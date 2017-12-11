@@ -18,12 +18,12 @@ sub_8006218:
 	ldr r0, _080062F8
 	ldr r5, _080062FC
 	adds r1, r5, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	ldr r4, _08006300
 	str r0, [r4]
 	ldr r0, _08006304
 	adds r1, r5, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	str r0, [r4, 0x4]
 	ldr r2, _08006308
 	ldr r1, [r4]
@@ -7346,7 +7346,7 @@ _08009714:
 	bls _08009714
 	ldr r4, _0800979C
 	adds r1, r4, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	adds r6, r0, 0
 	ldr r1, [r6, 0x4]
 	ldm r1!, {r5}
@@ -7354,10 +7354,10 @@ _08009714:
 	lsls r2, r5, 5
 	bl CpuCopy
 	adds r0, r6, 0
-	bl sub_800AA14
+	bl CloseFile
 	ldr r0, _080097A4
 	adds r1, r4, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	adds r6, r0, 0
 	ldr r1, [r6, 0x4]
 	ldm r1!, {r5}
@@ -7365,11 +7365,11 @@ _08009714:
 	lsls r2, r5, 5
 	bl CpuCopy
 	adds r0, r6, 0
-	bl sub_800AA14
+	bl CloseFile
 	bl sub_80097B0
 	ldr r0, _080097AC
 	adds r1, r4, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	adds r6, r0, 0
 	ldr r4, [r6, 0x4]
 	movs r5, 0
@@ -7384,7 +7384,7 @@ _08009766:
 	cmp r5, 0xF
 	ble _08009766
 	adds r0, r6, 0
-	bl sub_800AA14
+	bl CloseFile
 	bl TransferBGPaletteBuffer
 	pop {r4-r6}
 	pop {r0}
@@ -7406,7 +7406,7 @@ sub_80097B0:
 	push {r4-r6,lr}
 	ldr r0, _080097F8
 	ldr r1, _080097FC
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	adds r6, r0, 0
 	ldr r4, _08009800
 	ldr r1, [r6, 0x4]
@@ -7432,7 +7432,7 @@ _080097DA:
 	cmp r4, 0xF
 	ble _080097DA
 	adds r0, r6, 0
-	bl sub_800AA14
+	bl CloseFile
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -9821,8 +9821,8 @@ _0800A8BC: .4byte 0x0000012b
 _0800A8C0: .4byte gUnknown_80B96E4
 	thumb_func_end sub_800A894
 
-	thumb_func_start sub_800A8C4
-sub_800A8C4:
+	thumb_func_start InitFileSystem
+InitFileSystem:
 	push {r4,lr}
 	ldr r3, _0800A8EC
 	ldr r4, _0800A8F0
@@ -9847,7 +9847,7 @@ _0800A8D0:
 _0800A8EC: .4byte gUnknown_203B094
 _0800A8F0: .4byte gUnknown_202D2A4
 _0800A8F4: .4byte gUnknown_202D2A8
-	thumb_func_end sub_800A8C4
+	thumb_func_end InitFileSystem
 
 	thumb_func_start sub_800A8F8
 sub_800A8F8:
@@ -9860,8 +9860,8 @@ sub_800A8F8:
 _0800A904: .4byte gUnknown_202D2A4
 	thumb_func_end sub_800A8F8
 
-	thumb_func_start sub_800A908
-sub_800A908:
+	thumb_func_start OpenFile
+OpenFile:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -9966,55 +9966,55 @@ _0800A9B8:
 	.align 2, 0
 _0800A9C4: .4byte gUnknown_203B094
 _0800A9C8: .4byte gUnknown_202D2A8
-	thumb_func_end sub_800A908
+	thumb_func_end OpenFile
 
-	thumb_func_start sub_800A9CC
-sub_800A9CC:
+	thumb_func_start GetFileDataPtrFromFileEntry
+GetFileDataPtrFromFileEntry:
 	ldr r1, [r0]
 	ldr r1, [r1, 0x4]
 	str r1, [r0, 0x4]
 	adds r0, r1, 0
 	bx lr
-	thumb_func_end sub_800A9CC
+	thumb_func_end GetFileDataPtrFromFileEntry
 
-	thumb_func_start sub_800A9D8
-sub_800A9D8:
+	thumb_func_start GetFileDataPtr
+GetFileDataPtr:
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_800A9CC
+	bl GetFileDataPtrFromFileEntry
 	adds r0, r4, 0
-	bl sub_800AA48
+	bl GetSiroPtr
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A9D8
+	thumb_func_end GetFileDataPtr
 
-	thumb_func_start sub_800A9EC
-sub_800A9EC:
+	thumb_func_start OpenFileAndGetFileDataPtr
+OpenFileAndGetFileDataPtr:
 	push {r4,lr}
-	bl sub_800A908
+	bl OpenFile
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0800A9FE
 	movs r1, 0
-	bl sub_800A9D8
+	bl GetFileDataPtr
 _0800A9FE:
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A9EC
+	thumb_func_end OpenFileAndGetFileDataPtr
 
-	thumb_func_start sub_800AA08
-sub_800AA08:
+	thumb_func_start Call_OpenFileAndGetFileDataPtr
+Call_OpenFileAndGetFileDataPtr:
 	push {lr}
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800AA08
+	thumb_func_end Call_OpenFileAndGetFileDataPtr
 
-	thumb_func_start sub_800AA14
-sub_800AA14:
+	thumb_func_start CloseFile
+CloseFile:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
@@ -10042,10 +10042,10 @@ _0800AA42:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800AA14
+	thumb_func_end CloseFile
 
-	thumb_func_start sub_800AA48
-sub_800AA48:
+	thumb_func_start GetSiroPtr
+GetSiroPtr:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r4, [r5, 0x4]
@@ -10063,7 +10063,7 @@ _0800AA60: .4byte 0x30524953
 _0800AA64: .4byte 0x4f524953
 _0800AA68:
 	adds r0, r4, 0
-	bl nullsub_15
+	bl NDS_DecompressRLE
 _0800AA6E:
 	ldr r0, [r4, 0x4]
 	str r0, [r5, 0x4]
@@ -10071,10 +10071,10 @@ _0800AA72:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800AA48
+	thumb_func_end GetSiroPtr
 
-	thumb_func_start sub_800AA78
-sub_800AA78:
+	thumb_func_start UnusedGetSir0Ptr
+UnusedGetSir0Ptr:
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, [r4]
@@ -10082,7 +10082,7 @@ sub_800AA78:
 	cmp r1, r0
 	bne _0800AA94
 	adds r0, r4, 0
-	bl nullsub_15
+	bl NDS_DecompressRLE
 	ldr r0, [r4, 0x4]
 	b _0800AA96
 	.align 2, 0
@@ -10093,12 +10093,12 @@ _0800AA96:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800AA78
+	thumb_func_end UnusedGetSir0Ptr
 
-	thumb_func_start nullsub_15
-nullsub_15:
+	thumb_func_start NDS_DecompressRLE
+NDS_DecompressRLE:
 	bx lr
-	thumb_func_end nullsub_15
+	thumb_func_end NDS_DecompressRLE
 
 	thumb_func_start nullsub_16
 nullsub_16:

@@ -33,7 +33,7 @@ extern void nullsub_6(void);
 extern void sub_80047E8(void);
 extern void InitBGPaletteBuffer(void);
 extern void sub_80057E8(void);
-extern void sub_800A8C4(void);
+extern void InitFileSystem(void);
 extern void sub_8006218(void);
 extern void sub_80098A0(void);
 extern void sub_80096E0(void);
@@ -97,7 +97,7 @@ void AgbMain(void)
     sub_80047E8();
     InitBGPaletteBuffer();
     sub_80057E8();
-    sub_800A8C4();
+    InitFileSystem();
     sub_8006218();
     sub_80098A0();
     sub_80096E0();

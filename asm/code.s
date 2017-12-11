@@ -362,7 +362,7 @@ _0800055A:
 _08000580:
 	ldr r0, _0800059C
 	ldr r0, [r0]
-	bl sub_800AA14
+	bl CloseFile
 	cmp r5, 0x3
 	beq _080005CA
 	cmp r5, 0x3
@@ -466,14 +466,14 @@ sub_8000634:
 	ldr r0, [r5]
 	ldr r5, _08000714
 	adds r1, r5, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	ldr r1, _08000718
 	str r0, [r1]
 	mov r1, sp
 	adds r0, r1, r4
 	ldr r0, [r0]
 	adds r1, r5, 0
-	bl sub_800A9EC
+	bl OpenFileAndGetFileDataPtr
 	mov r8, r0
 	adds r0, r7, 0
 	movs r1, 0
@@ -528,7 +528,7 @@ _080006B8:
 	ldr r2, _08000724
 	bl CpuCopy
 	mov r0, r8
-	bl sub_800AA14
+	bl CloseFile
 	adds r0, r7, 0
 	bl MemoryFree
 	add sp, 0x18
