@@ -3854,7 +3854,7 @@ _08002170:
 	b _08002194
 _0800217A:
 	adds r0, r4, 0
-	bl sub_800451C
+	bl OtherRandomCapped
 	b _08002194
 _08002182:
 	ldr r0, _0800218C
@@ -5012,7 +5012,7 @@ _080029F4:
 	cmp r0, 0
 	beq _08002A18
 	movs r0, 0x2
-	bl sub_800451C
+	bl OtherRandomCapped
 	adds r1, r4, 0x7
 	lsls r0, 1
 	adds r1, r0
@@ -5027,7 +5027,7 @@ _08002A10:
 	b _08002A64
 _08002A18:
 	movs r0, 0x3
-	bl sub_800451C
+	bl OtherRandomCapped
 	adds r1, r4, 0x6
 	lsls r0, 1
 	adds r1, r0
@@ -5042,7 +5042,7 @@ _08002A2C:
 	b _08002A64
 _08002A34:
 	movs r0, 0x3
-	bl sub_800451C
+	bl OtherRandomCapped
 	adds r1, r4, 0x7
 	adds r1, r0
 	adds r0, r1, 0
@@ -5056,7 +5056,7 @@ _08002A46:
 	b _08002A64
 _08002A4E:
 	movs r0, 0x8
-	bl sub_800451C
+	bl OtherRandomCapped
 	movs r2, 0x2
 	negs r2, r2
 	adds r1, r2, 0
@@ -5064,7 +5064,7 @@ _08002A4E:
 	b _08002A64
 _08002A5E:
 	movs r0, 0x8
-	bl sub_800451C
+	bl OtherRandomCapped
 _08002A64:
 	lsls r0, 24
 	asrs r4, r0, 24

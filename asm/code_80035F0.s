@@ -2026,8 +2026,8 @@ _080044F8: .4byte gUnknown_3000C00
 _080044FC: .4byte gUnknown_3000400
 	thumb_func_end sub_8004434
 
-	thumb_func_start sub_8004500
-sub_8004500:
+	thumb_func_start OtherRandom
+OtherRandom:
 	ldr r1, _08004514
 	ldrh r2, [r1]
 	movs r0, 0x6D
@@ -2040,34 +2040,34 @@ sub_8004500:
 	.align 2, 0
 _08004514: .4byte gUnknown_203B070
 _08004518: .4byte 0x000003fd
-	thumb_func_end sub_8004500
+	thumb_func_end OtherRandom
 
-	thumb_func_start sub_800451C
-sub_800451C:
+	thumb_func_start OtherRandomCapped
+OtherRandomCapped:
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8004500
+	bl OtherRandom
 	muls r0, r4
 	asrs r0, 16
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800451C
+	thumb_func_end OtherRandomCapped
 
-	thumb_func_start sub_8004530
-sub_8004530:
+	thumb_func_start OtherRandomRange
+OtherRandomRange:
 	push {r4,lr}
 	adds r4, r0, 0
 	subs r0, r1, r4
-	bl sub_800451C
+	bl OtherRandomCapped
 	adds r0, r4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8004530
+	thumb_func_end OtherRandomRange
 
-	thumb_func_start sub_8004544
-sub_8004544:
+	thumb_func_start ReverseString
+ReverseString:
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	subs r4, r1, 0x1
@@ -2090,10 +2090,10 @@ _08004566:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004544
+	thumb_func_end ReverseString
 
-	thumb_func_start sub_800456C
-sub_800456C:
+	thumb_func_start ConvertToDecimal
+ConvertToDecimal:
 	push {r4-r7,lr}
 	adds r4, r1, 0
 	cmp r4, 0
@@ -2126,10 +2126,10 @@ _080045A0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800456C
+	thumb_func_end ConvertToDecimal
 
-	thumb_func_start sub_80045A8
-sub_80045A8:
+	thumb_func_start ConvertFromDecimal
+ConvertFromDecimal:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -2157,7 +2157,7 @@ _080045D2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80045A8
+	thumb_func_end ConvertFromDecimal
 
 	thumb_func_start ConvertFromBCD
 ConvertFromBCD:
