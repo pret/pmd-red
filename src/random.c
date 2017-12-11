@@ -1,4 +1,5 @@
 #include "global.h"
+#include "random.h"
 
 extern s32 gRngState;
 
@@ -26,6 +27,7 @@ s32 RandomCapped(s32 cap)
     return (((Random() & 0xFFFF) * cap) >> 16) & 0xFFFF;
 }
 
+// Returns a random number between a and b.
 s32 RandomRange(s32 a, s32 b)
 {
     if (a == b)

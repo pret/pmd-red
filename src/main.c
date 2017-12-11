@@ -1,4 +1,5 @@
 #include "global.h"
+#include "random.h"
 
 extern char ewram_start[];
 
@@ -26,7 +27,6 @@ extern char unk_code[];
 extern void sub_800CDA8(int);
 extern void sub_800B540(void);
 extern void sub_800CF0C(void);
-extern void SeedRng(u8 *);
 extern void sub_8004D78(void);
 extern void nullsub_9(void);
 extern void nullsub_6(void);
