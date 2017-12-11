@@ -35,7 +35,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         asm/code.o(.text);
-        asm/random.o(.text);
+        src/random.o(.text);
         asm/code_8006218.o(.text);
         src/main.o(.text);
         asm/code_800B540.o(.text);

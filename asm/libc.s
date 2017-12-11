@@ -2585,7 +2585,7 @@ _080B39E8:
 	adds r2, r5, 0
 	adds r1, r4, 0
 	adds r3, r7, 0
-	bl sub_80B3D3C
+	bl _dtoa_r
 	adds r7, r0, 0
 	mov r1, r9
 	cmp r1, 0x67
@@ -3034,8 +3034,8 @@ _080B3D30:
 	pop {r4-r7,pc}
 	thumb_func_end sub_80B3BE0
 
-	thumb_func_start sub_80B3D3C
-sub_80B3D3C:
+	thumb_func_start _dtoa_r
+_dtoa_r:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4669,7 +4669,7 @@ _080B4A26:
 	mov r9, r4
 	mov r10, r5
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B3D3C
+	thumb_func_end _dtoa_r
 
 	thumb_func_start sub_80B4A34
 sub_80B4A34:

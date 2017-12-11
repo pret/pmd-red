@@ -82,7 +82,7 @@ gUnknown_203B074: @ 203B074
 gUnknown_203B078: @ 203B078
 	.space 0x4
 
-gUnknown_203B07C: @ 203B07C
+gRngState: @ 203B07C
 	.space 0x4
 
 gUnknown_203B080: @ 203B080

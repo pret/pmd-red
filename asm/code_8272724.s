@@ -9,20 +9,20 @@
 
 	.text
 
-	thumb_func_start _08272760
-_08272760:
+	thumb_func_start sub_8272760
+sub_8272760:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08272770
-	bl _08272774
+	bl sub_8272774
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08272770: .4byte 0x02027370
-	thumb_func_end _08272760
+	thumb_func_end sub_8272760
 
-	thumb_func_start _08272774
-_08272774:
+	thumb_func_start sub_8272774
+sub_8272774:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -156,22 +156,22 @@ _08272860:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end _08272774
+	thumb_func_end sub_8272774
 
-	thumb_func_start _08272870
-_08272870:
+	thumb_func_start sub_8272870
+sub_8272870:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08272880
-	bl _08272884
+	bl sub_8272884
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08272880: .4byte 0x02027370
-	thumb_func_end _08272870
+	thumb_func_end sub_8272870
 
-	thumb_func_start _08272884
-_08272884:
+	thumb_func_start sub_8272884
+sub_8272884:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -325,22 +325,22 @@ _08272994:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end _08272884
+	thumb_func_end sub_8272884
 
-	thumb_func_start _082729A4
-_082729A4:
+	thumb_func_start sub_82729A4
+sub_82729A4:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _082729B4
-	bl _082729B8
+	bl sub_82729B8
 	pop {r0}
 	bx r0
 	.align 2, 0
 _082729B4: .4byte 0x02027370
-	thumb_func_end _082729A4
+	thumb_func_end sub_82729A4
 
-	thumb_func_start _082729B8
-_082729B8:
+	thumb_func_start sub_82729B8
+sub_82729B8:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -440,22 +440,22 @@ _08272A5A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end _082729B8
+	thumb_func_end sub_82729B8
 
-	thumb_func_start _08272A78
-_08272A78:
+	thumb_func_start sub_8272A78
+sub_8272A78:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08272A88
-	bl _08272A8C
+	bl sub_8272A8C
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08272A88: .4byte 0x02027370
-	thumb_func_end _08272A78
+	thumb_func_end sub_8272A78
 
-	thumb_func_start _08272A8C
-_08272A8C:
+	thumb_func_start sub_8272A8C
+sub_8272A8C:
 	push {r4-r7,lr}
 	lsls r2, r1, 3
 	adds r2, r1
@@ -546,6 +546,6 @@ _08272B20:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end _08272A8C
+	thumb_func_end sub_8272A8C
 
 	.align 2, 0 @ Don't pad with nop.
