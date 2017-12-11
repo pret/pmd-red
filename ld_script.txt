@@ -90,6 +90,61 @@ SECTIONS {
         data/unk_data.o(.rodata);
     }
 
+    . = 0x8300500;
+    system_sbin_section :
+    ALIGN(4)
+    {
+        data/system_sbin.o(.rodata);
+    }
+
+    . = 0x8380000;
+    titlemenu_sbin_section :
+    ALIGN(4)
+    {
+        data/titlemenu_sbin.o(.rodata);
+    }
+
+    . = 0x83B0000;
+    dungeon_sbin_section :
+    ALIGN(4)
+    {
+        data/dungeon_sbin.o(.rodata);
+    }
+
+    . = 0x8510000;
+    monster_sbin_section :
+    ALIGN(4)
+    {
+        data/monster_sbin.o(.rodata);
+    }
+
+    . = 0x9740000;
+    effect_sbin_section :
+    ALIGN(4)
+    {
+        data/effect_sbin.o(.rodata);
+    }
+
+    . = 0x9890000;
+    ground_sbin_section :
+    ALIGN(4)
+    {
+        data/ground_sbin.o(.rodata);
+    }
+
+    . = 0x9E60000;
+    ornament_sbin_section :
+    ALIGN(4)
+    {
+        data/ornament_sbin.o(.rodata);
+    }
+
+    sound_data :
+    ALIGN(4)
+    {
+        data/sound_data.o(.rodata);
+    }
+
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }
     .debug_pubnames 0 : { *(.debug_pubnames) }
