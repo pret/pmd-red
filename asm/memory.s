@@ -496,8 +496,8 @@ _080031AC:
 	bx r1
 	thumb_func_end MemorySearchFromBack
 
-	thumb_func_start MemorySplitFront
-MemorySplitFront:
+	thumb_func_start _LocateSetFront
+_LocateSetFront:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -602,10 +602,10 @@ _08003260:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end MemorySplitFront
+	thumb_func_end _LocateSetFront
 
-	thumb_func_start MemorySplitBack
-MemorySplitBack:
+	thumb_func_start _LocateSetBack
+_LocateSetBack:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -706,10 +706,10 @@ _08003328:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end MemorySplitBack
+	thumb_func_end _LocateSetBack
 
-	thumb_func_start MemoryLocateSet
-MemoryLocateSet:
+	thumb_func_start _LocateSet
+_LocateSet:
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -739,7 +739,7 @@ _0800335C:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl MemorySplitFront
+	bl _LocateSetFront
 	ldr r0, [r0, 0xC]
 	b _080033CC
 	.align 2, 0
@@ -756,7 +756,7 @@ _08003394:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl MemorySplitBack
+	bl _LocateSetBack
 	ldr r0, [r0, 0xC]
 	b _080033CC
 _080033B4:
@@ -775,7 +775,7 @@ _080033CC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end MemoryLocateSet
+	thumb_func_end _LocateSet
 
 	thumb_func_start MemoryAlloc
 MemoryAlloc:
@@ -803,8 +803,8 @@ MemoryFree:
 _080033FC: .4byte gUnknown_2000EB0
 	thumb_func_end MemoryFree
 
-	thumb_func_start CreateSubHeap
-CreateSubHeap:
+	thumb_func_start MemoryLocate_LocalCreate
+MemoryLocate_LocalCreate:
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -835,7 +835,7 @@ _08003438:
 	adds r0, r4, 0
 	movs r2, 0x9
 	adds r3, r5, 0
-	bl MemorySplitBack
+	bl _LocateSetBack
 	ldr r1, [r0, 0xC]
 	str r1, [sp, 0x4]
 	ldr r0, [r0, 0x10]
@@ -848,7 +848,7 @@ _08003438:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end CreateSubHeap
+	thumb_func_end MemoryLocate_LocalCreate
 
 	thumb_func_start DoCreateSubHeap
 DoCreateSubHeap:
@@ -953,7 +953,7 @@ DoAlloc:
 	lsls r3, 1
 	orrs r3, r2
 	adds r2, r3, 0
-	bl MemoryLocateSet
+	bl _LocateSet
 	pop {r1}
 	bx r1
 	thumb_func_end DoAlloc

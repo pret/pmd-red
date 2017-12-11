@@ -1703,8 +1703,8 @@ _080020E0: .4byte 0x0000021e
 _080020E4: .4byte 0x00000113
 	thumb_func_end sub_8001D88
 
-	thumb_func_start sub_80020E8
-sub_80020E8:
+	thumb_func_start _FlagCalc
+_FlagCalc:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -1792,10 +1792,10 @@ _08002194:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80020E8
+	thumb_func_end _FlagCalc
 
-	thumb_func_start sub_800219C
-sub_800219C:
+	thumb_func_start _FlagJudge
+_FlagJudge:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -1895,15 +1895,15 @@ _08002258:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800219C
+	thumb_func_end _FlagJudge
 
-	thumb_func_start sub_8002260
-sub_8002260:
+	thumb_func_start FlagCalc
+FlagCalc:
 	push {lr}
-	bl sub_80020E8
+	bl _FlagCalc
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002260
+	thumb_func_end FlagCalc
 
 	thumb_func_start sub_800226C
 sub_800226C:
@@ -1920,7 +1920,7 @@ sub_800226C:
 	bl sub_8001658
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80020E8
+	bl _FlagCalc
 	adds r2, r0, 0
 	mov r0, r8
 	adds r1, r4, 0
@@ -1955,7 +1955,7 @@ sub_80022A0:
 	adds r1, r0, 0
 	adds r0, r6, 0
 	mov r2, r9
-	bl sub_80020E8
+	bl _FlagCalc
 	adds r2, r0, 0
 	mov r0, r8
 	adds r1, r5, 0
@@ -1971,7 +1971,7 @@ sub_80022A0:
 	thumb_func_start sub_80022E8
 sub_80022E8:
 	push {lr}
-	bl sub_800219C
+	bl _FlagJudge
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1988,7 +1988,7 @@ sub_80022F8:
 	bl sub_8001658
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_800219C
+	bl _FlagJudge
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -2016,7 +2016,7 @@ sub_8002318:
 	adds r1, r0, 0
 	adds r0, r5, 0
 	mov r2, r8
-	bl sub_800219C
+	bl _FlagJudge
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r3}
