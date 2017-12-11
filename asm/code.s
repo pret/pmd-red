@@ -558,8 +558,8 @@ sub_8000728:
 _08000730: .4byte gUnknown_203B03C
 	thumb_func_end sub_8000728
 
-	thumb_func_start sub_8000734
-sub_8000734:
+	thumb_func_start QuickSave
+QuickSave:
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
@@ -737,7 +737,7 @@ _08000892:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8000734
+	thumb_func_end QuickSave
 
 	thumb_func_start sub_80008C0
 sub_80008C0:
@@ -904,7 +904,7 @@ _08000A08:
 	bl sub_80018D8
 	bl sub_8096BD0
 	movs r0, 0x3
-	bl sub_8000734
+	bl QuickSave
 	b _08000A3A
 _08000A24:
 	movs r3, 0x1
@@ -1390,7 +1390,7 @@ _08000E00:
 	cmp r6, 0x3F
 	bne _08000E0C
 	movs r0, 0
-	bl sub_8000734
+	bl QuickSave
 	b _08000E1E
 _08000E0C:
 	adds r0, r6, 0
@@ -1399,7 +1399,7 @@ _08000E0C:
 	cmp r0, 0
 	bne _08000E1E
 	movs r0, 0
-	bl sub_8000734
+	bl QuickSave
 _08000E1E:
 	ldr r0, _08000E70
 	movs r4, 0x1
