@@ -171,21 +171,21 @@ GameLoop:
 	bl sub_800135C
 _080003D2:
 	movs r0, 0xE
-	bl sub_8001334
+	bl xxx_script_related_8001334
 	movs r0, 0xF
-	bl sub_8001334
+	bl xxx_script_related_8001334
 	movs r0, 0
 	movs r1, 0x39
 	bl sub_80015C0
 	movs r0, 0x10
-	bl sub_8001334
+	bl xxx_script_related_8001334
 	movs r0, 0
 	movs r1, 0x39
 	bl sub_8001658
 	cmp r0, 0
 	bne _080003FE
 	movs r0, 0x11
-	bl sub_8001334
+	bl xxx_script_related_8001334
 _080003FE:
 	movs r1, 0
 	mov r10, r1
@@ -1078,7 +1078,7 @@ _08000B78:
 	movs r0, 0x4
 	bl sub_800A8F8
 	movs r0, 0x5
-	bl sub_8001334
+	bl xxx_script_related_8001334
 	adds r5, r0, 0
 	b _08000BEC
 	.align 2, 0
@@ -1109,7 +1109,7 @@ _08000BBE:
 	movs r0, 0x4
 	bl sub_800A8F8
 	adds r0, r7, 0
-	bl sub_8001334
+	bl xxx_script_related_8001334
 	adds r5, r0, 0
 	cmp r5, 0xE
 	bne _08000BD8
@@ -1563,7 +1563,7 @@ _08000F78:
 	cmp r5, 0
 	beq _08000F92
 	adds r0, r4, 0
-	bl sub_8001340
+	bl xxx_dungeon_8001340
 	bl sub_8099648
 	bl sub_8094C14
 	movs r0, 0
@@ -2054,26 +2054,26 @@ nullsub_2:
 	bx lr
 	thumb_func_end nullsub_2
 
-	thumb_func_start sub_8001334
-sub_8001334:
+	thumb_func_start xxx_script_related_8001334
+xxx_script_related_8001334:
 	push {lr}
-	bl sub_8098468
+	bl xxx_script_related_8098468
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001334
+	thumb_func_end xxx_script_related_8001334
 
-	thumb_func_start sub_8001340
-sub_8001340:
+	thumb_func_start xxx_dungeon_8001340
+xxx_dungeon_8001340:
 	push {r4,lr}
 	adds r4, r0, 0
 	bl nullsub_2
 	adds r0, r4, 0
-	bl sub_8042F6C
+	bl xxx_dungeon_8042F6C
 	bl NDS_LoadOverlay_GroundMain
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8001340
+	thumb_func_end xxx_dungeon_8001340
 
 	thumb_func_start nullsub_3
 nullsub_3:

@@ -1968,15 +1968,15 @@ sub_80022A0:
 	bx r0
 	thumb_func_end sub_80022A0
 
-	thumb_func_start sub_80022E8
-sub_80022E8:
+	thumb_func_start FlagJudge
+FlagJudge:
 	push {lr}
 	bl _FlagJudge
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80022E8
+	thumb_func_end FlagJudge
 
 	thumb_func_start sub_80022F8
 sub_80022F8:
