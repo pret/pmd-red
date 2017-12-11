@@ -35,6 +35,8 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         asm/code.o(.text);
+        asm/memory.o(.text);
+        asm/code_80035F0.o(.text);
         src/random.o(.text);
         asm/code_8006218.o(.text);
         src/main.o(.text);
