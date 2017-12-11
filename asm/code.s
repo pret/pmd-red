@@ -134,11 +134,11 @@ GameLoop:
 	movs r0, 0x1
 	mov r9, r0
 	bl InitHeap
-	bl sub_8011A38
+	bl NDS_DebugInit
 	bl sub_801180C
-	bl nullsub_1
+	bl NDS_LoadOverlay_GroundMain
 	bl sub_8014144
-	bl sub_808CDC0
+	bl LoadMonsterParameters
 	bl sub_8097670
 	bl sub_8094F88
 	bl sub_8094980
@@ -158,7 +158,7 @@ GameLoop:
 	movs r0, 0x1
 	bl sub_8094998
 	ldr r0, _08000498
-	bl nullsub_22
+	bl SetWindowTitle
 	bl sub_800DAAC
 	movs r0, 0
 	bl SetSavingIconCoords
@@ -2044,10 +2044,10 @@ _08001324: .4byte gUnknown_203B460
 _08001328: .4byte gUnknown_203B45C
 	thumb_func_end sub_80012C0
 
-	thumb_func_start nullsub_1
-nullsub_1:
+	thumb_func_start NDS_LoadOverlay_GroundMain
+NDS_LoadOverlay_GroundMain:
 	bx lr
-	thumb_func_end nullsub_1
+	thumb_func_end NDS_LoadOverlay_GroundMain
 
 	thumb_func_start nullsub_2
 nullsub_2:
@@ -2069,7 +2069,7 @@ sub_8001340:
 	bl nullsub_2
 	adds r0, r4, 0
 	bl sub_8042F6C
-	bl nullsub_1
+	bl NDS_LoadOverlay_GroundMain
 	pop {r4}
 	pop {r0}
 	bx r0
