@@ -38,7 +38,7 @@ SECTIONS {
         asm/memory.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
-        asm/util.o(.text);
+        src/util.o(.text);
         asm/bg_palette_buffer.o(.text);
         asm/code_80047E8.o(.text);
         src/random.o(.text);
