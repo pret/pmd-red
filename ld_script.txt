@@ -1,0 +1,107 @@
+ENTRY(Start)
+
+SECTIONS {
+    . = 0x2000000;
+
+    ewram (NOLOAD) :
+    ALIGN(4)
+    {
+        ewram_start = .;
+        <EWRAM>
+        . = ALIGN(4);
+        src/agb_flash.o(.bss);
+        . = ALIGN(4);
+        tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
+        . = ALIGN(4);
+        tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
+        <EWRAM2>
+        . = 0x40000;
+    }
+
+    . = 0x3000000;
+
+    iwram (NOLOAD) :
+    ALIGN(4)
+    {
+        iwram_start = .;
+        <IWRAM>
+        . = 0x8000;
+    }
+
+    . = 0x8000000;
+
+    .text :
+    ALIGN(4)
+    {
+        asm/crt0.o(.text);
+        asm/code.o(.text);
+        src/main.o(.text);
+        asm/code_800B540.o(.text);
+        asm/m4a.o(.text);
+        asm/syscall.o(.text);
+        src/agb_flash.o(.text);
+        src/agb_flash_1m.o(.text);
+        src/agb_flash_mx.o(.text);
+        src/agb_flash_le.o(.text);
+        tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
+        tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
+        tools/agbcc/lib/libgcc.a:_fixunssfsi.o(.text);
+        tools/agbcc/lib/libgcc.a:_modsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_umodsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:_muldi3.o(.text);
+        tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
+        asm/libc.o(.text);
+    } =0
+
+    .rodata :
+    ALIGN(4)
+    {
+        data/data.o(.rodata);
+        src/agb_flash.o(.rodata);
+        src/agb_flash_1m.o(.rodata);
+        src/agb_flash_mx.o(.rodata);
+        src/agb_flash_le.o(.rodata);
+        data/libc_data.o(.rodata);
+        data/data_8270000.o(.rodata);
+    } =0
+
+    unk_code_section :
+    ALIGN(4)
+    {
+        unk_code = .;
+        asm/code_8272724.o(.rodata);
+        asm/code_8272724.o(.text);
+        unk_code_end = .;
+    }
+
+    unk_code_ram_end = unk_code_ram + (unk_code_end - unk_code);
+    end = unk_code_ram_end;
+
+    . = 0x8300000;
+    unk_data :
+    ALIGN(4)
+    {
+        data/unk_data.o(.rodata);
+    }
+
+    /* DWARF 2 sections */
+    .debug_aranges  0 : { *(.debug_aranges) }
+    .debug_pubnames 0 : { *(.debug_pubnames) }
+    .debug_info     0 : { *(.debug_info) }
+    .debug_abbrev   0 : { *(.debug_abbrev) }
+    .debug_line     0 : { *(.debug_line) }
+    .debug_frame    0 : { *(.debug_frame) }
+    .debug_str      0 : { *(.debug_str) }
+    .debug_loc      0 : { *(.debug_loc) }
+    .debug_macinfo  0 : { *(.debug_macinfo) }
+
+    /* Discard everything not specifically mentioned above. */
+    /DISCARD/ :
+    {
+        *(*);
+    }
+}
