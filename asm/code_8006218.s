@@ -2400,8 +2400,8 @@ nullsub_156:
 	bx lr
 	thumb_func_end nullsub_156
 
-	thumb_func_start sub_800743C
-sub_800743C:
+	thumb_func_start xxx_call_draw_char
+xxx_call_draw_char:
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -2421,7 +2421,7 @@ sub_800743C:
 	bx r1
 	.align 2, 0
 _08007460: .4byte gUnknown_2027370
-	thumb_func_end sub_800743C
+	thumb_func_end xxx_call_draw_char
 
 	thumb_func_start sub_8007464
 sub_8007464:

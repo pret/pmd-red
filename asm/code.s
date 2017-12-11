@@ -147,7 +147,7 @@ GameLoop:
 	bl sub_80923A0
 	bl sub_8090998
 	bl sub_809207C
-	bl sub_8092848
+	bl LoadWazaParameters
 	bl sub_80950BC
 	bl sub_80958E8
 	movs r0, 0x80
@@ -411,7 +411,7 @@ _080005D4:
 	thumb_func_start xxx_update_stuff
 xxx_update_stuff:
 	push {lr}
-	bl sub_80144C4
+	bl xxx_draw_string_80144C4
 	movs r0, 0
 	movs r1, 0
 	bl sub_8005838
