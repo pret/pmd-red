@@ -44,7 +44,8 @@ SECTIONS {
         asm/bg_palette_buffer.o(.text);
         asm/code_80047E8.o(.text);
         src/random.o(.text);
-        asm/code_8006218.o(.text);
+        asm/text.o(.text);
+        asm/code_8009804.o(.text);
         asm/file_system.o(.text);
         asm/code_800AAA0.o(.text);
         src/main.o(.text);
