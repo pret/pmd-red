@@ -52,6 +52,8 @@ SECTIONS {
         asm/code_800B540.o(.text);
         src/flash.o(.text);
         asm/code_800D090.o(.text);
+        asm/save.o(.text);
+        asm/code_8012A18.o(.text);
         asm/m4a.o(.text);
         asm/syscall.o(.text);
         src/agb_flash.o(.text);
