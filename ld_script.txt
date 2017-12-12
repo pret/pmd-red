@@ -14,6 +14,7 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4);
         tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
+		. = ALIGN(8); /* 0x39e18 */
         <EWRAM2>
         . = 0x40000;
     }
@@ -37,6 +38,7 @@ SECTIONS {
         asm/code.o(.text);
         asm/event_flag.o(.text);
         asm/code_8002774.o(.text);
+        src/memory.o(.text);
         asm/memory.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
