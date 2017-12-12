@@ -49,6 +49,7 @@ SECTIONS {
         src/random.o(.text);
         asm/text.o(.text);
         asm/code_8009804.o(.text);
+        src/file_system.o(.text);
         asm/file_system.o(.text);
         asm/code_800AAA0.o(.text);
         src/main.o(.text);
@@ -81,6 +82,8 @@ SECTIONS {
     ALIGN(4)
     {
         data/data.o(.rodata);
+        src/file_system.o(.rodata);
+        data/data_80B9BB8.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
