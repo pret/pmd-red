@@ -27,10 +27,10 @@ extern char unk_code[];
 
 extern void sub_800CDA8(int);
 extern void sub_800B540(void);
-extern void sub_8004D78(void);
+extern void InitSprites(void);
 extern void nullsub_9(void);
 extern void nullsub_6(void);
-extern void sub_80047E8(void);
+extern void InitInput(void);
 extern void InitBGPaletteBuffer(void);
 extern void sub_80057E8(void);
 extern void InitFileSystem(void);
@@ -91,10 +91,10 @@ void AgbMain(void)
     InitFlash();
     memcpy(seed, gUnknown_80B9BF1, 6);
     SeedRng(seed);
-    sub_8004D78();
+    InitSprites();
     nullsub_9();
     nullsub_6();
-    sub_80047E8();
+    InitInput();
     InitBGPaletteBuffer();
     sub_80057E8();
     InitFileSystem();

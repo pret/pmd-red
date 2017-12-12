@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80047E8
-sub_80047E8:
+	thumb_func_start InitInput
+InitInput:
 	ldr r0, _08004840
 	movs r3, 0
 	movs r2, 0
@@ -58,7 +58,7 @@ _0800484C: .4byte 0x004a14c1
 _08004850: .4byte gUnknown_2025600
 _08004854: .4byte 0x0000ffff
 _08004858: .4byte gUnknown_2025668
-	thumb_func_end sub_80047E8
+	thumb_func_end InitInput
 
 	thumb_func_start sub_800485C
 sub_800485C:

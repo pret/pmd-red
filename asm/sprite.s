@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8004D78
-sub_8004D78:
+	thumb_func_start InitSprites
+InitSprites:
 	push {lr}
 	movs r0, 0x1
 	bl sub_8004D8C
@@ -14,7 +14,7 @@ sub_8004D78:
 	bl SetSavingIconCoords
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004D78
+	thumb_func_end InitSprites
 
 	thumb_func_start sub_8004D8C
 sub_8004D8C:
