@@ -19,6 +19,12 @@ struct FileArchive
     struct File *entries;
 };
 
+struct SiroArchive
+{
+    u32 magic;
+    u8 *data;
+};
+
 extern struct OpenedFile gUnknown_202D2A8[];
 
 extern u32 gUnknown_203B094;
@@ -27,6 +33,7 @@ extern u32 gUnknown_202D2A4;
 extern int sprintf(char *, const char *, ...);
 
 u8 *GetSiroPtr(struct OpenedFile *);
+void NDS_DecompressRLE(void *);
 
 void InitFileSystem(void)
 {
@@ -142,4 +149,51 @@ struct OpenedFile *OpenFileAndGetFileDataPtr(char *filename, struct FileArchive 
 struct OpenedFile *Call_OpenFileAndGetFileDataPtr(char *filename, struct FileArchive *arc)
 {
     return OpenFileAndGetFileDataPtr(filename, arc);
+}
+
+void CloseFile(struct OpenedFile *openedFile)
+{
+    s32 i;
+
+    for (i = 0; i < 64; i++)
+    {
+        if (&gUnknown_202D2A8[i] == openedFile)
+        {
+            gUnknown_202D2A8[i].file = NULL;
+            gUnknown_202D2A8[i].data = NULL;
+            gUnknown_203B094 = i;
+            return;
+        }
+    }
+}
+
+u8 *GetSiroPtr(struct OpenedFile *openedFile)
+{
+    struct SiroArchive *siro = (struct SiroArchive *)openedFile->data;
+
+    if (siro->magic == 0x30524953)
+    {
+        NDS_DecompressRLE(openedFile->data);
+    }
+    else if (siro->magic != 0x4F524953)
+    {
+        return openedFile->data;
+    }
+
+    openedFile->data = siro->data;
+
+    return openedFile->data;
+}
+
+void *UnusedGetSir0Ptr(struct SiroArchive *siro)
+{
+    if (siro->magic != 0x30524953)
+        return siro;
+
+    NDS_DecompressRLE(siro);
+    return siro->data;
+}
+
+void NDS_DecompressRLE(void *unused)
+{
 }
