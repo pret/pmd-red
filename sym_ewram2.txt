@@ -142,7 +142,7 @@ gUnknown_203B0B0: @ 203B0B0
 gUnknown_203B0B2: @ 203B0B2
 	.space 0x2
 
-gUnknown_203B0B4: @ 203B0B4
+gFlashEnabled: @ 203B0B4
 	.space 0x4
 
 gUnknown_203B0B8: @ 203B0B8

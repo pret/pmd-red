@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "flash.h"
 
 extern char ewram_start[];
 
@@ -26,7 +27,6 @@ extern char unk_code[];
 
 extern void sub_800CDA8(int);
 extern void sub_800B540(void);
-extern void sub_800CF0C(void);
 extern void sub_8004D78(void);
 extern void nullsub_9(void);
 extern void nullsub_6(void);
@@ -88,7 +88,7 @@ void AgbMain(void)
     REG_DISPCNT = 32704;
     sub_800CDA8(1);
     sub_800B540();
-    sub_800CF0C();
+    InitFlash();
     memcpy(seed, gUnknown_80B9BF1, 6);
     SeedRng(seed);
     sub_8004D78();
