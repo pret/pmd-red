@@ -6,15 +6,27 @@
 // Static type declarations
 
 struct HeapInitArgs {
-    void *ptr;
+    u8 *ptr;
     u32 size;
+};
+
+struct MemoryBlock {
+    u32 unk_00;
+    u32 unk_04;
+    struct MemoryBlock *next;
+    u32 unk_0c;
+    size_t unk_10;
+    u8 *data;
+    size_t unk_18;
+    u32 unk_1c;
 };
 
 // Static RAM declarations
 
+struct MemoryBlock *gUnknown_2000E88[8] = {};
 u32 gUnknown_2000EA8 = 0;
-u8 gUnknown_2000EB0[0x20] = {};
-u8 gUnknown_2000ED0[0x300] = {};
+struct MemoryBlock gUnknown_2000EB0 = {};
+struct MemoryBlock gUnknown_2000ED0[24] = {};
 u8 gUnknown_20011D0[0x24000] = {};
 
 // Static ROM declarations
@@ -24,7 +36,7 @@ u8 gUnknown_20011D0[0x24000] = {};
 // .text
 
 void InitHeapInternal(void);
-void DoInitHeap(void *a0, struct HeapInitArgs *args, void *a2, size_t a3);
+void DoInitHeap(struct MemoryBlock *a0, struct HeapInitArgs *args, struct MemoryBlock *a2, size_t a3);
 
 void InitHeap(void)
 {
@@ -114,5 +126,34 @@ void InitHeapInternal(void)
     args.ptr = gUnknown_20011D0;
     args.size = sizeof gUnknown_20011D0;
     gUnknown_2000EA8 = 0;
-    DoInitHeap(gUnknown_2000EB0, &args, gUnknown_2000ED0, sizeof gUnknown_2000EB0);
+    DoInitHeap(&gUnknown_2000EB0, &args, gUnknown_2000ED0, sizeof gUnknown_2000EB0);
+}
+
+void DoInitHeap(struct MemoryBlock *a0, struct HeapInitArgs *args, struct MemoryBlock *a2, size_t a3)
+{
+    size_t size = args->size & ~3; // r9
+    gUnknown_2000E88[gUnknown_2000EA8] = a0;
+    gUnknown_2000EA8++;
+    a0->data = args->ptr;
+    a0->unk_18 = size;
+    a0->unk_00 = 2;
+    a0->unk_04 = 0;
+    a0->next = a2;
+    a0->unk_0c = 1;
+    a0->unk_10 = a3;
+    a2->unk_00 = 0;
+    a2->unk_04 = 0;
+    a2->unk_0c = (intptr_t)args->ptr;
+    a2->unk_10 = size;
+    a2->data = NULL;
+    a2->next = NULL;
+}
+
+void InitSubHeap(struct MemoryBlock *a0, struct HeapInitArgs *srcArgs, size_t size)
+{
+    size_t size_ = size * 3;
+    int r2 = ~3;
+    size_t size__ = r2 & (srcArgs->size - size_ * 8);
+    struct HeapInitArgs args = {srcArgs->ptr + size_ * 8, size__};
+    DoInitHeap(a0, &args, (struct MemoryBlock *)srcArgs->ptr, size);
 }
