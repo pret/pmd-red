@@ -720,7 +720,7 @@ _080B2B98:
 	mov pc, r0
 	.align 2, 0
 _080B2BA4: .4byte _impure_ptr
-_080B2BA8: .4byte gUnknown_203B7AC
+_080B2BA8: .4byte __mb_cur_max
 _080B2BAC: .4byte 0x000001c9
 _080B2BB0: .4byte _080B2BB4
 	.align 2, 0
@@ -5024,9 +5024,9 @@ _080B4C8E:
 	bl __malloc_unlock
 	b _080B4DDA
 	.align 2, 0
-_080B4C98: .4byte __malloc_av__
-_080B4C9C: .4byte gUnknown_203BBC8
-_080B4CA0: .4byte gUnknown_203BBCC
+_080B4C98: .4byte __malloc_av_
+_080B4C9C: .4byte __malloc_trim_threshold
+_080B4CA0: .4byte __malloc_top_pad
 _080B4CA4:
 	str r4, [r7, 0x4]
 	movs r0, 0
@@ -5074,7 +5074,7 @@ _080B4CD0:
 	str r1, [r5, 0x8]
 	b _080B4D08
 	.align 2, 0
-_080B4CFC: .4byte gUnknown_203B7C8
+_080B4CFC: .4byte __malloc_av_+8
 _080B4D00:
 	ldr r3, [r7, 0xC]
 	adds r2, r1, 0
@@ -5107,7 +5107,7 @@ _080B4D08:
 	b _080B4DCC
 	.align 2, 0
 _080B4D38: .4byte 0x000001ff
-_080B4D3C: .4byte __malloc_av__
+_080B4D3C: .4byte __malloc_av_
 _080B4D40:
 	lsrs r1, r6, 9
 	cmp r1, 0
@@ -5171,7 +5171,7 @@ _080B4D92:
 	str r0, [r7, 0x4]
 	b _080B4DCC
 	.align 2, 0
-_080B4DB0: .4byte __malloc_av__
+_080B4DB0: .4byte __malloc_av_
 _080B4DB4:
 	ldr r0, [r2, 0x4]
 	movs r1, 0x4
@@ -5269,10 +5269,10 @@ _080B4E62:
 	movs r0, 0
 	b _080B4E98
 	.align 2, 0
-_080B4E6C: .4byte __malloc_av__
+_080B4E6C: .4byte __malloc_av_
 _080B4E70: .4byte 0x00000fef
-_080B4E74: .4byte gUnknown_203BBDC
-_080B4E78: .4byte gUnknown_203BBD0
+_080B4E74: .4byte __malloc_current_mallinfo
+_080B4E78: .4byte __malloc_sbrk_base
 _080B4E7C:
 	mov r1, r8
 	ldr r2, [r1, 0x8]
@@ -5292,7 +5292,7 @@ _080B4E98:
 	mov r8, r3
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B4EA0: .4byte gUnknown_203BBDC
+_080B4EA0: .4byte __malloc_current_mallinfo
 	thumb_func_end _malloc_trim_r
 
 @ stdio/fvwrite
@@ -5894,12 +5894,12 @@ _080B52B2:
 	str r2, [r1, 0x4]
 	b _080B5384
 	.align 2, 0
-_080B52CC: .4byte __malloc_av__
-_080B52D0: .4byte gUnknown_203BBCC
-_080B52D4: .4byte gUnknown_203BBD0
+_080B52CC: .4byte __malloc_av_
+_080B52D0: .4byte __malloc_top_pad
+_080B52D4: .4byte __malloc_sbrk_base
 _080B52D8: .4byte 0x0000100f
 _080B52DC: .4byte 0xfffff000
-_080B52E0: .4byte gUnknown_203BBDC
+_080B52E0: .4byte __malloc_current_mallinfo
 _080B52E4:
 	mov r3, r10
 	ldr r0, [r3]
@@ -5960,8 +5960,8 @@ _080B530C:
 	str r3, [r5, 0x4]
 	b _080B539C
 	.align 2, 0
-_080B5354: .4byte gUnknown_203BBDC
-_080B5358: .4byte __malloc_av__
+_080B5354: .4byte __malloc_current_mallinfo
+_080B5358: .4byte __malloc_av_
 _080B535C:
 	subs r7, 0xC
 	movs r0, 0x8
@@ -6004,9 +6004,9 @@ _080B539C:
 	mov r10, r5
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B53A8: .4byte gUnknown_203BBDC
-_080B53AC: .4byte gUnknown_203BBD4
-_080B53B0: .4byte gUnknown_203BBD8
+_080B53A8: .4byte __malloc_current_mallinfo
+_080B53AC: .4byte __malloc_max_sbrked_mem
+_080B53B0: .4byte __malloc_max_total_mem
 	thumb_func_end malloc_extend_top
 
 	thumb_func_start _malloc_r
@@ -6068,7 +6068,7 @@ _080B5402:
 	b _080B575A
 	.align 2, 0
 _080B5420: .4byte 0x000001f7
-_080B5424: .4byte __malloc_av__
+_080B5424: .4byte __malloc_av_
 _080B5428:
 	movs r0, 0x2
 	add r12, r0
@@ -6147,7 +6147,7 @@ _080B548C:
 	add r12, r0
 	b _080B54D6
 	.align 2, 0
-_080B54B0: .4byte __malloc_av__
+_080B54B0: .4byte __malloc_av_
 _080B54B4:
 	cmp r3, 0
 	blt _080B54BA
@@ -6203,7 +6203,7 @@ _080B54E6:
 	str r3, [r0]
 	b _080B575A
 	.align 2, 0
-_080B5518: .4byte gUnknown_203B7C8
+_080B5518: .4byte __malloc_av_+8
 _080B551C:
 	mov r7, r10
 	str r7, [r7, 0xC]
@@ -6299,7 +6299,7 @@ _080B55A6:
 	str r0, [r7, 0x4]
 	b _080B55E0
 	.align 2, 0
-_080B55C4: .4byte __malloc_av__
+_080B55C4: .4byte __malloc_av_
 _080B55C8:
 	ldr r0, [r4, 0x4]
 	movs r2, 0x4
@@ -6346,7 +6346,7 @@ _080B55F0:
 	mov r12, r0
 	b _080B561C
 	.align 2, 0
-_080B5614: .4byte __malloc_av__
+_080B5614: .4byte __malloc_av_
 _080B5618:
 	movs r3, 0x4
 	add r12, r3
@@ -6428,7 +6428,7 @@ _080B5694:
 	beq _080B5694
 	b _080B562A
 	.align 2, 0
-_080B56A4: .4byte __malloc_av__
+_080B56A4: .4byte __malloc_av_
 _080B56A8:
 	mov r1, r9
 	ldr r0, [r1, 0x4]
@@ -6468,7 +6468,7 @@ _080B56E6:
 	movs r0, 0
 	b _080B5764
 	.align 2, 0
-_080B56F0: .4byte __malloc_av__
+_080B56F0: .4byte __malloc_av_
 _080B56F4:
 	ldr r6, [r5, 0xC]
 	ldr r4, [r5, 0x8]
@@ -6537,7 +6537,7 @@ _080B5764:
 	mov r10, r5
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B5770: .4byte __malloc_av__
+_080B5770: .4byte __malloc_av_
 	thumb_func_end _malloc_r
 
 	thumb_func_start sub_80B5774

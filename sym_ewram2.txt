@@ -672,31 +672,30 @@ gUnknown_203B4B8: @ 203B4B8
 _impure_ptr: @ 203B7A8
 	.space 0x4
 
-gUnknown_203B7AC: @ 203B7AC
+__mb_cur_max: @ 203B7AC
 	.space 0x14
 
-__malloc_av__: @ 203B7C0
-	.space 0x8
+@ libc:stdlib/mallocr_MALLOC
 
-gUnknown_203B7C8: @ 203B7C8
-	.space 0x400
+__malloc_av_: @ 203B7C0
+	.space 0x408
 
-gUnknown_203BBC8: @ 203BBC8
+__malloc_trim_threshold: @ 203BBC8
 	.space 0x4
 
-gUnknown_203BBCC: @ 203BBCC
+__malloc_top_pad: @ 203BBCC
 	.space 0x4
 
-gUnknown_203BBD0: @ 203BBD0
+__malloc_sbrk_base: @ 203BBD0
 	.space 0x4
 
-gUnknown_203BBD4: @ 203BBD4
+__malloc_max_sbrked_mem: @ 203BBD4
 	.space 0x4
 
-gUnknown_203BBD8: @ 203BBD8
+__malloc_max_total_mem: @ 203BBD8
 	.space 0x4
 
-gUnknown_203BBDC: @ 203BBDC
+__malloc_current_mallinfo: @ 203BBDC
 	.space 0x28
 
 gUnknown_203BC04: @ 203BC04 @ main
