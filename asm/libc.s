@@ -1038,7 +1038,7 @@ _080B2E98:
 	bl sub_80B6180
 	cmp r0, 0
 	beq _080B2EEC
-	ldr r3, _080B2EE0
+	ldr r3, _080B2EDC+4
 	ldr r2, _080B2EDC
 	ldr r0, [sp, 0x1FC]
 	ldr r1, [sp, 0x200]
@@ -1055,8 +1055,7 @@ _080B2ED2:
 	movs r3, 0x3
 	b _080B3262
 	.align 2, 0
-_080B2EDC: .4byte 0x00000000
-_080B2EE0: .4byte 0x00000000
+_080B2EDC: .8byte 0x0000000000000000
 _080B2EE4: .4byte 0x000001c9
 _080B2EE8: .4byte gUnknown_826FE04
 _080B2EEC:
@@ -1090,7 +1089,7 @@ _080B2F04:
 	ldr r1, [sp, 0x1FC]
 	ldr r2, [sp, 0x200]
 	adds r3, r6, 0
-	bl sub_80B399C
+	bl cvt
 	mov r8, r0
 	ldr r4, [sp, 0x1E8]
 	cmp r4, 0x67
@@ -1128,7 +1127,7 @@ _080B2F5A:
 	str r1, [r0]
 	add r0, sp, 0x14
 	ldr r2, [sp, 0x1E8]
-	bl sub_80B3A90
+	bl exponent
 	str r0, [sp, 0x204]
 	add r0, sp, 0x1D8
 	ldr r0, [r0]
@@ -1493,7 +1492,7 @@ _080B31EA:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_80B688C
+	bl __udivsi3
 	adds r4, r0, 0
 	cmp r4, 0x9
 	bhi _080B31EA
@@ -2527,8 +2526,8 @@ _080B398C:
 	pop {r4-r7,pc}
 	thumb_func_end _vfprintf_r
 
-	thumb_func_start sub_80B399C
-sub_80B399C:
+	thumb_func_start cvt
+cvt:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2655,12 +2654,13 @@ _080B3A70:
 	mov r10, r5
 	pop {r4-r7,pc}
 	.align 2, 0
+	@ double 0.0
 _080B3A88: .4byte 0x00000000
 _080B3A8C: .4byte 0x00000000
-	thumb_func_end sub_80B399C
+	thumb_func_end cvt
 
-	thumb_func_start sub_80B3A90
-sub_80B3A90:
+	thumb_func_start exponent
+exponent:
 	push {r4-r7,lr}
 	sub sp, 0x134
 	adds r7, r0, 0
@@ -2720,7 +2720,7 @@ _080B3AF8:
 	subs r0, r5, r7
 	add sp, 0x134
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B3A90
+	thumb_func_end exponent
 
 	thumb_func_start vsprintf
 vsprintf:
@@ -2848,8 +2848,8 @@ _080B3BDE:
 	pop {r4,r5,pc}
 	thumb_func_end sub_80B3B34
 
-	thumb_func_start sub_80B3BE0
-sub_80B3BE0:
+	thumb_func_start quorem
+quorem:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2881,7 +2881,7 @@ _080B3BFC:
 	ldr r2, [r5]
 	mov r10, r2
 	mov r0, r10
-	bl sub_80B688C
+	bl __udivsi3
 	str r0, [sp, 0x8]
 	mov r3, r8
 	str r3, [sp, 0x14]
@@ -2955,7 +2955,7 @@ _080B3CA2:
 _080B3CA6:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl sub_80B5DD0
+	bl __mcmp
 	cmp r0, 0
 	blt _080B3D2E
 	ldr r0, [sp, 0x8]
@@ -3032,7 +3032,7 @@ _080B3D30:
 	mov r9, r4
 	mov r10, r5
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B3BE0
+	thumb_func_end quorem
 
 	thumb_func_start _dtoa_r
 _dtoa_r:
@@ -3059,7 +3059,7 @@ _dtoa_r:
 	str r0, [r2, 0x8]
 	mov r0, r10
 	adds r1, r2, 0
-	bl sub_80B5908
+	bl _Bfree
 	movs r0, 0
 	mov r1, r10
 	str r0, [r1, 0x40]
@@ -3153,7 +3153,7 @@ _080B3E20:
 	ldr r1, [sp, 0x40]
 	ldr r2, [sp, 0x44]
 	add r3, sp, 0x4
-	bl sub_80B6008
+	bl _d2b
 	str r0, [sp, 0x5C]
 	ldr r2, [sp, 0x40]
 	lsls r0, r2, 1
@@ -3218,7 +3218,7 @@ _080B3EAA:
 	bl __floatsidf
 	cmp r4, 0
 	bge _080B3EBC
-	ldr r3, _080B3F80
+	ldr r3, _080B3F7C+4
 	ldr r2, _080B3F7C
 	bl __adddf3
 _080B3EBC:
@@ -3228,28 +3228,28 @@ _080B3EBC:
 	ldr r0, [sp, 0x48]
 	adds r1, r0, r1
 	str r1, [sp, 0x48]
-	ldr r2, _080B3F88
+	ldr r2, _080B3F84+4
 	add r8, r2
 	movs r3, 0x1
 	str r3, [sp, 0x58]
 _080B3ED0:
 	ldr r2, _080B3F8C
-	ldr r3, _080B3F90
+	ldr r3, _080B3F8C+4
 	ldr r0, [sp, 0x48]
 	ldr r1, [sp, 0x4C]
 	bl __subdf3
 	ldr r2, _080B3F94
-	ldr r3, _080B3F98
+	ldr r3, _080B3F94+4
 	bl __muldf3
 	ldr r2, _080B3F9C
-	ldr r3, _080B3FA0
+	ldr r3, _080B3F9C+4
 	bl __adddf3
 	adds r5, r1, 0
 	adds r4, r0, 0
 	mov r0, r8
 	bl __floatsidf
 	ldr r2, _080B3FA4
-	ldr r3, _080B3FA8
+	ldr r3, _080B3FA4+4
 	bl __muldf3
 	adds r3, r1, 0
 	adds r2, r0, 0
@@ -3261,7 +3261,7 @@ _080B3ED0:
 	bl __fixdfsi
 	str r0, [sp, 0x24]
 	ldr r2, _080B3FAC
-	ldr r3, _080B3FB0
+	ldr r3, _080B3FAC+4
 	ldr r0, [sp, 0x6C]
 	ldr r1, [sp, 0x70]
 	bl __ltdf2
@@ -3312,20 +3312,13 @@ _080B3F6A:
 	str r4, [sp, 0x34]
 	b _080B3FC0
 	.align 2, 0
-_080B3F7C: .4byte 0x41f00000
-_080B3F80: .4byte 0x00000000
-_080B3F84: .4byte 0xfe100000
-_080B3F88: .4byte 0xfffffbcd
-_080B3F8C: .4byte 0x3ff80000
-_080B3F90: .4byte 0x00000000
-_080B3F94: .4byte 0x3fd287a7
-_080B3F98: .4byte 0x636f4361
-_080B3F9C: .4byte 0x3fc68a28
-_080B3FA0: .4byte 0x8b60c8b3
-_080B3FA4: .4byte 0x3fd34413
-_080B3FA8: .4byte 0x509f79fb
-_080B3FAC: .4byte 0x00000000
-_080B3FB0: .4byte 0x00000000
+_080B3F7C: .8byte 0x0000000041f00000 @ 4294967296.0
+_080B3F84: .8byte 0xfffffbcdfe100000 @ -1.6742337954003907e+299
+_080B3F8C: .8byte 0x000000003ff80000 @ 1.5
+_080B3F94: .8byte 0x636f43613fd287a7 @ 0.289529654602168
+_080B3F9C: .8byte 0x8b60c8b33fc68a28 @ 0.1760912590558
+_080B3FA4: .8byte 0x509f79fb3fd34413 @ 0.301029995663981
+_080B3FAC: .8byte 0x0000000000000000 @ 0.0
 _080B3FB4: .4byte gUnknown_826FEC0
 _080B3FB8:
 	negs r4, r4
@@ -3656,7 +3649,7 @@ _080B421C:
 _080B4236:
 	b _080B440C
 	.align 2, 0
-_080B4238: .4byte gUnknown_826FEC0
+_080B4238: .4byte gUnknown_826FEC0 @ tens
 _080B423C: .4byte gUnknown_826FF88
 _080B4240: .4byte 0x3ff00000
 _080B4244: .4byte 0x00000000
@@ -3904,7 +3897,7 @@ _080B4430:
 	b _080B478E
 _080B445A:
 	ldr r2, _080B4480
-	ldr r3, _080B4484
+	ldr r3, _080B4480+4
 	ldr r0, [sp, 0x6C]
 	ldr r1, [sp, 0x70]
 	bl __muldf3
@@ -3920,20 +3913,19 @@ _080B4478:
 	b _080B4796
 	.align 2, 0
 _080B447C: .4byte gUnknown_826FEC0
-_080B4480: .4byte 0x40140000
-_080B4484: .4byte 0x00000000
+_080B4480: .8byte 0x0000000040140000
 _080B4488:
 	movs r2, 0x1
 	mov r8, r2
 	b _080B44AC
 _080B448E:
-	ldr r1, _080B4550
+	ldr r1, _080B454C+4
 	ldr r0, _080B454C
 	bl __muldf3
 	str r0, [sp, 0x40]
 	str r1, [sp, 0x44]
 	ldr r2, _080B4554
-	ldr r3, _080B4558
+	ldr r3, _080B4554+4
 	bl __eqdf2
 	cmp r0, 0
 	bne _080B44A8
@@ -4020,10 +4012,8 @@ _080B4546:
 	add r9, r0
 	b _080B4A06
 	.align 2, 0
-_080B454C: .4byte 0x40240000
-_080B4550: .4byte 0x00000000
-_080B4554: .4byte 0x00000000
-_080B4558: .4byte 0x00000000
+_080B454C: .8byte 0x0000000040240000 @ 10.0
+_080B4554: .8byte 0x0000000000000000 @ 0.0
 _080B455C:
 	ldr r5, [sp, 0x10]
 	ldr r6, [sp, 0x14]
@@ -4128,7 +4118,7 @@ _080B45F4:
 	adds r4, r0, 0
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
-	bl sub_80B5908
+	bl _Bfree
 	str r4, [sp, 0x5C]
 _080B4626:
 	ldr r1, [sp, 0x14]
@@ -4271,7 +4261,7 @@ _080B4726:
 	beq _080B4764
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B5DD0
+	bl __mcmp
 	cmp r0, 0
 	bge _080B4764
 	ldr r2, [sp, 0x24]
@@ -4312,7 +4302,7 @@ _080B4764:
 	str r0, [sp, 0x68]
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B5DD0
+	bl __mcmp
 	cmp r0, 0
 	bgt _080B4796
 _080B478E:
@@ -4412,12 +4402,12 @@ _080B4844:
 _080B4848:
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B3BE0
+	bl quorem
 	adds r7, r0, 0
 	adds r7, 0x30
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x60]
-	bl sub_80B5DD0
+	bl __mcmp
 	adds r4, r0, 0
 	mov r0, r10
 	ldr r1, [sp, 0x68]
@@ -4429,7 +4419,7 @@ _080B4848:
 	bne _080B487C
 	ldr r0, [sp, 0x5C]
 	adds r1, r5, 0
-	bl sub_80B5DD0
+	bl __mcmp
 	adds r6, r0, 0
 	b _080B487E
 _080B487C:
@@ -4437,7 +4427,7 @@ _080B487C:
 _080B487E:
 	mov r0, r10
 	adds r1, r5, 0
-	bl sub_80B5908
+	bl _Bfree
 	cmp r6, 0
 	bne _080B48AA
 	ldr r2, [sp, 0xC]
@@ -4477,7 +4467,7 @@ _080B48BE:
 	bl sub_80B5D30
 	str r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B5DD0
+	bl __mcmp
 	adds r6, r0, 0
 	cmp r6, 0
 	bgt _080B48E8
@@ -4542,7 +4532,7 @@ _080B492C:
 _080B493E:
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B3BE0
+	bl quorem
 	adds r7, r0, 0
 	adds r7, 0x30
 	mov r2, r9
@@ -4559,7 +4549,7 @@ _080B4958:
 	bl sub_80B5D30
 	str r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
-	bl sub_80B5DD0
+	bl __mcmp
 	adds r4, r0, 0
 	cmp r4, 0
 	bgt _080B497C
@@ -4629,7 +4619,7 @@ _080B49DA:
 _080B49DE:
 	mov r0, r10
 	ldr r1, [sp, 0x68]
-	bl sub_80B5908
+	bl _Bfree
 	ldr r3, [sp, 0x64]
 	cmp r3, 0
 	beq _080B4A06
@@ -4640,15 +4630,15 @@ _080B49DE:
 	beq _080B49FE
 	mov r0, r10
 	ldr r1, [sp, 0x60]
-	bl sub_80B5908
+	bl _Bfree
 _080B49FE:
 	mov r0, r10
 	ldr r1, [sp, 0x64]
-	bl sub_80B5908
+	bl _Bfree
 _080B4A06:
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
-	bl sub_80B5908
+	bl _Bfree
 	movs r0, 0
 	mov r1, r9
 	strb r0, [r1]
@@ -5207,7 +5197,7 @@ _malloc_trim_r:
 	adds r4, r1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80B688C
+	bl __udivsi3
 	subs r0, 0x1
 	lsls r4, r0, 12
 	cmp r4, r5
@@ -6758,8 +6748,8 @@ _080B5904:
 	pop {r4-r6,pc}
 	thumb_func_end sub_80B58B0
 
-	thumb_func_start sub_80B5908
-sub_80B5908:
+	thumb_func_start _Bfree
+_Bfree:
 	adds r3, r0, 0
 	adds r2, r1, 0
 	cmp r2, 0
@@ -6773,7 +6763,7 @@ sub_80B5908:
 	str r2, [r0]
 _080B591E:
 	bx lr
-	thumb_func_end sub_80B5908
+	thumb_func_end _Bfree
 
 	thumb_func_start sub_80B5920
 sub_80B5920:
@@ -6834,7 +6824,7 @@ _080B593C:
 	bl memcpy
 	mov r0, r9
 	adds r1, r5, 0
-	bl sub_80B5908
+	bl _Bfree
 	adds r5, r4, 0
 _080B599A:
 	lsls r1, r6, 2
@@ -7332,7 +7322,7 @@ _080B5D04:
 	adds r4, r0, 0
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_80B5908
+	bl _Bfree
 	adds r7, r4, 0
 _080B5D22:
 	asrs r6, 1
@@ -7424,7 +7414,7 @@ _080B5DB4:
 	str r0, [r2, 0x10]
 	mov r0, r10
 	mov r1, r8
-	bl sub_80B5908
+	bl _Bfree
 	mov r0, r9
 	pop {r3-r5}
 	mov r8, r3
@@ -7433,8 +7423,8 @@ _080B5DB4:
 	pop {r4-r7,pc}
 	thumb_func_end sub_80B5D30
 
-	thumb_func_start sub_80B5DD0
-sub_80B5DD0:
+	thumb_func_start __mcmp
+__mcmp:
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	adds r5, r1, 0
@@ -7470,7 +7460,7 @@ _080B5E06:
 	movs r0, 0
 _080B5E0C:
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B5DD0
+	thumb_func_end __mcmp
 
 	thumb_func_start sub_80B5E10
 sub_80B5E10:
@@ -7485,7 +7475,7 @@ sub_80B5E10:
 	mov r8, r2
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_80B5DD0
+	bl __mcmp
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _080B5E42
@@ -7752,8 +7742,8 @@ _080B5FF8:
 _080B6004: .4byte 0x3ff00000
 	thumb_func_end sub_80B5F4C
 
-	thumb_func_start sub_80B6008
-sub_80B6008:
+	thumb_func_start _d2b
+_d2b:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7871,7 +7861,7 @@ _080B60DC:
 	pop {r4-r7,pc}
 	.align 2, 0
 _080B60EC: .4byte 0xfffffbce
-	thumb_func_end sub_80B6008
+	thumb_func_end _d2b
 
 	thumb_func_start sub_80B60F0
 sub_80B60F0:
@@ -8995,8 +8985,8 @@ _080B6882:
 _080B6888: .4byte gUnknown_203B034
 	thumb_func_end sub_80B685C
 
-	thumb_func_start sub_80B688C
-sub_80B688C:
+	thumb_func_start __udivsi3
+__udivsi3:
 	cmp r1, 0
 	beq _080B68FA
 	movs r3, 0x1
@@ -9066,6 +9056,6 @@ _080B68FA:
 	bl __div0
 	movs r0, 0
 	pop {pc}
-	thumb_func_end sub_80B688C
+	thumb_func_end __udivsi3
 
 	.align 2, 0 @ Don't pad with nop.

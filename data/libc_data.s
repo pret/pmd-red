@@ -1,85 +1,157 @@
 	.section .rodata
 
+	.align 2, 0
 	.global gUnknown_826FDE4
 gUnknown_826FDE4: @ 826FDE4
-	.incbin "baserom.gba", 0x26FDE4, 0x10
+	.byte 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20
 
 	.global gUnknown_826FDF4
 gUnknown_826FDF4: @ 826FDF4
-	.incbin "baserom.gba", 0x26FDF4, 0x10
+	.byte 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30
 
+	.align 2, 0
 	.global gUnknown_826FE04
 gUnknown_826FE04: @ 826FE04
-	.incbin "baserom.gba", 0x26FE04, 0x4
+	.ascii "Inf"
 
+	.align 2, 0
 	.global gUnknown_826FE08
 gUnknown_826FE08: @ 826FE08
-	.incbin "baserom.gba", 0x26FE08, 0x4
+	.ascii "NaN"
 
+	.align 2, 0
 	.global gUnknown_826FE0C
 gUnknown_826FE0C: @ 826FE0C
-	.incbin "baserom.gba", 0x26FE0C, 0x14
+	.ascii "0123456789abcdef"
+	.space 4
 
 	.global gUnknown_826FE20
 gUnknown_826FE20: @ 826FE20
-	.incbin "baserom.gba", 0x26FE20, 0x8
+	.ascii "(null)"
 
+	.align 2, 0
 	.global gUnknown_826FE28
 gUnknown_826FE28: @ 826FE28
-	.incbin "baserom.gba", 0x26FE28, 0x14
+	.ascii "0123456789ABCDEF"
+	.space 4
 
 	.global gUnknown_826FE3C
 gUnknown_826FE3C: @ 826FE3C
-	.incbin "baserom.gba", 0x26FE3C, 0x1C
+	.ascii "bug in vfprintf: bad base"
 
+	.align 2, 0
 	.global gUnknown_826FE58
 gUnknown_826FE58: @ 826FE58
-	.incbin "baserom.gba", 0x26FE58, 0x4
+	.ascii "0"
 
+	.align 2, 0
 	.global gUnknown_826FE5C
 gUnknown_826FE5C: @ 826FE5C
-	.incbin "baserom.gba", 0x26FE5C, 0x4
+	.ascii "."
 
+	.align 2, 0
 	.global gUnknown_826FE60
 gUnknown_826FE60: @ 826FE60
-	.incbin "baserom.gba", 0x26FE60, 0xC
+	.ascii "Infinity"
 
+	.space 4
 	.global gUnknown_826FE6C
 gUnknown_826FE6C: @ 826FE6C
-	.incbin "baserom.gba", 0x26FE6C, 0x4
+	.ascii "NaN"
 
+	.align 2, 0
 	.global gUnknown_826FE70
 gUnknown_826FE70: @ 826FE70
-	.incbin "baserom.gba", 0x26FE70, 0x8
+	.ascii "0"
+	.align 2, 0
+	.ascii "C"
+	.align 2, 0
 
 	.global gUnknown_826FE78
 gUnknown_826FE78: @ 826FE78
-	.incbin "baserom.gba", 0x26FE78, 0x30
+	.4byte gUnknown_826FEAC, gUnknown_826FEA8
+	.4byte gUnknown_826FEA8, gUnknown_826FEA8
+	.4byte gUnknown_826FEA8, gUnknown_826FEA8
+	.4byte gUnknown_826FEA8, gUnknown_826FEA8
+	.4byte gUnknown_826FEA8, gUnknown_826FEA8
+	.4byte 0xffffffff,       0xffffffff
 
 	.global gUnknown_826FEA8
 gUnknown_826FEA8: @ 826FEA8
-	.incbin "baserom.gba", 0x26FEA8, 0x8
+	.ascii ""
 
+	.space 4
+	.global gUnknown_826FEAC
+gUnknown_826FEAC: @ 826FEAC
+	.ascii "."
+
+	.align 2, 0
 	.global gUnknown_826FEB0
 gUnknown_826FEB0: @ 826FEB0
-	.incbin "baserom.gba", 0x26FEB0, 0x4
+	.ascii "C"
 
+	.align 2, 0
 	.global gUnknown_826FEB4
 gUnknown_826FEB4: @ 826FEB4
-	.incbin "baserom.gba", 0x26FEB4, 0xC
+	.4byte 5
+	.4byte 25
+	.4byte 125
 
+	.align 2, 0
 	.global gUnknown_826FEC0
 gUnknown_826FEC0: @ 826FEC0
-	.incbin "baserom.gba", 0x26FEC0, 0xC8
+	.8byte 0x000000003ff00000 @ 1.0
+	.8byte 0x0000000040240000 @ 10.0
+	.8byte 0x0000000040590000 @ 100.0
+	.8byte 0x00000000408f4000 @ 1000.0
+	.8byte 0x0000000040c38800 @ 10000.0
+	.8byte 0x0000000040f86a00 @ 100000.0
+	.8byte 0x00000000412e8480 @ 1000000.0
+	.8byte 0x00000000416312d0 @ 10000000.0
+	.8byte 0x000000004197d784 @ 100000000.0
+	.8byte 0x0000000041cdcd65 @ 1000000000.0
+	.8byte 0x200000004202a05f @ 10000000000.0
+	.8byte 0xe800000042374876 @ 100000000000.0
+	.8byte 0xa2000000426d1a94 @ 1000000000000.0
+	.8byte 0xe540000042a2309c @ 10000000000000.0
+	.8byte 0x1e90000042d6bcc4 @ 100000000000000.0
+	.8byte 0x26340000430c6bf5 @ 1000000000000000.0
+	.8byte 0x37e080004341c379 @ 10000000000000000.0
+	.8byte 0x85d8a00043763457 @ 100000000000000000.0
+	.8byte 0x674ec80043abc16d @ 1000000000000000000.0
+	.8byte 0x60913d0043e158e4 @ 10000000000000000000.0
+	.8byte 0x78b58c404415af1d @ 100000000000000000000.0
+	.8byte 0xd6e2ef50444b1ae4 @ 1000000000000000000000.0
+	.8byte 0x064dd5924480f0cf @ 10000000000000000000000.0
+	.8byte 0xc7e14af644b52d02 @ 100000000000000000000000.0
+	.8byte 0x79d99db444ea7843 @ 1000000000000000000000000.0
 
+	.align 2, 0
 	.global gUnknown_826FF88
 gUnknown_826FF88: @ 826FF88
-	.incbin "baserom.gba", 0x26FF88, 0x50
+	@ big tens
+	.8byte 0x37e080004341c379 @ 1e16
+	.8byte 0xb5056e174693b8b5 @ 1e32
+	.8byte 0xe93ff9f54d384f03 @ 1e64
+	.8byte 0xf9301d325a827748 @ 1e128
+	.8byte 0x7f73bf3c75154fdd @ 1e256
+	@ tiny tenths
+	.8byte 0x97d889bc3c9cd2b2 @ 1e-16
+	.8byte 0xd5a8a7333949f623 @ 1e-32
+	.8byte 0x44f4a73d32a50ffd @ 1e-64
+	.8byte 0xcf8c979d255bba08 @ 1e-128
+	.8byte 0x64ac6f430ac80628 @ 1e-256
 
+	.align 2, 0
 	.global gUnknown_826FFD8
 gUnknown_826FFD8: @ 826FFD8
-	.incbin "baserom.gba", 0x26FFD8, 0x4
+	.ascii ":tt"
+	.byte 0
 
+	.align 2, 0
 	.global gUnknown_826FFDC
 gUnknown_826FFDC: @ 826FFDC
-	.incbin "baserom.gba", 0x26FFDC, 0x24
+	.ascii "_sbrk: Heap and stack collision\n"
+	.byte 0
+
+	.align 2, 0 @ don't pad with nop
