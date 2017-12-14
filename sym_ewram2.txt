@@ -667,13 +667,15 @@ gUnknown_203B4B4: @ 203B4B4
 gUnknown_203B4B8: @ 203B4B8
 	.space 0x2F0
 
-gUnknown_203B7A8: @ 203B7A8
+@ libc
+
+_impure_ptr: @ 203B7A8
 	.space 0x4
 
 gUnknown_203B7AC: @ 203B7AC
 	.space 0x14
 
-gUnknown_203B7C0: @ 203B7C0
+__malloc_av__: @ 203B7C0
 	.space 0x8
 
 gUnknown_203B7C8: @ 203B7C8
@@ -697,4 +699,4 @@ gUnknown_203BBD8: @ 203BBD8
 gUnknown_203BBDC: @ 203BBDC
 	.space 0x28
 
-gUnknown_203BC04: @ 203BC04
+gUnknown_203BC04: @ 203BC04 @ main
