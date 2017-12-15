@@ -8075,7 +8075,7 @@ __sread:
 	movs r2, 0xE
 	ldrsh r1, [r5, r2]
 	adds r2, r4, 0
-	bl sub_80B685C
+	bl _read_r
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _080B6212
@@ -8112,7 +8112,7 @@ __swrite:
 	ldrsh r1, [r4, r2]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_80B682C
+	bl _lseek_r
 _080B6246:
 	ldr r0, _080B6260
 	ldrh r1, [r4, 0xC]
@@ -8139,7 +8139,7 @@ __sseek:
 	movs r2, 0xE
 	ldrsh r1, [r5, r2]
 	adds r2, r4, 0
-	bl sub_80B682C
+	bl _lseek_r
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -8172,7 +8172,7 @@ __sclose:
 	movs r3, 0xE
 	ldrsh r1, [r0, r3]
 	adds r0, r2, 0
-	bl sub_80B67A0
+	bl _close_r
 	pop {pc}
 	thumb_func_end __sclose
 
@@ -8318,7 +8318,7 @@ get_errno:
 error:
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80B67CC
+	bl _impure_r
 	adds r4, r0, 0
 	bl get_errno
 	str r0, [r4]
@@ -8907,8 +8907,10 @@ _080B679E:
 	pop {r4,pc}
 	thumb_func_end _calloc_r
 
-	thumb_func_start sub_80B67A0
-sub_80B67A0:
+@ libc/reent/closer
+
+	thumb_func_start _close_r
+_close_r:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r0, r1, 0
@@ -8930,16 +8932,20 @@ _080B67C2:
 	pop {r4,r5,pc}
 	.align 2, 0
 _080B67C8: .4byte errno
-	thumb_func_end sub_80B67A0
+	thumb_func_end _close_r
 
-	thumb_func_start sub_80B67CC
-sub_80B67CC:
+@ libc/reent/impure
+
+	thumb_func_start _impure_r
+_impure_r:
 	ldr r0, _080B67D4
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
 _080B67D4: .4byte _impure_ptr
-	thumb_func_end sub_80B67CC
+	thumb_func_end _impure_r
+
+@ libc/reent/fstatr
 
 	thumb_func_start _fstat_r
 _fstat_r:
@@ -8967,6 +8973,8 @@ _080B67FC:
 _080B6800: .4byte errno
 	thumb_func_end _fstat_r
 
+@ libc/stdlib/abort
+
 	thumb_func_start abort
 abort:
 	mov r12, r3
@@ -8986,19 +8994,25 @@ abort:
 _080B6820: .4byte 0x00020022
 	thumb_func_end abort
 
+@ libc/sys/arm/syscalls
+
 	thumb_func_start isatty
 isatty:
 	movs r0, 0x1
 	bx lr
 	thumb_func_end isatty
 
+@ libc/sys/arm/libcfunc
+
 	thumb_func_start alarm
 alarm:
 	bx lr
 	thumb_func_end alarm
 
-	thumb_func_start sub_80B682C
-sub_80B682C:
+@ libc/reent/lseekr
+
+	thumb_func_start _lseek_r
+_lseek_r:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r0, r1, 0
@@ -9022,10 +9036,12 @@ _080B6852:
 	pop {r4,r5,pc}
 	.align 2, 0
 _080B6858: .4byte errno
-	thumb_func_end sub_80B682C
+	thumb_func_end _lseek_r
 
-	thumb_func_start sub_80B685C
-sub_80B685C:
+@ libc/reent/readr
+
+	thumb_func_start _read_r
+_read_r:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r0, r1, 0
@@ -9049,79 +9065,6 @@ _080B6882:
 	pop {r4,r5,pc}
 	.align 2, 0
 _080B6888: .4byte errno
-	thumb_func_end sub_80B685C
-
-	thumb_func_start __udivsi3
-__udivsi3:
-	cmp r1, 0
-	beq _080B68FA
-	movs r3, 0x1
-	movs r2, 0
-	push {r4}
-	cmp r0, r1
-	bcc _080B68F4
-	movs r4, 0x1
-	lsls r4, 28
-_080B689E:
-	cmp r1, r4
-	bcs _080B68AC
-	cmp r1, r0
-	bcs _080B68AC
-	lsls r1, 4
-	lsls r3, 4
-	b _080B689E
-_080B68AC:
-	lsls r4, 3
-_080B68AE:
-	cmp r1, r4
-	bcs _080B68BC
-	cmp r1, r0
-	bcs _080B68BC
-	lsls r1, 1
-	lsls r3, 1
-	b _080B68AE
-_080B68BC:
-	cmp r0, r1
-	bcc _080B68C4
-	subs r0, r1
-	orrs r2, r3
-_080B68C4:
-	lsrs r4, r1, 1
-	cmp r0, r4
-	bcc _080B68D0
-	subs r0, r4
-	lsrs r4, r3, 1
-	orrs r2, r4
-_080B68D0:
-	lsrs r4, r1, 2
-	cmp r0, r4
-	bcc _080B68DC
-	subs r0, r4
-	lsrs r4, r3, 2
-	orrs r2, r4
-_080B68DC:
-	lsrs r4, r1, 3
-	cmp r0, r4
-	bcc _080B68E8
-	subs r0, r4
-	lsrs r4, r3, 3
-	orrs r2, r4
-_080B68E8:
-	cmp r0, 0
-	beq _080B68F4
-	lsrs r3, 4
-	beq _080B68F4
-	lsrs r1, 4
-	b _080B68BC
-_080B68F4:
-	adds r0, r2, 0
-	pop {r4}
-	mov pc, lr
-_080B68FA:
-	push {lr}
-	bl __div0
-	movs r0, 0
-	pop {pc}
-	thumb_func_end __udivsi3
+	thumb_func_end _read_r
 
 	.align 2, 0 @ Don't pad with nop.

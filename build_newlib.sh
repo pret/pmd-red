@@ -50,6 +50,14 @@ names="
 	libc/sys/arm/syscalls
 	libc/reent/writer
 	${dummy# libc/stdlib/mallocr:CALLOC}
+	libc/reent/closer
+	libc/reent/impure
+	libc/reent/fstatr
+	libc/stdlib/abort
+	libc/sys/arm/syscalls
+	libc/sys/arm/libcfunc
+	libc/reent/lseekr
+	libc/reent/readr
 "
 
 compile () {
