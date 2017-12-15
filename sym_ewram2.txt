@@ -1,17 +1,17 @@
 	.align 2
-gUnknown_2039E18: @ 2039E18
+heap_end: @ 2039E18
 	.space 0x4
 
-gUnknown_2039E1C: @ 2039E1C
+monitor_stdin: @ 2039E1C
 	.space 0x4
 
-gUnknown_2039E20: @ 2039E20
+monitor_stdout: @ 2039E20
 	.space 0x4
 
-gUnknown_2039E24: @ 2039E24
+monitor_stderr: @ 2039E24
 	.space 0x4
 
-gUnknown_2039E28: @ 2039E28
+openfiles: @ 2039E28
 	.space 0xA8
 
 gUnknown_2039ED0: @ 2039ED0
@@ -59,7 +59,7 @@ EraseFlashSector: @ 203B02C
 gFlashMaxTime: @ 203B030
 	.space 0x4
 
-gUnknown_203B034: @ 203B034
+errno: @ 203B034
 	.space 0x4
 
 alt_203B038:

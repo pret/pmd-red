@@ -4,7 +4,7 @@
 
 	.text
 
-@ string/memcpy
+@ libc/string/memcpy
 
 	thumb_func_start memcpy
 memcpy:
@@ -63,7 +63,7 @@ _080B271A:
 	pop {r4,r5,pc}
 	thumb_func_end memcpy
 
-@ string/memset
+@ libc/string/memset
 
 	thumb_func_start memset
 memset:
@@ -115,7 +115,7 @@ _080B2766:
 	pop {r4,r5,pc}
 	thumb_func_end memset
 
-@ stdio/sprintf
+@ libc/stdio/sprintf
 
 	thumb_func_start _sprintf_r
 _sprintf_r:
@@ -183,7 +183,7 @@ _080B27E8: .4byte 0x7fffffff
 _080B27EC: .4byte _impure_ptr
 	thumb_func_end sprintf
 
-@ string/strcat
+@ libc/string/strcat
 
 	thumb_func_start strcat
 strcat:
@@ -227,7 +227,7 @@ _080B2826:
 	pop {r4-r6,pc}
 	thumb_func_end strcat
 
-@ string/strcmp
+@ libc/string/strcmp
 
 	thumb_func_start strcmp
 strcmp:
@@ -283,7 +283,7 @@ _080B2890:
 	pop {r4,r5,pc}
 	thumb_func_end strcmp
 
-@ string/strcpy
+@ libc/string/strcpy
 
 	thumb_func_start strcpy
 strcpy:
@@ -328,7 +328,7 @@ _080B28CC:
 	pop {r4-r6,pc}
 	thumb_func_end strcpy
 
-@ string/strlen
+@ libc/string/strlen
 
 	thumb_func_start strlen
 strlen:
@@ -370,7 +370,7 @@ _080B2918:
 	pop {r4,r5,pc}
 	thumb_func_end strlen
 
-@ string/strncpy
+@ libc/string/strncpy
 
 	thumb_func_start strncpy
 strncpy:
@@ -437,7 +437,7 @@ _080B2990:
 	pop {r4-r7,pc}
 	thumb_func_end strncpy
 
-@ stdio/vfprintf
+@ libc/stdio/vfprintf
 
 	thumb_func_start __sprint
 __sprint:
@@ -580,7 +580,7 @@ _080B2A7E:
 	bne _080B2AAC
 _080B2A92:
 	ldr r0, [sp, 0x1E0]
-	bl sub_80B3B34
+	bl __swsetup
 	cmp r0, 0
 	beq _080B2AAC
 	movs r0, 0x1
@@ -637,7 +637,7 @@ _080B2AF8:
 	str r2, [sp]
 	ldr r1, [sp, 0x214]
 	ldr r2, [sp, 0x1E4]
-	bl sub_80B5774
+	bl _mbtowc_r
 	adds r4, r0, 0
 	cmp r4, 0
 	ble _080B2B26
@@ -1053,7 +1053,7 @@ _080B2E98:
 	str r2, [sp, 0x200]
 	ldr r0, [sp, 0x1FC]
 	ldr r1, [sp, 0x200]
-	bl sub_80B6180
+	bl isinf
 	cmp r0, 0
 	beq _080B2EEC
 	ldr r3, _080B2EDC+4
@@ -1079,7 +1079,7 @@ _080B2EE8: .4byte gUnknown_826FE04
 _080B2EEC:
 	ldr r0, [sp, 0x1FC]
 	ldr r1, [sp, 0x200]
-	bl sub_80B61A4
+	bl isnan
 	cmp r0, 0
 	beq _080B2F04
 	ldr r4, _080B2F00
@@ -1321,7 +1321,7 @@ _080B309C:
 	mov r0, r8
 	movs r1, 0
 	adds r2, r6, 0
-	bl sub_80B57A0
+	bl memchr
 	cmp r0, 0
 	beq _080B30B8
 	mov r1, r8
@@ -2740,7 +2740,7 @@ _080B3AF8:
 	pop {r4-r7,pc}
 	thumb_func_end exponent
 
-@ stdio/vsprintf
+@ libc/stdio/vsprintf
 
 	thumb_func_start vsprintf
 vsprintf:
@@ -2770,8 +2770,10 @@ _080B3B2C: .4byte 0x7fffffff
 _080B3B30: .4byte _impure_ptr
 	thumb_func_end vsprintf
 
-	thumb_func_start sub_80B3B34
-sub_80B3B34:
+@ libc/stdio/wsetup.s
+
+	thumb_func_start __swsetup
+__swsetup:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x54]
@@ -2866,9 +2868,9 @@ _080B3BDC:
 	movs r0, 0
 _080B3BDE:
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B3B34
+	thumb_func_end __swsetup
 
-@ stdlib/dtoa
+@ libc/stdlib/dtoa
 
 	thumb_func_start quorem
 quorem:
@@ -3341,7 +3343,7 @@ _080B3F94: .8byte 0x636f43613fd287a7 @ 0.289529654602168
 _080B3F9C: .8byte 0x8b60c8b33fc68a28 @ 0.1760912590558
 _080B3FA4: .8byte 0x509f79fb3fd34413 @ 0.301029995663981
 _080B3FAC: .8byte 0x0000000000000000 @ 0.0
-_080B3FB4: .4byte gUnknown_826FEC0
+_080B3FB4: .4byte __mprec_tens
 _080B3FB8:
 	negs r4, r4
 	str r4, [sp, 0x10]
@@ -3466,7 +3468,7 @@ _080B4086:
 _080B4096:
 	mov r0, r10
 	ldr r1, [r0, 0x44]
-	bl sub_80B58B0
+	bl _Balloc
 	mov r1, r10
 	str r0, [r1, 0x40]
 	str r0, [sp, 0x74]
@@ -3549,8 +3551,8 @@ _080B4128:
 	str r1, [sp, 0x44]
 	b _080B4190
 	.align 2, 0
-_080B413C: .4byte gUnknown_826FEC0
-_080B4140: .4byte gUnknown_826FF88
+_080B413C: .4byte __mprec_tens
+_080B4140: .4byte __mprec_bigtens
 _080B4144:
 	ldr r2, [sp, 0x24]
 	negs r6, r2
@@ -3671,8 +3673,8 @@ _080B421C:
 _080B4236:
 	b _080B440C
 	.align 2, 0
-_080B4238: .4byte gUnknown_826FEC0 @ tens
-_080B423C: .4byte gUnknown_826FF88
+_080B4238: .4byte __mprec_tens @ tens
+_080B423C: .4byte __mprec_bigtens
 _080B4240: .4byte 0x3ff00000
 _080B4244: .4byte 0x00000000
 _080B4248: .4byte 0x40240000
@@ -3705,7 +3707,7 @@ _080B4264:
 	mov r8, r1
 	b _080B42C0
 	.align 2, 0
-_080B4294: .4byte gUnknown_826FEC0
+_080B4294: .4byte __mprec_tens
 _080B4298: .4byte 0x3fe00000
 _080B429C: .4byte 0x00000000
 _080B42A0:
@@ -3791,7 +3793,7 @@ _080B4334:
 	mov r8, r2
 	b _080B436C
 	.align 2, 0
-_080B4354: .4byte gUnknown_826FEC0
+_080B4354: .4byte __mprec_tens
 _080B4358:
 	movs r3, 0x1
 	add r8, r3
@@ -3934,7 +3936,7 @@ _080B445A:
 _080B4478:
 	b _080B4796
 	.align 2, 0
-_080B447C: .4byte gUnknown_826FEC0
+_080B447C: .4byte __mprec_tens
 _080B4480: .8byte 0x0000000040140000
 _080B4488:
 	movs r2, 0x1
@@ -4098,7 +4100,7 @@ _080B45BC:
 	str r2, [sp, 0x34]
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_80B5B18
+	bl _i2b
 	str r0, [sp, 0x64]
 _080B45D2:
 	cmp r5, 0
@@ -4131,12 +4133,12 @@ _080B45F4:
 	mov r0, r10
 	ldr r1, [sp, 0x64]
 	adds r2, r6, 0
-	bl sub_80B5C98
+	bl _pow5mult
 	str r0, [sp, 0x64]
 	mov r0, r10
 	ldr r1, [sp, 0x64]
 	ldr r2, [sp, 0x5C]
-	bl sub_80B5B2C
+	bl _multiply
 	adds r4, r0, 0
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
@@ -4156,19 +4158,19 @@ _080B4636:
 	ldr r1, [sp, 0x5C]
 	ldr r2, [sp, 0x14]
 _080B463C:
-	bl sub_80B5C98
+	bl _pow5mult
 	str r0, [sp, 0x5C]
 _080B4642:
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_80B5B18
+	bl _i2b
 	str r0, [sp, 0x68]
 	ldr r2, [sp, 0x38]
 	cmp r2, 0
 	ble _080B465C
 	mov r0, r10
 	ldr r1, [sp, 0x68]
-	bl sub_80B5C98
+	bl _pow5mult
 	str r0, [sp, 0x68]
 _080B465C:
 	ldr r3, [sp, 0xC]
@@ -4213,7 +4215,7 @@ _080B4698:
 	adds r0, 0x14
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80B5A3C
+	bl _hi0bits
 	ldr r1, [sp, 0x34]
 	adds r1, 0x20
 	subs r1, r0
@@ -4266,7 +4268,7 @@ _080B4702:
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
 	adds r2, r3, 0
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x5C]
 _080B4714:
 	ldr r0, [sp, 0x34]
@@ -4275,7 +4277,7 @@ _080B4714:
 	mov r0, r10
 	ldr r1, [sp, 0x68]
 	ldr r2, [sp, 0x34]
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x68]
 _080B4726:
 	ldr r1, [sp, 0x2C]
@@ -4293,7 +4295,7 @@ _080B4726:
 	ldr r1, [sp, 0x5C]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x5C]
 	ldr r3, [sp, 0x30]
 	cmp r3, 0
@@ -4302,7 +4304,7 @@ _080B4726:
 	ldr r1, [sp, 0x64]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x64]
 _080B4760:
 	ldr r0, [sp, 0x20]
@@ -4320,7 +4322,7 @@ _080B4764:
 	ldr r1, [sp, 0x68]
 	movs r2, 0x5
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x68]
 	ldr r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
@@ -4353,7 +4355,7 @@ _080B47B0:
 	mov r0, r10
 	ldr r1, [sp, 0x64]
 	adds r2, r5, 0
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x64]
 _080B47C0:
 	ldr r1, [sp, 0x64]
@@ -4363,7 +4365,7 @@ _080B47C0:
 	beq _080B47F2
 	ldr r1, [r1, 0x4]
 	mov r0, r10
-	bl sub_80B58B0
+	bl _Balloc
 	str r0, [sp, 0x64]
 	adds r0, 0xC
 	ldr r1, [sp, 0x60]
@@ -4376,7 +4378,7 @@ _080B47C0:
 	mov r0, r10
 	ldr r1, [sp, 0x64]
 	movs r2, 0x1
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x64]
 _080B47F2:
 	movs r0, 0x1
@@ -4391,7 +4393,7 @@ _080B4800:
 	ldr r1, [sp, 0x5C]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x5C]
 	ldr r3, [sp, 0x60]
 	ldr r0, [sp, 0x64]
@@ -4401,7 +4403,7 @@ _080B4800:
 	ldr r1, [sp, 0x64]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x64]
 	str r0, [sp, 0x60]
 	b _080B4844
@@ -4410,13 +4412,13 @@ _080B4828:
 	ldr r1, [sp, 0x60]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x60]
 	mov r0, r10
 	ldr r1, [sp, 0x64]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x64]
 _080B4844:
 	movs r1, 0x1
@@ -4434,7 +4436,7 @@ _080B4848:
 	mov r0, r10
 	ldr r1, [sp, 0x68]
 	ldr r2, [sp, 0x64]
-	bl sub_80B5E10
+	bl __mdiff
 	adds r5, r0, 0
 	ldr r0, [r5, 0xC]
 	cmp r0, 0
@@ -4486,7 +4488,7 @@ _080B48BE:
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
 	movs r2, 0x1
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
 	bl __mcmp
@@ -4547,7 +4549,7 @@ _080B492C:
 	ldr r1, [sp, 0x5C]
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	str r0, [sp, 0x5C]
 	movs r1, 0x1
 	add r8, r1
@@ -4568,7 +4570,7 @@ _080B4958:
 	mov r0, r10
 	ldr r1, [sp, 0x5C]
 	movs r2, 0x1
-	bl sub_80B5D30
+	bl _lshift
 	str r0, [sp, 0x5C]
 	ldr r1, [sp, 0x68]
 	bl __mcmp
@@ -4683,7 +4685,7 @@ _080B4A26:
 	pop {r4-r7,pc}
 	thumb_func_end _dtoa_r
 
-@ stdio/fflush
+@ libc/stdio/fflush
 
 	thumb_func_start fflush
 fflush:
@@ -4767,7 +4769,7 @@ _080B4AC6:
 	pop {r4-r6,pc}
 	thumb_func_end fflush
 
-@ stdio/findfp
+@ libc/stdio/findfp
 
 	thumb_func_start std
 std:
@@ -4792,10 +4794,10 @@ std:
 	str r3, [r0, 0x54]
 	pop {r4,pc}
 	.align 2, 0
-_080B4AF0: .4byte sub_80B61F0
-_080B4AF4: .4byte sub_80B6224
-_080B4AF8: .4byte sub_80B6264
-_080B4AFC: .4byte sub_80B62A4
+_080B4AF0: .4byte __sread
+_080B4AF4: .4byte __swrite
+_080B4AF8: .4byte __sseek
+_080B4AFC: .4byte __sclose
 	thumb_func_end std
 
 	thumb_func_start __sfmoreglue
@@ -4962,7 +4964,7 @@ __sinit:
 _080B4C20: .4byte _cleanup_r
 	thumb_func_end __sinit
 
-@ stdlib/mallocr
+@ libc/stdlib/mallocr (define free)
 
 	thumb_func_start _free_r
 _free_r:
@@ -5295,7 +5297,7 @@ _080B4E98:
 _080B4EA0: .4byte __malloc_current_mallinfo
 	thumb_func_end _malloc_trim_r
 
-@ stdio/fvwrite
+@ libc/stdio/fvwrite
 
 	thumb_func_start __sfvwrite
 __sfvwrite:
@@ -5322,7 +5324,7 @@ _080B4EBC:
 	bne _080B4ED8
 _080B4ECC:
 	adds r0, r5, 0
-	bl sub_80B3B34
+	bl __swsetup
 	cmp r0, 0
 	beq _080B4ED8
 	b _080B50BE
@@ -5407,7 +5409,7 @@ _080B4F60:
 	adds r0, r3, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
-	bl sub_80B5820
+	bl memmove
 	ldr r0, [r5, 0x8]
 	subs r0, r4
 	str r0, [r5, 0x8]
@@ -5425,7 +5427,7 @@ _080B4F7A:
 	adds r0, r3, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
-	bl sub_80B5820
+	bl memmove
 	ldr r0, [r5]
 	adds r0, r4
 	str r0, [r5]
@@ -5454,7 +5456,7 @@ _080B4FBC:
 	adds r0, r3, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
-	bl sub_80B5820
+	bl memmove
 	ldr r0, [r5, 0x8]
 	subs r0, r4
 	str r0, [r5, 0x8]
@@ -5494,7 +5496,7 @@ _080B5000:
 	adds r0, r7, 0
 	movs r1, 0xA
 	adds r2, r6, 0
-	bl sub_80B57A0
+	bl memchr
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080B501C
@@ -5525,7 +5527,7 @@ _080B502C:
 	adds r0, r3, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
-	bl sub_80B5820
+	bl memmove
 	ldr r0, [r5]
 	adds r0, r4
 	str r0, [r5]
@@ -5551,7 +5553,7 @@ _080B5074:
 	adds r4, r2, 0
 	adds r0, r3, 0
 	adds r1, r7, 0
-	bl sub_80B5820
+	bl memmove
 	ldr r0, [r5, 0x8]
 	subs r0, r4
 	str r0, [r5, 0x8]
@@ -5599,7 +5601,7 @@ _080B50C2:
 	pop {r4-r7,pc}
 	thumb_func_end __sfvwrite
 
-@ stdio/fwalk
+@ libc/stdio/fwalk
 
 	thumb_func_start _fwalk
 _fwalk:
@@ -5641,7 +5643,7 @@ _080B5108:
 	pop {r4-r7,pc}
 	thumb_func_end _fwalk
 
-@ locale/locale
+@ libc/locale/locale
 
 	thumb_func_start _setlocale_r
 _setlocale_r:
@@ -5710,7 +5712,7 @@ localeconv:
 _080B5178: .4byte _impure_ptr
 	thumb_func_end localeconv
 
-@ stdio/makebuf
+@ libc/stdio/makebuf
 
 	thumb_func_start __smakebuf
 __smakebuf:
@@ -5772,7 +5774,7 @@ _080B51CA:
 	str r6, [r4, 0x4C]
 	b _080B51FC
 	.align 2, 0
-_080B51EC: .4byte sub_80B6264
+_080B51EC: .4byte __sseek
 _080B51F0:
 	movs r2, 0x80
 	lsls r2, 4
@@ -5830,7 +5832,7 @@ _080B524E:
 _080B5254: .4byte _cleanup_r
 	thumb_func_end __smakebuf
 
-@ stdlib/mallocr (define malloc)
+@ libc/stdlib/mallocr (define malloc)
 
 	thumb_func_start malloc_extend_top
 malloc_extend_top:
@@ -6540,8 +6542,10 @@ _080B5764:
 _080B5770: .4byte __malloc_av_
 	thumb_func_end _malloc_r
 
-	thumb_func_start sub_80B5774
-sub_80B5774:
+@ libc/stdlib/mbtowc
+
+	thumb_func_start _mbtowc_r
+_mbtowc_r:
 	sub sp, 0x4
 	cmp r1, 0
 	bne _080B577C
@@ -6567,10 +6571,12 @@ _080B5798:
 _080B579A:
 	add sp, 0x4
 	bx lr
-	thumb_func_end sub_80B5774
+	thumb_func_end _mbtowc_r
 
-	thumb_func_start sub_80B57A0
-sub_80B57A0:
+@ libc/string/memchr
+
+	thumb_func_start memchr
+memchr:
 	push {r4-r7,lr}
 	adds r5, r1, 0
 	adds r1, r0, 0
@@ -6643,10 +6649,12 @@ _080B5814:
 	movs r0, 0
 _080B581E:
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B57A0
+	thumb_func_end memchr
 
-	thumb_func_start sub_80B5820
-sub_80B5820:
+@ libc/string/memmove
+
+	thumb_func_start memmove
+memmove:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r5, 0
@@ -6723,9 +6731,9 @@ _080B5896:
 _080B58A4:
 	adds r0, r5, 0
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B5820
+	thumb_func_end memmove
 
-@ stdlib/mlock
+@ libc/stdlib/mlock
 
 	thumb_func_start __malloc_lock
 __malloc_lock:
@@ -6737,8 +6745,10 @@ __malloc_unlock:
 	bx lr
 	thumb_func_end __malloc_unlock
 
-	thumb_func_start sub_80B58B0
-sub_80B58B0:
+@ libc/stdlib/mprec
+
+	thumb_func_start _Balloc
+_Balloc:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -6748,7 +6758,7 @@ sub_80B58B0:
 	adds r0, r4, 0
 	movs r1, 0x4
 	movs r2, 0x10
-	bl sub_80B6748
+	bl _calloc_r
 	str r0, [r4, 0x4C]
 	cmp r0, 0
 	beq _080B58F4
@@ -6769,7 +6779,7 @@ _080B58DE:
 	adds r2, 0x14
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80B6748
+	bl _calloc_r
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080B58F8
@@ -6786,7 +6796,7 @@ _080B58FC:
 	adds r0, r1, 0
 _080B5904:
 	pop {r4-r6,pc}
-	thumb_func_end sub_80B58B0
+	thumb_func_end _Balloc
 
 	thumb_func_start _Bfree
 _Bfree:
@@ -6805,8 +6815,8 @@ _080B591E:
 	bx lr
 	thumb_func_end _Bfree
 
-	thumb_func_start sub_80B5920
-sub_80B5920:
+	thumb_func_start _multadd
+_multadd:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -6853,7 +6863,7 @@ _080B593C:
 	ldr r1, [r5, 0x4]
 	adds r1, 0x1
 	mov r0, r9
-	bl sub_80B58B0
+	bl _Balloc
 	adds r4, r0, 0
 	adds r0, 0xC
 	adds r1, r5, 0
@@ -6883,10 +6893,10 @@ _080B59AA:
 	pop {r4-r7,pc}
 	.align 2, 0
 _080B59B4: .4byte 0x0000ffff
-	thumb_func_end sub_80B5920
+	thumb_func_end _multadd
 
-	thumb_func_start sub_80B59B8
-sub_80B59B8:
+	thumb_func_start _s2b
+_s2b:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -6909,7 +6919,7 @@ _080B59D8:
 	bgt _080B59D8
 _080B59E0:
 	adds r0, r7, 0
-	bl sub_80B58B0
+	bl _Balloc
 	adds r1, r0, 0
 	ldr r0, [sp, 0x18]
 	str r0, [r1, 0x14]
@@ -6925,7 +6935,7 @@ _080B59F8:
 	adds r4, 0x1
 	adds r0, r7, 0
 	movs r2, 0xA
-	bl sub_80B5920
+	bl _multadd
 	adds r1, r0, 0
 	adds r5, 0x1
 	cmp r5, r6
@@ -6945,7 +6955,7 @@ _080B5A1C:
 	adds r4, 0x1
 	adds r0, r7, 0
 	movs r2, 0xA
-	bl sub_80B5920
+	bl _multadd
 	adds r1, r0, 0
 	subs r5, 0x1
 	cmp r5, 0
@@ -6955,10 +6965,10 @@ _080B5A32:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B59B8
+	thumb_func_end _s2b
 
-	thumb_func_start sub_80B5A3C
-sub_80B5A3C:
+	thumb_func_start _hi0bits
+_hi0bits:
 	adds r1, r0, 0
 	movs r2, 0
 	ldr r0, _080B5A8C
@@ -7008,10 +7018,10 @@ _080B5A90:
 	adds r0, r2, 0
 _080B5A92:
 	bx lr
-	thumb_func_end sub_80B5A3C
+	thumb_func_end _hi0bits
 
-	thumb_func_start sub_80B5A94
-sub_80B5A94:
+	thumb_func_start _lo0bits
+_lo0bits:
 	adds r3, r0, 0
 	ldr r1, [r3]
 	movs r0, 0x7
@@ -7085,22 +7095,22 @@ _080B5B10:
 	adds r0, r2, 0
 _080B5B14:
 	bx lr
-	thumb_func_end sub_80B5A94
+	thumb_func_end _lo0bits
 
-	thumb_func_start sub_80B5B18
-sub_80B5B18:
+	thumb_func_start _i2b
+_i2b:
 	push {r4,lr}
 	adds r4, r1, 0
 	movs r1, 0x1
-	bl sub_80B58B0
+	bl _Balloc
 	str r4, [r0, 0x14]
 	movs r1, 0x1
 	str r1, [r0, 0x10]
 	pop {r4,pc}
-	thumb_func_end sub_80B5B18
+	thumb_func_end _i2b
 
-	thumb_func_start sub_80B5B2C
-sub_80B5B2C:
+	thumb_func_start _multiply
+_multiply:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7131,7 +7141,7 @@ _080B5B4C:
 	adds r1, 0x1
 _080B5B62:
 	adds r0, r3, 0
-	bl sub_80B58B0
+	bl _Balloc
 	str r0, [sp]
 	adds r7, r0, 0
 	adds r7, 0x14
@@ -7294,10 +7304,10 @@ _080B5C82:
 	mov r9, r4
 	mov r10, r5
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B5B2C
+	thumb_func_end _multiply
 
-	thumb_func_start sub_80B5C98
-sub_80B5C98:
+	thumb_func_start _pow5mult
+_pow5mult:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -7316,7 +7326,7 @@ sub_80B5C98:
 	mov r0, r8
 	adds r1, r7, 0
 	movs r3, 0
-	bl sub_80B5920
+	bl _multadd
 	adds r7, r0, 0
 _080B5CC2:
 	asrs r6, 2
@@ -7328,7 +7338,7 @@ _080B5CC2:
 	cmp r5, 0
 	bne _080B5D04
 	ldr r1, _080B5CE8
-	bl sub_80B5B18
+	bl _i2b
 	mov r1, r8
 	str r0, [r1, 0x48]
 	adds r5, r0, 0
@@ -7345,7 +7355,7 @@ _080B5CEC:
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r5, 0
-	bl sub_80B5B2C
+	bl _multiply
 	str r0, [r5]
 	str r4, [r0]
 _080B5D02:
@@ -7358,7 +7368,7 @@ _080B5D04:
 	mov r0, r8
 	adds r1, r7, 0
 	adds r2, r5, 0
-	bl sub_80B5B2C
+	bl _multiply
 	adds r4, r0, 0
 	mov r0, r8
 	adds r1, r7, 0
@@ -7373,10 +7383,10 @@ _080B5D28:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B5C98
+	thumb_func_end _pow5mult
 
-	thumb_func_start sub_80B5D30
-sub_80B5D30:
+	thumb_func_start _lshift
+_lshift:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7401,7 +7411,7 @@ _080B5D52:
 	bgt _080B5D52
 _080B5D5A:
 	mov r0, r10
-	bl sub_80B58B0
+	bl _Balloc
 	mov r9, r0
 	mov r4, r9
 	adds r4, 0x14
@@ -7461,7 +7471,7 @@ _080B5DB4:
 	mov r9, r4
 	mov r10, r5
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B5D30
+	thumb_func_end _lshift
 
 	thumb_func_start __mcmp
 __mcmp:
@@ -7502,8 +7512,8 @@ _080B5E0C:
 	pop {r4,r5,pc}
 	thumb_func_end __mcmp
 
-	thumb_func_start sub_80B5E10
-sub_80B5E10:
+	thumb_func_start __mdiff
+__mdiff:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7521,7 +7531,7 @@ sub_80B5E10:
 	bne _080B5E42
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80B58B0
+	bl _Balloc
 	adds r7, r0, 0
 	movs r0, 0x1
 	str r0, [r7, 0x10]
@@ -7540,7 +7550,7 @@ _080B5E50:
 _080B5E52:
 	ldr r1, [r5, 0x4]
 	adds r0, r6, 0
-	bl sub_80B58B0
+	bl _Balloc
 	adds r7, r0, 0
 	str r4, [r7, 0xC]
 	ldr r0, [r5, 0x10]
@@ -7629,10 +7639,10 @@ _080B5EF2:
 	mov r9, r4
 	mov r10, r5
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B5E10
+	thumb_func_end __mdiff
 
-	thumb_func_start sub_80B5F00
-sub_80B5F00:
+	thumb_func_start _ulp
+_ulp:
 	push {r4,lr}
 	ldr r2, _080B5F14
 	ands r2, r0
@@ -7675,10 +7685,10 @@ _080B5F46:
 	adds r1, r4, 0
 	adds r0, r3, 0
 	pop {r4,pc}
-	thumb_func_end sub_80B5F00
+	thumb_func_end _ulp
 
-	thumb_func_start sub_80B5F4C
-sub_80B5F4C:
+	thumb_func_start _b2d
+_b2d:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -7694,7 +7704,7 @@ sub_80B5F4C:
 	ldr r2, [r5]
 	adds r0, r2, 0
 	str r2, [sp]
-	bl sub_80B5A3C
+	bl _hi0bits
 	adds r3, r0, 0
 	movs r0, 0x20
 	subs r0, r3
@@ -7780,7 +7790,7 @@ _080B5FF8:
 	pop {r4-r7,pc}
 	.align 2, 0
 _080B6004: .4byte 0x3ff00000
-	thumb_func_end sub_80B5F4C
+	thumb_func_end _b2d
 
 	thumb_func_start _d2b
 _d2b:
@@ -7796,7 +7806,7 @@ _d2b:
 	adds r5, r2, 0
 	adds r4, r1, 0
 	movs r1, 0x1
-	bl sub_80B58B0
+	bl _Balloc
 	adds r6, r0, 0
 	movs r0, 0x14
 	adds r0, r6
@@ -7819,7 +7829,7 @@ _080B6046:
 	cmp r5, 0
 	beq _080B6090
 	mov r0, sp
-	bl sub_80B5A94
+	bl _lo0bits
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _080B6078
@@ -7854,7 +7864,7 @@ _080B608A:
 	b _080B60A4
 _080B6090:
 	add r0, sp, 0x4
-	bl sub_80B5A94
+	bl _lo0bits
 	adds r2, r0, 0
 	ldr r0, [sp, 0x4]
 	str r0, [r6, 0x14]
@@ -7886,7 +7896,7 @@ _080B60C0:
 	add r0, r8
 	subs r0, 0x4
 	ldr r0, [r0]
-	bl sub_80B5A3C
+	bl _hi0bits
 	lsls r1, r4, 5
 	subs r1, r0
 	mov r0, r10
@@ -7903,19 +7913,19 @@ _080B60DC:
 _080B60EC: .4byte 0xfffffbce
 	thumb_func_end _d2b
 
-	thumb_func_start sub_80B60F0
-sub_80B60F0:
+	thumb_func_start _ratio
+_ratio:
 	push {r4-r7,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
 	adds r5, r1, 0
 	mov r1, sp
-	bl sub_80B5F4C
+	bl _b2d
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
 	add r1, sp, 0x4
 	adds r0, r5, 0
-	bl sub_80B5F4C
+	bl _b2d
 	adds r7, r1, 0
 	adds r6, r0, 0
 	ldr r2, [sp]
@@ -7944,10 +7954,10 @@ _080B6130:
 	bl __divdf3
 	add sp, 0x10
 	pop {r4-r7,pc}
-	thumb_func_end sub_80B60F0
+	thumb_func_end _ratio
 
-	thumb_func_start sub_80B6140
-sub_80B6140:
+	thumb_func_start _mprec_log10
+_mprec_log10:
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, _080B615C
@@ -7963,7 +7973,7 @@ sub_80B6140:
 	.align 2, 0
 _080B6158: .4byte 0x3ff00000
 _080B615C: .4byte 0x00000000
-_080B6160: .4byte gUnknown_826FEC0
+_080B6160: .4byte __mprec_tens
 _080B6164:
 	cmp r4, 0
 	ble _080B6176
@@ -7979,10 +7989,12 @@ _080B6176:
 	.align 2, 0
 _080B6178: .4byte 0x40240000
 _080B617C: .4byte 0x00000000
-	thumb_func_end sub_80B6140
+	thumb_func_end _mprec_log10
 
-	thumb_func_start sub_80B6180
-sub_80B6180:
+@ libm/math/s_isinf
+
+	thumb_func_start isinf
+isinf:
 	ldr r3, _080B619C
 	ands r3, r0
 	negs r2, r1
@@ -7998,12 +8010,15 @@ sub_80B6180:
 	subs r0, r3
 	bx lr
 	.align 2, 0
+	@ inf
 _080B619C: .4byte 0x7fffffff
 _080B61A0: .4byte 0x7ff00000
-	thumb_func_end sub_80B6180
+	thumb_func_end isinf
 
-	thumb_func_start sub_80B61A4
-sub_80B61A4:
+@ libm/math/s_isnan
+
+	thumb_func_start isnan
+isnan:
 	ldr r3, _080B61BC
 	ands r3, r0
 	negs r2, r1
@@ -8016,9 +8031,12 @@ sub_80B61A4:
 	adds r0, r3, 0
 	bx lr
 	.align 2, 0
+	@ nan
 _080B61BC: .4byte 0x7fffffff
 _080B61C0: .4byte 0x7ff00000
-	thumb_func_end sub_80B61A4
+	thumb_func_end isnan
+
+@ libc/reent/sbrkr
 
 	thumb_func_start _sbrk_r
 _sbrk_r:
@@ -8042,11 +8060,13 @@ _080B61E6:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B61EC: .4byte gUnknown_203B034
+_080B61EC: .4byte errno
 	thumb_func_end _sbrk_r
 
-	thumb_func_start sub_80B61F0
-sub_80B61F0:
+@ libc/stdio/stdio
+
+	thumb_func_start __sread
+__sread:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -8073,10 +8093,10 @@ _080B621A:
 	pop {r4,r5,pc}
 	.align 2, 0
 _080B6220: .4byte 0xffffefff
-	thumb_func_end sub_80B61F0
+	thumb_func_end __sread
 
-	thumb_func_start sub_80B6224
-sub_80B6224:
+	thumb_func_start __swrite
+__swrite:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -8103,14 +8123,14 @@ _080B6246:
 	ldrsh r1, [r4, r2]
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_80B6718
+	bl _write_r
 	pop {r4-r6,pc}
 	.align 2, 0
 _080B6260: .4byte 0xffffefff
-	thumb_func_end sub_80B6224
+	thumb_func_end __swrite
 
-	thumb_func_start sub_80B6264
-sub_80B6264:
+	thumb_func_start __sseek
+__sseek:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -8143,10 +8163,10 @@ _080B6290:
 _080B629E:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B6264
+	thumb_func_end __sseek
 
-	thumb_func_start sub_80B62A4
-sub_80B62A4:
+	thumb_func_start __sclose
+__sclose:
 	push {lr}
 	ldr r2, [r0, 0x54]
 	movs r3, 0xE
@@ -8154,7 +8174,9 @@ sub_80B62A4:
 	adds r0, r2, 0
 	bl sub_80B67A0
 	pop {pc}
-	thumb_func_end sub_80B62A4
+	thumb_func_end __sclose
+
+@ libc/sys/arm/syscalls
 
 	thumb_func_start findslot
 findslot:
@@ -8163,7 +8185,7 @@ findslot:
 	ldr r2, _080B62BC
 	b _080B62C8
 	.align 2, 0
-_080B62BC: .4byte gUnknown_2039E28
+_080B62BC: .4byte openfiles
 _080B62C0:
 	adds r2, 0x8
 	adds r1, 0x1
@@ -8178,8 +8200,8 @@ _080B62CE:
 	bx lr
 	thumb_func_end findslot
 
-	thumb_func_start sub_80B62D4
-sub_80B62D4:
+	thumb_func_start remap_handle
+remap_handle:
 	adds r2, r0, 0
 	ldr r0, _080B62E8
 	ldr r1, [r0]
@@ -8192,7 +8214,7 @@ sub_80B62D4:
 	b _080B6316
 	.align 2, 0
 _080B62E8: .4byte _impure_ptr
-_080B62EC: .4byte gUnknown_2039E1C
+_080B62EC: .4byte monitor_stdin
 _080B62F0:
 	ldr r0, [r1, 0x8]
 	movs r3, 0xE
@@ -8202,7 +8224,7 @@ _080B62F0:
 	ldr r0, _080B6300
 	b _080B6316
 	.align 2, 0
-_080B6300: .4byte gUnknown_2039E20
+_080B6300: .4byte monitor_stdout
 _080B6304:
 	ldr r0, [r1, 0xC]
 	movs r1, 0xE
@@ -8219,11 +8241,11 @@ _080B6316:
 _080B6318:
 	bx lr
 	.align 2, 0
-_080B631C: .4byte gUnknown_2039E24
-	thumb_func_end sub_80B62D4
+_080B631C: .4byte monitor_stderr
+	thumb_func_end remap_handle
 
-	thumb_func_start sub_80B6320
-sub_80B6320:
+	thumb_func_start initialise_monitor_handles
+initialise_monitor_handles:
 	push {r4,r5,lr}
 	sub sp, 0xC
 	ldr r4, _080B637C
@@ -8273,14 +8295,14 @@ _080B6362:
 	pop {r4,r5,pc}
 	.align 2, 0
 _080B637C: .4byte gUnknown_826FFD8
-_080B6380: .4byte gUnknown_2039E1C
-_080B6384: .4byte gUnknown_2039E20
-_080B6388: .4byte gUnknown_2039E24
-_080B638C: .4byte gUnknown_2039E28
-	thumb_func_end sub_80B6320
+_080B6380: .4byte monitor_stdin
+_080B6384: .4byte monitor_stdout
+_080B6388: .4byte monitor_stderr
+_080B638C: .4byte openfiles
+	thumb_func_end initialise_monitor_handles
 
-	thumb_func_start sub_80B6390
-sub_80B6390:
+	thumb_func_start get_errno
+get_errno:
 	push {r4,lr}
 	movs r3, 0x13
 	movs r4, 0
@@ -8290,22 +8312,22 @@ sub_80B6390:
 	adds r2, r0, 0
 	adds r0, r2, 0
 	pop {r4,pc}
-	thumb_func_end sub_80B6390
+	thumb_func_end get_errno
 
-	thumb_func_start sub_80B63A4
-sub_80B63A4:
+	thumb_func_start error
+error:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80B67CC
 	adds r4, r0, 0
-	bl sub_80B6390
+	bl get_errno
 	str r0, [r4]
 	adds r0, r5, 0
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B63A4
+	thumb_func_end error
 
-	thumb_func_start sub_80B63B8
-sub_80B63B8:
+	thumb_func_start wrap
+wrap:
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x1
@@ -8316,18 +8338,18 @@ sub_80B63B8:
 	b _080B63CE
 _080B63C8:
 	adds r0, r1, 0
-	bl sub_80B63A4
+	bl error
 _080B63CE:
 	pop {pc}
-	thumb_func_end sub_80B63B8
+	thumb_func_end wrap
 
-	thumb_func_start sub_80B63D0
-sub_80B63D0:
+	thumb_func_start _swiread
+_swiread:
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
 	adds r5, r2, 0
-	bl sub_80B62D4
+	bl remap_handle
 	str r0, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8339,26 +8361,26 @@ sub_80B63D0:
 	adds r0, r2, 0
 	add sp, 0xC
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B63D0
+	thumb_func_end _swiread
 
-	thumb_func_start sub_80B63F4
-sub_80B63F4:
+	thumb_func_start _read
+_read:
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r7, r2, 0
-	bl sub_80B62D4
+	bl remap_handle
 	bl findslot
 	adds r6, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl sub_80B63D0
+	bl _swiread
 	cmp r0, 0
 	bge _080B641E
 	movs r0, 0x1
 	negs r0, r0
-	bl sub_80B63A4
+	bl error
 	b _080B6434
 _080B641E:
 	subs r2, r7, r0
@@ -8376,11 +8398,11 @@ _080B6432:
 _080B6434:
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B6438: .4byte gUnknown_2039E28
-	thumb_func_end sub_80B63F4
+_080B6438: .4byte openfiles
+	thumb_func_end _read
 
-	thumb_func_start sub_80B643C
-sub_80B643C:
+	thumb_func_start _swilseek
+_swilseek:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8388,7 +8410,7 @@ sub_80B643C:
 	mov r8, r0
 	adds r5, r1, 0
 	adds r4, r2, 0
-	bl sub_80B62D4
+	bl remap_handle
 	adds r7, r0, 0
 	bl findslot
 	adds r6, r0, 0
@@ -8419,7 +8441,7 @@ _080B6472:
 	adds r5, r2
 _080B6484:
 	mov r0, r8
-	bl sub_80B62D4
+	bl remap_handle
 	str r0, [sp]
 	str r5, [sp, 0x4]
 	movs r3, 0xA
@@ -8448,24 +8470,24 @@ _080B64B4:
 	mov r8, r3
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B64BC: .4byte gUnknown_2039E28
-	thumb_func_end sub_80B643C
+_080B64BC: .4byte openfiles
+	thumb_func_end _swilseek
 
-	thumb_func_start sub_80B64C0
-sub_80B64C0:
+	thumb_func_start _lseek
+_lseek:
 	push {lr}
-	bl sub_80B643C
-	bl sub_80B63B8
+	bl _swilseek
+	bl wrap
 	pop {pc}
-	thumb_func_end sub_80B64C0
+	thumb_func_end _lseek
 
-	thumb_func_start sub_80B64CC
-sub_80B64CC:
+	thumb_func_start _swiwrite
+_swiwrite:
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
 	adds r5, r2, 0
-	bl sub_80B62D4
+	bl remap_handle
 	str r0, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8477,7 +8499,7 @@ sub_80B64CC:
 	adds r0, r2, 0
 	add sp, 0xC
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B64CC
+	thumb_func_end _swiwrite
 
 	thumb_func_start _write
 _write:
@@ -8485,13 +8507,13 @@ _write:
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	bl sub_80B62D4
+	bl remap_handle
 	bl findslot
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80B64CC
+	bl _swiwrite
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -8500,7 +8522,7 @@ _write:
 	bne _080B6520
 _080B6518:
 	adds r0, r1, 0
-	bl sub_80B63A4
+	bl error
 	b _080B6536
 _080B6520:
 	subs r2, r6, r0
@@ -8518,7 +8540,7 @@ _080B6534:
 _080B6536:
 	pop {r4-r7,pc}
 	.align 2, 0
-_080B6538: .4byte gUnknown_2039E28
+_080B6538: .4byte openfiles
 	thumb_func_end _write
 
 	thumb_func_start _swiopen
@@ -8596,10 +8618,10 @@ _080B6594:
 	adds r0, 0x20
 	b _080B65D2
 	.align 2, 0
-_080B65C8: .4byte gUnknown_2039E28
+_080B65C8: .4byte openfiles
 _080B65CC:
 	adds r0, r3, 0
-	bl sub_80B63A4
+	bl error
 _080B65D2:
 	add sp, 0xC
 	pop {r3}
@@ -8607,23 +8629,23 @@ _080B65D2:
 	pop {r4-r7,pc}
 	thumb_func_end _swiopen
 
-	thumb_func_start sub_80B65DC
-sub_80B65DC:
+	thumb_func_start _open
+_open:
 	push {r1-r3}
 	push {lr}
 	ldr r1, [sp, 0x4]
 	bl _swiopen
-	bl sub_80B63B8
+	bl wrap
 	pop {r3}
 	add sp, 0xC
 	bx r3
-	thumb_func_end sub_80B65DC
+	thumb_func_end _open
 
-	thumb_func_start sub_80B65F0
-sub_80B65F0:
+	thumb_func_start _swiclose
+_swiclose:
 	push {lr}
 	sub sp, 0x4
-	bl sub_80B62D4
+	bl remap_handle
 	str r0, [sp]
 	bl findslot
 	adds r1, r0, 0
@@ -8645,19 +8667,19 @@ _080B6610:
 	add sp, 0x4
 	pop {pc}
 	.align 2, 0
-_080B6620: .4byte gUnknown_2039E28
-	thumb_func_end sub_80B65F0
+_080B6620: .4byte openfiles
+	thumb_func_end _swiclose
 
-	thumb_func_start sub_80B6624
-sub_80B6624:
+	thumb_func_start _close
+_close:
 	push {lr}
-	bl sub_80B65F0
-	bl sub_80B63B8
+	bl _swiclose
+	bl wrap
 	pop {pc}
-	thumb_func_end sub_80B6624
+	thumb_func_end _close
 
-	thumb_func_start sub_80B6630
-sub_80B6630:
+	thumb_func_start _exit
+_exit:
 	mov r12, r3
 	mov r3, r8
 	push {r3}
@@ -8673,10 +8695,10 @@ sub_80B6630:
 	bx lr
 	.align 2, 0
 _080B664C: .4byte 0x00020026
-	thumb_func_end sub_80B6630
+	thumb_func_end _exit
 
-	thumb_func_start sub_80B6650
-sub_80B6650:
+	thumb_func_start _kill
+_kill:
 	mov r12, r3
 	mov r3, r8
 	push {r3}
@@ -8692,13 +8714,13 @@ sub_80B6650:
 	bx lr
 	.align 2, 0
 _080B666C: .4byte 0x00020026
-	thumb_func_end sub_80B6650
+	thumb_func_end _kill
 
-	thumb_func_start sub_80B6670
-sub_80B6670:
+	thumb_func_start _getpid
+_getpid:
 	movs r0, 0x1
 	bx lr
-	thumb_func_end sub_80B6670
+	thumb_func_end _getpid
 
 	thumb_func_start _sbrk
 _sbrk:
@@ -8727,34 +8749,34 @@ _080B669A:
 	adds r0, r5, 0
 	pop {r4-r6,pc}
 	.align 2, 0
-_080B66A4: .4byte gUnknown_2039E18
+_080B66A4: .4byte heap_end
 _080B66A8: .4byte end
 _080B66AC: .4byte gUnknown_826FFDC
 	thumb_func_end _sbrk
 
-	thumb_func_start sub_80B66B0
-sub_80B66B0:
+	thumb_func_start _fstat
+_fstat:
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r1, 0x4]
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80B66B0
+	thumb_func_end _fstat
 
-	thumb_func_start sub_80B66BC
-sub_80B66BC:
+	thumb_func_start _link
+_link:
 	movs r0, 0x1
 	negs r0, r0
 	bx lr
-	thumb_func_end sub_80B66BC
+	thumb_func_end _link
 
-	thumb_func_start nullsub_213
-nullsub_213:
+	thumb_func_start _raise
+_raise:
 	bx lr
-	thumb_func_end nullsub_213
+	thumb_func_end _raise
 
-	thumb_func_start sub_80B66C8
-sub_80B66C8:
+	thumb_func_start _gettimeofday
+_gettimeofday:
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -8779,10 +8801,10 @@ _080B66E6:
 _080B66F0:
 	movs r0, 0
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B66C8
+	thumb_func_end _gettimeofday
 
-	thumb_func_start sub_80B66F4
-sub_80B66F4:
+	thumb_func_start _times
+_times:
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	movs r4, 0x10
@@ -8801,10 +8823,12 @@ sub_80B66F4:
 _080B6712:
 	adds r0, r3, 0
 	pop {r4,r5,pc}
-	thumb_func_end sub_80B66F4
+	thumb_func_end _times
 
-	thumb_func_start sub_80B6718
-sub_80B6718:
+@ libc/reent/writer
+
+	thumb_func_start _write_r
+_write_r:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r0, r1, 0
@@ -8827,11 +8851,13 @@ _080B673E:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B6744: .4byte gUnknown_203B034
-	thumb_func_end sub_80B6718
+_080B6744: .4byte errno
+	thumb_func_end _write_r
 
-	thumb_func_start sub_80B6748
-sub_80B6748:
+@ libc/stdlib/mallocr with calloc
+
+	thumb_func_start _calloc_r
+_calloc_r:
 	push {r4,lr}
 	muls r1, r2
 	bl _malloc_r
@@ -8879,7 +8905,7 @@ _080B679C:
 	adds r0, r4, 0
 _080B679E:
 	pop {r4,pc}
-	thumb_func_end sub_80B6748
+	thumb_func_end _calloc_r
 
 	thumb_func_start sub_80B67A0
 sub_80B67A0:
@@ -8889,7 +8915,7 @@ sub_80B67A0:
 	ldr r4, _080B67C8
 	movs r1, 0
 	str r1, [r4]
-	bl sub_80B6624
+	bl _close
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -8903,7 +8929,7 @@ _080B67C2:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B67C8: .4byte gUnknown_203B034
+_080B67C8: .4byte errno
 	thumb_func_end sub_80B67A0
 
 	thumb_func_start sub_80B67CC
@@ -8924,7 +8950,7 @@ _fstat_r:
 	ldr r4, _080B6800
 	movs r2, 0
 	str r2, [r4]
-	bl sub_80B66B0
+	bl _fstat
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -8938,7 +8964,7 @@ _080B67FC:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B6800: .4byte gUnknown_203B034
+_080B6800: .4byte errno
 	thumb_func_end _fstat_r
 
 	thumb_func_start abort
@@ -8981,7 +9007,7 @@ sub_80B682C:
 	ldr r4, _080B6858
 	movs r3, 0
 	str r3, [r4]
-	bl sub_80B64C0
+	bl _lseek
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -8995,7 +9021,7 @@ _080B6852:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B6858: .4byte gUnknown_203B034
+_080B6858: .4byte errno
 	thumb_func_end sub_80B682C
 
 	thumb_func_start sub_80B685C
@@ -9008,7 +9034,7 @@ sub_80B685C:
 	ldr r4, _080B6888
 	movs r3, 0
 	str r3, [r4]
-	bl sub_80B63F4
+	bl _read
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -9022,7 +9048,7 @@ _080B6882:
 	adds r0, r1, 0
 	pop {r4,r5,pc}
 	.align 2, 0
-_080B6888: .4byte gUnknown_203B034
+_080B6888: .4byte errno
 	thumb_func_end sub_80B685C
 
 	thumb_func_start __udivsi3

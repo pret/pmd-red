@@ -98,8 +98,8 @@ gUnknown_826FEB4: @ 826FEB4
 	.4byte 125
 
 	.align 2, 0
-	.global gUnknown_826FEC0
-gUnknown_826FEC0: @ 826FEC0
+	.global __mprec_tens
+__mprec_tens: @ 826FEC0
 	.8byte 0x000000003ff00000 @ 1e0
 	.8byte 0x0000000040240000 @ 1e1
 	.8byte 0x0000000040590000 @ 1e2
@@ -127,15 +127,17 @@ gUnknown_826FEC0: @ 826FEC0
 	.8byte 0x79d99db444ea7843 @ 1e24
 
 	.align 2, 0
-	.global gUnknown_826FF88
-gUnknown_826FF88: @ 826FF88
-	@ big tens
+	.global __mprec_bigtens
+__mprec_bigtens: @ 826FF88
 	.8byte 0x37e080004341c379 @ 1e16
 	.8byte 0xb5056e174693b8b5 @ 1e32
 	.8byte 0xe93ff9f54d384f03 @ 1e64
 	.8byte 0xf9301d325a827748 @ 1e128
 	.8byte 0x7f73bf3c75154fdd @ 1e256
-	@ tiny tenths
+
+	.align 2, 0
+	.global __mprec_tinytens
+__mprec_tinytens:
 	.8byte 0x97d889bc3c9cd2b2 @ 1e-16
 	.8byte 0xd5a8a7333949f623 @ 1e-32
 	.8byte 0x44f4a73d32a50ffd @ 1e-64
