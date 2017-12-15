@@ -2,9 +2,7 @@
 
 	.syntax unified
 
-	.text
-
-@ libc/string/memcpy
+	.section .text.memcpy
 
 	thumb_func_start memcpy
 memcpy:
@@ -63,7 +61,8 @@ _080B271A:
 	pop {r4,r5,pc}
 	thumb_func_end memcpy
 
-@ libc/string/memset
+	.align 2, 0 @ don't pad with nop
+	.section .text.memset
 
 	thumb_func_start memset
 memset:
@@ -115,7 +114,8 @@ _080B2766:
 	pop {r4,r5,pc}
 	thumb_func_end memset
 
-@ libc/stdio/sprintf
+	.align 2, 0 @ don't pad with nop
+	.section .text.sprintf
 
 	thumb_func_start _sprintf_r
 _sprintf_r:
@@ -183,7 +183,8 @@ _080B27E8: .4byte 0x7fffffff
 _080B27EC: .4byte _impure_ptr
 	thumb_func_end sprintf
 
-@ libc/string/strcat
+	.align 2, 0 @ don't pad with nop
+	.section .text.strcat
 
 	thumb_func_start strcat
 strcat:
@@ -227,7 +228,8 @@ _080B2826:
 	pop {r4-r6,pc}
 	thumb_func_end strcat
 
-@ libc/string/strcmp
+	.align 2, 0 @ don't pad with nop
+	.section .text.strcmp
 
 	thumb_func_start strcmp
 strcmp:
@@ -283,7 +285,8 @@ _080B2890:
 	pop {r4,r5,pc}
 	thumb_func_end strcmp
 
-@ libc/string/strcpy
+	.align 2, 0 @ don't pad with nop
+	.section .text.strcpy
 
 	thumb_func_start strcpy
 strcpy:
@@ -328,7 +331,8 @@ _080B28CC:
 	pop {r4-r6,pc}
 	thumb_func_end strcpy
 
-@ libc/string/strlen
+	.align 2, 0 @ don't pad with nop
+	.section .text.strlen
 
 	thumb_func_start strlen
 strlen:
@@ -370,7 +374,8 @@ _080B2918:
 	pop {r4,r5,pc}
 	thumb_func_end strlen
 
-@ libc/string/strncpy
+	.align 2, 0 @ don't pad with nop
+	.section .text.strncpy
 
 	thumb_func_start strncpy
 strncpy:
@@ -437,7 +442,8 @@ _080B2990:
 	pop {r4-r7,pc}
 	thumb_func_end strncpy
 
-@ libc/stdio/vfprintf
+	.align 2, 0 @ don't pad with nop
+	.section .text.vfprintf
 
 	thumb_func_start __sprint
 __sprint:
@@ -2740,7 +2746,8 @@ _080B3AF8:
 	pop {r4-r7,pc}
 	thumb_func_end exponent
 
-@ libc/stdio/vsprintf
+	.align 2, 0 @ don't pad with nop
+	.section .text.vsprintf
 
 	thumb_func_start vsprintf
 vsprintf:
@@ -2770,7 +2777,8 @@ _080B3B2C: .4byte 0x7fffffff
 _080B3B30: .4byte _impure_ptr
 	thumb_func_end vsprintf
 
-@ libc/stdio/wsetup.s
+	.align 2, 0 @ don't pad with nop
+	.section .text.wsetup
 
 	thumb_func_start __swsetup
 __swsetup:
@@ -2870,7 +2878,8 @@ _080B3BDE:
 	pop {r4,r5,pc}
 	thumb_func_end __swsetup
 
-@ libc/stdlib/dtoa
+	.align 2, 0 @ don't pad with nop
+	.section .text.dtoa
 
 	thumb_func_start quorem
 quorem:
@@ -4685,7 +4694,8 @@ _080B4A26:
 	pop {r4-r7,pc}
 	thumb_func_end _dtoa_r
 
-@ libc/stdio/fflush
+	.align 2, 0 @ don't pad with nop
+	.section .text.fflush
 
 	thumb_func_start fflush
 fflush:
@@ -4769,7 +4779,8 @@ _080B4AC6:
 	pop {r4-r6,pc}
 	thumb_func_end fflush
 
-@ libc/stdio/findfp
+	.align 2, 0 @ don't pad with nop
+	.section .text.findfp
 
 	thumb_func_start std
 std:
@@ -4964,7 +4975,8 @@ __sinit:
 _080B4C20: .4byte _cleanup_r
 	thumb_func_end __sinit
 
-@ libc/stdlib/mallocr (define free)
+	.align 2, 0 @ don't pad with nop
+	.section .text.mallocr_FREE
 
 	thumb_func_start _free_r
 _free_r:
@@ -5297,7 +5309,8 @@ _080B4E98:
 _080B4EA0: .4byte __malloc_current_mallinfo
 	thumb_func_end _malloc_trim_r
 
-@ libc/stdio/fvwrite
+	.align 2, 0 @ don't pad with nop
+	.section .text.fvwrite
 
 	thumb_func_start __sfvwrite
 __sfvwrite:
@@ -5601,7 +5614,8 @@ _080B50C2:
 	pop {r4-r7,pc}
 	thumb_func_end __sfvwrite
 
-@ libc/stdio/fwalk
+	.align 2, 0 @ don't pad with nop
+	.section .text.fwalk
 
 	thumb_func_start _fwalk
 _fwalk:
@@ -5643,7 +5657,8 @@ _080B5108:
 	pop {r4-r7,pc}
 	thumb_func_end _fwalk
 
-@ libc/locale/locale
+	.align 2, 0 @ don't pad with nop
+	.section .text.locale
 
 	thumb_func_start _setlocale_r
 _setlocale_r:
@@ -5712,7 +5727,8 @@ localeconv:
 _080B5178: .4byte _impure_ptr
 	thumb_func_end localeconv
 
-@ libc/stdio/makebuf
+	.align 2, 0 @ don't pad with nop
+	.section .text.makebuf
 
 	thumb_func_start __smakebuf
 __smakebuf:
@@ -5832,7 +5848,8 @@ _080B524E:
 _080B5254: .4byte _cleanup_r
 	thumb_func_end __smakebuf
 
-@ libc/stdlib/mallocr (define malloc)
+	.align 2, 0 @ don't pad with nop
+	.section .text.mallocr_MALLOC
 
 	thumb_func_start malloc_extend_top
 malloc_extend_top:
@@ -6542,7 +6559,8 @@ _080B5764:
 _080B5770: .4byte __malloc_av_
 	thumb_func_end _malloc_r
 
-@ libc/stdlib/mbtowc
+	.align 2, 0 @ don't pad with nop
+	.section .text.mbtowc_r
 
 	thumb_func_start _mbtowc_r
 _mbtowc_r:
@@ -6573,7 +6591,8 @@ _080B579A:
 	bx lr
 	thumb_func_end _mbtowc_r
 
-@ libc/string/memchr
+	.align 2, 0 @ don't pad with nop
+	.section .text.memchr
 
 	thumb_func_start memchr
 memchr:
@@ -6651,7 +6670,8 @@ _080B581E:
 	pop {r4-r7,pc}
 	thumb_func_end memchr
 
-@ libc/string/memmove
+	.align 2, 0 @ don't pad with nop
+	.section .text.memmove
 
 	thumb_func_start memmove
 memmove:
@@ -6733,7 +6753,8 @@ _080B58A4:
 	pop {r4,r5,pc}
 	thumb_func_end memmove
 
-@ libc/stdlib/mlock
+	.align 2, 0 @ don't pad with nop
+	.section .text.mlock
 
 	thumb_func_start __malloc_lock
 __malloc_lock:
@@ -6745,7 +6766,8 @@ __malloc_unlock:
 	bx lr
 	thumb_func_end __malloc_unlock
 
-@ libc/stdlib/mprec
+	.align 2, 0 @ don't pad with nop
+	.section .text.mprec
 
 	thumb_func_start _Balloc
 _Balloc:
@@ -7991,7 +8013,8 @@ _080B6178: .4byte 0x40240000
 _080B617C: .4byte 0x00000000
 	thumb_func_end _mprec_log10
 
-@ libm/math/s_isinf
+	.align 2, 0 @ don't pad with nop
+	.section .text.s_isinf
 
 	thumb_func_start isinf
 isinf:
@@ -8015,7 +8038,8 @@ _080B619C: .4byte 0x7fffffff
 _080B61A0: .4byte 0x7ff00000
 	thumb_func_end isinf
 
-@ libm/math/s_isnan
+	.align 2, 0 @ don't pad with nop
+	.section .text.s_isnan
 
 	thumb_func_start isnan
 isnan:
@@ -8036,7 +8060,8 @@ _080B61BC: .4byte 0x7fffffff
 _080B61C0: .4byte 0x7ff00000
 	thumb_func_end isnan
 
-@ libc/reent/sbrkr
+	.align 2, 0 @ don't pad with nop
+	.section .text.sbrkr
 
 	thumb_func_start _sbrk_r
 _sbrk_r:
@@ -8063,7 +8088,8 @@ _080B61E6:
 _080B61EC: .4byte errno
 	thumb_func_end _sbrk_r
 
-@ libc/stdio/stdio
+	.align 2, 0 @ don't pad with nop
+	.section .text.stdio
 
 	thumb_func_start __sread
 __sread:
@@ -8176,7 +8202,8 @@ __sclose:
 	pop {pc}
 	thumb_func_end __sclose
 
-@ libc/sys/arm/syscalls
+	.align 2, 0 @ don't pad with nop
+	.section .text.syscalls
 
 	thumb_func_start findslot
 findslot:
@@ -8318,7 +8345,7 @@ get_errno:
 error:
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl _impure_r
+	bl __errno
 	adds r4, r0, 0
 	bl get_errno
 	str r0, [r4]
@@ -8825,7 +8852,8 @@ _080B6712:
 	pop {r4,r5,pc}
 	thumb_func_end _times
 
-@ libc/reent/writer
+	.align 2, 0 @ don't pad with nop
+	.section .text.writer
 
 	thumb_func_start _write_r
 _write_r:
@@ -8854,7 +8882,8 @@ _080B673E:
 _080B6744: .4byte errno
 	thumb_func_end _write_r
 
-@ libc/stdlib/mallocr with calloc
+	.align 2, 0 @ don't pad with nop
+	.section .text.mallocr_CALLOC
 
 	thumb_func_start _calloc_r
 _calloc_r:
@@ -8907,7 +8936,8 @@ _080B679E:
 	pop {r4,pc}
 	thumb_func_end _calloc_r
 
-@ libc/reent/closer
+	.align 2, 0 @ don't pad with nop
+	.section .text.closer
 
 	thumb_func_start _close_r
 _close_r:
@@ -8934,18 +8964,20 @@ _080B67C2:
 _080B67C8: .4byte errno
 	thumb_func_end _close_r
 
-@ libc/reent/impure
+	.align 2, 0 @ don't pad with nop
+	.section .text.errno
 
-	thumb_func_start _impure_r
-_impure_r:
+	thumb_func_start __errno
+__errno:
 	ldr r0, _080B67D4
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
 _080B67D4: .4byte _impure_ptr
-	thumb_func_end _impure_r
+	thumb_func_end __errno
 
-@ libc/reent/fstatr
+	.align 2, 0 @ don't pad with nop
+	.section .text.fstatr
 
 	thumb_func_start _fstat_r
 _fstat_r:
@@ -8973,7 +9005,8 @@ _080B67FC:
 _080B6800: .4byte errno
 	thumb_func_end _fstat_r
 
-@ libc/stdlib/abort
+	.align 2, 0 @ don't pad with nop
+	.section .text.abort
 
 	thumb_func_start abort
 abort:
@@ -8994,7 +9027,8 @@ abort:
 _080B6820: .4byte 0x00020022
 	thumb_func_end abort
 
-@ libc/sys/arm/syscalls
+	.align 2, 0 @ don't pad with nop
+	.section .text.libcfunc
 
 	thumb_func_start isatty
 isatty:
@@ -9002,14 +9036,13 @@ isatty:
 	bx lr
 	thumb_func_end isatty
 
-@ libc/sys/arm/libcfunc
-
 	thumb_func_start alarm
 alarm:
 	bx lr
 	thumb_func_end alarm
 
-@ libc/reent/lseekr
+	.align 2, 0 @ don't pad with nop
+	.section .text.lseekr
 
 	thumb_func_start _lseek_r
 _lseek_r:
@@ -9038,7 +9071,8 @@ _080B6852:
 _080B6858: .4byte errno
 	thumb_func_end _lseek_r
 
-@ libc/reent/readr
+	.align 2, 0 @ don't pad with nop
+	.section .text.readr
 
 	thumb_func_start _read_r
 _read_r:

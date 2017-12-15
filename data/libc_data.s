@@ -67,6 +67,8 @@ gUnknown_826FE70: @ 826FE70
 	.ascii "C"
 	.align 2, 0
 
+@ locale
+
 	.global lconv
 lconv: @ 826FE78
 	.4byte gUnknown_826FEAC, gUnknown_826FEA8
@@ -89,6 +91,8 @@ gUnknown_826FEAC: @ 826FEAC
 	.global gUnknown_826FEB0
 gUnknown_826FEB0: @ 826FEB0
 	.ascii "C"
+
+@ mprec
 
 	.align 2, 0
 	.global gUnknown_826FEB4
@@ -143,6 +147,8 @@ __mprec_tinytens:
 	.8byte 0x44f4a73d32a50ffd @ 1e-64
 	.8byte 0xcf8c979d255bba08 @ 1e-128
 	.8byte 0x64ac6f430ac80628 @ 1e-256
+
+@ syscalls
 
 	.align 2, 0
 	.global gUnknown_826FFD8

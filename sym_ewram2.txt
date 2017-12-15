@@ -1,4 +1,6 @@
 	.align 2
+
+	.include "newlib/libc.a:syscalls.o"
 heap_end: @ 2039E18
 	.space 0x4
 
@@ -668,6 +670,11 @@ gUnknown_203B4B8: @ 203B4B8
 	.space 0x2F0
 
 @ libc
+	/*
+	.include "newlib/libc.a:impure.o"
+	.include "newlib/libc.a:locale.o"
+	.include "newlib/libc.a:mallocr_MALLOC.o"
+	*/
 
 _impure_ptr: @ 203B7A8
 	.space 0x4
@@ -697,5 +704,6 @@ __malloc_max_total_mem: @ 203BBD8
 
 __malloc_current_mallinfo: @ 203BBDC
 	.space 0x28
+
 
 gUnknown_203BC04: @ 203BC04 @ main
