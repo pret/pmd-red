@@ -98,7 +98,7 @@ $(LIBC) $(LIBM):
 	make -C newlib
 
 pmd_red.elf: ld_script.ld $(OBJS) $(LIBC) $(LIBM)
-	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIBGCC) # $(LIBC) $(LIBM)
+	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIBC) $(LIBM) $(LIBGCC)
 
 pmd_red.gba: pmd_red.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@

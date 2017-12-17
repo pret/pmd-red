@@ -14,8 +14,18 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4);
         tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
-        . = ALIGN(8);
+        . = ALIGN(4);
+        newlib/libc.a:syscalls.o(.bss);
+        . = ALIGN(16);
         <EWRAM2>
+        . = ALIGN(4);
+        newlib/libc.a:impure.o(.data);
+        . = ALIGN(4);
+        newlib/libc.a:locale.o(.data);
+        . = ALIGN(4);
+        newlib/libc.a:mallocr_MALLOC.o(.data);
+        . = ALIGN(4);
+        gUnknown_203BC04 = .;
         . = 0x40000;
     }
 
@@ -75,7 +85,6 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        /*
 		newlib/libc.a:memcpy.o(.text);
 		newlib/libc.a:memset.o(.text);
 		newlib/libc.a:sprintf.o(.text);
@@ -115,46 +124,6 @@ SECTIONS {
 		newlib/libc.a:libcfunc.o(.text);
 		newlib/libc.a:lseekr.o(.text);
 		newlib/libc.a:readr.o(.text);
-		*/
-		asm/libc.o(.text.memcpy);
-		asm/libc.o(.text.memset);
-		asm/libc.o(.text.sprintf);
-		asm/libc.o(.text.strcat);
-		asm/libc.o(.text.strcmp);
-		asm/libc.o(.text.strcpy);
-		asm/libc.o(.text.strlen);
-		asm/libc.o(.text.strncpy);
-		asm/libc.o(.text.vfprintf);
-		asm/libc.o(.text.vsprintf);
-		asm/libc.o(.text.wsetup);
-		asm/libc.o(.text.dtoa);
-		asm/libc.o(.text.fflush);
-		asm/libc.o(.text.findfp);
-		asm/libc.o(.text.mallocr_FREE);
-		asm/libc.o(.text.fvwrite);
-		asm/libc.o(.text.fwalk);
-		asm/libc.o(.text.locale);
-		asm/libc.o(.text.makebuf);
-		asm/libc.o(.text.mallocr_MALLOC);
-		asm/libc.o(.text.mbtowc_r);
-		asm/libc.o(.text.memchr);
-		asm/libc.o(.text.memmove);
-		asm/libc.o(.text.mlock);
-		asm/libc.o(.text.mprec);
-		asm/libc.o(.text.s_isinf);
-		asm/libc.o(.text.s_isnan);
-		asm/libc.o(.text.sbrkr);
-		asm/libc.o(.text.stdio);
-		asm/libc.o(.text.syscalls);
-		asm/libc.o(.text.writer);
-		asm/libc.o(.text.mallocr_CALLOC);
-		asm/libc.o(.text.closer);
-		asm/libc.o(.text.errno);
-		asm/libc.o(.text.fstatr);
-		asm/libc.o(.text.abort);
-		asm/libc.o(.text.libcfunc);
-		asm/libc.o(.text.lseekr);
-		asm/libc.o(.text.readr);
         tools/agbcc/lib/libgcc.a:_udivsi3.o(.text);
     } =0
 
@@ -168,15 +137,21 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
-        /*
+        . = ALIGN(4);
         newlib/libc.a:sprintf.o(.rodata);
+        . = ALIGN(4);
         newlib/libc.a:vfprintf.o(.rodata);
+        . = ALIGN(4);
         newlib/libc.a:dtoa.o(.rodata);
+        . = ALIGN(4);
+        newlib/libc.a:impure.o(.rodata);
+        . = ALIGN(4);
         newlib/libc.a:locale.o(.rodata);
+        . = ALIGN(4);
         newlib/libc.a:mprec.o(.rodata);
+        . = ALIGN(4);
         newlib/libc.a:syscalls.o(.rodata);
-        */
-        data/libc_data.o(.rodata);
+        . = ALIGN(4);
         data/data_8270000.o(.rodata);
     } =0
 

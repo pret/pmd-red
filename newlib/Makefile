@@ -1,11 +1,11 @@
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
-CC1             := ../tools/agbcc/bin/agbcc
-override CFLAGS += -O2 -fhex-asm
+CC1             := ../tools/agbcc/bin/old_agbcc
+override CFLAGS += -O2 -fhex-asm -fno-builtin
 
 CPP      := cpp
-CPPFLAGS := -I ../tools/agbcc/include -I libc/include -iquote libm/common -D__thumb__ -D__GNUC__ -nostdinc -undef
+CPPFLAGS := -I ../tools/agbcc/include -I libc/include -iquote libm/common -D__thumb__ -D__GNUC__ -DARM_RDI_MONITOR -undef -nostdinc
 
 AR      := ar
 ARFLAGS := "-rc"
