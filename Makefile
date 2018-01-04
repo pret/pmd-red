@@ -12,8 +12,7 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 LIBGCC := tools/agbcc/lib/libgcc.a
-LIBC := newlib/libc.a
-LIBM := newlib/libm.a
+LIBC := tools/agbcc/lib/libc.a
 
 MD5 := md5sum -c
 
@@ -64,7 +63,6 @@ tidy:
 	rm -f $(C_SRCS:%.c=%.i)
 	rm -f $(C_SRCS:%.c=%.s)
 	rm -f *.ld
-	make -C newlib clean
 
 src/agb_flash.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
@@ -94,11 +92,8 @@ sym_iwram.ld: sym_iwram.txt
 ld_script.ld: ld_script.txt sym_ewram.ld sym_ewram2.ld sym_iwram.ld
 	sed -f ld_script.sed ld_script.txt >ld_script.ld
 
-$(LIBC) $(LIBM):
-	make -C newlib
-
-pmd_red.elf: ld_script.ld $(OBJS) $(LIBC) $(LIBM)
-	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIBC) $(LIBM) $(LIBGCC)
+pmd_red.elf: ld_script.ld $(OBJS) $(LIBC)
+	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIBC) $(LIBGCC)
 
 pmd_red.gba: pmd_red.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
