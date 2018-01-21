@@ -58,6 +58,7 @@ SECTIONS {
         asm/sprite.o(.text);
         asm/code_800558C.o(.text);
         src/random.o(.text);
+        src/text.o(.text);
         asm/text.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
