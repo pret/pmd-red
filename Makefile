@@ -11,8 +11,7 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
-LIBGCC := tools/agbcc/lib/libgcc.a
-LIBC := tools/agbcc/lib/libc.a
+LIB := -L tools/agbcc/lib -lc -lgcc
 
 MD5 := md5sum -c
 
@@ -93,7 +92,7 @@ ld_script.ld: ld_script.txt sym_ewram.ld sym_ewram2.ld sym_iwram.ld
 	sed -f ld_script.sed ld_script.txt >ld_script.ld
 
 pmd_red.elf: ld_script.ld $(OBJS) $(LIBC)
-	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIBC) $(LIBGCC)
+	$(LD) -T ld_script.ld -Map pmd_red.map -o $@ $(OBJS) $(LIB)
 
 pmd_red.gba: pmd_red.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
