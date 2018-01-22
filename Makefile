@@ -11,7 +11,11 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
-LIB := -L tools/agbcc/lib -lc -lgcc
+ifeq ($(OS),Windows_NT)
+  LIB := tools/agbcc/lib/libc.a tools/agbcc/lib/libgcc.a
+else
+  LIB := -L tools/agbcc/lib -lc -lgcc
+endif
 
 MD5 := md5sum -c
 
