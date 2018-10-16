@@ -7,7 +7,7 @@ SECTIONS {
     ALIGN(4)
     {
         ewram_start = .;
-        <EWRAM>
+        INCLUDE "sym_ewram.ld"
         . = ALIGN(4);
         src/agb_flash.o(.bss);
         . = ALIGN(4);
@@ -17,7 +17,7 @@ SECTIONS {
         . = ALIGN(4);
         tools/agbcc/lib/libc.a:syscalls.o(.bss);
         . = ALIGN(16);
-        <EWRAM2>
+        INCLUDE "sym_ewram2.ld"
         . = ALIGN(4);
         tools/agbcc/lib/libc.a:impure.o(.data);
         . = ALIGN(4);
@@ -35,7 +35,7 @@ SECTIONS {
     ALIGN(4)
     {
         iwram_start = .;
-        <IWRAM>
+        INCLUDE "sym_iwram.ld"
         . = 0x8000;
     }
 
