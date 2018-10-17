@@ -48,11 +48,13 @@ SECTIONS {
         asm/code.o(.text);
         asm/event_flag.o(.text);
         asm/code_8002774.o(.text);
+        src/memory.o(.text);
         asm/memory.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
         asm/bg_palette_buffer.o(.text);
+        src/bg_palette_buffer.o(.text);
         asm/input.o(.text);
         asm/code_8004AA0.o(.text);
         asm/sprite.o(.text);
@@ -66,6 +68,7 @@ SECTIONS {
         asm/code_800B540.o(.text);
         src/flash.o(.text);
         asm/code_800D090.o(.text);
+        src/save.o(.text);
         asm/save.o(.text);
         asm/code_8012A18.o(.text);
         asm/m4a.o(.text);

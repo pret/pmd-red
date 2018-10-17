@@ -103,7 +103,6 @@ $(BUILD_DIR)/sym_%.ld: sym_%.txt
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 	@$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
-	echo $(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
 	@$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s

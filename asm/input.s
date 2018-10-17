@@ -7,24 +7,24 @@
 
 	thumb_func_start InitInput
 InitInput:
-	ldr r0, _08004840
+	ldr r0, =gUnknown_20255F0
 	movs r3, 0
 	movs r2, 0
 	strh r2, [r0]
 	strh r2, [r0, 0x2]
 	strh r2, [r0, 0x4]
 	strh r2, [r0, 0x6]
-	ldr r0, _08004844
+	ldr r0, =gUnknown_2025638
 	strh r2, [r0]
 	strh r2, [r0, 0x2]
 	strh r2, [r0, 0x4]
 	strh r2, [r0, 0x6]
-	ldr r1, _08004848
-	ldr r0, _0800484C
+	ldr r1, =gUnknown_202562C
+	ldr r0, =0x4a14c1
 	str r0, [r1]
-	ldr r0, _08004850
+	ldr r0, =gUnknown_2025600
 	str r2, [r0, 0x20]
-	ldr r1, _08004854
+	ldr r1, =0xffff
 	strh r1, [r0]
 	movs r1, 0x1
 	negs r1, r1
@@ -46,25 +46,19 @@ InitInput:
 	strb r3, [r1]
 	adds r0, 0x29
 	strb r3, [r0]
-	ldr r0, _08004858
+	ldr r0, =gUnknown_2025668
 	strh r2, [r0]
 	strh r2, [r0, 0x2]
 	bx lr
 	.align 2, 0
-_08004840: .4byte gUnknown_20255F0
-_08004844: .4byte gUnknown_2025638
-_08004848: .4byte gUnknown_202562C
-_0800484C: .4byte 0x004a14c1
-_08004850: .4byte gUnknown_2025600
-_08004854: .4byte 0x0000ffff
-_08004858: .4byte gUnknown_2025668
+	.pool
 	thumb_func_end InitInput
 
 	thumb_func_start sub_800485C
 sub_800485C:
 	push {r4,r5,lr}
-	ldr r2, _080048A8
-	ldr r1, _080048AC
+	ldr r2, =gUnknown_2025638
+	ldr r1, =gUnknown_20255F0
 	adds r0, r2, 0
 	ldm r0!, {r3-r5}
 	stm r1!, {r3-r5}
@@ -76,8 +70,8 @@ sub_800485C:
 	strh r0, [r2, 0x2]
 	strh r0, [r2, 0x4]
 	strh r0, [r2, 0x6]
-	ldr r0, _080048B0
-	ldr r1, _080048B4
+	ldr r0, =gUnknown_2025600
+	ldr r1, =0xffff
 	strh r1, [r0]
 	movs r1, 0x1
 	negs r1, r1
@@ -101,10 +95,7 @@ sub_800485C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080048A8: .4byte gUnknown_2025638
-_080048AC: .4byte gUnknown_20255F0
-_080048B0: .4byte gUnknown_2025600
-_080048B4: .4byte 0x0000ffff
+	.pool 
 	thumb_func_end sub_800485C
 
 	thumb_func_start sub_80048B8
@@ -145,49 +136,44 @@ sub_80048CC:
 
 	thumb_func_start sub_80048D0
 sub_80048D0:
-	ldr r1, _080048E8
+	ldr r1, =gUnknown_20255F0
 	movs r0, 0
 	strh r0, [r1, 0x4]
-	ldr r1, _080048EC
+	ldr r1, =gUnknown_2025648
 	str r0, [r1, 0xC]
 	strh r0, [r1, 0x8]
-	ldr r1, _080048F0
-	ldr r0, _080048F4
+	ldr r1, =gUnknown_2025668
+	ldr r0, =0x3e7
 	strh r0, [r1]
 	strh r0, [r1, 0x2]
 	bx lr
 	.align 2, 0
-_080048E8: .4byte gUnknown_20255F0
-_080048EC: .4byte gUnknown_2025648
-_080048F0: .4byte gUnknown_2025668
-_080048F4: .4byte 0x000003e7
+	.pool
 	thumb_func_end sub_80048D0
 
 	thumb_func_start sub_80048F8
 sub_80048F8:
-	ldr r0, _08004908
+	ldr r0, =gUnknown_20255F0
 	movs r1, 0
 	strh r1, [r0, 0x2]
-	ldr r0, _0800490C
+	ldr r0, =gUnknown_2025638
 	strh r1, [r0, 0x2]
-	ldr r0, _08004910
+	ldr r0, =gUnknown_2025648
 	strh r1, [r0, 0x2]
 	bx lr
 	.align 2, 0
-_08004908: .4byte gUnknown_20255F0
-_0800490C: .4byte gUnknown_2025638
-_08004910: .4byte gUnknown_2025648
+	.pool
 	thumb_func_end sub_80048F8
 
 	thumb_func_start sub_8004914
 sub_8004914:
-	ldr r0, _0800494C
+	ldr r0, =gUnknown_2025600
 	movs r1, 0x5
 	str r1, [r0, 0x20]
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0, 0x24]
-	ldr r1, _08004950
+	ldr r1, =0xffff
 	strh r1, [r0]
 	movs r1, 0x1
 	negs r1, r1
@@ -209,15 +195,14 @@ sub_8004914:
 	strb r2, [r0]
 	bx lr
 	.align 2, 0
-_0800494C: .4byte gUnknown_2025600
-_08004950: .4byte 0x0000ffff
+	.pool
 	thumb_func_end sub_8004914
 
 	thumb_func_start UpdateInput
 UpdateInput:
 	push {r4-r6,lr}
-	ldr r4, _08004998
-	ldr r5, _0800499C
+	ldr r4, =gUnknown_2025658
+	ldr r5, =gUnknown_2025648
 	adds r1, r4, 0
 	adds r0, r5, 0
 	ldm r0!, {r2,r3,r6}
@@ -249,8 +234,7 @@ UpdateInput:
 	str r0, [r5, 0xC]
 	b _080049AC
 	.align 2, 0
-_08004998: .4byte gUnknown_2025658
-_0800499C: .4byte gUnknown_2025648
+	.pool
 _080049A0:
 	strh r2, [r5, 0x8]
 	movs r0, 0x1
@@ -260,7 +244,7 @@ _080049A8:
 	str r0, [r5, 0xC]
 	strh r0, [r5, 0x8]
 _080049AC:
-	ldr r0, _080049C4
+	ldr r0, =gUnknown_2025648
 	ldr r2, [r0, 0xC]
 	adds r3, r0, 0
 	cmp r2, 0x1
@@ -273,7 +257,7 @@ _080049AC:
 	strh r1, [r3, 0x4]
 	b _080049E0
 	.align 2, 0
-_080049C4: .4byte gUnknown_2025648
+	.pool
 _080049C8:
 	cmp r2, 0x30
 	bne _080049DC
@@ -300,7 +284,7 @@ _080049E0:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	beq _08004A0C
-	ldr r0, _08004A08
+	ldr r0, =gUnknown_2025668
 	ldrh r2, [r0]
 	movs r4, 0
 	ldrsh r1, [r0, r4]
@@ -311,9 +295,9 @@ _080049E0:
 	strh r0, [r4]
 	b _08004A20
 	.align 2, 0
-_08004A08: .4byte gUnknown_2025668
+	.pool
 _08004A0C:
-	ldr r1, _08004A44
+	ldr r1, =gUnknown_2025668
 	ldrh r0, [r1]
 	subs r0, 0x2
 	lsls r0, 16
@@ -343,7 +327,7 @@ _08004A20:
 	strh r0, [r4, 0x2]
 	b _08004A5E
 	.align 2, 0
-_08004A44: .4byte gUnknown_2025668
+	.pool
 _08004A48:
 	ldrh r0, [r4, 0x2]
 	subs r0, 0x2
@@ -358,7 +342,7 @@ _08004A48:
 _08004A5C:
 	strh r2, [r4, 0x2]
 _08004A5E:
-	ldr r2, _08004A94
+	ldr r2, =gUnknown_2025638
 	ldrh r0, [r2]
 	ldrh r1, [r3]
 	orrs r0, r1
@@ -375,9 +359,9 @@ _08004A5E:
 	ldrh r1, [r3, 0x6]
 	orrs r0, r1
 	strh r0, [r2, 0x6]
-	ldr r2, _08004A98
+	ldr r2, =gUnknown_202562C
 	ldrh r0, [r3]
-	ldr r1, _08004A9C
+	ldr r1, =0x054a1c41
 	orrs r0, r1
 	ldr r1, [r2]
 	muls r0, r1
@@ -386,9 +370,7 @@ _08004A5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08004A94: .4byte gUnknown_2025638
-_08004A98: .4byte gUnknown_202562C
-_08004A9C: .4byte 0x054a1c41
+	.pool
 	thumb_func_end UpdateInput
 
 	.align 2, 0 @ Don't pad with nop.

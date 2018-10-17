@@ -24,16 +24,16 @@ gUnknown_2000EA8 = .; /* 2000EA8 */
 gUnknown_2000EB0 = .; /* 2000EB0 */
 	. += 0x20;
 
-gUnknown_2000ED0 = .; /* 2000ED0 */
+gHeapHeader = .; /* 2000ED0 */
 	. += 0x300;
 
-gUnknown_20011D0 = .; /* 20011D0 */
+gHeap = .; /* 20011D0 */
 	. += 0x24000;
 
-gUnknown_20251D0 = .; /* 20251D0 */
+gBGPaletteUsed = .; /* 20251D0 */
 	. += 0x20;
 
-gUnknown_20251F0 = .; /* 20251F0 */
+gBGPaletteBuffer = .; /* 20251F0 */
 	. += 0x400;
 
 gUnknown_20255F0 = .; /* 20255F0 */
@@ -385,7 +385,8 @@ gUnknown_202DE24 = .; /* 202DE24 */
 	. += 0x4;
 
 gUnknown_202DE28 = .; /* 202DE28 */
-	. += 0x8;
+	. += 0x4;
+	. = ALIGN(16);
 
 gUnknown_202DE30 = .; /* 202DE30 */
 	. += 0x28;
