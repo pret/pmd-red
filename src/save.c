@@ -2,7 +2,9 @@
 
 extern u32 gUnknown_203B17C;
 extern u32 gUnknown_203B180;
+extern u32 *gUnknown_203B184;
 extern u32 gUnknown_202DE28;
+
 
 u32 sub_8011C1C(void)
 {
@@ -29,17 +31,34 @@ u32 sub_8011C4C(void)
     return gUnknown_203B180;
 }
 
-void sub_8011C58(u32 *out, u32 len)
+void CalculateChecksum(u8 *out, u32 size)
 {
-    u32 sum = 0;
-    s32 i = len / 4;
+    u32 checksum = 0;
+    s32 i = size / 4;
     if (i > 1)
     {
-        u32 *ptr = &out[1];
+        u32 *ptr = (u32 *)&out[4];
         --i;
         do
-            sum += *ptr++;
+            checksum += *ptr++;
         while (--i);
     }
-    *out = sum;
+    *(u32 *)out = checksum;
+}
+
+bool8 ValidateChecksum(u8 *in, u32 size)
+{
+    u32 checksum = 0;
+    s32 i = size / 4;
+    if (i > 1)
+	{
+        u32 *ptr = (u32 *)&in[4];
+        --i;
+        do
+            checksum += *ptr++;
+        while (--i);
+	}
+    if (*(u32 *)in != checksum)
+        return TRUE;
+    return FALSE;
 }

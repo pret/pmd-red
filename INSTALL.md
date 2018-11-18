@@ -1,3 +1,5 @@
+First, you must put a Pokémon Mystery Dungeon Red Rescue Team 1.0 (US) ROM in the root directory of the repository and name it `baserom.gba`. It should have a SHA1 checksum of `9f4cfc5b5f4859d17169a485462e977c7aac2b89`. Then, follow the OS-specific instructions below.
+
 # Linux
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).

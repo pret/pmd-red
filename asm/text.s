@@ -121,7 +121,7 @@ _080062AC:
 _080062F4: .4byte gUnknown_20274AC
 _080062F8: .4byte gUnknown_80B87B4
 _080062FC: .4byte gUnknown_8300500
-_08006300: .4byte gUnknown_202AFB4
+_08006300: .4byte gKanji
 _08006304: .4byte gUnknown_80B87BC
 _08006308: .4byte gUnknown_2027490
 _0800630C: .4byte gUnknown_202B028

@@ -57,6 +57,7 @@ SECTIONS {
         src/bg_palette_buffer.o(.text);
         asm/input.o(.text);
         asm/code_8004AA0.o(.text);
+        src/sprite.o(.text);
         asm/sprite.o(.text);
         asm/code_800558C.o(.text);
         src/random.o(.text);
@@ -70,6 +71,7 @@ SECTIONS {
         asm/code_800D090.o(.text);
         src/save.o(.text);
         asm/save.o(.text);
+        src/save1.o(.text);
         asm/code_8012A18.o(.text);
         asm/m4a.o(.text);
         asm/syscall.o(.text);

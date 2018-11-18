@@ -1,5 +1,6 @@
-	.include "constants/gba_constants.inc"
 	.include "asm/macros.inc"
+	.include "constants/gba_constants.inc"
+	.include "constants/m4a_constants.inc"
 
 	.syntax unified
 
@@ -18,16 +19,16 @@ _080AE268:
 
 	thumb_func_start SoundMain
 SoundMain:
-	ldr r0, _080AE2E0
+	ldr r0, lt_SOUND_INFO_PTR
 	ldr r0, [r0]
-	ldr r2, _080AE2E4
-	ldr r3, [r0]
+	ldr r2, lt_ID_NUMBER
+	ldr r3, [r0, o_SoundInfo_ident]
 	cmp r2, r3
-	beq _080AE282
-	bx lr
-_080AE282:
-	adds r3, 0x1
-	str r3, [r0]
+	beq SoundMain_1
+	bx lr @ Exit the function if ident doesn't match ID_NUMBER.
+SoundMain_1:
+	adds r3, 1
+	str r3, [r0, o_SoundInfo_ident]
 	push {r4-r7,lr}
 	mov r1, r8
 	mov r2, r9
@@ -35,65 +36,66 @@ _080AE282:
 	mov r4, r11
 	push {r0-r4}
 	sub sp, 0x18
-	ldrb r1, [r0, 0xC]
-	cmp r1, 0
-	beq _080AE2A6
-	ldr r2, _080AE2EC
+	ldrb r1, [r0, o_SoundInfo_maxLines]
+	cmp r1, 0 @ if maxLines is 0, there is no maximum
+	beq SoundMain_3
+	ldr r2, lt_REG_VCOUNT
 	ldrb r2, [r2]
-	cmp r2, 0xA0
-	bcs _080AE2A4
-	adds r2, 0xE4
-_080AE2A4:
+	cmp r2, VCOUNT_VBLANK
+	bhs SoundMain_2
+	adds r2, TOTAL_SCANLINES
+SoundMain_2:
 	adds r1, r2
-_080AE2A6:
+SoundMain_3:
 	str r1, [sp, 0x14]
-	ldr r3, [r0, 0x20]
+	ldr r3, [r0, o_SoundInfo_func]
 	cmp r3, 0
-	beq _080AE2B6
-	ldr r0, [r0, 0x24]
+	beq SoundMain_4
+	ldr r0, [r0, o_SoundInfo_intp]
 	bl call_r3
 	ldr r0, [sp, 0x18]
-_080AE2B6:
-	ldr r3, [r0, 0x28]
+SoundMain_4:
+	ldr r3, [r0, o_SoundInfo_CgbSound]
 	bl call_r3
 	ldr r0, [sp, 0x18]
-	ldr r3, [r0, 0x10]
+	ldr r3, [r0, o_SoundInfo_pcmSamplesPerVBlank]
 	mov r8, r3
-	ldr r5, _080AE2F0
+	ldr r5, lt_o_SoundInfo_pcmBuffer
 	adds r5, r0
-	ldrb r4, [r0, 0x4]
-	subs r7, r4, 0x1
-	bls _080AE2D6
-	ldrb r1, [r0, 0xB]
+	ldrb r4, [r0, o_SoundInfo_pcmDmaCounter]
+	subs r7, r4, 1
+	bls SoundMain_5
+	ldrb r1, [r0, o_SoundInfo_pcmDmaPeriod]
 	subs r1, r7
 	mov r2, r8
 	muls r2, r1
 	adds r5, r2
-_080AE2D6:
+SoundMain_5:
 	str r5, [sp, 0x8]
-	ldr r6, _080AE2F4
-	ldr r3, _080AE2E8
+	ldr r6, lt_PCM_DMA_BUF_SIZE
+	ldr r3, lt_SoundMainRAM_Buffer
 	bx r3
+
 	.align 2, 0
-_080AE2E0: .4byte SOUND_INFO_PTR
-_080AE2E4: .4byte 0x68736d53
-_080AE2E8: .4byte SoundMainRAM_Buffer + 1
-_080AE2EC: .4byte 0x04000006
-_080AE2F0: .4byte 0x00000350
-_080AE2F4: .4byte 0x00000630
+lt_SOUND_INFO_PTR:        .word SOUND_INFO_PTR
+lt_ID_NUMBER:             .word ID_NUMBER
+lt_SoundMainRAM_Buffer:   .word SoundMainRAM_Buffer + 1
+lt_REG_VCOUNT:            .word REG_VCOUNT
+lt_o_SoundInfo_pcmBuffer: .word o_SoundInfo_pcmBuffer
+lt_PCM_DMA_BUF_SIZE:      .word PCM_DMA_BUF_SIZE
 	thumb_func_end SoundMain
 
-	thumb_func_start sub_80AE2F8
-sub_80AE2F8:
-	ldrb r3, [r0, 0x5]
+	thumb_func_start SoundMainRAM
+SoundMainRAM:
+	ldrb r3, [r0, o_SoundInfo_reverb]
 	cmp r3, 0
-	beq _080AE358
-	adr r1, _080AE304
+	beq SoundMainRAM_NoReverb
+	adr r1, SoundMainRAM_Reverb
 	bx r1
 	.arm
-_080AE304:
+SoundMainRAM_Reverb:
 	cmp r4, 0x2
-	addeq r7, r0, 0x350
+	addeq r7, r0, o_SoundInfo_pcmBuffer
 	addne r7, r5, r8
 	mov r4, r8
 _080AE314:
@@ -115,22 +117,22 @@ _080AE314:
 	add r0, pc, 0x2F
 	bx r0
 	.thumb
-_080AE358:
+SoundMainRAM_NoReverb:
 	movs r0, 0
 	mov r1, r8
 	adds r6, r5
 	lsrs r1, 3
-	bcc _080AE366
+	bcc SoundMainRAM_NoReverb_Ok
 	stm r5!, {r0}
 	stm r6!, {r0}
-_080AE366:
+SoundMainRAM_NoReverb_Ok:
 	lsrs r1, 1
-	bcc _080AE372
+	bcc SoundMainRAM_NoReverb_Loop
 	stm r5!, {r0}
 	stm r6!, {r0}
 	stm r5!, {r0}
 	stm r6!, {r0}
-_080AE372:
+SoundMainRAM_NoReverb_Loop:
 	stm r5!, {r0}
 	stm r6!, {r0}
 	stm r5!, {r0}
@@ -140,31 +142,33 @@ _080AE372:
 	stm r5!, {r0}
 	stm r6!, {r0}
 	subs r1, 0x1
-	bgt _080AE372
+	bgt SoundMainRAM_NoReverb_Loop
+_080AE386:
 	ldr r4, [sp, 0x18]
-	ldr r0, [r4, 0x18]
+	ldr r0, [r4, o_SoundInfo_divFreq]
 	mov r12, r0
-	ldrb r0, [r4, 0x6]
-	adds r4, 0x50
-_080AE390:
+	ldrb r0, [r4, o_SoundInfo_maxChans]
+	adds r4, o_SoundInfo_chans
+SoundMainRAM_ChanLoop:
 	str r0, [sp, 0x4]
-	ldr r3, [r4, 0x24]
+	ldr r3, [r4, o_SoundChannel_wav]
 	ldr r0, [sp, 0x14]
 	cmp r0, 0
 	beq _080AE3B0
-	ldr r1, _080AE3AC
+	ldr r1, =REG_VCOUNT
 	ldrb r1, [r1]
-	cmp r1, 0xA0
-	bcs _080AE3A4
-	adds r1, 0xE4
+	cmp r1, VCOUNT_VBLANK
+	bhs _080AE3A4
+	adds r1, TOTAL_SCANLINES
 _080AE3A4:
 	cmp r1, r0
 	bcc _080AE3B0
 	b _080AE682
-	.align 2, 0
-_080AE3AC: .4byte 0x04000006
+
+	.pool
+
 _080AE3B0:
-	ldrb r6, [r4]
+	ldrb r6, [r4, o_SoundChannel_status]
 	movs r0, 0xC7
 	tst r0, r6
 	bne _080AE3BA
@@ -177,96 +181,96 @@ _080AE3BA:
 	tst r0, r6
 	bne _080AE3FA
 	movs r6, 0x3
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 	adds r0, r3, 0
 	adds r0, 0x10
-	str r0, [r4, 0x28]
+	str r0, [r4, o_SoundChannel_cp]
 	ldr r0, [r3, 0xC]
-	str r0, [r4, 0x18]
+	str r0, [r4, o_SoundChannel_ct]
 	movs r5, 0
-	strb r5, [r4, 0x9]
-	str r5, [r4, 0x1C]
+	strb r5, [r4, o_SoundChannel_ev]
+	str r5, [r4, o_SoundChannel_fw]
 	ldrb r2, [r3, 0x3]
 	movs r0, 0xC0
 	tst r0, r2
 	beq _080AE442
 	movs r0, 0x10
 	orrs r6, r0
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 	b _080AE442
 _080AE3EA:
-	ldrb r5, [r4, 0x9]
+	ldrb r5, [r4, o_SoundChannel_ev]
 	movs r0, 0x4
 	tst r0, r6
 	beq _080AE400
-	ldrb r0, [r4, 0xD]
+	ldrb r0, [r4, o_SoundChannel_iel]
 	subs r0, 0x1
-	strb r0, [r4, 0xD]
+	strb r0, [r4, o_SoundChannel_iel]
 	bhi _080AE450
 _080AE3FA:
 	movs r0, 0
-	strb r0, [r4]
+	strb r0, [r4, o_SoundChannel_status]
 	b _080AE678
 _080AE400:
 	movs r0, 0x40
 	tst r0, r6
 	beq _080AE420
-	ldrb r0, [r4, 0x7]
+	ldrb r0, [r4, o_SoundChannel_release]
 	muls r5, r0
 	lsrs r5, 8
-	ldrb r0, [r4, 0xC]
+	ldrb r0, [r4, o_SoundChannel_iev]
 	cmp r5, r0
 	bhi _080AE450
 _080AE412:
-	ldrb r5, [r4, 0xC]
+	ldrb r5, [r4, o_SoundChannel_iev]
 	cmp r5, 0
 	beq _080AE3FA
 	movs r0, 0x4
 	orrs r6, r0
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 	b _080AE450
 _080AE420:
 	movs r2, 0x3
 	ands r2, r6
 	cmp r2, 0x2
 	bne _080AE43E
-	ldrb r0, [r4, 0x5]
+	ldrb r0, [r4, o_SoundChannel_decay]
 	muls r5, r0
 	lsrs r5, 8
-	ldrb r0, [r4, 0x6]
+	ldrb r0, [r4, o_SoundChannel_sustain]
 	cmp r5, r0
 	bhi _080AE450
 	adds r5, r0, 0
 	beq _080AE412
 	subs r6, 0x1
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 	b _080AE450
 _080AE43E:
 	cmp r2, 0x3
 	bne _080AE450
 _080AE442:
-	ldrb r0, [r4, 0x4]
+	ldrb r0, [r4, o_SoundChannel_attack]
 	adds r5, r0
 	cmp r5, 0xFF
 	bcc _080AE450
 	movs r5, 0xFF
 	subs r6, 0x1
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 _080AE450:
-	strb r5, [r4, 0x9]
+	strb r5, [r4, o_SoundChannel_ev]
 	ldr r0, [sp, 0x18]
-	ldrb r0, [r0, 0x7]
+	ldrb r0, [r0, o_SoundChannel_release]
 	adds r0, 0x1
 	muls r0, r5
 	lsrs r5, r0, 4
-	ldrb r0, [r4, 0x2]
+	ldrb r0, [r4, o_SoundChannel_rightVolume]
 	muls r0, r5
 	lsrs r0, 8
-	strb r0, [r4, 0xA]
-	ldrb r0, [r4, 0x3]
+	strb r0, [r4, o_SoundChannel_er]
+	ldrb r0, [r4, o_SoundChannel_leftVolume]
 	muls r0, r5
 	lsrs r0, 8
-	strb r0, [r4, 0xB]
+	strb r0, [r4, o_SoundChannel_el]
 	movs r0, 0x10
 	ands r0, r6
 	str r0, [sp, 0x10]
@@ -281,18 +285,18 @@ _080AE450:
 	str r0, [sp, 0x10]
 _080AE484:
 	ldr r5, [sp, 0x8]
-	ldr r2, [r4, 0x18]
-	ldr r3, [r4, 0x28]
+	ldr r2, [r4, o_SoundChannel_ct]
+	ldr r3, [r4, o_SoundChannel_cp]
 	adr r0, _080AE490
 	bx r0
 	.arm
 _080AE490:
 	str r8, [sp]
-	ldrb r10, [r4, 0xA]
-	ldrb r11, [r4, 0xB]
+	ldrb r10, [r4, o_SoundChannel_er]
+	ldrb r11, [r4, o_SoundChannel_el]
 	mov r10, r10, lsl 16
 	mov r11, r11, lsl 16
-	ldrb r0, [r4, 0x1]
+	ldrb r0, [r4, o_SoundChannel_type]
 	tst r0, 0x8
 	beq _080AE5D0
 _080AE4B0:
@@ -368,7 +372,7 @@ _080AE598:
 	ldrne r3, [sp, 0xC]
 	bne _080AE54C
 _080AE5A8:
-	strb r2, [r4]
+	strb r2, [r4, o_SoundChannel_status]
 	mov r0, r5, lsr 30
 	bic r5, r5, 0xC0000000
 	rsb r0, r0, 0x3
@@ -380,8 +384,8 @@ _080AE5A8:
 	b _080AE66C
 _080AE5D0:
 	stmdb sp!, {r4,r12}
-	ldr lr, [r4, 0x1C]
-	ldr r1, [r4, 0x20]
+	ldr lr, [r4, o_SoundChannel_fw]
+	ldr r1, [r4, o_SoundChannel_freq]
 	mul r4, r12, r1
 	ldrsb r0, [r3]
 	ldrsb r1, [r3, 0x1]!
@@ -419,10 +423,10 @@ _080AE640:
 	bgt _080AE5EC
 	sub r3, r3, 0x1
 	ldmia sp!, {r4,r12}
-	str lr, [r4, 0x1C]
+	str lr, [r4, o_SoundChannel_fw]
 _080AE664:
-	str r2, [r4, 0x18]
-	str r3, [r4, 0x28]
+	str r2, [r4, o_SoundChannel_ct]
+	str r3, [r4, o_SoundChannel_cp]
 _080AE66C:
 	ldr r8, [sp]
 	add r0, pc, 0x1
@@ -432,11 +436,11 @@ _080AE678:
 	ldr r0, [sp, 0x4]
 	subs r0, 0x1
 	ble _080AE682
-	adds r4, 0x40
-	b _080AE390
+	adds r4, SoundChannel_size
+	b SoundMainRAM_ChanLoop
 _080AE682:
 	ldr r0, [sp, 0x18]
-	ldr r3, _080AE698
+	ldr r3, =ID_NUMBER
 	str r3, [r0]
 	add sp, 0x1C
 	pop {r0-r7}
@@ -448,10 +452,8 @@ _080AE682:
 
 call_r3:
 	bx r3
-
-	.align 2, 0
-_080AE698: .4byte 0x68736D53
-	thumb_func_end sub_80AE2F8
+	.pool
+	thumb_func_end SoundMainRAM
 
 	thumb_func_start sub_80AE69C
 sub_80AE69C:
@@ -1770,7 +1772,7 @@ _080AEF72:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AEF78: .4byte sub_80AE2F8
+_080AEF78: .4byte SoundMainRAM
 _080AEF7C: .4byte SoundMainRAM_Buffer
 _080AEF80: .4byte 0x04000100
 _080AEF84: .4byte gUnknown_2039ED0

@@ -1,7 +1,10 @@
 #include "global.h"
 
-extern u16 gBGPaletteBuffer[512];
-extern bool8 gBGPaletteUsed[32];
+#define BG_PALETTE_BUFFER_SIZE 512
+#define BG_PALETTE_BUFFER_CHUNK_SIZE 16
+
+extern u16 gBGPaletteBuffer[BG_PALETTE_BUFFER_SIZE];
+extern bool8 gBGPaletteUsed[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE];
 
 extern void CpuCopy(void* src, void* dest, u32 size);
 
@@ -55,13 +58,13 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *RGBArray, s32 a3, u8 *a4)
 
 void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray)
 {
-    gBGPaletteUsed[index / 16] = TRUE;
+    gBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
     gBGPaletteBuffer[index] = (colorArray[2] >> 3) << 10 | (colorArray[1] >> 3) << 5 | colorArray[0] >> 3;
 }
 
 void SetBGPaletteBufferColor(s32 index, u16 *color)
 {
-    gBGPaletteUsed[index / 16] = TRUE;
+    gBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
     gBGPaletteBuffer[index] = *color;
 }
 
@@ -98,5 +101,5 @@ void TransferBGPaletteBuffer(void)
         dest += 16;
         paletteBufferIndex += 16;
     }
-    while ( paletteBufferIndex < 512 );
+    while ( paletteBufferIndex < BG_PALETTE_BUFFER_SIZE );
 }

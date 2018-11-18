@@ -6,6 +6,10 @@ else
 EXE :=
 endif
 
+TITLE       := POKE DUNGEON
+GAME_CODE   := B24E
+MAKER_CODE  := 01
+REVISION    := 0
 
 #### Tools ####
 
@@ -17,6 +21,7 @@ LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx
+GBAFIX    := tools/gbafix/gbafix
 AIF2PCM   := tools/aif2pcm/aif2pcm
 MID2AGB   := tools/mid2agb/mid2agb
 PREPROC   := tools/preproc/preproc
@@ -51,9 +56,9 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
 # Special configurations required for lib files
-%/src/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
-%/src/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
-%/src/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
+$(BUILD_DIR)/src/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
+$(BUILD_DIR)/src/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
+$(BUILD_DIR)/src/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 
 #### Main Rules ####
 
@@ -92,6 +97,7 @@ tidy:
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
+	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ ../../$(LIBC) ../../$(LIBGCC)

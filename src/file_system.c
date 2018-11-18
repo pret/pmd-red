@@ -25,9 +25,9 @@ struct SiroArchive
     u8 *data;
 };
 
-extern struct OpenedFile gUnknown_202D2A8[];
+extern struct OpenedFile gFileCache[64];
 
-extern u32 gUnknown_203B094;
+extern u32 gFileCacheCursorPosition;
 extern u32 gUnknown_202D2A4;
 
 extern int sprintf(char *, const char *, ...);
@@ -41,11 +41,11 @@ void InitFileSystem(void)
 
     for (i = 0; i < 64; i++)
     {
-        gUnknown_202D2A8[i].file = NULL;
-        gUnknown_202D2A8[i].data = NULL;
+        gFileCache[i].file = NULL;
+        gFileCache[i].data = NULL;
     }
 
-    gUnknown_203B094 = 0;
+    gFileCacheCursorPosition = 0;
     gUnknown_202D2A4 = 1;
 }
 
@@ -62,8 +62,8 @@ struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
     s32 left, right;
     s32 cursor;
     s32 i;
-    s32 magic = 0;
-    s32 magicFound;
+    u32 magic = 0;
+    bool32 magicFound;
     struct File *entries;
     struct File *file;
 
@@ -71,7 +71,7 @@ struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
 
     magicFound = 0;
 
-    if (!(u8)magic)
+    if (!(bool8)magic)
         magicFound = 1;
 
     if (!magicFound)
@@ -108,18 +108,18 @@ struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
         return NULL;
     }
 
-    cursor = gUnknown_203B094;
+    cursor = gFileCacheCursorPosition;
 
     for (i = 0; i < 64; i++)
     {
         cursor++;
         if (cursor > 63)
             cursor = 0;
-        if (!gUnknown_202D2A8[cursor].file)
+        if (!gFileCache[cursor].file)
         {
-            gUnknown_202D2A8[cursor].file = file;
-            gUnknown_202D2A8[cursor].data = NULL;
-            return &gUnknown_202D2A8[cursor];
+            gFileCache[cursor].file = file;
+            gFileCache[cursor].data = NULL;
+            return &gFileCache[cursor];
         }
     }
 
@@ -157,11 +157,11 @@ void CloseFile(struct OpenedFile *openedFile)
 
     for (i = 0; i < 64; i++)
     {
-        if (&gUnknown_202D2A8[i] == openedFile)
+        if (&gFileCache[i] == openedFile)
         {
-            gUnknown_202D2A8[i].file = NULL;
-            gUnknown_202D2A8[i].data = NULL;
-            gUnknown_203B094 = i;
+            gFileCache[i].file = NULL;
+            gFileCache[i].data = NULL;
+            gFileCacheCursorPosition = i;
             return;
         }
     }

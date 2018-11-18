@@ -86,7 +86,7 @@ gUnknown_203B08C = .; /* 203B08C */
 gUnknown_203B090 = .; /* 203B090 */
 	. += 0x4;
 
-gUnknown_203B094 = .; /* 203B094 */
+gFileCacheCursorPosition = .; /* 203B094 */
 	. += 0x4;
 
 gUnknown_203B098 = .; /* 203B098 */

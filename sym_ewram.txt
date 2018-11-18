@@ -15,19 +15,20 @@ gUnknown_2000A80 = .; /* 2000A80 */
 gUnknown_2000A88 = .; /* 2000A88 */
 	. += 0x400;
 
-gUnknown_2000E88 = .; /* 2000E88 */
+gHeapDescriptorList = .; /* 2000E88 */
 	. += 0x20;
 
-gUnknown_2000EA8 = .; /* 2000EA8 */
-	. += 0x8;
+gHeapCount = .; /* 2000EA8 */
+	. += 0x4;
+	. = ALIGN(16);
 
-gUnknown_2000EB0 = .; /* 2000EB0 */
+gMainHeapDescriptor = .; /* 2000EB0 */
 	. += 0x20;
 
-gHeapHeader = .; /* 2000ED0 */
+gMainHeapFreeList = .; /* 2000ED0 */
 	. += 0x300;
 
-gHeap = .; /* 20011D0 */
+gMainHeap = .; /* 20011D0 */
 	. += 0x24000;
 
 gBGPaletteUsed = .; /* 20251D0 */
@@ -156,8 +157,11 @@ gUnknown_20274B0 = .; /* 20274B0 */
 gUnknown_20274B4 = .; /* 20274B4 */
 	. += 0x3B00;
 
-gUnknown_202AFB4 = .; /* 202AFB4 */
-	. += 0xC;
+gKanji = .; /* 202AFB4 */
+	. += 0x8;
+
+gUnknown_202AFBC = .; /* 202AFBC */
+	. += 0x4;
 
 gUnknown_202AFC0 = .; /* 202AFC0 */
 	. += 0x60;
@@ -237,11 +241,8 @@ gUnknown_202D2A0 = .; /* 202D2A0 */
 gUnknown_202D2A4 = .; /* 202D2A4 */
 	. += 0x4;
 
-gUnknown_202D2A8 = .; /* 202D2A8 */
-	. += 0x110;
-
-gUnknown_202D3B8 = .; /* 202D3B8 */
-	. += 0xF0;
+gFileCache = .; /* 202D2A8 */
+	. += 0x200;
 
 gUnknown_202D4A8 = .; /* 202D4A8 */
 	. += 0x4;
@@ -514,14 +515,11 @@ gUnknown_202EC4C = .; /* 202EC4C */
 gUnknown_202EC50 = .; /* 202EC50 */
 	. += 0x38;
 
-gUnknown_202EC88 = .; /* 202EC88 */
+gDungeonNameBannerPalette = .; /* 202EC88 */
 	. += 0x4;
 
-gUnknown_202EC8C = .; /* 202EC8C */
-	. += 0x4;
-
-gUnknown_202EC90 = .; /* 202EC90 */
-	. += 0x4;
+gDungeonNameBannerFontFile = .; /* 202EC8C */
+	. += 0x8;
 
 gUnknown_202EC94 = .; /* 202EC94 */
 	. += 0x4;
@@ -850,10 +848,10 @@ gUnknown_202F3D0 = .; /* 202F3D0 */
 gUnknown_202F3D8 = .; /* 202F3D8 */
 	. += 0x8;
 
-gUnknown_202F3E0 = .; /* 202F3E0 */
+gMonsterParameters = .; /* 202F3E0 */
 	. += 0x4;
 
-gUnknown_202F3E4 = .; /* 202F3E4 */
+gMonsterParametersFile = .; /* 202F3E4 */
 	. += 0x4;
 
 gUnknown_202F3E8 = .; /* 202F3E8 */
@@ -868,11 +866,8 @@ gUnknown_20384E8 = .; /* 20384E8 */
 gUnknown_20384F0 = .; /* 20384F0 */
 	. += 0x4B0;
 
-gUnknown_20389A0 = .; /* 20389A0 */
-	. += 0x4;
-
-gUnknown_20389A4 = .; /* 20389A4 */
-	. += 0x4;
+gItemParametersFile = .; /* 20389A0 */
+	. += 0x8;
 
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;
@@ -883,7 +878,7 @@ gUnknown_2038C10 = .; /* 2038C10 */
 gUnknown_2038C28 = .; /* 2038C28 */
 	. += 0x3C;
 
-gUnknown_2038C64 = .; /* 2038C64 */
+gWazaParametersFile = .; /* 2038C64 */
 	. += 0x4;
 
 gUnknown_2038C68 = .; /* 2038C68 */

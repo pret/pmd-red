@@ -1,7 +1,15 @@
 #include "global.h"
+#include "memory.h"
 
-extern void InitHeapInternal(void);
+extern struct HeapFreeListElement gMainHeapFreeList[32];
+extern u8 gMainHeap[HEAP_SIZE];
+extern u32 gHeapCount;
+extern struct HeapDescriptor gMainHeapDescriptor;
+extern struct HeapDescriptor *gHeapDescriptorList[8];
+
 extern void CpuClear(u32 *dest, s32 size);
+
+void InitHeapInternal(void);
 
 void InitHeap(void)
 {
@@ -82,4 +90,56 @@ void MemoryCopy32(u32 *dest, u32 *src, s32 size)
         size -= 4;
         *dest++ = *src++;
     }
+}
+
+void InitHeapInternal(void)
+{
+    struct HeapSettings settings;
+
+    settings.start = gMainHeap;
+    settings.size = HEAP_SIZE;
+    gHeapCount = 0;
+    DoInitHeap(&gMainHeapDescriptor, &settings, gMainHeapFreeList, sizeof(gMainHeapFreeList) / sizeof(struct HeapFreeListElement));
+}
+
+void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings, struct HeapFreeListElement *freeList, u32 freeListLength)
+{
+    u32 aligned_size;
+
+    aligned_size = settings->size & 0xFFFFFFFC;
+
+    gHeapDescriptorList[gHeapCount++] = descriptor;
+
+    descriptor->start = settings->start;
+    descriptor->size = aligned_size;
+    descriptor->unk0 = 2;
+    descriptor->unk4 = 0;
+    descriptor->freeList = freeList;
+    descriptor->freeCount = 1;
+    descriptor->freeListLength = freeListLength;
+
+    freeList->unk_atb = 0;
+    freeList->atb = 0;
+    freeList->block.start = descriptor->start;
+    freeList->block.size = aligned_size;
+    freeList->block.allocatedSize = 0;
+    freeList->grp = 0;
+}
+
+void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapFreeListElement *start, u32 freeListMax)
+{
+    u32 freeListSize;
+    u32 aligned_size;
+    u32 alignment;
+    struct HeapFreeListElement *freeList;
+    struct HeapSettings settings;
+
+    freeListSize = freeListMax * 3;
+    alignment = ~3;
+    freeListSize *= 8;
+    aligned_size = (start->atb - freeListSize) & alignment; //possible struct misalignment?
+    freeList = (struct HeapFreeListElement *)start->unk_atb;
+    settings.start = &((u8 *)start->unk_atb)[freeListSize];
+    settings.size = aligned_size;
+    DoInitHeap(parentHeap, &settings, freeList, freeListMax);
 }

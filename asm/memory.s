@@ -5,107 +5,6 @@
 
 	.text
 	
-	thumb_func_start InitHeapInternal
-InitHeapInternal:
-	push {lr}
-	sub sp, 0x8
-	ldr r0, =gHeap
-	str r0, [sp]
-	movs r0, 0x90
-	lsls r0, 10
-	str r0, [sp, 0x4]
-	ldr r1, =gUnknown_2000EA8
-	movs r0, 0
-	str r0, [r1]
-	ldr r0, =gUnknown_2000EB0
-	ldr r2, =gHeapHeader
-	mov r1, sp
-	movs r3, 0x20
-	bl DoInitHeap
-	add sp, 0x8
-	pop {r0}
-	bx r0
-	.align 2, 0
-	.pool
-	thumb_func_end InitHeapInternal
-
-	thumb_func_start DoInitHeap
-DoInitHeap:
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	ldr r4, [r1, 0x4]
-	mov r9, r4
-	movs r4, 0x4
-	negs r4, r4
-	mov r5, r9
-	ands r5, r4
-	mov r9, r5
-	ldr r6, =gUnknown_2000E88
-	ldr r4, =gUnknown_2000EA8
-	mov r8, r4
-	ldr r5, [r4]
-	lsls r4, r5, 2
-	adds r4, r6
-	str r0, [r4]
-	adds r5, 0x1
-	mov r4, r8
-	str r5, [r4]
-	ldr r5, [r1]
-	str r5, [r0, 0x14]
-	mov r1, r9
-	str r1, [r0, 0x18]
-	movs r1, 0x2
-	str r1, [r0]
-	movs r4, 0
-	str r4, [r0, 0x4]
-	str r2, [r0, 0x8]
-	movs r1, 0x1
-	str r1, [r0, 0xC]
-	str r3, [r0, 0x10]
-	str r4, [r2]
-	str r4, [r2, 0x4]
-	str r5, [r2, 0xC]
-	mov r5, r9
-	str r5, [r2, 0x10]
-	str r4, [r2, 0x14]
-	str r4, [r2, 0x8]
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-	.pool
-	thumb_func_end DoInitHeap
-
-	thumb_func_start InitSubHeap
-InitSubHeap:
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r3, r2, 0
-	lsls r4, r3, 1
-	adds r4, r3
-	movs r2, 0x4
-	negs r2, r2
-	lsls r4, 3
-	ldr r5, [r1, 0x4]
-	subs r5, r4
-	ands r5, r2
-	ldr r2, [r1]
-	adds r4, r2, r4
-	str r4, [sp]
-	str r5, [sp, 0x4]
-	mov r1, sp
-	bl DoInitHeap
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end InitSubHeap
-
 	thumb_func_start xxx_memory_attr_related
 xxx_memory_attr_related:
 	push {lr}
@@ -201,7 +100,7 @@ _080030C2:
 _080030CC:
 	movs r7, 0x1
 	negs r7, r7
-	ldr r1, =0x24001
+	ldr r1, _08003100
 	movs r4, 0
 	ldr r3, [r5, 0x8]
 	ldr r2, [r5, 0xC]
@@ -229,7 +128,7 @@ _080030FC:
 	adds r0, r7, 0
 	b _08003108
 	.align 2, 0
-	.pool
+_08003100: .4byte 0x00024001
 _08003104:
 	movs r0, 0x1
 	negs r0, r0
@@ -555,7 +454,7 @@ _LocateSet:
 	adds r6, r2, 0
 	cmp r5, 0
 	bne _0800335C
-	ldr r5, =gUnknown_2000EB0
+	ldr r5, =gMainHeapDescriptor
 _0800335C:
 	asrs r4, r6, 8
 	movs r0, 0x1
@@ -619,7 +518,7 @@ MemoryAlloc:
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
-	ldr r0, =gUnknown_2000EB0
+	ldr r0, =gMainHeapDescriptor
 	adds r1, r3, 0
 	bl DoAlloc
 	pop {r1}
@@ -632,7 +531,7 @@ MemoryAlloc:
 MemoryFree:
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =gUnknown_2000EB0
+	ldr r0, =gMainHeapDescriptor
 	bl DoFree
 	pop {r0}
 	bx r0
@@ -650,7 +549,7 @@ MemoryLocate_LocalCreate:
 	adds r6, r3, 0
 	cmp r4, 0
 	bne _08003412
-	ldr r4, =gUnknown_2000EB0
+	ldr r4, =gMainHeapDescriptor
 _08003412:
 	adds r0, r4, 0
 	movs r1, 0x9
@@ -728,11 +627,11 @@ _080034A2:
 	movs r0, 0
 	mov r12, r0
 	movs r3, 0
-	ldr r6, =gUnknown_2000EA8
+	ldr r6, =gHeapCount
 	ldr r0, [r6]
 	cmp r12, r0
 	bge _080034F2
-	ldr r5, =gUnknown_2000E88
+	ldr r5, =gHeapDescriptorList
 	adds r1, r6, 0
 	adds r7, r5, 0
 	movs r2, 0
@@ -746,7 +645,7 @@ _080034BC:
 	str r0, [r1]
 	cmp r3, r0
 	bge _080034F8
-	ldr r1, =gUnknown_2000EA8
+	ldr r1, =gHeapCount
 	adds r2, r7
 _080034D2:
 	ldr r0, [r2, 0x4]
@@ -800,7 +699,7 @@ DoFree:
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0800352E
-	ldr r4, =gUnknown_2000EB0
+	ldr r4, =gMainHeapDescriptor
 _0800352E:
 	cmp r1, 0
 	beq _080035E4
