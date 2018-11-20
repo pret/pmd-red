@@ -1,29 +1,5 @@
 #include "global.h"
-
-struct File
-{
-    char *name;
-    u8 *data;
-};
-
-struct OpenedFile
-{
-    struct File *file;
-    u8 *data;
-};
-
-struct FileArchive
-{
-    char magic[8];
-    s32 count;
-    struct File *entries;
-};
-
-struct SiroArchive
-{
-    u32 magic;
-    u8 *data;
-};
+#include "file_system.h"
 
 extern struct OpenedFile gFileCache[64];
 
@@ -56,7 +32,7 @@ u32 sub_800A8F8(u32 value)
     return oldValue;
 }
 
-struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
+struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc)
 {
     char buffer[0x12C];
     s32 left, right;
@@ -138,7 +114,7 @@ u8 *GetFileDataPtr(struct OpenedFile *openedFile, int unused)
     return GetSiroPtr(openedFile);
 }
 
-struct OpenedFile *OpenFileAndGetFileDataPtr(char *filename, struct FileArchive *arc)
+struct OpenedFile *OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
 {
     struct OpenedFile *openedFile = OpenFile(filename, arc);
     if (openedFile)
@@ -146,7 +122,7 @@ struct OpenedFile *OpenFileAndGetFileDataPtr(char *filename, struct FileArchive 
     return openedFile;
 }
 
-struct OpenedFile *Call_OpenFileAndGetFileDataPtr(char *filename, struct FileArchive *arc)
+struct OpenedFile *Call_OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
 {
     return OpenFileAndGetFileDataPtr(filename, arc);
 }
