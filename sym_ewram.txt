@@ -6,7 +6,7 @@ gUnknown_20008F0 = .; /* 20008F0 */
 gUnknown_2000970 = .; /* 2000970 */
 	. += 0xC0;
 
-gUnknown_2000A30 = .; /* 2000A30 */
+gMPlayMemAccArea = .; /* 2000A30 */
 	. += 0x50;
 
 gUnknown_2000A80 = .; /* 2000A80 */
@@ -82,13 +82,13 @@ gUnknown_2025EA8 = .; /* 2025EA8 */
 gUnknown_20262A8 = .; /* 20262A8 */
 	. += 0x400;
 
-gUnknown_20266A8 = .; /* 20266A8 */
+gSpriteCount = .; /* 20266A8 */
 	. += 0x8;
 
 gUnknown_20266B0 = .; /* 20266B0 */
 	. += 0x780;
 
-gUnknown_2026E30 = .; /* 2026E30 */
+gCharMemCursor = .; /* 2026E30 */
 	. += 0x8;
 
 gUnknown_2026E38 = .; /* 2026E38 */
@@ -519,7 +519,10 @@ gDungeonNameBannerPalette = .; /* 202EC88 */
 	. += 0x4;
 
 gDungeonNameBannerFontFile = .; /* 202EC8C */
-	. += 0x8;
+	. += 0x4;
+
+gDungeonNameBannerFont = .; /* 202EC90 */
+	. += 0x4;
 
 gUnknown_202EC94 = .; /* 202EC94 */
 	. += 0x4;

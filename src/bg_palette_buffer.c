@@ -18,7 +18,7 @@ void InitBGPaletteBuffer(void)
 
     u8* p;
 
-    ptr = gUnknown_20251F0;
+    ptr = gBGPaletteBuffer;
 
     i = 0x80;
     i <<= 2;
@@ -30,12 +30,12 @@ void InitBGPaletteBuffer(void)
 
     paletteUsed = TRUE;
 
-    p = gUnknown_20251D0;
+    p = gBGPaletteUsed;
     p += 31;
 
     do
         *p-- = paletteUsed;
-    while ((s32) p >= (s32) &gUnknown_20251D0);
+    while ((s32) p >= (s32) &gBGPaletteUsed);
 }
 void SetBGPaletteBufferColorRGB(s32 index, u8 *RGBArray, s32 a3, u8 *a4)
 {

@@ -26,7 +26,7 @@ struct HeapFreeListElement
 struct HeapDescriptor
 {
     u32 unk0;
-    u32 unk4;
+    struct HeapDescriptor *parentHeap;
     struct HeapFreeListElement *freeList;
     s32 freeCount;
     u32 freeListLength;
@@ -51,6 +51,6 @@ void MemoryCopy32(u32 *dest, u32 *src, s32 size);
 
 void InitHeapInternal(void);
 void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
-void InitSubHeap(struct HeapDescriptor *, struct HeapFreeListElement *, u32);
+void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock *, u32);
 
 #endif // GUARD_MEMORY_H

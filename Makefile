@@ -60,6 +60,9 @@ $(BUILD_DIR)/src/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
 $(BUILD_DIR)/src/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
 $(BUILD_DIR)/src/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 
+$(BUILD_DIR)/src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+$(BUILD_DIR)/src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+
 #### Main Rules ####
 
 ALL_BUILDS := red

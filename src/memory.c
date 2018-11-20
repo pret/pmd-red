@@ -113,7 +113,7 @@ void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings
     descriptor->start = settings->start;
     descriptor->size = aligned_size;
     descriptor->unk0 = 2;
-    descriptor->unk4 = 0;
+    descriptor->parentHeap = NULL;
     descriptor->freeList = freeList;
     descriptor->freeCount = 1;
     descriptor->freeListLength = freeListLength;
@@ -126,7 +126,7 @@ void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings
     freeList->grp = 0;
 }
 
-void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapFreeListElement *start, u32 freeListMax)
+void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock *block, u32 freeListMax)
 {
     u32 freeListSize;
     u32 aligned_size;
@@ -137,9 +137,9 @@ void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapFreeListElement *
     freeListSize = freeListMax * 3;
     alignment = ~3;
     freeListSize *= 8;
-    aligned_size = (start->atb - freeListSize) & alignment; //possible struct misalignment?
-    freeList = (struct HeapFreeListElement *)start->unk_atb;
-    settings.start = &((u8 *)start->unk_atb)[freeListSize];
+    aligned_size = (block->size - freeListSize) & alignment;
+    freeList = (struct HeapFreeListElement *)block->start;
+    settings.start = &((u8 *)block->start)[freeListSize];
     settings.size = aligned_size;
     DoInitHeap(parentHeap, &settings, freeList, freeListMax);
 }

@@ -1,13 +1,10 @@
 	. = ALIGN(2);
 
-gUnknown_2039ED0 = .; /* 2039ED0 */
+gSoundInfo = .; /* 2039ED0 */
 	. += 0xFB0;
 
-gUnknown_203AE80 = .; /* 203AE80 */
-	. += 0x4;
-
-gUnknown_203AE84 = .; /* 203AE84 */
-	. += 0x84;
+gMPlayJumpTable = .; /* 203AE80 */
+	. += 0x88;
 
 gUnknown_203AF08 = .; /* 203AF08 */
 	. += 0x4;
@@ -15,7 +12,7 @@ gUnknown_203AF08 = .; /* 203AF08 */
 gUnknown_203AF0C = .; /* 203AF0C */
 	. += 0x4;
 
-gUnknown_203AF10 = .; /* 203AF10 */
+gCgbChans = .; /* 203AF10 */
 	. += 0x100;
 
 gFlashTimeoutFlag = .; /* 203B010 */

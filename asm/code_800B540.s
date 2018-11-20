@@ -1062,7 +1062,7 @@ sub_800BD08:
 	ands r3, r1
 	strh r3, [r0, 0xA]
 	ldrh r0, [r0, 0xA]
-	bl sub_80AEF24
+	bl m4aSoundInit
 	ldr r0, _0800BDB8
 	movs r2, 0
 	strh r2, [r0]
@@ -1184,7 +1184,7 @@ _0800BE4C:
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r6, 0
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 _0800BE70:
 	cmp r4, 0
 	beq _0800BE78
@@ -1258,19 +1258,19 @@ _0800BEE0:
 	movs r1, 0x1
 	strh r1, [r0]
 	adds r0, r6, 0
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	ldr r4, _0800BF44
 	adds r0, r4, 0
-	bl sub_80AF198
+	bl m4aMPlayImmInit
 	adds r0, r4, 0
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_80AFF50
+	bl m4aMPlayVolumeControl
 	adds r0, r6, 0
-	bl sub_80AF074
+	bl m4aSongNumStop
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80AF170
+	bl m4aMPlayFadeIn
 _0800BF26:
 	cmp r7, 0
 	beq _0800BF2E
@@ -1333,7 +1333,7 @@ sub_800BF80:
 	cmp r1, r0
 	beq _0800BFA2
 	ldr r0, _0800BFC8
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800BFA2:
 	ldr r0, _0800BFC0
 	ldr r2, _0800BFC4
@@ -1392,7 +1392,7 @@ _0800BFE8:
 	strh r0, [r1]
 	ldr r0, _0800C028
 	adds r1, r4, 0
-	bl sub_80AF140
+	bl m4aMPlayFadeOut
 	b _0800C044
 	.align 2, 0
 _0800C018: .4byte gUnknown_202D690
@@ -1403,7 +1403,7 @@ _0800C028: .4byte gUnknown_20008F0
 _0800C02C:
 	strh r2, [r3]
 	ldr r0, _0800C038
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	b _0800C044
 	.align 2, 0
 _0800C038: .4byte gUnknown_20008F0
@@ -1506,7 +1506,7 @@ _0800C0B4:
 	strb r2, [r0]
 	ldr r0, _0800C11C
 	movs r1, 0x1
-	bl sub_80AF150
+	bl m4aMPlayFadeOutTemporarily
 	b _0800C15E
 	.align 2, 0
 _0800C0FC: .4byte 0x000003e5
@@ -1529,9 +1529,9 @@ _0800C12C:
 	movs r0, 0x3
 	strh r0, [r4]
 	ldr r0, _0800C140
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	ldrh r0, [r6]
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	b _0800C15E
 	.align 2, 0
 _0800C140: .4byte gUnknown_20008F0
@@ -1542,9 +1542,9 @@ _0800C144:
 	cmp r0, 0x1
 	bls _0800C15E
 	ldr r0, _0800C17C
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	ldrh r0, [r6]
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	movs r0, 0x3
 _0800C15C:
 	strh r0, [r4]
@@ -1618,7 +1618,7 @@ _0800C1DC:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	movs r0, 0x1
 	strh r0, [r4]
 	mov r0, r8
@@ -1693,7 +1693,7 @@ _0800C22C:
 	mov r0, r8
 	movs r1, 0xF
 	adds r2, r7, 0
-	bl sub_80AFF50
+	bl m4aMPlayVolumeControl
 _0800C27E:
 	cmp r6, 0
 	beq _0800C286
@@ -1705,7 +1705,7 @@ _0800C286:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C290: .4byte gUnknown_9E8665C
+_0800C290: .4byte gMPlayTable
 _0800C294: .4byte gUnknown_3000FD8
 	thumb_func_end sub_800C214
 
@@ -1736,7 +1736,7 @@ sub_800C298:
 	movs r5, 0x4
 _0800C2C8:
 	ldr r0, [r6]
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	strh r7, [r4]
 	mov r2, r8
 	strh r2, [r4, 0x2]
@@ -1756,7 +1756,7 @@ _0800C2C8:
 	.align 2, 0
 _0800C2F0: .4byte 0x000003e5
 _0800C2F4: .4byte gUnknown_3000FE8
-_0800C2F8: .4byte gUnknown_9E8665C
+_0800C2F8: .4byte gMPlayTable
 _0800C2FC:
 	adds r0, r5, 0
 	bl sub_800CAAC
@@ -1782,7 +1782,7 @@ _0800C2FC:
 	bl nullsub_21
 	b _0800C3DE
 	.align 2, 0
-_0800C330: .4byte gUnknown_9E8665C
+_0800C330: .4byte gMPlayTable
 _0800C334: .4byte gUnknown_3000FD8
 _0800C338:
 	bl sub_800B620
@@ -1792,7 +1792,7 @@ _0800C338:
 	cmp r0, r5
 	bne _0800C35A
 	adds r0, r7, 0
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	movs r1, 0
 	movs r0, 0
 	strh r0, [r4]
@@ -1823,7 +1823,7 @@ _0800C364:
 	mov r0, r8
 	strh r0, [r1]
 	ldr r0, _0800C3A4
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800C38C:
 	cmp r4, 0
 	beq _0800C3DE
@@ -1854,7 +1854,7 @@ _0800C3A8:
 	mov r2, r8
 	strh r2, [r1]
 	ldr r0, _0800C3F4
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800C3D6:
 	cmp r4, 0
 	beq _0800C3DE
@@ -1924,15 +1924,15 @@ _0800C43E:
 	beq _0800C46C
 	ldr r0, [r6]
 	mov r1, r9
-	bl sub_80AF140
+	bl m4aMPlayFadeOut
 	b _0800C47E
 	.align 2, 0
 _0800C460: .4byte 0x000003e5
 _0800C464: .4byte gUnknown_3000FE8
-_0800C468: .4byte gUnknown_9E8665C
+_0800C468: .4byte gMPlayTable
 _0800C46C:
 	ldr r0, [r6]
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	strh r4, [r5]
 	mov r1, r8
 	strh r1, [r5, 0x2]
@@ -1985,14 +1985,14 @@ _0800C496:
 	beq _0800C4EC
 	adds r0, r6, 0
 	mov r1, r9
-	bl sub_80AF140
+	bl m4aMPlayFadeOut
 	b _0800C4FE
 	.align 2, 0
 _0800C4E4: .4byte gUnknown_3000FD8
-_0800C4E8: .4byte gUnknown_9E8665C
+_0800C4E8: .4byte gMPlayTable
 _0800C4EC:
 	adds r0, r6, 0
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	movs r0, 0
 	strh r4, [r5]
 	mov r1, r8
@@ -2026,7 +2026,7 @@ _0800C508:
 	beq _0800C54C
 	ldr r0, _0800C548
 	mov r1, r9
-	bl sub_80AF140
+	bl m4aMPlayFadeOut
 	b _0800C556
 	.align 2, 0
 _0800C53C: .4byte 0x000003e6
@@ -2035,7 +2035,7 @@ _0800C544: .4byte gUnknown_202D68E
 _0800C548: .4byte gUnknown_2000970
 _0800C54C:
 	ldr r0, _0800C560
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	mov r0, r8
 	strh r0, [r4]
 _0800C556:
@@ -2069,7 +2069,7 @@ _0800C564:
 	beq _0800C5AC
 	ldr r0, _0800C5A8
 	mov r1, r9
-	bl sub_80AF140
+	bl m4aMPlayFadeOut
 	b _0800C5B6
 	.align 2, 0
 _0800C5A0: .4byte gUnknown_202D690
@@ -2077,7 +2077,7 @@ _0800C5A4: .4byte gUnknown_202D68E
 _0800C5A8: .4byte gUnknown_2000970
 _0800C5AC:
 	ldr r0, _0800C5CC
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 	mov r1, r8
 	strh r1, [r5]
 _0800C5B6:
@@ -2246,7 +2246,7 @@ _0800C6D8:
 	beq _0800C718
 	ldrh r0, [r2]
 _0800C6E4:
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	movs r0, 0x3
 	strh r0, [r4]
 	b _0800C8A2
@@ -2297,7 +2297,7 @@ _0800C74C: .4byte gUnknown_202D68E
 _0800C750: .4byte 0x000003e5
 _0800C754:
 	ldr r0, _0800C76C
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800C75A:
 	ldr r1, _0800C770
 	ldrh r0, [r1]
@@ -2324,7 +2324,7 @@ _0800C774:
 	cmp r0, 0
 	beq _0800C7A4
 	ldrh r0, [r3]
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	b _0800C7BE
 	.align 2, 0
 _0800C794: .4byte gUnknown_202D68A
@@ -2334,7 +2334,7 @@ _0800C7A0: .4byte gUnknown_202D694
 _0800C7A4:
 	ldr r0, _0800C7B0
 	movs r1, 0x4
-	bl sub_80AF170
+	bl m4aMPlayFadeIn
 	b _0800C7BE
 	.align 2, 0
 _0800C7B0: .4byte gUnknown_20008F0
@@ -2342,7 +2342,7 @@ _0800C7B4:
 	ldr r0, _0800C7CC
 	strh r2, [r0]
 	ldr r0, _0800C7D0
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800C7BE:
 	ldr r1, _0800C7D4
 	movs r0, 0
@@ -2402,7 +2402,7 @@ _0800C834: .4byte gUnknown_202D68A
 _0800C838: .4byte 0x000003e7
 _0800C83C:
 	ldr r0, _0800C854
-	bl sub_80AF7C0
+	bl m4aMPlayStop
 _0800C842:
 	ldr r1, _0800C858
 	movs r0, 0
@@ -2436,7 +2436,7 @@ _0800C864:
 	ldr r0, _0800C898
 	strh r2, [r0]
 	adds r0, r1, 0
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	strh r4, [r6]
 	b _0800C8A2
 	.align 2, 0
@@ -2503,10 +2503,10 @@ _0800C8F0:
 	ldr r0, [r0]
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xFF
-	bl sub_80AFF50
+	bl m4aMPlayVolumeControl
 	b _0800C926
 	.align 2, 0
-_0800C918: .4byte gUnknown_9E8665C
+_0800C918: .4byte gMPlayTable
 _0800C91C:
 	strh r0, [r4]
 	mov r1, r8
@@ -2579,8 +2579,8 @@ _0800C9A8:
 	strh r0, [r4]
 _0800C9AC:
 	ldr r0, _0800C9C8
-	bl sub_80AF7C0
-	bl sub_80AF5AC
+	bl m4aMPlayStop
+	bl m4aSoundVSyncOff
 	cmp r5, 0
 	beq _0800C9BE
 	bl sub_800B5F0
@@ -2599,7 +2599,7 @@ sub_800C9CC:
 	bl sub_800B620
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80AF628
+	bl m4aSoundVSyncOn
 	ldr r0, _0800CA08
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -2620,7 +2620,7 @@ sub_800C9CC:
 	cmp r0, 0
 	beq _0800CA1C
 	ldrh r0, [r2]
-	bl sub_80AEFA8
+	bl m4aSongNumStart
 	b _0800CA22
 	.align 2, 0
 _0800CA08: .4byte gUnknown_202D690
@@ -2630,7 +2630,7 @@ _0800CA14: .4byte gUnknown_202D688
 _0800CA18: .4byte gUnknown_202D694
 _0800CA1C:
 	ldr r0, _0800CA30
-	bl sub_80AF108
+	bl m4aMPlayContinue
 _0800CA22:
 	cmp r4, 0
 	beq _0800CA2A
@@ -2762,7 +2762,7 @@ sub_800CAE0:
 	ldrh r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
-_0800CAEC: .4byte gUnknown_9E866BC
+_0800CAEC: .4byte gSongTable
 	thumb_func_end sub_800CAE0
 
 	thumb_func_start sub_800CAF0
@@ -2782,7 +2782,7 @@ sub_800CAF0:
 	movs r0, 0x1
 	b _0800CB12
 	.align 2, 0
-_0800CB0C: .4byte gUnknown_9E8665C
+_0800CB0C: .4byte gMPlayTable
 _0800CB10:
 	movs r0, 0
 _0800CB12:

@@ -7661,7 +7661,7 @@ sub_8010960:
 	bl xxx_call_update_bg_sound_input
 	bl sub_8011860
 	movs r0, 0
-	bl sub_8004D8C
+	bl ResetSprites
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -9290,7 +9290,7 @@ sub_801169C:
 	bl xxx_call_update_bg_sound_input
 	bl sub_8011860
 	movs r0, 0
-	bl sub_8004D8C
+	bl ResetSprites
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
