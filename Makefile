@@ -50,8 +50,11 @@ ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
-LIBC   := tools/agbcc/lib/libc.a
-LIBGCC := tools/agbcc/lib/libgcc.a
+ifeq ($(OS),Windows_NT)
+LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a
+else
+LIB := -L ../../tools/agbcc/lib -lc -lgcc
+endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
@@ -64,6 +67,13 @@ $(BUILD_DIR)/src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 $(BUILD_DIR)/src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 #### Main Rules ####
+
+# Disable dependency scanning when NODEP is used for quick building
+ifeq ($(NODEP),)
+$(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include src/$(*F).c)
+$(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
+$(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
+endif
 
 ALL_BUILDS := red
 
@@ -103,21 +113,21 @@ $(ROM): %.gba: %.elf
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC)
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ ../../$(LIBC) ../../$(LIBGCC)
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
-$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
+$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	@$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
 	@$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
 
-$(BUILD_DIR)/data/%.o: data/%.s
+$(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
 
-$(BUILD_DIR)/%.o: %.s
+$(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
