@@ -4468,7 +4468,7 @@ sub_8008584:
 	adds r1, r5, r1
 	b _08008624
 	.align 2, 0
-_080085C4: .4byte gUnknown_2027490
+_080085C4: .4byte gKanji
 _080085C8: .4byte gUnknown_20274AC
 _080085CC: .4byte 0xffff0800
 _080085D0: .4byte 0x000007fe

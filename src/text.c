@@ -23,13 +23,13 @@ struct UnkTextStruct2 {
 extern char gUnknown_3000E94[];
 
 EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
-EWRAM_DATA u8 *gUnknown_2027490[2];
+EWRAM_DATA u8 *gKanji[2];
 EWRAM_DATA u16 gUnknown_2027498;
 EWRAM_DATA u8 gUnknown_20274A5;
 EWRAM_DATA u32 gUnknown_20274AC;
 EWRAM_DATA vu32 gUnknown_20274B0;
 EWRAM_DATA u8 gUnknown_20274B4[0x3b00];
-EWRAM_DATA struct OpenedFile *gKanji[2];
+EWRAM_DATA struct OpenedFile *gKanjiFiles[2];
 EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
 EWRAM_DATA u32 gUnknown_202B020;
 EWRAM_DATA u32 gUnknown_202B024;
@@ -60,10 +60,10 @@ void sub_8006218(void)
     int k;
 
     gUnknown_20274AC = 0;
-    gKanji[0] = OpenFileAndGetFileDataPtr(gUnknown_80B87B4, &gUnknown_8300500);
-    gKanji[1] = OpenFileAndGetFileDataPtr(gUnknown_80B87BC, &gUnknown_8300500);
-    gUnknown_2027490[0] = gKanji[0]->data;
-    gUnknown_2027490[1] = gKanji[1]->data;
+    gKanjiFiles[0] = OpenFileAndGetFileDataPtr(gUnknown_80B87B4, &gUnknown_8300500);
+    gKanjiFiles[1] = OpenFileAndGetFileDataPtr(gUnknown_80B87BC, &gUnknown_8300500);
+    gKanji[0] = gKanjiFiles[0]->data;
+    gKanji[1] = gKanjiFiles[1]->data;
     gUnknown_202B028[0] = 11;
     gUnknown_202B028[1] = 12;
     for (k = 0; k < 4; k++)
@@ -188,13 +188,11 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3)
     gUnknown_203B078 = gUnknown_3000E94;
     gUnknown_20274A5 = 1;
 #else
-    asm(".syntax unified\n"
-        "\tldr r2, =gUnknown_203B078\n"
+    asm_unified("\tldr r2, =gUnknown_203B078\n"
         "\tldr r0, =gUnknown_3000E94\n"
         "\tldr r1, =gUnknown_20274A5\n"
         "\tstr r0, [r2]\n"
         "\tmovs r0, 0x1\n"
-        "\tstrb r0, [r1]\n"
-        ".syntax divided");
+        "\tstrb r0, [r1]");
 #endif
 }

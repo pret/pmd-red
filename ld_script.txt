@@ -48,7 +48,6 @@ SECTIONS {
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
-        asm/bg_palette_buffer.o(.text);
         src/bg_palette_buffer.o(.text);
         asm/input.o(.text);
         asm/code_8004AA0.o(.text);
@@ -57,6 +56,7 @@ SECTIONS {
         asm/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
+		. = ALIGN(4);
         asm/text.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
@@ -71,7 +71,6 @@ SECTIONS {
         asm/code_8012A18.o(.text);
         asm/m4a_1.o(.text);
         src/m4a_2.o(.text);
-        asm/m4a_2.o(.text);
         asm/m4a_3.o(.text);
         src/m4a_4.o(.text);
         asm/syscall.o(.text);

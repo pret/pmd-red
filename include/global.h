@@ -24,6 +24,8 @@
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
+#define NAKED __attribute__((naked))
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #endif // GUARD_GLOBAL_H

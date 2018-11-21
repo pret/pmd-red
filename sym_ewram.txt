@@ -133,7 +133,7 @@ gUnknown_2027370 = .; /* 2027370 */
 gUnknown_20273B8 = .; /* 20273B8 */
 	. += 0xD8;
 
-gUnknown_2027490 = .; /* 2027490 */
+gKanji = .; /* 2027490 */
 	. += 0x8;
 
 gUnknown_2027498 = .; /* 2027498 */
@@ -157,7 +157,7 @@ gUnknown_20274B0 = .; /* 20274B0 */
 gUnknown_20274B4 = .; /* 20274B4 */
 	. += 0x3B00;
 
-gKanji = .; /* 202AFB4 */
+gKanjiFiles = .; /* 202AFB4 */
 	. += 0x8;
 
 gUnknown_202AFBC = .; /* 202AFBC */
