@@ -127,7 +127,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
 
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
-	$(AS) $(ASFLAGS) $< -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@

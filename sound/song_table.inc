@@ -1,6 +1,5 @@
 	.align 2
-	.global gSongTable
-gSongTable: @ 9E866BC
+gSongTable:: @ 9E866BC
 	song 0x9F5185C, 0, 0
 	song 0x9F5218C, 0, 0
 	song 0x9F52D24, 0, 0
