@@ -39,4 +39,3 @@ build/
 .idea/
 *.DS_Store
 *.pl
-tools/

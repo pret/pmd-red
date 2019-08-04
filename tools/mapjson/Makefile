@@ -6,10 +6,7 @@ SRCS := json11.cpp mapjson.cpp
 
 HEADERS := mapjson.h
 
-.PHONY: all clean
-
-all: mapjson
-	@:
+.PHONY: clean
 
 mapjson: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)

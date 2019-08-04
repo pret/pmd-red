@@ -22,9 +22,6 @@
 #include <cstdarg>
 #include <string>
 #include <memory>
-#include <iostream>
-#include <iterator>
-#include <cstring>
 #include "preproc.h"
 #include "c_file.h"
 #include "char_util.h"
@@ -33,41 +30,28 @@
 
 CFile::CFile(std::string filename) : m_filename(filename)
 {
-    if (filename == "-") {
-        std::string s, b;
+    FILE *fp = std::fopen(filename.c_str(), "rb");
 
-        while (!std::cin.eof()) {
-            std::getline(std::cin, b);
-            s += b + "\n";
-        }
-        m_size = s.size();
-        m_buffer = new char[m_size + 1];
-        memcpy(m_buffer, s.c_str(), m_size);
-        m_buffer[m_size] = 0;
-    } else {
-        FILE *fp = std::fopen(filename.c_str(), "rb");
+    if (fp == NULL)
+        FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename.c_str());
 
-        if (fp == NULL)
-            FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename.c_str());
+    std::fseek(fp, 0, SEEK_END);
 
-        std::fseek(fp, 0, SEEK_END);
+    m_size = std::ftell(fp);
 
-        m_size = std::ftell(fp);
+    if (m_size < 0)
+        FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
 
-        if (m_size < 0)
-            FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
+    m_buffer = new char[m_size + 1];
 
-        m_buffer = new char[m_size + 1];
+    std::rewind(fp);
 
-        std::rewind(fp);
+    if (std::fread(m_buffer, m_size, 1, fp) != 1)
+        FATAL_ERROR("Failed to read \"%s\".\n", filename.c_str());
 
-        if (std::fread(m_buffer, m_size, 1, fp) != 1)
-            FATAL_ERROR("Failed to read \"%s\".\n", filename.c_str());
+    m_buffer[m_size] = 0;
 
-        m_buffer[m_size] = 0;
-
-        std::fclose(fp);
-    }
+    std::fclose(fp);
 
     m_pos = 0;
     m_lineNum = 1;
