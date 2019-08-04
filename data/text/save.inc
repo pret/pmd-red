@@ -51,8 +51,7 @@ gUnknown_80B6CB8:: @ 80B6CB8
 	.byte 0
 	.align 2, 0
 
-	.string "pksdir0"
-	.byte 0
+	.asciz "pksdir0"
 	.align 2, 0
 
 	.incbin "baserom.gba", 0xB6D30, 0x60

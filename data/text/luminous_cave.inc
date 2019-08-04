@@ -13,17 +13,13 @@ gUnknown_80DCAB8:: @ 80DCAB8
 gUnknown_80DCAD0:: @ 80DCAD0
 	.string "#+There are those among Pokémon\n"
 	.string "#+that can evolve.#P#+Such Pokémon can evolve at this very\n"
-	.string "#+spot if they satisfy certain conditions.#P#+Evolution brings a"
-	.string "bout changes\n"
+	.string "#+spot if they satisfy certain conditions.#P#+Evolution brings about changes\n"
 	.string "#+in appearance and abilities.#P#+Not only that~2c some Pokémon even change\n"
-	.string "#+type and learn different moves.#P#+However...#W The requiremen"
-	.string "ts for\n"
+	.string "#+type and learn different moves.#P#+However...#W The requirements for\n"
 	.string "#+evolution differ among Pokémon.#P#+Some become ready for evolution\n"
 	.string "#+merely by leveling up.#P#+Still others may need special items\n"
-	.string "#+to attain evolution.#P#+Ye must also be aware of this:#P#+Once"
-	.string " it has evolved~2c a Pokémon\n"
-	.string "#+can never regain its previous form.#P#+That is why ye must thi"
-	.string "nk carefully\n"
+	.string "#+to attain evolution.#P#+Ye must also be aware of this:#P#+Once it has evolved~2c a Pokémon\n"
+	.string "#+can never regain its previous form.#P#+That is why ye must think carefully\n"
 	.string "#+before committing to evolution."
 	.byte 0
 	.align 2, 0
@@ -128,10 +124,8 @@ gUnknown_80DD104:: @ 80DD104
 	.byte 0
 	.align 2, 0
 
-	.string "pksdir0"
-	.byte 0
+	.asciz "pksdir0"
 	.align 2, 0
 
-	.string "pksdir0"
-	.byte 0
+	.asciz "pksdir0"
 	.align 2, 0

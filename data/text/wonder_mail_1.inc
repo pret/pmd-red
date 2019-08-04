@@ -184,8 +184,7 @@ gUnknown_80DE4F0:: @ 80DE4F0
 gUnknown_80DE524:: @ 80DE524
 	.string " If you want a reward~2c #C2don~27t\n"
 	.string "delete an A-OK Mail#R before getting a\n"
-	.string "#CGThank-You Mail#R back for it.#P #C2Be careful#R if you~27re g"
-	.string "oing\n"
+	.string "#CGThank-You Mail#R back for it.#P #C2Be careful#R if you~27re going\n"
 	.string "to delete any #CGA-OK Mail#R.#P Okeydoke.\n"
 	.string "Choose an #CGA-OK Mail#R\n"
 	.string "you don~27t need anymore."
@@ -249,8 +248,7 @@ gUnknown_80DE830:: @ 80DE830
 
 gUnknown_80DE864:: @ 80DE864
 	.string " Okeydoke.\n"
-	.string "Every bit of mail has been deleted.#P Let me save your adventure"
-	.string "."
+	.string "Every bit of mail has been deleted.#P Let me save your adventure."
 	.byte 0
 	.align 2, 0
 
@@ -345,6 +343,5 @@ gUnknown_80DECFC:: @ 80DECFC
 	.byte 0
 	.align 2, 0
 
-	.string "pksdir0"
-	.byte 0
+	.asciz "pksdir0"
 	.align 2, 0
