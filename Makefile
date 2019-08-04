@@ -98,9 +98,9 @@ MAKEFLAGS += --no-print-directory
 $(shell mkdir -p $(SUBDIRS))
 
 all: $(ROM)
-ifeq ($(COMPARE),1)
+	
+compare: all
 	@$(SHA1SUM) $(BUILD_NAME).sha1
-endif
 
 clean: tidy
 	$(RM) $(ALL_OBJECTS)
