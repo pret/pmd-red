@@ -1,5 +1,8 @@
 ENTRY(Start)
 
+gNumMusicPlayers = 8;
+gMaxLines = 0;
+
 SECTIONS {
     . = 0x2000000;
 
@@ -7,24 +10,16 @@ SECTIONS {
     ALIGN(4)
     {
         ewram_start = .;
-        <EWRAM>
-        . = ALIGN(4);
+        INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
-        . = ALIGN(4);
         tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
-        . = ALIGN(4);
         tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:syscalls.o(.bss);
         . = ALIGN(16);
-        <EWRAM2>
-        . = ALIGN(4);
+        INCLUDE "sym_ewram2.ld"
         tools/agbcc/lib/libc.a:impure.o(.data);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:locale.o(.data);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:mallocr.o(.data);
-        . = ALIGN(4);
         gUnknown_203BC04 = .;
         . = 0x40000;
     }
@@ -35,7 +30,7 @@ SECTIONS {
     ALIGN(4)
     {
         iwram_start = .;
-        <IWRAM>
+        INCLUDE "sym_iwram.ld"
         . = 0x8000;
     }
 
@@ -48,16 +43,20 @@ SECTIONS {
         asm/code.o(.text);
         asm/event_flag.o(.text);
         asm/code_8002774.o(.text);
+        src/memory.o(.text);
         asm/memory.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
-        asm/bg_palette_buffer.o(.text);
+        src/bg_palette_buffer.o(.text);
         asm/input.o(.text);
         asm/code_8004AA0.o(.text);
+        src/sprite.o(.text);
         asm/sprite.o(.text);
         asm/code_800558C.o(.text);
         src/random.o(.text);
+        src/text.o(.text);
+		. = ALIGN(4);
         asm/text.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
@@ -66,9 +65,14 @@ SECTIONS {
         asm/code_800B540.o(.text);
         src/flash.o(.text);
         asm/code_800D090.o(.text);
+        src/save.o(.text);
         asm/save.o(.text);
+        src/save1.o(.text);
         asm/code_8012A18.o(.text);
-        asm/m4a.o(.text);
+        asm/m4a_1.o(.text);
+        src/m4a_2.o(.text);
+        asm/m4a_3.o(.text);
+        src/m4a_4.o(.text);
         asm/syscall.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
@@ -133,23 +137,17 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
+        src/m4a_tables.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:sprintf.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:vfprintf.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:dtoa.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:impure.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:locale.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:mprec.o(.rodata);
-        . = ALIGN(4);
         tools/agbcc/lib/libc.a:syscalls.o(.rodata);
         . = ALIGN(4);
         data/data_8270000.o(.rodata);
@@ -164,7 +162,8 @@ SECTIONS {
         unk_code_end = .;
     }
 
-    unk_code_ram_end = unk_code_ram + (unk_code_end - unk_code);
+    unk_code_section_size = (unk_code_end - unk_code);
+    unk_code_ram_end = unk_code_ram + unk_code_section_size;
     end = unk_code_ram_end;
 
     . = 0x8300000;

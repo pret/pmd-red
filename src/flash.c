@@ -1,12 +1,11 @@
 #include "global.h"
 #include "gba/flash.h"
 #include "flash.h"
+#include "memory.h"
 
 extern u8 gFlashEnabled;
 
 extern FlashIntrFunc *sub_800B6E8(s32);
-extern void MemoryFill8(void *, u8, s32);
-extern void MemoryCopy8(void *, void *, s32);
 
 static u8 TryProgramSector(s32, u8 *);
 

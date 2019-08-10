@@ -1,654 +1,651 @@
-	.align 2
+	. = ALIGN(2);
 
-gUnknown_2039ED0: @ 2039ED0
-	.space 0xFB0
+gSoundInfo = .; /* 2039ED0 */
+	. += 0xFB0;
 
-gUnknown_203AE80: @ 203AE80
-	.space 0x4
+gMPlayJumpTable = .; /* 203AE80 */
+	. += 0x88;
 
-gUnknown_203AE84: @ 203AE84
-	.space 0x84
+gUnknown_203AF08 = .; /* 203AF08 */
+	. += 0x4;
 
-gUnknown_203AF08: @ 203AF08
-	.space 0x4
+gUnknown_203AF0C = .; /* 203AF0C */
+	. += 0x4;
 
-gUnknown_203AF0C: @ 203AF0C
-	.space 0x4
+gCgbChans = .; /* 203AF10 */
+	. += 0x100;
 
-gUnknown_203AF10: @ 203AF10
-	.space 0x100
+gFlashTimeoutFlag = .; /* 203B010 */
+	. += 0x4;
 
-gFlashTimeoutFlag: @ 203B010
-	.space 0x4
+PollFlashStatus = .; /* 203B014 */
+	. += 0x4;
 
-PollFlashStatus: @ 203B014
-	.space 0x4
+WaitForFlashWrite = .; /* 203B018 */
+	. += 0x4;
 
-WaitForFlashWrite: @ 203B018
-	.space 0x4
+ProgramFlashSector = .; /* 203B01C */
+	. += 0x4;
 
-ProgramFlashSector: @ 203B01C
-	.space 0x4
+gFlash = .; /* 203B020 */
+	. += 0x4;
 
-gFlash: @ 203B020
-	.space 0x4
+gFlashNumRemainingBytes = .; /* 203B024 */
+	. += 0x4;
 
-gFlashNumRemainingBytes: @ 203B024
-	.space 0x4
+EraseFlashChip = .; /* 203B028 */
+	. += 0x4;
 
-EraseFlashChip: @ 203B028
-	.space 0x4
+EraseFlashSector = .; /* 203B02C */
+	. += 0x4;
 
-EraseFlashSector: @ 203B02C
-	.space 0x4
+gFlashMaxTime = .; /* 203B030 */
+	. += 0x4;
 
-gFlashMaxTime: @ 203B030
-	.space 0x4
+errno = .; /* 203B034 */
+	. += 0x4;
 
-errno: @ 203B034
-	.space 0x4
+alt_203B038 = .;
 
-alt_203B038:
+gUnknown_203B038 = .; /* 203B038 */
+	. += 0x4;
 
-gUnknown_203B038: @ 203B038
-	.space 0x4
+gUnknown_203B03C = .; /* 203B03C */
+	. += 0x4;
 
-gUnknown_203B03C: @ 203B03C
-	.space 0x4
+gUnknown_203B040 = .; /* 203B040 */
+	. += 0x30;
 
-gUnknown_203B040: @ 203B040
-	.space 0x30
+gOtherRngState = .; /* 203B070 */
+	. += 0x4;
 
-gOtherRngState: @ 203B070
-	.space 0x4
+gUnknown_203B074 = .; /* 203B074 */
+	. += 0x4;
 
-gUnknown_203B074: @ 203B074
-	.space 0x4
+gUnknown_203B078 = .; /* 203B078 */
+	. += 0x4;
 
-gUnknown_203B078: @ 203B078
-	.space 0x4
+gRngState = .; /* 203B07C */
+	. += 0x4;
 
-gRngState: @ 203B07C
-	.space 0x4
+gUnknown_203B080 = .; /* 203B080 */
+	. += 0x4;
 
-gUnknown_203B080: @ 203B080
-	.space 0x4
+gUnknown_203B084 = .; /* 203B084 */
+	. += 0x4;
 
-gUnknown_203B084: @ 203B084
-	.space 0x4
+gUnknown_203B088 = .; /* 203B088 */
+	. += 0x4;
 
-gUnknown_203B088: @ 203B088
-	.space 0x4
+gUnknown_203B08C = .; /* 203B08C */
+	. += 0x4;
 
-gUnknown_203B08C: @ 203B08C
-	.space 0x4
+gUnknown_203B090 = .; /* 203B090 */
+	. += 0x4;
 
-gUnknown_203B090: @ 203B090
-	.space 0x4
+gFileCacheCursorPosition = .; /* 203B094 */
+	. += 0x4;
 
-gUnknown_203B094: @ 203B094
-	.space 0x4
+gUnknown_203B098 = .; /* 203B098 */
+	. += 0x1;
 
-gUnknown_203B098: @ 203B098
-	.space 0x1
+gUnknown_203B099 = .; /* 203B099 */
+	. += 0x1;
 
-gUnknown_203B099: @ 203B099
-	.space 0x1
+gUnknown_203B09A = .; /* 203B09A */
+	. += 0x1;
 
-gUnknown_203B09A: @ 203B09A
-	.space 0x1
+gUnknown_203B09B = .; /* 203B09B */
+	. += 0x1;
 
-gUnknown_203B09B: @ 203B09B
-	.space 0x1
+gUnknown_203B09C = .; /* 203B09C */
+	. += 0x4;
 
-gUnknown_203B09C: @ 203B09C
-	.space 0x4
+gUnknown_203B0A0 = .; /* 203B0A0 */
+	. += 0x4;
 
-gUnknown_203B0A0: @ 203B0A0
-	.space 0x4
+gUnknown_203B0A4 = .; /* 203B0A4 */
+	. += 0x4;
 
-gUnknown_203B0A4: @ 203B0A4
-	.space 0x4
+gUnknown_203B0A8 = .; /* 203B0A8 */
+	. += 0x2;
 
-gUnknown_203B0A8: @ 203B0A8
-	.space 0x2
+gUnknown_203B0AA = .; /* 203B0AA */
+	. += 0x2;
 
-gUnknown_203B0AA: @ 203B0AA
-	.space 0x2
+gUnknown_203B0AC = .; /* 203B0AC */
+	. += 0x2;
 
-gUnknown_203B0AC: @ 203B0AC
-	.space 0x2
+gUnknown_203B0AE = .; /* 203B0AE */
+	. += 0x2;
 
-gUnknown_203B0AE: @ 203B0AE
-	.space 0x2
+gUnknown_203B0B0 = .; /* 203B0B0 */
+	. += 0x2;
 
-gUnknown_203B0B0: @ 203B0B0
-	.space 0x2
+gUnknown_203B0B2 = .; /* 203B0B2 */
+	. += 0x2;
 
-gUnknown_203B0B2: @ 203B0B2
-	.space 0x2
+gFlashEnabled = .; /* 203B0B4 */
+	. += 0x4;
 
-gFlashEnabled: @ 203B0B4
-	.space 0x4
+gUnknown_203B0B8 = .; /* 203B0B8 */
+	. += 0x4;
 
-gUnknown_203B0B8: @ 203B0B8
-	.space 0x4
+gUnknown_203B0BC = .; /* 203B0BC */
+	. += 0x2;
 
-gUnknown_203B0BC: @ 203B0BC
-	.space 0x2
+gUnknown_203B0BE = .; /* 203B0BE */
+	. += 0xE;
 
-gUnknown_203B0BE: @ 203B0BE
-	.space 0xE
+gUnknown_203B0CC = .; /* 203B0CC */
+	. += 0x4;
 
-gUnknown_203B0CC: @ 203B0CC
-	.space 0x4
+gUnknown_203B0D0 = .; /* 203B0D0 */
+	. += 0x4;
 
-gUnknown_203B0D0: @ 203B0D0
-	.space 0x4
+gUnknown_203B0D4 = .; /* 203B0D4 */
+	. += 0x4;
 
-gUnknown_203B0D4: @ 203B0D4
-	.space 0x4
+gUnknown_203B0D8 = .; /* 203B0D8 */
+	. += 0x4;
 
-gUnknown_203B0D8: @ 203B0D8
-	.space 0x4
+gUnknown_203B0DC = .; /* 203B0DC */
+	. += 0x8;
 
-gUnknown_203B0DC: @ 203B0DC
-	.space 0x8
+gUnknown_203B0E4 = .; /* 203B0E4 */
+	. += 0x4;
 
-gUnknown_203B0E4: @ 203B0E4
-	.space 0x4
+gUnknown_203B0E8 = .; /* 203B0E8 */
+	. += 0x4;
 
-gUnknown_203B0E8: @ 203B0E8
-	.space 0x4
+gUnknown_203B0EC = .; /* 203B0EC */
+	. += 0x60;
 
-gUnknown_203B0EC: @ 203B0EC
-	.space 0x60
+gUnknown_203B14C = .; /* 203B14C */
+	. += 0x4;
 
-gUnknown_203B14C: @ 203B14C
-	.space 0x4
+gUnknown_203B150 = .; /* 203B150 */
+	. += 0x2C;
 
-gUnknown_203B150: @ 203B150
-	.space 0x2C
+gUnknown_203B17C = .; /* 203B17C */
+	. += 0x4;
 
-gUnknown_203B17C: @ 203B17C
-	.space 0x4
+gUnknown_203B180 = .; /* 203B180 */
+	. += 0x4;
 
-gUnknown_203B180: @ 203B180
-	.space 0x4
+gUnknown_203B184 = .; /* 203B184 */
+	. += 0x4;
 
-gUnknown_203B184: @ 203B184
-	.space 0x4
+gUnknown_203B188 = .; /* 203B188 */
+	. += 0x4;
 
-gUnknown_203B188: @ 203B188
-	.space 0x4
+gUnknown_203B18C = .; /* 203B18C */
+	. += 0x4;
 
-gUnknown_203B18C: @ 203B18C
-	.space 0x4
+gUnknown_203B190 = .; /* 203B190 */
+	. += 0x4;
 
-gUnknown_203B190: @ 203B190
-	.space 0x4
+gUnknown_203B194 = .; /* 203B194 */
+	. += 0x4;
 
-gUnknown_203B194: @ 203B194
-	.space 0x4
+gUnknown_203B198 = .; /* 203B198 */
+	. += 0x60;
 
-gUnknown_203B198: @ 203B198
-	.space 0x60
+gUnknown_203B1F8 = .; /* 203B1F8 */
+	. += 0x4;
 
-gUnknown_203B1F8: @ 203B1F8
-	.space 0x4
+gUnknown_203B1FC = .; /* 203B1FC */
+	. += 0x4;
 
-gUnknown_203B1FC: @ 203B1FC
-	.space 0x4
+gUnknown_203B200 = .; /* 203B200 */
+	. += 0x4;
 
-gUnknown_203B200: @ 203B200
-	.space 0x4
+gUnknown_203B204 = .; /* 203B204 */
+	. += 0x4;
 
-gUnknown_203B204: @ 203B204
-	.space 0x4
+gUnknown_203B208 = .; /* 203B208 */
+	. += 0x4;
 
-gUnknown_203B208: @ 203B208
-	.space 0x4
+gUnknown_203B20C = .; /* 203B20C */
+	. += 0x4;
 
-gUnknown_203B20C: @ 203B20C
-	.space 0x4
+gUnknown_203B210 = .; /* 203B210 */
+	. += 0x4;
 
-gUnknown_203B210: @ 203B210
-	.space 0x4
+gUnknown_203B214 = .; /* 203B214 */
+	. += 0x4;
 
-gUnknown_203B214: @ 203B214
-	.space 0x4
+gUnknown_203B218 = .; /* 203B218 */
+	. += 0x4;
 
-gUnknown_203B218: @ 203B218
-	.space 0x4
+gUnknown_203B21C = .; /* 203B21C */
+	. += 0x4;
 
-gUnknown_203B21C: @ 203B21C
-	.space 0x4
+gUnknown_203B220 = .; /* 203B220 */
+	. += 0x4;
 
-gUnknown_203B220: @ 203B220
-	.space 0x4
+gUnknown_203B224 = .; /* 203B224 */
+	. += 0x4;
 
-gUnknown_203B224: @ 203B224
-	.space 0x4
+gUnknown_203B228 = .; /* 203B228 */
+	. += 0x2;
 
-gUnknown_203B228: @ 203B228
-	.space 0x2
+gUnknown_203B22A = .; /* 203B22A */
+	. += 0x2;
 
-gUnknown_203B22A: @ 203B22A
-	.space 0x2
+gUnknown_203B22C = .; /* 203B22C */
+	. += 0x4;
 
-gUnknown_203B22C: @ 203B22C
-	.space 0x4
+gUnknown_203B230 = .; /* 203B230 */
+	. += 0x4;
 
-gUnknown_203B230: @ 203B230
-	.space 0x4
+gUnknown_203B234 = .; /* 203B234 */
+	. += 0x4;
 
-gUnknown_203B234: @ 203B234
-	.space 0x4
+gUnknown_203B238 = .; /* 203B238 */
+	. += 0x4;
 
-gUnknown_203B238: @ 203B238
-	.space 0x4
+gUnknown_203B23C = .; /* 203B23C */
+	. += 0x4;
 
-gUnknown_203B23C: @ 203B23C
-	.space 0x4
+gUnknown_203B240 = .; /* 203B240 */
+	. += 0x4;
 
-gUnknown_203B240: @ 203B240
-	.space 0x4
+gUnknown_203B244 = .; /* 203B244 */
+	. += 0x4;
 
-gUnknown_203B244: @ 203B244
-	.space 0x4
+gUnknown_203B248 = .; /* 203B248 */
+	. += 0x4;
 
-gUnknown_203B248: @ 203B248
-	.space 0x4
+gUnknown_203B24C = .; /* 203B24C */
+	. += 0x2;
 
-gUnknown_203B24C: @ 203B24C
-	.space 0x2
+gUnknown_203B24E = .; /* 203B24E */
+	. += 0x2;
 
-gUnknown_203B24E: @ 203B24E
-	.space 0x2
+gUnknown_203B250 = .; /* 203B250 */
+	. += 0x4;
 
-gUnknown_203B250: @ 203B250
-	.space 0x4
+gUnknown_203B254 = .; /* 203B254 */
+	. += 0x4;
 
-gUnknown_203B254: @ 203B254
-	.space 0x4
+gUnknown_203B258 = .; /* 203B258 */
+	. += 0x4;
 
-gUnknown_203B258: @ 203B258
-	.space 0x4
+gUnknown_203B25C = .; /* 203B25C */
+	. += 0x4;
 
-gUnknown_203B25C: @ 203B25C
-	.space 0x4
+gUnknown_203B260 = .; /* 203B260 */
+	. += 0x4;
 
-gUnknown_203B260: @ 203B260
-	.space 0x4
+gUnknown_203B264 = .; /* 203B264 */
+	. += 0x4;
 
-gUnknown_203B264: @ 203B264
-	.space 0x4
+gUnknown_203B268 = .; /* 203B268 */
+	. += 0x4;
 
-gUnknown_203B268: @ 203B268
-	.space 0x4
+gUnknown_203B26C = .; /* 203B26C */
+	. += 0x4;
 
-gUnknown_203B26C: @ 203B26C
-	.space 0x4
+gUnknown_203B270 = .; /* 203B270 */
+	. += 0x4;
 
-gUnknown_203B270: @ 203B270
-	.space 0x4
+gUnknown_203B274 = .; /* 203B274 */
+	. += 0x4;
 
-gUnknown_203B274: @ 203B274
-	.space 0x4
+gUnknown_203B278 = .; /* 203B278 */
+	. += 0x4;
 
-gUnknown_203B278: @ 203B278
-	.space 0x4
+gUnknown_203B27C = .; /* 203B27C */
+	. += 0x4;
 
-gUnknown_203B27C: @ 203B27C
-	.space 0x4
+gUnknown_203B280 = .; /* 203B280 */
+	. += 0x4;
 
-gUnknown_203B280: @ 203B280
-	.space 0x4
+gUnknown_203B284 = .; /* 203B284 */
+	. += 0x4;
 
-gUnknown_203B284: @ 203B284
-	.space 0x4
+gUnknown_203B288 = .; /* 203B288 */
+	. += 0x2;
 
-gUnknown_203B288: @ 203B288
-	.space 0x2
+gUnknown_203B28A = .; /* 203B28A */
+	. += 0x2;
 
-gUnknown_203B28A: @ 203B28A
-	.space 0x2
+gUnknown_203B28C = .; /* 203B28C */
+	. += 0x4;
 
-gUnknown_203B28C: @ 203B28C
-	.space 0x4
+gUnknown_203B290 = .; /* 203B290 */
+	. += 0x4;
 
-gUnknown_203B290: @ 203B290
-	.space 0x4
+gUnknown_203B294 = .; /* 203B294 */
+	. += 0x4;
 
-gUnknown_203B294: @ 203B294
-	.space 0x4
+gUnknown_203B298 = .; /* 203B298 */
+	. += 0x4;
 
-gUnknown_203B298: @ 203B298
-	.space 0x4
+gUnknown_203B29C = .; /* 203B29C */
+	. += 0x2;
 
-gUnknown_203B29C: @ 203B29C
-	.space 0x2
+gUnknown_203B29E = .; /* 203B29E */
+	. += 0x2;
 
-gUnknown_203B29E: @ 203B29E
-	.space 0x2
+gUnknown_203B2A0 = .; /* 203B2A0 */
+	. += 0x4;
 
-gUnknown_203B2A0: @ 203B2A0
-	.space 0x4
+gUnknown_203B2A4 = .; /* 203B2A4 */
+	. += 0x4;
 
-gUnknown_203B2A4: @ 203B2A4
-	.space 0x4
+gUnknown_203B2A8 = .; /* 203B2A8 */
+	. += 0x2;
 
-gUnknown_203B2A8: @ 203B2A8
-	.space 0x2
+gUnknown_203B2AA = .; /* 203B2AA */
+	. += 0x2;
 
-gUnknown_203B2AA: @ 203B2AA
-	.space 0x2
+gUnknown_203B2AC = .; /* 203B2AC */
+	. += 0x4;
 
-gUnknown_203B2AC: @ 203B2AC
-	.space 0x4
+gUnknown_203B2B0 = .; /* 203B2B0 */
+	. += 0x4;
 
-gUnknown_203B2B0: @ 203B2B0
-	.space 0x4
+gUnknown_203B2B4 = .; /* 203B2B4 */
+	. += 0x4;
 
-gUnknown_203B2B4: @ 203B2B4
-	.space 0x4
+gUnknown_203B2B8 = .; /* 203B2B8 */
+	. += 0x4;
 
-gUnknown_203B2B8: @ 203B2B8
-	.space 0x4
+gUnknown_203B2BC = .; /* 203B2BC */
+	. += 0x4;
 
-gUnknown_203B2BC: @ 203B2BC
-	.space 0x4
+gUnknown_203B2C0 = .; /* 203B2C0 */
+	. += 0x4;
 
-gUnknown_203B2C0: @ 203B2C0
-	.space 0x4
+gUnknown_203B2C4 = .; /* 203B2C4 */
+	. += 0x4;
 
-gUnknown_203B2C4: @ 203B2C4
-	.space 0x4
+gUnknown_203B2C8 = .; /* 203B2C8 */
+	. += 0x4;
 
-gUnknown_203B2C8: @ 203B2C8
-	.space 0x4
+gUnknown_203B2CC = .; /* 203B2CC */
+	. += 0x4;
 
-gUnknown_203B2CC: @ 203B2CC
-	.space 0x4
+gUnknown_203B2D0 = .; /* 203B2D0 */
+	. += 0x2;
 
-gUnknown_203B2D0: @ 203B2D0
-	.space 0x2
+gUnknown_203B2D2 = .; /* 203B2D2 */
+	. += 0x2;
 
-gUnknown_203B2D2: @ 203B2D2
-	.space 0x2
+gUnknown_203B2D4 = .; /* 203B2D4 */
+	. += 0x4;
 
-gUnknown_203B2D4: @ 203B2D4
-	.space 0x4
+gUnknown_203B2D8 = .; /* 203B2D8 */
+	. += 0x4;
 
-gUnknown_203B2D8: @ 203B2D8
-	.space 0x4
+gUnknown_203B2DC = .; /* 203B2DC */
+	. += 0x4;
 
-gUnknown_203B2DC: @ 203B2DC
-	.space 0x4
+gUnknown_203B2E0 = .; /* 203B2E0 */
+	. += 0x4;
 
-gUnknown_203B2E0: @ 203B2E0
-	.space 0x4
+gUnknown_203B2E4 = .; /* 203B2E4 */
+	. += 0x4;
 
-gUnknown_203B2E4: @ 203B2E4
-	.space 0x4
+gUnknown_203B2E8 = .; /* 203B2E8 */
+	. += 0x4;
 
-gUnknown_203B2E8: @ 203B2E8
-	.space 0x4
+gUnknown_203B2EC = .; /* 203B2EC */
+	. += 0x4;
 
-gUnknown_203B2EC: @ 203B2EC
-	.space 0x4
+gUnknown_203B2F0 = .; /* 203B2F0 */
+	. += 0x4;
 
-gUnknown_203B2F0: @ 203B2F0
-	.space 0x4
+gUnknown_203B2F4 = .; /* 203B2F4 */
+	. += 0x4;
 
-gUnknown_203B2F4: @ 203B2F4
-	.space 0x4
+gUnknown_203B2F8 = .; /* 203B2F8 */
+	. += 0x4;
 
-gUnknown_203B2F8: @ 203B2F8
-	.space 0x4
+gUnknown_203B2FC = .; /* 203B2FC */
+	. += 0x4;
 
-gUnknown_203B2FC: @ 203B2FC
-	.space 0x4
+gUnknown_203B300 = .; /* 203B300 */
+	. += 0x4;
 
-gUnknown_203B300: @ 203B300
-	.space 0x4
+gUnknown_203B304 = .; /* 203B304 */
+	. += 0x4;
 
-gUnknown_203B304: @ 203B304
-	.space 0x4
+gUnknown_203B308 = .; /* 203B308 */
+	. += 0x4;
 
-gUnknown_203B308: @ 203B308
-	.space 0x4
+gUnknown_203B30C = .; /* 203B30C */
+	. += 0x4;
 
-gUnknown_203B30C: @ 203B30C
-	.space 0x4
+gUnknown_203B310 = .; /* 203B310 */
+	. += 0x4;
 
-gUnknown_203B310: @ 203B310
-	.space 0x4
+gUnknown_203B314 = .; /* 203B314 */
+	. += 0x4;
 
-gUnknown_203B314: @ 203B314
-	.space 0x4
+gUnknown_203B318 = .; /* 203B318 */
+	. += 0x4;
 
-gUnknown_203B318: @ 203B318
-	.space 0x4
+gUnknown_203B31C = .; /* 203B31C */
+	. += 0x4;
 
-gUnknown_203B31C: @ 203B31C
-	.space 0x4
+gUnknown_203B320 = .; /* 203B320 */
+	. += 0x4;
 
-gUnknown_203B320: @ 203B320
-	.space 0x4
+gUnknown_203B324 = .; /* 203B324 */
+	. += 0x4;
 
-gUnknown_203B324: @ 203B324
-	.space 0x4
+gUnknown_203B328 = .; /* 203B328 */
+	. += 0x4;
 
-gUnknown_203B328: @ 203B328
-	.space 0x4
+gUnknown_203B32C = .; /* 203B32C */
+	. += 0x4;
 
-gUnknown_203B32C: @ 203B32C
-	.space 0x4
+gUnknown_203B330 = .; /* 203B330 */
+	. += 0x4;
 
-gUnknown_203B330: @ 203B330
-	.space 0x4
+gUnknown_203B334 = .; /* 203B334 */
+	. += 0x4;
 
-gUnknown_203B334: @ 203B334
-	.space 0x4
+gUnknown_203B338 = .; /* 203B338 */
+	. += 0x4;
 
-gUnknown_203B338: @ 203B338
-	.space 0x4
+gUnknown_203B33C = .; /* 203B33C */
+	. += 0x4;
 
-gUnknown_203B33C: @ 203B33C
-	.space 0x4
+gUnknown_203B340 = .; /* 203B340 */
+	. += 0x4;
 
-gUnknown_203B340: @ 203B340
-	.space 0x4
+gUnknown_203B344 = .; /* 203B344 */
+	. += 0x4;
 
-gUnknown_203B344: @ 203B344
-	.space 0x4
+gUnknown_203B348 = .; /* 203B348 */
+	. += 0x4;
 
-gUnknown_203B348: @ 203B348
-	.space 0x4
+gUnknown_203B34C = .; /* 203B34C */
+	. += 0x4;
 
-gUnknown_203B34C: @ 203B34C
-	.space 0x4
+gUnknown_203B350 = .; /* 203B350 */
+	. += 0x4;
 
-gUnknown_203B350: @ 203B350
-	.space 0x4
+gUnknown_203B354 = .; /* 203B354 */
+	. += 0x4;
 
-gUnknown_203B354: @ 203B354
-	.space 0x4
+gUnknown_203B358 = .; /* 203B358 */
+	. += 0x4;
 
-gUnknown_203B358: @ 203B358
-	.space 0x4
+gUnknown_203B35C = .; /* 203B35C */
+	. += 0x4;
 
-gUnknown_203B35C: @ 203B35C
-	.space 0x4
+gUnknown_203B360 = .; /* 203B360 */
+	. += 0x4;
 
-gUnknown_203B360: @ 203B360
-	.space 0x4
+gUnknown_203B364 = .; /* 203B364 */
+	. += 0x4;
 
-gUnknown_203B364: @ 203B364
-	.space 0x4
+gUnknown_203B368 = .; /* 203B368 */
+	. += 0x4;
 
-gUnknown_203B368: @ 203B368
-	.space 0x4
+gUnknown_203B36C = .; /* 203B36C */
+	. += 0x4;
 
-gUnknown_203B36C: @ 203B36C
-	.space 0x4
+gUnknown_203B370 = .; /* 203B370 */
+	. += 0x4;
 
-gUnknown_203B370: @ 203B370
-	.space 0x4
+gUnknown_203B374 = .; /* 203B374 */
+	. += 0x4;
 
-gUnknown_203B374: @ 203B374
-	.space 0x4
+gUnknown_203B378 = .; /* 203B378 */
+	. += 0x10;
 
-gUnknown_203B378: @ 203B378
-	.space 0x10
+gUnknown_203B388 = .; /* 203B388 */
+	. += 0x30;
 
-gUnknown_203B388: @ 203B388
-	.space 0x30
+gUnknown_203B3B8 = .; /* 203B3B8 */
+	. += 0x30;
 
-gUnknown_203B3B8: @ 203B3B8
-	.space 0x30
+gUnknown_203B3E8 = .; /* 203B3E8 */
+	. += 0x4;
 
-gUnknown_203B3E8: @ 203B3E8
-	.space 0x4
+gUnknown_203B3EC = .; /* 203B3EC */
+	. += 0x4;
 
-gUnknown_203B3EC: @ 203B3EC
-	.space 0x4
+gUnknown_203B3F0 = .; /* 203B3F0 */
+	. += 0x4;
 
-gUnknown_203B3F0: @ 203B3F0
-	.space 0x4
+gUnknown_203B3F4 = .; /* 203B3F4 */
+	. += 0x4;
 
-gUnknown_203B3F4: @ 203B3F4
-	.space 0x4
+gUnknown_203B3F8 = .; /* 203B3F8 */
+	. += 0x4;
 
-gUnknown_203B3F8: @ 203B3F8
-	.space 0x4
+gUnknown_203B3FC = .; /* 203B3FC */
+	. += 0x4;
 
-gUnknown_203B3FC: @ 203B3FC
-	.space 0x4
+gUnknown_203B400 = .; /* 203B400 */
+	. += 0x4;
 
-gUnknown_203B400: @ 203B400
-	.space 0x4
+gUnknown_203B404 = .; /* 203B404 */
+	. += 0x4;
 
-gUnknown_203B404: @ 203B404
-	.space 0x4
+gUnknown_203B408 = .; /* 203B408 */
+	. += 0x4;
 
-gUnknown_203B408: @ 203B408
-	.space 0x4
+gUnknown_203B40C = .; /* 203B40C */
+	. += 0x1;
 
-gUnknown_203B40C: @ 203B40C
-	.space 0x1
+gUnknown_203B40D = .; /* 203B40D */
+	. += 0x3;
 
-gUnknown_203B40D: @ 203B40D
-	.space 0x3
+gUnknown_203B410 = .; /* 203B410 */
+	. += 0x4;
 
-gUnknown_203B410: @ 203B410
-	.space 0x4
+gUnknown_203B414 = .; /* 203B414 */
+	. += 0x4;
 
-gUnknown_203B414: @ 203B414
-	.space 0x4
+gUnknown_203B418 = .; /* 203B418 */
+	. += 0x4;
 
-gUnknown_203B418: @ 203B418
-	.space 0x4
+gUnknown_203B41C = .; /* 203B41C */
+	. += 0x4;
 
-gUnknown_203B41C: @ 203B41C
-	.space 0x4
+gUnknown_203B420 = .; /* 203B420 */
+	. += 0x8;
 
-gUnknown_203B420: @ 203B420
-	.space 0x8
+gUnknown_203B428 = .; /* 203B428 */
+	. += 0x8;
 
-gUnknown_203B428: @ 203B428
-	.space 0x8
+gUnknown_203B430 = .; /* 203B430 */
+	. += 0x4;
 
-gUnknown_203B430: @ 203B430
-	.space 0x4
+gUnknown_203B434 = .; /* 203B434 */
+	. += 0x4;
 
-gUnknown_203B434: @ 203B434
-	.space 0x4
+gUnknown_203B438 = .; /* 203B438 */
+	. += 0x4;
 
-gUnknown_203B438: @ 203B438
-	.space 0x4
+gUnknown_203B43C = .; /* 203B43C */
+	. += 0x4;
 
-gUnknown_203B43C: @ 203B43C
-	.space 0x4
+gUnknown_203B440 = .; /* 203B440 */
+	. += 0x4;
 
-gUnknown_203B440: @ 203B440
-	.space 0x4
+gUnknown_203B444 = .; /* 203B444 */
+	. += 0xC;
 
-gUnknown_203B444: @ 203B444
-	.space 0xC
+gUnknown_203B450 = .; /* 203B450 */
+	. += 0x4;
 
-gUnknown_203B450: @ 203B450
-	.space 0x4
+gUnknown_203B454 = .; /* 203B454 */
+	. += 0x4;
 
-gUnknown_203B454: @ 203B454
-	.space 0x4
+gUnknown_203B458 = .; /* 203B458 */
+	. += 0x4;
 
-gUnknown_203B458: @ 203B458
-	.space 0x4
+gUnknown_203B45C = .; /* 203B45C */
+	. += 0x4;
 
-gUnknown_203B45C: @ 203B45C
-	.space 0x4
+gUnknown_203B460 = .; /* 203B460 */
+	. += 0x4;
 
-gUnknown_203B460: @ 203B460
-	.space 0x4
+gUnknown_203B464 = .; /* 203B464 */
+	. += 0x4;
 
-gUnknown_203B464: @ 203B464
-	.space 0x4
+gUnknown_203B468 = .; /* 203B468 */
+	. += 0x4;
 
-gUnknown_203B468: @ 203B468
-	.space 0x4
+gUnknown_203B46C = .; /* 203B46C */
+	. += 0x4;
 
-gUnknown_203B46C: @ 203B46C
-	.space 0x4
+gUnknown_203B470 = .; /* 203B470 */
+	. += 0x4;
 
-gUnknown_203B470: @ 203B470
-	.space 0x4
+gUnknown_203B474 = .; /* 203B474 */
+	. += 0x8;
 
-gUnknown_203B474: @ 203B474
-	.space 0x8
+gUnknown_203B47C = .; /* 203B47C */
+	. += 0x4;
 
-gUnknown_203B47C: @ 203B47C
-	.space 0x4
+gUnknown_203B480 = .; /* 203B480 */
+	. += 0x4;
 
-gUnknown_203B480: @ 203B480
-	.space 0x4
+gUnknown_203B484 = .; /* 203B484 */
+	. += 0x4;
 
-gUnknown_203B484: @ 203B484
-	.space 0x4
+gUnknown_203B488 = .; /* 203B488 */
+	. += 0x4;
 
-gUnknown_203B488: @ 203B488
-	.space 0x4
+gUnknown_203B48C = .; /* 203B48C */
+	. += 0x4;
 
-gUnknown_203B48C: @ 203B48C
-	.space 0x4
+gUnknown_203B490 = .; /* 203B490 */
+	. += 0x4;
 
-gUnknown_203B490: @ 203B490
-	.space 0x4
+gUnknown_203B494 = .; /* 203B494 */
+	. += 0x4;
 
-gUnknown_203B494: @ 203B494
-	.space 0x4
+gUnknown_203B498 = .; /* 203B498 */
+	. += 0x4;
 
-gUnknown_203B498: @ 203B498
-	.space 0x4
+gUnknown_203B49C = .; /* 203B49C */
+	. += 0x1;
 
-gUnknown_203B49C: @ 203B49C
-	.space 0x1
+gUnknown_203B49D = .; /* 203B49D */
+	. += 0x3;
 
-gUnknown_203B49D: @ 203B49D
-	.space 0x3
+gUnknown_203B4A0 = .; /* 203B4A0 */
+	. += 0xC;
 
-gUnknown_203B4A0: @ 203B4A0
-	.space 0xC
+gUnknown_203B4AC = .; /* 203B4AC */
+	. += 0x4;
 
-gUnknown_203B4AC: @ 203B4AC
-	.space 0x4
+gUnknown_203B4B0 = .; /* 203B4B0 */
+	. += 0x4;
 
-gUnknown_203B4B0: @ 203B4B0
-	.space 0x4
+gUnknown_203B4B4 = .; /* 203B4B4 */
+	. += 0x4;
 
-gUnknown_203B4B4: @ 203B4B4
-	.space 0x4
-
-gUnknown_203B4B8: @ 203B4B8
-	.space 0x4
+gUnknown_203B4B8 = .; /* 203B4B8 */
+	. += 0x4;

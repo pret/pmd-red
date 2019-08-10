@@ -1,10 +1,10 @@
-# Pokémon Mystery Dungeon: Red Rescue Team [![Build Status][travis-badge]][travis]
+# Pokémon Mystery Dungeon: Red Rescue Team
 
 This is a disassembly of Pokémon Mystery Dungeon: Red Rescue Team.
 
 It builds the following rom:
 
-* pmd_red.gba `md5: 2100cf6f17e12cd34f1513647dfa506b`
+* pmd_red.gba `sha1: 9f4cfc5b5f4859d17169a485462e977c7aac2b89`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
@@ -33,5 +33,3 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [pokeemerald]: https://github.com/pret/pokeemerald
 [Discord]: https://discord.gg/6EuWgX9
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
-[travis]: https://travis-ci.org/pret/pokeruby
-[travis-badge]: https://travis-ci.org/pret/pokeruby.svg?branch=master

@@ -1,33 +1,9 @@
 #include "global.h"
+#include "file_system.h"
 
-struct File
-{
-    char *name;
-    u8 *data;
-};
+extern struct OpenedFile gFileCache[64];
 
-struct OpenedFile
-{
-    struct File *file;
-    u8 *data;
-};
-
-struct FileArchive
-{
-    char magic[8];
-    s32 count;
-    struct File *entries;
-};
-
-struct SiroArchive
-{
-    u32 magic;
-    u8 *data;
-};
-
-extern struct OpenedFile gUnknown_202D2A8[];
-
-extern u32 gUnknown_203B094;
+extern u32 gFileCacheCursorPosition;
 extern u32 gUnknown_202D2A4;
 
 extern int sprintf(char *, const char *, ...);
@@ -41,11 +17,11 @@ void InitFileSystem(void)
 
     for (i = 0; i < 64; i++)
     {
-        gUnknown_202D2A8[i].file = NULL;
-        gUnknown_202D2A8[i].data = NULL;
+        gFileCache[i].file = NULL;
+        gFileCache[i].data = NULL;
     }
 
-    gUnknown_203B094 = 0;
+    gFileCacheCursorPosition = 0;
     gUnknown_202D2A4 = 1;
 }
 
@@ -56,14 +32,14 @@ u32 sub_800A8F8(u32 value)
     return oldValue;
 }
 
-struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
+struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc)
 {
     char buffer[0x12C];
     s32 left, right;
     s32 cursor;
     s32 i;
-    s32 magic = 0;
-    s32 magicFound;
+    u32 magic = 0;
+    bool32 magicFound;
     struct File *entries;
     struct File *file;
 
@@ -71,7 +47,7 @@ struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
 
     magicFound = 0;
 
-    if (!(u8)magic)
+    if (!(bool8)magic)
         magicFound = 1;
 
     if (!magicFound)
@@ -108,18 +84,18 @@ struct OpenedFile *OpenFile(char *filename, struct FileArchive *arc)
         return NULL;
     }
 
-    cursor = gUnknown_203B094;
+    cursor = gFileCacheCursorPosition;
 
     for (i = 0; i < 64; i++)
     {
         cursor++;
         if (cursor > 63)
             cursor = 0;
-        if (!gUnknown_202D2A8[cursor].file)
+        if (!gFileCache[cursor].file)
         {
-            gUnknown_202D2A8[cursor].file = file;
-            gUnknown_202D2A8[cursor].data = NULL;
-            return &gUnknown_202D2A8[cursor];
+            gFileCache[cursor].file = file;
+            gFileCache[cursor].data = NULL;
+            return &gFileCache[cursor];
         }
     }
 
@@ -138,7 +114,7 @@ u8 *GetFileDataPtr(struct OpenedFile *openedFile, int unused)
     return GetSiroPtr(openedFile);
 }
 
-struct OpenedFile *OpenFileAndGetFileDataPtr(char *filename, struct FileArchive *arc)
+struct OpenedFile *OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
 {
     struct OpenedFile *openedFile = OpenFile(filename, arc);
     if (openedFile)
@@ -146,7 +122,7 @@ struct OpenedFile *OpenFileAndGetFileDataPtr(char *filename, struct FileArchive 
     return openedFile;
 }
 
-struct OpenedFile *Call_OpenFileAndGetFileDataPtr(char *filename, struct FileArchive *arc)
+struct OpenedFile *Call_OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
 {
     return OpenFileAndGetFileDataPtr(filename, arc);
 }
@@ -157,11 +133,11 @@ void CloseFile(struct OpenedFile *openedFile)
 
     for (i = 0; i < 64; i++)
     {
-        if (&gUnknown_202D2A8[i] == openedFile)
+        if (&gFileCache[i] == openedFile)
         {
-            gUnknown_202D2A8[i].file = NULL;
-            gUnknown_202D2A8[i].data = NULL;
-            gUnknown_203B094 = i;
+            gFileCache[i].file = NULL;
+            gFileCache[i].data = NULL;
+            gFileCacheCursorPosition = i;
             return;
         }
     }

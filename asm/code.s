@@ -198,7 +198,7 @@ _08000406:
 	movs r0, 0x2
 	bl sub_800A8F8
 	movs r0, 0x1
-	bl sub_8004D8C
+	bl ResetSprites
 	movs r0, 0
 	bl xxx_update_some_bg_tiles
 	bl sub_80097B0
@@ -431,7 +431,7 @@ xxx_update_stuff:
 	bl sub_8009908
 	bl xxx_call_update_bg_sound_input
 	movs r0, 0
-	bl sub_8004D8C
+	bl ResetSprites
 	pop {r0}
 	bx r0
 	.align 2, 0

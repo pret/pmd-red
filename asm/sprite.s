@@ -5,19 +5,8 @@
 
 	.text
 
-	thumb_func_start InitSprites
-InitSprites:
-	push {lr}
-	movs r0, 0x1
-	bl sub_8004D8C
-	movs r0, 0
-	bl SetSavingIconCoords
-	pop {r0}
-	bx r0
-	thumb_func_end InitSprites
-
-	thumb_func_start sub_8004D8C
-sub_8004D8C:
+	thumb_func_start ResetSprites
+ResetSprites:
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -131,8 +120,8 @@ _08004E50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08004E68: .4byte gUnknown_20266A8
-_08004E6C: .4byte gUnknown_2026E30
+_08004E68: .4byte gSpriteCount
+_08004E6C: .4byte gCharMemCursor
 _08004E70: .4byte 0x06010000
 _08004E74: .4byte gUnknown_203B074
 _08004E78: .4byte gUnknown_20266B0
@@ -140,7 +129,7 @@ _08004E7C: .4byte gUnknown_20256A0
 _08004E80: .4byte gUnknown_20262A8
 _08004E84: .4byte gUnknown_2025EA8
 _08004E88: .4byte 0x00000804
-	thumb_func_end sub_8004D8C
+	thumb_func_end ResetSprites
 
 	thumb_func_start sub_8004E8C
 sub_8004E8C:
@@ -241,7 +230,7 @@ _08004F20:
 	strh r0, [r1, 0x2]
 	b _08004F86
 	.align 2, 0
-_08004F40: .4byte gUnknown_20266A8
+_08004F40: .4byte gSpriteCount
 _08004F44: .4byte 0x0000fcff
 _08004F48: .4byte 0x0000f1ff
 _08004F4C: .4byte 0x000003ff
@@ -459,7 +448,7 @@ _080050D8:
 	strh r0, [r2, 0x2]
 	b _08005128
 	.align 2, 0
-_080050F4: .4byte gUnknown_20266A8
+_080050F4: .4byte gSpriteCount
 _080050F8: .4byte gUnknown_20262A8
 _080050FC:
 	ldrh r1, [r6]
@@ -524,7 +513,7 @@ _08005168:
 	bx r0
 	.align 2, 0
 _08005174: .4byte gUnknown_2025EA8
-_08005178: .4byte gUnknown_20266A8
+_08005178: .4byte gSpriteCount
 _0800517C: .4byte gUnknown_20256A0
 	thumb_func_end AddSprite
 
@@ -739,8 +728,8 @@ _080052F2:
 	bx r0
 	.align 2, 0
 _080052F8: .4byte gUnknown_203B074
-_080052FC: .4byte gUnknown_2026E30
-_08005300: .4byte gUnknown_2026E30
+_080052FC: .4byte gCharMemCursor
+_08005300: .4byte gCharMemCursor
 	thumb_func_end sub_80052BC
 
 	thumb_func_start sub_8005304
@@ -801,7 +790,7 @@ sub_800533C:
 	str r0, [r1]
 	b _0800538E
 	.align 2, 0
-_08005368: .4byte gUnknown_2026E30
+_08005368: .4byte gCharMemCursor
 _0800536C: .4byte 0x06010000
 _08005370:
 	cmp r6, 0

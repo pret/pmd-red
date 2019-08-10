@@ -1,9 +1,8 @@
 	.section .rodata
 
-	.global gUnknown_9E8665C
-gUnknown_9E8665C: @ 9E8665C
-	.incbin "baserom.gba", 0x1E8665C, 0x60
+	.include "include/macros/m4a.inc"
 
-	.global gUnknown_9E866BC
-gUnknown_9E866BC: @ 9E866BC
-	.incbin "baserom.gba", 0x1E866BC
+	.include "sound/music_player_table.inc"
+	.include "sound/song_table.inc"
+
+	.incbin "baserom.gba", 0x1E8841C

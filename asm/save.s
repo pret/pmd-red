@@ -5,116 +5,18 @@
 
 	.text
 
-	thumb_func_start sub_8011C1C
-sub_8011C1C:
-	ldr r0, _08011C24
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_08011C24: .4byte gUnknown_203B17C
-	thumb_func_end sub_8011C1C
-
-	thumb_func_start sub_8011C28
-sub_8011C28:
-	ldr r1, _08011C30
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_08011C30: .4byte gUnknown_203B17C
-	thumb_func_end sub_8011C28
-
-	thumb_func_start sub_8011C34
-sub_8011C34:
-	ldr r0, _08011C3C
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_08011C3C: .4byte gUnknown_202DE28
-	thumb_func_end sub_8011C34
-
-	thumb_func_start sub_8011C40
-sub_8011C40:
-	ldr r1, _08011C48
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_08011C48: .4byte gUnknown_202DE28
-	thumb_func_end sub_8011C40
-
-	thumb_func_start sub_8011C4C
-sub_8011C4C:
-	ldr r0, _08011C54
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_08011C54: .4byte gUnknown_203B180
-	thumb_func_end sub_8011C4C
-
-	thumb_func_start sub_8011C58
-sub_8011C58:
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r2, 0
-	lsrs r1, 2
-	cmp r1, 0x1
-	ble _08011C72
-	adds r3, r4, 0x4
-	subs r1, 0x1
-_08011C68:
-	ldm r3!, {r0}
-	adds r2, r0
-	subs r1, 0x1
-	cmp r1, 0
-	bne _08011C68
-_08011C72:
-	str r2, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011C58
-
-	thumb_func_start sub_8011C7C
-sub_8011C7C:
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r2, 0
-	lsrs r1, 2
-	cmp r1, 0x1
-	ble _08011C96
-	adds r3, r4, 0x4
-	subs r1, 0x1
-_08011C8C:
-	ldm r3!, {r0}
-	adds r2, r0
-	subs r1, 0x1
-	cmp r1, 0
-	bne _08011C8C
-_08011C96:
-	ldr r0, [r4]
-	cmp r0, r2
-	bne _08011CA0
-	movs r0, 0
-	b _08011CA2
-_08011CA0:
-	movs r0, 0x1
-_08011CA2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8011C7C
-
 	thumb_func_start sub_8011CA8
 sub_8011CA8:
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
-	ldr r0, _08011CCC
+	ldr r0, =gUnknown_203B184
 	ldr r0, [r0]
-	ldr r0, _08011CD0
+	ldr r0, =0xfff
 	adds r1, r2, r0
 	cmp r1, 0
 	bge _08011CBE
-	ldr r0, _08011CD4
+	ldr r0, =0x1ffe
 	adds r1, r2, r0
 _08011CBE:
 	asrs r1, 12
@@ -124,13 +26,11 @@ _08011CBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011CCC: .4byte gUnknown_203B184
-_08011CD0: .4byte 0x00000fff
-_08011CD4: .4byte 0x00001ffe
+	.pool
 	thumb_func_end sub_8011CA8
 
-	thumb_func_start sub_8011CD8
-sub_8011CD8:
+	thumb_func_start WriteSaveSector
+WriteSaveSector:
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
@@ -139,7 +39,7 @@ sub_8011CD8:
 	bl sub_8011CA8
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8011C58
+	bl CalculateChecksum
 	ldr r0, _08011D04
 	ldr r0, [r0]
 	cmp r0, 0
@@ -183,10 +83,10 @@ _08011D3A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8011CD8
+	thumb_func_end WriteSaveSector
 
-	thumb_func_start sub_8011D40
-sub_8011D40:
+	thumb_func_start ReadSaveSector
+ReadSaveSector:
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
@@ -228,7 +128,7 @@ _08011D8A:
 _08011D8E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8011C7C
+	bl ValidateChecksum
 	lsls r0, 24
 	cmp r0, 0
 	bne _08011DA0
@@ -240,7 +140,7 @@ _08011DA2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8011D40
+	thumb_func_end ReadSaveSector
 
 	thumb_func_start sub_8011DA8
 sub_8011DA8:
@@ -265,14 +165,14 @@ sub_8011DAC:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	mov r2, r8
-	bl sub_8011D40
+	bl ReadSaveSector
 	adds r7, r0, 0
 	cmp r7, 0
 	beq _08011DE8
 	adds r0, r6, 0
 	adds r1, r5, 0
 	mov r2, r8
-	bl sub_8011D40
+	bl ReadSaveSector
 	adds r7, r0, 0
 	b _08011DF0
 	.align 2, 0
@@ -491,7 +391,7 @@ _08011F98: .4byte 0x00000444
 	thumb_func_start sub_8011F9C
 sub_8011F9C:
 	push {lr}
-	bl sub_8011D40
+	bl ReadSaveSector
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8011F9C
@@ -511,7 +411,7 @@ sub_8011FA8:
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8011D40
+	bl ReadSaveSector
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _08011FD8
@@ -554,7 +454,7 @@ sub_8011FF8:
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8011D40
+	bl ReadSaveSector
 	cmp r0, 0
 	bne _08012028
 	ldr r1, [r5, 0x14]
@@ -722,12 +622,12 @@ _080120E8:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8011CD8
+	bl WriteSaveSector
 	adds r5, r0, 0
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8011CD8
+	bl WriteSaveSector
 	adds r4, r0, 0
 	adds r0, r6, 0
 	bl MemoryFree
@@ -760,7 +660,7 @@ _080121CE:
 	thumb_func_start sub_80121D4
 sub_80121D4:
 	push {lr}
-	bl sub_8011CD8
+	bl WriteSaveSector
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80121D4
@@ -796,7 +696,7 @@ sub_80121E0:
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8011CD8
+	bl WriteSaveSector
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl MemoryFree
@@ -1791,23 +1691,5 @@ _080129F2:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80128B0
-
-	thumb_func_start sub_80129FC
-sub_80129FC:
-	push {r4,lr}
-	ldr r4, _08012A14
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _08012A0E
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-_08012A0E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08012A14: .4byte gUnknown_203B194
-	thumb_func_end sub_80129FC
 
 	.align 2, 0 @ Don't pad with nop.

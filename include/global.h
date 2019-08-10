@@ -1,10 +1,11 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <string.h>
 #include "gba/gba.h"
 
 // IDE support
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x
 #define __(x) x
 #define INCBIN_U8 {0}
@@ -13,9 +14,6 @@
 #define INCBIN_S8 {0}
 #define INCBIN_S16 {0}
 #define INCBIN_S32 {0}
-void *     memcpy (void *, const void *, size_t);
-void *     memset (void *, int, size_t);
-int     strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
@@ -26,13 +24,7 @@ int     strcmp (const char *, const char *);
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
-#define nonmatching(fndec, x) {\
-__attribute__((naked))\
-fndec\
-{\
-    asm_unified(x);\
-}\
-}
+#define NAKED __attribute__((naked))
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 

@@ -22,37 +22,7 @@ gUnknown_80B69F8: @ 80B69F8
 gUnknown_80B6A28: @ 80B6A28
 	.incbin "baserom.gba", 0xB6A28, 0xC
 
-	.global gUnknown_80B6A34
-gUnknown_80B6A34: @ 80B6A34
-	.incbin "baserom.gba", 0xB6A34, 0x48
-
-	.global gUnknown_80B6A7C
-gUnknown_80B6A7C: @ 80B6A7C
-	.incbin "baserom.gba", 0xB6A7C, 0x24
-
-	.global gUnknown_80B6AA0
-gUnknown_80B6AA0: @ 80B6AA0
-	.incbin "baserom.gba", 0xB6AA0, 0x74
-
-	.global gUnknown_80B6B14
-gUnknown_80B6B14: @ 80B6B14
-	.incbin "baserom.gba", 0xB6B14, 0x64
-
-	.global gUnknown_80B6B78
-gUnknown_80B6B78: @ 80B6B78
-	.incbin "baserom.gba", 0xB6B78, 0x10
-
-	.global gUnknown_80B6B88
-gUnknown_80B6B88: @ 80B6B88
-	.incbin "baserom.gba", 0xB6B88, 0x54
-
-	.global gUnknown_80B6BDC
-gUnknown_80B6BDC: @ 80B6BDC
-	.incbin "baserom.gba", 0xB6BDC, 0xDC
-
-	.global gUnknown_80B6CB8
-gUnknown_80B6CB8: @ 80B6CB8
-	.incbin "baserom.gba", 0xB6CB8, 0xD8
+	.include "data/text/save.inc"
 
 	.global gUnknown_80B6D90
 gUnknown_80B6D90: @ 80B6D90
