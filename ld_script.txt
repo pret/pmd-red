@@ -70,9 +70,7 @@ SECTIONS {
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
         asm/m4a_1.o(.text);
-        src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/m4a_4.o(.text);
+        src/m4a.o(.text);
         asm/syscall.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
