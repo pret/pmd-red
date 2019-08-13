@@ -110,12 +110,12 @@ bool8 ValidateChecksum(u8 *in, u32 size)
 
 void sub_8011CA8(u32 *out, s32 size)
 {
-    // Needed to match
-    if (gUnknown_203B184) {
-        size++;
-        size--;
+    if (gUnknown_203B184 == NULL) {
+        AGB_WARNING("A warning most likely went here.");
+        *out += (size + 0xFFF) / 0x1000;
+    } else {
+        *out += (size + 0xFFF) / 0x1000;
     }
-    *out += (size + 0xFFF) / 0x1000;
 }
 
 u32 WriteSaveSector(s32 *a, u8 *src, s32 size)
@@ -124,7 +124,7 @@ u32 WriteSaveSector(s32 *a, u8 *src, s32 size)
     s32 r6 = *a;
     sub_8011CA8(a, size);
     CalculateChecksum(src, size);
-    if (!gUnknown_203B184) {
+    if (gUnknown_203B184 == NULL) {
         r1 = WriteFlashData(r6, src, size);
     }
     else if (sub_800DAB8()) {
@@ -152,7 +152,7 @@ u32 ReadSaveSector(s32 *a, u8 *dest, s32 size)
     u32 r1;
     s32 r6 = *a;
     sub_8011CA8(a, size);
-    if (!gUnknown_203B184) {
+    if (gUnknown_203B184 == NULL) {
         r1 = ReadFlashData(r6, dest, size);
     }
     else if (sub_800DAB8()) {
@@ -202,7 +202,7 @@ u32 sub_8011DAC(u32 *a)
     }
     if (!r7)
     {
-        if (!gUnknown_203B184) {
+        if (gUnknown_203B184 == NULL) {
             sub_8011C28(r5->unk41C);
             sub_8011C40(r5->unk418);
             SetRngState(r5->unk420);
@@ -215,7 +215,7 @@ u32 sub_8011DAC(u32 *a)
     }
     if (!r7)
     {
-        if (!gUnknown_203B184) {
+        if (gUnknown_203B184 == NULL) {
             if (!sub_8002718(r5->unk004)) {
                 r7 = 4;
             }
