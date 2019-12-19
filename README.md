@@ -31,5 +31,5 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [pokefirered]: https://github.com/pret/pokefirered
 [pokeruby]: https://github.com/pret/pokeruby
 [pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/6EuWgX9
+[Discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
