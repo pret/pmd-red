@@ -1501,7 +1501,7 @@ gUnknown_80DDB60: @ 80DDB60
 	.incbin "baserom.gba", 0xDDB60, 0x48
 
 	.include "data/text/wonder_mail_1.inc"
-	
+
 	.global gUnknown_80DED44
 gUnknown_80DED44: @ 80DED44
 	.incbin "baserom.gba", 0xDED44, 0x4
@@ -10022,8 +10022,8 @@ gUnknown_8109CE4: @ 8109CE4
 gUnknown_8109CF4: @ 8109CF4
 	.incbin "baserom.gba", 0x109CF4, 0x3C
 
-	.global gUnknown_8109D30
-gUnknown_8109D30: @ 8109D30
+	.global gDungeons
+gDungeons: @ 8109D30
 	.incbin "baserom.gba", 0x109D30, 0x620
 
 	.global gUnknown_810A350
@@ -10294,8 +10294,8 @@ gUnknown_810E02C: @ 810E02C
 gUnknown_810E074: @ 810E074
 	.incbin "baserom.gba", 0x10E074, 0x39B4
 
-	.global gUnknown_8111A28
-gUnknown_8111A28: @ 8111A28
+	.global gDungeonNames
+gDungeonNames: @ 8111A28
 	.incbin "baserom.gba", 0x111A28, 0x80C
 
 	.global gUnknown_8112234
