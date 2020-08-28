@@ -269,3 +269,8 @@ u32 sub_8011DAC(u32 *a)
     MemoryFree(r5);
     return r7;
 }
+
+u32 sub_8011F9C(s32 *r0, u8 *r1, s32 r2)
+{
+    return ReadSaveSector(r0, r1, r2);
+}

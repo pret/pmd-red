@@ -5,14 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8011F9C
-sub_8011F9C:
-	push {lr}
-	bl ReadSaveSector
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8011F9C
-
 	thumb_func_start sub_8011FA8
 sub_8011FA8:
 	push {r4,r5,lr}
