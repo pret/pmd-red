@@ -2878,9 +2878,7 @@ gUnknown_80E6DDC: @ 80E6DDC
 gUnknown_80E6DF4: @ 80E6DF4
 	.incbin "baserom.gba", 0xE6DF4, 0x5C
 
-	.global gUnknown_80E6E50
-gUnknown_80E6E50: @ 80E6E50
-	.incbin "baserom.gba", 0xE6E50, 0x2C
+        .include "data/text/chunsoft.inc"
 
 	.global gUnknown_80E6E7C
 gUnknown_80E6E7C: @ 80E6E7C
