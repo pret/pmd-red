@@ -10124,8 +10124,8 @@ gUnknown_810AE24: @ 810AE24
 gUnknown_810AF50: @ 810AF50
 	.incbin "baserom.gba", 0x10AF50, 0xFC
 
-	.global gUnknown_810B04C
-gUnknown_810B04C: @ 810B04C
+	.global gTeamRanks
+gTeamRanks: @ 810B04C
 	.incbin "baserom.gba", 0x10B04C, 0x400
 
 	.global gUnknown_810B44C

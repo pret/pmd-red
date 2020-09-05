@@ -16467,7 +16467,7 @@ sub_8097738:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_08097744: .4byte gUnknown_810B04C
+_08097744: .4byte gTeamRanks
 	thumb_func_end sub_8097738
 
 	thumb_func_start sub_8097748
