@@ -28,9 +28,7 @@ gUnknown_80B6A28: @ 80B6A28
 gUnknown_80B6D90: @ 80B6D90
 	.incbin "baserom.gba", 0xB6D90, 0x3B4
 
-	.global gUnknown_80B7144
-gUnknown_80B7144: @ 80B7144
-	.incbin "baserom.gba", 0xB7144, 0x8
+        .include "data/text/none.inc"
 
 	.global gUnknown_80B714C
 gUnknown_80B714C: @ 80B714C
