@@ -5,16 +5,6 @@
 
 	.text
 
-	thumb_func_start nullsub_16
-nullsub_16:
-	bx lr
-	thumb_func_end nullsub_16
-
-	thumb_func_start nullsub_175
-nullsub_175:
-	bx lr
-	thumb_func_end nullsub_175
-
 	thumb_func_start sub_800AAA8
 sub_800AAA8:
 	push {lr}

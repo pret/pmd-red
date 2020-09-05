@@ -2583,9 +2583,4 @@ sub_800276C:
 	bx lr
 	thumb_func_end sub_800276C
 
-	thumb_func_start nullsub_140
-nullsub_140:
-	bx lr
-	thumb_func_end nullsub_140
-
 	.align 2, 0 @ Don't pad with nop.

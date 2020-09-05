@@ -173,3 +173,11 @@ void *UnusedGetSir0Ptr(struct SiroArchive *siro)
 void NDS_DecompressRLE(void *unused)
 {
 }
+
+void nullsub_16(void)
+{
+}
+
+void nullsub_175(void)
+{
+}
