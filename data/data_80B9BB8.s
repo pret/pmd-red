@@ -10114,9 +10114,7 @@ gUnknown_810ACC0: @ 810ACC0
 gUnknown_810AD0C: @ 810AD0C
 	.incbin "baserom.gba", 0x10AD0C, 0x40
 
-	.global gUnknown_810AD4C
-gUnknown_810AD4C: @ 810AD4C
-	.incbin "baserom.gba", 0x10AD4C, 0xD8
+        .include "data/text/type_names.inc"
 
 	.global gUnknown_810AE24
 gUnknown_810AE24: @ 810AE24
