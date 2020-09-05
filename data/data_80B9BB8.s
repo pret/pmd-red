@@ -74,9 +74,7 @@ gUnknown_80CE934: @ 80CE934
 gUnknown_80D3474: @ 80D3474
 	.incbin "baserom.gba", 0xD3474, 0xF0
 
-	.global gUnknown_80D3564
-gUnknown_80D3564: @ 80D3564
-	.incbin "baserom.gba", 0xD3564, 0xC
+        .include "data/text/pksdir0.inc"
 
 	.global gUnknown_80D3570
 gUnknown_80D3570: @ 80D3570
