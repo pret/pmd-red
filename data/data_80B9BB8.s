@@ -1398,7 +1398,11 @@ gUnknown_80DD190: @ 80DD190
 
 	.global gUnknown_80DD1A8
 gUnknown_80DD1A8: @ 80DD1A8
-	.incbin "baserom.gba", 0xDD1A8, 0x20
+        .string "Whom would you like to visit?"
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD1C8
 gUnknown_80DD1C8: @ 80DD1C8
@@ -1414,43 +1418,85 @@ gUnknown_80DD240: @ 80DD240
 
 	.global gUnknown_80DD270
 gUnknown_80DD270: @ 80DD270
-	.incbin "baserom.gba", 0xDD270, 0x40
+        .string "#+$m1 left the team to remain\n"
+        .string "#+on standby in the Friend Area."
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2B0
 gUnknown_80DD2B0: @ 80DD2B0
-	.incbin "baserom.gba", 0xDD2B0, 0x8
+        .string "Give"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2B8
 gUnknown_80DD2B8: @ 80DD2B8
-	.incbin "baserom.gba", 0xDD2B8, 0x8
+        .string "Take"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2C0
 gUnknown_80DD2C0: @ 80DD2C0
-	.incbin "baserom.gba", 0xDD2C0, 0xC
+        .string "Stand By"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2CC
 gUnknown_80DD2CC: @ 80DD2CC
-	.incbin "baserom.gba", 0xDD2CC, 0x8
+        .string "Visit"
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2D4
 gUnknown_80DD2D4: @ 80DD2D4
-	.incbin "baserom.gba", 0xDD2D4, 0x8
+        .string "Name"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2DC
 gUnknown_80DD2DC: @ 80DD2DC
-	.incbin "baserom.gba", 0xDD2DC, 0x8
+        .string "Summary"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2E4
 gUnknown_80DD2E4: @ 80DD2E4
-	.incbin "baserom.gba", 0xDD2E4, 0x8
+        .string "Moves"
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2EC
 gUnknown_80DD2EC: @ 80DD2EC
-	.incbin "baserom.gba", 0xDD2EC, 0xC
+        .string "Check IQ"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80DD2F8
 gUnknown_80DD2F8: @ 80DD2F8
-	.incbin "baserom.gba", 0xDD2F8, 0x18
+        .string "Item: #C4$i0#R "
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80DD310
 gUnknown_80DD310: @ 80DD310
