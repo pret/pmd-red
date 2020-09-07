@@ -285,15 +285,29 @@ gUnknown_80D43D8: @ 80D43D8
 
 	.global gUnknown_80D4438
 gUnknown_80D4438: @ 80D4438
-	.incbin "baserom.gba", 0xD4438, 0x14
+        .string "#+Save completed!"
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D444C
 gUnknown_80D444C: @ 80D444C
-	.incbin "baserom.gba", 0xD444C, 0x64
+        .string "#+The data could not be written.\n"
+        .string "#+Please turn off the power and remove\n"
+        .string "#+and reinsert the DS Card."
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D44B0
 gUnknown_80D44B0: @ 80D44B0
-	.incbin "baserom.gba", 0xD44B0, 0x18
+        .string "#+Save failed."
+        .byte 0
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D44C8
 gUnknown_80D44C8: @ 80D44C8
@@ -301,7 +315,12 @@ gUnknown_80D44C8: @ 80D44C8
 
 	.global gUnknown_80D45AC
 gUnknown_80D45AC: @ 80D45AC
-	.incbin "baserom.gba", 0xD45AC, 0x48
+        .string "#+Quicksaving your adventure...\n"
+        .string "#+Please don~27t turn off the power."
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80D45F4
 gUnknown_80D45F4: @ 80D45F4
@@ -317,7 +336,11 @@ gUnknown_80D473C: @ 80D473C
 
 	.global gUnknown_80D47A0
 gUnknown_80D47A0: @ 80D47A0
-	.incbin "baserom.gba", 0xD47A0, 0x18
+        .string "#+Save failed."
+        .byte 0
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80D47B8
 gUnknown_80D47B8: @ 80D47B8
