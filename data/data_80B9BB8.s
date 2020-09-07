@@ -117,12 +117,19 @@ gUnknown_80D4074: @ 80D4074
 	.incbin "baserom.gba", 0xD4074, 0x8
 
 	.global gUnknown_80D407C
-gUnknown_80D407C: @ 80D407C
-	.incbin "baserom.gba", 0xD407C, 0x4
+gUnknown_80D407C: @ 80D4074
+        .string "Yes"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D4080
 gUnknown_80D4080: @ 80D4080
-	.incbin "baserom.gba", 0xD4080, 0xC
+        .string "No"
+        .byte 0
+        .byte 0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D408C
 gUnknown_80D408C: @ 80D408C
@@ -156,7 +163,9 @@ gUnknown_80D4104: @ 80D4104
 
 	.global gUnknown_80D4120
 gUnknown_80D4120: @ 80D4120
-	.incbin "baserom.gba", 0xD4120, 0x4
+	.string "$i0"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D4124
 gUnknown_80D4124: @ 80D4124
