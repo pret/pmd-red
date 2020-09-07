@@ -201,11 +201,61 @@ gUnknown_80D4288: @ 80D4288
 
 	.global gUnknown_80D42C0
 gUnknown_80D42C0: @ 80D42C0
-	.incbin "baserom.gba", 0xD42C0, 0x14
+        .string "!!!!! Fatal !!!!!\n"
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D42D4
 gUnknown_80D42D4: @ 80D42D4
-	.incbin "baserom.gba", 0xD42D4, 0x80
+	.string "%s\n"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "POKE_DUNGEON__05"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D4354
 gUnknown_80D4354: @ 80D4354
