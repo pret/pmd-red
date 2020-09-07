@@ -1830,27 +1830,47 @@ gUnknown_80E02CC: @ 80E02CC
 
 	.global gUnknown_80E02E4
 gUnknown_80E02E4: @ 80E02E4
-	.incbin "baserom.gba", 0xE02E4, 0xC
+        .string "Check Mail"
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E02F0
 gUnknown_80E02F0: @ 80E02F0
-	.incbin "baserom.gba", 0xE02F0, 0xC
+        .string "Job List"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E02FC
 gUnknown_80E02FC: @ 80E02FC
-	.incbin "baserom.gba", 0xE02FC, 0xC
+        .string "PKMN News"
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E0308
 gUnknown_80E0308: @ 80E0308
-	.incbin "baserom.gba", 0xE0308, 0x8
+        .string "Store"
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E0310
 gUnknown_80E0310: @ 80E0310
-	.incbin "baserom.gba", 0xE0310, 0x8
+        .string "Read"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E0318
 gUnknown_80E0318: @ 80E0318
-	.incbin "baserom.gba", 0xE0318, 0xC
+        .string "Accepted"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E0324
 gUnknown_80E0324: @ 80E0324
