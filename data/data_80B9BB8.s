@@ -22,9 +22,7 @@ gUnknown_80B9C60: @ 80B9C60
 gUnknown_80B9C6C: @ 80B9C6C
 	.incbin "baserom.gba", 0xB9C6C, 0x8
 
-	.global gUnknown_80B9C74
-gUnknown_80B9C74: @ 80B9C74
-	.incbin "baserom.gba", 0xB9C74, 0x8
+        .include "data/text/efob000.inc"
 
 	.global gUnknown_80B9C7C
 gUnknown_80B9C7C: @ 80B9C7C
