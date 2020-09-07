@@ -259,7 +259,15 @@ gUnknown_80D42D4: @ 80D42D4
 
 	.global gUnknown_80D4354
 gUnknown_80D4354: @ 80D4354
-	.incbin "baserom.gba", 0xD4354, 0x44
+        .string "#+The game data is corrupted.\n"
+        .string "#+Your data will be erased."
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
+        .string "pksdir0"
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D4398
 gUnknown_80D4398: @ 80D4398
@@ -267,7 +275,13 @@ gUnknown_80D4398: @ 80D4398
 
 	.global gUnknown_80D43D8
 gUnknown_80D43D8: @ 80D43D8
-	.incbin "baserom.gba", 0xD43D8, 0x60
+        .string "#+Writing to GBA Game Pak.\n"
+        .string "#+Do not remove the GBA Game Pak.\n"
+        .string "#+Please wait with the power on."
+        .byte 0
+        .byte 0
+        .byte 0
+        .align 2,0
 
 	.global gUnknown_80D4438
 gUnknown_80D4438: @ 80D4438
