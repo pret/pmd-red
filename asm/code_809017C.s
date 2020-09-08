@@ -16046,7 +16046,7 @@ _08097470:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08097478: .4byte gUnknown_8109994
+_08097478: .4byte gStoryMissionText
 	thumb_func_end sub_8097418
 
 	thumb_func_start sub_809747C
@@ -16067,7 +16067,7 @@ _08097496:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809749C: .4byte gUnknown_8109CA8
+_0809749C: .4byte gDummyScenarioText
 	thumb_func_end sub_809747C
 
 	thumb_func_start sub_80974A0
@@ -16088,7 +16088,7 @@ _080974BA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080974C0: .4byte gUnknown_8109CA8
+_080974C0: .4byte gDummyScenarioText
 	thumb_func_end sub_80974A0
 
 	thumb_func_start sub_80974C4
@@ -16111,7 +16111,7 @@ _080974E0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080974E4: .4byte gUnknown_8109994
+_080974E4: .4byte gStoryMissionText
 	thumb_func_end sub_80974C4
 
 	thumb_func_start sub_80974E8
@@ -16263,19 +16263,19 @@ sub_80975DC:
 	b _08097612
 	.align 2, 0
 _08097600: .4byte 0xffe90000
-_08097604: .4byte gUnknown_8109CD4
+_08097604: .4byte gMeetNinetalesText
 _08097608:
 	ldr r0, _0809760C
 	b _08097612
 	.align 2, 0
-_0809760C: .4byte gUnknown_8109CE4
+_0809760C: .4byte gAvoidCaptureText
 _08097610:
 	ldr r0, _08097618
 _08097612:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08097618: .4byte gUnknown_8109CF4
+_08097618: .4byte gFinalScenarioText
 	thumb_func_end sub_80975DC
 
 	thumb_func_start sub_809761C

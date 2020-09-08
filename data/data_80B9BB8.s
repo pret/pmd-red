@@ -1782,7 +1782,13 @@ gUnknown_80DFDA4: @ 80DFDA4
 
 	.global gUnknown_80DFDBC
 gUnknown_80DFDBC: @ 80DFDBC
-	.incbin "baserom.gba", 0xDFDBC, 0x18
+	.string "RESCUE EVENT"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80DFDD4
 gUnknown_80DFDD4: @ 80DFDD4
@@ -1894,19 +1900,34 @@ gUnknown_80E0378: @ 80E0378
 
 	.global gUnknown_80E0390
 gUnknown_80E0390: @ 80E0390
-	.incbin "baserom.gba", 0xE0390, 0x10
+        .string "Bulletin Board"
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E03A0
 gUnknown_80E03A0: @ 80E03A0
-	.incbin "baserom.gba", 0xE03A0, 0xC
+        .string "Job List"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E03AC
 gUnknown_80E03AC: @ 80E03AC
-	.incbin "baserom.gba", 0xE03AC, 0xC
+        .string "Accepted"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E03B8
 gUnknown_80E03B8: @ 80E03B8
-	.incbin "baserom.gba", 0xE03B8, 0xC
+        .string "/"
+        .byte 0
+        .byte 0
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80E03C4
 gUnknown_80E03C4: @ 80E03C4
@@ -2694,8 +2715,8 @@ gUnknown_80E4A10: @ 80E4A10
 gUnknown_80E4A28: @ 80E4A28
 	.incbin "baserom.gba", 0xE4A28, 0x18
 
-	.global gUnknown_80E4A40
-gUnknown_80E4A40: @ 80E4A40
+	.global gCreditsTable
+gCreditsTable: @ 80E4A40
 	.incbin "baserom.gba", 0xE4A40, 0xEDC
 
 	.global gUnknown_80E591C
@@ -3518,19 +3539,34 @@ gUnknown_80E89B0: @ 80E89B0
 
 	.global gUnknown_80E89FC
 gUnknown_80E89FC: @ 80E89FC
-	.incbin "baserom.gba", 0xE89FC, 0x44
+        .string "This is a rescue through communication.\n"
+        .string "Get a friend to help you!"
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8A40
 gUnknown_80E8A40: @ 80E8A40
-	.incbin "baserom.gba", 0xE8A40, 0x3C
+        .string "This is a rescue through communication.\n"
+        .string "Rescue a friend!"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8A7C
 gUnknown_80E8A7C: @ 80E8A7C
-	.incbin "baserom.gba", 0xE8A7C, 0x4C
+        .string "This is a rescue through communication.\n"
+        .string "Send your thanks to your friend!"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8AC8
 gUnknown_80E8AC8: @ 80E8AC8
-	.incbin "baserom.gba", 0xE8AC8, 0x8
+        .string "Client:"
+        .byte 0
 
 	.global gUnknown_80E8AD0
 gUnknown_80E8AD0: @ 80E8AD0
@@ -3538,51 +3574,83 @@ gUnknown_80E8AD0: @ 80E8AD0
 
 	.global gUnknown_80E8AE0
 gUnknown_80E8AE0: @ 80E8AE0
-	.incbin "baserom.gba", 0xE8AE0, 0xC
+        .string "Objective:"
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8AEC
 gUnknown_80E8AEC: @ 80E8AEC
-	.incbin "baserom.gba", 0xE8AEC, 0x10
+        .string "Friend Rescue"
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8AFC
 gUnknown_80E8AFC: @ 80E8AFC
-	.incbin "baserom.gba", 0xE8AFC, 0x14
+        .string "Deliver #C4%s#R."
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B10
 gUnknown_80E8B10: @ 80E8B10
-	.incbin "baserom.gba", 0xE8B10, 0x10
+        .string "Find #C4%s#R."
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B20
 gUnknown_80E8B20: @ 80E8B20
-	.incbin "baserom.gba", 0xE8B20, 0xC
+        .string "Help me."
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B2C
 gUnknown_80E8B2C: @ 80E8B2C
-	.incbin "baserom.gba", 0xE8B2C, 0x14
+        .string "Escort to #C6%s#R."
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B40
 gUnknown_80E8B40: @ 80E8B40
-	.incbin "baserom.gba", 0xE8B40, 0x10
+        .string "Find #C6%s#R."
+        .byte 0
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B50
 gUnknown_80E8B50: @ 80E8B50
-	.incbin "baserom.gba", 0xE8B50, 0x10
+        .string "Special mission"
+        .byte 0
 
 	.global gUnknown_80E8B60
 gUnknown_80E8B60: @ 80E8B60
-	.incbin "baserom.gba", 0xE8B60, 0x8
+        .string "Place:"
+        .byte 0
+        .byte 0
 
 	.global gUnknown_80E8B68
 gUnknown_80E8B68: @ 80E8B68
-	.incbin "baserom.gba", 0xE8B68, 0xC
+        .string "Difficulty:"
+        .byte 0
 
 	.global gUnknown_80E8B74
 gUnknown_80E8B74: @ 80E8B74
-	.incbin "baserom.gba", 0xE8B74, 0x8
+        .string "Reward:"
+        .byte 0
 
 	.global gUnknown_80E8B7C
 gUnknown_80E8B7C: @ 80E8B7C
-	.incbin "baserom.gba", 0xE8B7C, 0x18
+        .string "Wonder Mail:"
+        .byte 0
+        .byte 0
+        .byte 0
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80E8B94
 gUnknown_80E8B94: @ 80E8B94
@@ -10152,28 +10220,28 @@ gUnknown_8109954: @ 8109954
 gUnknown_8109984: @ 8109984
 	.incbin "baserom.gba", 0x109984, 0x10
 
-	.global gUnknown_8109994
-gUnknown_8109994: @ 8109994
+	.global gStoryMissionText
+gStoryMissionText: @ 8109994
 	.incbin "baserom.gba", 0x109994, 0x314
 
-	.global gUnknown_8109CA8
-gUnknown_8109CA8: @ 8109CA8
+	.global gDummyScenarioText
+gDummyScenarioText: @ 8109CA8
 	.incbin "baserom.gba", 0x109CA8, 0x18
 
 	.global gUnknown_8109CC0
 gUnknown_8109CC0: @ 8109CC0
 	.incbin "baserom.gba", 0x109CC0, 0x14
 
-	.global gUnknown_8109CD4
-gUnknown_8109CD4: @ 8109CD4
+	.global gMeetNinetalesText
+gMeetNinetalesText: @ 8109CD4
 	.incbin "baserom.gba", 0x109CD4, 0x10
 
-	.global gUnknown_8109CE4
-gUnknown_8109CE4: @ 8109CE4
+	.global gAvoidCaptureText
+gAvoidCaptureText: @ 8109CE4
 	.incbin "baserom.gba", 0x109CE4, 0x10
 
-	.global gUnknown_8109CF4
-gUnknown_8109CF4: @ 8109CF4
+	.global gFinalScenarioText
+gFinalScenarioText: @ 8109CF4
 	.incbin "baserom.gba", 0x109CF4, 0x3C
 
 	.global gDungeons
