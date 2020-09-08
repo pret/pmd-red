@@ -5040,8 +5040,8 @@ gUnknown_80F7F70: @ 80F7F70
 gUnknown_80F8104: @ 80F8104
 	.incbin "baserom.gba", 0xF8104, 0x2C
 
-	.global gUnknown_80F8130
-gUnknown_80F8130: @ 80F8130
+	.global gTrapDescriptions
+gTrapDescriptions: @ 80F8130
 	.incbin "baserom.gba", 0xF8130, 0x838
 
 	.global gUnknown_80F8968

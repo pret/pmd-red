@@ -165436,7 +165436,7 @@ _080646C4:
 	adds r5, r0, 0
 	b _08064738
 	.align 2, 0
-_08064720: .4byte gUnknown_80F8130
+_08064720: .4byte gTrapDescriptions
 _08064724:
 	movs r0, 0x2
 	ands r0, r1
