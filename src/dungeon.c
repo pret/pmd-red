@@ -21,7 +21,7 @@ s16 GetUnkC(u8 dungeon)
     return gDungeons[dungeon].timer;
 }
 
-u8 GetSaveBeforeEntering(u8 dungeon)
+bool8 GetSaveBeforeEntering(u8 dungeon)
 {
     return gDungeons[dungeon].saveBeforeEntering;
 }

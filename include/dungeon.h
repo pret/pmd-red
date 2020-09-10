@@ -19,7 +19,7 @@ struct Dungeon
     u8 moneyCondition;
     u8 unk8;
     u8 unk9;
-    u8 saveBeforeEntering;  //whether to quicksave or not before entering
+    bool8 saveBeforeEntering;  //whether to quicksave or not before entering
     u8 unkB; // Apparently is a HM mask (Fly, Dive, Waterfall, Surf, Water)
     s16 timer;
     s16 unkE;
