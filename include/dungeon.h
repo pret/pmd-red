@@ -11,7 +11,7 @@ struct Dungeon
 {
     u8 stairDirection;
     u8 unk1;
-    u8 isRecruitable;
+    bool8 isRecruitable;
     s8 unk3;
     u8 maxItemCount;
     u8 maxPartySize;

@@ -51,7 +51,7 @@ s8 GetUnk3(u8 dungeon)
     return gDungeons[dungeon].unk3;
 }
 
-u8 GetRecruitable(u8 dungeon)
+bool8 GetRecruitable(u8 dungeon)
 {
     return gDungeons[dungeon].isRecruitable;
 }
