@@ -18,7 +18,7 @@ u8 GetStairDirection(u8 dungeon)
 
 s16 GetUnkC(u8 dungeon)
 {
-    return gDungeons[dungeon].unkC;
+    return gDungeons[dungeon].timer;
 }
 
 u8 GetSaveBeforeEntering(u8 dungeon)
@@ -51,9 +51,9 @@ s8 GetUnk3(u8 dungeon)
     return gDungeons[dungeon].unk3;
 }
 
-u8 sub_8090148(u8 dungeon)
+u8 GetRecruitable(u8 dungeon)
 {
-    return gDungeons[dungeon].unk2;
+    return gDungeons[dungeon].isRecruitable;
 }
 
 u8 sub_8090158(u8 dungeon)

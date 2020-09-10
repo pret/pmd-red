@@ -11,7 +11,7 @@ struct Dungeon
 {
     u8 stairDirection;
     u8 unk1;
-    u8 unk2;
+    u8 isRecruitable;
     s8 unk3;
     u8 maxItemCount;
     u8 maxPartySize;
@@ -20,8 +20,8 @@ struct Dungeon
     u8 unk8;
     u8 unk9;
     u8 saveBeforeEntering;  //whether to quicksave or not before entering
-    u8 unkB;
-    s16 unkC;
+    u8 unkB; // Apparently is a HM mask (Fly, Dive, Waterfall, Surf, Water)
+    s16 timer;
     s16 unkE;
 };
 

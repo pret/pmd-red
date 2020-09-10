@@ -168492,7 +168492,7 @@ sub_8065FB4:
 	ldr r1, _08065FE8
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8090148
+	bl GetRecruitable
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065FF0
@@ -187757,7 +187757,7 @@ _0806F6F0:
 	ldr r2, _0806F834
 	adds r0, r3, r2
 	ldrb r0, [r0]
-	bl sub_8090148
+	bl GetRecruitable
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F702
