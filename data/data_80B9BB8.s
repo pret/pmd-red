@@ -3732,8 +3732,8 @@ gUnknown_80EB72C: @ 80EB72C
 gUnknown_80EBA18: @ 80EBA18
 	.incbin "baserom.gba", 0xEBA18, 0x6C0C
 
-	.global gUnknown_80F2624
-gUnknown_80F2624: @ 80F2624
+	.global gPersonalityQuestionPointerTable
+gPersonalityQuestionPointerTable: @ 80F2624
 	.incbin "baserom.gba", 0xF2624, 0xE0
 
 	.global gUnknown_80F2704
@@ -3748,9 +3748,35 @@ gUnknown_80F273C: @ 80F273C
 gUnknown_80F275C: @ 80F275C
 	.incbin "baserom.gba", 0xF275C, 0x32
 
-	.global gUnknown_80F278E
-gUnknown_80F278E: @ 80F278E
-	.incbin "baserom.gba", 0xF278E, 0x36
+	.global gStarters
+gStarters: @ 80F278E
+        .byte 0x04, 0x00 @ Charmander (Hardy M)
+        .byte 0x19, 0x00 @ Pikachu (Hardy F)
+        .byte 0x01, 0x00 @ Bulbasaur (Docile M)
+        .byte 0x98, 0x00 @ Chikorita (Docile F)
+        .byte 0x42, 0x00 @ Machop (Brave M)
+        .byte 0x04, 0x00 @ Charmander (Brave F)
+        .byte 0x07, 0x00 @ Squirtle (Jolly M)
+        .byte 0x9E, 0x00 @ Totodile (Jolly F)
+        .byte 0x19, 0x00 @ Pikachu (Impish M)
+        .byte 0x68, 0x00 @ Cubone (Impish F)
+        .byte 0x9E, 0x00 @ Totodile (Naive M)
+        .byte 0x85, 0x00 @ Eevee (Naive F)
+        .byte 0x9B, 0x00 @ Cyndaquil (Timid M)
+        .byte 0x1B, 0x01 @ Mudkip (Timid F)
+        .byte 0x18, 0x01 @ Torchic (Hasty M)
+        .byte 0x45, 0x01 @ Skitty (Hasty F)
+        .byte 0x15, 0x01 @ Treecko (Sassy M)
+        .byte 0x18, 0x01 @ Torchic (Sassy F)
+        .byte 0x1B, 0x01 @ Mudkip (Calm M)
+        .byte 0x01, 0x00 @ Bulbasaur (Calm F)
+        .byte 0x36, 0x00 @ Psyduck (Relaxed M)
+        .byte 0x07, 0x00 @ Squirtle (Relaxed F)
+        .byte 0x68, 0x00 @ Cubone (Lonely M)
+        .byte 0x36, 0x00 @ Psyduck (Lonely F)
+        .byte 0x34, 0x00 @ Meowth (Quirky M)
+        .byte 0x15, 0x01 @ Treecko (Quirky F)
+        .byte 0x00, 0x00 @ End of table
 
 	.global gUnknown_80F27C4
 gUnknown_80F27C4: @ 80F27C4
@@ -3776,9 +3802,18 @@ gUnknown_80F28F4: @ 80F28F4
 gUnknown_80F4244: @ 80F4244
 	.incbin "baserom.gba", 0xF4244, 0x20
 
-	.global gUnknown_80F4264
-gUnknown_80F4264: @ 80F4264
-	.incbin "baserom.gba", 0xF4264, 0x14
+	.global gPartners
+gPartners: @ 80F4264
+        .byte 0x04, 0x00 @ Charmander
+        .byte 0x01, 0x00 @ Bulbasaur
+        .byte 0x07, 0x00 @ Squirtle
+        .byte 0x19, 0x00 @ Pikachu
+        .byte 0x98, 0x00 @ Chikorita
+        .byte 0x9E, 0x00 @ Totodile
+        .byte 0x9B, 0x00 @ Cyndaquil
+        .byte 0x18, 0x01 @ Torchic
+        .byte 0x15, 0x01 @ Treecko
+        .byte 0x1B, 0x01 @ Mudkip
 
 	.global gUnknown_80F4278
 gUnknown_80F4278: @ 80F4278
@@ -3794,7 +3829,10 @@ gUnknown_80F42A8: @ 80F42A8
 
 	.global gUnknown_80F42C0
 gUnknown_80F42C0: @ 80F42C0
-	.incbin "baserom.gba", 0xF42C0, 0x10
+	.string "Pokémon"
+        .byte 0
+        .string "pksdir0"
+        .byte 0
 
 	.global gUnknown_80F42D0
 gUnknown_80F42D0: @ 80F42D0

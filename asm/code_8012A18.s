@@ -84431,7 +84431,7 @@ _0803C97C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803C984: .4byte gUnknown_80F2624
+_0803C984: .4byte gPersonalityQuestionPointerTable
 _0803C988: .4byte gUnknown_203B400
 	thumb_func_end sub_803C920
 
@@ -84539,7 +84539,7 @@ _0803CA1A:
 	bx r0
 	.align 2, 0
 _0803CA4C: .4byte gUnknown_203B400
-_0803CA50: .4byte gUnknown_80F278E
+_0803CA50: .4byte gStarters
 	thumb_func_end sub_803C9D8
 
 	thumb_func_start sub_803CA54
@@ -84802,7 +84802,7 @@ sub_803CC04:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803CC38: .4byte gUnknown_80F2624
+_0803CC38: .4byte gPersonalityQuestionPointerTable
 _0803CC3C: .4byte gUnknown_203B400
 	thumb_func_end sub_803CC04
 
@@ -85379,7 +85379,7 @@ _0803D0BC:
 	bx r1
 	.align 2, 0
 _0803D0D0: .4byte gUnknown_203B404
-_0803D0D4: .4byte gUnknown_80F4264
+_0803D0D4: .4byte gPartners
 	thumb_func_end sub_803D030
 
 	thumb_func_start sub_803D0D8
