@@ -84832,7 +84832,7 @@ sub_803CC40:
 	.align 2, 0
 _0803CC70: .4byte gUnknown_202DF98
 _0803CC74: .4byte gUnknown_203B400
-_0803CC78: .4byte gUnknown_80F28F4
+_0803CC78: .4byte gPersonalityTypeDescriptionTable
 _0803CC7C: .4byte 0x00000101
 	thumb_func_end sub_803CC40
 
