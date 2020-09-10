@@ -2300,7 +2300,7 @@ sub_808EAB0:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_0808EABC: .4byte gUnknown_8112234
+_0808EABC: .4byte gIQSkillNames
 	thumb_func_end sub_808EAB0
 
 	thumb_func_start sub_808EAC0
@@ -2328,7 +2328,7 @@ sub_808EADC:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_0808EAE8: .4byte gUnknown_811240C
+_0808EAE8: .4byte gIQSkillDescriptions
 	thumb_func_end sub_808EADC
 
 	thumb_func_start sub_808EAEC
@@ -2340,7 +2340,7 @@ sub_808EAEC:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_0808EAF8: .4byte gUnknown_8112CFC
+_0808EAF8: .4byte gTacticsDescriptions
 	thumb_func_end sub_808EAEC
 
 	thumb_func_start sub_808EAFC

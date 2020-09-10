@@ -10510,28 +10510,28 @@ gUnknown_810DFCC: @ 810DFCC
 gUnknown_810E02C: @ 810E02C
 	.incbin "baserom.gba", 0x10E02C, 0x48
 
-	.global gUnknown_810E074
-gUnknown_810E074: @ 810E074
+	.global gStatusDescriptions
+gStatusDescriptions: @ 810E074
 	.incbin "baserom.gba", 0x10E074, 0x39B4
 
 	.global gDungeonNames
 gDungeonNames: @ 8111A28
 	.incbin "baserom.gba", 0x111A28, 0x80C
 
-	.global gUnknown_8112234
-gUnknown_8112234: @ 8112234
+	.global gIQSkillNames
+gIQSkillNames: @ 8112234
 	.incbin "baserom.gba", 0x112234, 0x1D8
 
-	.global gUnknown_811240C
-gUnknown_811240C: @ 811240C
+	.global gIQSkillDescriptions
+gIQSkillDescriptions: @ 811240C
 	.incbin "baserom.gba", 0x11240C, 0x808
 
 	.global gUnknown_8112C14
 gUnknown_8112C14: @ 8112C14
 	.incbin "baserom.gba", 0x112C14, 0xE8
 
-	.global gUnknown_8112CFC
-gUnknown_8112CFC: @ 8112CFC
+	.global gTacticsDescriptions
+gTacticsDescriptions: @ 8112CFC
 	.incbin "baserom.gba", 0x112CFC, 0x384
 
 	.global gUnknown_8113080

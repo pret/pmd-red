@@ -17428,7 +17428,7 @@ _08097E1E:
 	strb r0, [r1]
 	b _08097E50
 	.align 2, 0
-_08097E3C: .4byte gUnknown_810E074
+_08097E3C: .4byte gStatusDescriptions
 _08097E40:
 	ldr r0, [r3]
 	adds r0, r4
@@ -17491,7 +17491,7 @@ _08097E90:
 	movs r4, 0
 	b _08097EBA
 	.align 2, 0
-_08097EB4: .4byte gUnknown_810E074
+_08097EB4: .4byte gStatusDescriptions
 _08097EB8:
 	adds r4, 0x1
 _08097EBA:
@@ -17534,7 +17534,7 @@ _08097EF0:
 	bne _08097E90
 	b _08097F20
 	.align 2, 0
-_08097F04: .4byte gUnknown_810E074
+_08097F04: .4byte gStatusDescriptions
 _08097F08:
 	mov r0, r8
 	ldrb r1, [r0]
