@@ -17,7 +17,7 @@ gUnknown_80F273C: @ 80F273C
         .byte 0
         .byte 0
         .byte 0
-        .byte 0x3C, 0x27, 0x0F, 0x08
+        .byte 0x3C, 0x27, 0x0F, 0x08 @ Script to display small box?
 
 	.global gUnknown_80F275C
 gUnknown_80F275C: @ 80F275C
@@ -58,16 +58,16 @@ gUnknown_80F27C4: @ 80F27C4
         .string "\n"
         .string "#+The Pokémon $m0!"
         .byte 0
-        .byte 0xC4, 0x27, 0x0F, 0x08
+        .byte 0xC4, 0x27, 0x0F, 0x08 @ Script command to display pokepic of buffer
 
 	.global gUnknown_80F27DC
 gUnknown_80F27DC: @ 80F27DC
         .string "#+This is the final step.#W\n"
-        .string "#+Who would you like to have as a partner?#P"
+        .string "#+Who would you like to have as a partner?#P" @ #P -> scroll down
         .string "#+Choose the Pokémon you want\n"
         .string "#+as your partner from this group."
         .byte 0, 0, 0, 0
-        .byte 0xDC, 0x27, 0x0F, 0x08
+        .byte 0xDC, 0x27, 0x0F, 0x08 @ Script command to display pokepic of hovered?
 
 	.global gUnknown_80F286C
 gUnknown_80F286C: @ 80F286C
