@@ -4710,7 +4710,7 @@ _08014E24:
 	bl sub_80920D8
 	b _08014E48
 	.align 2, 0
-_08014E3C: .4byte gUnknown_202E6E8
+_08014E3C: .4byte gTeamName
 _08014E40:
 	ldr r0, _08014E4C
 	ldr r1, _08014E50
@@ -4719,7 +4719,7 @@ _08014E48:
 	ldr r4, _08014E4C
 	b _08014F0E
 	.align 2, 0
-_08014E4C: .4byte gUnknown_202E6E8
+_08014E4C: .4byte gTeamName
 _08014E50: .4byte gUnknown_80D48F8
 _08014E54:
 	adds r5, 0x1
@@ -36631,7 +36631,7 @@ _08024B4C:
 	ldr r0, _08024B70
 	b _08024CAE
 	.align 2, 0
-_08024B68: .4byte gUnknown_202E2B8
+_08024B68: .4byte gPlayerName
 _08024B6C: .4byte 0x000001ff
 _08024B70: .4byte gUnknown_80DCE68
 _08024B74:
@@ -59425,7 +59425,7 @@ _0803010C:
 	bl sub_80141B4
 	b _080301A0
 	.align 2, 0
-_08030138: .4byte gUnknown_202E2B8
+_08030138: .4byte gPlayerName
 _0803013C: .4byte gUnknown_203B318
 _08030140: .4byte gUnknown_80E0778
 _08030144: .4byte 0x00000101

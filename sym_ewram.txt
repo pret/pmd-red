@@ -419,7 +419,7 @@ gUnknown_202E1C8 = .; /* 202E1C8 */
 gUnknown_202E218 = .; /* 202E218 */
 	. += 0xA0;
 
-gUnknown_202E2B8 = .; /* 202E2B8 */
+gPlayerName = .; /* 202E2B8 */
 	. += 0x320;
 
 gUnknown_202E5D8 = .; /* 202E5D8 */
@@ -431,7 +431,7 @@ gUnknown_202E628 = .; /* 202E628 */
 gUnknown_202E6E0 = .; /* 202E6E0 */
 	. += 0x8;
 
-gUnknown_202E6E8 = .; /* 202E6E8 */
+gTeamName = .; /* 202E6E8 */
 	. += 0x50;
 
 gUnknown_202E738 = .; /* 202E738 */
@@ -875,7 +875,7 @@ gItemParametersFile = .; /* 20389A0 */
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;
 
-gUnknown_2038C10 = .; /* 2038C10 */
+gUnknown_2038C10 = .; /* 2038C10 (seems to be copy of gTeamName)*/
 	. += 0x18;
 
 gUnknown_2038C28 = .; /* 2038C28 */
@@ -1019,7 +1019,7 @@ gUnknown_2039B48 = .; /* 2039B48 */
 gUnknown_2039D50 = .; /* 2039D50 */
 	. += 0x48;
 
-gUnknown_2039D98 = .; /* 2039D98 */
+gUnknown_2039D98 = .; /* 2039D98 (seems to be copy of gTeamName)*/
 	. += 0xC;
 
 gUnknown_2039DA4 = .; /* 2039DA4 */

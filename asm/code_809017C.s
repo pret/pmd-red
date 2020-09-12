@@ -22836,7 +22836,7 @@ _0809A8A4: .4byte 0x0000043c
 _0809A8A8: .4byte 0x0000ffff
 _0809A8AC: .4byte gUnknown_202DF98
 _0809A8B0: .4byte gUnknown_811615C
-_0809A8B4: .4byte gUnknown_202E2B8
+_0809A8B4: .4byte gPlayerName
 	thumb_func_end sub_809A83C
 
 	thumb_func_start sub_809A8B8
@@ -23125,7 +23125,7 @@ _0809AAE6:
 	.align 2, 0
 _0809AB28: .4byte gUnknown_202DF98
 _0809AB2C: .4byte gUnknown_811616C
-_0809AB30: .4byte gUnknown_202E2B8
+_0809AB30: .4byte gPlayerName
 _0809AB34:
 	mov r0, r9
 	bl sub_809A83C
@@ -23187,7 +23187,7 @@ _0809ABA0:
 	bx r1
 	.align 2, 0
 _0809ABA8: .4byte gUnknown_202DF98
-_0809ABAC: .4byte gUnknown_202E2B8
+_0809ABAC: .4byte gPlayerName
 _0809ABB0: .4byte gUnknown_811617C
 	thumb_func_end sub_809AB4C
 
@@ -23238,7 +23238,7 @@ _0809AC0A:
 	bx r1
 	.align 2, 0
 _0809AC10: .4byte gUnknown_202DF98
-_0809AC14: .4byte gUnknown_202E2B8
+_0809AC14: .4byte gPlayerName
 	thumb_func_end sub_809ABB4
 
 	thumb_func_start sub_809AC18
@@ -23288,7 +23288,7 @@ _0809AC6E:
 	bx r1
 	.align 2, 0
 _0809AC74: .4byte gUnknown_202DF98
-_0809AC78: .4byte gUnknown_202E2B8
+_0809AC78: .4byte gPlayerName
 	thumb_func_end sub_809AC18
 
 	thumb_func_start sub_809AC7C
@@ -23930,7 +23930,7 @@ _0809B128:
 	.align 2, 0
 _0809B134: .4byte gUnknown_202E5D8
 _0809B138: .4byte gUnknown_8116188
-_0809B13C: .4byte gUnknown_202E2B8
+_0809B13C: .4byte gPlayerName
 _0809B140: .4byte sub_809B428
 _0809B144: .4byte gUnknown_8116148
 _0809B148:
@@ -24283,7 +24283,7 @@ _0809B3C0:
 	.align 2, 0
 _0809B3D0: .4byte gUnknown_202E5D8
 _0809B3D4: .4byte gUnknown_8116188
-_0809B3D8: .4byte gUnknown_202E2B8
+_0809B3D8: .4byte gPlayerName
 _0809B3DC: .4byte gUnknown_3001B64
 _0809B3E0: .4byte gUnknown_8116190
 _0809B3E4: .4byte sub_809B428
@@ -36581,7 +36581,7 @@ _080A1968:
 	.align 2, 0
 _080A1970: .4byte gUnknown_8116710
 _080A1974: .4byte gUnknown_2039D98
-_080A1978: .4byte gUnknown_202E2B8
+_080A1978: .4byte gPlayerName
 _080A197C:
 	ldr r0, _080A1984
 	movs r1, 0x53
@@ -36697,7 +36697,7 @@ _080A1A52:
 	.align 2, 0
 _080A1A64: .4byte gUnknown_8116760
 _080A1A68: .4byte gUnknown_2039D98
-_080A1A6C: .4byte gUnknown_202E2B8
+_080A1A6C: .4byte gPlayerName
 _080A1A70:
 	movs r0, 0x9E
 	movs r1, 0x1
