@@ -1,6 +1,7 @@
 	.section .rodata
 
 	.asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80B9BB8
 gUnknown_80B9BB8: @ 80B9BB8
@@ -123,12 +124,14 @@ gUnknown_80D4074: @ 80D4074
 	.global gUnknown_80D407C
 gUnknown_80D407C: @ 80D4074
         .asciz "Yes"
+        .align 2,0
 
 	.global gUnknown_80D4080
 gUnknown_80D4080: @ 80D4080
         .asciz "No"
         .align 2,0
         .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80D408C
 gUnknown_80D408C: @ 80D408C
@@ -157,10 +160,12 @@ gUnknown_80D40FC: @ 80D40FC
 	.global gUnknown_80D4104
 gUnknown_80D4104: @ 80D4104
 	.asciz "Where would you like to go?"
+        .align 2,0
 
 	.global gUnknown_80D4120
 gUnknown_80D4120: @ 80D4120
 	.asciz "$i0"
+        .align 2,0
 
 	.global gUnknown_80D4124
 gUnknown_80D4124: @ 80D4124
@@ -3477,6 +3482,7 @@ gUnknown_80E8B7C: @ 80E8B7C
         .asciz "Wonder Mail:"
         .align 2,0
         .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80E8B94
 gUnknown_80E8B94: @ 80E8B94
@@ -3573,6 +3579,7 @@ gUnknown_80F42C0: @ 80F42C0
 	.string "Pokémon"
         .byte 0
         .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80F42D0
 gUnknown_80F42D0: @ 80F42D0
