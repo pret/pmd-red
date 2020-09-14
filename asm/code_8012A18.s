@@ -84357,7 +84357,7 @@ _0803C8F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803C900: .4byte gUnknown_80F2704
+_0803C900: .4byte gNatureQuestionTable
 _0803C904: .4byte gUnknown_203B400
 	thumb_func_end sub_803C870
 
