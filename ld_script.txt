@@ -52,6 +52,7 @@ SECTIONS {
         src/other_random.o(.text);
         src/util.o(.text);
         src/bg_palette_buffer.o(.text);
+        src/input.o(.text);
         asm/input.o(.text);
         asm/code_8004AA0.o(.text);
         src/sprite.o(.text);
