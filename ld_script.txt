@@ -41,6 +41,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         asm/code.o(.text);
+        src/code.o(.text);
         asm/event_flag.o(.text);
         src/event_flag.o(.text);
         asm/code_8002774.o(.text);
@@ -71,6 +72,8 @@ SECTIONS {
         asm/save.o(.text);
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
+        asm/pokemon.o(.text);
+        src/pokemon.o(.text);
         asm/code_808DAB4.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
