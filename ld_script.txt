@@ -77,6 +77,7 @@ SECTIONS {
         asm/code_808DAB4.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
+        asm/code_8098468.o(.text);
         asm/m4a_1.o(.text);
         src/m4a_2.o(.text);
         asm/m4a_3.o(.text);
