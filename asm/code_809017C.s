@@ -5012,7 +5012,7 @@ sub_8092524:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_08092530: .4byte gUnknown_81139D0
+_08092530: .4byte gFriendAreaNames
 	thumb_func_end sub_8092524
 
 	thumb_func_start sub_8092534
@@ -5054,7 +5054,7 @@ sub_8092558:
 	bx r0
 	.align 2, 0
 _08092570: .4byte gUnknown_81098A4
-_08092574: .4byte gUnknown_81139D0
+_08092574: .4byte gFriendAreaNames
 	thumb_func_end sub_8092558
 
 	thumb_func_start sub_8092578
@@ -5089,7 +5089,7 @@ sub_8092578:
 	.align 2, 0
 _080925B4: .4byte gUnknown_810AA90
 _080925B8: .4byte gUnknown_81098AC
-_080925BC: .4byte gUnknown_81139D0
+_080925BC: .4byte gFriendAreaNames
 _080925C0:
 	ldr r0, _080925D8
 	lsls r1, r4, 2
@@ -5103,7 +5103,7 @@ _080925CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080925D8: .4byte gUnknown_81139D0
+_080925D8: .4byte gFriendAreaNames
 	thumb_func_end sub_8092578
 
 	thumb_func_start sub_80925DC
@@ -5115,7 +5115,7 @@ sub_80925DC:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_080925E8: .4byte gUnknown_8113E30
+_080925E8: .4byte gFriendAreaDescriptions
 	thumb_func_end sub_80925DC
 
 	thumb_func_start sub_80925EC

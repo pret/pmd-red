@@ -10391,12 +10391,168 @@ gUnknown_81139B8: @ 81139B8
 gUnknown_81139CC: @ 81139CC
 	.incbin "baserom.gba", 0x1139CC, 0x4
 
-	.global gUnknown_81139D0
-gUnknown_81139D0: @ 81139D0
-	.incbin "baserom.gba", 0x1139D0, 0x460
+	.global gFriendAreaNames
+gFriendAreaNames: @ 81139D0
+        .byte 0x1C, 0xAE, 0x10, 0x08
+        .byte 0x20, 0x3E, 0x11, 0x08
+        .byte 0x10, 0x3E, 0x11, 0x08
+        .byte 0x04, 0x3E, 0x11, 0x08
+        .byte 0xF4, 0x3D, 0x11, 0x08
+        .byte 0xE0, 0x3D, 0x11, 0x08
+        .byte 0xD0, 0x3D, 0x11, 0x08
+        .byte 0xC0, 0x3D, 0x11, 0x08
+        .byte 0xB0, 0x3D, 0x11, 0x08
+        .byte 0xA4, 0x3D, 0x11, 0x08
+        .byte 0x94, 0x3D, 0x11, 0x08
+        .byte 0x84, 0x3D, 0x11, 0x08
+        .byte 0x78, 0x3D, 0x11, 0x08
+        .byte 0x6C, 0x3D, 0x11, 0x08
+        .byte 0x5C, 0x3D, 0x11, 0x08
+        .byte 0x54, 0x3D, 0x11, 0x08
+        .byte 0x44, 0x3D, 0x11, 0x08
+        .byte 0x34, 0x3D, 0x11, 0x08
+        .byte 0x20, 0x3D, 0x11, 0x08
+        .byte 0x10, 0x3D, 0x11, 0x08
+        .byte 0xFC, 0x3C, 0x11, 0x08
+        .byte 0xE8, 0x3C, 0x11, 0x08
+        .byte 0xD8, 0x3C, 0x11, 0x08
+        .byte 0xC8, 0x3C, 0x11, 0x08
+        .byte 0xB4, 0x3C, 0x11, 0x08
+        .byte 0xA0, 0x3C, 0x11, 0x08
+        .byte 0x90, 0x3C, 0x11, 0x08
+        .byte 0x80, 0x3C, 0x11, 0x08
+        .byte 0x6C, 0x3C, 0x11, 0x08
+        .byte 0x60, 0x3C, 0x11, 0x08
+        .byte 0x50, 0x3C, 0x11, 0x08
+        .byte 0x40, 0x3C, 0x11, 0x08
+        .byte 0x30, 0x3C, 0x11, 0x08
+        .byte 0x24, 0x3C, 0x11, 0x08
+        .byte 0x14, 0x3C, 0x11, 0x08
+        .byte 0x08, 0x3C, 0x11, 0x08
+        .byte 0xF8, 0x3B, 0x11, 0x08
+        .byte 0xF0, 0x3B, 0x11, 0x08
+        .byte 0xE0, 0x3B, 0x11, 0x08
+        .byte 0xD0, 0x3B, 0x11, 0x08
+        .byte 0xC0, 0x3B, 0x11, 0x08
+        .byte 0xB4, 0x3B, 0x11, 0x08
+        .byte 0xAC, 0x3B, 0x11, 0x08
+        .byte 0x9C, 0x3B, 0x11, 0x08
+        .byte 0x8C, 0x3B, 0x11, 0x08
+        .byte 0x7C, 0x3B, 0x11, 0x08
+        .byte 0x6C, 0x3B, 0x11, 0x08
+        .byte 0x5C, 0x3B, 0x11, 0x08
+        .byte 0x4C, 0x3B, 0x11, 0x08
+        .byte 0x3C, 0x3B, 0x11, 0x08
+        .byte 0x2C, 0x3B, 0x11, 0x08
+        .byte 0x1C, 0x3B, 0x11, 0x08
+        .byte 0x0C, 0x3B, 0x11, 0x08
+        .byte 0xFC, 0x3A, 0x11, 0x08
+        .byte 0xE8, 0x3A, 0x11, 0x08
+        .byte 0xD8, 0x3A, 0x11, 0x08
+        .byte 0xC8, 0x3A, 0x11, 0x08
+        .byte 0xB8, 0x3A, 0x11, 0x08
+        .asciz "Final Island"
+        .align 2,0
+        .asciz "Enclosed Island"
+        .asciz "Southern Island"
+        .asciz "Legendary Island"
+        .align 2,0
+        .asciz "Magnetic Quarry"
+        .asciz "Ravaged Field"
+        .align 2,0
+        .asciz "Stratos Lookout"
+        .asciz "Volcanic Pit"
+        .align 2,0
+        .asciz "Ice Floe Beach"
+        .align 2,0
+        .asciz "Frigid Cavern"
+        .align 2,0
+        .asciz "Darkness Ridge"
+        .align 2,0
+        .asciz "Ancient Relic"
+        .align 2,0
+        .asciz "Aged Chamber O?"
+        .asciz "Aged Chamber AN"
+        .asciz "Furnace Desert"
+        .align 2,0
+        .asciz "Crater"
+        .align 2,0
+        .asciz "Power Plant"
+        .asciz "Thunder Meadow"
+        .align 2,0
+        .asciz "Mt. Discipline"
+        .align 2,0
+        .asciz "Decrepit Lab"
+        .align 2,0
+        .asciz "Jungle"
+        .align 2,0
+        .asciz "Boulder Cave"
+        .align 2,0
+        .asciz "Dragon Cave"
+        .asciz "Cryptic Cave"
+        .align 2,0
+        .asciz "Echo Cave"
+        .align 2,0
+        .asciz "Poison Swamp"
+        .align 2,0
+        .asciz "Peanut Swamp"
+        .align 2,0
+        .asciz "Waterfall Lake"
+        .align 2,0
+        .asciz "Mystic Lake"
+        .asciz "Turtleshell Pond"
+        .align 2,0
+        .asciz "Tadpole Pond"
+        .align 2,0
+        .asciz "Rub-a-Dub River"
+        .asciz "Secretive Forest"
+        .align 2,0
+        .asciz "Transform Forest"
+        .align 2,0
+        .asciz "Healing Forest"
+        .align 2,0
+        .asciz "Mushroom Forest"
+        .asciz "Energetic Forest"
+        .align 2,0
+        .asciz "Overgrown Forest"
+        .align 2,0
+        .asciz "Flyaway Forest"
+        .align 2,0
+        .asciz "Mist-Rise Forest"
+        .align 2,0
+        .asciz "Sacred Field"
+        .align 2,0
+        .asciz "Scorched Plains"
+        .asciz "Safari"
+        .align 2,0
+        .asciz "Sky Blue Plains"
+        .asciz "Beau Plains"
+        .asciz "Wild Plains"
+        .asciz "Rainbow Peak"
+        .align 2,0
+        .asciz "Mt. Moonview"
+        .align 2,0
+        .asciz "Mt. Cleft"
+        .align 2,0
+        .asciz "Mt. Deepgreen"
+        .align 2,0
+        .asciz "Shallow Beach"
+        .align 2,0
+        .asciz "Seafloor Cave"
+        .align 2,0
+        .asciz "Deep-Sea Current"
+        .align 2,0
+        .asciz "Deep-Sea Floor"
+        .align 2,0
+        .asciz "Serene Sea"
+        .align 2,0
+        .asciz "Treasure Sea"
+        .align 2,0
+        .asciz "Bountiful Sea"
+        .align 2,0
 
-	.global gUnknown_8113E30
-gUnknown_8113E30: @ 8113E30
+	.global gFriendAreaDescriptions
+gFriendAreaDescriptions: @ 8113E30
 	.incbin "baserom.gba", 0x113E30, 0x18E8
 
 	.global gUnknown_8115718
