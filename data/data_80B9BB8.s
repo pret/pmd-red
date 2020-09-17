@@ -10071,31 +10071,39 @@ gUnknown_810AA90: @ 810AA90
 
 	.global gUnknown_810AC60
 gUnknown_810AC60: @ 810AC60
-	.incbin "baserom.gba", 0x10AC60, 0x2
+        .byte 0x0C, 0x00
 
 	.global gUnknown_810AC62
 gUnknown_810AC62: @ 810AC62
-	.incbin "baserom.gba", 0x10AC62, 0x2
+        .byte 0x0C, 0x00
 
 	.global gUnknown_810AC64
 gUnknown_810AC64: @ 810AC64
-	.incbin "baserom.gba", 0x10AC64, 0x2
+        .byte 0x08, 0x00
 
 	.global gUnknown_810AC66
 gUnknown_810AC66: @ 810AC66
-	.incbin "baserom.gba", 0x10AC66, 0x2
+        .byte 0x08, 0x00
 
 	.global gUnknown_810AC68
 gUnknown_810AC68: @ 810AC68
-	.incbin "baserom.gba", 0x10AC68, 0x2
+        .byte 0x08, 0x00
 
 	.global gUnknown_810AC6A
 gUnknown_810AC6A: @ 810AC6A
-	.incbin "baserom.gba", 0x10AC6A, 0x12
+        .byte 0x00, 0x0E, 0x03, 0x04
+        .byte 0x0C, 0x09, 0x02, 0x0E
+        .byte 0x11, 0x0A, 0x0D, 0x10
+        .byte 0x08, 0x07, 0x01, 0x11
+        .byte 0x10, 0x05
 
 	.global gUnknown_810AC7C
 gUnknown_810AC7C: @ 810AC7C
-	.incbin "baserom.gba", 0x10AC7C, 0x14
+        .byte 0x01, 0x01, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x01
+        .byte 0x01, 0x01, 0x01, 0x00
+        .byte 0x01, 0x01, 0x01, 0x00
+        .byte 0x00, 0x01, 0x00, 0x00
 
 	.global gUnknown_810AC90
 gUnknown_810AC90: @ 810AC90
@@ -10103,19 +10111,19 @@ gUnknown_810AC90: @ 810AC90
 
 	.global gUnknown_810ACB8
 gUnknown_810ACB8: @ 810ACB8
-	.incbin "baserom.gba", 0x10ACB8, 0x2
+        .byte 0x4D, 0x01
 
 	.global gUnknown_810ACBA
 gUnknown_810ACBA: @ 810ACBA
-	.incbin "baserom.gba", 0x10ACBA, 0x2
+        .byte 0x4D, 0x01
 
 	.global gUnknown_810ACBC
 gUnknown_810ACBC: @ 810ACBC
-	.incbin "baserom.gba", 0x10ACBC, 0x2
+        .byte 0x4D, 0x01
 
 	.global gUnknown_810ACBE
 gUnknown_810ACBE: @ 810ACBE
-	.incbin "baserom.gba", 0x10ACBE, 0x2
+        .byte 0x4D, 0x01
 
 	.global gUnknown_810ACC0
 gUnknown_810ACC0: @ 810ACC0
@@ -10127,8 +10135,8 @@ gUnknown_810AD0C: @ 810AD0C
 
         .include "data/text/type_names.inc"
 
-	.global gUnknown_810AE24
-gUnknown_810AE24: @ 810AE24
+	.global gFormattedTypeStrings
+gFormattedTypeStrings: @ 810AE24
 	.incbin "baserom.gba", 0x10AE24, 0x12C
 
 	.global gUnknown_810AF50
@@ -10157,11 +10165,16 @@ gUnknown_810CC0C: @ 810CC0C
 
 	.global gUnknown_810CF00
 gUnknown_810CF00: @ 810CF00
-	.incbin "baserom.gba", 0x10CF00, 0xC
+        .byte 0xF0, 0xCE, 0x10, 0x08 @ (pointer to range string)
+        .asciz "Type"
+        .align 2,0
 
 	.global gUnknown_810CF0C
 gUnknown_810CF0C: @ 810CF0C
-	.incbin "baserom.gba", 0x10CF0C, 0x10
+        .byte 0x04, 0xCF, 0x10, 0x08 @ (pointer to type string)
+        .asciz "Power"
+        .align 2,0
+        .byte 0x10, 0xCF, 0x10, 0x08 @ (pointer to power string)
 
 	.global gUnknown_810CF1C
 gUnknown_810CF1C: @ 810CF1C

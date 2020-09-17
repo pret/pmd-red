@@ -147124,7 +147124,7 @@ sub_805B0D0:
 	movs r2, 0
 	bl sub_8045B94
 	adds r0, r6, 0
-	bl sub_8092334
+	bl GetUnformattedTypeString
 	adds r1, r0, 0
 	ldr r0, _0805B144
 	bl strcpy
@@ -176685,7 +176685,7 @@ _0806A0AA:
 	movs r2, 0
 	bl sub_8045B94
 	ldrb r0, [r4]
-	bl sub_8092334
+	bl GetUnformattedTypeString
 	adds r1, r0, 0
 	ldr r0, _0806A118
 	bl strcpy
@@ -176759,7 +176759,7 @@ sub_806A120:
 	movs r2, 0
 	bl sub_8045B94
 	adds r0, r4, 0
-	bl sub_8092334
+	bl GetUnformattedTypeString
 	adds r1, r0, 0
 	ldr r0, _0806A1A8
 	bl strcpy

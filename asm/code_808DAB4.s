@@ -3894,7 +3894,7 @@ _0808FB44:
 	bl sub_8014FF0
 	mov r3, r10
 	ldrb r0, [r3, 0x16]
-	bl sub_8092344
+	bl GetFormattedTypeString
 	adds r2, r0, 0
 	str r4, [sp]
 	movs r0, 0x38
@@ -3905,7 +3905,7 @@ _0808FB44:
 	ldrb r0, [r1, 0x17]
 	cmp r0, 0
 	beq _0808FB94
-	bl sub_8092344
+	bl GetFormattedTypeString
 	adds r2, r0, 0
 	str r4, [sp]
 	movs r0, 0x60

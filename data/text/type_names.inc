@@ -1,4 +1,4 @@
-gUnknown_810AD4C:: @ 810AD4C
+gUnformattedTypeStrings:: @ 810AD4C
 @ (Table of pointers to each string)
 .byte 0x1c, 0xae, 0x10, 0x08
 .byte 0x14, 0xae, 0x10, 0x08
