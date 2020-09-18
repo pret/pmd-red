@@ -57,7 +57,8 @@ gUnknown_80CE73C: @ 80CE73C
 
 	.global gUnknown_80CE77C
 gUnknown_80CE77C: @ 80CE77C
-	.incbin "baserom.gba", 0xCE77C, 0xC
+        .asciz "efob%03d"
+        .align 2,0
 
 	.global gUnknown_80CE788
 gUnknown_80CE788: @ 80CE788
@@ -111,15 +112,18 @@ gUnknown_80D405C: @ 80D405C
 
 	.global gUnknown_80D4064
 gUnknown_80D4064: @ 80D4064
-	.incbin "baserom.gba", 0xD4064, 0x8
+        .asciz "wmapspr"
+        .align 2,0
 
 	.global gUnknown_80D406C
 gUnknown_80D406C: @ 80D406C
-	.incbin "baserom.gba", 0xD406C, 0x8
+        .asciz "palet"
+        .align 2,0
 
 	.global gUnknown_80D4074
 gUnknown_80D4074: @ 80D4074
-	.incbin "baserom.gba", 0xD4074, 0x8
+        .asciz "#+$m0"
+        .align 2,0
 
 	.global gUnknown_80D407C
 gUnknown_80D407C: @ 80D4074
@@ -143,19 +147,23 @@ gUnknown_80D40C4: @ 80D40C4
 
 	.global gUnknown_80D40E4
 gUnknown_80D40E4: @ 80D40E4
-	.incbin "baserom.gba", 0xD40E4, 0x8
+        .asciz "ax%03d"
+        .align 2,0
 
 	.global gUnknown_80D40EC
 gUnknown_80D40EC: @ 80D40EC
-	.incbin "baserom.gba", 0xD40EC, 0x8
+        .asciz "wmapspr"
+        .align 2,0
 
 	.global gUnknown_80D40F4
 gUnknown_80D40F4: @ 80D40F4
-	.incbin "baserom.gba", 0xD40F4, 0x8
+        .asciz "palet"
+        .align 2,0
 
 	.global gUnknown_80D40FC
 gUnknown_80D40FC: @ 80D40FC
-	.incbin "baserom.gba", 0xD40FC, 0x8
+        .asciz "#+%s"
+        .align 2,0
 
 	.global gUnknown_80D4104
 gUnknown_80D4104: @ 80D4104
@@ -181,7 +189,8 @@ gUnknown_80D418C: @ 80D418C
 
 	.global gUnknown_80D41B0
 gUnknown_80D41B0: @ 80D41B0
-	.incbin "baserom.gba", 0xD41B0, 0x14
+        .asciz "--- not entry ---"
+        .align 2,0
 
 	.global gUnknown_80D41C4
 gUnknown_80D41C4: @ 80D41C4
@@ -197,7 +206,12 @@ gUnknown_80D421C: @ 80D421C
 
 	.global gUnknown_80D4288
 gUnknown_80D4288: @ 80D4288
-	.incbin "baserom.gba", 0xD4288, 0x38
+        .asciz "not mount log system"
+        .align 2,0
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
 
 	.global gUnknown_80D42C0
 gUnknown_80D42C0: @ 80D42C0
@@ -233,7 +247,9 @@ gUnknown_80D4354: @ 80D4354
 
 	.global gUnknown_80D4398
 gUnknown_80D4398: @ 80D4398
-	.incbin "baserom.gba", 0xD4398, 0x40
+        .string "#+Saving your adventure...\n"
+        .asciz "#+Please don~27t turn off the power."
+        .align 2,0
 
 	.global gUnknown_80D43D8
 gUnknown_80D43D8: @ 80D43D8

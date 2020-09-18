@@ -73,6 +73,8 @@ SECTIONS {
         asm/save.o(.text);
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
+        src/code_80521D0.o(.text);
+        asm/code_80521D0.o(.text);
         asm/pokemon.o(.text);
         src/pokemon.o(.text);
         asm/code_808DAB4.o(.text);
