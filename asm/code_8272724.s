@@ -9,18 +9,6 @@
 
 	.text
 
-	thumb_func_start sub_8272760
-sub_8272760:
-	push {lr}
-	adds r1, r0, 0
-	ldr r0, _08272770
-	bl sub_8272774
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08272770: .4byte gUnknown_2027370
-	thumb_func_end sub_8272760
-
 	thumb_func_start sub_8272774
 sub_8272774:
 	push {r4-r7,lr}

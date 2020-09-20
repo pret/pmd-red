@@ -2565,22 +2565,4 @@ _0800274E:
 	bx r1
 	thumb_func_end sub_8002718
 
-	thumb_func_start sub_8002758
-sub_8002758:
-	push {lr}
-	adds r2, r0, 0
-	movs r0, 0
-	movs r1, 0x1
-	movs r3, 0x9
-	bl sub_800226C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8002758
-
-	thumb_func_start sub_800276C
-sub_800276C:
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_800276C
-
 	.align 2, 0 @ Don't pad with nop.
