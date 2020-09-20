@@ -10270,59 +10270,75 @@ gUnknown_810DE0C: @ 810DE0C
 
 	.global gUnknown_810DE20
 gUnknown_810DE20: @ 810DE20
-	.incbin "baserom.gba", 0x10DE20, 0x4
+        .byte 0x10, 0xDE, 0x10, 0x08
 
 	.global gUnknown_810DE24
 gUnknown_810DE24: @ 810DE24
-	.incbin "baserom.gba", 0x10DE24, 0x4
+        .byte 0x00, 0xDE, 0x10, 0x08
 
 	.global gUnknown_810DE28
 gUnknown_810DE28: @ 810DE28
-	.incbin "baserom.gba", 0x10DE28, 0x10
+        .byte 0x10, 0xDE, 0x10, 0x08
+        .asciz "#>118.$v03"
+        .align 2,0
 
 	.global gUnknown_810DE38
 gUnknown_810DE38: @ 810DE38
-	.incbin "baserom.gba", 0x10DE38, 0x14
+        .byte 0x2C, 0xDE, 0x10, 0x08
+        .asciz "#>118.#c2$v03#r"
+        .align 2,0
 
 	.global gUnknown_810DE4C
 gUnknown_810DE4C: @ 810DE4C
-	.incbin "baserom.gba", 0x10DE4C, 0x4
+        .byte 0x3C, 0xDE, 0x10, 0x08
 
 	.global gUnknown_810DE50
 gUnknown_810DE50: @ 810DE50
-	.incbin "baserom.gba", 0x10DE50, 0x4
+        .byte 0x2C, 0xDE, 0x10, 0x08
 
 	.global gUnknown_810DE54
 gUnknown_810DE54: @ 810DE54
-	.incbin "baserom.gba", 0x10DE54, 0x4
+        .byte 0x3C, 0xDE, 0x10, 0x08
 
 	.global gUnknown_810DE58
 gUnknown_810DE58: @ 810DE58
-	.incbin "baserom.gba", 0x10DE58, 0x14
+        .byte 0x1C, 0xAE, 0x10, 0x08
+        .asciz "Item:#>46.$i0 "
+        .align 2,0
 
 	.global gUnknown_810DE6C
 gUnknown_810DE6C: @ 810DE6C
-	.incbin "baserom.gba", 0x10DE6C, 0x14
+        .byte 0x5C, 0xDE, 0x10, 0x08
+        .asciz "IQ:#>52.$m0 "
+        .align 2,0
 
 	.global gUnknown_810DE80
 gUnknown_810DE80: @ 810DE80
-	.incbin "baserom.gba", 0x10DE80, 0x18
+        .byte 0x70, 0xDE, 0x10, 0x08
+        .asciz "Tactics:#>52.$m0 "
+        .align 2,0
 
 	.global gUnknown_810DE98
 gUnknown_810DE98: @ 810DE98
-	.incbin "baserom.gba", 0x10DE98, 0x1C
+        .byte 0x84, 0xDE, 0x10, 0x08
+        .asciz "Species:#>54.#C6$m0#R "
+        .align 2,0
 
 	.global gUnknown_810DEB4
 gUnknown_810DEB4: @ 810DEB4
-	.incbin "baserom.gba", 0x10DEB4, 0x14
+        .byte 0x9C, 0xDE, 0x10, 0x08
+        .asciz "Friend Area: "
+        .align 2,0
 
 	.global gUnknown_810DEC8
 gUnknown_810DEC8: @ 810DEC8
-	.incbin "baserom.gba", 0x10DEC8, 0x14
+        .byte 0xB8, 0xDE, 0x10, 0x08
+        .asciz "#>22.#C4$i0#R"
+        .align 2,0
 
 	.global gUnknown_810DEDC
 gUnknown_810DEDC: @ 810DEDC
-	.incbin "baserom.gba", 0x10DEDC, 0x18
+        .incbin "baserom.gba", 0x10DEDC, 0x18
 
 	.global gUnknown_810DEF4
 gUnknown_810DEF4: @ 810DEF4

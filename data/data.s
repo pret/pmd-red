@@ -20,7 +20,9 @@ gUnknown_80B69F8: @ 80B69F8
 
 	.global gUnknown_80B6A28
 gUnknown_80B6A28: @ 80B6A28
-	.incbin "baserom.gba", 0xB6A28, 0xC
+        .byte 0x04, 0x6A, 0x0B, 0x08 @ Pointer to titlen0p
+        .byte 0x10, 0x6A, 0x0B, 0x08 @ Pointer to titlen1p
+        .byte 0x1C, 0x6A, 0x0B, 0x08 @ Pointer to titlen2p
 
 	.include "data/text/save.inc"
 
@@ -35,11 +37,48 @@ gUnknown_80B7144: @ 80B7144
 
 	.global gUnknown_80B714C
 gUnknown_80B714C: @ 80B714C
-	.incbin "baserom.gba", 0xB714C, 0x54
+        .byte 0x9C, 0x71, 0x0B, 0x08
+        .byte 0x9C, 0x71, 0x0B, 0x08
+        .byte 0x94, 0x71, 0x0B, 0x08
+        .byte 0x90, 0x71, 0x0B, 0x08
+        .byte 0x8C, 0x71, 0x0B, 0x08
+        .byte 0x88, 0x71, 0x0B, 0x08
+        .byte 0x80, 0x71, 0x0B, 0x08
+        .byte 0x7C, 0x71, 0x0B, 0x08
+        .byte 0x78, 0x71, 0x0B, 0x08
+        .byte 0x74, 0x71, 0x0B, 0x08
+        .asciz "END"
+        .asciz "9"
+        .align 2,0
+        .asciz "3"
+        .align 2,0
+        .asciz "2-2 8"
+        .align 2,0
+        .asciz "6"
+        .align 2,0
+        .asciz "5"
+        .align 2,0
+        .asciz "4"
+        .align 2,0
+        .asciz "1-2 7"
+        .align 2,0
+        .asciz "2-1"
+        .align 2,0
 
 	.global gUnknown_80B71A0
 gUnknown_80B71A0: @ 80B71A0
-	.incbin "baserom.gba", 0xB71A0, 0x44
+        .byte 0xD8, 0x71, 0x0B, 0x08 @ Pointer to CISTART
+        .byte 0xC8, 0x71, 0x0B, 0x08 @ Pointer to CECONTINUE
+        .byte 0xBC, 0x71, 0x0B, 0x08 @ Pointer to CNLAST
+        .byte 0xB0, 0x71, 0x0B, 0x08 @ Pointer to CWEND
+        .asciz "#CWEND#R"
+        .align 2,0
+        .asciz "#CNLAST#R"
+        .align 2,0
+        .asciz "#CECONTINUE#R"
+        .align 2,0
+        .asciz "#CISTART#R"
+        .align 2,0
 
 	.global gUnknown_80B71E4
 gUnknown_80B71E4: @ 80B71E4
@@ -59,7 +98,9 @@ gUnknown_80B7324: @ 80B7324
 
 	.global gUnknown_80B7350
 gUnknown_80B7350: @ 80B7350
-	.incbin "baserom.gba", 0xB7350, 0xC
+        .byte 0xF4, 0x72, 0x0B, 0x08 @ Pointer to ../main/event_flag.c
+        .byte 0x7C, 0x05, 0x00, 0x00
+        .byte 0x44, 0x73, 0x0B, 0x08 @ Pointer to _FlagJudge
 
 	.global gUnknown_80B735C
 gUnknown_80B735C: @ 80B735C
@@ -67,11 +108,13 @@ gUnknown_80B735C: @ 80B735C
 
 	.global gUnknown_80B7378
 gUnknown_80B7378: @ 80B7378
-	.incbin "baserom.gba", 0xB7378, 0x10
+        .asciz "error number"
+        .align 2,0
 
 	.global gUnknown_80B7388
 gUnknown_80B7388: @ 80B7388
-	.incbin "baserom.gba", 0xB7388, 0xC
+        .asciz "1-1"
+        .asciz "pksdir0"
 
 	.global gUnknown_80B7394
 gUnknown_80B7394: @ 80B7394
@@ -95,7 +138,9 @@ gUnknown_80B7EFC: @ 80B7EFC
 
 	.global gUnknown_80B7F14
 gUnknown_80B7F14: @ 80B7F14
-	.incbin "baserom.gba", 0xB7F14, 0xC
+        .byte 0x8C, 0x7E, 0x0B, 0x08
+        .byte 0x2C, 0x03, 0x00, 0x00
+        .byte 0x08, 0x7F, 0x0B, 0x08
 
 	.global gUnknown_80B7F20
 gUnknown_80B7F20: @ 80B7F20
@@ -103,11 +148,22 @@ gUnknown_80B7F20: @ 80B7F20
 
 	.global gUnknown_80B7F88
 gUnknown_80B7F88: @ 80B7F88
-	.incbin "baserom.gba", 0xB7F88, 0xC
+        .byte 0x8C, 0x7E, 0x0B, 0x08 @ Pointer to ../system/memory_locate.c
+        .byte 0x55, 0x04, 0x00, 0x00
+        .byte 0x6C, 0x7F, 0x0B, 0x08 @ Pointer to MemoryLocate_LocalCreate
 
 	.global gUnknown_80B7F94
 gUnknown_80B7F94: @ 80B7F94
-	.incbin "baserom.gba", 0xB7F94, 0x74
+        .asciz "Memroy LocalCreate buffer %08x size can\'t locate" @ Spelling error is intentional
+        .align 2,0
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
 
 	.global gUnknown_80B8008
 gUnknown_80B8008: @ 80B8008
@@ -143,7 +199,10 @@ gUnknown_80B85DC: @ 80B85DC
 
 	.global gUnknown_80B86A4
 gUnknown_80B86A4: @ 80B86A4
-	.incbin "baserom.gba", 0xB86A4, 0x10
+        .byte 0x5C, 0x86, 0x0B, 0x08
+        .byte 0xA1, 0x81, 0x07, 0x00
+        .byte 0x0A, 0x00, 0x00, 0x00
+        .byte 0x08, 0x00, 0x00, 0x00
 
 	.global gUnknown_80B86B4
 gUnknown_80B86B4: @ 80B86B4
@@ -151,27 +210,49 @@ gUnknown_80B86B4: @ 80B86B4
 
 	.global gUnknown_80B87B4
 gUnknown_80B87B4: @ 80B87B4
-	.incbin "baserom.gba", 0xB87B4, 0x8
+        .asciz "kanji_a"
+        .align 2,0
 
 	.global gUnknown_80B87BC
 gUnknown_80B87BC: @ 80B87BC
-	.incbin "baserom.gba", 0xB87BC, 0x8
+        .asciz "kanji_b"
+        .align 2,0
 
 	.global gUnknown_80B87C4
 gUnknown_80B87C4: @ 80B87C4
-	.incbin "baserom.gba", 0xB87C4, 0x20
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80B87E4
 gUnknown_80B87E4: @ 80B87E4
-	.incbin "baserom.gba", 0xB87E4, 0x20
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
+        .byte 0x88, 0x88, 0x88, 0x88
 
 	.global gUnknown_80B8804
 gUnknown_80B8804: @ 80B8804
-	.incbin "baserom.gba", 0xB8804, 0x10
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
 
 	.global gUnknown_80B8814
 gUnknown_80B8814: @ 80B8814
-	.incbin "baserom.gba", 0xB8814, 0x10
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80B8824
 gUnknown_80B8824: @ 80B8824
@@ -187,22 +268,28 @@ gUnknown_80B8868: @ 80B8868
 
 	.global gUnknown_80B88B0
 gUnknown_80B88B0: @ 80B88B0
-	.incbin "baserom.gba", 0xB88B0, 0x8
+        .asciz "font"
+        .align 2,0
 
 	.global gUnknown_80B88B8
 gUnknown_80B88B8: @ 80B88B8
-	.incbin "baserom.gba", 0xB88B8, 0x8
+        .asciz "fontsp"
+        .align 2,0
 
 	.global gUnknown_80B88C0
 gUnknown_80B88C0: @ 80B88C0
-	.incbin "baserom.gba", 0xB88C0, 0xC
+        .asciz "fontsppa"
+        .align 2,0
 
 	.global gUnknown_80B88CC
 gUnknown_80B88CC: @ 80B88CC
-	.incbin "baserom.gba", 0xB88CC, 0x18
+        .asciz "fontpal"
+        .align 2,0
+        .asciz "pksdir0"
+        .asciz "pksdir0"
 
 	.global gUnknown_80B88E4
-gUnknown_80B88E4: @ 80B88E4
+gUnknown_80B88E4: @ 80B88E4 @ (uppercase font table??)
 	.incbin "baserom.gba", 0xB88E4, 0x200
 
 	.global gUnknown_80B8AE4
