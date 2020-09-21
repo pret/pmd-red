@@ -1,3 +1,6 @@
+#ifndef GUARD_INPUT_H
+#define GUARD_INPUT_H  
+
 struct UnkInputStruct1
 {
     /* 0x0 */ u16 unk0;
@@ -55,3 +58,4 @@ void sub_80048D0(void);
 void sub_80048F8(void);
 void sub_8004914(void);
 
+#endif // GUARD_INPUT_H

@@ -1,4 +1,4 @@
-#ifdef POKEMON_H
+#ifndef POKEMON_H
 #define POKEMON_H
 
 struct gPokemon
@@ -46,6 +46,6 @@ struct gPokemon
     /* 0x42 */ u16 unk11;
     /* 0x44 */ u16 alphaNum;
     /* 0x46 */ u16 parentNum;
-}
+};
 
-#endif
+#endif // POKEMON_H  
