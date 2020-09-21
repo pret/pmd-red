@@ -5,15 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800AAA8
-sub_800AAA8:
-	push {lr}
-	ldr r2, [r2, 0x4]
-	bl sub_800AAB4
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800AAA8
-
 	thumb_func_start sub_800AAB4
 sub_800AAB4:
 	push {r4-r7,lr}

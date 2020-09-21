@@ -2044,35 +2044,4 @@ _08001324: .4byte gUnknown_203B460
 _08001328: .4byte gUnknown_203B45C
 	thumb_func_end sub_80012C0
 
-	thumb_func_start NDS_LoadOverlay_GroundMain
-NDS_LoadOverlay_GroundMain:
-	bx lr
-	thumb_func_end NDS_LoadOverlay_GroundMain
-
-	thumb_func_start nullsub_2
-nullsub_2:
-	bx lr
-	thumb_func_end nullsub_2
-
-	thumb_func_start xxx_script_related_8001334
-xxx_script_related_8001334:
-	push {lr}
-	bl xxx_script_related_8098468
-	pop {r1}
-	bx r1
-	thumb_func_end xxx_script_related_8001334
-
-	thumb_func_start xxx_dungeon_8001340
-xxx_dungeon_8001340:
-	push {r4,lr}
-	adds r4, r0, 0
-	bl nullsub_2
-	adds r0, r4, 0
-	bl xxx_dungeon_8042F6C
-	bl NDS_LoadOverlay_GroundMain
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end xxx_dungeon_8001340
-
 	.align 2, 0 @ Don't pad with nop.

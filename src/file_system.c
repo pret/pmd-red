@@ -7,6 +7,7 @@ extern u32 gFileCacheCursorPosition;
 extern u32 gUnknown_202D2A4;
 
 extern int sprintf(char *, const char *, ...);
+extern u32 sub_800AAB4(u32 r0, u32 r1, u32 r2);
 
 u8 *GetSiroPtr(struct OpenedFile *);
 void NDS_DecompressRLE(void *);
@@ -180,4 +181,9 @@ void nullsub_16(void)
 
 void nullsub_175(void)
 {
+}
+
+u32 sub_800AAA8(u32 r0, u32 r1, struct UnkFileStruct1 *r2)
+{
+    return sub_800AAB4(r0, r1, r2->unk4);
 }
