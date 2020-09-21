@@ -1,6 +1,7 @@
 #include "global.h"
 #include "random.h"
 #include "flash.h"
+#include "text.h"
 
 extern char ewram_start[];
 
@@ -34,7 +35,6 @@ extern void InitInput(void);
 extern void InitBGPaletteBuffer(void);
 extern void sub_80057E8(void);
 extern void InitFileSystem(void);
-extern void sub_8006218(void);
 extern void sub_80098A0(void);
 extern void sub_80096E0(void);
 extern void sub_800B6F4(int, void *);
