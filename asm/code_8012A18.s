@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8012A18
-sub_8012A18:
-	push {lr}
-	bl sub_8011860
-	bl xxx_draw_string_80144C4
-	ldr r0, _08012A60
-	ldr r0, [r0]
-	ldrb r0, [r0, 0xA]
-	bl nullsub_8
-	bl sub_8005180
-	bl sub_80060EC
-	bl sub_800CB20
-	bl sub_800485C
-	bl CopySpritesToOam
-	bl sub_8005304
-	bl TransferBGPaletteBuffer
-	bl xxx_call_update_bg_vram
-	bl sub_8009908
-	bl xxx_call_update_bg_sound_input
-	movs r0, 0
-	bl ResetSprites
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08012A60: .4byte gUnknown_203B46C
-	thumb_func_end sub_8012A18
-
 	thumb_func_start sub_8012A64
 sub_8012A64:
 	push {r4,lr}
