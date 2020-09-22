@@ -5,11 +5,19 @@
 
 	.global gUnknown_80B9BB8
 gUnknown_80B9BB8: @ 80B9BB8
-	.incbin "baserom.gba", 0xB9BB8, 0x39
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x08, 0x00, 0x00, 0x00
+        .byte 0x10, 0x00, 0x00, 0x00
+        .byte 0x18, 0x00, 0x00, 0x00
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .asciz "PKD ROM USER DATA 000000"
 
 	.global gUnknown_80B9BF1
 gUnknown_80B9BF1: @ 80B9BF1
-	.incbin "baserom.gba", 0xB9BF1, 0xF
+        .byte 0x36, 0x27, 0x46, 0x01
+        .byte 0xB9, 0x48, 0x00
+        .asciz "pksdir0"
 
 	.global gUnknown_80B9C00
 gUnknown_80B9C00: @ 80B9C00
@@ -17,7 +25,9 @@ gUnknown_80B9C00: @ 80B9C00
 
 	.global gUnknown_80B9C60
 gUnknown_80B9C60: @ 80B9C60
-	.incbin "baserom.gba", 0xB9C60, 0xC
+        .byte 0xFF, 0xFF, 0xFF, 0xFF
+        .byte 0xFF, 0xFF, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 gUnknown_80B9C6C:: @ 80B9C6C
         .asciz "efob001"
@@ -62,7 +72,9 @@ gUnknown_80CE77C: @ 80CE77C
 
 	.global gUnknown_80CE788
 gUnknown_80CE788: @ 80CE788
-	.incbin "baserom.gba", 0xCE788, 0x14
+        .asciz "efbg%03d"
+        .align 2,0
+        .asciz "pksdir0"
 
 	.global gUnknown_80CE79C
 gUnknown_80CE79C: @ 80CE79C
@@ -88,15 +100,27 @@ gUnknown_80D3EBC: @ 80D3EBC
 
 	.global gUnknown_80D3EDC
 gUnknown_80D3EDC: @ 80D3EDC
-	.incbin "baserom.gba", 0xD3EDC, 0x10
+        .byte 0xff, 0x00, 0x02, 0x01
+        .byte 0x04, 0xff, 0x03, 0xff
+        .byte 0x06, 0x07, 0xff, 0xff
+        .byte 0x05, 0xff, 0xff, 0xff
+
 
 	.global gUnknown_80D3EEC
 gUnknown_80D3EEC: @ 80D3EEC
-	.incbin "baserom.gba", 0xD3EEC, 0x10
+        .byte 0xff, 0xff, 0xff, 0x01
+        .byte 0xff, 0xff, 0x03, 0xff
+        .byte 0xff, 0x07, 0xff, 0xff
+        .byte 0x05, 0xff, 0xff, 0xff
 
 	.global gUnknown_80D3EFC
 gUnknown_80D3EFC: @ 80D3EFC
-	.incbin "baserom.gba", 0xD3EFC, 0x18
+        .byte 0x24, 0x74, 0x20, 0x54
+        .byte 0x65, 0x61, 0x6d, 0x20
+        .byte 0x42, 0x61, 0x73, 0x65
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x70, 0x6b, 0x73, 0x64
+        .byte 0x69, 0x72, 0x30, 0x00
 
 	.global gUnknown_80D3F14
 gUnknown_80D3F14: @ 80D3F14
@@ -108,7 +132,8 @@ gUnknown_80D4014: @ 80D4014
 
 	.global gUnknown_80D405C
 gUnknown_80D405C: @ 80D405C
-	.incbin "baserom.gba", 0xD405C, 0x8
+        .asciz "ax%03d"
+        .align 2,0
 
 	.global gUnknown_80D4064
 gUnknown_80D4064: @ 80D4064
@@ -143,7 +168,14 @@ gUnknown_80D408C: @ 80D408C
 
 	.global gUnknown_80D40C4
 gUnknown_80D40C4: @ 80D40C4
-	.incbin "baserom.gba", 0xD40C4, 0x20
+        .byte 0x00, 0x00, 0x18, 0x00
+        .byte 0x18, 0x00, 0x18, 0x00
+        .byte 0x18, 0x00, 0x00, 0x00
+        .byte 0x18, 0x00, 0xE8, 0xFF
+        .byte 0x00, 0x00, 0xE8, 0xFF
+        .byte 0xE8, 0xFF, 0xE8, 0xFF
+        .byte 0xE8, 0xFF, 0x00, 0x00
+        .byte 0xE8, 0xFF, 0x18, 0x00
 
 	.global gUnknown_80D40E4
 gUnknown_80D40E4: @ 80D40E4
@@ -314,7 +346,8 @@ gUnknown_80D47C8: @ 80D47C8
 
 	.global gUnknown_80D4828
 gUnknown_80D4828: @ 80D4828
-	.incbin "baserom.gba", 0xD4828, 0x8
+        .asciz "#C%c%s"
+        .align 2,0
 
 	.global gUnknown_80D4830
 gUnknown_80D4830: @ 80D4830
@@ -361,11 +394,12 @@ gUnknown_80D48DC: @ 80D48DC
 
 	.global gUnknown_80D48F4
 gUnknown_80D48F4: @ 80D48F4
-	.incbin "baserom.gba", 0xD48F4, 0x4
+        .byte 0x3A, 0x20, 0x00, 0x00 @ maybe just a colon and space
 
 	.global gUnknown_80D48F8
 gUnknown_80D48F8: @ 80D48F8
-	.incbin "baserom.gba", 0xD48F8, 0x8
+        .byte 0x3F, 0x3F, 0x3F, 0x3F @ apparently 4 ?'s
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80D4900
 gUnknown_80D4900: @ 80D4900
@@ -391,11 +425,15 @@ gUnknown_80D4910: @ 80D4910
 
 	.global gUnknown_80D4920
 gUnknown_80D4920: @ 80D4920
-	.incbin "baserom.gba", 0xD4920, 0x8
+        .byte 0x1C, 0x49, 0x0D, 0x08 @ Pointer to Yes
+        .asciz "No"
+        .align 2,0
 
 	.global gUnknown_80D4928
 gUnknown_80D4928: @ 80D4928
-	.incbin "baserom.gba", 0xD4928, 0xC
+        .byte 0x24, 0x49, 0x0D, 0x08 @ Pointer to No
+        .asciz "Cancel"
+        .align 2,0
 
 	.global gUnknown_80D4934
 gUnknown_80D4934: @ 80D4934
@@ -405,59 +443,85 @@ gUnknown_80D4934: @ 80D4934
 
 	.global gUnknown_80D4940
 gUnknown_80D4940: @ 80D4940
-	.incbin "baserom.gba", 0xD4940, 0xC
+        .byte 0x38, 0x49, 0x0D, 0x08
+        .asciz "Delete"
+        .align 2,0
 
 	.global gUnknown_80D494C
 gUnknown_80D494C: @ 80D494C
-	.incbin "baserom.gba", 0xD494C, 0xC
+        .byte 0x44, 0x49, 0x0D, 0x08
+        .asciz "Store"
+        .align 2,0
 
 	.global gUnknown_80D4958
 gUnknown_80D4958: @ 80D4958
-	.incbin "baserom.gba", 0xD4958, 0xC
+        .byte 0x50, 0x49, 0x0D, 0x08
+        .asciz "Take"
+        .align 2,0
 
 	.global gUnknown_80D4964
 gUnknown_80D4964: @ 80D4964
-	.incbin "baserom.gba", 0xD4964, 0xC
+        .byte 0x5C, 0x49, 0x0D, 0x08 @ Pointer to Take
+        .asciz "Info"
+        .align 2,0
 
 	.global gUnknown_80D4970
 gUnknown_80D4970: @ 80D4970
-	.incbin "baserom.gba", 0xD4970, 0x8
+        .byte 0x68, 0x49, 0x0D, 0x08 @ Pointer to Info
+        .asciz "Buy"
+        .align 2,0
 
 	.global gUnknown_80D4978
 gUnknown_80D4978: @ 80D4978
-	.incbin "baserom.gba", 0xD4978, 0xC
+        .byte 0x74, 0x49, 0x0D, 0x08 @ Pointer to Buy
+        .asciz "Sell "
+        .align 2,0
 
 	.global gUnknown_80D4984
 gUnknown_80D4984: @ 80D4984
-	.incbin "baserom.gba", 0xD4984, 0xC
+        .byte 0x7C, 0x49, 0x0D, 0x08 @ Pointer to Sell
+        .asciz "Accept"
+        .align 2,0
 
 	.global gUnknown_80D4990
 gUnknown_80D4990: @ 80D4990
-	.incbin "baserom.gba", 0xD4990, 0xC
+        .byte 0x88, 0x49, 0x0D, 0x08 @ Pointer to Accept
+        .asciz "Check"
+        .align 2,0
 
 	.global gUnknown_80D499C
 gUnknown_80D499C: @ 80D499C
-	.incbin "baserom.gba", 0xD499C, 0xC
+        .byte 0x94, 0x49, 0x0D, 0x08 @ Pointer to Check
+        .asciz "Friend"
+        .align 2,0
 
 	.global gUnknown_80D49A8
 gUnknown_80D49A8: @ 80D49A8
-	.incbin "baserom.gba", 0xD49A8, 0xC
+        .byte 0xA0, 0x49, 0x0D, 0x08 @ Pointer to Friend
+        .asciz "Exit"
+        .align 2,0
 
 	.global gUnknown_80D49B4
 gUnknown_80D49B4: @ 80D49B4
-	.incbin "baserom.gba", 0xD49B4, 0x8
+        .byte 0xAC, 0x49, 0x0D, 0x08 @ Poiner to Exit
+        .asciz "???"
+        .align 2,0
 
 	.global gUnknown_80D49BC
 gUnknown_80D49BC: @ 80D49BC
-	.incbin "baserom.gba", 0xD49BC, 0x10
+        .byte 0xB8, 0x49, 0x0D, 0x08 @ Pointer to the question marks above
+        .asciz "Deposit?"
+        .align 2,0
 
 	.global gUnknown_80D49CC
 gUnknown_80D49CC: @ 80D49CC
-	.incbin "baserom.gba", 0xD49CC, 0x10
+        .byte 0xC0, 0x49, 0x0D, 0x08 @ Pointer to Deposit
+        .asciz "Withdraw?"
+        .align 2,0
 
 	.global gUnknown_80D49DC
 gUnknown_80D49DC: @ 80D49DC
-	.incbin "baserom.gba", 0xD49DC, 0x4
+        .byte 0xD0, 0x49, 0x0D, 0x08 @ Pointer to Withdraw
 
 	.global gUnknown_80D49E0
 gUnknown_80D49E0: @ 80D49E0 (Felicity Bank Dialogue)
@@ -639,7 +703,10 @@ gUnknown_80DB790: @ 80DB790
 
 	.global gUnknown_80DB7A8
 gUnknown_80DB7A8: @ 80DB7A8
-	.incbin "baserom.gba", 0xDB7A8, 0x10
+        .asciz "Number?"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80DB7B8
 gUnknown_80DB7B8: @ 80DB7B8
@@ -663,7 +730,10 @@ gUnknown_80DB818: @ 80DB818
 
 	.global gUnknown_80DB830
 gUnknown_80DB830: @ 80DB830
-	.incbin "baserom.gba", 0xDB830, 0x10
+        .asciz "Number?"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80DB840
 gUnknown_80DB840: @ 80DB840
