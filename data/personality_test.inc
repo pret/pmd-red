@@ -79,8 +79,8 @@ gNatureQuestionTable: @ 80F2704 (Categories??)
         .byte 0x0D, 0x0D, 0x0D @ (Miscellaneous)
         .byte 0x02 @ (Question 2b for Brave Category)
 
-	.global gUnknown_80F273C
-gUnknown_80F273C: @ 80F273C
+	.global gGenderText
+gGenderText: @ 80F273C
 	.asciz "Are you a boy or a girl?"
         .align 2,0
         .byte 0x3C, 0x27, 0x0F, 0x08 @ pointer to above text
@@ -141,8 +141,8 @@ gStarters: @ 80F278E
         .byte 0x15, 0x01 @ Treecko (Quirky F)
         .byte 0x00, 0x00 @ End of table
 
-	.global gUnknown_80F27C4
-gUnknown_80F27C4: @ 80F27C4
+	.global gStarterReveal
+gStarterReveal: @ 80F27C4
         .string "\n"
         .string "#+The Pokémon $m0!"
         .byte 0
