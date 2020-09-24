@@ -420,7 +420,9 @@ gUnknown_80B7E3C: @ 80B7E3C
 
 	.global gUnknown_80B7EB8
 gUnknown_80B7EB8: @ 80B7EB8
-	.incbin "baserom.gba", 0xB7EB8, 0xC
+        .byte 0x8C, 0x7E, 0x0B, 0x08
+        .byte 0x45, 0x02, 0x00, 0x00
+        .byte 0xA8, 0x7E, 0x0B, 0x08 @ Pointer to _LocateSetFront
 
 	.global gUnknown_80B7EC4
 gUnknown_80B7EC4: @ 80B7EC4

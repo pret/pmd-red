@@ -3407,15 +3407,20 @@ gUnknown_80E7F04: @ 80E7F04
 
 	.global gUnknown_80E7F1C
 gUnknown_80E7F1C: @ 80E7F1C
-	.incbin "baserom.gba", 0xE7F1C, 0x8
+        .asciz "Number?"
+        .align 2,0
 
 	.global gUnknown_80E7F24
 gUnknown_80E7F24: @ 80E7F24
-	.incbin "baserom.gba", 0xE7F24, 0x8
+        .asciz "LEVEL"
+        .align 2,0
 
 	.global gUnknown_80E7F2C
 gUnknown_80E7F2C: @ 80E7F2C
-	.incbin "baserom.gba", 0xE7F2C, 0x10
+        .asciz "Name"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80E7F3C
 gUnknown_80E7F3C: @ 80E7F3C
@@ -3427,7 +3432,16 @@ gUnknown_80E7F54: @ 80E7F54
 
 	.global gUnknown_80E7F6C
 gUnknown_80E7F6C: @ 80E7F6C
-	.incbin "baserom.gba", 0xE7F6C, 0x28
+        .asciz "Script"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_80E7F94
 gUnknown_80E7F94: @ 80E7F94
@@ -3459,43 +3473,53 @@ gUnknown_80E81D4: @ 80E81D4
 
 	.global gUnknown_80E87DC
 gUnknown_80E87DC: @ 80E87DC
-	.incbin "baserom.gba", 0xE87DC, 0x18
+        .asciz "Punish bad #C6Mankey#R!"
+        .align 2,0
 
 	.global gUnknown_80E87F4
 gUnknown_80E87F4: @ 80E87F4
-	.incbin "baserom.gba", 0xE87F4, 0x24
+        .asciz "#C6Smeargle#R~27s desperate plea!"
+        .align 2,0
 
 	.global gUnknown_80E8818
 gUnknown_80E8818: @ 80E8818
-	.incbin "baserom.gba", 0xE8818, 0x18
+        .asciz "#C6Medicham#R: Help me!"
+        .align 2,0
 
 	.global gUnknown_80E8830
 gUnknown_80E8830: @ 80E8830
-	.incbin "baserom.gba", 0xE8830, 0x18
+        .asciz "Deliver one #C4%s#R."
+        .align 2,0
 
 	.global gUnknown_80E8848
 gUnknown_80E8848: @ 80E8848
-	.incbin "baserom.gba", 0xE8848, 0x14
+        .asciz "One #C4%s#R wanted!"
+        .align 2,0
 
 	.global gUnknown_80E885C
 gUnknown_80E885C: @ 80E885C
-	.incbin "baserom.gba", 0xE885C, 0x10
+        .asciz "Save my child!"
+        .align 2,0
 
 	.global gUnknown_80E886C
 gUnknown_80E886C: @ 80E886C
-	.incbin "baserom.gba", 0xE886C, 0x18
+        .asciz "Escort me to my love!"
+        .align 2,0
 
 	.global gUnknown_80E8884
 gUnknown_80E8884: @ 80E8884
-	.incbin "baserom.gba", 0xE8884, 0x8
+        .asciz "Near %s"
+        .align 2,0
 
 	.global gUnknown_80E888C
 gUnknown_80E888C: @ 80E888C
-	.incbin "baserom.gba", 0xE888C, 0x14
+        .asciz "Rescue Description"
+        .align 2,0
 
 	.global gUnknown_80E88A0
 gUnknown_80E88A0: @ 80E88A0
-	.incbin "baserom.gba", 0xE88A0, 0x28
+        .asciz "Please punish bad #C6Mankey#R~27s gang."
+        .align 2,0
 
 	.global gUnknown_80E88C8
 gUnknown_80E88C8: @ 80E88C8
@@ -3507,11 +3531,13 @@ gUnknown_80E8920: @ 80E8920
 
 	.global gUnknown_80E8968
 gUnknown_80E8968: @ 80E8968
-	.incbin "baserom.gba", 0xE8968, 0x48
+        .asciz "With the item #C4%s#R~2c I can\nevolve! I~27m yearning to evolve! Help!"
+        .align 2,0
 
 	.global gUnknown_80E89B0
 gUnknown_80E89B0: @ 80E89B0
-	.incbin "baserom.gba", 0xE89B0, 0x4C
+        .asciz "The #C4%s#R! What I love to eat\nand can~27t live without! Please get one!"
+        .align 2,0
 
 	.global gUnknown_80E89FC
 gUnknown_80E89FC: @ 80E89FC
@@ -3608,7 +3634,16 @@ gUnknown_80E8B94: @ 80E8B94
 
 	.global gUnknown_80E8BCC
 gUnknown_80E8BCC: @ 80E8BCC
-	.incbin "baserom.gba", 0xE8BCC, 0x2C
+        .byte 0xC8, 0x8B, 0x0E, 0x08
+        .byte 0xF0, 0x8B, 0x0E, 0x08 @ Pointer to Suspend
+        .byte 0xE4, 0x8B, 0x0E, 0x08 @ Pointer to Take Job
+        .byte 0xDC, 0x8B, 0x0E, 0x08 @ Pointer to Done
+        .asciz "Done"
+        .align 2,0
+        .asciz "Take Job"
+        .align 2,0
+        .asciz "Suspend"
+        .align 2,0
 
 	.global gUnknown_80E8BF8
 gUnknown_80E8BF8: @ 80E8BF8
@@ -3682,15 +3717,30 @@ gUnknown_80EB72C: @ 80EB72C
 
 	.global gUnknown_80F4278
 gUnknown_80F4278: @ 80F4278
-	.incbin "baserom.gba", 0xF4278, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F4290
 gUnknown_80F4290: @ 80F4290
-	.incbin "baserom.gba", 0xF4290, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x09, 0x00, 0x0B, 0x00
+        .byte 0x0D, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F42A8
 gUnknown_80F42A8: @ 80F42A8
-	.incbin "baserom.gba", 0xF42A8, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x0E, 0x00, 0x04, 0x00
+        .byte 0x05, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F42C0
 gUnknown_80F42C0: @ 80F42C0
@@ -3753,727 +3803,995 @@ gUnknown_80F4DA0: @ 80F4DA0
 
 	.global gUnknown_80F4DA2
 gUnknown_80F4DA2: @ 80F4DA2
-	.incbin "baserom.gba", 0xF4DA2, 0x2
+        .byte 0x08, 0x00
 
 	.global gUnknown_80F4DA4
 gUnknown_80F4DA4: @ 80F4DA4
-	.incbin "baserom.gba", 0xF4DA4, 0x2
+        .byte 0x0C, 0x00
 
 	.global gUnknown_80F4DA6
 gUnknown_80F4DA6: @ 80F4DA6
-	.incbin "baserom.gba", 0xF4DA6, 0x2
+        .byte 0x0A, 0x00
 
 	.global gUnknown_80F4DA8
 gUnknown_80F4DA8: @ 80F4DA8
-	.incbin "baserom.gba", 0xF4DA8, 0x2
+        .byte 0x04, 0x00
 
 	.global gUnknown_80F4DAA
 gUnknown_80F4DAA: @ 80F4DAA
-	.incbin "baserom.gba", 0xF4DAA, 0x2
+        .byte 0x24, 0x00
 
 	.global gUnknown_80F4DAC
 gUnknown_80F4DAC: @ 80F4DAC
-	.incbin "baserom.gba", 0xF4DAC, 0x2
+        .byte 0x05, 0x00
 
 	.global gUnknown_80F4DAE
 gUnknown_80F4DAE: @ 80F4DAE
-	.incbin "baserom.gba", 0xF4DAE, 0x2
+        .byte 0x28, 0x00
 
 	.global gUnknown_80F4DB0
 gUnknown_80F4DB0: @ 80F4DB0
-	.incbin "baserom.gba", 0xF4DB0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4db0, 0x2
+    .byte 0x28, 0x00
 
 	.global gUnknown_80F4DB2
 gUnknown_80F4DB2: @ 80F4DB2
-	.incbin "baserom.gba", 0xF4DB2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4db2, 0x2
+    .byte 0x46, 0x00
 
 	.global gUnknown_80F4DB4
 gUnknown_80F4DB4: @ 80F4DB4
-	.incbin "baserom.gba", 0xF4DB4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4db4, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4DB6
 gUnknown_80F4DB6: @ 80F4DB6
-	.incbin "baserom.gba", 0xF4DB6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4db6, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DB8
 gUnknown_80F4DB8: @ 80F4DB8
-	.incbin "baserom.gba", 0xF4DB8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4db8, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DBA
 gUnknown_80F4DBA: @ 80F4DBA
-	.incbin "baserom.gba", 0xF4DBA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dba, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DBC
 gUnknown_80F4DBC: @ 80F4DBC
-	.incbin "baserom.gba", 0xF4DBC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dbc, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DBE
 gUnknown_80F4DBE: @ 80F4DBE
-	.incbin "baserom.gba", 0xF4DBE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dbe, 0x2
+    .byte 0x12, 0x00
 
 	.global gUnknown_80F4DC0
 gUnknown_80F4DC0: @ 80F4DC0
-	.incbin "baserom.gba", 0xF4DC0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dc0, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DC2
 gUnknown_80F4DC2: @ 80F4DC2
-	.incbin "baserom.gba", 0xF4DC2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dc2, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DC4
 gUnknown_80F4DC4: @ 80F4DC4
-	.incbin "baserom.gba", 0xF4DC4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dc4, 0x2
+    .byte 0x28, 0x00
 
 	.global gUnknown_80F4DC6
 gUnknown_80F4DC6: @ 80F4DC6
-	.incbin "baserom.gba", 0xF4DC6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dc6, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DC8
 gUnknown_80F4DC8: @ 80F4DC8
-	.incbin "baserom.gba", 0xF4DC8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dc8, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DCA
 gUnknown_80F4DCA: @ 80F4DCA
-	.incbin "baserom.gba", 0xF4DCA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dca, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4DCC
 gUnknown_80F4DCC: @ 80F4DCC
-	.incbin "baserom.gba", 0xF4DCC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dcc, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4DCE
 gUnknown_80F4DCE: @ 80F4DCE
-	.incbin "baserom.gba", 0xF4DCE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dce, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DD0
 gUnknown_80F4DD0: @ 80F4DD0
-	.incbin "baserom.gba", 0xF4DD0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dd0, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DD2
 gUnknown_80F4DD2: @ 80F4DD2
-	.incbin "baserom.gba", 0xF4DD2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dd2, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DD4
 gUnknown_80F4DD4: @ 80F4DD4
-	.incbin "baserom.gba", 0xF4DD4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dd4, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DD6
 gUnknown_80F4DD6: @ 80F4DD6
-	.incbin "baserom.gba", 0xF4DD6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dd6, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DD8
 gUnknown_80F4DD8: @ 80F4DD8
-	.incbin "baserom.gba", 0xF4DD8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dd8, 0x2
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4DDA
 gUnknown_80F4DDA: @ 80F4DDA
-	.incbin "baserom.gba", 0xF4DDA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dda, 0x2
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4DDC
 gUnknown_80F4DDC: @ 80F4DDC
-	.incbin "baserom.gba", 0xF4DDC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ddc, 0x4
+    .byte 0x32, 0x00
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4DE0
 gUnknown_80F4DE0: @ 80F4DE0
-	.incbin "baserom.gba", 0xF4DE0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4de0, 0x2
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4DE2
 gUnknown_80F4DE2: @ 80F4DE2
-	.incbin "baserom.gba", 0xF4DE2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4de2, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DE4
 gUnknown_80F4DE4: @ 80F4DE4
-	.incbin "baserom.gba", 0xF4DE4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4de4, 0x2
+    .byte 0x0f, 0x00
 
 	.global gUnknown_80F4DE6
 gUnknown_80F4DE6: @ 80F4DE6
-	.incbin "baserom.gba", 0xF4DE6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4de6, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DE8
 gUnknown_80F4DE8: @ 80F4DE8
-	.incbin "baserom.gba", 0xF4DE8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4de8, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DEA
 gUnknown_80F4DEA: @ 80F4DEA
-	.incbin "baserom.gba", 0xF4DEA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dea, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DEC
 gUnknown_80F4DEC: @ 80F4DEC
-	.incbin "baserom.gba", 0xF4DEC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dec, 0x2
+    .byte 0x0f, 0x00
 
 	.global gUnknown_80F4DEE
 gUnknown_80F4DEE: @ 80F4DEE
-	.incbin "baserom.gba", 0xF4DEE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dee, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DF0
 gUnknown_80F4DF0: @ 80F4DF0
-	.incbin "baserom.gba", 0xF4DF0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4df0, 0x2
+    .byte 0x19, 0x00
 
 	.global gUnknown_80F4DF2
 gUnknown_80F4DF2: @ 80F4DF2
-	.incbin "baserom.gba", 0xF4DF2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4df2, 0x2
+    .byte 0x23, 0x00
 
 	.global gUnknown_80F4DF4
 gUnknown_80F4DF4: @ 80F4DF4
-	.incbin "baserom.gba", 0xF4DF4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4df4, 0x2
+    .byte 0x19, 0x00
 
 	.global gUnknown_80F4DF6
 gUnknown_80F4DF6: @ 80F4DF6
-	.incbin "baserom.gba", 0xF4DF6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4df6, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4DF8
 gUnknown_80F4DF8: @ 80F4DF8
-	.incbin "baserom.gba", 0xF4DF8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4df8, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4DFA
 gUnknown_80F4DFA: @ 80F4DFA
-	.incbin "baserom.gba", 0xF4DFA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dfa, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4DFC
 gUnknown_80F4DFC: @ 80F4DFC
-	.incbin "baserom.gba", 0xF4DFC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dfc, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4DFE
 gUnknown_80F4DFE: @ 80F4DFE
-	.incbin "baserom.gba", 0xF4DFE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4dfe, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4E00
 gUnknown_80F4E00: @ 80F4E00
-	.incbin "baserom.gba", 0xF4E00, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e00, 0x2
+    .byte 0x28, 0x00
 
 	.global gUnknown_80F4E02
 gUnknown_80F4E02: @ 80F4E02
-	.incbin "baserom.gba", 0xF4E02, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e02, 0x2
+    .byte 0x3c, 0x00
 
 	.global gUnknown_80F4E04
 gUnknown_80F4E04: @ 80F4E04
-	.incbin "baserom.gba", 0xF4E04, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e04, 0x2
+    .byte 0x3c, 0x00
 
 	.global gUnknown_80F4E06
 gUnknown_80F4E06: @ 80F4E06
-	.incbin "baserom.gba", 0xF4E06, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e06, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4E08
 gUnknown_80F4E08: @ 80F4E08
-	.incbin "baserom.gba", 0xF4E08, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e08, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4E0A
 gUnknown_80F4E0A: @ 80F4E0A
-	.incbin "baserom.gba", 0xF4E0A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e0a, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4E0C
 gUnknown_80F4E0C: @ 80F4E0C
-	.incbin "baserom.gba", 0xF4E0C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e0c, 0x2
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4E0E
 gUnknown_80F4E0E: @ 80F4E0E
-	.incbin "baserom.gba", 0xF4E0E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e0e, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4E10
 gUnknown_80F4E10: @ 80F4E10
-	.incbin "baserom.gba", 0xF4E10, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e10, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E12
 gUnknown_80F4E12: @ 80F4E12
-	.incbin "baserom.gba", 0xF4E12, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e12, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E14
 gUnknown_80F4E14: @ 80F4E14
-	.incbin "baserom.gba", 0xF4E14, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e14, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E16
 gUnknown_80F4E16: @ 80F4E16
-	.incbin "baserom.gba", 0xF4E16, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e16, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E18
 gUnknown_80F4E18: @ 80F4E18
-	.incbin "baserom.gba", 0xF4E18, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e18, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E1A
 gUnknown_80F4E1A: @ 80F4E1A
-	.incbin "baserom.gba", 0xF4E1A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e1a, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E1C
 gUnknown_80F4E1C: @ 80F4E1C
-	.incbin "baserom.gba", 0xF4E1C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e1c, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E1E
 gUnknown_80F4E1E: @ 80F4E1E
-	.incbin "baserom.gba", 0xF4E1E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e1e, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E20
 gUnknown_80F4E20: @ 80F4E20
-	.incbin "baserom.gba", 0xF4E20, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4e20, 0x2
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E22
 gUnknown_80F4E22: @ 80F4E22
-	.incbin "baserom.gba", 0xF4E22, 0xA
+@ replacing .incbin "baserom.gba", 0x000f4e22, 0xa
+    .byte 0x64, 0x00
+    .byte 0x14, 0x00
+    .byte 0x1e, 0x00
+    .byte 0x28, 0x00
+    .byte 0x32, 0x00
 
 	.global gUnknown_80F4E2C
 gUnknown_80F4E2C: @ 80F4E2C
-	.incbin "baserom.gba", 0xF4E2C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e2c, 0x4
+    .byte 0x03, 0x00
+    .byte 0x05, 0x00
 
 	.global gUnknown_80F4E30
 gUnknown_80F4E30: @ 80F4E30
-	.incbin "baserom.gba", 0xF4E30, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e30, 0x4
+    .byte 0x7f, 0x00
+    .byte 0x7f, 0x00
 
 	.global gUnknown_80F4E34
 gUnknown_80F4E34: @ 80F4E34
-	.incbin "baserom.gba", 0xF4E34, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e34, 0x4
+    .byte 0x7f, 0x00
+    .byte 0x7f, 0x00
 
 	.global gUnknown_80F4E38
 gUnknown_80F4E38: @ 80F4E38
-	.incbin "baserom.gba", 0xF4E38, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e38, 0x4
+    .byte 0x7f, 0x00
+    .byte 0x7f, 0x00
 
 	.global gUnknown_80F4E3C
 gUnknown_80F4E3C: @ 80F4E3C
-	.incbin "baserom.gba", 0xF4E3C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e3c, 0x4
+    .byte 0x01, 0x00
+    .byte 0x01, 0x00
 
 	.global gUnknown_80F4E40
 gUnknown_80F4E40: @ 80F4E40
-	.incbin "baserom.gba", 0xF4E40, 0x8
+@ replacing .incbin "baserom.gba", 0x000f4e40, 0x8
+    .byte 0x08, 0x00
+    .byte 0x0a, 0x00
+    .byte 0x03, 0x00
+    .byte 0x04, 0x00
 
 	.global gUnknown_80F4E48
 gUnknown_80F4E48: @ 80F4E48
-	.incbin "baserom.gba", 0xF4E48, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e48, 0x4
+    .byte 0x06, 0x00
+    .byte 0x08, 0x00
 
 	.global gUnknown_80F4E4C
 gUnknown_80F4E4C: @ 80F4E4C
-	.incbin "baserom.gba", 0xF4E4C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e4c, 0x4
+    .byte 0x06, 0x00
+    .byte 0x0c, 0x00
 
 	.global gUnknown_80F4E50
 gUnknown_80F4E50: @ 80F4E50
-	.incbin "baserom.gba", 0xF4E50, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e50, 0x4
+    .byte 0x01, 0x00
+    .byte 0x02, 0x00
 
 	.global gUnknown_80F4E54
 gUnknown_80F4E54: @ 80F4E54
-	.incbin "baserom.gba", 0xF4E54, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e54, 0x4
+    .byte 0x02, 0x00
+    .byte 0x05, 0x00
 
 	.global gUnknown_80F4E58
 gUnknown_80F4E58: @ 80F4E58
-	.incbin "baserom.gba", 0xF4E58, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e58, 0x4
+    .byte 0x03, 0x00
+    .byte 0x06, 0x00
 
 	.global gUnknown_80F4E5C
 gUnknown_80F4E5C: @ 80F4E5C
-	.incbin "baserom.gba", 0xF4E5C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e5c, 0x4
+    .byte 0x02, 0x00
+    .byte 0x05, 0x00
 
 	.global gUnknown_80F4E60
 gUnknown_80F4E60: @ 80F4E60
-	.incbin "baserom.gba", 0xF4E60, 0x10
+@ replacing .incbin "baserom.gba", 0x000f4e60, 0x10
+    .byte 0x0f, 0x00
+    .byte 0x1e, 0x00
+    .byte 0x02, 0x00
+    .byte 0x03, 0x00
+    .byte 0x02, 0x00
+    .byte 0x06, 0x00
+    .byte 0x0a, 0x00
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4E70
 gUnknown_80F4E70: @ 80F4E70
-	.incbin "baserom.gba", 0xF4E70, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e70, 0x4
+    .byte 0x01, 0x00
+    .byte 0x01, 0x00
 
 	.global gUnknown_80F4E74
 gUnknown_80F4E74: @ 80F4E74
-	.incbin "baserom.gba", 0xF4E74, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e74, 0x4
+    .byte 0x03, 0x00
+    .byte 0x07, 0x00
 
 	.global gUnknown_80F4E78
 gUnknown_80F4E78: @ 80F4E78
-	.incbin "baserom.gba", 0xF4E78, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e78, 0x4
+.byte 0x04, 0x00
+.byte 0x08, 0x00
 
 	.global gUnknown_80F4E7C
 gUnknown_80F4E7C: @ 80F4E7C
-	.incbin "baserom.gba", 0xF4E7C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e7c, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4E80
 gUnknown_80F4E80: @ 80F4E80
-	.incbin "baserom.gba", 0xF4E80, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e80, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4E84
 gUnknown_80F4E84: @ 80F4E84
-	.incbin "baserom.gba", 0xF4E84, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e84, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4E88
 gUnknown_80F4E88: @ 80F4E88
-	.incbin "baserom.gba", 0xF4E88, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e88, 0x4
+.byte 0x0f, 0x00
+.byte 0x14, 0x00
 
 	.global gUnknown_80F4E8C
 gUnknown_80F4E8C: @ 80F4E8C
-	.incbin "baserom.gba", 0xF4E8C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e8c, 0x4
+.byte 0x0a, 0x00
+.byte 0x0e, 0x00
 
 	.global gUnknown_80F4E90
 gUnknown_80F4E90: @ 80F4E90
-	.incbin "baserom.gba", 0xF4E90, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e90, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4E94
 gUnknown_80F4E94: @ 80F4E94
-	.incbin "baserom.gba", 0xF4E94, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e94, 0x4
+.byte 0x02, 0x00
+.byte 0x04, 0x00
 
 	.global gUnknown_80F4E98
 gUnknown_80F4E98: @ 80F4E98
-	.incbin "baserom.gba", 0xF4E98, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e98, 0x4
+.byte 0x06, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4E9C
 gUnknown_80F4E9C: @ 80F4E9C
-	.incbin "baserom.gba", 0xF4E9C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4e9c, 0x4
+.byte 0x03, 0x00
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4EA0
 gUnknown_80F4EA0: @ 80F4EA0
-	.incbin "baserom.gba", 0xF4EA0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ea0, 0x4
+.byte 0x04, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4EA4
 gUnknown_80F4EA4: @ 80F4EA4
-	.incbin "baserom.gba", 0xF4EA4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ea4, 0x4
+.byte 0x03, 0x00
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4EA8
 gUnknown_80F4EA8: @ 80F4EA8
-	.incbin "baserom.gba", 0xF4EA8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ea8, 0x4
+.byte 0x03, 0x00
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4EAC
 gUnknown_80F4EAC: @ 80F4EAC
-	.incbin "baserom.gba", 0xF4EAC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4eac, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EB0
 gUnknown_80F4EB0: @ 80F4EB0
-	.incbin "baserom.gba", 0xF4EB0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4eb0, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EB4
 gUnknown_80F4EB4: @ 80F4EB4
-	.incbin "baserom.gba", 0xF4EB4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4eb4, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EB8
 gUnknown_80F4EB8: @ 80F4EB8
-	.incbin "baserom.gba", 0xF4EB8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4eb8, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EBC
 gUnknown_80F4EBC: @ 80F4EBC
-	.incbin "baserom.gba", 0xF4EBC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ebc, 0x4
+.byte 0x14, 0x00
+.byte 0x1e, 0x00
 
 	.global gUnknown_80F4EC0
 gUnknown_80F4EC0: @ 80F4EC0
-	.incbin "baserom.gba", 0xF4EC0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ec0, 0x4
+.byte 0x7f, 0x00
+.byte 0x7f, 0x00
 
 	.global gUnknown_80F4EC4
 gUnknown_80F4EC4: @ 80F4EC4
-	.incbin "baserom.gba", 0xF4EC4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ec4, 0x4
+.byte 0x02, 0x00
+.byte 0x04, 0x00
 
 	.global gUnknown_80F4EC8
 gUnknown_80F4EC8: @ 80F4EC8
-	.incbin "baserom.gba", 0xF4EC8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ec8, 0x4
+.byte 0x02, 0x00
+.byte 0x04, 0x00
 
 	.global gUnknown_80F4ECC
 gUnknown_80F4ECC: @ 80F4ECC
-	.incbin "baserom.gba", 0xF4ECC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ecc, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4ED0
 gUnknown_80F4ED0: @ 80F4ED0
-	.incbin "baserom.gba", 0xF4ED0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ed0, 0x4
+.byte 0x14, 0x00
+.byte 0x32, 0x00
 
 	.global gUnknown_80F4ED4
 gUnknown_80F4ED4: @ 80F4ED4
-	.incbin "baserom.gba", 0xF4ED4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ed4, 0x4
+.byte 0x02, 0x00
+.byte 0x06, 0x00
 
 	.global gUnknown_80F4ED8
 gUnknown_80F4ED8: @ 80F4ED8
-	.incbin "baserom.gba", 0xF4ED8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ed8, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EDC
 gUnknown_80F4EDC: @ 80F4EDC
-	.incbin "baserom.gba", 0xF4EDC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4edc, 0x4
+.byte 0x01, 0x00
+.byte 0x06, 0x00
 
 	.global gUnknown_80F4EE0
 gUnknown_80F4EE0: @ 80F4EE0
-	.incbin "baserom.gba", 0xF4EE0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ee0, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EE4
 gUnknown_80F4EE4: @ 80F4EE4
-	.incbin "baserom.gba", 0xF4EE4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ee4, 0x4
+.byte 0x0a, 0x00
+.byte 0x14, 0x00
 
 	.global gUnknown_80F4EE8
 gUnknown_80F4EE8: @ 80F4EE8
-	.incbin "baserom.gba", 0xF4EE8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ee8, 0x4
+.byte 0x0a, 0x00
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4EEC
 gUnknown_80F4EEC: @ 80F4EEC
-	.incbin "baserom.gba", 0xF4EEC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4eec, 0x4
+.byte 0x03, 0x00
+.byte 0x03, 0x00
 
 	.global gUnknown_80F4EF0
 gUnknown_80F4EF0: @ 80F4EF0
-	.incbin "baserom.gba", 0xF4EF0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ef0, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4EF4
 gUnknown_80F4EF4: @ 80F4EF4
-	.incbin "baserom.gba", 0xF4EF4, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ef4, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4EF8
 gUnknown_80F4EF8: @ 80F4EF8
-	.incbin "baserom.gba", 0xF4EF8, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4ef8, 0x4
+.byte 0x03, 0x00
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4EFC
 gUnknown_80F4EFC: @ 80F4EFC
-	.incbin "baserom.gba", 0xF4EFC, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4efc, 0x4
+.byte 0x7f, 0x00
+.byte 0x7f, 0x00
 
 	.global gUnknown_80F4F00
 gUnknown_80F4F00: @ 80F4F00
-	.incbin "baserom.gba", 0xF4F00, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f00, 0x4
+.byte 0x04, 0x00
+.byte 0x06, 0x00
 
 	.global gUnknown_80F4F04
 gUnknown_80F4F04: @ 80F4F04
-	.incbin "baserom.gba", 0xF4F04, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f04, 0x4
+.byte 0x7f, 0x00
+.byte 0x7f, 0x00
 
 	.global gUnknown_80F4F08
 gUnknown_80F4F08: @ 80F4F08
-	.incbin "baserom.gba", 0xF4F08, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f08, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F0C
 gUnknown_80F4F0C: @ 80F4F0C
-	.incbin "baserom.gba", 0xF4F0C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f0c, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F10
 gUnknown_80F4F10: @ 80F4F10
-	.incbin "baserom.gba", 0xF4F10, 0x8
+@ replacing .incbin "baserom.gba", 0x000f4f10, 0x8
+.byte 0x7f, 0x00
+.byte 0x7f, 0x00
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F18
 gUnknown_80F4F18: @ 80F4F18
-	.incbin "baserom.gba", 0xF4F18, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f18, 0x4
+.byte 0x02, 0x00
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F1C
 gUnknown_80F4F1C: @ 80F4F1C
-	.incbin "baserom.gba", 0xF4F1C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f1c, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F20
 gUnknown_80F4F20: @ 80F4F20
-	.incbin "baserom.gba", 0xF4F20, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f20, 0x4
+.byte 0x0a, 0x00
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F24
 gUnknown_80F4F24: @ 80F4F24
-	.incbin "baserom.gba", 0xF4F24, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f24, 0x4
+.byte 0x0f, 0x00
+.byte 0x14, 0x00
 
 	.global gUnknown_80F4F28
 gUnknown_80F4F28: @ 80F4F28
-	.incbin "baserom.gba", 0xF4F28, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f28, 0x4
+.byte 0x02, 0x00
+.byte 0x02, 0x00
 
 	.global gUnknown_80F4F2C
 gUnknown_80F4F2C: @ 80F4F2C
-	.incbin "baserom.gba", 0xF4F2C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f2c, 0x4
+.byte 0x04, 0x00
+.byte 0x08, 0x00
 
 	.global gUnknown_80F4F30
 gUnknown_80F4F30: @ 80F4F30
-	.incbin "baserom.gba", 0xF4F30, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f30, 0x2
+.byte 0xfa, 0x00
 
 	.global gUnknown_80F4F32
 gUnknown_80F4F32: @ 80F4F32
-	.incbin "baserom.gba", 0xF4F32, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f32, 0x2
+.byte 0x14, 0x00
 
 	.global gUnknown_80F4F34
 gUnknown_80F4F34: @ 80F4F34
-	.incbin "baserom.gba", 0xF4F34, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f34, 0x2
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F36
 gUnknown_80F4F36: @ 80F4F36
-	.incbin "baserom.gba", 0xF4F36, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f36, 0x2
+.byte 0x02, 0x00
 
 	.global gUnknown_80F4F38
 gUnknown_80F4F38: @ 80F4F38
-	.incbin "baserom.gba", 0xF4F38, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f38, 0x2
+.byte 0x02, 0x00
 
 	.global gUnknown_80F4F3A
 gUnknown_80F4F3A: @ 80F4F3A
-	.incbin "baserom.gba", 0xF4F3A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f3a, 0x2
+.byte 0x02, 0x00
 
 	.global gUnknown_80F4F3C
 gUnknown_80F4F3C: @ 80F4F3C
-	.incbin "baserom.gba", 0xF4F3C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f3c, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F3E
 gUnknown_80F4F3E: @ 80F4F3E
-	.incbin "baserom.gba", 0xF4F3E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f3e, 0x2
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F40
 gUnknown_80F4F40: @ 80F4F40
-	.incbin "baserom.gba", 0xF4F40, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f40, 0x2
+.byte 0x02, 0x00
 
 	.global gUnknown_80F4F42
 gUnknown_80F4F42: @ 80F4F42
-	.incbin "baserom.gba", 0xF4F42, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f42, 0x4
+.byte 0x14, 0x00
+.byte 0x5f, 0x00
 
 	.global gUnknown_80F4F46
 gUnknown_80F4F46: @ 80F4F46
-	.incbin "baserom.gba", 0xF4F46, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f46, 0x2
+.byte 0x0c, 0x00
 
 	.global gUnknown_80F4F48
 gUnknown_80F4F48: @ 80F4F48
-	.incbin "baserom.gba", 0xF4F48, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f48, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F4C
 gUnknown_80F4F4C: @ 80F4F4C
-	.incbin "baserom.gba", 0xF4F4C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f4c, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F50
 gUnknown_80F4F50: @ 80F4F50
-	.incbin "baserom.gba", 0xF4F50, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f50, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F54
 gUnknown_80F4F54: @ 80F4F54
-	.incbin "baserom.gba", 0xF4F54, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f54, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F58
 gUnknown_80F4F58: @ 80F4F58
-	.incbin "baserom.gba", 0xF4F58, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f58, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F5C
 gUnknown_80F4F5C: @ 80F4F5C
-	.incbin "baserom.gba", 0xF4F5C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f5c, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F60
 gUnknown_80F4F60: @ 80F4F60
-	.incbin "baserom.gba", 0xF4F60, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f60, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F64
 gUnknown_80F4F64: @ 80F4F64
-	.incbin "baserom.gba", 0xF4F64, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f64, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F68
 gUnknown_80F4F68: @ 80F4F68
-	.incbin "baserom.gba", 0xF4F68, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f68, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F6C
 gUnknown_80F4F6C: @ 80F4F6C
-	.incbin "baserom.gba", 0xF4F6C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f6c, 0x4
+.byte 0x00, 0x02
+.byte 0x00, 0x00
 
 	.global gUnknown_80F4F70
 gUnknown_80F4F70: @ 80F4F70
-	.incbin "baserom.gba", 0xF4F70, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f70, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F72
 gUnknown_80F4F72: @ 80F4F72
-	.incbin "baserom.gba", 0xF4F72, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f72, 0x2
+.byte 0x04, 0x00
 
 	.global gUnknown_80F4F74
 gUnknown_80F4F74: @ 80F4F74
-	.incbin "baserom.gba", 0xF4F74, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f74, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F76
 gUnknown_80F4F76: @ 80F4F76
-	.incbin "baserom.gba", 0xF4F76, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f76, 0x2
+.byte 0x06, 0x00
 
 	.global gUnknown_80F4F78
 gUnknown_80F4F78: @ 80F4F78
-	.incbin "baserom.gba", 0xF4F78, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f78, 0x2
+.byte 0x08, 0x00
 
 	.global gUnknown_80F4F7A
 gUnknown_80F4F7A: @ 80F4F7A
-	.incbin "baserom.gba", 0xF4F7A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f7a, 0x2
+.byte 0xe7, 0x03
 
 	.global gUnknown_80F4F7C
 gUnknown_80F4F7C: @ 80F4F7C
-	.incbin "baserom.gba", 0xF4F7C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f7c, 0x2
+.byte 0x37, 0x00
 
 	.global gUnknown_80F4F7E
 gUnknown_80F4F7E: @ 80F4F7E
-	.incbin "baserom.gba", 0xF4F7E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f7e, 0x2
+.byte 0x41, 0x00
 
 	.global gUnknown_80F4F80
 gUnknown_80F4F80: @ 80F4F80
-	.incbin "baserom.gba", 0xF4F80, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f80, 0x2
+.byte 0x23, 0x00
 
 	.global gUnknown_80F4F82
 gUnknown_80F4F82: @ 80F4F82
-	.incbin "baserom.gba", 0xF4F82, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f82, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F84
 gUnknown_80F4F84: @ 80F4F84
-	.incbin "baserom.gba", 0xF4F84, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f84, 0x2
+.byte 0x14, 0x00
 
 	.global gUnknown_80F4F86
 gUnknown_80F4F86: @ 80F4F86
-	.incbin "baserom.gba", 0xF4F86, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4f86, 0x4
+.byte 0x0a, 0x00
+.byte 0x0f, 0x00
 
 	.global gUnknown_80F4F8A
 gUnknown_80F4F8A: @ 80F4F8A
-	.incbin "baserom.gba", 0xF4F8A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f8a, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F8C
 gUnknown_80F4F8C: @ 80F4F8C
-	.incbin "baserom.gba", 0xF4F8C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f8c, 0x2
+.byte 0x23, 0x00
 
 	.global gUnknown_80F4F8E
 gUnknown_80F4F8E: @ 80F4F8E
-	.incbin "baserom.gba", 0xF4F8E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f8e, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F90
 gUnknown_80F4F90: @ 80F4F90
-	.incbin "baserom.gba", 0xF4F90, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f90, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F4F92
 gUnknown_80F4F92: @ 80F4F92
-	.incbin "baserom.gba", 0xF4F92, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4f92, 0x2
+.byte 0x0a, 0x00
 
 	.global gUnknown_80F4F94
 gUnknown_80F4F94: @ 80F4F94
-	.incbin "baserom.gba", 0xF4F94, 0xE
+@ replacing .incbin "baserom.gba", 0x000f4f94, 0xe
+    .byte 0x05, 0x00
+    .byte 0x0a, 0x00
+    .byte 0x0f, 0x00
+    .byte 0x19, 0x00
+    .byte 0x1e, 0x00
+    .byte 0x23, 0x00
+    .byte 0x28, 0x00
 
 	.global gUnknown_80F4FA2
 gUnknown_80F4FA2: @ 80F4FA2
-	.incbin "baserom.gba", 0xF4FA2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fa2, 0x2
+.byte 0x5a, 0x00
 
 	.global gUnknown_80F4FA4
 gUnknown_80F4FA4: @ 80F4FA4
-	.incbin "baserom.gba", 0xF4FA4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fa4, 0x2
+    .byte 0x14, 0x00
 
 	.global gUnknown_80F4FA6
 gUnknown_80F4FA6: @ 80F4FA6
-	.incbin "baserom.gba", 0xF4FA6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fa6, 0x2
+    .byte 0x2d, 0x00
 
 	.global gUnknown_80F4FA8
 gUnknown_80F4FA8: @ 80F4FA8
-	.incbin "baserom.gba", 0xF4FA8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fa8, 0x2
+    .byte 0x0f, 0x00
 
 	.global gUnknown_80F4FAA
 gUnknown_80F4FAA: @ 80F4FAA
-	.incbin "baserom.gba", 0xF4FAA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4faa, 0x2
+    .byte 0x1e, 0x00
 
 	.global gUnknown_80F4FAC
 gUnknown_80F4FAC: @ 80F4FAC
-	.incbin "baserom.gba", 0xF4FAC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fac, 0x2
+    .byte 0x01, 0x00
 
 	.global gUnknown_80F4FAE
 gUnknown_80F4FAE: @ 80F4FAE
-	.incbin "baserom.gba", 0xF4FAE, 0x4
+@ replacing .incbin "baserom.gba", 0x000f4fae, 0x4
+    .byte 0x02, 0x00
+    .byte 0x19, 0x00
 
 	.global gUnknown_80F4FB2
 gUnknown_80F4FB2: @ 80F4FB2
-	.incbin "baserom.gba", 0xF4FB2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fb2, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4FB4
 gUnknown_80F4FB4: @ 80F4FB4
-	.incbin "baserom.gba", 0xF4FB4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fb4, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4FB6
 gUnknown_80F4FB6: @ 80F4FB6
-	.incbin "baserom.gba", 0xF4FB6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fb6, 0x2
+    .byte 0x64, 0x00
 
 	.global gUnknown_80F4FB8
 gUnknown_80F4FB8: @ 80F4FB8
-	.incbin "baserom.gba", 0xF4FB8, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fb8, 0x2
+    .byte 0x00, 0x00
 
 	.global gUnknown_80F4FBA
 gUnknown_80F4FBA: @ 80F4FBA
-	.incbin "baserom.gba", 0xF4FBA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fba, 0x2
+    .byte 0x64, 0x00
 
 	.global gUnknown_80F4FBC
 gUnknown_80F4FBC: @ 80F4FBC
-	.incbin "baserom.gba", 0xF4FBC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fbc, 0x2
+    .byte 0x02, 0x00
 
 	.global gUnknown_80F4FBE
 gUnknown_80F4FBE: @ 80F4FBE
-	.incbin "baserom.gba", 0xF4FBE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fbe, 0x2
+    .byte 0x03, 0x00
 
 	.global gUnknown_80F4FC0
 gUnknown_80F4FC0: @ 80F4FC0
-	.incbin "baserom.gba", 0xF4FC0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fc0, 0x2
+    .byte 0x24, 0xff
 
 	.global gUnknown_80F4FC2
 gUnknown_80F4FC2: @ 80F4FC2
-	.incbin "baserom.gba", 0xF4FC2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fc2, 0x2
+    .byte 0x6a, 0xff
 
 	.global gUnknown_80F4FC4
 gUnknown_80F4FC4: @ 80F4FC4
-	.incbin "baserom.gba", 0xF4FC4, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fc4, 0x2
+    .byte 0x9c, 0xff
 
 	.global gUnknown_80F4FC6
 gUnknown_80F4FC6: @ 80F4FC6
-	.incbin "baserom.gba", 0xF4FC6, 0x2
+@ replacing .incbin "baserom.gba", 0x000f4fc6, 0x2
+    .byte 0x0a, 0x00
 
 	.global gUnknown_80F4FC8
 gUnknown_80F4FC8: @ 80F4FC8
