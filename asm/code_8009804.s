@@ -2356,32 +2356,4 @@ _0800A878:
 	bx r0
 	thumb_func_end sub_800A78C
 
-	thumb_func_start sub_800A894
-sub_800A894:
-	push {lr}
-	adds r2, r0, 0
-	adds r0, r1, 0
-	cmp r0, 0
-	bgt _0800A8A0
-	movs r0, 0x1
-_0800A8A0:
-	ldr r1, _0800A8BC
-	cmp r0, r1
-	ble _0800A8A8
-	adds r0, r1, 0
-_0800A8A8:
-	ldr r1, _0800A8C0
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	str r0, [r2, 0x4]
-	movs r0, 0
-	str r0, [r2]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A8BC: .4byte 0x0000012b
-_0800A8C0: .4byte gUnknown_80B96E4
-	thumb_func_end sub_800A894
-
 	.align 2, 0 @ Don't pad with nop.

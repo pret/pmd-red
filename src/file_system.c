@@ -12,6 +12,26 @@ extern u32 sub_800AAB4(u32 r0, u32 r1, u32 r2);
 u8 *GetSiroPtr(struct OpenedFile *);
 void NDS_DecompressRLE(void *);
 
+struct UnkFileStruct
+{
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+};
+
+extern u32 gUnknown_80B96E4[];
+
+void sub_800A894(struct UnkFileStruct *r0, s32 r1)
+{
+    s32 temp;
+    temp = r1;
+    if(r1 <= 0)
+        temp = 1;
+    if(temp > 0x12b)
+        temp = 0x12b;
+    r0->unk4 = gUnknown_80B96E4[temp];
+    r0->unk0 = 0;
+}
+
 void InitFileSystem(void)
 {
     s32 i;
