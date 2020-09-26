@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8012A64
-sub_8012A64:
-	push {r4,lr}
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _08012A94
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _08012A7A
-	adds r0, r4, 0
-	bl nullsub_34
-_08012A7A:
-	ldrb r1, [r4, 0x1]
-	cmp r1, 0
-	beq _08012A88
-	movs r0, 0
-	strb r0, [r4, 0x1]
-	movs r0, 0x1
-	b _08012A98
-_08012A88:
-	ldrb r0, [r4, 0x2]
-	cmp r0, 0
-	beq _08012A94
-	strb r1, [r4, 0x2]
-	movs r0, 0x2
-	b _08012A98
-_08012A94:
-	bl sub_8012AE8
-_08012A98:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8012A64
-
 	thumb_func_start GetKeyPress
 GetKeyPress:
 	push {lr}
