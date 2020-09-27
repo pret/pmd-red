@@ -92,6 +92,8 @@ SECTIONS {
         asm/code_8092334.o(.text);
         asm/code_8098468.o(.text);
         asm/code_80A26CC.o(.text);
+        src/code_80A7714.o(.text);
+        asm/code_80A7714.o(.text);
         asm/m4a_1.o(.text);
         src/m4a_2.o(.text);
         asm/m4a_3.o(.text);
