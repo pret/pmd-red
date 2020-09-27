@@ -71,6 +71,8 @@ SECTIONS {
         asm/code_800D090.o(.text);
         src/code_80118A4.o(.text);
         asm/code_80118A4.o(.text);
+        src/code_80118A4_1.o(.text);
+        asm/fatal_system.o(.text);
         src/save.o(.text);
         asm/save.o(.text);
         src/save1.o(.text);
