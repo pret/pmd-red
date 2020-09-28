@@ -1,6 +1,5 @@
-        .global gUnknown_80EBA18
-gUnknown_80EBA18: @ 80EBA18
-	.incbin "baserom.gba", 0xEBA18, 0x6C0C
+        
+        .include "data/data_80EBA18.inc" @ includes Personality Test Questions
 
 	.global gPersonalityQuestionPointerTable
 gPersonalityQuestionPointerTable: @ 80F2624 (pointers to each question text)
