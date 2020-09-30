@@ -5,24 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808DE30
-sub_808DE30:
-	push {r4,lr}
-	adds r2, r1, 0
-	ldr r4, _0808DE4C
-	movs r1, 0x58
-	adds r3, r2, 0
-	muls r3, r1
-	ldr r1, [r4]
-	adds r1, r3
-	bl sub_808DE50
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808DE4C: .4byte gUnknown_203B45C
-	thumb_func_end sub_808DE30
-
 	thumb_func_start sub_808DE50
 sub_808DE50:
 	push {r4-r7,lr}
