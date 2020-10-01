@@ -2309,23 +2309,4 @@ _0808DE0A:
 	bx r1
 	thumb_func_end sub_808DDD0
 
-	thumb_func_start sub_808DE10
-sub_808DE10:
-	lsls r0, 16
-	asrs r0, 16
-	ldr r2, _0808DE2C
-	ldr r3, [r2]
-	lsls r2, r0, 3
-	adds r2, r0
-	lsls r2, 3
-	adds r2, r3
-	ldrh r0, [r2, 0x10]
-	asrs r0, r1
-	movs r1, 0x1
-	ands r0, r1
-	bx lr
-	.align 2, 0
-_0808DE2C: .4byte gMonsterParameters
-	thumb_func_end sub_808DE10
-
 .align 2,0

@@ -14,7 +14,8 @@ void LoadMonsterParameters(void)
 {
     gUnknown_203B45C = &gUnknown_202F400;
     gMonsterParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_81075F4, &gUnknown_8300500);
-    gMonsterParameters.unk0 = gMonsterParametersFile->data;
+    // TODO verify this... other parts imply this is an array
+    gMonsterParameters.species = gMonsterParametersFile->data;
     gUnknown_20384E8 = 0;
 }
 
