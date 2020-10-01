@@ -26,8 +26,8 @@ void sub_800A894(struct UnkFileStruct *r0, s32 r1)
     temp = r1;
     if(r1 <= 0)
         temp = 1;
-    if(temp > 0x12b)
-        temp = 0x12b;
+    if(temp > 299)
+        temp = 299;
     r0->unk4 = gUnknown_80B96E4[temp];
     r0->unk0 = 0;
 }
