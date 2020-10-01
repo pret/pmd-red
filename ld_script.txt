@@ -87,6 +87,8 @@ SECTIONS {
         asm/code_80521D0.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
+        src/pokemon_mid.o(.text);
+        asm/pokemon_1.o(.text);
         src/pokemon_1.o(.text);
         src/code_808DAB4.o(.text);
         asm/code_808DAB4.o(.text);
