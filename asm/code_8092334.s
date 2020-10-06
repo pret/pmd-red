@@ -6226,7 +6226,7 @@ sub_8094F88:
 	bx r0
 	.align 2, 0
 _08094F98: .4byte gUnknown_203B47C
-_08094F9C: .4byte gUnknown_2038C80
+_08094F9C: .4byte gPlayTime
 	thumb_func_end sub_8094F88
 
 	thumb_func_start sub_8094FA0
@@ -6234,7 +6234,7 @@ sub_8094FA0:
 	ldr r0, _08094FA4
 	bx lr
 	.align 2, 0
-_08094FA4: .4byte gUnknown_2038C80
+_08094FA4: .4byte gPlayTime
 	thumb_func_end sub_8094FA0
 
 	thumb_func_start sub_8094FA8

@@ -878,7 +878,7 @@ gUnknown_20389A8 = .; /* 20389A8 */
 gUnknown_2038C10 = .; /* 2038C10 (seems to be copy of gTeamName)*/
 	. += 0x18;
 
-gUnknown_2038C28 = .; /* 2038C28 */
+gBoughtFriendAreas = .; /* 2038C28 (one byte for each friend area) */
 	. += 0x3C;
 
 gWazaParametersFile = .; /* 2038C64 */
@@ -893,7 +893,7 @@ gUnknown_2038C6C = .; /* 2038C6C */
 gUnknown_2038C70 = .; /* 2038C70 */
 	. += 0x10;
 
-gUnknown_2038C80 = .; /* 2038C80 */
+gPlayTime = .; /* 2038C80 */
 	. += 0x8;
 
 gUnknown_2038C88 = .; /* 2038C88 */
