@@ -79,7 +79,9 @@ SECTIONS {
         asm/save.o(.text);
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
-        src/code_8012A18.o(.text);
+        src/code_8027C84_pre.o(.text);
+        asm/code_8027C84.o(.text);
+        src/code_8027C84.o(.text);
         asm/code_803D110.o(.text);
         src/code_80428A0.o(.text);
         asm/code_80428A0.o(.text);
