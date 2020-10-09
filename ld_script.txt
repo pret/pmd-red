@@ -77,6 +77,8 @@ SECTIONS {
         asm/fatal_system.o(.text);
         src/save.o(.text);
         asm/save.o(.text);
+        src/save_mid.o(.text);
+        asm/save1.o(.text);
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
         src/code_8027C84_pre.o(.text);
@@ -100,6 +102,8 @@ SECTIONS {
         asm/code_809017C.o(.text);
         src/code_8092334.o(.text);
         asm/code_8092334.o(.text);
+        src/code_8094F88.o(.text);
+        asm/code_8094F88.o(.text);
         asm/code_8098468.o(.text);
         asm/code_809D148.o(.text);
         asm/code_80A26CC.o(.text);
