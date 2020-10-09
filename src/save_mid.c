@@ -1,24 +1,8 @@
 #include "global.h"
+#include "save.h"
 
-// TODO unify with UnkStruct_203B184 in save.c
-struct unkSaveStruct
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-    /* 0xC */ u32 unkC;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 unk1C;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u32 unk28;
-    /* 0x2C */ u32 unk2C;
-    /* 0x30 */ u32 unk30;
-};
-
-extern struct unkSaveStruct *gUnknown_203B184;
+extern struct UnkStruct_203B184 *gUnknown_203B184;
+extern struct unkTimeStruct *gUnknown_203B47C;
 
 extern u32 gUnknown_203B460;
 extern u32 gUnknown_203B45C;
@@ -32,7 +16,6 @@ extern u32 gUnknown_203B494;
 extern u32 gUnknown_203B498;
 extern u32 gUnknown_203B468;
 extern u32 gUnknown_203B46C;
-extern u32 gUnknown_203B47C;
 
 extern void sub_800135C(void);
 extern u32 sub_808CE00(void);
@@ -45,7 +28,6 @@ extern u32 sub_80923B0(void);
 extern void sub_80923B8(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
-extern u32 sub_8094FA0(void);
 extern u32 sub_80950F8(void);
 extern u32 sub_8095100(void);
 extern u32 sub_8095108(void);
@@ -58,6 +40,60 @@ extern void sub_80972F4(void);
 extern void sub_80974E8(void);
 extern u32 sub_8097F6C(void);
 extern void sub_8097F74(void);
+
+extern void sub_8011C28(u32 r0);
+extern void sub_8011C40(s32 r0);
+extern void sub_8097748(void);
+extern void sub_8012240();
+
+
+extern void sub_8094FA8(struct unkTimeStruct *Time); // defined in src/code_8094F88.c
+extern struct unkTimeStruct *sub_8094FA0(void);
+
+void sub_80122D0();
+void sub_80122F4();
+void sub_8012300();
+void sub_80976A8();
+void sub_80122A8();
+
+void sub_8012284(void)
+{
+    sub_80122D0();
+    sub_80122F4();
+    sub_8012300();
+}
+
+void sub_8012298(void)
+{
+    sub_80976A8();
+    sub_80122A8();
+}
+
+void sub_80122A8(void)
+{
+    sub_80122D0();
+    sub_80122F4();
+    sub_8012300();
+    sub_8012240();
+
+}
+
+void nullsub_33(void)
+{
+}
+
+void sub_80122C4(void)
+{
+    sub_80122A8();
+}
+
+void sub_80122D0(void)
+{
+    sub_8011C28(0);
+    sub_8011C40(-1);
+    sub_8097748();
+    sub_8094FA8(gUnknown_203B47C);
+}
 
 void sub_80122F4(void)
 {
@@ -85,7 +121,7 @@ void nullsub_200(u32 r0)
 }
 
 // Unused
-void sub_8012334(struct unkSaveStruct *r0)
+void sub_8012334(struct UnkStruct_203B184 *r0)
 {
     gUnknown_203B184 = r0;
     if(r0 != NULL)

@@ -1,14 +1,7 @@
 #include "global.h"
 #include "flash.h"
 #include "memory.h"
-
-struct UnkStruct_203B184 {
-    u8 fill000[0x4C];
-    u8 *unk04C;
-    u32 unk050;
-    u32 unk054;
-    u32 unk058;
-};
+#include "save.h"
 
 struct UnkStruct_sub_8011DAC {
     u8 fill000[0x4];
@@ -30,7 +23,7 @@ struct UnkStruct_sub_8011DAC {
     u8 fill448[0x538C];
 };
 
-extern u32 gUnknown_202DE28;
+extern s32 gUnknown_202DE28;
 extern u32 gUnknown_203B17C;
 extern u32 gUnknown_203B180;
 extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
@@ -61,12 +54,12 @@ void sub_8011C28(u32 in)
     gUnknown_203B17C = in;
 }
 
-u32 sub_8011C34(void)
+s32 sub_8011C34(void)
 {
     return gUnknown_202DE28;
 }
 
-void sub_8011C40(u32 in)
+void sub_8011C40(s32 in)
 {
     gUnknown_202DE28 = in;
 }
