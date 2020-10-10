@@ -30418,7 +30418,7 @@ _08021A8E:
 	asrs r5, r0, 16
 	ldr r4, [r7]
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	ldrb r1, [r4, 0xC]
 	lsls r0, 24
 	lsrs r0, 24
@@ -31931,7 +31931,7 @@ sub_8022684:
 	strh r0, [r1, 0x12]
 	movs r2, 0x12
 	ldrsh r0, [r1, r2]
-	bl sub_808DBA8
+	bl GetFriendArea
 	ldr r1, [r4]
 	strb r0, [r1, 0x10]
 	movs r0, 0x18
@@ -33761,7 +33761,7 @@ _08023532:
 	movs r6, 0
 	ldrsh r5, [r1, r6]
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	add r4, sp, 0x16C
@@ -35339,7 +35339,7 @@ sub_8024184:
 	lsrs r4, 24
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -38164,7 +38164,7 @@ _080257E0:
 	ldr r0, [r4, 0x1C]
 	movs r2, 0x8
 	ldrsh r0, [r0, r2]
-	bl sub_808DBA8
+	bl GetFriendArea
 	ldrb r1, [r4, 0xC]
 	lsls r0, 24
 	lsrs r0, 24
@@ -38550,7 +38550,7 @@ _08025AFC:
 	ldr r0, [r0, 0x1C]
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	ldr r1, [r4]
 	strb r0, [r1, 0xD]
 	bl sub_8023C60

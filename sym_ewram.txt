@@ -398,7 +398,7 @@ gUnknown_202DE58 = .; /* 202DE58 */
 gUnknown_202DEA8 = .; /* 202DEA8 */
 	. += 0xF0;
 
-gUnknown_202DF98 = .; /* 202DF98 */
+gUnknown_202DF98 = .; /* 202DF98 ( Parner Nickname? ) */
 	. += 0x50;
 
 gUnknown_202DFE8 = .; /* 202DFE8 */
@@ -473,7 +473,7 @@ gUnknown_202E791 = .; /* 202E791 */
 gUnknown_202E794 = .; /* 202E794 */
 	. += 0x4;
 
-gUnknown_202E798 = .; /* 202E798 */
+gUnknown_202E798 = .; /* 202E798  (on screen dialogue text) */
 	. += 0x3E8;
 
 gUnknown_202EB80 = .; /* 202EB80 */
@@ -1019,7 +1019,8 @@ gUnknown_2039B48 = .; /* 2039B48 */
 gUnknown_2039D50 = .; /* 2039D50 */
 	. += 0x48;
 
-gUnknown_2039D98 = .; /* 2039D98 (seems to be copy of gTeamName)*/
+gUnknown_2039D98 = .; /* 2039D98 (seems to be storage for strings.. used for
+both Team Name and Player Name) */
 	. += 0xC;
 
 gUnknown_2039DA4 = .; /* 2039DA4 */

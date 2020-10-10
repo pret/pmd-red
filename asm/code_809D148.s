@@ -8416,7 +8416,7 @@ _080A184C:
 	bl sub_80A8BFC
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808DB48
+	bl GetIsMoving
 	b _080A171E
 _080A185E:
 	lsls r0, r5, 16
@@ -8500,7 +8500,7 @@ _080A18F6:
 _080A1900: .4byte gUnknown_2039D98
 _080A1904:
 	movs r0, 0x51
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80925EC
@@ -8562,7 +8562,7 @@ _080A197C:
 _080A1984: .4byte gUnknown_2039D98
 _080A1988:
 	ldr r0, _080A19D4
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80925EC
@@ -8781,7 +8781,7 @@ _080A1B60: .4byte gUnknown_2039D98
 _080A1B64:
 	ldr r4, _080A1BCC
 	adds r0, r4, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092600
@@ -8789,7 +8789,7 @@ _080A1B64:
 	cmp r0, 0
 	bne _080A1B88
 	adds r0, r4, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80925EC
@@ -9036,7 +9036,7 @@ _080A1CCC:
 	cmp r0, 0
 	beq _080A1CA4
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092600
@@ -9065,7 +9065,7 @@ _080A1DA8:
 	bl sub_80018D8
 	ldr r4, _080A1DE8
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9073,7 +9073,7 @@ _080A1DA8:
 	movs r2, 0
 	bl sub_8092578
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092600
@@ -9093,7 +9093,7 @@ _080A1DEC:
 	asrs r5, r0, 16
 	ldr r4, _080A1E2C
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9105,7 +9105,7 @@ _080A1DEC:
 	b _080A236A
 _080A1E14:
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092600
@@ -9134,7 +9134,7 @@ _080A1E42:
 	adds r6, r5, 0
 	ldr r4, _080A1EC4
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9146,7 +9146,7 @@ _080A1E42:
 	b _080A236A
 _080A1E6C:
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092600
@@ -9154,7 +9154,7 @@ _080A1E6C:
 	cmp r0, 0
 	bne _080A1E8E
 	adds r0, r5, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80925EC

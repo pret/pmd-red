@@ -7837,7 +7837,7 @@ _0805658C:
 	mov r2, r8
 	movs r1, 0x4
 	ldrsh r0, [r2, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -12629,7 +12629,7 @@ sub_80588F4:
 	ldr r0, [r5, 0x70]
 	movs r1, 0x4
 	ldrsh r0, [r0, r1]
-	bl sub_808DB78
+	bl GetLowKickDmg
 	adds r3, r0, 0
 	str r4, [sp]
 	adds r0, r6, 0
@@ -19679,10 +19679,10 @@ _0805BDDE:
 	cmp r8, r5
 	beq _0805BDDC
 	mov r0, r8
-	bl sub_808DACC
+	bl GetPokemonSize
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -20241,7 +20241,7 @@ sub_805C208:
 	ldr r0, [r1, 0x70]
 	movs r1, 0x4
 	ldrsh r0, [r0, r1]
-	bl sub_808DB90
+	bl GetSizeOrbDmg
 	mov r10, r0
 	adds r0, r6, 0
 	bl sub_8092B00
@@ -44620,7 +44620,7 @@ _08068A8E:
 	beq _08068AB2
 	movs r1, 0xE
 	ldrsh r0, [r2, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0
@@ -44630,7 +44630,7 @@ _08068AB2:
 	ble _08068A8E
 	movs r1, 0x8
 	ldrsh r0, [r6, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0
@@ -44902,7 +44902,7 @@ _08068CE8:
 	beq _08068CFE
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	add r0, sp
@@ -44985,7 +44985,7 @@ _08068D6A:
 	beq _08068DD6
 	movs r1, 0xE
 	ldrsh r0, [r5, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r8
@@ -48189,7 +48189,7 @@ _0806A5CE:
 _0806A608:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl sub_808DB14
+	bl GetWalkableTiles
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -50621,7 +50621,7 @@ _0806B838:
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r6, r1]
-	bl sub_808DB60
+	bl GetUnk1D
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r4
@@ -52135,7 +52135,7 @@ sub_806C444:
 	lsls r0, 16
 	asrs r6, r0, 16
 	adds r0, r6, 0
-	bl sub_808DBC0
+	bl GetBaseHP
 	adds r5, r0, 0
 	movs r4, 0x2
 	cmp r4, r7
@@ -52519,7 +52519,7 @@ _0806C714:
 	mov r7, r8
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl sub_808DB14
+	bl GetWalkableTiles
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -53649,7 +53649,7 @@ sub_806CF98:
 	ldr r7, [r4, 0x70]
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl sub_808DAE4
+	bl GetShadowSize
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r5, 0x3
@@ -58516,7 +58516,7 @@ sub_806F660:
 	mov r9, r1
 	movs r2, 0x4
 	ldrsh r0, [r4, r2]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0806F6C0
@@ -58882,7 +58882,7 @@ _0806F91C:
 	ldr r0, [r4, 0x70]
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r0, r4, 0
@@ -58993,12 +58993,12 @@ _0806F9F2:
 	cmp r4, r0
 	beq _0806FA3C
 	adds r0, r4, 0
-	bl sub_808DBF4
+	bl GetUnk12
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FA50
 	adds r0, r4, 0
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -59046,7 +59046,7 @@ sub_806FA5C:
 	mov r10, r0
 	movs r1, 0
 	ldrsh r0, [r6, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -59357,7 +59357,7 @@ sub_806FD18:
 	negs r6, r6
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0x2
@@ -59524,7 +59524,7 @@ _0806FE58:
 	add r0, sp, 0xC
 	movs r1, 0
 	ldrsh r0, [r0, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, _0806FF74
@@ -60142,7 +60142,7 @@ sub_8070328:
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808DB14
+	bl GetWalkableTiles
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x3
@@ -60770,7 +60770,7 @@ _08070794:
 _080707A8:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
-	bl sub_808DAFC
+	bl GetMoveSpeed
 	adds r4, r0
 	adds r0, r6, 0
 	movs r1, 0x6
@@ -63348,7 +63348,7 @@ sub_8071A70:
 	push {lr}
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_808DBD8
+	bl GetUnk33
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A84
@@ -69549,7 +69549,7 @@ _08074B7A:
 	bne _08074BAE
 	movs r2, 0x2
 	ldrsh r0, [r6, r2]
-	bl sub_808DB2C
+	bl GetUnk1B
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08074BAE:
@@ -71491,7 +71491,7 @@ _08075AF4:
 	beq _08075B46
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
-	bl sub_808DB48
+	bl GetIsMoving
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075B92
@@ -71514,7 +71514,7 @@ _08075B46:
 _08075B52:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
-	bl sub_808DB48
+	bl GetIsMoving
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075B68
@@ -97089,7 +97089,7 @@ sub_80828E0:
 	movs r4, 0x1
 	negs r4, r4
 	mov r0, r8
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r3, 0
@@ -97245,7 +97245,7 @@ sub_8082A08:
 	negs r0, r0
 	mov r8, r0
 	mov r0, r9
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r3, 0

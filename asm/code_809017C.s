@@ -459,7 +459,7 @@ _080904BA:
 	mov r8, r1
 _080904D2:
 	ldr r0, [sp, 0xE0]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -484,7 +484,7 @@ _080904E4:
 	beq _08090510
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0

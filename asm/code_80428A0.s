@@ -4212,7 +4212,7 @@ sub_8044CA0:
 	adds r4, r0, 0
 	lsls r0, r1, 16
 	asrs r0, 16
-	bl sub_808DB48
+	bl GetIsMoving
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044CB6
@@ -5222,7 +5222,7 @@ sub_80453AC:
 	negs r0, r0
 	mov r9, r0
 	mov r0, r8
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -5404,7 +5404,7 @@ sub_804550C:
 	negs r0, r0
 	mov r9, r0
 	mov r0, r8
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r5, 0

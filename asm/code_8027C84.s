@@ -37884,7 +37884,7 @@ _0803ABCE:
 	ldr r4, [r0]
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	ldrb r1, [r4, 0x4]
 	lsls r0, 24
 	lsrs r0, 24

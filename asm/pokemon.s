@@ -96,7 +96,7 @@ _0808CEA4:
 	movs r5, 0x1
 	strb r5, [r0, 0x3]
 	adds r0, r7, 0
-	bl sub_808DBC0
+	bl GetBaseHP
 	mov r1, sp
 	movs r4, 0
 	strh r0, [r1, 0x16]
@@ -260,7 +260,7 @@ sub_808CFD0:
 	strb r5, [r7, 0x2]
 	strb r0, [r7, 0x3]
 	mov r0, r9
-	bl sub_808DBC0
+	bl GetBaseHP
 	strh r0, [r7, 0x16]
 	mov r0, r9
 	movs r1, 0
@@ -377,7 +377,7 @@ sub_808D0D8:
 	strb r4, [r7, 0x3]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
-	bl sub_808DBC0
+	bl GetBaseHP
 	movs r5, 0
 	strh r0, [r7, 0x16]
 	movs r2, 0x8
@@ -1269,7 +1269,7 @@ _0808D6FA:
 	beq _0808D728
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0
@@ -1331,7 +1331,7 @@ _0808D76A:
 	beq _0808D798
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0
@@ -1352,7 +1352,7 @@ _0808D798:
 	adds r1, r0, r1
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0

@@ -819,10 +819,10 @@ _0808E426:
 	cmp r0, 0
 	bne _0808E456
 	mov r0, r9
-	bl sub_808DACC
+	bl GetPokemonSize
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1109,7 +1109,7 @@ sub_808E668:
 	cmp r0, 0x1
 	bls _0808E6D6
 	adds r0, r1, 0
-	bl sub_808DAE4
+	bl GetShadowSize
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
@@ -3068,13 +3068,13 @@ _0808F4FA:
 	b _0808F6DE
 _0808F50A:
 	ldr r0, [sp, 0x1C]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r3, r8
 	movs r1, 0x8
 	ldrsh r0, [r3, r1]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r5, 0
@@ -4187,7 +4187,7 @@ _0808FDB0:
 	mov r1, r10
 	movs r2, 0
 	ldrsh r0, [r1, r2]
-	bl sub_808DBA8
+	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092524
@@ -4239,7 +4239,7 @@ _0808FDB0:
 	mov r3, r10
 	movs r1, 0
 	ldrsh r0, [r3, r1]
-	bl sub_808DAB4
+	bl GetCategoryString
 	adds r1, r0, 0
 	adds r0, r6, 0
 	movs r2, 0x14
@@ -4257,7 +4257,7 @@ _0808FDB0:
 	mov r3, r10
 	movs r1, 0
 	ldrsh r0, [r3, r1]
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4

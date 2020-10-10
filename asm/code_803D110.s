@@ -997,7 +997,7 @@ sub_803D870:
 	mov r9, r1
 	b _0803D8B8
 _0803D884:
-	bl sub_808DACC
+	bl GetPokemonSize
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
