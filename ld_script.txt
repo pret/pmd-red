@@ -41,6 +41,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         asm/code.o(.text);
+        src/code_80001E0.o(.text);
         asm/arm_func.o(.text);
         asm/code_2.o(.text);
         src/code.o(.text);

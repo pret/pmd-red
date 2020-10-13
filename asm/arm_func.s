@@ -8,18 +8,18 @@
         arm_func_start sub_80001E8
 sub_80001E8:
 	stmdb sp!, {r4-r11}
-	mov r12, 0x4000000
+	mov r12, 0x4000000 @ REG_BASE
 	ldr r11, _08000224
 	add r10, r11, 0x40
 	mov r9, 0x1
 	mov r8, 0
-	strb r8, [r12, 0x208]
+	strb r8, [r12, 0x208] @ REG_IME
 	ldmia r10, {r0-r7}
 	stmia r10!, {r4-r7}
 	stmia r10!, {r0-r3}
 	ldr r0, [r11, 0x4]
 	str r8, [r11, 0x4]
-	strb r9, [r12, 0x208]
+	strb r9, [r12, 0x208] @ REG_IME
 	ldmia sp!, {r4-r11}
 	bx lr
 	.align 2, 0
@@ -29,7 +29,7 @@ _08000224: .4byte gUnknown_202DCF8
 	arm_func_start sub_8000228
 sub_8000228:
 	mov r12, 0x4000000
-	add r12, r12, 0x120
+	add r12, r12, 0x120 @ REG_SIODATA32
 	ldmia r12, {r0,r1}
 	stmdb sp!, {r7-r11}
 	ldr r11, _08000340
@@ -92,7 +92,7 @@ _080002F4:
 	ldrb r0, [r11]
 	cmp r0, 0
 	beq _08000334
-	ldr r7, _08000344
+	ldr r7, _08000344 @ REG_TM3CNT_H
 	mov r0, 0
 	strh r0, [r7]
 	ldrh r0, [r12, 0x8]

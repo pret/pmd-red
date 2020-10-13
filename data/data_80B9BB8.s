@@ -11323,18 +11323,19 @@ gUnknown_810AF50: @ 810AF50
 
 	.global gTeamRanks
 gTeamRanks: @ 810B04C
+        @ Seems to have some adventure log stuff too
 	.incbin "baserom.gba", 0x10B04C, 0x400
 
-	.global gUnknown_810B44C
-gUnknown_810B44C: @ 810B44C
+	.global gRescueTeamRanks
+gRescueTeamRanks: @ 810B44C
 	.incbin "baserom.gba", 0x10B44C, 0x7C
 
-	.global gUnknown_810B4C8
-gUnknown_810B4C8: @ 810B4C8
+	.global gAbilityNames
+gAbilityNames: @ 810B4C8
 	.incbin "baserom.gba", 0x10B4C8, 0x4C0
 
-	.global gUnknown_810B988
-gUnknown_810B988: @ 810B988
+	.global AbilityDescriptions
+AbilityDescriptions: @ 810B988
 	.incbin "baserom.gba", 0x10B988, 0x1284
 
 	.global gUnknown_810CC0C
@@ -11364,31 +11365,45 @@ gUnknown_810D628: @ 810D628
 
 	.global gUnknown_810DD58
 gUnknown_810DD58: @ 810DD58
-	.incbin "baserom.gba", 0x10DD58, 0x10
+        .byte 0x50, 0xDD, 0x10, 0x08
+        .asciz "IQ Skills"
+        .align 2,0
 
 	.global gUnknown_810DD68
 gUnknown_810DD68: @ 810DD68
-	.incbin "baserom.gba", 0x10DD68, 0x18
+        .byte 0x5C, 0xDD, 0x10, 0x08
+        .asciz "Level: #>82.$d0 "
+        .align 2,0
 
 	.global gUnknown_810DD80
 gUnknown_810DD80: @ 810DD80
-	.incbin "baserom.gba", 0x10DD80, 0x1C
+        .byte 0x6C, 0xDD, 0x10, 0x08
+        .asciz "Exp. Pts.: #>82.$d1 "
+        .align 2,0
 
 	.global gUnknown_810DD9C
 gUnknown_810DD9C: @ 810DD9C
-	.incbin "baserom.gba", 0x10DD9C, 0x1C
+        .byte 0x84, 0xDD, 0x10, 0x08
+        .asciz "To next level:#>82.$d0"
+        .align 2,0
 
 	.global gUnknown_810DDB8
 gUnknown_810DDB8: @ 810DDB8
-	.incbin "baserom.gba", 0x10DDB8, 0x18
+        .byte 0xA0, 0xDD, 0x10, 0x08
+        .asciz "HP:#>82.$v03/$v13"
+        .align 2,0
 
 	.global gUnknown_810DDD0
 gUnknown_810DDD0: @ 810DDD0
-	.incbin "baserom.gba", 0x10DDD0, 0x14
+        .byte 0xBC, 0xDD, 0x10, 0x08
+        .asciz "Attack/Defense:"
+        .align 2,0
 
 	.global gUnknown_810DDE4
 gUnknown_810DDE4: @ 810DDE4
-	.incbin "baserom.gba", 0x10DDE4, 0x18
+        .byte 0xD4, 0xDD, 0x10, 0x08
+        .asciz "Sp. Atk./Sp. Def.:"
+        .align 2,0
 
 	.global gUnknown_810DDFC
 gUnknown_810DDFC: @ 810DDFC
@@ -11476,7 +11491,9 @@ gUnknown_810DEF4: @ 810DEF4
 
 	.global gUnknown_810DF78
 gUnknown_810DF78: @ 810DF78
-	.incbin "baserom.gba", 0x10DF78, 0xC
+        .byte 0x64, 0xDF, 0x10, 0x08
+        .asciz "No IQ"
+        .align 2,0
 
 	.global gUnknown_810DF84
 gUnknown_810DF84: @ 810DF84
@@ -11484,7 +11501,9 @@ gUnknown_810DF84: @ 810DF84
 
 	.global gUnknown_810DF98
 gUnknown_810DF98: @ 810DF98
-	.incbin "baserom.gba", 0x10DF98, 0x1C
+        .byte 0x88, 0xDF, 0x10, 0x08
+        .asciz "Joined rescue team at:"
+        .align 2,0
 
 	.global gUnknown_810DFB4
 gUnknown_810DFB4: @ 810DFB4
@@ -11492,11 +11511,21 @@ gUnknown_810DFB4: @ 810DFB4
 
 	.global gUnknown_810DFC8
 gUnknown_810DFC8: @ 810DFC8
-	.incbin "baserom.gba", 0x10DFC8, 0x4
+        .byte 0xB8, 0xDF, 0x10, 0x08
 
 	.global gUnknown_810DFCC
 gUnknown_810DFCC: @ 810DFCC
-	.incbin "baserom.gba", 0x10DFCC, 0x60
+        .byte 0x14, 0xE0, 0x10, 0x08
+        .byte 0xF8, 0xDF, 0x10, 0x08
+        .byte 0xE0, 0xDF, 0x10, 0x08
+        .byte 0xDC, 0xDF, 0x10, 0x08
+        .byte 0x20, 0x00, 0x00, 0x00
+        .asciz "Evolution: #>54.No more"
+        .align 2,0
+        .asciz "Evolution: #>54.Possible"
+        .align 2,0
+        .asciz "Evolution: #>54.Not now"
+        .align 2,0
 
 	.global gUnknown_810E02C
 gUnknown_810E02C: @ 810E02C
@@ -11540,7 +11569,9 @@ gUnknown_8113850: @ 8113850
 
 	.global gUnknown_8113868
 gUnknown_8113868: @ 8113868
-	.incbin "baserom.gba", 0x113868, 0x8
+        .byte 0x54, 0x38, 0x11, 0x08
+        .asciz "$m1"
+        .align 2,0
 
 	.global gUnknown_8113870
 gUnknown_8113870: @ 8113870
@@ -11588,7 +11619,7 @@ gUnknown_8113990: @ 8113990
 
 	.global gUnknown_81139B4
 gUnknown_81139B4: @ 81139B4
-	.incbin "baserom.gba", 0x1139B4, 0x4
+        .byte 0x94, 0x39, 0x11, 0x08
 
 	.global gUnknown_81139B8
 gUnknown_81139B8: @ 81139B8
@@ -11596,7 +11627,7 @@ gUnknown_81139B8: @ 81139B8
 
 	.global gUnknown_81139CC
 gUnknown_81139CC: @ 81139CC
-	.incbin "baserom.gba", 0x1139CC, 0x4
+        .byte 0xBC, 0x39, 0x11, 0x08
 
 	.global gFriendAreaNames
 gFriendAreaNames: @ 81139D0

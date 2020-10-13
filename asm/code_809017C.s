@@ -4476,7 +4476,7 @@ sub_80921A8:
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_080921B4: .4byte gUnknown_810B44C
+_080921B4: .4byte gRescueTeamRanks
 	thumb_func_end sub_80921A8
 
 	thumb_func_start sub_80921B8
