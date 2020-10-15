@@ -1,6 +1,7 @@
 #include "global.h"
 
 void sub_8011924(void);
+void nullsub_26(void);
 
 extern void sub_800BDFC(u16 r0);
 extern void sub_800BE8C(u16 r0, u16 r1);
@@ -14,6 +15,13 @@ extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
 extern u8 sub_800C5D0(u16 r0);
 
+extern void nullsub_27(void);
+extern void nullsub_29(void);
+extern void nullsub_30(void);
+extern void nullsub_31(void);
+extern void nullsub_32(void);
+extern void nullsub_28(void);
+
 struct UnkStructType
 {
     /* 0x0 */ s16 unk0;
@@ -22,6 +30,9 @@ struct UnkStructType
 
 extern u16 gUnknown_80D4144[];
 extern struct UnkStructType gUnknown_202DE20;
+extern struct UnkStructType gUnknown_202DE22;
+extern u32 gUnknown_202DE1C;
+extern u32 gUnknown_203B14C;
 
 void sub_80118A4(void)
 {
@@ -138,11 +149,43 @@ u8 sub_80119C0(u16 r0)
     return sub_800C5D0(r0);
 }
 
-// TODO pretty close except r4's where should be r2's
-//void sub_80119D4(u32 r0)
-//{
-//    if(gUnknown_202DE20.unk0 > 0)
-//        return;
-//    sub_800C074(gUnknown_80D4144[r0], 0x80 << 1);
-//    gUnknown_80D4144[r0] = 0x4;
-//}
+void sub_80119D4(u32 r0)
+{
+    if(gUnknown_202DE20.unk0 > 0)
+        return;
+    sub_800C074(gUnknown_80D4144[r0], 0x80 << 1);
+    gUnknown_202DE20.unk0 = 4;
+}
+
+void sub_8011A04(void)
+{
+    if(gUnknown_202DE22.unk0 > 0)
+        return;
+    gUnknown_202DE22.unk0 = 3;
+    sub_800C074(0x131, 0x80 << 1);
+}
+
+void sub_8011A2C(u32 r0)
+{
+    gUnknown_202DE1C = r0;
+}
+
+void NDS_DebugInit(void)
+{
+    nullsub_26();
+    nullsub_27();
+    nullsub_29();
+    nullsub_30();
+    nullsub_31();
+    nullsub_32();
+    nullsub_28();
+    gUnknown_203B14C = 1; // Maybe a flag saying Debug is on?
+}
+
+void nullsub_25(void)
+{
+}
+
+void nullsub_26(void)
+{
+}
