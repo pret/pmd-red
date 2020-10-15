@@ -61,6 +61,7 @@ SECTIONS {
         src/sprite.o(.text);
         asm/sprite.o(.text);
         asm/code_800558C.o(.text);
+        src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
 		. = ALIGN(4);

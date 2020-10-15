@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_800558C.h"
+#include "input.h"
 
 
 struct UnkSaveStruct1
@@ -36,9 +38,7 @@ extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
 extern void nullsub_8(u8);
 extern void sub_8005180();
-extern void sub_80060EC();
 extern void sub_800CB20();
-extern void sub_800485C();
 extern void CopySpritesToOam();
 extern void sub_8005304();
 extern void TransferBGPaletteBuffer();
@@ -69,7 +69,7 @@ void sub_8012A18()
     sub_8005180();
     sub_80060EC();
     sub_800CB20();
-    sub_800485C();
+    sub_800485C(); // Input related
     CopySpritesToOam();
     sub_8005304();
     TransferBGPaletteBuffer();
