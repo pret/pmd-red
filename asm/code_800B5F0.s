@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B6B0
-sub_800B6B0:
-	push {r4,lr}
-	ldr r1, _0800B6D0
-	ldr r2, _0800B6D4
-	bl CpuSet
-	ldr r0, _0800B6D8
-	ldr r4, _0800B6DC
-	ldr r2, _0800B6E0
-	adds r1, r4, 0
-	bl CpuSet
-	ldr r0, _0800B6E4
-	str r4, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B6D0: .4byte gIntrTable
-_0800B6D4: .4byte 0x04000006
-_0800B6D8: .4byte IntrMain
-_0800B6DC: .4byte gUnknown_202D4B8
-_0800B6E0: .4byte 0x04000048
-_0800B6E4: .4byte INTR_VECTOR
-	thumb_func_end sub_800B6B0
-
-	thumb_func_start sub_800B6E8
-sub_800B6E8:
-	lsls r0, 2
-	ldr r1, _0800B6F0
-	adds r0, r1
-	bx lr
-	.align 2, 0
-_0800B6F0: .4byte gIntrTable
-	thumb_func_end sub_800B6E8
-
 	thumb_func_start sub_800B6F4
 sub_800B6F4:
 	push {r4-r6,lr}
