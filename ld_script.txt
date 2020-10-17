@@ -187,6 +187,9 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
+        data/personality_test.o(.rodata);
+        src/personality_test.o(.rodata);
+        data/data_80F4278.o(.rodata);
         src/m4a_tables.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);

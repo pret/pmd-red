@@ -1,0 +1,17 @@
+#include "global.h"
+#include "constants/species.h"
+
+const u16 gPartners[10] = 
+{
+    SPECIES_CHARMANDER,
+    SPECIES_BULBASAUR,
+    SPECIES_SQUIRTLE,
+    SPECIES_PIKACHU,
+    SPECIES_CHIKORITA,
+    SPECIES_TOTODILE,
+    SPECIES_CYNDAQUIL,
+    SPECIES_TORCHIC,
+    SPECIES_TREECKO,
+    SPECIES_MUDKIP
+};
+

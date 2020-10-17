@@ -1,4 +1,5 @@
-        
+        .section .rodata
+
         .include "data/data_80EBA18.inc" @ includes Personality Test Questions
 
 	.global gPersonalityQuestionPointerTable
@@ -186,16 +187,3 @@ gUnknown_80F4244: @ 80F4244 (maybe dialog to ok starter selection??)
 
         .byte 0x00, 0x00, 0x00, 0x00
         .asciz "pksdir0"
-
-	.global gPartners
-gPartners: @ 80F4264
-        .byte 0x04, 0x00 @ Charmander
-        .byte 0x01, 0x00 @ Bulbasaur
-        .byte 0x07, 0x00 @ Squirtle
-        .byte 0x19, 0x00 @ Pikachu
-        .byte 0x98, 0x00 @ Chikorita
-        .byte 0x9E, 0x00 @ Totodile
-        .byte 0x9B, 0x00 @ Cyndaquil
-        .byte 0x18, 0x01 @ Torchic
-        .byte 0x15, 0x01 @ Treecko
-        .byte 0x1B, 0x01 @ Mudkip
