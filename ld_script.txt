@@ -85,6 +85,8 @@ SECTIONS {
         asm/save1.o(.text);
         src/save1.o(.text);
         asm/code_8012A18.o(.text);
+        src/code_801D760.o(.text);
+        asm/code_801D760.o(.text);
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
         src/code_8027C84.o(.text);
@@ -111,6 +113,8 @@ SECTIONS {
         src/code_8095014.o(.text);
         asm/code_8095014.o(.text);
         asm/code_8098468.o(.text);
+        src/code_8098BDC.o(.text);
+        asm/code_8098BDC.o(.text);
         asm/code_809D148.o(.text);
         asm/code_80A26CC.o(.text);
         src/code_80A7714.o(.text);
