@@ -62,7 +62,7 @@ _0800B55C:
 	ldr r1, _0800B5EC
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_800B5F0
+	bl EnableInterrupts
 	ldr r1, _0800B5CC
 _0800B5BA:
 	ldrh r0, [r1]
@@ -81,7 +81,7 @@ _0800B5DC: .4byte 0x00002045
 _0800B5E0: .4byte 0x04000004
 _0800B5E4: .4byte gUnknown_203B0AE
 _0800B5E8: .4byte gUnknown_203B0AC
-_0800B5EC: .4byte gUnknown_203B098
+_0800B5EC: .4byte gInterruptsEnabled
 	thumb_func_end sub_800B540
 
 

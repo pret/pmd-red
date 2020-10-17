@@ -1,75 +1,74 @@
 #include "global.h"
 
-#include "global.h"
-
-extern u8 gUnknown_203B098;
+extern bool8 gInterruptsEnabled;
 extern u32 gIntrTable[];
 extern u32 IntrMain;
 extern u8 gUnknown_202D4B8;
+extern u32 gUnknown_202D5F0[];
 
-u8 sub_800B5F0(void)
+bool8 EnableInterrupts(void)
 {
-    if(gUnknown_203B098 == 0)
+    if(gInterruptsEnabled == FALSE)
     {
-        return 0;
+        return FALSE;
     }
 
     if((REG_IME & 1) != 0)
     {
-        return 0;
+        return FALSE;
     }
     else
     {
         REG_IME = 1;
-        return 1;
+        return TRUE;
     }
 }
 
-u8 sub_800B620(void)
+bool8 DisableInterrupts(void)
 {
-    if(gUnknown_203B098 == 0)
+    if(gInterruptsEnabled == 0)
     {
-        return 0;
+        return FALSE;
     }
 
     if((REG_IME & 1) == 0)
     {
-        return 0;
+        return FALSE;
     }
     else
     {
         REG_IME = 0;
-        return 1;
+        return TRUE;
     }
 
 }
 
-u8 sub_800B650(void)
+bool8 sub_800B650(void)
 {
-    if(gUnknown_203B098 == 0)
+    if(gInterruptsEnabled == FALSE)
     {
-        return 0;
+        return FALSE;
     }
 
     if((REG_IME & 1) != 0)
     {
-        return 0;
+        return FALSE;
     }
     else
     {
-        return 1;
+        return TRUE;
     }
 }
 
-void sub_800B67C(u16 r0)
+void SetInterruptFlag(u16 flag)
 {
-    if(gUnknown_203B098 == 0)
+    if(gInterruptsEnabled == FALSE)
     {
         return;
     }
 
     REG_IME = 0;
-    INTR_CHECK |= r0;
+    INTR_CHECK |= flag;
     REG_IME = 1;
 }
 
@@ -83,4 +82,18 @@ void sub_800B6B0(const u32 *r0)
 u32 *sub_800B6E8(u32 r0)
 {
     return &gIntrTable[r0];
+}
+
+u32 sub_800B6F4(u32 r0, u32 r1)
+{
+    u32 temp;
+    u32 interrupt_var;
+
+    interrupt_var = DisableInterrupts();
+    temp = gUnknown_202D5F0[r0];
+    gUnknown_202D5F0[r0] = r1;
+    if(interrupt_var != FALSE){
+        EnableInterrupts();
+    }
+    return temp;
 }

@@ -86,7 +86,7 @@ gUnknown_203B090 = .; /* 203B090 */
 gFileCacheCursorPosition = .; /* 203B094 */
 	. += 0x4;
 
-gUnknown_203B098 = .; /* 203B098 */
+gInterruptsEnabled = .; /* 203B098 */
 	. += 0x1;
 
 gUnknown_203B099 = .; /* 203B099 */

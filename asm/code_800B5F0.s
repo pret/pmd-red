@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B6F4
-sub_800B6F4:
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl sub_800B620
-	lsls r0, 24
-	ldr r1, _0800B71C
-	lsls r4, 2
-	adds r4, r1
-	ldr r6, [r4]
-	str r5, [r4]
-	cmp r0, 0
-	beq _0800B712
-	bl sub_800B5F0
-_0800B712:
-	adds r0, r6, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0800B71C: .4byte gUnknown_202D5F0
-	thumb_func_end sub_800B6F4
-
 	thumb_func_start sub_800B720
 sub_800B720:
 	push {r4-r7,lr}
@@ -41,7 +17,7 @@ sub_800B720:
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [sp, 0xC]
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -172,7 +148,7 @@ _0800B80E:
 	ldr r7, [sp, 0x4]
 	cmp r7, 0
 	beq _0800B838
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800B838:
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -193,7 +169,7 @@ sub_800B850:
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r6, r0, 16
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0
@@ -229,7 +205,7 @@ _0800B886:
 _0800B896:
 	cmp r5, 0
 	beq _0800B8BC
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800B8BC
 	.align 2, 0
 _0800B8A0: .4byte gUnknown_202D608
@@ -244,7 +220,7 @@ _0800B8A8:
 _0800B8B4:
 	cmp r5, 0
 	beq _0800B8BC
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800B8BC:
 	pop {r4-r7}
 	pop {r0}
@@ -323,7 +299,7 @@ _0800B920:
 	bl UpdateSound
 _0800B948:
 	movs r0, 0x1
-	bl sub_800B67C
+	bl SetInterruptFlag
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -438,7 +414,7 @@ _0800BA10:
 	strh r0, [r2]
 _0800BA34:
 	movs r0, 0x4
-	bl sub_800B67C
+	bl SetInterruptFlag
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -553,7 +529,7 @@ Timer3Intr:
 	bl _call_via_r0
 _0800BB26:
 	movs r0, 0x40
-	bl sub_800B67C
+	bl SetInterruptFlag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -592,7 +568,7 @@ _0800BB5A:
 	cmp r0, r1
 	bne _0800BB5A
 _0800BB60:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -644,7 +620,7 @@ _0800BB6C:
 	ldr r2, [sp]
 	cmp r2, 0
 	beq _0800BBD0
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800BBD0:
 	ldr r2, _0800BBF0
 	ldrh r0, [r2]
@@ -947,7 +923,7 @@ _0800BE40: .4byte 0x000003e7
 _0800BE44: .4byte gUnknown_202D68A
 _0800BE48: .4byte gUnknown_202D688
 _0800BE4C:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r4, r0, 24
 	strh r6, [r5]
@@ -966,7 +942,7 @@ _0800BE4C:
 _0800BE70:
 	cmp r4, 0
 	beq _0800BE78
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800BE78:
 	pop {r4-r6}
 	pop {r0}
@@ -1020,7 +996,7 @@ _0800BED8:
 	bne _0800BEE0
 	movs r5, 0x1
 _0800BEE0:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _0800BF34
@@ -1052,7 +1028,7 @@ _0800BEE0:
 _0800BF26:
 	cmp r7, 0
 	beq _0800BF2E
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800BF2E:
 	pop {r4-r7}
 	pop {r0}
@@ -1098,7 +1074,7 @@ _0800BF7C: .4byte gUnknown_202D68C
 	thumb_func_start sub_800BF80
 sub_800BF80:
 	push {r4,lr}
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0800BFBC
@@ -1121,7 +1097,7 @@ _0800BFA2:
 	strh r1, [r0]
 	cmp r4, 0
 	beq _0800BFB6
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800BFB6:
 	pop {r4}
 	pop {r0}
@@ -1150,7 +1126,7 @@ _0800BFE0:
 	bne _0800BFE8
 	movs r4, 0x1
 _0800BFE8:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0800C018
@@ -1197,7 +1173,7 @@ _0800C044:
 	strh r0, [r1]
 	cmp r5, 0
 	beq _0800C054
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C054:
 	pop {r4,r5}
 	pop {r0}
@@ -1253,7 +1229,7 @@ _0800C0A4:
 	beq _0800C0B4
 	b _0800C1D0
 _0800C0B4:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1366,7 +1342,7 @@ _0800C1A0:
 	mov r0, r8
 	cmp r0, 0
 	beq _0800C208
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C208
 	.align 2, 0
 _0800C1AC: .4byte gUnknown_202D694
@@ -1392,7 +1368,7 @@ _0800C1D0:
 	.align 2, 0
 _0800C1D8: .4byte gUnknown_3000FD8
 _0800C1DC:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
@@ -1412,7 +1388,7 @@ _0800C1FC:
 	strh r6, [r4, 0x4]
 	cmp r5, 0
 	beq _0800C208
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C208:
 	pop {r3}
 	mov r8, r3
@@ -1462,7 +1438,7 @@ _0800C22C:
 	adds r4, r2, r1
 	cmp r0, 0x1
 	bls _0800C286
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2]
@@ -1475,7 +1451,7 @@ _0800C22C:
 _0800C27E:
 	cmp r6, 0
 	beq _0800C286
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C286:
 	pop {r3}
 	mov r8, r3
@@ -1500,7 +1476,7 @@ sub_800C298:
 	mov r8, r0
 	cmp r5, r8
 	bne _0800C2FC
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -1529,7 +1505,7 @@ _0800C2C8:
 	mov r1, r9
 	cmp r1, 0
 	beq _0800C3DE
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C3DE
 	.align 2, 0
 _0800C2F0: .4byte 0x000003e5
@@ -1563,7 +1539,7 @@ _0800C2FC:
 _0800C330: .4byte gMPlayTable
 _0800C334: .4byte gUnknown_3000FD8
 _0800C338:
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2]
@@ -1581,13 +1557,13 @@ _0800C338:
 _0800C35A:
 	cmp r6, 0
 	beq _0800C3DE
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C3DE
 _0800C364:
 	ldr r0, _0800C398
 	cmp r5, r0
 	bne _0800C3A8
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0800C39C
@@ -1605,7 +1581,7 @@ _0800C364:
 _0800C38C:
 	cmp r4, 0
 	beq _0800C3DE
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C3DE
 	.align 2, 0
 _0800C398: .4byte 0x000003e6
@@ -1618,7 +1594,7 @@ _0800C3A8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C3DE
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0800C3EC
@@ -1636,7 +1612,7 @@ _0800C3A8:
 _0800C3D6:
 	cmp r4, 0
 	beq _0800C3DE
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C3DE:
 	pop {r3-r5}
 	mov r8, r3
@@ -1680,7 +1656,7 @@ _0800C422:
 	mov r8, r0
 	cmp r4, r8
 	bne _0800C496
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1728,7 +1704,7 @@ _0800C47E:
 	bne _0800C490
 	b _0800C5BE
 _0800C490:
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C5BE
 _0800C496:
 	adds r0, r4, 0
@@ -1749,7 +1725,7 @@ _0800C496:
 	lsls r0, 2
 	adds r0, r1
 	ldr r6, [r0]
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrh r0, [r5, 0x2]
@@ -1780,13 +1756,13 @@ _0800C4EC:
 _0800C4FE:
 	cmp r7, 0
 	beq _0800C5BE
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C5BE
 _0800C508:
 	ldr r0, _0800C53C
 	cmp r4, r0
 	bne _0800C564
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0800C540
@@ -1819,7 +1795,7 @@ _0800C54C:
 _0800C556:
 	cmp r5, 0
 	beq _0800C5BE
-	bl sub_800B5F0
+	bl EnableInterrupts
 	b _0800C5BE
 	.align 2, 0
 _0800C560: .4byte gUnknown_2000970
@@ -1829,7 +1805,7 @@ _0800C564:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C5BE
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _0800C5A0
@@ -1861,7 +1837,7 @@ _0800C5AC:
 _0800C5B6:
 	cmp r6, 0
 	beq _0800C5BE
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C5BE:
 	pop {r3-r5}
 	mov r8, r3
@@ -1931,14 +1907,14 @@ _0800C632:
 	thumb_func_start SoundVSync
 SoundVSync:
 	push {r4,lr}
-	bl sub_800B620
+	bl DisableInterrupts
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSoundVSync
 	cmp r4, 0
 	beq _0800C650
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C650:
 	pop {r4}
 	pop {r0}
@@ -2313,7 +2289,7 @@ sub_800C93C:
 	ldr r0, _0800C988
 	movs r1, 0x10
 	bl sub_800C3F8
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0800C98C
@@ -2361,7 +2337,7 @@ _0800C9AC:
 	bl m4aSoundVSyncOff
 	cmp r5, 0
 	beq _0800C9BE
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800C9BE:
 	pop {r4,r5}
 	pop {r0}
@@ -2374,7 +2350,7 @@ _0800C9C8: .4byte gUnknown_20008F0
 	thumb_func_start sub_800C9CC
 sub_800C9CC:
 	push {r4,lr}
-	bl sub_800B620
+	bl DisableInterrupts
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl m4aSoundVSyncOn
@@ -2412,7 +2388,7 @@ _0800CA1C:
 _0800CA22:
 	cmp r4, 0
 	beq _0800CA2A
-	bl sub_800B5F0
+	bl EnableInterrupts
 _0800CA2A:
 	pop {r4}
 	pop {r0}
