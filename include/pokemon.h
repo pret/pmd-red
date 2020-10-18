@@ -1,6 +1,18 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
+struct EvolveStruct1
+{
+    u16 evolve_from;
+    u16 evolve_type;
+};
+
+struct EvolveNeeds
+{
+    u16 evolve_need1;
+    u16 evolve_need2;
+};
+
 struct gPokemon
 {
     /* 0x0 */ u8* species;
@@ -36,10 +48,8 @@ struct gPokemon
     /* 0x31 */ u8 unk31;
     /* 0x32 */ u8 unk32;
     /* 0x33 */ bool8 unk33;
-    /* 0x34 */ u16 evolve_from; //verified
-    /* 0x36 */ u16 evolve_type;
-    /* 0x38 */ u16 evolve_need1; // verified
-    /* 0x3A */ u16 evolve_need2; // verified
+    /* 0x34 */ struct EvolveStruct1 pre;
+    /* 0x38 */ struct EvolveNeeds need;
     /* 0x3C */ u16 dexNo;
     /* 0x3E */ u16 internalNo; // verified
     /* 0x40 */ s16 base_recruit; // verified

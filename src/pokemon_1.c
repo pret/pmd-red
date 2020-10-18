@@ -8,6 +8,43 @@ extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gUnknown_8510000;
 extern const char gUnknown_8107684;
 
+struct unkEvolve
+{
+    /* 0x0 */ struct EvolveStruct1 conditions;
+    /* 0x4 */ struct EvolveNeeds needs;
+};
+
+#ifndef NONMATCHING
+NAKED
+#endif
+void sub_808DD48(s16 r0, struct unkEvolve *r1)
+{
+#ifdef NONMATCHING
+    struct EvolveStruct1 temp2;
+    struct EvolveNeeds temp1;
+    temp1 = gMonsterParameters[r0].need;
+    temp2 = gMonsterParameters[r0].pre; // TODO should be using r2 but it uses r0
+    r1->conditions = temp2;
+    r1->needs = temp1;
+#else
+	asm_unified("\tlsls r0, 16\n"
+	"\tasrs r0, 16\n"
+	"\tldr r2, _0808DD64\n"
+	"\tldr r3, [r2]\n"
+	"\tlsls r2, r0, 3\n"
+	"\tadds r2, r0\n"
+	"\tlsls r2, 3\n"
+	"\tadds r2, r3\n"
+	"\tldr r3, [r2, 0x38]\n"
+	"\tldr r2, [r2, 0x34]\n"
+	"\tstr r2, [r1]\n"
+	"\tstr r3, [r1, 0x4]\n"
+	"\tbx lr\n"
+	"\t.align 2, 0\n"
+"_0808DD64: .4byte gMonsterParameters");
+#endif
+}
+
 #ifndef NONMATCHING
 NAKED
 #endif

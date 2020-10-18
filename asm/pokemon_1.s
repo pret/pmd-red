@@ -181,23 +181,4 @@ sub_808DD18:
 _0808DD44: .4byte gMonsterParameters
 	thumb_func_end sub_808DD18
 
-	thumb_func_start sub_808DD48
-sub_808DD48:
-	lsls r0, 16
-	asrs r0, 16
-	ldr r2, _0808DD64
-	ldr r3, [r2]
-	lsls r2, r0, 3
-	adds r2, r0
-	lsls r2, 3
-	adds r2, r3
-	ldr r3, [r2, 0x38]
-	ldr r2, [r2, 0x34]
-	str r2, [r1]
-	str r3, [r1, 0x4]
-	bx lr
-	.align 2, 0
-_0808DD64: .4byte gMonsterParameters
-	thumb_func_end sub_808DD48
-
         .align 2,0 @ don't pad with nop

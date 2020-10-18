@@ -75,7 +75,7 @@ u8 GetUnk12(s16 r0)
 
 s16 sub_808DC0C(s16 r0)
 {
-    return gMonsterParameters[r0].evolve_from;
+    return gMonsterParameters[r0].pre.evolve_from;
 }
 
 // TODO fix calculation to match
