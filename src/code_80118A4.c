@@ -3,6 +3,7 @@
 void sub_8011924(void);
 void nullsub_26(void);
 
+extern u8 sub_80023E4(u8);
 extern void sub_800BDFC(u16 r0);
 extern void sub_800BE8C(u16 r0, u16 r1);
 extern void sub_800BF48(u16 r0);
@@ -13,7 +14,9 @@ extern void sub_801199C(u16 r0);
 extern u16 sub_800C068();
 extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
+extern void sub_800C93C();
 extern u8 sub_800C5D0(u16 r0);
+extern void sub_800C9CC();
 
 extern void nullsub_27(void);
 extern void nullsub_29(void);
@@ -31,8 +34,97 @@ struct UnkStructType
 extern u16 gUnknown_80D4144[];
 extern struct UnkStructType gUnknown_202DE20;
 extern struct UnkStructType gUnknown_202DE22;
+extern struct UnkStructType gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
+
+void sub_8011760(void)
+{
+    if(sub_80023E4(0xD) != 0)
+    {
+        sub_800BDFC(0x13);
+        return;
+    }
+    if(sub_80023E4(0xC) != 0)
+    {
+        sub_800BDFC(0x7);
+    }
+}
+
+void sub_801178C(void)
+{
+    if(sub_80023E4(0xD) != 0)
+    {
+        sub_800BDFC(0x13);
+        return;
+    }
+    sub_800BDFC(0x7);
+}
+
+void sub_80117AC(void)
+{
+    if(sub_80023E4(0xD) == 0)
+    {
+        sub_800BFD0(0x1E);
+    }
+}
+
+void sub_80117C4(void)
+{
+    sub_800BFD0(0x1E);
+}
+
+void sub_80117D0(void)
+{
+    sub_800C074(0x97 << 1, 0x80 << 1);
+}
+
+void sub_80117E4(void)
+{
+    sub_800C074(0x12f, 0x80 << 1);
+}
+
+void sub_80117F8(void)
+{
+    sub_800C074(0x12d, 0x80 << 1);
+}
+
+void sub_801180C(void)
+{
+    gUnknown_202DE1C = 0;
+    gUnknown_202DE20.unk0 = 0;
+    gUnknown_202DE22.unk0 = 0;
+    gUnknown_202DE24.unk0 = 0;
+}
+
+void sub_8011830(void)
+{
+    sub_800C93C();
+    gUnknown_202DE20.unk0 = 0;
+    gUnknown_202DE22.unk0 = 0;
+    gUnknown_202DE24.unk0 = 0;
+}
+
+void sub_8011854(void)
+{
+    sub_800C9CC();
+}
+
+void sub_8011860(void)
+{
+    if(gUnknown_202DE20.unk0 > 0)
+    {
+        gUnknown_202DE20.unk0--;
+    }
+    if(gUnknown_202DE22.unk0 > 0)
+    {
+        gUnknown_202DE22.unk0--;
+    }
+    if(gUnknown_202DE24.unk0 > 0)
+    {
+        gUnknown_202DE24.unk0--;
+    }
+}
 
 void sub_80118A4(void)
 {

@@ -5,23 +5,6 @@
 
 	.text	
 
-        thumb_func_start sub_8012468
-sub_8012468:
-	push {r4,lr}
-	ldr r4, _08012480
-	movs r0, 0x8
-	movs r1, 0x5
-	bl MemoryAlloc
-	str r0, [r4]
-	movs r1, 0x1
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08012480: .4byte gUnknown_203B188
-	thumb_func_end sub_8012468
-
 	thumb_func_start sub_8012484
 sub_8012484:
 	push {r4,r5,lr}

@@ -3,12 +3,12 @@
 
 extern u32 gUnknown_203B47C;
 
-extern u32 gUnknown_2026E3C;
-extern u32 gUnknown_2026E58;
-extern u32 gUnknown_2026E54;
-extern u32 gUnknown_2026E50;
-extern u16 gUnknown_2026E4E;
 extern u8 gUnknown_2026E38;
+extern u32 gUnknown_2026E3C;
+extern u16 gUnknown_2026E4E;
+extern u32 gUnknown_2026E50;
+extern u32 gUnknown_2026E54;
+extern u32 gUnknown_2026E58;
 
 extern void sub_800CC44(u32 r0, u32 r1);
 

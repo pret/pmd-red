@@ -4,6 +4,14 @@
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 extern struct unkTimeStruct *gUnknown_203B47C;
 
+struct unk_203B188
+{
+    u32 unk0;
+    u32 unk4;
+};
+
+extern struct unk_203B188 *gUnknown_203B188;
+
 extern u32 gUnknown_203B460;
 extern u32 gUnknown_203B45C;
 extern u32 gUnknown_203B480;
@@ -49,6 +57,8 @@ extern void sub_8012240();
 
 extern void sub_8094FA8(struct unkTimeStruct *Time); // defined in src/code_8094F88.c
 extern struct unkTimeStruct *sub_8094FA0(void);
+
+extern void* MemoryAlloc(u32 a, u32 b);
 
 void sub_80122D0();
 void sub_80122F4();
@@ -154,5 +164,12 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B468 = sub_80923B0();
        gUnknown_203B46C = sub_8094990();
        gUnknown_203B47C = sub_8094FA0();
+
+}
+
+void sub_8012468(void)
+{
+    gUnknown_203B188 = MemoryAlloc(sizeof(struct unk_203B188), 5);
+    gUnknown_203B188->unk0 = 1;
 
 }

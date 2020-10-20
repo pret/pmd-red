@@ -44,6 +44,7 @@ struct Input
     /* 0x28 */ u8 unk28;
     /* 0x29 */ u8 unk29;
     /* 0x2A */ u8 unk2A;
+    /* 0x2B */ u8 padding;
 };
 
 void InitInput(void);
