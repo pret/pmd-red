@@ -53,7 +53,7 @@ SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 ifeq ($(OS),Windows_NT)
 LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a
 else
-LIB := -L ../../tools/agbcc/lib -lc -lgcc
+LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
 endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
@@ -78,7 +78,7 @@ endif
 ALL_BUILDS := red
 
 # Available targets
-.PHONY: all clean tidy
+.PHONY: all clean tidy libagbsyscall
 
 MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
@@ -107,12 +107,13 @@ clean: tidy
 tidy:
 	$(RM) $(ALL_BUILDS:%=pmd_%{.gba,.elf,.map})
 	$(RM) -r build
+	@$(MAKE) clean -C libagbsyscall
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
-%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC)
+%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
@@ -131,3 +132,6 @@ $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
+
+libagbsyscall:
+	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
