@@ -5,6 +5,7 @@
 
 	.text
 
+        @ Unused
 	thumb_func_start sub_80035F8
 sub_80035F8:
 	push {lr}

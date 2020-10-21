@@ -143,3 +143,36 @@ void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock *bloc
     settings.size = aligned_size;
     DoInitHeap(parentHeap, &settings, freeList, freeListMax);
 }
+
+u8 xxx_memory_attr_related(u32 r0)
+{
+    u32 temp;
+    u32 return_var;
+    if(r0 == 0)
+    {
+        return 0;
+    }
+    if((r0 & 8) != 0)
+    {
+        return 4;
+    }
+
+    temp = r0 & 7;
+    if(temp == 7)
+    {
+        return_var = 1;;
+    }
+    else if(temp == 1)
+    {
+        return_var = 2;
+    }
+    else if(temp == 3)
+    {
+        return_var = 3;
+    }
+    else 
+    {
+        return_var = 5;
+    }
+    return return_var;
+}
