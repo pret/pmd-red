@@ -1,6 +1,6 @@
 #include "global.h"
 
-extern void sub_804151C(u32 r0, u32 r1, u32 r2);
+extern void sub_804151C(u32 r0, u32 r1, u8 r2);
 extern void sub_803E708(u32 r0, u32 r1);
 extern void sub_80416A4(u32 r0, u32 r1, u32 r2);
 extern void sub_80421C0(u32 r0, u32 r1);

@@ -1,8 +1,18 @@
 #include "global.h"
 
-extern void sub_804151C(u32 r0, u32 r1, u32 r2);
+struct unkStruct_8041D5C
+{
+    u8 padding[0x70];
+    u8 *unk70[100];
+};
+
+extern void sub_803ED30(u8, struct unkStruct_8041D5C *r0, u8, u8); 
+extern void sub_804151C(u32 r0, u32 r1, u8 r2);
 extern void sub_80421C0(u32 r0, u32 r1);
-extern void sub_806CDD4(u32 r0, u8, u8);
+extern u8 sub_8042768(void);
+extern void sub_806CDD4(u32 r0, u8, u32);
+extern u8 sub_8071858(u32, u8);
+
 
 void sub_8041AD0(u32 r0)
 {
@@ -180,4 +190,255 @@ void nullsub_72(void)
 
 void nullsub_73(void)
 {
+}
+
+void sub_8041C94(u32 r0)
+{
+    sub_804151C(r0, 0x171, 1);
+}
+
+void sub_8041CA8(u32 r0)
+{
+    sub_804151C(r0, 7, 1);
+}
+
+void sub_8041CB8(u32 r0)
+{
+    sub_804151C(r0, 0x18b, 1);
+}
+
+void sub_8041CCC(u32 r0)
+{
+    sub_804151C(r0, 0xC5 << 1, 1);
+}
+
+void sub_8041CDC(u32 r0)
+{
+    sub_804151C(r0, 5, 1);
+}
+
+void sub_8041CEC(u32 r0)
+{
+    sub_80421C0(r0, 0x19d);
+}
+
+void nullsub_74(void)
+{
+}
+
+void sub_8041D00(u32 r0, u32 r1)
+{
+    sub_804151C(r1, 0x2F, 1);
+    sub_804151C(r0, 0x30, 1);
+}
+
+void nullsub_75(void)
+{
+}
+
+void nullsub_76(void)
+{
+}
+
+void nullsub_77(void)
+{
+}
+
+void nullsub_78(void)
+{
+}
+
+void nullsub_79(void)
+{
+}
+
+void nullsub_80(void)
+{
+}
+
+void sub_8041D38(u32 r0)
+{
+    sub_804151C(r0, 0x21, 1);
+}
+
+void sub_8041D48(u32 r0)
+{
+    sub_80421C0(r0, 0x191);
+}
+
+void nullsub_81(void)
+{
+}
+
+void sub_8041D5C(struct unkStruct_8041D5C *r0)
+{
+    u8 *temp;
+    if(sub_8042768() == 0)
+    {
+        return;
+    }
+    temp = *r0->unk70;
+    sub_803ED30(temp[0x89 << 1] , r0, 1, 0xB);
+}
+
+void sub_8041D84(u32 r0)
+{
+    sub_80421C0(r0, 0x19f);
+}
+
+void nullsub_82(void)
+{
+}
+
+void nullsub_83(void)
+{
+}
+
+void sub_8041D9C(u32 r0)
+{
+    sub_804151C(r0, 0x131, 1);
+}
+
+void sub_8041DB0(u32 r0)
+{
+    sub_804151C(r0, 0x30, 1);
+}
+
+void nullsub_84(void)
+{
+}
+
+void nullsub_85(void)
+{
+}
+
+void nullsub_204(void)
+{
+}
+
+void nullsub_86(void)
+{
+}
+
+void nullsub_87(void)
+{
+}
+
+void nullsub_88(void)
+{
+}
+
+#ifndef NONMATCHING
+NAKED
+#endif
+// TODO r1 is doing an lsr instead of an asr... maybe a signed arg?
+void sub_8041DD8(u32 r0, u16 r1)
+{
+#ifdef NONMATCHING
+    if(sub_8071858(r0, 0xE) != 0)
+    {
+        sub_804151C(r0, r1, 1);
+        return;
+    }
+    sub_804151C(r0, 0xE, 1);
+#else
+	asm_unified("\tpush {r4,r5,lr}\n"
+	"\tadds r4, r0, 0\n"
+	"\tlsls r1, 16\n"
+	"\tasrs r5, r1, 16\n"
+	"\tmovs r1, 0xE\n"
+	"\tbl sub_8071858\n"
+	"\tlsls r0, 24\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _08041DF8\n"
+	"\tadds r0, r4, 0\n"
+	"\tadds r1, r5, 0\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_804151C\n"
+	"\tb _08041E02\n"
+"_08041DF8:\n"
+	"\tadds r0, r4, 0\n"
+	"\tmovs r1, 0xE\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_804151C\n"
+"_08041E02:\n"
+	"\tpop {r4,r5}\n"
+	"\tpop {r0}\n"
+	"\tbx r0");
+#endif
+}
+
+void nullsub_89(void)
+{
+}
+
+void sub_8041E0C(u32 r0)
+{
+    sub_804151C(r0, 0x41, 1);
+}
+
+void sub_8041E1C(u32 r0)
+{
+    sub_804151C(r0, 0x8F << 1, 1);
+    sub_80421C0(r0, 0xCE << 1);
+}
+
+void sub_8041E3C(u32 r0)
+{
+    sub_804151C(r0, 0xD7 << 1, 1);
+}
+
+void sub_8041E4C(u32 r0)
+{
+    sub_804151C(r0, 0x1b1, 1);
+}
+
+void sub_8041E60(u32 r0)
+{
+    sub_804151C(r0, 0x1a9, 1);
+}
+
+void sub_8041E74(u32 r0)
+{
+    sub_804151C(r0, 0xC9 << 1, 1);
+}
+
+void sub_8041E84(u32 r0)
+{
+    sub_804151C(r0, 0xC7 << 1, 1);
+}
+
+void sub_8041E94(u32 r0)
+{
+    sub_804151C(r0, 0xC8 << 1, 1);
+}
+
+void sub_8041EA4(u32 r0)
+{
+    sub_804151C(r0, 0x15, 1);
+}
+
+void sub_8041EB4(u32 r0)
+{
+    sub_804151C(r0, 0x171, 1);
+}
+
+void sub_8041EC8(u32 r0)
+{
+    sub_80421C0(r0, 0x197);
+}
+
+void sub_8041ED8(u32 r0)
+{
+    sub_80421C0(r0, 0x197);
+}
+
+void sub_8041EE8(u32 r0)
+{
+    sub_804151C(r0, 0x15, 1);
+}
+
+void sub_8041EF8(u32 r0)
+{
+    sub_804151C(r0, 0xF, 1);
 }
