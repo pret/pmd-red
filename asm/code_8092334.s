@@ -1402,7 +1402,7 @@ sub_8092D54:
 	bx r0
 	.align 2, 0
 _08092D78: .4byte gUnknown_810992C
-_08092D7C: .4byte gUnknown_810CC0C
+_08092D7C: .4byte gRangeNames
 	thumb_func_end sub_8092D54
 
 	thumb_func_start sub_8092D80

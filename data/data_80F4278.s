@@ -6988,8 +6988,8 @@ gAbilityNames: @ 810B4C8
 AbilityDescriptions: @ 810B988
 	.incbin "baserom.gba", 0x10B988, 0x1284
 
-	.global gUnknown_810CC0C
-gUnknown_810CC0C: @ 810CC0C
+	.global gRangeNames
+gRangeNames: @ 810CC0C
 	.incbin "baserom.gba", 0x10CC0C, 0x2F4
 
 	.global gUnknown_810CF00
@@ -7005,12 +7005,12 @@ gUnknown_810CF0C: @ 810CF0C
         .align 2,0
         .byte 0x10, 0xCF, 0x10, 0x08 @ (pointer to power string)
 
-	.global gUnknown_810CF1C
-gUnknown_810CF1C: @ 810CF1C
+	.global gStatusNames
+gStatusNames: @ 810CF1C
 	.incbin "baserom.gba", 0x10CF1C, 0x70C
 
-	.global gUnknown_810D628
-gUnknown_810D628: @ 810D628
+	.global gFormattedStatusNames
+gFormattedStatusNames: @ 810D628
 	.incbin "baserom.gba", 0x10D628, 0x730
 
 	.global gUnknown_810DD58
@@ -7197,8 +7197,8 @@ gIQSkillNames: @ 8112234
 gIQSkillDescriptions: @ 811240C
 	.incbin "baserom.gba", 0x11240C, 0x808
 
-	.global gUnknown_8112C14
-gUnknown_8112C14: @ 8112C14
+	.global gTactics
+gTactics: @ 8112C14
 	.incbin "baserom.gba", 0x112C14, 0xE8
 
 	.global gTacticsDescriptions
@@ -9465,6 +9465,7 @@ gUnknown_811BAF4: @ 811BAF4
         .byte 0x6f, 0x75, 0x6e, 0x64, 0x5f, 0x61, 0x6d, 0x64, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x30, 0x30, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64
         .byte 0x69, 0x72, 0x30, 0x00
 
+@ Script Data
 	.global gUnknown_811E258
 gUnknown_811E258: @ 811E258
 	.incbin "baserom.gba", 0x11E258, 0x39C

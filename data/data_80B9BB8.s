@@ -108,6 +108,8 @@ gUnknown_80CE788: @ 80CE788
         .align 2,0
         .asciz "pksdir0"
 
+@ Status Conditions Graphics
+
 	.global gUnknown_80CE79C
 gUnknown_80CE79C: @ 80CE79C
 	.incbin "baserom.gba", 0xCE79C, 0x198
@@ -121,6 +123,8 @@ gUnknown_80D3474: @ 80D3474
 	.incbin "baserom.gba", 0xD3474, 0xF0
 
         .include "data/text/pksdir0.inc"
+
+@ Friend Area Data
 
 	.global gUnknown_80D3570
 gUnknown_80D3570: @ 80D3570
@@ -257,6 +261,7 @@ gUnknown_80D4120: @ 80D4120
 gUnknown_80D4124: @ 80D4124
 	.incbin "baserom.gba", 0xD4124, 0x20
 
+@ Error Handling
 	.global gUnknown_80D4144
 gUnknown_80D4144: @ 80D4144
 	.incbin "baserom.gba", 0xD4144, 0x48

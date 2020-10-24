@@ -936,7 +936,7 @@ sub_808E4FC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808E518: .4byte gUnknown_810D628
+_0808E518: .4byte gFormattedStatusNames
 	thumb_func_end sub_808E4FC
 
 	thumb_func_start sub_808E51C
@@ -955,7 +955,7 @@ sub_808E51C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808E538: .4byte gUnknown_810D628
+_0808E538: .4byte gFormattedStatusNames
 	thumb_func_end sub_808E51C
 
 	thumb_func_start sub_808E53C
@@ -1749,7 +1749,7 @@ sub_808EAC0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808EAD8: .4byte gUnknown_8112C14
+_0808EAD8: .4byte gTactics
 	thumb_func_end sub_808EAC0
 
 	thumb_func_start sub_808EADC
@@ -4026,7 +4026,7 @@ _0808FC96:
 	str r7, [sp]
 	b _0808FD98
 	.align 2, 0
-_0808FCA0: .4byte gUnknown_810CF1C
+_0808FCA0: .4byte gStatusNames
 _0808FCA4: .4byte gUnknown_202DEA8
 _0808FCA8: .4byte gUnknown_8107784
 _0808FCAC: .4byte gUnknown_810DF78
