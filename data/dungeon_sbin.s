@@ -1,7 +1,4 @@
-#include "constants/bg_music.h"
-#include "constants/weather.h"
-
-    .section .rodata
+.section .rodata
 
 .include "data/unk_dungeon.inc"
 
