@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80484A8
-sub_80484A8:
-	push {lr}
-	sub sp, 0x4
-	movs r2, 0x1
-	str r2, [sp]
-	movs r3, 0x1
-	bl sub_8072008
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80484A8
-
-	thumb_func_start sub_80484BC
-sub_80484BC:
-	push {lr}
-	bl sub_8076D10
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80484BC
-
-	thumb_func_start sub_80484C8
-sub_80484C8:
-	push {lr}
-	ldr r2, _080484D8
-	ldr r2, [r2]
-	bl sub_80522F4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080484D8: .4byte gUnknown_80F89F4
-	thumb_func_end sub_80484C8
-
-	thumb_func_start sub_80484DC
-sub_80484DC:
-	push {lr}
-	movs r2, 0x1
-	bl sub_807232C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80484DC
-
 	thumb_func_start sub_80484E8
 sub_80484E8:
 	push {r4,r5,lr}
