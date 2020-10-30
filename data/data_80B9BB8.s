@@ -268,27 +268,33 @@ gUnknown_80D4144: @ 80D4144
 
 	.global gUnknown_80D418C
 gUnknown_80D418C: @ 80D418C
-	.incbin "baserom.gba", 0xD418C, 0x24
+        .string "func = '%s'\n"
+        .asciz "file = '%s'  line = %5d"
 
-	.global gUnknown_80D41B0
-gUnknown_80D41B0: @ 80D41B0
+	.global gNotEntryText
+gNotEntryText: @ 80D41B0
         .asciz "--- not entry ---"
         .align 2,0
 
 	.global gUnknown_80D41C4
 gUnknown_80D41C4: @ 80D41C4
-	.incbin "baserom.gba", 0xD41C4, 0x28
+        .string "%sfunc = '%s'\n"
+        .asciz "file = '%s'  line = %5d\n"
+        .align 2,0
 
 	.global gUnknown_80D41EC
 gUnknown_80D41EC: @ 80D41EC
-	.incbin "baserom.gba", 0xD41EC, 0x30
+        .string "func = '%s'\n"
+        .asciz "file = '%s'  line = %5d\n"
+        .align 2,0
+        .asciz "pksdir0"
 
 	.global gUnknown_80D421C
 gUnknown_80D421C: @ 80D421C
 	.incbin "baserom.gba", 0xD421C, 0x6C
 
-	.global gUnknown_80D4288
-gUnknown_80D4288: @ 80D4288
+	.global gNotMountText
+gNotMountText: @ 80D4288
         .asciz "not mount log system"
         .align 2,0
         .asciz "pksdir0"
@@ -296,8 +302,8 @@ gUnknown_80D4288: @ 80D4288
         .asciz "pksdir0"
         .asciz "pksdir0"
 
-	.global gUnknown_80D42C0
-gUnknown_80D42C0: @ 80D42C0
+	.global gFatalText
+gFatalText: @ 80D42C0
         .asciz "!!!!! Fatal !!!!!\n"
         .align 2,0
 
@@ -1336,7 +1342,8 @@ gUnknown_80DC274: @ 80DC274
 	.global gUnknown_80DC28C
 gUnknown_80DC28C: @ 80DC28C
 @ replacing .incbin "baserom.gba", 0x000dc28c, 0x14
-        .byte 0x4d, 0x6f, 0x76, 0x65, 0x73, 0x3a, 0x20, 0x23, 0x43, 0x36, 0x24, 0x6d, 0x30, 0x23, 0x52, 0x20, 0x00, 0x00, 0x00, 0x00
+        .asciz "Moves: #C6$m0#R "
+        .align 2,0
 
 	.global gUnknown_80DC2A0
 gUnknown_80DC2A0: @ 80DC2A0
@@ -1375,7 +1382,8 @@ gUnknown_80DC2C4: @ 80DC2C4
 	.global gUnknown_80DC2DC
 gUnknown_80DC2DC: @ 80DC2DC
 @ replacing .incbin "baserom.gba", 0x000dc2dc, 0x1c
-        .byte 0x4d, 0x6f, 0x76, 0x65, 0x73, 0x20, 0x50, 0x61, 0x67, 0x65, 0x3a, 0x20, 0x25, 0x64, 0x2f, 0x25, 0x64, 0x20, 0x00, 0x00
+        .asciz "Moves Page: %d/%d "
+        .align 2,0
         .asciz "pksdir0"
         .align 2,0
 
@@ -1451,84 +1459,70 @@ gUnknown_80DC394: @ 80DC394
 
 	.global gUnknown_80DC3C4
 gUnknown_80DC3C4: @ 80DC3C4
-@ replacing .incbin "baserom.gba", 0x000dc3c4, 0x8
         .asciz "Proceed"
         .align 2,0
 
 	.global gUnknown_80DC3CC
 gUnknown_80DC3CC: @ 80DC3CC
-@ replacing .incbin "baserom.gba", 0x000dc3cc, 0xc
 .byte 0x23, 0x43, 0x36, 0x49, 0x6e, 0x66, 0x6f, 0x23, 0x52, 0x20, 0x00, 0x00
 
 	.global gUnknown_80DC3D8
 gUnknown_80DC3D8: @ 80DC3D8
-@ replacing .incbin "baserom.gba", 0x000dc3d8, 0x8
         .asciz "Moves"
         .align 2,0
 
 	.global gUnknown_80DC3E0
 gUnknown_80DC3E0: @ 80DC3E0
-@ replacing .incbin "baserom.gba", 0x000dc3e0, 0x8
         .asciz "Summary"
         .align 2,0
 
 	.global gUnknown_80DC3E8
 gUnknown_80DC3E8: @ 80DC3E8
-@ replacing .incbin "baserom.gba", 0x000dc3e8, 0xc
         .asciz "Check IQ"
         .align 2,0
 
 	.global gUnknown_80DC3F4
 gUnknown_80DC3F4: @ 80DC3F4
-@ replacing .incbin "baserom.gba", 0x000dc3f4, 0xc
         .asciz "Remember"
         .align 2,0
 
 	.global gUnknown_80DC400
 gUnknown_80DC400: @ 80DC400
-@ replacing .incbin "baserom.gba", 0x000dc400, 0xc
         .asciz "Deselect"
         .align 2,0
 
 	.global gUnknown_80DC40C
 gUnknown_80DC40C: @ 80DC40C
-@ replacing .incbin "baserom.gba", 0x000dc40c, 0x4
         .asciz "Set"
         .align 2,0
 
 	.global gUnknown_80DC410
 gUnknown_80DC410: @ 80DC410
-@ replacing .incbin "baserom.gba", 0x000dc410, 0x8
         .asciz "Link"
         .align 2,0
 
 	.global gUnknown_80DC418
 gUnknown_80DC418: @ 80DC418
-@ replacing .incbin "baserom.gba", 0x000dc418, 0x8
         .asciz "Delink"
         .align 2,0
 
 	.global gUnknown_80DC420
 gUnknown_80DC420: @ 80DC420
-@ replacing .incbin "baserom.gba", 0x000dc420, 0x8
         .asciz "Forget"
         .align 2,0
 
 	.global gUnknown_80DC428
 gUnknown_80DC428: @ 80DC428
-@ replacing .incbin "baserom.gba", 0x000dc428, 0x10
         .asciz "Setting moves"
         .align 2,0
 
 	.global gUnknown_80DC438
 gUnknown_80DC438: @ 80DC438
-@ replacing .incbin "baserom.gba", 0x000dc438, 0x10
         .asciz "Linking moves"
         .align 2,0
 
 	.global gUnknown_80DC448
 gUnknown_80DC448: @ 80DC448
-@ replacing .incbin "baserom.gba", 0x000dc448, 0x1c
         .asciz "Remembering moves"
         .align 2,0
         .asciz "pksdir0"
@@ -1536,7 +1530,6 @@ gUnknown_80DC448: @ 80DC448
 
 	.global gUnknown_80DC464
 gUnknown_80DC464: @ 80DC464
-@ replacing .incbin "baserom.gba", 0x000dc464, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -1546,7 +1539,6 @@ gUnknown_80DC464: @ 80DC464
 
 	.global gUnknown_80DC47C
 gUnknown_80DC47C: @ 80DC47C
-@ replacing .incbin "baserom.gba", 0x000dc47c, 0x18
         .byte 0x00, 0x00
         .byte 0x00, 0x00
         .byte 0x06, 0x00
@@ -1562,7 +1554,6 @@ gUnknown_80DC47C: @ 80DC47C
 
 	.global gUnknown_80DC494
 gUnknown_80DC494: @ 80DC494
-@ replacing .incbin "baserom.gba", 0x000dc494, 0x10
         .asciz "Friend Areas"
         .align 2,0
 
@@ -1707,7 +1698,6 @@ gUnknown_80DC5EC: @ 80DC5EC
 
 	.global gUnknown_80DC5F4
 gUnknown_80DC5F4: @ 80DC5F4
-@ replacing .incbin "baserom.gba", 0x000dc5f4, 0x24
         .asciz "It doesn~27t appear to be hungry."
         .align 2,0
 
@@ -2608,15 +2598,21 @@ gUnknown_80E0744: @ 80E0744
 
 	.global gUnknown_80E0750
 gUnknown_80E0750: @ 80E0750
-	.incbin "baserom.gba", 0xE0750, 0x4
+        .byte 0x83, 0xC2, 0x00, 0x00
 
 	.global gUnknown_80E0754
 gUnknown_80E0754: @ 80E0754
-	.incbin "baserom.gba", 0xE0754, 0xC
+        .byte 0x83, 0xC0, 0x00, 0x00
+        .asciz "pksdir0"
 
 	.global gUnknown_80E0760
 gUnknown_80E0760: @ 80E0760
-	.incbin "baserom.gba", 0xE0760, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0778
 gUnknown_80E0778: @ 80E0778
@@ -2628,7 +2624,12 @@ gUnknown_80E07D8: @ 80E07D8
 
 	.global gUnknown_80E07EC
 gUnknown_80E07EC: @ 80E07EC
-	.incbin "baserom.gba", 0xE07EC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0804
 gUnknown_80E0804: @ 80E0804
@@ -2649,7 +2650,12 @@ gUnknown_80E0828: @ 80E0828
 
 	.global gUnknown_80E083C
 gUnknown_80E083C: @ 80E083C
-	.incbin "baserom.gba", 0xE083C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0854
 gUnknown_80E0854: @ 80E0854
@@ -2669,11 +2675,13 @@ gUnknown_80E091C: @ 80E091C
 
 	.global gUnknown_80E0934
 gUnknown_80E0934: @ 80E0934
-	.incbin "baserom.gba", 0xE0934, 0x4
+        .asciz "ID:"
 
 	.global gUnknown_80E0938
 gUnknown_80E0938: @ 80E0938
-	.incbin "baserom.gba", 0xE0938, 0x10
+        .asciz "%-4d"
+        .align 2,0
+        .asciz "pksdir0"
 
 	.global gUnknown_80E0948
 gUnknown_80E0948: @ 80E0948
@@ -2731,35 +2739,43 @@ gUnknown_80E1F18: @ 80E1F18
 
 	.global gUnknown_80E1F30
 gUnknown_80E1F30: @ 80E1F30
-	.incbin "baserom.gba", 0xE1F30, 0xC
+        .asciz "Objectives"
+        .align 2,0
 
 	.global gUnknown_80E1F3C
 gUnknown_80E1F3C: @ 80E1F3C
-	.incbin "baserom.gba", 0xE1F3C, 0x4
+        .asciz "%dF"
 
 	.global gUnknown_80E1F40
 gUnknown_80E1F40: @ 80E1F40
-	.incbin "baserom.gba", 0xE1F40, 0x14
+        .asciz "  Rescue #C6%s#R"
+        .align 2,0
 
 	.global gUnknown_80E1F54
 gUnknown_80E1F54: @ 80E1F54
-	.incbin "baserom.gba", 0xE1F54, 0xC
+        .asciz "Just go!"
+        .align 2,0
 
 	.global gUnknown_80E1F60
 gUnknown_80E1F60: @ 80E1F60
-	.incbin "baserom.gba", 0xE1F60, 0x10
+        .asciz "  Bring #C4%s#R"
+        .align 2,0
 
 	.global gUnknown_80E1F70
 gUnknown_80E1F70: @ 80E1F70
-	.incbin "baserom.gba", 0xE1F70, 0x10
+        .asciz "  Find #C4%s#R"
+        .align 2,0
 
 	.global gUnknown_80E1F80
 gUnknown_80E1F80: @ 80E1F80
-	.incbin "baserom.gba", 0xE1F80, 0x14
+        .asciz "  Escort to #C6%s#R"
+        .align 2,0
 
 	.global gUnknown_80E1F94
 gUnknown_80E1F94: @ 80E1F94
-	.incbin "baserom.gba", 0xE1F94, 0x14
+        .asciz "#CW???#R"
+        .align 2,0
+        .asciz "pksdir0"
 
 	.global gUnknown_80E1FA8
 gUnknown_80E1FA8: @ 80E1FA8
@@ -2783,11 +2799,15 @@ gUnknown_80E2008: @ 80E2008
 
 	.global gUnknown_80E2020
 gUnknown_80E2020: @ 80E2020
-	.incbin "baserom.gba", 0xE2020, 0x10
+        .asciz "Adventure Log"
+        .align 2,0
 
 	.global gUnknown_80E2030
 gUnknown_80E2030: @ 80E2030
-	.incbin "baserom.gba", 0xE2030, 0x38
+        @ Probably some sort of placeholder
+        .asciz "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "
+        .align 2,0
+        .asciz "pksdir0"
 
 	.global gUnknown_80E2068
 gUnknown_80E2068: @ 80E2068
@@ -4109,18 +4129,18 @@ gUnknown_80E8180: @ 80E8180
 gUnknown_80E81D4: @ 80E81D4
 	.incbin "baserom.gba", 0xE81D4, 0x608
 
-	.global gUnknown_80E87DC
-gUnknown_80E87DC: @ 80E87DC
+	.global gMankeyMission
+gMankeyMission: @ 80E87DC
         .asciz "Punish bad #C6Mankey#R!"
         .align 2,0
 
-	.global gUnknown_80E87F4
-gUnknown_80E87F4: @ 80E87F4
+	.global gSmeargleMission
+gSmeargleMission: @ 80E87F4
         .asciz "#C6Smeargle#R~27s desperate plea!"
         .align 2,0
 
-	.global gUnknown_80E8818
-gUnknown_80E8818: @ 80E8818
+	.global gMedichamMission
+gMedichamMission: @ 80E8818
         .asciz "#C6Medicham#R: Help me!"
         .align 2,0
 
@@ -4241,23 +4261,23 @@ gUnknown_80E8B40: @ 80E8B40
         .asciz "Find #C6%s#R."
         .align 2,0
 
-	.global gUnknown_80E8B50
-gUnknown_80E8B50: @ 80E8B50
+	.global gSpecialMissionText
+gSpecialMissionText: @ 80E8B50
         .asciz "Special mission"
         .align 2,0
 
-	.global gUnknown_80E8B60
-gUnknown_80E8B60: @ 80E8B60
+	.global gPlaceText
+gPlaceText: @ 80E8B60
         .asciz "Place:"
         .align 2,0
 
-	.global gUnknown_80E8B68
-gUnknown_80E8B68: @ 80E8B68
+	.global gDifficultyText
+gDifficultyText: @ 80E8B68
         .asciz "Difficulty:"
         .align 2,0
 
-	.global gUnknown_80E8B74
-gUnknown_80E8B74: @ 80E8B74
+	.global gRewardText
+gRewardText: @ 80E8B74
         .asciz "Reward:"
         .align 2,0
 

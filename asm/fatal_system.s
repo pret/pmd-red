@@ -79,7 +79,7 @@ sub_8011BAC:
 	ldr r0, _08011BB0
 	bx lr
 	.align 2, 0
-_08011BB0: .4byte gUnknown_80D4288
+_08011BB0: .4byte gNotMountText
 	thumb_func_end sub_8011BAC
 
 	thumb_func_start sub_8011BB4
@@ -150,7 +150,7 @@ FatalError:
 	bl FatalErrorFormatMessage
 	bl FatalErrorHang
 	.align 2, 0
-_08011C14: .4byte gUnknown_80D42C0
+_08011C14: .4byte gFatalText
 _08011C18: .4byte gUnknown_80D42D4
 	thumb_func_end FatalError
 

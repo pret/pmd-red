@@ -34,7 +34,7 @@ _08011A98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011AA0: .4byte gUnknown_80D41B0
+_08011AA0: .4byte gNotEntryText
 	thumb_func_end PrintFuncFileLineOrNotEntry
 
 	thumb_func_start PrintFuncFileLine

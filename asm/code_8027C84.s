@@ -39369,19 +39369,19 @@ _0803B73E:
 	ldr r2, _0803B744
 	b _0803B7CC
 	.align 2, 0
-_0803B744: .4byte gUnknown_80E87DC
+_0803B744: .4byte gMankeyMission
 _0803B748:
 	ldr r1, [r7, 0x48]
 	ldr r2, _0803B750
 	b _0803B7CC
 	.align 2, 0
-_0803B750: .4byte gUnknown_80E87F4
+_0803B750: .4byte gSmeargleMission
 _0803B754:
 	ldr r1, [r7, 0x48]
 	ldr r2, _0803B75C
 	b _0803B7CC
 	.align 2, 0
-_0803B75C: .4byte gUnknown_80E8818
+_0803B75C: .4byte gMedichamMission
 _0803B760:
 	ldr r1, [r7, 0x8]
 	add r0, sp, 0x4
@@ -40262,8 +40262,8 @@ _0803BEC8:
 	bl sub_800D158
 	b _0803BF0C
 	.align 2, 0
-_0803BEF8: .4byte gUnknown_80E8B50
-_0803BEFC: .4byte gUnknown_80E8B60
+_0803BEF8: .4byte gSpecialMissionText
+_0803BEFC: .4byte gPlaceText
 _0803BF00: .4byte gUnknown_80E8884
 _0803BF04:
 	ldr r1, [r7, 0x8]
@@ -40328,8 +40328,8 @@ _0803BF2E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0803BF88: .4byte gUnknown_80E8B68
-_0803BF8C: .4byte gUnknown_80E8B74
+_0803BF88: .4byte gDifficultyText
+_0803BF8C: .4byte gRewardText
 _0803BF90: .4byte _0803BF94
 	.align 2, 0
 _0803BF94:
