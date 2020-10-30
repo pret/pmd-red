@@ -87,15 +87,22 @@ gGenderText: @ 80F273C
 
 	.global gUnknown_80F275C
 gUnknown_80F275C: @ 80F275C
-        .byte 0x7C, 0x27, 0x0F, 0x08 @ Pointer to boy text
+        .4byte BoyText @ Pointer to boy text
         .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x74, 0x27, 0x0F, 0x08 @ Pointer to girl text
+        .4byte GirlText @ Pointer to girl text
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00 @ end of table
         .byte 0xFF, 0xFF, 0xFF, 0xFF
+
+        .global GirlText
+        GirlText:
         .asciz "Girl."
         .align 2,0
+
+        .global BoyText
+        BoyText:
         .string "Boy."
+
         .byte 0x00
         .byte 0x01
         .byte 0x02
