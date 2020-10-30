@@ -353,7 +353,7 @@ void SampleFreqSet(u32 freq)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
 
-    freq = (freq & 0xF0000) >> 16;
+    freq = (freq & SOUND_MODE_FREQ) >> SOUND_MODE_FREQ_SHIFT;
     soundInfo->freq = freq;
     soundInfo->pcmSamplesPerVBlank = gPcmSamplesPerVBlankTable[freq - 1];
     soundInfo->pcmDmaPeriod = PCM_DMA_BUF_SIZE / soundInfo->pcmSamplesPerVBlank;
@@ -642,28 +642,18 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 {
     s32 i;
     struct MusicPlayerTrack *track;
-    u16 fadeOI = mplayInfo->fadeOI;
-    register u32 temp asm("r3");
-    register u16 mask asm("r2");
+    u16 fadeOV;
 
-    if (fadeOI == 0)
+    if (mplayInfo->fadeOI == 0)
+        return;
+    if (--mplayInfo->fadeOC != 0)
         return;
 
-    mplayInfo->fadeOC--;
-
-    temp = 0xFFFF;
-    mask = temp;
-
-    if (mplayInfo->fadeOC != 0)
-        return;
-
-    mplayInfo->fadeOC = fadeOI;
+    mplayInfo->fadeOC = mplayInfo->fadeOI;
 
     if (mplayInfo->fadeOV & FADE_IN)
     {
-        mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT);
-
-        if ((u16)(mplayInfo->fadeOV & mask) >= (64 << FADE_VOL_SHIFT))
+        if ((u16)(mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT))
         {
             mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT);
             mplayInfo->fadeOI = 0;
@@ -671,16 +661,10 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     }
     else
     {
-        mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT);
-
-        if ((s16)(mplayInfo->fadeOV & mask) <= 0)
+        if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
         {
-            i = mplayInfo->trackCount;
-            track = mplayInfo->tracks;
-
-            while (i > 0)
+            for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
             {
-                register u32 fadeOV asm("r7");
                 u32 val;
 
                 TrackStop(mplayInfo, track);
@@ -691,9 +675,6 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 
                 if (!val)
                     track->flags = 0;
-
-                i--;
-                track++;
             }
 
             if (mplayInfo->fadeOV & TEMPORARY_FADE)
@@ -706,27 +687,22 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
         }
     }
 
-    i = mplayInfo->trackCount;
-    track = mplayInfo->tracks;
-
-    while (i > 0)
+    for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
     {
         if (track->flags & MPT_FLG_EXIST)
         {
-            track->volX = (mplayInfo->fadeOV >> FADE_VOL_SHIFT);
+            fadeOV = mplayInfo->fadeOV;
+
+            track->volX = (fadeOV >> FADE_VOL_SHIFT);
             track->flags |= MPT_FLG_VOLCHG;
         }
-
-        i--;
-        track++;
     }
 }
-
 void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     if (track->flags & MPT_FLG_VOLSET)
     {
-        s32 x;
+        u32 x;
         s32 y;
 
         x = (u32)(track->vol * track->volX) >> 5;
@@ -751,12 +727,11 @@ void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tr
     if (track->flags & MPT_FLG_PITSET)
     {
         s32 bend = track->bend * track->bendRange;
-        register s32 x asm("r1") = track->tune;
-        x += bend;
-        x *= 4;
-        x += (track->keyShift << 8);
-        x += (track->keyShiftX << 8);
-        x += track->pitX;
+        s32 x = (track->tune + bend)
+              * 4
+              + (track->keyShift << 8)
+              + (track->keyShiftX << 8)
+              + track->pitX;
 
         if (track->modT == 0)
             x += 16 * track->modM;
