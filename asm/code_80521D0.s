@@ -116336,27 +116336,4 @@ _0808CD94: .4byte sub_8086A3C
 _0808CD98: .4byte gUnknown_202E038
 	thumb_func_end sub_808CD44
 
-	thumb_func_start sub_808CD9C
-sub_808CD9C:
-	push {lr}
-	bl sub_8086448
-	ldr r0, _0808CDAC
-	bl sub_80866C4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CDAC: .4byte gUnknown_810697C
-	thumb_func_end sub_808CD9C
-
-	thumb_func_start sub_808CDB0
-sub_808CDB0:
-	lsls r0, 24
-	lsrs r0, 21
-	ldr r1, _0808CDBC
-	adds r0, r1
-	bx lr
-	.align 2, 0
-_0808CDBC: .4byte gUnknown_8107544
-	thumb_func_end sub_808CDB0
-
         .align 2,0 @ Don't pad with nop

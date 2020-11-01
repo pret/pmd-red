@@ -5,38 +5,6 @@
 
 	.text	
 
-        @ Unused
-	thumb_func_start PrintFuncFileLineOrNotEntry
-PrintFuncFileLineOrNotEntry:
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r0, r1, 0
-	cmp r0, 0
-	beq _08011A90
-	ldr r1, _08011A8C
-	ldr r2, [r0, 0x8]
-	ldr r3, [r0]
-	ldr r0, [r0, 0x4]
-	str r0, [sp]
-	adds r0, r4, 0
-	bl sprintf
-	b _08011A98
-	.align 2, 0
-_08011A8C: .4byte gUnknown_80D418C
-_08011A90:
-	ldr r1, _08011AA0
-	adds r0, r4, 0
-	bl sprintf
-_08011A98:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011AA0: .4byte gNotEntryText
-	thumb_func_end PrintFuncFileLineOrNotEntry
-
 	thumb_func_start PrintFuncFileLine
 PrintFuncFileLine:
 	push {r4,r5,lr}

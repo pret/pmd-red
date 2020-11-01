@@ -25,11 +25,22 @@ extern void nullsub_31(void);
 extern void nullsub_32(void);
 extern void nullsub_28(void);
 
+extern int sprintf(char *, const char *, ...);
+
 struct UnkStructType
 {
     /* 0x0 */ s16 unk0;
 
 };
+
+
+struct unkFileStruct
+{
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+};
+
 
 extern u16 gUnknown_80D4144[];
 extern struct UnkStructType gUnknown_202DE20;
@@ -37,6 +48,8 @@ extern struct UnkStructType gUnknown_202DE22;
 extern struct UnkStructType gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
+extern const char gNotEntryText;
+extern const char gUnknown_80D418C;
 
 void sub_8011760(void)
 {
@@ -280,4 +293,53 @@ void nullsub_25(void)
 
 void nullsub_26(void)
 {
+}
+
+#ifndef NONMATCHING
+NAKED
+#endif
+// Unused
+void PrintFuncFileLineOrNotEntry(char * r0, struct unkFileStruct *r1)
+{
+#ifdef NONMATCHING
+    u32 temp;
+    if(r1 != 0)
+    {
+        // TODO fix regswap here.. otherwise looks good
+        temp = r1->unk4;
+        sprintf(r0, &gUnknown_80D418C, r1->unk8, r1->unk0, temp);
+    }
+    else
+    {
+        sprintf(r0, &gNotEntryText);
+    }
+#else
+	asm_unified("\tpush {r4,lr}\n"
+	"\tsub sp, 0x4\n"
+	"\tadds r4, r0, 0\n"
+	"\tadds r0, r1, 0\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _08011A90\n"
+	"\tldr r1, _08011A8C\n"
+	"\tldr r2, [r0, 0x8]\n"
+	"\tldr r3, [r0]\n"
+	"\tldr r0, [r0, 0x4]\n"
+	"\tstr r0, [sp]\n"
+	"\tadds r0, r4, 0\n"
+	"\tbl sprintf\n"
+	"\tb _08011A98\n"
+	"\t.align 2, 0\n"
+"_08011A8C: .4byte gUnknown_80D418C\n"
+"_08011A90:\n"
+	"\tldr r1, _08011AA0\n"
+	"\tadds r0, r4, 0\n"
+	"\tbl sprintf\n"
+"_08011A98:\n"
+	"\tadd sp, 0x4\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_08011AA0: .4byte gNotEntryText");
+#endif
 }
