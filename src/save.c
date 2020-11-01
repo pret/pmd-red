@@ -23,6 +23,19 @@ struct UnkStruct_sub_8011DAC {
     u8 fill448[0x538C];
 };
 
+
+struct unk_struct
+{
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 padding[505];
+};
+
 extern s32 gUnknown_202DE28;
 extern u32 gUnknown_203B17C;
 extern u32 gUnknown_203B180;
@@ -266,4 +279,48 @@ u32 sub_8011DAC(u32 *a)
 u32 sub_8011F9C(s32 *r0, u8 *r1, s32 r2)
 {
     return ReadSaveSector(r0, r1, r2);
+}
+
+u32 sub_8011FA8(void)
+{
+    u32 temp2;
+    u32 temp3;
+    u32 temp;
+    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    temp = 0x1F;
+    temp2 = ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct));
+    if( temp2 == 0)
+    {
+        if(r5->unk14 != 0x5071412)
+        {
+            temp2 = 4;
+        }
+    }
+    temp3 = 0xf1209;
+    if(temp2 == 0)
+    {
+        temp3 = r5->unk18;
+    }
+    MemoryFree(r5);
+    return temp3;
+}
+
+bool8 sub_8011FF8(void)
+{
+    u32 temp2;
+    u32 temp;
+    bool8 r6;
+    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    temp = 0x1F;
+    r6 = FALSE;
+    temp2 = ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct));
+    if(temp2 == 0)
+    {
+        if(r5->unk14 == 0x5071412)
+        {
+            r6 = TRUE;
+        }
+    }
+    MemoryFree(r5);
+    return r6;
 }
