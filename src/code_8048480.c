@@ -24,27 +24,11 @@ void sub_804849C(u32 r0, u32 r1)
     sub_8077AE4(r0, r1, 1);
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
 void sub_80484A8(u32 r0, u32 r1)
 {   
-#ifdef NONMATCHING
-    // TODO missing something on the stack
-    u32 *temp;
-    *temp = 1;
+    volatile u32 temp;
+    temp = 1;
     sub_8072008(r0, r1, 1, 1);
-#else
-	asm_unified("\tpush {lr}\n"
-	"\tsub sp, 0x4\n"
-	"\tmovs r2, 0x1\n"
-	"\tstr r2, [sp]\n"
-	"\tmovs r3, 0x1\n"
-	"\tbl sub_8072008\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
-#endif
 }
 
 void sub_80484BC(void)
