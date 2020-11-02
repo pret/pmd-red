@@ -264,7 +264,25 @@ gUnknown_80D4124: @ 80D4124
 @ Error Handling
 	.global gUnknown_80D4144
 gUnknown_80D4144: @ 80D4144
-	.incbin "baserom.gba", 0xD4144, 0x48
+        .byte 0x2e, 0x01
+        .byte 0x2f, 0x01
+        .byte 0x2f, 0x01
+        .byte 0x2d, 0x01
+        .byte 0x30, 0x01
+        .byte 0x32, 0x01
+        .byte 0x33, 0x01
+        .byte 0x00, 0x00
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
+        .byte 0xff, 0xff, 0xff, 0xff
+        .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
+        .asciz "none"
+        .align 2,0
+        .byte 0x84, 0x41, 0x0d, 0x08 @ Pointer to default
+        .byte 0xff, 0xff, 0xff, 0xff
+        .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
+        .asciz "default"
 
 	.global gUnknown_80D418C
 gUnknown_80D418C: @ 80D418C
@@ -291,7 +309,30 @@ gUnknown_80D41EC: @ 80D41EC
 
 	.global gUnknown_80D421C
 gUnknown_80D421C: @ 80D421C
-	.incbin "baserom.gba", 0xD421C, 0x6C
+        .asciz "  Print  "
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
+        .asciz "Performance"
+        .align 2,0
+        .asciz "Memory Card"
+        .align 2,0
+        .asciz "Memory"
+        .align 2,0
+        .asciz "Flag"
+        .align 2,0
+        .asciz "Se"
+        .align 2,0
+        .asciz "Bgm"
+        .align 2,0
+        .asciz "Sound"
+        .align 2,0
+        .asciz "Dungeon"
+        .align 2,0
+        .asciz "GroundScript"
+        .align 2,0
+        .asciz "Ground"
+        .align 2,0
 
 	.global gNotMountText
 gNotMountText: @ 80D4288
@@ -784,7 +825,16 @@ gUnknown_80DB65C: @ 80DB65C
 
 	.global gUnknown_80DB664
 gUnknown_80DB664: @ 80DB664
-	.incbin "baserom.gba", 0xDB664, 0x24
+        .asciz "%s"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DB688
 gUnknown_80DB688: @ 80DB688
@@ -891,11 +941,21 @@ gUnknown_80DB7A8: @ 80DB7A8
 
 	.global gUnknown_80DB7B8
 gUnknown_80DB7B8: @ 80DB7B8
-	.incbin "baserom.gba", 0xDB7B8, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DB7D0
 gUnknown_80DB7D0: @ 80DB7D0
-	.incbin "baserom.gba", 0xDB7D0, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x03, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DB7E8
 gUnknown_80DB7E8: @ 80DB7E8
@@ -949,7 +1009,8 @@ gUnknown_80DB8CC: @ 80DB8CC
 
 	.global gUnknown_80DB8E4
 gUnknown_80DB8E4: @ 80DB8E4
-	.incbin "baserom.gba", 0xDB8E4, 0x8
+        .asciz "Goods"
+        .align 2,0
 
 	.global gUnknown_80DB8EC
 gUnknown_80DB8EC: @ 80DB8EC
