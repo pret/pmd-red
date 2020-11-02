@@ -25,41 +25,41 @@ struct unk_struct
 
 extern struct unk_203B188 *gUnknown_203B188;
 
-extern u32 gUnknown_203B460;
-extern u32 gUnknown_203B45C;
-extern u32 gUnknown_203B480;
-extern u32 gUnknown_203B484;
-extern u32 gUnknown_203B488;
-extern u32 gUnknown_203B48C;
+extern u32 *gUnknown_203B460;
+extern u32 *gUnknown_203B45C;
+extern u32 *gUnknown_203B480;
+extern u32 *gUnknown_203B484;
+extern u32 *gUnknown_203B488;
+extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B464;
 extern u32 gUnknown_203B494;
-extern u32 gUnknown_203B498;
-extern u32 gUnknown_203B468;
+extern u8 *gUnknown_203B498;
+extern u32 *gUnknown_203B468;
 extern u32 gUnknown_203B46C;
 
 extern void sub_800135C(void);
-extern u32 sub_808CE00(void);
+extern u32 *sub_808CE00(void);
 extern void sub_808CE08(void);
-extern u32 sub_80909D0(void);
+extern u32 *sub_80909D0(void);
 extern void sub_80909D8(void);
 extern u32 sub_809208C(void);
 extern void sub_8092094(void);
-extern u32 sub_80923B0(void);
+extern u32 *sub_80923B0(void);
 extern void sub_80923B8(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
-extern u32 sub_80950F8(void);
-extern u32 sub_8095100(void);
-extern u32 sub_8095108(void);
-extern u32 sub_8095110(void);
+extern u32 *sub_80950F8(void);
+extern u32 *sub_8095100(void);
+extern u32 *sub_8095108(void);
+extern u32 *sub_8095110(void);
 extern void sub_8095118(void);
 extern u32 sub_80958F8(void);
 extern void sub_8095900(void);
 extern u32 sub_8097680(void);
 extern void sub_80972F4(void);
 extern void sub_80974E8(void);
-extern u32 sub_8097F6C(void);
+extern u8 *sub_8097F6C(void);
 extern void sub_8097F74(void);
 
 extern void sub_8011C28(u32 r0);
