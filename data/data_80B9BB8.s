@@ -122,7 +122,11 @@ gUnknown_80CE934: @ 80CE934
 gUnknown_80D3474: @ 80D3474
 	.incbin "baserom.gba", 0xD3474, 0xF0
 
-        .include "data/text/pksdir0.inc"
+        .global gUnknown_80D3564
+gUnknown_80D3564: @ 80D3564
+        .byte 0,0,0,0
+        .asciz "pksdir0"
+        .align 2,0
 
 @ Friend Area Data
 
