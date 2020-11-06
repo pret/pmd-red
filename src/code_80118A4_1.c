@@ -2,6 +2,9 @@
 
 extern u8 gUnknown_203B150;
 
+void PrintFuncFileLine(char *r0, const char *r1, ...);
+extern const char gUnknown_80D421C;
+
 void nullsub_199(void)
 {
 }
@@ -66,4 +69,17 @@ u8 sub_8011B3C(void)
 void nullsub_137(void)
 {
 
+}
+
+// TODO merge with fatal_system
+void FatalErrorPrintFuncFileLine(const char *r0, const char *r1)
+{
+    char buf[0x100];
+    if(r0 != 0){
+        PrintFuncFileLine(buf, r1, r0);
+    }
+    else
+    {
+        PrintFuncFileLine(buf, r1, &gUnknown_80D421C);
+    }
 }

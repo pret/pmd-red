@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80A7764
-sub_80A7764:
-	push {r4,lr}
-	lsls r0, 16
-	asrs r4, r0, 16
-	bl sub_80A7784
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	beq _080A777A
-	ldr r0, _080A7780
-	strh r4, [r0]
-_080A777A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A7780: .4byte gUnknown_2039DE0
-	thumb_func_end sub_80A7764
-
-	thumb_func_start sub_80A7784
-sub_80A7784:
-	push {lr}
-	ldr r2, _080A779C
-	movs r1, 0
-	ldrsh r0, [r2, r1]
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080A7796
-	strh r1, [r2]
-_080A7796:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A779C: .4byte gUnknown_2039DE0
-	thumb_func_end sub_80A7784
-
 	thumb_func_start sub_80A77A0
 sub_80A77A0:
 	push {lr}
