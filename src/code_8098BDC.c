@@ -1,6 +1,15 @@
 #include "global.h"
 
 extern u32 gUnknown_203B47C;
+extern u32 gUnknown_20398A8;
+extern u32 gUnknown_8115F5C;
+extern u32 gUnknown_20398AC;
+extern u32 gUnknown_20398B0;
+extern u32 gUnknown_20398B4;
+extern u32 gUnknown_20398C0;
+extern u16 gUnknown_20398BE;
+
+extern void Log(u32, u32*, s32, u32);
 
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
@@ -43,6 +52,10 @@ extern void sub_80961B4();
 extern void sub_8091FB4();
 extern u8 sub_8001CC4(u8, u8, u8);
 extern void sub_8091980(u32);
+
+extern u8 sub_80023E4(u32);
+extern void sub_80118C4(u32);
+extern void sub_809C730();
 
 void sub_8098BDC(void)
 {
@@ -148,19 +161,57 @@ void sub_8098CC8(void)
     sub_8091FB4();
 }
 
-// TODO lsrs should be asrs on my first arg
-//u8 sub_8098D1C(u16 r0, u32 r1, s32 r2)
-//{
-//    if(gUnknown_20398A8 == 0)
-//    {
-//        Log(0, &gUnknown_8115F5C, r0, r2);
-//        gUnknown_20398A8 = 1;
-//        gUnknown_20398AC = 1;
-//        gUnknown_20398B0 = r2;
-//        gUnknown_20398B4 = 2;
-//        gUnknown_20398BE = r0;
-//        gUnknown_20398C0 = r1;
-//        return 1;
-//    }
-//    return 0;
-//}
+bool8 sub_8098D1C(s16 r0, u32 r1, u32 r2)
+{
+    s32 temp;
+    temp = r0; // force a asr shift
+    if(gUnknown_20398A8 == 0)
+    {
+        Log(0, &gUnknown_8115F5C, temp, r2);
+        gUnknown_20398A8 = 1;
+        gUnknown_20398AC = 1;
+        gUnknown_20398B0 = r2;
+        gUnknown_20398B4 = 2;
+        gUnknown_20398BE = temp;
+        gUnknown_20398C0 = r1;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8098D80(u32 r0)
+{
+    if(gUnknown_20398A8 == 0)
+    {
+        gUnknown_20398A8 = 3;
+        gUnknown_20398AC = 1;
+        gUnknown_20398B0 = r0;
+        sub_809C730();
+        if(sub_80023E4(0xD) == 0)
+        {
+            // Terrible hack but meh
+            sub_80118C4((r0 << 16) >> 16);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8098DCC(u32 r0)
+{
+    if(gUnknown_20398A8 == 0)
+    {
+        gUnknown_20398A8 = 4;
+        gUnknown_20398AC = 1;
+        gUnknown_20398B0 = r0;
+        sub_809C730();
+        if(sub_80023E4(0xD) == 0)
+        {
+            // Terrible hack but meh
+            sub_80118C4((r0 << 16) >> 16);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
