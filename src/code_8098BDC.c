@@ -54,7 +54,7 @@ extern u8 sub_8001CC4(u8, u8, u8);
 extern void sub_8091980(u32);
 
 extern u8 sub_80023E4(u32);
-extern void sub_80118C4(u32);
+extern void sub_80118C4(u16);
 extern void sub_809C730();
 
 void sub_8098BDC(void)
@@ -189,8 +189,7 @@ bool8 sub_8098D80(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            // Terrible hack but meh
-            sub_80118C4((r0 << 16) >> 16);
+            sub_80118C4(r0);
         }
         return TRUE;
     }
@@ -207,8 +206,7 @@ bool8 sub_8098DCC(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            // Terrible hack but meh
-            sub_80118C4((r0 << 16) >> 16);
+            sub_80118C4(r0);
         }
         return TRUE;
     }
