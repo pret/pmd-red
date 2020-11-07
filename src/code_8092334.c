@@ -6,8 +6,8 @@ extern u8 gUnknown_810AC7C[];
 extern u8 gUnknown_810AC6A[];
 extern u8 *gAbilityNames[];
 extern u8 *AbilityDescriptions[];
-extern u32 gBoughtFriendAreas;
-extern u32 *gUnknown_203B468;
+extern u8 gBoughtFriendAreas[];
+extern u8 *gUnknown_203B468;
 
 u32 GetUnformattedTypeString(u8 type)
 {
@@ -41,10 +41,19 @@ u8 *sub_8092390(u8 r0)
 
 void sub_80923A0(void)
 {
-    gUnknown_203B468 = &gBoughtFriendAreas;
+    gUnknown_203B468 = gBoughtFriendAreas;
 }
 
-u32 *sub_80923B0(void)
+u8 *sub_80923B0(void)
 {
-    return &gBoughtFriendAreas;
+    return gBoughtFriendAreas;
+}
+
+void sub_80923B8(void)
+{
+    s32 counter;
+    for(counter = 0; counter <= 0x39; counter++)
+    {
+        gUnknown_203B468[counter] = 0;
+    }
 }

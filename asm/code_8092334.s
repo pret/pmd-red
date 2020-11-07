@@ -5,25 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80923B8
-sub_80923B8:
-	push {lr}
-	movs r1, 0
-	ldr r3, _080923D0
-	movs r2, 0
-_080923C0:
-	ldr r0, [r3]
-	adds r0, r1
-	strb r2, [r0]
-	adds r1, 0x1
-	cmp r1, 0x39
-	ble _080923C0
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080923D0: .4byte gUnknown_203B468
-	thumb_func_end sub_80923B8
-
 	thumb_func_start sub_80923D4
 sub_80923D4:
 	push {r4,r5,lr}

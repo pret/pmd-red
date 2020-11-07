@@ -35,7 +35,7 @@ extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B464;
 extern u32 gUnknown_203B494;
 extern u8 *gUnknown_203B498;
-extern u32 *gUnknown_203B468;
+extern u8 *gUnknown_203B468;
 extern u32 gUnknown_203B46C;
 
 extern void sub_800135C(void);
@@ -45,7 +45,7 @@ extern u32 *sub_80909D0(void);
 extern void sub_80909D8(void);
 extern u32 sub_809208C(void);
 extern void sub_8092094(void);
-extern u32 *sub_80923B0(void);
+extern u8 *sub_80923B0(void);
 extern void sub_80923B8(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
