@@ -1,13 +1,19 @@
 #include "global.h"
 
+#define NUM_FRIEND_AREAS 58
+
 extern u32 gUnformattedTypeStrings[]; // unformatted type names
 extern u32 gFormattedTypeStrings[]; // formatted type names
+
 extern u8 gUnknown_810AC7C[];
 extern u8 gUnknown_810AC6A[];
+
 extern u8 *gAbilityNames[];
 extern u8 *AbilityDescriptions[];
-extern u8 gBoughtFriendAreas[];
+
+extern u8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
 extern u8 *gUnknown_203B468;
+
 
 u32 GetUnformattedTypeString(u8 type)
 {
@@ -52,7 +58,7 @@ u8 *sub_80923B0(void)
 void sub_80923B8(void)
 {
     s32 counter;
-    for(counter = 0; counter <= 0x39; counter++)
+    for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
         gUnknown_203B468[counter] = 0;
     }
