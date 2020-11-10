@@ -74,6 +74,7 @@ SECTIONS {
         src/code_800B5F0.o(.text);
         asm/code_800B5F0.o(.text);
         src/music.o(.text);
+        src/code_800C9CC.o(.text);
         asm/code_800C9CC.o(.text);
         src/flash.o(.text);
         asm/code_800D090.o(.text);
