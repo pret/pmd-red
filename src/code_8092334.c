@@ -14,6 +14,7 @@ extern u8 *AbilityDescriptions[];
 extern u8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
 extern u8 *gUnknown_203B468;
 
+extern s16 gUnknown_810AA90[];
 
 u32 GetUnformattedTypeString(u8 type)
 {
@@ -62,4 +63,22 @@ void sub_80923B8(void)
     {
         gUnknown_203B468[counter] = 0;
     }
+}
+
+u8 sub_80923D4(s32 target)
+{
+    s32 counter;
+    s32 index;
+    s32 sum = 0;
+    index = 0;
+    for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
+    {
+        sum += gUnknown_810AA90[index];
+        if(sum > target)
+        {
+            return counter;
+        }
+        index += 4;
+    }
+    return 0;
 }
