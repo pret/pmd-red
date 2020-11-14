@@ -77,6 +77,7 @@ SECTIONS {
         src/code_800C9CC.o(.text);
         asm/code_800C9CC.o(.text);
         src/flash.o(.text);
+        src/code_800D090.o(.text);
         asm/code_800D090.o(.text);
         src/code_80118A4.o(.text);
         asm/code_80118A4.o(.text);

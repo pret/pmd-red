@@ -18,6 +18,9 @@ struct unkStruct_20399E8
     u32 unk30;
     u32 unk34;
     u32 unk38;
+    u32 unk3C;
+    u32 unk40;
+    u8 unk44;
 };
 
 struct unkStruct_809D158
@@ -264,14 +267,31 @@ u32 sub_809D234(void)
 }
 
 // TODO regswap but matches otherwise
-//u8 sub_809D248(struct unkStruct_809D158 *r0)
-//{
-//    u32 temp;
-//    u32 temp1;
-//
-//    temp = gUnknown_20399E8.unk3C;
-//    temp1 = gUnknown_20399E8.unk40;
-//    r0->unk0 = temp;
-//    r0->unk4 = temp1;
-//    return gUnknown_20399E8.unk44;
-//}
+// Loads struct into R1... should be R3
+#ifndef NONMATCHING
+NAKED
+#endif
+u8 sub_809D248(struct unkStruct_809D158 *r0)
+{
+#ifdef NONMATCHING
+    u32 temp;
+    u32 temp1;
+
+    temp = gUnknown_20399E8.unk3C;
+    temp1 = gUnknown_20399E8.unk40;
+    r0->unk0 = temp;
+    r0->unk4 = temp1;
+    return gUnknown_20399E8.unk44;
+#else
+	asm_unified("\tldr r3, _0809D258\n"
+	"\tldr r1, [r3, 0x3C]\n"
+	"\tldr r2, [r3, 0x40]\n"
+	"\tstr r1, [r0]\n"
+	"\tstr r2, [r0, 0x4]\n"
+	"\tadds r3, 0x44\n"
+	"\tldrb r0, [r3]\n"
+	"\tbx lr\n"
+	"\t.align 2, 0\n"
+"_0809D258: .4byte gUnknown_20399E8");
+#endif
+}

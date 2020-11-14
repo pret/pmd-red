@@ -1,26 +1,26 @@
 #include "global.h"
 
+extern u32 sub_801BF48(void);
+extern void sub_801BF98(void);
+extern void sub_801D208(u8);
+extern u32 sub_801DCE8(void);
+extern void sub_801DD50(void);
+extern u32 sub_80217EC(void);
+extern void sub_8021830(void);
 extern u32 sub_8022860();
 extern void sub_8022908();
-extern void sub_801D208(u8);
-extern void sub_8027168();
-extern u32 sub_80270A4();
-extern u32 sub_8025F68();
-extern u8 sub_802604C();
-extern void sub_8026058();
+extern u32 sub_80244E4(void);
+extern void sub_802453C(void);
 extern u32 sub_8025354(void);
 extern u8 sub_802540C(void);
 extern void sub_8025418(void);
-extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
-extern u32 sub_801BF48(void);
-extern void sub_801BF98(void);
-extern u32 sub_80217EC(void);
-extern void sub_8021830(void);
+extern u32 sub_8025F68();
+extern u8 sub_802604C();
+extern void sub_8026058();
+extern void sub_8027168();
+extern u32 sub_80270A4();
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
-extern u32 sub_801DCE8(void);
-extern void sub_801DD50(void);
 
 struct unk_203B250
 {

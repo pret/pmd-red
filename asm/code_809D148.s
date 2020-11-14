@@ -5,20 +5,6 @@
 
 	.text	
 
-	thumb_func_start sub_809D248
-sub_809D248:
-	ldr r3, _0809D258
-	ldr r1, [r3, 0x3C]
-	ldr r2, [r3, 0x40]
-	str r1, [r0]
-	str r2, [r0, 0x4]
-	adds r3, 0x44
-	ldrb r0, [r3]
-	bx lr
-	.align 2, 0
-_0809D258: .4byte gUnknown_20399E8
-	thumb_func_end sub_809D248
-
 	thumb_func_start sub_809D25C
 sub_809D25C:
 	push {r4-r6,lr}
