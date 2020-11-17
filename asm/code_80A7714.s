@@ -13050,7 +13050,7 @@ _080ADA7E:
 	bx r0
 	.align 2, 0
 _080ADA88: .4byte gUnknown_81187DC
-_080ADA8C: .4byte gUnknown_81187E8
+_080ADA8C: .4byte gGroundEventSelectText
 	thumb_func_end GroundEvent_Select
 
 	thumb_func_start GroundEvent_Cancel
@@ -13108,7 +13108,7 @@ _080ADADC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ADAF8: .4byte gUnknown_811880C
+_080ADAF8: .4byte gGroundEventCancelText
 _080ADAFC: .4byte gUnknown_3001B90
 	thumb_func_end GroundEvent_Cancel
 
@@ -13198,7 +13198,7 @@ _080ADB68:
 	b _080ADBAA
 	.align 2, 0
 _080ADBA0: .4byte gUnknown_3001B90
-_080ADBA4: .4byte gUnknown_8118828
+_080ADBA4: .4byte gGroundEventAddText
 _080ADBA8:
 	movs r0, 0x20
 _080ADBAA:
@@ -13294,7 +13294,7 @@ GroundEvent_Delete:
 	bx r0
 	.align 2, 0
 _080ADC58: .4byte gUnknown_3001B90
-_080ADC5C: .4byte gUnknown_811886C
+_080ADC5C: .4byte gGroundEventDeleteText
 _080ADC60: .4byte 0x0000ffff
 	thumb_func_end GroundEvent_Delete
 
@@ -13597,7 +13597,7 @@ _080ADDFA:
 	bl CloseFile
 	b _080ADEFC
 	.align 2, 0
-_080ADEB4: .4byte gUnknown_8118890
+_080ADEB4: .4byte gMapparamText
 _080ADEB8: .4byte gUnknown_83B0000
 _080ADEBC: .4byte gUnknown_811889C
 _080ADEC0: .4byte gUnknown_8108EC0

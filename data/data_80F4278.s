@@ -8604,58 +8604,82 @@ gUnknown_811874C: @ 811874C
 gUnknown_8118758: @ 8118758
 	.incbin "baserom.gba", 0x118758, 0x40
 
+@ Ground Events
 	.global gUnknown_8118798
 gUnknown_8118798: @ 8118798
-	.incbin "baserom.gba", 0x118798, 0x44
+        .byte 0x6C, 0x87, 0x11, 0x08
+        .byte 0x4D, 0x00, 0x00, 0x00
+        .byte 0x84, 0x87, 0x11, 0x08
+        .asciz "pksdir0"
+        .asciz "../ground/ground_event.c"
+        .align 2,0
+        .asciz "GroundEvent_Select"
+        .align 2,0
 
 	.global gUnknown_81187DC
 gUnknown_81187DC: @ 81187DC
-	.incbin "baserom.gba", 0x1187DC, 0xC
+        .byte 0xAC, 0x87, 0x11, 0x08
+        .byte 0xA0, 0x00, 0x00, 0x00
+        .byte 0xC8, 0x87, 0x11, 0x08 @ Pointer to GroundEvent_Select string above
 
-	.global gUnknown_81187E8
-gUnknown_81187E8: @ 81187E8
-	.incbin "baserom.gba", 0x1187E8, 0x24
+	.global gGroundEventSelectText
+gGroundEventSelectText: @ 81187E8
+        .asciz "GroundEvent Select %3d  %3d  %3d"
+        .align 2,0
 
-	.global gUnknown_811880C
-gUnknown_811880C: @ 811880C
-	.incbin "baserom.gba", 0x11880C, 0x1C
+	.global gGroundEventCancelText
+gGroundEventCancelText: @ 811880C
+        .asciz "GroundEvent Cancel %3d  %3d"
+        .align 2,0
 
-	.global gUnknown_8118828
-gUnknown_8118828: @ 8118828
-	.incbin "baserom.gba", 0x118828, 0x44
+	.global gGroundEventAddText
+gGroundEventAddText: @ 8118828
+        .asciz "GroundEvent Add id %3d  kind %3d  group %3d  sector %3d  script %p"
+        .align 2,0
 
-	.global gUnknown_811886C
-gUnknown_811886C: @ 811886C
-	.incbin "baserom.gba", 0x11886C, 0x24
+	.global gGroundEventDeleteText
+gGroundEventDeleteText: @ 811886C
+        .asciz "GroundEvent Delete id %3d"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
-	.global gUnknown_8118890
-gUnknown_8118890: @ 8118890
+	.global gMapparamText
+gMapparamText: @ 8118890
         .asciz "mapparam"
         .align 2,0
 
 	.global gUnknown_811889C
 gUnknown_811889C: @ 811889C
-	.incbin "baserom.gba", 0x11889C, 0xC
+        .asciz "b%02dfon"
+        .align 2,0
 
 	.global gUnknown_81188A8
 gUnknown_81188A8: @ 81188A8
-	.incbin "baserom.gba", 0x1188A8, 0xC
+        .asciz "b%02dpal"
+        .align 2,0
 
 	.global gUnknown_81188B4
 gUnknown_81188B4: @ 81188B4
-	.incbin "baserom.gba", 0x1188B4, 0xC
+        .asciz "b%02dcel"
+        .align 2,0
 
 	.global gUnknown_81188C0
 gUnknown_81188C0: @ 81188C0
-	.incbin "baserom.gba", 0x1188C0, 0xC
+        .asciz "b%02dcex"
+        .align 2,0
 
 	.global gUnknown_81188CC
 gUnknown_81188CC: @ 81188CC
-	.incbin "baserom.gba", 0x1188CC, 0x10
+        .asciz "b%02demap%01d"
+        .align 2,0
 
 	.global gUnknown_81188DC
 gUnknown_81188DC: @ 81188DC
-	.incbin "baserom.gba", 0x1188DC, 0x14
+        .asciz "b%02dcanm"
+        .align 2,0
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_81188F0
 gUnknown_81188F0: @ 81188F0
