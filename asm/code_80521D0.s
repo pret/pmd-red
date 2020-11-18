@@ -100197,7 +100197,7 @@ _08084030:
 	ldr r0, _08084048
 	ands r0, r1
 	ldrh r1, [r4, 0x8]
-	bl sub_800BE8C
+	bl FadeInNewBGM
 _0808403A:
 	ldrh r0, [r4, 0xA]
 	strh r0, [r4, 0xC]

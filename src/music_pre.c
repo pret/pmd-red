@@ -118,7 +118,7 @@ void sub_800BDFC(u16 songIndex)
 #ifndef NONMATCHING
 NAKED
 #endif
-void sub_800BE8C(u16 SongIndex, u16 r1)
+void FadeInNewBGM(u16 SongIndex, u16 speed)
 {
 #ifdef NONMATCHING
     // TODO regswap memes
@@ -136,16 +136,16 @@ void sub_800BE8C(u16 SongIndex, u16 r1)
             return;
     }
 
-    if((r1 > 0x80 << 1))
+    if((speed > 0x80 << 1))
     {
-        r1 = 0x10;
+        speed = 0x10;
 
     }
     else
     {
-        if(r1 >> 4 == 0)
+        if(speed >> 4 == 0)
         {
-            r1 = 1;
+            speed = 1;
         }
     }
 
@@ -160,7 +160,7 @@ void sub_800BE8C(u16 SongIndex, u16 r1)
         m4aMPlayImmInit(&gUnknown_20008F0);
         m4aMPlayVolumeControl(&gUnknown_20008F0, 0xFF, 0);
         m4aSongNumStop(SongIndex);
-        m4aMPlayFadeIn(&gUnknown_20008F0, r1);
+        m4aMPlayFadeIn(&gUnknown_20008F0, speed);
     }
     if(interrupt_flag)
         EnableInterrupts();

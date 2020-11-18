@@ -5,7 +5,7 @@ void nullsub_26(void);
 
 extern u8 sub_80023E4(u8);
 extern void sub_800BDFC(u16 r0);
-extern void sub_800BE8C(u16 r0, u16 r1);
+extern void FadeInNewBGM(u16 r0, u16 r1);
 extern void sub_800BF48(u16 r0);
 extern void sub_800BF80(void);
 extern void sub_800BFD0(u16 r0);
@@ -158,9 +158,9 @@ void sub_80118F0(u16 r0)
     sub_800BDFC(r0);
 }
 
-void sub_8011900(u16 r0, u16 r1)
+void sub_8011900(u16 songIndex, u16 speed)
 {
-    sub_800BE8C(r0, r1);
+    FadeInNewBGM(songIndex, speed);
 }
 
 void sub_8011914(u16 r0)
