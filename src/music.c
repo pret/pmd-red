@@ -1,5 +1,5 @@
 #include "global.h"
-#include "gba/m4a_internal.h"
+#include "m4a.h"
 
 #define NUM_BG_SONGS 128
 
@@ -9,24 +9,18 @@ extern void sub_809C730();
 
 extern bool8 DisableInterrupts();
 extern bool8 EnableInterrupts();
-extern void m4aSoundVSyncOn();
-extern void m4aSongNumStart(u16);
-extern void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo);
-extern void m4aSoundVSyncOff();
-extern void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
 
 extern void sub_800C3F8(u16, u16);
 extern void Random();
 extern void sub_800BA5C();
 extern void xxx_update_bg_sound_input();
 
-extern u16 gUnknown_202D690;
-extern u16 gUnknown_202D68A;
 extern u16 gUnknown_202D688;
+extern u16 gUnknown_202D68A;
+extern u16 gUnknown_202D690;
 extern u8 gUnknown_202D694;
 extern u32 gUnknown_203B0B8;
 extern u16 gUnknown_203B0BC;
-extern struct MusicPlayerInfo gUnknown_20008F0;
 
 bool8 IsBGSong(u32);
 bool8 sub_800CAAC(u32);
@@ -232,7 +226,7 @@ bool8 sub_800CAF0(u16 songIndex)
     return 1;
 }
 
-void nullsub_20(void)
+void nullsub_20(u16 songIndex)
 {
 }
 
