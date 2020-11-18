@@ -115,13 +115,8 @@ void sub_800BDFC(u16 songIndex)
         EnableInterrupts();
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
 void FadeInNewBGM(u16 SongIndex, u16 speed)
 {
-#ifdef NONMATCHING
-    // TODO regswap memes
     bool8 interrupt_flag;
     u16 temp_store;
 
@@ -136,14 +131,14 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
             return;
     }
 
-    if((speed > 0x80 << 1))
+    if((speed > 256))
     {
-        speed = 0x10;
+        speed = 16;
 
     }
     else
     {
-        if(speed >> 4 == 0)
+        if((speed >>= 4) == 0)
         {
             speed = 1;
         }
@@ -164,92 +159,6 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
     }
     if(interrupt_flag)
         EnableInterrupts();
-#else
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r6, r0, 16\n"
-	"\tlsls r4, r1, 16\n"
-	"\tlsrs r5, r4, 16\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl IsBGSong\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800BF2E\n"
-	"\tldr r0, _0800BECC\n"
-	"\tcmp r6, r0\n"
-	"\tbeq _0800BF2E\n"
-	"\tldr r0, _0800BED0\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r6, r0\n"
-	"\tbne _0800BEBE\n"
-	"\tldr r0, _0800BED4\n"
-	"\tldrh r0, [r0]\n"
-	"\tsubs r0, 0x1\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x1\n"
-	"\tbls _0800BF2E\n"
-"_0800BEBE:\n"
-	"\tmovs r0, 0x80\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r5, r0\n"
-	"\tbls _0800BED8\n"
-	"\tmovs r5, 0x10\n"
-	"\tb _0800BEE0\n"
-	"\t.align 2, 0\n"
-"_0800BECC: .4byte 0x000003e7\n"
-"_0800BED0: .4byte gUnknown_202D68A\n"
-"_0800BED4: .4byte gUnknown_202D688\n"
-"_0800BED8:\n"
-	"\tlsrs r5, r4, 20\n"
-	"\tcmp r5, 0\n"
-	"\tbne _0800BEE0\n"
-	"\tmovs r5, 0x1\n"
-"_0800BEE0:\n"
-	"\tbl DisableInterrupts\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r7, r0, 24\n"
-	"\tldr r0, _0800BF34\n"
-	"\tstrh r6, [r0]\n"
-	"\tldr r1, _0800BF38\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1]\n"
-	"\tldr r0, _0800BF3C\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0800BF26\n"
-	"\tldr r0, _0800BF40\n"
-	"\tmovs r1, 0x1\n"
-	"\tstrh r1, [r0]\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl m4aSongNumStart\n"
-	"\tldr r4, _0800BF44\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl m4aMPlayImmInit\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0xFF\n"
-	"\tmovs r2, 0\n"
-	"\tbl m4aMPlayVolumeControl\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl m4aSongNumStop\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r1, r5, 0\n"
-	"\tbl m4aMPlayFadeIn\n"
-"_0800BF26:\n"
-	"\tcmp r7, 0\n"
-	"\tbeq _0800BF2E\n"
-	"\tbl EnableInterrupts\n"
-"_0800BF2E:\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0800BF34: .4byte gUnknown_202D68A\n"
-"_0800BF38: .4byte gUnknown_202D694\n"
-"_0800BF3C: .4byte gUnknown_202D690\n"
-"_0800BF40: .4byte gUnknown_202D688\n"
-"_0800BF44: .4byte gUnknown_20008F0");
-#endif
 }
 
 void sub_800BF48(u16 SongIndex)
@@ -278,4 +187,54 @@ void sub_800BF80(void)
     gUnknown_202D68C = 0x3e7;
     if(interrupt_flag)
         EnableInterrupts();
+}
+
+void sub_800BFD0(u16 speed)
+{
+
+    u32 comparison;
+    bool8 interrupt_flag;
+
+    // TODO clean this comparison up
+    comparison = 0x80 << 17; // 16777216
+    if((speed * 65536) > comparison)
+    {
+        speed = 16;
+    }
+    else
+    {
+        if((speed >>= 4) == 0)
+        {
+            speed = 1;
+        }
+    }
+    interrupt_flag = DisableInterrupts();
+    if(gUnknown_202D690 == 0)
+    {
+        if(gUnknown_202D68A != 0x3e7)
+        {
+            if(gUnknown_202D688 == 2)
+            {
+                gUnknown_202D688 = 3;
+                m4aMPlayFadeOut(&gUnknown_20008F0, speed);
+            }
+            else
+            {
+                gUnknown_202D68A = 0x3e7;
+                m4aMPlayStop(&gUnknown_20008F0);
+            }
+        }
+    }
+    else
+    {
+        gUnknown_202D68A = 0x3e7;
+    }
+    gUnknown_202D68C = 0x3e7;
+    if(interrupt_flag)
+        EnableInterrupts();
+}
+
+u16 sub_800C068(void)
+{
+    return gUnknown_202D68A;
 }
