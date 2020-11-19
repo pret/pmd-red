@@ -9,8 +9,8 @@ struct unkTimeStruct
 struct UnkStruct_203B184 {
     /* 0x0 */ u32 *unk0;
     /* 0x4 */ u32 *unk4;
-    /* 0x8 */ u32 *unk8;
-    /* 0xC */ u32 *unkC;
+    /* 0x8 */ u8 *unk8;
+    /* 0xC */ u8 *unkC;
     /* 0x10 */ u32 *unk10;
     /* 0x14 */ u32 *unk14;
     /* 0x18 */ u32 unk18;
