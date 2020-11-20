@@ -35,15 +35,20 @@ struct PlayTimeStruct *sub_8094FA0(void)
 
 void ResetPlayTime(struct PlayTimeStruct *Time)
 {
+    Time->frames = 0;
     Time->seconds = 0;
     Time->minutes = 0;
     Time->hours = 0;
-    Time->unk0 = 0;
 }
 
-void sub_8094FB4(struct PlayTimeStruct *Time)
+void IncrementPlayTime(struct PlayTimeStruct *Time)
 {
     u16 temp_store16;
+
+    Time->frames++;
+    if(Time->frames <= 59)
+        return;
+    Time->frames = 0;
 
     Time->seconds++;
     if(Time->seconds <= 59)
@@ -55,42 +60,35 @@ void sub_8094FB4(struct PlayTimeStruct *Time)
         return;
     Time->minutes = 0;
 
-    Time->hours++;
-    if(Time->hours <= 59)
-        return;
-    Time->hours = 0;
-
-    // ???
-    temp_store16 = Time->unk0;
-    if(Time->unk0 <= 9998)
+    // Casting here for unsigned comparison
+    temp_store16 = Time->hours;
+    if(Time->hours <= 9998)
     {
         temp_store16++;
-        Time->unk0 = temp_store16;
+        Time->hours = temp_store16;
     }
     else
     {
+        Time->seconds = 59;
         Time->minutes = 59;
-        Time->hours = 59;
-        Time->unk0 = 9999;
+        Time->hours= 9999;
     }
 }
 
-void sub_8095014(struct PlayTimeStruct *r0, u32 *r1, u32 *r2, u32 *r3)
+void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinutes, u32 *outSeconds)
 {
-    u32 temp;
-    if(r0->unk0 <= 9999)
+    if(r0->hours <= 9999)
     {
-        *r1 = r0->unk0;
-        *r2 = r0->hours;
-        temp = r0->minutes;
+        *outHours = r0->hours;
+        *outMinutes = r0->minutes;
+        *outSeconds = r0->seconds;
     }
     else
     {
-        *r1 = 9999;
-        *r2 = 59;
-        temp = 59;
+        *outHours = 9999;
+        *outMinutes = 59;
+        *outSeconds = 59;
     }
-    *r3 = temp;
 }
 
 void sub_8095044(u32 r0)

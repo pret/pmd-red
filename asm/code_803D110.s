@@ -2673,7 +2673,7 @@ _0803E5A2:
 	str r0, [r1]
 	ldr r0, _0803E65C
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam
@@ -2748,7 +2748,7 @@ sub_803E668:
 	str r0, [r1]
 	ldr r0, _0803E6FC
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam

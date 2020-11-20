@@ -1,6 +1,7 @@
 #include "global.h"
+#include "time.h"
 
-extern u32 gUnknown_203B47C;
+extern struct PlayTimeStruct *gUnknown_203B47C;
 extern u32 gUnknown_20398A8;
 extern u32 gUnknown_8115F5C;
 extern u32 gUnknown_20398AC;
@@ -21,7 +22,7 @@ extern void sub_80A6E80();
 extern void sub_8099BE4();
 extern void sub_8099744();
 extern void sub_8011860();
-extern void sub_8094FB4(u32 r0);
+extern void IncrementPlayTime(struct PlayTimeStruct *Time);
 extern void sub_800CB20();
 extern void sub_800485C();
 extern void nullsub_120();
@@ -69,7 +70,7 @@ void sub_8098BDC(void)
     sub_8099BE4();
     sub_8099744();
     sub_8011860();
-    sub_8094FB4(gUnknown_203B47C);
+    IncrementPlayTime(gUnknown_203B47C);
     sub_800CB20();
     sub_800485C();
     nullsub_120();

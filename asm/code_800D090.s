@@ -7545,7 +7545,7 @@ sub_8010960:
 	bl sub_80060EC
 	ldr r0, _080109FC
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam
@@ -9175,7 +9175,7 @@ sub_801169C:
 	bl sub_80060EC
 	ldr r0, _0801175C
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam

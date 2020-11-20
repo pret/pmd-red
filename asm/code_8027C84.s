@@ -35186,7 +35186,7 @@ _08039696:
 	add r1, sp, 0x144
 	add r2, sp, 0x148
 	add r3, sp, 0x14C
-	bl sub_8095014
+	bl DeconstructPlayTime
 	ldr r0, [r7]
 	movs r5, 0x84
 	lsls r5, 2

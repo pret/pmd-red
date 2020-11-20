@@ -26632,7 +26632,7 @@ _0805FA62:
 	add r2, sp, 0x8
 	add r3, sp, 0xC
 	add r1, sp, 0x4
-	bl sub_8095014
+	bl DeconstructPlayTime
 	movs r1, 0x9E
 	lsls r1, 1
 	adds r0, r7, r1

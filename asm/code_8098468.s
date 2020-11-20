@@ -510,7 +510,7 @@ _080988F8:
 	bl sub_8011860
 	ldr r0, _08098978
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl nullsub_120
