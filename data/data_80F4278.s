@@ -7729,23 +7729,38 @@ gUnknown_8115D94: @ 8115D94
 
 	.global gUnknown_8115DD4
 gUnknown_8115DD4: @ 8115DD4
-	.incbin "baserom.gba", 0x115DD4, 0x2C
+        .byte 0x98, 0x5D, 0x11, 0x08
+        .byte 0x87, 0x42
+        .asciz " Game will be saved before entering."
+        .align 2,0
 
 	.global gUnknown_8115E00
 gUnknown_8115E00: @ 8115E00
-	.incbin "baserom.gba", 0x115E00, 0x28
+        .byte 0xD8, 0x5D, 0x11, 0x08
+        .byte 0x87, 0x42
+        .asciz " The team will enter at Level 1. "
+        .align 2,0
 
 	.global gUnknown_8115E28
 gUnknown_8115E28: @ 8115E28
-	.incbin "baserom.gba", 0x115E28, 0x2C
+        .byte 0x04, 0x5E, 0x11, 0x08
+        .byte 0x87, 0x42, 0x20
+        .asciz "All items will be lost on entering."
+        .align 2,0
 
 	.global gUnknown_8115E54
 gUnknown_8115E54: @ 8115E54
-	.incbin "baserom.gba", 0x115E54, 0x2C
+        .byte 0x2C, 0x5E, 0x11, 0x08
+        .byte 0x87, 0x42, 0x20
+        .asciz "All money will be lost on entering."
+        .align 2,0
 
 	.global gUnknown_8115E80
 gUnknown_8115E80: @ 8115E80
-	.incbin "baserom.gba", 0x115E80, 0x14
+        .byte 0x58, 0x5E, 0x11, 0x08
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_8115E94
 gUnknown_8115E94: @ 8115E94
@@ -7753,31 +7768,43 @@ gUnknown_8115E94: @ 8115E94
 
 	.global gUnknown_8115F5C
 gUnknown_8115F5C: @ 8115F5C
-	.incbin "baserom.gba", 0x115F5C, 0x24
+        .asciz "GroundMain ground request %3d %3d"
+        .align 2,0
 
 	.global gUnknown_8115F80
 gUnknown_8115F80: @ 8115F80
-	.incbin "baserom.gba", 0x115F80, 0x24
+        .asciz "GroundMain recue request %3d %3d"
+        .align 2,0
 
 	.global gUnknown_8115FA4
 gUnknown_8115FA4: @ 8115FA4
-	.incbin "baserom.gba", 0x115FA4, 0x24
+        .asciz "GroundMain user rescue request %3d"
+        .align 2,0
 
 	.global gUnknown_8115FC8
 gUnknown_8115FC8: @ 8115FC8
-	.incbin "baserom.gba", 0x115FC8, 0x20
+        .asciz "GroundMain game end request %3d"
+        .align 2,0
 
 	.global gUnknown_8115FE8
 gUnknown_8115FE8: @ 8115FE8
-	.incbin "baserom.gba", 0x115FE8, 0x34
+        .asciz "GroundMain game cancel request %3d"
+        .align 2,0
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_811601C
 gUnknown_811601C: @ 811601C
-	.incbin "baserom.gba", 0x11601C, 0xC
+        .asciz "fontsppa"
+        .align 2,0
 
 	.global gUnknown_8116028
 gUnknown_8116028: @ 8116028
-	.incbin "baserom.gba", 0x116028, 0x18
+        .asciz "fontpal"
+        .asciz "pksdir0"
+        .asciz "pksdir0"
+        .align 2,0
 
 	.global gUnknown_8116040
 gUnknown_8116040: @ 8116040
