@@ -20,6 +20,15 @@ extern struct unkStruct_80A2608 *sub_80A2620(u32);
 extern u8 sub_8097384(u32);
 extern s16 gUnknown_8116F9A[];
 
+s16 sub_80A26B8(s16 r0)
+{
+    // Useless cast that forces correct ordering
+    s32 temp;
+    temp = r0;
+
+    return gUnknown_8116F9A[r0];
+}
+
 s16 sub_80A26CC(s16 r0)
 {
     return (0xDC >> 2) + r0;

@@ -10035,17 +10035,4 @@ _080A26B4:
 	bx r1
 	thumb_func_end sub_80A2688
 
-	thumb_func_start sub_80A26B8
-sub_80A26B8:
-	lsls r0, 16
-	ldr r1, _080A26C8
-	asrs r0, 15
-	adds r0, r1
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	bx lr
-	.align 2, 0
-_080A26C8: .4byte gUnknown_8116F9A
-	thumb_func_end sub_80A26B8
-
         .align 2,0
