@@ -5,26 +5,6 @@
 
 	.text	
 
-	thumb_func_start PrintFuncFileLine
-PrintFuncFileLine:
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r5, _08011AC4
-	ldr r3, [r1, 0x8]
-	ldr r4, [r1]
-	str r4, [sp]
-	ldr r1, [r1, 0x4]
-	str r1, [sp, 0x4]
-	adds r1, r5, 0
-	bl sprintf
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011AC4: .4byte gUnknown_80D41C4
-	thumb_func_end PrintFuncFileLine
-
         @ Unused
 	thumb_func_start PrintMessageWithFuncFileLine
 PrintMessageWithFuncFileLine:

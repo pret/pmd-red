@@ -37,6 +37,7 @@ extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
 extern u8 *gUnknown_203B498;
+extern u32 gUnknown_80D4354;
 
 extern void sub_800135C(void);
 extern u32 *sub_808CE00(void);
@@ -80,12 +81,18 @@ extern u32 *sub_809769C(void);
 u32 *sub_8011C4C(void);
 extern void sub_80958E4(u8 *a, u32 b);
 extern s32 WriteSaveSector(s32 *a, u8 *src, s32 size);
+extern u32 sub_8011DAC(u32 *a);
+extern u32 sub_80144A4(u32 *a);
+extern bool8 sub_8011FF8(void);
+extern void sub_80141B4(u32 *r0, u32 r1, u32 r2, u16 r3);
 
+void sub_8012298();
 void sub_80122D0();
 void sub_80122F4();
 void sub_8012300();
 void sub_80976A8();
 void sub_80122A8();
+
 
 s32 sub_80121D4(s32 *a, u8 *src, s32 size)
 {
@@ -237,4 +244,68 @@ void sub_8012468(void)
     gUnknown_203B188 = MemoryAlloc(sizeof(struct unk_203B188), 5);
     gUnknown_203B188->unk0 = 1;
 
+}
+
+u8 sub_8012484(void)
+{
+    u32 temp;
+    u32 temp2;
+    switch(gUnknown_203B188->unk0)
+    {
+        case 0:
+            gUnknown_203B188->unk0 = 1;
+            break;
+        case 1:
+            temp = 0;
+            gUnknown_203B188->unk4 = sub_8011DAC(&temp);
+            gUnknown_203B188->unk0 = 2;
+            break;
+        case 2:
+            if(gUnknown_203B188->unk4 != 0)
+            {
+                if(sub_8011FF8())
+                {
+                    sub_80141B4(&gUnknown_80D4354, 0, 0, 0x301);
+                    gUnknown_203B188->unk0 = 3;
+                    break;
+                }
+                else
+                {
+                    gUnknown_203B188->unk0 = 4;
+                    break;
+                }
+            }
+            else
+            {
+                gUnknown_203B188->unk0 = 6;
+                break; 
+            }
+        case 3:
+            if(sub_80144A4(&temp2) == 0)
+            {
+                gUnknown_203B188->unk0 = 4;
+                break;
+            }
+            else
+            {
+                break;
+            }
+        case 4:
+            sub_8012298();
+            gUnknown_203B188->unk0 = 6;
+        case 5:
+            break;
+        case 6:
+            return 0;
+    }
+    return 1;
+}
+
+void sub_8012558(void)
+{
+    if(gUnknown_203B188 != NULL)
+    {
+        MemoryFree(gUnknown_203B188);
+        gUnknown_203B188 = NULL;
+    }
 }

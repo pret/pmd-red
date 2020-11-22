@@ -50,6 +50,7 @@ extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
 extern const char gNotEntryText;
 extern const char gUnknown_80D418C;
+extern char gUnknown_80D41C4;
 
 void sub_8011760(void)
 {
@@ -342,4 +343,21 @@ void PrintFuncFileLineOrNotEntry(char * r0, struct unkFileStruct *r1)
 	"\t.align 2, 0\n"
 "_08011AA0: .4byte gNotEntryText");
 #endif
+}
+
+void PrintFuncFileLine(char *r0, struct unkFileStruct *r1, u32 r2)
+{
+    volatile u32 temp;
+    volatile u32 temp2;
+    u32 r3;
+    u32 r4;
+    char *preload;
+
+    preload = &gUnknown_80D41C4;
+    r3 = r1->unk8;
+    r4 = r1->unk0;
+    temp = r4;
+    temp2 = r1->unk4;
+
+    sprintf(r0, preload, r2, r3);
 }

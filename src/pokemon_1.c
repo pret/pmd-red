@@ -45,44 +45,19 @@ void sub_808DD48(s16 r0, struct unkEvolve *r1)
 #endif
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
-// Pretty confided args are correct yet compiler disagrees
 u8 sub_808DD68(s16 r0, u32 r1)
 {
-#ifdef NONMATCHING
+    // Had to have this cast to match
+    u32 temp;
+    temp = r0;
     if (r1 != 0)
     {
         return 0xA;
     }
     else 
     {
-        return gMonsterParameters[r0].overworld_sprite;
+        return gMonsterParameters[temp].overworld_sprite;
     }
-#else
-	asm_unified("\tpush {lr}\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r2, r0, 16\n"
-	"\tcmp r1, 0\n"
-	"\tbne _0808DD88\n"
-	"\tldr r0, _0808DD84\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r0, r2, 3\n"
-	"\tadds r0, r2\n"
-	"\tlsls r0, 3\n"
-	"\tadds r0, r1\n"
-	"\tldrb r0, [r0, 0x8]\n"
-	"\tb _0808DD8A\n"
-	"\t.align 2, 0\n"
-"_0808DD84: .4byte gMonsterParameters\n"
-"_0808DD88:\n"
-	"\tmovs r0, 0xA\n"
-"_0808DD8A:\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-
-#endif
 }
 
 #ifndef NONMATCHING

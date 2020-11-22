@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80A77A0
-sub_80A77A0:
-	push {lr}
-	lsls r0, 16
-	asrs r1, r0, 16
-	adds r2, r1, 0
-	ldr r0, _080A77BC
-	movs r3, 0
-	ldrsh r0, [r0, r3]
-	cmp r0, r1
-	beq _080A77CA
-	cmp r1, 0
-	bge _080A77C0
-	bl sub_80A7784
-	b _080A77C6
-	.align 2, 0
-_080A77BC: .4byte gUnknown_2039DE0
-_080A77C0:
-	adds r0, r2, 0
-	bl sub_80A7764
-_080A77C6:
-	movs r0, 0x1
-	b _080A77CC
-_080A77CA:
-	movs r0, 0
-_080A77CC:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80A77A0
-
-	thumb_func_start sub_80A77D0
-sub_80A77D0:
-	push {lr}
-	lsls r0, 16
-	asrs r1, r0, 16
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	bne _080A77E8
-	ldr r0, _080A77E4
-	b _080A77F0
-	.align 2, 0
-_080A77E4: .4byte gUnknown_8117EFC
-_080A77E8:
-	ldr r0, _080A77F4
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-_080A77F0:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080A77F4: .4byte gUnknown_811E258
-	thumb_func_end sub_80A77D0
-
 	thumb_func_start sub_80A77F8
 sub_80A77F8:
 	push {r4,r5,lr}
