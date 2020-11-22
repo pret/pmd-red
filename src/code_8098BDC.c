@@ -67,6 +67,7 @@ extern void sub_8091980(u32);
 extern u8 sub_80023E4(u32);
 extern void sub_80118C4(u16);
 extern u8 sub_809C730();
+extern s16 sub_80A2750(s16);
 
 void sub_8098BDC(void)
 {
@@ -224,19 +225,12 @@ bool8 sub_8098DCC(u32 r0)
     return FALSE;
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
-bool8 sub_8098E18(s16 r0, u32 r1, u32 r2)
+bool8 sub_8098E18(s16 r0, u32 r1)
 {
-#ifdef NONMATCHING
-    // Had to nonmatch because the prologue statements of add/lsls/lsrs didn't match
-    s32 temp;
-    s16 return_var;
-    temp = r0;
+    s32 r2 = r0, r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, &gUnknown_8115F80, temp, r2);
+        Log(0, &gUnknown_8115F80, r2, r1);
         if(gUnknown_203B49D != 0)
         {
             gUnknown_20398A8 = 7;
@@ -245,127 +239,21 @@ bool8 sub_8098E18(s16 r0, u32 r1, u32 r2)
         {
             if(gUnknown_203B49C == 0)
             {
-                gUnknown_20398C4 = r2;
+                gUnknown_20398C4 = r5;
             }
-            return_var = sub_80A2750(gUnknown_20398C4);
-            // TODO so ugly but it works.. nested if statements aren't my thing in decomping
-            if(return_var == 2)
+            switch(sub_80A2750(gUnknown_20398C4))
             {
-                goto _08098E88;
+                case 4: gUnknown_20398A8 = 8; break;
+                case 1: gUnknown_20398A8 = 5; break;
+                case 2: gUnknown_20398A8 = 6; break;
             }
-            if(return_var > 2)
-            {
-                goto _08098E7C;
-            }
-            if(return_var == 1)
-            {
-                goto _08098E84;
-            }
-            else
-            {
-                goto _08098E8C;
-            }
-_08098E7C:
-                if(return_var == 4)
-                {
-                    gUnknown_20398A8 = 8;
-                    goto _08098E8C;
-                }
-                else
-                {
-                    goto _08098E8C;
-                }
-_08098E84:
-                gUnknown_20398A8 = 5;
-                goto _08098E8C;
-_08098E88:
-                gUnknown_20398A8 = 6;
         }
-_08098E8C:
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r1;
         sub_809C730();
         return TRUE;
     }
     return FALSE;
-#else
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tadds r6, r1, 0\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r2, r0, 16\n"
-	"\tadds r5, r2, 0\n"
-	"\tldr r4, _08098E40\n"
-	"\tldr r0, [r4]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08098EA8\n"
-	"\tldr r1, _08098E44\n"
-	"\tmovs r0, 0\n"
-	"\tadds r3, r6, 0\n"
-	"\tbl Log\n"
-	"\tldr r0, _08098E48\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08098E4C\n"
-	"\tmovs r0, 0x7\n"
-	"\tb _08098E8A\n"
-	"\t.align 2, 0\n"
-"_08098E40: .4byte gUnknown_20398A8\n"
-"_08098E44: .4byte gUnknown_8115F80\n"
-"_08098E48: .4byte gUnknown_203B49D\n"
-"_08098E4C:\n"
-	"\tldr r0, _08098E74\n"
-	"\tldrb r0, [r0]\n"
-	"\tldr r1, _08098E78\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08098E58\n"
-	"\tstrh r5, [r1]\n"
-"_08098E58:\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r0, [r1, r2]\n"
-	"\tbl sub_80A2750\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tcmp r0, 0x2\n"
-	"\tbeq _08098E88\n"
-	"\tcmp r0, 0x2\n"
-	"\tbgt _08098E7C\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _08098E84\n"
-	"\tb _08098E8C\n"
-	"\t.align 2, 0\n"
-"_08098E74: .4byte gUnknown_203B49C\n"
-"_08098E78: .4byte gUnknown_20398C4\n"
-"_08098E7C:\n"
-	"\tcmp r0, 0x4\n"
-	"\tbne _08098E8C\n"
-	"\tmovs r0, 0x8\n"
-	"\tb _08098E8A\n"
-"_08098E84:\n"
-	"\tmovs r0, 0x5\n"
-	"\tb _08098E8A\n"
-"_08098E88:\n"
-	"\tmovs r0, 0x6\n"
-"_08098E8A:\n"
-	"\tstr r0, [r4]\n"
-"_08098E8C:\n"
-	"\tldr r0, _08098EA0\n"
-	"\tmovs r1, 0x1\n"
-	"\tstr r1, [r0]\n"
-	"\tldr r0, _08098EA4\n"
-	"\tstr r6, [r0]\n"
-	"\tbl sub_809C730\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _08098EAA\n"
-	"\t.align 2, 0\n"
-"_08098EA0: .4byte gUnknown_20398AC\n"
-"_08098EA4: .4byte gUnknown_20398B0\n"
-"_08098EA8:\n"
-	"\tmovs r0, 0\n"
-"_08098EAA:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-#endif
 }
 
 // Unused
