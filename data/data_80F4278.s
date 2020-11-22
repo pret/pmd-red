@@ -6044,35 +6044,70 @@ gUnknown_8106400: @ 8106400
 
 	.global gUnknown_810643C
 gUnknown_810643C: @ 810643C
-	.incbin "baserom.gba", 0x10643C, 0x2C
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x48, 0x64, 0x10, 0x08
+        .asciz "#+$m2 wants to join the team."
+        .align 2,0
 
 	.global gUnknown_8106468
 gUnknown_8106468: @ 8106468
-	.incbin "baserom.gba", 0x106468, 0x24
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x74, 0x64, 0x10, 0x08
+        .asciz "#+$m2 joined the team! "
+        .align 2,0
 
 	.global gUnknown_810648C
 gUnknown_810648C: @ 810648C
-	.incbin "baserom.gba", 0x10648C, 0x30
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x98, 0x64, 0x10, 0x08
+        .string "#+$m3 appears to\n"
+        .asciz "#+be very happy!"
+        .align 2,0
 
 	.global gUnknown_81064BC
 gUnknown_81064BC: @ 81064BC
-	.incbin "baserom.gba", 0x1064BC, 0x44
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xC8, 0x64, 0x10, 0x08
+        .string "#+It~27s delighted to have\n"
+        .asciz "#+joined the rescue team!"
+        .align 2,0
 
 	.global gUnknown_8106500
 gUnknown_8106500: @ 8106500
-	.incbin "baserom.gba", 0x106500, 0x34
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0C, 0x65, 0x10, 0x08
+        .string "#+$m0 turned down\n"
+        .asciz "#+the offer to join."
+        .align 2,0
 
 	.global gUnknown_8106534
 gUnknown_8106534: @ 8106534
-	.incbin "baserom.gba", 0x106534, 0x2C
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x40, 0x65, 0x10, 0x08
+        .asciz "#+Celebi is very disappointed."
+        .align 2,0
 
 	.global gUnknown_8106560
 gUnknown_8106560: @ 8106560
-	.incbin "baserom.gba", 0x106560, 0x48
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x6C, 0x65, 0x10, 0x08
+        .string "#+$m2 left\n"
+        .asciz "#+dejectedly..."
+        .align 2,0
+        .string "#+Allow $m2\n"
+        .asciz "#+to join the team?"
+        .align 2,0
 
 	.global gUnknown_81065A8
 gUnknown_81065A8: @ 81065A8
-	.incbin "baserom.gba", 0x1065A8, 0x4
+        .byte 0x88, 0x65, 0x10, 0x08
 
 	.global gUnknown_81065AC
 gUnknown_81065AC: @ 81065AC
@@ -6218,6 +6253,7 @@ gUnknown_8106B8C: @ 8106B8C
 gUnknown_8106BB0: @ 8106BB0
 	.incbin "baserom.gba", 0x106BB0, 0x4
 
+@ Red Heart Symbols
 	.global gUnknown_8106BB4
 gUnknown_8106BB4: @ 8106BB4
 	.incbin "baserom.gba", 0x106BB4, 0x4
@@ -6234,6 +6270,7 @@ gUnknown_8106BBC: @ 8106BBC
 gUnknown_8106BC0: @ 8106BC0
 	.incbin "baserom.gba", 0x106BC0, 0x4
 
+@ Yellow Heart Symbols
 	.global gUnknown_8106BC4
 gUnknown_8106BC4: @ 8106BC4
 	.incbin "baserom.gba", 0x106BC4, 0x4
@@ -6249,6 +6286,7 @@ gUnknown_8106BCC: @ 8106BCC
 	.global gUnknown_8106BD0
 gUnknown_8106BD0: @ 8106BD0
 	.incbin "baserom.gba", 0x106BD0, 0x4
+
 
 	.global gUnknown_8106BD4
 gUnknown_8106BD4: @ 8106BD4
@@ -6788,19 +6826,22 @@ gUnknown_81098AC: @ 81098AC
 
 	.global gUnknown_81098C4
 gUnknown_81098C4: @ 81098C4
-	.incbin "baserom.gba", 0x1098C4, 0xC
+        .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_81098D0
 gUnknown_81098D0: @ 81098D0
-	.incbin "baserom.gba", 0x1098D0, 0xC
+        .asciz "wazapara"
+        .align 2,0
 
 	.global gUnknown_81098DC
 gUnknown_81098DC: @ 81098DC
-	.incbin "baserom.gba", 0x1098DC, 0x4
+        .asciz "%+d"
 
 	.global gUnknown_81098E0
 gUnknown_81098E0: @ 81098E0
-	.incbin "baserom.gba", 0x1098E0, 0xC
+        .asciz "#c%c%s%s#r"
+        .align 2,0
 
 	.global gUnknown_81098EC
 gUnknown_81098EC: @ 81098EC
@@ -7183,14 +7224,33 @@ gFormattedTypeStrings: @ 810AE24
 gUnknown_810AF50: @ 810AF50
 	.incbin "baserom.gba", 0x10AF50, 0xFC
 
-	.global gTeamRanks
-gTeamRanks: @ 810B04C
-        @ Seems to have some adventure log stuff too
+	.global gAdventureLogText
+gAdventureLogText: @ 810B04C
 	.incbin "baserom.gba", 0x10B04C, 0x400
 
 	.global gRescueTeamRanks
 gRescueTeamRanks: @ 810B44C
-	.incbin "baserom.gba", 0x10B44C, 0x7C
+        .byte 0xBC, 0xB4, 0x10, 0x08 @ Normal
+        .byte 0xB0, 0xB4, 0x10, 0x08
+        .byte 0xA4, 0xB4, 0x10, 0x08
+        .byte 0x98, 0xB4, 0x10, 0x08
+        .byte 0x88, 0xB4, 0x10, 0x08
+        .byte 0x78, 0xB4, 0x10, 0x08
+        .byte 0x68, 0xB4, 0x10, 0x08 @ Lucario
+        .asciz "Lucario Rank"
+        .align 2,0
+        .asciz "Diamond Rank"
+        .align 2,0
+        .asciz "Platinum Rank"
+        .align 2,0
+        .asciz "Gold Rank"
+        .align 2,0
+        .asciz "Silver Rank"
+        .align 2,0
+        .asciz "Bronze Rank"
+        .align 2,0
+        .asciz "Normal Rank"
+        .align 2,0
 
 	.global gAbilityNames
 gAbilityNames: @ 810B4C8
