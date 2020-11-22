@@ -51,7 +51,7 @@ ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
 ifeq ($(OS),Windows_NT)
-LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a
+LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a ../../libagbsyscall/libagbsyscall.a
 else
 LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
 endif
