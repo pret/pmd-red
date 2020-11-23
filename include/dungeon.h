@@ -27,5 +27,6 @@ struct Dungeon
 
 extern struct Dungeon gDungeons[];
 extern struct DungeonName gDungeonNames[];
+const u8 *GetDungeonName1(u8 dungeon);
 
 #endif //GUARD_DUNGEON_H

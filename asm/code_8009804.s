@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8009804
-sub_8009804:
+	thumb_func_start vram_related_8009804
+vram_related_8009804:
 	push {lr}
 	movs r1, 0xC0
 	lsls r1, 19
@@ -83,7 +83,7 @@ _08009890: .4byte 0x06010000
 _08009894: .4byte 0x00001f7f
 _08009898: .4byte 0x05000200
 _0800989C: .4byte 0x00a000a0
-	thumb_func_end sub_8009804
+	thumb_func_end vram_related_8009804
 
 	thumb_func_start sub_80098A0
 sub_80098A0:

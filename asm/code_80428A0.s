@@ -2181,7 +2181,7 @@ _08043CD4: .4byte gUnknown_203B41C
 	thumb_func_start sub_8043CD8
 sub_8043CD8:
 	push {lr}
-	bl sub_8009804
+	bl vram_related_8009804
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8043CD8
