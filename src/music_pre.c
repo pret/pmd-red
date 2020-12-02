@@ -29,10 +29,11 @@ struct unkStruct_3000FD8
     u8 padding;
 };
 
-extern struct unkStruct_3000FD8 gUnknown_3000FD8[];
+extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
 
 void sub_800BF80(void);
 
+// Some kind of initializer for music?
 void sub_800BD08(void)
 {
     s32 counter;

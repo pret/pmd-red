@@ -27,13 +27,6 @@ extern void nullsub_28(void);
 
 extern int sprintf(char *, const char *, ...);
 
-struct UnkStructType
-{
-    /* 0x0 */ s16 unk0;
-
-};
-
-
 struct unkFileStruct
 {
     u32 unk0;
@@ -43,9 +36,9 @@ struct unkFileStruct
 
 
 extern u16 gUnknown_80D4144[];
-extern struct UnkStructType gUnknown_202DE20;
-extern struct UnkStructType gUnknown_202DE22;
-extern struct UnkStructType gUnknown_202DE24;
+extern s16 gUnknown_202DE20;
+extern s16 gUnknown_202DE22;
+extern s16 gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
 extern const char gNotEntryText;
@@ -61,7 +54,7 @@ void sub_8011760(void)
     }
     if(sub_80023E4(0xC) != 0)
     {
-        sub_800BDFC(0x7);
+        sub_800BDFC(0x7); // Pokemon Square Theme
     }
 }
 
@@ -72,7 +65,7 @@ void sub_801178C(void)
         sub_800BDFC(0x13);
         return;
     }
-    sub_800BDFC(0x7);
+    sub_800BDFC(0x7); // Pokemon Square Theme
 }
 
 void sub_80117AC(void)
@@ -106,17 +99,17 @@ void sub_80117F8(void)
 void sub_801180C(void)
 {
     gUnknown_202DE1C = 0;
-    gUnknown_202DE20.unk0 = 0;
-    gUnknown_202DE22.unk0 = 0;
-    gUnknown_202DE24.unk0 = 0;
+    gUnknown_202DE20 = 0;
+    gUnknown_202DE22 = 0;
+    gUnknown_202DE24 = 0;
 }
 
 void sub_8011830(void)
 {
     sub_800C93C();
-    gUnknown_202DE20.unk0 = 0;
-    gUnknown_202DE22.unk0 = 0;
-    gUnknown_202DE24.unk0 = 0;
+    gUnknown_202DE20 = 0;
+    gUnknown_202DE22 = 0;
+    gUnknown_202DE24 = 0;
 }
 
 void sub_8011854(void)
@@ -126,17 +119,17 @@ void sub_8011854(void)
 
 void sub_8011860(void)
 {
-    if(gUnknown_202DE20.unk0 > 0)
+    if(gUnknown_202DE20 > 0)
     {
-        gUnknown_202DE20.unk0--;
+        gUnknown_202DE20--;
     }
-    if(gUnknown_202DE22.unk0 > 0)
+    if(gUnknown_202DE22 > 0)
     {
-        gUnknown_202DE22.unk0--;
+        gUnknown_202DE22--;
     }
-    if(gUnknown_202DE24.unk0 > 0)
+    if(gUnknown_202DE24 > 0)
     {
-        gUnknown_202DE24.unk0--;
+        gUnknown_202DE24--;
     }
 }
 
@@ -257,17 +250,17 @@ u8 sub_80119C0(u16 r0)
 
 void sub_80119D4(u32 r0)
 {
-    if(gUnknown_202DE20.unk0 > 0)
+    if(gUnknown_202DE20 > 0)
         return;
     sub_800C074(gUnknown_80D4144[r0], 0x80 << 1);
-    gUnknown_202DE20.unk0 = 4;
+    gUnknown_202DE20 = 4;
 }
 
 void sub_8011A04(void)
 {
-    if(gUnknown_202DE22.unk0 > 0)
+    if(gUnknown_202DE22 > 0)
         return;
-    gUnknown_202DE22.unk0 = 3;
+    gUnknown_202DE22 = 3;
     sub_800C074(0x131, 0x80 << 1);
 }
 
