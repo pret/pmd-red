@@ -10,6 +10,99 @@ extern void sub_8095240(u8);
 
 extern void sub_809927C(u8);
 extern u32 *gUnknown_203B2C0;
+extern u8 sub_8030C20(u32);
+extern u32 sub_8031050();
+extern void sub_80310B4();
+extern u32 sub_8095350();
+
+void sub_8028CE0()
+{
+    s32 temp;
+
+    if(sub_80144A4(&temp) != 0)
+    {
+        return;
+    }
+    sub_8028B04(3);
+}
+
+void sub_8028CFC()
+{
+    s32 temp;
+    u32 temp2;
+
+    if(sub_80144A4(&temp) != 0)
+    {
+        return;
+    }
+    switch(sub_8031050())
+    {
+        case 2:
+        case 3:
+            temp2 = sub_8095350();
+            sub_80310B4();
+            if(temp2 != gUnknown_203B2C0[0xA8 << 1])
+            {
+                sub_8028B04(0x17);
+            }
+            else
+            {
+                sub_8028B04(0x19);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void sub_8028D4C()
+{
+    s32 temp;
+
+    if(sub_80144A4(&temp) != 0)
+    {
+        return;
+    }
+    gUnknown_203B2C0[0xA7 << 1] = temp;
+    switch((s32)gUnknown_203B2C0[0xA7 << 1])
+    {
+        case 5:
+            if(sub_8030C20(2) != 0)
+            {
+                sub_8028B04(12);
+            }
+            else
+            {
+                sub_8028B04(13);
+            }
+            break;
+        case 6:
+            if(sub_8030C20(4) != 0)
+            {
+                sub_8028B04(14);
+            }
+            else
+            {
+                sub_8028B04(15);
+            }
+            break;
+        case 7:
+            if(sub_8030C20(0) != 0)
+            {
+                sub_8028B04(16);
+            }
+            else
+            {
+                sub_8028B04(17);
+            }
+            break;
+        case 0xA:
+            sub_8028B04(1);
+            break;
+        default:
+            break;
+    }
+}
 
 void sub_8028DE8(u32 r0)
 {
@@ -22,7 +115,7 @@ void sub_8028DE8(u32 r0)
     sub_8028B04(r0);
 }
 
-void sub_8028E08(u32 r0)
+void sub_8028E08()
 {
     s32 temp;
 
@@ -33,7 +126,7 @@ void sub_8028E08(u32 r0)
     sub_8028B04(0x12);
 }
 
-void sub_8028E24(u32 r0)
+void sub_8028E24()
 {
     s32 temp;
 
@@ -54,7 +147,7 @@ void sub_8028E24(u32 r0)
     }
 }
 
-void sub_8028E54(u32 r0)
+void sub_8028E54()
 {
     s32 temp;
 
@@ -75,7 +168,7 @@ void sub_8028E54(u32 r0)
     }
 }
 
-void sub_8028E84(u32 r0)
+void sub_8028E84()
 {
     s32 temp;
 
@@ -88,7 +181,7 @@ void sub_8028E84(u32 r0)
     sub_8012574(0);
 }
 
-void sub_8028EAC(u32 r0)
+void sub_8028EAC()
 {
     s32 temp;
 
@@ -103,7 +196,7 @@ void sub_8028EAC(u32 r0)
     }
 }
 
-void sub_8028ED4(u32 r0)
+void sub_8028ED4()
 {
     s32 temp;
 
@@ -131,7 +224,7 @@ void sub_8028ED4(u32 r0)
     }
 }
 
-void sub_8028F04(u32 r0)
+void sub_8028F04()
 {
     s32 temp;
     s32 counter;
@@ -147,7 +240,7 @@ void sub_8028F04(u32 r0)
     sub_8028B04(0x15);
 }
 
-void sub_8028F30(u32 r0)
+void sub_8028F30()
 {
     s32 temp;
 
@@ -160,7 +253,7 @@ void sub_8028F30(u32 r0)
     sub_8012574(0);
 }
 
-void sub_8028F58(u32 r0)
+void sub_8028F58()
 {
     s32 temp;
 
@@ -175,7 +268,7 @@ void sub_8028F58(u32 r0)
     }
 }
 
-void sub_8028F80(u32 r0)
+void sub_8028F80()
 {
     s32 temp;
 
@@ -188,7 +281,7 @@ void sub_8028F80(u32 r0)
     sub_8028B04(3);
 }
 
-void sub_8028FC0(u32 r0)
+void sub_8028FC0()
 {
     s32 temp;
 
