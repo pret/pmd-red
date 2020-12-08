@@ -2,22 +2,23 @@
 
 struct unkStruct_80A2608
 {
-    s16 unk0;
-    /*0x2*/ u16 padding;
-    /*0x4*/ u32 padding2;
-    /*0x8*/ u16 padding3;
-    /*0xA*/ u16 padding4;
-    u8 unkC;
+    /* 0x0 */ s16 unk0;
+    /* 0x2 */ u16 padding;
+    /* 0x4 */ u32 padding2;
+    /* 0x8 */ u16 padding3;
+    /* 0xA */ u16 padding4;
+    /* 0xC */ u8 unkC;
     /* 0xD */ u8 padding5;
-    s16 unkE;
-    u8 unk11;
+    /* 0xE */ s16 unkE;
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 unk11;
 };
 
-extern u8 sub_80023E4(u32);
-extern u8 sub_80973F4(s16);
 extern struct unkStruct_80A2608 *sub_80A2608(s32);
 extern struct unkStruct_80A2608 *sub_80A2620(u32);
-extern u8 sub_8097384(u32);
+extern u8 sub_80023E4(u32);
+extern u8 sub_80973F4(s16);
+extern u8 sub_8097384(s16);
 extern s16 gUnknown_8116F9A[];
 
 s16 sub_80A26B8(s16 r0)
@@ -35,20 +36,16 @@ s16 sub_80A26CC(s16 r0)
 }
 
 
-#ifndef NONMATCHING
-NAKED
-#endif
 s32 sub_80A26D8(u8 r0)
 {
-#ifdef NONMATCHING
     s32 counter;
     s32 counter2;
+    s32 temp2;
     struct unkStruct_80A2608 *temp;
     for(counter = 0; counter <= 0x52; counter++)
     {
-        // Forcing a shift here.. but does it to R4 instead of R0
-        counter2 = counter <<  0x10;
-        counter2 >>= 0x10;
+        temp2 = counter <<  0x10;
+        counter2 = temp2 >> 0x10;
         temp = sub_80A2608(counter2);
         if(temp->unk11 != 0)
         {
@@ -59,36 +56,6 @@ s32 sub_80A26D8(u8 r0)
         }
     }
     return -1;
-#else
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tmovs r5, 0\n"
-"_080A26E0:\n"
-	"\tlsls r0, r5, 16\n"
-	"\tasrs r4, r0, 16\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_80A2608\n"
-	"\tadds r1, r0, 0\n"
-	"\tldrb r0, [r1, 0x11]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080A26FC\n"
-	"\tldrb r0, [r1, 0xC]\n"
-	"\tcmp r0, r6\n"
-	"\tbne _080A26FC\n"
-	"\tadds r0, r4, 0\n"
-	"\tb _080A2706\n"
-"_080A26FC:\n"
-	"\tadds r5, 0x1\n"
-	"\tcmp r5, 0x52\n"
-	"\tble _080A26E0\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-"_080A2706:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n");
-#endif
 }
 
 u8 sub_80A270C(s16 r0)
@@ -171,4 +138,118 @@ u32 sub_80A27CC(s16 r0)
     if(sub_80973F4(temp) == 0)
         return 0;
     return 1;
+}
+
+u32 sub_80A2824(u8 r0)
+{
+    s32 counter;
+    s32 counter2;
+    s32 temp2;
+    struct unkStruct_80A2608 *temp;
+
+    if(sub_80023E4(5) != 0)
+    {
+        return 0;
+    }
+    if(sub_80023E4(1) != 0)
+    {
+        for(counter = 0; counter <= 0x2D; counter++)
+        {
+            temp2 = counter <<  0x10;
+            counter2 = temp2 >> 0x10;
+            temp = sub_80A2620(counter2);
+            if(temp->unk11 != 0)
+            {
+                if(temp->unkC == r0)
+                {
+                    if(sub_8097384(counter2) != 0)
+                    {
+                        return 1;
+                    }
+                    if(sub_80973F4(counter2) != 0)
+                    {
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for(counter = 0; counter <= 0x2D; counter++)
+        {
+            temp2 = counter <<  0x10;
+            counter2 = temp2 >> 0x10;
+            temp = sub_80A2620(counter2);
+            if(temp->unk11 != 0)
+            {
+                if(temp->unkC == r0)
+                {
+                    if(sub_8097384(counter2) != 0)
+                    {
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+
+}
+
+u32 sub_80A28B4(s16 r0)
+{
+    s32 counter2;
+    s32 temp2;
+    struct unkStruct_80A2608 *temp;
+
+    temp2 = r0 <<  0x10;
+    counter2 = temp2 >> 0x10;
+    temp = sub_80A2620(counter2);
+    if(temp->unk0 != -1)
+    {
+        if(sub_8097384(counter2) == 0)
+        {
+            if(sub_80973F4(counter2) == 0)
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+        return 1;
+    }
+    return 0;
+}
+
+u32 sub_80A28F0(u8 r0)
+{
+    s32 counter;
+    s32 counter2;
+    s32 temp2;
+    struct unkStruct_80A2608 *temp;
+
+    for(counter = 0; counter <= 0x2D; counter++)
+    {
+        temp2 = counter <<  0x10;
+        counter2 = temp2 >> 0x10;
+        temp = sub_80A2620(counter2);
+        if(temp->unk11 != 0)
+        {
+            if(temp->unkC == r0)
+            {
+                if(sub_8097384(counter2) != 0)
+                {
+                    return 1;
+                }
+                if(sub_80973F4(counter2) != 0)
+                {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
 }
