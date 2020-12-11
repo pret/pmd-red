@@ -1807,25 +1807,469 @@ gUnknown_80F7AFC: @ 80F7AFC
 gUnknown_80F7B04: @ 80F7B04
 	.incbin "baserom.gba", 0xF7B04, 0x10
 
-	.global gUnknown_80F7B14
-gUnknown_80F7B14: @ 80F7B14
-	.incbin "baserom.gba", 0xF7B14, 0x13C
+	.global gActions
+gActions: @ 80F7B14
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gThrowDescription
+	.4byte gThrowText
+	.4byte gThrowDescription
+	.4byte gThrowText
+	.4byte gEquipDescription
+	.4byte gEquipText
+	.4byte gEatDescription
+	.4byte gEatText
+	.4byte gIngestDescription
+	.4byte gIngestText
+	.4byte gPeelDescription
+	.4byte gPeelText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gEquipPutOnDescription
+	.4byte gEquipText
+	.4byte gEquipPutOnDescription
+	.4byte gEquipText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gUseDescription
+	.4byte gUseText
+	.4byte gUseDescription
+	.4byte gUseText
+
+	.global gEquipPutOnDescription
+gEquipPutOnDescription: @ 80F7B94
+	.string "$m0 put on\n"
+	.asciz "the $i0."
+
+	.global gPeelText
+gPeelText: @ 80F7BA8
+	.asciz "Peel"
+	.align 2,0
+
+	.global gPeelDescription
+gPeelDescription: @ 80F7BB0
+	.string "$m0 peeled\n"
+	.asciz "the $i0."
+	.align 2,0
+
+	.global gIngestText
+gIngestText: @ 80F7BC4
+	.asciz "Ingest"
+	.align 2,0
+
+	.global gIngestDescription
+gIngestDescription: @ 80F7BCC
+	.string "$m0 swallowed\n"
+	.asciz "the $i0."
+	.align 2,0
+
+	.global gEatText
+gEatText: @ 80F7BE4
+	.asciz "Eat"
+	.align 2,0
+
+	.global gEatDescription
+gEatDescription: @ 80F7BE8
+	.string "$m0 ate\n"
+	.asciz "the $i0."
+	.align 2,0
+
+	.global gEquipText
+gEquipText: @ 80F7BFC
+	.asciz "Equip"
+	.align 2,0
+
+	.global gEquipDescription
+gEquipDescription: @ 80F7C04
+	.string "$m0 equipped\n"
+	.asciz "the $i0."
+	.align 2,0
+
+	.global gThrowText
+gThrowText: @ 80F7C1C
+	.string "Throw"
+	.align 2,0
+
+	.global gThrowDescription
+gThrowDescription: @ 80F7C24
+	.string "$m0 threw\n"
+	.asciz "the $i0."
+	.align 2,0
+
+	.global gUseText
+gUseText: @ 80F7C38
+	.asciz "Use"
+	.align 2,0
+
+	.global gUseDescription
+gUseDescription: @ 80F7C3C
+	.string "$m0 used\n"
+	.asciz "the $i0."
+	.align 2,0
 
 	.global gUnknown_80F7C50
 gUnknown_80F7C50: @ 80F7C50
-	.incbin "baserom.gba", 0xF7C50, 0x4
+	.4byte gMenuQuestionMarks
 
 	.global gUnknown_80F7C54
 gUnknown_80F7C54: @ 80F7C54
-	.incbin "baserom.gba", 0xF7C54, 0x31C
+	.4byte 0x0000000A
+	.4byte gMenuWaitText
+	.4byte 0x0000000A
+	.4byte gMenuMoveText
+	.4byte 0x0000000A
+	.4byte gMenuMoveText
+	.4byte 0x0000000A
+	.4byte gMenuWaitText
+	.4byte 0x0000000A
+	.4byte gMenuWaitText
+	.4byte 0x0000000A
+	.4byte gMenuNextText
+	.4byte 0x0000000A
+	.4byte gMenuPrevText
+	.4byte 0x0000000A
+	.4byte gMenuPlaceText
+	.4byte 0x0000000A
+	.4byte gMenuGetText
+	.4byte 0x0000000A
+	.4byte gMenuSwitchText
+	.4byte 0x0000000A
+	.4byte gThrowText
+	.4byte 0x0000000A
+	.4byte gMenuInfoText
+	.4byte 0x0000005A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuXText
+	.4byte 0x0000000A
+	.4byte gMenuTalkText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gMenuEmpty
+	.4byte 0x0000000A
+	.4byte gMenuStruggleText
+	.4byte 0x0000000A
+	.4byte gMenuMoneySymbols
+	.4byte 0x000003E7
+	.4byte gMenuMovesText
+	.4byte 0x0000000A
+	.4byte gMenuTacticsText
+	.4byte 0x0000000A
+	.4byte gMenuSummaryText
+	.4byte 0x0000000A
+	.4byte gMenuTalkText
+	.4byte 0x0000000A
+	.4byte gMenuInfoText
+	.4byte 0x0000005A
+	.4byte gMenuSetText
+	.4byte 0x0000000A
+	.4byte gMenuSwitchText
+	.4byte 0x0000000A
+	.4byte gMenuLinkText
+	.4byte 0x0000000A
+	.4byte gMenuDelinkText
+	.4byte 0x0000000A
+	.4byte gMenuForgetText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gThrowText
+	.4byte 0x0000000A
+	.4byte gMenuTriggerText
+	.4byte 0x0000000A
+	.4byte gMenuProceedText
+	.4byte 0x0000000A
+	.4byte gThrowText
+	.4byte 0x00000005
+	.4byte gMenuSwitchText
+	.4byte 0x0000000A
+	.4byte gMenuFarewellText
+	.4byte 0x0000000A
+	.4byte gMenuCancelText
+	.4byte 0x0000000A
+	.4byte gMenuQuicksaveText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gMenuTalkText
+	.4byte 0x0000000A
+	.4byte gMenuGiveUpText
+	.4byte 0x0000000A
+	.4byte gMenuSwitchText
+	.4byte 0x0000000A
+	.4byte gMenuCheckIQText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gMenuDeselectText
+	.4byte 0x0000000A
+	.4byte gMenuFarewellText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gMenuGiveText
+	.4byte 0x0000000A
+	.4byte gMenuTakeText
+	.4byte 0x0000000A
+	.4byte gUseText
+	.4byte 0x0000000A
+	.4byte gMenuEmpty
+	.4byte 0x0000000A
+	.4byte gMenuSwapText
+	.4byte 0x0000000A
+	.4byte gMenuLeaderText
+	.4byte 0x0000000A
+	.4byte gMenuSetText
+	.4byte 0x0000000A
+	.4byte gMenuDeselectText
+	.4byte 0x0000000A
+	.4byte gMenuSwapText
+	.4byte 0x0000000A
+	.4byte gMenuPickUpText
+	.4byte 0x0000000A
+	.4byte gMenuSummaryText
+	.4byte 0x0000000A
+	.4byte gThrowText
+	.4byte 0x00000005
+
+	.global gMenuPickUpText
+gMenuPickUpText: @ 80F7E60
+	.asciz "Pick Up"
+	.align 2,0
+
+	.global gMenuLeaderText
+gMenuLeaderText: @ 80F7E68
+	.asciz "Leader"
+	.align 2,0
+
+	.global gMenuSwapText
+gMenuSwapText: @ 80F7E70
+	.asciz "Swap"
+	.align 2,0
+
+	.global gMenuTakeText
+gMenuTakeText: @ 80F7E78
+	.asciz "Take"
+	.align 2,0
+
+	.global gMenuGiveText
+gMenuGiveText: @ 80F7E80
+	.asciz "Give"
+	.align 2,0
+
+	.global gMenuDeselectText
+gMenuDeselectText: @ 80F7E88
+	.asciz "Deselect"
+	.align 2,0
+
+	.global gMenuCheckIQText
+gMenuCheckIQText: @ 80F7E94
+	.asciz "Check IQ"
+	.align 2,0
+
+	.global gMenuGiveUpText
+gMenuGiveUpText: @ 80F7EA0
+	.asciz "Give Up"
+	.align 2,0
+
+	.global gMenuQuicksaveText
+gMenuQuicksaveText: @ 80F7EA8
+	.asciz "Quicksave"
+	.align 2,0
+
+	.global gMenuCancelText
+gMenuCancelText: @ 80F7EB0
+	.asciz "Cancel"
+	.align 2,0
+
+	.global gMenuFarewellText
+gMenuFarewellText: @ 80F7EBC
+	.asciz "Farewell"
+	.align 2,0
+
+	.global gMenuProceedText
+gMenuProceedText: @ 80F7EC8
+	.asciz "Proceed"
+	.align 2,0
+
+	.global gMenuTriggerText
+gMenuTriggerText: @ 80F7ED0
+	.asciz "Trigger"
+	.align 2,0
+
+	.global gMenuForgetText
+gMenuForgetText: @ 80F7ED8
+	.asciz "Forget"
+	.align 2,0
+
+	.global gMenuDelinkText
+gMenuDelinkText: @ 80F7EE0
+	.asciz "Delink"
+	.align 2,0
+
+	.global gMenuLinkText
+gMenuLinkText: @ 80F7EE8
+	.asciz "Link"
+	.align 2,0
+
+	.global gMenuSetText
+gMenuSetText: @ 80F7EF0
+	.asciz "Set"
+	.align 2,0
+
+	.global gMenuSummaryText
+gMenuSummaryText: @ 80F7EF4
+	.asciz "Summary"
+	.align 2,0
+
+	.global gMenuTacticsText
+gMenuTacticsText: @ 80F7EFC
+	.asciz "Tactics"
+	.align 2,0
+
+	.global gMenuMovesText
+gMenuMovesText: @ 80F7F04
+	.asciz "Moves"
+	.align 2,0
+
+	.global gMenuMoneySymbols
+gMenuMoneySymbols: @ 80F7F0C
+	.asciz "$$$$"
+	.align 2,0
+
+	.global gMenuStruggleText
+gMenuStruggleText: @ 80F7F14
+	.asciz "Struggle"
+	.align 2,0
+
+	.global gMenuEmpty
+gMenuEmpty: @ 80F7F20
+	.byte 0x00
+	.align 2,0
+
+	.global gMenuTalkText
+gMenuTalkText: @ 80F7F24
+	.asciz "Talk"
+	.align 2,0
+
+	.global gMenuXText
+gMenuXText: @ 80F7F2C
+	.asciz "X"
+	.align 2,0
+
+	.global gMenuInfoText
+gMenuInfoText: @ 80F7F30
+	.asciz "Info"
+	.align 2,0
+
+	.global gMenuSwitchText
+gMenuSwitchText: @ 80F7F38
+	.asciz "Switch"
+	.align 2,0
+
+	.global gMenuGetText
+gMenuGetText: @ 80F7F40
+	.asciz "Get"
+	.align 2,0
+
+	.global gMenuPlaceText
+gMenuPlaceText: @ 80F7F44
+	.asciz "Place"
+	.align 2,0
+
+	.global gMenuPrevText
+gMenuPrevText: @ 80F7F4C
+	.asciz "Prev."
+	.align 2,0
+
+	.global gMenuNextText
+gMenuNextText: @ 80F7F54
+	.asciz "Next"
+	.align 2,0
+
+	.global gMenuMoveText
+gMenuMoveText: @ 80F7F5C
+	.asciz "Move"
+	.align 2,0
+
+	.global gMenuWaitText
+gMenuWaitText: @ 80F7F64
+	.asciz "Wait"
+	.align 2,0
+
+	.global gMenuQuestionMarks
+gMenuQuestionMarks: @ 80F7F6C
+	.asciz "???"
+	.align 2,0
 
 	.global gUnknown_80F7F70
 gUnknown_80F7F70: @ 80F7F70
-	.incbin "baserom.gba", 0xF7F70, 0x194
+	.4byte gDungeonStairsDescription
+	.4byte gWarpZoneDescription
+	.4byte gRescueSpotDescription
+
+	.global gRescueSpotDescription
+gRescueSpotDescription: @ 80F7F7C
+	.string "You reached the rescue spot where your\n"
+	.string "friend~27s team went down!\n"
+	.string "Send an #c2A-OK Mail#r from the Pelipper Post\n"
+	.string "Office to let your friend know you~27ve\n"
+	.asciz "rescued the defeated team."
+	.align 2,0
+
+	.global gWarpZoneDescription
+gWarpZoneDescription: @ 80F8030
+	.string "The warp zone leading to the next floor.\n"
+	.string "If you are on the final floor~2c you will\n"
+	.asciz "escape from the dungeon."
+	.align 2,0
+
+	.global gDungeonStairsDescription
+gDungeonStairsDescription: @ 80F809C
+	.string "Stairs leading to the next floor.\n"
+	.string "If you are on the final floor~2c you will\n"
+	.asciz "escape from the dungeon."
+	.align 2,0
 
 	.global gUnknown_80F8104
 gUnknown_80F8104: @ 80F8104
-	.incbin "baserom.gba", 0xF8104, 0x2C
+	.4byte gDungeonStairsText
+	.4byte gWarpZoneText
+	.4byte gRescueSpotText
+
+	.global gRescueSpotText
+gRescueSpotText: @ 80F7F7C
+	.asciz "Rescue Spot"
+	.align 2,0
+
+	.global gWarpZoneText
+gWarpZoneText: @ 80F8030
+	.asciz "Warp Zone"
+	.align 2,0
+
+	.global gDungeonStairsText
+gDungeonStairsText: @ 80F809C
+	.asciz "Stairs"
+	.align 2,0
 
 	.global gTrapDescriptions
 gTrapDescriptions: @ 80F8130

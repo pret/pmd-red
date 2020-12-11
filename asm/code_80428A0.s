@@ -4119,7 +4119,7 @@ _08044C04:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044C0C: .4byte gUnknown_80F7B14
+_08044C0C: .4byte gActions
 	thumb_func_end sub_8044BA8
 
 	thumb_func_start sub_8044C10
@@ -4563,7 +4563,7 @@ _08044F2E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044F34: .4byte gUnknown_80F7B14
+_08044F34: .4byte gActions
 _08044F38: .4byte gUnknown_202EE44
 	thumb_func_end sub_8044EC8
 
@@ -7462,7 +7462,7 @@ sub_80464AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080464C4: .4byte gUnknown_80F7B14
+_080464C4: .4byte gActions
 	thumb_func_end sub_80464AC
 
 	thumb_func_start sub_80464C8
