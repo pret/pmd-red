@@ -91,7 +91,11 @@ gUnknown_80DDFB8:: @ 80DDFB8
 	.align 2, 0
 
 gUnknown_80DE01C:: @ 80DE01C
-	.incbin "baserom.gba", 0xDE01C, 0x50
+	.string "#+Communicating...\n"
+	.string "#+Please wait with the power on.\n"
+	.string "#+To cancel~2c press {B_BUTTON}."
+	.byte 0
+	.align 2, 0
 
 gUnknown_80DE06C:: @ 80DE06C
 	.string " Okeydoke!\n"

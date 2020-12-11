@@ -49,15 +49,23 @@ gUnknown_80DD1A8: @ 80DD1A8
 
 	.global gUnknown_80DD1C8
 gUnknown_80DD1C8: @ 80DD1C8
-	.incbin "baserom.gba", 0xDD1C8, 0x24
+	.string "#+The #C4$i1#R was\n"
+	.asciz "#+handed over. "
+	.align 2,0
 
 	.global gUnknown_80DD1EC
 gUnknown_80DD1EC: @ 80DD1EC
-	.incbin "baserom.gba", 0xDD1EC, 0x54
+	.string "#+The #C4$i1#R was\n"
+	.string "#+handed over.#P"
+	.string "#+The #C4$i0#R was\n"
+	.asciz "#+returned to the Toolbox."
+	.align 2,0
 
 	.global gUnknown_80DD240
 gUnknown_80DD240: @ 80DD240
-	.incbin "baserom.gba", 0xDD240, 0x30
+	.string "#+The #C4$i0#R was\n"
+	.asciz "#+returned to the Toolbox."
+	.align 2,0
 
 	.global gUnknown_80DD270
 gUnknown_80DD270: @ 80DD270
