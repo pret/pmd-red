@@ -15032,7 +15032,7 @@ sub_8059BAC:
 	ldr r0, _08059BD4
 	b _08059C5E
 	.align 2, 0
-_08059BD4: .4byte gUnknown_81006F8
+_08059BD4: .4byte gPtrForecastPreventsTypeSwitchMessage
 _08059BD8:
 	movs r1, 0x8C
 	lsls r1, 1
@@ -17869,7 +17869,7 @@ _0805B15A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805B160: .4byte gUnknown_81006F8
+_0805B160: .4byte gPtrForecastPreventsTypeSwitchMessage
 	thumb_func_end sub_805B0D0
 
 	thumb_func_start sub_805B164
@@ -18660,7 +18660,7 @@ _0805B71E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805B730: .4byte gUnknown_810024C
+_0805B730: .4byte gPtrSleepingTargetOnlyMessage
 	thumb_func_end sub_805B668
 
 	thumb_func_start sub_805B734
@@ -48586,7 +48586,7 @@ sub_806A9B4:
 	ldr r0, _0806A9DC
 	b _0806A9E6
 	.align 2, 0
-_0806A9DC: .4byte gUnknown_81002FC
+_0806A9DC: .4byte gPtrLinkedMovesComeApartMessage
 _0806A9E0:
 	cmp r0, 0x1
 	bne _0806A9F4
@@ -48597,7 +48597,7 @@ _0806A9E6:
 	bl sub_80522A8
 	b _0806AA02
 	.align 2, 0
-_0806A9F0: .4byte gUnknown_810035C
+_0806A9F0: .4byte gPtrLinkMoveOneUseWarningMessage
 _0806A9F4:
 	cmp r0, 0x2
 	bne _0806AA02
@@ -48610,7 +48610,7 @@ _0806AA02:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806AA08: .4byte gUnknown_81003BC
+_0806AA08: .4byte gPtrLinkMoveTwoUsesWarningMessage
 	thumb_func_end sub_806A9B4
 
 	thumb_func_start sub_806AA0C
@@ -59963,7 +59963,7 @@ _08070288:
 	bl sub_80522A8
 	b _0807031A
 	.align 2, 0
-_080702A4: .4byte gUnknown_8100660
+_080702A4: .4byte gPtrMoveInterruptedMessage
 _080702A8:
 	movs r5, 0
 	movs r0, 0x8C
@@ -69267,7 +69267,7 @@ _080749E4:
 	.align 2, 0
 _08074A18: .4byte gUnknown_202DFE8
 _08074A1C: .4byte gUnknown_80FEB30
-_08074A20: .4byte gUnknown_810075C
+_08074A20: .4byte gPtrProtectSavedItMessage
 _08074A24:
 	ldr r1, _08074B40
 	ldr r3, _08074B44
@@ -69943,7 +69943,7 @@ _08074F96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08074FA0: .4byte gUnknown_8100740
+_08074FA0: .4byte gPtrStenchWavedOffMessage
 _08074FA4: .4byte 0x0000010d
 _08074FA8: .4byte gUnknown_202DF98
 _08074FAC: .4byte gUnknown_80FA124
@@ -71262,7 +71262,7 @@ _080759E4:
 	b _08075B92
 	.align 2, 0
 _08075A1C: .4byte gUnknown_202DF98
-_08075A20: .4byte gUnknown_81004E4
+_08075A20: .4byte gPtrCouldntBeUsedMessage
 _08075A24:
 	adds r0, r7, 0
 	bl sub_8073658
@@ -75904,7 +75904,7 @@ _08077F70:
 	adds r0, r4, 0
 	b _08078022
 	.align 2, 0
-_08077F84: .4byte gUnknown_8100610
+_08077F84: .4byte gPtrCantLeechSeedSelfMessage
 _08077F88:
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -75932,7 +75932,7 @@ _08077F88:
 	b _0807801E
 	.align 2, 0
 _08077FC0: .4byte gUnknown_202DF98
-_08077FC4: .4byte gUnknown_8100640
+_08077FC4: .4byte gPtrCantLeechSeedMonMessage
 _08077FC8:
 	adds r6, r7, 0
 	adds r6, 0xD0
@@ -79560,7 +79560,7 @@ sub_8079D1C:
 	bl sub_80522F4
 	b _08079DAE
 	.align 2, 0
-_08079D4C: .4byte gUnknown_8100720
+_08079D4C: .4byte gPtrForecastPreventsConversion2Message
 _08079D50:
 	ldr r0, _08079D90
 	adds r1, r4, 0
@@ -79969,10 +79969,10 @@ _0807A078:
 	b _0807A0B2
 	.align 2, 0
 _0807A08C: .4byte gUnknown_8100594
-_0807A090: .4byte gUnknown_81005B8
+_0807A090: .4byte gPtrExposedWoreOffMessage
 _0807A094: .4byte 0x00000111
 _0807A098: .4byte gUnknown_80FA124
-_0807A09C: .4byte gUnknown_81005DC
+_0807A09C: .4byte gPtrSealedMoveReleasedMessage
 _0807A0A0:
 	mov r0, r10
 	cmp r0, 0
@@ -85610,7 +85610,7 @@ _0807CB80:
 	movs r4, 0x1
 	b _0807CCDE
 	.align 2, 0
-_0807CBA8: .4byte gUnknown_81004C4
+_0807CBA8: .4byte gPtrMysteriousPowerPreventedUseMessage
 _0807CBAC:
 	movs r0, 0x1
 	mov r8, r0
@@ -115649,8 +115649,8 @@ _0808C732:
 	bl sub_8083E38
 	b _0808C76E
 	.align 2, 0
-_0808C75C: .4byte gUnknown_81065A8
-_0808C760: .4byte gUnknown_81065AC
+_0808C75C: .4byte gPtrPurityForestAllowCelebiToJoinText
+_0808C760: .4byte gPurityForestAllowCelebiToJoinPrompt
 _0808C764: .4byte 0x00000701
 _0808C768:
 	movs r0, 0x46
@@ -115742,8 +115742,8 @@ _0808C82A:
 	movs r0, 0
 	b _0808C8A6
 	.align 2, 0
-_0808C844: .4byte gUnknown_810660C
-_0808C848: .4byte gUnknown_8106610
+_0808C844: .4byte gPtrPurityForestRefuseCelebiConfirmText
+_0808C848: .4byte gPurityForestRefuseCelebiConfirmPrompt
 _0808C84C: .4byte 0x00000701
 _0808C850:
 	movs r0, 0xA

@@ -5357,155 +5357,348 @@ gUnknown_80FF7EC: @ 80FF7EC
 
 	.global gUnknown_8100208
 gUnknown_8100208: @ 8100208
-	.incbin "baserom.gba", 0x100208, 0x1C
+	.4byte 0x81001C0
 
-	.global gUnknown_8100224
-gUnknown_8100224: @ 8100224
-	.incbin "baserom.gba", 0x100224, 0x28
+	.global gMagnitudeMessage
+gMagnitudeMessage: @ 810020C
+	.string "It~27s Magnitude $d0!\0"
+	.align 2, 0
 
-	.global gUnknown_810024C
-gUnknown_810024C: @ 810024C
-	.incbin "baserom.gba", 0x10024C, 0x24
+	.global gPtrMagnitudeMessage
+gPtrMagnitudeMessage: @ 8100224
+	.4byte gMagnitudeMessage
 
-	.global gUnknown_8100270
-gUnknown_8100270: @ 8100270
-	.incbin "baserom.gba", 0x100270, 0x28
+	.global gSleepingTargetOnlyMessage
+gSleepingTargetOnlyMessage: @ 8100228
+	.string "It only works on a sleeping target!\0"
+	.align 2, 0
 
-	.global gUnknown_8100298
-gUnknown_8100298: @ 8100298
-	.incbin "baserom.gba", 0x100298, 0x20
+	.global gPtrSleepingTargetOnlyMessage
+gPtrSleepingTargetOnlyMessage: @ 810024C
+	.4byte gSleepingTargetOnlyMessage
+
+	.global gFeralFoundItemMessage
+gFeralFoundItemMessage: @ 8100250
+	.string "$m0 found an item somewhere.\0"
+	.align 2, 0
+
+	.global gPtrFeralFoundItemMessage
+gPtrFeralFoundItemMessage: @ 8100270
+	.4byte gFeralFoundItemMessage
+
+	.global gSelfHealPreventedHungerMessage
+gSelfHealPreventedHungerMessage: @ 8100274
+	.string "Its self-healing prevented hunger!\0"
+	.align 2, 0
+
+	.global gPtrSelfHealPreventedHungerMessage
+gPtrSelfHealPreventedHungerMessage: @ 8100298
+	.4byte gSelfHealPreventedHungerMessage
+
+	.global gUnknown_810029C
+gUnknown_810029C: @ 810029C
+	.string "Rescue challenges left: $d0\0"
+	.align 2, 0
 
 	.global gUnknown_81002B8
 gUnknown_81002B8: @ 81002B8
-	.incbin "baserom.gba", 0x1002B8, 0x20
+	.4byte gUnknown_810029C
 
-	.global gUnknown_81002D8
-gUnknown_81002D8: @ 81002D8
-	.incbin "baserom.gba", 0x1002D8, 0x24
+	.global gFinalChanceMessage
+gFinalChanceMessage: @ 81002BC
+	.string "This is your final chance!\0"
+	.align 2, 0
 
-	.global gUnknown_81002FC
-gUnknown_81002FC: @ 81002FC
-	.incbin "baserom.gba", 0x1002FC, 0x60
+	.global gPtrFinalChanceMessage
+gPtrFinalChanceMessage: @ 81002D8
+	.4byte gFinalChanceMessage
 
-	.global gUnknown_810035C
-gUnknown_810035C: @ 810035C
-	.incbin "baserom.gba", 0x10035C, 0x60
+	.global gLinkedMovesComeApartMessage
+gLinkedMovesComeApartMessage: @ 81002DC
+	.string "The linked moves came apart!\0"
+	.align 2, 0
 
-	.global gUnknown_81003BC
-gUnknown_81003BC: @ 81003BC
-	.incbin "baserom.gba", 0x1003BC, 0x24
+	.global gPtrLinkedMovesComeApartMessage
+gPtrLinkedMovesComeApartMessage: @ 81002FC
+	.4byte gLinkedMovesComeApartMessage
 
-	.global gUnknown_81003E0
-gUnknown_81003E0: @ 81003E0
-	.incbin "baserom.gba", 0x1003E0, 0x24
+	.global gLinkMoveOneUseWarningMessage
+gLinkMoveOneUseWarningMessage: @ 8100300
+	.string "#c6The linked moves are almost out of PP!#r\n"
+	.string "#c6Use them again and they will come apart!#r\0"
+	.align 2, 0
 
-	.global gUnknown_8100404
-gUnknown_8100404: @ 8100404
-	.incbin "baserom.gba", 0x100404, 0x24
+	.global gPtrLinkMoveOneUseWarningMessage
+gPtrLinkMoveOneUseWarningMessage: @ 810035C
+	.4byte gLinkMoveOneUseWarningMessage
 
-	.global gUnknown_8100428
-gUnknown_8100428: @ 8100428
-	.incbin "baserom.gba", 0x100428, 0x24
+	.global gLinkMoveTwoUsesWarningMessage
+gLinkMoveTwoUsesWarningMessage: @ 8100360
+	.string "#c6The linked moves are almost out of PP!#r\n"
+	.string "#c6Use them twice and they will come apart!#r\0"
+	.align 2, 0
 
-	.global gUnknown_810044C
-gUnknown_810044C: @ 810044C
-	.incbin "baserom.gba", 0x10044C, 0x48
+	.global gPtrLinkMoveTwoUsesWarningMessage
+gPtrLinkMoveTwoUsesWarningMessage: @ 81003BC
+	.4byte gLinkMoveTwoUsesWarningMessage
 
-	.global gUnknown_8100494
-gUnknown_8100494: @ 8100494
-	.incbin "baserom.gba", 0x100494, 0x30
+	.global gIcePartCrumbledMessage
+gIcePartCrumbledMessage: @ 81003C0
+	.string "The Ice Part crumbled away...\0"
+	.align 2, 0
 
-	.global gUnknown_81004C4
-gUnknown_81004C4: @ 81004C4
-	.incbin "baserom.gba", 0x1004C4, 0x20
+	.global gPtrIcePartCrumbledMessage
+gPtrIcePartCrumbledMessage: @ 81003E0
+	.4byte gIcePartCrumbledMessage
 
-	.global gUnknown_81004E4
-gUnknown_81004E4: @ 81004E4
-	.incbin "baserom.gba", 0x1004E4, 0x4
+	.global gRockPartCrumbledMessage
+gRockPartCrumbledMessage: @ 81003E4
+	.string "The Rock Part crumbled away...\0"
+	.align 2, 0
+
+	.global gPtrRockPartCrumbledMessage
+gPtrRockPartCrumbledMessage: @ 8100404
+	.4byte gRockPartCrumbledMessage
+
+	.global gSteelPartCrumbledMessage
+gSteelPartCrumbledMessage: @ 8100408
+	.string "The Steel Part crumbled away...\0"
+	.align 2, 0
+
+	.global gPtrSteelPartCrumbledMessage
+gPtrSteelPartCrumbledMessage: @ 8100428
+	.4byte gSteelPartCrumbledMessage
+
+	.global gWishStoneCrumbledMessage
+gWishStoneCrumbledMessage: @ 810042C
+	.string "The Wish Stone crumbled away...\0"
+	.align 2, 0
+
+	.global gPtrWishStoneCrumbledMessage
+gPtrWishStoneCrumbledMessage: @ 810044C
+	.4byte gWishStoneCrumbledMessage
+
+	.global gMusicBoxPlayedCrumbledMessage
+gMusicBoxPlayedCrumbledMessage: @ 8100450
+	.string "The Music Box played a beautiful melody~2c\n"
+	.string "then crumbled away...\0"
+	.align 2, 0
+
+	.global gPtrMusicBoxPlayedCrumbledMessage
+gPtrMusicBoxPlayedCrumbledMessage: @ 8100494
+	.4byte gMusicBoxPlayedCrumbledMessage
+
+	.global gMysteriousPowerPreventedUseMessage
+gMysteriousPowerPreventedUseMessage: @ 8100498
+	.string "But a mysterious power prevented its use!\0"
+	.align 2, 0
+
+	.global gPtrMysteriousPowerPreventedUseMessage
+gPtrMysteriousPowerPreventedUseMessage: @ 81004C4
+	.4byte gMysteriousPowerPreventedUseMessage
+
+	.global gCouldntBeUsedMessage
+gCouldntBeUsedMessage: @ 81004C8
+	.string "But it couldn~27t be used!\0"
+	.align 2, 0
+
+	.global gPtrCouldntBeUsedMessage
+gPtrCouldntBeUsedMessage: @ 81004E4
+	.4byte gCouldntBeUsedMessage
 
 	.global gUnknown_81004E8
 gUnknown_81004E8: @ 81004E8
-	.incbin "baserom.gba", 0x1004E8, 0x4
+	.4byte 0x80FB568
 
 	.global gUnknown_81004EC
 gUnknown_81004EC: @ 81004EC
-	.incbin "baserom.gba", 0x1004EC, 0x4
+	.4byte 0x80FB568
 
 	.global gUnknown_81004F0
 gUnknown_81004F0: @ 81004F0
-	.incbin "baserom.gba", 0x1004F0, 0x34
+	.4byte 0x80FB568
+
+	.global gUnknown_81004F4
+gUnknown_81004F4: @ 81004F4
+	.string "$m1~27s Soundproof suppressed\n"
+	.string "the sound move!\0"
+	.align 2, 0
 
 	.global gUnknown_8100524
 gUnknown_8100524: @ 8100524
-	.incbin "baserom.gba", 0x100524, 0x24
+	.4byte gUnknown_81004F4
+
+	.global gUnknown_8100528
+gUnknown_8100528: @ 8100528
+	.string "The attack was barely endured!\0"
+	.align 2, 0
 
 	.global gUnknown_8100548
 gUnknown_8100548: @ 8100548
-	.incbin "baserom.gba", 0x100548, 0x24
+	.4byte gUnknown_8100528
+
+	.global gUnknown_810054C
+gUnknown_810054C: @ 810054C
+	.string "False Swipe prevented fainting!\0"
+	.align 2, 0
 
 	.global gUnknown_810056C
 gUnknown_810056C: @ 810056C
-	.incbin "baserom.gba", 0x10056C, 0x28
+	.4byte gUnknown_810054C
+
+	.global gUnknown_8100570
+gUnknown_8100570: @ 8100570
+	.string "Perish Song~27s effect wore off!\0"
+	.align 2, 0
 
 	.global gUnknown_8100594
 gUnknown_8100594: @ 8100594
-	.incbin "baserom.gba", 0x100594, 0x24
+	.4byte gUnknown_8100570
 
-	.global gUnknown_81005B8
-gUnknown_81005B8: @ 81005B8
-	.incbin "baserom.gba", 0x1005B8, 0x24
+	.global gExposedWoreOffMessage
+gExposedWoreOffMessage: @ 8100598
+	.string "The Exposed status wore off!\0"
+	.align 2, 0
 
-	.global gUnknown_81005DC
-gUnknown_81005DC: @ 81005DC
-	.incbin "baserom.gba", 0x1005DC, 0x34
+	.global gPtrExposedWoreOffMessage
+gPtrExposedWoreOffMessage: @ 81005B8
+	.4byte gExposedWoreOffMessage
 
-	.global gUnknown_8100610
-gUnknown_8100610: @ 8100610
-	.incbin "baserom.gba", 0x100610, 0x30
+	.global gSealedMoveReleasedMessage
+gSealedMoveReleasedMessage: @ 81005BC
+	.string "The sealed move was released!\0"
+	.align 2, 0
 
-	.global gUnknown_8100640
-gUnknown_8100640: @ 8100640
-	.incbin "baserom.gba", 0x100640, 0x20
+	.global gPtrSealedMoveReleasedMessage
+gPtrSealedMoveReleasedMessage: @ 81005DC
+	.4byte gSealedMoveReleasedMessage
 
-	.global gUnknown_8100660
-gUnknown_8100660: @ 8100660
-	.incbin "baserom.gba", 0x100660, 0x44
+	.global gCantLeechSeedSelfMessage
+gCantLeechSeedSelfMessage: @ 81005E0
+	.string "A leech seed can~27t be planted on the user!\0"
+	.align 2, 0
 
-	.global gUnknown_81006A4
-gUnknown_81006A4: @ 81006A4
-	.incbin "baserom.gba", 0x1006A4, 0x28
+	.global gPtrCantLeechSeedSelfMessage
+gPtrCantLeechSeedSelfMessage: @ 8100610
+	.4byte gCantLeechSeedSelfMessage
 
-	.global gUnknown_81006CC
-gUnknown_81006CC: @ 81006CC
-	.incbin "baserom.gba", 0x1006CC, 0x2C
+	.global gCantLeechSeedMonMessage
+gCantLeechSeedMonMessage: @ 8100614
+	.string "A leech seed couldn~27t be planted on\n"
+	.string "$m0!\0"
+	.align 2, 0
 
-	.global gUnknown_81006F8
-gUnknown_81006F8: @ 81006F8
-	.incbin "baserom.gba", 0x1006F8, 0x28
+	.global gPtrCantLeechSeedMonMessage
+gPtrCantLeechSeedMonMessage: @ 8100640
+	.4byte gCantLeechSeedMonMessage
 
-	.global gUnknown_8100720
-gUnknown_8100720: @ 8100720
-	.incbin "baserom.gba", 0x100720, 0x20
+	.global gMoveInterruptedMessage
+gMoveInterruptedMessage: @ 8100644
+	.string "The move was interrupted!\0"
+	.align 2, 0
 
-	.global gUnknown_8100740
-gUnknown_8100740: @ 8100740
-	.incbin "baserom.gba", 0x100740, 0x1C
+	.global gPtrMoveInterruptedMessage
+gPtrMoveInterruptedMessage: @ 8100660
+	.4byte gMoveInterruptedMessage
 
-	.global gUnknown_810075C
-gUnknown_810075C: @ 810075C
-	.incbin "baserom.gba", 0x10075C, 0xC
+	.global gClientFaintedMessage
+gClientFaintedMessage: @ 8100664
+	.string "Your client Pokémon has fainted!\n"
+	.string "A rescue call can~27t be made!\0"
+	.align 2, 0
+
+	.global gPtrClientFaintedMessage
+gPtrClientFaintedMessage: @ 81006A4
+	.4byte gClientFaintedMessage
+
+	.global gCantUseInDungeonMessage
+gCantUseInDungeonMessage: @ 81006A8
+	.string "It can~27t be used in a dungeon!\0"
+	.align 2, 0
+
+	.global gPtrCantUseInDungeonMessage
+gPtrCantUseInDungeonMessage: @ 81006CC
+	.4byte gCantUseInDungeonMessage
+
+	.global gForecastPreventsTypeSwitchMessage
+gForecastPreventsTypeSwitchMessage: @ 81006D0
+	.string "Its Forecast prevents type switching!\0"
+	.align 2, 0
+
+	.global gPtrForecastPreventsTypeSwitchMessage
+gPtrForecastPreventsTypeSwitchMessage: @ 81006F8
+	.4byte gForecastPreventsTypeSwitchMessage
+
+	.global gForecastPreventsConversion2Message
+gForecastPreventsConversion2Message: @ 81006FC
+	.string "Its Forecast prevents Conversion 2!\0"
+	.align 2, 0
+
+	.global gPtrForecastPreventsConversion2Message
+gPtrForecastPreventsConversion2Message: @ 8100720
+	.4byte gForecastPreventsConversion2Message
+
+	.global gStenchWavedOffMessage
+gStenchWavedOffMessage: @ 8100724
+	.string "The stench was waved off!\0"
+	.align 2, 0
+
+	.global gPtrStenchWavedOffMessage
+gPtrStenchWavedOffMessage: @ 8100740
+	.4byte gStenchWavedOffMessage
+
+	.global gProtectSavedItMessage
+gProtectSavedItMessage: @ 8100744
+	.string "Its Protect saved it!\0"
+	.align 2, 0
+
+	.global gPtrProtectSavedItMessage
+gPtrProtectSavedItMessage: @ 810075C
+	.4byte gProtectSavedItMessage
+
+	.string "pksdir0\0"
+	.align 2, 0
 
 	.global gUnknown_8100768
 gUnknown_8100768: @ 8100768
-	.incbin "baserom.gba", 0x100768, 0x30
+	.byte 0x00, 0x00, 0x0C, 0x02, 0xAA, 0x01, 0x00, 0x00
+	.4byte gUnknown_8100774
+
+	.global gUnknown_8100774
+gUnknown_8100774: @ 8100774
+	.string " Look~2c $m0!\n"
+	.string "$m2~27s over there!\0"
+	.align 2, 0
 
 	.global gUnknown_8100798
 gUnknown_8100798: @ 8100798
-	.incbin "baserom.gba", 0x100798, 0x88
+	.byte 0x00, 0x00, 0x04, 0x02, 0xAA, 0x01, 0x07, 0x00
+	.4byte gUnknown_81007E8
+	.byte 0x00, 0x00, 0x04, 0x02, 0xAA, 0x01, 0x00, 0x00
+	.4byte gUnknown_81007B0
+
+	.global gUnknown_81007B0
+gUnknown_81007B0: @ 81007B0
+	.string " Hey! Are you all right?\n"
+	.string "We~27ve come to rescue you!\0"
+	.align 2, 0
+
+	.global gUnknown_81007E8
+gUnknown_81007E8: @ 81007E8
+	.string " Hey! Are you all right?\n"
+	.string "We~27re here to rescue you!\0"
+	.align 2, 0
 
 	.global gUnknown_8100820
 gUnknown_8100820: @ 8100820
-	.incbin "baserom.gba", 0x100820, 0x24
+	.byte 0x00, 0x00, 0x01, 0x0D, 0x32, 0x00, 0x00, 0x00
+	.4byte gUnknown_810082C
+
+	.global gUnknown_810082C
+gUnknown_810082C: @ 810082C
+	.string " ...I...\n"
+	.string "I~27m scared.\0"
+	.align 2, 0
 
 	.global gUnknown_8100844
 gUnknown_8100844: @ 8100844
@@ -5517,7 +5710,20 @@ gUnknown_8100880: @ 8100880
 
 	.global gUnknown_8100928
 gUnknown_8100928: @ 8100928
-	.incbin "baserom.gba", 0x100928, 0xDC
+	.byte 0x00, 0x00, 0x00, 0x0D, 0xFC, 0x00, 0x00, 0x00
+	.4byte gUnknown_8100934
+
+	.global gUnknown_8100934
+gUnknown_8100934: @ 8100934
+	.string " How dare you!#W\n"
+	.string "It~27s their fault!#P"
+	.string " I haven~27t slept in days\n"
+	.string "because the earthquakes frighten me so!\n"
+	.string "Every night we had them!#P"
+	.string " Those earthquakes are\n"
+	.string "caused by this brat~27s ilk running wild\n"
+	.string "underground!\0"
+	.align 2, 0
 
 	.global gUnknown_8100A04
 gUnknown_8100A04: @ 8100A04
@@ -6137,7 +6343,16 @@ gUnknown_8103E28: @ 8103E28
 
 	.global gUnknown_8103E34
 gUnknown_8103E34: @ 8103E34
-	.incbin "baserom.gba", 0x103E34, 0x70
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gUnknown_8103E40
+
+	.global gUnknown_8103E40
+gUnknown_8103E40: @ 8103E40
+	.string "#+There appears to be no one here.#P"
+	.string "#+It~27s impossible to go farther.#W\n"
+	.string "#+It~27s time to go back.\0"
+	.align 2, 0
 
 	.global gUnknown_8103EA4
 gUnknown_8103EA4: @ 8103EA4
@@ -6641,101 +6856,174 @@ gUnknown_8106390: @ 8106390
 
 	.global gUnknown_81063C4
 gUnknown_81063C4: @ 81063C4
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x40, 0x3E, 0x10, 0x08
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gUnknown_8103E40
+
+@ Dialogue for Purity Forest
 
 	.global gUnknown_81063D0
 gUnknown_81063D0: @ 81063D0
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0xDC, 0x63, 0x10, 0x08
-        .string "#+Oh?#W\n"
-        .string "#+There~27s someone there.\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestSomeoneThereText
+
+	.global gPurityForestSomeoneThereText
+gPurityForestSomeoneThereText: @ 81063DC
+	.string "#+Oh?#W\n"
+	.string "#+There~27s someone there.\0"
+	.align 2, 0
 
 	.global gUnknown_8106400
 gUnknown_8106400: @ 8106400
-	.incbin "baserom.gba", 0x106400, 0x3C
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiIntroText
+
+	.global gPurityForestCelebiIntroText
+gPurityForestCelebiIntroText: @ 810640C
+	.string "#+It~27s...#W\n"
+	.string "#+The Time Travel Pokémon $m2!\0"
+	.align 2, 0
 
 	.global gUnknown_810643C
 gUnknown_810643C: @ 810643C
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x48, 0x64, 0x10, 0x08
-        .string "#+$m2 wants to join the team.\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiWantsToJoinText
+
+	.global gPurityForestCelebiWantsToJoinText
+gPurityForestCelebiWantsToJoinText: @ 8106448
+	.string "#+$m2 wants to join the team.\0"
+	.align 2, 0
 
 	.global gUnknown_8106468
 gUnknown_8106468: @ 8106468
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x74, 0x64, 0x10, 0x08
-        .string "#+$m2 joined the team! \0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiJoinedText
+
+	.global gPurityForestCelebiJoinedText
+gPurityForestCelebiJoinedText: @ 8106474
+	.string "#+$m2 joined the team! \0"
+	.align 2, 0
 
 	.global gUnknown_810648C
 gUnknown_810648C: @ 810648C
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x98, 0x64, 0x10, 0x08
-        .string "#+$m3 appears to\n"
-        .string "#+be very happy!\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiVeryHappyText
+
+	.global gPurityForestCelebiVeryHappyText
+gPurityForestCelebiVeryHappyText: @ 8106498
+	.string "#+$m3 appears to\n"
+	.string "#+be very happy!\0"
+	.align 2, 0
 
 	.global gUnknown_81064BC
 gUnknown_81064BC: @ 81064BC
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0xC8, 0x64, 0x10, 0x08
-        .string "#+It~27s delighted to have\n"
-        .string "#+joined the rescue team!\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiDelightedToJoinText
+
+	.global gPurityForestCelebiDelightedToJoinText
+gPurityForestCelebiDelightedToJoinText: @ 81064C8
+	.string "#+It~27s delighted to have\n"
+	.string "#+joined the rescue team!\0"
+	.align 2, 0
 
 	.global gUnknown_8106500
 gUnknown_8106500: @ 8106500
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x0C, 0x65, 0x10, 0x08
-        .string "#+$m0 turned down\n"
-        .string "#+the offer to join.\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestTurnedDownOfferText
+
+	.global gPurityForestTurnedDownOfferText
+gPurityForestTurnedDownOfferText: @ 810650C
+	.string "#+$m0 turned down\n"
+	.string "#+the offer to join.\0"
+	.align 2, 0
 
 	.global gUnknown_8106534
 gUnknown_8106534: @ 8106534
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x40, 0x65, 0x10, 0x08
-        .string "#+Celebi is very disappointed.\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiDisappointedText
+
+	.global gPurityForestCelebiDisappointedText
+gPurityForestCelebiDisappointedText: @ 8106540
+	.string "#+Celebi is very disappointed.\0"
+	.align 2, 0
 
 	.global gUnknown_8106560
 gUnknown_8106560: @ 8106560
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x6C, 0x65, 0x10, 0x08
-        .string "#+$m2 left\n"
-        .string "#+dejectedly...\0"
-        .align 2,0
-        .string "#+Allow $m2\n"
-        .string "#+to join the team?\0"
-        .align 2,0
+	.byte 0x04, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte gPurityForestCelebiLeftDejectedlyText
 
-	.global gUnknown_81065A8
-gUnknown_81065A8: @ 81065A8
-        .byte 0x88, 0x65, 0x10, 0x08
+	.global gPurityForestCelebiLeftDejectedlyText
+gPurityForestCelebiLeftDejectedlyText: @ 810656C
+	.string "#+$m2 left\n"
+	.string "#+dejectedly...\0"
+	.align 2, 0
 
-	.global gUnknown_81065AC
-gUnknown_81065AC: @ 81065AC
-	.incbin "baserom.gba", 0x1065AC, 0x60
+	.global gPurityForestAllowCelebiToJoinText
+gPurityForestAllowCelebiToJoinText: @ 8106588
+	.string "#+Allow $m2\n"
+	.string "#+to join the team?\0"
+	.align 2, 0
 
-	.global gUnknown_810660C
-gUnknown_810660C: @ 810660C
-	.incbin "baserom.gba", 0x10660C, 0x4
+	.global gPtrPurityForestAllowCelebiToJoinText
+gPtrPurityForestAllowCelebiToJoinText: @ 81065A8
+	.4byte gPurityForestAllowCelebiToJoinText
 
-	.global gUnknown_8106610
-gUnknown_8106610: @ 8106610
-	.incbin "baserom.gba", 0x106610, 0x2C
+	.global gPurityForestAllowCelebiToJoinPrompt
+gPurityForestAllowCelebiToJoinPrompt: @ 81065AC
+	.4byte gPurityForestAllowCelebiToJoinYesText
+	.4byte 0x00000001
+	.4byte gPurityForestAllowCelebiToJoinNoText
+	.4byte 0x00000002
+	.4byte 0x00000000
+	.4byte 0xFFFFFFFF
+
+	.global gPurityForestAllowCelebiToJoinNoText
+gPurityForestAllowCelebiToJoinNoText: @ 81065C4
+	.string "No.\0"
+	.align 2, 0
+
+	.global gPurityForestAllowCelebiToJoinYesText
+gPurityForestAllowCelebiToJoinYesText: @ 81065C8
+	.string "Yes.\0"
+	.align 2, 0
+
+	.global gPurityForestRefuseCelebiConfirmText
+gPurityForestRefuseCelebiConfirmText: @ 81065D0
+	.string "#+Are you sure?#W\n"
+	.string "#+You~27re sure you won~27t accept it?\0"
+	.align 2, 0
+
+	.global gPtrPurityForestRefuseCelebiConfirmText
+gPtrPurityForestRefuseCelebiConfirmText: @ 810660C
+	.4byte gPurityForestRefuseCelebiConfirmText
+
+	.global gPurityForestRefuseCelebiConfirmPrompt
+gPurityForestRefuseCelebiConfirmPrompt: @ 8106610
+	.4byte gPurityForestRefuseCelebiReconsiderText
+	.4byte 0x00000001
+	.4byte gPurityForestRefuseCelebiRefuseText
+	.4byte 0x00000002
+	.4byte 0x00000000
+	.4byte 0xFFFFFFFF
+
+	.global gPurityForestRefuseCelebiRefuseText
+gPurityForestRefuseCelebiRefuseText: @ 8106628
+	.string "Refuse.\0"
+	.align 2, 0
+
+	.global gPurityForestRefuseCelebiReconsiderText
+gPurityForestRefuseCelebiReconsiderText: @ 8106630
+	.string "Reconsider.\0"
+	.align 2, 0
 
 	.global gUnknown_810663C
 gUnknown_810663C: @ 810663C

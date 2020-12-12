@@ -68,7 +68,7 @@ _08048542:
 	b _08048586
 	.align 2, 0
 _08048560: .4byte gUnknown_202DF98
-_08048564: .4byte gUnknown_8100298
+_08048564: .4byte gPtrSelfHealPreventedHungerMessage
 _08048568:
 	movs r0, 0x9E
 	lsls r0, 1
@@ -623,7 +623,7 @@ _08048988:
 	ldr r0, _0804899C
 	b _08048978
 	.align 2, 0
-_0804899C: .4byte gUnknown_81006CC
+_0804899C: .4byte gPtrCantUseInDungeonMessage
 _080489A0:
 	movs r7, 0
 _080489A2:
@@ -1283,7 +1283,7 @@ sub_8048EB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048EC0: .4byte gUnknown_81003E0
+_08048EC0: .4byte gPtrIcePartCrumbledMessage
 	thumb_func_end sub_8048EB0
 
 	thumb_func_start sub_8048EC4
@@ -1295,7 +1295,7 @@ sub_8048EC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048ED4: .4byte gUnknown_8100404
+_08048ED4: .4byte gPtrRockPartCrumbledMessage
 	thumb_func_end sub_8048EC4
 
 	thumb_func_start sub_8048ED8
@@ -1307,7 +1307,7 @@ sub_8048ED8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048EE8: .4byte gUnknown_8100428
+_08048EE8: .4byte gPtrSteelPartCrumbledMessage
 	thumb_func_end sub_8048ED8
 
 	thumb_func_start sub_8048EEC
@@ -1319,7 +1319,7 @@ sub_8048EEC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048EFC: .4byte gUnknown_810044C
+_08048EFC: .4byte gPtrWishStoneCrumbledMessage
 	thumb_func_end sub_8048EEC
 
 	thumb_func_start sub_8048F00
@@ -1339,7 +1339,7 @@ sub_8048F00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048F24: .4byte gUnknown_8100494
+_08048F24: .4byte gPtrMusicBoxPlayedCrumbledMessage
 	thumb_func_end sub_8048F00
 
 	thumb_func_start sub_8048F28

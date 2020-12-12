@@ -1282,7 +1282,7 @@ _080434A6:
 	bl sub_80687AC
 	b _0804351C
 	.align 2, 0
-_080434B8: .4byte gUnknown_81002D8
+_080434B8: .4byte gPtrFinalChanceMessage
 _080434BC: .4byte gUnknown_203B450
 _080434C0: .4byte gUnknown_203B418
 _080434C4: .4byte 0x000037ec
@@ -1794,7 +1794,7 @@ _0804397C: .4byte 0xffffff00
 _08043980: .4byte 0xffff00ff
 _08043984: .4byte 0xff00ffff
 _08043988: .4byte gUnknown_202EDC8
-_0804398C: .4byte gUnknown_81006A4
+_0804398C: .4byte gPtrClientFaintedMessage
 _08043990: .4byte 0x00000222
 _08043994: .4byte gDungeonNameBannerPalette
 _08043998: .4byte gUnknown_203B40C
