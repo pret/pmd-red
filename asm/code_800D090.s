@@ -5596,7 +5596,7 @@ _0800FA20: .4byte gUnknown_203B0E4
 _0800FA24: .4byte gUnknown_2026E4E
 _0800FA28: .4byte 0x00001010
 _0800FA2C: .4byte 0x00004014
-_0800FA30: .4byte gUnknown_80D3570
+_0800FA30: .4byte gFriendAreaLocations
 _0800FA34: .4byte 0x00004a2c
 _0800FA38: .4byte 0x00004a28
 _0800FA3C: .4byte 0x00004a1c
@@ -6639,7 +6639,7 @@ _08010238:
 	ldrh r0, [r4, 0x2]
 	b _08010260
 	.align 2, 0
-_08010248: .4byte gUnknown_80D3570
+_08010248: .4byte gFriendAreaLocations
 _0801024C:
 	adds r2, 0x1
 	cmp r2, 0x7
@@ -6913,7 +6913,7 @@ _08010448:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010470: .4byte gUnknown_80D3F14
+_08010470: .4byte gDungeonCoordinates
 _08010474: .4byte 0xfffffc00
 _08010478: .4byte 0xfffffdff
 _0801047C: .4byte gUnknown_203B0E8
@@ -6986,7 +6986,7 @@ _080104E6:
 	b _0801050E
 	.align 2, 0
 _08010504: .4byte 0x00001108
-_08010508: .4byte gUnknown_80D3F14
+_08010508: .4byte gDungeonCoordinates
 _0801050C:
 	strb r0, [r4]
 _0801050E:
@@ -7047,7 +7047,7 @@ _0801057C: .4byte gUnknown_203B0E8
 _08010580: .4byte 0x00005114
 _08010584: .4byte 0x0000110c
 _08010588: .4byte 0x000052dc
-_0801058C: .4byte gUnknown_80D3F14
+_0801058C: .4byte gDungeonCoordinates
 _08010590: .4byte 0x000052d8
 _08010594: .4byte 0x000052de
 _08010598: .4byte 0x000052da
@@ -8025,7 +8025,7 @@ sub_8010D8C:
 	strh r0, [r1, 0x2]
 	bx lr
 	.align 2, 0
-_08010DA0: .4byte gUnknown_80D3F14
+_08010DA0: .4byte gDungeonCoordinates
 	thumb_func_end sub_8010D8C
 
 	thumb_func_start sub_8010DA4
