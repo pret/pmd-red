@@ -21,90 +21,90 @@ gUnformattedTypeStrings:: @ 810AD4C
 
 .global gSteelText
 gSteelText:
-.asciz "Steel"
+.string "Steel\0"
 .align 2,0
 
 .global gDarkText
 gDarkText:
-.asciz "Dark"
+.string "Dark\0"
 .align 2,0
 
 .global gDragonText
 gDragonText:
-.asciz "Dragon"
+.string "Dragon\0"
 .align 2,0
 
 .global gGhostText
 gGhostText:
-.asciz "Ghost"
+.string "Ghost\0"
 .align 2,0
 
 .global gRockText
 gRockText:
-.asciz "Rock"
+.string "Rock\0"
 .align 2,0
 
 .global gBugText
 gBugText:
-.asciz "Bug"
+.string "Bug\0"
 .align 2,0
 
 .global gPsychicText
 gPsychicText:
-.asciz "Psychic"
+.string "Psychic\0"
 .align 2,0
 
 .global gFlyingText
 gFlyingText:
-.asciz "Flying"
+.string "Flying\0"
 .align 2,0
 
 .global gGroundText
 gGroundText:
-.asciz "Ground"
+.string "Ground\0"
 .align 2,0
 
 .global gPoisonText
 gPoisonText:
-.asciz "Poison"
+.string "Poison\0"
 .align 2,0
 
 .global gFightingText
 gFightingText:
-.asciz "Fighting"
+.string "Fighting\0"
 .align 2,0
 
 .global gIceText
 gIceText:
-.asciz "Ice"
+.string "Ice\0"
 .align 2,0
 
 .global gElectricText
 gElectricText:
-.asciz "Electric"
+.string "Electric\0"
 .align 2,0
 
 .global gGrassText
 gGrassText:
-.asciz "Grass"
+.string "Grass\0"
 .align 2,0
 
 .global gWaterText
 gWaterText:
-.asciz "Water"
+.string "Water\0"
 .align 2,0
 
 .global gFireText
 gFireText:
-.asciz "Fire"
+.string "Fire\0"
 .align 2,0
 
 .global gNormalText
 gNormalText:
-.asciz "Normal"
+.string "Normal\0"
 .align 2,0
 
 .global gNoneText
 gNoneText:
-.asciz "None"
+.string "None\0"
 .align 2,0

@@ -13,14 +13,14 @@
     .byte 0x02, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Ignore it and play."
-    .asciz "At the last second."
-    .asciz "Study hard."
+    .string "Ignore it and play.\0"
+    .string "At the last second.\0"
+    .string "Study hard.\0"
     .byte 0xe4, 0x00, 0x0f, 0x08
     .byte 0x84, 0x00, 0x0f, 0x08
     .byte 0x54, 0x00, 0x0f, 0x08
     .string "A test is coming up.\n"
-    .asciz "How do you study for it?"
+    .string "How do you study for it?\0"
     .align 2,0
 
     @ Question 2, Category 1 (Hardy)
@@ -32,14 +32,14 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "No. "
+    .string "No. \0"
     .align 2,0
-    .asciz "Yes."
+    .string "Yes.\0"
     .align 2,0
     .byte 0x68, 0x01, 0x0f, 0x08
     .byte 0x34, 0x01, 0x0f, 0x08
     .byte 0x14, 0x01, 0x0f, 0x08
-    .asciz "Can you focus on something you like?"
+    .string "Can you focus on something you like?\0"
     .align 2,0
 
     @ Question 3, Category 1 (Hardy)
@@ -51,12 +51,12 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "No."
+    .string "No.\0"
     .byte 0xd8, 0x01, 0x0f, 0x08
     .byte 0xb0, 0x01, 0x0f, 0x08
     .byte 0x90, 0x01, 0x0f, 0x08
     .string "When the going gets tough~2c do you get\n"
-    .asciz "going?"
+    .string "going?\0"
     .align 2,0
 
     @ Question 4, Category 1 (Hardy)
@@ -70,17 +70,17 @@
     .byte 0x02, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "A little."
+    .string "A little.\0"
     .align 2,0
-    .asciz "Half."
+    .string "Half.\0"
     .align 2,0
-    .asciz "Full."
+    .string "Full.\0"
     .align 2,0
     .byte 0x80, 0x02, 0x0f, 0x08
     .byte 0x38, 0x02, 0x0f, 0x08
     .byte 0x08, 0x02, 0x0f, 0x08
     .string "There is a bucket. If you put\n"
-    .asciz "water in it~2c how high will you fill it?"
+    .string "water in it~2c how high will you fill it?\0"
     .align 2,0
 
     @ Question 1, Category 2 (Docile)
@@ -92,15 +92,15 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Small box."
+    .string "Small box.\0"
     .align 2,0
-    .asciz "Big box."
+    .string "Big box.\0"
     .align 2,0
     .byte 0x24, 0x03, 0x0f, 0x08
     .byte 0xe8, 0x02, 0x0f, 0x08
     .byte 0xc8, 0x02, 0x0f, 0x08
     .string "You are offered a choice of two gifts.\n"
-    .asciz "Which one will you take?"
+    .string "Which one will you take?\0"
     .align 2,0
 
     @ Question 2, Category 2 (Docile)
@@ -112,15 +112,15 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Take a sniff first."
+    .string "Take a sniff first.\0"
     .align 2,0
-    .asciz "Open a window right away."
+    .string "Open a window right away.\0"
     .align 2,0
     .byte 0xd8, 0x03, 0x0f, 0x08
     .byte 0x84, 0x03, 0x0f, 0x08
     .byte 0x64, 0x03, 0x0f, 0x08
     .string "You broke a rotten egg in your room!\n"
-    .asciz "What will you do?"
+    .string "What will you do?\0"
     .align 2,0
 
     @ Question 3, Category 2 (Docile)
@@ -135,18 +135,18 @@
     .byte 0x02, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Say thanks~2c but be cool."
+    .string "Say thanks~2c but be cool.\0"
     .align 2,0
-    .asciz "Say thanks with a joke."
+    .string "Say thanks with a joke.\0"
     .align 2,0
-    .asciz "Say thank you regularly."
+    .string "Say thank you regularly.\0"
     .align 2,0
     .byte 0xbc, 0x04, 0x0f, 0x08
     .byte 0x40, 0x04, 0x0f, 0x08
     .byte 0x10, 0x04, 0x0f, 0x08
     .string "A friend brought over something you~27d\n"
     .string "forgotten.#W\n"
-    .asciz "How do you thank your friend?"
+    .string "How do you thank your friend?\0"
     .align 2,0
 
     @ Question 4, Category 2 (Docile)
@@ -161,16 +161,16 @@
     .byte 0x02, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Is anyone watching...?"
+    .string "Is anyone watching...?\0"
     .align 2,0
-    .asciz "Yay! Yay!"
+    .string "Yay! Yay!\0"
     .align 2,0
-    .asciz "Turn it in to the police!"
+    .string "Turn it in to the police!\0"
     .align 2,0
     .byte 0xac, 0x05, 0x0f, 0x08
     .byte 0x40, 0x05, 0x0f, 0x08
     .byte 0x10, 0x05, 0x0f, 0x08
-    .asciz "There is a wallet at the side of a road."
+    .string "There is a wallet at the side of a road.\0"
     .align 2,0
 
     @ Question 1, Category 3 (Brave)
@@ -188,8 +188,8 @@
     .string "You~27re going bungee jumping for the first\n"
     .string "time.#PSince it~27s scary~2c you decide to test the\n"
     .string "jump with a doll...#W\n"
-    .string "And the bungee cord snaps!"
-    .asciz "#PWill you still try to make a jump anyway?"
+    .string "And the bungee cord snaps!#P"
+    .string "Will you still try to make a jump anyway?\0"
     .align 2,0
 
     @ Question 2, Category 3 (Brave)
@@ -204,17 +204,17 @@
     .byte 0x02, 0x00, 0x00, 0x0
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Ignore it."
+    .string "Ignore it.\0"
     .align 2,0
-    .asciz "Run."
+    .string "Run.\0"
     .align 2,0
-    .asciz "Fight."
+    .string "Fight.\0"
     .align 2,0
     .byte 0x50, 0x07, 0x0f, 0x08
     .byte 0x08, 0x07, 0x0f, 0x08
     .byte 0xd8, 0x06, 0x0f, 0x08
     .string "There is an alien invasion!\n"
-    .asciz "What will you do?"
+    .string "What will you do?\0"
     .align 2,0
 
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -225,9 +225,9 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Refuse."
+    .string "Refuse.\0"
     .align 2,0
-    .asciz "Rule with the aliens."
+    .string "Rule with the aliens.\0"
     .align 2,0
     .byte 0xe4, 0x07, 0x0f, 0x08
     .byte 0xa0, 0x07, 0x0f, 0x08
@@ -236,7 +236,7 @@
     .string "But~2c you are defeated...#PAn alien says to you...#P~93YOU HAVE IMPRESSED US.\n"
     .string "IT WAS A PLEASURE TO SEE.#PJOIN US~2c AND TOGETHER WE SHALL\n"
     .string "RULE THE WORLD.~94#W\n"
-    .asciz "What will you do?"
+    .string "What will you do?\0"
     .align 2,0
 
     .byte 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -247,15 +247,15 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Scream in unison."
+    .string "Scream in unison.\0"
     .align 2,0
-    .asciz "Yank open the door."
+    .string "Yank open the door.\0"
     .align 2,0
     .byte 0x28, 0x09, 0x0f, 0x08
     .byte 0xdc, 0x08, 0x0f, 0x08
     .byte 0xbc, 0x08, 0x0f, 0x08
     .string "There is a scream from behind a door!#W\n"
-    .asciz "How will you react?"
+    .string "How will you react?\0"
     .align 2,0
 
     .byte 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -996,7 +996,7 @@
     .byte 0x3c, 0x22, 0x0f, 0x08
     .string "There is a person you like...#W\n"
     .string "But there~27s no opportunity to get close.\n"
-    .asciz "What do you do?"
+    .string "What do you do?\0"
     .align 2,0
 
     @ Question 4, Category 13 (Quirky)
@@ -1013,11 +1013,11 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
 
-    .asciz "Choose either side."
+    .string "Choose either side.\0"
     .align 2,0
-    .asciz "It~27s a trap! Go left."
+    .string "It~27s a trap! Go left.\0"
     .align 2,0
-    .asciz "Instantly go right."
+    .string "Instantly go right.\0"
     .align 2,0
 
     .global QuirkyQuest4
@@ -1028,7 +1028,7 @@
 
     .string "The road forks to the right and left.\n"
     .string "You are told there is a treasure on the\n"
-    .asciz "right side. What do you do?"
+    .string "right side. What do you do?\0"
     .align 2,0
 
     @ Question 1, Category 14 (Miscellaneous)
@@ -1040,9 +1040,9 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Go with others."
+    .string "Go with others.\0"
     .align 2,0
-    .asciz "Go alone."
+    .string "Go alone.\0"
     .align 2,0
 
     .global MiscQuest1
@@ -1050,7 +1050,7 @@
     .byte 0xd4, 0x24, 0x0f, 0x08
     .byte 0x94, 0x24, 0x0f, 0x08
     .byte 0x74, 0x24, 0x0f, 0x08
-    .asciz "On vacation outings~2c you want to..."
+    .string "On vacation outings~2c you want to...\0"
     .align 2,0
 
     @ Question 2, Category 14 (Miscellaneous)
@@ -1062,7 +1062,7 @@
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
-    .asciz "Don~27t care."
+    .string "Don~27t care.\0"
     .align 2,0
 
     .global MiscQuest2
@@ -1071,7 +1071,7 @@
     .byte 0x1c, 0x25, 0x0f, 0x08 @ Pointer to Answers Pointer Table
     .byte 0xfc, 0x24, 0x0f, 0x08 @ Nature Points for Answers
     .string "It~27s the summer festival!\n"
-    .asciz "Do you like carnivals?"
+    .string "Do you like carnivals?\0"
     .align 2,0
 
     @ Question 3, Category 14 (Miscellaneous)
@@ -1091,12 +1091,12 @@
 
     .global MiscQuest3NotHappy
     MiscQuest3NotHappy:
-    .asciz "Not happy."
+    .string "Not happy.\0"
     .align 2,0
 
     .global MiscQuest3Happy
     MiscQuest3Happy:
-    .asciz "Happy!"
+    .string "Happy!\0"
     .align 2,0
 
     .global MiscQuest3
@@ -1108,7 +1108,7 @@
     .global MiscQuest3Text
     MiscQuest3Text:
     .string "Somebody calls you ~93weird but funny.~94\n"
-    .asciz "How does that make you feel?"
+    .string "How does that make you feel?\0"
     .align 2,0
 
 	.global gPersonalityQuestionPointerTable
@@ -1190,7 +1190,7 @@ gNatureQuestionTable: @ 80F2704 (Categories??)
 
 	.global gGenderText
 gGenderText: @ 80F273C
-	.asciz "Are you a boy or a girl?"
+	.string "Are you a boy or a girl?\0"
         .align 2,0
         .byte 0x3C, 0x27, 0x0F, 0x08 @ pointer to above text
 
@@ -1205,14 +1205,13 @@ gUnknown_80F275C: @ 80F275C
 
         .global GirlText
         GirlText:
-        .asciz "Girl."
+        .string "Girl.\0"
         .align 2,0
 
         .global BoyText
         BoyText:
-        .string "Boy."
+        .string "Boy.\0"
 
-        .byte 0x00
         .byte 0x01
         .byte 0x02
         .byte 0x03
@@ -1260,8 +1259,7 @@ gStarters: @ 80F278E
 	.global gStarterReveal
 gStarterReveal: @ 80F27C4
         .string "\n"
-        .string "#+The Pokémon $m0!"
-        .byte 0
+        .string "#+The Pokémon $m0!\0"
         .4byte gStarterReveal
 
 	.global gUnknown_80F27DC
@@ -1269,13 +1267,13 @@ gUnknown_80F27DC: @ 80F27DC
         .string "#+This is the final step.#W\n"
         .string "#+Who would you like to have as a partner?#P" @ #P -> scroll down
         .string "#+Choose the Pokémon you want\n"
-        .asciz "#+as your partner from this group."
+        .string "#+as your partner from this group.\0"
         .align 2,0
         .4byte gUnknown_80F27DC
 
 	.global gUnknown_80F286C
 gUnknown_80F286C: @ 80F286C
-        .asciz "#+What is your partner~27s nickname?"
+        .string "#+What is your partner~27s nickname?\0"
         .align 2,0
         .4byte gUnknown_80F286C
 
@@ -1284,7 +1282,7 @@ gUnknown_80F2898: @ 80F2898
         .string "#+OK! We~27re all set!#P"
         .string "#+Let~27s get you into the\n"
         .string "#+world of Pokémon!#P"
-        .asciz "#+Go for it!"
+        .string "#+Go for it!\0"
         .align 2,0
         .4byte gUnknown_80F2898
 
@@ -1321,7 +1319,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+If you realize how selfishly\n"
         .string "#+you~27re behaving~2c try to think\n"
         .string "#+before you do anything rash.#P"
-        .asciz  "#+A quirky person like you should be..."
+        .string "#+A quirky person like you should be...\0"
         .align 2,0
 
         .global gLonelyDescription
@@ -1347,7 +1345,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+You know what it~27s like when you aren~27t\n"
         .string "#+alone~2c so that~27s why you feel lonesome.#P"
         .string "#+And that~27s why you aren~27t really alone.#P"
-        .asciz "#+A lonely person like you should be..."
+        .string "#+A lonely person like you should be...\0"
         .align 2,0
 
         .global gRelaxedDescription
@@ -1372,7 +1370,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+off into the distance...#P"
         .string "#+It should make that someone\n"
         .string "#+special~27s pulse race.#P"
-        .asciz  "#+A relaxed person like you should be..."
+        .string "#+A relaxed person like you should be...\0"
         .align 2,0
 
         .global gCalmDescription
@@ -1392,7 +1390,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+And even a little sloppy.#P"
         .string "#+You might want to keep\n"
         .string "#+those points in mind.#P"
-        .asciz  "#+A calm person like you should be..."
+        .string "#+A calm person like you should be...\0"
         .align 2,0
 
         .global gSassyDescription
@@ -1418,7 +1416,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+attitude is what defines you.#P"
         .string "#+It makes you exasperating and\n"
         .string "#+appealing at the same time.#P"
-        .asciz  "#+A sassy person like you should be..."
+        .string "#+A sassy person like you should be...\0"
         .align 2,0
 
         .global gHastyDescription
@@ -1439,7 +1437,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+the A Button repeatedly now.#P"
         .string "#+Beware--getting too easily irritated\n"
         .string "#+just isn~27t good for your well-being.#P"
-        .asciz  "#+A hasty person like you should be..."
+        .string "#+A hasty person like you should be...\0"
         .align 2,0
 
         .global gTimidDescription
@@ -1458,7 +1456,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+also your good point!#P"
         .string "#+Because those who know fear are\n"
         .string "#+those who know true courage.#P"
-        .asciz  "#+A timid person like you should be..."
+        .string "#+A timid person like you should be...\0"
         .align 2,0
 
         .global gNaiveDescription
@@ -1476,7 +1474,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+You~27re always on the move.#P"
         .string "#+You can also be selfish~2c\n"
         .string "#+so you should watch yourself.#P"
-        .asciz  "#+A naive person like you should be..."
+        .string "#+A naive person like you should be...\0"
         .align 2,0
 
         .global gImpishDescription
@@ -1497,7 +1495,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+to let their feelings be known.#P"
         .string "#+There~27s someone out there who~27s\n"
         .string "#+afraid to declare their love for you!#P"
-        .asciz "#+An impish person like you should be..."
+        .string "#+An impish person like you should be...\0"
         .align 2,0
 
         .global gJollyDescription
@@ -1513,7 +1511,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+and say things that get you in trouble.#P"
         .string "#+You should learn to think before\n"
         .string "#+saying or doing anything.#P"
-        .asciz "#+A jolly person like you should be..."
+        .string "#+A jolly person like you should be...\0"
         .align 2,0
 
         .global gBraveDescription
@@ -1530,7 +1528,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+Fight the forces of evil!#P"
         .string "#+......#WIf I~27m wrong...#W\n"
         .string "#+Work at becoming a true hero!#P"
-        .asciz "#+A brave person like you should be..."
+        .string "#+A brave person like you should be...\0"
         .align 2,0
 
         .global gDocileDescription
@@ -1545,7 +1543,7 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+I don~27t think so.#P"
         .string "#+You yourself should be\n"
         .string "#+the best judge of that.#P"
-        .asciz "#+A docile person like you should be..."
+        .string "#+A docile person like you should be...\0"
         .align 2,0
 
         .global gHardyDescription
@@ -1560,5 +1558,5 @@ gPersonalityTypeDescriptionTable: @ 80F28F4
         .string "#+point of even feuding with friends...#P"
         .string "#+Nothing will go right for you when you~27re\n"
         .string "#+irritated~2c so learn to laugh it off.#P"
-        .string "#+A hardy person like you should be..."
+        .string "#+A hardy person like you should be...\0"
         .align 2,0

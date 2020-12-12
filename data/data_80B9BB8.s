@@ -1,6 +1,6 @@
 	.section .rodata
 
-	.asciz "pksdir0"
+	.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80B9BB8
@@ -9,15 +9,15 @@ gUnknown_80B9BB8: @ 80B9BB8
         .byte 0x08, 0x00, 0x00, 0x00
         .byte 0x10, 0x00, 0x00, 0x00
         .byte 0x18, 0x00, 0x00, 0x00
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "PKD ROM USER DATA 000000"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "PKD ROM USER DATA 000000\0"
 
 	.global gUnknown_80B9BF1
 gUnknown_80B9BF1: @ 80B9BF1
         .byte 0x36, 0x27, 0x46, 0x01
         .byte 0xB9, 0x48, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80B9C00
 gUnknown_80B9C00: @ 80B9C00
@@ -30,11 +30,11 @@ gUnknown_80B9C60: @ 80B9C60
         .byte 0x00, 0x00, 0x00, 0x00
 
 gUnknown_80B9C6C:: @ 80B9C6C
-        .asciz "efob001"
+        .string "efob001\0"
         .align 2,0
 
 gUnknown_80B9C74:: @ 80B9C74
-        .asciz "efob000"
+        .string "efob000\0"
         .align 2,0
 
 	.global gUnknown_80B9C7C
@@ -51,7 +51,7 @@ gUnknown_80B9C9C: @ 80B9C9C
         .byte 0xff, 0xff, 0xff, 0xff
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x01, 0x00, 0x00, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80B9CC4
@@ -92,21 +92,21 @@ gUnknown_80CE73C: @ 80CE73C
         .byte 0x00, 0x00
         .byte 0xd2, 0x00
         .byte 0x00, 0x00
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80CE77C
 gUnknown_80CE77C: @ 80CE77C
-        .asciz "efob%03d"
+        .string "efob%03d\0"
         .align 2,0
 
 	.global gUnknown_80CE788
 gUnknown_80CE788: @ 80CE788
-        .asciz "efbg%03d"
+        .string "efbg%03d\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 @ Status Conditions Graphics
 
@@ -125,7 +125,7 @@ gUnknown_80D3474: @ 80D3474
         .global gUnknown_80D3564
 gUnknown_80D3564: @ 80D3564
         .byte 0,0,0,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 @ Friend Area Data
@@ -173,47 +173,47 @@ gUnknown_80D4014: @ 80D4014
         .byte 0x3C, 0x40, 0x0D, 0x08
         .byte 0x34, 0x40, 0x0D, 0x08
         .byte 0x28, 0x40, 0x0D, 0x08
-        .asciz "wmp2fon1"
+        .string "wmp2fon1\0"
         .align 2,0
-        .asciz "wmp2pal"
+        .string "wmp2pal\0"
         .align 2,0
-        .asciz "wmp2cani"
+        .string "wmp2cani\0"
         .align 2,0
-        .asciz "wmp2mcc"
+        .string "wmp2mcc\0"
         .align 2,0
-        .asciz "wmp2font"
+        .string "wmp2font\0"
         .align 2,0
 
 	.global gUnknown_80D405C
 gUnknown_80D405C: @ 80D405C
-        .asciz "ax%03d"
+        .string "ax%03d\0"
         .align 2,0
 
 	.global gUnknown_80D4064
 gUnknown_80D4064: @ 80D4064
-        .asciz "wmapspr"
+        .string "wmapspr\0"
         .align 2,0
 
 	.global gUnknown_80D406C
 gUnknown_80D406C: @ 80D406C
-        .asciz "palet"
+        .string "palet\0"
         .align 2,0
 
 	.global gUnknown_80D4074
 gUnknown_80D4074: @ 80D4074
-        .asciz "#+$m0"
+        .string "#+$m0\0"
         .align 2,0
 
 	.global gUnknown_80D407C
 gUnknown_80D407C: @ 80D4074
-        .asciz "Yes"
+        .string "Yes\0"
         .align 2,0
 
 	.global gUnknown_80D4080
 gUnknown_80D4080: @ 80D4080
-        .asciz "No"
+        .string "No\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80D408C
@@ -233,32 +233,32 @@ gUnknown_80D40C4: @ 80D40C4
 
 	.global gUnknown_80D40E4
 gUnknown_80D40E4: @ 80D40E4
-        .asciz "ax%03d"
+        .string "ax%03d\0"
         .align 2,0
 
 	.global gUnknown_80D40EC
 gUnknown_80D40EC: @ 80D40EC
-        .asciz "wmapspr"
+        .string "wmapspr\0"
         .align 2,0
 
 	.global gUnknown_80D40F4
 gUnknown_80D40F4: @ 80D40F4
-        .asciz "palet"
+        .string "palet\0"
         .align 2,0
 
 	.global gUnknown_80D40FC
 gUnknown_80D40FC: @ 80D40FC
-        .asciz "#+%s"
+        .string "#+%s\0"
         .align 2,0
 
 	.global gUnknown_80D4104
 gUnknown_80D4104: @ 80D4104
-	.asciz "Where would you like to go?"
+	.string "Where would you like to go?\0"
         .align 2,0
 
 	.global gUnknown_80D4120
 gUnknown_80D4120: @ 80D4120
-	.asciz "$i0"
+	.string "$i0\0"
         .align 2,0
 
 	.global gUnknown_80D4124
@@ -276,139 +276,139 @@ gUnknown_80D4144: @ 80D4144
         .byte 0x32, 0x01
         .byte 0x33, 0x01
         .byte 0x00, 0x00
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
         .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
         .byte 0xff, 0xff, 0xff, 0xff
         .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
-        .asciz "none"
+        .string "none\0"
         .align 2,0
         .byte 0x84, 0x41, 0x0d, 0x08 @ Pointer to default
         .byte 0xff, 0xff, 0xff, 0xff
         .byte 0x70, 0x41, 0x0d, 0x08 @ Pointer to none
-        .asciz "default"
+        .string "default\0"
 
 	.global gUnknown_80D418C
 gUnknown_80D418C: @ 80D418C
         .string "func = '%s'\n"
-        .asciz "file = '%s'  line = %5d"
+        .string "file = '%s'  line = %5d\0"
 
 	.global gNotEntryText
 gNotEntryText: @ 80D41B0
-        .asciz "--- not entry ---"
+        .string "--- not entry ---\0"
         .align 2,0
 
 	.global gUnknown_80D41C4
 gUnknown_80D41C4: @ 80D41C4
         .string "%sfunc = '%s'\n"
-        .asciz "file = '%s'  line = %5d\n"
+        .string "file = '%s'  line = %5d\n\0"
         .align 2,0
 
 	.global gUnknown_80D41EC
 gUnknown_80D41EC: @ 80D41EC
         .string "func = '%s'\n"
-        .asciz "file = '%s'  line = %5d\n"
+        .string "file = '%s'  line = %5d\n\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80D421C
 gUnknown_80D421C: @ 80D421C
-        .asciz "  Print  "
+        .string "  Print  \0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "Performance"
+        .string "Performance\0"
         .align 2,0
-        .asciz "Memory Card"
+        .string "Memory Card\0"
         .align 2,0
-        .asciz "Memory"
+        .string "Memory\0"
         .align 2,0
-        .asciz "Flag"
+        .string "Flag\0"
         .align 2,0
-        .asciz "Se"
+        .string "Se\0"
         .align 2,0
-        .asciz "Bgm"
+        .string "Bgm\0"
         .align 2,0
-        .asciz "Sound"
+        .string "Sound\0"
         .align 2,0
-        .asciz "Dungeon"
+        .string "Dungeon\0"
         .align 2,0
-        .asciz "GroundScript"
+        .string "GroundScript\0"
         .align 2,0
-        .asciz "Ground"
+        .string "Ground\0"
         .align 2,0
 
 	.global gNotMountText
 gNotMountText: @ 80D4288
-        .asciz "not mount log system"
+        .string "not mount log system\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 	.global gFatalText
 gFatalText: @ 80D42C0
-        .asciz "!!!!! Fatal !!!!!\n"
+        .string "!!!!! Fatal !!!!!\n\0"
         .align 2,0
 
 	.global gUnknown_80D42D4
 gUnknown_80D42D4: @ 80D42D4
-	.asciz "%s\n"
+	.string "%s\n\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "POKE_DUNGEON__05"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "POKE_DUNGEON__05\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80D4354
 gUnknown_80D4354: @ 80D4354
         .string "#+The game data is corrupted.\n"
-        .asciz "#+Your data will be erased."
+        .string "#+Your data will be erased.\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80D4398
 gUnknown_80D4398: @ 80D4398
         .string "#+Saving your adventure...\n"
-        .asciz "#+Please don~27t turn off the power."
+        .string "#+Please don~27t turn off the power.\0"
         .align 2,0
 
 	.global gUnknown_80D43D8
 gUnknown_80D43D8: @ 80D43D8
         .string "#+Writing to GBA Game Pak.\n"
         .string "#+Do not remove the GBA Game Pak.\n"
-        .asciz "#+Please wait with the power on."
+        .string "#+Please wait with the power on.\0"
         .align 2,0
 
 	.global gUnknown_80D4438
 gUnknown_80D4438: @ 80D4438
-        .asciz "#+Save completed!"
+        .string "#+Save completed!\0"
         .align 2,0
 
 	.global gUnknown_80D444C
 gUnknown_80D444C: @ 80D444C
         .string "#+The data could not be written.\n"
         .string "#+Please turn off the power and remove\n"
-        .asciz "#+and reinsert the DS Card."
+        .string "#+and reinsert the DS Card.\0"
         .align 2,0
 
 	.global gUnknown_80D44B0
 gUnknown_80D44B0: @ 80D44B0
-        .asciz "#+Save failed."
+        .string "#+Save failed.\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80D44C8
 gUnknown_80D44C8: @ 80D44C8
@@ -417,7 +417,7 @@ gUnknown_80D44C8: @ 80D44C8
 	.global gUnknown_80D45AC
 gUnknown_80D45AC: @ 80D45AC
         .string "#+Quicksaving your adventure...\n"
-        .asciz "#+Please don~27t turn off the power."
+        .string "#+Please don~27t turn off the power.\0"
         .align 2,0
 
 	.global gUnknown_80D45F4
@@ -434,9 +434,9 @@ gUnknown_80D473C: @ 80D473C
 
 	.global gUnknown_80D47A0
 gUnknown_80D47A0: @ 80D47A0
-        .asciz "#+Save failed."
+        .string "#+Save failed.\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80D47B8
 gUnknown_80D47B8: @ 80D47B8
@@ -451,7 +451,7 @@ gUnknown_80D47C8: @ 80D47C8
 
 	.global gUnknown_80D4828
 gUnknown_80D4828: @ 80D4828
-        .asciz "#C%c%s"
+        .string "#C%c%s\0"
         .align 2,0
 
 	.global gUnknown_80D4830
@@ -466,9 +466,9 @@ gUnknown_80D485C: @ 80D485C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0xFF, 0xFF, 0xFF, 0xFF
-        .asciz "No"
+        .string "No\0"
         .align 2,0
-        .asciz "*Yes"
+        .string "*Yes\0"
         .align 2,0
 
 	.global gUnknown_80D4880
@@ -479,8 +479,8 @@ gUnknown_80D4880: @ 80D4880
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00 @ End of table
         .byte 0xFF, 0xFF, 0xFF, 0xFF
-        .asciz "*No"
-        .asciz "Yes"
+        .string "*No\0"
+        .string "Yes\0"
         .align 2,0
 
 	.global gUnknown_80D48A0
@@ -527,120 +527,120 @@ gUnknown_80D48F8: @ 80D48F8
 
 	.global gUnknown_80D4900
 gUnknown_80D4900: @ 80D4900
-        .asciz "%d"
+        .string "%d\0"
         .align 2,0
 
 	.global gUnknown_80D4904
 gUnknown_80D4904: @ 80D4904
-        .asciz "%*d"
+        .string "%*d\0"
         .align 2,0
 
 	.global gUnknown_80D4908
 gUnknown_80D4908: @ 80D4908
-        .asciz "%0*d"
+        .string "%0*d\0"
         .align 2,0
 
 	.global gUnknown_80D4910
 gUnknown_80D4910: @ 80D4910
-        .asciz "$"
+        .string "$\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "Yes"
+        .string "pksdir0\0"
+        .string "Yes\0"
 
 	.global gUnknown_80D4920
 gUnknown_80D4920: @ 80D4920
         .byte 0x1C, 0x49, 0x0D, 0x08 @ Pointer to Yes
-        .asciz "No"
+        .string "No\0"
         .align 2,0
 
 	.global gUnknown_80D4928
 gUnknown_80D4928: @ 80D4928
         .byte 0x24, 0x49, 0x0D, 0x08 @ Pointer to No
-        .asciz "Cancel"
+        .string "Cancel\0"
         .align 2,0
 
 	.global gUnknown_80D4934
 gUnknown_80D4934: @ 80D4934
         .byte 0x2C, 0x49, 0x0D, 0x08 @ Pointer to Cancel
-        .asciz "Trash "
+        .string "Trash \0"
         .align 2,0
 
 	.global gUnknown_80D4940
 gUnknown_80D4940: @ 80D4940
         .byte 0x38, 0x49, 0x0D, 0x08
-        .asciz "Delete"
+        .string "Delete\0"
         .align 2,0
 
 	.global gUnknown_80D494C
 gUnknown_80D494C: @ 80D494C
         .byte 0x44, 0x49, 0x0D, 0x08
-        .asciz "Store"
+        .string "Store\0"
         .align 2,0
 
 	.global gUnknown_80D4958
 gUnknown_80D4958: @ 80D4958
         .byte 0x50, 0x49, 0x0D, 0x08
-        .asciz "Take"
+        .string "Take\0"
         .align 2,0
 
 	.global gUnknown_80D4964
 gUnknown_80D4964: @ 80D4964
         .byte 0x5C, 0x49, 0x0D, 0x08 @ Pointer to Take
-        .asciz "Info"
+        .string "Info\0"
         .align 2,0
 
 	.global gUnknown_80D4970
 gUnknown_80D4970: @ 80D4970
         .byte 0x68, 0x49, 0x0D, 0x08 @ Pointer to Info
-        .asciz "Buy"
+        .string "Buy\0"
         .align 2,0
 
 	.global gUnknown_80D4978
 gUnknown_80D4978: @ 80D4978
         .byte 0x74, 0x49, 0x0D, 0x08 @ Pointer to Buy
-        .asciz "Sell "
+        .string "Sell \0"
         .align 2,0
 
 	.global gUnknown_80D4984
 gUnknown_80D4984: @ 80D4984
         .byte 0x7C, 0x49, 0x0D, 0x08 @ Pointer to Sell
-        .asciz "Accept"
+        .string "Accept\0"
         .align 2,0
 
 	.global gUnknown_80D4990
 gUnknown_80D4990: @ 80D4990
         .byte 0x88, 0x49, 0x0D, 0x08 @ Pointer to Accept
-        .asciz "Check"
+        .string "Check\0"
         .align 2,0
 
 	.global gUnknown_80D499C
 gUnknown_80D499C: @ 80D499C
         .byte 0x94, 0x49, 0x0D, 0x08 @ Pointer to Check
-        .asciz "Friend"
+        .string "Friend\0"
         .align 2,0
 
 	.global gUnknown_80D49A8
 gUnknown_80D49A8: @ 80D49A8
         .byte 0xA0, 0x49, 0x0D, 0x08 @ Pointer to Friend
-        .asciz "Exit"
+        .string "Exit\0"
         .align 2,0
 
 	.global gUnknown_80D49B4
 gUnknown_80D49B4: @ 80D49B4
         .byte 0xAC, 0x49, 0x0D, 0x08 @ Poiner to Exit
-        .asciz "???"
+        .string "???\0"
         .align 2,0
 
 	.global gUnknown_80D49BC
 gUnknown_80D49BC: @ 80D49BC
         .byte 0xB8, 0x49, 0x0D, 0x08 @ Pointer to the question marks above
-        .asciz "Deposit?"
+        .string "Deposit?\0"
         .align 2,0
 
 	.global gUnknown_80D49CC
 gUnknown_80D49CC: @ 80D49CC
         .byte 0xC0, 0x49, 0x0D, 0x08 @ Pointer to Deposit
-        .asciz "Withdraw?"
+        .string "Withdraw?\0"
         .align 2,0
 
 	.global gUnknown_80D49DC
@@ -701,7 +701,7 @@ gUnknown_80DAFA0: @ 80DAFA0
         .byte 0x06, 0x00, 0x03, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DAFC0
@@ -776,12 +776,12 @@ gUnknown_80DB580: @ 80DB580
 
 	.global gUnknown_80DB598
 gUnknown_80DB598: @ 80DB598
-        .asciz "#C4OVR#R"
+        .string "#C4OVR#R\0"
         .align 2,0
 
 	.global gUnknown_80DB5A4
 gUnknown_80DB5A4: @ 80DB5A4
-        .asciz "#C6INS#R"
+        .string "#C6INS#R\0"
         .align 2,0
 
 	.global gUnknown_80DB5B0
@@ -790,12 +790,12 @@ gUnknown_80DB5B0: @ 80DB5B0
 
 	.global gUnknown_80DB5B8
 gUnknown_80DB5B8: @ 80DB5B8
-        .asciz "#C%c%s"
+        .string "#C%c%s\0"
         .align 2,0
 
 	.global gUnknown_80DB5C0
 gUnknown_80DB5C0: @ 80DB5C0
-        .asciz "What is your name?"
+        .string "What is your name?\0"
         .align 2,0
 
 	.global gUnknown_80DB5D4
@@ -804,34 +804,34 @@ gUnknown_80DB5D4: @ 80DB5D4
 
 	.global gUnknown_80DB5F8
 gUnknown_80DB5F8: @ 80DB5F8
-        .asciz "What is your partner~27s nickname?"
+        .string "What is your partner~27s nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB61C
 gUnknown_80DB61C: @ 80DB61C
-        .asciz "What is your team~27s name?"
+        .string "What is your team~27s name?\0"
         .align 2,0
 
 	.global gUnknown_80DB638
 gUnknown_80DB638: @ 80DB638
-        .asciz "Please enter the password."
+        .string "Please enter the password.\0"
         .align 2,0
 
 	.global gUnknown_80DB654
 gUnknown_80DB654: @ 80DB654
-        .asciz "#C2%s#R"
+        .string "#C2%s#R\0"
         .align 2,0
 
 	.global gUnknown_80DB65C
 gUnknown_80DB65C: @ 80DB65C
-        .asciz "#C5%s#R"
+        .string "#C5%s#R\0"
         .align 2,0
 
 	.global gUnknown_80DB664
 gUnknown_80DB664: @ 80DB664
-        .asciz "%s"
+        .string "%s\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
@@ -842,19 +842,19 @@ gUnknown_80DB664: @ 80DB664
 
 	.global gUnknown_80DB688
 gUnknown_80DB688: @ 80DB688
-        .asciz "Is the name #C5$m0#R OK?"
+        .string "Is the name #C5$m0#R OK?\0"
         .align 2,0
 
 	.global gUnknown_80DB6A4
 gUnknown_80DB6A4: @ 80DB6A4
-        .asciz "This name is too long."
+        .string "This name is too long.\0"
         .align 2,0
 
 	.global gUnknown_80DB6BC
 gUnknown_80DB6BC: @ 80DB6BC
-        .asciz "Please enter a name."
+        .string "Please enter a name.\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB6DC
@@ -886,19 +886,19 @@ gUnknown_80DB70C: @ 80DB70C
 
 	.global gUnknown_80DB724
 gUnknown_80DB724: @ 80DB724
-        .asciz "Money: "
+        .string "Money: \0"
         .align 2,0
 
 	.global gUnknown_80DB72C
 gUnknown_80DB72C: @ 80DB72C
-        .asciz "Savings: "
+        .string "Savings: \0"
         .align 2,0
 
 	.global gUnknown_80DB738
 gUnknown_80DB738: @ 80DB738
-        .asciz "Money"
+        .string "Money\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DB748
 gUnknown_80DB748: @ 80DB748
@@ -938,9 +938,9 @@ gUnknown_80DB790: @ 80DB790
 
 	.global gUnknown_80DB7A8
 gUnknown_80DB7A8: @ 80DB7A8
-        .asciz "Number?"
+        .string "Number?\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB7B8
@@ -975,9 +975,9 @@ gUnknown_80DB818: @ 80DB818
 
 	.global gUnknown_80DB830
 gUnknown_80DB830: @ 80DB830
-        .asciz "Number?"
+        .string "Number?\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB840
@@ -1018,9 +1018,9 @@ gUnknown_80DB888: @ 80DB888
 
 	.global gUnknown_80DB8A0
 gUnknown_80DB8A0: @ 80DB8A0
-        .asciz "Sell All"
+        .string "Sell All\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB8B4
@@ -1043,13 +1043,13 @@ gUnknown_80DB8CC: @ 80DB8CC
 
 	.global gUnknown_80DB8E4
 gUnknown_80DB8E4: @ 80DB8E4
-        .asciz "Goods"
+        .string "Goods\0"
         .align 2,0
 
 	.global gUnknown_80DB8EC
 gUnknown_80DB8EC: @ 80DB8EC
-        .asciz "#C2%s#R"
-        .asciz "pksdir0"
+        .string "#C2%s#R\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB8FC
@@ -1062,13 +1062,13 @@ gUnknown_80DB914: @ 80DB914
 
 	.global gUnknown_80DB92C
 gUnknown_80DB92C: @ 80DB92C
-        .asciz "Goods"
+        .string "Goods\0"
         .align 2,0
 
 	.global gUnknown_80DB934
 gUnknown_80DB934: @ 80DB934
-        .asciz "#C2%s#R"
-        .asciz "pksdir0"
+        .string "#C2%s#R\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB944
@@ -1081,12 +1081,12 @@ gUnknown_80DB95C: @ 80DB95C
 
 	.global gUnknown_80DB974
 gUnknown_80DB974: @ 80DB974
-        .asciz "Team Toolbox A"
+        .string "Team Toolbox A\0"
         .align 2,0
 
 	.global gUnknown_80DB984
 gUnknown_80DB984: @ 80DB984
-        .asciz "Team Toolbox B"
+        .string "Team Toolbox B\0"
         .align 2,0
 
 	.global gUnknown_80DB994
@@ -1095,31 +1095,31 @@ gUnknown_80DB994: @ 80DB994
 
 	.global gUnknown_80DB9A0
 gUnknown_80DB9A0: @ 80DB9A0
-        .asciz "#C2%s#R"
+        .string "#C2%s#R\0"
         .align 2,0
 
 	.global gUnknown_80DB9A8
 gUnknown_80DB9A8: @ 80DB9A8
-        .asciz "Items"
+        .string "Items\0"
         .align 2,0
 
 	.global gUnknown_80DB9B0
 gUnknown_80DB9B0: @ 80DB9B0
-        .asciz "/"
+        .string "/\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DB9BC
 gUnknown_80DB9BC: @ 80DB9BC
         .string "#+Who will learn the move\n"
-        .asciz "#+#C5$m7#R?"
+        .string "#+#C5$m7#R?\0"
         .align 2,0
 
 	.global gUnknown_80DB9E4
 gUnknown_80DB9E4: @ 80DB9E4
         .string "#+#CM$m8#R learned\n"
-        .asciz "#+the move #C5$m7#R!"
+        .string "#+the move #C5$m7#R!\0"
         .align 2,0
 
 	.global gUnknown_80DBA0C
@@ -1128,8 +1128,8 @@ gUnknown_80DBA0C: @ 80DBA0C
 
 	.global gUnknown_80DBA4C
 gUnknown_80DBA4C: @ 80DBA4C
-        .asciz "$m0"
-        .asciz "pksdir0"
+        .string "$m0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBA58
@@ -1190,24 +1190,24 @@ gUnknown_80DBD24: @ 80DBD24
 
 	.global gUnknown_80DBD58
 gUnknown_80DBD58: @ 80DBD58
-        .asciz "Trash Toolbox Item"
+        .string "Trash Toolbox Item\0"
         .align 2,0
 
 	.global gUnknown_80DBD6C
 gUnknown_80DBD6C: @ 80DBD6C
-        .asciz "Trash Received Item"
+        .string "Trash Received Item\0"
         .align 2,0
 
 	.global gUnknown_80DBD80
 gUnknown_80DBD80: @ 80DBD80
-        .asciz "Storage"
+        .string "Storage\0"
         .align 2,0
 
 	.global gUnknown_80DBD88
 gUnknown_80DBD88: @ 80DBD88
-        .asciz "Trash"
+        .string "Trash\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBD98
@@ -1220,9 +1220,9 @@ gUnknown_80DBDB0: @ 80DBDB0
 
 	.global gUnknown_80DBDC8
 gUnknown_80DBDC8: @ 80DBDC8
-        .asciz "Switch"
+        .string "Switch\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBDD8
@@ -1235,7 +1235,7 @@ gUnknown_80DBDF0: @ 80DBDF0
 
 	.global gUnknown_80DBE08
 gUnknown_80DBE08: @ 80DBE08
-        .asciz "IQ Skills"
+        .string "IQ Skills\0"
         .align 2,0
 
 	.global gUnknown_80DBE14
@@ -1248,20 +1248,20 @@ gUnknown_80DBE18: @ 80DBE18
 
 	.global gUnknown_80DBE1C
 gUnknown_80DBE1C: @ 80DBE1C
-        .asciz "$i0$i1"
+        .string "$i0$i1\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE2C
 gUnknown_80DBE2C: @ 80DBE2C
-        .asciz "$i0"
+        .string "$i0\0"
         .align 2,0
 
 	.global gUnknown_80DBE30
 gUnknown_80DBE30: @ 80DBE30
-        .asciz "$m0"
-        .asciz "pksdir0"
+        .string "$m0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE3C
@@ -1274,8 +1274,8 @@ gUnknown_80DBE54: @ 80DBE54
 
 	.global gUnknown_80DBE6C
 gUnknown_80DBE6C: @ 80DBE6C
-        .asciz "Storage"
-        .asciz "pksdir0"
+        .string "Storage\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE7C
@@ -1292,22 +1292,22 @@ gUnknown_80DBEB0: @ 80DBEB0
 
 	.global gUnknown_80DBF10
 gUnknown_80DBF10: @ 80DBF10
-        .asciz "Items"
+        .string "Items\0"
         .align 2,0
 
 	.global gUnknown_80DBF18
 gUnknown_80DBF18: @ 80DBF18
-        .asciz "Team"
+        .string "Team\0"
         .align 2,0
 
 	.global gUnknown_80DBF20
 gUnknown_80DBF20: @ 80DBF20
-        .asciz "Job List"
+        .string "Job List\0"
         .align 2,0
 
 	.global gUnknown_80DBF2C
 gUnknown_80DBF2C: @ 80DBF2C
-        .asciz "Others"
+        .string "Others\0"
         .align 2,0
 
 	.global gUnknown_80DBF34
@@ -1319,7 +1319,7 @@ gUnknown_80DBF34: @ 80DBF34
 
 	.global gUnknown_80DBF3C
 gUnknown_80DBF3C: @ 80DBF3C
-        .asciz "%s #C5%d#R Pts."
+        .string "%s #C5%d#R Pts.\0"
         .align 2,0
 
 	.global gUnknown_80DBF4C
@@ -1328,9 +1328,9 @@ gUnknown_80DBF4C: @ 80DBF4C
 
 	.global gUnknown_80DBF60
 gUnknown_80DBF60: @ 80DBF60
-        .asciz "tmrkpat"
+        .string "tmrkpat\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBF70
@@ -1343,9 +1343,9 @@ gUnknown_80DBF88: @ 80DBF88
 
 	.global gUnknown_80DBFA0
 gUnknown_80DBFA0: @ 80DBFA0
-        .asciz "Field"
+        .string "Field\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBFB0
@@ -1358,24 +1358,24 @@ gUnknown_80DBFCC: @ 80DBFCC
 
 	.global gUnknown_80DBFE4
 gUnknown_80DBFE4: @ 80DBFE4
-        .asciz "Others"
+        .string "Others\0"
         .align 2,0
 
 	.global gUnknown_80DBFEC
 gUnknown_80DBFEC: @ 80DBFEC
-        .asciz "Change settings?"
+        .string "Change settings?\0"
         .align 2,0
 
 	.global gUnknown_80DC000
 gUnknown_80DC000: @ 80DC000
-        .asciz "Game Options"
+        .string "Game Options\0"
         .align 2,0
 
 	.global gUnknown_80DC010
 gUnknown_80DC010: @ 80DC010
-        .asciz "Hints"
+        .string "Hints\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC020
@@ -1388,7 +1388,7 @@ gUnknown_80DC03C: @ 80DC03C
 
 	.global gUnknown_80DC054
 gUnknown_80DC054: @ 80DC054
-        .asciz "Game Options"
+        .string "Game Options\0"
         .align 2,0
 
 @ Window Settings
@@ -1398,19 +1398,19 @@ gUnknown_80DC064: @ 80DC064
 
 	.global gUnknown_80DC084
 gUnknown_80DC084: @ 80DC084
-        .asciz "Blue"
+        .string "Blue\0"
         .align 2,0
 
 	.global gUnknown_80DC08C
 gUnknown_80DC08C: @ 80DC08C
-        .asciz "Red"
+        .string "Red\0"
         .align 2,0
 
 	.global gUnknown_80DC090
 gUnknown_80DC090: @ 80DC090
-        .asciz "Green"
+        .string "Green\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC0A0
@@ -1423,9 +1423,9 @@ gUnknown_80DC0BC: @ 80DC0BC
 
 	.global gUnknown_80DC0D4
 gUnknown_80DC0D4: @ 80DC0D4
-        .asciz "Hints"
+        .string "Hints\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC0E4
@@ -1447,7 +1447,7 @@ gUnknown_80DC134: @ 80DC134
 	.global gUnknown_80DC164
 gUnknown_80DC164: @ 80DC164
         .string "Only four moves may be learned!\n"
-        .asciz "Will a move be forgotten?"
+        .string "Will a move be forgotten?\0"
         .align 2,0
 
 	.global gUnknown_80DC1A0
@@ -1460,9 +1460,9 @@ gUnknown_80DC1FC: @ 80DC1FC
 
 	.global gUnknown_80DC230
 gUnknown_80DC230: @ 80DC230
-        .asciz "Forget"
+        .string "Forget\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC240
@@ -1500,14 +1500,14 @@ gUnknown_80DC274: @ 80DC274
 
 	.global gUnknown_80DC28C
 gUnknown_80DC28C: @ 80DC28C
-        .asciz "Moves: #C6$m0#R "
+        .string "Moves: #C6$m0#R \0"
         .align 2,0
 
 	.global gUnknown_80DC2A0
 gUnknown_80DC2A0: @ 80DC2A0
-        .asciz "$i0"
+        .string "$i0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC2AC
@@ -1536,9 +1536,9 @@ gUnknown_80DC2C4: @ 80DC2C4
 
 	.global gUnknown_80DC2DC
 gUnknown_80DC2DC: @ 80DC2DC
-        .asciz "Moves Page: %d/%d "
+        .string "Moves Page: %d/%d \0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC2F8
@@ -1552,9 +1552,9 @@ gUnknown_80DC2F8: @ 80DC2F8
 
 	.global gUnknown_80DC310
 gUnknown_80DC310: @ 80DC310
-        .asciz "$m0"
+        .string "$m0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC31C
@@ -1601,83 +1601,79 @@ gUnknown_80DC37C: @ 80DC37C
 
 	.global gUnknown_80DC394
 gUnknown_80DC394: @ 80DC394
-        .byte 0x84, 0x86, 0x2b, 0x87
-        .string "R: Shift moves\n"
-        .byte 0x84, 0x86, 0x2b, 0x87
-        .string "P: Switch link  "
-        .byte 0x87, 0x72, 0x87, 0x73
-        .asciz " Set"
+        .string "{R_BUTTON}+{DPAD}: Shift moves\n"
+        .string "{R_BUTTON}+{A_BUTTON}: Switch link  {SELECT_BUTTON} Set\0"
 
 	.global gUnknown_80DC3C4
 gUnknown_80DC3C4: @ 80DC3C4
-        .asciz "Proceed"
+        .string "Proceed\0"
         .align 2,0
 
 	.global gUnknown_80DC3CC
 gUnknown_80DC3CC: @ 80DC3CC
-        .asciz "#C6Info#R "
+        .string "#C6Info#R \0"
         .align 2,0
 
 	.global gUnknown_80DC3D8
 gUnknown_80DC3D8: @ 80DC3D8
-        .asciz "Moves"
+        .string "Moves\0"
         .align 2,0
 
 	.global gUnknown_80DC3E0
 gUnknown_80DC3E0: @ 80DC3E0
-        .asciz "Summary"
+        .string "Summary\0"
         .align 2,0
 
 	.global gUnknown_80DC3E8
 gUnknown_80DC3E8: @ 80DC3E8
-        .asciz "Check IQ"
+        .string "Check IQ\0"
         .align 2,0
 
 	.global gUnknown_80DC3F4
 gUnknown_80DC3F4: @ 80DC3F4
-        .asciz "Remember"
+        .string "Remember\0"
         .align 2,0
 
 	.global gUnknown_80DC400
 gUnknown_80DC400: @ 80DC400
-        .asciz "Deselect"
+        .string "Deselect\0"
         .align 2,0
 
 	.global gUnknown_80DC40C
 gUnknown_80DC40C: @ 80DC40C
-        .asciz "Set"
+        .string "Set\0"
         .align 2,0
 
 	.global gUnknown_80DC410
 gUnknown_80DC410: @ 80DC410
-        .asciz "Link"
+        .string "Link\0"
         .align 2,0
 
 	.global gUnknown_80DC418
 gUnknown_80DC418: @ 80DC418
-        .asciz "Delink"
+        .string "Delink\0"
         .align 2,0
 
 	.global gUnknown_80DC420
 gUnknown_80DC420: @ 80DC420
-        .asciz "Forget"
+        .string "Forget\0"
         .align 2,0
 
 	.global gUnknown_80DC428
 gUnknown_80DC428: @ 80DC428
-        .asciz "Setting moves"
+        .string "Setting moves\0"
         .align 2,0
 
 	.global gUnknown_80DC438
 gUnknown_80DC438: @ 80DC438
-        .asciz "Linking moves"
+        .string "Linking moves\0"
         .align 2,0
 
 	.global gUnknown_80DC448
 gUnknown_80DC448: @ 80DC448
-        .asciz "Remembering moves"
+        .string "Remembering moves\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC464
@@ -1706,19 +1702,19 @@ gUnknown_80DC47C: @ 80DC47C
 
 	.global gUnknown_80DC494
 gUnknown_80DC494: @ 80DC494
-        .asciz "Friend Areas"
+        .string "Friend Areas\0"
         .align 2,0
 
 	.global gUnknown_80DC4A4
 gUnknown_80DC4A4: @ 80DC4A4
-        .asciz "#C2%s#R"
+        .string "#C2%s#R\0"
         .align 2,0
 
 	.global gUnknown_80DC4AC
 gUnknown_80DC4AC: @ 80DC4AC
-        .asciz "#C4%s#R"
+        .string "#C4%s#R\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC4BC
@@ -1747,19 +1743,19 @@ gUnknown_80DC4D8: @ 80DC4D8
 
 	.global gUnknown_80DC4F0
 gUnknown_80DC4F0: @ 80DC4F0
-        .asciz "Inhabitants (Friends: #c5Light blue#r)"
+        .string "Inhabitants (Friends: #c5Light blue#r)\0"
         .align 2,0
 
 	.global gUnknown_80DC518
 gUnknown_80DC518: @ 80DC518
-        .asciz "Inhabitants"
+        .string "Inhabitants\0"
         .align 2,0
 
 	.global gUnknown_80DC524
 gUnknown_80DC524: @ 80DC524
-        .asciz "#c5%s#r"
+        .string "#c5%s#r\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC534
@@ -1788,7 +1784,7 @@ gUnknown_80DC564: @ 80DC564
         .byte 0x06, 0x00, 0x03, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC584
@@ -1838,7 +1834,7 @@ gUnknown_80DC5EC: @ 80DC5EC
 
 	.global gUnknown_80DC5F4
 gUnknown_80DC5F4: @ 80DC5F4
-        .asciz "It doesn~27t appear to be hungry."
+        .string "It doesn~27t appear to be hungry.\0"
         .align 2,0
 
 	.global gUnknown_80DC618
@@ -1869,21 +1865,21 @@ gUnknown_80DC7B4: @ 80DC7B4
 gUnknown_80DC7FC: @ 80DC7FC
 @ replacing .incbin "baserom.gba", 0x000dc7fc, 0x20
         .string "Yes!\n"
-        .asciz "$m1~27s Attack rose by 1!"
+        .string "$m1~27s Attack rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC81C
 gUnknown_80DC81C: @ 80DC81C
 @ replacing .incbin "baserom.gba", 0x000dc81c, 0x28
         .string "Yes!\n"
-        .asciz "$m1~27s Special Attack rose by 1!"
+        .string "$m1~27s Special Attack rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC844
 gUnknown_80DC844: @ 80DC844
 @ replacing .incbin "baserom.gba", 0x000dc844, 0x20
         .string "Yes!\n"
-        .asciz "$m1~27s Defense rose by 1!"
+        .string "$m1~27s Defense rose by 1!\0"
         .align 2,0
 
 
@@ -1891,43 +1887,43 @@ gUnknown_80DC844: @ 80DC844
 gUnknown_80DC864: @ 80DC864
 @ replacing .incbin "baserom.gba", 0x000dc864, 0x28
         .string "Yes!\n"
-        .asciz "$m1~27s Special Defense rose by 1!"
+        .string "$m1~27s Special Defense rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC88C
 gUnknown_80DC88C: @ 80DC88C
 @ replacing .incbin "baserom.gba", 0x000dc88c, 0x20
-        .asciz "You don~27t have any Gummis."
+        .string "You don~27t have any Gummis.\0"
         .align 2,0
 
 	.global gUnknown_80DC8AC
 gUnknown_80DC8AC: @ 80DC8AC
 @ replacing .incbin "baserom.gba", 0x000dc8ac, 0x1c
-        .asciz "You don~27t have an item."
+        .string "You don~27t have an item.\0"
         .align 2,0
 
 	.global gUnknown_80DC8C8
 gUnknown_80DC8C8: @ 80DC8C8
 @ replacing .incbin "baserom.gba", 0x000dc8c8, 0x14
-        .asciz "The Gummi is gone!"
+        .string "The Gummi is gone!\0"
         .align 2,0
 
 	.global gUnknown_80DC8DC
 gUnknown_80DC8DC: @ 80DC8DC
-        .asciz "The item is gone!"
+        .string "The item is gone!\0"
         .align 2,0
 
 	.global gUnknown_80DC8F0
 gUnknown_80DC8F0: @ 80DC8F0
-        .asciz "Give"
+        .string "Give\0"
         .align 2,0
 
 	.global gUnknown_80DC8F8
 gUnknown_80DC8F8: @ 80DC8F8
 @ replacing .incbin "baserom.gba", 0x000dc8f8, 0xc
-        .asciz "Use"
+        .string "Use\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC904
@@ -1958,9 +1954,9 @@ gUnknown_80DC934: @ 80DC934
 	.global gUnknown_80DC93C
 gUnknown_80DC93C: @ 80DC93C
 @ replacing .incbin "baserom.gba", 0x000dc93c, 0x14
-        .asciz "#c%c%s#r"
+        .string "#c%c%s#r\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC950
@@ -1986,7 +1982,7 @@ gUnknown_80DC968: @ 80DC968
 	.global gUnknown_80DC980
 gUnknown_80DC980: @ 80DC980
 @ replacing .incbin "baserom.gba", 0x000dc980, 0x8
-        .asciz "Friends"
+        .string "Friends\0"
 
 	.global gUnknown_80DC988
 gUnknown_80DC988: @ 80DC988
@@ -2047,20 +2043,20 @@ gUnknown_80DCA00: @ 80DCA00
 
 	.global gUnknown_80DCA18
 gUnknown_80DCA18: @ 80DCA18
-        .asciz "Evolve"
+        .string "Evolve\0"
         .align 2,0
         .4byte gUnknown_80DCA18
 
 	.global gUnknown_80DCA24
 gUnknown_80DCA24: @ 80DCA24
-        .asciz "No"
+        .string "No\0"
         .align 2,0
         .4byte gUnknown_80DCA24
 
 	.global gUnknown_80DCA2C
 gUnknown_80DCA2C: @ 80DCA2C
 @ replacing .incbin "baserom.gba", 0x000dca2c, 0x8
-        .asciz "Yes"
+        .string "Yes\0"
         .align 2,0
         .4byte gUnknown_80DCA2C
 
@@ -2113,7 +2109,7 @@ gUnknown_80DD764: @ 80DD764
         .string "to this Pokémon.#P"
         .string "The Pokémon will leave its Friend Area.\n"
         .string "It will no longer be available for\n"
-        .asciz "adventures. Is that OK?"
+        .string "adventures. Is that OK?\0"
         .align 2,0
 
 	.global gUnknown_80DD7FC
@@ -2123,7 +2119,7 @@ gUnknown_80DD7FC: @ 80DD7FC
 	.global gUnknown_80DD8A0
 gUnknown_80DD8A0: @ 80DD8A0
         .string "#+The #C4$i0#R was\n"
-        .asciz "#+returned to the Toolbox."
+        .string "#+returned to the Toolbox.\0"
         .align 2,0
 
 	.global gUnknown_80DD8D0
@@ -2132,52 +2128,52 @@ gUnknown_80DD8D0: @ 80DD8D0
 
 	.global gUnknown_80DD8F8
 gUnknown_80DD8F8: @ 80DD8F8
-        .asciz "Stand By"
+        .string "Stand By\0"
         .align 2,0
 
 	.global gUnknown_80DD904
 gUnknown_80DD904: @ 80DD904
-        .asciz "Make Leader"
+        .string "Make Leader\0"
 
 	.global gUnknown_80DD910
 gUnknown_80DD910: @ 80DD910
-        .asciz "Join Team"
+        .string "Join Team\0"
         .align 2,0
 
 	.global gUnknown_80DD91C
 gUnknown_80DD91C: @ 80DD91C
-        .asciz "Say Farewell"
+        .string "Say Farewell\0"
         .align 2,0
 
 	.global gUnknown_80DD92C
 gUnknown_80DD92C: @ 80DD92C
-        .asciz "Give"
+        .string "Give\0"
         .align 2,0
 
 	.global gUnknown_80DD934
 gUnknown_80DD934: @ 80DD934
-        .asciz "Take"
+        .string "Take\0"
         .align 2,0
 
 	.global gUnknown_80DD93C
 gUnknown_80DD93C: @ 80DD93C
-        .asciz "Summary"
+        .string "Summary\0"
         .align 2,0
 
 	.global gUnknown_80DD944
 gUnknown_80DD944: @ 80DD944
-        .asciz "Moves"
+        .string "Moves\0"
         .align 2,0
 
 	.global gUnknown_80DD94C
 gUnknown_80DD94C: @ 80DD94C
-        .asciz "Check IQ"
+        .string "Check IQ\0"
         .align 2,0
 
 	.global gUnknown_80DD958
 gUnknown_80DD958: @ 80DD958
-        .asciz "Item: #C4$i0#R "
-        .asciz "pksdir0"
+        .string "Item: #C4$i0#R \0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DD970
 gUnknown_80DD970: @ 80DD970
@@ -2301,9 +2297,9 @@ gUnknown_80DFBEC: @ 80DFBEC
 
 	.global gUnknown_80DFC04
 gUnknown_80DFC04: @ 80DFC04
-        .asciz "News List"
+        .string "News List\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFC18
 gUnknown_80DFC18: @ 80DFC18
@@ -2331,13 +2327,13 @@ gUnknown_80DFC34: @ 80DFC34
 
 	.global gUnknown_80DFC4C
 gUnknown_80DFC4C: @ 80DFC4C
-        .asciz "She"
+        .string "She\0"
 
 	.global gUnknown_80DFC50
 gUnknown_80DFC50: @ 80DFC50
-        .asciz "He"
+        .string "He\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFC5C
 gUnknown_80DFC5C: @ 80DFC5C
@@ -2361,8 +2357,8 @@ gUnknown_80DFC74: @ 80DFC74
 
 	.global gUnknown_80DFC8C
 gUnknown_80DFC8C: @ 80DFC8C
-        .asciz "Mailbox"
-        .asciz "pksdir0"
+        .string "Mailbox\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFC9C
 gUnknown_80DFC9C: @ 80DFC9C
@@ -2386,9 +2382,9 @@ gUnknown_80DFCB4: @ 80DFCB4
 
 	.global gUnknown_80DFCCC
 gUnknown_80DFCCC: @ 80DFCCC
-        .asciz "Bulletin Board"
+        .string "Bulletin Board\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFCE4
 gUnknown_80DFCE4: @ 80DFCE4
@@ -2418,9 +2414,9 @@ gUnknown_80DFCFC: @ 80DFCFC
 
 	.global gUnknown_80DFD14
 gUnknown_80DFD14: @ 80DFD14
-        .asciz "Job List"
+        .string "Job List\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFD28
 gUnknown_80DFD28: @ 80DFD28
@@ -2466,13 +2462,13 @@ gUnknown_80DFD58: @ 80DFD58
 
 	.global gUnknown_80DFD70
 gUnknown_80DFD70: @ 80DFD70
-        .asciz "Take Job"
+        .string "Take Job\0"
         .align 2,0
 
 	.global gUnknown_80DFD7C
 gUnknown_80DFD7C: @ 80DFD7C
-        .asciz "Suspend"
-        .asciz "pksdir0"
+        .string "Suspend\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFD8C
 gUnknown_80DFD8C: @ 80DFD8C
@@ -2496,9 +2492,9 @@ gUnknown_80DFDA4: @ 80DFDA4
 
 	.global gUnknown_80DFDBC
 gUnknown_80DFDBC: @ 80DFDBC
-	.asciz "RESCUE EVENT"
+	.string "RESCUE EVENT\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80DFDD4
 gUnknown_80DFDD4: @ 80DFDD4
@@ -2611,32 +2607,32 @@ gUnknown_80E02CC: @ 80E02CC
 
 	.global gUnknown_80E02E4
 gUnknown_80E02E4: @ 80E02E4
-        .asciz "Check Mail"
+        .string "Check Mail\0"
         .align 2,0
 
 	.global gUnknown_80E02F0
 gUnknown_80E02F0: @ 80E02F0
-        .asciz "Job List"
+        .string "Job List\0"
         .align 2,0
 
 	.global gUnknown_80E02FC
 gUnknown_80E02FC: @ 80E02FC
-        .asciz "PKMN News"
+        .string "PKMN News\0"
         .align 2,0
 
 	.global gUnknown_80E0308
 gUnknown_80E0308: @ 80E0308
-        .asciz "Store"
+        .string "Store\0"
         .align 2,0
 
 	.global gUnknown_80E0310
 gUnknown_80E0310: @ 80E0310
-        .asciz "Read"
+        .string "Read\0"
         .align 2,0
 
 	.global gUnknown_80E0318
 gUnknown_80E0318: @ 80E0318
-        .asciz "Accepted"
+        .string "Accepted\0"
         .align 2,0
 
 	.global gUnknown_80E0324
@@ -2682,24 +2678,24 @@ gUnknown_80E0378: @ 80E0378
 
 	.global gUnknown_80E0390
 gUnknown_80E0390: @ 80E0390
-        .asciz "Bulletin Board"
+        .string "Bulletin Board\0"
         .align 2,0
 
 	.global gUnknown_80E03A0
 gUnknown_80E03A0: @ 80E03A0
-        .asciz "Job List"
+        .string "Job List\0"
         .align 2,0
 
 	.global gUnknown_80E03AC
 gUnknown_80E03AC: @ 80E03AC
-        .asciz "Accepted"
+        .string "Accepted\0"
         .align 2,0
 
 	.global gUnknown_80E03B8
 gUnknown_80E03B8: @ 80E03B8
-        .asciz "/"
+        .string "/\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E03C4
 gUnknown_80E03C4: @ 80E03C4
@@ -2711,9 +2707,9 @@ gUnknown_80E03F4: @ 80E03F4
 
 	.global gUnknown_80E040C
 gUnknown_80E040C: @ 80E040C
-        .asciz "Send"
+        .string "Send\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E041C
 gUnknown_80E041C: @ 80E041C
@@ -2773,7 +2769,7 @@ gUnknown_80E072C: @ 80E072C
 
 	.global gUnknown_80E0744
 gUnknown_80E0744: @ 80E0744
-        .asciz "Dungeons"
+        .string "Dungeons\0"
         .align 2,0
 
 	.global gUnknown_80E0750
@@ -2783,7 +2779,7 @@ gUnknown_80E0750: @ 80E0750
 	.global gUnknown_80E0754
 gUnknown_80E0754: @ 80E0754
         .byte 0x83, 0xC0, 0x00, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E0760
 gUnknown_80E0760: @ 80E0760
@@ -2817,7 +2813,7 @@ gUnknown_80E0804: @ 80E0804
 
 	.global gUnknown_80E081C
 gUnknown_80E081C: @ 80E081C
-        .asciz "Courses"
+        .string "Courses\0"
         .align 2,0
 
 	.global gUnknown_80E0824
@@ -2855,13 +2851,13 @@ gUnknown_80E091C: @ 80E091C
 
 	.global gUnknown_80E0934
 gUnknown_80E0934: @ 80E0934
-        .asciz "ID:"
+        .string "ID:\0"
 
 	.global gUnknown_80E0938
 gUnknown_80E0938: @ 80E0938
-        .asciz "%-4d"
+        .string "%-4d\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E0948
 gUnknown_80E0948: @ 80E0948
@@ -2919,43 +2915,43 @@ gUnknown_80E1F18: @ 80E1F18
 
 	.global gUnknown_80E1F30
 gUnknown_80E1F30: @ 80E1F30
-        .asciz "Objectives"
+        .string "Objectives\0"
         .align 2,0
 
 	.global gUnknown_80E1F3C
 gUnknown_80E1F3C: @ 80E1F3C
-        .asciz "%dF"
+        .string "%dF\0"
 
 	.global gUnknown_80E1F40
 gUnknown_80E1F40: @ 80E1F40
-        .asciz "  Rescue #C6%s#R"
+        .string "  Rescue #C6%s#R\0"
         .align 2,0
 
 	.global gUnknown_80E1F54
 gUnknown_80E1F54: @ 80E1F54
-        .asciz "Just go!"
+        .string "Just go!\0"
         .align 2,0
 
 	.global gUnknown_80E1F60
 gUnknown_80E1F60: @ 80E1F60
-        .asciz "  Bring #C4%s#R"
+        .string "  Bring #C4%s#R\0"
         .align 2,0
 
 	.global gUnknown_80E1F70
 gUnknown_80E1F70: @ 80E1F70
-        .asciz "  Find #C4%s#R"
+        .string "  Find #C4%s#R\0"
         .align 2,0
 
 	.global gUnknown_80E1F80
 gUnknown_80E1F80: @ 80E1F80
-        .asciz "  Escort to #C6%s#R"
+        .string "  Escort to #C6%s#R\0"
         .align 2,0
 
 	.global gUnknown_80E1F94
 gUnknown_80E1F94: @ 80E1F94
-        .asciz "#CW???#R"
+        .string "#CW???#R\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E1FA8
 gUnknown_80E1FA8: @ 80E1FA8
@@ -2979,15 +2975,15 @@ gUnknown_80E2008: @ 80E2008
 
 	.global gUnknown_80E2020
 gUnknown_80E2020: @ 80E2020
-        .asciz "Adventure Log"
+        .string "Adventure Log\0"
         .align 2,0
 
 	.global gUnknown_80E2030
 gUnknown_80E2030: @ 80E2030
         @ Probably some sort of placeholder
-        .asciz "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "
+        .string "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 \0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80E2068
 gUnknown_80E2068: @ 80E2068
@@ -3107,7 +3103,7 @@ gUnknown_80E25B4: @ 80E25B4
 
 	.global gUnknown_80E25F4
 gUnknown_80E25F4: @ 80E25F4
-        .asciz "What would you like to do?"
+        .string "What would you like to do?\0"
         .align 2,0
 
 	.global gUnknown_80E2610
@@ -4206,9 +4202,9 @@ gUnknown_80E7E64: @ 80E7E64
 
 	.global gUnknown_80E7E7C
 gUnknown_80E7E7C: @ 80E7E7C
-        .asciz "Number?"
+        .string "Number?\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E7E8C
@@ -4221,14 +4217,14 @@ gUnknown_80E7EA4: @ 80E7EA4
 
 	.global gUnknown_80E7EBC
 gUnknown_80E7EBC: @ 80E7EBC
-        .asciz "CLOSE"
+        .string "CLOSE\0"
         .align 2,0
 
 	.global gUnknown_80E7EC4
 gUnknown_80E7EC4: @ 80E7EC4
-        .asciz "OPEN"
+        .string "OPEN\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E7ED4
@@ -4245,19 +4241,19 @@ gUnknown_80E7F04: @ 80E7F04
 
 	.global gUnknown_80E7F1C
 gUnknown_80E7F1C: @ 80E7F1C
-        .asciz "Number?"
+        .string "Number?\0"
         .align 2,0
 
 	.global gUnknown_80E7F24
 gUnknown_80E7F24: @ 80E7F24
-        .asciz "LEVEL"
+        .string "LEVEL\0"
         .align 2,0
 
 	.global gUnknown_80E7F2C
 gUnknown_80E7F2C: @ 80E7F2C
-        .asciz "Name"
+        .string "Name\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E7F3C
@@ -4270,15 +4266,15 @@ gUnknown_80E7F54: @ 80E7F54
 
 	.global gUnknown_80E7F6C
 gUnknown_80E7F6C: @ 80E7F6C
-        .asciz "Script"
+        .string "Script\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E7F94
@@ -4311,52 +4307,52 @@ gUnknown_80E81D4: @ 80E81D4
 
 	.global gMankeyMission
 gMankeyMission: @ 80E87DC
-        .asciz "Punish bad #C6Mankey#R!"
+        .string "Punish bad #C6Mankey#R!\0"
         .align 2,0
 
 	.global gSmeargleMission
 gSmeargleMission: @ 80E87F4
-        .asciz "#C6Smeargle#R~27s desperate plea!"
+        .string "#C6Smeargle#R~27s desperate plea!\0"
         .align 2,0
 
 	.global gMedichamMission
 gMedichamMission: @ 80E8818
-        .asciz "#C6Medicham#R: Help me!"
+        .string "#C6Medicham#R: Help me!\0"
         .align 2,0
 
 	.global gUnknown_80E8830
 gUnknown_80E8830: @ 80E8830
-        .asciz "Deliver one #C4%s#R."
+        .string "Deliver one #C4%s#R.\0"
         .align 2,0
 
 	.global gUnknown_80E8848
 gUnknown_80E8848: @ 80E8848
-        .asciz "One #C4%s#R wanted!"
+        .string "One #C4%s#R wanted!\0"
         .align 2,0
 
 	.global gUnknown_80E885C
 gUnknown_80E885C: @ 80E885C
-        .asciz "Save my child!"
+        .string "Save my child!\0"
         .align 2,0
 
 	.global gUnknown_80E886C
 gUnknown_80E886C: @ 80E886C
-        .asciz "Escort me to my love!"
+        .string "Escort me to my love!\0"
         .align 2,0
 
 	.global gUnknown_80E8884
 gUnknown_80E8884: @ 80E8884
-        .asciz "Near %s"
+        .string "Near %s\0"
         .align 2,0
 
 	.global gUnknown_80E888C
 gUnknown_80E888C: @ 80E888C
-        .asciz "Rescue Description"
+        .string "Rescue Description\0"
         .align 2,0
 
 	.global gUnknown_80E88A0
 gUnknown_80E88A0: @ 80E88A0
-        .asciz "Please punish bad #C6Mankey#R~27s gang."
+        .string "Please punish bad #C6Mankey#R~27s gang.\0"
         .align 2,0
 
 	.global gUnknown_80E88C8
@@ -4370,36 +4366,36 @@ gUnknown_80E8920: @ 80E8920
 	.global gUnknown_80E8968
 gUnknown_80E8968: @ 80E8968
         .string "With the item #C4%s#R~2c I can\n"
-        .asciz "evolve! I~27m yearning to evolve! Help!"
+        .string "evolve! I~27m yearning to evolve! Help!\0"
         .align 2,0
 
 	.global gUnknown_80E89B0
 gUnknown_80E89B0: @ 80E89B0
         .string "The #C4%s#R! What I love to eat\n"
-        .asciz "and can~27t live without! Please get one!"
+        .string "and can~27t live without! Please get one!\0"
         .align 2,0
 
 	.global gUnknown_80E89FC
 gUnknown_80E89FC: @ 80E89FC
         .string "This is a rescue through communication.\n"
-        .asciz "Get a friend to help you!"
+        .string "Get a friend to help you!\0"
         .align 2,0
 
 	.global gUnknown_80E8A40
 gUnknown_80E8A40: @ 80E8A40
         .string "This is a rescue through communication.\n"
-        .asciz "Rescue a friend!"
+        .string "Rescue a friend!\0"
         .align 2,0
 
 	.global gUnknown_80E8A7C
 gUnknown_80E8A7C: @ 80E8A7C
         .string "This is a rescue through communication.\n"
-        .asciz "Send your thanks to your friend!"
+        .string "Send your thanks to your friend!\0"
         .align 2,0
 
 	.global gUnknown_80E8AC8
 gUnknown_80E8AC8: @ 80E8AC8
-        .asciz "Client:"
+        .string "Client:\0"
         .align 2,0
 
 	.global gUnknown_80E8AD0
@@ -4408,64 +4404,64 @@ gUnknown_80E8AD0: @ 80E8AD0
 
 	.global gUnknown_80E8AE0
 gUnknown_80E8AE0: @ 80E8AE0
-        .asciz "Objective:"
+        .string "Objective:\0"
         .align 2,0
 
 	.global gUnknown_80E8AEC
 gUnknown_80E8AEC: @ 80E8AEC
-        .asciz "Friend Rescue"
+        .string "Friend Rescue\0"
         .align 2,0
 
 	.global gUnknown_80E8AFC
 gUnknown_80E8AFC: @ 80E8AFC
-        .asciz "Deliver #C4%s#R."
+        .string "Deliver #C4%s#R.\0"
         .align 2,0
 
 	.global gUnknown_80E8B10
 gUnknown_80E8B10: @ 80E8B10
-        .asciz "Find #C4%s#R."
+        .string "Find #C4%s#R.\0"
         .align 2,0
 
 	.global gUnknown_80E8B20
 gUnknown_80E8B20: @ 80E8B20
-        .asciz "Help me."
+        .string "Help me.\0"
         .align 2,0
 
 	.global gUnknown_80E8B2C
 gUnknown_80E8B2C: @ 80E8B2C
-        .asciz "Escort to #C6%s#R."
+        .string "Escort to #C6%s#R.\0"
         .align 2,0
 
 	.global gUnknown_80E8B40
 gUnknown_80E8B40: @ 80E8B40
-        .asciz "Find #C6%s#R."
+        .string "Find #C6%s#R.\0"
         .align 2,0
 
 	.global gSpecialMissionText
 gSpecialMissionText: @ 80E8B50
-        .asciz "Special mission"
+        .string "Special mission\0"
         .align 2,0
 
 	.global gPlaceText
 gPlaceText: @ 80E8B60
-        .asciz "Place:"
+        .string "Place:\0"
         .align 2,0
 
 	.global gDifficultyText
 gDifficultyText: @ 80E8B68
-        .asciz "Difficulty:"
+        .string "Difficulty:\0"
         .align 2,0
 
 	.global gRewardText
 gRewardText: @ 80E8B74
-        .asciz "Reward:"
+        .string "Reward:\0"
         .align 2,0
 
 	.global gUnknown_80E8B7C
 gUnknown_80E8B7C: @ 80E8B7C
-        .asciz "Wonder Mail:"
+        .string "Wonder Mail:\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E8B94
@@ -4478,11 +4474,11 @@ gUnknown_80E8BCC: @ 80E8BCC
         .byte 0xF0, 0x8B, 0x0E, 0x08 @ Pointer to Suspend
         .byte 0xE4, 0x8B, 0x0E, 0x08 @ Pointer to Take Job
         .byte 0xDC, 0x8B, 0x0E, 0x08 @ Pointer to Done
-        .asciz "Done"
+        .string "Done\0"
         .align 2,0
-        .asciz "Take Job"
+        .string "Take Job\0"
         .align 2,0
-        .asciz "Suspend"
+        .string "Suspend\0"
         .align 2,0
 
 	.global gUnknown_80E8BF8

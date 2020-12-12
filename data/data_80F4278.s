@@ -29,10 +29,9 @@ gUnknown_80F42A8: @ 80F42A8
 
 	.global gUnknown_80F42C0
 gUnknown_80F42C0: @ 80F42C0
-	.string "Pokémon"
-        .byte 0
-        .asciz "pksdir0"
-        .align 2,0
+	.string "Pokémon\0"
+	.string "pksdir0\0"
+	.align 2,0
 
 	.global gUnknown_80F42D0
 gUnknown_80F42D0: @ 80F42D0
@@ -1372,12 +1371,12 @@ gUnknown_80F60DC: @ 80F60DC
 	.global gUnknown_80F60F8
 gUnknown_80F60F8: @ 80F60F8
 @ replacing .incbin "baserom.gba", 0x000f60f8, 0x8
-        .asciz "banrpal"
+        .string "banrpal\0"
 
 	.global gUnknown_80F6100
 gUnknown_80F6100: @ 80F6100
 @ replacing .incbin "baserom.gba", 0x000f6100, 0x8
-        .asciz "banfont"
+        .string "banfont\0"
 
 	.global gUnknown_80F6108
 gUnknown_80F6108: @ 80F6108
@@ -1406,33 +1405,33 @@ gUnknown_80F6120: @ 80F6120
 .byte 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0x08, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0xff, 0xff, 0x0f, 0x00, 0x00, 0x00, 0xf0, 0xff, 0x0c, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00
 .byte 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x10, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0xff, 0x0f, 0x00, 0x00, 0x00, 0xf0, 0xff, 0xff, 0x14, 0x00, 0x00, 0x00, 0x0c, 0x00, 0x00, 0x00
 .byte 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x18, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0xf0, 0xff, 0xff, 0xff, 0x1c, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00
-.asciz "pksdir0"
+.string "pksdir0\0"
 
 	.global gUnknown_80F61A8
 gUnknown_80F61A8: @ 80F61A8
 @ replacing .incbin "baserom.gba", 0x000f61a8, 0x8
-        .asciz "itempat"
+        .string "itempat\0"
 
 	.global gUnknown_80F61B0
 gUnknown_80F61B0: @ 80F61B0
 @ replacing .incbin "baserom.gba", 0x000f61b0, 0x8
-        .asciz "etcfont"
+        .string "etcfont\0"
 
 	.global gUnknown_80F61B8
 gUnknown_80F61B8: @ 80F61B8
 @ replacing .incbin "baserom.gba", 0x000f61b8, 0xc
-        .asciz "etcfonta"
+        .string "etcfonta\0"
         .align 2,0
 
 	.global gUnknown_80F61C4
 gUnknown_80F61C4: @ 80F61C4
 @ replacing .incbin "baserom.gba", 0x000f61c4, 0x8
-        .asciz "levfont"
+        .string "levfont\0"
 
 	.global gUnknown_80F61CC
 gUnknown_80F61CC: @ 80F61CC
 @ replacing .incbin "baserom.gba", 0x000f61cc, 0x8
-        .asciz "hp5font"
+        .string "hp5font\0"
 
 	.global gUnknown_80F61D4
 gUnknown_80F61D4: @ 80F61D4
@@ -1443,7 +1442,7 @@ gUnknown_80F61D4: @ 80F61D4
 gUnknown_80F61DC: @ 80F61DC
 @ replacing .incbin "baserom.gba", 0x000f61dc, 0x10
 .byte 0x74, 0x72, 0x61, 0x70, 0x70, 0x61, 0x74, 0x00
-.asciz "pksdir0"
+.string "pksdir0\0"
 
 	.global gUnknown_80F61EC
 gUnknown_80F61EC: @ 80F61EC
@@ -1548,7 +1547,7 @@ gUnknown_80F6478: @ 80F6478
 .byte 0x0e, 0x00, 0x00, 0x00
 .byte 0x0f, 0x00, 0x00, 0x00
 .byte 0x0f, 0x00, 0x00, 0x00
-.asciz "pksdir0"
+.string "pksdir0\0"
 
 	.global gUnknown_80F6490
 gUnknown_80F6490: @ 80F6490
@@ -1617,10 +1616,10 @@ gUnknown_80F65F0: @ 80F65F0
 	.global gUnknown_80F6604
 gUnknown_80F6604: @ 80F6604
 @ replacing .incbin "baserom.gba", 0x000f6604, 0x20
-        .asciz "zmappat"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "zmappat\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 
         .global gUnknown_80F6624
@@ -1845,72 +1844,72 @@ gActions: @ 80F7B14
 	.global gEquipPutOnDescription
 gEquipPutOnDescription: @ 80F7B94
 	.string "$m0 put on\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 
 	.global gPeelText
 gPeelText: @ 80F7BA8
-	.asciz "Peel"
+	.string "Peel\0"
 	.align 2,0
 
 	.global gPeelDescription
 gPeelDescription: @ 80F7BB0
 	.string "$m0 peeled\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gIngestText
 gIngestText: @ 80F7BC4
-	.asciz "Ingest"
+	.string "Ingest\0"
 	.align 2,0
 
 	.global gIngestDescription
 gIngestDescription: @ 80F7BCC
 	.string "$m0 swallowed\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gEatText
 gEatText: @ 80F7BE4
-	.asciz "Eat"
+	.string "Eat\0"
 	.align 2,0
 
 	.global gEatDescription
 gEatDescription: @ 80F7BE8
 	.string "$m0 ate\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gEquipText
 gEquipText: @ 80F7BFC
-	.asciz "Equip"
+	.string "Equip\0"
 	.align 2,0
 
 	.global gEquipDescription
 gEquipDescription: @ 80F7C04
 	.string "$m0 equipped\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gThrowText
 gThrowText: @ 80F7C1C
-	.string "Throw"
+	.string "Throw\0"
 	.align 2,0
 
 	.global gThrowDescription
 gThrowDescription: @ 80F7C24
 	.string "$m0 threw\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gUseText
 gUseText: @ 80F7C38
-	.asciz "Use"
+	.string "Use\0"
 	.align 2,0
 
 	.global gUseDescription
 gUseDescription: @ 80F7C3C
 	.string "$m0 used\n"
-	.asciz "the $i0."
+	.string "the $i0.\0"
 	.align 2,0
 
 	.global gUnknown_80F7C50
@@ -2053,112 +2052,112 @@ gUnknown_80F7C54: @ 80F7C54
 
 	.global gMenuPickUpText
 gMenuPickUpText: @ 80F7E60
-	.asciz "Pick Up"
+	.string "Pick Up\0"
 	.align 2,0
 
 	.global gMenuLeaderText
 gMenuLeaderText: @ 80F7E68
-	.asciz "Leader"
+	.string "Leader\0"
 	.align 2,0
 
 	.global gMenuSwapText
 gMenuSwapText: @ 80F7E70
-	.asciz "Swap"
+	.string "Swap\0"
 	.align 2,0
 
 	.global gMenuTakeText
 gMenuTakeText: @ 80F7E78
-	.asciz "Take"
+	.string "Take\0"
 	.align 2,0
 
 	.global gMenuGiveText
 gMenuGiveText: @ 80F7E80
-	.asciz "Give"
+	.string "Give\0"
 	.align 2,0
 
 	.global gMenuDeselectText
 gMenuDeselectText: @ 80F7E88
-	.asciz "Deselect"
+	.string "Deselect\0"
 	.align 2,0
 
 	.global gMenuCheckIQText
 gMenuCheckIQText: @ 80F7E94
-	.asciz "Check IQ"
+	.string "Check IQ\0"
 	.align 2,0
 
 	.global gMenuGiveUpText
 gMenuGiveUpText: @ 80F7EA0
-	.asciz "Give Up"
+	.string "Give Up\0"
 	.align 2,0
 
 	.global gMenuQuicksaveText
 gMenuQuicksaveText: @ 80F7EA8
-	.asciz "Quicksave"
+	.string "Quicksave\0"
 	.align 2,0
 
 	.global gMenuCancelText
 gMenuCancelText: @ 80F7EB0
-	.asciz "Cancel"
+	.string "Cancel\0"
 	.align 2,0
 
 	.global gMenuFarewellText
 gMenuFarewellText: @ 80F7EBC
-	.asciz "Farewell"
+	.string "Farewell\0"
 	.align 2,0
 
 	.global gMenuProceedText
 gMenuProceedText: @ 80F7EC8
-	.asciz "Proceed"
+	.string "Proceed\0"
 	.align 2,0
 
 	.global gMenuTriggerText
 gMenuTriggerText: @ 80F7ED0
-	.asciz "Trigger"
+	.string "Trigger\0"
 	.align 2,0
 
 	.global gMenuForgetText
 gMenuForgetText: @ 80F7ED8
-	.asciz "Forget"
+	.string "Forget\0"
 	.align 2,0
 
 	.global gMenuDelinkText
 gMenuDelinkText: @ 80F7EE0
-	.asciz "Delink"
+	.string "Delink\0"
 	.align 2,0
 
 	.global gMenuLinkText
 gMenuLinkText: @ 80F7EE8
-	.asciz "Link"
+	.string "Link\0"
 	.align 2,0
 
 	.global gMenuSetText
 gMenuSetText: @ 80F7EF0
-	.asciz "Set"
+	.string "Set\0"
 	.align 2,0
 
 	.global gMenuSummaryText
 gMenuSummaryText: @ 80F7EF4
-	.asciz "Summary"
+	.string "Summary\0"
 	.align 2,0
 
 	.global gMenuTacticsText
 gMenuTacticsText: @ 80F7EFC
-	.asciz "Tactics"
+	.string "Tactics\0"
 	.align 2,0
 
 	.global gMenuMovesText
 gMenuMovesText: @ 80F7F04
-	.asciz "Moves"
+	.string "Moves\0"
 	.align 2,0
 
 	.global gMenuMoneySymbols
 gMenuMoneySymbols: @ 80F7F0C
-	.asciz "$$$$"
+	.string "$$$$\0"
 	.align 2,0
 
 	.global gMenuStruggleText
 gMenuStruggleText: @ 80F7F14
-	.asciz "Struggle"
+	.string "Struggle\0"
 	.align 2,0
 
 	.global gMenuEmpty
@@ -2168,57 +2167,57 @@ gMenuEmpty: @ 80F7F20
 
 	.global gMenuTalkText
 gMenuTalkText: @ 80F7F24
-	.asciz "Talk"
+	.string "Talk\0"
 	.align 2,0
 
 	.global gMenuXText
 gMenuXText: @ 80F7F2C
-	.asciz "X"
+	.string "X\0"
 	.align 2,0
 
 	.global gMenuInfoText
 gMenuInfoText: @ 80F7F30
-	.asciz "Info"
+	.string "Info\0"
 	.align 2,0
 
 	.global gMenuSwitchText
 gMenuSwitchText: @ 80F7F38
-	.asciz "Switch"
+	.string "Switch\0"
 	.align 2,0
 
 	.global gMenuGetText
 gMenuGetText: @ 80F7F40
-	.asciz "Get"
+	.string "Get\0"
 	.align 2,0
 
 	.global gMenuPlaceText
 gMenuPlaceText: @ 80F7F44
-	.asciz "Place"
+	.string "Place\0"
 	.align 2,0
 
 	.global gMenuPrevText
 gMenuPrevText: @ 80F7F4C
-	.asciz "Prev."
+	.string "Prev.\0"
 	.align 2,0
 
 	.global gMenuNextText
 gMenuNextText: @ 80F7F54
-	.asciz "Next"
+	.string "Next\0"
 	.align 2,0
 
 	.global gMenuMoveText
 gMenuMoveText: @ 80F7F5C
-	.asciz "Move"
+	.string "Move\0"
 	.align 2,0
 
 	.global gMenuWaitText
 gMenuWaitText: @ 80F7F64
-	.asciz "Wait"
+	.string "Wait\0"
 	.align 2,0
 
 	.global gMenuQuestionMarks
 gMenuQuestionMarks: @ 80F7F6C
-	.asciz "???"
+	.string "???\0"
 	.align 2,0
 
 	.global gUnknown_80F7F70
@@ -2233,21 +2232,21 @@ gRescueSpotDescription: @ 80F7F7C
 	.string "friend~27s team went down!\n"
 	.string "Send an #c2A-OK Mail#r from the Pelipper Post\n"
 	.string "Office to let your friend know you~27ve\n"
-	.asciz "rescued the defeated team."
+	.string "rescued the defeated team.\0"
 	.align 2,0
 
 	.global gWarpZoneDescription
 gWarpZoneDescription: @ 80F8030
 	.string "The warp zone leading to the next floor.\n"
 	.string "If you are on the final floor~2c you will\n"
-	.asciz "escape from the dungeon."
+	.string "escape from the dungeon.\0"
 	.align 2,0
 
 	.global gDungeonStairsDescription
 gDungeonStairsDescription: @ 80F809C
 	.string "Stairs leading to the next floor.\n"
 	.string "If you are on the final floor~2c you will\n"
-	.asciz "escape from the dungeon."
+	.string "escape from the dungeon.\0"
 	.align 2,0
 
 	.global gUnknown_80F8104
@@ -2258,17 +2257,17 @@ gUnknown_80F8104: @ 80F8104
 
 	.global gRescueSpotText
 gRescueSpotText: @ 80F7F7C
-	.asciz "Rescue Spot"
+	.string "Rescue Spot\0"
 	.align 2,0
 
 	.global gWarpZoneText
 gWarpZoneText: @ 80F8030
-	.asciz "Warp Zone"
+	.string "Warp Zone\0"
 	.align 2,0
 
 	.global gDungeonStairsText
 gDungeonStairsText: @ 80F809C
-	.asciz "Stairs"
+	.string "Stairs\0"
 	.align 2,0
 
 	.global gTrapDescriptions
@@ -2278,7 +2277,7 @@ gTrapDescriptions: @ 80F8130
 	.global gUnknown_80F8968
 gUnknown_80F8968: @ 80F8968
         .byte 0x5C, 0x89, 0x0F, 0x08
-        .asciz "Decoy"
+        .string "Decoy\0"
         .align 2,0
 
 	.global gUnknown_80F8974
@@ -2292,13 +2291,13 @@ gUnknown_80F8988: @ 80F8988
 	.global gUnknown_80F8994
 gUnknown_80F8994: @ 80F8994
         .byte 0x8C, 0x89, 0x0F, 0x08
-        .asciz "Your partner $m0 fainted!"
+        .string "Your partner $m0 fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89B4
 gUnknown_80F89B4: @ 80F89B4
         .byte 0x98, 0x89, 0x0F, 0x08
-        .asciz "Your client $m0 fainted!"
+        .string "Your client $m0 fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89D4
@@ -2308,91 +2307,91 @@ gUnknown_80F89D4: @ 80F89D4
 	.global gUnknown_80F89D8
 gUnknown_80F89D8: @ 80F89D8
         .byte 0xB8, 0x89, 0x0F, 0x08
-        .asciz "But nothing happened!"
+        .string "But nothing happened!\0"
         .align 2,0
 
 	.global gUnknown_80F89F4
 gUnknown_80F89F4: @ 80F89F4
         .byte 0xDC, 0x89, 0x0F, 0x08
-        .asciz "$m0 was blown away!"
+        .string "$m0 was blown away!\0"
         .align 2,0
 
 	.global gUnknown_80F8A0C
 gUnknown_80F8A0C: @ 80F8A0C
         .byte 0xF8, 0x89, 0x0F, 0x08
-        .asciz "No move has been set."
+        .string "No move has been set.\0"
         .align 2,0
 
 	.global gUnknown_80F8A28
 gUnknown_80F8A28: @ 80F8A28
         .byte 0x10, 0x8A, 0x0F, 0x08
-        .asciz "The set move can~27t be used."
+        .string "The set move can~27t be used.\0"
         .align 2,0
 
 	.global gUnknown_80F8A4C
 gUnknown_80F8A4C: @ 80F8A4C
         .byte 0x2C, 0x8A, 0x0F, 0x08
-        .asciz "You~27re being constricted!"
+        .string "You~27re being constricted!\0"
         .align 2,0
 
 	.global gUnknown_80F8A6C
 gUnknown_80F8A6C: @ 80F8A6C
         .byte 0x50, 0x8A, 0x0F, 0x08
-        .asciz "You can~27t move!"
+        .string "You can~27t move!\0"
         .align 2,0
 
 	.global gUnknown_80F8A84
 gUnknown_80F8A84: @ 80F8A84
         .byte 0x70, 0x8A, 0x0F, 0x08
-        .asciz "You can~27t move while you~27re rooted!"
+        .string "You can~27t move while you~27re rooted!\0"
         .align 2,0
 
 	.global gUnknown_80F8AB0
 gUnknown_80F8AB0: @ 80F8AB0
         .byte 0x88, 0x8A, 0x0F, 0x08
-        .asciz "You can~27t move while wrapping a foe!"
+        .string "You can~27t move while wrapping a foe!\0"
         .align 2,0
 
 	.global gUnknown_80F8ADC
 gUnknown_80F8ADC: @ 80F8ADC
         .byte 0xB4, 0x8A, 0x0F, 0x08
-        .asciz "The foe has you wrapped! You can~27t move!"
+        .string "The foe has you wrapped! You can~27t move!\0"
         .align 2,0
 
 	.global gUnknown_80F8B0C
 gUnknown_80F8B0C: @ 80F8B0C
         .byte 0xE0, 0x8A, 0x0F, 0x08
-        .asciz "There are no items."
+        .string "There are no items.\0"
 
 	.global gUnknown_80F8B24
 gUnknown_80F8B24: @ 80F8B24
         .byte 0x10, 0x8B, 0x0F, 0x08
-        .asciz "The move $i0 was set."
+        .string "The move $i0 was set.\0"
         .align 2,0
 
 	.global gUnknown_80F8B40
 gUnknown_80F8B40: @ 80F8B40
         .byte 0x28, 0x8B, 0x0F, 0x08
-        .asciz "The move $i0 was deselected."
+        .string "The move $i0 was deselected.\0"
         .align 2,0
 
 	.global gUnknown_80F8B64
 gUnknown_80F8B64: @ 80F8B64
         .byte 0x44, 0x8B, 0x0F, 0x08
         .byte 0x20, 0x7F, 0x0F, 0x08
-        .asciz "The move $i0 was delinked."
+        .string "The move $i0 was delinked.\0"
         .align 2,0
 
 	.global gUnknown_80F8B88
 gUnknown_80F8B88: @ 80F8B88
         .byte 0x6C, 0x8B, 0x0F, 0x08
-        .asciz "The linked moves were left unchanged."
+        .string "The linked moves were left unchanged.\0"
         .align 2,0
 
 	.global gUnknown_80F8BB4
 gUnknown_80F8BB4: @ 80F8BB4
         .byte 0x8C, 0x8B, 0x0F, 0x08
-        .asciz "It~27s all sticky and doesn~27t work!"
+        .string "It~27s all sticky and doesn~27t work!\0"
         .align 2,0
 
 	.global gUnknown_80F8BE0
@@ -2410,14 +2409,14 @@ gUnknown_80F8C44: @ 80F8C44
 	.global gUnknown_80F8C48
 gUnknown_80F8C48: @ 80F8C48
         .byte 0x14, 0x8C, 0x0F, 0x08
-        .asciz "The $i0 is all sticky!\nIt can~27t be equipped."
+        .string "The $i0 is all sticky!\nIt can~27t be equipped.\0"
         .align 2,0
 
 	.global gUnknown_80F8C7C
 gUnknown_80F8C7C: @ 80F8C7C
         .byte 0x4C, 0x8C, 0x0F, 0x08
         .string "$m1 took the $i0\n"
-        .asciz "and returned the $i1."
+        .string "and returned the $i1.\0"
         .align 2,0
 
 	.global gUnknown_80F8CA8
@@ -2431,25 +2430,25 @@ gUnknown_80F8CE4: @ 80F8CE4
 	.global gUnknown_80F8CE8
 gUnknown_80F8CE8: @ 80F8CE8
         .byte 0xAC, 0x8C, 0x0F, 0x08
-        .asciz "Equipped the item $i0."
+        .string "Equipped the item $i0.\0"
         .align 2,0
 
 	.global gUnknown_80F8D04
 gUnknown_80F8D04: @ 80F8D04
         .byte 0xEC, 0x8C, 0x0F, 0x08
-        .asciz "The $i0 was deselected."
+        .string "The $i0 was deselected.\0"
 
 	.global gUnknown_80F8D20
 gUnknown_80F8D20: @ 80F8D20
         .byte 0x08, 0x8D, 0x0F, 0x08
         .string "The item $i0 was given\n"
-        .asciz "to $m1."
+        .string "to $m1.\0"
         .align 2,0
 
 	.global gUnknown_80F8D44
 gUnknown_80F8D44: @ 80F8D44
         .byte 0x24, 0x8D, 0x0F, 0x08
-        .asciz "The Toolbox is full."
+        .string "The Toolbox is full.\0"
         .align 2,0
 
 	.global gUnknown_80F8D60
@@ -6652,7 +6651,7 @@ gUnknown_81063D0: @ 81063D0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0xDC, 0x63, 0x10, 0x08
         .string "#+Oh?#W\n"
-        .asciz "#+There~27s someone there."
+        .string "#+There~27s someone there.\0"
         .align 2,0
 
 	.global gUnknown_8106400
@@ -6664,7 +6663,7 @@ gUnknown_810643C: @ 810643C
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x48, 0x64, 0x10, 0x08
-        .asciz "#+$m2 wants to join the team."
+        .string "#+$m2 wants to join the team.\0"
         .align 2,0
 
 	.global gUnknown_8106468
@@ -6672,7 +6671,7 @@ gUnknown_8106468: @ 8106468
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x74, 0x64, 0x10, 0x08
-        .asciz "#+$m2 joined the team! "
+        .string "#+$m2 joined the team! \0"
         .align 2,0
 
 	.global gUnknown_810648C
@@ -6681,7 +6680,7 @@ gUnknown_810648C: @ 810648C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x98, 0x64, 0x10, 0x08
         .string "#+$m3 appears to\n"
-        .asciz "#+be very happy!"
+        .string "#+be very happy!\0"
         .align 2,0
 
 	.global gUnknown_81064BC
@@ -6690,7 +6689,7 @@ gUnknown_81064BC: @ 81064BC
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0xC8, 0x64, 0x10, 0x08
         .string "#+It~27s delighted to have\n"
-        .asciz "#+joined the rescue team!"
+        .string "#+joined the rescue team!\0"
         .align 2,0
 
 	.global gUnknown_8106500
@@ -6699,7 +6698,7 @@ gUnknown_8106500: @ 8106500
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x0C, 0x65, 0x10, 0x08
         .string "#+$m0 turned down\n"
-        .asciz "#+the offer to join."
+        .string "#+the offer to join.\0"
         .align 2,0
 
 	.global gUnknown_8106534
@@ -6707,7 +6706,7 @@ gUnknown_8106534: @ 8106534
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x40, 0x65, 0x10, 0x08
-        .asciz "#+Celebi is very disappointed."
+        .string "#+Celebi is very disappointed.\0"
         .align 2,0
 
 	.global gUnknown_8106560
@@ -6716,10 +6715,10 @@ gUnknown_8106560: @ 8106560
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x6C, 0x65, 0x10, 0x08
         .string "#+$m2 left\n"
-        .asciz "#+dejectedly..."
+        .string "#+dejectedly...\0"
         .align 2,0
         .string "#+Allow $m2\n"
-        .asciz "#+to join the team?"
+        .string "#+to join the team?\0"
         .align 2,0
 
 	.global gUnknown_81065A8
@@ -7203,7 +7202,7 @@ gUnknown_8107544: @ 8107544
 
 	.global gUnknown_81075F4
 gUnknown_81075F4: @ 81075F4
-        .asciz "monspara"
+        .string "monspara\0"
         .align 2,0
 
 	.global gUnknown_8107600
@@ -7216,17 +7215,17 @@ gUnknown_8107608: @ 8107608
 
 	.global gUnknown_8107610
 gUnknown_8107610: @ 8107610
-        .asciz "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?"
+        .string "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?\0"
         .align 2,0
 
 	.global gUnknown_8107630
 gUnknown_8107630: @ 8107630
-        .asciz "%s%c"
+        .string "%s%c\0"
         .align 2,0
 
 	.global gUnknown_8107638
 gUnknown_8107638: @ 8107638
-        .asciz "%s"
+        .string "%s\0"
         .align 2,0
 
 	.global gUnknown_810763C
@@ -7243,12 +7242,12 @@ gUnknown_8107654: @ 8107654
 
 	.global gUnknown_8107684
 gUnknown_8107684: @ 8107684
-        .asciz "kao%03d"
+        .string "kao%03d\0"
         .align 2,0
 
 	.global gUnknown_810768C
 gUnknown_810768C: @ 810768C
-        .asciz "lvmp%03d"
+        .string "lvmp%03d\0"
         .align 2,0
 
 	.global gUnknown_8107698
@@ -7257,7 +7256,7 @@ gUnknown_8107698: @ 8107698
 
 	.global gUnknown_81076BC
 gUnknown_81076BC: @ 81076BC
-        .asciz "etcfont"
+        .string "etcfont\0"
         .align 2,0
 
 	.global gUnknown_81076C4
@@ -7270,27 +7269,27 @@ gUnknown_81076E4: @ 81076E4
 
 	.global gUnknown_8107754
 gUnknown_8107754: @ 8107754
-        .asciz "Stats"
+        .string "Stats\0"
         .align 2,0
 
 	.global gUnknown_810775C
 gUnknown_810775C: @ 810775C
-        .asciz "Features"
+        .string "Features\0"
         .align 2,0
 
 	.global gUnknown_8107768
 gUnknown_8107768: @ 8107768
-        .asciz "Type:"
+        .string "Type:\0"
         .align 2,0
 
 	.global gUnknown_8107770
 gUnknown_8107770: @ 8107770
-        .asciz "Special Abilities:"
+        .string "Special Abilities:\0"
         .align 2,0
 
 	.global gUnknown_8107784
 gUnknown_8107784: @ 8107784
-        .asciz "$i1"
+        .string "$i1\0"
         .align 2,0
 
 	.global gUnknown_8107788
@@ -7303,14 +7302,14 @@ gUnknown_810778C: @ 810778C
 
 	.global gUnknown_8107790
 gUnknown_8107790: @ 8107790
-        .asciz "$i0$i1"
+        .string "$i0$i1\0"
         .align 2,0
 
 	.global gUnknown_8107798
 gUnknown_8107798: @ 8107798
-        .asciz "Info"
+        .string "Info\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_81077A8
@@ -7363,9 +7362,9 @@ gUnknown_8108F4A: @ 8108F4A
 
 	.global gUnknown_8108F50
 gUnknown_8108F50: @ 8108F50
-        .asciz "No problem."
+        .string "No problem.\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_8108F64
@@ -7374,17 +7373,17 @@ gUnknown_8108F64: @ 8108F64
 
 	.global gUnknown_8109764
 gUnknown_8109764: @ 8109764
-        .asciz "itempara"
+        .string "itempara\0"
         .align 2,0
 
 	.global gUnknown_8109770
 gUnknown_8109770: @ 8109770
-        .asciz "%s %d"
+        .string "%s %d\0"
         .align 2,0
 
 	.global gUnknown_8109778
 gUnknown_8109778: @ 8109778
-        .asciz "%s"
+        .string "%s\0"
         .align 2,0
 
 	.global gUnknown_810977C
@@ -7458,16 +7457,16 @@ gUnknown_81098C4: @ 81098C4
 
 	.global gUnknown_81098D0
 gUnknown_81098D0: @ 81098D0
-        .asciz "wazapara"
+        .string "wazapara\0"
         .align 2,0
 
 	.global gUnknown_81098DC
 gUnknown_81098DC: @ 81098DC
-        .asciz "%+d"
+        .string "%+d\0"
 
 	.global gUnknown_81098E0
 gUnknown_81098E0: @ 81098E0
-        .asciz "#c%c%s%s#r"
+        .string "#c%c%s%s#r\0"
         .align 2,0
 
 	.global gUnknown_81098EC
@@ -7496,20 +7495,20 @@ gUnknown_810992B: @ 810992B
 
 	.global gUnknown_810992C
 gUnknown_810992C: @ 810992C
-        .asciz "%s"
+        .string "%s\0"
         .align 2,0
 
 	.global gUnknown_8109930
 gUnknown_8109930: @ 8109930
-        .asciz "$m0"
+        .string "$m0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_8109954
@@ -7519,7 +7518,7 @@ gUnknown_8109954: @ 8109954
 	.global gUnknown_8109984
 gUnknown_8109984: @ 8109984
         .byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x02, 0x01, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gStoryMissionText
@@ -7528,23 +7527,23 @@ gStoryMissionText: @ 8109994
 
 	.global gDummyScenarioText
 gDummyScenarioText: @ 8109CA8
-        .asciz "#CCScenario try dummy#R"
+        .string "#CCScenario try dummy#R\0"
         .align 2,0
 
 	.global gUnknown_8109CC0
 gUnknown_8109CC0: @ 8109CC0
-        .asciz "#CW???#R"
+        .string "#CW???#R\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gMeetNinetalesText
 gMeetNinetalesText: @ 8109CD4
-        .asciz "Meet Ninetales."
+        .string "Meet Ninetales.\0"
         .align 2,0
 
 	.global gAvoidCaptureText
 gAvoidCaptureText: @ 8109CE4
-        .asciz "Avoid capture."
+        .string "Avoid capture.\0"
         .align 2,0
 
 	.global gFinalScenarioText
@@ -7863,8 +7862,8 @@ gUnknown_810AD0C: @ 810AD0C
         .byte 0xfb, 0x00, 0x01, 0x00
         .byte 0x54, 0x01, 0x01, 0x00
         .byte 0xbe, 0x00, 0x00, 0x01
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
         .include "data/text/type_names.inc"
 
@@ -7889,19 +7888,19 @@ gRescueTeamRanks: @ 810B44C
         .byte 0x88, 0xB4, 0x10, 0x08
         .byte 0x78, 0xB4, 0x10, 0x08
         .byte 0x68, 0xB4, 0x10, 0x08 @ Lucario
-        .asciz "Lucario Rank"
+        .string "Lucario Rank\0"
         .align 2,0
-        .asciz "Diamond Rank"
+        .string "Diamond Rank\0"
         .align 2,0
-        .asciz "Platinum Rank"
+        .string "Platinum Rank\0"
         .align 2,0
-        .asciz "Gold Rank"
+        .string "Gold Rank\0"
         .align 2,0
-        .asciz "Silver Rank"
+        .string "Silver Rank\0"
         .align 2,0
-        .asciz "Bronze Rank"
+        .string "Bronze Rank\0"
         .align 2,0
-        .asciz "Normal Rank"
+        .string "Normal Rank\0"
         .align 2,0
 
 	.global gAbilityNames
@@ -7919,13 +7918,13 @@ gRangeNames: @ 810CC0C
 	.global gUnknown_810CF00
 gUnknown_810CF00: @ 810CF00
         .byte 0xF0, 0xCE, 0x10, 0x08 @ (pointer to range string)
-        .asciz "Type"
+        .string "Type\0"
         .align 2,0
 
 	.global gUnknown_810CF0C
 gUnknown_810CF0C: @ 810CF0C
         .byte 0x04, 0xCF, 0x10, 0x08 @ (pointer to type string)
-        .asciz "Power"
+        .string "Power\0"
         .align 2,0
         .byte 0x10, 0xCF, 0x10, 0x08 @ (pointer to power string)
 
@@ -7940,55 +7939,55 @@ gFormattedStatusNames: @ 810D628
 	.global gUnknown_810DD58
 gUnknown_810DD58: @ 810DD58
         .byte 0x50, 0xDD, 0x10, 0x08
-        .asciz "IQ Skills"
+        .string "IQ Skills\0"
         .align 2,0
 
 	.global gUnknown_810DD68
 gUnknown_810DD68: @ 810DD68
         .byte 0x5C, 0xDD, 0x10, 0x08
-        .asciz "Level: #>82.$d0 "
+        .string "Level: #>82.$d0 \0"
         .align 2,0
 
 	.global gUnknown_810DD80
 gUnknown_810DD80: @ 810DD80
         .byte 0x6C, 0xDD, 0x10, 0x08
-        .asciz "Exp. Pts.: #>82.$d1 "
+        .string "Exp. Pts.: #>82.$d1 \0"
         .align 2,0
 
 	.global gUnknown_810DD9C
 gUnknown_810DD9C: @ 810DD9C
         .byte 0x84, 0xDD, 0x10, 0x08
-        .asciz "To next level:#>82.$d0"
+        .string "To next level:#>82.$d0\0"
         .align 2,0
 
 	.global gUnknown_810DDB8
 gUnknown_810DDB8: @ 810DDB8
         .byte 0xA0, 0xDD, 0x10, 0x08
-        .asciz "HP:#>82.$v03/$v13"
+        .string "HP:#>82.$v03/$v13\0"
         .align 2,0
 
 	.global gUnknown_810DDD0
 gUnknown_810DDD0: @ 810DDD0
         .byte 0xBC, 0xDD, 0x10, 0x08
-        .asciz "Attack/Defense:"
+        .string "Attack/Defense:\0"
         .align 2,0
 
 	.global gUnknown_810DDE4
 gUnknown_810DDE4: @ 810DDE4
         .byte 0xD4, 0xDD, 0x10, 0x08
-        .asciz "Sp. Atk./Sp. Def.:"
+        .string "Sp. Atk./Sp. Def.:\0"
         .align 2,0
 
 	.global gUnknown_810DDFC
 gUnknown_810DDFC: @ 810DDFC
         .byte 0xE8, 0xDD, 0x10, 0x08
-        .asciz "#>92.$v03/"
+        .string "#>92.$v03/\0"
         .align 2,0
 
 	.global gUnknown_810DE0C
 gUnknown_810DE0C: @ 810DE0C
         .byte 0x00, 0xDE, 0x10, 0x08
-        .asciz "#>92.#c2$v03#r/"
+        .string "#>92.#c2$v03#r/\0"
         .align 2,0
 
 	.global gUnknown_810DE20
@@ -8002,13 +8001,13 @@ gUnknown_810DE24: @ 810DE24
 	.global gUnknown_810DE28
 gUnknown_810DE28: @ 810DE28
         .byte 0x10, 0xDE, 0x10, 0x08
-        .asciz "#>118.$v03"
+        .string "#>118.$v03\0"
         .align 2,0
 
 	.global gUnknown_810DE38
 gUnknown_810DE38: @ 810DE38
         .byte 0x2C, 0xDE, 0x10, 0x08
-        .asciz "#>118.#c2$v03#r"
+        .string "#>118.#c2$v03#r\0"
         .align 2,0
 
 	.global gUnknown_810DE4C
@@ -8026,37 +8025,37 @@ gUnknown_810DE54: @ 810DE54
 	.global gUnknown_810DE58
 gUnknown_810DE58: @ 810DE58
         .byte 0x1C, 0xAE, 0x10, 0x08
-        .asciz "Item:#>46.$i0 "
+        .string "Item:#>46.$i0 \0"
         .align 2,0
 
 	.global gUnknown_810DE6C
 gUnknown_810DE6C: @ 810DE6C
         .byte 0x5C, 0xDE, 0x10, 0x08
-        .asciz "IQ:#>52.$m0 "
+        .string "IQ:#>52.$m0 \0"
         .align 2,0
 
 	.global gUnknown_810DE80
 gUnknown_810DE80: @ 810DE80
         .byte 0x70, 0xDE, 0x10, 0x08
-        .asciz "Tactics:#>52.$m0 "
+        .string "Tactics:#>52.$m0 \0"
         .align 2,0
 
 	.global gUnknown_810DE98
 gUnknown_810DE98: @ 810DE98
         .byte 0x84, 0xDE, 0x10, 0x08
-        .asciz "Species:#>54.#C6$m0#R "
+        .string "Species:#>54.#C6$m0#R \0"
         .align 2,0
 
 	.global gUnknown_810DEB4
 gUnknown_810DEB4: @ 810DEB4
         .byte 0x9C, 0xDE, 0x10, 0x08
-        .asciz "Friend Area: "
+        .string "Friend Area: \0"
         .align 2,0
 
 	.global gUnknown_810DEC8
 gUnknown_810DEC8: @ 810DEC8
         .byte 0xB8, 0xDE, 0x10, 0x08
-        .asciz "#>22.#C4$i0#R"
+        .string "#>22.#C4$i0#R\0"
         .align 2,0
 
 	.global gUnknown_810DEDC
@@ -8070,25 +8069,25 @@ gUnknown_810DEF4: @ 810DEF4
 	.global gUnknown_810DF78
 gUnknown_810DF78: @ 810DF78
         .byte 0x64, 0xDF, 0x10, 0x08
-        .asciz "No IQ"
+        .string "No IQ\0"
         .align 2,0
 
 	.global gUnknown_810DF84
 gUnknown_810DF84: @ 810DF84
         .byte 0x7C, 0xDF, 0x10, 0x08
-        .asciz "Size:#>82.$m0"
+        .string "Size:#>82.$m0\0"
         .align 2,0
 
 	.global gUnknown_810DF98
 gUnknown_810DF98: @ 810DF98
         .byte 0x88, 0xDF, 0x10, 0x08
-        .asciz "Joined rescue team at:"
+        .string "Joined rescue team at:\0"
         .align 2,0
 
 	.global gUnknown_810DFB4
 gUnknown_810DFB4: @ 810DFB4
         .byte 0x9C, 0xDF, 0x10, 0x08
-        .asciz "#>22.#C5$i0#R"
+        .string "#>22.#C5$i0#R\0"
         .align 2,0
 
 	.global gUnknown_810DFC8
@@ -8102,11 +8101,11 @@ gUnknown_810DFCC: @ 810DFCC
         .byte 0xE0, 0xDF, 0x10, 0x08
         .byte 0xDC, 0xDF, 0x10, 0x08
         .byte 0x20, 0x00, 0x00, 0x00
-        .asciz "Evolution: #>54.No more"
+        .string "Evolution: #>54.No more\0"
         .align 2,0
-        .asciz "Evolution: #>54.Possible"
+        .string "Evolution: #>54.Possible\0"
         .align 2,0
-        .asciz "Evolution: #>54.Not now"
+        .string "Evolution: #>54.Not now\0"
         .align 2,0
 
 	.global gUnknown_810E02C
@@ -8144,19 +8143,19 @@ gUnknown_8113080: @ 8113080
 	.global gUnknown_811383C
 gUnknown_811383C: @ 811383C
         .byte 0x2C, 0x38, 0x11, 0x08
-        .asciz "#+Place: $m0"
+        .string "#+Place: $m0\0"
         .align 2,0
 
 	.global gUnknown_8113850
 gUnknown_8113850: @ 8113850
         .byte 0x40, 0x38, 0x11, 0x08
-        .asciz "$m1 was defeated by"
+        .string "$m1 was defeated by\0"
 
 
 	.global gUnknown_8113868
 gUnknown_8113868: @ 8113868
         .byte 0x54, 0x38, 0x11, 0x08
-        .asciz "$m1"
+        .string "$m1\0"
         .align 2,0
 
 	.global gUnknown_8113870
@@ -8170,12 +8169,12 @@ gUnknown_8113898: @ 8113898
 	.global gUnknown_81138C0
 gUnknown_81138C0: @ 81138C0
         .byte 0x9C, 0x38, 0x11, 0x08
-        .asciz "HP#>42.$d0 "
+        .string "HP#>42.$d0 \0"
 
 	.global gUnknown_81138D0
 gUnknown_81138D0: @ 81138D0
         .byte 0xC4, 0x38, 0x11, 0x08
-        .asciz "Attack#>42.$d0 "
+        .string "Attack#>42.$d0 \0"
 
 	.global gUnknown_81138E4
 gUnknown_81138E4: @ 81138E4
@@ -8212,7 +8211,7 @@ gUnknown_81139B4: @ 81139B4
 	.global gUnknown_81139B8
 gUnknown_81139B8: @ 81139B8
         .byte 0x1C, 0xAE, 0x10, 0x08
-        .asciz "Item:#>42.$i0 "
+        .string "Item:#>42.$i0 \0"
         .align 2,0
 
 	.global gUnknown_81139CC
@@ -8279,104 +8278,104 @@ gFriendAreaNames: @ 81139D0
         .byte 0xD8, 0x3A, 0x11, 0x08
         .byte 0xC8, 0x3A, 0x11, 0x08
         .byte 0xB8, 0x3A, 0x11, 0x08
-        .asciz "Final Island"
+        .string "Final Island\0"
         .align 2,0
-        .asciz "Enclosed Island"
-        .asciz "Southern Island"
-        .asciz "Legendary Island"
+        .string "Enclosed Island\0"
+        .string "Southern Island\0"
+        .string "Legendary Island\0"
         .align 2,0
-        .asciz "Magnetic Quarry"
-        .asciz "Ravaged Field"
+        .string "Magnetic Quarry\0"
+        .string "Ravaged Field\0"
         .align 2,0
-        .asciz "Stratos Lookout"
-        .asciz "Volcanic Pit"
+        .string "Stratos Lookout\0"
+        .string "Volcanic Pit\0"
         .align 2,0
-        .asciz "Ice Floe Beach"
+        .string "Ice Floe Beach\0"
         .align 2,0
-        .asciz "Frigid Cavern"
+        .string "Frigid Cavern\0"
         .align 2,0
-        .asciz "Darkness Ridge"
+        .string "Darkness Ridge\0"
         .align 2,0
-        .asciz "Ancient Relic"
+        .string "Ancient Relic\0"
         .align 2,0
-        .asciz "Aged Chamber O?"
-        .asciz "Aged Chamber AN"
-        .asciz "Furnace Desert"
+        .string "Aged Chamber O?\0"
+        .string "Aged Chamber AN\0"
+        .string "Furnace Desert\0"
         .align 2,0
-        .asciz "Crater"
+        .string "Crater\0"
         .align 2,0
-        .asciz "Power Plant"
-        .asciz "Thunder Meadow"
+        .string "Power Plant\0"
+        .string "Thunder Meadow\0"
         .align 2,0
-        .asciz "Mt. Discipline"
+        .string "Mt. Discipline\0"
         .align 2,0
-        .asciz "Decrepit Lab"
+        .string "Decrepit Lab\0"
         .align 2,0
-        .asciz "Jungle"
+        .string "Jungle\0"
         .align 2,0
-        .asciz "Boulder Cave"
+        .string "Boulder Cave\0"
         .align 2,0
-        .asciz "Dragon Cave"
-        .asciz "Cryptic Cave"
+        .string "Dragon Cave\0"
+        .string "Cryptic Cave\0"
         .align 2,0
-        .asciz "Echo Cave"
+        .string "Echo Cave\0"
         .align 2,0
-        .asciz "Poison Swamp"
+        .string "Poison Swamp\0"
         .align 2,0
-        .asciz "Peanut Swamp"
+        .string "Peanut Swamp\0"
         .align 2,0
-        .asciz "Waterfall Lake"
+        .string "Waterfall Lake\0"
         .align 2,0
-        .asciz "Mystic Lake"
-        .asciz "Turtleshell Pond"
+        .string "Mystic Lake\0"
+        .string "Turtleshell Pond\0"
         .align 2,0
-        .asciz "Tadpole Pond"
+        .string "Tadpole Pond\0"
         .align 2,0
-        .asciz "Rub-a-Dub River"
-        .asciz "Secretive Forest"
+        .string "Rub-a-Dub River\0"
+        .string "Secretive Forest\0"
         .align 2,0
-        .asciz "Transform Forest"
+        .string "Transform Forest\0"
         .align 2,0
-        .asciz "Healing Forest"
+        .string "Healing Forest\0"
         .align 2,0
-        .asciz "Mushroom Forest"
-        .asciz "Energetic Forest"
+        .string "Mushroom Forest\0"
+        .string "Energetic Forest\0"
         .align 2,0
-        .asciz "Overgrown Forest"
+        .string "Overgrown Forest\0"
         .align 2,0
-        .asciz "Flyaway Forest"
+        .string "Flyaway Forest\0"
         .align 2,0
-        .asciz "Mist-Rise Forest"
+        .string "Mist-Rise Forest\0"
         .align 2,0
-        .asciz "Sacred Field"
+        .string "Sacred Field\0"
         .align 2,0
-        .asciz "Scorched Plains"
-        .asciz "Safari"
+        .string "Scorched Plains\0"
+        .string "Safari\0"
         .align 2,0
-        .asciz "Sky Blue Plains"
-        .asciz "Beau Plains"
-        .asciz "Wild Plains"
-        .asciz "Rainbow Peak"
+        .string "Sky Blue Plains\0"
+        .string "Beau Plains\0"
+        .string "Wild Plains\0"
+        .string "Rainbow Peak\0"
         .align 2,0
-        .asciz "Mt. Moonview"
+        .string "Mt. Moonview\0"
         .align 2,0
-        .asciz "Mt. Cleft"
+        .string "Mt. Cleft\0"
         .align 2,0
-        .asciz "Mt. Deepgreen"
+        .string "Mt. Deepgreen\0"
         .align 2,0
-        .asciz "Shallow Beach"
+        .string "Shallow Beach\0"
         .align 2,0
-        .asciz "Seafloor Cave"
+        .string "Seafloor Cave\0"
         .align 2,0
-        .asciz "Deep-Sea Current"
+        .string "Deep-Sea Current\0"
         .align 2,0
-        .asciz "Deep-Sea Floor"
+        .string "Deep-Sea Floor\0"
         .align 2,0
-        .asciz "Serene Sea"
+        .string "Serene Sea\0"
         .align 2,0
-        .asciz "Treasure Sea"
+        .string "Treasure Sea\0"
         .align 2,0
-        .asciz "Bountiful Sea"
+        .string "Bountiful Sea\0"
         .align 2,0
 
 	.global gFriendAreaDescriptions
@@ -8443,35 +8442,35 @@ gUnknown_8115D94: @ 8115D94
 gUnknown_8115DD4: @ 8115DD4
         .byte 0x98, 0x5D, 0x11, 0x08
         .byte 0x87, 0x42
-        .asciz " Game will be saved before entering."
+        .string " Game will be saved before entering.\0"
         .align 2,0
 
 	.global gUnknown_8115E00
 gUnknown_8115E00: @ 8115E00
         .byte 0xD8, 0x5D, 0x11, 0x08
         .byte 0x87, 0x42
-        .asciz " The team will enter at Level 1. "
+        .string " The team will enter at Level 1. \0"
         .align 2,0
 
 	.global gUnknown_8115E28
 gUnknown_8115E28: @ 8115E28
         .byte 0x04, 0x5E, 0x11, 0x08
         .byte 0x87, 0x42, 0x20
-        .asciz "All items will be lost on entering."
+        .string "All items will be lost on entering.\0"
         .align 2,0
 
 	.global gUnknown_8115E54
 gUnknown_8115E54: @ 8115E54
         .byte 0x2C, 0x5E, 0x11, 0x08
         .byte 0x87, 0x42, 0x20
-        .asciz "All money will be lost on entering."
+        .string "All money will be lost on entering.\0"
         .align 2,0
 
 	.global gUnknown_8115E80
 gUnknown_8115E80: @ 8115E80
         .byte 0x58, 0x5E, 0x11, 0x08
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_8115E94
@@ -8480,42 +8479,42 @@ gUnknown_8115E94: @ 8115E94
 
 	.global gUnknown_8115F5C
 gUnknown_8115F5C: @ 8115F5C
-        .asciz "GroundMain ground request %3d %3d"
+        .string "GroundMain ground request %3d %3d\0"
         .align 2,0
 
 	.global gUnknown_8115F80
 gUnknown_8115F80: @ 8115F80
-        .asciz "GroundMain recue request %3d %3d"
+        .string "GroundMain recue request %3d %3d\0"
         .align 2,0
 
 	.global gUnknown_8115FA4
 gUnknown_8115FA4: @ 8115FA4
-        .asciz "GroundMain user rescue request %3d"
+        .string "GroundMain user rescue request %3d\0"
         .align 2,0
 
 	.global gUnknown_8115FC8
 gUnknown_8115FC8: @ 8115FC8
-        .asciz "GroundMain game end request %3d"
+        .string "GroundMain game end request %3d\0"
         .align 2,0
 
 	.global gUnknown_8115FE8
 gUnknown_8115FE8: @ 8115FE8
-        .asciz "GroundMain game cancel request %3d"
+        .string "GroundMain game cancel request %3d\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_811601C
 gUnknown_811601C: @ 811601C
-        .asciz "fontsppa"
+        .string "fontsppa\0"
         .align 2,0
 
 	.global gUnknown_8116028
 gUnknown_8116028: @ 8116028
-        .asciz "fontpal"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "fontpal\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_8116040
@@ -8562,13 +8561,13 @@ gUnknown_8116148: @ 8116148
 	.global gUnknown_811615C
 gUnknown_811615C: @ 811615C
 @ replacing .incbin "baserom.gba", 0x0011615c, 0x10
-        .asciz "#CWinvalidity#R"
+        .string "#CWinvalidity#R\0"
         .align 2,0
 
 	.global gUnknown_811616C
 gUnknown_811616C: @ 811616C
 @ replacing .incbin "baserom.gba", 0x0011616c, 0x10
-        .asciz "#CWundefine#R"
+        .string "#CWundefine#R\0"
         .align 2,0
 
 	.global gUnknown_811617C
@@ -8584,7 +8583,7 @@ gUnknown_8116180: @ 8116180
 	.global gUnknown_8116188
 gUnknown_8116188: @ 8116188
 @ replacing .incbin "baserom.gba", 0x00116188, 0x8
-        .asciz "#CN%s#R"
+        .string "#CN%s#R\0"
         .align 2,0
 
 	.global gUnknown_8116190
@@ -9059,14 +9058,14 @@ gUnknown_8117734: @ 8117734
 
 	.global gUnknown_8117740
 gUnknown_8117740: @ 8117740
-        .asciz "map type error %d"
+        .string "map type error %d\0"
         .align 2,0
 
 	.global gUnknown_8117754
 gUnknown_8117754: @ 8117754
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .asciz "GroundMap_Action"
+        .string "GroundMap_Action\0"
         .align 2,0
 
 	.global gUnknown_8117770
@@ -9079,37 +9078,37 @@ gUnknown_8117784: @ 8117784
 
 	.global gUnknown_811779C
 gUnknown_811779C: @ 811779C
-        .asciz "GroundWeather Select %3d %3d"
+        .string "GroundWeather Select %3d %3d\0"
         .align 2,0
 
 	.global gUnknown_81177BC
 gUnknown_81177BC: @ 81177BC
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
 	.global gUnknown_81177CC
 gUnknown_81177CC: @ 81177CC
-        .asciz "etcfonta"
+        .string "etcfonta\0"
         .align 2,0
 
 	.global gUnknown_81177D8
 gUnknown_81177D8: @ 81177D8
-        .asciz "GroundSprite Reset"
+        .string "GroundSprite Reset\0"
         .align 2,0
 
 	.global gUnknown_81177EC
 gUnknown_81177EC: @ 81177EC
-        .asciz "palet"
+        .string "palet\0"
         .align 2,0
 
 	.global gUnknown_81177F4
 gUnknown_81177F4: @ 81177F4
-        .asciz "extend palette %3d[%3d] %04x up %04x"
+        .string "extend palette %3d[%3d] %04x up %04x\0"
         .align 2,0
-        .asciz "../ground/ground_sprite.c"
+        .string "../ground/ground_sprite.c\0"
         .align 2,0
-        .asciz "GroundSprite_ExtendPaletteAdd"
+        .string "GroundSprite_ExtendPaletteAdd\0"
         .align 2,0
 
 	.global gUnknown_8117858
@@ -9118,7 +9117,7 @@ gUnknown_8117858: @ 8117858
 
 	.global gUnknown_8117864
 gUnknown_8117864: @ 8117864
-        .asciz "extend palette buffer error %08x"
+        .string "extend palette buffer error %08x\0"
         .align 2,0
 
 	.global gUnknown_8117888
@@ -9127,12 +9126,12 @@ gUnknown_8117888: @ 8117888
 
 	.global gUnknown_8117894
 gUnknown_8117894: @ 8117894
-        .asciz "extend palette %3d[%3d] %04x set %04x %04x"
+        .string "extend palette %3d[%3d] %04x set %04x %04x\0"
         .align 2,0
 
 	.global gUnknown_81178C0
 gUnknown_81178C0: @ 81178C0
-        .asciz "extend palette %3d  delete %04x"
+        .string "extend palette %3d  delete %04x\0"
         .align 2,0
 
 	.global gUnknown_81178E0
@@ -9188,9 +9187,9 @@ gUnknown_8118050: @ 8118050
         .byte 0x00, 0x14, 0x00, 0x00
         .byte 0x00, 0x14, 0x00, 0x00
         .byte 0x00, 0x18, 0x00, 0x00
-        .asciz "../ground/ground_lives.c"
+        .string "../ground/ground_lives.c\0"
         .align 2,0
-        .asciz "GroundLives_Select"
+        .string "GroundLives_Select\0"
         .align 2,0
 
 	.global gUnknown_811808C
@@ -9199,17 +9198,17 @@ gUnknown_811808C: @ 811808C
 
 	.global gUnknown_8118098
 gUnknown_8118098: @ 8118098
-        .asciz "GroundLives Select %3d  %3d  %3d"
+        .string "GroundLives Select %3d  %3d  %3d\0"
         .align 2,0
 
 	.global gUnknown_81180BC
 gUnknown_81180BC: @ 81180BC
-        .asciz "GroundLives Cancel %3d  %3d"
+        .string "GroundLives Cancel %3d  %3d\0"
         .align 2,0
 
 	.global gUnknown_81180D8
 gUnknown_81180D8: @ 81180D8
-        .asciz "GroundLives CancelBlank"
+        .string "GroundLives CancelBlank\0"
         .align 2,0
 
 	.global gUnknown_81180F0
@@ -9227,9 +9226,9 @@ gUnknown_81180FC: @ 81180FC
 
 	.global gUnknown_811811C
 gUnknown_811811C: @ 811811C
-        .asciz "GroundLive Add id %3d  kind %3d  type %3d  group %3d  sector %3d"
+        .string "GroundLive Add id %3d  kind %3d  type %3d  group %3d  sector %3d\0"
         .align 2,0
-        .asciz "GroundLives_Add"
+        .string "GroundLives_Add\0"
         .align 2,0
 
 	.global gUnknown_8118170
@@ -9248,14 +9247,14 @@ gUnknown_8118188: @ 8118188
 
 	.global gUnknown_8118194
 gUnknown_8118194: @ 8118194
-        .asciz "GroundLives Delete id %3d"
+        .string "GroundLives Delete id %3d\0"
         .align 2,0
 
 	.global gUnknown_81181B0
 gUnknown_81181B0: @ 81181B0
-        .asciz "GroundLives Execute %3d  kind %3d  %p"
+        .string "GroundLives Execute %3d  kind %3d  %p\0"
         .align 2,0
-        .asciz "GroundLives_ExecuteScript"
+        .string "GroundLives_ExecuteScript\0"
         .align 2,0
 
 	.global gUnknown_81181F4
@@ -9304,24 +9303,24 @@ gUnknown_81183E4: @ 81183E4
 
 	.global gUnknown_81183F0
 gUnknown_81183F0: @ 81183F0
-        .asciz "GroundObject Select %3d  %3d  %3d"
+        .string "GroundObject Select %3d  %3d  %3d\0"
         .align 2,0
 
 	.global gUnknown_8118414
 gUnknown_8118414: @ 8118414
-        .asciz "GroundObject Cancel %3d"
+        .string "GroundObject Cancel %3d\0"
         .align 2,0
 
 	.global gUnknown_811842C
 gUnknown_811842C: @ 811842C
-        .asciz "GroundObject CancelBlank"
+        .string "GroundObject CancelBlank\0"
         .align 2,0
 
 	.global gUnknown_8118448
 gUnknown_8118448: @ 8118448
-        .asciz "GroundObject Add id %3d  kind %3d[%3d]  type %3d  group %3d  sector %3d"
+        .string "GroundObject Add id %3d  kind %3d[%3d]  type %3d  group %3d  sector %3d\0"
         .align 2,0
-        .asciz "GroundObject_Add"
+        .string "GroundObject_Add\0"
         .align 2,0
 
 	.global gUnknown_81184A4
@@ -9330,14 +9329,14 @@ gUnknown_81184A4: @ 81184A4
 
 	.global gUnknown_81184B0
 gUnknown_81184B0: @ 81184B0
-        .asciz "GroundObject Delete id %3d"
+        .string "GroundObject Delete id %3d\0"
         .align 2,0
 
 	.global gUnknown_81184CC
 gUnknown_81184CC: @ 81184CC
-        .asciz "GroundObject Execute %3d  "
+        .string "GroundObject Execute %3d  \0"
         .align 2,0
-        .asciz "GroundObject_ExecuteScript"
+        .string "GroundObject_ExecuteScript\0"
         .align 2,0
 
 	.global gUnknown_8118504
@@ -9410,10 +9409,10 @@ gUnknown_8118798: @ 8118798
         .byte 0x6C, 0x87, 0x11, 0x08
         .byte 0x4D, 0x00, 0x00, 0x00
         .byte 0x84, 0x87, 0x11, 0x08
-        .asciz "pksdir0"
-        .asciz "../ground/ground_event.c"
+        .string "pksdir0\0"
+        .string "../ground/ground_event.c\0"
         .align 2,0
-        .asciz "GroundEvent_Select"
+        .string "GroundEvent_Select\0"
         .align 2,0
 
 	.global gUnknown_81187DC
@@ -9424,61 +9423,61 @@ gUnknown_81187DC: @ 81187DC
 
 	.global gGroundEventSelectText
 gGroundEventSelectText: @ 81187E8
-        .asciz "GroundEvent Select %3d  %3d  %3d"
+        .string "GroundEvent Select %3d  %3d  %3d\0"
         .align 2,0
 
 	.global gGroundEventCancelText
 gGroundEventCancelText: @ 811880C
-        .asciz "GroundEvent Cancel %3d  %3d"
+        .string "GroundEvent Cancel %3d  %3d\0"
         .align 2,0
 
 	.global gGroundEventAddText
 gGroundEventAddText: @ 8118828
-        .asciz "GroundEvent Add id %3d  kind %3d  group %3d  sector %3d  script %p"
+        .string "GroundEvent Add id %3d  kind %3d  group %3d  sector %3d  script %p\0"
         .align 2,0
 
 	.global gGroundEventDeleteText
 gGroundEventDeleteText: @ 811886C
-        .asciz "GroundEvent Delete id %3d"
+        .string "GroundEvent Delete id %3d\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gMapparamText
 gMapparamText: @ 8118890
-        .asciz "mapparam"
+        .string "mapparam\0"
         .align 2,0
 
 	.global gUnknown_811889C
 gUnknown_811889C: @ 811889C
-        .asciz "b%02dfon"
+        .string "b%02dfon\0"
         .align 2,0
 
 	.global gUnknown_81188A8
 gUnknown_81188A8: @ 81188A8
-        .asciz "b%02dpal"
+        .string "b%02dpal\0"
         .align 2,0
 
 	.global gUnknown_81188B4
 gUnknown_81188B4: @ 81188B4
-        .asciz "b%02dcel"
+        .string "b%02dcel\0"
         .align 2,0
 
 	.global gUnknown_81188C0
 gUnknown_81188C0: @ 81188C0
-        .asciz "b%02dcex"
+        .string "b%02dcex\0"
         .align 2,0
 
 	.global gUnknown_81188CC
 gUnknown_81188CC: @ 81188CC
-        .asciz "b%02demap%01d"
+        .string "b%02demap%01d\0"
         .align 2,0
 
 	.global gUnknown_81188DC
 gUnknown_81188DC: @ 81188DC
-        .asciz "b%02dcanm"
+        .string "b%02dcanm\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_81188F0

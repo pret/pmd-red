@@ -44,13 +44,13 @@ gUnknown_80DD190: @ 80DD190 (seems to be Friend Area Warp Script)
 
 	.global gUnknown_80DD1A8
 gUnknown_80DD1A8: @ 80DD1A8
-        .asciz "Whom would you like to visit?"
+        .string "Whom would you like to visit?\0"
         .align 2,0
 
 	.global gUnknown_80DD1C8
 gUnknown_80DD1C8: @ 80DD1C8
 	.string "#+The #C4$i1#R was\n"
-	.asciz "#+handed over. "
+	.string "#+handed over. \0"
 	.align 2,0
 
 	.global gUnknown_80DD1EC
@@ -58,66 +58,66 @@ gUnknown_80DD1EC: @ 80DD1EC
 	.string "#+The #C4$i1#R was\n"
 	.string "#+handed over.#P"
 	.string "#+The #C4$i0#R was\n"
-	.asciz "#+returned to the Toolbox."
+	.string "#+returned to the Toolbox.\0"
 	.align 2,0
 
 	.global gUnknown_80DD240
 gUnknown_80DD240: @ 80DD240
 	.string "#+The #C4$i0#R was\n"
-	.asciz "#+returned to the Toolbox."
+	.string "#+returned to the Toolbox.\0"
 	.align 2,0
 
 	.global gUnknown_80DD270
 gUnknown_80DD270: @ 80DD270
         .string "#+$m1 left the team to remain\n"
-        .asciz "#+on standby in the Friend Area."
+        .string "#+on standby in the Friend Area.\0"
         .align 2,0
 
 	.global gUnknown_80DD2B0
 gUnknown_80DD2B0: @ 80DD2B0
-        .asciz "Give"
+        .string "Give\0"
         .align 2,0
 
 	.global gUnknown_80DD2B8
 gUnknown_80DD2B8: @ 80DD2B8
-        .asciz "Take"
+        .string "Take\0"
         .align 2,0
 
 	.global gUnknown_80DD2C0
 gUnknown_80DD2C0: @ 80DD2C0
-        .asciz "Stand By"
+        .string "Stand By\0"
         .align 2,0
 
 	.global gUnknown_80DD2CC
 gUnknown_80DD2CC: @ 80DD2CC
-        .asciz "Visit"
+        .string "Visit\0"
         .align 2,0
 
 	.global gUnknown_80DD2D4
 gUnknown_80DD2D4: @ 80DD2D4
-        .asciz "Name"
+        .string "Name\0"
         .align 2,0
 
 	.global gUnknown_80DD2DC
 gUnknown_80DD2DC: @ 80DD2DC
-        .asciz "Summary"
+        .string "Summary\0"
         .align 2,0
 
 	.global gUnknown_80DD2E4
 gUnknown_80DD2E4: @ 80DD2E4
-        .asciz "Moves"
+        .string "Moves\0"
         .align 2,0
 
 	.global gUnknown_80DD2EC
 gUnknown_80DD2EC: @ 80DD2EC
-        .asciz "Check IQ"
+        .string "Check IQ\0"
         .align 2,0
 
 	.global gUnknown_80DD2F8
 gUnknown_80DD2F8: @ 80DD2F8
-        .asciz "Item: #C4$i0#R "
+        .string "Item: #C4$i0#R \0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DD310

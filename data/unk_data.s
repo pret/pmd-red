@@ -1,14 +1,14 @@
 	.section .rodata
 
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .byte 0x01, 0x00, 0x00, 0x00 @ # of pointers
         .byte 0x18, 0x00, 0x30, 0x08 @ pointer to pointer table
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .byte 0x20, 0x00, 0x30, 0x08 @ pointer to monpal string
         .byte 0x30, 0x00, 0x30, 0x08 @ Pointer to unknown palette
-        .asciz "monpal"
+        .string "monpal\0"
         .align 2,0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
 
         @ Unknown Palette
         .byte 0x00, 0x00, 0x00, 0x80
@@ -267,10 +267,10 @@
         .byte 0x00, 0x00, 0x00, 0x80
         .byte 0x00, 0x00, 0x00, 0x80
 
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
         @ Blank Space
         .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff

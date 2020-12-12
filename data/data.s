@@ -1,6 +1,6 @@
 	.section .rodata
 
-	.asciz "pksdir0"
+	.string "pksdir0\0"
 
 	.global gUnknown_80B690C
 gUnknown_80B690C: @ 80B690C
@@ -54,13 +54,13 @@ gUnknown_80B6994: @ 80B6994
 
 	.global gUnknown_80B69BC
 gUnknown_80B69BC: @ 80B69BC
-        .asciz "PKDi ver 1.0 [Apr 28 2006] 16:37:54"
+        .string "PKDi ver 1.0 [Apr 28 2006] 16:37:54\0"
         .align 2,0
-        .asciz "titlen0"
+        .string "titlen0\0"
         .align 2,0
-        .asciz "titlen1"
+        .string "titlen1\0"
         .align 2,0
-        .asciz "titlen2"
+        .string "titlen2\0"
         .align 2,0
 
 	.global gUnknown_80B69F8
@@ -68,11 +68,11 @@ gUnknown_80B69F8: @ 80B69F8
         .byte 0xE0, 0x69, 0x0B, 0x08
         .byte 0xE8, 0x69, 0x0B, 0x08
         .byte 0xF0, 0x69, 0x0B, 0x08
-        .asciz "titlen0p"
+        .string "titlen0p\0"
         .align 2,0
-        .asciz "titlen1p"
+        .string "titlen1p\0"
         .align 2,0
-        .asciz "titlen2p"
+        .string "titlen2p\0"
         .align 2,0
 
 	.global gUnknown_80B6A28
@@ -204,126 +204,126 @@ gUnknown_80B6D90: @ 80B6D90
         .byte 0x68, 0x6f, 0x0b, 0x08
         .byte 0xff, 0xff, 0xff, 0xff
 
-        .asciz "DEBUG GROUND"
+        .string "DEBUG GROUND\0"
         .align 2,0
-        .asciz "NEXT DAY"
+        .string "NEXT DAY\0"
         .align 2,0
-        .asciz "R00E01A"
+        .string "R00E01A\0"
         .align 2,0
-        .asciz "S09E01C"
+        .string "S09E01C\0"
         .align 2,0
-        .asciz "S09E01B"
+        .string "S09E01B\0"
         .align 2,0
-        .asciz "S09E01A"
+        .string "S09E01A\0"
         .align 2,0
-        .asciz "S08E01B"
+        .string "S08E01B\0"
         .align 2,0
-        .asciz "S08E01A"
+        .string "S08E01A\0"
         .align 2,0
-        .asciz "S07E01B"
+        .string "S07E01B\0"
         .align 2,0
-        .asciz "S07E01A"
+        .string "S07E01A\0"
         .align 2,0
-        .asciz "S06E01C"
+        .string "S06E01C\0"
         .align 2,0
-        .asciz "S06E01B"
+        .string "S06E01B\0"
         .align 2,0
-        .asciz "S06E01A"
+        .string "S06E01A\0"
         .align 2,0
-        .asciz "S05E01B"
+        .string "S05E01B\0"
         .align 2,0
-        .asciz "S05E01A"
+        .string "S05E01A\0"
         .align 2,0
-        .asciz "S04E01F"
+        .string "S04E01F\0"
         .align 2,0
-        .asciz "S04E01E"
+        .string "S04E01E\0"
         .align 2,0
-        .asciz "S04E01D"
+        .string "S04E01D\0"
         .align 2,0
-        .asciz "S04E01C"
+        .string "S04E01C\0"
         .align 2,0
-        .asciz "S04E01B"
+        .string "S04E01B\0"
         .align 2,0
-        .asciz "S04E01A"
+        .string "S04E01A\0"
         .align 2,0
-        .asciz "S03E01B"
+        .string "S03E01B\0"
         .align 2,0
-        .asciz "S03E01A"
+        .string "S03E01A\0"
         .align 2,0
-        .asciz "S02E02B"
+        .string "S02E02B\0"
         .align 2,0
-        .asciz "S02E02A"
+        .string "S02E02A\0"
         .align 2,0
-        .asciz "S02E01A"
+        .string "S02E01A\0"
         .align 2,0
-        .asciz "S01E02B"
+        .string "S01E02B\0"
         .align 2,0
-        .asciz "S01E02A"
+        .string "S01E02A\0"
         .align 2,0
-        .asciz "S01E01B"
+        .string "S01E01B\0"
         .align 2,0
-        .asciz "S01E01A"
+        .string "S01E01A\0"
         .align 2,0
-        .asciz "S00E01A"
+        .string "S00E01A\0"
         .align 2,0
-        .asciz "M02END"
+        .string "M02END\0"
         .align 2,0
-        .asciz "M02E02H"
+        .string "M02E02H\0"
         .align 2,0
-        .asciz "M02E02G"
+        .string "M02E02G\0"
         .align 2,0
-        .asciz "M02E02F"
+        .string "M02E02F\0"
         .align 2,0
-        .asciz "M02E02E"
+        .string "M02E02E\0"
         .align 2,0
-        .asciz "M02E02D"
+        .string "M02E02D\0"
         .align 2,0
-        .asciz "M02E02C"
+        .string "M02E02C\0"
         .align 2,0
-        .asciz "M02E02B"
+        .string "M02E02B\0"
         .align 2,0
-        .asciz "M02E02A"
+        .string "M02E02A\0"
         .align 2,0
-        .asciz "M02E01A"
+        .string "M02E01A\0"
         .align 2,0
-        .asciz "M01END"
+        .string "M01END\0"
         .align 2,0
-        .asciz "M01E10A"
+        .string "M01E10A\0"
         .align 2,0
-        .asciz "M01E09A"
+        .string "M01E09A\0"
         .align 2,0
-        .asciz "M01E08B"
+        .string "M01E08B\0"
         .align 2,0
-        .asciz "M01E08A"
+        .string "M01E08A\0"
         .align 2,0
-        .asciz "M01E07B"
+        .string "M01E07B\0"
         .align 2,0
-        .asciz "M01E07A"
+        .string "M01E07A\0"
         .align 2,0
-        .asciz "M01E06A"
+        .string "M01E06A\0"
         .align 2,0
-        .asciz "M01E05B"
+        .string "M01E05B\0"
         .align 2,0
-        .asciz "M01E05A"
+        .string "M01E05A\0"
         .align 2,0
-        .asciz "M01E04B"
+        .string "M01E04B\0"
         .align 2,0
-        .asciz "M01E04A"
+        .string "M01E04A\0"
         .align 2,0
-        .asciz "M01E03A"
+        .string "M01E03A\0"
         .align 2,0
-        .asciz "M01E02B"
+        .string "M01E02B\0"
         .align 2,0
-        .asciz "M01E02A"
+        .string "M01E02A\0"
         .align 2,0
-        .asciz "M01E01A"
+        .string "M01E01A\0"
         .align 2,0
-        .asciz "M00E01A"
+        .string "M00E01A\0"
         .align 2,0
 
 	.global gUnknown_80B7144
 gUnknown_80B7144: @ 80B7144
-        .asciz "NONE"
+        .string "NONE\0"
         .align 2,0
 
 	.global gUnknown_80B714C
@@ -338,22 +338,22 @@ gUnknown_80B714C: @ 80B714C
         .byte 0x7C, 0x71, 0x0B, 0x08
         .byte 0x78, 0x71, 0x0B, 0x08
         .byte 0x74, 0x71, 0x0B, 0x08
-        .asciz "END"
-        .asciz "9"
+        .string "END\0"
+        .string "9\0"
         .align 2,0
-        .asciz "3"
+        .string "3\0"
         .align 2,0
-        .asciz "2-2 8"
+        .string "2-2 8\0"
         .align 2,0
-        .asciz "6"
+        .string "6\0"
         .align 2,0
-        .asciz "5"
+        .string "5\0"
         .align 2,0
-        .asciz "4"
+        .string "4\0"
         .align 2,0
-        .asciz "1-2 7"
+        .string "1-2 7\0"
         .align 2,0
-        .asciz "2-1"
+        .string "2-1\0"
         .align 2,0
 
 	.global gUnknown_80B71A0
@@ -362,13 +362,13 @@ gUnknown_80B71A0: @ 80B71A0
         .byte 0xC8, 0x71, 0x0B, 0x08 @ Pointer to CECONTINUE
         .byte 0xBC, 0x71, 0x0B, 0x08 @ Pointer to CNLAST
         .byte 0xB0, 0x71, 0x0B, 0x08 @ Pointer to CWEND
-        .asciz "#CWEND#R"
+        .string "#CWEND#R\0"
         .align 2,0
-        .asciz "#CNLAST#R"
+        .string "#CNLAST#R\0"
         .align 2,0
-        .asciz "#CECONTINUE#R"
+        .string "#CECONTINUE#R\0"
         .align 2,0
-        .asciz "#CISTART#R"
+        .string "#CISTART#R\0"
         .align 2,0
 
 	.global gUnknown_80B71E4
@@ -397,18 +397,18 @@ gUnknown_80B7350: @ 80B7350
 
 	.global gUnknown_80B735C
 gUnknown_80B735C: @ 80B735C
-        .asciz "event flag rule error %d"
+        .string "event flag rule error %d\0"
         .align 2,0
 
 	.global gUnknown_80B7378
 gUnknown_80B7378: @ 80B7378
-        .asciz "error number"
+        .string "error number\0"
         .align 2,0
 
 	.global gUnknown_80B7388
 gUnknown_80B7388: @ 80B7388
-        .asciz "1-1"
-        .asciz "pksdir0"
+        .string "1-1\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80B7394
 gUnknown_80B7394: @ 80B7394
@@ -433,7 +433,7 @@ gUnknown_80B7EFC: @ 80B7EFC
         .byte 0x8C, 0x7E, 0x0B, 0x08
         .byte 0xA1, 0x02, 0x00, 0x00
         .byte 0xEC, 0x7E, 0x0B, 0x08
-        .asciz "_LocateSet"
+        .string "_LocateSet\0"
         .align 2,0
         
 	.global gUnknown_80B7F14
@@ -454,16 +454,16 @@ gUnknown_80B7F88: @ 80B7F88
 
 	.global gUnknown_80B7F94
 gUnknown_80B7F94: @ 80B7F94
-        .asciz "Memroy LocalCreate buffer %08x size can\'t locate" @ Spelling error is intentional
+        .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80B8008
 gUnknown_80B8008: @ 80B8008
@@ -518,12 +518,12 @@ gUnknown_80B86B4: @ 80B86B4
 
 	.global gUnknown_80B87B4
 gUnknown_80B87B4: @ 80B87B4
-        .asciz "kanji_a"
+        .string "kanji_a\0"
         .align 2,0
 
 	.global gUnknown_80B87BC
 gUnknown_80B87BC: @ 80B87BC
-        .asciz "kanji_b"
+        .string "kanji_b\0"
         .align 2,0
 
 	.global gUnknown_80B87C4
@@ -603,30 +603,30 @@ gUnknown_80B8868: @ 80B8868
         .byte 0x00, 0x00, 0xf0, 0xff
         .byte 0x00, 0x00, 0x00, 0xff
         .byte 0x00, 0x00, 0x00, 0xf0
-        .asciz "pksdir0"
+        .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80B88B0
 gUnknown_80B88B0: @ 80B88B0
-        .asciz "font"
+        .string "font\0"
         .align 2,0
 
 	.global gUnknown_80B88B8
 gUnknown_80B88B8: @ 80B88B8
-        .asciz "fontsp"
+        .string "fontsp\0"
         .align 2,0
 
 	.global gUnknown_80B88C0
 gUnknown_80B88C0: @ 80B88C0
-        .asciz "fontsppa"
+        .string "fontsppa\0"
         .align 2,0
 
 	.global gUnknown_80B88CC
 gUnknown_80B88CC: @ 80B88CC
-        .asciz "fontpal"
+        .string "fontpal\0"
         .align 2,0
-        .asciz "pksdir0"
-        .asciz "pksdir0"
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80B88E4
 gUnknown_80B88E4: @ 80B88E4 @ (uppercase font table??)

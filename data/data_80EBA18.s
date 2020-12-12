@@ -121,9 +121,9 @@ gUnknown_80EBA18: @ 80EBA18
     .string "Wigglytuff for what is available.\n"
     .string "By adding to your Friend Areas~2c you can\n"
     .string "recruit Pokémon that wouldn~27t join your\n"
-    .asciz "rescue team before!"
+    .string "rescue team before!\0"
     .align 2,0
-    .asciz "New Friend Areas!"
+    .string "New Friend Areas!\0"
     .align 2,0
 
     .byte 0x43, 0x6f, 0x6e, 0x67
