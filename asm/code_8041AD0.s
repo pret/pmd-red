@@ -957,7 +957,7 @@ _080427FA:
 _08042808: .4byte gUnknown_203B418
 _0804280C: .4byte 0x000135cc
 _08042810: .4byte gUnknown_202DF98
-_08042814: .4byte gUnknown_8100270
+_08042814: .4byte gPtrFeralFoundItemMessage
 	thumb_func_end sub_80427AC
 
 	thumb_func_start sub_8042818

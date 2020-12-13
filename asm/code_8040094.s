@@ -1808,7 +1808,7 @@ _08040EBC: .4byte gUnknown_203B418
 _08040EC0: .4byte 0x00018204
 _08040EC4: .4byte gUnknown_8106A8C
 _08040EC8: .4byte gUnknown_202DE30
-_08040ECC: .4byte gUnknown_8100224
+_08040ECC: .4byte gPtrMagnitudeMessage
 _08040ED0:
 	cmp r1, 0x76
 	bne _08040EF0
