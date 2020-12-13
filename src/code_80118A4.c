@@ -27,11 +27,11 @@ extern void nullsub_28(void);
 
 extern int sprintf(char *, const char *, ...);
 
-struct unkFileStruct
+struct DebugLocation
 {
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
+    char *file;
+    u32 line;
+    char *func;
 };
 
 
@@ -41,9 +41,9 @@ extern s16 gUnknown_202DE22;
 extern s16 gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
-extern const char gNotEntryText;
-extern const char gUnknown_80D418C;
-extern char gUnknown_80D41C4;
+extern const char gNotEntryText[];
+extern const char gUnknown_80D418C[];
+extern const char gUnknown_80D41C4[];
 
 void sub_8011760(void)
 {
@@ -172,55 +172,18 @@ void sub_8011930(u16 r0)
     sub_800BFD0(r0);
 }
 
-// TODO fix this nonmatching
-#ifndef NONMATCHING
-NAKED
-#endif
 u32 sub_8011940(u16 r0)
 {
-#ifdef NONMATCHING
     u32 temp;
     temp = sub_800C068();
 
-    if(r0 == 0x3e7)
+    if(r0 == 999)
     {
-        temp ^= r0;
-        // TODO this OR/NEG apparently is close
-        temp |= -temp;
-        return temp >> 31;
+        temp ^= 999;
+        return (-temp | temp) >> 31;
     }
 
-    if(temp != r0)
-        return 0;
-    else
-        return 1;
-#else
-	asm_unified("\tpush {r4,lr}\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r4, r0, 16\n"
-	"\tbl sub_800C068\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r1, r0, 16\n"
-	"\tldr r0, _08011960\n"
-	"\tcmp r4, r0\n"
-	"\tbne _08011964\n"
-	"\teors r1, r4\n"
-	"\tnegs r0, r1\n"
-	"\torrs r0, r1\n"
-	"\tlsrs r0, 31\n"
-	"\tb _0801196C\n"
-        "\t.align 2,0\n"
-        "_08011960: .4byte 0x000003e7\n"
-        "_08011964:\n"
-        "\tmovs r0, 0\n"
-        "\tcmp r1, r4\n"
-        "\tbne _0801196C\n"
-        "\tmovs r0, 0x1\n"
-        "_0801196C:\n"
-        "\tpop {r4}\n"
-        "\tpop {r1}\n"
-        "\tbx r1");
-#endif
+    return temp == r0;
 }
 
 void sub_8011974(u16 r0, u16 r1)
@@ -289,68 +252,20 @@ void nullsub_26(void)
 {
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
 // Unused
-void PrintFuncFileLineOrNotEntry(char * r0, struct unkFileStruct *r1)
+void PrintFuncFileLineOrNotEntry(char * r0, struct DebugLocation *r1)
 {
-#ifdef NONMATCHING
-    u32 temp;
     if(r1 != 0)
     {
-        // TODO fix regswap here.. otherwise looks good
-        temp = r1->unk4;
-        sprintf(r0, &gUnknown_80D418C, r1->unk8, r1->unk0, temp);
+        sprintf(r0, gUnknown_80D418C, r1->func, r1->file, r1->line);
     }
     else
     {
-        sprintf(r0, &gNotEntryText);
+        sprintf(r0, gNotEntryText);
     }
-#else
-	asm_unified("\tpush {r4,lr}\n"
-	"\tsub sp, 0x4\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r0, r1, 0\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08011A90\n"
-	"\tldr r1, _08011A8C\n"
-	"\tldr r2, [r0, 0x8]\n"
-	"\tldr r3, [r0]\n"
-	"\tldr r0, [r0, 0x4]\n"
-	"\tstr r0, [sp]\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sprintf\n"
-	"\tb _08011A98\n"
-	"\t.align 2, 0\n"
-"_08011A8C: .4byte gUnknown_80D418C\n"
-"_08011A90:\n"
-	"\tldr r1, _08011AA0\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sprintf\n"
-"_08011A98:\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r4}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08011AA0: .4byte gNotEntryText");
-#endif
 }
 
-void PrintFuncFileLine(char *r0, struct unkFileStruct *r1, u32 r2)
+void PrintFuncFileLine(char *buf, struct DebugLocation *loc, char* prefix)
 {
-    volatile u32 temp;
-    volatile u32 temp2;
-    u32 r3;
-    u32 r4;
-    char *preload;
-
-    preload = &gUnknown_80D41C4;
-    r3 = r1->unk8;
-    r4 = r1->unk0;
-    temp = r4;
-    temp2 = r1->unk4;
-
-    sprintf(r0, preload, r2, r3);
+    sprintf(buf, gUnknown_80D41C4, prefix, loc->func, loc->file, loc->line);
 }

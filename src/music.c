@@ -99,12 +99,8 @@ void nullsub_179(void)
 {
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
 u8 sub_800CA38(u32 songIndex)
 {
-#ifdef NONMATCHING
     if(IsBGSong(songIndex))
     {
         if(sub_800CAE0(songIndex) == 0)
@@ -114,70 +110,19 @@ u8 sub_800CA38(u32 songIndex)
     }
     if(sub_800CACC(songIndex))
     {
-        // TODO compiler gets weird here wanted to skip to next check
         if(sub_800CAE0(songIndex) == 1)
         {
-    _0800CA70: 
             return 1;
         }
     }
-    if(sub_800CAAC(songIndex))
+    else if(sub_800CAAC(songIndex))
     {
-        if((sub_800CAE0(songIndex) > 1))
+        if(sub_800CAE0(songIndex) > 1)
         {
-            goto _0800CA70;
+            return 1;
         }
     }
     return 0;
-#else
-	asm_unified("\tpush {r4,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tbl IsBGSong\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800CA54\n"
-	"\tlsls r0, r4, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tbl sub_800CAE0\n"
-	"\tlsls r0, 16\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800CA70\n"
-"_0800CA54:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CACC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800CA74\n"
-	"\tlsls r0, r4, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tbl sub_800CAE0\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x1\n"
-	"\tbne _0800CA90\n"
-"_0800CA70:\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0800CA92\n"
-"_0800CA74:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CAAC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800CA90\n"
-	"\tlsls r0, r4, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tbl sub_800CAE0\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x1\n"
-	"\tbhi _0800CA70\n"
-"_0800CA90:\n"
-	"\tmovs r0, 0\n"
-"_0800CA92:\n"
-	"\tpop {r4}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-#endif
 }
 
 void nullsub_19(void)
