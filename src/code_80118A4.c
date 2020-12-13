@@ -178,10 +178,7 @@ u32 sub_8011940(u16 r0)
     temp = sub_800C068();
 
     if(r0 == 999)
-    {
-        temp ^= 999;
-        return (-temp | temp) >> 31;
-    }
+        return temp != 999;
 
     return temp == r0;
 }
