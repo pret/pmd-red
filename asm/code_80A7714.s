@@ -13496,7 +13496,7 @@ _080ADDFA:
 	ldr r0, [sp, 0x28]
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	adds r0, r4, 0
 	bl CloseFile
 	ldr r1, _080ADEC4
@@ -13519,7 +13519,7 @@ _080ADDFA:
 	ldr r1, _080ADECC
 	ldr r0, [sp, 0x2C]
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 	mov r2, r8
@@ -13537,7 +13537,7 @@ _080ADDFA:
 	movs r1, 0x93
 	lsls r1, 4
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 	b _080ADEFC
@@ -13564,7 +13564,7 @@ _080ADED4:
 	lsls r1, 2
 	mov r0, r10
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 _080ADEFC:

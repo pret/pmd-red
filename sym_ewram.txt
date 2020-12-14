@@ -244,16 +244,16 @@ gUnknown_202D2A4 = .; /* 202D2A4 */
 gFileCache = .; /* 202D2A8 */
 	. += 0x200;
 
-gUnknown_202D4A8 = .; /* 202D4A8 */
+gDecompressBufferPtr = .; /* 202D4A8 */
 	. += 0x4;
 
-gUnknown_202D4AC = .; /* 202D4AC */
+gDecompressBufferStart = .; /* 202D4AC */
 	. += 0x4;
 
-gUnknown_202D4B0 = .; /* 202D4B0 */
+gDecompressBufferCurrent = .; /* 202D4B0 */
 	. += 0x4;
 
-gUnknown_202D4B4 = .; /* 202D4B4 */
+gDecompressBufferByteInInt = .; /* 202D4B4 */
 	. += 0x4;
 
 gUnknown_202D4B8 = .; /* 202D4B8 */

@@ -2158,7 +2158,7 @@ sub_804966C:
 	ldr r0, _08049748
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	adds r0, r4, 0
 	bl CloseFile
 	ldr r1, _0804974C
@@ -2191,7 +2191,7 @@ sub_804966C:
 	adds r0, r1
 	ldr r1, _0804975C
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 	ldr r0, [r6]
@@ -2215,7 +2215,7 @@ sub_804966C:
 	movs r1, 0x93
 	lsls r1, 4
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 	b _08049794
@@ -2249,7 +2249,7 @@ _08049768:
 	movs r1, 0x90
 	lsls r1, 2
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 _08049794:

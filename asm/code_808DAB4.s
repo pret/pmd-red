@@ -267,7 +267,7 @@ sub_808E010:
 	ldr r0, _0808E078
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	adds r0, r4, 0
 	bl CloseFile
 _0808E04A:

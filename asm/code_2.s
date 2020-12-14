@@ -360,7 +360,7 @@ sub_8000634:
 	adds r0, r7, 0
 	movs r1, 0
 	mov r2, r8
-	bl sub_800AAA8
+	bl DecompressATFile
 	movs r2, 0
 	ldr r0, _0800071C
 	movs r3, 0xC0
