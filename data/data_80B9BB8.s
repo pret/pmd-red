@@ -3,12 +3,13 @@
 	.string "pksdir0\0"
         .align 2,0
 
-	.global gUnknown_80B9BB8
-gUnknown_80B9BB8: @ 80B9BB8
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x08, 0x00, 0x00, 0x00
-        .byte 0x10, 0x00, 0x00, 0x00
-        .byte 0x18, 0x00, 0x00, 0x00
+	.global gByteShiftLookup
+gByteShiftLookup: @ 80B9BB8
+        .4byte 0
+        .4byte 8
+        .4byte 16
+        .4byte 24
+
         .string "pksdir0\0"
         .string "pksdir0\0"
         .string "PKD ROM USER DATA 000000\0"

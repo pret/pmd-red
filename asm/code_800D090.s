@@ -7137,7 +7137,7 @@ sub_801059C:
 	ldr r0, _08010714
 	movs r1, 0
 	ldr r2, [sp, 0xC]
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	ldr r1, [r4]
 	ldr r2, _08010718
 	adds r0, r1, r2
@@ -7151,7 +7151,7 @@ sub_801059C:
 	ldr r3, _0801071C
 	adds r0, r3
 	ldr r2, [sp, 0x10]
-	bl sub_800AAA8
+	bl DecompressATFile
 	ldr r1, [r4]
 	ldr r2, _08010720
 	adds r0, r1, r2
@@ -8101,7 +8101,7 @@ sub_8010DA4:
 	ldr r0, _08010EDC
 	movs r1, 0
 	mov r2, r10
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	ldr r1, [r4]
 	ldr r2, _08010EE0
 	adds r0, r1, r2
@@ -8113,7 +8113,7 @@ sub_8010DA4:
 	ldr r0, [r4]
 	adds r0, 0x14
 	adds r2, r7, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	ldr r1, [r4]
 	ldr r3, _08010EE4
 	adds r0, r1, r3

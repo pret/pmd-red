@@ -4046,7 +4046,7 @@ sub_800829C:
 	lsls r1, 5
 	muls r1, r2
 	adds r2, r3, 0
-	bl sub_800AAB4
+	bl DecompressAT
 	movs r2, 0
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
