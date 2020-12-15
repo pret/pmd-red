@@ -1553,66 +1553,21 @@ void DecompressAT_Init(u32 *buffer) {
 }
 
 // 800B1E0
-#ifndef NONMATCHING
-NAKED
-#endif
 char DecompressAT_GetByte(int index) {
-#ifdef NONMATCHING
-    char result;
     u32 data;
     int offset;
 
     offset = index < 0 ? index + 3 : index;
-
     data = gDecompressBufferStart[offset >> 2];
-    // compiler inserts a ldrb here for some reason?
-    result = data;
-    index &= 3;
-    // Need to reorder these somehow to match
-    if (index == 1) result = data >> 8;
-    else if (index == 2) result = data >> 16;
-    else if (index == 3) return data >> 24;
-    return result;
-#else
-    asm_unified(
-        "DecompressAT_GetByte:\n"
-        "  push {lr}\n"
-        "  adds r2, r0, 0\n"
-        "  cmp r2, 0\n"
-        "  bge _0800B1EA\n"
-        "  adds r0, r2, 0x3\n"
-        "_0800B1EA:\n"
-        "  asrs r0, 2\n"
-        "  ldr r1, _0800B20C\n"
-        "  ldr r1, [r1]\n"
-        "  lsls r0, 2\n"
-        "  adds r0, r1\n"
-        "  ldr r0, [r0]\n"
-        "  movs r1, 0x3\n"
-        "  ands r1, r2\n"
-        "  cmp r1, 0x1\n"
-        "  beq _0800B210\n"
-        "  cmp r1, 0x1\n"
-        "  ble _0800B216\n"
-        "  cmp r1, 0x2\n"
-        "  beq _0800B214\n"
-        "  cmp r1, 0x3\n"
-        "  beq _0800B218\n"
-        "  b _0800B216\n"
-        "  .align 2, 0\n"
-        "_0800B20C: .4byte gDecompressBufferStart\n"
-        "_0800B210:\n"
-        "  lsrs r0, 8\n"
-        "  b _0800B216\n"
-        "_0800B214:\n"
-        "  lsrs r0, 16\n"
-        "_0800B216:\n"
-        "  lsls r0, 24\n"
-        "_0800B218:\n"
-        "  lsrs r0, 24\n"
-        "  pop {r1}\n"
-        "  bx r1");
-#endif
+
+    switch (index & 3) {
+        case 0: return data;
+        case 1: return data >> 8;
+        case 2: return data >> 16;
+        case 3: return data >> 24;
+    }
+
+    return data;
 }
 
 // 800B220
