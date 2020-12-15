@@ -68,7 +68,6 @@ SECTIONS {
         asm/text.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
-        asm/code_800AAA0.o(.text);
         src/main.o(.text);
         asm/code_800B540.o(.text);
         src/code_800B5F0.o(.text);

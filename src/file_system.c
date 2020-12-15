@@ -1632,3 +1632,28 @@ void DecompressAT_Finish(void) {
     if (gDecompressBufferByteInInt)
         *gDecompressBufferPtr = gDecompressBufferCurrent;
 }
+
+// 800B294
+bool32 IsATxPCompressed_unused(char *data) {
+    if ((data[0] == 'A' && data[1] == 'T' && data[2] == '4' && data[3] == 'P')) return TRUE;
+    if ((data[0] == 'A' && data[1] == 'T' && data[2] == '3' && data[3] == 'P')) return TRUE;
+    return FALSE;
+}
+
+// 800B2D4
+bool32 sub_800B2D4(char *arg0, char *arg1, int length) {
+    int i;
+    char a, b;
+    for (i = 0; i < length; i++) {
+        a = arg0[i];
+        b = arg1[i];
+        // convert to lowercase
+        if ('A' <= a && a <= 'Z') a += 0x20;
+        if ('A' <= b && b <= 'Z') b += 0x20;
+        if (a != b)
+            return TRUE;
+        if (a == '\0')
+            break;
+    }
+    return FALSE;
+}
