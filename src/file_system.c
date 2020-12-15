@@ -252,13 +252,13 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
     char c13;
     const char *p;
     int command;
-    int resultIndex;
+    int bytesWritten;
     int v16;
     int cmdBit;
     int currentByte;
 
     compressedLength = compressedData[5] + (compressedData[6] << 8);
-    resultIndex = 0;
+    bytesWritten = 0;
     currentByte = 0;
     cmdBit = 8;
 
@@ -284,7 +284,7 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
         return 0;
     }
 
-    if (compressedData[5] == 'N') {
+    if (compressedData[4] == 'N') {
         // uncompressed mode, unused
         int i;
         for (i = 0; i < compressedLength; i++)
@@ -304,13 +304,13 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
 
     // Some mismatches regarding the signedness of these two conditionals, extremely fragile
     if (curIndex < compressedLength) {
-        while (resultLength == 0 || resultIndex < resultLength) {
+        while (resultLength == 0 || bytesWritten < resultLength) {
             if (cmdBit == 8) {
                 currentByte = compressedData[curIndex++];
                 cmdBit = 0;
             }
             if (currentByte & 0x80) { // some weird reordering happens here, couldn't figure it out
-                result[resultIndex++] = compressedData[curIndex++];
+                result[bytesWritten++] = compressedData[curIndex++];
                 goto end_800AE08;
             }
             p = &compressedData[curIndex];
@@ -329,8 +329,8 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
             case 0x1f:
                 c10 = *p & 0xf;
                 c10 = c10 | (c10 << 4);
-                result[resultIndex++] = c10;
-                result[resultIndex++] = c10;
+                result[bytesWritten++] = c10;
+                result[bytesWritten++] = c10;
                 curIndex++;
                 // if curIndex is incremented inside each case, the compiler leaves them inside, but if curIndex is moved after the switch
                 // then it moves the second result assignment (just the 'strb' instruction) after the switch.
@@ -340,22 +340,22 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
                 v12 = *p & 0xf;
                 v12 = (v12 + 1) & 0xf;
                 c10 = v12;
-                result[resultIndex++] = ((*p & 0xf) << 4) | c10;
-                result[resultIndex++] = (v12 << 4) | c10;
+                result[bytesWritten++] = ((*p & 0xf) << 4) | c10;
+                result[bytesWritten++] = (v12 << 4) | c10;
                 curIndex++;
                 break;
             case 0x1d:
                 c11 = *p & 0xf;
                 c10 = c11 << 4;
-                result[resultIndex++] = ((c11 - 1) & 0xf) | c10;
-                result[resultIndex++] = c10 | c11;
+                result[bytesWritten++] = ((c11 - 1) & 0xf) | c10;
+                result[bytesWritten++] = c10 | c11;
                 curIndex++;
                 break;
             case 0x1c:
                 v12 = *p & 0xf;
                 c10 = v12;
-                result[resultIndex++] = (v12 << 4) | c10;
-                result[resultIndex++] = ((v12 & 0xf) << 4) | c10;
+                result[bytesWritten++] = (v12 << 4) | c10;
+                result[bytesWritten++] = ((v12 & 0xf) << 4) | c10;
                 v12--;
                 curIndex++;
                 break;
@@ -363,48 +363,48 @@ u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
                 c10 = *p;
                 c11 = c10 & 0xf;
                 c13 = c11 << 4;
-                result[resultIndex++] = c13 | c11;
+                result[bytesWritten++] = c13 | c11;
                 c10 = (c10 & 0xf) - 1;
-                result[resultIndex++] = c13 | (c10 & 0xf);
+                result[bytesWritten++] = c13 | (c10 & 0xf);
                 curIndex++;
                 break;
             case 0x1a:
                 v12 = ((*p & 0xf) - 1) & 0xf;
                 c10 = v12;
-                result[resultIndex++] = ((*p & 0xf) << 4) | c10;
-                result[resultIndex++] = (v12 << 4) | c10;
+                result[bytesWritten++] = ((*p & 0xf) << 4) | c10;
+                result[bytesWritten++] = (v12 << 4) | c10;
                 curIndex++;
                 break;
             case 0x19:
                 c11 = *p & 0xf;
                 c10 = c11 << 4;
-                result[resultIndex++] = ((c11 + 1) & 0xf) | c10;
-                result[resultIndex++] = c10 | c11;
+                result[bytesWritten++] = ((c11 + 1) & 0xf) | c10;
+                result[bytesWritten++] = c10 | c11;
                 curIndex++;
                 break;
             case 0x18:
                 v12 = *p & 0xf;
                 c10 = v12;
-                result[resultIndex++] = (v12 << 4) | c10;
+                result[bytesWritten++] = (v12 << 4) | c10;
                 v12++;
                 curIndex++;
-                result[resultIndex++] = ((v12 & 0xf) << 4) | c10;
+                result[bytesWritten++] = ((v12 & 0xf) << 4) | c10;
                 break;
             case 0x17:
                 c10 = *p;
                 c11 = c10 & 0xf;
                 c13 = c11 << 4;
-                result[resultIndex++] = c11 | c13;
+                result[bytesWritten++] = c11 | c13;
                 c10 = (c10 & 0xf) + 1;
-                result[resultIndex++] = c13 | (c10 & 0xf);
+                result[bytesWritten++] = c13 | (c10 & 0xf);
                 curIndex++;
                 break;
             default:
                 v16 = curIndex + 1;
                 curIndex += 2;
-                v16 = ((*p & 0xf) << 8) + compressedData[v16] + (-0x1000) + resultIndex;
+                v16 = ((*p & 0xf) << 8) + compressedData[v16] + (-0x1000) + bytesWritten;
                 while (command) {
-                    result[resultIndex++] = result[v16++];
+                    result[bytesWritten++] = result[v16++];
                     command--;
                 }
                 break;
@@ -413,7 +413,7 @@ end_800AE08:
             cmdBit++;
             currentByte <<= 1;
             if (curIndex > compressedLength)
-                return resultIndex;
+                return bytesWritten;
         }
     }
 
@@ -921,13 +921,9 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
     int flags8;
     int flags9;
     int compressedLength;
-    u32 c10;
-    char c11;
-    u32 curIndex;
-    const char *p;
+    int curIndex;
     int command;
     int bytesWritten;
-    int v16;
     int cmdBit;
     int currentByte;
 
@@ -942,6 +938,7 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
      && compressedData[1] == 'T'
      && compressedData[2] == '4'
      && compressedData[3] == 'P') {
+        // compiler swaps comparison order somehow
         if (resultLength != compressedData[0x10] + (compressedData[0x11] << 8) && resultLength != 0)
             return 0;
         curIndex = 0x12;
@@ -954,13 +951,13 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
         return 0;
     }
 
-    if (compressedData[5] == 'N') {
+    if (compressedData[4] == 'N') {
         // uncompressed mode, unused
-        int i;
-        for (i = 0; i < compressedLength; i++)
-            DecompressAT_AppendByte(compressedData[i + 7]);
+        for (bytesWritten = 0; bytesWritten < compressedLength; bytesWritten++) {
+            DecompressAT_AppendByte(compressedData[bytesWritten + 7]);
+        }
         DecompressAT_Finish();
-        return i;
+        return bytesWritten;
     }
 
     flags1 = compressedData[0x7] + 3;
@@ -973,106 +970,118 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
     flags8 = compressedData[0xe] + 3;
     flags9 = compressedData[0xf] + 3;
 
-    // Some mismatches regarding the signedness of these two conditionals, extremely fragile
-    if (curIndex < compressedLength) {
-        while (resultLength == 0 || bytesWritten < resultLength) {
+    // Some mismatches regarding the signedness of these two conditionals, extremely fragile without explicit casts
+    // TODO: clean this up later
+    if ((int)curIndex < (int)compressedLength) {
+        // '<' comparison compiles to wrong branch, but if I add another 'return bytesWritten;'
+        // after the while loop, the compiler merges it with the earlier uncompressed case which breaks stuff.
+        if (resultLength == 0 || (int)bytesWritten < (int)resultLength) return 0;
+        do {
             if (cmdBit == 8) {
                 currentByte = compressedData[curIndex++];
                 cmdBit = 0;
             }
             if (currentByte & 0x80) { // some weird reordering happens here, couldn't figure it out
+                // do NOT try inverting the above condition and moving this to the bottom
+                // it really won't end well
                 DecompressAT_AppendByte(compressedData[curIndex++]);
-                goto end_800B198;
-            }
-            p = &compressedData[curIndex];
-            command = (*p >> 4) + 3;
-            if (command == flags1) command = 0x1f;
-            if (command == flags2) command = 0x1e;
-            if (command == flags3) command = 0x1d;
-            if (command == flags4) command = 0x1c;
-            if (command == flags5) command = 0x1b;
-            if (command == flags6) command = 0x1a;
-            if (command == flags7) command = 0x19;
-            if (command == flags8) command = 0x18;
-            if (command == flags9) command = 0x17;
+                bytesWritten++;
+            } else {
+                command = (compressedData[curIndex] >> 4) + 3;
+                if (command == flags1) command = 0x1f;
+                if (command == flags2) command = 0x1e;
+                if (command == flags3) command = 0x1d;
+                if (command == flags4) command = 0x1c;
+                if (command == flags5) command = 0x1b;
+                if (command == flags6) command = 0x1a;
+                if (command == flags7) command = 0x19;
+                if (command == flags8) command = 0x18;
+                if (command == flags9) command = 0x17;
 
-            switch (command) {
-            case 0x1f:
-                c10 = *p & 0xf;
-                c10 = c10 | (c10 << 4);
-                DecompressAT_AppendByte(c10);
-                break;
-            case 0x1e:
-                c10 = ((*p & 0xf) + 1) & 0xf;
-                DecompressAT_AppendByte(((*p & 0xf) << 4) | c10);
-                c10 |= c10 << 4;
-                break;
-            case 0x1d:
-                c10 = *p & 0xf;
-                DecompressAT_AppendByte(((c10 - 1) & 0xf) | (c10 << 4));
-                c10 |= c10 << 4;
-                break;
-            case 0x1c:
-                c10 = *p & 0xf;
-                DecompressAT_AppendByte((c10 << 4) | c10);
-                c10 |= ((c10 - 1) & 0xf) << 4;
-                break;
-            case 0x1b:
-                c11 = *p & 0xf;
-                c10 = c11 << 4;
-                DecompressAT_AppendByte(c10 | c11);
-                c11--;
-                c10 |= c11 & 0xf;
-                break;
-            case 0x1a:
-                c10 = ((*p & 0xf) - 1) & 0xf;
-                DecompressAT_AppendByte(((*p & 0xf) << 4) | c10);
-                c10 |= c10 << 4;
-                break;
-            case 0x19:
-                c10 = *p & 0xf;
-                DecompressAT_AppendByte(((c10 + 1) & 0xf) | (c10 << 4));
-                c10 |= c10 << 4;
-                break;
-            case 0x18:
-                c10 = *p & 0xf;
-                DecompressAT_AppendByte((c10 << 4) | c10);
-                c10 |= ((c10 + 1) & 0xf) << 4;
-                break;
-            case 0x17:
-                c11 = *p & 0xf;
-                c10 = c11 << 4;
-                DecompressAT_AppendByte(c10 | c11);
-                c11++;
-                c10 |= c11 & 0xf;
-                break;
-            default:
-                v16 = curIndex + 1;
-                curIndex += 2;
-                v16 = ((*p & 0xf) << 8) + compressedData[v16] + (-0x1000) + bytesWritten;
-                while (command) {
-                    char c = DecompressAT_GetByte(v16);
-                    DecompressAT_AppendByte(c);
-                    bytesWritten++;
-                    v16++;
-                    command--;
+                switch (command) {
+                    case 0x1f: {
+                        char c = compressedData[curIndex++] & 0xf;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x1e: {
+                        char c = compressedData[curIndex++] & 0xf;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 1) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
+                        break; // rather large mismatch
+                    }
+                    case 0x1d: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x1c: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c - 1) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x1b: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x1a: {
+                        char c = compressedData[curIndex] & 0xf;
+                        // weird movs/adds here - possibly regalloc
+                        curIndex++;
+                        // missing u8 cast for argument, twice
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c - 1) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
+                        break; // second call is inlined! Should end up after switch code
+                        // and yes, I tried extracting (c-1)&0xf into its own variable, and in 0x1e as well
+                        // which had little effect
+                    }
+                    case 0x19: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x18: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 1) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    case 0x17: {
+                        char c = compressedData[curIndex] & 0xf;
+                        curIndex++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
+                        break;
+                    }
+                    default: {
+                        unsigned tmp = curIndex + 1;
+                        tmp = bytesWritten - 0x1000 + ((compressedData[curIndex++] & 0xf) << 8) + compressedData[tmp];
+                        curIndex++;
+                        for (; command != 0; tmp++, command--) {
+                            char c = DecompressAT_GetByte(tmp);
+                            DecompressAT_AppendByte(c); bytesWritten++;
+                        }
+                    }
                 }
-                goto end_800B198;
             }
-            curIndex++;
-            DecompressAT_AppendByte(c10);
-            bytesWritten += 2;
-end_800B198:
             cmdBit++;
             currentByte <<= 1;
-            if (curIndex > compressedLength)
-                break;
-        }
+        } while ((int)curIndex < (int)compressedLength);
         DecompressAT_Finish();
-        return bytesWritten;
     }
 
-    return 0;
+    return bytesWritten;
 #else
     asm_unified(
         "DecompressATGlobal:\n"
