@@ -2383,23 +2383,116 @@ gUnknown_80DD958: @ 80DD958
 
 	.global gUnknown_80DD970
 gUnknown_80DD970: @ 80DD970
-	.incbin "baserom.gba", 0xDD970, 0x7C
+@ replacing .incbin "baserom.gba", 0x000dd970, 0x7c
+        .4byte gWonderMailReceiveSOSMail
+        .byte 0x00, 0x00, 0x00, 0x00
+        .4byte gWonderMailLeaveForRescue
+        .byte 0x01, 0x00, 0x00, 0x00
+        .4byte gWonderMailSendAOKMail
+        .byte 0x02, 0x00, 0x00, 0x00
+        .4byte gWonderMailDeleteMail
+        .byte 0x03, 0x00, 0x00, 0x00
+        .4byte gWonderMailCancel
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .global gWonderMailCancel @ 80DD9A0
+        gWonderMailCancel:
+        .string "Cancel\0"
+        .align 2,0
+
+        .global gWonderMailDeleteMail @ 80DD9A8
+        gWonderMailDeleteMail:
+        .string "Delete Mail\0"
+        .align 2,0
+
+        .global gWonderMailSendAOKMail @ 80DD9B4
+        gWonderMailSendAOKMail:
+        .string "Send A-OK Mail\0"
+        .align 2,0
+
+        .global gWonderMailLeaveForResuce @ 80DD9C4
+        gWonderMailLeaveForRescue:
+        .string "Leave for Rescue\0"
+        .align 2,0
+
+        .global gWonderMailReceiveSOSMail @ 80DD9D8
+        gWonderMailReceiveSOSMail:
+        .string "Receive SOS Mail\0"
+        .align 2,0
 
 	.global gUnknown_80DD9EC
 gUnknown_80DD9EC: @ 80DD9EC
-	.incbin "baserom.gba", 0xDD9EC, 0x5C
+@ replacing .incbin "baserom.gba", 0x000dd9ec, 0x5c
+        .4byte gWonderMailDeleteSOSMail
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte gWonderMailDeleteAOKMail
+        .byte 0x06, 0x00, 0x00, 0x00
+        .4byte gWonderMailDeleteAllMail
+        .byte 0x07, 0x00, 0x00, 0x00
+        .4byte gWonderMailCancel
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .global gWonderMailDeleteAllMail @ 80DDA14
+        gWonderMailDeleteAllMail:
+        .string "Delete All Mail\0"
+        .align 2,0
+
+        .global gWonderMailDeleteAOKMail @ 80DDA24
+        gWonderMailDeleteAOKMail:
+        .string "Delete A-OK Mail\0"
+        .align 2,0
+
+        .global gWonderMailDeleteSOSMail @ 80DDA38
+        gWonderMailDeleteSOSMail:
+        .string "Delete SOS Mail\0"
+        .align 2,0
 
 	.global gUnknown_80DDA48
 gUnknown_80DDA48: @ 80DDA48
-	.incbin "baserom.gba", 0xDDA48, 0x1C
+@ Menu that shows up when you enter an incorrect Wonder Mail Password
+@ replacing .incbin "baserom.gba", 0x000dda48, 0x1c
+        .4byte gWonderMailYes
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte gWonderMailCancel
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .global gWonderMailYes @ (80DDA60)
+        gWonderMailYes:
+        .string "Yes\0"
+        .align 2,0
 
 	.global gUnknown_80DDA64
 gUnknown_80DDA64: @ 80DDA64
-	.incbin "baserom.gba", 0xDDA64, 0x1C
+@ replacing .incbin "baserom.gba", 0x000dda64, 0x1c
+        .4byte gWonderMailYes
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte gWonderMailNo
+        .byte 0x09, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .global gWonderMailNo @ (80DDA7C)
+        gWonderMailNo:
+        .string "No\0"
+        .align 2,0
 
 	.global gUnknown_80DDA80
 gUnknown_80DDA80: @ 80DDA80
-	.incbin "baserom.gba", 0xDDA80, 0x20
+@ replacing .incbin "baserom.gba", 0x000dda80, 0x20
+        .4byte gWonderMailYes
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte gWonderMailNo
+        .byte 0x09, 0x00, 0x00, 0x00
+        .4byte gWonderMailCancel
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DDAA0
 gUnknown_80DDAA0: @ 80DDAA0

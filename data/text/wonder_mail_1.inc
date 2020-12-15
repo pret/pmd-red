@@ -244,41 +244,41 @@ gUnknown_80DE93C:: @ 80DE93C
 	.string " Come again anytime!\0"
 	.align 2, 0
 
-gUnknown_80DE954:: @ 80DE954
+gWonderMailErrorText:: @ 80DE954
 	.string " ...Uh~2c no?\n"
 	.string "Something~27s not working right here...\0"
 	.align 2, 0
 
-gUnknown_80DE98C:: @ 80DE98C
+gWonderMailNumGBAsText:: @ 80DE98C
 	.string " ...Uh~2c no?\n"
 	.string "The number of GBA systems isn~27t right.\n"
 	.string "You~27d better try this again from the top.\0"
 	.align 2, 0
 
-gUnknown_80DE9F0:: @ 80DE9F0
+gWonderMailWrongModeText:: @ 80DE9F0
 	.string " ...Uh~2c no? You~27re not in the\n"
 	.string "same mode as your friend.\n"
 	.string "You~27d better try this again from the top.\0"
 	.align 2, 0
 
-gUnknown_80DEA58:: @ 80DEA58
+gWonderMailStorageFullText:: @ 80DEA58
 	.string " ...Uh~2c no?\n"
 	.string "Your storage space is stuffed full.\n"
 	.string "You~27d better make room and try again.\0"
 	.align 2, 0
 
-gUnknown_80DEAB4:: @ 80DEAB4
+gWonderMailDuplicateText:: @ 80DEAB4
 	.string " ...Uh~2c no? It looks like\n"
 	.string "you received this mail before.\n"
 	.string "You can~27t get the same mail twice. \0"
 	.align 2, 0
 
-gUnknown_80DEB18:: @ 80DEB18
+gWonderMailNotEligibleReceiveText:: @ 80DEB18
 	.string " ...Uh~2c no?\n"
 	.string "You~27re not eligible to receive this mail.\0"
 	.align 2, 0
 
-gUnknown_80DEB54:: @ 80DEB54
+gWonderMailNoRoomText:: @ 80DEB54
 	.string " ...Uh~2c no?\n"
 	.string "There~27s no room for you to \n"
 	.string "receive any more mail.#P"
@@ -287,24 +287,24 @@ gUnknown_80DEB54:: @ 80DEB54
 	.string "me again about receiving new mail.\0"
 	.align 2, 0
 
-gUnknown_80DEC00:: @ 80DEC00
+gWonderMailFriendErrorText:: @ 80DEC00
 	.string " ...Uh~2c no? Looks like your\n"
 	.string "friend didn~27t do what needed doing.\n"
 	.string "You~27d better do this again from the top.\0"
 	.align 2, 0
 
-gUnknown_80DEC70:: @ 80DEC70
+gWonderMailPasswordIncorrectText:: @ 80DEC70
 	.string " ...Uh~2c no?\n"
 	.string "This here password looks wrong.\n"
 	.string "Do you want to try that again?\0"
 	.align 2, 0
 
-gUnknown_80DECC0:: @ 80DECC0
+gWonderMailSOSPasswordIncorrectText:: @ 80DECC0
 	.string " ...Uh~2c no? This password~27s\n"
 	.string "not for any #CGSOS Mail#R.\0"
 	.align 2, 0
 
-gUnknown_80DECFC:: @ 80DECFC
+gWonderMailAOKMailReceivedText:: @ 80DECFC
 	.string ": I received the #CGSOS Mail#R.\n"
 	.string "Your adventure will be saved.\0"
 	.align 2, 0

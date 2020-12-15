@@ -96,8 +96,8 @@ SECTIONS {
         asm/code_801D760.o(.text);
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
-        src/code_8028DE8.o(.text);
-        asm/code_8028DE8.o(.text);
+        src/wonder_mail.o(.text);
+        asm/wonder_mail.o(.text);
         asm/personality_test.o(.text);
         src/personality_test.o(.text);
         asm/code_803D110.o(.text);
