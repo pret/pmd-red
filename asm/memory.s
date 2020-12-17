@@ -5,39 +5,6 @@
 
 	.text
 	
-	thumb_func_start xxx_memory_attr_related
-xxx_memory_attr_related:
-	push {lr}
-	adds r1, r0, 0
-	cmp r1, 0
-	bne _0800303C
-	movs r0, 0
-	b _08003060
-_0800303C:
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08003048
-	movs r0, 0x4
-	b _08003060
-_08003048:
-	movs r2, 0x7
-	ands r2, r1
-	movs r0, 0x1
-	cmp r2, 0x7
-	beq _08003060
-	movs r0, 0x2
-	cmp r2, 0x1
-	beq _08003060
-	movs r0, 0x5
-	cmp r2, 0x3
-	bne _08003060
-	movs r0, 0x3
-_08003060:
-	pop {r1}
-	bx r1
-	thumb_func_end xxx_memory_attr_related
-
 	thumb_func_start MemorySearchFromFront
 MemorySearchFromFront:
 	push {r4-r7,lr}

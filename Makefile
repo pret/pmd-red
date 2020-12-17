@@ -51,9 +51,9 @@ ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
 ifeq ($(OS),Windows_NT)
-LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a
+LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a ../../libagbsyscall/libagbsyscall.a
 else
-LIB := -L ../../tools/agbcc/lib -lc -lgcc
+LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
 endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
@@ -63,8 +63,7 @@ $(BUILD_DIR)/src/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
 $(BUILD_DIR)/src/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
 $(BUILD_DIR)/src/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 
-$(BUILD_DIR)/src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-$(BUILD_DIR)/src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+$(BUILD_DIR)/src/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 #### Main Rules ####
 
@@ -78,7 +77,7 @@ endif
 ALL_BUILDS := red
 
 # Available targets
-.PHONY: all clean tidy
+.PHONY: all clean tidy libagbsyscall
 
 MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
@@ -107,12 +106,13 @@ clean: tidy
 tidy:
 	$(RM) $(ALL_BUILDS:%=pmd_%{.gba,.elf,.map})
 	$(RM) -r build
+	@$(MAKE) clean -C libagbsyscall
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
-%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC)
+%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
@@ -131,3 +131,6 @@ $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
+
+libagbsyscall:
+	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)

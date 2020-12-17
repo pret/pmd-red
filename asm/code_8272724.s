@@ -9,18 +9,6 @@
 
 	.text
 
-	thumb_func_start sub_8272760
-sub_8272760:
-	push {lr}
-	adds r1, r0, 0
-	ldr r0, _08272770
-	bl sub_8272774
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08272770: .4byte 0x02027370
-	thumb_func_end sub_8272760
-
 	thumb_func_start sub_8272774
 sub_8272774:
 	push {r4-r7,lr}
@@ -167,7 +155,7 @@ sub_8272870:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08272880: .4byte 0x02027370
+_08272880: .4byte gUnknown_2027370
 	thumb_func_end sub_8272870
 
 	thumb_func_start sub_8272884
@@ -336,7 +324,7 @@ sub_82729A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082729B4: .4byte 0x02027370
+_082729B4: .4byte gUnknown_2027370
 	thumb_func_end sub_82729A4
 
 	thumb_func_start sub_82729B8
@@ -451,7 +439,7 @@ sub_8272A78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08272A88: .4byte 0x02027370
+_08272A88: .4byte gUnknown_2027370
 	thumb_func_end sub_8272A78
 
 	thumb_func_start sub_8272A8C

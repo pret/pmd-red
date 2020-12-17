@@ -5,110 +5,6 @@
 
 	.text
 
-	thumb_func_start Hang
-Hang:
-	push {lr}
-_0800D092:
-	swi 0x2
-	b _0800D092
-	thumb_func_end Hang
-
-	thumb_func_start sub_800D098
-sub_800D098:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	ldr r1, _0800D138
-_0800D0A4:
-	ldrh r0, [r1]
-	cmp r0, 0x9F
-	bls _0800D0A4
-	movs r1, 0x80
-	lsls r1, 19
-	ldrh r0, [r1]
-	adds r7, r0, 0
-	movs r0, 0
-	strh r0, [r1]
-	movs r1, 0xA0
-	lsls r1, 19
-	ldr r2, _0800D13C
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r2, _0800D140
-	ldrh r0, [r2]
-	ldr r1, _0800D144
-	cmp r0, r1
-	beq _0800D0D0
-_0800D0CA:
-	ldrh r0, [r2]
-	cmp r0, r1
-	bne _0800D0CA
-_0800D0D0:
-	ldr r6, _0800D148
-	movs r0, 0
-	mov r8, r0
-	strh r0, [r6]
-	ldr r5, _0800D14C
-	ldrh r4, [r5]
-	movs r1, 0xC0
-	lsls r1, 6
-	adds r0, r1, 0
-	strh r0, [r5]
-	ldr r2, _0800D150
-	mov r10, r2
-	ldr r1, _0800D154
-	adds r0, r1, 0
-	strh r0, [r2]
-	movs r2, 0x1
-	mov r9, r2
-	strh r2, [r6]
-	bl SoundBiasReset
-	swi 0x3
-	bl SoundBiasSet
-	mov r0, r8
-	strh r0, [r6]
-	strh r4, [r5]
-	mov r1, r10
-	strh r0, [r1]
-	mov r2, r9
-	strh r2, [r6]
-	ldr r1, _0800D138
-_0800D10E:
-	ldrh r0, [r1]
-	cmp r0, 0x9F
-	bls _0800D10E
-	movs r0, 0x80
-	lsls r0, 19
-	strh r7, [r0]
-	ldr r2, _0800D140
-	ldrh r0, [r2]
-	ldr r1, _0800D144
-	cmp r0, r1
-	beq _0800D12A
-_0800D124:
-	ldrh r0, [r2]
-	cmp r0, r1
-	bne _0800D124
-_0800D12A:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800D138: .4byte 0x04000006
-_0800D13C: .4byte 0x0000efff
-_0800D140: .4byte 0x04000130
-_0800D144: .4byte 0x000003ff
-_0800D148: .4byte 0x04000208
-_0800D14C: .4byte 0x04000200
-_0800D150: .4byte 0x04000132
-_0800D154: .4byte 0x0000c304
-	thumb_func_end sub_800D098
 
 	thumb_func_start sub_800D158
 sub_800D158:
@@ -5700,7 +5596,7 @@ _0800FA20: .4byte gUnknown_203B0E4
 _0800FA24: .4byte gUnknown_2026E4E
 _0800FA28: .4byte 0x00001010
 _0800FA2C: .4byte 0x00004014
-_0800FA30: .4byte gUnknown_80D3570
+_0800FA30: .4byte gFriendAreaLocations
 _0800FA34: .4byte 0x00004a2c
 _0800FA38: .4byte 0x00004a28
 _0800FA3C: .4byte 0x00004a1c
@@ -6743,7 +6639,7 @@ _08010238:
 	ldrh r0, [r4, 0x2]
 	b _08010260
 	.align 2, 0
-_08010248: .4byte gUnknown_80D3570
+_08010248: .4byte gFriendAreaLocations
 _0801024C:
 	adds r2, 0x1
 	cmp r2, 0x7
@@ -7017,7 +6913,7 @@ _08010448:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010470: .4byte gUnknown_80D3F14
+_08010470: .4byte gDungeonCoordinates
 _08010474: .4byte 0xfffffc00
 _08010478: .4byte 0xfffffdff
 _0801047C: .4byte gUnknown_203B0E8
@@ -7090,7 +6986,7 @@ _080104E6:
 	b _0801050E
 	.align 2, 0
 _08010504: .4byte 0x00001108
-_08010508: .4byte gUnknown_80D3F14
+_08010508: .4byte gDungeonCoordinates
 _0801050C:
 	strb r0, [r4]
 _0801050E:
@@ -7151,7 +7047,7 @@ _0801057C: .4byte gUnknown_203B0E8
 _08010580: .4byte 0x00005114
 _08010584: .4byte 0x0000110c
 _08010588: .4byte 0x000052dc
-_0801058C: .4byte gUnknown_80D3F14
+_0801058C: .4byte gDungeonCoordinates
 _08010590: .4byte 0x000052d8
 _08010594: .4byte 0x000052de
 _08010598: .4byte 0x000052da
@@ -7241,7 +7137,7 @@ sub_801059C:
 	ldr r0, _08010714
 	movs r1, 0
 	ldr r2, [sp, 0xC]
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	ldr r1, [r4]
 	ldr r2, _08010718
 	adds r0, r1, r2
@@ -7255,7 +7151,7 @@ sub_801059C:
 	ldr r3, _0801071C
 	adds r0, r3
 	ldr r2, [sp, 0x10]
-	bl sub_800AAA8
+	bl DecompressATFile
 	ldr r1, [r4]
 	ldr r2, _08010720
 	adds r0, r1, r2
@@ -7649,7 +7545,7 @@ sub_8010960:
 	bl sub_80060EC
 	ldr r0, _080109FC
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam
@@ -8129,7 +8025,7 @@ sub_8010D8C:
 	strh r0, [r1, 0x2]
 	bx lr
 	.align 2, 0
-_08010DA0: .4byte gUnknown_80D3F14
+_08010DA0: .4byte gDungeonCoordinates
 	thumb_func_end sub_8010D8C
 
 	thumb_func_start sub_8010DA4
@@ -8205,7 +8101,7 @@ sub_8010DA4:
 	ldr r0, _08010EDC
 	movs r1, 0
 	mov r2, r10
-	bl sub_800AE28
+	bl DecompressATGlobalFile
 	ldr r1, [r4]
 	ldr r2, _08010EE0
 	adds r0, r1, r2
@@ -8217,7 +8113,7 @@ sub_8010DA4:
 	ldr r0, [r4]
 	adds r0, 0x14
 	adds r2, r7, 0
-	bl sub_800AAA8
+	bl DecompressATFile
 	ldr r1, [r4]
 	ldr r3, _08010EE4
 	adds r0, r1, r3
@@ -9279,7 +9175,7 @@ sub_801169C:
 	bl sub_80060EC
 	ldr r0, _0801175C
 	ldr r0, [r0]
-	bl sub_8094FB4
+	bl IncrementPlayTime
 	bl sub_800CB20
 	bl sub_800485C
 	bl CopySpritesToOam
@@ -9304,746 +9200,5 @@ _08011754: .4byte 0x00004dcc
 _08011758: .4byte gUnknown_203B46C
 _0801175C: .4byte gUnknown_203B47C
 	thumb_func_end sub_801169C
-
-	thumb_func_start sub_8011760
-sub_8011760:
-	push {lr}
-	movs r0, 0xD
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	beq _08011776
-	movs r0, 0x13
-	bl sub_800BDFC
-	b _08011788
-_08011776:
-	movs r0, 0xC
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	beq _08011788
-	movs r0, 0x7
-	bl sub_800BDFC
-_08011788:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011760
-
-	thumb_func_start sub_801178C
-sub_801178C:
-	push {lr}
-	movs r0, 0xD
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	beq _080117A2
-	movs r0, 0x13
-	bl sub_800BDFC
-	b _080117A8
-_080117A2:
-	movs r0, 0x7
-	bl sub_800BDFC
-_080117A8:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_801178C
-
-	thumb_func_start sub_80117AC
-sub_80117AC:
-	push {lr}
-	movs r0, 0xD
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	bne _080117C0
-	movs r0, 0x1E
-	bl sub_800BFD0
-_080117C0:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80117AC
-
-	thumb_func_start sub_80117C4
-sub_80117C4:
-	push {lr}
-	movs r0, 0x1E
-	bl sub_800BFD0
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80117C4
-
-	thumb_func_start sub_80117D0
-sub_80117D0:
-	push {lr}
-	movs r0, 0x97
-	lsls r0, 1
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80117D0
-
-	thumb_func_start sub_80117E4
-sub_80117E4:
-	push {lr}
-	ldr r0, _080117F4
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080117F4: .4byte 0x0000012f
-	thumb_func_end sub_80117E4
-
-	thumb_func_start sub_80117F8
-sub_80117F8:
-	push {lr}
-	ldr r0, _08011808
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011808: .4byte 0x0000012d
-	thumb_func_end sub_80117F8
-
-	thumb_func_start sub_801180C
-sub_801180C:
-	ldr r0, _08011820
-	movs r1, 0
-	str r1, [r0]
-	ldr r0, _08011824
-	strh r1, [r0]
-	ldr r0, _08011828
-	strh r1, [r0]
-	ldr r0, _0801182C
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_08011820: .4byte gUnknown_202DE1C
-_08011824: .4byte gUnknown_202DE20
-_08011828: .4byte gUnknown_202DE22
-_0801182C: .4byte gUnknown_202DE24
-	thumb_func_end sub_801180C
-
-	thumb_func_start sub_8011830
-sub_8011830:
-	push {lr}
-	bl sub_800C93C
-	ldr r0, _08011848
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, _0801184C
-	strh r1, [r0]
-	ldr r0, _08011850
-	strh r1, [r0]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011848: .4byte gUnknown_202DE20
-_0801184C: .4byte gUnknown_202DE22
-_08011850: .4byte gUnknown_202DE24
-	thumb_func_end sub_8011830
-
-	thumb_func_start sub_8011854
-sub_8011854:
-	push {lr}
-	bl sub_800C9CC
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011854
-
-	thumb_func_start sub_8011860
-sub_8011860:
-	push {lr}
-	ldr r1, _08011898
-	ldrh r2, [r1]
-	movs r3, 0
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	ble _08011872
-	subs r0, r2, 0x1
-	strh r0, [r1]
-_08011872:
-	ldr r1, _0801189C
-	ldrh r2, [r1]
-	movs r3, 0
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	ble _08011882
-	subs r0, r2, 0x1
-	strh r0, [r1]
-_08011882:
-	ldr r1, _080118A0
-	ldrh r2, [r1]
-	movs r3, 0
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	ble _08011892
-	subs r0, r2, 0x1
-	strh r0, [r1]
-_08011892:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011898: .4byte gUnknown_202DE20
-_0801189C: .4byte gUnknown_202DE22
-_080118A0: .4byte gUnknown_202DE24
-	thumb_func_end sub_8011860
-
-	thumb_func_start sub_80118A4
-sub_80118A4:
-	push {lr}
-	bl sub_8011924
-	ldr r0, _080118BC
-	bl sub_801199C
-	ldr r0, _080118C0
-	bl sub_801199C
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080118BC: .4byte 0x000003e6
-_080118C0: .4byte 0x000003e5
-	thumb_func_end sub_80118A4
-
-	thumb_func_start sub_80118C4
-sub_80118C4:
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	bl sub_800BFD0
-	ldr r0, _080118E8
-	adds r1, r4, 0
-	bl sub_800C3F8
-	ldr r0, _080118EC
-	adds r1, r4, 0
-	bl sub_800C3F8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080118E8: .4byte 0x000003e6
-_080118EC: .4byte 0x000003e5
-	thumb_func_end sub_80118C4
-
-	thumb_func_start sub_80118F0
-sub_80118F0:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_800BDFC
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80118F0
-
-	thumb_func_start sub_8011900
-sub_8011900:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	bl sub_800BE8C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011900
-
-	thumb_func_start sub_8011914
-sub_8011914:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_800BF48
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011914
-
-	thumb_func_start sub_8011924
-sub_8011924:
-	push {lr}
-	bl sub_800BF80
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011924
-
-	thumb_func_start sub_8011930
-sub_8011930:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_800BFD0
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011930
-
-	thumb_func_start sub_8011940
-sub_8011940:
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	bl sub_800C068
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, _08011960
-	cmp r4, r0
-	bne _08011964
-	eors r1, r4
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	b _0801196C
-	.align 2, 0
-_08011960: .4byte 0x000003e7
-_08011964:
-	movs r0, 0
-	cmp r1, r4
-	bne _0801196C
-	movs r0, 0x1
-_0801196C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8011940
-
-	thumb_func_start sub_8011974
-sub_8011974:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	bl sub_800C074
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011974
-
-	thumb_func_start sub_8011988
-sub_8011988:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011988
-
-	thumb_func_start sub_801199C
-sub_801199C:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_800C298
-	pop {r0}
-	bx r0
-	thumb_func_end sub_801199C
-
-	thumb_func_start sub_80119AC
-sub_80119AC:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	bl sub_800C3F8
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80119AC
-
-	thumb_func_start sub_80119C0
-sub_80119C0:
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_800C5D0
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80119C0
-
-	thumb_func_start sub_80119D4
-sub_80119D4:
-	push {r4,lr}
-	adds r2, r0, 0
-	ldr r4, _080119FC
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bgt _080119F6
-	ldr r1, _08011A00
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-	movs r0, 0x4
-	strh r0, [r4]
-_080119F6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080119FC: .4byte gUnknown_202DE20
-_08011A00: .4byte gUnknown_80D4144
-	thumb_func_end sub_80119D4
-
-	thumb_func_start sub_8011A04
-sub_8011A04:
-	push {lr}
-	ldr r1, _08011A24
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	cmp r0, 0
-	bgt _08011A1E
-	movs r0, 0x3
-	strh r0, [r1]
-	ldr r0, _08011A28
-	movs r1, 0x80
-	lsls r1, 1
-	bl sub_800C074
-_08011A1E:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011A24: .4byte gUnknown_202DE22
-_08011A28: .4byte 0x00000131
-	thumb_func_end sub_8011A04
-
-	thumb_func_start sub_8011A2C
-sub_8011A2C:
-	ldr r1, _08011A34
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_08011A34: .4byte gUnknown_202DE1C
-	thumb_func_end sub_8011A2C
-
-	thumb_func_start NDS_DebugInit
-NDS_DebugInit:
-	push {lr}
-	bl nullsub_26
-	bl nullsub_27
-	bl nullsub_29
-	bl nullsub_30
-	bl nullsub_31
-	bl nullsub_32
-	bl nullsub_28
-	ldr r1, _08011A60
-	movs r0, 0x1
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011A60: .4byte gUnknown_203B14C
-	thumb_func_end NDS_DebugInit
-
-	thumb_func_start nullsub_25
-nullsub_25:
-	bx lr
-	thumb_func_end nullsub_25
-
-	thumb_func_start nullsub_26
-nullsub_26:
-	bx lr
-	thumb_func_end nullsub_26
-
-	thumb_func_start PrintFuncFileLineOrNotEntry
-PrintFuncFileLineOrNotEntry:
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r0, r1, 0
-	cmp r0, 0
-	beq _08011A90
-	ldr r1, _08011A8C
-	ldr r2, [r0, 0x8]
-	ldr r3, [r0]
-	ldr r0, [r0, 0x4]
-	str r0, [sp]
-	adds r0, r4, 0
-	bl sprintf
-	b _08011A98
-	.align 2, 0
-_08011A8C: .4byte gUnknown_80D418C
-_08011A90:
-	ldr r1, _08011AA0
-	adds r0, r4, 0
-	bl sprintf
-_08011A98:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011AA0: .4byte gUnknown_80D41B0
-	thumb_func_end PrintFuncFileLineOrNotEntry
-
-	thumb_func_start PrintFuncFileLine
-PrintFuncFileLine:
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r5, _08011AC4
-	ldr r3, [r1, 0x8]
-	ldr r4, [r1]
-	str r4, [sp]
-	ldr r1, [r1, 0x4]
-	str r1, [sp, 0x4]
-	adds r1, r5, 0
-	bl sprintf
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011AC4: .4byte gUnknown_80D41C4
-	thumb_func_end PrintFuncFileLine
-
-	thumb_func_start PrintMessageWithFuncFileLine
-PrintMessageWithFuncFileLine:
-	push {r2,r3}
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r1, [sp, 0x10]
-	add r2, sp, 0x14
-	bl vsprintf
-	adds r0, r4, 0
-	bl strlen
-	adds r4, r0
-	ldr r1, _08011AFC
-	ldr r2, [r5, 0x8]
-	ldr r3, [r5]
-	ldr r0, [r5, 0x4]
-	str r0, [sp]
-	adds r0, r4, 0
-	bl sprintf
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r3}
-	add sp, 0x8
-	bx r3
-	.align 2, 0
-_08011AFC: .4byte gUnknown_80D41EC
-	thumb_func_end PrintMessageWithFuncFileLine
-
-	thumb_func_start nullsub_199
-nullsub_199:
-	bx lr
-	thumb_func_end nullsub_199
-
-	thumb_func_start nullsub_27
-nullsub_27:
-	bx lr
-	thumb_func_end nullsub_27
-
-	thumb_func_start sub_8011B08
-sub_8011B08:
-	ldr r1, _08011B10
-	movs r0, 0x1
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_08011B10: .4byte gUnknown_203B150
-	thumb_func_end sub_8011B08
-
-	thumb_func_start sub_8011B14
-sub_8011B14:
-	ldr r1, _08011B1C
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_08011B1C: .4byte gUnknown_203B150
-	thumb_func_end sub_8011B14
-
-	thumb_func_start sub_8011B20
-sub_8011B20:
-	push {lr}
-	ldr r1, _08011B38
-	movs r2, 0
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08011B2E
-	movs r2, 0x1
-_08011B2E:
-	strb r2, [r1]
-	ldrb r0, [r1]
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08011B38: .4byte gUnknown_203B150
-	thumb_func_end sub_8011B20
-
-	thumb_func_start sub_8011B3C
-sub_8011B3C:
-	ldr r0, _08011B44
-	ldrb r0, [r0]
-	bx lr
-	.align 2, 0
-_08011B44: .4byte gUnknown_203B150
-	thumb_func_end sub_8011B3C
-
-	thumb_func_start nullsub_137
-nullsub_137:
-	bx lr
-	thumb_func_end nullsub_137
-
-	thumb_func_start FatalErrorPrintFuncFileLine
-FatalErrorPrintFuncFileLine:
-	push {lr}
-	sub sp, 0x100
-	adds r2, r0, 0
-	cmp r2, 0
-	beq _08011B5E
-	mov r0, sp
-	bl PrintFuncFileLine
-	b _08011B66
-_08011B5E:
-	ldr r2, _08011B6C
-	mov r0, sp
-	bl PrintFuncFileLine
-_08011B66:
-	add sp, 0x100
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011B6C: .4byte gUnknown_80D421C
-	thumb_func_end FatalErrorPrintFuncFileLine
-
-	thumb_func_start FatalErrorFormatMessage
-FatalErrorFormatMessage:
-	push {r0-r3}
-	push {lr}
-	sub sp, 0x100
-	ldr r1, [sp, 0x104]
-	add r2, sp, 0x108
-	mov r0, sp
-	bl vsprintf
-	add sp, 0x100
-	pop {r3}
-	add sp, 0x10
-	bx r3
-	thumb_func_end FatalErrorFormatMessage
-
-	thumb_func_start sub_8011B88
-sub_8011B88:
-	push {r0-r3}
-	push {lr}
-	sub sp, 0x100
-	ldr r1, [sp, 0x104]
-	add r2, sp, 0x108
-	mov r0, sp
-	bl vsprintf
-	add sp, 0x100
-	pop {r3}
-	add sp, 0x10
-	bx r3
-	thumb_func_end sub_8011B88
-
-	thumb_func_start nullsub_28
-nullsub_28:
-	bx lr
-	thumb_func_end nullsub_28
-
-	thumb_func_start sub_8011BA4
-sub_8011BA4:
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_8011BA4
-
-	thumb_func_start sub_8011BA8
-sub_8011BA8:
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_8011BA8
-
-	thumb_func_start sub_8011BAC
-sub_8011BAC:
-	ldr r0, _08011BB0
-	bx lr
-	.align 2, 0
-_08011BB0: .4byte gUnknown_80D4288
-	thumb_func_end sub_8011BAC
-
-	thumb_func_start sub_8011BB4
-sub_8011BB4:
-	push {lr}
-	bl Hang
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8011BB4
-
-	thumb_func_start Log
-Log:
-	push {r1-r3}
-	add sp, 0xC
-	bx lr
-	thumb_func_end Log
-
-	thumb_func_start sub_8011BC8
-sub_8011BC8:
-	push {r2,r3}
-	add sp, 0x8
-	bx lr
-	thumb_func_end sub_8011BC8
-
-	thumb_func_start nullsub_29
-nullsub_29:
-	bx lr
-	thumb_func_end nullsub_29
-
-	thumb_func_start nullsub_30
-nullsub_30:
-	bx lr
-	thumb_func_end nullsub_30
-
-	thumb_func_start nullsub_31
-nullsub_31:
-	bx lr
-	thumb_func_end nullsub_31
-
-	thumb_func_start nullsub_32
-nullsub_32:
-	bx lr
-	thumb_func_end nullsub_32
-
-	thumb_func_start FatalErrorHang
-FatalErrorHang:
-	push {lr}
-	bl Hang
-	pop {r0}
-	bx r0
-	thumb_func_end FatalErrorHang
-
-	thumb_func_start FatalError
-FatalError:
-	push {r1-r3}
-	push {r4,lr}
-	sub sp, 0x100
-	adds r1, r0, 0
-	ldr r4, [sp, 0x108]
-	ldr r0, _08011C14
-	bl FatalErrorPrintFuncFileLine
-	add r2, sp, 0x10C
-	mov r0, sp
-	adds r1, r4, 0
-	bl vsprintf
-	ldr r0, _08011C18
-	mov r1, sp
-	bl FatalErrorFormatMessage
-	bl FatalErrorHang
-	.align 2, 0
-_08011C14: .4byte gUnknown_80D42C0
-_08011C18: .4byte gUnknown_80D42D4
-	thumb_func_end FatalError
 
 	.align 2, 0 @ Don't pad with nop.

@@ -244,16 +244,16 @@ gUnknown_202D2A4 = .; /* 202D2A4 */
 gFileCache = .; /* 202D2A8 */
 	. += 0x200;
 
-gUnknown_202D4A8 = .; /* 202D4A8 */
+gDecompressBufferPtr = .; /* 202D4A8 */
 	. += 0x4;
 
-gUnknown_202D4AC = .; /* 202D4AC */
+gDecompressBufferStart = .; /* 202D4AC */
 	. += 0x4;
 
-gUnknown_202D4B0 = .; /* 202D4B0 */
+gDecompressBufferCurrent = .; /* 202D4B0 */
 	. += 0x4;
 
-gUnknown_202D4B4 = .; /* 202D4B4 */
+gDecompressBufferByteInInt = .; /* 202D4B4 */
 	. += 0x4;
 
 gUnknown_202D4B8 = .; /* 202D4B8 */
@@ -398,7 +398,7 @@ gUnknown_202DE58 = .; /* 202DE58 */
 gUnknown_202DEA8 = .; /* 202DEA8 */
 	. += 0xF0;
 
-gUnknown_202DF98 = .; /* 202DF98 */
+gUnknown_202DF98 = .; /* 202DF98 ( Parner Nickname? ) */
 	. += 0x50;
 
 gUnknown_202DFE8 = .; /* 202DFE8 */
@@ -419,7 +419,7 @@ gUnknown_202E1C8 = .; /* 202E1C8 */
 gUnknown_202E218 = .; /* 202E218 */
 	. += 0xA0;
 
-gUnknown_202E2B8 = .; /* 202E2B8 */
+gPlayerName = .; /* 202E2B8 */
 	. += 0x320;
 
 gUnknown_202E5D8 = .; /* 202E5D8 */
@@ -431,7 +431,7 @@ gUnknown_202E628 = .; /* 202E628 */
 gUnknown_202E6E0 = .; /* 202E6E0 */
 	. += 0x8;
 
-gUnknown_202E6E8 = .; /* 202E6E8 */
+gTeamName = .; /* 202E6E8 */
 	. += 0x50;
 
 gUnknown_202E738 = .; /* 202E738 */
@@ -473,7 +473,7 @@ gUnknown_202E791 = .; /* 202E791 */
 gUnknown_202E794 = .; /* 202E794 */
 	. += 0x4;
 
-gUnknown_202E798 = .; /* 202E798 */
+gUnknown_202E798 = .; /* 202E798  (on screen dialogue text) */
 	. += 0x3E8;
 
 gUnknown_202EB80 = .; /* 202EB80 */
@@ -875,10 +875,10 @@ gItemParametersFile = .; /* 20389A0 */
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;
 
-gUnknown_2038C10 = .; /* 2038C10 */
+gUnknown_2038C10 = .; /* 2038C10 (seems to be copy of gTeamName)*/
 	. += 0x18;
 
-gUnknown_2038C28 = .; /* 2038C28 */
+gBoughtFriendAreas = .; /* 2038C28 (one byte for each friend area) */
 	. += 0x3C;
 
 gWazaParametersFile = .; /* 2038C64 */
@@ -893,7 +893,7 @@ gUnknown_2038C6C = .; /* 2038C6C */
 gUnknown_2038C70 = .; /* 2038C70 */
 	. += 0x10;
 
-gUnknown_2038C80 = .; /* 2038C80 */
+gPlayTime = .; /* 2038C80 */
 	. += 0x8;
 
 gUnknown_2038C88 = .; /* 2038C88 */
@@ -1019,7 +1019,8 @@ gUnknown_2039B48 = .; /* 2039B48 */
 gUnknown_2039D50 = .; /* 2039D50 */
 	. += 0x48;
 
-gUnknown_2039D98 = .; /* 2039D98 */
+gUnknown_2039D98 = .; /* 2039D98 (seems to be storage for strings.. used for
+both Team Name and Player Name) */
 	. += 0xC;
 
 gUnknown_2039DA4 = .; /* 2039DA4 */

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8009804
-sub_8009804:
+	thumb_func_start vram_related_8009804
+vram_related_8009804:
 	push {lr}
 	movs r1, 0xC0
 	lsls r1, 19
@@ -83,7 +83,7 @@ _08009890: .4byte 0x06010000
 _08009894: .4byte 0x00001f7f
 _08009898: .4byte 0x05000200
 _0800989C: .4byte 0x00a000a0
-	thumb_func_end sub_8009804
+	thumb_func_end vram_related_8009804
 
 	thumb_func_start sub_80098A0
 sub_80098A0:
@@ -2355,33 +2355,5 @@ _0800A878:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_800A78C
-
-	thumb_func_start sub_800A894
-sub_800A894:
-	push {lr}
-	adds r2, r0, 0
-	adds r0, r1, 0
-	cmp r0, 0
-	bgt _0800A8A0
-	movs r0, 0x1
-_0800A8A0:
-	ldr r1, _0800A8BC
-	cmp r0, r1
-	ble _0800A8A8
-	adds r0, r1, 0
-_0800A8A8:
-	ldr r1, _0800A8C0
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	str r0, [r2, 0x4]
-	movs r0, 0
-	str r0, [r2]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A8BC: .4byte 0x0000012b
-_0800A8C0: .4byte gUnknown_80B96E4
-	thumb_func_end sub_800A894
 
 	.align 2, 0 @ Don't pad with nop.
