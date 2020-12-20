@@ -20,8 +20,8 @@ void DecompressAT_AppendByte(char value);
 void DecompressAT_Finish(void);
 char DecompressAT_GetByte(int index);
 
-u32 DecompressAT(char *result, u32 resultLength, const char *compressedData);
-u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData);
+u32 DecompressAT(char *result, s32 resultLength, const char *compressedData);
+u32 DecompressATGlobal(u32 *result, s32 resultLength, const char *compressedData);
 u8 *GetSiroPtr(struct OpenedFile *);
 void NDS_DecompressRLE(void *);
 
@@ -216,686 +216,169 @@ void nullsub_175(void)
 {
 }
 
-u32 DecompressATFile(char *result, u32 resultLength, struct OpenedFile *file)
+u32 DecompressATFile(char *result, s32 resultLength, struct OpenedFile *file)
 {
     return DecompressAT(result, resultLength, file->data);
 }
 
 // 800AAB4
-#ifndef NONMATCHING
-NAKED
-#endif
-u32 DecompressAT(char *result, u32 resultLength, const char *compressedData)
+u32 DecompressAT(char *result, s32 resultLength, const char *compressedData)
 {
-#ifdef NONMATCHING
-
-    // This function is an absolute mess, the compiler does some extremely weird things
-    // which makes matching it difficult.
-
-    // As-is, it's likely that this implementation is nonfunctional
-    // as I've shuffled things around a lot while trying to make some parts match.
-
-    int flags1;
-    int flags2;
-    int flags3;
-    int flags4;
-    int flags5;
-    int flags6;
-    int flags7;
-    int flags8;
-    int flags9;
-    int compressedLength;
-    char c10;
-    char c11;
-    u32 curIndex;
-    int v12;
-    char c13;
-    const char *p;
-    int command;
-    int bytesWritten;
-    int v16;
-    int cmdBit;
-    int currentByte;
-
-    compressedLength = compressedData[5] + (compressedData[6] << 8);
-    bytesWritten = 0;
-    currentByte = 0;
-    cmdBit = 8;
+    s32 compressedLength = compressedData[5] + (compressedData[6] << 8);
+    s32 bytesWritten = 0;
+    s32 currentByte = 0;
+    s32 cmdBit = 8;
+    s32 curIndex;
+    s32 flags[9];
+    s32 idxStart;
 
     if (compressedData[0] == 'A'
      && compressedData[1] == 'T'
      && compressedData[2] == '4'
      && compressedData[3] == 'P') {
-        if (resultLength != compressedData[0x10] + (compressedData[0x11] << 8) && resultLength != 0)
+        u32 tmp2 = compressedData[0x10] + (compressedData[0x11] << 8);
+        if (resultLength != 0 && resultLength != tmp2)
             return 0;
-        curIndex = 0x12;
+        idxStart = 0x12;
     } else if (compressedData[0] == 'A'
             && compressedData[1] == 'T'
             && compressedData[2] == '3'
             && compressedData[3] == 'P') {
-        // Can't get this to match - compiler chooses beq, b pairs instead of bne
-        // I tried multiple if (... != 'x') return 0;
-        // I tried != chained with ||
-        // I tried == chained with &&
-        // I tried nested if (... == 'x')
-        // None of that produced matching code.
-        curIndex = 0x10;
+        idxStart = 0x10;
     } else {
         return 0;
     }
 
     if (compressedData[4] == 'N') {
         // uncompressed mode, unused
-        int i;
-        for (i = 0; i < compressedLength; i++)
-            result[i] = compressedData[i + 7];
-        return i;
+        for (curIndex = 0; curIndex < compressedLength; curIndex++) {
+            result[curIndex] = compressedData[curIndex + 7];
+        }
+        return curIndex;
     }
 
-    flags1 = compressedData[0x7] + 3;
-    flags2 = compressedData[0x8] + 3;
-    flags3 = compressedData[0x9] + 3;
-    flags4 = compressedData[0xa] + 3;
-    flags5 = compressedData[0xb] + 3;
-    flags6 = compressedData[0xc] + 3;
-    flags7 = compressedData[0xd] + 3;
-    flags8 = compressedData[0xe] + 3;
-    flags9 = compressedData[0xf] + 3;
+    flags[0] = compressedData[0x7] + 3;
+    flags[1] = compressedData[0x8] + 3;
+    flags[2] = compressedData[0x9] + 3;
+    flags[3] = compressedData[0xa] + 3;
+    flags[4] = compressedData[0xb] + 3;
+    flags[5] = compressedData[0xc] + 3;
+    flags[6] = compressedData[0xd] + 3;
+    flags[7] = compressedData[0xe] + 3;
+    flags[8] = compressedData[0xf] + 3;
 
-    // Some mismatches regarding the signedness of these two conditionals, extremely fragile
+    curIndex = idxStart;
     if (curIndex < compressedLength) {
-        while (resultLength == 0 || bytesWritten < resultLength) {
+
+        do {
+            if (resultLength != 0 && bytesWritten >= resultLength)
+                return 0;
+
             if (cmdBit == 8) {
                 currentByte = compressedData[curIndex++];
                 cmdBit = 0;
             }
-            if (currentByte & 0x80) { // some weird reordering happens here, couldn't figure it out
-                result[bytesWritten++] = compressedData[curIndex++];
-                goto end_800AE08;
-            }
-            p = &compressedData[curIndex];
-            command = (*p >> 4) + 3;
-            if (command == flags1) command = 0x1f;
-            if (command == flags2) command = 0x1e;
-            if (command == flags3) command = 0x1d;
-            if (command == flags4) command = 0x1c;
-            if (command == flags5) command = 0x1b;
-            if (command == flags6) command = 0x1a;
-            if (command == flags7) command = 0x19;
-            if (command == flags8) command = 0x18;
-            if (command == flags9) command = 0x17;
+            if ((currentByte & 0x80) == 0) {
+                // if bit is unset, process command
+                u32 command = (compressedData[curIndex] >> 4) + 3;
+                u32 tmp = (compressedData[curIndex] & 0xf) << 8;
+                u32 c;
 
-            switch (command) {
-            case 0x1f:
-                c10 = *p & 0xf;
-                c10 = c10 | (c10 << 4);
-                result[bytesWritten++] = c10;
-                result[bytesWritten++] = c10;
-                curIndex++;
-                // if curIndex is incremented inside each case, the compiler leaves them inside, but if curIndex is moved after the switch
-                // then it moves the second result assignment (just the 'strb' instruction) after the switch.
-                // Can't figure out how to make the compiler move only one without the other.
-                break;
-            case 0x1e:
-                v12 = *p & 0xf;
-                v12 = (v12 + 1) & 0xf;
-                c10 = v12;
-                result[bytesWritten++] = ((*p & 0xf) << 4) | c10;
-                result[bytesWritten++] = (v12 << 4) | c10;
-                curIndex++;
-                break;
-            case 0x1d:
-                c11 = *p & 0xf;
-                c10 = c11 << 4;
-                result[bytesWritten++] = ((c11 - 1) & 0xf) | c10;
-                result[bytesWritten++] = c10 | c11;
-                curIndex++;
-                break;
-            case 0x1c:
-                v12 = *p & 0xf;
-                c10 = v12;
-                result[bytesWritten++] = (v12 << 4) | c10;
-                result[bytesWritten++] = ((v12 & 0xf) << 4) | c10;
-                v12--;
-                curIndex++;
-                break;
-            case 0x1b:
-                c10 = *p;
-                c11 = c10 & 0xf;
-                c13 = c11 << 4;
-                result[bytesWritten++] = c13 | c11;
-                c10 = (c10 & 0xf) - 1;
-                result[bytesWritten++] = c13 | (c10 & 0xf);
-                curIndex++;
-                break;
-            case 0x1a:
-                v12 = ((*p & 0xf) - 1) & 0xf;
-                c10 = v12;
-                result[bytesWritten++] = ((*p & 0xf) << 4) | c10;
-                result[bytesWritten++] = (v12 << 4) | c10;
-                curIndex++;
-                break;
-            case 0x19:
-                c11 = *p & 0xf;
-                c10 = c11 << 4;
-                result[bytesWritten++] = ((c11 + 1) & 0xf) | c10;
-                result[bytesWritten++] = c10 | c11;
-                curIndex++;
-                break;
-            case 0x18:
-                v12 = *p & 0xf;
-                c10 = v12;
-                result[bytesWritten++] = (v12 << 4) | c10;
-                v12++;
-                curIndex++;
-                result[bytesWritten++] = ((v12 & 0xf) << 4) | c10;
-                break;
-            case 0x17:
-                c10 = *p;
-                c11 = c10 & 0xf;
-                c13 = c11 << 4;
-                result[bytesWritten++] = c11 | c13;
-                c10 = (c10 & 0xf) + 1;
-                result[bytesWritten++] = c13 | (c10 & 0xf);
-                curIndex++;
-                break;
-            default:
-                v16 = curIndex + 1;
-                curIndex += 2;
-                v16 = ((*p & 0xf) << 8) + compressedData[v16] + (-0x1000) + bytesWritten;
-                while (command) {
-                    result[bytesWritten++] = result[v16++];
-                    command--;
+                if (command == flags[0]) command = 0x1f;
+                if (command == flags[1]) command = 0x1e;
+                if (command == flags[2]) command = 0x1d;
+                if (command == flags[3]) command = 0x1c;
+                if (command == flags[4]) command = 0x1b;
+                if (command == flags[5]) command = 0x1a;
+                if (command == flags[6]) command = 0x19;
+                if (command == flags[7]) command = 0x18;
+                if (command == flags[8]) command = 0x17;
+
+                switch (command) {
+                    case 0x1f: { // aaaa
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        break;
+                    }
+                    case 0x1e: { // abbb
+                        u8 byte = compressedData[curIndex];
+                        c = 0xF;
+                        c = byte & c;
+                        curIndex++;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf));
+                        result[bytesWritten++] = ((((c + 1) & 0xf) << 4) | ((c + 1) & 0xf));
+                        break;
+                    }
+                    case 0x1d: { // babb
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf));
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        break;
+                    }
+                    case 0x1c: { // bbab
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        result[bytesWritten++] = ((((c - 1) & 0xf) << 4) | ((c + 0) & 0xf));
+                        break;
+                    }
+                    case 0x1b: { // bbba
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf));
+                        break;
+                    }
+                    case 0x1a: { // baaa -- the horrible, hard-to-match case
+                        u8 byte = compressedData[curIndex];
+                        c = 0xF;
+                        c = byte & c;
+                        curIndex++;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf));
+                        result[bytesWritten++] = ((((c - 1) & 0xf) << 4) | ((c - 1) & 0xf));
+                        break;
+                    }
+                    case 0x19: { // abaa
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf));
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        break;
+                    }
+                    case 0x18: { // aaba
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        result[bytesWritten++] = ((((c + 1) & 0xf) << 4) | ((c + 0) & 0xf));
+                        break;
+                    }
+                    case 0x17: { // aaab
+                        c = compressedData[curIndex++] & 0xf;
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf));
+                        result[bytesWritten++] = ((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf));
+                        break;
+                    }
+                    default: {
+                        tmp += (compressedData[curIndex++, curIndex++]);
+                        tmp += bytesWritten - 0x1000;
+                        for(;command;command--)
+                        {
+                            result[bytesWritten++] = result[tmp];
+                            tmp++;
+                        }
+                    }
                 }
-                break;
+            } else {
+                // if bit is set, just copy next byte
+                result[bytesWritten++] = (compressedData[curIndex]);
+                curIndex++;
             }
-end_800AE08:
             cmdBit++;
             currentByte <<= 1;
-            if (curIndex > compressedLength)
-                return bytesWritten;
-        }
+        } while (curIndex < compressedLength);
     }
 
-    return 0;
-#else
-    asm_unified(
-        "DecompressAT:\n"
-        "  push {r4-r7,lr}\n"
-        "  mov r7, r10\n"
-        "  mov r6, r9\n"
-        "  mov r5, r8\n"
-        "  push {r5-r7}\n"
-        "  sub sp, 0x2C\n"
-        "  mov r12, r0\n"
-        "  str r1, [sp, 0x24]\n"
-        "  mov r8, r2\n"
-        "  ldrb r0, [r2, 0x5]\n"
-        "  ldrb r1, [r2, 0x6]\n"
-        "  lsls r1, 8\n"
-        "  adds r0, r1\n"
-        "  str r0, [sp, 0x28]\n"
-        "  movs r6, 0\n"
-        "  mov r10, r6\n"
-        "  movs r0, 0x8\n"
-        "  mov r9, r0\n"
-        "  ldrb r0, [r2]\n"
-        "  cmp r0, 0x41\n"
-        "  bne _0800AB04\n"
-        "  ldrb r0, [r2, 0x1]\n"
-        "  adds r1, r0, 0\n"
-        "  cmp r1, 0x54\n"
-        "  bne _0800AB0C\n"
-        "  ldrb r0, [r2, 0x2]\n"
-        "  cmp r0, 0x34\n"
-        "  bne _0800AB0C\n"
-        "  ldrb r0, [r2, 0x3]\n"
-        "  cmp r0, 0x50\n"
-        "  bne _0800AB0C\n"
-        "  ldrb r1, [r2, 0x10]\n"
-        "  ldrb r0, [r2, 0x11]\n"
-        "  lsls r0, 8\n"
-        "  adds r1, r0\n"
-        "  ldr r2, [sp, 0x24]\n"
-        "  cmp r2, 0\n"
-        "  beq _0800AB08\n"
-        "  cmp r2, r1\n"
-        "  beq _0800AB08\n"
-        "_0800AB04:\n"
-        "  movs r0, 0\n"
-        "  b _0800AE16\n"
-        "_0800AB08:\n"
-        "  movs r1, 0x12\n"
-        "  b _0800AB26\n"
-        "_0800AB0C:\n"
-        "  mov r3, r8\n"
-        "  ldrb r0, [r3]\n"
-        "  cmp r0, 0x41\n"
-        "  bne _0800AB04\n"
-        "  cmp r1, 0x54\n"
-        "  bne _0800AB04\n"
-        "  ldrb r0, [r3, 0x2]\n"
-        "  cmp r0, 0x33\n"
-        "  bne _0800AB04\n"
-        "  ldrb r0, [r3, 0x3]\n"
-        "  cmp r0, 0x50\n"
-        "  bne _0800AB04\n"
-        "  movs r1, 0x10\n"
-        "_0800AB26:\n"
-        "  mov r2, r8\n"
-        "  ldrb r0, [r2, 0x4]\n"
-        "  cmp r0, 0x4E\n"
-        "  bne _0800AB4A\n"
-        "  movs r7, 0\n"
-        "  b _0800AB40\n"
-        "_0800AB32:\n"
-        "  mov r1, r12\n"
-        "  adds r0, r1, r7\n"
-        "  mov r2, r8\n"
-        "  adds r1, r7, r2\n"
-        "  ldrb r1, [r1, 0x7]\n"
-        "  strb r1, [r0]\n"
-        "  adds r7, 0x1\n"
-        "_0800AB40:\n"
-        "  ldr r3, [sp, 0x28]\n"
-        "  cmp r7, r3\n"
-        "  blt _0800AB32\n"
-        "  adds r0, r7, 0\n"
-        "  b _0800AE16\n"
-        "_0800AB4A:\n"
-        "  mov r2, r8\n"
-        "  ldrb r0, [r2, 0x7]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp]\n"
-        "  ldrb r0, [r2, 0x8]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x4]\n"
-        "  ldrb r0, [r2, 0x9]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x8]\n"
-        "  ldrb r0, [r2, 0xA]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0xC]\n"
-        "  ldrb r0, [r2, 0xB]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x10]\n"
-        "  ldrb r0, [r2, 0xC]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x14]\n"
-        "  ldrb r0, [r2, 0xD]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x18]\n"
-        "  ldrb r0, [r2, 0xE]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x1C]\n"
-        "  ldrb r0, [r2, 0xF]\n"
-        "  adds r0, 0x3\n"
-        "  str r0, [sp, 0x20]\n"
-        "  adds r7, r1, 0\n"
-        "  ldr r3, [sp, 0x28]\n"
-        "  cmp r7, r3\n"
-        "  blt _0800AB8C\n"
-        "  b _0800AE14\n"
-        "_0800AB8C:\n"
-        "  ldr r0, [sp, 0x24]\n"
-        "  cmp r0, 0\n"
-        "  beq _0800AB96\n"
-        "  cmp r6, r0\n"
-        "  bge _0800AB04\n"
-        "_0800AB96:\n"
-        "  mov r1, r9\n"
-        "  cmp r1, 0x8\n"
-        "  bne _0800ABAA\n"
-        "  mov r2, r8\n"
-        "  adds r0, r2, r7\n"
-        "  ldrb r0, [r0]\n"
-        "  mov r10, r0\n"
-        "  adds r7, 0x1\n"
-        "  movs r3, 0\n"
-        "  mov r9, r3\n"
-        "_0800ABAA:\n"
-        "  movs r0, 0x80\n"
-        "  mov r1, r10\n"
-        "  ands r0, r1\n"
-        "  cmp r0, 0\n"
-        "  beq _0800ABB6\n"
-        "  b _0800ADF0\n"
-        "_0800ABB6:\n"
-        "  mov r3, r8\n"
-        "  adds r2, r3, r7\n"
-        "  ldrb r1, [r2]\n"
-        "  lsrs r0, r1, 4\n"
-        "  adds r3, r0, 0x3\n"
-        "  movs r0, 0xF\n"
-        "  ands r0, r1\n"
-        "  lsls r5, r0, 8\n"
-        "  ldr r0, [sp]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABCE\n"
-        "  movs r3, 0x1F\n"
-        "_0800ABCE:\n"
-        "  ldr r0, [sp, 0x4]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABD6\n"
-        "  movs r3, 0x1E\n"
-        "_0800ABD6:\n"
-        "  ldr r0, [sp, 0x8]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABDE\n"
-        "  movs r3, 0x1D\n"
-        "_0800ABDE:\n"
-        "  ldr r0, [sp, 0xC]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABE6\n"
-        "  movs r3, 0x1C\n"
-        "_0800ABE6:\n"
-        "  ldr r0, [sp, 0x10]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABEE\n"
-        "  movs r3, 0x1B\n"
-        "_0800ABEE:\n"
-        "  ldr r0, [sp, 0x14]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABF6\n"
-        "  movs r3, 0x1A\n"
-        "_0800ABF6:\n"
-        "  ldr r0, [sp, 0x18]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800ABFE\n"
-        "  movs r3, 0x19\n"
-        "_0800ABFE:\n"
-        "  ldr r0, [sp, 0x1C]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800AC06\n"
-        "  movs r3, 0x18\n"
-        "_0800AC06:\n"
-        "  ldr r0, [sp, 0x20]\n"
-        "  cmp r3, r0\n"
-        "  bne _0800AC0E\n"
-        "  movs r3, 0x17\n"
-        "_0800AC0E:\n"
-        "  adds r0, r3, 0\n"
-        "  subs r0, 0x17\n"
-        "  cmp r0, 0x8\n"
-        "  bls _0800AC18\n"
-        "  b _0800ADB0\n"
-        "_0800AC18:\n"
-        "  lsls r0, 2\n"
-        "  ldr r1, _0800AC24\n"
-        "  adds r0, r1\n"
-        "  ldr r0, [r0]\n"
-        "  mov pc, r0\n"
-        "  .align 2, 0\n"
-        "_0800AC24: .4byte _0800AC28\n"
-        "  .align 2, 0\n"
-        "_0800AC28:\n"
-        "  .4byte _0800AD7C\n"
-        "  .4byte _0800AD48\n"
-        "  .4byte _0800AD20\n"
-        "  .4byte _0800ACFA\n"
-        "  .4byte _0800ACD6\n"
-        "  .4byte _0800ACB4\n"
-        "  .4byte _0800AC8C\n"
-        "  .4byte _0800AC66\n"
-        "  .4byte _0800AC4C\n"
-        "_0800AC4C:\n"
-        "  ldrb r1, [r2]\n"
-        "  movs r0, 0xF\n"
-        "  adds r7, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r2, r3, r6\n"
-        "  ands r0, r1\n"
-        "  lsls r1, r0, 4\n"
-        "  orrs r1, r0\n"
-        "  strb r1, [r2]\n"
-        "  adds r6, 0x1\n"
-        "  adds r0, r3, r6\n"
-        "  strb r1, [r0]\n"
-        "  b _0800ADA4\n"
-        "_0800AC66:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r3, r1, r6\n"
-        "  movs r2, 0xF\n"
-        "  lsls r0, r5, 4\n"
-        "  adds r1, r5, 0x1\n"
-        "  ands r1, r2\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r3]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r2, r3, r6\n"
-        "  lsls r0, r1, 4\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r2]\n"
-        "  b _0800ADA4\n"
-        "_0800AC8C:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r3, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r4, r1, r6\n"
-        "  adds r2, r5, 0\n"
-        "  ands r2, r3\n"
-        "  lsls r1, r2, 4\n"
-        "  subs r0, r5, 0x1\n"
-        "  ands r0, r3\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r4]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r0, r3, r6\n"
-        "  orrs r1, r2\n"
-        "  strb r1, [r0]\n"
-        "  b _0800ADA4\n"
-        "_0800ACB4:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r3, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r2, r1, r6\n"
-        "  adds r1, r5, 0\n"
-        "  ands r1, r3\n"
-        "  lsls r0, r1, 4\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r2]\n"
-        "  adds r6, 0x1\n"
-        "  mov r0, r12\n"
-        "  adds r2, r0, r6\n"
-        "  subs r0, r5, 0x1\n"
-        "  b _0800AD68\n"
-        "_0800ACD6:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r4, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r2, r12\n"
-        "  adds r3, r2, r6\n"
-        "  adds r1, r5, 0\n"
-        "  ands r1, r4\n"
-        "  lsls r2, r1, 4\n"
-        "  adds r0, r2, 0\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r3]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r1, r3, r6\n"
-        "  subs r0, r5, 0x1\n"
-        "  b _0800AD9E\n"
-        "_0800ACFA:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r3, r1, r6\n"
-        "  movs r2, 0xF\n"
-        "  lsls r0, r5, 4\n"
-        "  subs r1, r5, 0x1\n"
-        "  ands r1, r2\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r3]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r2, r3, r6\n"
-        "  lsls r0, r1, 4\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r2]\n"
-        "  b _0800ADA4\n"
-        "_0800AD20:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r3, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r4, r1, r6\n"
-        "  adds r2, r5, 0\n"
-        "  ands r2, r3\n"
-        "  lsls r1, r2, 4\n"
-        "  adds r0, r5, 0x1\n"
-        "  ands r0, r3\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r4]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r0, r3, r6\n"
-        "  orrs r1, r2\n"
-        "  strb r1, [r0]\n"
-        "  b _0800ADA4\n"
-        "_0800AD48:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r3, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r12\n"
-        "  adds r2, r1, r6\n"
-        "  adds r1, r5, 0\n"
-        "  ands r1, r3\n"
-        "  lsls r0, r1, 4\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r2]\n"
-        "  adds r6, 0x1\n"
-        "  mov r0, r12\n"
-        "  adds r2, r0, r6\n"
-        "  adds r0, r5, 0x1\n"
-        "_0800AD68:\n"
-        "  ands r0, r3\n"
-        "  lsls r0, 4\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r2]\n"
-        "  adds r6, 0x1\n"
-        "  mov r4, r9\n"
-        "  adds r4, 0x1\n"
-        "  mov r1, r10\n"
-        "  lsls r2, r1, 1\n"
-        "  b _0800AE08\n"
-        "_0800AD7C:\n"
-        "  ldrb r0, [r2]\n"
-        "  movs r4, 0xF\n"
-        "  movs r5, 0xF\n"
-        "  ands r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  mov r2, r12\n"
-        "  adds r3, r2, r6\n"
-        "  adds r1, r5, 0\n"
-        "  ands r1, r4\n"
-        "  lsls r2, r1, 4\n"
-        "  adds r0, r2, 0\n"
-        "  orrs r0, r1\n"
-        "  strb r0, [r3]\n"
-        "  adds r6, 0x1\n"
-        "  mov r3, r12\n"
-        "  adds r1, r3, r6\n"
-        "  adds r0, r5, 0x1\n"
-        "_0800AD9E:\n"
-        "  ands r0, r4\n"
-        "  orrs r2, r0\n"
-        "  strb r2, [r1]\n"
-        "_0800ADA4:\n"
-        "  adds r6, 0x1\n"
-        "  mov r4, r9\n"
-        "  adds r4, 0x1\n"
-        "  mov r0, r10\n"
-        "  lsls r2, r0, 1\n"
-        "  b _0800AE08\n"
-        "_0800ADB0:\n"
-        "  adds r7, 0x1\n"
-        "  mov r1, r8\n"
-        "  adds r0, r1, r7\n"
-        "  ldrb r0, [r0]\n"
-        "  adds r5, r0\n"
-        "  adds r7, 0x1\n"
-        "  ldr r2, _0800ADEC\n"
-        "  adds r0, r5, r2\n"
-        "  adds r5, r0, r6\n"
-        "  mov r4, r9\n"
-        "  adds r4, 0x1\n"
-        "  mov r0, r10\n"
-        "  lsls r2, r0, 1\n"
-        "  cmp r3, 0\n"
-        "  beq _0800AE08\n"
-        "_0800ADCE:\n"
-        "  mov r1, r12\n"
-        "  adds r1, r6\n"
-        "  mov r10, r1\n"
-        "  mov r0, r12\n"
-        "  adds r0, r5\n"
-        "  ldrb r1, [r0]\n"
-        "  mov r0, r10\n"
-        "  strb r1, [r0]\n"
-        "  adds r6, 0x1\n"
-        "  adds r5, 0x1\n"
-        "  subs r3, 0x1\n"
-        "  cmp r3, 0\n"
-        "  bne _0800ADCE\n"
-        "  b _0800AE08\n"
-        "  .align 2, 0\n"
-        "_0800ADEC: .4byte 0xfffff000\n"
-        "_0800ADF0:\n"
-        "  mov r1, r12\n"
-        "  adds r0, r1, r6\n"
-        "  mov r2, r8\n"
-        "  adds r1, r2, r7\n"
-        "  ldrb r1, [r1]\n"
-        "  strb r1, [r0]\n"
-        "  adds r6, 0x1\n"
-        "  adds r7, 0x1\n"
-        "  mov r4, r9\n"
-        "  adds r4, 0x1\n"
-        "  mov r3, r10\n"
-        "  lsls r2, r3, 1\n"
-        "_0800AE08:\n"
-        "  mov r9, r4\n"
-        "  mov r10, r2\n"
-        "  ldr r0, [sp, 0x28]\n"
-        "  cmp r7, r0\n"
-        "  bge _0800AE14\n"
-        "  b _0800AB8C\n"
-        "_0800AE14:\n"
-        "  adds r0, r6, 0\n"
-        "_0800AE16:\n"
-        "  add sp, 0x2C\n"
-        "  pop {r3-r5}\n"
-        "  mov r8, r3\n"
-        "  mov r9, r4\n"
-        "  mov r10, r5\n"
-        "  pop {r4-r7}\n"
-        "  pop {r1}\n"
-        "  bx r1");
-#endif
+    return bytesWritten;
 }
 
-u32 DecompressATGlobalFile(u32 *result, u32 resultLength, struct OpenedFile *file)
+u32 DecompressATGlobalFile(u32 *result, s32 resultLength, struct OpenedFile *file)
 {
     return DecompressATGlobal(result, resultLength, file->data);
 }
@@ -904,28 +387,27 @@ u32 DecompressATGlobalFile(u32 *result, u32 resultLength, struct OpenedFile *fil
 #ifndef NONMATCHING
 NAKED
 #endif
-u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData)
+u32 DecompressATGlobal(u32 *result, s32 resultLength, const char *compressedData)
 {
 #ifdef NONMATCHING
-
-    // This function has the same issues as above, except is possibly a bit nicer due to the function calls
-    // I'd say this one is more likely to be at least correct
-
-    int flags1;
-    int flags2;
-    int flags3;
-    int flags4;
-    int flags5;
-    int flags6;
-    int flags7;
-    int flags8;
-    int flags9;
-    int compressedLength;
-    int curIndex;
-    int command;
-    int bytesWritten;
-    int cmdBit;
-    int currentByte;
+    s32 compressedLength;
+    s32 curIndex;
+    s32 bytesWritten;
+    s32 cmdBit;
+    s32 currentByte;
+    s32 flags1;
+    s32 flags2;
+    s32 flags3;
+    s32 flags4;
+    s32 flags5;
+    s32 flags6;
+    s32 flags7;
+    s32 flags8;
+    s32 flags9;
+    u32 command;
+    u32 tmp;
+    u32 tmp2;
+    u32 c;
 
     compressedLength = compressedData[5] + (compressedData[6] << 8);
     bytesWritten = 0;
@@ -938,9 +420,9 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
      && compressedData[1] == 'T'
      && compressedData[2] == '4'
      && compressedData[3] == 'P') {
-        // compiler swaps comparison order somehow
-        if (resultLength != compressedData[0x10] + (compressedData[0x11] << 8) && resultLength != 0)
-            return 0;
+        tmp2 = compressedData[0x10] + (compressedData[0x11] << 8);
+        if (resultLength != 0 && resultLength != tmp2)
+            return bytesWritten;
         curIndex = 0x12;
     } else if (compressedData[0] == 'A'
             && compressedData[1] == 'T'
@@ -970,24 +452,21 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
     flags8 = compressedData[0xe] + 3;
     flags9 = compressedData[0xf] + 3;
 
-    // Some mismatches regarding the signedness of these two conditionals, extremely fragile without explicit casts
-    // TODO: clean this up later
-    if ((int)curIndex < (int)compressedLength) {
-        // '<' comparison compiles to wrong branch, but if I add another 'return bytesWritten;'
-        // after the while loop, the compiler merges it with the earlier uncompressed case which breaks stuff.
-        if (resultLength == 0 || (int)bytesWritten < (int)resultLength) return 0;
+    if (curIndex < compressedLength) {
+
         do {
+            if (resultLength != 0 && bytesWritten >= resultLength)
+                return 0;
+
             if (cmdBit == 8) {
                 currentByte = compressedData[curIndex++];
                 cmdBit = 0;
             }
-            if (currentByte & 0x80) { // some weird reordering happens here, couldn't figure it out
-                // do NOT try inverting the above condition and moving this to the bottom
-                // it really won't end well
-                DecompressAT_AppendByte(compressedData[curIndex++]);
-                bytesWritten++;
-            } else {
+            if ((currentByte & 0x80) == 0) {
+                // if bit is unset, process command
                 command = (compressedData[curIndex] >> 4) + 3;
+                tmp2 = (compressedData[curIndex] & 0xf) << 8;
+
                 if (command == flags1) command = 0x1f;
                 if (command == flags2) command = 0x1e;
                 if (command == flags3) command = 0x1d;
@@ -999,85 +478,76 @@ u32 DecompressATGlobal(u32 *result, u32 resultLength, const char *compressedData
                 if (command == flags9) command = 0x17;
 
                 switch (command) {
-                    case 0x1f: {
-                        char c = compressedData[curIndex++] & 0xf;
+                    case 0x1f: { // aaaa
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x1e: {
-                        char c = compressedData[curIndex++] & 0xf;
+                    case 0x1e: { // abbb
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 1) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
-                        break; // rather large mismatch
+                        break;
                     }
-                    case 0x1d: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x1d: { // babb
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x1c: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x1c: { // bbab
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c - 1) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x1b: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x1b: { // bbba
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x1a: {
-                        char c = compressedData[curIndex] & 0xf;
-                        // weird movs/adds here - possibly regalloc
-                        curIndex++;
-                        // missing u8 cast for argument, twice
+                    case 0x1a: { // baaa -- the horrible, unmatching case
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
-                        DecompressAT_AppendByte((((c - 1) & 0xf) << 4) | ((c - 1) & 0xf)); bytesWritten++;
-                        break; // second call is inlined! Should end up after switch code
-                        // and yes, I tried extracting (c-1)&0xf into its own variable, and in 0x1e as well
-                        // which had little effect
+                        c -= 1;
+                        DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
+                        break;
                     }
-                    case 0x19: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x19: { // abaa
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x18: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x18: { // aaba
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 1) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         break;
                     }
-                    case 0x17: {
-                        char c = compressedData[curIndex] & 0xf;
-                        curIndex++;
+                    case 0x17: { // aaab
+                        c = compressedData[curIndex++] & 0xf;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 0) & 0xf)); bytesWritten++;
                         DecompressAT_AppendByte((((c + 0) & 0xf) << 4) | ((c + 1) & 0xf)); bytesWritten++;
                         break;
                     }
                     default: {
-                        unsigned tmp = curIndex + 1;
-                        tmp = bytesWritten - 0x1000 + ((compressedData[curIndex++] & 0xf) << 8) + compressedData[tmp];
-                        curIndex++;
+                        tmp = compressedData[curIndex++, curIndex++] + tmp2 - 0x1000 + bytesWritten;
                         for (; command != 0; tmp++, command--) {
-                            char c = DecompressAT_GetByte(tmp);
-                            DecompressAT_AppendByte(c); bytesWritten++;
+                            DecompressAT_AppendByte(DecompressAT_GetByte(tmp)); bytesWritten++;
                         }
                     }
                 }
+            } else {
+                // if bit is set, just copy next byte
+                DecompressAT_AppendByte(compressedData[curIndex]); bytesWritten++;
+                curIndex++;
             }
             cmdBit++;
             currentByte <<= 1;
-        } while ((int)curIndex < (int)compressedLength);
+        } while (curIndex < compressedLength);
         DecompressAT_Finish();
     }
 
