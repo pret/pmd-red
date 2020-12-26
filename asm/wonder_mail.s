@@ -23474,7 +23474,7 @@ sub_80356A0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080356C4: .4byte gUnknown_20255F0
+_080356C4: .4byte gRealInputs
 _080356C8: .4byte gUnknown_80E5990
 _080356CC: .4byte gUnknown_203B344
 _080356D0: .4byte _080356D4
@@ -27022,7 +27022,7 @@ sub_80373C4:
 	bl sub_8005838
 	bl sub_80060EC
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl TransferBGPaletteBuffer
 	bl xxx_call_update_bg_vram
 	bl sub_8009908

@@ -2675,7 +2675,7 @@ _0803E5A2:
 	ldr r0, [r0]
 	bl IncrementPlayTime
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl CopySpritesToOam
 	bl nullsub_13
 	bl sub_8005304
@@ -2750,7 +2750,7 @@ sub_803E668:
 	ldr r0, [r0]
 	bl IncrementPlayTime
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl CopySpritesToOam
 	bl nullsub_13
 	bl sub_8005304
@@ -2822,7 +2822,7 @@ _0803E72C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803E744: .4byte gUnknown_20255F0
+_0803E744: .4byte gRealInputs
 	thumb_func_end sub_803E724
 
 	thumb_func_start sub_803E748

@@ -33,7 +33,7 @@ extern void sub_8099BE4();
 extern void sub_8099744();
 extern void sub_8011860();
 extern void sub_800CB20();
-extern void sub_800485C();
+extern void LoadBufferedInputs();
 extern void nullsub_120();
 extern void sub_80A5E70();
 extern void sub_809B638();
@@ -83,7 +83,7 @@ void sub_8098BDC(void)
     sub_8011860();
     IncrementPlayTime(gUnknown_203B47C);
     sub_800CB20();
-    sub_800485C();
+    LoadBufferedInputs();
     nullsub_120();
     sub_80A5E70();
     sub_809B638();

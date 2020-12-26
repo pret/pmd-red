@@ -526,7 +526,7 @@ _080527A4:
 _080527B0: .4byte gUnknown_203B418
 _080527B4: .4byte 0x0001bdd4
 _080527B8: .4byte 0x0001c064
-_080527BC: .4byte gUnknown_20255F0
+_080527BC: .4byte gRealInputs
 _080527C0: .4byte 0x0000030f
 	thumb_func_end sub_8052740
 
@@ -1648,7 +1648,7 @@ _080530E0: .4byte 0x0000efff
 _080530E4: .4byte 0x0000dfff
 _080530E8: .4byte 0x00003fff
 _080530EC: .4byte 0x00000fff
-_080530F0: .4byte gUnknown_20255F0
+_080530F0: .4byte gRealInputs
 _080530F4:
 	mov r0, r8
 	cmp r0, 0
@@ -1978,7 +1978,7 @@ _0805336C:
 _08053374: .4byte gUnknown_202F1F8
 _08053378: .4byte gUnknown_202F1FC
 _0805337C: .4byte gUnknown_8106990
-_08053380: .4byte gUnknown_20255F0
+_08053380: .4byte gRealInputs
 _08053384:
 	adds r0, r5, 0
 	ands r0, r1
@@ -2131,7 +2131,7 @@ _08053498:
 	.align 2, 0
 _0805349C: .4byte 0x0001c070
 _080534A0: .4byte gUnknown_202F1FC
-_080534A4: .4byte gUnknown_20255F0
+_080534A4: .4byte gRealInputs
 _080534A8:
 	movs r0, 0
 	bl sub_8083CE0
@@ -2252,7 +2252,7 @@ _08053592:
 	b _08053622
 	.align 2, 0
 _08053598: .4byte gUnknown_202F1FC
-_0805359C: .4byte gUnknown_20255F0
+_0805359C: .4byte gRealInputs
 _080535A0:
 	movs r0, 0
 	bl sub_8083CE0
@@ -22509,7 +22509,7 @@ _0805D928:
 	bl sub_805E804
 	bl sub_8083600
 	bl sub_80647F0
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 	bl sub_805F1AC
 	lsls r0, 16
@@ -22820,7 +22820,7 @@ _0805DBDA:
 	strb r5, [r0]
 	b _0805E1AE
 	.align 2, 0
-_0805DBEC: .4byte gUnknown_20255F0
+_0805DBEC: .4byte gRealInputs
 _0805DBF0: .4byte gUnknown_203B418
 _0805DBF4: .4byte 0x00000673
 _0805DBF8:
@@ -23030,7 +23030,7 @@ _0805DD66:
 	bl sub_804AA60
 	ldr r0, _0805DDD4
 	strb r4, [r0]
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 _0805DD7E:
 	ldr r2, _0805DDC8
@@ -23047,7 +23047,7 @@ _0805DD7E:
 	cmp r0, 0
 	beq _0805DDA4
 	bl sub_80532B4
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 _0805DDA4:
 	movs r4, 0
@@ -23070,7 +23070,7 @@ _0805DDC2:
 	strb r3, [r1]
 	b _0805DDFE
 	.align 2, 0
-_0805DDC8: .4byte gUnknown_20255F0
+_0805DDC8: .4byte gRealInputs
 _0805DDCC: .4byte 0x00000707
 _0805DDD0: .4byte gUnknown_203B46C
 _0805DDD4: .4byte gUnknown_202F22D
@@ -23135,7 +23135,7 @@ _0805DE2C:
 	adds r1, 0x34
 	movs r0, 0xFF
 	strb r0, [r1]
-	bl sub_80048D0
+	bl ResetRepeatTimers
 _0805DE54:
 	ldr r0, _0805DF00
 	ldr r1, [r0]
@@ -23222,7 +23222,7 @@ _0805DEDC:
 	.align 2, 0
 _0805DEF8: .4byte gUnknown_202F22C
 _0805DEFC: .4byte gUnknown_203B46C
-_0805DF00: .4byte gUnknown_20255F0
+_0805DF00: .4byte gRealInputs
 _0805DF04: .4byte gUnknown_202F22D
 _0805DF08: .4byte 0x01000200
 _0805DF0C: .4byte gUnknown_203B460
@@ -23295,7 +23295,7 @@ _0805DF82:
 	b _0805DFCC
 	.align 2, 0
 _0805DFA0: .4byte gUnknown_202EE00
-_0805DFA4: .4byte gUnknown_20255F0
+_0805DFA4: .4byte gRealInputs
 _0805DFA8: .4byte gUnknown_203B418
 _0805DFAC: .4byte 0x00018214
 _0805DFB0: .4byte gUnknown_203B46C
@@ -23391,7 +23391,7 @@ _0805E020:
 	bl sub_806CDD4
 	b _0805E1A0
 	.align 2, 0
-_0805E05C: .4byte gUnknown_20255F0
+_0805E05C: .4byte gRealInputs
 _0805E060: .4byte gUnknown_202F22C
 _0805E064: .4byte gUnknown_202F22D
 _0805E068:
@@ -23536,7 +23536,7 @@ _0805E174:
 	strb r5, [r0]
 	b _0805E1AE
 	.align 2, 0
-_0805E17C: .4byte gUnknown_20255F0
+_0805E17C: .4byte gRealInputs
 _0805E180: .4byte gUnknown_203B418
 _0805E184: .4byte 0x0000066c
 _0805E188:
@@ -23627,7 +23627,7 @@ _0805E238:
 	lsrs r1, 24
 	adds r0, r2, 0
 	bl ShowFieldMenu
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 	ldr r1, _0805E294
 	movs r0, 0
@@ -24397,7 +24397,7 @@ _0805E85C:
 _0805E864: .4byte gUnknown_203B418
 _0805E868: .4byte 0x0000066d
 _0805E86C: .4byte 0x0000066c
-_0805E870: .4byte gUnknown_20255F0
+_0805E870: .4byte gRealInputs
 	thumb_func_end sub_805E804
 
 	thumb_func_start sub_805E874
@@ -25085,7 +25085,7 @@ _0805EDA0:
 	movs r0, 0
 	b _0805EDCA
 	.align 2, 0
-_0805EDC0: .4byte gUnknown_20255F0
+_0805EDC0: .4byte gRealInputs
 _0805EDC4:
 	adds r1, r7, 0
 	adds r1, 0x48
@@ -25816,7 +25816,7 @@ _0805F35C:
 	.align 2, 0
 _0805F388: .4byte gUnknown_202F260
 _0805F38C: .4byte gUnknown_202EE10
-_0805F390: .4byte gUnknown_20255F0
+_0805F390: .4byte gRealInputs
 _0805F394: .4byte gUnknown_202749A
 _0805F398: .4byte 0xffffff00
 _0805F39C: .4byte 0xffff00ff
@@ -26453,7 +26453,7 @@ _0805F904:
 	ldr r3, [sp, 0x14]
 	cmp r3, 0
 	bne _0805F920
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 	b _0805F240
 	.align 2, 0
@@ -26466,7 +26466,7 @@ _0805F92A:
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
-	bl sub_80048D0
+	bl ResetRepeatTimers
 	bl sub_8004914
 	add sp, 0x18
 	pop {r3-r5}
@@ -27322,7 +27322,7 @@ _08060034:
 	.align 2, 0
 _08060050: .4byte gUnknown_202EE10
 _08060054: .4byte gUnknown_202F258
-_08060058: .4byte gUnknown_20255F0
+_08060058: .4byte gRealInputs
 _0806005C:
 	movs r0, 0x10
 	ands r0, r1
@@ -27425,7 +27425,7 @@ _080600D8:
 	add r2, sp, 0x68
 	b _08060152
 	.align 2, 0
-_08060134: .4byte gUnknown_20255F0
+_08060134: .4byte gRealInputs
 _08060138: .4byte gUnknown_202EE10
 _0806013C: .4byte gUnknown_202F248
 _08060140: .4byte gUnknown_202F240
@@ -27697,7 +27697,7 @@ _0806034C: .4byte gUnknown_202EE10
 _08060350: .4byte gUnknown_202F248
 _08060354: .4byte gUnknown_203B460
 _08060358: .4byte gUnknown_202F240
-_0806035C: .4byte gUnknown_20255F0
+_0806035C: .4byte gRealInputs
 _08060360: .4byte gUnknown_203B418
 _08060364: .4byte 0x00018212
 _08060368: .4byte gUnknown_202F238
@@ -29272,7 +29272,7 @@ _08061020: .4byte 0x0001357c
 _08061024: .4byte 0x00000157
 _08061028: .4byte 0x0000065b
 _0806102C: .4byte gUnknown_202EE10
-_08061030: .4byte gUnknown_20255F0
+_08061030: .4byte gRealInputs
 _08061034: .4byte gUnknown_202EE39
 _08061038: .4byte gUnknown_202EE3A
 _0806103C: .4byte gUnknown_202F260
@@ -29369,7 +29369,7 @@ _080610FC:
 	movs r7, 0
 	b _08061116
 	.align 2, 0
-_08061100: .4byte gUnknown_20255F0
+_08061100: .4byte gRealInputs
 _08061104: .4byte gUnknown_202EE39
 _08061108: .4byte gUnknown_202EE10
 _0806110C:
@@ -30131,7 +30131,7 @@ _08061720: .4byte gUnknown_202F270
 _08061724: .4byte gUnknown_203B418
 _08061728: .4byte 0x0001357c
 _0806172C: .4byte gUnknown_202EE10
-_08061730: .4byte gUnknown_20255F0
+_08061730: .4byte gRealInputs
 _08061734: .4byte gUnknown_203B080
 _08061738:
 	mov r0, r9
@@ -30173,7 +30173,7 @@ _08061780:
 	str r1, [sp, 0x70]
 	b _08061926
 	.align 2, 0
-_08061788: .4byte gUnknown_20255F0
+_08061788: .4byte gRealInputs
 _0806178C: .4byte gUnknown_202EE10
 _08061790: .4byte gUnknown_203B084
 _08061794:
@@ -30203,7 +30203,7 @@ _080617C4:
 	movs r7, 0
 	b _08061926
 	.align 2, 0
-_080617C8: .4byte gUnknown_20255F0
+_080617C8: .4byte gRealInputs
 _080617CC:
 	bl sub_8083D08
 	mov r0, r9
@@ -30866,7 +30866,7 @@ _08061CF0:
 _08061CF8: .4byte gUnknown_202EE10
 _08061CFC: .4byte gUnknown_8106B8C
 _08061D00: .4byte gUnknown_202F270
-_08061D04: .4byte gUnknown_20255F0
+_08061D04: .4byte gRealInputs
 _08061D08:
 	movs r0, 0x20
 	ands r0, r1
@@ -30979,7 +30979,7 @@ _08061DC2:
 	add r2, sp
 	b _08061EFE
 	.align 2, 0
-_08061DDC: .4byte gUnknown_20255F0
+_08061DDC: .4byte gRealInputs
 _08061DE0: .4byte gUnknown_202EE10
 _08061DE4: .4byte gUnknown_203B080
 _08061DE8:
@@ -31054,7 +31054,7 @@ _08061E58:
 	add r1, sp
 	b _08061F90
 	.align 2, 0
-_08061E74: .4byte gUnknown_20255F0
+_08061E74: .4byte gRealInputs
 _08061E78: .4byte gUnknown_202EE10
 _08061E7C: .4byte gUnknown_203B084
 _08061E80:
@@ -31130,7 +31130,7 @@ _08061F04:
 	mov r8, r0
 	b _080621E6
 	.align 2, 0
-_08061F0C: .4byte gUnknown_20255F0
+_08061F0C: .4byte gRealInputs
 _08061F10: .4byte gUnknown_202EE10
 _08061F14: .4byte gUnknown_203B080
 _08061F18:
@@ -31202,7 +31202,7 @@ _08061F96:
 	mov r8, r2
 	b _080621E6
 	.align 2, 0
-_08061F9C: .4byte gUnknown_20255F0
+_08061F9C: .4byte gRealInputs
 _08061FA0: .4byte gUnknown_202EE10
 _08061FA4: .4byte gUnknown_203B084
 _08061FA8:
@@ -31316,7 +31316,7 @@ _08062082:
 	mov r10, r0
 	b _080621E6
 	.align 2, 0
-_0806208C: .4byte gUnknown_20255F0
+_0806208C: .4byte gRealInputs
 _08062090: .4byte gUnknown_202EE10
 _08062094: .4byte gUnknown_202EE6C
 _08062098:
@@ -32013,7 +32013,7 @@ _0806261A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062628: .4byte gUnknown_20255F0
+_08062628: .4byte gRealInputs
 	thumb_func_end sub_80625A4
 
 	thumb_func_start sub_806262C
@@ -32133,7 +32133,7 @@ _08062718:
 	bl sub_80625A4
 	b _08062650
 	.align 2, 0
-_0806272C: .4byte gUnknown_20255F0
+_0806272C: .4byte gRealInputs
 _08062730:
 	movs r0, 0x4
 	movs r1, 0x3E
@@ -32263,7 +32263,7 @@ _0806282C:
 	bl sub_80625A4
 	b _0806276C
 	.align 2, 0
-_08062840: .4byte gUnknown_20255F0
+_08062840: .4byte gRealInputs
 _08062844:
 	movs r0, 0x4
 	movs r1, 0x3E
@@ -32409,7 +32409,7 @@ _0806295C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062974: .4byte gUnknown_20255F0
+_08062974: .4byte gRealInputs
 	thumb_func_end sub_806285C
 
 	thumb_func_start sub_8062978
@@ -32629,7 +32629,7 @@ _08062B3C:
 	b _08062B5A
 	.align 2, 0
 _08062B40: .4byte gUnknown_202EE10
-_08062B44: .4byte gUnknown_20255F0
+_08062B44: .4byte gRealInputs
 _08062B48: .4byte gUnknown_202EE3A
 _08062B4C:
 	ldr r0, _08062B6C
@@ -33313,7 +33313,7 @@ _0806305C:
 	.align 2, 0
 _080630A4: .4byte gUnknown_202F2D8
 _080630A8: .4byte gUnknown_202EE10
-_080630AC: .4byte gUnknown_20255F0
+_080630AC: .4byte gRealInputs
 _080630B0:
 	bl sub_8083D30
 _080630B4:
@@ -33366,7 +33366,7 @@ _080630DE:
 	b _08063128
 	.align 2, 0
 _08063118: .4byte gUnknown_202EE10
-_0806311C: .4byte gUnknown_20255F0
+_0806311C: .4byte gRealInputs
 _08063120: .4byte gUnknown_202F2D8
 _08063124:
 	bl sub_8083D30
@@ -33408,7 +33408,7 @@ _08063168:
 	bl sub_8044C94
 	b _080631F4
 	.align 2, 0
-_08063174: .4byte gUnknown_20255F0
+_08063174: .4byte gRealInputs
 _08063178: .4byte gUnknown_202EE10
 _0806317C:
 	movs r0, 0x20
@@ -33657,7 +33657,7 @@ _08063376:
 	b _080633A0
 	.align 2, 0
 _0806337C: .4byte gUnknown_202EE10
-_08063380: .4byte gUnknown_20255F0
+_08063380: .4byte gRealInputs
 _08063384:
 	bl sub_8083D30
 _08063388:
@@ -34390,7 +34390,7 @@ _0806392C:
 _0806393C: .4byte gUnknown_202EE10
 _08063940: .4byte gUnknown_2027370
 _08063944: .4byte gUnknown_202EE38
-_08063948: .4byte gUnknown_20255F0
+_08063948: .4byte gRealInputs
 _0806394C:
 	movs r0, 0x2
 	ands r0, r1
@@ -35194,7 +35194,7 @@ _08063F76:
 	.align 2, 0
 _08063F80: .4byte gUnknown_202F2D8
 _08063F84: .4byte gUnknown_202EE10
-_08063F88: .4byte gUnknown_20255F0
+_08063F88: .4byte gRealInputs
 _08063F8C:
 	movs r0, 0x8
 	ands r0, r1
@@ -35314,7 +35314,7 @@ _0806406E:
 	bl sub_8083D08
 	b _08064094
 	.align 2, 0
-_0806408C: .4byte gUnknown_20255F0
+_0806408C: .4byte gRealInputs
 _08064090:
 	bl sub_8083D1C
 _08064094:
@@ -35866,7 +35866,7 @@ _080644B2:
 	b _0806452A
 	.align 2, 0
 _080644C8: .4byte gUnknown_202EE10
-_080644CC: .4byte gUnknown_20255F0
+_080644CC: .4byte gRealInputs
 _080644D0:
 	movs r2, 0x18
 	ldrsh r0, [r5, r2]
@@ -36203,7 +36203,7 @@ _08064774:
 	adds r7, r4, 0x1
 	b _080647A0
 	.align 2, 0
-_08064788: .4byte gUnknown_20255F0
+_08064788: .4byte gRealInputs
 _0806478C:
 	movs r0, 0x2
 	ands r0, r1
@@ -36242,7 +36242,7 @@ _080647CC:
 	blt _08064774
 	b _08064640
 	.align 2, 0
-_080647D4: .4byte gUnknown_20255F0
+_080647D4: .4byte gRealInputs
 _080647D8:
 	movs r0, 0
 	movs r1, 0
@@ -36393,7 +36393,7 @@ _080648F6:
 	b _0806496E
 	.align 2, 0
 _0806490C: .4byte gUnknown_202EE10
-_08064910: .4byte gUnknown_20255F0
+_08064910: .4byte gRealInputs
 _08064914:
 	movs r2, 0x18
 	ldrsh r0, [r5, r2]
@@ -36695,7 +36695,7 @@ _08064B64:
 	adds r7, r4, 0x1
 	b _08064B90
 	.align 2, 0
-_08064B78: .4byte gUnknown_20255F0
+_08064B78: .4byte gRealInputs
 _08064B7C:
 	movs r0, 0x2
 	ands r0, r1
@@ -36734,7 +36734,7 @@ _08064BBC:
 	blt _08064B64
 	b _08064A58
 	.align 2, 0
-_08064BC4: .4byte gUnknown_20255F0
+_08064BC4: .4byte gRealInputs
 _08064BC8:
 	movs r0, 0
 	movs r1, 0
@@ -36842,7 +36842,7 @@ _08064C8C:
 _08064C94: .4byte gUnknown_203B418
 _08064C98: .4byte gUnknown_202F2E0
 _08064C9C: .4byte gUnknown_202EE10
-_08064CA0: .4byte gUnknown_20255F0
+_08064CA0: .4byte gRealInputs
 _08064CA4:
 	bl sub_8083D30
 	b _08064CC0
@@ -36998,7 +36998,7 @@ _08064DDA:
 	b _08064DFE
 	.align 2, 0
 _08064DE0: .4byte gUnknown_202EE10
-_08064DE4: .4byte gUnknown_20255F0
+_08064DE4: .4byte gRealInputs
 _08064DE8:
 	movs r0, 0x2
 	ands r0, r1
@@ -37119,7 +37119,7 @@ _08064EC2:
 	b _08064F2E
 	.align 2, 0
 _08064EDC: .4byte gUnknown_202EE10
-_08064EE0: .4byte gUnknown_20255F0
+_08064EE0: .4byte gRealInputs
 _08064EE4:
 	movs r0, 0x10
 	ands r0, r1
@@ -37234,7 +37234,7 @@ _08064FAA:
 	b _0806501C
 	.align 2, 0
 _08064FC8: .4byte gUnknown_202EE10
-_08064FCC: .4byte gUnknown_20255F0
+_08064FCC: .4byte gRealInputs
 _08064FD0:
 	movs r0, 0x10
 	ands r0, r1
@@ -37417,7 +37417,7 @@ _0806512C:
 	b _08065152
 	.align 2, 0
 _08065134: .4byte gUnknown_202EE10
-_08065138: .4byte gUnknown_20255F0
+_08065138: .4byte gRealInputs
 _0806513C:
 	movs r0, 0x2
 	ands r0, r1
@@ -38783,7 +38783,7 @@ _08065C5A:
 	b _08065C7E
 	.align 2, 0
 _08065C60: .4byte gUnknown_202EE10
-_08065C64: .4byte gUnknown_20255F0
+_08065C64: .4byte gRealInputs
 _08065C68:
 	movs r0, 0x2
 	ands r0, r1
@@ -39125,7 +39125,7 @@ _08065F2C: .4byte gUnknown_202EE10
 _08065F30: .4byte gUnknown_2027370
 _08065F34: .4byte gUnknown_80FF774
 _08065F38: .4byte gUnknown_80FF7EC
-_08065F3C: .4byte gUnknown_20255F0
+_08065F3C: .4byte gRealInputs
 _08065F40:
 	movs r0, 0x20
 	ands r0, r1
@@ -39381,7 +39381,7 @@ _0806613C: .4byte gUnknown_202F2F8
 _08066140: .4byte gUnknown_202F2FC
 _08066144: .4byte gUnknown_2027370
 _08066148: .4byte gUnknown_8106D68
-_0806614C: .4byte gUnknown_20255F0
+_0806614C: .4byte gRealInputs
 _08066150:
 	bl sub_80048C8
 	lsls r0, 24
@@ -39569,7 +39569,7 @@ _080662B4:
 	.align 2, 0
 _080662B8: .4byte gUnknown_202F2F8
 _080662BC: .4byte gUnknown_202F2FC
-_080662C0: .4byte gUnknown_20255F0
+_080662C0: .4byte gRealInputs
 _080662C4:
 	movs r0, 0
 	bl sub_8083CE0
@@ -39671,7 +39671,7 @@ _08066390:
 	.align 2, 0
 _08066394: .4byte gUnknown_202F2F8
 _08066398: .4byte gUnknown_202F2FC
-_0806639C: .4byte gUnknown_20255F0
+_0806639C: .4byte gRealInputs
 _080663A0:
 	movs r0, 0
 	bl sub_8083CE0
@@ -42663,7 +42663,7 @@ _08067BF0:
 	mov r10, r0
 	b _08067CF6
 	.align 2, 0
-_08067BF8: .4byte gUnknown_20255F0
+_08067BF8: .4byte gRealInputs
 _08067BFC: .4byte gUnknown_202EE10
 _08067C00: .4byte gUnknown_203B080
 _08067C04:
@@ -42736,7 +42736,7 @@ _08067C84:
 	mov r10, r3
 	b _08067CF6
 	.align 2, 0
-_08067C8C: .4byte gUnknown_20255F0
+_08067C8C: .4byte gRealInputs
 _08067C90: .4byte gUnknown_202EE10
 _08067C94: .4byte gUnknown_203B084
 _08067C98:
@@ -42771,7 +42771,7 @@ _08067CCC:
 	movs r7, 0x1
 	b _08067CF6
 	.align 2, 0
-_08067CD4: .4byte gUnknown_20255F0
+_08067CD4: .4byte gRealInputs
 _08067CD8: .4byte gUnknown_202EE10
 _08067CDC:
 	movs r0, 0x2
@@ -42992,7 +42992,7 @@ _08067E82:
 	b _08067EBC
 	.align 2, 0
 _08067EA0: .4byte gUnknown_202EE10
-_08067EA4: .4byte gUnknown_20255F0
+_08067EA4: .4byte gRealInputs
 _08067EA8:
 	cmp r0, 0x1
 	bne _08067ECC
@@ -43379,7 +43379,7 @@ _080681C0: .4byte gUnknown_203B418
 _080681C4: .4byte 0x0000065a
 _080681C8: .4byte gUnknown_2027370
 _080681CC: .4byte gUnknown_8106DA4
-_080681D0: .4byte gUnknown_20255F0
+_080681D0: .4byte gRealInputs
 _080681D4:
 	movs r0, 0x20
 	ands r0, r1
@@ -43472,7 +43472,7 @@ _0806826C:
 	strh r0, [r3]
 	b _080682E8
 	.align 2, 0
-_0806828C: .4byte gUnknown_20255F0
+_0806828C: .4byte gRealInputs
 _08068290: .4byte gUnknown_203B084
 _08068294:
 	bl sub_80048C8
@@ -43499,7 +43499,7 @@ _080682B8:
 	mov r8, r4
 	b _080682E8
 	.align 2, 0
-_080682C4: .4byte gUnknown_20255F0
+_080682C4: .4byte gRealInputs
 _080682C8: .4byte gUnknown_202EE10
 _080682CC:
 	movs r0, 0x2
@@ -100564,7 +100564,7 @@ _080842DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080842EC: .4byte gUnknown_20255F0
+_080842EC: .4byte gRealInputs
 	thumb_func_end sub_80841EC
 
 	thumb_func_start sub_80842F0

@@ -692,7 +692,7 @@ _08099524:
 	mov r9, r1
 	b _080995AE
 	.align 2, 0
-_0809953C: .4byte gUnknown_20255F0
+_0809953C: .4byte gRealInputs
 _08099540:
 	adds r0, r6, 0
 	bl sub_809CFE8
@@ -768,7 +768,7 @@ _080995AE:
 	bl sub_8099744
 	bl sub_8011860
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl nullsub_120
 	bl sub_80A5E70
 	bl xxx_call_update_bg_vram
@@ -5123,7 +5123,7 @@ _0809B72C:
 	str r0, [r1]
 	bl _0809C392
 	.align 2, 0
-_0809B754: .4byte gUnknown_20255F0
+_0809B754: .4byte gRealInputs
 _0809B758:
 	bl sub_8094D14
 	lsls r0, 24
@@ -5164,7 +5164,7 @@ _0809B79C:
 	bne _0809B784
 	bl _0809C392
 	.align 2, 0
-_0809B7A8: .4byte gUnknown_20255F0
+_0809B7A8: .4byte gRealInputs
 _0809B7AC:
 	ldr r0, [r6]
 	movs r3, 0x84
@@ -8026,7 +8026,7 @@ _0809CE54:
 	movs r0, 0
 	b _0809CEA8
 	.align 2, 0
-_0809CE70: .4byte gUnknown_20255F0
+_0809CE70: .4byte gRealInputs
 _0809CE74:
 	movs r3, 0x2
 	adds r0, r1, 0
@@ -8186,7 +8186,7 @@ _0809CF86:
 	movs r0, 0x4
 	b _0809CFB6
 	.align 2, 0
-_0809CFA0: .4byte gUnknown_20255F0
+_0809CFA0: .4byte gRealInputs
 _0809CFA4:
 	movs r0, 0x80
 	ands r1, r0

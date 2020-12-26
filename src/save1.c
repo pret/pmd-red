@@ -69,7 +69,7 @@ void sub_8012A18()
     sub_8005180();
     sub_80060EC();
     sub_800CB20();
-    sub_800485C(); // Input related
+    LoadBufferedInputs(); // Input related
     CopySpritesToOam();
     sub_8005304();
     TransferBGPaletteBuffer();

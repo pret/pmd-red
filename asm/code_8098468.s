@@ -512,7 +512,7 @@ _080988F8:
 	ldr r0, [r0]
 	bl IncrementPlayTime
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl nullsub_120
 	bl sub_80A5E70
 	bl sub_809B638
@@ -524,7 +524,7 @@ _080988F8:
 	.align 2, 0
 _08098968: .4byte gUnknown_20398B9
 _0809896C: .4byte gUnknown_20398B8
-_08098970: .4byte gUnknown_20255F0
+_08098970: .4byte gRealInputs
 _08098974: .4byte 0x0000030f
 _08098978: .4byte gUnknown_203B47C
 _0809897C:

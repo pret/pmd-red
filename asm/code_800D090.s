@@ -5739,7 +5739,7 @@ _0800FB58: .4byte 0x0000401a
 _0800FB5C: .4byte 0x00004018
 _0800FB60: .4byte 0x00004a28
 _0800FB64: .4byte 0x00004a1c
-_0800FB68: .4byte gUnknown_20255F0
+_0800FB68: .4byte gRealInputs
 	thumb_func_end sub_800FAA8
 
 	thumb_func_start sub_800FB6C
@@ -5804,7 +5804,7 @@ _0800FBCA:
 	b _0800FC16
 	.align 2, 0
 _0800FBE8: .4byte gUnknown_203B0E4
-_0800FBEC: .4byte gUnknown_20255F0
+_0800FBEC: .4byte gRealInputs
 _0800FBF0: .4byte 0x00004dfc
 _0800FBF4: .4byte 0x00004e25
 _0800FBF8: .4byte 0x00004dec
@@ -6424,7 +6424,7 @@ _08010072:
 	.align 2, 0
 _08010094: .4byte gUnknown_80D3EDC
 _08010098: .4byte gUnknown_80D3EEC
-_0801009C: .4byte gUnknown_20255F0
+_0801009C: .4byte gRealInputs
 _080100A0: .4byte gUnknown_202DE18
 _080100A4: .4byte gUnknown_202DE19
 _080100A8:
@@ -6921,7 +6921,7 @@ _08010480: .4byte 0x00005114
 _08010484: .4byte 0x0000110c
 _08010488: .4byte 0x000052dc
 _0801048C: .4byte 0x000052de
-_08010490: .4byte gUnknown_20255F0
+_08010490: .4byte gRealInputs
 	thumb_func_end sub_8010344
 
 	thumb_func_start sub_8010494
@@ -7547,7 +7547,7 @@ sub_8010960:
 	ldr r0, [r0]
 	bl IncrementPlayTime
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl CopySpritesToOam
 	bl sub_8005304
 	bl TransferBGPaletteBuffer
@@ -8003,7 +8003,7 @@ _08010D5E:
 _08010D70: .4byte gUnknown_203B0EC
 _08010D74: .4byte gUnknown_80D407C
 _08010D78: .4byte gUnknown_80D4080
-_08010D7C: .4byte gUnknown_20255F0
+_08010D7C: .4byte gRealInputs
 _08010D80:
 	movs r0, 0x1
 _08010D82:
@@ -8378,7 +8378,7 @@ _08011098: .4byte 0x00004dd0
 _0801109C: .4byte 0x00004018
 _080110A0: .4byte 0x00004014
 _080110A4: .4byte 0x00004a30
-_080110A8: .4byte gUnknown_20255F0
+_080110A8: .4byte gRealInputs
 _080110AC: .4byte gUnknown_80D40C4
 	thumb_func_end sub_8010F28
 
@@ -9177,7 +9177,7 @@ sub_801169C:
 	ldr r0, [r0]
 	bl IncrementPlayTime
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl CopySpritesToOam
 	bl sub_8005304
 	bl TransferBGPaletteBuffer
