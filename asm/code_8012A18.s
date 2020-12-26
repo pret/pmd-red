@@ -67,7 +67,7 @@ sub_8012AE8:
 	movs r0, 0xB
 	b _08012BBE
 	.align 2, 0
-_08012B08: .4byte gUnknown_20255F0
+_08012B08: .4byte gRealInputs
 _08012B0C:
 	ldrh r1, [r2, 0x4]
 	movs r0, 0x40
@@ -3450,7 +3450,7 @@ _08014418:
 	str r1, [r0]
 	ldr r0, _08014464
 	str r1, [r0]
-	bl sub_80048F8
+	bl UnpressButtons
 	ldr r1, _08014468
 	movs r0, 0
 	strb r0, [r1]
@@ -3853,7 +3853,7 @@ _08014750:
 	.align 2, 0
 _08014760: .4byte gUnknown_202E77C
 _08014764: .4byte gUnknown_202E748
-_08014768: .4byte gUnknown_20255F0
+_08014768: .4byte gRealInputs
 _0801476C: .4byte gUnknown_202E790
 _08014770: .4byte 0x0001869f
 _08014774: .4byte gUnknown_202E744
@@ -4042,7 +4042,7 @@ _0801487A:
 	movs r0, 0x70
 	b _08014932
 	.align 2, 0
-_080148E4: .4byte gUnknown_20255F0
+_080148E4: .4byte gRealInputs
 _080148E8: .4byte gUnknown_202E791
 _080148EC: .4byte gUnknown_202E77C
 _080148F0: .4byte gUnknown_202E6E0

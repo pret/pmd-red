@@ -179,7 +179,7 @@ _080004D8:
 	bl SetBGOBJEnableFlags
 	b _08000516
 	.align 2, 0
-_080004FC: .4byte gUnknown_20255F0
+_080004FC: .4byte gRealInputs
 _08000500:
 	cmp r4, 0
 	bne _08000522
@@ -305,7 +305,7 @@ xxx_update_stuff:
 	bl sub_80060EC
 	bl sub_8011860
 	bl sub_800CB20
-	bl sub_800485C
+	bl LoadBufferedInputs
 	bl CopySpritesToOam
 	bl sub_8005304
 	bl TransferBGPaletteBuffer
@@ -592,7 +592,7 @@ _0800086C:
 	beq _08000892
 	b _08000860
 	.align 2, 0
-_08000880: .4byte gUnknown_20255F0
+_08000880: .4byte gRealInputs
 _08000884:
 	add r0, sp, 0x8
 	bl sub_80144A4
@@ -720,7 +720,7 @@ _0800097C:
 	beq _080009A2
 	b _0800095C
 	.align 2, 0
-_08000990: .4byte gUnknown_20255F0
+_08000990: .4byte gRealInputs
 _08000994:
 	mov r0, sp
 	bl sub_80144A4

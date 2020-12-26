@@ -8200,7 +8200,7 @@ _080A1814:
 	ands r0, r1
 	b _080A1720
 	.align 2, 0
-_080A1820: .4byte gUnknown_20255F0
+_080A1820: .4byte gRealInputs
 _080A1824:
 	lsls r0, r5, 16
 	asrs r0, 16
@@ -9461,7 +9461,7 @@ _080A2282:
 	negs r0, r0
 	b _080A236C
 	.align 2, 0
-_080A2288: .4byte gUnknown_20255F0
+_080A2288: .4byte gRealInputs
 _080A228C:
 	negs r0, r5
 	orrs r0, r5
