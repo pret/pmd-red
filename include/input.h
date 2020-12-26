@@ -3,19 +3,19 @@
 
 struct UnkInputStruct1
 {
-    /* 0x0 */ u16 unk0;
-    /* 0x2 */ u16 unk2;
+    /* 0x0 */ u16 held;
+    /* 0x2 */ u16 pressed;
     /* 0x4 */ u16 unk4;
     /* 0x6 */ u16 unk6;
     /* 0x8 */ u16 unk8;
     /* 0xA */ u16 unkA;
-    /* 0xC */ u32 unkC;
+    /* 0xC */ s32 repeatTimer;
 };
 
 struct UnkInputStruct2
 {
-    /* 0x0 */ u16 unk0;
-    /* 0x2 */ u16 unk2;
+    /* 0x0 */ s16 holdTimerB;
+    /* 0x2 */ s16 holdTimerR;
     /* 0x4 */ u16 unk4;
     /* 0x6 */ u16 unk6;
 };

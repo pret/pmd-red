@@ -40,8 +40,7 @@ SECTIONS {
     ALIGN(4)
     {
         asm/crt0.o(.text);
-        asm/code.o(.text);
-        src/code_80001E0.o(.text);
+        src/code_80001DC.o(.text);
         asm/arm_func.o(.text);
         asm/code_2.o(.text);
         src/code.o(.text);
@@ -56,7 +55,6 @@ SECTIONS {
         src/util.o(.text);
         src/bg_palette_buffer.o(.text);
         src/input.o(.text);
-        asm/input.o(.text);
         asm/code_8004AA0.o(.text);
         src/sprite.o(.text);
         asm/sprite.o(.text);

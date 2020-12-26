@@ -43,16 +43,16 @@ gUnknown_20255F0 = .; /* 20255F0 */
 gUnknown_2025600 = .; /* 2025600 */
 	. += 0x2C;
 
-gUnknown_202562C = .; /* 202562C */
+gUnusedScrambledInputJunk = .; /* 202562C */
 	. += 0xC;
 
 gUnknown_2025638 = .; /* 2025638 */
 	. += 0x10;
 
-gUnknown_2025648 = .; /* 2025648 */
+gCurrentInputs = .; /* 2025648 */
 	. += 0x10;
 
-gUnknown_2025658 = .; /* 2025658 */
+gLastInputs = .; /* 2025658 */
 	. += 0x10;
 
 gUnknown_2025668 = .; /* 2025668 */

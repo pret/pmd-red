@@ -131,7 +131,7 @@ gFlashEnabled = .; /* 203B0B4 */
 gUnknown_203B0B8 = .; /* 203B0B8 */
 	. += 0x4;
 
-gUnknown_203B0BC = .; /* 203B0BC */
+gRawKeyInput = .; /* 203B0BC */
 	. += 0x2;
 
 gUnknown_203B0BE = .; /* 203B0BE */
