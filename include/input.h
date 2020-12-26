@@ -8,7 +8,7 @@ struct UnkInputStruct1
     /* 0x4 */ u16 repeated;
     /* 0x6 */ u16 shortPress;
     /* 0x8 */ u16 heldDpad;
-    /* 0xA */ u16 unkA;
+    /* 0xA..0xB - padding */
     /* 0xC */ s32 repeatTimerDpad;
 };
 
