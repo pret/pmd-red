@@ -20,7 +20,7 @@ extern u16 gUnknown_202D68A;
 extern u16 gUnknown_202D690;
 extern u8 gUnknown_202D694;
 extern u32 gUnknown_203B0B8;
-extern u16 gUnknown_203B0BC;
+extern u16 gRawKeyInput;
 
 bool8 IsBGSong(u32);
 bool8 sub_800CAAC(u32);
@@ -183,7 +183,7 @@ void sub_800CB20(void)
 {
     sub_800BA5C();
     gUnknown_203B0B8++;
-    if((gUnknown_203B0BC & 5) != 0)
+    if((gRawKeyInput & 5) != 0)
     {
         Random();
     }

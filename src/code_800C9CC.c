@@ -9,7 +9,7 @@ struct unkStruct_809CC88
     u16 unk6;
 };
 
-extern u16 gUnknown_203B0BC;
+extern u16 gRawKeyInput;
 extern u8 gUnknown_202D6B8;
 extern u8 gUnknown_202D6B9;
 extern u16 gUnknown_202D7FA;
@@ -22,58 +22,39 @@ extern struct unkStruct_809CC88 gUnknown_202D6B0;
 void ReadKeyInput(struct UnkInputStruct1 *r0)
 {
     u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
-    r0->unk0 = 0;
+    r0->held = 0;
 
     if((keyInput & DPAD_UP) != 0)
-    {
-        r0->unk0 = DPAD_UP;
-    }
+        r0->held = DPAD_UP;
 
     if((keyInput & DPAD_DOWN) != 0)
-    {
-        r0->unk0 |= DPAD_DOWN;
-    }
+        r0->held |= DPAD_DOWN;
 
     if((keyInput & DPAD_LEFT) != 0)
-    {
-        r0->unk0 |= DPAD_LEFT;
-    }
+        r0->held |= DPAD_LEFT;
 
     if((keyInput & DPAD_RIGHT) != 0)
-    {
-        r0->unk0 |= DPAD_RIGHT;
-    }
+        r0->held |= DPAD_RIGHT;
 
     if((keyInput & A_BUTTON) != 0)
-    {
-        r0->unk0 |= A_BUTTON;
-    }
+        r0->held |= A_BUTTON;
 
     if((keyInput & B_BUTTON) != 0)
-    {
-        r0->unk0 |= B_BUTTON;
-    }
+        r0->held |= B_BUTTON;
 
     if((keyInput & START_BUTTON) != 0)
-    {
-        r0->unk0 |= START_BUTTON;
-    }
+        r0->held |= START_BUTTON;
 
     if((keyInput & SELECT_BUTTON) != 0)
-    {
-        r0->unk0 |= SELECT_BUTTON;
-    }
+        r0->held |= SELECT_BUTTON;
 
     if((keyInput & R_BUTTON) != 0)
-    {
-        r0->unk0 |= R_BUTTON;
-    }
-    
+        r0->held |= R_BUTTON;
+
     if((keyInput & L_BUTTON) != 0)
-    {
-        r0->unk0 |= L_BUTTON;
-    }
-    gUnknown_203B0BC = keyInput;
+        r0->held |= L_BUTTON;
+
+    gRawKeyInput = keyInput;
 }
 
 void sub_800CC44(s32 r0, s32 r1)
