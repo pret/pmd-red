@@ -40,11 +40,9 @@ extern void LoadTitleScreen(void);
 extern void sub_800CCA0(u32, u32);
 extern void sub_800CCAC(u32, u32);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
-extern void xxx_update_stuff(u32);
 extern void sub_800BDFC(u32);
 extern void sub_80095CC(u32, u32);
 extern void InitMainMenu(void);
-
 extern void sub_8012468(void);
 extern u32 sub_8012484(void);
 extern void sub_8012558(void);
@@ -60,13 +58,31 @@ extern void sub_80122A8(void);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
+extern void xxx_draw_string_80144C4(void);
+extern void sub_8005838(u32, u32);
+extern void nullsub_8(u32);
+extern void sub_8005180(void);
+extern void sub_80060EC(void);
+extern void sub_8011860(void);
+extern void sub_800CB20(void);
+extern void LoadBufferedInputs(void);
+extern void CopySpritesToOam(void);
+extern void sub_8005304(void);
+extern void TransferBGPaletteBuffer(void);
+extern void xxx_call_update_bg_vram(void);
+extern void sub_8009908(void);
+extern void xxx_call_update_bg_sound_input(void);
+
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
 extern struct OpenedFile *gTitlePaletteFile;
 extern struct Inputs gRealInputs;
+extern u8 *gUnknown_203B46C;
 
 extern char gUnknown_80B69BC[];
+
+void xxx_update_stuff(u32);
 
 void GameLoop(void)
 {
@@ -192,4 +208,23 @@ void GameLoop(void)
         }
 
     }
+}
+
+void xxx_update_stuff(u32 r0)
+{
+    xxx_draw_string_80144C4();
+    sub_8005838(0, 0);
+    nullsub_8(gUnknown_203B46C[10]);
+    sub_8005180();
+    sub_80060EC();
+    sub_8011860();
+    sub_800CB20();
+    LoadBufferedInputs();
+    CopySpritesToOam();
+    sub_8005304();
+    TransferBGPaletteBuffer();
+    xxx_call_update_bg_vram();
+    sub_8009908();
+    xxx_call_update_bg_sound_input();
+    ResetSprites(0);
 }

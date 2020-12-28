@@ -5,36 +5,6 @@
 
 	.text	
 
-	thumb_func_start xxx_update_stuff
-xxx_update_stuff:
-	push {lr}
-	bl xxx_draw_string_80144C4
-	movs r0, 0
-	movs r1, 0
-	bl sub_8005838
-	ldr r0, _08000630
-	ldr r0, [r0]
-	ldrb r0, [r0, 0xA]
-	bl nullsub_8
-	bl sub_8005180
-	bl sub_80060EC
-	bl sub_8011860
-	bl sub_800CB20
-	bl LoadBufferedInputs
-	bl CopySpritesToOam
-	bl sub_8005304
-	bl TransferBGPaletteBuffer
-	bl xxx_call_update_bg_vram
-	bl sub_8009908
-	bl xxx_call_update_bg_sound_input
-	movs r0, 0
-	bl ResetSprites
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08000630: .4byte gUnknown_203B46C
-	thumb_func_end xxx_update_stuff
-
 	thumb_func_start LoadTitleScreen
 LoadTitleScreen:
 	push {r4-r7,lr}
