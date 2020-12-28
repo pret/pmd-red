@@ -23,13 +23,13 @@ struct UnkTextStruct2 {
 extern char gUnknown_3000E94[];
 
 EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
-EWRAM_DATA u8 *gKanji[2];
-EWRAM_DATA u16 gUnknown_2027498;
+EWRAM_DATA u8 *gCharmaps[2];
+EWRAM_DATA u16 gCharacterSpacing;
 EWRAM_DATA u8 gUnknown_20274A5;
-EWRAM_DATA u32 gUnknown_20274AC;
+EWRAM_DATA u32 gCurrentCharmap;
 EWRAM_DATA vu32 gUnknown_20274B0;
 EWRAM_DATA u8 gUnknown_20274B4[0x3b00];
-EWRAM_DATA struct OpenedFile *gKanjiFiles[2];
+EWRAM_DATA struct OpenedFile *gCharmapFiles[2];
 EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
 EWRAM_DATA u32 gUnknown_202B020;
 EWRAM_DATA u32 gUnknown_202B024;
@@ -53,17 +53,17 @@ extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
 
-void sub_8006218(void)
+void LoadCharmaps(void)
 {
     int i;
     int j;
     int k;
 
-    gUnknown_20274AC = 0;
-    gKanjiFiles[0] = OpenFileAndGetFileDataPtr(gUnknown_80B87B4, &gUnknown_8300500);
-    gKanjiFiles[1] = OpenFileAndGetFileDataPtr(gUnknown_80B87BC, &gUnknown_8300500);
-    gKanji[0] = gKanjiFiles[0]->data;
-    gKanji[1] = gKanjiFiles[1]->data;
+    gCurrentCharmap = 0;
+    gCharmapFiles[0] = OpenFileAndGetFileDataPtr(gUnknown_80B87B4, &gUnknown_8300500);
+    gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gUnknown_80B87BC, &gUnknown_8300500);
+    gCharmaps[0] = gCharmapFiles[0]->data;
+    gCharmaps[1] = gCharmapFiles[1]->data;
     gUnknown_202B028[0] = 11;
     gUnknown_202B028[1] = 12;
     for (k = 0; k < 4; k++)
@@ -72,7 +72,7 @@ void sub_8006218(void)
         gUnknown_2027370[k].unk08 = 0;
         gUnknown_2027370[k].unk46 = 0;
     }
-    gUnknown_2027498 = 0;
+    gCharacterSpacing = 0;
     for (i = 0; i < 20; i++)
     {
         gUnknown_202B038[0][i][0] = 0xf279;
@@ -132,9 +132,9 @@ u8 sub_80063BC(u8 a0)
     return retval;
 }
 
-void sub_80063CC(u32 a0)
+void SelectCharmap(u32 a0)
 {
-    gUnknown_20274AC = a0;
+    gCurrentCharmap = a0;
 }
 
 void sub_80063D8(int a0)

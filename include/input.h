@@ -1,7 +1,7 @@
 #ifndef GUARD_INPUT_H
 #define GUARD_INPUT_H  
 
-struct UnkInputStruct1
+struct Inputs
 {
     /* 0x0 */ u16 held;
     /* 0x2 */ u16 pressed;
@@ -12,7 +12,7 @@ struct UnkInputStruct1
     /* 0xC */ s32 repeatTimerDpad;
 };
 
-struct UnkInputStruct2
+struct InputTimers
 {
     /* 0x0 */ s16 holdTimerB;
     /* 0x2 */ s16 holdTimerR;
@@ -20,7 +20,7 @@ struct UnkInputStruct2
     /* 0x6 */ u16 unk6;
 };
 
-struct Input
+struct UnusedInputStruct
 {
     /* 0x0 */ u16 unk0;
     /* 0x2 */ u16 unk2;
@@ -34,7 +34,7 @@ struct Input
     /* 0x12 */ u16 unk12;
     /* 0x14 */ u16 unk14;
     /* 0x16 */ u16 unk16;
-    /* 0x16 */ u16 unk18;
+    /* 0x18 */ u16 unk18;
     /* 0x1A */ u16 unk1A;
     /* 0x1C */ u16 unk1C;
     /* 0x1E */ u16 unk1E;
@@ -43,8 +43,7 @@ struct Input
     /* 0x24 */ u16 unk26;
     /* 0x28 */ u8 unk28;
     /* 0x29 */ u8 unk29;
-    /* 0x2A */ u8 unk2A;
-    /* 0x2B */ u8 padding;
+    /* 0x2A..0x2B - padding */
 };
 
 void InitInput(void);
@@ -57,7 +56,7 @@ u8 sub_80048C8(void);
 u8 sub_80048CC(void);
 void ResetRepeatTimers(void);
 void UnpressButtons(void);
-void sub_8004914(void);
+void ResetUnusedInputStruct(void);
 void UpdateInput(void);
 
 #endif // GUARD_INPUT_H

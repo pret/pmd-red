@@ -22510,7 +22510,7 @@ _0805D928:
 	bl sub_8083600
 	bl sub_80647F0
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	bl sub_805F1AC
 	lsls r0, 16
 	cmp r0, 0
@@ -23031,7 +23031,7 @@ _0805DD66:
 	ldr r0, _0805DDD4
 	strb r4, [r0]
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 _0805DD7E:
 	ldr r2, _0805DDC8
 	ldrh r0, [r2]
@@ -23048,7 +23048,7 @@ _0805DD7E:
 	beq _0805DDA4
 	bl sub_80532B4
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 _0805DDA4:
 	movs r4, 0
 	ldr r0, _0805DDC8
@@ -23628,7 +23628,7 @@ _0805E238:
 	adds r0, r2, 0
 	bl ShowFieldMenu
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r1, _0805E294
 	movs r0, 0
 	strb r0, [r1]
@@ -26454,7 +26454,7 @@ _0805F904:
 	cmp r3, 0
 	bne _0805F920
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	b _0805F240
 	.align 2, 0
 _0805F91C: .4byte gUnknown_203B418
@@ -26467,7 +26467,7 @@ _0805F92A:
 	movs r1, 0
 	bl sub_803EAF0
 	bl ResetRepeatTimers
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -46957,7 +46957,7 @@ _08069D6C:
 	ldrsh r1, [r4, r0]
 	ldrb r2, [r4, 0x9]
 	mov r0, sp
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	str r0, [r5, 0x10]
 	ldrb r0, [r4, 0x14]
@@ -52043,7 +52043,7 @@ _0806C462:
 	mov r0, sp
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	mov r1, r8
 	ldrh r0, [r1, 0x4]
 	adds r5, r0
@@ -52084,7 +52084,7 @@ _0806C4AE:
 	mov r0, sp
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	mov r1, r8
 	ldrb r0, [r1]
 	adds r5, r0
@@ -52124,7 +52124,7 @@ _0806C4F8:
 	mov r0, sp
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	mov r1, r8
 	ldrb r0, [r1]
 	adds r5, r0
@@ -64045,7 +64045,7 @@ _08072080:
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	mov r0, sp
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	str r0, [r5, 0x18]
 	mov r0, r9
@@ -64406,7 +64406,7 @@ _0807236C:
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
 	mov r0, sp
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	str r0, [r4, 0x18]
 	mov r0, r8
@@ -64656,7 +64656,7 @@ _0807255A:
 	mov r0, sp
 	ldr r1, [sp, 0x1C]
 	mov r2, r8
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	ldr r3, [sp, 0x20]
 	cmp r0, r3
@@ -64739,7 +64739,7 @@ _080725F8:
 	mov r0, sp
 	ldr r1, [sp, 0x18]
 	mov r2, r8
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	ldr r1, [sp, 0x1C]
 	cmp r0, r1
@@ -64764,7 +64764,7 @@ _08072624:
 	mov r0, sp
 	ldr r1, [sp, 0x18]
 	adds r2, r4, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	subs r0, 0x1
 	str r0, [r5, 0x18]
@@ -64779,7 +64779,7 @@ _08072644:
 	mov r0, sp
 	ldr r1, [sp, 0x18]
 	adds r2, r4, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	mov r0, r8
 	strb r0, [r5, 0x9]
 	ldrh r0, [r5, 0x10]
@@ -65493,7 +65493,7 @@ sub_8072B78:
 	ldrb r2, [r6, 0x9]
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp]
 	str r0, [r6, 0x18]
 	str r4, [r7, 0x64]

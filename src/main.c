@@ -10,7 +10,7 @@ extern u8 gUnknown_202D7FE;
 
 extern char alt_203B038[];
 
-extern char gUnknown_203B038[];
+extern char gTitlePaletteFile[];
 extern char gUnknown_203BC04[];
 
 extern char iwram_start[];
@@ -36,7 +36,7 @@ extern void InitBGPaletteBuffer(void);
 extern void sub_80057E8(void);
 extern void InitFileSystem(void);
 extern void sub_80098A0(void);
-extern void sub_80096E0(void);
+extern void InitGraphics(void);
 extern void sub_800B6F4(int, void *);
 extern void GameLoop(void);
 extern void Hang(void);
@@ -54,8 +54,8 @@ void AgbMain(void)
     DmaStop(2);
     DmaStop(3);
 
-    if (gUnknown_203BC04 - gUnknown_203B038 > 0)
-        CpuCopy32(gUnknown_8270000, gUnknown_203B038, gUnknown_203BC04 - gUnknown_203B038);
+    if (gUnknown_203BC04 - gTitlePaletteFile > 0)
+        CpuCopy32(gUnknown_8270000, gTitlePaletteFile, gUnknown_203BC04 - gTitlePaletteFile);
 
     if (alt_203B038 - ewram_start > 0)
     {
@@ -98,9 +98,9 @@ void AgbMain(void)
     InitBGPaletteBuffer();
     sub_80057E8();
     InitFileSystem();
-    sub_8006218();
+    LoadCharmaps();
     sub_80098A0();
-    sub_80096E0();
+    InitGraphics();
     sub_800B6F4(1, sub_800CE54);
     REG_DISPCNT = 32576;
     GameLoop();

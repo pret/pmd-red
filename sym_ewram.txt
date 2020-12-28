@@ -40,7 +40,7 @@ gBGPaletteBuffer = .; /* 20251F0 */
 gRealInputs = .; /* 20255F0 */
 	. += 0x10;
 
-gUnknown_2025600 = .; /* 2025600 */
+gUnusedInputsRelated = .; /* 2025600 */
 	. += 0x2C;
 
 gUnusedScrambledInputJunk = .; /* 202562C */
@@ -55,7 +55,7 @@ gCurrentInputs = .; /* 2025648 */
 gLastInputs = .; /* 2025658 */
 	. += 0x10;
 
-gUnknown_2025668 = .; /* 2025668 */
+gInputTimers = .; /* 2025668 */
 	. += 0x8;
 
 gUnknown_2025670 = .; /* 2025670 */
@@ -133,10 +133,10 @@ gUnknown_2027370 = .; /* 2027370 */
 gUnknown_20273B8 = .; /* 20273B8 */
 	. += 0xD8;
 
-gKanji = .; /* 2027490 */
+gCharmaps = .; /* 2027490 */
 	. += 0x8;
 
-gUnknown_2027498 = .; /* 2027498 */
+gCharacterSpacing = .; /* 2027498 */
 	. += 0x2;
 
 gUnknown_202749A = .; /* 202749A */
@@ -148,7 +148,7 @@ gUnknown_20274A5 = .; /* 20274A5 */
 gUnknown_20274A6 = .; /* 20274A6 */
 	. += 0x6;
 
-gUnknown_20274AC = .; /* 20274AC */
+gCurrentCharmap = .; /* 20274AC */
 	. += 0x4;
 
 gUnknown_20274B0 = .; /* 20274B0 */
@@ -157,7 +157,7 @@ gUnknown_20274B0 = .; /* 20274B0 */
 gUnknown_20274B4 = .; /* 20274B4 */
 	. += 0x3B00;
 
-gKanjiFiles = .; /* 202AFB4 */
+gCharmapFiles = .; /* 202AFB4 */
 	. += 0x8;
 
 gUnknown_202AFBC = .; /* 202AFBC */
@@ -863,10 +863,10 @@ gUnknown_202F3E8 = .; /* 202F3E8 */
 gUnknown_202F400 = .; /* 202F400 */
 	. += 0x90E8;
 
-gUnknown_20384E8 = .; /* 20384E8 */
+gLevelCurrentPokeId = .; /* 20384E8 */
 	. += 0x8;
 
-gUnknown_20384F0 = .; /* 20384F0 */
+gLevelCurrentData = .; /* 20384F0 */
 	. += 0x4B0;
 
 gItemParametersFile = .; /* 20389A0 */
@@ -884,10 +884,10 @@ gBoughtFriendAreas = .; /* 2038C28 (one byte for each friend area) */
 gWazaParametersFile = .; /* 2038C64 */
 	. += 0x4;
 
-gUnknown_2038C68 = .; /* 2038C68 */
+gMovesData = .; /* 2038C68 */
 	. += 0x4;
 
-gUnknown_2038C6C = .; /* 2038C6C */
+gMovesRelated_2038C6C = .; /* 2038C6C */
 	. += 0x4;
 
 gUnknown_2038C70 = .; /* 2038C70 */

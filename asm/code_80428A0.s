@@ -2609,7 +2609,7 @@ _08043FF0:
 	ldrsh r1, [r4, r0]
 	adds r0, r5, 0
 	mov r2, r9
-	bl sub_808E010
+	bl GetPokemonLevelData
 	mov r1, r9
 	strb r1, [r4, 0x3]
 	ldr r0, [sp, 0x20]

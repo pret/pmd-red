@@ -2093,7 +2093,7 @@ _080074B0:
 	b _080074CC
 	.align 2, 0
 _080074B8: .4byte gUnknown_80B853C
-_080074BC: .4byte gUnknown_20274AC
+_080074BC: .4byte gCurrentCharmap
 _080074C0:
 	ldr r0, _080074F8
 	cmp r4, r0
@@ -2103,7 +2103,7 @@ _080074C0:
 	add r10, r1
 _080074CC:
 	adds r0, r4, 0
-	bl sub_8008584
+	bl GetCharacter
 	str r0, [sp]
 	ldr r2, [r0]
 	str r2, [sp, 0x4]
@@ -2324,7 +2324,7 @@ _0800764E:
 	.align 2, 0
 _08007664: .4byte gUnknown_80B85DC
 _08007668: .4byte gUnknown_202B028
-_0800766C: .4byte gUnknown_20274AC
+_0800766C: .4byte gCurrentCharmap
 _08007670:
 	movs r0, 0
 	str r0, [sp, 0x20]
@@ -2614,10 +2614,10 @@ _0800786C:
 	.align 2, 0
 _0800788C: .4byte gUnknown_80B85DC
 _08007890: .4byte gUnknown_202B028
-_08007894: .4byte gUnknown_20274AC
+_08007894: .4byte gCurrentCharmap
 _08007898: .4byte 0x11111111
 _0800789C: .4byte gUnknown_202B030
-_080078A0: .4byte gUnknown_2027498
+_080078A0: .4byte gCharacterSpacing
 	thumb_func_end xxx_draw_char
 
 	thumb_func_start sub_80078A4
@@ -4434,8 +4434,8 @@ _08008570:
 _08008580: .4byte 0x00000fff
 	thumb_func_end sub_80084A4
 
-	thumb_func_start sub_8008584
-sub_8008584:
+	thumb_func_start GetCharacter
+GetCharacter:
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	ldr r1, _080085C4
@@ -4468,8 +4468,8 @@ sub_8008584:
 	adds r1, r5, r1
 	b _08008624
 	.align 2, 0
-_080085C4: .4byte gKanji
-_080085C8: .4byte gUnknown_20274AC
+_080085C4: .4byte gCharmaps
+_080085C8: .4byte gCurrentCharmap
 _080085CC: .4byte 0xffff0800
 _080085D0: .4byte 0x000007fe
 _080085D4:
@@ -4525,7 +4525,7 @@ _08008624:
 	bx r1
 	.align 2, 0
 _0800862C: .4byte gUnknown_80B86A4
-	thumb_func_end sub_8008584
+	thumb_func_end GetCharacter
 
 	thumb_func_start sub_8008630
 sub_8008630:
@@ -5857,7 +5857,7 @@ _08008F44:
 	b _08008F64
 _08008F4C:
 	adds r0, r1, 0
-	bl sub_8008584
+	bl GetCharacter
 	cmp r0, 0
 	beq _08008F64
 	movs r1, 0x6
@@ -5887,7 +5887,7 @@ _08008F7E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08008F88: .4byte gUnknown_2027498
+_08008F88: .4byte gCharacterSpacing
 	thumb_func_end sub_8008ED0
 
 	thumb_func_start sub_8008F8C
@@ -6012,7 +6012,7 @@ _0800904A:
 	b _08009128
 	.align 2, 0
 _08009058: .4byte 0x000082a0
-_0800905C: .4byte gUnknown_20274AC
+_0800905C: .4byte gCurrentCharmap
 _08009060:
 	ldr r0, _08009070
 	cmp r3, r0
@@ -6023,7 +6023,7 @@ _08009060:
 	b _08009128
 	.align 2, 0
 _08009070: .4byte 0x000082a2
-_08009074: .4byte gUnknown_20274AC
+_08009074: .4byte gCurrentCharmap
 _08009078:
 	cmp r3, 0x1B
 	beq _0800914A
@@ -6082,7 +6082,7 @@ _080090B8:
 	b _08009128
 _080090E0:
 	adds r0, r3, 0
-	bl sub_8008584
+	bl GetCharacter
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _08009128
@@ -6120,7 +6120,7 @@ _08009128:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	add r2, sp, 0x8
-	bl sub_80091AC
+	bl HandleTextFormat
 	adds r4, r0, 0
 	mov r1, r9
 	bl xxx_get_next_char_from_string
@@ -6141,7 +6141,7 @@ _0800914A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08009158: .4byte gUnknown_2027498
+_08009158: .4byte gCharacterSpacing
 	thumb_func_end xxx_draw_string
 
 	thumb_func_start sub_800915C
@@ -6184,7 +6184,7 @@ sub_8009190:
 	adds r2, r1, 0
 	ldr r0, _080091A4
 	adds r1, r3, 0
-	bl sub_80091AC
+	bl HandleTextFormat
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -6197,8 +6197,8 @@ sub_80091A8:
 	bx lr
 	thumb_func_end sub_80091A8
 
-	thumb_func_start sub_80091AC
-sub_80091AC:
+	thumb_func_start HandleTextFormat
+HandleTextFormat:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -6463,7 +6463,7 @@ _0800937A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80091AC
+	thumb_func_end HandleTextFormat
 
 	thumb_func_start sub_8009388
 sub_8009388:
@@ -6929,8 +6929,8 @@ _080096DA:
 	bx r1
 	thumb_func_end sub_800963C
 
-	thumb_func_start sub_80096E0
-sub_80096E0:
+	thumb_func_start InitGraphics
+InitGraphics:
 	push {r4-r6,lr}
 	ldr r1, _0800978C
 	movs r0, 0x1
@@ -7019,7 +7019,7 @@ _080097A0: .4byte 0x06004f00
 _080097A4: .4byte gUnknown_80B88B8
 _080097A8: .4byte 0x06017e00
 _080097AC: .4byte gUnknown_80B88C0
-	thumb_func_end sub_80096E0
+	thumb_func_end InitGraphics
 
 	thumb_func_start sub_80097B0
 sub_80097B0:

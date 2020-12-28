@@ -47,7 +47,7 @@ errno = .; /* 203B034 */
 
 alt_203B038 = .;
 
-gUnknown_203B038 = .; /* 203B038 */
+gTitlePaletteFile = .; /* 203B038 */
 	. += 0x4;
 
 gUnknown_203B03C = .; /* 203B03C */

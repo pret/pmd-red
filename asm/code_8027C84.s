@@ -390,7 +390,7 @@ _08027F82:
 	thumb_func_start sub_8027F88
 sub_8027F88:
 	push {r4-r6,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -890,7 +890,7 @@ _08028464:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -976,7 +976,7 @@ _0802850C:
 	beq _08028516
 	b _08028AF2
 _08028516:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -1073,7 +1073,7 @@ _080285DC:
 	beq _080285E6
 	b _08028AF2
 _080285E6:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -1328,7 +1328,7 @@ _080287DC:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -1430,7 +1430,7 @@ _080288A0:
 	beq _080288AA
 	b _08028AF2
 _080288AA:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
