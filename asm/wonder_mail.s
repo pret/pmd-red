@@ -8,7 +8,7 @@
 	thumb_func_start sub_8029B50
 sub_8029B50:
 	push {r4,r5,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -596,7 +596,7 @@ sub_802A050:
 	cmp r0, 0x3
 	bhi _0802A08C
 	bl sub_8031E10
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802A084
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -700,7 +700,7 @@ _0802A10C:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -790,7 +790,7 @@ _0802A1D2:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -835,7 +835,7 @@ sub_802A230:
 	cmp r0, 0x2
 	bcc _0802A284
 	bl sub_8030DE4
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _0802A27C
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -933,7 +933,7 @@ _0802A2FC:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -960,7 +960,7 @@ sub_802A33C:
 	cmp r0, 0x3
 	bhi _0802A394
 	bl sub_801B450
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _0802A38C
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -1048,7 +1048,7 @@ _0802A3FA:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -1329,7 +1329,7 @@ _0802A654:
 _0802A65C: .4byte gUnknown_203B2C4
 _0802A660:
 	bl sub_80155F0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802A688
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -2186,7 +2186,7 @@ _0802AD20:
 	beq _0802AD2A
 	b _0802B2AA
 _0802AD2A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -2229,7 +2229,7 @@ _0802AD80:
 	beq _0802AD8A
 	b _0802B2AA
 _0802AD8A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -2406,7 +2406,7 @@ _0802AEF4:
 	lsls r5, 2
 	adds r0, r5
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -2422,7 +2422,7 @@ _0802AF1A:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -2891,7 +2891,7 @@ _0802B2D0: .4byte gUnknown_203B2C4
 	thumb_func_start sub_802B2D4
 sub_802B2D4:
 	push {r4,r5,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -3382,7 +3382,7 @@ _0802B6B0:
 	ldr r0, [r0, 0x70]
 	mov r1, r8
 	bl sub_8012D08
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x74
 	movs r1, 0x1
@@ -3525,7 +3525,7 @@ sub_802B7D0:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _0802B818
 	ldr r0, [r5]
 	adds r0, 0x74
@@ -3583,7 +3583,7 @@ sub_802B81C:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x74
 	movs r1, 0x1
@@ -3634,7 +3634,7 @@ sub_802B880:
 	adds r3, 0x2
 	adds r2, 0x84
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x74
 	movs r1, 0x1
@@ -3845,7 +3845,7 @@ sub_802B9FC:
 	stm r0!, {r1,r4,r7}
 	ldm r2!, {r3,r4,r7}
 	stm r0!, {r3,r4,r7}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x28
 	movs r1, 0x1
@@ -3925,7 +3925,7 @@ sub_802BACC:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x28
 	movs r1, 0x1
@@ -4280,7 +4280,7 @@ _0802BD8E:
 	ldr r0, [r0, 0x3C]
 	mov r1, r8
 	bl sub_8012D34
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x40
 	movs r1, 0x1
@@ -4409,7 +4409,7 @@ sub_802BE94:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _0802BED8
 	ldr r0, [r5]
 	adds r0, 0x40
@@ -4458,7 +4458,7 @@ sub_802BEDC:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x40
 	movs r1, 0x1
@@ -4522,7 +4522,7 @@ sub_802BF30:
 	adds r3, 0x2
 	adds r2, 0x50
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x40
 	movs r1, 0x1
@@ -4785,7 +4785,7 @@ _0802C186:
 	ldr r0, [r0, 0x40]
 	mov r1, r8
 	bl sub_8012D34
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -4914,7 +4914,7 @@ sub_802C28C:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _0802C2D0
 	ldr r0, [r5]
 	adds r0, 0x44
@@ -4963,7 +4963,7 @@ sub_802C2D4:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -5028,7 +5028,7 @@ sub_802C328:
 	adds r3, 0x2
 	adds r2, 0x54
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -5258,7 +5258,7 @@ _0802C53A:
 	ldr r0, [r0, 0x40]
 	mov r1, r8
 	bl sub_8012D34
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -5387,7 +5387,7 @@ sub_802C640:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _0802C684
 	ldr r0, [r5]
 	adds r0, 0x44
@@ -5436,7 +5436,7 @@ sub_802C688:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -5501,7 +5501,7 @@ sub_802C6DC:
 	adds r3, 0x2
 	adds r2, 0x54
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x44
 	movs r1, 0x1
@@ -5837,7 +5837,7 @@ _0802C998:
 	cmp r2, 0x3
 	ble _0802C998
 _0802C9B8:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802C9D4
 	ldr r0, [r0]
 	movs r1, 0xCE
@@ -6391,7 +6391,7 @@ _0802CDEA:
 	str r1, [r0, 0x14]
 	movs r1, 0x4
 	bl sub_8012D34
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -6486,7 +6486,7 @@ sub_802CED8:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _0802CF10
 	ldr r0, [r5]
 	adds r0, 0x3C
@@ -6527,7 +6527,7 @@ sub_802CF14:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -6591,7 +6591,7 @@ sub_802CF5C:
 	adds r3, 0x2
 	adds r2, 0x4C
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -6943,7 +6943,7 @@ _0802D264:
 	cmp r2, 0
 	bge _0802D264
 _0802D27E:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802D2A0
 	ldr r0, [r0]
 	movs r6, 0xD4
@@ -8063,7 +8063,7 @@ sub_802DB28:
 	movs r0, 0
 	b _0802DBC6
 _0802DB4A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -8226,7 +8226,7 @@ _0802DC60:
 	cmp r2, 0
 	bge _0802DC60
 _0802DC7A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802DC94
 	ldr r0, [r0]
 	adds r0, 0x48
@@ -8569,7 +8569,7 @@ sub_802DF24:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x18
 	movs r1, 0x1
@@ -8591,7 +8591,7 @@ _0802DF68: .4byte gUnknown_80E0248
 	thumb_func_start sub_802DF6C
 sub_802DF6C:
 	push {lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802DF84
 	ldr r0, [r0]
 	adds r0, 0x18
@@ -8858,7 +8858,7 @@ _0802E168:
 	cmp r3, 0x3
 	ble _0802E168
 _0802E188:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802E1A8
 	ldr r0, [r0]
 	movs r7, 0x86
@@ -9931,7 +9931,7 @@ _0802EA14:
 	cmp r3, 0x3
 	ble _0802EA14
 _0802EA34:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802EA54
 	ldr r0, [r0]
 	movs r7, 0x86
@@ -10731,7 +10731,7 @@ _0802F04C:
 	cmp r3, 0
 	bge _0802F04C
 _0802F066:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802F084
 	ldr r0, [r0]
 	adds r0, 0xF0
@@ -10949,7 +10949,7 @@ sub_802F204:
 	adds r6, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -11104,7 +11104,7 @@ _0802F31C:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _0802F31C
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802F350
 	ldr r0, [r0]
 	adds r0, 0x24
@@ -11679,7 +11679,7 @@ _0802F7FC:
 	ldr r0, [r0]
 	mov r1, r8
 	bl sub_8012D08
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0xF8
 	movs r1, 0x1
@@ -11884,7 +11884,7 @@ sub_802F974:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0xF8
 	movs r1, 0x1
@@ -11959,7 +11959,7 @@ sub_802F9C0:
 	lsls r0, 1
 	adds r3, r0
 	strh r2, [r3]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0xF8
 	movs r1, 0x1
@@ -12335,7 +12335,7 @@ _0802FD0E:
 sub_802FD14:
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -12625,7 +12625,7 @@ _0802FF4E:
 	cmp r2, 0
 	bge _0802FF4E
 _0802FF68:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0802FF80
 	ldr r0, [r0]
 	adds r0, 0x6C
@@ -13128,7 +13128,7 @@ _08030362:
 	ldr r0, [r0, 0x68]
 	mov r1, r8
 	bl sub_8012D08
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x6C
 	movs r1, 0x1
@@ -13284,7 +13284,7 @@ sub_8030480:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x6C
 	movs r1, 0x1
@@ -13348,7 +13348,7 @@ sub_80304C8:
 	adds r3, 0x2
 	adds r2, 0x7C
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x6C
 	movs r1, 0x1
@@ -13604,7 +13604,7 @@ _0803071E:
 	ldr r0, [r0, 0x5C]
 	mov r1, r8
 	bl sub_8012D08
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r6]
 	adds r0, 0x60
 	movs r1, 0x1
@@ -13769,7 +13769,7 @@ sub_803084C:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x60
 	movs r1, 0x1
@@ -13821,7 +13821,7 @@ sub_80308A0:
 	ldr r0, [r4]
 	adds r0, 0xC3
 	strb r2, [r0]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x60
 	movs r1, 0x1
@@ -13852,7 +13852,7 @@ sub_80308A0:
 	adds r3, 0x2
 	adds r2, 0x70
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x60
 	movs r1, 0x1
@@ -14513,7 +14513,7 @@ sub_8030DE4:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x18
 	movs r1, 0x1
@@ -14535,7 +14535,7 @@ _08030E28: .4byte gUnknown_80E0900
 	thumb_func_start sub_8030E2C
 sub_8030E2C:
 	push {lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08030E44
 	ldr r0, [r0]
 	adds r0, 0x18
@@ -14686,7 +14686,7 @@ _08030F54: .4byte gUnknown_80E0938
 sub_8030F58:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -15035,13 +15035,13 @@ _080311E8:
 _08031224: .4byte gUnknown_203B328
 _08031228: .4byte gUnknown_80E0990
 _0803122C:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
 	bl sub_800641C
 _0803123A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08031254
 	ldr r0, [r0]
 	adds r0, 0xA8
@@ -15360,7 +15360,7 @@ sub_80314B4:
 	push {r4-r6,lr}
 	lsls r0, 16
 	asrs r5, r0, 16
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -16102,7 +16102,7 @@ sub_8031A3C:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x18
 	movs r1, 0x1
@@ -16155,7 +16155,7 @@ _08031ABE:
 	ldr r0, [r0, 0x14]
 	bl sub_8012D08
 _08031AC6:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08031AE0
 	ldr r0, [r0]
 	adds r0, 0x18
@@ -16575,7 +16575,7 @@ sub_8031E10:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x18
 	movs r1, 0x1
@@ -16597,7 +16597,7 @@ _08031E54: .4byte gUnknown_80E1FA8
 	thumb_func_start sub_8031E58
 sub_8031E58:
 	push {lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08031E70
 	ldr r0, [r0]
 	adds r0, 0x18
@@ -16766,7 +16766,7 @@ sub_8031F60:
 	ldr r1, [r0, 0x38]
 	adds r0, 0x9C
 	str r0, [r1, 0x14]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -16856,7 +16856,7 @@ sub_803203C:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -16920,7 +16920,7 @@ sub_8032084:
 	adds r3, 0x2
 	adds r2, 0x4C
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -17102,7 +17102,7 @@ _08032258: .4byte gUnknown_203B338
 	thumb_func_start sub_803225C
 sub_803225C:
 	push {r4,r5,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18234,7 +18234,7 @@ _08032D9C:
 	beq _08032DA8
 	bl _080338B4
 _08032DA8:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18284,7 +18284,7 @@ _08032E0C:
 	lsls r3, 2
 	adds r0, r3
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18383,7 +18383,7 @@ _08032EEC:
 	beq _08032EF8
 	bl sub_8023C60
 _08032EF8:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18456,7 +18456,7 @@ _08032F98:
 	beq _08032FA4
 	bl _080338B4
 _08032FA4:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18745,7 +18745,7 @@ _080331DC:
 	beq _080331E6
 	b _080338B4
 _080331E6:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -18838,7 +18838,7 @@ _08033288:
 	beq _08033292
 	b _080338B4
 _08033292:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -19010,7 +19010,7 @@ _080333EC:
 	adds r0, r4
 _080333F4:
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -19031,7 +19031,7 @@ _0803341C:
 	lsls r5, 2
 	adds r0, r5
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -19338,7 +19338,7 @@ _0803368C:
 	beq _08033696
 	b _080338B4
 _08033696:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -20449,7 +20449,7 @@ _08033F2E:
 _08033F34: .4byte gUnknown_203B484
 _08033F38:
 	bl sub_80155F0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08033F60
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -20591,7 +20591,7 @@ _08034028:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -20665,7 +20665,7 @@ _080340D2:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -20710,7 +20710,7 @@ sub_8034130:
 	cmp r0, 0x2
 	bcc _08034184
 	bl sub_8030DE4
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _0803417C
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -20814,7 +20814,7 @@ _08034204:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -20889,7 +20889,7 @@ _080342B2:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -20939,7 +20939,7 @@ _08034320:
 	cmp r0, 0x3
 	bhi _08034370
 	bl sub_802453C
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08034368
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -21159,7 +21159,7 @@ sub_80344C0:
 	cmp r0, 0x3
 	bhi _080344FC
 	bl sub_8031E10
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _080344F4
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -21230,7 +21230,7 @@ _08034544:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -21304,7 +21304,7 @@ _080345EE:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -21349,7 +21349,7 @@ sub_803464C:
 	cmp r0, 0x2
 	bcc _080346A0
 	bl sub_8030DE4
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08034698
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -21475,7 +21475,7 @@ sub_803473C:
 	cmp r0, 0x3
 	bhi _08034778
 	bl sub_8031E10
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08034770
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -21767,7 +21767,7 @@ sub_8034970:
 	cmp r0, 0x3
 	bhi _080349AC
 	bl sub_8031E10
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _080349A4
 	ldr r0, [r0]
 	movs r1, 0xEF
@@ -21865,7 +21865,7 @@ _08034A24:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -21939,7 +21939,7 @@ _08034ACE:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -21984,7 +21984,7 @@ sub_8034B2C:
 	cmp r0, 0x2
 	bcc _08034B80
 	bl sub_8030DE4
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08034B78
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -22082,7 +22082,7 @@ _08034BF8:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -22109,7 +22109,7 @@ sub_8034C38:
 	cmp r0, 0x3
 	bhi _08034C90
 	bl sub_801B450
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08034C88
 	ldr r0, [r4]
 	movs r1, 0xEF
@@ -22197,7 +22197,7 @@ _08034CF6:
 	lsls r1, 2
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -22378,7 +22378,7 @@ _08034E90:
 _08034E98: .4byte gUnknown_203B33C
 _08034E9C:
 	bl sub_80155F0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _08034EC4
 	ldr r0, [r0]
 	movs r3, 0xEF
@@ -23190,7 +23190,7 @@ _08035472:
 	stm r1!, {r2-r4}
 	ldm r0!, {r5-r7}
 	stm r1!, {r5-r7}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	mov r1, r9
 	ldr r0, [r1]
 	movs r1, 0x1
@@ -23284,7 +23284,7 @@ _08035542:
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0
-	bl sub_80063CC
+	bl SelectCharmap
 	ldr r2, _08035570
 	movs r0, 0x9
 	movs r1, 0
@@ -23381,7 +23381,7 @@ _08035610:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08035654
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -24101,7 +24101,7 @@ SetMenuItems:
 	stm r0!, {r1,r2,r7}
 	ldm r3!, {r1,r2,r7}
 	stm r0!, {r1,r2,r7}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -24163,7 +24163,7 @@ sub_8035CC0:
 	stm r1!, {r2-r4}
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -24401,7 +24401,7 @@ _08035E42:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _08035E42
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08035EB8
 	ldr r0, [r4]
 	movs r6, 0xA2
@@ -24449,7 +24449,7 @@ _08035EBC: .4byte gUnknown_80E59C8
 	thumb_func_start sub_8035EC0
 sub_8035EC0:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -24546,7 +24546,7 @@ _08035F7A:
 	ldr r0, [r4]
 	str r5, [r0]
 	str r6, [sp]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x4
 	movs r1, 0
@@ -25085,7 +25085,7 @@ _080363FA:
 	thumb_func_start sub_8036400
 sub_8036400:
 	push {r4,r5,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -25361,7 +25361,7 @@ _0803662C:
 	lsls r2, 1
 	adds r0, r2
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -25432,7 +25432,7 @@ _080366CE:
 	lsls r1, 1
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -25476,7 +25476,7 @@ sub_8036728:
 	cmp r0, 0x3
 	bhi _08036780
 	bl sub_801B450
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _08036778
 	ldr r0, [r4]
 	movs r1, 0xF2
@@ -26078,7 +26078,7 @@ _08036BE4:
 	beq _08036BEE
 	b _08036DFA
 _08036BEE:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -26454,7 +26454,7 @@ sub_8036ECC:
 	stm r1!, {r2-r4}
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0x1
@@ -26558,7 +26558,7 @@ sub_8036FDC:
 	push {r7}
 	sub sp, 0x10
 	adds r6, r0, 0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -26625,7 +26625,7 @@ _08037054:
 	cmp r2, 0
 	bge _08037054
 	movs r6, 0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _080370C0
 	ldr r0, [r5]
 	movs r4, 0xAE
@@ -28907,7 +28907,7 @@ sub_80382A0:
 	thumb_func_start sub_80382AC
 sub_80382AC:
 	push {lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -28980,7 +28980,7 @@ _0803831C:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _0803831C
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r5, _08038398
 	ldr r0, [r5]
 	movs r6, 0xA4
@@ -29035,7 +29035,7 @@ _080383A4: .4byte gUnknown_80E6EAC
 	thumb_func_start sub_80383A8
 sub_80383A8:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -29257,7 +29257,7 @@ _08038544:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _08038544
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _0803859C
 	ldr r0, [r4]
 	movs r6, 0xA4
@@ -29335,7 +29335,7 @@ _08038600: .4byte gUnknown_203B364
 	thumb_func_start sub_8038604
 sub_8038604:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -29759,7 +29759,7 @@ _08038942:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _08038942
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r4, _080389B8
 	ldr r0, [r4]
 	movs r7, 0xA4
@@ -29875,7 +29875,7 @@ _08038A58: .4byte gUnknown_203B370
 	thumb_func_start sub_8038A5C
 sub_8038A5C:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -30174,7 +30174,7 @@ _08038CEA:
 	bne _08038DB0
 _08038CEE:
 	bl sub_8039174
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -30230,7 +30230,7 @@ _08038D62:
 	bne _08038DB0
 _08038D66:
 	bl sub_8039174
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -30281,7 +30281,7 @@ sub_8038DC0:
 	lsls r1, 1
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -30491,7 +30491,7 @@ sub_8038F98:
 	lsls r1, 1
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -30884,7 +30884,7 @@ _0803928E:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _0803928E
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r6, _080392EC
 	ldr r0, [r6]
 	movs r5, 0xA2
@@ -31037,7 +31037,7 @@ _080393EC: .4byte gUnknown_80E779C
 	thumb_func_start sub_80393F0
 sub_80393F0:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -31608,7 +31608,7 @@ _080398A2:
 	thumb_func_start sub_80398AC
 sub_80398AC:
 	push {r4,r5,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -32080,7 +32080,7 @@ sub_8039C60:
 	cmp r4, 0x3
 	bne _08039D04
 	bl sub_80155F0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	movs r1, 0xF6
 	lsls r1, 1
@@ -32128,7 +32128,7 @@ _08039CC0:
 	b _08039D04
 _08039CE6:
 	bl sub_80155F0
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	movs r2, 0xF6
 	lsls r2, 1
@@ -32364,7 +32364,7 @@ _08039EB8:
 _08039EC0: .4byte gUnknown_80E7AE0
 _08039EC4: .4byte gUnknown_80E7894
 _08039EC8:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -32700,7 +32700,7 @@ _0803A168:
 	lsls r1, 1
 	adds r0, r1
 	bl sub_8006518
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -32782,7 +32782,7 @@ sub_803A1E8:
 	thumb_func_start sub_803A1EC
 sub_803A1EC:
 	push {lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -32831,7 +32831,7 @@ _0803A232:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _0803A232
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803A270
 	ldr r0, [r0]
 	movs r6, 0xA0
@@ -32854,7 +32854,7 @@ _0803A274: .4byte gUnknown_80E7D40
 	thumb_func_start sub_803A278
 sub_803A278:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -33095,7 +33095,7 @@ _0803A458: .4byte 0x0000012b
 	thumb_func_start sub_803A45C
 sub_803A45C:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -33246,7 +33246,7 @@ _0803A564:
 	cmp r2, 0
 	bge _0803A564
 _0803A57E:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803A59C
 	ldr r0, [r0]
 	adds r0, 0xD8
@@ -33627,7 +33627,7 @@ _0803A884:
 	thumb_func_start sub_803A888
 sub_803A888:
 	push {r4,lr}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -33762,7 +33762,7 @@ _0803A970:
 	cmp r2, 0
 	bge _0803A970
 _0803A98A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803A9A8
 	ldr r0, [r0]
 	adds r0, 0x9C
@@ -34262,7 +34262,7 @@ _0803AD50:
 	cmp r2, 0x3
 	ble _0803AD50
 _0803AD6C:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803AD84
 	ldr r0, [r0]
 	adds r0, 0xE0
@@ -34659,7 +34659,7 @@ sub_803B050:
 	ldr r1, [r0, 0x38]
 	adds r0, 0x9C
 	str r0, [r1, 0x14]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -34832,7 +34832,7 @@ sub_803B1BC:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -34870,7 +34870,7 @@ sub_803B204:
 	ldr r0, [r4]
 	adds r0, 0x9F
 	strb r2, [r0]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1
@@ -34901,7 +34901,7 @@ sub_803B204:
 	adds r3, 0x2
 	adds r2, 0x4C
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x3C
 	movs r1, 0x1

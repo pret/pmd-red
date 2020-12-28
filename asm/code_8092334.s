@@ -266,8 +266,8 @@ _080925CE:
 _080925D8: .4byte gFriendAreaNames
 	thumb_func_end sub_8092578
 
-	thumb_func_start sub_80925DC
-sub_80925DC:
+	thumb_func_start GetFriendAreaDescription
+GetFriendAreaDescription:
 	lsls r0, 24
 	ldr r1, _080925E8
 	lsrs r0, 22
@@ -276,7 +276,7 @@ sub_80925DC:
 	bx lr
 	.align 2, 0
 _080925E8: .4byte gFriendAreaDescriptions
-	thumb_func_end sub_80925DC
+	thumb_func_end GetFriendAreaDescription
 
 	thumb_func_start sub_80925EC
 sub_80925EC:
@@ -636,8 +636,8 @@ LoadWazaParameters:
 _08092868: .4byte gUnknown_81098D0
 _0809286C: .4byte gUnknown_8300500
 _08092870: .4byte gWazaParametersFile
-_08092874: .4byte gUnknown_2038C68
-_08092878: .4byte gUnknown_2038C6C
+_08092874: .4byte gMovesData
+_08092878: .4byte gMovesRelated_2038C6C
 	thumb_func_end LoadWazaParameters
 
 	thumb_func_start sub_809287C
@@ -766,7 +766,7 @@ _08092944:
 	b _08092A6A
 	.align 2, 0
 _08092964: .4byte gUnknown_81098E0
-_08092968: .4byte gUnknown_2038C68
+_08092968: .4byte gMovesData
 _0809296C:
 	adds r0, r4, 0
 	bl sub_8092BF4
@@ -848,7 +848,7 @@ _080929E2:
 _08092A10: .4byte gUnknown_81098EC
 _08092A14: .4byte gUnknown_810990C
 _08092A18: .4byte gUnknown_8109928
-_08092A1C: .4byte gUnknown_2038C68
+_08092A1C: .4byte gMovesData
 _08092A20:
 	adds r0, r4, 0
 	bl sub_8092BF4
@@ -897,7 +897,7 @@ _08092A6A:
 _08092A78: .4byte gUnknown_8109910
 _08092A7C: .4byte gUnknown_810990C
 _08092A80: .4byte gUnknown_8109928
-_08092A84: .4byte gUnknown_2038C68
+_08092A84: .4byte gMovesData
 	thumb_func_end sub_80928C0
 
 	thumb_func_start sub_8092A88
@@ -972,7 +972,7 @@ sub_8092AE0:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_08092AFC: .4byte gUnknown_2038C68
+_08092AFC: .4byte gMovesData
 	thumb_func_end sub_8092AE0
 
 	thumb_func_start sub_8092B00
@@ -987,7 +987,7 @@ sub_8092B00:
 	ldrb r0, [r0, 0x6]
 	bx lr
 	.align 2, 0
-_08092B14: .4byte gUnknown_2038C68
+_08092B14: .4byte gMovesData
 	thumb_func_end sub_8092B00
 
 	thumb_func_start sub_8092B18
@@ -1013,7 +1013,7 @@ sub_8092B18:
 	b _08092B4A
 	.align 2, 0
 _08092B40: .4byte 0x000001a5
-_08092B44: .4byte gUnknown_2038C6C
+_08092B44: .4byte gMovesRelated_2038C6C
 _08092B48:
 	ldr r0, _08092B50
 _08092B4A:
@@ -1046,7 +1046,7 @@ sub_8092B54:
 	b _08092B86
 	.align 2, 0
 _08092B7C: .4byte 0x000001a5
-_08092B80: .4byte gUnknown_2038C6C
+_08092B80: .4byte gMovesRelated_2038C6C
 _08092B84:
 	ldr r0, _08092B8C
 _08092B86:
@@ -1068,7 +1068,7 @@ sub_8092B90:
 	ldrb r0, [r0, 0xD]
 	bx lr
 	.align 2, 0
-_08092BA4: .4byte gUnknown_2038C68
+_08092BA4: .4byte gMovesData
 	thumb_func_end sub_8092B90
 
 	thumb_func_start sub_8092BA8
@@ -1083,7 +1083,7 @@ sub_8092BA8:
 	ldrb r0, [r0, 0x11]
 	bx lr
 	.align 2, 0
-_08092BBC: .4byte gUnknown_2038C68
+_08092BBC: .4byte gMovesData
 	thumb_func_end sub_8092BA8
 
 	thumb_func_start sub_8092BC0
@@ -1099,7 +1099,7 @@ sub_8092BC0:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_08092BD4: .4byte gUnknown_2038C68
+_08092BD4: .4byte gMovesData
 	thumb_func_end sub_8092BC0
 
 	thumb_func_start sub_8092BD8
@@ -1116,7 +1116,7 @@ sub_8092BD8:
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08092BF0: .4byte gUnknown_2038C68
+_08092BF0: .4byte gMovesData
 	thumb_func_end sub_8092BD8
 
 	thumb_func_start sub_8092BF4
@@ -1131,7 +1131,7 @@ sub_8092BF4:
 	ldrb r0, [r0, 0xC]
 	bx lr
 	.align 2, 0
-_08092C08: .4byte gUnknown_2038C68
+_08092C08: .4byte gMovesData
 	thumb_func_end sub_8092BF4
 
 	thumb_func_start sub_8092C0C
@@ -1146,7 +1146,7 @@ sub_8092C0C:
 	ldrb r0, [r0, 0x12]
 	bx lr
 	.align 2, 0
-_08092C20: .4byte gUnknown_2038C68
+_08092C20: .4byte gMovesData
 	thumb_func_end sub_8092C0C
 
 	thumb_func_start sub_8092C24
@@ -1161,7 +1161,7 @@ sub_8092C24:
 	ldrb r0, [r0, 0x13]
 	bx lr
 	.align 2, 0
-_08092C38: .4byte gUnknown_2038C68
+_08092C38: .4byte gMovesData
 	thumb_func_end sub_8092C24
 
 	thumb_func_start sub_8092C3C
@@ -1176,7 +1176,7 @@ sub_8092C3C:
 	ldrb r0, [r0, 0x17]
 	bx lr
 	.align 2, 0
-_08092C50: .4byte gUnknown_2038C68
+_08092C50: .4byte gMovesData
 	thumb_func_end sub_8092C3C
 
 	thumb_func_start sub_8092C54
@@ -1191,7 +1191,7 @@ sub_8092C54:
 	ldrb r0, [r0, 0x18]
 	bx lr
 	.align 2, 0
-_08092C68: .4byte gUnknown_2038C68
+_08092C68: .4byte gMovesData
 	thumb_func_end sub_8092C54
 
 	thumb_func_start sub_8092C6C
@@ -1206,7 +1206,7 @@ sub_8092C6C:
 	ldrb r0, [r0, 0x19]
 	bx lr
 	.align 2, 0
-_08092C80: .4byte gUnknown_2038C68
+_08092C80: .4byte gMovesData
 	thumb_func_end sub_8092C6C
 
 	thumb_func_start sub_8092C84
@@ -1241,7 +1241,7 @@ sub_8092CA8:
 	ldr r0, [r1, 0x20]
 	bx lr
 	.align 2, 0
-_08092CBC: .4byte gUnknown_2038C68
+_08092CBC: .4byte gMovesData
 	thumb_func_end sub_8092CA8
 
 	thumb_func_start sub_8092CC0
@@ -1257,7 +1257,7 @@ sub_8092CC0:
 	ldrb r0, [r1, 0x14]
 	bx lr
 	.align 2, 0
-_08092CD4: .4byte gUnknown_2038C68
+_08092CD4: .4byte gMovesData
 	thumb_func_end sub_8092CC0
 
 	thumb_func_start sub_8092CD8
@@ -1273,7 +1273,7 @@ sub_8092CD8:
 	ldrb r0, [r1, 0x15]
 	bx lr
 	.align 2, 0
-_08092CEC: .4byte gUnknown_2038C68
+_08092CEC: .4byte gMovesData
 	thumb_func_end sub_8092CD8
 
 	thumb_func_start sub_8092CF0
@@ -1289,7 +1289,7 @@ sub_8092CF0:
 	ldrb r0, [r1, 0x16]
 	bx lr
 	.align 2, 0
-_08092D04: .4byte gUnknown_2038C68
+_08092D04: .4byte gMovesData
 	thumb_func_end sub_8092CF0
 
 	thumb_func_start sub_8092D08
@@ -3827,7 +3827,7 @@ _08093E3A:
 _08093E80: .4byte 0xfffffcdc
 _08093E84: .4byte gUnknown_202DF98
 _08093E88: .4byte gUnknown_8109930
-_08093E8C: .4byte gUnknown_2038C68
+_08093E8C: .4byte gMovesData
 	thumb_func_end sub_8093DE8
 
 	thumb_func_start sub_8093E90
@@ -3915,7 +3915,7 @@ sub_8093F10:
 	strb r0, [r3, 0x5]
 	b _08093F4A
 	.align 2, 0
-_08093F44: .4byte gUnknown_2038C68
+_08093F44: .4byte gMovesData
 _08093F48:
 	strb r0, [r3]
 _08093F4A:
@@ -3955,7 +3955,7 @@ _08093F5C:
 	strb r0, [r3, 0x5]
 	b _08093F8E
 	.align 2, 0
-_08093F88: .4byte gUnknown_2038C68
+_08093F88: .4byte gMovesData
 _08093F8C:
 	strb r0, [r3]
 _08093F8E:

@@ -18,7 +18,7 @@ struct UnkTextStruct2 {
     u8 fill12[0x06];
 };
 
-void sub_8006218(void);
+void LoadCharmaps(void);
 u32 xxx_update_some_bg_tiles(u32 a0);
 void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3);
 void sub_8006554(void *a0, void *a1, void *a2, void *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, u32 *a8, u32 a9);

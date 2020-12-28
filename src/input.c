@@ -1,15 +1,15 @@
 #include "global.h"
 #include "input.h"
 
-EWRAM_DATA struct Input gUnknown_2025600;
-EWRAM_DATA struct UnkInputStruct1 gRealInputs;
-EWRAM_DATA struct UnkInputStruct1 gBufferedInputs;
-EWRAM_DATA struct UnkInputStruct1 gCurrentInputs;
-EWRAM_DATA struct UnkInputStruct1 gLastInputs;
-EWRAM_DATA struct UnkInputStruct2 gUnknown_2025668;
+EWRAM_DATA struct UnusedInputStruct gUnusedInputsRelated;
+EWRAM_DATA struct Inputs gRealInputs;
+EWRAM_DATA struct Inputs gBufferedInputs;
+EWRAM_DATA struct Inputs gCurrentInputs;
+EWRAM_DATA struct Inputs gLastInputs;
+EWRAM_DATA struct InputTimers gInputTimers;
 EWRAM_DATA u32 gUnusedScrambledInputJunk;
 
-void ReadKeyInput(struct UnkInputStruct1 *r0);
+void ReadKeyInput(struct Inputs *r0);
 
 void InitInput(void)
 {
@@ -25,26 +25,26 @@ void InitInput(void)
 
     gUnusedScrambledInputJunk = 0x4a14c1; // seems like random keyboard mashing (see UpdateInput)
 
-    gUnknown_2025600.unk20 = 0;
-    gUnknown_2025600.unk0 = 0xffff; // probably a mask
-    gUnknown_2025600.unk2 = -1;
-    gUnknown_2025600.unk4 = -1;
-    gUnknown_2025600.unk6 = -1;
-    gUnknown_2025600.unk1C = -1;
-    gUnknown_2025600.unk1E = -1;
-    gUnknown_2025600.unk8 = -1;
-    gUnknown_2025600.unkA = -1;
-    gUnknown_2025600.unkC = -1;
-    gUnknown_2025600.unkE = -1;
-    gUnknown_2025600.unk10 = -1;
-    gUnknown_2025600.unk12 = -1;
-    gUnknown_2025600.unk14 = -1;
-    gUnknown_2025600.unk16 = -1;
-    gUnknown_2025600.unk28 = 0;
-    gUnknown_2025600.unk29 = 0;
+    gUnusedInputsRelated.unk20 = 0;
+    gUnusedInputsRelated.unk0 = 0xffff; // probably a mask
+    gUnusedInputsRelated.unk2 = -1;
+    gUnusedInputsRelated.unk4 = -1;
+    gUnusedInputsRelated.unk6 = -1;
+    gUnusedInputsRelated.unk1C = -1;
+    gUnusedInputsRelated.unk1E = -1;
+    gUnusedInputsRelated.unk8 = -1;
+    gUnusedInputsRelated.unkA = -1;
+    gUnusedInputsRelated.unkC = -1;
+    gUnusedInputsRelated.unkE = -1;
+    gUnusedInputsRelated.unk10 = -1;
+    gUnusedInputsRelated.unk12 = -1;
+    gUnusedInputsRelated.unk14 = -1;
+    gUnusedInputsRelated.unk16 = -1;
+    gUnusedInputsRelated.unk28 = 0;
+    gUnusedInputsRelated.unk29 = 0;
 
-    gUnknown_2025668.holdTimerB = 0;
-    gUnknown_2025668.holdTimerR = 0;
+    gInputTimers.holdTimerB = 0;
+    gInputTimers.holdTimerR = 0;
 }
 
 void LoadBufferedInputs(void)
@@ -56,21 +56,21 @@ void LoadBufferedInputs(void)
     gBufferedInputs.repeated = 0;
     gBufferedInputs.shortPress = 0;
 
-    gUnknown_2025600.unk0 = 0xffff;
-    gUnknown_2025600.unk2 = -1;
-    gUnknown_2025600.unk4 = -1;
-    gUnknown_2025600.unk6 = -1;
-    gUnknown_2025600.unk8 = -1;
-    gUnknown_2025600.unkA = -1;
-    gUnknown_2025600.unkC = -1;
-    gUnknown_2025600.unkE = -1;
-    gUnknown_2025600.unk10 = -1;
-    gUnknown_2025600.unk12 = -1;
-    gUnknown_2025600.unk14 = -1;
-    gUnknown_2025600.unk16 = -1;
+    gUnusedInputsRelated.unk0 = 0xffff;
+    gUnusedInputsRelated.unk2 = -1;
+    gUnusedInputsRelated.unk4 = -1;
+    gUnusedInputsRelated.unk6 = -1;
+    gUnusedInputsRelated.unk8 = -1;
+    gUnusedInputsRelated.unkA = -1;
+    gUnusedInputsRelated.unkC = -1;
+    gUnusedInputsRelated.unkE = -1;
+    gUnusedInputsRelated.unk10 = -1;
+    gUnusedInputsRelated.unk12 = -1;
+    gUnusedInputsRelated.unk14 = -1;
+    gUnusedInputsRelated.unk16 = -1;
 
-    gUnknown_2025600.unk28 = 0;
-    gUnknown_2025600.unk29 = 0;
+    gUnusedInputsRelated.unk28 = 0;
+    gUnusedInputsRelated.unk29 = 0;
 }
 
 // Unused
@@ -112,8 +112,8 @@ void ResetRepeatTimers(void)
     gRealInputs.repeated = 0;
     gCurrentInputs.repeatTimerDpad = 0;
     gCurrentInputs.heldDpad = 0;
-    gUnknown_2025668.holdTimerB = 999;
-    gUnknown_2025668.holdTimerR = 999;
+    gInputTimers.holdTimerB = 999;
+    gInputTimers.holdTimerR = 999;
 
 }
 
@@ -124,25 +124,25 @@ void UnpressButtons(void)
     gCurrentInputs.pressed = 0;
 }
 
-void sub_8004914(void)
+void ResetUnusedInputStruct(void)
 {
-    gUnknown_2025600.unk20 = 0x5;
-    gUnknown_2025600.unk24 = 0;
-    gUnknown_2025600.unk0 = 0xffff;
-    gUnknown_2025600.unk2 = -1;
-    gUnknown_2025600.unk4 = -1;
-    gUnknown_2025600.unk6 = -1;
-    gUnknown_2025600.unk8 = -1;
-    gUnknown_2025600.unkA = -1;
-    gUnknown_2025600.unkC = -1;
-    gUnknown_2025600.unkE = -1;
-    gUnknown_2025600.unk10 = -1;
-    gUnknown_2025600.unk12 = -1;
-    gUnknown_2025600.unk14 = -1;
-    gUnknown_2025600.unk16 = -1;
+    gUnusedInputsRelated.unk20 = 0x5;
+    gUnusedInputsRelated.unk24 = 0;
+    gUnusedInputsRelated.unk0 = 0xffff;
+    gUnusedInputsRelated.unk2 = -1;
+    gUnusedInputsRelated.unk4 = -1;
+    gUnusedInputsRelated.unk6 = -1;
+    gUnusedInputsRelated.unk8 = -1;
+    gUnusedInputsRelated.unkA = -1;
+    gUnusedInputsRelated.unkC = -1;
+    gUnusedInputsRelated.unkE = -1;
+    gUnusedInputsRelated.unk10 = -1;
+    gUnusedInputsRelated.unk12 = -1;
+    gUnusedInputsRelated.unk14 = -1;
+    gUnusedInputsRelated.unk16 = -1;
 
-    gUnknown_2025600.unk28 = 0;
-    gUnknown_2025600.unk29 = 0;
+    gUnusedInputsRelated.unk28 = 0;
+    gUnusedInputsRelated.unk29 = 0;
 
 }
 
@@ -155,12 +155,11 @@ void UpdateInput(void)
     gCurrentInputs.pressed = (gLastInputs.held ^ gCurrentInputs.held) & gCurrentInputs.held;
 
     if (gCurrentInputs.held) {
-        // 0xF0 -- DPAD buttons
-        if ((gCurrentInputs.heldDpad & 0xf0) == (gCurrentInputs.held & 0xf0)) {
+        if ((gCurrentInputs.heldDpad & DPAD_ANY) == (gCurrentInputs.held & DPAD_ANY)) {
             if (gCurrentInputs.repeatTimerDpad < 50)
                 gCurrentInputs.repeatTimerDpad++;
         } else {
-            gCurrentInputs.heldDpad = gCurrentInputs.held & 0xf0;
+            gCurrentInputs.heldDpad = gCurrentInputs.held & DPAD_ANY;
             gCurrentInputs.repeatTimerDpad = 1;
         }
     } else {
@@ -169,33 +168,33 @@ void UpdateInput(void)
     }
 
     if (gCurrentInputs.repeatTimerDpad == 1) {
-        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & 0xf0) | gCurrentInputs.pressed;
+        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & DPAD_ANY) | gCurrentInputs.pressed;
     } else if (gCurrentInputs.repeatTimerDpad == 48) {
         gCurrentInputs.repeatTimerDpad = 43;
-        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & 0xf0) | gCurrentInputs.pressed;
+        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & DPAD_ANY) | gCurrentInputs.pressed;
     } else {
         gCurrentInputs.repeated = 0;
     }
     gCurrentInputs.shortPress = 0;
 
     if (gCurrentInputs.held & B_BUTTON) {
-        if (gUnknown_2025668.holdTimerB < 100)
-            gUnknown_2025668.holdTimerB++;
-    } else if (1 < gUnknown_2025668.holdTimerB && gUnknown_2025668.holdTimerB < 12) {
+        if (gInputTimers.holdTimerB < 100)
+            gInputTimers.holdTimerB++;
+    } else if (1 < gInputTimers.holdTimerB && gInputTimers.holdTimerB < 12) {
         gCurrentInputs.shortPress = B_BUTTON;
-        gUnknown_2025668.holdTimerB = 0;
+        gInputTimers.holdTimerB = 0;
     } else {
-        gUnknown_2025668.holdTimerB = 0;
+        gInputTimers.holdTimerB = 0;
     }
 
     if (gCurrentInputs.held & R_BUTTON) {
-        if (gUnknown_2025668.holdTimerR < 100)
-            gUnknown_2025668.holdTimerR++;
-    } else if (1 < gUnknown_2025668.holdTimerR && gUnknown_2025668.holdTimerR < 12) {
+        if (gInputTimers.holdTimerR < 100)
+            gInputTimers.holdTimerR++;
+    } else if (1 < gInputTimers.holdTimerR && gInputTimers.holdTimerR < 12) {
         gCurrentInputs.shortPress |= R_BUTTON;
-        gUnknown_2025668.holdTimerR = 0;
+        gInputTimers.holdTimerR = 0;
     } else {
-        gUnknown_2025668.holdTimerR = 0;
+        gInputTimers.holdTimerR = 0;
     }
 
     gBufferedInputs.held |= gCurrentInputs.held;

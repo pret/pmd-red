@@ -243,8 +243,8 @@ _0808E00A:
 	bx r0
 	thumb_func_end sub_808DFDC
 
-	thumb_func_start sub_808E010
-sub_808E010:
+	thumb_func_start GetPokemonLevelData
+GetPokemonLevelData:
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -289,11 +289,11 @@ _0808E052:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808E06C: .4byte gUnknown_20384E8
+_0808E06C: .4byte gLevelCurrentPokeId
 _0808E070: .4byte gUnknown_810768C
 _0808E074: .4byte gUnknown_8300500
-_0808E078: .4byte gUnknown_20384F0
-	thumb_func_end sub_808E010
+_0808E078: .4byte gLevelCurrentData
+	thumb_func_end GetPokemonLevelData
 
 	thumb_func_start sub_808E07C
 sub_808E07C:

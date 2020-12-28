@@ -1559,7 +1559,7 @@ sub_808F798:
 	mov r1, sp
 	ldrb r2, [r1, 0x3]
 	adds r1, r5, 0
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp, 0x58]
 	str r0, [sp, 0x1C]
 	movs r0, 0
@@ -1715,7 +1715,7 @@ _0808F8A0:
 	ldrsh r1, [r0, r3]
 	adds r2, 0x1
 	add r0, sp, 0x8
-	bl sub_808E010
+	bl GetPokemonLevelData
 	ldr r0, [sp, 0x8]
 	mov r2, r10
 	ldr r1, [r2, 0x30]

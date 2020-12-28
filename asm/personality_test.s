@@ -1497,7 +1497,7 @@ sub_803CC80:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	mov r0, sp
 	movs r1, 0x1
 	movs r2, 0
@@ -1600,7 +1600,7 @@ sub_803CD08:
 	ldr r0, [r5]
 	adds r0, 0xB7
 	strb r3, [r0]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r5]
 	adds r0, 0x54
 	movs r1, 0x1
@@ -1732,7 +1732,7 @@ sub_803CE6C:
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r4]
 	adds r0, 0x54
 	movs r1, 0x1
@@ -1819,7 +1819,7 @@ sub_803CEF0:
 	adds r3, 0x2
 	adds r2, 0x64
 	strh r3, [r2]
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, [r6]
 	adds r0, 0x54
 	movs r1, 0x1

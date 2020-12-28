@@ -19,7 +19,7 @@ extern struct unkStruct_809CC88 gUnknown_202D6A0;
 extern struct unkStruct_809CC88 gUnknown_202D6A8;
 extern struct unkStruct_809CC88 gUnknown_202D6B0;
 
-void ReadKeyInput(struct UnkInputStruct1 *r0)
+void ReadKeyInput(struct Inputs *r0)
 {
     u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
     r0->held = 0;

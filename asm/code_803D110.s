@@ -3346,7 +3346,7 @@ _0803EB50:
 	movs r0, 0
 	bl sub_8052210
 _0803EB5E:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	bl sub_803EC94
 	movs r0, 0
 	movs r1, 0x1
@@ -3394,7 +3394,7 @@ _0803EBBC:
 	movs r0, 0
 	bl sub_8052210
 _0803EBCA:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803EBD8
 	movs r1, 0x1
 	b _0803EC6E
@@ -3409,7 +3409,7 @@ _0803EBDC:
 	movs r0, 0
 	bl sub_8052210
 _0803EBEA:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803EBF8
 	movs r1, 0x1
 	b _0803EC6E
@@ -3424,7 +3424,7 @@ _0803EBFC:
 	movs r0, 0
 	bl sub_8052210
 _0803EC0A:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	bl sub_803EC94
 	movs r0, 0
 	movs r1, 0x1
@@ -3468,7 +3468,7 @@ _0803EC54:
 	bl sub_8052210
 	bl sub_8083D44
 _0803EC66:
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	ldr r0, _0803EC7C
 	movs r1, 0
 _0803EC6E:
@@ -3520,7 +3520,7 @@ sub_803ECB4:
 	str r0, [r1]
 	movs r0, 0
 	bl sub_8052210
-	bl sub_8004914
+	bl ResetUnusedInputStruct
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
