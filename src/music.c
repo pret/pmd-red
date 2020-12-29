@@ -183,7 +183,7 @@ void sub_800CB20(void)
 {
     sub_800BA5C();
     gUnknown_203B0B8++;
-    if((gRawKeyInput & 5) != 0)
+    if((gRawKeyInput & (A_BUTTON | SELECT_BUTTON)) != 0)
     {
         Random();
     }
