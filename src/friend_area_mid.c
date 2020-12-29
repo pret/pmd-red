@@ -31,12 +31,9 @@ void sub_8092558(u8 *r0, u8 index)
     sub_800D158(r0, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
+#ifdef NONMATCHING
 void sub_8092578(u8 *r0, u8 r1, u8 r2)
 {
-#ifdef NONMATCHING
     struct unkFriendAreaStruct temp;
     if(r2)
     {
@@ -51,7 +48,10 @@ void sub_8092578(u8 *r0, u8 r1, u8 r2)
     {
         strcpy(r0, gFriendAreaNames[r1]);
     }
+}
 #else
+NAKED void sub_8092578(u8 *r0, u8 r1, u8 r2)
+{
         asm_unified("\tpush {r4,r5,lr}\n"
 	"\tsub sp, 0x18\n"
 	"\tadds r5, r0, 0\n"
@@ -97,8 +97,8 @@ void sub_8092578(u8 *r0, u8 r1, u8 r2)
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
 "\t_080925D8: .4byte gFriendAreaNames");
-#endif
 }
+#endif
 
 u32 GetFriendAreaDescription(u8 index)
 {

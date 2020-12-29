@@ -1,44 +1,35 @@
 #include "global.h"
 #include "constants/friend_area.h"
 
-struct unkStruct_80927F4
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
 extern bool8 *gFriendAreas;
-extern void sub_809485C(struct unkStruct_80927F4 *r0, u32 r1, u32 r2);
-extern void sub_8094924(struct unkStruct_80927F4 *r0, u32 *r1, u32);
-extern void nullsub_102(struct unkStruct_80927F4 *r0);
-extern void sub_809488C(struct unkStruct_80927F4 *r0, u32 *r1, u32 r2);
-extern void sub_809486C(struct unkStruct_80927F4 *r0, u32 r1, u32 r2);
+extern void sub_809485C(u32 *r0, u32 r1, u32 r2);
+extern void sub_8094924(u32 *r0, u32 *r1, u32);
+extern void nullsub_102(u32 *r0);
+extern void sub_809488C(u32 *r0, u32 *r1, u32 r2);
+extern void sub_809486C(u32 *r0, u32 r1, u32 r2);
 
-#ifndef NONMATCHING
-NAKED
-#endif
+#ifdef NONMATCHING
 u32 sub_80927A8(u32 r0, u32 r1)
 {
-#ifdef NONMATCHING
-    struct unkStruct_80927F4 temp;
+    u32 temp[5];
     s32 counter;
 
-    sub_809486C(&temp, r0, r1);
+    sub_809486C(temp, r0, r1);
     for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
-        // TODO moves into R1 for the load/cmp... else it matches
+        // TODO moves into R1 for the load else it matches
         if(!gFriendAreas[counter])
-            temp.unk10 = gFriendAreas[counter];
+            temp[4] = gFriendAreas[counter];
         else
-            temp.unk10 = -1;
-        sub_809488C(&temp, &(temp.unk10), 1);
+            temp[4] = -1;
+        sub_809488C(temp, &(temp[4]), 1);
     }
-    nullsub_102(&temp);
-    return temp.unk8;
+    nullsub_102(temp);
+    return temp[2];
+}
 #else
+NAKED u32 sub_80927A8(u32 r0, u32 r1)
+{
 	asm_unified("\tpush {r4,r5,lr}\n"
 	"\tsub sp, 0x14\n"
 	"\tadds r3, r0, 0\n"
@@ -75,27 +66,25 @@ u32 sub_80927A8(u32 r0, u32 r1)
 	"\tbx r1\n"
 	"\t.align 2, 0\n"
 "_080927F0: .4byte gFriendAreas");
-
-#endif
 }
+#endif
 
 u32 sub_80927F4(u32 r0, u32 r1)
 {
-    struct unkStruct_80927F4 temp;
+    u32 temp[5];
     s32 counter;
 
-    sub_809485C(&temp, r0, r1);
+    sub_809485C(temp, r0, r1);
     for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
-        sub_8094924(&temp, &(temp.unk10), 1);
-
+        sub_8094924(temp, &(temp[4]), 1);
         // It's setting whether we have the friend area or not
-        if((temp.unk10 & 1))
+        if((temp[4] & 1))
             gFriendAreas[counter] = TRUE;
         else
             gFriendAreas[counter] = FALSE;
     }
-    nullsub_102(&temp);
-    return temp.unk8;
+    nullsub_102(temp);
+    return temp[2];
 }
 
