@@ -11265,7 +11265,7 @@ _0802F494:
 	ldr r0, [r0, 0x10]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802F4BC
@@ -11286,7 +11286,7 @@ _0802F4BC:
 	ldr r0, [r0, 0x10]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r0, 0xCE
 	bl sub_8011988
 	ldr r0, _0802F4E8
@@ -11304,7 +11304,7 @@ _0802F4F0:
 	ldr r0, [r0, 0x10]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r0, 0xCE
 	bl sub_8011988
 	ldr r0, _0802F518
@@ -33033,7 +33033,7 @@ sub_803A3BC:
 _0803A3D6:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 	adds r5, 0x1
 	cmp r5, 0x39
 	ble _0803A3D6
@@ -33867,7 +33867,7 @@ sub_803AA34:
 	str r0, [r1, 0x10]
 	b _0803AA82
 	.align 2, 0
-_0803AA64: .4byte gUnknown_203B468
+_0803AA64: .4byte gFriendAreas
 _0803AA68: .4byte gUnknown_203B3F4
 _0803AA6C: .4byte gUnknown_80E7EBC
 _0803AA70:
@@ -34004,7 +34004,7 @@ _0803AB70:
 _0803AB7A:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x4]
-	bl sub_80925EC
+	bl UnlockFriendArea
 	b _0803AB8E
 _0803AB84:
 	ldr r0, [r4]

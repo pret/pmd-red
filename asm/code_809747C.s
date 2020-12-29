@@ -680,7 +680,7 @@ sub_8097944:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08097974
-	bl sub_8092614
+	bl HasAllFriendAreas
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097974

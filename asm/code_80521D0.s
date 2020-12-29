@@ -59029,12 +59029,12 @@ _0806FB30: .4byte 0x00008df8
 _0806FB34: .4byte gUnknown_80FA030
 _0806FB38:
 	mov r0, r9
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FB4E
 	mov r0, r9
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r2, 0x1
 	mov r10, r2
 _0806FB4E:
@@ -59516,12 +59516,12 @@ _0806FED8:
 	movs r2, 0xA
 	bl sub_8092310
 	adds r0, r7, 0
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FF34
 	adds r0, r7, 0
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r2, 0x1
 	mov r9, r2
 _0806FF34:
@@ -113968,7 +113968,7 @@ _0808B87C:
 	ldr r0, _0808BA38
 	bl sub_8052910
 	adds r0, r4, 0
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r0, 0xD4
 	bl sub_8083E38
 	bl sub_8083600
@@ -114544,7 +114544,7 @@ sub_808BD94:
 _0808BD9C:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -114573,7 +114573,7 @@ _0808BDC4:
 	ldrb r0, [r0]
 	b _0808BDE2
 	.align 2, 0
-_0808BDDC: .4byte gUnknown_203B468
+_0808BDDC: .4byte gFriendAreas
 _0808BDE0:
 	movs r0, 0x3A
 _0808BDE2:

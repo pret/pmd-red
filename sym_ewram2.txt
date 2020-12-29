@@ -593,7 +593,7 @@ gUnknown_203B460 = .; /* 203B460 */
 gUnknown_203B464 = .; /* 203B464 */
 	. += 0x4;
 
-gUnknown_203B468 = .; /* 203B468 */
+gFriendAreas = .; /* 203B468 */
 	. += 0x4;
 
 gUnknown_203B46C = .; /* 203B46C */

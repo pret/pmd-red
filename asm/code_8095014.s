@@ -1306,7 +1306,7 @@ _08095AD4:
 	cmp r0, 0x9
 	bne _08095B20
 	ldrb r0, [r5, 0x13]
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1789,7 +1789,7 @@ _08095E84:
 	bne _08095EF6
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1848,7 +1848,7 @@ _08095EF6:
 	movs r0, 0
 	b _08095F1A
 	.align 2, 0
-_08095F04: .4byte gUnknown_203B468
+_08095F04: .4byte gFriendAreas
 _08095F08: .4byte gUnknown_203B490
 _08095F0C: .4byte 0x00000101
 _08095F10:

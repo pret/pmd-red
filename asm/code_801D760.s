@@ -20,7 +20,7 @@ sub_801D894:
 _0801D8A8: .4byte gUnknown_203B250
 _0801D8AC:
 	ldrb r0, [r1, 0x6]
-	bl sub_8092524
+	bl GetFriendAreaName
 _0801D8B2:
 	add r2, sp, 0x68
 	add r1, sp, 0x4
@@ -7330,7 +7330,7 @@ _080212BC:
 	bl sub_802132C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092544
+	bl GetFriendAreaPrice
 	ldr r1, _080212E8
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -7632,7 +7632,7 @@ _08021502:
 	movs r2, 0x1
 	bl sub_8092578
 	adds r0, r5, 0
-	bl sub_8092544
+	bl GetFriendAreaPrice
 	ldr r1, _08021570
 	ldr r1, [r1]
 	movs r5, 0x98
@@ -7694,7 +7694,7 @@ _0802159C:
 	bl sub_8013800
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8092524
+	bl GetFriendAreaName
 	adds r2, r0, 0
 	mov r1, r8
 	ldr r0, [r1]
@@ -7705,10 +7705,10 @@ _0802159C:
 	bl xxx_call_draw_string
 	b _08021632
 	.align 2, 0
-_080215D4: .4byte gUnknown_203B468
+_080215D4: .4byte gFriendAreas
 _080215D8:
 	adds r0, r5, 0
-	bl sub_8092524
+	bl GetFriendAreaName
 	adds r2, r0, 0
 	mov r0, r10
 	ldr r1, _08021608
@@ -7737,7 +7737,7 @@ _0802160C:
 	bl sub_8013800
 	adds r4, r0, 0
 	adds r0, r7, 0
-	bl sub_8092524
+	bl GetFriendAreaName
 	adds r2, r0, 0
 	mov r5, r8
 	ldr r0, [r5]
@@ -7821,7 +7821,7 @@ _080216A8:
 	ble _08021696
 	b _080216F2
 	.align 2, 0
-_080216B0: .4byte gUnknown_203B468
+_080216B0: .4byte gFriendAreas
 _080216B4:
 	movs r4, 0x1
 	adds r6, r1, 0
@@ -7834,7 +7834,7 @@ _080216B8:
 	bne _080216EC
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7861,7 +7861,7 @@ _080216F2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080216FC: .4byte gUnknown_203B468
+_080216FC: .4byte gFriendAreas
 	thumb_func_end sub_8021664
 
 	thumb_func_start sub_8021700
@@ -7888,7 +7888,7 @@ _08021716:
 	ble _08021716
 	b _0802176A
 	.align 2, 0
-_08021728: .4byte gUnknown_203B468
+_08021728: .4byte gFriendAreas
 _0802172C:
 	movs r4, 0x1
 _0802172E:
@@ -7900,7 +7900,7 @@ _0802172E:
 	bne _08021764
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7909,7 +7909,7 @@ _0802172E:
 	beq _08021758
 	b _08021764
 	.align 2, 0
-_08021750: .4byte gUnknown_203B468
+_08021750: .4byte gFriendAreas
 _08021754:
 	movs r0, 0
 	b _0802176C
@@ -9188,7 +9188,7 @@ _080221A0: .4byte gUnknown_203B290
 _080221A4:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
-	bl sub_8092534
+	bl GetFriendAreaUnlockCondition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -9643,7 +9643,7 @@ _080224F8:
 	subs r0, r1
 	str r0, [r2]
 	ldrb r0, [r3, 0x10]
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r0, 0xA6
 	lsls r0, 1
 	bl sub_8011988
@@ -9690,7 +9690,7 @@ _08022568:
 	strb r0, [r1, 0x10]
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
-	bl sub_8092544
+	bl GetFriendAreaPrice
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 	movs r0, 0xB
@@ -9705,7 +9705,7 @@ _0802258C:
 	strb r0, [r1, 0x10]
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
-	bl sub_8092544
+	bl GetFriendAreaPrice
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 	movs r0, 0x10

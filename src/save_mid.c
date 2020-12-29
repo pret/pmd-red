@@ -1,5 +1,6 @@
 #include "global.h"
 #include "save.h"
+#include "friend_area.h"
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 extern struct unkTimeStruct *gUnknown_203B47C;
@@ -28,7 +29,7 @@ extern struct unk_203B188 *gUnknown_203B188;
 extern u32 *gUnknown_203B45C;
 extern u32 *gUnknown_203B460;
 extern u32 gUnknown_203B464;
-extern u8 *gUnknown_203B468;
+extern u8 *gFriendAreas;
 extern u32 gUnknown_203B46C;
 extern u8 *gUnknown_203B480;
 extern u8 *gUnknown_203B484;
@@ -46,8 +47,6 @@ extern u32 *sub_80909D0(void);
 extern void sub_80909D8(void);
 extern u32 sub_809208C(void);
 extern void sub_8092094(void);
-extern u8 *sub_80923B0(void);
-extern void sub_80923B8(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
 extern u8 *sub_80950F8(void);
@@ -184,7 +183,7 @@ void sub_80122F4(void)
 
 void sub_8012300(void)
 {
-    sub_80923B8();
+    InitializeFriendAreas();
     sub_808CE08();
     sub_80909D8();
     sub_8092094();
@@ -218,7 +217,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B464 = r0->unk1C;
        gUnknown_203B494 = r0->unk20;
        gUnknown_203B498 = r0->unk24;
-       gUnknown_203B468 = r0->unk28;
+       gFriendAreas     = r0->BoughtFriendAreas;
        gUnknown_203B46C = r0->unk2C;
        gUnknown_203B47C = r0->unk30;
        return;
@@ -233,7 +232,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B464 = sub_809208C();
        gUnknown_203B494 = sub_8097680();
        gUnknown_203B498 = sub_8097F6C();
-       gUnknown_203B468 = sub_80923B0();
+       gFriendAreas     = GetBoughtFriendAreas();
        gUnknown_203B46C = sub_8094990();
        gUnknown_203B47C = sub_8094FA0();
 

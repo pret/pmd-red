@@ -121,7 +121,12 @@ SECTIONS {
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
-        src/code_8092334.o(.text);
+        src/code_809017C.o(.text);
+        src/friend_area.o(.text);
+        asm/friend_area.o(.text);
+        src/friend_area_mid.o(.text);
+        asm/friend_area_1.o(.text);
+        src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);

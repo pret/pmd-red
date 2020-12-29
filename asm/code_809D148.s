@@ -8295,9 +8295,9 @@ _080A18D8:
 	b _080A1EBE
 _080A18E2:
 	movs r0, 0xC
-	bl sub_80925EC
+	bl UnlockFriendArea
 	movs r0, 0x12
-	bl sub_80925EC
+	bl UnlockFriendArea
 	bl _080A236A
 _080A18F2:
 	ldr r0, _080A1900
@@ -8313,7 +8313,7 @@ _080A1904:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 	add r1, sp, 0x4
 	ldr r0, _080A1970
 	ldm r0!, {r2,r3,r6}
@@ -8375,7 +8375,7 @@ _080A1988:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 	add r1, sp, 0x84
 	adds r2, r1, 0
 	ldr r0, _080A19D8
@@ -8594,7 +8594,7 @@ _080A1B64:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1B88
@@ -8602,7 +8602,7 @@ _080A1B64:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 _080A1B88:
 	add r1, sp, 0x188
 	adds r2, r1, 0
@@ -8849,7 +8849,7 @@ _080A1CCC:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A1D9E
@@ -8886,7 +8886,7 @@ _080A1DA8:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1EBE
@@ -8918,7 +8918,7 @@ _080A1E14:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1EBE
@@ -8959,7 +8959,7 @@ _080A1E6C:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1E8E
@@ -8967,7 +8967,7 @@ _080A1E6C:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 _080A1E8E:
 	ldr r3, _080A1EC8
 	movs r0, 0
