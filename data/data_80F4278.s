@@ -7732,11 +7732,19 @@ gUnknown_810983C: @ 810983C
 
 	.global gUnknown_81098A4
 gUnknown_81098A4: @ 81098A4
-	.incbin "baserom.gba", 0x1098A4, 0x8
+	.string "#c"
+        .byte 0x4
+        .string "%s#r\0"
+        .align 2,0
 
 	.global gUnknown_81098AC
 gUnknown_81098AC: @ 81098AC
-	.incbin "baserom.gba", 0x1098AC, 0x18
+        .string "%s#=%c#C"
+        .byte 0x4
+        .string "%s#R\0"
+        .align 2,0
+        .string "pksdir0"
+        .align 2,0
 
 	.global gUnknown_81098C4
 gUnknown_81098C4: @ 81098C4

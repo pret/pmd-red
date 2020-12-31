@@ -123,8 +123,6 @@ SECTIONS {
         asm/code_809017C.o(.text);
         src/code_809017C.o(.text);
         src/friend_area.o(.text);
-        asm/friend_area.o(.text);
-        src/friend_area_mid.o(.text);
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);

@@ -7926,7 +7926,7 @@ _080A151C:
 	.4byte _080A1840
 	.4byte _080A185E
 	.4byte _080A18C2
-	.4byte _080A18E2
+	.4byte _080A18E2  @ Wigglytuff Club Opening
 	.4byte _080A18F2
 	.4byte _080A1904
 	.4byte _080A197C
@@ -8293,10 +8293,10 @@ _080A18D8:
 	cmp r0, r1
 	bge _080A18D8
 	b _080A1EBE
-_080A18E2:
-	movs r0, 0xC
+_080A18E2: @ Wigglytuff Guild Opening
+	movs r0, 0xC @ Wild Plains
 	bl UnlockFriendArea
-	movs r0, 0x12
+	movs r0, 0x12 @ Mist-Rise Forest
 	bl UnlockFriendArea
 	bl _080A236A
 _080A18F2:
