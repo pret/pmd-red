@@ -2027,7 +2027,7 @@ _0808FB94:
 	add r9, r3
 	mov r1, r10
 	ldrb r0, [r1, 0x18]
-	bl sub_8092390
+	bl GetAbilityDescription
 	adds r2, r0, 0
 	str r4, [sp]
 	movs r5, 0xB
@@ -2044,7 +2044,7 @@ _0808FB94:
 	bne _0808FBD2
 	b _0808FED6
 _0808FBD2:
-	bl sub_8092390
+	bl GetAbilityDescription
 	adds r2, r0, 0
 	str r4, [sp]
 	str r5, [sp, 0x4]
@@ -2310,7 +2310,7 @@ _0808FDB0:
 	bl GetFriendArea
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092524
+	bl GetFriendAreaName
 	adds r1, r0, 0
 	ldr r4, _0808FEFC
 	adds r0, r4, 0

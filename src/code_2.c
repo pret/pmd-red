@@ -1,5 +1,6 @@
 #include "global.h"
 #include "file_system.h"
+#include "friend_area.h"
 #include "input.h"
 
 extern void InitHeap(void);
@@ -13,7 +14,6 @@ extern void sub_8094F88(void);
 extern void sub_8094980(void);
 extern void sub_8094C14(void);
 extern void sub_8097F5C(void);
-extern void sub_80923A0(void);
 extern void sub_8090998(void);
 extern void sub_809207C(void);
 extern void LoadWazaParameters(void);
@@ -102,7 +102,7 @@ void GameLoop(void)
     sub_8094980();
     sub_8094C14();
     sub_8097F5C();
-    sub_80923A0();
+    LoadFriendAreas();
     sub_8090998();
     sub_809207C();
     LoadWazaParameters();

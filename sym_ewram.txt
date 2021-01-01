@@ -398,7 +398,7 @@ gUnknown_202DE58 = .; /* 202DE58 */
 gUnknown_202DEA8 = .; /* 202DEA8 */
 	. += 0xF0;
 
-gUnknown_202DF98 = .; /* 202DF98 ( Parner Nickname? ) */
+gUnknown_202DF98 = .; /* 202DF98 ( Available Pokemon Names ) */
 	. += 0x50;
 
 gUnknown_202DFE8 = .; /* 202DFE8 */

@@ -170,7 +170,7 @@ _0808CF36:
 	bl sub_80980B4
 	b _0808CFB8
 	.align 2, 0
-_0808CF58: .4byte gUnknown_203B468
+_0808CF58: .4byte gFriendAreas
 _0808CF5C:
 	movs r2, 0
 	lsls r4, r7, 3
@@ -522,7 +522,7 @@ sub_808D1DC:
 	b _0808D268
 	.align 2, 0
 _0808D204: .4byte gMonsterParameters
-_0808D208: .4byte gUnknown_203B468
+_0808D208: .4byte gFriendAreas
 _0808D20C:
 	ldr r0, [r7]
 	adds r0, r5
@@ -603,7 +603,7 @@ sub_808D278:
 	b _0808D2DA
 	.align 2, 0
 _0808D29C: .4byte gMonsterParameters
-_0808D2A0: .4byte gUnknown_203B468
+_0808D2A0: .4byte gFriendAreas
 _0808D2A4:
 	ldr r0, [r7]
 	adds r0, r5

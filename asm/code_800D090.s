@@ -6345,7 +6345,7 @@ _08010004:
 	movs r0, 0
 	b _0801000E
 	.align 2, 0
-_08010008: .4byte gUnknown_203B468
+_08010008: .4byte gFriendAreas
 _0801000C:
 	movs r0, 0x1
 _0801000E:

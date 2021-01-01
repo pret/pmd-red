@@ -1379,7 +1379,7 @@ _08001E08:
 	cmp r0, 0
 	beq _08001E36
 	movs r0, 0xE
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001E36
@@ -1425,7 +1425,7 @@ _08001E72:
 	bl sub_80973A8
 _08001E7A:
 	movs r0, 0x2B
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001E8E
@@ -1434,7 +1434,7 @@ _08001E7A:
 	bl sub_80973A8
 _08001E8E:
 	movs r0, 0x24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001EA2
@@ -1443,7 +1443,7 @@ _08001E8E:
 	bl sub_80973A8
 _08001EA2:
 	movs r0, 0x23
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001EB6
@@ -1452,7 +1452,7 @@ _08001EA2:
 	bl sub_80973A8
 _08001EB6:
 	movs r0, 0x19
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001ECA
@@ -1461,7 +1461,7 @@ _08001EB6:
 	bl sub_80973A8
 _08001ECA:
 	movs r0, 0x3
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001EE6
@@ -1473,12 +1473,12 @@ _08001ECA:
 	bl sub_80973A8
 _08001EE6:
 	movs r0, 0x2C
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001F06
 	movs r0, 0x2D
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001F06
@@ -1533,7 +1533,7 @@ _08001F58:
 	cmp r0, 0
 	beq _08001F7E
 	movs r0, 0x37
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001F7E
@@ -1591,7 +1591,7 @@ _08001FCC:
 	cmp r0, 0
 	beq _08002002
 	movs r0, 0xE
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08002002
@@ -1601,7 +1601,7 @@ _08001FCC:
 	bl sub_8001BB4
 _08002002:
 	movs r0, 0xE
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08002016
@@ -1610,7 +1610,7 @@ _08002002:
 	bl sub_80973A8
 _08002016:
 	movs r0, 0xE
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800202A
@@ -2497,7 +2497,7 @@ sub_80026CC:
 	bl sub_8002658
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092600
+	bl GetFriendAreaStatus
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2512,7 +2512,7 @@ sub_80026E8:
 	bl sub_8002658
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80925EC
+	bl UnlockFriendArea
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80026E8
