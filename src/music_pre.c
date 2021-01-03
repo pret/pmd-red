@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gba/io_reg.h"
 #include "m4a.h"
+#include "bg.h"
 
 extern void nullsub_19(void);
 extern void nullsub_20(u16 songIndex);
@@ -30,14 +31,6 @@ struct unkStruct_3000FD8
 };
 
 extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
-
-struct BGControlStruct
-{
-    u16 padding;
-    u16 unk2;
-    s16 hofs;
-    s16 vofs;
-};
 
 extern u8 gUnknown_202D7FE;
 extern u16 gUnknown_202D7FC;

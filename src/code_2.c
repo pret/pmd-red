@@ -1,6 +1,7 @@
 #include "global.h"
 #include "file_system.h"
 #include "input.h"
+#include "bg.h"
 
 extern void InitHeap(void);
 extern void NDS_DebugInit(void);
@@ -37,8 +38,6 @@ extern void sub_80097B0(void);
 extern void sub_800CDA8(u32);
 extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
-extern void SetBG2RegOffsets(s32, s32);
-extern void SetBG3RegOffsets(s32, s32);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_800BDFC(u32);
 extern void sub_80095CC(u32, u32);
