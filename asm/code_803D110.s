@@ -2567,7 +2567,7 @@ sub_803E490:
 	adds r1, r4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl sub_800CCA0
+	bl SetBG2RegOffsets
 	b _0803E4FC
 	.align 2, 0
 _0803E4D8: .4byte gUnknown_202EDD4
@@ -2582,7 +2582,7 @@ _0803E4EC:
 	strb r0, [r1]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800CCA0
+	bl SetBG2RegOffsets
 _0803E4FC:
 	ldr r4, _0803E62C
 	ldr r2, [r4]
@@ -2598,7 +2598,7 @@ _0803E4FC:
 	adds r2, r3
 	ldr r2, [r2]
 	subs r1, r2
-	bl sub_800CCAC
+	bl SetBG3RegOffsets
 	bl sub_806CC10
 	bl sub_804522C
 	bl sub_803F9CC

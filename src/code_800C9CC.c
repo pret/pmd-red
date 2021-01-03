@@ -1,23 +1,24 @@
 #include "global.h"
 #include "input.h"
 
-struct unkStruct_809CC88
+struct BGControlStruct
 {
     u16 padding;
     u16 unk2;
-    u16 unk4;
-    u16 unk6;
+    s16 hofs;
+    s16 vofs;
 };
 
 extern u16 gRawKeyInput;
 extern u8 gUnknown_202D6B8;
 extern u8 gUnknown_202D6B9;
 extern u16 gUnknown_202D7FA;
+extern u8 gUnknown_202D7FE;
 
-extern struct unkStruct_809CC88 gUnknown_202D698;
-extern struct unkStruct_809CC88 gUnknown_202D6A0;
-extern struct unkStruct_809CC88 gUnknown_202D6A8;
-extern struct unkStruct_809CC88 gUnknown_202D6B0;
+extern struct BGControlStruct gUnknown_202D698;
+extern struct BGControlStruct gUnknown_202D6A0;
+extern struct BGControlStruct gUnknown_202D6A8;
+extern struct BGControlStruct gUnknown_202D6B0;
 
 void ReadKeyInput(struct Inputs *r0)
 {
@@ -97,122 +98,128 @@ void sub_800CC44(s32 r0, s32 r1)
 
 }
 
-void sub_800CC88(u32 r0, u32 r1)
+void SetBG0RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D698.unk4 = r0;
-    gUnknown_202D698.unk6 = r1;
+    gUnknown_202D698.hofs = xoffset;
+    gUnknown_202D698.vofs = yoffset;
 }
 
-void sub_800CC94(u32 r0, u32 r1)
+void SetBG1RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6A0.unk4 = r0;
-    gUnknown_202D6A0.unk6 = r1;
+    gUnknown_202D6A0.hofs = xoffset;
+    gUnknown_202D6A0.vofs = yoffset;
 }
 
-void sub_800CCA0(u32 r0, u32 r1)
+void SetBG2RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6A8.unk4 = r0;
-    gUnknown_202D6A8.unk6 = r1;
+    gUnknown_202D6A8.hofs = xoffset;
+    gUnknown_202D6A8.vofs = yoffset;
 }
 
-void sub_800CCAC(u32 r0, u32 r1)
+void SetBG3RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6B0.unk4 = r0;
-    gUnknown_202D6B0.unk6 = r1;
+    gUnknown_202D6B0.hofs = xoffset;
+    gUnknown_202D6B0.vofs = yoffset;
 }
 
-void sub_800CCB8(s32 r0, u32 r1, u32 r2)
+void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset)
 {
-    if(r0 == 1)
+    if(reg == 1)
     {
         goto _0800CCD4;
     }
-    if(r0 <= 1)
+    if(reg <= 1)
     {
         goto _0800CCCA;
     }
-    if(r0 == 2)
+    if(reg == 2)
     {
         goto _0800CCDE;
     }
-    if(r0 == 3)
+    if(reg == 3)
     {
         goto _0800CCE8;
     }
-   
+
     _0800CCCA:
-        sub_800CC88(r1, r2);
+        SetBG0RegOffsets(xoffset, yoffset);
         return;
     _0800CCD4:
-        sub_800CC94(r1, r2);
+        SetBG1RegOffsets(xoffset, yoffset);
         return;
     _0800CCDE:
-        sub_800CCA0(r1, r2);
+        SetBG2RegOffsets(xoffset, yoffset);
         return;
     _0800CCE8:
-        sub_800CCAC(r1, r2);
+        SetBG3RegOffsets(xoffset, yoffset);
 }
 
-void sub_800CCF4(s32 r0, u32 r1)
+void SetBGRegXOffset(s32 reg, s32 offset)
 {
-    if(r0 == 1)
+    if(reg == 1)
     {
         goto _0800CD10;
     }
-    if(r0 <= 1)
+    if(reg <= 1)
     {
         goto _0800CD06;
     }
-    if(r0 == 2)
+    if(reg == 2)
     {
         goto _0800CD18;
     }
-    if(r0 == 3)
+    if(reg == 3)
     {
         goto _0800CD20;
     }
 
     _0800CD06:
-        gUnknown_202D698.unk4 = r1;
+        gUnknown_202D698.hofs = offset;
         return;
     _0800CD10:
-        gUnknown_202D6A0.unk4 = r1;
+        gUnknown_202D6A0.hofs = offset;
         return;
     _0800CD18:
-        gUnknown_202D6A8.unk4 = r1;
+        gUnknown_202D6A8.hofs = offset;
         return;
     _0800CD20:
-        gUnknown_202D6B0.unk4 = r1;
+        gUnknown_202D6B0.hofs = offset;
 }
 
-void sub_800CD2C(s32 r0, u32 r1)
+void SetBGRegYOffset(s32 reg, s32 offset)
 {
-    if(r0 == 1)
+    if(reg == 1)
     {
         goto _0800CD48;
     }
-    if(r0 <= 1)
+    if(reg <= 1)
     {
         goto _0800CD3E;
     }
-    if(r0 == 2)
+    if(reg == 2)
     {
         goto _0800CD50;
     }
-    if(r0 == 3)
+    if(reg == 3)
     {
         goto _0800CD58;
     }
 
     _0800CD3E:
-        gUnknown_202D698.unk6 = r1;
+        gUnknown_202D698.vofs = offset;
         return;
     _0800CD48:
-        gUnknown_202D6A0.unk6 = r1;
+        gUnknown_202D6A0.vofs = offset;
         return;
     _0800CD50:
-        gUnknown_202D6A8.unk6 = r1;
+        gUnknown_202D6A8.vofs = offset;
         return;
     _0800CD58:
-        gUnknown_202D6B0.unk6 = r1;
+        gUnknown_202D6B0.vofs = offset;
+}
+
+void sub_800CD64(s32 r0, u8 r1)
+{
+    gUnknown_202D7FE = r1;
+    gUnknown_202D6A8.unk2 = (1 << 15) & (u16)((-r0|r0) >> 31);
 }

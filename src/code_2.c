@@ -37,8 +37,8 @@ extern void sub_80097B0(void);
 extern void sub_800CDA8(u32);
 extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
-extern void sub_800CCA0(u32, u32);
-extern void sub_800CCAC(u32, u32);
+extern void SetBG2RegOffsets(s32, s32);
+extern void SetBG3RegOffsets(s32, s32);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_800BDFC(u32);
 extern void sub_80095CC(u32, u32);
@@ -134,8 +134,8 @@ void GameLoop(void)
         sub_800641C(0, 1, 1);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
-        sub_800CCA0(0, 0);
-        sub_800CCAC(0, 0);
+        SetBG2RegOffsets(0, 0);
+        SetBG3RegOffsets(0, 0);
         gUnknown_2000A80 = 0;
         while (gUnknown_2000A80 < 32) {
             s32 i;

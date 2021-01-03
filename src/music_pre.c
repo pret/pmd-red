@@ -31,7 +31,69 @@ struct unkStruct_3000FD8
 
 extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
 
+struct BGControlStruct
+{
+    u16 padding;
+    u16 unk2;
+    s16 hofs;
+    s16 vofs;
+};
+
+extern u8 gUnknown_202D7FE;
+extern u16 gUnknown_202D7FC;
+extern struct BGControlStruct gUnknown_202D698;
+extern struct BGControlStruct gUnknown_202D6A0;
+extern struct BGControlStruct gUnknown_202D6A8;
+extern struct BGControlStruct gUnknown_202D6B0;
+
 void sub_800BF80(void);
+
+void nullsub_17(void)
+{
+}
+
+void UpdateBGControlRegisters(void)
+{
+    u32 BG[4];
+
+    if(gUnknown_202D7FE == 1)
+    {
+        BG[0] = 1;
+        BG[1] = 2;
+        BG[2] = 0;
+        BG[3] = 3;
+    }
+    else
+    {
+        BG[0] = 0;
+        BG[1] = 1;
+        BG[2] = 2;
+        BG[3] = 3;
+    }
+
+    REG_BG0HOFS = gUnknown_202D698.hofs;
+    REG_BG0VOFS = gUnknown_202D698.vofs;
+    REG_BG1HOFS = gUnknown_202D6A0.hofs;
+    REG_BG1VOFS = gUnknown_202D6A0.vofs;
+    REG_BG2HOFS = gUnknown_202D6A8.hofs;
+    REG_BG2VOFS = gUnknown_202D6A8.vofs;
+    REG_BG3HOFS = gUnknown_202D6B0.hofs;
+    REG_BG3VOFS = gUnknown_202D6B0.vofs;
+
+    REG_BG0CNT = BG[0] | 0xB0 << 6;
+    REG_BG1CNT = BG[1] | 0xB4 << 6;
+    if(gUnknown_202D6A8.unk2 == 0x80 << 8)
+    {
+        REG_BG2CNT = BG[2] | 0x2e08;
+    }
+    else
+    {
+        REG_BG2CNT = BG[2] | 0xB8 << 6;
+    }
+
+    REG_BG3CNT = BG[3] | 0x2f08;
+    REG_BLDCNT = gUnknown_202D7FC;
+}
 
 // Some kind of initializer for music?
 void sub_800BD08(void)

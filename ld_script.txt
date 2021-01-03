@@ -68,14 +68,13 @@ SECTIONS {
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
         src/main.o(.text);
-        asm/code_800B540.o(.text);
-        src/code_800B5F0.o(.text);
         asm/code_800B5F0.o(.text);
         src/music_pre.o(.text);
         asm/music.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);
         asm/code_800C9CC.o(.text);
+        src/cpu.o(.text);
         src/flash.o(.text);
         src/code_800D090.o(.text);
         asm/code_800D090.o(.text);
