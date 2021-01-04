@@ -46,7 +46,6 @@ extern void sub_8012468(void);
 extern u32 sub_8012484(void);
 extern void sub_8012558(void);
 extern u8 sub_80363E0(void);
-extern void SetBGOBJEnableFlags(u32);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);

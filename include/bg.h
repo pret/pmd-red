@@ -14,4 +14,5 @@ void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset);
 void SetBGRegXOffset(s32 reg, s32 offset);
 void SetBGRegYOffset(s32 reg, s32 offset);
 void UpdateBGControlRegisters(void);
+void SetBGOBJEnableFlags(u32 mask);
 

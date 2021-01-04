@@ -169,3 +169,8 @@ void sub_800CD64(s32 r0, u8 r1)
     gUnknown_202D7FE = r1;
     gUnknown_202D6A8.unk2 = r0 ? 0x8000 : 0; 
 }
+
+void SetBGOBJEnableFlags(u32 mask)
+{
+    REG_DISPCNT = (REG_DISPCNT & 0xe0ff) | (~(mask << 8) & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON));
+}

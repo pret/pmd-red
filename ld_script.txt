@@ -73,7 +73,6 @@ SECTIONS {
         asm/music.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);
-        asm/code_800C9CC.o(.text);
         src/cpu.o(.text);
         src/flash.o(.text);
         src/code_800D090.o(.text);
