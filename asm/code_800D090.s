@@ -7522,7 +7522,7 @@ sub_8010960:
 	adds r1, r5
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl sub_800CCA0
+	bl SetBG2RegOffsets
 	ldr r1, [r6]
 	adds r4, r1, r4
 	movs r2, 0
@@ -7530,7 +7530,7 @@ sub_8010960:
 	adds r1, r5
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl sub_800CCAC
+	bl SetBG3RegOffsets
 	movs r0, 0x1
 	bl sub_8010A88
 	bl sub_8010A00
@@ -9139,7 +9139,7 @@ sub_801169C:
 	adds r1, r6
 	movs r3, 0
 	ldrsh r1, [r1, r3]
-	bl sub_800CCA0
+	bl SetBG2RegOffsets
 	ldr r1, [r5]
 	adds r4, r1, r4
 	movs r2, 0
@@ -9147,7 +9147,7 @@ sub_801169C:
 	adds r1, r6
 	movs r3, 0
 	ldrsh r1, [r1, r3]
-	bl sub_800CCAC
+	bl SetBG3RegOffsets
 	bl sub_8010F28
 	bl sub_80111C4
 	lsls r0, 24

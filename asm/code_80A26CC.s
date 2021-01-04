@@ -4386,12 +4386,12 @@ _080A4998: .4byte 0x00000536
 _080A499C:
 	ldr r0, [r4, 0x48]
 	ldr r1, [r4, 0x4C]
-	bl sub_800CCA0
+	bl SetBG2RegOffsets
 	b _080A49AE
 _080A49A6:
 	ldr r0, [r4, 0x48]
 	ldr r1, [r4, 0x4C]
-	bl sub_800CCAC
+	bl SetBG3RegOffsets
 _080A49AE:
 	adds r6, 0x1
 	adds r5, 0x1

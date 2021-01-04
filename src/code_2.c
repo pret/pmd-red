@@ -2,6 +2,7 @@
 #include "file_system.h"
 #include "friend_area.h"
 #include "input.h"
+#include "bg.h"
 
 extern void InitHeap(void);
 extern void NDS_DebugInit(void);
@@ -37,8 +38,6 @@ extern void sub_80097B0(void);
 extern void sub_800CDA8(u32);
 extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
-extern void sub_800CCA0(u32, u32);
-extern void sub_800CCAC(u32, u32);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_800BDFC(u32);
 extern void sub_80095CC(u32, u32);
@@ -47,7 +46,6 @@ extern void sub_8012468(void);
 extern u32 sub_8012484(void);
 extern void sub_8012558(void);
 extern u8 sub_80363E0(void);
-extern void SetBGOBJEnableFlags(u32);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);
@@ -134,8 +132,8 @@ void GameLoop(void)
         sub_800641C(0, 1, 1);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
-        sub_800CCA0(0, 0);
-        sub_800CCAC(0, 0);
+        SetBG2RegOffsets(0, 0);
+        SetBG3RegOffsets(0, 0);
         gUnknown_2000A80 = 0;
         while (gUnknown_2000A80 < 32) {
             s32 i;
