@@ -5,38 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80484E8
-sub_80484E8:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	ldr r0, [r4, 0x70]
-	adds r0, 0xAC
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08048500
-	adds r0, r5, 0
-	bl sub_807A290
-	b _08048516
-_08048500:
-	ldr r0, _0804851C
-	adds r1, r4, 0
-	movs r2, 0
-	bl sub_8045B94
-	ldr r0, _08048520
-	ldr r2, [r0]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80522F4
-_08048516:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804851C: .4byte gUnknown_202DF98
-_08048520: .4byte gUnknown_80FB580
-	thumb_func_end sub_80484E8
-
 	thumb_func_start sub_8048524
 sub_8048524:
 	push {r4-r6,lr}

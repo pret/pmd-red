@@ -1,22 +1,19 @@
 #include "global.h"
+#include "music.h"
+#include "constants/bg_music.h"
 
 void sub_8011924(void);
 void nullsub_26(void);
 
 extern u8 sub_80023E4(u8);
-extern void sub_800BDFC(u16 r0);
-extern void FadeInNewBGM(u16 r0, u16 r1);
 extern void sub_800BF48(u16 r0);
 extern void sub_800BF80(void);
 extern void sub_800BFD0(u16 r0);
 extern void sub_800C3F8(u16 r0, u16 r1);
 extern void sub_801199C(u16 r0);
-extern u16 sub_800C068();
 extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
-extern void sub_800C93C();
 extern u8 sub_800C5D0(u16 r0);
-extern void sub_800C9CC();
 
 extern void nullsub_27(void);
 extern void nullsub_29(void);
@@ -49,12 +46,12 @@ void sub_8011760(void)
 {
     if(sub_80023E4(0xD) != 0)
     {
-        sub_800BDFC(0x13);
+        StartNewBGM(MUS_WORLD_CALAMITY);
         return;
     }
     if(sub_80023E4(0xC) != 0)
     {
-        sub_800BDFC(0x7); // Pokemon Square Theme
+        StartNewBGM(MUS_POKEMON_SQUARE);
     }
 }
 
@@ -62,10 +59,10 @@ void sub_801178C(void)
 {
     if(sub_80023E4(0xD) != 0)
     {
-        sub_800BDFC(0x13);
+        StartNewBGM(MUS_WORLD_CALAMITY);
         return;
     }
-    sub_800BDFC(0x7); // Pokemon Square Theme
+    StartNewBGM(MUS_POKEMON_SQUARE);
 }
 
 void sub_80117AC(void)
@@ -147,12 +144,12 @@ void sub_80118C4(u16 r0)
     sub_800C3F8(0x3e5, r0);
 }
 
-void sub_80118F0(u16 r0)
+void xxx_call_start_new_bgm(u16 songIndex)
 {
-    sub_800BDFC(r0);
+    StartNewBGM(songIndex);
 }
 
-void sub_8011900(u16 songIndex, u16 speed)
+void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed)
 {
     FadeInNewBGM(songIndex, speed);
 }
@@ -175,7 +172,7 @@ void sub_8011930(u16 r0)
 u32 sub_8011940(u16 r0)
 {
     u32 temp;
-    temp = sub_800C068();
+    temp = GetCurrentBGSong();
 
     if(r0 == 999)
         return temp != 999;

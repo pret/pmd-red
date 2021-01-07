@@ -3,6 +3,8 @@
 #include "friend_area.h"
 #include "input.h"
 #include "bg.h"
+#include "music.h"
+#include "constants/bg_music.h"
 
 extern void InitHeap(void);
 extern void NDS_DebugInit(void);
@@ -39,7 +41,6 @@ extern void sub_800CDA8(u32);
 extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
-extern void sub_800BDFC(u32);
 extern void sub_80095CC(u32, u32);
 extern void InitMainMenu(void);
 extern void sub_8012468(void);
@@ -149,7 +150,7 @@ void GameLoop(void)
             sub_8012558();
         }
         tmp3 = 1;
-        sub_800BDFC(8);
+        StartNewBGM(MUS_LOADING_SCREEN);
         flag = TRUE;
         sub_80095CC(0, 20);
         InitMainMenu();

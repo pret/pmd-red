@@ -1,7 +1,6 @@
 #include "global.h"
 #include "m4a.h"
-
-#define NUM_BG_SONGS 128
+#include "constants/bg_music.h"
 
 extern u8 sub_80023E4(u32);
 extern void sub_80118C4(u16);
@@ -15,8 +14,14 @@ extern void Random();
 extern void sub_800BA5C();
 extern void xxx_update_bg_sound_input();
 
-extern u16 gUnknown_202D688;
-extern u16 gUnknown_202D68A;
+// 0 - Only seen it initialized
+// 1 - Playing
+// 2 - 
+// 3 - Fade Out?
+// 4 - Stopped
+extern u16 gBGMusicPlayerState;
+
+extern u16 gCurrentBGSong;
 extern u16 gUnknown_202D690;
 extern u8 gUnknown_202D694;
 extern u32 gUnknown_203B0B8;
@@ -38,23 +43,20 @@ void sub_800C93C(void)
     interrupt_flag = DisableInterrupts();
     if(gUnknown_202D690 == 0)
     {
-        if(gUnknown_202D68A != 0x3e7)
+        if(gCurrentBGSong != 999)
         {
-            temp = gUnknown_202D688 - 1;
+            temp = gBGMusicPlayerState - 1;
             if(temp <= 1)
             {
-                if(gUnknown_202D688 == 2)
+                if(gBGMusicPlayerState == 2)
                 {
                     gUnknown_202D694 = gUnknown_202D690;
                 }
-                else
+                else if(gBGMusicPlayerState == 1)
                 {
-                    if(gUnknown_202D688 == 1)
-                    {
-                        gUnknown_202D694 = 1;
-                    }
+                    gUnknown_202D694 = 1;
                 }
-                gUnknown_202D688 = 4;
+                gBGMusicPlayerState = 4;
             }
         }
     }
@@ -72,14 +74,14 @@ void sub_800C9CC(void)
     m4aSoundVSyncOn();
     if(gUnknown_202D690 == 0)
     {
-        if(gUnknown_202D68A != 0x3e7)
+        if(gCurrentBGSong != 999)
         {
-            if(gUnknown_202D688 == 4)
+            if(gBGMusicPlayerState == 4)
             {
-                gUnknown_202D688 = 1;
+                gBGMusicPlayerState = 1;
                 if(gUnknown_202D694 != 0)
                 {
-                    m4aSongNumStart(gUnknown_202D68A);
+                    m4aSongNumStart(gCurrentBGSong);
                 }
                 else
                 {
@@ -99,6 +101,7 @@ void nullsub_179(void)
 {
 }
 
+// Unused
 u8 sub_800CA38(u32 songIndex)
 {
     if(IsBGSong(songIndex))
@@ -190,6 +193,7 @@ void sub_800CB20(void)
     Random();
 }
 
+// Unused
 u32 sub_800CB50(void)
 {
     return gUnknown_203B0B8;
