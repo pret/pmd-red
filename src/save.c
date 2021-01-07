@@ -2,6 +2,7 @@
 #include "flash.h"
 #include "memory.h"
 #include "save.h"
+#include "event_flag.h"
 
 struct UnkStruct_sub_8011DAC {
     u8 fill000[0x4];
@@ -44,7 +45,6 @@ extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
 extern void* MemoryAlloc(u32 a, u32 b);
 extern void MemoryFree(void* a);
 extern void SetRngState(s32 state);
-extern bool8 sub_8002718(u8 *a);
 extern bool8 sub_800DAB0(u16, u8*, s32);
 extern bool8 sub_800DAB4(u16, u8*, s32);
 extern bool8 sub_800DAB8(void);

@@ -1,19 +1,21 @@
 #include "global.h"
+#include "crt0.h"
 #include "random.h"
 #include "flash.h"
 #include "text.h"
 
 extern char ewram_start[];
 
-extern u8 gUnknown_202D4B8;
-extern void *gUnknown_202D5F0[6];
+typedef void (*IntrCallback)(void);
+
+extern u8 IntrMain_Buffer[0x120];
+extern IntrCallback gUnknown_202D5F0[6];
 extern u16 gUnknown_202D7FC;
 extern u8 gUnknown_202D7FE;
 extern u8 gInterruptsEnabled;
 extern u16 gUnknown_203B0AC;
 extern s16 gUnknown_203B0AE;
 extern u32 gIntrTable[];
-extern u32 IntrMain;
 
 
 extern char alt_203B038[];
@@ -226,8 +228,8 @@ void SetInterruptFlag(u16 flag)
 void InitIntrTable(const u32 *interrupt_table)
 {
     CpuCopy32(interrupt_table, &gIntrTable, 0x18); // 0x18 = 0x6 * 4 (0x4f00 is 32 bits)
-    CpuCopy32(&IntrMain, &gUnknown_202D4B8, 0x120); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
-    INTR_VECTOR = &gUnknown_202D4B8;
+    CpuCopy32(&IntrMain, &IntrMain_Buffer, 0x120); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
+    INTR_VECTOR = &IntrMain_Buffer;
 }
 
 u32 *sub_800B6E8(u32 r0)

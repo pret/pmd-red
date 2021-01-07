@@ -5,50 +5,6 @@
 
 	.text	
 
-        thumb_func_start sub_803C190
-sub_803C190:
-	lsls r0, 24
-	ldr r1, _0803C19C
-	lsrs r0, 21
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_0803C19C: .4byte gUnknown_80EBA18
-	thumb_func_end sub_803C190
-
-	thumb_func_start sub_803C1A0
-sub_803C1A0:
-	lsls r0, 24
-	ldr r1, _0803C1B0
-	lsrs r0, 21
-	adds r1, 0x4
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_0803C1B0: .4byte gUnknown_80EBA18
-	thumb_func_end sub_803C1A0
-
-	thumb_func_start sub_803C1B4
-sub_803C1B4:
-	push {r4,lr}
-	lsls r4, r1, 24
-	lsrs r4, 24
-	bl sub_80908D8
-	cmp r4, 0x2
-	bne _0803C1C4
-	adds r0, 0x2
-_0803C1C4:
-	cmp r0, 0xF
-	ble _0803C1CA
-	movs r0, 0xF
-_0803C1CA:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803C1B4
-
 	thumb_func_start sub_803C1D0
 sub_803C1D0:
 	push {lr}

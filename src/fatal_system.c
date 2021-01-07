@@ -1,7 +1,29 @@
-#include "global.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include "gba/gba.h"
+#include "config.h"
 
 extern const char gNotMountText;
 extern void Hang();
+
+void FatalErrorFormatMessage(const char *text, ...)
+{
+    char bufPrint[0x100];
+    va_list vArgv;
+    va_start(vArgv, text);
+    vsprintf(bufPrint, text, vArgv);
+    va_end(vArgv);
+}
+
+
+void sub_8011B88(const char *text, ...)
+{
+    char bufPrint[0x100];
+    va_list vArgv;
+    va_start(vArgv, text);
+    vsprintf(bufPrint, text, vArgv);
+    va_end(vArgv);
+}
 
 void nullsub_28(void)
 {
@@ -25,7 +47,7 @@ const char *sub_8011BAC(void)
 }
 
 // Unused
-void sub_8011BB4(void)
+void UnusedHang(void)
 {
     Hang();
 }

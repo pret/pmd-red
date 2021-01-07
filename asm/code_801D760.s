@@ -14300,7 +14300,7 @@ _080249F8:
 	str r0, [r1, 0x24]
 	movs r0, 0x8
 	movs r1, 0x3C
-	bl sub_8011900
+	bl xxx_call_fade_in_new_bgm
 	ldr r0, _08024A0C
 	ldr r3, _08024A10
 	b _08024CB0
@@ -14620,7 +14620,7 @@ _08024C98: .4byte gUnknown_80DD0E0
 _08024C9C:
 	movs r0, 0x8
 	movs r1, 0x3C
-	bl sub_8011900
+	bl xxx_call_fade_in_new_bgm
 	ldr r0, _08024CBC
 	ldr r1, [r0]
 	movs r0, 0x15

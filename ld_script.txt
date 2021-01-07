@@ -80,7 +80,6 @@ SECTIONS {
         src/code_80118A4.o(.text);
         asm/code_80118A4.o(.text);
         src/code_80118A4_1.o(.text);
-        asm/fatal_system.o(.text);
         src/fatal_system.o(.text);
         asm/fatal_system_1.o(.text);
         src/save.o(.text);
@@ -88,6 +87,7 @@ SECTIONS {
         src/save_mid.o(.text);
         asm/save1.o(.text);
         src/save1.o(.text);
+        src/more_input.o(.text);
         asm/code_8012A18.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);
@@ -95,6 +95,7 @@ SECTIONS {
         asm/code_8027C84.o(.text);
         src/wonder_mail.o(.text);
         asm/wonder_mail.o(.text);
+        src/code_803C190.o(.text);
         asm/personality_test.o(.text);
         src/personality_test.o(.text);
         asm/code_803D110.o(.text);
@@ -108,6 +109,7 @@ SECTIONS {
         asm/code_8048480.o(.text);
         src/code_80521D0.o(.text);
         asm/code_80521D0.o(.text);
+        src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
         src/pokemon_mid.o(.text);

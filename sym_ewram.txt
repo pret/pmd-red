@@ -256,7 +256,7 @@ gDecompressBufferCurrent = .; /* 202D4B0 */
 gDecompressBufferByteInInt = .; /* 202D4B4 */
 	. += 0x4;
 
-gUnknown_202D4B8 = .; /* 202D4B8 */
+IntrMain_Buffer = .; /* 202D4B8 */
 	. += 0x120;
 
 gIntrTable = .; /* 202D5D8 */
@@ -271,10 +271,10 @@ gUnknown_202D608 = .; /* 202D608 */
 gUnknown_202D648 = .; /* 202D648 */
 	. += 0x40;
 
-gUnknown_202D688 = .; /* 202D688 */
+gBGMusicPlayerState = .; /* 202D688 */
 	. += 0x2;
 
-gUnknown_202D68A = .; /* 202D68A */
+gCurrentBGSong = .; /* 202D68A */
 	. += 0x2;
 
 gUnknown_202D68C = .; /* 202D68C */

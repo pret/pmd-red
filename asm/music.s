@@ -78,9 +78,9 @@ _0800C0B4:
 _0800C0FC: .4byte 0x000003e5
 _0800C100: .4byte gUnknown_202D68E
 _0800C104: .4byte gUnknown_202D690
-_0800C108: .4byte gUnknown_202D68A
+_0800C108: .4byte gCurrentBGSong
 _0800C10C: .4byte 0x000003e7
-_0800C110: .4byte gUnknown_202D688
+_0800C110: .4byte gBGMusicPlayerState
 _0800C114: .4byte gUnknown_202D692
 _0800C118: .4byte gUnknown_202D694
 _0800C11C: .4byte gUnknown_20008F0
@@ -132,7 +132,7 @@ _0800C15E:
 	b _0800C19A
 	.align 2, 0
 _0800C17C: .4byte gUnknown_20008F0
-_0800C180: .4byte gUnknown_202D68A
+_0800C180: .4byte gCurrentBGSong
 _0800C184:
 	cmp r0, 0x7A
 	beq _0800C19A
@@ -817,7 +817,7 @@ _0800C6E4:
 	strh r0, [r4]
 	b _0800C8A2
 	.align 2, 0
-_0800C6F0: .4byte gUnknown_202D68A
+_0800C6F0: .4byte gCurrentBGSong
 _0800C6F4: .4byte 0x000003e7
 _0800C6F8: .4byte gUnknown_202D68E
 _0800C6FC: .4byte 0x000003e5
@@ -893,9 +893,9 @@ _0800C774:
 	bl m4aSongNumStart
 	b _0800C7BE
 	.align 2, 0
-_0800C794: .4byte gUnknown_202D68A
+_0800C794: .4byte gCurrentBGSong
 _0800C798: .4byte 0x000003e7
-_0800C79C: .4byte gUnknown_202D688
+_0800C79C: .4byte gBGMusicPlayerState
 _0800C7A0: .4byte gUnknown_202D694
 _0800C7A4:
 	ldr r0, _0800C7B0
@@ -917,7 +917,7 @@ _0800C7BE:
 	ldr r2, _0800C7DC
 	b _0800C84C
 	.align 2, 0
-_0800C7CC: .4byte gUnknown_202D688
+_0800C7CC: .4byte gBGMusicPlayerState
 _0800C7D0: .4byte gUnknown_20008F0
 _0800C7D4: .4byte gUnknown_202D690
 _0800C7D8: .4byte gUnknown_202D68E
@@ -948,8 +948,8 @@ _0800C80A:
 	strh r0, [r5]
 	b _0800C8A2
 	.align 2, 0
-_0800C810: .4byte gUnknown_202D688
-_0800C814: .4byte gUnknown_202D68A
+_0800C810: .4byte gBGMusicPlayerState
+_0800C814: .4byte gCurrentBGSong
 _0800C818: .4byte 0x000003e7
 _0800C81C:
 	ldr r0, _0800C834
@@ -964,7 +964,7 @@ _0800C81C:
 	bne _0800C8A2
 	b _0800C842
 	.align 2, 0
-_0800C834: .4byte gUnknown_202D68A
+_0800C834: .4byte gCurrentBGSong
 _0800C838: .4byte 0x000003e7
 _0800C83C:
 	ldr r0, _0800C854
@@ -981,8 +981,8 @@ _0800C84C:
 	b _0800C8A2
 	.align 2, 0
 _0800C854: .4byte gUnknown_20008F0
-_0800C858: .4byte gUnknown_202D688
-_0800C85C: .4byte gUnknown_202D68A
+_0800C858: .4byte gBGMusicPlayerState
+_0800C85C: .4byte gCurrentBGSong
 _0800C860: .4byte 0x000003e7
 _0800C864:
 	movs r0, 0
@@ -1008,7 +1008,7 @@ _0800C864:
 	.align 2, 0
 _0800C890: .4byte gUnknown_202D68C
 _0800C894: .4byte 0x000003e7
-_0800C898: .4byte gUnknown_202D68A
+_0800C898: .4byte gCurrentBGSong
 _0800C89C:
 	strh r0, [r5]
 	ldr r0, _0800C8C4
@@ -1033,7 +1033,7 @@ _0800C8AE:
 	beq _0800C8F0
 	b _0800C926
 	.align 2, 0
-_0800C8C4: .4byte gUnknown_202D68A
+_0800C8C4: .4byte gCurrentBGSong
 _0800C8C8: .4byte gUnknown_3000FE8
 _0800C8CC: .4byte 0x000003e5
 _0800C8D0:

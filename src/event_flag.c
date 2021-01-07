@@ -1,41 +1,39 @@
 #include "global.h"
+#include "event_flag.h"
 #include "memory.h"
-
-struct UnkEventStruct
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ s16 unk4;
-    /* 0x6 */ u16 unk6;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ s16 unkA;
-};
-
-struct UnkEventStruct2
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 *unk4;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ s16 unkA;
-};
+#include "friend_area.h"
 
 extern void sub_800226C(u8 r0, u8 r1, u32* r2, u8 u3);
-extern void sub_800160C(struct UnkEventStruct2 *r0, u32 r1, u32 r2);
+extern void sub_800160C(struct UnkEventStruct *r0, u32 r1, u32 r2);
+extern u8 sub_8002658(s32);
 
 extern u8 gUnknown_2000A88;
 
+bool8 sub_80026CC(s16 r0)
+{
+    return GetFriendAreaStatus(sub_8002658(r0));
+}
 
-// TODO fix stack allocation from 0xC to 0x8 to make this match
-//u8 sub_8002718(struct UnkEventStruct *r0)
-//{
-//    struct UnkEventStruct2 temp;
-//    sub_800160C(&temp, 0, 0);
-//    MemoryCopy8(&gUnknown_2000A88, (u8 *)r0, (0x80 << 3));
-//
-//    // TODO fix this comparison to make it match
-//    if(temp.unkA != *(temp.unk4)) 
-//        return 0;
-//    return 1;
-//}
+void sub_80026E8(s16 r0)
+{
+    UnlockFriendArea(sub_8002658(r0));
+}
+
+bool8 sub_8002700(void *r0)
+{
+    MemoryCopy8(r0, &gUnknown_2000A88, 0x80 << 3);
+    return 1;
+}
+
+bool8 sub_8002718(u8 *r0)
+{
+    struct UnkEventStruct temp;
+    sub_800160C(&temp, 0, 0);
+    MemoryCopy8(&gUnknown_2000A88, r0, 0x80 << 3);
+    if (temp.unk0[5] != temp.unk4[0])
+        return 0;
+    return 1;
+}
 
 void sub_8002758(u32 *r0)
 {

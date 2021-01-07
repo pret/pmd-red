@@ -4953,7 +4953,7 @@ _0809FD20:
 	cmp r1, r0
 	beq _0809FDA0
 	adds r0, r1, 0
-	bl sub_80118F0
+	bl xxx_call_start_new_bgm
 	bl _0809EAE0
 	.align 2, 0
 _0809FD34: .4byte 0x000003e7
@@ -4978,7 +4978,7 @@ _0809FD4E:
 	add r0, sp, 0x8
 	ldrh r1, [r0, 0x2]
 	adds r0, r2, 0
-	bl sub_8011900
+	bl xxx_call_fade_in_new_bgm
 	bl _0809EAE0
 	.align 2, 0
 _0809FD68: .4byte 0x000003e7
@@ -9479,7 +9479,7 @@ _080A229E:
 	bl sub_80118C4
 	b _080A236A
 _080A22AE:
-	bl sub_800C068
+	bl GetCurrentBGSong
 	ldr r1, _080A22C4
 	strh r0, [r1]
 	lsls r0, 16
@@ -9498,7 +9498,7 @@ _080A22CC:
 	ldr r5, _080A22E0
 	cmp r0, r5
 	beq _080A236A
-	bl sub_80118F0
+	bl xxx_call_start_new_bgm
 	b _080A2312
 	.align 2, 0
 _080A22DC: .4byte gUnknown_2039DA8
@@ -9511,7 +9511,7 @@ _080A22E4:
 	beq _080A236A
 	lsls r1, r5, 16
 	lsrs r1, 16
-	bl sub_8011900
+	bl xxx_call_fade_in_new_bgm
 	strh r6, [r4]
 	b _080A1EBE
 	.align 2, 0
