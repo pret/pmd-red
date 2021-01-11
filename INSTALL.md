@@ -12,11 +12,7 @@ Then get the compiler from https://github.com/pret/agbcc and run the following c
 	install.sh PATH_OF_PMD-RED_DIRECTORY
 	${DEVKITARM}/bin/arm-none-eabi/ranlib PATH_OF_PMD-RED_DIRECTORY/tools/agbcc/lib/libgcc.a lib/libc.a
 
-Then in the pmd-red directory, build the tools.
-
-	build_tools.sh
-
-Finally, build the rom.
+Finally, in the pmd-red directory, build the rom.
 
 	make
 
