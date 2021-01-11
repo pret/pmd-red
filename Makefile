@@ -1,4 +1,28 @@
-include $(DEVKITARM)/base_tools
+TOOLCHAIN := $(DEVKITARM)
+
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
+include $(TOOLCHAIN)/base_tools
+else
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+PREFIX := arm-none-eabi-
+OBJCOPY   := $(PREFIX)objcopy
+export CC 	 := $(PREFIX)gcc
+export AS        := $(PREFIX)as
+endif
+export CPP       := $(PREFIX)cpp
+export LD        := $(PREFIX)ld
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -6,19 +30,23 @@ else
 EXE :=
 endif
 
+
 TITLE       := POKE DUNGEON
 GAME_CODE   := B24E
 MAKER_CODE  := 01
 REVISION    := 0
 
+ifeq ($(OS),Windows_NT)
+LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a ../../libagbsyscall/libagbsyscall.a
+else
+LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
+endif
+
+
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
-AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc
-CPP       := $(PREFIX)cpp
-LD        := $(PREFIX)ld
-OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx
 GBAFIX    := tools/gbafix/gbafix
@@ -28,7 +56,13 @@ PREPROC   := tools/preproc/preproc
 SCANINC   := tools/scaninc/scaninc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
+TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLBASE = $(TOOLDIRS:tools/%=%)
+TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
+
+
 ASFLAGS         := -mcpu=arm7tdmi
+
 override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 CPPFLAGS        := -I tools/agbcc/include -iquote include -nostdinc -undef
 
@@ -50,11 +84,6 @@ ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
-ifeq ($(OS),Windows_NT)
-LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a ../../libagbsyscall/libagbsyscall.a
-else
-LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
-endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
@@ -68,16 +97,17 @@ $(BUILD_DIR)/src/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 #### Main Rules ####
 
 # Disable dependency scanning when NODEP is used for quick building
-ifeq ($(NODEP),)
-$(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include src/$(*F).c)
-$(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
-$(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
-endif
+# TODO enable when NODEP is fixed
+#ifeq ($(NODEP),)
+#$(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include src/$(*F).c)
+#$(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
+#$(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
+#endif
 
 ALL_BUILDS := red
 
 # Available targets
-.PHONY: all clean tidy libagbsyscall
+.PHONY: all clean tidy libagbsyscall tools clean-tools $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
@@ -97,18 +127,28 @@ MAKEFLAGS += --no-print-directory
 $(shell mkdir -p $(SUBDIRS))
 
 all: $(ROM)
-	
+
+tools: $(TOOLDIRS)
+
+$(TOOLDIRS):
+	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
+
+
 compare: all
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 
-clean: tidy
+clean: tidy clean-tools
 	$(RM) $(ALL_OBJECTS)
+
+clean-tools:
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+
 tidy:
 	$(RM) $(ALL_BUILDS:%=pmd_%{.gba,.elf,.map})
 	$(RM) -r build
 	@$(MAKE) clean -C libagbsyscall
 
-$(ROM): %.gba: %.elf
+$(ROM): %.gba: %.elf tools
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
