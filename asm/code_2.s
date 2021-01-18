@@ -109,7 +109,7 @@ _080006B8:
 _08000708: .4byte gUnknown_80B69F8
 _0800070C: .4byte gUnknown_80B6A28
 _08000710: .4byte 0x00005b20
-_08000714: .4byte gUnknown_8380000
+_08000714: .4byte gTitleMenuFileArchive
 _08000718: .4byte gTitlePaletteFile
 _0800071C: .4byte gUnknown_202B038
 _08000720: .4byte 0x06008000

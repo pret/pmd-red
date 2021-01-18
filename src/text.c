@@ -46,9 +46,9 @@ void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
 void sub_8009388(void);
 
 extern const struct UnkTextStruct2 gUnknown_80B857C[4];
-extern const char gUnknown_80B87B4[];
-extern const char gUnknown_80B87BC[];
-extern const struct FileArchive gUnknown_8300500;
+extern const char gKanjiA_file_string[];
+extern const char gKanjiB_file_string[];
+extern const struct FileArchive gSystemFileArchive;
 extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
@@ -60,8 +60,8 @@ void LoadCharmaps(void)
     int k;
 
     gCurrentCharmap = 0;
-    gCharmapFiles[0] = OpenFileAndGetFileDataPtr(gUnknown_80B87B4, &gUnknown_8300500);
-    gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gUnknown_80B87BC, &gUnknown_8300500);
+    gCharmapFiles[0] = OpenFileAndGetFileDataPtr(gKanjiA_file_string, &gSystemFileArchive);
+    gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
     gCharmaps[0] = gCharmapFiles[0]->data;
     gCharmaps[1] = gCharmapFiles[1]->data;
     gUnknown_202B028[0] = 11;

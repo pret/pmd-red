@@ -1097,7 +1097,7 @@ sub_8090998:
 _080909B8: .4byte gUnknown_203B460
 _080909BC: .4byte gUnknown_20389A8
 _080909C0: .4byte gUnknown_8109764
-_080909C4: .4byte gUnknown_8300500
+_080909C4: .4byte gSystemFileArchive
 _080909C8: .4byte gItemParametersFile
 _080909CC: .4byte gItemParametersFile + 4
 	thumb_func_end sub_8090998

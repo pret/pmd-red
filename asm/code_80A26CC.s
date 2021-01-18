@@ -1226,7 +1226,7 @@ _080A326C:
 	.align 2, 0
 _080A3284: .4byte 0x00000444
 _080A3288: .4byte gUnknown_81188F0
-_080A328C: .4byte gUnknown_9890000
+_080A328C: .4byte gGroundFileArchive
 _080A3290: .4byte 0x00000434
 _080A3294: .4byte 0x00000464
 _080A3298: .4byte 0x00000454
@@ -1347,7 +1347,7 @@ _080A3338:
 _080A3384: .4byte 0x0000046c
 _080A3388: .4byte 0x00000471
 _080A338C: .4byte 0x06008000
-_080A3390: .4byte gUnknown_9890000
+_080A3390: .4byte gGroundFileArchive
 _080A3394:
 	strb r0, [r4]
 	strb r0, [r4, 0x1]
@@ -1435,7 +1435,7 @@ _080A3428:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A3438: .4byte gUnknown_9890000
+_080A3438: .4byte gGroundFileArchive
 _080A343C: .4byte 0x0000052a
 	thumb_func_end sub_80A2FBC
 
@@ -1854,7 +1854,7 @@ _080A376C:
 	.align 2, 0
 _080A377C: .4byte 0x00000444
 _080A3780: .4byte gUnknown_81188F0
-_080A3784: .4byte gUnknown_9890000
+_080A3784: .4byte gGroundFileArchive
 _080A3788: .4byte 0x00000434
 _080A378C: .4byte 0x00000464
 _080A3790: .4byte 0x00000454
@@ -7798,7 +7798,7 @@ _080A6350:
 	.align 2, 0
 _080A6378: .4byte gUnknown_3001B7C
 _080A637C: .4byte gUnknown_81177CC
-_080A6380: .4byte gUnknown_83B0000
+_080A6380: .4byte gDungeonFileArchive
 _080A6384: .4byte gUnknown_203B4B4
 _080A6388: .4byte gUnknown_2039DD4
 _080A638C: .4byte gUnknown_2039DD0
@@ -7931,7 +7931,7 @@ _080A6474:
 	bx r0
 	.align 2, 0
 _080A649C: .4byte gUnknown_81177EC
-_080A64A0: .4byte gUnknown_8510000
+_080A64A0: .4byte gMonsterFileArchive
 	thumb_func_end sub_80A6460
 
 	thumb_func_start sub_80A64A4
@@ -7987,7 +7987,7 @@ _080A64C0:
 	.align 2, 0
 _080A6508: .4byte gUnknown_3001B7C
 _080A650C: .4byte gUnknown_81177EC
-_080A6510: .4byte gUnknown_8510000
+_080A6510: .4byte gMonsterFileArchive
 _080A6514:
 	movs r0, 0xFF
 	ands r0, r5
@@ -8045,7 +8045,7 @@ _080A6568:
 	bx r0
 	.align 2, 0
 _080A6584: .4byte gUnknown_81178F4
-_080A6588: .4byte gUnknown_9E60000
+_080A6588: .4byte gOrnamentFileArchive
 	thumb_func_end sub_80A64A4
 
 	thumb_func_start sub_80A658C
@@ -8932,7 +8932,7 @@ _080A6BA8:
 	b _080A6BFE
 	.align 2, 0
 _080A6BE0: .4byte gUnknown_81177EC
-_080A6BE4: .4byte gUnknown_8510000
+_080A6BE4: .4byte gMonsterFileArchive
 _080A6BE8:
 	movs r0, 0xFF
 	ands r0, r5
@@ -8994,7 +8994,7 @@ _080A6C42:
 	b _080A6C78
 	.align 2, 0
 _080A6C60: .4byte gUnknown_81178F4
-_080A6C64: .4byte gUnknown_9E60000
+_080A6C64: .4byte gOrnamentFileArchive
 _080A6C68: .4byte gUnknown_8117894
 _080A6C6C:
 	mov r1, r10
@@ -10088,7 +10088,7 @@ sub_80A7428:
 	b _080A74AC
 	.align 2, 0
 _080A7480: .4byte gUnknown_8117EDC
-_080A7484: .4byte gUnknown_8510000
+_080A7484: .4byte gMonsterFileArchive
 _080A7488: .4byte 0xffff0000
 _080A748C: .4byte 0x0000ffff
 _080A7490:
@@ -10301,7 +10301,7 @@ sub_80A75CC:
 _080A7618: .4byte gUnknown_8117AE4
 _080A761C: .4byte 0xffff0000
 _080A7620: .4byte 0x0000ffff
-_080A7624: .4byte gUnknown_9E60000
+_080A7624: .4byte gOrnamentFileArchive
 _080A7628:
 	str r5, [sp, 0x4]
 _080A762A:
@@ -10397,7 +10397,7 @@ sub_80A7688:
 _080A76D4: .4byte gUnknown_8117E8C
 _080A76D8: .4byte 0xffff0000
 _080A76DC: .4byte 0x0000ffff
-_080A76E0: .4byte gUnknown_9E60000
+_080A76E0: .4byte gOrnamentFileArchive
 _080A76E4:
 	str r5, [sp, 0x4]
 _080A76E6:

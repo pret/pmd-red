@@ -24,7 +24,7 @@ LoadWazaParameters:
 	bx r0
 	.align 2, 0
 _08092868: .4byte gUnknown_81098D0
-_0809286C: .4byte gUnknown_8300500
+_0809286C: .4byte gSystemFileArchive
 _08092870: .4byte gWazaParametersFile
 _08092874: .4byte gMovesData
 _08092878: .4byte gMovesRelated_2038C6C

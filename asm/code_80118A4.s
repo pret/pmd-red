@@ -32,7 +32,7 @@ PrintMessageWithFuncFileLine:
 	add sp, 0x8
 	bx r3
 	.align 2, 0
-_08011AFC: .4byte gUnknown_80D41EC
+_08011AFC: .4byte gFuncFileLineString2
 	thumb_func_end PrintMessageWithFuncFileLine
 
         .align 2,0 @ Don't pad with nop

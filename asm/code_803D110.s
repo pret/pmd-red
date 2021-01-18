@@ -713,7 +713,7 @@ _0803D654: .4byte gUnknown_203B418
 _0803D658: .4byte 0x00000644
 _0803D65C: .4byte 0x0001c570
 _0803D660: .4byte gUnknown_80F4D8C
-_0803D664: .4byte gUnknown_83B0000
+_0803D664: .4byte gDungeonFileArchive
 _0803D668: .4byte 0x0001c571
 _0803D66C: .4byte 0x0001cec8
 _0803D670: .4byte 0x0001c574
@@ -1392,7 +1392,7 @@ _0803DB54:
 	b _0803DBCA
 	.align 2, 0
 _0803DB84: .4byte gUnknown_80F60F8
-_0803DB88: .4byte gUnknown_83B0000
+_0803DB88: .4byte gDungeonFileArchive
 _0803DB8C: .4byte gDungeonNameBannerPalette
 _0803DB90: .4byte gUnknown_80F6100
 _0803DB94: .4byte gDungeonNameBannerFontFile
@@ -1982,7 +1982,7 @@ _0803DFBA:
 	bx r0
 	.align 2, 0
 _0803DFF8: .4byte gUnknown_80F61A8
-_0803DFFC: .4byte gUnknown_83B0000
+_0803DFFC: .4byte gDungeonFileArchive
 _0803E000: .4byte 0x06013400
 _0803E004: .4byte gUnknown_80F61B0
 _0803E008: .4byte 0x06014000
@@ -2118,7 +2118,7 @@ _0803E0E8:
 	bx r0
 	.align 2, 0
 _0803E118: .4byte gUnknown_80F61DC
-_0803E11C: .4byte gUnknown_83B0000
+_0803E11C: .4byte gDungeonFileArchive
 _0803E120: .4byte 0x0600c000
 _0803E124: .4byte gUnknown_202ECA4
 _0803E128: .4byte gUnknown_203B418

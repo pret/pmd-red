@@ -1,16 +1,24 @@
 	.section .rodata
 
         .string "pksdir0\0"
-        .byte 0x01, 0x00, 0x00, 0x00 @ # of pointers
-        .byte 0x18, 0x00, 0x30, 0x08 @ pointer to pointer table
+        .4byte 1
+        .4byte unk_data_table
         .string "pksdir0\0"
-        .byte 0x20, 0x00, 0x30, 0x08 @ pointer to monpal string
-        .byte 0x30, 0x00, 0x30, 0x08 @ Pointer to unknown palette
+
+        .global unk_data_table
+        unk_data_table:
+        .4byte monpal_string
+        .4byte unkPalette
+
+        .global monpal_string
+        monpal_string:
         .string "monpal\0"
         .align 2,0
         .string "pksdir0\0"
 
         @ Unknown Palette
+        .global unkPalette
+        unkPalette:
         .byte 0x00, 0x00, 0x00, 0x80
         .byte 0x17, 0x17, 0x0f, 0x80
         .byte 0x47, 0x37, 0x37, 0x80

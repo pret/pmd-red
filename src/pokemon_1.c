@@ -5,7 +5,7 @@
 extern int sprintf(char *, const char *, ...);
 
 extern struct gPokemon *gMonsterParameters;
-extern struct FileArchive gUnknown_8510000;
+extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 
 struct unkEvolve
@@ -51,7 +51,7 @@ struct OpenedFile *sub_808DD90(s16 r0)
         return NULL;
     }
     sprintf(buffer, gUnknown_8107684, r0); // "kao%03d"
-    return OpenFile(buffer, &gUnknown_8510000);
+    return OpenFile(buffer, &gMonsterFileArchive);
 }
 
 struct OpenedFile *sub_808DDD0(s16 r0)
@@ -64,7 +64,7 @@ struct OpenedFile *sub_808DDD0(s16 r0)
         return NULL;
     }
     sprintf(buffer, gUnknown_8107684, r0); // "kao%03d"
-    return OpenFileAndGetFileDataPtr(buffer, &gUnknown_8510000);
+    return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 
 bool8 sub_808DE10(s16 r0, s32 r1)

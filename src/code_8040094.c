@@ -20,7 +20,7 @@ extern struct unkStruct_203B418 *gUnknown_203B418;
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
 extern const char gUnknown_80F6604; // "zmappat"
-extern struct FileArchive gUnknown_83B0000;
+extern struct FileArchive gDungeonFileArchive;
 extern struct OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
@@ -65,5 +65,5 @@ void sub_8040124(void)
 
 void sub_8040130(void)
 {
-    gUnknown_202EE04 = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gUnknown_83B0000);
+    gUnknown_202EE04 = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
 }

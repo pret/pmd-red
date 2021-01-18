@@ -51,3 +51,39 @@ void UnusedHang(void)
 {
     Hang();
 }
+
+void Log(u8 *buffer, const char *text, ...)
+{
+    va_list vArgv;
+    va_start(vArgv, text);
+    va_end(vArgv);
+}
+
+// Unused
+void sub_8011BC8(u32 r0, u32 r1, u32 r2, ...)
+{
+    va_list vArgv;
+    va_start(vArgv, r2);
+    va_end(vArgv);
+}
+
+void nullsub_29()
+{
+}
+
+void nullsub_30()
+{
+}
+
+void nullsub_31()
+{
+}
+
+void nullsub_32()
+{
+}
+
+void FatalErrorHang()
+{
+    Hang();
+}

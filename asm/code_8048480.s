@@ -658,7 +658,7 @@ _08048A12:
 	ble _080489A2
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8062978
+	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
 	bl sub_80450E0
 	lsls r0, 24
@@ -818,7 +818,7 @@ _08048B4A:
 	ble _08048AB2
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8062978
+	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
 	bl sub_80450E0
 	lsls r0, 24
@@ -944,7 +944,7 @@ _08048C3E:
 	ble _08048BD6
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8062978
+	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
 	bl sub_80450E0
 	lsls r0, 24
@@ -2192,7 +2192,7 @@ _08049734: .4byte gUnknown_80F6A04
 _08049738: .4byte gUnknown_8108EC0
 _0804973C: .4byte gUnknown_203B418
 _08049740: .4byte 0x00003a0e
-_08049744: .4byte gUnknown_83B0000
+_08049744: .4byte gDungeonFileArchive
 _08049748: .4byte 0x06008000
 _0804974C: .4byte gUnknown_80F6A10
 _08049750: .4byte gUnknown_202EE88
@@ -2266,7 +2266,7 @@ _080497EC: .4byte 0x00012c24
 _080497F0: .4byte gUnknown_80F6A40
 _080497F4: .4byte gUnknown_203B418
 _080497F8: .4byte 0x00003a0e
-_080497FC: .4byte gUnknown_83B0000
+_080497FC: .4byte gDungeonFileArchive
 _08049800: .4byte gUnknown_202F18C
 _08049804: .4byte gUnknown_202EE8C
 _08049808: .4byte gUnknown_202F314
@@ -5592,7 +5592,7 @@ _0804B0E4:
 _0804B0E8: .4byte gUnknown_203B418
 _0804B0EC: .4byte 0x0001c574
 _0804B0F0: .4byte gUnknown_80F6DCC
-_0804B0F4: .4byte gUnknown_83B0000
+_0804B0F4: .4byte gDungeonFileArchive
 _0804B0F8: .4byte 0x00013568
 _0804B0FC: .4byte gUnknown_202F1AA
 _0804B100: .4byte gUnknown_202F1AB

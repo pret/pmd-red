@@ -7014,7 +7014,7 @@ _0800978C: .4byte gUnknown_203B090
 _08009790: .4byte 0x00005fff
 _08009794: .4byte gUnknown_80B88B0
 _08009798: .4byte 0x00a000a0
-_0800979C: .4byte gUnknown_8300500
+_0800979C: .4byte gSystemFileArchive
 _080097A0: .4byte 0x06004f00
 _080097A4: .4byte gUnknown_80B88B8
 _080097A8: .4byte 0x06017e00
@@ -7058,7 +7058,7 @@ _080097DA:
 	bx r0
 	.align 2, 0
 _080097F8: .4byte gUnknown_80B88CC
-_080097FC: .4byte gUnknown_8300500
+_080097FC: .4byte gSystemFileArchive
 _08009800: .4byte gUnknown_202D038
 	thumb_func_end sub_80097B0
 

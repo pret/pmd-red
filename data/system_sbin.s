@@ -1,7 +1,7 @@
 	.section .rodata
 
-	.global gUnknown_8300500
-gUnknown_8300500: @ 8300500
+	.global gSystemFileArchive
+gSystemFileArchive: @ 8300500
 @ replacing .incbin "baserom.gba", 0x00300500, 0x72e40
 .string "pksdir0\0"
 .byte 0xaf, 0x01, 0x00, 0x00 @ 431 (421 level maps)

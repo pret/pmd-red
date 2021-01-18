@@ -3001,7 +3001,10 @@ gUnknown_80FA5B4: @ 80FA5B4
 
 	.global gUnknown_80FA5F4
 gUnknown_80FA5F4: @ 80FA5F4
-	.incbin "baserom.gba", 0xFA5F4, 0x28
+        .byte 0xBC, 0xA5, 0x0F, 0x08
+
+        .string "There are no potential recruits.\0"
+        .align 2,0
 
 	.global gUnknown_80FA61C
 gUnknown_80FA61C: @ 80FA61C
@@ -4917,131 +4920,317 @@ gUnknown_80FE6F4: @ 80FE6F4
 
 	.global gUnknown_80FE708
 gUnknown_80FE708: @ 80FE708
-	.incbin "baserom.gba", 0xFE708, 0x4
+        .byte 0xF8, 0xE6, 0x0F, 0x08
 
 	.global gUnknown_80FE70C
 gUnknown_80FE70C: @ 80FE70C
-	.incbin "baserom.gba", 0xFE70C, 0x14
+        .byte 0x28, 0x81, 0x0F, 0x08
+
+        .string "Rescue Point\0"
+        .align 2,0
 
 	.global gUnknown_80FE720
 gUnknown_80FE720: @ 80FE720
-	.incbin "baserom.gba", 0xFE720, 0x4
+        .byte 0x10, 0xE7, 0x0F, 0x08
+
+@ In Dungeon Game Options Menu
 
 	.global gUnknown_80FE724
 gUnknown_80FE724: @ 80FE724
-	.incbin "baserom.gba", 0xFE724, 0xC
+        .byte 0x1C, 0x81, 0x0F, 0x08
 
-	.global gUnknown_80FE730
-gUnknown_80FE730: @ 80FE730
-	.incbin "baserom.gba", 0xFE730, 0xC
+        .global OptionsDungeonText
+        OptionsDungeonText:
+        .string "Dungeon\0"
+        .align 2,0
 
-	.global gUnknown_80FE73C
-gUnknown_80FE73C: @ 80FE73C
-	.incbin "baserom.gba", 0xFE73C, 0xC
+	.global gOptionsDungeonTextPtr
+gOptionsDungeonTextPtr: @ 80FE730
+        .4byte OptionsDungeonText
+
+        .global OptionsOthersText
+        OptionsOthersText:
+        .string "Others\0"
+        .align 2,0
+
+	.global gOptionsOthersTextPtr
+gOptionsOthersTextPtr: @ 80FE73C
+        .4byte OptionsOthersText
+
+        .global OptionsDefaultText
+        OptionsDefaultText:
+        .string "Default\0"
+        .align 2,0
 
 	.global gUnknown_80FE748
 gUnknown_80FE748: @ 80FE748
-	.incbin "baserom.gba", 0xFE748, 0x1C
+        .4byte OptionsDefaultText
+
+@ Dungeon Game Options Menu
+
+        .global OptionsSpeed
+        OptionsSpeed:
+        .string "Speed#=P.Slow#="
+        .byte 0x88
+        .string ".Fast\0"
+        .align 2,0
 
 	.global gUnknown_80FE764
 gUnknown_80FE764: @ 80FE764
-	.incbin "baserom.gba", 0xFE764, 0x24
+        .4byte OptionsSpeed
+
+        .global OptionsFarOffPals
+        OptionsFarOffPals:
+        .string "Far-off pals#="
+        .string "P.Self#="
+        .byte 0x88
+        .string ".Look\0"
+        .align 2,0
 
 	.global gUnknown_80FE788
 gUnknown_80FE788: @ 80FE788
-	.incbin "baserom.gba", 0xFE788, 0x20
+        .4byte OptionsFarOffPals
+
+        .global OptionsDamageTurn
+        OptionsDamageTurn:
+        .string "Damage turn#=P."
+        .string "No#="
+        .byte 0x88
+        .string ".Yes\0"
+        .align 2,0
 
 	.global gUnknown_80FE7A8
 gUnknown_80FE7A8: @ 80FE7A8
-	.incbin "baserom.gba", 0xFE7A8, 0x18
+        .4byte OptionsDamageTurn
+
+        .global OptionsGrid
+        OptionsGrid:
+        .string "Grids#=P."
+        .string "Off#="
+        .byte 0x88
+        .string ".On\0"
+        .align 2,0
 
 	.global gUnknown_80FE7C0
 gUnknown_80FE7C0: @ 80FE7C0
-	.incbin "baserom.gba", 0xFE7C0, 0x24
+        .4byte OptionsGrid
+
+        .global OptionsMap
+        OptionsMap:
+        .string "Map#=P."
+        .string "Off#=x."
+        .string "Clear#="
+        .byte 0xa0
+        .string ".Shade\0"
+        .align 2,0
 
 	.global gUnknown_80FE7E4
 gUnknown_80FE7E4: @ 80FE7E4
-	.incbin "baserom.gba", 0xFE7E4, 0x24
+        .4byte OptionsMap
 
-	.global gUnknown_80FE808
-gUnknown_80FE808: @ 80FE808
-	.incbin "baserom.gba", 0xFE808, 0xE8
+@ Field Others Menu
 
-	.global gUnknown_80FE8F0
-gUnknown_80FE8F0: @ 80FE8F0
-	.incbin "baserom.gba", 0xFE8F0, 0x4
+        .global OptionsWindowColor
+        OptionsWindowColor:
+        .string "Windows#=P."
+        .string "Blue#=x."
+        .string "Red#="
+        .byte 0xa0
+        .string ".Green\0"
+        .align 2,0
+
+	.global gOptionsWindowColorPtr
+gOptionsWindowColorPtr: @ 80FE808
+        .4byte OptionsWindowColor
+
+
+        .4byte TopScreenMapData
+        .4byte TopScreenMapData
+        .4byte TopScreenMapData
+
+        .4byte TopScreenMessageLog
+        .4byte TopScreenMessageLog
+        .4byte TopScreenMessageLog
+
+        .4byte TopScreenMapAndTeam
+
+        .global TopScreenMapAndTeam
+        TopScreenMapAndTeam:
+        .string "Top screen: Map and team\0"
+        .align 2,0
+
+        .global TopScreenMessageLog
+        TopScreenMessageLog:
+        .string "Top screen: Message log\0"
+        .align 2,0
+
+        .global TopScreenMapData
+        TopScreenMapData:
+        .string "Top screen: Team data\0"
+        .align 2,0
+
+        .4byte BottomScreenNoMap
+        .4byte BottomScreenClearMap
+        .4byte BottomScreenShadedMap
+        .4byte BottomScreenNoMap
+        .4byte BottomScreenClearMap
+        .4byte BottomScreenShadedMap
+        .4byte BottomScreenNoMap
+
+        .global BottomScreenShadedMap
+        BottomScreenShadedMap:
+        .string "Bottom screen: Shaded map\0"
+        .align 2,0
+
+        .global BottomScreenClearMap
+        BottomScreenClearMap:
+        .string "Bottom screen: Clear map\0"
+        .align 2,0
+
+        .global BottomScreenNoMap
+        BottomScreenNoMap:
+        .string "Bottom screen: No map\0"
+        .align 2,0
+
+        .global GameOptionsText
+        GameOptionsText:
+        .string "Game Options\0"
+        .align 2,0
+
+	.global gGameOptionsTextPtr
+gGameOptionsTextPtr: @ 80FE8F0
+        .4byte GameOptionsText
 
 	.global gUnknown_80FE8F4
 gUnknown_80FE8F4: @ 80FE8F4
-	.incbin "baserom.gba", 0xFE8F4, 0x4
+        .byte 0xa8, 0x7e, 0x0f, 0x08
 
 	.global gUnknown_80FE8F8
 gUnknown_80FE8F8: @ 80FE8F8
-	.incbin "baserom.gba", 0xFE8F8, 0x14
+        .byte 0x34, 0xe7, 0x0f, 0x08
 
-	.global gUnknown_80FE90C
-gUnknown_80FE90C: @ 80FE90C
-	.incbin "baserom.gba", 0xFE90C, 0x14
+        .global TeamToolboxAText
+        TeamToolboxAText:
+        .string "Team Toolbox A"
+        .align 2,0
 
-	.global gUnknown_80FE920
-gUnknown_80FE920: @ 80FE920
-	.incbin "baserom.gba", 0xFE920, 0xC
+	.global gTeamToolboxAPtr
+gTeamToolboxAPtr: @ 80FE90C
+        .4byte TeamToolboxAText
 
-	.global gUnknown_80FE92C
-gUnknown_80FE92C: @ 80FE92C
-	.incbin "baserom.gba", 0xFE92C, 0x14
+        .global TeamToolboxBText
+        TeamToolboxBText:
+        .string "Team Toolbox B"
+        .align 2,0
+
+	.global gTeamToolboxBPtr
+gTeamToolboxBPtr: @ 80FE920
+        .4byte TeamToolboxBText
+
+        .global FieldItemMenuGroundText
+        FieldItemMenuGroundText:
+        .string "Ground\0"
+        .align 2,0
+
+	.global gFieldItemMenuGroundTextPtr
+gFieldItemMenuGroundTextPtr: @ 80FE92C
+        .4byte FieldItemMenuGroundText
+
+        .string "$m0~27s item\0"
+        .align 2,0
 
 	.global gUnknown_80FE940
 gUnknown_80FE940: @ 80FE940
-	.incbin "baserom.gba", 0xFE940, 0xC
+        .byte 0x30, 0xe9, 0x0f, 0x08
 
-	.global gUnknown_80FE94C
-gUnknown_80FE94C: @ 80FE94C
-	.incbin "baserom.gba", 0xFE94C, 0x4
+        .global WhichText
+        WhichText:
+        .string "Which?\0"
+        .align 2,0
 
-	.global gUnknown_80FE950
-gUnknown_80FE950: @ 80FE950
-	.incbin "baserom.gba", 0xFE950, 0x4
+	.global gWhichTextPtr1
+gWhichTextPtr1: @ 80FE94C
+        .4byte WhichText
+
+	.global gWhichTextPtr2
+gWhichTextPtr2: @ 80FE950
+        .4byte WhichText
 
 	.global gUnknown_80FE954
 gUnknown_80FE954: @ 80FE954
-	.incbin "baserom.gba", 0xFE954, 0x8
+        .byte 0xfc, 0x7e, 0x0f, 0x08
+
+        .string "$i0\0"
+        .align 2,0
 
 	.global gUnknown_80FE95C
 gUnknown_80FE95C: @ 80FE95C
-	.incbin "baserom.gba", 0xFE95C, 0x4
+        .byte 0x58, 0xe9, 0x0f, 0x08
 
 	.global gUnknown_80FE960
 gUnknown_80FE960: @ 80FE960
-	.incbin "baserom.gba", 0xFE960, 0x4
+        .byte 0x58, 0xe9, 0x0f, 0x08
 
 	.global gUnknown_80FE964
 gUnknown_80FE964: @ 80FE964
-	.incbin "baserom.gba", 0xFE964, 0x14
+        .byte 0x58, 0xe9, 0x0f, 0x08
+
+        .string "$m0~27s moves\0"
+        .align 2,0
 
 	.global gUnknown_80FE978
 gUnknown_80FE978: @ 80FE978
-	.incbin "baserom.gba", 0xFE978, 0x10
+        .byte 0x68, 0xe9, 0x0f, 0x08
 
-	.global gUnknown_80FE988
-gUnknown_80FE988: @ 80FE988
-	.incbin "baserom.gba", 0xFE988, 0x10
+        .global FieldMenuMovesEntry
+        FieldMenuMovesEntry:
+        .byte 0x23, 0x5f, 0x01, 0x2e
+        .string "Moves\0"
+        .align 2,0
 
-	.global gUnknown_80FE998
-gUnknown_80FE998: @ 80FE998
-	.incbin "baserom.gba", 0xFE998, 0x10
+	.global gFieldMenuMovesPtr
+gFieldMenuMovesPtr: @ 80FE988
+        .4byte FieldMenuMovesEntry
 
-	.global gUnknown_80FE9A8
-gUnknown_80FE9A8: @ 80FE9A8
-	.incbin "baserom.gba", 0xFE9A8, 0x10
+        .global FieldMenuItemsEntry
+        FieldMenuItemsEntry:
+        .byte 0x23, 0x5f, 0x02, 0x2e
+        .string "Items\0"
+        .align 2,0
 
-	.global gUnknown_80FE9B8
-gUnknown_80FE9B8: @ 80FE9B8
-	.incbin "baserom.gba", 0xFE9B8, 0x10
+	.global gFieldMenuItemsPtr
+gFieldMenuItemsPtr: @ 80FE998
+        .4byte FieldMenuItemsEntry
 
-	.global gUnknown_80FE9C8
-gUnknown_80FE9C8: @ 80FE9C8
-	.incbin "baserom.gba", 0xFE9C8, 0x4
+        .global FieldMenuTeamEntry
+        FieldMenuTeamEntry:
+        .byte 0x23, 0x5f, 0x03, 0x2e
+        .string "Team\0"
+        .align 2,0
+
+	.global gFieldMenuTeamPtr
+gFieldMenuTeamPtr: @ 80FE9A8
+        .4byte FieldMenuTeamEntry
+
+        .global FieldMenuOthersEntry
+        FieldMenuOthersEntry:
+        .byte 0x23, 0x5f, 0x04, 0x2e
+        .string "Others\0"
+        .align 2,0
+
+	.global gFieldMenuOthersPtr
+gFieldMenuOthersPtr: @ 80FE9B8
+        .4byte FieldMenuOthersEntry
+
+        .global FieldMenuGroundEntry
+        FieldMenuGroundEntry:
+        .byte 0x23, 0x5f, 0x05, 0x2e
+        .string "Ground\0"
+        .align 2,0
+
+	.global gFieldMenuGroundPtr
+gFieldMenuGroundPtr: @ 80FE9C8
+        .4byte FieldMenuGroundEntry
 
 	.global gUnknown_80FE9CC
 gUnknown_80FE9CC: @ 80FE9CC
@@ -5073,11 +5262,17 @@ gUnknown_80FEA50: @ 80FEA50
 
 	.global gUnknown_80FEA68
 gUnknown_80FEA68: @ 80FEA68
-	.incbin "baserom.gba", 0xFEA68, 0x18
+        .byte 0x54, 0xEA, 0x0F, 0x08
+
+        .string "Recruited Pokémon\0"
+        .align 2,0
 
 	.global gUnknown_80FEA80
 gUnknown_80FEA80: @ 80FEA80
-	.incbin "baserom.gba", 0xFEA80, 0xC
+        .byte 0x6C, 0xEA, 0x0F, 0x08
+
+        .string "None\0"
+        .align 2,0
 
 	.global gUnknown_80FEA8C
 gUnknown_80FEA8C: @ 80FEA8C
@@ -5345,7 +5540,7 @@ gUnknown_80FF76C: @ 80FF76C
 
 	.global gUnknown_80FF770
 gUnknown_80FF770: @ 80FF770
-	.incbin "baserom.gba", 0xFF770, 0x4
+        .byte 0x48, 0xEA, 0x0F, 0x08
 
 	.global gUnknown_80FF774
 gUnknown_80FF774: @ 80FF774
@@ -7155,42 +7350,42 @@ gUnknown_8106B8C: @ 8106B8C
 
 	.global gUnknown_8106BB0
 gUnknown_8106BB0: @ 8106BB0
-	.incbin "baserom.gba", 0x106BB0, 0x4
+        .string "$t\0"
+        .align 2,0
 
 @ Red Heart Symbols
 	.global gUnknown_8106BB4
 gUnknown_8106BB4: @ 8106BB4
-	.incbin "baserom.gba", 0x106BB4, 0x4
+        .byte 0x87, 0x46, 0x00, 0x00
 
 	.global gUnknown_8106BB8
 gUnknown_8106BB8: @ 8106BB8
-	.incbin "baserom.gba", 0x106BB8, 0x4
+        .byte 0x87, 0x47, 0x00, 0x00
 
 	.global gUnknown_8106BBC
 gUnknown_8106BBC: @ 8106BBC
-	.incbin "baserom.gba", 0x106BBC, 0x4
+        .byte 0x87, 0x48, 0x00, 0x00
 
 	.global gUnknown_8106BC0
 gUnknown_8106BC0: @ 8106BC0
-	.incbin "baserom.gba", 0x106BC0, 0x4
+        .byte 0x87, 0x49, 0x00, 0x00
 
 @ Yellow Heart Symbols
 	.global gUnknown_8106BC4
 gUnknown_8106BC4: @ 8106BC4
-	.incbin "baserom.gba", 0x106BC4, 0x4
+        .byte 0x87, 0x4A, 0x00, 0x00
 
 	.global gUnknown_8106BC8
 gUnknown_8106BC8: @ 8106BC8
-	.incbin "baserom.gba", 0x106BC8, 0x4
+        .byte 0x87, 0x4B, 0x00, 0x00
 
 	.global gUnknown_8106BCC
 gUnknown_8106BCC: @ 8106BCC
-	.incbin "baserom.gba", 0x106BCC, 0x4
+        .byte 0x87, 0x4C, 0x00, 0x00
 
 	.global gUnknown_8106BD0
 gUnknown_8106BD0: @ 8106BD0
-	.incbin "baserom.gba", 0x106BD0, 0x4
-
+        .byte 0x87, 0x4D, 0x00, 0x00
 
 	.global gUnknown_8106BD4
 gUnknown_8106BD4: @ 8106BD4
@@ -7254,7 +7449,11 @@ gUnknown_8106CE8: @ 8106CE8
 
 	.global gUnknown_8106CF4
 gUnknown_8106CF4: @ 8106CF4
-	.incbin "baserom.gba", 0x106CF4, 0x14
+        .byte 0x13, 0x00, 0x00, 0x00
+        .byte 0x11, 0x00, 0x00, 0x00
+        .byte 0x19, 0x00, 0x00, 0x00
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_8106D08
 gUnknown_8106D08: @ 8106D08

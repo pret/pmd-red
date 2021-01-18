@@ -7524,7 +7524,7 @@ _08016594:
 	ldr r2, [r2]
 	b _08016844
 	.align 2, 0
-_080165B0: .4byte gUnknown_80D49E0
+_080165B0: .4byte gFelicityDialogue
 _080165B4:
 	bl sub_8016900
 	ldr r0, _080165FC
@@ -7563,7 +7563,7 @@ _080165B4:
 	.align 2, 0
 _080165FC: .4byte gUnknown_203B204
 _08016600: .4byte gUnknown_203B460
-_08016604: .4byte gUnknown_80D49E0
+_08016604: .4byte gFelicityDialogue
 _08016608:
 	ldr r0, _08016648
 	str r4, [r0]
@@ -7598,7 +7598,7 @@ _08016632:
 	b _080168EC
 	.align 2, 0
 _08016648: .4byte gUnknown_202DE30
-_0801664C: .4byte gUnknown_80D49E0
+_0801664C: .4byte gFelicityDialogue
 _08016650:
 	ldr r3, [r2]
 	movs r0, 0x1
@@ -7611,7 +7611,7 @@ _08016650:
 	adds r2, 0x38
 	b _0801683C
 	.align 2, 0
-_08016664: .4byte gUnknown_80D49E0
+_08016664: .4byte gFelicityDialogue
 _08016668:
 	ldr r3, [r2]
 	movs r0, 0x6
@@ -7638,7 +7638,7 @@ _08016668:
 	b _08016844
 	.align 2, 0
 _08016698: .4byte gUnknown_203B460
-_0801669C: .4byte gUnknown_80D49E0
+_0801669C: .4byte gFelicityDialogue
 _080166A0:
 	ldr r0, _080166BC
 	str r1, [r0]
@@ -7656,7 +7656,7 @@ _080166A0:
 	b _08016844
 	.align 2, 0
 _080166BC: .4byte gUnknown_202DE30
-_080166C0: .4byte gUnknown_80D49E0
+_080166C0: .4byte gFelicityDialogue
 _080166C4:
 	ldr r3, [r2]
 	movs r0, 0x1
@@ -7669,7 +7669,7 @@ _080166C4:
 	adds r2, 0xC
 	b _0801683C
 	.align 2, 0
-_080166D8: .4byte gUnknown_80D49E0
+_080166D8: .4byte gFelicityDialogue
 _080166DC:
 	ldr r0, _08016700
 	ldr r1, [r0]
@@ -7691,7 +7691,7 @@ _080166DC:
 	b _0801683C
 	.align 2, 0
 _08016700: .4byte gUnknown_203B460
-_08016704: .4byte gUnknown_80D49E0
+_08016704: .4byte gFelicityDialogue
 _08016708:
 	movs r5, 0x99
 	lsls r5, 2
@@ -7712,7 +7712,7 @@ _08016708:
 	b _0801683C
 	.align 2, 0
 _0801672C: .4byte 0x0098967e
-_08016730: .4byte gUnknown_80D49E0
+_08016730: .4byte gFelicityDialogue
 _08016734:
 	ldr r3, [r2]
 	movs r0, 0x8
@@ -7725,7 +7725,7 @@ _08016734:
 	adds r2, 0x18
 	b _0801683C
 	.align 2, 0
-_08016748: .4byte gUnknown_80D49E0
+_08016748: .4byte gFelicityDialogue
 _0801674C:
 	ldr r4, [r2]
 	ldr r0, _080167A0
@@ -7788,7 +7788,7 @@ _080167A8:
 	b _0801683C
 	.align 2, 0
 _080167C4: .4byte gUnknown_202DE30
-_080167C8: .4byte gUnknown_80D49E0
+_080167C8: .4byte gFelicityDialogue
 _080167CC:
 	ldr r0, _080167F4
 	ldr r3, [r0]
@@ -7812,7 +7812,7 @@ _080167CC:
 	.align 2, 0
 _080167F4: .4byte gUnknown_203B460
 _080167F8: .4byte 0x0001869e
-_080167FC: .4byte gUnknown_80D49E0
+_080167FC: .4byte gFelicityDialogue
 _08016800:
 	movs r5, 0x99
 	lsls r5, 2
@@ -7831,7 +7831,7 @@ _08016800:
 	adds r2, 0x2C
 	b _0801683C
 	.align 2, 0
-_08016820: .4byte gUnknown_80D49E0
+_08016820: .4byte gFelicityDialogue
 _08016824:
 	ldr r3, [r2]
 	movs r0, 0xB
@@ -7857,7 +7857,7 @@ _08016844:
 	b _080168EC
 	.align 2, 0
 _08016850: .4byte gUnknown_202DE30
-_08016854: .4byte gUnknown_80D49E0
+_08016854: .4byte gFelicityDialogue
 _08016858: .4byte 0x0000010d
 _0801685C:
 	ldr r4, [r2]
@@ -7905,7 +7905,7 @@ _080168AE:
 	bl sub_8016B48
 _080168B2:
 	movs r0, 0x3
-	bl sub_8016BB8
+	bl CreateFelicityBankShopMenu
 	b _080168EC
 	.align 2, 0
 _080168BC: .4byte gUnknown_203B460
@@ -7937,7 +7937,7 @@ _080168EC:
 	bx r0
 	.align 2, 0
 _080168F4: .4byte gUnknown_202DE30
-_080168F8: .4byte gUnknown_80D49E0
+_080168F8: .4byte gFelicityDialogue
 _080168FC: .4byte 0x0000010d
 	thumb_func_end sub_801653C
 
@@ -8271,7 +8271,7 @@ sub_8016B48:
 	b _08016B96
 	.align 2, 0
 _08016B7C: .4byte gUnknown_203B204
-_08016B80: .4byte gUnknown_80D49CC
+_08016B80: .4byte gFelicityDeposit
 _08016B84:
 	ldr r0, _08016BB0
 	ldr r2, [r0]
@@ -8294,12 +8294,12 @@ _08016B96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016BB0: .4byte gUnknown_80D49DC
+_08016BB0: .4byte gFelicityWithdraw
 _08016BB4: .4byte gUnknown_203B204
 	thumb_func_end sub_8016B48
 
-	thumb_func_start sub_8016BB8
-sub_8016BB8:
+	thumb_func_start CreateFelicityBankShopMenu
+CreateFelicityBankShopMenu:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -8356,10 +8356,10 @@ sub_8016BB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016C34: .4byte gUnknown_80DB724
+_08016C34: .4byte gFelicityMoney
 _08016C38: .4byte gUnknown_203B460
-_08016C3C: .4byte gUnknown_80DB72C
-	thumb_func_end sub_8016BB8
+_08016C3C: .4byte gFelicitySavings
+	thumb_func_end CreateFelicityBankShopMenu
 
 	thumb_func_start sub_8016C40
 sub_8016C40:
@@ -12672,7 +12672,7 @@ _08018F30:
 	adds r0, r2
 	b _08018F76
 	.align 2, 0
-_08018F50: .4byte gUnknown_80D5EC8
+_08018F50: .4byte gKecleonShopDialogue
 _08018F54: .4byte gUnknown_203B210
 _08018F58:
 	bl sub_8019DAC
@@ -12709,7 +12709,7 @@ _08018F76:
 	bl sub_8014248
 	b _080194E8
 	.align 2, 0
-_08018FA0: .4byte gUnknown_80D5EC8
+_08018FA0: .4byte gKecleonShopDialogue
 _08018FA4: .4byte gUnknown_203B210
 _08018FA8:
 	ldr r1, [r4]
@@ -12729,7 +12729,7 @@ _08018FA8:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08018FCC: .4byte gUnknown_80D5EC8
+_08018FCC: .4byte gKecleonShopDialogue
 _08018FD0:
 	ldr r1, [r4]
 	movs r0, 0x4
@@ -12749,7 +12749,7 @@ _08018FD0:
 	ldr r3, _08018FF8
 	b _08019456
 	.align 2, 0
-_08018FF4: .4byte gUnknown_80D5EC8
+_08018FF4: .4byte gKecleonShopDialogue
 _08018FF8: .4byte 0x0000030d
 _08018FFC:
 	ldr r1, [r4]
@@ -12769,7 +12769,7 @@ _08018FFC:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019020: .4byte gUnknown_80D5EC8
+_08019020: .4byte gKecleonShopDialogue
 _08019024:
 	ldr r1, [r4]
 	movs r0, 0x10
@@ -12788,7 +12788,7 @@ _08019024:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019048: .4byte gUnknown_80D5EC8
+_08019048: .4byte gKecleonShopDialogue
 _0801904C:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -12806,7 +12806,7 @@ _0801904C:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_0801906C: .4byte gUnknown_80D5EC8
+_0801906C: .4byte gKecleonShopDialogue
 _08019070:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -12824,7 +12824,7 @@ _08019070:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019090: .4byte gUnknown_80D5EC8
+_08019090: .4byte gKecleonShopDialogue
 _08019094:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -12842,7 +12842,7 @@ _08019094:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_080190B4: .4byte gUnknown_80D5EC8
+_080190B4: .4byte gKecleonShopDialogue
 _080190B8:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -12860,7 +12860,7 @@ _080190B8:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_080190D8: .4byte gUnknown_80D5EC8
+_080190D8: .4byte gKecleonShopDialogue
 _080190DC:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -12879,7 +12879,7 @@ _080190DC:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019100: .4byte gUnknown_80D5EC8
+_08019100: .4byte gKecleonShopDialogue
 _08019104:
 	ldr r1, [r4]
 	movs r0, 0x10
@@ -12898,7 +12898,7 @@ _08019104:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019128: .4byte gUnknown_80D5EC8
+_08019128: .4byte gKecleonShopDialogue
 _0801912C:
 	ldr r0, _0801915C
 	ldr r1, [r4]
@@ -12923,7 +12923,7 @@ _0801912C:
 	b _08019454
 	.align 2, 0
 _0801915C: .4byte gUnknown_202DE58
-_08019160: .4byte gUnknown_80D5EC8
+_08019160: .4byte gKecleonShopDialogue
 _08019164:
 	ldr r1, [r4]
 	movs r0, 0x18
@@ -12942,7 +12942,7 @@ _08019164:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019188: .4byte gUnknown_80D5EC8
+_08019188: .4byte gKecleonShopDialogue
 _0801918C:
 	ldr r1, [r4]
 	movs r0, 0x12
@@ -12961,7 +12961,7 @@ _0801918C:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_080191B0: .4byte gUnknown_80D5EC8
+_080191B0: .4byte gKecleonShopDialogue
 _080191B4:
 	ldr r1, [r4]
 	movs r0, 0x13
@@ -12980,7 +12980,7 @@ _080191B4:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_080191D8: .4byte gUnknown_80D5EC8
+_080191D8: .4byte gKecleonShopDialogue
 _080191DC:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x4]
@@ -13063,7 +13063,7 @@ _08019254:
 _08019284: .4byte gUnknown_202DE58
 _08019288: .4byte gUnknown_203B210
 _0801928C: .4byte gUnknown_202DE30
-_08019290: .4byte gUnknown_80D5EC8
+_08019290: .4byte gKecleonShopDialogue
 _08019294:
 	bl sub_8019D8C
 	cmp r0, 0
@@ -13126,7 +13126,7 @@ _080192F2:
 	b _0801944C
 	.align 2, 0
 _0801930C: .4byte gUnknown_203B210
-_08019310: .4byte gUnknown_80D5EC8
+_08019310: .4byte gKecleonShopDialogue
 _08019314:
 	ldr r1, [r4]
 	movs r0, 0x1A
@@ -13145,7 +13145,7 @@ _08019314:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019338: .4byte gUnknown_80D5EC8
+_08019338: .4byte gKecleonShopDialogue
 _0801933C:
 	ldr r1, [r4]
 	movs r0, 0x1B
@@ -13164,7 +13164,7 @@ _0801933C:
 	ldr r2, [r2]
 	b _08019454
 	.align 2, 0
-_08019360: .4byte gUnknown_80D5EC8
+_08019360: .4byte gKecleonShopDialogue
 _08019364:
 	movs r0, 0x4
 	movs r1, 0x3
@@ -13227,7 +13227,7 @@ _080193B4:
 _080193E4: .4byte gUnknown_202DE58
 _080193E8: .4byte gUnknown_203B210
 _080193EC: .4byte gUnknown_202DE30
-_080193F0: .4byte gUnknown_80D5EC8
+_080193F0: .4byte gKecleonShopDialogue
 _080193F4:
 	ldr r0, [r4]
 	adds r0, 0x1C
@@ -13284,7 +13284,7 @@ _08019456:
 	b _080194E8
 	.align 2, 0
 _08019460: .4byte gUnknown_203B210
-_08019464: .4byte gUnknown_80D5EC8
+_08019464: .4byte gKecleonShopDialogue
 _08019468: .4byte 0x0000010d
 _0801946C:
 	bl sub_8019700
@@ -13323,7 +13323,7 @@ _0801948C:
 	.align 2, 0
 _080194B4: .4byte gUnknown_202DE30
 _080194B8: .4byte gUnknown_203B210
-_080194BC: .4byte gUnknown_80D5EC8
+_080194BC: .4byte gKecleonShopDialogue
 _080194C0:
 	ldr r1, [r4]
 	movs r0, 0x1
@@ -13349,7 +13349,7 @@ _080194E8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080194F0: .4byte gUnknown_80D5EC8
+_080194F0: .4byte gKecleonShopDialogue
 _080194F4: .4byte 0x0000010d
 	thumb_func_end sub_8018E88
 
@@ -16008,7 +16008,7 @@ sub_801A9E0:
 	b _0801AA48
 	.align 2, 0
 _0801AA2C: .4byte gUnknown_203B224
-_0801AA30: .4byte gUnknown_80DB974
+_0801AA30: .4byte gTeamToolboxA
 _0801AA34:
 	ldr r2, _0801AA58
 	adds r0, r4, 0
@@ -16028,7 +16028,7 @@ _0801AA48:
 	ldrsh r0, [r0, r4]
 	b _0801AD0A
 	.align 2, 0
-_0801AA58: .4byte gUnknown_80DB984
+_0801AA58: .4byte gTeamToolboxB
 _0801AA5C: .4byte gUnknown_203B224
 _0801AA60:
 	ldr r2, [r1]
@@ -18188,8 +18188,8 @@ sub_801BB20:
 	bx lr
 	.align 2, 0
 _0801BB50: .4byte gUnknown_203B234
-_0801BB54: .4byte gUnknown_80DBD58
-_0801BB58: .4byte gUnknown_80DBD6C
+_0801BB54: .4byte gKangaskhanTrashToolboxItem
+_0801BB58: .4byte gKangaskhanTrashReceivedItem
 	thumb_func_end sub_801BB20
 
 	thumb_func_start sub_801BB5C
@@ -18269,8 +18269,8 @@ _0801BBD2:
 	b _0801BC0E
 	.align 2, 0
 _0801BBEC: .4byte gUnknown_203B234
-_0801BBF0: .4byte gUnknown_80DBD80
-_0801BBF4: .4byte gUnknown_80DBD88
+_0801BBF0: .4byte gKangaskhanStorage
+_0801BBF4: .4byte gKangaskhanTrash
 _0801BBF8: .4byte gUnknown_80D4970
 _0801BBFC:
 	adds r3, 0x1
@@ -21504,10 +21504,10 @@ _0801D534:
 	b _0801D5E6
 	.align 2, 0
 _0801D554: .4byte gUnknown_203B250
-_0801D558: .4byte gUnknown_80DBF10
-_0801D55C: .4byte gUnknown_80DBF18
-_0801D560: .4byte gUnknown_80DBF20
-_0801D564: .4byte gUnknown_80DBF2C
+_0801D558: .4byte gMenuItems
+_0801D55C: .4byte gMenuTeam
+_0801D560: .4byte gMenuJobList
+_0801D564: .4byte gMenuOthers
 _0801D568:
 	ldr r0, _0801D63C
 	ldr r1, _0801D640
@@ -21621,7 +21621,7 @@ _0801D622:
 _0801D63C: .4byte gUnknown_202DF98
 _0801D640: .4byte gUnknown_80DBF34
 _0801D644: .4byte gUnknown_80D49A8
-_0801D648: .4byte gUnknown_80DBF10
+_0801D648: .4byte gMenuItems
 _0801D64C: .4byte gUnknown_203B250
 _0801D650: .4byte gUnknown_80D4970
 _0801D654: .4byte gUnknown_80D49B4

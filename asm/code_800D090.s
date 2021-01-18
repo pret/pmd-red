@@ -5,19 +5,6 @@
 
 	.text
 
-
-	thumb_func_start sub_800D158
-sub_800D158:
-	push {r1-r3}
-	push {lr}
-	ldr r1, [sp, 0x4]
-	add r2, sp, 0x8
-	bl vsprintf
-	pop {r3}
-	add sp, 0xC
-	bx r3
-	thumb_func_end sub_800D158
-
 	thumb_func_start sub_800D16C
 sub_800D16C:
 	push {r0-r3}
@@ -1381,8 +1368,8 @@ _0800DAF0:
 _0800DB38: .4byte gUnknown_203B0CC
 _0800DB3C: .4byte 0x00001a18
 _0800DB40: .4byte 0x00001a04
-_0800DB44: .4byte gUnknown_80B9C6C
-_0800DB48: .4byte gUnknown_9740000
+_0800DB44: .4byte gefob001_string
+_0800DB48: .4byte gEffectFileArchive
 _0800DB4C:
 	ldr r0, _0800DB74
 	ldr r1, _0800DB78
@@ -1402,8 +1389,8 @@ _0800DB6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DB74: .4byte gUnknown_80B9C74
-_0800DB78: .4byte gUnknown_9740000
+_0800DB74: .4byte gefob000_string
+_0800DB78: .4byte gEffectFileArchive
 	thumb_func_end sub_800DAC0
 
 	thumb_func_start sub_800DB7C
@@ -4534,7 +4521,7 @@ _0800F1EC:
 	bx r1
 	.align 2, 0
 _0800F1FC: .4byte gUnknown_80CE788
-_0800F200: .4byte gUnknown_9740000
+_0800F200: .4byte gEffectFileArchive
 	thumb_func_end sub_800F1C0
 
 	thumb_func_start sub_800F204
@@ -7205,9 +7192,9 @@ _080106A2:
 	bx r0
 	.align 2, 0
 _080106E4: .4byte gUnknown_80D4014
-_080106E8: .4byte gUnknown_8380000
+_080106E8: .4byte gTitleMenuFileArchive
 _080106EC: .4byte gUnknown_80D405C
-_080106F0: .4byte gUnknown_8510000
+_080106F0: .4byte gMonsterFileArchive
 _080106F4: .4byte gUnknown_203B0E8
 _080106F8: .4byte 0x0000110c
 _080106FC: .4byte gUnknown_80D4064
@@ -8155,9 +8142,9 @@ _08010E84:
 	bx r0
 	.align 2, 0
 _08010EBC: .4byte gUnknown_80D408C
-_08010EC0: .4byte gUnknown_8380000
+_08010EC0: .4byte gTitleMenuFileArchive
 _08010EC4: .4byte gUnknown_80D40E4
-_08010EC8: .4byte gUnknown_8510000
+_08010EC8: .4byte gMonsterFileArchive
 _08010ECC: .4byte gUnknown_203B0E4
 _08010ED0: .4byte gUnknown_80D40EC
 _08010ED4: .4byte gUnknown_80D40F4
@@ -9124,81 +9111,5 @@ _08011690: .4byte gUnknown_203B0E4
 _08011694: .4byte 0x00004a2c
 _08011698: .4byte gUnknown_80D4124
 	thumb_func_end sub_8011494
-
-	thumb_func_start sub_801169C
-sub_801169C:
-	push {r4-r6,lr}
-	sub sp, 0x8
-	ldr r5, _08011744
-	ldr r1, [r5]
-	ldr r4, _08011748
-	adds r0, r1, r4
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	ldr r6, _0801174C
-	adds r1, r6
-	movs r3, 0
-	ldrsh r1, [r1, r3]
-	bl SetBG2RegOffsets
-	ldr r1, [r5]
-	adds r4, r1, r4
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	adds r1, r6
-	movs r3, 0
-	ldrsh r1, [r1, r3]
-	bl SetBG3RegOffsets
-	bl sub_8010F28
-	bl sub_80111C4
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, [r5]
-	ldr r3, _08011750
-	adds r1, r2, r3
-	ldr r3, _08011754
-	adds r2, r3
-	ldr r2, [r2]
-	str r2, [sp]
-	movs r2, 0
-	str r2, [sp, 0x4]
-	movs r2, 0xB0
-	movs r3, 0x10
-	bl sub_8004AF0
-	movs r0, 0
-	movs r1, 0
-	bl sub_8005838
-	ldr r0, _08011758
-	ldr r0, [r0]
-	ldrb r0, [r0, 0xA]
-	bl nullsub_8
-	bl sub_8005180
-	bl sub_80060EC
-	ldr r0, _0801175C
-	ldr r0, [r0]
-	bl IncrementPlayTime
-	bl sub_800CB20
-	bl LoadBufferedInputs
-	bl CopySpritesToOam
-	bl sub_8005304
-	bl TransferBGPaletteBuffer
-	bl xxx_call_update_bg_vram
-	bl sub_8009908
-	bl xxx_call_update_bg_sound_input
-	bl sub_8011860
-	movs r0, 0
-	bl ResetSprites
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011744: .4byte gUnknown_203B0E4
-_08011748: .4byte 0x00004dd4
-_0801174C: .4byte 0x00004dd6
-_08011750: .4byte 0x00004c4c
-_08011754: .4byte 0x00004dcc
-_08011758: .4byte gUnknown_203B46C
-_0801175C: .4byte gUnknown_203B47C
-	thumb_func_end sub_801169C
 
 	.align 2, 0 @ Don't pad with nop.

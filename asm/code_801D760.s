@@ -153,7 +153,7 @@ _0801D994:
 	bx r0
 	.align 2, 0
 _0801D9DC: .4byte gUnknown_80DBF60
-_0801D9E0: .4byte gUnknown_8380000
+_0801D9E0: .4byte gTitleMenuFileArchive
 	thumb_func_end sub_801D970
 
 	thumb_func_start sub_801D9E4
@@ -645,7 +645,7 @@ sub_801DD84:
 _0801DDAC: .4byte gUnknown_203B25C
 _0801DDB0: .4byte gUnknown_80DBFB0
 _0801DDB4:
-	bl sub_801DFA4
+	bl CreateOthersMenu
 	movs r3, 0
 	ldr r1, [r4]
 	adds r0, r1, 0
@@ -712,7 +712,7 @@ _0801DE2C: .4byte gUnknown_203B25C
 _0801DE30: .4byte gUnknown_80DBFCC
 _0801DE34: .4byte gUnknown_80DBFB0
 _0801DE38:
-	bl sub_801DFA4
+	bl CreateOthersMenu
 	mov r8, r4
 	ldr r6, _0801DE88
 	mov r12, r6
@@ -832,7 +832,7 @@ _0801DF14:
 	bl sub_8012D60
 	b _0801DF94
 	.align 2, 0
-_0801DF34: .4byte gUnknown_80DBFE4
+_0801DF34: .4byte gOthers_MenuOption
 _0801DF38:
 	movs r0, 0
 	bl sub_801E3F0
@@ -888,8 +888,8 @@ _0801DF9C: .4byte gUnknown_80DBFEC
 _0801DFA0: .4byte gUnknown_203B25C
 	thumb_func_end sub_801DED0
 
-	thumb_func_start sub_801DFA4
-sub_801DFA4:
+	thumb_func_start CreateOthersMenu
+CreateOthersMenu:
 	push {r4,lr}
 	ldr r4, _0801DFD8
 	ldr r0, [r4]
@@ -916,9 +916,9 @@ sub_801DFA4:
 	bx r0
 	.align 2, 0
 _0801DFD8: .4byte gUnknown_203B25C
-_0801DFDC: .4byte gUnknown_80DC000
-_0801DFE0: .4byte gUnknown_80DC010
-	thumb_func_end sub_801DFA4
+_0801DFDC: .4byte gOthers_GameOptions
+_0801DFE0: .4byte gOthers_Hints
+	thumb_func_end CreateOthersMenu
 
 	thumb_func_start sub_801DFE4
 sub_801DFE4:
@@ -1189,7 +1189,7 @@ sub_801E198:
 	movs r2, 0x1
 	bl sub_8013818
 	bl nullsub_38
-	bl sub_801E310
+	bl CreateOptionsMenu
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -1281,7 +1281,7 @@ _0801E294:
 	bne _0801E2BC
 _0801E2AA:
 	bl nullsub_38
-	bl sub_801E310
+	bl CreateOptionsMenu
 	movs r0, 0x1
 	b _0801E2BE
 	.align 2, 0
@@ -1336,8 +1336,8 @@ nullsub_38:
 	bx lr
 	thumb_func_end nullsub_38
 
-	thumb_func_start sub_801E310
-sub_801E310:
+	thumb_func_start CreateOptionsMenu
+CreateOptionsMenu:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _0801E368
@@ -1379,7 +1379,7 @@ sub_801E310:
 	b _0801E3D6
 	.align 2, 0
 _0801E368: .4byte gUnknown_203B260
-_0801E36C: .4byte gUnknown_80DC054
+_0801E36C: .4byte gWindowBGTitle
 _0801E370: .4byte gUnknown_80DC064
 _0801E374:
 	cmp r0, 0x2
@@ -1389,7 +1389,7 @@ _0801E37A:
 	ldr r0, _0801E380
 	b _0801E386
 	.align 2, 0
-_0801E380: .4byte gUnknown_80DC084
+_0801E380: .4byte gWindowBGBlueString
 _0801E384:
 	ldr r0, _0801E3AC
 _0801E386:
@@ -1411,7 +1411,7 @@ _0801E386:
 	bl sub_80078A4
 	b _0801E3D6
 	.align 2, 0
-_0801E3AC: .4byte gUnknown_80DC08C
+_0801E3AC: .4byte gWindowBGRedString
 _0801E3B0:
 	ldr r0, _0801E3E8
 	bl sub_8008ED0
@@ -1440,9 +1440,9 @@ _0801E3D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E3E8: .4byte gUnknown_80DC090
+_0801E3E8: .4byte gWindowBGGreenString
 _0801E3EC: .4byte gUnknown_203B260
-	thumb_func_end sub_801E310
+	thumb_func_end CreateOptionsMenu
 
 	thumb_func_start sub_801E3F0
 sub_801E3F0:
@@ -2371,7 +2371,7 @@ _0801EB00:
 	movs r1, 0xC
 	b _0801EB86
 	.align 2, 0
-_0801EB34: .4byte gUnknown_80D8888
+_0801EB34: .4byte gGulpinDialogue
 _0801EB38:
 	ldr r1, _0801EB64
 	movs r0, 0x64
@@ -2395,7 +2395,7 @@ _0801EB38:
 	movs r1, 0xC
 	b _0801EB86
 	.align 2, 0
-_0801EB64: .4byte gUnknown_80D8888
+_0801EB64: .4byte gGulpinDialogue
 _0801EB68:
 	ldrb r4, [r2, 0xE]
 	cmp r4, 0
@@ -4812,7 +4812,7 @@ _0801FE6C:
 	.align 2, 0
 _0801FE84: .4byte gUnknown_80DC334
 _0801FE88:
-	bl sub_802074C
+	bl CreateGulpinLinkMenu
 	ldr r1, [r4]
 	movs r7, 0xCC
 	lsls r7, 1
@@ -4952,7 +4952,7 @@ _0801FFDC:
 	ldr r0, [r5]
 	movs r4, 0x2
 	str r4, [r0, 0x6C]
-	bl sub_8020574
+	bl CreateGulpinShopMenu
 	ldr r5, [r5]
 	str r4, [r5, 0x8]
 	ldr r2, _08020014
@@ -4976,9 +4976,9 @@ _0801FFDC:
 	adds r1, r5, r4
 	b _0802004C
 	.align 2, 0
-_08020014: .4byte gUnknown_80D8888
+_08020014: .4byte gGulpinDialogue
 _08020018:
-	bl sub_8020574
+	bl CreateGulpinShopMenu
 	ldr r0, _0802005C
 	ldr r4, [r0]
 	movs r0, 0x2
@@ -5013,7 +5013,7 @@ _0802004C:
 	b _08020562
 	.align 2, 0
 _0802005C: .4byte gUnknown_203B27C
-_08020060: .4byte gUnknown_80D8888
+_08020060: .4byte gGulpinDialogue
 _08020064:
 	movs r0, 0x3
 	bl sub_8016C40
@@ -5035,7 +5035,7 @@ _0802006C:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_0802008C: .4byte gUnknown_80D8888
+_0802008C: .4byte gGulpinDialogue
 _08020090:
 	ldr r2, [r5]
 	movs r0, 0x1F
@@ -5053,7 +5053,7 @@ _08020090:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080200B0: .4byte gUnknown_80D8888
+_080200B0: .4byte gGulpinDialogue
 _080200B4:
 	ldr r2, [r5]
 	movs r0, 0x1F
@@ -5071,7 +5071,7 @@ _080200B4:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080200D4: .4byte gUnknown_80D8888
+_080200D4: .4byte gGulpinDialogue
 _080200D8:
 	ldr r2, [r5]
 	movs r0, 0x1F
@@ -5089,7 +5089,7 @@ _080200D8:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080200F8: .4byte gUnknown_80D8888
+_080200F8: .4byte gGulpinDialogue
 _080200FC:
 	bl sub_8020900
 	ldr r1, _0802013C
@@ -5122,7 +5122,7 @@ _080200FC:
 	bl sub_8014248
 	b _08020562
 	.align 2, 0
-_0802013C: .4byte gUnknown_80D8888
+_0802013C: .4byte gGulpinDialogue
 _08020140: .4byte gUnknown_203B27C
 _08020144:
 	bl sub_8020950
@@ -5156,7 +5156,7 @@ _08020144:
 	bl sub_8014248
 	b _08020562
 	.align 2, 0
-_08020184: .4byte gUnknown_80D8888
+_08020184: .4byte gGulpinDialogue
 _08020188: .4byte gUnknown_203B27C
 _0802018C:
 	ldr r2, [r5]
@@ -5175,7 +5175,7 @@ _0802018C:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080201AC: .4byte gUnknown_80D8888
+_080201AC: .4byte gGulpinDialogue
 _080201B0:
 	ldr r2, [r5]
 	movs r0, 0x1
@@ -5193,7 +5193,7 @@ _080201B0:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080201D0: .4byte gUnknown_80D8888
+_080201D0: .4byte gGulpinDialogue
 _080201D4:
 	ldr r2, [r5]
 	movs r0, 0x1
@@ -5211,7 +5211,7 @@ _080201D4:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080201F4: .4byte gUnknown_80D8888
+_080201F4: .4byte gGulpinDialogue
 _080201F8:
 	ldr r2, [r5]
 	movs r0, 0xD
@@ -5229,7 +5229,7 @@ _080201F8:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_08020218: .4byte gUnknown_80D8888
+_08020218: .4byte gGulpinDialogue
 _0802021C:
 	ldr r2, [r5]
 	movs r0, 0xF
@@ -5247,7 +5247,7 @@ _0802021C:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_0802023C: .4byte gUnknown_80D8888
+_0802023C: .4byte gGulpinDialogue
 _08020240:
 	movs r0, 0x2
 	movs r1, 0
@@ -5303,7 +5303,7 @@ _0802028E:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080202AC: .4byte gUnknown_80D8888
+_080202AC: .4byte gGulpinDialogue
 _080202B0:
 	ldr r0, [r5]
 	movs r5, 0xC
@@ -5375,7 +5375,7 @@ _08020304:
 	b _0802052C
 	.align 2, 0
 _0802033C: .4byte gUnknown_202DF98
-_08020340: .4byte gUnknown_80D8888
+_08020340: .4byte gGulpinDialogue
 _08020344:
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -5396,7 +5396,7 @@ _08020344:
 	adds r1, 0x38
 	b _08020520
 	.align 2, 0
-_0802036C: .4byte gUnknown_80D8888
+_0802036C: .4byte gGulpinDialogue
 _08020370:
 	ldr r1, _08020388
 	ldr r2, [r3]
@@ -5410,7 +5410,7 @@ _08020370:
 	adds r1, r3, r4
 	b _0802052A
 	.align 2, 0
-_08020388: .4byte gUnknown_80D8888
+_08020388: .4byte gGulpinDialogue
 _0802038C:
 	ldr r2, [r5]
 	ldr r0, [r2]
@@ -5446,7 +5446,7 @@ _080203B0:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080203D0: .4byte gUnknown_80D8888
+_080203D0: .4byte gGulpinDialogue
 _080203D4:
 	ldr r2, [r5]
 	movs r0, 0x10
@@ -5464,7 +5464,7 @@ _080203D4:
 	ldr r2, [r2]
 	b _0802052C
 	.align 2, 0
-_080203F4: .4byte gUnknown_80D8888
+_080203F4: .4byte gGulpinDialogue
 _080203F8:
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -5560,7 +5560,7 @@ _08020478:
 	.align 2, 0
 _080204B8: .4byte gUnknown_202DFE8
 _080204BC: .4byte gUnknown_203B27C
-_080204C0: .4byte gUnknown_80D8888
+_080204C0: .4byte gGulpinDialogue
 _080204C4:
 	ldr r1, _080204FC
 	ldr r2, [r4]
@@ -5590,7 +5590,7 @@ _080204E8:
 	bl sub_8014248
 	b _08020562
 	.align 2, 0
-_080204FC: .4byte gUnknown_80D8888
+_080204FC: .4byte gGulpinDialogue
 _08020500:
 	ldr r1, [r5]
 	movs r0, 0x1F
@@ -5622,7 +5622,7 @@ _0802052C:
 	b _08020562
 	.align 2, 0
 _08020538: .4byte gUnknown_202DFE8
-_0802053C: .4byte gUnknown_80D8888
+_0802053C: .4byte gGulpinDialogue
 _08020540: .4byte 0x0000010d
 _08020544:
 	ldr r1, _0802056C
@@ -5645,12 +5645,12 @@ _08020562:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802056C: .4byte gUnknown_80D8888
+_0802056C: .4byte gGulpinDialogue
 _08020570: .4byte 0x0000010d
 	thumb_func_end sub_801FF28
 
-	thumb_func_start sub_8020574
-sub_8020574:
+	thumb_func_start CreateGulpinShopMenu
+CreateGulpinShopMenu:
 	push {r4,lr}
 	ldr r4, _080205C0
 	ldr r0, [r4]
@@ -5689,10 +5689,10 @@ sub_8020574:
 	bx r0
 	.align 2, 0
 _080205C0: .4byte gUnknown_203B27C
-_080205C4: .4byte gUnknown_80DC3C4
-_080205C8: .4byte gUnknown_80DC3CC
+_080205C4: .4byte gGulpinProceed
+_080205C8: .4byte gGulpinInfo
 _080205CC: .4byte gUnknown_80D4934
-	thumb_func_end sub_8020574
+	thumb_func_end CreateGulpinShopMenu
 
 	thumb_func_start sub_80205D0
 sub_80205D0:
@@ -5891,8 +5891,8 @@ _08020746:
 	bx r0
 	thumb_func_end sub_802069C
 
-	thumb_func_start sub_802074C
-sub_802074C:
+	thumb_func_start CreateGulpinLinkMenu
+CreateGulpinLinkMenu:
 	push {r4-r7,lr}
 	movs r7, 0
 	ldr r4, _08020780
@@ -5919,7 +5919,7 @@ sub_802074C:
 	b _08020792
 	.align 2, 0
 _08020780: .4byte gUnknown_203B27C
-_08020784: .4byte gUnknown_80DC400
+_08020784: .4byte gGulpinDeselect
 _08020788:
 	ldr r0, [r4]
 	ldr r1, _08020798
@@ -5931,7 +5931,7 @@ _08020792:
 	mov r12, r4
 	b _080207CA
 	.align 2, 0
-_08020798: .4byte gUnknown_80DC40C
+_08020798: .4byte gGulpinSet
 _0802079C:
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
@@ -5943,7 +5943,7 @@ _0802079C:
 	ldr r0, _080207B0
 	b _080207B8
 	.align 2, 0
-_080207B0: .4byte gUnknown_80DC400
+_080207B0: .4byte gGulpinDeselect
 _080207B4:
 	ldr r1, [r4]
 	ldr r0, _0802086C
@@ -6042,11 +6042,11 @@ _0802084C:
 	str r0, [r1, 0x78]
 	b _080208A8
 	.align 2, 0
-_0802086C: .4byte gUnknown_80DC40C
+_0802086C: .4byte gGulpinSet
 _08020870: .4byte gUnknown_203B27C
-_08020874: .4byte gUnknown_80DC410
-_08020878: .4byte gUnknown_80DC418
-_0802087C: .4byte gUnknown_80DC420
+_08020874: .4byte gGulpinLink
+_08020878: .4byte gGulpinDelink
+_0802087C: .4byte gGulpinForget
 _08020880: .4byte gUnknown_80D4970
 _08020884:
 	adds r3, 0x1
@@ -6071,7 +6071,7 @@ _080208A8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802074C
+	thumb_func_end CreateGulpinLinkMenu
 
 	thumb_func_start sub_80208B0
 sub_80208B0:
@@ -8820,7 +8820,7 @@ _08021EA4:
 	lsls r0, 4
 	b _08021ED4
 	.align 2, 0
-_08021EB8: .4byte gUnknown_80D79A4
+_08021EB8: .4byte gWigglytuffDialogue
 _08021EBC: .4byte gUnknown_203B290
 _08021EC0:
 	bl sub_80222C8
@@ -8855,7 +8855,7 @@ _08021ED4:
 	bl sub_8014248
 	b _080222B6
 	.align 2, 0
-_08021F00: .4byte gUnknown_80D79A4
+_08021F00: .4byte gWigglytuffDialogue
 _08021F04: .4byte gUnknown_203B290
 _08021F08:
 	ldr r3, [r4]
@@ -8869,7 +8869,7 @@ _08021F08:
 	adds r2, 0xC
 	b _0802227A
 	.align 2, 0
-_08021F1C: .4byte gUnknown_80D79A4
+_08021F1C: .4byte gWigglytuffDialogue
 _08021F20:
 	ldr r3, [r4]
 	movs r0, 0xA
@@ -8882,7 +8882,7 @@ _08021F20:
 	adds r2, 0x10
 	b _0802227A
 	.align 2, 0
-_08021F34: .4byte gUnknown_80D79A4
+_08021F34: .4byte gWigglytuffDialogue
 _08021F38:
 	ldr r3, [r4]
 	movs r0, 0x1
@@ -8895,7 +8895,7 @@ _08021F38:
 	adds r2, 0x4C
 	b _0802227A
 	.align 2, 0
-_08021F4C: .4byte gUnknown_80D79A4
+_08021F4C: .4byte gWigglytuffDialogue
 _08021F50:
 	ldr r3, [r4]
 	movs r0, 0x4
@@ -8913,7 +8913,7 @@ _08021F50:
 	ldr r3, _08021F74
 	b _08022284
 	.align 2, 0
-_08021F70: .4byte gUnknown_80D79A4
+_08021F70: .4byte gWigglytuffDialogue
 _08021F74: .4byte 0x0000030d
 _08021F78:
 	ldr r3, [r4]
@@ -8927,7 +8927,7 @@ _08021F78:
 	adds r2, 0x20
 	b _0802227A
 	.align 2, 0
-_08021F8C: .4byte gUnknown_80D79A4
+_08021F8C: .4byte gWigglytuffDialogue
 _08021F90:
 	ldr r3, [r4]
 	movs r0, 0xA
@@ -8940,7 +8940,7 @@ _08021F90:
 	adds r2, 0x24
 	b _0802227A
 	.align 2, 0
-_08021FA4: .4byte gUnknown_80D79A4
+_08021FA4: .4byte gWigglytuffDialogue
 _08021FA8:
 	ldr r3, [r4]
 	movs r0, 0x3
@@ -8953,7 +8953,7 @@ _08021FA8:
 	adds r2, 0x28
 	b _0802227A
 	.align 2, 0
-_08021FBC: .4byte gUnknown_80D79A4
+_08021FBC: .4byte gWigglytuffDialogue
 _08021FC0:
 	ldr r3, [r4]
 	movs r0, 0xA
@@ -8966,7 +8966,7 @@ _08021FC0:
 	adds r2, 0x2C
 	b _0802227A
 	.align 2, 0
-_08021FD4: .4byte gUnknown_80D79A4
+_08021FD4: .4byte gWigglytuffDialogue
 _08021FD8:
 	movs r0, 0x2
 	movs r1, 0x3
@@ -9041,7 +9041,7 @@ _08022024:
 _08022070: .4byte gUnknown_202E628
 _08022074: .4byte gUnknown_203B290
 _08022078: .4byte gUnknown_202DE30
-_0802207C: .4byte gUnknown_80D79A4
+_0802207C: .4byte gWigglytuffDialogue
 _08022080:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
@@ -9067,7 +9067,7 @@ _0802208E:
 	b _0802227A
 	.align 2, 0
 _080220B0: .4byte gUnknown_202E628
-_080220B4: .4byte gUnknown_80D79A4
+_080220B4: .4byte gWigglytuffDialogue
 _080220B8:
 	ldr r1, [r4]
 	movs r0, 0xE
@@ -9129,7 +9129,7 @@ _0802210E:
 	b _08022282
 	.align 2, 0
 _08022130: .4byte gUnknown_203B290
-_08022134: .4byte gUnknown_80D79A4
+_08022134: .4byte gWigglytuffDialogue
 _08022138:
 	ldr r3, [r4]
 	movs r0, 0x16
@@ -9142,7 +9142,7 @@ _08022138:
 	adds r2, 0x30
 	b _0802227A
 	.align 2, 0
-_0802214C: .4byte gUnknown_80D79A4
+_0802214C: .4byte gWigglytuffDialogue
 _08022150:
 	ldr r3, [r4]
 	movs r0, 0x17
@@ -9155,7 +9155,7 @@ _08022150:
 	adds r2, 0x34
 	b _0802227A
 	.align 2, 0
-_08022164: .4byte gUnknown_80D79A4
+_08022164: .4byte gWigglytuffDialogue
 _08022168:
 	movs r0, 0
 	movs r1, 0x3
@@ -9258,7 +9258,7 @@ _080221FA:
 _08022228: .4byte gUnknown_203B290
 _0802222C: .4byte gUnknown_202DF98
 _08022230: .4byte gUnknown_202E628
-_08022234: .4byte gUnknown_80D79A4
+_08022234: .4byte gWigglytuffDialogue
 _08022238:
 	ldr r3, [r4]
 	movs r0, 0x15
@@ -9271,7 +9271,7 @@ _08022238:
 	adds r2, 0x3C
 	b _0802227A
 	.align 2, 0
-_0802224C: .4byte gUnknown_80D79A4
+_0802224C: .4byte gWigglytuffDialogue
 _08022250:
 	ldr r3, [r4]
 	movs r0, 0x15
@@ -9284,7 +9284,7 @@ _08022250:
 	adds r2, 0x40
 	b _0802227A
 	.align 2, 0
-_08022264: .4byte gUnknown_80D79A4
+_08022264: .4byte gWigglytuffDialogue
 _08022268:
 	ldr r3, [r4]
 	movs r0, 0x15
@@ -9307,7 +9307,7 @@ _08022284:
 	bl sub_80141B4
 	b _080222B6
 	.align 2, 0
-_0802228C: .4byte gUnknown_80D79A4
+_0802228C: .4byte gWigglytuffDialogue
 _08022290: .4byte 0x0000010d
 _08022294:
 	ldr r3, [r4]
@@ -9332,7 +9332,7 @@ _080222B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080222C0: .4byte gUnknown_80D79A4
+_080222C0: .4byte gWigglytuffDialogue
 _080222C4: .4byte 0x0000010d
 	thumb_func_end sub_8021E0C
 
@@ -9404,7 +9404,7 @@ _08022322:
 	.align 2, 0
 _08022344: .4byte gUnknown_203B290
 _08022348: .4byte gUnknown_80D4978
-_0802234C: .4byte gUnknown_80D499C
+_0802234C: .4byte gWigglytuffCheck
 _08022350: .4byte gUnknown_80D4970
 _08022354: .4byte gUnknown_80D4934
 _08022358:
@@ -19290,7 +19290,7 @@ _080271C8:
 	stm r1!, {r3,r5,r6}
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
-	bl sub_802745C
+	bl CreateFriendActionMenu
 	ldr r2, [r4]
 	movs r0, 0xD8
 	lsls r0, 1
@@ -19587,8 +19587,9 @@ _08027454: .4byte gUnknown_80DD8D0
 _08027458: .4byte 0x00000101
 	thumb_func_end sub_8027274
 
-	thumb_func_start sub_802745C
-sub_802745C:
+        @ Menu that gets created when you talk to friend
+	thumb_func_start CreateFriendActionMenu
+CreateFriendActionMenu:
 	push {r4-r7,lr}
 	ldr r3, _080274E4
 	ldr r4, _080274E8
@@ -19657,8 +19658,8 @@ _080274B6:
 	.align 2, 0
 _080274E4: .4byte gUnknown_203B45C
 _080274E8: .4byte gUnknown_203B2BC
-_080274EC: .4byte gUnknown_80DD8F8
-_080274F0: .4byte gUnknown_80DD904
+_080274EC: .4byte gFriendActionStandby
+_080274F0: .4byte gFriendActionMakeLeader
 _080274F4:
 	ldr r2, [r4]
 	movs r3, 0x8E
@@ -19844,14 +19845,14 @@ _08027636:
 	str r0, [r1, 0x70]
 	b _080276A0
 	.align 2, 0
-_08027658: .4byte gUnknown_80DD910
-_0802765C: .4byte gUnknown_80DD91C
+_08027658: .4byte gFriendActionJoinTeam
+_0802765C: .4byte gFriendActionSayFarewell
 _08027660: .4byte gUnknown_203B2BC
-_08027664: .4byte gUnknown_80DD92C
-_08027668: .4byte gUnknown_80DD934
-_0802766C: .4byte gUnknown_80DD93C
-_08027670: .4byte gUnknown_80DD944
-_08027674: .4byte gUnknown_80DD94C
+_08027664: .4byte gFriendActionGive
+_08027668: .4byte gFriendActionTake
+_0802766C: .4byte gFriendActionSummary
+_08027670: .4byte gFriendActionMoves
+_08027674: .4byte gFriendActionCheckIQ
 _08027678:
 	adds r3, 0x1
 	cmp r3, r7
@@ -19877,7 +19878,7 @@ _080276A0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802745C
+	thumb_func_end CreateFriendActionMenu
 
 	thumb_func_start sub_80276A8
 sub_80276A8:
@@ -19973,7 +19974,7 @@ _08027730:
 	b _0802778E
 	.align 2, 0
 _0802775C: .4byte gUnknown_203B2BC
-_08027760: .4byte gUnknown_80DD92C
+_08027760: .4byte gFriendActionGive
 _08027764: .4byte gUnknown_80D4970
 _08027768:
 	adds r3, 0x1
