@@ -291,7 +291,7 @@ _0808E052:
 	.align 2, 0
 _0808E06C: .4byte gLevelCurrentPokeId
 _0808E070: .4byte gUnknown_810768C
-_0808E074: .4byte gUnknown_8300500
+_0808E074: .4byte gSystemFileArchive
 _0808E078: .4byte gLevelCurrentData
 	thumb_func_end GetPokemonLevelData
 
@@ -1079,7 +1079,7 @@ _0808E598:
 	bx r0
 	.align 2, 0
 _0808E628: .4byte gUnknown_81076BC
-_0808E62C: .4byte gUnknown_83B0000
+_0808E62C: .4byte gDungeonFileArchive
 _0808E630: .4byte 0x06010000
 _0808E634: .4byte 0x0000f3ff
 _0808E638: .4byte 0x00003fff

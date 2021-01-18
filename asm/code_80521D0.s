@@ -26750,11 +26750,11 @@ _0805FB92:
 	.align 2, 0
 _0805FBA0: .4byte gUnknown_202749A
 _0805FBA4: .4byte gUnknown_202EE10
-_0805FBA8: .4byte gUnknown_80FE988
-_0805FBAC: .4byte gUnknown_80FE998
-_0805FBB0: .4byte gUnknown_80FE9A8
-_0805FBB4: .4byte gUnknown_80FE9B8
-_0805FBB8: .4byte gUnknown_80FE9C8
+_0805FBA8: .4byte gFieldMenuMovesPtr
+_0805FBAC: .4byte gFieldMenuItemsPtr
+_0805FBB0: .4byte gFieldMenuTeamPtr
+_0805FBB4: .4byte gFieldMenuOthersPtr
+_0805FBB8: .4byte gFieldMenuGroundPtr
 _0805FBBC: .4byte gUnknown_203B47C
 _0805FBC0: .4byte gUnknown_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
@@ -27224,7 +27224,7 @@ _0805FF66:
 	mov r1, r10
 	ldr r2, [sp, 0xD8]
 	ldr r3, [sp, 0xD4]
-	bl sub_80603D8
+	bl CreateFieldItemMenu
 	ldr r1, _0805FFBC
 	ldr r0, _0805FFC0
 	movs r2, 0x1E
@@ -27706,7 +27706,7 @@ _0806036C:
 	bne _08060390
 	add r0, sp, 0xCC
 	movs r1, 0x2
-	bl sub_8062978
+	bl DrawFieldGiveItemMenu
 	add r1, sp, 0xCC
 	cmp r0, 0
 	beq _08060380
@@ -27753,8 +27753,8 @@ _080603D0: .4byte gUnknown_203B418
 _080603D4: .4byte 0x00018212
 	thumb_func_end sub_805FD74
 
-	thumb_func_start sub_80603D8
-sub_80603D8:
+	thumb_func_start CreateFieldItemMenu
+CreateFieldItemMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -27991,7 +27991,7 @@ _08060592:
 	ble _0806057E
 	b _08060794
 	.align 2, 0
-_080605C0: .4byte gUnknown_80FE90C
+_080605C0: .4byte gTeamToolboxAPtr
 _080605C4: .4byte gUnknown_203B460
 _080605C8: .4byte gUnknown_8106B60
 _080605CC:
@@ -28043,7 +28043,7 @@ _080605FC:
 	ble _080605E6
 	b _08060794
 	.align 2, 0
-_08060630: .4byte gUnknown_80FE920
+_08060630: .4byte gTeamToolboxBPtr
 _08060634: .4byte gUnknown_203B460
 _08060638: .4byte gUnknown_8106B60
 _0806063C:
@@ -28096,7 +28096,7 @@ _08060698:
 	strh r2, [r5, 0x8]
 	b _08060794
 	.align 2, 0
-_080606A8: .4byte gUnknown_80FE92C
+_080606A8: .4byte gFieldItemMenuGroundTextPtr
 _080606AC: .4byte gUnknown_8106B60
 _080606B0:
 	mov r3, r9
@@ -28245,8 +28245,8 @@ _080607EC: .4byte gUnknown_202DF98
 _080607F0: .4byte gUnknown_80FE940
 _080607F4: .4byte gUnknown_202EE10
 _080607F8: .4byte gUnknown_8106B60
-_080607FC: .4byte gUnknown_80FE94C
-	thumb_func_end sub_80603D8
+_080607FC: .4byte gWhichTextPtr1
+	thumb_func_end CreateFieldItemMenu
 
 	thumb_func_start sub_8060800
 sub_8060800:
@@ -29104,7 +29104,7 @@ _08060EBE:
 	mov r0, sp
 	mov r1, r9
 	movs r2, 0x1
-	bl sub_8061130
+	bl DrawFieldTeamMenu
 	movs r0, 0
 	mov r10, r0
 _08060ECE:
@@ -29391,8 +29391,8 @@ _08061116:
 	bx r1
 	thumb_func_end sub_8060E38
 
-	thumb_func_start sub_8061130
-sub_8061130:
+	thumb_func_start DrawFieldTeamMenu
+DrawFieldTeamMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -29783,7 +29783,7 @@ _08061440:
 	bx r0
 	.align 2, 0
 _08061458: .4byte gUnknown_8106BE0
-	thumb_func_end sub_8061130
+	thumb_func_end DrawFieldTeamMenu
 
 	thumb_func_start sub_806145C
 sub_806145C:
@@ -32412,8 +32412,8 @@ _0806295C:
 _08062974: .4byte gRealInputs
 	thumb_func_end sub_806285C
 
-	thumb_func_start sub_8062978
-sub_8062978:
+	thumb_func_start DrawFieldGiveItemMenu
+DrawFieldGiveItemMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -32460,7 +32460,7 @@ _080629CA:
 	add r0, sp, 0x4
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8061130
+	bl DrawFieldTeamMenu
 	movs r0, 0x1
 	bl sub_80073B8
 	ldr r0, _08062A3C
@@ -32508,7 +32508,7 @@ _080629FC:
 	b _08062A5A
 	.align 2, 0
 _08062A38: .4byte gUnknown_8106C18
-_08062A3C: .4byte gUnknown_80FE950
+_08062A3C: .4byte gWhichTextPtr2
 _08062A40: .4byte 0xfffffc27
 _08062A44: .4byte gUnknown_202EE10
 _08062A48: .4byte gUnknown_203B418
@@ -32651,7 +32651,7 @@ _08062B5A:
 	.align 2, 0
 _08062B6C: .4byte gUnknown_203B418
 _08062B70: .4byte 0x0001357c
-	thumb_func_end sub_8062978
+	thumb_func_end DrawFieldGiveItemMenu
 
 	thumb_func_start sub_8062B74
 sub_8062B74:
@@ -36955,7 +36955,7 @@ sub_8064D74:
 	mov r8, r0
 _08064D84:
 	movs r5, 0
-	bl sub_8065574
+	bl CreateFieldGameOptionsMenu
 _08064D8A:
 	adds r0, r6, 0
 	bl AddMenuCursorSprite
@@ -37078,7 +37078,7 @@ sub_8064E68:
 _08064E7E:
 	movs r7, 0
 	movs r5, 0
-	bl sub_80656C0
+	bl CreateFieldDungeonMenu
 _08064E86:
 	adds r0, r4, 0
 	bl AddMenuCursorSprite
@@ -37192,7 +37192,7 @@ sub_8064F50:
 _08064F66:
 	movs r7, 0
 	movs r5, 0
-	bl sub_8065948
+	bl CreateFieldOthersMenu
 _08064F6E:
 	adds r0, r4, 0
 	bl AddMenuCursorSprite
@@ -37920,8 +37920,8 @@ _0806556C: .4byte gUnknown_80FE8F4
 _08065570: .4byte gUnknown_80F7C50
 	thumb_func_end sub_806544C
 
-	thumb_func_start sub_8065574
-sub_8065574:
+	thumb_func_start CreateFieldGameOptionsMenu
+CreateFieldGameOptionsMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -38064,14 +38064,14 @@ sub_8065574:
 	bx r0
 	.align 2, 0
 _080656AC: .4byte gUnknown_202EE10
-_080656B0: .4byte gUnknown_80FE8F0
-_080656B4: .4byte gUnknown_80FE730
-_080656B8: .4byte gUnknown_80FE73C
+_080656B0: .4byte gGameOptionsTextPtr
+_080656B4: .4byte gOptionsDungeonTextPtr
+_080656B8: .4byte gOptionsOthersTextPtr
 _080656BC: .4byte gUnknown_80FE748
-	thumb_func_end sub_8065574
+	thumb_func_end CreateFieldGameOptionsMenu
 
-	thumb_func_start sub_80656C0
-sub_80656C0:
+	thumb_func_start CreateFieldDungeonMenu
+CreateFieldDungeonMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -38245,7 +38245,7 @@ sub_80656C0:
 	.align 2, 0
 _0806583C: .4byte gUnknown_8106CE8
 _08065840: .4byte gUnknown_202EE10
-_08065844: .4byte gUnknown_80FE730
+_08065844: .4byte gOptionsDungeonTextPtr
 _08065848: .4byte gUnknown_80FE764
 _0806584C: .4byte gUnknown_80FE788
 _08065850: .4byte gUnknown_80FE7A8
@@ -38363,10 +38363,10 @@ _0806590E:
 	bx r0
 	.align 2, 0
 _08065944: .4byte gUnknown_202F2E8
-	thumb_func_end sub_80656C0
+	thumb_func_end CreateFieldDungeonMenu
 
-	thumb_func_start sub_8065948
-sub_8065948:
+	thumb_func_start CreateFieldOthersMenu
+CreateFieldOthersMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -38511,10 +38511,10 @@ _08065A0A:
 	.align 2, 0
 _08065A78: .4byte gUnknown_8106CF4
 _08065A7C: .4byte gUnknown_202EE10
-_08065A80: .4byte gUnknown_80FE73C
-_08065A84: .4byte gUnknown_80FE808
+_08065A80: .4byte gOptionsOthersTextPtr
+_08065A84: .4byte gOptionsWindowColorPtr
 _08065A88: .4byte gUnknown_202F2E8
-	thumb_func_end sub_8065948
+	thumb_func_end CreateFieldOthersMenu
 
 	thumb_func_start sub_8065A8C
 sub_8065A8C:
@@ -43933,7 +43933,7 @@ sub_8068614:
 	bx r0
 	.align 2, 0
 _0806862C: .4byte gUnknown_8106E98
-_08068630: .4byte gUnknown_8510000
+_08068630: .4byte gMonsterFileArchive
 _08068634: .4byte gUnknown_203B418
 _08068638: .4byte 0x000181e4
 	thumb_func_end sub_8068614
@@ -44194,7 +44194,7 @@ _08068820:
 _08068828: .4byte gUnknown_203B418
 _0806882C: .4byte 0x00017b44
 _08068830: .4byte gUnknown_8106EA0
-_08068834: .4byte gUnknown_8510000
+_08068834: .4byte gMonsterFileArchive
 	thumb_func_end sub_80687EC
 
 	thumb_func_start sub_8068838
@@ -47842,7 +47842,7 @@ _0806A41C:
 	bx r0
 	.align 2, 0
 _0806A450: .4byte gUnknown_8106EB0
-_0806A454: .4byte gUnknown_83B0000
+_0806A454: .4byte gDungeonFileArchive
 	thumb_func_end sub_806A3D4
 
 	thumb_func_start sub_806A458

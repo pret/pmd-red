@@ -1,6 +1,9 @@
 #include "global.h"
 #include "music.h"
 #include "constants/bg_music.h"
+#include "time.h"
+#include "bg.h"
+#include "input.h"
 
 void sub_8011924(void);
 void nullsub_26(void);
@@ -24,6 +27,29 @@ extern void nullsub_28(void);
 
 extern int sprintf(char *, const char *, ...);
 
+extern struct PlayTimeStruct *gUnknown_203B47C;
+
+struct UnkSaveStruct1
+{
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u16 unk8;
+    /* 0xA */ u8 unkA;
+};
+extern struct UnkSaveStruct1 *gUnknown_203B46C;
+
+struct UnkBgStruct
+{
+    u8 padding[0x4c4b];
+    u32 unk4c4c;
+    u8 padding2[0x17A];
+    u32 *unk4dcc;
+    u32 unk4dd0;
+    s16 unk4dd4;
+    s16 unk4dd6;
+};
+extern struct UnkBgStruct *gUnknown_203B0E4;
+
 struct DebugLocation
 {
     char *file;
@@ -39,8 +65,51 @@ extern s16 gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
 extern u32 gUnknown_203B14C;
 extern const char gNotEntryText[];
-extern const char gUnknown_80D418C[];
-extern const char gUnknown_80D41C4[];
+extern const char gFuncFileLineString[];
+extern const char gFuncFileLineStringWPrefix[];
+
+void nullsub_8(u32);
+void sub_8005838(u32, u32);
+extern void CopySpritesToOam(void);
+extern void sub_8005304(void);
+extern void TransferBGPaletteBuffer(void);
+extern void xxx_call_update_bg_vram(void);
+extern void sub_8009908(void);
+extern void xxx_call_update_bg_sound_input(void);
+extern void sub_8005180(void);
+extern void sub_80060EC(void);
+extern void sub_8011860(void);
+extern void sub_800CB20(void);
+extern void ResetSprites(u32);
+extern void sub_8004AF0(u8, u32 *r1, u32, u32, u32 *r2, u32);
+extern u8 sub_80111C4();
+extern void sub_8010F28();
+
+void sub_801169C(void)
+{
+    u8 return_var;
+
+    SetBG2RegOffsets(gUnknown_203B0E4->unk4dd4, gUnknown_203B0E4->unk4dd6);
+    SetBG3RegOffsets(gUnknown_203B0E4->unk4dd4, gUnknown_203B0E4->unk4dd6);
+    sub_8010F28();
+    return_var = sub_80111C4();
+    sub_8004AF0(return_var, &(gUnknown_203B0E4->unk4c4c), 0xB0, 0x10, (gUnknown_203B0E4->unk4dcc), 0);
+    sub_8005838(0, 0);
+    nullsub_8(gUnknown_203B46C->unkA);
+    sub_8005180();
+    sub_80060EC();
+    IncrementPlayTime(gUnknown_203B47C);
+    sub_800CB20();
+    LoadBufferedInputs();
+    CopySpritesToOam();
+    sub_8005304();
+    TransferBGPaletteBuffer();
+    xxx_call_update_bg_vram();
+    sub_8009908();
+    xxx_call_update_bg_sound_input();
+    sub_8011860();
+    ResetSprites(0);
+}
 
 void sub_8011760(void)
 {
@@ -251,7 +320,7 @@ void PrintFuncFileLineOrNotEntry(char * r0, struct DebugLocation *r1)
 {
     if(r1 != 0)
     {
-        sprintf(r0, gUnknown_80D418C, r1->func, r1->file, r1->line);
+        sprintf(r0, gFuncFileLineString, r1->func, r1->file, r1->line);
     }
     else
     {
@@ -261,5 +330,5 @@ void PrintFuncFileLineOrNotEntry(char * r0, struct DebugLocation *r1)
 
 void PrintFuncFileLine(char *buf, struct DebugLocation *loc, char* prefix)
 {
-    sprintf(buf, gUnknown_80D41C4, prefix, loc->func, loc->file, loc->line);
+    sprintf(buf, gFuncFileLineStringWPrefix, prefix, loc->func, loc->file, loc->line);
 }

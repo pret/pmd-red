@@ -3716,7 +3716,7 @@ _0802B930:
 	bl sub_803B6B0
 	bl sub_802BC7C
 	adds r0, r4, 0
-	bl sub_803C190
+	bl GetPokemonMailHeadline
 	adds r2, r0, 0
 	ldr r0, [r7]
 	ldr r3, [r0, 0x6C]
@@ -3975,7 +3975,7 @@ sub_802BB28:
 	bl sub_80073B8
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x4]
-	bl sub_803C190
+	bl GetPokemonMailHeadline
 	adds r2, r0, 0
 	ldr r0, [r5]
 	ldr r3, [r0, 0x24]
@@ -4171,7 +4171,7 @@ sub_802BCC4:
 	ldr r4, _0802BCDC
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x4]
-	bl sub_803C1A0
+	bl GetPokemonMailText
 	adds r3, r0, 0
 	ldr r1, [r4]
 	movs r0, 0
@@ -4301,7 +4301,7 @@ _0802BD8E:
 	adds r0, 0x4
 	bl sub_8013984
 	bl sub_802BF30
-	bl sub_802BFA0
+	bl CreateMailMenu
 	movs r0, 0x1
 _0802BDD4:
 	pop {r3}
@@ -4377,7 +4377,7 @@ _0802BE48:
 _0802BE60: .4byte gUnknown_203B2D8
 _0802BE64:
 	bl sub_802BF30
-	bl sub_802BFA0
+	bl CreateMailMenu
 	movs r0, 0x1
 _0802BE6E:
 	pop {r1}
@@ -4423,7 +4423,7 @@ sub_802BE94:
 	adds r0, 0x4
 	bl sub_8013984
 	bl sub_802BF30
-	bl sub_802BFA0
+	bl CreateMailMenu
 	cmp r4, 0
 	beq _0802BED2
 	ldr r0, [r5]
@@ -4535,8 +4535,8 @@ sub_802BF30:
 _0802BF9C: .4byte gUnknown_203B2D8
 	thumb_func_end sub_802BF30
 
-	thumb_func_start sub_802BFA0
-sub_802BFA0:
+	thumb_func_start CreateMailMenu
+CreateMailMenu:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4608,7 +4608,7 @@ _0802BFE8:
 	mov r0, r9
 	bl sub_808DA34
 	ldrb r0, [r5, 0x5]
-	bl sub_803C190
+	bl GetPokemonMailHeadline
 	adds r1, r0, 0
 	mov r0, r8
 	mov r2, r9
@@ -4624,7 +4624,7 @@ _0802BFE8:
 	b _0802C08E
 	.align 2, 0
 _0802C060: .4byte gUnknown_203B2D8
-_0802C064: .4byte gUnknown_80DFC8C
+_0802C064: .4byte gMailboxText
 _0802C068: .4byte gUnknown_202DF98
 _0802C06C:
 	adds r0, r5, 0
@@ -4663,7 +4663,7 @@ _0802C09A:
 	bx r0
 	.align 2, 0
 _0802C0B4: .4byte gUnknown_203B2D8
-	thumb_func_end sub_802BFA0
+	thumb_func_end CreateMailMenu
 
 	thumb_func_start sub_802C0B8
 sub_802C0B8:
@@ -5087,7 +5087,7 @@ sub_802C39C:
 	b _0802C452
 	.align 2, 0
 _0802C3F8: .4byte gUnknown_203B2E0
-_0802C3FC: .4byte gUnknown_80DFCCC
+_0802C3FC: .4byte gBulletinBoardText
 _0802C400:
 	ldr r1, [r7]
 	movs r3, 0x26
@@ -8788,7 +8788,7 @@ _0802E0DA:
 	subs r3, 0x1
 	cmp r3, 0
 	bge _0802E0DA
-	bl sub_802E2B4
+	bl CreateMailboxMenu
 	ldr r3, _0802E11C
 	ldr r2, [r3]
 	movs r0, 0x9E
@@ -8809,7 +8809,7 @@ _0802E118: .4byte gUnknown_80E0284
 _0802E11C: .4byte gUnknown_203B304
 _0802E120: .4byte gUnknown_80E029C
 _0802E124:
-	bl sub_802E3B8
+	bl CreateMailActionMenu
 	ldr r2, [r4]
 	movs r0, 0x9E
 	lsls r0, 1
@@ -8934,9 +8934,9 @@ _0802E22A:
 	bl sub_802BE94
 	b _0802E2AA
 _0802E232:
-	bl sub_802BFA0
+	bl CreateMailMenu
 	movs r0, 0x3
-	bl sub_802E7F8
+	bl CreateMailAcceptedStatusBox
 	ldr r0, _0802E25C
 	ldr r2, [r0]
 	adds r0, r2, 0
@@ -8995,8 +8995,8 @@ _0802E2AA:
 	bx r0
 	thumb_func_end sub_802E1AC
 
-	thumb_func_start sub_802E2B4
-sub_802E2B4:
+	thumb_func_start CreateMailboxMenu
+CreateMailboxMenu:
 	push {r4-r7,lr}
 	ldr r4, _0802E380
 	ldr r0, [r4]
@@ -9102,9 +9102,9 @@ _0802E35A:
 	b _0802E3B2
 	.align 2, 0
 _0802E380: .4byte gUnknown_203B304
-_0802E384: .4byte gUnknown_80E02E4
-_0802E388: .4byte gUnknown_80E02F0
-_0802E38C: .4byte gUnknown_80E02FC
+_0802E384: .4byte gMailboxCheckMail
+_0802E388: .4byte gMailboxJobList
+_0802E38C: .4byte gMailboxPKMNNews
 _0802E390:
 	adds r3, 0x1
 	cmp r3, r5
@@ -9127,10 +9127,10 @@ _0802E3B2:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802E2B4
+	thumb_func_end CreateMailboxMenu
 
-	thumb_func_start sub_802E3B8
-sub_802E3B8:
+	thumb_func_start CreateMailActionMenu
+CreateMailActionMenu:
 	push {r4-r7,lr}
 	movs r5, 0
 	ldr r4, _0802E3F0
@@ -9159,8 +9159,8 @@ sub_802E3B8:
 	b _0802E44A
 	.align 2, 0
 _0802E3F0: .4byte gUnknown_203B304
-_0802E3F4: .4byte gUnknown_80E0308
-_0802E3F8: .4byte gUnknown_80E0310
+_0802E3F4: .4byte gMailActionStore
+_0802E3F8: .4byte gMailActionRead
 _0802E3FC:
 	ldr r1, [r4]
 	adds r2, r1, 0
@@ -9256,7 +9256,7 @@ _0802E4A8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802E3B8
+	thumb_func_end CreateMailActionMenu
 
 	thumb_func_start sub_802E4B0
 sub_802E4B0:
@@ -9647,8 +9647,8 @@ nullsub_133:
 	bx lr
 	thumb_func_end nullsub_133
 
-	thumb_func_start sub_802E7F8
-sub_802E7F8:
+	thumb_func_start CreateMailAcceptedStatusBox
+CreateMailAcceptedStatusBox:
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -9691,9 +9691,9 @@ sub_802E7F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802E85C: .4byte gUnknown_80E0318
+_0802E85C: .4byte gMailAccepted
 _0802E860: .4byte gUnknown_80E0324
-	thumb_func_end sub_802E7F8
+	thumb_func_end CreateMailAcceptedStatusBox
 
 	thumb_func_start sub_802E864
 sub_802E864:
@@ -9861,7 +9861,7 @@ _0802E986:
 	subs r3, 0x1
 	cmp r3, 0
 	bge _0802E986
-	bl sub_802EB34
+	bl CreatePelliperBoardMenu
 	ldr r3, _0802E9C8
 	ldr r2, [r3]
 	movs r0, 0x9E
@@ -10006,7 +10006,7 @@ _0802EACA:
 _0802EAD2:
 	bl sub_802C39C
 	movs r0, 0x3
-	bl sub_802EEDC
+	bl CreatePelliperAcceptedStatusBox
 	ldr r0, _0802EAFC
 	ldr r2, [r0]
 	adds r0, r2, 0
@@ -10050,8 +10050,8 @@ _0802EB2C:
 	bx r0
 	thumb_func_end sub_802EA58
 
-	thumb_func_start sub_802EB34
-sub_802EB34:
+	thumb_func_start CreatePelliperBoardMenu
+CreatePelliperBoardMenu:
 	push {r4-r7,lr}
 	ldr r4, _0802EBDC
 	ldr r0, [r4]
@@ -10139,8 +10139,8 @@ _0802EBB6:
 	b _0802EC0A
 	.align 2, 0
 _0802EBDC: .4byte gUnknown_203B308
-_0802EBE0: .4byte gUnknown_80E0390
-_0802EBE4: .4byte gUnknown_80E03A0
+_0802EBE0: .4byte gPelliperBoard_BulletinBoard
+_0802EBE4: .4byte gPelliperBoard_JobList
 _0802EBE8:
 	adds r3, 0x1
 	cmp r3, r5
@@ -10163,7 +10163,7 @@ _0802EC0A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802EB34
+	thumb_func_end CreatePelliperBoardMenu
 
 	thumb_func_start sub_802EC10
 sub_802EC10:
@@ -10527,8 +10527,8 @@ nullsub_134:
 	bx lr
 	thumb_func_end nullsub_134
 
-	thumb_func_start sub_802EEDC
-sub_802EEDC:
+	thumb_func_start CreatePelliperAccepedStatusBox
+CreatePelliperAcceptedStatusBox:
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -10573,7 +10573,7 @@ sub_802EEDC:
 	.align 2, 0
 _0802EF40: .4byte gUnknown_80E03AC
 _0802EF44: .4byte gUnknown_80E03B8
-	thumb_func_end sub_802EEDC
+	thumb_func_end CreatePelliperAcceptedStatusBox
 
 	thumb_func_start sub_802EF48
 sub_802EF48:
@@ -12687,7 +12687,7 @@ _0802FFE4:
 	lsls r0, 3
 	b _0803000E
 	.align 2, 0
-_0802FFF8: .4byte gUnknown_80D9FC8
+_0802FFF8: .4byte gMakuhitaDialogue
 _0802FFFC: .4byte gUnknown_203B318
 _08030000:
 	ldr r2, _08030034
@@ -12716,7 +12716,7 @@ _0803000E:
 	bl sub_8014248
 	b _080301A0
 	.align 2, 0
-_08030034: .4byte gUnknown_80D9FC8
+_08030034: .4byte gMakuhitaDialogue
 _08030038:
 	ldr r3, [r5]
 	movs r0, 0xD
@@ -12729,7 +12729,7 @@ _08030038:
 	adds r2, 0x8
 	b _0803015A
 	.align 2, 0
-_0803004C: .4byte gUnknown_80D9FC8
+_0803004C: .4byte gMakuhitaDialogue
 _08030050:
 	ldr r3, [r5]
 	movs r0, 0x4
@@ -12742,7 +12742,7 @@ _08030050:
 	adds r2, 0xC
 	b _0803015A
 	.align 2, 0
-_08030064: .4byte gUnknown_80D9FC8
+_08030064: .4byte gMakuhitaDialogue
 _08030068:
 	movs r0, 0x3
 	movs r1, 0
@@ -12783,7 +12783,7 @@ _08030074:
 _080300B4: .4byte 0xffffff00
 _080300B8: .4byte 0xffff00ff
 _080300BC: .4byte gUnknown_202DF98
-_080300C0: .4byte gUnknown_80D9FC8
+_080300C0: .4byte gMakuhitaDialogue
 _080300C4:
 	ldr r3, [r5]
 	movs r0, 0xD
@@ -12796,7 +12796,7 @@ _080300C4:
 	adds r2, 0x18
 	b _0803015A
 	.align 2, 0
-_080300D8: .4byte gUnknown_80D9FC8
+_080300D8: .4byte gMakuhitaDialogue
 _080300DC:
 	ldr r3, [r5]
 	movs r0, 0xD
@@ -12809,7 +12809,7 @@ _080300DC:
 	adds r2, 0x14
 	b _0803015A
 	.align 2, 0
-_080300F0: .4byte gUnknown_80D9FC8
+_080300F0: .4byte gMakuhitaDialogue
 _080300F4:
 	ldr r3, [r5]
 	movs r0, 0x9
@@ -12822,7 +12822,7 @@ _080300F4:
 	adds r2, 0x1C
 	b _0803015A
 	.align 2, 0
-_08030108: .4byte gUnknown_80D9FC8
+_08030108: .4byte gMakuhitaDialogue
 _0803010C:
 	ldr r4, _08030138
 	bl sub_808D33C
@@ -12866,7 +12866,7 @@ _0803015A:
 	bl sub_80141B4
 	b _080301A0
 	.align 2, 0
-_0803016C: .4byte gUnknown_80D9FC8
+_0803016C: .4byte gMakuhitaDialogue
 _08030170: .4byte 0x0000010d
 _08030174:
 	movs r0, 0x1
@@ -12896,7 +12896,7 @@ _080301A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080301A8: .4byte gUnknown_80D9FC8
+_080301A8: .4byte gMakuhitaDialogue
 _080301AC: .4byte 0x0000010d
 	thumb_func_end sub_802FF88
 
@@ -31545,7 +31545,7 @@ _0803981C:
 	bx r0
 	.align 2, 0
 _08039834: .4byte gUnknown_80E785C
-_08039838: .4byte gUnknown_8380000
+_08039838: .4byte gTitleMenuFileArchive
 _0803983C: .4byte gUnknown_203B3B8
 _08039840: .4byte gUnknown_203B388
 	thumb_func_end sub_80397B4

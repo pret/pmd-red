@@ -841,7 +841,7 @@ sub_809965C:
 	bx r0
 	.align 2, 0
 _08099688: .4byte gUnknown_811601C
-_0809968C: .4byte gUnknown_8300500
+_0809968C: .4byte gSystemFileArchive
 	thumb_func_end sub_809965C
 
 	thumb_func_start sub_8099690
@@ -868,7 +868,7 @@ sub_8099690:
 	b _080996D6
 	.align 2, 0
 _080996BC: .4byte gUnknown_8116028
-_080996C0: .4byte gUnknown_8300500
+_080996C0: .4byte gSystemFileArchive
 _080996C4: .4byte gUnknown_203B46C
 _080996C8: .4byte gUnknown_202D078
 _080996CC:

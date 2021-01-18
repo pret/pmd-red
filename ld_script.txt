@@ -95,7 +95,8 @@ SECTIONS {
         asm/code_8027C84.o(.text);
         src/wonder_mail.o(.text);
         asm/wonder_mail.o(.text);
-        src/code_803C190.o(.text);
+        src/pokemon_mail.o(.text);
+        src/code_803C1B4.o(.text);
         asm/personality_test.o(.text);
         src/personality_test.o(.text);
         asm/code_803D110.o(.text);
@@ -210,7 +211,7 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
-        data/data_80EBA18.o(.rodata);
+        data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);

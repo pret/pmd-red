@@ -13543,7 +13543,7 @@ _080ADDFA:
 	b _080ADEFC
 	.align 2, 0
 _080ADEB4: .4byte gMapparamText
-_080ADEB8: .4byte gUnknown_83B0000
+_080ADEB8: .4byte gDungeonFileArchive
 _080ADEBC: .4byte gUnknown_811889C
 _080ADEC0: .4byte gUnknown_8108EC0
 _080ADEC4: .4byte gUnknown_81188A8
@@ -13636,7 +13636,7 @@ _080ADF52:
 	.align 2, 0
 _080ADF80: .4byte gUnknown_81188CC
 _080ADF84: .4byte gUnknown_81188DC
-_080ADF88: .4byte gUnknown_83B0000
+_080ADF88: .4byte gDungeonFileArchive
 	thumb_func_end sub_80ADD9C
 
 	thumb_func_start sub_80ADF8C

@@ -64,7 +64,6 @@ extern void sub_8005180(void);
 extern void sub_80060EC(void);
 extern void sub_8011860(void);
 extern void sub_800CB20(void);
-extern void LoadBufferedInputs(void);
 extern void CopySpritesToOam(void);
 extern void sub_8005304(void);
 extern void TransferBGPaletteBuffer(void);

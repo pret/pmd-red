@@ -1,4 +1,8 @@
-#include "global.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include "gba/gba.h"
+#include "config.h"
+
 
 extern void SoundBiasReset(void);
 extern void SoundBiasSet(void);
@@ -62,4 +66,12 @@ void sub_800D098(void)
     while(REG_VCOUNT <= 159){}
     REG_DISPCNT = dispcnt_save; // restore DISPCNT
     while(REG_KEYINPUT != 0x3ff){} // All buttons
+}
+
+void sub_800D158(u8 *buffer, const char *text, ...)
+{
+    va_list vArgv;
+    va_start(vArgv, text);
+    vsprintf(buffer, text, vArgv);
+    va_end(vArgv);
 }

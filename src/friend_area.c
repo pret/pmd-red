@@ -28,14 +28,14 @@ struct unkFriendAreaStruct
 
 extern struct unkStruct_203B45C gUnknown_203B45C[];
 
-extern struct FriendAreaSettings gFriendAreaSettings[58];
 extern bool8 *gFriendAreas;
 
 extern u32 gFriendAreaDescriptions[];
 extern const char *gFriendAreaNames[];
-extern u32 gUnknown_81098A4;
+extern const char gUnknown_81098A4;
+extern const char gUnknown_81098AC;
 
-extern void sub_800D158(u8 *buffer, u32 *r1, const char *r2, ...);
+extern void sub_800D158(u8 *buffer, const char *r2, ...);
 extern void sub_8090FEC(u32, u32 *r1, u32);
 
 

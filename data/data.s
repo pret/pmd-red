@@ -516,13 +516,13 @@ gUnknown_80B86A4: @ 80B86A4
 gUnknown_80B86B4: @ 80B86B4
 	.incbin "baserom.gba", 0xB86B4, 0x100
 
-	.global gUnknown_80B87B4
-gUnknown_80B87B4: @ 80B87B4
+	.global gKanjiA_file_string
+gKanjiA_file_string: @ 80B87B4
         .string "kanji_a\0"
         .align 2,0
 
-	.global gUnknown_80B87BC
-gUnknown_80B87BC: @ 80B87BC
+	.global gKanjiB_file_string
+gKanjiB_file_string: @ 80B87BC
         .string "kanji_b\0"
         .align 2,0
 

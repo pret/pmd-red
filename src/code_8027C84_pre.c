@@ -28,11 +28,11 @@ struct UnkStructTemp
     /* 0x14 */ u32 unk14;
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u32 unk1C;
-    /* 0x20 */ struct UnkOtherStructTemp *unk20;
+    /* 0x20 */ u32 unk20;
     /* 0x24 */ u16 unk24;
     /* 0x26 */ u16 unk26;
     /* 0x28 */ u16 unk28;
-    /* 0x2A */ u16 unk2A;
+    /* 0x2A */ u16 *unk2A;
 };
 
 
@@ -79,7 +79,7 @@ void sub_8027C84()
 //            // lsls r0, 3
 //            // adds r0, r1, r0
 //            // Why are we shifting the pointer by 3?
-//            gUnknown_203B2BC->unk24 = temp_store->unk2A;
+//            gUnknown_203B2BC->unk24 = temp_store->unk2A[temp_store];
 //            sub_8027184(0x10);
 //            break;
 //    }
