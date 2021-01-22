@@ -772,7 +772,7 @@ _0808E3E0:
 	cmp r0, 0
 	beq _0808E3F8
 	adds r0, r2, 0
-	bl sub_808DC0C
+	bl GetPokemonEvolveFrom
 	lsls r0, 16
 	asrs r2, r0, 16
 	cmp r2, 0
@@ -810,7 +810,7 @@ _0808E426:
 	asrs r5, r0, 16
 	mov r8, r5
 	adds r0, r5, 0
-	bl sub_808DC0C
+	bl GetPokemonEvolveFrom
 	lsls r0, 16
 	asrs r0, 16
 	cmp r9, r0

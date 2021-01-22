@@ -8097,7 +8097,7 @@ gUnknown_810A390: @ 810A390
 	.incbin "baserom.gba", 0x10A390, 0x60
 
 	.global gUnknown_810A3F0
-gUnknown_810A3F0: @ 810A3F0
+gUnknown_810A3F0: @ 810A3F0 (money related according to PMDe)
 	.incbin "baserom.gba", 0x10A3F0, 0x190
 
 	.global gUnknown_810A580
@@ -8517,9 +8517,13 @@ gUnknown_810ACC0: @ 810ACC0
         .byte 0x00, 0x00, 0x01, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_810AD0C
-gUnknown_810AD0C: @ 810AD0C
-        .byte 0x89, 0x00, 0x01, 0x00
+	.global gExclusivePokemon
+gExclusivePokemon: @ 810AD0C
+        @ Format:
+        @ Pokemon ID: 2 bytes
+        @ RRT: 1 byte (bool)
+        @ BRT: 1 byte (bool)
+        .byte 0x89, 0x00, 0x01, 0x00 @ Porygon (only in RRT)
         .byte 0x02, 0x01, 0x00, 0x01
         .byte 0x81, 0x00, 0x00, 0x01
         .byte 0x82, 0x00, 0x00, 0x01

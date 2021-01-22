@@ -570,13 +570,13 @@ _080527DE:
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	ldrb r1, [r4, 0x2]
-	bl sub_808DE10
+	bl IsPokemonDialogueSpriteAvail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052844
 	movs r2, 0
 	ldrsh r0, [r4, r2]
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	str r0, [sp, 0x14]
 	ldr r0, [r0, 0x4]
 	str r0, [sp, 0x18]
@@ -903,7 +903,7 @@ _08052A9E:
 	adds r5, r0, 0
 	mov r9, sp
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	str r0, [sp]
 	cmp r0, 0
 	beq _08052B10
@@ -1023,13 +1023,13 @@ sub_8052B8C:
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	ldrb r1, [r4, 0x2]
-	bl sub_808DE10
+	bl IsPokemonDialogueSpriteAvail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052C02
 	movs r2, 0
 	ldrsh r0, [r4, r2]
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	str r0, [sp]
 	ldr r0, [r0, 0x4]
 	str r0, [sp, 0x4]
@@ -1134,13 +1134,13 @@ sub_8052C68:
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	ldrb r1, [r4, 0x2]
-	bl sub_808DE10
+	bl IsPokemonDialogueSpriteAvail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052CE6
 	movs r2, 0
 	ldrsh r0, [r4, r2]
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	str r0, [sp, 0x14]
 	ldr r0, [r0, 0x4]
 	str r0, [sp, 0x18]
@@ -39953,7 +39953,7 @@ _080665D0:
 	b _08066704
 _080665DE:
 	adds r0, r6, 0
-	bl sub_808DCC0
+	bl GetBaseRecruit
 	lsls r0, 16
 	ldr r1, _0806661C
 	cmp r0, r1
@@ -47072,7 +47072,7 @@ _08069E4E:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	adds r1, r4, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r4, 0x1
@@ -47084,7 +47084,7 @@ _08069E64:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	adds r1, r4, 0
-	bl sub_808DC84
+	bl GetPokemonAbility
 	adds r1, r6, r4
 	strb r0, [r1]
 	adds r4, 0x1
@@ -49179,7 +49179,7 @@ _0806AE42:
 	bl sub_808E9E4
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_808DD18
+	bl CalculateEXPGain
 	cmp r9, r0
 	bge _0806AE72
 	mov r9, r0
@@ -51574,7 +51574,7 @@ _0806C0E0:
 	adds r1, r5, 0
 	str r2, [sp, 0x30]
 	str r3, [sp, 0x34]
-	bl sub_808DC84
+	bl GetPokemonAbility
 	ldr r7, [sp, 0x8]
 	adds r1, r7, r5
 	strb r0, [r1]
@@ -51646,7 +51646,7 @@ _0806C172:
 	movs r7, 0x2
 	ldrsh r0, [r4, r7]
 	adds r1, r5, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	mov r2, r10
 	adds r1, r2, r5
 	strb r0, [r1]
@@ -52072,7 +52072,7 @@ sub_806C488:
 	asrs r6, r0, 16
 	adds r0, r6, 0
 	mov r1, r8
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	adds r5, r0, 0
 	movs r4, 0x2
 	cmp r4, r7
@@ -52113,7 +52113,7 @@ sub_806C4D4:
 	asrs r6, r0, 16
 	adds r0, r6, 0
 	mov r1, r8
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	adds r5, r0, 0
 	movs r4, 0x2
 	cmp r4, r7
@@ -52886,7 +52886,7 @@ _0806CACC:
 	ldrsh r0, [r3, r4]
 _0806CAD2:
 	movs r1, 0
-	bl sub_808DD68
+	bl GetPokemonOverworldPalette
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r0, r6, 0
@@ -55533,7 +55533,7 @@ _0806DF7E:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
 	ldrb r1, [r6, 0x9]
-	bl sub_808DD18
+	bl CalculateEXPGain
 	adds r5, r0, 0
 	adds r0, r6, 0
 	adds r0, 0xFB
@@ -58603,7 +58603,7 @@ _0806F7DE:
 	adds r7, r0, 0
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl sub_808DCC0
+	bl GetBaseRecruit
 	lsls r0, 16
 	asrs r4, r0, 16
 	ldr r0, _0806F844
@@ -89292,12 +89292,12 @@ _0807E958:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	strb r0, [r6]
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	strb r0, [r7]
 _0807E984:
 	mov r0, sp

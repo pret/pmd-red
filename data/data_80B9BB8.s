@@ -439,7 +439,30 @@ gUnknown_80D4080: @ 80D4080
 
 	.global gUnknown_80D408C
 gUnknown_80D408C: @ 80D408C
-	.incbin "baserom.gba", 0xD408C, 0x38
+        .4byte wmapfont_text
+        .4byte wmapmcc_text
+        .4byte wmapcani_text
+        .4byte wmappal_text
+
+        .global wmappal_text
+        wmappal_text:
+        .string "wmappal\0"
+        .align 2,0
+
+        .global wmapcani_text
+        wmapcani_text:
+        .string "wmapcani\0"
+        .align 2,0
+
+        .global wmapmcc_text
+        wmapmcc_text:
+        .string "wmapmcc\0"
+        .align 2,0
+
+        .global wmapfont_text
+        wmapfont_text:
+        .string "wmapfont\0"
+        .align 2,0
 
 	.global gUnknown_80D40C4
 gUnknown_80D40C4: @ 80D40C4

@@ -10098,7 +10098,7 @@ _080A7490:
 	movs r1, 0x1
 _080A7498:
 	adds r0, r4, 0
-	bl sub_808DD68
+	bl GetPokemonOverworldPalette
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r2, _080A74E0

@@ -7108,7 +7108,7 @@ sub_801059C:
 	movs r3, 0x8
 	ldrsh r0, [r7, r3]
 	movs r1, 0
-	bl sub_808DD68
+	bl GetPokemonOverworldPalette
 	ldr r1, [r4]
 	ldr r3, _08010710
 	adds r2, r1, r3
@@ -8073,7 +8073,7 @@ sub_8010DA4:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	movs r1, 0
-	bl sub_808DD68
+	bl GetPokemonOverworldPalette
 	ldr r2, [r4]
 	ldr r3, _08010ED8
 	adds r1, r2, r3

@@ -30,7 +30,7 @@ _08097F86:
 	bx r0
 	.align 2, 0
 _08097FA0: .4byte gUnknown_203B498
-_08097FA4: .4byte gUnknown_810AD0C
+_08097FA4: .4byte gExclusivePokemon
 	thumb_func_end sub_8097F74
 
 	thumb_func_start sub_8097FA8
@@ -386,7 +386,7 @@ _080981E8:
 	b _0809820E
 	.align 2, 0
 _080981FC: .4byte gUnknown_203B498
-_08098200: .4byte gUnknown_810AD0C
+_08098200: .4byte gExclusivePokemon
 _08098204:
 	adds r2, 0x4
 	adds r1, 0x1
@@ -427,7 +427,7 @@ _08098232:
 	bx r0
 	.align 2, 0
 _08098240: .4byte gUnknown_203B498
-_08098244: .4byte gUnknown_810AD0C
+_08098244: .4byte gExclusivePokemon
 	thumb_func_end sub_8098214
 
 	thumb_func_start sub_8098248

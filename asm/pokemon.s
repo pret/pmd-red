@@ -102,22 +102,22 @@ _0808CEA4:
 	strh r0, [r1, 0x16]
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	mov r1, sp
 	strb r0, [r1, 0x18]
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	mov r1, sp
 	strb r0, [r1, 0x19]
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	mov r1, sp
 	strb r0, [r1, 0x1A]
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	mov r1, sp
 	strb r0, [r1, 0x1B]
 	mov r0, sp
@@ -264,19 +264,19 @@ sub_808CFD0:
 	strh r0, [r7, 0x16]
 	mov r0, r9
 	movs r1, 0
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	strb r0, [r7, 0x18]
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	strb r0, [r7, 0x19]
 	mov r0, r9
 	movs r1, 0
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	strb r0, [r7, 0x1A]
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	strb r0, [r7, 0x1B]
 	mov r1, r9
 	strh r1, [r7, 0x8]
@@ -383,22 +383,22 @@ sub_808D0D8:
 	movs r2, 0x8
 	ldrsh r0, [r7, r2]
 	movs r1, 0
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	strb r0, [r7, 0x18]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
 	movs r1, 0x1
-	bl sub_808DC28
+	bl GetPokemonAttSpatt
 	strb r0, [r7, 0x19]
 	movs r2, 0x8
 	ldrsh r0, [r7, r2]
 	movs r1, 0
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	strb r0, [r7, 0x1A]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
 	movs r1, 0x1
-	bl sub_808DC48
+	bl GetPokemonDefSpdef
 	strb r0, [r7, 0x1B]
 	str r6, [r7, 0x1C]
 	adds r0, r7, 0

@@ -431,7 +431,7 @@ sub_8027F88:
 	ldr r0, _08028064
 	bl strcpy
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, [r5]
 	movs r3, 0x84
 	lsls r3, 3
