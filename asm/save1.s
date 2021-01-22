@@ -24,7 +24,7 @@ sub_8012574:
 	cmp r4, 0
 	beq _080125BA
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r1, [r5]
 	str r0, [r1, 0xC]
 	ldr r0, [r0, 0x4]

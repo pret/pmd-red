@@ -2009,7 +2009,7 @@ _0801E850:
 _0801E858:
 	str r0, [r1]
 	ldr r0, _0801E8B4
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, _0801E8B8
 	ldr r3, [r2]
 	movs r4, 0x8C
@@ -4499,7 +4499,7 @@ _0801FBD0:
 	str r0, [r1]
 _0801FBDE:
 	ldr r0, _0801FC34
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, _0801FC38
 	ldr r3, [r2]
 	movs r4, 0xB6
@@ -8517,7 +8517,7 @@ _08021C04:
 	str r0, [r1]
 _08021C0E:
 	movs r0, 0x28
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, _08021C58
 	ldr r3, [r2]
 	adds r1, r3, 0
@@ -13920,7 +13920,7 @@ sub_802465C:
 	ldr r0, [r5]
 	strb r4, [r0]
 	ldr r0, _080246EC
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, [r5]
 	movs r3, 0x82
 	lsls r3, 1

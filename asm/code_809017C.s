@@ -614,14 +614,14 @@ _08090602:
 	beq _0809063A
 	adds r0, r2, 0
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _08090638
 	ldr r0, [sp, 0xE0]
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -653,7 +653,7 @@ _08090644:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -661,7 +661,7 @@ _08090644:
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2837,14 +2837,14 @@ _0809161E:
 	movs r1, 0x8
 	ldrsh r0, [r6, r1]
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r2, 0x8
 	ldrsh r0, [r6, r2]
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r5, 0

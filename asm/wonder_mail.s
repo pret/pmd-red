@@ -33,7 +33,7 @@ sub_8029B50:
 	ldr r0, _08029C48
 	bl strcpy
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, [r5]
 	movs r3, 0x84
 	lsls r3, 3
@@ -2914,7 +2914,7 @@ sub_802B2D4:
 	adds r1, r4, 0
 	bl sub_808D8E0
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r1, [r5]
 	str r0, [r1, 0x4]
 	ldr r0, [r0, 0x4]
@@ -8089,7 +8089,7 @@ _0802DB4A:
 	ldr r0, [r0, 0x34]
 	movs r1, 0xC
 	ldrsh r0, [r0, r1]
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r1, [r4]
 	str r0, [r1, 0x38]
 	str r5, [r1, 0x3C]
@@ -10976,7 +10976,7 @@ sub_802F204:
 	ldr r0, [r0, 0x10]
 	movs r1, 0x14
 	ldrsh r0, [r0, r1]
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r1, [r5]
 	str r0, [r1, 0x14]
 	str r6, [r1, 0x18]
@@ -12448,7 +12448,7 @@ _0802FDE0:
 	adds r0, r4, 0
 	bl strcpy
 	adds r0, r5, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r3, _0802FE54
 	ldr r1, [r3]
 	str r0, [r1, 0x58]
@@ -14712,7 +14712,7 @@ _08030F88:
 	str r6, [r0]
 	movs r0, 0x98
 	lsls r0, 1
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r2, [r5]
 	movs r4, 0x84
 	lsls r4, 1
@@ -15385,7 +15385,7 @@ sub_80314B4:
 	cmp r5, 0
 	beq _0803151E
 	adds r0, r5, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	ldr r1, [r6]
 	str r0, [r1, 0x8]
 	strb r4, [r1, 0x14]

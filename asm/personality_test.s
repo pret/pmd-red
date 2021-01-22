@@ -1463,7 +1463,7 @@ sub_803CC80:
 	movs r0, 0x1
 	bl sub_80073B8
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	adds r5, r0, 0
 	ldr r0, [r5, 0x4]
 	ldr r6, [r0, 0xC]
@@ -1859,7 +1859,7 @@ sub_803CFC0:
 	movs r0, 0x1
 	bl sub_80073B8
 	adds r0, r4, 0
-	bl sub_808DDD0
+	bl GetDialogueSpriteDataPtr
 	adds r5, r0, 0
 	ldr r0, [r5, 0x4]
 	ldr r6, [r0, 0x4]
@@ -1909,14 +1909,14 @@ sub_803D030:
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	mov r1, sp
 	strb r0, [r1]
 	ldr r0, [r4]
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	mov r1, sp
 	strb r0, [r1, 0x1]
 	movs r7, 0
@@ -1930,11 +1930,11 @@ _0803D064:
 	ldrsh r4, [r1, r0]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	strb r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_808DC68
+	bl GetPokemonType
 	adds r2, r0, 0
 	strb r2, [r6, 0x1]
 	ldrb r1, [r6]

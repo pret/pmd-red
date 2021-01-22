@@ -2478,7 +2478,7 @@ _0808FF50:
 	movs r7, 0x8
 	ldrsh r0, [r6, r7]
 	adds r1, r4, 0
-	bl sub_808DC68
+	bl GetPokemonType
 	adds r1, r5, 0
 	adds r1, 0x16
 	adds r1, r4
@@ -2486,7 +2486,7 @@ _0808FF50:
 	movs r1, 0x8
 	ldrsh r0, [r6, r1]
 	adds r1, r4, 0
-	bl sub_808DC84
+	bl GetPokemonAbility
 	adds r1, r5, 0
 	adds r1, 0x18
 	adds r1, r4

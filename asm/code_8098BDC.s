@@ -3793,7 +3793,7 @@ _0809AD1C:
 	beq _0809ADC0
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl sub_808DD90
+	bl OpenPokemonDialogueSpriteFile
 	str r0, [r4, 0x20]
 	cmp r0, 0
 	beq _0809ADB6
