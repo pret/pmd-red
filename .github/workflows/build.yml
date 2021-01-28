@@ -9,10 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install xdelta
+      - name: Install xdelta and ARM GCC
         run: |
             sudo apt-get update -y
-            sudo apt-get install -y xdelta3
+            sudo apt-get install -y xdelta3 gcc-arm-none-eabi
 
       - name: Fetch repo
         uses: actions/checkout@master
