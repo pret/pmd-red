@@ -12,7 +12,7 @@ jobs:
       - name: Install xdelta
         run: |
             sudo apt-get update -y
-            sudo apt-get install -y xdelta
+            sudo apt-get install -y xdelta3
 
       - name: Fetch repo
         uses: actions/checkout@master
