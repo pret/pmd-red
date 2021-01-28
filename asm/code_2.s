@@ -1116,7 +1116,7 @@ _08000F58:
 	ldr r0, _08000F64
 	bl sub_80121E0
 _08000F5E:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _08000F78
 	.align 2, 0
 _08000F64: .4byte 0x000f1209

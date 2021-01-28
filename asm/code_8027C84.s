@@ -1277,7 +1277,7 @@ _08028782:
 	ldr r1, [r4]
 	str r0, [r1, 0x44]
 _0802878A:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _08028AF2
 _08028790:
 	ldr r0, [r6]

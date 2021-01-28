@@ -1,12 +1,15 @@
+#include <stdarg.h>
+#include <stdio.h>
 #include "global.h"
 #include "music.h"
 #include "constants/bg_music.h"
 #include "time.h"
 #include "bg.h"
 #include "input.h"
+#include "config.h"
+
 
 void sub_8011924(void);
-void nullsub_26(void);
 
 extern u8 sub_80023E4(u8);
 extern void sub_800BF48(u16 r0);
@@ -17,15 +20,6 @@ extern void sub_801199C(u16 r0);
 extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
 extern u8 sub_800C5D0(u16 r0);
-
-extern void nullsub_27(void);
-extern void nullsub_29(void);
-extern void nullsub_30(void);
-extern void nullsub_31(void);
-extern void nullsub_32(void);
-extern void nullsub_28(void);
-
-extern int sprintf(char *, const char *, ...);
 
 extern struct PlayTimeStruct *gUnknown_203B47C;
 
@@ -50,23 +44,12 @@ struct UnkBgStruct
 };
 extern struct UnkBgStruct *gUnknown_203B0E4;
 
-struct DebugLocation
-{
-    char *file;
-    u32 line;
-    char *func;
-};
-
 
 extern u16 gUnknown_80D4144[];
 extern s16 gUnknown_202DE20;
 extern s16 gUnknown_202DE22;
 extern s16 gUnknown_202DE24;
 extern u32 gUnknown_202DE1C;
-extern u32 gUnknown_203B14C;
-extern const char gNotEntryText[];
-extern const char gFuncFileLineString[];
-extern const char gFuncFileLineStringWPrefix[];
 
 void nullsub_8(u32);
 void sub_8005838(u32, u32);
@@ -114,32 +97,23 @@ void sub_801169C(void)
 void sub_8011760(void)
 {
     if(sub_80023E4(0xD) != 0)
-    {
         StartNewBGM(MUS_WORLD_CALAMITY);
-        return;
-    }
-    if(sub_80023E4(0xC) != 0)
-    {
+    else if(sub_80023E4(0xC) != 0)
         StartNewBGM(MUS_POKEMON_SQUARE);
-    }
 }
 
 void sub_801178C(void)
 {
     if(sub_80023E4(0xD) != 0)
-    {
         StartNewBGM(MUS_WORLD_CALAMITY);
-        return;
-    }
-    StartNewBGM(MUS_POKEMON_SQUARE);
+    else
+        StartNewBGM(MUS_POKEMON_SQUARE);
 }
 
 void sub_80117AC(void)
 {
     if(sub_80023E4(0xD) == 0)
-    {
         sub_800BFD0(0x1E);
-    }
 }
 
 void sub_80117C4(void)
@@ -149,17 +123,19 @@ void sub_80117C4(void)
 
 void sub_80117D0(void)
 {
-    sub_800C074(0x97 << 1, 0x80 << 1);
+    sub_800C074(0x97 << 1, 256);
 }
 
+// Some sound effect
 void sub_80117E4(void)
 {
-    sub_800C074(0x12f, 0x80 << 1);
+    sub_800C074(303, 256);
 }
 
+// Some sound effect
 void sub_80117F8(void)
 {
-    sub_800C074(0x12d, 0x80 << 1);
+    sub_800C074(301, 256);
 }
 
 void sub_801180C(void)
@@ -172,15 +148,15 @@ void sub_801180C(void)
 
 void sub_8011830(void)
 {
-    sub_800C93C();
+    StopBGMusicVSync();
     gUnknown_202DE20 = 0;
     gUnknown_202DE22 = 0;
     gUnknown_202DE24 = 0;
 }
 
-void sub_8011854(void)
+void xxx_call_start_bg_music(void)
 {
-    sub_800C9CC();
+    StartBGMusicVSync();
 }
 
 void sub_8011860(void)
@@ -238,40 +214,40 @@ void sub_8011930(u16 r0)
     sub_800BFD0(r0);
 }
 
-u32 sub_8011940(u16 r0)
+u32 IsEqualtoBGTrack(u16 songIndex)
 {
     u32 temp;
     temp = GetCurrentBGSong();
 
-    if(r0 == 999)
+    if(songIndex == 999)
         return temp != 999;
 
-    return temp == r0;
+    return temp == songIndex;
 }
 
-void sub_8011974(u16 r0, u16 r1)
+void sub_8011974(u16 songIndex, u16 r1)
 {
-    sub_800C074(r0, r1);
+    sub_800C074(songIndex, r1);
 }
 
-void sub_8011988(u16 r0)
+void sub_8011988(u16 songIndex)
 {
-    sub_800C074(r0, 0x80 << 1);
+    sub_800C074(songIndex, 0x80 << 1);
 }
 
-void sub_801199C(u16 r0)
+void sub_801199C(u16 songIndex)
 {
-    sub_800C298(r0);
+    sub_800C298(songIndex);
 }
 
-void sub_80119AC(u16 r0, u16 r1)
+void sub_80119AC(u16 songIndex, u16 r1)
 {
-    sub_800C3F8(r0, r1);
+    sub_800C3F8(songIndex, r1);
 }
 
-u8 sub_80119C0(u16 r0)
+u8 sub_80119C0(u16 songIndex)
 {
-    return sub_800C5D0(r0);
+    return sub_800C5D0(songIndex);
 }
 
 void sub_80119D4(u32 r0)
@@ -293,42 +269,4 @@ void sub_8011A04(void)
 void sub_8011A2C(u32 r0)
 {
     gUnknown_202DE1C = r0;
-}
-
-void NDS_DebugInit(void)
-{
-    nullsub_26();
-    nullsub_27();
-    nullsub_29();
-    nullsub_30();
-    nullsub_31();
-    nullsub_32();
-    nullsub_28();
-    gUnknown_203B14C = 1; // Maybe a flag saying Debug is on?
-}
-
-void nullsub_25(void)
-{
-}
-
-void nullsub_26(void)
-{
-}
-
-// Unused
-void PrintFuncFileLineOrNotEntry(char * r0, struct DebugLocation *r1)
-{
-    if(r1 != 0)
-    {
-        sprintf(r0, gFuncFileLineString, r1->func, r1->file, r1->line);
-    }
-    else
-    {
-        sprintf(r0, gNotEntryText);
-    }
-}
-
-void PrintFuncFileLine(char *buf, struct DebugLocation *loc, char* prefix)
-{
-    sprintf(buf, gFuncFileLineStringWPrefix, prefix, loc->func, loc->file, loc->line);
 }

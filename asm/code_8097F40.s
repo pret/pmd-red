@@ -5,34 +5,6 @@
 
 	.text
 	
-	thumb_func_start sub_8097F74
-sub_8097F74:
-	push {r4,lr}
-	ldr r4, _08097FA0
-	ldr r0, [r4]
-	movs r1, 0
-	movs r2, 0x64
-	bl memset
-	movs r2, 0
-	ldr r3, _08097FA4
-_08097F86:
-	ldr r0, [r4]
-	adds r0, 0x58
-	adds r0, r2
-	ldrb r1, [r3, 0x2]
-	strb r1, [r0]
-	adds r3, 0x4
-	adds r2, 0x1
-	cmp r2, 0xB
-	ble _08097F86
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08097FA0: .4byte gUnknown_203B498
-_08097FA4: .4byte gExclusivePokemon
-	thumb_func_end sub_8097F74
-
 	thumb_func_start sub_8097FA8
 sub_8097FA8:
 	lsls r0, 24

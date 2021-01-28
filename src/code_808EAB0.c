@@ -119,16 +119,10 @@ void sub_808EB48(u8 *r0, s32 r1)
 
 bool8 sub_808EB7C(s32 r0, u8 r1)
 {
-    u8 return_var;
     if(r1 == 0)
     {
         return FALSE;
     }
 
-    return_var = FALSE;
-    if(gUnknown_810A390[r1] <= r0)
-    {
-        return_var = TRUE;
-    }
-    return return_var;
+    return gUnknown_810A390[r1] <= r0;
 }

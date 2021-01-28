@@ -17,10 +17,8 @@ u32 sub_80927A8(u32 r0, u32 r1)
     sub_809486C(temp, r0, r1);
     for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
-        // TODO moves into R1 for the load else it matches
-        if(!gFriendAreas[counter])
-            temp[4] = gFriendAreas[counter];
-        else
+        // TODO fix one line diff of storing into temp[4]
+        if(gFriendAreas[counter])
             temp[4] = -1;
         sub_809488C(temp, &(temp[4]), 1);
     }

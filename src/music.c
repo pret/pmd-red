@@ -32,7 +32,7 @@ bool8 sub_800CAAC(u32);
 bool8 sub_800CACC(u32);
 u16 sub_800CAE0(u16);
 
-void sub_800C93C(void)
+void StopBGMusicVSync(void)
 {
     bool8 interrupt_flag;
     u16 temp;
@@ -50,7 +50,7 @@ void sub_800C93C(void)
             {
                 if(gBGMusicPlayerState == 2)
                 {
-                    gUnknown_202D694 = gUnknown_202D690;
+                    gUnknown_202D694 = 0;
                 }
                 else if(gBGMusicPlayerState == 1)
                 {
@@ -68,7 +68,7 @@ void sub_800C93C(void)
     }
 }
 
-void sub_800C9CC(void)
+void StartBGMusicVSync(void)
 {
     bool8 interrupt_flag = DisableInterrupts();
     m4aSoundVSyncOn();

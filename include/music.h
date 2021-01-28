@@ -1,8 +1,8 @@
 #ifndef GUARD_MUSIC_H
 #define GUARD_MUSIC_H
 
-void sub_800C93C(void);
-void sub_800C9CC(void);
+void StopBGMusicVSync(void);
+void StartBGMusicVSync(void);
 u8 sub_800CA38(u32 songIndex);
 void StartNewBGM(u16 songIndex);
 bool8 IsBGSong(u32 songIndex);

@@ -1481,7 +1481,7 @@ _0809DEE8:
 	str r0, [r1]
 	add r0, sp, 0x4
 	ldrh r0, [r0, 0x2]
-	bl sub_8011940
+	bl IsEqualtoBGTrack
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809DF06
