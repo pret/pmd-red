@@ -18,14 +18,6 @@ struct unkStruct_203B45C
     u8 unk29[0x2f];
 };
 
-struct unkFriendAreaStruct
-{
-    // size: 0x18
-    u32 unk0;
-    u32 unk4;
-    u32 padding[4];
-};
-
 extern struct unkStruct_203B45C gUnknown_203B45C[];
 
 extern bool8 *gFriendAreas;
@@ -622,75 +614,20 @@ void sub_8092558(u8 *buffer, u8 index)
     sub_800D158(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
-#ifdef NONMATCHING
 void sub_8092578(u8 *buffer, u8 index, u8 r2)
 {
     // I think this is when we buy the friend area from wigglytuff
-    struct unkFriendAreaStruct temp;
+    u32 temp[5];
     if(r2)
     {
-        sub_8090FEC(gFriendAreaSettings[index].price, &(temp.unk4), 1);
-        // TODO: There's some stack storage here in the middle calling this func
-        //         add     r0, sp, 0x4
-        //          str     r0, [sp] 
-        //temp.unk0 = temp.unk4;
-        sub_800D158(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96);
+        sub_8090FEC(gFriendAreaSettings[index].price, (&temp[0]), 1);
+        sub_800D158(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, temp);
     }
     else
     {
         strcpy(buffer, gFriendAreaNames[index]);
     }
 }
-#else
-NAKED void sub_8092578(u8 *buffer, u8 index, u8 r2)
-{
-        asm_unified("\tpush {r4,r5,lr}\n"
-	"\tsub sp, 0x18\n"
-	"\tadds r5, r0, 0\n"
-	"\tlsls r1, 24\n"
-	"\tlsrs r4, r1, 24\n"
-	"\tlsls r2, 24\n"
-	"\tcmp r2, 0\n"
-	"\tbeq _080925C0\n"
-	"\tldr r0, _080925B4\n"
-	"\tlsls r1, r4, 3\n"
-	"\tadds r0, 0x4\n"
-	"\tadds r1, r0\n"
-	"\tldr r0, [r1]\n"
-	"\tadd r1, sp, 0x4\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_8090FEC\n"
-	"\tldr r1, _080925B8\n"
-	"\tldr r2, _080925BC\n"
-	"\tlsls r0, r4, 2\n"
-	"\tadds r0, r2\n"
-	"\tldr r2, [r0]\n"
-	"\tadd r0, sp, 0x4\n"
-	"\tstr r0, [sp]\n"
-	"\tadds r0, r5, 0\n"
-	"\tmovs r3, 0x60\n"
-	"\tbl sub_800D158\n"
-	"\tb _080925CE\n"
-	"\t.align 2, 0\n"
-"\t_080925B4: .4byte gFriendAreaSettings\n"
-"\t_080925B8: .4byte gUnknown_81098AC\n"
-"\t_080925BC: .4byte gFriendAreaNames\n"
-"\t_080925C0:\n"
-	"\tldr r0, _080925D8\n"
-	"\tlsls r1, r4, 2\n"
-	"\tadds r1, r0\n"
-	"\tldr r1, [r1]\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl strcpy\n"
-"\t_080925CE:\n"
-	"\tadd sp, 0x18\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"\t_080925D8: .4byte gFriendAreaNames");
-}
-#endif
 
 u32 GetFriendAreaDescription(u8 index)
 {

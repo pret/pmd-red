@@ -75,7 +75,7 @@ extern void MemoryFree(void* a);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void sub_8011830(void);
 extern s32 WriteFlashData(s32 sector, u8 *src, s32 size);
-extern void sub_8011854(void);
+extern void xxx_call_start_bg_music(void);
 extern u32 *sub_809769C(void);
 u32 *sub_8011C4C(void);
 extern void sub_80958E4(u8 *a, u32 b);
@@ -125,7 +125,7 @@ u32 sub_8012240(void)
     MemoryFill8((u8 *)r5, 0xFF, 0x4);
     sub_8011830();
     temp = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));
-    sub_8011854();
+    xxx_call_start_bg_music();
     MemoryFree(r5);
     if(temp != 0)
     {

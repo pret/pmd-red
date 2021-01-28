@@ -2393,7 +2393,7 @@ _0802AEE2:
 	ldr r0, [r0]
 	str r0, [r1]
 _0802AEE6:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _0802B2AA
 _0802AEEC:
 	ldr r0, _0802AEF0
@@ -18996,7 +18996,7 @@ _080333DA:
 _080333DC:
 	str r0, [r1]
 _080333DE:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _080338B4
 _080333E4:
 	ldr r0, _080333E8
@@ -26254,7 +26254,7 @@ _08036D44:
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 _08036D66:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _08036DFA
 	.align 2, 0
 _08036D6C: .4byte gUnknown_203B358
@@ -27375,7 +27375,7 @@ _080376AE:
 	ldr r1, [r4]
 	str r0, [r1, 0x4]
 _080376BE:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -32681,7 +32681,7 @@ _0803A138:
 	movs r2, 0xB4
 	bl memcpy
 _0803A14C:
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	b _0803A1AA
 _0803A152:
 	ldr r0, _0803A160

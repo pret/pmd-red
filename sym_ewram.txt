@@ -292,16 +292,16 @@ gUnknown_202D692 = .; /* 202D692 */
 gUnknown_202D694 = .; /* 202D694 */
 	. += 0x4;
 
-gUnknown_202D698 = .; /* 202D698 */
+gBG0Control = .; /* 202D698 */
 	. += 0x8;
 
-gUnknown_202D6A0 = .; /* 202D6A0 */
+gBG1Control = .; /* 202D6A0 */
 	. += 0x8;
 
-gUnknown_202D6A8 = .; /* 202D6A8 */
+gBG2Control = .; /* 202D6A8 */
 	. += 0x8;
 
-gUnknown_202D6B0 = .; /* 202D6B0 */
+gBG3Control = .; /* 202D6B0 */
 	. += 0x8;
 
 gUnknown_202D6B8 = .; /* 202D6B8 */

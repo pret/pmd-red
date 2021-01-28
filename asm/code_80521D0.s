@@ -4476,7 +4476,7 @@ _08054B58:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058AAC
+	bl SkyAttackMoveAction
 	bl _080554BA
 _08054B68:
 	adds r0, r7, 0
@@ -4800,7 +4800,7 @@ _08054E0C:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B220
+	bl TrapperOrbAction
 	b _080554BA
 _08054E1A:
 	adds r0, r7, 0
@@ -4849,7 +4849,7 @@ _08054E6E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B8B0
+	bl SkullBashMoveAction
 	b _080554BA
 _08054E7C:
 	adds r0, r7, 0
@@ -4905,7 +4905,7 @@ _08054EDE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057A98
+	bl TormentMoveAction
 	b _080554BA
 _08054EEC:
 	adds r0, r7, 0
@@ -4961,7 +4961,7 @@ _08054F4E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C2AC
+	bl FillInOrbAction
 	b _080554BA
 _08054F5C:
 	adds r0, r7, 0
@@ -5031,7 +5031,7 @@ _08054FDA:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805983C
+	bl DiveMoveAction
 	b _080554BA
 _08054FE8:
 	adds r0, r7, 0
@@ -5066,7 +5066,7 @@ _08055020:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BF40
+	bl TrapbustOrbAction
 	b _080554BA
 _0805502E:
 	adds r0, r7, 0
@@ -5087,7 +5087,7 @@ _0805504A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805810C
+	bl GrudgeMoveAction
 	b _080554BA
 _08055058:
 	adds r0, r7, 0
@@ -5236,7 +5236,7 @@ _08055174:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A640
+	bl SpitUpMoveAction
 	b _080554BA
 _08055182:
 	adds r0, r7, 0
@@ -5341,7 +5341,7 @@ _08055246:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059C8C
+	bl HelpingHandMoveAction
 	b _080554BA
 _08055254:
 	adds r0, r7, 0
@@ -5390,7 +5390,7 @@ _080552A8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B038
+	bl TransformMoveAction
 	b _080554BA
 _080552B6:
 	adds r0, r7, 0
@@ -5425,7 +5425,7 @@ _080552EE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD88
+	bl TransferOrbAction
 	b _080554BA
 _080552FC:
 	adds r0, r7, 0
@@ -5474,7 +5474,7 @@ _08055350:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BED4
+	bl EscapeOrbAction
 	b _080554BA
 _0805535E:
 	adds r0, r7, 0
@@ -5502,7 +5502,7 @@ _08055388:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059340
+	bl SketchMoveAction
 	b _080554BA
 _08055396:
 	adds r0, r7, 0
@@ -5523,7 +5523,7 @@ _080553B2:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059290
+	bl SkillSwapMoveAction
 	b _080554BA
 _080553C0:
 	adds r0, r7, 0
@@ -5537,7 +5537,7 @@ _080553CE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BBA8
+	bl CleanseOrbAction
 	b _080554BA
 _080553DC:
 	adds r0, r7, 0
@@ -5635,7 +5635,7 @@ _08055492:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B464
+	bl MimicMoveAction
 	b _080554BA
 _080554A0:
 	adds r0, r7, 0
@@ -10577,8 +10577,8 @@ _08057A90: .4byte gUnknown_202DF98
 _08057A94: .4byte gUnknown_80FC7EC
 	thumb_func_end sub_8057A0C
 
-	thumb_func_start sub_8057A98
-sub_8057A98:
+	thumb_func_start TormentMoveAction
+TormentMoveAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -10719,7 +10719,7 @@ _08057B9C:
 	bx r1
 	.align 2, 0
 _08057BB0: .4byte gUnknown_80FCFE4
-	thumb_func_end sub_8057A98
+	thumb_func_end TormentMoveAction
 
 	thumb_func_start sub_8057BB4
 sub_8057BB4:
@@ -11439,8 +11439,8 @@ _080580F4:
 	bx r1
 	thumb_func_end sub_805805C
 
-	thumb_func_start sub_805810C
-sub_805810C:
+	thumb_func_start GrudgeMoveAction
+GrudgeMoveAction:
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
@@ -11478,7 +11478,7 @@ _0805814E:
 	bx r1
 	.align 2, 0
 _08058158: .4byte gUnknown_80FD294
-	thumb_func_end sub_805810C
+	thumb_func_end GrudgeMoveAction
 
 	thumb_func_start sub_805815C
 sub_805815C:
@@ -12740,8 +12740,8 @@ _08058AA4: .4byte gUnknown_8106A4C
 _08058AA8: .4byte gUnknown_8106A50
 	thumb_func_end sub_8058A7C
 
-	thumb_func_start sub_8058AAC
-sub_8058AAC:
+	thumb_func_start SkyAttackMoveAction
+SkyAttackMoveAction:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -12810,7 +12810,7 @@ _08058B2A:
 	bx r1
 	.align 2, 0
 _08058B38: .4byte gUnknown_80FACC4
-	thumb_func_end sub_8058AAC
+	thumb_func_end SkyAttackMoveAction
 
 	thumb_func_start sub_8058B3C
 sub_8058B3C:
@@ -13804,8 +13804,8 @@ _0805927E:
 	bx r1
 	thumb_func_end sub_80591E4
 
-	thumb_func_start sub_8059290
-sub_8059290:
+	thumb_func_start SkillSwapMoveAction
+SkillSwapMoveAction:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -13890,10 +13890,10 @@ _0805932E:
 	.align 2, 0
 _08059338: .4byte gUnknown_203B418
 _0805933C: .4byte gUnknown_80FC888
-	thumb_func_end sub_8059290
+	thumb_func_end SkillSwapMoveAction
 
-	thumb_func_start sub_8059340
-sub_8059340:
+	thumb_func_start SketchMoveAction
+SketchMoveAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -14008,7 +14008,7 @@ _0805940A:
 	.align 2, 0
 _0805941C: .4byte gUnknown_202DE58
 _08059420: .4byte gUnknown_80FE38C
-	thumb_func_end sub_8059340
+	thumb_func_end SketchMoveAction
 
 	thumb_func_start sub_8059424
 sub_8059424:
@@ -14549,8 +14549,8 @@ sub_80597F0:
 	bx r1
 	thumb_func_end sub_80597F0
 
-	thumb_func_start sub_805983C
-sub_805983C:
+	thumb_func_start DiveMoveAction
+DiveMoveAction:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -14616,7 +14616,7 @@ _080598B8:
 	bx r1
 	.align 2, 0
 _080598C8: .4byte gUnknown_80FAD2C
-	thumb_func_end sub_805983C
+	thumb_func_end DiveMoveAction
 
 	thumb_func_start sub_80598CC
 sub_80598CC:
@@ -15126,8 +15126,8 @@ sub_8059C80:
 	bx r1
 	thumb_func_end sub_8059C80
 
-	thumb_func_start sub_8059C8C
-sub_8059C8C:
+	thumb_func_start HelpingHandMoveAction
+HelpingHandMoveAction:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -15163,7 +15163,7 @@ _08059CC6:
 	.align 2, 0
 _08059CD0: .4byte gUnknown_8106A4C
 _08059CD4: .4byte gUnknown_8106A50
-	thumb_func_end sub_8059C8C
+	thumb_func_end HelpingHandMoveAction
 
 	thumb_func_start sub_8059CD8
 sub_8059CD8:
@@ -16432,8 +16432,8 @@ _0805A632:
 _0805A63C: .4byte gUnknown_80F4DD2
 	thumb_func_end sub_805A5E8
 
-	thumb_func_start sub_805A640
-sub_805A640:
+	thumb_func_start SpitUpMoveAction
+SpitUpMoveAction:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -16469,7 +16469,7 @@ _0805A678:
 	bx r1
 	.align 2, 0
 _0805A684: .4byte gUnknown_80FCA3C
-	thumb_func_end sub_805A640
+	thumb_func_end SpitUpMoveAction
 
 	thumb_func_start sub_805A688
 sub_805A688:
@@ -17721,8 +17721,8 @@ sub_805B028:
 	bx r1
 	thumb_func_end sub_805B028
 
-	thumb_func_start sub_805B038
-sub_805B038:
+	thumb_func_start TransformMoveAction
+TransformMoveAction:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -17751,7 +17751,7 @@ _0805B068:
 	bx r1
 	.align 2, 0
 _0805B070: .4byte gUnknown_80FEFF4
-	thumb_func_end sub_805B038
+	thumb_func_end TransformMoveAction
 
 	thumb_func_start sub_805B074
 sub_805B074:
@@ -17977,8 +17977,8 @@ sub_805B214:
 	bx r1
 	thumb_func_end sub_805B214
 
-	thumb_func_start sub_805B220
-sub_805B220:
+	thumb_func_start TrapperOrbAction
+TrapperOrbAction:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18012,7 +18012,7 @@ _0805B252:
 	bx r1
 	.align 2, 0
 _0805B260: .4byte gUnknown_80FC5A8
-	thumb_func_end sub_805B220
+	thumb_func_end TrapperOrbAction
 
 	thumb_func_start sub_805B264
 sub_805B264:
@@ -18297,8 +18297,8 @@ sub_805B454:
 	bx r1
 	thumb_func_end sub_805B454
 
-	thumb_func_start sub_805B464
-sub_805B464:
+	thumb_func_start MimicMoveAction
+MimicMoveAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -18404,7 +18404,7 @@ _0805B524:
 	bx r1
 	.align 2, 0
 _0805B538: .4byte gUnknown_80FDD00
-	thumb_func_end sub_805B464
+	thumb_func_end MimicMoveAction
 
 	thumb_func_start sub_805B53C
 sub_805B53C:
@@ -18864,8 +18864,8 @@ sub_805B884:
 _0805B8AC: .4byte gUnknown_8106A4C
 	thumb_func_end sub_805B884
 
-	thumb_func_start sub_805B8B0
-sub_805B8B0:
+	thumb_func_start SkullBashMoveAction
+SkullBashMoveAction:
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -18910,7 +18910,7 @@ _0805B900:
 	bx r1
 	.align 2, 0
 _0805B90C: .4byte gUnknown_80FAFF0
-	thumb_func_end sub_805B8B0
+	thumb_func_end SkullBashMoveAction
 
 	thumb_func_start sub_805B910
 sub_805B910:
@@ -19256,8 +19256,8 @@ sub_805BB98:
 	bx r1
 	thumb_func_end sub_805BB98
 
-	thumb_func_start sub_805BBA8
-sub_805BBA8:
+	thumb_func_start CleanseOrbAction
+CleanseOrbAction:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19358,7 +19358,7 @@ _0805BC60:
 	bx r1
 	.align 2, 0
 _0805BC6C: .4byte gUnknown_80FC920
-	thumb_func_end sub_805BBA8
+	thumb_func_end CleanseOrbAction
 
 	thumb_func_start sub_805BC70
 sub_805BC70:
@@ -19517,8 +19517,8 @@ sub_805BD7C:
 	bx r1
 	thumb_func_end sub_805BD7C
 
-	thumb_func_start sub_805BD88
-sub_805BD88:
+	thumb_func_start TransferOrbAction
+TransferOrbAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -19644,7 +19644,7 @@ _0805BE78:
 	.align 2, 0
 _0805BE88: .4byte gUnknown_202DF98
 _0805BE8C: .4byte gUnknown_80FD450
-	thumb_func_end sub_805BD88
+	thumb_func_end TransferOrbAction
 
 	thumb_func_start sub_805BE90
 sub_805BE90:
@@ -19694,8 +19694,8 @@ sub_805BEC8:
 	bx r1
 	thumb_func_end sub_805BEC8
 
-	thumb_func_start sub_805BED4
-sub_805BED4:
+	thumb_func_start EscapeOrbAction
+EscapeOrbAction:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -19739,7 +19739,7 @@ _0805BF26:
 	bx r1
 	.align 2, 0
 _0805BF30: .4byte gUnknown_80FD4C4
-	thumb_func_end sub_805BED4
+	thumb_func_end EscapeOrbAction
 
 	thumb_func_start sub_805BF34
 sub_805BF34:
@@ -19750,8 +19750,8 @@ sub_805BF34:
 	bx r1
 	thumb_func_end sub_805BF34
 
-	thumb_func_start sub_805BF40
-sub_805BF40:
+	thumb_func_start TrapbustOrbAction
+TrapbustOrbAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -19908,7 +19908,7 @@ _0805C06A:
 	bx r1
 	.align 2, 0
 _0805C07C: .4byte gUnknown_80FD1CC
-	thumb_func_end sub_805BF40
+	thumb_func_end TrapbustOrbAction
 
 	thumb_func_start sub_805C080
 sub_805C080:
@@ -20209,8 +20209,8 @@ sub_805C2A0:
 	bx r1
 	thumb_func_end sub_805C2A0
 
-	thumb_func_start sub_805C2AC
-sub_805C2AC:
+	thumb_func_start FillInOrbAction
+FillInOrbAction:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -20356,7 +20356,7 @@ _0805C3CA:
 	bx r1
 	.align 2, 0
 _0805C3D8: .4byte gUnknown_80FD0B8
-	thumb_func_end sub_805C2AC
+	thumb_func_end FillInOrbAction
 
 	thumb_func_start sub_805C3DC
 sub_805C3DC:

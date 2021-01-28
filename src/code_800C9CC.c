@@ -8,10 +8,10 @@ extern u8 gUnknown_202D6B9;
 extern u16 gUnknown_202D7FA;
 extern u8 gUnknown_202D7FE;
 
-extern struct BGControlStruct gUnknown_202D698;
-extern struct BGControlStruct gUnknown_202D6A0;
-extern struct BGControlStruct gUnknown_202D6A8;
-extern struct BGControlStruct gUnknown_202D6B0;
+extern struct BGControlStruct gBG0Control;
+extern struct BGControlStruct gBG1Control;
+extern struct BGControlStruct gBG2Control;
+extern struct BGControlStruct gBG3Control;
 
 void ReadKeyInput(struct Inputs *r0)
 {
@@ -93,26 +93,26 @@ void sub_800CC44(s32 r0, s32 r1)
 
 void SetBG0RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D698.hofs = xoffset;
-    gUnknown_202D698.vofs = yoffset;
+    gBG0Control.hofs = xoffset;
+    gBG0Control.vofs = yoffset;
 }
 
 void SetBG1RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6A0.hofs = xoffset;
-    gUnknown_202D6A0.vofs = yoffset;
+    gBG1Control.hofs = xoffset;
+    gBG1Control.vofs = yoffset;
 }
 
 void SetBG2RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6A8.hofs = xoffset;
-    gUnknown_202D6A8.vofs = yoffset;
+    gBG2Control.hofs = xoffset;
+    gBG2Control.vofs = yoffset;
 }
 
 void SetBG3RegOffsets(s32 xoffset, s32 yoffset)
 {
-    gUnknown_202D6B0.hofs = xoffset;
-    gUnknown_202D6B0.vofs = yoffset;
+    gBG3Control.hofs = xoffset;
+    gBG3Control.vofs = yoffset;
 }
 
 void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset)
@@ -131,16 +131,16 @@ void SetBGRegXOffset(s32 reg, s32 offset)
     switch (reg) {
         default:
         case 0:
-            gUnknown_202D698.hofs = offset;
+            gBG0Control.hofs = offset;
             break;
         case 1:
-            gUnknown_202D6A0.hofs = offset;
+            gBG1Control.hofs = offset;
             break;
         case 2:
-            gUnknown_202D6A8.hofs = offset;
+            gBG2Control.hofs = offset;
             break;
         case 3:
-            gUnknown_202D6B0.hofs = offset;
+            gBG3Control.hofs = offset;
             break;
     }
 }
@@ -150,16 +150,16 @@ void SetBGRegYOffset(s32 reg, s32 offset)
     switch (reg) {
         default:
         case 0:
-            gUnknown_202D698.vofs = offset;
+            gBG0Control.vofs = offset;
             break;
         case 1:
-            gUnknown_202D6A0.vofs = offset;
+            gBG1Control.vofs = offset;
             break;
         case 2:
-            gUnknown_202D6A8.vofs = offset;
+            gBG2Control.vofs = offset;
             break;
         case 3:
-            gUnknown_202D6B0.vofs = offset;
+            gBG3Control.vofs = offset;
             break;
     }
 }
@@ -167,7 +167,7 @@ void SetBGRegYOffset(s32 reg, s32 offset)
 void sub_800CD64(s32 r0, u8 r1)
 {
     gUnknown_202D7FE = r1;
-    gUnknown_202D6A8.unk2 = r0 ? 0x8000 : 0; 
+    gBG2Control.unk2 = r0 ? 0x8000 : 0; 
 }
 
 void SetBGOBJEnableFlags(u32 mask)

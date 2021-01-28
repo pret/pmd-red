@@ -2875,7 +2875,7 @@ _08014110: .4byte 0x004000bc
 	thumb_func_start sub_8014114
 sub_8014114:
 	push {lr}
-	bl sub_8011854
+	bl xxx_call_start_bg_music
 	movs r0, 0
 	bl SetSavingIconCoords
 	pop {r0}

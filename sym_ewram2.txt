@@ -161,7 +161,7 @@ gUnknown_203B0E8 = .; /* 203B0E8 */
 gUnknown_203B0EC = .; /* 203B0EC */
 	. += 0x60;
 
-gUnknown_203B14C = .; /* 203B14C */
+gNDS_DebugEnabled = .; /* 203B14C */
 	. += 0x4;
 
 gUnknown_203B150 = .; /* 203B150 */
