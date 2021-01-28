@@ -1,0 +1,45 @@
+name: GithubCI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install xdelta
+        run: |
+            apt-get update -y
+            apt-get install -y xdelta
+
+      - name: Fetch repo
+        uses: actions/checkout@master
+      
+      - name: Load and setup agbcc
+        run: |
+          git clone https://github.com/luckytyphlosion/agbcc.git -b new_layout_with_libs
+          cd agbcc && make -j${nproc} && make install prefix=$GITHUB_WORKSPACE
+        
+      - name: Build tools and baserom
+        run: |
+          cd $GITHUB_WORKSPACE
+          make tools
+          head -c 33554432 /dev/zero > tmp.bin
+          xdelta3 -d -s tmp.bin baserom.xdelta baserom.gba
+          rm tmp.bin
+        
+      - name: Build via Makefile
+        run: |
+          make -j${nproc} compare
+      
+      # only run OK when pushed to master
+      - name: Run OK webhook
+        shell: bash
+        if: ${{ github.event_name == 'push' }}
+        env:
+          CALCROM_DISCORD_WEBHOOK_USERNAME: ${{ secrets.CALCROM_DISCORD_WEBHOOK_USERNAME }}
+          CALCROM_DISCORD_WEBHOOK_AVATAR_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_AVATAR_URL }}
+          CALCROM_DISCORD_WEBHOOK_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
+        run: sh .github/calcrom/webhook.sh pmd_red
