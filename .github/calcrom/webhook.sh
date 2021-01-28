@@ -1,9 +1,6 @@
 #!/bin/bash -ex
 
-# Only run this script if it's the master branch build.
-if [[ "$TRAVIS_BRANCH" != "master" || "$TRAVIS_PULL_REQUEST" != "false" ]]; then
-  exit 0
-fi
+# the workflow will make sure this runs on a push to master only
 
 build_name=$1
 map_file=$build_name.map
