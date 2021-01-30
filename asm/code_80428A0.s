@@ -1516,7 +1516,7 @@ _08043706:
 	strb r5, [r0, 0x5]
 	cmp r6, 0
 	bne _08043778
-	bl sub_8084B64
+	bl DisplayPreFightDialogue
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0

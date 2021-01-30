@@ -1846,7 +1846,7 @@ _080A860C:
 	b _080A865A
 	.align 2, 0
 _080A861C: .4byte gUnknown_8117F10
-_080A8620: .4byte gUnknown_812F1F8
+_080A8620: .4byte gFunctionScriptTable
 _080A8624: .4byte gUnknown_3001B80
 _080A8628: .4byte gUnknown_811817C
 _080A862C: .4byte gUnknown_8118188
@@ -9431,7 +9431,7 @@ _080AC142:
 _080AC154: .4byte gUnknown_81182A0
 _080AC158: .4byte gUnknown_81182F4
 _080AC15C: .4byte gUnknown_8118350
-_080AC160: .4byte gUnknown_812F1F8
+_080AC160: .4byte gFunctionScriptTable
 _080AC164: .4byte gUnknown_81184A4
 	thumb_func_end GroundObject_Add
 
@@ -11225,7 +11225,7 @@ GroundEffect_Add:
 	movs r6, 0
 	b _080ACE38
 	.align 2, 0
-_080ACE08: .4byte gUnknown_811EE38
+_080ACE08: .4byte gFunctionScriptData
 _080ACE0C: .4byte gUnknown_3001B8C
 _080ACE10:
 	adds r0, r2, 0x1
@@ -11542,7 +11542,7 @@ _080AD062:
 	bx r1
 	.align 2, 0
 _080AD074: .4byte gUnknown_8118544
-_080AD078: .4byte gUnknown_812F1F8
+_080AD078: .4byte gFunctionScriptTable
 _080AD07C: .4byte gUnknown_81186CC
 	thumb_func_end GroundEffect_Add
 

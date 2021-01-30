@@ -101583,8 +101583,8 @@ _08084B5C:
 	bx r0
 	thumb_func_end sub_80848F0
 
-	thumb_func_start sub_8084B64
-sub_8084B64:
+	thumb_func_start DisplayPreFightDialogue
+DisplayPreFightDialogue:
 	push {lr}
 	ldr r0, _08084B80
 	ldr r0, [r0]
@@ -101668,7 +101668,7 @@ _08084B8C:
 	.4byte _08084DD6
 	.4byte _08084DDA
 _08084C80:
-	bl sub_8086C0C
+	bl SkarmonyPreFightDialogue
 	b _08084DDA
 _08084C86:
 	bl sub_8086DAC
@@ -101761,22 +101761,22 @@ _08084D34:
 	bl sub_8089D2C
 	b _08084DDA
 _08084D3A:
-	bl sub_8089D8C
+	bl EnteiPreFightDialogue1
 	b _08084DDA
 _08084D40:
-	bl sub_8089DEC
+	bl EnteiPreFightDialogue
 	b _08084DDA
 _08084D46:
-	bl sub_808A020
+	bl RaikouPreFightDialogue
 	b _08084DDA
 _08084D4C:
-	bl sub_808A0C8
+	bl RaikouPreFightDialogue1
 	b _08084DDA
 _08084D52:
-	bl sub_808A144
+	bl RaikouPreFightDialogue2
 	b _08084DDA
 _08084D58:
-	bl sub_808A39C
+	bl SuicunePreFightDialogue
 	b _08084DDA
 _08084D5E:
 	bl sub_808A454
@@ -101788,10 +101788,10 @@ _08084D6A:
 	bl sub_808A724
 	b _08084DDA
 _08084D70:
-	bl sub_808A828
+	bl HoOhPreFightDialogue
 	b _08084DDA
 _08084D76:
-	bl sub_808AB20
+	bl LatiosPreFightDialogue
 	b _08084DDA
 _08084D7C:
 	bl sub_808ABD8
@@ -101815,10 +101815,10 @@ _08084DA0:
 	bl sub_808BA78
 	b _08084DDA
 _08084DA6:
-	bl sub_808BE94
+	bl LugiaPreFightDialogue
 	b _08084DDA
 _08084DAC:
-	bl sub_808C1CC
+	bl KyogrePreFightDialogue
 	b _08084DDA
 _08084DB2:
 	bl sub_808C43C
@@ -101855,7 +101855,7 @@ _08084DDA:
 	.align 2, 0
 _08084DF8: .4byte gUnknown_203B418
 _08084DFC: .4byte 0x0001356c
-	thumb_func_end sub_8084B64
+	thumb_func_end DisplayPreFightDialogue
 
 	thumb_func_start sub_8084E00
 sub_8084E00:
@@ -105598,8 +105598,8 @@ _08086C02:
 _08086C08: .4byte gUnknown_203B418
 	thumb_func_end sub_8086BDC
 
-	thumb_func_start sub_8086C0C
-sub_8086C0C:
+	thumb_func_start SkarmonyPreFightDialogue
+SkarmonyPreFightDialogue:
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -105758,7 +105758,7 @@ _08086D9C: .4byte gUnknown_8100928
 _08086DA0: .4byte gUnknown_8100A04
 _08086DA4: .4byte gUnknown_8100B80
 _08086DA8: .4byte gUnknown_8100BC0
-	thumb_func_end sub_8086C0C
+	thumb_func_end SkarmonyPreFightDialogue
 
 	thumb_func_start sub_8086DAC
 sub_8086DAC:
@@ -110953,8 +110953,8 @@ _08089D84: .4byte gUnknown_81041AC
 _08089D88: .4byte gUnknown_81041F8
 	thumb_func_end sub_8089D2C
 
-	thumb_func_start sub_8089D8C
-sub_8089D8C:
+	thumb_func_start EnteiPreFightDialogue1
+EnteiPreFightDialogue1:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -110989,10 +110989,10 @@ sub_8089D8C:
 _08089DE0: .4byte gUnknown_8104240
 _08089DE4: .4byte gUnknown_81042AC
 _08089DE8: .4byte gUnknown_81042B8
-	thumb_func_end sub_8089D8C
+	thumb_func_end EnteiPreFightDialogue1
 
-	thumb_func_start sub_8089DEC
-sub_8089DEC:
+	thumb_func_start EnteiPreFightDialogue
+EnteiPreFightDialogue:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r5, r0, 0
@@ -111040,7 +111040,7 @@ _08089E54:
 _08089E5C: .4byte gUnknown_8104310
 _08089E60: .4byte gUnknown_810439C
 _08089E64: .4byte gUnknown_81043C0
-	thumb_func_end sub_8089DEC
+	thumb_func_end EnteiPreFightDialogue
 
 	thumb_func_start sub_8089E68
 sub_8089E68:
@@ -111249,8 +111249,8 @@ _0808A016:
 _0808A01C: .4byte gUnknown_203B418
 	thumb_func_end sub_8089FF0
 
-	thumb_func_start sub_808A020
-sub_808A020:
+	thumb_func_start RaikouPreFightDialogue
+RaikouPreFightDialogue:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -111309,10 +111309,10 @@ _0808A0B8: .4byte gUnknown_810453C
 _0808A0BC: .4byte gUnknown_8104570
 _0808A0C0: .4byte gUnknown_81045B0
 _0808A0C4: .4byte 0x0000028a
-	thumb_func_end sub_808A020
+	thumb_func_end RaikouPreFightDialogue
 
-	thumb_func_start sub_808A0C8
-sub_808A0C8:
+	thumb_func_start RaikouPreFightDialogue1
+RaikouPreFightDialogue1:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -111358,10 +111358,10 @@ _0808A134: .4byte gUnknown_81045F8
 _0808A138: .4byte gUnknown_8104674
 _0808A13C: .4byte gUnknown_81046A0
 _0808A140: .4byte 0x0000028a
-	thumb_func_end sub_808A0C8
+	thumb_func_end RaikouPreFightDialogue1
 
-	thumb_func_start sub_808A144
-sub_808A144:
+	thumb_func_start RaikouPreFightDialogue2
+RaikouPreFightDialogue2:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r5, r0, 0
@@ -111419,7 +111419,7 @@ _0808A1C8: .4byte gUnknown_81046CC
 _0808A1CC: .4byte gUnknown_8104744
 _0808A1D0: .4byte gUnknown_810476C
 _0808A1D4: .4byte 0x0000028a
-	thumb_func_end sub_808A144
+	thumb_func_end RaikouPreFightDialogue2
 
 	thumb_func_start sub_808A1D8
 sub_808A1D8:
@@ -111630,8 +111630,8 @@ _0808A392:
 _0808A398: .4byte gUnknown_203B418
 	thumb_func_end sub_808A36C
 
-	thumb_func_start sub_808A39C
-sub_808A39C:
+	thumb_func_start SuicunePreFightDialogue
+SuicunePreFightDialogue:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -111695,7 +111695,7 @@ _0808A444: .4byte gUnknown_8104888
 _0808A448: .4byte gUnknown_81048C8
 _0808A44C: .4byte gUnknown_8104914
 _0808A450: .4byte 0x0000028a
-	thumb_func_end sub_808A39C
+	thumb_func_end SuicunePreFightDialogue
 
 	thumb_func_start sub_808A454
 sub_808A454:
@@ -112120,8 +112120,8 @@ _0808A820: .4byte gUnknown_8104CB4
 _0808A824: .4byte gUnknown_8104CE0
 	thumb_func_end sub_808A724
 
-	thumb_func_start sub_808A828
-sub_808A828:
+	thumb_func_start HoOhPreFightDialogue
+HoOhPreFightDialogue:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	bl sub_8085480
@@ -112202,7 +112202,7 @@ _0808A8F4: .4byte sub_8086910
 _0808A8F8: .4byte gUnknown_8104D60
 _0808A8FC: .4byte gUnknown_8104DDC
 _0808A900: .4byte gUnknown_8104E0C
-	thumb_func_end sub_808A828
+	thumb_func_end HoOhPreFightDialogue
 
 	thumb_func_start sub_808A904
 sub_808A904:
@@ -112453,8 +112453,8 @@ _0808AB16:
 _0808AB1C: .4byte gUnknown_203B418
 	thumb_func_end sub_808AAF0
 
-	thumb_func_start sub_808AB20
-sub_808AB20:
+	thumb_func_start LatiosPreFightDialogue
+LatiosPreFightDialogue:
 	push {r4,r5,lr}
 	sub sp, 0x10
 	bl sub_8085480
@@ -112524,7 +112524,7 @@ _0808ABC8: .4byte 0x000001bd
 _0808ABCC: .4byte gUnknown_8104E60
 _0808ABD0: .4byte gUnknown_8104EFC
 _0808ABD4: .4byte gUnknown_8104F30
-	thumb_func_end sub_808AB20
+	thumb_func_end LatiosPreFightDialogue
 
 	thumb_func_start sub_808ABD8
 sub_808ABD8:
@@ -113495,7 +113495,7 @@ _0808B418:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808B43C
-	bl sub_808B5B8
+	bl JirachiWish
 	b _0808B440
 	.align 2, 0
 _0808B434: .4byte gUnknown_203B418
@@ -113655,8 +113655,8 @@ _0808B5B0: .4byte gUnknown_81055F4
 _0808B5B4: .4byte gUnknown_203B418
 	thumb_func_end sub_808B50C
 
-	thumb_func_start sub_808B5B8
-sub_808B5B8:
+	thumb_func_start JirachiWish
+JirachiWish:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -114155,7 +114155,7 @@ _0808BA68: .4byte gUnknown_203B418
 _0808BA6C: .4byte 0x00000674
 _0808BA70: .4byte gUnknown_81058E0
 _0808BA74: .4byte gUnknown_810593C
-	thumb_func_end sub_808B5B8
+	thumb_func_end JirachiWish
 
 	thumb_func_start sub_808BA78
 sub_808BA78:
@@ -114662,8 +114662,8 @@ _0808BE8A:
 _0808BE90: .4byte gUnknown_203B418
 	thumb_func_end sub_808BE70
 
-	thumb_func_start sub_808BE94
-sub_808BE94:
+	thumb_func_start LugiaPreFightDialogue
+LugiaPreFightDialogue:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	bl sub_8085480
@@ -114762,7 +114762,7 @@ _0808BF90: .4byte gUnknown_8105F74
 _0808BF94: .4byte gUnknown_8105FA0
 _0808BF98: .4byte gUnknown_8105FD8
 _0808BF9C: .4byte gUnknown_8106024
-	thumb_func_end sub_808BE94
+	thumb_func_end LugiaPreFightDialogue
 
 	thumb_func_start sub_808BFA0
 sub_808BFA0:
@@ -115024,8 +115024,8 @@ _0808C1C4:
 _0808C1C8: .4byte gUnknown_203B418
 	thumb_func_end sub_808C1A4
 
-	thumb_func_start sub_808C1CC
-sub_808C1CC:
+	thumb_func_start KyogrePreFightDialogue
+KyogrePreFightDialogue:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -115121,7 +115121,7 @@ _0808C2C0: .4byte gUnknown_8106140
 _0808C2C4: .4byte gUnknown_8106214
 _0808C2C8: .4byte gUnknown_8106244
 _0808C2CC: .4byte gUnknown_810627C
-	thumb_func_end sub_808C1CC
+	thumb_func_end KyogrePreFightDialogue
 
 	thumb_func_start nullsub_99
 nullsub_99:

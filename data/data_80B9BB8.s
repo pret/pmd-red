@@ -22,7 +22,28 @@ gUnknown_80B9BF1: @ 80B9BF1
 
 	.global gUnknown_80B9C00
 gUnknown_80B9C00: @ 80B9C00
-	.incbin "baserom.gba", 0xB9C00, 0x60
+        .4byte gUnknown_202DBB8
+        .4byte VBlankIntr
+        .4byte VCountIntr
+        .4byte nullsub_177
+        .4byte Timer3Intr
+        .4byte nullsub_177
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "MultiSio010918\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80B9C60
 gUnknown_80B9C60: @ 80B9C60
@@ -296,81 +317,79 @@ gUnknown_80D3EEC: @ 80D3EEC
 
 	.global gUnknown_80D3EFC
 gUnknown_80D3EFC: @ 80D3EFC
-        .byte 0x24, 0x74, 0x20, 0x54
-        .byte 0x65, 0x61, 0x6d, 0x20
-        .byte 0x42, 0x61, 0x73, 0x65
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x70, 0x6b, 0x73, 0x64
-        .byte 0x69, 0x72, 0x30, 0x00
+        .string "$t Team Base\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gDungeonCoordinates
 gDungeonCoordinates: @ 80D3F14
 @ replacing .incbin "baserom.gba", 0x000d3f14, 0x100
 @ 2 byte X and 2 byte Y
-        .byte 0xac, 0x00, 0xae, 0x00 @ Tiny Woods
-        .byte 0xab, 0x00, 0x6f, 0x00
-        .byte 0xf2, 0x00, 0x7e, 0x00
-        .byte 0xe8, 0x00, 0xb5, 0x00
-        .byte 0x07, 0x01, 0x9b, 0x00
-        .byte 0x2a, 0x01, 0x9f, 0x00
-        .byte 0x2b, 0x01, 0x8e, 0x00
-        .byte 0xcb, 0x00, 0xff, 0x00
-        .byte 0x81, 0x01, 0xa6, 0x00
-        .byte 0x84, 0x01, 0x7e, 0x00
-        .byte 0x85, 0x01, 0x6d, 0x00
-        .byte 0xa1, 0x01, 0x70, 0x00
-        .byte 0xa6, 0x01, 0x65, 0x00
-        .byte 0xb0, 0x01, 0x55, 0x00
-        .byte 0xb4, 0x01, 0x45, 0x00
-        .byte 0xba, 0x01, 0x96, 0x00
-        .byte 0xbe, 0x01, 0xa3, 0x00
-        .byte 0x6d, 0x01, 0x1b, 0x00
-        .byte 0x60, 0x01, 0x0c, 0x00
-        .byte 0x85, 0x00, 0xee, 0x00
-        .byte 0x81, 0x00, 0x8f, 0x00
-        .byte 0x58, 0x01, 0x69, 0x00
-        .byte 0xab, 0x01, 0x3e, 0x00
-        .byte 0x1b, 0x00, 0xd3, 0x00
-        .byte 0xf6, 0x00, 0x3b, 0x01
-        .byte 0xbb, 0x01, 0x06, 0x00
-        .byte 0x20, 0x00, 0x17, 0x01
-        .byte 0x94, 0x01, 0x06, 0x01
-        .byte 0xc2, 0x00, 0x3f, 0x00
-        .byte 0x9f, 0x00, 0x2e, 0x00
-        .byte 0xb9, 0x01, 0x36, 0x01
-        .byte 0xe7, 0x00, 0xeb, 0x00
-        .byte 0xa9, 0x00, 0x1f, 0x01
-        .byte 0xb9, 0x01, 0x11, 0x01
-        .byte 0x40, 0x00, 0x57, 0x00
-        .byte 0x50, 0x00, 0x36, 0x00
-        .byte 0xaf, 0x01, 0xe1, 0x00
-        .byte 0x1b, 0x00, 0x5e, 0x00
-        .byte 0x62, 0x01, 0x2a, 0x01
-        .byte 0x50, 0x01, 0xfd, 0x00
-        .byte 0x1f, 0x01, 0xde, 0x00
-        .byte 0x3f, 0x00, 0xa3, 0x00
-        .byte 0x13, 0x01, 0x6f, 0x00
-        .byte 0xca, 0x00, 0xe8, 0x00
-        .byte 0x0c, 0x01, 0x2e, 0x01
-        .byte 0x50, 0x01, 0x04, 0x01
-        .byte 0x6e, 0x00, 0x4f, 0x00
-        .byte 0xe1, 0x00, 0x3a, 0x01
-        .byte 0xce, 0x00, 0x3a, 0x01
-        .byte 0x0b, 0x00, 0x33, 0x01
-        .byte 0xd8, 0x01, 0x19, 0x00
-        .byte 0xfa, 0x00, 0x08, 0x00
-        .byte 0xbb, 0x00, 0xbe, 0x00
-        .byte 0xcd, 0x00, 0x6f, 0x00
-        .byte 0xda, 0x01, 0x06, 0x00
-        .byte 0xb7, 0x00, 0x09, 0x00
-        .byte 0x6f, 0x01, 0xd6, 0x00
-        .byte 0x16, 0x01, 0x11, 0x01
-        .byte 0x44, 0x00, 0x31, 0x01
-        .byte 0x0e, 0x01, 0x21, 0x00
-        .byte 0x21, 0x00, 0x27, 0x00
-        .byte 0xd9, 0x00, 0x08, 0x00
-        .byte 0x45, 0x00, 0x18, 0x01
-        .byte 0xc0, 0x00, 0xb7, 0x00 @ D63
+        .2byte 172, 174 @ Tiny Woods
+        .2byte 171, 111
+        .2byte 242, 126
+        .2byte 232, 181
+        .2byte 263, 155
+        .2byte 298, 159
+        .2byte 299, 142
+        .2byte 203, 255
+        .2byte 385, 166
+        .2byte 388, 126
+        .2byte 389, 109
+        .2byte 417, 112
+        .2byte 422, 101
+        .2byte 432, 85
+        .2byte 436, 69
+        .2byte 442, 150
+        .2byte 446, 163
+        .2byte 365, 27
+        .2byte 352, 12
+        .2byte 133, 238
+        .2byte 129, 143
+        .2byte 344, 105
+        .2byte 427, 62
+        .2byte 27, 211
+        .2byte 246, 315
+        .2byte 443, 6
+        .2byte 32, 279
+        .2byte 404, 262
+        .2byte 194, 63
+        .2byte 159, 46
+        .2byte 441, 310
+        .2byte 231, 235
+        .2byte 169, 287
+        .2byte 441, 273
+        .2byte 64, 87
+        .2byte 80, 54
+        .2byte 431, 225
+        .2byte 27, 94
+        .2byte 354, 298
+        .2byte 336, 253
+        .2byte 287, 222
+        .2byte 63, 163
+        .2byte 275, 111
+        .2byte 202, 232
+        .2byte 268, 302
+        .2byte 336, 260
+        .2byte 110, 79
+        .2byte 225, 314
+        .2byte 206, 314
+        .2byte 11, 307
+        .2byte 472, 25
+        .2byte 250, 8
+        .2byte 187, 190
+        .2byte 205, 111
+        .2byte 474, 6
+        .2byte 183, 9
+        .2byte 367, 214
+        .2byte 278, 273
+        .2byte 68, 305
+        .2byte 270, 33
+        .2byte 33, 39
+        .2byte 217, 8
+        .2byte 69, 280
+        .2byte 192, 183 @ D63
 
 	.global gUnknown_80D4014
 gUnknown_80D4014: @ 80D4014
@@ -663,7 +682,15 @@ gUnknown_80D44B0: @ 80D44B0
 
 	.global gUnknown_80D44C8
 gUnknown_80D44C8: @ 80D44C8
-	.incbin "baserom.gba", 0xD44C8, 0xE4
+        .string "#+Your data was not properly saved~2c\n"
+        .string "#+so your game cannot be resumed\n"
+        .string "#+from your last spot.#P#+Your last outing is considered a defeat.\n"
+        .string "#+Before shutting down~2c save in your\n"
+        .string "#+team base~2c or quicksave in a dungeon.\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+
 
 	.global gUnknown_80D45AC
 gUnknown_80D45AC: @ 80D45AC
@@ -673,15 +700,26 @@ gUnknown_80D45AC: @ 80D45AC
 
 	.global gUnknown_80D45F4
 gUnknown_80D45F4: @ 80D45F4
-	.incbin "baserom.gba", 0xD45F4, 0x74
+        .string "#+Your adventure has been saved.\n"
+        .string "#+When you are in a dungeon~2c quicksave\n"
+        .string "#+your progress before ending the game.\0"
+        .align 2,0
 
 	.global gUnknown_80D4668
 gUnknown_80D4668: @ 80D4668
-	.incbin "baserom.gba", 0xD4668, 0xD4
+        .string "#+Your adventure has been saved.\n"
+        .string "#+When you resume play~2c the quicksave\n"
+        .string "#+data will be deleted.#P#+When you are shutting down the game~2c\n"
+        .string "#+save your progress in your team base~2c\n"
+        .string "#+or quicksave in a dungeon.\0"
+        .align 2,0
 
 	.global gUnknown_80D473C
 gUnknown_80D473C: @ 80D473C
-	.incbin "baserom.gba", 0xD473C, 0x64
+        .string "#+The data could not be written.\n"
+        .string "#+Please turn off the power and remove\n"
+        .string "#+and reinsert the DS Card.\0"
+        .align 2,0
 
 	.global gUnknown_80D47A0
 gUnknown_80D47A0: @ 80D47A0
@@ -773,8 +811,8 @@ gUnknown_80D48F4: @ 80D48F4
 
 	.global gUnknown_80D48F8
 gUnknown_80D48F8: @ 80D48F8
-        .byte 0x3F, 0x3F, 0x3F, 0x3F @ apparently 4 ?'s
-        .byte 0x00, 0x00, 0x00, 0x00
+        .string "????\0"
+        .align 2,0
 
 	.global gUnknown_80D4900
 gUnknown_80D4900: @ 80D4900
@@ -817,54 +855,77 @@ gUnknown_80D4928: @ 80D4928
 gUnknown_80D4934: @ 80D4934
         .4byte CancelText
 
+        .global TrashText
+        TrashText:
         .string "Trash \0"
         .align 2,0
 
 	.global gUnknown_80D4940
 gUnknown_80D4940: @ 80D4940
-        .byte 0x38, 0x49, 0x0D, 0x08
+        .4byte TrashText
+
+        .global DeleteText
+        DeleteText:
         .string "Delete\0"
         .align 2,0
 
 	.global gUnknown_80D494C
 gUnknown_80D494C: @ 80D494C
-        .byte 0x44, 0x49, 0x0D, 0x08
+        .4byte DeleteText
+
+        .global StoreText
+        StoreText:
         .string "Store\0"
         .align 2,0
 
 	.global gUnknown_80D4958
 gUnknown_80D4958: @ 80D4958
-        .byte 0x50, 0x49, 0x0D, 0x08
+        .4byte StoreText
+
+        .global TakeText
+        TakeText:
         .string "Take\0"
         .align 2,0
 
 	.global gUnknown_80D4964
 gUnknown_80D4964: @ 80D4964
-        .byte 0x5C, 0x49, 0x0D, 0x08 @ Pointer to Take
+        .4byte TakeText
+
+        .global InfoText
+        InfoText:
         .string "Info\0"
         .align 2,0
 
 	.global gUnknown_80D4970
 gUnknown_80D4970: @ 80D4970
-        .byte 0x68, 0x49, 0x0D, 0x08 @ Pointer to Info
+        .4byte InfoText
+
+        .global BuyText
+        BuyText:
         .string "Buy\0"
         .align 2,0
 
 	.global gUnknown_80D4978
 gUnknown_80D4978: @ 80D4978
-        .byte 0x74, 0x49, 0x0D, 0x08 @ Pointer to Buy
+        .4byte BuyText
+
+        .global SellText
+        SellText:
         .string "Sell \0"
         .align 2,0
 
 	.global gUnknown_80D4984
 gUnknown_80D4984: @ 80D4984
-        .byte 0x7C, 0x49, 0x0D, 0x08 @ Pointer to Sell
+        .4byte SellText
+
+        .global AcceptText
+        AcceptText:
         .string "Accept\0"
         .align 2,0
 
 	.global gUnknown_80D4990
 gUnknown_80D4990: @ 80D4990
-        .byte 0x88, 0x49, 0x0D, 0x08 @ Pointer to Accept
+        .4byte AcceptText
 
         .global WigglytuffCheck
         WigglytuffCheck:
@@ -875,12 +936,14 @@ gUnknown_80D4990: @ 80D4990
 gWigglytuffCheck: @ 80D499C
         .4byte WigglytuffCheck
 
+        .global FriendText
+        FriendText:
         .string "Friend\0"
         .align 2,0
 
 	.global gUnknown_80D49A8
 gUnknown_80D49A8: @ 80D49A8
-        .byte 0xA0, 0x49, 0x0D, 0x08 @ Pointer to Friend
+        .4byte FriendText
 
         .global ExitText
         ExitText:
@@ -1057,7 +1120,9 @@ gUnknown_80DB5A4: @ 80DB5A4
 
 	.global gUnknown_80DB5B0
 gUnknown_80DB5B0: @ 80DB5B0
-        .byte 0x23, 0x43, 0x25, 0x63, 0x81, 0x59, 0x00, 0x00
+        .string "#C%c"
+        .byte 0x81, 0x59
+        .align 2,0
 
 	.global gUnknown_80DB5B8
 gUnknown_80DB5B8: @ 80DB5B8
@@ -1071,7 +1136,8 @@ gUnknown_80DB5C0: @ 80DB5C0
 
 	.global gUnknown_80DB5D4
 gUnknown_80DB5D4: @ 80DB5D4
-	.incbin "baserom.gba", 0xDB5D4, 0x24
+        .string "What is this Pokémon~27s nickname?\0"
+        .align 2,0
 
 	.global gUnknown_80DB5F8
 gUnknown_80DB5F8: @ 80DB5F8
@@ -1325,11 +1391,21 @@ gUnknown_80DB8EC: @ 80DB8EC
 
 	.global gUnknown_80DB8FC
 gUnknown_80DB8FC: @ 80DB8FC
-	.incbin "baserom.gba", 0xDB8FC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DB914
 gUnknown_80DB914: @ 80DB914
-	.incbin "baserom.gba", 0xDB914, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x10, 0x00, 0x04, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DB92C
 gUnknown_80DB92C: @ 80DB92C
@@ -1344,11 +1420,23 @@ gUnknown_80DB934: @ 80DB934
 
 	.global gUnknown_80DB944
 gUnknown_80DB944: @ 80DB944
-	.incbin "baserom.gba", 0xDB944, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
 
 	.global gUnknown_80DB95C
 gUnknown_80DB95C: @ 80DB95C
-	.incbin "baserom.gba", 0xDB95C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x10, 0x00, 0x11, 0x00
+        .byte 0x13, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
 
 	.global gTeamToolboxA
 gTeamToolboxA: @ 80DB974
@@ -1362,7 +1450,10 @@ gTeamToolboxB: @ 80DB984
 
 	.global gUnknown_80DB994
 gUnknown_80DB994: @ 80DB994
-	.incbin "baserom.gba", 0xDB994, 0xC
+        .string "#C"
+        .byte 0x02
+        .string "$i0#R\0"
+        .align 2,0
 
 	.global gUnknown_80DB9A0
 gUnknown_80DB9A0: @ 80DB9A0
@@ -1395,7 +1486,11 @@ gUnknown_80DB9E4: @ 80DB9E4
 
 	.global gUnknown_80DBA0C
 gUnknown_80DBA0C: @ 80DBA0C
-	.incbin "baserom.gba", 0xDBA0C, 0x40
+        .string "#+No one in the current team\n"
+        .string "#+can learn this move. \0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80DBA4C
 gUnknown_80DBA4C: @ 80DBA4C
@@ -1405,59 +1500,98 @@ gUnknown_80DBA4C: @ 80DBA4C
 
 	.global gUnknown_80DBA58
 gUnknown_80DBA58: @ 80DBA58
-	.incbin "baserom.gba", 0xDBA58, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBA70
 gUnknown_80DBA70: @ 80DBA70
-	.incbin "baserom.gba", 0xDBA70, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x14, 0x00, 0x04, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBA88
 gUnknown_80DBA88: @ 80DBA88
-	.incbin "baserom.gba", 0xDBA88, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x14, 0x00, 0x0E, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBAA0
 gUnknown_80DBAA0: @ 80DBAA0
-	.incbin "baserom.gba", 0xDBAA0, 0x30
+        .string "#+#CN$m0#R received\n"
+        .string "#+the promised #C4$i0#R. \0"
+        .align 2,0
 
 	.global gUnknown_80DBAD0
 gUnknown_80DBAD0: @ 80DBAD0
-	.incbin "baserom.gba", 0xDBAD0, 0x38
+        .string "#+#CN$m0#R~27s team received\n"
+        .string "#+the promised #C4$i0#R.\0"
+        .align 2,0
 
 	.global gUnknown_80DBB08
 gUnknown_80DBB08: @ 80DBB08
-	.incbin "baserom.gba", 0xDBB08, 0x30
+        .string "#+The team also received\n"
+        .string "#+the item #C4$i0#R.\0"
+        .align 2,0
 
 	.global gUnknown_80DBB38
 gUnknown_80DBB38: @ 80DBB38
-	.incbin "baserom.gba", 0xDBB38, 0x64
+        .string "#+Received the #C4$i0#R!#P#+A very rare statue. It has been placed\n"
+        .string "#+outside your rescue team base.\0"
+        .align 2,0
 
 	.global gUnknown_80DBB9C
 gUnknown_80DBB9C: @ 80DBB9C
-	.incbin "baserom.gba", 0xDBB9C, 0x8C
+        .string "#+The #C4$i0#R...\n"
+        .string "#+You~27ve already acquired it.#P#+Sorry to see that...#P#+In its place~2c #CN$m0#R~2c\n"
+        .string "#+you can have #CG1~2c000#R "
+        .byte 0x83, 0xBF, 0x83, 0xC4, 0x2E
+        .align 2,0
 
 	.global gUnknown_80DBC28
 gUnknown_80DBC28: @ 80DBC28
-	.incbin "baserom.gba", 0xDBC28, 0x38
+        .string "#+Your Toolbox is full.\n"
+        .string "#+The item was sent to storage.\0"
+        .align 2,0
 
 	.global gUnknown_80DBC60
 gUnknown_80DBC60: @ 80DBC60
-	.incbin "baserom.gba", 0xDBC60, 0x38
+        .string "#+Your Toolbox is full.\n"
+        .string "#+What would you like to do?\0"
+        .align 2,0
 
 	.global gUnknown_80DBC98
 gUnknown_80DBC98: @ 80DBC98
-	.incbin "baserom.gba", 0xDBC98, 0x2C
+        .string "#+Is it OK to throw away\n"
+        .string "#+this #C4$i0#R?\0"
+        .align 2,0
 
 	.global gUnknown_80DBCC4
 gUnknown_80DBCC4: @ 80DBCC4
-	.incbin "baserom.gba", 0xDBCC4, 0x24
+        .string "#+The #C4$i0#R\n"
+        .string "#+was thrown away.\0"
+        .align 2,0
 
 	.global gUnknown_80DBCE8
 gUnknown_80DBCE8: @ 80DBCE8
-	.incbin "baserom.gba", 0xDBCE8, 0x3C
+        .string "#+The #C4$i1#R was put in\n"
+        .string "#+storage to get the #C4$i0#R.\0"
+        .align 2,0
 
 	.global gUnknown_80DBD24
 gUnknown_80DBD24: @ 80DBD24
-	.incbin "baserom.gba", 0xDBD24, 0x34
+        .string "#+The #C4$i1#R was discarded\n"
+        .string "#+to get the #C4$i0#R.\0"
+        .align 2,0
 
 	.global gKangaskhanTrashToolboxItem
 gKangaskhanTrashToolboxItem: @ 80DBD58
@@ -1483,11 +1617,22 @@ gKangaskhanTrash: @ 80DBD88
 
 	.global gUnknown_80DBD98
 gUnknown_80DBD98: @ 80DBD98
-	.incbin "baserom.gba", 0xDBD98, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
 
 	.global gUnknown_80DBDB0
 gUnknown_80DBDB0: @ 80DBDB0
-	.incbin "baserom.gba", 0xDBDB0, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x14, 0x00, 0x04, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBDC8
 gUnknown_80DBDC8: @ 80DBDC8
@@ -1498,11 +1643,21 @@ gUnknown_80DBDC8: @ 80DBDC8
 
 	.global gUnknown_80DBDD8
 gUnknown_80DBDD8: @ 80DBDD8
-	.incbin "baserom.gba", 0xDBDD8, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBDF0
 gUnknown_80DBDF0: @ 80DBDF0
-	.incbin "baserom.gba", 0xDBDF0, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x10, 0x00, 0x11, 0x00
+        .byte 0x13, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBE08
 gUnknown_80DBE08: @ 80DBE08
@@ -1537,11 +1692,21 @@ gUnknown_80DBE30: @ 80DBE30
 
 	.global gUnknown_80DBE3C
 gUnknown_80DBE3C: @ 80DBE3C
-	.incbin "baserom.gba", 0xDBE3C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBE54
 gUnknown_80DBE54: @ 80DBE54
-	.incbin "baserom.gba", 0xDBE54, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x10, 0x00, 0x0E, 0x00
+        .byte 0x10, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBE6C
 gUnknown_80DBE6C: @ 80DBE6C
@@ -1551,11 +1716,24 @@ gUnknown_80DBE6C: @ 80DBE6C
 
 	.global gUnknown_80DBE7C
 gUnknown_80DBE7C: @ 80DBE7C
-	.incbin "baserom.gba", 0xDBE7C, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x07, 0x00
 
 	.global gUnknown_80DBE98
 gUnknown_80DBE98: @ 80DBE98
-	.incbin "baserom.gba", 0xDBE98, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x09, 0x00, 0x06, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+
+        .byte 0x94, 0xBE, 0x0D, 0x08
 
 	.global gUnknown_80DBEB0
 gUnknown_80DBEB0: @ 80DBEB0
@@ -1595,7 +1773,9 @@ gUnknown_80DBF3C: @ 80DBF3C
 
 	.global gUnknown_80DBF4C
 gUnknown_80DBF4C: @ 80DBF4C
-	.incbin "baserom.gba", 0xDBF4C, 0x14
+        .string "Money: #C5%d#R "
+        .byte 0x83, 0xBF, 0x83, 0xC4
+        .align 2,0
 
 	.global gUnknown_80DBF60
 gUnknown_80DBF60: @ 80DBF60
@@ -1606,11 +1786,21 @@ gUnknown_80DBF60: @ 80DBF60
 
 	.global gUnknown_80DBF70
 gUnknown_80DBF70: @ 80DBF70
-	.incbin "baserom.gba", 0xDBF70, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBF88
 gUnknown_80DBF88: @ 80DBF88
-	.incbin "baserom.gba", 0xDBF88, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x18, 0x00, 0x11, 0x00
+        .byte 0x11, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DBFA0
 gUnknown_80DBFA0: @ 80DBFA0
@@ -1621,11 +1811,24 @@ gUnknown_80DBFA0: @ 80DBFA0
 
 	.global gUnknown_80DBFB0
 gUnknown_80DBFB0: @ 80DBFB0
-	.incbin "baserom.gba", 0xDBFB0, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x07, 0x00
 
 	.global gUnknown_80DBFCC
 gUnknown_80DBFCC: @ 80DBFCC
-	.incbin "baserom.gba", 0xDBFCC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x0A, 0x00, 0x06, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        
+        .byte 0xC8, 0xBF, 0x0D, 0x08
 
 	.global gOthers_MenuOption
 gOthers_MenuOption: @ 80DBFE4
@@ -1651,11 +1854,24 @@ gOthers_Hints: @ 80DC010
 
 	.global gUnknown_80DC020
 gUnknown_80DC020: @ 80DC020
-	.incbin "baserom.gba", 0xDC020, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x0a, 0x00
 
 	.global gUnknown_80DC03C
 gUnknown_80DC03C: @ 80DC03C
-	.incbin "baserom.gba", 0xDC03C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x18, 0x00, 0x10, 0x00
+        .byte 0x12, 0x00, 0x00, 0x00
+
+        .byte 0x38, 0xC0, 0x0D, 0x08
 
 @ Window Settings
 
@@ -1690,11 +1906,24 @@ gWindowBGGreenString: @ 80DC090
 
 	.global gUnknown_80DC0A0
 gUnknown_80DC0A0: @ 80DC0A0
-	.incbin "baserom.gba", 0xDC0A0, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x08, 0x00
 
 	.global gUnknown_80DC0BC
 gUnknown_80DC0BC: @ 80DC0BC
-	.incbin "baserom.gba", 0xDC0BC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x18, 0x00, 0x0E, 0x00
+        .byte 0x0E, 0x00, 0x00, 0x00
+
+        .byte 0xB8, 0xC0, 0x0D, 0x08
 
 	.global gUnknown_80DC0D4
 gUnknown_80DC0D4: @ 80DC0D4
@@ -1705,7 +1934,12 @@ gUnknown_80DC0D4: @ 80DC0D4
 
 	.global gUnknown_80DC0E4
 gUnknown_80DC0E4: @ 80DC0E4
-	.incbin "baserom.gba", 0xDC0E4, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DC0FC
 gUnknown_80DC0FC: @ 80DC0FC
@@ -1713,7 +1947,12 @@ gUnknown_80DC0FC: @ 80DC0FC
 
 	.global gUnknown_80DC11C
 gUnknown_80DC11C: @ 80DC11C
-	.incbin "baserom.gba", 0xDC11C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DC134
 gUnknown_80DC134: @ 80DC134
@@ -1727,11 +1966,16 @@ gUnknown_80DC164: @ 80DC164
 
 	.global gUnknown_80DC1A0
 gUnknown_80DC1A0: @ 80DC1A0
-	.incbin "baserom.gba", 0xDC1A0, 0x5C
+        .string "#+Forget the move #C4$m1#R and\n"
+        .string "#+any moves linked to it~2c and learn the move\n"
+        .string "#+#C5$m0#R?\0"
+        .align 2,0
 
 	.global gUnknown_80DC1FC
 gUnknown_80DC1FC: @ 80DC1FC
-	.incbin "baserom.gba", 0xDC1FC, 0x34
+        .string "#+Forget the move #C4$m1#R\n"
+        .string "#+and learn #C5$m0#R?\0"
+        .align 2,0
 
 	.global gUnknown_80DC230
 gUnknown_80DC230: @ 80DC230
@@ -1748,6 +1992,7 @@ gUnknown_80DC240: @ 80DC240
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
         .byte 0x01, 0x00, 0x0f, 0x00
 
 	.global gUnknown_80DC25C
@@ -2144,11 +2389,15 @@ gUnknown_80DC728: @ 80DC728
 
 	.global gUnknown_80DC788
 gUnknown_80DC788: @ 80DC788
-	.incbin "baserom.gba", 0xDC788, 0x2C
+        .string "$m1~27s IQ helped it learn how to\n"
+        .string "use $i1!\0"
+        .align 2,0
 
 	.global gUnknown_80DC7B4
 gUnknown_80DC7B4: @ 80DC7B4
-	.incbin "baserom.gba", 0xDC7B4, 0x48
+        .string "Yes! $m1 grew explosively!\n"
+        .string "Attack~2c Defense~2c and so on rose by 1!\0"
+        .align 2,0
 
 	.global gUnknown_80DC7FC
 gUnknown_80DC7FC: @ 80DC7FC
@@ -2422,7 +2671,8 @@ gUnknown_80DD8A0: @ 80DD8A0
 
 	.global gUnknown_80DD8D0
 gUnknown_80DD8D0: @ 80DD8D0
-	.incbin "baserom.gba", 0xDD8D0, 0x28
+        .string "#+The #C4$i0#R was\n#+sent to storage.\0"
+        .align 2,0
 
 	.global gFriendActionStandby
 gFriendActionStandby: @ 80DD8F8
@@ -2592,7 +2842,12 @@ gUnknown_80DDAA0: @ 80DDAA0
 
 	.global gUnknown_80DDACC
 gUnknown_80DDACC: @ 80DDACC
-	.incbin "baserom.gba", 0xDDACC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x16, 0x00, 0x07, 0x00
+        .byte 0x06, 0x00, 0x04, 0x00
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DDAE4
 gUnknown_80DDAE4: @ 80DDAE4
@@ -3196,7 +3451,12 @@ gUnknown_80E03C4: @ 80E03C4
 
 	.global gUnknown_80E03F4
 gUnknown_80E03F4: @ 80E03F4
-	.incbin "baserom.gba", 0xE03F4, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x15, 0x00, 0x06, 0x00
+        .byte 0x07, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E040C
 gUnknown_80E040C: @ 80E040C
@@ -3206,7 +3466,12 @@ gUnknown_80E040C: @ 80E040C
 
 	.global gUnknown_80E041C
 gUnknown_80E041C: @ 80E041C
-	.incbin "baserom.gba", 0xE041C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0434
 gUnknown_80E0434: @ 80E0434
@@ -3250,15 +3515,30 @@ gUnknown_80E06A8: @ 80E06A8
 
 	.global gUnknown_80E06FC
 gUnknown_80E06FC: @ 80E06FC
-	.incbin "baserom.gba", 0xE06FC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0714
 gUnknown_80E0714: @ 80E0714
-	.incbin "baserom.gba", 0xE0714, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x0e, 0x00, 0x0e, 0x00
+        .byte 0x0e, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E072C
 gUnknown_80E072C: @ 80E072C
-	.incbin "baserom.gba", 0xE072C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x10, 0x00, 0x10, 0x00
+        .byte 0x10, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0744
 gUnknown_80E0744: @ 80E0744
@@ -3289,7 +3569,10 @@ gUnknown_80E0778: @ 80E0778
 
 	.global gUnknown_80E07D8
 gUnknown_80E07D8: @ 80E07D8
-	.incbin "baserom.gba", 0xE07D8, 0x14
+        .string "Go Train\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80E07EC
 gUnknown_80E07EC: @ 80E07EC
@@ -3302,7 +3585,12 @@ gUnknown_80E07EC: @ 80E07EC
 
 	.global gUnknown_80E0804
 gUnknown_80E0804: @ 80E0804
-	.incbin "baserom.gba", 0xE0804, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x0e, 0x00, 0x0e, 0x00
+        .byte 0x0e, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E081C
 gUnknown_80E081C: @ 80E081C
@@ -3311,11 +3599,14 @@ gUnknown_80E081C: @ 80E081C
 
 	.global gUnknown_80E0824
 gUnknown_80E0824: @ 80E0824
-	.incbin "baserom.gba", 0xE0824, 0x4
+        .byte 0x87, 0x42, 0x00, 0x00
 
 	.global gUnknown_80E0828
 gUnknown_80E0828: @ 80E0828
-	.incbin "baserom.gba", 0xE0828, 0x14
+        .string "#c%c%s#r\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80E083C
 gUnknown_80E083C: @ 80E083C
@@ -3328,7 +3619,12 @@ gUnknown_80E083C: @ 80E083C
 
 	.global gUnknown_80E0854
 gUnknown_80E0854: @ 80E0854
-	.incbin "baserom.gba", 0xE0854, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x18, 0x00, 0x11, 0x00
+        .byte 0x11, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E086C
 gUnknown_80E086C: @ 80E086C
@@ -3336,11 +3632,24 @@ gUnknown_80E086C: @ 80E086C
 
 	.global gUnknown_80E0900
 gUnknown_80E0900: @ 80E0900
-	.incbin "baserom.gba", 0xE0900, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x12, 0x00
 
 	.global gUnknown_80E091C
 gUnknown_80E091C: @ 80E091C
-	.incbin "baserom.gba", 0xE091C, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x1a, 0x00, 0x10, 0x00
+        .byte 0x10, 0x00, 0x00, 0x00
+
+        .byte 0x18, 0x09, 0x0E, 0x08
 
 	.global gUnknown_80E0934
 gUnknown_80E0934: @ 80E0934
@@ -3362,15 +3671,30 @@ gUnknown_80E0968: @ 80E0968
 
 	.global gUnknown_80E0990
 gUnknown_80E0990: @ 80E0990
-	.incbin "baserom.gba", 0xE0990, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E09A8
 gUnknown_80E09A8: @ 80E09A8
-	.incbin "baserom.gba", 0xE09A8, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x13, 0x00, 0x0B, 0x00
+        .byte 0x08, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E09C0
 gUnknown_80E09C0: @ 80E09C0
-	.incbin "baserom.gba", 0xE09C0, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x11, 0x00, 0x0F, 0x00
+        .byte 0x07, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E09D8
 gUnknown_80E09D8: @ 80E09D8
@@ -3471,11 +3795,24 @@ gUnknown_80E0BD4: @ 80E0BD4
 
 	.global gUnknown_80E1EFC
 gUnknown_80E1EFC: @ 80E1EFC
-	.incbin "baserom.gba", 0xE1EFC, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x08, 0x00
 
 	.global gUnknown_80E1F18
 gUnknown_80E1F18: @ 80E1F18
-	.incbin "baserom.gba", 0xE1F18, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x14, 0x00, 0x04, 0x00
+        .byte 0x04, 0x00, 0x00, 0x00
+
+        .byte 0x14, 0x1F, 0x0E, 0x08
 
 	.global gUnknown_80E1F30
 gUnknown_80E1F30: @ 80E1F30
@@ -3519,23 +3856,49 @@ gUnknown_80E1F94: @ 80E1F94
 
 	.global gUnknown_80E1FA8
 gUnknown_80E1FA8: @ 80E1FA8
-	.incbin "baserom.gba", 0xE1FA8, 0x1C
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x01, 0x00, 0x0A, 0x00
 
 	.global gUnknown_80E1FC4
 gUnknown_80E1FC4: @ 80E1FC4
-	.incbin "baserom.gba", 0xE1FC4, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x1a, 0x00, 0x0a, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .byte 0xc0, 0x1F, 0x0E, 0x08
 
 	.global gUnknown_80E1FDC
 gUnknown_80E1FDC: @ 80E1FDC
-	.incbin "baserom.gba", 0xE1FDC, 0x14
+        .string "Password\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80E1FF0
 gUnknown_80E1FF0: @ 80E1FF0
-	.incbin "baserom.gba", 0xE1FF0, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E2008
 gUnknown_80E2008: @ 80E2008
-	.incbin "baserom.gba", 0xE2008, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x1a, 0x00, 0x04, 0x00
+        .byte 0x06, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E2020
 gUnknown_80E2020: @ 80E2020
@@ -3865,7 +4228,8 @@ gUnknown_80E314C: @ 80E314C
 
 	.global gUnknown_80E317C
 gUnknown_80E317C: @ 80E317C
-	.incbin "baserom.gba", 0xE317C, 0x20
+        .string "Your adventure will be saved.\0"
+        .align 2,0
 
 	.global gUnknown_80E319C
 gUnknown_80E319C: @ 80E319C
@@ -3873,15 +4237,18 @@ gUnknown_80E319C: @ 80E319C
 
 	.global gUnknown_80E31D8
 gUnknown_80E31D8: @ 80E31D8
-	.incbin "baserom.gba", 0xE31D8, 0x24
+        .string "All preparations have been made.\0"
+        .align 2,0
 
 	.global gUnknown_80E31FC
 gUnknown_80E31FC: @ 80E31FC
-	.incbin "baserom.gba", 0xE31FC, 0x24
+        .string "The #CGThank-You Mail#R was sent.\0"
+        .align 2,0
 
 	.global gUnknown_80E3220
 gUnknown_80E3220: @ 80E3220
-	.incbin "baserom.gba", 0xE3220, 0x28
+        .string "You received the #CGThank-You Mail#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E3248
 gUnknown_80E3248: @ 80E3248
@@ -3901,7 +4268,8 @@ gUnknown_80E331C: @ 80E331C
 
 	.global gUnknown_80E3378
 gUnknown_80E3378: @ 80E3378
-	.incbin "baserom.gba", 0xE3378, 0x24
+        .string "Please choose the item to be sent.\0"
+        .align 2,0
 
 	.global gUnknown_80E339C
 gUnknown_80E339C: @ 80E339C
@@ -3925,7 +4293,8 @@ gUnknown_80E34F0: @ 80E34F0
 
 	.global gUnknown_80E352C
 gUnknown_80E352C: @ 80E352C
-	.incbin "baserom.gba", 0xE352C, 0x30
+        .string "Is it OK to accept this #CGThank-You Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E355C
 gUnknown_80E355C: @ 80E355C
@@ -3937,7 +4306,8 @@ gUnknown_80E35AC: @ 80E35AC
 
 	.global gUnknown_80E35E8
 gUnknown_80E35E8: @ 80E35E8
-	.incbin "baserom.gba", 0xE35E8, 0x24
+        .string "There is no #CGThank-You Mail#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E360C
 gUnknown_80E360C: @ 80E360C
@@ -3949,7 +4319,8 @@ gUnknown_80E3644: @ 80E3644
 
 	.global gUnknown_80E367C
 gUnknown_80E367C: @ 80E367C
-	.incbin "baserom.gba", 0xE367C, 0x14
+        .string "Read which Info?\0"
+        .align 2,0
 
 	.global gUnknown_80E3690
 gUnknown_80E3690: @ 80E3690
@@ -3997,7 +4368,8 @@ gUnknown_80E4314: @ 80E4314
 
 	.global gUnknown_80E4480
 gUnknown_80E4480: @ 80E4480
-	.incbin "baserom.gba", 0xE4480, 0x24
+        .string "There was a communication error.\0"
+        .align 2,0
 
 	.global gUnknown_80E44A4
 gUnknown_80E44A4: @ 80E44A4
@@ -4077,11 +4449,21 @@ gUnknown_80E49C4: @ 80E49C4
 
 	.global gUnknown_80E4A10
 gUnknown_80E4A10: @ 80E4A10
-	.incbin "baserom.gba", 0xE4A10, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E4A28
 gUnknown_80E4A28: @ 80E4A28
-	.incbin "baserom.gba", 0xE4A28, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x02, 0x00
+        .byte 0x1a, 0x00, 0x10, 0x00
+        .byte 0x10, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gCreditsTable
 gCreditsTable: @ 80E4A40
@@ -4101,7 +4483,12 @@ gUnknown_80E59A8: @ 80E59A8
 
 	.global gUnknown_80E59C8
 gUnknown_80E59C8: @ 80E59C8
-	.incbin "baserom.gba", 0xE59C8, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E59E0
 gUnknown_80E59E0: @ 80E59E0
@@ -4799,8 +5186,8 @@ gUnknown_80E7D58: @ 80E7D58
         .byte 0x0b, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7D70
-gUnknown_80E7D70: @ 80E7D70
+	.global gDebugMenuItems
+gDebugMenuItems: @ 80E7D70
 @ replacing .incbin "baserom.gba", 0x000e7d70, 0xc4
         .4byte dungeons_string
         .byte 0x00, 0x00, 0x00, 0x00
@@ -4935,15 +5322,30 @@ gUnknown_80E7EC4: @ 80E7EC4
 
 	.global gUnknown_80E7ED4
 gUnknown_80E7ED4: @ 80E7ED4
-	.incbin "baserom.gba", 0xE7ED4, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7EEC
 gUnknown_80E7EEC: @ 80E7EEC
-	.incbin "baserom.gba", 0xE7EEC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x13, 0x00, 0x04, 0x00
+        .byte 0x09, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7F04
 gUnknown_80E7F04: @ 80E7F04
-	.incbin "baserom.gba", 0xE7F04, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x13, 0x00, 0x0e, 0x00
+        .byte 0x06, 0x00, 0x04, 0x00
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7F1C
 gUnknown_80E7F1C: @ 80E7F1C
@@ -5073,11 +5475,17 @@ gUnknown_80E88A0: @ 80E88A0
 
 	.global gUnknown_80E88C8
 gUnknown_80E88C8: @ 80E88C8
-	.incbin "baserom.gba", 0xE88C8, 0x58
+        .string "I didn~27t want to become a grown-up~2c so I\n"
+        .string "fled~2c but now I~27ve lost my way! Help!\0"
+        .align 2,0
 
 	.global gUnknown_80E8920
 gUnknown_80E8920: @ 80E8920
-	.incbin "baserom.gba", 0xE8920, 0x48
+        .string "This is #C6Medicham#R. Rescue me~2c please!\n"
+        .string "The reward is a secret"
+        .byte 0x81, 0x60
+        .string "♪ "
+        .align 2,0
 
 	.global gUnknown_80E8968
 gUnknown_80E8968: @ 80E8968
