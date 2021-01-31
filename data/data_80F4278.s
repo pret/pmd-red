@@ -1740,27 +1740,32 @@ gUnknown_80F69EC: @ 80F69EC
 
 	.global gUnknown_80F6A04
 gUnknown_80F6A04: @ 80F6A04
-	.incbin "baserom.gba", 0xF6A04, 0xC
+        .string "b%02dfon\0"
+        .align 2,0
 
 	.global gUnknown_80F6A10
 gUnknown_80F6A10: @ 80F6A10
-	.incbin "baserom.gba", 0xF6A10, 0xC
+        .string "b%02dpal\0"
+        .align 2,0
 
 	.global gUnknown_80F6A1C
 gUnknown_80F6A1C: @ 80F6A1C
-	.incbin "baserom.gba", 0xF6A1C, 0xC
+        .string "b%02dcel\0"
+        .align 2,0
 
 	.global gUnknown_80F6A28
 gUnknown_80F6A28: @ 80F6A28
-	.incbin "baserom.gba", 0xF6A28, 0xC
+        .string "b%02dcex\0"
+        .align 2,0
 
 	.global gUnknown_80F6A34
 gUnknown_80F6A34: @ 80F6A34
-	.incbin "baserom.gba", 0xF6A34, 0xC
+        .string "b%02demap0\0"
+        .align 2,0
 
 	.global gUnknown_80F6A40
 gUnknown_80F6A40: @ 80F6A40
-	.incbin "baserom.gba", 0xF6A40, 0xA
+        .string "b%02dcanm\0"
 
 	.global gUnknown_80F6A4A
 gUnknown_80F6A4A: @ 80F6A4A
@@ -1800,7 +1805,8 @@ gUnknown_80F7AF8: @ 80F7AF8
 
 	.global gUnknown_80F7AFC
 gUnknown_80F7AFC: @ 80F7AFC
-	.incbin "baserom.gba", 0xF7AFC, 0x8
+        .string "#C6%s#R\0"
+        .align 2,0
 
 	.global gUnknown_80F7B04
 gUnknown_80F7B04: @ 80F7B04
@@ -7297,7 +7303,11 @@ gUnknown_8106934: @ 8106934
 
 	.global gUnknown_810697C
 gUnknown_810697C: @ 810697C
-	.incbin "baserom.gba", 0x10697C, 0x14
+        .byte 0x04, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .4byte gUnknown_8103E40
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_8106990
 gUnknown_8106990: @ 8106990
@@ -8913,15 +8923,27 @@ gUnknown_810DFC8: @ 810DFC8
 
 	.global gUnknown_810DFCC
 gUnknown_810DFCC: @ 810DFCC
-        .byte 0x14, 0xE0, 0x10, 0x08
-        .byte 0xF8, 0xDF, 0x10, 0x08
-        .byte 0xE0, 0xDF, 0x10, 0x08
-        .byte 0xDC, 0xDF, 0x10, 0x08
+        .4byte NotNowText
+        .4byte PossibleText
+        .4byte NoMoreText
+        .4byte UnkData_810DFDC
+
+        .global UnkData_810DFDC
+        UnkData_810DFDC:
         .byte 0x20, 0x00, 0x00, 0x00
+
+        .global NoMoreText
+        NoMoreText:
         .string "Evolution: #>54.No more\0"
         .align 2,0
+        
+        .global PossibleText
+        PossibleText:
         .string "Evolution: #>54.Possible\0"
         .align 2,0
+
+        .global NotNowText
+        NotNowText:
         .string "Evolution: #>54.Not now\0"
         .align 2,0
 
@@ -8995,31 +9017,45 @@ gUnknown_81138D0: @ 81138D0
 
 	.global gUnknown_81138E4
 gUnknown_81138E4: @ 81138E4
-	.incbin "baserom.gba", 0x1138E4, 0x1C
+        .byte 0xD4, 0x38, 0x11, 0x08
+        .string "#>80.Defense#>128.$d1 \0"
+        .align 2,0
 
 	.global gUnknown_8113900
 gUnknown_8113900: @ 8113900
-	.incbin "baserom.gba", 0x113900, 0x18
+        .byte 0xE8, 0x38, 0x11, 0x08
+        .string "Sp. Atk.#>42.$d0 \0"
+        .align 2,0
 
 	.global gUnknown_8113918
 gUnknown_8113918: @ 8113918
-	.incbin "baserom.gba", 0x113918, 0x1C
+        .4byte 0x8113904
+        .string "#>80.Sp. Def.#>128.$d1 \0"
+        .align 2,0
 
 	.global gUnknown_8113934
 gUnknown_8113934: @ 8113934
-	.incbin "baserom.gba", 0x113934, 0x1C
+.byte 0x1c, 0x39, 0x11, 0x08
+        .string "Attack#>42.#c2$d0#r  \0"
+        .align 2,0
 
 	.global gUnknown_8113950
 gUnknown_8113950: @ 8113950
-	.incbin "baserom.gba", 0x113950, 0x24
+        .byte 0x38, 0x39, 0x11, 0x08
+        .string "#>80.Defense#>128.#c2$d1#r  \0"
+        .align 2,0
 
 	.global gUnknown_8113974
 gUnknown_8113974: @ 8113974
-	.incbin "baserom.gba", 0x113974, 0x1C
+        .4byte 0x8113954
+        .string "Sp. Atk.#>42.#c2$d0#r  \0"
+        .align 2,0
 
 	.global gUnknown_8113990
 gUnknown_8113990: @ 8113990
-	.incbin "baserom.gba", 0x113990, 0x24
+        .byte 0x78, 0x39, 0x11, 0x08
+        .string "#>80.Sp. Def.#>128.#c2$d1#r  \0"
+        .align 2,0
 
 	.global gUnknown_81139B4
 gUnknown_81139B4: @ 81139B4
@@ -9395,7 +9431,9 @@ gUnknown_811617C: @ 811617C
 	.global gUnknown_8116180
 gUnknown_8116180: @ 8116180
 @ replacing .incbin "baserom.gba", 0x00116180, 0x8
-        .byte 0x23, 0x43, 0x4e, 0x87, 0x45, 0x23, 0x52, 0x00
+        .string "#CN"
+        .byte 0x87, 0x45
+        .string "#R\0"
 
 	.global gUnknown_8116188
 gUnknown_8116188: @ 8116188
@@ -9602,19 +9640,31 @@ gUnknown_81163BC: @ 81163BC
 
 	.global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4
-	.incbin "baserom.gba", 0x1163E4, 0xC
+        .string "#CG%d#R %s\0"
+        .align 2,0
 
 	.global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-	.incbin "baserom.gba", 0x1163F0, 0x3C
+        .string "#+However~2c $n0~27s team\n"
+        .string "#+had too much money already...\0"
+        .align 2,0
 
 	.global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-	.incbin "baserom.gba", 0x11642C, 0x4C
+        .string "#+However~2c $n0~27s team\n"
+        .string "#+had too many items already...\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_8116478
 gUnknown_8116478: @ 8116478
-	.incbin "baserom.gba", 0x116478, 0x10
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_8116488
 gUnknown_8116488: @ 8116488
@@ -9622,71 +9672,120 @@ gUnknown_8116488: @ 8116488
 
 	.global gUnknown_81164DC
 gUnknown_81164DC: @ 81164DC
-	.incbin "baserom.gba", 0x1164DC, 0x8
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_81164E4
 gUnknown_81164E4: @ 81164E4
-	.incbin "baserom.gba", 0x1164E4, 0x54
+        .byte 0xf6, 0x00, 0xc5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        .4byte GroundScriptFile_Text
+        .byte 0xef, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+.global GroundScriptFile_Text
+        GroundScriptFile_Text:
+        .string "../ground/ground_script.c\0"
+        .align 2,0
+
+.global GroundScript_ExecutePP_Text
+        GroundScript_ExecutePP_Text:
+        .string "GroundScript_ExecutePP\0"
+        .align 2,0
 
 	.global gUnknown_8116538
 gUnknown_8116538: @ 8116538
-	.incbin "baserom.gba", 0x116538, 0xC
+        .4byte GroundScriptFile_Text
+        .4byte 0x000002b0
+        .4byte GroundScript_ExecutePP_Text
 
 	.global gUnknown_8116544
 gUnknown_8116544: @ 8116544
-	.incbin "baserom.gba", 0x116544, 0x1C
+        .string "execute script type error B\0"
+        .align 2,0
 
 	.global gUnknown_8116560
 gUnknown_8116560: @ 8116560
-	.incbin "baserom.gba", 0x116560, 0xC
+        .4byte GroundScriptFile_Text
+        .4byte 0x000002b1
+        .4byte GroundScript_ExecutePP_Text
 
 	.global gUnknown_811656C
 gUnknown_811656C: @ 811656C
-	.incbin "baserom.gba", 0x11656C, 0x1C
+        .string "execute script type error C\0"
+        .align 2,0
 
 	.global gUnknown_8116588
 gUnknown_8116588: @ 8116588
-	.incbin "baserom.gba", 0x116588, 0xC
+        .4byte GroundScriptFile_Text
+        .4byte 0x000002c4
+        .4byte GroundScript_ExecutePP_Text
 
 	.global gUnknown_8116594
 gUnknown_8116594: @ 8116594
-	.incbin "baserom.gba", 0x116594, 0x34
+        .string "execute script type error %d\0"
+        .align 2,0
+
+        .global GroundScript_Cancel_Text
+        GroundScript_Cancel_Text:
+        .string "GroundScript_Cancel\0"
+        .align 2,0
 
 	.global gUnknown_81165C8
 gUnknown_81165C8: @ 81165C8
-	.incbin "baserom.gba", 0x1165C8, 0xC
+        .4byte GroundScriptFile_Text
+        .4byte 0x00000335
+        .4byte GroundScript_Cancel_Text
 
 	.global gUnknown_81165D4
 gUnknown_81165D4: @ 81165D4
-	.incbin "baserom.gba", 0x1165D4, 0x20
+        .string "    ground select %3d[%s] %3d\0"
+        .align 2,0
+
 
 	.global gUnknown_81165F4
 gUnknown_81165F4: @ 81165F4
-	.incbin "baserom.gba", 0x1165F4, 0x18
+@ replacing .incbin "baserom.gba", 0x001165f4, 0x18
+        .string "    dungeon select %3d\0"
+        .align 2,0
 
 	.global gUnknown_811660C
 gUnknown_811660C: @ 811660C
-	.incbin "baserom.gba", 0x11660C, 0x1C
+@ replacing .incbin "baserom.gba", 0x0011660c, 0x1c
+        .string "    dungeon enter check %3d\0"
+        .align 2,0
 
 	.global gUnknown_8116628
 gUnknown_8116628: @ 8116628
-	.incbin "baserom.gba", 0x116628, 0x1C
+@ replacing .incbin "baserom.gba", 0x00116628, 0x1c
+        .string "    map select %3d %3d[%s]\0"
+        .align 2,0
 
 	.global gUnknown_8116644
 gUnknown_8116644: @ 8116644
-	.incbin "baserom.gba", 0x116644, 0x20
+@ replacing .incbin "baserom.gba", 0x00116644, 0x20
+        .string "    ground select %3d %3d[%s]\0"
+        .align 2,0
 
 	.global gUnknown_8116664
 gUnknown_8116664: @ 8116664
-	.incbin "baserom.gba", 0x116664, 0x20
+@ replacing .incbin "baserom.gba", 0x00116664, 0x20
+        .string "    dungeon select %3d %3d[%s]\0"
+        .align 2,0
 
 	.global gUnknown_8116684
 gUnknown_8116684: @ 8116684
-	.incbin "baserom.gba", 0x116684, 0x30
+@ replacing .incbin "baserom.gba", 0x00116684, 0x30
+        .string "    dungeon rescue select %3d\0"
+        .align 2,0
+
+        .string "_AnalyzeProcess\0"
+        .align 2,0
+
 
 	.global gUnknown_81166B4
 gUnknown_81166B4: @ 81166B4
-	.incbin "baserom.gba", 0x1166B4, 0xC
+.4byte GroundScriptFile_Text
+.4byte 0x0000107e
+.4byte 0x81166a4
 
 	.global gUnknown_81166C0
 gUnknown_81166C0: @ 81166C0
@@ -9698,11 +9797,16 @@ gUnknown_81166D8: @ 81166D8
 
 	.global gUnknown_81166F8
 gUnknown_81166F8: @ 81166F8
-	.incbin "baserom.gba", 0x1166F8, 0xC
+.4byte GroundScriptFile_Text
+.4byte 0x000011c9
+.4byte 0x81166dc
 
 	.global gUnknown_8116704
 gUnknown_8116704: @ 8116704
-	.incbin "baserom.gba", 0x116704, 0xC
+.4byte GroundScriptFile_Text
+.4byte 0x000011ce
+.4byte 0x81166dc
+
 
 	.global gUnknown_8116710
 gUnknown_8116710: @ 8116710
@@ -9969,7 +10073,14 @@ gUnknown_8117E8C: @ 8117E8C
 
 	.global gUnknown_8117EDC
 gUnknown_8117EDC: @ 8117EDC
-	.incbin "baserom.gba", 0x117EDC, 0x20
+        .string "ax%03d\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_8117EFC
 gUnknown_8117EFC: @ 8117EFC
@@ -10004,8 +10115,12 @@ gUnknown_8118050: @ 8118050
         .byte 0x00, 0x14, 0x00, 0x00
         .byte 0x00, 0x14, 0x00, 0x00
         .byte 0x00, 0x18, 0x00, 0x00
+
+        .global GroundLivesFile_Text
+        GroundLivesFile_Text:
         .string "../ground/ground_lives.c\0"
         .align 2,0
+
         .string "GroundLives_Select\0"
         .align 2,0
 
@@ -10050,7 +10165,7 @@ gUnknown_811811C: @ 811811C
 
 	.global gUnknown_8118170
 gUnknown_8118170: @ 8118170
-        .byte 0x5C, 0x80, 0x11, 0x08
+        .4byte GroundLivesFile_Text
         .byte 0x89, 0x05, 0x00, 0x00
         .byte 0x60, 0x81, 0x11, 0x08
 
@@ -10220,23 +10335,30 @@ gUnknown_811874C: @ 811874C
 gUnknown_8118758: @ 8118758
 	.incbin "baserom.gba", 0x118758, 0x40
 
-@ Ground Events
+@ Ground Link
 	.global gUnknown_8118798
 gUnknown_8118798: @ 8118798
         .byte 0x6C, 0x87, 0x11, 0x08
         .byte 0x4D, 0x00, 0x00, 0x00
         .byte 0x84, 0x87, 0x11, 0x08
         .string "pksdir0\0"
+
+@ Ground Event
+        .global GroundEventFile_Text
+        GroundEventFile_Text:
         .string "../ground/ground_event.c\0"
         .align 2,0
+
+        .global GroundEvent_Select_Text
+        GroundEvent_Select_Text:
         .string "GroundEvent_Select\0"
         .align 2,0
 
 	.global gUnknown_81187DC
 gUnknown_81187DC: @ 81187DC
-        .byte 0xAC, 0x87, 0x11, 0x08
-        .byte 0xA0, 0x00, 0x00, 0x00
-        .byte 0xC8, 0x87, 0x11, 0x08 @ Pointer to GroundEvent_Select string above
+        .4byte GroundEventFile_Text
+        .4byte 0xA0
+        .4byte GroundEvent_Select_Text
 
 	.global gGroundEventSelectText
 gGroundEventSelectText: @ 81187E8

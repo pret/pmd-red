@@ -65,6 +65,7 @@ SECTIONS {
         src/text.o(.text);
 		. = ALIGN(4);
         asm/text.o(.text);
+        src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
         src/main.o(.text);
