@@ -168,16 +168,27 @@ s32 UpdateMenu(void)
         break;
     case 0xc:
         iVar1 = sub_8036448();
-        goto _08035A62;
+        iVar2 = 1;
+        if (iVar1 != 3) {
+            iVar2 = 0xffdc;
+        }
+        break;
     case 0xb:
         iVar1 = sub_8032318();
-        goto _08035A62;
+        iVar2 = 1;
+        if (iVar1 != 3) {
+            iVar2 = 0xffdc;
+        }
+        break;
     case 0xd:
         iVar1 = sub_8039928();
-        goto _08035A62;
+        iVar2 = 1;
+        if (iVar1 != 3) {
+            iVar2 = 0xffdc;
+        }
+        break;
     case 0xe:
         iVar1 = sub_803A1DC();
-    _08035A62:
         iVar2 = 1;
         if (iVar1 != 3) {
             iVar2 = 0xffdc;
