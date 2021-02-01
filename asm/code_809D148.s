@@ -701,7 +701,7 @@ sub_809D710:
 	ldrb r0, [r4, 0x12]
 	b _0809D746
 	.align 2, 0
-_0809D73C: .4byte gUnknown_812F1F8
+_0809D73C: .4byte gFunctionScriptTable
 _0809D740:
 	ldr r0, _0809D750
 	strh r0, [r3, 0x6]
@@ -3937,7 +3937,7 @@ _0809F442:
 	ldrsh r2, [r0, r3]
 	b _0809F4B6
 	.align 2, 0
-_0809F4AC: .4byte gUnknown_812F1F8
+_0809F4AC: .4byte gFunctionScriptTable
 _0809F4B0:
 	mov r4, r10
 	movs r5, 0xC
@@ -4023,7 +4023,7 @@ _0809F4FE:
 	ldrsh r2, [r0, r4]
 	b _0809F566
 	.align 2, 0
-_0809F55C: .4byte gUnknown_812F1F8
+_0809F55C: .4byte gFunctionScriptTable
 _0809F560:
 	mov r5, r10
 	movs r0, 0xC
@@ -7677,7 +7677,7 @@ _080A1344:
 	str r0, [r1, 0x8]
 	bl _0809EAE0
 	.align 2, 0
-_080A1364: .4byte gUnknown_812F1F8
+_080A1364: .4byte gFunctionScriptTable
 _080A1368:
 	mov r1, r10
 	adds r1, 0x10
@@ -7862,7 +7862,7 @@ _080A14C4:
 	movs r0, 0
 	b _080A14DE
 	.align 2, 0
-_080A14C8: .4byte gUnknown_812F1F8
+_080A14C8: .4byte gFunctionScriptTable
 _080A14CC: .4byte gUnknown_8116488
 _080A14D0: .4byte gUnknown_81166F8
 _080A14D4: .4byte gUnknown_81164E4
@@ -8081,7 +8081,7 @@ _080A1720:
 _080A1726:
 	bl _080A236A
 	.align 2, 0
-_080A172C: .4byte gUnknown_813237C
+_080A172C: .4byte gFriendAreaDialogue
 _080A1730:
 	movs r0, 0
 	movs r1, 0x14
@@ -9374,7 +9374,7 @@ _080A2182:
 	bl _call_via_r2
 	b _080A1EBE
 	.align 2, 0
-_080A21D8: .4byte gUnknown_812F1F8
+_080A21D8: .4byte gFunctionScriptTable
 _080A21DC: .4byte 0x00001310
 _080A21E0: .4byte 0xfffffc00
 _080A21E4:

@@ -7,7 +7,7 @@ extern void sub_80A7784();
 extern s16 gUnknown_2039DE0;
 
 extern u32 gUnknown_8117EFC;
-extern u32 *gUnknown_811E258[];
+extern u32 *gMapScriptTable[];
 
 void sub_80A7714(void)
 {
@@ -75,7 +75,7 @@ u32 *sub_80A77D0(s16 r0)
 {
     if(r0 != -1)
     {
-        return gUnknown_811E258[r0];
+        return gMapScriptTable[r0];
     }
     else
     {

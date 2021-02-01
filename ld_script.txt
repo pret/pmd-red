@@ -65,6 +65,7 @@ SECTIONS {
         src/text.o(.text);
 		. = ALIGN(4);
         asm/text.o(.text);
+        src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
         src/main.o(.text);
@@ -93,6 +94,10 @@ SECTIONS {
         asm/code_8027C84.o(.text);
         src/wonder_mail.o(.text);
         asm/wonder_mail.o(.text);
+        src/wonder_mail_1.o(.text);
+        asm/credits.o(.text);
+        src/main_menu.o(.text);
+        asm/main_menu.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         asm/personality_test.o(.text);
@@ -211,6 +216,7 @@ SECTIONS {
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
+        data/friend_area_dialogue.o(.rodata);
         src/m4a_tables.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
