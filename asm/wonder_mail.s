@@ -16778,7 +16778,7 @@ sub_8031F60:
 	adds r3, r5, 0
 	bl sub_8013818
 	bl sub_8032084
-	bl sub_80320F8
+	bl DisplayAdventureLog
 	movs r0, 0x1
 	pop {r4-r6}
 	pop {r1}
@@ -16830,7 +16830,7 @@ _0803201A:
 	b _08032034
 _0803202A:
 	bl sub_8032084
-	bl sub_80320F8
+	bl DisplayAdventureLog
 	movs r0, 0x1
 _08032034:
 	pop {r4}
@@ -16933,8 +16933,8 @@ sub_8032084:
 _080320F4: .4byte gUnknown_203B338
 	thumb_func_end sub_8032084
 
-	thumb_func_start sub_80320F8
-sub_80320F8:
+	thumb_func_start DisplayAdventureLog
+DisplayAdventureLog:
 	push {r4-r7,lr}
 	sub sp, 0x8
 	ldr r5, _08032158
@@ -17053,7 +17053,7 @@ _080321EC:
 	bl sub_8013800
 	adds r5, r0, 0
 	adds r0, r6, 0
-	bl sub_8097738
+	bl GetAdventureLogLine
 	adds r2, r0, 0
 	ldr r0, [r4]
 	ldr r3, [r0, 0x34]
@@ -17097,7 +17097,7 @@ _0803223A:
 	.align 2, 0
 _08032254: .4byte gUnknown_80E2030
 _08032258: .4byte gUnknown_203B338
-	thumb_func_end sub_80320F8
+	thumb_func_end DisplayAdventureLog
 
 	thumb_func_start sub_803225C
 sub_803225C:

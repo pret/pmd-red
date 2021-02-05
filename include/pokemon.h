@@ -1,6 +1,8 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
+#include "file_system.h"
+
 struct EvolveStruct1
 {
     /* 0x34 */ u16 evolve_from;
@@ -12,6 +14,13 @@ struct EvolveNeeds
     /* 0x38 */ u16 evolve_need1;
     /* 0x3A */ u16 evolve_need2;
 };
+
+struct unkEvolve
+{
+    /* 0x0 */ struct EvolveStruct1 conditions;
+    /* 0x4 */ struct EvolveNeeds needs;
+};
+
 
 struct gPokemon
 {
@@ -50,5 +59,35 @@ struct gPokemon
     /* 0x40 */ s16 base_recruit;
     /* 0x42 */ s16 unk42[2]; // alphabetNo and parentNo
 };
+
+u8 *GetCategoryString(s16 index);
+u8 GetPokemonSize(s16 index);
+u8 GetShadowSize(s16 index);
+s32 GetMoveSpeed(s16 index);
+u8 GetWalkableTiles(s16 index);
+u8 GetUnk1B(s16 index);
+bool8 GetIsMoving(s16 index);
+u8 GetUnk1D(s16 index);
+u16 GetLowKickDmg(s16 index);
+u16 GetSizeOrbDmg(s16 index);
+u8 GetFriendArea(s16 index);
+u16 GetBaseHP(s16 index);
+bool8 GetUnk33(s16 index);
+u8 GetUnk12(s16 index);
+s16 GetPokemonEvolveFrom(s16 index);
+u16 GetPokemonAttSpatt(s16 index, u32 r1);
+u16 GetPokemonDefSpdef(s16 index, u32 r1);
+u8 GetPokemonType(s32 index, u32 typeIndex);;
+u8 GetPokemonAbility(s16 index, u32 abilityIndex);
+s16 sub_808DCA0(s16 index, u32 r1);
+s16 GetBaseRecruit(s16 index);
+s16 sub_808DCDC(s16 index, s32 r1);
+s16 sub_808DCFC(s16 index);
+u32 CalculateEXPGain(s16 index, s32 level);
+s16 sub_808DD48(s16 index, struct unkEvolve *r1);
+u8 GetPokemonOverworldPalette(s16 index, u32 r1);
+bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
+struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
+struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 
 #endif // POKEMON_H  

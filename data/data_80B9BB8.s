@@ -585,26 +585,57 @@ gFuncFileLineString2: @ 80D41EC
 gUnknown_80D421C: @ 80D421C
         .string "  Print  \0"
         .align 2,0
+
         .string "pksdir0\0"
         .align 2,0
+
+        .global Performance_Text
+        Performance_Text:
         .string "Performance\0"
         .align 2,0
+
+        .global MemoryCard_Text
+        MemoryCard_Text:
         .string "Memory Card\0"
         .align 2,0
+
+        .global Memory_Text
+        Memory_Text:
         .string "Memory\0"
         .align 2,0
+
+        .global Flag_Text
+        Flag_Text:
         .string "Flag\0"
         .align 2,0
+
+        .global Se_Text
+        Se_Text:
         .string "Se\0"
         .align 2,0
+
+        .global Bgm_Text
+        Bgm_Text:
         .string "Bgm\0"
         .align 2,0
+
+        .global Sound_Text
+        Sound_Text:
         .string "Sound\0"
         .align 2,0
+
+        .global Dungeon_Text
+        Dungeon_Text:
         .string "Dungeon\0"
         .align 2,0
+
+        .global GroundScript_Text
+        GroundScript_Text:
         .string "GroundScript\0"
         .align 2,0
+
+        .global Ground_Text
+        Ground_Text:
         .string "Ground\0"
         .align 2,0
 
@@ -635,8 +666,12 @@ gUnknown_80D42D4: @ 80D42D4
         .string "pksdir0\0"
         .string "pksdir0\0"
         .string "pksdir0\0"
+
+        .global PokeDungeon_Text
+        PokeDungeon_Text:
         .string "POKE_DUNGEON__05\0"
         .align 2,0
+
         .string "pksdir0\0"
         .string "pksdir0\0"
         .string "pksdir0\0"
@@ -834,17 +869,23 @@ gUnknown_80D4910: @ 80D4910
         .string "$\0"
         .align 2,0
         .string "pksdir0\0"
+
+        .global Yes_80D491C
+        Yes_80D491C:
         .string "Yes\0"
 
 	.global gUnknown_80D4920
 gUnknown_80D4920: @ 80D4920
-        .byte 0x1C, 0x49, 0x0D, 0x08 @ Pointer to Yes
+        .4byte Yes_80D491C
+
+        .global No_80D4924
+        No_80D4924:
         .string "No\0"
         .align 2,0
 
 	.global gUnknown_80D4928
 gUnknown_80D4928: @ 80D4928
-        .byte 0x24, 0x49, 0x0D, 0x08 @ Pointer to No
+        .4byte No_80D4924
 
         .global CancelText
         CancelText:
@@ -2487,7 +2528,8 @@ gUnknown_80DC91C: @ 80DC91C
 	.global gUnknown_80DC934
 gUnknown_80DC934: @ 80DC934
 @ replacing .incbin "baserom.gba", 0x000dc934, 0x8
-.byte 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x00
+        .string "Pokémon\0"
+        .align 2,0
 
 	.global gUnknown_80DC93C
 gUnknown_80DC93C: @ 80DC93C
@@ -2895,15 +2937,22 @@ gUnknown_80DED60: @ 80DED60
 	.global gUnknown_80DED78
 gUnknown_80DED78: @ 80DED78
         @ replacing .incbin "baserom.gba", 0x000ded78, 0x40
-        .byte 0x98, 0xed, 0x0d, 0x08 @ Pointer to Confirm
+        .4byte Confirm_80DED98
         .byte 0x0b, 0x00, 0x00, 0x00
-        .byte 0x90, 0xed, 0x0d, 0x08 @ Pointer to Info
+        .4byte Info_80DED90
         .byte 0x0c, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global Info_80DED90
+        Info_80DED90:
         .string "Info\0"
         .align 2,0
+
+        .global Confirm_80DED98
+        Confirm_80DED98:
         .string "Confirm\0"
+
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -2914,18 +2963,27 @@ gUnknown_80DED78: @ 80DED78
 	.global gUnknown_80DEDB8
 gUnknown_80DEDB8: @ 80DEDB8
         @ replacing .incbin "baserom.gba", 0x000dedb8, 0x50
-        .byte 0xf4, 0xed, 0x0d, 0x08 @ Pointer to Send Thank-You
+        .4byte SendThankYou_Text
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xe0, 0xed, 0x0d, 0x08 @ Pointer to Get Thank-You
+        .4byte GetThankYou_Text
         .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global Cancel_80DEDD8
+        Cancel_80DEDD8:
         .string "Cancel\0"
         .align 2,0
+
+        .global GetThankYou_Text
+        GetThankYou_Text:
         .string "Get Thank-You Mail\0"
         .align 2,0
+
+        .global SendThankYou_Text
+        SendThankYou_Text:
         .string "Send Thank-You Mail\0"
         .align 2,0
 
@@ -2933,16 +2991,22 @@ gUnknown_80DEDB8: @ 80DEDB8
 gUnknown_80DEE08: @ 80DEE08
         @ Thank You Mail Pelipper Menu
         @ replacing .incbin "baserom.gba", 0x000dee08, 0x3c
-        .byte 0x34, 0xee, 0x0d, 0x08 @ Pointer to Game Link cable
+        .4byte GameLinkCable_Text
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x28, 0xee, 0x0d, 0x08 @ Pointer to Password
+        .4byte Password_Text
         .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global Password_Text
+        Password_Text:
         .string "Password\0"
         .align 2,0
+
+        .global GameLinkCable_Text
+        GameLinkCable_Text:
         .string "Game Link cable\0"
         .align 2,0
 
@@ -2950,63 +3014,78 @@ gUnknown_80DEE08: @ 80DEE08
 gUnknown_80DEE44: @ 80DEE44
         @ Game Link Cable Thank-You Mail Menu
         @ replacing .incbin "baserom.gba", 0x000dee44, 0x1c
-        .byte 0x5c, 0xee, 0x0d, 0x08 @ Pointer to Yes
+        .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global Yes_80DEE5C
+        Yes_80DEE5C:
         .string "Yes\0"
         .align 2,0
 
 	.global gUnknown_80DEE60
 gUnknown_80DEE60: @ 80DEE60
         @ replacing .incbin "baserom.gba", 0x000dee60, 0x1c
-        .byte 0x5c, 0xee, 0x0d, 0x08 @ Pointer to Yes
+        .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x78, 0xee, 0x0d, 0x08 @ Pointer to No
+        .4byte No_80DEE78
         .byte 0x08, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global No_80DEE78
+        No_80DEE78:
         .string "No\0"
         .align 2,0
 
 	.global gUnknown_80DEE7C
 gUnknown_80DEE7C: @ 80DEE7C
         @ replacing .incbin "baserom.gba", 0x000dee7c, 0x40
-        .byte 0xb0, 0xee, 0x0d, 0x08 @ Pointer to Send Item
+        .4byte SendItem_Text
         .byte 0x09, 0x00, 0x00, 0x00
-        .byte 0x9c, 0xee, 0x0d, 0x08 @ Pointer to Don't Send Item
+        .4byte DontSendItemText
         .byte 0x0a, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global DontSendItem_Text
+        DontSendItemText:
         .string "Don~27t Send Item\0"
         .align 2,0
+
+        .global SendItem_Text
+        SendItem_Text:
         .string "Send Item\0"
         .align 2,0
 
 	.global gUnknown_80DEEBC
 gUnknown_80DEEBC: @ 80DEEBC
         @ replacing .incbin "baserom.gba", 0x000deebc, 0x28
-        .byte 0xd4, 0xee, 0x0d, 0x08 @ Pointer to Send w/o Item
+        .4byte SendWOItem_Text
         .byte 0x0a, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global SendWOItem_Text
+        SendWOItem_Text:
         .string "Send w/o Item\0"
         .align 2,0
 
 	.global gUnknown_80DEEE4
 gUnknown_80DEEE4: @ 80DEEE4
         @ replacing .incbin "baserom.gba", 0x000deee4, 0x20
-        .byte 0x5c, 0xee, 0x0d, 0x08 @ Pointer to Yes
+        .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x78, 0xee, 0x0d, 0x08 @ Pointer to No
+        .4byte No_80DEE78
         .byte 0x08, 0x00, 0x00, 0x00
-        .byte 0xd8, 0xed, 0x0d, 0x08 @ Pointer to Cancel
+        .4byte Cancel_80DEDD8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -3713,26 +3792,41 @@ gUnknown_80E0A48: @ 80E0A48
 gUnknown_80E0ABC: @ 80E0ABC
         @ Friend Rescue menu from help menu
         @ replacing .incbin "baserom.gba", 0x000e0abc, 0x80
-        .byte 0x28, 0x0b, 0x0e, 0x08 @ Friend Rescue Info
+        .4byte FriendRescueInfo_Text
         .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x18, 0x0b, 0x0e, 0x08 @ Go rescue
+        .4byte GoRescue_Text
         .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x08, 0x0b, 0x0e, 0x08 @ Get help
+        .4byte GetHelp_Text
         .byte 0x08, 0x00, 0x00, 0x00
-        .byte 0xf4, 0x0a, 0x0e, 0x08 @ Deleting Mail Info
+        .4byte DeletingMailInfo_Text
         .byte 0x09, 0x00, 0x00, 0x00
-        .byte 0xec, 0x0a, 0x0e, 0x08 @ Exit
+        .4byte Exit_80EA0EC
         .byte 0x05, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x05, 0x00, 0x00, 0x00
+
+        .global Exit_80E0AEC
+        Exit_80EA0EC:
         .string "Exit\0"
         .align 2,0
+
+        .global DeletingMailInfo_Text
+        DeletingMailInfo_Text:
         .string "Deleting Mail Info\0"
         .align 2,0
+
+        .global GetHelp_Text
+        GetHelp_Text:
         .string "#C6Get help#R \0"
         .align 2,0
+
+        .global GoRescue_Text
+        GoRescue_Text:
         .string "#C6Go rescue#R \0"
         .align 2,0
+
+        .global FriendRescueInfo_Text
+        FriendRescueInfo_Text:
         .string "Friend Rescue Info\0"
         .align 2,0
 
@@ -3740,28 +3834,43 @@ gUnknown_80E0ABC: @ 80E0ABC
 gUnknown_80E0B3C: @ 80E0B3C
         @ Go Resuce menu from Peilipper help menu
         @ replacing .incbin "baserom.gba", 0x000e0b3c, 0x98
-        .byte 0xc0, 0x0b, 0x0e, 0x08 @ Rescue Procedures
+        .4byte RescueProcedures_Text
         .byte 0x0a, 0x00, 0x00, 0x00
-        .byte 0xac, 0x0b, 0x0e, 0x08 @ Recieve SOS Mail
+        .4byte ReceiveSOSMail_Text
         .byte 0x0b, 0x00, 0x00, 0x00
-        .byte 0x98, 0x0b, 0x0e, 0x08 @ Leave for Rescue
+        .4byte LeaveForRescue_Text
         .byte 0x0c, 0x00, 0x00, 0x00
-        .byte 0x88, 0x0b, 0x0e, 0x08 @ Send A-OK Mail
+        .4byte SendAOKMail_Text
         .byte 0x0d, 0x00, 0x00, 0x00
-        .byte 0x74, 0x0b, 0x0e, 0x08 @ Get Thank You Mail
+        .4byte GetThankYouMail_Text
         .byte 0x0e, 0x00, 0x00, 0x00
-        .byte 0xec, 0x0a, 0x0e, 0x08 @ Exit
+        .4byte Exit_80EA0EC
         .byte 0x05, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x05, 0x00, 0x00, 0x00
+
+        .global GetThankYouMail_Text
+        GetThankYouMail_Text:
         .string "Get Thank-You Mail\0"
         .align 2,0
+
+        .global SendAOKMail_Text
+        SendAOKMail_Text:
         .string "Send A-OK Mail\0"
         .align 2,0
+
+        .global LeaveForResuce_Text
+        LeaveForRescue_Text:
         .string "Leave for Rescue\0"
         .align 2,0
+
+        .global ReceiveSOSMail_Text
+        ReceiveSOSMail_Text:
         .string "Receive SOS Mail\0"
         .align 2,0
+
+        .global RescueProcedures_Text
+        RescueProcedures_Text:
         .string "Rescue Procedures\0"
         .align 2,0
 
@@ -3769,24 +3878,36 @@ gUnknown_80E0B3C: @ 80E0B3C
 gUnknown_80E0BD4: @ 80E0BD4
         @ Get help menu from Pelipper help menu
         @ replacing .incbin "baserom.gba", 0x000e0bd4, 0x78
-        .byte 0x3c, 0x0c, 0x0e, 0x08 @ Getting Help
+        .4byte GettingHelp_Text
         .byte 0x0f, 0x00, 0x00, 0x00
-        .byte 0x2c, 0x0c, 0x0e, 0x08 @ Send SOS Mail
+        .4byte SendSOSMail_Text
         .byte 0x10, 0x00, 0x00, 0x00
-        .byte 0x18, 0x0c, 0x0e, 0x08 @ Receive A-OK Mail
+        .4byte RecieveAOKMail_Text
         .byte 0x11, 0x00, 0x00, 0x00
-        .byte 0x04, 0x0c, 0x0e, 0x08 @ Send Thank-You Mail
+        .4byte SentThankYouMail_Text
         .byte 0x12, 0x00, 0x00, 0x00
-        .byte 0xec, 0x0a, 0x0e, 0x08 @ Exit
+        .4byte Exit_80EA0EC
         .byte 0x05, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x05, 0x00, 0x00, 0x00
+
+        .global SendThankYouMail_Text
+        SentThankYouMail_Text:
         .string "Send Thank-You Mail\0"
         .align 2,0
+
+        .global ReceiveAOKMail_Text
+        RecieveAOKMail_Text:
         .string "Receive A-OK Mail\0"
         .align 2,0
+
+        .global SendSOSMail_Text
+        SendSOSMail_Text:
         .string "Send SOS Mail\0"
         .align 2,0
+
+        .global GettingHelp_Text
+        GettingHelp_Text:
         .string "Getting Help\0"
         .align 2,0
 

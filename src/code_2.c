@@ -78,7 +78,7 @@ extern struct OpenedFile *gTitlePaletteFile;
 extern struct Inputs gRealInputs;
 extern u8 *gUnknown_203B46C;
 
-extern char gUnknown_80B69BC[];
+extern char gPMDBuildVersion[];
 
 void xxx_update_stuff(u32);
 
@@ -109,7 +109,7 @@ void GameLoop(void)
     sub_800CD64(0x8000, 0);
     sub_8012284();
     sub_8094998(1);
-    SetWindowTitle(gUnknown_80B69BC);
+    SetWindowTitle(gPMDBuildVersion);
     sub_800DAAC();
     SetSavingIconCoords(0);
     tmp = 0;

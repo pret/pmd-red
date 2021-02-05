@@ -454,6 +454,7 @@ u16 GetCurrentBGSong(void)
 }
 
 #ifdef NONMATCHING
+// TODO fix reg allocation.. using one too many regs
 void sub_800C074(u16 SongIndex,u16 param_2)
 {
   bool8 interrupt_flag;
@@ -548,10 +549,15 @@ void sub_800C074(u16 SongIndex,u16 param_2)
       m4aSongNumStart(SongIndex);
       preload->unk0 = 1;
       preload->songIndex = SongIndex;
-      // TODO fix this comparison
-      // Generates eor/neg/lsr
-      preload->unk6 = param_2 != 0x100;
-      preload->unk4 = param_2;
+      if(msVar == param_2)
+      {
+        preload->unk6 = 1;
+      }
+      else
+      {
+        preload->unk6 = 0;
+      }
+      preload->unk4 = msVar;
       if (interrupt_flag)
         EnableInterrupts();
     }
