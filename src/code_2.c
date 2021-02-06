@@ -50,7 +50,7 @@ extern u8 sub_80363E0(void);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);
-extern void sub_80357D0(void);
+extern void DeleteMainMenu(void);
 extern s32 sub_80953D4(u32);
 extern void sub_8095240(u8);
 extern void sub_80122A8(void);
@@ -175,7 +175,7 @@ void GameLoop(void)
             if (tmp4 == 4) break;
             if (tmp4 == 3) break;
         }
-        sub_80357D0();
+        DeleteMainMenu();
         while (gUnknown_2000A80 > 0) {
             s32 i;
             gUnknown_2000A80--;

@@ -1,18 +1,22 @@
 #include "global.h"
 
-struct MainMenu
+struct MainMenuSub
 {
-    u32 unk0;
-    s32 unk4;
-    u32 unk8;
-    u8 padding[0x20];
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;
-    u8 padding2[0x30 - 0x2F];
+};
+
+struct MainMenu
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    u8 padding[0x20];
+    /* 0x2C */ struct MainMenuSub sub;
     u32 unk30;
     u32 unk34;
-    u16 unk38;
+    s16 unk38;
     u8 unk3A;
     u8 unk3B;
     s32 unk3C;
@@ -75,16 +79,16 @@ void InitMainMenu(void)
   gUnknown_203B348->unk0 = 0xffdc;
   gUnknown_203B348->unk4 = 1;
   gUnknown_203B348->unk8 = 1;
-  gUnknown_203B348->unk38 = 0xffdc + 0x23;
+  gUnknown_203B348->unk38 = -1;
   gUnknown_203B348->unk3C = -1;
-  gUnknown_203B348->unk2E = 0;
-  gUnknown_203B348->unk2C = 1;
-  gUnknown_203B348->unk2D = 0;
+  gUnknown_203B348->sub.unk2E = 0;
+  gUnknown_203B348->sub.unk2C = 1;
+  gUnknown_203B348->sub.unk2D = 0;
   sub_8035DA0();
   gUnknown_203B348->unk3A = 0;
 }
 
-void sub_80357D0(void)
+void DeleteMainMenu(void)
 {
     if(gUnknown_203B348){
         MemoryFree(gUnknown_203B348);
@@ -293,4 +297,23 @@ void CleanUpMenu(void)
     }
     gUnknown_203B348->unk8 = gUnknown_203B348->unk4;
   }
+}
+
+// Unused
+void sub_8035C00(struct MainMenuSub *param)
+{
+    gUnknown_203B348->sub = *param;
+}
+
+// Unused
+struct MainMenuSub *sub_8035C10(void)
+{
+   return &gUnknown_203B348->sub;
+}
+
+void sub_8035C1C(void)
+{
+    gUnknown_203B348->sub.unk2E = 0;
+    gUnknown_203B348->sub.unk2C = 1;
+    gUnknown_203B348->sub.unk2D = 0;
 }

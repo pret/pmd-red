@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8035C00
-sub_8035C00:
-	ldr r1, _08035C0C
-	ldr r1, [r1]
-	ldr r0, [r0]
-	str r0, [r1, 0x2C]
-	bx lr
-	.align 2, 0
-_08035C0C: .4byte gUnknown_203B348
-	thumb_func_end sub_8035C00
-
-	thumb_func_start sub_8035C10
-sub_8035C10:
-	ldr r0, _08035C18
-	ldr r0, [r0]
-	adds r0, 0x2C
-	bx lr
-	.align 2, 0
-_08035C18: .4byte gUnknown_203B348
-	thumb_func_end sub_8035C10
-
-	thumb_func_start sub_8035C1C
-sub_8035C1C:
-	ldr r2, _08035C38
-	ldr r0, [r2]
-	adds r0, 0x2E
-	movs r3, 0
-	strb r3, [r0]
-	ldr r0, [r2]
-	adds r0, 0x2C
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x2D
-	strb r3, [r0]
-	bx lr
-	.align 2, 0
-_08035C38: .4byte gUnknown_203B348
-	thumb_func_end sub_8035C1C
-
 	thumb_func_start SetMenuItems
 SetMenuItems:
 	push {r4-r7,lr}
