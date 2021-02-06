@@ -5704,7 +5704,7 @@ _0809BC26:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_8016C94
+	bl DisplayKangaskhanDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC5C
@@ -5743,7 +5743,7 @@ _0809BC78:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_80162E4
+	bl DisplayPersianDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BCB0
@@ -5789,7 +5789,7 @@ _0809BCE8:
 	beq _0809BCF0
 	movs r0, 0x3
 _0809BCF0:
-	bl sub_8018B00
+	bl DisplayKeckleonDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BD10

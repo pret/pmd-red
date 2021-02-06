@@ -7182,8 +7182,8 @@ _080162E0:
 	bx r1
 	thumb_func_end sub_80162B8
 
-	thumb_func_start sub_80162E4
-sub_80162E4:
+	thumb_func_start DisplayPersianDialogueSprite
+DisplayPersianDialogueSprite:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl ResetUnusedInputStruct
@@ -7268,7 +7268,7 @@ _08016352:
 	bx r1
 	.align 2, 0
 _0801639C: .4byte gUnknown_203B204
-	thumb_func_end sub_80162E4
+	thumb_func_end DisplayPersianDialogueSprite
 
 	thumb_func_start sub_80163A0
 sub_80163A0:
@@ -8400,8 +8400,8 @@ _08016C8C: .4byte gUnknown_80DB738
 _08016C90: .4byte gUnknown_203B460
 	thumb_func_end sub_8016C40
 
-	thumb_func_start sub_8016C94
-sub_8016C94:
+	thumb_func_start DisplayKangaskhanDialogueSprite
+DisplayKangaskhanDialogueSprite:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl ResetUnusedInputStruct
@@ -8488,7 +8488,7 @@ _08016D06:
 	bx r1
 	.align 2, 0
 _08016D50: .4byte gUnknown_203B208
-	thumb_func_end sub_8016C94
+	thumb_func_end DisplayKangaskhanDialogueSprite
 
 	thumb_func_start sub_8016D54
 sub_8016D54:
@@ -12186,8 +12186,8 @@ _08018AFC:
 	bx r0
 	thumb_func_end sub_8018AE4
 
-	thumb_func_start sub_8018B00
-sub_8018B00:
+	thumb_func_start DisplayKeckleonDialogueSprite
+DisplayKeckleonDialogueSprite:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _08018B30
@@ -12311,7 +12311,7 @@ _08018BAE:
 _08018BF8: .4byte gUnknown_202E5D8
 _08018BFC: .4byte gUnknown_202E1C8
 _08018C00: .4byte gUnknown_203B210
-	thumb_func_end sub_8018B00
+	thumb_func_end DisplayKeckleonDialogueSprite
 
 	thumb_func_start sub_8018C04
 sub_8018C04:
@@ -16876,7 +16876,7 @@ _0801B0E8:
 	ldrsh r1, [r0, r3]
 	adds r2, 0xC
 	movs r0, 0x2
-	bl sub_801E80C
+	bl DisplayGulpinDialogueSprite
 	b _0801B168
 _0801B0FC:
 	ldr r1, [r4]
