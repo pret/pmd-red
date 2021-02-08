@@ -8,12 +8,6 @@ extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 
-struct unkEvolve
-{
-    /* 0x0 */ struct EvolveStruct1 conditions;
-    /* 0x4 */ struct EvolveNeeds needs;
-};
-
 u8 *GetCategoryString(s16 index)
 {
     return gMonsterParameters[index].category;
@@ -99,9 +93,10 @@ u16 GetPokemonDefSpdef(s16 index, u32 r1)
     return gMonsterParameters[index].base_def_spdef[r1];
 }
 
-u8 GetPokemonType(s16 index, u32 typeIndex)
+u8 GetPokemonType(s32 index, u32 typeIndex)
 {
-    return gMonsterParameters[index].types[typeIndex];
+    s16 newIndex = index;
+    return gMonsterParameters[newIndex].types[typeIndex];
 }
 
 u8 GetPokemonAbility(s16 index, u32 abilityIndex)

@@ -50,7 +50,7 @@ extern u8 sub_80363E0(void);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);
-extern void sub_80357D0(void);
+extern void DeleteMainMenu(void);
 extern s32 sub_80953D4(u32);
 extern void sub_8095240(u8);
 extern void sub_80122A8(void);
@@ -78,7 +78,7 @@ extern struct OpenedFile *gTitlePaletteFile;
 extern struct Inputs gRealInputs;
 extern u8 *gUnknown_203B46C;
 
-extern char gUnknown_80B69BC[];
+extern char gPMDBuildVersion[];
 
 void xxx_update_stuff(u32);
 
@@ -109,7 +109,7 @@ void GameLoop(void)
     sub_800CD64(0x8000, 0);
     sub_8012284();
     sub_8094998(1);
-    SetWindowTitle(gUnknown_80B69BC);
+    SetWindowTitle(gPMDBuildVersion);
     sub_800DAAC();
     SetSavingIconCoords(0);
     tmp = 0;
@@ -175,7 +175,7 @@ void GameLoop(void)
             if (tmp4 == 4) break;
             if (tmp4 == 3) break;
         }
-        sub_80357D0();
+        DeleteMainMenu();
         while (gUnknown_2000A80 > 0) {
             s32 i;
             gUnknown_2000A80--;

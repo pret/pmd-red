@@ -28,6 +28,9 @@ struct unk_203B250
     u16 unk4;
     u8 unk6;
     u8 unk7;
+    u32 padding[3];
+    u32 unk14;
+    u32 unk18;
 };
 
 struct unk_203B250 *gUnknown_203B250;

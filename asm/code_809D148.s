@@ -6724,7 +6724,7 @@ _080A0BA2:
 	ldrsh r0, [r0, r1]
 	ldr r1, [sp, 0xC]
 	ldr r2, [sp, 0x10]
-	bl sub_8001BB4
+	bl ScenarioCalc
 	bl _0809EAE0
 _080A0BB4:
 	add r0, sp, 0x8
@@ -6741,7 +6741,7 @@ _080A0BB4:
 	add r2, sp, 0x168
 	ldr r2, [r2]
 	adds r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 	bl _0809EAE0
 _080A0BDA:
 	ldr r2, [sp, 0xC]

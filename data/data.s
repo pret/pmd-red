@@ -52,34 +52,52 @@ gUnknown_80B6994: @ 80B6994
         .byte 0x02, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80B69BC
-gUnknown_80B69BC: @ 80B69BC
+	.global gPMDBuildVersion
+gPMDBuildVersion: @ 80B69BC
         .string "PKDi ver 1.0 [Apr 28 2006] 16:37:54\0"
         .align 2,0
+
+        .global titlen0_text
+        titlen0_text:
         .string "titlen0\0"
         .align 2,0
+
+        .global titlen1_text
+        titlen1_text:
         .string "titlen1\0"
         .align 2,0
+
+        .global titlen2_text
+        titlen2_text:
         .string "titlen2\0"
         .align 2,0
 
 	.global gUnknown_80B69F8
 gUnknown_80B69F8: @ 80B69F8
-        .byte 0xE0, 0x69, 0x0B, 0x08
-        .byte 0xE8, 0x69, 0x0B, 0x08
-        .byte 0xF0, 0x69, 0x0B, 0x08
+        .4byte titlen0_text
+        .4byte titlen1_text
+        .4byte titlen2_text
+
+        .global titlen0p_text
+        titlen0p_text:
         .string "titlen0p\0"
         .align 2,0
+
+        .global titlen1p_text
+        titlen1p_text:
         .string "titlen1p\0"
         .align 2,0
+
+        .global titlen2p_text
+        titlen2p_text:
         .string "titlen2p\0"
         .align 2,0
 
 	.global gUnknown_80B6A28
 gUnknown_80B6A28: @ 80B6A28
-        .byte 0x04, 0x6A, 0x0B, 0x08 @ Pointer to titlen0p
-        .byte 0x10, 0x6A, 0x0B, 0x08 @ Pointer to titlen1p
-        .byte 0x1C, 0x6A, 0x0B, 0x08 @ Pointer to titlen2p
+        .4byte titlen0p_text
+        .4byte titlen1p_text
+        .4byte titlen2p_text
 
 	.include "data/text/save.inc"
 
@@ -328,46 +346,85 @@ gUnknown_80B7144: @ 80B7144
 
 	.global gUnknown_80B714C
 gUnknown_80B714C: @ 80B714C
-        .byte 0x9C, 0x71, 0x0B, 0x08
-        .byte 0x9C, 0x71, 0x0B, 0x08
-        .byte 0x94, 0x71, 0x0B, 0x08
-        .byte 0x90, 0x71, 0x0B, 0x08
-        .byte 0x8C, 0x71, 0x0B, 0x08
-        .byte 0x88, 0x71, 0x0B, 0x08
-        .byte 0x80, 0x71, 0x0B, 0x08
-        .byte 0x7C, 0x71, 0x0B, 0x08
-        .byte 0x78, 0x71, 0x0B, 0x08
-        .byte 0x74, 0x71, 0x0B, 0x08
+        .4byte TwoOneText
+        .4byte TwoOneText
+        .4byte OneTwoSevenText
+        .4byte FourText
+        .4byte FiveText
+        .4byte SixText
+        .4byte TwoTwoEightText
+        .4byte ThreeText
+        .4byte NineText
+        .4byte EndText
+
+        .global EndText
+        EndText:
         .string "END\0"
+
+        .global NineText
+        NineText:
         .string "9\0"
         .align 2,0
+
+        .global ThreeText
+        ThreeText:
         .string "3\0"
         .align 2,0
+
+        .global TwoTwoEightText
+        TwoTwoEightText:
         .string "2-2 8\0"
         .align 2,0
+
+        .global SixText
+        SixText:
         .string "6\0"
         .align 2,0
+
+        .global FiveText
+        FiveText:
         .string "5\0"
         .align 2,0
+
+        .global FourText
+        FourText:
         .string "4\0"
         .align 2,0
+
+        .global OneTwoSevenText
+        OneTwoSevenText:
         .string "1-2 7\0"
         .align 2,0
+
+        .global TwoOneText
+        TwoOneText:
         .string "2-1\0"
         .align 2,0
 
 	.global gUnknown_80B71A0
 gUnknown_80B71A0: @ 80B71A0
-        .byte 0xD8, 0x71, 0x0B, 0x08 @ Pointer to CISTART
-        .byte 0xC8, 0x71, 0x0B, 0x08 @ Pointer to CECONTINUE
-        .byte 0xBC, 0x71, 0x0B, 0x08 @ Pointer to CNLAST
-        .byte 0xB0, 0x71, 0x0B, 0x08 @ Pointer to CWEND
+        .4byte CISTART_text
+        .4byte CECONTINUE_text
+        .4byte CNLAST_text
+        .4byte CWEND_text
+
+        .global CWEND_text
+        CWEND_text:
         .string "#CWEND#R\0"
         .align 2,0
+
+        .global CNLAST_text
+        CNLAST_text:
         .string "#CNLAST#R\0"
         .align 2,0
+
+        .global CECONTINUE_text
+        CECONTINUE_text:
         .string "#CECONTINUE#R\0"
         .align 2,0
+
+        .global CISTART_text
+        CISTART_text:
         .string "#CISTART#R\0"
         .align 2,0
 
@@ -377,13 +434,24 @@ gUnknown_80B71E4: @ 80B71E4
 
 	.global gUnknown_80B72CC
 gUnknown_80B72CC: @ 80B72CC
-	.incbin "baserom.gba", 0xB72CC, 0x4C
+        .string "SCENARIO CALC [%3d] %4d %4d -> %4d %4d\0"
+        .align 2,0
+
+        .global EventFlagFile_Text
+        EventFlagFile_Text:
+        .string "../main/event_flag.c\0"
+        .align 2,0
+
+        .global FlagCalc_Text
+        FlagCalc_Text:
+        .string "_FlagCalc\0"
+        .align 2,0
 
 	.global gUnknown_80B7318
 gUnknown_80B7318: @ 80B7318
-        .byte 0xF4, 0x72, 0x0B, 0x08
+        .4byte EventFlagFile_Text
         .byte 0x51, 0x05, 0x00, 0x00
-        .byte 0x0C, 0x73, 0x0B, 0x08
+        .4byte FlagCalc_Text
 
 	.global gUnknown_80B7324
 gUnknown_80B7324: @ 80B7324
@@ -391,7 +459,7 @@ gUnknown_80B7324: @ 80B7324
 
 	.global gUnknown_80B7350
 gUnknown_80B7350: @ 80B7350
-        .byte 0xF4, 0x72, 0x0B, 0x08 @ Pointer to ../main/event_flag.c
+        .4byte EventFlagFile_Text
         .byte 0x7C, 0x05, 0x00, 0x00
         .byte 0x44, 0x73, 0x0B, 0x08 @ Pointer to _FlagJudge
 
@@ -426,31 +494,47 @@ gUnknown_80B7EB8: @ 80B7EB8
 
 	.global gUnknown_80B7EC4
 gUnknown_80B7EC4: @ 80B7EC4
-	.incbin "baserom.gba", 0xB7EC4, 0x38
+        .string "Memory Locate sprit max over [%3d/%3d]\0"
+        .align 2,0
+
+        .global LocateSetBackText
+        LocateSetBackText:
+        .string "_LocateSetBack\0"
+        .align 2,0
 
 	.global gUnknown_80B7EFC
 gUnknown_80B7EFC: @ 80B7EFC
         .byte 0x8C, 0x7E, 0x0B, 0x08
         .byte 0xA1, 0x02, 0x00, 0x00
-        .byte 0xEC, 0x7E, 0x0B, 0x08
+        .4byte LocateSetBackText
+
+        .global LocateSetText
+        LocateSetText:
         .string "_LocateSet\0"
         .align 2,0
-        
+
 	.global gUnknown_80B7F14
 gUnknown_80B7F14: @ 80B7F14
         .byte 0x8C, 0x7E, 0x0B, 0x08
         .byte 0x2C, 0x03, 0x00, 0x00
-        .byte 0x08, 0x7F, 0x0B, 0x08
+        .4byte LocateSetText
 
 	.global gUnknown_80B7F20
 gUnknown_80B7F20: @ 80B7F20
-	.incbin "baserom.gba", 0xB7F20, 0x68
+        .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
+        .string "    atb %02x grp %3d \0"
+        .align 2,0
+
+        .global MemoryLocate_LocalCreateText
+        MemoryLocate_LocalCreateText:
+        .string "MemoryLocate_LocalCreate\0"
+        .align 2,0
 
 	.global gUnknown_80B7F88
 gUnknown_80B7F88: @ 80B7F88
         .byte 0x8C, 0x7E, 0x0B, 0x08 @ Pointer to ../system/memory_locate.c
         .byte 0x55, 0x04, 0x00, 0x00
-        .byte 0x6C, 0x7F, 0x0B, 0x08 @ Pointer to MemoryLocate_LocalCreate
+        .4byte MemoryLocate_LocalCreateText
 
 	.global gUnknown_80B7F94
 gUnknown_80B7F94: @ 80B7F94

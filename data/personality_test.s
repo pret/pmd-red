@@ -1032,44 +1032,68 @@
     .align 2,0
 
     @ Question 1, Category 14 (Miscellaneous)
+    .global MiscQuest1Points
+    MiscQuest1Points:
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 @ +1 Hasty, +1 Quirky
     .byte 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00 @ +1 Jolly, +1 Lonely
-    .byte 0xbc, 0x24, 0x0f, 0x08
+    .global MiscQuest1Answers
+    MiscQuest1Answers:
+    .4byte MiscQuest1_Alone
     .byte 0x00, 0x00, 0x00, 0x00
-    .byte 0xac, 0x24, 0x0f, 0x08
+    .4byte MiscQuest1_Others
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
+
+    .global MiscQuest1_Others
+    MiscQuest1_Others:
     .string "Go with others.\0"
     .align 2,0
+
+    .global MiscQuest1_Alone
+    MiscQuest1_Alone:
     .string "Go alone.\0"
     .align 2,0
 
     .global MiscQuest1
     MiscQuest1:
-    .byte 0xd4, 0x24, 0x0f, 0x08
-    .byte 0x94, 0x24, 0x0f, 0x08
-    .byte 0x74, 0x24, 0x0f, 0x08
+    .4byte MiscQuest1Question
+    .4byte MiscQuest1Answers
+    .4byte MiscQuest1Points
+
+    .global MiscQuest1Question
+    MiscQuest1Question:
     .string "On vacation outings~2c you want to...\0"
     .align 2,0
 
     @ Question 2, Category 14 (Miscellaneous)
+    .global MiscQuest2Points
+    MiscQuest2Points:
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 @ +2 Jolly
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 @ +1 Sassy, +1 Quirky
+
+    .global MiscQuest2Answers
+    MiscQuest2Answers:
     .byte 0xd4, 0x0f, 0x0f, 0x08 @ Pointer to Love them!
     .byte 0x00, 0x00, 0x00, 0x00
-    .byte 0x34, 0x25, 0x0f, 0x08 @ Pointer to Don't care.
+    .4byte MiscQuest2_DontCare
     .byte 0x01, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0xff, 0xff, 0xff, 0xff
+
+    .global MiscQuest2_DontCare
+    MiscQuest2_DontCare:
     .string "Don~27t care.\0"
     .align 2,0
 
     .global MiscQuest2
     MiscQuest2:
-    .byte 0x50, 0x25, 0x0f, 0x08 @ Pointer to Question Text
-    .byte 0x1c, 0x25, 0x0f, 0x08 @ Pointer to Answers Pointer Table
-    .byte 0xfc, 0x24, 0x0f, 0x08 @ Nature Points for Answers
+    .4byte MiscQuest2Question
+    .4byte MiscQuest2Answers
+    .4byte MiscQuest2Points
+
+    .global MiscQuest2Question
+    MiscQuest2Question:
     .string "It~27s the summer festival!\n"
     .string "Do you like carnivals?\0"
     .align 2,0
@@ -1101,12 +1125,12 @@
 
     .global MiscQuest3
     MiscQuest3:
-    .4byte MiscQuest3Text
+    .4byte MiscQuest3Question
     .4byte MiscQuest3Answers
     .4byte MiscQuest3Points
 
-    .global MiscQuest3Text
-    MiscQuest3Text:
+    .global MiscQuest3Question
+    MiscQuest3Question:
     .string "Somebody calls you ~93weird but funny.~94\n"
     .string "How does that make you feel?\0"
     .align 2,0
@@ -1171,7 +1195,7 @@ gPersonalityQuestionPointerTable: @ 80F2624 (pointers to each question text)
         .byte 0xD8, 0x07, 0x0F, 0x08 @ (pointer to Question 2B for Brave)
 
 	.global gNatureQuestionTable
-gNatureQuestionTable: @ 80F2704 (Categories??)
+gNatureQuestionTable: @ 80F2704 (Categories)
         .byte 0x00, 0x00, 0x00, 0x00 @ (Hardy)
         .byte 0x01, 0x01, 0x01, 0x01 @ (Docile)
         .byte 0x02, 0x02, 0x02, 0x02 @ (Brave)
@@ -1192,7 +1216,7 @@ gNatureQuestionTable: @ 80F2704 (Categories??)
 gGenderText: @ 80F273C
 	.string "Are you a boy or a girl?\0"
         .align 2,0
-        .byte 0x3C, 0x27, 0x0F, 0x08 @ pointer to above text
+        .4byte gGenderText
 
 	.global gUnknown_80F275C
 gUnknown_80F275C: @ 80F275C

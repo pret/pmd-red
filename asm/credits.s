@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8035404
-sub_8035404:
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	mov r0, sp
-	bl sub_80144A4
-	cmp r0, 0
-	bne _0803541A
-	adds r0, r4, 0
-	bl sub_80338C4
-_0803541A:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8035404
-
-	thumb_func_start sub_8035424
-sub_8035424:
-	push {lr}
-	movs r0, 0x6
-	bl sub_80338C4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8035424
-
-	thumb_func_start sub_8035430
-sub_8035430:
-	push {lr}
-	movs r0, 0x4F
-	bl sub_80338C4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8035430
-
-	thumb_func_start nullsub_50
-nullsub_50:
-	bx lr
-	thumb_func_end nullsub_50
-
-	thumb_func_start nullsub_51
-nullsub_51:
-	bx lr
-	thumb_func_end nullsub_51
-
 	thumb_func_start sub_8035444
 sub_8035444:
 	push {r4-r7,lr}

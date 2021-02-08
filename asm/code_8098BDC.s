@@ -5704,7 +5704,7 @@ _0809BC26:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_8016C94
+	bl DisplayKangaskhanDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC5C
@@ -5743,7 +5743,7 @@ _0809BC78:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_80162E4
+	bl DisplayPersianDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BCB0
@@ -5789,7 +5789,7 @@ _0809BCE8:
 	beq _0809BCF0
 	movs r0, 0x3
 _0809BCF0:
-	bl sub_8018B00
+	bl DisplayKeckleonDialogueSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BD10
@@ -6041,7 +6041,7 @@ _0809BEF2:
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
 	movs r0, 0x2
-	bl sub_8001BB4
+	bl ScenarioCalc
 	ldr r0, _0809BF40
 	ldr r0, [r0]
 	movs r1, 0x86
@@ -6087,7 +6087,7 @@ _0809BF4E:
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	b _0809C392
 	.align 2, 0
 _0809BF6C: .4byte gUnknown_3001B64
@@ -6145,7 +6145,7 @@ _0809BFCE:
 	ldr r2, [sp, 0x18]
 	adds r2, 0x1
 	movs r0, 0x2
-	bl sub_8001BB4
+	bl ScenarioCalc
 	ldr r0, _0809BFF4
 	ldr r0, [r0]
 	movs r2, 0x83
@@ -6700,7 +6700,7 @@ _0809C460: .4byte gUnknown_3001B64
 	thumb_func_start sub_809C464
 sub_809C464:
 	push {lr}
-	bl sub_803C850
+	bl DeleteTestTracker
 	bl sub_8001064
 	bl sub_809965C
 	pop {r0}

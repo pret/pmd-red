@@ -95,11 +95,14 @@ SECTIONS {
         src/wonder_mail.o(.text);
         asm/wonder_mail.o(.text);
         src/wonder_mail_1.o(.text);
+        src/credits.o(.text);
         asm/credits.o(.text);
         src/main_menu.o(.text);
         asm/main_menu.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
+        asm/code_803C1D0.o(.text);
+        src/personality_test_pre.o(.text);
         asm/personality_test.o(.text);
         src/personality_test.o(.text);
         asm/code_803D110.o(.text);

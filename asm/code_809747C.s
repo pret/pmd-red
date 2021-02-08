@@ -332,8 +332,8 @@ _08097732:
 	bx r1
 	thumb_func_end sub_8097710
 
-	thumb_func_start sub_8097738
-sub_8097738:
+	thumb_func_start GetAdventureLogLine
+GetAdventureLogLine:
 	lsls r0, 24
 	ldr r1, _08097744
 	lsrs r0, 22
@@ -342,7 +342,7 @@ sub_8097738:
 	bx lr
 	.align 2, 0
 _08097744: .4byte gAdventureLogText
-	thumb_func_end sub_8097738
+	thumb_func_end GetAdventureLogLine
 
 	thumb_func_start sub_8097748
 sub_8097748:

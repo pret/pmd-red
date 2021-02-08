@@ -1966,8 +1966,8 @@ _0801E804: .4byte gUnknown_203B268
 _0801E808: .4byte gUnknown_80DAA98
 	thumb_func_end sub_801E7AC
 
-	thumb_func_start sub_801E80C
-sub_801E80C:
+	thumb_func_start DisplayGulpinDialogueSprite
+DisplayGulpinDialogueSprite:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2055,7 +2055,7 @@ _0801E858:
 _0801E8B4: .4byte 0x00000155
 _0801E8B8: .4byte gUnknown_203B26C
 _0801E8BC: .4byte 0x00000125
-	thumb_func_end sub_801E80C
+	thumb_func_end DisplayGulpinDialogueSprite
 
 	thumb_func_start sub_801E8C0
 sub_801E8C0:
@@ -5420,14 +5420,14 @@ _0802038C:
 	ldrsh r1, [r2, r5]
 	adds r2, 0x24
 	movs r0, 0
-	bl sub_801E80C
+	bl DisplayGulpinDialogueSprite
 	b _08020562
 _080203A2:
 	movs r0, 0xC
 	ldrsh r1, [r2, r0]
 	adds r2, 0x24
 	movs r0, 0x1
-	bl sub_801E80C
+	bl DisplayGulpinDialogueSprite
 	b _08020562
 _080203B0:
 	ldr r2, [r5]

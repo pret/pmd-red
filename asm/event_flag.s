@@ -62,47 +62,47 @@ _080013B4:
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x4
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x5
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x7
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x8
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x9
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0xA
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0xB
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0xC
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0
 	movs r1, 0xD
 	movs r2, 0xA2
@@ -1070,8 +1070,8 @@ sub_8001B88:
 	bx r0
 	thumb_func_end sub_8001B88
 
-	thumb_func_start sub_8001BB4
-sub_8001BB4:
+	thumb_func_start ScenarioCalc
+ScenarioCalc:
 	push {r4-r6,lr}
 	sub sp, 0x14
 	adds r5, r1, 0
@@ -1199,7 +1199,7 @@ _08001CBA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8001BB4
+	thumb_func_end ScenarioCalc
 
 	thumb_func_start sub_8001CC4
 sub_8001CC4:
@@ -1342,7 +1342,7 @@ _08001DA0:
 	movs r0, 0x4
 	movs r1, 0x1F
 	movs r2, 0
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0xE
 	movs r1, 0x1
 	bl sub_8097418
@@ -1369,7 +1369,7 @@ _08001DDE:
 	movs r0, 0x4
 	movs r1, 0x1D
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08001E08:
 	movs r0, 0x4
 	movs r1, 0x1F
@@ -1386,7 +1386,7 @@ _08001E08:
 	movs r0, 0x4
 	movs r1, 0x1F
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0xF
 	movs r1, 0x1
 	bl sub_809733C
@@ -1496,7 +1496,7 @@ _08001F06:
 	movs r0, 0x5
 	movs r1, 0x21
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08001F20:
 	movs r0, 0xE2
 	bl sub_8091130
@@ -1523,7 +1523,7 @@ _08001F3E:
 	movs r0, 0x7
 	movs r1, 0x26
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08001F58:
 	movs r0, 0x9
 	movs r1, 0
@@ -1540,7 +1540,7 @@ _08001F58:
 	movs r0, 0x9
 	movs r1, 0x2E
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08001F7E:
 	movs r0, 0x9
 	movs r1, 0x30
@@ -1574,7 +1574,7 @@ _08001F7E:
 	movs r0, 0x5
 	movs r1, 0x22
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08001FCC:
 	movs r0, 0xB
 	movs r1, 0
@@ -1598,7 +1598,7 @@ _08001FCC:
 	movs r0, 0xB
 	movs r1, 0x33
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08002002:
 	movs r0, 0xE
 	bl GetFriendAreaStatus
@@ -1635,7 +1635,7 @@ _0800202A:
 	movs r0, 0xA
 	movs r1, 0x31
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 	movs r0, 0x1B
 	movs r1, 0x1
 	bl sub_809733C
@@ -1657,7 +1657,7 @@ _0800205C:
 	movs r0, 0xC
 	movs r1, 0x35
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _08002086:
 	movs r0, 0x6
 	movs r1, 0
@@ -1675,7 +1675,7 @@ _08002086:
 	movs r0, 0x6
 	movs r1, 0x24
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _080020AE:
 	movs r0, 0x8
 	movs r1, 0
@@ -1692,7 +1692,7 @@ _080020AE:
 	movs r0, 0x8
 	movs r1, 0x2C
 	movs r2, 0x1
-	bl sub_8001BB4
+	bl ScenarioCalc
 _080020D4:
 	add sp, 0x8
 	pop {r0}
