@@ -1,8 +1,7 @@
 #include "global.h"
 #include "constants/species.h"
+#include "personality_test.h"
 #include "pokemon.h"
-
-#define NUM_PARTNERS 10
 
 // TODO convert this... maybe a script?
 const u8 gUnknown_80F4244[32] = 
@@ -35,14 +34,14 @@ extern u8 gUnknown_80F42D0[];
 extern u8 gUnknown_80F42F0[];
 extern u8 gUnknown_203B408;
 
-struct unkStruct_203B404
+struct PersonalityStruct_203B404
 {
     // Size: 0xB8
     /* 0x0 */ s16 StarterID;
     /* 0x2 */ s16 PartnerArray[NUM_PARTNERS];
 };
 
-extern struct unkStruct_203B404 *gUnknown_203B404;
+extern struct PersonalityStruct_203B404 *gUnknown_203B404;
 
 s32 GetValidPartners(void)
 {

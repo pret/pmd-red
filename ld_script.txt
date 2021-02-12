@@ -104,6 +104,10 @@ SECTIONS {
         asm/code_803C1D0.o(.text);
         src/personality_test_pre.o(.text);
         asm/personality_test.o(.text);
+        src/personality_test_mid.o(.text);
+        asm/personality_test_1.o(.text);
+        src/personality_test_mid2.o(.text);
+        asm/personality_test_2.o(.text);
         src/personality_test.o(.text);
         asm/code_803D110.o(.text);
         src/code_8040094.o(.text);
