@@ -43,6 +43,9 @@ void sub_803CB7C(void);
 void sub_803CBB0(void);
 void sub_803CBE4(void);
 s32 GetValidPartners(void);
+void UpdateNatureTotals(void);
+void PromptNewQuestion(void);
+
 
 
 #endif
