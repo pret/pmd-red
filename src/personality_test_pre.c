@@ -23,8 +23,10 @@ struct UnkSaveStruct1
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 
-extern void sub_80141B4(const char *r0, u32 r1, u32 r2, u16 r3);
-extern void sub_803CC80(void);
+extern void sub_80141B4(const char *text, u32 r1, u32 r2, u16 r3);
+extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32, u32);
+
+extern void DisplayStarterSprite(void);
 extern u32 sub_80144A4(s32 *);
 extern void sub_803CD08(s16);
 
@@ -42,7 +44,7 @@ extern void sub_808D8BC(u32 *r0, u32);
 extern const char gStarterReveal;
 extern const char gPartnerPrompt;
 extern const char gPartnerNickPrompt;
-extern const char gUnknown_80F2898;
+extern const char gEndIntroText;
 extern const char gGenderText;
 extern u32 gGenderMenu;
 
@@ -50,10 +52,6 @@ extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern const char *gPersonalityTypeDescriptionTable[];
 
 extern u32 gUnknown_202DF98;
-
-
-
-extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32, u32);
 
 
 u8 CreateTestTracker(void)
@@ -133,7 +131,7 @@ u8 HandleTestTrackerState(void)
         sub_803CB7C();
         break;
     case 13:
-        sub_803CBB0();
+        PrintEndIntroText();
         break;
     case 14:
         sub_803CBE4();
@@ -387,7 +385,7 @@ void RevealStarter(void)
 
   if (sub_80144A4(&temp) == 0) {
     sub_80141B4(&gStarterReveal,0,0,0x101);
-    sub_803CC80();
+    DisplayStarterSprite();
     gUnknown_203B400->TestState = 6;
   }
 }
@@ -459,11 +457,11 @@ void sub_803CB7C(void)
   gUnknown_203B400->TestState = 13;
 }
 
-void sub_803CBB0(void)
+void PrintEndIntroText(void)
 {
   if (sub_8016080() != 0) {
     sub_80160D8();
-    sub_80141B4(&gUnknown_80F2898, 0, 0, 0x301);
+    sub_80141B4(&gEndIntroText, 0, 0, 0x301);
     gUnknown_203B400->TestState = 14;
   }
 }

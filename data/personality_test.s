@@ -1859,14 +1859,14 @@ gPartnerNickPrompt: @ 80F286C
         .align 2,0
         .4byte gPartnerNickPrompt
 
-	.global gUnknown_80F2898
-gUnknown_80F2898: @ 80F2898
+	.global gEndIntroText
+gEndIntroText: @ 80F2898
         .string "#+OK! We~27re all set!#P"
         .string "#+Let~27s get you into the\n"
         .string "#+world of Pokémon!#P"
         .string "#+Go for it!\0"
         .align 2,0
-        .4byte gUnknown_80F2898
+        .4byte gEndIntroText
 
 	.global gPersonalityTypeDescriptionTable
 gPersonalityTypeDescriptionTable: @ 80F28F4

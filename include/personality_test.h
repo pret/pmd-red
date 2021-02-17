@@ -40,7 +40,7 @@ void sub_803CAF4(void);
 void PromptForPartnerNickname(void);
 void sub_803CB5C(void);
 void sub_803CB7C(void);
-void sub_803CBB0(void);
+void PrintEndIntroText(void);
 void sub_803CBE4(void);
 s32 GetValidPartners(void);
 void UpdateNatureTotals(void);

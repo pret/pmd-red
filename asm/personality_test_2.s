@@ -5,8 +5,8 @@
 
 	.text
 
-        thumb_func_start sub_803CC80
-sub_803CC80:
+        thumb_func_start DisplayStarterSprite
+DisplayStarterSprite:
 	push {r4-r7,lr}
 	sub sp, 0x60
 	ldr r0, _0803CD00
@@ -64,7 +64,7 @@ _0803CCC8:
 	.align 2, 0
 _0803CD00: .4byte gUnknown_203B400
 _0803CD04: .4byte gUnknown_80F4244
-	thumb_func_end sub_803CC80
+	thumb_func_end DisplayStarterSprite
 
 	thumb_func_start sub_803CD08
 sub_803CD08:
