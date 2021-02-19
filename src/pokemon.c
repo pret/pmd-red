@@ -8,7 +8,7 @@ extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_81075F4;
 extern struct OpenedFile *gMonsterParametersFile;
 extern u16 gLevelCurrentPokeId;
-extern struct gPokemon gMonsterParameters;
+extern struct gPokemon *gMonsterParameters;
 
 extern u64 gUnknown_8107544[];
 extern u32 gUnknown_810697C;
@@ -30,8 +30,7 @@ void LoadMonsterParameters(void)
 {
     gUnknown_203B45C = &gUnknown_202F400;
     gMonsterParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_81075F4, &gSystemFileArchive);
-    // TODO verify this... other parts imply this is an array
-    gMonsterParameters.species = gMonsterParametersFile->data;
+    gMonsterParameters = (struct gPokemon *)gMonsterParametersFile->data;
     gLevelCurrentPokeId = 0;
 }
 

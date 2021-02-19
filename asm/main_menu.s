@@ -286,8 +286,8 @@ _08035E0A:
 	bx r1
 	thumb_func_end sub_8035DB4
 
-        thumb_func_start sub_8035E10
-sub_8035E10:
+        thumb_func_start DrawMainMenu
+DrawMainMenu:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -335,7 +335,7 @@ _08035E42:
 	movs r1, 0x1
 	movs r2, 0x1
 	bl sub_800641C
-	bl sub_803628C
+	bl SetMainMenuItems
 	ldr r0, [r4]
 	movs r7, 0xD2
 	lsls r7, 1
@@ -343,7 +343,7 @@ _08035E42:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [r0]
-	bl SetMainMenuType
+	bl SetMainMenuText
 	lsls r0, 24
 	cmp r0, 0
 	beq _08035E9A
@@ -369,10 +369,10 @@ _08035E9A:
 	.align 2, 0
 _08035EB8: .4byte gUnknown_203B34C
 _08035EBC: .4byte gUnknown_80E59C8
-	thumb_func_end sub_8035E10
+	thumb_func_end DrawMainMenu
 
-	thumb_func_start sub_8035EC0
-sub_8035EC0:
+	thumb_func_start CleanMainMenu
+CleanMainMenu:
 	push {r4,lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -392,7 +392,7 @@ _08035EE0:
 	bx r0
 	.align 2, 0
 _08035EE8: .4byte gUnknown_203B34C
-	thumb_func_end sub_8035EC0
+	thumb_func_end CleanMainMenu
 
 	thumb_func_start sub_8035EEC
 sub_8035EEC:
@@ -426,7 +426,7 @@ _08035F0A:
 	mov r1, sp
 	bl sub_8013114
 _08035F28:
-	bl SetMainMenuType
+	bl SetMainMenuText
 	lsls r0, 24
 	cmp r0, 0
 	beq _08035F4A
@@ -553,8 +553,8 @@ _0803601A:
 	bx r1
 	thumb_func_end sub_8035EEC
 
-	thumb_func_start SetMainMenuType
-SetMainMenuType:
+	thumb_func_start SetMainMenuText
+SetMainMenuText:
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r6, _08036048
@@ -789,7 +789,7 @@ _08036226:
 _08036230: .4byte gUnknown_203B34C
 _08036234: .4byte gUnknown_80E5CB4
 _08036238: .4byte gUnknown_80E5D48
-	thumb_func_end SetMainMenuType
+	thumb_func_end SetMainMenuText
 
 	thumb_func_start sub_803623C
 sub_803623C:
@@ -801,7 +801,7 @@ sub_803623C:
 	adds r0, r1
 	movs r1, 0x1
 	bl sub_8035CC0
-	bl sub_803628C
+	bl SetMainMenuItems
 	ldr r0, [r4]
 	movs r1, 0xD2
 	lsls r1, 1
@@ -809,7 +809,7 @@ sub_803623C:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [r0]
-	bl SetMainMenuType
+	bl SetMainMenuText
 	lsls r0, 24
 	cmp r0, 0
 	beq _08036276
@@ -831,8 +831,8 @@ _08036276:
 _08036288: .4byte gUnknown_203B34C
 	thumb_func_end sub_803623C
 
-	thumb_func_start sub_803628C
-sub_803628C:
+	thumb_func_start SetMainMenuItems
+SetMainMenuItems:
 	push {r4,lr}
 	sub sp, 0x10
 	bl sub_8011C34
@@ -984,7 +984,7 @@ _080363D0: .4byte gUnknown_203B34C
 _080363D4: .4byte gUnknown_80E59E0
 _080363D8: .4byte gUnknown_80E59F8
 _080363DC: .4byte gUnknown_203B350
-	thumb_func_end sub_803628C
+	thumb_func_end SetMainMenuItems
 
 	thumb_func_start sub_80363E0
 sub_80363E0:
