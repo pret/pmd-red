@@ -1,20 +1,15 @@
 #include "global.h"
+#include "constants/emotions.h"
 #include "constants/species.h"
 #include "personality_test.h"
 #include "pokemon.h"
 
-// TODO convert this... maybe a script?
-const u8 gUnknown_80F4244[32] = 
-{
-    0, 0, 0, 0,
-    5, 0, 0, 0,
-    0xC, 0, 6, 0,
-    5, 0, 5, 0,
-    5, 0, 0, 0,
-    0, 0, 0, 0,
+extern void sub_80073E0(u32);
+extern void sub_80073B8(u32);
+extern void sub_8008C54(u32);
+extern void sub_800836C(u32, u8 *r0, u32);
+extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
-    'p', 'k', 's', 'd', 'i', 'r', '0', 0
-};
 
 const s16 gPartners[NUM_PARTNERS] = 
 {
@@ -34,14 +29,34 @@ extern u8 gUnknown_80F42D0[];
 extern u8 gUnknown_80F42F0[];
 extern u8 gUnknown_203B408;
 
-struct PersonalityStruct_203B404
+// Definitely wrong but need to figure out better structure later
+struct FaceData
 {
-    // Size: 0xB8
-    /* 0x0 */ s16 StarterID;
-    /* 0x2 */ s16 PartnerArray[NUM_PARTNERS];
+    /* 0x0 */ u8 *unk0[5];
 };
 
-extern struct PersonalityStruct_203B404 *gUnknown_203B404;
+void PersonalityTest_DisplayPartnerSprite(void)
+{
+  s32 partnerID;
+  struct OpenedFile *faceFile;
+  int palleteIndex;
+  u8 *r6;
+  u32 faceIndex;
+
+  partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
+  sub_8008C54(1);
+  sub_80073B8(1);
+  faceFile = GetDialogueSpriteDataPtr(partnerID);
+  r6 = ((struct FaceData *)(faceFile->data))->unk0[1 + EMOTION_NORMAL];
+  faceIndex = EMOTION_NORMAL;
+  for(palleteIndex = 0; palleteIndex < 16; palleteIndex++){
+    SetBGPaletteBufferColorArray(palleteIndex + 224,&((struct FaceData *)(faceFile->data))->unk0[faceIndex][palleteIndex << 2]);
+  }
+  sub_800836C(1,r6,0xe);
+  CloseFile(faceFile);
+  sub_80073E0(1);
+  gUnknown_203B404->unk16 = 1;
+}
 
 s32 GetValidPartners(void)
 {
@@ -87,5 +102,3 @@ u8 sub_803D100(u8 r0)
 {
     return gUnknown_80F42D0[r0];
 }
-
-

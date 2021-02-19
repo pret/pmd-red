@@ -217,6 +217,7 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
+        src/personality_test_pre.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
         data/friend_area_dialogue.o(.rodata);

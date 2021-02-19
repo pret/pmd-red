@@ -1,6 +1,10 @@
 #include "global.h"
 #include "personality_test.h"
+#include "constants/emotions.h"
 #include "random.h"
+#include "file_system.h"
+#include "pokemon.h"
+#include "input.h"
 
 extern void* MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
@@ -12,6 +16,8 @@ extern void sub_8011C40(s32);
 extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
+
+
 struct UnkSaveStruct1
 {
     /* 0x0 */ u32 unk0;
@@ -22,15 +28,27 @@ struct UnkSaveStruct1
 };
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
+// The frick... This is definitely wrong in terms of members
+// There's 5 pointers in the data
+struct FaceData
+{
+    /* 0x0 */ u8 *unk0[5];
+};
+
+struct stack_PartnerSprite
+{
+    // size: 0x60
+    u32 unk0;
+    u8 padding[0x18 - 4];
+    struct unkData data;
+    u32 padding2[12];
+};
 
 extern void sub_80141B4(const char *text, u32 r1, u32 r2, u16 r3);
 extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32, u32);
 
-extern void DisplayStarterSprite(void);
 extern u32 sub_80144A4(s32 *);
-extern void sub_803CD08(s16);
 
-extern s16 sub_803CDC0(void);
 extern void sub_803CE6C(void);
 extern u32 sub_808D994(u32);
 extern void sub_80922F4(s32 *r0, u32);
@@ -40,6 +58,26 @@ extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
 extern void sub_808D8BC(u32 *r0, u32);
+
+extern void sub_8006518(void *);
+extern void sub_800641C(void *, u32, u32);
+extern void sub_80073E0(u32);
+extern void sub_80073B8(u32);
+extern void sub_8008C54(u32);
+extern void sub_800836C(u32, u8 *r0, u32);
+extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
+
+extern void sub_803CEAC(void);
+extern void RedrawPartnerSelectionMenu(void);
+extern void sub_8013818(u32 *r0, s32, u32, u32);
+
+extern u32 GetKeyPress(struct UnkInputStruct **r0);
+extern u8 sub_80138B8(struct UnkInputStruct **r0, u32);
+extern void sub_80119D4(u32);
+
+
+extern void sub_8013984(struct UnkInputStruct **r0);
+extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
 
 extern const char gStarterReveal;
 extern const char gPartnerPrompt;
@@ -52,6 +90,24 @@ extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern const char *gPersonalityTypeDescriptionTable[];
 
 extern u32 gUnknown_202DF98;
+
+
+struct unkData gUnknown_80F4244 = 
+{
+    0, 0, 0, 0,
+    5, 0, 0, 0,
+    0xC, 0, 6, 0,
+    5, 0, 5, 0,
+    5, 0, 0, 0,
+    0, 0, 0, 0,
+};
+
+const u8 filler[8] = 
+{
+    'p', 'k', 's', 'd', 'i', 'r', '0', 0
+};
+
+extern struct unkData gUnknown_80F4278;
 
 
 u8 CreateTestTracker(void)
@@ -119,7 +175,7 @@ u8 HandleTestTrackerState(void)
         sub_803CAD4();
         break;
     case 9:
-        sub_803CAF4();
+        CallCreatePartnerSelectionMenu();
         break;
     case 10:
         PromptForPartnerNickname();
@@ -385,7 +441,7 @@ void RevealStarter(void)
 
   if (sub_80144A4(&temp) == 0) {
     sub_80141B4(&gStarterReveal,0,0,0x101);
-    DisplayStarterSprite();
+    PersonalityTest_DisplayStarterSprite();
     gUnknown_203B400->TestState = 6;
   }
 }
@@ -414,22 +470,22 @@ void sub_803CAD4(void)
   }
 }
 
-void sub_803CAF4(void)
+void CallCreatePartnerSelectionMenu(void)
 {
-    sub_803CD08(gUnknown_203B400->StarterID);
+    CreatePartnerSelectionMenu(gUnknown_203B400->StarterID);
     gUnknown_203B400->TestState = 10;
 }
 
 void PromptForPartnerNickname(void)
 {
-  u16 sVar1;
+  u16 selectedPartner;
 
-  sVar1 = sub_803CDC0();
-  if (sVar1 != 0xffff)
+  selectedPartner = HandlePartnerSelectionInput();
+  if (selectedPartner != 0xffff)
   {
-      if(sVar1 != 0xfffe) {
+      if(selectedPartner != 0xfffe) {
         sub_803CE6C();
-        gUnknown_203B400->unkA = sVar1;
+        gUnknown_203B400->PartnerID = selectedPartner;
         sub_80141B4(&gPartnerNickPrompt, 0, 0, 0x301);
         gUnknown_203B400->TestState = 11;
       }
@@ -451,7 +507,7 @@ void sub_803CB7C(void)
   s32 *iVar2;
 
   iVar2 = &gUnknown_203B400->unk20;
-  uVar1 = sub_808D994(gUnknown_203B400->unkA);
+  uVar1 = sub_808D994(gUnknown_203B400->PartnerID);
   sub_80922F4(iVar2,uVar1);
   sub_801602C(3, &gUnknown_203B400->unk20);
   gUnknown_203B400->TestState = 13;
@@ -514,4 +570,214 @@ void PrintPersonalityTypeDescription(void)
   sub_808D8BC(&gUnknown_202DF98,gUnknown_203B400->StarterID);
   sub_80141B4(gPersonalityTypeDescriptionTable[gUnknown_203B400->playerNature],0,
               0,0x101);
+}
+
+void PersonalityTest_DisplayStarterSprite(void)
+{
+  s32 starterID;
+  struct OpenedFile *faceFile;
+  int palleteIndex;
+  u8 *r6;
+  u32 faceIndex;
+  struct stack_PartnerSprite stackArray;
+
+  starterID = gUnknown_203B400->StarterID;
+  sub_8006518(&stackArray);
+  stackArray.data = gUnknown_80F4244;
+  ResetUnusedInputStruct();
+  sub_800641C(&stackArray, 1, 0);
+  sub_8008C54(1);
+  sub_80073B8(1);
+  faceFile = GetDialogueSpriteDataPtr(starterID);
+  r6 = ((struct FaceData *)(faceFile->data))->unk0[1 + EMOTION_HAPPY]; 
+  faceIndex = EMOTION_HAPPY;
+  for(palleteIndex = 0; palleteIndex < 16; palleteIndex++){
+    SetBGPaletteBufferColorArray(palleteIndex + 224, &((struct FaceData *)(faceFile->data))->unk0[faceIndex][palleteIndex << 2]);
+  }
+  sub_800836C(1, r6, 0xe);
+  CloseFile(faceFile);
+  sub_80073E0(1);
+}
+
+#ifdef NONMATCHING
+void CreatePartnerSelectionMenu(s16 starterID)
+{
+    s32 starterID_s32;
+    starterID_s32 = starterID; // force an asr shift.. does lsr without it
+
+    sub_803CEAC(); // creates 203B404
+    gUnknown_203B404->StarterID = starterID_s32;
+    gUnknown_203B404->unk4C = 0;
+    gUnknown_203B404->unk50 = &gUnknown_203B404->unk54;
+
+    gUnknown_203B404->unk54[0] = gUnknown_80F4290;
+    gUnknown_203B404->unk54[1] = gUnknown_80F42A8;
+    gUnknown_203B404->unk54[2] = gUnknown_80F4278;
+    gUnknown_203B404->unk54[3] = gUnknown_80F4278;
+
+    // TODO this is the problem area
+    //gUnknown_203B404->unk50[5] = (u32 *) &gUnknown_203B404->sub; // so weird but think they store the substruct
+
+    gUnknown_203B404->sub.unkb4 = 1;
+    gUnknown_203B404->sub.unkb5 = 0;
+    gUnknown_203B404->sub.unkb6 = 6;
+    gUnknown_203B404->sub.unkb7 = 0;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B404->unk54, 1, 1);
+    sub_8013818(&gUnknown_203B404->unk18, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
+    RedrawPartnerSelectionMenu();
+    PersonalityTest_DisplayPartnerSprite();
+}
+#else
+NAKED
+void CreatePartnerSelectionMenu(s16 starterID)
+{
+	asm_unified("\tpush {r4-r7,lr}\n"
+	"\tadds r4, r0, 0\n"
+	"\tlsls r4, 16\n"
+	"\tasrs r4, 16\n"
+	"\tbl sub_803CEAC\n"
+	"\tldr r5, _0803CDB0\n"
+	"\tldr r0, [r5]\n"
+	"\tmovs r3, 0\n"
+	"\tmovs r1, 0\n"
+	"\tstrh r4, [r0]\n"
+	"\tstr r1, [r0, 0x4C]\n"
+	"\tadds r1, r0, 0\n"
+	"\tadds r1, 0x54\n"
+	"\tstr r1, [r0, 0x50]\n"
+	"\tldr r0, _0803CDB4\n"
+	"\tldm r0!, {r2,r4,r6}\n"
+	"\tstm r1!, {r2,r4,r6}\n"
+	"\tldm r0!, {r2,r4,r7}\n"
+	"\tstm r1!, {r2,r4,r7}\n"
+	"\tldr r1, [r5]\n"
+	"\tadds r1, 0x6C\n"
+	"\tldr r0, _0803CDB8\n"
+	"\tldm r0!, {r2,r6,r7}\n"
+	"\tstm r1!, {r2,r6,r7}\n"
+	"\tldm r0!, {r4,r6,r7}\n"
+	"\tstm r1!, {r4,r6,r7}\n"
+	"\tldr r1, [r5]\n"
+	"\tldr r2, _0803CDBC\n"
+	"\tadds r1, 0x84\n"
+	"\tadds r0, r2, 0\n"
+	"\tldm r0!, {r4,r6,r7}\n"
+	"\tstm r1!, {r4,r6,r7}\n"
+	"\tldm r0!, {r4,r6,r7}\n"
+	"\tstm r1!, {r4,r6,r7}\n"
+	"\tldr r0, [r5]\n"
+	"\tadds r0, 0x9C\n"
+	"\tldm r2!, {r1,r4,r6}\n"
+	"\tstm r0!, {r1,r4,r6}\n"
+	"\tldm r2!, {r1,r4,r7}\n"
+	"\tstm r0!, {r1,r4,r7}\n"
+	"\tldr r0, [r5]\n"
+	"\tldr r1, [r0, 0x50]\n"
+	"\tadds r0, 0xB4\n"
+	"\tstr r0, [r1, 0x14]\n"
+	"\tmovs r1, 0x1\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r5]\n"
+	"\tadds r0, 0xB5\n"
+	"\tstrb r3, [r0]\n"
+	"\tldr r0, [r5]\n"
+	"\tadds r0, 0xB6\n"
+	"\tmovs r1, 0x6\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r5]\n"
+	"\tadds r0, 0xB7\n"
+	"\tstrb r3, [r0]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r5]\n"
+	"\tadds r0, 0x54\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tldr r4, [r5]\n"
+	"\tadds r4, 0x18\n"
+	"\tbl GetValidPartners\n"
+	"\tadds r1, r0, 0\n"
+	"\tldr r0, [r5]\n"
+	"\tldr r3, [r0, 0x4C]\n"
+	"\tadds r0, r4, 0\n"
+	"\tmovs r2, 0xA\n"
+	"\tbl sub_8013818\n"
+	"\tbl RedrawPartnerSelectionMenu\n"
+	"\tbl PersonalityTest_DisplayPartnerSprite\n"
+	"\tpop {r4-r7}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0803CDB0: .4byte gUnknown_203B404\n"
+"_0803CDB4: .4byte gUnknown_80F4290\n"
+"_0803CDB8: .4byte gUnknown_80F42A8\n"
+"_0803CDBC: .4byte gUnknown_80F4278");
+}
+
+#endif
+
+u16 HandlePartnerSelectionInput(void)
+{
+  s32 sVar1;
+
+  sVar1 = gUnknown_203B404->currPartnerSelection;
+  gUnknown_203B404->unk16 = 0;
+  if (GetKeyPress(&gUnknown_203B404->unk18) == A_BUTTON) {
+    sub_80119D4(0);
+    return gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
+  }
+  else {
+    if (sub_80138B8(&gUnknown_203B404->unk18, 1) != '\0') {
+      RedrawPartnerSelectionMenu();
+    }
+    if (sVar1 != gUnknown_203B404->currPartnerSelection) {
+      PersonalityTest_DisplayPartnerSprite();
+    }
+    if (gUnknown_203B404->unk16 != '\0') {
+      return 0xfffe;
+    }
+    else {
+      return 0xffff;
+    }
+  }
+}
+
+void sub_803CE34(u8 param_1)
+{
+  gUnknown_203B404->numPartners = GetValidPartners();
+  sub_8013984(&gUnknown_203B404->unk18);
+  RedrawPartnerSelectionMenu();
+  PersonalityTest_DisplayPartnerSprite();
+  if (param_1 != 0) {
+    AddMenuCursorSprite(&gUnknown_203B404->unk18);
+  }
+}
+
+void sub_803CE6C()
+{
+  gUnknown_203B404->unk54[gUnknown_203B404->unk4C] = gUnknown_80F4278;
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B404->unk54, 1, 1);
+  sub_803CECC(); // Free 203B404
+}
+
+void sub_803CEAC(void)
+{
+    gUnknown_203B404 = MemoryAlloc(sizeof(struct PersonalityStruct_203B404), 8);
+    nullsub_135();
+}
+
+void nullsub_135(void)
+{
+}
+
+
+void sub_803CECC(void)
+{
+    if(gUnknown_203B404 != NULL){
+        nullsub_135();
+        MemoryFree(gUnknown_203B404);
+        gUnknown_203B404 = NULL;
+    }
 }
