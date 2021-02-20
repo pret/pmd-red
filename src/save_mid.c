@@ -3,9 +3,10 @@
 #include "friend_area.h"
 #include "pokemon.h"
 #include "file_system.h"
+#include "time.h"
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
-extern struct unkTimeStruct *gUnknown_203B47C;
+extern struct PlayTimeStruct *gPlayTimeRef;
 
 struct unk_203B188
 {
@@ -58,7 +59,7 @@ extern struct unkStruct_203B190 *gUnknown_203B190;
 struct unkStruct_203B194
 {
     s32 unk0;
-    u32 unk4;
+    u8 *unk4;
     u32 unk8;
     u8 unkC;
     u8 padding[0x10 - 0xD];
@@ -79,14 +80,19 @@ extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
 extern u8 *gUnknown_203B498;
 
-extern const char gUnknown_80D4354;
-extern const char gUnknown_80D4398;
-extern const char gUnknown_80D43D8;
-extern const char gUnknown_80D4438;
-extern const char gUnknown_80D444C;
-extern const char gUnknown_80D44B0;
+extern const char gSaveCorrupted;
+extern const char gSavingAdventure;
+extern const char gWriteGamePak;
+extern const char gSaveCompleted;
+extern const char gSaveNotWritten;
+extern const char gSaveFailed;
 extern const char gUnknown_80D44C8;
 extern const char gUnknown_80D45AC;
+
+extern const char gUnknown_80D45F4;
+extern const char gUnknown_80D4668;
+extern const char gUnknown_80D473C;
+extern const char gSaveFailed2;
 
 extern void sub_800135C(void);
 extern u32 *sub_808CE00(void);
@@ -114,10 +120,6 @@ extern void sub_80993D8(void);
 extern void sub_8011C28(u32 r0);
 extern void sub_8011C40(s32 r0);
 extern void sub_8097748(void);
-
-
-extern void ResetPlayTime(struct unkTimeStruct *Time); // defined in src/code_8094F88.c
-extern struct unkTimeStruct *sub_8094FA0(void);
 
 extern void* MemoryAlloc(u32 a, u32 b);
 extern void MemoryFree(void* a);
@@ -229,7 +231,7 @@ void sub_80122D0(void)
     sub_8011C28(0);
     sub_8011C40(-1);
     sub_8097748();
-    ResetPlayTime(gUnknown_203B47C);
+    ResetPlayTime(gPlayTimeRef);
 }
 
 void sub_80122F4(void)
@@ -275,7 +277,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B498 = r0->unk24;
        gFriendAreas     = r0->BoughtFriendAreas;
        gUnknown_203B46C = r0->unk2C;
-       gUnknown_203B47C = r0->unk30;
+       gPlayTimeRef = r0->playTime;
        return;
     }
        gUnknown_203B460 = sub_80909D0();
@@ -290,7 +292,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B498 = sub_8097F6C();
        gFriendAreas     = GetBoughtFriendAreas();
        gUnknown_203B46C = sub_8094990();
-       gUnknown_203B47C = sub_8094FA0();
+       gPlayTimeRef = GetPlayTime();
 
 }
 
@@ -320,7 +322,7 @@ u8 sub_8012484(void)
             {
                 if(sub_8011FF8())
                 {
-                    sub_80141B4(&gUnknown_80D4354, 0, 0, 0x301);
+                    sub_80141B4(&gSaveCorrupted, 0, 0, 0x301);
                     gUnknown_203B188->unk0 = 3;
                     break;
                 }
@@ -390,10 +392,10 @@ void sub_8012574(s16 PokemonID)
   }
   if (gUnknown_203B18C->faceFile != 0) {
       // LDR r0 and R2 statements get flipped... basically matches
-      sub_80141B4(&gUnknown_80D4398,0,(u8 *)&gUnknown_203B18C->faceFile,0x20);
+      sub_80141B4(&gSavingAdventure,0,(u8 *)&gUnknown_203B18C->faceFile,0x20);
   }
   else {
-      sub_80141B4(&gUnknown_80D4398,0,0,0x20);
+      sub_80141B4(&gSavingAdventure,0,0,0x20);
   }
   gUnknown_203B18C->unk0 = 3;
 }
@@ -447,7 +449,7 @@ void sub_8012574(s16 PokemonID)
 	"\tb _080125E8\n"
 	"\t.align 2, 0\n"
 "_080125D4: .4byte gUnknown_203B18C\n"
-"_080125D8: .4byte gUnknown_80D4398\n"
+"_080125D8: .4byte gSavingAdventure\n"
 "_080125DC:\n"
 	"\tldr r0, _080125F8\n"
 	"\tmovs r1, 0\n"
@@ -463,13 +465,13 @@ void sub_8012574(s16 PokemonID)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_080125F8: .4byte gUnknown_80D4398\n"
+"_080125F8: .4byte gSavingAdventure\n"
 "_080125FC: .4byte gUnknown_203B18C");
 
 }
 #endif
 
-u32 sub_8012600(void)
+u8 sub_8012600(void)
 {
   struct OpenedFile **faceFile;
   u32 local_14;
@@ -487,8 +489,8 @@ u32 sub_8012600(void)
     case 1:
         gUnknown_203B18C->unk4++;
         if (8 < gUnknown_203B18C->unk4) {
-        sub_80141B4(&gUnknown_80D43D8,0,0,0x20);
-        gUnknown_203B18C->unk0 = 3;
+            sub_80141B4(&gWriteGamePak, 0, 0, 0x20);
+            gUnknown_203B18C->unk0 = 3;
         }
         break;
     case 2:
@@ -505,26 +507,26 @@ u32 sub_8012600(void)
             case 0:
                 if(gUnknown_203B18C->faceFile != NULL)
                 {
-                    sub_80141B4(&gUnknown_80D4438, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
                 }
                 else
                 {
-                    sub_80141B4(&gUnknown_80D4438, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
                 }
                 gUnknown_203B18C->unk0 = 5;
                 break;
             case 1:
-                sub_80141B4(&gUnknown_80D444C, 0, 0, 0);
+                sub_80141B4(&gSaveNotWritten, 0, 0, 0);
                 gUnknown_203B18C->unk0 = 6;
                 break;
             default:
                 if(gUnknown_203B18C->faceFile != NULL)
                 {
-                    sub_80141B4(&gUnknown_80D44B0, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
                 }
                 else
                 {
-                    sub_80141B4(&gUnknown_80D44B0, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
                 }
                 gUnknown_203B18C->unk0 = 5;
                 break;
@@ -619,7 +621,7 @@ void sub_8012834(void)
     }
 }
 
-void sub_8012850(u32 r0, u32 r1, u8 r2)
+void sub_8012850(u8 *r0, u32 r1, u8 r2)
 {
     gUnknown_203B194 = MemoryAlloc(sizeof(struct unkStruct_203B194), 5);
     gUnknown_203B194->unk4 = r0;
@@ -635,3 +637,81 @@ void sub_8012850(u32 r0, u32 r1, u8 r2)
         sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
     }
 }
+
+u32 sub_80128B0(void)
+{
+    u32 stack_1;
+    u32 stack_2;
+    switch(gUnknown_203B194->unk0)
+    {
+        case 0:
+            gUnknown_203B194->unk0 = 1;
+            break;
+        case 1:
+            sub_80140DC();
+            stack_1 = 16;
+            gUnknown_203B194->unk10 = sub_80121D4(&stack_1, gUnknown_203B194->unk4, gUnknown_203B194->unk8);
+            gUnknown_203B194->unk0 = 2;
+            return 1;
+        case 2:
+            stack_1 = 0;
+            if(gUnknown_203B194->unk10 == 0)
+            {
+                gUnknown_203B194->unk10 = sub_801203C(&stack_1, 2);
+            }
+            switch(gUnknown_203B194->unk10)
+            {
+                case 0:
+                    sub_80121E0(0xf1207);
+                    if(gUnknown_203B194->unkC != 0)
+                    {
+                        sub_80141B4(&gUnknown_80D45F4, 0, 0, 0x301);
+                    }
+                    else
+                    {
+                        sub_80141B4(&gUnknown_80D4668, 0, 0, 0x301);
+                    }
+                    gUnknown_203B194->unk0 = 3;
+                    break;
+                case 1:
+                    sub_80141B4(&gUnknown_80D473C, 0, 0, 0);
+                    gUnknown_203B194->unk0 = 4;
+                    break;
+                default:
+                    sub_80121E0(0xf1209);
+                    sub_80141B4(&gSaveFailed2, 0, 0, 0x301);
+                    gUnknown_203B194->unk0 = 3;
+                    break;
+            }
+            sub_8014114();
+            break;
+        case 3:
+            if(sub_80144A4(&stack_2) == 0)
+                gUnknown_203B194->unk0 = 5;
+            break;
+        case 4:
+            break;
+        case 5:
+            if(gUnknown_203B194->unk10 == 0)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+            break;
+        default:
+            break;
+    }
+    return 0;
+}
+
+void sub_80129FC()
+{
+    if (gUnknown_203B194) {
+        MemoryFree(gUnknown_203B194);
+        gUnknown_203B194 = NULL;
+    }
+}
+

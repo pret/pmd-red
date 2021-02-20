@@ -5,6 +5,7 @@
 #include "bg.h"
 #include "music.h"
 #include "constants/bg_music.h"
+#include "time.h"
 
 extern void InitHeap(void);
 extern void NDS_DebugInit(void);
@@ -13,7 +14,6 @@ extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void LoadMonsterParameters(void);
 extern void sub_8097670(void);
-extern void sub_8094F88(void);
 extern void sub_8094980(void);
 extern void sub_8094C14(void);
 extern void sub_8097F5C(void);
@@ -96,7 +96,7 @@ void GameLoop(void)
     sub_8014144();
     LoadMonsterParameters();
     sub_8097670();
-    sub_8094F88();
+    InitializePlayTime();
     sub_8094980();
     sub_8094C14();
     sub_8097F5C();

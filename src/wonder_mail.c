@@ -1,4 +1,5 @@
 #include "global.h"
+#include "save.h"
 
 // Wonder Mail Related
 struct WonderMailStruct_203B2C0
@@ -57,9 +58,6 @@ extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
-extern void sub_8012574(u32);
-extern u8 sub_8012600();
-extern void sub_8012750();
 extern void sub_8095240(u8);
 
 extern void sub_809927C(u8);
@@ -104,10 +102,6 @@ extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 extern void sub_8011C28(u32);
-extern void sub_8012574(u32);
-extern u8 sub_8012600();
-extern u32 sub_8012744();
-extern void sub_8012750();
 
 
 extern u32 sub_80154F0();

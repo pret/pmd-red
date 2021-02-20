@@ -7364,7 +7364,7 @@ _08039696:
 	.align 2, 0
 _0803974C: .4byte gUnknown_80E780C
 _08039750: .4byte gUnknown_203B374
-_08039754: .4byte gUnknown_203B47C
+_08039754: .4byte gPlayTimeRef
 _08039758: .4byte gUnknown_80E7838
 _0803975C: .4byte gUnknown_80E7848
 _08039760: .4byte 0x000f1207

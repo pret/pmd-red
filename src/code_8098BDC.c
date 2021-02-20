@@ -2,7 +2,7 @@
 #include "time.h"
 #include "input.h"
 
-extern struct PlayTimeStruct *gUnknown_203B47C;
+extern struct PlayTimeStruct *gPlayTimeRef;
 extern u32 gUnknown_20398A8;
 extern u32 gUnknown_20398AC;
 extern u32 gUnknown_20398B0;
@@ -81,7 +81,7 @@ void sub_8098BDC(void)
     sub_8099BE4();
     sub_8099744();
     sub_8011860();
-    IncrementPlayTime(gUnknown_203B47C);
+    IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
     LoadBufferedInputs();
     nullsub_120();

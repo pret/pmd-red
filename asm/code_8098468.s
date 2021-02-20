@@ -526,7 +526,7 @@ _08098968: .4byte gUnknown_20398B9
 _0809896C: .4byte gUnknown_20398B8
 _08098970: .4byte gRealInputs
 _08098974: .4byte 0x0000030f
-_08098978: .4byte gUnknown_203B47C
+_08098978: .4byte gPlayTimeRef
 _0809897C:
 	bl sub_80A4AEC
 	movs r7, 0x1

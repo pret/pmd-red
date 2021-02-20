@@ -21,7 +21,7 @@ extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
 extern u8 sub_800C5D0(u16 r0);
 
-extern struct PlayTimeStruct *gUnknown_203B47C;
+extern struct PlayTimeStruct *gPlayTimeRef;
 
 struct UnkSaveStruct1
 {
@@ -81,7 +81,7 @@ void sub_801169C(void)
     nullsub_8(gUnknown_203B46C->unkA);
     sub_8005180();
     sub_80060EC();
-    IncrementPlayTime(gUnknown_203B47C);
+    IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
     LoadBufferedInputs();
     CopySpritesToOam();

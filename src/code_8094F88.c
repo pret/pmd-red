@@ -1,7 +1,7 @@
 #include "global.h"
 #include "time.h"
 
-extern struct PlayTimeStruct *gUnknown_203B47C;
+extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct PlayTimeStruct gPlayTime;
 
 extern u8 gUnknown_2038C88;
@@ -18,17 +18,13 @@ extern void sub_809488C(u32 *r0, u32 *r1, u32);
 extern void sub_8094924(u32 *r0, u32 *r1, u32);
 
 
-// Forward Declaration
-void ResetPlayTime(struct PlayTimeStruct *Time);
-
-
-void sub_8094F88(void)
+void InitializePlayTime(void)
 {
-    gUnknown_203B47C = &gPlayTime;
+    gPlayTimeRef = &gPlayTime;
     ResetPlayTime(&gPlayTime);
 }
 
-struct PlayTimeStruct *sub_8094FA0(void)
+struct PlayTimeStruct *GetPlayTime(void)
 {
     return &gPlayTime;
 }
@@ -93,18 +89,18 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
 
 void sub_8095044(u32 *r0)
 {
-    sub_809488C(r0, (u32 *)(&(gUnknown_203B47C->frames)), 6);
-    sub_809488C(r0, (u32 *)(&(gUnknown_203B47C->seconds)), 6);
-    sub_809488C(r0, (u32 *)(&(gUnknown_203B47C->minutes)), 6);
-    sub_809488C(r0, (u32 *)(&(gUnknown_203B47C->hours)), 14);
+    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->frames)), 6);
+    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->seconds)), 6);
+    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->minutes)), 6);
+    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->hours)), 14);
 }
 
 void sub_8095080(u32 *r0)
 {
-    sub_8094924(r0, (u32 *)(&(gUnknown_203B47C->frames)), 6);
-    sub_8094924(r0, (u32 *)(&(gUnknown_203B47C->seconds)), 6);
-    sub_8094924(r0, (u32 *)(&(gUnknown_203B47C->minutes)), 6);
-    sub_8094924(r0, (u32 *)(&(gUnknown_203B47C->hours)), 14);
+    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->frames)), 6);
+    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->seconds)), 6);
+    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->minutes)), 6);
+    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->hours)), 14);
 }
 
 void sub_80950BC(void)
