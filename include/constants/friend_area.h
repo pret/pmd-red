@@ -1,3 +1,7 @@
+#ifndef GUARD_CONSTANTS_FRIEND_AREA_H
+#define GUARD_CONSTANTS_FRIEND_AREA_H
+
+
 #define NUM_FRIEND_AREAS 58
 
 #define NONE 0
@@ -58,3 +62,5 @@
 #define SOUTHERN_ISLAND 55
 #define ENCLOSED_ISLAND 56
 #define FINAL_ISLAND 57
+
+#endif

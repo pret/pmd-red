@@ -69,7 +69,7 @@ _08035472:
 _080354C0: .4byte gUnknown_203B340
 _080354C4: .4byte gUnknown_80E4A10
 _080354C8: .4byte gUnknown_80E4A28
-_080354CC: .4byte gUnknown_80E591C
+_080354CC: .4byte gCreditsTable
 _080354D0:
 	ldr r2, [r1, 0x8]
 	movs r3, 0x4
@@ -157,7 +157,7 @@ _08035542:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08035570: .4byte gCreditsTable
+_08035570: .4byte gCreditsText
 	thumb_func_end sub_8035444
 
 	thumb_func_start sub_8035574
@@ -201,7 +201,7 @@ _080355A8:
 	b _08035654
 	.align 2, 0
 _080355C8: .4byte gUnknown_203B340
-_080355CC: .4byte gCreditsTable
+_080355CC: .4byte gCreditsText
 _080355D0:
 	bl sub_8099B94
 	lsls r0, 24
@@ -233,7 +233,7 @@ _08035600:
 	str r0, [r1, 0x64]
 	b _08035654
 	.align 2, 0
-_0803560C: .4byte gCreditsTable
+_0803560C: .4byte gCreditsText
 _08035610:
 	bl sub_8099B94
 	lsls r0, 24
@@ -262,7 +262,7 @@ _08035638:
 	movs r0, 0x3
 	b _08035656
 	.align 2, 0
-_08035650: .4byte gCreditsTable
+_08035650: .4byte gCreditsText
 _08035654:
 	movs r0, 0
 _08035656:

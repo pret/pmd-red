@@ -18,7 +18,7 @@ extern s16 gUnknown_80F4FBE;
 extern void sub_807D148(u32 r0, struct unkDungeon_8041D5C *r1, u32 r2, u32 r3);
 extern void sub_8075FCC(u32 r0, struct unkDungeon_8041D5C *r1);
 extern void sub_8077AE4(u32 r0, struct unkDungeon_8041D5C *r1, u32 r2);
-extern void sub_8072008(u32 r0, struct unkDungeon_8041D5C *r1, u32 r2, u8 r3);
+extern void sub_8072008(u32 r0, struct unkDungeon_8041D5C *r1, u32 r2, u8 r3, u32);
 extern void sub_8076D10(u32 r0, struct unkDungeon_8041D5C *r1);
 extern void sub_807232C(u32 r0, struct unkDungeon_8041D5C *r1, u32 r2);
 
@@ -135,9 +135,7 @@ void sub_804849C(u32 r0, struct unkDungeon_8041D5C *r1)
 
 void sub_80484A8(u32 r0, struct unkDungeon_8041D5C *r1)
 {
-    volatile u32 temp;
-    temp = 1;
-    sub_8072008(r0, r1, 1, 1);
+    sub_8072008(r0, r1, 1, 1, 1);
 }
 
 void sub_80484BC(u32 r0, struct unkDungeon_8041D5C *r1)

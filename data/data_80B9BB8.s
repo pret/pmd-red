@@ -4906,12 +4906,12 @@ gUnknown_80E4A28: @ 80E4A28
         .byte 0x10, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gCreditsTable
-gCreditsTable: @ 80E4A40
+	.global gCreditsText
+gCreditsText: @ 80E4A40
 	.incbin "baserom.gba", 0xE4A40, 0xEDC
 
-	.global gUnknown_80E591C
-gUnknown_80E591C: @ 80E591C
+	.global gCreditsTable
+gCreditsTable: @ 80E591C
 	.incbin "baserom.gba", 0xE591C, 0x74
 
 	.global gUnknown_80E5990

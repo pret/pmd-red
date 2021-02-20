@@ -30,7 +30,7 @@ extern void MemoryFree(void *);
 
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
-extern void sub_8035E10(void);
+extern void DrawMainMenu(void);
 extern void CreateDebugMenu(void);
 extern void sub_8036400(void);
 extern void sub_8036FDC(void);
@@ -56,7 +56,7 @@ extern s32 sub_80383D4(void);
 extern s32 sub_8038630(void);
 extern s32 sub_803A2A4(void);
 
-extern void sub_8035EC0(void);
+extern void CleanMainMenu(void);
 extern void sub_80393F0(void);
 extern void sub_8036B04(void);
 extern void sub_80370D4(void);
@@ -103,7 +103,7 @@ void SetUpMenu(void)
         case 1:
             sub_8094C14();
             sub_8099690(0);
-            sub_8035E10();
+            DrawMainMenu();
             break;
         case 6:
         case 7:
@@ -242,7 +242,7 @@ void CleanUpMenu(void)
   if (gUnknown_203B348->unk8 != gUnknown_203B348->unk4) {
     switch(gUnknown_203B348->unk8) {
     case 1:
-      sub_8035EC0();
+      CleanMainMenu();
       break;
     case 6:
     case 7:

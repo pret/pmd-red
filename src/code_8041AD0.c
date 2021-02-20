@@ -31,7 +31,7 @@ extern u8 sub_8071858(struct unkDungeon_8041D5C *r0, u8);
 extern u32 sub_806F62C(u32);
 extern void sub_8083E38(u32);
 extern u8 sub_803F428(struct unkDungeon_8041D5C *r0);
-extern void sub_8041550(struct unkDungeon_8041D5C *r0, u32, u32, u32);
+extern void sub_8041550(struct unkDungeon_8041D5C *r0, u32, u32, u32, u32, u32);
 
 
 void sub_80421C0(struct unkDungeon_8041D5C *r0, u16 r1);
@@ -439,10 +439,7 @@ void sub_8041EF8(struct unkDungeon_8041D5C *r0)
 
 void sub_8041F08(struct unkDungeon_8041D5C *r0)
 {
-    volatile struct unk_struct_8041F08 temp;
-    temp.unk0 = 2;
-    temp.unk4 = 0;
-    sub_8041550(r0, 0x15, 1, 3);
+    sub_8041550(r0, 0x15, 1, 3, 2, 0);
 }
 
 void nullsub_90(void)
@@ -597,10 +594,7 @@ void sub_80420B8(struct unkDungeon_8041D5C *r0, u32 r1)
 
 void sub_80420C8(struct unkDungeon_8041D5C *r0)
 {
-    volatile struct unk_struct_8041F08 temp;
-    temp.unk0 = 2;
-    temp.unk4 = 0;
-    sub_8041550(r0, 0x15, 1, 3);
+    sub_8041550(r0, 0x15, 1, 3, 2, 0);
 }
 
 void nullsub_92(void)
@@ -611,7 +605,6 @@ void sub_80420E8(struct unkDungeon_8041D5C *r0, struct unkStruct_80420E8 *r1)
 {
     u32 temp;
     u32 arg;
-    volatile struct unk_struct_8041F08 temp_1;
     temp = r1->unk8;
     if(gUnknown_203B418[0x16d] != 0)
         temp = sub_806F62C(r1->unk8);
@@ -631,9 +624,7 @@ void sub_80420E8(struct unkDungeon_8041D5C *r0, struct unkStruct_80420E8 *r1)
             arg = 11;
             break;
     }
-    temp_1.unk0 = 0;
-    temp_1.unk4 = 1;
-    sub_8041550(r0, arg, 1, 3);
+    sub_8041550(r0, arg, 1, 3, 0, 1);
 }
 
 void sub_8042148(struct unkDungeon_8041D5C *r0)
