@@ -1,6 +1,8 @@
 #include "global.h"
 #include "save.h"
 #include "friend_area.h"
+#include "pokemon.h"
+#include "file_system.h"
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 extern struct unkTimeStruct *gUnknown_203B47C;
@@ -26,6 +28,44 @@ struct unk_struct
 
 extern struct unk_203B188 *gUnknown_203B188;
 
+struct unkStruct_203B18C
+{
+    u32 unk0;
+    s32 unk4;
+    u32 unk8;
+    struct OpenedFile *faceFile;
+    u8 *faceData;
+     u16 unk14;
+     u16 unk16;
+     u8 unk18;
+     u8 unk19;
+     u8 unk1A;
+     u8 unk1B;
+     u16 pokeID;
+};
+
+extern struct unkStruct_203B18C *gUnknown_203B18C;
+
+struct unkStruct_203B190
+{
+    s32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u8 unkC;
+};
+extern struct unkStruct_203B190 *gUnknown_203B190;
+
+struct unkStruct_203B194
+{
+    s32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u8 unkC;
+    u8 padding[0x10 - 0xD];
+    u32 unk10;
+};
+extern struct unkStruct_203B194 *gUnknown_203B194;
+
 extern u32 *gUnknown_203B45C;
 extern u32 *gUnknown_203B460;
 extern u32 gUnknown_203B464;
@@ -38,7 +78,15 @@ extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
 extern u8 *gUnknown_203B498;
-extern u32 gUnknown_80D4354;
+
+extern const char gUnknown_80D4354;
+extern const char gUnknown_80D4398;
+extern const char gUnknown_80D43D8;
+extern const char gUnknown_80D4438;
+extern const char gUnknown_80D444C;
+extern const char gUnknown_80D44B0;
+extern const char gUnknown_80D44C8;
+extern const char gUnknown_80D45AC;
 
 extern void sub_800135C(void);
 extern u32 *sub_808CE00(void);
@@ -61,6 +109,7 @@ extern void sub_80972F4(void);
 extern void sub_80974E8(void);
 extern u8 *sub_8097F6C(void);
 extern void sub_8097F74(void);
+extern void sub_80993D8(void);
 
 extern void sub_8011C28(u32 r0);
 extern void sub_8011C40(s32 r0);
@@ -83,7 +132,14 @@ extern s32 WriteSaveSector(s32 *a, u8 *src, s32 size);
 extern u32 sub_8011DAC(u32 *a);
 extern u32 sub_80144A4(u32 *a);
 extern bool8 sub_8011FF8(void);
-extern void sub_80141B4(u32 *r0, u32 r1, u32 r2, u16 r3);
+extern void sub_80141B4(const char *r0, u32 r1, u8 *r2, u16 r3);
+
+extern void sub_8014114();
+extern void sub_80140DC();
+extern u32 sub_8011C1C();
+extern u32 sub_801203C(u32 *r0, u32);
+extern void sub_80993E4();
+extern u32 sub_8011F9C(u32 *r0, u32, u32);
 
 void sub_8012298();
 void sub_80122D0();
@@ -306,5 +362,276 @@ void sub_8012558(void)
     {
         MemoryFree(gUnknown_203B188);
         gUnknown_203B188 = NULL;
+    }
+}
+
+#ifdef NONMATCHING
+void sub_8012574(s16 PokemonID)
+{
+  struct OpenedFile *file;
+  s32 id_s32;
+
+  id_s32 = PokemonID; // had to cast for asr shift
+  
+  sub_80993D8();
+  gUnknown_203B18C = MemoryAlloc(sizeof(struct unkStruct_203B18C),5);
+  gUnknown_203B18C->pokeID = id_s32;
+  gUnknown_203B18C->faceFile = NULL;
+  gUnknown_203B18C->faceData = NULL;
+  if (PokemonID != 0) {
+    file = GetDialogueSpriteDataPtr(id_s32);
+    gUnknown_203B18C->faceFile = file;
+    gUnknown_203B18C->faceData = file->data;
+    gUnknown_203B18C->unk18 = 0;
+    gUnknown_203B18C->unk19 = 0;
+    gUnknown_203B18C->unk1A = 0;
+    gUnknown_203B18C->unk14 = 2;
+    gUnknown_203B18C->unk16 = 8;
+  }
+  if (gUnknown_203B18C->faceFile != 0) {
+      // LDR r0 and R2 statements get flipped... basically matches
+      sub_80141B4(&gUnknown_80D4398,0,(u8 *)&gUnknown_203B18C->faceFile,0x20);
+  }
+  else {
+      sub_80141B4(&gUnknown_80D4398,0,0,0x20);
+  }
+  gUnknown_203B18C->unk0 = 3;
+}
+#else
+NAKED
+void sub_8012574(s16 PokemonID)
+{
+	asm_unified("\tpush {r4-r6,lr}\n"
+	"\tlsls r0, 16\n"
+	"\tasrs r4, r0, 16\n"
+	"\tbl sub_80993D8\n"
+	"\tldr r5, _080125D4\n"
+	"\tmovs r0, 0x20\n"
+	"\tmovs r1, 0x5\n"
+	"\tbl MemoryAlloc\n"
+	"\tstr r0, [r5]\n"
+	"\tmovs r6, 0\n"
+	"\tmovs r1, 0\n"
+	"\tstrh r4, [r0, 0x1C]\n"
+	"\tstr r1, [r0, 0xC]\n"
+	"\tstr r1, [r0, 0x10]\n"
+	"\tcmp r4, 0\n"
+	"\tbeq _080125BA\n"
+	"\tadds r0, r4, 0\n"
+	"\tbl GetDialogueSpriteDataPtr\n"
+	"\tldr r1, [r5]\n"
+	"\tstr r0, [r1, 0xC]\n"
+	"\tldr r0, [r0, 0x4]\n"
+	"\tstr r0, [r1, 0x10]\n"
+	"\tstrb r6, [r1, 0x18]\n"
+	"\tldr r0, [r5]\n"
+	"\tstrb r6, [r0, 0x19]\n"
+	"\tldr r0, [r5]\n"
+	"\tstrb r6, [r0, 0x1A]\n"
+	"\tldr r1, [r5]\n"
+	"\tmovs r0, 0x2\n"
+	"\tstrh r0, [r1, 0x14]\n"
+	"\tmovs r0, 0x8\n"
+	"\tstrh r0, [r1, 0x16]\n"
+"_080125BA:\n"
+	"\tldr r1, [r5]\n"
+	"\tldr r0, [r1, 0xC]\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _080125DC\n"
+	"\tadds r2, r1, 0\n"
+	"\tadds r2, 0xC\n"
+	"\tldr r0, _080125D8\n"
+	"\tmovs r1, 0\n"
+	"\tmovs r3, 0x20\n"
+	"\tbl sub_80141B4\n"
+	"\tb _080125E8\n"
+	"\t.align 2, 0\n"
+"_080125D4: .4byte gUnknown_203B18C\n"
+"_080125D8: .4byte gUnknown_80D4398\n"
+"_080125DC:\n"
+	"\tldr r0, _080125F8\n"
+	"\tmovs r1, 0\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r3, 0x20\n"
+	"\tbl sub_80141B4\n"
+"_080125E8:\n"
+	"\tldr r0, _080125FC\n"
+	"\tldr r1, [r0]\n"
+	"\tmovs r0, 0x3\n"
+	"\tstr r0, [r1]\n"
+	"\tpop {r4-r6}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_080125F8: .4byte gUnknown_80D4398\n"
+"_080125FC: .4byte gUnknown_203B18C");
+
+}
+#endif
+
+u32 sub_8012600(void)
+{
+  struct OpenedFile **faceFile;
+  u32 local_14;
+  u32 other_stack;
+  
+  faceFile = NULL;
+  if (gUnknown_203B18C->faceFile != 0) {
+    faceFile = &gUnknown_203B18C->faceFile;
+  }
+  switch(gUnknown_203B18C->unk0) 
+  {
+    case 0:
+        gUnknown_203B18C->unk0 = 7;
+        break;
+    case 1:
+        gUnknown_203B18C->unk4++;
+        if (8 < gUnknown_203B18C->unk4) {
+        sub_80141B4(&gUnknown_80D43D8,0,0,0x20);
+        gUnknown_203B18C->unk0 = 3;
+        }
+        break;
+    case 2:
+        break;
+    case 3:
+        gUnknown_203B18C->unk0 = 4;
+        break;
+    case 4:
+        local_14 = 0;
+        sub_80140DC();
+        gUnknown_203B18C->unk8 = sub_801203C(&local_14, sub_8011C1C());
+        switch(gUnknown_203B18C->unk8)
+        {
+            case 0:
+                if(gUnknown_203B18C->faceFile != NULL)
+                {
+                    sub_80141B4(&gUnknown_80D4438, 0, (u8 *)faceFile, 0x101);
+                }
+                else
+                {
+                    sub_80141B4(&gUnknown_80D4438, 0, (u8 *)faceFile, 0x101);
+                }
+                gUnknown_203B18C->unk0 = 5;
+                break;
+            case 1:
+                sub_80141B4(&gUnknown_80D444C, 0, 0, 0);
+                gUnknown_203B18C->unk0 = 6;
+                break;
+            default:
+                if(gUnknown_203B18C->faceFile != NULL)
+                {
+                    sub_80141B4(&gUnknown_80D44B0, 0, (u8 *)faceFile, 0x101);
+                }
+                else
+                {
+                    sub_80141B4(&gUnknown_80D44B0, 0, (u8 *)faceFile, 0x101);
+                }
+                gUnknown_203B18C->unk0 = 5;
+                break;
+        }
+        sub_8014114();
+        break;
+    case 5:
+        if (sub_80144A4(&other_stack) == 0)
+            gUnknown_203B18C->unk0 = 7;
+        break;
+    case 6:
+        break;
+    case 7:
+        return 0;
+    }
+    return 1;
+}
+
+u32 sub_8012744(void)
+{
+    return gUnknown_203B18C->unk8;
+}
+
+void sub_8012750(void)
+{
+    if(gUnknown_203B18C != NULL)
+    {
+        if(gUnknown_203B18C->faceFile != NULL)
+        {
+            CloseFile(gUnknown_203B18C->faceFile);
+        }
+        MemoryFree(gUnknown_203B18C);
+        gUnknown_203B18C = NULL;
+    }
+    sub_80993E4();
+}
+
+void sub_801277C(u32 r0, u32 r1)
+{
+    gUnknown_203B190 = MemoryAlloc(sizeof(struct unkStruct_203B190), 5);
+    gUnknown_203B190->unk4 = r0;
+    gUnknown_203B190->unk8 = r1;
+    gUnknown_203B190->unkC = 0;
+    gUnknown_203B190->unk0 = 1;
+}
+
+u32 sub_80127A8(void)
+{
+    u32 stack_1;
+    u32 stack_2;
+
+    switch(gUnknown_203B190->unk0)
+    {
+        case 0:
+            gUnknown_203B190->unk0 = 1;
+            break;
+        case 1:
+            stack_1 = 16;
+            if(sub_8011F9C(&stack_1, gUnknown_203B190->unk4, gUnknown_203B190->unk8) == 0)
+            {
+                gUnknown_203B190->unkC = 1;
+                gUnknown_203B190->unk0 = 3;
+            }
+            else
+            {
+                sub_80141B4(&gUnknown_80D44C8, 0, 0, 0x301);
+                gUnknown_203B190->unk0 = 2;
+            }
+            break;
+        case 2:
+            if(sub_80144A4(&stack_2) == 0)
+                gUnknown_203B190->unk0 = 3;
+            break;
+        case 3:
+            return 0;
+        default:
+            break;
+    }
+    return 1;
+}
+
+u8 sub_8012828(void)
+{
+    return gUnknown_203B190->unkC;
+}
+
+void sub_8012834(void)
+{
+    if(gUnknown_203B190 != NULL){
+        MemoryFree(gUnknown_203B190);
+        gUnknown_203B190 = 0;
+    }
+}
+
+void sub_8012850(u32 r0, u32 r1, u8 r2)
+{
+    gUnknown_203B194 = MemoryAlloc(sizeof(struct unkStruct_203B194), 5);
+    gUnknown_203B194->unk4 = r0;
+    gUnknown_203B194->unk8 = r1;
+    gUnknown_203B194->unkC = r2;
+    gUnknown_203B194->unk0 = 0;
+    if(gUnknown_203B194->unkC != 0)
+    {
+        sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
+    }
+    else
+    {
+        sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
     }
 }
