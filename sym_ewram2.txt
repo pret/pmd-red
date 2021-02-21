@@ -605,7 +605,7 @@ gUnknown_203B470 = .; /* 203B470 */
 gUnknown_203B474 = .; /* 203B474 */
 	. += 0x8;
 
-gUnknown_203B47C = .; /* 203B47C */
+gPlayTimeRef = .; /* 203B47C */
 	. += 0x4;
 
 gUnknown_203B480 = .; /* 203B480 */

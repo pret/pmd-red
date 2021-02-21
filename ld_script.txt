@@ -82,10 +82,7 @@ SECTIONS {
         src/debug.o(.text);
         asm/debug.o(.text);
         src/save.o(.text);
-        asm/save.o(.text);
-        src/save_mid.o(.text);
-        asm/save1.o(.text);
-        src/save1.o(.text);
+        src/code_8012A18.o(.text);
         src/more_input.o(.text);
         asm/code_8012A18.o(.text);
         src/code_801D760.o(.text);

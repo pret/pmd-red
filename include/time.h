@@ -11,9 +11,9 @@ struct PlayTimeStruct
 
 void IncrementPlayTime(struct PlayTimeStruct *Time);
 void ResetPlayTime(struct PlayTimeStruct *Time);
-struct PlayTimeStruct *sub_8094FA0(void);
+struct PlayTimeStruct *GetPlayTime(void);
 void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinutes, u32 *outSeconds);
-void sub_8094F88(void);
+void InitializePlayTime(void);
 
 
 #endif // TIME_H  

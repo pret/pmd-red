@@ -15,7 +15,7 @@ struct unkStruct_203B418
     u8 unk18217;
 };
 
-extern struct PlayTimeStruct *gUnknown_203B47C;
+extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct unkStruct_203B418 *gUnknown_203B418;
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
@@ -36,7 +36,7 @@ void sub_8040094(u8 r0)
     gUnknown_203B418->unk18217 = r0;
     sub_803F7BC();
     sub_80060EC();
-    IncrementPlayTime(gUnknown_203B47C);
+    IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
     LoadBufferedInputs();
     xxx_call_update_bg_sound_input();

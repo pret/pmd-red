@@ -1,19 +1,20 @@
 #include "global.h"
+#include "bg.h"
+#include "constants/bg_music.h"
 #include "file_system.h"
 #include "friend_area.h"
 #include "input.h"
-#include "bg.h"
+#include "memory.h"
 #include "music.h"
-#include "constants/bg_music.h"
+#include "time.h"
+#include "save.h"
 
-extern void InitHeap(void);
 extern void NDS_DebugInit(void);
 extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void LoadMonsterParameters(void);
 extern void sub_8097670(void);
-extern void sub_8094F88(void);
 extern void sub_8094980(void);
 extern void sub_8094C14(void);
 extern void sub_8097F5C(void);
@@ -23,12 +24,10 @@ extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);
 extern void sub_800CD64(u32, u32);
-extern void sub_8012284(void);
 extern void sub_8094998(u32);
 extern void SetWindowTitle(char *);
 extern void sub_800DAAC(void);
 extern void SetSavingIconCoords(u32);
-extern u32 sub_8011DAC(u32 *);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
 extern void sub_80015C0(u32, u32);
@@ -43,9 +42,6 @@ extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
 extern void InitMainMenu(void);
-extern void sub_8012468(void);
-extern u32 sub_8012484(void);
-extern void sub_8012558(void);
 extern u8 sub_80363E0(void);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
@@ -53,7 +49,6 @@ extern void CleanUpMenu(void);
 extern void DeleteMainMenu(void);
 extern s32 sub_80953D4(u32);
 extern void sub_8095240(u8);
-extern void sub_80122A8(void);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
@@ -96,7 +91,7 @@ void GameLoop(void)
     sub_8014144();
     LoadMonsterParameters();
     sub_8097670();
-    sub_8094F88();
+    InitializePlayTime();
     sub_8094980();
     sub_8094C14();
     sub_8097F5C();

@@ -2720,7 +2720,7 @@ _0803E64C: .4byte gUnknown_203B40D
 _0803E650: .4byte gUnknown_202EE8C
 _0803E654: .4byte gUnknown_202EDC8
 _0803E658: .4byte gUnknown_202EDCC
-_0803E65C: .4byte gUnknown_203B47C
+_0803E65C: .4byte gPlayTimeRef
 _0803E660: .4byte 0x00018213
 _0803E664: .4byte gUnknown_202EDD4
 	thumb_func_end sub_803E490
@@ -2780,7 +2780,7 @@ sub_803E668:
 _0803E6F0: .4byte gUnknown_202EDD4
 _0803E6F4: .4byte gUnknown_203B46C
 _0803E6F8: .4byte gUnknown_202EDCC
-_0803E6FC: .4byte gUnknown_203B47C
+_0803E6FC: .4byte gPlayTimeRef
 _0803E700: .4byte gUnknown_203B418
 _0803E704: .4byte 0x00018213
 	thumb_func_end sub_803E668

@@ -26755,7 +26755,7 @@ _0805FBAC: .4byte gFieldMenuItemsPtr
 _0805FBB0: .4byte gFieldMenuTeamPtr
 _0805FBB4: .4byte gFieldMenuOthersPtr
 _0805FBB8: .4byte gFieldMenuGroundPtr
-_0805FBBC: .4byte gUnknown_203B47C
+_0805FBBC: .4byte gPlayTimeRef
 _0805FBC0: .4byte gUnknown_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
 _0805FBC8: .4byte gUnknown_203B460

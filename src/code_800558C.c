@@ -1,8 +1,6 @@
 #include "global.h"
 #include "code_800558C.h"
 
-extern u32 gUnknown_203B47C;
-
 extern u8 gUnknown_2026E38;
 extern u32 gUnknown_2026E3C;
 extern u16 gUnknown_2026E4E;

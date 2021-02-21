@@ -73,10 +73,9 @@ void sub_800BA5C(void)
     nullsub_18();
 }
 
-#ifdef NONMATCHING
 void xxx_update_bg_sound_input(void)
 {
-    u8 store;
+    u32 store;
     store = gUnknown_203B09B;
     if(gUnknown_203B09B != 0){
         gUnknown_203B09C++;
@@ -93,55 +92,6 @@ void xxx_update_bg_sound_input(void)
         gUnknown_203B0A4 = gUnknown_203B0A0;
     }
 }
-#else
-NAKED
-void xxx_update_bg_sound_input(void)
-{
-	asm_unified("\tpush {r4,r5,lr}\n"
-	"\tldr r1, _0800BACC\n"
-	"\tldrb r4, [r1]\n"
-	"\tcmp r4, 0\n"
-	"\tbeq _0800BAD4\n"
-	"\tldr r1, _0800BAD0\n"
-	"\tldr r0, [r1]\n"
-	"\tadds r0, 0x1\n"
-	"\tstr r0, [r1]\n"
-	"\tb _0800BAFE\n"
-	"\t.align 2, 0\n"
-"_0800BACC: .4byte gUnknown_203B09B\n"
-"_0800BAD0: .4byte gUnknown_203B09C\n"
-"_0800BAD4:\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1]\n"
-	"\tldr r0, _0800BB04\n"
-	"\tstrb r4, [r0]\n"
-	"\tldr r0, _0800BB08\n"
-	"\tstr r4, [r0]\n"
-	"\tbl UpdateBGControlRegisters\n"
-	"\tldr r5, _0800BB0C\n"
-        "\tldrb r0, [r5]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800BAF0\n"
-	"\tbl UpdateSound\n"
-"_0800BAF0:\n"
-	"\tbl UpdateInput\n"
-	"\tstrb r4, [r5]\n"
-	"\tldr r0, _0800BB10\n"
-	"\tldr r1, _0800BB14\n"
-	"\tldr r1, [r1]\n"
-	"\tstr r1, [r0]\n"
-"_0800BAFE:\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0800BB04: .4byte gUnknown_203B09A\n"
-"_0800BB08: .4byte gUnknown_203B09C\n"
-"_0800BB0C: .4byte gUnknown_203B099\n"
-"_0800BB10: .4byte gUnknown_203B0A4\n"
-"_0800BB14: .4byte gUnknown_203B0A0");
-}
-#endif
 
 void Timer3Intr(void)
 {

@@ -528,17 +528,17 @@ gUnknown_80D4120: @ 80D4120
 gUnknown_80D4124: @ 80D4124
 	.incbin "baserom.gba", 0xD4124, 0x20
 
-@ Error Handling
 	.global gUnknown_80D4144
 gUnknown_80D4144: @ 80D4144
-        .byte 0x2e, 0x01
-        .byte 0x2f, 0x01
-        .byte 0x2f, 0x01
-        .byte 0x2d, 0x01
-        .byte 0x30, 0x01
-        .byte 0x32, 0x01
-        .byte 0x33, 0x01
-        .byte 0x00, 0x00
+        .2byte 302
+        .2byte 303
+        .2byte 303
+        .2byte 301
+        .2byte 304
+        .2byte 306
+        .2byte 307
+        .2byte 0
+
         .string "pksdir0\0"
         .string "pksdir0\0"
         .4byte noneText
@@ -558,6 +558,7 @@ gUnknown_80D4144: @ 80D4144
         defaultText:
         .string "default\0"
 
+@ Error Handling
 	.global gFuncFileLineString
 gFuncFileLineString: @ 80D418C
         .string "func = '%s'\n"
@@ -677,40 +678,40 @@ gUnknown_80D42D4: @ 80D42D4
         .string "pksdir0\0"
         .string "pksdir0\0"
 
-	.global gUnknown_80D4354
-gUnknown_80D4354: @ 80D4354
+	.global gSaveCorrupted
+gSaveCorrupted: @ 80D4354
         .string "#+The game data is corrupted.\n"
         .string "#+Your data will be erased.\0"
         .align 2,0
         .string "pksdir0\0"
 
-	.global gUnknown_80D4398
-gUnknown_80D4398: @ 80D4398
+	.global gSavingAdventure
+gSavingAdventure: @ 80D4398
         .string "#+Saving your adventure...\n"
         .string "#+Please don~27t turn off the power.\0"
         .align 2,0
 
-	.global gUnknown_80D43D8
-gUnknown_80D43D8: @ 80D43D8
+	.global gWriteGamePak
+gWriteGamePak: @ 80D43D8
         .string "#+Writing to GBA Game Pak.\n"
         .string "#+Do not remove the GBA Game Pak.\n"
         .string "#+Please wait with the power on.\0"
         .align 2,0
 
-	.global gUnknown_80D4438
-gUnknown_80D4438: @ 80D4438
+	.global gSaveCompleted
+gSaveCompleted: @ 80D4438
         .string "#+Save completed!\0"
         .align 2,0
 
-	.global gUnknown_80D444C
-gUnknown_80D444C: @ 80D444C
+	.global gSaveNotWritten
+gSaveNotWritten: @ 80D444C
         .string "#+The data could not be written.\n"
         .string "#+Please turn off the power and remove\n"
         .string "#+and reinsert the DS Card.\0"
         .align 2,0
 
-	.global gUnknown_80D44B0
-gUnknown_80D44B0: @ 80D44B0
+	.global gSaveFailed
+gSaveFailed: @ 80D44B0
         .string "#+Save failed.\0"
         .align 2,0
         .string "pksdir0\0"
@@ -756,8 +757,8 @@ gUnknown_80D473C: @ 80D473C
         .string "#+and reinsert the DS Card.\0"
         .align 2,0
 
-	.global gUnknown_80D47A0
-gUnknown_80D47A0: @ 80D47A0
+	.global gSaveFailed2
+gSaveFailed2: @ 80D47A0
         .string "#+Save failed.\0"
         .align 2,0
         .string "pksdir0\0"
@@ -2293,6 +2294,9 @@ gUnknown_80DC4BC: @ 80DC4BC
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global gUnknown_80DC4D4
+gUnknown_80DC4D4: @ 80DC4D4
         .byte 0x01, 0x00, 0x12, 0x00
 
 	.global gUnknown_80DC4D8
@@ -2307,7 +2311,8 @@ gUnknown_80DC4D8: @ 80DC4D8
         .byte 0x11, 0x00
         .byte 0x11, 0x00
         .byte 0x00, 0x00
-        .byte 0xd4, 0xc4, 0x0d, 0x08
+
+        .4byte gUnknown_80DC4D4
 
 	.global gUnknown_80DC4F0
 gUnknown_80DC4F0: @ 80DC4F0

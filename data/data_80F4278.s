@@ -8729,25 +8729,46 @@ gAdventureLogText: @ 810B04C
 
 	.global gRescueTeamRanks
 gRescueTeamRanks: @ 810B44C
-        .byte 0xBC, 0xB4, 0x10, 0x08 @ Normal
-        .byte 0xB0, 0xB4, 0x10, 0x08
-        .byte 0xA4, 0xB4, 0x10, 0x08
-        .byte 0x98, 0xB4, 0x10, 0x08
-        .byte 0x88, 0xB4, 0x10, 0x08
-        .byte 0x78, 0xB4, 0x10, 0x08
-        .byte 0x68, 0xB4, 0x10, 0x08 @ Lucario
+        .4byte NormalRank
+        .4byte BronzeRank
+        .4byte SilverRank
+        .4byte GoldRank
+        .4byte PlatinumRank
+        .4byte DiamondRank
+        .4byte LucarioRank
+
+        .global LucarioRank
+        LucarioRank:
         .string "Lucario Rank\0"
         .align 2,0
+
+        .global DiamondRank
+        DiamondRank:
         .string "Diamond Rank\0"
         .align 2,0
+
+        .global PlatinumRank
+        PlatinumRank:
         .string "Platinum Rank\0"
         .align 2,0
+
+        .global GoldRank
+        GoldRank:
         .string "Gold Rank\0"
         .align 2,0
+
+        .global SilverRank
+        SilverRank:
         .string "Silver Rank\0"
         .align 2,0
+
+        .global BronzeRank
+        BronzeRank:
         .string "Bronze Rank\0"
         .align 2,0
+
+        .global NormalRank
+        NormalRank:
         .string "Normal Rank\0"
         .align 2,0
 
@@ -9003,18 +9024,23 @@ gUnknown_8113080: @ 8113080
 	.global gUnknown_811383C
 gUnknown_811383C: @ 811383C
         .byte 0x2C, 0x38, 0x11, 0x08
+
+        .global PlaceText
+        PlaceText:
         .string "#+Place: $m0\0"
         .align 2,0
 
 	.global gUnknown_8113850
 gUnknown_8113850: @ 8113850
-        .byte 0x40, 0x38, 0x11, 0x08
-        .string "$m1 was defeated by\0"
+        .4byte PlaceText
 
+        .global DefeatedbyText
+        DefeatedbyText:
+        .string "$m1 was defeated by\0"
 
 	.global gUnknown_8113868
 gUnknown_8113868: @ 8113868
-        .byte 0x54, 0x38, 0x11, 0x08
+        .4byte DefeatedbyText
         .string "$m1\0"
         .align 2,0
 

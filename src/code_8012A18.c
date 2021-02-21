@@ -2,8 +2,7 @@
 #include "code_800558C.h"
 #include "input.h"
 
-
-struct UnkSaveStruct1
+struct UnkStruct_203B46C
 {
     /* 0x0 */ u32 unk0;
     /* 0x4 */ u32 unk4;
@@ -12,7 +11,6 @@ struct UnkSaveStruct1
 };
 
 
-extern void MemoryFree(void *);
 extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
 extern void nullsub_8(u8);
@@ -26,17 +24,8 @@ extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 extern void ResetSprites(u8 r0);
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct UnkStruct_203B46C *gUnknown_203B46C;
 
-extern u8 *gUnknown_203B194;
-
-void sub_80129FC()
-{
-    if (gUnknown_203B194) {
-        MemoryFree(gUnknown_203B194);
-        gUnknown_203B194 = NULL;
-    }
-}
 
 void sub_8012A18()
 {
