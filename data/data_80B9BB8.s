@@ -25,9 +25,9 @@ gUnknown_80B9C00: @ 80B9C00
         .4byte gUnknown_202DBB8
         .4byte VBlankIntr
         .4byte VCountIntr
-        .4byte nullsub_177
+        .4byte UnusedIntrFunc
         .4byte Timer3Intr
-        .4byte nullsub_177
+        .4byte UnusedIntrFunc
         .string "pksdir0\0"
         .align 2,0
         .string "pksdir0\0"
