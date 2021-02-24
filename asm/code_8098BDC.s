@@ -3246,7 +3246,7 @@ _0809A89A:
 _0809A8A0: .4byte gUnknown_3001B64
 _0809A8A4: .4byte 0x0000043c
 _0809A8A8: .4byte 0x0000ffff
-_0809A8AC: .4byte gUnknown_202DF98
+_0809A8AC: .4byte gAvailablePokemonNames
 _0809A8B0: .4byte gUnknown_811615C
 _0809A8B4: .4byte gPlayerName
 	thumb_func_end sub_809A83C
@@ -3535,7 +3535,7 @@ _0809AAE6:
 	movs r0, 0x1
 	b _0809AB3C
 	.align 2, 0
-_0809AB28: .4byte gUnknown_202DF98
+_0809AB28: .4byte gAvailablePokemonNames
 _0809AB2C: .4byte gUnknown_811616C
 _0809AB30: .4byte gPlayerName
 _0809AB34:
@@ -3598,7 +3598,7 @@ _0809ABA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809ABA8: .4byte gUnknown_202DF98
+_0809ABA8: .4byte gAvailablePokemonNames
 _0809ABAC: .4byte gPlayerName
 _0809ABB0: .4byte gUnknown_811617C
 	thumb_func_end sub_809AB4C
@@ -3649,7 +3649,7 @@ _0809AC0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AC10: .4byte gUnknown_202DF98
+_0809AC10: .4byte gAvailablePokemonNames
 _0809AC14: .4byte gPlayerName
 	thumb_func_end sub_809ABB4
 
@@ -3699,7 +3699,7 @@ _0809AC6E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AC74: .4byte gUnknown_202DF98
+_0809AC74: .4byte gAvailablePokemonNames
 _0809AC78: .4byte gPlayerName
 	thumb_func_end sub_809AC18
 
@@ -6555,7 +6555,7 @@ _0809C32A:
 	lsls r2, 3
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8035444
+	bl DrawCredits
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C35C

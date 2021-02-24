@@ -7726,7 +7726,7 @@ _08010BD0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010C08: .4byte gUnknown_202DF98
+_08010C08: .4byte gAvailablePokemonNames
 _08010C0C: .4byte gUnknown_80D4074
 	thumb_func_end sub_8010B74
 

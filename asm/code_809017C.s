@@ -442,7 +442,7 @@ _0809048E:
 	b _080904BA
 	.align 2, 0
 _080904AC: .4byte gUnknown_8115ADC
-_080904B0: .4byte gUnknown_202DF98
+_080904B0: .4byte gAvailablePokemonNames
 _080904B4: .4byte gUnknown_8115B3C
 _080904B8:
 	ldr r0, _08090528

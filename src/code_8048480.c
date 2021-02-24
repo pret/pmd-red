@@ -7,7 +7,7 @@ struct unkDungeon_8041D5C
 };
 
 extern u32 gUnknown_80F89F4;
-extern u32 gUnknown_202DF98;
+extern u32 gAvailablePokemonNames;
 extern u32 gUnknown_80FB580;
 extern s16 gUnknown_80F4FB6;
 extern s16 gUnknown_80F4FB8;
@@ -162,6 +162,6 @@ void sub_80484E8(u32 r0, struct unkDungeon_8041D5C *r1)
         sub_807A290(r0, r1);
         return;
     }
-    sub_8045B94(&gUnknown_202DF98, r1, 0);
+    sub_8045B94(&gAvailablePokemonNames, r1, 0);
     sub_80522F4(r0, r1, gUnknown_80FB580);
 }

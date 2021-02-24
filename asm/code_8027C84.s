@@ -426,7 +426,7 @@ sub_8027F88:
 	adds r1, r4, 0
 	bl sub_808D8E0
 	adds r0, r4, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r0, _08028064
 	bl strcpy
@@ -487,7 +487,7 @@ _08028054: .4byte 0x0000053c
 _08028058: .4byte 0x00000544
 _0802805C: .4byte 0x0000ffff
 _08028060: .4byte gUnknown_202E5D8
-_08028064: .4byte gUnknown_202DF98
+_08028064: .4byte gAvailablePokemonNames
 _08028068: .4byte 0x0000042c
 _0802806C: .4byte 0x0000042d
 _08028070: .4byte 0x0000042e

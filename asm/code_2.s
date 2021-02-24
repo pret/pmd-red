@@ -1262,7 +1262,7 @@ sub_8001064:
 	movs r0, 0x4
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	mov r0, sp
 	adds r1, r4, 0
 	bl sub_80922F4
@@ -1293,7 +1293,7 @@ _080010AE:
 	movs r0, 0x6
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	mov r0, sp
 	adds r1, r4, 0
 	bl sub_80922F4

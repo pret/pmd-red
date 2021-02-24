@@ -8980,7 +8980,7 @@ _0803A3E8:
 	strh r0, [r7]
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r0, r6, 0
 	adds r1, r6, 0
 	bl sub_80922F4
@@ -11564,7 +11564,7 @@ _0803B7E0:
 	lsrs r4, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r5, _0803B810
 	adds r0, r5, 0
@@ -11579,7 +11579,7 @@ _0803B7E0:
 	adds r2, r5, 0
 	b _0803B84C
 	.align 2, 0
-_0803B810: .4byte gUnknown_202DF98
+_0803B810: .4byte gAvailablePokemonNames
 _0803B814: .4byte gUnknown_80EAE5C
 _0803B818:
 	ldr r0, [r7, 0x8]
@@ -11590,7 +11590,7 @@ _0803B818:
 	lsrs r4, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r6, _0803B864
 	adds r0, r6, 0
@@ -11617,7 +11617,7 @@ _0803B850:
 	bl xxx_call_draw_string
 	b _0803B8B4
 	.align 2, 0
-_0803B864: .4byte gUnknown_202DF98
+_0803B864: .4byte gAvailablePokemonNames
 _0803B868: .4byte gUnknown_80E910C
 _0803B86C:
 	ldr r0, [r7, 0x8]
@@ -11628,7 +11628,7 @@ _0803B86C:
 	lsrs r4, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r6, _0803B8E8
 	adds r0, r6, 0
@@ -11666,7 +11666,7 @@ _0803B8B4:
 	subs r4, r0
 	movs r1, 0x10
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r2, r0, 0
 	ldr r1, [r7, 0x48]
 	ldr r3, [r7]
@@ -11675,7 +11675,7 @@ _0803B8B4:
 	bl xxx_call_draw_string
 	b _0803B956
 	.align 2, 0
-_0803B8E8: .4byte gUnknown_202DF98
+_0803B8E8: .4byte gAvailablePokemonNames
 _0803B8EC: .4byte gUnknown_80E8C98
 _0803B8F0:
 	add r4, sp, 0xCC
@@ -11878,7 +11878,7 @@ _0803BA9C: .4byte gUnknown_80E9920
 _0803BAA0:
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r4, _0803BAE0
 	adds r0, r4, 0
@@ -11905,7 +11905,7 @@ _0803BACC:
 	bl xxx_call_draw_string
 	b _0803BD42
 	.align 2, 0
-_0803BAE0: .4byte gUnknown_202DF98
+_0803BAE0: .4byte gAvailablePokemonNames
 _0803BAE4: .4byte gUnknown_80E9F8C
 _0803BAE8:
 	ldr r2, _0803BAEC
@@ -11986,7 +11986,7 @@ _0803BB74:
 	lsrs r5, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r0, _0803BBE4
 	mov r8, r0
@@ -12024,7 +12024,7 @@ _0803BB74:
 	str r4, [sp]
 	b _0803BD32
 	.align 2, 0
-_0803BBE4: .4byte gUnknown_202DF98
+_0803BBE4: .4byte gAvailablePokemonNames
 _0803BBE8: .4byte gUnknown_80EAEB8
 _0803BBEC: .4byte gUnknown_80EB198
 _0803BBF0:
@@ -12040,7 +12040,7 @@ _0803BBF0:
 	lsrs r5, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r0, _0803BC4C
 	mov r8, r0
@@ -12070,7 +12070,7 @@ _0803BBF0:
 	movs r1, 0x6
 	b _0803BD1A
 	.align 2, 0
-_0803BC4C: .4byte gUnknown_202DF98
+_0803BC4C: .4byte gAvailablePokemonNames
 _0803BC50: .4byte gUnknown_80EB220
 _0803BC54: .4byte gUnknown_80EB2F0
 _0803BC58:
@@ -12086,7 +12086,7 @@ _0803BC58:
 	lsrs r5, 24
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r0, _0803BCB4
 	mov r8, r0
@@ -12116,7 +12116,7 @@ _0803BC58:
 	movs r1, 0xA
 	b _0803BD1A
 	.align 2, 0
-_0803BCB4: .4byte gUnknown_202DF98
+_0803BCB4: .4byte gAvailablePokemonNames
 _0803BCB8: .4byte gUnknown_80E91D4
 _0803BCBC: .4byte gUnknown_80E9820
 _0803BCC0:
@@ -12132,7 +12132,7 @@ _0803BCC0:
 	lsrs r5, 24
 	movs r1, 0x10
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r0, _0803BD78
 	mov r8, r0
@@ -12195,7 +12195,7 @@ _0803BD42:
 	bne _0803BD88
 	movs r1, 0x10
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r2, r0, 0
 	ldr r3, [r7]
 	mov r0, r8
@@ -12205,7 +12205,7 @@ _0803BD42:
 	bl xxx_call_draw_string
 	b _0803BDBC
 	.align 2, 0
-_0803BD78: .4byte gUnknown_202DF98
+_0803BD78: .4byte gAvailablePokemonNames
 _0803BD7C: .4byte gUnknown_80E8DE4
 _0803BD80: .4byte gUnknown_80E8FB0
 _0803BD84: .4byte gUnknown_80E8AC8
@@ -12308,7 +12308,7 @@ _0803BE5C: .4byte gUnknown_80E8B20
 _0803BE60:
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r4, _0803BE78
 	adds r0, r4, 0
@@ -12316,12 +12316,12 @@ _0803BE60:
 	ldr r1, _0803BE7C
 	b _0803BE94
 	.align 2, 0
-_0803BE78: .4byte gUnknown_202DF98
+_0803BE78: .4byte gAvailablePokemonNames
 _0803BE7C: .4byte gUnknown_80E8B2C
 _0803BE80:
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	ldr r4, _0803BEB0
 	adds r0, r4, 0
@@ -12340,7 +12340,7 @@ _0803BE94:
 	bl xxx_call_draw_string
 	b _0803BEC8
 	.align 2, 0
-_0803BEB0: .4byte gUnknown_202DF98
+_0803BEB0: .4byte gAvailablePokemonNames
 _0803BEB4: .4byte gUnknown_80E8B40
 _0803BEB8:
 	ldr r2, _0803BEF8

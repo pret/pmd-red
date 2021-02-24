@@ -147,7 +147,7 @@ _0808CEA4:
 	add r4, sp, 0x58
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add r0, sp, 0x4C
 	adds r1, r4, 0
 	movs r2, 0xA
@@ -339,7 +339,7 @@ _0808D09A:
 	bne _0808D0B4
 	mov r0, sp
 	mov r1, r9
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	mov r0, r8
 	mov r1, sp
 	movs r2, 0xA
@@ -1422,7 +1422,7 @@ sub_808D824:
 	adds r4, r0, 0
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	mov r0, sp
 	bl sub_80922F4
@@ -1501,8 +1501,8 @@ _0808D8B4:
 	bx r1
 	thumb_func_end sub_808D864
 
-	thumb_func_start sub_808D8BC
-sub_808D8BC:
+	thumb_func_start CopySpeciesNametoBuffer
+CopySpeciesNametoBuffer:
 	push {lr}
 	lsls r1, 16
 	asrs r1, 16
@@ -1519,7 +1519,7 @@ sub_808D8BC:
 	bx r0
 	.align 2, 0
 _0808D8DC: .4byte gMonsterParameters
-	thumb_func_end sub_808D8BC
+	thumb_func_end CopySpeciesNametoBuffer
 
 	thumb_func_start sub_808D8E0
 sub_808D8E0:
@@ -1579,7 +1579,7 @@ sub_808D930:
 	bne _0808D970
 	ldr r5, _0808D968
 	movs r0, 0xC9
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r4, r0, 0
 	adds r0, r6, 0
 	bl sub_808E8C8
@@ -1614,8 +1614,8 @@ _0808D98C: .4byte gUnknown_8107638
 _0808D990: .4byte gMonsterParameters
 	thumb_func_end sub_808D930
 
-	thumb_func_start sub_808D994
-sub_808D994:
+	thumb_func_start GetMonSpecies
+GetMonSpecies:
 	lsls r0, 16
 	asrs r0, 16
 	ldr r1, _0808D9A8
@@ -1628,7 +1628,7 @@ sub_808D994:
 	bx lr
 	.align 2, 0
 _0808D9A8: .4byte gMonsterParameters
-	thumb_func_end sub_808D994
+	thumb_func_end GetMonSpecies
 
 	thumb_func_start sub_808D9AC
 sub_808D9AC:

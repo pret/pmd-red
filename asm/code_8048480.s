@@ -35,7 +35,7 @@ _08048542:
 	ldr r0, _08048564
 	b _08048586
 	.align 2, 0
-_08048560: .4byte gUnknown_202DF98
+_08048560: .4byte gAvailablePokemonNames
 _08048564: .4byte gPtrSelfHealPreventedHungerMessage
 _08048568:
 	movs r0, 0x9E
@@ -1111,7 +1111,7 @@ _08048D9A:
 	movs r0, 0
 	b _08048DB2
 	.align 2, 0
-_08048DA8: .4byte gUnknown_202DF98
+_08048DA8: .4byte gAvailablePokemonNames
 _08048DAC: .4byte gUnknown_80FDCA4
 _08048DB0:
 	movs r0, 0x1

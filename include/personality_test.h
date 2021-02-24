@@ -17,7 +17,7 @@ struct PersonalityStruct_203B400
     /* 0x8 */ s16 StarterID;
     /* 0xA */ s16 PartnerID;
     u8 padding[0x20 - 0xC];
-    s32 unk20;
+    s32 unk20; // Buffer to store partner name?
     u8 padding2[0x34 - 0x24];
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
