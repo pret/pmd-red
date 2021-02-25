@@ -39,7 +39,7 @@ extern void sub_803225C(void);
 extern void sub_803A1D8(void);
 extern void sub_80398AC(void);
 extern void sub_80382A0(void);
-extern void sub_8039254(u32);
+extern void CreateLoadScreen(u32);
 extern void sub_8035DB4(u32);
 extern void sub_8038900(u32);
 extern void sub_803850C(u32);
@@ -57,7 +57,7 @@ extern s32 sub_8038630(void);
 extern s32 sub_803A2A4(void);
 
 extern void CleanMainMenu(void);
-extern void sub_80393F0(void);
+extern void CleanLoadScreen(void);
 extern void sub_8036B04(void);
 extern void sub_80370D4(void);
 extern void sub_80327E4(void);
@@ -109,7 +109,7 @@ void SetUpMenu(void)
         case 7:
         case 8:
         case 9:
-            sub_8039254(gUnknown_203B348->unk4);
+            CreateLoadScreen(gUnknown_203B348->unk4);
             break;
         case 0xc:
             sub_8036400();
@@ -248,7 +248,7 @@ void CleanUpMenu(void)
     case 7:
     case 8:
     case 9:
-      sub_80393F0();
+      CleanLoadScreen();
       break;
     case 0xc:
       sub_8036B04();

@@ -15555,8 +15555,8 @@ _08031F00:
 _08031F5C: .4byte gUnknown_203B334
 	thumb_func_end sub_8031E74
 
-	thumb_func_start sub_8031F60
-sub_8031F60:
+	thumb_func_start CreateAdventureLogScreen
+CreateAdventureLogScreen:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r4, _08031FD0
@@ -15609,7 +15609,7 @@ sub_8031F60:
 	.align 2, 0
 _08031FD0: .4byte gUnknown_203B338
 _08031FD4: .4byte gUnknown_80E2008
-	thumb_func_end sub_8031F60
+	thumb_func_end CreateAdventureLogScreen
 
 	thumb_func_start sub_8031FD8
 sub_8031FD8:
