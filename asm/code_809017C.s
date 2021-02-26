@@ -4657,8 +4657,8 @@ sub_80922E4:
 _080922F0: .4byte gUnknown_810983C
 	thumb_func_end sub_80922E4
 
-	thumb_func_start sub_80922F4
-sub_80922F4:
+	thumb_func_start CopyStringtoBuffer
+CopyStringtoBuffer:
 	push {lr}
 	adds r2, r0, 0
 	b _08092300
@@ -4674,7 +4674,7 @@ _08092300:
 	strb r0, [r2]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80922F4
+	thumb_func_end CopyStringtoBuffer
 
 	thumb_func_start sub_8092310
 sub_8092310:

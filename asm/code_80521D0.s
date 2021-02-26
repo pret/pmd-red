@@ -99478,7 +99478,7 @@ _08083AE4:
 	bl sub_80709C8
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	b _08083B0E
 	.align 2, 0
 _08083AFC: .4byte gUnknown_203B418
@@ -99487,7 +99487,7 @@ _08083B04:
 	ldr r0, _08083C04
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 _08083B0E:
 	mov r0, sp
 	adds r1, r5, 0
@@ -99495,7 +99495,7 @@ _08083B0E:
 	adds r0, r4, 0
 	adds r0, 0xA
 	mov r1, sp
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r2, 0
 	mov r3, r8
 	strh r3, [r4, 0x14]

@@ -272,7 +272,7 @@ _0803A3E8:
 	bl CopySpeciesNametoBuffer
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r0, 0x40
 	strb r0, [r6]
 	mov r0, r8

@@ -51,7 +51,7 @@ extern u32 sub_80144A4(s32 *);
 
 extern void sub_803CE6C(void);
 extern char* GetMonSpecies(u32);
-extern void sub_80922F4(s32 *r0, char *r1);
+extern void CopyStringtoBuffer(s32 *r0, char *r1);
 extern void sub_801602C(u32, s32 *r0);
 
 extern u32 sub_8016080(void);
@@ -508,7 +508,7 @@ void sub_803CB7C(void)
 
   iVar2 = &gUnknown_203B400->unk20;
   monName = GetMonSpecies(gUnknown_203B400->PartnerID);
-  sub_80922F4(iVar2, monName);
+  CopyStringtoBuffer(iVar2, monName);
   sub_801602C(3, &gUnknown_203B400->unk20);
   gUnknown_203B400->TestState = 13;
 }

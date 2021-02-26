@@ -1589,7 +1589,7 @@ _0808F7EA:
 	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r2, 0
 	b _0808F800
 _0808F7FE:

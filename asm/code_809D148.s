@@ -2505,7 +2505,7 @@ _0809E718:
 	cmp r1, r3
 	bge _0809E718
 	adds r1, r4, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r2, 0
 	ldrb r0, [r4]
 	ldrb r3, [r5]
