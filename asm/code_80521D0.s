@@ -59127,7 +59127,7 @@ _0806FBC4:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	bl sub_8097848
 	movs r2, 0
 	ldrsh r0, [r6, r2]
@@ -59514,7 +59514,7 @@ _0806FED8:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	adds r0, r7, 0
 	bl GetFriendAreaStatus
 	lsls r0, 24

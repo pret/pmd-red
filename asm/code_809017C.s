@@ -4302,7 +4302,7 @@ sub_8092094:
 	ldr r0, [r4]
 	ldr r1, _080920B4
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0xC]
@@ -4467,8 +4467,8 @@ _080921A2:
 	bx r1
 	thumb_func_end sub_8092178
 
-	thumb_func_start sub_80921A8
-sub_80921A8:
+	thumb_func_start GetTeamRankString
+GetTeamRankString:
 	lsls r0, 24
 	ldr r1, _080921B4
 	lsrs r0, 22
@@ -4477,7 +4477,7 @@ sub_80921A8:
 	bx lr
 	.align 2, 0
 _080921B4: .4byte gRescueTeamRanks
-	thumb_func_end sub_80921A8
+	thumb_func_end GetTeamRankString
 
 	thumb_func_start sub_80921B8
 sub_80921B8:
@@ -4580,19 +4580,19 @@ sub_809222C:
 _0809227C: .4byte gUnknown_203B464
 	thumb_func_end sub_809222C
 
-	thumb_func_start sub_8092280
-sub_8092280:
+	thumb_func_start ReturnIntFromChar
+ReturnIntFromChar:
 	lsls r0, 24
 	lsrs r0, 24
 	bx lr
-	thumb_func_end sub_8092280
+	thumb_func_end ReturnIntFromChar
 
-	thumb_func_start sub_8092288
-sub_8092288:
+	thumb_func_start ReturnIntFromChar2
+ReturnIntFromChar2:
 	lsls r0, 24
 	lsrs r0, 24
 	bx lr
-	thumb_func_end sub_8092288
+	thumb_func_end ReturnIntFromChar2
 
 	thumb_func_start sub_8092290
 sub_8092290:
@@ -4603,7 +4603,7 @@ sub_8092290:
 _08092298:
 	ldrb r0, [r4]
 	adds r4, 0x1
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	strb r0, [r5]
 	adds r5, 0x1
 _080922A4:
@@ -4627,7 +4627,7 @@ sub_80922B4:
 _080922BE:
 	ldrb r0, [r4]
 	adds r4, 0x1
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	strb r0, [r6]
 	adds r6, 0x1
 _080922CA:
@@ -4676,8 +4676,8 @@ _08092300:
 	bx r0
 	thumb_func_end CopyStringtoBuffer
 
-	thumb_func_start sub_8092310
-sub_8092310:
+	thumb_func_start BoundedCopyStringtoBuffer
+BoundedCopyStringtoBuffer:
 	push {r4,lr}
 	adds r4, r0, 0
 	b _0809231C
@@ -4699,6 +4699,6 @@ _0809232E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8092310
+	thumb_func_end BoundedCopyStringtoBuffer
 
 	.align 2, 0 @ Don't pad with nop.

@@ -3131,7 +3131,7 @@ sub_80A8F50:
 	adds r0, r4, 0
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	add sp, 0x80
 	pop {r4,r5}
 	pop {r0}

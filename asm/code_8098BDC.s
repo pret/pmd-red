@@ -190,7 +190,7 @@ _0809913E:
 	adds r0, r4, 0
 	mov r1, sp
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	add r5, sp, 0x30
 	str r4, [sp, 0x58]
 	add r1, sp, 0x5C

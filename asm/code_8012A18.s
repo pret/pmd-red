@@ -55,7 +55,7 @@ _08012C18:
 	adds r0, 0x30
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	adds r4, r0, 0
 	bl GetCharacter
 	movs r1, 0x6
@@ -97,7 +97,7 @@ sub_8012C60:
 	adds r7, r3, 0
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	adds r4, r0, 0
 	bl GetCharacter
 	adds r1, r0, 0
@@ -6745,7 +6745,7 @@ _08015F96:
 _08015FBC: .4byte gUnknown_203B1FC
 _08015FC0:
 	ldrb r0, [r2]
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	bl GetCharacter
 	ldr r3, [r7]
 	adds r1, r3, 0
@@ -6781,7 +6781,7 @@ sub_8015FEC:
 	adds r4, r2, 0
 _08016002:
 	ldrb r0, [r4]
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	bl GetCharacter
 	movs r1, 0x6
 	ldrsh r0, [r0, r1]

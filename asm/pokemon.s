@@ -151,7 +151,7 @@ _0808CEA4:
 	add r0, sp, 0x4C
 	adds r1, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	lsls r4, r7, 3
 	b _0808CF72
 _0808CF36:
@@ -343,7 +343,7 @@ _0808D09A:
 	mov r0, r8
 	mov r1, sp
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	b _0808D0C8
 _0808D0B4:
 	movs r2, 0
@@ -1475,10 +1475,10 @@ sub_808D864:
 	movs r7, 0
 _0808D888:
 	ldrb r0, [r6]
-	bl sub_8092280
+	bl ReturnIntFromChar
 	adds r4, r0, 0
 	ldrb r0, [r5]
-	bl sub_8092280
+	bl ReturnIntFromChar
 	cmp r4, r0
 	ble _0808D8A4
 	movs r0, 0x1

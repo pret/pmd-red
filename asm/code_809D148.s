@@ -9018,13 +9018,13 @@ _080A1EE8:
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r4, 0
-	bl sub_80921A8
+	bl GetTeamRankString
 	adds r1, r0, 0
 	ldr r4, _080A1F30
 	adds r0, r4, 0
 	bl strcpy
 	adds r0, r5, 0
-	bl sub_80921A8
+	bl GetTeamRankString
 	adds r1, r0, 0
 	adds r4, 0x50
 	adds r0, r4, 0

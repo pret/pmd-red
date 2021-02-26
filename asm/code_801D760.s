@@ -58,7 +58,7 @@ _0801D8B2:
 	bl sub_8092178
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80921A8
+	bl GetTeamRankString
 	adds r4, r0, 0
 	bl sub_8092110
 	adds r3, r0, 0
@@ -14542,7 +14542,7 @@ _08024BD6:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 _08024C06:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -14651,7 +14651,7 @@ _08024CC8:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 _08024CE8:
 	ldr r0, [r5]
 	ldr r1, [r0, 0xC]

@@ -1522,7 +1522,7 @@ sub_808F734:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	mov r0, sp
 	adds r1, r5, 0
 	bl sub_808F798
@@ -1616,7 +1616,7 @@ _0808F816:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 _0808F82E:
 	mov r0, sp
 	bl sub_808D1DC

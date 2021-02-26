@@ -9891,7 +9891,7 @@ sub_802F2E8:
 	ldr r1, [r1]
 	str r0, [r1]
 	bl sub_802F300
-	bl sub_802F358
+	bl HandleMissionReward
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9943,8 +9943,8 @@ _0802F350: .4byte gUnknown_203B310
 _0802F354: .4byte gUnknown_80E041C
 	thumb_func_end sub_802F300
 
-	thumb_func_start sub_802F358
-sub_802F358:
+	thumb_func_start HandleMissionReward
+HandleMissionReward:
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r1, _0802F374
@@ -10332,7 +10332,7 @@ _0802F6A4:
 	movs r0, 0x9
 	str r0, [r1, 0x4]
 	ldrb r0, [r1, 0x9]
-	bl sub_80921A8
+	bl GetTeamRankString
 	adds r1, r0, 0
 	ldr r4, _0802F6F0
 	adds r0, r4, 0
@@ -10340,7 +10340,7 @@ _0802F6A4:
 	bl sub_8092178
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80921A8
+	bl GetTeamRankString
 	adds r1, r0, 0
 	adds r4, 0x50
 	adds r0, r4, 0
@@ -10360,7 +10360,7 @@ _0802F6EC: .4byte gUnknown_203B310
 _0802F6F0: .4byte gUnknown_202E038
 _0802F6F4: .4byte gUnknown_80E06A8
 _0802F6F8: .4byte 0x00000101
-	thumb_func_end sub_802F358
+	thumb_func_end HandleMissionReward
 
 	thumb_func_start sub_802F6FC
 sub_802F6FC:
