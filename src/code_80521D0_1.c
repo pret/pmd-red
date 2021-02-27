@@ -1,8 +1,9 @@
 #include "global.h"
+#include "constants/species.h"
 
 extern s16 *sub_8085480(void);
 extern u32 sub_8085680(u32);
-extern u32 gUnknown_202E038;
+extern char gUnknown_202E038[0x50];
 extern u8* gUnknown_203B418;
 
 extern u32 gUnknown_8106778;
@@ -15,7 +16,7 @@ extern u32 gUnknown_8106918;
 extern u32 gUnknown_8106934;
 
 extern void sub_8086A3C(void);
-extern void sub_808D8BC(u32 *r0, u32 r1);
+extern void CopySpeciesNametoBuffer(char *r0, u32 r1);
 extern void sub_8083E88(u32);
 extern void sub_80854D4(void);
 extern void sub_80855E4(void *);
@@ -51,7 +52,7 @@ void sub_808C9C4(void)
     sub_80855E4(sub_8086A3C);
     sub_8085918(temp_2, 0);
     sub_8085860(array[2], array[3] - 3);
-    sub_808D8BC(&gUnknown_202E038, 0x14d);
+    CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
 void sub_808CA1C(void)
@@ -112,7 +113,7 @@ void sub_808CB5C(void)
     sub_8085930(0x4);
     sub_8068FE0(temp_2, 0x87 << 2, 0);
     sub_8085860(array[2], array[3]);
-    sub_808D8BC(&gUnknown_202E038, 0x14d);
+    CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
 void nullsub_101(void)
@@ -132,7 +133,7 @@ void sub_808CBB0(void)
     sub_80855E4(sub_8086A3C);
     sub_8085918(temp_2, 0);
     sub_8085860(array[2], array[3] - 3);
-    sub_808D8BC(&gUnknown_202E038, 0x82 << 1);
+    CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 
 void sub_808CC04(void)
@@ -195,6 +196,6 @@ void sub_808CD44(void)
     sub_80855E4(sub_8086A3C);
     sub_8068FE0(temp_2, 0x87 << 2, 0);
     sub_8085860(array[2], array[3] - 3);
-    sub_808D8BC(&gUnknown_202E038, 0x82 << 1);
+    CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 

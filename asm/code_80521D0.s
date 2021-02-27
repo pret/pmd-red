@@ -723,7 +723,7 @@ sub_8052910:
 	.align 2, 0
 _08052950: .4byte gUnknown_203B45C
 _08052954: .4byte 0x00008df8
-_08052958: .4byte gUnknown_202DF98
+_08052958: .4byte gAvailablePokemonNames
 _0805295C:
 	movs r7, 0
 	ldr r0, _08052988
@@ -747,7 +747,7 @@ _08052966:
 	ldrsh r4, [r4, r2]
 	b _080529A6
 	.align 2, 0
-_08052988: .4byte gUnknown_202DF98
+_08052988: .4byte gAvailablePokemonNames
 _0805298C: .4byte gUnknown_80F7AF8
 _08052990: .4byte gUnknown_203B45C
 _08052994: .4byte 0x00008df8
@@ -790,7 +790,7 @@ _080529D4:
 	.align 2, 0
 _080529E4: .4byte gUnknown_202E5D8
 _080529E8: .4byte gUnknown_80F7AFC
-_080529EC: .4byte gUnknown_202DF98
+_080529EC: .4byte gAvailablePokemonNames
 _080529F0:
 	ldr r0, _080529FC
 	ldr r1, _08052A00
@@ -1220,7 +1220,7 @@ sub_8052D44:
 	strh r0, [r7]
 	b _08052D7A
 	.align 2, 0
-_08052D6C: .4byte gUnknown_202DF98
+_08052D6C: .4byte gAvailablePokemonNames
 _08052D70:
 	ldr r0, _08052D9C
 	ldr r1, _08052DA0
@@ -1242,7 +1242,7 @@ _08052D7A:
 	strh r0, [r7, 0x2]
 	b _08052DB2
 	.align 2, 0
-_08052D9C: .4byte gUnknown_202DF98
+_08052D9C: .4byte gAvailablePokemonNames
 _08052DA0: .4byte gUnknown_80F7AF8
 _08052DA4: .4byte gUnknown_202DFE8
 _08052DA8:
@@ -6368,7 +6368,7 @@ _08055A22:
 	b _08055A8A
 	.align 2, 0
 _08055A4C: .4byte 0x00000159
-_08055A50: .4byte gUnknown_202DF98
+_08055A50: .4byte gAvailablePokemonNames
 _08055A54: .4byte gUnknown_80FC714
 _08055A58:
 	cmp r0, 0x7
@@ -6380,7 +6380,7 @@ _08055A58:
 	ldr r0, _08055A70
 	b _08055A8A
 	.align 2, 0
-_08055A6C: .4byte gUnknown_202DF98
+_08055A6C: .4byte gAvailablePokemonNames
 _08055A70: .4byte gUnknown_80FC718
 _08055A74:
 	mov r0, r10
@@ -6400,7 +6400,7 @@ _08055A8A:
 	movs r0, 0
 	b _08055DB4
 	.align 2, 0
-_08055A98: .4byte gUnknown_202DF98
+_08055A98: .4byte gAvailablePokemonNames
 _08055A9C: .4byte gUnknown_80FC6A8
 _08055AA0:
 	ldr r0, _08055B24
@@ -7004,7 +7004,7 @@ _08055F84: .4byte gUnknown_80FEF54
 _08055F88: .4byte gUnknown_80F4E74
 _08055F8C: .4byte gUnknown_80FEF74
 _08055F90: .4byte gUnknown_80FEF98
-_08055F94: .4byte gUnknown_202DF98
+_08055F94: .4byte gAvailablePokemonNames
 _08055F98: .4byte gUnknown_80FEFD0
 _08055F9C: .4byte gUnknown_80F5004
 	thumb_func_end sub_8055DDC
@@ -7186,7 +7186,7 @@ _08056108: .4byte gUnknown_203B418
 _0805610C: .4byte 0x00003a0e
 _08056110: .4byte gUnknown_80F5D10
 _08056114: .4byte gUnknown_80FECE0
-_08056118: .4byte gUnknown_202DF98
+_08056118: .4byte gAvailablePokemonNames
 _0805611C: .4byte gUnknown_202DE58
 _08056120: .4byte gUnknown_80FC72C
 _08056124:
@@ -7246,7 +7246,7 @@ _08056190:
 	b _08056446
 	.align 2, 0
 _08056194: .4byte gUnknown_80F9158
-_08056198: .4byte gUnknown_202DF98
+_08056198: .4byte gAvailablePokemonNames
 _0805619C: .4byte gUnknown_80FC710
 _080561A0:
 	cmp r4, 0
@@ -7271,7 +7271,7 @@ _080561A0:
 	ldr r0, _080561DC
 	b _08056188
 	.align 2, 0
-_080561D4: .4byte gUnknown_202DF98
+_080561D4: .4byte gAvailablePokemonNames
 _080561D8: .4byte gUnknown_202DE58
 _080561DC: .4byte gUnknown_80FC6D0
 _080561E0:
@@ -7642,7 +7642,7 @@ _080564BC:
 	bl sub_80928C0
 	b _080564F2
 	.align 2, 0
-_080564DC: .4byte gUnknown_202DF98
+_080564DC: .4byte gAvailablePokemonNames
 _080564E0: .4byte gUnknown_202DE58
 _080564E4:
 	ldr r0, _08056508
@@ -10573,7 +10573,7 @@ _08057A78:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08057A90: .4byte gUnknown_202DF98
+_08057A90: .4byte gAvailablePokemonNames
 _08057A94: .4byte gUnknown_80FC7EC
 	thumb_func_end sub_8057A0C
 
@@ -13236,7 +13236,7 @@ _08058E4C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058E54: .4byte gUnknown_202DF98
+_08058E54: .4byte gAvailablePokemonNames
 _08058E58: .4byte gUnknown_80FBD58
 	thumb_func_end sub_8058DBC
 
@@ -15482,7 +15482,7 @@ _08059F1A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059F2C: .4byte gUnknown_202DF98
+_08059F2C: .4byte gAvailablePokemonNames
 _08059F30: .4byte gUnknown_80FC7C8
 _08059F34: .4byte 0x000001f7
 	thumb_func_end sub_8059E54
@@ -15665,7 +15665,7 @@ _0805A090:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A0A0: .4byte gUnknown_202DF98
+_0805A0A0: .4byte gAvailablePokemonNames
 _0805A0A4: .4byte gUnknown_80FC7C8
 	thumb_func_end sub_8059FC8
 
@@ -15767,7 +15767,7 @@ sub_805A120:
 	ldr r0, _0805A170
 	b _0805A1B8
 	.align 2, 0
-_0805A16C: .4byte gUnknown_202DF98
+_0805A16C: .4byte gAvailablePokemonNames
 _0805A170: .4byte gUnknown_80FCCE4
 _0805A174:
 	adds r0, r5, 0
@@ -16537,7 +16537,7 @@ sub_805A6C8:
 	ldr r0, _0805A70C
 	b _0805A73A
 	.align 2, 0
-_0805A708: .4byte gUnknown_202DF98
+_0805A708: .4byte gAvailablePokemonNames
 _0805A70C: .4byte gUnknown_80FCCE8
 _0805A710:
 	adds r0, r5, 0
@@ -17057,7 +17057,7 @@ _0805AB36:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805AB40: .4byte gUnknown_202DF98
+_0805AB40: .4byte gAvailablePokemonNames
 _0805AB44: .4byte gUnknown_80FC5CC
 	thumb_func_end sub_805AAE0
 
@@ -18384,7 +18384,7 @@ _0805B4F8:
 	b _0805B524
 	.align 2, 0
 _0805B50C: .4byte 0x00000147
-_0805B510: .4byte gUnknown_202DF98
+_0805B510: .4byte gAvailablePokemonNames
 _0805B514: .4byte gUnknown_80FDCE4
 _0805B518:
 	ldr r0, _0805B538
@@ -19132,7 +19132,7 @@ sub_805BA50:
 	movs r0, 0x1
 	b _0805BB4E
 	.align 2, 0
-_0805BAC0: .4byte gUnknown_202DF98
+_0805BAC0: .4byte gAvailablePokemonNames
 _0805BAC4:
 	adds r0, r5, 0
 	movs r1, 0x24
@@ -19554,7 +19554,7 @@ TransferOrbAction:
 	movs r0, 0
 	b _0805BE78
 	.align 2, 0
-_0805BDD0: .4byte gUnknown_202DF98
+_0805BDD0: .4byte gAvailablePokemonNames
 _0805BDD4: .4byte gUnknown_80FD450
 _0805BDD8:
 	movs r6, 0
@@ -19642,7 +19642,7 @@ _0805BE78:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805BE88: .4byte gUnknown_202DF98
+_0805BE88: .4byte gAvailablePokemonNames
 _0805BE8C: .4byte gUnknown_80FD450
 	thumb_func_end TransferOrbAction
 
@@ -19717,7 +19717,7 @@ EscapeOrbAction:
 	bl sub_80522F4
 	b _0805BF26
 	.align 2, 0
-_0805BF00: .4byte gUnknown_202DF98
+_0805BF00: .4byte gAvailablePokemonNames
 _0805BF04: .4byte gUnknown_203B418
 _0805BF08: .4byte 0x0000066e
 _0805BF0C: .4byte gUnknown_80FD4DC
@@ -25578,7 +25578,7 @@ _0805F184:
 	bx r0
 	.align 2, 0
 _0805F194: .4byte gUnknown_203B450
-_0805F198: .4byte gUnknown_202DF98
+_0805F198: .4byte gAvailablePokemonNames
 _0805F19C: .4byte gUnknown_80F9BB0
 	thumb_func_end sub_805F02C
 
@@ -26427,7 +26427,7 @@ _0805F8CE:
 	mov r10, r3
 	b _0805F904
 	.align 2, 0
-_0805F8D8: .4byte gUnknown_202DF98
+_0805F8D8: .4byte gAvailablePokemonNames
 _0805F8DC: .4byte gUnknown_80FDE18
 _0805F8E0:
 	ldr r0, [sp, 0x10]
@@ -26760,7 +26760,7 @@ _0805FBC0: .4byte gUnknown_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
 _0805FBC8: .4byte gUnknown_203B460
 _0805FBCC: .4byte gUnknown_80F9190
-_0805FBD0: .4byte gUnknown_202DF98
+_0805FBD0: .4byte gAvailablePokemonNames
 _0805FBD4: .4byte gUnknown_80F91A8
 _0805FBD8: .4byte gUnknown_80F91C8
 _0805FBDC: .4byte gUnknown_203B418
@@ -28140,7 +28140,7 @@ _080606B0:
 	bl sub_8014FF0
 	b _08060794
 	.align 2, 0
-_0806070C: .4byte gUnknown_202DF98
+_0806070C: .4byte gAvailablePokemonNames
 _08060710: .4byte gUnknown_80FE940
 _08060714: .4byte gUnknown_8106B60
 _08060718:
@@ -28241,7 +28241,7 @@ _080607D0:
 _080607E0: .4byte gUnknown_203B418
 _080607E4: .4byte gUnknown_202F248
 _080607E8: .4byte 0x0001357c
-_080607EC: .4byte gUnknown_202DF98
+_080607EC: .4byte gAvailablePokemonNames
 _080607F0: .4byte gUnknown_80FE940
 _080607F4: .4byte gUnknown_202EE10
 _080607F8: .4byte gUnknown_8106B60
@@ -29647,7 +29647,7 @@ _08061324: .4byte gUnknown_202F260
 _08061328: .4byte gUnknown_202F270
 _0806132C: .4byte gUnknown_202EE10
 _08061330: .4byte gUnknown_8106BB0
-_08061334: .4byte gUnknown_202DF98
+_08061334: .4byte gAvailablePokemonNames
 _08061338: .4byte gUnknown_203B45C
 _0806133C: .4byte 0x00008e02
 _08061340: .4byte gUnknown_8106BB4
@@ -30459,7 +30459,7 @@ _080619B8:
 	bl sub_8014FF0
 	b _080619F4
 	.align 2, 0
-_080619DC: .4byte gUnknown_202DF98
+_080619DC: .4byte gAvailablePokemonNames
 _080619E0: .4byte gUnknown_8106BEC
 _080619E4:
 	mov r1, r10
@@ -32698,7 +32698,7 @@ _08062BCA:
 	movs r0, 0x1
 	b _08062BDA
 	.align 2, 0
-_08062BD0: .4byte gUnknown_202DF98
+_08062BD0: .4byte gAvailablePokemonNames
 _08062BD4: .4byte gUnknown_80FE978
 _08062BD8:
 	movs r0, 0
@@ -32849,7 +32849,7 @@ _08062CF4:
 	movs r0, 0x1
 	b _08062D02
 	.align 2, 0
-_08062CF8: .4byte gUnknown_202DF98
+_08062CF8: .4byte gAvailablePokemonNames
 _08062CFC: .4byte gUnknown_80FE940
 _08062D00:
 	movs r0, 0
@@ -33859,7 +33859,7 @@ _08063508: .4byte gUnknown_8106CAC
 _0806350C: .4byte gUnknown_202EE10
 _08063510: .4byte gUnknown_202F2D8
 _08063514: .4byte gUnknown_2027370
-_08063518: .4byte gUnknown_202DF98
+_08063518: .4byte gAvailablePokemonNames
 _0806351C:
 	movs r0, 0x2
 	ands r0, r1
@@ -33972,7 +33972,7 @@ _080635D0:
 	movs r0, 0x2
 	b _08063606
 	.align 2, 0
-_080635FC: .4byte gUnknown_202DF98
+_080635FC: .4byte gAvailablePokemonNames
 _08063600: .4byte gUnknown_80FE978
 _08063604:
 	movs r0, 0x4
@@ -34532,7 +34532,7 @@ sub_80639E4:
 	.align 2, 0
 _08063A5C: .4byte gUnknown_202F278
 _08063A60: .4byte gUnknown_8106CC8
-_08063A64: .4byte gUnknown_202DF98
+_08063A64: .4byte gAvailablePokemonNames
 _08063A68: .4byte gUnknown_8106CCC
 _08063A6C: .4byte gUnknown_202EE10
 	thumb_func_end sub_80639E4
@@ -35643,7 +35643,7 @@ _08064262:
 	.align 2, 0
 _08064304: .4byte gUnknown_202EE10
 _08064308: .4byte gUnknown_202F2D8
-_0806430C: .4byte gUnknown_202DF98
+_0806430C: .4byte gAvailablePokemonNames
 	thumb_func_end sub_8064228
 
 	thumb_func_start sub_8064310
@@ -39517,7 +39517,7 @@ _08066244:
 	.align 2, 0
 _08066254: .4byte gUnknown_80FEA80
 _08066258: .4byte gUnknown_8106D8C
-_0806625C: .4byte gUnknown_202DF98
+_0806625C: .4byte gAvailablePokemonNames
 _08066260:
 	ldr r0, _08066284
 	ldr r2, [r0]
@@ -39630,7 +39630,7 @@ _0806633E:
 	bx r1
 	.align 2, 0
 _08066348: .4byte gUnknown_8106D8C
-_0806634C: .4byte gUnknown_202DF98
+_0806634C: .4byte gAvailablePokemonNames
 _08066350: .4byte gUnknown_203B084
 _08066354: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066288
@@ -39732,7 +39732,7 @@ _0806641A:
 	bx r1
 	.align 2, 0
 _08066424: .4byte gUnknown_8106D8C
-_08066428: .4byte gUnknown_202DF98
+_08066428: .4byte gAvailablePokemonNames
 _0806642C: .4byte gUnknown_203B080
 _08066430: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066358
@@ -40672,7 +40672,7 @@ _08066BAC:
 	.align 2, 0
 _08066BB8: .4byte 0xffffff00
 _08066BBC: .4byte gUnknown_202DE58
-_08066BC0: .4byte gUnknown_202DF98
+_08066BC0: .4byte gAvailablePokemonNames
 _08066BC4: .4byte 0x0000014d
 _08066BC8: .4byte gUnknown_80F8D7C
 _08066BCC: .4byte gUnknown_203B418
@@ -40943,7 +40943,7 @@ _08066DF8:
 	bx r0
 	.align 2, 0
 _08066E00: .4byte 0x0000014d
-_08066E04: .4byte gUnknown_202DF98
+_08066E04: .4byte gAvailablePokemonNames
 _08066E08: .4byte gUnknown_80F8E28
 _08066E0C: .4byte gUnknown_203B418
 _08066E10: .4byte 0x00003a08
@@ -41366,7 +41366,7 @@ _08067188:
 	bx r0
 	.align 2, 0
 _08067190: .4byte gUnknown_202DE58
-_08067194: .4byte gUnknown_202DF98
+_08067194: .4byte gAvailablePokemonNames
 _08067198: .4byte gUnknown_203B418
 _0806719C: .4byte 0x00003a08
 	thumb_func_end sub_8067110
@@ -41625,7 +41625,7 @@ _08067384:
 	b _080673C6
 	.align 2, 0
 _080673B0: .4byte gUnknown_202DE58
-_080673B4: .4byte gUnknown_202DF98
+_080673B4: .4byte gAvailablePokemonNames
 _080673B8: .4byte gUnknown_80F8EC8
 _080673BC:
 	ldr r0, _080673F8
@@ -41920,7 +41920,7 @@ _08067600:
 	movs r0, 0
 	b _08067716
 	.align 2, 0
-_08067608: .4byte gUnknown_202DF98
+_08067608: .4byte gAvailablePokemonNames
 _0806760C: .4byte gUnknown_80FE008
 _08067610:
 	adds r0, r6, 0x4
@@ -42168,7 +42168,7 @@ _080677B4:
 	ldr r0, _08067808
 	b _08067832
 	.align 2, 0
-_080677F0: .4byte gUnknown_202DF98
+_080677F0: .4byte gAvailablePokemonNames
 _080677F4: .4byte gUnknown_80F9094
 _080677F8: .4byte gUnknown_80F913C
 _080677FC: .4byte gUnknown_203B45C
@@ -42229,7 +42229,7 @@ _0806786C:
 	.align 2, 0
 _08067874: .4byte gUnknown_80F90C8
 _08067878: .4byte gUnknown_80F9150
-_0806787C: .4byte gUnknown_202DF98
+_0806787C: .4byte gAvailablePokemonNames
 _08067880: .4byte 0x0000021d
 	thumb_func_end sub_8067794
 
@@ -42329,7 +42329,7 @@ sub_8067904:
 	b _08067962
 	.align 2, 0
 _08067940: .4byte gUnknown_202F208
-_08067944: .4byte gUnknown_202DF98
+_08067944: .4byte gAvailablePokemonNames
 _08067948: .4byte gUnknown_80F8F20
 _0806794C:
 	adds r0, r6, 0
@@ -42348,7 +42348,7 @@ _08067962:
 	bl sub_80522A8
 	b _08067A56
 	.align 2, 0
-_0806796C: .4byte gUnknown_202DF98
+_0806796C: .4byte gAvailablePokemonNames
 _08067970: .4byte gUnknown_80F8F38
 _08067974:
 	movs r0, 0xB0
@@ -43074,7 +43074,7 @@ sub_8067F00:
 	mov r10, r1
 	b _08067FF6
 	.align 2, 0
-_08067F44: .4byte gUnknown_202DF98
+_08067F44: .4byte gAvailablePokemonNames
 _08067F48: .4byte gUnknown_8106E28
 _08067F4C:
 	ldr r4, _08067F8C
@@ -43106,7 +43106,7 @@ _08067F4C:
 	bl strcpy
 	b _08067FA4
 	.align 2, 0
-_08067F8C: .4byte gUnknown_202DF98
+_08067F8C: .4byte gAvailablePokemonNames
 _08067F90: .4byte gUnknown_202DE30
 _08067F94: .4byte gUnknown_202DE58
 _08067F98: .4byte gUnknown_8106E2C
@@ -44546,7 +44546,7 @@ _08068AB2:
 	.align 2, 0
 _08068AE0: .4byte gUnknown_203B45C
 _08068AE4: .4byte 0x00008df8
-_08068AE8: .4byte gUnknown_202DF98
+_08068AE8: .4byte gAvailablePokemonNames
 _08068AEC: .4byte gUnknown_80FE0F4
 _08068AF0:
 	cmp r0, 0x47
@@ -44616,7 +44616,7 @@ _08068B3E:
 _08068B6C: .4byte gUnknown_203B45C
 _08068B70: .4byte 0x00008df8
 _08068B74: .4byte 0x000055aa
-_08068B78: .4byte gUnknown_202DF98
+_08068B78: .4byte gAvailablePokemonNames
 _08068B7C: .4byte gUnknown_80FE134
 _08068B80:
 	adds r5, 0x1
@@ -44632,7 +44632,7 @@ _08068B80:
 	ldr r0, _08068BA0
 	b _08068BB2
 	.align 2, 0
-_08068B9C: .4byte gUnknown_202DF98
+_08068B9C: .4byte gAvailablePokemonNames
 _08068BA0: .4byte gUnknown_80FE0F4
 _08068BA4:
 	cmp r0, 0x47
@@ -47421,7 +47421,7 @@ _0806A0FA:
 	bx r0
 	.align 2, 0
 _0806A108: .4byte gUnknown_203B418
-_0806A10C: .4byte gUnknown_202DF98
+_0806A10C: .4byte gAvailablePokemonNames
 _0806A110: .4byte gUnknown_80FCC7C
 _0806A114: .4byte gUnknown_80F51E4
 _0806A118: .4byte gUnknown_202DE58
@@ -47488,7 +47488,7 @@ _0806A19C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A1A4: .4byte gUnknown_202DF98
+_0806A1A4: .4byte gAvailablePokemonNames
 _0806A1A8: .4byte gUnknown_202DE58
 _0806A1AC: .4byte gUnknown_80FDCC8
 	thumb_func_end sub_806A120
@@ -48356,7 +48356,7 @@ _0806A818:
 	mov r0, sp
 	b _0806A836
 	.align 2, 0
-_0806A828: .4byte gUnknown_202DF98
+_0806A828: .4byte gAvailablePokemonNames
 _0806A82C:
 	adds r1, 0x1
 	cmp r1, r9
@@ -54483,7 +54483,7 @@ _0806D71E:
 	b _0806D754
 	.align 2, 0
 _0806D728: .4byte gUnknown_80F9670
-_0806D72C: .4byte gUnknown_202DF98
+_0806D72C: .4byte gAvailablePokemonNames
 _0806D730: .4byte gUnknown_80F9688
 _0806D734:
 	movs r1, 0xA9
@@ -54902,7 +54902,7 @@ _0806DA50:
 	ldr r2, [r0]
 	b _0806DAC2
 	.align 2, 0
-_0806DA88: .4byte gUnknown_202DF98
+_0806DA88: .4byte gAvailablePokemonNames
 _0806DA8C: .4byte gUnknown_80F9E44
 _0806DA90:
 	ldr r0, _0806DA98
@@ -55330,7 +55330,7 @@ _0806DDA2:
 	ldr r0, _0806DDF4
 	b _0806DF2E
 	.align 2, 0
-_0806DDF0: .4byte gUnknown_202DF98
+_0806DDF0: .4byte gAvailablePokemonNames
 _0806DDF4: .4byte gUnknown_80FD484
 _0806DDF8:
 	mov r4, r8
@@ -58980,7 +58980,7 @@ sub_806FA5C:
 	bl sub_80522A8
 	b _0806FB28
 	.align 2, 0
-_0806FAD4: .4byte gUnknown_202DF98
+_0806FAD4: .4byte gAvailablePokemonNames
 _0806FAD8: .4byte gUnknown_80F9FE8
 _0806FADC: .4byte 0x0000019d
 _0806FAE0: .4byte gUnknown_80FA004
@@ -59123,11 +59123,11 @@ _0806FBC4:
 	adds r4, 0x58
 	movs r1, 0
 	ldrsh r0, [r6, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	bl sub_8097848
 	movs r2, 0
 	ldrsh r0, [r6, r2]
@@ -59240,7 +59240,7 @@ _0806FCF0:
 	bx r1
 	.align 2, 0
 _0806FD00: .4byte gUnknown_80FA0C8
-_0806FD04: .4byte gUnknown_202DF98
+_0806FD04: .4byte gAvailablePokemonNames
 _0806FD08: .4byte gUnknown_80FA0F0
 _0806FD0C: .4byte gUnknown_202E628
 _0806FD10: .4byte gUnknown_80FA120
@@ -59510,11 +59510,11 @@ _0806FED8:
 	add r0, sp, 0xC
 	movs r1, 0
 	ldrsh r0, [r0, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	adds r0, r7, 0
 	bl GetFriendAreaStatus
 	lsls r0, 24
@@ -59622,7 +59622,7 @@ _0806FFF8:
 	bx r1
 	.align 2, 0
 _08070008: .4byte gUnknown_80FA0C8
-_0807000C: .4byte gUnknown_202DF98
+_0807000C: .4byte gAvailablePokemonNames
 _08070010: .4byte gUnknown_202E628
 _08070014: .4byte gUnknown_80FA120
 _08070018: .4byte gUnknown_202E088
@@ -59656,7 +59656,7 @@ _08070042:
 _0807004C:
 	b _0807005A
 	.align 2, 0
-_08070050: .4byte gUnknown_202DF98
+_08070050: .4byte gAvailablePokemonNames
 _08070054:
 	cmp r0, 0x5
 	bne _0807005A
@@ -59854,7 +59854,7 @@ sub_80701A4:
 	beq _080701DC
 	b _080701E4
 	.align 2, 0
-_080701D4: .4byte gUnknown_202DF98
+_080701D4: .4byte gAvailablePokemonNames
 _080701D8:
 	cmp r0, 0x5
 	bne _080701E4
@@ -60998,7 +60998,7 @@ _08070A20:
 	movs r0, 0x4
 	ldrsh r1, [r1, r0]
 	adds r0, r3, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	b _08070A48
 _08070A32:
 	ldr r2, _08070A50
@@ -62755,7 +62755,7 @@ _08071714:
 	movs r0, 0x1
 	b _08071722
 	.align 2, 0
-_08071718: .4byte gUnknown_202DF98
+_08071718: .4byte gAvailablePokemonNames
 _0807171C: .4byte gUnknown_80FC2FC
 _08071720:
 	movs r0, 0
@@ -62786,7 +62786,7 @@ sub_8071728:
 	ldr r0, _08071754
 	b _08071784
 	.align 2, 0
-_08071750: .4byte gUnknown_202DF98
+_08071750: .4byte gAvailablePokemonNames
 _08071754: .4byte gUnknown_80FC31C
 _08071758:
 	adds r0, r4, 0
@@ -62818,7 +62818,7 @@ _0807178E:
 	movs r0, 0x1
 	b _0807179E
 	.align 2, 0
-_08071794: .4byte gUnknown_202DF98
+_08071794: .4byte gAvailablePokemonNames
 _08071798: .4byte gUnknown_80FCEFC
 _0807179C:
 	movs r0, 0
@@ -63516,7 +63516,7 @@ _08071C60: .4byte gUnknown_80F4DAC
 _08071C64: .4byte 0x00000662
 _08071C68: .4byte 0x00017b34
 _08071C6C: .4byte 0x00017b40
-_08071C70: .4byte gUnknown_202DF98
+_08071C70: .4byte gAvailablePokemonNames
 _08071C74: .4byte 0x0001358c
 _08071C78: .4byte 0x0000066e
 _08071C7C: .4byte gUnknown_203B418
@@ -63835,7 +63835,7 @@ _08071EB6:
 	b _08071F02
 	.align 2, 0
 _08071EE8: .4byte gUnknown_202DE30
-_08071EEC: .4byte gUnknown_202DF98
+_08071EEC: .4byte gAvailablePokemonNames
 _08071EF0: .4byte gUnknown_80F9E64
 _08071EF4: .4byte 0x00000149
 _08071EF8:
@@ -63968,7 +63968,7 @@ _08071FE2:
 	bx r0
 	.align 2, 0
 _08071FF4: .4byte gUnknown_202DE30
-_08071FF8: .4byte gUnknown_202DF98
+_08071FF8: .4byte gAvailablePokemonNames
 _08071FFC: .4byte gUnknown_202DE58
 _08072000: .4byte gUnknown_80FF730
 _08072004: .4byte 0x00000149
@@ -64159,7 +64159,7 @@ _08072162:
 	bx r0
 	.align 2, 0
 _08072174: .4byte gUnknown_202DE30
-_08072178: .4byte gUnknown_202DF98
+_08072178: .4byte gAvailablePokemonNames
 _0807217C: .4byte gUnknown_202DE58
 _08072180: .4byte gUnknown_80FF730
 _08072184: .4byte 0x00000149
@@ -64196,7 +64196,7 @@ sub_807218C:
 	lsls r1, 1
 	b _080721EC
 	.align 2, 0
-_080721C8: .4byte gUnknown_202DF98
+_080721C8: .4byte gAvailablePokemonNames
 _080721CC:
 	cmp r0, 0x47
 	bne _080721D8
@@ -64444,7 +64444,7 @@ _080723B6:
 	bx r0
 	.align 2, 0
 _080723C4: .4byte 0x00000149
-_080723C8: .4byte gUnknown_202DF98
+_080723C8: .4byte gAvailablePokemonNames
 _080723CC: .4byte gUnknown_80F9B94
 	thumb_func_end sub_807232C
 
@@ -64535,7 +64535,7 @@ _08072456:
 	b _080724A4
 	.align 2, 0
 _08072474: .4byte gUnknown_202DE30
-_08072478: .4byte gUnknown_202DF98
+_08072478: .4byte gAvailablePokemonNames
 _0807247C: .4byte gUnknown_80F9E80
 _08072480:
 	ldr r3, [sp, 0x18]
@@ -64675,7 +64675,7 @@ _08072576:
 	bx r1
 	.align 2, 0
 _08072588: .4byte gUnknown_202DE30
-_0807258C: .4byte gUnknown_202DF98
+_0807258C: .4byte gAvailablePokemonNames
 _08072590: .4byte gUnknown_80F9E80
 _08072594: .4byte 0x03e60000
 _08072598: .4byte 0x000003e7
@@ -64900,7 +64900,7 @@ _0807272E:
 	.align 2, 0
 _08072734: .4byte gUnknown_202F31C
 _08072738: .4byte gUnknown_202F324
-_0807273C: .4byte gUnknown_202DF98
+_0807273C: .4byte gAvailablePokemonNames
 _08072740: .4byte gUnknown_80F9EEC
 _08072744:
 	ldr r0, _08072770
@@ -65102,7 +65102,7 @@ _08072894:
 	bl sub_80528F4
 	b _08072928
 	.align 2, 0
-_080728C8: .4byte gUnknown_202DF98
+_080728C8: .4byte gAvailablePokemonNames
 _080728CC: .4byte gUnknown_202DE58
 _080728D0: .4byte gUnknown_80F9F04
 _080728D4:
@@ -65297,7 +65297,7 @@ _08072A0C:
 	bl sub_80528F4
 	b _08072A8C
 	.align 2, 0
-_08072A44: .4byte gUnknown_202DF98
+_08072A44: .4byte gAvailablePokemonNames
 _08072A48: .4byte gUnknown_202DE58
 _08072A4C: .4byte gUnknown_80F9F04
 _08072A50:
@@ -65358,7 +65358,7 @@ _08072AB0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08072AC0: .4byte gUnknown_202DF98
+_08072AC0: .4byte gAvailablePokemonNames
 _08072AC4: .4byte gUnknown_80F9F2C
 	thumb_func_end sub_8072938
 
@@ -65521,7 +65521,7 @@ sub_8072B78:
 	ldr r4, _08072C04
 	b _08072C0C
 	.align 2, 0
-_08072BFC: .4byte gUnknown_202DF98
+_08072BFC: .4byte gAvailablePokemonNames
 _08072C00: .4byte gUnknown_80FE2EC
 _08072C04: .4byte gUnknown_80F4448
 _08072C08:
@@ -66132,7 +66132,7 @@ _08073136:
 	ldr r0, _08073148
 	b _080731A2
 	.align 2, 0
-_08073144: .4byte gUnknown_202DF98
+_08073144: .4byte gAvailablePokemonNames
 _08073148: .4byte gUnknown_80FE6D4
 _0807314C:
 	adds r0, r4, 0
@@ -66185,7 +66185,7 @@ _080731A2:
 	bl sub_80522A8
 	b _080731B8
 	.align 2, 0
-_080731AC: .4byte gUnknown_202DF98
+_080731AC: .4byte gAvailablePokemonNames
 _080731B0: .4byte gUnknown_80FE478
 _080731B4:
 	movs r0, 0x1
@@ -66502,7 +66502,7 @@ _080733FC:
 	b _08073456
 	.align 2, 0
 _08073434: .4byte 0x00000147
-_08073438: .4byte gUnknown_202DF98
+_08073438: .4byte gAvailablePokemonNames
 _0807343C: .4byte gUnknown_80FCF38
 _08073440:
 	adds r0, r5, 0x4
@@ -66739,7 +66739,7 @@ _080735EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073600: .4byte gUnknown_202DF98
+_08073600: .4byte gAvailablePokemonNames
 _08073604: .4byte gUnknown_80FCF50
 _08073608: .4byte 0x00000165
 	thumb_func_end sub_807348C
@@ -67721,7 +67721,7 @@ _08073D64:
 	movs r0, 0x1
 	b _08073D6E
 	.align 2, 0
-_08073D68: .4byte gUnknown_202DF98
+_08073D68: .4byte gAvailablePokemonNames
 _08073D6C:
 	movs r0, 0
 _08073D6E:
@@ -67765,7 +67765,7 @@ _08073D98:
 	b _0807404C
 	.align 2, 0
 _08073DBC: .4byte gUnknown_202DE58
-_08073DC0: .4byte gUnknown_202DF98
+_08073DC0: .4byte gAvailablePokemonNames
 _08073DC4: .4byte gUnknown_80F8F88
 _08073DC8:
 	mov r1, r10
@@ -68092,7 +68092,7 @@ _0807404C:
 	bl sub_805239C
 	b _0807407A
 	.align 2, 0
-_08074058: .4byte gUnknown_202DF98
+_08074058: .4byte gAvailablePokemonNames
 _0807405C: .4byte gUnknown_80F8FAC
 _08074060:
 	ldr r0, _0807408C
@@ -69400,7 +69400,7 @@ _08074B2E:
 _08074B40: .4byte 0x0000270f
 _08074B44: .4byte 0x0000020e
 _08074B48: .4byte 0x00000165
-_08074B4C: .4byte gUnknown_202DF98
+_08074B4C: .4byte gAvailablePokemonNames
 _08074B50: .4byte gUnknown_80FABD8
 	thumb_func_end sub_8074094
 
@@ -69866,7 +69866,7 @@ _08074EC6:
 _08074EF8: .4byte gUnknown_80F4FC4
 _08074EFC: .4byte gUnknown_80F4FC0
 _08074F00: .4byte gUnknown_80F4FC2
-_08074F04: .4byte gUnknown_202DF98
+_08074F04: .4byte gAvailablePokemonNames
 _08074F08:
 	movs r2, 0
 	bl sub_8045B94
@@ -69945,7 +69945,7 @@ _08074F96:
 	.align 2, 0
 _08074FA0: .4byte gPtrStenchWavedOffMessage
 _08074FA4: .4byte 0x0000010d
-_08074FA8: .4byte gUnknown_202DF98
+_08074FA8: .4byte gAvailablePokemonNames
 _08074FAC: .4byte gUnknown_80FA124
 	thumb_func_end sub_8074B54
 
@@ -71261,7 +71261,7 @@ _080759E4:
 	bl sub_80522A8
 	b _08075B92
 	.align 2, 0
-_08075A1C: .4byte gUnknown_202DF98
+_08075A1C: .4byte gAvailablePokemonNames
 _08075A20: .4byte gPtrCouldntBeUsedMessage
 _08075A24:
 	adds r0, r7, 0
@@ -71671,7 +71671,7 @@ _08075D34:
 	ldr r0, _08075D50
 	b _08075DA0
 	.align 2, 0
-_08075D4C: .4byte gUnknown_202DF98
+_08075D4C: .4byte gAvailablePokemonNames
 _08075D50: .4byte gUnknown_80FCD54
 _08075D54:
 	adds r0, r4, 0
@@ -72071,7 +72071,7 @@ _08076050:
 	bl sub_80522F4
 	b _08076080
 	.align 2, 0
-_08076060: .4byte gUnknown_202DF98
+_08076060: .4byte gAvailablePokemonNames
 _08076064: .4byte gUnknown_80F4E7C
 _08076068: .4byte 0x00000165
 _0807606C: .4byte gUnknown_80FB41C
@@ -72148,7 +72148,7 @@ _080760D0:
 	ldr r0, _08076104
 	b _08076116
 	.align 2, 0
-_08076100: .4byte gUnknown_202DF98
+_08076100: .4byte gAvailablePokemonNames
 _08076104: .4byte gUnknown_80FB480
 _08076108:
 	ldr r0, _0807610C
@@ -72226,7 +72226,7 @@ sub_807614C:
 	bl sub_80522F4
 	b _08076206
 	.align 2, 0
-_080761A0: .4byte gUnknown_202DF98
+_080761A0: .4byte gAvailablePokemonNames
 _080761A4: .4byte gUnknown_80FCC4C
 _080761A8:
 	ldr r0, _080761E8
@@ -72257,7 +72257,7 @@ _080761A8:
 	bl sub_80522F4
 	b _08076200
 	.align 2, 0
-_080761E8: .4byte gUnknown_202DF98
+_080761E8: .4byte gAvailablePokemonNames
 _080761EC: .4byte gUnknown_80F4F00
 _080761F0: .4byte gUnknown_80FB50C
 _080761F4:
@@ -72328,7 +72328,7 @@ _0807626E:
 	ldr r0, _08076278
 	b _080762CC
 	.align 2, 0
-_08076274: .4byte gUnknown_202DF98
+_08076274: .4byte gAvailablePokemonNames
 _08076278: .4byte gUnknown_80FCE5C
 _0807627C:
 	adds r0, r5, 0
@@ -72507,7 +72507,7 @@ _080763DA:
 	.align 2, 0
 _080763E8: .4byte gUnknown_80FB564
 _080763EC: .4byte gUnknown_80F4448
-_080763F0: .4byte gUnknown_202DF98
+_080763F0: .4byte gAvailablePokemonNames
 _080763F4: .4byte gUnknown_80FF01C
 	thumb_func_end sub_8076210
 
@@ -72559,7 +72559,7 @@ _08076450:
 	ldr r0, _08076458
 	b _080764A4
 	.align 2, 0
-_08076454: .4byte gUnknown_202DF98
+_08076454: .4byte gAvailablePokemonNames
 _08076458: .4byte gUnknown_80FD524
 _0807645C:
 	adds r0, r5, 0
@@ -72741,7 +72741,7 @@ _080765C0:
 	.align 2, 0
 _080765D0: .4byte gUnknown_80FB5F8
 _080765D4: .4byte gUnknown_80F4448
-_080765D8: .4byte gUnknown_202DF98
+_080765D8: .4byte gAvailablePokemonNames
 _080765DC: .4byte gUnknown_80FF01C
 	thumb_func_end sub_80763F8
 
@@ -72793,7 +72793,7 @@ _08076638:
 	ldr r0, _08076640
 	b _0807668C
 	.align 2, 0
-_0807663C: .4byte gUnknown_202DF98
+_0807663C: .4byte gAvailablePokemonNames
 _08076640: .4byte gUnknown_80FD524
 _08076644:
 	adds r0, r5, 0
@@ -72964,7 +72964,7 @@ _08076790:
 	.align 2, 0
 _080767A0: .4byte gUnknown_80FB5F8
 _080767A4: .4byte gUnknown_80F4448
-_080767A8: .4byte gUnknown_202DF98
+_080767A8: .4byte gAvailablePokemonNames
 _080767AC: .4byte gUnknown_80FF01C
 	thumb_func_end sub_80765E0
 
@@ -73013,7 +73013,7 @@ _080767CE:
 	ldr r0, _08076810
 	b _0807685C
 	.align 2, 0
-_0807680C: .4byte gUnknown_202DF98
+_0807680C: .4byte gAvailablePokemonNames
 _08076810: .4byte gUnknown_80FCDE0
 _08076814:
 	adds r0, r5, 0
@@ -73200,7 +73200,7 @@ _08076948:
 	bl sub_806CE94
 	b _080769B8
 	.align 2, 0
-_0807699C: .4byte gUnknown_202DF98
+_0807699C: .4byte gAvailablePokemonNames
 _080769A0: .4byte gUnknown_80FA844
 _080769A4: .4byte gUnknown_80F4E58
 _080769A8: .4byte gUnknown_80FB628
@@ -73304,7 +73304,7 @@ _08076A2A:
 	bl sub_806CE94
 	b _08076A94
 	.align 2, 0
-_08076A78: .4byte gUnknown_202DF98
+_08076A78: .4byte gAvailablePokemonNames
 _08076A7C: .4byte gUnknown_80FA844
 _08076A80: .4byte gUnknown_80F4E54
 _08076A84: .4byte gUnknown_80FB668
@@ -73382,7 +73382,7 @@ _08076AD8:
 	bl sub_80522F4
 	b _08076B34
 	.align 2, 0
-_08076B1C: .4byte gUnknown_202DF98
+_08076B1C: .4byte gAvailablePokemonNames
 _08076B20: .4byte gUnknown_80F4E60
 _08076B24: .4byte gUnknown_80FB6A4
 _08076B28:
@@ -73502,7 +73502,7 @@ _08076B74:
 _08076C0C: .4byte gUnknown_80F4E5C
 _08076C10: .4byte gUnknown_203B418
 _08076C14: .4byte 0x000037f4
-_08076C18: .4byte gUnknown_202DF98
+_08076C18: .4byte gAvailablePokemonNames
 _08076C1C: .4byte gUnknown_80FB6D8
 _08076C20:
 	adds r7, r5, 0
@@ -73570,7 +73570,7 @@ _08076C9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08076CA8: .4byte gUnknown_202DF98
+_08076CA8: .4byte gAvailablePokemonNames
 _08076CAC: .4byte gUnknown_80FB6FC
 _08076CB0: .4byte gUnknown_80FB718
 	thumb_func_end sub_8076B48
@@ -73673,7 +73673,7 @@ _08076D54:
 	ldr r1, _08076D78
 	b _08076D7E
 	.align 2, 0
-_08076D74: .4byte gUnknown_202DF98
+_08076D74: .4byte gAvailablePokemonNames
 _08076D78: .4byte gUnknown_80F4EBC
 _08076D7C:
 	ldr r1, _08076DA4
@@ -73823,7 +73823,7 @@ _08076E6E:
 	.align 2, 0
 _08076EA0: .4byte gUnknown_202DE58
 _08076EA4: .4byte gUnknown_80FC0B8
-_08076EA8: .4byte gUnknown_202DF98
+_08076EA8: .4byte gAvailablePokemonNames
 _08076EAC: .4byte gUnknown_80FD550
 _08076EB0:
 	adds r0, r4, 0
@@ -73846,7 +73846,7 @@ _08076ECE:
 	bl sub_80522F4
 	b _08076F6E
 	.align 2, 0
-_08076EDC: .4byte gUnknown_202DF98
+_08076EDC: .4byte gAvailablePokemonNames
 _08076EE0: .4byte gUnknown_80FCA60
 _08076EE4:
 	ldr r7, [r4, 0x70]
@@ -73866,7 +73866,7 @@ _08076EE4:
 	bl strcpy
 	b _08076F22
 	.align 2, 0
-_08076F0C: .4byte gUnknown_202DF98
+_08076F0C: .4byte gAvailablePokemonNames
 _08076F10: .4byte gUnknown_202DEA8
 _08076F14: .4byte gUnknown_80FC0E4
 _08076F18:
@@ -73989,7 +73989,7 @@ _08076FE2:
 	.align 2, 0
 _08077008: .4byte gUnknown_202DE58
 _0807700C: .4byte gUnknown_80FC09C
-_08077010: .4byte gUnknown_202DF98
+_08077010: .4byte gAvailablePokemonNames
 _08077014: .4byte gUnknown_202DEA8
 _08077018: .4byte gUnknown_80FC0E4
 _0807701C:
@@ -74075,7 +74075,7 @@ sub_8077084:
 	bl strcpy
 	b _080770DA
 	.align 2, 0
-_080770C4: .4byte gUnknown_202DF98
+_080770C4: .4byte gAvailablePokemonNames
 _080770C8: .4byte gUnknown_202DE58
 _080770CC: .4byte gUnknown_80FC0C8
 _080770D0:
@@ -74177,7 +74177,7 @@ sub_8077160:
 	bl strcpy
 	b _080771B6
 	.align 2, 0
-_080771A0: .4byte gUnknown_202DF98
+_080771A0: .4byte gAvailablePokemonNames
 _080771A4: .4byte gUnknown_202DE58
 _080771A8: .4byte gUnknown_80FC0AC
 _080771AC:
@@ -74319,7 +74319,7 @@ _080772B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080772BC: .4byte gUnknown_202DF98
+_080772BC: .4byte gAvailablePokemonNames
 	thumb_func_end sub_8077274
 
 	thumb_func_start sub_80772C0
@@ -74387,7 +74387,7 @@ _08077320:
 	.align 2, 0
 _08077340: .4byte gUnknown_202DE58
 _08077344: .4byte gUnknown_80FC0B8
-_08077348: .4byte gUnknown_202DF98
+_08077348: .4byte gAvailablePokemonNames
 _0807734C: .4byte gUnknown_80FD550
 _08077350:
 	adds r0, r5, 0
@@ -74414,7 +74414,7 @@ _08077376:
 	bl sub_80522F4
 	b _08077422
 	.align 2, 0
-_08077384: .4byte gUnknown_202DF98
+_08077384: .4byte gAvailablePokemonNames
 _08077388: .4byte gUnknown_80FCA60
 _0807738C:
 	ldr r0, [r5, 0x70]
@@ -74437,7 +74437,7 @@ _0807738C:
 	bl sub_8041FD8
 	b _080773C4
 	.align 2, 0
-_080773B8: .4byte gUnknown_202DF98
+_080773B8: .4byte gAvailablePokemonNames
 _080773BC:
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -74570,7 +74570,7 @@ _08077490:
 	.align 2, 0
 _080774BC: .4byte gUnknown_202DE58
 _080774C0: .4byte gUnknown_80FC09C
-_080774C4: .4byte gUnknown_202DF98
+_080774C4: .4byte gAvailablePokemonNames
 _080774C8:
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -74662,7 +74662,7 @@ sub_8077540:
 	bl strcpy
 	b _0807758E
 	.align 2, 0
-_08077578: .4byte gUnknown_202DF98
+_08077578: .4byte gAvailablePokemonNames
 _0807757C: .4byte gUnknown_202DE58
 _08077580: .4byte gUnknown_80FC090
 _08077584:
@@ -74768,7 +74768,7 @@ _08077616:
 	.align 2, 0
 _08077654: .4byte gUnknown_202DE58
 _08077658: .4byte gUnknown_80FC084
-_0807765C: .4byte gUnknown_202DF98
+_0807765C: .4byte gAvailablePokemonNames
 _08077660: .4byte gUnknown_80FCA64
 _08077664:
 	ldr r4, [r5, 0x70]
@@ -74796,7 +74796,7 @@ _08077664:
 	bl sub_80522F4
 	b _080776B0
 	.align 2, 0
-_0807769C: .4byte gUnknown_202DF98
+_0807769C: .4byte gAvailablePokemonNames
 _080776A0: .4byte gUnknown_80FC1A4
 _080776A4:
 	ldr r0, _080776BC
@@ -74853,7 +74853,7 @@ sub_80776C0:
 	bl sub_80522F4
 	b _08077776
 	.align 2, 0
-_08077710: .4byte gUnknown_202DF98
+_08077710: .4byte gAvailablePokemonNames
 _08077714: .4byte gUnknown_80FCC18
 _08077718:
 	ldr r6, [r4, 0x70]
@@ -74885,7 +74885,7 @@ _08077718:
 	bl sub_80522F4
 	b _08077770
 	.align 2, 0
-_08077758: .4byte gUnknown_202DF98
+_08077758: .4byte gAvailablePokemonNames
 _0807775C: .4byte gUnknown_80F4E3C
 _08077760: .4byte gUnknown_80FB2E0
 _08077764:
@@ -74956,7 +74956,7 @@ _080777D6:
 	bl sub_80522F4
 	b _080778F0
 	.align 2, 0
-_080777E4: .4byte gUnknown_202DF98
+_080777E4: .4byte gAvailablePokemonNames
 _080777E8: .4byte gUnknown_80FCBF8
 _080777EC:
 	movs r6, 0x1
@@ -74998,7 +74998,7 @@ _080777EC:
 	bl sub_8070774
 	b _0807785C
 	.align 2, 0
-_08077844: .4byte gUnknown_202DF98
+_08077844: .4byte gAvailablePokemonNames
 _08077848: .4byte gUnknown_80F4E50
 _0807784C: .4byte gUnknown_80FB2AC
 _08077850:
@@ -75088,7 +75088,7 @@ _080778F0:
 	.align 2, 0
 _08077900: .4byte gUnknown_80FB2CC
 _08077904: .4byte gUnknown_80F4448
-_08077908: .4byte gUnknown_202DF98
+_08077908: .4byte gAvailablePokemonNames
 _0807790C: .4byte gUnknown_80FF01C
 	thumb_func_end sub_8077780
 
@@ -75134,7 +75134,7 @@ _08077940:
 	b _0807799E
 	.align 2, 0
 _08077964: .4byte gUnknown_80F4E40
-_08077968: .4byte gUnknown_202DF98
+_08077968: .4byte gAvailablePokemonNames
 _0807796C: .4byte gUnknown_80FC2B8
 _08077970:
 	movs r2, 0
@@ -75245,7 +75245,7 @@ sub_80779F0:
 	ldr r0, _08077A4C
 	b _08077AA2
 	.align 2, 0
-_08077A48: .4byte gUnknown_202DF98
+_08077A48: .4byte gAvailablePokemonNames
 _08077A4C: .4byte gUnknown_80FC2D8
 _08077A50:
 	movs r0, 0
@@ -75359,7 +75359,7 @@ sub_8077AE4:
 	ldr r0, _08077B30
 	b _08077B48
 	.align 2, 0
-_08077B2C: .4byte gUnknown_202DF98
+_08077B2C: .4byte gAvailablePokemonNames
 _08077B30: .4byte gUnknown_80FD500
 _08077B34:
 	adds r0, r4, 0
@@ -75472,7 +75472,7 @@ sub_8077BB4:
 	bl sub_80522F4
 	b _08077C34
 	.align 2, 0
-_08077C1C: .4byte gUnknown_202DF98
+_08077C1C: .4byte gAvailablePokemonNames
 _08077C20: .4byte gUnknown_80F4ECC
 _08077C24: .4byte gUnknown_80FB940
 _08077C28:
@@ -75608,7 +75608,7 @@ _08077CE8:
 	b _08077D3A
 	.align 2, 0
 _08077D1C: .4byte gUnknown_202DE30
-_08077D20: .4byte gUnknown_202DF98
+_08077D20: .4byte gAvailablePokemonNames
 _08077D24: .4byte gUnknown_80FB204
 _08077D28:
 	mov r0, r8
@@ -75750,7 +75750,7 @@ _08077E3C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077E44: .4byte gUnknown_202DF98
+_08077E44: .4byte gAvailablePokemonNames
 _08077E48: .4byte gUnknown_80FAEA0
 	thumb_func_end sub_8077DDC
 
@@ -75812,7 +75812,7 @@ _08077EC0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077EC8: .4byte gUnknown_202DF98
+_08077EC8: .4byte gAvailablePokemonNames
 _08077ECC: .4byte gUnknown_80FAEC8
 	thumb_func_end sub_8077E4C
 
@@ -75864,7 +75864,7 @@ _08077F30:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077F38: .4byte gUnknown_202DF98
+_08077F38: .4byte gAvailablePokemonNames
 _08077F3C: .4byte gUnknown_80FAFAC
 	thumb_func_end sub_8077ED0
 
@@ -75931,7 +75931,7 @@ _08077F88:
 	ldr r0, _08077FC4
 	b _0807801E
 	.align 2, 0
-_08077FC0: .4byte gUnknown_202DF98
+_08077FC0: .4byte gAvailablePokemonNames
 _08077FC4: .4byte gPtrCantLeechSeedMonMessage
 _08077FC8:
 	adds r6, r7, 0
@@ -76141,7 +76141,7 @@ _08078134:
 	adds r3, r1, 0
 	b _0807818C
 	.align 2, 0
-_0807816C: .4byte gUnknown_202DF98
+_0807816C: .4byte gAvailablePokemonNames
 _08078170: .4byte gUnknown_80FA79C
 _08078174: .4byte gUnknown_80F4EF0
 _08078178:
@@ -76229,7 +76229,7 @@ sub_80781DC:
 	bl sub_80522F4
 	b _0807823C
 	.align 2, 0
-_08078228: .4byte gUnknown_202DF98
+_08078228: .4byte gAvailablePokemonNames
 _0807822C: .4byte gUnknown_80FB73C
 _08078230:
 	ldr r0, _08078248
@@ -76291,7 +76291,7 @@ sub_807824C:
 	bl sub_80522F4
 	b _080782BC
 	.align 2, 0
-_080782A8: .4byte gUnknown_202DF98
+_080782A8: .4byte gAvailablePokemonNames
 _080782AC: .4byte gUnknown_80FB780
 _080782B0:
 	ldr r0, _080782C8
@@ -76349,7 +76349,7 @@ sub_80782CC:
 	bl sub_80522F4
 	b _08078338
 	.align 2, 0
-_08078320: .4byte gUnknown_202DF98
+_08078320: .4byte gAvailablePokemonNames
 _08078324: .4byte gUnknown_80F4EC4
 _08078328: .4byte gUnknown_80FB8BC
 _0807832C:
@@ -76408,7 +76408,7 @@ sub_8078348:
 	bl sub_80522F4
 	b _080783B4
 	.align 2, 0
-_0807839C: .4byte gUnknown_202DF98
+_0807839C: .4byte gAvailablePokemonNames
 _080783A0: .4byte gUnknown_80F4EC8
 _080783A4: .4byte gUnknown_80FB900
 _080783A8:
@@ -76474,7 +76474,7 @@ _080783FA:
 	bl sub_80522F4
 	b _0807856A
 	.align 2, 0
-_08078420: .4byte gUnknown_202DF98
+_08078420: .4byte gAvailablePokemonNames
 _08078424: .4byte gUnknown_80FB994
 _08078428:
 	movs r6, 0
@@ -76642,7 +76642,7 @@ _0807856A:
 	.align 2, 0
 _0807857C: .4byte gUnknown_203B418
 _08078580: .4byte 0x000135cc
-_08078584: .4byte gUnknown_202DF98
+_08078584: .4byte gAvailablePokemonNames
 _08078588: .4byte gUnknown_80F4ED0
 _0807858C: .4byte 0x000037fc
 _08078590: .4byte gUnknown_80FB978
@@ -76725,7 +76725,7 @@ _0807861C:
 	b _08078668
 	.align 2, 0
 _08078634: .4byte gUnknown_80F4EA4
-_08078638: .4byte gUnknown_202DF98
+_08078638: .4byte gAvailablePokemonNames
 _0807863C: .4byte gUnknown_80FB004
 _08078640:
 	ldr r0, _08078674
@@ -76857,7 +76857,7 @@ _08078740: .4byte 0x000135cc
 _08078744: .4byte gUnknown_80F4EA8
 _08078748: .4byte 0x00017b30
 _0807874C: .4byte 0x00017b3c
-_08078750: .4byte gUnknown_202DF98
+_08078750: .4byte gAvailablePokemonNames
 _08078754: .4byte gUnknown_80FB01C
 	thumb_func_end sub_8078678
 
@@ -76907,7 +76907,7 @@ sub_8078758:
 	bl sub_80522F4
 	b _080787D4
 	.align 2, 0
-_080787BC: .4byte gUnknown_202DF98
+_080787BC: .4byte gAvailablePokemonNames
 _080787C0: .4byte gUnknown_80F4ED8
 _080787C4: .4byte gUnknown_80FB9F0
 _080787C8:
@@ -76964,7 +76964,7 @@ sub_80787E4:
 	bl sub_80522F4
 	b _0807884C
 	.align 2, 0
-_08078834: .4byte gUnknown_202DF98
+_08078834: .4byte gAvailablePokemonNames
 _08078838: .4byte gUnknown_202DE30
 _0807883C: .4byte gUnknown_80FBA38
 _08078840:
@@ -77031,7 +77031,7 @@ _08078884:
 	bl sub_80522F4
 	b _080788D8
 	.align 2, 0
-_080788C0: .4byte gUnknown_202DF98
+_080788C0: .4byte gAvailablePokemonNames
 _080788C4: .4byte gUnknown_80F4EE4
 _080788C8: .4byte gUnknown_80FBA80
 _080788CC:
@@ -77092,7 +77092,7 @@ sub_80788E8:
 	bl sub_80522F4
 	b _08078958
 	.align 2, 0
-_08078940: .4byte gUnknown_202DF98
+_08078940: .4byte gAvailablePokemonNames
 _08078944: .4byte gUnknown_80F4EEC
 _08078948: .4byte gUnknown_80FBB04
 _0807894C:
@@ -77178,7 +77178,7 @@ _080789BC:
 	bl sub_80522F4
 	b _08078A4A
 	.align 2, 0
-_080789E8: .4byte gUnknown_202DF98
+_080789E8: .4byte gAvailablePokemonNames
 _080789EC: .4byte gUnknown_80FBBD4
 _080789F0:
 	mov r0, r8
@@ -77285,7 +77285,7 @@ sub_8078A58:
 	ldr r0, _08078AD4
 	b _08078B22
 	.align 2, 0
-_08078AD0: .4byte gUnknown_202DF98
+_08078AD0: .4byte gAvailablePokemonNames
 _08078AD4: .4byte gUnknown_80FBD9C
 _08078AD8:
 	ldr r0, _08078ADC
@@ -77327,7 +77327,7 @@ _08078B22:
 	bl sub_80522F4
 	b _08078B44
 	.align 2, 0
-_08078B30: .4byte gUnknown_202DF98
+_08078B30: .4byte gAvailablePokemonNames
 _08078B34: .4byte gUnknown_80FBD78
 _08078B38:
 	ldr r0, _08078B58
@@ -77496,7 +77496,7 @@ _08078C5E:
 	.align 2, 0
 _08078C8C: .4byte 0x000003e7
 _08078C90: .4byte gUnknown_80FBE64
-_08078C94: .4byte gUnknown_202DF98
+_08078C94: .4byte gAvailablePokemonNames
 _08078C98: .4byte gUnknown_80FBDF0
 _08078C9C:
 	adds r0, r6, 0
@@ -77511,7 +77511,7 @@ _08078C9C:
 	ldr r0, _08078CBC
 	b _08078D4E
 	.align 2, 0
-_08078CB8: .4byte gUnknown_202DF98
+_08078CB8: .4byte gAvailablePokemonNames
 _08078CBC: .4byte gUnknown_80FBDC4
 _08078CC0:
 	movs r0, 0x9E
@@ -77561,7 +77561,7 @@ _08078CFA:
 	b _08078D4E
 	.align 2, 0
 _08078D28: .4byte 0x000003e7
-_08078D2C: .4byte gUnknown_202DF98
+_08078D2C: .4byte gAvailablePokemonNames
 _08078D30: .4byte gUnknown_80FBE14
 _08078D34:
 	ldr r0, [r5]
@@ -77654,7 +77654,7 @@ sub_8078D8C:
 	bl sub_80522F4
 	b _08078E08
 	.align 2, 0
-_08078DF0: .4byte gUnknown_202DF98
+_08078DF0: .4byte gAvailablePokemonNames
 _08078DF4: .4byte gUnknown_80F4F1C
 _08078DF8: .4byte gUnknown_80FBF68
 _08078DFC:
@@ -77762,7 +77762,7 @@ _08078EC0:
 	bl sub_80522F4
 	b _08078F2E
 	.align 2, 0
-_08078ECC: .4byte gUnknown_202DF98
+_08078ECC: .4byte gAvailablePokemonNames
 _08078ED0: .4byte gUnknown_80FBEE4
 _08078ED4:
 	strh r4, [r7, 0x4]
@@ -77866,7 +77866,7 @@ _08078F78:
 	bl sub_80522F4
 	b _08078FCC
 	.align 2, 0
-_08078FB4: .4byte gUnknown_202DF98
+_08078FB4: .4byte gAvailablePokemonNames
 _08078FB8: .4byte gUnknown_80F4F04
 _08078FBC: .4byte gUnknown_80FBF28
 _08078FC0:
@@ -77952,7 +77952,7 @@ _0807904C:
 	bl sub_80522F4
 	b _080790B6
 	.align 2, 0
-_08079064: .4byte gUnknown_202DF98
+_08079064: .4byte gAvailablePokemonNames
 _08079068: .4byte gUnknown_80FC000
 _0807906C: .4byte gUnknown_80FBFB8
 _08079070:
@@ -78107,7 +78107,7 @@ sub_8079140:
 	bl sub_8040A84
 	b _080791C8
 	.align 2, 0
-_080791B0: .4byte gUnknown_202DF98
+_080791B0: .4byte gAvailablePokemonNames
 _080791B4: .4byte gUnknown_80F4F08
 _080791B8: .4byte gUnknown_80FB7F4
 _080791BC:
@@ -78177,7 +78177,7 @@ sub_80791D8:
 	bl sub_8040A84
 	b _08079260
 	.align 2, 0
-_08079248: .4byte gUnknown_202DF98
+_08079248: .4byte gAvailablePokemonNames
 _0807924C: .4byte gUnknown_80FB834
 _08079250: .4byte gUnknown_80F4F0C
 _08079254:
@@ -78240,7 +78240,7 @@ sub_8079270:
 	bl sub_8040A84
 	b _080792E8
 	.align 2, 0
-_080792D0: .4byte gUnknown_202DF98
+_080792D0: .4byte gAvailablePokemonNames
 _080792D4: .4byte gUnknown_80F4F10
 _080792D8: .4byte gUnknown_80FB880
 _080792DC:
@@ -78392,7 +78392,7 @@ _080793DE:
 	bl sub_80522F4
 	b _08079410
 	.align 2, 0
-_080793FC: .4byte gUnknown_202DF98
+_080793FC: .4byte gAvailablePokemonNames
 _08079400: .4byte gUnknown_80FC33C
 _08079404:
 	ldr r0, _0807941C
@@ -78449,7 +78449,7 @@ _0807944E:
 	bl sub_80522F4
 	b _08079480
 	.align 2, 0
-_0807946C: .4byte gUnknown_202DF98
+_0807946C: .4byte gAvailablePokemonNames
 _08079470: .4byte gUnknown_80FC388
 _08079474:
 	ldr r0, _0807948C
@@ -78506,7 +78506,7 @@ _080794BE:
 	bl sub_80522F4
 	b _080794F0
 	.align 2, 0
-_080794DC: .4byte gUnknown_202DF98
+_080794DC: .4byte gAvailablePokemonNames
 _080794E0: .4byte gUnknown_80FC3D8
 _080794E4:
 	ldr r0, _080794FC
@@ -78563,7 +78563,7 @@ _0807952E:
 	bl sub_80522F4
 	b _08079560
 	.align 2, 0
-_0807954C: .4byte gUnknown_202DF98
+_0807954C: .4byte gAvailablePokemonNames
 _08079550: .4byte gUnknown_80FC428
 _08079554:
 	ldr r0, _0807956C
@@ -78703,7 +78703,7 @@ _08079638:
 	bl sub_80522F4
 	b _08079752
 	.align 2, 0
-_08079660: .4byte gUnknown_202DF98
+_08079660: .4byte gAvailablePokemonNames
 _08079664: .4byte gUnknown_80FC074
 _08079668:
 	adds r0, r5, 0
@@ -78901,7 +78901,7 @@ sub_80797A0:
 	bl sub_80522F4
 	b _08079822
 	.align 2, 0
-_080797E0: .4byte gUnknown_202DF98
+_080797E0: .4byte gAvailablePokemonNames
 _080797E4: .4byte gUnknown_80FB10C
 _080797E8:
 	adds r0, r4, 0
@@ -78980,7 +78980,7 @@ sub_8079834:
 	bl sub_80522F4
 	b _080798A0
 	.align 2, 0
-_08079888: .4byte gUnknown_202DF98
+_08079888: .4byte gAvailablePokemonNames
 _0807988C: .4byte gUnknown_80F4E88
 _08079890: .4byte gUnknown_80FB048
 _08079894:
@@ -79039,7 +79039,7 @@ sub_80798B0:
 	bl sub_80522F4
 	b _0807991C
 	.align 2, 0
-_08079904: .4byte gUnknown_202DF98
+_08079904: .4byte gAvailablePokemonNames
 _08079908: .4byte gUnknown_80F4E8C
 _0807990C: .4byte gUnknown_80FB09C
 _08079910:
@@ -79098,7 +79098,7 @@ sub_807992C:
 	bl sub_80522F4
 	b _08079998
 	.align 2, 0
-_08079980: .4byte gUnknown_202DF98
+_08079980: .4byte gAvailablePokemonNames
 _08079984: .4byte gUnknown_80F4EB4
 _08079988: .4byte gUnknown_80FAE1C
 _0807998C:
@@ -79157,7 +79157,7 @@ sub_80799A8:
 	bl sub_80522F4
 	b _08079A14
 	.align 2, 0
-_080799FC: .4byte gUnknown_202DF98
+_080799FC: .4byte gAvailablePokemonNames
 _08079A00: .4byte gUnknown_80F4E90
 _08079A04: .4byte gUnknown_80FAF5C
 _08079A08:
@@ -79216,7 +79216,7 @@ sub_8079A24:
 	bl sub_80522F4
 	b _08079A90
 	.align 2, 0
-_08079A78: .4byte gUnknown_202DF98
+_08079A78: .4byte gAvailablePokemonNames
 _08079A7C: .4byte gUnknown_80F4E84
 _08079A80: .4byte gUnknown_80FB130
 _08079A84:
@@ -79275,7 +79275,7 @@ sub_8079AA0:
 	bl sub_80522F4
 	b _08079B0C
 	.align 2, 0
-_08079AF4: .4byte gUnknown_202DF98
+_08079AF4: .4byte gAvailablePokemonNames
 _08079AF8: .4byte gUnknown_80F4E80
 _08079AFC: .4byte gUnknown_80FB17C
 _08079B00:
@@ -79335,7 +79335,7 @@ sub_8079B1C:
 	b _08079B92
 	.align 2, 0
 _08079B70: .4byte gUnknown_80F4ED4
-_08079B74: .4byte gUnknown_202DF98
+_08079B74: .4byte gAvailablePokemonNames
 _08079B78: .4byte gUnknown_80FB9B0
 _08079B7C:
 	ldr r0, _08079BA0
@@ -79355,7 +79355,7 @@ _08079B98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079BA0: .4byte gUnknown_202DF98
+_08079BA0: .4byte gAvailablePokemonNames
 _08079BA4: .4byte gUnknown_80FB9D8
 	thumb_func_end sub_8079B1C
 
@@ -79398,7 +79398,7 @@ sub_8079BA8:
 	bl sub_80522F4
 	b _08079C14
 	.align 2, 0
-_08079BFC: .4byte gUnknown_202DF98
+_08079BFC: .4byte gAvailablePokemonNames
 _08079C00: .4byte gUnknown_80F4EE8
 _08079C04: .4byte gUnknown_80FBAC0
 _08079C08:
@@ -79457,7 +79457,7 @@ sub_8079C24:
 	bl sub_80522F4
 	b _08079C90
 	.align 2, 0
-_08079C78: .4byte gUnknown_202DF98
+_08079C78: .4byte gAvailablePokemonNames
 _08079C7C: .4byte gUnknown_80F4EF8
 _08079C80: .4byte gUnknown_80FBBF0
 _08079C84:
@@ -79516,7 +79516,7 @@ sub_8079CA0:
 	bl sub_80522F4
 	b _08079D0C
 	.align 2, 0
-_08079CF4: .4byte gUnknown_202DF98
+_08079CF4: .4byte gAvailablePokemonNames
 _08079CF8: .4byte gUnknown_80F4F18
 _08079CFC: .4byte gUnknown_80FBC38
 _08079D00:
@@ -79590,7 +79590,7 @@ _08079D50:
 	bl sub_80522F4
 	b _08079DA8
 	.align 2, 0
-_08079D90: .4byte gUnknown_202DF98
+_08079D90: .4byte gAvailablePokemonNames
 _08079D94: .4byte gUnknown_80F4F20
 _08079D98: .4byte gUnknown_80FBC7C
 _08079D9C:
@@ -79649,7 +79649,7 @@ sub_8079DB8:
 	bl sub_80522F4
 	b _08079E24
 	.align 2, 0
-_08079E0C: .4byte gUnknown_202DF98
+_08079E0C: .4byte gAvailablePokemonNames
 _08079E10: .4byte gUnknown_80F4F24
 _08079E14: .4byte gUnknown_80FBCC8
 _08079E18:
@@ -79771,7 +79771,7 @@ _08079ED8:
 	bl sub_80522F4
 	b _08079F08
 	.align 2, 0
-_08079EF4: .4byte gUnknown_202DF98
+_08079EF4: .4byte gAvailablePokemonNames
 _08079EF8: .4byte gUnknown_80FBD18
 _08079EFC:
 	ldr r0, _08079F1C
@@ -80087,7 +80087,7 @@ _0807A166:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A170: .4byte gUnknown_202DF98
+_0807A170: .4byte gAvailablePokemonNames
 _0807A174: .4byte _0807A178
 	.align 2, 0
 _0807A178:
@@ -80244,7 +80244,7 @@ sub_807A290:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A2C4: .4byte gUnknown_202DF98
+_0807A2C4: .4byte gAvailablePokemonNames
 _0807A2C8: .4byte _0807A2CC
 	.align 2, 0
 _0807A2CC:
@@ -80317,7 +80317,7 @@ sub_807A324:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A358: .4byte gUnknown_202DF98
+_0807A358: .4byte gAvailablePokemonNames
 _0807A35C: .4byte _0807A360
 	.align 2, 0
 _0807A360:
@@ -80419,7 +80419,7 @@ sub_807A400:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A434: .4byte gUnknown_202DF98
+_0807A434: .4byte gAvailablePokemonNames
 _0807A438: .4byte _0807A43C
 	.align 2, 0
 _0807A43C:
@@ -80517,7 +80517,7 @@ _0807A4DA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A4FC: .4byte gUnknown_202DF98
+_0807A4FC: .4byte gAvailablePokemonNames
 _0807A500: .4byte _0807A504
 	.align 2, 0
 _0807A504:
@@ -80648,7 +80648,7 @@ sub_807A5D0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A604: .4byte gUnknown_202DF98
+_0807A604: .4byte gAvailablePokemonNames
 _0807A608: .4byte _0807A60C
 	.align 2, 0
 _0807A60C:
@@ -80731,7 +80731,7 @@ _0807A6B2:
 	.align 2, 0
 _0807A6B8: .4byte gUnknown_203B418
 _0807A6BC: .4byte 0x000037fc
-_0807A6C0: .4byte gUnknown_202DF98
+_0807A6C0: .4byte gAvailablePokemonNames
 _0807A6C4: .4byte gUnknown_80FA9A0
 	thumb_func_end sub_807A5D0
 
@@ -80760,7 +80760,7 @@ sub_807A6C8:
 	beq _0807A70C
 	b _0807A716
 	.align 2, 0
-_0807A6F8: .4byte gUnknown_202DF98
+_0807A6F8: .4byte gAvailablePokemonNames
 _0807A6FC:
 	ldr r0, _0807A708
 	ldr r1, [r0]
@@ -80817,7 +80817,7 @@ sub_807A734:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A764: .4byte gUnknown_202DF98
+_0807A764: .4byte gAvailablePokemonNames
 _0807A768: .4byte _0807A76C
 	.align 2, 0
 _0807A76C:
@@ -80892,7 +80892,7 @@ sub_807A7C8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A7FC: .4byte gUnknown_202DF98
+_0807A7FC: .4byte gAvailablePokemonNames
 _0807A800: .4byte _0807A804
 	.align 2, 0
 _0807A804:
@@ -80981,7 +80981,7 @@ sub_807A888:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A8B8: .4byte gUnknown_202DF98
+_0807A8B8: .4byte gAvailablePokemonNames
 _0807A8BC: .4byte _0807A8C0
 	.align 2, 0
 _0807A8C0:
@@ -81063,7 +81063,7 @@ _0807A95C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807A964: .4byte gUnknown_202DF98
+_0807A964: .4byte gAvailablePokemonNames
 _0807A968: .4byte gUnknown_80FABC0
 	thumb_func_end sub_807A924
 
@@ -81165,7 +81165,7 @@ _0807AA20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807AA28: .4byte gUnknown_202DF98
+_0807AA28: .4byte gAvailablePokemonNames
 _0807AA2C: .4byte gUnknown_80FA8BC
 	thumb_func_end sub_807A9D8
 
@@ -85668,7 +85668,7 @@ _0807CC08:
 	b _0807CC3C
 	.align 2, 0
 _0807CC20: .4byte 0xffffff00
-_0807CC24: .4byte gUnknown_202DF98
+_0807CC24: .4byte gAvailablePokemonNames
 _0807CC28: .4byte gUnknown_80FC714
 _0807CC2C:
 	cmp r0, 0x7
@@ -85684,7 +85684,7 @@ _0807CC3C:
 	bl sub_80522A8
 	b _0807CCDC
 	.align 2, 0
-_0807CC48: .4byte gUnknown_202DF98
+_0807CC48: .4byte gAvailablePokemonNames
 _0807CC4C: .4byte gUnknown_80FC718
 _0807CC50:
 	adds r0, r7, 0
@@ -85737,7 +85737,7 @@ _0807CC84:
 	bl sub_8055FA0
 	b _0807CCDE
 	.align 2, 0
-_0807CCB8: .4byte gUnknown_202DF98
+_0807CCB8: .4byte gAvailablePokemonNames
 _0807CCBC: .4byte gUnknown_80FC6A8
 _0807CCC0:
 	mov r3, r9
@@ -85882,7 +85882,7 @@ _0807CDC4:
 	adds r0, r6, 0
 	b _0807CE02
 	.align 2, 0
-_0807CDDC: .4byte gUnknown_202DF98
+_0807CDDC: .4byte gAvailablePokemonNames
 _0807CDE0: .4byte gUnknown_80FCA10
 _0807CDE4:
 	ldr r0, _0807CE0C
@@ -85904,7 +85904,7 @@ _0807CE02:
 	bl sub_80522F4
 	b _0807D02A
 	.align 2, 0
-_0807CE0C: .4byte gUnknown_202DF98
+_0807CE0C: .4byte gAvailablePokemonNames
 _0807CE10: .4byte gUnknown_80FCBCC
 _0807CE14:
 	str r0, [sp, 0x28]
@@ -86324,7 +86324,7 @@ sub_807D148:
 	ldr r0, _0807D184
 	b _0807D194
 	.align 2, 0
-_0807D180: .4byte gUnknown_202DF98
+_0807D180: .4byte gAvailablePokemonNames
 _0807D184: .4byte gUnknown_80FCAE8
 _0807D188:
 	bl sub_80441E8
@@ -87416,7 +87416,7 @@ sub_807DA14:
 	ldr r0, _0807DA4C
 	b _0807DA5C
 	.align 2, 0
-_0807DA48: .4byte gUnknown_202DF98
+_0807DA48: .4byte gAvailablePokemonNames
 _0807DA4C: .4byte gUnknown_80FCB98
 _0807DA50:
 	bl sub_80441E8
@@ -88086,7 +88086,7 @@ _0807DF8E:
 	.align 2, 0
 _0807DFA8: .4byte gUnknown_203B418
 _0807DFAC: .4byte 0x000135cc
-_0807DFB0: .4byte gUnknown_202DF98
+_0807DFB0: .4byte gAvailablePokemonNames
 _0807DFB4:
 	mov r0, r10
 	bl sub_807E580
@@ -88317,7 +88317,7 @@ _0807E174:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E184: .4byte gUnknown_202DF98
+_0807E184: .4byte gAvailablePokemonNames
 _0807E188: .4byte gUnknown_80F96BC
 _0807E18C: .4byte gUnknown_8107178
 _0807E190: .4byte 0xffff0000
@@ -88431,7 +88431,7 @@ sub_807E254:
 	adds r1, r6, 0
 	b _0807E286
 	.align 2, 0
-_0807E270: .4byte gUnknown_202DF98
+_0807E270: .4byte gAvailablePokemonNames
 _0807E274:
 	adds r0, r7, 0
 	movs r1, 0xE
@@ -88451,7 +88451,7 @@ _0807E286:
 	bl sub_80522F4
 	b _0807E366
 	.align 2, 0
-_0807E29C: .4byte gUnknown_202DF98
+_0807E29C: .4byte gAvailablePokemonNames
 _0807E2A0: .4byte gUnknown_80FCAC0
 _0807E2A4:
 	ldrh r1, [r6, 0x6]
@@ -89171,7 +89171,7 @@ _0807E866:
 _0807E874: .4byte gUnknown_203B418
 _0807E878: .4byte 0x000181f8
 _0807E87C: .4byte 0x0001356c
-_0807E880: .4byte gUnknown_202DF98
+_0807E880: .4byte gAvailablePokemonNames
 _0807E884: .4byte gUnknown_80FC5E0
 _0807E888: .4byte 0x000135cc
 	thumb_func_end sub_807E7FC
@@ -90666,7 +90666,7 @@ sub_807F43C:
 	ldr r0, _0807F46C
 	b _0807F694
 	.align 2, 0
-_0807F468: .4byte gUnknown_202DF98
+_0807F468: .4byte gAvailablePokemonNames
 _0807F46C: .4byte gUnknown_80FCB40
 _0807F470:
 	ldr r0, [sp, 0xEC]
@@ -90681,7 +90681,7 @@ _0807F470:
 	mov r0, r8
 	b _0807F698
 	.align 2, 0
-_0807F488: .4byte gUnknown_202DF98
+_0807F488: .4byte gAvailablePokemonNames
 _0807F48C: .4byte gUnknown_80FCB70
 _0807F490:
 	mov r1, r8
@@ -91163,7 +91163,7 @@ _0807F7FC:
 	bl sub_807F9BC
 	b _0807F99C
 	.align 2, 0
-_0807F860: .4byte gUnknown_202DF98
+_0807F860: .4byte gAvailablePokemonNames
 _0807F864: .4byte gUnknown_80FE690
 _0807F868: .4byte 0x000001a3
 _0807F86C: .4byte gUnknown_80F4448
@@ -92072,7 +92072,7 @@ _0807FF50:
 	bge _0807FF70
 	b _0807FF6C
 	.align 2, 0
-_0807FF58: .4byte gUnknown_202DF98
+_0807FF58: .4byte gAvailablePokemonNames
 _0807FF5C: .4byte gUnknown_80FDB5C
 _0807FF60: .4byte gUnknown_203B418
 _0807FF64: .4byte 0x0001820f
@@ -92897,7 +92897,7 @@ _080805C4:
 	bl sub_80522F4
 	b _080805F6
 	.align 2, 0
-_080805E4: .4byte gUnknown_202DF98
+_080805E4: .4byte gAvailablePokemonNames
 _080805E8: .4byte gUnknown_80F970C
 _080805EC:
 	ldr r0, _08080618
@@ -99478,7 +99478,7 @@ _08083AE4:
 	bl sub_80709C8
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	b _08083B0E
 	.align 2, 0
 _08083AFC: .4byte gUnknown_203B418
@@ -99487,7 +99487,7 @@ _08083B04:
 	ldr r0, _08083C04
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 _08083B0E:
 	mov r0, sp
 	adds r1, r5, 0
@@ -99495,7 +99495,7 @@ _08083B0E:
 	adds r0, r4, 0
 	adds r0, 0xA
 	mov r1, sp
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r2, 0
 	mov r3, r8
 	strh r3, [r4, 0x14]
@@ -100776,7 +100776,7 @@ sub_8084448:
 	ldr r0, _08084480
 	b _080844F0
 	.align 2, 0
-_0808447C: .4byte gUnknown_202DF98
+_0808447C: .4byte gAvailablePokemonNames
 _08084480: .4byte gUnknown_80FA464
 _08084484:
 	ldr r4, _080844FC
@@ -100970,7 +100970,7 @@ sub_80845E0:
 	ldr r0, _08084624
 	b _080846B4
 	.align 2, 0
-_08084620: .4byte gUnknown_202DF98
+_08084620: .4byte gAvailablePokemonNames
 _08084624: .4byte gUnknown_80FA530
 _08084628:
 	adds r7, r4, 0
@@ -105524,11 +105524,11 @@ sub_8086B14:
 	ldr r4, _08086B90
 	adds r0, r4, 0
 	movs r1, 0x32
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0xFC
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -105889,15 +105889,15 @@ sub_8086E9C:
 	ldr r4, _08086EFC
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r0, r4, 0
 	adds r0, 0x50
 	movs r1, 0x5E
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0xA0
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -105925,15 +105925,15 @@ sub_8086F00:
 	ldr r4, _08086F50
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r0, r4, 0
 	adds r0, 0x50
 	movs r1, 0x5E
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0xA0
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -106287,11 +106287,11 @@ sub_8087230:
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x91
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -106354,11 +106354,11 @@ _08087300:
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x91
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -106915,7 +106915,7 @@ sub_80877E8:
 	bl sub_8085860
 	ldr r0, _08087844
 	movs r1, 0x92
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -106986,7 +106986,7 @@ _080878B4:
 	bl sub_803F878
 	ldr r0, _080878F0
 	movs r1, 0x92
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -107716,7 +107716,7 @@ sub_8087F54:
 	bl sub_8085860
 	ldr r0, _08087FB0
 	movs r1, 0x90
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -107746,7 +107746,7 @@ sub_8087FB4:
 	bl sub_806CDD4
 	ldr r0, _08087FF4
 	movs r1, 0x90
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -107807,7 +107807,7 @@ _08088060:
 	bl sub_8085860
 	ldr r0, _08088084
 	movs r1, 0x90
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -108467,11 +108467,11 @@ sub_808862C:
 	ldr r4, _080886BC
 	ldr r1, _080886C0
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -108527,11 +108527,11 @@ sub_80886C4:
 	ldr r4, _08088754
 	ldr r1, _08088758
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -108606,11 +108606,11 @@ _080887E0:
 	ldr r4, _08088810
 	ldr r1, _08088814
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -109257,11 +109257,11 @@ sub_8088DC0:
 	ldr r4, _08088E54
 	ldr r1, _08088E58
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -109316,11 +109316,11 @@ sub_8088E5C:
 	ldr r4, _08088EE0
 	ldr r1, _08088EE4
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -109789,7 +109789,7 @@ sub_80892C8:
 	ldr r0, _08089324
 	movs r1, 0xCE
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -109851,7 +109851,7 @@ _0808938C:
 	ldr r0, _080893B0
 	movs r1, 0xCE
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -110484,7 +110484,7 @@ sub_8089914:
 	bl sub_8085860
 	ldr r0, _08089974
 	movs r1, 0x96
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -110543,7 +110543,7 @@ _080899DA:
 	bl sub_8085860
 	ldr r0, _080899FC
 	movs r1, 0x96
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -110832,7 +110832,7 @@ sub_8089C44:
 	bl sub_8085860
 	ldr r0, _08089C88
 	ldr r1, _08089C8C
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -110879,7 +110879,7 @@ _08089CD8:
 	bl sub_8085860
 	ldr r0, _08089CF4
 	ldr r1, _08089CF8
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111136,7 +111136,7 @@ sub_8089EFC:
 	ldr r0, _08089F40
 	movs r1, 0x86
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111168,7 +111168,7 @@ sub_8089F44:
 	ldr r0, _08089F88
 	movs r1, 0x86
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111214,7 +111214,7 @@ _08089FD0:
 	ldr r0, _08089FEC
 	movs r1, 0x86
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111516,7 +111516,7 @@ sub_808A264:
 	ldr r0, _0808A2BC
 	movs r1, 0x87
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -111549,7 +111549,7 @@ sub_808A2C0:
 	ldr r0, _0808A304
 	movs r1, 0x87
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111595,7 +111595,7 @@ _0808A34C:
 	ldr r0, _0808A368
 	movs r1, 0x87
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111926,7 +111926,7 @@ sub_808A608:
 	bl sub_8085860
 	ldr r0, _0808A660
 	ldr r1, _0808A664
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -111981,7 +111981,7 @@ _0808A6C2:
 	bl sub_8085860
 	ldr r0, _0808A6E0
 	ldr r1, _0808A6E4
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -112342,7 +112342,7 @@ sub_808A9E4:
 	bl sub_8085860
 	ldr r0, _0808AA34
 	ldr r1, _0808AA38
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -112378,7 +112378,7 @@ sub_808AA3C:
 	bl sub_8085860
 	ldr r0, _0808AA8C
 	ldr r1, _0808AA90
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -112416,7 +112416,7 @@ sub_808AA94:
 	bl sub_8085860
 	ldr r0, _0808AAE8
 	ldr r1, _0808AAEC
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -112680,7 +112680,7 @@ _0808AD1E:
 	bl sub_80855E4
 	ldr r0, _0808AD44
 	adds r1, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 _0808AD38:
 	pop {r4}
 	pop {r0}
@@ -112739,7 +112739,7 @@ _0808ADA4:
 	bl sub_80855E4
 	ldr r0, _0808ADC8
 	adds r1, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 _0808ADBE:
 	pop {r4}
 	pop {r0}
@@ -112799,7 +112799,7 @@ _0808AE2A:
 	bl sub_80855E4
 	ldr r0, _0808AE50
 	adds r1, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 _0808AE44:
 	pop {r4}
 	pop {r0}
@@ -113016,7 +113016,7 @@ _0808B01E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B028: .4byte gUnknown_202DF98
+_0808B028: .4byte gAvailablePokemonNames
 _0808B02C: .4byte gUnknown_81050B4
 	thumb_func_end sub_808AFB0
 
@@ -113071,7 +113071,7 @@ _0808B09E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B0A8: .4byte gUnknown_202DF98
+_0808B0A8: .4byte gAvailablePokemonNames
 _0808B0AC: .4byte gUnknown_810517C
 	thumb_func_end sub_808B030
 
@@ -113126,7 +113126,7 @@ _0808B11E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B128: .4byte gUnknown_202DF98
+_0808B128: .4byte gAvailablePokemonNames
 _0808B12C: .4byte gUnknown_8105244
 	thumb_func_end sub_808B0B0
 
@@ -113391,7 +113391,7 @@ sub_808B2F4:
 	bl sub_8085860
 	ldr r0, _0808B354
 	ldr r1, _0808B358
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -113448,7 +113448,7 @@ _0808B3BE:
 	bl sub_8085860
 	ldr r0, _0808B3DC
 	ldr r1, _0808B3E0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -113594,7 +113594,7 @@ sub_808B50C:
 	adds r5, r0, 0
 	ldr r0, _0808B59C
 	ldr r1, _0808B5A0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	ldr r4, _0808B5A4
 	adds r0, r4, 0
 	bl sub_80855E4
@@ -113668,7 +113668,7 @@ JirachiWish:
 	adds r6, r0, 0
 	ldr r0, _0808B82C
 	ldr r1, _0808B830
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	ldr r4, _0808B834
 	adds r0, r4, 0
 	bl sub_80855E4
@@ -114140,7 +114140,7 @@ _0808B9F8:
 _0808BA30: .4byte gUnknown_8105AD4
 _0808BA34: .4byte 0x0000015d
 _0808BA38: .4byte gUnknown_8105B20
-_0808BA3C: .4byte gUnknown_202DF98
+_0808BA3C: .4byte gAvailablePokemonNames
 _0808BA40: .4byte gUnknown_202DE58
 _0808BA44: .4byte gUnknown_8105B68
 _0808BA48: .4byte gUnknown_8105BA8
@@ -114631,7 +114631,7 @@ _0808BE48:
 	ldr r0, _0808BE6C
 	movs r1, 0x89
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -114985,11 +114985,11 @@ _0808C156:
 	movs r1, 0xCD
 	lsls r1, 1
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	adds r4, 0x50
 	ldr r1, _0808C1A0
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -115263,7 +115263,7 @@ _0808C3EA:
 	ldr r0, _0808C410
 	movs r1, 0xCF
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -115510,7 +115510,7 @@ sub_808C5C0:
 	ldr r0, _0808C620
 	movs r1, 0x8A
 	lsls r1, 1
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0

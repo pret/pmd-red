@@ -512,7 +512,7 @@ sub_809542C:
 	ldr r0, [r4]
 	adds r0, 0x14
 	mov r1, sp
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	bl sub_8011C34
 	ldr r1, [r4]
 	str r0, [r1, 0x24]

@@ -1518,11 +1518,11 @@ sub_808F734:
 	add r4, sp, 0x4C
 	ldr r5, _0808F794
 	adds r0, r5, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	mov r0, sp
 	adds r1, r5, 0
 	bl sub_808F798
@@ -1586,10 +1586,10 @@ _0808F7DA:
 _0808F7EA:
 	add r4, sp, 0x64
 	adds r0, r6, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_80922F4
+	bl CopyStringtoBuffer
 	movs r2, 0
 	b _0808F800
 _0808F7FE:
@@ -1612,11 +1612,11 @@ _0808F816:
 	beq _0808F82E
 	add r4, sp, 0x4C
 	adds r0, r5, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 _0808F82E:
 	mov r0, sp
 	bl sub_808D1DC
@@ -1664,7 +1664,7 @@ _0808F874:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0808F880: .4byte gUnknown_202DF98
+_0808F880: .4byte gAvailablePokemonNames
 _0808F884: .4byte _0808F888
 	.align 2, 0
 _0808F888:
@@ -1976,7 +1976,7 @@ _0808FB28: .4byte gUnknown_810DE58
 _0808FB2C: .4byte gUnknown_810DE6C
 _0808FB30: .4byte gUnknown_202DE30
 _0808FB34: .4byte gUnknown_8115718
-_0808FB38: .4byte gUnknown_202DF98
+_0808FB38: .4byte gAvailablePokemonNames
 _0808FB3C: .4byte gUnknown_810DE80
 _0808FB40: .4byte gUnknown_810DE98
 _0808FB44:
@@ -2289,7 +2289,7 @@ _0808FDB0:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r0, r6, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	ldr r1, _0808FEF4
 	mov r2, r10
 	movs r3, 0
@@ -2419,7 +2419,7 @@ _0808FED6:
 	bx r0
 	.align 2, 0
 _0808FEEC: .4byte gUnknown_8107798
-_0808FEF0: .4byte gUnknown_202DF98
+_0808FEF0: .4byte gAvailablePokemonNames
 _0808FEF4: .4byte gUnknown_202DE30
 _0808FEF8: .4byte gUnknown_810DEB4
 _0808FEFC: .4byte gUnknown_202DE58

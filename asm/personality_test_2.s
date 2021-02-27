@@ -72,7 +72,7 @@ _0803CF68:
 	adds r0, r1
 	movs r1, 0
 	ldrsh r0, [r0, r1]
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r2, r0, 0
 	ldr r0, [r6]
 	ldr r3, [r0, 0x4C]

@@ -50,14 +50,14 @@ extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32,
 extern u32 sub_80144A4(s32 *);
 
 extern void sub_803CE6C(void);
-extern u32 sub_808D994(u32);
-extern void sub_80922F4(s32 *r0, u32);
+extern char* GetMonSpecies(u32);
+extern void CopyStringtoBuffer(s32 *r0, char *r1);
 extern void sub_801602C(u32, s32 *r0);
 
 extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
-extern void sub_808D8BC(u32 *r0, u32);
+extern void CopySpeciesNametoBuffer(char *r0, u32);
 
 extern void sub_8006518(void *);
 extern void sub_800641C(void *, u32, u32);
@@ -89,7 +89,7 @@ extern u32 gGenderMenu;
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern const char *gPersonalityTypeDescriptionTable[];
 
-extern u32 gUnknown_202DF98;
+extern char gAvailablePokemonNames[0x50];
 
 
 struct unkData gUnknown_80F4244 = 
@@ -503,12 +503,12 @@ void sub_803CB5C(void)
 
 void sub_803CB7C(void)
 {
-  u32 uVar1;
+  char *monName;
   s32 *iVar2;
 
   iVar2 = &gUnknown_203B400->unk20;
-  uVar1 = sub_808D994(gUnknown_203B400->PartnerID);
-  sub_80922F4(iVar2,uVar1);
+  monName = GetMonSpecies(gUnknown_203B400->PartnerID);
+  CopyStringtoBuffer(iVar2, monName);
   sub_801602C(3, &gUnknown_203B400->unk20);
   gUnknown_203B400->TestState = 13;
 }
@@ -567,7 +567,7 @@ void PromptNewQuestion(void)
 
 void PrintPersonalityTypeDescription(void)
 {
-  sub_808D8BC(&gUnknown_202DF98,gUnknown_203B400->StarterID);
+  CopySpeciesNametoBuffer(gAvailablePokemonNames, gUnknown_203B400->StarterID);
   sub_80141B4(gPersonalityTypeDescriptionTable[gUnknown_203B400->playerNature],0,
               0,0x101);
 }

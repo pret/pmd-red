@@ -3103,7 +3103,7 @@ _080A8F30:
 	ldrsh r1, [r0, r2]
 _080A8F34:
 	adds r0, r4, 0
-	bl sub_808D8BC
+	bl CopySpeciesNametoBuffer
 	b _080A8F44
 _080A8F3C:
 	ldr r1, _080A8F4C
@@ -3131,7 +3131,7 @@ sub_80A8F50:
 	adds r0, r4, 0
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_8092310
+	bl BoundedCopyStringtoBuffer
 	add sp, 0x80
 	pop {r4,r5}
 	pop {r0}

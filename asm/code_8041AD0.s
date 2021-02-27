@@ -735,7 +735,7 @@ _080427FA:
 	.align 2, 0
 _08042808: .4byte gUnknown_203B418
 _0804280C: .4byte 0x000135cc
-_08042810: .4byte gUnknown_202DF98
+_08042810: .4byte gAvailablePokemonNames
 _08042814: .4byte gPtrFeralFoundItemMessage
 	thumb_func_end sub_80427AC
 

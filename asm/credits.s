@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8035444
-sub_8035444:
+	thumb_func_start DrawCredits
+DrawCredits:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -157,8 +157,8 @@ _08035542:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08035570: .4byte gCreditsText
-	thumb_func_end sub_8035444
+_08035570: .4byte gUnknown_80E4A40
+	thumb_func_end DrawCredits
 
 	thumb_func_start sub_8035574
 sub_8035574:
@@ -201,7 +201,7 @@ _080355A8:
 	b _08035654
 	.align 2, 0
 _080355C8: .4byte gUnknown_203B340
-_080355CC: .4byte gCreditsText
+_080355CC: .4byte gUnknown_80E4A40
 _080355D0:
 	bl sub_8099B94
 	lsls r0, 24
@@ -233,7 +233,7 @@ _08035600:
 	str r0, [r1, 0x64]
 	b _08035654
 	.align 2, 0
-_0803560C: .4byte gCreditsText
+_0803560C: .4byte gUnknown_80E4A40
 _08035610:
 	bl sub_8099B94
 	lsls r0, 24
@@ -262,7 +262,7 @@ _08035638:
 	movs r0, 0x3
 	b _08035656
 	.align 2, 0
-_08035650: .4byte gCreditsText
+_08035650: .4byte gUnknown_80E4A40
 _08035654:
 	movs r0, 0
 _08035656:
@@ -270,164 +270,5 @@ _08035656:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8035574
-
-	thumb_func_start sub_803565C
-sub_803565C:
-	push {r4,lr}
-	ldr r4, _08035674
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _0803566E
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-_0803566E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08035674: .4byte gUnknown_203B340
-	thumb_func_end sub_803565C
-
-	thumb_func_start sub_8035678
-sub_8035678:
-	push {r4,lr}
-	ldr r4, _0803569C
-	movs r0, 0x8
-	movs r1, 0x8
-	bl MemoryAlloc
-	str r0, [r4]
-	movs r1, 0
-	str r1, [r0]
-	str r1, [r0, 0x4]
-	movs r0, 0
-	movs r1, 0x39
-	bl sub_80015C0
-	movs r0, 0x1
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803569C: .4byte gUnknown_203B344
-	thumb_func_end sub_8035678
-
-	thumb_func_start sub_80356A0
-sub_80356A0:
-	push {r4,lr}
-	ldr r0, _080356C4
-	ldrh r4, [r0]
-	ldr r3, _080356C8
-	ldr r2, _080356CC
-	ldr r1, [r2]
-	ldr r0, [r1, 0x4]
-	lsls r0, 1
-	adds r0, r3
-	ldrh r3, [r0]
-	ldr r0, [r1]
-	cmp r0, 0x4
-	bhi _08035734
-	lsls r0, 2
-	ldr r1, _080356D0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080356C4: .4byte gRealInputs
-_080356C8: .4byte gUnknown_80E5990
-_080356CC: .4byte gUnknown_203B344
-_080356D0: .4byte _080356D4
-	.align 2, 0
-_080356D4:
-	.4byte _08035728
-	.4byte _080356E8
-	.4byte _08035710
-	.4byte _0803574C
-	.4byte _08035730
-_080356E8:
-	cmp r3, 0
-	bne _080356F4
-	ldr r1, [r2]
-	movs r0, 0x4
-	str r0, [r1]
-	b _08035734
-_080356F4:
-	cmp r4, r3
-	bne _08035700
-	ldr r1, [r2]
-	movs r0, 0x2
-	str r0, [r1]
-	b _08035734
-_08035700:
-	ands r3, r4
-	cmp r3, r4
-	bne _08035728
-	ldr r1, [r2]
-	ldr r0, [r1, 0x4]
-	cmp r0, 0
-	bne _08035734
-	b _0803572A
-_08035710:
-	cmp r4, 0
-	bne _08035722
-	ldr r1, [r2]
-	movs r0, 0x1
-	str r0, [r1]
-	ldr r0, [r1, 0x4]
-	adds r0, 0x1
-	str r0, [r1, 0x4]
-	b _08035734
-_08035722:
-	ands r3, r4
-	cmp r3, r4
-	beq _08035734
-_08035728:
-	ldr r1, [r2]
-_0803572A:
-	movs r0, 0x3
-	str r0, [r1]
-	b _08035734
-_08035730:
-	movs r0, 0x3
-	b _0803574E
-_08035734:
-	movs r0, 0
-	movs r1, 0x39
-	bl sub_8001658
-	cmp r0, 0
-	bne _08035744
-	movs r0, 0
-	b _0803574E
-_08035744:
-	ldr r0, _08035754
-	ldr r1, [r0]
-	movs r0, 0x3
-	str r0, [r1]
-_0803574C:
-	movs r0, 0x2
-_0803574E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08035754: .4byte gUnknown_203B344
-	thumb_func_end sub_80356A0
-
-	thumb_func_start sub_8035758
-sub_8035758:
-	push {r4,lr}
-	ldr r4, _08035770
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _0803576A
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-_0803576A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08035770: .4byte gUnknown_203B344
-	thumb_func_end sub_8035758
 
         .align 2,0

@@ -55,7 +55,7 @@ _08012C18:
 	adds r0, 0x30
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	adds r4, r0, 0
 	bl GetCharacter
 	movs r1, 0x6
@@ -97,7 +97,7 @@ sub_8012C60:
 	adds r7, r3, 0
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	adds r4, r0, 0
 	bl GetCharacter
 	adds r1, r0, 0
@@ -6745,7 +6745,7 @@ _08015F96:
 _08015FBC: .4byte gUnknown_203B1FC
 _08015FC0:
 	ldrb r0, [r2]
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	bl GetCharacter
 	ldr r3, [r7]
 	adds r1, r3, 0
@@ -6781,7 +6781,7 @@ sub_8015FEC:
 	adds r4, r2, 0
 _08016002:
 	ldrb r0, [r4]
-	bl sub_8092288
+	bl ReturnIntFromChar2
 	bl GetCharacter
 	movs r1, 0x6
 	ldrsh r0, [r0, r1]
@@ -6971,7 +6971,7 @@ _08016140:
 	bl sub_80922B4
 	b _08016166
 	.align 2, 0
-_08016158: .4byte gUnknown_202DF98
+_08016158: .4byte gAvailablePokemonNames
 _0801615C:
 	ldr r0, _08016188
 	ldr r1, [r1, 0x8]
@@ -6995,7 +6995,7 @@ _08016166:
 	bl sub_8014248
 	b _080161B8
 	.align 2, 0
-_08016188: .4byte gUnknown_202DF98
+_08016188: .4byte gAvailablePokemonNames
 _0801618C: .4byte gUnknown_80DB688
 _08016190: .4byte gUnknown_203B200
 _08016194:
@@ -7208,7 +7208,7 @@ DisplayPersianDialogueSprite:
 	movs r1, 0x35
 	bl sub_808D8E0
 	movs r0, 0x35
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	subs r4, 0x50
 	adds r0, r4, 0
@@ -8428,7 +8428,7 @@ DisplayKangaskhanDialogueSprite:
 	movs r1, 0x73
 	bl sub_808D8E0
 	movs r0, 0x73
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	subs r4, 0x50
 	adds r0, r4, 0
@@ -12242,7 +12242,7 @@ _08018B50:
 	adds r1, r5, 0
 	bl sub_808D8E0
 	adds r0, r5, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	subs r4, 0x50
 	adds r0, r4, 0
@@ -12266,7 +12266,7 @@ _08018B80:
 	adds r1, r5, 0
 	bl sub_808D8E0
 	adds r0, r5, 0
-	bl sub_808D994
+	bl GetMonSpecies
 	adds r1, r0, 0
 	subs r4, 0x50
 	adds r0, r4, 0
@@ -17005,7 +17005,7 @@ _0801B1D2:
 	.align 2, 0
 _0801B1F4: .4byte gUnknown_203B22C
 _0801B1F8: .4byte gUnknown_203B45C
-_0801B1FC: .4byte gUnknown_202DF98
+_0801B1FC: .4byte gAvailablePokemonNames
 	thumb_func_end sub_801B178
 
 	thumb_func_start sub_801B200
@@ -17423,7 +17423,7 @@ _0801B50C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801B514: .4byte gUnknown_202DF98
+_0801B514: .4byte gAvailablePokemonNames
 _0801B518: .4byte gUnknown_80DBA4C
 	thumb_func_end sub_801B480
 
@@ -17622,7 +17622,7 @@ _0801B65E:
 	bx r1
 	.align 2, 0
 _0801B6A0: .4byte gUnknown_203B234
-_0801B6A4: .4byte gUnknown_202DF98
+_0801B6A4: .4byte gAvailablePokemonNames
 _0801B6A8: .4byte gUnknown_202DE58
 	thumb_func_end sub_801B60C
 
@@ -19776,7 +19776,7 @@ _0801C7C4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801C7CC: .4byte gUnknown_202DF98
+_0801C7CC: .4byte gAvailablePokemonNames
 _0801C7D0: .4byte gUnknown_80DBE30
 	thumb_func_end sub_801C6E4
 
@@ -21359,7 +21359,7 @@ _0801D400:
 	bl sub_8012D60
 	b _0801D4B6
 	.align 2, 0
-_0801D434: .4byte gUnknown_202DF98
+_0801D434: .4byte gAvailablePokemonNames
 _0801D438:
 	bl sub_801D894
 	ldr r2, [r6]
@@ -21618,7 +21618,7 @@ _0801D622:
 	str r0, [r1, 0x14]
 	b _0801D67A
 	.align 2, 0
-_0801D63C: .4byte gUnknown_202DF98
+_0801D63C: .4byte gAvailablePokemonNames
 _0801D640: .4byte gUnknown_80DBF34
 _0801D644: .4byte gUnknown_80D49A8
 _0801D648: .4byte gMenuItems

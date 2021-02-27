@@ -90,12 +90,15 @@ SECTIONS {
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
         src/wonder_mail.o(.text);
+        src/wonder_mail_mid.o(.text);
         asm/wonder_mail.o(.text);
         src/wonder_mail_1.o(.text);
-        src/credits.o(.text);
         asm/credits.o(.text);
+        src/credits.o(.text);
         src/main_menu.o(.text);
         asm/main_menu.o(.text);
+        asm/debug_menu.o(.text);
+        asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         asm/code_803C1D0.o(.text);
