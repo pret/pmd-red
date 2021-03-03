@@ -15,7 +15,7 @@ const u8 *sub_809747C(s16 r0)
     }
     else
     {
-        return GetDungeonName1(sub_80A270C());
+        return GetDungeonName1(sub_80A270C(r0));
     }
 }
 
@@ -27,14 +27,14 @@ const u8 *sub_80974A0(s16 r0)
     }
     else
     {
-        return GetDungeonName1(sub_80A270C());
+        return GetDungeonName1(sub_80A270C(r0));
     }
 }
 
 #ifndef NONMATCHING
 NAKED
 #endif
-u32 *sub_80974C4(s16 r0)
+u32 *GetCurrentMissionText(s16 r0)
 {
 #ifdef NONMATCHING
     // TODO fix regswap memes of r0/r1

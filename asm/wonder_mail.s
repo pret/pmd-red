@@ -15235,7 +15235,7 @@ _08031CD4:
 	beq _08031D04
 	movs r2, 0
 	ldrsh r0, [r4, r2]
-	bl sub_80974C4
+	bl GetCurrentMissionText
 	adds r2, r0, 0
 	ldr r0, _08031D00
 	ldr r0, [r0]
@@ -15611,8 +15611,8 @@ _08031FD0: .4byte gUnknown_203B338
 _08031FD4: .4byte gUnknown_80E2008
 	thumb_func_end CreateAdventureLogScreen
 
-	thumb_func_start sub_8031FD8
-sub_8031FD8:
+	thumb_func_start HandleAdventureLogInput
+HandleAdventureLogInput:
 	push {r4,lr}
 	lsls r0, 24
 	cmp r0, 0
@@ -15659,7 +15659,7 @@ _08032034:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8031FD8
+	thumb_func_end HandleAdventureLogInput
 
 	thumb_func_start sub_803203C
 sub_803203C:
@@ -15922,8 +15922,8 @@ _08032254: .4byte gUnknown_80E2030
 _08032258: .4byte gUnknown_203B338
 	thumb_func_end DisplayAdventureLog
 
-	thumb_func_start sub_803225C
-sub_803225C:
+	thumb_func_start CreateFriendRescueMenu
+CreateFriendRescueMenu:
 	push {r4,r5,lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -16005,10 +16005,10 @@ _08032308: .4byte gUnknown_202E5D8
 _0803230C: .4byte gAvailablePokemonNames
 _08032310: .4byte 0x0000052c
 _08032314: .4byte 0x0000052d
-	thumb_func_end sub_803225C
+	thumb_func_end CreateFriendRescueMenu
 
-	thumb_func_start sub_8032318
-sub_8032318:
+	thumb_func_start UpdateFriendRescueMenu
+UpdateFriendRescueMenu:
 	push {lr}
 	ldr r0, _08032330
 	ldr r0, [r0]
@@ -16501,10 +16501,10 @@ _080327DC:
 _080327DE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8032318
+	thumb_func_end UpdateFriendRescueMenu
 
-	thumb_func_start sub_80327E4
-sub_80327E4:
+	thumb_func_start CleanFriendRescueMenu
+CleanFriendRescueMenu:
 	push {r4,lr}
 	ldr r4, _08032820
 	ldr r0, [r4]
@@ -16528,7 +16528,7 @@ _0803281A:
 	bx r0
 	.align 2, 0
 _08032820: .4byte gUnknown_203B33C
-	thumb_func_end sub_80327E4
+	thumb_func_end CleanFriendRescueMenu
 
 	thumb_func_start nullsub_40
 nullsub_40:
@@ -21732,122 +21732,5 @@ _0803528C:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8035210
-
-	thumb_func_start nullsub_46
-nullsub_46:
-	bx lr
-	thumb_func_end nullsub_46
-
-	thumb_func_start nullsub_47
-nullsub_47:
-	bx lr
-	thumb_func_end nullsub_47
-
-	thumb_func_start nullsub_48
-nullsub_48:
-	bx lr
-	thumb_func_end nullsub_48
-
-	thumb_func_start nullsub_49
-nullsub_49:
-	bx lr
-	thumb_func_end nullsub_49
-
-	thumb_func_start sub_80352A4
-sub_80352A4:
-	push {r4,lr}
-	bl sub_802F298
-	cmp r0, 0x3
-	bne _080352EC
-	bl sub_802F2C0
-	ldr r0, _080352F4
-	movs r4, 0x98
-	lsls r4, 1
-	adds r1, r4, 0
-	bl sub_808D8E0
-	adds r0, r4, 0
-	bl GetMonSpecies
-	adds r1, r0, 0
-	ldr r0, _080352F8
-	bl strcpy
-	ldr r0, _080352FC
-	ldr r0, [r0]
-	movs r1, 0x84
-	lsls r1, 3
-	adds r0, r1
-	ldr r1, [r0]
-	movs r0, 0x6
-	bl sub_809539C
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_8095240
-	movs r0, 0x70
-	bl sub_80338C4
-_080352EC:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080352F4: .4byte gUnknown_202E5D8
-_080352F8: .4byte gAvailablePokemonNames
-_080352FC: .4byte gUnknown_203B33C
-	thumb_func_end sub_80352A4
-
-	thumb_func_start sub_8035300
-sub_8035300:
-	push {lr}
-	sub sp, 0x4
-	mov r0, sp
-	bl sub_80144A4
-	cmp r0, 0
-	bne _08035364
-	ldr r0, [sp]
-	adds r1, r0, 0
-	subs r1, 0x19
-	adds r2, r0, 0
-	cmp r1, 0x4
-	bhi _08035364
-	lsls r0, r1, 2
-	ldr r1, _08035324
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08035324: .4byte _08035328
-	.align 2, 0
-_08035328:
-	.4byte _0803533C
-	.4byte _08035354
-	.4byte _08035344
-	.4byte _0803534C
-	.4byte _08035354
-_0803533C:
-	movs r0, 0x1
-	bl sub_80338C4
-	b _08035364
-_08035344:
-	movs r0, 0x7A
-	bl sub_80338C4
-	b _08035364
-_0803534C:
-	movs r0, 0x7C
-	bl sub_80338C4
-	b _08035364
-_08035354:
-	ldr r0, _0803536C
-	ldr r0, [r0]
-	ldr r1, _08035370
-	adds r0, r1
-	str r2, [r0]
-	movs r0, 0x79
-	bl sub_80338C4
-_08035364:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803536C: .4byte gUnknown_203B33C
-_08035370: .4byte 0x00000564
-	thumb_func_end sub_8035300
 
         .align 2,0

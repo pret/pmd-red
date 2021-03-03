@@ -394,8 +394,8 @@ _08035EE0:
 _08035EE8: .4byte gUnknown_203B34C
 	thumb_func_end CleanMainMenu
 
-	thumb_func_start sub_8035EEC
-sub_8035EEC:
+	thumb_func_start UpdateMainMenu
+UpdateMainMenu:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _08035F64
@@ -551,7 +551,7 @@ _0803601A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8035EEC
+	thumb_func_end UpdateMainMenu
 
 	thumb_func_start SetMainMenuText
 SetMainMenuText:
@@ -1007,8 +1007,8 @@ _080363FA:
 	bx r1
 	thumb_func_end sub_80363E0
 
-	thumb_func_start sub_8036400
-sub_8036400:
+	thumb_func_start CreateTradeItemsMenu
+CreateTradeItemsMenu:
 	push {r4,r5,lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -1038,10 +1038,10 @@ sub_8036400:
 	bx r1
 	.align 2, 0
 _08036444: .4byte gUnknown_203B358
-	thumb_func_end sub_8036400
+	thumb_func_end CreateTradeItemsMenu
 
-	thumb_func_start sub_8036448
-sub_8036448:
+	thumb_func_start UpdateTradeItemsMenu
+UpdateTradeItemsMenu:
 	push {lr}
 	ldr r0, _08036460
 	ldr r0, [r0]
@@ -1139,7 +1139,7 @@ _08036524:
 _08036526:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8036448
+	thumb_func_end UpdateTradeItemsMenu
 
 	thumb_func_start sub_803652C
 sub_803652C:
@@ -1895,8 +1895,8 @@ _08036AFE:
 	bx r0
 	thumb_func_end sub_8036ADC
 
-	thumb_func_start sub_8036B04
-sub_8036B04:
+	thumb_func_start CleanTradeItemsMenu
+CleanTradeItemsMenu:
 	push {r4,lr}
 	ldr r4, _08036B20
 	ldr r0, [r4]
@@ -1912,7 +1912,7 @@ _08036B1A:
 	bx r0
 	.align 2, 0
 _08036B20: .4byte gUnknown_203B358
-	thumb_func_end sub_8036B04
+	thumb_func_end CleanTradeItemsMenu
 
 	thumb_func_start nullsub_52
 nullsub_52:
@@ -4820,17 +4820,17 @@ _08038298:
 	bx r1
 	thumb_func_end sub_80381F4
 
-	thumb_func_start sub_80382A0
-sub_80382A0:
+	thumb_func_start CreateAdventureLogMenu
+CreateAdventureLogMenu:
 	push {lr}
 	movs r0, 0
 	bl CreateAdventureLogScreen
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80382A0
+	thumb_func_end CreateAdventureLogMenu
 
-	thumb_func_start sub_80382AC
-sub_80382AC:
+	thumb_func_start CleanAdventureLogMenu
+CleanAdventureLogMenu:
 	push {lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -4839,14 +4839,14 @@ sub_80382AC:
 	bl sub_800641C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80382AC
+	thumb_func_end CleanAdventureLogMenu
 
-	thumb_func_start sub_80382C0
-sub_80382C0:
+	thumb_func_start UpdateAdventureLogMenu
+UpdateAdventureLogMenu:
 	push {r4,lr}
 	ldr r4, _080382E0
 	movs r0, 0x1
-	bl sub_8031FD8
+	bl HandleAdventureLogInput
 	cmp r0, 0x1
 	bls _080382D8
 	cmp r0, 0x3
@@ -4860,7 +4860,7 @@ _080382D8:
 	bx r1
 	.align 2, 0
 _080382E0: .4byte 0x0000ffdc
-	thumb_func_end sub_80382C0
+	thumb_func_end UpdateAdventureLogMenu
 
 	thumb_func_start sub_80382E4
 sub_80382E4:
@@ -5636,8 +5636,8 @@ _080388EA:
 _080388FC: .4byte gUnknown_203B364
 	thumb_func_end sub_80388C4
 
-	thumb_func_start sub_8038900
-sub_8038900:
+	thumb_func_start CreateRescuePasswordMenu
+CreateRescuePasswordMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5795,10 +5795,10 @@ _08038A36:
 	.align 2, 0
 _08038A54: .4byte gUnknown_202EC50
 _08038A58: .4byte gUnknown_203B370
-	thumb_func_end sub_8038900
+	thumb_func_end CreateRescuePasswordMenu
 
-	thumb_func_start sub_8038A5C
-sub_8038A5C:
+	thumb_func_start CleanRescuePasswordMenu
+CleanRescuePasswordMenu:
 	push {r4,lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -5821,10 +5821,10 @@ _08038A86:
 	bx r0
 	.align 2, 0
 _08038A8C: .4byte gUnknown_203B370
-	thumb_func_end sub_8038A5C
+	thumb_func_end CleanRescuePasswordMenu
 
-	thumb_func_start sub_8038A90
-sub_8038A90:
+	thumb_func_start UpdateRescuePasswordMenu
+UpdateRescuePasswordMenu:
 	push {r4-r6,lr}
 	sub sp, 0x34
 	movs r0, 0xB
@@ -6193,7 +6193,7 @@ _08038DB0:
 	bx r1
 	.align 2, 0
 _08038DBC: .4byte 0x0000ffdc
-	thumb_func_end sub_8038A90
+	thumb_func_end UpdateRescuePasswordMenu
 
 	thumb_func_start sub_8038DC0
 sub_8038DC0:
@@ -7530,8 +7530,8 @@ _080398A2:
 	bx r1
 	thumb_func_end sub_8039880
 
-	thumb_func_start sub_80398AC
-sub_80398AC:
+	thumb_func_start CreateWonderMailMenu
+CreateWonderMailMenu:
 	push {r4,r5,lr}
 	bl ResetUnusedInputStruct
 	movs r0, 0
@@ -7587,10 +7587,10 @@ _080398D8:
 _0803991C: .4byte gUnknown_203B3E8
 _08039920: .4byte 0x0000049c
 _08039924: .4byte 0x00000494
-	thumb_func_end sub_80398AC
+	thumb_func_end CreateWonderMailMenu
 
-	thumb_func_start sub_8039928
-sub_8039928:
+	thumb_func_start UpdateWonderMailMenu
+UpdateWonderMailMenu:
 	push {lr}
 	ldr r0, _08039940
 	ldr r0, [r0]
@@ -7673,10 +7673,10 @@ _080399DE:
 _080399E0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8039928
+	thumb_func_end UpdateWonderMailMenu
 
-	thumb_func_start sub_80399E4
-sub_80399E4:
+	thumb_func_start CleanWonderMailMenu
+CleanWonderMailMenu:
 	push {r4,lr}
 	ldr r4, _08039A14
 	ldr r0, [r4]
@@ -7697,7 +7697,7 @@ _08039A0E:
 	bx r0
 	.align 2, 0
 _08039A14: .4byte gUnknown_203B3E8
-	thumb_func_end sub_80399E4
+	thumb_func_end CleanWonderMailMenu
 
 	thumb_func_start sub_8039A18
 sub_8039A18:

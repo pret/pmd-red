@@ -18,7 +18,7 @@ extern void sub_8097670(void);
 extern void sub_8094980(void);
 extern void sub_8094C14(void);
 extern void sub_8097F5C(void);
-extern void sub_8090998(void);
+extern void LoadItemParameters(void);
 extern void sub_809207C(void);
 extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
@@ -81,7 +81,7 @@ void GameLoop(void)
 {
     u32 tmp;
     u8 tmp3 = 1;
-    u32 tmp4;
+    u32 nextMenu;
     u32 flag;
 
     InitHeap();
@@ -96,7 +96,7 @@ void GameLoop(void)
     sub_8094C14();
     sub_8097F5C();
     LoadFriendAreas();
-    sub_8090998();
+    LoadItemParameters();
     sub_809207C();
     LoadWazaParameters();
     sub_80950BC();
@@ -164,11 +164,11 @@ void GameLoop(void)
             }
             SetUpMenu();
             xxx_update_stuff(0);
-            tmp4 = UpdateMenu();
+            nextMenu = UpdateMenu();
             CleanUpMenu();
-            if (tmp4 == 2) break;
-            if (tmp4 == 4) break;
-            if (tmp4 == 3) break;
+            if (nextMenu == 2) break;
+            if (nextMenu == 4) break;
+            if (nextMenu == 3) break;
         }
         DeleteMainMenu();
         while (gUnknown_2000A80 > 0) {
@@ -179,7 +179,7 @@ void GameLoop(void)
             xxx_update_stuff(0);
         }
         CloseFile(gTitlePaletteFile);
-        switch (tmp4) {
+        switch (nextMenu) {
             case 2: {
                 s32 tmp5 = sub_80953D4(7);
                 if (tmp5 != -1) {

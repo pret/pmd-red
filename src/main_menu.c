@@ -1,4 +1,19 @@
 #include "global.h"
+#include "debug_menu.h"
+#include "main_menu.h"
+
+// NOTE: 0x13 and 0x14 
+// Communication Screen?
+// Got Communication warning when I wrote them to the struct
+
+// NOTE: 0x29, 0x2A, 0x2B, 0x2C
+// Triggers a save 
+
+// NOTE: 0x2D
+// Triggers a save and then goes to 0x13 (comms warning)
+
+// NOTE: 0x2E
+// Deletes the Save
 
 struct MainMenuSub
 {
@@ -9,9 +24,9 @@ struct MainMenuSub
 
 struct MainMenu
 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
+    /* 0x0 */ s32 currMenu;
+    /* 0x4 */ s32 nextMenu;
+    /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
     /* 0x2C */ struct MainMenuSub sub;
     u32 unk30;
@@ -31,44 +46,41 @@ extern void MemoryFree(void *);
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
 extern void DrawMainMenu(void);
-extern void CreateDebugMenu(void);
-extern void sub_8036400(void);
+extern void CreateTradeItemsMenu(void);
 extern void sub_8036FDC(void);
 extern void sub_803A1E4(void);
-extern void sub_803225C(void);
+extern void CreateFriendRescueMenu(void);
 extern void sub_803A1D8(void);
-extern void sub_80398AC(void);
-extern void sub_80382A0(void);
+extern void CreateWonderMailMenu(void);
+extern void CreateAdventureLogMenu(void);
 extern void CreateLoadScreen(u32);
 extern void sub_8035DB4(u32);
-extern void sub_8038900(u32);
+extern void CreateRescuePasswordMenu(u32);
 extern void sub_803850C(u32);
-extern s32 sub_8035EEC(void);
+extern s32 UpdateMainMenu(void);
 extern s32 sub_803941C(void);
-extern s32 sub_8036448(void);
-extern s32 sub_8032318(void);
-extern s32 sub_8039928(void);
+extern s32 UpdateTradeItemsMenu(void);
+extern s32 UpdateFriendRescueMenu(void);
+extern s32 UpdateWonderMailMenu(void);
 extern s32 sub_803A1DC(void);
 extern s32 sub_803A1E8(void);
-extern s32 sub_8038A90(void);
-extern s32 sub_80382C0(void);
+extern s32 UpdateRescuePasswordMenu(void);
+extern s32 UpdateAdventureLogMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 sub_8038630(void);
-extern s32 sub_803A2A4(void);
 
 extern void CleanMainMenu(void);
 extern void CleanLoadScreen(void);
-extern void sub_8036B04(void);
+extern void CleanTradeItemsMenu(void);
 extern void sub_80370D4(void);
-extern void sub_80327E4(void);
-extern void sub_80399E4(void);
+extern void CleanFriendRescueMenu(void);
+extern void CleanWonderMailMenu(void);
 extern void nullsub_55(void);
 extern void sub_803A1EC(void);
-extern void sub_8038A5C(void);
-extern void sub_80382AC(void);
+extern void CleanRescuePasswordMenu(void);
+extern void CleanAdventureLogMenu(void);
 extern void sub_80383A8(void);
 extern void sub_8038604(void);
-extern void DeleteDebugMenu(void);
 
 void InitMainMenu(void)
 {
@@ -76,9 +88,9 @@ void InitMainMenu(void)
     gUnknown_203B348 = MemoryAlloc(sizeof(struct MainMenu),8);
     MemoryFill8((u8 *)gUnknown_203B348, 0, sizeof(struct MainMenu));
   }
-  gUnknown_203B348->unk0 = 0xffdc;
-  gUnknown_203B348->unk4 = 1;
-  gUnknown_203B348->unk8 = 1;
+  gUnknown_203B348->currMenu = 0xffdc;
+  gUnknown_203B348->nextMenu = MENU_MAIN_SCREEN;
+  gUnknown_203B348->lastMenu = MENU_MAIN_SCREEN;
   gUnknown_203B348->unk38 = -1;
   gUnknown_203B348->unk3C = -1;
   gUnknown_203B348->sub.unk2E = 0;
@@ -98,32 +110,32 @@ void DeleteMainMenu(void)
 
 void SetUpMenu(void)
 {
-  if (gUnknown_203B348->unk0 != gUnknown_203B348->unk4) {
-    switch(gUnknown_203B348->unk4) {
-        case 1:
+  if (gUnknown_203B348->currMenu != gUnknown_203B348->nextMenu) {
+    switch(gUnknown_203B348->nextMenu) {
+        case MENU_MAIN_SCREEN:
             sub_8094C14();
             sub_8099690(0);
             DrawMainMenu();
             break;
         case 6:
-        case 7:
-        case 8:
+        case MENU_CONTINUE:
+        case MENU_DELETE_SAVE_PROMPT:
         case 9:
-            CreateLoadScreen(gUnknown_203B348->unk4);
+            CreateLoadScreen(gUnknown_203B348->nextMenu);
             break;
-        case 0xc:
-            sub_8036400();
+        case MENU_TRADE_ITEMS:
+            CreateTradeItemsMenu();
             break;
         case 0x13:
         case 0x14:
-            sub_8035DB4(gUnknown_203B348->unk4);
+            sub_8035DB4(gUnknown_203B348->nextMenu);
             sub_8036FDC();
             break;
-        case 0xb:
-            sub_803225C();
+        case MENU_FRIEND_RESCUE:
+            CreateFriendRescueMenu();
             break;
-        case 0xd:
-            sub_80398AC();
+        case MENU_WONDER_MAIL:
+            CreateWonderMailMenu();
             break;
         case 0xe:
             sub_803A1D8();
@@ -131,12 +143,12 @@ void SetUpMenu(void)
         case 0xf:
             sub_803A1E4();
             break;
-        case 0x21:
-        case 0x22:
-            sub_8038900(gUnknown_203B348->unk4);
+        case MENU_DISPLAY_RESCUE_PASSWORD:
+        case MENU_RESCUE_PASSWORD_ENTRY:
+            CreateRescuePasswordMenu(gUnknown_203B348->nextMenu);
             break;
-        case 0xA:
-            sub_80382A0();
+        case MENU_ADVENTURE_LOG:
+            CreateAdventureLogMenu();
             break;
         case 0x29:
         case 0x2a:
@@ -144,80 +156,80 @@ void SetUpMenu(void)
         case 0x2c:
         case 0x2d:
         case 0x2e:
-            sub_803850C(gUnknown_203B348->unk4);
+            sub_803850C(gUnknown_203B348->nextMenu);
             break;
-        case 0x10:
+        case MENU_DEBUG:
             CreateDebugMenu();
             break;
     }
-    gUnknown_203B348->unk0 = gUnknown_203B348->unk4;
+    gUnknown_203B348->currMenu = gUnknown_203B348->nextMenu;
   }
 }
 
 s32 UpdateMenu(void)
 {
   s32 iVar1;
-  s32 iVar2;
+  s32 nextMenu;
 
-  iVar2 = 0xffdc;
-  switch(gUnknown_203B348->unk4) {
-    case 1:
-        iVar2 = sub_8035EEC();
+  nextMenu = MENU_NO_SCREEN_CHANGE;
+  switch(gUnknown_203B348->nextMenu) {
+    case MENU_MAIN_SCREEN:
+        nextMenu = UpdateMainMenu();
         break;
     case 6:
-    case 7:
-    case 8:
+    case MENU_CONTINUE:
+    case MENU_DELETE_SAVE_PROMPT:
     case 9:
-        iVar2 = sub_803941C();
+        nextMenu = sub_803941C();
         break;
-    case 0xc:
-        iVar1 = sub_8036448();
-        iVar2 = 1;
+    case MENU_TRADE_ITEMS:
+        iVar1 = UpdateTradeItemsMenu();
+        nextMenu = MENU_MAIN_SCREEN;
         if (iVar1 != 3) {
-            iVar2 = 0xffdc;
+            nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
-    case 0xb:
-        iVar1 = sub_8032318();
-        iVar2 = 1;
+    case MENU_FRIEND_RESCUE:
+        iVar1 = UpdateFriendRescueMenu();
+        nextMenu = MENU_MAIN_SCREEN;
         if (iVar1 != 3) {
-            iVar2 = 0xffdc;
+            nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
-    case 0xd:
-        iVar1 = sub_8039928();
-        iVar2 = 1;
+    case MENU_WONDER_MAIL:
+        iVar1 = UpdateWonderMailMenu();
+        nextMenu = MENU_MAIN_SCREEN;
         if (iVar1 != 3) {
-            iVar2 = 0xffdc;
+            nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case 0xe:
         iVar1 = sub_803A1DC();
-        iVar2 = 1;
+        nextMenu = MENU_MAIN_SCREEN;
         if (iVar1 != 3) {
-            iVar2 = 0xffdc;
+            nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case 0xf:
         iVar1 = sub_803A1E8();
-        iVar2 = 5;
-        if ((iVar1 != 3) && (iVar2 = 0xffdc, iVar1 == 2)) {
-            iVar2 = 1;
+        nextMenu = 5;
+        if ((iVar1 != 3) && (nextMenu = MENU_NO_SCREEN_CHANGE, iVar1 == 2)) {
+            nextMenu = MENU_MAIN_SCREEN;
         }
         break;
-    case 0x21:
-    case 0x22:
-        iVar2 = sub_8038A90();
+    case MENU_DISPLAY_RESCUE_PASSWORD:
+    case MENU_RESCUE_PASSWORD_ENTRY:
+        nextMenu = UpdateRescuePasswordMenu();
         break;
-    case 10:
-        iVar2 = sub_80382C0();
+    case MENU_ADVENTURE_LOG:
+        nextMenu = UpdateAdventureLogMenu();
         break;
     case 0x24:
     case 0x25:
     case 0x26:
     case 0x27:
     case 0x28:
-        iVar2 = sub_80383D4();
+        nextMenu = sub_80383D4();
         break;
     case 0x29:
     case 0x2a:
@@ -225,43 +237,43 @@ s32 UpdateMenu(void)
     case 0x2c:
     case 0x2d:
     case 0x2e:
-        iVar2 = sub_8038630();
+        nextMenu = sub_8038630();
         break;
-    case 0x10:
-        iVar2 = sub_803A2A4();
+    case MENU_DEBUG:
+        nextMenu = UpdateDebugMenu();
         break;
   }
-  if (iVar2 != 0xffdc) {
-    gUnknown_203B348->unk4 = iVar2;
+  if (nextMenu != MENU_NO_SCREEN_CHANGE) {
+    gUnknown_203B348->nextMenu = nextMenu;
   }
-  return iVar2;
+  return nextMenu;
 }
 
 void CleanUpMenu(void)
 {
-  if (gUnknown_203B348->unk8 != gUnknown_203B348->unk4) {
-    switch(gUnknown_203B348->unk8) {
-    case 1:
+  if (gUnknown_203B348->lastMenu != gUnknown_203B348->nextMenu) {
+    switch(gUnknown_203B348->lastMenu) {
+    case MENU_MAIN_SCREEN:
       CleanMainMenu();
       break;
     case 6:
-    case 7:
-    case 8:
+    case MENU_CONTINUE:
+    case MENU_DELETE_SAVE_PROMPT:
     case 9:
       CleanLoadScreen();
       break;
-    case 0xc:
-      sub_8036B04();
+    case MENU_TRADE_ITEMS:
+      CleanTradeItemsMenu();
       break;
     case 0x13:
     case 0x14:
       sub_80370D4();
       break;
-    case 0xb:
-      sub_80327E4();
+    case MENU_FRIEND_RESCUE:
+      CleanFriendRescueMenu();
       break;
-    case 0xd:
-      sub_80399E4();
+    case MENU_WONDER_MAIL:
+      CleanWonderMailMenu();
       break;
     case 0xe:
       nullsub_55();
@@ -269,12 +281,12 @@ void CleanUpMenu(void)
     case 0xf:
       sub_803A1EC();
       break;
-    case 0x21:
-    case 0x22:
-      sub_8038A5C();
+    case MENU_DISPLAY_RESCUE_PASSWORD:
+    case MENU_RESCUE_PASSWORD_ENTRY:
+      CleanRescuePasswordMenu();
       break;
-    case 10:
-      sub_80382AC();
+    case MENU_ADVENTURE_LOG:
+      CleanAdventureLogMenu();
       break;
     case 0x24:
     case 0x25:
@@ -291,11 +303,11 @@ void CleanUpMenu(void)
     case 0x2e:
       sub_8038604();
       break;
-    case 0x10:
+    case MENU_DEBUG:
       DeleteDebugMenu();
       break;
     }
-    gUnknown_203B348->unk8 = gUnknown_203B348->unk4;
+    gUnknown_203B348->lastMenu = gUnknown_203B348->nextMenu;
   }
 }
 
