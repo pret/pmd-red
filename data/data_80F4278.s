@@ -1385,22 +1385,23 @@ gUnknown_80F6100: @ 80F6100
 	.global gUnknown_80F6108
 gUnknown_80F6108: @ 80F6108
 @ replacing .incbin "baserom.gba", 0x000f6108, 0x4
-.byte 0x23, 0x00, 0x00, 0x00
+        .byte 0x23, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F610C
 gUnknown_80F610C: @ 80F610C
 @ replacing .incbin "baserom.gba", 0x000f610c, 0x4
-.byte 0x42, 0x00, 0x00, 0x00
+        .byte 0x42, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F6110
 gUnknown_80F6110: @ 80F6110
 @ replacing .incbin "baserom.gba", 0x000f6110, 0x8
-.byte 0x25, 0x73, 0x25, 0x63, 0x25, 0x63, 0x46, 0x00
+        .string "%s%c%cF\0"
 
 	.global gUnknown_80F6118
 gUnknown_80F6118: @ 80F6118
 @ replacing .incbin "baserom.gba", 0x000f6118, 0x8
-.byte 0x25, 0x73, 0x25, 0x63, 0x46, 0x00, 0x00, 0x00
+        .string "%s%cF\0"
+        .align 2,0
 
 	.global gUnknown_80F6120
 gUnknown_80F6120: @ 80F6120
@@ -1440,13 +1441,14 @@ gUnknown_80F61CC: @ 80F61CC
 	.global gUnknown_80F61D4
 gUnknown_80F61D4: @ 80F61D4
 @ replacing .incbin "baserom.gba", 0x000f61d4, 0x8
-.byte 0x63, 0x6f, 0x6c, 0x76, 0x65, 0x63, 0x00, 0x00
+        .string "colvec\0"
+        .align 2,0
 
 	.global gUnknown_80F61DC
 gUnknown_80F61DC: @ 80F61DC
 @ replacing .incbin "baserom.gba", 0x000f61dc, 0x10
-.byte 0x74, 0x72, 0x61, 0x70, 0x70, 0x61, 0x74, 0x00
-.string "pksdir0\0"
+        .string "trappat\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_80F61EC
 gUnknown_80F61EC: @ 80F61EC
@@ -1802,7 +1804,7 @@ gUnknown_80F6D20: @ 80F6D20
 
 	.global gUnknown_80F6DCC
 gUnknown_80F6DCC: @ 80F6DCC
-	.incbin "baserom.gba", 0xF6DCC, 0x9
+        .string "fixedmap\0"
 
 	.global gUnknown_80F6DD5
 gUnknown_80F6DD5: @ 80F6DD5

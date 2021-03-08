@@ -17,7 +17,7 @@ extern void LoadMonsterParameters(void);
 extern void sub_8097670(void);
 extern void sub_8094980(void);
 extern void sub_8094C14(void);
-extern void sub_8097F5C(void);
+extern void LoadExclusivePokemon(void);
 extern void LoadItemParameters(void);
 extern void sub_809207C(void);
 extern void LoadWazaParameters(void);
@@ -94,7 +94,7 @@ void GameLoop(void)
     InitializePlayTime();
     sub_8094980();
     sub_8094C14();
-    sub_8097F5C();
+    LoadExclusivePokemon();
     LoadFriendAreas();
     LoadItemParameters();
     sub_809207C();

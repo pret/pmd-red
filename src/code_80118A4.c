@@ -12,12 +12,8 @@
 void sub_8011924(void);
 
 extern u8 sub_80023E4(u8);
-extern void sub_800BF48(u16 r0);
-extern void sub_800BF80(void);
-extern void sub_800BFD0(u16 r0);
 extern void sub_800C3F8(u16 r0, u16 r1);
 extern void sub_801199C(u16 r0);
-extern void sub_800C074(u16 r0, u16 r1);
 extern void sub_800C298(u16 r0);
 extern u8 sub_800C5D0(u16 r0);
 
@@ -121,9 +117,10 @@ void sub_80117C4(void)
     sub_800BFD0(0x1E);
 }
 
+// Some sound effect
 void sub_80117D0(void)
 {
-    sub_800C074(0x97 << 1, 256);
+    sub_800C074(302, 256);
 }
 
 // Some sound effect
@@ -199,9 +196,9 @@ void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed)
     FadeInNewBGM(songIndex, speed);
 }
 
-void sub_8011914(u16 r0)
+void sub_8011914(u16 songIndex)
 {
-    sub_800BF48(r0);
+    sub_800BF48(songIndex);
 }
 
 void sub_8011924()
@@ -209,9 +206,9 @@ void sub_8011924()
     sub_800BF80();
 }
 
-void sub_8011930(u16 r0)
+void sub_8011930(u16 speed)
 {
-    sub_800BFD0(r0);
+    sub_800BFD0(speed);
 }
 
 u32 IsEqualtoBGTrack(u16 songIndex)
@@ -232,7 +229,7 @@ void sub_8011974(u16 songIndex, u16 r1)
 
 void sub_8011988(u16 songIndex)
 {
-    sub_800C074(songIndex, 0x80 << 1);
+    sub_800C074(songIndex, 256);
 }
 
 void sub_801199C(u16 songIndex)
@@ -250,11 +247,11 @@ u8 sub_80119C0(u16 songIndex)
     return sub_800C5D0(songIndex);
 }
 
-void sub_80119D4(u32 r0)
+void PlayMenuSoundEffect(u32 r0)
 {
     if(gUnknown_202DE20 > 0)
         return;
-    sub_800C074(gUnknown_80D4144[r0], 0x80 << 1);
+    sub_800C074(gUnknown_80D4144[r0], 256);
     gUnknown_202DE20 = 4;
 }
 
@@ -263,7 +260,7 @@ void sub_8011A04(void)
     if(gUnknown_202DE22 > 0)
         return;
     gUnknown_202DE22 = 3;
-    sub_800C074(0x131, 0x80 << 1);
+    sub_800C074(0x131, 256);
 }
 
 void sub_8011A2C(u32 r0)

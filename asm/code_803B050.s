@@ -118,7 +118,7 @@ sub_803B120:
 	cmp r0, 0x2
 	bne _0803B144
 	movs r0, 0x1
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	movs r0, 0x2
 	b _0803B160
 	.align 2, 0
@@ -1206,8 +1206,8 @@ _0803B968:
 	bx r0
 	thumb_func_end sub_803B6D4
 
-	thumb_func_start sub_803B98C
-sub_803B98C:
+	thumb_func_start CreateRescueDescription
+CreateRescueDescription:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2055,7 +2055,7 @@ _0803C0C6:
 	.align 2, 0
 _0803C0D4: .4byte gUnknown_80E8C48
 _0803C0D8: .4byte gUnknown_80E8B7C
-	thumb_func_end sub_803B98C
+	thumb_func_end CreateRescueDescription
 
 	thumb_func_start sub_803C0DC
 sub_803C0DC:

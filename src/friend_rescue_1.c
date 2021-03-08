@@ -1,4 +1,5 @@
 #include "global.h"
+#include "friend_rescue.h"
 #include "constants/species.h"
 
 extern void sub_80338C4(u32);
@@ -13,37 +14,6 @@ extern u32 sub_802F298();
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
-struct WonderMailStruct_203B33C
-{
-    // size: 0x568
-    u32 unk0;
-    u32 unk4;
-    u8 unk8[0x38];
-    u32 unk40;
-    u32 unk44;
-    u16 unk48[232];
-    u8 unk218;
-    u8 padding7[3];
-    u32 unk21C;
-    u8 padding[0x7C];
-    u32 unk29C;
-    u8 padding6[0x6C];
-    u32 unk30C;
-    u8 padding8[0x4C];
-    u32 unk35C;
-    u8 padding5[0x5C];
-    u32 unk3BC;
-    u8 padding4[0x60];
-    u32 unk420; // Is this supposed to be a File like 203B2C4?
-    u8 padding3[0x110];
-    u32 unk534;
-    s32 unk538; // A7 << 3
-    u32 unk53C;
-    u32 unk540; // A8 << 4
-    s16 unk544;
-    u8 filler546[0x564 - 0x546];
-    s32 unk564;
-};
 extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 
 void nullsub_46(void)

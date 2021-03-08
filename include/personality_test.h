@@ -12,19 +12,17 @@ extern const struct unkData gUnknown_80F4244;
 
 struct PersonalityStruct_203B400
 {
-    s32 FrameCounter;
-    u32 unk4;
+    /* 0x0 */ s32 FrameCounter;
+    /* 0x4 */ u32 unk4;
     /* 0x8 */ s16 StarterID;
     /* 0xA */ s16 PartnerID;
     u8 padding[0x20 - 0xC];
-    s32 unk20; // Buffer to store partner name?
-    u8 padding2[0x34 - 0x24];
+    /* 0x20 */ char PartnerNick[0x14];
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
     /* 0x3C */ u32 currQuestionIndex;
     /* 0x40 */ u8 playerNature;
-    u8 padding3[3];
-    /* 0x44 */ s32 NatureTotals[13];
+    /* 0x44 */ s32 NatureTotals[NUM_PERSONALITIES];
     /* 0x78 */ u8 QuestionTracker[NUM_QUIZ_QUESTIONS];
     /* 0xB0 */ u32 playerGender; // 1 = Female, 0 = Male
     u32 unkb4;

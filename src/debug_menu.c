@@ -42,7 +42,7 @@ extern void sub_803A3A0(void);
 
 extern void SetMenuItems(void *menu, void *, u32, u32 *, struct MenuItem *entries, u32, u32, u32);
 extern void sub_8035CF4(struct DebugMenu *, u32, u32);
-extern void sub_8035CC0(void *, u32);
+extern void sub_8035CC0(struct unkData *, u32);
 
 void CreateDebugMenu(void)
 {
@@ -85,29 +85,29 @@ u32 UpdateDebugMenu(void)
   }
 
   switch(debugMenuAction) {
-      case MENU_DEBUG_DUNGEONS:
-        nextMenu = 0x2f;
+      case MENU_DEBUG_MENU_DUNGEONS:
+        nextMenu = MENU_DEBUG_DUNGEON;
         break;
-      case MENU_DEBUG_FIELD:
-        nextMenu = 0x30;
+      case MENU_DEBUG_MENU_FIELD:
+        nextMenu = MENU_DEBUG_FIELD;
         break;
-      case MENU_DEBUG_FIELD_MAP:
-        nextMenu = 0x31;
+      case MENU_DEBUG_MENU_FIELD_MAP:
+        nextMenu = MENU_DEBUG_FIELD_MAP;
         break;
-      case MENU_DEBUG_FIELD_SCRIPT:
-        nextMenu = 0x32;
+      case MENU_DEBUG_MENU_FIELD_SCRIPT:
+        nextMenu = MENU_DEBUG_FIELD_SCRIPT;
         break;
-      case MENU_DEBUG_MENU:
-        nextMenu = 0x33;
+      case MENU_DEBUG_MENU_DEBUG_MENU:
+        nextMenu = MENU_DEBUG_DEBUG_MENU;
         break;
-      case 5:
-        nextMenu = 0x34;
+      case MENU_DEBUG_MENU_UNKNOWN_1: // No option that correponds to this one
+        nextMenu = MENU_DEBUG_UNKNOWN_1;
         break;
-      case MENU_DEBUG_STORAGE:
-        sub_803A3BC(); // TODO seems to do something with friend areas
+      case MENU_DEBUG_MENU_STORAGE:
+        sub_803A3BC();
         nextMenu = MENU_MAIN_SCREEN;
         break;
-      case MENU_DEBUG_H_OPEN:
+      case MENU_DEBUG_MENU_H_OPEN:
         for(counter = 0; counter < 0x20; counter++){
           sub_80976F8(counter);
         }
@@ -131,5 +131,5 @@ void SetDebugMenuItems(void)
 
 void sub_803A3A0(void)
 {
-    sub_8035CC0(&gUnknown_203B3EC->unk140, 0);
+    sub_8035CC0(gUnknown_203B3EC->unk140, 0);
 }

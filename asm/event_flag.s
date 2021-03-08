@@ -2453,40 +2453,4 @@ _0800268E:
 	bx r1
 	thumb_func_end sub_8002658
 
-	thumb_func_start sub_8002694
-sub_8002694:
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r1, _080026B4
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	movs r2, 0x1
-	negs r2, r2
-	cmp r0, r2
-	beq _080026C2
-_080026A8:
-	ldrb r0, [r1, 0x2]
-	cmp r0, r3
-	bne _080026B8
-	movs r4, 0
-	ldrsh r0, [r1, r4]
-	b _080026C6
-	.align 2, 0
-_080026B4: .4byte gUnknown_80B71E4
-_080026B8:
-	adds r1, 0x4
-	movs r4, 0
-	ldrsh r0, [r1, r4]
-	cmp r0, r2
-	bne _080026A8
-_080026C2:
-	movs r0, 0x1
-	negs r0, r0
-_080026C6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8002694
-
 	.align 2, 0 @ Don't pad with nop.

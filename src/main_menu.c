@@ -15,27 +15,6 @@
 // NOTE: 0x2E
 // Deletes the Save
 
-struct MainMenuSub
-{
-    u8 unk2C;
-    u8 unk2D;
-    u8 unk2E;
-};
-
-struct MainMenu
-{
-    /* 0x0 */ s32 currMenu;
-    /* 0x4 */ s32 nextMenu;
-    /* 0x8 */ s32 lastMenu;
-    u8 padding[0x20];
-    /* 0x2C */ struct MainMenuSub sub;
-    u32 unk30;
-    u32 unk34;
-    s16 unk38;
-    u8 unk3A;
-    u8 unk3B;
-    s32 unk3C;
-};
 
 extern struct MainMenu *gUnknown_203B348;
 extern void* MemoryAlloc(u32 a, u32 b);
@@ -47,14 +26,14 @@ extern void sub_8094C14(void);
 extern void sub_8099690(u32);
 extern void DrawMainMenu(void);
 extern void CreateTradeItemsMenu(void);
-extern void sub_8036FDC(void);
+extern void sub_8036FDC(s32);
 extern void sub_803A1E4(void);
 extern void CreateFriendRescueMenu(void);
 extern void sub_803A1D8(void);
 extern void CreateWonderMailMenu(void);
 extern void CreateAdventureLogMenu(void);
 extern void CreateLoadScreen(u32);
-extern void sub_8035DB4(u32);
+extern s32 sub_8035DB4(u32);
 extern void CreateRescuePasswordMenu(u32);
 extern void sub_803850C(u32);
 extern s32 UpdateMainMenu(void);
@@ -126,10 +105,9 @@ void SetUpMenu(void)
         case MENU_TRADE_ITEMS:
             CreateTradeItemsMenu();
             break;
-        case 0x13:
-        case 0x14:
-            sub_8035DB4(gUnknown_203B348->nextMenu);
-            sub_8036FDC();
+        case MENU_COMMUNICATION_1:
+        case MENU_COMMUNICATION_2:
+            sub_8036FDC(sub_8035DB4(gUnknown_203B348->nextMenu));
             break;
         case MENU_FRIEND_RESCUE:
             CreateFriendRescueMenu();
@@ -265,8 +243,8 @@ void CleanUpMenu(void)
     case MENU_TRADE_ITEMS:
       CleanTradeItemsMenu();
       break;
-    case 0x13:
-    case 0x14:
+    case MENU_COMMUNICATION_1:
+    case MENU_COMMUNICATION_2:
       sub_80370D4();
       break;
     case MENU_FRIEND_RESCUE:

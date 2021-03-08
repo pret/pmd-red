@@ -5351,7 +5351,7 @@ _0809B91C:
 _0809B932:
 	str r1, [r0]
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 	.align 2, 0
 _0809B93C: .4byte 0x0000042c
@@ -5392,7 +5392,7 @@ _0809B988: .4byte 0x0000042c
 _0809B98C: .4byte gUnknown_811610C
 _0809B990:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 _0809B998:
 	bl sub_801516C
@@ -5451,7 +5451,7 @@ _0809BA0C: .4byte 0x0000042c
 _0809BA10: .4byte gUnknown_811612C
 _0809BA14:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 _0809BA1C:
 	bl sub_801516C
@@ -5487,7 +5487,7 @@ _0809BA2A:
 _0809BA5C: .4byte 0x00000424
 _0809BA60:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 _0809BA68:
 	movs r0, 0x1
@@ -5564,7 +5564,7 @@ _0809BAEA:
 	bl sub_80018D8
 _0809BB08:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 _0809BB10:
 	movs r0, 0x1
@@ -5627,7 +5627,7 @@ _0809BB66:
 	b _0809B978
 _0809BB92:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	b _0809B784
 _0809BB9A:
 	movs r0, 0x1
@@ -5990,7 +5990,7 @@ _0809BE94: .4byte gUnknown_3001B64
 _0809BE98: .4byte gUnknown_8116258
 _0809BE9C:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	ldr r0, _0809BEB0
 	ldr r0, [r0]
 	movs r2, 0x83
@@ -6003,7 +6003,7 @@ _0809BEB0: .4byte gUnknown_3001B64
 _0809BEB4: .4byte gUnknown_8116268
 _0809BEB8:
 	movs r0, 0x4
-	bl sub_80119D4
+	bl PlayMenuSoundEffect
 	ldr r0, _0809BECC
 	ldr r0, [r0]
 	movs r3, 0x83

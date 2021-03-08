@@ -51,8 +51,8 @@ extern u32 sub_80144A4(s32 *);
 
 extern void sub_803CE6C(void);
 extern char* GetMonSpecies(u32);
-extern void CopyStringtoBuffer(s32 *r0, char *r1);
-extern void sub_801602C(u32, s32 *r0);
+extern void CopyStringtoBuffer(char *r0, char *r1);
+extern void sub_801602C(u32, char *r0);
 
 extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
@@ -73,7 +73,7 @@ extern void sub_8013818(u32 *r0, s32, u32, u32);
 
 extern u32 GetKeyPress(struct UnkInputStruct **r0);
 extern u8 sub_80138B8(struct UnkInputStruct **r0, u32);
-extern void sub_80119D4(u32);
+extern void PlayMenuSoundEffect(u32);
 
 
 extern void sub_8013984(struct UnkInputStruct **r0);
@@ -503,13 +503,9 @@ void sub_803CB5C(void)
 
 void sub_803CB7C(void)
 {
-  char *monName;
-  s32 *iVar2;
 
-  iVar2 = &gUnknown_203B400->unk20;
-  monName = GetMonSpecies(gUnknown_203B400->PartnerID);
-  CopyStringtoBuffer(iVar2, monName);
-  sub_801602C(3, &gUnknown_203B400->unk20);
+  CopyStringtoBuffer(gUnknown_203B400->PartnerNick, GetMonSpecies(gUnknown_203B400->PartnerID));
+  sub_801602C(3, gUnknown_203B400->PartnerNick);
   gUnknown_203B400->TestState = 13;
 }
 
@@ -724,7 +720,7 @@ u16 HandlePartnerSelectionInput(void)
   sVar1 = gUnknown_203B404->currPartnerSelection;
   gUnknown_203B404->unk16 = 0;
   if (GetKeyPress(&gUnknown_203B404->unk18) == A_BUTTON) {
-    sub_80119D4(0);
+    PlayMenuSoundEffect(0);
     return gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
   }
   else {
@@ -735,10 +731,10 @@ u16 HandlePartnerSelectionInput(void)
       PersonalityTest_DisplayPartnerSprite();
     }
     if (gUnknown_203B404->unk16 != '\0') {
-      return 0xfffe;
+      return -2;
     }
     else {
-      return 0xffff;
+      return -1;
     }
   }
 }
