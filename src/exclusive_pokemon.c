@@ -2,6 +2,21 @@
 #include "constants/species.h"
 #define NUM_EXCLUSIVE_POKEMON 12
 
+#define RED_EXCLUSIVE(species)  \
+{                               \
+    .poke_id = species,         \
+    .in_rrt = TRUE,             \
+    .in_brt = FALSE,            \
+}
+
+#define BLUE_EXCLUSIVE(species) \
+{                               \
+    .poke_id = species,         \
+    .in_rrt = FALSE,            \
+    .in_brt = TRUE,             \
+}
+
+
 struct ExclusivePokemon
 {
     u16 poke_id;
@@ -11,67 +26,18 @@ struct ExclusivePokemon
 
 const struct ExclusivePokemon gExclusivePokemon[NUM_EXCLUSIVE_POKEMON] = {
 
-    {
-        .poke_id = SPECIES_PORYGON,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_PORYGON2,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-    {
-        .poke_id = SPECIES_MAGIKARP,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-    {
-        .poke_id = SPECIES_GYARADOS,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-    {
-        .poke_id = SPECIES_FEEBAS,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_MILOTIC,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_PLUSLE,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_MINUN,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-    {
-        .poke_id = SPECIES_LAPRAS,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-    {
-        .poke_id = SPECIES_MANTINE,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_ROSELIA,
-        .in_rrt = TRUE,
-        .in_brt = FALSE,
-    },
-    {
-        .poke_id = SPECIES_AIPOM,
-        .in_rrt = FALSE,
-        .in_brt = TRUE,
-    },
-
+    RED_EXCLUSIVE(SPECIES_PORYGON),
+    BLUE_EXCLUSIVE(SPECIES_PORYGON2),
+    BLUE_EXCLUSIVE(SPECIES_MAGIKARP),
+    BLUE_EXCLUSIVE(SPECIES_GYARADOS),
+    RED_EXCLUSIVE(SPECIES_FEEBAS),
+    RED_EXCLUSIVE(SPECIES_MILOTIC),
+    RED_EXCLUSIVE(SPECIES_PLUSLE),
+    BLUE_EXCLUSIVE(SPECIES_MINUN),
+    BLUE_EXCLUSIVE(SPECIES_LAPRAS),
+    RED_EXCLUSIVE(SPECIES_MANTINE),
+    RED_EXCLUSIVE(SPECIES_ROSELIA),
+    BLUE_EXCLUSIVE(SPECIES_AIPOM),
 };
 
 const u8 filler_ex0[8] = 
