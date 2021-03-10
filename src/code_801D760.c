@@ -22,18 +22,69 @@ extern u32 sub_80270A4();
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 
+extern u8 sub_8012FD8(u32 *);
+extern void sub_8013114(u32 *, s32 *);
+
 struct unk_203B250
 {
     u32 unk0;
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    u32 padding[3];
+    u8 unk8;
+    u8 unk9;
+    u8 fillA[0x14 - 0xA];
     u32 unk14;
-    u32 unk18;
+    u32 unk18; // an input struct??
 };
 
 struct unk_203B250 *gUnknown_203B250;
+
+void sub_801D680(void)
+{
+  int local_c;
+  
+  local_c = 0;
+  if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&local_c), local_c != 1)) {
+    gUnknown_203B250->unk14 = local_c;
+  }
+  switch(local_c) {
+      case 2:
+        sub_801D208(3);
+        break;
+      case 4:
+        sub_801D208(6);
+        break;
+      case 3:
+        sub_801D208(4);
+        break;
+      case 5:
+        sub_801D208(7);
+        break;
+      case 6:
+        sub_801D208(8);
+        break;
+      case 7:
+        sub_801D208(9);
+        break;
+      case 8:
+        sub_801D208(10);
+        break;
+      case 9:
+        sub_801D208(0xb);
+        break;
+      case 10:
+        gUnknown_203B250->unk9 = 1;
+        sub_801D208(2);
+        break;
+      case 11:
+        sub_801D208(0xc);
+        break;
+      case 1:
+        sub_801D208(2);
+        break;
+  }
+}
 
 void sub_801D760()
 {

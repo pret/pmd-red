@@ -60,36 +60,4 @@ _08098428:
 _08098430: .4byte gUnknown_8115E94
 	thumb_func_end sub_80983D8
 
-	thumb_func_start sub_8098434
-sub_8098434:
-	push {r4,lr}
-	adds r3, r0, 0
-	adds r4, r1, 0
-	movs r0, 0
-	ldrsh r1, [r3, r0]
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	subs r2, r1, r0
-	cmp r2, 0
-	bge _0809844A
-	negs r2, r2
-_0809844A:
-	movs r0, 0x2
-	ldrsh r1, [r3, r0]
-	movs r3, 0x2
-	ldrsh r0, [r4, r3]
-	subs r0, r1, r0
-	cmp r0, 0
-	bge _0809845A
-	negs r0, r0
-_0809845A:
-	cmp r0, r2
-	bge _08098460
-	adds r0, r2, 0
-_08098460:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8098434
-
         .align 2,0
