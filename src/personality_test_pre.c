@@ -18,6 +18,21 @@ extern void sub_8001044(u32 *);
 
 
 
+struct PersonalityAnswer
+{
+  const char * text;
+  int effect;
+};
+
+struct PersonalityQuestion
+{
+  const char * question;
+  const struct PersonalityAnswer * answers;
+  const u8 (*effects[16]);
+};
+
+extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
+
 struct UnkSaveStruct1
 {
     /* 0x0 */ u32 unk0;
@@ -527,38 +542,12 @@ void sub_803CBE4(void)
   }
 }
 
-NAKED
 void PromptNewQuestion(void)
 {
-    asm_unified(
-	"\tpush {lr}\n"
-	"\tsub sp, 0x14\n"
-	"\tldr r1, _0803CC38\n"
-	"\tldr r0, _0803CC3C\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r0, [r0, 0x3C]\n"
-	"\tlsls r0, 2\n"
-	"\tadds r0, r1\n"
-	"\tldr r1, [r0]\n"
-	"\tldr r0, [r1]\n"
-	"\tldr r3, [r1, 0x4]\n"
-	"\tmovs r2, 0\n"
-	"\tstr r2, [sp]\n"
-	"\tmovs r1, 0x3\n"
-	"\tstr r1, [sp, 0x4]\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tstr r2, [sp, 0xC]\n"
-	"\tadds r1, 0xFE\n"
-	"\tstr r1, [sp, 0x10]\n"
-	"\tmovs r1, 0\n"
-	"\tbl sub_8014248\n"
-	"\tadd sp, 0x14\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0803CC38: .4byte gPersonalityQuestionPointerTable\n"
-"_0803CC3C: .4byte gUnknown_203B400"
-    );
+  sub_8014248(gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->question,
+              0, 0,
+              (void *)gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->answers,
+              0, 3, 0, 0, 0x101);
 }
 
 void PrintPersonalityTypeDescription(void)
