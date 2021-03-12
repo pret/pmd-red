@@ -549,23 +549,16 @@ void sub_8028ED4()
     {
         return;
     }
-    if(temp == 8)
-    {
-        sub_8028B04(11);
-    }
-    else
-    {
-        switch(temp){
-            case 8:
-                sub_8028B04(2);
-                break;
-            case 9:
-            case 10:
-                sub_8028B04(2);
-                break;
-            default:
-                break;
-        }
+    switch(temp){
+        case 8:
+            sub_8028B04(11);
+            break;
+        case 9:
+        case 10:
+            sub_8028B04(2);
+            break;
+        default:
+            break;
     }
 }
 

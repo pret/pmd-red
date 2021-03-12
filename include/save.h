@@ -34,7 +34,7 @@ struct UnkStruct_203B184 {
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u32 unk1C;
     /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 *unk24;
+    /* 0x24 */ u8 *ExclusivePokemon;
     /* 0x28 */ u8 *BoughtFriendAreas;
     /* 0x2C */ u32 unk2C;
     /* 0x30 */ struct PlayTimeStruct *playTime;

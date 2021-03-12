@@ -148,8 +148,8 @@ extern u32 sub_8097680(void);
 extern u32 *sub_809769C(void);
 extern void sub_80974E8(void);
 extern void sub_8097748(void);
-extern u8 *sub_8097F6C(void);
-extern void sub_8097F74(void);
+extern u8 *GetExclusivePokemon(void);
+extern void InitializeExclusivePokemon(void);
 extern void sub_80993D8(void);
 
 extern struct PlayTimeStruct *gPlayTimeRef;
@@ -587,7 +587,7 @@ void sub_8012300(void)
     sub_8095900();
     sub_80974E8();
     sub_8094998(1);
-    sub_8097F74();
+    InitializeExclusivePokemon();
 }
 
 
@@ -611,10 +611,10 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B490 = r0->unk18;
        gUnknown_203B464 = r0->unk1C;
        gUnknown_203B494 = r0->unk20;
-       gUnknown_203B498 = r0->unk24;
+       gUnknown_203B498 = r0->ExclusivePokemon;
        gFriendAreas     = r0->BoughtFriendAreas;
        gUnknown_203B46C = r0->unk2C;
-       gPlayTimeRef = r0->playTime;
+       gPlayTimeRef     = r0->playTime;
        return;
     }
        gUnknown_203B460 = sub_80909D0();
@@ -626,7 +626,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B490 = sub_80958F8();
        gUnknown_203B464 = sub_809208C();
        gUnknown_203B494 = sub_8097680();
-       gUnknown_203B498 = sub_8097F6C();
+       gUnknown_203B498 = GetExclusivePokemon();
        gFriendAreas     = GetBoughtFriendAreas();
        gUnknown_203B46C = sub_8094990();
        gPlayTimeRef     = GetPlayTime();

@@ -5,9 +5,32 @@
 
 extern void sub_800226C(u8 r0, u8 r1, u32* r2, u8 u3);
 extern void sub_800160C(struct UnkEventStruct *r0, u32 r1, u32 r2);
-extern u8 sub_8002658(s32);
+extern u8 sub_8002658(s16);
+
+struct unkEventStruct
+{
+    s16 unk0;
+    u8 unk2; // Seems like friend area number
+};
+
+struct unkEventStruct gUnknown_80B71E4[100]; // TODO figure out size of this
 
 extern u8 gUnknown_2000A88[0x400];
+
+s16 sub_8002694(u8 param_1)
+{
+
+    struct unkEventStruct *puVar2 = gUnknown_80B71E4;
+
+    while (puVar2->unk0 != -1) {
+        if (puVar2->unk2 == param_1) {
+            return puVar2->unk0;
+        }
+        puVar2++;
+    }
+
+    return -1;
+}
 
 bool8 sub_80026CC(s16 r0)
 {

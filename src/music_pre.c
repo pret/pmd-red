@@ -600,7 +600,7 @@ u16 GetCurrentBGSong(void)
 
 #ifdef NONMATCHING
 // TODO fix reg allocation.. using one too many regs
-void sub_800C074(u16 SongIndex,u16 param_2)
+void sub_800C074(u16 SongIndex, u16 param_2)
 {
   bool8 interrupt_flag;
   u16 msVar;

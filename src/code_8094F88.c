@@ -14,8 +14,8 @@ extern u32 *gUnknown_203B488;
 extern u32 *gUnknown_203B48C;
 
 
-extern void sub_809488C(u32 *r0, u32 *r1, u32);
-extern void sub_8094924(u32 *r0, u32 *r1, u32);
+extern void sub_809488C(u8 *r0, u8 *r1, u32);
+extern void sub_8094924(u8 *r0, u8 *r1, u32);
 
 
 void InitializePlayTime(void)
@@ -87,20 +87,20 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
     }
 }
 
-void sub_8095044(u32 *r0)
+void sub_8095044(u8 *r0)
 {
-    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->frames)), 6);
-    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->seconds)), 6);
-    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->minutes)), 6);
-    sub_809488C(r0, (u32 *)(&(gPlayTimeRef->hours)), 14);
+    sub_809488C(r0, (&(gPlayTimeRef->frames)), 6);
+    sub_809488C(r0, (&(gPlayTimeRef->seconds)), 6);
+    sub_809488C(r0, (&(gPlayTimeRef->minutes)), 6);
+    sub_809488C(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
 }
 
-void sub_8095080(u32 *r0)
+void sub_8095080(u8 *r0)
 {
-    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->frames)), 6);
-    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->seconds)), 6);
-    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->minutes)), 6);
-    sub_8094924(r0, (u32 *)(&(gPlayTimeRef->hours)), 14);
+    sub_8094924(r0, (&(gPlayTimeRef->frames)), 6);
+    sub_8094924(r0, (&(gPlayTimeRef->seconds)), 6);
+    sub_8094924(r0, (&(gPlayTimeRef->minutes)), 6);
+    sub_8094924(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
 }
 
 void sub_80950BC(void)
