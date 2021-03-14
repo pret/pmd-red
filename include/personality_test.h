@@ -60,9 +60,6 @@ struct PersonalityStruct_203B404
 };
 extern struct PersonalityStruct_203B404 *gUnknown_203B404;
 
-
-
-
 void InitializeTestStats(void);
 void GenerateNewQuestionOrGender(void);
 void CallPromptNewQuestion(void);
@@ -86,6 +83,8 @@ void PersonalityTest_DisplayPartnerSprite(void);
 u16 HandlePartnerSelectionInput(void);
 void PersonalityTest_DisplayStarterSprite(void);
 void CreatePartnerSelectionMenu(s16);
+void sub_803CE6C(void);
+void sub_803CEAC(void);
 void sub_803CECC(void);
 void nullsub_135(void);
 

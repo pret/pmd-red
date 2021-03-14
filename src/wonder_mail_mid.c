@@ -38,7 +38,6 @@ extern struct unkStruct_203B2C4 *gUnknown_203B2C4;
 
 
 extern u16 gUnknown_80E5990[];
-extern struct unkStruct_203B340 *gUnknown_203B340;
 extern s32 sub_8001658(u32, u32);
 extern u32 gUnknown_80E4A40[];
 extern u8 sub_8099B94();
