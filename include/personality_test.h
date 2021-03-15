@@ -5,8 +5,15 @@
 
 struct unkData
 {
-    u8 unk0[24];
+    s16 unk0[12];
 };
+
+// Definitely wrong but need to figure out better structure later
+struct FaceData
+{
+    /* 0x0 */ u8 *unk0[5];
+};
+
 
 extern const struct unkData gUnknown_80F4244;
 

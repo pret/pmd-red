@@ -4,11 +4,12 @@
 
 struct unkStruct_203B418
 {
-    u8 padding[0x181FB];
+    u8 fill0[0x181FC];
     u32 unk181FC;
     u32 unk18200;
     u32 unk18204;
-    u32 unk18208;
+    u8 unk18208[3];
+    u8 unk1820B;
     u32 unk1820C;
     u32 unk18210;
     u8 padding2[3];
@@ -30,6 +31,47 @@ extern void LoadBufferedInputs(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_8083F58(void);
 extern void sub_8011860(void);
+
+extern void sub_803F580(u32);
+extern void sub_8049ED4();
+extern void sub_8040A84();
+extern void sub_80522A8(u32, const char *);
+
+extern const char *gUnknown_80FD040; // It became brighter on the floor
+
+struct unk8049590
+{
+    u32 unk0;
+    u16 unk4;
+};
+
+extern struct unk8049590 *sub_8049590(u32, u32);
+
+// Luminous Orb???
+void sub_804002C(u32 param_1)
+{
+  struct unk8049590 *iVar1;
+  int innerCounter;
+  int iVar3;
+  int iVar4;
+  
+  gUnknown_203B418->unk1820B = 1;
+  iVar3 = 0;
+  do {
+    innerCounter = 0;
+    iVar4 = iVar3 + 1;
+    do {
+      iVar1 = sub_8049590(innerCounter, iVar3);
+      iVar1->unk4 = iVar1->unk4 | 1;
+      innerCounter++;
+    } while (innerCounter < 0x38);
+    iVar3 = iVar4;
+  } while (iVar4 < 0x20);
+  sub_803F580(0);
+  sub_8049ED4();
+  sub_8040A84();
+  sub_80522A8(param_1, gUnknown_80FD040);
+}
 
 void sub_8040094(u8 r0)
 {

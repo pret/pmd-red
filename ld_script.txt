@@ -111,8 +111,7 @@ SECTIONS {
         src/code_803C1B4.o(.text);
         asm/code_803C1D0.o(.text);
         src/personality_test.o(.text);
-        asm/personality_test_2.o(.text);
-        src/personality_test_1.o(.text);
+        src/code_803D0D8.o(.text);
         asm/code_803D110.o(.text);
         src/code_8040094.o(.text);
         asm/code_8040094.o(.text);
@@ -229,7 +228,6 @@ SECTIONS {
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
-        src/personality_test_1.o(.rodata);
         data/data_80F4278.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
         data/data_810AE24.o(.rodata);

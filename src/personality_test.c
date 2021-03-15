@@ -1,6 +1,7 @@
 #include "global.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
+#include "constants/species.h"
 #include "random.h"
 #include "file_system.h"
 #include "pokemon.h"
@@ -47,7 +48,10 @@ extern void PlayMenuSoundEffect(u32);
 
 
 extern void sub_8013984(struct UnkInputStruct **r0);
+u32 sub_8013800(struct UnkInputStruct **r0, u32);
 extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
+extern void xxx_call_draw_string(u32 size, u32, const char *text, u32, u32);
+extern u32 sub_80095E4(s16, u32);
 
 
 struct PersonalityAnswer
@@ -75,13 +79,6 @@ struct UnkSaveStruct1
 };
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
-// The frick... This is definitely wrong in terms of members
-// There's 5 pointers in the data
-struct FaceData
-{
-    /* 0x0 */ u8 *unk0[5];
-};
-
 struct stack_PartnerSprite
 {
     // size: 0x60
@@ -91,13 +88,13 @@ struct stack_PartnerSprite
     u32 padding2[12];
 };
 
-extern struct unkData gUnknown_80F4278;
 extern const char gStarterReveal;
 extern const char gPartnerPrompt;
 extern const char gPartnerNickPrompt;
 extern const char gEndIntroText;
 extern const char gGenderText;
 extern u32 gGenderMenu;
+extern const char gUnknown_80F42C0;
 
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern char gAvailablePokemonNames[0x50];
@@ -138,17 +135,61 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 struct unkData gUnknown_80F4244 = 
 {
-    0, 0, 0, 0,
-    5, 0, 0, 0,
-    0xC, 0, 6, 0,
-    5, 0, 5, 0,
-    5, 0, 0, 0,
-    0, 0, 0, 0,
+    0, 0,
+    5, 0,
+    0xC, 6,
+    5, 5,
+    5,0,
+    0, 0
 };
 
 const u8 filler[8] = 
 {
     'p', 'k', 's', 'd', 'i', 'r', '0', 0
+};
+
+const s16 gPartners[NUM_PARTNERS] = 
+{
+    SPECIES_CHARMANDER,
+    SPECIES_BULBASAUR,
+    SPECIES_SQUIRTLE,
+    SPECIES_PIKACHU,
+    SPECIES_CHIKORITA,
+    SPECIES_TOTODILE,
+    SPECIES_CYNDAQUIL,
+    SPECIES_TORCHIC,
+    SPECIES_TREECKO,
+    SPECIES_MUDKIP
+};
+
+const struct unkData gUnknown_80F4278 = 
+{
+    0x00, 0x00,
+    0x03, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00
+};
+
+const struct unkData gUnknown_80F4290 = 
+{
+    0x00, 0x00,
+    0x06, 0x00,
+    0x02, 0x02,
+    0x09, 0x0B,
+    0x0D, 0x00,
+    0x00, 0x00
+};
+
+const struct unkData gUnknown_80F42A8 = 
+{
+    0x00, 0x00,
+    0x05, 0x00,
+    0x0E, 0x04,
+    0x05, 0x05,
+    0x05, 0x00,
+    0x00, 0x00
 };
 
 
@@ -793,4 +834,188 @@ void sub_803CECC(void)
         MemoryFree(gUnknown_203B404);
         gUnknown_203B404 = NULL;
     }
+}
+
+#ifdef NONMATCHING
+void RedrawPartnerSelectionMenu(void)
+{
+  s32 sVar1;
+  u32 uVar2;
+  const char *monName;
+  s32 monCounter;
+ 
+  sVar1 = sub_80095E4(gUnknown_203B404->unk32, 0xc);
+
+  // Have a feeling this is some graphical thing but 
+  // still not sure structure so it's not matching yet bc of that
+  // and some casting stuff
+  sVar1 += 2;
+  sVar1 <<= 16;
+  gUnknown_203B404->unk54[gUnknown_203B404->unk4C].unk0[7] = sVar1;
+  gUnknown_203B404->unk54[gUnknown_203B404->unk4C].unk0[8] = sVar1 + 2;
+
+  // Everything after this matches
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B404->unk54,1,1);
+  sub_8008C54(gUnknown_203B404->unk4C);
+  sub_80073B8(gUnknown_203B404->unk4C);
+  xxx_call_draw_string(0xc, 0, &gUnknown_80F42C0, gUnknown_203B404->unk4C, 0);
+
+  monCounter = 0;
+  while (monCounter < gUnknown_203B404->unk32) {
+    uVar2 = sub_8013800(&gUnknown_203B404->unk18, monCounter);
+    monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
+    xxx_call_draw_string(8, uVar2, monName, gUnknown_203B404->unk4C, 0);
+    monCounter++;
+  }
+  sub_80073E0(gUnknown_203B404->unk4C);
+  gUnknown_203B404->unk16 = 1;
+}
+#else
+NAKED
+void RedrawPartnerSelectionMenu(void)
+{
+	asm_unified("\tpush {r4-r6,lr}\n"
+	"\tsub sp, 0x4\n"
+	"\tldr r6, _0803CF60\n"
+	"\tldr r0, [r6]\n"
+	"\tmovs r1, 0x32\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tmovs r1, 0xC\n"
+	"\tbl sub_80095E4\n"
+	"\tadds r0, 0x2\n"
+	"\tlsls r0, 16\n"
+	"\tldr r2, [r6]\n"
+	"\tldr r3, [r2, 0x4C]\n"
+	"\tlsls r1, r3, 1\n"
+	"\tadds r1, r3\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r2, r1\n"
+	"\tadds r1, 0x62\n"
+	"\tmovs r4, 0\n"
+	"\tasrs r3, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r1, [r2, 0x4C]\n"
+	"\tlsls r0, r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tlsls r0, 3\n"
+	"\tadds r2, r0\n"
+	"\tadds r3, 0x2\n"
+	"\tadds r2, 0x64\n"
+	"\tstrh r3, [r2]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r6]\n"
+	"\tadds r0, 0x54\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tldr r0, [r6]\n"
+	"\tldr r0, [r0, 0x4C]\n"
+	"\tbl sub_8008C54\n"
+	"\tldr r0, [r6]\n"
+	"\tldr r0, [r0, 0x4C]\n"
+	"\tbl sub_80073B8\n"
+	"\tldr r2, _0803CF64\n"
+	"\tldr r0, [r6]\n"
+	"\tldr r3, [r0, 0x4C]\n"
+	"\tstr r4, [sp]\n"
+	"\tmovs r0, 0xC\n"
+	"\tmovs r1, 0\n"
+	"\tbl xxx_call_draw_string\n"
+	"\tmovs r5, 0\n"
+	"\tb _0803CF98\n"
+	"\t.align 2, 0\n"
+"_0803CF60: .4byte gUnknown_203B404\n"
+"_0803CF64: .4byte gUnknown_80F42C0\n"
+"_0803CF68:\n"
+	"\tldr r0, [r6]\n"
+	"\tadds r0, 0x18\n"
+	"\tadds r1, r5, 0\n"
+	"\tbl sub_8013800\n"
+	"\tadds r4, r0, 0\n"
+	"\tldr r0, [r6]\n"
+	"\tlsls r1, r5, 1\n"
+	"\tadds r0, 0x2\n"
+	"\tadds r0, r1\n"
+	"\tmovs r1, 0\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tbl GetMonSpecies\n"
+	"\tadds r2, r0, 0\n"
+	"\tldr r0, [r6]\n"
+	"\tldr r3, [r0, 0x4C]\n"
+	"\tmovs r0, 0\n"
+	"\tstr r0, [sp]\n"
+	"\tmovs r0, 0x8\n"
+	"\tadds r1, r4, 0\n"
+	"\tbl xxx_call_draw_string\n"
+	"\tadds r5, 0x1\n"
+"_0803CF98:\n"
+	"\tldr r0, [r6]\n"
+	"\tmovs r1, 0x32\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tcmp r5, r0\n"
+	"\tblt _0803CF68\n"
+	"\tldr r4, _0803CFBC\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r0, [r0, 0x4C]\n"
+	"\tbl sub_80073E0\n"
+	"\tldr r1, [r4]\n"
+	"\tmovs r0, 0x1\n"
+	"\tstrb r0, [r1, 0x16]\n"
+	"\tadd sp, 0x4\n"
+	"\tpop {r4-r6}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0803CFBC: .4byte gUnknown_203B404");
+}
+#endif
+
+void PersonalityTest_DisplayPartnerSprite(void)
+{
+  s32 partnerID;
+  struct OpenedFile *faceFile;
+  int palleteIndex;
+  u8 *r6;
+  u32 faceIndex;
+
+  partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
+  sub_8008C54(1);
+  sub_80073B8(1);
+  faceFile = GetDialogueSpriteDataPtr(partnerID);
+  r6 = ((struct FaceData *)(faceFile->data))->unk0[1 + EMOTION_NORMAL];
+  faceIndex = EMOTION_NORMAL;
+  for(palleteIndex = 0; palleteIndex < 16; palleteIndex++){
+    SetBGPaletteBufferColorArray(palleteIndex + 224,&((struct FaceData *)(faceFile->data))->unk0[faceIndex][palleteIndex << 2]);
+  }
+  sub_800836C(1,r6,0xe);
+  CloseFile(faceFile);
+  sub_80073E0(1);
+  gUnknown_203B404->unk16 = 1;
+}
+
+s32 GetValidPartners(void)
+{
+  u8 PlayerType[2];
+  u8 currentPartnerTypes[2];
+  s32 counter;
+  s32 ValidPartnerCounter;
+  s32 CurrentPartnerID;
+  
+  ValidPartnerCounter = 0;
+  PlayerType[0] = GetPokemonType(gUnknown_203B404->StarterID, 0);
+  PlayerType[1] = GetPokemonType(gUnknown_203B404->StarterID, 1);
+  for(counter = 0; counter < NUM_PARTNERS; counter++){
+    CurrentPartnerID = gPartners[counter];
+    currentPartnerTypes[0] = GetPokemonType(CurrentPartnerID, 0);
+    currentPartnerTypes[1] = GetPokemonType(CurrentPartnerID, 1);
+    if (((currentPartnerTypes[0] == '\0') || ((currentPartnerTypes[0] != PlayerType[0] && (currentPartnerTypes[0] != PlayerType[1]))))
+       && ((currentPartnerTypes[1] == '\0' || ((currentPartnerTypes[1] != PlayerType[0] && (currentPartnerTypes[1] != PlayerType[1])))
+           ))) {
+      gUnknown_203B404->PartnerArray[ValidPartnerCounter] = CurrentPartnerID;
+      ValidPartnerCounter++;
+    }
+  }
+  return ValidPartnerCounter;
 }
