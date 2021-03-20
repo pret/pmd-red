@@ -1,7 +1,5 @@
         .section .rodata
 
-        .include "data/text/type_names.inc"
-
 	.global gFormattedTypeStrings
 gFormattedTypeStrings: @ 810AE24
 	.incbin "baserom.gba", 0x10AE24, 0x12C

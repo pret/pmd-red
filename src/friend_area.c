@@ -31,8 +31,7 @@ extern void sub_800D158(u8 *buffer, const char *r2, ...);
 extern void sub_8090FEC(u32, u32 *r1, u32);
 
 
-// TODO uncomment when all references have been moved
-//static struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] = 
+//const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] = 
 //{
 //    [NONE] = {
 //        .num_pokemon = 0,

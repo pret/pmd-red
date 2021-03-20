@@ -1,4 +1,5 @@
 #include "global.h"
+#include "save.h"
 
 struct unkWonderMailData
 {
@@ -9,7 +10,7 @@ struct unkStruct_203B3E8
 {
     // size: 0x49C
     u8 unk0; // state variable?
-    u8 unk1[0x36];
+    u8 unk1[0x36]; // Wonder Mail Buffer...
     struct unkWonderMailData unk38; // 0x30 - 0x14
     u8 unk38_1[0x30 - 20]; // TODO: split for the ldm/stm stuff (fix dumb hack)
     u8 fill68[0x1EC - 0x68];
@@ -38,34 +39,16 @@ extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void sub_803A1C0(u8);
 extern void ResetUnusedInputStruct(void);
 extern void sub_800641C(void *, u32, u32);
-extern void sub_8039A18(void);
-extern void sub_8039AA8(void);
-extern void sub_8039B14(void);
-extern void sub_8039B20(void);
-extern void sub_8039B58(void);
-extern void sub_8039D88(void);
-extern void sub_8039D28(void);
-extern void sub_8039D68(void);
-extern void sub_8039DA4(void);
-extern void sub_8039DCC(void);
-extern void sub_8039B3C(void);
-extern void sub_8039D0C(void);
-extern void sub_8039C60(void);
-extern void sub_8039DE8(void);
-extern void sub_8030DE4();
-extern void sub_801B450();
-extern void sub_803084C();
-extern void sub_801CBB8();
-extern void sub_80155F0();
-extern void sub_8031E10();
+extern void sub_8030DE4(void);
+extern void sub_801B450(void);
+extern void sub_803084C(void);
+extern void sub_801CBB8(void);
+extern void sub_80155F0(void);
+extern void sub_8031E10(void);
 
 extern u32 sub_802D0E0();
 extern u8 sub_802D178();
 extern void sub_802D184();
-extern u8 sub_8012600();
-extern void sub_8012750();
-
-extern void sub_8012574(u32);
 
 extern s32 sub_80154F0();
 extern bool8 sub_803D358(u8 *, void *);
@@ -73,6 +56,20 @@ extern bool8 sub_80959C0(void *);
 extern void sub_80141B4(u32 *r0, u32, u32 *r1, u32);
 
 void sub_8039BAC(u32);
+void sub_8039A18(void);
+void sub_8039AA8(void);
+void sub_8039B14(void);
+void sub_8039B20(void);
+void sub_8039B58(void);
+void sub_8039D88(void);
+void sub_8039D28(void);
+void sub_8039D68(void);
+void sub_8039DA4(void);
+void sub_8039DCC(void);
+void sub_8039B3C(void);
+void sub_8039D0C(void);
+void sub_8039C60(void);
+void sub_8039DE8(void);
 
 
 extern u32 gUnknown_80E7914;
@@ -114,14 +111,14 @@ u8 UpdateWonderMailMenu(void)
     case 4:
         sub_8039A18();
         break;
-    case 5:
+    case 5: // When you exit out of the menu
         return 3;
     case 8:
         sub_8039AA8();
         break;
-    case 11:
+    case 11: // "Please enter the Wonder Mail Password" Screen
         break;
-    case 12:
+    case 12: // Password Entry
         sub_8039B14();
         break;
     case 6:
@@ -379,7 +376,7 @@ void sub_8039D68(void)
   if(sub_80144A4(&iVar2) == 0)
   {
       sub_803A1C0(0xF);
-      sub_8012574(0);
+      sub_8012574(0); // "Saving Adventure.."
   }
 }
 

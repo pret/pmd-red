@@ -2,6 +2,7 @@
 #define SAVE_H
 
 #include "time.h"
+#include "exclusive_pokemon.h"
 
 struct UnkStruct_sub_8011DAC {
     u8 fill000[0x4];
@@ -34,7 +35,7 @@ struct UnkStruct_203B184 {
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u32 unk1C;
     /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 *ExclusivePokemon;
+    /* 0x24 */ struct unkStruct_203B498 *ExclusivePokemon;
     /* 0x28 */ u8 *BoughtFriendAreas;
     /* 0x2C */ u32 unk2C;
     /* 0x30 */ struct PlayTimeStruct *playTime;
@@ -66,7 +67,7 @@ void sub_8012468(void);
 u8 sub_8012484(void);
 void sub_8012558(void);
 void sub_8012574(s16 PokemonID);
-u8 sub_8012600(void);
+bool8 sub_8012600(void);
 u32 sub_8012744(void);
 void sub_8012750(void);
 u32 sub_80127A8(void);

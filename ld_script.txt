@@ -226,11 +226,16 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
+        src/wonder_mail.o(.rodata);
+        data/data_80DED44.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
+        data/friend_areas.o(.rodata);
+        data/data_810AC60.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
+        src/code_809017C.o(.rodata);
         data/data_810AE24.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/m4a_tables.o(.rodata);

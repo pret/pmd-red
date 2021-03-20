@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "save.h"
+#include "exclusive_pokemon.h"
 
 struct unk_struct
 {
@@ -82,7 +83,7 @@ extern u32 *gUnknown_203B488;
 extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
-extern u8 *gUnknown_203B498;
+extern struct unkStruct_203B498 *gUnknown_203B498;
 
 extern const char gSaveCorrupted;
 extern const char gSavingAdventure;
@@ -95,7 +96,7 @@ extern const char gUnknown_80D45AC;
 
 extern const char gUnknown_80D45F4;
 extern const char gUnknown_80D4668;
-extern const char gUnknown_80D473C;
+extern const char gSaveNotWritten2;
 extern const char gSaveFailed2;
 
 extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
@@ -148,8 +149,6 @@ extern u32 sub_8097680(void);
 extern u32 *sub_809769C(void);
 extern void sub_80974E8(void);
 extern void sub_8097748(void);
-extern u8 *GetExclusivePokemon(void);
-extern void InitializeExclusivePokemon(void);
 extern void sub_80993D8(void);
 
 extern struct PlayTimeStruct *gPlayTimeRef;
@@ -523,13 +522,9 @@ u32 sub_8012240(void)
     xxx_call_start_bg_music();
     MemoryFree(r5);
     if(temp != 0)
-    {
         return 2;
-    }
     else
-    {
         return 0;
-    }
 }
 
 void sub_8012284(void)
@@ -661,29 +656,21 @@ u8 sub_8012484(void)
                 {
                     sub_80141B4(&gSaveCorrupted, 0, 0, 0x301);
                     gUnknown_203B188->unk0 = 3;
-                    break;
                 }
                 else
                 {
                     gUnknown_203B188->unk0 = 4;
-                    break;
                 }
             }
             else
             {
                 gUnknown_203B188->unk0 = 6;
-                break; 
             }
+        break;
         case 3:
             if(sub_80144A4(&temp2) == 0)
-            {
                 gUnknown_203B188->unk0 = 4;
-                break;
-            }
-            else
-            {
-                break;
-            }
+        break;
         case 4:
             sub_8012298();
             gUnknown_203B188->unk0 = 6;
@@ -808,7 +795,7 @@ void sub_8012574(s16 PokemonID)
 }
 #endif
 
-u8 sub_8012600(void)
+bool8 sub_8012600(void)
 {
   struct OpenedFile **faceFile;
   u32 local_14;
@@ -843,13 +830,9 @@ u8 sub_8012600(void)
         {
             case 0:
                 if(gUnknown_203B18C->faceFile != NULL)
-                {
                     sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
-                }
                 else
-                {
                     sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
-                }
                 gUnknown_203B18C->unk0 = 5;
                 break;
             case 1:
@@ -858,13 +841,9 @@ u8 sub_8012600(void)
                 break;
             default:
                 if(gUnknown_203B18C->faceFile != NULL)
-                {
                     sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
-                }
                 else
-                {
                     sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
-                }
                 gUnknown_203B18C->unk0 = 5;
                 break;
         }
@@ -892,9 +871,7 @@ void sub_8012750(void)
     if(gUnknown_203B18C != NULL)
     {
         if(gUnknown_203B18C->faceFile != NULL)
-        {
             CloseFile(gUnknown_203B18C->faceFile);
-        }
         MemoryFree(gUnknown_203B18C);
         gUnknown_203B18C = NULL;
     }
@@ -966,13 +943,9 @@ void sub_8012850(u8 *r0, u32 r1, u8 r2)
     gUnknown_203B194->unkC = r2;
     gUnknown_203B194->unk0 = 0;
     if(gUnknown_203B194->unkC != 0)
-    {
         sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
-    }
     else
-    {
         sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
-    }
 }
 
 u32 sub_80128B0(void)
@@ -993,25 +966,19 @@ u32 sub_80128B0(void)
         case 2:
             stack_1 = 0;
             if(gUnknown_203B194->unk10 == 0)
-            {
                 gUnknown_203B194->unk10 = sub_801203C(&stack_1, 2);
-            }
             switch(gUnknown_203B194->unk10)
             {
                 case 0:
                     sub_80121E0(0xf1207);
                     if(gUnknown_203B194->unkC != 0)
-                    {
                         sub_80141B4(&gUnknown_80D45F4, 0, 0, 0x301);
-                    }
                     else
-                    {
                         sub_80141B4(&gUnknown_80D4668, 0, 0, 0x301);
-                    }
                     gUnknown_203B194->unk0 = 3;
                     break;
                 case 1:
-                    sub_80141B4(&gUnknown_80D473C, 0, 0, 0);
+                    sub_80141B4(&gSaveNotWritten2, 0, 0, 0);
                     gUnknown_203B194->unk0 = 4;
                     break;
                 default:
@@ -1030,13 +997,9 @@ u32 sub_80128B0(void)
             break;
         case 5:
             if(gUnknown_203B194->unk10 == 0)
-            {
                 return 2;
-            }
             else
-            {
                 return 3;
-            }
             break;
         default:
             break;

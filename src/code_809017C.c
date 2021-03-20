@@ -1,7 +1,51 @@
 #include "global.h"
 
-extern u32 gUnformattedTypeStrings[]; // unformatted type names
-extern u32 gFormattedTypeStrings[]; // formatted type names
+#define NUM_POKEMON_TYPES 18
+
+extern const char gNoneText[];
+extern const char gNormalText[];
+extern const char gFireText[];
+extern const char gWaterText[];
+extern const char gGrassText[];
+extern const char gElectricText[];
+extern const char gIceText[];
+extern const char gFightingText[];
+extern const char gPoisonText[];
+extern const char gGroundText[];
+extern const char gFlyingText[];
+extern const char gPsychicText[];
+extern const char gBugText[];
+extern const char gRockText[];
+extern const char gGhostText[];
+extern const char gDragonText[];
+extern const char gDarkText[];
+extern const char gSteelText[];
+
+const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
+{
+    gNoneText,
+    gNormalText,
+    gFireText,
+    gWaterText,
+    gGrassText,
+    gElectricText,
+    gIceText,
+    gFightingText,
+    gPoisonText,
+    gGroundText,
+    gFlyingText,
+    gPsychicText,
+    gBugText,
+    gRockText,
+    gGhostText,
+    gDragonText,
+    gDarkText,
+    gSteelText,
+};
+
+#include "data/unformatted_type_names.h"
+
+extern const char * gFormattedTypeStrings[NUM_POKEMON_TYPES]; // formatted type names
 
 extern u8 gUnknown_810AC7C[];
 extern u8 gUnknown_810AC6A[];
@@ -290,12 +334,12 @@ void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size)
   }
 }
 
-u32 GetUnformattedTypeString(u8 type)
+const char *GetUnformattedTypeString(u8 type)
 {
     return gUnformattedTypeStrings[type];
 }
 
-u32 GetFormattedTypeString(u8 type)
+const char * GetFormattedTypeString(u8 type)
 {
     return gFormattedTypeStrings[type];
 }
