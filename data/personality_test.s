@@ -1866,4 +1866,3 @@ gEndIntroText: @ 80F2898
         .string "#+world of Pokémon!#P"
         .string "#+Go for it!\0"
         .align 2,0
-        .4byte gEndIntroText

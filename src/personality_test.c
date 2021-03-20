@@ -88,11 +88,11 @@ struct stack_PartnerSprite
     u32 padding2[12];
 };
 
-extern const char gStarterReveal;
-extern const char gPartnerPrompt;
-extern const char gPartnerNickPrompt;
-extern const char gEndIntroText;
-extern const char gGenderText;
+extern const char gStarterReveal[];
+extern const char gPartnerPrompt[];
+extern const char gPartnerNickPrompt[];
+extern const char gGenderText[];
+extern const char gEndIntroText[];
 extern u32 gGenderMenu;
 extern const char gUnknown_80F42C0;
 
@@ -113,6 +113,8 @@ extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 
+
+const char * const gEndIntroTextPtr = gEndIntroText;
 
 const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] = 
 {
@@ -143,10 +145,7 @@ struct unkData gUnknown_80F4244 =
     0, 0
 };
 
-const u8 filler[8] = 
-{
-    'p', 'k', 's', 'd', 'i', 'r', '0', 0
-};
+const char filler[] = "pksdir0"; // CHUNSOFT inserted for aligning data
 
 const s16 gPartners[NUM_PARTNERS] = 
 {
@@ -312,7 +311,7 @@ void GenerateNewQuestionOrGender(void)
   gUnknown_203B400->QuestionCounter++;
   if (gUnknown_203B400->QuestionCounter > MAX_ASKED_QUESTIONS) {
       // We've asked enough questions
-        sub_8014248(&gGenderText, 0, 0, &gGenderMenu, 0, 3, 0, 0, 257);
+        sub_8014248(gGenderText, 0, 0, &gGenderMenu, 0, 3, 0, 0, 257);
         gUnknown_203B400->TestState = 3;
   }
   else
@@ -524,7 +523,7 @@ void RevealStarter(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    sub_80141B4(&gStarterReveal,0,0,0x101);
+    sub_80141B4(gStarterReveal,0,0,0x101);
     PersonalityTest_DisplayStarterSprite();
     gUnknown_203B400->TestState = 6;
   }
@@ -541,7 +540,7 @@ void sub_803CA8C(void)
 
 void PromptPickPartner(void)
 {
-    sub_80141B4(&gPartnerPrompt, 0, 0, 0x301);
+    sub_80141B4(gPartnerPrompt, 0, 0, 0x301);
     gUnknown_203B400->TestState = 8;
 }
 
@@ -570,7 +569,7 @@ void PromptForPartnerNickname(void)
       if(selectedPartner != 0xfffe) {
         sub_803CE6C();
         gUnknown_203B400->PartnerID = selectedPartner;
-        sub_80141B4(&gPartnerNickPrompt, 0, 0, 0x301);
+        sub_80141B4(gPartnerNickPrompt, 0, 0, 0x301);
         gUnknown_203B400->TestState = 11;
       }
   }
@@ -597,7 +596,7 @@ void PrintEndIntroText(void)
 {
   if (sub_8016080() != 0) {
     sub_80160D8();
-    sub_80141B4(&gEndIntroText, 0, 0, 0x301);
+    sub_80141B4(gEndIntroText, 0, 0, 0x301);
     gUnknown_203B400->TestState = 14;
   }
 }

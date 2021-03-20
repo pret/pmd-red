@@ -5435,11 +5435,21 @@ gUnknown_80E7178: @ 80E7178
 
 	.global gUnknown_80E71E4
 gUnknown_80E71E4: @ 80E71E4
-	.incbin "baserom.gba", 0xE71E4, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E71FC
 gUnknown_80E71FC: @ 80E71FC
-	.incbin "baserom.gba", 0xE71FC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x09, 0x00
+        .byte 0x17, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7214
 gUnknown_80E7214: @ 80E7214
@@ -5447,15 +5457,46 @@ gUnknown_80E7214: @ 80E7214
 
 	.global gUnknown_80E7278
 gUnknown_80E7278: @ 80E7278
-	.incbin "baserom.gba", 0xE7278, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x09, 0x00
+        .byte 0x17, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7290
 gUnknown_80E7290: @ 80E7290
-	.incbin "baserom.gba", 0xE7290, 0x5C
+        .4byte Success_80E72D8
+        .4byte 0xC
+        .4byte PasswordAccept_80E72B4
+        .4byte 0xC
+        .4byte DATA_80E72B0
+        .4byte 0xC
+        .4byte 0
+        .4byte 0xA
+
+        .global DATA_80E72B0
+        DATA_80E72B0:
+        .byte 0x20, 0x20, 0x00, 0x00 @ 2 spaces??
+
+        .global PasswordAccept_80E72B4
+        PasswordAccept_80E72B4:
+        .asciz "#+The password has been accepted."
+        .align 2,0
+        
+        .global Success_80E72D8
+        Success_80E72D8:
+        .asciz "#+#CGSuccess!#R "
+        .align 2,0
 
 	.global gUnknown_80E72EC
 gUnknown_80E72EC: @ 80E72EC
-	.incbin "baserom.gba", 0xE72EC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x09, 0x00
+        .byte 0x17, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E7304
 gUnknown_80E7304: @ 80E7304
@@ -5463,7 +5504,12 @@ gUnknown_80E7304: @ 80E7304
 
 	.global gUnknown_80E7344
 gUnknown_80E7344: @ 80E7344
-	.incbin "baserom.gba", 0xE7344, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x09, 0x00
+        .byte 0x17, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E735C
 gUnknown_80E735C: @ 80E735C
@@ -5471,7 +5517,12 @@ gUnknown_80E735C: @ 80E735C
 
 	.global gUnknown_80E73AC
 gUnknown_80E73AC: @ 80E73AC
-	.incbin "baserom.gba", 0xE73AC, 0x18
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x09, 0x00
+        .byte 0x17, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E73C4
 gUnknown_80E73C4: @ 80E73C4
@@ -5644,35 +5695,98 @@ gUnknown_80E785C: @ 80E785C
 
 	.global gUnknown_80E786C
 gUnknown_80E786C: @ 80E786C
-	.incbin "baserom.gba", 0xE786C, 0x28
+        .4byte Send_80E788C
+        .4byte 1
+        .4byte Receive_80E7884
+        .4byte 2
+        .4byte 0
+        .4byte 0
+
+        .global Receive_80E7884
+        Receive_80E7884:
+        .asciz "Receive"
+        .align 2,0
+
+        .global Send_80E788C
+        Send_80E788C:
+        .asciz "Send"
+        .align 2,0
 
 	.global gUnknown_80E7894
 gUnknown_80E7894: @ 80E7894
-	.incbin "baserom.gba", 0xE7894, 0x44
+        .4byte GameLinkCable_80E78C8
+        .4byte 3
+        .4byte Password_80E78BC
+        .byte 0xFF, 0xFF, 0xFF, 0xFF
+        .4byte Cancel_80E78B4
+        .4byte 8
+        .4byte 0
+        .4byte 0
+
+        .global Cancel_80E78B4
+        Cancel_80E78B4:
+        .asciz "Cancel"
+        .align 2,0
+
+        .global Password_80E78BC
+        Password_80E78BC:
+        .asciz "Password"
+        .align 2,0
+
+        .global GameLinkCable_80E78C8
+        GameLinkCable_80E78C8:
+        .asciz "Game Link cable"
+        .align 2,0
 
 	.global gUnknown_80E78D8
 gUnknown_80E78D8: @ 80E78D8
-	.incbin "baserom.gba", 0xE78D8, 0x20
+        .4byte GameLinkCable_80E78C8
+        .4byte 3
+        .4byte Password_80E78BC
+        .4byte 5
+        .4byte Cancel_80E78B4
+        .4byte 8
+        .4byte 0
+        .4byte 0
 
 	.global gUnknown_80E78F8
 gUnknown_80E78F8: @ 80E78F8
-	.incbin "baserom.gba", 0xE78F8, 0x1C
+        .4byte Yes_80E7910
+        .4byte 6
+        .4byte Cancel_80E78B4
+        .4byte 0
+        .4byte 0
+        .4byte 0
+
+        .global Yes_80E7910
+        Yes_80E7910:
+        .asciz "Yes"
+        .align 2,0
 
 	.global gUnknown_80E7914
 gUnknown_80E7914: @ 80E7914
-	.incbin "baserom.gba", 0xE7914, 0x24
+        .asciz "There was a communication error."
+        .align 2,0
 
 	.global gUnknown_80E7938
 gUnknown_80E7938: @ 80E7938
-	.incbin "baserom.gba", 0xE7938, 0x5C
+        .string "An incorrect number of GBA systems are\n"
+        .string "connected.\n"
+        .asciz "Please redo this process from the start."
+        .align 2,0
 
 	.global gUnknown_80E7994
 gUnknown_80E7994: @ 80E7994
-	.incbin "baserom.gba", 0xE7994, 0x50
+        .string "There is no response from your friend.\n"
+        .asciz "Please redo this process from the start."
+        .align 2,0
 
 	.global gUnknown_80E79E4
 gUnknown_80E79E4: @ 80E79E4
-	.incbin "baserom.gba", 0xE79E4, 0x64
+        .string "The sender and receiver appear to be\n"
+        .string "in different modes.\n"
+        .asciz "Please redo the process from the start."
+        .align 2,0
 
 	.global gUnknown_80E7A48
 gUnknown_80E7A48: @ 80E7A48
@@ -5680,23 +5794,30 @@ gUnknown_80E7A48: @ 80E7A48
 
 	.global gUnknown_80E7AC4
 gUnknown_80E7AC4: @ 80E7AC4
-	.incbin "baserom.gba", 0xE7AC4, 0x1C
+        .asciz "What would you like to do?"
+        .align 2,0
 
 	.global gUnknown_80E7AE0
 gUnknown_80E7AE0: @ 80E7AE0
-	.incbin "baserom.gba", 0xE7AE0, 0x34
+        .string "How would you like to send your\n"
+        .asciz "#CGWonder Mail#R?"
+        .align 2,0
 
 	.global gUnknown_80E7B14
 gUnknown_80E7B14: @ 80E7B14
-	.incbin "baserom.gba", 0xE7B14, 0x34
+        .string "How would you like to receive the\n"
+        .asciz "#CGWonder Mail#R?"
+        .align 2,0
 
 	.global gUnknown_80E7B48
 gUnknown_80E7B48: @ 80E7B48
-	.incbin "baserom.gba", 0xE7B48, 0x20
+        .asciz "Your adventure will be saved."
+        .align 2,0
 
 	.global gUnknown_80E7B68
 gUnknown_80E7B68: @ 80E7B68
-	.incbin "baserom.gba", 0xE7B68, 0x20
+        .asciz "Your #CGWonder Mail#R was sent."
+        .align 2,0
 
 	.global gUnknown_80E7B88
 gUnknown_80E7B88: @ 80E7B88
@@ -5704,7 +5825,8 @@ gUnknown_80E7B88: @ 80E7B88
 
 	.global gUnknown_80E7BC8
 gUnknown_80E7BC8: @ 80E7BC8
-	.incbin "baserom.gba", 0xE7BC8, 0x24
+        .asciz "The #CGWonder Mail#R was refused."
+        .align 2,0
 
 	.global gUnknown_80E7BEC
 gUnknown_80E7BEC: @ 80E7BEC
@@ -6196,8 +6318,8 @@ gUnknown_80E8BCC: @ 80E8BCC
 gUnknown_80E8BF8: @ 80E8BF8
 	.incbin "baserom.gba", 0xE8BF8, 0x50
 
-	.global gUnknown_80E8C48
-gUnknown_80E8C48: @ 80E8C48
+	.global gMissionRewardText
+gMissionRewardText: @ 80E8C48
 	.incbin "baserom.gba", 0xE8C48, 0x50
 
 	.global gUnknown_80E8C98
@@ -6232,9 +6354,34 @@ gUnknown_80E9920: @ 80E9920
 gUnknown_80E9F8C: @ 80E9F8C
 	.incbin "baserom.gba", 0xE9F8C, 0xED0
 
+@ Escort Mission Text
 	.global gUnknown_80EAE5C
 gUnknown_80EAE5C: @ 80EAE5C
-	.incbin "baserom.gba", 0xEAE5C, 0x5C
+        .4byte TakeMe_Text
+        .4byte WantToSee_Text
+        .4byte TakeMeWith_Text
+        .4byte EscortMe_Text
+
+
+        .global EscortMe_Text
+        EscortMe_Text:
+        .asciz "Escort me!"
+        .align 2,0
+
+        .global TakeMeWith_Text
+        TakeMeWith_Text:
+        .asciz "Please take me with you!"
+        .align 2,0
+
+        .global WantToSee_Text
+        WantToSee_Text:
+        .asciz "I want to see #C6%s#R."
+        .align 2,0
+
+        .global TakeMe_Text
+        TakeMe_Text:
+        .asciz "Take me!"
+        .align 2,0
 
 	.global gUnknown_80EAEB8
 gUnknown_80EAEB8: @ 80EAEB8
@@ -6252,6 +6399,7 @@ gUnknown_80EB220: @ 80EB220
 gUnknown_80EB2F0: @ 80EB2F0
 	.incbin "baserom.gba", 0xEB2F0, 0x108
 
+@ Item Delivery Mission Text
 	.global gUnknown_80EB3F8
 gUnknown_80EB3F8: @ 80EB3F8
 	.incbin "baserom.gba", 0xEB3F8, 0x334

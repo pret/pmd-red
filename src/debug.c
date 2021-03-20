@@ -6,9 +6,8 @@
 
 extern void Hang();
 
-extern u8 gUnknown_203B150;
-
 extern bool32 gNDS_DebugEnabled;
+extern u8 gUnknown_203B150;
 
 extern const char gUnknown_80D421C[];
 extern const char gNotMountText[];
@@ -75,16 +74,19 @@ void nullsub_27(void)
 {
 }
 
+// Unused
 void sub_8011B08(void)
 {
     gUnknown_203B150 = 1;
 }
 
+// Unused
 void sub_8011B14(void)
 {
     gUnknown_203B150 = 0;
 }
 
+// Unused
 u8 sub_8011B20(void)
 {
     gUnknown_203B150 = !gUnknown_203B150;
