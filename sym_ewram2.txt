@@ -590,7 +590,7 @@ gUnknown_203B45C = .; /* 203B45C */
 gUnknown_203B460 = .; /* 203B460 */
 	. += 0x4;
 
-gUnknown_203B464 = .; /* 203B464 */
+gRescueTeamInfoRef = .; /* 203B464 */
 	. += 0x4;
 
 gFriendAreas = .; /* 203B468 */

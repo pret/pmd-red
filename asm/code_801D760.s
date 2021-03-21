@@ -55,12 +55,12 @@ _0801D8B2:
 	movs r2, 0x6
 	bl sub_801D970
 	ldr r5, _0801D964
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetTeamRankString
 	adds r4, r0, 0
-	bl sub_8092110
+	bl GetTeamRankPts
 	adds r3, r0, 0
 	add r0, sp, 0x4
 	adds r1, r5, 0
@@ -127,7 +127,7 @@ _0801D994:
 	adds r4, 0x1
 	cmp r4, 0xF
 	ble _0801D994
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r0, 17
 	adds r6, r0

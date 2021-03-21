@@ -7938,15 +7938,22 @@ gUnknown_8108EC0: @ 8108EC0
 
 	.global gUnknown_8108F10
 gUnknown_8108F10: @ 8108F10
-	.incbin "baserom.gba", 0x108F10, 0x8
+        .asciz "#cD%s#r"
+        .align 2,0
 
 	.global gUnknown_8108F18
 gUnknown_8108F18: @ 8108F18
-	.incbin "baserom.gba", 0x108F18, 0x14
+        .string "#cD%s#r"
+        .byte 0x81, 0x40
+        .asciz "#c5%d#rF"
+        .align 2,0
 
 	.global gUnknown_8108F2C
 gUnknown_8108F2C: @ 8108F2C
-	.incbin "baserom.gba", 0x108F2C, 0x14
+        .string "#cD%s#r"
+        .byte 0x81, 0x40
+        .asciz "B#c5%d#rF"
+        .align 2,0
 
 	.global gUnknown_8108F40
 gUnknown_8108F40: @ 8108F40
@@ -8045,19 +8052,19 @@ gUnknown_81097F8: @ 81097F8
         .string "pksdir0\0"
 
 
-	.global gUnknown_8109810
-gUnknown_8109810: @ 8109810
+	.global gRescueRankMaxPoints
+gRescueRankMaxPoints: @ 8109810
         @ replacing .incbin "baserom.gba", 0x00109810, 0x1c
-        .byte 0x32, 0x00, 0x00, 0x00
-        .byte 0xf4, 0x01, 0x00, 0x00
-        .byte 0xdc, 0x05, 0x00, 0x00
-        .byte 0xb8, 0x0b, 0x00, 0x00
-        .byte 0x4c, 0x1d, 0x00, 0x00
-        .byte 0x98, 0x3a, 0x00, 0x00
-        .byte 0x00, 0xe1, 0xf5, 0x05
+        .4byte 50
+        .4byte 500
+        .4byte 1500
+        .4byte 3000
+        .4byte 7500
+        .4byte 15000
+        .4byte 100000000
 
-	.global gUnknown_810982C
-gUnknown_810982C: @ 810982C
+	.global gTeamNamePlaceholder
+gTeamNamePlaceholder: @ 810982C
         @ replacing .incbin "baserom.gba", 0x0010982c, 0x10
         .byte 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x00
         .string "pksdir0\0"

@@ -875,7 +875,7 @@ gItemParametersFile = .; /* 20389A0 */
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;
 
-gUnknown_2038C10 = .; /* 2038C10 (seems to be copy of gTeamName)*/
+gRescueTeamInfo = .; /* 2038C10 */
 	. += 0x18;
 
 gBoughtFriendAreas = .; /* 2038C28 (one byte for each friend area) */
@@ -914,7 +914,7 @@ gUnknown_2039448 = .; /* 2039448 */
 gUnknown_2039778 = .; /* 2039778 */
 	. += 0xC8;
 
-gUnknown_2039840 = .; /* 2039840 */
+gExclusivePokemonInfo = .; /* 2039840 */
 	. += 0x68;
 
 gUnknown_20398A8 = .; /* 20398A8 */

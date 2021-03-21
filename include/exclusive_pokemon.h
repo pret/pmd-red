@@ -10,7 +10,7 @@ struct ExclusivePokemon
     bool8 in_brt; // blue rescue team
 };
 
-struct unkStruct_203B498
+struct ExclusivePokemonData
 {
     u8 fill0[0x58];
     bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
@@ -32,7 +32,7 @@ struct unkStruct_203B498
 
 
 void LoadExclusivePokemon(void);
-struct unkStruct_203B498 *GetExclusivePokemon(void);
+struct ExclusivePokemonData *GetExclusivePokemon(void);
 void InitializeExclusivePokemon(void);
 
 #endif // EXCLUSIVE_POKEMON_H

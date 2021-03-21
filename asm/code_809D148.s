@@ -2461,7 +2461,7 @@ _0809E6C2:
 	cmp r0, 0x1
 	bne _0809E6D0
 	ldr r0, _0809E6DC
-	bl sub_80920EC
+	bl SetRescueTeamName
 _0809E6D0:
 	ldr r1, [r4]
 	adds r0, r7, 0
@@ -9001,19 +9001,19 @@ _080A1EC4: .4byte gUnknown_202E628
 _080A1EC8: .4byte gUnknown_81167E8
 _080A1ECC: .4byte gUnknown_2039D98
 _080A1ED0:
-	bl sub_809211C
+	bl GetPtsToNextRank
 	b _080A177C
 _080A1ED6:
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_809211C
+	bl GetPtsToNextRank
 	cmp r0, 0
 	bgt _080A1EE8
 	b _080A236A
 _080A1EE8:
-	bl sub_8092158
-	bl sub_8092178
+	bl AddToTeamRankPts
+	bl GetRescueTeamRank
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24

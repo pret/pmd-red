@@ -2391,7 +2391,7 @@ _08002628:
 	bl sub_80973F4
 	b _08002648
 _08002630:
-	bl sub_8092178
+	bl GetRescueTeamRank
 	movs r1, 0
 	lsls r0, 24
 	lsrs r0, 24

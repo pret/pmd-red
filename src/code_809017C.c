@@ -21,6 +21,17 @@ extern const char gDragonText[];
 extern const char gDarkText[];
 extern const char gSteelText[];
 
+enum TeamRanks
+{
+    NORMAL_RANK,
+    BRONZE_RANK,
+    SILVER_RANK,
+    GOLD_RANK,
+    PLATINUM_RANK,
+    DIAMOND_RANK,
+    LUCARIO_RANK
+};
+
 const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
 {
     gNoneText,
@@ -55,14 +66,14 @@ extern u8 *AbilityDescriptions[];
 
 extern u32 gUnknown_810983C[26]; // TODO: verify size later
 
-struct unkStruct_203B464
+struct RescueTeamData
 {
-    u8 unk0[0xA]; // some string of sorts
-    s32 unkC;
+    u8 teamName[0xA]; // some string of sorts
+    s32 teamRankPts;
     u8 unk10;
 };
-extern struct unkStruct_203B464 *gUnknown_203B464;
-extern struct unkStruct_203B464 gUnknown_2038C10;
+extern struct RescueTeamData *gRescueTeamInfoRef;
+extern struct RescueTeamData gRescueTeamInfo;
 
 extern void sub_809485C(u32 *r0, u8 *r1, u32 r2);
 extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);
@@ -72,13 +83,14 @@ extern void nullsub_102(u32 *r0);
 extern u8 sub_80023E4(u32);
 
 extern const char *gRescueTeamRanks[];
-extern s32 gUnknown_8109810[7];
-extern u8 gUnknown_810982C[0x8]; // Pokemon
+extern s32 gRescueRankMaxPoints[7];
+extern u8 gTeamNamePlaceholder[0x8]; // Pokemon
 extern u8 gUnknown_810A35B[0x10];
 
 // Forward declaration
 void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
+u8 GetRescueTeamRank(void);
 
 bool32 sub_8092040(u8 param_1)
 {
@@ -97,21 +109,21 @@ bool32 sub_8092040(u8 param_1)
   }
 }
 
-void sub_809207C(void)
+void LoadRescueTeamInfo(void)
 {
-    gUnknown_203B464 = &gUnknown_2038C10;
+    gRescueTeamInfoRef = &gRescueTeamInfo;
 }
 
-struct unkStruct_203B464 *sub_809208C(void)
+struct RescueTeamData *GetRescueTeamInfo(void)
 {
-    return &gUnknown_2038C10;
+    return &gRescueTeamInfo;
 }
 
-void sub_8092094(void)
+void InitializeResuceTeamInfo(void)
 {
-    BoundedCopyStringtoBuffer(gUnknown_203B464->unk0, gUnknown_810982C, 0xA);
-    gUnknown_203B464->unkC = 0;
-    gUnknown_203B464->unk10 = 0;
+    BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, 0xA);
+    gRescueTeamInfoRef->teamRankPts = 0;
+    gRescueTeamInfoRef->unk10 = 0;
 }
 
 void sub_80920B8(u8 *buffer)
@@ -119,103 +131,67 @@ void sub_80920B8(u8 *buffer)
     s32 counter;
     for(counter = 0; counter < 0xA; counter++)
     {
-        *buffer++ = gUnknown_203B464->unk0[counter];
+        *buffer++ = gRescueTeamInfoRef->teamName[counter];
     }
 }
 
 void sub_80920D8(u8 *buffer)
 {
-    sub_80922B4(buffer, gUnknown_203B464->unk0, 0xA);
+    sub_80922B4(buffer, gRescueTeamInfoRef->teamName, 0xA);
 }
 
-void sub_80920EC(u8 *r0)
+void SetRescueTeamName(u8 *buffer)
 {
     s32 counter;
     for(counter = 0; counter < 0xA; counter++)
     {
-        gUnknown_203B464->unk0[counter] = *r0++;
+        gRescueTeamInfoRef->teamName[counter] = *buffer++;
     }
 }
 
-s32 sub_8092110(void)
+s32 GetTeamRankPts(void)
 {
-   return gUnknown_203B464->unkC;
+   return gRescueTeamInfoRef->teamRankPts;
 }
 
-
-#ifdef NONMATCHING
-s32 sub_809211C(void)
+s32 GetPtsToNextRank(void)
 {
-  u8 uVar1;
-  s32 iVar2;
+  u8 teamRank;
 
-  uVar1 = sub_8092178();
-  if (uVar1 != 6) {
-    // Goes to R2 instead of R1 but matches aside from that
-    iVar2 =  gUnknown_8109810[uVar1] - gUnknown_203B464->unkC;
+  teamRank = GetRescueTeamRank();
+  if (teamRank == LUCARIO_RANK) {
+      return 0;
   }
   else
   {
-    iVar2 = 0;
+      return (gRescueRankMaxPoints[teamRank] - gRescueTeamInfoRef->teamRankPts);
   }
-  return iVar2;
 }
-#else
-NAKED 
-s32 sub_809211C(void)
-{
-    asm_unified(
-	"\tpush {lr}\n"
-	"\tbl sub_8092178\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0x6\n"
-	"\tbeq _08092144\n"
-	"\tldr r1, _0809213C\n"
-	"\tlsls r0, 2\n"
-	"\tadds r0, r1\n"
-	"\tldr r1, _08092140\n"
-	"\tldr r1, [r1]\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r1, [r1, 0xC]\n"
-	"\tsubs r0, r1\n"
-	"\tb _08092146\n"
-	"\t.align 2, 0\n"
-"_0809213C: .4byte gUnknown_8109810\n"
-"_08092140: .4byte gUnknown_203B464\n"
-"_08092144:\n"
-	"\tmovs r0, 0\n"
-"_08092146:\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-}
-#endif
-
 
 // Unused
-void sub_809214C(s32 param_1)
+void SetTeamRankPoints(s32 newPts)
 {
-    gUnknown_203B464->unkC = param_1;
+    gRescueTeamInfoRef->teamRankPts = newPts;
 }
 
-void sub_8092158(s32 param_1)
+void AddToTeamRankPts(s32 param_1)
 {
-  gUnknown_203B464->unkC += param_1;
-  if (gUnknown_203B464->unkC > 99999999) {
-   gUnknown_203B464->unkC = 99999999;
+  gRescueTeamInfoRef->teamRankPts += param_1;
+  if (gRescueTeamInfoRef->teamRankPts > 99999999) {
+   gRescueTeamInfoRef->teamRankPts = 99999999;
   }
 }
 
-u8 sub_8092178(void)
+u8 GetRescueTeamRank(void)
 {
-  s32 index;
+  s32 rank;
 
-  for(index = 0; index < 7; index++){
-    if (gUnknown_203B464->unkC < gUnknown_8109810[index]) {
-      return index;
+  for(rank = NORMAL_RANK; rank < LUCARIO_RANK + 1; rank++){
+    if (gRescueTeamInfoRef->teamRankPts < gRescueRankMaxPoints[rank]) {
+      return rank;
     }
   }
-  return 6;
+  return LUCARIO_RANK;
 }
 
 const char *GetTeamRankString(u8 index)
@@ -226,7 +202,7 @@ const char *GetTeamRankString(u8 index)
 // Unused
 u8 sub_80921B8(void)
 {
-    return gUnknown_203B464->unk10;
+    return gRescueTeamInfoRef->unk10;
 }
 
 u32 sub_80921C4(u8 *param_1,u32 param_2)
@@ -241,11 +217,11 @@ u32 sub_80921C4(u8 *param_1,u32 param_2)
     zero = 0;
 
     sub_809486C(auStack36, param_1, param_2);
-    sub_809488C(auStack36, gUnknown_203B464->unk0, 0x58);
-    sub_809488C(auStack36, (u8 *)&gUnknown_203B464->unkC, 0x20);
-    gUnknown_203B464->unk10 = sub_80023E4(0);
+    sub_809488C(auStack36, gRescueTeamInfoRef->teamName, 0x58);
+    sub_809488C(auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
+    gRescueTeamInfoRef->unk10 = sub_80023E4(0);
 
-    if (gUnknown_203B464->unk10 != 0)
+    if (gRescueTeamInfoRef->unk10 != 0)
     {
         puVar2 = &neg1;
     }
@@ -264,10 +240,10 @@ u32 sub_809222C(u8 *param_1, u32 param_2)
   u8 byteArray[4];
 
   sub_809485C(auStack32, param_1, param_2);
-  sub_8094924(auStack32, gUnknown_203B464->unk0, 0x58);
-  sub_8094924(auStack32, (u8 *)&gUnknown_203B464->unkC, 0x20);
+  sub_8094924(auStack32, gRescueTeamInfoRef->teamName, 0x58);
+  sub_8094924(auStack32, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
   sub_8094924(auStack32, byteArray, 1);
-  gUnknown_203B464->unk10 = byteArray[0] & 1;
+  gRescueTeamInfoRef->unk10 = byteArray[0] & 1;
   nullsub_102(auStack32);
   return auStack32[2];
 }
