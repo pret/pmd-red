@@ -5,63 +5,6 @@
 
 	.text	
 
-	thumb_func_start LoadTeamRankBadge
-LoadTeamRankBadge:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	mov r8, r0
-	mov r9, r1
-	mov r10, r2
-	ldr r0, _0801D9DC
-	ldr r1, _0801D9E0
-	bl OpenFileAndGetFileDataPtr
-	adds r7, r0, 0
-	ldr r0, [r7, 0x4]
-	ldr r6, [r0]
-	ldr r5, [r0, 0x4]
-	movs r4, 0
-_0801D994:
-	adds r0, r4, 0
-	adds r0, 0xE0
-	adds r1, r5, 0
-	bl SetBGPaletteBufferColorArray
-	adds r5, 0x4
-	adds r4, 0x1
-	cmp r4, 0xF
-	ble _0801D994
-	bl GetRescueTeamRank
-	lsls r0, 24
-	lsrs r0, 17
-	adds r6, r0
-	movs r0, 0x10
-	str r0, [sp]
-	str r6, [sp, 0x4]
-	movs r0, 0xE
-	str r0, [sp, 0x8]
-	mov r0, r8
-	mov r1, r9
-	mov r2, r10
-	movs r3, 0x10
-	bl sub_8007E20
-	adds r0, r7, 0
-	bl CloseFile
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801D9DC: .4byte gUnknown_80DBF60
-_0801D9E0: .4byte gTitleMenuFileArchive
-	thumb_func_end LoadTeamRankBadge
-
 	thumb_func_start sub_801D9E4
 sub_801D9E4:
 	push {r4,r5,lr}

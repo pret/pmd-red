@@ -1819,8 +1819,8 @@ gUnknown_80DBF4C: @ 80DBF4C
         .byte 0x83, 0xBF, 0x83, 0xC4
         .align 2,0
 
-	.global gUnknown_80DBF60
-gUnknown_80DBF60: @ 80DBF60
+	.global gTeamRankBadgeFileName
+gTeamRankBadgeFileName: @ 80DBF60
         .string "tmrkpat\0"
         .align 2,0
         .string "pksdir0\0"
