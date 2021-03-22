@@ -100212,7 +100212,7 @@ _08084048: .4byte 0x00007fff
 _0808404C: .4byte 0x000003e7
 _08084050:
 	movs r0, 0x1E
-	bl sub_800BFD0
+	bl FadeOutBGM
 	movs r0, 0x1E
 	str r0, [r4, 0x4]
 	movs r0, 0x3

@@ -15,7 +15,7 @@ void FadeInNewBGM(u16 SongIndex, u16 speed);
 u16 GetCurrentBGSong(void);
 void sub_800BF48(u16 SongIndex);
 void sub_800BF80(void);
-void sub_800BFD0(u16 speed);
+void FadeOutBGM(u16 speed);
 void sub_800C074(u16 SongIndex, u16 param_2);
 
 void nullsub_19(void);

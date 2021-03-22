@@ -1,6 +1,31 @@
-	. += 0x8F0;
+gMPlayTrack_BGM = .; /* 2000000 */
+        . += 0x3C0;
 
-gUnknown_20008F0 = .; /* 20008F0 */
+gMPlayTrack_Unknown1 = .; /* 20003C0 */
+        . += 0x1E0;
+
+gMPlayTrack_Unknown2 = .; /* 20005A0 */
+        . += 0x50;
+
+gMPlayTrack_Unknown3 = .; /* 20005F0 */
+        . += 0x50;
+
+gMPlayTrack_Unknown4 = .; /* 2000640 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown5 = .; /* 20006E0 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown6 = .; /* 2000780 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown7 = .; /* 2000820 */
+        . += 0x50;
+
+gUnknown_2000870 = .; /* 2000870 */
+        . += 0x80;
+
+gMPlayInfo_BGM = .; /* 20008F0 */
 	. += 0x80;
 
 gUnknown_2000970 = .; /* 2000970 */

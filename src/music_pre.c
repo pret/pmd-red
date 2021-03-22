@@ -28,7 +28,7 @@ struct unkStruct_202D648
 extern struct unkStruct_202D648 gUnknown_202D648[8];
 extern struct unkStruct_202D648 gUnknown_202D608[8];
 
-extern struct MusicPlayerInfo gUnknown_20008F0; // BGM??
+extern struct MusicPlayerInfo gMPlayInfo_BGM; // BGM??
 extern u32 gUnknown_203B0A0;
 extern u32 gUnknown_203B0A4;
 extern u16 gBGMusicPlayerState;
@@ -511,10 +511,10 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
     {
         gBGMusicPlayerState = 1;
         m4aSongNumStart(SongIndex);
-        m4aMPlayImmInit(&gUnknown_20008F0);
-        m4aMPlayVolumeControl(&gUnknown_20008F0, 0xFF, 0);
+        m4aMPlayImmInit(&gMPlayInfo_BGM);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0);
         m4aSongNumStop(SongIndex);
-        m4aMPlayFadeIn(&gUnknown_20008F0, speed);
+        m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
     }
     if(interrupt_flag)
         EnableInterrupts();
@@ -539,7 +539,7 @@ void sub_800BF80(void)
     {
         if(gCurrentBGSong != 999)
         {
-            m4aMPlayStop(&gUnknown_20008F0);
+            m4aMPlayStop(&gMPlayInfo_BGM);
         }
     }
     gCurrentBGSong = 999;
@@ -548,7 +548,7 @@ void sub_800BF80(void)
         EnableInterrupts();
 }
 
-void sub_800BFD0(u16 speed)
+void FadeOutBGM(u16 speed)
 {
 
     u32 comparison;
@@ -575,12 +575,12 @@ void sub_800BFD0(u16 speed)
             if(gBGMusicPlayerState == 2)
             {
                 gBGMusicPlayerState = 3;
-                m4aMPlayFadeOut(&gUnknown_20008F0, speed);
+                m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
             }
             else
             {
                 gCurrentBGSong = 999;
-                m4aMPlayStop(&gUnknown_20008F0);
+                m4aMPlayStop(&gMPlayInfo_BGM);
             }
         }
     }
@@ -626,7 +626,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
                 gUnknown_202D690 = msVar;
                 gUnknown_202D692 = 16;
                 gUnknown_202D694 = 0;
-                m4aMPlayFadeOutTemporarily(&gUnknown_20008F0,1);
+                m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM,1);
             }
             else 
             {
@@ -635,7 +635,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
                 else
                 {
                     gUnknown_202D690 = 3;
-                    m4aMPlayStop(&gUnknown_20008F0);
+                    m4aMPlayStop(&gMPlayInfo_BGM);
                     m4aSongNumStart(gUnknown_202D68E);
                 }
             }
@@ -645,7 +645,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
       {
         if (1 < (u16)(gUnknown_202D690 - 1U)) 
         {
-            m4aMPlayStop(&gUnknown_20008F0);
+            m4aMPlayStop(&gMPlayInfo_BGM);
             m4aSongNumStart(gUnknown_202D68E);
             gUnknown_202D690 = 3;
         }
@@ -788,7 +788,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
 "_0800C110: .4byte gBGMusicPlayerState\n"
 "_0800C114: .4byte gUnknown_202D692\n"
 "_0800C118: .4byte gUnknown_202D694\n"
-"_0800C11C: .4byte gUnknown_20008F0\n"
+"_0800C11C: .4byte gMPlayInfo_BGM\n"
 "_0800C120:\n"
 	"\tlsls r0, r1, 16\n"
 	"\tlsrs r0, 16\n"
@@ -805,7 +805,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
 	"\tbl m4aSongNumStart\n"
 	"\tb _0800C15E\n"
 	"\t.align 2, 0\n"
-"_0800C140: .4byte gUnknown_20008F0\n"
+"_0800C140: .4byte gMPlayInfo_BGM\n"
 "_0800C144:\n"
 	"\tsubs r0, 0x1\n"
 	"\tlsls r0, 16\n"
@@ -836,7 +836,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
 	"\tblt _0800C1A0\n"
 	"\tb _0800C19A\n"
 	"\t.align 2, 0\n"
-"_0800C17C: .4byte gUnknown_20008F0\n"
+"_0800C17C: .4byte gMPlayInfo_BGM\n"
 "_0800C180: .4byte gCurrentBGSong\n"
 "_0800C184:\n"
 	"\tcmp r0, 0x7A\n"

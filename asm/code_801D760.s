@@ -5,102 +5,8 @@
 
 	.text	
 
-	thumb_func_start sub_801D894
-sub_801D894:
-	push {r4-r6,lr}
-	sub sp, 0x68
-	ldr r0, _0801D8A8
-	ldr r1, [r0]
-	ldrb r0, [r1, 0x6]
-	cmp r0, 0
-	bne _0801D8AC
-	bl sub_8098FB4
-	b _0801D8B2
-	.align 2, 0
-_0801D8A8: .4byte gUnknown_203B250
-_0801D8AC:
-	ldrb r0, [r1, 0x6]
-	bl GetFriendAreaName
-_0801D8B2:
-	add r2, sp, 0x68
-	add r1, sp, 0x4
-	movs r3, 0
-	bl xxx_format_string
-	add r0, sp, 0x4
-	bl sub_8008ED0
-	movs r4, 0x80
-	subs r4, r0
-	lsrs r0, r4, 31
-	adds r4, r0
-	asrs r4, 1
-	movs r0, 0x1
-	bl sub_8008C54
-	movs r0, 0x1
-	bl sub_80073B8
-	movs r6, 0
-	str r6, [sp]
-	adds r0, r4, 0
-	movs r1, 0x4
-	add r2, sp, 0x4
-	movs r3, 0x1
-	bl xxx_call_draw_string
-	movs r0, 0x1
-	bl sub_80073E0
-	movs r0, 0x2
-	bl sub_8008C54
-	movs r0, 0x2
-	bl sub_80073B8
-	movs r0, 0x2
-	movs r1, 0x8
-	movs r2, 0x6
-	bl sub_801D970
-	ldr r5, _0801D964
-	bl GetRescueTeamRank
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetTeamRankString
-	adds r4, r0, 0
-	bl GetTeamRankPts
-	adds r3, r0, 0
-	add r0, sp, 0x4
-	adds r1, r5, 0
-	adds r2, r4, 0
-	bl sub_800D158
-	str r6, [sp]
-	movs r0, 0x20
-	movs r1, 0x4
-	add r2, sp, 0x4
-	movs r3, 0x2
-	bl xxx_call_draw_string
-	ldr r1, _0801D968
-	ldr r0, _0801D96C
-	ldr r0, [r0]
-	movs r2, 0x98
-	lsls r2, 2
-	adds r0, r2
-	ldr r2, [r0]
-	add r0, sp, 0x4
-	bl sub_800D158
-	str r6, [sp]
-	movs r0, 0x20
-	movs r1, 0x12
-	add r2, sp, 0x4
-	movs r3, 0x2
-	bl xxx_call_draw_string
-	movs r0, 0x2
-	bl sub_80073E0
-	add sp, 0x68
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801D964: .4byte gUnknown_80DBF3C
-_0801D968: .4byte gUnknown_80DBF4C
-_0801D96C: .4byte gUnknown_203B460
-	thumb_func_end sub_801D894
-
-	thumb_func_start sub_801D970
-sub_801D970:
+	thumb_func_start LoadTeamRankBadge
+LoadTeamRankBadge:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -154,7 +60,7 @@ _0801D994:
 	.align 2, 0
 _0801D9DC: .4byte gUnknown_80DBF60
 _0801D9E0: .4byte gTitleMenuFileArchive
-	thumb_func_end sub_801D970
+	thumb_func_end LoadTeamRankBadge
 
 	thumb_func_start sub_801D9E4
 sub_801D9E4:

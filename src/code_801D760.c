@@ -24,6 +24,23 @@ extern void sub_802C8F4(void);
 
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
+extern const char *sub_8098FB4();
+extern void xxx_format_string(const char *, u8 *, u32 **, u32);
+extern const char *GetFriendAreaName(u8);
+extern s32 sub_8008ED0(u8 *);
+extern void  xxx_call_draw_string(s32 size, u32, u8 *, u32, u32);
+extern const char *GetFriendAreaName(u8);
+extern u8 GetRescueTeamRank();
+extern const char *GetTeamRankString(u8);
+extern s32 GetTeamRankPts();
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+extern void LoadTeamRankBadge(u32, u32, u32);
+extern void sub_800D158(u8 *, u32 *, ...);
+
+extern u32 gUnknown_80DBF3C;
+extern u32 gUnknown_80DBF4C;
 
 struct unk_203B250
 {
@@ -39,6 +56,14 @@ struct unk_203B250
 };
 
 struct unk_203B250 *gUnknown_203B250;
+
+struct unkStruct_203B460
+{
+    u8 padding[0x260];
+    u32 unk260;
+};
+
+extern struct unkStruct_203B460 *gUnknown_203B460;
 
 void sub_801D680(void)
 {
@@ -212,4 +237,43 @@ void sub_801D878(void)
         return;
     sub_801DD50();
     sub_801D208(1);
+}
+
+void sub_801D894(void)
+{
+  u8 uVar1;
+  const char *location;
+  int iVar3;
+  s32 size_var;
+
+  // Stored on stack
+  u32 *preload_string;
+  u32 *r5; // R5
+  u8 auStack116 [96]; // sp +4
+  
+  if (gUnknown_203B250->unk6 == '\0') {
+    location = sub_8098FB4();
+  }
+  else {
+    location = GetFriendAreaName(gUnknown_203B250->unk6);
+  }
+  // TODO this is def a hack
+  xxx_format_string(location, auStack116, &preload_string + 1, 0);
+  iVar3 = sub_8008ED0(auStack116);
+  size_var = (0x80 - iVar3) / 2; // have to calculate here
+  sub_8008C54(1);
+  sub_80073B8(1);
+  xxx_call_draw_string(size_var, 4, auStack116, 1, 0);
+  sub_80073E0(1);
+  sub_8008C54(2);
+  sub_80073B8(2);
+  LoadTeamRankBadge(2, 8, 6);
+
+  r5 = &gUnknown_80DBF3C; // Have to load before TeamRank funcs
+  uVar1 = GetRescueTeamRank();
+  sub_800D158(auStack116, r5, GetTeamRankString(uVar1), GetTeamRankPts());
+  xxx_call_draw_string(0x20, 4, auStack116, 2, 0);
+  sub_800D158(auStack116, &gUnknown_80DBF4C, gUnknown_203B460->unk260);
+  xxx_call_draw_string(0x20, 0x12, auStack116, 2, 0);
+  sub_80073E0(2);
 }
