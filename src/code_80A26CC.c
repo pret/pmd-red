@@ -266,18 +266,14 @@ u32 sub_80A28B4(s16 r0)
     temp = sub_80A2620(r0);
     if(temp->unk0 != -1)
     {
-        if(sub_8097384(r0) == 0)
+        if(sub_8097384(r0) == 0 && sub_80973F4(r0) == 0)
         {
-            if(sub_80973F4(r0) == 0)
-            {
-                return 0;
-            }
+            return 0;
         }
         else
         {
             return 1;
         }
-        return 1;
     }
     return 0;
 }
