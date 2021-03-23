@@ -134,7 +134,8 @@ SECTIONS {
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
-        src/code_809017C.o(.text);
+        src/rescue_team_info.o(.text);
+        src/text_util.o(.text);
         src/friend_area.o(.text);
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
@@ -235,7 +236,8 @@ SECTIONS {
         data/friend_areas.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
-        src/code_809017C.o(.rodata);
+        src/rescue_team_info.o(.rodata);
+        src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/m4a_tables.o(.rodata);

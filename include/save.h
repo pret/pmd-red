@@ -3,6 +3,7 @@
 
 #include "time.h"
 #include "exclusive_pokemon.h"
+#include "rescue_team_info.h"
 
 struct UnkStruct_sub_8011DAC {
     u8 fill000[0x4];
@@ -33,7 +34,7 @@ struct UnkStruct_203B184 {
     /* 0x10 */ u32 *unk10;
     /* 0x14 */ u32 *unk14;
     /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 RescueTeamInfo;
+    /* 0x1C */ struct RescueTeamData *RescueTeamInfo;
     /* 0x20 */ u32 unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
     /* 0x28 */ u8 *BoughtFriendAreas;
