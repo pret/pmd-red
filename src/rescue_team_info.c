@@ -47,7 +47,7 @@ struct RescueTeamData *GetRescueTeamInfo(void)
 
 void InitializeResuceTeamInfo(void)
 {
-    BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, 0xA);
+    BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, TEAM_NAME_LENGTH);
     gRescueTeamInfoRef->teamRankPts = 0;
     gRescueTeamInfoRef->unk10 = 0;
 }
