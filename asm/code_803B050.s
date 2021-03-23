@@ -1912,7 +1912,7 @@ _0803BFA8:
 	add r0, sp, 0x4
 	b _0803BFEE
 	.align 2, 0
-_0803BFB8: .4byte gUnknown_80E8C48
+_0803BFB8: .4byte gMissionRewardText
 _0803BFBC:
 	ldr r1, _0803BFCC
 	ldrb r0, [r5]
@@ -1923,7 +1923,7 @@ _0803BFBC:
 	add r0, sp, 0x4
 	b _0803BFEE
 	.align 2, 0
-_0803BFCC: .4byte gUnknown_80E8C48
+_0803BFCC: .4byte gMissionRewardText
 _0803BFD0:
 	ldr r4, _0803C004
 	adds r0, r7, 0
@@ -1951,7 +1951,7 @@ _0803BFEE:
 	b _0803C040
 	.align 2, 0
 _0803C004: .4byte gUnknown_202DE58
-_0803C008: .4byte gUnknown_80E8C48
+_0803C008: .4byte gMissionRewardText
 _0803C00C:
 	ldr r1, _0803C028
 	ldrb r0, [r5]
@@ -1966,7 +1966,7 @@ _0803C00C:
 	bl xxx_call_draw_string
 	b _0803C040
 	.align 2, 0
-_0803C028: .4byte gUnknown_80E8C48
+_0803C028: .4byte gMissionRewardText
 _0803C02C:
 	ldr r1, _0803C0D4
 	lsls r0, r2, 2
@@ -2053,7 +2053,7 @@ _0803C0C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803C0D4: .4byte gUnknown_80E8C48
+_0803C0D4: .4byte gMissionRewardText
 _0803C0D8: .4byte gUnknown_80E8B7C
 	thumb_func_end CreateRescueDescription
 

@@ -1358,7 +1358,7 @@ _08095B48:
 	strb r0, [r4, 0x1]
 	cmp r0, 0x2
 	bne _08095B6C
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2357,7 +2357,7 @@ _08096280:
 	bne _0809629C
 	movs r5, 0x32
 _0809629C:
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6

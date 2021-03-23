@@ -5,8 +5,15 @@
 
 struct unkData
 {
-    u8 unk0[24];
+    s16 unk0[12];
 };
+
+// Definitely wrong but need to figure out better structure later
+struct FaceData
+{
+    /* 0x0 */ u8 *unk0[5];
+};
+
 
 extern const struct unkData gUnknown_80F4244;
 
@@ -60,9 +67,6 @@ struct PersonalityStruct_203B404
 };
 extern struct PersonalityStruct_203B404 *gUnknown_203B404;
 
-
-
-
 void InitializeTestStats(void);
 void GenerateNewQuestionOrGender(void);
 void CallPromptNewQuestion(void);
@@ -86,6 +90,8 @@ void PersonalityTest_DisplayPartnerSprite(void);
 u16 HandlePartnerSelectionInput(void);
 void PersonalityTest_DisplayStarterSprite(void);
 void CreatePartnerSelectionMenu(s16);
+void sub_803CE6C(void);
+void sub_803CEAC(void);
 void sub_803CECC(void);
 void nullsub_135(void);
 

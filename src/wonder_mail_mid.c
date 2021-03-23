@@ -38,7 +38,6 @@ extern struct unkStruct_203B2C4 *gUnknown_203B2C4;
 
 
 extern u16 gUnknown_80E5990[];
-extern struct unkStruct_203B340 *gUnknown_203B340;
 extern s32 sub_8001658(u32, u32);
 extern u32 gUnknown_80E4A40[];
 extern u8 sub_8099B94();
@@ -53,7 +52,7 @@ extern void sub_80141B4(u32 *r0, u32, u32 *r1, u32);
 
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern u32 gUnknown_80DF194;
-extern void sub_8029EC4(u32 param_1);
+extern void PrintWonderMailLinkError(u32 param_1);
 
 extern void sub_802B2BC(u32);
 extern u32 sub_80144A4(s32 *r0);
@@ -104,6 +103,7 @@ void sub_8029F98(void)
                     case 3:
                     case 5:
                     case 6:
+                        // "Thank-You Mail has been sent"
                         sub_80141B4(&gUnknown_80DF194, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
                         break;
                     case 4:
@@ -111,17 +111,17 @@ void sub_8029F98(void)
                         break;
                 }
                 sub_802B2BC(0xD);
-                return;
+                break;
             case 7:
                 sub_802B2BC(0x21);
-                return;
+                break;
             default:
-                return;
+                break;
         }
   }
   else
   {
-      sub_8029EC4(gUnknown_203B2C4->unk44);
+      PrintWonderMailLinkError(gUnknown_203B2C4->unk44);
       sub_802B2BC(0x1F);
   }
 }
@@ -179,13 +179,14 @@ void sub_802A0C8(void)
         sub_802B2BC(0x11);
         break;
     case 4:
-            gUnknown_203B2C4->unk4 = 0x10;
-            gUnknown_203B2C4->unk218 = sub_80307EC();
-            sub_8006518(&gUnknown_203B2C4->unk3BC);
-            ResetUnusedInputStruct();
-            sub_800641C(0,1,1);
-            sub_8030D40(gUnknown_203B2C4->unk218,0);
-            sub_802B2BC(0x12);
+        gUnknown_203B2C4->unk4 = 0x10;
+        gUnknown_203B2C4->unk218 = sub_80307EC();
+        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_802B2BC(0x12);
+        break;
   }
 }
 
@@ -211,22 +212,22 @@ void sub_802A174(void)
   switch(temp)
   {
       case 0xB:
-            sub_803084C();
-            sub_802B2BC(0xe);
-            break;
+        sub_803084C();
+        sub_802B2BC(0xe);
+        break;
       case 0xC:
-            gUnknown_203B2C4->unk4 = 0x2b;
-            sub_8006518(&gUnknown_203B2C4->unk3BC);
-            ResetUnusedInputStruct();
-            sub_800641C(0,1,1);
-            sub_8030D40(gUnknown_203B2C4->unk218,0);
-            sub_802B2BC(0x12);
-            break;
+        gUnknown_203B2C4->unk4 = 0x2b;
+        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_802B2BC(0x12);
+        break;
       case 0:
       case 0xD:
-            sub_8035CC0(&gUnknown_203B2C4->unk35C,2);
-            sub_8030810(1);
-            sub_802B2BC(0x10);
+        sub_8035CC0(&gUnknown_203B2C4->unk35C,2);
+        sub_8030810(1);
+        sub_802B2BC(0x10);
       default:
         break;
   }

@@ -633,7 +633,7 @@ _0800C7A4:
 	bl m4aMPlayFadeIn
 	b _0800C7BE
 	.align 2, 0
-_0800C7B0: .4byte gUnknown_20008F0
+_0800C7B0: .4byte gMPlayInfo_BGM
 _0800C7B4:
 	ldr r0, _0800C7CC
 	strh r2, [r0]
@@ -648,7 +648,7 @@ _0800C7BE:
 	b _0800C84C
 	.align 2, 0
 _0800C7CC: .4byte gBGMusicPlayerState
-_0800C7D0: .4byte gUnknown_20008F0
+_0800C7D0: .4byte gMPlayInfo_BGM
 _0800C7D4: .4byte gUnknown_202D690
 _0800C7D8: .4byte gUnknown_202D68E
 _0800C7DC: .4byte 0x000003e5
@@ -710,7 +710,7 @@ _0800C84C:
 	strh r0, [r1]
 	b _0800C8A2
 	.align 2, 0
-_0800C854: .4byte gUnknown_20008F0
+_0800C854: .4byte gMPlayInfo_BGM
 _0800C858: .4byte gBGMusicPlayerState
 _0800C85C: .4byte gCurrentBGSong
 _0800C860: .4byte 0x000003e7

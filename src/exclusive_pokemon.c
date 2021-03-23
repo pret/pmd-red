@@ -1,28 +1,6 @@
 #include "global.h"
 #include "constants/species.h"
-#define NUM_EXCLUSIVE_POKEMON 12
-
-#define RED_EXCLUSIVE(species)  \
-{                               \
-    .poke_id = species,         \
-    .in_rrt = TRUE,             \
-    .in_brt = FALSE,            \
-}
-
-#define BLUE_EXCLUSIVE(species) \
-{                               \
-    .poke_id = species,         \
-    .in_rrt = FALSE,            \
-    .in_brt = TRUE,             \
-}
-
-
-struct ExclusivePokemon
-{
-    u16 poke_id;
-    bool8 in_rrt; // red rescue team
-    bool8 in_brt; // blue rescue team
-};
+#include "exclusive_pokemon.h"
 
 const struct ExclusivePokemon gExclusivePokemon[NUM_EXCLUSIVE_POKEMON] = {
 
@@ -49,30 +27,24 @@ const u8 filler_ex1[8] =
     'p', 'k', 's', 'd', 'i', 'r', '0', 0
 };
 
-
-struct unkStruct_203B498
-{
-    u8 fill0[0x58];
-    bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
-};
-extern struct unkStruct_203B498 *gUnknown_203B498;
-extern struct unkStruct_203B498 gUnknown_2039840;
+extern struct ExclusivePokemonData *gUnknown_203B498;
+extern struct ExclusivePokemonData gExclusivePokemonInfo;
 
 
 void LoadExclusivePokemon(void)
 {
-    gUnknown_203B498 = &gUnknown_2039840;
+    gUnknown_203B498 = &gExclusivePokemonInfo;
 }
 
-struct unkStruct_203B498 *GetExclusivePokemon(void)
+struct ExclusivePokemonData *GetExclusivePokemon(void)
 {
-    return &gUnknown_2039840;
+    return &gExclusivePokemonInfo;
 }
 
 void InitializeExclusivePokemon(void)
 {
     s32 counter;
-    memset(gUnknown_203B498, 0, sizeof(struct unkStruct_203B498));
+    memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
     for(counter = 0; counter < NUM_EXCLUSIVE_POKEMON; counter++)
     {
         gUnknown_203B498->Exclusives[counter] = gExclusivePokemon[counter].in_rrt;

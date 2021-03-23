@@ -60,7 +60,7 @@ extern void sub_8098CC8();
 extern void sub_809674C();
 extern void sub_80961B4();
 extern void sub_8091FB4();
-extern s32 sub_80A2B18(s16);
+extern const char *sub_80A2B18(s16);
 extern u8 sub_8001CC4(u8, u8, u8);
 extern void sub_8091980(u32);
 
@@ -317,7 +317,7 @@ s16 sub_8098FA0(void)
     return sub_8001658(0, 0x11);
 }
 
-s32 sub_8098FB4(void)
+const char  *sub_8098FB4(void)
 {
     return sub_80A2B18(sub_8001658(0, 0x11));
 }

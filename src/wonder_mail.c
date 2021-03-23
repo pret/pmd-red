@@ -41,7 +41,7 @@ struct unkStruct_203B2C4
     u8 unk0;
     u8 padding[3];
     u32 unk4; // wonder mail link status??
-    u8 unk8[0x36];
+    u8 unk8[0x36]; // Probably a buffer for entry
     u8 unk3E;
     u32 unk40;
     u32 unk44; // another link status
@@ -55,7 +55,7 @@ struct unkStruct_203B2C4
     u8 filler360[0x3BC - 0x360];
     u32 unk3BC;
     u8 filler3C0[0x41C - 0x3C0];
-    u8 *unk41C;
+    u32 unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;
@@ -77,7 +77,7 @@ struct unkStruct_8095228
     u8 padding[0x10 - 0x5];
     u32 unk10;
     u8 padding2[0x20 - 0x14];
-    u8 *unk20;
+    u32 unk20;
     u8 padding3[0x2C - 0x24];
     s8 unk2C;
     u8 padding4[0x30 - 0x2D];
@@ -109,35 +109,28 @@ extern u32 sub_8095350();
 extern struct unkStruct_8095228 *sub_8095228(u8);
 extern u8 sub_80A2824(u32);
 
-extern u32 gWonderMailErrorText;
-extern u32 gWonderMailNumGBAsText;
-extern u32 gWonderMailWrongModeText;
-extern u32 gWonderMailStorageFullText;
-extern u32 gWonderMailDuplicateText;
-extern u32 gWonderMailNotEligibleReceiveText;
-extern u32 gWonderMailNoRoomText;
-extern u32 gWonderMailFriendErrorText;
-extern u32 gWonderMailPasswordIncorrectText;
-extern u32 gWonderMailSOSPasswordIncorrectText;
-extern u32 gWonderMailDuplicateText;
-extern u32 gWonderMailAOKMailReceivedText;
+#include "data/wonder_mail_1.h"
+
+extern u32 gUnknown_80DED44;
+
+
 extern u32 gUnknown_80DDA48;
-extern u32 gUnknown_80DEF04;
-extern u32 gUnknown_80DEF28;
-extern u32 gUnknown_80DEF80;
-extern u32 gUnknown_80DEFDC;
-extern u32 gUnknown_80DF044;
-extern u32 gUnknown_80DF0A0;
-extern u32 gUnknown_80DF0E0;
-extern u32 gUnknown_80DF138;
-extern u32 gUnknown_80DF194;
+extern const char gUnknown_80DEF04[];
+extern const char gUnknown_80DEF28[];
+extern const char gUnknown_80DEF80[];
+extern const char gUnknown_80DEFDC[];
+extern const char gUnknown_80DF044[];
+extern const char gUnknown_80DF0A0[];
+extern const char gUnknown_80DF0E0[];
+extern const char gUnknown_80DF138[];
+extern const char gUnknown_80DF194[];
+
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern u8 *gUnknown_80DED44;
 
 extern s32 sub_8095190(void);
 extern u32 sub_8095324(u32);
-extern void sub_80141B4(u32 *r0, u32, u32 *r1, u32);
+extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
 extern void sub_800641C(void *r0, u8, u8);
@@ -163,7 +156,7 @@ extern void MemoryFree(void *);
 
 extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
-extern void sub_8014248(u32 *r0, u32, u32, u32 *r4, u32, u32, u32, u32 *r5, u32);
+extern void sub_8014248(const char *r0, u32, u32, u32 *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_80951BC(u8 *r0);
@@ -253,43 +246,43 @@ void sub_8028B1C(u32 r0)
             break;
         case 1:
         case 2:
-            sub_80141B4(&gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 3:
-            sub_80141B4(&gWonderMailNumGBAsText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNumGBAsText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 4:
-            sub_80141B4(&gWonderMailWrongModeText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailWrongModeText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 5:
-            sub_80141B4(&gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 6:
-            sub_80141B4(&gWonderMailStorageFullText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailStorageFullText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 7:
-            sub_80141B4(&gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 8:
             break;
         case 9:
-            sub_80141B4(&gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 10:
             break;
         case 11:
-            sub_80141B4(&gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 12:
             break;
         case 13:
-            sub_80141B4(&gWonderMailNoRoomText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNoRoomText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 14:
-            sub_80141B4(&gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         case 15:
-            sub_80141B4(&gWonderMailFriendErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailFriendErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
             break;
         default:
             break;
@@ -534,7 +527,7 @@ void sub_8028EAC()
     {
         return;
     }
-    if(sub_8012600() == 0)
+    if(!sub_8012600())
     {
         sub_8012750();
         sub_8028B04(25);
@@ -599,7 +592,7 @@ void sub_8028F58()
     {
         return;
     }
-    if(sub_8012600() == 0)
+    if(!sub_8012600())
     {
         sub_8012750();
         sub_8028B04(2);
@@ -895,7 +888,7 @@ void sub_802939C(void)
     {
         return;
     }
-    if(sub_8012600() == 0)
+    if(!sub_8012600())
     {
         return_var = sub_8012744();
         sub_8012750();
@@ -946,15 +939,15 @@ void sub_80293F4(void)
                     case 9:
                         break;
                     case 10:
-                        sub_8014248(&gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->unk420, 0xC);
+                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->unk420, 0xC);
                         sub_8028B04(0x28);
                         break;
                     case 11:
-                        sub_80141B4(&gWonderMailSOSPasswordIncorrectText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+                        sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, &gUnknown_203B2C0->unk420, 0x10d);
                         sub_8028B04(7);
                         break;
                     case 0:
-                        sub_80141B4(&gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+                        sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
                         sub_8028B04(7);
                         break;
                     case 12:
@@ -965,7 +958,7 @@ void sub_80293F4(void)
                         sub_8095274(temp.unk10);
                         temp.unkArray[0] = 2; // Some sort of Ack?
                         sub_80951BC(temp.unkArray);
-                        sub_80141B4(&gWonderMailAOKMailReceivedText, 0, &gUnknown_203B2C0->unk420, 0x101);
+                        sub_80141B4(gWonderMailAOKMailReceivedText, 0, &gUnknown_203B2C0->unk420, 0x101);
                         sub_8028B04(0x23);
                         break;
                     case 16:
@@ -1319,7 +1312,7 @@ void sub_8029A88(void)
     {
         return;
     }
-    if(sub_8012600() == 0)
+    if(!sub_8012600())
     {
         sub_8012750();
         sub_8028B04(0x39);
@@ -1583,38 +1576,39 @@ void sub_8029EA8(void)
     }
 }
 
-void sub_8029EC4(u32 param_1)
+// Is this used for only Thank-You Mail??
+void PrintWonderMailLinkError(u32 param_1)
 {
   switch(param_1) {
     case 3:
-        sub_80141B4(&gUnknown_80DEF28, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DEF28, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 4:
-        sub_80141B4(&gUnknown_80DEF80, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DEF80, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 6:
-        sub_80141B4(&gUnknown_80DEFDC, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DEFDC, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 7:
-        sub_80141B4(&gUnknown_80DF044, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF044, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 9:
-        sub_80141B4(&gUnknown_80DF0A0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF0A0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 11:
-        sub_80141B4(&gUnknown_80DF0A0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF0A0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 13:
-        sub_80141B4(&gUnknown_80DF0E0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF0E0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 1:
     case 2:
     case 5:
     case 14:
-        sub_80141B4(&gUnknown_80DEF04, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DEF04, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 15:
-        sub_80141B4(&gUnknown_80DF138,0,(u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF138,0,(u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 0:
     case 8:

@@ -19,7 +19,7 @@ extern void sub_8094980(void);
 extern void sub_8094C14(void);
 extern void LoadExclusivePokemon(void);
 extern void LoadItemParameters(void);
-extern void sub_809207C(void);
+extern void LoadRescueTeamInfo(void);
 extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);
@@ -97,7 +97,7 @@ void GameLoop(void)
     LoadExclusivePokemon();
     LoadFriendAreas();
     LoadItemParameters();
-    sub_809207C();
+    LoadRescueTeamInfo();
     LoadWazaParameters();
     sub_80950BC();
     sub_80958E8();

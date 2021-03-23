@@ -101,6 +101,7 @@ SECTIONS {
         asm/main_menu.o(.text);
         src/main_menu_mid.o(.text);
         asm/main_menu_1.o(.text);
+        src/wonder_mail_main_menu_pre.o(.text);
         asm/wonder_mail_main_menu.o(.text);
         src/wonder_mail_main_menu.o(.text);
         src/debug_menu.o(.text);
@@ -110,9 +111,8 @@ SECTIONS {
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         asm/code_803C1D0.o(.text);
-        src/personality_test_pre.o(.text);
-        asm/personality_test_2.o(.text);
         src/personality_test.o(.text);
+        src/code_803D0D8.o(.text);
         asm/code_803D110.o(.text);
         src/code_8040094.o(.text);
         asm/code_8040094.o(.text);
@@ -134,7 +134,8 @@ SECTIONS {
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
-        src/code_809017C.o(.text);
+        src/rescue_team_info.o(.text);
+        src/text_util.o(.text);
         src/friend_area.o(.text);
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
@@ -226,12 +227,17 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
+        src/wonder_mail.o(.rodata);
+        data/data_80DED44.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
-        src/personality_test_pre.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
+        data/friend_areas.o(.rodata);
+        data/data_810AC60.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
+        src/rescue_team_info.o(.rodata);
+        src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/m4a_tables.o(.rodata);

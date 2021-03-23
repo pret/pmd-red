@@ -60,7 +60,7 @@ void StopBGMusicVSync(void)
             }
         }
     }
-    m4aMPlayStop(&gUnknown_20008F0);
+    m4aMPlayStop(&gMPlayInfo_BGM);
     m4aSoundVSyncOff();
     if(interrupt_flag)
     {
@@ -85,7 +85,7 @@ void StartBGMusicVSync(void)
                 }
                 else
                 {
-                    m4aMPlayContinue(&gUnknown_20008F0);
+                    m4aMPlayContinue(&gMPlayInfo_BGM);
                 }
             }
         }

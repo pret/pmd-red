@@ -35,8 +35,8 @@ struct UnkBgStruct
     u8 padding2[0x17A];
     u32 *unk4dcc;
     u32 unk4dd0;
-    s16 unk4dd4;
-    s16 unk4dd6;
+    s16 xoffset;
+    s16 yoffset;
 };
 extern struct UnkBgStruct *gUnknown_203B0E4;
 
@@ -68,8 +68,8 @@ void sub_801169C(void)
 {
     u8 return_var;
 
-    SetBG2RegOffsets(gUnknown_203B0E4->unk4dd4, gUnknown_203B0E4->unk4dd6);
-    SetBG3RegOffsets(gUnknown_203B0E4->unk4dd4, gUnknown_203B0E4->unk4dd6);
+    SetBG2RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
+    SetBG3RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
     sub_8010F28();
     return_var = sub_80111C4();
     sub_8004AF0(return_var, &(gUnknown_203B0E4->unk4c4c), 0xB0, 0x10, (gUnknown_203B0E4->unk4dcc), 0);
@@ -109,12 +109,12 @@ void sub_801178C(void)
 void sub_80117AC(void)
 {
     if(sub_80023E4(0xD) == 0)
-        sub_800BFD0(0x1E);
+        FadeOutBGM(0x1E);
 }
 
 void sub_80117C4(void)
 {
-    sub_800BFD0(0x1E);
+    FadeOutBGM(0x1E);
 }
 
 // Some sound effect
@@ -181,7 +181,7 @@ void sub_80118A4(void)
 
 void sub_80118C4(u16 r0)
 {
-    sub_800BFD0(r0);
+    FadeOutBGM(r0);
     sub_800C3F8(0x3e6, r0);
     sub_800C3F8(0x3e5, r0);
 }
@@ -208,7 +208,7 @@ void sub_8011924()
 
 void sub_8011930(u16 speed)
 {
-    sub_800BFD0(speed);
+    FadeOutBGM(speed);
 }
 
 u32 IsEqualtoBGTrack(u16 songIndex)

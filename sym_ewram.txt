@@ -1,6 +1,31 @@
-	. += 0x8F0;
+gMPlayTrack_BGM = .; /* 2000000 */
+        . += 0x3C0;
 
-gUnknown_20008F0 = .; /* 20008F0 */
+gMPlayTrack_Unknown1 = .; /* 20003C0 */
+        . += 0x1E0;
+
+gMPlayTrack_Unknown2 = .; /* 20005A0 */
+        . += 0x50;
+
+gMPlayTrack_Unknown3 = .; /* 20005F0 */
+        . += 0x50;
+
+gMPlayTrack_Unknown4 = .; /* 2000640 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown5 = .; /* 20006E0 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown6 = .; /* 2000780 */
+        . += 0xA0;
+
+gMPlayTrack_Unknown7 = .; /* 2000820 */
+        . += 0x50;
+
+gUnknown_2000870 = .; /* 2000870 */
+        . += 0x80;
+
+gMPlayInfo_BGM = .; /* 20008F0 */
 	. += 0x80;
 
 gUnknown_2000970 = .; /* 2000970 */
@@ -875,7 +900,7 @@ gItemParametersFile = .; /* 20389A0 */
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;
 
-gUnknown_2038C10 = .; /* 2038C10 (seems to be copy of gTeamName)*/
+gRescueTeamInfo = .; /* 2038C10 */
 	. += 0x18;
 
 gBoughtFriendAreas = .; /* 2038C28 (one byte for each friend area) */
@@ -914,7 +939,7 @@ gUnknown_2039448 = .; /* 2039448 */
 gUnknown_2039778 = .; /* 2039778 */
 	. += 0xC8;
 
-gUnknown_2039840 = .; /* 2039840 */
+gExclusivePokemonInfo = .; /* 2039840 */
 	. += 0x68;
 
 gUnknown_20398A8 = .; /* 20398A8 */

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "constants/friend_area.h"
+#include "file_system.h"
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
@@ -24,12 +26,40 @@ extern void sub_802C8F4(void);
 
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
+extern const char *sub_8098FB4();
+extern void xxx_format_string(const char *, u8 *, u32 **, u32);
+extern const char *GetFriendAreaName(u8);
+extern s32 sub_8008ED0(u8 *);
+extern void  xxx_call_draw_string(s32 size, u32, u8 *, u32, u32);
+extern const char *GetFriendAreaName(u8);
+extern u8 GetRescueTeamRank();
+extern const char *GetTeamRankString(u8);
+extern s32 GetTeamRankPts();
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+void LoadTeamRankBadge(u32, u32, u32);
+extern void sub_800D158(u8 *, u32 *, ...);
+extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
+extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
+
+extern struct FileArchive gTitleMenuFileArchive;
+extern const char gTeamRankBadgeFileName;
+
+extern u32 gUnknown_80DBF3C;
+extern u32 gUnknown_80DBF4C;
+
+struct TeamBadgeData
+{
+    /* 0x0 */ u8 *pics; // probably a pointer to an arrays of pixels?
+    /* 0x4 */ u8 *pallete; // Pics share common pallete
+};
 
 struct unk_203B250
 {
     u32 unk0;
     u16 unk4;
-    u8 unk6;
+    /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
@@ -39,6 +69,14 @@ struct unk_203B250
 };
 
 struct unk_203B250 *gUnknown_203B250;
+
+struct unkStruct_203B460
+{
+    u8 padding[0x260];
+    /* 0x260 */ u32 teamMoney;
+};
+
+extern struct unkStruct_203B460 *gUnknown_203B460;
 
 void sub_801D680(void)
 {
@@ -121,7 +159,7 @@ void sub_801D798(void)
     if (temp > 3)
         return;
     if(sub_802604C() != 0)
-        gUnknown_203B250->unk7 = gUnknown_203B250->unk6;
+        gUnknown_203B250->unk7 = gUnknown_203B250->currFriendAreaLocation;
     sub_8026058();
     sub_801D208(2);
 }
@@ -212,4 +250,64 @@ void sub_801D878(void)
         return;
     sub_801DD50();
     sub_801D208(1);
+}
+
+void sub_801D894(void)
+{
+  u8 uVar1;
+  const char *location;
+  int iVar3;
+  s32 size_var;
+
+  // Stored on stack
+  u32 *preload_string;
+  u32 *r5; // R5
+  u8 auStack116 [96]; // sp +4
+  
+  if (gUnknown_203B250->currFriendAreaLocation == NONE) {
+    location = sub_8098FB4();
+  }
+  else {
+    location = GetFriendAreaName(gUnknown_203B250->currFriendAreaLocation);
+  }
+  // TODO this is def a hack
+  xxx_format_string(location, auStack116, &preload_string + 1, 0);
+  iVar3 = sub_8008ED0(auStack116);
+  size_var = (0x80 - iVar3) / 2; // have to calculate here
+  sub_8008C54(1);
+  sub_80073B8(1);
+  xxx_call_draw_string(size_var, 4, auStack116, 1, 0);
+  sub_80073E0(1);
+  sub_8008C54(2);
+  sub_80073B8(2);
+  LoadTeamRankBadge(2, 8, 6);
+
+  r5 = &gUnknown_80DBF3C; // Have to load before TeamRank funcs
+  uVar1 = GetRescueTeamRank();
+  sub_800D158(auStack116, r5, GetTeamRankString(uVar1), GetTeamRankPts());
+  xxx_call_draw_string(0x20, 4, auStack116, 2, 0);
+  sub_800D158(auStack116, &gUnknown_80DBF4C, gUnknown_203B460->teamMoney);
+  xxx_call_draw_string(0x20, 0x12, auStack116, 2, 0);
+  sub_80073E0(2);
+}
+
+void LoadTeamRankBadge(u32 param_1, u32 param_2, u32 param_3)
+{
+  struct OpenedFile *teamBadgeFile;
+  s32 palleteIndex;
+  u8 rank;
+  u8 *colorArray;
+  u8 *teamBadgePic;
+
+  teamBadgeFile = OpenFileAndGetFileDataPtr(&gTeamRankBadgeFileName, &gTitleMenuFileArchive);
+  teamBadgePic = ((struct TeamBadgeData *)(teamBadgeFile->data))->pics;
+  colorArray = ((struct TeamBadgeData *)(teamBadgeFile->data))->pallete;
+  for(palleteIndex = 0; palleteIndex < 16; palleteIndex++){
+    SetBGPaletteBufferColorArray(palleteIndex + 224,colorArray);
+    colorArray = colorArray + 4;
+  }
+  rank = GetRescueTeamRank();
+  teamBadgePic = &teamBadgePic[rank << 7]; // TODO figure out why the lft shft 7 is needed
+  sub_8007E20(param_1, param_2, param_3, 16, 16, teamBadgePic, 14);
+  CloseFile(teamBadgeFile);
 }

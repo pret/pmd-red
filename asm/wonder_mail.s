@@ -10283,17 +10283,17 @@ _0802F630:
 	bl sub_802F2E8
 	b _0802F6E4
 _0802F644:
-	bl sub_8092178
+	bl GetRescueTeamRank
 	ldr r1, [r5]
 	strb r0, [r1, 0x9]
 	ldr r0, [r5]
 	ldr r0, [r0, 0x10]
 	ldr r0, [r0, 0x24]
-	bl sub_8092158
+	bl AddToTeamRankPts
 	movs r0, 0xCB
 	bl sub_8011988
 	ldr r4, [r5]
-	bl sub_8092178
+	bl GetRescueTeamRank
 	ldrb r1, [r4, 0x9]
 	lsls r0, 24
 	lsrs r0, 24
@@ -10337,7 +10337,7 @@ _0802F6A4:
 	ldr r4, _0802F6F0
 	adds r0, r4, 0
 	bl strcpy
-	bl sub_8092178
+	bl GetRescueTeamRank
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetTeamRankString
