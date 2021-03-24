@@ -140,6 +140,7 @@ SECTIONS {
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);
+        src/play_time.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);
         src/code_809747C.o(.text);
