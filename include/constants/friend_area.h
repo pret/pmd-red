@@ -4,6 +4,12 @@
 
 #define NUM_FRIEND_AREAS 58
 
+// Unlock Condition
+#define UNLOCK_SHOP_STORY 0
+#define UNLOCK_SHOP_POST_GAME 1
+#define UNLOCK_WONDER_MAIL 2
+#define UNLOCK_LEGENDARY_REQUEST 3
+
 #define NONE 0
 #define BOUNTIFUL_SEA 1
 #define TREASURE_SEA 2
@@ -11,7 +17,7 @@
 #define DEEP_SEA_FLOOR 4
 #define DEEP_SEA_CURRENT 5
 #define SEAFLOOR_CAVE 6
-#define SHALLOW_CAVE 7
+#define SHALLOW_BEACH 7
 #define MT_DEEPGREEN 8
 #define MT_CLEFT 9
 #define MT_MOONVIEW 10

@@ -5867,6 +5867,8 @@ gPtrProtectSavedItMessage: @ 810075C
 	.string "pksdir0\0"
 	.align 2, 0
 
+@ Start of Boss Fight Dialogues?
+
 	.global gUnknown_8100768
 gUnknown_8100768: @ 8100768
 	.byte 0x00, 0x00, 0x0C, 0x02, 0xAA, 0x01, 0x00, 0x00
@@ -5945,9 +5947,19 @@ gUnknown_8100B80: @ 8100B80
 gUnknown_8100BC0: @ 8100BC0
 	.incbin "baserom.gba", 0x100BC0, 0xD0
 
+@ Skarmony Re-Fight?
+
 	.global gUnknown_8100C90
 gUnknown_8100C90: @ 8100C90
-	.incbin "baserom.gba", 0x100C90, 0x2C
+        .byte 0x00, 0x00, 0x00, 0x0D
+        .byte 0xFC, 0x00, 0x00, 0x00
+        .4byte _08100C9C
+    
+        .global _08100C9C
+        _08100C9C:
+        .string " You again?!\n"
+        .asciz "Persistent pests!\0"
+        .align 2,0
 
 	.global gUnknown_8100CBC
 gUnknown_8100CBC: @ 8100CBC

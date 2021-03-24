@@ -233,7 +233,7 @@ SECTIONS {
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
-        data/friend_areas.o(.rodata);
+        src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
         src/rescue_team_info.o(.rodata);
