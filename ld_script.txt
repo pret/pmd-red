@@ -89,9 +89,10 @@ SECTIONS {
         asm/code_801D760.o(.text);
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
+        asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
         src/wonder_mail_mid.o(.text);
-        asm/wonder_mail.o(.text);
+        asm/wonder_mail_1.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
         src/friend_rescue_1.o(.text);
