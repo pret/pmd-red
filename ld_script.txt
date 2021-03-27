@@ -89,6 +89,7 @@ SECTIONS {
         asm/code_801D760.o(.text);
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
+        src/wonder_mail_pre.o(.text);
         asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
         src/wonder_mail_mid.o(.text);

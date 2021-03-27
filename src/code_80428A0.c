@@ -1,10 +1,5 @@
 #include "global.h"
-
-struct unkDungeon_8041D5C
-{
-    u8 padding[0x70];
-    u8 *unk70[100];
-};
+#include "code_8041D5C.h"
 
 
 extern void sub_804151C(struct unkDungeon_8041D5C *r0, u32 r1, u8 r2);

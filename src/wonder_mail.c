@@ -3,37 +3,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "constants/species.h"
-
-// Wonder Mail Related
-struct WonderMailStruct_203B2C0
-{
-    // size: 0x548
-    u32 unk0;
-    u32 unk4;
-    u8 unk8[0x38];
-    u32 unk40;
-    u32 unk44;
-    u16 unk48[232];
-    u8 unk218;
-    u8 padding7[3];
-    u32 unk21C;
-    u8 padding[0x7C];
-    u32 unk29C;
-    u8 padding6[0x6C];
-    u32 unk30C;
-    u8 padding8[0x4C];
-    u32 unk35C;
-    u8 padding5[0x5C];
-    u32 unk3BC;
-    u8 padding4[0x60];
-    u32 unk420; // Is this supposed to be a File like 203B2C4?
-    u8 padding3[0x110];
-    u32 unk534;
-    s32 unk538; // A7 << 3
-    u32 unk53C;
-    u32 unk540; // A8 << 4
-    s16 unk544;
-};
+#include "wonder_mail.h"
 
 struct unkStruct_203B2C4
 {
@@ -246,43 +216,43 @@ void sub_8028B1C(u32 r0)
             break;
         case 1:
         case 2:
-            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 3:
-            sub_80141B4(gWonderMailNumGBAsText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNumGBAsText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 4:
-            sub_80141B4(gWonderMailWrongModeText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailWrongModeText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 5:
-            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 6:
-            sub_80141B4(gWonderMailStorageFullText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailStorageFullText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 7:
-            sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailDuplicateText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 8:
             break;
         case 9:
-            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 10:
             break;
         case 11:
-            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNotEligibleReceiveText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 12:
             break;
         case 13:
-            sub_80141B4(gWonderMailNoRoomText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailNoRoomText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 14:
-            sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailErrorText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 15:
-            sub_80141B4(gWonderMailFriendErrorText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+            sub_80141B4(gWonderMailFriendErrorText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
             break;
         default:
             break;
@@ -939,15 +909,15 @@ void sub_80293F4(void)
                     case 9:
                         break;
                     case 10:
-                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->unk420, 0xC);
+                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
                         sub_8028B04(0x28);
                         break;
                     case 11:
-                        sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+                        sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
                         sub_8028B04(7);
                         break;
                     case 0:
-                        sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->unk420, 0x10d);
+                        sub_80141B4(gWonderMailDuplicateText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
                         sub_8028B04(7);
                         break;
                     case 12:
@@ -958,7 +928,7 @@ void sub_80293F4(void)
                         sub_8095274(temp.unk10);
                         temp.unkArray[0] = 2; // Some sort of Ack?
                         sub_80951BC(temp.unkArray);
-                        sub_80141B4(gWonderMailAOKMailReceivedText, 0, &gUnknown_203B2C0->unk420, 0x101);
+                        sub_80141B4(gWonderMailAOKMailReceivedText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x101);
                         sub_8028B04(0x23);
                         break;
                     case 16:
