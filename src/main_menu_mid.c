@@ -10,12 +10,12 @@ struct unkData
 
 extern struct MainMenu *gUnknown_203B348;
 extern struct unkData gUnknown_80E59A8;
-extern void sub_8006518();
+extern void sub_8006518(struct unkData *);
 extern void sub_800641C(struct unkData *, u32, u32);
 
 void sub_8035CC0(struct unkData *dataArray, u32 index)
 {
-    sub_8006518();
+    sub_8006518(dataArray);
     dataArray[index] = gUnknown_80E59A8;
     ResetUnusedInputStruct();
     sub_800641C(dataArray, 1, 1);
