@@ -105,6 +105,7 @@ SECTIONS {
         asm/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
         asm/trade_items_menu.o(.text);
+        src/trade_items_menu_1.o(.text);
         asm/other_menus.o(.text);
         asm/rescue_password_menu.o(.text);
         asm/load_screen.o(.text);

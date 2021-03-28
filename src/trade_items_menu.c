@@ -1,32 +1,6 @@
 #include "global.h"
 #include "input.h"
-
-struct TradeItemsMenu
-{
-    // size: 0x3A0
-    u32 currMenu;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-    u32 unk14; // item #
-    u8 fill18[0x44 - 0x18];
-    u32 unk44;
-    u8 fill8[0x134 - 0x48];
-    u32 unk134;
-    u8 fill138[0x184 - 0x138];
-    u32 unk184;
-    u8 fill188[0x1E4 - 0x188];
-    u32 unk1E4;
-    u8 fill1E8[0x254 - 0x1E8];
-    u8 unk254;
-    u8 fill255[3];
-    u32 unk258;
-    u8 unk25C;
-    u8 unk25D;
-    u8 unk25E;
-    u8 fill25F[0x3A0 - 0x25F];
-};
+#include "trade_items_menu.h"
 
 extern struct TradeItemsMenu *gUnknown_203B358;
 
@@ -44,7 +18,7 @@ extern void sub_8006518(u32 *);
 extern void sub_801B3C0(u8 *);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
-extern void sub_8035CC0(u32 *, u32);
+extern void sub_8035CC0(struct unkData *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();
 extern void sub_801B450();
@@ -52,6 +26,12 @@ extern void sub_801CB5C(u32);
 extern void sub_8035CF4(u32 *, u32, u32); 
 extern u32 sub_8013BBC(u32 *);
 extern void sub_8036F30();
+extern void sub_80369D0();
+extern void sub_8012574(u32);
+extern void sub_8036E18(u32);
+
+
+
 
 void sub_803652C();
 void sub_8036590();
@@ -101,7 +81,7 @@ u32 UpdateTradeItemsMenu(void)
       case TRADE_ITEMS_MAIN_MENU:
         sub_803652C();
         break;
-      case 1:
+      case TRADE_ITEMS_SEND_ITEM:
         sub_8036590();
         break;
       case 2:
@@ -119,7 +99,7 @@ u32 UpdateTradeItemsMenu(void)
       case 6:
         sub_8036830();
         break;
-      case 7:
+      case TRADE_ITEMS_RECEIVE_ITEM:
         sub_803689C();
         break;
       case 8:
@@ -247,7 +227,7 @@ void sub_8036674(void)
     case 7:
     case 0:
         // Cancel
-        sub_8035CC0(&gUnknown_203B358->unk184, 3);
+        sub_8035CC0(gUnknown_203B358->unk184, 3);
         sub_801CCD8();
         SetTradeItemMenu(2);
         break;
@@ -262,10 +242,10 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(&gUnknown_203B358->unk1E4,1,1);
+        sub_800641C(&gUnknown_203B358->unk1E4, 1, 1);
         sub_801CB5C(1);
         if (gUnknown_203B358->unk4 == 0x13) {
-            sub_8035CF4(&gUnknown_203B358->unk44,3,1);
+            sub_8035CF4(&gUnknown_203B358->unk44, 3, 1);
             SetTradeItemMenu(3);
         }
         else {
@@ -285,14 +265,14 @@ void sub_8036788(void)
     case 1:
         // When you change the #
         sub_801CCD8();
-        sub_8035CF4(&gUnknown_203B358->unk44,3,0);
+        sub_8035CF4(&gUnknown_203B358->unk44, 3, 0);
         sub_8036F30();
         break;
     case 2:
         // If you back out of the # selection
-        sub_8035CC0(&gUnknown_203B358->unk184,2);
+        sub_8035CC0(gUnknown_203B358->unk184, 2);
         sub_801CCD8();
-        sub_8035CF4(&gUnknown_203B358->unk44,3,1);
+        sub_8035CF4(&gUnknown_203B358->unk44, 3, 1);
         SetTradeItemMenu(3);
         break;
     case 3:
@@ -305,5 +285,164 @@ void sub_8036788(void)
         break;
     case 0:
         break;
+  }
+}
+
+#ifdef NONMATCHING
+void sub_8036830(void)
+{
+  int local_8;
+
+  if (sub_80144A4(&local_8) == 0) 
+  {
+      switch(local_8){
+        case 5:
+            sub_801CBB8();
+            // TODO: Statements are shifted around but is equivalent
+            gUnknown_203B460->unk50[gUnknown_203B358->unk25E] -= gUnknown_203B358->unk14;
+            SetTradeItemMenu(0xF);
+            sub_8012574(0);
+            break;
+        case 6:
+        case 0:
+            SetTradeItemMenu(0);
+            break;
+        }
+  }
+}
+#else
+NAKED
+void sub_8036830(void)
+{
+	asm_unified("\tpush {lr}\n"
+	"\tsub sp, 0x4\n"
+	"\tmov r0, sp\n"
+	"\tbl sub_80144A4\n"
+	"\tcmp r0, 0\n"
+	"\tbne _08036896\n"
+	"\tldr r0, [sp]\n"
+	"\tcmp r0, 0x5\n"
+	"\tbeq _08036854\n"
+	"\tcmp r0, 0x5\n"
+	"\tbgt _0803684E\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _08036890\n"
+	"\tb _08036896\n"
+"_0803684E:\n"
+	"\tcmp r0, 0x6\n"
+	"\tbeq _08036890\n"
+	"\tb _08036896\n"
+"_08036854:\n"
+	"\tbl sub_801CBB8\n"
+	"\tldr r0, _08036884\n"
+	"\tldr r2, [r0]\n"
+	"\tldr r0, _08036888\n"
+	"\tldr r1, [r0]\n"
+	"\tldr r3, _0803688C\n"
+	"\tadds r0, r1, r3\n"
+	"\tldrb r0, [r0]\n"
+	"\tlsls r0, 1\n"
+	"\tadds r2, 0x50\n"
+	"\tadds r2, r0\n"
+	"\tldrh r0, [r2]\n"
+	"\tldr r1, [r1, 0x14]\n"
+	"\tsubs r0, r1\n"
+	"\tstrh r0, [r2]\n"
+	"\tmovs r0, 0xF\n"
+	"\tbl SetTradeItemMenu\n"
+	"\tmovs r0, 0\n"
+	"\tbl sub_8012574\n"
+	"\tb _08036896\n"
+	"\t.align 2, 0\n"
+"_08036884: .4byte gUnknown_203B460\n"
+"_08036888: .4byte gUnknown_203B358\n"
+"_0803688C: .4byte 0x0000025e\n"
+"_08036890:\n"
+	"\tmovs r0, 0\n"
+	"\tbl SetTradeItemMenu\n"
+"_08036896:\n"
+	"\tadd sp, 0x4\n"
+	"\tpop {r0}\n"
+	"\tbx r0");
+}
+#endif
+
+void sub_803689C(void)
+{
+  int menuAction;
+
+  if (sub_80144A4(&menuAction) == 0) {
+      switch(menuAction){
+        case 5:
+            SetTradeItemMenu(9);
+            break;
+        case 7:
+        case 0:
+            SetTradeItemMenu(0x12);
+            break;
+    }
+  }
+}
+
+void sub_80368D4(void)
+{
+  int menuAction;
+
+  if (sub_80144A4(&menuAction) == 0) {
+    switch(menuAction){
+        case 5:
+            SetTradeItemMenu(9);
+            break;
+        case 7:
+        case 0:
+            if ((gUnknown_203B358->unk254 != 0) && (gUnknown_203B358->unk258 != 0))
+            {
+                sub_80369D0();
+                SetTradeItemMenu(0x11);
+                sub_8012574(0);
+            }
+        break;
+    }
+  }
+}
+
+void sub_8036934(void)
+{
+  s32 iVar1;
+
+  if (sub_80144A4(&iVar1) == 0) {
+    SetTradeItemMenu(10);
+  }
+}
+
+void sub_8036950(void)
+{
+  s32 iVar1;
+
+  if (sub_80144A4(&iVar1) == 0) {
+    if (gUnknown_203B358->unkC == 0) {
+      switch(gUnknown_203B358->unk8){
+        case 0:
+          SetTradeItemMenu(0xd);
+          break;
+        case 1:
+          SetTradeItemMenu(0xe);
+          break;
+        default:
+          break;
+      }
+    }
+    else {
+      if (((gUnknown_203B358->unk8 == 0) && (gUnknown_203B358->unk254 != 0))
+         && (gUnknown_203B358->unk258 != 0)) {
+        sub_80369D0();
+        SetTradeItemMenu(0xb);
+        sub_8012574(0);
+      }
+      else {
+        sub_8036E18(gUnknown_203B358->unkC);
+        SetTradeItemMenu(0xc);
+      }
+    }
   }
 }

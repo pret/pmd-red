@@ -1,0 +1,44 @@
+#ifndef GUARD_TRADE_ITEMS_MENU_H
+#define GUARD_TRADE_ITEMS_MENU_H
+
+struct unkData
+{
+    u8 unk0[24];
+};
+
+struct TradeItemsMenu
+{
+    // size: 0x3A0
+    u32 currMenu;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14; // item #
+    u32 unk18;
+    u32 unk1C;
+    u32 unk20;
+    u32 unk24;
+    u32 unk28;
+    struct unkData *unk2C;
+    u32 unk30;
+    u32 unk34;
+    u8 fill38[0x44 - 0x38];
+    u32 unk44;
+    u8 fill8[0x134 - 0x48];
+    u32 unk134;
+    u8 fill138[0x184 - 0x138];
+    struct unkData unk184[3]; // guessing the size until I know
+    u8 fill188[0x1E4 - 0x1CC];
+    u32 unk1E4;
+    u8 fill1E8[0x254 - 0x1E8];
+    u8 unk254;
+    u8 fill255[3];
+    u32 unk258;
+    u8 unk25C;
+    u8 unk25D;
+    u8 unk25E;
+    u8 fill25F[0x3A0 - 0x25F];
+};
+
+#endif
