@@ -287,7 +287,7 @@ void sub_8036788(void)
     case 3:
         // Confirm # of item
         gUnknown_203B358->unk25D = gUnknown_203B358->unk14;
-        gUnknown_203B358->unk254 = gUnknown_203B358->unk25E;
+        gUnknown_203B358->unk254 = (u8)gUnknown_203B358->unk25E;
         gUnknown_203B358->unk258 = gUnknown_203B358->unk14;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
@@ -404,7 +404,7 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if ((gUnknown_203B358->unk254 != 0) && (gUnknown_203B358->unk258 != 0))
+            if (((u8)gUnknown_203B358->unk254 != 0) && (gUnknown_203B358->unk258 != 0))
             {
                 sub_80369D0();
                 SetTradeItemMenu(0x11);
@@ -442,7 +442,7 @@ void sub_8036950(void)
       }
     }
     else {
-      if (((gUnknown_203B358->unk8 == 0) && (gUnknown_203B358->unk254 != 0))
+      if (((gUnknown_203B358->unk8 == 0) && ((u8)gUnknown_203B358->unk254 != 0))
          && (gUnknown_203B358->unk258 != 0)) {
         sub_80369D0();
         SetTradeItemMenu(0xb);

@@ -6,13 +6,25 @@ struct unkData
     u8 unk0[24];
 };
 
+struct TradeSubStruct
+{
+    u32 unk254; // sometimes cast to a u8
+    u32 unk258;
+};
+
+struct TradeSubStruct2
+{
+    u32 unk0;
+    u32 unk4;
+};
+
 struct TradeItemsMenu
 {
     // size: 0x3A0
-    /* 0x0 */ u32 currMenu;
+    u32 currMenu;
     u32 unk4;
     u32 unk8;
-    /* 0xC */ u32 linkStatus;
+    u32 unkC;
     u32 unk10;
     u32 unk14; // item #
     u32 unk18;
@@ -31,10 +43,14 @@ struct TradeItemsMenu
     struct unkData unk184[3]; // guessing the size until I know
     u8 fill188[0x1E4 - 0x1CC];
     u32 unk1E4;
-    u8 fill1E8[0x254 - 0x1E8];
-    u8 unk254;
-    u8 fill255[3];
-    u32 unk258;
+    u8 fill1E8[0x244 - 0x1E8];
+
+    struct TradeSubStruct2 unk244;
+
+    struct TradeSubStruct2 unk24C;
+
+    struct TradeSubStruct unk254;
+
     u8 unk25C;
     u8 unk25D;
     u8 unk25E;
