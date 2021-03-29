@@ -2184,6 +2184,8 @@ gUnknown_80E5FCC: @ 80E5FCC
 gUnknown_80E6030: @ 80E6030
 	.incbin "baserom.gba", 0xE6030, 0x70
 
+@ Start of Trade Items Data
+
 	.global gUnknown_80E60A0
 gUnknown_80E60A0: @ 80E60A0
 	.incbin "baserom.gba", 0xE60A0, 0x34
@@ -2244,8 +2246,9 @@ gUnknown_80E6314: @ 80E6314
 gUnknown_80E6358: @ 80E6358
 	.incbin "baserom.gba", 0xE6358, 0x20
 
-	.global gUnknown_80E6378
-gUnknown_80E6378: @ 80E6378
+@ Trade Items Link Errors
+	.global gTradeItemsCommunicationError
+gTradeItemsCommunicationError: @ 80E6378
 	.incbin "baserom.gba", 0xE6378, 0x24
 
 	.global gUnknown_80E639C
@@ -2264,9 +2267,11 @@ gUnknown_80E6448: @ 80E6448
 gUnknown_80E64AC: @ 80E64AC
 	.incbin "baserom.gba", 0xE64AC, 0x7C
 
-	.global gUnknown_80E6528
-gUnknown_80E6528: @ 80E6528
+	.global gTradeItemsHowManyText
+gTradeItemsHowManyText: @ 80E6528
 	.incbin "baserom.gba", 0xE6528, 0x14
+
+@ End of Trade Menu Data
 
 	.global gUnknown_80E653C
 gUnknown_80E653C: @ 80E653C

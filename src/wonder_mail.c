@@ -14,7 +14,7 @@ struct unkStruct_203B2C4
     u8 unk8[0x36]; // Probably a buffer for entry
     u8 unk3E;
     u32 unk40;
-    u32 unk44; // another link status
+    u32 linkError; // another link status
     u8 filler48[0x218 - 0x48];
     s8 unk218;
     u32 unk21C;
@@ -799,7 +799,7 @@ void sub_80292EC(void)
     {
         return;
     }
-    if(gUnknown_203B2C0->unk44 == 0)
+    if(gUnknown_203B2C0->linkError == 0)
     {
         switch(gUnknown_203B2C0->unk538)
         {
@@ -813,7 +813,7 @@ void sub_80292EC(void)
     }
     else
     {
-        sub_8028B1C(gUnknown_203B2C0->unk44);
+        sub_8028B1C(gUnknown_203B2C0->linkError);
         sub_8028B04(0x7);
     }
 }

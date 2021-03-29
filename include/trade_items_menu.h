@@ -9,10 +9,10 @@ struct unkData
 struct TradeItemsMenu
 {
     // size: 0x3A0
-    u32 currMenu;
+    /* 0x0 */ u32 currMenu;
     u32 unk4;
     u32 unk8;
-    u32 unkC;
+    /* 0xC */ u32 linkStatus;
     u32 unk10;
     u32 unk14; // item #
     u32 unk18;

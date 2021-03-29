@@ -11,11 +11,11 @@ struct unkStruct_203B460
 };
 
 extern struct unkStruct_203B460 *gUnknown_203B460; // TODO unify this
-extern u32 gUnknown_80E6528;
+extern u32 gTradeItemsHowManyText;
 extern struct unkData gUnknown_80E6174;
 
 // Trade Items Menu Link Error Messages
-extern u32 gUnknown_80E6378;
+extern u32 gTradeItemsCommunicationError;
 extern u32 gUnknown_80E639C;
 extern u32 gUnknown_80E63F8;
 extern u32 gUnknown_80E6448;
@@ -28,7 +28,7 @@ extern void sub_8036B28();
 extern void sub_8006518(struct unkData *);
 extern void sub_8036ECC(u32, u32);
 extern void sub_801CCD8();
-extern void sub_8036F30();
+void sub_8036F30();
 extern void sub_8035CF4(u32 *, u32, u32);
 
 
@@ -40,13 +40,13 @@ extern void xxx_call_draw_string(u32, u32, u32 *, u32, u32);
 extern void sub_8013AA0(u32 *);
 extern void sub_800641C(struct unkData *, u32, u32);
 
-void sub_8036E18(u32 errorNum)
+void PrintTradeItemsLinkError(u32 errorNum)
 {
   switch(errorNum) {
     case 0:
         break;
     case 1:
-        sub_80141B4(&gUnknown_80E6378, 0, 0, 0x101);
+        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 3:
         sub_80141B4(&gUnknown_80E639C, 0, 0, 0x101);
@@ -58,10 +58,10 @@ void sub_8036E18(u32 errorNum)
         sub_80141B4(&gUnknown_80E6448, 0, 0, 0x101);
         break;
     case 5:
-        sub_80141B4(&gUnknown_80E6378, 0, 0, 0x101);
+        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 0xe:
-        sub_80141B4(&gUnknown_80E6378, 0, 0, 0x101);
+        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 0xf:
         sub_80141B4(&gUnknown_80E64AC, 0, 0, 0x101);
@@ -75,7 +75,7 @@ void sub_8036E18(u32 errorNum)
     case 0xB:
     case 0xC:
     case 0xD:
-    sub_80141B4(&gUnknown_80E6378, 0, 0, 0x101);
+        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
   }
 }
@@ -104,7 +104,7 @@ void sub_8036F30(void)
   sub_8008C54(uVar1);
   sub_80073B8(uVar1);
   // Draw "How many?"
-  xxx_call_draw_string(2, 0, &gUnknown_80E6528, uVar1, 0);
+  xxx_call_draw_string(2, 0, &gTradeItemsHowManyText, uVar1, 0);
   sub_8013C68(&gUnknown_203B358->unk14);
   sub_80073E0(uVar1);
 }

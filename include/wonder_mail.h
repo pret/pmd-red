@@ -10,7 +10,7 @@ struct WonderMailStruct_203B2C0
     u8 unk8[0x36];
     u8 unk3E;
     u32 unk40;
-    u32 unk44;
+    u32 linkError;
     u16 unk48[232];
     u8 unk218;
     u8 padding7[3];

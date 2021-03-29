@@ -25,25 +25,25 @@ extern void sub_801B450();
 extern void sub_801CB5C(u32); 
 extern void sub_8035CF4(u32 *, u32, u32); 
 extern u32 sub_8013BBC(u32 *);
-extern void sub_8036F30();
+void sub_8036F30();
 extern void sub_80369D0();
 extern void sub_8012574(u32);
-extern void sub_8036E18(u32);
+void PrintTradeItemsLinkError(u32);
 
 
 
 
 void sub_803652C();
 void sub_8036590();
-extern void sub_80365AC();
-extern void sub_8036674();
-extern void sub_8036788();
-extern void sub_8036728();
+void sub_80365AC();
+void sub_8036674();
+void sub_8036788();
+void sub_8036728();
 extern void sub_8036830();
-extern void sub_803689C();
-extern void sub_80368D4();
-extern void sub_8036934();
-extern void sub_8036950();
+void sub_803689C();
+void sub_80368D4();
+void sub_8036934();
+void sub_8036950();
 extern void sub_8036AA4();
 extern void sub_80369FC();
 extern void sub_8036A18();
@@ -52,11 +52,20 @@ extern void sub_8036A7C();
 extern void sub_8036A54();
 extern void sub_8036ADC();
 
+// 11 was another saving too?
 enum TradeItemsScreens
 {
     TRADE_ITEMS_MAIN_MENU,
     TRADE_ITEMS_SEND_ITEM,
-    TRADE_ITEMS_RECEIVE_ITEM = 7,
+    TRADE_ITEMS_SEND_ITEM_SELECTION,
+    TRADE_ITEMS_SEND_ITEM_POPUP_MENU,
+    TRADE_ITEMS_SEND_ITEM_NUMBER,
+    TRADE_ITEMS_ITEM_INFO,
+    TRADE_ITEMS_SEND_ITEM_CONFIRM,
+    TRADE_ITEMS_RECEIVE_ITEM,
+    TRADE_ITEMS_IN_COMMUNICATION = 9,
+    TRADE_ITEMS_PREPARE_TRADE_SAVING = 15,
+    TRADE_ITEMS_EXIT = 18,
 };
 
 
@@ -84,19 +93,19 @@ u32 UpdateTradeItemsMenu(void)
       case TRADE_ITEMS_SEND_ITEM:
         sub_8036590();
         break;
-      case 2:
+      case TRADE_ITEMS_SEND_ITEM_SELECTION:
         sub_80365AC();
         break;
-      case 3:
+      case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8036674();
         break;
-      case 5:
+      case TRADE_ITEMS_ITEM_INFO:
         sub_8036728();
         break;
-      case 4:
+      case TRADE_ITEMS_SEND_ITEM_NUMBER:
         sub_8036788();
         break;
-      case 6:
+      case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         sub_8036830();
         break;
       case TRADE_ITEMS_RECEIVE_ITEM:
@@ -105,10 +114,10 @@ u32 UpdateTradeItemsMenu(void)
       case 8:
         sub_80368D4();
         break;
-      case 0xf:
+      case TRADE_ITEMS_PREPARE_TRADE_SAVING:
         sub_8036A7C();
         break;
-      case 9:
+      case TRADE_ITEMS_IN_COMMUNICATION:
         sub_8036934();
         break;
       case 10:
@@ -132,7 +141,7 @@ u32 UpdateTradeItemsMenu(void)
       case 0x11:
         sub_8036ADC();
         break;
-      case 0x12: // when you exit the menu to Main
+      case TRADE_ITEMS_EXIT: // when you exit the menu to Main
         return 3;
   }
   return 0;
@@ -160,7 +169,7 @@ void sub_803652C(void)
         case 0:
         case 7:
             // Cancel
-            SetTradeItemMenu(0x12);
+            SetTradeItemMenu(TRADE_ITEMS_EXIT);
       }
   }
 }
@@ -170,7 +179,7 @@ void sub_8036590(void)
   s32 iVar1;
   
   if (sub_80144A4(&iVar1) == 0)
-    SetTradeItemMenu(2);
+    SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_SELECTION);
 }
 
 void sub_80365AC(void)
@@ -188,7 +197,7 @@ void sub_80365AC(void)
         // Pop up menu with Confirm, Info, Cancel
         gUnknown_203B358->unk25E = sub_801CB24();
         gUnknown_203B358->unk25D = 1;
-        SetTradeItemMenu(3);
+        SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 4:
         gUnknown_203B358->unk4 = 2;
@@ -198,23 +207,23 @@ void sub_80365AC(void)
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_801B3C0(&gUnknown_203B358->unk25C);
-        SetTradeItemMenu(5);
+        SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
   }
 }
 
 void sub_8036674(void)
 {
-  int local_c;
+  int menuAction;
   
-  local_c = -1;
+  menuAction = -1;
   sub_801CA08(0);
   if (sub_8012FD8(&gUnknown_203B358->unk134) == '\0') {
-    sub_8013114(&gUnknown_203B358->unk134, &local_c);
+    sub_8013114(&gUnknown_203B358->unk134, &menuAction);
   }
-  switch(local_c){
+  switch(menuAction){
     case 3: // confirm
-        SetTradeItemMenu(4);
+        SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_NUMBER);
         break;
     case 4: // Info
         gUnknown_203B358->unk4 = 0x13;
@@ -222,14 +231,14 @@ void sub_8036674(void)
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_801B3C0(&gUnknown_203B358->unk25C);
-        SetTradeItemMenu(5);
+        SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
     case 7:
     case 0:
         // Cancel
         sub_8035CC0(gUnknown_203B358->unk184, 3);
         sub_801CCD8();
-        SetTradeItemMenu(2);
+        SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_SELECTION);
         break;
   }
 }
@@ -246,7 +255,7 @@ void sub_8036728(void)
         sub_801CB5C(1);
         if (gUnknown_203B358->unk4 == 0x13) {
             sub_8035CF4(&gUnknown_203B358->unk44, 3, 1);
-            SetTradeItemMenu(3);
+            SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         }
         else {
             SetTradeItemMenu(gUnknown_203B358->unk4);
@@ -273,7 +282,7 @@ void sub_8036788(void)
         sub_8035CC0(gUnknown_203B358->unk184, 2);
         sub_801CCD8();
         sub_8035CF4(&gUnknown_203B358->unk44, 3, 1);
-        SetTradeItemMenu(3);
+        SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 3:
         // Confirm # of item
@@ -281,7 +290,7 @@ void sub_8036788(void)
         gUnknown_203B358->unk254 = gUnknown_203B358->unk25E;
         gUnknown_203B358->unk258 = gUnknown_203B358->unk14;
         sub_801CBB8();
-        SetTradeItemMenu(6);
+        SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
         break;
     case 0:
         break;
@@ -291,11 +300,11 @@ void sub_8036788(void)
 #ifdef NONMATCHING
 void sub_8036830(void)
 {
-  int local_8;
+  int menuAction;
 
-  if (sub_80144A4(&local_8) == 0) 
+  if (sub_80144A4(&menuAction) == 0) 
   {
-      switch(local_8){
+      switch(menuAction){
         case 5:
             sub_801CBB8();
             // TODO: Statements are shifted around but is equivalent
@@ -374,11 +383,11 @@ void sub_803689C(void)
   if (sub_80144A4(&menuAction) == 0) {
       switch(menuAction){
         case 5:
-            SetTradeItemMenu(9);
+            SetTradeItemMenu(TRADE_ITEMS_IN_COMMUNICATION);
             break;
         case 7:
         case 0:
-            SetTradeItemMenu(0x12);
+            SetTradeItemMenu(TRADE_ITEMS_EXIT);
             break;
     }
   }
@@ -391,7 +400,7 @@ void sub_80368D4(void)
   if (sub_80144A4(&menuAction) == 0) {
     switch(menuAction){
         case 5:
-            SetTradeItemMenu(9);
+            SetTradeItemMenu(TRADE_ITEMS_IN_COMMUNICATION);
             break;
         case 7:
         case 0:
@@ -420,7 +429,7 @@ void sub_8036950(void)
   s32 iVar1;
 
   if (sub_80144A4(&iVar1) == 0) {
-    if (gUnknown_203B358->unkC == 0) {
+    if (gUnknown_203B358->linkStatus == 0) {
       switch(gUnknown_203B358->unk8){
         case 0:
           SetTradeItemMenu(0xd);
@@ -440,7 +449,7 @@ void sub_8036950(void)
         sub_8012574(0);
       }
       else {
-        sub_8036E18(gUnknown_203B358->unkC);
+        PrintTradeItemsLinkError(gUnknown_203B358->linkStatus);
         SetTradeItemMenu(0xc);
       }
     }

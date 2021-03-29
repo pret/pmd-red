@@ -138,7 +138,7 @@ sub_8036AA4:
 	ldr r0, _08036AD8
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	bl sub_8036E18
+	bl PrintTradeItemsLinkError
 	movs r0, 0xC
 	bl SetTradeItemMenu
 _08036AD0:
