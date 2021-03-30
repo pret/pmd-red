@@ -8,13 +8,8 @@ struct unkData
 
 struct TradeSubStruct
 {
-    u32 unk254;
-    u32 unk258;
-};
-
-struct TradeSubStruct2
-{
-    u32 unk0;
+    u8 unk0;
+    u8 fill3[0x3];
     u32 unk4;
 };
 
@@ -47,24 +42,11 @@ struct TradeItemsMenu
     u8 fill1E8[0x244 - 0x1E8];
 
     // TODO These might be structs...
-    u8 unk244; // sometimes cast to a u8
-    u8 fill[0x3];
-    u32 unk248;
+    struct TradeSubStruct unk244;
 
+    struct TradeSubStruct unk24C;
 
-    u8 unk24C; // sometimes cast to a u8
-    u8 fill2[0x3];
-    u32 unk250;
-
-    u8 unk254; // sometimes cast to a u8
-    u8 fill3[0x3];
-    u32 unk258;
-
-    //struct TradeSubStruct2 unk244;
-
-    //struct TradeSubStruct2 unk24C;
-
-    //struct TradeSubStruct unk254;
+    struct TradeSubStruct unk254;
 
     u8 unk25C;
     u8 unk25D;
