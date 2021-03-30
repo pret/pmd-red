@@ -121,6 +121,12 @@ enum TradeItemsScreens
     TRADE_ITEMS_EXIT = 18,
 };
 
+enum TradeItemsModes
+{
+    TRADE_ITEMS_SEND_ITEM_MODE,
+    TRADE_ITEMS_RECEIVE_ITEM_MODE
+};
+
 
 u32 CreateTradeItemsMenu(void)
 {
@@ -209,13 +215,13 @@ void sub_803652C(void)
       {
         case 1:
             // Send Item
-            gTradeItemsMenu->unk8 = 0;
+            gTradeItemsMenu->itemMode = TRADE_ITEMS_SEND_ITEM_MODE;
             gTradeItemsMenu->unk10 = 1;
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM);
             break;
         case 2:
             // Receive Item
-            gTradeItemsMenu->unk8 = 1;
+            gTradeItemsMenu->itemMode = TRADE_ITEMS_RECEIVE_ITEM_MODE;
             gTradeItemsMenu->unk10 = 2;
             SetTradeItemMenu(TRADE_ITEMS_RECEIVE_ITEM);
             break;
@@ -429,11 +435,11 @@ void sub_8036950(void)
 
   if (sub_80144A4(&iVar1) == 0) {
     if (gTradeItemsMenu->linkStatus == 0) {
-      switch(gTradeItemsMenu->unk8){
-        case 0:
+      switch(gTradeItemsMenu->itemMode){
+        case TRADE_ITEMS_SEND_ITEM_MODE:
           SetTradeItemMenu(0xd);
           break;
-        case 1:
+        case TRADE_ITEMS_RECEIVE_ITEM_MODE:
           SetTradeItemMenu(0xe);
           break;
         default:
@@ -441,9 +447,10 @@ void sub_8036950(void)
       }
     }
     else {
-      if (((gTradeItemsMenu->unk8 == 0) && (gTradeItemsMenu->unk254.unk0 != 0))
+      if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->unk254.unk0 != 0))
          && (gTradeItemsMenu->unk254.unk4 != 0)) {
-        sub_80369D0();
+          // Link Failure
+        sub_80369D0(); // Add back the item
         SetTradeItemMenu(0xb);
         sub_8012574(0);
       }
@@ -633,26 +640,26 @@ void sub_8036B28(void)
     // Regs are fixed back up after
 
         sub_8011830();
-        iVar3 = sub_8037B28(gTradeItemsMenu->unk8);
+        iVar3 = sub_8037B28(gTradeItemsMenu->itemMode);
         gTradeItemsMenu->linkStatus = iVar3;
         if(iVar3 == 0){
-        switch(gTradeItemsMenu->unk8){
+        switch(gTradeItemsMenu->itemMode){
             // Fallthrough needed on each case
-            case 0:
+            case TRADE_ITEMS_SEND_ITEM_MODE:
                 temp = &gTradeItemsMenu->unk244;
                 temp2 = &gTradeItemsMenu->unk254;
                 load_2 = temp2->unk4;
                 temp->unk0 = temp2->unk0;
                 temp->unk4 = load_2;
-            case 1:
-                gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->unk8,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
+            case TRADE_ITEMS_RECEIVE_ITEM_MODE:
+                gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
             default:
                 break;
         }
         }
         // Needed this check for code generation
-        if(gTradeItemsMenu->linkStatus == 0 && gTradeItemsMenu->unk8 <= 1){
-            gTradeItemsMenu->linkStatus = sub_80381F4(gTradeItemsMenu->unk8,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
+        if(gTradeItemsMenu->linkStatus == 0 && gTradeItemsMenu->itemMode <= 1){
+            gTradeItemsMenu->linkStatus = sub_80381F4(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
         }
         xxx_call_start_bg_music();
         break;
