@@ -1,107 +1,34 @@
 #include "global.h"
-#include "time.h"
+#include "memory.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
-extern struct PlayTimeStruct gPlayTime;
+struct unkStruct_203B480
+{
+    //size of 48
+    u8 unk0;
+    u8 fill1[0x22 - 1];
+    u8 unk22;
+    u8 fill23[0x2D - 0x23];
+    u8 unk2D;
+};
 
-extern u8 gUnknown_2038C88;
+struct unkStruct_203B48C
+{
+    s32 unk0;
+    s32 unk4[0x20];
+};
+
+extern struct unkStruct_203B480 gUnknown_2038C88;
 extern u8 gUnknown_2039288;
 extern u32 gUnknown_20392E8;
-extern u32 gUnknown_20393C0;
-extern u8 *gUnknown_203B480;
+extern struct unkStruct_203B48C gUnknown_20393C0;
 extern u8 *gUnknown_203B484;
 extern u32 *gUnknown_203B488;
-extern u32 *gUnknown_203B48C;
 
 
-extern void sub_809488C(u8 *r0, u8 *r1, u32);
-extern void sub_8094924(u8 *r0, u8 *r1, u32);
+extern struct unkStruct_203B480 *gUnknown_203B480;
 
+extern struct unkStruct_203B48C *gUnknown_203B48C; // def a pointer
 
-void InitializePlayTime(void)
-{
-    gPlayTimeRef = &gPlayTime;
-    ResetPlayTime(&gPlayTime);
-}
-
-struct PlayTimeStruct *GetPlayTime(void)
-{
-    return &gPlayTime;
-}
-
-void ResetPlayTime(struct PlayTimeStruct *Time)
-{
-    Time->frames = 0;
-    Time->seconds = 0;
-    Time->minutes = 0;
-    Time->hours = 0;
-}
-
-void IncrementPlayTime(struct PlayTimeStruct *Time)
-{
-    u16 temp_store16;
-
-    Time->frames++;
-    if(Time->frames <= 59)
-        return;
-    Time->frames = 0;
-
-    Time->seconds++;
-    if(Time->seconds <= 59)
-        return;
-    Time->seconds = 0;
-
-    Time->minutes++;
-    if(Time->minutes <= 59)
-        return;
-    Time->minutes = 0;
-
-    // Casting here for unsigned comparison
-    temp_store16 = Time->hours;
-    if(Time->hours <= 9998)
-    {
-        temp_store16++;
-        Time->hours = temp_store16;
-    }
-    else
-    {
-        Time->seconds = 59;
-        Time->minutes = 59;
-        Time->hours= 9999;
-    }
-}
-
-void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinutes, u32 *outSeconds)
-{
-    if(r0->hours <= 9999)
-    {
-        *outHours = r0->hours;
-        *outMinutes = r0->minutes;
-        *outSeconds = r0->seconds;
-    }
-    else
-    {
-        *outHours = 9999;
-        *outMinutes = 59;
-        *outSeconds = 59;
-    }
-}
-
-void sub_8095044(u8 *r0)
-{
-    sub_809488C(r0, (&(gPlayTimeRef->frames)), 6);
-    sub_809488C(r0, (&(gPlayTimeRef->seconds)), 6);
-    sub_809488C(r0, (&(gPlayTimeRef->minutes)), 6);
-    sub_809488C(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
-}
-
-void sub_8095080(u8 *r0)
-{
-    sub_8094924(r0, (&(gPlayTimeRef->frames)), 6);
-    sub_8094924(r0, (&(gPlayTimeRef->seconds)), 6);
-    sub_8094924(r0, (&(gPlayTimeRef->minutes)), 6);
-    sub_8094924(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
-}
 
 void sub_80950BC(void)
 {
@@ -111,7 +38,7 @@ void sub_80950BC(void)
     gUnknown_203B48C = &gUnknown_20393C0;
 }
 
-u8 *sub_80950F8(void)
+struct unkStruct_203B480 *sub_80950F8(void)
 {
     return &gUnknown_2038C88;
 }
@@ -126,9 +53,108 @@ u32 *sub_8095108(void)
     return &gUnknown_20392E8;
 }
 
-u32 *sub_8095110(void)
+struct unkStruct_203B48C *sub_8095110(void)
 {
     return &gUnknown_20393C0;
 }
 
 
+#ifdef NONMATCHING
+void sub_8095118(void)
+{
+  int iVar1;
+  
+  MemoryFill8((u8*)gUnknown_203B480,0,0x600);
+  MemoryFill8(gUnknown_203B484,0,0x5c);
+  for(iVar1 = 0; iVar1 < 0x20; iVar1++){
+      // NOTE: when it adds the index regs flip
+      // Instead of add r0, r0, r1 -> add r0, r1, r0
+      // Everything else matches...
+    gUnknown_203B480[iVar1].unk0 = 0;
+    gUnknown_203B480[iVar1].unk22 = 0;
+    gUnknown_203B480[iVar1].unk2D = 0;
+  }
+  gUnknown_203B48C->unk0 = 0;
+  for(iVar1 = 0; iVar1 < 0x20; iVar1++){
+    gUnknown_203B48C->unk4[iVar1] = -1;
+  }
+}
+#else
+NAKED
+void sub_8095118(void)
+{
+	asm_unified("\tpush {r4,lr}\n"
+	"\tldr r4, _0809517C\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r2, 0xC0\n"
+	"\tlsls r2, 3\n"
+	"\tmovs r1, 0\n"
+	"\tbl MemoryFill8\n"
+	"\tldr r0, _08095180\n"
+	"\tldr r0, [r0]\n"
+	"\tmovs r1, 0\n"
+	"\tmovs r2, 0x5C\n"
+	"\tbl MemoryFill8\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r1, 0\n"
+	"\tmovs r3, 0x1F\n"
+"_0809513A:\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, r1\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, r1\n"
+	"\tadds r0, 0x22\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, r1\n"
+	"\tadds r0, 0x2D\n"
+	"\tstrb r2, [r0]\n"
+	"\tadds r1, 0x30\n"
+	"\tsubs r3, 0x1\n"
+	"\tcmp r3, 0\n"
+	"\tbge _0809513A\n"
+	"\tldr r2, _08095184\n"
+	"\tldr r1, [r2]\n"
+	"\tmovs r0, 0\n"
+	"\tstr r0, [r1]\n"
+	"\tmovs r3, 0\n"
+	"\tmovs r4, 0x1\n"
+	"\tnegs r4, r4\n"
+"_08095166:\n"
+	"\tldr r0, [r2]\n"
+	"\tlsls r1, r3, 2\n"
+	"\tadds r0, 0x4\n"
+	"\tadds r0, r1\n"
+	"\tstr r4, [r0]\n"
+	"\tadds r3, 0x1\n"
+	"\tcmp r3, 0x1F\n"
+	"\tble _08095166\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0809517C: .4byte gUnknown_203B480\n"
+"_08095180: .4byte gUnknown_203B484\n"
+"_08095184: .4byte gUnknown_203B48C");
+}
+#endif
+
+void nullsub_206(void)
+{
+}
+
+void nullsub_207(void)
+{
+}
+
+s32 sub_8095190(void)
+{
+  int index;
+  
+  for(index = 2; index < 0x20; index++){
+    if(gUnknown_203B480[index].unk0 == 0)
+        return index;
+  }
+  return -1;
+}

@@ -8,14 +8,14 @@ struct unkData
 };
 
 
-extern struct MainMenu *gUnknown_203B348;
+extern struct MainMenu *gMainMenu;
 extern struct unkData gUnknown_80E59A8;
-extern void sub_8006518();
+extern void sub_8006518(struct unkData *);
 extern void sub_800641C(struct unkData *, u32, u32);
 
 void sub_8035CC0(struct unkData *dataArray, u32 index)
 {
-    sub_8006518();
+    sub_8006518(dataArray);
     dataArray[index] = gUnknown_80E59A8;
     ResetUnusedInputStruct();
     sub_800641C(dataArray, 1, 1);
@@ -46,35 +46,35 @@ void sub_8035CF4(void * Menu, u32 index, u8 r2)
 
 void sub_8035D1C(void)
 {
-    gUnknown_203B348->unk38 = -1;
+    gMainMenu->unk38 = -1;
 }
 
 void sub_8035D30(s32 r0)
 {
-    gUnknown_203B348->unk38 = r0;
+    gMainMenu->unk38 = r0;
 }
 
 s16 sub_8035D3C(void)
 {
-    return gUnknown_203B348->unk38;
+    return gMainMenu->unk38;
 }
 
 s32 *sub_8035D4C(void)
 {
-    return &gUnknown_203B348->currMenu;
+    return &gMainMenu->currMenu;
 }
 
 void sub_8035D58(void)
 {
-    gUnknown_203B348->unk3C = -1;
+    gMainMenu->unk3C = -1;
 }
 
 void sub_8035D68(s32 r0)
 {
-    gUnknown_203B348->unk3C = r0;
+    gMainMenu->unk3C = r0;
 }
 
 s32 sub_8035D74(void)
 {
-    return gUnknown_203B348->unk3C;
+    return gMainMenu->unk3C;
 }

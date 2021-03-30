@@ -1,10 +1,5 @@
 #include "global.h"
-
-struct unkDungeon_8041D5C
-{
-    u8 padding[0x70];
-    u8 *unk70[100];
-};
+#include "code_8041D5C.h"
 
 struct unk_struct_8041F08
 {
@@ -295,13 +290,11 @@ void nullsub_81(void)
 
 void sub_8041D5C(struct unkDungeon_8041D5C *r0)
 {
-    u8 *temp;
     if(sub_8042768(r0) == 0)
     {
         return;
     }
-    temp = *r0->unk70;
-    sub_803ED30(temp[0x89 << 1] , r0, 1, 0xB);
+    sub_803ED30(r0->unk70->unk112 , r0, 1, 0xB);
 }
 
 void sub_8041D84(struct unkDungeon_8041D5C * r0)
@@ -687,9 +680,7 @@ void sub_8042208(struct unkDungeon_8041D5C *r0, u8 r1)
 
 void sub_8042238(u32 r0, struct unkDungeon_8041D5C *r1)
 {
-    u8 *temp;
-    temp = *r1->unk70;
-    if(temp[6] != 0)
+    if(r1->unk70->unk6 != 0)
         sub_8083E38(0x157);
     else
         sub_8083E38(0xAB << 1);

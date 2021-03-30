@@ -6,7 +6,7 @@
 #include "input.h"
 #include "memory.h"
 #include "music.h"
-#include "time.h"
+#include "play_time.h"
 #include "save.h"
 
 extern void NDS_DebugInit(void);

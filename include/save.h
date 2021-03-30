@@ -1,7 +1,7 @@
 #ifndef SAVE_H
 #define SAVE_H
 
-#include "time.h"
+#include "play_time.h"
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
 

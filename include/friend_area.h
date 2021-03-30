@@ -4,11 +4,7 @@
 struct FriendAreaSettings
 {
     s16 num_pokemon;
-    u8 unlock_condition;
-    // 0 - Shop (Story)
-    // 1 - Shop (Story Post-game)
-    // 2 - Wonder Mail
-    // 3 - Legendary Request (unlocks when lengendary joins)
+    u16 unlock_condition;
     u32 price;
 };
 

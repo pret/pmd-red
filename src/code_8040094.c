@@ -1,5 +1,5 @@
 #include "global.h"
-#include "time.h"
+#include "play_time.h"
 #include "file_system.h"
 
 struct unkStruct_203B418

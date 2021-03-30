@@ -3,7 +3,7 @@
 #include "global.h"
 #include "music.h"
 #include "constants/bg_music.h"
-#include "time.h"
+#include "play_time.h"
 #include "bg.h"
 #include "input.h"
 #include "config.h"

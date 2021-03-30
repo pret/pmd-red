@@ -10,7 +10,7 @@ struct unkStruct_203B2C4
     u8 unk8[0x36];
     u8 unk3E;
     u32 unk40;
-    u32 unk44; // another link status
+    u32 linkError; // another link status
     u8 filler48[0x218 - 0x48];
     s8 unk218;
     u32 unk21C;
@@ -94,7 +94,7 @@ void sub_8029F98(void)
   gUnknown_203B2C4->unk41C[2] = 0;
   gUnknown_203B2C4->unk41C[1] = 1;
   gUnknown_203B2C4->unk41C[0] = 0;
-  if (gUnknown_203B2C4->unk44 == 0) {
+  if (gUnknown_203B2C4->linkError == 0) {
       switch(gUnknown_203B2C4->unk40) 
         {
             case 6:
@@ -121,7 +121,7 @@ void sub_8029F98(void)
   }
   else
   {
-      PrintWonderMailLinkError(gUnknown_203B2C4->unk44);
+      PrintWonderMailLinkError(gUnknown_203B2C4->linkError);
       sub_802B2BC(0x1F);
   }
 }

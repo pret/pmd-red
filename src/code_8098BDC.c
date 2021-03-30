@@ -1,5 +1,5 @@
 #include "global.h"
-#include "time.h"
+#include "play_time.h"
 #include "input.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
