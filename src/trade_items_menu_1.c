@@ -68,6 +68,99 @@ extern void sub_8090DC4(u32 *, u8, u32);
 extern void sub_80141B4(u32 *, u32, u32, u32);
 extern void MemoryFree(void *);
 extern void sub_801CBB8();
+extern u8 sub_8012600(void);
+
+extern u32 sub_80144A4(s32 *);
+void SetTradeItemMenu(u32 newMenu);
+extern void sub_8012750();
+void PrintTradeItemsLinkError(u32 errorNum);
+extern void sub_8012574(u32);
+
+void sub_80369FC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        SetTradeItemMenu(0);
+    }
+}
+
+
+void sub_8036A18(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        SetTradeItemMenu(0x12);
+    }
+}
+
+
+void sub_8036A34(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        SetTradeItemMenu(0x10);
+        sub_8012574(0);
+    }
+}
+
+
+void sub_8036A54(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        if(sub_8012600() == 0)
+        {
+            sub_8012750();
+            SetTradeItemMenu(0x12);
+        }
+    }
+}
+
+void sub_8036A7C(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        if(sub_8012600() == 0)
+        {
+            sub_8012750();
+            SetTradeItemMenu(0x8);
+        }
+    }
+}
+
+
+void sub_8036AA4(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        if(sub_8012600() == 0)
+        {
+            sub_8012750();
+            PrintTradeItemsLinkError(gUnknown_203B358->linkStatus);
+            SetTradeItemMenu(0xC);
+        }
+    }
+}
+
+
+void sub_8036ADC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        if(sub_8012600() == 0)
+        {
+            sub_8012750();
+            SetTradeItemMenu(0x12);
+        }
+    }
+}
 
 void CleanTradeItemsMenu(void)
 {
@@ -140,7 +233,7 @@ void sub_8036B28(void)
         sub_80141B4(&gUnknown_80E62C4,0,0,0);
         break;
     case 10:
-        gUnknown_203B358->unkC = 0;
+        gUnknown_203B358->linkStatus = 0;
     // TODO
     // Regs mess up here
     // Needs a mov r2, 0
@@ -157,7 +250,7 @@ void sub_8036B28(void)
 
         sub_8011830();
         iVar3 = sub_8037B28(gUnknown_203B358->unk8);
-        gUnknown_203B358->unkC = iVar3;
+        gUnknown_203B358->linkStatus = iVar3;
         if(iVar3 == 0){
         switch(gUnknown_203B358->unk8){
             // Fallthrough needed on each case
@@ -168,14 +261,14 @@ void sub_8036B28(void)
                 temp->unk0 = temp2->unk254;
                 temp->unk4 = load_2;
             case 1:
-                gUnknown_203B358->unkC = sub_8037D64(gUnknown_203B358->unk8,&gUnknown_203B358->unk244,&gUnknown_203B358->unk24C);
+                gUnknown_203B358->linkStatus = sub_8037D64(gUnknown_203B358->unk8,&gUnknown_203B358->unk244,&gUnknown_203B358->unk24C);
             default:
                 break;
         }
         }
         // Needed this check for code generation
-        if(gUnknown_203B358->unkC == 0 && gUnknown_203B358->unk8 <= 1){
-            gUnknown_203B358->unkC = sub_80381F4(gUnknown_203B358->unk8,&gUnknown_203B358->unk244,&gUnknown_203B358->unk24C);
+        if(gUnknown_203B358->linkStatus == 0 && gUnknown_203B358->unk8 <= 1){
+            gUnknown_203B358->linkStatus = sub_80381F4(gUnknown_203B358->unk8,&gUnknown_203B358->unk244,&gUnknown_203B358->unk24C);
         }
         xxx_call_start_bg_music();
         break;

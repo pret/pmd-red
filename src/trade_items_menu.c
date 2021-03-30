@@ -429,7 +429,7 @@ void sub_8036950(void)
   s32 iVar1;
 
   if (sub_80144A4(&iVar1) == 0) {
-    if (gUnknown_203B358->unkC == 0) {
+    if (gUnknown_203B358->linkStatus == 0) {
       switch(gUnknown_203B358->unk8){
         case 0:
           SetTradeItemMenu(0xd);
@@ -449,7 +449,7 @@ void sub_8036950(void)
         sub_8012574(0);
       }
       else {
-        PrintTradeItemsLinkError(gUnknown_203B358->unkC);
+        PrintTradeItemsLinkError(gUnknown_203B358->linkStatus);
         SetTradeItemMenu(0xc);
       }
     }

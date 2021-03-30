@@ -25,7 +25,7 @@ struct TradeItemsMenu
     u32 currMenu;
     u32 unk4;
     u32 unk8;
-    u32 unkC;
+    u32 linkStatus;
     u32 unk10;
     u32 unk14; // item #
     u32 unk18;
