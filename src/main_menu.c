@@ -1,6 +1,7 @@
 #include "global.h"
 #include "debug_menu.h"
 #include "main_menu.h"
+#include "adventure_log.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -31,7 +32,6 @@ extern void sub_803A1E4(void);
 extern void CreateFriendRescueMenu(void);
 extern void sub_803A1D8(void);
 extern void CreateWonderMailMenu(void);
-extern void CreateAdventureLogMenu(void);
 extern void CreateLoadScreen(u32);
 extern s32 sub_8035DB4(u32);
 extern void CreateRescuePasswordMenu(u32);
@@ -44,7 +44,6 @@ extern s32 UpdateWonderMailMenu(void);
 extern s32 sub_803A1DC(void);
 extern s32 sub_803A1E8(void);
 extern s32 UpdateRescuePasswordMenu(void);
-extern s32 UpdateAdventureLogMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 sub_8038630(void);
 
@@ -57,7 +56,6 @@ extern void CleanWonderMailMenu(void);
 extern void nullsub_55(void);
 extern void sub_803A1EC(void);
 extern void CleanRescuePasswordMenu(void);
-extern void CleanAdventureLogMenu(void);
 extern void sub_80383A8(void);
 extern void sub_8038604(void);
 
