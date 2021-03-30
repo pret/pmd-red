@@ -8,9 +8,9 @@ struct unkData
 
 struct TradeSubStruct
 {
-    u8 unk0;
+    u8 unk0; // item id?
     u8 fill3[0x3];
-    u32 unk4;
+    u32 unk4; // number of items?
 };
 
 

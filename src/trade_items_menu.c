@@ -340,7 +340,7 @@ void sub_8036788(void)
     case 3:
         // Confirm # of item
         gUnknown_203B358->unk25D = gUnknown_203B358->unk14;
-        gUnknown_203B358->unk254.unk0 = (u8)gUnknown_203B358->unk25E;
+        gUnknown_203B358->unk254.unk0 = gUnknown_203B358->unk25E;
         gUnknown_203B358->unk254.unk4 = gUnknown_203B358->unk14;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
@@ -364,12 +364,12 @@ void sub_8036830(void)
             load = gUnknown_203B460->unk50[gUnknown_203B358->unk25E];
             load -= gUnknown_203B358->unk14;
             gUnknown_203B460->unk50[gUnknown_203B358->unk25E] = load;
-            SetTradeItemMenu(0xF);
+            SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
             sub_8012574(0);
             break;
         case 6:
         case 0:
-            SetTradeItemMenu(0);
+            SetTradeItemMenu(TRADE_ITEMS_MAIN_MENU);
             break;
         }
   }
@@ -403,7 +403,7 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if (((u8)gUnknown_203B358->unk254.unk0 != 0) && (gUnknown_203B358->unk254.unk4 != 0))
+            if ((gUnknown_203B358->unk254.unk0 != 0) && (gUnknown_203B358->unk254.unk4 != 0))
             {
                 sub_80369D0();
                 SetTradeItemMenu(0x11);
@@ -441,7 +441,7 @@ void sub_8036950(void)
       }
     }
     else {
-      if (((gUnknown_203B358->unk8 == 0) && ((u8)gUnknown_203B358->unk254.unk0 != 0))
+      if (((gUnknown_203B358->unk8 == 0) && (gUnknown_203B358->unk254.unk0 != 0))
          && (gUnknown_203B358->unk254.unk4 != 0)) {
         sub_80369D0();
         SetTradeItemMenu(0xb);
@@ -469,7 +469,7 @@ void sub_80369FC(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        SetTradeItemMenu(0); 
+        SetTradeItemMenu(TRADE_ITEMS_MAIN_MENU);
     }
 }
 
@@ -479,7 +479,7 @@ void sub_8036A18(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        SetTradeItemMenu(0x12);
+        SetTradeItemMenu(TRADE_ITEMS_EXIT);
     }
 }
 
@@ -501,7 +501,7 @@ void sub_8036A54(void)
         if(sub_8012600() == 0)
         {
             sub_8012750();
-            SetTradeItemMenu(0x12);
+            SetTradeItemMenu(TRADE_ITEMS_EXIT);
         }
     }
 }
@@ -513,7 +513,7 @@ void sub_8036A7C(void)
     {
         if(sub_8012600() == 0)
         {
-            sub_8012750();
+            sub_8012750(); // cleans up from Save Message
             SetTradeItemMenu(0x8);
         }
     }
@@ -541,7 +541,7 @@ void sub_8036ADC(void)
         if(sub_8012600() == 0)
         {
             sub_8012750();
-            SetTradeItemMenu(0x12);
+            SetTradeItemMenu(TRADE_ITEMS_EXIT);
         }
     }
 }
@@ -626,7 +626,7 @@ void sub_8036B28(void)
         temp->unk0 = 0;
         temp->unk4 = 0;
 
-        temp += 1;
+        temp += 1; // move to unk24C
 
         temp->unk0 = 0;
         temp->unk4 = 0;
