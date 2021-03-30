@@ -461,7 +461,7 @@ gUnknown_203B340 = .; /* 203B340 */
 gUnknown_203B344 = .; /* 203B344 */
 	. += 0x4;
 
-gUnknown_203B348 = .; /* 203B348 */
+gMainMenu = .; /* 203B348 */
 	. += 0x4;
 
 gUnknown_203B34C = .; /* 203B34C */
@@ -473,7 +473,7 @@ gUnknown_203B350 = .; /* 203B350 */
 gUnknown_203B354 = .; /* 203B354 */
 	. += 0x4;
 
-gUnknown_203B358 = .; /* 203B358 */
+gTradeItemsMenu = .; /* 203B358 */
 	. += 0x4;
 
 gUnknown_203B35C = .; /* 203B35C */

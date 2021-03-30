@@ -15,7 +15,7 @@ sub_8035D80:
 	str r1, [r2, 0x34]
 	bx lr
 	.align 2, 0
-_08035D90: .4byte gUnknown_203B348
+_08035D90: .4byte gMainMenu
 	thumb_func_end sub_8035D80
 
 	thumb_func_start sub_8035D94
@@ -25,7 +25,7 @@ sub_8035D94:
 	adds r0, 0x30
 	bx lr
 	.align 2, 0
-_08035D9C: .4byte gUnknown_203B348
+_08035D9C: .4byte gMainMenu
 	thumb_func_end sub_8035D94
 
 	thumb_func_start sub_8035DA0
@@ -39,7 +39,7 @@ sub_8035DA0:
 	str r1, [r0, 0x34]
 	bx lr
 	.align 2, 0
-_08035DB0: .4byte gUnknown_203B348
+_08035DB0: .4byte gMainMenu
 	thumb_func_end sub_8035DA0
 
 	thumb_func_start sub_8035DB4

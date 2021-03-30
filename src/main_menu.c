@@ -16,7 +16,7 @@
 // Deletes the Save
 
 
-extern struct MainMenu *gUnknown_203B348;
+extern struct MainMenu *gMainMenu;
 extern void* MemoryAlloc(u32 a, u32 b);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 void sub_8035DA0(void);
@@ -63,34 +63,34 @@ extern void sub_8038604(void);
 
 void InitMainMenu(void)
 {
-  if (gUnknown_203B348 == NULL) {
-    gUnknown_203B348 = MemoryAlloc(sizeof(struct MainMenu),8);
-    MemoryFill8((u8 *)gUnknown_203B348, 0, sizeof(struct MainMenu));
+  if (gMainMenu == NULL) {
+    gMainMenu = MemoryAlloc(sizeof(struct MainMenu),8);
+    MemoryFill8((u8 *)gMainMenu, 0, sizeof(struct MainMenu));
   }
-  gUnknown_203B348->currMenu = 0xffdc;
-  gUnknown_203B348->nextMenu = MENU_MAIN_SCREEN;
-  gUnknown_203B348->lastMenu = MENU_MAIN_SCREEN;
-  gUnknown_203B348->unk38 = -1;
-  gUnknown_203B348->unk3C = -1;
-  gUnknown_203B348->sub.unk2E = 0;
-  gUnknown_203B348->sub.unk2C = 1;
-  gUnknown_203B348->sub.unk2D = 0;
+  gMainMenu->currMenu = 0xffdc;
+  gMainMenu->nextMenu = MENU_MAIN_SCREEN;
+  gMainMenu->lastMenu = MENU_MAIN_SCREEN;
+  gMainMenu->unk38 = -1;
+  gMainMenu->unk3C = -1;
+  gMainMenu->sub.unk2E = 0;
+  gMainMenu->sub.unk2C = 1;
+  gMainMenu->sub.unk2D = 0;
   sub_8035DA0();
-  gUnknown_203B348->unk3A = 0;
+  gMainMenu->unk3A = 0;
 }
 
 void DeleteMainMenu(void)
 {
-    if(gUnknown_203B348){
-        MemoryFree(gUnknown_203B348);
-        gUnknown_203B348 = NULL;
+    if(gMainMenu){
+        MemoryFree(gMainMenu);
+        gMainMenu = NULL;
     }
 }
 
 void SetUpMenu(void)
 {
-  if (gUnknown_203B348->currMenu != gUnknown_203B348->nextMenu) {
-    switch(gUnknown_203B348->nextMenu) {
+  if (gMainMenu->currMenu != gMainMenu->nextMenu) {
+    switch(gMainMenu->nextMenu) {
         case MENU_MAIN_SCREEN:
             sub_8094C14();
             sub_8099690(0);
@@ -100,14 +100,14 @@ void SetUpMenu(void)
         case MENU_CONTINUE:
         case MENU_DELETE_SAVE_PROMPT:
         case 9:
-            CreateLoadScreen(gUnknown_203B348->nextMenu);
+            CreateLoadScreen(gMainMenu->nextMenu);
             break;
         case MENU_TRADE_ITEMS:
             CreateTradeItemsMenu();
             break;
         case MENU_COMMUNICATION_1:
         case MENU_COMMUNICATION_2:
-            sub_8036FDC(sub_8035DB4(gUnknown_203B348->nextMenu));
+            sub_8036FDC(sub_8035DB4(gMainMenu->nextMenu));
             break;
         case MENU_FRIEND_RESCUE:
             CreateFriendRescueMenu();
@@ -123,7 +123,7 @@ void SetUpMenu(void)
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
         case MENU_RESCUE_PASSWORD_ENTRY:
-            CreateRescuePasswordMenu(gUnknown_203B348->nextMenu);
+            CreateRescuePasswordMenu(gMainMenu->nextMenu);
             break;
         case MENU_ADVENTURE_LOG:
             CreateAdventureLogMenu();
@@ -134,13 +134,13 @@ void SetUpMenu(void)
         case 0x2c:
         case 0x2d:
         case 0x2e:
-            sub_803850C(gUnknown_203B348->nextMenu);
+            sub_803850C(gMainMenu->nextMenu);
             break;
         case MENU_DEBUG:
             CreateDebugMenu();
             break;
     }
-    gUnknown_203B348->currMenu = gUnknown_203B348->nextMenu;
+    gMainMenu->currMenu = gMainMenu->nextMenu;
   }
 }
 
@@ -150,7 +150,7 @@ s32 UpdateMenu(void)
   s32 nextMenu;
 
   nextMenu = MENU_NO_SCREEN_CHANGE;
-  switch(gUnknown_203B348->nextMenu) {
+  switch(gMainMenu->nextMenu) {
     case MENU_MAIN_SCREEN:
         nextMenu = UpdateMainMenu();
         break;
@@ -222,15 +222,15 @@ s32 UpdateMenu(void)
         break;
   }
   if (nextMenu != MENU_NO_SCREEN_CHANGE) {
-    gUnknown_203B348->nextMenu = nextMenu;
+    gMainMenu->nextMenu = nextMenu;
   }
   return nextMenu;
 }
 
 void CleanUpMenu(void)
 {
-  if (gUnknown_203B348->lastMenu != gUnknown_203B348->nextMenu) {
-    switch(gUnknown_203B348->lastMenu) {
+  if (gMainMenu->lastMenu != gMainMenu->nextMenu) {
+    switch(gMainMenu->lastMenu) {
     case MENU_MAIN_SCREEN:
       CleanMainMenu();
       break;
@@ -285,25 +285,25 @@ void CleanUpMenu(void)
       DeleteDebugMenu();
       break;
     }
-    gUnknown_203B348->lastMenu = gUnknown_203B348->nextMenu;
+    gMainMenu->lastMenu = gMainMenu->nextMenu;
   }
 }
 
 // Unused
 void sub_8035C00(struct MainMenuSub *param)
 {
-    gUnknown_203B348->sub = *param;
+    gMainMenu->sub = *param;
 }
 
 // Unused
 struct MainMenuSub *sub_8035C10(void)
 {
-   return &gUnknown_203B348->sub;
+   return &gMainMenu->sub;
 }
 
 void sub_8035C1C(void)
 {
-    gUnknown_203B348->sub.unk2E = 0;
-    gUnknown_203B348->sub.unk2C = 1;
-    gUnknown_203B348->sub.unk2D = 0;
+    gMainMenu->sub.unk2E = 0;
+    gMainMenu->sub.unk2C = 1;
+    gMainMenu->sub.unk2D = 0;
 }
