@@ -173,7 +173,7 @@ void sub_8036B28(void)
                 break;
         }
         }
-        // Needed this check for code generatioh
+        // Needed this check for code generation
         if(gUnknown_203B358->unkC == 0 && gUnknown_203B358->unk8 <= 1){
             gUnknown_203B358->unkC = sub_80381F4(gUnknown_203B358->unk8,&gUnknown_203B358->unk244,&gUnknown_203B358->unk24C);
         }
