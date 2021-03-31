@@ -94,6 +94,7 @@ SECTIONS {
         src/wonder_mail.o(.text);
         src/wonder_mail_mid.o(.text);
         asm/wonder_mail_1.o(.text);
+        src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
         src/friend_rescue_1.o(.text);
@@ -240,6 +241,8 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         src/wonder_mail.o(.rodata);
         data/data_80DED44.o(.rodata);
+        src/adventure_log.o(.rodata);
+        data/data_80E2068.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);

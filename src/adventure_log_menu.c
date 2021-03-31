@@ -6,7 +6,7 @@
 extern void sub_800641C(u8 *, u32, u32);
 extern void CreateAdventureLogScreen(u32);
 extern u32 HandleAdventureLogInput(u32);
-extern void sub_803203C();
+extern void CleanAdventureLogScreen();
 
 void CreateAdventureLogMenu(void)
 {
@@ -31,7 +31,7 @@ u32 UpdateAdventureLogMenu(void)
             break;
         case 2:
         case 3:
-            sub_803203C();
+            CleanAdventureLogScreen();
             nextMenu = MENU_MAIN_SCREEN;
         default:
             break;
