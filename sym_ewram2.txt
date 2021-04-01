@@ -491,7 +491,7 @@ gUnknown_203B368 = .; /* 203B368 */
 gUnknown_203B36C = .; /* 203B36C */
 	. += 0x4;
 
-gUnknown_203B370 = .; /* 203B370 */
+gRescuePasswordMenu = .; /* 203B370 */
 	. += 0x4;
 
 gUnknown_203B374 = .; /* 203B374 */

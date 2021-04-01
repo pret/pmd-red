@@ -59,9 +59,9 @@ s16 sub_8035D3C(void)
     return gMainMenu->unk38;
 }
 
-s32 *sub_8035D4C(void)
+struct MainMenu *GetMainMenu(void)
 {
-    return &gMainMenu->currMenu;
+    return gMainMenu;
 }
 
 void sub_8035D58(void)

@@ -105,13 +105,17 @@ SECTIONS {
         src/main_menu_mid.o(.text);
         asm/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
+        src/other_menus.o(.text);
         asm/other_menus.o(.text);
         src/adventure_log_menu.o(.text);
+        src/unk_menu_203B360.o(.text);
         asm/unk_menu_203B360.o(.text);
+        src/unk_menu_203B360_1.o(.text);
+        src/unk_menu_203B364.o(.text);
         asm/unk_menu_203B364.o(.text);
         asm/rescue_password_menu.o(.text);
         asm/load_screen.o(.text);
-        src/main_menu_1.o(.text);
+        src/load_screen.o(.text);
         src/wonder_mail_main_menu_pre.o(.text);
         asm/wonder_mail_main_menu.o(.text);
         src/wonder_mail_main_menu.o(.text);
