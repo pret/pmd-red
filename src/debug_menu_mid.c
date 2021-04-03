@@ -23,7 +23,7 @@ struct unkStruct_203B3F0
     u32 unk18;
     u32 unk1C;
     u32 unk20;
-    u8 fill10[0x4C - 0x24];
+    u8 fill24[0x4C - 0x24];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
     u32 unk9C;
@@ -41,6 +41,27 @@ struct unkStruct_203B3F0
 
 extern struct unkStruct_203B3F0 *gUnknown_203B3F0;
 
+struct unkStruct_203B3F4
+{
+    // size: 0xFC
+    u32 unk0;
+    u8 unk4;
+    u8 fill5[0x8 - 5];
+    u32 unk8;
+    u32 *unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u32 unk20;
+    u8 fill24[0x4C - 0x24];
+    u32 unk4C;
+    u8 fill50[0x9C - 0x50];
+    struct unkData unk9C[4];
+};
+
+extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
+
 
 struct unkStruct_203B460
 {
@@ -55,6 +76,8 @@ extern void sub_8013AA0(u32 *);
 extern struct unkData gUnknown_80E7E4C;
 extern struct unkData gUnknown_80E7E34;
 extern struct unkData gUnknown_80E7E64;
+extern struct unkData gUnknown_80E7EA4;
+extern struct unkData gUnknown_80E7E8C;
 
 extern u32 gDebug_NumberText;
 extern u32 gDebug_NumberText;
@@ -84,6 +107,20 @@ extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_8013BBC(u32 *);
 extern u32 sub_801B410();
 extern void sub_801B450();
+extern void sub_80211AC(u32, u32);
+extern void sub_8021354(u32);
+extern void sub_8021494();
+extern void sub_803AA34();
+extern void sub_8021774(u8,u32, u32);
+
+
+extern void sub_803AAC4();
+extern void sub_803AB34();
+extern void sub_803ABAC();
+
+void sub_803A924(u32);
+void sub_803A93C();
+void sub_803A9AC();
 
 void sub_803A504(u32);
 void sub_803A51C();
@@ -312,4 +349,91 @@ void sub_803A86C(void)
             sub_803A504(1);
             break;
     }
+}
+
+//////////////////////////////////////////
+
+u32 sub_803A888(void)
+{
+    ResetUnusedInputStruct();
+    sub_800641C(0, 1, 1);
+    gUnknown_203B3F4 = MemoryAlloc(0xFC, 8);
+    sub_803A924(0);
+    return 1;
+}
+
+u32 sub_803A8B8(void)
+{
+  switch(gUnknown_203B3F4->unk0) {
+    case 0:
+    case 1:
+        sub_803AAC4();
+        break;
+    case 2:
+        sub_803AB34();
+        break;
+    case 3:
+        sub_803ABAC();
+        break;
+    case 4:
+        return 3;
+  }
+    return 0;
+}
+
+void sub_803A908(void)
+{
+    if(gUnknown_203B3F4 != NULL)
+    {
+        MemoryFree(gUnknown_203B3F4);
+        gUnknown_203B3F4 = NULL;
+    }
+}
+
+void sub_803A924(u32 newState)
+{
+    gUnknown_203B3F4->unk0 = newState;
+    sub_803A93C();
+    sub_803A9AC();
+}
+
+void sub_803A93C(void)
+{
+    s32 iVar4;
+    sub_8006518(gUnknown_203B3F4->unk9C);
+    if(gUnknown_203B3F4->unk0 == 2)
+    {
+        gUnknown_203B3F4->unk9C[2] = gUnknown_80E7EA4;
+    }
+    else
+    {
+        for(iVar4 = 0; iVar4 < 4; iVar4++)
+        {
+            gUnknown_203B3F4->unk9C[iVar4] = gUnknown_80E7E8C;
+        }
+    }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B3F4->unk9C, 1, 1);
+}
+
+void sub_803A9AC(void)
+{
+  switch(gUnknown_203B3F4->unk0) {
+    case 0:
+        sub_80211AC(0,3);
+        break;
+    case 1:
+        sub_8021354(1);
+        break;
+    case 2:
+        sub_8021494();
+        sub_803AA34();
+        sub_8012D60(&gUnknown_203B3F4->unk4C,&gUnknown_203B3F4->unkC,0,0,gUnknown_203B3F4->unk8,2);
+        break;
+    case 3:
+        sub_8021774(gUnknown_203B3F4->unk4,1,0);
+        break;
+    case 4:
+        break;
+  }
 }
