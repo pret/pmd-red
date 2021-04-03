@@ -121,6 +121,8 @@ SECTIONS {
         src/wonder_mail_main_menu.o(.text);
         src/debug_menu.o(.text);
         asm/debug_menu.o(.text);
+        src/debug_menu_mid.o(.text);
+        asm/debug_menu_1.o(.text);
         src/debug_menu_1.o(.text);
         asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);

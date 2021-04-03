@@ -106,8 +106,8 @@ _080006B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000708: .4byte gUnknown_80B69F8
-_0800070C: .4byte gUnknown_80B6A28
+_08000708: .4byte gLoadScreenBackgroundFileNames
+_0800070C: .4byte gLoadScreenBackgroundPaletteFileNames
 _08000710: .4byte 0x00005b20
 _08000714: .4byte gTitleMenuFileArchive
 _08000718: .4byte gTitlePaletteFile

@@ -1769,8 +1769,8 @@ gUnknown_80E7E64: @ 80E7E64
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7E7C
-gUnknown_80E7E7C: @ 80E7E7C
+	.global gDebug_NumberText
+gDebug_NumberText: @ 80E7E7C
         .string "Number?\0"
         .align 2,0
         .string "pksdir0\0"
@@ -1797,13 +1797,13 @@ gUnknown_80E7EA4: @ 80E7EA4
         .byte 0x00, 0x00, 0x00, 0x00
 
 
-	.global gUnknown_80E7EBC
-gUnknown_80E7EBC: @ 80E7EBC
+	.global gDebug_CloseText
+gDebug_CloseText: @ 80E7EBC
         .string "CLOSE\0"
         .align 2,0
 
-	.global gUnknown_80E7EC4
-gUnknown_80E7EC4: @ 80E7EC4
+	.global gDebug_OpenText
+gDebug_OpenText: @ 80E7EC4
         .string "OPEN\0"
         .align 2,0
         .string "pksdir0\0"
@@ -1836,13 +1836,13 @@ gUnknown_80E7F04: @ 80E7F04
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7F1C
-gUnknown_80E7F1C: @ 80E7F1C
+	.global gDebug_NumberText2
+gDebug_NumberText2: @ 80E7F1C
         .string "Number?\0"
         .align 2,0
 
-	.global gUnknown_80E7F24
-gUnknown_80E7F24: @ 80E7F24
+	.global gDebug_LevelText
+gDebug_LevelText: @ 80E7F24
         .string "LEVEL\0"
         .align 2,0
 
