@@ -5,7 +5,8 @@
 
 struct unkData
 {
-    s16 unk0[12];
+    s16 unk0[10];
+    u8 *unk14;
 };
 
 // Definitely wrong but need to figure out better structure later
@@ -63,7 +64,7 @@ struct PersonalityStruct_203B404
     u32 unk4C;
     /* 0x50 */ struct unkData *unk50;
     /* 0x54 */ struct unkData unk54[4];
-    /* 0xB4 */ struct PersonalitySubStruct sub;
+    /* 0xB4 */ u8 unkb4[4];
 };
 extern struct PersonalityStruct_203B404 *gUnknown_203B404;
 
