@@ -21,6 +21,26 @@ extern const char gDragonText[];
 extern const char gDarkText[];
 extern const char gSteelText[];
 
+extern const char gFormattedNoneText[];
+extern const char gFormattedNormalText[];
+extern const char gFormattedFireText[];
+extern const char gFormattedWaterText[];
+extern const char gFormattedGrassText[];
+extern const char gFormattedElectricText[];
+extern const char gFormattedIceText[];
+extern const char gFormattedFightingText[];
+extern const char gFormattedPoisonText[];
+extern const char gFormattedGroundText[];
+extern const char gFormattedFlyingText[];
+extern const char gFormattedPsychicText[];
+extern const char gFormattedBugText[];
+extern const char gFormattedRockText[];
+extern const char gFormattedGhostText[];
+extern const char gFormattedDragonText[];
+extern const char gFormattedDarkText[];
+extern const char gFormattedSteelText[];
+
+
 const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
 {
     gNoneText,
@@ -45,7 +65,29 @@ const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
 
 #include "data/unformatted_type_names.h"
 
-extern const char * gFormattedTypeStrings[NUM_POKEMON_TYPES]; // formatted type names
+const char * const gFormattedTypeStrings[NUM_POKEMON_TYPES] =
+{
+    gFormattedNoneText,
+    gFormattedNormalText,
+    gFormattedFireText,
+    gFormattedWaterText,
+    gFormattedGrassText,
+    gFormattedElectricText,
+    gFormattedIceText,
+    gFormattedFightingText,
+    gFormattedPoisonText,
+    gFormattedGroundText,
+    gFormattedFlyingText,
+    gFormattedPsychicText,
+    gFormattedBugText,
+    gFormattedRockText,
+    gFormattedGhostText,
+    gFormattedDragonText,
+    gFormattedDarkText,
+    gFormattedSteelText,
+};
+
+#include "data/formatted_type_names.h"
 
 
 extern u8 *gAbilityNames[];

@@ -229,6 +229,8 @@ gUnknown_80DFC18: @ 80DFC18
 
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global gUnkData_80DFC30
+        gUnkData_80DFC30:
         .byte 0x01, 0x00, 0x16, 0x00
 
 	.global gUnknown_80DFC34
@@ -240,7 +242,7 @@ gUnknown_80DFC34: @ 80DFC34
         .byte 0x1A, 0x00, 0x10, 0x00
         .byte 0x10, 0x00, 0x00, 0x00
 
-        .byte 0x30, 0xFC, 0x0D, 0x08
+        .4byte gUnkData_80DFC30
 
 	.global gUnknown_80DFC4C
 gUnknown_80DFC4C: @ 80DFC4C
@@ -1126,6 +1128,8 @@ gUnknown_80E1EFC: @ 80E1EFC
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global gUnkData_80E1F14
+        gUnkData_80E1F14:
         .byte 0x01, 0x00, 0x08, 0x00
 
 	.global gUnknown_80E1F18
@@ -1136,7 +1140,7 @@ gUnknown_80E1F18: @ 80E1F18
         .byte 0x14, 0x00, 0x04, 0x00
         .byte 0x04, 0x00, 0x00, 0x00
 
-        .byte 0x14, 0x1F, 0x0E, 0x08
+        .4byte gUnkData_80E1F14
 
 	.global gUnknown_80E1F30
 gUnknown_80E1F30: @ 80E1F30
@@ -1187,6 +1191,8 @@ gUnknown_80E1FA8: @ 80E1FA8
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global gUnkData_80E1FC0
+        gUnkData_80E1FC0:
         .byte 0x01, 0x00, 0x0A, 0x00
 
 	.global gUnknown_80E1FC4
@@ -1197,7 +1203,7 @@ gUnknown_80E1FC4: @ 80E1FC4
         .byte 0x1a, 0x00, 0x0a, 0x00
         .byte 0x0a, 0x00, 0x00, 0x00
 
-        .byte 0xc0, 0x1F, 0x0E, 0x08
+        .4byte gUnkData_80E1FC0
 
 	.global gUnknown_80E1FDC
 gUnknown_80E1FDC: @ 80E1FDC
