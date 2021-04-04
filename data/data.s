@@ -72,8 +72,8 @@ gPMDBuildVersion: @ 80B69BC
         .string "titlen2\0"
         .align 2,0
 
-	.global gUnknown_80B69F8
-gUnknown_80B69F8: @ 80B69F8
+	.global gLoadScreenBackgroundFileNames
+gLoadScreenBackgroundFileNames: @ 80B69F8
         .4byte titlen0_text
         .4byte titlen1_text
         .4byte titlen2_text
@@ -93,8 +93,8 @@ gUnknown_80B69F8: @ 80B69F8
         .string "titlen2p\0"
         .align 2,0
 
-	.global gUnknown_80B6A28
-gUnknown_80B6A28: @ 80B6A28
+	.global gLoadScreenBackgroundPaletteFileNames
+gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
         .4byte titlen0p_text
         .4byte titlen1p_text
         .4byte titlen2p_text
@@ -455,13 +455,19 @@ gUnknown_80B7318: @ 80B7318
 
 	.global gUnknown_80B7324
 gUnknown_80B7324: @ 80B7324
-	.incbin "baserom.gba", 0xB7324, 0x2C
+        .string "event flag expansion error %d\0"
+        .align 2,0
+
+        .global FlagJudge_Text
+        FlagJudge_Text:
+        .string "_FlagJudge\0"
+        .align 2,0
 
 	.global gUnknown_80B7350
 gUnknown_80B7350: @ 80B7350
         .4byte EventFlagFile_Text
         .byte 0x7C, 0x05, 0x00, 0x00
-        .byte 0x44, 0x73, 0x0B, 0x08 @ Pointer to _FlagJudge
+        .4byte FlagJudge_Text
 
 	.global gUnknown_80B735C
 gUnknown_80B735C: @ 80B735C

@@ -40,7 +40,7 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
-extern void sub_8013818(u32 *r0, s32, u32, u32);
+extern void sub_8013818(struct UnkInputStruct **r0, s32, u32, u32);
 
 extern u32 GetKeyPress(struct UnkInputStruct **r0);
 extern u8 sub_80138B8(struct UnkInputStruct **r0, u32);
@@ -142,7 +142,7 @@ struct unkData gUnknown_80F4244 =
     0xC, 6,
     5, 5,
     5,0,
-    0, 0
+    NULL
 };
 
 const char filler[] = "pksdir0"; // CHUNSOFT inserted for aligning data
@@ -168,7 +168,7 @@ const struct unkData gUnknown_80F4278 =
     0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
-    0x00, 0x00
+    NULL
 };
 
 const struct unkData gUnknown_80F4290 = 
@@ -178,7 +178,7 @@ const struct unkData gUnknown_80F4290 =
     0x02, 0x02,
     0x09, 0x0B,
     0x0D, 0x00,
-    0x00, 0x00
+    NULL
 };
 
 const struct unkData gUnknown_80F42A8 = 
@@ -188,7 +188,7 @@ const struct unkData gUnknown_80F42A8 =
     0x0E, 0x04,
     0x05, 0x05,
     0x05, 0x00,
-    0x00, 0x00
+    NULL
 };
 
 
@@ -586,7 +586,6 @@ void sub_803CB5C(void)
 
 void sub_803CB7C(void)
 {
-
   CopyStringtoBuffer(gUnknown_203B400->PartnerNick, GetMonSpecies(gUnknown_203B400->PartnerID));
   sub_801602C(3, gUnknown_203B400->PartnerNick);
   gUnknown_203B400->TestState = 13;
@@ -652,7 +651,6 @@ void PersonalityTest_DisplayStarterSprite(void)
   sub_80073E0(1);
 }
 
-#ifdef NONMATCHING
 void CreatePartnerSelectionMenu(s16 starterID)
 {
     s32 starterID_s32;
@@ -661,114 +659,26 @@ void CreatePartnerSelectionMenu(s16 starterID)
     sub_803CEAC(); // creates 203B404
     gUnknown_203B404->StarterID = starterID_s32;
     gUnknown_203B404->unk4C = 0;
-    gUnknown_203B404->unk50 = &gUnknown_203B404->unk54;
+    gUnknown_203B404->unk50 = gUnknown_203B404->unk54;
 
     gUnknown_203B404->unk54[0] = gUnknown_80F4290;
     gUnknown_203B404->unk54[1] = gUnknown_80F42A8;
     gUnknown_203B404->unk54[2] = gUnknown_80F4278;
     gUnknown_203B404->unk54[3] = gUnknown_80F4278;
 
-    // TODO this is the problem area
-    //gUnknown_203B404->unk50[5] = (u32 *) &gUnknown_203B404->sub; // so weird but think they store the substruct
+    gUnknown_203B404->unk50->unk14 = gUnknown_203B404->unkb4;
 
-    gUnknown_203B404->sub.unkb4 = 1;
-    gUnknown_203B404->sub.unkb5 = 0;
-    gUnknown_203B404->sub.unkb6 = 6;
-    gUnknown_203B404->sub.unkb7 = 0;
+    gUnknown_203B404->unkb4[0] = 1;
+    gUnknown_203B404->unkb4[1] = 0;
+    gUnknown_203B404->unkb4[2] = 6;
+    gUnknown_203B404->unkb4[3] = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B404->unk54, 1, 1);
     sub_8013818(&gUnknown_203B404->unk18, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
-#else
-NAKED
-void CreatePartnerSelectionMenu(s16 starterID)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tlsls r4, 16\n"
-	"\tasrs r4, 16\n"
-	"\tbl sub_803CEAC\n"
-	"\tldr r5, _0803CDB0\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r3, 0\n"
-	"\tmovs r1, 0\n"
-	"\tstrh r4, [r0]\n"
-	"\tstr r1, [r0, 0x4C]\n"
-	"\tadds r1, r0, 0\n"
-	"\tadds r1, 0x54\n"
-	"\tstr r1, [r0, 0x50]\n"
-	"\tldr r0, _0803CDB4\n"
-	"\tldm r0!, {r2,r4,r6}\n"
-	"\tstm r1!, {r2,r4,r6}\n"
-	"\tldm r0!, {r2,r4,r7}\n"
-	"\tstm r1!, {r2,r4,r7}\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r1, 0x6C\n"
-	"\tldr r0, _0803CDB8\n"
-	"\tldm r0!, {r2,r6,r7}\n"
-	"\tstm r1!, {r2,r6,r7}\n"
-	"\tldm r0!, {r4,r6,r7}\n"
-	"\tstm r1!, {r4,r6,r7}\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r2, _0803CDBC\n"
-	"\tadds r1, 0x84\n"
-	"\tadds r0, r2, 0\n"
-	"\tldm r0!, {r4,r6,r7}\n"
-	"\tstm r1!, {r4,r6,r7}\n"
-	"\tldm r0!, {r4,r6,r7}\n"
-	"\tstm r1!, {r4,r6,r7}\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0x9C\n"
-	"\tldm r2!, {r1,r4,r6}\n"
-	"\tstm r0!, {r1,r4,r6}\n"
-	"\tldm r2!, {r1,r4,r7}\n"
-	"\tstm r0!, {r1,r4,r7}\n"
-	"\tldr r0, [r5]\n"
-	"\tldr r1, [r0, 0x50]\n"
-	"\tadds r0, 0xB4\n"
-	"\tstr r0, [r1, 0x14]\n"
-	"\tmovs r1, 0x1\n"
-	"\tstrb r1, [r0]\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0xB5\n"
-	"\tstrb r3, [r0]\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0xB6\n"
-	"\tmovs r1, 0x6\n"
-	"\tstrb r1, [r0]\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0xB7\n"
-	"\tstrb r3, [r0]\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0x54\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tldr r4, [r5]\n"
-	"\tadds r4, 0x18\n"
-	"\tbl GetValidPartners\n"
-	"\tadds r1, r0, 0\n"
-	"\tldr r0, [r5]\n"
-	"\tldr r3, [r0, 0x4C]\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r2, 0xA\n"
-	"\tbl sub_8013818\n"
-	"\tbl RedrawPartnerSelectionMenu\n"
-	"\tbl PersonalityTest_DisplayPartnerSprite\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0803CDB0: .4byte gUnknown_203B404\n"
-"_0803CDB4: .4byte gUnknown_80F4290\n"
-"_0803CDB8: .4byte gUnknown_80F42A8\n"
-"_0803CDBC: .4byte gUnknown_80F4278");
-}
 
-#endif
 
 u16 HandlePartnerSelectionInput(void)
 {

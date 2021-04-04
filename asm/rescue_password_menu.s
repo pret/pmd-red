@@ -100,7 +100,7 @@ _080389A0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080389B8: .4byte gUnknown_203B370
+_080389B8: .4byte gRescuePasswordMenu
 _080389BC: .4byte gUnknown_80E71E4
 _080389C0: .4byte gUnknown_203B368
 _080389C4: .4byte gUnknown_203B36C
@@ -163,7 +163,7 @@ _08038A36:
 	bx r0
 	.align 2, 0
 _08038A54: .4byte gUnknown_202EC50
-_08038A58: .4byte gUnknown_203B370
+_08038A58: .4byte gRescuePasswordMenu
 	thumb_func_end CreateRescuePasswordMenu
 
 	thumb_func_start CleanRescuePasswordMenu
@@ -189,7 +189,7 @@ _08038A86:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08038A8C: .4byte gUnknown_203B370
+_08038A8C: .4byte gRescuePasswordMenu
 	thumb_func_end CleanRescuePasswordMenu
 
 	thumb_func_start UpdateRescuePasswordMenu
@@ -214,7 +214,7 @@ _08038AA8:
 	mov pc, r0
 	.align 2, 0
 _08038AB4: .4byte 0x0000ffdc
-_08038AB8: .4byte gUnknown_203B370
+_08038AB8: .4byte gRescuePasswordMenu
 _08038ABC: .4byte _08038AC0
 	.align 2, 0
 _08038AC0:
@@ -277,7 +277,7 @@ _08038B38:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08038B44: .4byte gUnknown_203B370
+_08038B44: .4byte gRescuePasswordMenu
 _08038B48: .4byte gUnknown_202EC50
 _08038B4C: .4byte _08038B50
 	.align 2, 0
@@ -328,7 +328,7 @@ _08038BA8:
 	bl sub_80951BC
 	b _08038DB0
 	.align 2, 0
-_08038BCC: .4byte gUnknown_203B370
+_08038BCC: .4byte gRescuePasswordMenu
 _08038BD0: .4byte 0x0000ffdc
 _08038BD4:
 	movs r0, 0x13
@@ -362,7 +362,7 @@ _08038BDC:
 	bl MemoryFill8
 	b _08038DB0
 	.align 2, 0
-_08038C18: .4byte gUnknown_203B370
+_08038C18: .4byte gRescuePasswordMenu
 _08038C1C: .4byte 0x0000ffdc
 _08038C20: .4byte gUnknown_203B484
 _08038C24:
@@ -396,13 +396,13 @@ _08038C2C:
 	stm r2!, {r3,r4,r6}
 	movs r1, 0x6
 	strb r1, [r0]
-	bl sub_8035D4C
+	bl GetMainMenu
 	adds r0, 0x3A
 	movs r1, 0x1
 	strb r1, [r0]
 	b _08038DB0
 	.align 2, 0
-_08038C70: .4byte gUnknown_203B370
+_08038C70: .4byte gRescuePasswordMenu
 _08038C74: .4byte 0x0000ffdc
 _08038C78:
 	bl sub_8031DCC
@@ -438,7 +438,7 @@ _08038CB0:
 	ldr r5, _08038CB8
 	b _08038DB0
 	.align 2, 0
-_08038CB4: .4byte gUnknown_203B370
+_08038CB4: .4byte gRescuePasswordMenu
 _08038CB8: .4byte 0x0000ffdc
 _08038CBC:
 	bl sub_8031E00
@@ -488,7 +488,7 @@ _08038CEE:
 	b _08038C84
 	.align 2, 0
 _08038D1C: .4byte gUnknown_202EC50
-_08038D20: .4byte gUnknown_203B370
+_08038D20: .4byte gRescuePasswordMenu
 _08038D24:
 	ldr r1, [r6]
 	movs r0, 0x8
@@ -547,7 +547,7 @@ _08038D66:
 	b _08038DB0
 	.align 2, 0
 _08038D9C: .4byte gUnknown_202EC50
-_08038DA0: .4byte gUnknown_203B370
+_08038DA0: .4byte gRescuePasswordMenu
 _08038DA4:
 	ldr r1, [r6]
 	movs r0, 0x9
@@ -592,7 +592,7 @@ _08038DEE:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08038DF8: .4byte gUnknown_203B370
+_08038DF8: .4byte gRescuePasswordMenu
 _08038DFC: .4byte _08038E00
 	.align 2, 0
 _08038E00:
@@ -623,7 +623,7 @@ _08038E3C:
 	ldr r2, _08038E58
 	b _08038F2E
 	.align 2, 0
-_08038E50: .4byte gUnknown_203B370
+_08038E50: .4byte gRescuePasswordMenu
 _08038E54: .4byte gUnknown_80E71FC
 _08038E58: .4byte gUnknown_80E7214
 _08038E5C:
@@ -638,7 +638,7 @@ _08038E5C:
 	ldr r2, _08038E78
 	b _08038F2E
 	.align 2, 0
-_08038E70: .4byte gUnknown_203B370
+_08038E70: .4byte gRescuePasswordMenu
 _08038E74: .4byte gUnknown_80E72EC
 _08038E78: .4byte gUnknown_80E7304
 _08038E7C:
@@ -653,7 +653,7 @@ _08038E7C:
 	ldr r2, _08038E98
 	b _08038F2E
 	.align 2, 0
-_08038E90: .4byte gUnknown_203B370
+_08038E90: .4byte gRescuePasswordMenu
 _08038E94: .4byte gUnknown_80E7344
 _08038E98: .4byte gUnknown_80E735C
 _08038E9C:
@@ -668,7 +668,7 @@ _08038E9C:
 	ldr r2, _08038EB8
 	b _08038F2E
 	.align 2, 0
-_08038EB0: .4byte gUnknown_203B370
+_08038EB0: .4byte gRescuePasswordMenu
 _08038EB4: .4byte gUnknown_80E7588
 _08038EB8: .4byte gUnknown_80E75A0
 _08038EBC:
@@ -683,7 +683,7 @@ _08038EBC:
 	ldr r2, _08038ED8
 	b _08038F2E
 	.align 2, 0
-_08038ED0: .4byte gUnknown_203B370
+_08038ED0: .4byte gRescuePasswordMenu
 _08038ED4: .4byte gUnknown_80E73AC
 _08038ED8: .4byte gUnknown_80E73C4
 _08038EDC:
@@ -698,7 +698,7 @@ _08038EDC:
 	ldr r2, _08038EF8
 	b _08038F2E
 	.align 2, 0
-_08038EF0: .4byte gUnknown_203B370
+_08038EF0: .4byte gRescuePasswordMenu
 _08038EF4: .4byte gUnknown_80E7408
 _08038EF8: .4byte gUnknown_80E7420
 _08038EFC:
@@ -713,7 +713,7 @@ _08038EFC:
 	ldr r2, _08038F18
 	b _08038F2E
 	.align 2, 0
-_08038F10: .4byte gUnknown_203B370
+_08038F10: .4byte gRescuePasswordMenu
 _08038F14: .4byte gUnknown_80E7468
 _08038F18: .4byte gUnknown_80E7480
 _08038F1C:
@@ -737,7 +737,7 @@ _08038F2E:
 	bl SetMenuItems
 	b _08038F74
 	.align 2, 0
-_08038F44: .4byte gUnknown_203B370
+_08038F44: .4byte gRescuePasswordMenu
 _08038F48: .4byte gUnknown_80E74C8
 _08038F4C: .4byte gUnknown_80E74E0
 _08038F50:
@@ -770,7 +770,7 @@ _08038F74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08038F8C: .4byte gUnknown_203B370
+_08038F8C: .4byte gRescuePasswordMenu
 _08038F90: .4byte gUnknown_80E752C
 _08038F94: .4byte gUnknown_80E7544
 	thumb_func_end sub_8038DC0
@@ -817,7 +817,7 @@ sub_8038F98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08038FF4: .4byte gUnknown_203B370
+_08038FF4: .4byte gRescuePasswordMenu
 _08038FF8: .4byte gUnknown_80E7278
 _08038FFC: .4byte gUnknown_80E7290
 	thumb_func_end sub_8038F98
@@ -838,7 +838,7 @@ sub_8039000:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0803901C: .4byte gUnknown_203B370
+_0803901C: .4byte gRescuePasswordMenu
 _08039020: .4byte _08039024
 	.align 2, 0
 _08039024:
@@ -1075,7 +1075,7 @@ sub_8039174:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080391D8: .4byte gUnknown_203B370
+_080391D8: .4byte gRescuePasswordMenu
 _080391DC: .4byte 0x0000feff
 _080391E0: .4byte 0x0000fdff
 _080391E4: .4byte 0x0000f3ff
@@ -1131,7 +1131,7 @@ _0803923C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039250: .4byte gUnknown_203B370
+_08039250: .4byte gRescuePasswordMenu
 	thumb_func_end sub_80391F8
 
         .align 2,0

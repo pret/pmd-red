@@ -1,9 +1,5 @@
         .section .rodata
 
-	.global gFormattedTypeStrings
-gFormattedTypeStrings: @ 810AE24
-	.incbin "baserom.gba", 0x10AE24, 0x12C
-
 	.global gUnknown_810AF50
 gUnknown_810AF50: @ 810AF50
 	.incbin "baserom.gba", 0x10AF50, 0xFC
@@ -1656,24 +1652,42 @@ gUnknown_8118218: @ 8118218
         .byte 0xC8, 0x06, 0x00, 0x00
         .4byte ExecutePlayerScript_Text
 
+        .global ExecutePlayerScriptActionLives_Text
+        ExecutePlayerScriptActionLives_Text:
         .string "GroundLives_ExecutePlayerScriptActionLives\0"
         .align 2,0
 
 	.global gUnknown_8118250
 gUnknown_8118250: @ 8118250
-	.incbin "baserom.gba", 0x118250, 0xC
+        .4byte GroundLivesFile_Text
+        .byte 0xF9, 0x06, 0x00, 0x00
+        .4byte ExecutePlayerScriptActionLives_Text
 
 	.global gUnknown_811825C
 gUnknown_811825C: @ 811825C
-	.incbin "baserom.gba", 0x11825C, 0x24
+        .string "#CWinvalidity#R\0"
+        .align 2,0
+
+        .global GroundLives_ActionText
+        GroundLives_ActionText:
+        .string "GroundLives_Action\0"
+        .align 2,0
+
 
 	.global gUnknown_8118280
 gUnknown_8118280: @ 8118280
-	.incbin "baserom.gba", 0x118280, 0xC
+        .4byte GroundLivesFile_Text
+        .byte 0xA2, 0x11, 0x00, 0x00
+        .4byte GroundLives_ActionText
 
 	.global gUnknown_811828C
 gUnknown_811828C: @ 811828C
-	.incbin "baserom.gba", 0x11828C, 0x14
+        .4byte GroundLivesFile_Text
+        .byte 0x0E, 0x12, 0x00, 0x00
+        .4byte GroundLives_ActionText
+
+        .string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_81182A0
 gUnknown_81182A0: @ 81182A0
@@ -1714,6 +1728,9 @@ gUnknown_811842C: @ 811842C
 gUnknown_8118448: @ 8118448
         .string "GroundObject Add id %3d  kind %3d[%3d]  type %3d  group %3d  sector %3d\0"
         .align 2,0
+
+        .global GroundObject_AddText
+        GroundObject_AddText:
         .string "GroundObject_Add\0"
         .align 2,0
 
@@ -1759,15 +1776,18 @@ gUnknown_8118610: @ 8118610
 
 	.global gUnknown_811861C
 gUnknown_811861C: @ 811861C
-	.incbin "baserom.gba", 0x11861C, 0x24
+        .string "GroundEffect Select %3d  %3d  %3d"
+        .align 2,0
 
 	.global gUnknown_8118640
 gUnknown_8118640: @ 8118640
-	.incbin "baserom.gba", 0x118640, 0x18
+        .string "GroundEffect Cancel %3d"
+        .align 2,0
 
 	.global gUnknown_8118658
 gUnknown_8118658: @ 8118658
-	.incbin "baserom.gba", 0x118658, 0x1C
+        .string "GroundEffect CancelBlank\0"
+        .align 2,0
 
 	.global gUnknown_8118674
 gUnknown_8118674: @ 8118674
@@ -1779,11 +1799,16 @@ gUnknown_81186CC: @ 81186CC
 
 	.global gUnknown_81186D8
 gUnknown_81186D8: @ 81186D8
-	.incbin "baserom.gba", 0x1186D8, 0x1C
+        .string "GroundEffect Delete id %3d"
+        .align 2,0
 
 	.global gUnknown_81186F4
 gUnknown_81186F4: @ 81186F4
-	.incbin "baserom.gba", 0x1186F4, 0x38
+        .string "GroundEffect Execute %3d  "
+        .align 2,0
+
+        .string "GroundEffect_ExecuteScript"
+        .align 2,0
 
 	.global gUnknown_811872C
 gUnknown_811872C: @ 811872C

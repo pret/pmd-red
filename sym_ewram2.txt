@@ -449,7 +449,7 @@ gUnknown_203B330 = .; /* 203B330 */
 gUnknown_203B334 = .; /* 203B334 */
 	. += 0x4;
 
-gUnknown_203B338 = .; /* 203B338 */
+gAdventureLog = .; /* 203B338 */
 	. += 0x4;
 
 gUnknown_203B33C = .; /* 203B33C */
@@ -491,7 +491,7 @@ gUnknown_203B368 = .; /* 203B368 */
 gUnknown_203B36C = .; /* 203B36C */
 	. += 0x4;
 
-gUnknown_203B370 = .; /* 203B370 */
+gRescuePasswordMenu = .; /* 203B370 */
 	. += 0x4;
 
 gUnknown_203B374 = .; /* 203B374 */
