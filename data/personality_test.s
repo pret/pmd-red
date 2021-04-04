@@ -1837,32 +1837,3 @@ gStarters: @ 80F278E (2D Array / [Male][Female])
         .byte 0x34, 0x00 @ Meowth (Quirky M)
         .byte 0x15, 0x01 @ Treecko (Quirky F)
         .byte 0x00, 0x00 @ End of table
-
-	.global gStarterReveal
-gStarterReveal: @ 80F27C4
-        .string "\n"
-        .string "#+The Pokémon $m0!\0"
-        .4byte gStarterReveal
-
-	.global gPartnerPrompt
-gPartnerPrompt: @ 80F27DC
-        .string "#+This is the final step.#W\n"
-        .string "#+Who would you like to have as a partner?#P" @ #P -> scroll down
-        .string "#+Choose the Pokémon you want\n"
-        .string "#+as your partner from this group.\0"
-        .align 2,0
-        .4byte gPartnerPrompt
-
-	.global gPartnerNickPrompt
-gPartnerNickPrompt: @ 80F286C
-        .string "#+What is your partner~27s nickname?\0"
-        .align 2,0
-        .4byte gPartnerNickPrompt
-
-	.global gEndIntroText
-gEndIntroText: @ 80F2898
-        .string "#+OK! We~27re all set!#P"
-        .string "#+Let~27s get you into the\n"
-        .string "#+world of Pokémon!#P"
-        .string "#+Go for it!\0"
-        .align 2,0

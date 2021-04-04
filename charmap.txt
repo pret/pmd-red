@@ -228,7 +228,9 @@ DPAD = 87 52
 '\0' = 00
 '\n' = 0A
 
-@ 23 is a text macro for different things
+@ TEXT MACROS
+@
+@ "#" is a text macro for different things
 @ case is insensitive but need different
 @ definitions to match
 
@@ -239,6 +241,7 @@ NEW_LINE = 23 4E     @ #N
 
 
 @ COLOR FORMATTING MACROS
+@
 @ TO USE: {COLOR_(1 or 2) ______} text here {END_COLOR_(# from first one)}
 @ EX: {COLOR_2} Steel {END_COLOR_TEXT_2} gets you a colored yellow "Steel"
 COLOR_1 = 23 43
@@ -261,5 +264,6 @@ WHITE_3     = 41 @ CA
 WHITE_4     = 42 @ CB
 YELLOW_2    = 43 @ CC
 YELLOW_3    = 44 @ CD
-LIGHT_BLUE = 45 @ CE
+LIGHT_BLUE = 45  @ CE
 WHITE_5     = 46 @ CF
+LIGHT_BLUE_2 = 47 @ CG (TODO CHECK THIS)
