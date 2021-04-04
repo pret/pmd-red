@@ -2973,5 +2973,3 @@ gUnknown_80DDB24: @ 80DDB24
 gUnknown_80DDB60: @ 80DDB60
 	.incbin "baserom.gba", 0xDDB60, 0x48
 
-	.include "data/text/wonder_mail_1.inc"
-

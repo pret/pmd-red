@@ -1,3 +1,97 @@
+ALIGNED(4) const char gUnknown_80DDBA8[] = _(
+	" What you need to do is\n"
+	"tell your friend--the one you rescued--\n"
+	"this here password.");
+
+ALIGNED(4) const char gUnknown_80DDBFC[] = _(
+	" All righty!\n"
+	"Here~27s your {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const char gUnknown_80DDC30[] = _(
+	" Okeydoke! That~27s all done.\n"
+	"Come around whenever you need.");
+
+ALIGNED(4) const char gUnknown_80DDC70[] = _(
+	" Okeydoke! I sent off your\n"
+	"{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	" Let me save your adventure.");
+
+ALIGNED(4) const char gUnknown_80DDCBC[] = _(
+	"{CENTER_ALIGN}Please choose the Pokémon you want to\n"
+	"{CENTER_ALIGN}send as a helper to your friend.\n"
+	"{CENTER_ALIGN}(Its hold item will not be sent.)");
+
+ALIGNED(4) const char gUnknown_80DDD2C[] = _(
+	" ...Uh~2c no?\n"
+	"There appear to be no Pokémon in your\n"
+	"Friend Areas. What do you want to do?");
+
+ALIGNED(4) const char gUnknown_80DDD88[] = _(
+	" You~27re sure you want to\n"
+	"send this here Pokémon?");
+
+ALIGNED(4) const char gUnknown_80DDDBC[] = _(
+	" You~27re sure about this?");
+
+ALIGNED(4) const char gUnknown_80DDDD8[] = _(
+	" All righty. I need you to\n"
+	"pick the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} you want to send.");
+
+ALIGNED(4) const char gUnknown_80DDE20[] = _(
+	" ...Uh~2c no?\n"
+	"I don~27t see any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} here.");
+
+ALIGNED(4) const char gUnknown_80DDE58[] = _(
+	" Did you know? If you use\n"
+	"a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c you can send\n"
+	"a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} to your friend.");
+
+ALIGNED(4) const char gUnknown_80DDEC0[] = _(
+	" Don~27t you worry. Sending\n"
+	"a Pokémon doesn~27t mean it will go away.\n"
+	"So! Want to send one to your friend?");
+
+ALIGNED(4) const char gUnknown_80DDF2C[] = _(
+	" ...Uh~2c no?\n"
+	"There~27s no space at all to receive\n"
+	"any more mail.{EXTRA_MSG}"
+	" Delete some old mail~2c\n"
+	"and then come to me to receive\n"
+	"your mail~2c OK?");
+
+ALIGNED(4) const char gUnknown_80DDFB8[] = _(
+	 " All righty! Connect up\n"
+	 "the {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c if you~27d please.\n"
+	 "Your friend ready~2c too?");
+
+ALIGNED(4) const char gUnknown_80DE01C[] = _(
+	"{CENTER_ALIGN}Communicating...\n"
+	"{CENTER_ALIGN}Please wait with the power on.\n"
+	"{CENTER_ALIGN}To cancel~2c press {B_BUTTON}.");
+
+ALIGNED(4) const char gUnknown_80DE06C[] = _(
+	" Okeydoke!\n"
+	"I received your friend~27s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	" Let me save your adventure.");
+
+ALIGNED(4) const char gUnknown_80DE0C0[] = _(
+	" Okeydoke! You~27re good to go.\n"
+	"Just give me a shout when you~27d like\n"
+	"to go rescue your friend.");
+
+ALIGNED(4) const char gUnknown_80DE124[] = _(
+	" OK~2c I need you to enter\n"
+	"the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1} that your\n"
+	"friend gave you.");
+
+ALIGNED(4) const char gUnknown_80DE178[] = _(
+	" How do you want to receive\n"
+	"your friend~27s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const char gUnknown_80DE1B4[] = _(
+	" How do you want to send\n"
+	"your {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?");
+
 ALIGNED(4) const char gUnknown_80DE1E4[] = _(
 	" ...Uh~2c no?\n"
 	"You don~27t have an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
