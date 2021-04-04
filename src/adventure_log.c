@@ -31,8 +31,23 @@ struct AdventureLog
 };
 
 extern struct AdventureLog *gAdventureLog;
-extern struct unkData gUnknown_80E2008;
-extern struct unkData gUnknown_80E1FF0;
+
+const struct unkData gUnknown_80E1FF0 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+const struct unkData gUnknown_80E2008 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x1A, 0x00, 0x04,
+    0x06, 0x00,
+    NULL
+};
 
 // Adventure Log Text
 const u8 gAdventureLogHeaderText[] = "Adventure Log";
@@ -43,8 +58,8 @@ extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
 extern void sub_8006518(struct unkData *);
 extern void sub_800641C(void *, u32, u32);
-extern void sub_8032084();
-extern void DisplayAdventureLog();
+void sub_8032084();
+void DisplayAdventureLog();
 extern void sub_8013818(void *, u32, u32, u32);
 extern u8 sub_8013938(void *);
 extern void sub_8013660(void *);
