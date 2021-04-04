@@ -225,5 +225,10 @@ SELECT_BUTTON = 87 72 87 73
 START_BUTTON = 87 53 87 71
 DPAD = 87 52
 
+@ 23 is a text macro for different things
+COLOR_2 = 23 63
+YELLOW = 36
+END_COLOR_TEXT_2 = 23 72
+
 '\0' = 00
 '\n' = 0A
