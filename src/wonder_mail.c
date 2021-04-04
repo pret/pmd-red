@@ -176,9 +176,6 @@ extern void sub_8099690(u32);
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 
 
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
-
-extern void sub_802B2BC(u32);
 extern u32 sub_80144A4(s32 *r0);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
@@ -274,7 +271,7 @@ void sub_8028BF0(void)
         return;
     }
     gUnknown_203B2C0->unk40 = 8;
-    gUnknown_203B2C0->unk544 = 0xffff;
+    gUnknown_203B2C0->unk544 = -1;
     switch(temp)
     {
         case 0:
@@ -1118,7 +1115,7 @@ void sub_80297D4(void)
         case 2:
             sub_8023C60();
             sub_8028B04(1);
-            gUnknown_203B2C0->unk544 = 0xffff;
+            gUnknown_203B2C0->unk544 = -1;
             break;
         case 3:
             gUnknown_203B2C0->unk544 = sub_8023B44();
@@ -1354,8 +1351,8 @@ u32 sub_8029B50(void)
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B2C4 = MemoryAlloc(0x564, 8);
-  MemoryFill8((u8 *)gUnknown_203B2C4, 0, 0x564);
+  gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
 
   sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);

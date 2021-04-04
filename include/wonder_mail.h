@@ -80,6 +80,7 @@ struct WonderMailStruct_203B2C4
     u8 padding3[0x534 - 0x434];
     s32 unk534;
     u32 unk538;
+    u8 fill53C[0x564 - 0x53C];
 };
 
 void sub_8028B04(u32 r0);
