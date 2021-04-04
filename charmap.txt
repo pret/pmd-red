@@ -225,10 +225,41 @@ SELECT_BUTTON = 87 72 87 73
 START_BUTTON = 87 53 87 71
 DPAD = 87 52
 
-@ 23 is a text macro for different things
-COLOR_2 = 23 63
-YELLOW = 36
-END_COLOR_TEXT_2 = 23 72
-
 '\0' = 00
 '\n' = 0A
+
+@ 23 is a text macro for different things
+@ case is insensitive but need different
+@ definitions to match
+
+EXTRA_MSG  = 23 50   @ #P
+WAIT_PRESS = 23 57   @ #W
+CENTER_ALIGN = 23 2B @ #+
+NEW_LINE = 23 4E     @ #N
+
+
+@ COLOR FORMATTING MACROS
+@ TO USE: {COLOR_(1 or 2) ______} text here {END_COLOR_(# from first one)}
+@ EX: {COLOR_2} Steel {END_COLOR_TEXT_2} gets you a colored yellow "Steel"
+COLOR_1 = 23 43
+COLOR_2 = 23 63
+END_COLOR_TEXT_1 = 23 52
+END_COLOR_TEXT_2 = 23 72
+
+@ COLORS
+WHITE = 30 @ C0
+BLUE = 31 @ C1
+RED = 32 @ C2
+BLACK = 33 @ C3
+GREEN = 34 @ C4
+CYAN = 35 @ C5
+YELLOW = 36 @ C6
+WHITE_2 = 37 @ C7
+DARKER_GRAY = 38 @ C8
+DARK_GRAY = 39 @ C9
+WHITE_3     = 41 @ CA
+WHITE_4     = 42 @ CB
+YELLOW_2    = 43 @ CC
+YELLOW_3    = 44 @ CD
+LIGHT_BLUE = 45 @ CE
+WHITE_5     = 46 @ CF
