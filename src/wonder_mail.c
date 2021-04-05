@@ -10,26 +10,14 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 struct unkStruct_8095228
 {
-    u32 unk0;
-    u8 unk4;
-    u8 padding[0x10 - 0x5];
+    u8 unkArray[0x10];
     u32 unk10;
     u8 padding2[0x20 - 0x14];
     struct unkStruct_41C unk20;
     u8 padding3[0x2C - 0x24];
     s8 unk2C;
     u8 padding4[0x30 - 0x2D];
-    s8 unk30;
 };
-
-// Used as a temp storage when receiveing A-OK Mail
-struct unkStruct_80293F4
-{
-    u8 unkArray[0x10];
-    u32 unk10;
-    u8 padding[0x30 - 0x14];
-};
-
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
@@ -62,6 +50,11 @@ extern const char gUnknown_80DF0A0[];
 extern const char gUnknown_80DF0E0[];
 extern const char gUnknown_80DF138[];
 extern const char gUnknown_80DF194[];
+extern u32 gUnknown_80DEE44;
+extern const char gUnknown_80DF1C0[];
+extern const char gUnknown_80DF208[];
+extern const char gUnknown_80DF0A0[];
+extern u8 sub_809539C(u32, u32);
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -610,7 +603,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->unk4) == 0)
+            if(sub_80A2824(return_var->unkArray[4]) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -891,10 +884,10 @@ void sub_80293D8(void)
 void sub_80293F4(void)
 {
     u32 return_var;
-    struct unkStruct_80293F4 temp;
+    struct unkStruct_8095228 temp;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)temp.unkArray, 0, 0x30);
+    MemoryFill8((u8 *)temp.unkArray, 0, sizeof(struct unkStruct_8095228));
     switch(return_var)
     {
         case 3:
@@ -1907,3 +1900,125 @@ void sub_802A4F0(void)
     }
 }
 
+void sub_802A50C(void)
+{
+  u8 uVar1;
+  struct unkStruct_8095228 *puVar5;
+  u32 return_var;
+  struct unkStruct_8095228 temp;
+
+  return_var = sub_80154F0();
+  MemoryFill8((u8 *)temp.unkArray, 0, sizeof(struct unkStruct_8095228));
+  switch(return_var)
+  {
+    case 3:
+        switch(sub_8039068(0x20,gUnknown_203B2C4->unk8,temp.unkArray)) 
+        {
+            case 7:
+            case 8:
+            case 9:
+            case 0xA:
+            case 0xD:
+            case 0xE:
+            case 0xF:
+            case 0x10:
+                break;
+            case 0x11:
+                // Wrong password
+                sub_8014248(gUnknown_80DF1C0,0,7,&gUnknown_80DEE44,0,4,0,(u32 *)&gUnknown_203B2C4->faceFile,0xc);
+                sub_802B2BC(0x28);
+                break;
+            case 0x14:
+                // Incorrect password
+                sub_80141B4(gUnknown_80DF208,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_802B2BC(0x1f);
+                break;
+            case 0xB:
+                // Not eligible to receive
+                sub_80141B4(gUnknown_80DF0A0,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_802B2BC(0x1f);
+                break;
+            case 0x18:
+                // I think this is when password works successfully
+                uVar1 = sub_809539C(4,temp.unk10);
+                puVar5 = sub_8095228(uVar1);
+                *puVar5 = temp;
+                puVar5->unkArray[0] = 6;
+                gUnknown_203B2C4->unk430 = temp.unk10;
+                sub_802B2BC(0x21);
+                break;
+            default:
+                break;
+        }
+    sub_80155F0();
+    break;
+  case 2:
+    sub_80155F0();
+    ResetUnusedInputStruct();
+    sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+    sub_802B2BC(1);
+    break;
+  }
+}
+
+void sub_802A68C(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    if (sub_8012600() == 0) {
+      sub_8012750();
+      sub_802B2BC(0xd);
+    }
+  }
+}
+
+void sub_802A6B4(void)
+{
+  int iVar2;
+  u32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    if (sub_8012600() == 0) {
+      iVar2 = sub_8012744();
+      sub_8012750();
+      if (iVar2 == 0) {
+        sub_802B2BC(0x20);
+      }
+      else {
+        sub_802B2BC(3);
+      }
+    }
+  }
+}
+
+void sub_802A6F0(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x18);
+    sub_8011C28(1);
+    sub_8012574(0);
+  }
+}
+
+void sub_802A718(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x25);
+    sub_8011C28(1);
+    sub_8012574(0);
+  }
+}
+
+void sub_802A740(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x1e);
+  }
+}
