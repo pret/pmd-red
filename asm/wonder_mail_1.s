@@ -7130,7 +7130,7 @@ _0802DCE0:
 	ldr r0, [r0, 0x34]
 	movs r1, 0xC
 	ldrsh r0, [r0, r1]
-	bl sub_8098214
+	bl UnlockExclusivePokemon
 	ldr r0, _0802DD70
 	ldr r1, [r5]
 	ldr r1, [r1, 0x34]
@@ -7179,7 +7179,7 @@ _0802DD9C:
 	ldr r0, [r0, 0x34]
 	movs r2, 0xE
 	ldrsh r0, [r0, r2]
-	bl sub_8098214
+	bl UnlockExclusivePokemon
 	b _0802DE3E
 	.align 2, 0
 _0802DDB4: .4byte gUnknown_203B2FC
@@ -7191,7 +7191,7 @@ _0802DDB8:
 	ldr r0, [r0, 0x34]
 	movs r1, 0xE
 	ldrsh r0, [r0, r1]
-	bl sub_8098214
+	bl UnlockExclusivePokemon
 	b _0802DE3E
 	.align 2, 0
 _0802DDD0: .4byte gUnknown_203B2FC

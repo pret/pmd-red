@@ -338,8 +338,8 @@ _080981D4:
 _080981D8: .4byte gUnknown_203B498
 	thumb_func_end sub_80981A0
 
-	thumb_func_start sub_80981DC
-sub_80981DC:
+	thumb_func_start IsExclusivePokemonUnlocked
+IsExclusivePokemonUnlocked:
 	push {r4,r5,lr}
 	lsls r0, 16
 	asrs r3, r0, 16
@@ -369,10 +369,10 @@ _0809820E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80981DC
+	thumb_func_end IsExclusivePokemonUnlocked
 
-	thumb_func_start sub_8098214
-sub_8098214:
+	thumb_func_start UnlockExclusivePokemon
+UnlockExclusivePokemon:
 	push {r4-r6,lr}
 	lsls r0, 16
 	asrs r3, r0, 16
@@ -400,7 +400,7 @@ _08098232:
 	.align 2, 0
 _08098240: .4byte gUnknown_203B498
 _08098244: .4byte gExclusivePokemon
-	thumb_func_end sub_8098214
+	thumb_func_end UnlockExclusivePokemon
 
 	thumb_func_start sub_8098248
 sub_8098248:
