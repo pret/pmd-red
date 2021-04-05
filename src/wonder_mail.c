@@ -887,7 +887,7 @@ void sub_80293F4(void)
     struct unkStruct_8095228 temp;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)temp.unkArray, 0, sizeof(struct unkStruct_8095228));
+    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
     switch(return_var)
     {
         case 3:
@@ -1908,7 +1908,7 @@ void sub_802A50C(void)
   struct unkStruct_8095228 temp;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)temp.unkArray, 0, sizeof(struct unkStruct_8095228));
+  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
   switch(return_var)
   {
     case 3:
