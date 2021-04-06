@@ -69,11 +69,27 @@ CPPFLAGS        := -I tools/agbcc/include -iquote include -nostdinc -undef
 #### Files ####
 
 BUILD_NAME = red
+BUILD_DIR := build/pmd_$(BUILD_NAME)
 
 ROM := pmd_$(BUILD_NAME).gba
+ELF := $(ROM:%.gba=%.elf)
 MAP := $(ROM:%.gba=%.map)
 
-BUILD_DIR := build/pmd_$(BUILD_NAME)
+C_SUBDIR = src
+GFLIB_SUBDIR = gflib
+ASM_SUBDIR = asm
+DATA_SRC_SUBDIR = src/data
+DATA_ASM_SUBDIR = data
+SONG_SUBDIR = sound/songs
+MID_SUBDIR = sound/songs/midi
+SAMPLE_SUBDIR = sound/direct_sound_samples
+
+C_BUILDDIR = $(BUILD_DIR)/$(C_SUBDIR)
+GFLIB_BUILDDIR = $(BUILD_DIR)/$(GFLIB_SUBDIR)
+ASM_BUILDDIR = $(BUILD_DIR)/$(ASM_SUBDIR)
+DATA_ASM_BUILDDIR = $(BUILD_DIR)/$(DATA_ASM_SUBDIR)
+SONG_BUILDDIR = $(BUILD_DIR)/$(SONG_SUBDIR)
+MID_BUILDDIR = $(BUILD_DIR)/$(MID_SUBDIR)
 
 C_SOURCES   := $(wildcard src/*.c)
 ASM_SOURCES := $(wildcard asm/*.s data/*.s)
@@ -88,21 +104,20 @@ SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
 # Special configurations required for lib files
-$(BUILD_DIR)/src/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
-$(BUILD_DIR)/src/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
-$(BUILD_DIR)/src/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 
-$(BUILD_DIR)/src/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 #### Main Rules ####
 
 # Disable dependency scanning when NODEP is used for quick building
-# TODO enable when NODEP is fixed
-#ifeq ($(NODEP),)
-#$(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include src/$(*F).c)
-#$(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
-#$(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
-#endif
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: C_DEP :=
+else
+$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
+endif
 
 ALL_BUILDS := red
 
@@ -110,6 +125,7 @@ ALL_BUILDS := red
 .PHONY: all clean tidy libagbsyscall tools clean-tools $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
+
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 # Clear the default suffixes
@@ -133,7 +149,6 @@ tools: $(TOOLDIRS)
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
-
 compare: all
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 
@@ -144,33 +159,34 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 tidy:
-	$(RM) $(ALL_BUILDS:%=pmd_%{.gba,.elf,.map})
-	$(RM) -r build
+	$(RM) -f $(ROM) $(ELF) $(MAP)
+	$(RM) -r $(BUILD_DIR)
 	@$(MAKE) clean -C libagbsyscall
 
-$(ROM): %.gba: %.elf tools
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
-	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c $$(C_DEP)
+	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
+	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(C_BUILDDIR)/$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
-%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP)
+	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
+	$(AS) $(ASFLAGS) $< -o $@
+
+libagbsyscall:
+	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
-$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
-	@$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
-	@$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
-	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
+$(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
 
-$(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+$(ROM): %.gba: $(ELF) tools
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
+	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
-$(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
-	$(AS) $(ASFLAGS) $< -o $@
-
-libagbsyscall:
-	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)

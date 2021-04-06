@@ -1,6 +1,11 @@
 #include "global.h"
 #include "save.h"
 
+#define EXIT_TO_MAIN_MENU 5
+#define PASSWORD_SUCCESS 13
+#define PASSWORD_INVALID 19
+#define PASSWORD_ENTRY_SCREEN 18
+
 struct unkWonderMailData
 {
     u8 unk0[20];
@@ -10,7 +15,7 @@ struct unkStruct_203B3E8
 {
     // size: 0x49C
     u8 unk0; // state variable?
-    u8 unk1[0x36]; // Wonder Mail Buffer...
+    u8 PasswordEntryBuffer[0x36]; // Wonder Mail Buffer...
     struct unkWonderMailData unk38; // 0x30 - 0x14
     u8 unk38_1[0x30 - 20]; // TODO: split for the ldm/stm stuff (fix dumb hack)
     u8 fill68[0x1EC - 0x68];
@@ -94,7 +99,7 @@ bool8 CreateWonderMailMenu(void)
   MemoryFill8((u8 *)gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
 
   for(iVar2 = 0; iVar2 < 0x36; iVar2++){
-    gUnknown_203B3E8->unk1[iVar2] = 0;
+    gUnknown_203B3E8->PasswordEntryBuffer[iVar2] = 0;
   }
 
   gUnknown_203B3E8->unk490 = 3;
@@ -111,14 +116,14 @@ u8 UpdateWonderMailMenu(void)
     case 4:
         sub_8039A18();
         break;
-    case 5: // When you exit out of the menu
+    case EXIT_TO_MAIN_MENU: // When you exit out of the menu
         return 3;
     case 8:
         sub_8039AA8();
         break;
-    case 11: // "Please enter the Wonder Mail Password" Screen
+    case 11:
         break;
-    case 12: // Password Entry
+    case 12:
         sub_8039B14();
         break;
     case 6:
@@ -130,28 +135,28 @@ u8 UpdateWonderMailMenu(void)
     case 7:
         sub_8039D88();
         break;
-    case 13:
+    case PASSWORD_SUCCESS:
         sub_8039D28();
         break;
     case 14:
         sub_8039D68();
         break;
-    case 15:
+    case 15: // Saving adventure
         sub_8039DA4();
         break;
-    case 16:
+    case 16: // Display "Recieved Wonder Mail was added" and go back to main menu
         sub_8039DCC();
         break;
     case 10:
         sub_8039B3C();
         break;
-    case 17:
+    case 17: // "Please enter the Wonder Mail Password" Screen 
         sub_8039D0C();
         break;
-    case 18:
+    case PASSWORD_ENTRY_SCREEN: // Password Entry
         sub_8039C60();
         break;
-    case 19:
+    case PASSWORD_INVALID:
         sub_8039DE8();
   }
   return 0;
@@ -189,7 +194,7 @@ void sub_8039A18(void)
             break;
         case 0:
         case 8:
-            sub_803A1C0(5);
+            sub_803A1C0(EXIT_TO_MAIN_MENU);
             break;
     }
   }
@@ -255,7 +260,7 @@ void sub_8039B58(void)
             sub_803A1C0(7);
             break;
         case 10:
-            sub_803A1C0(13);
+            sub_803A1C0(PASSWORD_SUCCESS);
             break;
       }
     }
@@ -306,7 +311,7 @@ void sub_8039BAC(u32 arg)
         case 10:
         case 11:
         case 12:
-        case 13:
+        case PASSWORD_SUCCESS:
         default:
             // "Communication Error"
             sub_80141B4(&gUnknown_80E7914, 0, 0, 0x101);
@@ -326,23 +331,25 @@ void sub_8039C60(void)
       sub_80155F0();
       ResetUnusedInputStruct();
       sub_800641C(&gUnknown_203B3E8->unk1EC,1,1);
-      if ( !sub_803D358(gUnknown_203B3E8->unk1,&gUnknown_203B3E8->unk38) || !sub_80959C0(&gUnknown_203B3E8->unk38) ) 
+      if ( !sub_803D358(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->unk38) || !sub_80959C0(&gUnknown_203B3E8->unk38) ) 
       {
-        sub_803A1C0(19);
+        // Invalid password
+        sub_803A1C0(PASSWORD_INVALID);
       }
       else {
-        // Copying some data but don't know what or structure
+        // Successful password
+        // Copy the decoded data to another buffer?
         gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->unk38;
 
         gUnknown_203B3E8->unk498 = 1;
-        sub_803A1C0(13);
+        sub_803A1C0(PASSWORD_SUCCESS);
       }
     break;
     case 2:
         sub_80155F0();
         ResetUnusedInputStruct();
         sub_800641C(&gUnknown_203B3E8->unk1EC,1,1);
-        sub_803A1C0(5);
+        sub_803A1C0(EXIT_TO_MAIN_MENU);
         break;
   }
 }
@@ -352,7 +359,7 @@ void sub_8039D0C(void)
   int iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
-      sub_803A1C0(0x12);
+      sub_803A1C0(PASSWORD_ENTRY_SCREEN);
   }
 }
 
@@ -407,22 +414,24 @@ void sub_8039DCC(void)
   int iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
-          sub_803A1C0(5);
+      sub_803A1C0(EXIT_TO_MAIN_MENU);
   }
 }
 
 void sub_8039DE8(void)
 {
   int iVar2;
+  
+  // Prompt to re-enter password
   if(sub_80144A4(&iVar2) == 0)
   {
     switch(iVar2)
     {
-        case 6:
+        case 6: // Yes
             sub_803A1C0(0x11);
             break;
-        case 0:
-            sub_803A1C0(5);
+        case 0: // No
+            sub_803A1C0(EXIT_TO_MAIN_MENU);
             break;
     }
   }

@@ -5,66 +5,19 @@
 #include "constants/species.h"
 #include "wonder_mail.h"
 
-struct unkStruct_203B2C4
-{
-    // size: 0x564
-    u8 unk0;
-    u8 padding[3];
-    u32 unk4; // wonder mail link status??
-    u8 unk8[0x36]; // Probably a buffer for entry
-    u8 unk3E;
-    u32 unk40;
-    u32 linkError; // another link status
-    u8 filler48[0x218 - 0x48];
-    s8 unk218;
-    u32 unk21C;
-    u8 filler220[0x30C - 0x220];
-    u32 unk30C;
-    u8 filler310[0x35C - 0x310];
-    u32 unk35C;
-    u8 filler360[0x3BC - 0x360];
-    u32 unk3BC;
-    u8 filler3C0[0x41C - 0x3C0];
-    u32 unk41C;
-    /* 0x420 */ struct OpenedFile *faceFile;
-    /* 0x424 */ u8 *faceData;
-    u16 unk428;
-    u16 unk42A;
-    u8 unk42C;
-    u8 unk42D;
-    u8 unk42E;
-    u32 unk430;
-    u8 padding3[0x534 - 0x434];
-    s32 unk534;
-    u32 unk538;
-};
-extern struct unkStruct_203B2C4 *gUnknown_203B2C4;
+extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
+extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 struct unkStruct_8095228
 {
-    u32 unk0;
-    u8 unk4;
-    u8 padding[0x10 - 0x5];
+    u8 unkArray[0x10];
     u32 unk10;
     u8 padding2[0x20 - 0x14];
-    u32 unk20;
+    struct unkStruct_41C unk20;
     u8 padding3[0x2C - 0x24];
     s8 unk2C;
     u8 padding4[0x30 - 0x2D];
-    s8 unk30;
 };
-
-// Used as a temp storage when receiveing A-OK Mail
-struct unkStruct_80293F4
-{
-    u8 unkArray[0x10];
-    u32 unk10;
-    u8 padding[0x30 - 0x14];
-};
-
-
-
-extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
@@ -81,7 +34,10 @@ extern u8 sub_80A2824(u32);
 
 #include "data/wonder_mail_1.h"
 
-extern u32 gUnknown_80DED44;
+const struct unkStruct_41C gUnknown_80DED44 = 
+{
+    1, 0, 0, 0
+};
 
 
 extern u32 gUnknown_80DDA48;
@@ -94,6 +50,11 @@ extern const char gUnknown_80DF0A0[];
 extern const char gUnknown_80DF0E0[];
 extern const char gUnknown_80DF138[];
 extern const char gUnknown_80DF194[];
+extern u32 gUnknown_80DEE44;
+extern const char gUnknown_80DF1C0[];
+extern const char gUnknown_80DF208[];
+extern const char gUnknown_80DF0A0[];
+extern u8 sub_809539C(u32, u32);
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -103,7 +64,6 @@ extern u32 sub_8095324(u32);
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
-extern void sub_800641C(void *r0, u8, u8);
 extern void ResetUnusedInputStruct();
 extern void sub_803084C();
 extern u32 sub_8030768(u32);
@@ -196,8 +156,45 @@ extern void sub_801CBB8();
 extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
+extern u16 gUnknown_80E5990[];
+extern s32 sub_8001658(u32, u32);
+extern u32 gUnknown_80E4A40[];
+extern u8 sub_8099B94();
+
+extern void sub_8099A5C(u32, u32, u32*);
+extern void sub_8099AFC(u32, u32, u32*);
+extern void sub_800641C(void *, u32, u32);
+extern void ResetUnusedInputStruct();
+extern void sub_8099690(u32);
+extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 
 
+extern u32 sub_80144A4(s32 *r0);
+extern u32 sub_8031DCC(void);
+extern void sub_8031E00(void);
+extern void sub_8031E10(void);
+extern void sub_8030D40(u8, u32);
+extern u32 sub_8030768(u32);
+extern void sub_803084C(void);
+extern s8 sub_80307EC(void);
+extern void sub_8006518(u32 *);
+extern u8 sub_8012FD8(u32 *r0);
+extern void sub_8013114(u32 *, s32 *);
+extern void sub_8035CC0(u32 *, u32);
+extern void sub_8030810(u32);
+extern u32 sub_8030DA0();
+extern void sub_8030DE4();
+extern void sub_803092C();
+extern void sub_8035CF4(u32 *, u32, u32);
+extern u32 sub_801CA08(u32);
+extern void sub_801CBB8();
+extern void sub_801B3C0(struct unkStruct_41C *);
+extern u8 sub_801CB24();
+extern void sub_801B450();
+extern u32 sub_801B410();
+extern void sub_801CB5C(u32);
+extern void sub_801CCD8();
+extern void sub_8011C28(u32);
 
 
 void sub_8028B04(u32 r0)
@@ -267,7 +264,7 @@ void sub_8028BF0(void)
         return;
     }
     gUnknown_203B2C0->unk40 = 8;
-    gUnknown_203B2C0->unk544 = 0xffff;
+    gUnknown_203B2C0->unk544 = -1;
     switch(temp)
     {
         case 0:
@@ -606,7 +603,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->unk4) == 0)
+            if(sub_80A2824(return_var->unkArray[4]) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -883,56 +880,54 @@ void sub_80293D8(void)
     sub_8028B04(0x27);
 }
 
-// TODO: pls someone fix this madness of a match - Sese
-// This is definitely a fake match with the casting and switch could probably be cleaned up too..
-//
+// TODO: pls look into this later - Sese
 void sub_80293F4(void)
 {
     u32 return_var;
-    struct unkStruct_80293F4 temp;
+    struct unkStruct_8095228 temp;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)temp.unkArray, 0, 0x30);
+    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x1C, (gUnknown_203B2C0->unk8), temp.unkArray) - 7)
+                switch(sub_8039068(0x1C, (gUnknown_203B2C0->unk8), temp.unkArray))
                 {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
                     case 8:
                     case 9:
-                        break;
                     case 10:
-                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
-                        sub_8028B04(0x28);
-                        break;
                     case 11:
-                        sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
-                        sub_8028B04(7);
-                        break;
-                    case 0:
-                        sub_80141B4(gWonderMailDuplicateText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
-                        sub_8028B04(7);
-                        break;
                     case 12:
                     case 13:
                     case 14:
-                        break;
                     case 15:
+                    case 16:
+                        break;
+                    case 17:
+                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
+                        sub_8028B04(40);
+                        break;
+                    case 18:
+                        sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
+                        sub_8028B04(7);
+                        break;
+                    case 7:
+                        sub_80141B4(gWonderMailDuplicateText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
+                        sub_8028B04(7);
+                        break;
+                    case 19:
+                    case 20:
+                    case 21:
+                        break;
+                    case 22:
                         sub_8095274(temp.unk10);
                         temp.unkArray[0] = 2; // Some sort of Ack?
                         sub_80951BC(temp.unkArray);
                         sub_80141B4(gWonderMailAOKMailReceivedText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x101);
-                        sub_8028B04(0x23);
+                        sub_8028B04(35);
                         break;
-                    case 16:
-                    case 17:
+                    case 23:
+                    case 24:
                     default:
                         break;
                 }
@@ -1113,7 +1108,7 @@ void sub_80297D4(void)
         case 2:
             sub_8023C60();
             sub_8028B04(1);
-            gUnknown_203B2C0->unk544 = 0xffff;
+            gUnknown_203B2C0->unk544 = -1;
             break;
         case 3:
             gUnknown_203B2C0->unk544 = sub_8023B44();
@@ -1349,8 +1344,8 @@ u32 sub_8029B50(void)
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B2C4 = MemoryAlloc(0x564, 8);
-  MemoryFill8((u8 *)gUnknown_203B2C4, 0, 0x564);
+  gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
 
   sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);
@@ -1586,5 +1581,444 @@ void PrintWonderMailLinkError(u32 param_1)
     case 12:
     default:
         return;
+  }
+}
+
+void sub_8029F98(void)
+{
+  s32 auStack20;
+
+  if (sub_80144A4(&auStack20) != 0) {
+    return;
+  }
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, 4);
+  gUnknown_203B2C4->unk41C.unk41E = 0;
+  gUnknown_203B2C4->unk41C.unk41D = 1;
+  gUnknown_203B2C4->unk41C.unk41C = 0;
+  if (gUnknown_203B2C4->linkError == 0) {
+      switch(gUnknown_203B2C4->unk40) 
+        {
+            case 6:
+                switch(gUnknown_203B2C4->unk534)
+                {
+                    case 3:
+                    case 5:
+                    case 6:
+                        // "Thank-You Mail has been sent"
+                        sub_80141B4(gUnknown_80DF194, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+                        break;
+                    case 4:
+                    default:
+                        break;
+                }
+                sub_802B2BC(0xD);
+                break;
+            case 7:
+                sub_802B2BC(0x21);
+                break;
+            default:
+                break;
+        }
+  }
+  else
+  {
+      PrintWonderMailLinkError(gUnknown_203B2C4->linkError);
+      sub_802B2BC(0x1F);
+  }
+}
+
+void sub_802A050(void)
+{
+    switch(sub_8031DCC())
+    {
+
+        case 3:
+        case 2:
+            sub_8031E10();
+            ResetUnusedInputStruct();
+            sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+            sub_802B2BC(0x1B);
+            break;
+        case 1:
+            sub_8031E00();
+            break;
+        default:
+            return;
+    }
+}
+
+void sub_802A090(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 7:
+                sub_802B2BC(6);
+                break;
+            case 8:
+            case 0:
+                sub_802B2BC(1);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void sub_802A0C8(void)
+{
+  switch(sub_8030768(1))
+  {
+    case 2:
+        sub_803084C();
+        sub_802B2BC(1);
+        break;
+    case 3:
+        gUnknown_203B2C4->unk218 = sub_80307EC();
+        sub_802B2BC(0x11);
+        break;
+    case 4:
+        gUnknown_203B2C4->unk4 = 0x10;
+        gUnknown_203B2C4->unk218 = sub_80307EC();
+        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_802B2BC(0x12);
+        break;
+  }
+}
+
+void sub_802A158(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x10);
+    }
+}
+
+void sub_802A174(void)
+{
+  s32 temp;
+
+  temp = -1;
+  sub_8030768(0);
+  if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
+    sub_8013114(&gUnknown_203B2C4->unk30C, &temp);
+  }
+  
+  switch(temp)
+  {
+      case 0xB:
+        sub_803084C();
+        sub_802B2BC(0xe);
+        break;
+      case 0xC:
+        gUnknown_203B2C4->unk4 = 0x2b;
+        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_802B2BC(0x12);
+        break;
+      case 0:
+      case 0xD:
+        sub_8035CC0(&gUnknown_203B2C4->unk35C,2);
+        sub_8030810(1);
+        sub_802B2BC(0x10);
+      default:
+        break;
+  }
+}
+
+void sub_802A230(void)
+{  
+  switch(sub_8030DA0())
+  {
+      case 2:
+      case 3:
+        sub_8030DE4();
+        ResetUnusedInputStruct();
+        sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+        sub_803092C();
+        if (gUnknown_203B2C4->unk4 == 0x2b) {
+            sub_8035CF4(&gUnknown_203B2C4->unk21C, 3, 1);
+            sub_802B2BC(0x11);
+        }
+        else {
+            sub_802B2BC(gUnknown_203B2C4->unk4);
+        }
+        break;
+    default:
+        break;
+  }
+}
+
+void sub_802A28C(void)
+{
+
+  gUnknown_203B2C4->unk41C.unk41E = 0;
+  gUnknown_203B2C4->unk41C.unk41D = 1;
+  gUnknown_203B2C4->unk41C.unk41C = 0;
+
+  switch(sub_801CA08(1))
+  {
+    case 2:
+        sub_801CBB8();
+        sub_802B2BC(1);
+        break;
+    case 3:
+        gUnknown_203B2C4->unk41C.unk41E = sub_801CB24();
+        sub_802B2BC(0x14);
+        break;
+    case 4:
+        gUnknown_203B2C4->unk4 = 0x13;
+        gUnknown_203B2C4->unk41C.unk41E = sub_801CB24();
+        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_801B3C0(&gUnknown_203B2C4->unk41C);
+        sub_802B2BC(0x15);
+        break;
+  }
+}
+
+void sub_802A33C(void)
+{
+  switch(sub_801B410())
+ {
+     case 2:
+     case 3:
+        sub_801B450();
+        ResetUnusedInputStruct();
+        sub_800641C(&gUnknown_203B2C4->unk3BC,1,1);
+        sub_801CB5C(1);
+        if (gUnknown_203B2C4->unk4 == 0x2b) {
+            sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
+            sub_802B2BC(0x14);
+        }
+        else {
+            sub_802B2BC(gUnknown_203B2C4->unk4);
+        }
+        break;
+    case 1:
+    default:
+        break;
+  }
+}
+
+void sub_802A39C(void)
+{
+  s32 temp;
+
+  temp = -1;
+  sub_801CA08(0);
+  if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
+    sub_8013114(&gUnknown_203B2C4->unk30C, &temp);
+  }
+
+  switch(temp)
+  {
+      case 0xB:
+            sub_801CBB8();
+            sub_802B2BC(0xC);
+            break;
+      case 0xC:
+            gUnknown_203B2C4->unk4 = 0x2b;
+            sub_8006518(&gUnknown_203B2C4->unk3BC);
+            ResetUnusedInputStruct();
+            sub_800641C(0,1,1);
+            sub_801B3C0(&gUnknown_203B2C4->unk41C);
+            sub_802B2BC(0x15);
+            break;
+      case 0:
+      case 0xD:
+            sub_8035CC0(&gUnknown_203B2C4->unk35C, 3);
+            sub_801CCD8();
+            sub_802B2BC(0x13);
+      default:
+        break;
+  }
+}
+
+void sub_802A458(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0xD);
+    }
+}
+
+void sub_802A474(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x3);
+    }
+}
+
+void sub_802A490(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x3);
+    }
+}
+
+void sub_802A4AC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x18);
+        sub_8011C28(1);
+        sub_8012574(0);
+    }
+}
+
+void sub_802A4D4(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x1A);
+    }
+}
+
+void sub_802A4F0(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x27);
+    }
+}
+
+void sub_802A50C(void)
+{
+  u8 uVar1;
+  struct unkStruct_8095228 *puVar5;
+  u32 return_var;
+  struct unkStruct_8095228 temp;
+
+  return_var = sub_80154F0();
+  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+  switch(return_var)
+  {
+    case 3:
+        switch(sub_8039068(0x20,gUnknown_203B2C4->unk8,temp.unkArray)) 
+        {
+            case 7:
+            case 8:
+            case 9:
+            case 0xA:
+            case 0xD:
+            case 0xE:
+            case 0xF:
+            case 0x10:
+                break;
+            case 0x11:
+                // Wrong password
+                sub_8014248(gUnknown_80DF1C0,0,7,&gUnknown_80DEE44,0,4,0,(u32 *)&gUnknown_203B2C4->faceFile,0xc);
+                sub_802B2BC(0x28);
+                break;
+            case 0x14:
+                // Incorrect password
+                sub_80141B4(gUnknown_80DF208,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_802B2BC(0x1f);
+                break;
+            case 0xB:
+                // Not eligible to receive
+                sub_80141B4(gUnknown_80DF0A0,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_802B2BC(0x1f);
+                break;
+            case 0x18:
+                // I think this is when password works successfully
+                uVar1 = sub_809539C(4,temp.unk10);
+                puVar5 = sub_8095228(uVar1);
+                *puVar5 = temp;
+                puVar5->unkArray[0] = 6;
+                gUnknown_203B2C4->unk430 = temp.unk10;
+                sub_802B2BC(0x21);
+                break;
+            default:
+                break;
+        }
+    sub_80155F0();
+    break;
+  case 2:
+    sub_80155F0();
+    ResetUnusedInputStruct();
+    sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+    sub_802B2BC(1);
+    break;
+  }
+}
+
+void sub_802A68C(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    if (sub_8012600() == 0) {
+      sub_8012750();
+      sub_802B2BC(0xd);
+    }
+  }
+}
+
+void sub_802A6B4(void)
+{
+  int iVar2;
+  u32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    if (sub_8012600() == 0) {
+      iVar2 = sub_8012744();
+      sub_8012750();
+      if (iVar2 == 0) {
+        sub_802B2BC(0x20);
+      }
+      else {
+        sub_802B2BC(3);
+      }
+    }
+  }
+}
+
+void sub_802A6F0(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x18);
+    sub_8011C28(1);
+    sub_8012574(0);
+  }
+}
+
+void sub_802A718(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x25);
+    sub_8011C28(1);
+    sub_8012574(0);
+  }
+}
+
+void sub_802A740(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x1e);
   }
 }

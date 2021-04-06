@@ -39946,7 +39946,7 @@ _080665BE:
 	b _08066704
 _080665D0:
 	adds r0, r6, 0
-	bl sub_80981DC
+	bl IsExclusivePokemonUnlocked
 	lsls r0, 24
 	cmp r0, 0
 	bne _080665DE
@@ -48621,7 +48621,7 @@ sub_806AA0C:
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl sub_80981DC
+	bl IsExclusivePokemonUnlocked
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AA56

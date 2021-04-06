@@ -40,6 +40,49 @@ struct WonderMailStruct_203B2C0
 
 };
 
+struct unkStruct_41C
+{
+    u8 unk41C;
+    u8 unk41D;
+    u8 unk41E;
+    u8 unk41F;
+};
+
+struct WonderMailStruct_203B2C4
+{
+    // size: 0x564
+    u8 unk0;
+    u8 padding[3];
+    u32 unk4; // wonder mail link status??
+    u8 unk8[0x36]; // Probably a buffer for entry
+    u8 unk3E;
+    u32 unk40;
+    u32 linkError; // another link status
+    u8 filler48[0x218 - 0x48];
+    s8 unk218;
+    u32 unk21C;
+    u8 filler220[0x30C - 0x220];
+    u32 unk30C;
+    u8 filler310[0x35C - 0x310];
+    u32 unk35C;
+    u8 filler360[0x3BC - 0x360];
+    u32 unk3BC;
+    u8 filler3C0[0x41C - 0x3C0];
+    struct unkStruct_41C unk41C;
+    /* 0x420 */ struct OpenedFile *faceFile;
+    /* 0x424 */ u8 *faceData;
+    u16 unk428;
+    u16 unk42A;
+    u8 unk42C;
+    u8 unk42D;
+    u8 unk42E;
+    u32 unk430;
+    u8 padding3[0x534 - 0x434];
+    s32 unk534;
+    u32 unk538;
+    u8 fill53C[0x564 - 0x53C];
+};
+
 void sub_8028B04(u32 r0);
 
 

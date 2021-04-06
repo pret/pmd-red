@@ -8841,7 +8841,7 @@ _080A1CCC:
 	cmp r5, r0
 	beq _080A1CA4
 	adds r0, r5, 0
-	bl sub_80981DC
+	bl IsExclusivePokemonUnlocked
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A1CA4

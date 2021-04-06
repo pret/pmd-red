@@ -89,10 +89,7 @@ struct stack_PartnerSprite
 };
 
 extern const char gStarterReveal[];
-extern const char gPartnerPrompt[];
-extern const char gPartnerNickPrompt[];
 extern const char gGenderText[];
-extern const char gEndIntroText[];
 extern u32 gGenderMenu;
 extern const char gUnknown_80F42C0;
 
@@ -113,7 +110,24 @@ extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 
+const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
+const char * const gStarterRevealPtr = gStarterReveal;
 
+const char gPartnerPrompt[] = _(
+        "{CENTER_ALIGN}This is the final step.{WAIT_PRESS}\n"
+        "{CENTER_ALIGN}Who would you like to have as a partner?{EXTRA_MSG}"
+        "{CENTER_ALIGN}Choose the Pokémon you want\n"
+        "{CENTER_ALIGN}as your partner from this group.");
+const char * const gPartnerPromptPtr = gPartnerPrompt;
+
+const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
+const char * const gPartnerNickPromptPtr = gPartnerNickPrompt;
+
+ALIGNED(4) const char gEndIntroText[] = _(
+        "{CENTER_ALIGN}OK! We~27re all set!{EXTRA_MSG}"
+        "{CENTER_ALIGN}Let~27s get you into the\n"
+        "{CENTER_ALIGN}world of Pokémon!{EXTRA_MSG}"
+        "{CENTER_ALIGN}Go for it!");
 const char * const gEndIntroTextPtr = gEndIntroText;
 
 const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] = 
