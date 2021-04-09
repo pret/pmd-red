@@ -13,31 +13,31 @@ void sub_803A1C0(u8 r0)
     sub_8039E18();
 }
 
-u32 sub_803A1D8(void)
+u32 CreateDualSlotMenu(void)
 {
     return 1;
 }
 
-u32 sub_803A1DC(void)
+u32 UpdateDualSlotMenu(void)
 {
     return 0;
 }
 
-void nullsub_55()
+void CleanDualSlotMenu()
 {
 }
 
-u32 sub_803A1E4(void)
+u32 CreateWirelessCommsMenu(void)
 {
     return 1;
 }
 
-u32 sub_803A1E8(void)
+u32 UpdateWirelessCommsMenu(void)
 {
     return 2;
 }
 
-void sub_803A1EC(void)
+void CleanWirelessCommsMenu(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, 1, 1);

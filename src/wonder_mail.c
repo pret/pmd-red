@@ -10,11 +10,17 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 struct unkStruct_8095228
 {
-    u8 unkArray[0x10];
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 padding[0x10 - 0x5];
     u32 unk10;
     u8 padding2[0x20 - 0x14];
     struct unkStruct_41C unk20;
-    u8 padding3[0x2C - 0x24];
+    u8 padding3[0x28 - 0x24];
+    u32 unk28;
     s8 unk2C;
     u8 padding4[0x30 - 0x2D];
 };
@@ -603,7 +609,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->unkArray[4]) == 0)
+            if(sub_80A2824(return_var->unk4) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -891,7 +897,7 @@ void sub_80293F4(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x1C, (gUnknown_203B2C0->unk8), temp.unkArray))
+                switch(sub_8039068(0x1C, (gUnknown_203B2C0->unk8), &temp.unk0))
                 {
                     case 8:
                     case 9:
@@ -921,8 +927,8 @@ void sub_80293F4(void)
                         break;
                     case 22:
                         sub_8095274(temp.unk10);
-                        temp.unkArray[0] = 2; // Some sort of Ack?
-                        sub_80951BC(temp.unkArray);
+                        temp.unk0 = 2; // Some sort of Ack?
+                        sub_80951BC(&temp.unk0);
                         sub_80141B4(gWonderMailAOKMailReceivedText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x101);
                         sub_8028B04(35);
                         break;
@@ -1912,7 +1918,7 @@ void sub_802A50C(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->unk8,temp.unkArray)) 
+        switch(sub_8039068(0x20,gUnknown_203B2C4->unk8,&temp.unk0)) 
         {
             case 7:
             case 8:
@@ -1943,7 +1949,7 @@ void sub_802A50C(void)
                 uVar1 = sub_809539C(4,temp.unk10);
                 puVar5 = sub_8095228(uVar1);
                 *puVar5 = temp;
-                puVar5->unkArray[0] = 6;
+                puVar5->unk0 = 6;
                 gUnknown_203B2C4->unk430 = temp.unk10;
                 sub_802B2BC(0x21);
                 break;
