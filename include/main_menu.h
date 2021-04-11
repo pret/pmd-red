@@ -43,7 +43,7 @@ struct MainMenu
     /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
     /* 0x2C */ struct MainMenuSub sub;
-    u32 unk30;
+    u8 unk30;
     u32 unk34;
     s16 unk38;
     u8 unk3A;

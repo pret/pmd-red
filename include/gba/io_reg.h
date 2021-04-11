@@ -597,6 +597,9 @@
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
 
+// There is one time that we need to reverse the OR to match in PMD
+#define BLDALPHA_BLEND1(target1, target2) ((target1) | ((target2) << 8))
+
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
 #define SOUND_CGB_MIX_HALF    0x0001

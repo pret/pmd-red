@@ -6,17 +6,29 @@ struct subStruct_8048524
     u8 fill0[0x6];
     u8 unk6;
     u8 unk7;
-    u8 fill8[0xAC - 0x8];
+    u8 fill8[0xE - 0x8];
+    s16 unkE; // HP??
+    s16 unk10;
+    u8 fill12[0x46 - 0x12];
+    u8 unk46;
+    u8 fill47[0xAC - 0x47];
     u8 unkAC;
-    u8 fillAD[0x112 - 0xAD];
+    u8 fillAD[0xFB - 0xAD];
+    u8 unkFB;
+    u8 fillFC[0x112 - 0xFC];
     u8 unk112;
     u8 fill113[0x13C - 0x113];
     u32 unk13C;
+    u8 fill140[0x174 - 0x140];
+    u32 unk174;
 };
 
 struct unkDungeon_8041D5C
 {
-    u8 padding[0x70];
+    u8 fill0[4];
+    s16 unk4;
+    s16 unk6;
+    u8 fill8[0x70 - 0x8];
     struct subStruct_8048524 *unk70;
 };
 

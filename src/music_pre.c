@@ -8,7 +8,7 @@ extern bool8 EnableInterrupts(void);
 extern bool8 DisableInterrupts(void);
 extern void SoundBiasReset();
 extern void SoundBiasSet();
-extern void SetInterruptFlag(u16);
+extern void AckInterrupt(u16);
 extern void nullsub_25();
 extern void nullsub_18();
 extern void UpdateSound();
@@ -17,7 +17,7 @@ extern void UpdateInput();
 extern void sub_800C298(u16 r0);
 
 typedef void (*IntrCallback)(void);
-extern IntrCallback gUnknown_202D5F0[];
+extern IntrCallback gIntrCallbacks[];
 
 struct unkStruct_202D648
 {
@@ -61,7 +61,7 @@ struct unkStruct_3000FD8
 extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
 
 extern u8 gUnknown_202D7FE;
-extern u16 gUnknown_202D7FC;
+extern u16 gBldCnt;
 extern struct BGControlStruct gBG0Control;
 extern struct BGControlStruct gBG1Control;
 extern struct BGControlStruct gBG2Control;
@@ -84,8 +84,8 @@ void VBlankIntr(void)
     gUnknown_203B0A0++;
     SoundVSync();
     BlinkSavingIcon();
-    if (gUnknown_202D5F0[1] != NULL) {
-        gUnknown_202D5F0[1]();
+    if (gIntrCallbacks[1] != NULL) {
+        gIntrCallbacks[1]();
     }
     index = 0;
     while (index < gUnknown_203B0AA) {
@@ -100,7 +100,7 @@ void VBlankIntr(void)
     if (gUnknown_203B099 == 0) {
         UpdateSound();
     }
-    SetInterruptFlag(INTR_FLAG_VBLANK);
+    AckInterrupt(INTR_FLAG_VBLANK);
 }
 
 // Registers are a little off.. seems to be around the while loop
@@ -115,8 +115,8 @@ void VCountIntr(void)
   sVar2 = sVar2 >> 16;
 
   if (gUnknown_203B0AE < 0) {
-    if (gUnknown_202D5F0[2] != 0) {
-      gUnknown_202D5F0[2]();
+    if (gIntrCallbacks[2] != 0) {
+      gIntrCallbacks[2]();
     }
     gUnknown_203B0AE = 0;
   }
@@ -134,7 +134,7 @@ void VCountIntr(void)
       REG_DISPSTAT = gUnknown_202D648[gUnknown_203B0AE].unk2 << 8 | DISPSTAT_VBLANK_INTR | DISPSTAT_VCOUNT_INTR;
     }
   }
-  SetInterruptFlag(INTR_FLAG_VCOUNT);
+  AckInterrupt(INTR_FLAG_VCOUNT);
 }
 #else
 NAKED
@@ -232,7 +232,7 @@ void VCountIntr(void)
 	"\tstrh r0, [r2]\n"
 "_0800BA34:\n"
 	"\tmovs r0, 0x4\n"
-	"\tbl SetInterruptFlag\n"
+	"\tbl AckInterrupt\n"
 	"\tpop {r3}\n"
 	"\tmov r8, r3\n"
 	"\tpop {r4-r7}\n"
@@ -241,7 +241,7 @@ void VCountIntr(void)
 	"\t.align 2, 0\n"
 "_0800BA44: .4byte 0x04000006\n"
 "_0800BA48: .4byte gUnknown_203B0AE\n"
-"_0800BA4C: .4byte gUnknown_202D5F0\n"
+"_0800BA4C: .4byte gIntrCallbacks\n"
 "_0800BA50: .4byte gUnknown_203B0AC\n"
 "_0800BA54: .4byte gUnknown_202D648\n"
 "_0800BA58: .4byte 0x04000004"
@@ -290,9 +290,9 @@ void xxx_update_bg_sound_input(void)
 
 void Timer3Intr(void)
 {
-    if(gUnknown_202D5F0[4])
-        gUnknown_202D5F0[4]();
-    SetInterruptFlag(INTR_FLAG_TIMER3);
+    if(gIntrCallbacks[4])
+        gIntrCallbacks[4]();
+    AckInterrupt(INTR_FLAG_TIMER3);
 }
 
 // Unused
@@ -388,7 +388,7 @@ void UpdateBGControlRegisters(void)
     }
 
     REG_BG3CNT = BG[3] | 0x2f08;
-    REG_BLDCNT = gUnknown_202D7FC;
+    REG_BLDCNT = gBldCnt;
 }
 
 // Some kind of initializer for music?

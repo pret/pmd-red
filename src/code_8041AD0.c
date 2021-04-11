@@ -1,12 +1,6 @@
 #include "global.h"
 #include "code_8041D5C.h"
 
-struct unk_struct_8041F08
-{
-    u32 unk0;
-    u32 unk4;
-};
-
 struct unkStruct_80420E8
 {
     u32 unk0;

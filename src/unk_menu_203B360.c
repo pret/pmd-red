@@ -54,6 +54,9 @@ void sub_80382E4(s32 param_1)
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B360->unk148,1,1);
   if (param_1 == 0x25) {
+      // Caution!
+      // The storage space is empty!
+      // Please check again.
     SetMenuItems(&gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,&gUnknown_80E6EAC,
                  0,4,0);
   }

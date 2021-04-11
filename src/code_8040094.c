@@ -1,20 +1,7 @@
 #include "global.h"
 #include "play_time.h"
 #include "file_system.h"
-
-struct unkStruct_203B418
-{
-    u8 fill0[0x181FC];
-    u32 unk181FC;
-    u32 unk18200;
-    u32 unk18204;
-    u8 unk18208[3];
-    u8 unk1820B;
-    u32 unk1820C;
-    u32 unk18210;
-    u8 padding2[3];
-    u8 unk18217;
-};
+#include "gUnknown_203B418.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct unkStruct_203B418 *gUnknown_203B418;

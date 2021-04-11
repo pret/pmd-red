@@ -120,9 +120,9 @@ SECTIONS {
         asm/rescue_password_menu.o(.text);
         asm/load_screen.o(.text);
         src/load_screen.o(.text);
-        src/wonder_mail_main_menu_pre.o(.text);
-        asm/wonder_mail_main_menu.o(.text);
         src/wonder_mail_main_menu.o(.text);
+        asm/wonder_mail_main_menu.o(.text);
+        src/ds_menus.o(.text);
         src/debug_menu.o(.text);
         asm/debug_menu.o(.text);
         src/debug_menu_mid.o(.text);
@@ -145,6 +145,8 @@ SECTIONS {
         asm/code_8048480.o(.text);
         src/code_80521D0.o(.text);
         asm/code_80521D0.o(.text);
+        src/code_8057824.o(.text);
+        asm/code_8057824.o(.text);
         src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);

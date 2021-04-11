@@ -25,6 +25,6 @@ void sub_80060EC(void)
     gUnknown_2026E3C = gUnknown_2026E58;
     gUnknown_2026E54 = !gUnknown_2026E54;
     gUnknown_2026E50 = !gUnknown_2026E50;
-    sub_800CC44((gUnknown_2026E4E & (0xF8 << 5)) >> 8, gUnknown_2026E4E & 0x1F);
+    sub_800CC44((gUnknown_2026E4E & 0x1F00) >> 8, gUnknown_2026E4E & 0x1F);
     gUnknown_2026E38 = TRUE;
 }
