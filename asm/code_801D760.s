@@ -11533,7 +11533,7 @@ _08023532:
 	cmp r0, 0
 	beq _08023594
 	adds r0, r5, 0
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	movs r7, 0x4
 	cmp r0, 0

@@ -1557,17 +1557,17 @@ _08001F7E:
 	cmp r0, 0
 	beq _08001FCC
 	movs r0, 0x90
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001FCC
 	movs r0, 0x91
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001FCC
 	movs r0, 0x92
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08001FCC
@@ -1668,7 +1668,7 @@ _08002086:
 	beq _080020AE
 	movs r0, 0x89
 	lsls r0, 1
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _080020AE
@@ -1685,7 +1685,7 @@ _080020AE:
 	cmp r0, 0
 	beq _080020D4
 	ldr r0, _080020E4
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _080020D4

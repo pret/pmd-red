@@ -8539,21 +8539,21 @@ _080A1AF0: .4byte gUnknown_811678C
 _080A1AF4: .4byte gUnknown_8116790
 _080A1AF8:
 	movs r0, 0x90
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1B08
 	bl _080A236A
 _080A1B08:
 	movs r0, 0x91
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1B18
 	bl _080A236A
 _080A1B18:
 	movs r0, 0x92
-	bl sub_808E734
+	bl HasRecruitedMon
 	b _080A171E
 _080A1B20:
 	bl sub_808D33C
@@ -8854,7 +8854,7 @@ _080A1CCC:
 	cmp r0, 0
 	beq _080A1D9E
 	adds r0, r5, 0
-	bl sub_808E734
+	bl HasRecruitedMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1CA4
