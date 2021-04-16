@@ -15,7 +15,9 @@ struct unkStruct_203B418
     u8 fillE240[0xE26B - 0xE240];
     u8 unkE26B;
     u8 unkE26C;
-    u8 fillE26D[0x1358C - 0xE26D];
+    u8 fillE26D[0x1356C - 0xE26D];
+    u8 unk1356C;
+    u8 fill1356D[0x1358C - 0x1356D];
     u32 unk1358C[0x10];
     u8 fill135CC[0x181FC - 0x135CC];
     u32 unk181FC;

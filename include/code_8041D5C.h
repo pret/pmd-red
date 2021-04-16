@@ -34,7 +34,8 @@ struct unkDungeon_8041D5C
     s16 unk6;
     u32 unk8;
     u32 unkC;
-    u8 fill10[0x70 - 0x10];
+    u32 unk10;
+    u8 fill14[0x70 - 0x14];
     struct subStruct_8048524 *unk70;
 };
 
