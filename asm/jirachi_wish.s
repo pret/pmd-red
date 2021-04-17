@@ -507,8 +507,8 @@ _0808BA70: .4byte gUnknown_81058E0
 _0808BA74: .4byte gUnknown_810593C
 	thumb_func_end JirachiWish
 
-	thumb_func_start sub_808BA78
-sub_808BA78:
+	thumb_func_start JirachiPreFightDialogue1
+JirachiPreFightDialogue1:
 	push {lr}
 	ldr r0, _0808BA94
 	bl HasRecruitedMon
@@ -523,11 +523,11 @@ sub_808BA78:
 _0808BA94: .4byte 0x0000019d
 _0808BA98: .4byte gUnknown_8105E14
 _0808BA9C:
-	bl sub_808B45C
+	bl JirachiPreFightDialogue
 _0808BAA0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808BA78
+	thumb_func_end JirachiPreFightDialogue1
 
 	thumb_func_start sub_808BAA4
 sub_808BAA4:

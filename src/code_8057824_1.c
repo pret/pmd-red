@@ -5,9 +5,16 @@
 
 extern struct unkStruct_203B418 *gUnknown_203B418;
 
-extern struct unkDungeon_8041D5C *sub_8085480(void);
-extern struct unkDungeon_8041D5C *sub_8085680(u32);
+extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
+extern u8 gAvailablePokemonNames[0x58]; 
+
+extern u32 gUnknown_8105244;
+extern u32 gUnknown_810517C;
+extern u32 gUnknown_81050B4;
+extern u32 gUnknown_81051D0;
+extern u32 gUnknown_810510C;
+extern u32 gUnknown_8105040;
 extern u32 gUnknown_810554C;
 extern u32 gUnknown_8105558;
 extern u32 gUnknown_81055F4;
@@ -16,79 +23,11 @@ extern u32 gUnknown_8104FD4;
 extern u32 gUnknown_8104930;
 extern u32 gUnknown_8104980;
 extern u32 gUnknown_8104998;
-extern void sub_808BBA8(struct unkDungeon_8041D5C * );
-extern void CopySpeciesNametoBuffer(char *r0, u32 r1);
-extern void sub_80855E4(void *);
-extern void sub_8041888(u32);
-extern void sub_80861B8(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_8083ED8(u32);
-extern void sub_803E708(u32, u32);
-extern void sub_8052910(u32 *r0);
-extern void sub_8083E88(u32);
-extern void sub_808BC20(struct unkDungeon_8041D5C *);
-
 extern u32 gUnknown_8105034;
 extern u32 gUnknown_8105438;
 extern u32 gUnknown_81054A0;
 extern u32 gUnknown_81054E4;
 extern u32 gUnknown_810550C;
-extern void sub_80862BC(struct unkDungeon_8041D5C *);
-void sub_808BBB8(struct unkDungeon_8041D5C *param_1);
-extern void sub_8086448();
-extern void sub_808696C();
-extern u32 sub_80861F8(u32, struct unkDungeon_8041D5C *, u32);
-extern void sub_8086A70(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_80858AC(u32 *, u32);
-void sub_808B50C(void);
-
-extern void sub_8097FA8(u32);
-extern void JirachiWish();
-extern u8 sub_80860A8(u32);
-extern void sub_8040A84();
-extern void sub_8086A3C(struct unkDungeon_8041D5C *);
-extern u8 HasRecruitedMon(u32);
-extern void sub_80854D4();
-extern void sub_8085930(u32);
-extern void sub_8068FE0(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_8085918(struct unkDungeon_8041D5C *, u32);
-void sub_808BCE4(void);
-extern void sub_8049ED4();
-extern void sub_8085860(s16 r0, u32 r1);
-extern void sub_806CE68(struct unkDungeon_8041D5C *, u32);
-void sub_808B2E4(struct unkDungeon_8041D5C *r0);
-u8 sub_8098100(u32);
-void sub_808563C(void *);
-void sub_808B2C4(struct unkDungeon_8041D5C *r0);
-void sub_808B2D4(struct unkDungeon_8041D5C *r0);
-
-extern u8 gAvailablePokemonNames[0x58]; 
-extern u32 gUnknown_8105244;
-extern u32 gUnknown_810517C;
-extern u32 gUnknown_81050B4;
-extern u32 gUnknown_81051D0;
-extern u32 gUnknown_810510C;
-extern u32 gUnknown_8105040;
-extern void sub_8052D44(u8 *, struct unkDungeon_8041D5C *, u32);
-extern void sub_8097FD0(u32);
-extern void sub_8045B94(u8 *, struct unkDungeon_8041D5C *, u32);
-extern struct unkDungeon_8041D5C *sub_8083600();
-extern void sub_80421C0(struct unkDungeon_8041D5C *, u32);
-extern void sub_8046D20();
-extern void sub_808B1CC(u8);
-extern void sub_8090A8C(u8 *, u32, u32);
-extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, u8 *);
-extern void sub_8098044(u32);
-void sub_808B2B0(struct unkDungeon_8041D5C *r0);
-extern u32 gUnknown_202EDC8;
-extern void sub_8083E38(u32);
-extern void sub_8085C54(u32, u32, u32, u32, u32);
-extern void sub_803E46C(u32);
-extern void sub_8085EB0();
-extern u32 gUnknown_8104FC8;
-extern void sub_80866C4(u32 *);
-void sub_808AC50(void);
-extern void sub_808692C();
-
 extern u32 gUnknown_8104F64;
 extern u32 gUnknown_8104EFC;
 extern u32 gUnknown_8104F30;
@@ -115,21 +54,546 @@ extern u32 gUnknown_810484C;
 extern u32 gUnknown_8104888;
 extern u32 gUnknown_81048C8;
 extern u32 gUnknown_8104914;
+extern u32 gUnknown_810476C;
+extern u32 gUnknown_8104778;
+extern u32 gUnknown_81046CC;
+extern u32 gUnknown_8104744;
+extern u32 gUnknown_81045F8;
+extern u32 gUnknown_8104674;
+extern u32 gUnknown_81046A0;
+extern u32 gUnknown_8104450;
+extern u32 gUnknown_81044B4;
+extern u32 gUnknown_8104510;
+extern u32 gUnknown_810453C;
+extern u32 gUnknown_8104570;
+extern u32 gUnknown_81045B0;
+extern u32 gUnknown_81043DC;
+extern u32 gUnknown_8104310;
+extern u32 gUnknown_810439C;
+extern u32 gUnknown_81043C0;
+extern u32 gUnknown_8104240;
+extern u32 gUnknown_81042AC;
+extern u32 gUnknown_81042B8;
+extern u32 gUnknown_8104FC8;
+extern u32 gUnknown_8104150;
+extern u32 gUnknown_81041AC;
+extern u32 gUnknown_81041F8;
+extern u32 gUnknown_8104144;
+extern u32 gUnknown_8104114;
+extern u32 gUnknown_81040CC;
+extern u32 gUnknown_8104050;
+extern u32 gUnknown_8104044;
+extern u32 gUnknown_8104008;
+extern u32 gUnknown_8103EA4;
+extern u32 gUnknown_8103F0C;
+extern u32 gUnknown_8103F4C;
+extern u32 gUnknown_8103FCC;
+
+extern struct unkDungeon_8041D5C *sub_8085480(void);
+extern struct unkDungeon_8041D5C *sub_8085680(u32);
+extern void sub_808BBA8(struct unkDungeon_8041D5C * );
+extern void CopySpeciesNametoBuffer(char *r0, u32 r1);
+extern void sub_80855E4(void *);
+extern void sub_8041888(u32);
+extern void sub_80861B8(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_8083ED8(u32);
+extern void sub_803E708(u32, u32);
+extern void sub_8052910(u32 *r0);
+extern void sub_8083E88(u32);
+extern void sub_808BC20(struct unkDungeon_8041D5C *);
+
+extern void sub_80862BC(struct unkDungeon_8041D5C *);
+extern void sub_8086448();
+extern void sub_808696C();
+extern u32 sub_80861F8(u32, struct unkDungeon_8041D5C *, u32);
+extern void sub_8086A70(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_80858AC(u32 *, u32);
+
+extern void sub_8097FA8(u32);
+extern void JirachiWish();
+extern u8 sub_80860A8(u32);
+extern void sub_8040A84();
+extern void sub_8086A3C(struct unkDungeon_8041D5C *);
+extern u8 HasRecruitedMon(u32);
+extern void sub_80854D4();
+extern void sub_8085930(u32);
+extern void sub_8068FE0(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_8085918(struct unkDungeon_8041D5C *, u32);
+extern void sub_8049ED4();
+extern void sub_8085860(s16 r0, u32 r1);
+extern void sub_806CE68(struct unkDungeon_8041D5C *, u32);
+
+extern void sub_8052D44(u8 *, struct unkDungeon_8041D5C *, u32);
+extern void sub_8097FD0(u32);
+extern void sub_8045B94(u8 *, struct unkDungeon_8041D5C *, u32);
+extern struct unkDungeon_8041D5C *sub_8083600();
+extern void sub_80421C0(struct unkDungeon_8041D5C *, u32);
+extern void sub_8046D20();
+extern void sub_808B1CC(u8);
+extern void sub_8090A8C(u8 *, u32, u32);
+extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, u8 *);
+extern void sub_8098044(u32);
+extern void sub_8083E38(u32);
+extern void sub_8085C54(u32, u32, u32, u32, u32);
+extern void sub_803E46C(u32);
+extern void sub_8085EB0();
+extern void sub_80866C4(u32 *);
+extern void sub_808692C();
+
 extern void sub_8083E58(u32);
 extern void sub_80868F4();
 extern void sub_8086910();
 extern u32 sub_8085EC8(u32, u32, u32, u32 *, u32);
-void sub_808A904(struct unkDungeon_8041D5C * param_1);
-void sub_808A958(void);
 extern void sub_808680C();
 extern void sub_808682C();
 extern void sub_8086854();
 extern void sub_80867F4();
 extern void sub_8086838(u32, u32, u32);
 extern void sub_80426C8(u32, u32);
-void sub_808A528(struct unkDungeon_8041D5C * param_1);
+extern void sub_807EAA0(u32, u32);
 
+extern void sub_808563C(void *);
+extern void sub_808BCE4(void);
+extern void sub_808BBB8(struct unkDungeon_8041D5C *param_1);
+extern u8 sub_8098100(u32);
+extern void sub_8086794();
+
+void sub_8089E68(void);
+void sub_808A1D8(void);
+void sub_808A528(struct unkDungeon_8041D5C * param_1);
 void sub_808A57C();
+void sub_808A904(struct unkDungeon_8041D5C * param_1);
+void sub_808A958(void);
+void sub_808AC50(void);
+void sub_808B2B0(struct unkDungeon_8041D5C *r0);
+void sub_808B2C4(struct unkDungeon_8041D5C *r0);
+void sub_808B2D4(struct unkDungeon_8041D5C *r0);
+void sub_808B2E4(struct unkDungeon_8041D5C *r0);
+void sub_808B50C(void);
+void sub_8089B64(struct unkDungeon_8041D5C *param_1);
+void sub_8089BB8(void);
+
+
+void MewtwoPreFightDialogue(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  struct unkDungeon_8041D5C *uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x11);
+  sub_8086448();
+  sub_8052910(&gUnknown_8103EA4);
+  sub_803E708(10,0x46);
+  sub_8083E88(0x23);
+  sub_8086794();
+  sub_803E708(0x1e,0x46);
+  sub_8089B64(uVar2);
+  sub_803E708(0x3c,0x46);
+  sub_8052910(&gUnknown_8103F0C);
+  sub_8052910(&gUnknown_8103F4C);
+  sub_803E708(10,0x46);
+  sub_8089BB8();
+  sub_8052910(&gUnknown_8103FCC);
+  sub_8089BB8();
+  sub_8052910(&gUnknown_8104008);
+  sub_803E708(10,0x46);
+  sub_8086A70(uVar2,900,0x20);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void MewtwoPreFightDialogue1(void)
+{
+  struct unkDungeon_8041D5C *iVar2;
+  struct unkDungeon_8041D5C *uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x11);
+  sub_8086448();
+  if(HasRecruitedMon(SPECIES_MEWTWO)) {
+    sub_80866C4(&gUnknown_8104144);
+  }
+  else {
+    sub_8052910(&gUnknown_8104044);
+    sub_8083E88(0x23);
+    sub_8086794();
+    sub_8089B64(uVar3);
+    sub_803E708(0x3c,0x46);
+    sub_8052910(&gUnknown_8104050);
+    sub_8089BB8();
+    sub_8052910(&gUnknown_81040CC);
+    sub_8089BB8();
+    sub_8052910(&gUnknown_8104114);
+    sub_8086A70(uVar3,900,0x20);
+    sub_80858AC(&iVar2->unkC,0x10);
+  }
+}
+
+void sub_8089B64(struct unkDungeon_8041D5C *param_1)
+{
+  s32 iVar1;
+  s32 iVar2;
+  
+  param_1->unk70->unk15E = 0;
+  iVar2 = 51200;
+  iVar1 = 0x400;
+  sub_8083E38(0x1f8);
+  while( 1 ) {
+    iVar2 = iVar2 - iVar1;
+    iVar1 = iVar1 -= 11;
+    if (iVar1 < 0x1e) {
+      iVar1 = 0x1e;
+    }
+    if (iVar2 < 0) break;
+    param_1->unk70->unk174 = iVar2;
+    sub_803E46C(0x46);
+  }
+  param_1->unk70->unk174 = 0;
+}
+
+void sub_8089BB8(void)
+{
+  int iVar1;
+  
+  sub_8083E38(0x1f6);
+  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
+  { 
+    sub_8085C54(iVar1,iVar1,0,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+  for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+  sub_8085EB0();
+}
+
+void sub_8089C44(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x12);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_8085918(uVar3, 0);
+  sub_8085860(iVar2->unk4,iVar2->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
+}
+
+
+void sub_8089C90(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x12);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  if (HasRecruitedMon(SPECIES_ENTEI)) {
+      sub_8068FE0(uVar3,0x21c,0);
+  }
+  else {
+      sub_8085918(uVar3,0);
+  }
+  sub_8085860(iVar2->unk4,iVar2->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
+}
+
+
+void sub_8089CFC(char param_1,int param_2)
+{
+  if ((((param_2 * 0x1000000) + 0xE0000000U) >> 0x18 < 3) && (param_1 == 0x12)) {
+    sub_8097FA8(0x15);
+    gUnknown_203B418->unk2 = 1;
+  }
+}
+
+
+void EnteiPreFightDialogue(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x12);
+  sub_8089E68();
+  sub_8052910(&gUnknown_8104150);
+  sub_8089E68();
+  sub_8052910(&gUnknown_81041AC);
+  sub_8089E68();
+  sub_8052910(&gUnknown_81041F8);
+  sub_803E708(10,70);
+  sub_8086A70(uVar2,600,0xb);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void EnteiPreFightDialogue1(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x12);
+  sub_8089E68();
+  sub_8052910(&gUnknown_8104240);
+  sub_8089E68();
+  sub_8052910(&gUnknown_81042AC);
+  sub_8089E68();
+  sub_8052910(&gUnknown_81042B8);
+  sub_803E708(10,70);
+  sub_8086A70(uVar2,600,0xb);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void EnteiPreFightDialogue2(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x12);
+  if (HasRecruitedMon(SPECIES_ENTEI)) {
+    sub_80866C4(&gUnknown_81043DC);
+  }
+  else {
+    sub_8089E68();
+    sub_8052910(&gUnknown_8104310);
+    sub_8089E68();
+    sub_8052910(&gUnknown_810439C);
+    sub_8089E68();
+    sub_8052910(&gUnknown_81043C0);
+    sub_803E708(10,70);
+    sub_8086A70(uVar3,600,0xb);
+    sub_80858AC(&iVar2->unkC,0x10);
+  }
+}
+
+void sub_8089E68(void)
+{
+  s32 iVar1;
+  
+  sub_8083E38(0x1ed);
+  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1, 0, 0, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  sub_8085EB0();
+}
+
+void sub_8089EFC(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x13);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_8085918(uVar3, 0);
+  sub_8085860(iVar2->unk4,iVar2->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
+}
+
+
+void sub_8089F44(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x13);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_8085918(uVar3, 0);
+  sub_8085860(iVar2->unk4,iVar2->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
+}
+
+
+void sub_8089F8C(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x13);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  if (HasRecruitedMon(SPECIES_RAIKOU)) {
+      sub_8068FE0(uVar3,0x21c,0);
+  }
+  else {
+      sub_8085918(uVar3,0);
+  }
+  sub_8085860(iVar2->unk4,iVar2->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
+}
+
+void sub_8089FF0(char param_1,int param_2)
+{
+  if ((((param_2 * 0x1000000) + 0xdD000000U) >> 0x18 < 3) && (param_1 == 0x13)) {
+    sub_8097FA8(0x17);
+    gUnknown_203B418->unk2 = 1;
+  }
+}
+
+
+void RaikouPreFightDialogue(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x13);
+  sub_8052910(&gUnknown_8104450);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_81044B4);
+  gUnknown_203B418->unkE265 = 4;
+  sub_807EAA0(0,1);
+  sub_803E708(10,70);
+  sub_8052910(&gUnknown_8104510);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_810453C);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_8104570);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_81045B0);
+  sub_803E708(10,70);
+  sub_8086A70(uVar2,0x28a,0xb);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void RaikouPreFightDialogue1(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x13);
+  gUnknown_203B418->unkE265 = 4;
+  sub_807EAA0(0,1);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_81045F8);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_8104674);
+  sub_808A1D8();
+  sub_8052910(&gUnknown_81046A0);
+  sub_803E708(10,70);
+  sub_8086A70(uVar3,0x28a,0xb);
+  sub_80858AC(&iVar2->unkC,0x10);
+}
+
+void RaikouPreFightDialogue2(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x13);
+  if (HasRecruitedMon(SPECIES_RAIKOU)) {
+    sub_80866C4(&gUnknown_8104778);
+  }
+  else {
+    gUnknown_203B418->unkE265 = 4;
+    sub_807EAA0(0,1);
+    sub_8052910(&gUnknown_81046CC);
+    sub_808A1D8();
+    sub_8052910(&gUnknown_8104744);
+    sub_808A1D8();
+    sub_8052910(&gUnknown_810476C);
+    sub_803E708(10,70);
+    sub_8086A70(uVar3,0x28a,0xb);
+    sub_80858AC(&iVar2->unkC,0x10);
+  }
+}
+
+void sub_808A1D8(void)
+{
+  s32 iVar1;
+  
+  sub_8083E38(0x1f6);
+  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  sub_8085EB0();
+}
+
+void sub_808A264(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x14);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  sub_8085918(uVar2,0);
+  sub_8086A3C(uVar2);
+  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
+}
+
+void sub_808A2C0(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x14);
+  sub_8083E88(0x72);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_8085918(uVar2,0);
+  sub_8085860(iVar1->unk4,iVar1->unk6);
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
+}
 
 void sub_808A308(void)
 {
@@ -168,13 +632,13 @@ void SuicunePreFightDialogue(void)
   uVar2 = sub_8085680(0x14);
   sub_8086448();
   sub_8052910(&gUnknown_8104784);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8052910(&gUnknown_8104790);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_80426C8(1,2);
-  sub_803E708(0x3c,0x46);
+  sub_803E708(0x3c,70);
   sub_8052910(&gUnknown_81047B0);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_808A528(uVar2);
   sub_8052910(&gUnknown_810484C);
   sub_8052910(&gUnknown_8104888);
@@ -182,7 +646,7 @@ void SuicunePreFightDialogue(void)
   sub_8052910(&gUnknown_81048C8);
   sub_808A57C();
   sub_8052910(&gUnknown_8104914);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(uVar2,0x28a,0xb);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -199,7 +663,7 @@ void SuicunePreFightDialogue1(void)
   sub_8052910(&gUnknown_8104980);
   sub_808A57C();
   sub_8052910(&gUnknown_8104998);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(uVar2,0x28a,0xb);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -220,7 +684,7 @@ void SuicunePreFightDialogue2(void)
     sub_8052910(&gUnknown_8104A80);
     sub_808A57C();
     sub_8052910(&gUnknown_8104A9C);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_8086A70(uVar3,0x28a,0xb);
     sub_80858AC(&iVar2->unkC,0x10);
   }
@@ -232,18 +696,18 @@ void sub_808A528(struct unkDungeon_8041D5C * param_1)
   s32 iVar2;
   
   param_1->unk70->unk15E = 0;
-  iVar2 = 0xc800;
-  iVar1 = 0xc00;
+  iVar2 = 51200;
+  iVar1 = 3072;
   sub_8083E38(0x1f8);
   while( 1 ) {
     iVar2 = iVar2 - iVar1;
-    iVar1 -= 0x60;
-    if (iVar1 < 0x14) {
-      iVar1 = 0x14;
+    iVar1 -= 96;
+    if (iVar1 < 20) {
+      iVar1 = 20;
     }
     if (iVar2 < 0) break;
     param_1->unk70->unk174 = iVar2;
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
   param_1->unk70->unk174 = 0;
 }
@@ -253,24 +717,24 @@ void sub_808A57C(void)
   s32 iVar1;
   
   sub_8083E38(0x1ee);
-  for(iVar1 = 0xFA; iVar1 > 0x95; iVar1 -= 10)
+  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
-  for(iVar1 = 0xFA; iVar1 > 199; iVar1 -= 10)
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
-  for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 10)
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8085EB0();
 }
 
@@ -340,16 +804,16 @@ void HoOhPreFightDialogue(void)
   local_14[0] = iVar1->unkC;
   local_14[1] = iVar1->unk10 + -0x1000;
   sub_80858AC(local_14,0x88);
-  sub_803E708(0x40,0x46);
+  sub_803E708(0x40,70);
   sub_8052910(&gUnknown_8104AD4);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_808A958();
   sub_8052910(&gUnknown_8104BEC);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_80855E4(sub_80868F4);
   sub_808680C();
   sub_8083E38(0x1c5);
-  sub_803E708(0xfa,0x46);
+  sub_803E708(0xfa,70);
   sub_808A904(uVar2);
   sub_8083E58(0x1c5);
   sub_808682C();
@@ -357,13 +821,13 @@ void HoOhPreFightDialogue(void)
   sub_8085930(4);
   sub_8052910(&gUnknown_8104C10);
   sub_8052910(&gUnknown_8104C54);
-  sub_803E708(0x1e,0x46);
-  sub_803E708(0x1e,0x46);
+  sub_803E708(0x1e,70);
+  sub_803E708(0x1e,70);
   sub_808A958();
   sub_8052910(&gUnknown_8104CB4);
   sub_808A958();
   sub_8052910(&gUnknown_8104CE0);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(uVar2,800,0x20);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -380,7 +844,7 @@ void HoOhPreFightDialogue1(void)
   local_14[0] = iVar2->unkC;
   local_14[1] = iVar2->unk10 + -0x1000;
   sub_80858AC(local_14,0x88);
-  sub_803E708(0x40,0x46);
+  sub_803E708(0x40,70);
   if (HasRecruitedMon(SPECIES_HO_OH)) {
     sub_80866C4(&gUnknown_8104E54);
   }
@@ -389,7 +853,7 @@ void HoOhPreFightDialogue1(void)
     sub_808A958();
     sub_80855E4(sub_80868F4);
     sub_808680C();
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_808A904(uVar3);
     sub_808682C();
     sub_80855E4(sub_8086910);
@@ -399,7 +863,7 @@ void HoOhPreFightDialogue1(void)
     sub_8052910(&gUnknown_8104DDC);
     sub_808A958();
     sub_8052910(&gUnknown_8104E0C);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_8086A70(uVar3,800,0x20);
     sub_80858AC(&iVar2->unkC,0x10);
   }
@@ -411,18 +875,18 @@ void sub_808A904(struct unkDungeon_8041D5C * param_1)
   s32 iVar2;
   
   param_1->unk70->unk15E = 0;
-  iVar2 = 0xc800;
-  iVar1 = 0xc00;
+  iVar2 = 51200;
+  iVar1 = 3072;
   sub_8083E38(0x1f8);
   while( 1 ) {
     iVar2 = iVar2 - iVar1;
-    iVar1 -= 0x60;
-    if (iVar1 < 0x14) {
-      iVar1 = 0x14;
+    iVar1 -= 96;
+    if (iVar1 < 20) {
+      iVar1 = 20;
     }
     if (iVar2 < 0) break;
     param_1->unk70->unk174 = iVar2;
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
   param_1->unk70->unk174 = 0;
 }
@@ -435,21 +899,21 @@ void sub_808A958(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8085EB0();
 }
 
@@ -523,19 +987,19 @@ void LatiosPreFightDialogue(void)
   local_18[2] = 0x7000fc;
   sub_8085EC8(0x1bd,0,0,&local_18[2],1);
 
-  sub_803E708(0x1e,0x46);
+  sub_803E708(0x1e,70);
   sub_8086448();
   sub_80858AC(local_18,0x18);
-  sub_803E708(2,0x46);
+  sub_803E708(2,70);
   sub_80862BC(iVar2);
-  sub_803E708(0x20,0x46);
+  sub_803E708(0x20,70);
   sub_808692C();
   sub_8052910(&gUnknown_8104E60);
   sub_808AC50();
   sub_8052910(&gUnknown_8104EFC);
   sub_808AC50();
   sub_8052910(&gUnknown_8104F30);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(iVar2,600,0xb);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -554,7 +1018,7 @@ void LatiosReFightDialogue(void)
   sub_8052910(&gUnknown_8104EFC);
   sub_808AC50();
   sub_8052910(&gUnknown_8104F30);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(uVar2,600,0xb);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -575,15 +1039,15 @@ void sub_808AC50(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     sub_8085C54(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    sub_803E46C(70);
   }
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8085EB0();
 }
 
@@ -764,7 +1228,7 @@ void sub_808AFB0(char param_1)
     // $m0 obatined the Rock Part that Regirock was guarding
     sub_8052910(&gUnknown_81050B4);
     sub_80421C0(0,0xd4);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_8046D20();
   }
 }
@@ -782,7 +1246,7 @@ void sub_808B030(char param_1)
     // $m0 obatined the Ice Part that Regice was guarding
     sub_8052910(&gUnknown_810517C);
     sub_80421C0(0,0xd4);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_8046D20();
   }
 }
@@ -800,43 +1264,43 @@ void sub_808B0B0(char param_1)
     // $m0 obatined the Steel Part that Registeel was guarding
     sub_8052910(&gUnknown_8105244);
     sub_80421C0(0,0xd4);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_8046D20();
   }
 }
 
-void sub_808B130(void)
+void RegirockPreFightDialogue(void)
 {
   if (sub_8098100(0x22) == '\0') {
     sub_8085930(4);
     // INTRUDER ALERT
     // EXTERMINATE
     sub_8052910(&gUnknown_8104FD4);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_808563C(sub_808B2C4);
   }
 }
 
-void sub_808B164(void)
+void RegicePreFightDialogue(void)
 {
   if (sub_8098100(0x22) == '\0') {
     sub_8085930(4);
     // INTRUDER ALERT
     // EXTERMINATE
     sub_8052910(&gUnknown_8105028);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_808563C(sub_808B2D4);
   }
 }
 
-void sub_808B198(void)
+void RegisteelPreFightDialogue(void)
 {
   if (sub_8098100(0x22) == '\0') {
     sub_8085930(4);
     // INTRUDER ALERT
     // EXTERMINATE
     sub_8052910(&gUnknown_8105034);
-    sub_803E708(10,0x46);
+    sub_803E708(10,70);
     sub_808563C(sub_808B2E4);
   }
 }
@@ -1007,7 +1471,7 @@ void sub_808B35C(void)
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
-  if (HasRecruitedMon(SPECIES_JIRACHI) != '\0') {
+  if (HasRecruitedMon(SPECIES_JIRACHI)) {
     sub_8068FE0(uVar3,0x21c,0);
   }
   else {
@@ -1110,7 +1574,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 }
 #endif
 
-void sub_808B45C(void)
+void JirachiPreFightDialogue(void)
 {
   struct unkDungeon_8041D5C * iVar1;
   struct unkDungeon_8041D5C * uVar2;
@@ -1118,21 +1582,21 @@ void sub_808B45C(void)
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x1a);
   sub_8086448();
-  sub_803E708(0x40,0x46);
+  sub_803E708(0x40,70);
   sub_8052910(&gUnknown_8105438);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_808696C(iVar1);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8052910(&gUnknown_81054A0);
   sub_80861F8(0x37,uVar2,1);
   sub_80855E4(sub_80862BC);
-  sub_803E708(0x3c,0x46);
+  sub_803E708(0x3c,70);
   sub_808BBB8(uVar2);
-  sub_803E708(0x5a,0x46);
+  sub_803E708(0x5a,70);
   sub_8052910(&gUnknown_81054E4);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8052910(&gUnknown_810550C);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_8086A70(uVar2,0x15e,0x20);
   sub_80858AC(&iVar1->unkC,0x10);
 }
@@ -1150,7 +1614,7 @@ void sub_808B50C(void)
   iVar1->unk70->unk15E = 0;
   sub_80861B8(iVar1,0xe,0);
   sub_8083ED8(0x1e);
-  sub_803E708(0x1e,0x46);
+  sub_803E708(0x1e,70);
   // Fwaaaahhhh
   sub_8052910(&gUnknown_810554C);
   sub_8083E88(0x79);
@@ -1158,9 +1622,9 @@ void sub_808B50C(void)
   // Did I imagine it?
   // I'm sleepy so I'm going back to sleep.
   sub_8052910(&gUnknown_8105558);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   sub_808BC20(iVar1);
   sub_8052910(&gUnknown_81055F4);
-  sub_803E708(10,0x46);
+  sub_803E708(10,70);
   gUnknown_203B418->unk2 = 1;
 }

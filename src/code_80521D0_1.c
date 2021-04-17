@@ -1208,7 +1208,7 @@ void sub_808CB5C(void)
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
-void nullsub_101(void)
+void DummyFightDialogue(void)
 {
 }
 
