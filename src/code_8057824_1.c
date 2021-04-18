@@ -88,6 +88,7 @@ extern u32 gUnknown_8103EA4;
 extern u32 gUnknown_8103F0C;
 extern u32 gUnknown_8103F4C;
 extern u32 gUnknown_8103FCC;
+extern u32 gUnknown_8103E34;
 
 extern struct unkDungeon_8041D5C *sub_8085480(void);
 extern struct unkDungeon_8041D5C *sub_8085680(u32);
@@ -158,21 +159,386 @@ extern void sub_808BBB8(struct unkDungeon_8041D5C *param_1);
 extern u8 sub_8098100(u32);
 extern void sub_8086794();
 
-void sub_8089E68(void);
-void sub_808A1D8(void);
+void EnteiScreenFlash(void);
+void RaikouScreenFlash(void);
 void sub_808A528(struct unkDungeon_8041D5C * param_1);
-void sub_808A57C();
+void SuicuneScreenFlash();
 void sub_808A904(struct unkDungeon_8041D5C * param_1);
-void sub_808A958(void);
-void sub_808AC50(void);
+void HoOhScreenFlash(void);
+void LatiosScreenFlash(void);
 void sub_808B2B0(struct unkDungeon_8041D5C *r0);
 void sub_808B2C4(struct unkDungeon_8041D5C *r0);
 void sub_808B2D4(struct unkDungeon_8041D5C *r0);
 void sub_808B2E4(struct unkDungeon_8041D5C *r0);
 void sub_808B50C(void);
 void sub_8089B64(struct unkDungeon_8041D5C *param_1);
-void sub_8089BB8(void);
+void MewtwoScreenFlash(void);
+void sub_80898F8(struct unkDungeon_8041D5C *r0);
+void sub_8089908(struct unkDungeon_8041D5C *r0);
+void sub_8089620(struct unkDungeon_8041D5C *param_1);
+void RaquazaScreenFlash(void);
 
+extern void sub_8083F14();
+extern u8 sub_80450E0(struct unkDungeon_8041D5C *);
+extern u8 sub_8086AE4(u32);
+
+extern u32 gUnknown_8103D8C;
+extern u32 gUnknown_8103D98;
+extern u32 gUnknown_8103DD8;
+extern u32 gUnknown_8103E28;
+extern u32 gUnknown_8103BD8;
+extern u32 gUnknown_8103C00;
+extern u32 gUnknown_8103C3C;
+extern u32 gUnknown_8103C74;
+extern u32 gUnknown_8103CC4;
+extern u32 gUnknown_8103D0C;
+extern u32 gUnknown_8103D50;
+extern u32 gUnknown_8103B58;
+extern u32 gUnknown_8103904;
+extern u32 gUnknown_8103938;
+extern u32 gUnknown_8103AA4;
+extern u32 gUnknown_8103AE4;
+extern u32 gUnknown_8103B30;
+extern u32 gUnknown_8103690;
+extern u32 gUnknown_8103844;
+extern u32 gUnknown_8103874;
+extern u32 gUnknown_81038A8;
+extern u32 gUnknown_81038F8;
+
+extern u32 gUnknown_8103500;
+extern u32 gUnknown_810352C;
+extern u32 gUnknown_8103578;
+extern u32 gUnknown_81035D4;
+extern u32 gUnknown_8103618;
+extern u32 gUnknown_810367C;
+extern u32 gUnknown_8103690;
+extern u32 gUnknown_81036C8;
+extern u32 gUnknown_81037A0;
+extern u32 gUnknown_81037D4;
+extern u32 gUnknown_8103820;
+
+extern struct unkDungeon_8041D5C *sub_808548C();
+extern void sub_80856E0(struct unkDungeon_8041D5C *, u32);
+extern void sub_80869E4(struct unkDungeon_8041D5C *, u32, u32, u32);
+
+void sub_80893B4(char param_1, s32 param_2)
+{
+  if ((((param_2 * 0x1000000) + 0xE9000000U) >> 0x18 < 3) && (param_1 == 0xF)) {
+    sub_8097FA8(0xF);
+    gUnknown_203B418->unk2 = 1;
+  }
+}
+
+void RaquazaPreFightDialogue(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  struct unkDungeon_8041D5C *uVar2;
+  struct unkDungeon_8041D5C *uVar3;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_808548C();
+  uVar3 = sub_8085680(0xf);
+  sub_8086448();
+  sub_8052910(&gUnknown_8103500);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_810352C);
+  sub_80856E0(uVar2,4);
+  sub_808696C(uVar2);
+  sub_803E708(10,0x46);
+  sub_80869E4(uVar2,4,1,2);
+  sub_80869E4(iVar1,4,2,6);
+  sub_8052910(&gUnknown_8103578);
+  sub_80869E4(uVar2,4,2,4);
+  sub_80869E4(iVar1,4,1,4);
+  sub_8052910(&gUnknown_81035D4);
+  sub_803E708(10,0x46);
+  sub_8052910(&gUnknown_8103618);
+  sub_803E708(10,0x46);
+  sub_8052910(&gUnknown_810367C);
+  RaquazaScreenFlash();
+  sub_8083E38(0x1da);
+  sub_8052910(&gUnknown_8103690);
+  sub_8089620(uVar3);
+  sub_8052910(&gUnknown_81036C8);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_81037A0);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_81037D4);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_8103820);
+  sub_8086A70(uVar3,600,0x20);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void RaquazaReFightDialogue(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  struct unkDungeon_8041D5C *uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0xf);
+  sub_8086448();
+  RaquazaScreenFlash();
+  sub_8083E38(0x1da);
+  sub_8052910(&gUnknown_8103690);
+  sub_803E708(10,0x46);
+  sub_8089620(uVar2);
+  sub_8052910(&gUnknown_8103844);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_8103874);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_81038A8);
+  RaquazaScreenFlash();
+  sub_8052910(&gUnknown_81038F8);
+  sub_8086A70(uVar2,600,0x20);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void RaquazaPostStoryPreFightDialogue(void)
+{
+  struct unkDungeon_8041D5C *iVar2;
+  struct unkDungeon_8041D5C *uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0xf);
+  sub_8086448();
+  if (sub_8086AE4(SPECIES_RAYQUAZA)) {
+    sub_80866C4(&gUnknown_8103B58);
+  }
+  else {
+    sub_8083E38(0x1da);
+    sub_8052910(&gUnknown_8103904);
+    sub_8089620(uVar3);
+    sub_8052910(&gUnknown_8103938);
+    RaquazaScreenFlash();
+    sub_8052910(&gUnknown_8103AA4);
+    RaquazaScreenFlash();
+    sub_8052910(&gUnknown_8103AE4);
+    RaquazaScreenFlash();
+    sub_8052910(&gUnknown_8103B30);
+    sub_8086A70(uVar3,600,0xb);
+    sub_80858AC(&iVar2->unkC,0x10);
+  }
+}
+
+void sub_8089620(struct unkDungeon_8041D5C *param_1)
+{
+  s32 iVar1;
+  s32 iVar2;
+  
+  param_1->unk70->unk15E = 0;
+  iVar2 = 51200;
+  iVar1 = 0x600;
+  sub_8083E38(0x1f8);
+  while( 1 ) {
+    iVar2 = iVar2 - iVar1;
+    iVar1 = iVar1 -= 0x18;
+    if (iVar1 < 0x14) {
+      iVar1 = 0x14;
+    }
+    if (iVar2 < 0) break;
+    param_1->unk70->unk174 = iVar2;
+    sub_803E46C(0x46);
+  }
+  param_1->unk70->unk174 = 0;
+}
+
+void RaquazaScreenFlash(void)
+{
+  s32 iVar1;
+  
+  sub_8083E38(0x1f6);
+  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1 / 2, iVar1, iVar1 / 2, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1 / 2, iVar1, 0, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
+  {
+    sub_8085C54(iVar1 / 2, iVar1, iVar1 / 2, 1, 1);
+    sub_803E46C(70);
+  }
+  sub_803E708(10,70);
+  sub_8085EB0();
+}
+
+
+void sub_808970C(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  
+  iVar1 = sub_8085480();
+  sub_8083E88(0x7D);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  sub_808563C(sub_8089908);
+  sub_8085860(iVar1->unk4,iVar1->unk6 + -3);
+}
+
+void sub_808974C(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  
+  iVar1 = sub_8085480();
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  sub_808563C(sub_80898F8);
+  sub_8085860(iVar1->unk4,iVar1->unk6 + -3);
+}
+
+void sub_8089788(struct unkDungeon_8041D5C *param_1, u8 param_2, s32 param_3)
+{
+  struct unkDungeon_8041D5C *iVar2;
+  s32 iVar3;
+  u32 unk1;
+
+  unk1 = 0;
+  
+  if ((((param_3 * 0x1000000) + 0xe6000000U) >> 0x18) < 2) {
+    for(iVar3 = 0; iVar3 < 0x10; iVar3++)
+    {
+      iVar2 = gUnknown_203B418->unk1358C[iVar3];
+      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->unk70->unkA4 == param_2)) {
+        return;
+      }
+    }
+    // WTF is this??
+    if(!unk1){
+        sub_8097FA8(0x11);
+        gUnknown_203B418->unk2 = 1;
+    }
+  }
+}
+
+void sub_80897F0(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  
+  iVar1 = sub_8085480();
+  sub_8086448();
+  sub_803E708(10,0x46);
+  sub_808563C(sub_80862BC);
+  sub_803E708(0x20,0x46);
+  sub_808692C();
+  sub_8052910(&gUnknown_8103BD8);
+  // We don't like to brag or 
+  // nothing, but
+  sub_8052910(&gUnknown_8103C00);
+  // We get furious real easy
+  // You know that?!
+  sub_8052910(&gUnknown_8103C3C);
+  // What really irritates us is
+  // when we see some dim witted face
+  sub_8052910(&gUnknown_8103C74);
+  // .........
+  // Wrooooooar!
+  // That vacant expression
+  sub_8052910(&gUnknown_8103CC4);
+  // Gwoooh
+  // It's ticking me off!
+  // I'm seeing red!
+  sub_8052910(&gUnknown_8103D0C);
+  // Mukkkeeeeeh
+  // Get 'em! It's frenzy time!
+  sub_8052910(&gUnknown_8103D50);
+  sub_803E708(10,0x46);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+
+
+void sub_8089878(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  
+  iVar1 = sub_8085480();
+  sub_8086448();
+  sub_803E708(10,0x46);
+  sub_808563C(sub_80862BC);
+  sub_803E708(0x20,0x46);
+  sub_808692C();
+  sub_8052910(&gUnknown_8103D8C);
+  sub_8052910(&gUnknown_8103D98);
+  sub_8052910(&gUnknown_8103DD8);
+  sub_8052910(&gUnknown_8103E28);
+  sub_803E708(10,0x46);
+  sub_80858AC(&iVar1->unkC,0x10);
+}
+
+void sub_80898E4(void)
+{
+    sub_8086448();
+    sub_80866C4(&gUnknown_8103E34);
+}
+
+void sub_80898F8(struct unkDungeon_8041D5C *r0)
+{
+    sub_8068FE0(r0, 0x21C, 0);
+}
+
+void sub_8089908(struct unkDungeon_8041D5C *r0)
+{
+    sub_8085918(r0, 4);
+}
+
+void sub_8089914(void)
+{
+  struct unkDungeon_8041D5C *iVar1;
+  struct unkDungeon_8041D5C *uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0x11);
+  sub_8083F14();
+  gUnknown_203B418->unk7 = 1;
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  sub_8085918(uVar2,0);
+  sub_8086A3C(uVar2);
+  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
+}
+
+void sub_8089978(void)
+{
+  struct unkDungeon_8041D5C *iVar2;
+  struct unkDungeon_8041D5C *uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0x11);
+  sub_8083F14();
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  if(HasRecruitedMon(SPECIES_MEWTWO)){
+    sub_8083E88(0x23);
+    sub_8068FE0(uVar3,0x21c,0);
+  }
+  else {
+    gUnknown_203B418->unk7 = 1;
+    sub_8085918(uVar3,0);
+    sub_8086A3C(uVar3);
+  }
+  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
+}
+
+void sub_8089A00(char param_1, s32 param_2)
+{
+  if ((((param_2 * 0x1000000) + 0xE3000000U) >> 0x18 < 3) && (param_1 == 0x11)) {
+    sub_8097FA8(0x13);
+    gUnknown_203B418->unk2 = 1;
+  }
+}
 
 void MewtwoPreFightDialogue(void)
 {
@@ -192,9 +558,9 @@ void MewtwoPreFightDialogue(void)
   sub_8052910(&gUnknown_8103F0C);
   sub_8052910(&gUnknown_8103F4C);
   sub_803E708(10,0x46);
-  sub_8089BB8();
+  MewtwoScreenFlash();
   sub_8052910(&gUnknown_8103FCC);
-  sub_8089BB8();
+  MewtwoScreenFlash();
   sub_8052910(&gUnknown_8104008);
   sub_803E708(10,0x46);
   sub_8086A70(uVar2,900,0x20);
@@ -219,9 +585,9 @@ void MewtwoPreFightDialogue1(void)
     sub_8089B64(uVar3);
     sub_803E708(0x3c,0x46);
     sub_8052910(&gUnknown_8104050);
-    sub_8089BB8();
+    MewtwoScreenFlash();
     sub_8052910(&gUnknown_81040CC);
-    sub_8089BB8();
+    MewtwoScreenFlash();
     sub_8052910(&gUnknown_8104114);
     sub_8086A70(uVar3,900,0x20);
     sub_80858AC(&iVar2->unkC,0x10);
@@ -250,7 +616,7 @@ void sub_8089B64(struct unkDungeon_8041D5C *param_1)
   param_1->unk70->unk174 = 0;
 }
 
-void sub_8089BB8(void)
+void MewtwoScreenFlash(void)
 {
   int iVar1;
   
@@ -329,11 +695,11 @@ void EnteiPreFightDialogue(void)
   
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x12);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_8104150);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_81041AC);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_81041F8);
   sub_803E708(10,70);
   sub_8086A70(uVar2,600,0xb);
@@ -347,11 +713,11 @@ void EnteiPreFightDialogue1(void)
   
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x12);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_8104240);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_81042AC);
-  sub_8089E68();
+  EnteiScreenFlash();
   sub_8052910(&gUnknown_81042B8);
   sub_803E708(10,70);
   sub_8086A70(uVar2,600,0xb);
@@ -369,11 +735,11 @@ void EnteiPreFightDialogue2(void)
     sub_80866C4(&gUnknown_81043DC);
   }
   else {
-    sub_8089E68();
+    EnteiScreenFlash();
     sub_8052910(&gUnknown_8104310);
-    sub_8089E68();
+    EnteiScreenFlash();
     sub_8052910(&gUnknown_810439C);
-    sub_8089E68();
+    EnteiScreenFlash();
     sub_8052910(&gUnknown_81043C0);
     sub_803E708(10,70);
     sub_8086A70(uVar3,600,0xb);
@@ -381,7 +747,7 @@ void EnteiPreFightDialogue2(void)
   }
 }
 
-void sub_8089E68(void)
+void EnteiScreenFlash(void)
 {
   s32 iVar1;
   
@@ -476,17 +842,17 @@ void RaikouPreFightDialogue(void)
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x13);
   sub_8052910(&gUnknown_8104450);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_81044B4);
   gUnknown_203B418->unkE265 = 4;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
   sub_8052910(&gUnknown_8104510);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_810453C);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_8104570);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_81045B0);
   sub_803E708(10,70);
   sub_8086A70(uVar2,0x28a,0xb);
@@ -502,11 +868,11 @@ void RaikouPreFightDialogue1(void)
   uVar3 = sub_8085680(0x13);
   gUnknown_203B418->unkE265 = 4;
   sub_807EAA0(0,1);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_81045F8);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_8104674);
-  sub_808A1D8();
+  RaikouScreenFlash();
   sub_8052910(&gUnknown_81046A0);
   sub_803E708(10,70);
   sub_8086A70(uVar3,0x28a,0xb);
@@ -527,9 +893,9 @@ void RaikouPreFightDialogue2(void)
     gUnknown_203B418->unkE265 = 4;
     sub_807EAA0(0,1);
     sub_8052910(&gUnknown_81046CC);
-    sub_808A1D8();
+    RaikouScreenFlash();
     sub_8052910(&gUnknown_8104744);
-    sub_808A1D8();
+    RaikouScreenFlash();
     sub_8052910(&gUnknown_810476C);
     sub_803E708(10,70);
     sub_8086A70(uVar3,0x28a,0xb);
@@ -537,7 +903,7 @@ void RaikouPreFightDialogue2(void)
   }
 }
 
-void sub_808A1D8(void)
+void RaikouScreenFlash(void)
 {
   s32 iVar1;
   
@@ -642,9 +1008,9 @@ void SuicunePreFightDialogue(void)
   sub_808A528(uVar2);
   sub_8052910(&gUnknown_810484C);
   sub_8052910(&gUnknown_8104888);
-  sub_808A57C();
+  SuicuneScreenFlash();
   sub_8052910(&gUnknown_81048C8);
-  sub_808A57C();
+  SuicuneScreenFlash();
   sub_8052910(&gUnknown_8104914);
   sub_803E708(10,70);
   sub_8086A70(uVar2,0x28a,0xb);
@@ -659,9 +1025,9 @@ void SuicunePreFightDialogue1(void)
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x14);
   sub_8052910(&gUnknown_8104930);
-  sub_808A57C();
+  SuicuneScreenFlash();
   sub_8052910(&gUnknown_8104980);
-  sub_808A57C();
+  SuicuneScreenFlash();
   sub_8052910(&gUnknown_8104998);
   sub_803E708(10,70);
   sub_8086A70(uVar2,0x28a,0xb);
@@ -680,9 +1046,9 @@ void SuicunePreFightDialogue2(void)
   }
   else {
     sub_8052910(&gUnknown_81049D4);
-    sub_808A57C();
+    SuicuneScreenFlash();
     sub_8052910(&gUnknown_8104A80);
-    sub_808A57C();
+    SuicuneScreenFlash();
     sub_8052910(&gUnknown_8104A9C);
     sub_803E708(10,70);
     sub_8086A70(uVar3,0x28a,0xb);
@@ -712,7 +1078,7 @@ void sub_808A528(struct unkDungeon_8041D5C * param_1)
   param_1->unk70->unk174 = 0;
 }
 
-void sub_808A57C(void)
+void SuicuneScreenFlash(void)
 {
   s32 iVar1;
   
@@ -807,7 +1173,7 @@ void HoOhPreFightDialogue(void)
   sub_803E708(0x40,70);
   sub_8052910(&gUnknown_8104AD4);
   sub_803E708(10,70);
-  sub_808A958();
+  HoOhScreenFlash();
   sub_8052910(&gUnknown_8104BEC);
   sub_803E708(10,70);
   sub_80855E4(sub_80868F4);
@@ -823,9 +1189,9 @@ void HoOhPreFightDialogue(void)
   sub_8052910(&gUnknown_8104C54);
   sub_803E708(0x1e,70);
   sub_803E708(0x1e,70);
-  sub_808A958();
+  HoOhScreenFlash();
   sub_8052910(&gUnknown_8104CB4);
-  sub_808A958();
+  HoOhScreenFlash();
   sub_8052910(&gUnknown_8104CE0);
   sub_803E708(10,70);
   sub_8086A70(uVar2,800,0x20);
@@ -850,7 +1216,7 @@ void HoOhPreFightDialogue1(void)
   }
   else {
     sub_8052910(&gUnknown_8104CEC);
-    sub_808A958();
+    HoOhScreenFlash();
     sub_80855E4(sub_80868F4);
     sub_808680C();
     sub_803E708(10,70);
@@ -859,9 +1225,9 @@ void HoOhPreFightDialogue1(void)
     sub_80855E4(sub_8086910);
     sub_8085930(4);
     sub_8052910(&gUnknown_8104D60);
-    sub_808A958();
+    HoOhScreenFlash();
     sub_8052910(&gUnknown_8104DDC);
-    sub_808A958();
+    HoOhScreenFlash();
     sub_8052910(&gUnknown_8104E0C);
     sub_803E708(10,70);
     sub_8086A70(uVar3,800,0x20);
@@ -891,7 +1257,7 @@ void sub_808A904(struct unkDungeon_8041D5C * param_1)
   param_1->unk70->unk174 = 0;
 }
 
-void sub_808A958(void)
+void HoOhScreenFlash(void)
 {
   s32 iVar1;
   
@@ -995,9 +1361,9 @@ void LatiosPreFightDialogue(void)
   sub_803E708(0x20,70);
   sub_808692C();
   sub_8052910(&gUnknown_8104E60);
-  sub_808AC50();
+  LatiosScreenFlash();
   sub_8052910(&gUnknown_8104EFC);
-  sub_808AC50();
+  LatiosScreenFlash();
   sub_8052910(&gUnknown_8104F30);
   sub_803E708(10,70);
   sub_8086A70(iVar2,600,0xb);
@@ -1014,9 +1380,9 @@ void LatiosReFightDialogue(void)
   sub_8086448();
   sub_808692C();
   sub_8052910(&gUnknown_8104F64);
-  sub_808AC50();
+  LatiosScreenFlash();
   sub_8052910(&gUnknown_8104EFC);
-  sub_808AC50();
+  LatiosScreenFlash();
   sub_8052910(&gUnknown_8104F30);
   sub_803E708(10,70);
   sub_8086A70(uVar2,600,0xb);
@@ -1030,7 +1396,7 @@ void sub_808AC3C(void)
     sub_80866C4(&gUnknown_8104FC8);
 }
 
-void sub_808AC50(void)
+void LatiosScreenFlash(void)
 {
   s32 iVar1;
   

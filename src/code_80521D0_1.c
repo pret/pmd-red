@@ -94,7 +94,7 @@ extern void sub_8085918(struct unkDungeon_8041D5C *, u32);
 extern void sub_806CE68(struct unkDungeon_8041D5C *r0, u32);
 extern void sub_8052910(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 sub_80450E0();
+extern u8 sub_80450E0(struct unkDungeon_8041D5C *);
 extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct unkDungeon_8041D5C *);
 extern u8 sub_8083E74(u32);
@@ -218,9 +218,9 @@ void sub_808BCE4(void)
   struct unk8049590 *puVar1;
 
   puVar1 = sub_8049590(gUnknown_203B418->unkE23C, gUnknown_203B418->unkE23E);
-  puVar1->unk0 = puVar1->unk0 & 0xfffc;
-  puVar1->unk0 = puVar1->unk0 | 16;
-  puVar1->unk0 = puVar1->unk0 & 0xfdff;
+  puVar1->unk0 &= 0xfffc;
+  puVar1->unk0 |= 16;
+  puVar1->unk0 &= 0xfdff;
   sub_8049884();
   sub_8049B8C();
   sub_8049ED4();
@@ -232,10 +232,10 @@ void sub_808BD38(void)
   struct unk8049590 *puVar1;
 
   puVar1 = sub_8049590(gUnknown_203B418->unkE23C, gUnknown_203B418->unkE23E);
-  puVar1->unk0 = puVar1->unk0 & 0xfffc;
-  puVar1->unk0 = puVar1->unk0 | 1;
-  puVar1->unk0 = puVar1->unk0 & 0xffef;
-  puVar1->unk0 = puVar1->unk0 | (0x200);
+  puVar1->unk0 &= 0xfffc;
+  puVar1->unk0 |= 1;
+  puVar1->unk0 &= 0xffef;
+  puVar1->unk0 |= (0x200);
   puVar1->unk8 = 1;
   sub_8049884();
   sub_8049B8C();
@@ -1091,15 +1091,17 @@ void sub_808C938(void)
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(s32 param_1, u8 param_2)
+void sub_808C948(struct unkDungeon_8041D5C *param_1, u8 param_2)
 {
   bool8 flag;
   s32 iVar3;
+  struct unkDungeon_8041D5C *iVar2;
 
   if (param_2 == 0x37) {
     flag = FALSE;
     for(iVar3 = 0; iVar3 < 0x10; iVar3++){
-      if ((gUnknown_203B418->unk1358C[iVar3] != param_1) && (sub_80450E0() != 0)) {
+      iVar2 = gUnknown_203B418->unk1358C[iVar3];
+      if ((iVar2 != param_1) && (sub_80450E0(iVar2) != 0)) {
         flag = TRUE;
         break;
       }
