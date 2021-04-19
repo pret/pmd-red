@@ -91235,13 +91235,13 @@ _08084CFE:
 	bl sub_8089168
 	b _08084DDA
 _08084D04:
-	bl RaquazaPreFightDialogue
+	bl RayquazaPreFightDialogue
 	b _08084DDA
 _08084D0A:
-	bl RaquazaReFightDialogue
+	bl RayquazaReFightDialogue
 	b _08084DDA
 _08084D10:
-	bl RaquazaPostStoryPreFightDialogue
+	bl RayquazaPostStoryPreFightDialogue
 	b _08084DDA
 _08084D16:
 	bl sub_80897F0
@@ -99233,133 +99233,5 @@ _0808928C:
 	.align 2, 0
 _08089290: .4byte 0xfffffe00
 	thumb_func_end sub_8089224
-
-	thumb_func_start sub_8089294
-sub_8089294:
-	push {r4,lr}
-	ldr r0, _080892BC
-	bl sub_80855E4
-	movs r4, 0x77
-_0808929E:
-	ldr r0, _080892C0
-	bl sub_80855E4
-	movs r0, 0x46
-	bl sub_803E46C
-	subs r4, 0x1
-	cmp r4, 0
-	bge _0808929E
-	ldr r0, _080892C4
-	bl sub_80855E4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080892BC: .4byte sub_80891B0
-_080892C0: .4byte sub_8089224
-_080892C4: .4byte sub_80891D0
-	thumb_func_end sub_8089294
-
-	thumb_func_start sub_80892C8
-sub_80892C8:
-	push {r4-r6,lr}
-	bl sub_8085480
-	adds r6, r0, 0
-	movs r0, 0xF
-	bl sub_8085680
-	adds r5, r0, 0
-	movs r0, 0x1A
-	bl sub_8083E88
-	bl sub_8085374
-	bl sub_80854D4
-	movs r0, 0x4
-	bl sub_8085930
-	ldr r4, _08089320
-	adds r0, r4, 0
-	bl sub_80855E4
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_8085918
-	adds r0, r5, 0
-	bl _call_via_r4
-	movs r1, 0x4
-	ldrsh r0, [r6, r1]
-	movs r2, 0x6
-	ldrsh r1, [r6, r2]
-	subs r1, 0x3
-	bl sub_8085860
-	ldr r0, _08089324
-	movs r1, 0xCE
-	lsls r1, 1
-	bl CopySpeciesNametoBuffer
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08089320: .4byte sub_8086A3C
-_08089324: .4byte gUnknown_202E038
-	thumb_func_end sub_80892C8
-
-	thumb_func_start sub_8089328
-sub_8089328:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	bl sub_8085480
-	adds r5, r0, 0
-	movs r0, 0xF
-	bl sub_8085680
-	adds r4, r0, 0
-	movs r0, 0x1A
-	bl sub_8083E88
-	bl sub_80854D4
-	movs r0, 0x4
-	bl sub_8085930
-	ldr r6, _08089370
-	adds r0, r6, 0
-	bl sub_80855E4
-	movs r0, 0xCE
-	lsls r0, 1
-	bl sub_8086AE4
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	beq _08089374
-	movs r1, 0x87
-	lsls r1, 2
-	adds r0, r4, 0
-	movs r2, 0
-	bl sub_8068FE0
-	b _0808938C
-	.align 2, 0
-_08089370: .4byte sub_8086A3C
-_08089374:
-	ldr r0, _080893AC
-	movs r3, 0
-	ldrsh r2, [r0, r3]
-	str r1, [sp]
-	adds r0, r4, 0
-	adds r1, r4, 0
-	movs r3, 0
-	bl sub_8072008
-	adds r0, r4, 0
-	bl _call_via_r6
-_0808938C:
-	movs r1, 0x4
-	ldrsh r0, [r5, r1]
-	movs r2, 0x6
-	ldrsh r1, [r5, r2]
-	subs r1, 0x3
-	bl sub_8085860
-	ldr r0, _080893B0
-	movs r1, 0xCE
-	lsls r1, 1
-	bl CopySpeciesNametoBuffer
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080893AC: .4byte gUnknown_80F57CA
-_080893B0: .4byte gUnknown_202E038
-	thumb_func_end sub_8089328
 
         .align 2,0

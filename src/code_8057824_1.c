@@ -176,7 +176,7 @@ void MewtwoScreenFlash(void);
 void sub_80898F8(struct unkDungeon_8041D5C *r0);
 void sub_8089908(struct unkDungeon_8041D5C *r0);
 void sub_8089620(struct unkDungeon_8041D5C *param_1);
-void RaquazaScreenFlash(void);
+void RayquazaScreenFlash(void);
 
 extern void sub_8083F14();
 extern u8 sub_80450E0(struct unkDungeon_8041D5C *);
@@ -216,10 +216,71 @@ extern u32 gUnknown_81036C8;
 extern u32 gUnknown_81037A0;
 extern u32 gUnknown_81037D4;
 extern u32 gUnknown_8103820;
+extern s16 gUnknown_80F57CA;
 
+extern void sub_8072008(struct unkDungeon_8041D5C *, struct unkDungeon_8041D5C *, s16, u32, u32);
 extern struct unkDungeon_8041D5C *sub_808548C();
 extern void sub_80856E0(struct unkDungeon_8041D5C *, u32);
 extern void sub_80869E4(struct unkDungeon_8041D5C *, u32, u32, u32);
+extern void sub_8085374();
+
+extern void sub_80891B0();
+extern void sub_8089224();
+extern void sub_80891D0();
+
+void sub_8089294(void)
+{
+  s32 iVar1;
+  
+  sub_80855E4(sub_80891B0);
+  iVar1 = 0x77;
+  for(iVar1 = 0x77; iVar1 >= 0; iVar1--)
+  {
+    sub_80855E4(sub_8089224);
+    sub_803E46C(0x46);
+  }
+  sub_80855E4(sub_80891D0);
+}
+
+void sub_80892C8(void)
+{
+  struct unkDungeon_8041D5C * iVar1;
+  struct unkDungeon_8041D5C * uVar2;
+  
+  iVar1 = sub_8085480();
+  uVar2 = sub_8085680(0xf);
+  sub_8083E88(0x1a);
+  sub_8085374();
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  sub_8085918(uVar2,0);
+  sub_8086A3C(uVar2);
+  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
+}
+
+void sub_8089328(void)
+{
+  struct unkDungeon_8041D5C * iVar2;
+  struct unkDungeon_8041D5C * uVar3;
+  
+  iVar2 = sub_8085480();
+  uVar3 = sub_8085680(0xf);
+  sub_8083E88(0x1a);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  if (sub_8086AE4(SPECIES_RAYQUAZA) != '\0') {
+    sub_8068FE0(uVar3,0x21c,0);
+  }
+  else {
+    sub_8072008(uVar3,uVar3,gUnknown_80F57CA,0,0);
+    sub_8086A3C(uVar3);
+  }
+  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
+}
 
 void sub_80893B4(char param_1, s32 param_2)
 {
@@ -229,7 +290,7 @@ void sub_80893B4(char param_1, s32 param_2)
   }
 }
 
-void RaquazaPreFightDialogue(void)
+void RayquazaPreFightDialogue(void)
 {
   struct unkDungeon_8041D5C *iVar1;
   struct unkDungeon_8041D5C *uVar2;
@@ -240,7 +301,7 @@ void RaquazaPreFightDialogue(void)
   uVar3 = sub_8085680(0xf);
   sub_8086448();
   sub_8052910(&gUnknown_8103500);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_810352C);
   sub_80856E0(uVar2,4);
   sub_808696C(uVar2);
@@ -255,22 +316,22 @@ void RaquazaPreFightDialogue(void)
   sub_8052910(&gUnknown_8103618);
   sub_803E708(10,0x46);
   sub_8052910(&gUnknown_810367C);
-  RaquazaScreenFlash();
-  sub_8083E38(0x1da);
+  RayquazaScreenFlash();
+  sub_8083E38(0x1da); // Rayquaza Cry
   sub_8052910(&gUnknown_8103690);
   sub_8089620(uVar3);
   sub_8052910(&gUnknown_81036C8);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_81037A0);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_81037D4);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_8103820);
   sub_8086A70(uVar3,600,0x20);
   sub_80858AC(&iVar1->unkC,0x10);
 }
 
-void RaquazaReFightDialogue(void)
+void RayquazaReFightDialogue(void)
 {
   struct unkDungeon_8041D5C *iVar1;
   struct unkDungeon_8041D5C *uVar2;
@@ -278,23 +339,23 @@ void RaquazaReFightDialogue(void)
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0xf);
   sub_8086448();
-  RaquazaScreenFlash();
-  sub_8083E38(0x1da);
+  RayquazaScreenFlash();
+  sub_8083E38(0x1da); // Rayquaza Cry
   sub_8052910(&gUnknown_8103690);
   sub_803E708(10,0x46);
   sub_8089620(uVar2);
   sub_8052910(&gUnknown_8103844);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_8103874);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_81038A8);
-  RaquazaScreenFlash();
+  RayquazaScreenFlash();
   sub_8052910(&gUnknown_81038F8);
   sub_8086A70(uVar2,600,0x20);
   sub_80858AC(&iVar1->unkC,0x10);
 }
 
-void RaquazaPostStoryPreFightDialogue(void)
+void RayquazaPostStoryPreFightDialogue(void)
 {
   struct unkDungeon_8041D5C *iVar2;
   struct unkDungeon_8041D5C *uVar3;
@@ -306,15 +367,15 @@ void RaquazaPostStoryPreFightDialogue(void)
     sub_80866C4(&gUnknown_8103B58);
   }
   else {
-    sub_8083E38(0x1da);
+    sub_8083E38(0x1da); // Rayquaza Cry
     sub_8052910(&gUnknown_8103904);
     sub_8089620(uVar3);
     sub_8052910(&gUnknown_8103938);
-    RaquazaScreenFlash();
+    RayquazaScreenFlash();
     sub_8052910(&gUnknown_8103AA4);
-    RaquazaScreenFlash();
+    RayquazaScreenFlash();
     sub_8052910(&gUnknown_8103AE4);
-    RaquazaScreenFlash();
+    RayquazaScreenFlash();
     sub_8052910(&gUnknown_8103B30);
     sub_8086A70(uVar3,600,0xb);
     sub_80858AC(&iVar2->unkC,0x10);
@@ -343,7 +404,7 @@ void sub_8089620(struct unkDungeon_8041D5C *param_1)
   param_1->unk70->unk174 = 0;
 }
 
-void RaquazaScreenFlash(void)
+void RayquazaScreenFlash(void)
 {
   s32 iVar1;
   
