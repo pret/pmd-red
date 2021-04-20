@@ -842,12 +842,12 @@ void CgbModVol(struct CgbChannel *chan)
     if (!CgbPan(chan))
     {
         chan->pan = 0xFF;
-        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) / 16;
     }
     else
     {
 
-        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) / 16;
         if (chan->eg > 15)
             chan->eg = 15;
     }
