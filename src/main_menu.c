@@ -28,9 +28,9 @@ extern void sub_8099690(u32);
 extern void DrawMainMenu(void);
 extern void CreateTradeItemsMenu(void);
 extern void sub_8036FDC(s32);
-extern void sub_803A1E4(void);
+extern void CreateWirelessCommsMenu(void);
 extern void CreateFriendRescueMenu(void);
-extern void sub_803A1D8(void);
+extern void CreateDualSlotMenu(void);
 extern void CreateWonderMailMenu(void);
 extern void CreateLoadScreen(u32);
 extern s32 sub_8035DB4(u32);
@@ -41,8 +41,8 @@ extern s32 sub_803941C(void);
 extern s32 UpdateTradeItemsMenu(void);
 extern s32 UpdateFriendRescueMenu(void);
 extern s32 UpdateWonderMailMenu(void);
-extern s32 sub_803A1DC(void);
-extern s32 sub_803A1E8(void);
+extern s32 UpdateDualSlotMenu(void);
+extern s32 UpdateWirelessCommsMenu(void);
 extern s32 UpdateRescuePasswordMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 sub_8038630(void);
@@ -53,8 +53,8 @@ extern void CleanTradeItemsMenu(void);
 extern void sub_80370D4(void);
 extern void CleanFriendRescueMenu(void);
 extern void CleanWonderMailMenu(void);
-extern void nullsub_55(void);
-extern void sub_803A1EC(void);
+extern void CleanDualSlotMenu(void);
+extern void CleanWirelessCommsMenu(void);
 extern void CleanRescuePasswordMenu(void);
 extern void sub_80383A8(void);
 extern void sub_8038604(void);
@@ -94,7 +94,7 @@ void SetUpMenu(void)
             sub_8099690(0);
             DrawMainMenu();
             break;
-        case 6:
+        case MENU_AWAITING_RESCUE:
         case MENU_CONTINUE:
         case MENU_DELETE_SAVE_PROMPT:
         case 9:
@@ -113,11 +113,11 @@ void SetUpMenu(void)
         case MENU_WONDER_MAIL:
             CreateWonderMailMenu();
             break;
-        case 0xe:
-            sub_803A1D8();
+        case MENU_DUAL_SLOT:
+            CreateDualSlotMenu();
             break;
-        case 0xf:
-            sub_803A1E4();
+        case MENU_WIRELESS_COMMS:
+            CreateWirelessCommsMenu();
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
         case MENU_RESCUE_PASSWORD_ENTRY:
@@ -152,7 +152,7 @@ s32 UpdateMenu(void)
     case MENU_MAIN_SCREEN:
         nextMenu = UpdateMainMenu();
         break;
-    case 6:
+    case MENU_AWAITING_RESCUE:
     case MENU_CONTINUE:
     case MENU_DELETE_SAVE_PROMPT:
     case 9:
@@ -179,15 +179,15 @@ s32 UpdateMenu(void)
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
-    case 0xe:
-        iVar1 = sub_803A1DC();
+    case MENU_DUAL_SLOT:
+        iVar1 = UpdateDualSlotMenu();
         nextMenu = MENU_MAIN_SCREEN;
         if (iVar1 != 3) {
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
-    case 0xf:
-        iVar1 = sub_803A1E8();
+    case MENU_WIRELESS_COMMS:
+        iVar1 = UpdateWirelessCommsMenu();
         nextMenu = 5;
         if ((iVar1 != 3) && (nextMenu = MENU_NO_SCREEN_CHANGE, iVar1 == 2)) {
             nextMenu = MENU_MAIN_SCREEN;
@@ -232,7 +232,7 @@ void CleanUpMenu(void)
     case MENU_MAIN_SCREEN:
       CleanMainMenu();
       break;
-    case 6:
+    case MENU_AWAITING_RESCUE:
     case MENU_CONTINUE:
     case MENU_DELETE_SAVE_PROMPT:
     case 9:
@@ -251,11 +251,11 @@ void CleanUpMenu(void)
     case MENU_WONDER_MAIL:
       CleanWonderMailMenu();
       break;
-    case 0xe:
-      nullsub_55();
+    case MENU_DUAL_SLOT:
+      CleanDualSlotMenu();
       break;
-    case 0xf:
-      sub_803A1EC();
+    case MENU_WIRELESS_COMMS:
+      CleanWirelessCommsMenu();
       break;
     case MENU_DISPLAY_RESCUE_PASSWORD:
     case MENU_RESCUE_PASSWORD_ENTRY:

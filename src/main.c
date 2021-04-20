@@ -9,8 +9,8 @@ extern char ewram_start[];
 typedef void (*IntrCallback)(void);
 
 extern u8 IntrMain_Buffer[0x120];
-extern IntrCallback gUnknown_202D5F0[6];
-extern u16 gUnknown_202D7FC;
+extern IntrCallback gIntrCallbacks[6];
+extern u16 gBldCnt;
 extern u8 gUnknown_202D7FE;
 extern u8 gInterruptsEnabled;
 extern u16 gUnknown_203B0AC;
@@ -50,7 +50,7 @@ extern void sub_80098A0(void);
 extern void InitGraphics(void);
 extern void GameLoop(void);
 extern void Hang(void);
-extern void sub_800CE54(void);
+extern void VBlank_CB(void);
 
 extern void nullsub_17(void);
 extern void sub_800BD08(void); // music initializer
@@ -59,7 +59,7 @@ extern void sub_800D7D0(void);
 
 bool8 EnableInterrupts(void);
 void InitIntrTable(const u32 *interrupt_table);
-void *sub_800B6F4(u32 index, void * new_callback);
+void *SetInterruptCallback(u32 index, void * new_callback);
 
 
 void AgbMain(void)
@@ -98,7 +98,7 @@ void AgbMain(void)
     REG_WIN1V = 0;
     REG_WININ = WININ_WIN0_ALL | WININ_WIN1_ALL; // 16191
     REG_WINOUT = WINOUT_WIN01_BG0 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR; // 61
-    gUnknown_202D7FC = REG_BLDCNT = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BD | BLDCNT_TGT2_OBJ; // 15426
+    gBldCnt = REG_BLDCNT = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BD | BLDCNT_TGT2_OBJ; // 15426
     REG_BLDALPHA = BLDALPHA_BLEND(10, 6); // 1546
     gUnknown_202D7FE = 0;
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_WRAP | BGCNT_SCREENBASE(12); // 11264
@@ -121,7 +121,7 @@ void AgbMain(void)
     LoadCharmaps();
     sub_80098A0();
     InitGraphics();
-    sub_800B6F4(1, sub_800CE54);
+    SetInterruptCallback(1, VBlank_CB);
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576
     GameLoop();
     Hang();
@@ -131,7 +131,7 @@ void sub_800B540(void)
 {
     s32 i;
     for (i = 0; i < 6; i++) {
-        gUnknown_202D5F0[i] = NULL;
+        gIntrCallbacks[i] = NULL;
     }
 
     nullsub_17();
@@ -213,7 +213,7 @@ bool8 sub_800B650(void)
     }
 }
 
-void SetInterruptFlag(u16 flag)
+void AckInterrupt(u16 flag)
 {
     if(!gInterruptsEnabled)
     {
@@ -237,14 +237,14 @@ u32 *sub_800B6E8(u32 r0)
     return &gIntrTable[r0];
 }
 
-void *sub_800B6F4(u32 index, void * new_callback)
+void *SetInterruptCallback(u32 index, void * new_callback)
 {
     void *old_callback;
     u32 interrupt_var;
 
     interrupt_var = DisableInterrupts();
-    old_callback = gUnknown_202D5F0[index];
-    gUnknown_202D5F0[index] = new_callback;
+    old_callback = gIntrCallbacks[index];
+    gIntrCallbacks[index] = new_callback;
     if(interrupt_var){
         EnableInterrupts();
     }

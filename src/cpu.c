@@ -1,13 +1,13 @@
 #include "global.h"
 
 extern u32 gUnknown_202D800;
-extern u16 gUnknown_202D7FC; // used to update Blend Count Reg
+extern u16 gBldCnt; // used to update Blend Count Reg
 extern u16 gUnknown_203B0BE[];
 
 void sub_800CDA8(u32 r0)
 {
     gUnknown_202D800 = r0;
-    gUnknown_202D7FC = gUnknown_203B0BE[r0];
+    gBldCnt = gUnknown_203B0BE[r0];
 }
 
 u32 sub_800CDC8(void)
@@ -48,7 +48,7 @@ void CpuFill(void* src, void *dest, s32 size)
 }
 
 #ifdef NONMATCHING
-void sub_800CE54(void)
+void VBlank_CB(void)
 {
     // TODO this is so gross.. looks like a macro or something else but I don't want to deal with this rn
     REG_DMA0CNT_H = (REG_DMA0CNT_H | DMA_ENABLE) & 0xcdff;
@@ -62,8 +62,8 @@ void sub_800CE54(void)
 
     REG_WININ = WININ_WIN0_ALL | WININ_WIN1_ALL;
     REG_WINOUT = WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WIN01_BG3 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG0;
-    REG_BLDCNT = gUnknown_202D7FC;
-    REG_BLDALPHA = gUnknown_202D7FA;
+    REG_BLDCNT = gBldCnt;
+    REG_BLDALPHA = gBldAlpha;
     if(gUnknown_2026E38 != 0)
     {
         DmaSet(0, &gUnknown_2026E3C[2], REG_ADDR_WIN0H, 0xa2600002);
@@ -82,7 +82,7 @@ void sub_800CE54(void)
 }
 #else
 NAKED
-void sub_800CE54(void)
+void VBlank_CB(void)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tldr r2, _0800CEC0\n"
@@ -144,8 +144,8 @@ void sub_800CE54(void)
 "_0800CEC8: .4byte 0x00007fff\n"
 "_0800CECC: .4byte 0x04000048\n"
 "_0800CED0: .4byte 0x00003f3f\n"
-"_0800CED4: .4byte gUnknown_202D7FC\n"
-"_0800CED8: .4byte gUnknown_202D7FA\n"
+"_0800CED4: .4byte gBldCnt\n"
+"_0800CED8: .4byte gBldAlpha\n"
 "_0800CEDC: .4byte gUnknown_2026E38\n"
 "_0800CEE0: .4byte 0x040000b0\n"
 "_0800CEE4: .4byte gUnknown_2026E3C\n"

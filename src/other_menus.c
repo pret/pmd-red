@@ -323,6 +323,9 @@ void sub_80371B8(void)
     if (sub_8037C10(0) != 0) {
       sub_80376CC();
       sub_8035CC0(&gUnknown_203B35C->unk15C,0);
+      // Success!
+      // The item exchange with your friend
+      // went through successfully
       SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50,
                    &gUnknown_80E6C68, 0, 6, 0);
       sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
@@ -375,10 +378,12 @@ void sub_80371B8(void)
           break;
         case 0xe:
           puVar5 = &gUnknown_80E6B78;
+          // Error, there was a problem on your friend's end
           ppuVar4 = &gUnknown_80E6B90;
           break;
         case 0xf:
           puVar5 = &gUnknown_80E6BF4;
+          // Error, your friend is not responding
           ppuVar4 = &gUnknown_80E6C0C;
           break;
     }

@@ -287,7 +287,7 @@ IntrMain_Buffer = .; /* 202D4B8 */
 gIntrTable = .; /* 202D5D8 */
 	. += 0x18;
 
-gUnknown_202D5F0 = .; /* 202D5F0 */
+gIntrCallbacks = .; /* 202D5F0 */
 	. += 0x18;
 
 gUnknown_202D608 = .; /* 202D608 */
@@ -335,10 +335,10 @@ gUnknown_202D6B8 = .; /* 202D6B8 */
 gUnknown_202D6B9 = .; /* 202D6B9 */
 	. += 0x141;
 
-gUnknown_202D7FA = .; /* 202D7FA */
+gBldAlpha = .; /* 202D7FA */
 	. += 0x2;
 
-gUnknown_202D7FC = .; /* 202D7FC */
+gBldCnt = .; /* 202D7FC */
 	. += 0x2;
 
 gUnknown_202D7FE = .; /* 202D7FE */
@@ -429,10 +429,10 @@ gAvailablePokemonNames = .; /* 202DF98 */
 gUnknown_202DFE8 = .; /* 202DFE8 */
 	. += 0x50;
 
-gUnknown_202E038 = .; /* 202E038 */
+gUnknown_202E038 = .; /* 202E038  ($m2) */
 	. += 0x50;
 
-gUnknown_202E088 = .; /* 202E088 */
+gUnknown_202E088 = .; /* 202E088  ($m3)? */
 	. += 0xA0;
 
 gUnknown_202E128 = .; /* 202E128 */

@@ -73,7 +73,7 @@ extern s16 sub_8097838();
 extern s16 sub_8097870();
 extern s32 sub_80977B8();
 extern s32 sub_80977F8();
-extern void xxx_call_draw_string(s32, u32, u32 *, u32, u32);
+extern void xxx_call_draw_string(s32, u32, u8 *, u32, u32);
 extern u32 gUnknown_202DE30;
 
 u32 CreateAdventureLogScreen(u32 param_1)
@@ -227,7 +227,7 @@ void DisplayAdventureLog(void)
   iVar5 = gAdventureLog->currPage * 8;
   iVar5 += 10;
   // Draw Header
-  xxx_call_draw_string(iVar5, 0, &gAdventureLogHeaderText, gAdventureLog->unk34, 0);
+  xxx_call_draw_string(iVar5, 0, gAdventureLogHeaderText, gAdventureLog->unk34, 0);
   iVar5 += 4;
   iVar5 += gAdventureLog->unk9E * 8;
   // Draw Page #
@@ -264,7 +264,7 @@ void DisplayAdventureLog(void)
     else
     {
         // Draw the ?????????? across the row
-        xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), &gUnknown_80E2030, gAdventureLog->unk34, 0);
+        xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), gUnknown_80E2030, gAdventureLog->unk34, 0);
     }
     counter++;
   } while(counter < gAdventureLog->unk1A);

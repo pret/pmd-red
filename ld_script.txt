@@ -93,6 +93,10 @@ SECTIONS {
         asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
         asm/wonder_mail_1.o(.text);
+        src/wonder_mail_2.o(.text);
+        asm/code_802B640.o(.text);
+        src/wonder_mail_3.o(.text);
+        asm/wonder_mail_3.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
@@ -103,6 +107,7 @@ SECTIONS {
         asm/main_menu.o(.text);
         src/main_menu_mid.o(.text);
         asm/main_menu_1.o(.text);
+        src/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
         src/other_menus.o(.text);
         asm/other_menus.o(.text);
@@ -115,9 +120,9 @@ SECTIONS {
         asm/rescue_password_menu.o(.text);
         asm/load_screen.o(.text);
         src/load_screen.o(.text);
-        src/wonder_mail_main_menu_pre.o(.text);
-        asm/wonder_mail_main_menu.o(.text);
         src/wonder_mail_main_menu.o(.text);
+        asm/wonder_mail_main_menu.o(.text);
+        src/ds_menus.o(.text);
         src/debug_menu.o(.text);
         asm/debug_menu.o(.text);
         src/debug_menu_mid.o(.text);
@@ -140,6 +145,10 @@ SECTIONS {
         asm/code_8048480.o(.text);
         src/code_80521D0.o(.text);
         asm/code_80521D0.o(.text);
+        src/code_8057824.o(.text);
+        asm/code_8057824.o(.text);
+        src/code_8057824_1.o(.text);
+        asm/jirachi_wish.o(.text);
         src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);

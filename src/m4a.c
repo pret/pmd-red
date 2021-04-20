@@ -835,92 +835,25 @@ static inline int CgbPan(struct CgbChannel *chan)
 
     return 0;
 }
-#ifndef NONMATCHING
-NAKED
-#endif
+
 void CgbModVol(struct CgbChannel *chan)
 {
-#ifdef NONMATCHING
-    struct SoundInfo *soundInfo = SOUND_INFO_PTR;
 
-    if ((soundInfo->mode & 1) || !CgbPan(chan))
+    if (!CgbPan(chan))
     {
         chan->pan = 0xFF;
-        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) / 16;
     }
     else
     {
-        // Force chan->rightVolume and chan->leftVolume to be read from memory again,
-        // even though there is no reason to do so.
-        // The command line option "-fno-gcse" achieves the same result as this.
-        asm("" : : : "memory");
 
-        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
+        chan->eg = (u32)(chan->rightVolume + chan->leftVolume) / 16;
         if (chan->eg > 15)
             chan->eg = 15;
     }
 
     chan->sg = (chan->eg * chan->su + 15) >> 4;
     chan->pan &= chan->panMask;
-#else
-    asm_unified("\tpush {r4,lr}\n"
-        "\tadds r1, r0, 0\n"
-        "\tldrb r0, [r1, 0x2]\n"
-        "\tlsls r2, r0, 24\n"
-        "\tlsrs r4, r2, 24\n"
-        "\tldrb r3, [r1, 0x3]\n"
-        "\tlsls r0, r3, 24\n"
-        "\tlsrs r3, r0, 24\n"
-        "\tcmp r4, r3\n"
-        "\tbcc _080AFA94\n"
-        "\tlsrs r0, r2, 25\n"
-        "\tcmp r0, r3\n"
-        "\tbcc _080AFAA0\n"
-        "\tmovs r0, 0xF\n"
-        "\tstrb r0, [r1, 0x1B]\n"
-        "\tb _080AFAAE\n"
-        "_080AFA94:\n"
-        "\tlsrs r0, 25\n"
-        "\tcmp r0, r4\n"
-        "\tbcc _080AFAA0\n"
-        "\tmovs r0, 0xF0\n"
-        "\tstrb r0, [r1, 0x1B]\n"
-        "\tb _080AFAAE\n"
-        "_080AFAA0:\n"
-        "\tmovs r0, 0xFF\n"
-        "\tstrb r0, [r1, 0x1B]\n"
-        "\tldrb r2, [r1, 0x3]\n"
-        "\tldrb r3, [r1, 0x2]\n"
-        "\tadds r0, r2, r3\n"
-        "\tlsrs r0, 4\n"
-        "\tb _080AFABE\n"
-        "_080AFAAE:\n"
-        "\tldrb r2, [r1, 0x3]\n"
-        "\tldrb r3, [r1, 0x2]\n"
-        "\tadds r0, r2, r3\n"
-        "\tlsrs r0, 4\n"
-        "\tstrb r0, [r1, 0xA]\n"
-        "\tcmp r0, 0xF\n"
-        "\tbls _080AFAC0\n"
-        "\tmovs r0, 0xF\n"
-        "_080AFABE:\n"
-        "\tstrb r0, [r1, 0xA]\n"
-        "_080AFAC0:\n"
-        "\tldrb r2, [r1, 0x6]\n"
-        "\tldrb r3, [r1, 0xA]\n"
-        "\tadds r0, r2, 0\n"
-        "\tmuls r0, r3\n"
-        "\tadds r0, 0xF\n"
-        "\tasrs r0, 4\n"
-        "\tstrb r0, [r1, 0x19]\n"
-        "\tldrb r0, [r1, 0x1C]\n"
-        "\tldrb r2, [r1, 0x1B]\n"
-        "\tands r0, r2\n"
-        "\tstrb r0, [r1, 0x1B]\n"
-        "\tpop {r4}\n"
-        "\tpop {r0}\n"
-        "\tbx r0\n");
-#endif
 }
 
 void CgbSound(void)

@@ -5,7 +5,7 @@
 extern u16 gRawKeyInput;
 extern u8 gUnknown_202D6B8;
 extern u8 gUnknown_202D6B9;
-extern u16 gUnknown_202D7FA;
+extern u16 gBldAlpha;
 extern u8 gUnknown_202D7FE;
 
 extern struct BGControlStruct gBG0Control;
@@ -53,10 +53,6 @@ void ReadKeyInput(struct Inputs *r0)
 
 void sub_800CC44(s32 r0, s32 r1)
 {
-    u32 preload1;
-    u8 preload2;
-    u8 preload3;
-
     if(r0 < 0)
     {
         r0 = 0;
@@ -82,13 +78,7 @@ void sub_800CC44(s32 r0, s32 r1)
     gUnknown_202D6B8 = r0;
     gUnknown_202D6B9 = r1;
 
-    // Forcing the correct loads
-    preload1 = gUnknown_202D7FA;
-    preload2 = gUnknown_202D6B8;
-    preload3 = gUnknown_202D6B9;
-
-    gUnknown_202D7FA = (gUnknown_202D6B9 << 8) | gUnknown_202D6B8;
-
+    gBldAlpha = BLDALPHA_BLEND1(gUnknown_202D6B8, gUnknown_202D6B9);
 }
 
 void SetBG0RegOffsets(s32 xoffset, s32 yoffset)

@@ -1201,8 +1201,8 @@ _0808E72C:
 	bx r0
 	thumb_func_end sub_808E6F4
 
-	thumb_func_start sub_808E734
-sub_808E734:
+	thumb_func_start HasRecruitedMon
+HasRecruitedMon:
 	push {r4-r6,lr}
 	lsls r0, 16
 	asrs r4, r0, 16
@@ -1236,7 +1236,7 @@ _0808E76A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808E734
+	thumb_func_end HasRecruitedMon
 
 	thumb_func_start sub_808E770
 sub_808E770:

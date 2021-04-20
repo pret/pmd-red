@@ -4,12 +4,16 @@
 enum MainMenuScreens
 {
     MENU_MAIN_SCREEN = 1,
+    MENU_NEW_GAME = 3,
+    MENU_AWAITING_RESCUE = 6,
     MENU_CONTINUE = 7,
     MENU_DELETE_SAVE_PROMPT,
     MENU_ADVENTURE_LOG = 10,
     MENU_FRIEND_RESCUE,
     MENU_TRADE_ITEMS,
     MENU_WONDER_MAIL,
+    MENU_DUAL_SLOT,
+    MENU_WIRELESS_COMMS,
     MENU_DEBUG = 16,
     MENU_COMMUNICATION_1 = 19,
     MENU_COMMUNICATION_2,
@@ -39,7 +43,7 @@ struct MainMenu
     /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
     /* 0x2C */ struct MainMenuSub sub;
-    u32 unk30;
+    u8 unk30;
     u32 unk34;
     s16 unk38;
     u8 unk3A;
