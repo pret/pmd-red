@@ -815,7 +815,7 @@ _08052A1C:
 	ldrsh r4, [r6, r1]
 	ldr r0, _08052A48
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 _08052A28:
 	ldrh r0, [r6]
 	subs r0, 0x2

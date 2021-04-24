@@ -110,8 +110,6 @@ extern u8 sub_8024108(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
-void sub_808D8E0(u8 *, u32);
-extern char* GetMonSpecies(u32);
 extern s32 sub_80953D4(u32);
 extern void sub_802B2BC(u32);
 
@@ -856,16 +854,16 @@ void sub_8029374(void)
 void sub_802939C(void)
 {
     s32 temp;
-    u32 return_var;
+    u32 saveStatus;
     if(sub_80144A4(&temp) != 0)
     {
         return;
     }
     if(!sub_8012600())
     {
-        return_var = sub_8012744();
+        saveStatus = sub_8012744();
         sub_8012750();
-        if(return_var == 0)
+        if(saveStatus == SAVE_COMPLETED)
         {
             sub_8028B04(0x25);
         }
@@ -1353,7 +1351,7 @@ u32 sub_8029B50(void)
   gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
   MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
 
-  sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);
   strcpy(gAvailablePokemonNames, monName);
   faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
@@ -1981,14 +1979,14 @@ void sub_802A68C(void)
 
 void sub_802A6B4(void)
 {
-  int iVar2;
+  int saveStatus;
   u32 temp;
 
   if (sub_80144A4(&temp) == 0) {
     if (sub_8012600() == 0) {
-      iVar2 = sub_8012744();
+      saveStatus = sub_8012744();
       sub_8012750();
-      if (iVar2 == 0) {
+      if (saveStatus == SAVE_COMPLETED) {
         sub_802B2BC(0x20);
       }
       else {

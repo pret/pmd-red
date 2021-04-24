@@ -1438,14 +1438,14 @@ _0802DCE0:
 	ldr r1, [r1, 0x34]
 	movs r2, 0xC
 	ldrsh r1, [r1, r2]
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r4, _0802DD64
 	ldr r0, [r5]
 	ldr r0, [r0, 0x34]
 	movs r2, 0xC
 	ldrsh r1, [r0, r2]
 	adds r0, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r0, [r5]
 	ldr r0, [r0, 0x34]
 	movs r1, 0xC
@@ -5493,8 +5493,8 @@ _0802FD0E:
 	bx r1
 	thumb_func_end sub_802FCF0
 
-	thumb_func_start sub_802FD14
-sub_802FD14:
+	thumb_func_start CreateMakhuitaShop
+CreateMakhuitaShop:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	bl ResetUnusedInputStruct
@@ -5598,11 +5598,11 @@ _0802FDE0:
 	ldr r0, _0802FE48
 	ldr r5, _0802FE4C
 	adds r1, r5, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r4, _0802FE50
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	adds r0, r5, 0
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -5644,7 +5644,7 @@ _0802FE48: .4byte gUnknown_202E5D8
 _0802FE4C: .4byte 0x00000141
 _0802FE50: .4byte gUnknown_202E1C8
 _0802FE54: .4byte gUnknown_203B318
-	thumb_func_end sub_802FD14
+	thumb_func_end CreateMakhuitaShop
 
 	thumb_func_start sub_802FE58
 sub_802FE58:
@@ -8534,7 +8534,7 @@ sub_80314B4:
 	str r0, [r6]
 	ldr r0, _08031538
 	adds r1, r5, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	adds r0, r5, 0
 	bl GetMonSpecies
 	adds r1, r0, 0

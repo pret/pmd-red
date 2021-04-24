@@ -179,7 +179,7 @@ u8 sub_8092364(u8 index)
     return gUnknown_810AC6A[index];
 }
 
-void sub_8092374(char *buffer, u8 index)
+void CopyAbilityNametoBuffer(char *buffer, u8 index)
 {
     strncpy(buffer, gAbilityNames[index], 0x50);
 }

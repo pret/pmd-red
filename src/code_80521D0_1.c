@@ -4,6 +4,7 @@
 #include "code_8041D5C.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
+#include "pokemon.h"
 
 extern struct unkDungeon_8041D5C *sub_8085480(void);
 extern struct unkDungeon_8041D5C *sub_8085680(u32);
@@ -66,7 +67,6 @@ extern void sub_800DC14(u32);
 extern void sub_808BAA4();
 
 extern void sub_8086A3C(struct unkDungeon_8041D5C *r0);
-extern void CopySpeciesNametoBuffer(char *r0, u32 r1);
 extern void sub_8083E88(u32);
 extern void sub_80854D4(void);
 extern void sub_80855E4(void *);
@@ -81,9 +81,9 @@ extern void sub_80866C4(u32 *r0);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void sub_8086598(void);
-extern void sub_808696C();
+extern void SpriteLookAroundEffect(struct unkDungeon_8041D5C *);
 extern void sub_80862BC(struct unkDungeon_8041D5C *);
-extern void sub_8083E38(u32);
+extern void PlaySoundEffect(u32);
 extern void sub_806CDD4(struct unkDungeon_8041D5C *, u32, u32);
 extern void sub_80869E4(struct unkDungeon_8041D5C *, u32, u32, u32);
 extern void sub_806CE68(struct unkDungeon_8041D5C *, u32);
@@ -122,7 +122,7 @@ void sub_808C5A0(struct unkDungeon_8041D5C *r0);
 void sub_808C9B0();
 void sub_808C8E0(struct unkDungeon_8041D5C *param_1);
 void sub_808C360(void);
-void sub_808C2D4();
+void KyogreScreenFlash();
 
 void sub_808C0CC();
 void sub_808BFA0();
@@ -166,7 +166,7 @@ void sub_808BBB8(struct unkDungeon_8041D5C *param_1)
   sub_80861B8(param_1,0xe,0);
   iVar1 = 0xa000;
   iVar2 = 0x200;
-  sub_8083E38(0x1f8);
+  PlaySoundEffect(0x1f8);
   while( 1 ) {
     iVar1 = iVar1 - iVar2;
     if (iVar1 < 0x1800) {
@@ -183,13 +183,13 @@ void sub_808BC20(struct unkDungeon_8041D5C * param_1)
 {
   s32 uVar1;
   
-  sub_8083E38(0x298);
+  PlaySoundEffect(0x298);
   for(uVar1 = 0; uVar1 < 0x19; uVar1++){
     sub_8085918(param_1,uVar1 & 7);
     sub_803E708(3,0x46);
   }
   param_1->unk70->unk15E = 1;
-  sub_8083E38(0x27f);
+  PlaySoundEffect(0x27f);
   sub_80861F8(99,param_1,1);
 }
 
@@ -200,9 +200,9 @@ void JirachiWishGrantDialogue(struct unkDungeon_8041D5C *param_1)
   param_1->unk70->unk15D = 1;
   // Nnnnnnnnnn!
   sub_8052910(&gUnknown_81058A8);
-  sub_8083E38(0x375);
+  PlaySoundEffect(0x375);
   sub_80861F8(0x67,param_1,1);
-  sub_8083E38(0x2a8);
+  PlaySoundEffect(0x2a8);
   uVar2 = sub_80861F8(0x68,param_1,0);
   // Taaaaaaaah!
   sub_8052910(&gUnknown_81058C4);
@@ -329,7 +329,7 @@ void LugiaPreFightDialogue(void)
     sub_8052910(&gUnknown_8105F38);
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_8105F74);
-    sub_8083E38(0x1f8);
+    PlaySoundEffect(0x1f8);
     sub_80861D4(uVar3,0xd,0);
     sub_803E708(0x2b,0x46);
     sub_80861B8(uVar3,0,0);
@@ -352,7 +352,7 @@ void sub_808BFA0(void)
 {
   s32 iVar1;
 
-  sub_8083E38(0x1f6);
+  PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     sub_8085C54(0,0,iVar1,1,1);
     sub_803E46C(0x46);
@@ -375,7 +375,7 @@ void sub_808C02C(void)
 {
   s32 iVar1;
 
-  sub_8083E38(0x1f6);
+  PlaySoundEffect(0x1f6);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
     sub_8085C54(iVar1,iVar1,iVar1,1,0);
@@ -460,7 +460,7 @@ void KyogrePreFightDialogue(void)
   sub_8083F14();
   if (HasRecruitedMon(SPECIES_KYOGRE)) {
     sub_8083EA8(0x23,0x3c);
-    sub_808696C(iVar2);
+    SpriteLookAroundEffect(iVar2);
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_81062A8);
     sub_803E708(10,0x46);
@@ -480,14 +480,14 @@ void KyogrePreFightDialogue(void)
     sub_808C360();
     // My duels agaisnt $m3 (Groudon) left us both exhausted
     sub_8052910(&gUnknown_8106140);
-    sub_808C2D4();
+    KyogreScreenFlash();
     // I am $m2 (Kyogre)!
     // The lord of the sea!
     sub_8052910(&gUnknown_8106214);
-    sub_808C2D4();
+    KyogreScreenFlash();
     // Witness the destructive force of my waves!
     sub_8052910(&gUnknown_8106244);
-    sub_808C2D4();
+    KyogreScreenFlash();
     // Marvel at my awesome
     // power!
     sub_8052910(&gUnknown_810627C);
@@ -502,11 +502,11 @@ void nullsub_99(void)
 {
 }
 
-void sub_808C2D4(void)
+void KyogreScreenFlash(void)
 {
   s32 iVar1;
 
-  sub_8083E38(0x1f8);
+  PlaySoundEffect(0x1f8);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     sub_8085C54(0,0,iVar1,1,1);
     sub_803E46C(0x46);
@@ -532,7 +532,7 @@ void sub_808C360(void)
   sub_803E9D0();
   sub_803E46C(0x46);
   gUnknown_203B418->unk7 = 0;
-  sub_808C2D4();
+  KyogreScreenFlash();
 }
 
 void sub_808C3A0(void)
@@ -593,7 +593,7 @@ void sub_808C4C4(void)
 {
   s32 iVar1;
   
-  sub_8083E38(0x2c1);
+  PlaySoundEffect(0x2c1);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     sub_8085C54(iVar1,0,0,1,1);
     sub_803E46C(0x46);
@@ -675,14 +675,14 @@ void CelebiJoinDialogue(void)
   if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(local_1c) == '\0')) 
   {
     sub_8068FE0(local_1c,0x21c,0);
-    sub_808696C(uVar2);
+    SpriteLookAroundEffect(uVar2);
     sub_803E708(10,0x46);
     // .........
     sub_8052910(&gUnknown_810663C);
   }
   else 
   {
-    sub_808696C(uVar2);
+    SpriteLookAroundEffect(uVar2);
     sub_803E708(10,0x46);
     sub_80862BC(uVar2);
     sub_803E708(10,0x46);
@@ -695,12 +695,12 @@ void CelebiJoinDialogue(void)
     sub_8086598();
     // The Time-Traveling Pokemon $m2 (Celebi)!
     sub_8052910(&gUnknown_8106400);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(local_1c,10,0);
     sub_803E708(0x14,0x46);
     sub_806CE68(local_1c,0);
     sub_803E708(4,0x46);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(local_1c,10,0);
     sub_8052910(&gUnknown_810643C);
     sub_803E708(10,0x46);
@@ -718,17 +718,17 @@ void CelebiJoinDialogue(void)
             if (menuChoice == 1) 
             {
                 sub_8083F14();
-                sub_8083E38(0xcc);
+                PlaySoundEffect(0xcc);
                 while (sub_8083E74(0xcc) != 0) {
                     sub_803E46C(0x46);
                 }
                 sub_8083E88(0x7f);
-                sub_8083E38(0x1c7);
+                PlaySoundEffect(0x1c7);
                 sub_80861D4(local_1c,0xd,0);
                 sub_803E708(0x37,0x46);
-                sub_8083E38(0x1d5);
+                PlaySoundEffect(0x1d5);
                 sub_803E708(0x1a,0x46);
-                sub_8083E38(0x1d5);
+                PlaySoundEffect(0x1d5);
                 sub_803E708(0x1c,0x46);
                 sub_8052910(&gUnknown_8106468);
                 sub_803E708(10,0x46);
@@ -736,12 +736,12 @@ void CelebiJoinDialogue(void)
                 sub_8083E88(0x7f);
                 sub_8052910(&gUnknown_810648C);
                 sub_803E708(10,0x46);
-                sub_8083E38(0x1c7);
+                PlaySoundEffect(0x1c7);
                 sub_80861D4(local_1c,0xd,0);
                 sub_803E708(0x37,0x46);
-                sub_8083E38(0x1d5);
+                PlaySoundEffect(0x1d5);
                 sub_803E708(0x1a,0x46);
-                sub_8083E38(0x1d5);
+                PlaySoundEffect(0x1d5);
                 sub_803E708(0x1b,0x46);
                 sub_8052910(&gUnknown_81064BC);
                 sub_803E708(10,0x46);
@@ -815,7 +815,7 @@ void CelebiJoinDialogue(void)
 	"\tmovs r2, 0\n"
 	"\tbl sub_8068FE0\n"
 	"\tadds r0, r7, 0\n"
-	"\tbl sub_808696C\n"
+	"\tbl SpriteLookAroundEffect\n"
 	"\tmovs r0, 0xA\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
@@ -826,7 +826,7 @@ void CelebiJoinDialogue(void)
 "_0808C67C: .4byte gUnknown_810663C\n"
 "_0808C680:\n"
 	"\tadds r0, r7, 0\n"
-	"\tbl sub_808696C\n"
+	"\tbl SpriteLookAroundEffect\n"
 	"\tmovs r0, 0xA\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
@@ -848,7 +848,7 @@ void CelebiJoinDialogue(void)
 	"\tbl sub_8052910\n"
 	"\tldr r4, _0808C724\n"
 	"\tadds r0, r4, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tldr r0, [sp]\n"
 	"\tmovs r1, 0xA\n"
 	"\tmovs r2, 0\n"
@@ -863,7 +863,7 @@ void CelebiJoinDialogue(void)
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tadds r0, r4, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tldr r0, [sp]\n"
 	"\tmovs r1, 0xA\n"
 	"\tmovs r2, 0\n"
@@ -908,7 +908,7 @@ void CelebiJoinDialogue(void)
 	"\tbne _0808C824\n"
 	"\tbl sub_8083F14\n"
 	"\tmovs r0, 0xCC\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tb _0808C76E\n"
 	"\t.align 2, 0\n"
 "_0808C75C: .4byte gPtrPurityForestAllowCelebiToJoinText\n"
@@ -926,7 +926,7 @@ void CelebiJoinDialogue(void)
 	"\tmovs r0, 0x7F\n"
 	"\tbl sub_8083E88\n"
 	"\tmov r0, r8\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tldr r0, [sp]\n"
 	"\tmovs r1, 0xD\n"
 	"\tmovs r2, 0\n"
@@ -935,12 +935,12 @@ void CelebiJoinDialogue(void)
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tadds r0, r6, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tmovs r0, 0x1A\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tadds r0, r6, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tmovs r0, 0x1C\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
@@ -961,7 +961,7 @@ void CelebiJoinDialogue(void)
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tmov r0, r8\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tldr r0, [sp]\n"
 	"\tmovs r1, 0xD\n"
 	"\tmovs r2, 0\n"
@@ -970,12 +970,12 @@ void CelebiJoinDialogue(void)
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tadds r0, r6, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tmovs r0, 0x1A\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
 	"\tadds r0, r6, 0\n"
-	"\tbl sub_8083E38\n"
+	"\tbl PlaySoundEffect\n"
 	"\tmovs r0, 0x1B\n"
 	"\tmovs r1, 0x46\n"
 	"\tbl sub_803E708\n"
@@ -1073,7 +1073,7 @@ void sub_808C8E0(struct unkDungeon_8041D5C *param_1)
 {
   s32 iVar1;
 
-  sub_8083E38(0x1a5);
+  PlaySoundEffect(0x1a5);
   sub_806CDD4(param_1, 0, 0);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
     param_1->unk70->unk174 = iVar1 << 8;
@@ -1149,7 +1149,7 @@ void MedichamResuceDialogue(void)
     s32 counter;
 
     temp = sub_8085680(7);
-    sub_808696C();
+    SpriteLookAroundEffect(temp);
     sub_803E708(0xA, 0x46);
     // Oh my I can't seem to find a way out...
     sub_8052910(&gUnknown_8106778);
@@ -1167,12 +1167,12 @@ void MedichamResuceDialogue(void)
     sub_80869E4(temp, 4, 2, 0);
     sub_8052910(&gUnknown_81067E0);
     sub_803E708(0xA, 0x46);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(temp, 0xA, 0);
     sub_803E708(0x14, 0x46);
     sub_806CE68(temp, 0);
     sub_803E708(0x4, 0x46);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(temp, 0xA, 0);
     sub_803E708(0x14, 0x46);
     // Yes Yes
@@ -1237,7 +1237,7 @@ void SmeargleRescueDialogue(void)
     s32 counter;
 
     temp = sub_8085680(0x1F);
-    sub_808696C();
+    SpriteLookAroundEffect(temp);
     sub_803E708(0xA, 0x46);
     // Ohhh...
     // I've lost my bearings
@@ -1259,12 +1259,12 @@ void SmeargleRescueDialogue(void)
     // Oh! You are?
     sub_8052910(&gUnknown_8106918);
     sub_803E708(0xA, 0x46);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(temp, 0xA, 0);
     sub_803E708(0x14, 0x46);
     sub_806CE68(temp, 0);
     sub_803E708(0x4, 0x46);
-    sub_8083E38(0x1c7);
+    PlaySoundEffect(0x1c7);
     sub_806CDD4(temp, 0xA, 0);
     sub_803E708(0x14, 0x46);
     // Did you maybe come to rescue me?

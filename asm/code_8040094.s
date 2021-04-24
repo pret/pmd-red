@@ -1782,7 +1782,7 @@ _08040EF0:
 	beq _08040F2A
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8083E38
+	bl PlaySoundEffect
 _08040F2A:
 	ldr r1, [sp, 0x18]
 	cmp r1, 0x63

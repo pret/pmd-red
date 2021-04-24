@@ -68,7 +68,6 @@ extern void sub_8097790();
 extern struct unkStruct_8095228 *sub_8095228(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-void sub_808D8E0(u8 *, u32);
 extern u32 sub_802F298();
 extern void sub_802F2C0();
 extern u32 sub_8011C34();
@@ -101,7 +100,6 @@ extern const char gUnknown_80DFB14[];
 extern const char gUnknown_80DF9F0[];
 extern const char gUnknown_80DF9F8[];
 extern u8 sub_80023E4(u32);
-extern char * GetMonSpecies(u32);
 
 u32 sub_802B2D4(void)
 {
@@ -113,7 +111,7 @@ u32 sub_802B2D4(void)
   gUnknown_203B2C8 = MemoryAlloc(0x140,8);
   MemoryFill8((u8 *)gUnknown_203B2C8,0,0x140);
   gUnknown_203B2C8->unk1 = -1;
-  sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
   gUnknown_203B2C8->faceFile = faceFile;
   gUnknown_203B2C8->faceData  = faceFile->data;
@@ -243,7 +241,7 @@ void sub_802B57C(void)
 
   if (sub_802F298() == 3) {
     sub_802F2C0();
-    sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+    CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
     monName = GetMonSpecies(SPECIES_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
     sub_802B548(2);

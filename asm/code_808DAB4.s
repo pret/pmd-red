@@ -1430,8 +1430,8 @@ _0808E8C4:
 	bx r1
 	thumb_func_end sub_808E858
 
-	thumb_func_start sub_808E8C8
-sub_808E8C8:
+	thumb_func_start GetUnownIndex
+GetUnownIndex:
 	push {lr}
 	lsls r0, 16
 	asrs r1, r0, 16
@@ -1579,7 +1579,7 @@ _0808E9B0:
 _0808E9B2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808E8C8
+	thumb_func_end GetUnownIndex
 
 	thumb_func_start sub_808E9B8
 sub_808E9B8:

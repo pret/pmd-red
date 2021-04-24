@@ -831,7 +831,7 @@ gUnknown_81161E8: @ 81161E8
 @ replacing .incbin "baserom.gba", 0x001161e8, 0x10
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_801641C
+        .4byte CleanFelicityBank
         .4byte sub_80163A0
 
 	.global gUnknown_81161F8

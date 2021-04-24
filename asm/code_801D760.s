@@ -4308,11 +4308,11 @@ sub_801FB50:
 	ldr r0, _0801FBC4
 	ldr r4, _0801FBC8
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r5, _0801FBCC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	adds r0, r4, 0
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -8314,8 +8314,8 @@ _08021B94:
 	bx r1
 	thumb_func_end sub_8021B58
 
-	thumb_func_start sub_8021B9C
-sub_8021B9C:
+	thumb_func_start CreateWigglytuffShop
+CreateWigglytuffShop:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl ResetUnusedInputStruct
@@ -8335,11 +8335,11 @@ sub_8021B9C:
 	str r4, [r0]
 	ldr r0, _08021BFC
 	movs r1, 0x28
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r4, _08021C00
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	movs r0, 0x28
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -8401,7 +8401,7 @@ _08021C0E:
 	bx r1
 	.align 2, 0
 _08021C58: .4byte gUnknown_203B290
-	thumb_func_end sub_8021B9C
+	thumb_func_end CreateWigglytuffShop
 
 	thumb_func_start sub_8021C5C
 sub_8021C5C:
@@ -8510,7 +8510,7 @@ sub_8021D44:
 	ldr r1, [r1]
 	str r0, [r1, 0x4]
 	bl sub_8021D5C
-	bl sub_8021E0C
+	bl UpdateWigglytuffDialogue
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8607,8 +8607,8 @@ _08021E04: .4byte gUnknown_203B290
 _08021E08: .4byte gUnknown_80DC534
 	thumb_func_end sub_8021D5C
 
-	thumb_func_start sub_8021E0C
-sub_8021E0C:
+	thumb_func_start UpdateWigglytuffDialogue
+UpdateWigglytuffDialogue:
 	push {r4,lr}
 	sub sp, 0x20
 	ldr r1, _08021E28
@@ -9183,7 +9183,7 @@ _080222B6:
 	.align 2, 0
 _080222C0: .4byte gWigglytuffDialogue
 _080222C4: .4byte 0x0000010d
-	thumb_func_end sub_8021E0C
+	thumb_func_end UpdateWigglytuffDialogue
 
 	thumb_func_start sub_80222C8
 sub_80222C8:
@@ -11542,7 +11542,7 @@ _08023532:
 _08023594:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_808DCA0
+	bl GetDexInternalNo
 	lsls r0, 16
 	asrs r4, r0, 16
 	adds r0, r4, 0
@@ -11794,12 +11794,12 @@ _08023788:
 	ldrsh r0, [r6, r1]
 	movs r1, 0x1
 	str r2, [sp]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	movs r1, 0x1
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp]
@@ -11868,12 +11868,12 @@ _08023810:
 	ldrsh r0, [r6, r1]
 	movs r1, 0
 	str r2, [sp]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	movs r1, 0
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp]
@@ -13225,7 +13225,7 @@ _0802425E:
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	str r2, [sp, 0x8]
-	bl sub_808DCFC
+	bl GetInternalNo
 	adds r4, r0, 0
 	mov r0, r9
 	ldr r1, [r0]
@@ -13237,7 +13237,7 @@ _0802425E:
 	adds r1, r0
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
-	bl sub_808DCFC
+	bl GetInternalNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp, 0x8]
@@ -13316,7 +13316,7 @@ _08024306:
 	ldrsh r0, [r1, r3]
 	movs r1, 0
 	str r2, [sp, 0x8]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	mov r0, r9
 	ldr r1, [r0]
@@ -13329,7 +13329,7 @@ _08024306:
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	movs r1, 0
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp, 0x8]

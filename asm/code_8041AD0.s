@@ -554,7 +554,7 @@ _08042694:
 	subs r4, 0x1
 _080426AC:
 	adds r0, r4, 0
-	bl sub_8083E38
+	bl PlaySoundEffect
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -581,7 +581,7 @@ _080426D8:
 	lsls r1, r4, 1
 	adds r1, r0
 	ldrh r0, [r1]
-	bl sub_8083E38
+	bl PlaySoundEffect
 	b _080426FC
 	.align 2, 0
 _080426EC: .4byte gUnknown_80F67DC
@@ -590,7 +590,7 @@ _080426F0:
 	lsls r1, r4, 1
 	adds r1, r0
 	ldrh r0, [r1]
-	bl sub_8083E38
+	bl PlaySoundEffect
 _080426FC:
 	adds r0, r5, 0
 	adds r1, r4, 0

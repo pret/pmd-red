@@ -2,23 +2,7 @@
 #include "file_system.h"
 #include "code_800558C.h"
 #include "code_800B540.h"
-
-struct UnkTextStruct1 {
-    u8 fill00[4];
-    u16 unk04;
-    u8 fill06[2];
-    u16 unk08;
-    u8 fill04[0x3c];
-    u8 unk46;
-};
-
-struct UnkTextStruct2 {
-    u8 fill00[0x0c];
-    s16 unk0c;
-    u8 fill0e[2];
-    s16 unk10;
-    u8 fill12[0x06];
-};
+#include "text.h"
 
 extern char gUnknown_3000E94[];
 
@@ -37,13 +21,6 @@ EWRAM_DATA u32 gUnknown_202B028[2];
 EWRAM_DATA u32 gUnknown_202B030;
 EWRAM_DATA u8 gUnknown_202B034;
 EWRAM_DATA u16 gUnknown_202B038[2][32][32];
-
-u32 xxx_update_some_bg_tiles(u32 a0);
-void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3);
-void sub_8006554(void *a0, void *a1, void *a2, void *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, u32 *a8, u32 a9);
-void sub_800898C(void);
-void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
-void sub_8009388(void);
 
 extern const struct UnkTextStruct2 gUnknown_80B857C[4];
 extern const char gKanjiA_file_string[];
@@ -158,7 +135,7 @@ void sub_80063D8(int a0)
     gUnknown_202B030 = retval;
 }
 
-void sub_800641C(void *a0, u8 a1, u8 a2)
+void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2)
 {
     u32 r3 = 0;
     sub_8006438(a0, a1, a2, &r3);

@@ -927,11 +927,11 @@ _0808F488:
 	bne _0808F49C
 	movs r0, 0x41
 	adds r1, r7, 0
-	bl sub_808DD48
+	bl GetPokemonEvolveConditions
 	b _0808F4A2
 _0808F49C:
 	adds r1, r7, 0
-	bl sub_808DD48
+	bl GetPokemonEvolveConditions
 _0808F4A2:
 	ldrh r0, [r7, 0x2]
 	cmp r0, 0
@@ -974,7 +974,7 @@ _0808F4E0:
 	asrs r0, 16
 	str r0, [sp, 0x1C]
 	adds r1, r7, 0
-	bl sub_808DD48
+	bl GetPokemonEvolveConditions
 	ldrh r0, [r7, 0x2]
 	cmp r0, 0
 	bne _0808F4FA

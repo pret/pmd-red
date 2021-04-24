@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "main_menu.h"
+#include "gUnknown_203B460.h"
 
 struct unkData
 {
@@ -67,12 +68,7 @@ struct unkStruct_8035D94
 
 extern struct unkStruct_8035D94 *sub_8035D94();
 
-struct unkStruct_203B460
-{
-    u8 unk0[0x50];
-    u16 unk50[10];
-};
-extern struct unkStruct_203B460 *gUnknown_203B460; // TODO unify this
+extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern void sub_8037400(void);
 extern void sub_800641C(void *, u32, u32);

@@ -18,7 +18,7 @@ extern u8 sub_8042768(struct unkDungeon_8041D5C *r0);
 extern void sub_806CDD4(struct unkDungeon_8041D5C *r0, u8, u32);
 extern u8 sub_8071858(struct unkDungeon_8041D5C *r0, u8);
 extern u32 sub_806F62C(u32);
-extern void sub_8083E38(u32);
+extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(struct unkDungeon_8041D5C *r0);
 extern void sub_8041550(struct unkDungeon_8041D5C *r0, u32, u32, u32, u32, u32);
 
@@ -650,32 +650,32 @@ void sub_80421AC(u32 r0, struct unkDungeon_8041D5C * r1)
 void sub_80421C0(struct unkDungeon_8041D5C *r0, u16 r1)
 {
     if(r0 == NULL)
-        sub_8083E38(r1);
+        PlaySoundEffect(r1);
     else
         if(sub_8042768(r0) != 0)
-            sub_8083E38(r1);
+            PlaySoundEffect(r1);
 }
 
 void sub_80421EC(struct unkDungeon_8041D5C *r0, u16 r1)
 {
     if(sub_803F428(r0) != 0)
-        sub_8083E38(r1);
+        PlaySoundEffect(r1);
 }
 
 void sub_8042208(struct unkDungeon_8041D5C *r0, u8 r1)
 {
     if(r1 == 0)
-        sub_8083E38(0xA9 << 1);
+        PlaySoundEffect(0x152);
     else if(r1 == 1)
-        sub_8083E38(0x151);
+        PlaySoundEffect(0x151);
     else
-        sub_8083E38(0xA8 << 1);
+        PlaySoundEffect(0x150);
 }
 
 void sub_8042238(u32 r0, struct unkDungeon_8041D5C *r1)
 {
     if(r1->unk70->unk6 != 0)
-        sub_8083E38(0x157);
+        PlaySoundEffect(0x157);
     else
-        sub_8083E38(0xAB << 1);
+        PlaySoundEffect(0x156);
 }

@@ -1,17 +1,11 @@
 #include "global.h"
 #include "input.h"
 #include "trade_items_menu.h"
+#include "gUnknown_203B460.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
-struct unkStruct_203B460
-{
-    u8 unk0[0x50];
-    u16 unk50[10];
-};
-
-
-extern struct unkStruct_203B460 *gUnknown_203B460; // TODO unify this
+extern struct unkStruct_203B460 *gUnknown_203B460;
 extern u32 gUnknown_202DE30;
 extern u32 gUnknown_202DE58;
 extern struct unkData gUnknown_80E6174;

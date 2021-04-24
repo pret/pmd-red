@@ -60,7 +60,7 @@ JirachiWish:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808B848
-	bl sub_8083E38
+	bl PlaySoundEffect
 	movs r0, 0x96
 	movs r1, 0x46
 	bl sub_803E708
@@ -78,14 +78,14 @@ JirachiWish:
 	bl sub_80856E0
 	movs r0, 0xB5
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r0, _0808B850
 	bl sub_8052910
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	adds r0, r6, 0
-	bl sub_808696C
+	bl SpriteLookAroundEffect
 	ldr r0, _0808B854
 	bl sub_8052910
 	movs r0, 0xA
@@ -165,7 +165,7 @@ _0808B6D2:
 	beq _0808B744
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	adds r0, r7, 0
 	bl sub_808BB3C
 	adds r0, r6, 0
@@ -249,7 +249,7 @@ _0808B77E:
 	beq _0808B7FA
 	movs r0, 0xC8
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	adds r0, r7, 0
 	bl sub_808BB3C
 	adds r0, r6, 0
@@ -320,7 +320,7 @@ _0808B87C:
 	adds r0, r4, 0
 	bl UnlockFriendArea
 	movs r0, 0xD4
-	bl sub_8083E38
+	bl PlaySoundEffect
 	bl sub_8083600
 	adds r1, r0, 0
 	ldr r0, _0808BA3C
@@ -399,7 +399,7 @@ _0808B8F4:
 	beq _0808B970
 	movs r0, 0xC8
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	adds r0, r7, 0
 	bl sub_808BB3C
 	adds r0, r6, 0
@@ -534,7 +534,7 @@ sub_808BAA4:
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _0808BB34
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r1, _0808BB38
 	movs r0, 0x1F
 	str r0, [r1]

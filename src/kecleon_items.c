@@ -1,0 +1,169 @@
+#include "global.h"
+#include "file_system.h"
+#include "pokemon.h"
+#include "constants/species.h"
+
+struct unkStruct_203B210
+{
+    // size: 0x148
+    u32 unk0;
+    u8 unk4;
+    u8 fill5[3];
+    u32 unk8;
+    u8 fillC[0x28 - 0xC];
+    u32 unk28;
+    u32 unk2C;
+    u32 unk30;
+    u8 fill34[0xD4 - 0x34];
+    struct OpenedFile *unkD4;
+    u8 *unkD8;
+    u16 unkDC;
+    u16 unkDE;
+    u8 unkE0;
+    u8 unkE1;
+    u8 unkE2;
+    u8 unkE3;
+    struct OpenedFile **unkE4;
+};
+extern struct unkStruct_203B210 *gUnknown_203B210;
+extern u8 gUnknown_202E5D8[];
+extern u8 gUnknown_202E1C8[];
+
+extern void *MemoryAlloc(u32, u32);
+extern void MemoryFree(void *);
+void UpdateKecleonStoreState(u32);
+
+extern void sub_8019730();
+extern void sub_80199CC();
+extern void sub_8019B08();
+extern void sub_8019BBC();
+extern void sub_8019C78();
+extern void sub_8019850();
+extern void sub_80198E8();
+extern void sub_8019944();
+extern void sub_8019D30();
+extern void sub_8019D4C();
+extern void sub_8019D68();
+extern void sub_8018D30();
+extern void sub_8018E88();
+
+u32 DisplayKeckleonDialogueSprite(u32 param_1)
+{
+  char *monName;
+  struct OpenedFile *faceFile;
+  
+  gUnknown_203B210 = MemoryAlloc(0x148,8);
+  gUnknown_203B210->unk28 = 0;
+  gUnknown_203B210->unk2C = 0;
+  gUnknown_203B210->unk30 = 0;
+  gUnknown_203B210->unk0 = param_1;
+  switch(param_1)
+  {
+      case 0:
+        gUnknown_203B210->unk4 = 1;
+        gUnknown_203B210->unkE4 = &gUnknown_203B210->unkD4;
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
+        monName = GetMonSpecies( SPECIES_KECLEON);
+        strcpy(gUnknown_202E1C8 - 0x50, monName);
+        break;
+      case 1:
+        gUnknown_203B210->unk4 = 1;
+        gUnknown_203B210->unkE4 = 0;
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
+        monName = GetMonSpecies( SPECIES_KECLEON);
+        strcpy(gUnknown_202E1C8 - 0x50, monName);
+        break;
+      case 2:
+        gUnknown_203B210->unk4 = 0;
+        gUnknown_203B210->unkE4 = &gUnknown_203B210->unkD4;
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
+        monName = GetMonSpecies( SPECIES_KECLEON);
+        strcpy(gUnknown_202E1C8 - 0x50, monName);
+        break;
+      case 3:
+        gUnknown_203B210->unk4 = 0;
+        gUnknown_203B210->unkE4 = 0;
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
+        monName = GetMonSpecies( SPECIES_KECLEON);
+        strcpy(gUnknown_202E1C8 - 0x50, monName);
+        break;
+      default:
+        break;
+  }
+  faceFile = GetDialogueSpriteDataPtr(SPECIES_KECLEON);
+  gUnknown_203B210->unkD4 = faceFile;
+  gUnknown_203B210->unkD8 = faceFile->data;
+  gUnknown_203B210->unkE0 = 0;
+  gUnknown_203B210->unkE1 = 0;
+  gUnknown_203B210->unkE2 = 0;
+  gUnknown_203B210->unkDC = 2;
+  gUnknown_203B210->unkDE = 8;
+  UpdateKecleonStoreState(0);
+  return 1;
+}
+
+u32 sub_8018C04(void)
+{
+  switch(gUnknown_203B210->unk8) {
+    case 0:
+    case 1:
+        sub_8019730();
+        break;
+    case 0x12:
+    case 0x13:
+        sub_80199CC();
+        break;
+    case 0x1a:
+    case 0x1b:
+        sub_8019B08();
+        break;
+    case 0x14:
+        sub_8019BBC();
+        break;
+    case 0x1c:
+        sub_8019C78();
+        break;
+    case 0x16:
+        sub_8019850();
+        break;
+    case 0x1e:
+        sub_80198E8();
+        break;
+    case 0x1f:
+        sub_8019944();
+        break;
+    case 0x15:
+        sub_8019D30();
+        break;
+    case 0x1d:
+        sub_8019D4C();
+        break;
+    case 4:
+        return 3;
+    default:
+        sub_8019D68();
+        break;
+  }
+  return 0;
+}
+
+void sub_8018CF0(void)
+{
+    if(gUnknown_203B210 != NULL)
+    {
+        CloseFile(gUnknown_203B210->unkD4);
+        MemoryFree(gUnknown_203B210);
+        gUnknown_203B210 = NULL;
+    }
+}
+
+void UpdateKecleonStoreState(u32 newState)
+{
+    gUnknown_203B210->unk8 = newState;
+    sub_8018D30();
+    sub_8018E88();
+}

@@ -55,14 +55,19 @@ struct gPokemon
     /* 0x33 */ bool8 unk33;
     /* 0x34 */ struct EvolveStruct1 pre;
     /* 0x38 */ struct EvolveNeeds need;
-    /* 0x3C */ s16 unk3C[2]; // dexNo and internalNo
+    /* 0x3C */ s16 dexInternal[2]; // dexNo and internalNo
     /* 0x40 */ s16 base_recruit;
-    /* 0x42 */ s16 unk42[2]; // alphabetNo and parentNo
+    /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
 };
+
+void CopySpeciesNametoBuffer(u8 * buffer, s16 index);
+void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index);
+void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index);
 
 u8 *GetCategoryString(s16 index);
 u8 GetPokemonSize(s16 index);
 u8 GetShadowSize(s16 index);
+char * GetMonSpecies(s16 index);
 s32 GetMoveSpeed(s16 index);
 u8 GetWalkableTiles(s16 index);
 u8 GetUnk1B(s16 index);
@@ -79,12 +84,12 @@ u16 GetPokemonAttSpatt(s16 index, u32 r1);
 u16 GetPokemonDefSpdef(s16 index, u32 r1);
 u8 GetPokemonType(s32 index, u32 typeIndex);;
 u8 GetPokemonAbility(s16 index, u32 abilityIndex);
-s16 sub_808DCA0(s16 index, u32 r1);
+s16 GetDexInternalNo(s16 index, u32 r1);
 s16 GetBaseRecruit(s16 index);
-s16 sub_808DCDC(s16 index, s32 r1);
-s16 sub_808DCFC(s16 index);
+s16 GetAlphabetParentNo(s16 index, s32 r1);
+s16 GetInternalNo(s16 index);
 u32 CalculateEXPGain(s16 index, s32 level);
-s16 sub_808DD48(s16 index, struct unkEvolve *r1);
+s16 GetPokemonEvolveConditons(s16 index, struct unkEvolve *r1);
 u8 GetPokemonOverworldPalette(s16 index, u32 r1);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
 struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);

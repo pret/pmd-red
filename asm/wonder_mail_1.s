@@ -591,7 +591,7 @@ sub_802AB98:
 	movs r4, 0x98
 	lsls r4, 1
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	adds r0, r4, 0
 	bl GetMonSpecies
 	adds r1, r0, 0

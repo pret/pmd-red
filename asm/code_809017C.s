@@ -432,7 +432,7 @@ _0809048E:
 	beq _0809054E
 	ldr r0, _080904B0
 	adds r1, r2, 0
-	bl sub_808D908
+	bl CopyCyanSpeciesNametoBuffer
 	cmp r5, 0x3
 	ble _080904D2
 	mov r0, r8

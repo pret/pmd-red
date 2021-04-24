@@ -92,7 +92,7 @@ _080392FC:
 	beq _0803936C
 	b _08039382
 _08039306:
-	bl sub_8039844
+	bl IsQuickSave
 	lsls r0, 24
 	cmp r0, 0
 	beq _08039324

@@ -6638,7 +6638,7 @@ _08045E40:
 	bne _08045E7C
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl sub_80915D4
 	bl sub_80913A0
@@ -6825,7 +6825,7 @@ _08045FAC:
 	bl sub_80461C8
 	movs r0, 0xA5
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	mov r3, sp
 	adds r0, r3, r4
 	ldr r0, [r0]
@@ -6902,7 +6902,7 @@ _0804605C: .4byte gUnknown_80F8F54
 _08046060:
 	movs r0, 0xA5
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	lsls r0, r4, 2
 	add r0, sp
 	ldr r0, [r0]
@@ -8728,7 +8728,7 @@ _08046E1E:
 	movs r1, 0x41
 	bl sub_803E708
 	movs r0, 0xD4
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r0, _08046EFC
 	ldr r1, [r0]
 	movs r0, 0
@@ -10235,7 +10235,7 @@ _08047A4C:
 	bl _080482BA
 _08047A76:
 	ldr r0, _08047AAC
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r0, _08047AB0
 	adds r1, r7, 0
 	bl sub_8045BF8
