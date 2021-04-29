@@ -751,7 +751,7 @@ _080A7D7E:
 	negs r0, r0
 	b _080A7DD4
 	.align 2, 0
-_080A7D84: .4byte gUnknown_203B45C
+_080A7D84: .4byte gRecruitedPokemonRef
 _080A7D88:
 	ldrb r1, [r4]
 	movs r0, 0x1
@@ -893,7 +893,7 @@ _080A7E78:
 	ldrh r0, [r0, 0x8]
 	b _080A800A
 	.align 2, 0
-_080A7E8C: .4byte gUnknown_203B45C
+_080A7E8C: .4byte gRecruitedPokemonRef
 _080A7E90:
 	adds r0, r3, 0
 	subs r0, 0xE
@@ -958,7 +958,7 @@ _080A7F06:
 	ldrh r0, [r4, 0x8]
 	b _080A800A
 	.align 2, 0
-_080A7F0C: .4byte gUnknown_203B45C
+_080A7F0C: .4byte gRecruitedPokemonRef
 _080A7F10:
 	ldrb r1, [r4]
 	movs r0, 0x1
@@ -2937,7 +2937,7 @@ _080A8DDE:
 	adds r0, r1
 	b _080A8E94
 	.align 2, 0
-_080A8DF4: .4byte gUnknown_203B45C
+_080A8DF4: .4byte gRecruitedPokemonRef
 _080A8DF8:
 	adds r0, r1, 0
 	subs r0, 0xE
@@ -2993,7 +2993,7 @@ _080A8DF8:
 	adds r0, r4, 0
 	b _080A8E94
 	.align 2, 0
-_080A8E6C: .4byte gUnknown_203B45C
+_080A8E6C: .4byte gRecruitedPokemonRef
 _080A8E70:
 	ldrb r1, [r4]
 	movs r0, 0x1

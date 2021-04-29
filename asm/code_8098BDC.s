@@ -5965,7 +5965,7 @@ _0809BE60:
 	bl sub_809B294
 	movs r0, 0x98
 	lsls r0, 1
-	bl sub_80314B4
+	bl CreateHelperPelipperMenu
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809BE84
@@ -6175,7 +6175,7 @@ _0809BFFC:
 	ands r4, r0
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakhuitaShop
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C032
@@ -6222,7 +6222,7 @@ _0809C072:
 _0809C082:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakhuitaShop
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0A8
@@ -6256,7 +6256,7 @@ _0809C0B8:
 _0809C0C8:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakhuitaShop
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0F0
@@ -6287,7 +6287,7 @@ _0809C0FC:
 _0809C10C:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakhuitaShop
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C134
@@ -6715,7 +6715,7 @@ sub_809C478:
 	cmp r0, 0x3
 	bne _0809C492
 	ldr r0, _0809C4AC
-	bl sub_8011988
+	bl PlaySound
 	bl InitFlash
 	bl ClearFlashData
 _0809C492:

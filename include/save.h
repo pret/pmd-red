@@ -66,7 +66,7 @@ s32 sub_8011C34(void);
 void sub_8011C40(s32 in);
 char *sub_8011C4C(void);
 void sub_8011CA8(u32 *out, s32 size);
-u32 sub_8011DAC(u32 *a);
+u32 ReadSaveFromPak(u32 *a);
 u32 sub_8011F9C(s32 *r0, u8 *dest, s32 size);
 bool8 IsSaveCorrupted(void);
 void sub_8012284(void);

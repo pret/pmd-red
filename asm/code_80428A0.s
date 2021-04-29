@@ -2713,7 +2713,7 @@ _080440D0:
 	bl sub_8092AD4
 	b _080440F8
 	.align 2, 0
-_080440E4: .4byte gUnknown_203B45C
+_080440E4: .4byte gRecruitedPokemonRef
 _080440E8: .4byte 0x03e60000
 _080440EC: .4byte 0x000003e7
 _080440F0:
@@ -2825,7 +2825,7 @@ _080441A4:
 _080441AC: .4byte gUnknown_203B418
 _080441B0: .4byte 0x00000644
 _080441B4: .4byte gUnknown_203B460
-_080441B8: .4byte gUnknown_203B45C
+_080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 
 	thumb_func_start sub_80441BC

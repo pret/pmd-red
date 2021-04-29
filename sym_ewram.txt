@@ -885,7 +885,7 @@ gMonsterParametersFile = .; /* 202F3E4 */
 gUnknown_202F3E8 = .; /* 202F3E8 */
 	. += 0x18;
 
-gUnknown_202F400 = .; /* 202F400 */
+gRecruitedPokemon = .; /* 202F400 */
 	. += 0x90E8;
 
 gLevelCurrentPokeId = .; /* 20384E8 */

@@ -199,7 +199,7 @@ _080007CC:
 	bhi _080007EC
 	add r0, sp, 0x4
 	movs r1, 0x1
-	bl sub_801203C
+	bl WriteSavetoPak
 	adds r4, r0, 0
 	b _080007EE
 _080007EC:
@@ -1549,7 +1549,7 @@ _08001298:
 	bx r0
 	.align 2, 0
 _080012B8: .4byte gUnknown_203B460
-_080012BC: .4byte gUnknown_203B45C
+_080012BC: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8001248
 
 	thumb_func_start sub_80012C0
@@ -1608,7 +1608,7 @@ _08001306:
 	bx r0
 	.align 2, 0
 _08001324: .4byte gUnknown_203B460
-_08001328: .4byte gUnknown_203B45C
+_08001328: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_80012C0
 
         .align 2,0

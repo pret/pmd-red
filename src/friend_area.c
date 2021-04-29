@@ -16,7 +16,7 @@ struct unkStruct_203B45C
     u8 unk29[0x2f];
 };
 
-extern struct unkStruct_203B45C gUnknown_203B45C[];
+extern struct unkStruct_203B45C gRecruitedPokemonRef[];
 
 extern bool8 *gFriendAreas;
 
@@ -365,11 +365,11 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
     r6 = 0;
     for(counter = 0; counter <= 412; counter++)
     {
-        if((u8)(gUnknown_203B45C[counter].unk0) & 1)
+        if((u8)(gRecruitedPokemonRef[counter].unk0) & 1)
         {
-            if(((u8)gUnknown_203B45C[counter].unk2 == 0) || r2)
+            if(((u8)gRecruitedPokemonRef[counter].unk2 == 0) || r2)
             {
-                flag = (u8)gUnknown_203B45C[counter].unk4[0] == 65;
+                flag = (u8)gRecruitedPokemonRef[counter].unk4[0] == 65;
                 if(!flag || r3)
                 {
                     if(sub_80923D4(counter) == r0)
@@ -466,7 +466,7 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_08092494: .4byte gUnknown_203B45C\n"
+"_08092494: .4byte gRecruitedPokemonRef\n"
 "_08092498: .4byte 0x0000ffff");
 } 
 #endif
@@ -483,14 +483,14 @@ void sub_809249C(u8 index, u8 clear)
         return;
     for(counter = 0; counter <= 412; counter++)
     {
-        if((u8)(gUnknown_203B45C[counter].unk0) & 1)
+        if((u8)(gRecruitedPokemonRef[counter].unk0) & 1)
         {
             if(sub_80923D4(counter) == index)
             {
-                flag = (u8)gUnknown_203B45C[counter].unk4[0] == 65;
+                flag = (u8)gRecruitedPokemonRef[counter].unk4[0] == 65;
                 if(!flag)
                 {
-                    temp8 = (u8)gUnknown_203B45C[counter].unk2;
+                    temp8 = (u8)gRecruitedPokemonRef[counter].unk2;
                     neg8 = -temp8;
                     neg8 |= temp8;
                     // still tries to left shift before the right shift..
@@ -501,7 +501,7 @@ void sub_809249C(u8 index, u8 clear)
                     }
                     else
                     {
-                       gUnknown_203B45C[counter].unk0 = neg8;
+                       gRecruitedPokemonRef[counter].unk0 = neg8;
                     }
                 }
             }
@@ -564,7 +564,7 @@ NAKED void sub_809249C(u8 index, u8 clear)
 	"\tb _08092502\n"
 	"\t.align 2, 0\n"
 "_080924F8: .4byte gFriendAreas\n"
-"_080924FC: .4byte gUnknown_203B45C\n"
+"_080924FC: .4byte gRecruitedPokemonRef\n"
 "_08092500:\n"
 	"\tstrh r0, [r4]\n"
 "_08092502:\n"

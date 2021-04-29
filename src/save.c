@@ -24,7 +24,7 @@ struct unk_struct
 struct unk_203B188
 {
     u32 state;
-    u32 unk4;
+    u32 readStatus;
 };
 
 
@@ -72,7 +72,7 @@ extern struct unkStruct_203B194 *gUnknown_203B194;
 extern s32 gUnknown_202DE28;
 extern u32 gUnknown_203B17C;
 extern char *gUnknown_203B180;
-extern u32 *gUnknown_203B45C;
+extern u32 *gRecruitedPokemonRef;
 extern u32 *gUnknown_203B460;
 extern struct RescueTeamData *gRescueTeamInfoRef;
 extern u8 *gFriendAreas;
@@ -287,7 +287,7 @@ bool8 sub_8011DA8(void)
     return TRUE;
 }
 
-u32 sub_8011DAC(u32 *a)
+u32 ReadSaveFromPak(u32 *a)
 {
     struct UnkStruct_sub_8011DAC *r5 = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC), 5);
     u8 *r4 = (u8*)r5->unk448;
@@ -424,7 +424,7 @@ bool8 IsSaveCorrupted(void)
     return isCorrupted;
 }
 
-u32 sub_801203C(s32 *param_1,u32 param_2)
+u32 WriteSavetoPak(s32 *param_1,u32 param_2)
 {
   struct UnkStruct_sub_8011DAC *iVar1;
   char *__src;
@@ -593,7 +593,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
     if(r0 != NULL)
     {
        gUnknown_203B460 = r0->unk0;
-       gUnknown_203B45C = r0->unk4;
+       gRecruitedPokemonRef = r0->unk4;
        gUnknown_203B480 = r0->unk8;
        gUnknown_203B484 = r0->unkC;
        gUnknown_203B488 = r0->unk10;
@@ -608,7 +608,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        return;
     }
        gUnknown_203B460 = sub_80909D0();
-       gUnknown_203B45C = sub_808CE00();
+       gRecruitedPokemonRef = sub_808CE00();
        gUnknown_203B480 = sub_80950F8();
        gUnknown_203B484 = sub_8095100();
        gUnknown_203B488 = sub_8095108();
@@ -641,11 +641,11 @@ u8 sub_8012484(void)
             break;
         case 1:
             temp = 0;
-            gUnknown_203B188->unk4 = sub_8011DAC(&temp);
+            gUnknown_203B188->readStatus = ReadSaveFromPak(&temp);
             gUnknown_203B188->state = 2;
             break;
         case 2:
-            if(gUnknown_203B188->unk4 != 0)
+            if(gUnknown_203B188->readStatus != 0)
             {
                 if(IsSaveCorrupted())
                 {
@@ -749,7 +749,7 @@ bool8 sub_8012600(void)
     case 4:
         local_14 = 0;
         sub_80140DC();
-        gUnknown_203B18C->saveStatus = sub_801203C(&local_14, sub_8011C1C());
+        gUnknown_203B18C->saveStatus = WriteSavetoPak(&local_14, sub_8011C1C());
         switch(gUnknown_203B18C->saveStatus)
         {
             case SAVE_COMPLETED:
@@ -890,7 +890,7 @@ u32 sub_80128B0(void)
         case 2:
             stack_1 = 0;
             if(gUnknown_203B194->quickSaveStatus == 0)
-                gUnknown_203B194->quickSaveStatus = sub_801203C(&stack_1, 2);
+                gUnknown_203B194->quickSaveStatus = WriteSavetoPak(&stack_1, 2);
             switch(gUnknown_203B194->quickSaveStatus)
             {
                 case SAVE_COMPLETED:

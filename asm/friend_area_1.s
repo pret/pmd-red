@@ -97,7 +97,7 @@ _080926CC:
 	.align 2, 0
 _080926DC: .4byte gFriendAreas
 _080926E0: .4byte gFriendAreaSettings
-_080926E4: .4byte gUnknown_203B45C
+_080926E4: .4byte gRecruitedPokemonRef
 _080926E8:
 	strh r0, [r4, 0x2]
 	strh r0, [r4]
@@ -185,7 +185,7 @@ _08092776:
 	.align 2, 0
 _08092780: .4byte gFriendAreas
 _08092784: .4byte gFriendAreaSettings
-_08092788: .4byte gUnknown_203B45C
+_08092788: .4byte gRecruitedPokemonRef
 _0809278C:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1

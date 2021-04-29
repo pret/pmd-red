@@ -31,7 +31,7 @@ _0803864C:
 	bl sub_8011C1C
 	adds r1, r0, 0
 	add r0, sp, 0x10
-	bl sub_801203C
+	bl WriteSavetoPak
 	adds r4, r0, 0
 	bl sub_8014114
 	cmp r4, 0

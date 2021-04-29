@@ -2,6 +2,12 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "constants/species.h"
+#include "input.h"
+
+struct unkData
+{
+    u8 unk0[24];
+};
 
 struct unkStruct_203B210
 {
@@ -24,10 +30,15 @@ struct unkStruct_203B210
     u8 unkE2;
     u8 unkE3;
     struct OpenedFile **unkE4;
+    struct unkData unkE8[4];
 };
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
+struct unkData gUnknown_80DB840;
+struct unkData gUnknown_80DB870;
+struct unkData gUnknown_80DB888;
+struct unkData gUnknown_80DB858;
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
@@ -46,6 +57,8 @@ extern void sub_8019D4C();
 extern void sub_8019D68();
 extern void sub_8018D30();
 extern void sub_8018E88();
+extern void sub_8006518(struct unkData *);
+extern void sub_800641C(struct unkData *, u32, u32);
 
 u32 DisplayKeckleonDialogueSprite(u32 param_1)
 {
@@ -166,4 +179,44 @@ void UpdateKecleonStoreState(u32 newState)
     gUnknown_203B210->unk8 = newState;
     sub_8018D30();
     sub_8018E88();
+}
+
+void sub_8018D30(void)
+{
+    s32 iVar3;
+    sub_8006518(gUnknown_203B210->unkE8);
+    switch(gUnknown_203B210->unk8)
+    {
+        case 0x12:
+        case 0x13:
+            gUnknown_203B210->unkE8[0] = gUnknown_80DB840;
+            gUnknown_203B210->unkE8[2] = gUnknown_80DB840;
+            gUnknown_203B210->unkE8[0] = gUnknown_80DB870;
+            gUnknown_203B210->unkE8[1] = gUnknown_80DB888;
+            break;
+        case 0x1A:
+        case 0x1B:
+            gUnknown_203B210->unkE8[0] = gUnknown_80DB840;
+            gUnknown_203B210->unkE8[1] = gUnknown_80DB840;
+            gUnknown_203B210->unkE8[2] = gUnknown_80DB840;
+            gUnknown_203B210->unkE8[1] = gUnknown_80DB888;
+            break;
+        case 0x14:
+        case 0x1C:
+            gUnknown_203B210->unkE8[2] = gUnknown_80DB858;
+            break;
+        default:
+        case 0x15:
+        case 0x16:
+        case 0x17:
+        case 0x18:
+        case 0x19:
+            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            {
+                gUnknown_203B210->unkE8[iVar3] = gUnknown_80DB840;
+            }
+            break;
+    }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B210->unkE8, 1, 1);
 }

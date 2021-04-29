@@ -989,7 +989,7 @@ _0803315A:
 	adds r0, r5
 	b _080333DA
 	.align 2, 0
-_08033188: .4byte gUnknown_203B45C
+_08033188: .4byte gRecruitedPokemonRef
 _0803318C: .4byte gUnknown_203B33C
 _08033190:
 	adds r1, r2, 0

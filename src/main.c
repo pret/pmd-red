@@ -53,7 +53,7 @@ extern void Hang(void);
 extern void VBlank_CB(void);
 
 extern void nullsub_17(void);
-extern void sub_800BD08(void); // music initializer
+extern void InitMusic(void); // music initializer
 extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
 
@@ -135,7 +135,7 @@ void sub_800B540(void)
     }
 
     nullsub_17();
-    sub_800BD08(); // initialize music and stop DMAs
+    InitMusic(); // initialize music and stop DMAs
 
     while(REG_VCOUNT <= 159){}
 

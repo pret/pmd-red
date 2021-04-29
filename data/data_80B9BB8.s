@@ -785,26 +785,36 @@ gUnknown_80D4830: @ 80D4830
 
 	.global gUnknown_80D485C
 gUnknown_80D485C: @ 80D485C
-        .byte 0x78, 0x48, 0x0D, 0x08
+        .4byte Data_80D4878
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x74, 0x48, 0x0D, 0x08
+        .4byte Data_80D4874
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0xFF, 0xFF, 0xFF, 0xFF
+
+        .global Data_80D4874
+        Data_80D4874:
         .string "No\0"
         .align 2,0
+        .global Data_80D4878
+        Data_80D4878:
         .string "*Yes\0"
         .align 2,0
 
 	.global gUnknown_80D4880
 gUnknown_80D4880: @ 80D4880
-        .byte 0x9C, 0x48, 0x0D, 0x08 @ Pointer to Yes
+        .4byte Data_80D489C
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x98, 0x48, 0x0D, 0x08 @ Pointer to No
+        .4byte Data_80D4898
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00 @ End of table
         .byte 0xFF, 0xFF, 0xFF, 0xFF
+
+        .global Data_80D4898
+        Data_80D4898:
         .string "*No\0"
+        .global Data_80D489C
+        Data_80D489C:
         .string "Yes\0"
         .align 2,0
 
@@ -1955,6 +1965,8 @@ gUnknown_80DC0A0: @ 80DC0A0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global Data_80DC0B8
+        Data_80DC0B8:
         .byte 0x01, 0x00, 0x08, 0x00
 
 	.global gUnknown_80DC0BC
@@ -1965,7 +1977,7 @@ gUnknown_80DC0BC: @ 80DC0BC
         .byte 0x18, 0x00, 0x0E, 0x00
         .byte 0x0E, 0x00, 0x00, 0x00
 
-        .byte 0xB8, 0xC0, 0x0D, 0x08
+        .4byte Data_80DC0B8
 
 	.global gUnknown_80DC0D4
 gUnknown_80DC0D4: @ 80DC0D4
@@ -2005,7 +2017,18 @@ gUnknown_80DC11C: @ 80DC11C
 
 	.global gUnknown_80DC134
 gUnknown_80DC134: @ 80DC134
-	.incbin "baserom.gba", 0xDC134, 0x30
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x16, 0x00, 0x04, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x16, 0x00, 0x0e, 0x00
+        .byte 0x06, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80DC164
 gUnknown_80DC164: @ 80DC164
@@ -2042,6 +2065,8 @@ gUnknown_80DC240: @ 80DC240
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global Data_80DC258
+        Data_80DC258:
         .byte 0x01, 0x00, 0x0f, 0x00
 
 	.global gUnknown_80DC25C
@@ -2056,7 +2081,8 @@ gUnknown_80DC25C: @ 80DC25C
         .byte 0x08, 0x00
         .byte 0x08, 0x00
         .byte 0x00, 0x00
-        .byte 0x58, 0xc2, 0x0d, 0x08
+
+        .4byte Data_80DC258
 
 	.global gUnknown_80DC274
 gUnknown_80DC274: @ 80DC274
@@ -2909,7 +2935,17 @@ gUnknown_80DDA80: @ 80DDA80
 
 	.global gUnknown_80DDAA0
 gUnknown_80DDAA0: @ 80DDAA0
-	.incbin "baserom.gba", 0xDDAA0, 0x2C
+        .4byte SendWOPokemon
+        .byte 0x12, 0x00, 0x00, 0x00
+        .4byte gWonderMailCancel
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+
+        .global SendWOPokemon
+        SendWOPokemon:
+        .string "Send w/o Pokémon\0"
+        .align 2,0
 
 	.global gUnknown_80DDACC
 gUnknown_80DDACC: @ 80DDACC
@@ -2971,5 +3007,23 @@ gUnknown_80DDB24: @ 80DDB24
 
 	.global gUnknown_80DDB60
 gUnknown_80DDB60: @ 80DDB60
-	.incbin "baserom.gba", 0xDDB60, 0x48
+
+    .4byte SendPokemon_80DDB98
+    .byte 0x11, 0x00, 0x00, 0x00
+    .4byte DontSendPokemon_80DDB80
+    .byte 0x12, 0x00, 0x00, 0x00
+    .4byte gWonderMailCancel
+    .byte 0x0a, 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00, 0x00
+    .byte 0x0a, 0x00, 0x00, 0x00
+
+    .global DontSendPokemon_80DDB80
+    DontSendPokemon_80DDB80:
+    .string "Don~27t Send Pokémon\0"
+    .align 2,0
+
+    .global SendPokemon_80DDB98
+    SendPokemon_80DDB98:
+    .string "Send Pokémon\0"
+    .align 2,0
 

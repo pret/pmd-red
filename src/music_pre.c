@@ -391,8 +391,7 @@ void UpdateBGControlRegisters(void)
     REG_BLDCNT = gBldCnt;
 }
 
-// Some kind of initializer for music?
-void sub_800BD08(void)
+void InitMusic(void)
 {
     s32 counter;
     u16 zero;
@@ -477,7 +476,6 @@ void StartNewBGM(u16 songIndex)
 void FadeInNewBGM(u16 SongIndex, u16 speed)
 {
     bool8 interrupt_flag;
-    u16 temp_store;
 
     if(!IsBGSong(SongIndex))
         return;
@@ -485,8 +483,7 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
         return;
     if(SongIndex == gCurrentBGSong)
     {
-        temp_store = gBGMusicPlayerState - 1;
-        if((temp_store) <= 1)
+        if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
     }
 
@@ -608,8 +605,8 @@ void sub_800C074(u16 SongIndex, u16 param_2)
 
   if (SongIndex == 0x3e5)
     return;
-  if (0x100 < param_2)
-    param_2 = 0x100;
+  if (256 < param_2)
+    param_2 = 256;
 
   if (sub_800CACC(SongIndex)) 
   {

@@ -1512,7 +1512,7 @@ sub_800DCD0:
 	ldr r0, [r4, 0x4C]
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8011988
+	bl PlaySound
 _0800DCF6:
 	str r5, [r4, 0x4C]
 	str r5, [r4, 0x50]

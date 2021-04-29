@@ -19,7 +19,7 @@ extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
 extern s32 sub_80144A4(s32 *);
 extern void UpdateFelicityBankState(u32);
-extern void sub_8011988(u32);
+extern void PlaySound(u32);
 
 extern u32 sub_8013BBC(u32 *);
 void sub_8016B48(u8 action);
@@ -62,7 +62,7 @@ void Felicity_DepositMoney(void)
           gUnknown_203B204->unkC = gUnknown_203B204->unk64;
           gUnknown_203B460->teamSavings += gUnknown_203B204->unkC;
           gUnknown_203B460->teamMoney -= gUnknown_203B204->unkC;
-          sub_8011988(0x14c);
+          PlaySound(0x14c);
           UpdateFelicityBankState(9);
           break;
       case 2:
@@ -84,7 +84,7 @@ void Felicity_WithdrawMoney(void)
           gUnknown_203B204->unkC = gUnknown_203B204->unk64;
           gUnknown_203B460->teamMoney += gUnknown_203B204->unkC;
           gUnknown_203B460->teamSavings -= gUnknown_203B204->unkC;
-          sub_8011988(0x14c);
+          PlaySound(0x14c);
           UpdateFelicityBankState(0xc);
           break;
       case 2:

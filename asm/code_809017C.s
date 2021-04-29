@@ -369,7 +369,7 @@ _080903F2:
 	b _08090430
 	.align 2, 0
 _0809040C: .4byte gUnknown_8108F40
-_08090410: .4byte gUnknown_203B45C
+_08090410: .4byte gRecruitedPokemonRef
 _08090414: .4byte gDungeons
 _08090418: .4byte gUnknown_8115A2C
 _0809041C:
@@ -503,7 +503,7 @@ _08090510:
 	b _08090536
 	.align 2, 0
 _08090528: .4byte gUnknown_8115BA4
-_0809052C: .4byte gUnknown_203B45C
+_0809052C: .4byte gRecruitedPokemonRef
 _08090530: .4byte gUnknown_8115BF4
 _08090534:
 	ldr r0, _080905D0
@@ -685,7 +685,7 @@ _08090690:
 _080906A0: .4byte gUnknown_8115D14
 _080906A4: .4byte gDungeons
 _080906A8: .4byte 0x0000019d
-_080906AC: .4byte gUnknown_203B45C
+_080906AC: .4byte gRecruitedPokemonRef
 _080906B0: .4byte gUnknown_8115D5C
 _080906B4:
 	ldr r0, _080906D8
@@ -899,7 +899,7 @@ _08090852:
 	movs r0, 0x1
 	b _08090880
 	.align 2, 0
-_08090868: .4byte gUnknown_203B45C
+_08090868: .4byte gRecruitedPokemonRef
 _0809086C:
 	adds r2, 0x8
 	adds r3, 0x1
@@ -2256,7 +2256,7 @@ _080911E2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080911F4: .4byte gUnknown_203B45C
+_080911F4: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_80911A4
 
 	thumb_func_start sub_80911F8
@@ -4235,7 +4235,7 @@ _08092026:
 	bx r0
 	.align 2, 0
 _08092038: .4byte gUnknown_203B460
-_0809203C: .4byte gUnknown_203B45C
+_0809203C: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8091FB4
 
 	.align 2, 0 @ Don't pad with nop.

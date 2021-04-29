@@ -721,7 +721,7 @@ sub_8052910:
 	ldrsh r7, [r4, r2]
 	b _08052966
 	.align 2, 0
-_08052950: .4byte gUnknown_203B45C
+_08052950: .4byte gRecruitedPokemonRef
 _08052954: .4byte 0x00008df8
 _08052958: .4byte gAvailablePokemonNames
 _0805295C:
@@ -749,7 +749,7 @@ _08052966:
 	.align 2, 0
 _08052988: .4byte gAvailablePokemonNames
 _0805298C: .4byte gUnknown_80F7AF8
-_08052990: .4byte gUnknown_203B45C
+_08052990: .4byte gRecruitedPokemonRef
 _08052994: .4byte 0x00008df8
 _08052998: .4byte gUnknown_202DFE8
 _0805299C:

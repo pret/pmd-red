@@ -63,7 +63,6 @@ SECTIONS {
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
-		. = ALIGN(4);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -104,6 +103,11 @@ SECTIONS {
         asm/code_802B640.o(.text);
         src/wonder_mail_3.o(.text);
         asm/wonder_mail_3.o(.text);
+        src/makuhita_dojo.o(.text);
+        asm/makuhita_dojo.o(.text);
+        asm/wonder_mail_4.o(.text);
+        src/post_office_guide.o(.text);
+        asm/wonder_mail_5.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
@@ -264,6 +268,8 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         src/wonder_mail.o(.rodata);
         data/data_80DED44.o(.rodata);
+        src/post_office_guide.o(.rodata);
+        data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
         data/pokemon_mail.o(.rodata);

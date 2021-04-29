@@ -66,7 +66,7 @@ _0808ED64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808ED70: .4byte gUnknown_203B45C
+_0808ED70: .4byte gRecruitedPokemonRef
 _0808ED74: .4byte 0x00008f88
 	thumb_func_end sub_808ED00
 
@@ -135,7 +135,7 @@ _0808EDE2:
 	b _0808EDFA
 	.align 2, 0
 _0808EDF0: .4byte 0x0000ffff
-_0808EDF4: .4byte gUnknown_203B45C
+_0808EDF4: .4byte gRecruitedPokemonRef
 _0808EDF8:
 	strb r0, [r1, 0x3]
 _0808EDFA:
@@ -168,7 +168,7 @@ _0808EE16:
 	strb r0, [r1]
 	b _0808EE40
 	.align 2, 0
-_0808EE34: .4byte gUnknown_203B45C
+_0808EE34: .4byte gRecruitedPokemonRef
 _0808EE38: .4byte 0x00008f88
 _0808EE3C:
 	mov r0, r8
@@ -275,7 +275,7 @@ _0808EEDA:
 	movs r1, 0x3
 	b _0808EF20
 	.align 2, 0
-_0808EF10: .4byte gUnknown_203B45C
+_0808EF10: .4byte gRecruitedPokemonRef
 _0808EF14: .4byte 0x00008f88
 _0808EF18:
 	ldr r0, [r7]
@@ -345,7 +345,7 @@ _0808EF84:
 	bx r1
 	.align 2, 0
 _0808EF98: .4byte 0x00008f88
-_0808EF9C: .4byte gUnknown_203B45C
+_0808EF9C: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_808EE9C
 
 	thumb_func_start sub_808EFA0
@@ -689,7 +689,7 @@ _0808F296:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808F2A8: .4byte gUnknown_203B45C
+_0808F2A8: .4byte gRecruitedPokemonRef
 _0808F2AC: .4byte 0x00008df8
 	thumb_func_end sub_808F154
 
@@ -733,7 +733,7 @@ _0808F2C4:
 	strb r2, [r4, 0x2]
 	b _0808F30A
 	.align 2, 0
-_0808F300: .4byte gUnknown_203B45C
+_0808F300: .4byte gRecruitedPokemonRef
 _0808F304: .4byte 0x00008df8
 _0808F308:
 	strb r1, [r4, 0x2]

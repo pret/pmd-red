@@ -306,7 +306,7 @@ sub_8027EB8:
 _08027ED4: .4byte gUnknown_203B2BC
 _08027ED8:
 	ldr r0, _08027F08
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, [r4]
 	adds r0, 0x14
 	bl sub_8091274
@@ -328,7 +328,7 @@ _08027ED8:
 _08027F08: .4byte 0x0000014d
 _08027F0C:
 	ldr r0, _08027F38
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x14]
 	bl sub_8090A60
