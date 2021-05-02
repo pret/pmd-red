@@ -9,18 +9,21 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 
 extern struct unkStruct_203B204 *gUnknown_203B204;
+extern struct unkData gUnknown_80DB6DC;
+extern struct unkData gUnknown_80DB6F4;
+extern struct unkData gUnknown_80DB70C;
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
-extern void sub_800641C(u32 *, u32, u32);
-
+extern void sub_800641C(struct unkData *, u32, u32);
+extern void sub_8006518(struct unkData *);
 extern void sub_8016B24();
 extern void sub_80169BC();
 extern void Felicity_DepositMoney();
 extern void Felicity_WithdrawMoney();
 extern void sub_8016B00();
 extern void sub_801645C();
-extern void sub_801653C();
+extern void UpdateFelicityBankDialogue();
 
 void UpdateFelicityBankState(u32);
 
@@ -31,7 +34,7 @@ u32 CreateFelicityBank(s32 param_1)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B204 = MemoryAlloc(0x108,8);
+  gUnknown_203B204 = MemoryAlloc(sizeof(struct unkStruct_203B204),8);
   gUnknown_203B204->unk10 = 0;
   gUnknown_203B204->unk0 = param_1;
   CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PERSIAN);
@@ -102,5 +105,40 @@ void UpdateFelicityBankState(u32 newState)
 {
     gUnknown_203B204->currState = newState;
     sub_801645C();
-    sub_801653C();
+    UpdateFelicityBankDialogue();
+}
+
+void sub_801645C(void)
+{
+    s32 uVar3;
+
+    sub_8006518(gUnknown_203B204->unkA8);
+    switch(gUnknown_203B204->currState)
+    {
+        case 2:
+            gUnknown_203B204->unkA8[0].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[1].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[2].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
+            ResetUnusedInputStruct();
+            sub_800641C(gUnknown_203B204->unkA8, 1, 0);
+            break;
+        case 8:
+        case 11:
+            gUnknown_203B204->unkA8[0].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[1].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
+            gUnknown_203B204->unkA8[2] = gUnknown_80DB70C;
+            ResetUnusedInputStruct();
+            sub_800641C(gUnknown_203B204->unkA8, 1, 0);
+            break;
+        default:
+            for(uVar3 = 0; uVar3 < 4; uVar3++)
+            {
+                gUnknown_203B204->unkA8[uVar3] = gUnknown_80DB6DC;
+            }
+            ResetUnusedInputStruct();
+            sub_800641C(gUnknown_203B204->unkA8, 1, 1);
+            break;
+    }
 }

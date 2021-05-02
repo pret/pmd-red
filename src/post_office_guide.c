@@ -3,6 +3,7 @@
 #include "file_system.h"
 #include "input.h"
 #include "constants/species.h"
+#include "menu.h"
 
 struct PostOfficeHelper
 {
@@ -40,12 +41,6 @@ struct unkStruct_203B330
 };
 extern struct unkStruct_203B330 *gUnknown_203B330;
 
-
-struct MenuItem
-{
-    const char *text;
-    u32 menuAction; // action??
-};
 
 extern const char DeletingMailInfo_Text[];
 extern const char GetHelp_Text[];

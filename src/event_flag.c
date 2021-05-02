@@ -13,7 +13,7 @@ struct unkEventStruct
     u8 unk2; // Seems like friend area number
 };
 
-struct unkEventStruct gUnknown_80B71E4[100]; // TODO figure out size of this
+extern struct unkEventStruct gUnknown_80B71E4[100]; // TODO figure out size of this
 
 extern u8 gUnknown_2000A88[0x400];
 

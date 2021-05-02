@@ -1,5 +1,6 @@
 #include "global.h"
 #include "input.h"
+#include "menu.h"
 
 struct unkData
 {
@@ -27,9 +28,9 @@ struct unkStruct_203B360
 
 extern struct unkStruct_203B360 *gUnknown_203B364;
 extern struct unkData gUnknown_80E6F20;
-extern u32 gUnknown_80E6F38;
-extern u32 gUnknown_80E7090;
-extern u32 gUnknown_80E6F50;
+extern struct unkData gUnknown_80E6F38;
+extern struct MenuItem gUnknown_80E7090[];
+extern struct MenuItem gUnknown_80E6F50[];
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFill8(u8 *, u8, u32);
@@ -37,13 +38,13 @@ extern void MemoryFree(void *);
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern void sub_800641C(void *, u32, u32);
-extern void SetMenuItems(void *, void *, u32, u32 *, u32 *, u32, u32, u32);
+extern void SetMenuItems(void *, struct unkData *, u32, struct unkData *, struct MenuItem *, u32, u32, u32);
 extern u8 sub_80130A8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_80384D0();
 extern void sub_8038830();
 
-void sub_803850C(s32 param_1)
+void sub_803850C(s32 currMenu)
 {
   s32 iVar4;
   
@@ -57,19 +58,19 @@ void sub_803850C(s32 param_1)
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B364->unk148,1,1);
 
-  if (param_1 == 0x2e) {
+  if (currMenu == 0x2e) {
       // Beware, Deleting your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,&gUnknown_80E7090,
+    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gUnknown_80E7090,
                  0,6,0);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,&gUnknown_80E6F50,
+    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gUnknown_80E6F50,
                  0,6,0);
   }
   sub_8035CF4(&gUnknown_203B364->unk8,0,1);
   gUnknown_203B364->unk4 = 0;
-  gUnknown_203B364->currMenu = param_1;
+  gUnknown_203B364->currMenu = currMenu;
   sub_8038830();
 }
 

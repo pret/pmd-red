@@ -5,121 +5,8 @@
 
 	.text
 
-        thumb_func_start sub_801645C
-sub_801645C:
-	push {r4-r7,lr}
-	ldr r4, _0801647C
-	ldr r0, [r4]
-	adds r0, 0xA8
-	bl sub_8006518
-	ldr r0, [r4]
-	ldr r1, [r0, 0x4]
-	cmp r1, 0x8
-	beq _080164AC
-	cmp r1, 0x8
-	bgt _08016480
-	cmp r1, 0x2
-	beq _08016486
-	b _080164F8
-	.align 2, 0
-_0801647C: .4byte gUnknown_203B204
-_08016480:
-	cmp r1, 0xB
-	beq _080164AC
-	b _080164F8
-_08016486:
-	adds r0, 0xA8
-	movs r1, 0x80
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, 0xC0
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, 0xD8
-	strb r1, [r0]
-	ldr r1, [r4]
-	adds r1, 0xF0
-	ldr r0, _080164A8
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r6,r7}
-	stm r1!, {r2,r6,r7}
-	b _080164D8
-	.align 2, 0
-_080164A8: .4byte gUnknown_80DB6F4
-_080164AC:
-	ldr r4, _080164EC
-	ldr r0, [r4]
-	adds r0, 0xA8
-	movs r1, 0x80
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, 0xC0
-	strb r1, [r0]
-	ldr r1, [r4]
-	adds r1, 0xF0
-	ldr r0, _080164F0
-	ldm r0!, {r3,r5,r6}
-	stm r1!, {r3,r5,r6}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldr r1, [r4]
-	adds r1, 0xD8
-	ldr r0, _080164F4
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-_080164D8:
-	bl ResetUnusedInputStruct
-	ldr r0, [r4]
-	adds r0, 0xA8
-	movs r1, 0x1
-	movs r2, 0
-	bl sub_800641C
-	b _0801652E
-	.align 2, 0
-_080164EC: .4byte gUnknown_203B204
-_080164F0: .4byte gUnknown_80DB6F4
-_080164F4: .4byte gUnknown_80DB70C
-_080164F8:
-	ldr r6, _08016534
-	mov r12, r6
-	ldr r4, _08016538
-	movs r3, 0
-	movs r2, 0x3
-_08016502:
-	mov r7, r12
-	ldr r1, [r7]
-	adds r1, r3
-	adds r1, 0xA8
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r3, 0x18
-	subs r2, 0x1
-	cmp r2, 0
-	bge _08016502
-	bl ResetUnusedInputStruct
-	ldr r0, _08016534
-	ldr r0, [r0]
-	adds r0, 0xA8
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_800641C
-_0801652E:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08016534: .4byte gUnknown_203B204
-_08016538: .4byte gUnknown_80DB6DC
-	thumb_func_end sub_801645C
-
-	thumb_func_start sub_801653C
-sub_801653C:
+	thumb_func_start UpdateFelicityBankDialogue
+UpdateFelicityBankDialogue:
 	push {r4,r5,lr}
 	sub sp, 0x14
 	ldr r1, _08016558
@@ -583,7 +470,7 @@ _080168EC:
 _080168F4: .4byte gUnknown_202DE30
 _080168F8: .4byte gFelicityDialogue
 _080168FC: .4byte 0x0000010d
-	thumb_func_end sub_801653C
+	thumb_func_end UpdateFelicityBankDialogue
 
 	thumb_func_start CreateFelicityBankShopMenu
 CreateFelicityBankShopMenu:

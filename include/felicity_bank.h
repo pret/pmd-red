@@ -3,13 +3,18 @@
 
 #include "file_system.h"
 
+struct unkData
+{
+    u8 unk0[24];
+};
+
 struct unkStruct_203B204
 {
     // size: 0x108
     u32 unk0;
-    u32 currState;
+    s32 currState;
     u32 unk8;
-    u32 unkC;
+    u32 chosenAmount;
     u32 unk10;
     u8 fill14[0x64 - 0x14];
     u32 unk64;
@@ -25,6 +30,7 @@ struct unkStruct_203B204
     u8 unkA2;
     u8 unkA3;
     struct OpenedFile **unkA4;
+    struct unkData unkA8[4];
 };
 
 

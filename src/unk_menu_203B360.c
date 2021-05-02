@@ -26,8 +26,8 @@ struct unkStruct_203B360
 
 extern struct unkStruct_203B360 *gUnknown_203B360;
 extern struct unkData gUnknown_80E6E7C;
-extern u32 gUnknown_80E6E94;
-extern u32 gUnknown_80E6EAC;
+extern struct unkData gUnknown_80E6E94;
+extern struct MenuItem gUnknown_80E6EAC[];
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFill8(u8 *, u8, u32);
@@ -35,7 +35,7 @@ extern void MemoryFree(void *);
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern void sub_800641C(void *, u32, u32);
-extern void SetMenuItems(void *, void *, u32, u32 *, u32 *, u32, u32, u32);
+extern void SetMenuItems(void *, struct unkData *, u32, struct unkData *, struct MenuItem *, u32, u32, u32);
 extern u8 sub_80130A8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_80384D0();
@@ -57,7 +57,7 @@ void sub_80382E4(s32 param_1)
       // Caution!
       // The storage space is empty!
       // Please check again.
-    SetMenuItems(&gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,&gUnknown_80E6EAC,
+    SetMenuItems(&gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
                  0,4,0);
   }
   sub_8035CF4(&gUnknown_203B360->unk8,0,1);

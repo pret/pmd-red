@@ -1279,17 +1279,17 @@ _0803BA34:
 	ldr r2, _0803BA38
 	b _0803BAFA
 	.align 2, 0
-_0803BA38: .4byte gUnknown_80E88A0
+_0803BA38: .4byte gMankeyMissionDescription
 _0803BA3C:
 	ldr r2, _0803BA40
 	b _0803BAFA
 	.align 2, 0
-_0803BA40: .4byte gUnknown_80E88C8
+_0803BA40: .4byte gSmeargleMissionDescription
 _0803BA44:
 	ldr r2, _0803BA48
 	b _0803BAFA
 	.align 2, 0
-_0803BA48: .4byte gUnknown_80E8920
+_0803BA48: .4byte gMedichamMissionDescription
 _0803BA4C:
 	ldr r4, _0803BA64
 	ldrb r1, [r7, 0x14]

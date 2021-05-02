@@ -59,9 +59,9 @@ void Felicity_DepositMoney(void)
         sub_8016B48(FELICITY_BANK_ACTION_DEPOSIT);
         break;
       case 3:
-          gUnknown_203B204->unkC = gUnknown_203B204->unk64;
-          gUnknown_203B460->teamSavings += gUnknown_203B204->unkC;
-          gUnknown_203B460->teamMoney -= gUnknown_203B204->unkC;
+          gUnknown_203B204->chosenAmount = gUnknown_203B204->unk64;
+          gUnknown_203B460->teamSavings += gUnknown_203B204->chosenAmount;
+          gUnknown_203B460->teamMoney -= gUnknown_203B204->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(9);
           break;
@@ -81,9 +81,9 @@ void Felicity_WithdrawMoney(void)
         sub_8016B48(FELICITY_BANK_ACTION_WITHDRAW);
         break;
       case 3:
-          gUnknown_203B204->unkC = gUnknown_203B204->unk64;
-          gUnknown_203B460->teamMoney += gUnknown_203B204->unkC;
-          gUnknown_203B460->teamSavings -= gUnknown_203B204->unkC;
+          gUnknown_203B204->chosenAmount = gUnknown_203B204->unk64;
+          gUnknown_203B460->teamMoney += gUnknown_203B204->chosenAmount;
+          gUnknown_203B460->teamSavings -= gUnknown_203B204->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(0xc);
           break;

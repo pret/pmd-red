@@ -35,10 +35,10 @@ struct unkStruct_203B210
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
-struct unkData gUnknown_80DB840;
-struct unkData gUnknown_80DB870;
-struct unkData gUnknown_80DB888;
-struct unkData gUnknown_80DB858;
+extern struct unkData gUnknown_80DB840;
+extern struct unkData gUnknown_80DB870;
+extern struct unkData gUnknown_80DB888;
+extern struct unkData gUnknown_80DB858;
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);

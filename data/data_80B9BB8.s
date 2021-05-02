@@ -1,17 +1,5 @@
 	.section .rodata
 
-	.string "pksdir0\0"
-        .align 2,0
-
-	.global gByteShiftLookup
-gByteShiftLookup: @ 80B9BB8
-        .4byte 0
-        .4byte 8
-        .4byte 16
-        .4byte 24
-
-        .string "pksdir0\0"
-        .string "pksdir0\0"
         .string "PKD ROM USER DATA 000000\0"
 
 	.global gUnknown_80B9BF1

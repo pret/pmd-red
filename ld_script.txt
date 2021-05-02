@@ -115,8 +115,6 @@ SECTIONS {
         asm/credits.o(.text);
         src/credits.o(.text);
         src/main_menu.o(.text);
-        asm/main_menu.o(.text);
-        src/main_menu_mid.o(.text);
         asm/main_menu_1.o(.text);
         src/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
@@ -272,6 +270,8 @@ SECTIONS {
         data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
+        src/debug_menu.o(.rodata);
+        data/data_80E7D40.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);

@@ -1,37 +1,72 @@
 #include "global.h"
 #include "debug_menu.h"
 #include "main_menu.h"
+#include "menu.h"
 
-struct unkData
-{
-    u8 unk0[24];
-};
-
-
-struct DebugMenu
-{
-    // size: 0x1A4
-    u8 fill0[0x140];
-    /* 0x140 */ struct unkData unk140[4];
-};
 extern struct DebugMenu *gUnknown_203B3EC;
-extern struct unkData gUnknown_80E7D40;
 
-struct MenuItem
+const struct unkData gUnknown_80E7D40 =
 {
-    const char *text;
-    u32 menuAction; // action??
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00
 };
 
+const struct unkData gUnknown_80E7D58 = 
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x09, 0x00, 0x0b, 0x00,
+    0x0b, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00
+};
+
+extern const char dungeons_string[];
+extern const char field_string[];
+extern const char field_map_string[];
+extern const char field_script_string[];
+extern const char debug_menu_string[];
+extern const char storage_string[];
+extern const char h_open_string[];
 
 
-extern struct MenuItem gDebugMenuItems[8];
-extern u32 gUnknown_80E7D58[6];
+const struct MenuItem gDebugMenuItems[8] =
+{
+    {dungeons_string, MENU_DEBUG_MENU_DUNGEONS},
+    {field_string, MENU_DEBUG_MENU_FIELD},
+    {field_map_string, MENU_DEBUG_MENU_FIELD_MAP},
+    {field_script_string, MENU_DEBUG_MENU_FIELD_SCRIPT},
+    {debug_menu_string, MENU_DEBUG_MENU_DEBUG_MENU},
+    {storage_string, MENU_DEBUG_MENU_STORAGE},
+    {h_open_string, MENU_DEBUG_MENU_H_OPEN},
+    {NULL, 10},
+};
+
+ALIGNED(4) const char h_open_string[] = _("h-open");
+ALIGNED(4) const char storage_string[] = _("Storage");
+ALIGNED(4) const char debug_menu_string[] = _("Debug Menu");
+ALIGNED(4) const char field_script_string[] = _("Field Script");
+ALIGNED(4) const char field_map_string[] = _("Field Map");
+ALIGNED(4) const char field_string[] = _("Field");
+ALIGNED(4) const char dungeons_string[] = _("Dungeons");
+
+ALIGNED(4) const char debug_fill0[] = _("pksdir0");
+ALIGNED(4) const char debug_fill1[] = _("pksdir0");
+ALIGNED(4) const char debug_fill2[] = _("pksdir0");
+ALIGNED(4) const char debug_fill3[] = _("pksdir0");
+ALIGNED(4) const char debug_fill4[] = _("pksdir0");
+ALIGNED(4) const char debug_fill5[] = _("pksdir0");
+ALIGNED(4) const char debug_fill6[] = _("pksdir0");
+
 
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
 extern void MemoryFill8(u8 *, u8, u32);
-extern void sub_800641C(void *, u32, u32);
+extern void sub_800641C(struct unkData *, u32, u32);
 
 extern void ResetUnusedInputStruct(void);
 extern u8 sub_8012FD8(struct DebugMenu *);
@@ -40,7 +75,7 @@ extern void sub_80976F8(u8);
 extern void sub_803A3BC(void);
 extern void sub_803A3A0(void);
 
-extern void SetMenuItems(void *menu, void *, u32, u32 *, struct MenuItem *entries, u32, u32, u32);
+extern void SetMenuItems(void *menu, struct unkData *, u32, const struct unkData *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_8035CF4(struct DebugMenu *, u32, u32);
 extern void sub_8035CC0(struct unkData *, u32);
 
@@ -49,14 +84,14 @@ void CreateDebugMenu(void)
   int iVar2;
 
   if (gUnknown_203B3EC == NULL) {
-    gUnknown_203B3EC = MemoryAlloc(0x1a4, 8);
-    MemoryFill8((u8 *)gUnknown_203B3EC, 0, 0x1a4);
+    gUnknown_203B3EC = MemoryAlloc(sizeof(struct DebugMenu), 8);
+    MemoryFill8((u8 *)gUnknown_203B3EC, 0, sizeof(struct DebugMenu));
   }
   for(iVar2 = 0; iVar2 < 4; iVar2++){
     gUnknown_203B3EC->unk140[iVar2] = gUnknown_80E7D40;
   }
   ResetUnusedInputStruct();
-  sub_800641C(&gUnknown_203B3EC->unk140, 1, 1);
+  sub_800641C(gUnknown_203B3EC->unk140, 1, 1);
   SetDebugMenuItems();
 }
 
@@ -125,7 +160,7 @@ u32 UpdateDebugMenu(void)
 
 void SetDebugMenuItems(void)
 {
-  SetMenuItems(gUnknown_203B3EC, gUnknown_203B3EC->unk140, 0, gUnknown_80E7D58, gDebugMenuItems, 1, 0xd, 0);
+  SetMenuItems(gUnknown_203B3EC, gUnknown_203B3EC->unk140, 0, &gUnknown_80E7D58, gDebugMenuItems, 1, 0xd, 0);
   sub_8035CF4(gUnknown_203B3EC,0,1);
 }
 
