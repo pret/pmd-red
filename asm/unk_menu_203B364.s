@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8038630
-sub_8038630:
+	thumb_func_start UpdateSaveMenu
+UpdateSaveMenu:
 	push {r4-r6,lr}
 	sub sp, 0x18
 	ldr r5, _080386A8
@@ -256,7 +256,7 @@ _08038826:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8038630
+	thumb_func_end UpdateSaveMenu
 
 	thumb_func_start sub_8038830
 sub_8038830:

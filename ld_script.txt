@@ -127,7 +127,6 @@ SECTIONS {
         src/unk_menu_203B364.o(.text);
         asm/unk_menu_203B364.o(.text);
         asm/rescue_password_menu.o(.text);
-        asm/load_screen.o(.text);
         src/load_screen.o(.text);
         src/wonder_mail_main_menu.o(.text);
         asm/wonder_mail_main_menu.o(.text);

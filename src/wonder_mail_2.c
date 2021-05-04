@@ -7,7 +7,7 @@
 struct unkStruct_203B2C8
 {
     // size: 0x140
-    u8 unk0;
+    u8 currState;
     u8 unk1;
     u16 unk2;
     /* 0x4 */ struct OpenedFile *faceFile;
@@ -131,7 +131,7 @@ u32 sub_802B2D4(void)
 
 u32 sub_802B358(void)
 {
-  switch(gUnknown_203B2C8->unk0) {
+  switch(gUnknown_203B2C8->currState) {
     case 0:
         sub_802B560();
         break;
@@ -173,55 +173,55 @@ void sub_802B3E0(void)
   char *monName;
   char teamNameBuffer[40];
 
-  switch(gUnknown_203B2C8->unk0) {
-  case 0:
-    if (sub_80023E4(0) != '\0') {
-        // Copy Team Name to buffer
-        sub_80920D8(teamNameBuffer);
-    }
-    else {
-        // Copy "????" to buffer
-        strcpy(teamNameBuffer,gUnknown_80DF9F0);
-    }
-    // Print and expand placeholders?
-    sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
-    // Display to screen with Pelliper face
-    sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-    break;
-  case 1:
-    monName = GetMonSpecies(SPECIES_PELIPPER);
-    strcpy(gUnknown_203B2C8->unk114, monName);
-    gUnknown_203B2C8->unk128 = 0x130;
-    gUnknown_203B2C8->unk12A = 2;
-    gUnknown_203B2C8->unk12C = 0;
-    sub_8097790();
-    iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-    sub_803C37C(&iVar3->unk4, 0, &gUnknown_203B2C8->unk130);
-    gUnknown_203B2C8->unk138 = sub_803C200(&iVar3->unk4, 0);
-    gUnknown_203B2C8->unk131 = 0;
-    gUnknown_203B2C8->unk132 = 0;
-    gUnknown_203B2C8->unk133 = 10;
-    gUnknown_203B2C8->unk134 = 0;
-    sub_802F204(gUnknown_203B2C8->unk114, 0);
-    break;
-  case 2:
-    // I hope you will keep on rescuing your friends
-    // I must save your adventure
-    sub_80141B4(gUnknown_80DFAA8, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-    break;
-  case 4:
-    // Oh yes, that's right. Please don't forget to send an A-OK Mail
-    // to the friend you just rescued
-    sub_80141B4(gUnknown_80DFB14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-  case 3:
-  case 5:
-    break;
+  switch(gUnknown_203B2C8->currState) {
+      case 0:
+        if (sub_80023E4(0) != '\0') {
+            // Copy Team Name to buffer
+            sub_80920D8(teamNameBuffer);
+        }
+        else {
+            // Copy "????" to buffer
+            strcpy(teamNameBuffer,gUnknown_80DF9F0);
+        }
+        // Print and expand placeholders?
+        sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
+        // Display to screen with Pelliper face
+        sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        break;
+      case 1:
+        monName = GetMonSpecies(SPECIES_PELIPPER);
+        strcpy(gUnknown_203B2C8->unk114, monName);
+        gUnknown_203B2C8->unk128 = 0x130;
+        gUnknown_203B2C8->unk12A = 2;
+        gUnknown_203B2C8->unk12C = 0;
+        sub_8097790();
+        iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
+        sub_803C37C(&iVar3->unk4, 0, &gUnknown_203B2C8->unk130);
+        gUnknown_203B2C8->unk138 = sub_803C200(&iVar3->unk4, 0);
+        gUnknown_203B2C8->unk131 = 0;
+        gUnknown_203B2C8->unk132 = 0;
+        gUnknown_203B2C8->unk133 = 10;
+        gUnknown_203B2C8->unk134 = 0;
+        sub_802F204(gUnknown_203B2C8->unk114, 0);
+        break;
+      case 2:
+        // I hope you will keep on rescuing your friends
+        // I must save your adventure
+        sub_80141B4(gUnknown_80DFAA8, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        break;
+      case 4:
+        // Oh yes, that's right. Please don't forget to send an A-OK Mail
+        // to the friend you just rescued
+        sub_80141B4(gUnknown_80DFB14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+      case 3:
+      case 5:
+        break;
   }
 }
 
 void sub_802B548(u32 newState)
 {
-    gUnknown_203B2C8->unk0 = newState;
+    gUnknown_203B2C8->currState = newState;
     nullsub_132();
     sub_802B3E0();
 }

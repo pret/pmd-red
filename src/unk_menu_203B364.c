@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "menu.h"
+#include "main_menu.h"
 
 struct unkData
 {
@@ -44,7 +45,7 @@ extern void sub_8013114(u32 *, u32 *);
 extern void sub_80384D0();
 extern void sub_8038830();
 
-void sub_803850C(s32 currMenu)
+void CreateSaveMenu(s32 currMenu)
 {
   s32 iVar4;
   
@@ -58,7 +59,7 @@ void sub_803850C(s32 currMenu)
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B364->unk148,1,1);
 
-  if (currMenu == 0x2e) {
+  if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
     SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gUnknown_80E7090,
                  0,6,0);
@@ -74,13 +75,13 @@ void sub_803850C(s32 currMenu)
   sub_8038830();
 }
 
-void sub_8038604(void)
+void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  if (gUnknown_203B364 != 0) {
+  if (gUnknown_203B364 != NULL) {
     MemoryFree(gUnknown_203B364);
-    gUnknown_203B364 = 0;
+    gUnknown_203B364 = NULL;
   }
 }
 

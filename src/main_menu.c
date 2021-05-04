@@ -37,9 +37,9 @@ extern void CreateWonderMailMenu(void);
 extern void CreateLoadScreen(u32);
 extern s32 sub_8035DB4(u32);
 extern void CreateRescuePasswordMenu(u32);
-extern void sub_803850C(u32);
+extern void CreateSaveMenu(u32);
 extern s32 UpdateMainMenu(void);
-extern s32 sub_803941C(void);
+extern s32 UpdateLoadScreenMenu(void);
 extern s32 UpdateTradeItemsMenu(void);
 extern s32 UpdateFriendRescueMenu(void);
 extern s32 UpdateWonderMailMenu(void);
@@ -47,7 +47,7 @@ extern s32 UpdateDualSlotMenu(void);
 extern s32 UpdateWirelessCommsMenu(void);
 extern s32 UpdateRescuePasswordMenu(void);
 extern s32 sub_80383D4(void);
-extern s32 sub_8038630(void);
+extern s32 UpdateSaveMenu(void);
 
 extern void CleanMainMenu(void);
 extern void CleanLoadScreen(void);
@@ -59,7 +59,7 @@ extern void CleanDualSlotMenu(void);
 extern void CleanWirelessCommsMenu(void);
 extern void CleanRescuePasswordMenu(void);
 extern void sub_80383A8(void);
-extern void sub_8038604(void);
+extern void CleanSaveMenu(void);
 
 struct unkSubStruct
 {
@@ -109,7 +109,7 @@ void InitMainMenu(void)
     gMainMenu = MemoryAlloc(sizeof(struct MainMenu),8);
     MemoryFill8((u8 *)gMainMenu, 0, sizeof(struct MainMenu));
   }
-  gMainMenu->currMenu = 0xffdc;
+  gMainMenu->currMenu = MENU_NO_SCREEN_CHANGE;
   gMainMenu->nextMenu = MENU_MAIN_SCREEN;
   gMainMenu->lastMenu = MENU_MAIN_SCREEN;
   gMainMenu->unk38 = -1;
@@ -141,7 +141,7 @@ void SetUpMenu(void)
         case MENU_AWAITING_RESCUE:
         case MENU_CONTINUE:
         case MENU_DELETE_SAVE_PROMPT:
-        case 9:
+        case MENU_DELETE_SAVE_CONFIRM:
             CreateLoadScreen(gMainMenu->nextMenu);
             break;
         case MENU_TRADE_ITEMS:
@@ -175,8 +175,8 @@ void SetUpMenu(void)
         case 0x2b:
         case 0x2c:
         case 0x2d:
-        case 0x2e:
-            sub_803850C(gMainMenu->nextMenu);
+        case MENU_DELETE_SAVE:
+            CreateSaveMenu(gMainMenu->nextMenu);
             break;
         case MENU_DEBUG:
             CreateDebugMenu();
@@ -199,8 +199,8 @@ s32 UpdateMenu(void)
     case MENU_AWAITING_RESCUE:
     case MENU_CONTINUE:
     case MENU_DELETE_SAVE_PROMPT:
-    case 9:
-        nextMenu = sub_803941C();
+    case MENU_DELETE_SAVE_CONFIRM:
+        nextMenu = UpdateLoadScreenMenu();
         break;
     case MENU_TRADE_ITEMS:
         iVar1 = UpdateTradeItemsMenu();
@@ -256,8 +256,8 @@ s32 UpdateMenu(void)
     case 0x2b:
     case 0x2c:
     case 0x2d:
-    case 0x2e:
-        nextMenu = sub_8038630();
+    case MENU_DELETE_SAVE:
+        nextMenu = UpdateSaveMenu();
         break;
     case MENU_DEBUG:
         nextMenu = UpdateDebugMenu();
@@ -279,7 +279,7 @@ void CleanUpMenu(void)
     case MENU_AWAITING_RESCUE:
     case MENU_CONTINUE:
     case MENU_DELETE_SAVE_PROMPT:
-    case 9:
+    case MENU_DELETE_SAVE_CONFIRM:
       CleanLoadScreen();
       break;
     case MENU_TRADE_ITEMS:
@@ -320,8 +320,8 @@ void CleanUpMenu(void)
     case 0x2b:
     case 0x2c:
     case 0x2d:
-    case 0x2e:
-      sub_8038604();
+    case MENU_DELETE_SAVE:
+      CleanSaveMenu();
       break;
     case MENU_DEBUG:
       DeleteDebugMenu();
@@ -460,10 +460,10 @@ void sub_8035DA0(void)
     gMainMenu->unk34 = 0;
 }
 
-s32 sub_8035DB4(u32 r0)
+s32 sub_8035DB4(u32 currMenu)
 {
     s32 returnVar = 8;
-    switch(r0)
+    switch(currMenu)
     {
     case MENU_COMMUNICATION_1:
         returnVar = 0;
@@ -498,8 +498,8 @@ void DrawMainMenu(void)
 
     if(gUnknown_203B34C == NULL)
     {
-        gUnknown_203B34C = MemoryAlloc(0x1A8, 8);
-        MemoryFill8((u8 *)gUnknown_203B34C, 0, 0x1A8);
+        gUnknown_203B34C = MemoryAlloc(sizeof(struct unkStruct_203B34C), 8);
+        MemoryFill8((u8 *)gUnknown_203B34C, 0, sizeof(struct unkStruct_203B34C));
     }
 
     for(iVar3 = 0; iVar3 < 4; iVar3++)
