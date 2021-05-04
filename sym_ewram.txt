@@ -329,10 +329,10 @@ gBG2Control = .; /* 202D6A8 */
 gBG3Control = .; /* 202D6B0 */
 	. += 0x8;
 
-gUnknown_202D6B8 = .; /* 202D6B8 */
+gBldAlpha_CoeffA = .; /* 202D6B8 */
 	. += 0x1;
 
-gUnknown_202D6B9 = .; /* 202D6B9 */
+gBldAlpha_CoeffB = .; /* 202D6B9 */
 	. += 0x141;
 
 gBldAlpha = .; /* 202D7FA */
