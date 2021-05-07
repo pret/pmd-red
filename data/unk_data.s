@@ -2,13 +2,13 @@
 
         .string "pksdir0\0"
         .4byte 1
-        .4byte unk_data_table
+        .4byte monpal_table
         .string "pksdir0\0"
 
-        .global unk_data_table
-        unk_data_table:
+        .global monpal_table
+        monpal_table:
         .4byte monpal_string
-        .4byte unkPalette
+        .4byte monPal
 
         .global monpal_string
         monpal_string:
@@ -17,8 +17,8 @@
         .string "pksdir0\0"
 
         @ Unknown Palette
-        .global unkPalette
-        unkPalette:
+        .global monPal
+        monPal:
         .byte 0x00, 0x00, 0x00, 0x80
         .byte 0x17, 0x17, 0x0f, 0x80
         .byte 0x47, 0x37, 0x37, 0x80
