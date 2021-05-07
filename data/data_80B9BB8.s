@@ -514,7 +514,13 @@ gUnknown_80D4120: @ 80D4120
 
 	.global gUnknown_80D4124
 gUnknown_80D4124: @ 80D4124
-	.incbin "baserom.gba", 0xD4124, 0x20
+        .string "$i0($v02"
+        .byte 0x81, 0x5E
+        .asciz "$v12)"
+        .align 2,0
+
+        .asciz "pksdir0"
+        .asciz "pksdir0"
 
 	.global gUnknown_80D4144
 gUnknown_80D4144: @ 80D4144
@@ -1763,6 +1769,8 @@ gUnknown_80DBE7C: @ 80DBE7C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global UnkData_80DBE94
+        UnkData_80DBE94:
         .byte 0x01, 0x00, 0x07, 0x00
 
 	.global gUnknown_80DBE98
@@ -1773,7 +1781,7 @@ gUnknown_80DBE98: @ 80DBE98
         .byte 0x09, 0x00, 0x06, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
 
-        .byte 0x94, 0xBE, 0x0D, 0x08
+        .4byte UnkData_80DBE94
 
 	.global gUnknown_80DBEB0
 gUnknown_80DBEB0: @ 80DBEB0
@@ -1858,6 +1866,8 @@ gUnknown_80DBFB0: @ 80DBFB0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global UnkData_80DBFC8
+        UnkData_80DBFC8:
         .byte 0x01, 0x00, 0x07, 0x00
 
 	.global gUnknown_80DBFCC
@@ -1868,7 +1878,7 @@ gUnknown_80DBFCC: @ 80DBFCC
         .byte 0x0A, 0x00, 0x06, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         
-        .byte 0xC8, 0xBF, 0x0D, 0x08
+        .4byte UnkData_80DBFC8
 
 	.global gOthers_MenuOption
 gOthers_MenuOption: @ 80DBFE4
@@ -1901,6 +1911,8 @@ gUnknown_80DC020: @ 80DC020
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
+        .global UnkData_80DC038
+        UnkData_80DC038:
         .byte 0x01, 0x00, 0x0a, 0x00
 
 	.global gUnknown_80DC03C
@@ -1911,7 +1923,7 @@ gUnknown_80DC03C: @ 80DC03C
         .byte 0x18, 0x00, 0x10, 0x00
         .byte 0x12, 0x00, 0x00, 0x00
 
-        .byte 0x38, 0xC0, 0x0D, 0x08
+        .4byte UnkData_80DC038
 
 @ Window Settings
 

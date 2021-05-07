@@ -614,7 +614,19 @@ gUnknown_80E03B8: @ 80E03B8
 
 	.global gUnknown_80E03C4
 gUnknown_80E03C4: @ 80E03C4
-	.incbin "baserom.gba", 0xE03C4, 0x30
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x03, 0x00
+        .byte 0x07, 0x00, 0x03, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E03F4
 gUnknown_80E03F4: @ 80E03F4
@@ -977,8 +989,13 @@ gUnknown_80E09C0: @ 80E09C0
 
 	.global gUnknown_80E09D8
 gUnknown_80E09D8: @ 80E09D8
-	.incbin "baserom.gba", 0xE09D8, 0x34
+        .string " ...Uh~2c no?\n"
+        .asciz "You don~27t have any #CGSOS Mail#R."
+        .align 2,0
 
 	.global gUnknown_80E0A0C
 gUnknown_80E0A0C: @ 80E0A0C
-	.incbin "baserom.gba", 0xE0A0C, 0x3C
+        .string " ...Uh~2c no?\n"
+        .asciz "You don~27t have any #CGA-OK Mail#R."
+        .align 2,0
+        .asciz "pksdir0"
