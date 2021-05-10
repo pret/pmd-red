@@ -32,9 +32,9 @@ u32 sub_800CDE0(void)
     return 1;
 }
 
-void CpuCopy(void* src, void *dest, s32 size)
+void CpuCopy(void* dest, void *src, s32 size)
 {
-    CpuCopy32(dest, src, size);
+    CpuCopy32(src, dest, size);
 }
 
 void CpuClear(void* dest, s32 size)
@@ -42,9 +42,9 @@ void CpuClear(void* dest, s32 size)
     CpuFill32(NULL, dest, size);
 }
 
-void CpuFill(void* src, void *dest, s32 size)
+void CpuFill(void* dest, void *value, s32 size)
 {
-    CpuFill32(dest, src, size);
+    CpuFill32(value, dest, size);
 }
 
 #ifdef NONMATCHING

@@ -4,6 +4,12 @@
 #include "input.h"
 #include "constants/species.h"
 
+struct unkData
+{
+    u8 unk0[20];
+    u8 *array;
+};
+
 struct unkStruct_203B208
 {
     // size: 0x14C
@@ -26,15 +32,21 @@ struct unkStruct_203B208
     u8 unkE6;
     u8 unkE7;
     struct OpenedFile **unkE8;
+    struct unkData unkEC[4];
 };
 extern struct unkStruct_203B208 *gUnknown_203B208;
+extern struct unkData gUnknown_80DB748;
+extern struct unkData gUnknown_80DB778;
+extern struct unkData gUnknown_80DB790;
+extern struct unkData gUnknown_80DB760;
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern void *MemoryAlloc(u32, u32);
 extern void MemoryFree(void *);
-extern void sub_800641C(u32 *, u32, u32);
-extern void UpdateKangaskhanStorageState(u32);
+extern void sub_800641C(struct unkData *, u32, u32);
+extern void sub_8006518(struct unkData *);
+void UpdateKangaskhanStorageState(u32);
 
 extern void sub_8017828();
 extern void sub_8017AF8();
@@ -49,7 +61,7 @@ extern void sub_8017DDC();
 extern void sub_8017928();
 extern void sub_8017A1C();
 extern void sub_8017DF8();
-extern void sub_8016E80();
+void sub_8016E80();
 extern void sub_8016FF8();
 
 
@@ -153,4 +165,41 @@ void UpdateKangaskhanStorageState(u32 newState)
     gUnknown_203B208->currState = newState;
     sub_8016E80();
     sub_8016FF8();
+}
+
+void sub_8016E80(void)
+{
+    s32 iVar3;
+
+    sub_8006518(gUnknown_203B208->unkEC);
+    switch(gUnknown_203B208->currState)
+    {
+        case 0xD:
+        case 0xE:
+            gUnknown_203B208->unkEC[0] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[1] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[2] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[0] = gUnknown_80DB748;
+            break;
+        case 0x16:
+        case 0x17:
+            gUnknown_203B208->unkEC[0] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[1] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[2] = gUnknown_80DB748;
+            gUnknown_203B208->unkEC[0] = gUnknown_80DB778;
+            break;
+        case 0x18:
+            gUnknown_203B208->unkEC[1] = gUnknown_80DB790;
+            break;
+        case 0xF:
+        case 0x19:
+            gUnknown_203B208->unkEC[2] = gUnknown_80DB760;
+            break;
+        default:
+            for(iVar3 = 0; iVar3 < 4; iVar3++)
+                gUnknown_203B208->unkEC[iVar3] = gUnknown_80DB748;
+            break;
+    }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B208->unkEC, 1, 1);
 }

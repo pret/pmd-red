@@ -137,7 +137,7 @@ void sub_800B540(void)
     nullsub_17();
     InitMusic(); // initialize music and stop DMAs
 
-    while(REG_VCOUNT <= 159){}
+    while(REG_VCOUNT < 160){}
 
     REG_IE ^= INTR_FLAG_TIMER3 | INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT; // 0x45
 
@@ -156,7 +156,7 @@ void sub_800B540(void)
     gInterruptsEnabled = 1;
     EnableInterrupts();
 
-    while(REG_VCOUNT <= 159){}
+    while(REG_VCOUNT < 160){}
 }
 
 bool8 EnableInterrupts(void)

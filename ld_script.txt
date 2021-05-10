@@ -90,6 +90,7 @@ SECTIONS {
         src/kangaskhan_storage.o(.text);
         asm/kangaskhan_storage.o(.text);
         src/kecleon_items.o(.text);
+        asm/kecleon_items.o(.text);
         asm/pokemon_square.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);

@@ -67,6 +67,15 @@ extern struct BGControlStruct gBG1Control;
 extern struct BGControlStruct gBG2Control;
 extern struct BGControlStruct gBG3Control;
 
+enum
+{
+    BG0,
+    BG1,
+    BG2,
+    BG3,
+    NUM_BGS
+};
+
 extern void SoundVSync();
 extern void BlinkSavingIcon();
 
@@ -312,21 +321,21 @@ void sub_800BB44(void)
     u16 dispcnt_store;
     bool8 interrupt_flag;
 
-    while(REG_KEYINPUT != 0x3ff){}
+    while(REG_KEYINPUT != KEYS_MASK){}
 
     interrupt_flag = DisableInterrupts();
 
-    while(REG_VCOUNT <= 159){}
+    while(REG_VCOUNT < 160){}
 
     dispcnt_store = REG_DISPCNT;
-    REG_DISPCNT = 0x80;
+    REG_DISPCNT = DISPCNT_FORCED_BLANK;
 
-    *(vu16 *)BG_PLTT = 0x7fff;
+    *(vu16 *)BG_PLTT = RGB_WHITE;
 
     ie_store = REG_IE;
     REG_IE = INTR_FLAG_KEYPAD | INTR_FLAG_GAMEPAK;
 
-    REG_KEYCNT = 0x8304;
+    REG_KEYCNT = KEY_AND_INTR | R_BUTTON | L_BUTTON | SELECT_BUTTON; // 0x8304
     REG_IME = 1;
 
     SoundBiasReset();
@@ -337,11 +346,11 @@ void sub_800BB44(void)
     REG_IE = ie_store;
     REG_KEYCNT = 0;
     REG_DISPCNT = dispcnt_store;
-    *(vu16 *)BG_PLTT = 0;
+    *(vu16 *)BG_PLTT = RGB_BLACK;
 
     if(interrupt_flag)
         EnableInterrupts();
-    while(REG_KEYINPUT != 0x3ff){}
+    while(REG_KEYINPUT != KEYS_MASK){}
 }
 
 void nullsub_17(void)
@@ -350,21 +359,21 @@ void nullsub_17(void)
 
 void UpdateBGControlRegisters(void)
 {
-    u32 BG[4];
+    u32 BGCNT_Priority[NUM_BGS];
 
     if(gUnknown_202D7FE == 1)
     {
-        BG[0] = 1;
-        BG[1] = 2;
-        BG[2] = 0;
-        BG[3] = 3;
+        BGCNT_Priority[BG0] = BGCNT_PRIORITY(1);
+        BGCNT_Priority[BG1] = BGCNT_PRIORITY(2);
+        BGCNT_Priority[BG2] = BGCNT_PRIORITY(0);
+        BGCNT_Priority[BG3] = BGCNT_PRIORITY(3);
     }
     else
     {
-        BG[0] = 0;
-        BG[1] = 1;
-        BG[2] = 2;
-        BG[3] = 3;
+        BGCNT_Priority[BG0] = BGCNT_PRIORITY(0);
+        BGCNT_Priority[BG1] = BGCNT_PRIORITY(1);
+        BGCNT_Priority[BG2] = BGCNT_PRIORITY(2);
+        BGCNT_Priority[BG3] = BGCNT_PRIORITY(3);
     }
 
     REG_BG0HOFS = gBG0Control.hofs;
@@ -376,18 +385,13 @@ void UpdateBGControlRegisters(void)
     REG_BG3HOFS = gBG3Control.hofs;
     REG_BG3VOFS = gBG3Control.vofs;
 
-    REG_BG0CNT = BG[0] | 0xB0 << 6;
-    REG_BG1CNT = BG[1] | 0xB4 << 6;
-    if(gBG2Control.unk2 == 0x80 << 8)
-    {
-        REG_BG2CNT = BG[2] | 0x2e08;
-    }
+    REG_BG0CNT = BGCNT_Priority[BG0] | BGCNT_SCREENBASE(12) | BGCNT_CHARBASE(0) | BGCNT_WRAP; // 0x2C00
+    REG_BG1CNT = BGCNT_Priority[BG1] | BGCNT_SCREENBASE(13) | BGCNT_CHARBASE(0) | BGCNT_WRAP; // 0x2D00
+    if(gBG2Control.unk2 == 0x8000)
+        REG_BG2CNT = BGCNT_Priority[BG2] | BGCNT_SCREENBASE(14) | BGCNT_CHARBASE(2) | BGCNT_WRAP; // 0x2E08
     else
-    {
-        REG_BG2CNT = BG[2] | 0xB8 << 6;
-    }
-
-    REG_BG3CNT = BG[3] | 0x2f08;
+        REG_BG2CNT = BGCNT_Priority[BG2] | BGCNT_SCREENBASE(14) | BGCNT_CHARBASE(0) | BGCNT_WRAP; // 0x2E00
+    REG_BG3CNT = BGCNT_Priority[BG3] | BGCNT_SCREENBASE(15) | BGCNT_CHARBASE(2) | BGCNT_WRAP;
     REG_BLDCNT = gBldCnt;
 }
 

@@ -31,7 +31,7 @@ void sub_800D098(void)
     u32 dispcnt_save;
     u32 ie_store;
 
-    while(REG_VCOUNT <= 159)
+    while(REG_VCOUNT < 160)
         ;
 
     // Save DISPCNT and set to 0
@@ -40,7 +40,7 @@ void sub_800D098(void)
 
     *(u16 *)BG_PLTT = 0xefff;
 
-    while(REG_KEYINPUT != 0x3ff) // 0011 1111 1111 (all buttons)
+    while(REG_KEYINPUT != KEYS_MASK)
         ;
 
 
@@ -71,9 +71,9 @@ void sub_800D098(void)
 
     REG_IME = 1;
 
-    while(REG_VCOUNT <= 159){}
+    while(REG_VCOUNT < 160){}
     REG_DISPCNT = dispcnt_save; // restore DISPCNT
-    while(REG_KEYINPUT != 0x3ff){} // All buttons
+    while(REG_KEYINPUT != KEYS_MASK){} // All buttons
 }
 
 void sub_800D158(u8 *buffer, const char *text, ...)
