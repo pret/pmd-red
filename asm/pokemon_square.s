@@ -2091,14 +2091,14 @@ _0801AF12:
 	adds r0, r6
 	ldrb r0, [r0, 0x2]
 	str r2, [sp]
-	bl sub_8090D44
+	bl GetItemOrder
 	adds r4, r0, 0
 	ldr r2, [sp]
 	ldr r0, [r2]
 	lsls r5, r7, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x2]
-	bl sub_8090D44
+	bl GetItemOrder
 	ldr r2, [sp]
 	cmp r4, r0
 	bgt _0801AF4C
@@ -6089,13 +6089,13 @@ _0801CEB8:
 	adds r0, r6
 	ldrb r0, [r0]
 	str r3, [sp]
-	bl sub_8090D44
+	bl GetItemOrder
 	adds r4, r0, 0
 	ldr r0, [r7]
 	adds r0, 0x4
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8090D44
+	bl GetItemOrder
 	ldr r3, [sp]
 	cmp r4, r0
 	ble _0801CEF0

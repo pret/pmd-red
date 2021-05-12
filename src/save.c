@@ -134,7 +134,7 @@ extern void sub_800135C(void);
 extern u32 *sub_808CE00(void);
 extern void sub_808CE08(void);
 extern u32 *sub_80909D0(void);
-extern void sub_80909D8(void);
+extern void InitializeItems(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
 extern u8 *sub_80950F8(void);
@@ -570,7 +570,7 @@ void sub_8012300(void)
 {
     InitializeFriendAreas();
     sub_808CE08();
-    sub_80909D8();
+    InitializeItems();
     InitializeResuceTeamInfo();
     sub_80972F4();
     sub_8095118();

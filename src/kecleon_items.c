@@ -3,35 +3,8 @@
 #include "pokemon.h"
 #include "constants/species.h"
 #include "input.h"
+#include "kecleon_items.h"
 
-struct unkData
-{
-    u8 unk0[24];
-};
-
-struct unkStruct_203B210
-{
-    // size: 0x148
-    u32 unk0;
-    u8 unk4;
-    u8 fill5[3];
-    u32 unk8;
-    u8 fillC[0x28 - 0xC];
-    u32 unk28;
-    u32 unk2C;
-    u32 unk30;
-    u8 fill34[0xD4 - 0x34];
-    struct OpenedFile *unkD4;
-    u8 *unkD8;
-    u16 unkDC;
-    u16 unkDE;
-    u8 unkE0;
-    u8 unkE1;
-    u8 unkE2;
-    u8 unkE3;
-    struct OpenedFile **unkE4;
-    struct unkData unkE8[4];
-};
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
@@ -121,7 +94,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
 
 u32 sub_8018C04(void)
 {
-  switch(gUnknown_203B210->unk8) {
+  switch(gUnknown_203B210->currState) {
     case 0:
     case 1:
         sub_8019730();
@@ -176,7 +149,7 @@ void sub_8018CF0(void)
 
 void UpdateKecleonStoreState(u32 newState)
 {
-    gUnknown_203B210->unk8 = newState;
+    gUnknown_203B210->currState = newState;
     sub_8018D30();
     sub_8018E88();
 }
@@ -185,7 +158,7 @@ void sub_8018D30(void)
 {
     s32 iVar3;
     sub_8006518(gUnknown_203B210->unkE8);
-    switch(gUnknown_203B210->unk8)
+    switch(gUnknown_203B210->currState)
     {
         case 0x12:
         case 0x13:
@@ -212,9 +185,7 @@ void sub_8018D30(void)
         case 0x18:
         case 0x19:
             for(iVar3 = 0; iVar3 < 4; iVar3++)
-            {
                 gUnknown_203B210->unkE8[iVar3] = gUnknown_80DB840;
-            }
             break;
     }
     ResetUnusedInputStruct();

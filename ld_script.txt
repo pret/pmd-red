@@ -89,8 +89,11 @@ SECTIONS {
         src/felicity_bank_1.o(.text);
         src/kangaskhan_storage.o(.text);
         asm/kangaskhan_storage.o(.text);
+        src/kangaskhan_storage_1.o(.text);
+        asm/kangaskhan_storage_1.o(.text);
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
+        src/kecleon_items_1.o(.text);
         asm/pokemon_square.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);
@@ -170,6 +173,8 @@ SECTIONS {
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
+        src/items.o(.text);
+        asm/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
         src/friend_area.o(.text);

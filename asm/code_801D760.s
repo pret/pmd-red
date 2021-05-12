@@ -10534,7 +10534,7 @@ _08022D80:
 	adds r0, r2, 0
 	adds r0, 0x52
 	ldrb r0, [r0]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5

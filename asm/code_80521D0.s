@@ -1379,7 +1379,7 @@ sub_8052EC0:
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	adds r0, r4, 0
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3

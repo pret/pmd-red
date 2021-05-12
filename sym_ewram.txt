@@ -895,7 +895,10 @@ gLevelCurrentData = .; /* 20384F0 */
 	. += 0x4B0;
 
 gItemParametersFile = .; /* 20389A0 */
-	. += 0x8;
+	. += 0x4;
+
+gItemParametersData = .; /* 20389A4 */
+	. += 0x4;
 
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;

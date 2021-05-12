@@ -7692,7 +7692,7 @@ sub_809CBBC:
 	b _0809CC4A
 	.align 2, 0
 _0809CC0C: .4byte gUnknown_81163E4
-_0809CC10: .4byte gItemParametersFile + 4
+_0809CC10: .4byte gItemParametersData
 _0809CC14: .4byte gUnknown_203B460
 _0809CC18: .4byte 0x0001869f
 _0809CC1C:

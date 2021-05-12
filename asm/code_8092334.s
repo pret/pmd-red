@@ -4509,7 +4509,7 @@ sub_8094828:
 	lsrs r0, r1, 24
 	cmp r0, 0
 	beq _08094852
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9

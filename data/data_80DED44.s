@@ -2,7 +2,6 @@
 
 	.global gUnknown_80DED48
 gUnknown_80DED48: @ 80DED48
-        @ replacing .incbin "baserom.gba", 0x000ded48, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x15, 0x00, 0x04, 0x00
@@ -12,7 +11,6 @@ gUnknown_80DED48: @ 80DED48
 
 	.global gUnknown_80DED60
 gUnknown_80DED60: @ 80DED60
-        @ replacing .incbin "baserom.gba", 0x000ded60, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x16, 0x00, 0x07, 0x00
@@ -22,7 +20,6 @@ gUnknown_80DED60: @ 80DED60
 
 	.global gUnknown_80DED78
 gUnknown_80DED78: @ 80DED78
-        @ replacing .incbin "baserom.gba", 0x000ded78, 0x40
         .4byte Confirm_80DED98
         .byte 0x0b, 0x00, 0x00, 0x00
         .4byte Info_80DED90
@@ -48,7 +45,6 @@ gUnknown_80DED78: @ 80DED78
 
 	.global gUnknown_80DEDB8
 gUnknown_80DEDB8: @ 80DEDB8
-        @ replacing .incbin "baserom.gba", 0x000dedb8, 0x50
         .4byte SendThankYou_Text
         .byte 0x01, 0x00, 0x00, 0x00
         .4byte GetThankYou_Text
@@ -76,7 +72,6 @@ gUnknown_80DEDB8: @ 80DEDB8
 	.global gUnknown_80DEE08
 gUnknown_80DEE08: @ 80DEE08
         @ Thank You Mail Pelipper Menu
-        @ replacing .incbin "baserom.gba", 0x000dee08, 0x3c
         .4byte GameLinkCable_Text
         .byte 0x03, 0x00, 0x00, 0x00
         .4byte Password_Text
@@ -99,7 +94,6 @@ gUnknown_80DEE08: @ 80DEE08
 	.global gUnknown_80DEE44
 gUnknown_80DEE44: @ 80DEE44
         @ Game Link Cable Thank-You Mail Menu
-        @ replacing .incbin "baserom.gba", 0x000dee44, 0x1c
         .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
         .4byte Cancel_80DEDD8
@@ -114,7 +108,6 @@ gUnknown_80DEE44: @ 80DEE44
 
 	.global gUnknown_80DEE60
 gUnknown_80DEE60: @ 80DEE60
-        @ replacing .incbin "baserom.gba", 0x000dee60, 0x1c
         .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
         .4byte No_80DEE78
@@ -129,7 +122,6 @@ gUnknown_80DEE60: @ 80DEE60
 
 	.global gUnknown_80DEE7C
 gUnknown_80DEE7C: @ 80DEE7C
-        @ replacing .incbin "baserom.gba", 0x000dee7c, 0x40
         .4byte SendItem_Text
         .byte 0x09, 0x00, 0x00, 0x00
         .4byte DontSendItemText
@@ -151,7 +143,6 @@ gUnknown_80DEE7C: @ 80DEE7C
 
 	.global gUnknown_80DEEBC
 gUnknown_80DEEBC: @ 80DEEBC
-        @ replacing .incbin "baserom.gba", 0x000deebc, 0x28
         .4byte SendWOItem_Text
         .byte 0x0a, 0x00, 0x00, 0x00
         .4byte Cancel_80DEDD8
@@ -166,7 +157,6 @@ gUnknown_80DEEBC: @ 80DEEBC
 
 	.global gUnknown_80DEEE4
 gUnknown_80DEEE4: @ 80DEEE4
-        @ replacing .incbin "baserom.gba", 0x000deee4, 0x20
         .4byte Yes_80DEE5C
         .byte 0x07, 0x00, 0x00, 0x00
         .4byte No_80DEE78
@@ -193,12 +183,10 @@ gUnknown_80DFBD0: @ 80DFBD0
 
 	.global gUnknown_80DFBE8
 gUnknown_80DFBE8: @ 80DFBE8
-@ replacing .incbin "baserom.gba", 0x000dfbe8, 0x4
         .byte 0x01, 0x00, 0x0c, 0x00
 
 	.global gUnknown_80DFBEC
 gUnknown_80DFBEC: @ 80DFBEC
-@ replacing .incbin "baserom.gba", 0x000dfbec, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x02, 0x00
@@ -251,7 +239,6 @@ gUnknown_80DFC50: @ 80DFC50
 
 	.global gUnknown_80DFC5C
 gUnknown_80DFC5C: @ 80DFC5C
-@ replacing .incbin "baserom.gba", 0x000dfc5c, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -261,7 +248,6 @@ gUnknown_80DFC5C: @ 80DFC5C
 
 	.global gUnknown_80DFC74
 gUnknown_80DFC74: @ 80DFC74
-@ replacing .incbin "baserom.gba", 0x000dfc74, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x02, 0x00
@@ -276,7 +262,6 @@ gMailboxText: @ 80DFC8C
 
 	.global gUnknown_80DFC9C
 gUnknown_80DFC9C: @ 80DFC9C
-@ replacing .incbin "baserom.gba", 0x000dfc9c, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -286,7 +271,6 @@ gUnknown_80DFC9C: @ 80DFC9C
 
 	.global gUnknown_80DFCB4
 gUnknown_80DFCB4: @ 80DFCB4
-@ replacing .incbin "baserom.gba", 0x000dfcb4, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x02, 0x00
@@ -302,7 +286,6 @@ gBulletinBoardText: @ 80DFCCC
 
 	.global gUnknown_80DFCE4
 gUnknown_80DFCE4: @ 80DFCE4
-@ replacing .incbin "baserom.gba", 0x000dfce4, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -312,7 +295,6 @@ gUnknown_80DFCE4: @ 80DFCE4
 
 	.global gUnknown_80DFCFC
 gUnknown_80DFCFC: @ 80DFCFC
-@ replacing .incbin "baserom.gba", 0x000dfcfc, 0x18
         .byte 0x00, 0x00
         .byte 0x00, 0x00
         .byte 0x06, 0x00
@@ -334,7 +316,6 @@ gUnknown_80DFD14: @ 80DFD14
 
 	.global gUnknown_80DFD28
 gUnknown_80DFD28: @ 80DFD28
-@ replacing .incbin "baserom.gba", 0x000dfd28, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -344,7 +325,6 @@ gUnknown_80DFD28: @ 80DFD28
 
 	.global gUnknown_80DFD40
 gUnknown_80DFD40: @ 80DFD40
-@ replacing .incbin "baserom.gba", 0x000dfd40, 0x18
         .byte 0x00, 0x00
         .byte 0x00, 0x00
         .byte 0x04, 0x00
@@ -360,7 +340,6 @@ gUnknown_80DFD40: @ 80DFD40
 
 	.global gUnknown_80DFD58
 gUnknown_80DFD58: @ 80DFD58
-@ replacing .incbin "baserom.gba", 0x000dfd58, 0x18
         .byte 0x00, 0x00
         .byte 0x00, 0x00
         .byte 0x04, 0x00
@@ -386,7 +365,6 @@ gUnknown_80DFD7C: @ 80DFD7C
 
 	.global gUnknown_80DFD8C
 gUnknown_80DFD8C: @ 80DFD8C
-@ replacing .incbin "baserom.gba", 0x000dfd8c, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -396,7 +374,6 @@ gUnknown_80DFD8C: @ 80DFD8C
 
 	.global gUnknown_80DFDA4
 gUnknown_80DFDA4: @ 80DFDA4
-@ replacing .incbin "baserom.gba", 0x000dfda4, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x02, 0x0
@@ -662,7 +639,11 @@ gUnknown_80E0434: @ 80E0434
 
 	.global gUnknown_80E045C
 gUnknown_80E045C: @ 80E045C
-	.incbin "baserom.gba", 0xE045C, 0x28
+@ replacing .incbin "baserom.gba", 0x000e045c, 0x28
+        .string "#+#CN$m0#R received\n"
+        .string "#+#C5$d0#R"
+        .byte 0x20, 0x83
+        .byte 0xbf, 0x83, 0xc4, 0x2e, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0484
 gUnknown_80E0484: @ 80E0484

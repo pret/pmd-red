@@ -17927,7 +17927,7 @@ _0806092C:
 	movs r0, 0x9
 	bl sub_8044F5C
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -18013,12 +18013,12 @@ _080609E8:
 	cmp r0, 0x14
 	bhi _08060A6C
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060A0A
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18194,7 +18194,7 @@ _08060B68:
 	bl sub_8044F5C
 _08060B78:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060B8E
@@ -18204,7 +18204,7 @@ _08060B78:
 	b _08060BAE
 _08060B8E:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18265,7 +18265,7 @@ _08060BD0:
 	movs r4, 0x1
 	ands r4, r0
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -18273,7 +18273,7 @@ _08060BD0:
 	movs r5, 0x1
 _08060C22:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9
@@ -29708,7 +29708,7 @@ _080667C8: .4byte 0x00000133
 _080667CC: .4byte gUnknown_80F8D04
 _080667D0:
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08066808
@@ -30908,12 +30908,12 @@ _080671E0: .4byte gUnknown_202DE58
 _080671E4: .4byte gUnknown_80F8BE0
 _080671E8:
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067202
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -30977,7 +30977,7 @@ _08067272:
 	lsrs r0, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806729A
@@ -30985,7 +30985,7 @@ _08067272:
 	lsrs r0, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -31092,12 +31092,12 @@ _0806733E:
 _08067364:
 	add r4, sp, 0x4
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067380
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -31115,7 +31115,7 @@ _08067384:
 	movs r2, 0
 	bl sub_80708B4
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	bne _080673BC
@@ -31136,7 +31136,7 @@ _080673BC:
 _080673C6:
 	add r0, sp, 0x4
 	ldrb r0, [r0, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -31234,7 +31234,7 @@ _08067462:
 _08067486:
 	add r0, sp, 0x4
 	ldrb r0, [r0, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -56354,7 +56354,7 @@ _080736D4:
 	movs r3, 0x81
 	str r3, [sp, 0x54]
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -56576,7 +56576,7 @@ _08073870:
 	cmp r5, 0
 	beq _080738EC
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -56637,7 +56637,7 @@ _080738FC:
 	cmp r0, 0
 	beq _080739AE
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -57274,7 +57274,7 @@ _08073DC8:
 	cmp r0, 0
 	bne _08073E24
 	ldrb r0, [r5, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -82227,7 +82227,7 @@ _08080470:
 _08080478:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3

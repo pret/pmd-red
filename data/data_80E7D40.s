@@ -345,11 +345,47 @@ gUnknown_80E8B7C: @ 80E8B7C
 
 	.global gUnknown_80E8B94
 gUnknown_80E8B94: @ 80E8B94
-	.incbin "baserom.gba", 0xE8B94, 0x38
+@ replacing .incbin "baserom.gba", 0x000e8b94, 0x38
+        .4byte UnkData_80E8BC8
+        .4byte UnkData_80E8BC4
+        .4byte UnkData_80E8BC0
+        .4byte UnkData_80E8BBC
+        .4byte UnkData_80E8BB8
+        .4byte UnkData_80E8BB4
+        .4byte UnkData_80E8BB0
+
+        .global UnkData_80E8BB0
+        UnkData_80E8BB0:
+        .byte 0x83, 0xc3, 0x00, 0x00
+
+        .global UnkData_80E8BB4
+        UnkData_80E8BB4:
+        .byte 0x83, 0xc2, 0x00, 0x00
+
+        .global UnkData_80E8BB8
+        UnkData_80E8BB8:
+        .byte 0x83, 0xc1, 0x00, 0x00
+
+        .global UnkData_80E8BBC
+        UnkData_80E8BBC:
+        .byte 0x83, 0xc0, 0x00, 0x00
+
+        .global UnkData_80E8BC0
+        UnkData_80E8BC0:
+        .byte 0x87, 0x40, 0x00, 0x00
+
+        .global UnkData_80E8BC4
+        UnkData_80E8BC4:
+        .byte 0x84, 0x87, 0x00, 0x00
+
+        .global UnkData_80E8BC8
+        UnkData_80E8BC8:
+        .byte 0x81, 0x40, 0x00, 0x00
+
 
 	.global gUnknown_80E8BCC
 gUnknown_80E8BCC: @ 80E8BCC
-        .byte 0xC8, 0x8B, 0x0E, 0x08
+        .4byte UnkData_80E8BC8
         .4byte SuspendText
         .4byte TakeJobText
         .4byte DoneText
@@ -440,19 +476,171 @@ gUnknown_80EAE5C: @ 80EAE5C
 
 	.global gUnknown_80EAEB8
 gUnknown_80EAEB8: @ 80EAEB8
-	.incbin "baserom.gba", 0xEAEB8, 0x2E0
+@ replacing .incbin "baserom.gba", 0x000eaeb8, 0x2e0
+        .byte 0x7c, 0xb1, 0x0e, 0x08
+        .byte 0x58, 0xb1, 0x0e, 0x08
+        .byte 0x38, 0xb1, 0x0e, 0x08
+        .byte 0x18, 0xb1, 0x0e, 0x08
+        .byte 0xfc, 0xb0, 0x0e, 0x08
+        .byte 0xdc, 0xb0, 0x0e, 0x08
+        .byte 0xb4, 0xb0, 0x0e, 0x08
+        .byte 0x90, 0xb0, 0x0e, 0x08
+        .byte 0x6c, 0xb0, 0x0e, 0x08
+        .byte 0x48, 0xb0, 0x0e, 0x08
+        .byte 0x30, 0xb0, 0x0e, 0x08
+        .byte 0x14, 0xb0, 0x0e, 0x08
+        .byte 0xf0, 0xaf, 0x0e, 0x08
+        .byte 0xd4, 0xaf, 0x0e, 0x08
+        .byte 0xa4, 0xaf, 0x0e, 0x08
+        .byte 0x94, 0xaf, 0x0e, 0x08
+        .byte 0x70, 0xaf, 0x0e, 0x08
+        .byte 0x4c, 0xaf, 0x0e, 0x08
+        .byte 0x2c, 0xaf, 0x0e, 0x08
+        .byte 0x08, 0xaf, 0x0e, 0x08
+
+        .asciz "I~27m close friends with #C6%s#R!"
+        .align 2,0
+
+        .asciz "I want to apologize to #C6%s#R."
+        .align 2,0
+
+        .asciz "I don~27t care how--we must meet!"
+        .align 2,0
+
+        .asciz "We have to meet--whatever it takes!"
+        .align 2,0
+
+        .asciz "I have to go!"
+        .align 2,0
+
+        .asciz "We haven~27t seen each other in a long time."
+        .align 2,0
+
+        .asciz "I~27m sick with worry..."
+        .align 2,0
+
+        .asciz "#C6%s#R may have fainted inside..."
+        .align 2,0
+
+        .asciz "#C6%s#R hasn~27t returned!"
+        .align 2,0
+
+        .asciz "I want to help #C6%s#R!"
+        .align 2,0
+
+        .asciz "Hurry~2c #C6%s#R is in trouble..."
+        .align 2,0
+
+        .asciz "#C6%s#R has been waiting forever..."
+        .align 2,0
+
+        .asciz "#C6%s#R is waiting in the dungeon."
+        .align 2,0
+
+        .asciz "I~27m too weak. It~27s not possible."
+        .align 2,0
+
+        .asciz "I can~27t go on my own power..."
+        .align 2,0
+
+        .asciz "I can~27t go by myself..."
+        .align 2,0
+
+        .asciz "I~27m worried about #C6%s#R..."
+        .align 2,0
+
+        .asciz "I want to meet with #C6%s#R."
+        .align 2,0
+
+        .asciz "We promised to meet in the dungeon!"
+        .align 2,0
+
+        .asciz "#C6%s#R is waiting for me!"
+        .align 2,0
+
 
 	.global gUnknown_80EB198
 gUnknown_80EB198: @ 80EB198
-	.incbin "baserom.gba", 0xEB198, 0x88
+        .4byte PleaseTakeMeToSee
+        .4byte PleaseTakeMeThere
+        .4byte PleaseEscortMe
+        .4byte SomeonePleaseEscort
+
+        .global SomeonePleaseEscort
+        SomeonePleaseEscort:
+        .asciz "Someone~2c please escort me!"
+        .align 2,0
+
+        .global PleaseEscortMe
+        PleaseEscortMe:
+        .asciz "Please escort me there!"
+        .align 2,0
+
+        .global PleaseTakeMeThere
+        PleaseTakeMeThere:
+        .asciz "Please take me there with you!"
+        .align 2,0
+
+        .global PleaseTakeMeToSee
+        PleaseTakeMeToSee:
+        .asciz "Please take me to see #C6%s#R!"
+        .align 2,0
 
 	.global gUnknown_80EB220
 gUnknown_80EB220: @ 80EB220
-	.incbin "baserom.gba", 0xEB220, 0xD0
+@ replacing .incbin "baserom.gba", 0x000eb220, 0xd0
+        .byte 0xcc, 0xb2, 0x0e, 0x08
+        .byte 0xac, 0xb2, 0x0e, 0x08
+        .byte 0x94, 0xb2, 0x0e, 0x08
+        .byte 0x74, 0xb2, 0x0e, 0x08
+        .byte 0x50, 0xb2, 0x0e, 0x08
+        .byte 0x38, 0xb2, 0x0e, 0x08
+
+        .asciz "Without #C6%s#R~2c I..."
+        .align 2,0
+
+        .asciz "I~27m so worried about #C6%s#R..."
+        .align 2,0
+
+        .asciz "I really want to meet #C6%s#R!"
+        .align 2,0
+
+        .asciz "Help me meet #C6%s#R!"
+        .align 2,0
+
+        .asciz "Please escort me to my #C6%s#R!"
+        .align 2,0
+
+        .asciz "Please! Take me to meet #C6%s#R!"
+        .align 2,0
 
 	.global gUnknown_80EB2F0
 gUnknown_80EB2F0: @ 80EB2F0
-	.incbin "baserom.gba", 0xEB2F0, 0x108
+@ replacing .incbin "baserom.gba", 0x000eb2f0, 0x108
+        .byte 0xcc, 0xb3, 0x0e, 0x08
+        .byte 0xa4, 0xb3, 0x0e, 0x08
+        .byte 0x7c, 0xb3, 0x0e, 0x08
+        .byte 0x5c, 0xb3, 0x0e, 0x08
+        .byte 0x34, 0xb3, 0x0e, 0x08
+        .byte 0x08, 0xb3, 0x0e, 0x08
+
+        .asciz "I~27m very lonely! Please take me with you!"
+        .align 2,0
+
+        .asciz "It~27s no good if we~27re not together!"
+        .align 2,0
+
+        .asciz "This means everything to me!"
+        .align 2,0
+
+        .asciz "We~27ve promised our futures together."
+        .align 2,0
+
+        .asciz "We belong together! Please escort me!"
+        .align 2,0
+
+        .asciz "We~27re in love! Please~2c take me there!"
+        .align 2,0
 
 @ Item Delivery Mission Text
 	.global gUnknown_80EB3F8

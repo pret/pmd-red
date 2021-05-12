@@ -3,37 +3,8 @@
 #include "pokemon.h"
 #include "input.h"
 #include "constants/species.h"
+#include "kangaskhan_storage.h"
 
-struct unkData
-{
-    u8 unk0[20];
-    u8 *array;
-};
-
-struct unkStruct_203B208
-{
-    // size: 0x14C
-    u32 unk0;
-    u32 currState;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
-    u8 fill24[0xD8 - 0x24];
-    struct OpenedFile *faceFile;
-    u8 *faceData;
-    u16 unkE0;
-    u16 unkE2;
-    u8 unkE4;
-    u8 unkE5;
-    u8 unkE6;
-    u8 unkE7;
-    struct OpenedFile **unkE8;
-    struct unkData unkEC[4];
-};
 extern struct unkStruct_203B208 *gUnknown_203B208;
 extern struct unkData gUnknown_80DB748;
 extern struct unkData gUnknown_80DB778;
