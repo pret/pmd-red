@@ -8,9 +8,9 @@ struct unkData
 
 struct TradeSubStruct
 {
-    u8 unk0; // item id?
+    u8 itemIndex; // item id?
     u8 fill3[0x3];
-    u32 unk4; // number of items?
+    u32 numItems; // number of items?
 };
 
 
@@ -22,7 +22,7 @@ struct TradeItemsMenu
     u32 itemMode;
     u32 linkStatus;
     u32 unk10;
-    u32 unk14; // item #
+    u32 numItemsToSend; // item #
     u32 unk18;
     u32 unk1C;
     u32 unk20;
@@ -49,8 +49,8 @@ struct TradeItemsMenu
     struct TradeSubStruct unk254;
 
     u8 unk25C;
-    u8 unk25D;
-    u8 unk25E;
+    u8 chosenNum;
+    u8 chosenItem;
     u8 fill25F[0x3A0 - 0x25F];
 };
 

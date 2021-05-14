@@ -133,8 +133,8 @@ extern void sub_80993E4();
 extern void sub_800135C(void);
 extern u32 *sub_808CE00(void);
 extern void sub_808CE08(void);
-extern u32 *sub_80909D0(void);
-extern void InitializeItems(void);
+extern u32 *GetMoneyItemsInfo(void);
+extern void InitializeMoneyItems(void);
 extern u32 sub_8094990(void);
 extern void sub_8094998(u8 r0);
 extern u8 *sub_80950F8(void);
@@ -570,7 +570,7 @@ void sub_8012300(void)
 {
     InitializeFriendAreas();
     sub_808CE08();
-    InitializeItems();
+    InitializeMoneyItems();
     InitializeResuceTeamInfo();
     sub_80972F4();
     sub_8095118();
@@ -607,7 +607,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gPlayTimeRef     = r0->playTime;
        return;
     }
-       gUnknown_203B460 = sub_80909D0();
+       gUnknown_203B460 = GetMoneyItemsInfo();
        gRecruitedPokemonRef = sub_808CE00();
        gUnknown_203B480 = sub_80950F8();
        gUnknown_203B484 = sub_8095100();

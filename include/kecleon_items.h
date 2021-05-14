@@ -19,7 +19,7 @@ struct unkStruct_203B210
     s32 unk10;
     u32 unk14;
     u32 unk18;
-    struct subStruct_203B460 unk1C;
+    struct ItemStruct_203B460 unk1C;
     u32 unk20;
     u32 unk24;
     u32 unk28;

@@ -56564,7 +56564,7 @@ _08073866:
 _08073870:
 	ldrb r0, [r7, 0x2]
 	movs r1, 0
-	bl sub_8090DAC
+	bl GetItemUnkFood
 	lsls r0, 24
 	cmp r0, 0
 	beq _080738EC
@@ -56632,7 +56632,7 @@ _080738EC:
 _080738FC:
 	ldrb r0, [r7, 0x2]
 	mov r1, r9
-	bl sub_8090DAC
+	bl GetItemUnkFood
 	lsls r0, 24
 	cmp r0, 0
 	beq _080739AE

@@ -57,7 +57,7 @@ extern void sub_801CB5C(u32);
 extern void sub_8035CF4(u32 *, u32, u32); 
 extern u32 sub_8013BBC(u32 *);
 void sub_8036F30();
-extern void sub_80369D0();
+extern void TradeItem_AddItem();
 extern void sub_8012574(u32);
 extern void sub_80141B4(u32 *, u32, u32, u32);
 
@@ -80,13 +80,13 @@ extern void sub_801C8C4(u32, u32, s32 *, u32);
 
 void SetTradeItemMenu(u32);
 void PrintTradeItemsLinkError(u32);
-void sub_803652C();
+void TradeItem_MainMenu();
 void sub_8036590();
 void sub_80365AC();
 void sub_8036674();
 void sub_8036788();
 void sub_8036728();
-extern void sub_8036830();
+void TradeItem_SendItemConfirm();
 void sub_803689C();
 void sub_80368D4();
 void sub_8036934();
@@ -141,7 +141,7 @@ u32 UpdateTradeItemsMenu(void)
   
   switch(gTradeItemsMenu->currMenu) {
       case TRADE_ITEMS_MAIN_MENU:
-        sub_803652C();
+        TradeItem_MainMenu();
         break;
       case TRADE_ITEMS_SEND_ITEM:
         sub_8036590();
@@ -159,7 +159,7 @@ u32 UpdateTradeItemsMenu(void)
         sub_8036788();
         break;
       case TRADE_ITEMS_SEND_ITEM_CONFIRM:
-        sub_8036830();
+        TradeItem_SendItemConfirm();
         break;
       case TRADE_ITEMS_RECEIVE_ITEM:
         sub_803689C();
@@ -200,7 +200,7 @@ u32 UpdateTradeItemsMenu(void)
   return 0;
 }
 
-void sub_803652C(void)
+void TradeItem_MainMenu(void)
 {
   s32 menuAction;
   
@@ -237,8 +237,8 @@ void sub_8036590(void)
 
 void sub_80365AC(void)
 { 
-  gTradeItemsMenu->unk25E = 0;
-  gTradeItemsMenu->unk25D = 1;
+  gTradeItemsMenu->chosenItem = 0;
+  gTradeItemsMenu->chosenNum = 1;
   gTradeItemsMenu->unk25C = 0;
   switch(sub_801CA08(1)){
     case 2:
@@ -248,14 +248,14 @@ void sub_80365AC(void)
         break;
     case 3:
         // Pop up menu with Confirm, Info, Cancel
-        gTradeItemsMenu->unk25E = sub_801CB24();
-        gTradeItemsMenu->unk25D = 1;
+        gTradeItemsMenu->chosenItem = sub_801CB24();
+        gTradeItemsMenu->chosenNum = 1;
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 4:
         gTradeItemsMenu->unk4 = 2;
-        gTradeItemsMenu->unk25E = sub_801CB24();
-        gTradeItemsMenu->unk25D = 1;
+        gTradeItemsMenu->chosenItem = sub_801CB24();
+        gTradeItemsMenu->chosenNum = 1;
         sub_8006518(&gTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
@@ -323,7 +323,7 @@ void sub_8036788(void)
 { 
   sub_8012FD8(&gTradeItemsMenu->unk134);
   sub_801CA08(0);
-  switch(sub_8013BBC(&gTradeItemsMenu->unk14)){
+  switch(sub_8013BBC(&gTradeItemsMenu->numItemsToSend)){
     case 1:
         // When you change the #
         sub_801CCD8();
@@ -339,9 +339,9 @@ void sub_8036788(void)
         break;
     case 3:
         // Confirm # of item
-        gTradeItemsMenu->unk25D = gTradeItemsMenu->unk14;
-        gTradeItemsMenu->unk254.unk0 = gTradeItemsMenu->unk25E;
-        gTradeItemsMenu->unk254.unk4 = gTradeItemsMenu->unk14;
+        gTradeItemsMenu->chosenNum = gTradeItemsMenu->numItemsToSend;
+        gTradeItemsMenu->unk254.itemIndex = gTradeItemsMenu->chosenItem;
+        gTradeItemsMenu->unk254.numItems = gTradeItemsMenu->numItemsToSend;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
         break;
@@ -350,7 +350,7 @@ void sub_8036788(void)
   }
 }
 
-void sub_8036830(void)
+void TradeItem_SendItemConfirm(void)
 {
   int menuAction;
   u16 load;
@@ -361,9 +361,9 @@ void sub_8036830(void)
         case 5:
             sub_801CBB8();
             // Used temp var to get correct statements
-            load = gUnknown_203B460->unk50[gTradeItemsMenu->unk25E];
-            load -= gTradeItemsMenu->unk14;
-            gUnknown_203B460->unk50[gTradeItemsMenu->unk25E] = load;
+            load = gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem];
+            load -= gTradeItemsMenu->numItemsToSend;
+            gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
             sub_8012574(0);
             break;
@@ -403,9 +403,9 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if ((gTradeItemsMenu->unk254.unk0 != 0) && (gTradeItemsMenu->unk254.unk4 != 0))
+            if ((gTradeItemsMenu->unk254.itemIndex != 0) && (gTradeItemsMenu->unk254.numItems != 0))
             {
-                sub_80369D0();
+                TradeItem_AddItem();
                 SetTradeItemMenu(0x11);
                 sub_8012574(0);
             }
@@ -441,10 +441,10 @@ void sub_8036950(void)
       }
     }
     else {
-      if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->unk254.unk0 != 0))
-         && (gTradeItemsMenu->unk254.unk4 != 0)) {
+      if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->unk254.itemIndex != 0))
+         && (gTradeItemsMenu->unk254.numItems != 0)) {
           // Link Failure
-        sub_80369D0(); // Add back the item
+        TradeItem_AddItem(); // Add back the item
         SetTradeItemMenu(0xb);
         sub_8012574(0);
       }
@@ -456,13 +456,13 @@ void sub_8036950(void)
   }
 }
 
-void sub_80369D0(void)
+void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements 
     u16 load;
-    load = gUnknown_203B460->unk50[gTradeItemsMenu->unk254.unk0];
-    load += gTradeItemsMenu->unk254.unk4;
-    gUnknown_203B460->unk50[gTradeItemsMenu->unk254.unk0] = load;
+    load = gUnknown_203B460->unk50[gTradeItemsMenu->unk254.itemIndex];
+    load += gTradeItemsMenu->unk254.numItems;
+    gUnknown_203B460->unk50[gTradeItemsMenu->unk254.itemIndex] = load;
 }
 
 void sub_80369FC(void)
@@ -603,8 +603,8 @@ void sub_8036B28(void)
         sub_8036F74();
         break;
     case 6:
-        gUnknown_202DE30 = gTradeItemsMenu->unk14;
-        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk25E,0);
+        gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
+        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->chosenItem,0);
         sub_8014248(&gUnknown_80E61E4,0,5, &gUnknown_80E6154,0,4,0,0,0x101);
         break;
     case 7:
@@ -624,13 +624,13 @@ void sub_8036B28(void)
     // Needs a mov r2, 0
     // and     mov r3, 0
         temp = &gTradeItemsMenu->unk244;
-        temp->unk0 = 0;
-        temp->unk4 = 0;
+        temp->itemIndex = 0;
+        temp->numItems = 0;
 
         temp += 1; // move to unk24C
 
-        temp->unk0 = 0;
-        temp->unk4 = 0;
+        temp->itemIndex = 0;
+        temp->numItems = 0;
     // Regs are fixed back up after
 
         sub_8011830();
@@ -642,9 +642,9 @@ void sub_8036B28(void)
             case TRADE_ITEMS_SEND_ITEM_MODE:
                 temp = &gTradeItemsMenu->unk244;
                 temp2 = &gTradeItemsMenu->unk254;
-                load_2 = temp2->unk4;
-                temp->unk0 = temp2->unk0;
-                temp->unk4 = load_2;
+                load_2 = temp2->numItems;
+                temp->itemIndex = temp2->itemIndex;
+                temp->numItems = load_2;
             case TRADE_ITEMS_RECEIVE_ITEM_MODE:
                 gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
             default:
@@ -658,21 +658,21 @@ void sub_8036B28(void)
         xxx_call_start_bg_music();
         break;
     case 0xe:
-        if (gTradeItemsMenu->unk24C.unk4 == 0) {
-            gUnknown_202DE30 = gTradeItemsMenu->unk244.unk4;
+        if (gTradeItemsMenu->unk24C.numItems == 0) {
+            gUnknown_202DE30 = gTradeItemsMenu->unk244.numItems;
             // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk244.unk0,0);
+            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk244.itemIndex,0);
         }
         else {
-            gUnknown_202DE30 = gTradeItemsMenu->unk24C.unk4;
+            gUnknown_202DE30 = gTradeItemsMenu->unk24C.numItems;
             // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk24C.unk0,0);
+            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk24C.itemIndex,0);
         }
         sub_80141B4(&gUnknown_80E6314,0,0,0x101);
         break;
     case 0xd:
-        gUnknown_202DE30 = gTradeItemsMenu->unk14;
-        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk25E,0);
+        gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
+        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->chosenItem,0);
         sub_80141B4(&gUnknown_80E6358,0,0,0x101);
         break;
     case 0xB:
@@ -1078,7 +1078,7 @@ void sub_8036ECC(u32 index, u32 r1)
   gTradeItemsMenu->unk34 = 0x12;
   gTradeItemsMenu->unk28 = index;
   gTradeItemsMenu->unk2C = &gTradeItemsMenu->unk184[index];
-  sub_8013AA0(&gTradeItemsMenu->unk14);
+  sub_8013AA0(&gTradeItemsMenu->numItemsToSend);
   gTradeItemsMenu->unk184[index] = gUnknown_80E6174;
   ResetUnusedInputStruct();
   sub_800641C((u32 *)&gTradeItemsMenu->unk184, 1, 1);
@@ -1093,14 +1093,14 @@ void sub_8036F30(void)
   sub_80073B8(uVar1);
   // Draw "How many?"
   xxx_call_draw_string(2, 0, &gTradeItemsHowManyText, uVar1, 0);
-  sub_8013C68(&gTradeItemsMenu->unk14);
+  sub_8013C68(&gTradeItemsMenu->numItemsToSend);
   sub_80073E0(uVar1);
 }
 
 void sub_8036F74(void)
 {
   sub_8006518((u32 *)&gTradeItemsMenu->unk184);
-  sub_8036ECC(2, gUnknown_203B460->unk50[gTradeItemsMenu->unk25E]);
+  sub_8036ECC(2, gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem]);
   sub_801CCD8();
   sub_8035CF4(&gTradeItemsMenu->unk44, 3, 0);
   sub_8036F30();

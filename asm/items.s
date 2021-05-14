@@ -820,7 +820,7 @@ sub_80913E0:
 	adds r5, r1, 0
 	mov r8, r2
 	ldrb r0, [r6, 0x2]
-	bl sub_8090D98
+	bl GetItemDescription
 	ldrb r1, [r6, 0x2]
 	add r0, sp, 0x4
 	movs r2, 0
@@ -846,7 +846,7 @@ _08091414:
 	adds r3, r5, 0
 	bl sub_8014FF0
 	ldrb r0, [r6, 0x2]
-	bl sub_8090D98
+	bl GetItemDescription
 	adds r2, r0, 0
 	str r7, [sp]
 	movs r0, 0x8
@@ -907,7 +907,7 @@ _080914B6:
 	adds r0, r5, 0
 	bl sub_80073E0
 	ldrb r0, [r6, 0x2]
-	bl sub_8090D98
+	bl GetItemDescription
 	mov r1, r8
 	bl sub_8097DF0
 	add sp, 0x5C

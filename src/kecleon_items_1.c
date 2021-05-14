@@ -9,7 +9,7 @@
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
-extern u32 sub_8090CCC(struct subStruct_203B460 *);
+extern u32 sub_8090CCC(struct ItemStruct_203B460 *);
 extern u8 sub_80914E4(u8);
 extern u32 sub_8091814(void);
 extern u32 sub_8091A48(void);
@@ -185,7 +185,7 @@ u32 sub_8019D8C(void)
 void sub_8019DAC(void)
 {
   s32 iVar3;
-  struct subStruct_203B460 *pbVar4;
+  struct ItemStruct_203B460 *pbVar4;
   s32 iVar5;
   
   gUnknown_203B210->unk14 = 0;

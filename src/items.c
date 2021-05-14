@@ -13,10 +13,10 @@ extern struct Item *gItemParametersData;
 
 extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
-extern u32 sub_8090D80(u8, u32);
-extern s32 sub_80915D4(struct subStruct_203B460 *);
+extern u32 GetItemUnkThrow(u8, u32);
+extern s32 sub_80915D4(struct ItemStruct_203B460 *);
 extern u8 sub_80914E4(u8);
-extern void sub_8090F58(u32, u8 *, struct subStruct_203B460 *, u32);
+extern void sub_8090F58(u32, u8 *, struct ItemStruct_203B460 *, u32);
 
 void LoadItemParameters(void)
 {
@@ -25,12 +25,12 @@ void LoadItemParameters(void)
   gItemParametersData = (struct Item *) gItemParametersFile->data;
 }
 
-struct unkStruct_203B460 *sub_80909D0(void)
+struct unkStruct_203B460 *GetMoneyItemsInfo(void)
 {
     return &gUnknown_20389A8;
 }
 
-void InitializeItems(void)
+void InitializeMoneyItems(void)
 {
   s32 iVar1;
   
@@ -67,17 +67,17 @@ u32 sub_8090A34(void)
   return iVar3;
 }
 
-u8 sub_8090A60(u8 itemIndex)
+bool8 sub_8090A60(u8 itemIndex)
 {
   if ((GetItemType(itemIndex) != 0) && (GetItemType(itemIndex) != 1)) {
-    return 0;
+    return FALSE;
   }
   else {
-    return 1;
+    return TRUE;
   }
 }
 
-void sub_8090A8C(struct subStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
+void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
 {
   u32 uVar3;
   u32 uVar4;
@@ -85,9 +85,9 @@ void sub_8090A8C(struct subStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
   if (itemIndex != 0) {
     param_1->unk0 = 1;
     param_1->itemIndex = itemIndex;
-    if (sub_8090A60(itemIndex) != 0) {
-        uVar3 = sub_8090D80(itemIndex,0);
-        uVar4 = sub_8090D80(itemIndex,1);
+    if (sub_8090A60(itemIndex)) {
+        uVar3 = GetItemUnkThrow(itemIndex,0);
+        uVar4 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar3,uVar4);
     }
     else {
@@ -110,16 +110,16 @@ void sub_8090A8C(struct subStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
 }
 
 // TODO is this a struct one too?
-void sub_8090B08(struct subStruct_203B460 *param_1,u8 itemIndex)
+void sub_8090B08(struct ItemStruct_203B460 *param_1,u8 itemIndex)
 {
   u32 uVar2;
   u32 uVar3;
   
   if (itemIndex != 0) {
     param_1->unk0 = itemIndex;
-    if (sub_8090A60(itemIndex) != 0) {
-        uVar2 = sub_8090D80(itemIndex,0);
-        uVar3 = sub_8090D80(itemIndex,1);
+    if (sub_8090A60(itemIndex)) {
+        uVar2 = GetItemUnkThrow(itemIndex,0);
+        uVar3 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar2,uVar3);
     } else {
       if (GetItemType(itemIndex) == 6) {
@@ -181,7 +181,7 @@ void sub_8090B64(u32 r0, u32 r1)
 	"\tbx r0");
 }
 
-void sub_8090BB0(struct subStruct_203B460 *param_1,struct subStruct_203B460 *param_2)
+void sub_8090BB0(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *param_2)
 {
   if ((param_2->unk0 & 1) != 0) {
     param_1->unk0 = param_2->itemIndex;
@@ -197,13 +197,13 @@ u8 GetItemType(u8 index)
     return gItemParametersData[index].type;
 }
 
-s32 sub_8090BE4(struct subStruct_203B460 *param_1)
+s32 sub_8090BE4(struct ItemStruct_203B460 *param_1)
 {
   if (param_1->itemIndex == 0x69) {
     return sub_80915D4(param_1);
   }
   else {
-    if (sub_8090A60(param_1->itemIndex) != 0) {
+    if (sub_8090A60(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].buyPrice * param_1->numItems;
     }
     else {
@@ -212,13 +212,13 @@ s32 sub_8090BE4(struct subStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090C30(struct subStruct_203B460 *param_1)
+s32 sub_8090C30(struct ItemStruct_203B460 *param_1)
 {
   if (param_1->itemIndex == 0x69) {
     return sub_80915D4(param_1);
   }
   else {
-    if (sub_8090A60(param_1->itemIndex) != 0) {
+    if (sub_8090A60(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].sellPrice * param_1->numItems;
     }
     else {
@@ -227,13 +227,13 @@ s32 sub_8090C30(struct subStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090C7C(struct subStruct_203B460 *param_1)
+s32 sub_8090C7C(struct ItemStruct_203B460 *param_1)
 {
   if (sub_80914E4(param_1->itemIndex) == 0) {
     return 0;
   }
   else {
-    if (sub_8090A60(param_1->itemIndex) != 0) {
+    if (sub_8090A60(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].buyPrice * param_1->numItems;
     }
     else {
@@ -242,13 +242,13 @@ s32 sub_8090C7C(struct subStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090CCC(struct subStruct_203B460 *param_1)
+s32 sub_8090CCC(struct ItemStruct_203B460 *param_1)
 {
   if (sub_80914E4(param_1->itemIndex) == 0) {
     return 0;
   }
   else {
-    if (sub_8090A60(param_1->itemIndex) != 0) {
+    if (sub_8090A60(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].sellPrice * param_1->numItems;
     }
     else {
@@ -282,17 +282,17 @@ u8 GetItemSubtype(u8 itemIndex)
     return gItemParametersData[itemIndex].subtype;
 }
 
-u32 sub_8090D80(u8 itemIndex, u32 r1)
+u32 GetItemUnkThrow(u8 itemIndex, u32 r1)
 {
     return gItemParametersData[itemIndex].unkThrow1B[r1];
 }
 
-u8 *sub_8090D98(u8 itemIndex)
+u8 *GetItemDescription(u8 itemIndex)
 {
     return gItemParametersData[itemIndex].descriptionPointer;
 }
 
-u32 sub_8090DAC(u8 itemIndex, u32 r1)
+u32 GetItemUnkFood(u8 itemIndex, u32 r1)
 {
     return gItemParametersData[itemIndex].unkFood1[r1];
 }
@@ -300,7 +300,7 @@ u32 sub_8090DAC(u8 itemIndex, u32 r1)
 void sub_8090DC4(u32 param_1,u8 itemIndex,u32 param_3)
 {
   char acStack104 [80];
-  struct subStruct_203B460 unkItem;
+  struct ItemStruct_203B460 unkItem;
   
   strncpy(acStack104,gItemParametersData[itemIndex].namePointer,0x50);
   sub_8090A8C(&unkItem,itemIndex,0);
