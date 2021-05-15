@@ -2517,7 +2517,7 @@ _0801ED6C:
 	b _0801ED9A
 _0801ED74:
 	ldr r0, _0801ED90
-	bl sub_8011988
+	bl PlaySound
 	ldr r1, [r4]
 	ldr r0, [r1, 0x20]
 	ldr r1, [r1, 0x10]
@@ -2735,7 +2735,7 @@ _0801EED8:
 	bx r1
 	.align 2, 0
 _0801EF28: .4byte gUnknown_203B270
-_0801EF2C: .4byte gUnknown_203B45C
+_0801EF2C: .4byte gRecruitedPokemonRef
 _0801EF30: .4byte gUnknown_80DC25C
 _0801EF34: .4byte gUnknown_80DC274
 	thumb_func_end sub_801EE10
@@ -2923,7 +2923,7 @@ _0801F074:
 	strb r7, [r1, 0x4]
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8011988
+	bl PlaySound
 	b _0801F12E
 	.align 2, 0
 _0801F0C8: .4byte gUnknown_203B270
@@ -3478,7 +3478,7 @@ sub_801F428:
 	bx r1
 	.align 2, 0
 _0801F50C: .4byte gUnknown_203B274
-_0801F510: .4byte gUnknown_203B45C
+_0801F510: .4byte gRecruitedPokemonRef
 _0801F514: .4byte gUnknown_80DC2C4
 _0801F518: .4byte 0x000003e5
 _0801F51C: .4byte 0x000003e6
@@ -4308,11 +4308,11 @@ sub_801FB50:
 	ldr r0, _0801FBC4
 	ldr r4, _0801FBC8
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r5, _0801FBCC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	adds r0, r4, 0
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -6212,7 +6212,7 @@ _08020AB0:
 	b _08020B32
 	.align 2, 0
 _08020AE0: .4byte gUnknown_203B27C
-_08020AE4: .4byte gUnknown_203B45C
+_08020AE4: .4byte gRecruitedPokemonRef
 _08020AE8: .4byte gUnknown_202E128
 _08020AEC:
 	bl sub_8023B44
@@ -6238,7 +6238,7 @@ _08020AEC:
 	b _08020B32
 	.align 2, 0
 _08020B1C: .4byte gUnknown_203B27C
-_08020B20: .4byte gUnknown_203B45C
+_08020B20: .4byte gRecruitedPokemonRef
 _08020B24: .4byte gUnknown_202E128
 _08020B28:
 	bl sub_8023C60
@@ -6751,7 +6751,7 @@ _08020F44:
 	cmp r0, 0
 	beq _08020F68
 	ldr r0, _08020F64
-	bl sub_8011988
+	bl PlaySound
 	b _08021068
 	.align 2, 0
 _08020F60: .4byte gUnknown_203B27C
@@ -6762,7 +6762,7 @@ _08020F68:
 	b _08021068
 _08020F70:
 	ldr r0, _08020F84
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _08020F88
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
@@ -6782,7 +6782,7 @@ _08020F8C:
 	cmp r0, 0
 	beq _08020FB0
 	ldr r0, _08020FAC
-	bl sub_8011988
+	bl PlaySound
 	b _08021068
 	.align 2, 0
 _08020FA8: .4byte gUnknown_203B27C
@@ -6832,11 +6832,11 @@ _08021000:
 	strb r0, [r1, 0x15]
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8011988
+	bl PlaySound
 	b _0802101C
 _08021016:
 	ldr r0, _0802102C
-	bl sub_8011988
+	bl PlaySound
 _0802101C:
 	ldr r0, _08021030
 	ldr r1, [r0]
@@ -6865,7 +6865,7 @@ _08021034:
 _08021054: .4byte gUnknown_203B27C
 _08021058:
 	ldr r0, _08021070
-	bl sub_8011988
+	bl PlaySound
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
@@ -6894,7 +6894,7 @@ _08021074:
 _08021094: .4byte gUnknown_203B27C
 _08021098:
 	ldr r0, _080210B4
-	bl sub_8011988
+	bl PlaySound
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
@@ -8271,7 +8271,7 @@ _08021B3C:
 	.align 2, 0
 _08021B4C: .4byte gUnknown_203B28C
 _08021B50: .4byte 0x000001a7
-_08021B54: .4byte gUnknown_203B45C
+_08021B54: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8021A60
 
 	thumb_func_start sub_8021B58
@@ -8314,8 +8314,8 @@ _08021B94:
 	bx r1
 	thumb_func_end sub_8021B58
 
-	thumb_func_start sub_8021B9C
-sub_8021B9C:
+	thumb_func_start CreateWigglytuffShop
+CreateWigglytuffShop:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl ResetUnusedInputStruct
@@ -8335,11 +8335,11 @@ sub_8021B9C:
 	str r4, [r0]
 	ldr r0, _08021BFC
 	movs r1, 0x28
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldr r4, _08021C00
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	movs r0, 0x28
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -8401,7 +8401,7 @@ _08021C0E:
 	bx r1
 	.align 2, 0
 _08021C58: .4byte gUnknown_203B290
-	thumb_func_end sub_8021B9C
+	thumb_func_end CreateWigglytuffShop
 
 	thumb_func_start sub_8021C5C
 sub_8021C5C:
@@ -8510,7 +8510,7 @@ sub_8021D44:
 	ldr r1, [r1]
 	str r0, [r1, 0x4]
 	bl sub_8021D5C
-	bl sub_8021E0C
+	bl UpdateWigglytuffDialogue
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8607,8 +8607,8 @@ _08021E04: .4byte gUnknown_203B290
 _08021E08: .4byte gUnknown_80DC534
 	thumb_func_end sub_8021D5C
 
-	thumb_func_start sub_8021E0C
-sub_8021E0C:
+	thumb_func_start UpdateWigglytuffDialogue
+UpdateWigglytuffDialogue:
 	push {r4,lr}
 	sub sp, 0x20
 	ldr r1, _08021E28
@@ -8922,7 +8922,7 @@ _080220B8:
 	movs r0, 0xE
 	str r0, [r1, 0x8]
 	ldr r0, _080220D4
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, [r4]
 	movs r1, 0x98
 	lsls r1, 1
@@ -8962,7 +8962,7 @@ _08022108:
 _0802210E:
 	str r0, [r1, 0x8]
 	movs r0, 0xCE
-	bl sub_8011988
+	bl PlaySound
 	ldr r3, _08022134
 	ldr r0, _08022130
 	ldr r2, [r0]
@@ -9183,7 +9183,7 @@ _080222B6:
 	.align 2, 0
 _080222C0: .4byte gWigglytuffDialogue
 _080222C4: .4byte 0x0000010d
-	thumb_func_end sub_8021E0C
+	thumb_func_end UpdateWigglytuffDialogue
 
 	thumb_func_start sub_80222C8
 sub_80222C8:
@@ -9495,7 +9495,7 @@ _080224F8:
 	bl UnlockFriendArea
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8011988
+	bl PlaySound
 	movs r0, 0xC
 	bl sub_8021D44
 	b _08022532
@@ -10333,7 +10333,7 @@ _08022BCE:
 	ldr r0, _08022C18
 	bl strcpy
 	movs r0, 0xCB
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _08022C1C
 	movs r1, 0
 	movs r2, 0
@@ -10534,7 +10534,7 @@ _08022D80:
 	adds r0, r2, 0
 	adds r0, 0x52
 	ldrb r0, [r0]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -11542,7 +11542,7 @@ _08023532:
 _08023594:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_808DCA0
+	bl GetDexInternalNo
 	lsls r0, 16
 	asrs r4, r0, 16
 	adds r0, r4, 0
@@ -11794,12 +11794,12 @@ _08023788:
 	ldrsh r0, [r6, r1]
 	movs r1, 0x1
 	str r2, [sp]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	movs r1, 0x1
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp]
@@ -11868,12 +11868,12 @@ _08023810:
 	ldrsh r0, [r6, r1]
 	movs r1, 0
 	str r2, [sp]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	movs r1, 0
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp]
@@ -12413,7 +12413,7 @@ _08023C4A:
 	bx r1
 	.align 2, 0
 _08023C58: .4byte gUnknown_3001B60
-_08023C5C: .4byte gUnknown_203B45C
+_08023C5C: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8023BD8
 
 	thumb_func_start sub_8023C60
@@ -12725,7 +12725,7 @@ _08023EC0: .4byte 0x000003f6
 _08023EC4: .4byte 0x00000376
 _08023EC8: .4byte gUnknown_3001B60
 _08023ECC: .4byte 0x00000372
-_08023ED0: .4byte gUnknown_203B45C
+_08023ED0: .4byte gRecruitedPokemonRef
 _08023ED4:
 	ldrb r0, [r3, 0x18]
 	cmp r0, 0
@@ -12853,7 +12853,7 @@ _08023FA2:
 	b _08023FE2
 	.align 2, 0
 _08023FD0: .4byte gUnknown_3001B60
-_08023FD4: .4byte gUnknown_203B45C
+_08023FD4: .4byte gRecruitedPokemonRef
 _08023FD8:
 	adds r4, 0x1
 	movs r0, 0xCE
@@ -12905,7 +12905,7 @@ _08024002:
 	str r1, [r3, 0x8]
 	b _08024042
 	.align 2, 0
-_08024034: .4byte gUnknown_203B45C
+_08024034: .4byte gRecruitedPokemonRef
 _08024038:
 	adds r4, 0x1
 	movs r0, 0xCE
@@ -13014,7 +13014,7 @@ _080240EE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08024100: .4byte gUnknown_203B45C
+_08024100: .4byte gRecruitedPokemonRef
 _08024104: .4byte gUnknown_3001B60
 	thumb_func_end sub_8023F8C
 
@@ -13044,7 +13044,7 @@ _08024110:
 	beq _08024172
 	b _0802416E
 	.align 2, 0
-_08024134: .4byte gUnknown_203B45C
+_08024134: .4byte gRecruitedPokemonRef
 _08024138:
 	cmp r5, 0x3
 	bne _08024140
@@ -13225,7 +13225,7 @@ _0802425E:
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	str r2, [sp, 0x8]
-	bl sub_808DCFC
+	bl GetInternalNo
 	adds r4, r0, 0
 	mov r0, r9
 	ldr r1, [r0]
@@ -13237,7 +13237,7 @@ _0802425E:
 	adds r1, r0
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
-	bl sub_808DCFC
+	bl GetInternalNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp, 0x8]
@@ -13269,7 +13269,7 @@ _080242B8:
 	bx r0
 	.align 2, 0
 _080242C8: .4byte gUnknown_3001B60
-_080242CC: .4byte gUnknown_203B45C
+_080242CC: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8024228
 
 	thumb_func_start sub_80242D0
@@ -13316,7 +13316,7 @@ _08024306:
 	ldrsh r0, [r1, r3]
 	movs r1, 0
 	str r2, [sp, 0x8]
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	adds r4, r0, 0
 	mov r0, r9
 	ldr r1, [r0]
@@ -13329,7 +13329,7 @@ _08024306:
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	movs r1, 0
-	bl sub_808DCDC
+	bl GetAlphabetParentNo
 	lsls r4, 16
 	lsls r0, 16
 	ldr r2, [sp, 0x8]
@@ -13361,7 +13361,7 @@ _08024364:
 	bx r0
 	.align 2, 0
 _08024374: .4byte gUnknown_3001B60
-_08024378: .4byte gUnknown_203B45C
+_08024378: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_80242D0
 
 	thumb_func_start sub_802437C
@@ -13474,7 +13474,7 @@ sub_80243E8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08024448: .4byte gUnknown_203B45C
+_08024448: .4byte gRecruitedPokemonRef
 _0802444C: .4byte gUnknown_3001B60
 _08024450: .4byte 0x00000376
 _08024454: .4byte gUnknown_80DC9A4
@@ -13739,7 +13739,7 @@ sub_8024604:
 	bx r0
 	.align 2, 0
 _08024654: .4byte gUnknown_203B2AC
-_08024658: .4byte gUnknown_203B45C
+_08024658: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8024604
 
 	thumb_func_start sub_802465C
@@ -14309,7 +14309,7 @@ _08024B38:
 _08024B3A:
 	str r0, [r1, 0x24]
 	movs r0, 0x3C
-	bl sub_8011930
+	bl xxx_call_fade_out_bgm
 	ldr r0, _08024B48
 	b _08024CAE
 	.align 2, 0
@@ -14321,7 +14321,7 @@ _08024B4C:
 	movs r2, 0x5
 	bl sub_808D9AC
 	ldr r0, _08024B6C
-	bl sub_8011988
+	bl PlaySound
 	ldr r1, [r5]
 	movs r0, 0x13
 	str r0, [r1, 0x24]
@@ -14377,7 +14377,7 @@ _08024BD6:
 	ldr r0, _08024C14
 	bl sub_801199C
 	movs r0, 0xD2
-	bl sub_8011988
+	bl PlaySound
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x10]
 	cmp r0, 0
@@ -15295,7 +15295,7 @@ _080252D0:
 	movs r0, 0
 	b _080252EA
 	.align 2, 0
-_080252E0: .4byte gUnknown_203B45C
+_080252E0: .4byte gRecruitedPokemonRef
 _080252E4: .4byte 0x0000019d
 _080252E8:
 	movs r0, 0x1
@@ -15765,7 +15765,7 @@ _080256A8:
 	movs r0, 0x1
 	str r0, [r1, 0x8]
 	movs r0, 0xCF
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _080256C4
 _080256B6:
 	ldr r3, _080256C8
@@ -15907,7 +15907,7 @@ _080257A0:
 	adds r6, 0x1
 	b _08025810
 	.align 2, 0
-_080257CC: .4byte gUnknown_203B45C
+_080257CC: .4byte gRecruitedPokemonRef
 _080257D0: .4byte gUnknown_203B2B4
 _080257D4: .4byte gUnknown_80DD2B0
 _080257D8: .4byte gUnknown_80DD2B8
@@ -16219,7 +16219,7 @@ _08025A0C:
 	b _08025A7E
 	.align 2, 0
 _08025A38: .4byte gUnknown_203B2B4
-_08025A3C: .4byte gUnknown_203B45C
+_08025A3C: .4byte gRecruitedPokemonRef
 _08025A40:
 	bl sub_8023B44
 	ldr r1, _08025A6C
@@ -16242,7 +16242,7 @@ _08025A40:
 	b _08025A7E
 	.align 2, 0
 _08025A6C: .4byte gUnknown_203B2B4
-_08025A70: .4byte gUnknown_203B45C
+_08025A70: .4byte gRecruitedPokemonRef
 _08025A74:
 	bl sub_8023C60
 	movs r0, 0x13
@@ -16324,7 +16324,7 @@ _08025B20:
 	b _08025BC2
 _08025B28:
 	ldr r0, _08025B68
-	bl sub_8011988
+	bl PlaySound
 	ldr r4, _08025B6C
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x18]
@@ -16547,7 +16547,7 @@ _08025CF8:
 	bne _08025D88
 	movs r6, 0x8
 	ldr r0, _08025D68
-	bl sub_8011988
+	bl PlaySound
 	ldr r5, _08025D6C
 	ldr r0, [r5]
 	ldr r0, [r0, 0x10]
@@ -16819,7 +16819,7 @@ sub_8025EF4:
 	b _08025F48
 	.align 2, 0
 _08025F1C: .4byte gUnknown_203B2B8
-_08025F20: .4byte gUnknown_203B45C
+_08025F20: .4byte gRecruitedPokemonRef
 _08025F24:
 	adds r5, 0x1
 	movs r0, 0xCE
@@ -16853,7 +16853,7 @@ _08025F48:
 	bx r1
 	.align 2, 0
 _08025F60: .4byte gUnknown_203B2B8
-_08025F64: .4byte gUnknown_203B45C
+_08025F64: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8025EF4
 
 	thumb_func_start sub_8025F68
@@ -17393,7 +17393,7 @@ _080263F8:
 	movs r0, 0x19
 	str r0, [r1, 0x4]
 	movs r0, 0xCF
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _08026408
 	b _08026492
 	.align 2, 0
@@ -17403,7 +17403,7 @@ _0802640C:
 	movs r0, 0x19
 	str r0, [r1, 0x4]
 	movs r0, 0xCF
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _0802641C
 	b _08026492
 	.align 2, 0
@@ -17413,7 +17413,7 @@ _08026420:
 	movs r0, 0x19
 	str r0, [r1, 0x4]
 	movs r0, 0xCC
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _08026430
 	b _08026492
 	.align 2, 0
@@ -17423,7 +17423,7 @@ _08026434:
 	movs r0, 0x9
 	str r0, [r1, 0x4]
 	movs r0, 0xCA
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _08026444
 	b _08026492
 	.align 2, 0
@@ -17577,7 +17577,7 @@ _08026542:
 	movs r6, 0x2
 	b _080265B4
 	.align 2, 0
-_08026574: .4byte gUnknown_203B45C
+_08026574: .4byte gRecruitedPokemonRef
 _08026578: .4byte gUnknown_203B2B8
 _0802657C: .4byte gUnknown_80DD664
 _08026580: .4byte gUnknown_80DD670
@@ -18089,7 +18089,7 @@ _08026976:
 	b _08026A6E
 	.align 2, 0
 _08026984: .4byte gUnknown_203B2B8
-_08026988: .4byte gUnknown_203B45C
+_08026988: .4byte gRecruitedPokemonRef
 _0802698C:
 	ldr r0, _080269AC
 	ldr r0, [r0]
@@ -18130,7 +18130,7 @@ _080269DA:
 	bl sub_8026074
 	b _08026A6E
 	.align 2, 0
-_080269E8: .4byte gUnknown_203B45C
+_080269E8: .4byte gRecruitedPokemonRef
 _080269EC: .4byte gUnknown_203B2B8
 _080269F0:
 	movs r0, 0xC
@@ -18150,7 +18150,7 @@ _08026A08:
 	b _08026A6E
 _08026A10:
 	ldr r0, _08026A50
-	bl sub_8011988
+	bl PlaySound
 	ldr r4, _08026A54
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x14]
@@ -18450,7 +18450,7 @@ _08026C58:
 	bne _08026CE8
 	movs r6, 0xF
 	ldr r0, _08026CC8
-	bl sub_8011988
+	bl PlaySound
 	ldr r5, _08026CCC
 	ldr r0, [r5]
 	ldr r0, [r0, 0xC]
@@ -18885,7 +18885,7 @@ sub_8026FA4:
 _08026FC0: .4byte gUnknown_203B2B8
 _08026FC4:
 	ldr r0, _08026FF4
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, [r4]
 	adds r0, 0x14
 	bl sub_8091274
@@ -18907,7 +18907,7 @@ _08026FC4:
 _08026FF4: .4byte 0x0000014d
 _08026FF8:
 	ldr r0, _08027024
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x14]
 	bl sub_8090A60
@@ -19505,7 +19505,7 @@ _080274B6:
 	str r2, [r0]
 	b _08027550
 	.align 2, 0
-_080274E4: .4byte gUnknown_203B45C
+_080274E4: .4byte gRecruitedPokemonRef
 _080274E8: .4byte gUnknown_203B2BC
 _080274EC: .4byte gFriendActionStandby
 _080274F0: .4byte gFriendActionMakeLeader
@@ -19949,7 +19949,7 @@ _0802782C:
 	b _080278AE
 	.align 2, 0
 _08027860: .4byte gUnknown_203B2BC
-_08027864: .4byte gUnknown_203B45C
+_08027864: .4byte gRecruitedPokemonRef
 _08027868:
 	bl sub_8023B44
 	ldr r4, _0802789C
@@ -19975,7 +19975,7 @@ _08027868:
 	b _080278AE
 	.align 2, 0
 _0802789C: .4byte gUnknown_203B2BC
-_080278A0: .4byte gUnknown_203B45C
+_080278A0: .4byte gRecruitedPokemonRef
 _080278A4:
 	bl sub_8023C60
 	movs r0, 0x11
@@ -20065,7 +20065,7 @@ _0802795E:
 	b _08027A0E
 	.align 2, 0
 _08027964: .4byte gUnknown_203B2BC
-_08027968: .4byte gUnknown_203B45C
+_08027968: .4byte gRecruitedPokemonRef
 _0802796C:
 	ldr r0, _08027984
 	ldr r0, [r0]
@@ -20102,7 +20102,7 @@ _080279B2:
 	bl sub_808ED00
 	b _08027A0E
 	.align 2, 0
-_080279B8: .4byte gUnknown_203B45C
+_080279B8: .4byte gRecruitedPokemonRef
 _080279BC: .4byte gUnknown_203B2BC
 _080279C0:
 	movs r0, 0x8
@@ -20118,7 +20118,7 @@ _080279D0:
 	b _08027A36
 _080279D8:
 	ldr r0, _08027A18
-	bl sub_8011988
+	bl PlaySound
 	ldr r4, _08027A1C
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x14]
@@ -20412,7 +20412,7 @@ _08027C1C:
 	cmp r0, 0xA
 	bne _08027C7C
 	ldr r0, _08027C60
-	bl sub_8011988
+	bl PlaySound
 	ldr r4, _08027C64
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]

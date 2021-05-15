@@ -242,7 +242,7 @@ _0803ABCE:
 	movs r0, 0
 	b _0803AC1C
 	.align 2, 0
-_0803AC08: .4byte gUnknown_203B45C
+_0803AC08: .4byte gRecruitedPokemonRef
 _0803AC0C: .4byte gUnknown_203B3F4
 _0803AC10:
 	adds r5, 0x1
@@ -673,7 +673,7 @@ sub_803AF38:
 	b _0803AF82
 	.align 2, 0
 _0803AF70: .4byte gUnknown_203B3F8
-_0803AF74: .4byte gUnknown_203B45C
+_0803AF74: .4byte gRecruitedPokemonRef
 _0803AF78:
 	bl sub_8023C60
 	movs r0, 0x7

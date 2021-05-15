@@ -22,14 +22,12 @@ extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32,
 
 extern u32 sub_80144A4(s32 *);
 
-extern char* GetMonSpecies(u32);
 extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_801602C(u32, char *r0);
 
 extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
-extern void CopySpeciesNametoBuffer(char *r0, u32);
 
 extern void sub_8006518(void *);
 extern void sub_800641C(void *, u32, u32);
@@ -94,7 +92,7 @@ extern u32 gGenderMenu;
 extern const char gUnknown_80F42C0;
 
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
-extern char gAvailablePokemonNames[0x50];
+extern u8 gAvailablePokemonNames[0x50];
 
 extern const char gHardyDescription[];
 extern const char gDocileDescription[];

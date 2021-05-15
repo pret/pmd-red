@@ -206,7 +206,7 @@ void sub_8011924()
     sub_800BF80();
 }
 
-void sub_8011930(u16 speed)
+void xxx_call_fade_out_bgm(u16 speed)
 {
     FadeOutBGM(speed);
 }
@@ -227,7 +227,7 @@ void sub_8011974(u16 songIndex, u16 r1)
     sub_800C074(songIndex, r1);
 }
 
-void sub_8011988(u16 songIndex)
+void PlaySound(u16 songIndex)
 {
     sub_800C074(songIndex, 256);
 }
@@ -260,7 +260,7 @@ void sub_8011A04(void)
     if(gUnknown_202DE22 > 0)
         return;
     gUnknown_202DE22 = 3;
-    sub_800C074(0x131, 256);
+    sub_800C074(305, 256);
 }
 
 void sub_8011A2C(u32 r0)

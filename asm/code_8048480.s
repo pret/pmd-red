@@ -795,7 +795,7 @@ _08048B20:
 	.align 2, 0
 _08048B24: .4byte gUnknown_203B418
 _08048B28: .4byte 0x0001357c
-_08048B2C: .4byte gUnknown_203B45C
+_08048B2C: .4byte gRecruitedPokemonRef
 _08048B30: .4byte 0x00008df8
 _08048B34:
 	movs r0, 0
@@ -20336,7 +20336,7 @@ _08052196:
 	b _080521CA
 	.align 2, 0
 _080521B4: .4byte gUnknown_203B460
-_080521B8: .4byte gUnknown_203B45C
+_080521B8: .4byte gRecruitedPokemonRef
 _080521BC: .4byte 0x00008df8
 _080521C0: .4byte 0x00008e38
 _080521C4: .4byte 0x00008e3a

@@ -104,9 +104,9 @@ u8 GetPokemonAbility(s16 index, u32 abilityIndex)
     return gMonsterParameters[index].abilities[abilityIndex];
 }
 
-s16 sub_808DCA0(s16 index, u32 r1)
+s16 GetDexInternalNo(s16 index, u32 r1)
 {
-    return gMonsterParameters[index].unk3C[r1];
+    return gMonsterParameters[index].dexInternal[r1];
 }
 
 s16 GetBaseRecruit(s16 index)
@@ -114,15 +114,15 @@ s16 GetBaseRecruit(s16 index)
     return gMonsterParameters[index].base_recruit;
 }
 
-s16 sub_808DCDC(s16 index, s32 r1)
+s16 GetAlphabetParentNo(s16 index, s32 r1)
 {
-    return gMonsterParameters[index].unk42[r1];
+    return gMonsterParameters[index].alphabetParent[r1];
 }
 
 
-s16 sub_808DCFC(s16 index)
+s16 GetInternalNo(s16 index)
 {
-    return gMonsterParameters[index].unk3C[1];
+    return gMonsterParameters[index].dexInternal[1];
 }
 
 #ifdef NONMATCHING
@@ -159,7 +159,7 @@ u32 CalculateEXPGain(s16 index, s32 level)
 }
 #endif
 
-s16 sub_808DD48(s16 index, struct unkEvolve *r1)
+s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1)
 {
     struct EvolveStruct1 temp2;
     struct EvolveNeeds temp1;

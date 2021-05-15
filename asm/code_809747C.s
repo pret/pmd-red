@@ -950,7 +950,7 @@ _08097B4C:
 	b _08097B80
 	.align 2, 0
 _08097B5C: .4byte gUnknown_203B494
-_08097B60: .4byte gUnknown_203B45C
+_08097B60: .4byte gRecruitedPokemonRef
 _08097B64: .4byte 0x000001a7
 _08097B68: .4byte 0x00000179
 _08097B6C: .4byte 0x0000010d

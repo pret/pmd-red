@@ -1091,3 +1091,10 @@ bool32 sub_800B2D4(char *arg0, char *arg1, int length) {
     }
     return FALSE;
 }
+
+// Has to be down here to match (rodata ordering)
+ALIGNED(4) const char file_filler[] = _("pksdir0");
+const u32 gByteShiftLookup[4] = {0, 8, 16, 24};
+ALIGNED(4) const char file_filler1[] = _("pksdir0");
+ALIGNED(4) const char file_filler2[] = _("pksdir0");
+

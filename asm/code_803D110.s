@@ -894,7 +894,7 @@ _0803D7AE:
 	adds r0, r5, 0
 	str r1, [sp]
 	str r2, [sp, 0x4]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]

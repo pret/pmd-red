@@ -8,9 +8,7 @@
 
 extern void* MemoryAlloc(u32 a, u32 b);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
-extern char* GetMonSpecies(u32);
 extern void sub_800641C(void *r0, u8, u8);
-void sub_808D8E0(u8 *, u32);
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern char gUnknown_202E5D8[0x50];
@@ -81,7 +79,7 @@ u32 sub_8027F88(void)
   gUnknown_203B2C0->unk53C = 0;
   gUnknown_203B2C0->unk218 = -1;
   gUnknown_203B2C0->unk544 = -1;
-  sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);
   strcpy(gAvailablePokemonNames, monName);
   faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);

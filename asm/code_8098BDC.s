@@ -3586,7 +3586,7 @@ _0809AB80:
 	adds r0, r4, r0
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl sub_808D908
+	bl CopyCyanSpeciesNametoBuffer
 	ldr r0, _0809ABAC
 	adds r4, r0
 	ldr r1, _0809ABB0
@@ -3637,7 +3637,7 @@ _0809ABE8:
 	movs r0, 0x2
 	ldrsh r1, [r6, r0]
 	adds r0, r5, 0
-	bl sub_808D908
+	bl CopyCyanSpeciesNametoBuffer
 	ldr r0, _0809AC14
 	adds r4, r0
 	adds r0, r4, 0
@@ -3686,7 +3686,7 @@ _0809AC4C:
 	adds r0, r4, r0
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl sub_808D908
+	bl CopyCyanSpeciesNametoBuffer
 	ldr r0, _0809AC78
 	adds r4, r0
 	movs r3, 0
@@ -5743,7 +5743,7 @@ _0809BC78:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl DisplayPersianDialogueSprite
+	bl CreateFelicityBank
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BCB0
@@ -5911,7 +5911,7 @@ _0809BDE8:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_8021B9C
+	bl CreateWigglytuffShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BE20
@@ -5965,7 +5965,7 @@ _0809BE60:
 	bl sub_809B294
 	movs r0, 0x98
 	lsls r0, 1
-	bl sub_80314B4
+	bl CreateHelperPelipperMenu
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809BE84
@@ -6175,7 +6175,7 @@ _0809BFFC:
 	ands r4, r0
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_802FD14
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C032
@@ -6222,7 +6222,7 @@ _0809C072:
 _0809C082:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_802FD14
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0A8
@@ -6256,7 +6256,7 @@ _0809C0B8:
 _0809C0C8:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_802FD14
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0F0
@@ -6287,7 +6287,7 @@ _0809C0FC:
 _0809C10C:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl sub_802FD14
+	bl CreateMakuhitaShop
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C134
@@ -6715,7 +6715,7 @@ sub_809C478:
 	cmp r0, 0x3
 	bne _0809C492
 	ldr r0, _0809C4AC
-	bl sub_8011988
+	bl PlaySound
 	bl InitFlash
 	bl ClearFlashData
 _0809C492:
@@ -7692,7 +7692,7 @@ sub_809CBBC:
 	b _0809CC4A
 	.align 2, 0
 _0809CC0C: .4byte gUnknown_81163E4
-_0809CC10: .4byte gItemParametersFile + 4
+_0809CC10: .4byte gItemParametersData
 _0809CC14: .4byte gUnknown_203B460
 _0809CC18: .4byte 0x0001869f
 _0809CC1C:

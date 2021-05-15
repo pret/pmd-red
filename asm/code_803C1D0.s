@@ -220,7 +220,7 @@ _0803C35A:
 	movs r0, 0xC
 	ldrsh r1, [r6, r0]
 	adds r0, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 	ldrh r0, [r6, 0xC]
 	strh r0, [r4, 0x14]
 	ldrb r1, [r6, 0x1]

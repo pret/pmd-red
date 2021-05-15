@@ -5022,7 +5022,7 @@ _0809FDA8:
 _0809FDB8:
 	movs r0, 0x1E
 _0809FDBA:
-	bl sub_8011930
+	bl xxx_call_fade_out_bgm
 	bl _0809EAE0
 _0809FDC2:
 	ldr r0, [sp, 0xC]

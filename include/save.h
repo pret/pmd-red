@@ -5,6 +5,14 @@
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
 
+enum
+{
+    SAVE_COMPLETED,
+    SAVE_NOT_WRTTEN,
+    SAVE_FAILED
+};
+
+
 struct UnkStruct_sub_8011DAC {
     u8 fill000[0x4];
     u8 unk004[0x400];
@@ -18,7 +26,7 @@ struct UnkStruct_sub_8011DAC {
     u8 fill42C[0x4];
     u32 unk430;
     u32 unk434;
-    u32 unk438;
+    u32 savedFriendAreas;
     u32 unk43C;
     u32 unk440;
     u32 unk444;
@@ -56,11 +64,11 @@ u32 sub_8011C1C(void);
 void sub_8011C28(u32 in);
 s32 sub_8011C34(void);
 void sub_8011C40(s32 in);
-u32 sub_8011C4C(void);
+char *sub_8011C4C(void);
 void sub_8011CA8(u32 *out, s32 size);
-u32 sub_8011DAC(u32 *a);
+u32 ReadSaveFromPak(u32 *a);
 u32 sub_8011F9C(s32 *r0, u8 *dest, s32 size);
-bool8 sub_8011FF8(void);
+bool8 IsSaveCorrupted(void);
 void sub_8012284(void);
 void sub_8012298(void);
 void sub_80122A8(void);

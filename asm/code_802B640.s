@@ -2913,7 +2913,7 @@ _0802CCBC:
 	.4byte _0802CD20
 _0802CCD8:
 	ldr r0, _0802CCEC
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _0802CCF0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xC]
@@ -2925,7 +2925,7 @@ _0802CCEC: .4byte 0x00000133
 _0802CCF0: .4byte gUnknown_203B2F0
 _0802CCF4:
 	ldr r0, _0802CD10
-	bl sub_8011988
+	bl PlaySound
 	ldr r0, _0802CD14
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xC]

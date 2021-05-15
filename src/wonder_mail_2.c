@@ -7,7 +7,7 @@
 struct unkStruct_203B2C8
 {
     // size: 0x140
-    u8 unk0;
+    u8 currState;
     u8 unk1;
     u16 unk2;
     /* 0x4 */ struct OpenedFile *faceFile;
@@ -68,7 +68,6 @@ extern void sub_8097790();
 extern struct unkStruct_8095228 *sub_8095228(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-void sub_808D8E0(u8 *, u32);
 extern u32 sub_802F298();
 extern void sub_802F2C0();
 extern u32 sub_8011C34();
@@ -101,7 +100,6 @@ extern const char gUnknown_80DFB14[];
 extern const char gUnknown_80DF9F0[];
 extern const char gUnknown_80DF9F8[];
 extern u8 sub_80023E4(u32);
-extern char * GetMonSpecies(u32);
 
 u32 sub_802B2D4(void)
 {
@@ -113,7 +111,7 @@ u32 sub_802B2D4(void)
   gUnknown_203B2C8 = MemoryAlloc(0x140,8);
   MemoryFill8((u8 *)gUnknown_203B2C8,0,0x140);
   gUnknown_203B2C8->unk1 = -1;
-  sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
   gUnknown_203B2C8->faceFile = faceFile;
   gUnknown_203B2C8->faceData  = faceFile->data;
@@ -133,7 +131,7 @@ u32 sub_802B2D4(void)
 
 u32 sub_802B358(void)
 {
-  switch(gUnknown_203B2C8->unk0) {
+  switch(gUnknown_203B2C8->currState) {
     case 0:
         sub_802B560();
         break;
@@ -175,55 +173,55 @@ void sub_802B3E0(void)
   char *monName;
   char teamNameBuffer[40];
 
-  switch(gUnknown_203B2C8->unk0) {
-  case 0:
-    if (sub_80023E4(0) != '\0') {
-        // Copy Team Name to buffer
-        sub_80920D8(teamNameBuffer);
-    }
-    else {
-        // Copy "????" to buffer
-        strcpy(teamNameBuffer,gUnknown_80DF9F0);
-    }
-    // Print and expand placeholders?
-    sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
-    // Display to screen with Pelliper face
-    sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-    break;
-  case 1:
-    monName = GetMonSpecies(SPECIES_PELIPPER);
-    strcpy(gUnknown_203B2C8->unk114, monName);
-    gUnknown_203B2C8->unk128 = 0x130;
-    gUnknown_203B2C8->unk12A = 2;
-    gUnknown_203B2C8->unk12C = 0;
-    sub_8097790();
-    iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-    sub_803C37C(&iVar3->unk4, 0, &gUnknown_203B2C8->unk130);
-    gUnknown_203B2C8->unk138 = sub_803C200(&iVar3->unk4, 0);
-    gUnknown_203B2C8->unk131 = 0;
-    gUnknown_203B2C8->unk132 = 0;
-    gUnknown_203B2C8->unk133 = 10;
-    gUnknown_203B2C8->unk134 = 0;
-    sub_802F204(gUnknown_203B2C8->unk114, 0);
-    break;
-  case 2:
-    // I hope you will keep on rescuing your friends
-    // I must save your adventure
-    sub_80141B4(gUnknown_80DFAA8, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-    break;
-  case 4:
-    // Oh yes, that's right. Please don't forget to send an A-OK Mail
-    // to the friend you just rescued
-    sub_80141B4(gUnknown_80DFB14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
-  case 3:
-  case 5:
-    break;
+  switch(gUnknown_203B2C8->currState) {
+      case 0:
+        if (sub_80023E4(0) != '\0') {
+            // Copy Team Name to buffer
+            sub_80920D8(teamNameBuffer);
+        }
+        else {
+            // Copy "????" to buffer
+            strcpy(teamNameBuffer,gUnknown_80DF9F0);
+        }
+        // Print and expand placeholders?
+        sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
+        // Display to screen with Pelliper face
+        sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        break;
+      case 1:
+        monName = GetMonSpecies(SPECIES_PELIPPER);
+        strcpy(gUnknown_203B2C8->unk114, monName);
+        gUnknown_203B2C8->unk128 = 0x130;
+        gUnknown_203B2C8->unk12A = 2;
+        gUnknown_203B2C8->unk12C = 0;
+        sub_8097790();
+        iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
+        sub_803C37C(&iVar3->unk4, 0, &gUnknown_203B2C8->unk130);
+        gUnknown_203B2C8->unk138 = sub_803C200(&iVar3->unk4, 0);
+        gUnknown_203B2C8->unk131 = 0;
+        gUnknown_203B2C8->unk132 = 0;
+        gUnknown_203B2C8->unk133 = 10;
+        gUnknown_203B2C8->unk134 = 0;
+        sub_802F204(gUnknown_203B2C8->unk114, 0);
+        break;
+      case 2:
+        // I hope you will keep on rescuing your friends
+        // I must save your adventure
+        sub_80141B4(gUnknown_80DFAA8, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        break;
+      case 4:
+        // Oh yes, that's right. Please don't forget to send an A-OK Mail
+        // to the friend you just rescued
+        sub_80141B4(gUnknown_80DFB14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+      case 3:
+      case 5:
+        break;
   }
 }
 
 void sub_802B548(u32 newState)
 {
-    gUnknown_203B2C8->unk0 = newState;
+    gUnknown_203B2C8->currState = newState;
     nullsub_132();
     sub_802B3E0();
 }
@@ -243,7 +241,7 @@ void sub_802B57C(void)
 
   if (sub_802F298() == 3) {
     sub_802F2C0();
-    sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+    CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
     monName = GetMonSpecies(SPECIES_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
     sub_802B548(2);

@@ -223,7 +223,7 @@ _080375BE:
 	.align 2, 0
 _080375CC: .4byte gUnknown_203B35C
 _080375D0: .4byte 0xffff0000
-_080375D4: .4byte gUnknown_203B45C
+_080375D4: .4byte gRecruitedPokemonRef
 _080375D8:
 	ldr r0, _08037610
 	ldr r0, [r0]

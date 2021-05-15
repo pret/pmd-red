@@ -68,7 +68,7 @@ _0803A3E8:
 	str r0, [sp, 0x80]
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_801203C
+	bl WriteSavetoPak
 	add sp, 0x84
 	pop {r3-r5}
 	mov r8, r3

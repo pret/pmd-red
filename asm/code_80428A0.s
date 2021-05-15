@@ -2713,7 +2713,7 @@ _080440D0:
 	bl sub_8092AD4
 	b _080440F8
 	.align 2, 0
-_080440E4: .4byte gUnknown_203B45C
+_080440E4: .4byte gRecruitedPokemonRef
 _080440E8: .4byte 0x03e60000
 _080440EC: .4byte 0x000003e7
 _080440F0:
@@ -2825,7 +2825,7 @@ _080441A4:
 _080441AC: .4byte gUnknown_203B418
 _080441B0: .4byte 0x00000644
 _080441B4: .4byte gUnknown_203B460
-_080441B8: .4byte gUnknown_203B45C
+_080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 
 	thumb_func_start sub_80441BC
@@ -4108,7 +4108,7 @@ _08044BF0: .4byte gUnknown_80F697C
 _08044BF4:
 	ldr r4, _08044C0C
 	adds r0, r5, 0
-	bl sub_8090D6C
+	bl GetItemCategory
 	lsls r0, 3
 	adds r4, 0x4
 	adds r0, r4
@@ -4382,7 +4382,7 @@ sub_8044DC8:
 	cmp r0, 0xE9
 	beq _08044DE8
 	ldr r4, _08044DE4
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -4445,7 +4445,7 @@ sub_8044E24:
 	cmp r0, 0
 	bne _08044EBA
 	ldrb r0, [r5, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -4552,7 +4552,7 @@ _08044F18:
 	lsls r0, r5, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
-	bl sub_8090D6C
+	bl GetItemCategory
 	lsls r0, 3
 	adds r4, 0x4
 	adds r0, r4
@@ -6402,7 +6402,7 @@ _08045C76:
 	strb r0, [r5]
 _08045C7E:
 	adds r0, r4, 0
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -6631,14 +6631,14 @@ _08045E38: .4byte gAvailablePokemonNames
 _08045E3C: .4byte gUnknown_80F8F88
 _08045E40:
 	ldrb r0, [r5, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
 	bne _08045E7C
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl sub_80915D4
 	bl sub_80913A0
@@ -6825,7 +6825,7 @@ _08045FAC:
 	bl sub_80461C8
 	movs r0, 0xA5
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	mov r3, sp
 	adds r0, r3, r4
 	ldr r0, [r0]
@@ -6902,7 +6902,7 @@ _0804605C: .4byte gUnknown_80F8F54
 _08046060:
 	movs r0, 0xA5
 	lsls r0, 1
-	bl sub_8083E38
+	bl PlaySoundEffect
 	lsls r0, r4, 2
 	add r0, sp
 	ldr r0, [r0]
@@ -7189,7 +7189,7 @@ sub_8046298:
 	ldrb r0, [r0, 0xD]
 	bx lr
 	.align 2, 0
-_080462A8: .4byte gItemParametersFile + 4
+_080462A8: .4byte gItemParametersData
 	thumb_func_end sub_8046298
 
 	thumb_func_start sub_80462AC
@@ -7361,7 +7361,7 @@ _080463BC:
 _080463EE:
 	ldr r0, [r4, 0x70]
 	ldrb r0, [r0, 0x2]
-	bl sub_8090D58
+	bl GetItemPalette
 	movs r1, 0xF
 	ands r0, r1
 	lsls r0, 12
@@ -7454,7 +7454,7 @@ sub_80464AC:
 	push {r4,lr}
 	ldr r4, _080464C4
 	ldrb r0, [r0, 0x2]
-	bl sub_8090D6C
+	bl GetItemCategory
 	lsls r0, 3
 	adds r0, r4
 	ldr r0, [r0]
@@ -8728,7 +8728,7 @@ _08046E1E:
 	movs r1, 0x41
 	bl sub_803E708
 	movs r0, 0xD4
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r0, _08046EFC
 	ldr r1, [r0]
 	movs r0, 0
@@ -8765,7 +8765,7 @@ sub_8046F00:
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -10171,18 +10171,18 @@ sub_80479B8:
 	cmp r0, 0
 	beq _08047A20
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047A3C
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	beq _08047A3C
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -10194,7 +10194,7 @@ sub_80479B8:
 	b _08047A3C
 _08047A20:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -10235,7 +10235,7 @@ _08047A4C:
 	bl _080482BA
 _08047A76:
 	ldr r0, _08047AAC
-	bl sub_8083E38
+	bl PlaySoundEffect
 	ldr r0, _08047AB0
 	adds r1, r7, 0
 	bl sub_8045BF8
@@ -10317,7 +10317,7 @@ _08047B30:
 	bl sub_804245C
 _08047B38:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -10331,13 +10331,13 @@ _08047B38:
 	bl sub_8078B5C
 _08047B56:
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
 	beq _08047B72
 	ldrb r0, [r7, 0x2]
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xA

@@ -721,7 +721,7 @@ sub_8052910:
 	ldrsh r7, [r4, r2]
 	b _08052966
 	.align 2, 0
-_08052950: .4byte gUnknown_203B45C
+_08052950: .4byte gRecruitedPokemonRef
 _08052954: .4byte 0x00008df8
 _08052958: .4byte gAvailablePokemonNames
 _0805295C:
@@ -749,7 +749,7 @@ _08052966:
 	.align 2, 0
 _08052988: .4byte gAvailablePokemonNames
 _0805298C: .4byte gUnknown_80F7AF8
-_08052990: .4byte gUnknown_203B45C
+_08052990: .4byte gRecruitedPokemonRef
 _08052994: .4byte 0x00008df8
 _08052998: .4byte gUnknown_202DFE8
 _0805299C:
@@ -815,7 +815,7 @@ _08052A1C:
 	ldrsh r4, [r6, r1]
 	ldr r0, _08052A48
 	adds r1, r4, 0
-	bl sub_808D8E0
+	bl CopyYellowSpeciesNametoBuffer
 _08052A28:
 	ldrh r0, [r6]
 	subs r0, 0x2
@@ -1379,7 +1379,7 @@ sub_8052EC0:
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	adds r0, r4, 0
-	bl sub_8090BD0
+	bl GetItemType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3

@@ -1,6 +1,8 @@
 #include "global.h"
 #include "input.h"
 #include "main_menu.h"
+#include "gUnknown_203B460.h"
+#include "menu.h"
 
 struct unkData
 {
@@ -29,34 +31,34 @@ extern struct unkStruct_203B35C *gUnknown_203B35C;
 
 extern struct unkData gUnknown_80E653C;
 
-extern u32 gUnknown_80E66BC;
-extern u32 gUnknown_80E66D4;
-extern u32 gUnknown_80E6748;
-extern u32 gUnknown_80E6760;
-extern u32 gUnknown_80E67D4;
-extern u32 gUnknown_80E67EC;
-extern u32 gUnknown_80E689C;
-extern u32 gUnknown_80E68B4;
-extern u32 gUnknown_80E6938;
-extern u32 gUnknown_80E6950;
-extern u32 gUnknown_80E69B0;
-extern u32 gUnknown_80E69C8;
-extern u32 gUnknown_80E6A10;
-extern u32 gUnknown_80E6A28;
-extern u32 gUnknown_80E6A74;
-extern u32 gUnknown_80E6A8C;
-extern u32 gUnknown_80E6B78;
-extern u32 gUnknown_80E6B90;
-extern u32 gUnknown_80E6BF4;
-extern u32 gUnknown_80E6C0C;
-extern u32 gUnknown_80E6C50;
-extern u32 gUnknown_80E6C68;
-extern u32 gUnknown_80E6CD0;
-extern u32 gUnknown_80E6CE8;
-extern u32 gUnknown_80E6DDC;
-extern u32 gUnknown_80E6DF4;
-extern u32 gUnknown_80E6D54;
-extern u32 gUnknown_80E6D6C;
+extern struct unkData gUnknown_80E66BC;
+extern struct MenuItem gUnknown_80E66D4[];
+extern struct unkData gUnknown_80E6748;
+extern struct MenuItem gUnknown_80E6760[];
+extern struct unkData gUnknown_80E67D4;
+extern struct MenuItem gUnknown_80E67EC[];
+extern struct unkData gUnknown_80E689C;
+extern struct MenuItem gUnknown_80E68B4[];
+extern struct unkData gUnknown_80E6938;
+extern struct MenuItem gUnknown_80E6950[];
+extern struct unkData gUnknown_80E69B0;
+extern struct MenuItem gUnknown_80E69C8[];
+extern struct unkData gUnknown_80E6A10;
+extern struct MenuItem gUnknown_80E6A28[];
+extern struct unkData gUnknown_80E6A74;
+extern struct MenuItem gUnknown_80E6A8C[];
+extern struct unkData gUnknown_80E6B78;
+extern struct MenuItem gUnknown_80E6B90[];
+extern struct unkData gUnknown_80E6BF4;
+extern struct MenuItem gUnknown_80E6C0C[];
+extern struct unkData gUnknown_80E6C50;
+extern struct MenuItem gUnknown_80E6C68[];
+extern struct unkData gUnknown_80E6CD0;
+extern struct MenuItem gUnknown_80E6CE8[];
+extern struct unkData gUnknown_80E6DDC;
+extern struct MenuItem gUnknown_80E6DF4[];
+extern struct unkData gUnknown_80E6D54;
+extern struct MenuItem gUnknown_80E6D6C[];
 
 struct unkStruct_8035D94
 {
@@ -67,12 +69,7 @@ struct unkStruct_8035D94
 
 extern struct unkStruct_8035D94 *sub_8035D94();
 
-struct unkStruct_203B460
-{
-    u8 unk0[0x50];
-    u16 unk50[10];
-};
-extern struct unkStruct_203B460 *gUnknown_203B460; // TODO unify this
+extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern void sub_8037400(void);
 extern void sub_800641C(void *, u32, u32);
@@ -92,7 +89,7 @@ extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
-extern void SetMenuItems(void *, void *, u32, u32 *, u32 *, u32, u32, u32);
+extern void SetMenuItems(void *, void *, u32, struct unkData *, struct MenuItem *, u32, u32, u32);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
 extern void sub_800CB20();
@@ -131,7 +128,7 @@ void sub_8036FDC(s32 param_1)
   }
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B35C->unk15C,1,1);
-  SetMenuItems(&gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,&gUnknown_80E6CE8,0,
+  SetMenuItems(&gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,
                6,0);
   sub_8035CF4(&gUnknown_203B35C->unk1C,0,1);
   sub_80376CC();
@@ -313,11 +310,11 @@ u32 sub_80370F0(void)
 void sub_80371B8(void)
 {
   struct unkStruct_8035D94 *pbVar2;
-  u32 *ppuVar4;
-  u32 *puVar5;
+  struct MenuItem *MenuItems;
+  struct unkData *puVar5;
   
   puVar5 = NULL;
-  ppuVar4 = NULL;
+  MenuItems = NULL;
   sub_8037400();
   if ((gUnknown_203B35C->unk0 < 2) &&(gUnknown_203B35C->unk4 == 0)) {
     if (sub_8037C10(0) != 0) {
@@ -326,8 +323,7 @@ void sub_80371B8(void)
       // Success!
       // The item exchange with your friend
       // went through successfully
-      SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50,
-                   &gUnknown_80E6C68, 0, 6, 0);
+      SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50, gUnknown_80E6C68, 0, 6, 0);
       sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
     }
   }
@@ -337,57 +333,57 @@ void sub_80371B8(void)
     switch(gUnknown_203B35C->unk4) {
         case 0:
           puVar5 = &gUnknown_80E66BC;
-          ppuVar4 = &gUnknown_80E66D4;
+          MenuItems = gUnknown_80E66D4;
           break;
         case 3:
           puVar5 = &gUnknown_80E6D54;
-          ppuVar4 = &gUnknown_80E6D6C;
+          MenuItems = gUnknown_80E6D6C;
           break;
         case 2:
           puVar5 = &gUnknown_80E6DDC;
-          ppuVar4 = &gUnknown_80E6DF4;
+          MenuItems = gUnknown_80E6DF4;
           break;
         case 4:
           puVar5 = &gUnknown_80E67D4;
-          ppuVar4 = &gUnknown_80E67EC;
+          MenuItems = gUnknown_80E67EC;
           break;
         case 1:
         case 5:
           puVar5 = &gUnknown_80E6748;
-          ppuVar4 = &gUnknown_80E6760;
+          MenuItems = gUnknown_80E6760;
           break;
         case 6:
           puVar5 = &gUnknown_80E689C;
-          ppuVar4 = &gUnknown_80E68B4;
+          MenuItems = gUnknown_80E68B4;
           break;
         case 7:
           puVar5 = &gUnknown_80E6938;
-          ppuVar4 = &gUnknown_80E6950;
+          MenuItems = gUnknown_80E6950;
           break;
         case 9:
           puVar5 = &gUnknown_80E69B0;
-          ppuVar4 = &gUnknown_80E69C8;
+          MenuItems = gUnknown_80E69C8;
           break;
         case 0xb:
           puVar5 = &gUnknown_80E6A10;
-          ppuVar4 = &gUnknown_80E6A28;
+          MenuItems = gUnknown_80E6A28;
           break;
         case 0xd:
           puVar5 = &gUnknown_80E6A74;
-          ppuVar4 = &gUnknown_80E6A8C;
+          MenuItems = gUnknown_80E6A8C;
           break;
         case 0xe:
           puVar5 = &gUnknown_80E6B78;
           // Error, there was a problem on your friend's end
-          ppuVar4 = &gUnknown_80E6B90;
+          MenuItems = gUnknown_80E6B90;
           break;
         case 0xf:
           puVar5 = &gUnknown_80E6BF4;
           // Error, your friend is not responding
-          ppuVar4 = &gUnknown_80E6C0C;
+          MenuItems = gUnknown_80E6C0C;
           break;
     }
-    SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, ppuVar4, 0, 6, 0);
+    SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
     sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
     // TODO clean this if statement up...
     if ((((gUnknown_203B35C->unk4 != 0) &&(gUnknown_203B35C->unk0 == 0)) &&

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/friend_area.h"
 #include "file_system.h"
+#include "gUnknown_203B460.h"
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
@@ -69,12 +70,6 @@ struct unk_203B250
 };
 
 struct unk_203B250 *gUnknown_203B250;
-
-struct unkStruct_203B460
-{
-    u8 padding[0x260];
-    /* 0x260 */ u32 teamMoney;
-};
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
@@ -254,10 +249,10 @@ void sub_801D878(void)
 
 void sub_801D894(void)
 {
-  u8 uVar1;
+  u8 rank;
   const char *location;
-  int iVar3;
-  s32 size_var;
+  int location_length;
+  s32 x_coord;
 
   // Stored on stack
   u32 *preload_string;
@@ -272,22 +267,23 @@ void sub_801D894(void)
   }
   // TODO this is def a hack
   xxx_format_string(location, auStack116, &preload_string + 1, 0);
-  iVar3 = sub_8008ED0(auStack116);
-  size_var = (0x80 - iVar3) / 2; // have to calculate here
+  location_length = sub_8008ED0(auStack116);
+  x_coord = (128 - location_length) / 2; // Centers the location name
   sub_8008C54(1);
   sub_80073B8(1);
-  xxx_call_draw_string(size_var, 4, auStack116, 1, 0);
+  xxx_call_draw_string(x_coord, 4, auStack116, 1, 0);
   sub_80073E0(1);
   sub_8008C54(2);
   sub_80073B8(2);
   LoadTeamRankBadge(2, 8, 6);
 
-  r5 = &gUnknown_80DBF3C; // Have to load before TeamRank funcs
-  uVar1 = GetRescueTeamRank();
-  sub_800D158(auStack116, r5, GetTeamRankString(uVar1), GetTeamRankPts());
-  xxx_call_draw_string(0x20, 4, auStack116, 2, 0);
+// Have to load before TeamRank funcs
+  r5 = &gUnknown_80DBF3C; // %s #C5%d#R Pts.
+  rank = GetRescueTeamRank();
+  sub_800D158(auStack116, r5, GetTeamRankString(rank), GetTeamRankPts());
+  xxx_call_draw_string(32, 4, auStack116, 2, 0);
   sub_800D158(auStack116, &gUnknown_80DBF4C, gUnknown_203B460->teamMoney);
-  xxx_call_draw_string(0x20, 0x12, auStack116, 2, 0);
+  xxx_call_draw_string(32, 18, auStack116, 2, 0);
   sub_80073E0(2);
 }
 

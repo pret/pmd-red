@@ -129,7 +129,7 @@ sub_808DF2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808DF40: .4byte gUnknown_203B45C
+_0808DF40: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_808DF2C
 
 	thumb_func_start sub_808DF44
@@ -233,7 +233,7 @@ sub_808DFDC:
 	bl sub_8090BB0
 	b _0808E00A
 	.align 2, 0
-_0808E000: .4byte gUnknown_203B45C
+_0808E000: .4byte gRecruitedPokemonRef
 _0808E004:
 	adds r0, r3, 0
 	adds r0, 0x28
@@ -1225,7 +1225,7 @@ _0808E746:
 	movs r0, 0x1
 	b _0808E76A
 	.align 2, 0
-_0808E75C: .4byte gUnknown_203B45C
+_0808E75C: .4byte gRecruitedPokemonRef
 _0808E760:
 	adds r2, 0x58
 	adds r3, 0x1
@@ -1430,8 +1430,8 @@ _0808E8C4:
 	bx r1
 	thumb_func_end sub_808E858
 
-	thumb_func_start sub_808E8C8
-sub_808E8C8:
+	thumb_func_start GetUnownIndex
+GetUnownIndex:
 	push {lr}
 	lsls r0, 16
 	asrs r1, r0, 16
@@ -1579,7 +1579,7 @@ _0808E9B0:
 _0808E9B2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808E8C8
+	thumb_func_end GetUnownIndex
 
 	thumb_func_start sub_808E9B8
 sub_808E9B8:

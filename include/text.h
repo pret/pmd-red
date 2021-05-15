@@ -25,4 +25,5 @@ void sub_8006554(void *a0, void *a1, void *a2, void *a3, u32 a4, const struct Un
 void sub_800898C(void);
 void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
 void sub_8009388(void);
+void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
 #endif

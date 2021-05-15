@@ -768,7 +768,7 @@ _08028748:
 	b _0802878A
 	.align 2, 0
 _08028760: .4byte 0x00000544
-_08028764: .4byte gUnknown_203B45C
+_08028764: .4byte gRecruitedPokemonRef
 _08028768: .4byte gUnknown_203B2C0
 _0802876C:
 	adds r1, r2, 0

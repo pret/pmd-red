@@ -1,12 +1,11 @@
 #include "global.h"
 #include "friend_rescue.h"
+#include "pokemon.h"
 #include "constants/species.h"
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_808D8E0(u8 *, u32);
-extern char * GetMonSpecies(u32);
 extern u8 sub_809539C(u32, u32);
 extern void sub_8095240(u8);
 extern u32 sub_802F298();
@@ -127,7 +126,7 @@ u32 CreateFriendRescueMenu(void)
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->unk538 = -1;
-  sub_808D8E0(gUnknown_202E5D8, SPECIES_PELIPPER);
+  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);
   strcpy(gAvailablePokemonNames,monName);
   for(counter = 0; counter < 0x36; counter++){

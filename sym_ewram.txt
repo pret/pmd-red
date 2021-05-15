@@ -329,10 +329,10 @@ gBG2Control = .; /* 202D6A8 */
 gBG3Control = .; /* 202D6B0 */
 	. += 0x8;
 
-gUnknown_202D6B8 = .; /* 202D6B8 */
+gBldAlpha_CoeffA = .; /* 202D6B8 */
 	. += 0x1;
 
-gUnknown_202D6B9 = .; /* 202D6B9 */
+gBldAlpha_CoeffB = .; /* 202D6B9 */
 	. += 0x141;
 
 gBldAlpha = .; /* 202D7FA */
@@ -885,7 +885,7 @@ gMonsterParametersFile = .; /* 202F3E4 */
 gUnknown_202F3E8 = .; /* 202F3E8 */
 	. += 0x18;
 
-gUnknown_202F400 = .; /* 202F400 */
+gRecruitedPokemon = .; /* 202F400 */
 	. += 0x90E8;
 
 gLevelCurrentPokeId = .; /* 20384E8 */
@@ -895,7 +895,10 @@ gLevelCurrentData = .; /* 20384F0 */
 	. += 0x4B0;
 
 gItemParametersFile = .; /* 20389A0 */
-	. += 0x8;
+	. += 0x4;
+
+gItemParametersData = .; /* 20389A4 */
+	. += 0x4;
 
 gUnknown_20389A8 = .; /* 20389A8 */
 	. += 0x268;

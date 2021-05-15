@@ -1,28 +1,6 @@
 #include "global.h"
 #include "input.h"
 
-struct UnkInputStruct
-{
-    /* 0x0 */ u8 unk0;
-    /* 0x1 */ u8 unk1;
-    /* 0x2 */ u8 unk2;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4;
-    /* 0x5 */ u32 unk5;
-    /* 0x9 */ u32 unk9;
-    /* 0xD */ u32 unkD;
-    /* 0x12 */ u32 unk11;
-    /* 0x16 */ u32 unk15;
-    /* 0x1A */ u32 unk19;
-    /* 0x1E */ u32 unk1D;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u8 unk28;
-    /* 0x29 */ u8 a_button;
-    /* 0x2A */ u8 b_button;
-    /* 0x2B */ u8 dpad_right;
-    /* 0x2C */ u8 dpad_left;
-};
-
 
 extern void nullsub_34(struct UnkInputStruct *r0);
 extern struct Inputs gRealInputs;

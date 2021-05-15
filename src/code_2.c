@@ -108,7 +108,7 @@ void GameLoop(void)
     sub_800DAAC();
     SetSavingIconCoords(0);
     tmp = 0;
-    if (sub_8011DAC(&tmp))
+    if (ReadSaveFromPak(&tmp))
         sub_800135C();
     xxx_script_related_8001334(14);
     xxx_script_related_8001334(15);

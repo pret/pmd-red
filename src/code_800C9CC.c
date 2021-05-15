@@ -3,8 +3,8 @@
 #include "bg.h"
 
 extern u16 gRawKeyInput;
-extern u8 gUnknown_202D6B8;
-extern u8 gUnknown_202D6B9;
+extern u8 gBldAlpha_CoeffA;
+extern u8 gBldAlpha_CoeffB;
 extern u16 gBldAlpha;
 extern u8 gUnknown_202D7FE;
 
@@ -51,34 +51,30 @@ void ReadKeyInput(struct Inputs *r0)
     gRawKeyInput = keyInput;
 }
 
-void sub_800CC44(s32 r0, s32 r1)
+void SetBldAlphaReg(s32 lowAlpha, s32 highAlpha)
 {
-    if(r0 < 0)
+    if(lowAlpha < 0)
     {
-        r0 = 0;
+        lowAlpha = 0;
     }
-    else
+    else if(lowAlpha > 16)
     {
-        if(r0 > 0x10)
-        {
-            r0 = 0x10;
-        }
+        lowAlpha = 16;
     }
-    if(r1 < 0)
-    {
-        r1 = 0;
-    }
-    else
-    {
-        if(r1 > 0x10)
-        {
-            r1 = 0x10;
-        }
-    }
-    gUnknown_202D6B8 = r0;
-    gUnknown_202D6B9 = r1;
 
-    gBldAlpha = BLDALPHA_BLEND1(gUnknown_202D6B8, gUnknown_202D6B9);
+    if(highAlpha < 0)
+    {
+        highAlpha = 0;
+    }
+    else if(highAlpha > 16)
+    {
+        highAlpha = 16;
+    }
+
+    gBldAlpha_CoeffA = lowAlpha;
+    gBldAlpha_CoeffB = highAlpha;
+
+    gBldAlpha = BLDALPHA_BLEND1(gBldAlpha_CoeffA, gBldAlpha_CoeffB);
 }
 
 void SetBG0RegOffsets(s32 xoffset, s32 yoffset)

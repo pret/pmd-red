@@ -440,7 +440,7 @@ gUnknown_203B324 = .; /* 203B324 */
 gUnknown_203B328 = .; /* 203B328 */
 	. += 0x4;
 
-gUnknown_203B32C = .; /* 203B32C */
+gPostOfficeHelper = .; /* 203B32C */
 	. += 0x4;
 
 gUnknown_203B330 = .; /* 203B330 */
@@ -584,7 +584,7 @@ gUnknown_203B454 = .; /* 203B454 */
 gUnknown_203B458 = .; /* 203B458 */
 	. += 0x4;
 
-gUnknown_203B45C = .; /* 203B45C */
+gRecruitedPokemonRef = .; /* 203B45C */
 	. += 0x4;
 
 gUnknown_203B460 = .; /* 203B460 */

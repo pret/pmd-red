@@ -63,7 +63,6 @@ SECTIONS {
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
-		. = ALIGN(4);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -85,6 +84,17 @@ SECTIONS {
         src/code_8012A18.o(.text);
         src/more_input.o(.text);
         asm/code_8012A18.o(.text);
+        src/felicity_bank.o(.text);
+        asm/felicity_bank.o(.text);
+        src/felicity_bank_1.o(.text);
+        src/kangaskhan_storage.o(.text);
+        asm/kangaskhan_storage.o(.text);
+        src/kangaskhan_storage_1.o(.text);
+        asm/kangaskhan_storage_1.o(.text);
+        src/kecleon_items.o(.text);
+        asm/kecleon_items.o(.text);
+        src/kecleon_items_1.o(.text);
+        asm/pokemon_square.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);
         src/code_8027C84_pre.o(.text);
@@ -97,6 +107,11 @@ SECTIONS {
         asm/code_802B640.o(.text);
         src/wonder_mail_3.o(.text);
         asm/wonder_mail_3.o(.text);
+        src/makuhita_dojo.o(.text);
+        asm/makuhita_dojo.o(.text);
+        asm/wonder_mail_4.o(.text);
+        src/post_office_guide.o(.text);
+        asm/wonder_mail_5.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
@@ -104,8 +119,6 @@ SECTIONS {
         asm/credits.o(.text);
         src/credits.o(.text);
         src/main_menu.o(.text);
-        asm/main_menu.o(.text);
-        src/main_menu_mid.o(.text);
         asm/main_menu_1.o(.text);
         src/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
@@ -118,7 +131,6 @@ SECTIONS {
         src/unk_menu_203B364.o(.text);
         asm/unk_menu_203B364.o(.text);
         asm/rescue_password_menu.o(.text);
-        asm/load_screen.o(.text);
         src/load_screen.o(.text);
         src/wonder_mail_main_menu.o(.text);
         asm/wonder_mail_main_menu.o(.text);
@@ -152,6 +164,8 @@ SECTIONS {
         src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
+        src/pokemon_mid.o(.text);
+        asm/pokemon_1.o(.text);
         src/pokemon_1.o(.text);
         src/code_808DAB4.o(.text);
         asm/code_808DAB4.o(.text);
@@ -159,6 +173,8 @@ SECTIONS {
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
+        src/items.o(.text);
+        asm/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
         src/friend_area.o(.text);
@@ -255,8 +271,12 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         src/wonder_mail.o(.rodata);
         data/data_80DED44.o(.rodata);
+        src/post_office_guide.o(.rodata);
+        data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
+        src/debug_menu.o(.rodata);
+        data/data_80E7D40.o(.rodata);
         data/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);

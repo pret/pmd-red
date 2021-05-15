@@ -1,14 +1,12 @@
 #include "global.h"
 #include "input.h"
+#include "gUnknown_203B460.h"
 
 struct unkData
 {
-    u8 unk0[14];
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u8 *unk14;
+    u8 unk0[24];
 };
+
 
 struct unkStruct_203B3F0
 {
@@ -63,12 +61,7 @@ struct unkStruct_203B3F4
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
-struct unkStruct_203B460
-{
-    u8 unk0[0x50];
-    u16 unk50[10];
-};
-extern struct unkStruct_203B460 *gUnknown_203B460; // TODO unify this
+extern struct unkStruct_203B460 *gUnknown_203B460;
 extern void sub_801B3C0(u8 *);
 extern void sub_8090A8C(u8 *, u8, u32);
 extern void sub_8013AA0(u32 *);
@@ -79,7 +72,6 @@ extern struct unkData gUnknown_80E7E64;
 extern struct unkData gUnknown_80E7EA4;
 extern struct unkData gUnknown_80E7E8C;
 
-extern u32 gDebug_NumberText;
 extern u32 gDebug_NumberText;
 extern u32 gUnknown_80D4970;
 
@@ -357,7 +349,7 @@ u32 sub_803A888(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(0, 1, 1);
-    gUnknown_203B3F4 = MemoryAlloc(0xFC, 8);
+    gUnknown_203B3F4 = MemoryAlloc(sizeof(struct unkStruct_203B3F4), 8);
     sub_803A924(0);
     return 1;
 }

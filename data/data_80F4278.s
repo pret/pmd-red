@@ -7799,8 +7799,8 @@ gUnknown_8107608: @ 8107608
         .string "%s#r"
         .align 2,0
 
-	.global gUnknown_8107610
-gUnknown_8107610: @ 8107610
+	.global gUnownLetters
+gUnownLetters: @ 8107610
         .string "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?\0"
         .align 2,0
 
@@ -7816,7 +7816,7 @@ gUnknown_8107638: @ 8107638
 
 	.global gUnknown_810763C
 gUnknown_810763C: @ 810763C
-	.incbin "baserom.gba", 0x10763C, 0x9
+        .string "#c%c%s#r\0"
 
 	.global gUnknown_8107645
 gUnknown_8107645: @ 8107645

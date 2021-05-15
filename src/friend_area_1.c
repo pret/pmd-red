@@ -8,7 +8,7 @@ extern void nullsub_102(u32 *r0);
 extern void sub_809488C(u32 *r0, u32 *r1, u32 r2);
 extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);
 
-u32 sub_80927A8(u8 *r0, u32 r1)
+u32 SaveFriendAreas(u8 *r0, u32 r1)
 {
     u32 temp[5];
     s32 counter;
@@ -26,7 +26,7 @@ u32 sub_80927A8(u8 *r0, u32 r1)
     return temp[2];
 }
 
-u32 sub_80927F4(u8 *r0, u32 r1)
+u32 ReadSavedFriendAreas(u8 *r0, u32 r1)
 {
     u32 temp[5];
     s32 counter;
