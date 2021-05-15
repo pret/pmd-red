@@ -69,7 +69,7 @@ u32 sub_8090A34(void)
 
 bool8 sub_8090A60(u8 itemIndex)
 {
-  if ((GetItemType(itemIndex) != 0) && (GetItemType(itemIndex) != 1)) {
+  if ((GetItemType(itemIndex) != ITEM_TYPE_THROWABLE) && (GetItemType(itemIndex) != ITEM_TYPE_ROCK)) {
     return FALSE;
   }
   else {
@@ -91,7 +91,7 @@ void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
         param_1->numItems = RandomRange(uVar3,uVar4);
     }
     else {
-        if (GetItemType(itemIndex) == 6) {
+        if (GetItemType(itemIndex) == ITEM_TYPE_MONEY) {
             param_1->numItems  = 1;
         }
         else {
@@ -122,7 +122,7 @@ void sub_8090B08(struct ItemStruct_203B460 *param_1,u8 itemIndex)
         uVar3 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar2,uVar3);
     } else {
-      if (GetItemType(itemIndex) == 6) {
+      if (GetItemType(itemIndex) == ITEM_TYPE_MONEY) {
         param_1->numItems = 1;
       }
       else {
@@ -277,9 +277,9 @@ u8 GetItemPalette(u8 itemIndex)
     return gItemParametersData[itemIndex].palette;
 }
 
-u8 GetItemSubtype(u8 itemIndex)
+u8 GetItemCategory(u8 itemIndex)
 {
-    return gItemParametersData[itemIndex].subtype;
+    return gItemParametersData[itemIndex].category;
 }
 
 u32 GetItemUnkThrow(u8 itemIndex, u32 r1)

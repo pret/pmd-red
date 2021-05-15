@@ -4108,7 +4108,7 @@ _08044BF0: .4byte gUnknown_80F697C
 _08044BF4:
 	ldr r4, _08044C0C
 	adds r0, r5, 0
-	bl GetItemSubtype
+	bl GetItemCategory
 	lsls r0, 3
 	adds r4, 0x4
 	adds r0, r4
@@ -4552,7 +4552,7 @@ _08044F18:
 	lsls r0, r5, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
-	bl GetItemSubtype
+	bl GetItemCategory
 	lsls r0, 3
 	adds r4, 0x4
 	adds r0, r4
@@ -7454,7 +7454,7 @@ sub_80464AC:
 	push {r4,lr}
 	ldr r4, _080464C4
 	ldrb r0, [r0, 0x2]
-	bl GetItemSubtype
+	bl GetItemCategory
 	lsls r0, 3
 	adds r0, r4
 	ldr r0, [r0]

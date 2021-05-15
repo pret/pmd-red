@@ -17,8 +17,42 @@ struct Item
     /* 0x1A */ u8 order; // Numbered order they are in storage
     /* 0x1B */ u8 unkThrow1B[2];
     /* 0x1D */ u8 palette;
-    /* 0x1E */ u8 subtype; // category in PMDe??
+    /* 0x1E */ u8 category;
     /* 0x1F */ u8 fill3;
+};
+
+enum ItemType
+{
+    ITEM_TYPE_THROWABLE,
+    ITEM_TYPE_ROCK,
+    ITEM_TYPE_BERRY_SEED,
+    ITEM_TYPE_APPLE_GUMMI,
+    ITEM_TYPE_HOLD_ITEM,
+    ITEM_TYPE_TM,
+    ITEM_TYPE_MONEY,
+    ITEM_TYPE_UNUSED,
+    ITEM_TYPE_MISC,
+    ITEM_TYPE_ORB,
+    ITEM_TYPE_LINK_BOX,
+    ITEM_TYPE_USED_TM
+};
+
+enum ItemCategory
+{
+    ITEM_CATEGORY_NOTHING,
+    ITEM_CATEGORY_THROWABLE,
+    ITEM_CATEGORY_ROCKS,
+    ITEM_CATEGORY_RIBBONS,
+    ITEM_CATEGORY_FOOD,
+    ITEM_CATEGORY_HEALING,
+    ITEM_CATEGORY_CHESTNUT,
+    ITEM_CATEGORY_MONEY_WISH_STONE,
+    ITEM_CATEGORY_MISC,
+    ITEM_CATEGORY_TM,
+    ITEM_CATEGORY_LINK_BOX,
+    ITEM_CATEGORY_SPECS,
+    ITEM_CATEGORY_SCARFS,
+    ITEM_CATEGORY_ORBS
 };
 
 #endif
