@@ -89,7 +89,7 @@ void sub_80129FC(void);
 void sub_8012298();
 void sub_80122D0();
 void sub_80122F4();
-void sub_8012300();
+void InitializePlayerData();
 void sub_80122A8();
 
 u32 ReadSaveSector(s32 *a, u8 *dest, s32 size);

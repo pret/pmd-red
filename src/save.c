@@ -63,7 +63,7 @@ struct unkStruct_203B194
     u8 *unk4;
     u32 unk8;
     u8 unkC;
-    u8 padding[0x10 - 0xD];
+    u8 fillD[3];
     u32 quickSaveStatus;
 };
 extern struct unkStruct_203B194 *gUnknown_203B194;
@@ -85,19 +85,57 @@ extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
 extern struct ExclusivePokemonData *gUnknown_203B498;
 
-extern const char gSaveCorrupted;
-extern const char gSavingAdventure;
-extern const char gWriteGamePak;
-extern const char gSaveCompleted;
-extern const char gSaveNotWritten;
-extern const char gSaveFailed;
-extern const char gUnknown_80D44C8;
-extern const char gUnknown_80D45AC;
+ALIGNED(4) const char gSaveCorrupted[] = _("#+The game data is corrupted.\n"
+                                            "#+Your data will be erased.");
 
-extern const char gUnknown_80D45F4;
-extern const char gUnknown_80D4668;
-extern const char gSaveNotWritten2;
-extern const char gSaveFailed2;
+ALIGNED(4) const char fill_save0[] = _("pksdir0");
+
+ALIGNED(4) const char gSavingAdventure[] = _("#+Saving your adventure...\n"
+                                            "#+Please don~27t turn off the power.");
+
+ALIGNED(4) const char gWriteGamePak[] = _("#+Writing to GBA Game Pak.\n"
+                                      "#+Do not remove the GBA Game Pak.\n"
+                                      "#+Please wait with the power on.");
+
+ALIGNED(4) const char gSaveCompleted[] = _("#+Save completed!");
+
+ALIGNED(4) const char gSaveNotWritten[] = _("#+The data could not be written.\n"
+                                        "#+Please turn off the power and remove\n"
+                                        "#+and reinsert the DS Card.");
+
+ALIGNED(4) const char gSaveFailed[] = _("#+Save failed.");
+
+ALIGNED(4) const char fill_save1[] = _("pksdir0");
+
+ALIGNED(4) const char gUnknown_80D44C8[] = _("#+Your data was not properly saved~2c\n"
+                                             "#+so your game cannot be resumed\n"
+                                             "#+from your last spot.#P"
+                                             "#+Your last outing is considered a defeat.\n"
+                                             "#+Before shutting down~2c save in your\n"
+                                             "#+team base~2c or quicksave in a dungeon.");
+
+ALIGNED(4) const char fill_save2[] = _("pksdir0");
+
+ALIGNED(4) const char gUnknown_80D45AC[] = _("#+Quicksaving your adventure...\n"
+                                             "#+Please don~27t turn off the power.");
+
+ALIGNED(4) const char gUnknown_80D45F4[] = _("#+Your adventure has been saved.\n"
+                                             "#+When you are in a dungeon~2c quicksave\n"
+                                             "#+your progress before ending the game.");
+
+ALIGNED(4) const char gUnknown_80D4668[] = _("#+Your adventure has been saved.\n"
+                                             "#+When you resume play~2c the quicksave\n"
+                                             "#+data will be deleted.#P"
+                                             "#+When you are shutting down the game~2c\n"
+                                             "#+save your progress in your team base~2c\n"
+                                             "#+or quicksave in a dungeon.");
+
+ALIGNED(4) const char gSaveNotWritten2[] = _("#+The data could not be written.\n"
+                                             "#+Please turn off the power and remove\n"
+                                             "#+and reinsert the DS Card.");
+
+ALIGNED(4) const char gSaveFailed2[] = _("#+Save failed.");
+ALIGNED(4) const char fill_save3[] = _("pksdir0");
 
 extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
 
@@ -523,7 +561,7 @@ void sub_8012284(void)
 {
     sub_80122D0();
     sub_80122F4();
-    sub_8012300();
+    InitializePlayerData();
 }
 
 void sub_8012298(void)
@@ -536,7 +574,7 @@ void sub_80122A8(void)
 {
     sub_80122D0();
     sub_80122F4();
-    sub_8012300();
+    InitializePlayerData();
     sub_8012240();
 }
 
@@ -562,7 +600,7 @@ void sub_80122F4(void)
     sub_800135C();
 }
 
-void sub_8012300(void)
+void InitializePlayerData(void)
 {
     InitializeFriendAreas();
     InitializeRecruitedPokemon();
@@ -645,7 +683,7 @@ u8 sub_8012484(void)
             {
                 if(IsSaveCorrupted())
                 {
-                    sub_80141B4(&gSaveCorrupted, 0, 0, 0x301);
+                    sub_80141B4(gSaveCorrupted, 0, 0, 0x301);
                     gUnknown_203B188->state = 3;
                 }
                 else
@@ -657,11 +695,11 @@ u8 sub_8012484(void)
             {
                 gUnknown_203B188->state = 6;
             }
-        break;
+            break;
         case 3:
             if(sub_80144A4(&temp2) == 0)
                 gUnknown_203B188->state = 4;
-        break;
+            break;
         case 4:
             sub_8012298();
             gUnknown_203B188->state = 6;
@@ -707,10 +745,10 @@ void sub_8012574(s16 PokemonID)
   }
   if (gUnknown_203B18C->faceFile != 0) {
       preload_face = (u8 *)&gUnknown_203B18C->faceFile; 
-      sub_80141B4(&gSavingAdventure,0,preload_face,0x20);
+      sub_80141B4(gSavingAdventure,0,preload_face,0x20);
   }
   else {
-      sub_80141B4(&gSavingAdventure,0,0,0x20);
+      sub_80141B4(gSavingAdventure,0,0,0x20);
   }
   gUnknown_203B18C->state = 3;
 }
@@ -732,8 +770,8 @@ bool8 sub_8012600(void)
         break;
     case 1:
         gUnknown_203B18C->unk4++;
-        if (8 < gUnknown_203B18C->unk4) {
-            sub_80141B4(&gWriteGamePak, 0, 0, 0x20);
+        if (gUnknown_203B18C->unk4 > 8) {
+            sub_80141B4(gWriteGamePak, 0, 0, 0x20);
             gUnknown_203B18C->state = 3;
         }
         break;
@@ -750,20 +788,20 @@ bool8 sub_8012600(void)
         {
             case SAVE_COMPLETED:
                 if(gUnknown_203B18C->faceFile != NULL)
-                    sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
                 else
-                    sub_80141B4(&gSaveCompleted, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
                 gUnknown_203B18C->state = 5;
                 break;
             case SAVE_NOT_WRTTEN:
-                sub_80141B4(&gSaveNotWritten, 0, 0, 0);
+                sub_80141B4(gSaveNotWritten, 0, 0, 0);
                 gUnknown_203B18C->state = 6;
                 break;
             default:
                 if(gUnknown_203B18C->faceFile != NULL)
-                    sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
                 else
-                    sub_80141B4(&gSaveFailed, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
                 gUnknown_203B18C->state = 5;
                 break;
         }
@@ -831,7 +869,7 @@ u32 sub_80127A8(void)
                 // from your last spot. Your last outing is considered a defeat.
                 // Before shutting down, save in your
                 // team base or quicksave in a dungeon
-                sub_80141B4(&gUnknown_80D44C8, 0, 0, 0x301);
+                sub_80141B4(gUnknown_80D44C8, 0, 0, 0x301);
                 gUnknown_203B190->state = 2;
             }
             break;
@@ -868,9 +906,13 @@ void sub_8012850(u8 *r0, u32 r1, u8 r2)
     gUnknown_203B194->unkC = r2;
     gUnknown_203B194->state = 0;
     if(gUnknown_203B194->unkC != 0)
-        sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
+        // Quicksaving your adventure...
+        // Please don't turn off the power.
+        sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
     else
-        sub_80141B4(&gUnknown_80D45AC, 0, 0, 0x20);
+        // Quicksaving your adventure...
+        // Please don't turn off the power.
+        sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
 }
 
 u32 sub_80128B0(void)
@@ -897,18 +939,29 @@ u32 sub_80128B0(void)
                 case SAVE_COMPLETED:
                     sub_80121E0(0xf1207);
                     if(gUnknown_203B194->unkC != 0)
-                        sub_80141B4(&gUnknown_80D45F4, 0, 0, 0x301);
+                        // Your adventure has been saved
+                        // When you are in a dungeon, quicksave
+                        // your progress before ending the game.
+                        sub_80141B4(gUnknown_80D45F4, 0, 0, 0x301);
                     else
-                        sub_80141B4(&gUnknown_80D4668, 0, 0, 0x301);
+                        // Your adventure has been saved.
+                        // When you resume play, the quicksave
+                        // data will be deleted. When you are shutting down the game,
+                        // save your progress in your team base,
+                        // or quicksave in a dungeon.
+                        sub_80141B4(gUnknown_80D4668, 0, 0, 0x301);
                     gUnknown_203B194->state = 3;
                     break;
                 case SAVE_NOT_WRTTEN:
-                    sub_80141B4(&gSaveNotWritten2, 0, 0, 0);
+                    // The data could not be written.
+                    // Please turn off the power and remove
+                    // and reinsert the DS Card
+                    sub_80141B4(gSaveNotWritten2, 0, 0, 0);
                     gUnknown_203B194->state = 4;
                     break;
                 default:
                     sub_80121E0(0xf1209);
-                    sub_80141B4(&gSaveFailed2, 0, 0, 0x301);
+                    sub_80141B4(gSaveFailed2, 0, 0, 0x301);
                     gUnknown_203B194->state = 3;
                     break;
             }
