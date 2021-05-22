@@ -3,6 +3,7 @@
 #include "input.h"
 #include "pokemon.h"
 #include "constants/species.h"
+#include "memory.h"
 
 struct unkStruct_203B2C8
 {
@@ -33,6 +34,7 @@ struct unkStruct_203B2C8
     u8 unk134;
     u8 fill135[0x3];
     u32 unk138;
+    u32 fill13C;
 };
 
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
@@ -71,9 +73,6 @@ extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298();
 extern void sub_802F2C0();
 extern u32 sub_8011C34();
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u8, s32);
-extern void MemoryFree(void *);
 extern void sub_800641C(void *, u32, u32);
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
@@ -108,8 +107,8 @@ u32 sub_802B2D4(void)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B2C8 = MemoryAlloc(0x140,8);
-  MemoryFill8((u8 *)gUnknown_203B2C8,0,0x140);
+  gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
+  MemoryFill8((u8 *)gUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   gUnknown_203B2C8->unk1 = -1;
   CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);

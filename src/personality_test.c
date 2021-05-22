@@ -7,9 +7,9 @@
 #include "pokemon.h"
 #include "input.h"
 #include "save.h"
+#include "memory.h"
+#include "gUnknown_203B46C.h"
 
-extern void* MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_801317C(u32 *);
 extern void sub_8099690(u32);
 extern void sub_8001024(u32 *);
@@ -67,14 +67,6 @@ struct PersonalityQuestion
 
 extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
 
-struct UnkSaveStruct1
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ u8 unkA;
-    /* 0xB */ u8 playerGender;
-};
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 struct stack_PartnerSprite

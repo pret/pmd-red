@@ -1789,7 +1789,7 @@ _08058756:
 	adds r0, r7, 0
 	adds r1, r7, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 _08058762:
 	adds r0, r5, 0
 	add sp, 0x4
@@ -2142,7 +2142,7 @@ sub_80589D4:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4-r6}
@@ -2821,7 +2821,7 @@ sub_8058EE0:
 	movs r3, 0x1
 	str r3, [sp]
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r1}
@@ -3293,7 +3293,7 @@ _0805926E:
 	adds r1, r7, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 _0805927E:
 	mov r0, r8
 	add sp, 0x4
@@ -4287,7 +4287,7 @@ _080599FE:
 	str r0, [sp]
 	adds r0, r3, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4}
@@ -4408,7 +4408,7 @@ sub_8059AC4:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4-r6}
@@ -5789,7 +5789,7 @@ sub_805A508:
 	adds r0, r5, 0
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0
 	strb r0, [r4]
 	b _0805A54C
@@ -7110,7 +7110,7 @@ _0805AF64:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	b _0805AF9C
 _0805AF78:
@@ -8143,7 +8143,7 @@ _0805B700:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	b _0805B71E
 _0805B712:
 	ldr r0, _0805B730
@@ -19945,7 +19945,7 @@ _080619B4: .4byte gUnknown_80FE954
 _080619B8:
 	ldr r0, _080619DC
 	adds r1, r4, 0
-	bl sub_808EAC0
+	bl CopyTacticsNameToBuffer
 	ldr r0, [sp, 0x10]
 	adds r0, 0x94
 	ldrb r0, [r0]
@@ -21558,7 +21558,7 @@ _08062650:
 	movs r0, 0
 	bl sub_80073B8
 	mov r0, r10
-	bl sub_808EAB0
+	bl GetIQSkillName
 	adds r1, r0, 0
 	ldr r0, _080626CC
 	bl strcpy
@@ -21571,7 +21571,7 @@ _08062650:
 	movs r3, 0
 	bl sub_8014FF0
 	mov r0, r10
-	bl sub_808EADC
+	bl GetIQSkillDescription
 	adds r2, r0, 0
 	mov r0, r9
 	str r0, [sp]
@@ -21582,7 +21582,7 @@ _08062650:
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
-	bl sub_808EADC
+	bl GetIQSkillDescription
 	ldr r1, [sp, 0x84]
 	bl sub_8097DF0
 	adds r5, r0, 0
@@ -21691,7 +21691,7 @@ _0806276C:
 	bl sub_80073B8
 	ldr r0, _080627E0
 	mov r1, r10
-	bl sub_808EAC0
+	bl CopyTacticsNameToBuffer
 	ldr r0, _080627E4
 	ldr r2, [r0]
 	mov r0, r9
@@ -21701,7 +21701,7 @@ _0806276C:
 	movs r3, 0
 	bl sub_8014FF0
 	mov r0, r10
-	bl sub_808EAEC
+	bl GetTacticsDescription
 	adds r2, r0, 0
 	mov r0, r9
 	str r0, [sp]
@@ -21712,7 +21712,7 @@ _0806276C:
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
-	bl sub_808EAEC
+	bl GetTacticsDescription
 	ldr r1, [sp, 0x84]
 	bl sub_8097DF0
 	adds r5, r0, 0
@@ -26801,7 +26801,7 @@ sub_8065040:
 	cmp r0, 0
 	beq _0806505C
 	ldr r0, _08065058
-	bl sub_80949DC
+	bl GameOptionsNotChange
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806505E
@@ -26851,7 +26851,7 @@ sub_806509C:
 	cmp r0, 0x1
 	bne _080650B8
 	movs r0, 0
-	bl sub_8094998
+	bl InitializeGameOptions
 	bl sub_803E13C
 _080650B8:
 	pop {r0}
@@ -37892,7 +37892,7 @@ _0806A85C:
 	beq _0806A87A
 	lsls r0, r2, 24
 	lsrs r0, 24
-	bl sub_808EAB0
+	bl GetIQSkillName
 	adds r1, r0, 0
 	ldr r0, _0806A890
 	bl strcpy
@@ -43883,7 +43883,7 @@ _0806D64E:
 	mov r0, r9
 	adds r1, r7, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	b _0806D754
 _0806D660:
 	adds r0, r7, 0
@@ -53434,7 +53434,7 @@ _08071F94:
 	lsls r1, r4, 24
 	lsrs r1, 24
 	ldr r0, _08071FFC
-	bl sub_808EAC0
+	bl CopyTacticsNameToBuffer
 	ldr r0, _08072000
 	ldr r2, [r0]
 	ldr r0, [sp, 0xB4]
@@ -53615,7 +53615,7 @@ _080720FA:
 	lsls r1, r6, 24
 	lsrs r1, 24
 	ldr r0, _0807217C
-	bl sub_808EAC0
+	bl CopyTacticsNameToBuffer
 	ldr r0, _08072180
 	ldr r2, [r0]
 	mov r0, r9
@@ -53865,8 +53865,8 @@ _08072324: .4byte gUnknown_80F9B34
 _08072328: .4byte gUnknown_80F9B58
 	thumb_func_end sub_807218C
 
-	thumb_func_start sub_807232C
-sub_807232C:
+	thumb_func_start LevelDownTarget
+LevelDownTarget:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -53947,7 +53947,7 @@ _080723B6:
 _080723C4: .4byte 0x00000149
 _080723C8: .4byte gAvailablePokemonNames
 _080723CC: .4byte gUnknown_80F9B94
-	thumb_func_end sub_807232C
+	thumb_func_end LevelDownTarget
 
 	thumb_func_start sub_80723D0
 sub_80723D0:
@@ -58511,7 +58511,7 @@ _080747E8:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 _08074802:
 	mov r0, r8
 	adds r0, 0xC8
@@ -58704,7 +58704,7 @@ _08074984:
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 _08074994:
 	adds r0, r5, 0
 	bl sub_80450E0
@@ -64993,8 +64993,8 @@ _08077C3A:
 _08077C40: .4byte gUnknown_80FB960
 	thumb_func_end sub_8077BB4
 
-	thumb_func_start sub_8077C44
-sub_8077C44:
+	thumb_func_start HealTargetHP
+HealTargetHP:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -65201,7 +65201,7 @@ _08077DC8:
 	bx r0
 	.align 2, 0
 _08077DD8: .4byte gUnknown_80FB1C4
-	thumb_func_end sub_8077C44
+	thumb_func_end HealTargetHP
 
 	thumb_func_start sub_8077DDC
 sub_8077DDC:
@@ -67558,8 +67558,8 @@ _08079134:
 _0807913C: .4byte gUnknown_80FC054
 	thumb_func_end sub_80790C8
 
-	thumb_func_start sub_8079140
-sub_8079140:
+	thumb_func_start BlindTarget
+BlindTarget:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -67626,7 +67626,7 @@ _080791CE:
 	bx r0
 	.align 2, 0
 _080791D4: .4byte gUnknown_80FB810
-	thumb_func_end sub_8079140
+	thumb_func_end BlindTarget
 
 	thumb_func_start sub_80791D8
 sub_80791D8:
@@ -67698,8 +67698,8 @@ _08079266:
 _0807926C: .4byte gUnknown_80FB85C
 	thumb_func_end sub_80791D8
 
-	thumb_func_start sub_8079270
-sub_8079270:
+	thumb_func_start RestoreVisionTarget
+RestoreVisionTarget:
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -67759,7 +67759,7 @@ _080792EE:
 	bx r0
 	.align 2, 0
 _080792F4: .4byte gUnknown_80FB89C
-	thumb_func_end sub_8079270
+	thumb_func_end RestoreVisionTarget
 
 	thumb_func_start sub_80792F8
 sub_80792F8:
@@ -69655,7 +69655,7 @@ _0807A1E8:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	adds r0, r7, 0
 	adds r0, 0xA8
 	strb r4, [r0]

@@ -131,12 +131,12 @@ extern u32 sub_8097D60(u8 *, u32);
 extern u32 sub_8097D98(void* a, s32 b);
 extern void sub_80993E4();
 extern void sub_800135C(void);
-extern u32 *sub_808CE00(void);
-extern void sub_808CE08(void);
+extern u32 *GetRecruitedPokemon(void);
+extern void InitializeRecruitedPokemon(void);
 extern u32 *GetMoneyItemsInfo(void);
 extern void InitializeMoneyItems(void);
-extern u32 sub_8094990(void);
-extern void sub_8094998(u8 r0);
+extern u32 GetGameOptions(void);
+extern void InitializeGameOptions(u8 r0);
 extern u8 *sub_80950F8(void);
 extern void sub_80958E4(u8 *a, u32 b);
 extern u32 sub_80958F8(void);
@@ -150,10 +150,6 @@ extern void sub_80993D8(void);
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 
-
-extern void* MemoryAlloc(u32 a, u32 b);
-extern void MemoryFree(void* a);
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void xxx_call_start_bg_music(void);
 
 
@@ -569,14 +565,14 @@ void sub_80122F4(void)
 void sub_8012300(void)
 {
     InitializeFriendAreas();
-    sub_808CE08();
+    InitializeRecruitedPokemon();
     InitializeMoneyItems();
     InitializeResuceTeamInfo();
     sub_80972F4();
     sub_8095118();
     sub_8095900();
     sub_80974E8();
-    sub_8094998(1);
+    InitializeGameOptions(1);
     InitializeExclusivePokemon();
 }
 
@@ -593,7 +589,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
     if(r0 != NULL)
     {
        gUnknown_203B460 = r0->unk0;
-       gRecruitedPokemonRef = r0->unk4;
+       gRecruitedPokemonRef = r0->recruitedPokemon;
        gUnknown_203B480 = r0->unk8;
        gUnknown_203B484 = r0->unkC;
        gUnknown_203B488 = r0->unk10;
@@ -603,12 +599,12 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = r0->unk20;
        gUnknown_203B498 = r0->ExclusivePokemon;
        gFriendAreas     = r0->BoughtFriendAreas;
-       gUnknown_203B46C = r0->unk2C;
+       gUnknown_203B46C = r0->gameOptions;
        gPlayTimeRef     = r0->playTime;
        return;
     }
        gUnknown_203B460 = GetMoneyItemsInfo();
-       gRecruitedPokemonRef = sub_808CE00();
+       gRecruitedPokemonRef = GetRecruitedPokemon();
        gUnknown_203B480 = sub_80950F8();
        gUnknown_203B484 = sub_8095100();
        gUnknown_203B488 = sub_8095108();
@@ -618,7 +614,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = sub_8097680();
        gUnknown_203B498 = GetExclusivePokemon();
        gFriendAreas     = GetBoughtFriendAreas();
-       gUnknown_203B46C = sub_8094990();
+       gUnknown_203B46C = GetGameOptions();
        gPlayTimeRef     = GetPlayTime();
 
 }
@@ -830,6 +826,11 @@ u32 sub_80127A8(void)
             }
             else
             {
+                // Data was not properly saved
+                // so your game cannot be resumed
+                // from your last spot. Your last outing is considered a defeat.
+                // Before shutting down, save in your
+                // team base or quicksave in a dungeon
                 sub_80141B4(&gUnknown_80D44C8, 0, 0, 0x301);
                 gUnknown_203B190->state = 2;
             }

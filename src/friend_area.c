@@ -1,22 +1,13 @@
 #include "global.h"
 #include "constants/friend_area.h"
 #include "friend_area.h"
+#include "pokemon.h"
 
 extern bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
 extern bool8 *gFriendAreas;
 
 
-struct unkStruct_203B45C
-{
-    // size: 0x58?
-    u16 unk0;
-    s16 unk2;
-    u8 unk4[0x24];
-    u8 unk28;
-    u8 unk29[0x2f];
-};
-
-extern struct unkStruct_203B45C gRecruitedPokemonRef[];
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 extern bool8 *gFriendAreas;
 
@@ -362,14 +353,17 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
     s32 counter;
     bool32 flag;
     s32 r6;
+    struct PokemonStruct *pokemon;
+
     r6 = 0;
     for(counter = 0; counter <= 412; counter++)
     {
-        if((u8)(gRecruitedPokemonRef[counter].unk0) & 1)
+        pokemon = &gRecruitedPokemonRef->pokemon[counter];
+        if((u8)(pokemon->unk0) & 1)
         {
-            if(((u8)gRecruitedPokemonRef[counter].unk2 == 0) || r2)
+            if((pokemon->unk2 == 0) || r2)
             {
-                flag = (u8)gRecruitedPokemonRef[counter].unk4[0] == 65;
+                flag = (u8)pokemon->fill4[0] == 65;
                 if(!flag || r3)
                 {
                     if(sub_80923D4(counter) == r0)

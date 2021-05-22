@@ -4,6 +4,7 @@
 #include "input.h"
 #include "constants/species.h"
 #include "felicity_bank.h"
+#include "memory.h"
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
@@ -13,8 +14,6 @@ extern struct unkData gUnknown_80DB6DC;
 extern struct unkData gUnknown_80DB6F4;
 extern struct unkData gUnknown_80DB70C;
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_800641C(struct unkData *, u32, u32);
 extern void sub_8006518(struct unkData *);
 extern void sub_8016B24();

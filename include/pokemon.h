@@ -3,6 +3,57 @@
 
 #include "file_system.h"
 
+struct PokemonStruct
+{
+    // size: 0x58
+    u16 unk0; // recruited??
+    u8 unk2;
+    u8 unk3;
+    u8 fill4[0x8 - 0x4];
+    s16 unk8; // species #
+    u8 fillA[0x14 - 0xA];
+    u16 unk14;
+    u16 unk16; // HP
+    u8 unk18; // attack
+    u8 unk19; // sp attack
+    u8 unk1A; // def
+    u8 unk1B; // spdef
+    u32 unk1C;
+    u32 unk20;
+    u8 unk24;
+    u8 fill25[3];
+    u8 unk28;
+    u8 fill29[3];
+    u32 unk2C;
+    u8 fill30[0x4C - 0x30];
+    /* 0x4C */ u8 name[0xA];
+};
+
+struct PokemonStruct2
+{
+    // size 0x64
+    u16 unk0;
+    u8 fill[0x62];
+};
+
+struct PokemonStruct3
+{
+    // size: 0x58
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
+    u8 fill[0x4E];
+};
+
+struct unkStruct_203B45C
+{
+    struct PokemonStruct pokemon[0x19D];
+    struct PokemonStruct2 pokemon2[4];
+    struct PokemonStruct3 pokemon3[4];
+};
+
 struct EvolveStruct1
 {
     /* 0x34 */ u16 evolve_from;

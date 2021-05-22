@@ -4,6 +4,7 @@
 #include "input.h"
 #include "constants/species.h"
 #include "kangaskhan_storage.h"
+#include "memory.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
 extern struct unkData gUnknown_80DB748;
@@ -13,8 +14,6 @@ extern struct unkData gUnknown_80DB760;
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_800641C(struct unkData *, u32, u32);
 extern void sub_8006518(struct unkData *);
 void UpdateKangaskhanStorageState(u32);

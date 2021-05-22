@@ -4,6 +4,7 @@
 #include "constants/species.h"
 #include "input.h"
 #include "kecleon_items.h"
+#include "memory.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_202E5D8[];
@@ -13,8 +14,6 @@ extern struct unkData gUnknown_80DB870;
 extern struct unkData gUnknown_80DB888;
 extern struct unkData gUnknown_80DB858;
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 void UpdateKecleonStoreState(u32);
 
 extern void sub_8019730();
@@ -47,7 +46,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   {
       case 0:
         gUnknown_203B210->unk4 = 1;
-        gUnknown_203B210->unkE4 = &gUnknown_203B210->unkD4;
+        gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
         monName = GetMonSpecies( SPECIES_KECLEON);
@@ -63,7 +62,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         break;
       case 2:
         gUnknown_203B210->unk4 = 0;
-        gUnknown_203B210->unkE4 = &gUnknown_203B210->unkD4;
+        gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
         monName = GetMonSpecies( SPECIES_KECLEON);
@@ -81,7 +80,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         break;
   }
   faceFile = GetDialogueSpriteDataPtr(SPECIES_KECLEON);
-  gUnknown_203B210->unkD4 = faceFile;
+  gUnknown_203B210->faceFile = faceFile;
   gUnknown_203B210->unkD8 = faceFile->data;
   gUnknown_203B210->unkE0 = 0;
   gUnknown_203B210->unkE1 = 0;
@@ -141,7 +140,7 @@ void sub_8018CF0(void)
 {
     if(gUnknown_203B210 != NULL)
     {
-        CloseFile(gUnknown_203B210->unkD4);
+        CloseFile(gUnknown_203B210->faceFile);
         MemoryFree(gUnknown_203B210);
         gUnknown_203B210 = NULL;
     }

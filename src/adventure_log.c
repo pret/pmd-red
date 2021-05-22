@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "gba/io_reg.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -54,8 +55,6 @@ const u8 gAdventureLogHeaderText[] = "Adventure Log";
 const u8 gUnknown_80E2030[] = "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "; // string of ???????
 const u8 fill_adven[] = "pksdir0";
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_8006518(struct unkData *);
 extern void sub_800641C(void *, u32, u32);
 void sub_8032084();
@@ -78,7 +77,7 @@ extern u32 gUnknown_202DE30;
 
 u32 CreateAdventureLogScreen(u32 param_1)
 {
-  gAdventureLog = MemoryAlloc(0xa0,8);
+  gAdventureLog = MemoryAlloc(sizeof(struct AdventureLog),8);
   gAdventureLog->unk34 = param_1;
   gAdventureLog->unk38 = &gAdventureLog->unk3C[param_1];
   sub_8006518(gAdventureLog->unk3C);

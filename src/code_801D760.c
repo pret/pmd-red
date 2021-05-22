@@ -2,6 +2,39 @@
 #include "constants/friend_area.h"
 #include "file_system.h"
 #include "gUnknown_203B460.h"
+#include "memory.h"
+#include "input.h"
+
+struct unkData
+{
+    u8 unk0[0x14];
+    u32 *unk14;
+};
+
+struct unkStruct_203B258
+{
+    // size: 0xA0
+    u8 fill0[0x14];
+    u32 unk14;
+    u8 fill18[0x34 - 0x18];
+    u32 unk34;
+    struct unkData *unk38;
+    struct unkData unk3C[4];
+    u32 unk9C;
+};
+
+extern struct unkStruct_203B258 *gUnknown_203B258;
+extern struct unkData gUnknown_80DBF88;
+
+extern void sub_800641C(struct unkData *, u32, u32);
+extern void sub_8006518(struct unkData *);
+extern void sub_8013818(void *, u32, u32, u32);
+extern void sub_8013878(void *, s32);
+extern u8 sub_80138B8(void *, u32);
+extern u32 GetKeyPress(void *);
+extern void PlayMenuSoundEffect(u32);
+extern void sub_801DB54();
+extern void sub_801DBD4();
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
@@ -121,130 +154,156 @@ void sub_801D680(void)
 
 void sub_801D760()
 {
-    u32 temp;
-    temp = sub_8022860();
-    if (temp <= 1)
-        return;
-    if (temp > 3)
-        return;
-    sub_8022908();
-    sub_801D208(1);
-
+    switch(sub_8022860())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_8022908();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D77C()
 {
-    u32 temp;
-    temp = sub_80270A4();
-    if (temp <= 1)
-        return;
-    if (temp > 3)
-        return;
-    sub_8027168();
-    sub_801D208(1);
-
+    switch(sub_80270A4())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_8027168();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D798(void)
 {
-    u32 temp;
-    temp = sub_8025F68();
-    if (temp <= 1)
-        return;
-    if (temp > 3)
-        return;
-    if(sub_802604C() != 0)
-        gUnknown_203B250->unk7 = gUnknown_203B250->currFriendAreaLocation;
-    sub_8026058();
-    sub_801D208(2);
+    switch(sub_8025F68())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            if(sub_802604C() != 0)
+                gUnknown_203B250->unk7 = gUnknown_203B250->currFriendAreaLocation;
+            sub_8026058();
+            sub_801D208(2);
+            break;
+    }
 }
 
 void sub_801D7CC()
 {
-    u32 check;
-    u32 temp2;
-
-    check = sub_8025354();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-
-    temp2 = sub_802540C();
-    gUnknown_203B250->unk7 = temp2;
-
-    sub_8025418();
-
-    if(gUnknown_203B250->unk7 != 0)
+    switch(sub_8025354())
     {
-        sub_801D208(2);
-    }
-    else
-    {
-        sub_801D208(1);
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            gUnknown_203B250->unk7 = sub_802540C();
+            sub_8025418();
+            if(gUnknown_203B250->unk7 != 0)
+            {
+                sub_801D208(2);
+            }
+            else
+            {
+                sub_801D208(1);
+            }
+            break;
     }
 }
 
 void sub_801D808(void)
 {
-    u32 check;
-
-    check = sub_80244E4();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-
-    sub_802453C();
-    sub_801D208(1);
+    switch(sub_80244E4())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_802453C();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D824(void)
 {
-    u32 check;
-    check = sub_801BF48();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-    sub_801BF98();
-    sub_801D208(1);
+    switch(sub_801BF48())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_801BF98();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D840(void)
 {
-    u32 check;
-    check = sub_80217EC();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-    sub_8021830();
-    sub_801D208(1);
+    switch(sub_80217EC())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_8021830();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D85C(void)
 {
-    u32 check;
-    check = sub_802C898();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-    sub_802C8F4();
-    sub_801D208(1);
+    switch(sub_802C898())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_802C8F4();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D878(void)
 {
-    u32 check;
-    check = sub_801DCE8();
-    if(check <= 1)
-        return;
-    if(check > 3)
-        return;
-    sub_801DD50();
-    sub_801D208(1);
+    switch(sub_801DCE8())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_801DD50();
+            sub_801D208(1);
+            break;
+    }
 }
 
 void sub_801D894(void)
@@ -306,4 +365,51 @@ void LoadTeamRankBadge(u32 param_1, u32 param_2, u32 param_3)
   teamBadgePic = &teamBadgePic[rank << 7]; // TODO figure out why the lft shft 7 is needed
   sub_8007E20(param_1, param_2, param_3, 16, 16, teamBadgePic, 14);
   CloseFile(teamBadgeFile);
+}
+
+u32 sub_801D9E4(void)
+{
+  gUnknown_203B258 = MemoryAlloc(sizeof(struct unkStruct_203B258),8);
+  gUnknown_203B258->unk34 = 3;
+  gUnknown_203B258->unk38 = &gUnknown_203B258->unk3C[3];
+  sub_8006518(gUnknown_203B258->unk3C);
+  gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF88;
+  gUnknown_203B258->unk38->unk14 = &gUnknown_203B258->unk9C;
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B258->unk3C,1,1);
+  sub_8013818(gUnknown_203B258,0xe5,10,gUnknown_203B258->unk34);
+  sub_801DB54();
+  sub_801DBD4();
+  return 1;
+}
+
+void sub_801DA58(s16 param_0)
+{  
+    s32 cast;
+    cast = param_0;
+    sub_8013878(gUnknown_203B258, cast);
+    sub_801DB54();
+    sub_801DBD4();
+}
+
+u32 sub_801DA78(void)
+{
+    switch(GetKeyPress(gUnknown_203B258))
+    {
+        case 2:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case 1:
+            return 3;
+        default:
+            if(sub_80138B8(gUnknown_203B258, 1) != 0)
+            {
+                sub_801DB54();
+                sub_801DBD4();
+                return 1;
+            }
+            else {
+                return 0;
+            }
+    }
 }

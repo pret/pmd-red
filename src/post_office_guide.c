@@ -4,6 +4,7 @@
 #include "input.h"
 #include "constants/species.h"
 #include "menu.h"
+#include "memory.h"
 
 struct PostOfficeHelper
 {
@@ -30,6 +31,7 @@ struct unkData
 
 struct unkStruct_203B330
 {
+    // size: 0x78
     struct UnkInputStruct *unk0;
     u8 fill4[0x8];
     u8 unkC;
@@ -166,8 +168,6 @@ extern void sub_8031AE8();
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_800641C(struct unkData *, u32, u32);
 extern void sub_8006518(struct unkData *);
 extern void sub_8031A2C(void);

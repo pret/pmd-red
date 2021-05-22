@@ -2,6 +2,7 @@
 #include "input.h"
 #include "menu.h"
 #include "main_menu.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -33,9 +34,6 @@ extern struct unkData gUnknown_80E6F38;
 extern struct MenuItem gUnknown_80E7090[];
 extern struct MenuItem gUnknown_80E6F50[];
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u8, u32);
-extern void MemoryFree(void *);
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern void sub_800641C(void *, u32, u32);

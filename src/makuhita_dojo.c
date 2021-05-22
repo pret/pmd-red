@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "input.h"
 #include "constants/species.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -14,7 +15,7 @@ struct unkStruct_203B318
     // size: 0xcc
     u32 unk0;
     u32 unk4;
-    s32 unk8;
+    s32 state;
     u8 fillC[0x10 - 0xC];
     s16 unk10;
     u8 fill[0x58 - 0x12];
@@ -37,8 +38,6 @@ extern struct unkData gUnknown_80E0760;
 
 extern void sub_800641C(struct unkData *, u32, u32);
 extern void sub_8006518(struct unkData *);
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 
 extern void sub_8030208();
 extern void sub_8030258();
@@ -46,7 +45,7 @@ extern void sub_80302A8();
 extern void sub_80302C4();
 extern void UpdateMakuhitaDialogue();
 
-void sub_802FF04(s32);
+void UpdateMakuhitaState(s32);
 void sub_802FF1C();
 
 u32 CreateMakuhitaShop(u32 param_1)
@@ -113,14 +112,14 @@ u32 CreateMakuhitaShop(u32 param_1)
   gUnknown_203B318->unk66 = 0;
   gUnknown_203B318->unk60 = 2;
   gUnknown_203B318->unk62 = 8;
-  sub_802FF04(initialState);
+  UpdateMakuhitaState(initialState);
   return 1;
 }
 
 u32 sub_802FE58(void)
 {
   
-  switch(gUnknown_203B318->unk8) {
+  switch(gUnknown_203B318->state) {
     case 0:
     case 1:
         sub_8030208();
@@ -145,7 +144,7 @@ s16 sub_802FED0(void)
     return gUnknown_203B318->unk10;
 }
 
-void sub_802FEE0(void)
+void CleanMakuhitaShop(void)
 {
     if(gUnknown_203B318 != NULL)
     {
@@ -155,9 +154,9 @@ void sub_802FEE0(void)
     }
 }
 
-void sub_802FF04(s32 newState)
+void UpdateMakuhitaState(s32 newState)
 {
-    gUnknown_203B318->unk8 = newState;
+    gUnknown_203B318->state = newState;
     sub_802FF1C();
     UpdateMakuhitaDialogue();
 }
@@ -166,7 +165,7 @@ void sub_802FF1C(void)
 {
     s32 iVar3;
     sub_8006518(gUnknown_203B318->unk6C);
-    switch(gUnknown_203B318->unk8)
+    switch(gUnknown_203B318->state)
     {
         case 0:
         case 4:

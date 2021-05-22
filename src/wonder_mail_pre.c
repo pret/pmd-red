@@ -4,10 +4,9 @@
 #include "pokemon.h"
 #include "constants/species.h"
 #include "wonder_mail.h"
+#include "memory.h"
 
 
-extern void* MemoryAlloc(u32 a, u32 b);
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void sub_800641C(void *r0, u8, u8);
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;

@@ -13,22 +13,22 @@ extern u32 gUnknown_81076E4[];
 extern bool8 sub_808ECD0(u8 *, u32);
 extern void sub_808EC30(u8 *, u32);
 
-u32 sub_808EAB0(u8 r0)
+u32 GetIQSkillName(u8 r0)
 {
     return gIQSkillNames[r0];
 }
 
-void sub_808EAC0(char *r0, u8 r1)
+void CopyTacticsNameToBuffer(char *r0, u8 r1)
 {
     strncpy(r0, gTactics[r1], 0x14);
 }
 
-u32 sub_808EADC(u8 r0)
+u32 GetIQSkillDescription(u8 r0)
 {
     return gIQSkillDescriptions[r0];
 }
 
-u32 sub_808EAEC(u8 r0)
+u32 GetTacticsDescription(u8 r0)
 {
     return gTacticsDescriptions[r0];
 }

@@ -50,6 +50,8 @@ SECTIONS {
         asm/code_8002774.o(.text);
         src/memory.o(.text);
         asm/memory.o(.text);
+        src/memory_mid.o(.text);
+        asm/memory_1.o(.text);
         src/memory1.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
@@ -84,6 +86,7 @@ SECTIONS {
         src/code_8012A18.o(.text);
         src/more_input.o(.text);
         asm/code_8012A18.o(.text);
+        src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
         asm/felicity_bank.o(.text);
         src/felicity_bank_1.o(.text);
@@ -91,12 +94,20 @@ SECTIONS {
         asm/kangaskhan_storage.o(.text);
         src/kangaskhan_storage_1.o(.text);
         asm/kangaskhan_storage_1.o(.text);
+        src/kangaskhan_storage_2.o(.text);
+        asm/kangaskhan_storage_2.o(.text);
+        src/kangaskhan_storage_3.o(.text);
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
         asm/pokemon_square.o(.text);
+        src/code_801C620.o(.text);
+        asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);
+        src/code_801DCC4.o(.text);
+        asm/code_801DCC4.o(.text);
+        asm/gulpin_shop.o(.text);
         src/code_8027C84_pre.o(.text);
         asm/code_8027C84.o(.text);
         src/wonder_mail_pre.o(.text);
@@ -181,6 +192,8 @@ SECTIONS {
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);
+        src/game_options.o(.text);
+        asm/game_options.o(.text);
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);

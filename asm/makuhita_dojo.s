@@ -338,15 +338,15 @@ _08030234:
 	b _08030250
 _0803023A:
 	movs r0, 0x3
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 	b _08030250
 _08030242:
 	movs r0, 0xC
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 	b _08030250
 _0803024A:
 	movs r0, 0x2
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 _08030250:
 	add sp, 0x4
 	pop {r0}
@@ -370,7 +370,7 @@ sub_8030258:
 	strh r0, [r1, 0x10]
 	bl sub_8030480
 	movs r0, 0x5
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 	b _0803029A
 	.align 2, 0
 _08030284: .4byte gUnknown_203B318
@@ -381,7 +381,7 @@ _08030288:
 	ldr r0, _080302A4
 	strh r0, [r1, 0x10]
 	movs r0, 0x1
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 _0803029A:
 	pop {r0}
 	bx r0
@@ -400,7 +400,7 @@ sub_80302A8:
 	bhi _080302C0
 	bl sub_801B72C
 	movs r0, 0xA
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 _080302C0:
 	pop {r0}
 	bx r0
@@ -417,7 +417,7 @@ sub_80302C4:
 	ldr r0, _080302E4
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	bl sub_802FF04
+	bl UpdateMakuhitaState
 _080302DC:
 	add sp, 0x4
 	pop {r0}

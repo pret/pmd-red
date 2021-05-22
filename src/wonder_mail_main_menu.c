@@ -1,5 +1,6 @@
 #include "global.h"
 #include "save.h"
+#include "memory.h"
 
 #define EXIT_TO_MAIN_MENU 5
 #define PASSWORD_SUCCESS 13
@@ -38,9 +39,6 @@ extern u32 sub_8095324(u32);
 extern u32 sub_80144A4(s32 *);
 extern u32 sub_8011C1C(void);
 extern struct unkStruct_203B3E8 *gUnknown_203B3E8;
-extern void* MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void sub_803A1C0(u8);
 extern void ResetUnusedInputStruct(void);
 extern void sub_800641C(void *, u32, u32);

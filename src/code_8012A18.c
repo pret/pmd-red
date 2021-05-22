@@ -1,15 +1,7 @@
 #include "global.h"
 #include "code_800558C.h"
 #include "input.h"
-
-struct UnkStruct_203B46C
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ u8 unkA;
-};
-
+#include "gUnknown_203B46C.h"
 
 extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
@@ -24,7 +16,7 @@ extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 extern void ResetSprites(u8 r0);
 
-extern struct UnkStruct_203B46C *gUnknown_203B46C;
+extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 
 void sub_8012A18()

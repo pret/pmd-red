@@ -4,6 +4,7 @@
 #include "adventure_log.h"
 #include "input.h"
 #include "menu.h"
+#include "memory.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -20,10 +21,7 @@
 
 
 extern struct MainMenu *gMainMenu;
-extern void* MemoryAlloc(u32 a, u32 b);
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 void sub_8035DA0(void);
-extern void MemoryFree(void *);
 
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
@@ -74,7 +72,7 @@ struct unkStruct_203B34C
     u32 unk4;
     struct unkSubStruct *unk8; // Array of menu choices??
     u8 fillC[0x30 - 0xC];
-    s16 unk30;
+    s16 menuIndex;
     u8 fill32[0x144 - 0x32];
     struct unkData unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;

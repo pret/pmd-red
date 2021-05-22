@@ -5,63 +5,6 @@
 
         .text
 
-	thumb_func_start sub_808CE08
-sub_808CE08:
-	push {r4-r7,lr}
-	ldr r4, _0808CE60
-	movs r3, 0
-	movs r1, 0
-	ldr r2, _0808CE64
-_0808CE12:
-	ldr r0, [r4]
-	adds r0, r1
-	strh r3, [r0]
-	adds r1, 0x58
-	subs r2, 0x1
-	cmp r2, 0
-	bne _0808CE12
-	ldr r5, _0808CE60
-	ldr r4, _0808CE68
-	movs r3, 0
-	movs r1, 0
-	movs r2, 0x3
-_0808CE2A:
-	ldr r0, [r5]
-	adds r0, r1
-	adds r0, r4
-	strh r3, [r0]
-	adds r1, 0x64
-	subs r2, 0x1
-	cmp r2, 0
-	bge _0808CE2A
-	ldr r7, _0808CE60
-	ldr r6, _0808CE6C
-	movs r4, 0
-	movs r3, 0
-	ldr r5, _0808CE70
-	movs r2, 0x3
-_0808CE46:
-	ldr r0, [r7]
-	adds r0, r3
-	adds r1, r0, r6
-	strh r4, [r1]
-	adds r0, r5
-	strh r4, [r0]
-	adds r3, 0x58
-	subs r2, 0x1
-	cmp r2, 0
-	bge _0808CE46
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CE60: .4byte gRecruitedPokemonRef
-_0808CE64: .4byte 0x0000019d
-_0808CE68: .4byte 0x00008df8
-_0808CE6C: .4byte 0x00008f90
-_0808CE70: .4byte 0x00008f88
-	thumb_func_end sub_808CE08
-
 	thumb_func_start sub_808CE74
 sub_808CE74:
 	push {r4-r7,lr}

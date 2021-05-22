@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "gUnknown_203B460.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -76,8 +77,6 @@ extern u32 gDebug_NumberText;
 extern u32 gUnknown_80D4970;
 
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern void sub_800641C(void *, u32, u32);
 extern void sub_8006518(void *);
 extern void sub_801C8C4(u32, u32, u32, u32);

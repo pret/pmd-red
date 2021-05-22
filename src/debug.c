@@ -15,6 +15,8 @@ extern const char gNotEntryText[];
 extern const char gFuncFileLineString[];
 extern const char gFuncFileLineStringWPrefix[];
 extern const char gFuncFileLineString2[];
+extern const char gFatalText[];
+extern const char gUnknown_80D42D4[];
 
 void NDS_DebugInit(void)
 {
@@ -198,3 +200,17 @@ void FatalErrorHang()
 {
     Hang();
 }
+
+/*void 
+FatalError(struct DebugLocation *debug, const char *text, ...) 
+{
+    char buf[0x100];
+    va_list vArgv;
+
+    FatalErrorPrintFuncFileLine(gFatalText, debug);
+    va_start(vArgv, text);
+    vsprintf(buf, text, vArgv);
+    va_end(vArgv);
+    FatalErrorFormatMessage(gUnknown_80D42D4, buf);
+    FatalErrorHang();
+}*/

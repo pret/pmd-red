@@ -3,6 +3,7 @@
 #include "main_menu.h"
 #include "gUnknown_203B460.h"
 #include "menu.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -19,7 +20,7 @@ struct unkStruct_203B35C
     // size: 0x504
     u32 unk0;
     u32 unk4; // link status?
-    u32 unk8; // state var?
+    u32 state; // state var?
     u8 fillC[0x1C - 0xC];
     u32 unk1C;
     u8 fill20[0x15C - 0x20];
@@ -74,9 +75,6 @@ extern struct unkStruct_203B460 *gUnknown_203B460;
 extern void sub_8037400(void);
 extern void sub_800641C(void *, u32, u32);
 extern void ResetSprites(u32);
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u8, s32);
-extern void MemoryFree(void *);
 extern void sub_8035CF4(u32 *,u32, u32);
 extern void sub_80376CC();
 extern void sub_8035CC0(void *, u32);
@@ -115,7 +113,7 @@ void sub_8036FDC(s32 param_1)
 
   gUnknown_203B35C->unk0 = param_1;
   gUnknown_203B35C->unk4 = 0;
-  gUnknown_203B35C->unk8 = 0;
+  gUnknown_203B35C->state = 0;
   iVar3 = 0;
   do {
     gUnknown_203B35C->unk1C0[iVar3 * 2] = 0;
@@ -269,7 +267,7 @@ u32 sub_80370F0(void)
 
   local_10 = 4;
   nextMenu = MENU_NO_SCREEN_CHANGE;
-  switch(gUnknown_203B35C->unk8){
+  switch(gUnknown_203B35C->state){
       case 0:
         if (sub_80130A8(&gUnknown_203B35C->unk1C) == '\0') {
             sub_8013114(&gUnknown_203B35C->unk1C,&local_10);
@@ -278,13 +276,13 @@ u32 sub_80370F0(void)
             sub_8037748();
         }
         else {
-            gUnknown_203B35C->unk8 = 1;
+            gUnknown_203B35C->state = 1;
             sub_8037900();
         }
         break;
       case 1:
         sub_80376CC();
-        gUnknown_203B35C->unk8 = 2;
+        gUnknown_203B35C->state = 2;
         sub_80371B8();
         break;
       case 2:
@@ -298,7 +296,7 @@ u32 sub_80370F0(void)
           if (local_10 != 4) {
             PlayMenuSoundEffect(3);
             nextMenu = sub_8037798();
-            gUnknown_203B35C->unk8 = 4;
+            gUnknown_203B35C->state = 4;
           }
           sub_8037748();
         }
