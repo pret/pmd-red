@@ -6199,7 +6199,7 @@ _0809C046:
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r1]
-	bl sub_802FEE0
+	bl CleanMakuhitaShop
 	b _0809C392
 _0809C05E:
 	ldr r0, [r6]
@@ -6209,7 +6209,7 @@ _0809C05E:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [r0]
-	bl sub_802FEE0
+	bl CleanMakuhitaShop
 	b _0809C392
 _0809C072:
 	movs r4, 0x1

@@ -10148,7 +10148,7 @@ sub_8057748:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_8077C44
+	bl HealTargetHP
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4-r6}

@@ -2,6 +2,7 @@
 #include "input.h"
 #include "trade_items_menu.h"
 #include "gUnknown_203B460.h"
+#include "memory.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
@@ -35,9 +36,6 @@ extern u32 gUnknown_80E6314;
 
 extern void sub_8013AA0(u32 *);
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u32, u32);
-extern void MemoryFree(void *);
 extern void sub_800641C(u32 *, u32, u32);
 extern void sub_8035C1C();
 extern void sub_8035DA0();

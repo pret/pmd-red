@@ -28,7 +28,7 @@ struct unkStruct_203B210
     u8 fill34[0x84 - 0x34];
     u32 unk84;
     u8 fill88[0xD4 - 0x88];
-    struct OpenedFile *unkD4;
+    struct OpenedFile *faceFile;
     u8 *unkD8;
     u16 unkDC;
     u16 unkDE;

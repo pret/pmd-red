@@ -3,6 +3,7 @@
 #include "main_menu.h"
 #include "play_time.h"
 #include "file_system.h"
+#include "memory.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct PlayTimeStruct gPlayTime;
@@ -81,9 +82,6 @@ extern u8 gUnknown_80E7854;
 extern const char gUnknown_80E785C[]; // clmkpat
 
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u32, u32);
-extern void MemoryFree(void *);
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 extern void sub_8035CF4(u32 *, u32, u32);

@@ -36,7 +36,7 @@ struct UnkStruct_sub_8011DAC {
 
 struct UnkStruct_203B184 {
     /* 0x0 */ u32 *unk0;
-    /* 0x4 */ u32 *unk4;
+    /* 0x4 */ u32 *recruitedPokemon;
     /* 0x8 */ u8 *unk8;
     /* 0xC */ u8 *unkC;
     /* 0x10 */ u32 *unk10;
@@ -46,7 +46,7 @@ struct UnkStruct_203B184 {
     /* 0x20 */ u32 unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
     /* 0x28 */ u8 *BoughtFriendAreas;
-    /* 0x2C */ u32 unk2C;
+    /* 0x2C */ u32 gameOptions;
     /* 0x30 */ struct PlayTimeStruct *playTime;
     u32 unk34;
     u32 unk38;
@@ -89,7 +89,7 @@ void sub_80129FC(void);
 void sub_8012298();
 void sub_80122D0();
 void sub_80122F4();
-void sub_8012300();
+void InitializePlayerData();
 void sub_80122A8();
 
 u32 ReadSaveSector(s32 *a, u8 *dest, s32 size);

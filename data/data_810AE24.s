@@ -919,7 +919,7 @@ gUnknown_8116298: @ 8116298
 @ replacing .incbin "baserom.gba", 0x00116298, 0x10
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_802FEE0
+        .4byte CleanMakuhitaShop
         .4byte sub_802FE58
 
 	.global gUnknown_81162A8
@@ -927,7 +927,7 @@ gUnknown_81162A8: @ 81162A8
 @ replacing .incbin "baserom.gba", 0x001162a8, 0x10
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_802FEE0
+        .4byte CleanMakuhitaShop
         .4byte sub_802FE58
 
 	.global gUnknown_81162B8
@@ -935,7 +935,7 @@ gUnknown_81162B8: @ 81162B8
 @ replacing .incbin "baserom.gba", 0x001162b8, 0x10
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_802FEE0
+        .4byte CleanMakuhitaShop
         .4byte sub_802FE58
 
 	.global gUnknown_81162C8

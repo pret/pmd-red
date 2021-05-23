@@ -14,7 +14,7 @@ struct unkStruct_203B34C
     u32 unk4;
     struct MenuItem *unk8; // Array of menu choices??
     u8 fillC[0x30 - 0xC];
-    s16 unk30;
+    s16 menuIndex;
     u8 fill32[0x144 - 0x32];
     struct unkData unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
@@ -66,7 +66,7 @@ bool8 SetMainMenuText(void)
 
  // Have to load the pointer before the index
   preload = gUnknown_203B34C->unk8;
-  menuChoice = preload[gUnknown_203B34C->unk30].menuAction; // chosen menu action?
+  menuChoice = preload[gUnknown_203B34C->menuIndex].menuAction; // chosen menu action?
   if (gUnknown_203B34C->currMenuChoice == menuChoice) {
     return FALSE;
   }

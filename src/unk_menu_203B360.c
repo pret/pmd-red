@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "main_menu.h"
+#include "memory.h"
 
 struct unkData
 {
@@ -29,9 +30,6 @@ extern struct unkData gUnknown_80E6E7C;
 extern struct unkData gUnknown_80E6E94;
 extern struct MenuItem gUnknown_80E6EAC[];
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFill8(u8 *, u8, u32);
-extern void MemoryFree(void *);
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern void sub_800641C(void *, u32, u32);

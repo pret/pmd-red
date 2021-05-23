@@ -2,6 +2,7 @@
 #include "debug_menu.h"
 #include "main_menu.h"
 #include "menu.h"
+#include "memory.h"
 
 extern struct DebugMenu *gUnknown_203B3EC;
 
@@ -63,9 +64,6 @@ ALIGNED(4) const char debug_fill5[] = _("pksdir0");
 ALIGNED(4) const char debug_fill6[] = _("pksdir0");
 
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
-extern void MemoryFill8(u8 *, u8, u32);
 extern void sub_800641C(struct unkData *, u32, u32);
 
 extern void ResetUnusedInputStruct(void);

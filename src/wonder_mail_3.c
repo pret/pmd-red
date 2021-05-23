@@ -1,9 +1,10 @@
 #include "global.h"
+#include "memory.h"
 
 struct unkStruct_203B2F8
 {
     // size: 0x208
-    u32 unk0; // state
+    u32 state; // state
     u32 unk4;
     u8 unk8;
     u8 unk9;
@@ -17,8 +18,6 @@ struct unkStruct_203B2F8
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
 
-extern void *MemoryAlloc(u32, u32);
-extern void MemoryFree(void *);
 extern u8 sub_8099328(u8 *);
 extern u32 sub_8011C1C();
 extern void sub_802D1A0(u32);
@@ -52,7 +51,7 @@ u32 sub_802D098(u32 param_1)
 
 u32 sub_802D0E0(void)
 {
-  switch(gUnknown_203B2F8->unk0) {
+  switch(gUnknown_203B2F8->state) {
     case 0:
         break;
     case 1:
@@ -100,7 +99,7 @@ void sub_802D184(void)
 
 void sub_802D1A0(u32 newState)
 {
-    gUnknown_203B2F8->unk0 = newState;
+    gUnknown_203B2F8->state = newState;
     sub_802D1B8();
     sub_802D2A8();
 }

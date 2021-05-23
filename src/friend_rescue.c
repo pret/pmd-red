@@ -2,6 +2,7 @@
 #include "friend_rescue.h"
 #include "pokemon.h"
 #include "constants/species.h"
+#include "memory.h"
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);
@@ -16,8 +17,6 @@ extern char gAvailablePokemonNames[0x50];
 extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 
 extern u8 sub_8039880(void);
-void MemoryFill8(u8 *dest, u8 value, s32 size);
-void *MemoryAlloc(u32, u32);
 void ResetUnusedInputStruct(void);
 void sub_800641C(void *, u32, u32);
 
@@ -102,7 +101,6 @@ extern void sub_8035210(void);
 extern void sub_8035430(void);
 extern void sub_8034848(void);
 
-extern void MemoryFree(void *);
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
 extern void sub_8023C60(void);

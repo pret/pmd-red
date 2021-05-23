@@ -7,14 +7,14 @@ struct subStruct_8048524
     u8 unk6;
     u8 unk7;
     u8 fill8[0xE - 0x8];
-    s16 unkE; // HP??
+    /* 0xE */ s16 HP; // HP??
     s16 unk10;
     u8 fill12[0x46 - 0x12];
     u8 unk46;
     u8 fill47[0xA4 - 0x47];
     u8 unkA4;
     u8 fillA5[0xAC - 0xA5];
-    u8 unkAC;
+    /* 0xAC */ u8 statusCondition;
     u8 fillAD[0xFB - 0xAD];
     u8 unkFB;
     u8 fillFC[0x112 - 0xFC];

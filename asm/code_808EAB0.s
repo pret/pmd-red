@@ -1767,7 +1767,7 @@ _0808FB10:
 	adds r0, 0x1C
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_808EAC0
+	bl CopyTacticsNameToBuffer
 	ldr r0, _0808FB40
 	ldr r2, [r0]
 	str r4, [sp]
@@ -1997,7 +1997,7 @@ _0808FCFC:
 	cmp r0, 0
 	beq _0808FD74
 	movs r4, 0x1
-	bl sub_808EAB0
+	bl GetIQSkillName
 	adds r1, r0, 0
 	ldr r6, _0808FD3C
 	adds r0, r6, 0
