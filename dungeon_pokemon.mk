@@ -4,7 +4,7 @@ DUNGEONS_DIR = $(DATA_ASM_SUBDIR)/dungeon
 
 DUNGEON_DIRS := $(dir $(wildcard $(DUNGEONS_DIR)/*/pokemon_found.json))
 
-pokemon: TinyWoods ThunderwaveCave
+dungeon_pokemon: TinyWoods ThunderwaveCave
 
 TinyWoods: $(DUNGEONS_DIR)/TinyWoods/pokemon_found.json
 	$(DUNGEONJSON) dungeon pmd-red $(DUNGEONS_DIR)/TinyWoods/pokemon_found.json
