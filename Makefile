@@ -55,6 +55,7 @@ MID2AGB   := tools/mid2agb/mid2agb
 PREPROC   := tools/preproc/preproc
 SCANINC   := tools/scaninc/scaninc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
+DUNGEONJSON := tools/dungeonjson/dungeonjson
 
 TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
@@ -102,6 +103,7 @@ SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
+
 
 # Special configurations required for lib files
 $(C_BUILDDIR)/agb_flash.o   : CC1FLAGS := -O -mthumb-interwork
@@ -183,10 +185,12 @@ $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
-$(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall
+$(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
 
-$(ROM): %.gba: $(ELF) tools
+include dungeon_pokemon.mk
+
+$(ROM): %.gba: $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 

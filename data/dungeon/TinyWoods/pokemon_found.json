@@ -1,0 +1,64 @@
+{
+	"tables": [{
+		"name": "TinyWoods1F_2F_Pokemon",
+		"pokemon": [{
+				"species": 16,
+				"level": 1,
+				"probability": 3333
+			},
+			{
+				"species": 191,
+				"level": 1,
+				"probability": 3334
+			},
+			{
+				"species": 290,
+				"level": 1,
+				"probability": 3333
+			},
+			{
+				"species": 380,
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": 421,
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "TinyWoods3F_Pokemon",
+		"pokemon": [{
+				"species": 16,
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": 102,
+				"level": 1,
+				"probability": 1429
+			},
+			{
+				"species": 191,
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": 290,
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": 380,
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": 421,
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}
