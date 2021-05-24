@@ -267,13 +267,14 @@ string generate_pokemon_table_text(Json map_data) {
             text << table["name"].string_value() << ":\n";
 
             for (auto &pokemon: table["pokemon"].array_items()) {
-                pokemon_mask = pokemon["species"].int_value() + (pokemon["level"].int_value() * 512);
+                pokemon_mask = (pokemon["level"].int_value() * 512);
                 probability_total += pokemon["probability"].int_value();
                 if(pokemon["probability"].int_value() == 0)
                 {
                     probability_total = 0; // reset back to zero
                 }
-                text << ".2byte "  << pokemon_mask
+                text << ".2byte "  << pokemon["species"].string_value() 
+                    << " + " << pokemon_mask
                     // We have to repeat to maintain matching
                     << ", " << probability_total << ", " << probability_total
                     << ", " << "0x00" << "\n";

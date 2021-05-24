@@ -3,27 +3,27 @@
 		"name": "ThunderwaveCave_1F_2F_Pokemon",
 		"pokemon": [
                         {
-				"species": 19,
+				"species": "SPECIES_RATTATA",
 				"level": 3,
 				"probability": 5000
 			},
 			{
-				"species": 29,
+				"species": "SPECIES_NIDORAN_F",
 				"level": 4,
 				"probability": 2500
 			},
 			{
-				"species": 286,
+				"species": "SPECIES_POOCHYENA",
 				"level": 3,
 				"probability": 2500
 			},
 			{
-				"species": 380,
+				"species": "SPECIES_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": 421,
+				"species": "SPECIES_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -32,32 +32,32 @@
 		"name": "ThunderwaveCave_3F_Pokemon",
 		"pokemon": [
                         {
-				"species": 19,
+				"species": "SPECIES_RATTATA",
 				"level": 3,
 				"probability": 4167
 			},
 			{
-				"species": 29,
+				"species": "SPECIES_NIDORAN_F",
 				"level": 4,
 				"probability": 2083
 			},
 			{
-				"species": 100,
+				"species": "SPECIES_VOLTORB",
 				"level": 3,
 				"probability": 1667
 			},
 			{
-				"species": 286,
+				"species": "SPECIES_POOCHYENA",
 				"level": 3,
 				"probability": 2083
 			},
 			{
-				"species": 380,
+				"species": "SPECIES_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": 421,
+				"species": "SPECIES_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -66,32 +66,32 @@
 		"name": "ThunderwaveCave_4F_5F_Pokemon",
 		"pokemon": [
                         {
-				"species": 100,
+				"species": "SPECIES_VOLTORB",
 				"level": 3,
 				"probability": 3846
 			},
 			{
-				"species": 264,
+				"species": "SPECIES_ELEKID",
 				"level": 4,
 				"probability": 3077
 			},
 			{
-				"species": 336,
+				"species": "SPECIES_PLUSLE",
 				"level": 3,
 				"probability": 1539
 			},
 			{
-				"species": 337,
+				"species": "SPECIES_MINUN",
 				"level": 3,
 				"probability": 1538
 			},
 			{
-				"species": 380,
+				"species": "SPECIES_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": 421,
+				"species": "SPECIES_DECOY",
 				"level": 1,
 				"probability": 0
 			}

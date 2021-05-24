@@ -1,5 +1,7 @@
 @ Start of Pokemon Found (0x84b6064)
 
+.include "include/constants/species.h"
+
 .include "data/dungeon/TinyWoods/pokemon_found.inc"
 .include "data/dungeon/ThunderwaveCave/pokemon_found.inc"
 .include "data/dungeon/MtSteel/pokemon_found.inc"
