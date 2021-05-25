@@ -1,0 +1,316 @@
+{
+	"tables": [{
+		"name": "SilentChasm_1F_3F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 1667
+			},
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 1000
+			},
+			{
+				"species": "SPECIES_FARFETCHD",
+				"level": 10,
+				"probability": 2666
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_TEDDIURSA",
+				"level": 10,
+				"probability": 2667
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_4F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 2778
+			},
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 1666
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_DUSTOX",
+				"level": 10,
+				"probability": 2222
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_5F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 1515
+			},
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 909
+			},
+			{
+				"species": "SPECIES_POLIWAG",
+				"level": 10,
+				"probability": 909
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 1819
+			},
+			{
+				"species": "SPECIES_HOUNDOUR",
+				"level": 11,
+				"probability": 2424
+			},
+			{
+				"species": "SPECIES_DUSTOX",
+				"level": 10,
+				"probability": 2424
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_6F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 1064
+			},
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 638
+			},
+			{
+				"species": "SPECIES_POLIWAG",
+				"level": 10,
+				"probability": 638
+			},
+			{
+				"species": "SPECIES_SPINARAK",
+				"level": 11,
+				"probability": 1277
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 1277
+			},
+			{
+				"species": "SPECIES_HOUNDOUR",
+				"level": 11,
+				"probability": 1702
+			},
+			{
+				"species": "SPECIES_DUSTOX",
+				"level": 10,
+				"probability": 1702
+			},
+			{
+				"species": "SPECIES_TRAPINCH",
+				"level": 11,
+				"probability": 1702
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_7F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 652
+			},
+			{
+				"species": "SPECIES_PARAS",
+				"level": 11,
+				"probability": 870
+			},
+			{
+				"species": "SPECIES_POLIWAG",
+				"level": 10,
+				"probability": 652
+			},
+			{
+				"species": "SPECIES_SPINARAK",
+				"level": 11,
+				"probability": 1304
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 1305
+			},
+			{
+				"species": "SPECIES_HOUNDOUR",
+				"level": 11,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_DUSTOX",
+				"level": 10,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_TRAPINCH",
+				"level": 11,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_8F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 1000
+			},
+			{
+				"species": "SPECIES_PARAS",
+				"level": 11,
+				"probability": 1333
+			},
+			{
+				"species": "SPECIES_POLIWAG",
+				"level": 10,
+				"probability": 1000
+			},
+			{
+				"species": "SPECIES_SPINARAK",
+				"level": 11,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_YANMA",
+				"level": 10,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_TRAPINCH",
+				"level": 11,
+				"probability": 2667
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "SilentChasm_9F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_BEEDRILL",
+				"level": 10,
+				"probability": 1724
+			},
+			{
+				"species": "SPECIES_GLOOM",
+				"level": 10,
+				"probability": 1035
+			},
+			{
+				"species": "SPECIES_PARAS",
+				"level": 11,
+				"probability": 1379
+			},
+			{
+				"species": "SPECIES_POLIWAG",
+				"level": 10,
+				"probability": 1034
+			},
+			{
+				"species": "SPECIES_SPINARAK",
+				"level": 11,
+				"probability": 2069
+			},
+			{
+				"species": "SPECIES_TRAPINCH",
+				"level": 11,
+				"probability": 2759
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}
