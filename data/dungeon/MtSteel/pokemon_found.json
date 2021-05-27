@@ -1,0 +1,188 @@
+{
+	"tables": [{
+		"name": "MtSteel_1F_4F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_SPEAROW",
+				"level": 4,
+				"probability": 2353
+			},
+			{
+				"species": "SPECIES_ZIGZAGOON",
+				"level": 5,
+				"probability": 2353
+			},
+			{
+				"species": "SPECIES_ARON",
+				"level": 6,
+				"probability": 2941
+			},
+			{
+				"species": "SPECIES_BALTOY",
+				"level": 5,
+				"probability": 2353
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtSteel_5F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GEODUDE",
+				"level": 5,
+				"probability": 1905
+			},
+			{
+				"species": "SPECIES_TYROGUE",
+				"level": 6,
+				"probability": 1905
+			},
+			{
+				"species": "SPECIES_ZIGZAGOON",
+				"level": 5,
+				"probability": 1904
+			},
+			{
+				"species": "SPECIES_ARON",
+				"level": 6,
+				"probability": 2381
+			},
+			{
+				"species": "SPECIES_MEDITITE",
+				"level": 6,
+				"probability": 1905
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtSteel_6F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GEODUDE",
+				"level": 5,
+				"probability": 2051
+			},
+			{
+				"species": "SPECIES_TYROGUE",
+				"level": 6,
+				"probability": 2052
+			},
+			{
+				"species": "SPECIES_ARON",
+				"level": 6,
+				"probability": 2564
+			},
+			{
+				"species": "SPECIES_MEDITITE",
+				"level": 6,
+				"probability": 2051
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BELDUM",
+				"level": 5,
+				"probability": 1282
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtSteel_7F_8F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GEODUDE",
+				"level": 5,
+				"probability": 1633
+			},
+			{
+				"species": "SPECIES_PINSIR",
+				"level": 6,
+				"probability": 2040
+			},
+			{
+				"species": "SPECIES_TYROGUE",
+				"level": 6,
+				"probability": 1633
+			},
+			{
+				"species": "SPECIES_ARON",
+				"level": 6,
+				"probability": 2041
+			},
+			{
+				"species": "SPECIES_MEDITITE",
+				"level": 6,
+				"probability": 1633
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BELDUM",
+				"level": 5,
+				"probability": 1020
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtSteel_9F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_DIGLETT",
+				"level": 5,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_SKARMORY",
+				"level": 10,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_ARON",
+				"level": 6,
+				"probability": 6667
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BELDUM",
+				"level": 5,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}
