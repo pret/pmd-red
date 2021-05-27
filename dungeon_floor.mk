@@ -2,7 +2,7 @@
 
 DUNGEONS_DIR = $(DATA_ASM_SUBDIR)/dungeon
 
-dungeon_floor: TinyWoods
+dungeon_floor: TinyWoodsFloor
 
-TinyWoods: $(DUNGEONS_DIR)/TinyWoods/floor_id.json
+TinyWoodsFloor: $(DUNGEONS_DIR)/TinyWoods/floor_id.json
 	$(DUNGEONJSON) floor pmd-red $(DUNGEONS_DIR)/TinyWoods/floor_id.json
