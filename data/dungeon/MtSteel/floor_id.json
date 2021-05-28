@@ -1,0 +1,86 @@
+{
+    "name": "MtSteelFloorID",
+    "tables": [
+        {
+            "MainData": 8,
+            "Pokemon": 5,
+            "Traps": 1,
+            "Items": 8,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 9,
+            "Pokemon": 5,
+            "Traps": 1,
+            "Items": 8,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 10,
+            "Pokemon": 5,
+            "Traps": 1,
+            "Items": 8,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 11,
+            "Pokemon": 5,
+            "Traps": 1,
+            "Items": 9,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 12,
+            "Pokemon": 6,
+            "Traps": 1,
+            "Items": 9,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 13,
+            "Pokemon": 7,
+            "Traps": 1,
+            "Items": 9,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 14,
+            "Pokemon": 8,
+            "Traps": 1,
+            "Items": 10,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 15,
+            "Pokemon": 8,
+            "Traps": 1,
+            "Items": 10,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 16,
+            "Pokemon": 9,
+            "Traps": 1,
+            "Items": 10,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        }
+    ]
+}

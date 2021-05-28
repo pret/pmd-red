@@ -273,7 +273,7 @@ string generate_pokemon_table_text(Json map_data) {
                     // We have to repeat to maintain matching
                     if(pokemon["probability"].int_value() == 0)
                     {
-                         text << ", " <<  "0x00, 0x00"; // reset back to zero
+                         text << ", " <<  "0x00, 0x00";
                     }
                     else
                     {
@@ -309,7 +309,7 @@ string generate_floorID_table_text(Json map_data) {
             << ", " << table["KecleonShop"].int_value()
             << ", " << table["MonsterRoomItems"].int_value()
             << ", " << table["BuriedItems"].int_value()
-            << ", " << table["Unknown"].int_value() << "\n";
+            << ", " << "0" << "\n";
 
     }
     text << "@ END OF TABLE" << "\n";

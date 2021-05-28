@@ -8,8 +8,7 @@
             "Items": 0,
             "KecleonShop": 1,
             "MonsterRoomItems": 2,
-            "BuriedItems": 3,
-            "Unknown": 0
+            "BuriedItems": 3
         },
         {
             "MainData": 1,
@@ -18,8 +17,7 @@
             "Items": 4,
             "KecleonShop": 1,
             "MonsterRoomItems": 2,
-            "BuriedItems": 3,
-            "Unknown": 0
+            "BuriedItems": 3
         },
         {
             "MainData": 2,
@@ -28,8 +26,7 @@
             "Items": 5,
             "KecleonShop": 1,
             "MonsterRoomItems": 2,
-            "BuriedItems": 3,
-            "Unknown": 0
+            "BuriedItems": 3
         }
     ]
 }

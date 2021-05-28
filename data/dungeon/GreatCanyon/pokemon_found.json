@@ -1,0 +1,284 @@
+{
+	"tables": [{
+		"name": "GreatCanyon_1F_3F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_DODUO",
+				"level": 14,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_SKIPLOOM",
+				"level": 13,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_DUNSPARCE",
+				"level": 13,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_PHANPY",
+				"level": 14,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_4F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_VILEPLUME",
+				"level": 14,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_DODUO",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_BRELOOM",
+				"level": 14,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_5F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_VILEPLUME",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_MURKROW",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_BRELOOM",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_CACTURNE",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_6F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_VILEPLUME",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_NOCTOWL",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_MURKROW",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_BRELOOM",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_CACTURNE",
+				"level": 14,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_7F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_NOCTOWL",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_MURKROW",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_HERACROSS",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_CACTURNE",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_8F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_NOCTOWL",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_ARIADOS",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_HERACROSS",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_CACTURNE",
+				"level": 14,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_9F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_ARIADOS",
+				"level": 14,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_HERACROSS",
+				"level": 14,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_10F_11F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_TAUROS",
+				"level": 15,
+				"probability": 3077
+			},
+			{
+				"species": "SPECIES_ARIADOS",
+				"level": 14,
+				"probability": 3077
+			},
+			{
+				"species": "SPECIES_HOUNDOOM",
+				"level": 15,
+				"probability": 3846
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "GreatCanyon_12F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_TAUROS",
+				"level": 15,
+				"probability": 4444
+			},
+			{
+				"species": "SPECIES_HOUNDOOM",
+				"level": 15,
+				"probability": 5556
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}
