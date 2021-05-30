@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start nullsub_152
-nullsub_152:
-	bx lr
-	thumb_func_end nullsub_152
-
-	thumb_func_start sub_8006518
-sub_8006518:
-	push {r4-r7,lr}
-	ldr r4, _0800653C
-	adds r2, r0, 0
-	movs r3, 0x3
-_08006520:
-	adds r1, r2, 0
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r4, 0x18
-	adds r2, 0x18
-	subs r3, 0x1
-	cmp r3, 0
-	bge _08006520
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800653C: .4byte gUnknown_202AFC0
-	thumb_func_end sub_8006518
-
-	thumb_func_start nullsub_153
-nullsub_153:
-	bx lr
-	thumb_func_end nullsub_153
-
-	thumb_func_start sub_8006544
-sub_8006544:
-	ldr r1, _08006550
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_08006550: .4byte gUnknown_80B8814
-	thumb_func_end sub_8006544
-
 	thumb_func_start sub_8006554
 sub_8006554:
 	push {r4-r7,lr}

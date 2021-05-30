@@ -2,7 +2,7 @@
 #include "play_time.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
-extern struct PlayTimeStruct gPlayTime;
+EWRAM_DATA struct PlayTimeStruct gPlayTime;
 
 extern void sub_809488C(u8 *r0, u8 *r1, u32);
 extern void sub_8094924(u8 *r0, u8 *r1, u32);

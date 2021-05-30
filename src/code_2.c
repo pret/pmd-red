@@ -42,7 +42,7 @@ extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
 extern void InitMainMenu(void);
-extern u8 sub_80363E0(void);
+extern bool8 sub_80363E0(void);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);
@@ -149,7 +149,7 @@ void GameLoop(void)
         sub_80095CC(0, 20);
         InitMainMenu();
         while (1) {
-            if ((u8)sub_80363E0()) {
+            if (sub_80363E0()) {
                 if (gRealInputs.pressed & L_BUTTON) {
                     flag = FALSE;
                     SetBGOBJEnableFlags(19);

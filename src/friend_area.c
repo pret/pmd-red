@@ -3,7 +3,7 @@
 #include "friend_area.h"
 #include "pokemon.h"
 
-extern bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
+EWRAM_DATA bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
 extern bool8 *gFriendAreas;
 
 

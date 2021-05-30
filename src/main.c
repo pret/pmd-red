@@ -8,14 +8,14 @@ extern char ewram_start[];
 
 typedef void (*IntrCallback)(void);
 
-extern u8 IntrMain_Buffer[0x120];
-extern IntrCallback gIntrCallbacks[6];
+EWRAM_DATA u8 IntrMain_Buffer[0x120];
+EWRAM_DATA u32 gIntrTable[6];
+EWRAM_DATA IntrCallback gIntrCallbacks[6];
 extern u16 gBldCnt;
 extern u8 gUnknown_202D7FE;
 extern u8 gInterruptsEnabled;
 extern u16 gUnknown_203B0AC;
 extern s16 gUnknown_203B0AE;
-extern u32 gIntrTable[];
 
 
 extern char alt_203B038[];
@@ -227,9 +227,9 @@ void AckInterrupt(u16 flag)
 
 void InitIntrTable(const u32 *interrupt_table)
 {
-    CpuCopy32(interrupt_table, &gIntrTable, 0x18); // 0x18 = 0x6 * 4 (0x4f00 is 32 bits)
-    CpuCopy32(&IntrMain, &IntrMain_Buffer, 0x120); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
-    INTR_VECTOR = &IntrMain_Buffer;
+    CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4f00 is 32 bits)
+    CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
+    INTR_VECTOR = IntrMain_Buffer;
 }
 
 u32 *sub_800B6E8(u32 r0)

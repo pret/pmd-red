@@ -2,6 +2,7 @@
 #define POKEMON_H
 
 #include "file_system.h"
+#include "constants/species.h"
 
 struct PokemonStruct
 {
@@ -49,7 +50,7 @@ struct PokemonStruct3
 
 struct unkStruct_203B45C
 {
-    struct PokemonStruct pokemon[0x19D];
+    struct PokemonStruct pokemon[NUM_SPECIES];
     struct PokemonStruct2 pokemon2[4];
     struct PokemonStruct3 pokemon3[4];
 };

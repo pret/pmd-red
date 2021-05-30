@@ -79,7 +79,7 @@ extern s8 sub_80307EC();
 extern void sub_8030D40(u8, u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8030810(u32);
-extern void sub_8035CC0(u32 *r0, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8035CF4(u32 *r0, u32, u32);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
@@ -94,7 +94,6 @@ extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_80951BC(u8 *r0);
 extern void sub_8013114(u32 *r0, s32 *r1);
-extern void sub_8035CC0(u32 *r0, u32);
 extern void sub_8023C60();
 extern u32 sub_8023A94(u32);
 extern void sub_8024458(s16, u32);
@@ -179,7 +178,6 @@ extern void sub_803084C(void);
 extern s8 sub_80307EC(void);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
-extern void sub_8035CC0(u32 *, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8030DA0();
 extern void sub_8030DE4();
@@ -686,7 +684,7 @@ void sub_80290F0(void)
             break;
         case 4:
         case 10:
-            sub_8035CC0(&(gUnknown_203B2C0->unk35C), 2);
+            sub_8035CC0(gUnknown_203B2C0->unk35C, 2);
             sub_8030810(1);
             sub_8028B04(31);
             break;
@@ -731,7 +729,7 @@ void sub_8029208(void)
 
         case 13:
         case 14:
-            gUnknown_203B2C0->unk534 = 0xD;
+            gUnknown_203B2C0->unk534 = 13;
             switch(gUnknown_203B2C0->unk538)
             {
                 case 0:
@@ -745,7 +743,7 @@ void sub_8029208(void)
             }
             break;
         case 15:
-            gUnknown_203B2C0->unk534 = temp;
+            gUnknown_203B2C0->unk534 = 15;
             switch(gUnknown_203B2C0->unk538)
             {
                 case 0:
@@ -1050,7 +1048,7 @@ void sub_8029684(void)
             break;
         case 0x4:
         case 0xA:
-            sub_8035CC0(&(gUnknown_203B2C0->unk35C),2);
+            sub_8035CC0(gUnknown_203B2C0->unk35C,2);
             sub_8030810(1);
             sub_8028B04(0x2A);
             break;
@@ -1150,7 +1148,7 @@ void sub_8029884(void)
             break;
         case 0x4:
         case 0xA:
-            sub_8035CC0(&(gUnknown_203B2C0->unk35C), 3);
+            sub_8035CC0(gUnknown_203B2C0->unk35C, 3);
             sub_8023B7C(1);
             sub_8028B04(0x33);
             break;
@@ -1386,7 +1384,7 @@ u32 sub_8029B50(void)
 u32 sub_8029C98(void)
 {
 
-  switch(gUnknown_203B2C4->unk0) {
+  switch(gUnknown_203B2C4->state) {
     case 5:
         sub_802AB7C();
         break;
@@ -1725,7 +1723,7 @@ void sub_802A174(void)
         break;
       case 0:
       case 0xD:
-        sub_8035CC0(&gUnknown_203B2C4->unk35C,2);
+        sub_8035CC0(gUnknown_203B2C4->unk35C,2);
         sub_8030810(1);
         sub_802B2BC(0x10);
       default:
@@ -1835,7 +1833,7 @@ void sub_802A39C(void)
             break;
       case 0:
       case 0xD:
-            sub_8035CC0(&gUnknown_203B2C4->unk35C, 3);
+            sub_8035CC0(gUnknown_203B2C4->unk35C, 3);
             sub_801CCD8();
             sub_802B2BC(0x13);
       default:

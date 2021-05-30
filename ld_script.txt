@@ -65,6 +65,7 @@ SECTIONS {
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
+        src/text_1.o(.text);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -178,8 +179,7 @@ SECTIONS {
         src/pokemon_mid.o(.text);
         asm/pokemon_1.o(.text);
         src/pokemon_1.o(.text);
-        src/code_808DAB4.o(.text);
-        asm/code_808DAB4.o(.text);
+        asm/pokemon_2.o(.text);
         src/code_808EAB0.o(.text);
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);

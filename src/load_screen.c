@@ -20,7 +20,7 @@ struct unkStruct_808D33C
 struct unkStruct_203B484
 {
     u8 fill0[0xC];
-    s16 unkC;
+    s16 speciesIndex;
     u8 fillE[0x50 - 0xE];
     u32 unk50;
 };
@@ -305,8 +305,8 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(64,48,gUnknown_203B374->formattedAdventures,0,0);
 
   // Draw Helper Info
-  if ((iVar2 == 0xf1207) && (gUnknown_203B484->unkC != 0)) {
-    sub_808D930(speciesHelper,gUnknown_203B484->unkC);
+  if ((iVar2 == 0xf1207) && (gUnknown_203B484->speciesIndex != 0)) {
+    sub_808D930(speciesHelper,gUnknown_203B484->speciesIndex);
     // TODO very hacky match here
     sub_80922B4(nameHelper,(u8 *)(&gUnknown_203B484 + 0x14),10);
     ExpandPlaceholdersBuffer(gUnknown_203B374->formattedHelperInfo,&gUnknown_80E784C,nameHelper,speciesHelper); // %s (%s)

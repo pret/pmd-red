@@ -8,8 +8,9 @@ extern struct unkStruct_203B460 *gUnknown_203B460;
 extern struct unkStruct_203B460 gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
-extern struct OpenedFile *gItemParametersFile;
-extern struct Item *gItemParametersData;
+
+EWRAM_DATA struct OpenedFile *gItemParametersFile;
+EWRAM_DATA struct Item *gItemParametersData;
 
 extern void sub_8091840(u8);
 extern u8 GetItemType(u8);

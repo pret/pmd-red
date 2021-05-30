@@ -4,16 +4,7 @@
 #include "gUnknown_203B460.h"
 #include "menu.h"
 #include "memory.h"
-
-struct unkData
-{
-    u8 unk0[14];
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u8 *unk14;
-};
-
+#include "text.h"
 
 struct unkStruct_203B35C
 {
@@ -24,41 +15,41 @@ struct unkStruct_203B35C
     u8 fillC[0x1C - 0xC];
     u32 unk1C;
     u8 fill20[0x15C - 0x20];
-    struct unkData unk15C[4];
+    struct UnkTextStruct2 unk15C[4];
     u8 unk1BC[4];
     u32 unk1C0[9];
 };
 extern struct unkStruct_203B35C *gUnknown_203B35C;
 
-extern struct unkData gUnknown_80E653C;
+extern struct UnkTextStruct2 gUnknown_80E653C;
 
-extern struct unkData gUnknown_80E66BC;
+extern struct UnkTextStruct2 gUnknown_80E66BC;
 extern struct MenuItem gUnknown_80E66D4[];
-extern struct unkData gUnknown_80E6748;
+extern struct UnkTextStruct2 gUnknown_80E6748;
 extern struct MenuItem gUnknown_80E6760[];
-extern struct unkData gUnknown_80E67D4;
+extern struct UnkTextStruct2 gUnknown_80E67D4;
 extern struct MenuItem gUnknown_80E67EC[];
-extern struct unkData gUnknown_80E689C;
+extern struct UnkTextStruct2 gUnknown_80E689C;
 extern struct MenuItem gUnknown_80E68B4[];
-extern struct unkData gUnknown_80E6938;
+extern struct UnkTextStruct2 gUnknown_80E6938;
 extern struct MenuItem gUnknown_80E6950[];
-extern struct unkData gUnknown_80E69B0;
+extern struct UnkTextStruct2 gUnknown_80E69B0;
 extern struct MenuItem gUnknown_80E69C8[];
-extern struct unkData gUnknown_80E6A10;
+extern struct UnkTextStruct2 gUnknown_80E6A10;
 extern struct MenuItem gUnknown_80E6A28[];
-extern struct unkData gUnknown_80E6A74;
+extern struct UnkTextStruct2 gUnknown_80E6A74;
 extern struct MenuItem gUnknown_80E6A8C[];
-extern struct unkData gUnknown_80E6B78;
+extern struct UnkTextStruct2 gUnknown_80E6B78;
 extern struct MenuItem gUnknown_80E6B90[];
-extern struct unkData gUnknown_80E6BF4;
+extern struct UnkTextStruct2 gUnknown_80E6BF4;
 extern struct MenuItem gUnknown_80E6C0C[];
-extern struct unkData gUnknown_80E6C50;
+extern struct UnkTextStruct2 gUnknown_80E6C50;
 extern struct MenuItem gUnknown_80E6C68[];
-extern struct unkData gUnknown_80E6CD0;
+extern struct UnkTextStruct2 gUnknown_80E6CD0;
 extern struct MenuItem gUnknown_80E6CE8[];
-extern struct unkData gUnknown_80E6DDC;
+extern struct UnkTextStruct2 gUnknown_80E6DDC;
 extern struct MenuItem gUnknown_80E6DF4[];
-extern struct unkData gUnknown_80E6D54;
+extern struct UnkTextStruct2 gUnknown_80E6D54;
 extern struct MenuItem gUnknown_80E6D6C[];
 
 struct unkStruct_8035D94
@@ -73,11 +64,10 @@ extern struct unkStruct_8035D94 *sub_8035D94();
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern void sub_8037400(void);
-extern void sub_800641C(void *, u32, u32);
 extern void ResetSprites(u32);
 extern void sub_8035CF4(u32 *,u32, u32);
 extern void sub_80376CC();
-extern void sub_8035CC0(void *, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
 extern u8 sub_80130A8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
@@ -87,7 +77,7 @@ extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
-extern void SetMenuItems(void *, void *, u32, struct unkData *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(void *, void *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
 extern void sub_800CB20();
@@ -309,7 +299,7 @@ void sub_80371B8(void)
 {
   struct unkStruct_8035D94 *pbVar2;
   struct MenuItem *MenuItems;
-  struct unkData *puVar5;
+  struct UnkTextStruct2 *puVar5;
   
   puVar5 = NULL;
   MenuItems = NULL;
@@ -317,7 +307,7 @@ void sub_80371B8(void)
   if ((gUnknown_203B35C->unk0 < 2) &&(gUnknown_203B35C->unk4 == 0)) {
     if (sub_8037C10(0) != 0) {
       sub_80376CC();
-      sub_8035CC0(&gUnknown_203B35C->unk15C,0);
+      sub_8035CC0(gUnknown_203B35C->unk15C,0);
       // Success!
       // The item exchange with your friend
       // went through successfully
@@ -327,7 +317,7 @@ void sub_80371B8(void)
   }
   else {
     sub_80376CC();
-    sub_8035CC0(&gUnknown_203B35C->unk15C, 0);
+    sub_8035CC0(gUnknown_203B35C->unk15C, 0);
     switch(gUnknown_203B35C->unk4) {
         case 0:
           puVar5 = &gUnknown_80E66BC;

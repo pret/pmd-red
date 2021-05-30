@@ -41,11 +41,11 @@ struct UnkBgStruct
 extern struct UnkBgStruct *gUnknown_203B0E4;
 
 
-extern u16 gUnknown_80D4144[];
-extern s16 gUnknown_202DE20;
-extern s16 gUnknown_202DE22;
-extern s16 gUnknown_202DE24;
-extern u32 gUnknown_202DE1C;
+extern const u16 gUnknown_80D4144[8];
+EWRAM_DATA u32 gUnknown_202DE1C;
+EWRAM_DATA s16 gUnknown_202DE20;
+EWRAM_DATA s16 gUnknown_202DE22;
+EWRAM_DATA s16 gUnknown_202DE24;
 
 void nullsub_8(u32);
 void sub_8005838(u32, u32);

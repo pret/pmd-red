@@ -1,11 +1,7 @@
 #include "global.h"
 #include "main_menu.h"
 #include "menu.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
+#include "text.h"
 
 struct unkStruct_203B34C
 {
@@ -16,7 +12,7 @@ struct unkStruct_203B34C
     u8 fillC[0x30 - 0xC];
     s16 menuIndex;
     u8 fill32[0x144 - 0x32];
-    struct unkData unk144[4];
+    struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
 };
 
@@ -53,11 +49,11 @@ extern const struct MenuItem gUnknown_80E6030[];
 extern u8 sub_803D0D8();
 extern s32 sub_8011C34();
 extern s32 sub_8095324(u32);
-extern void SetMenuItems(u32 *, struct unkData *, u32, u32 *, const struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, u32 *, const struct MenuItem *, u32, u32, u32);
 void SetMainMenuItems(void);
 extern bool8 SetMainMenuText();
 extern void sub_8035CF4(u32 *, u32, u32);
-extern void sub_8035CC0(struct unkData *, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
 bool8 SetMainMenuText(void)
 {
@@ -210,11 +206,11 @@ void SetMainMenuItems(void)
   }
 }
 
-u8 sub_80363E0(void)
+bool8 sub_80363E0(void)
 {
     if(gUnknown_203B34C == NULL)
-        return 0;
+        return FALSE;
     if(gUnknown_203B34C->unk0 == 0xC)
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }

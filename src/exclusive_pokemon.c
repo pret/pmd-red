@@ -28,7 +28,7 @@ const u8 filler_ex1[8] =
 };
 
 extern struct ExclusivePokemonData *gUnknown_203B498;
-extern struct ExclusivePokemonData gExclusivePokemonInfo;
+EWRAM_DATA struct ExclusivePokemonData gExclusivePokemonInfo;
 
 
 void LoadExclusivePokemon(void)

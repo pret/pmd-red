@@ -12,7 +12,6 @@
 #include "text.h"
 
 extern void sub_801317C(u32 *);
-extern void sub_8099690(u32);
 extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);

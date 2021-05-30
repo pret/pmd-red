@@ -2,7 +2,7 @@
 #include "rescue_team_info.h"
 
 extern struct RescueTeamData *gRescueTeamInfoRef;
-extern struct RescueTeamData gRescueTeamInfo;
+EWRAM_DATA struct RescueTeamData gRescueTeamInfo;
 
 extern void sub_809485C(u32 *r0, u8 *r1, u32 r2);
 extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);

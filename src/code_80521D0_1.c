@@ -131,7 +131,7 @@ extern void sub_80861B8(struct unkDungeon_8041D5C *, u32, u32);
 
 void nullsub_99();
 extern u32 sub_8084100(s32);
-extern u8 *gFriendAreas;
+extern bool8 *gFriendAreas;
 
 extern void sub_8049884();
 extern void sub_8049B8C();
@@ -258,7 +258,7 @@ u8 JirachiFriendAreaSearch(void)
     unlockCondition = GetFriendAreaUnlockCondition(friendAreaCounter);
     if (!(unlockCondition == UNLOCK_LEGENDARY_REQUEST)){
         if (!(unlockCondition == UNLOCK_WONDER_MAIL)){
-            if(gFriendAreas[friendAreaCounter] == FALSE) {
+            if(!gFriendAreas[friendAreaCounter]) {
                 friendAreas[numUnlockableAreas] = friendAreaCounter;
                 numUnlockableAreas++;
             }
