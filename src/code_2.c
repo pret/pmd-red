@@ -9,6 +9,7 @@
 #include "play_time.h"
 #include "save.h"
 #include "gUnknown_203B46C.h"
+#include "text.h"
 
 extern void NDS_DebugInit(void);
 extern void sub_801180C(void);
@@ -35,10 +36,8 @@ extern void sub_80015C0(u32, u32);
 extern u32 sub_8001658(u32, u32);
 extern void sub_800A8F8(u32);
 extern void ResetSprites(u32);
-extern void xxx_update_some_bg_tiles(u32);
 extern void sub_80097B0(void);
 extern void sub_800CDA8(u32);
-extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);

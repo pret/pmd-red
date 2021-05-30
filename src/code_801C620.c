@@ -1,12 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "memory.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
-
+#include "text.h"
 
 struct subStruct_203B240
 {
@@ -16,6 +11,7 @@ struct subStruct_203B240
 
 struct unkStruct_203B240
 {
+    // size: 0x94
     s32 unk0;
     u8 unk4;
     u8 fill5[3];
@@ -25,8 +21,10 @@ struct unkStruct_203B240
     u8 fill14[0x20 - 0x18];
     u32 unk20;
     u32 unk24;
-    struct unkData unk28[4];
+    struct UnkTextStruct2 unk28[4];
     u32 unk88;
+    u32 unk8C;
+    u32 unk90;
 };
 
 extern struct unkStruct_203B240 *gUnknown_203B240;
@@ -38,8 +36,7 @@ extern u8 gAvailablePokemonNames[0x58];
 
 extern void ResetSprites(u32);
 extern void sub_801317C(u32 *);
-extern void sub_80140B4(struct unkData *);
-extern void sub_800641C(struct unkData *,u32, u32);
+extern void sub_80140B4(struct UnkTextStruct2 *);
 
 
 extern void sub_8014FF0(u32, u32, char *, u32, u32);
@@ -62,7 +59,7 @@ void sub_801C848();
 u32 sub_801C620(u8 param_1)
 {
   ResetSprites(1);
-  gUnknown_203B240 = MemoryAlloc(0x94,8);
+  gUnknown_203B240 = MemoryAlloc(sizeof(struct unkStruct_203B240),8);
   gUnknown_203B240->unk4 = param_1;
   sub_801317C(&gUnknown_203B240->unk88);
   gUnknown_203B240->unk24 = 0;

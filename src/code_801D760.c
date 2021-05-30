@@ -4,12 +4,7 @@
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "input.h"
-
-struct unkData
-{
-    u8 unk0[0x14];
-    u32 *unk14;
-};
+#include "text.h"
 
 struct unkStruct_203B258
 {
@@ -18,16 +13,14 @@ struct unkStruct_203B258
     u32 unk14;
     u8 fill18[0x34 - 0x18];
     u32 unk34;
-    struct unkData *unk38;
-    struct unkData unk3C[4];
-    u32 unk9C;
+    struct UnkTextStruct2 *unk38;
+    struct UnkTextStruct2 unk3C[4];
+    u8 unk9C[4];
 };
 
 extern struct unkStruct_203B258 *gUnknown_203B258;
-extern struct unkData gUnknown_80DBF88;
+extern struct UnkTextStruct2 gUnknown_80DBF88;
 
-extern void sub_800641C(struct unkData *, u32, u32);
-extern void sub_8006518(struct unkData *);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_8013878(void *, s32);
 extern u8 sub_80138B8(void *, u32);
@@ -373,7 +366,7 @@ u32 sub_801D9E4(void)
   gUnknown_203B258->unk38 = &gUnknown_203B258->unk3C[3];
   sub_8006518(gUnknown_203B258->unk3C);
   gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF88;
-  gUnknown_203B258->unk38->unk14 = &gUnknown_203B258->unk9C;
+  gUnknown_203B258->unk38->unk14 = gUnknown_203B258->unk9C;
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B258->unk3C,1,1);
   sub_8013818(gUnknown_203B258,0xe5,10,gUnknown_203B258->unk34);

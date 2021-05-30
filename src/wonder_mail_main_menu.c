@@ -1,6 +1,8 @@
 #include "global.h"
 #include "save.h"
 #include "memory.h"
+#include "text.h"
+#include "input.h"
 
 #define EXIT_TO_MAIN_MENU 5
 #define PASSWORD_SUCCESS 13
@@ -20,10 +22,9 @@ struct unkStruct_203B3E8
     struct unkWonderMailData unk38; // 0x30 - 0x14
     u8 unk38_1[0x30 - 20]; // TODO: split for the ldm/stm stuff (fix dumb hack)
     u8 fill68[0x1EC - 0x68];
-    u32 unk1EC;
-    u8 fill1F0[0x24C - 0x1F0];
+    struct UnkTextStruct2 unk1EC[4];
     u32 unk24C;
-    u32 unk250;
+    u32 wonderMailStatus;
     u8 fill254[0x3C0 - 0x254];
     struct unkWonderMailData unk3C0; // 0x3C0 + 0x14
     u8 fill3D0[0x490 - 0x3D4];
@@ -40,8 +41,6 @@ extern u32 sub_80144A4(s32 *);
 extern u32 sub_8011C1C(void);
 extern struct unkStruct_203B3E8 *gUnknown_203B3E8;
 extern void sub_803A1C0(u8);
-extern void ResetUnusedInputStruct(void);
-extern void sub_800641C(void *, u32, u32);
 extern void sub_8030DE4(void);
 extern void sub_801B450(void);
 extern void sub_803084C(void);
@@ -252,7 +251,7 @@ void sub_8039B58(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (gUnknown_203B3E8->unk250 == 0) {
+    if (gUnknown_203B3E8->wonderMailStatus == 0) {
       switch(gUnknown_203B3E8->unk24C){
         case 9: 
             sub_803A1C0(7);
@@ -263,7 +262,7 @@ void sub_8039B58(void)
       }
     }
     else {
-      sub_8039BAC(gUnknown_203B3E8->unk250);
+      sub_8039BAC(gUnknown_203B3E8->wonderMailStatus);
       sub_803A1C0(10);
     }
   }
@@ -328,7 +327,7 @@ void sub_8039C60(void)
     case 3:
       sub_80155F0();
       ResetUnusedInputStruct();
-      sub_800641C(&gUnknown_203B3E8->unk1EC,1,1);
+      sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
       if ( !sub_803D358(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->unk38) || !sub_80959C0(&gUnknown_203B3E8->unk38) ) 
       {
         // Invalid password
@@ -346,7 +345,7 @@ void sub_8039C60(void)
     case 2:
         sub_80155F0();
         ResetUnusedInputStruct();
-        sub_800641C(&gUnknown_203B3E8->unk1EC,1,1);
+        sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
         sub_803A1C0(EXIT_TO_MAIN_MENU);
         break;
   }

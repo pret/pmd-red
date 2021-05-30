@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "memory.h"
+#include "text.h"
 
 struct unkStruct_203B20C
 {
@@ -12,7 +13,6 @@ struct unkStruct_203B20C
 };
 extern struct unkStruct_203B20C *gUnknown_203B20C;
 
-extern void sub_800641C(u8 *, u32, u32);
 extern void sub_8017F10(u32);
 
 

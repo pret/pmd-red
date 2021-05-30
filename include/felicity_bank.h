@@ -2,11 +2,7 @@
 #define FELICITY_BANK_H
 
 #include "file_system.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
+#include "text.h"
 
 struct unkStruct_203B204
 {
@@ -30,7 +26,7 @@ struct unkStruct_203B204
     u8 unkA2;
     u8 unkA3;
     struct OpenedFile **unkA4;
-    struct unkData unkA8[4];
+    struct UnkTextStruct2 unkA8[4];
 };
 
 

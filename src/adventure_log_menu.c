@@ -2,8 +2,8 @@
 #include "input.h"
 #include "main_menu.h"
 #include "adventure_log.h"
+#include "text.h"
 
-extern void sub_800641C(u8 *, u32, u32);
 extern void CreateAdventureLogScreen(u32);
 extern u32 HandleAdventureLogInput(u32);
 extern void CleanAdventureLogScreen();

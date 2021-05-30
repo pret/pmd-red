@@ -3,8 +3,7 @@
 #include "file_system.h"
 #include "memory.h"
 #include "input.h"
-
-extern void sub_800641C(u32, u32, u32);
+#include "text.h"
 
 struct unkStruct_203B200
 {

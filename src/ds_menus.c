@@ -1,8 +1,8 @@
 #include "global.h"
 #include "input.h"
+#include "text.h"
 
 extern u8 *gUnknown_203B3E8;
-extern void sub_800641C(void *, u32, u32);
 extern void nullsub_54();
 extern void sub_8039E18();
 

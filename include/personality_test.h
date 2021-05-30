@@ -2,12 +2,7 @@
 #define GUARD_PERSONALITY_TEST_H
 
 #include "constants/personality_test.h"
-
-struct unkData
-{
-    s16 unk0[10];
-    u8 *unk14;
-};
+#include "text.h"
 
 // Definitely wrong but need to figure out better structure later
 struct FaceData
@@ -15,8 +10,18 @@ struct FaceData
     /* 0x0 */ u8 *unk0[5];
 };
 
+struct PersonalityAnswer
+{
+  const char * text;
+  int effect;
+};
 
-extern const struct unkData gUnknown_80F4244;
+struct PersonalityQuestion
+{
+  const char * question;
+  const struct PersonalityAnswer * answers;
+  const u8 (*effects[16]);
+};
 
 struct PersonalityStruct_203B400
 {
@@ -39,21 +44,12 @@ struct PersonalityStruct_203B400
 };
 extern struct PersonalityStruct_203B400 *gUnknown_203B400;
 
-struct PersonalitySubStruct
-{
-    u8 unkb4;
-    u8 unkb5;
-    u8 unkb6;
-    u8 unkb7;
-};
-
 struct PersonalityStruct_203B404
 {
     // Size: 0xB8
     /* 0x0 */ s16 StarterID;
     /* 0x2 */ s16 PartnerArray[NUM_PARTNERS];
     u8 unk16;
-    u8 unk17;
     /* 0x18 */ struct UnkInputStruct *unk18; // something menu related (seems to be some struct)
     u8 padding[0x30 - 0x1C];
     /* 0x30 */ s16 currPartnerSelection;
@@ -62,8 +58,8 @@ struct PersonalityStruct_203B404
     /* 0x3A */ s16 numPartners;
     u8 padding3[0x4C - 0x3C];
     u32 unk4C;
-    /* 0x50 */ struct unkData *unk50;
-    /* 0x54 */ struct unkData unk54[4];
+    /* 0x50 */ struct UnkTextStruct2 *unk50;
+    /* 0x54 */ struct UnkTextStruct2 unk54[4];
     /* 0xB4 */ u8 unkb4[4];
 };
 extern struct PersonalityStruct_203B404 *gUnknown_203B404;

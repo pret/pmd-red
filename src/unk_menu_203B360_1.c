@@ -1,13 +1,5 @@
 #include "global.h"
-
-struct unkData
-{
-    u8 unk0[14];
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u8 *unk14;
-};
+#include "text.h"
 
 struct unkStruct_203B360
 {
@@ -16,7 +8,7 @@ struct unkStruct_203B360
     u32 unk4;
     u32 unk8;
     u8 fill8[0x148 - 0xC];
-    struct unkData unk148[4];
+    struct UnkTextStruct2 unk148[4];
     u16 unk1A8;
     u16 unk1AA;
     u16 unk1AC;

@@ -3,12 +3,7 @@
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "menu.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
-
+#include "text.h"
 
 struct unkStruct_203B3F0
 {
@@ -27,11 +22,11 @@ struct unkStruct_203B3F0
     u32 unkA8;
     u32 unkAC;
     u32 unkB0;
-    struct unkData *unkB4;
+    struct UnkTextStruct2 *unkB4;
     u32 unkB8;
     u32 unkBC;
     u8 fill4[0xD8 - 0xC0];
-    struct unkData unkD8[4];
+    struct UnkTextStruct2 unkD8[4];
 };
 
 extern struct unkStruct_203B3F0 *gUnknown_203B3F0;
@@ -47,7 +42,7 @@ struct unkStruct_203B3F4
     u8 fill24[0x4C - 0x24];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
-    struct unkData unk9C[4];
+    struct UnkTextStruct2 unk9C[4];
 };
 
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
@@ -58,18 +53,16 @@ extern void sub_801B3C0(u8 *);
 extern void sub_8090A8C(u8 *, u8, u32);
 extern void sub_8013AA0(u32 *);
 
-extern struct unkData gUnknown_80E7E4C;
-extern struct unkData gUnknown_80E7E34;
-extern struct unkData gUnknown_80E7E64;
-extern struct unkData gUnknown_80E7EA4;
-extern struct unkData gUnknown_80E7E8C;
+extern struct UnkTextStruct2 gUnknown_80E7E4C;
+extern struct UnkTextStruct2 gUnknown_80E7E34;
+extern struct UnkTextStruct2 gUnknown_80E7E64;
+extern struct UnkTextStruct2 gUnknown_80E7EA4;
+extern struct UnkTextStruct2 gUnknown_80E7E8C;
 
 extern const char gDebug_NumberText;
 extern const char *gUnknown_80D4970[];
 
 
-extern void sub_800641C(void *, u32, u32);
-extern void sub_8006518(void *);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801CCD8();

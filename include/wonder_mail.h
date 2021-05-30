@@ -2,14 +2,10 @@
 #define GUARD_WONDER_MAIL_H
 
 #include "file_system.h"
-
+#include "text.h"
 
 #define PASSWORD_BUFFER_SIZE 0x36
 
-struct unkData
-{
-    u8 unk0[24];
-};
 
 struct WonderMailStruct_203B2C0
 {
@@ -30,7 +26,7 @@ struct WonderMailStruct_203B2C0
     u8 padding8[0x4C];
     u32 unk35C;
     u8 padding5[0x5C];
-    struct unkData unk3BC[4];
+    struct UnkTextStruct2 unk3BC[4];
     u32 unkfill; // unkStruct_41C?
     struct OpenedFile *faceFile;
     u8 *faceData;
@@ -73,7 +69,7 @@ struct WonderMailStruct_203B2C4
     u8 filler310[0x35C - 0x310];
     u32 unk35C;
     u8 filler360[0x3BC - 0x360];
-    struct unkData unk3BC[4];
+    struct UnkTextStruct2 unk3BC[4];
     struct unkStruct_41C unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;

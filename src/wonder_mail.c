@@ -5,6 +5,7 @@
 #include "constants/species.h"
 #include "wonder_mail.h"
 #include "memory.h"
+#include "text.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
@@ -76,7 +77,6 @@ extern void sub_803084C();
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC();
 extern void sub_8030D40(u8, u32);
-extern void sub_8006518(void *r0);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8030810(u32);
 extern void sub_8035CC0(u32 *r0, u32);
@@ -164,7 +164,6 @@ extern u8 sub_8099B94();
 
 extern void sub_8099A5C(u32, u32, u32*);
 extern void sub_8099AFC(u32, u32, u32*);
-extern void sub_800641C(void *, u32, u32);
 extern void ResetUnusedInputStruct();
 extern void sub_8099690(u32);
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);

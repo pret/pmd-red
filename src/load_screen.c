@@ -4,6 +4,7 @@
 #include "play_time.h"
 #include "file_system.h"
 #include "memory.h"
+#include "text.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct PlayTimeStruct gPlayTime;
@@ -24,11 +25,6 @@ struct unkStruct_203B484
     u32 unk50;
 };
 
-struct unkData
-{
-    u8 unk0[24];
-};
-
 struct unkStruct_203B374
 {
     // size: 0x27c
@@ -39,7 +35,7 @@ struct unkStruct_203B374
     u8 fill58[0xA4 - 0x58];
     u32 unkA4;
     u8 fillA8[0x144 - 0xA8];
-    struct unkData unk144[4];
+    struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
     /* 0x1EC */ u8 formattedLocation[0x24];
@@ -54,15 +50,15 @@ extern u32 gUnknown_203B3B8[];
 extern u32 gUnknown_203B388[];
 extern struct unkStruct_203B484 *gUnknown_203B484;
 
-extern struct unkData gUnknown_80E75F8;
-extern struct unkData gUnknown_80E7610;
-extern struct unkData gUnknown_80E762C;
+extern struct UnkTextStruct2 gUnknown_80E75F8;
+extern struct UnkTextStruct2 gUnknown_80E7610;
+extern struct UnkTextStruct2 gUnknown_80E762C;
 extern u32 gUnknown_80E7644;
 extern u32 gUnknown_80E7684;
 extern u32 gUnknown_80E76B8;
 extern u32 gUnknown_80E76E8;
 extern u32 gUnknown_80E7730;
-extern struct unkData gUnknown_80E7784;
+extern struct UnkTextStruct2 gUnknown_80E7784;
 extern u32 gUnknown_80E779C;
 extern u8 gUnknown_80E77BC;
 extern u8 gUnknown_80E77C4;
@@ -85,8 +81,7 @@ extern const char gUnknown_80E785C[]; // clmkpat
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 extern void sub_8035CF4(u32 *, u32, u32);
-extern void sub_800641C(struct unkData *, u32, u32);
-extern void SetMenuItems(u32 *, struct unkData *, u32, struct unkData *, u32 *, u32, u32, u32);
+extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, u32 *, u32, u32, u32);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_8095240(u32);

@@ -2,15 +2,7 @@
 #include "input.h"
 #include "main_menu.h"
 #include "memory.h"
-
-struct unkData
-{
-    u8 unk0[14];
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u8 *unk14;
-};
+#include "text.h"
 
 struct unkStruct_203B360
 {
@@ -19,21 +11,20 @@ struct unkStruct_203B360
     u32 unk4; // state
     u32 unk8;
     u8 fill8[0x148 - 0xC];
-    struct unkData unk148[4];
+    struct UnkTextStruct2 unk148[4];
     u32 unk1A8;
     u32 unk1AC;
     u32 unk1B0; // sprite count?
 };
 
 extern struct unkStruct_203B360 *gUnknown_203B360;
-extern struct unkData gUnknown_80E6E7C;
-extern struct unkData gUnknown_80E6E94;
+extern struct UnkTextStruct2 gUnknown_80E6E7C;
+extern struct UnkTextStruct2 gUnknown_80E6E94;
 extern struct MenuItem gUnknown_80E6EAC[];
 
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
-extern void sub_800641C(void *, u32, u32);
-extern void SetMenuItems(void *, struct unkData *, u32, struct unkData *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
 extern u8 sub_80130A8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_80384D0();

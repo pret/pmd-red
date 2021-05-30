@@ -7,8 +7,6 @@
 #include "memory.h"
 
 
-extern void sub_800641C(void *r0, u8, u8);
-
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];

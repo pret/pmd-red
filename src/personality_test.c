@@ -9,6 +9,7 @@
 #include "save.h"
 #include "memory.h"
 #include "gUnknown_203B46C.h"
+#include "text.h"
 
 extern void sub_801317C(u32 *);
 extern void sub_8099690(u32);
@@ -29,8 +30,6 @@ extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
 
-extern void sub_8006518(void *);
-extern void sub_800641C(void *, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
 extern void sub_8008C54(u32);
@@ -51,32 +50,9 @@ extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
 extern void xxx_call_draw_string(u32 size, u32, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
-
-struct PersonalityAnswer
-{
-  const char * text;
-  int effect;
-};
-
-struct PersonalityQuestion
-{
-  const char * question;
-  const struct PersonalityAnswer * answers;
-  const u8 (*effects[16]);
-};
-
 extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
 
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
-
-struct stack_PartnerSprite
-{
-    // size: 0x60
-    u32 unk0;
-    u8 padding[0x18 - 4];
-    struct unkData data;
-    u32 padding2[12];
-};
 
 extern const char gStarterReveal[];
 extern const char gGenderText[];
@@ -139,13 +115,13 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 #include "data/nature_description.h"
 
-struct unkData gUnknown_80F4244 = 
+const struct UnkTextStruct2 gUnknown_80F4244 = 
 {
-    0, 0,
-    5, 0,
-    0xC, 6,
-    5, 5,
-    5,0,
+    0x00, 0x00, 0x00, 0x00,
+    0x05, 0x00, 0x00, 0x00,
+    0x0C, 0x00, 0x06, 0x00,
+    0x05, 0x05,
+    0x05, 0x00,
     NULL
 };
 
@@ -165,31 +141,31 @@ const s16 gPartners[NUM_PARTNERS] =
     SPECIES_MUDKIP
 };
 
-const struct unkData gUnknown_80F4278 = 
+const struct UnkTextStruct2 gUnknown_80F4278 = 
 {
-    0x00, 0x00,
-    0x03, 0x00,
-    0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
 };
 
-const struct unkData gUnknown_80F4290 = 
+const struct UnkTextStruct2 gUnknown_80F4290 = 
 {
-    0x00, 0x00,
-    0x06, 0x00,
-    0x02, 0x02,
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
     0x09, 0x0B,
     0x0D, 0x00,
     NULL
 };
 
-const struct unkData gUnknown_80F42A8 = 
+const struct UnkTextStruct2 gUnknown_80F42A8 = 
 {
-    0x00, 0x00,
-    0x05, 0x00,
-    0x0E, 0x04,
+    0x00, 0x00, 0x00, 0x00,
+    0x05, 0x00, 0x00, 0x00,
+    0x0E, 0x00, 0x04, 0x00,
     0x05, 0x05,
     0x05, 0x00,
     NULL
@@ -635,13 +611,13 @@ void PersonalityTest_DisplayStarterSprite(void)
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;
-  struct stack_PartnerSprite stackArray;
+  struct UnkTextStruct2 stackArray[4];
 
   starterID = gUnknown_203B400->StarterID;
-  sub_8006518(&stackArray);
-  stackArray.data = gUnknown_80F4244;
+  sub_8006518(stackArray);
+  stackArray[1] = gUnknown_80F4244;
   ResetUnusedInputStruct();
-  sub_800641C(&stackArray, 1, 0);
+  sub_800641C(stackArray, 1, 0);
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(starterID);

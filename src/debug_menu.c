@@ -6,24 +6,24 @@
 
 extern struct DebugMenu *gUnknown_203B3EC;
 
-const struct unkData gUnknown_80E7D40 =
+const struct UnkTextStruct2 gUnknown_80E7D40 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
-const struct unkData gUnknown_80E7D58 = 
+const struct UnkTextStruct2 gUnknown_80E7D58 = 
 {
     0x00, 0x00, 0x00, 0x00,
     0x03, 0x00, 0x00, 0x00,
     0x02, 0x00, 0x02, 0x00,
-    0x09, 0x00, 0x0b, 0x00,
-    0x0b, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00
+    0x09, 0x0b,
+    0x0b, 0x00,
+    NULL
 };
 
 extern const char dungeons_string[];
@@ -64,8 +64,6 @@ ALIGNED(4) const char debug_fill5[] = _("pksdir0");
 ALIGNED(4) const char debug_fill6[] = _("pksdir0");
 
 
-extern void sub_800641C(struct unkData *, u32, u32);
-
 extern void ResetUnusedInputStruct(void);
 extern u8 sub_8012FD8(struct DebugMenu *);
 extern void sub_8013114(struct DebugMenu *, s32 *);
@@ -73,9 +71,9 @@ extern void sub_80976F8(u8);
 extern void sub_803A3BC(void);
 extern void sub_803A3A0(void);
 
-extern void SetMenuItems(void *menu, struct unkData *, u32, const struct unkData *, const struct MenuItem *entries, u32, u32, u32);
+extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_8035CF4(struct DebugMenu *, u32, u32);
-extern void sub_8035CC0(struct unkData *, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
 void CreateDebugMenu(void)
 {

@@ -5,6 +5,7 @@
 #include "constants/species.h"
 #include "menu.h"
 #include "memory.h"
+#include "text.h"
 
 struct PostOfficeHelper
 {
@@ -23,12 +24,6 @@ struct PostOfficeHelper
 extern struct PostOfficeHelper *gPostOfficeHelper;
 
 
-struct unkData
-{
-    u8 unk0[20];
-    const u8 *unk20;
-};
-
 struct unkStruct_203B330
 {
     // size: 0x78
@@ -38,8 +33,8 @@ struct unkStruct_203B330
     u8 unkD;
     u8 fillE[2];
     u32 unk10;
-    struct unkData *unk14;
-    struct unkData unk18[3];
+    struct UnkTextStruct2 *unk14;
+    struct UnkTextStruct2 unk18[3];
 };
 extern struct unkStruct_203B330 *gUnknown_203B330;
 
@@ -137,25 +132,25 @@ ALIGNED(4) const char GettingHelp_Text[] = _("Getting Help");
 
 ALIGNED(4) const u8 wonder_mail_fill[] = _("pksdir0");
 
-const struct unkData gUnknown_80E1EFC = 
+const struct UnkTextStruct2 gUnknown_80E1EFC = 
 {
     0, 0, 0, 0,
     3, 0, 0, 0,
     0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
+    0, 0,
+    0, 0,
     NULL
 };
 
 const u8 gUnkData_80E1F14[] = {1, 0, 8, 0};
 
-const struct unkData gUnknown_80E1F18 = 
+const struct UnkTextStruct2 gUnknown_80E1F18 = 
 {
     0, 0, 0, 0,
     6, 0, 0, 0,
     2, 0, 2, 0,
-    0x14, 0, 4, 0,
-    4, 0, 0, 0,
+    0x14, 4,
+    4, 0,
     gUnkData_80E1F14
 };
 
@@ -168,8 +163,6 @@ extern void sub_8031AE8();
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
-extern void sub_800641C(struct unkData *, u32, u32);
-extern void sub_8006518(struct unkData *);
 extern void sub_8031A2C(void);
 extern void sub_801317C(void *);
 
@@ -184,7 +177,7 @@ extern void HandlePostOfficeHelpGetHelpMenuSelection();
 extern void sub_8031988();
 extern s32 sub_80144A4(s32 *);
 extern s32 sub_80969D0(u8);
-extern void sub_8012D08(struct unkData *, s32);
+extern void sub_8012D08(struct UnkTextStruct2 *, s32);
 
 
 u32 CreateHelperPelipperMenu(s16 speciesID)

@@ -10,12 +10,10 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 
 extern struct unkStruct_203B204 *gUnknown_203B204;
-extern struct unkData gUnknown_80DB6DC;
-extern struct unkData gUnknown_80DB6F4;
-extern struct unkData gUnknown_80DB70C;
+extern struct UnkTextStruct2 gUnknown_80DB6DC;
+extern struct UnkTextStruct2 gUnknown_80DB6F4;
+extern struct UnkTextStruct2 gUnknown_80DB70C;
 
-extern void sub_800641C(struct unkData *, u32, u32);
-extern void sub_8006518(struct unkData *);
 extern void sub_8016B24();
 extern void sub_80169BC();
 extern void Felicity_DepositMoney();
@@ -115,17 +113,17 @@ void sub_801645C(void)
     switch(gUnknown_203B204->currState)
     {
         case 2:
-            gUnknown_203B204->unkA8[0].unk0[0] = 0x80;
-            gUnknown_203B204->unkA8[1].unk0[0] = 0x80;
-            gUnknown_203B204->unkA8[2].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[0].fill00[0] = 0x80;
+            gUnknown_203B204->unkA8[1].fill00[0] = 0x80;
+            gUnknown_203B204->unkA8[2].fill00[0] = 0x80;
             gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B204->unkA8, 1, 0);
             break;
         case 8:
         case 11:
-            gUnknown_203B204->unkA8[0].unk0[0] = 0x80;
-            gUnknown_203B204->unkA8[1].unk0[0] = 0x80;
+            gUnknown_203B204->unkA8[0].fill00[0] = 0x80;
+            gUnknown_203B204->unkA8[1].fill00[0] = 0x80;
             gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
             gUnknown_203B204->unkA8[2] = gUnknown_80DB70C;
             ResetUnusedInputStruct();

@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "constants/species.h"
 #include "memory.h"
+#include "text.h"
 
 struct unkStruct_203B2C8
 {
@@ -73,7 +74,6 @@ extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298();
 extern void sub_802F2C0();
 extern u32 sub_8011C34();
-extern void sub_800641C(void *, u32, u32);
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
 extern u32 sub_80144A4(s32 *);

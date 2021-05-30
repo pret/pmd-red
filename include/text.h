@@ -13,9 +13,10 @@ struct UnkTextStruct1 {
 struct UnkTextStruct2 {
     u8 fill00[0x0c];
     s16 unk0c;
-    u8 fill0e[2];
+    s16 unkE;
     s16 unk10;
-    u8 fill12[0x06];
+    s16 unk12;
+    const u8 *unk14;
 };
 
 void LoadCharmaps(void);
@@ -26,4 +27,5 @@ void sub_800898C(void);
 void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
 void sub_8009388(void);
 void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
+void sub_8006518(struct UnkTextStruct2 *);
 #endif

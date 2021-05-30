@@ -1,11 +1,7 @@
 #ifndef KANGASKHAN_STORAGE_H
 #define KANGASKHAN_STORAGE_H
 
-struct unkData
-{
-    u8 unk0[20];
-    u8 *array;
-};
+#include "text.h"
 
 struct unkStruct_203B208
 {
@@ -35,7 +31,7 @@ struct unkStruct_203B208
     u8 unkE6;
     u8 unkE7;
     struct OpenedFile **unkE8;
-    struct unkData unkEC[4];
+    struct UnkTextStruct2 unkEC[4];
 };
 
 #endif
