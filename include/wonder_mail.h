@@ -3,17 +3,25 @@
 
 #include "file_system.h"
 
+
+#define PASSWORD_BUFFER_SIZE 0x36
+
+struct unkData
+{
+    u8 unk0[24];
+};
+
 struct WonderMailStruct_203B2C0
 {
+    // size: 0x548
     u32 unk0;
-    u32 unk4;
-    u8 unk8[0x36];
+    u32 state;
+    u8 passwordBuffer[PASSWORD_BUFFER_SIZE];
     u8 unk3E;
     u32 unk40;
     u32 linkError;
     u16 unk48[232];
     u8 unk218;
-    u8 padding7[3];
     u32 unk21C;
     u8 padding[0x7C];
     u32 unk29C;
@@ -22,8 +30,8 @@ struct WonderMailStruct_203B2C0
     u8 padding8[0x4C];
     u32 unk35C;
     u8 padding5[0x5C];
-    u32 unk3BC;
-    u8 padding4[0x60];
+    struct unkData unk3BC[4];
+    u32 unkfill; // unkStruct_41C?
     struct OpenedFile *faceFile;
     u8 *faceData;
     u16 unk428;
@@ -52,9 +60,8 @@ struct WonderMailStruct_203B2C4
 {
     // size: 0x564
     u8 unk0;
-    u8 padding[3];
     u32 unk4; // wonder mail link status??
-    u8 unk8[0x36]; // Probably a buffer for entry
+    u8 passwordBuffer[PASSWORD_BUFFER_SIZE]; // Probably a buffer for entry
     u8 unk3E;
     u32 unk40;
     u32 linkError; // another link status
@@ -66,8 +73,7 @@ struct WonderMailStruct_203B2C4
     u8 filler310[0x35C - 0x310];
     u32 unk35C;
     u8 filler360[0x3BC - 0x360];
-    u32 unk3BC;
-    u8 filler3C0[0x41C - 0x3C0];
+    struct unkData unk3BC[4];
     struct unkStruct_41C unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;

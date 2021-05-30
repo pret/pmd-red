@@ -19,9 +19,9 @@ struct unkStruct_203B2C8
     /* 0x11 */ u8 unk11;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ u8 unk13;
-    /* 0x14 */ u8 unk14[4]; // Figure out size of this buffer
+    /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
-    u8 unk114[0xA]; // holds species name
+    u8 speciesName[0xA]; // holds species name
     u8 fill118[0x128 - 0x11E];
     u16 unk128;
     u8 unk12A;
@@ -89,7 +89,7 @@ extern void sub_802B5B8();
 extern void sub_802B5FC();
 extern void sub_802B624();
 
-void sub_800D158(u8 *buffer, const char *text, ...);
+void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
 extern void sub_802F204(u8 *, u32);
 extern void sub_803C37C(u8 *, u32, u8 *);
 extern u32 sub_803C200(u8 *, u32);
@@ -183,13 +183,13 @@ void sub_802B3E0(void)
             strcpy(teamNameBuffer,gUnknown_80DF9F0);
         }
         // Print and expand placeholders?
-        sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
+        ExpandPlaceholdersBuffer(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelliper face
-        sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        sub_80141B4(gUnknown_203B2C8->teamName, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 1:
         monName = GetMonSpecies(SPECIES_PELIPPER);
-        strcpy(gUnknown_203B2C8->unk114, monName);
+        strcpy(gUnknown_203B2C8->speciesName, monName);
         gUnknown_203B2C8->unk128 = 0x130;
         gUnknown_203B2C8->unk12A = 2;
         gUnknown_203B2C8->unk12C = 0;
@@ -201,7 +201,7 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk132 = 0;
         gUnknown_203B2C8->unk133 = 10;
         gUnknown_203B2C8->unk134 = 0;
-        sub_802F204(gUnknown_203B2C8->unk114, 0);
+        sub_802F204(gUnknown_203B2C8->speciesName, 0);
         break;
       case 2:
         // I hope you will keep on rescuing your friends

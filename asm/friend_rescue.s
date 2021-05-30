@@ -1542,7 +1542,7 @@ _080335C0:
 	adds r0, r4
 	ldr r1, _080335F0
 	add r2, sp, 0x14
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, [r5]
 	adds r0, r4
 	b _0803388E

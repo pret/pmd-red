@@ -62,7 +62,6 @@ extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
-extern const char *GetFriendAreaName(u8);
 extern s32 sub_8008ED0(u8 *);
 extern void  xxx_call_draw_string(s32 size, u32, u8 *, u32, u32);
 extern const char *GetFriendAreaName(u8);
@@ -73,7 +72,7 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 void LoadTeamRankBadge(u32, u32, u32);
-extern void sub_800D158(u8 *, u32 *, ...);
+extern void ExpandPlaceholdersBuffer(u8 *, u32 *, ...);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 
@@ -316,7 +315,7 @@ void sub_801D894(void)
   // Stored on stack
   u32 *preload_string;
   u32 *r5; // R5
-  u8 auStack116 [96]; // sp +4
+  u8 buffer [96]; // sp +4
   
   if (gUnknown_203B250->currFriendAreaLocation == NONE) {
     location = sub_8098FB4();
@@ -325,12 +324,12 @@ void sub_801D894(void)
     location = GetFriendAreaName(gUnknown_203B250->currFriendAreaLocation);
   }
   // TODO this is def a hack
-  xxx_format_string(location, auStack116, &preload_string + 1, 0);
-  location_length = sub_8008ED0(auStack116);
+  xxx_format_string(location, buffer, &preload_string + 1, 0);
+  location_length = sub_8008ED0(buffer);
   x_coord = (128 - location_length) / 2; // Centers the location name
   sub_8008C54(1);
   sub_80073B8(1);
-  xxx_call_draw_string(x_coord, 4, auStack116, 1, 0);
+  xxx_call_draw_string(x_coord, 4, buffer, 1, 0);
   sub_80073E0(1);
   sub_8008C54(2);
   sub_80073B8(2);
@@ -339,10 +338,10 @@ void sub_801D894(void)
 // Have to load before TeamRank funcs
   r5 = &gUnknown_80DBF3C; // %s #C5%d#R Pts.
   rank = GetRescueTeamRank();
-  sub_800D158(auStack116, r5, GetTeamRankString(rank), GetTeamRankPts());
-  xxx_call_draw_string(32, 4, auStack116, 2, 0);
-  sub_800D158(auStack116, &gUnknown_80DBF4C, gUnknown_203B460->teamMoney);
-  xxx_call_draw_string(32, 18, auStack116, 2, 0);
+  ExpandPlaceholdersBuffer(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
+  xxx_call_draw_string(32, 4, buffer, 2, 0);
+  ExpandPlaceholdersBuffer(buffer, &gUnknown_80DBF4C, gUnknown_203B460->teamMoney);
+  xxx_call_draw_string(32, 18, buffer, 2, 0);
   sub_80073E0(2);
 }
 

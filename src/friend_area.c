@@ -16,7 +16,7 @@ extern const char *gFriendAreaNames[];
 extern const char gUnknown_81098A4;
 extern const char gUnknown_81098AC;
 
-extern void sub_800D158(u8 *buffer, const char *r2, ...);
+extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
 extern void sub_8090FEC(u32, u32 *r1, u32);
 
 const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] = 
@@ -601,7 +601,7 @@ u32 GetFriendAreaPrice(u8 index)
 void sub_8092558(u8 *buffer, u8 index)
 {
     // colors the friend area name green and prints to buffer?
-    sub_800D158(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
+    ExpandPlaceholdersBuffer(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
 void sub_8092578(u8 *buffer, u8 index, u8 r2)
@@ -611,7 +611,7 @@ void sub_8092578(u8 *buffer, u8 index, u8 r2)
     if(r2)
     {
         sub_8090FEC(gFriendAreaSettings[index].price, (&temp[0]), 1);
-        sub_800D158(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, temp);
+        ExpandPlaceholdersBuffer(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, temp);
     }
     else
     {

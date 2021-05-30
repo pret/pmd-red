@@ -703,7 +703,7 @@ _0802ACC8:
 	adds r0, r4
 	ldr r1, _0802AD00
 	add r2, sp, 0x14
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r2, [r5]
 	adds r4, r2, r4
 	movs r0, 0x84
@@ -1174,7 +1174,7 @@ _0802B0AC:
 	adds r0, r4
 	ldr r1, _0802B0E8
 	adds r2, r6, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r2, [r5]
 	adds r4, r2, r4
 	movs r3, 0x84

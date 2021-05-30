@@ -96,7 +96,7 @@ sub_8090208:
 	adds r1, r2
 	ldr r2, [r1]
 	adds r1, r3, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -123,7 +123,7 @@ sub_8090228:
 	ldr r2, [r0]
 	ldrb r3, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _0809026E
 	.align 2, 0
 _08090250: .4byte gDungeons
@@ -137,7 +137,7 @@ _0809025C:
 	ldr r2, [r0]
 	ldrb r3, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _0809026E:
 	pop {r4,r5}
 	pop {r0}
@@ -834,7 +834,7 @@ _080907DA:
 	bne _0809080C
 	ldr r1, _08090808
 	adds r0, r7, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	movs r0, 0
 	b _0809080E
 	.align 2, 0

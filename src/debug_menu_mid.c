@@ -2,6 +2,7 @@
 #include "input.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
+#include "menu.h"
 
 struct unkData
 {
@@ -12,16 +13,11 @@ struct unkData
 struct unkStruct_203B3F0
 {
     // size: 0x138
-    u32 unk0;
-    u8 unk4;
+    u32 state;
+    u8 itemIndex;
     u8 fill5[0x8 - 5];
     u32 unk8;
-    u32 *unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
+    struct MenuItem unkC[3];
     u8 fill24[0x4C - 0x24];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
@@ -43,16 +39,11 @@ extern struct unkStruct_203B3F0 *gUnknown_203B3F0;
 struct unkStruct_203B3F4
 {
     // size: 0xFC
-    u32 unk0;
+    u32 state;
     u8 unk4;
     u8 fill5[0x8 - 5];
     u32 unk8;
-    u32 *unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
+    struct MenuItem unkC[3];
     u8 fill24[0x4C - 0x24];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
@@ -73,8 +64,8 @@ extern struct unkData gUnknown_80E7E64;
 extern struct unkData gUnknown_80E7EA4;
 extern struct unkData gUnknown_80E7E8C;
 
-extern u32 gDebug_NumberText;
-extern u32 gUnknown_80D4970;
+extern const char gDebug_NumberText;
+extern const char *gUnknown_80D4970[];
 
 
 extern void sub_800641C(void *, u32, u32);
@@ -82,13 +73,13 @@ extern void sub_8006518(void *);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801CCD8();
-extern void sub_8012D60(u32 *, u32 **, u32, u32, u32, u32);
+extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8012EA4(u32 *, u32);
 extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
-extern void xxx_call_draw_string(s32, u32, u32 *, u32, u32);
+extern void xxx_call_draw_string(s32, u32, const char *, u32, u32);
 extern u8 sub_8091524(u8);
 extern u32 sub_801CA08(u32);
 extern u8 sub_801CB24();
@@ -135,7 +126,7 @@ u32 sub_803A45C(void)
 
 u32 sub_803A48C(void)
 {
-  switch(gUnknown_203B3F0->unk0) {
+  switch(gUnknown_203B3F0->state) {
     case 0:
     case 1:
         sub_803A740();
@@ -166,7 +157,7 @@ void sub_803A4E8(void)
 
 void sub_803A504(u32 newState)
 {
-    gUnknown_203B3F0->unk0 = newState;
+    gUnknown_203B3F0->state = newState;
     sub_803A51C();
     sub_803A5A0();
 }
@@ -176,7 +167,7 @@ void sub_803A51C(void)
     s32 iVar4;
 
     sub_8006518(gUnknown_203B3F0->unkD8);
-    switch(gUnknown_203B3F0->unk0)
+    switch(gUnknown_203B3F0->state)
     {
         case 3:
             gUnknown_203B3F0->unkD8[1] = gUnknown_80E7E64;
@@ -199,7 +190,7 @@ void sub_803A5A0(void)
 {
   u8 auStack8 [4];
   
-  switch(gUnknown_203B3F0->unk0) {
+  switch(gUnknown_203B3F0->state) {
     case 0:
         sub_801C8C4(2,3,0,10);
         break;
@@ -209,13 +200,13 @@ void sub_803A5A0(void)
     case 2:
         sub_801CCD8();
         sub_803A6F0();
-        sub_8012D60(&gUnknown_203B3F0->unk4C, &gUnknown_203B3F0->unkC, 0, 0, gUnknown_203B3F0->unk8, 2);
+        sub_8012D60(&gUnknown_203B3F0->unk4C, gUnknown_203B3F0->unkC, 0, 0, gUnknown_203B3F0->unk8, 2);
         break;
     case 3:
         gUnknown_203B3F0->unkAC = 3;
         gUnknown_203B3F0->unkA4 = 0;
         gUnknown_203B3F0->unkA8 = 0x3e7;
-        gUnknown_203B3F0->unkA0 = gUnknown_203B460->unk50[gUnknown_203B3F0->unk4];
+        gUnknown_203B3F0->unkA0 = gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex];
         gUnknown_203B3F0->unkB0 = 1;
         gUnknown_203B3F0->unkB4 = &gUnknown_203B3F0->unkD8[1];
         gUnknown_203B3F0->unkB8 = 0x2C;
@@ -224,7 +215,7 @@ void sub_803A5A0(void)
         sub_803A690();
         break;
     case 4:
-        sub_8090A8C(auStack8,gUnknown_203B3F0->unk4,0);
+        sub_8090A8C(auStack8,gUnknown_203B3F0->itemIndex,0);
         sub_801B3C0(auStack8);
         break;
     case 5:
@@ -248,20 +239,20 @@ void sub_803A6F0(void)
   s32 temp1;
   struct unkStruct_203B3F0 *preload;
 
-  gUnknown_203B3F0->unkC = &gDebug_NumberText;
-  gUnknown_203B3F0->unk10 = 2;
+  gUnknown_203B3F0->unkC[0].text = &gDebug_NumberText;
+  gUnknown_203B3F0->unkC[0].menuAction = 2;
   gUnknown_203B3F0->unk8 = 2;
-  if (sub_8091524(gUnknown_203B3F0->unk4) == 0) {
-    gUnknown_203B3F0->unk10 = -1;
+  if (sub_8091524(gUnknown_203B3F0->itemIndex) == 0) {
+    gUnknown_203B3F0->unkC[0].menuAction = -1;
     gUnknown_203B3F0->unk8 = 3;
   }
   preload = gUnknown_203B3F0;
   // this var gets loaded in between the sets... very dumb
   temp1 = 1;
-  preload->unk14 = gUnknown_80D4970;
-  preload->unk18 = 3;
-  preload->unk1C = 0;
-  preload->unk20 = temp1;
+  preload->unkC[1].text = *gUnknown_80D4970;
+  preload->unkC[1].menuAction = 3;
+  preload->unkC[2].text = NULL;
+  preload->unkC[2].menuAction = temp1;
 }
 
 void sub_803A740(void)
@@ -271,11 +262,11 @@ void sub_803A740(void)
     case 1:
         break;
     case 3:
-        gUnknown_203B3F0->unk4 = sub_801CB24();
+        gUnknown_203B3F0->itemIndex = sub_801CB24();
         sub_803A504(2);
         break;
     case 4:
-        gUnknown_203B3F0->unk4 = sub_801CB24();
+        gUnknown_203B3F0->itemIndex = sub_801CB24();
         sub_803A504(4);
         break;
     case 2:
@@ -316,7 +307,7 @@ void sub_803A810(void)
   switch(sub_8013BBC(&gUnknown_203B3F0->unk9C))
   {
       case 3:
-        gUnknown_203B460->unk50[gUnknown_203B3F0->unk4] = gUnknown_203B3F0->unk9C;
+        gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex] = gUnknown_203B3F0->unk9C;
         // Fallthrough needed to match
       case 2:
         sub_803A504(1);
@@ -355,7 +346,7 @@ u32 sub_803A888(void)
 
 u32 sub_803A8B8(void)
 {
-  switch(gUnknown_203B3F4->unk0) {
+  switch(gUnknown_203B3F4->state) {
     case 0:
     case 1:
         sub_803AAC4();
@@ -383,7 +374,7 @@ void sub_803A908(void)
 
 void sub_803A924(u32 newState)
 {
-    gUnknown_203B3F4->unk0 = newState;
+    gUnknown_203B3F4->state = newState;
     sub_803A93C();
     sub_803A9AC();
 }
@@ -392,7 +383,7 @@ void sub_803A93C(void)
 {
     s32 iVar4;
     sub_8006518(gUnknown_203B3F4->unk9C);
-    if(gUnknown_203B3F4->unk0 == 2)
+    if(gUnknown_203B3F4->state == 2)
     {
         gUnknown_203B3F4->unk9C[2] = gUnknown_80E7EA4;
     }
@@ -409,7 +400,7 @@ void sub_803A93C(void)
 
 void sub_803A9AC(void)
 {
-  switch(gUnknown_203B3F4->unk0) {
+  switch(gUnknown_203B3F4->state) {
     case 0:
         sub_80211AC(0,3);
         break;
@@ -419,7 +410,7 @@ void sub_803A9AC(void)
     case 2:
         sub_8021494();
         sub_803AA34();
-        sub_8012D60(&gUnknown_203B3F4->unk4C,&gUnknown_203B3F4->unkC,0,0,gUnknown_203B3F4->unk8,2);
+        sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->unkC,0,0,gUnknown_203B3F4->unk8,2);
         break;
     case 3:
         sub_8021774(gUnknown_203B3F4->unk4,1,0);

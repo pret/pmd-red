@@ -1,0 +1,300 @@
+{
+	"tables": [{
+		"name": "MtThunder_1F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 1875
+			},
+			{
+				"species": "SPECIES_NIDORAN_M",
+				"level": 12,
+				"probability": 3125
+			},
+			{
+				"species": "SPECIES_ELECTRIKE",
+				"level": 12,
+				"probability": 3125
+			},
+			{
+				"species": "SPECIES_CACNEA",
+				"level": 11,
+				"probability": 1875
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_2F_4F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_WEEDLE",
+				"level": 8,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_PIDGEOTTO",
+				"level": 11,
+				"probability": 2381
+			},
+			{
+				"species": "SPECIES_NIDORAN_M",
+				"level": 12,
+				"probability": 2380
+			},
+			{
+				"species": "SPECIES_ELECTRIKE",
+				"level": 12,
+				"probability": 2381
+			},
+			{
+				"species": "SPECIES_CACNEA",
+				"level": 11,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_5F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_BEEDRILL",
+				"level": 10,
+				"probability": 1333
+			},
+			{
+				"species": "SPECIES_PIDGEOTTO",
+				"level": 11,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_ELECTABUZZ",
+				"level": 12,
+				"probability": 2666
+			},
+			{
+				"species": "SPECIES_STANTLER",
+				"level": 9,
+				"probability": 2667
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_6F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_BEEDRILL",
+				"level": 10,
+				"probability": 1538
+			},
+			{
+				"species": "SPECIES_ELECTABUZZ",
+				"level": 12,
+				"probability": 3077
+			},
+			{
+				"species": "SPECIES_AMPHAROS",
+				"level": 12,
+				"probability": 2308
+			},
+			{
+				"species": "SPECIES_STANTLER",
+				"level": 9,
+				"probability": 3077
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_7F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_BEEDRILL",
+				"level": 10,
+				"probability": 1111
+			},
+			{
+				"species": "SPECIES_ELECTABUZZ",
+				"level": 12,
+				"probability": 2222
+			},
+			{
+				"species": "SPECIES_AMPHAROS",
+				"level": 12,
+				"probability": 1667
+			},
+			{
+				"species": "SPECIES_GLIGAR",
+				"level": 12,
+				"probability": 2778
+			},
+			{
+				"species": "SPECIES_STANTLER",
+				"level": 9,
+				"probability": 2222
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_8F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_BEEDRILL",
+				"level": 10,
+				"probability": 870
+			},
+			{
+				"species": "SPECIES_ELECTABUZZ",
+				"level": 12,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_AMPHAROS",
+				"level": 12,
+				"probability": 1304
+			},
+			{
+				"species": "SPECIES_GLIGAR",
+				"level": 12,
+				"probability": 2174
+			},
+			{
+				"species": "SPECIES_STANTLER",
+				"level": 9,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_MANECTRIC",
+				"level": 9,
+				"probability": 2174
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_9F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_GROWLITHE",
+				"level": 10,
+				"probability": 1905
+			},
+			{
+				"species": "SPECIES_AMPHAROS",
+				"level": 12,
+				"probability": 1428
+			},
+			{
+				"species": "SPECIES_GLIGAR",
+				"level": 12,
+				"probability": 2381
+			},
+			{
+				"species": "SPECIES_STANTLER",
+				"level": 9,
+				"probability": 1905
+			},
+			{
+				"species": "SPECIES_MANECTRIC",
+				"level": 9,
+				"probability": 2381
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtThunder_10F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_GROWLITHE",
+				"level": 10,
+				"probability": 2353
+			},
+			{
+				"species": "SPECIES_AMPHAROS",
+				"level": 12,
+				"probability": 1765
+			},
+			{
+				"species": "SPECIES_GLIGAR",
+				"level": 12,
+				"probability": 2941
+			},
+			{
+				"species": "SPECIES_MANECTRIC",
+				"level": 9,
+				"probability": 2941
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}

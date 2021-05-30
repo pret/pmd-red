@@ -76,7 +76,7 @@ void sub_800D098(void)
     while(REG_KEYINPUT != KEYS_MASK){} // All buttons
 }
 
-void sub_800D158(u8 *buffer, const char *text, ...)
+void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...)
 {
     va_list vArgv;
     va_start(vArgv, text);

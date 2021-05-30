@@ -76,7 +76,7 @@ extern void sub_803084C();
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC();
 extern void sub_8030D40(u8, u32);
-extern void sub_8006518(u32 *r0);
+extern void sub_8006518(void *r0);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8030810(u32);
 extern void sub_8035CC0(u32 *r0, u32);
@@ -178,7 +178,6 @@ extern void sub_8030D40(u8, u32);
 extern u32 sub_8030768(u32);
 extern void sub_803084C(void);
 extern s8 sub_80307EC(void);
-extern void sub_8006518(u32 *);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_8035CC0(u32 *, u32);
@@ -200,7 +199,7 @@ extern void sub_8011C28(u32);
 
 void sub_8028B04(u32 r0)
 {
-    gUnknown_203B2C0->unk4 = r0;
+    gUnknown_203B2C0->state = r0;
     nullsub_130();
     sub_8028348();
 }
@@ -644,7 +643,7 @@ void sub_8029044(void)
         case 4:
             gUnknown_203B2C0->unk0 = 0x1F;
             gUnknown_203B2C0->unk218 = sub_80307EC();
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8030D40(gUnknown_203B2C0->unk218, 0);
@@ -680,7 +679,7 @@ void sub_80290F0(void)
             break;
         case 12:
             gUnknown_203B2C0->unk0 = 0x3D;
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8030D40(gUnknown_203B2C0->unk218, 0);
@@ -705,7 +704,7 @@ void sub_80291AC(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(&(gUnknown_203B2C0->unk3BC), 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_803092C();
             if(gUnknown_203B2C0->unk0 == 0x3D)
             {
@@ -892,7 +891,7 @@ void sub_80293F4(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x1C, (gUnknown_203B2C0->unk8), &temp.unk0))
+                switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp.unk0))
                 {
                     case 8:
                     case 9:
@@ -937,7 +936,7 @@ void sub_80293F4(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(&(gUnknown_203B2C0->unk3BC), 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_8028B04(1);
             break;
         default:
@@ -1008,7 +1007,7 @@ void sub_80295D8(void)
         case 4:
             gUnknown_203B2C0->unk0 = 0x2A;
             gUnknown_203B2C0->unk218 = sub_80307EC();
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8030D40(gUnknown_203B2C0->unk218, 0);
@@ -1044,7 +1043,7 @@ void sub_8029684(void)
             break;
         case 0xC:
             gUnknown_203B2C0->unk0 = 0x3D;
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8030D40(gUnknown_203B2C0->unk218, 0);
@@ -1067,7 +1066,7 @@ void sub_8029740(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(&(gUnknown_203B2C0->unk3BC), 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_803092C();
             if(gUnknown_203B2C0->unk0 == 0x3D)
             {
@@ -1118,7 +1117,7 @@ void sub_80297D4(void)
         case 4:
             gUnknown_203B2C0->unk0 = 0x33;
             gUnknown_203B2C0->unk544 = sub_8023B44();
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8024458(gUnknown_203B2C0->unk544, 0);
@@ -1144,7 +1143,7 @@ void sub_8029884(void)
             break;
         case 0xC:
             gUnknown_203B2C0->unk0 = 0x3D;
-            sub_8006518(&(gUnknown_203B2C0->unk3BC));
+            sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
             sub_8024458(gUnknown_203B2C0->unk544, 0);
@@ -1176,7 +1175,7 @@ void sub_8029944(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            sub_800641C(&(gUnknown_203B2C0->unk3BC), 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_8023B7C(1);
             if(gUnknown_203B2C0->unk0 == 0x3D)
             {
@@ -1316,7 +1315,7 @@ void sub_8029AF4(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(&(gUnknown_203B2C0->unk3BC), 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_8028B04(0x3C);
             break;
         case 1:
@@ -1361,8 +1360,8 @@ u32 sub_8029B50(void)
   gUnknown_203B2C4->unk428 = 2;
   gUnknown_203B2C4->unk42A = 8;
 
-  for(counter = 0; counter < 0x36; counter++){
-    gUnknown_203B2C4->unk8[counter] = 0;
+  for(counter = 0; counter < PASSWORD_BUFFER_SIZE; counter++){
+    gUnknown_203B2C4->passwordBuffer[counter] = 0;
   }
 
   gUnknown_203B2C4->unk534 = 3;
@@ -1592,7 +1591,7 @@ void sub_8029F98(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, 4);
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct unkStruct_41C));
   gUnknown_203B2C4->unk41C.unk41E = 0;
   gUnknown_203B2C4->unk41C.unk41D = 1;
   gUnknown_203B2C4->unk41C.unk41C = 0;
@@ -1637,7 +1636,7 @@ void sub_802A050(void)
         case 2:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
             sub_802B2BC(0x1B);
             break;
         case 1:
@@ -1683,7 +1682,7 @@ void sub_802A0C8(void)
     case 4:
         gUnknown_203B2C4->unk4 = 0x10;
         gUnknown_203B2C4->unk218 = sub_80307EC();
-        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_8030D40(gUnknown_203B2C4->unk218,0);
@@ -1719,7 +1718,7 @@ void sub_802A174(void)
         break;
       case 0xC:
         gUnknown_203B2C4->unk4 = 0x2b;
-        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_8030D40(gUnknown_203B2C4->unk218,0);
@@ -1743,7 +1742,7 @@ void sub_802A230(void)
       case 3:
         sub_8030DE4();
         ResetUnusedInputStruct();
-        sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+        sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
         sub_803092C();
         if (gUnknown_203B2C4->unk4 == 0x2b) {
             sub_8035CF4(&gUnknown_203B2C4->unk21C, 3, 1);
@@ -1778,7 +1777,7 @@ void sub_802A28C(void)
     case 4:
         gUnknown_203B2C4->unk4 = 0x13;
         gUnknown_203B2C4->unk41C.unk41E = sub_801CB24();
-        sub_8006518(&gUnknown_203B2C4->unk3BC);
+        sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_801B3C0(&gUnknown_203B2C4->unk41C);
@@ -1795,7 +1794,7 @@ void sub_802A33C(void)
      case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(&gUnknown_203B2C4->unk3BC,1,1);
+        sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
         sub_801CB5C(1);
         if (gUnknown_203B2C4->unk4 == 0x2b) {
             sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
@@ -1829,7 +1828,7 @@ void sub_802A39C(void)
             break;
       case 0xC:
             gUnknown_203B2C4->unk4 = 0x2b;
-            sub_8006518(&gUnknown_203B2C4->unk3BC);
+            sub_8006518(gUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0,1,1);
             sub_801B3C0(&gUnknown_203B2C4->unk41C);
@@ -1913,7 +1912,7 @@ void sub_802A50C(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->unk8,&temp.unk0)) 
+        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0)) 
         {
             case 7:
             case 8:
@@ -1956,7 +1955,7 @@ void sub_802A50C(void)
   case 2:
     sub_80155F0();
     ResetUnusedInputStruct();
-    sub_800641C(&gUnknown_203B2C4->unk3BC, 1, 1);
+    sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
     sub_802B2BC(1);
     break;
   }

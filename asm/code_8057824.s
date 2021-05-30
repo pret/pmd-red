@@ -16402,7 +16402,7 @@ _0805FCEC:
 	adds r0, r5, 0
 	ldr r1, _0805FD38
 	adds r2, r4, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, _0805FD30
 	adds r1, r6, 0
 	bl sub_8013800
@@ -28994,7 +28994,7 @@ _08066208:
 	ldrb r2, [r0]
 	add r0, sp, 0x4
 	ldr r1, _08066258
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	movs r0, 0
 	ldrsh r1, [r5, r0]
 	ldr r0, _0806625C
@@ -29090,7 +29090,7 @@ _080662C4:
 	adds r0, r4
 	ldrb r2, [r0]
 	add r0, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, _0806634C
 	lsls r1, r4, 1
 	adds r1, r5, r1
@@ -29192,7 +29192,7 @@ _080663A0:
 	adds r0, r4
 	ldrb r2, [r0]
 	add r0, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, _08066428
 	lsls r1, r4, 1
 	adds r1, r5, r1
@@ -50412,7 +50412,7 @@ sub_8070968:
 	ldr r0, _0807098C
 	ldr r3, [r0]
 	adds r0, r4, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _080709BA
 	.align 2, 0
 _08070988: .4byte gUnknown_8106FA4

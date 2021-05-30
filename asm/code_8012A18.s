@@ -510,7 +510,7 @@ _08012F62:
 _08012F64:
 	mov r0, r8
 	ldr r1, _08012FBC
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	adds r0, r5, 0
 	adds r0, 0x14
 	mov r1, r9
@@ -4504,7 +4504,7 @@ _08014E60:
 	adds r5, 0x1
 	ldr r2, [r0]
 	mov r0, sp
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _08014E78:
 	mov r4, sp
 	b _08014F0E
@@ -4525,7 +4525,7 @@ _08014E84:
 	subs r2, 0x30
 	adds r5, 0x1
 	mov r0, sp
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	mov r0, sp
 	ldrb r1, [r0]
 	cmp r1, 0
@@ -4558,7 +4558,7 @@ _08014EC4:
 	subs r2, 0x30
 	adds r5, 0x1
 	mov r0, sp
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	mov r0, sp
 	ldrb r1, [r0]
 	cmp r1, 0
@@ -6139,7 +6139,7 @@ _08015B04:
 	add r0, sp, 0x4
 	ldr r1, _08015B30
 	adds r2, r5, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	mov r1, r8
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x19]
@@ -6169,7 +6169,7 @@ _08015B34:
 	mov r0, r10
 	ldr r1, _08015B78
 	adds r2, r5, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	mov r3, r8
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x19]
@@ -6477,7 +6477,7 @@ _08015DD0:
 	adds r0, 0xF8
 	ldr r2, [r0]
 	add r0, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _08015DEE
 	.align 2, 0
 _08015DDC: .4byte gUnknown_80DB65C
@@ -6487,7 +6487,7 @@ _08015DE0:
 	adds r0, 0xF8
 	ldr r2, [r0]
 	add r0, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _08015DEE:
 	movs r0, 0
 	str r0, [sp]

@@ -1388,7 +1388,7 @@ _0803DB54:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _0803DBCA
 	.align 2, 0
 _0803DB84: .4byte gUnknown_80F60F8
@@ -1411,7 +1411,7 @@ _0803DBBC:
 	adds r3, 0x30
 	add r0, sp, 0x4
 	adds r2, r6, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _0803DBCA:
 	add r0, sp, 0x4
 	bl CalcStringWidth

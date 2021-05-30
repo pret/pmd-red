@@ -96,7 +96,7 @@ extern void sub_80920D8(u8 *);
 extern struct unkStruct_808D33C *sub_808D33C(void);
 extern u8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
-extern void sub_800D158(u8 *buffer, u8 *text, ...);
+extern void ExpandPlaceholdersBuffer(u8 *buffer, u8 *text, ...);
 extern s32 sub_8011C1C(void);
 extern u8 *sub_809769C(void);
 extern u32 sub_8097778(void);
@@ -244,7 +244,7 @@ void DrawLoadScreenText(void)
   else {
     strcpy(teamNameBuffer,&gUnknown_80E77F8);
   }
-  sub_800D158(gUnknown_203B374->formattedTeamName,&gUnknown_80E7804,teamNameBuffer);
+  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedTeamName,&gUnknown_80E7804,teamNameBuffer);
   xxx_call_draw_string(64,0,gUnknown_203B374->formattedTeamName,0,0);
 
   // Draw Player Name
@@ -255,7 +255,7 @@ void DrawLoadScreenText(void)
   else {
     sub_80922B4(playerName,&playerInfo->unk4C,10);
   }
-  sub_800D158(gUnknown_203B374->formattedPlayerName,&gUnknown_80E7804,playerName);
+  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedPlayerName,&gUnknown_80E7804,playerName);
   xxx_call_draw_string(64,12,gUnknown_203B374->formattedPlayerName,0,0);
 
   // Draw Location Info
@@ -265,25 +265,25 @@ void DrawLoadScreenText(void)
         sub_8090228(gUnknown_203B374->formattedLocation,sub_809769C());
     }
     else {
-        sub_800D158(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
+        ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
     }
   }
   else {
     switch(sub_8011C1C())
     {
         default:
-            sub_800D158(gUnknown_203B374->formattedLocation,&gUnknown_80E7824); // Location unknown
+            ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E7824); // Location unknown
             break;
         case 1:
             switch(sub_8001658(0,24))
             {
                 default:
-                    sub_800D158(auStack356,&gUnknown_80E7804,sub_8098FB4());
+                    ExpandPlaceholdersBuffer(auStack356,&gUnknown_80E7804,sub_8098FB4());
                     xxx_format_string(auStack356,gUnknown_203B374->formattedLocation,gUnknown_203B374->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:
-                    sub_800D158(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
+                    ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
                     break;
             }
             break;
@@ -292,7 +292,7 @@ void DrawLoadScreenText(void)
             {
                 sub_8090228(gUnknown_203B374->formattedLocation,sub_809769C());
             } else {
-                sub_800D158(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
+                ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
             }
             break;
     }
@@ -301,12 +301,12 @@ void DrawLoadScreenText(void)
 
   // Draw Play Time
   DeconstructPlayTime(gPlayTimeRef,&hours,&minutes,&seconds);
-  sub_800D158(gUnknown_203B374->formattedPlayTime,&gUnknown_80E7838,hours,minutes,seconds);
+  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedPlayTime,&gUnknown_80E7838,hours,minutes,seconds);
   xxx_call_draw_string(64,36,gUnknown_203B374->formattedPlayTime,0,0);
 
   // Draw Adventures Info 
   numAdventures = sub_8097778();
-  sub_800D158(gUnknown_203B374->formattedAdventures,&gUnknown_80E7848,numAdventures); // %d
+  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedAdventures,&gUnknown_80E7848,numAdventures); // %d
   xxx_call_draw_string(64,48,gUnknown_203B374->formattedAdventures,0,0);
 
   // Draw Helper Info
@@ -314,10 +314,10 @@ void DrawLoadScreenText(void)
     sub_808D930(speciesHelper,gUnknown_203B484->unkC);
     // TODO very hacky match here
     sub_80922B4(nameHelper,(u8 *)(&gUnknown_203B484 + 0x14),10);
-    sub_800D158(gUnknown_203B374->formattedHelperInfo,&gUnknown_80E784C,nameHelper,speciesHelper); // %s (%s)
+    ExpandPlaceholdersBuffer(gUnknown_203B374->formattedHelperInfo,&gUnknown_80E784C,nameHelper,speciesHelper); // %s (%s)
   }
   else {
-    sub_800D158(gUnknown_203B374->formattedHelperInfo,&gUnknown_80E7854); // -----
+    ExpandPlaceholdersBuffer(gUnknown_203B374->formattedHelperInfo,&gUnknown_80E7854); // -----
   }
   xxx_call_draw_string(64,60,gUnknown_203B374->formattedHelperInfo,0,0);
 
@@ -404,7 +404,7 @@ void DrawLoadScreenText(void)
 	"\tlsls r4, 1\n"
 	"\tadds r0, r4\n"
 	"\tldr r1, _08039590\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tldr r2, [r5]\n"
 	"\tadds r2, r4\n"
 	"\tmovs r0, 0\n"
@@ -443,7 +443,7 @@ void DrawLoadScreenText(void)
 	"\tadds r0, r4\n"
 	"\tldr r6, _080395F4\n"
 	"\tadds r1, r6, 0\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tldr r2, [r5]\n"
 	"\tadds r2, r4\n"
 	"\tmovs r0, 0\n"
@@ -505,7 +505,7 @@ void DrawLoadScreenText(void)
 	"\tadds r2, r0, 0\n"
 	"\tadd r0, sp, 0x4\n"
 	"\tadds r1, r6, 0\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tldr r0, [r5]\n"
 	"\tmovs r3, 0xF6\n"
 	"\tlsls r3, 1\n"
@@ -549,7 +549,7 @@ void DrawLoadScreenText(void)
 "_08039690:\n"
 	"\tldr r1, _0803974C\n"
 "_08039692:\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 "_08039696:\n"
 	"\tldr r7, _08039750\n"
 	"\tldr r2, [r7]\n"
@@ -580,7 +580,7 @@ void DrawLoadScreenText(void)
 	"\tadd r4, sp, 0x14C\n"
 	"\tldr r4, [r4]\n"
 	"\tstr r4, [sp]\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tldr r2, [r7]\n"
 	"\tadds r2, r5\n"
 	"\tstr r6, [sp]\n"
@@ -595,7 +595,7 @@ void DrawLoadScreenText(void)
 	"\tlsls r4, 2\n"
 	"\tadds r0, r4\n"
 	"\tldr r1, _0803975C\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tldr r2, [r7]\n"
 	"\tadds r2, r4\n"
 	"\tstr r6, [sp]\n"
@@ -629,7 +629,7 @@ void DrawLoadScreenText(void)
 	"\tldr r1, _08039768\n"
 	"\tadds r2, r4, 0\n"
 	"\tadds r3, r5, 0\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 	"\tb _0803977C\n"
 	"\t.align 2, 0\n"
 "_0803974C: .4byte gUnknown_80E780C\n"
@@ -647,7 +647,7 @@ void DrawLoadScreenText(void)
 	"\tlsls r1, 2\n"
 	"\tadds r0, r1\n"
 	"\tldr r1, _080397B0\n"
-	"\tbl sub_800D158\n"
+	"\tbl ExpandPlaceholdersBuffer\n"
 "_0803977C:\n"
 	"\tldr r0, _080397AC\n"
 	"\tldr r2, [r0]\n"

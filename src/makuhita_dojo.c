@@ -56,7 +56,7 @@ u32 CreateMakuhitaShop(u32 param_1)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B318 = MemoryAlloc(0xcc,8);
+  gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318),8);
   gUnknown_203B318->unk10 = -1;
   gUnknown_203B318->unk0 = param_1;
   switch(param_1) {
