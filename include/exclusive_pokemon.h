@@ -5,7 +5,7 @@
 
 struct ExclusivePokemon
 {
-    u16 poke_id;
+    s16 poke_id;
     bool8 in_rrt; // red rescue team
     bool8 in_brt; // blue rescue team
 };

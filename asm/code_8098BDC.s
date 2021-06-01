@@ -3247,7 +3247,7 @@ _0809A8A0: .4byte gUnknown_3001B64
 _0809A8A4: .4byte 0x0000043c
 _0809A8A8: .4byte 0x0000ffff
 _0809A8AC: .4byte gAvailablePokemonNames
-_0809A8B0: .4byte gUnknown_811615C
+_0809A8B0: .4byte gInvalidityText
 _0809A8B4: .4byte gPlayerName
 	thumb_func_end sub_809A83C
 
@@ -3536,7 +3536,7 @@ _0809AAE6:
 	b _0809AB3C
 	.align 2, 0
 _0809AB28: .4byte gAvailablePokemonNames
-_0809AB2C: .4byte gUnknown_811616C
+_0809AB2C: .4byte gUndefineText
 _0809AB30: .4byte gPlayerName
 _0809AB34:
 	mov r0, r9

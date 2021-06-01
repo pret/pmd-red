@@ -402,8 +402,8 @@ _08098240: .4byte gUnknown_203B498
 _08098244: .4byte gExclusivePokemon
 	thumb_func_end UnlockExclusivePokemon
 
-	thumb_func_start sub_8098248
-sub_8098248:
+	thumb_func_start WriteExclusivePokemon
+WriteExclusivePokemon:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -496,10 +496,10 @@ _080982E4:
 	.align 2, 0
 _08098300: .4byte gUnknown_203B498
 _08098304: .4byte 0x000001a7
-	thumb_func_end sub_8098248
+	thumb_func_end WriteExclusivePokemon
 
-	thumb_func_start sub_8098308
-sub_8098308:
+	thumb_func_start ReadExclusivePokemon
+ReadExclusivePokemon:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -600,7 +600,7 @@ _0809839C:
 	.align 2, 0
 _080983D0: .4byte gUnknown_203B498
 _080983D4: .4byte 0x000001a7
-	thumb_func_end sub_8098308
+	thumb_func_end ReadExclusivePokemon
 
 
         .align 2,0

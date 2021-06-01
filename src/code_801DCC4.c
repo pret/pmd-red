@@ -2,16 +2,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "gUnknown_203B46C.h"
-
-struct unkData
-{
-    u8 unk0[0xB];
-    u16 unkB;
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u32 *unk14;
-};
+#include "text.h"
 
 struct unkStruct_203B25C
 {
@@ -25,7 +16,7 @@ struct unkStruct_203B25C
     struct MenuItem unk6C[3];
     u8 fill84[0xAC - 0x84];
     u16 unkAC[8];
-    struct unkData unkBC[4];
+    struct UnkTextStruct2 unkBC[4];
 };
 
 
@@ -58,9 +49,12 @@ extern void sub_801E2C4(void);
 extern s32 sub_80144A4(s32 *);
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
+extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
+extern const struct UnkTextStruct2 gUnknown_80DBFCC;
+extern const struct UnkTextStruct2 gUnknown_80DBFB0;
 
 extern const char gOthers_MenuOption[];
 extern const char gUnknown_80DBFEC[];
@@ -131,6 +125,60 @@ void sub_801DD6C(u32 newState)
     sub_801DED0();
 }
 
+#ifdef NONMATCHING
+void sub_801DD84(void)
+{
+    s32 iVar3;
+    sub_8006518(gUnknown_203B25C->unkBC);
+    switch(gUnknown_203B25C->state)
+    {
+        case 0:
+            CreateOthersMenu();
+            // TODO probably could be cleaned up to actually match
+            iVar3 = 0;
+            if (gUnknown_203B25C->unkAC[iVar3] == 0) {
+                gUnknown_203B25C->unk18 = gUnknown_203B25C->unk6C[iVar3].menuAction;
+            }
+            else {
+                do {
+                    iVar3++;
+                    if(iVar3 > 7)
+                        break;
+                    if(gUnknown_203B25C->unkAC[iVar3] == 0){
+                        gUnknown_203B25C->unk18 = gUnknown_203B25C->unk6C[iVar3].menuAction;
+                        break;
+                    }
+                } while (iVar3 < 8);
+            }
+            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            {
+                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFCC;
+            }
+            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFB0;
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->unk6C);
+            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
+            break;
+        case 1:
+            CreateOthersMenu();
+            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            {
+                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+            }
+            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->unk6C);
+            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
+            break;
+        default:
+            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            {
+                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+            }
+            break;
+    }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B25C->unkBC, 1, 1);
+}
+#else
 NAKED
 void sub_801DD84(void)
 {
@@ -297,6 +345,7 @@ void sub_801DD84(void)
 	"\t.align 2, 0\n"
 "_0801DECC: .4byte gUnknown_203B25C");
 }
+#endif
 
 void sub_801DED0(void)
 {

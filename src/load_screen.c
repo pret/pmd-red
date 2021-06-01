@@ -94,7 +94,7 @@ extern u8 *sub_8098FB4();
 extern void ExpandPlaceholdersBuffer(u8 *buffer, u8 *text, ...);
 extern s32 sub_8011C1C(void);
 extern u8 *sub_809769C(void);
-extern u32 sub_8097778(void);
+extern u32 GetNumAdventures(void);
 extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
 extern void sub_8090228(u8 *, u8 *);
 extern void sub_80922B4(u8 *, u8 *, u32);
@@ -300,7 +300,7 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(64,36,gUnknown_203B374->formattedPlayTime,0,0);
 
   // Draw Adventures Info 
-  numAdventures = sub_8097778();
+  numAdventures = GetNumAdventures();
   ExpandPlaceholdersBuffer(gUnknown_203B374->formattedAdventures,&gUnknown_80E7848,numAdventures); // %d
   xxx_call_draw_string(64,48,gUnknown_203B374->formattedAdventures,0,0);
 
@@ -583,7 +583,7 @@ void DrawLoadScreenText(void)
 	"\tmovs r1, 0x24\n"
 	"\tmovs r3, 0\n"
 	"\tbl xxx_call_draw_string\n"
-	"\tbl sub_8097778\n"
+	"\tbl GetNumAdventures\n"
 	"\tadds r2, r0, 0\n"
 	"\tldr r0, [r7]\n"
 	"\tmovs r4, 0x8D\n"

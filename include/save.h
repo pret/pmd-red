@@ -4,12 +4,21 @@
 #include "play_time.h"
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
+#include "pokemon.h"
+#include "item.h"
 
 enum
 {
     SAVE_COMPLETED,
     SAVE_NOT_WRTTEN,
     SAVE_FAILED
+};
+
+enum
+{
+    READ_SAVE_VALID,
+    READ_SAVE_FAILED,
+    READ_SAVE_CHECKSUM_ERROR
 };
 
 
@@ -20,8 +29,8 @@ struct UnkStruct_sub_8011DAC {
     u32 unk414;
     u32 unk418;
     u32 unk41C;
-    u32 unk420;
-    u32 unk424;
+    u32 RngState;
+    u32 savedRecruitedPokemon;
     u32 unk428;
     u8 fill42C[0x4];
     u32 unk430;
@@ -35,8 +44,8 @@ struct UnkStruct_sub_8011DAC {
 
 
 struct UnkStruct_203B184 {
-    /* 0x0 */ u32 *unk0;
-    /* 0x4 */ u32 *recruitedPokemon;
+    /* 0x0 */ struct unkStruct_203B460 *MoneyItems;
+    /* 0x4 */ struct unkStruct_203B45C *recruitedPokemon;
     /* 0x8 */ u8 *unk8;
     /* 0xC */ u8 *unkC;
     /* 0x10 */ u32 *unk10;
@@ -57,7 +66,7 @@ struct UnkStruct_203B184 {
     u8 *unk04C;
     u32 unk050;
     u32 unk054;
-    u32 unk058;
+    u32 RngState;
 };
 
 u32 sub_8011C1C(void);

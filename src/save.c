@@ -37,13 +37,13 @@ struct unkStruct_203B18C
     u32 saveStatus;
     struct OpenedFile *faceFile;
     u8 *faceData;
-     u16 unk14;
-     u16 unk16;
-     u8 unk18;
-     u8 unk19;
-     u8 unk1A;
-     u8 unk1B;
-     u16 pokeID;
+    u16 unk14;
+    u16 unk16;
+    u8 unk18;
+    u8 unk19;
+    u8 unk1A;
+    u8 unk1B;
+    u16 pokeID;
 };
 
 extern struct unkStruct_203B18C *gUnknown_203B18C;
@@ -51,9 +51,9 @@ extern struct unkStruct_203B18C *gUnknown_203B18C;
 struct unkStruct_203B190
 {
     s32 state;
-    u8 *unk4;
-    u32 unk8;
-    u8 unkC;
+    u8 *dest;
+    u32 size;
+    bool8 saveValid;
 };
 extern struct unkStruct_203B190 *gUnknown_203B190;
 
@@ -72,8 +72,8 @@ extern struct unkStruct_203B194 *gUnknown_203B194;
 extern s32 gUnknown_202DE28;
 extern u32 gUnknown_203B17C;
 extern char *gUnknown_203B180;
-extern u32 *gRecruitedPokemonRef;
-extern u32 *gUnknown_203B460;
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+extern struct unkStruct_203B460 *gUnknown_203B460;
 extern struct RescueTeamData *gRescueTeamInfoRef;
 extern bool8 *gFriendAreas;
 extern u32 gUnknown_203B46C;
@@ -147,8 +147,8 @@ extern void sub_80140DC();
 extern void sub_8014114();
 extern void sub_80141B4(const char *r0, u32 r1, u8 *r2, u16 r3);
 extern u32 sub_80144A4(u32 *a);
-extern u32 sub_808ED78(u8 *, u32);
-extern u32 sub_808EE9C(void* a, s32 b);
+extern u32 SaveRecruitedPokemon(u8 *, u32);
+extern u32 ReadRecruitedPokemon(void* a, s32 b);
 extern u32 sub_808F154(u8 *, u32);
 extern u32 sub_808F2B0(void* a, s32 b);
 extern u32 sub_8091C68(u8 *, u32);
@@ -167,10 +167,6 @@ extern u32 sub_8097D60(u8 *, u32);
 extern u32 sub_8097D98(void* a, s32 b);
 extern void sub_80993E4();
 extern void sub_800135C(void);
-extern u32 *GetRecruitedPokemon(void);
-extern void InitializeRecruitedPokemon(void);
-extern u32 *GetMoneyItemsInfo(void);
-extern void InitializeMoneyItems(void);
 extern u32 GetGameOptions(void);
 extern void InitializeGameOptions(u8 r0);
 extern u8 *sub_80950F8(void);
@@ -181,7 +177,7 @@ extern void sub_80972F4(void);
 extern u32 sub_8097680(void);
 extern u32 *sub_809769C(void);
 extern void sub_80974E8(void);
-extern void sub_8097748(void);
+extern void ResetNumAdventures(void);
 extern void sub_80993D8(void);
 
 extern struct PlayTimeStruct *gPlayTimeRef;
@@ -302,15 +298,15 @@ u32 ReadSaveSector(s32 *a, u8 *dest, s32 size)
         }
     }
     else {
-        return 1;
+        return READ_SAVE_FAILED;
     }
     if (r1) {
-        return 1;
+        return READ_SAVE_FAILED;
     }
     if (ValidateChecksum(dest, size)) {
-        return 2;
+        return READ_SAVE_CHECKSUM_ERROR;
     }
-    return 0;    
+    return READ_SAVE_VALID;
 }
 
 // Unused
@@ -344,12 +340,12 @@ u32 ReadSaveFromPak(u32 *a)
         if (gUnknown_203B184 == NULL) {
             sub_8011C28(r5->unk41C);
             sub_8011C40(r5->unk418);
-            SetRngState(r5->unk420);
+            SetRngState(r5->RngState);
         }
         else {
             gUnknown_203B184->unk054 = r5->unk41C;
             gUnknown_203B184->unk050 = r5->unk418;
-            gUnknown_203B184->unk058 = r5->unk420;
+            gUnknown_203B184->RngState = r5->RngState;
         }
     }
     if (!r7)
@@ -365,8 +361,8 @@ u32 ReadSaveFromPak(u32 *a)
     }
     if (!r7)
     {
-        r1 = sub_808EE9C(r4, 0x4650);
-        if (r1 != r5->unk424) {
+        r1 = ReadRecruitedPokemon(r4, 0x4650);
+        if (r1 != r5->savedRecruitedPokemon) {
             r7 = 3;
         }
         r4 += 0x4650;
@@ -422,7 +418,7 @@ u32 sub_8011FA8(void)
     struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
     temp = 0x1F;
     temp2 = ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct));
-    if( temp2 == 0)
+    if( temp2 == READ_SAVE_VALID)
     {
         if(r5->unk14 != 0x5071412)
         {
@@ -430,7 +426,7 @@ u32 sub_8011FA8(void)
         }
     }
     temp3 = 0xf1209;
-    if(temp2 == 0)
+    if(temp2 == READ_SAVE_VALID)
     {
         temp3 = r5->unk18;
     }
@@ -445,7 +441,7 @@ bool8 IsSaveCorrupted(void)
     struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
     temp = 0x1F;
     isCorrupted = FALSE;
-    if(ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct)) == 0)
+    if(ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct)) == READ_SAVE_VALID)
     {
         if(r5->unk14 == 0x5071412)
         {
@@ -469,12 +465,12 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
   if (gUnknown_203B184 == NULL) {
     iVar1->unk41C = param_2;
     iVar1->unk418 = sub_8011C34();
-    iVar1->unk420 = GetRngState();
+    iVar1->RngState = GetRngState();
   }
   else {
     iVar1->unk41C = gUnknown_203B184->unk054;
     iVar1->unk418 = gUnknown_203B184->unk050;
-    iVar1->unk420 = gUnknown_203B184->unk058;
+    iVar1->RngState = gUnknown_203B184->RngState;
   }
    iVar1->unk414 = 0x5071412;
   __src = sub_8011C4C();
@@ -486,7 +482,7 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
     MemoryCopy8(iVar1->unk004,gUnknown_203B184->unk04C,0x400);
   }
 
-  iVar1->unk424 = sub_808ED78(array_ptr,0x4650);
+  iVar1->savedRecruitedPokemon = SaveRecruitedPokemon(array_ptr,0x4650);
   array_ptr += 0x4650;
   iVar1->unk428 = sub_808F154(array_ptr,0x258);
   array_ptr += 0x258;
@@ -589,7 +585,7 @@ void sub_80122D0(void)
 {
     sub_8011C28(0);
     sub_8011C40(-1);
-    sub_8097748();
+    ResetNumAdventures();
     ResetPlayTime(gPlayTimeRef);
 }
 
@@ -624,7 +620,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
     gUnknown_203B184 = r0;
     if(r0 != NULL)
     {
-       gUnknown_203B460 = r0->unk0;
+       gUnknown_203B460 = r0->MoneyItems;
        gRecruitedPokemonRef = r0->recruitedPokemon;
        gUnknown_203B480 = r0->unk8;
        gUnknown_203B484 = r0->unkC;
@@ -677,7 +673,7 @@ u8 sub_8012484(void)
             gUnknown_203B188->state = 2;
             break;
         case 2:
-            if(gUnknown_203B188->readStatus != 0)
+            if(gUnknown_203B188->readStatus != READ_SAVE_VALID)
             {
                 if(IsSaveCorrupted())
                 {
@@ -834,12 +830,12 @@ void sub_8012750(void)
     sub_80993E4();
 }
 
-void sub_801277C(u8 *r0, u32 r1)
+void sub_801277C(u8 *dest, u32 size)
 {
     gUnknown_203B190 = MemoryAlloc(sizeof(struct unkStruct_203B190), 5);
-    gUnknown_203B190->unk4 = r0;
-    gUnknown_203B190->unk8 = r1;
-    gUnknown_203B190->unkC = 0;
+    gUnknown_203B190->dest = dest;
+    gUnknown_203B190->size = size;
+    gUnknown_203B190->saveValid = FALSE;
     gUnknown_203B190->state = 1;
 }
 
@@ -855,9 +851,9 @@ u32 sub_80127A8(void)
             break;
         case 1:
             stack_1 = 16;
-            if(sub_8011F9C(&stack_1, gUnknown_203B190->unk4, gUnknown_203B190->unk8) == 0)
+            if(sub_8011F9C(&stack_1, gUnknown_203B190->dest, gUnknown_203B190->size) == READ_SAVE_VALID)
             {
-                gUnknown_203B190->unkC = 1;
+                gUnknown_203B190->saveValid = TRUE;
                 gUnknown_203B190->state = 3;
             }
             else
@@ -883,9 +879,9 @@ u32 sub_80127A8(void)
     return 1;
 }
 
-u8 sub_8012828(void)
+bool8 sub_8012828(void)
 {
-    return gUnknown_203B190->unkC;
+    return gUnknown_203B190->saveValid;
 }
 
 void sub_8012834(void)

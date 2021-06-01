@@ -10,18 +10,18 @@
 #include "save.h"
 #include "gUnknown_203B46C.h"
 #include "text.h"
+#include "exclusive_pokemon.h"
+#include "pokemon.h"
+#include "rescue_team_info.h"
 
 extern void NDS_DebugInit(void);
 extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
-extern void LoadMonsterParameters(void);
 extern void sub_8097670(void);
 extern void LoadGameOptions(void);
 extern void sub_8094C14(void);
-extern void LoadExclusivePokemon(void);
 extern void LoadItemParameters(void);
-extern void LoadRescueTeamInfo(void);
 extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);

@@ -110,7 +110,7 @@ extern void sub_803F878(u32, s32);
 extern void sub_8086A70(struct unkDungeon_8041D5C *, u32, u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void sub_803E9D0(void);
-extern void sub_808C4C4(void);
+extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0();
 extern void sub_808563C(void *);
 extern void sub_80858AC(u32 *, u32);
@@ -579,9 +579,9 @@ void DeoxysPreFightDialogue(void)
     sub_8083EA8(0x1a,0x3c);
     sub_808C550();
     sub_8052910(&gUnknown_81062E8);
-    sub_808C4C4();
+    DeoxysScreenFlash();
     sub_8052910(&gUnknown_8106368);
-    sub_808C4C4();
+    DeoxysScreenFlash();
     sub_8052910(&gUnknown_8106390);
     sub_803E708(10,0x46);
     sub_808563C(sub_808C5AC);
@@ -589,7 +589,7 @@ void DeoxysPreFightDialogue(void)
   }
 }
 
-void sub_808C4C4(void)
+void DeoxysScreenFlash(void)
 {
   s32 iVar1;
   
@@ -619,12 +619,12 @@ void sub_808C550(void)
   sub_803E9D0();
   sub_803E46C(0x46);
   gUnknown_203B418->unk7 = 0;
-  sub_808C4C4();
+  DeoxysScreenFlash();
 }
 
 void sub_808C590(struct unkDungeon_8041D5C *r0)
 {
-    sub_8068FE0(r0, 0x87 << 2, 0);
+    sub_8068FE0(r0, 0x21C, 0);
 }
 
 void sub_808C5A0(struct unkDungeon_8041D5C *r0)
@@ -658,6 +658,7 @@ void sub_808C5C0(void)
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_CELEBI);
 }
 
+// Dummy Celebi Fight Dialogue??
 void nullsub_100(void)
 {
 }
@@ -1190,7 +1191,7 @@ void MedichamResuceDialogue(void)
     sub_806CE68(temp, 0);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(temp);
-    sub_8068FE0(temp, 0x87 << 2, 0);
+    sub_8068FE0(temp, 0x21C, 0);
     gUnknown_203B418->unk4 = 1;
     gUnknown_203B418->unk11 = 4;
 }
@@ -1205,7 +1206,7 @@ void sub_808CB5C(void)
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(4);
-    sub_8068FE0(temp_2, 0x87 << 2, 0);
+    sub_8068FE0(temp_2, 0x21C, 0);
     sub_8085860(temp->unk4, temp->unk6);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
@@ -1280,7 +1281,7 @@ void SmeargleRescueDialogue(void)
     sub_806CE68(temp, 0);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(temp);
-    sub_8068FE0(temp, 0x87 << 2, 0);
+    sub_8068FE0(temp, 0x21C, 0);
     gUnknown_203B418->unk4 = 1;
     gUnknown_203B418->unk11 = 4;
 
@@ -1297,7 +1298,7 @@ void sub_808CD44(void)
     sub_80854D4();
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
-    sub_8068FE0(temp_2, 0x87 << 2, 0);
+    sub_8068FE0(temp_2, 0x21C, 0);
     sub_8085860(temp->unk4, temp->unk6 - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }

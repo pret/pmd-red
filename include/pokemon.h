@@ -112,6 +112,11 @@ struct gPokemon
     /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
 };
 
+void LoadMonsterParameters(void);
+struct unkStruct_203B45C *GetRecruitedPokemon(void);
+void InitializeRecruitedPokemon(void);
+
+
 void CopySpeciesNametoBuffer(u8 * buffer, s16 index);
 void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index);
 void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index);

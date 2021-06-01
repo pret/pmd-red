@@ -55,4 +55,17 @@ enum ItemCategory
     ITEM_CATEGORY_ORBS
 };
 
+void LoadItemParameters(void);
+struct unkStruct_203B460 *GetMoneyItemsInfo(void);
+void InitializeMoneyItems(void);
+u8 GetItemType(u8 index);
+s32 GetItemBuyPrice(u8 itemIndex);
+s32 GetItemSellPrice(u8 itemIndex);
+u8 GetItemOrder(u8 itemIndex);
+u8 GetItemPalette(u8 itemIndex);
+u8 GetItemCategory(u8 itemIndex);
+u32 GetItemUnkThrow(u8 itemIndex, u32 r1);
+u8 *GetItemDescription(u8 itemIndex);
+u32 GetItemUnkFood(u8 itemIndex, u32 r1);
+
 #endif

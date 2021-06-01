@@ -923,7 +923,7 @@ _08000DAC:
 	bl sub_8001170
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8097758
+	bl IncrementNumAdventures
 	cmp r5, 0x9
 	bne _08000E00
 	ldr r4, _08000DF4

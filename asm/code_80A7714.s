@@ -3115,7 +3115,7 @@ _080A8F44:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A8F4C: .4byte gUnknown_811825C
+_080A8F4C: .4byte gGroundLives_InvalidityText
 	thumb_func_end sub_80A8EC0
 
 	thumb_func_start sub_80A8F50
