@@ -5,6 +5,7 @@
 #include "constants/species.h"
 #include "memory.h"
 #include "text.h"
+#include "save.h"
 
 struct unkStruct_203B2C8
 {
@@ -73,15 +74,9 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298();
 extern void sub_802F2C0();
-extern u32 sub_8011C34();
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
 extern u32 sub_80144A4(s32 *);
-extern void sub_8011C28(u32);
-extern void sub_8012574(u32);
-extern void sub_8012750();
-extern bool8 sub_8012600();
-
 
 extern void sub_802B560();
 extern void sub_802B57C();
@@ -260,7 +255,7 @@ void sub_802B5B8(void)
     puVar3->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
   }
 }
 
@@ -269,8 +264,8 @@ void sub_802B5FC(void)
   s32 temp;
   
   if (sub_80144A4(&temp) == 0) {
-    if (sub_8012600() == '\0') {
-      sub_8012750();
+    if (!WriteSavePak()) {
+      FinishWriteSavePak();
       sub_802B548(4);
     }
   }

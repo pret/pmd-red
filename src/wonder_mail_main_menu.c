@@ -380,7 +380,7 @@ void sub_8039D68(void)
   if(sub_80144A4(&iVar2) == 0)
   {
       sub_803A1C0(0xF);
-      sub_8012574(0); // "Saving Adventure.."
+      PrepareSavePakWrite(0); // "Saving Adventure.."
   }
 }
 
@@ -398,9 +398,9 @@ void sub_8039DA4(void)
   int iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
-      if(!sub_8012600())
+      if(!WriteSavePak())
       {
-          sub_8012750();
+          FinishWriteSavePak();
           sub_803A1C0(0x10);
       }
   }

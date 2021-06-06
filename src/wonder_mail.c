@@ -84,8 +84,6 @@ extern void sub_8035CF4(u32 *r0, u32, u32);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
-extern void sub_8011C28(u32);
-
 
 extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
@@ -480,7 +478,7 @@ void sub_8028E84()
     }
     sub_8028B04(24);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
 }
 
 void sub_8028EAC()
@@ -491,9 +489,9 @@ void sub_8028EAC()
     {
         return;
     }
-    if(!sub_8012600())
+    if(!WriteSavePak())
     {
-        sub_8012750();
+        FinishWriteSavePak();
         sub_8028B04(25);
     }
 }
@@ -545,7 +543,7 @@ void sub_8028F30()
     }
     sub_8028B04(22);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
 }
 
 void sub_8028F58()
@@ -556,9 +554,9 @@ void sub_8028F58()
     {
         return;
     }
-    if(!sub_8012600())
+    if(!WriteSavePak())
     {
-        sub_8012750();
+        FinishWriteSavePak();
         sub_8028B04(2);
     }
 }
@@ -661,14 +659,14 @@ void sub_80290D4(void)
 
 void sub_80290F0(void)
 {
-    s32 temp;
-    temp = -1;
+    s32 menuAction;
+    menuAction = -1;
     sub_8030768(0);
     if(sub_8012FD8(&(gUnknown_203B2C0->unk30C)) == 0)
     {
-        sub_8013114(&(gUnknown_203B2C0->unk30C), &temp);
+        sub_8013114(&(gUnknown_203B2C0->unk30C), &menuAction);
     }
-    switch(temp)
+    switch(menuAction)
     {
         case 11:
             sub_803084C();
@@ -841,7 +839,7 @@ void sub_8029374(void)
     }
     sub_8028B04(0x24);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
 }
 
 void sub_802939C(void)
@@ -852,10 +850,10 @@ void sub_802939C(void)
     {
         return;
     }
-    if(!sub_8012600())
+    if(!WriteSavePak())
     {
-        saveStatus = sub_8012744();
-        sub_8012750();
+        saveStatus = GetSavePakStatus();
+        FinishWriteSavePak();
         if(saveStatus == SAVE_COMPLETED)
         {
             sub_8028B04(0x25);
@@ -1025,14 +1023,14 @@ void sub_8029668(void)
 
 void sub_8029684(void)
 {
-    s32 temp;
-    temp = -1;
+    s32 menuAction;
+    menuAction = -1;
     sub_8030768(0);
     if(sub_8012FD8(&(gUnknown_203B2C0->unk30C)) == 0)
     {
-        sub_8013114(&(gUnknown_203B2C0->unk30C), &temp);
+        sub_8013114(&(gUnknown_203B2C0->unk30C), &menuAction);
     }
-    switch(temp)
+    switch(menuAction)
     {
         case 0xB:
             sub_803084C();
@@ -1125,14 +1123,14 @@ void sub_80297D4(void)
 
 void sub_8029884(void)
 {
-    s32 temp;
-    temp = -1;
+    s32 menuAction;
+    menuAction = -1;
     sub_8023A94(0);
     if(sub_8012FD8(&(gUnknown_203B2C0->unk30C)) == 0)
     {
-        sub_8013114(&(gUnknown_203B2C0->unk30C), &temp);
+        sub_8013114(&(gUnknown_203B2C0->unk30C), &menuAction);
     }
-    switch(temp)
+    switch(menuAction)
     {
         case 0xB:
             sub_8023C60();
@@ -1274,9 +1272,9 @@ void sub_8029A88(void)
     {
         return;
     }
-    if(!sub_8012600())
+    if(!WriteSavePak())
     {
-        sub_8012750();
+        FinishWriteSavePak();
         sub_8028B04(0x39);
     }
 }
@@ -1290,7 +1288,7 @@ void sub_8029AB0(void)
     }
     sub_8028B04(0x38);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
 }
 
 void sub_8029AD8(void)
@@ -1699,15 +1697,15 @@ void sub_802A158(void)
 
 void sub_802A174(void)
 {
-  s32 temp;
+  s32 menuAction;
 
-  temp = -1;
+  menuAction = -1;
   sub_8030768(0);
   if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
-    sub_8013114(&gUnknown_203B2C4->unk30C, &temp);
+    sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
   }
   
-  switch(temp)
+  switch(menuAction)
   {
       case 0xB:
         sub_803084C();
@@ -1809,15 +1807,15 @@ void sub_802A33C(void)
 
 void sub_802A39C(void)
 {
-  s32 temp;
+  s32 menuAction;
 
-  temp = -1;
+  menuAction = -1;
   sub_801CA08(0);
   if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
-    sub_8013114(&gUnknown_203B2C4->unk30C, &temp);
+    sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
   }
 
-  switch(temp)
+  switch(menuAction)
   {
       case 0xB:
             sub_801CBB8();
@@ -1875,7 +1873,7 @@ void sub_802A4AC(void)
     {
         sub_802B2BC(0x18);
         sub_8011C28(1);
-        sub_8012574(0);
+        PrepareSavePakWrite(0);
     }
 }
 
@@ -1963,8 +1961,8 @@ void sub_802A68C(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (sub_8012600() == 0) {
-      sub_8012750();
+    if (WriteSavePak() == 0) {
+      FinishWriteSavePak();
       sub_802B2BC(0xd);
     }
   }
@@ -1976,9 +1974,9 @@ void sub_802A6B4(void)
   u32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (sub_8012600() == 0) {
-      saveStatus = sub_8012744();
-      sub_8012750();
+    if (WriteSavePak() == 0) {
+      saveStatus = GetSavePakStatus();
+      FinishWriteSavePak();
       if (saveStatus == SAVE_COMPLETED) {
         sub_802B2BC(0x20);
       }
@@ -1996,7 +1994,7 @@ void sub_802A6F0(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B2BC(0x18);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
   }
 }
 
@@ -2007,7 +2005,7 @@ void sub_802A718(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B2BC(0x25);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
   }
 }
 

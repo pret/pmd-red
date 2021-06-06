@@ -21,16 +21,15 @@ struct unk_struct
     u32 padding[504];
 };
 
-struct unk_203B188
+struct SavePakRead
 {
     u32 state;
     u32 readStatus;
 };
 
+extern struct SavePakRead *gSavePakRead;
 
-extern struct unk_203B188 *gUnknown_203B188;
-
-struct unkStruct_203B18C
+struct SavePakWrite
 {
     u32 state;
     s32 unk4;
@@ -46,27 +45,26 @@ struct unkStruct_203B18C
     u16 pokeID;
 };
 
-extern struct unkStruct_203B18C *gUnknown_203B18C;
+extern struct SavePakWrite *gSavePakWrite;
 
-struct unkStruct_203B190
+struct QuickSaveRead
 {
     s32 state;
     u8 *dest;
     u32 size;
     bool8 saveValid;
 };
-extern struct unkStruct_203B190 *gUnknown_203B190;
+extern struct QuickSaveRead *gQuickSaveRead;
 
-struct unkStruct_203B194
+struct QuickSaveWrite
 {
     s32 state;
     u8 *unk4;
     u32 unk8;
     u8 unkC;
-    u8 fillD[3];
     u32 quickSaveStatus;
 };
-extern struct unkStruct_203B194 *gUnknown_203B194;
+extern struct QuickSaveWrite *gQuickSaveWrite;
 
 
 extern s32 gUnknown_202DE28;
@@ -651,52 +649,52 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
 
 }
 
-void sub_8012468(void)
+void PrepareSavePakRead(void)
 {
-    gUnknown_203B188 = MemoryAlloc(sizeof(struct unk_203B188), 5);
-    gUnknown_203B188->state = 1;
+    gSavePakRead = MemoryAlloc(sizeof(struct SavePakRead), 5);
+    gSavePakRead->state = 1;
 
 }
 
-u8 sub_8012484(void)
+u8 ReadSavePak(void)
 {
     u32 temp;
     u32 temp2;
-    switch(gUnknown_203B188->state)
+    switch(gSavePakRead->state)
     {
         case 0:
-            gUnknown_203B188->state = 1;
+            gSavePakRead->state = 1;
             break;
         case 1:
             temp = 0;
-            gUnknown_203B188->readStatus = ReadSaveFromPak(&temp);
-            gUnknown_203B188->state = 2;
+            gSavePakRead->readStatus = ReadSaveFromPak(&temp);
+            gSavePakRead->state = 2;
             break;
         case 2:
-            if(gUnknown_203B188->readStatus != READ_SAVE_VALID)
+            if(gSavePakRead->readStatus != READ_SAVE_VALID)
             {
                 if(IsSaveCorrupted())
                 {
                     sub_80141B4(gSaveCorrupted, 0, 0, 0x301);
-                    gUnknown_203B188->state = 3;
+                    gSavePakRead->state = 3;
                 }
                 else
                 {
-                    gUnknown_203B188->state = 4;
+                    gSavePakRead->state = 4;
                 }
             }
             else
             {
-                gUnknown_203B188->state = 6;
+                gSavePakRead->state = 6;
             }
             break;
         case 3:
             if(sub_80144A4(&temp2) == 0)
-                gUnknown_203B188->state = 4;
+                gSavePakRead->state = 4;
             break;
         case 4:
             sub_8012298();
-            gUnknown_203B188->state = 6;
+            gSavePakRead->state = 6;
         case 5:
             break;
         case 6:
@@ -705,16 +703,16 @@ u8 sub_8012484(void)
     return 1;
 }
 
-void sub_8012558(void)
+void FinishReadSavePak(void)
 {
-    if(gUnknown_203B188 != NULL)
+    if(gSavePakRead != NULL)
     {
-        MemoryFree(gUnknown_203B188);
-        gUnknown_203B188 = NULL;
+        MemoryFree(gSavePakRead);
+        gSavePakRead = NULL;
     }
 }
 
-void sub_8012574(s16 PokemonID)
+void PrepareSavePakWrite(s16 PokemonID)
 {
   struct OpenedFile *file;
   s32 id_s32;
@@ -723,138 +721,138 @@ void sub_8012574(s16 PokemonID)
   id_s32 = PokemonID; // had to cast for asr shift
   
   sub_80993D8();
-  gUnknown_203B18C = MemoryAlloc(sizeof(struct unkStruct_203B18C),5);
-  gUnknown_203B18C->pokeID = id_s32;
-  gUnknown_203B18C->faceFile = NULL;
-  gUnknown_203B18C->faceData = NULL;
+  gSavePakWrite = MemoryAlloc(sizeof(struct SavePakWrite),5);
+  gSavePakWrite->pokeID = id_s32;
+  gSavePakWrite->faceFile = NULL;
+  gSavePakWrite->faceData = NULL;
   if (PokemonID != 0) {
     file = GetDialogueSpriteDataPtr(PokemonID);
-    gUnknown_203B18C->faceFile = file;
-    gUnknown_203B18C->faceData = file->data;
-    gUnknown_203B18C->unk18 = 0;
-    gUnknown_203B18C->unk19 = 0;
-    gUnknown_203B18C->unk1A = 0;
-    gUnknown_203B18C->unk14 = 2;
-    gUnknown_203B18C->unk16 = 8;
+    gSavePakWrite->faceFile = file;
+    gSavePakWrite->faceData = file->data;
+    gSavePakWrite->unk18 = 0;
+    gSavePakWrite->unk19 = 0;
+    gSavePakWrite->unk1A = 0;
+    gSavePakWrite->unk14 = 2;
+    gSavePakWrite->unk16 = 8;
   }
-  if (gUnknown_203B18C->faceFile != 0) {
-      preload_face = (u8 *)&gUnknown_203B18C->faceFile; 
+  if (gSavePakWrite->faceFile != 0) {
+      preload_face = (u8 *)&gSavePakWrite->faceFile; 
       sub_80141B4(gSavingAdventure,0,preload_face,0x20);
   }
   else {
       sub_80141B4(gSavingAdventure,0,0,0x20);
   }
-  gUnknown_203B18C->state = 3;
+  gSavePakWrite->state = 3;
 }
 
-bool8 sub_8012600(void)
+bool8 WriteSavePak(void)
 {
   struct OpenedFile **faceFile;
   u32 local_14;
   u32 other_stack;
   
   faceFile = NULL;
-  if (gUnknown_203B18C->faceFile != 0) {
-    faceFile = &gUnknown_203B18C->faceFile;
+  if (gSavePakWrite->faceFile != 0) {
+    faceFile = &gSavePakWrite->faceFile;
   }
-  switch(gUnknown_203B18C->state) 
+  switch(gSavePakWrite->state) 
   {
     case 0:
-        gUnknown_203B18C->state = 7;
+        gSavePakWrite->state = 7;
         break;
     case 1:
-        gUnknown_203B18C->unk4++;
-        if (gUnknown_203B18C->unk4 > 8) {
+        gSavePakWrite->unk4++;
+        if (gSavePakWrite->unk4 > 8) {
             sub_80141B4(gWriteGamePak, 0, 0, 0x20);
-            gUnknown_203B18C->state = 3;
+            gSavePakWrite->state = 3;
         }
         break;
     case 2:
         break;
     case 3:
-        gUnknown_203B18C->state = 4;
+        gSavePakWrite->state = 4;
         break;
     case 4:
         local_14 = 0;
         sub_80140DC();
-        gUnknown_203B18C->saveStatus = WriteSavetoPak(&local_14, sub_8011C1C());
-        switch(gUnknown_203B18C->saveStatus)
+        gSavePakWrite->saveStatus = WriteSavetoPak(&local_14, sub_8011C1C());
+        switch(gSavePakWrite->saveStatus)
         {
             case SAVE_COMPLETED:
-                if(gUnknown_203B18C->faceFile != NULL)
+                if(gSavePakWrite->faceFile != NULL)
                     sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
                 else
                     sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
-                gUnknown_203B18C->state = 5;
+                gSavePakWrite->state = 5;
                 break;
             case SAVE_NOT_WRTTEN:
                 sub_80141B4(gSaveNotWritten, 0, 0, 0);
-                gUnknown_203B18C->state = 6;
+                gSavePakWrite->state = 6;
                 break;
             default:
-                if(gUnknown_203B18C->faceFile != NULL)
+                if(gSavePakWrite->faceFile != NULL)
                     sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
                 else
                     sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
-                gUnknown_203B18C->state = 5;
+                gSavePakWrite->state = 5;
                 break;
         }
         sub_8014114();
         break;
     case 5:
         if (sub_80144A4(&other_stack) == 0)
-            gUnknown_203B18C->state = 7;
+            gSavePakWrite->state = 7;
         break;
     case 6:
         break;
     case 7:
-        return 0;
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
-u32 sub_8012744(void)
+u32 GetSavePakStatus(void)
 {
-    return gUnknown_203B18C->saveStatus;
+    return gSavePakWrite->saveStatus;
 }
 
-void sub_8012750(void)
+void FinishWriteSavePak(void)
 {
-    if(gUnknown_203B18C != NULL)
+    if(gSavePakWrite != NULL)
     {
-        if(gUnknown_203B18C->faceFile != NULL)
-            CloseFile(gUnknown_203B18C->faceFile);
-        MemoryFree(gUnknown_203B18C);
-        gUnknown_203B18C = NULL;
+        if(gSavePakWrite->faceFile != NULL)
+            CloseFile(gSavePakWrite->faceFile);
+        MemoryFree(gSavePakWrite);
+        gSavePakWrite = NULL;
     }
     sub_80993E4();
 }
 
-void sub_801277C(u8 *dest, u32 size)
+void PrepareQuickSaveRead(u8 *dest, u32 size)
 {
-    gUnknown_203B190 = MemoryAlloc(sizeof(struct unkStruct_203B190), 5);
-    gUnknown_203B190->dest = dest;
-    gUnknown_203B190->size = size;
-    gUnknown_203B190->saveValid = FALSE;
-    gUnknown_203B190->state = 1;
+    gQuickSaveRead = MemoryAlloc(sizeof(struct QuickSaveRead), 5);
+    gQuickSaveRead->dest = dest;
+    gQuickSaveRead->size = size;
+    gQuickSaveRead->saveValid = FALSE;
+    gQuickSaveRead->state = 1;
 }
 
-u32 sub_80127A8(void)
+bool8 ReadQuickSave(void)
 {
     u32 stack_1;
     u32 stack_2;
 
-    switch(gUnknown_203B190->state)
+    switch(gQuickSaveRead->state)
     {
         case 0:
-            gUnknown_203B190->state = 1;
+            gQuickSaveRead->state = 1;
             break;
         case 1:
             stack_1 = 16;
-            if(sub_8011F9C(&stack_1, gUnknown_203B190->dest, gUnknown_203B190->size) == READ_SAVE_VALID)
+            if(sub_8011F9C(&stack_1, gQuickSaveRead->dest, gQuickSaveRead->size) == READ_SAVE_VALID)
             {
-                gUnknown_203B190->saveValid = TRUE;
-                gUnknown_203B190->state = 3;
+                gQuickSaveRead->saveValid = TRUE;
+                gQuickSaveRead->state = 3;
             }
             else
             {
@@ -864,42 +862,42 @@ u32 sub_80127A8(void)
                 // Before shutting down, save in your
                 // team base or quicksave in a dungeon
                 sub_80141B4(gUnknown_80D44C8, 0, 0, 0x301);
-                gUnknown_203B190->state = 2;
+                gQuickSaveRead->state = 2;
             }
             break;
         case 2:
             if(sub_80144A4(&stack_2) == 0)
-                gUnknown_203B190->state = 3;
+                gQuickSaveRead->state = 3;
             break;
         case 3:
-            return 0;
+            return FALSE;
         default:
             break;
     }
-    return 1;
+    return TRUE;
 }
 
-bool8 sub_8012828(void)
+bool8 IsQuickSaveValid(void)
 {
-    return gUnknown_203B190->saveValid;
+    return gQuickSaveRead->saveValid;
 }
 
 void sub_8012834(void)
 {
-    if(gUnknown_203B190 != NULL){
-        MemoryFree(gUnknown_203B190);
-        gUnknown_203B190 = 0;
+    if(gQuickSaveRead != NULL){
+        MemoryFree(gQuickSaveRead);
+        gQuickSaveRead = 0;
     }
 }
 
 void sub_8012850(u8 *r0, u32 r1, u8 r2)
 {
-    gUnknown_203B194 = MemoryAlloc(sizeof(struct unkStruct_203B194), 5);
-    gUnknown_203B194->unk4 = r0;
-    gUnknown_203B194->unk8 = r1;
-    gUnknown_203B194->unkC = r2;
-    gUnknown_203B194->state = 0;
-    if(gUnknown_203B194->unkC != 0)
+    gQuickSaveWrite = MemoryAlloc(sizeof(struct QuickSaveWrite), 5);
+    gQuickSaveWrite->unk4 = r0;
+    gQuickSaveWrite->unk8 = r1;
+    gQuickSaveWrite->unkC = r2;
+    gQuickSaveWrite->state = 0;
+    if(gQuickSaveWrite->unkC != 0)
         // Quicksaving your adventure...
         // Please don't turn off the power.
         sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
@@ -913,26 +911,26 @@ u32 sub_80128B0(void)
 {
     u32 stack_1;
     u32 stack_2;
-    switch(gUnknown_203B194->state)
+    switch(gQuickSaveWrite->state)
     {
         case 0:
-            gUnknown_203B194->state = 1;
+            gQuickSaveWrite->state = 1;
             break;
         case 1:
             sub_80140DC();
             stack_1 = 16;
-            gUnknown_203B194->quickSaveStatus = sub_80121D4(&stack_1, gUnknown_203B194->unk4, gUnknown_203B194->unk8);
-            gUnknown_203B194->state = 2;
+            gQuickSaveWrite->quickSaveStatus = sub_80121D4(&stack_1, gQuickSaveWrite->unk4, gQuickSaveWrite->unk8);
+            gQuickSaveWrite->state = 2;
             return 1;
         case 2:
             stack_1 = 0;
-            if(gUnknown_203B194->quickSaveStatus == 0)
-                gUnknown_203B194->quickSaveStatus = WriteSavetoPak(&stack_1, 2);
-            switch(gUnknown_203B194->quickSaveStatus)
+            if(gQuickSaveWrite->quickSaveStatus == 0)
+                gQuickSaveWrite->quickSaveStatus = WriteSavetoPak(&stack_1, 2);
+            switch(gQuickSaveWrite->quickSaveStatus)
             {
                 case SAVE_COMPLETED:
                     sub_80121E0(0xf1207);
-                    if(gUnknown_203B194->unkC != 0)
+                    if(gQuickSaveWrite->unkC != 0)
                         // Your adventure has been saved
                         // When you are in a dungeon, quicksave
                         // your progress before ending the game.
@@ -944,31 +942,31 @@ u32 sub_80128B0(void)
                         // save your progress in your team base,
                         // or quicksave in a dungeon.
                         sub_80141B4(gUnknown_80D4668, 0, 0, 0x301);
-                    gUnknown_203B194->state = 3;
+                    gQuickSaveWrite->state = 3;
                     break;
                 case SAVE_NOT_WRTTEN:
                     // The data could not be written.
                     // Please turn off the power and remove
                     // and reinsert the DS Card
                     sub_80141B4(gSaveNotWritten2, 0, 0, 0);
-                    gUnknown_203B194->state = 4;
+                    gQuickSaveWrite->state = 4;
                     break;
                 default:
                     sub_80121E0(0xf1209);
                     sub_80141B4(gSaveFailed2, 0, 0, 0x301);
-                    gUnknown_203B194->state = 3;
+                    gQuickSaveWrite->state = 3;
                     break;
             }
             sub_8014114();
             break;
         case 3:
             if(sub_80144A4(&stack_2) == 0)
-                gUnknown_203B194->state = 5;
+                gQuickSaveWrite->state = 5;
             break;
         case 4:
             break;
         case 5:
-            if(gUnknown_203B194->quickSaveStatus == SAVE_COMPLETED)
+            if(gQuickSaveWrite->quickSaveStatus == SAVE_COMPLETED)
                 return 2;
             else
                 return 3;
@@ -981,9 +979,9 @@ u32 sub_80128B0(void)
 
 void sub_80129FC()
 {
-    if (gUnknown_203B194) {
-        MemoryFree(gUnknown_203B194);
-        gUnknown_203B194 = NULL;
+    if (gQuickSaveWrite) {
+        MemoryFree(gQuickSaveWrite);
+        gQuickSaveWrite = NULL;
     }
 }
 

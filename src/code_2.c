@@ -138,10 +138,10 @@ void GameLoop(void)
             xxx_update_stuff(0);
         }
         if (tmp3) {
-            sub_8012468();
-            while ((u8)(tmp3 = sub_8012484()))
+            PrepareSavePakRead();
+            while ((tmp3 = ReadSavePak()))
                 xxx_update_stuff(0);
-            sub_8012558();
+            FinishReadSavePak();
         }
         tmp3 = 1;
         StartNewBGM(MUS_LOADING_SCREEN);

@@ -2543,7 +2543,7 @@ sub_8033D74:
 	movs r0, 0x17
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _08033D8E:
 	add sp, 0x4
 	pop {r0}
@@ -2558,11 +2558,11 @@ sub_8033D94:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _08033DB6
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _08033DB6
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x18
 	bl sub_80338C4
 _08033DB6:
@@ -3410,11 +3410,11 @@ sub_8034478:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _0803449A
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803449A
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x2
 	bl sub_80338C4
 _0803449A:
@@ -3434,7 +3434,7 @@ sub_80344A0:
 	movs r0, 0x2C
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _080344BA:
 	add sp, 0x4
 	pop {r0}
@@ -3710,11 +3710,11 @@ sub_80346D8:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _080346FA
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _080346FA
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x2
 	bl sub_80338C4
 _080346FA:
@@ -3734,7 +3734,7 @@ sub_8034700:
 	movs r0, 0x38
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _0803471A:
 	add sp, 0x4
 	pop {r0}
@@ -3859,7 +3859,7 @@ sub_80347E4:
 	movs r0, 0x41
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _080347FE:
 	add sp, 0x4
 	pop {r0}
@@ -3874,11 +3874,11 @@ sub_8034804:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _08034826
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _08034826
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x42
 	bl sub_80338C4
 _08034826:
@@ -4536,7 +4536,7 @@ sub_8034D54:
 	movs r0, 0x65
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _08034D6E:
 	add sp, 0x4
 	pop {r0}
@@ -4699,11 +4699,11 @@ sub_8034EC8:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _08034EEA
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _08034EEA
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x2
 	bl sub_80338C4
 _08034EEA:
@@ -4720,11 +4720,11 @@ sub_8034EF0:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _08034F12
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _08034F12
-	bl sub_8012750
+	bl FinishWriteSavePak
 	movs r0, 0x2
 	bl sub_80338C4
 _08034F12:
@@ -4744,7 +4744,7 @@ sub_8034F18:
 	movs r0, 0x65
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _08034F32:
 	add sp, 0x4
 	pop {r0}
@@ -4762,7 +4762,7 @@ sub_8034F38:
 	movs r0, 0x71
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _08034F52:
 	add sp, 0x4
 	pop {r0}
@@ -4880,7 +4880,7 @@ sub_8035018:
 	movs r0, 0x76
 	bl sub_80338C4
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _08035032:
 	add sp, 0x4
 	pop {r0}
@@ -4895,11 +4895,11 @@ sub_8035038:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _0803508E
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803508E
-	bl sub_8012750
+	bl FinishWriteSavePak
 	ldr r0, _0803506C
 	ldr r0, [r0]
 	ldr r1, _08035070

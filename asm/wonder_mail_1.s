@@ -124,7 +124,7 @@ sub_802A828:
 	movs r0, 0x1
 	bl sub_8011C28
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 _0802A848:
 	add sp, 0x4
 	pop {r0}
@@ -139,11 +139,11 @@ sub_802A850:
 	bl sub_80144A4
 	cmp r0, 0
 	bne _0802A89A
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802A89A
-	bl sub_8012750
+	bl FinishWriteSavePak
 	ldr r0, _0802A884
 	ldr r0, [r0]
 	ldr r1, _0802A888

@@ -1086,7 +1086,7 @@ sub_8000EDC:
 	beq _08000F68
 	ldr r0, [r4, 0x74]
 	ldr r1, [sp]
-	bl sub_801277C
+	bl PrepareQuickSaveRead
 	adds r7, r4, 0
 	adds r7, 0x7C
 	b _08000F2E
@@ -1096,11 +1096,11 @@ _08000F28:
 	movs r0, 0
 	bl xxx_update_stuff
 _08000F2E:
-	bl sub_80127A8
+	bl ReadQuickSave
 	lsls r0, 24
 	cmp r0, 0
 	bne _08000F28
-	bl sub_8012828
+	bl IsQuickSaveValid
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_8012834

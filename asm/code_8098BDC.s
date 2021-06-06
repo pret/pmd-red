@@ -5681,18 +5681,18 @@ _0809BC02:
 	movs r0, 0x1
 	bl sub_8011C28
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 	b _0809B784
 	.align 2, 0
 _0809BC10: .4byte 0x00000414
 _0809BC14:
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC20
 	b _0809B784
 _0809BC20:
-	bl sub_8012750
+	bl FinishWriteSavePak
 	b _0809C392
 _0809BC26:
 	movs r0, 0x4
