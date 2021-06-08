@@ -75,17 +75,17 @@ extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 
-const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
+ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
 const char * const gStarterRevealPtr = gStarterReveal;
 
-const char gPartnerPrompt[] = _(
+ALIGNED(4) const char gPartnerPrompt[] = _(
         "{CENTER_ALIGN}This is the final step.{WAIT_PRESS}\n"
         "{CENTER_ALIGN}Who would you like to have as a partner?{EXTRA_MSG}"
         "{CENTER_ALIGN}Choose the Pokémon you want\n"
         "{CENTER_ALIGN}as your partner from this group.");
 const char * const gPartnerPromptPtr = gPartnerPrompt;
 
-const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
+ALIGNED(4) const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
 const char * const gPartnerNickPromptPtr = gPartnerNickPrompt;
 
 ALIGNED(4) const char gEndIntroText[] = _(

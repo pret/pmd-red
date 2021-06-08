@@ -23,9 +23,10 @@ enum
 
 
 struct UnkStruct_sub_8011DAC {
+    // size: 0x57D4
     u8 fill000[0x4];
     u8 unk004[0x400];
-    u8 unk404[0x10];
+    u8 unk404[0x10]; // has "POKE_DUNGEON__05"
     u32 unk414;
     u32 unk418;
     u32 unk41C;
@@ -90,10 +91,10 @@ u32 GetSavePakStatus(void);
 void FinishWriteSavePak(void);
 bool8 ReadQuickSave(void);
 bool8 IsQuickSaveValid(void);
-void sub_8012834(void);
-void sub_8012850(u8 *r0, u32 r1, u8 r2);
-u32 sub_80128B0(void);
-void sub_80129FC(void);
+void FinishQuickSaveRead(void);
+void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2);
+u32 WriteQuickSave(void);
+void FinishQuickSaveWrite(void);
 
 void sub_8012298();
 void sub_80122D0();

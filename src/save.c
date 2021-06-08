@@ -10,15 +10,14 @@
 
 struct unk_struct
 {
+    // size: 0x800
     u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
+    u8 unk4[0x10]; // has "POKE_DUNGEON__05
     u32 unk14;
     u32 unk18;
     u32 unk1C;
-    u32 padding[504];
+    u32 unk20;
+    u32 padding[503];
 };
 
 struct SavePakRead
@@ -83,10 +82,17 @@ extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
 extern struct ExclusivePokemonData *gUnknown_203B498;
 
+ALIGNED(4) const char PokeDungeon_Text[] = _("POKE_DUNGEON__05");
+
+ALIGNED(4) const char fill_save0[] = _("pksdir0");
+ALIGNED(4) const char fill_save1[] = _("pksdir0");
+ALIGNED(4) const char fill_save2[] = _("pksdir0");
+ALIGNED(4) const char fill_save3[] = _("pksdir0");
+
 ALIGNED(4) const char gSaveCorrupted[] = _("#+The game data is corrupted.\n"
                                             "#+Your data will be erased.");
 
-ALIGNED(4) const char fill_save0[] = _("pksdir0");
+ALIGNED(4) const char fill_save4[] = _("pksdir0");
 
 ALIGNED(4) const char gSavingAdventure[] = _("#+Saving your adventure...\n"
                                             "#+Please don~27t turn off the power.");
@@ -103,7 +109,7 @@ ALIGNED(4) const char gSaveNotWritten[] = _("#+The data could not be written.\n"
 
 ALIGNED(4) const char gSaveFailed[] = _("#+Save failed.");
 
-ALIGNED(4) const char fill_save1[] = _("pksdir0");
+ALIGNED(4) const char fill_save5[] = _("pksdir0");
 
 ALIGNED(4) const char gUnknown_80D44C8[] = _("#+Your data was not properly saved~2c\n"
                                              "#+so your game cannot be resumed\n"
@@ -112,7 +118,7 @@ ALIGNED(4) const char gUnknown_80D44C8[] = _("#+Your data was not properly saved
                                              "#+Before shutting down~2c save in your\n"
                                              "#+team base~2c or quicksave in a dungeon.");
 
-ALIGNED(4) const char fill_save2[] = _("pksdir0");
+ALIGNED(4) const char fill_save6[] = _("pksdir0");
 
 ALIGNED(4) const char gUnknown_80D45AC[] = _("#+Quicksaving your adventure...\n"
                                              "#+Please don~27t turn off the power.");
@@ -133,7 +139,7 @@ ALIGNED(4) const char gSaveNotWritten2[] = _("#+The data could not be written.\n
                                              "#+and reinsert the DS Card.");
 
 ALIGNED(4) const char gSaveFailed2[] = _("#+Save failed.");
-ALIGNED(4) const char fill_save3[] = _("pksdir0");
+ALIGNED(4) const char fill_save7[] = _("pksdir0");
 
 extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
 
@@ -205,7 +211,7 @@ void sub_8011C40(s32 in)
 
 char *sub_8011C4C(void)
 {
-    return gUnknown_203B180;
+    return gUnknown_203B180; // returns POKE_DUNGEON__05
 }
 
 void CalculateChecksum(u8 *out, u32 size)
@@ -472,12 +478,12 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
   }
    iVar1->unk414 = 0x5071412;
   __src = sub_8011C4C();
-  strncpy(iVar1->unk404,__src,16);
+  strncpy(iVar1->unk404,__src, ARRAY_COUNT(iVar1->unk404));
   if (gUnknown_203B184 == NULL) {
-    sub_8002700(&iVar1->unk004);
+    sub_8002700(iVar1->unk004);
   }
   else {
-    MemoryCopy8(iVar1->unk004,gUnknown_203B184->unk04C,0x400);
+    MemoryCopy8(iVar1->unk004,gUnknown_203B184->unk04C,ARRAY_COUNT(iVar1->unk004));
   }
 
   iVar1->savedRecruitedPokemon = SaveRecruitedPokemon(array_ptr,0x4650);
@@ -500,12 +506,12 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
   r4 = WriteSaveSector(param_1,(u8 *)iVar1,sizeof(struct UnkStruct_sub_8011DAC));
   MemoryFree(iVar1);
 
-  if (r5 != 0)
+  if (r5 != SAVE_COMPLETED)
     return r5;
-  if (r4 != 0)
+  if (r4 != SAVE_COMPLETED)
     return r4;
 
-  return 0; // Success
+  return SAVE_COMPLETED;
 }
 
 
@@ -517,7 +523,7 @@ s32 sub_80121D4(s32 *a, u8 *src, s32 size)
 u32 sub_80121E0(u32 r0)
 {
     u32 temp;
-    char *temp2;
+    char *string;
     u32 temp3;
     struct unk_struct *r4 = MemoryAlloc(sizeof(struct unk_struct), 5);
     temp = 0x1F;
@@ -526,8 +532,8 @@ u32 sub_80121E0(u32 r0)
     r4->unk1C = *sub_809769C();
     r4->unk14 = 0x5071412;
 
-    temp2 = sub_8011C4C();
-    strncpy((u8 *)r4 + 4, temp2, 16);
+    string = sub_8011C4C();
+    strncpy(r4->unk4, string, ARRAY_COUNT(r4->unk4));
     sub_80958E4((u8 *)r4 + 32, 0);
     temp3 = WriteSaveSector(&temp, (u8 *)r4, sizeof(struct unk_struct));
     MemoryFree(r4);
@@ -882,7 +888,7 @@ bool8 IsQuickSaveValid(void)
     return gQuickSaveRead->saveValid;
 }
 
-void sub_8012834(void)
+void FinishQuickSaveRead(void)
 {
     if(gQuickSaveRead != NULL){
         MemoryFree(gQuickSaveRead);
@@ -890,7 +896,7 @@ void sub_8012834(void)
     }
 }
 
-void sub_8012850(u8 *r0, u32 r1, u8 r2)
+void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2)
 {
     gQuickSaveWrite = MemoryAlloc(sizeof(struct QuickSaveWrite), 5);
     gQuickSaveWrite->unk4 = r0;
@@ -907,7 +913,7 @@ void sub_8012850(u8 *r0, u32 r1, u8 r2)
         sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
 }
 
-u32 sub_80128B0(void)
+u32 WriteQuickSave(void)
 {
     u32 stack_1;
     u32 stack_2;
@@ -977,7 +983,7 @@ u32 sub_80128B0(void)
     return 0;
 }
 
-void sub_80129FC()
+void FinishQuickSaveWrite()
 {
     if (gQuickSaveWrite) {
         MemoryFree(gQuickSaveWrite);

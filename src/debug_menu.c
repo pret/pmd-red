@@ -55,13 +55,13 @@ ALIGNED(4) const char field_map_string[] = _("Field Map");
 ALIGNED(4) const char field_string[] = _("Field");
 ALIGNED(4) const char dungeons_string[] = _("Dungeons");
 
-ALIGNED(4) const char debug_fill0[] = _("pksdir0");
-ALIGNED(4) const char debug_fill1[] = _("pksdir0");
-ALIGNED(4) const char debug_fill2[] = _("pksdir0");
-ALIGNED(4) const char debug_fill3[] = _("pksdir0");
-ALIGNED(4) const char debug_fill4[] = _("pksdir0");
-ALIGNED(4) const char debug_fill5[] = _("pksdir0");
-ALIGNED(4) const char debug_fill6[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill0[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill1[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill2[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill3[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill4[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill5[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill6[] = _("pksdir0");
 
 
 extern void ResetUnusedInputStruct(void);

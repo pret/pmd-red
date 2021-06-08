@@ -1961,7 +1961,7 @@ void sub_802A68C(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (WriteSavePak() == 0) {
+    if (!WriteSavePak()) {
       FinishWriteSavePak();
       sub_802B2BC(0xd);
     }
@@ -1974,7 +1974,7 @@ void sub_802A6B4(void)
   u32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (WriteSavePak() == 0) {
+    if (!WriteSavePak()) {
       saveStatus = GetSavePakStatus();
       FinishWriteSavePak();
       if (saveStatus == SAVE_COMPLETED) {
