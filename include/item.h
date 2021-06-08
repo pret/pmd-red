@@ -67,5 +67,7 @@ u8 GetItemCategory(u8 itemIndex);
 u32 GetItemUnkThrow(u8 itemIndex, u32 r1);
 u8 *GetItemDescription(u8 itemIndex);
 u32 GetItemUnkFood(u8 itemIndex, u32 r1);
+s32 sub_8090A34(void);
+bool8 sub_8090A60(u8 itemIndex);
 
 #endif

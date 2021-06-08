@@ -9,13 +9,16 @@ struct unkStruct_203B208
     u32 unk0;
     u32 currState;
     u32 unk8;
-    u32 unkC;
+    u16 unkC;
+    u8 itemIndex;
+    u8 unkF;
     u32 unk10;
     u32 unk14;
     u32 unk18;
     u32 unk1C;
     u32 unk20;
-    u8 fill24[0x58 - 0x24];
+    u8 fill24[0x4C - 0x24];
+    u16 unk4C[5];
     u32 unk58;
     u8 unk5C[0xA8 - 0x5C];
     u32 unkA8;

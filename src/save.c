@@ -380,8 +380,8 @@ u32 ReadSaveFromPak(u32 *a)
             r7 = 3;
         }
         r4 += 0x1d8;
-        r1 = sub_809222C(r4, 0x10);
-        if (r1 != r5->unk434) {
+        r1 = ReadRescueTeamInfo(r4, 0x10);
+        if (r1 != r5->savedRescueTeamInfo) {
             r7 = 3;
         }
         r4 += 0x10;
@@ -492,7 +492,7 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
   array_ptr += 0x258;
   iVar1->unk430 = sub_8091C68(array_ptr,0x1D8);
   array_ptr += 0x1D8;
-  iVar1->unk434 = sub_80921C4(array_ptr,0x10);
+  iVar1->savedRescueTeamInfo = SaveRescueTeamInfo(array_ptr,0x10);
   array_ptr += 0x10;
   iVar1->savedFriendAreas = SaveFriendAreas(array_ptr,8);
   array_ptr += 8;

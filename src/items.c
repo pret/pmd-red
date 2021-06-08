@@ -53,10 +53,10 @@ void InitializeMoneyItems(void)
   gUnknown_203B460->teamSavings = 0;
 }
 
-u32 sub_8090A34(void)
+s32 sub_8090A34(void)
 {
   s32 iVar2;
-  u32 iVar3;
+  s32 iVar3;
   
   iVar3 = 0;
   for(iVar2 = 0; iVar2 < 0x14; iVar2++)

@@ -46,7 +46,7 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct UnkInputStruct **r0);
 u32 sub_8013800(struct UnkInputStruct **r0, u32);
 extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
-extern void xxx_call_draw_string(u32 size, u32, const char *text, u32, u32);
+extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
 extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
@@ -692,7 +692,7 @@ void sub_803CECC(void)
 void RedrawPartnerSelectionMenu(void)
 {
   s32 sVar1;
-  u32 uVar2;
+  u32 yCoord;
   const char *monName;
   s32 monCounter;
  
@@ -715,9 +715,9 @@ void RedrawPartnerSelectionMenu(void)
 
   monCounter = 0;
   while (monCounter < gUnknown_203B404->unk32) {
-    uVar2 = sub_8013800(&gUnknown_203B404->unk18, monCounter);
+    yCoord = sub_8013800(&gUnknown_203B404->unk18, monCounter);
     monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-    xxx_call_draw_string(8, uVar2, monName, gUnknown_203B404->unk4C, 0);
+    xxx_call_draw_string(8, yCoord, monName, gUnknown_203B404->unk4C, 0);
     monCounter++;
   }
   sub_80073E0(gUnknown_203B404->unk4C);

@@ -1,17 +1,12 @@
 #include "global.h"
-
-struct subStruct
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-};
+#include "pokemon.h"
 
 struct unkStruct_203B3F8
 {
-    u8 fill0[8];
-    struct subStruct *unk8;
+    // size: 0x140
+    u32 state;
+    u32 unk4;
+    struct PokemonStruct *pokemon;
     u8 fill4[4];
     u32 unk10;
     u8 fill14[0x60 - 0x14];
@@ -61,7 +56,7 @@ void sub_803AFE8(void)
       default:
         break;
       case 3:
-        gUnknown_203B3F8->unk8->unk3 = gUnknown_203B3F8->unk60;
+        gUnknown_203B3F8->pokemon->unk3 = gUnknown_203B3F8->unk60;
         // Fallthrough is needed to match
       case 2:
         sub_803ACD0(2);
