@@ -319,67 +319,31 @@ void CallPromptNewQuestion(void)
     gUnknown_203B400->TestState = 2;
 }
 
-NAKED
-void UpdateNatureTotals(void)
+void UpdateNatureTotals()
 {
-    asm_unified(
-	"\tpush {r4-r6,lr}\n"
-	"\tsub sp, 0x4\n"
-	"\tmov r0, sp\n"
-	"\tbl sub_80144A4\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0803C97C\n"
-	"\tldr r3, [sp]\n"
-	"\tcmp r3, 0x63\n"
-	"\tbne _0803C944\n"
-	"\tldr r0, _0803C940\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0x37\n"
-	"\tstr r0, [r1, 0x3C]\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0803C97A\n"
-	"\t.align 2, 0\n"
-"_0803C940: .4byte gUnknown_203B400\n"
-"_0803C944:\n"
-	"\tldr r1, _0803C984\n"
-	"\tldr r2, _0803C988\n"
-	"\tldr r0, [r2]\n"
-	"\tldr r0, [r0, 0x3C]\n"
-	"\tlsls r0, 2\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r4, [r0, 0x8]\n"
-	"\tlsls r0, r3, 4\n"
-	"\tadds r4, r0\n"
-	"\tmovs r3, 0\n"
-	"\tadds r6, r2, 0\n"
-	"\tadds r5, r6, 0\n"
-"_0803C95E:\n"
-	"\tldr r1, [r5]\n"
-	"\tlsls r0, r3, 2\n"
-	"\tadds r1, 0x44\n"
-	"\tadds r1, r0\n"
-	"\tadds r0, r4, r3\n"
-	"\tldrb r2, [r0]\n"
-	"\tldr r0, [r1]\n"
-	"\tadds r0, r2\n"
-	"\tstr r0, [r1]\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0xC\n"
-	"\tble _0803C95E\n"
-	"\tldr r1, [r6]\n"
-	"\tmovs r0, 0\n"
-"_0803C97A:\n"
-	"\tstr r0, [r1, 0x34]\n"
-"_0803C97C:\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0803C984: .4byte gPersonalityQuestionPointerTable\n"
-"_0803C988: .4byte gUnknown_203B400"
-    );
+    s32 answerIndex;
+    s32 natureIndex;
+    const u8 *pointArray;
+    
+    if (!sub_80144A4(&answerIndex))
+    {
+        if (answerIndex == 99)
+        {
+            gUnknown_203B400->currQuestionIndex = NUM_QUIZ_QUESTIONS;
+            gUnknown_203B400->TestState = 1;
+        }
+        else
+        {
+            pointArray = gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->effects;
+            // Skip until we get to the one for our answer
+            pointArray += 16 * answerIndex;
+            for (natureIndex = 0; natureIndex < NUM_PERSONALITIES; natureIndex++)
+            {
+                gUnknown_203B400->NatureTotals[natureIndex] += pointArray[natureIndex];
+            }
+            gUnknown_203B400->TestState = 0;
+        }
+    }
 }
 
 void SetPlayerGender(void)

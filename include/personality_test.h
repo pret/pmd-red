@@ -20,7 +20,7 @@ struct PersonalityQuestion
 {
   const char * question;
   const struct PersonalityAnswer * answers;
-  const u8 (*effects[16]);
+  const u8 (*effects);
 };
 
 struct PersonalityStruct_203B400
