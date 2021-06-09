@@ -1,14 +1,12 @@
-# Map JSON data
+# Dungeon Floor data
 
 DUNGEONS_DIR = $(DATA_ASM_SUBDIR)/dungeon
 
-dungeon_floor: TinyWoodsFloor ThunderwaveCaveFloor MtSteelFloor
+DUNGEON_DIRS := $(dir $(wildcard $(DUNGEONS_DIR)/*/floor_id.json))
+DUNGEON_FLOOR := $(patsubst $(DUNGEONS_DIR)/%/,$(DUNGEONS_DIR)/%/floor_id.inc,$(DUNGEON_DIRS))
 
-TinyWoodsFloor: $(DUNGEONS_DIR)/TinyWoods/floor_id.json
-	$(DUNGEONJSON) floor pmd-red $(DUNGEONS_DIR)/TinyWoods/floor_id.json
 
-ThunderwaveCaveFloor: $(DUNGEONS_DIR)/ThunderwaveCave/floor_id.json
-	$(DUNGEONJSON) floor pmd-red $(DUNGEONS_DIR)/ThunderwaveCave/floor_id.json
+dungeon_floor: $(DUNGEON_FLOOR);
 
-MtSteelFloor: $(DUNGEONS_DIR)/MtSteel/floor_id.json
-	$(DUNGEONJSON) floor pmd-red $(DUNGEONS_DIR)/MtSteel/floor_id.json
+$(DUNGEONS_DIR)/%/floor_id.inc: $(DUNGEONS_DIR)/%/floor_id.json
+	$(DUNGEONJSON) floor pmd-red $<
