@@ -1144,7 +1144,7 @@ void sub_808C9C4(void)
 }
 
 // Medicham Rescue Dialogue?
-void MedichamResuceDialogue(void)
+void MedichamRescueDialogue(void)
 {
     struct unkDungeon_8041D5C *temp;
     s32 counter;

@@ -42207,7 +42207,7 @@ _08084DBE:
 	bl sub_808C998
 	b _08084DDA
 _08084DC4:
-	bl MedichamResuceDialogue
+	bl MedichamRescueDialogue
 	b _08084DDA
 _08084DCA:
 	bl DummyFightDialogue
