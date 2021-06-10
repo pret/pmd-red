@@ -1,0 +1,56 @@
+{
+	"tables": [{
+		"name": "MtFreezePeak_1F_4F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_GLALIE",
+				"level": 20,
+				"probability": 10000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreezePeak_5F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_CHARIZARD",
+				"level": 55,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_ALAKAZAM",
+				"level": 50,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_TYRANITAR",
+				"level": 50,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_GLALIE",
+				"level": 20,
+				"probability": 10000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}
