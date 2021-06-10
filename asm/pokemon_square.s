@@ -438,7 +438,7 @@ _0801A1BC:
 	mov r0, r8
 	ldr r1, _0801A204
 	add r2, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, [r7]
 	adds r1, r6, 0
 	bl sub_8013800
@@ -906,7 +906,7 @@ _0801A588:
 	mov r0, r8
 	ldr r1, _0801A5D0
 	add r2, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, [r7]
 	adds r1, r6, 0
 	bl sub_8013800
@@ -1666,7 +1666,7 @@ _0801AB90:
 	ldr r1, _0801AC08
 	adds r0, r5, 0
 	add r2, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r4, _0801AC0C
 	ldr r0, [r4]
 	adds r0, 0x54

@@ -26,7 +26,7 @@ u32 SaveFriendAreas(u8 *r0, u32 r1)
     return temp[2];
 }
 
-u32 ReadSavedFriendAreas(u8 *r0, u32 r1)
+u32 ReadSavedFriendAreas(u8 *r0, s32 r1)
 {
     u32 temp[5];
     s32 counter;

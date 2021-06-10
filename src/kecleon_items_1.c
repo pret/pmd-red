@@ -60,19 +60,19 @@ void sub_8019B08(void)
 
 void sub_8019BBC(void)
 {
-  int local_c;
+  int menuAction;
   
-  local_c = 0;
+  menuAction = 0;
   if (gUnknown_203B210->unk4 != 0) {
     sub_8019EDC(0);
   }
   else {
     sub_801A2A8(0);
   }
-  if ((sub_8012FD8(&gUnknown_203B210->unk84) == 0) && (sub_8013114(&gUnknown_203B210->unk84,&local_c), local_c != 1)) {
-    gUnknown_203B210->unk30 = local_c;
+  if ((sub_8012FD8(&gUnknown_203B210->unk84) == 0) && (sub_8013114(&gUnknown_203B210->unk84,&menuAction), menuAction != 1)) {
+    gUnknown_203B210->unk30 = menuAction;
   }
-  switch(local_c){
+  switch(menuAction){
       case 2:
         if (gUnknown_203B460->teamMoney == 0) {
             UpdateKecleonStoreState(0x6);
@@ -97,14 +97,14 @@ void sub_8019BBC(void)
 
 void sub_8019C78(void)
 {
-  int local_c;
+  int menuAction;
   
-  local_c = 0;
+  menuAction = 0;
   sub_801A6E8(0);
-  if ((sub_8012FD8(&gUnknown_203B210->unk84) == '\0') && (sub_8013114(&gUnknown_203B210->unk84,&local_c), local_c != 1)) {
-    gUnknown_203B210->unk2C = local_c;
+  if ((sub_8012FD8(&gUnknown_203B210->unk84) == '\0') && (sub_8013114(&gUnknown_203B210->unk84,&menuAction), menuAction != 1)) {
+    gUnknown_203B210->unk2C = menuAction;
   }
-  switch(local_c){
+  switch(menuAction){
       case 3:
         sub_8099690(0);
         if (sub_80914E4(gUnknown_203B210->unk1C.itemIndex) == '\0') {

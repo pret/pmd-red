@@ -9,10 +9,10 @@
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
-extern struct unkData gUnknown_80DB840;
-extern struct unkData gUnknown_80DB870;
-extern struct unkData gUnknown_80DB888;
-extern struct unkData gUnknown_80DB858;
+extern struct UnkTextStruct2 gUnknown_80DB840;
+extern struct UnkTextStruct2 gUnknown_80DB870;
+extern struct UnkTextStruct2 gUnknown_80DB888;
+extern struct UnkTextStruct2 gUnknown_80DB858;
 
 void UpdateKecleonStoreState(u32);
 
@@ -29,8 +29,6 @@ extern void sub_8019D4C();
 extern void sub_8019D68();
 extern void sub_8018D30();
 extern void sub_8018E88();
-extern void sub_8006518(struct unkData *);
-extern void sub_800641C(struct unkData *, u32, u32);
 
 u32 DisplayKeckleonDialogueSprite(u32 param_1)
 {

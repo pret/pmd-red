@@ -4,11 +4,7 @@
 #include "input.h"
 #include "constants/species.h"
 #include "memory.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
+#include "text.h"
 
 struct unkStruct_203B318
 {
@@ -28,16 +24,13 @@ struct unkStruct_203B318
     u8 unk66;
     u8 unk67;
     struct OpenedFile** unk68;
-    struct unkData unk6C[4];
+    struct UnkTextStruct2 unk6C[4];
 };
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern struct unkStruct_203B318 *gUnknown_203B318;
-extern struct unkData gUnknown_80E0760;
-
-extern void sub_800641C(struct unkData *, u32, u32);
-extern void sub_8006518(struct unkData *);
+extern struct UnkTextStruct2 gUnknown_80E0760;
 
 extern void sub_8030208();
 extern void sub_8030258();
@@ -56,7 +49,7 @@ u32 CreateMakuhitaShop(u32 param_1)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B318 = MemoryAlloc(0xcc,8);
+  gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318),8);
   gUnknown_203B318->unk10 = -1;
   gUnknown_203B318->unk0 = param_1;
   switch(param_1) {

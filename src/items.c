@@ -8,8 +8,9 @@ extern struct unkStruct_203B460 *gUnknown_203B460;
 extern struct unkStruct_203B460 gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
-extern struct OpenedFile *gItemParametersFile;
-extern struct Item *gItemParametersData;
+
+EWRAM_DATA struct OpenedFile *gItemParametersFile;
+EWRAM_DATA struct Item *gItemParametersData;
 
 extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
@@ -52,10 +53,10 @@ void InitializeMoneyItems(void)
   gUnknown_203B460->teamSavings = 0;
 }
 
-u32 sub_8090A34(void)
+s32 sub_8090A34(void)
 {
   s32 iVar2;
-  u32 iVar3;
+  s32 iVar3;
   
   iVar3 = 0;
   for(iVar2 = 0; iVar2 < 0x14; iVar2++)

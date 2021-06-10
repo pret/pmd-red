@@ -7,6 +7,10 @@ extern int sprintf(char *, const char *, ...);
 extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+
+extern void sub_808DE50(void* r0, struct PokemonStruct *r1, u32 r2, u32 r3);
+
 
 u8 *GetCategoryString(s16 index)
 {
@@ -216,4 +220,9 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
 {
     // checking to see if dialogue sprite is available??
     return (gMonsterParameters[index].dialogue_sprites >> r1) & 1;
+}
+
+void sub_808DE30(void* r0, u32 r1)
+{
+    sub_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1, r1 * sizeof(struct PokemonStruct));
 }

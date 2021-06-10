@@ -3,16 +3,17 @@
 #include "file_system.h"
 #include "memory.h"
 #include "input.h"
-
-extern void sub_800641C(u32, u32, u32);
+#include "text.h"
 
 struct unkStruct_203B200
 {
+    // size: 0x50
     u32 unk0;
     u32 unk4;
     u8 *pokeName;
     s32 state;
     /* 0x10 */ struct MenuItem menus[3];
+    u8 fill[0x50 - 0x28];
 };
 extern struct unkStruct_203B200 *gUnknown_203B200;
 extern const char *gUnknown_80D4920;
@@ -94,7 +95,7 @@ u32 sub_801602C(u32 r0, u8 *name)
 {
     ResetUnusedInputStruct();
     sub_800641C(0, 1, 1);
-    gUnknown_203B200 = MemoryAlloc(0x50, 8);
+    gUnknown_203B200 = MemoryAlloc(sizeof(struct unkStruct_203B200), 8);
     gUnknown_203B200->unk0 = r0;
     gUnknown_203B200->pokeName = name;
     switch(r0)
@@ -138,8 +139,6 @@ u32 sub_8016080(void)
   }
     return 0;
 }
-
-extern void MemoryFree(void *);
 
 void sub_80160D8(void)
 {

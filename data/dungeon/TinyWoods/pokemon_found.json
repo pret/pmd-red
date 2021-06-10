@@ -1,0 +1,64 @@
+{
+	"tables": [{
+		"name": "TinyWoods1F_2F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_PIDGEY",
+				"level": 1,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_SUNKERN",
+				"level": 1,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_WURMPLE",
+				"level": 1,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "TinyWoods3F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_PIDGEY",
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_EXEGGCUTE",
+				"level": 1,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_SUNKERN",
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_WURMPLE",
+				"level": 1,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}

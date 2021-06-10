@@ -65,6 +65,7 @@ SECTIONS {
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
+        src/text_1.o(.text);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -107,8 +108,11 @@ SECTIONS {
         asm/code_801D760.o(.text);
         src/code_801DCC4.o(.text);
         asm/code_801DCC4.o(.text);
+        src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);
-        src/code_8027C84_pre.o(.text);
+        src/friend_area_action_menu.o(.text);
+        asm/friend_area_action_menu.o(.text);
+        src/friend_area_action_menu_1.o(.text);
         asm/code_8027C84.o(.text);
         src/wonder_mail_pre.o(.text);
         asm/wonder_mail.o(.text);
@@ -150,6 +154,8 @@ SECTIONS {
         asm/debug_menu.o(.text);
         src/debug_menu_mid.o(.text);
         asm/debug_menu_1.o(.text);
+        src/debug_menu_2.o(.text);
+        asm/debug_menu_2.o(.text);
         src/debug_menu_1.o(.text);
         asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
@@ -170,6 +176,7 @@ SECTIONS {
         asm/code_80521D0.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
+        asm/code_807001C.o(.text);
         src/code_8057824_1.o(.text);
         asm/jirachi_wish.o(.text);
         src/code_80521D0_1.o(.text);
@@ -178,8 +185,7 @@ SECTIONS {
         src/pokemon_mid.o(.text);
         asm/pokemon_1.o(.text);
         src/pokemon_1.o(.text);
-        src/code_808DAB4.o(.text);
-        asm/code_808DAB4.o(.text);
+        asm/pokemon_2.o(.text);
         src/code_808EAB0.o(.text);
         asm/code_808EAB0.o(.text);
         src/dungeon.o(.text);
@@ -199,6 +205,8 @@ SECTIONS {
         asm/code_8095014.o(.text);
         src/code_809747C.o(.text);
         asm/code_809747C.o(.text);
+        src/code_8097670.o(.text);
+        asm/code_8097670.o(.text);
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
         asm/exclusive_pokemon.o(.text);
@@ -282,6 +290,8 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
+        data/debug.o(.rodata);
+        src/debug.o(.rodata);
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/wonder_mail.o(.rodata);

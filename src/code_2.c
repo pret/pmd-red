@@ -9,18 +9,19 @@
 #include "play_time.h"
 #include "save.h"
 #include "gUnknown_203B46C.h"
+#include "text.h"
+#include "exclusive_pokemon.h"
+#include "pokemon.h"
+#include "rescue_team_info.h"
 
 extern void NDS_DebugInit(void);
 extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
-extern void LoadMonsterParameters(void);
 extern void sub_8097670(void);
 extern void LoadGameOptions(void);
 extern void sub_8094C14(void);
-extern void LoadExclusivePokemon(void);
 extern void LoadItemParameters(void);
-extern void LoadRescueTeamInfo(void);
 extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);
@@ -35,15 +36,13 @@ extern void sub_80015C0(u32, u32);
 extern u32 sub_8001658(u32, u32);
 extern void sub_800A8F8(u32);
 extern void ResetSprites(u32);
-extern void xxx_update_some_bg_tiles(u32);
 extern void sub_80097B0(void);
 extern void sub_800CDA8(u32);
-extern void sub_800641C(u32, u32, u32);
 extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
 extern void InitMainMenu(void);
-extern u8 sub_80363E0(void);
+extern bool8 sub_80363E0(void);
 extern void SetUpMenu(void);
 extern u32 UpdateMenu(void);
 extern void CleanUpMenu(void);
@@ -139,10 +138,10 @@ void GameLoop(void)
             xxx_update_stuff(0);
         }
         if (tmp3) {
-            sub_8012468();
-            while ((u8)(tmp3 = sub_8012484()))
+            PrepareSavePakRead();
+            while ((tmp3 = ReadSavePak()))
                 xxx_update_stuff(0);
-            sub_8012558();
+            FinishReadSavePak();
         }
         tmp3 = 1;
         StartNewBGM(MUS_LOADING_SCREEN);
@@ -150,7 +149,7 @@ void GameLoop(void)
         sub_80095CC(0, 20);
         InitMainMenu();
         while (1) {
-            if ((u8)sub_80363E0()) {
+            if (sub_80363E0()) {
                 if (gRealInputs.pressed & L_BUTTON) {
                     flag = FALSE;
                     SetBGOBJEnableFlags(19);

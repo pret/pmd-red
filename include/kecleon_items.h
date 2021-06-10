@@ -2,11 +2,7 @@
 #define KECLEON_ITEMS_H
 
 #include "gUnknown_203B460.h"
-
-struct unkData
-{
-    u8 unk0[24];
-};
+#include "text.h"
 
 struct unkStruct_203B210
 {
@@ -37,7 +33,7 @@ struct unkStruct_203B210
     u8 unkE2;
     u8 unkE3;
     struct OpenedFile **unkE4;
-    struct unkData unkE8[4];
+    struct UnkTextStruct2 unkE8[4];
 };
 
 #endif

@@ -244,8 +244,8 @@ gUnknown_810DFB4: @ 810DFB4
 gUnknown_810DFC8: @ 810DFC8
         .byte 0xB8, 0xDF, 0x10, 0x08
 
-	.global gUnknown_810DFCC
-gUnknown_810DFCC: @ 810DFCC
+	.global gEvolutionStrings
+gEvolutionStrings: @ 810DFCC
         .4byte NotNowText
         .4byte PossibleText
         .4byte NoMoreText
@@ -363,7 +363,7 @@ gUnknown_8113918: @ 8113918
 
 	.global gUnknown_8113934
 gUnknown_8113934: @ 8113934
-.byte 0x1c, 0x39, 0x11, 0x08
+        .byte 0x1c, 0x39, 0x11, 0x08
         .string "Attack#>42.#c2$d0#r  \0"
         .align 2,0
 
@@ -759,14 +759,14 @@ gUnknown_8116148: @ 8116148
         .byte 0x05, 0x01
         .byte 0x00, 0x00
 
-	.global gUnknown_811615C
-gUnknown_811615C: @ 811615C
+	.global gInvalidityText
+gInvalidityText: @ 811615C
 @ replacing .incbin "baserom.gba", 0x0011615c, 0x10
         .string "#CWinvalidity#R\0"
         .align 2,0
 
-	.global gUnknown_811616C
-gUnknown_811616C: @ 811616C
+	.global gUndefineText
+gUndefineText: @ 811616C
 @ replacing .incbin "baserom.gba", 0x0011616c, 0x10
         .string "#CWundefine#R\0"
         .align 2,0
@@ -1663,8 +1663,8 @@ gUnknown_8118250: @ 8118250
         .byte 0xF9, 0x06, 0x00, 0x00
         .4byte ExecutePlayerScriptActionLives_Text
 
-	.global gUnknown_811825C
-gUnknown_811825C: @ 811825C
+	.global gGroundLives_InvalidityText
+gGroundLives_InvalidityText: @ 811825C
         .string "#CWinvalidity#R\0"
         .align 2,0
 

@@ -1,0 +1,174 @@
+{
+	"tables": [{
+		"name": "LapisCave_1F_3F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_ZUBAT",
+				"level": 17,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_NINCADA",
+				"level": 14,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_4F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_NIDORINA",
+				"level": 15,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_NIDORINO",
+				"level": 15,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_NINCADA",
+				"level": 14,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_5F_8F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_NIDORINA",
+				"level": 15,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_NIDORINO",
+				"level": 15,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_ILLIMISE",
+				"level": 15,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_9F_10F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_TANGELA",
+				"level": 14,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BAGON",
+				"level": 16,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_11F_12F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GOLBAT",
+				"level": 10,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_TANGELA",
+				"level": 14,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BAGON",
+				"level": 16,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_13F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GOLBAT",
+				"level": 10,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_BAGON",
+				"level": 16,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "LapisCave_14F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_GOLBAT",
+				"level": 10,
+				"probability": 10000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}

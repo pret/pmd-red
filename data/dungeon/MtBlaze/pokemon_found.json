@@ -1,0 +1,220 @@
+{
+	"tables": [{
+		"name": "MtBlaze_1F_3F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_PIDGEOT",
+				"level": 16,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_MAGBY",
+				"level": 17,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_NUMEL",
+				"level": 14,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+
+		"name": "MtBlaze_4F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_MAGBY",
+				"level": 17,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_NUMEL",
+				"level": 14,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+
+		]
+	}, {
+		"name": "MtBlaze_5F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_SHUCKLE",
+				"level": 15,
+				"probability": 1304
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_MAGBY",
+				"level": 17,
+				"probability": 3479
+			},
+			{
+				"species": "SPECIES_NUMEL",
+				"level": 14,
+				"probability": 3478
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtBlaze_6F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_SHUCKLE",
+				"level": 15,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 2667
+			},
+			{
+				"species": "SPECIES_NUMEL",
+				"level": 14,
+				"probability": 5333
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtBlaze_7F_Pokemon",
+		"pokemon": [{
+				"species": "SPECIES_SHUCKLE",
+				"level": 15,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 2667
+			},
+			{
+				"species": "SPECIES_TORKOAL",
+				"level": 15,
+				"probability": 5333
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtBlaze_8F_9F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_RAPIDASH",
+				"level": 10,
+				"probability": 3478
+			},
+                        {
+				"species": "SPECIES_SHUCKLE",
+				"level": 15,
+				"probability": 1305
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 1739
+			},
+			{
+				"species": "SPECIES_TORKOAL",
+				"level": 15,
+				"probability": 3478
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtBlaze_10F_12F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_RAPIDASH",
+				"level": 10,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_SLUGMA",
+				"level": 16,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_TORKOAL",
+				"level": 15,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+        }
+        ]
+}

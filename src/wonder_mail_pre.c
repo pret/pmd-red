@@ -7,8 +7,6 @@
 #include "memory.h"
 
 
-extern void sub_800641C(void *r0, u8, u8);
-
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -89,8 +87,8 @@ u32 sub_8027F88(void)
   gUnknown_203B2C0->unk42E = 0;
   gUnknown_203B2C0->unk428 = 2;
   gUnknown_203B2C0->unk42A = 8;
-  for(counter = 0; counter < 0x36; counter++){
-    gUnknown_203B2C0->unk8[counter] = 0;
+  for(counter = 0; counter < PASSWORD_BUFFER_SIZE; counter++){
+    gUnknown_203B2C0->passwordBuffer[counter] = 0;
   }
   gUnknown_203B2C0->unk0 = 0x3D;
   sub_8028B04(0); // Set initial state to 0?

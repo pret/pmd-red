@@ -1,0 +1,32 @@
+{
+    "name": "TinyWoodsFloorID",
+    "tables": [
+        {
+            "MainData": 0,
+            "Pokemon": 0,
+            "Traps": 0,
+            "Items": 0,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 1,
+            "Pokemon": 0,
+            "Traps": 0,
+            "Items": 4,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 2,
+            "Pokemon": 1,
+            "Traps": 0,
+            "Items": 5,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        }
+    ]
+}

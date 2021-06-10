@@ -2,7 +2,7 @@
 #include "play_time.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
-extern struct PlayTimeStruct gPlayTime;
+EWRAM_DATA struct PlayTimeStruct gPlayTime;
 
 extern void sub_809488C(u8 *r0, u8 *r1, u32);
 extern void sub_8094924(u8 *r0, u8 *r1, u32);
@@ -76,7 +76,7 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
     }
 }
 
-void sub_8095044(u8 *r0)
+void WritePlayTime(u8 *r0)
 {
     sub_809488C(r0, (&(gPlayTimeRef->frames)), 6);
     sub_809488C(r0, (&(gPlayTimeRef->seconds)), 6);
@@ -84,7 +84,7 @@ void sub_8095044(u8 *r0)
     sub_809488C(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
 }
 
-void sub_8095080(u8 *r0)
+void ReadPlayTime(u8 *r0)
 {
     sub_8094924(r0, (&(gPlayTimeRef->frames)), 6);
     sub_8094924(r0, (&(gPlayTimeRef->seconds)), 6);

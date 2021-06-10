@@ -923,7 +923,7 @@ _08000DAC:
 	bl sub_8001170
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8097758
+	bl IncrementNumAdventures
 	cmp r5, 0x9
 	bne _08000E00
 	ldr r4, _08000DF4
@@ -1086,7 +1086,7 @@ sub_8000EDC:
 	beq _08000F68
 	ldr r0, [r4, 0x74]
 	ldr r1, [sp]
-	bl sub_801277C
+	bl PrepareQuickSaveRead
 	adds r7, r4, 0
 	adds r7, 0x7C
 	b _08000F2E
@@ -1096,14 +1096,14 @@ _08000F28:
 	movs r0, 0
 	bl xxx_update_stuff
 _08000F2E:
-	bl sub_80127A8
+	bl ReadQuickSave
 	lsls r0, 24
 	cmp r0, 0
 	bne _08000F28
-	bl sub_8012828
+	bl IsQuickSaveValid
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8012834
+	bl FinishQuickSaveRead
 	bl sub_8011830
 	cmp r5, 0
 	beq _08000F58
@@ -1169,13 +1169,13 @@ _08000FB8:
 	ldr r0, [r4, 0x74]
 	ldr r1, [sp]
 	movs r2, 0x1
-	bl sub_8012850
+	bl PrepareQuickSaveWrite
 	b _08000FFA
 _08000FD8:
 	ldr r0, [r4, 0x74]
 	ldr r1, [sp]
 	movs r2, 0
-	bl sub_8012850
+	bl PrepareQuickSaveWrite
 	b _08000FFA
 _08000FE4:
 	cmp r0, 0x1
@@ -1188,13 +1188,13 @@ _08000FF4:
 	movs r0, 0
 	bl xxx_update_stuff
 _08000FFA:
-	bl sub_80128B0
+	bl WriteQuickSave
 	cmp r0, 0x2
 	beq _08001006
 	cmp r0, 0x3
 	bne _08000FE4
 _08001006:
-	bl sub_80129FC
+	bl FinishQuickSaveWrite
 	b _0800101C
 _0800100C:
 	bl sub_808ED00

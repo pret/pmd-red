@@ -2,15 +2,7 @@
 #include "input.h"
 #include "gba/io_reg.h"
 #include "memory.h"
-
-struct unkData
-{
-    u8 unk0[14];
-    u16 unkD;
-    u16 unk10;
-    u16 unk12;
-    u8 *unk14;
-};
+#include "text.h"
 
 struct AdventureLog
 {
@@ -22,8 +14,8 @@ struct AdventureLog
     u16 unk20;
     u8 fill22[0x34 - 0x22];
     u32 unk34;
-    struct unkData *unk38;
-    struct unkData unk3C[3];
+    struct UnkTextStruct2 *unk38;
+    struct UnkTextStruct2 unk3C[3];
     u8 fill84[0x9C - 0x84];
     u8 unk9C;
     /* 0x9D */ u8 currPage_u8;
@@ -33,19 +25,19 @@ struct AdventureLog
 
 extern struct AdventureLog *gAdventureLog;
 
-const struct unkData gUnknown_80E1FF0 = {
+const struct UnkTextStruct2 gUnknown_80E1FF0 = {
    0x00, 0x00, 0x00, 0x00,
    0x03, 0x00, 0x00, 0x00,
    0x00, 0x00, 0x00, 0x00,
-   0x00, 0x00, 0x00,
+   0x00, 0x00,
    0x00, 0x00,
    NULL
 };
-const struct unkData gUnknown_80E2008 = {
+const struct UnkTextStruct2 gUnknown_80E2008 = {
     0x00, 0x00, 0x00, 0x00,
     0x06, 0x00, 0x00, 0x00,
     0x02, 0x00, 0x02, 0x00,
-    0x1A, 0x00, 0x04,
+    0x1A, 0x04,
     0x06, 0x00,
     NULL
 };
@@ -55,8 +47,6 @@ const u8 gAdventureLogHeaderText[] = "Adventure Log";
 const u8 gUnknown_80E2030[] = "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "; // string of ???????
 const u8 fill_adven[] = "pksdir0";
 
-extern void sub_8006518(struct unkData *);
-extern void sub_800641C(void *, u32, u32);
 void sub_8032084();
 void DisplayAdventureLog();
 extern void sub_8013818(void *, u32, u32, u32);
@@ -145,7 +135,7 @@ void sub_8032084(void)
   sVar2 = sub_80095E4(gAdventureLog->unk1A,0xc) + 2 << 0x10;
   // TODO needs asr r3, r0, r16
   //        and lsr r0, r0, r16
-  gAdventureLog->unk3C[gAdventureLog->unk34].unkD = sVar2;
+  gAdventureLog->unk3C[gAdventureLog->unk34].unkE = sVar2;
   // Good past here except regs for this store
   gAdventureLog->unk3C[gAdventureLog->unk34].unk10 = sVar2 + 2;
   ResetUnusedInputStruct();

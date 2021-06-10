@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "constants/species.h"
 #include "memory.h"
+#include "text.h"
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);
@@ -18,7 +19,6 @@ extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 
 extern u8 sub_8039880(void);
 void ResetUnusedInputStruct(void);
-void sub_800641C(void *, u32, u32);
 
 extern void sub_8035300(void);
 extern void sub_8035404(u32);

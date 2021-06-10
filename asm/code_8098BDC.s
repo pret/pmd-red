@@ -3247,7 +3247,7 @@ _0809A8A0: .4byte gUnknown_3001B64
 _0809A8A4: .4byte 0x0000043c
 _0809A8A8: .4byte 0x0000ffff
 _0809A8AC: .4byte gAvailablePokemonNames
-_0809A8B0: .4byte gUnknown_811615C
+_0809A8B0: .4byte gInvalidityText
 _0809A8B4: .4byte gPlayerName
 	thumb_func_end sub_809A83C
 
@@ -3536,7 +3536,7 @@ _0809AAE6:
 	b _0809AB3C
 	.align 2, 0
 _0809AB28: .4byte gAvailablePokemonNames
-_0809AB2C: .4byte gUnknown_811616C
+_0809AB2C: .4byte gUndefineText
 _0809AB30: .4byte gPlayerName
 _0809AB34:
 	mov r0, r9
@@ -4305,7 +4305,7 @@ _0809B0E4:
 	lsls r2, 4
 	ldr r3, _0809B13C
 	adds r2, r3
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _0809B0F6:
 	adds r0, r4, 0
 	bl sub_809AE3C
@@ -4602,7 +4602,7 @@ _0809B318:
 	lsls r2, 4
 	ldr r3, _0809B3D8
 	adds r2, r3
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _0809B32A:
 	ldr r0, _0809B3DC
 	mov r8, r0
@@ -4614,7 +4614,7 @@ _0809B32A:
 	ldr r1, _0809B3E0
 	adds r0, r4, 0
 	adds r2, r7, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	adds r7, r4, 0
 _0809B344:
 	adds r0, r6, 0
@@ -5681,18 +5681,18 @@ _0809BC02:
 	movs r0, 0x1
 	bl sub_8011C28
 	movs r0, 0
-	bl sub_8012574
+	bl PrepareSavePakWrite
 	b _0809B784
 	.align 2, 0
 _0809BC10: .4byte 0x00000414
 _0809BC14:
-	bl sub_8012600
+	bl WriteSavePak
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC20
 	b _0809B784
 _0809BC20:
-	bl sub_8012750
+	bl FinishWriteSavePak
 	b _0809C392
 _0809BC26:
 	movs r0, 0x4
@@ -7670,7 +7670,7 @@ sub_809CBBC:
 	adds r0, r3
 	ldr r3, [r0]
 	mov r0, sp
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	ldr r0, _0809CC14
 	ldr r0, [r0]
 	movs r1, 0x98

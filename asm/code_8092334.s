@@ -95,7 +95,7 @@ _080928DE:
 	ldr r1, _080928F4
 	ldrb r2, [r4, 0x5]
 	add r0, sp, 0x14
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _080928FC
 	.align 2, 0
 _080928F0: .4byte gUnknown_81098C4
@@ -152,7 +152,7 @@ _08092944:
 	str r0, [sp]
 	adds r0, r7, 0
 	adds r2, r6, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _08092A6A
 	.align 2, 0
 _08092964: .4byte gUnknown_81098E0
@@ -232,7 +232,7 @@ _080929E2:
 	mov r1, r8
 	adds r2, r6, 0
 	mov r3, r12
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	b _08092A6A
 	.align 2, 0
 _08092A10: .4byte gUnknown_81098EC
@@ -275,7 +275,7 @@ _08092A3E:
 	mov r1, r8
 	adds r2, r6, 0
 	mov r3, r12
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 _08092A6A:
 	add sp, 0x20
 	pop {r3}
@@ -737,7 +737,7 @@ sub_8092D54:
 	ldr r2, [r0]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0

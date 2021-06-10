@@ -1,0 +1,216 @@
+{
+	"tables": [{
+		"name": "MtFreeze_1F_2F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_PINECO",
+				"level": 18,
+				"probability": 1111
+			},
+			{
+				"species": "SPECIES_SWABLU",
+				"level": 18,
+				"probability": 4445
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_SHELGON",
+				"level": 19,
+				"probability": 4444
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_3F_5F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SEEL",
+				"level": 18,
+				"probability": 2759
+			},
+                        {
+				"species": "SPECIES_PINECO",
+				"level": 18,
+				"probability": 689
+			},
+			{
+				"species": "SPECIES_PUPITAR",
+				"level": 17,
+				"probability": 1035
+			},
+			{
+				"species": "SPECIES_SWABLU",
+				"level": 18,
+				"probability": 2758
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_SHELGON",
+				"level": 19,
+				"probability": 2759
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_6F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SEEL",
+				"level": 18,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_SWABLU",
+				"level": 18,
+				"probability": 3334
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_SHELGON",
+				"level": 19,
+				"probability": 3333
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_7F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SEEL",
+				"level": 18,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_VIGOROTH",
+				"level": 20,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_ZANGOOSE",
+				"level": 18,
+				"probability": 2857
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_CHIMECHO",
+				"level": 22,
+				"probability": 1429
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_8F_11F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_VIGOROTH",
+				"level": 20,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_ZANGOOSE",
+				"level": 18,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_CHIMECHO",
+				"level": 22,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_12F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SLAKING",
+				"level": 15,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_ZANGOOSE",
+				"level": 18,
+				"probability": 4000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_CHIMECHO",
+				"level": 22,
+				"probability": 2000
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "MtFreeze_13F_15F_Pokemon",
+		"pokemon": [
+			{
+				"species": "SPECIES_SLAKING",
+				"level": 15,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_SEVIPER",
+				"level": 19,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}

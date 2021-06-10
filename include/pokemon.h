@@ -2,6 +2,7 @@
 #define POKEMON_H
 
 #include "file_system.h"
+#include "constants/species.h"
 
 struct PokemonStruct
 {
@@ -49,7 +50,7 @@ struct PokemonStruct3
 
 struct unkStruct_203B45C
 {
-    struct PokemonStruct pokemon[0x19D];
+    struct PokemonStruct pokemon[NUM_SPECIES];
     struct PokemonStruct2 pokemon2[4];
     struct PokemonStruct3 pokemon3[4];
 };
@@ -110,6 +111,11 @@ struct gPokemon
     /* 0x40 */ s16 base_recruit;
     /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
 };
+
+void LoadMonsterParameters(void);
+struct unkStruct_203B45C *GetRecruitedPokemon(void);
+void InitializeRecruitedPokemon(void);
+
 
 void CopySpeciesNametoBuffer(u8 * buffer, s16 index);
 void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index);

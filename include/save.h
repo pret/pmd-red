@@ -4,6 +4,8 @@
 #include "play_time.h"
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
+#include "pokemon.h"
+#include "item.h"
 
 enum
 {
@@ -12,20 +14,28 @@ enum
     SAVE_FAILED
 };
 
+enum
+{
+    READ_SAVE_VALID,
+    READ_SAVE_FAILED,
+    READ_SAVE_CHECKSUM_ERROR
+};
+
 
 struct UnkStruct_sub_8011DAC {
+    // size: 0x57D4
     u8 fill000[0x4];
     u8 unk004[0x400];
-    u8 unk404[0x10];
+    u8 unk404[0x10]; // has "POKE_DUNGEON__05"
     u32 unk414;
     u32 unk418;
     u32 unk41C;
-    u32 unk420;
-    u32 unk424;
+    u32 RngState;
+    u32 savedRecruitedPokemon;
     u32 unk428;
     u8 fill42C[0x4];
     u32 unk430;
-    u32 unk434;
+    u32 savedRescueTeamInfo;
     u32 savedFriendAreas;
     u32 unk43C;
     u32 unk440;
@@ -35,8 +45,8 @@ struct UnkStruct_sub_8011DAC {
 
 
 struct UnkStruct_203B184 {
-    /* 0x0 */ u32 *unk0;
-    /* 0x4 */ u32 *recruitedPokemon;
+    /* 0x0 */ struct unkStruct_203B460 *MoneyItems;
+    /* 0x4 */ struct unkStruct_203B45C *recruitedPokemon;
     /* 0x8 */ u8 *unk8;
     /* 0xC */ u8 *unkC;
     /* 0x10 */ u32 *unk10;
@@ -45,7 +55,7 @@ struct UnkStruct_203B184 {
     /* 0x1C */ struct RescueTeamData *RescueTeamInfo;
     /* 0x20 */ u32 unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
-    /* 0x28 */ u8 *BoughtFriendAreas;
+    /* 0x28 */ bool8 *BoughtFriendAreas;
     /* 0x2C */ u32 gameOptions;
     /* 0x30 */ struct PlayTimeStruct *playTime;
     u32 unk34;
@@ -57,7 +67,7 @@ struct UnkStruct_203B184 {
     u8 *unk04C;
     u32 unk050;
     u32 unk054;
-    u32 unk058;
+    u32 RngState;
 };
 
 u32 sub_8011C1C(void);
@@ -72,19 +82,19 @@ bool8 IsSaveCorrupted(void);
 void sub_8012284(void);
 void sub_8012298(void);
 void sub_80122A8(void);
-void sub_8012468(void);
-u8 sub_8012484(void);
-void sub_8012558(void);
-void sub_8012574(s16 PokemonID);
-bool8 sub_8012600(void);
-u32 sub_8012744(void);
-void sub_8012750(void);
-u32 sub_80127A8(void);
-u8 sub_8012828(void);
-void sub_8012834(void);
-void sub_8012850(u8 *r0, u32 r1, u8 r2);
-u32 sub_80128B0(void);
-void sub_80129FC(void);
+void PrepareSavePakRead(void);
+bool8 ReadSavePak(void);
+void FinishReadSavePak(void);
+void PrepareSavePakWrite(s16 PokemonID);
+bool8 WriteSavePak(void);
+u32 GetSavePakStatus(void);
+void FinishWriteSavePak(void);
+bool8 ReadQuickSave(void);
+bool8 IsQuickSaveValid(void);
+void FinishQuickSaveRead(void);
+void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2);
+u32 WriteQuickSave(void);
+void FinishQuickSaveWrite(void);
 
 void sub_8012298();
 void sub_80122D0();

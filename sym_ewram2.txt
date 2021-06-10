@@ -176,16 +176,16 @@ gUnknown_203B180 = .; /* 203B180 */
 gUnknown_203B184 = .; /* 203B184 */
 	. += 0x4;
 
-gUnknown_203B188 = .; /* 203B188 */
+gSavePakRead = .; /* 203B188 */
 	. += 0x4;
 
-gUnknown_203B18C = .; /* 203B18C */
+gSavePakWrite = .; /* 203B18C */
 	. += 0x4;
 
-gUnknown_203B190 = .; /* 203B190 */
+gQuickSaveRead = .; /* 203B190 */
 	. += 0x4;
 
-gUnknown_203B194 = .; /* 203B194 */
+gQuickSaveWrite = .; /* 203B194 */
 	. += 0x4;
 
 gUnknown_203B198 = .; /* 203B198 */

@@ -1,6 +1,11 @@
 #include "global.h"
 #include "input.h"
 #include "memory.h"
+#include "text.h"
+#include "item.h"
+#include "kangaskhan_storage.h"
+
+extern struct unkStruct_203B208 *gUnknown_203B208;
 
 struct unkStruct_203B20C
 {
@@ -11,10 +16,6 @@ struct unkStruct_203B20C
     u32 unk1C;
 };
 extern struct unkStruct_203B20C *gUnknown_203B20C;
-
-extern void sub_800641C(u8 *, u32, u32);
-extern void sub_8017F10(u32);
-
 
 extern void sub_8017F10(u32);
 extern void sub_8018588(void);
@@ -29,6 +30,91 @@ extern void sub_8018AE4(void);
 
 extern void sub_8017F28();
 extern void sub_8018100();
+extern void UpdateKangaskhanStorageState(u32);
+extern s32 sub_80144A4(s32 *);
+extern void sub_801B450();
+extern u32 sub_801B410(void);
+
+extern u8 sub_8012FD8(u32 *r0);
+extern void sub_8013114(u32 *, s32 *);
+extern void sub_801CBB8();
+extern void sub_801CA08();
+
+void sub_8017D24(void)
+{
+    s32 menuAction;
+    menuAction = 0;
+    sub_801CA08();
+    if (sub_8012FD8(&gUnknown_203B208->unk58) == 0) {
+        sub_8013114(&gUnknown_203B208->unk58, &menuAction);
+        if(menuAction != 1) gUnknown_203B208->unk20 = menuAction;
+    }
+
+    switch(menuAction)
+    {
+      case 3:
+        if (sub_8090A34() > 0x13)
+        {
+            sub_801CBB8();
+            UpdateKangaskhanStorageState(0x6);
+        }
+        else
+        {
+            if(sub_8090A60(gUnknown_203B208->itemIndex))
+                UpdateKangaskhanStorageState(0x18);
+            else
+                UpdateKangaskhanStorageState(0x1B);
+        }
+        break;
+      case 6:
+        UpdateKangaskhanStorageState(0x1A);
+        break;
+      case 1:
+        UpdateKangaskhanStorageState(0x17);
+        break;
+    }
+}
+
+void sub_8017DC0(void)
+{
+    switch(sub_801B410())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_801B450();
+            UpdateKangaskhanStorageState(0xE);
+            break;
+    }
+}
+
+void sub_8017DDC(void)
+{
+    switch(sub_801B410())
+    {
+        case 0:
+        case 1:
+        default:
+            break;
+        case 2:
+        case 3:
+            sub_801B450();
+            UpdateKangaskhanStorageState(0x17);
+            break;
+    }
+}
+
+void sub_8017DF8(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        UpdateKangaskhanStorageState(gUnknown_203B208->unk8);
+    }
+}
 
 u32 sub_8017E1C(void)
 {

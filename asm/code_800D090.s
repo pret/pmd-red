@@ -8732,7 +8732,7 @@ _08011406:
 	ldr r1, _0801147C
 	ldr r2, [r6]
 	add r0, sp, 0x4
-	bl sub_800D158
+	bl ExpandPlaceholdersBuffer
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xC

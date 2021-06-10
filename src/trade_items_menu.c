@@ -3,13 +3,14 @@
 #include "trade_items_menu.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
+#include "save.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
 extern u32 gUnknown_202DE30;
 extern u32 gUnknown_202DE58;
-extern struct unkData gUnknown_80E6174;
+extern struct UnkTextStruct2 gUnknown_80E6174;
 
 // Trade Items Menu Link Error Messages
 extern u32 gTradeItemsCommunicationError;
@@ -36,18 +37,16 @@ extern u32 gUnknown_80E6314;
 
 extern void sub_8013AA0(u32 *);
 
-extern void sub_800641C(u32 *, u32, u32);
 extern void sub_8035C1C();
 extern void sub_8035DA0();
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
 extern u8 sub_801CB24();
-extern void sub_8006518(u32 *);
 extern void sub_801B3C0(u8 *);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
-extern void sub_8035CC0(struct unkData *, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();
 extern void sub_801B450();
@@ -56,12 +55,7 @@ extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_8013BBC(u32 *);
 void sub_8036F30();
 extern void TradeItem_AddItem();
-extern void sub_8012574(u32);
 extern void sub_80141B4(u32 *, u32, u32, u32);
-
-extern void sub_8012574(u32);
-extern u8 sub_8012600(void);
-extern void sub_8012750();
 
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
@@ -254,7 +248,7 @@ void sub_80365AC(void)
         gTradeItemsMenu->unk4 = 2;
         gTradeItemsMenu->chosenItem = sub_801CB24();
         gTradeItemsMenu->chosenNum = 1;
-        sub_8006518(&gTradeItemsMenu->unk1E4);
+        sub_8006518(gTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_801B3C0(&gTradeItemsMenu->unk25C);
@@ -278,7 +272,7 @@ void sub_8036674(void)
         break;
     case 4: // Info
         gTradeItemsMenu->unk4 = 0x13;
-        sub_8006518(&gTradeItemsMenu->unk1E4);
+        sub_8006518(gTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
         sub_801B3C0(&gTradeItemsMenu->unk25C);
@@ -302,7 +296,7 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(&gTradeItemsMenu->unk1E4, 1, 1);
+        sub_800641C(gTradeItemsMenu->unk1E4, 1, 1);
         sub_801CB5C(1);
         if (gTradeItemsMenu->unk4 == 0x13) {
             sub_8035CF4(&gTradeItemsMenu->unk44, 3, 1);
@@ -363,7 +357,7 @@ void TradeItem_SendItemConfirm(void)
             load -= gTradeItemsMenu->numItemsToSend;
             gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
-            sub_8012574(0);
+            PrepareSavePakWrite(0);
             break;
         case 6:
         case 0:
@@ -405,7 +399,7 @@ void sub_80368D4(void)
             {
                 TradeItem_AddItem();
                 SetTradeItemMenu(0x11);
-                sub_8012574(0);
+                PrepareSavePakWrite(0);
             }
         break;
     }
@@ -444,7 +438,7 @@ void sub_8036950(void)
           // Link Failure
         TradeItem_AddItem(); // Add back the item
         SetTradeItemMenu(0xb);
-        sub_8012574(0);
+        PrepareSavePakWrite(0);
       }
       else {
         PrintTradeItemsLinkError(gTradeItemsMenu->linkStatus);
@@ -488,7 +482,7 @@ void sub_8036A34(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetTradeItemMenu(0x10);
-        sub_8012574(0);
+        PrepareSavePakWrite(0);
     }
 }
 
@@ -497,9 +491,9 @@ void sub_8036A54(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        if(sub_8012600() == 0)
+        if(!WriteSavePak())
         {
-            sub_8012750();
+            FinishWriteSavePak();
             SetTradeItemMenu(TRADE_ITEMS_EXIT);
         }
     }
@@ -510,9 +504,9 @@ void sub_8036A7C(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        if(sub_8012600() == 0)
+        if(!WriteSavePak())
         {
-            sub_8012750(); // cleans up from Save Message
+            FinishWriteSavePak(); // cleans up from Save Message
             SetTradeItemMenu(0x8);
         }
     }
@@ -523,9 +517,9 @@ void sub_8036AA4(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        if(sub_8012600() == 0)
+        if(!WriteSavePak())
         {
-            sub_8012750();
+            FinishWriteSavePak();
             PrintTradeItemsLinkError(gTradeItemsMenu->linkStatus);
             SetTradeItemMenu(0xC);
         }
@@ -537,9 +531,9 @@ void sub_8036ADC(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        if(sub_8012600() == 0)
+        if(!WriteSavePak())
         {
-            sub_8012750();
+            FinishWriteSavePak();
             SetTradeItemMenu(TRADE_ITEMS_EXIT);
         }
     }
@@ -1079,7 +1073,7 @@ void sub_8036ECC(u32 index, u32 r1)
   sub_8013AA0(&gTradeItemsMenu->numItemsToSend);
   gTradeItemsMenu->unk184[index] = gUnknown_80E6174;
   ResetUnusedInputStruct();
-  sub_800641C((u32 *)&gTradeItemsMenu->unk184, 1, 1);
+  sub_800641C(gTradeItemsMenu->unk184, 1, 1);
 }
 
 void sub_8036F30(void)
@@ -1097,7 +1091,7 @@ void sub_8036F30(void)
 
 void sub_8036F74(void)
 {
-  sub_8006518((u32 *)&gTradeItemsMenu->unk184);
+  sub_8006518(gTradeItemsMenu->unk184);
   sub_8036ECC(2, gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem]);
   sub_801CCD8();
   sub_8035CF4(&gTradeItemsMenu->unk44, 3, 0);

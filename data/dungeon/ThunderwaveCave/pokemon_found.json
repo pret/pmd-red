@@ -1,0 +1,100 @@
+{
+	"tables": [{
+		"name": "ThunderwaveCave_1F_2F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_RATTATA",
+				"level": 3,
+				"probability": 5000
+			},
+			{
+				"species": "SPECIES_NIDORAN_F",
+				"level": 4,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_POOCHYENA",
+				"level": 3,
+				"probability": 2500
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "ThunderwaveCave_3F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_RATTATA",
+				"level": 3,
+				"probability": 4167
+			},
+			{
+				"species": "SPECIES_NIDORAN_F",
+				"level": 4,
+				"probability": 2083
+			},
+			{
+				"species": "SPECIES_VOLTORB",
+				"level": 3,
+				"probability": 1667
+			},
+			{
+				"species": "SPECIES_POOCHYENA",
+				"level": 3,
+				"probability": 2083
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}, {
+		"name": "ThunderwaveCave_4F_5F_Pokemon",
+		"pokemon": [
+                        {
+				"species": "SPECIES_VOLTORB",
+				"level": 3,
+				"probability": 3846
+			},
+			{
+				"species": "SPECIES_ELEKID",
+				"level": 4,
+				"probability": 3077
+			},
+			{
+				"species": "SPECIES_PLUSLE",
+				"level": 3,
+				"probability": 1539
+			},
+			{
+				"species": "SPECIES_MINUN",
+				"level": 3,
+				"probability": 1538
+			},
+			{
+				"species": "SPECIES_KECLEON",
+				"level": 90,
+				"probability": 0
+			},
+			{
+				"species": "SPECIES_DECOY",
+				"level": 1,
+				"probability": 0
+			}
+		]
+	}]
+}

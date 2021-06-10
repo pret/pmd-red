@@ -4,6 +4,8 @@
 #include "pokemon.h"
 #include "constants/species.h"
 #include "memory.h"
+#include "text.h"
+#include "save.h"
 
 struct unkStruct_203B2C8
 {
@@ -19,9 +21,9 @@ struct unkStruct_203B2C8
     /* 0x11 */ u8 unk11;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ u8 unk13;
-    /* 0x14 */ u8 unk14[4]; // Figure out size of this buffer
+    /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
-    u8 unk114[0xA]; // holds species name
+    u8 speciesName[0xA]; // holds species name
     u8 fill118[0x128 - 0x11E];
     u16 unk128;
     u8 unk12A;
@@ -72,16 +74,9 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298();
 extern void sub_802F2C0();
-extern u32 sub_8011C34();
-extern void sub_800641C(void *, u32, u32);
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
 extern u32 sub_80144A4(s32 *);
-extern void sub_8011C28(u32);
-extern void sub_8012574(u32);
-extern void sub_8012750();
-extern bool8 sub_8012600();
-
 
 extern void sub_802B560();
 extern void sub_802B57C();
@@ -89,7 +84,7 @@ extern void sub_802B5B8();
 extern void sub_802B5FC();
 extern void sub_802B624();
 
-void sub_800D158(u8 *buffer, const char *text, ...);
+void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
 extern void sub_802F204(u8 *, u32);
 extern void sub_803C37C(u8 *, u32, u8 *);
 extern u32 sub_803C200(u8 *, u32);
@@ -183,13 +178,13 @@ void sub_802B3E0(void)
             strcpy(teamNameBuffer,gUnknown_80DF9F0);
         }
         // Print and expand placeholders?
-        sub_800D158(gUnknown_203B2C8->unk14,gUnknown_80DF9F8,teamNameBuffer);
+        ExpandPlaceholdersBuffer(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelliper face
-        sub_80141B4(gUnknown_203B2C8->unk14, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
+        sub_80141B4(gUnknown_203B2C8->teamName, 0, (u32 *)&gUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 1:
         monName = GetMonSpecies(SPECIES_PELIPPER);
-        strcpy(gUnknown_203B2C8->unk114, monName);
+        strcpy(gUnknown_203B2C8->speciesName, monName);
         gUnknown_203B2C8->unk128 = 0x130;
         gUnknown_203B2C8->unk12A = 2;
         gUnknown_203B2C8->unk12C = 0;
@@ -201,7 +196,7 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk132 = 0;
         gUnknown_203B2C8->unk133 = 10;
         gUnknown_203B2C8->unk134 = 0;
-        sub_802F204(gUnknown_203B2C8->unk114, 0);
+        sub_802F204(gUnknown_203B2C8->speciesName, 0);
         break;
       case 2:
         // I hope you will keep on rescuing your friends
@@ -260,7 +255,7 @@ void sub_802B5B8(void)
     puVar3->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);
-    sub_8012574(0);
+    PrepareSavePakWrite(0);
   }
 }
 
@@ -269,8 +264,8 @@ void sub_802B5FC(void)
   s32 temp;
   
   if (sub_80144A4(&temp) == 0) {
-    if (sub_8012600() == '\0') {
-      sub_8012750();
+    if (!WriteSavePak()) {
+      FinishWriteSavePak();
       sub_802B548(4);
     }
   }

@@ -9,9 +9,9 @@
 #include "save.h"
 #include "memory.h"
 #include "gUnknown_203B46C.h"
+#include "text.h"
 
 extern void sub_801317C(u32 *);
-extern void sub_8099690(u32);
 extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
@@ -29,8 +29,6 @@ extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
 
-extern void sub_8006518(void *);
-extern void sub_800641C(void *, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
 extern void sub_8008C54(u32);
@@ -48,35 +46,12 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct UnkInputStruct **r0);
 u32 sub_8013800(struct UnkInputStruct **r0, u32);
 extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
-extern void xxx_call_draw_string(u32 size, u32, const char *text, u32, u32);
+extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
-
-
-struct PersonalityAnswer
-{
-  const char * text;
-  int effect;
-};
-
-struct PersonalityQuestion
-{
-  const char * question;
-  const struct PersonalityAnswer * answers;
-  const u8 (*effects[16]);
-};
 
 extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
 
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
-
-struct stack_PartnerSprite
-{
-    // size: 0x60
-    u32 unk0;
-    u8 padding[0x18 - 4];
-    struct unkData data;
-    u32 padding2[12];
-};
 
 extern const char gStarterReveal[];
 extern const char gGenderText[];
@@ -100,17 +75,17 @@ extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 
-const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
+ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
 const char * const gStarterRevealPtr = gStarterReveal;
 
-const char gPartnerPrompt[] = _(
+ALIGNED(4) const char gPartnerPrompt[] = _(
         "{CENTER_ALIGN}This is the final step.{WAIT_PRESS}\n"
         "{CENTER_ALIGN}Who would you like to have as a partner?{EXTRA_MSG}"
         "{CENTER_ALIGN}Choose the Pokémon you want\n"
         "{CENTER_ALIGN}as your partner from this group.");
 const char * const gPartnerPromptPtr = gPartnerPrompt;
 
-const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
+ALIGNED(4) const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
 const char * const gPartnerNickPromptPtr = gPartnerNickPrompt;
 
 ALIGNED(4) const char gEndIntroText[] = _(
@@ -139,13 +114,13 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 #include "data/nature_description.h"
 
-struct unkData gUnknown_80F4244 = 
+const struct UnkTextStruct2 gUnknown_80F4244 = 
 {
-    0, 0,
-    5, 0,
-    0xC, 6,
-    5, 5,
-    5,0,
+    0x00, 0x00, 0x00, 0x00,
+    0x05, 0x00, 0x00, 0x00,
+    0x0C, 0x00, 0x06, 0x00,
+    0x05, 0x05,
+    0x05, 0x00,
     NULL
 };
 
@@ -165,31 +140,31 @@ const s16 gPartners[NUM_PARTNERS] =
     SPECIES_MUDKIP
 };
 
-const struct unkData gUnknown_80F4278 = 
+const struct UnkTextStruct2 gUnknown_80F4278 = 
 {
-    0x00, 0x00,
-    0x03, 0x00,
-    0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
 };
 
-const struct unkData gUnknown_80F4290 = 
+const struct UnkTextStruct2 gUnknown_80F4290 = 
 {
-    0x00, 0x00,
-    0x06, 0x00,
-    0x02, 0x02,
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
     0x09, 0x0B,
     0x0D, 0x00,
     NULL
 };
 
-const struct unkData gUnknown_80F42A8 = 
+const struct UnkTextStruct2 gUnknown_80F42A8 = 
 {
-    0x00, 0x00,
-    0x05, 0x00,
-    0x0E, 0x04,
+    0x00, 0x00, 0x00, 0x00,
+    0x05, 0x00, 0x00, 0x00,
+    0x0E, 0x00, 0x04, 0x00,
     0x05, 0x05,
     0x05, 0x00,
     NULL
@@ -344,67 +319,31 @@ void CallPromptNewQuestion(void)
     gUnknown_203B400->TestState = 2;
 }
 
-NAKED
-void UpdateNatureTotals(void)
+void UpdateNatureTotals()
 {
-    asm_unified(
-	"\tpush {r4-r6,lr}\n"
-	"\tsub sp, 0x4\n"
-	"\tmov r0, sp\n"
-	"\tbl sub_80144A4\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0803C97C\n"
-	"\tldr r3, [sp]\n"
-	"\tcmp r3, 0x63\n"
-	"\tbne _0803C944\n"
-	"\tldr r0, _0803C940\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0x37\n"
-	"\tstr r0, [r1, 0x3C]\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0803C97A\n"
-	"\t.align 2, 0\n"
-"_0803C940: .4byte gUnknown_203B400\n"
-"_0803C944:\n"
-	"\tldr r1, _0803C984\n"
-	"\tldr r2, _0803C988\n"
-	"\tldr r0, [r2]\n"
-	"\tldr r0, [r0, 0x3C]\n"
-	"\tlsls r0, 2\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r4, [r0, 0x8]\n"
-	"\tlsls r0, r3, 4\n"
-	"\tadds r4, r0\n"
-	"\tmovs r3, 0\n"
-	"\tadds r6, r2, 0\n"
-	"\tadds r5, r6, 0\n"
-"_0803C95E:\n"
-	"\tldr r1, [r5]\n"
-	"\tlsls r0, r3, 2\n"
-	"\tadds r1, 0x44\n"
-	"\tadds r1, r0\n"
-	"\tadds r0, r4, r3\n"
-	"\tldrb r2, [r0]\n"
-	"\tldr r0, [r1]\n"
-	"\tadds r0, r2\n"
-	"\tstr r0, [r1]\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0xC\n"
-	"\tble _0803C95E\n"
-	"\tldr r1, [r6]\n"
-	"\tmovs r0, 0\n"
-"_0803C97A:\n"
-	"\tstr r0, [r1, 0x34]\n"
-"_0803C97C:\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0803C984: .4byte gPersonalityQuestionPointerTable\n"
-"_0803C988: .4byte gUnknown_203B400"
-    );
+    s32 answerIndex;
+    s32 natureIndex;
+    const u8 *pointArray;
+    
+    if (!sub_80144A4(&answerIndex))
+    {
+        if (answerIndex == 99)
+        {
+            gUnknown_203B400->currQuestionIndex = NUM_QUIZ_QUESTIONS;
+            gUnknown_203B400->TestState = 1;
+        }
+        else
+        {
+            pointArray = gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->effects;
+            // Skip until we get to the one for our answer
+            pointArray += 16 * answerIndex;
+            for (natureIndex = 0; natureIndex < NUM_PERSONALITIES; natureIndex++)
+            {
+                gUnknown_203B400->NatureTotals[natureIndex] += pointArray[natureIndex];
+            }
+            gUnknown_203B400->TestState = 0;
+        }
+    }
 }
 
 void SetPlayerGender(void)
@@ -635,13 +574,13 @@ void PersonalityTest_DisplayStarterSprite(void)
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;
-  struct stack_PartnerSprite stackArray;
+  struct UnkTextStruct2 stackArray[4];
 
   starterID = gUnknown_203B400->StarterID;
-  sub_8006518(&stackArray);
-  stackArray.data = gUnknown_80F4244;
+  sub_8006518(stackArray);
+  stackArray[1] = gUnknown_80F4244;
   ResetUnusedInputStruct();
-  sub_800641C(&stackArray, 1, 0);
+  sub_800641C(stackArray, 1, 0);
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(starterID);
@@ -753,7 +692,7 @@ void sub_803CECC(void)
 void RedrawPartnerSelectionMenu(void)
 {
   s32 sVar1;
-  u32 uVar2;
+  u32 yCoord;
   const char *monName;
   s32 monCounter;
  
@@ -776,9 +715,9 @@ void RedrawPartnerSelectionMenu(void)
 
   monCounter = 0;
   while (monCounter < gUnknown_203B404->unk32) {
-    uVar2 = sub_8013800(&gUnknown_203B404->unk18, monCounter);
+    yCoord = sub_8013800(&gUnknown_203B404->unk18, monCounter);
     monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-    xxx_call_draw_string(8, uVar2, monName, gUnknown_203B404->unk4C, 0);
+    xxx_call_draw_string(8, yCoord, monName, gUnknown_203B404->unk4C, 0);
     monCounter++;
   }
   sub_80073E0(gUnknown_203B404->unk4C);

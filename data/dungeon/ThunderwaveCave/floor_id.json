@@ -1,0 +1,50 @@
+{
+    "name": "ThunderwaveCaveFloorID",
+    "tables": [
+        {
+            "MainData": 3,
+            "Pokemon": 2,
+            "Traps": 1,
+            "Items": 6,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 4,
+            "Pokemon": 2,
+            "Traps": 1,
+            "Items": 6,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 5,
+            "Pokemon": 3,
+            "Traps": 1,
+            "Items": 6,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 6,
+            "Pokemon": 4,
+            "Traps": 1,
+            "Items": 7,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        },
+        {
+            "MainData": 7,
+            "Pokemon": 4,
+            "Traps": 1,
+            "Items": 7,
+            "KecleonShop": 1,
+            "MonsterRoomItems": 2,
+            "BuriedItems": 3
+        }
+    ]
+}

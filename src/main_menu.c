@@ -5,6 +5,7 @@
 #include "input.h"
 #include "menu.h"
 #include "memory.h"
+#include "text.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -74,17 +75,15 @@ struct unkStruct_203B34C
     u8 fillC[0x30 - 0xC];
     s16 menuIndex;
     u8 fill32[0x144 - 0x32];
-    struct unkData unk144[4];
+    struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
 };
 
 extern struct unkStruct_203B34C *gUnknown_203B34C;
 
 extern struct MainMenu *gMainMenu;
-extern struct unkData gUnknown_80E59A8;
-extern struct unkData gUnknown_80E59C8;
-extern void sub_8006518(struct unkData *);
-extern void sub_800641C(struct unkData *, u32, u32);
+extern struct UnkTextStruct2 gUnknown_80E59A8;
+extern struct UnkTextStruct2 gUnknown_80E59C8;
 
 extern bool8 SetMainMenuText();
 extern void SetMainMenuItems();
@@ -349,7 +348,7 @@ void sub_8035C1C(void)
 }
 
 void
-SetMenuItems(struct unkStruct_Menu *param_1, struct unkData *unkData, int param_3, const struct unkData *param_4, const struct MenuItem *param_5, char param_6 ,u32 param_7, u32 unused_8)
+SetMenuItems(struct unkStruct_Menu *param_1, struct UnkTextStruct2 *unkData, int param_3, const struct UnkTextStruct2 *param_4, const struct MenuItem *param_5, char param_6 ,u32 param_7, u32 unused_8)
 {
   unkData[param_3] = *param_4;
   ResetUnusedInputStruct();
@@ -363,7 +362,7 @@ SetMenuItems(struct unkStruct_Menu *param_1, struct unkData *unkData, int param_
   param_1[param_3].unk4C = 1;
 }
 
-void sub_8035CC0(struct unkData *dataArray, u32 index)
+void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
 {
     sub_8006518(dataArray);
     dataArray[index] = gUnknown_80E59A8;

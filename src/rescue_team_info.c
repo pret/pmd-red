@@ -2,7 +2,7 @@
 #include "rescue_team_info.h"
 
 extern struct RescueTeamData *gRescueTeamInfoRef;
-extern struct RescueTeamData gRescueTeamInfo;
+EWRAM_DATA struct RescueTeamData gRescueTeamInfo;
 
 extern void sub_809485C(u32 *r0, u8 *r1, u32 r2);
 extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);
@@ -131,7 +131,7 @@ u8 sub_80921B8(void)
     return gRescueTeamInfoRef->unk10;
 }
 
-u32 sub_80921C4(u8 *param_1, u32 param_2)
+u32 SaveRescueTeamInfo(u8 *param_1, u32 param_2)
 
 {
     u32 auStack36[4];
@@ -160,7 +160,7 @@ u32 sub_80921C4(u8 *param_1, u32 param_2)
     return auStack36[2];
 }
 
-u32 sub_809222C(u8 *param_1, u32 param_2)
+u32 ReadRescueTeamInfo(u8 *param_1, u32 param_2)
 {
   u32 auStack32 [4];
   u8 byteArray[4];

@@ -4,11 +4,13 @@
 gSystemFileArchive: @ 8300500
 @ replacing .incbin "baserom.gba", 0x00300500, 0x72e40
 .string "pksdir0\0"
-.byte 0xaf, 0x01, 0x00, 0x00 @ 431 (421 level maps)
-.byte 0x18, 0x05, 0x30, 0x08 @ Pointer to Data Root Table
+.4byte 431 @ 431 entries (421 level maps)
+.4byte DataRootTable
 .string "pksdir0\0"
 
 @ Data Root Table
+.global DataRootTable
+DataRootTable:
 .byte 0x14, 0x20, 0x30, 0x08 @ Pointer to font string
 .byte 0x24, 0x20, 0x30, 0x08
 .byte 0x08, 0x20, 0x30, 0x08 @ Pointer to fontd8x8 string

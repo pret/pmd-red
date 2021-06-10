@@ -62,8 +62,8 @@ _08094A3E:
 	bx r1
 	thumb_func_end GameOptionsNotChange
 
-	thumb_func_start sub_8094A44
-sub_8094A44:
+	thumb_func_start WriteSaveOptions
+WriteSaveOptions:
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -167,10 +167,10 @@ _08094AEC:
 	bx r0
 	.align 2, 0
 _08094B14: .4byte gUnknown_203B46C
-	thumb_func_end sub_8094A44
+	thumb_func_end WriteSaveOptions
 
-	thumb_func_start sub_8094B18
-sub_8094B18:
+	thumb_func_start ReadSaveOptions
+ReadSaveOptions:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -286,7 +286,7 @@ sub_8094B18:
 	bx r0
 	.align 2, 0
 _08094C10: .4byte gUnknown_203B46C
-	thumb_func_end sub_8094B18
+	thumb_func_end ReadSaveOptions
 
 	thumb_func_start sub_8094C14
 sub_8094C14:

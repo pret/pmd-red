@@ -70,8 +70,8 @@ _0808ED70: .4byte gRecruitedPokemonRef
 _0808ED74: .4byte 0x00008f88
 	thumb_func_end sub_808ED00
 
-	thumb_func_start sub_808ED78
-sub_808ED78:
+	thumb_func_start SaveRecruitedPokemon
+SaveRecruitedPokemon:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -215,10 +215,10 @@ _0808EE64:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808ED78
+	thumb_func_end SaveRecruitedPokemon
 
-	thumb_func_start sub_808EE9C
-sub_808EE9C:
+	thumb_func_start ReadRecruitedPokemon
+ReadRecruitedPokemon:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -346,7 +346,7 @@ _0808EF84:
 	.align 2, 0
 _0808EF98: .4byte 0x00008f88
 _0808EF9C: .4byte gRecruitedPokemonRef
-	thumb_func_end sub_808EE9C
+	thumb_func_end ReadRecruitedPokemon
 
 	thumb_func_start sub_808EFA0
 sub_808EFA0:
@@ -2232,7 +2232,7 @@ _0808FF0C: .4byte gUnknown_810DFC8
 _0808FF10: .4byte gUnknown_810DEF4
 _0808FF14: .4byte gUnknown_810E02C
 _0808FF18: .4byte gUnknown_810DF98
-_0808FF1C: .4byte gUnknown_810DFCC
+_0808FF1C: .4byte gEvolutionStrings
 	thumb_func_end sub_808F844
 
 	thumb_func_start sub_808FF20
