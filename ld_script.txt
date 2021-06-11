@@ -102,6 +102,8 @@ SECTIONS {
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
         asm/pokemon_square.o(.text);
+        src/code_801AFA4.o(.text);
+        asm/code_801AFA4.o(.text);
         src/code_801C620.o(.text);
         asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
@@ -205,6 +207,7 @@ SECTIONS {
         asm/code_8095014.o(.text);
         src/code_809747C.o(.text);
         asm/code_809747C.o(.text);
+        src/code_809747C_1.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097F40.o(.text);
