@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/species.h"
 #include "gUnknown_203B418.h"
 #include "code_8041D5C.h"
 #include "friend_area.h"

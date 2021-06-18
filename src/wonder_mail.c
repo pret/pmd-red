@@ -2,13 +2,14 @@
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
-#include "constants/species.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text.h"
+#include "gUnknown_203B460.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
+extern struct unkStruct_203B460 *gUnknown_203B460;
 
 struct unkStruct_8095228
 {
@@ -36,6 +37,8 @@ extern u8 sub_8030C20(u32);
 extern u32 sub_8031050();
 extern void sub_80310B4();
 extern u32 sub_8095350();
+extern u8 sub_801CF14(u32);
+extern u32 sub_802F298();
 
 extern struct unkStruct_8095228 *sub_8095228(u8);
 extern u8 sub_80A2824(u32);
@@ -478,7 +481,7 @@ void sub_8028E84()
     }
     sub_8028B04(24);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
 }
 
 void sub_8028EAC()
@@ -522,15 +525,14 @@ void sub_8028F04()
     s32 temp;
     s32 counter;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&temp) == 0)
     {
-        return;
+        for(counter = 0; counter <= 31; counter++)
+        {
+            sub_8095240(counter);
+        }
+        sub_8028B04(21);
     }
-    for(counter = 0; counter <= 31; counter++)
-    {
-        sub_8095240(counter);
-    }
-    sub_8028B04(21);
 }
 
 void sub_8028F30()
@@ -543,7 +545,7 @@ void sub_8028F30()
     }
     sub_8028B04(22);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
 }
 
 void sub_8028F58()
@@ -839,7 +841,7 @@ void sub_8029374(void)
     }
     sub_8028B04(0x24);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
 }
 
 void sub_802939C(void)
@@ -1288,7 +1290,7 @@ void sub_8029AB0(void)
     }
     sub_8028B04(0x38);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
 }
 
 void sub_8029AD8(void)
@@ -1873,7 +1875,7 @@ void sub_802A4AC(void)
     {
         sub_802B2BC(0x18);
         sub_8011C28(1);
-        PrepareSavePakWrite(0);
+        PrepareSavePakWrite(SPECIES_NONE);
     }
 }
 
@@ -1994,7 +1996,7 @@ void sub_802A6F0(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B2BC(0x18);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
   }
 }
 
@@ -2005,7 +2007,7 @@ void sub_802A718(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B2BC(0x25);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
   }
 }
 
@@ -2016,4 +2018,342 @@ void sub_802A740(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B2BC(0x1e);
   }
+}
+
+void sub_802A75C(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 7:
+                // NOTE: if statement is needed to match
+                if(gUnknown_203B2C4->unk538)
+                    sub_802B2BC(0x16);
+                else
+                    sub_802B2BC(0x16);
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802A798(void)
+{
+    s32 temp;
+    struct unkStruct_8095228 *return_var;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 7:
+                return_var = sub_8095228(gUnknown_203B2C4->unk218);
+                if(gUnknown_203B2C4->unk41C.unk41E != 0)
+                {
+                    return_var->unk20 = gUnknown_203B2C4->unk41C;
+                }
+                gUnknown_203B460->unk50[gUnknown_203B2C4->unk41C.unk41E]--;
+                sub_802B2BC(0x29);
+                break;
+            case 8:
+                sub_802B2BC(0xB);
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802A828(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x2A);
+        sub_8011C28(1);
+        PrepareSavePakWrite(SPECIES_NONE);
+    }
+}
+
+void sub_802A850(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        if(!WriteSavePak())
+        {
+            FinishWriteSavePak();
+            switch(gUnknown_203B2C4->unk534)
+            {
+                case 3:
+                case 4:
+                    sub_802B2BC(0x1D);
+                    break;
+                case 5:
+                    sub_802B2BC(0x19);
+                    break;
+            }
+        }
+    }
+}
+
+void sub_802A8A0(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x13);
+  }
+}
+
+void sub_802A8BC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 0xA:
+                switch(gUnknown_203B2C4->unk534)
+                {
+                    case 3:
+                    case 4:
+                        sub_802B2BC(0x1D);
+                        break;
+                    case 5:
+                        sub_802B2BC(0x19);
+                        break;
+                }
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802A910(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 9:
+                if(sub_801CF14(0) != 0)
+                {
+                    sub_802B2BC(0xA);
+                }
+                else
+                {
+                    sub_802B2BC(0xB);
+                }
+                break;
+            case 0xA:
+                switch(gUnknown_203B2C4->unk534)
+                {
+                    case 3:
+                    case 4:
+                        sub_802B2BC(0x1D);
+                        break;
+                    case 5:
+                        sub_802B2BC(0x19);
+                        break;
+                }
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802A98C(void)
+{
+  s32 temp;
+
+  if (sub_80144A4(&temp) == 0) {
+    sub_802B2BC(0x8);
+  }
+}
+
+void sub_802A9A8(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 0x7:
+                switch(gUnknown_203B2C4->unk534)
+                {
+                    case 3:
+                    case 4:
+                        sub_802B2BC(0x1D);
+                        break;
+                    case 5:
+                        sub_802B2BC(0x19);
+                        break;
+                }
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802A9FC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 0x7:
+                sub_802B2BC(0x26);
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802AA28(void)
+{
+    s32 temp;
+    struct unkStruct_8095228 *return_var;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 3:
+            case 4:
+            case 5:
+                gUnknown_203B2C4->unk534 = temp;
+                switch(gUnknown_203B2C4->unk538)
+                {
+                    case 1:
+                        return_var = sub_8095228(sub_80953D4(5));
+                        if(return_var->unk20.unk41E != 0)
+                        {
+                            sub_802B2BC(7);
+                        }
+                        else
+                        {
+                            sub_802B2BC(9);
+                        }
+                        break;
+                    default:
+                        if(gUnknown_203B2C4->unk534 == 5)
+                        {
+                            sub_802B2BC(0x26);
+                        }
+                        else
+                        {
+                            sub_802B2BC(0x1D);
+                        }
+                        break;
+                }
+                break;
+            case 0:
+                sub_802B2BC(1);
+                break;
+        }
+    }
+}
+
+void sub_802AAAC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(1);
+    }
+}
+
+void sub_802AAC8(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(3);
+    }
+}
+
+void sub_802AAE4(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 1:
+                gUnknown_203B2C4->unk40 = 6;
+                gUnknown_203B2C4->unk538 = 1;
+                if(sub_8095324(5) == 0)
+                {
+                    sub_802B2BC(4);
+                }
+                else
+                {
+                    sub_802B2BC(0xF);
+                }
+                break;
+            case 2:
+                gUnknown_203B2C4->unk40 = 7;
+                gUnknown_203B2C4->unk538 = 2;
+                sub_802B2BC(6);
+                break;
+            case 0:
+                sub_802B2BC(2);
+                break;
+        }
+    }
+}
+
+void sub_802AB60(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x22);
+    }
+}
+
+void sub_802AB7C(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802B2BC(0x22);
+    }
+}
+
+
+void sub_802AB98(void)
+{
+    const char *monName;
+    switch(sub_802F298())
+    {
+        case 3:
+            sub_802F2C0();
+            CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
+            monName = GetMonSpecies(SPECIES_PELIPPER);
+            strcpy(gAvailablePokemonNames, monName);
+            sub_8095240(sub_809539C(6, gUnknown_203B2C4->unk430));
+            sub_802B2BC(0x24);
+            break;
+        default:
+            break;
+    }
+}
+
+void nullsub_131(void)
+{
 }

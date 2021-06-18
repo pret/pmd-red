@@ -2,7 +2,6 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "input.h"
-#include "constants/species.h"
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
@@ -62,14 +61,51 @@ extern const char Delivery_Text[];
 extern const char BulletinBoard_Text[];
 extern const char PostOffice_Text[];
 
+enum PostOfficeStates
+{
+    EXIT_POST_OFFICE_MENU,
+    IM_GUIDE_START_MENU,
+    ANYTHING_ELSE_START_MENU,
+    RETURN_TO_START_MENU,
+    DISPLAY_FRIEND_RESCUE_MENU,
+    RETURN_TO_FRIEND_RESCUE,
+    DISPLAY_GO_RESCUE_MENU,
+    RETURN_TO_GO_RESCUE,
+    DISPLAY_GET_HELP_MENU,
+    RETURN_TO_GET_HELP,
+};
+
+enum PostOfficeMenuActions
+{
+    POST_OFFICE, 
+    BULLETIN_BOARD, 
+    DELIVERY, 
+    FRIEND_RESCUE,
+    CANCEL,
+    EXIT,
+    FRIEND_RESCUE_INFO,
+    GO_RESCUE,
+    GET_HELP_MENU,
+    DELETING_MAIL,
+    RESCUE_PROCEDURES,
+    RECEIVE_SOS_MAIL,
+    LEAVE_FOR_RESCUE,
+    SEND_AOK_MAIL,
+    GET_THANK_YOU_MAIL,
+    GETTING_HELP,
+    SEND_SOS_MAIL,
+    RECEIVE_AOK_MAIL,
+    SEND_THANK_YOU_MAIL
+};
+
 const struct MenuItem gPostOfficeHelpStartMenu[] =
 {
-    {PostOffice_Text, 0x0},
-    {BulletinBoard_Text, 0x1},
-    {Delivery_Text, 0x2},
-    {FriendRescue_80E0A80,0x3},
-    {Cancel_80E0A78,0x4},
-    {NULL,0x5}
+    {PostOffice_Text, POST_OFFICE},
+    {BulletinBoard_Text, BULLETIN_BOARD},
+    {Delivery_Text, DELIVERY},
+    {FriendRescue_80E0A80, FRIEND_RESCUE},
+    {Cancel_80E0A78, CANCEL},
+    {NULL, EXIT}
 };
 
 ALIGNED(4) const char Cancel_80E0A78[] = _("Cancel");
@@ -80,12 +116,12 @@ ALIGNED(4) const char PostOffice_Text[] = _("Post Office");
 
 const struct MenuItem gPostOfficeHelpFriendRescueMenu[] =
 {
-    {FriendRescueInfo_Text, 0x6},
-    {GoRescue_Text, 0x7},
-    {GetHelp_Text, 0x8},
-    {DeletingMailInfo_Text,0x9},
-    {Exit_80EA0EC,0x5},
-    {NULL,0x5}
+    {FriendRescueInfo_Text, FRIEND_RESCUE_INFO},
+    {GoRescue_Text, GO_RESCUE},
+    {GetHelp_Text, GET_HELP_MENU},
+    {DeletingMailInfo_Text, DELETING_MAIL},
+    {Exit_80EA0EC, EXIT},
+    {NULL, EXIT}
 };
 
 ALIGNED(4) const char Exit_80EA0EC[] = _("Exit");
@@ -97,13 +133,13 @@ ALIGNED(4) const char FriendRescueInfo_Text[] = _("Friend Rescue Info");
 
 const struct MenuItem gPostOfficeHelpGoRescueMenu[] =
 {
-    {RescueProcedures_Text, 0xA},
-    {ReceiveSOSMail_Text, 0xB},
-    {LeaveForRescue_Text, 0xC},
-    {SendAOKMail_Text, 0xD},
-    {GetThankYouMail_Text,0xE},
-    {Exit_80EA0EC,0x5},
-    {NULL,0x5}
+    {RescueProcedures_Text, RESCUE_PROCEDURES},
+    {ReceiveSOSMail_Text, RECEIVE_SOS_MAIL},
+    {LeaveForRescue_Text, LEAVE_FOR_RESCUE},
+    {SendAOKMail_Text, SEND_AOK_MAIL},
+    {GetThankYouMail_Text, GET_THANK_YOU_MAIL},
+    {Exit_80EA0EC, EXIT},
+    {NULL, EXIT}
 };
 
 ALIGNED(4) const char GetThankYouMail_Text[] = _("Get Thank-You Mail");
@@ -115,12 +151,12 @@ ALIGNED(4) const char RescueProcedures_Text[] = _("Rescue Procedures");
 
 const struct MenuItem gPostOfficeHelpGetHelpMenu[] =
 {
-    {GettingHelp_Text, 0xF},
-    {SendSOSMail_Text, 0x10},
-    {ReceiveAOKMail_Text, 0x11},
-    {SendThankYouMail_Text,0x12},
-    {Exit_80EA0EC,0x5},
-    {NULL,0x5}
+    {GettingHelp_Text, GETTING_HELP},
+    {SendSOSMail_Text, SEND_SOS_MAIL},
+    {ReceiveAOKMail_Text, RECEIVE_AOK_MAIL},
+    {SendThankYouMail_Text, SEND_THANK_YOU_MAIL},
+    {Exit_80EA0EC, EXIT},
+    {NULL, EXIT}
 };
 
 ALIGNED(4) const char SendThankYouMail_Text[] = _("Send Thank-You Mail");
@@ -168,13 +204,13 @@ extern void sub_801317C(void *);
 
 void UpdateHelperPelipperState(u8);
 void HandlePostOfficeHelpStartMenuSelection();
-void sub_8031848();
+void ReturnToPostOfficeStartMenu();
 extern void HandlePostOfficeHelpFriendRescueMenuSelection();
-extern void sub_80318D0();
+extern void ReturnToFriendRescueMenu();
 extern void HandlePostOfficeHelpGoRescueMenuSelection();
-extern void sub_803192C();
+extern void ReturntoGoRescueMenu();
 extern void HandlePostOfficeHelpGetHelpMenuSelection();
-extern void sub_8031988();
+extern void ReturnToGetHelpMenu();
 extern s32 sub_80144A4(s32 *);
 extern s32 sub_80969D0(u8);
 extern void sub_8012D08(struct UnkTextStruct2 *, s32);
@@ -208,40 +244,40 @@ u32 CreateHelperPelipperMenu(s16 speciesID)
     }
   }
   gPostOfficeHelper->currMenuChoice = 0;
-  UpdateHelperPelipperState(1);
+  UpdateHelperPelipperState(IM_GUIDE_START_MENU);
   return 1;
 }
 
 
-u32 sub_8031540(void)
+u32 HelperPelliperCallback(void)
 {
   switch(gPostOfficeHelper->state) {
-      case 1:
-      case 2:
+      case IM_GUIDE_START_MENU:
+      case ANYTHING_ELSE_START_MENU:
         HandlePostOfficeHelpStartMenuSelection();
         break;
-      case 3:
-        sub_8031848();
+      case RETURN_TO_START_MENU:
+        ReturnToPostOfficeStartMenu();
         break;
-      case 4:
+      case DISPLAY_FRIEND_RESCUE_MENU:
         HandlePostOfficeHelpFriendRescueMenuSelection();
         break;
-      case 5:
-        sub_80318D0();
+      case RETURN_TO_FRIEND_RESCUE:
+        ReturnToFriendRescueMenu();
         break;
-      case 6:
+      case DISPLAY_GO_RESCUE_MENU:
         HandlePostOfficeHelpGoRescueMenuSelection();
         break;
-      case 7:
-        sub_803192C();
+      case RETURN_TO_GO_RESCUE:
+        ReturntoGoRescueMenu();
         break;
-      case 0:
+      case EXIT_POST_OFFICE_MENU:
           return 3;
-      case 8:
+      case DISPLAY_GET_HELP_MENU:
         HandlePostOfficeHelpGetHelpMenuSelection();
         break;
-      case 9:
-        sub_8031988();
+      case RETURN_TO_GET_HELP:
+        ReturnToGetHelpMenu();
         break;
   }
   return 0;
@@ -271,85 +307,85 @@ void UpdateHelperPelipperText(void)
     
     switch(gPostOfficeHelper->state)
     {
-        case 8:
+        case DISPLAY_GET_HELP_MENU:
             sub_8014248(gWhatdYouWantToKnow, 0, gPostOfficeHelper->currMenuChoice, gPostOfficeHelpGetHelpMenu, 0, 4, 0, faceFile, 0xC);
             break;
-        case 9:
+        case RETURN_TO_GET_HELP:
             switch(gPostOfficeHelper->currMenuChoice)
             {
-                case 15:
+                case GETTING_HELP:
                     sub_80141B4(gGettingHelpExplaination, 0, faceFile, 0x10d);
                     break;
-                case 16:
+                case SEND_SOS_MAIL:
                     sub_80141B4(gSendSOSMailExplaination, 0, faceFile, 0x10d);
                     break;
-                case 17:
+                case RECEIVE_AOK_MAIL:
                     sub_80141B4(gReceiveAOKMailExplaination, 0, faceFile, 0x10d);
                     break;
-                case 18:
+                case SEND_THANK_YOU_MAIL:
                     sub_80141B4(gSendThankYouMailExplaination, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
-        case 6:
+        case DISPLAY_GO_RESCUE_MENU:
             sub_8014248(gWhatdYouWantToKnow, 0, gPostOfficeHelper->currMenuChoice, gPostOfficeHelpGoRescueMenu, 0, 4, 0, faceFile, 0xC);
             break;
-        case 7:
+        case RETURN_TO_GO_RESCUE:
             switch(gPostOfficeHelper->currMenuChoice)
             {
-                case 10:
+                case RESCUE_PROCEDURES:
                     sub_80141B4(gRescueProceduresExplaination, 0, faceFile, 0x10d);
                     break;
-                case 11:
+                case RECEIVE_SOS_MAIL:
                     sub_80141B4(gReceiveSOSMailExplaination, 0, faceFile, 0x10d);
                     break;
-                case 13:
+                case SEND_AOK_MAIL:
                     sub_80141B4(gSendAOKMailExplaination, 0, faceFile, 0x10d);
                     break;
-                case 12:
+                case LEAVE_FOR_RESCUE:
                     sub_80141B4(gLeaveForRescueExplaination, 0, faceFile, 0x10d);
                     break;
-                case 14:
+                case GET_THANK_YOU_MAIL:
                     sub_80141B4(gGetThankYouMailExplaination, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
-        case 1:
+        case IM_GUIDE_START_MENU:
             sub_8014248(gImYourGuide, 0, gPostOfficeHelper->currMenuChoice, gPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 0xC);
             break;
-        case 2:
+        case ANYTHING_ELSE_START_MENU:
             sub_8014248(gAnythingElse, 0, gPostOfficeHelper->currMenuChoice, gPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 0xC);
             break;
-        case 3:
+        case RETURN_TO_START_MENU:
             switch(gPostOfficeHelper->currMenuChoice)
             {
-                case 0:
+                case POST_OFFICE:
                     sub_80141B4(gPostOfficeExplaination, 0, faceFile, 0x10d);
                     break;
-                case 1:
+                case BULLETIN_BOARD:
                     sub_80141B4(gBulletinBoardExplaination, 0, faceFile, 0x10d);
                     break;
-                case 2:
+                case DELIVERY:
                     sub_80141B4(gDeliveryExplaination, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
-        case 4:
+        case DISPLAY_FRIEND_RESCUE_MENU:
             sub_8014248(gWhatdYouWantToKnow, 0, gPostOfficeHelper->currMenuChoice, gPostOfficeHelpFriendRescueMenu, 0, 4, 0, faceFile, 0xC);
             break;
-        case 5:
+        case RETURN_TO_FRIEND_RESCUE:
             switch(gPostOfficeHelper->currMenuChoice)
             {
-                case 6:
+                case FRIEND_RESCUE_INFO:
                     sub_80141B4(gFriendRescueExplaination, 0, faceFile, 0x10d);
                     break;
-                case 9:
+                case DELETING_MAIL:
                     sub_80141B4(gDeletingMailExplaination, 0, faceFile, 0x10d);
                     break;
                 default:
@@ -375,30 +411,30 @@ void HandlePostOfficeHelpStartMenuSelection(void)
     {
         switch(chosenAction)
         {
-            case 4:
-            case 5:
-                UpdateHelperPelipperState(0);
+            case CANCEL:
+            case EXIT:
+                UpdateHelperPelipperState(EXIT_POST_OFFICE_MENU);
                 break;
-            case 3:
+            case FRIEND_RESCUE:
                 gPostOfficeHelper->currMenuChoice = chosenAction;
-                UpdateHelperPelipperState(4);
+                UpdateHelperPelipperState(DISPLAY_FRIEND_RESCUE_MENU);
                 break;
-            case 0:
-            case 1:
-            case 2:
+            case POST_OFFICE:
+            case BULLETIN_BOARD:
+            case DELIVERY:
                 gPostOfficeHelper->currMenuChoice = chosenAction;
-                UpdateHelperPelipperState(3);
+                UpdateHelperPelipperState(RETURN_TO_START_MENU);
                 break;
         }
     }
 }
 
-void sub_8031848(void)
+void ReturnToPostOfficeStartMenu(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        UpdateHelperPelipperState(2);
+        UpdateHelperPelipperState(ANYTHING_ELSE_START_MENU);
     }
 }
 
@@ -409,30 +445,30 @@ void HandlePostOfficeHelpFriendRescueMenuSelection(void)
     {
         switch(chosenAction)
         {
-            case 5:
-                UpdateHelperPelipperState(2);
+            case EXIT:
+                UpdateHelperPelipperState(ANYTHING_ELSE_START_MENU);
                 break;
-            case 7:
-                UpdateHelperPelipperState(6);
+            case GO_RESCUE:
+                UpdateHelperPelipperState(DISPLAY_GO_RESCUE_MENU);
                 break;
-            case 8:
-                UpdateHelperPelipperState(8);
+            case GET_HELP_MENU:
+                UpdateHelperPelipperState(DISPLAY_GET_HELP_MENU);
                 break;
-            case 6:
-            case 9:
+            case FRIEND_RESCUE_INFO:
+            case DELETING_MAIL:
                 gPostOfficeHelper->currMenuChoice = chosenAction;
-                UpdateHelperPelipperState(5);
+                UpdateHelperPelipperState(RETURN_TO_FRIEND_RESCUE);
                 break;
         }
     }
 }
 
-void sub_80318D0(void)
+void ReturnToFriendRescueMenu(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        UpdateHelperPelipperState(4);
+        UpdateHelperPelipperState(DISPLAY_FRIEND_RESCUE_MENU);
     }
 }
 
@@ -443,27 +479,27 @@ void HandlePostOfficeHelpGoRescueMenuSelection(void)
     {
         switch(chosenAction)
         {
-            case 5:
-                UpdateHelperPelipperState(4);
+            case EXIT:
+                UpdateHelperPelipperState(DISPLAY_FRIEND_RESCUE_MENU);
                 break;
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
+            case RESCUE_PROCEDURES:
+            case RECEIVE_SOS_MAIL:
+            case LEAVE_FOR_RESCUE:
+            case SEND_AOK_MAIL:
+            case GET_THANK_YOU_MAIL:
                 gPostOfficeHelper->currMenuChoice = chosenAction;
-                UpdateHelperPelipperState(7);
+                UpdateHelperPelipperState(RETURN_TO_GO_RESCUE);
                 break;
         }
     }
 }
 
-void sub_803192C(void)
+void ReturntoGoRescueMenu(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        UpdateHelperPelipperState(6);
+        UpdateHelperPelipperState(DISPLAY_GO_RESCUE_MENU);
     }
 }
 
@@ -474,26 +510,26 @@ void HandlePostOfficeHelpGetHelpMenuSelection(void)
     {
         switch(chosenAction)
         {
-            case 5:
-                UpdateHelperPelipperState(4);
+            case EXIT:
+                UpdateHelperPelipperState(DISPLAY_FRIEND_RESCUE_MENU);
                 break;
-            case 15:
-            case 16:
-            case 17:
-            case 18:
+            case GETTING_HELP:
+            case SEND_SOS_MAIL:
+            case RECEIVE_AOK_MAIL:
+            case SEND_THANK_YOU_MAIL:
                 gPostOfficeHelper->currMenuChoice = chosenAction;
-                UpdateHelperPelipperState(9);
+                UpdateHelperPelipperState(RETURN_TO_GET_HELP);
                 break;
         }
     }
 }
 
-void sub_8031988(void)
+void ReturnToGetHelpMenu(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        UpdateHelperPelipperState(8);
+        UpdateHelperPelipperState(DISPLAY_GET_HELP_MENU);
     }
 }
 
@@ -503,7 +539,7 @@ u32 sub_80319A4(u8 param_1,u8 param_2,int param_3)
   gUnknown_203B330 = MemoryAlloc(0x78,8);
   gUnknown_203B330->unkC = param_1;
   gUnknown_203B330->unkD = param_2;
-  sub_801317C(gUnknown_203B330);
+  sub_801317C(&gUnknown_203B330->unk0);
   gUnknown_203B330->unk10 = param_3;
   gUnknown_203B330->unk14 = &gUnknown_203B330->unk18[param_3];
   sub_8031A2C();

@@ -16,7 +16,7 @@ extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern s32 sub_80915D4(struct ItemStruct_203B460 *);
-extern u8 sub_80914E4(u8);
+extern bool8 sub_80914E4(u8);
 extern void sub_8090F58(u32, u8 *, struct ItemStruct_203B460 *, u32);
 
 void LoadItemParameters(void)
@@ -230,7 +230,7 @@ s32 sub_8090C30(struct ItemStruct_203B460 *param_1)
 
 s32 sub_8090C7C(struct ItemStruct_203B460 *param_1)
 {
-  if (sub_80914E4(param_1->itemIndex) == 0) {
+  if (!sub_80914E4(param_1->itemIndex)) {
     return 0;
   }
   else {
@@ -245,7 +245,7 @@ s32 sub_8090C7C(struct ItemStruct_203B460 *param_1)
 
 s32 sub_8090CCC(struct ItemStruct_203B460 *param_1)
 {
-  if (sub_80914E4(param_1->itemIndex) == 0) {
+  if (!sub_80914E4(param_1->itemIndex)) {
     return 0;
   }
   else {

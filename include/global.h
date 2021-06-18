@@ -5,6 +5,8 @@
 #include "config.h" // We need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 
+#include "constants/species.h"
+
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x

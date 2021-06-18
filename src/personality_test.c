@@ -1,7 +1,6 @@
 #include "global.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
-#include "constants/species.h"
 #include "random.h"
 #include "file_system.h"
 #include "pokemon.h"

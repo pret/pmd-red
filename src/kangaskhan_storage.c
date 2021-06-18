@@ -2,7 +2,6 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "input.h"
-#include "constants/species.h"
 #include "kangaskhan_storage.h"
 #include "memory.h"
 

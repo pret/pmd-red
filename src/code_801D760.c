@@ -1,10 +1,12 @@
 #include "global.h"
+#include "friend_area.h"
 #include "constants/friend_area.h"
 #include "file_system.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "input.h"
 #include "text.h"
+#include "rescue_team_info.h"
 
 struct unkStruct_203B258
 {
@@ -57,10 +59,6 @@ extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
 extern void  xxx_call_draw_string(s32 size, u32, u8 *, u32, u32);
-extern const char *GetFriendAreaName(u8);
-extern u8 GetRescueTeamRank();
-extern const char *GetTeamRankString(u8);
-extern s32 GetTeamRankPts();
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

@@ -5,8 +5,8 @@
 
 	.text
 
-        thumb_func_start sub_8018E88
-sub_8018E88:
+        thumb_func_start UpdateKecleonStoreDialogue
+UpdateKecleonStoreDialogue:
 	push {r4,lr}
 	sub sp, 0x14
 	ldr r1, _08018EA4
@@ -753,7 +753,7 @@ _080194E8:
 	.align 2, 0
 _080194F0: .4byte gKecleonShopDialogue
 _080194F4: .4byte 0x0000010d
-	thumb_func_end sub_8018E88
+	thumb_func_end UpdateKecleonStoreDialogue
 
 	thumb_func_start sub_80194F8
 sub_80194F8:

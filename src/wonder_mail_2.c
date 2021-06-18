@@ -2,10 +2,12 @@
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "memory.h"
 #include "text.h"
 #include "save.h"
+#include "wonder_mail.h"
+
+extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 struct unkStruct_203B2C8
 {
@@ -40,15 +42,6 @@ struct unkStruct_203B2C8
 };
 
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
-
-struct unkStruct_41C
-{
-    u8 unk41C;
-    u8 unk41D;
-    u8 unk41E;
-    u8 unk41F;
-};
-
 
 struct unkStruct_8095228
 {
@@ -94,6 +87,16 @@ extern const char gUnknown_80DFB14[];
 extern const char gUnknown_80DF9F0[];
 extern const char gUnknown_80DF9F8[];
 extern u8 sub_80023E4(u32);
+
+extern void nullsub_131(void);
+extern void sub_802ABF8(void);
+
+void sub_802B2BC(u32 newState)
+{
+    gUnknown_203B2C4->state = newState;
+    nullsub_131();
+    sub_802ABF8();
+}
 
 u32 sub_802B2D4(void)
 {
@@ -255,7 +258,7 @@ void sub_802B5B8(void)
     puVar3->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);
-    PrepareSavePakWrite(0);
+    PrepareSavePakWrite(SPECIES_NONE);
   }
 }
 

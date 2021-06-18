@@ -1,7 +1,6 @@
 #include "global.h"
 #include "friend_rescue.h"
 #include "pokemon.h"
-#include "constants/species.h"
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);

@@ -17,8 +17,7 @@ struct subStruct_203B460
 struct unkStruct_203B460
 {
     struct ItemStruct_203B460 fill0[20];
-    u16 unk50[0x10];
-    u8 fill70[0x230 -  0x70];
+    u16 unk50[0xF0];
     struct subStruct_203B460 unk230[8];
     struct subStruct_203B460 unk250[4]; // TODO: idk if this is identical struct or not.. Ghidra says sizes are same
     /* 0x260 */ s32 teamMoney;

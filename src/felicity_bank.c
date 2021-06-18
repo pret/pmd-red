@@ -2,7 +2,6 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "input.h"
-#include "constants/species.h"
 #include "felicity_bank.h"
 #include "memory.h"
 

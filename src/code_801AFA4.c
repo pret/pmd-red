@@ -5,7 +5,7 @@
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
-extern u16 sub_80913CC(u8);
+extern u16 GetItemMove(u8);
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
 extern u32 sub_801B2F4(void);
@@ -60,7 +60,7 @@ u32 sub_801AFA4(u32 r0)
     gUnknown_203B22C = MemoryAlloc(0xA4, 8);
     gUnknown_203B22C->unk4 = r0;
     gUnknown_203B22C->unk8 = gUnknown_203B460->fill0[r0].itemIndex;
-    gUnknown_203B22C->unkA = sub_80913CC(gUnknown_203B22C->unk8);
+    gUnknown_203B22C->unkA = GetItemMove(gUnknown_203B22C->unk8);
     sub_8092C84(gUnknown_202E1C8, gUnknown_203B22C->unkA);
     sub_8099690(0);
     if(sub_801B2F4() == 0)

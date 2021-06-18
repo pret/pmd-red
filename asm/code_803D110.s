@@ -314,8 +314,8 @@ _0803D32A:
 _0803D354: .4byte gUnknown_80F43F0
 	thumb_func_end sub_803D2C0
 
-	thumb_func_start sub_803D358
-sub_803D358:
+	thumb_func_start DecodeWonderMailPassword
+DecodeWonderMailPassword:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -409,7 +409,7 @@ _0803D402:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_803D358
+	thumb_func_end DecodeWonderMailPassword
 
 	thumb_func_start sub_803D414
 sub_803D414:

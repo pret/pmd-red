@@ -1,7 +1,6 @@
 #include "global.h"
 #include "friend_rescue.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "memory.h"
 #include "text.h"
 

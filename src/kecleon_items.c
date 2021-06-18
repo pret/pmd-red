@@ -1,7 +1,6 @@
 #include "global.h"
 #include "file_system.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "input.h"
 #include "kecleon_items.h"
 #include "memory.h"
@@ -28,7 +27,7 @@ extern void sub_8019D30();
 extern void sub_8019D4C();
 extern void sub_8019D68();
 extern void sub_8018D30();
-extern void sub_8018E88();
+extern void UpdateKecleonStoreDialogue();
 
 u32 DisplayKeckleonDialogueSprite(u32 param_1)
 {
@@ -43,7 +42,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   switch(param_1)
   {
       case 0:
-        gUnknown_203B210->unk4 = 1;
+        gUnknown_203B210->unk4 = TRUE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
@@ -51,15 +50,15 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 1:
-        gUnknown_203B210->unk4 = 1;
-        gUnknown_203B210->unkE4 = 0;
+        gUnknown_203B210->unk4 = TRUE;
+        gUnknown_203B210->unkE4 = NULL;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
         monName = GetMonSpecies( SPECIES_KECLEON);
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 2:
-        gUnknown_203B210->unk4 = 0;
+        gUnknown_203B210->unk4 = FALSE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
@@ -67,8 +66,8 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 3:
-        gUnknown_203B210->unk4 = 0;
-        gUnknown_203B210->unkE4 = 0;
+        gUnknown_203B210->unk4 = FALSE;
+        gUnknown_203B210->unkE4 = NULL;
         CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
         CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
         monName = GetMonSpecies( SPECIES_KECLEON);
@@ -148,7 +147,7 @@ void UpdateKecleonStoreState(u32 newState)
 {
     gUnknown_203B210->currState = newState;
     sub_8018D30();
-    sub_8018E88();
+    UpdateKecleonStoreDialogue();
 }
 
 void sub_8018D30(void)

@@ -2,7 +2,6 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "memory.h"
-#include "constants/species.h"
 #include "text.h"
 #include "input.h"
 

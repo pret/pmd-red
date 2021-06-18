@@ -562,7 +562,7 @@ sub_8048950:
 	mov r10, r0
 	mov r8, r1
 	ldrb r0, [r1, 0x2]
-	bl sub_80913CC
+	bl GetItemMove
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0

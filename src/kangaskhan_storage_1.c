@@ -2,7 +2,6 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "input.h"
-#include "constants/species.h"
 #include "kangaskhan_storage.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;

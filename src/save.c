@@ -731,7 +731,7 @@ void PrepareSavePakWrite(s16 PokemonID)
   gSavePakWrite->pokeID = id_s32;
   gSavePakWrite->faceFile = NULL;
   gSavePakWrite->faceData = NULL;
-  if (PokemonID != 0) {
+  if (PokemonID != SPECIES_NONE) {
     file = GetDialogueSpriteDataPtr(PokemonID);
     gSavePakWrite->faceFile = file;
     gSavePakWrite->faceData = file->data;

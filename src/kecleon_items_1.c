@@ -1,7 +1,6 @@
 #include "global.h"
 #include "file_system.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "input.h"
 #include "kecleon_items.h"
 #include "gUnknown_203B460.h"
@@ -10,7 +9,7 @@ extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern u32 sub_8090CCC(struct ItemStruct_203B460 *);
-extern u8 sub_80914E4(u8);
+extern bool8 sub_80914E4(u8);
 extern u32 sub_8091814(void);
 extern u32 sub_8091A48(void);
 extern s32 sub_80144A4(s32 *);
@@ -37,13 +36,13 @@ void sub_8019B08(void)
     case 3:
         gUnknown_203B210->unk24 = sub_801A8AC();
         gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
-        gUnknown_203B210->unk10 = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x1c);
         break;
     case 4:
         gUnknown_203B210->unk24 = sub_801A8AC();
         gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
-        gUnknown_203B210->unk10 = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
         sub_8099690(0);
         UpdateKecleonStoreState(0x1d);
         break;
@@ -63,7 +62,7 @@ void sub_8019BBC(void)
   int menuAction;
   
   menuAction = 0;
-  if (gUnknown_203B210->unk4 != 0) {
+  if (gUnknown_203B210->unk4) {
     sub_8019EDC(0);
   }
   else {
@@ -77,13 +76,11 @@ void sub_8019BBC(void)
         if (gUnknown_203B460->teamMoney == 0) {
             UpdateKecleonStoreState(0x6);
         }
+        else if (gUnknown_203B210->itemSellPrice > gUnknown_203B460->teamMoney) {
+            UpdateKecleonStoreState(0xC);
+        }
         else {
-            if (gUnknown_203B210->unk10 > gUnknown_203B460->teamMoney) {
-                 UpdateKecleonStoreState(0xC);
-            }
-            else {
-                UpdateKecleonStoreState(0x16);
-            }
+            UpdateKecleonStoreState(0x16);
         }
         break;
     case 7:
@@ -107,17 +104,14 @@ void sub_8019C78(void)
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (sub_80914E4(gUnknown_203B210->unk1C.itemIndex) == '\0') {
+        if (!sub_80914E4(gUnknown_203B210->unk1C.itemIndex)) {
             UpdateKecleonStoreState(0xd);
         }
+        else if (gUnknown_203B210->itemSellPrice + gUnknown_203B460->teamMoney > 99999) {
+            UpdateKecleonStoreState(0xe);
+        }
         else {
-            if (gUnknown_203B210->unk10 + gUnknown_203B460->teamMoney > 99999) {
-                 UpdateKecleonStoreState(0xe);
-   
-            }
-            else {
-                UpdateKecleonStoreState(0x1e);
-            }
+            UpdateKecleonStoreState(0x1e);
         }
         break;
     case 7:
@@ -172,7 +166,7 @@ void sub_8019D68(void)
 
 u32 sub_8019D8C(void)
 {
-    if(gUnknown_203B210->unk4 != 0)
+    if(gUnknown_203B210->unk4)
     {
         return sub_8091814();
     }
@@ -190,22 +184,20 @@ void sub_8019DAC(void)
   
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
-  iVar5 = 0;
-  do {
+  for(iVar5 = 0; iVar5 < 0x14; iVar5++){
     pbVar4 = &gUnknown_203B460->fill0[iVar5];
-    if (((pbVar4->unk0 & 1) != 0) && (sub_80914E4(pbVar4->itemIndex) != 0)) {
+    if (((pbVar4->unk0 & 1) != 0) && (sub_80914E4(pbVar4->itemIndex))) {
       iVar3 = sub_8090CCC(pbVar4);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
     }
-    iVar5 = iVar5 + 1;
-  } while (iVar5 < 0x14);
+  }
 }
 
 void sub_8019E04(int param_1)
 {
   
-  if (gUnknown_203B210->unk4 != 0) {
+  if (gUnknown_203B210->unk4) {
     if (param_1 == 1)
         gUnknown_203B210->unkE0 = 1;
     else

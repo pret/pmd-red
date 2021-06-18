@@ -6,7 +6,7 @@ extern u8 *gUnknown_203B3E8;
 extern void nullsub_54();
 extern void sub_8039E18();
 
-void sub_803A1C0(u8 r0)
+void SetWonderMailMainMenuState(u8 r0)
 {
     *gUnknown_203B3E8 = r0;
     nullsub_54();

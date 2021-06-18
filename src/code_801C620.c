@@ -12,7 +12,7 @@ struct subStruct_203B240
 struct unkStruct_203B240
 {
     // size: 0x94
-    s32 unk0;
+    s32 state;
     u8 unk4;
     u8 fill5[3];
     s32 unk8;
@@ -72,7 +72,7 @@ u32 sub_801C620(u8 param_1)
 
 u32 sub_801C674(void)
 {
-    switch(gUnknown_203B240->unk0)
+    switch(gUnknown_203B240->state)
     {
         case 0:
             sub_801C7D4();
@@ -98,9 +98,9 @@ void sub_801C6B4(void)
     }
 }
 
-void sub_801C6D0(s32 unk0)
+void sub_801C6D0(s32 newState)
 {
-    gUnknown_203B240->unk0 = unk0;
+    gUnknown_203B240->state = newState;
     sub_801C6E4();
 }
 
@@ -109,7 +109,7 @@ void sub_801C6E4(void)
   char *skillName;
   struct subStruct_203B240 *preload;
   
-  switch(gUnknown_203B240->unk0)
+  switch(gUnknown_203B240->state)
   {
     case 0:
         sub_8008C54(gUnknown_203B240->unk24);
@@ -139,9 +139,8 @@ void sub_801C6E4(void)
 
 void sub_801C7D4(void)
 {
-  
   if (gUnknown_203B240->unkC != 0) {
-    if ((gUnknown_203B240->unk20 & 8) != 0) {
+    if ((gUnknown_203B240->unk20 & 8)) {
       sub_8013F84();
     }
     gUnknown_203B240->unk20++;
@@ -169,7 +168,7 @@ void sub_801C848(void)
 {
   
   if (gUnknown_203B240->unk8 < (gUnknown_203B240->unkC - 1)) {
-    if ((gUnknown_203B240->unk20 & 8) != 0) {
+    if ((gUnknown_203B240->unk20 & 8)) {
       sub_8013F84();
     }
     gUnknown_203B240->unk20++;

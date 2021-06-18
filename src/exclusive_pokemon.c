@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/species.h"
 #include "exclusive_pokemon.h"
 
 const struct ExclusivePokemon gExclusivePokemon[NUM_EXCLUSIVE_POKEMON] = {

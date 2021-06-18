@@ -4,7 +4,24 @@
 #include "file_system.h"
 #include "text.h"
 
-#define PASSWORD_BUFFER_SIZE 0x36
+#define PASSWORD_BUFFER_SIZE 54
+
+struct WonderMail
+{
+    /* 0x0 */ u8 mailType; // mail type
+    /* 0x1 */ u8 missionType; // mission type
+    /* 0x2 */ u8 unk2;
+    /* 0x3 */ u8 unk3;
+    /* 0x4 */ u8 dungeon; // dungeon
+    /* 0x5 */ u8 floor; // floor
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ s16 clientPoke; // client pokemon
+    /* 0xE */ s16 targetPoke; // target
+    /* 0x10 */ u8 targetItem; // item to find/deliver
+    /* 0x11 */ u8 rewardType; // reward type
+    /* 0x12 */ u8 itemReward; // item reward
+    /* 0x13 */ u8 friendAreaReward; // friend area
+};
 
 
 struct WonderMailStruct_203B2C0

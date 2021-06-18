@@ -8771,7 +8771,7 @@ sub_8046F00:
 	cmp r0, 0x5
 	bne _08046F7C
 	ldrb r0, [r4, 0x2]
-	bl sub_80913CC
+	bl GetItemMove
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrb r0, [r4, 0x2]

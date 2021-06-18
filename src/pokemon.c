@@ -1,7 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
 #include "file_system.h"
-#include "constants/species.h"
 
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_81075F4;

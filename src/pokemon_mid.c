@@ -1,6 +1,5 @@
 #include "global.h"
 #include "pokemon.h"
-#include "constants/species.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];

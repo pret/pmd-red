@@ -1,0 +1,28 @@
+#ifndef GUARD_CONSTANTS_WONDER_MAIL_H
+#define GUARD_CONSTANTS_WONDER_MAIL_H 
+
+enum MissionType
+{
+    HELP_POKE,
+    FIND_POKE,
+    ESCORT,
+    FIND_ITEM,
+    DELIVER_ITEM
+};
+
+enum RewardType
+{
+    MONEY,
+    MONEY_EXTRA,
+    ITEM,
+    ITEM_EXTRA,
+    BLANK_4,
+    MONEY1,
+    MONEY1_EXTRA,
+    ITEM1,
+    ITEM1_EXTRA,
+    FRIEND_AREA,
+    END_REWARDS
+};
+
+#endif //GUARD_CONSTANTS_WONDER_MAIL_H

@@ -104,6 +104,8 @@ SECTIONS {
         asm/pokemon_square.o(.text);
         src/code_801AFA4.o(.text);
         asm/code_801AFA4.o(.text);
+        src/code_801B3C0.o(.text);
+        asm/code_801B3C0.o(.text);
         src/code_801C620.o(.text);
         asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
@@ -188,8 +190,8 @@ SECTIONS {
         asm/pokemon_1.o(.text);
         src/pokemon_1.o(.text);
         asm/pokemon_2.o(.text);
-        src/code_808EAB0.o(.text);
-        asm/code_808EAB0.o(.text);
+        src/pokemon_3.o(.text);
+        asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
         src/items.o(.text);
@@ -205,6 +207,8 @@ SECTIONS {
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);
+        src/code_80958E8.o(.text);
+        asm/code_80958E8.o(.text);
         src/code_809747C.o(.text);
         asm/code_809747C.o(.text);
         src/code_809747C_1.o(.text);

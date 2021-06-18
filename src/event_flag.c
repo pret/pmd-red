@@ -9,6 +9,7 @@ extern u8 sub_8002658(s16);
 
 struct unkEventStruct
 {
+    // size: 0x4
     s16 unk0;
     u8 unk2; // Seems like friend area number
 };

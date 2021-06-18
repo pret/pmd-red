@@ -1412,7 +1412,19 @@ gUnknown_80E6DDC: @ 80E6DDC
 gUnknown_80E6DF4: @ 80E6DF4
 	.incbin "baserom.gba", 0xE6DF4, 0x5C
 
-        .include "data/text/chunsoft.inc"
+        .global gUnknown_80E6E50
+gUnknown_80E6E50:: @ 80E6E50
+        .string "CHUNSOFT\0"
+        .align 2,0
+
+        .string "pksdir0\0"
+
+        .string "pksdir0\0"
+
+        .string "pksdir0\0"
+
+        .string "pksdir0\0"
+
 
 	.global gUnknown_80E6E7C
 gUnknown_80E6E7C: @ 80E6E7C

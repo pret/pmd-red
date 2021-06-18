@@ -1,10 +1,12 @@
 #include "global.h"
 #include "memory.h"
+#include "text.h"
+#include "input.h"
 
 struct unkStruct_203B2F8
 {
     // size: 0x208
-    u32 state; // state
+    s32 state; // state
     u32 unk4;
     u8 unk8;
     u8 unk9;
@@ -15,8 +17,22 @@ struct unkStruct_203B2F8
     u32 unk6C;
     u32 unk70;
     u32 unk74;
+    u8 fill78[0x118 - 0x78];
+    u32 unk118;
+    u8 fill11C[0x158 - 0x11C];
+    u32 unk158;
+    u8 fill15C[0x198 - 0x15C];
+    u16 unk198[8];
+    struct UnkTextStruct2 unk1A8[4];
+    u32 unk1E4;
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
+extern struct UnkTextStruct2 gUnknown_80DFE04;
+extern struct UnkTextStruct2 gUnknown_80DFE1C;
+extern struct UnkTextStruct2 gUnknown_80DFDD4;
+extern void sub_8012CAC(struct UnkTextStruct2 *, u32 *);
+extern void sub_802D63C(void);
+extern void sub_802D5A4(void);
 
 extern u8 sub_8099328(u8 *);
 extern u32 sub_8011C1C();
@@ -102,4 +118,35 @@ void sub_802D1A0(u32 newState)
     gUnknown_203B2F8->state = newState;
     sub_802D1B8();
     sub_802D2A8();
+}
+
+void sub_802D1B8(void)
+{
+    s32 iVar2;
+    sub_8006518(gUnknown_203B2F8->unk1A8);
+    switch(gUnknown_203B2F8->state)
+    {
+        case 0xD:
+           sub_802D5A4();
+           gUnknown_203B2F8->unk1A8[2] = gUnknown_80DFE04;
+           sub_8012CAC(&gUnknown_203B2F8->unk1A8[2], &gUnknown_203B2F8->unk118);
+           gUnknown_203B2F8->unk1A8[2].unk0c = 6;
+           break;
+        case 0xE:
+           sub_802D63C();
+           gUnknown_203B2F8->unk1A8[3] = gUnknown_80DFE1C;
+           sub_8012CAC(&gUnknown_203B2F8->unk1A8[3], &gUnknown_203B2F8->unk158);
+           gUnknown_203B2F8->unk1A8[3].unk0c = 6;
+           break;
+        default:
+           for(iVar2 = 0; iVar2 < 4; iVar2++)
+           {
+               gUnknown_203B2F8->unk1A8[iVar2] = gUnknown_80DFDD4;
+           }
+           break;
+        case 2:
+           break;
+    }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2F8->unk1A8, 1, 1);
 }

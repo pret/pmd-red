@@ -797,8 +797,8 @@ _080913C4: .4byte gUnknown_203B460
 _080913C8: .4byte 0x0001869f
 	thumb_func_end sub_80913A0
 
-	thumb_func_start sub_80913CC
-sub_80913CC:
+	thumb_func_start GetItemMove
+GetItemMove:
 	lsls r0, 24
 	ldr r1, _080913DC
 	ldr r1, [r1]
@@ -808,7 +808,7 @@ sub_80913CC:
 	bx lr
 	.align 2, 0
 _080913DC: .4byte gItemParametersData
-	thumb_func_end sub_80913CC
+	thumb_func_end GetItemMove
 
 	thumb_func_start sub_80913E0
 sub_80913E0:
@@ -861,7 +861,7 @@ _08091414:
 	bne _080914B6
 	add r4, sp, 0x54
 	ldrb r0, [r6, 0x2]
-	bl sub_80913CC
+	bl GetItemMove
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16

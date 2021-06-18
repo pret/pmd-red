@@ -25994,7 +25994,7 @@ _0807CBAC:
 	add r4, sp, 0x20
 	lsls r5, 8
 	lsrs r0, r5, 24
-	bl sub_80913CC
+	bl GetItemMove
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16

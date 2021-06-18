@@ -3,6 +3,7 @@
 
 #include "file_system.h"
 #include "text.h"
+#include "menu.h"
 
 struct unkStruct_203B204
 {
@@ -12,7 +13,9 @@ struct unkStruct_203B204
     u32 unk8;
     u32 chosenAmount;
     u32 unk10;
-    u8 fill14[0x64 - 0x14];
+    struct MenuItem unk14[5];
+    u8 fill3C[0x54 - 0x3C];
+    u16 unk54[8];
     u32 unk64;
     u8 fill68[0x78 - 0x68];
     u32 unk78;

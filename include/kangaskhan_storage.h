@@ -2,6 +2,7 @@
 #define KANGASKHAN_STORAGE_H
 
 #include "text.h"
+#include "menu.h"
 
 struct unkStruct_203B208
 {
@@ -17,7 +18,7 @@ struct unkStruct_203B208
     u32 unk18;
     u32 unk1C;
     u32 unk20;
-    u8 fill24[0x4C - 0x24];
+    struct MenuItem unk24[5];
     u16 unk4C[5];
     u32 unk58;
     u8 unk5C[0xA8 - 0x5C];

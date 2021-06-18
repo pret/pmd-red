@@ -357,7 +357,7 @@ void TradeItem_SendItemConfirm(void)
             load -= gTradeItemsMenu->numItemsToSend;
             gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
-            PrepareSavePakWrite(0);
+            PrepareSavePakWrite(SPECIES_NONE);
             break;
         case 6:
         case 0:
@@ -399,7 +399,7 @@ void sub_80368D4(void)
             {
                 TradeItem_AddItem();
                 SetTradeItemMenu(0x11);
-                PrepareSavePakWrite(0);
+                PrepareSavePakWrite(SPECIES_NONE);
             }
         break;
     }
@@ -438,7 +438,7 @@ void sub_8036950(void)
           // Link Failure
         TradeItem_AddItem(); // Add back the item
         SetTradeItemMenu(0xb);
-        PrepareSavePakWrite(0);
+        PrepareSavePakWrite(SPECIES_NONE);
       }
       else {
         PrintTradeItemsLinkError(gTradeItemsMenu->linkStatus);
@@ -482,7 +482,7 @@ void sub_8036A34(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetTradeItemMenu(0x10);
-        PrepareSavePakWrite(0);
+        PrepareSavePakWrite(SPECIES_NONE);
     }
 }
 

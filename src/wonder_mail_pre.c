@@ -2,7 +2,6 @@
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "wonder_mail.h"
 #include "memory.h"
 
