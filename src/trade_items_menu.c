@@ -114,7 +114,7 @@ enum TradeItemsModes
 };
 
 
-u32 CreateTradeItemsMenu(void)
+s32 CreateTradeItemsMenu(void)
 {
   
   ResetUnusedInputStruct();
@@ -128,7 +128,7 @@ u32 CreateTradeItemsMenu(void)
   return 1;
 }
 
-u32 UpdateTradeItemsMenu(void)
+s32 UpdateTradeItemsMenu(void)
 {
   
   switch(gTradeItemsMenu->currMenu) {

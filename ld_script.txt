@@ -82,7 +82,6 @@ SECTIONS {
         asm/code_800D090.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);
-        asm/debug.o(.text);
         src/save.o(.text);
         src/code_8012A18.o(.text);
         src/more_input.o(.text);
@@ -194,6 +193,8 @@ SECTIONS {
         asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
         asm/code_809017C.o(.text);
+        src/code_8090208.o(.text);
+        asm/code_8090208.o(.text);
         src/items.o(.text);
         asm/items.o(.text);
         src/rescue_team_info.o(.text);
@@ -203,7 +204,7 @@ SECTIONS {
         src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);
         src/game_options.o(.text);
-        asm/game_options.o(.text);
+        asm/code_8094D28.o(.text);
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);

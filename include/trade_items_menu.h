@@ -49,4 +49,9 @@ struct TradeItemsMenu
     u8 fill25F[0x3A0 - 0x25F];
 };
 
+
+s32 UpdateTradeItemsMenu(void);
+s32 CreateTradeItemsMenu(void);
+void CleanTradeItemsMenu(void);
+
 #endif

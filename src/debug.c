@@ -5,6 +5,7 @@
 #include "debug.h"
 
 extern void Hang();
+void FatalErrorHang(void) __attribute__((noreturn));
 
 extern bool32 gNDS_DebugEnabled;
 extern u8 gUnknown_203B150;
@@ -236,8 +237,7 @@ void FatalErrorHang()
     Hang();
 }
 
-/*void 
-FatalError(struct DebugLocation *debug, const char *text, ...) 
+void FatalError(struct DebugLocation *debug, const char *text, ...) 
 {
     char buf[0x100];
     va_list vArgv;
@@ -248,4 +248,4 @@ FatalError(struct DebugLocation *debug, const char *text, ...)
     va_end(vArgv);
     FatalErrorFormatMessage(gUnknown_80D42D4, buf);
     FatalErrorHang();
-}*/
+}

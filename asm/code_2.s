@@ -193,7 +193,7 @@ _080007CC:
 	movs r0, 0x3F
 	str r0, [sp]
 	mov r0, sp
-	bl sub_8097688
+	bl SetDungeonLocationInfo
 	bl sub_80140DC
 	cmp r5, 0x3
 	bhi _080007EC
@@ -1160,7 +1160,7 @@ _08000FAC:
 _08000FB8:
 	adds r0, r4, 0
 	adds r0, 0x80
-	bl sub_8097688
+	bl SetDungeonLocationInfo
 	bl sub_8011924
 	movs r1, 0
 	ldrsh r0, [r7, r1]

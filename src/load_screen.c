@@ -93,10 +93,10 @@ extern u8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
 extern void ExpandPlaceholdersBuffer(u8 *buffer, u8 *text, ...);
 extern s32 sub_8011C1C(void);
-extern u8 *sub_809769C(void);
+extern u8 *GetDungeonLocationInfo(void);
 extern u32 GetNumAdventures(void);
 extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
-extern void sub_8090228(u8 *, u8 *);
+extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
 extern void sub_80922B4(u8 *, u8 *, u32);
 extern s32 sub_8095324(u32);
 extern u32 sub_8001658(u32, u32);
@@ -257,7 +257,7 @@ void DrawLoadScreenText(void)
   // TODO: fix these branches.. correct logic but branching isn't right
   if ((sub_8095324(1) != 0) || (sub_8095324(7) != 0)) {
     if (iVar2 == 0xf1207) {
-        sub_8090228(gUnknown_203B374->formattedLocation,sub_809769C());
+        PrintDungeonLocationtoBuffer(gUnknown_203B374->formattedLocation,GetDungeonLocationInfo());
     }
     else {
         ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
@@ -266,9 +266,6 @@ void DrawLoadScreenText(void)
   else {
     switch(sub_8011C1C())
     {
-        default:
-            ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E7824); // Location unknown
-            break;
         case 1:
             switch(sub_8001658(0,24))
             {
@@ -285,10 +282,13 @@ void DrawLoadScreenText(void)
         case 2:
             if (iVar2 == 0xf1207)
             {
-                sub_8090228(gUnknown_203B374->formattedLocation,sub_809769C());
+                PrintDungeonLocationtoBuffer(gUnknown_203B374->formattedLocation,GetDungeonLocationInfo());
             } else {
                 ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E780C); // Quicksave data deleted
             }
+            break;
+        default:
+            ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,&gUnknown_80E7824); // Location unknown
             break;
     }
   }
@@ -529,10 +529,10 @@ void DrawLoadScreenText(void)
 	"\tlsls r2, 1\n"
 	"\tadds r4, r2\n"
 "_08039676:\n"
-	"\tbl sub_809769C\n"
+	"\tbl GetDungeonLocationInfo\n"
 	"\tadds r1, r0, 0\n"
 	"\tadds r0, r4, 0\n"
-	"\tbl sub_8090228\n"
+	"\tbl PrintDungeonLocationtoBuffer\n"
 	"\tb _08039696\n"
 	"\t.align 2, 0\n"
 "_08039684: .4byte 0x000f1207\n"

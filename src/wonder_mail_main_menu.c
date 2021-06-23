@@ -62,7 +62,7 @@ extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
 extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
 extern void sub_80141B4(u32 *r0, u32, u32 *r1, u32);
 
-void sub_8039BAC(u32);
+void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
 void sub_8039AA8(void);
 void sub_8039B14(void);
@@ -73,8 +73,8 @@ void HandlePasswordSuccess(void);
 void HandlePrepareSaveScreen(void);
 void HandleSaveAdventureScreen(void);
 void HandleWonderMailAddedScreen(void);
-void sub_8039B3C(void);
-void sub_8039D0C(void);
+void ReturnToWonderMailMainScreen(void);
+void AdvanceToPasswordEntryScreen(void);
 void HandlePasswordEntryScreen(void);
 void HandleInvalidPasswordMenu(void);
 
@@ -150,10 +150,10 @@ u8 UpdateWonderMailMenu(void)
         HandleWonderMailAddedScreen();
         break;
     case COMMUNICATION_ERROR:
-        sub_8039B3C();
+        ReturnToWonderMailMainScreen();
         break;
     case PROMPT_PASSWORD_ENTRY: // "Please enter the Wonder Mail Password" Screen 
-        sub_8039D0C();
+        AdvanceToPasswordEntryScreen();
         break;
     case PASSWORD_ENTRY_SCREEN: // Password Entry
         HandlePasswordEntryScreen();
@@ -242,7 +242,7 @@ void sub_8039B20(void)
   }
 }
 
-void sub_8039B3C(void)
+void ReturnToWonderMailMainScreen(void)
 {
   s32 local_8;
 
@@ -267,15 +267,15 @@ void sub_8039B58(void)
       }
     }
     else {
-      sub_8039BAC(gUnknown_203B3E8->wonderMailStatus);
+      PrintWonderMailMainMenuError(gUnknown_203B3E8->wonderMailStatus);
       SetWonderMailMainMenuState(COMMUNICATION_ERROR);
     }
   }
 }
 
-void sub_8039BAC(u32 arg)
+void PrintWonderMailMainMenuError(u32 status)
 {
-    switch(arg)
+    switch(status)
     {
         case 0:
             break;
@@ -356,7 +356,7 @@ void HandlePasswordEntryScreen(void)
   }
 }
 
-void sub_8039D0C(void)
+void AdvanceToPasswordEntryScreen(void)
 {
   int iVar2;
   if(sub_80144A4(&iVar2) == 0)

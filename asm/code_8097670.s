@@ -609,7 +609,7 @@ sub_8097D60:
 	adds r1, r3, 0
 	bl sub_809486C
 	mov r0, sp
-	bl WriteSaveOptions
+	bl WriteGameOptions
 	mov r0, sp
 	bl WritePlayTime
 	mov r0, sp
@@ -634,7 +634,7 @@ sub_8097D98:
 	adds r1, r3, 0
 	bl sub_809485C
 	mov r0, sp
-	bl ReadSaveOptions
+	bl ReadGameOptions
 	mov r0, sp
 	bl ReadPlayTime
 	mov r0, sp

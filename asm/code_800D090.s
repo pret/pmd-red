@@ -7711,7 +7711,7 @@ _08010BD0:
 	bl sub_80073B8
 	ldr r0, _08010C08
 	adds r1, r5, 0
-	bl sub_809027C
+	bl CopyDungeonName1toBuffer
 	ldr r2, _08010C0C
 	movs r0, 0
 	str r0, [sp]

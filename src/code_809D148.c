@@ -255,15 +255,9 @@ void sub_809D220(u32 r0, u32 r1, u32 r2)
     gUnknown_20399E8.unk4 = r1;
 }
 
-u32 sub_809D234(void)
+bool32 sub_809D234(void)
 {
-    u32 temp;
-    temp = gUnknown_20399E8.unk8;
-    if(temp != 0)
-    {
-        temp = 1;
-    }
-    return temp;
+    return gUnknown_20399E8.unk8 != 0;
 }
 
 // TODO regswap but matches otherwise

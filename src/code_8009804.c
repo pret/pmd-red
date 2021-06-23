@@ -16,7 +16,19 @@ struct unkStruct_202D240
 };
 extern struct unkStruct_202D240 gUnknown_202D240[8];
 
+struct unkStruct_202D038
+{
+     // size: 0x40
+     u32 unk0;
+     u32 unk4;
+     u8 fill[0x40 - 0x8];
+};
+
+extern struct unkStruct_202D038 gUnknown_202D038[8];
+
 extern void CpuCopy(void* dest, void *src, s32 size);
+extern void sub_8009A1C(u32);
+
 
 void vram_related_8009804(void)
 {
@@ -122,4 +134,18 @@ void sub_80099C0(void)
   CpuCopy(BG_SCREEN_ADDR(12),gUnknown_202B038, BG_SCREEN_SIZE);
   // TODO shouldn't this be 202B838? It didn't match... might need raw address
   CpuCopy(BG_SCREEN_ADDR(13),gUnknown_202B038 + 0x1, BG_SCREEN_SIZE);
+}
+
+void sub_80099F0(u32 r0)
+{
+    s32 iVar2;
+    for(iVar2 = 0; iVar2 < 8; iVar2++)
+    {
+        gUnknown_202D038[iVar2].unk4 = r0;
+    }
+}
+
+void sub_8009A10(u32 *r0)
+{
+    sub_8009A1C(r0[1]);
 }

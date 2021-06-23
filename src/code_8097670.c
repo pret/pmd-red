@@ -1,5 +1,11 @@
 #include "global.h"
 
+struct unkDungeonStruct
+{
+    u8 index;
+    u8 floor;
+};
+
 struct unkStruct_203B494
 {
     // size: 0xC8?
@@ -7,9 +13,7 @@ struct unkStruct_203B494
     s32 numAdventures;
     s32 unk8;
     s32 unkC;
-    u8 unk10; // location?
-    u8 unk11;
-    u8 fill12[2];
+    struct unkDungeonStruct dungeonLocation;
     s16 unk14;
     s16 unk16;
     s16 unk18;
@@ -36,15 +40,15 @@ struct unkStruct_203B494 *sub_8097680(void)
     return &gUnknown_2039778;
 }
 
-void sub_8097688(u8 *r0)
+void SetDungeonLocationInfo(struct unkDungeonStruct *r0)
 {
-    gUnknown_203B494->unk10 = r0[0];
-    gUnknown_203B494->unk11 = r0[1];
+    gUnknown_203B494->dungeonLocation.index = r0->index;
+    gUnknown_203B494->dungeonLocation.floor = r0->floor;
 }
 
-u8 *sub_809769C(void)
+struct unkDungeonStruct *GetDungeonLocationInfo(void)
 {
-    return &gUnknown_203B494->unk10;
+    return &gUnknown_203B494->dungeonLocation;
 }
 
 void sub_80976A8(void)
@@ -63,7 +67,7 @@ void sub_80976A8(void)
     {
         gUnknown_203B494->unk1C[iVar2] = 0;
     }
-    
+
     for(iVar2 = 0; iVar2 < 0xD; iVar2++)
     {
         gUnknown_203B494->unk8C[iVar2] = 0;
@@ -150,7 +154,7 @@ void sub_8097810(void)
 {
     if(gUnknown_203B494->unk14 < 9999)
         gUnknown_203B494->unk14++;
-    sub_80976F8(0xB);
+    sub_80976F8(11);
 }
 
 s16 sub_8097838(void)
@@ -162,7 +166,7 @@ void sub_8097848(void)
 {
     if(gUnknown_203B494->unk16 < 9999)
         gUnknown_203B494->unk16++;
-    sub_80976F8(0xA);
+    sub_80976F8(10);
 }
 
 s16 sub_8097870(void)
@@ -179,7 +183,7 @@ void sub_8097890(void)
 {
     if(gUnknown_203B494->UNKC0.unkC0 < 99999)
         gUnknown_203B494->UNKC0.unkC0++;
-    sub_80976F8(0xC);
+    sub_80976F8(12);
 }
 
 s16 sub_80978B8(void)

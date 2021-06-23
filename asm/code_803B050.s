@@ -1156,7 +1156,7 @@ _0803B916:
 	add r4, sp, 0xE0
 	ldr r1, [r7, 0x8]
 	adds r0, r4, 0
-	bl sub_8090228
+	bl PrintDungeonLocationtoBuffer
 	ldr r1, _0803B938
 	add r0, sp, 0x4
 	adds r2, r4, 0
@@ -1167,7 +1167,7 @@ _0803B938: .4byte gUnknown_80E8884
 _0803B93C:
 	ldr r1, [r7, 0x8]
 	add r0, sp, 0x4
-	bl sub_8090228
+	bl PrintDungeonLocationtoBuffer
 _0803B944:
 	ldr r1, [r7, 0x48]
 	adds r1, 0xC
@@ -1819,7 +1819,7 @@ _0803BEC8:
 	add r4, sp, 0x180
 	ldr r1, [r7, 0x8]
 	adds r0, r4, 0
-	bl sub_8090228
+	bl PrintDungeonLocationtoBuffer
 	ldr r1, _0803BF00
 	add r0, sp, 0x4
 	adds r2, r4, 0
@@ -1832,7 +1832,7 @@ _0803BF00: .4byte gUnknown_80E8884
 _0803BF04:
 	ldr r1, [r7, 0x8]
 	add r0, sp, 0x4
-	bl sub_8090228
+	bl PrintDungeonLocationtoBuffer
 _0803BF0C:
 	ldr r3, [r7]
 	movs r0, 0

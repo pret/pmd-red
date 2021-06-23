@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
+#include "trade_items_menu.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -26,20 +27,16 @@ void sub_8035DA0(void);
 
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
-extern void DrawMainMenu(void);
-extern void CreateTradeItemsMenu(void);
 extern void sub_8036FDC(s32);
 extern void CreateWirelessCommsMenu(void);
 extern void CreateFriendRescueMenu(void);
 extern void CreateDualSlotMenu(void);
 extern void CreateWonderMailMenu(void);
 extern void CreateLoadScreen(u32);
-extern s32 sub_8035DB4(u32);
 extern void CreateRescuePasswordMenu(u32);
 extern void CreateSaveMenu(u32);
 extern s32 UpdateMainMenu(void);
 extern s32 UpdateLoadScreenMenu(void);
-extern s32 UpdateTradeItemsMenu(void);
 extern s32 UpdateFriendRescueMenu(void);
 extern s32 UpdateWonderMailMenu(void);
 extern s32 UpdateDualSlotMenu(void);
@@ -47,10 +44,7 @@ extern s32 UpdateWirelessCommsMenu(void);
 extern s32 UpdateRescuePasswordMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 UpdateSaveMenu(void);
-
-extern void CleanMainMenu(void);
 extern void CleanLoadScreen(void);
-extern void CleanTradeItemsMenu(void);
 extern void sub_80370D4(void);
 extern void CleanFriendRescueMenu(void);
 extern void CleanWonderMailMenu(void);
@@ -59,6 +53,10 @@ extern void CleanWirelessCommsMenu(void);
 extern void CleanRescuePasswordMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
+
+void CleanMainMenu(void);
+void DrawMainMenu(void);
+s32 sub_8035DB4(u32);
 
 struct unkSubStruct
 {
@@ -485,6 +483,7 @@ s32 sub_8035DB4(u32 currMenu)
         break;
     case 0x1a:
         returnVar = 7;
+        break;
     }
     return returnVar;
 }

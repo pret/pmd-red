@@ -15,7 +15,7 @@ struct unk_struct
     u8 unk4[0x10]; // has "POKE_DUNGEON__05
     u32 unk14;
     u32 unk18;
-    u32 unk1C;
+    u32 dungeonLocation;
     u32 unk20;
     u32 padding[503];
 };
@@ -179,7 +179,7 @@ extern u32 sub_80958F8(void);
 extern void sub_8095900(void);
 extern void sub_80972F4(void);
 extern u32 sub_8097680(void);
-extern u32 *sub_809769C(void);
+extern u32 *GetDungeonLocationInfo(void);
 extern void sub_80974E8(void);
 extern void ResetNumAdventures(void);
 extern void sub_80993D8(void);
@@ -529,7 +529,7 @@ u32 sub_80121E0(u32 r0)
     temp = 0x1F;
 
     r4->unk18 = r0;
-    r4->unk1C = *sub_809769C();
+    r4->dungeonLocation = *GetDungeonLocationInfo();
     r4->unk14 = 0x5071412;
 
     string = sub_8011C4C();

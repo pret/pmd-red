@@ -2,7 +2,6 @@
 #define POKEMON_H
 
 #include "file_system.h"
-#include "constants/species.h"
 
 struct PokemonStruct
 {
@@ -10,22 +9,29 @@ struct PokemonStruct
     u16 unk0; // recruited??
     u8 unk2;
     u8 unk3;
-    u8 fill4[0x8 - 0x4];
-    s16 unk8; // species #
-    u8 fillA[0x14 - 0xA];
+    u8 unk4;
+    u8 unk5;
+    u8 fill6[0x8 - 0x6];
+    /* 0x8 */ s16 speciesNum; // species #
+    u8 fillA[0xC - 0xA];
+    u8 unkC;
+    u8 fillD[0x10 - 0xD];
+    u8 unk10;
+    u8 fill11[0x14 - 0x11];
     u16 unk14;
-    u16 unk16; // HP
-    u8 unk18; // attack
-    u8 unk19; // sp attack
-    u8 unk1A; // def
-    u8 unk1B; // spdef
+    /* 0x16 */ u16 pokeHP; // HP
+    /* 0x18 */ u8 pokeAtt; // attack
+    /* 0x19 */ u8 pokeSPAtt; // sp attack
+    /* 0x1A */ u8 pokeDef; // def
+    /* 0x1B */ u8 pokeSPDef; // spdef
     u32 unk1C;
-    u32 unk20;
+    u8 unk20[4];
     u8 unk24;
     u8 fill25[3];
     u8 unk28;
-    u8 fill29[3];
-    u32 unk2C;
+    u8 unk29;
+    u8 fill2A[2];
+    u8 unk2C[4];
     u8 fill30[0x4C - 0x30];
     /* 0x4C */ u8 name[0xA];
 };
@@ -50,9 +56,9 @@ struct PokemonStruct3
 
 struct unkStruct_203B45C
 {
-    struct PokemonStruct pokemon[NUM_SPECIES];
-    struct PokemonStruct2 pokemon2[4];
-    struct PokemonStruct3 pokemon3[4];
+    /* 0x0 */ struct PokemonStruct pokemon[NUM_SPECIES];
+    /* 0x8DF8 */ struct PokemonStruct2 pokemon2[4];
+    /* 0x8F88 */ struct PokemonStruct3 pokemon3[4];
 };
 
 struct EvolveStruct1
