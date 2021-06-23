@@ -129,39 +129,11 @@ s16 GetInternalNo(s16 index)
     return gMonsterParameters[index].dexInternal[1];
 }
 
-#ifdef NONMATCHING
-u32 CalculateEXPGain(s16 index, s32 level)
+s32 CalculateEXPGain(s16 index, s32 level)
 {
-    return gMonsterParameters[index].base_exp + (gMonsterParameters[index].base_exp * (level- 1)) / 10;
+    s32 baseEXP = gMonsterParameters[index].base_exp;
+    return baseEXP + (baseEXP * (level - 1)) / 10;
 }
-#else
-NAKED
-u32 CalculateEXPGain(s16 index, s32 level)
-{
-	asm_unified("\tpush {r4,lr}\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tldr r2, _0808DD44\n"
-	"\tldr r3, [r2]\n"
-	"\tlsls r2, r0, 3\n"
-	"\tadds r2, r0\n"
-	"\tlsls r2, 3\n"
-	"\tadds r2, r3\n"
-	"\tldr r4, [r2, 0x20]\n"
-	"\tsubs r1, 0x1\n"
-	"\tadds r0, r4, 0\n"
-	"\tmuls r0, r1\n"
-	"\tmovs r1, 0xA\n"
-	"\tbl __divsi3\n"
-	"\tadds r4, r0\n"
-	"\tadds r0, r4, 0\n"
-	"\tpop {r4}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0808DD44: .4byte gMonsterParameters");
-}
-#endif
 
 s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1)
 {

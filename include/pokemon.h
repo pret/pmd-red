@@ -101,8 +101,7 @@ struct gPokemon
     /* 0x1C */ bool8 isMoving;
     /* 0x1D */ u8 unk1D;
     /* 0x1E */ u16 base_hp;
-    /* 0x20 */ u16 base_exp;
-    /* 0x22 */ u16 unk22;
+    /* 0x20 */ s32 base_exp;
     /* 0x24 */ u16 base_att_spatt[2];
     /* 0x28 */ u16 base_def_spdef[2];
     /* 0x2C */ u16 lowkick_dmg;
@@ -151,7 +150,7 @@ s16 GetDexInternalNo(s16 index, u32 r1);
 s16 GetBaseRecruit(s16 index);
 s16 GetAlphabetParentNo(s16 index, s32 r1);
 s16 GetInternalNo(s16 index);
-u32 CalculateEXPGain(s16 index, s32 level);
+s32 CalculateEXPGain(s16 index, s32 level);
 s16 GetPokemonEvolveConditons(s16 index, struct unkEvolve *r1);
 u8 GetPokemonOverworldPalette(s16 index, u32 r1);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
