@@ -1,0 +1,75 @@
+{
+	"tables": [{
+		"name": "MagmaCavernPit_1F_Pokemon",
+		"pokemon": [
+                        {
+                            "species": "SPECIES_ONIX",
+                            "level": 30,
+                            "probability": 5000
+                        },
+                        {
+                            "species": "SPECIES_STEELIX",
+                            "level": 25,
+                            "probability": 5000
+                        },
+                        {
+                            "species": "SPECIES_KECLEON",
+                            "level": 90,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_DECOY",
+                            "level": 1,
+                            "probability": 0
+                        }
+		]
+	}, {
+		"name": "MagmaCavernPit_2F_Pokemon",
+		"pokemon": [
+                        {
+                            "species": "SPECIES_CHARIZARD",
+                            "level": 55,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_TYRANITAR",
+                            "level": 50,
+                            "probability": 10000
+                        },
+                        {
+                            "species": "SPECIES_KECLEON",
+                            "level": 90,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_DECOY",
+                            "level": 1,
+                            "probability": 0
+                        }
+		]
+	}, {
+		"name": "MagmaCavernPit_3F_Pokemon",
+		"pokemon": [
+                        {
+                            "species": "SPECIES_ALAKAZAM",
+                            "level": 50,
+                            "probability": 5000
+                        },
+                        {
+                            "species": "SPECIES_KECLEON",
+                            "level": 90,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_GROUDON",
+                            "level": 27,
+                            "probability": 5000
+                        },
+                        {
+                            "species": "SPECIES_DECOY",
+                            "level": 1,
+                            "probability": 0
+                        }
+		]
+	}]
+}
