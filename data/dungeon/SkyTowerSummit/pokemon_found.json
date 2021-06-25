@@ -1,0 +1,66 @@
+{
+	"tables": [{
+		"name": "SkyTowerSummit_1F_8F_Pokemon",
+		"pokemon": [
+                        {
+                            "species": "SPECIES_AERODACTYL",
+                            "level": 25,
+                            "probability": 1667
+                        },
+                        {
+                            "species": "SPECIES_FLYGON",
+                            "level": 27,
+                            "probability": 1666
+                        },
+                        {
+                            "species": "SPECIES_CLAYDOL",
+                            "level": 26,
+                            "probability": 1667
+                        },
+                        {
+                            "species": "SPECIES_KECLEON",
+                            "level": 90,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_TROPIUS",
+                            "level": 27,
+                            "probability": 1667
+                        },
+                        {
+                            "species": "SPECIES_SALAMENCE",
+                            "level": 29,
+                            "probability": 1666
+                        },
+                        {
+                            "species": "SPECIES_METAGROSS",
+                            "level": 30,
+                            "probability": 1667
+                        },
+                        {
+                            "species": "SPECIES_DECOY",
+                            "level": 1,
+                            "probability": 0
+                        }
+		]
+	}, {
+		"name": "SkyTowerSummit_9F_Pokemon",
+		"pokemon": [
+                        {
+                            "species": "SPECIES_KECLEON",
+                            "level": 90,
+                            "probability": 0
+                        },
+                        {
+                            "species": "SPECIES_RAYQUAZA",
+                            "level": 35,
+                            "probability": 10000
+                        },
+                        {
+                            "species": "SPECIES_DECOY",
+                            "level": 1,
+                            "probability": 0
+                        }
+		]
+	}]
+}
