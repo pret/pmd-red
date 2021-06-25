@@ -1,0 +1,86 @@
+{
+    "name": "FrostyForestFloorID",
+    "tables": [
+    {
+        "MainData": 93,
+        "Pokemon": 64,
+        "Traps": 3,
+        "Items": 27,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 94,
+        "Pokemon": 64,
+        "Traps": 3,
+        "Items": 27,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 95,
+        "Pokemon": 65,
+        "Traps": 3,
+        "Items": 27,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 96,
+        "Pokemon": 66,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 97,
+        "Pokemon": 67,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 98,
+        "Pokemon": 67,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 99,
+        "Pokemon": 68,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 100,
+        "Pokemon": 69,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 101,
+        "Pokemon": 69,
+        "Traps": 3,
+        "Items": 29,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

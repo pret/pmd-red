@@ -1,0 +1,50 @@
+{
+    "name": "FrostyGrottoFloorID",
+    "tables": [
+    {
+        "MainData": 102,
+        "Pokemon": 70,
+        "Traps": 3,
+        "Items": 30,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 103,
+        "Pokemon": 70,
+        "Traps": 3,
+        "Items": 30,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 104,
+        "Pokemon": 70,
+        "Traps": 3,
+        "Items": 30,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 105,
+        "Pokemon": 70,
+        "Traps": 3,
+        "Items": 31,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 106,
+        "Pokemon": 71,
+        "Traps": 3,
+        "Items": 31,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "name": "SkyTowerSummitFloorID",
+    "tables": [
+    {
+        "MainData": 178,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 43,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 179,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 43,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 180,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 43,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 181,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 182,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 183,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 184,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 185,
+        "Pokemon": 110,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 186,
+        "Pokemon": 111,
+        "Traps": 5,
+        "Items": 44,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "MagmaCavernPitFloorID",
+    "tables": [
+    {
+        "MainData": 150,
+        "Pokemon": 94,
+        "Traps": 3,
+        "Items": 40,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 151,
+        "Pokemon": 95,
+        "Traps": 3,
+        "Items": 40,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 152,
+        "Pokemon": 96,
+        "Traps": 3,
+        "Items": 40,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

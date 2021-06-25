@@ -1,0 +1,86 @@
+{
+    "name": "SilentChasmFloorID",
+    "tables": [
+    {
+        "MainData": 30,
+        "Pokemon": 22,
+        "Traps": 1,
+        "Items": 13,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 31,
+        "Pokemon": 22,
+        "Traps": 1,
+        "Items": 13,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 32,
+        "Pokemon": 22,
+        "Traps": 1,
+        "Items": 13,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 33,
+        "Pokemon": 23,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 34,
+        "Pokemon": 24,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 35,
+        "Pokemon": 25,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 36,
+        "Pokemon": 26,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 37,
+        "Pokemon": 27,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 38,
+        "Pokemon": 28,
+        "Traps": 1,
+        "Items": 14,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

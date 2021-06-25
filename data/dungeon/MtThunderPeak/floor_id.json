@@ -1,0 +1,33 @@
+{
+    "name": "MtThunderPeakFloorID",
+    "tables": [
+    {
+        "MainData": 49,
+        "Pokemon": 37,
+        "Traps": 3,
+        "Items": 17,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 50,
+        "Pokemon": 37,
+        "Traps": 3,
+        "Items": 17,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 51,
+        "Pokemon": 38,
+        "Traps": 3,
+        "Items": 17,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+
+    ]
+}

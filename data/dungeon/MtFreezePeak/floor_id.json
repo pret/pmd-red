@@ -1,0 +1,50 @@
+{
+    "name": "MtFreezePeakFloorID",
+    "tables": [
+    {
+        "MainData": 122,
+        "Pokemon": 79,
+        "Traps": 3,
+        "Items": 34,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 123,
+        "Pokemon": 79,
+        "Traps": 3,
+        "Items": 34,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 124,
+        "Pokemon": 79,
+        "Traps": 3,
+        "Items": 34,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 125,
+        "Pokemon": 79,
+        "Traps": 3,
+        "Items": 35,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 126,
+        "Pokemon": 80,
+        "Traps": 3,
+        "Items": 35,
+        "KecleonShop": 28,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

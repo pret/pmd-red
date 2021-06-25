@@ -1,0 +1,95 @@
+{
+    "name": "MtThunderFloorID",
+    "tables": [
+    {
+        "MainData": 39,
+        "Pokemon": 29,
+        "Traps": 1,
+        "Items": 15,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 40,
+        "Pokemon": 30,
+        "Traps": 1,
+        "Items": 15,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 41,
+        "Pokemon": 30,
+        "Traps": 1,
+        "Items": 15,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 42,
+        "Pokemon": 30,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 43,
+        "Pokemon": 31,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 44,
+        "Pokemon": 32,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 45,
+        "Pokemon": 33,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 46,
+        "Pokemon": 34,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 47,
+        "Pokemon": 35,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 48,
+        "Pokemon": 36,
+        "Traps": 1,
+        "Items": 16,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

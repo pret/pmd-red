@@ -1,0 +1,113 @@
+{
+    "name": "MtBlazeFloorID",
+    "tables": [
+    {
+        "MainData": 78,
+        "Pokemon": 55,
+        "Traps": 3,
+        "Items": 24,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 79,
+        "Pokemon": 55,
+        "Traps": 3,
+        "Items": 24,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 80,
+        "Pokemon": 55,
+        "Traps": 3,
+        "Items": 24,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 81,
+        "Pokemon": 56,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 82,
+        "Pokemon": 57,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 83,
+        "Pokemon": 58,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 84,
+        "Pokemon": 59,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 85,
+        "Pokemon": 60,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 86,
+        "Pokemon": 60,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 87,
+        "Pokemon": 61,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 88,
+        "Pokemon": 61,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 89,
+        "Pokemon": 61,
+        "Traps": 3,
+        "Items": 25,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "MtBlazePeakFloorID",
+    "tables": [
+    {
+        "MainData": 90,
+        "Pokemon": 62,
+        "Traps": 1,
+        "Items": 26,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 91,
+        "Pokemon": 62,
+        "Traps": 1,
+        "Items": 26,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 92,
+        "Pokemon": 63,
+        "Traps": 1,
+        "Items": 26,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

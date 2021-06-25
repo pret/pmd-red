@@ -1,0 +1,113 @@
+{
+    "name": "GreatCanyonFloorID",
+    "tables": [
+    {
+        "MainData": 52,
+        "Pokemon": 39,
+        "Traps": 3,
+        "Items": 18,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 53,
+        "Pokemon": 39,
+        "Traps": 3,
+        "Items": 18,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 54,
+        "Pokemon": 39,
+        "Traps": 3,
+        "Items": 18,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 55,
+        "Pokemon": 40,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 56,
+        "Pokemon": 41,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 57,
+        "Pokemon": 42,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 58,
+        "Pokemon": 43,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 59,
+        "Pokemon": 44,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 60,
+        "Pokemon": 45,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 61,
+        "Pokemon": 46,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 62,
+        "Pokemon": 46,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 63,
+        "Pokemon": 47,
+        "Traps": 3,
+        "Items": 20,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}
