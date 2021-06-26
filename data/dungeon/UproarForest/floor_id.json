@@ -1,0 +1,95 @@
+{
+    "name": "UproarForestFloorID",
+    "tables": [
+    {
+        "MainData": 1026,
+        "Pokemon": 475,
+        "Traps": 10,
+        "Items": 115,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1027,
+        "Pokemon": 475,
+        "Traps": 10,
+        "Items": 115,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1028,
+        "Pokemon": 475,
+        "Traps": 10,
+        "Items": 115,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1029,
+        "Pokemon": 476,
+        "Traps": 10,
+        "Items": 116,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1030,
+        "Pokemon": 477,
+        "Traps": 10,
+        "Items": 116,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1031,
+        "Pokemon": 478,
+        "Traps": 10,
+        "Items": 116,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1032,
+        "Pokemon": 479,
+        "Traps": 10,
+        "Items": 116,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1033,
+        "Pokemon": 480,
+        "Traps": 10,
+        "Items": 116,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1034,
+        "Pokemon": 480,
+        "Traps": 10,
+        "Items": 117,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1035,
+        "Pokemon": 480,
+        "Traps": 10,
+        "Items": 118,
+        "KecleonShop": 37,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    }
+    ]
+}

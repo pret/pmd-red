@@ -1,0 +1,14 @@
+{
+    "name": "D63FloorID",
+    "tables": [
+    {
+        "MainData": 1763,
+        "Pokemon": 526,
+        "Traps": 87,
+        "Items": 176,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 177,
+        "BuriedItems": 66
+    }
+    ]
+}

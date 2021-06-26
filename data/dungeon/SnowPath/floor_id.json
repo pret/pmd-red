@@ -1,0 +1,41 @@
+{
+    "name": "SnowPathFloorID",
+    "tables": [
+    {
+        "MainData": 1125,
+        "Pokemon": 522,
+        "Traps": 10,
+        "Items": 124,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1126,
+        "Pokemon": 523,
+        "Traps": 10,
+        "Items": 124,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1127,
+        "Pokemon": 524,
+        "Traps": 10,
+        "Items": 124,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1128,
+        "Pokemon": 525,
+        "Traps": 10,
+        "Items": 125,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

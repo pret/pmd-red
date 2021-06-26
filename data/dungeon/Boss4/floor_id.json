@@ -1,0 +1,104 @@
+{
+    "name": "Boss4FloorID",
+    "tables": [
+    {
+        "MainData": 469,
+        "Pokemon": 207,
+        "Traps": 22,
+        "Items": 70,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 470,
+        "Pokemon": 207,
+        "Traps": 23,
+        "Items": 70,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 471,
+        "Pokemon": 207,
+        "Traps": 24,
+        "Items": 70,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 472,
+        "Pokemon": 208,
+        "Traps": 25,
+        "Items": 71,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 473,
+        "Pokemon": 209,
+        "Traps": 26,
+        "Items": 71,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 474,
+        "Pokemon": 210,
+        "Traps": 27,
+        "Items": 71,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 475,
+        "Pokemon": 210,
+        "Traps": 28,
+        "Items": 72,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 476,
+        "Pokemon": 211,
+        "Traps": 28,
+        "Items": 72,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 477,
+        "Pokemon": 212,
+        "Traps": 28,
+        "Items": 72,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 478,
+        "Pokemon": 213,
+        "Traps": 28,
+        "Items": 73,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 479,
+        "Pokemon": 214,
+        "Traps": 29,
+        "Items": 73,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 46,
+        "BuriedItems": 66
+    }
+    ]
+}

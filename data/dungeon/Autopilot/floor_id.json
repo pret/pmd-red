@@ -1,0 +1,95 @@
+{
+    "name": "AutopilotFloorID",
+    "tables": [
+    {
+        "MainData": 1129,
+        "Pokemon": 526,
+        "Traps": 10,
+        "Items": 126,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1130,
+        "Pokemon": 526,
+        "Traps": 10,
+        "Items": 126,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1131,
+        "Pokemon": 527,
+        "Traps": 10,
+        "Items": 126,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1132,
+        "Pokemon": 528,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1133,
+        "Pokemon": 529,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1134,
+        "Pokemon": 529,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1135,
+        "Pokemon": 530,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1136,
+        "Pokemon": 530,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1137,
+        "Pokemon": 530,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 1138,
+        "Pokemon": 531,
+        "Traps": 10,
+        "Items": 127,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    }
+    ]
+}

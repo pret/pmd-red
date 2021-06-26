@@ -1,0 +1,113 @@
+{
+    "name": "WondrousSeaFloorID",
+    "tables": [
+    {
+        "MainData": 965,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 87,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 966,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 87,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 967,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 87,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 968,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 969,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 970,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 971,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 972,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 973,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 974,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 975,
+        "Pokemon": 448,
+        "Traps": 63,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    },
+    {
+        "MainData": 976,
+        "Pokemon": 448,
+        "Traps": 85,
+        "Items": 88,
+        "KecleonShop": 19,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 66
+    }
+    ]
+}

@@ -1,0 +1,176 @@
+{
+    "name": "FantasyStraitAltFloorID",
+    "tables": [
+    {
+        "MainData": 1302,
+        "Pokemon": 526,
+        "Traps": 87,
+        "Items": 87,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1303,
+        "Pokemon": 526,
+        "Traps": 87,
+        "Items": 87,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1304,
+        "Pokemon": 527,
+        "Traps": 87,
+        "Items": 87,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1305,
+        "Pokemon": 528,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1306,
+        "Pokemon": 529,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1307,
+        "Pokemon": 529,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1308,
+        "Pokemon": 530,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1309,
+        "Pokemon": 530,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1310,
+        "Pokemon": 530,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1311,
+        "Pokemon": 531,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1312,
+        "Pokemon": 531,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1313,
+        "Pokemon": 531,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1314,
+        "Pokemon": 531,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1315,
+        "Pokemon": 534,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1316,
+        "Pokemon": 534,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1317,
+        "Pokemon": 535,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1318,
+        "Pokemon": 535,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1319,
+        "Pokemon": 535,
+        "Traps": 87,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1320,
+        "Pokemon": 535,
+        "Traps": 92,
+        "Items": 88,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}

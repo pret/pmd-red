@@ -1,0 +1,41 @@
+{
+    "name": "RockPathFloorID",
+    "tables": [
+    {
+        "MainData": 1121,
+        "Pokemon": 521,
+        "Traps": 10,
+        "Items": 123,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1122,
+        "Pokemon": 521,
+        "Traps": 10,
+        "Items": 123,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1123,
+        "Pokemon": 521,
+        "Traps": 10,
+        "Items": 123,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    },
+    {
+        "MainData": 1124,
+        "Pokemon": 521,
+        "Traps": 10,
+        "Items": 123,
+        "KecleonShop": 1,
+        "MonsterRoomItems": 2,
+        "BuriedItems": 3
+    }
+    ]
+}
