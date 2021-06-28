@@ -447,7 +447,6 @@ void sub_800BDDC(void)
 void StartNewBGM(u16 songIndex)
 {
     bool8 interrupt_flag;
-    u16 temp_store;
 
     if(!IsBGSong(songIndex))
         return;
@@ -455,8 +454,7 @@ void StartNewBGM(u16 songIndex)
         return;
     if(songIndex == gCurrentBGSong)
     {
-        temp_store = gBGMusicPlayerState - 1;
-        if(temp_store <= 1)
+        if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
     }
     if(sub_800CAE0(songIndex))

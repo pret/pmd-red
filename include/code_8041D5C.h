@@ -10,7 +10,7 @@ struct subStruct_8048524
     /* 0xE */ s16 HP; // HP??
     s16 unk10;
     u8 fill12[0x46 - 0x12];
-    u8 unk46;
+    s8 unk46;
     u8 fill47[0xA4 - 0x47];
     u8 unkA4;
     u8 fillA5[0xAC - 0xA5];
@@ -38,7 +38,9 @@ struct unkDungeon_8041D5C
     u32 unk8;
     s32 unkC;
     s32 unk10;
-    u8 fill14[0x70 - 0x14];
+    u8 fill14[0x20 - 0x14];
+    u8 unk20;
+    u8 unk21[0x70 - 0x21];
     struct subStruct_8048524 *unk70;
 };
 

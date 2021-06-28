@@ -156,5 +156,6 @@ u8 GetPokemonOverworldPalette(s16 index, u32 r1);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
 struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
+s32 GetUnownIndex(s16 index);
 
 #endif // POKEMON_H  

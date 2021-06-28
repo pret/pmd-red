@@ -11,7 +11,6 @@ extern const char gUnknown_810763C[];
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
 extern s16 sub_808E770(u32);
-extern s32 GetUnownIndex(s32);
 extern void sub_80922B4(u8 *, u8 *, s32);
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);

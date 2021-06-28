@@ -137,49 +137,37 @@ void sub_8090B08(struct ItemStruct_203B460 *param_1,u8 itemIndex)
   }
 }
 
-NAKED
-void sub_8090B64(u32 r0, u32 r1)
+void sub_8090B64(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *param_2)
 {
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r5, r1, 0\n"
-	"\tldrb r1, [r5]\n"
-	"\tadds r0, r1, 0\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08090BA4\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r4]\n"
-	"\tstrb r1, [r4, 0x2]\n"
-	"\tldrb r0, [r4, 0x2]\n"
-	"\tbl sub_8090A60\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tcmp r6, 0\n"
-	"\tbne _08090B9A\n"
-	"\tldrb r0, [r4, 0x2]\n"
-	"\tbl GetItemType\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0x6\n"
-	"\tbeq _08090B9A\n"
-	"\tldrb r0, [r4, 0x2]\n"
-	"\tcmp r0, 0x7C\n"
-	"\tbne _08090BA0\n"
-"_08090B9A:\n"
-	"\tldrb r0, [r5, 0x1]\n"
-	"\tstrb r0, [r4, 0x1]\n"
-	"\tb _08090BAA\n"
-"_08090BA0:\n"
-	"\tstrb r6, [r4, 0x1]\n"
-	"\tb _08090BAA\n"
-"_08090BA4:\n"
-	"\tstrb r0, [r4, 0x2]\n"
-	"\tstrb r0, [r4, 0x1]\n"
-	"\tstrb r0, [r4]\n"
-"_08090BAA:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
+    u8 r6;
+
+    if(param_2->unk0 != 0)
+    {
+        param_1->unk0 = 1;
+        param_1->itemIndex = param_2->unk0;
+        r6 = sub_8090A60(param_1->itemIndex);
+        if(r6 != 0 || GetItemType(param_1->itemIndex) == ITEM_TYPE_MONEY)
+        {
+            param_1->numItems = param_2->numItems;
+        }
+        else
+        {
+            if(param_1->itemIndex == 0x7C)
+            {
+                param_1->numItems = param_2->numItems;
+            }
+            else
+            {
+                param_1->numItems = r6;
+            }
+        }
+    }
+    else
+    {
+        param_1->itemIndex = 0;
+        param_1->numItems = 0;
+        param_1->unk0 = 0;
+    }
 }
 
 void sub_8090BB0(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *param_2)

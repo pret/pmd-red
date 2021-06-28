@@ -3,15 +3,17 @@
 #include "bg.h"
 
 extern u16 gRawKeyInput;
-extern u8 gBldAlpha_CoeffA;
-extern u8 gBldAlpha_CoeffB;
-extern u16 gBldAlpha;
-extern u8 gUnknown_202D7FE;
 
 extern struct BGControlStruct gBG0Control;
 extern struct BGControlStruct gBG1Control;
 extern struct BGControlStruct gBG2Control;
 extern struct BGControlStruct gBG3Control;
+
+extern u8 gBldAlpha_CoeffA;
+extern u8 gBldAlpha_CoeffB;
+extern u16 gBldAlpha;
+extern u8 gUnknown_202D7FE;
+
 
 void ReadKeyInput(struct Inputs *r0)
 {
