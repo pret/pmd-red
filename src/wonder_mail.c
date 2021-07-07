@@ -2,31 +2,16 @@
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
+#include "item.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text.h"
+#include "sub_8095228.h"
 #include "gUnknown_203B460.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 extern struct unkStruct_203B460 *gUnknown_203B460;
-
-struct unkStruct_8095228
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 padding[0x10 - 0x5];
-    u32 unk10;
-    u8 padding2[0x20 - 0x14];
-    struct unkStruct_41C unk20;
-    u8 padding3[0x28 - 0x24];
-    u32 unk28;
-    s8 unk2C;
-    u8 padding4[0x30 - 0x2D];
-};
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
@@ -40,14 +25,13 @@ extern u32 sub_8095350();
 extern u8 sub_801CF14(u32);
 extern u32 sub_802F298();
 
-extern struct unkStruct_8095228 *sub_8095228(u8);
 extern u8 sub_80A2824(u32);
 
 #include "data/wonder_mail_1.h"
 
-const struct unkStruct_41C gUnknown_80DED44 = 
+const struct ItemStruct_203B460 gUnknown_80DED44 = 
 {
-    1, 0, 0, 0
+    1, 0, 0
 };
 
 
@@ -186,7 +170,7 @@ extern void sub_803092C();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
-extern void sub_801B3C0(struct unkStruct_41C *);
+extern void sub_801B3C0(struct ItemStruct_203B460 *);
 extern u8 sub_801CB24();
 extern void sub_801B450();
 extern u32 sub_801B410();
@@ -301,13 +285,6 @@ void sub_8028BF0(void)
             break;
         case 3:
             sub_8028B04(11);
-            break;
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
             break;
         case 10:
             sub_8028B04(2);
@@ -890,16 +867,6 @@ void sub_80293F4(void)
         case 3:
                 switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp.unk0))
                 {
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                        break;
                     case 17:
                         sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
                         sub_8028B04(40);
@@ -911,10 +878,6 @@ void sub_80293F4(void)
                     case 7:
                         sub_80141B4(gWonderMailDuplicateText, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0x10d);
                         sub_8028B04(7);
-                        break;
-                    case 19:
-                    case 20:
-                    case 21:
                         break;
                     case 22:
                         sub_8095274(temp.unk10);
@@ -1573,11 +1536,8 @@ void PrintWonderMailLinkError(u32 param_1)
         sub_80141B4(gUnknown_80DF138,0,(u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 0:
-    case 8:
-    case 10:
-    case 12:
     default:
-        return;
+        break;
   }
 }
 
@@ -1588,10 +1548,10 @@ void sub_8029F98(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct unkStruct_41C));
-  gUnknown_203B2C4->unk41C.unk41E = 0;
-  gUnknown_203B2C4->unk41C.unk41D = 1;
-  gUnknown_203B2C4->unk41C.unk41C = 0;
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemStruct_203B460));
+  gUnknown_203B2C4->unk41C.itemIndex = 0;
+  gUnknown_203B2C4->unk41C.numItems = 1;
+  gUnknown_203B2C4->unk41C.unk0 = 0;
   if (gUnknown_203B2C4->linkError == 0) {
       switch(gUnknown_203B2C4->unk40) 
         {
@@ -1757,9 +1717,9 @@ void sub_802A230(void)
 void sub_802A28C(void)
 {
 
-  gUnknown_203B2C4->unk41C.unk41E = 0;
-  gUnknown_203B2C4->unk41C.unk41D = 1;
-  gUnknown_203B2C4->unk41C.unk41C = 0;
+  gUnknown_203B2C4->unk41C.itemIndex = 0;
+  gUnknown_203B2C4->unk41C.numItems = 1;
+  gUnknown_203B2C4->unk41C.unk0 = 0;
 
   switch(sub_801CA08(1))
   {
@@ -1768,12 +1728,12 @@ void sub_802A28C(void)
         sub_802B2BC(1);
         break;
     case 3:
-        gUnknown_203B2C4->unk41C.unk41E = sub_801CB24();
+        gUnknown_203B2C4->unk41C.itemIndex = sub_801CB24();
         sub_802B2BC(0x14);
         break;
     case 4:
         gUnknown_203B2C4->unk4 = 0x13;
-        gUnknown_203B2C4->unk41C.unk41E = sub_801CB24();
+        gUnknown_203B2C4->unk41C.itemIndex = sub_801CB24();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
@@ -1911,15 +1871,6 @@ void sub_802A50C(void)
     case 3:
         switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0)) 
         {
-            case 7:
-            case 8:
-            case 9:
-            case 0xA:
-            case 0xD:
-            case 0xE:
-            case 0xF:
-            case 0x10:
-                break;
             case 0x11:
                 // Wrong password
                 sub_8014248(gUnknown_80DF1C0,0,7,&gUnknown_80DEE44,0,4,0,(u32 *)&gUnknown_203B2C4->faceFile,0xc);
@@ -1945,6 +1896,7 @@ void sub_802A50C(void)
                 sub_802B2BC(0x21);
                 break;
             default:
+            case 7:
                 break;
         }
     sub_80155F0();
@@ -2051,11 +2003,11 @@ void sub_802A798(void)
         {
             case 7:
                 return_var = sub_8095228(gUnknown_203B2C4->unk218);
-                if(gUnknown_203B2C4->unk41C.unk41E != 0)
+                if(gUnknown_203B2C4->unk41C.itemIndex != 0)
                 {
                     return_var->unk20 = gUnknown_203B2C4->unk41C;
                 }
-                gUnknown_203B460->unk50[gUnknown_203B2C4->unk41C.unk41E]--;
+                gUnknown_203B460->unk50[gUnknown_203B2C4->unk41C.itemIndex]--;
                 sub_802B2BC(0x29);
                 break;
             case 8:
@@ -2240,7 +2192,7 @@ void sub_802AA28(void)
                 {
                     case 1:
                         return_var = sub_8095228(sub_80953D4(5));
-                        if(return_var->unk20.unk41E != 0)
+                        if(return_var->unk20.itemIndex != 0)
                         {
                             sub_802B2BC(7);
                         }

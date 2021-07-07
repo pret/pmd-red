@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "felicity_bank.h"
 

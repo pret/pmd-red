@@ -1,5 +1,5 @@
-#ifndef CODE_8041D5C_H
-#define CODE_8041D5C_H
+#ifndef GUARD_CODE_8041D5C_H
+#define GUARD_CODE_8041D5C_H
 
 struct subStruct_8048524
 {

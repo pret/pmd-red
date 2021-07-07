@@ -3,6 +3,7 @@
 
 #include "file_system.h"
 #include "text.h"
+#include "item.h"
 
 #define PASSWORD_BUFFER_SIZE 54
 
@@ -60,14 +61,6 @@ struct WonderMailStruct_203B2C0
 
 };
 
-struct unkStruct_41C
-{
-    u8 unk41C;
-    u8 unk41D;
-    u8 unk41E;
-    u8 unk41F;
-};
-
 struct WonderMailStruct_203B2C4
 {
     // size: 0x564
@@ -85,7 +78,7 @@ struct WonderMailStruct_203B2C4
     u8 filler310[0x35C - 0x310];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct unkStruct_41C unk41C;
+    struct ItemStruct_203B460 unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;

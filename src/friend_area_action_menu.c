@@ -3,6 +3,8 @@
 #include "text.h"
 #include "input.h"
 #include "menu.h"
+#include "item.h"
+#include "gUnknown_203B460.h"
 #include "friend_area_action_menu.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
@@ -31,8 +33,7 @@ extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
-extern void sub_8090B64(u8 *, u8 *);
-extern void sub_801B3C0(u8 *);
+extern void sub_801B3C0(struct ItemStruct_203B460 *);
 extern void sub_809401C(u32 *, u32 *);
 extern void sub_801EE10(u32, s16, u32 *, u32, u32, u32);
 
@@ -166,7 +167,7 @@ void sub_802719C(void)
 
 void sub_8027274(void)
 {
-  u8 auStack12 [4];
+  struct ItemStruct_203B460 auStack12;
 
   switch(gUnknown_203B2BC->state) {
     case 0:
@@ -200,8 +201,8 @@ void sub_8027274(void)
         sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk74,2);
         break;
     case 0xd:
-        sub_8090B64(auStack12,&gUnknown_203B2BC->unk10);
-        sub_801B3C0(auStack12);
+        sub_8090B64(&auStack12,&gUnknown_203B2BC->unk10);
+        sub_801B3C0(&auStack12);
         break;
     case 0xe:
         sub_809401C(&gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk18->unk2C);

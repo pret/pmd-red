@@ -1,3 +1,6 @@
+#ifndef GUARD_BG_H
+#define GUARD_BG_H
+
 struct BGControlStruct
 {
     u16 padding;
@@ -16,3 +19,4 @@ void SetBGRegYOffset(s32 reg, s32 offset);
 void UpdateBGControlRegisters(void);
 void SetBGOBJEnableFlags(u32 mask);
 
+#endif

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "memory.h"
+#include "item.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "wonder_mail.h"
@@ -10,7 +11,6 @@ struct subStruct_203B490
     // size: 0xC
     u8 unk0;
     u8 unk1;
-    u8 fill2[2];
     u32 unk4;
     u32 unk8;
 };
@@ -29,14 +29,13 @@ struct unkStruct_203B490
 };
 
 
-extern u8 sub_809095C(u8);
+extern bool8 sub_809095C(u8);
 extern s32 sub_8090298(u8);
-extern u8 sub_809017C(u8 *);
+extern bool8 sub_809017C(u8 *);
 extern s16 sub_808E770(s16);
-extern u8 sub_8092040(u8);
+extern bool8 sub_8092040(u8);
 extern u8 sub_803C1D0(u8 *, u8);
-extern u8 sub_8090A60(u8);
-extern u8 sub_8091524(u8);
+extern bool8 sub_8091524(u8);
 extern u8 sub_8091E60(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
 extern u8 sub_803C0DC(s16);
@@ -82,7 +81,7 @@ void sub_8095900(void)
     MemoryClear8(gUnknown_203B490->unk1B8, sizeof(gUnknown_203B490->unk1B8));
     for(iVar2 = 0; iVar2 < 16; iVar2++)
     {
-        gUnknown_203B490->unk230[iVar2].unk0 = 0x63;
+        gUnknown_203B490->unk230[iVar2].unk0 = 99;
         gUnknown_203B490->unk230[iVar2].unk1 = 1;
         gUnknown_203B490->unk230[iVar2].unk4 = 0;
         gUnknown_203B490->unk230[iVar2].unk8 = 0;
@@ -117,11 +116,11 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         if(data->unk2 > 9)
             return FALSE;
 
-        if(sub_809095C(data->dungeon) != 0)
+        if(sub_809095C(data->dungeon))
             return FALSE;
         if(data->floor >= sub_8090298(data->dungeon))
             return FALSE;
-        if(sub_809017C(&(data->dungeon)) != 0)
+        if(sub_809017C(&(data->dungeon)))
             return FALSE;
 
         if(data->clientPoke == SPECIES_NONE)
@@ -145,11 +144,11 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             if(data->targetPoke != data->clientPoke)
                 return FALSE;
 
-        if(sub_8092040(data->targetItem) != 0)
+        if(sub_8092040(data->targetItem))
             return FALSE;
-        if(sub_8090A60(data->targetItem) != 0)
+        if(sub_8090A60(data->targetItem))
             return FALSE;
-        if(sub_8091524(data->targetItem) == 0)
+        if(!sub_8091524(data->targetItem))
             return FALSE;
 
         // Item finding
@@ -159,7 +158,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
             return FALSE;
 
-        if(sub_8092040(data->itemReward) != 0)
+        if(sub_8092040(data->itemReward))
             return FALSE;
 
         // Friend Area Reward

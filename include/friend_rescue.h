@@ -1,3 +1,6 @@
+#ifndef GUARD_FRIEND_RESCUE_H
+#define GUARD_FRIEND_RESCUE_H
+
 struct WonderMailStruct_203B33C
 {
     // size: 0x568
@@ -17,10 +20,12 @@ struct WonderMailStruct_203B33C
     u8 padding8[0x4C];
     u32 unk35C;
     u8 padding5[0x5C];
-    u32 unk3BC;
-    u8 padding4[0x60];
+    struct UnkTextStruct2 unk3BC[4];
+    struct ItemStruct_203B460 unk41C;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
-    u8 fill424[0x52C - 0x424];
+    u8 fill424[0x524 - 0x424];
+    s32 unk524;
+    u32 unk528;
     u8 unk52C;
     u8 unk52D;
     u8 fill52E;
@@ -33,3 +38,5 @@ struct WonderMailStruct_203B33C
     u8 filler546[0x564 - 0x546];
     s32 unk564;
 };
+
+#endif

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "play_time.h"
 #include "input.h"
+#include "debug.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 extern u32 gUnknown_20398A8;
@@ -20,8 +21,6 @@ extern const char gUnknown_8115F80;
 extern const char gUnknown_8115FA4;
 extern const char gUnknown_8115FC8;
 extern const char gUnknown_8115FE8;
-
-extern void Log(u8 *, const char*, ...);
 
 extern void sub_809B57C();
 extern void GroundScript_Unlock();

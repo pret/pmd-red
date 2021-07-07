@@ -2,6 +2,7 @@
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "file_system.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "input.h"

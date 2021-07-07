@@ -56,36 +56,36 @@ gUnknown_80D4830: @ 80D4830
 
 	.global gUnknown_80D485C
 gUnknown_80D485C: @ 80D485C
-        .4byte Data_80D4878
+        .4byte Yes_80D4878
         .byte 0x01, 0x00, 0x00, 0x00
-        .4byte Data_80D4874
+        .4byte No_80D4874
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0xFF, 0xFF, 0xFF, 0xFF
+        .4byte -1
 
-        .global Data_80D4874
-        Data_80D4874:
+        .global No_80D4874
+        No_80D4874:
         .string "No\0"
         .align 2,0
-        .global Data_80D4878
-        Data_80D4878:
+        .global Yes_80D4878
+        Yes_80D4878:
         .string "*Yes\0"
         .align 2,0
 
 	.global gUnknown_80D4880
 gUnknown_80D4880: @ 80D4880
-        .4byte Data_80D489C
+        .4byte Yes_80D489C
         .byte 0x01, 0x00, 0x00, 0x00
-        .4byte Data_80D4898
+        .4byte No_80D4898
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00 @ End of table
-        .byte 0xFF, 0xFF, 0xFF, 0xFF
+        .4byte -1
 
-        .global Data_80D4898
-        Data_80D4898:
+        .global No_80D4898
+        No_80D4898:
         .string "*No\0"
-        .global Data_80D489C
-        Data_80D489C:
+        .global Yes_80D489C
+        Yes_80D489C:
         .string "Yes\0"
         .align 2,0
 

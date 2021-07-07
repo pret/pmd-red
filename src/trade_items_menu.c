@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "trade_items_menu.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "save.h"
@@ -1047,14 +1048,6 @@ void PrintTradeItemsLinkError(u32 errorNum)
         sub_80141B4(&gUnknown_80E64AC, 0, 0, 0x101);
         break;
     default:
-    case 0x6:
-    case 0x7:
-    case 0x8:
-    case 0x9:
-    case 0xA:
-    case 0xB:
-    case 0xC:
-    case 0xD:
         sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
   }

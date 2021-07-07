@@ -1,6 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "main_menu.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "menu.h"
 #include "memory.h"

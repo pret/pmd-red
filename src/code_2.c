@@ -1,6 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "constants/bg_music.h"
+#include "debug.h"
 #include "file_system.h"
 #include "friend_area.h"
 #include "input.h"
@@ -14,7 +15,6 @@
 #include "pokemon.h"
 #include "rescue_team_info.h"
 
-extern void NDS_DebugInit(void);
 extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);

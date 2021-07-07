@@ -10,9 +10,6 @@ struct DebugLocation
     char *func;
 };
 
-void FatalErrorHang();
-void FatalErrorPrintFuncFileLine(const char *r0, struct DebugLocation *debug);
-void FatalErrorFormatMessage(const char *text, ...);
 void Log(u8 *buffer, const char *text, ...);
 void NDS_DebugInit(void);
 void nullsub_25(void);

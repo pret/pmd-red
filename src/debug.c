@@ -5,7 +5,7 @@
 #include "debug.h"
 
 extern void Hang();
-void FatalErrorHang(void) __attribute__((noreturn));
+static void FatalErrorHang(void) __attribute__((noreturn));
 
 extern bool32 gNDS_DebugEnabled;
 extern u8 gUnknown_203B150;
@@ -143,7 +143,7 @@ void nullsub_137(void)
 
 }
 
-void FatalErrorPrintFuncFileLine(const char *r0, struct DebugLocation *debug)
+static void FatalErrorPrintFuncFileLine(const char *r0, struct DebugLocation *debug)
 {
     char buf[0x100];
     if(r0 != NULL){
@@ -155,7 +155,7 @@ void FatalErrorPrintFuncFileLine(const char *r0, struct DebugLocation *debug)
     }
 }
 
-void FatalErrorFormatMessage(const char *text, ...)
+static void FatalErrorFormatMessage(const char *text, ...)
 {
     char bufPrint[0x100];
     va_list vArgv;
@@ -190,7 +190,7 @@ u32 sub_8011BA8(void)
 }
 
 // Unused
-const char *sub_8011BAC(void)
+const char *GetNotMountText(void)
 {
     return gNotMountText;
 }
@@ -232,7 +232,7 @@ void nullsub_32()
 {
 }
 
-void FatalErrorHang()
+static void FatalErrorHang()
 {
     Hang();
 }

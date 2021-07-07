@@ -1,8 +1,8 @@
 #include "global.h"
 #include "file_system.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "random.h"
-#include "item.h"
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
 extern struct unkStruct_203B460 gUnknown_20389A8;
@@ -110,14 +110,13 @@ void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
   }
 }
 
-// TODO is this a struct one too?
-void sub_8090B08(struct ItemStruct_203B460 *param_1,u8 itemIndex)
+void sub_8090B08(struct ItemStruct_203B460_ALT *param_1,u8 itemIndex)
 {
   u32 uVar2;
   u32 uVar3;
   
   if (itemIndex != 0) {
-    param_1->unk0 = itemIndex;
+    param_1->itemIndex = itemIndex;
     if (sub_8090A60(itemIndex)) {
         uVar2 = GetItemUnkThrow(itemIndex,0);
         uVar3 = GetItemUnkThrow(itemIndex,1);
@@ -132,19 +131,19 @@ void sub_8090B08(struct ItemStruct_203B460 *param_1,u8 itemIndex)
     }
   }
   else {
-    param_1->unk0 = 0;
+    param_1->itemIndex = 0;
     param_1->numItems = 0;
   }
 }
 
-void sub_8090B64(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *param_2)
+void sub_8090B64(struct ItemStruct_203B460 *param_1, struct ItemStruct_203B460_ALT *param_2)
 {
     u8 r6;
 
-    if(param_2->unk0 != 0)
+    if(param_2->itemIndex != 0)
     {
         param_1->unk0 = 1;
-        param_1->itemIndex = param_2->unk0;
+        param_1->itemIndex = param_2->itemIndex;
         r6 = sub_8090A60(param_1->itemIndex);
         if(r6 != 0 || GetItemType(param_1->itemIndex) == ITEM_TYPE_MONEY)
         {
@@ -170,14 +169,14 @@ void sub_8090B64(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *p
     }
 }
 
-void sub_8090BB0(struct ItemStruct_203B460 *param_1,struct ItemStruct_203B460 *param_2)
+void sub_8090BB0(struct ItemStruct_203B460_ALT *param_1,struct ItemStruct_203B460 *param_2)
 {
   if ((param_2->unk0 & 1) != 0) {
-    param_1->unk0 = param_2->itemIndex;
+    param_1->itemIndex = param_2->itemIndex;
     param_1->numItems = param_2->numItems;
   }
   else {
-    param_1->unk0 = 0;
+    param_1->itemIndex = 0;
   }
 }
 
@@ -188,7 +187,7 @@ u8 GetItemType(u8 index)
 
 s32 sub_8090BE4(struct ItemStruct_203B460 *param_1)
 {
-  if (param_1->itemIndex == 0x69) {
+  if (param_1->itemIndex == 105) {
     return sub_80915D4(param_1);
   }
   else {
@@ -203,7 +202,7 @@ s32 sub_8090BE4(struct ItemStruct_203B460 *param_1)
 
 s32 sub_8090C30(struct ItemStruct_203B460 *param_1)
 {
-  if (param_1->itemIndex == 0x69) {
+  if (param_1->itemIndex == 105) {
     return sub_80915D4(param_1);
   }
   else {

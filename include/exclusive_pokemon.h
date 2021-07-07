@@ -1,5 +1,5 @@
-#ifndef EXCLUSIVE_POKEMON_H
-#define EXCLUSIVE_POKEMON_H
+#ifndef GUARD_EXCLUSIVE_POKEMON_H
+#define GUARD_EXCLUSIVE_POKEMON_H
 
 #define NUM_EXCLUSIVE_POKEMON 12
 
@@ -12,7 +12,8 @@ struct ExclusivePokemon
 
 struct ExclusivePokemonData
 {
-    u8 fill0[0x58];
+    u8 fill0[0x48];
+    u32 unk48[4];
     bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
 };
 
@@ -35,4 +36,4 @@ void LoadExclusivePokemon(void);
 struct ExclusivePokemonData *GetExclusivePokemon(void);
 void InitializeExclusivePokemon(void);
 
-#endif // EXCLUSIVE_POKEMON_H
+#endif // GUARD_EXCLUSIVE_POKEMON_H

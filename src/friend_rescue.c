@@ -1,8 +1,10 @@
 #include "global.h"
+#include "text.h"
+#include "item.h"
+#include "gUnknown_203B460.h"
 #include "friend_rescue.h"
 #include "pokemon.h"
 #include "memory.h"
-#include "text.h"
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);

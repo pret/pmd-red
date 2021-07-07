@@ -2,6 +2,7 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "input.h"
+#include "item.h"
 #include "kecleon_items.h"
 #include "gUnknown_203B460.h"
 

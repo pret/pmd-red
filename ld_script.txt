@@ -113,6 +113,7 @@ SECTIONS {
         asm/code_801DCC4.o(.text);
         src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);
+        asm/friend_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
@@ -205,6 +206,7 @@ SECTIONS {
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
         asm/code_8092334.o(.text);
+        src/code_8092334.o(.text);
         src/game_options.o(.text);
         asm/code_8094D28.o(.text);
         src/play_time.o(.text);
@@ -220,6 +222,7 @@ SECTIONS {
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
         asm/exclusive_pokemon.o(.text);
+        src/exclusive_pokemon_1.o(.text);
         asm/code_80983D8.o(.text);
         src/code_80983D8.o(.text);
         asm/code_8098468.o(.text);

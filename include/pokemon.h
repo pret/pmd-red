@@ -1,5 +1,5 @@
-#ifndef POKEMON_H
-#define POKEMON_H
+#ifndef GUARD_POKEMON_H
+#define GUARD_POKEMON_H
 
 #include "file_system.h"
 
@@ -158,4 +158,4 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 
-#endif // POKEMON_H  
+#endif // GUARD_POKEMON_H  

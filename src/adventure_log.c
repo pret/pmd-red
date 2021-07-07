@@ -50,7 +50,7 @@ const u8 fill_adven[] = "pksdir0";
 void sub_8032084();
 void DisplayAdventureLog();
 extern void sub_8013818(void *, u32, u32, u32);
-extern u8 sub_8013938(void *);
+extern bool8 sub_8013938(void *);
 extern void sub_8013660(void *);
 extern void PlayMenuSoundEffect(u32);
 extern u32 GetKeyPress(void *);
@@ -98,7 +98,7 @@ u32 HandleAdventureLogInput(u8 param_1)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(gAdventureLog) != '\0') {
+            if (sub_8013938(gAdventureLog)) {
                 sub_8032084();
                 DisplayAdventureLog();
                 return 1;

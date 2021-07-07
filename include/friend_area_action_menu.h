@@ -1,5 +1,5 @@
-#ifndef FRIEND_AREA_ACTION_MENU_H
-#define FRIEND_AREA_ACTION_MENU_H
+#ifndef GUARD_FRIEND_AREA_ACTION_MENU_H
+#define GUARD_FRIEND_AREA_ACTION_MENU_H
 
 struct unkSubStruct_203B2BC
 {
@@ -16,10 +16,7 @@ struct unkStruct_203B2BC
     s16 unk8;
     u16 unkA;
     u32 unkC;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
+    struct ItemStruct_203B460_ALT unk10;
     u8 unk14;
     u8 fill15[3];
     struct unkSubStruct_203B2BC *unk18;

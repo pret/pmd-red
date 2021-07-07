@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef GUARD_MENU_H
+#define GUARD_MENU_H
 
 struct MenuItem
 {
@@ -7,4 +7,4 @@ struct MenuItem
     u32 menuAction; // action??
 };
 
-#endif
+#endif // GUARD_MENU_H

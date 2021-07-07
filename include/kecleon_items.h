@@ -1,5 +1,5 @@
-#ifndef KECLEON_ITEMS_H
-#define KECLEON_ITEMS_H
+#ifndef GUARD_KECLEON_ITEMS_H
+#define GUARD_KECLEON_ITEMS_H
 
 #include "gUnknown_203B460.h"
 #include "text.h"
@@ -42,4 +42,4 @@ struct unkStruct_203B210
     struct UnkTextStruct2 unkE8[4];
 };
 
-#endif
+#endif // GUARD_KECLEON_ITEMS_H

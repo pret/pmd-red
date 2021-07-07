@@ -232,9 +232,9 @@ void InitIntrTable(const u32 *interrupt_table)
     INTR_VECTOR = IntrMain_Buffer;
 }
 
-u32 *sub_800B6E8(u32 r0)
+u32 *GetInterruptCallback(u32 index)
 {
-    return &gIntrTable[r0];
+    return &gIntrTable[index];
 }
 
 void *SetInterruptCallback(u32 index, void * new_callback)

@@ -3,9 +3,9 @@
 #include "memory.h"
 #include "text.h"
 #include "item.h"
+#include "gUnknown_203B460.h"
 #include "input.h"
 #include "kangaskhan_storage.h"
-#include "gUnknown_203B460.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
 extern struct unkStruct_203B460 *gUnknown_203B460;
@@ -14,10 +14,7 @@ struct unkStruct_203B20C
 {
     u32 state;
     u8 unk4[4];
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
+    struct ItemStruct_203B460 unk8;
     u8 fillC[0x14 - 0xC];
     u32 unk14;
     u32 unk18;
@@ -64,8 +61,8 @@ extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8();
 
-extern u8 sub_8091524(u8);
-extern u8 sub_801ADA0(u32);
+extern bool8 sub_8091524(u8);
+extern bool8 sub_801ADA0(u32);
 extern void sub_8099690(u32);
 extern u32 sub_8013BBC(u32 *);
 extern void sub_8017598(void);
@@ -73,7 +70,6 @@ extern void sub_8017598(void);
 extern u32 sub_801CA08(u32);
 extern u32 sub_801CFB8(void);
 extern u8 sub_801CB24();
-extern void sub_8090A8C(struct ItemStruct_203B460 *, u8, u32);
 extern void sub_801AD34(u32);
 extern u32 sub_801A6E8(u32);
 extern u32 sub_801AEA8(void);
@@ -88,7 +84,7 @@ extern void sub_801CCD8();
 extern void sub_80184D4();
 extern void sub_8018280();
 extern void sub_8013AA0(u32 *);
-extern void sub_801B3C0(u8 *);
+extern void sub_801B3C0(struct ItemStruct_203B460 *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_8012D60(u32 *, u32 *, u32, u32 *, u32, u32);
@@ -140,15 +136,15 @@ void sub_8017B88(void)
             }
             else
             {
-                gUnknown_203B208->unk14 = sub_801CB24();
-                sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->unk14, 0);
+                gUnknown_203B208->itemIndex = sub_801CB24();
+                sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
                 gUnknown_203B208->unkC.numItems = 1;
                 UpdateKangaskhanStorageState(0x19);
             }
             break;
         case 4:
-            gUnknown_203B208->unk14 = sub_801CB24();
-            sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->unk14, 0);
+            gUnknown_203B208->itemIndex = sub_801CB24();
+            sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
             gUnknown_203B208->unkC.numItems = 1;
             UpdateKangaskhanStorageState(0x1A);
             break;
@@ -198,21 +194,13 @@ void sub_8017C7C(void)
     {
       case 2:
         sub_8099690(0);
-        if(sub_8091524(gUnknown_203B208->unkC.itemIndex) == 0)
-        {
+        if(!sub_8091524(gUnknown_203B208->unkC.itemIndex))
             UpdateKangaskhanStorageState(9);
-        }
         else
-        {
-            if(sub_801ADA0(gUnknown_203B208->unk10) == 0)
-            {
+            if(!sub_801ADA0(gUnknown_203B208->unk10))
                 UpdateKangaskhanStorageState(0xA);
-            }
             else
-            {
                 UpdateKangaskhanStorageState(0x11);
-            }
-        }
         break;
       case 6:
         sub_8099690(0);
@@ -304,7 +292,7 @@ u32 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, 1, 1);
-    gUnknown_203B20C = MemoryAlloc(0x150, 8);
+    gUnknown_203B20C = MemoryAlloc(sizeof(struct unkStruct_203B20C), 8);
     gUnknown_203B20C->unk14 = 0;
     gUnknown_203B20C->unk18 = 0;
     gUnknown_203B20C->unk1C = 0;
@@ -449,10 +437,10 @@ void sub_8018100(void)
         case 12:
             gUnknown_203B20C->unkD0 = 2;
             gUnknown_203B20C->unkC8 = 1;
-            if(gUnknown_203B460->unk50[gUnknown_203B20C->unkA] > 0x63)
-                gUnknown_203B20C->unkCC = 0x63;
+            if(gUnknown_203B460->unk50[gUnknown_203B20C->unk8.itemIndex] > 99)
+                gUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gUnknown_203B460->unk50[gUnknown_203B20C->unkA];
+                gUnknown_203B20C->unkCC = gUnknown_203B460->unk50[gUnknown_203B20C->unk8.itemIndex];
             gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
             gUnknown_203B20C->unkD4 = 1;
             gUnknown_203B20C->unkD8 = &gUnknown_203B20C->unkF0[1];

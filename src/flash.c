@@ -5,13 +5,13 @@
 
 extern u8 gFlashEnabled;
 
-extern FlashIntrFunc *sub_800B6E8(s32);
+extern FlashIntrFunc *GetInterruptCallback(s32);
 
 static u8 TryProgramSector(s32, u8 *);
 
 void InitFlash(void)
 {
-    if (!IdentifyFlash() && !SetFlashTimerIntr(2, sub_800B6E8(3)))
+    if (!IdentifyFlash() && !SetFlashTimerIntr(2, GetInterruptCallback(3)))
         gFlashEnabled = TRUE;
 }
 

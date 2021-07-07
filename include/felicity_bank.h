@@ -1,5 +1,5 @@
-#ifndef FELICITY_BANK_H
-#define FELICITY_BANK_H
+#ifndef GUARD_FELICITY_BANK_H
+#define GUARD_FELICITY_BANK_H
 
 #include "file_system.h"
 #include "text.h"

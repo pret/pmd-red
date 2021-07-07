@@ -1,5 +1,6 @@
 #include "global.h"
 #include "input.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "memory.h"
 #include "menu.h"
@@ -49,8 +50,7 @@ extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
-extern void sub_801B3C0(u8 *);
-extern void sub_8090A8C(u8 *, u8, u32);
+extern void sub_801B3C0(struct ItemStruct_203B460 *);
 extern void sub_8013AA0(u32 *);
 
 extern struct UnkTextStruct2 gUnknown_80E7E34;
@@ -181,7 +181,7 @@ void sub_803A51C(void)
 
 void sub_803A5A0(void)
 {
-  u8 auStack8 [4];
+  struct ItemStruct_203B460 auStack8;
   
   switch(gUnknown_203B3F0->state) {
     case 0:
@@ -208,8 +208,8 @@ void sub_803A5A0(void)
         sub_803A690();
         break;
     case 4:
-        sub_8090A8C(auStack8,gUnknown_203B3F0->itemIndex,0);
-        sub_801B3C0(auStack8);
+        sub_8090A8C(&auStack8,gUnknown_203B3F0->itemIndex,0);
+        sub_801B3C0(&auStack8);
         break;
     case 5:
         break;

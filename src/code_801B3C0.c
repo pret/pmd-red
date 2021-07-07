@@ -2,19 +2,13 @@
 #include "text.h"
 #include "input.h"
 #include "memory.h"
+#include "item.h"
+#include "gUnknown_203B460.h"
 
 struct subStruct_203B240
 {
-    char * unk0;
+    char * pokeName;
     char * unk4;
-};
-
-struct unkStruct_41C
-{
-    u8 unk41C;
-    u8 unk41D;
-    u8 unk41E;
-    u8 unk41F;
 };
 
 // based off of 203B240..
@@ -22,7 +16,7 @@ struct unkStruct_203B230
 {
     // size: 0x94
     s32 state;
-    struct unkStruct_41C unk4;
+    struct ItemStruct_203B460 unk4;
     s32 unk8;
     s32 unkC;
     struct subStruct_203B240 *unk10[2];
@@ -46,7 +40,7 @@ extern void sub_8014FF0(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern u32 sub_8012A64(u32 *, u32);
-extern s32 sub_80913E0(struct unkStruct_41C *, u32, struct subStruct_203B240 **);
+extern s32 sub_80913E0(struct ItemStruct_203B460 *, u32, struct subStruct_203B240 **);
 
 extern void sub_801317C(u32 *);
 extern void sub_80140B4(struct UnkTextStruct2 *);
@@ -58,7 +52,7 @@ void sub_801B590();
 void sub_801B480();
 
 
-u32 sub_801B3C0(struct unkStruct_41C *param_1)
+u32 sub_801B3C0(struct ItemStruct_203B460 *param_1)
 {
   ResetSprites(1);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);
@@ -120,7 +114,7 @@ void sub_801B480(void)
             sub_8008C54(gUnknown_203B230->unk24);
             sub_80073B8(gUnknown_203B230->unk24);
             preload = gUnknown_203B230->unk10[gUnknown_203B230->unk8];
-            strcpy(gAvailablePokemonNames, preload->unk0);
+            strcpy(gAvailablePokemonNames, preload->pokeName);
             sub_8014FF0(16, 0, gUnknown_80DBA4C, gUnknown_203B230->unk24, 0); // $m0
             sub_8014FF0(4, 16, gUnknown_203B230->unk10[gUnknown_203B230->unk8]->unk4, gUnknown_203B230->unk24, 0);
             sub_80073E0(gUnknown_203B230->unk24);

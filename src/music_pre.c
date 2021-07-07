@@ -96,10 +96,8 @@ void VBlankIntr(void)
     if (gIntrCallbacks[1] != NULL) {
         gIntrCallbacks[1]();
     }
-    index = 0;
-    while (index < gUnknown_203B0AA) {
+    for(index = 0; index < gUnknown_203B0AA; index++) {
         gUnknown_202D648[index] = gUnknown_202D608[index];
-        index++;
     }
     gUnknown_203B0AC = gUnknown_203B0AA;
     gUnknown_203B0AE = -1;

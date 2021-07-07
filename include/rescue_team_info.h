@@ -1,5 +1,5 @@
-#ifndef RESCUE_TEAM_INFO_H
-#define RESCUE_TEAM_INFO_H
+#ifndef GUARD_RESCUE_TEAM_INFO_H
+#define GUARD_RESCUE_TEAM_INFO_H
 
 #define TEAM_NAME_LENGTH 10
 
@@ -38,4 +38,4 @@ u8 sub_80921B8(void);
 u32 SaveRescueTeamInfo(u8 *param_1,u32 param_2);
 u32 ReadRescueTeamInfo(u8 *param_1, u32 param_2);
 
-#endif // RESCUE_TEAM_INFO_H
+#endif // GUARD_RESCUE_TEAM_INFO_H

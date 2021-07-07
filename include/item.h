@@ -1,5 +1,5 @@
-#ifndef ITEMS_H
-#define ITEMS_H
+#ifndef GUARD_ITEMS_H
+#define GUARD_ITEMS_H
 
 struct Item
 {
@@ -19,6 +19,20 @@ struct Item
     /* 0x1D */ u8 palette;
     /* 0x1E */ u8 category;
     /* 0x1F */ u8 fill3;
+};
+
+struct ItemStruct_203B460
+{
+    u8 unk0;
+    u8 numItems;
+    u8 itemIndex;
+};
+
+struct ItemStruct_203B460_ALT
+{
+    u8 itemIndex;
+    u8 numItems;
+    u8 unk2;
 };
 
 enum ItemType
@@ -69,5 +83,8 @@ u8 *GetItemDescription(u8 itemIndex);
 u32 GetItemUnkFood(u8 itemIndex, u32 r1);
 s32 sub_8090A34(void);
 bool8 sub_8090A60(u8 itemIndex);
+void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3);
+void sub_8090B08(struct ItemStruct_203B460_ALT *param_1,u8 itemIndex);
+void sub_8090B64(struct ItemStruct_203B460 *param_1, struct ItemStruct_203B460_ALT *param_2);
 
 #endif

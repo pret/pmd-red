@@ -1,3 +1,6 @@
+#ifndef GUARD_GUNKNOWN_203B418_H
+#define GUARD_GUNKNOWN_203B418_H
+
 #include "code_8041D5C.h"
 
 struct unkStruct_203B418
@@ -34,3 +37,5 @@ struct unkStruct_203B418
     u8 padding2[3];
     u8 unk18217;
 };
+
+#endif

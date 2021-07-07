@@ -2,18 +2,18 @@
 #include "constants/friend_area.h"
 
 extern bool8 *gFriendAreas;
-extern void sub_809485C(u32 *r0, u8 *r1, u32 r2);
+extern void sub_809485C(u32 *r0, u8 *r1, u32 size);
 extern void sub_8094924(u32 *r0, u32 *r1, u32);
 extern void nullsub_102(u32 *r0);
 extern void sub_809488C(u32 *r0, u32 *r1, u32 r2);
-extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);
+extern void sub_809486C(u32 *r0, u8 *r1, u32 size);
 
-u32 SaveFriendAreas(u8 *r0, u32 r1)
+u32 SaveFriendAreas(u8 *r0, u32 size)
 {
     u32 temp[5];
     s32 counter;
 
-    sub_809486C(temp, r0, r1);
+    sub_809486C(temp, r0, size);
     for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
         if(gFriendAreas[counter] != 0)
@@ -26,12 +26,12 @@ u32 SaveFriendAreas(u8 *r0, u32 r1)
     return temp[2];
 }
 
-u32 ReadSavedFriendAreas(u8 *r0, s32 r1)
+u32 ReadSavedFriendAreas(u8 *r0, s32 size)
 {
     u32 temp[5];
     s32 counter;
 
-    sub_809485C(temp, r0, r1);
+    sub_809485C(temp, r0, size);
     for(counter = 0; counter < NUM_FRIEND_AREAS; counter++)
     {
         sub_8094924(temp, &(temp[4]), 1);

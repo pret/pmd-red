@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
 #include "text.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 
 extern struct unkStruct_203B460 *gUnknown_203B460;

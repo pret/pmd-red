@@ -1,5 +1,5 @@
-#ifndef PLAY_TIME_H
-#define PLAY_TIME_H
+#ifndef GUARD_PLAY_TIME_H
+#define GUARD_PLAY_TIME_H
 
 struct PlayTimeStruct
 {
@@ -16,5 +16,5 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
 void InitializePlayTime(void);
 
 
-#endif // PLAY_TIME_H  
+#endif // GUARD_PLAY_TIME_H  
 

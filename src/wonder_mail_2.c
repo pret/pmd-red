@@ -6,6 +6,7 @@
 #include "text.h"
 #include "save.h"
 #include "wonder_mail.h"
+#include "sub_8095228.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -43,26 +44,8 @@ struct unkStruct_203B2C8
 
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
-struct unkStruct_8095228
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 padding[0x10 - 0x5];
-    u32 unk10;
-    u8 padding2[0x20 - 0x14];
-    u32 unk20;
-    u8 padding3[0x28 - 0x24];
-    u32 unk28;
-    s8 unk2C;
-    u8 padding4[0x30 - 0x2D];
-};
-
 extern void sub_80920D8(u8 *buffer);
 extern void sub_8097790();
-extern struct unkStruct_8095228 *sub_8095228(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298();

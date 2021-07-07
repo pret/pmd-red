@@ -89,56 +89,56 @@ ALIGNED(4) const char fill_save1[] = _("pksdir0");
 ALIGNED(4) const char fill_save2[] = _("pksdir0");
 ALIGNED(4) const char fill_save3[] = _("pksdir0");
 
-ALIGNED(4) const char gSaveCorrupted[] = _("#+The game data is corrupted.\n"
-                                            "#+Your data will be erased.");
+ALIGNED(4) const char gSaveCorrupted[] = _("{CENTER_ALIGN}The game data is corrupted.\n"
+                                            "{CENTER_ALIGN}Your data will be erased.");
 
 ALIGNED(4) const char fill_save4[] = _("pksdir0");
 
-ALIGNED(4) const char gSavingAdventure[] = _("#+Saving your adventure...\n"
-                                            "#+Please don~27t turn off the power.");
+ALIGNED(4) const char gSavingAdventure[] = _("{CENTER_ALIGN}Saving your adventure...\n"
+                                            "{CENTER_ALIGN}Please don~27t turn off the power.");
 
-ALIGNED(4) const char gWriteGamePak[] = _("#+Writing to GBA Game Pak.\n"
-                                      "#+Do not remove the GBA Game Pak.\n"
-                                      "#+Please wait with the power on.");
+ALIGNED(4) const char gWriteGamePak[] = _("{CENTER_ALIGN}Writing to GBA Game Pak.\n"
+                                      "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
+                                      "{CENTER_ALIGN}Please wait with the power on.");
 
-ALIGNED(4) const char gSaveCompleted[] = _("#+Save completed!");
+ALIGNED(4) const char gSaveCompleted[] = _("{CENTER_ALIGN}Save completed!");
 
-ALIGNED(4) const char gSaveNotWritten[] = _("#+The data could not be written.\n"
-                                        "#+Please turn off the power and remove\n"
-                                        "#+and reinsert the DS Card.");
+ALIGNED(4) const char gSaveNotWritten[] = _("{CENTER_ALIGN}The data could not be written.\n"
+                                        "{CENTER_ALIGN}Please turn off the power and remove\n"
+                                        "{CENTER_ALIGN}and reinsert the DS Card.");
 
-ALIGNED(4) const char gSaveFailed[] = _("#+Save failed.");
+ALIGNED(4) const char gSaveFailed[] = _("{CENTER_ALIGN}Save failed.");
 
 ALIGNED(4) const char fill_save5[] = _("pksdir0");
 
-ALIGNED(4) const char gUnknown_80D44C8[] = _("#+Your data was not properly saved~2c\n"
-                                             "#+so your game cannot be resumed\n"
-                                             "#+from your last spot.#P"
-                                             "#+Your last outing is considered a defeat.\n"
-                                             "#+Before shutting down~2c save in your\n"
-                                             "#+team base~2c or quicksave in a dungeon.");
+ALIGNED(4) const char gUnknown_80D44C8[] = _("{CENTER_ALIGN}Your data was not properly saved~2c\n"
+                                             "{CENTER_ALIGN}so your game cannot be resumed\n"
+                                             "{CENTER_ALIGN}from your last spot.{EXTRA_MSG}"
+                                             "{CENTER_ALIGN}Your last outing is considered a defeat.\n"
+                                             "{CENTER_ALIGN}Before shutting down~2c save in your\n"
+                                             "{CENTER_ALIGN}team base~2c or quicksave in a dungeon.");
 
 ALIGNED(4) const char fill_save6[] = _("pksdir0");
 
-ALIGNED(4) const char gUnknown_80D45AC[] = _("#+Quicksaving your adventure...\n"
-                                             "#+Please don~27t turn off the power.");
+ALIGNED(4) const char gUnknown_80D45AC[] = _("{CENTER_ALIGN}Quicksaving your adventure...\n"
+                                             "{CENTER_ALIGN}Please don~27t turn off the power.");
 
-ALIGNED(4) const char gUnknown_80D45F4[] = _("#+Your adventure has been saved.\n"
-                                             "#+When you are in a dungeon~2c quicksave\n"
-                                             "#+your progress before ending the game.");
+ALIGNED(4) const char gUnknown_80D45F4[] = _("{CENTER_ALIGN}Your adventure has been saved.\n"
+                                             "{CENTER_ALIGN}When you are in a dungeon~2c quicksave\n"
+                                             "{CENTER_ALIGN}your progress before ending the game.");
 
-ALIGNED(4) const char gUnknown_80D4668[] = _("#+Your adventure has been saved.\n"
-                                             "#+When you resume play~2c the quicksave\n"
-                                             "#+data will be deleted.#P"
-                                             "#+When you are shutting down the game~2c\n"
-                                             "#+save your progress in your team base~2c\n"
-                                             "#+or quicksave in a dungeon.");
+ALIGNED(4) const char gUnknown_80D4668[] = _("{CENTER_ALIGN}Your adventure has been saved.\n"
+                                             "{CENTER_ALIGN}When you resume play~2c the quicksave\n"
+                                             "{CENTER_ALIGN}data will be deleted.{EXTRA_MSG}"
+                                             "{CENTER_ALIGN}When you are shutting down the game~2c\n"
+                                             "{CENTER_ALIGN}save your progress in your team base~2c\n"
+                                             "{CENTER_ALIGN}or quicksave in a dungeon.");
 
-ALIGNED(4) const char gSaveNotWritten2[] = _("#+The data could not be written.\n"
-                                             "#+Please turn off the power and remove\n"
-                                             "#+and reinsert the DS Card.");
+ALIGNED(4) const char gSaveNotWritten2[] = _("{CENTER_ALIGN}The data could not be written.\n"
+                                             "{CENTER_ALIGN}Please turn off the power and remove\n"
+                                             "{CENTER_ALIGN}and reinsert the DS Card.");
 
-ALIGNED(4) const char gSaveFailed2[] = _("#+Save failed.");
+ALIGNED(4) const char gSaveFailed2[] = _("{CENTER_ALIGN}Save failed.");
 ALIGNED(4) const char fill_save7[] = _("pksdir0");
 
 extern volatile struct UnkStruct_203B184 *gUnknown_203B184;

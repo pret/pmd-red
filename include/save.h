@@ -1,5 +1,5 @@
-#ifndef SAVE_H
-#define SAVE_H
+#ifndef GUARD_SAVE_H
+#define GUARD_SAVE_H
 
 #include "play_time.h"
 #include "exclusive_pokemon.h"
@@ -107,4 +107,4 @@ u32 WriteSaveSector(s32 *a, u8 *src, s32 size);
 void CalculateChecksum(u8 *out, u32 size);
 bool8 ValidateChecksum(u8 *in, u32 size);
 
-#endif
+#endif // GUARD_SAVE_H

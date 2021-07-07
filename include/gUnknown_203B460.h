@@ -1,12 +1,5 @@
-#ifndef GUNKNOWN_203B460_H
-#define GUNKNOWN_203B460_H
-
-struct ItemStruct_203B460
-{
-    u8 unk0;
-    u8 numItems;
-    u8 itemIndex;
-};
+#ifndef GUARD_GUNKNOWN_203B460_H
+#define GUARD_GUNKNOWN_203B460_H
 
 struct subStruct_203B460
 {

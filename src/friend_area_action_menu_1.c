@@ -2,6 +2,7 @@
 #include "text.h"
 #include "input.h"
 #include "menu.h"
+#include "item.h"
 #include "gUnknown_203B460.h"
 #include "friend_area_action_menu.h"
 
@@ -23,7 +24,7 @@ extern void nullsub_104();
 extern void sub_8091274(u8 *);
 extern void sub_801A928();
 extern void sub_8099690(u32);
-extern void sub_808D800(s16, u8 *);
+extern void sub_808D800(s16, struct ItemStruct_203B460_ALT *);
 extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(u32);
 
@@ -56,14 +57,14 @@ void sub_8027B28(void)
   {
     case 3:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10 = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk11 = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
         sub_8027184(0xc);
         break;
     case 4:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10 = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk11 = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
         sub_8099690(0);
         sub_8027184(0xd);
         break;

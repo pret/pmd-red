@@ -1,6 +1,6 @@
-#ifndef GUARD_code_800B540_H
-#define GUARD_code_800B540_H
+#ifndef GUARD_CODE_800B540_H
+#define GUARD_CODE_800B540_H
 
 void sub_800CDA8(int a0);
 
-#endif //GUARD_code_800B540_H
+#endif //GUARD_CODE_800B540_H

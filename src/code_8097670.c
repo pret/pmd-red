@@ -9,7 +9,7 @@ struct unkDungeonStruct
 struct unkStruct_203B494
 {
     // size: 0xC8?
-    u32 unk0;
+    u32 unk0; // 32 bit bitfield, I think
     s32 numAdventures;
     s32 unk8;
     s32 unkC;
@@ -20,10 +20,7 @@ struct unkStruct_203B494
     u32 unk1C[0xE];
     u8 fill54[0x8C - 0x54];
     u32 unk8C[0xD];
-    union UNKC0{
-        s32 unkC0;
-        s16 unkC0_16;
-    } UNKC0;
+    s32 unkC0;
 };
 
 extern struct unkStruct_203B494 *gUnknown_203B494;
@@ -59,7 +56,7 @@ void sub_80976A8(void)
     gUnknown_203B494->unk14 = 0;
     gUnknown_203B494->unk16 = 0;
     gUnknown_203B494->unk18 = 0;
-    gUnknown_203B494->UNKC0.unkC0 = 0;
+    gUnknown_203B494->unkC0 = 0;
     gUnknown_203B494->unk8 = 0;
     gUnknown_203B494->unkC = 0;
 
@@ -81,7 +78,7 @@ void sub_80976F8(u8 r0)
 
 u8 sub_8097710(u8 r0)
 {
-    if((gUnknown_203B494->unk0 & (1 << r0)) != 0)
+    if(gUnknown_203B494->unk0 & (1 << r0))
         return 1;
     else
         return 0;
@@ -181,12 +178,12 @@ s16 sub_8097880(void)
 
 void sub_8097890(void)
 {
-    if(gUnknown_203B494->UNKC0.unkC0 < 99999)
-        gUnknown_203B494->UNKC0.unkC0++;
+    if(gUnknown_203B494->unkC0 < 99999)
+        gUnknown_203B494->unkC0++;
     sub_80976F8(12);
 }
 
 s16 sub_80978B8(void)
 {
-    return gUnknown_203B494->UNKC0.unkC0_16;
+    return gUnknown_203B494->unkC0;
 }
