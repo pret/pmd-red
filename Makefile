@@ -21,7 +21,7 @@ OBJCOPY   := $(PREFIX)objcopy
 export CC 	 := $(PREFIX)gcc
 export AS        := $(PREFIX)as
 endif
-export CPP       := $(PREFIX)cpp
+export CPP       := $(CC) -E
 export LD        := $(PREFIX)ld
 
 ifeq ($(OS),Windows_NT)
@@ -175,7 +175,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c $$(C_DEP)
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP) dungeon_pokemon dungeon_floor
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
@@ -183,10 +183,11 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
+$(BUILD_DIR)/sym_%.txt: sym_%.txt
+	cp $< $(BUILD_DIR)
+
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.txt $(BUILD_DIR)/sym_ewram2.txt $(BUILD_DIR)/sym_iwram.txt
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
-$(BUILD_DIR)/sym_%.ld: sym_%.txt
-	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
