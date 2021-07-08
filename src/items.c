@@ -295,4 +295,3 @@ void sub_8090DC4(u32 param_1,u8 itemIndex,u32 param_3)
   unkItem.numItems = 1;
   sub_8090F58(param_1,acStack104,&unkItem,param_3);
 }
-
