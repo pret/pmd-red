@@ -26,7 +26,7 @@ extern void sub_801A2A8(u32);
 extern s32 sub_801A8AC(void);
 extern u32 sub_801A6E8(u32);
 extern void sub_801A928(void);
-extern void sub_8016C40(u32);
+extern void DrawTeamMoneyBox(u32);
 
 void sub_8019B08(void)
 {
@@ -53,7 +53,7 @@ void sub_8019B08(void)
         break;
     case 1:
     default:
-        sub_8016C40(1);
+        DrawTeamMoneyBox(1);
         break;
   }
 }
@@ -168,13 +168,9 @@ void sub_8019D68(void)
 u32 sub_8019D8C(void)
 {
     if(gUnknown_203B210->unk4)
-    {
         return sub_8091814();
-    }
     else
-    {
         return sub_8091A48();
-    }
 }
 
 void sub_8019DAC(void)
@@ -195,7 +191,7 @@ void sub_8019DAC(void)
   }
 }
 
-void sub_8019E04(int param_1)
+void sub_8019E04(s32 param_1)
 {
   
   if (gUnknown_203B210->unk4) {

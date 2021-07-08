@@ -2,6 +2,7 @@
 #define GUARD_TRADE_ITEMS_MENU_H
 
 #include "text.h"
+#include "item.h"
 
 struct TradeSubStruct
 {
@@ -41,12 +42,11 @@ struct TradeItemsMenu
 
     struct TradeSubStruct unk24C;
 
-    struct TradeSubStruct unk254;
+    /* 0x254 */ struct TradeSubStruct sentItem;
 
-    u8 unk25C;
-    u8 chosenNum;
-    u8 chosenItem;
-    u8 fill25F[0x3A0 - 0x25F];
+    /* 0x25C */ struct ItemStruct_203B460 itemToSend;
+
+    u8 fill25F[0x3A0 - 0x260];
 };
 
 

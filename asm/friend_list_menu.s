@@ -2272,7 +2272,7 @@ _0802005C: .4byte gUnknown_203B27C
 _08020060: .4byte gGulpinDialogue
 _08020064:
 	movs r0, 0x3
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	b _08020562
 _0802006C:
 	ldr r2, [r5]
@@ -6233,12 +6233,12 @@ _08021FE2:
 	bl sub_8021354
 _08021FE8:
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	b _080222B6
 _08021FF0:
 	bl sub_8021494
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	bl sub_8022380
 	ldr r0, _08022020
 	ldr r2, [r0]
@@ -6976,7 +6976,7 @@ _080225B0:
 	b _080225C2
 _080225BC:
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 _080225C2:
 	pop {r4}
 	pop {r0}
