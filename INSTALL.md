@@ -115,7 +115,6 @@ If this works, then proceed to [Installation](#installation).
     ```
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
-    - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
     - Otherwise, **open the Terminal** and go to [Choosing where to store pmd-red (macOS)](#choosing-where-to-store-pmd-red-macos)
 
 ### Installing libpng (macOS)
@@ -133,32 +132,6 @@ If this works, then proceed to [Installation](#installation).
     brew install libpng
     ```
     libpng is now installed.
-
-    Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pmd-red (macOS)](#choosing-where-to-store-pmd-red-(macos)).
-
-### Installing devkitARM (macOS)
-1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
-2. Open the package to install devkitPro pacman.
-3. In the Terminal, run the following commands to install devkitARM:
-
-    ```bash
-    sudo dkp-pacman -Sy
-    sudo dkp-pacman -S gba-dev
-    sudo dkp-pacman -S devkitarm-rules
-    ```
-
-    The command with gba-dev will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-4. After the tools are installed, devkitARM must now be made accessible from anywhere by the system. To do so, run the following commands:
-
-    ```bash
-    export DEVKITPRO=/opt/devkitpro
-    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
-    export DEVKITARM=$DEVKITPRO/devkitARM
-    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-
-    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
-    ```
 
 ### Choosing where to store pmd-red (macOS)
 At this point, you can choose a folder to store pmd-red into. If you're okay with storing pmd-red in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pmd-red is stored when changing directory to the pmd-red folder.
