@@ -10,7 +10,6 @@ In general, you should not need to open these unless if you get an error or if y
 If you run into trouble, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## Windows
-Windows has instructions for building with three possible terminals, providing 3 different options in case the user stumbles upon unexpected errors.
 - [Windows 10 (WSL1)](#windows-10-(wsl1)) (**Fastest, highly recommended**, Windows 10 only)
 
 <details>
@@ -322,7 +321,4 @@ make TOOLCHAIN="/usr/local/arm-none-eabi"
 To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
 
 # Useful additional tools
-
-* [porymap](https://github.com/huderlem/porymap) for viewing and editing maps
-* [poryscript](https://github.com/huderlem/poryscript) for scripting ([VS Code extension](https://marketplace.visualstudio.com/items?itemName=karathan.poryscript))
 * [Tilemap Studio](https://github.com/Rangi42/tilemap-studio) for viewing and editing tilemaps
