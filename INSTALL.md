@@ -10,7 +10,7 @@ In general, you should not need to open these unless if you get an error or if y
 If you run into trouble, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## Windows
-- [Windows 10 (WSL1)](#windows-10-(wsl1)) (**Fastest, highly recommended**, Windows 10 only)
+- [Windows 10 (WSL1)](#windows-10-wsl1) (**Fastest, highly recommended**, Windows 10 only)
 
 <details>
     <summary><i>Note for advanced users: <b>WSL2</b>...</i></summary>
@@ -28,7 +28,7 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 WSL1 is the preferred terminal to build **pmd-red**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
 - If WSL (Debian or Ubuntu) is **not installed**, then go to [Installing WSL1](#installing-wsl1).
 - Otherwise, if WSL is installed, but it **hasn't previously been set up for another decompilation project**, then go to [Setting up WSL1](#setting-up-wsl1).
-- Otherwise, **open WSL** and go to [Choosing where to store pmd-red (WSL1)](#choosing-where-to-store-pmd-red-(wsl1)).
+- Otherwise, **open WSL** and go to [Choosing where to store pmd-red (WSL1)](#choosing-where-to-store-pmd-red-wsl1).
 
 ### Installing WSL1
 1. Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
