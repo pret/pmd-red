@@ -508,7 +508,7 @@ _08017404:
 	movs r0, 0x63
 	b _0801743A
 	.align 2, 0
-_08017430: .4byte gUnknown_203B460
+_08017430: .4byte gTeamInventory_203B460
 _08017434:
 	adds r1, r2, 0
 	adds r1, 0xB4

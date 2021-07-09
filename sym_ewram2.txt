@@ -587,7 +587,7 @@ gUnknown_203B458 = .; /* 203B458 */
 gRecruitedPokemonRef = .; /* 203B45C */
 	. += 0x4;
 
-gUnknown_203B460 = .; /* 203B460 */
+gTeamInventory_203B460 = .; /* 203B460 */
 	. += 0x4;
 
 gRescueTeamInfoRef = .; /* 203B464 */

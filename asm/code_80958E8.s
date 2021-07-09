@@ -2244,7 +2244,7 @@ _08096B6A:
 	bge _08096B56
 	b _08096B92
 	.align 2, 0
-_08096B74: .4byte gUnknown_203B460
+_08096B74: .4byte gTeamInventory_203B460
 _08096B78:
 	ldrb r0, [r3]
 	cmp r0, 0x9

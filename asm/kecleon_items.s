@@ -655,7 +655,7 @@ _08019418:
 	movs r0, 0x1
 	b _08019436
 	.align 2, 0
-_08019424: .4byte gUnknown_203B460
+_08019424: .4byte gTeamInventory_203B460
 _08019428: .4byte 0x0001869e
 _0801942C: .4byte gUnknown_203B210
 _08019430:
@@ -1132,7 +1132,7 @@ _080197AC:
 	b _0801984A
 	.align 2, 0
 _080197D8: .4byte gUnknown_203B210
-_080197DC: .4byte gUnknown_203B460
+_080197DC: .4byte gTeamInventory_203B460
 _080197E0: .4byte 0x0001869e
 _080197E4:
 	bl sub_8090A34
@@ -1171,7 +1171,7 @@ _08019822:
 	bl UpdateKecleonStoreState
 	b _0801984A
 	.align 2, 0
-_0801982C: .4byte gUnknown_203B460
+_0801982C: .4byte gTeamInventory_203B460
 _08019830: .4byte 0x0001869f
 _08019834:
 	movs r0, 0x1F
@@ -1362,7 +1362,7 @@ _0801998E:
 	bl UpdateKecleonStoreState
 	b _080199C2
 	.align 2, 0
-_080199B4: .4byte gUnknown_203B460
+_080199B4: .4byte gTeamInventory_203B460
 _080199B8: .4byte gUnknown_203B210
 _080199BC:
 	movs r0, 0x1

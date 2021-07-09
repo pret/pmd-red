@@ -1,7 +1,7 @@
 #ifndef GUARD_KECLEON_ITEMS_H
 #define GUARD_KECLEON_ITEMS_H
 
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "text.h"
 #include "menu.h"
 

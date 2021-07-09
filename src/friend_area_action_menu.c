@@ -4,7 +4,7 @@
 #include "input.h"
 #include "menu.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "friend_area_action_menu.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;

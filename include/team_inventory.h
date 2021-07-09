@@ -1,5 +1,5 @@
-#ifndef GUARD_GUNKNOWN_203B460_H
-#define GUARD_GUNKNOWN_203B460_H
+#ifndef GUARD_gTeamInventory_203B460_H
+#define GUARD_gTeamInventory_203B460_H
 
 struct subStruct_203B460
 {
@@ -7,7 +7,7 @@ struct subStruct_203B460
     u8 unk1;
 };
 
-struct unkStruct_203B460
+struct TeamInventory
 {
     struct ItemSlot teamItems[20];
     u16 unk50[0xF0];

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "memory.h"
 #include "menu.h"
 #include "text.h"
@@ -49,7 +49,7 @@ struct unkStruct_203B3F4
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_8013AA0(u32 *);
 
@@ -199,7 +199,7 @@ void sub_803A5A0(void)
         gUnknown_203B3F0->unkAC = 3;
         gUnknown_203B3F0->unkA4 = 0;
         gUnknown_203B3F0->unkA8 = 0x3e7;
-        gUnknown_203B3F0->unkA0 = gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex];
+        gUnknown_203B3F0->unkA0 = gTeamInventory_203B460->unk50[gUnknown_203B3F0->itemIndex];
         gUnknown_203B3F0->unkB0 = 1;
         gUnknown_203B3F0->unkB4 = &gUnknown_203B3F0->unkD8[1];
         gUnknown_203B3F0->unkB8 = 0x2C;
@@ -300,7 +300,7 @@ void sub_803A810(void)
   switch(sub_8013BBC(&gUnknown_203B3F0->unk9C))
   {
       case 3:
-        gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex] = gUnknown_203B3F0->unk9C;
+        gTeamInventory_203B460->unk50[gUnknown_203B3F0->itemIndex] = gUnknown_203B3F0->unk9C;
         // Fallthrough needed to match
       case 2:
         sub_803A504(1);

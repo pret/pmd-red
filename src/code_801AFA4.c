@@ -2,9 +2,9 @@
 #include "memory.h"
 #include "text.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
@@ -59,7 +59,7 @@ u32 sub_801AFA4(u32 r0)
 {
     gUnknown_203B22C = MemoryAlloc(0xA4, 8);
     gUnknown_203B22C->unk4 = r0;
-    gUnknown_203B22C->unk8 = gUnknown_203B460->teamItems[r0].itemIndex;
+    gUnknown_203B22C->unk8 = gTeamInventory_203B460->teamItems[r0].itemIndex;
     gUnknown_203B22C->unkA = GetItemMove(gUnknown_203B22C->unk8);
     sub_8092C84(gUnknown_202E1C8, gUnknown_203B22C->unkA);
     sub_8099690(0);
@@ -131,8 +131,8 @@ void sub_801B080(void)
             sub_8094060(&gUnknown_203B22C->unkC, &gUnknown_203B22C->unk5C->unk2C);
             if(!sub_80915A0(gUnknown_203B22C->unk8))
             {
-                gUnknown_203B460->teamItems[gUnknown_203B22C->unk4].numItems = gUnknown_203B22C->unk8 - 0x7D;
-                gUnknown_203B460->teamItems[gUnknown_203B22C->unk4].itemIndex = 0x7C;
+                gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].numItems = gUnknown_203B22C->unk8 - 0x7D;
+                gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].itemIndex = 0x7C;
             }
             PlaySound(0x9C << 1);
             // #+CM$m8#R learned

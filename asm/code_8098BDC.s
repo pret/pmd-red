@@ -6517,7 +6517,7 @@ _0809C2CA:
 	movs r1, 0x1
 	b _0809C318
 	.align 2, 0
-_0809C304: .4byte gUnknown_203B460
+_0809C304: .4byte gTeamInventory_203B460
 _0809C308: .4byte gUnknown_202DE58
 _0809C30C:
 	ldr r0, [r6]
@@ -7693,7 +7693,7 @@ sub_809CBBC:
 	.align 2, 0
 _0809CC0C: .4byte gUnknown_81163E4
 _0809CC10: .4byte gItemParametersData
-_0809CC14: .4byte gUnknown_203B460
+_0809CC14: .4byte gTeamInventory_203B460
 _0809CC18: .4byte 0x0001869f
 _0809CC1C:
 	str r1, [r2]
@@ -7779,7 +7779,7 @@ sub_809CC90:
 	b _0809CCD6
 	.align 2, 0
 _0809CCBC: .4byte gUnknown_81163BC
-_0809CCC0: .4byte gUnknown_203B460
+_0809CCC0: .4byte gTeamInventory_203B460
 _0809CCC4: .4byte 0x0001869f
 _0809CCC8:
 	bl sub_8090A34

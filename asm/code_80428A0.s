@@ -2824,7 +2824,7 @@ _080441A4:
 	.align 2, 0
 _080441AC: .4byte gUnknown_203B418
 _080441B0: .4byte 0x00000644
-_080441B4: .4byte gUnknown_203B460
+_080441B4: .4byte gTeamInventory_203B460
 _080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 
@@ -4249,7 +4249,7 @@ sub_8044CC8:
 	adds r0, r1
 	b _08044D34
 	.align 2, 0
-_08044CE8: .4byte gUnknown_203B460
+_08044CE8: .4byte gTeamInventory_203B460
 _08044CEC:
 	adds r0, r1, 0
 	cmp r0, 0x80
@@ -4322,7 +4322,7 @@ sub_8044D40:
 	bl sub_80910B4
 	b _08044D88
 	.align 2, 0
-_08044D70: .4byte gUnknown_203B460
+_08044D70: .4byte gTeamInventory_203B460
 _08044D74:
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -6679,7 +6679,7 @@ _08045E94:
 	.align 2, 0
 _08045EA8: .4byte gUnknown_203B418
 _08045EAC: .4byte 0x0000065b
-_08045EB0: .4byte gUnknown_203B460
+_08045EB0: .4byte gTeamInventory_203B460
 _08045EB4:
 	ldr r0, [sp, 0xAC]
 	adds r0, 0x60
@@ -8749,7 +8749,7 @@ _08046ED4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046EDC: .4byte gUnknown_203B460
+_08046EDC: .4byte gTeamInventory_203B460
 _08046EE0: .4byte sub_80861A8
 _08046EE4: .4byte gUnknown_203B418
 _08046EE8: .4byte 0x0001356c
@@ -8895,7 +8895,7 @@ _08046FF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047000: .4byte gUnknown_203B460
+_08047000: .4byte gTeamInventory_203B460
 _08047004: .4byte gUnknown_203B418
 _08047008: .4byte 0x0001357c
 	thumb_func_end sub_8046F84
@@ -8957,7 +8957,7 @@ _0804706C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047078: .4byte gUnknown_203B460
+_08047078: .4byte gTeamInventory_203B460
 _0804707C: .4byte gUnknown_203B418
 _08047080: .4byte 0x0001357c
 	thumb_func_end sub_804700C
@@ -9016,7 +9016,7 @@ _080470E2:
 	movs r0, 0x1
 	b _080470FC
 	.align 2, 0
-_080470E8: .4byte gUnknown_203B460
+_080470E8: .4byte gTeamInventory_203B460
 _080470EC: .4byte gUnknown_203B418
 _080470F0: .4byte 0x0001357c
 _080470F4:
@@ -9072,7 +9072,7 @@ _08047142:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047154: .4byte gUnknown_203B460
+_08047154: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8047104
 
 	thumb_func_start sub_8047158
@@ -9106,7 +9106,7 @@ _08047180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804718C: .4byte gUnknown_203B460
+_0804718C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8047158
 
 	thumb_func_start sub_8047190

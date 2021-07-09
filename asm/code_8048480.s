@@ -20335,7 +20335,7 @@ _08052196:
 	movs r0, 0
 	b _080521CA
 	.align 2, 0
-_080521B4: .4byte gUnknown_203B460
+_080521B4: .4byte gTeamInventory_203B460
 _080521B8: .4byte gRecruitedPokemonRef
 _080521BC: .4byte 0x00008df8
 _080521C0: .4byte 0x00008e38

@@ -403,7 +403,7 @@ _08091780:
 	movs r0, 0x1
 	b _080917B0
 	.align 2, 0
-_080917A4: .4byte gUnknown_203B460
+_080917A4: .4byte gTeamInventory_203B460
 _080917A8:
 	adds r4, 0x1
 	cmp r4, 0x13
@@ -435,7 +435,7 @@ sub_80917B8:
 	adds r0, r3
 	b _080917F0
 	.align 2, 0
-_080917DC: .4byte gUnknown_203B460
+_080917DC: .4byte gTeamInventory_203B460
 _080917E0:
 	ldr r2, _0809180C
 	ldr r1, [r2]
@@ -462,7 +462,7 @@ _08091806:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809180C: .4byte gUnknown_203B460
+_0809180C: .4byte gTeamInventory_203B460
 _08091810: .4byte 0x000003e7
 	thumb_func_end sub_80917B8
 
@@ -490,7 +490,7 @@ _0809182C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809183C: .4byte gUnknown_203B460
+_0809183C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091814
 
 	thumb_func_start sub_8091840
@@ -508,7 +508,7 @@ sub_8091840:
 	strb r0, [r1, 0x1]
 	bx lr
 	.align 2, 0
-_08091858: .4byte gUnknown_203B460
+_08091858: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091840
 
 	thumb_func_start sub_809185C
@@ -524,7 +524,7 @@ sub_809185C:
 	adds r0, r1, 0
 	bx lr
 	.align 2, 0
-_08091870: .4byte gUnknown_203B460
+_08091870: .4byte gTeamInventory_203B460
 	thumb_func_end sub_809185C
 
 	thumb_func_start sub_8091874
@@ -538,7 +538,7 @@ sub_8091874:
 	movs r3, 0
 	b _080918A0
 	.align 2, 0
-_08091884: .4byte gUnknown_203B460
+_08091884: .4byte gTeamInventory_203B460
 _08091888:
 	cmp r2, r4
 	ble _0809189A
@@ -593,7 +593,7 @@ _080918E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080918E8: .4byte gUnknown_203B460
+_080918E8: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091874
 
 	thumb_func_start sub_80918EC
@@ -672,7 +672,7 @@ _08091964:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08091978: .4byte gUnknown_203B460
+_08091978: .4byte gTeamInventory_203B460
 _0809197C: .4byte 0x00000231
 	thumb_func_end sub_80918EC
 
@@ -765,7 +765,7 @@ _08091A14:
 	movs r0, 0
 	b _08091A40
 	.align 2, 0
-_08091A34: .4byte gUnknown_203B460
+_08091A34: .4byte gTeamInventory_203B460
 _08091A38:
 	adds r3, 0x1
 	cmp r3, 0x7
@@ -802,7 +802,7 @@ _08091A60:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08091A70: .4byte gUnknown_203B460
+_08091A70: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091A48
 
 	thumb_func_start sub_8091A74
@@ -820,7 +820,7 @@ sub_8091A74:
 	strb r0, [r1, 0x1]
 	bx lr
 	.align 2, 0
-_08091A8C: .4byte gUnknown_203B460
+_08091A8C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091A74
 
 	thumb_func_start sub_8091A90
@@ -836,7 +836,7 @@ sub_8091A90:
 	adds r0, r1, 0
 	bx lr
 	.align 2, 0
-_08091AA4: .4byte gUnknown_203B460
+_08091AA4: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091A90
 
 	thumb_func_start sub_8091AA8
@@ -850,7 +850,7 @@ sub_8091AA8:
 	movs r3, 0
 	b _08091AD4
 	.align 2, 0
-_08091AB8: .4byte gUnknown_203B460
+_08091AB8: .4byte gTeamInventory_203B460
 _08091ABC:
 	cmp r2, r4
 	ble _08091ACE
@@ -905,7 +905,7 @@ _08091B14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08091B1C: .4byte gUnknown_203B460
+_08091B1C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091AA8
 
 	thumb_func_start sub_8091B20
@@ -984,7 +984,7 @@ _08091B98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08091BAC: .4byte gUnknown_203B460
+_08091BAC: .4byte gTeamInventory_203B460
 _08091BB0: .4byte 0x00000251
 	thumb_func_end sub_8091B20
 
@@ -1069,7 +1069,7 @@ _08091C34:
 	movs r0, 0
 	b _08091C60
 	.align 2, 0
-_08091C54: .4byte gUnknown_203B460
+_08091C54: .4byte gTeamInventory_203B460
 _08091C58:
 	adds r3, 0x1
 	cmp r3, 0x3
@@ -1164,7 +1164,7 @@ _08091CCA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08091D10: .4byte gUnknown_203B460
+_08091D10: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091C68
 
 	thumb_func_start sub_8091D14
@@ -1249,7 +1249,7 @@ _08091D76:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08091DBC: .4byte gUnknown_203B460
+_08091DBC: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091D14
 
 	thumb_func_start sub_8091DC0
@@ -1593,7 +1593,7 @@ _08092026:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08092038: .4byte gUnknown_203B460
+_08092038: .4byte gTeamInventory_203B460
 _0809203C: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8091FB4
 

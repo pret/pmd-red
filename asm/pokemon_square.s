@@ -147,7 +147,7 @@ _08019F24:
 	.align 2, 0
 _08019F68: .4byte 0xff00ffff
 _08019F6C: .4byte 0xffff00ff
-_08019F70: .4byte gUnknown_203B460
+_08019F70: .4byte gTeamInventory_203B460
 _08019F74:
 	movs r0, 0
 	bl PlayMenuSoundEffect
@@ -433,7 +433,7 @@ _0801A1A8: .4byte gUnknown_80DB8E4
 _0801A1AC: .4byte 0xff00ffff
 _0801A1B0: .4byte 0xffff00ff
 _0801A1B4: .4byte 0xffffff00
-_0801A1B8: .4byte gUnknown_203B460
+_0801A1B8: .4byte gTeamInventory_203B460
 _0801A1BC:
 	mov r0, r8
 	ldr r1, _0801A204
@@ -615,7 +615,7 @@ _0801A2F0:
 	.align 2, 0
 _0801A334: .4byte 0xff00ffff
 _0801A338: .4byte 0xffff00ff
-_0801A33C: .4byte gUnknown_203B460
+_0801A33C: .4byte gTeamInventory_203B460
 _0801A340:
 	movs r0, 0
 	bl PlayMenuSoundEffect
@@ -901,7 +901,7 @@ _0801A574: .4byte gUnknown_80DB92C
 _0801A578: .4byte 0xff00ffff
 _0801A57C: .4byte 0xffff00ff
 _0801A580: .4byte 0xffffff00
-_0801A584: .4byte gUnknown_203B460
+_0801A584: .4byte gTeamInventory_203B460
 _0801A588:
 	mov r0, r8
 	ldr r1, _0801A5D0
@@ -1187,7 +1187,7 @@ _0801A7E2:
 	bl PlayMenuSoundEffect
 	b _0801A802
 	.align 2, 0
-_0801A7EC: .4byte gUnknown_203B460
+_0801A7EC: .4byte gTeamInventory_203B460
 _0801A7F0: .4byte 0x0001869f
 _0801A7F4:
 	movs r0, 0x2
@@ -1522,7 +1522,7 @@ _0801AA90:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801AA9C: .4byte gUnknown_203B460
+_0801AA9C: .4byte gTeamInventory_203B460
 _0801AAA0: .4byte _0801AAA4
 	.align 2, 0
 _0801AAA4:
@@ -1682,7 +1682,7 @@ _0801AB90:
 	bl xxx_call_draw_string
 	b _0801ACC4
 	.align 2, 0
-_0801AC00: .4byte gUnknown_203B460
+_0801AC00: .4byte gTeamInventory_203B460
 _0801AC04: .4byte 0x0001869f
 _0801AC08: .4byte gUnknown_80DB9A0
 _0801AC0C: .4byte gUnknown_203B224
@@ -1910,7 +1910,7 @@ sub_801ADA0:
 	ldr r1, _0801ADF0
 	b _0801AE0E
 	.align 2, 0
-_0801ADEC: .4byte gUnknown_203B460
+_0801ADEC: .4byte gTeamInventory_203B460
 _0801ADF0: .4byte 0x000003e7
 _0801ADF4:
 	lsrs r0, r4, 24
@@ -1976,7 +1976,7 @@ _0801AE2E:
 	b _0801AE6E
 	.align 2, 0
 _0801AE64: .4byte gUnknown_203B224
-_0801AE68: .4byte gUnknown_203B460
+_0801AE68: .4byte gTeamInventory_203B460
 _0801AE6C:
 	adds r0, r5, 0x1
 _0801AE6E:
@@ -2148,7 +2148,7 @@ _0801AF78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801AF90: .4byte gUnknown_203B460
+_0801AF90: .4byte gTeamInventory_203B460
 _0801AF94: .4byte gUnknown_203B224
 	thumb_func_end sub_801AEF8
 

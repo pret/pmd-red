@@ -334,7 +334,7 @@ _0801F074:
 	b _0801F12E
 	.align 2, 0
 _0801F0C8: .4byte gUnknown_203B270
-_0801F0CC: .4byte gUnknown_203B460
+_0801F0CC: .4byte gTeamInventory_203B460
 _0801F0D0:
 	ldr r0, _0801F0E0
 	ldr r1, [r0]
@@ -1922,7 +1922,7 @@ _0801FD68:
 	movs r0, 0x3
 	b _0801FD76
 	.align 2, 0
-_0801FD6C: .4byte gUnknown_203B460
+_0801FD6C: .4byte gTeamInventory_203B460
 _0801FD70:
 	bl sub_8021130
 _0801FD74:
@@ -4213,7 +4213,7 @@ _08020FB8:
 	bl sub_801FDA8
 	b _080210BE
 	.align 2, 0
-_08020FD8: .4byte gUnknown_203B460
+_08020FD8: .4byte gTeamInventory_203B460
 _08020FDC:
 	ldr r4, _08020FFC
 	ldr r1, [r4]
@@ -4599,7 +4599,7 @@ _080212BC:
 	bl PlayMenuSoundEffect
 	b _080212F2
 	.align 2, 0
-_080212E8: .4byte gUnknown_203B460
+_080212E8: .4byte gTeamInventory_203B460
 _080212EC:
 	movs r0, 0
 	bl PlayMenuSoundEffect
@@ -4915,7 +4915,7 @@ _08021502:
 	.align 2, 0
 _08021568: .4byte gUnknown_203B280
 _0802156C: .4byte gUnknown_80DC494
-_08021570: .4byte gUnknown_203B460
+_08021570: .4byte gTeamInventory_203B460
 _08021574:
 	mov r0, r10
 	ldr r1, _08021598
@@ -6907,7 +6907,7 @@ _080224F8:
 	bl sub_8021D44
 	b _08022532
 	.align 2, 0
-_08022524: .4byte gUnknown_203B460
+_08022524: .4byte gTeamInventory_203B460
 _08022528: .4byte gUnknown_203B290
 _0802252C:
 	movs r0, 0xA
@@ -7034,7 +7034,7 @@ _08022612:
 	bl sub_8021D44
 	b _0802265E
 	.align 2, 0
-_0802262C: .4byte gUnknown_203B460
+_0802262C: .4byte gTeamInventory_203B460
 _08022630:
 	ldr r0, _08022644
 	ldr r0, [r0]
@@ -8097,7 +8097,7 @@ _08022E94:
 	b _08022EEE
 	.align 2, 0
 _08022EB4: .4byte gUnknown_203B294
-_08022EB8: .4byte gUnknown_203B460
+_08022EB8: .4byte gTeamInventory_203B460
 _08022EBC:
 	bl sub_801A8AC
 	ldr r1, _08022EE0
@@ -8116,7 +8116,7 @@ _08022EBC:
 	b _08022EEE
 	.align 2, 0
 _08022EE0: .4byte gUnknown_203B294
-_08022EE4: .4byte gUnknown_203B460
+_08022EE4: .4byte gTeamInventory_203B460
 _08022EE8:
 	movs r0, 0x16
 	bl sub_8022924
@@ -8242,7 +8242,7 @@ _08022FD0:
 	.align 2, 0
 _08022FEC: .4byte gUnknown_203B294
 _08022FF0: .4byte gUnknown_202DE58
-_08022FF4: .4byte gUnknown_203B460
+_08022FF4: .4byte gTeamInventory_203B460
 _08022FF8: .4byte _08022FFC
 	.align 2, 0
 _08022FFC:
@@ -12336,7 +12336,7 @@ _08024FF0:
 	b _08025052
 	.align 2, 0
 _08025014: .4byte gUnknown_203B2B0
-_08025018: .4byte gUnknown_203B460
+_08025018: .4byte gTeamInventory_203B460
 _0802501C:
 	bl sub_801A8AC
 	ldr r1, _08025040
@@ -12354,7 +12354,7 @@ _0802501C:
 	b _08025052
 	.align 2, 0
 _08025040: .4byte gUnknown_203B2B0
-_08025044: .4byte gUnknown_203B460
+_08025044: .4byte gTeamInventory_203B460
 _08025048:
 	bl sub_801A928
 	movs r0, 0x5
@@ -12401,7 +12401,7 @@ _08025074:
 	b _080250E6
 	.align 2, 0
 _080250A0: .4byte gUnknown_203B2B0
-_080250A4: .4byte gUnknown_203B460
+_080250A4: .4byte gTeamInventory_203B460
 _080250A8:
 	movs r0, 0x2
 	bl PlayMenuSoundEffect
@@ -12423,7 +12423,7 @@ _080250B0:
 	b _080250E6
 	.align 2, 0
 _080250D4: .4byte gUnknown_203B2B0
-_080250D8: .4byte gUnknown_203B460
+_080250D8: .4byte gTeamInventory_203B460
 _080250DC:
 	bl sub_801A928
 	movs r0, 0xA
@@ -12651,7 +12651,7 @@ _08025276:
 	movs r0, 0
 	b _08025292
 	.align 2, 0
-_08025284: .4byte gUnknown_203B460
+_08025284: .4byte gTeamInventory_203B460
 _08025288:
 	ldr r0, _080252B0
 	ldr r0, [r0]
@@ -12673,7 +12673,7 @@ _08025292:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080252B0: .4byte gUnknown_203B460
+_080252B0: .4byte gTeamInventory_203B460
 _080252B4: .4byte gUnknown_203B2B0
 	thumb_func_end sub_8025254
 
@@ -13878,7 +13878,7 @@ _08025C34:
 	b _08025CAE
 	.align 2, 0
 _08025C60: .4byte gUnknown_203B2B4
-_08025C64: .4byte gUnknown_203B460
+_08025C64: .4byte gTeamInventory_203B460
 _08025C68:
 	bl sub_801A8AC
 	ldr r4, _08025C9C
@@ -13904,7 +13904,7 @@ _08025C68:
 	b _08025CAE
 	.align 2, 0
 _08025C9C: .4byte gUnknown_203B2B4
-_08025CA0: .4byte gUnknown_203B460
+_08025CA0: .4byte gTeamInventory_203B460
 _08025CA4:
 	bl sub_801A928
 	movs r0, 0x2
@@ -15781,7 +15781,7 @@ _08026B94:
 	b _08026C0E
 	.align 2, 0
 _08026BC0: .4byte gUnknown_203B2B8
-_08026BC4: .4byte gUnknown_203B460
+_08026BC4: .4byte gTeamInventory_203B460
 _08026BC8:
 	bl sub_801A8AC
 	ldr r4, _08026BFC
@@ -15807,7 +15807,7 @@ _08026BC8:
 	b _08026C0E
 	.align 2, 0
 _08026BFC: .4byte gUnknown_203B2B8
-_08026C00: .4byte gUnknown_203B460
+_08026C00: .4byte gTeamInventory_203B460
 _08026C04:
 	bl sub_801A928
 	movs r0, 0x2
@@ -16250,7 +16250,7 @@ _08026F74:
 	movs r0, 0
 	b _08026F96
 	.align 2, 0
-_08026F78: .4byte gUnknown_203B460
+_08026F78: .4byte gTeamInventory_203B460
 _08026F7C: .4byte 0x000003e7
 _08026F80:
 	ldr r0, _08026F9C
@@ -16270,7 +16270,7 @@ _08026F96:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08026F9C: .4byte gUnknown_203B460
+_08026F9C: .4byte gTeamInventory_203B460
 _08026FA0: .4byte 0x000003e6
 	thumb_func_end sub_8026F38
 
@@ -16334,7 +16334,7 @@ _08026FF8:
 	b _0802703E
 	.align 2, 0
 _08027024: .4byte 0x0000014d
-_08027028: .4byte gUnknown_203B460
+_08027028: .4byte gTeamInventory_203B460
 _0802702C:
 	ldr r0, _08027060
 	ldr r1, [r0]
@@ -16362,7 +16362,7 @@ _0802703E:
 	bl sub_8026074
 	b _0802706E
 	.align 2, 0
-_08027060: .4byte gUnknown_203B460
+_08027060: .4byte gTeamInventory_203B460
 _08027064: .4byte gUnknown_203B2B8
 _08027068:
 	movs r0, 0x19

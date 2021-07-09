@@ -3,7 +3,7 @@
 #include "input.h"
 #include "memory.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 
 struct subStruct_203B240
 {

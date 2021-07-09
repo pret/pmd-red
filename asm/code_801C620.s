@@ -669,7 +669,7 @@ _0801CE44: .4byte 0x000004d2
 _0801CE48: .4byte 0x000004ce
 _0801CE4C: .4byte 0x000004b4
 _0801CE50: .4byte 0x000004ec
-_0801CE54: .4byte gUnknown_203B460
+_0801CE54: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CCD8
 
 	thumb_func_start sub_801CE58
@@ -771,7 +771,7 @@ _0801CEFC:
 	bx r1
 	.align 2, 0
 _0801CF0C: .4byte gUnknown_203B244
-_0801CF10: .4byte gUnknown_203B460
+_0801CF10: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CE58
 
 	thumb_func_start sub_801CF14
@@ -809,7 +809,7 @@ _0801CF46:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801CF4C: .4byte gUnknown_203B460
+_0801CF4C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CF14
 
 	thumb_func_start sub_801CF50
@@ -849,7 +849,7 @@ _0801CF84:
 	bx r1
 	.align 2, 0
 _0801CF8C: .4byte 0x000003e6
-_0801CF90: .4byte gUnknown_203B460
+_0801CF90: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CF50
 
 	thumb_func_start sub_801CF94

@@ -2,13 +2,13 @@
 #include "input.h"
 #include "trade_items_menu.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "memory.h"
 #include "save.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 extern u32 gUnknown_202DE30;
 extern u32 gUnknown_202DE58;
 extern struct UnkTextStruct2 gUnknown_80E6174;
@@ -354,9 +354,9 @@ void TradeItem_SendItemConfirm(void)
         case 5:
             sub_801CBB8();
             // Used temp var to get correct statements
-            load = gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem];
+            load = gTeamInventory_203B460->unk50[gTradeItemsMenu->chosenItem];
             load -= gTradeItemsMenu->numItemsToSend;
-            gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem] = load;
+            gTeamInventory_203B460->unk50[gTradeItemsMenu->chosenItem] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
             PrepareSavePakWrite(SPECIES_NONE);
             break;
@@ -453,9 +453,9 @@ void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements 
     u16 load;
-    load = gUnknown_203B460->unk50[gTradeItemsMenu->unk254.itemIndex];
+    load = gTeamInventory_203B460->unk50[gTradeItemsMenu->unk254.itemIndex];
     load += gTradeItemsMenu->unk254.numItems;
-    gUnknown_203B460->unk50[gTradeItemsMenu->unk254.itemIndex] = load;
+    gTeamInventory_203B460->unk50[gTradeItemsMenu->unk254.itemIndex] = load;
 }
 
 void sub_80369FC(void)
@@ -1085,7 +1085,7 @@ void sub_8036F30(void)
 void sub_8036F74(void)
 {
   sub_8006518(gTradeItemsMenu->unk184);
-  sub_8036ECC(2, gUnknown_203B460->unk50[gTradeItemsMenu->chosenItem]);
+  sub_8036ECC(2, gTeamInventory_203B460->unk50[gTradeItemsMenu->chosenItem]);
   sub_801CCD8();
   sub_8035CF4(&gTradeItemsMenu->unk44, 3, 0);
   sub_8036F30();

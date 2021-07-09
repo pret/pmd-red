@@ -2,7 +2,7 @@
 #include "input.h"
 #include "main_menu.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
@@ -62,7 +62,7 @@ struct unkStruct_8035D94
 
 extern struct unkStruct_8035D94 *sub_8035D94();
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 extern void sub_8037400(void);
 extern void ResetSprites(u32);
@@ -378,7 +378,7 @@ void sub_80371B8(void)
     if ((((gUnknown_203B35C->unk4 != 0) &&(gUnknown_203B35C->unk0 == 0)) &&
         (pbVar2 = sub_8035D94(), pbVar2->unk0 != 0)) && (pbVar2->unk4 != 0)) {
         // We received something..
-      gUnknown_203B460->unk50[pbVar2->unk0] += pbVar2->unk4;
+      gTeamInventory_203B460->unk50[pbVar2->unk0] += pbVar2->unk4;
     }
   }
 }

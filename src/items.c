@@ -1,11 +1,11 @@
 #include "global.h"
 #include "file_system.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "random.h"
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
-extern struct unkStruct_203B460 gUnknown_20389A8;
+extern struct TeamInventory *gTeamInventory_203B460;
+extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
 
@@ -21,12 +21,12 @@ extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u32);
 
 void LoadItemParameters(void)
 {
-  gUnknown_203B460 = &gUnknown_20389A8;
+  gTeamInventory_203B460 = &gUnknown_20389A8;
   gItemParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_8109764,&gSystemFileArchive);
   gItemParametersData = (struct Item *) gItemParametersFile->data;
 }
 
-struct unkStruct_203B460 *GetMoneyItemsInfo(void)
+struct TeamInventory *GetMoneyItemsInfo(void)
 {
     return &gUnknown_20389A8;
 }
@@ -37,20 +37,20 @@ void InitializeMoneyItems(void)
   
   for(iVar1 = 0; iVar1 < 0x14; iVar1++)
   {
-    gUnknown_203B460->teamItems[iVar1].unk0 = 0;
+    gTeamInventory_203B460->teamItems[iVar1].unk0 = 0;
   }
 
   for(iVar1 = 0; iVar1 < 0xF0; iVar1++)
   {
-    gUnknown_203B460->unk50[iVar1] = 0;
+    gTeamInventory_203B460->unk50[iVar1] = 0;
   }
 
   for(iVar1 = 0; iVar1 < 8; iVar1++)
   {
     sub_8091840(iVar1);
   }
-  gUnknown_203B460->teamMoney = 0;
-  gUnknown_203B460->teamSavings = 0;
+  gTeamInventory_203B460->teamMoney = 0;
+  gTeamInventory_203B460->teamSavings = 0;
 }
 
 s32 sub_8090A34(void)
@@ -61,7 +61,7 @@ s32 sub_8090A34(void)
   iVar3 = 0;
   for(iVar2 = 0; iVar2 < 0x14; iVar2++)
   {
-    if ((gUnknown_203B460->teamItems[iVar2].unk0 & 1) != 0) {
+    if ((gTeamInventory_203B460->teamItems[iVar2].unk0 & 1) != 0) {
       iVar3++;
     }
   }
