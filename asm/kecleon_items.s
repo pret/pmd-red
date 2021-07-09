@@ -1340,7 +1340,7 @@ _0801996C:
 	cmp r0, 0
 	beq _0801998E
 	ldrb r0, [r2, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801998E

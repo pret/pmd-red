@@ -6519,7 +6519,7 @@ _08045D58:
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08045D6E
@@ -7007,7 +7007,7 @@ _08046110:
 	cmp r0, 0
 	beq _08046186
 	ldrb r0, [r6, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046186
@@ -7107,7 +7107,7 @@ _080461F2:
 	cmp r0, 0
 	beq _0804624E
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804624E

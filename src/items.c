@@ -16,7 +16,7 @@ extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern s32 sub_80915D4(struct ItemSlot *);
-extern bool8 sub_80914E4(u8);
+extern bool8 CanSellItem(u8);
 extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u32);
 
 void LoadItemParameters(void)
@@ -217,7 +217,7 @@ s32 sub_8090C30(struct ItemSlot *param_1)
 
 s32 sub_8090C7C(struct ItemSlot *param_1)
 {
-  if (!sub_80914E4(param_1->itemIndex)) {
+  if (!CanSellItem(param_1->itemIndex)) {
     return 0;
   }
   else {
@@ -232,7 +232,7 @@ s32 sub_8090C7C(struct ItemSlot *param_1)
 
 s32 sub_8090CCC(struct ItemSlot *param_1)
 {
-  if (!sub_80914E4(param_1->itemIndex)) {
+  if (!CanSellItem(param_1->itemIndex)) {
     return 0;
   }
   else {

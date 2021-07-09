@@ -151,3 +151,21 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
   sub_80073E0(a2);
   return sub_8097DF0(GetItemDescription(slot->itemIndex), a3);
 }
+
+bool8 CanSellItem(u32 id) {
+  u8 id_;
+  id = (u8)id;
+  id_ = id;
+
+  if((id != ITEM_ID_NOTHING)
+      && (id != ITEM_ID_POKE)
+      && (id != ITEM_ID_ROCK_PART)
+      && (id != ITEM_ID_ICE_PART)
+      && (id != ITEM_ID_STEEL_PART)
+      && (id != ITEM_ID_MUSIC_BOX)
+      && (GetItemSellPrice(id_))
+      && (GetItemBuyPrice(id_))) {
+          return 1;
+    }
+    return 0;
+}

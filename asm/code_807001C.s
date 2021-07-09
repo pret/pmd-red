@@ -30616,7 +30616,7 @@ _0807F09A:
 	lsrs r0, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	add r3, sp, 0x8
 	cmp r0, 0
@@ -30793,7 +30793,7 @@ _0807F240:
 	bl sub_8045108
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F27E
@@ -30820,7 +30820,7 @@ _0807F28C:
 	cmp r0, 0
 	beq _0807F2B2
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F2B2
@@ -30855,7 +30855,7 @@ _0807F2BA:
 	cmp r0, 0
 	beq _0807F2F8
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F2F8

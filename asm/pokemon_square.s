@@ -1167,7 +1167,7 @@ _0801A7AC:
 	str r0, [sp]
 	mov r0, sp
 	ldrb r0, [r0, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801A7F4
@@ -1632,7 +1632,7 @@ _0801AB88: .4byte gUnknown_202DE58
 _0801AB8C: .4byte gUnknown_80DB994
 _0801AB90:
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0

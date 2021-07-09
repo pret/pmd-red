@@ -5,40 +5,40 @@
 
 	.text
 
-	thumb_func_start sub_80914E4
-sub_80914E4:
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r4, r0, 0
-	cmp r0, 0
-	beq _0809151A
-	cmp r0, 0x69
-	beq _0809151A
-	cmp r0, 0x79
-	beq _0809151A
-	cmp r0, 0x77
-	beq _0809151A
-	cmp r0, 0x78
-	beq _0809151A
-	cmp r0, 0x7A
-	beq _0809151A
-	bl GetItemSellPrice
-	cmp r0, 0
-	beq _0809151A
-	adds r0, r4, 0
-	bl GetItemBuyPrice
-	cmp r0, 0
-	beq _0809151A
-	movs r0, 0x1
-	b _0809151C
-_0809151A:
-	movs r0, 0
-_0809151C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80914E4
+@ 	thumb_func_start CanSellItem
+@ CanSellItem:
+@ 	push {r4,lr}
+@ 	lsls r0, 24
+@ 	lsrs r0, 24
+@ 	adds r4, r0, 0
+@ 	cmp r0, 0
+@ 	beq _0809151A
+@ 	cmp r0, 0x69
+@ 	beq _0809151A
+@ 	cmp r0, 0x79
+@ 	beq _0809151A
+@ 	cmp r0, 0x77
+@ 	beq _0809151A
+@ 	cmp r0, 0x78
+@ 	beq _0809151A
+@ 	cmp r0, 0x7A
+@ 	beq _0809151A
+@ 	bl GetItemSellPrice
+@ 	cmp r0, 0
+@ 	beq _0809151A
+@ 	adds r0, r4, 0
+@ 	bl GetItemBuyPrice
+@ 	cmp r0, 0
+@ 	beq _0809151A
+@ 	movs r0, 0x1
+@ 	b _0809151C
+@ _0809151A:
+@ 	movs r0, 0
+@ _0809151C:
+@ 	pop {r4}
+@ 	pop {r1}
+@ 	bx r1
+@ 	thumb_func_end CanSellItem
 
 	thumb_func_start sub_8091524
 sub_8091524:

@@ -10,7 +10,7 @@ extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern u32 sub_8090CCC(struct ItemSlot *);
-extern bool8 sub_80914E4(u8);
+extern bool8 CanSellItem(u8);
 extern u32 sub_8091814(void);
 extern u32 sub_8091A48(void);
 extern s32 sub_80144A4(s32 *);
@@ -105,7 +105,7 @@ void sub_8019C78(void)
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (!sub_80914E4(gUnknown_203B210->unk1C.itemIndex)) {
+        if (!CanSellItem(gUnknown_203B210->unk1C.itemIndex)) {
             UpdateKecleonStoreState(0xd);
         }
         else if (gUnknown_203B210->itemSellPrice + gUnknown_203B460->teamMoney > 99999) {
@@ -187,7 +187,7 @@ void sub_8019DAC(void)
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < 0x14; iVar5++){
     pbVar4 = &gUnknown_203B460->teamItems[iVar5];
-    if (((pbVar4->unk0 & 1) != 0) && (sub_80914E4(pbVar4->itemIndex))) {
+    if (((pbVar4->unk0 & 1) != 0) && (CanSellItem(pbVar4->itemIndex))) {
       iVar3 = sub_8090CCC(pbVar4);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
