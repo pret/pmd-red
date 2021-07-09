@@ -29,7 +29,7 @@ extern u8 sub_80A2824(u32);
 
 #include "data/wonder_mail_1.h"
 
-const struct ItemStruct_203B460 gUnknown_80DED44 = 
+const struct ItemSlot gUnknown_80DED44 = 
 {
     1, 0, 0
 };
@@ -170,7 +170,7 @@ extern void sub_803092C();
 extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
-extern void sub_801B3C0(struct ItemStruct_203B460 *);
+extern void sub_801B3C0(struct ItemSlot *);
 extern u8 sub_801CB24();
 extern void sub_801B450();
 extern u32 sub_801B410();
@@ -1548,7 +1548,7 @@ void sub_8029F98(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemStruct_203B460));
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemSlot));
   gUnknown_203B2C4->unk41C.itemIndex = 0;
   gUnknown_203B2C4->unk41C.numItems = 1;
   gUnknown_203B2C4->unk41C.unk0 = 0;

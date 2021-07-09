@@ -24,7 +24,7 @@ extern void nullsub_104();
 extern void sub_8091274(u8 *);
 extern void sub_801A928();
 extern void sub_8099690(u32);
-extern void sub_808D800(s16, struct ItemStruct_203B460_ALT *);
+extern void sub_808D800(s16, struct ItemSlot_ALT *);
 extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(u32);
 

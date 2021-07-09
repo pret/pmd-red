@@ -33,7 +33,7 @@ extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
-extern void sub_801B3C0(struct ItemStruct_203B460 *);
+extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_809401C(u32 *, u32 *);
 extern void sub_801EE10(u32, s16, u32 *, u32, u32, u32);
 
@@ -167,7 +167,7 @@ void sub_802719C(void)
 
 void sub_8027274(void)
 {
-  struct ItemStruct_203B460 auStack12;
+  struct ItemSlot auStack12;
 
   switch(gUnknown_203B2BC->state) {
     case 0:

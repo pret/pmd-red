@@ -6,16 +6,16 @@
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
 
-extern s32 sub_80915D4(struct ItemStruct_203B460 *);
+extern s32 sub_80915D4(struct ItemSlot *);
 extern void sub_80910B4();
 extern void sub_80913A0(s32);
 
-bool8 AddItemToInventory(const struct ItemStruct_203B460* x) {
+bool8 AddItemToInventory(const struct ItemSlot* x) {
   s32 i;
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < 20; i++) {
-    UNUSED struct ItemStruct_203B460* current = &gUnknown_203B460->teamItems[i];
+    UNUSED struct ItemSlot* current = &gUnknown_203B460->teamItems[i];
     if (!(i[gUnknown_203B460->teamItems].unk0 & 1)) {
       gUnknown_203B460->teamItems[i] = *x;
       return 0;
@@ -32,8 +32,8 @@ void RemoveMoneyFromInventory() {
     UNUSED struct unkStruct_203B460 * _gUnknown_203B460 = gUnknown_203B460;
     UNUSED size_t offs = offsetof(struct unkStruct_203B460, teamItems[i]);
 
-    struct ItemStruct_203B460* current_slot = &gUnknown_203B460->teamItems[i];
-    if ((current_slot->unk0 & 1) && (current_slot->itemIndex == 105)) {
+    struct ItemSlot* current_slot = &gUnknown_203B460->teamItems[i];
+    if ((current_slot->unk0 & 1) && (current_slot->itemIndex == ITEM_ID_POKE)) {
       s32 result;
 
       result = sub_80915D4(current_slot);
@@ -68,7 +68,7 @@ void RemoveMoneyFromInventory() {
 
       if (lowest_index >= 0) {
         // swap the slots
-        struct ItemStruct_203B460 current = gUnknown_203B460->teamItems[i];
+        struct ItemSlot current = gUnknown_203B460->teamItems[i];
         gUnknown_203B460->teamItems[i] = gUnknown_203B460->teamItems[lowest_index]; 
         gUnknown_203B460->teamItems[lowest_index] = current;
       }

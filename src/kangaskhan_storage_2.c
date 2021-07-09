@@ -14,7 +14,7 @@ struct unkStruct_203B20C
 {
     u32 state;
     u8 unk4[4];
-    struct ItemStruct_203B460 unk8;
+    struct ItemSlot unk8;
     u8 fillC[0x14 - 0xC];
     u32 unk14;
     u32 unk18;
@@ -84,7 +84,7 @@ extern void sub_801CCD8();
 extern void sub_80184D4();
 extern void sub_8018280();
 extern void sub_8013AA0(u32 *);
-extern void sub_801B3C0(struct ItemStruct_203B460 *);
+extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_8012D60(u32 *, u32 *, u32, u32 *, u32, u32);

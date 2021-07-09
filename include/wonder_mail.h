@@ -78,7 +78,7 @@ struct WonderMailStruct_203B2C4
     u8 filler310[0x35C - 0x310];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct ItemStruct_203B460 unk41C;
+    struct ItemSlot unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;

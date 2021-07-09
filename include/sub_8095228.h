@@ -9,7 +9,7 @@ struct unkStruct_8095228
     u8 padding[0x10 - 0x5];
     u32 unk10;
     u8 padding2[0x20 - 0x14];
-    struct ItemStruct_203B460 unk20;
+    struct ItemSlot unk20;
     u8 padding3[0x28 - 0x24];
     u32 unk28;
     s8 unk2C;

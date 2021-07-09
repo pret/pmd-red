@@ -16,7 +16,7 @@ struct unkStruct_203B230
 {
     // size: 0x94
     s32 state;
-    struct ItemStruct_203B460 unk4;
+    struct ItemSlot unk4;
     s32 unk8;
     s32 unkC;
     struct subStruct_203B240 *unk10[2];
@@ -40,7 +40,7 @@ extern void sub_8014FF0(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern u32 sub_8012A64(u32 *, u32);
-extern s32 sub_80913E0(struct ItemStruct_203B460 *, u32, struct subStruct_203B240 **);
+extern s32 sub_80913E0(struct ItemSlot *, u32, struct subStruct_203B240 **);
 
 extern void sub_801317C(u32 *);
 extern void sub_80140B4(struct UnkTextStruct2 *);
@@ -52,7 +52,7 @@ void sub_801B590();
 void sub_801B480();
 
 
-u32 sub_801B3C0(struct ItemStruct_203B460 *param_1)
+u32 sub_801B3C0(struct ItemSlot *param_1)
 {
   ResetSprites(1);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);

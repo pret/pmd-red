@@ -8327,7 +8327,8 @@ gUnknown_810A390: @ 810A390
 	.incbin "baserom.gba", 0x10A390, 0x60
 
 	.global gUnknown_810A3F0
-gUnknown_810A3F0: @ 810A3F0 (money related according to PMDe)
+gUnknown_810A3F0: @ 810A3F0 (money related according to PMDe
+				  @ LUT for money item stack size -> money amount
 	.incbin "baserom.gba", 0x10A3F0, 0x190
 
 	.global gUnknown_810A580

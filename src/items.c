@@ -15,9 +15,9 @@ EWRAM_DATA struct Item *gItemParametersData;
 extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
-extern s32 sub_80915D4(struct ItemStruct_203B460 *);
+extern s32 sub_80915D4(struct ItemSlot *);
 extern bool8 sub_80914E4(u8);
-extern void sub_8090F58(u32, u8 *, struct ItemStruct_203B460 *, u32);
+extern void sub_8090F58(u32, u8 *, struct ItemSlot *, u32);
 
 void LoadItemParameters(void)
 {
@@ -78,7 +78,7 @@ bool8 sub_8090A60(u8 itemIndex)
   }
 }
 
-void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
+void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
 {
   u32 uVar3;
   u32 uVar4;
@@ -110,7 +110,7 @@ void sub_8090A8C(struct ItemStruct_203B460 *param_1,u8 itemIndex,u8 param_3)
   }
 }
 
-void sub_8090B08(struct ItemStruct_203B460_ALT *param_1,u8 itemIndex)
+void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex)
 {
   u32 uVar2;
   u32 uVar3;
@@ -136,7 +136,7 @@ void sub_8090B08(struct ItemStruct_203B460_ALT *param_1,u8 itemIndex)
   }
 }
 
-void sub_8090B64(struct ItemStruct_203B460 *param_1, struct ItemStruct_203B460_ALT *param_2)
+void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
 {
     u8 r6;
 
@@ -169,7 +169,7 @@ void sub_8090B64(struct ItemStruct_203B460 *param_1, struct ItemStruct_203B460_A
     }
 }
 
-void sub_8090BB0(struct ItemStruct_203B460_ALT *param_1,struct ItemStruct_203B460 *param_2)
+void sub_8090BB0(struct ItemSlot_ALT *param_1,struct ItemSlot *param_2)
 {
   if ((param_2->unk0 & 1) != 0) {
     param_1->itemIndex = param_2->itemIndex;
@@ -185,7 +185,7 @@ u8 GetItemType(u8 index)
     return gItemParametersData[index].type;
 }
 
-s32 sub_8090BE4(struct ItemStruct_203B460 *param_1)
+s32 sub_8090BE4(struct ItemSlot *param_1)
 {
   if (param_1->itemIndex == 105) {
     return sub_80915D4(param_1);
@@ -200,7 +200,7 @@ s32 sub_8090BE4(struct ItemStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090C30(struct ItemStruct_203B460 *param_1)
+s32 sub_8090C30(struct ItemSlot *param_1)
 {
   if (param_1->itemIndex == 105) {
     return sub_80915D4(param_1);
@@ -215,7 +215,7 @@ s32 sub_8090C30(struct ItemStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090C7C(struct ItemStruct_203B460 *param_1)
+s32 sub_8090C7C(struct ItemSlot *param_1)
 {
   if (!sub_80914E4(param_1->itemIndex)) {
     return 0;
@@ -230,7 +230,7 @@ s32 sub_8090C7C(struct ItemStruct_203B460 *param_1)
   }
 }
 
-s32 sub_8090CCC(struct ItemStruct_203B460 *param_1)
+s32 sub_8090CCC(struct ItemSlot *param_1)
 {
   if (!sub_80914E4(param_1->itemIndex)) {
     return 0;
@@ -288,7 +288,7 @@ u32 GetItemUnkFood(u8 itemIndex, u32 r1)
 void sub_8090DC4(u32 param_1,u8 itemIndex,u32 param_3)
 {
   char acStack104 [80];
-  struct ItemStruct_203B460 unkItem;
+  struct ItemSlot unkItem;
   
   strncpy(acStack104,gItemParametersData[itemIndex].namePointer,0x50);
   sub_8090A8C(&unkItem,itemIndex,0);

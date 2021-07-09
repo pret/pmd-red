@@ -9,7 +9,7 @@ struct subStruct_203B460
 
 struct unkStruct_203B460
 {
-    struct ItemStruct_203B460 teamItems[20];
+    struct ItemSlot teamItems[20];
     u16 unk50[0xF0];
     struct subStruct_203B460 unk230[8];
     struct subStruct_203B460 unk250[4]; // TODO: idk if this is identical struct or not.. Ghidra says sizes are same

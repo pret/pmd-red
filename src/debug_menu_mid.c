@@ -50,7 +50,7 @@ extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
-extern void sub_801B3C0(struct ItemStruct_203B460 *);
+extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_8013AA0(u32 *);
 
 extern struct UnkTextStruct2 gUnknown_80E7E34;
@@ -181,7 +181,7 @@ void sub_803A51C(void)
 
 void sub_803A5A0(void)
 {
-  struct ItemStruct_203B460 auStack8;
+  struct ItemSlot auStack8;
   
   switch(gUnknown_203B3F0->state) {
     case 0:

@@ -16,7 +16,7 @@ struct unkStruct_203B2BC
     s16 unk8;
     u16 unkA;
     u32 unkC;
-    struct ItemStruct_203B460_ALT unk10;
+    struct ItemSlot_ALT unk10;
     u8 unk14;
     u8 fill15[3];
     struct unkSubStruct_203B2BC *unk18;
