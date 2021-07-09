@@ -75,7 +75,7 @@ void InitializeMoneyItems(void);
 u8 GetItemType(u8 index);
 s32 GetItemBuyPrice(u8 itemIndex);
 s32 GetItemSellPrice(u8 itemIndex);
-u8 GetItemOrder(u8 itemIndex);
+s32 GetItemOrder(u8 itemIndex);
 u8 GetItemPalette(u8 itemIndex);
 u8 GetItemCategory(u8 itemIndex);
 u32 GetItemUnkThrow(u8 itemIndex, u32 r1);

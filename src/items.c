@@ -255,7 +255,7 @@ s32 GetItemSellPrice(u8 itemIndex)
     return gItemParametersData[itemIndex].sellPrice;
 }
 
-u8 GetItemOrder(u8 itemIndex)
+s32 GetItemOrder(u8 itemIndex)
 {
     return gItemParametersData[itemIndex].order;
 }
