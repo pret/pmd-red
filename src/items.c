@@ -37,7 +37,7 @@ void InitializeMoneyItems(void)
   
   for(iVar1 = 0; iVar1 < 0x14; iVar1++)
   {
-    gUnknown_203B460->fill0[iVar1].unk0 = 0;
+    gUnknown_203B460->teamItems[iVar1].unk0 = 0;
   }
 
   for(iVar1 = 0; iVar1 < 0xF0; iVar1++)
@@ -61,7 +61,7 @@ s32 sub_8090A34(void)
   iVar3 = 0;
   for(iVar2 = 0; iVar2 < 0x14; iVar2++)
   {
-    if ((gUnknown_203B460->fill0[iVar2].unk0 & 1) != 0) {
+    if ((gUnknown_203B460->teamItems[iVar2].unk0 & 1) != 0) {
       iVar3++;
     }
   }

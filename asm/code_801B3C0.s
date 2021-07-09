@@ -420,7 +420,7 @@ _0801B978:
 _0801B986:
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
+	bl AddItemToInventory
 	bl sub_80910B4
 	movs r0, 0xCB
 	bl PlaySound
@@ -975,7 +975,7 @@ _0801BDD2:
 	bl sub_80911F8
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
+	bl AddItemToInventory
 	bl sub_80910B4
 	movs r0, 0xCB
 	bl PlaySound
@@ -1052,7 +1052,7 @@ _0801BE80:
 	bl sub_80911F8
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
+	bl AddItemToInventory
 	bl sub_80910B4
 	movs r0, 0xCB
 	bl PlaySound

@@ -36,13 +36,13 @@ void sub_8019B08(void)
         break;
     case 3:
         gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
+        gUnknown_203B210->unk1C = gUnknown_203B460->teamItems[gUnknown_203B210->unk24];
         gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x1c);
         break;
     case 4:
         gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
+        gUnknown_203B210->unk1C = gUnknown_203B460->teamItems[gUnknown_203B210->unk24];
         gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
         sub_8099690(0);
         UpdateKecleonStoreState(0x1d);
@@ -186,7 +186,7 @@ void sub_8019DAC(void)
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < 0x14; iVar5++){
-    pbVar4 = &gUnknown_203B460->fill0[iVar5];
+    pbVar4 = &gUnknown_203B460->teamItems[iVar5];
     if (((pbVar4->unk0 & 1) != 0) && (sub_80914E4(pbVar4->itemIndex))) {
       iVar3 = sub_8090CCC(pbVar4);
       gUnknown_203B210->unk18 += iVar3;

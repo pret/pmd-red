@@ -16904,7 +16904,7 @@ _080600D8:
 	lsls r0, 1
 	bl PlaySoundEffect
 	bl sub_8047158
-	bl sub_80912C8
+	bl RemoveMoneyFromInventory
 	movs r0, 0
 	ldr r2, _08060140
 	str r0, [r2]
@@ -29934,7 +29934,7 @@ _08066968:
 _080669A8: .4byte 0xffffff00
 _080669AC:
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 _080669B2:
 	ldr r0, [sp, 0x4]
 	str r0, [r7, 0x60]
@@ -30123,7 +30123,7 @@ _08066B24:
 	strb r4, [r5, 0x1]
 	strb r4, [r5]
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 	ldr r0, _08066BC4
 	bl PlaySoundEffect
 	ldr r0, _08066BC8
@@ -30596,7 +30596,7 @@ _08066F30:
 	b _08066F46
 _08066F40:
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 _08066F46:
 	bl sub_80910B4
 	ldr r4, _08066F90
@@ -30776,7 +30776,7 @@ _080670B4:
 	b _080670CA
 _080670C4:
 	add r0, sp, 0x4
-	bl sub_8091290
+	bl AddItemToInventory
 _080670CA:
 	bl sub_80910B4
 	ldr r0, _08067100

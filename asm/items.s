@@ -602,7 +602,7 @@ sub_809124C:
 	adds r1, r3, 0
 	bl sub_8090A8C
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -618,7 +618,7 @@ sub_8091274:
 	mov r0, sp
 	bl sub_8090B64
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -626,8 +626,8 @@ sub_8091274:
 	bx r1
 	thumb_func_end sub_8091274
 
-@ 	thumb_func_start sub_8091290
-@ sub_8091290:
+@ 	thumb_func_start AddItemToInventory
+@ AddItemToInventory:
 @ 	push {r4-r6,lr}
 @ 	adds r4, r0, 0
 @ 	movs r3, 0
@@ -657,5 +657,5 @@ sub_8091274:
 @ 	pop {r4-r6}
 @ 	pop {r1}
 @ 	bx r1
-@ 	thumb_func_end sub_8091290
+@ 	thumb_func_end AddItemToInventory
         .align 2,0

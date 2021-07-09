@@ -110,13 +110,13 @@ void sub_8017AF8(void)
             else
             {
                 gUnknown_203B208->unk10 = sub_801A8AC();
-                gUnknown_203B208->unkC = gUnknown_203B460->fill0[gUnknown_203B208->unk10];
+                gUnknown_203B208->unkC = gUnknown_203B460->teamItems[gUnknown_203B208->unk10];
                 UpdateKangaskhanStorageState(0xF);
             }
             break;
         case 4:
             gUnknown_203B208->unk10 = sub_801A8AC();
-            gUnknown_203B208->unkC = gUnknown_203B460->fill0[gUnknown_203B208->unk10];
+            gUnknown_203B208->unkC = gUnknown_203B460->teamItems[gUnknown_203B208->unk10];
             UpdateKangaskhanStorageState(0x10);
             break;
         case 2:

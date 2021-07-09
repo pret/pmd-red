@@ -8454,7 +8454,7 @@ _0807402C: .4byte gUnknown_202DE58
 _08074030: .4byte gUnknown_80F9018
 _08074034:
 	adds r0, r5, 0
-	bl sub_8091290
+	bl AddItemToInventory
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074060

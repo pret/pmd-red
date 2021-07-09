@@ -57,14 +57,14 @@ void sub_8027B28(void)
   {
     case 3:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
         sub_8027184(0xc);
         break;
     case 4:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
         sub_8099690(0);
         sub_8027184(0xd);
         break;
