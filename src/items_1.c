@@ -42,7 +42,7 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
 }
 
 
-void RemoveMoneyFromInventory() 
+void ConvertMoneyItemToMoney() 
 {
   s32 i = 0;
 

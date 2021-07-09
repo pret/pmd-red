@@ -16904,7 +16904,7 @@ _080600D8:
 	lsls r0, 1
 	bl PlaySoundEffect
 	bl sub_8047158
-	bl RemoveMoneyFromInventory
+	bl ConvertMoneyItemToMoney
 	movs r0, 0
 	ldr r2, _08060140
 	str r0, [r2]
