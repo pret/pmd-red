@@ -169,3 +169,73 @@ bool8 CanSellItem(u32 id) {
     }
     return 0;
 }
+
+bool8 IsNotMoneyOrUsedTMItem(u8 id) {
+  if (id == ITEM_ID_NOTHING) {
+    return 0;
+  }
+  else if (id == ITEM_ID_POKE) {
+    return 0;
+  }
+  else if (id == ITEM_ID_USED_TM) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsNotSpecialItem(u8 id) {
+  if (id == ITEM_ID_NOTHING) {
+    return 0;
+  }
+  else if (id == ITEM_ID_POKE) {
+    return 0;
+  }
+  else if (id == ITEM_ID_ROCK_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_ICE_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_STEEL_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_MUSIC_BOX) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsEdibleItem(u8 id) {
+  if (!((GetItemType(id) == ITEM_TYPE_BERRY_SEED) || (GetItemType(id) == ITEM_TYPE_APPLE_GUMMI))) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsTMItem(u8 id) {
+  if (id == ITEM_ID_CUT) {
+    return 1;
+  }
+  else if (id == ITEM_ID_FLY) {
+    return 1;
+  }
+  else if (id == ITEM_ID_SURF) {
+    return 1;
+  }
+  else if (id == ITEM_ID_STRENGTH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_FLASH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_ROCK_SMASH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_WATERFALL) {
+    return 1;
+  }
+  else if (id == ITEM_ID_DIVE) {
+    return 1;
+  }
+  return 0;
+}

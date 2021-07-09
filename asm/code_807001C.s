@@ -32841,7 +32841,7 @@ _08080290:
 	cmp r0, 0
 	beq _080802C2
 	ldrb r0, [r2, 0x2]
-	bl sub_8091544
+	bl IsNotSpecialItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080802C2
@@ -32870,7 +32870,7 @@ _080802C8:
 	mov r0, r8
 	adds r0, 0x62
 	ldrb r0, [r0]
-	bl sub_8091544
+	bl IsNotSpecialItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080802FA

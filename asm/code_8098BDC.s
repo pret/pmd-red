@@ -6500,7 +6500,7 @@ _0809C2CA:
 	adds r0, r1
 	ldrb r4, [r0, 0x2]
 	adds r0, r4, 0
-	bl sub_8091570
+	bl IsEdibleItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C30C

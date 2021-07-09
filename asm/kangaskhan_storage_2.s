@@ -873,7 +873,7 @@ _0801894E:
 	ldr r4, _08018978
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801896C

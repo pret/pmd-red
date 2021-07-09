@@ -1,5 +1,5 @@
-#ifndef GUARD_gTeamInventory_203B460_H
-#define GUARD_gTeamInventory_203B460_H
+#ifndef GUARD_TEAM_INVENTORY_H
+#define GUARD_TEAM_INVENTORY_H
 
 struct subStruct_203B460
 {

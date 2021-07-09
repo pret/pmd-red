@@ -61,7 +61,7 @@ extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8();
 
-extern bool8 sub_8091524(u8);
+extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern bool8 sub_801ADA0(u32);
 extern void sub_8099690(u32);
 extern u32 sub_8013BBC(u32 *);
@@ -194,7 +194,7 @@ void sub_8017C7C(void)
     {
       case 2:
         sub_8099690(0);
-        if(!sub_8091524(gUnknown_203B208->unkC.itemIndex))
+        if(!IsNotMoneyOrUsedTMItem(gUnknown_203B208->unkC.itemIndex))
             UpdateKangaskhanStorageState(9);
         else
             if(!sub_801ADA0(gUnknown_203B208->unk10))

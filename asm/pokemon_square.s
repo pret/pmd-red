@@ -1883,7 +1883,7 @@ sub_801ADA0:
 	ldr r6, [r1]
 	lsls r4, r6, 8
 	lsrs r0, r4, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801AE12

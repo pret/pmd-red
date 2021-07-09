@@ -35,7 +35,7 @@ extern bool8 sub_809017C(u8 *);
 extern s16 sub_808E770(s16);
 extern bool8 sub_8092040(u8);
 extern u8 sub_803C1D0(u8 *, u8);
-extern bool8 sub_8091524(u8);
+extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 sub_8091E60(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
 extern u8 sub_803C0DC(s16);
@@ -148,7 +148,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
         if(sub_8090A60(data->targetItem))
             return FALSE;
-        if(!sub_8091524(data->targetItem))
+        if(!IsNotMoneyOrUsedTMItem(data->targetItem))
             return FALSE;
 
         // Item finding

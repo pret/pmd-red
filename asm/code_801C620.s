@@ -698,7 +698,7 @@ _0801CE68:
 	lsls r0, r6, 24
 	lsrs r0, 24
 	str r3, [sp]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	ldr r3, [sp]
 	cmp r0, 0
@@ -795,7 +795,7 @@ _0801CF20:
 	beq _0801CF3E
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801CF1A
@@ -826,7 +826,7 @@ _0801CF5A:
 _0801CF5E:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801CF7C

@@ -8691,7 +8691,7 @@ _080A1C30:
 	ldr r0, _080A1C64
 	ldrb r4, [r0, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1C4A
@@ -9132,7 +9132,7 @@ _080A1FE0:
 	ble _080A2018
 	ldrb r4, [r6, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2024

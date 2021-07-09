@@ -16223,7 +16223,7 @@ sub_8026F38:
 	adds r4, r5, 0
 	adds r4, 0x28
 	ldrb r0, [r4]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08026F74

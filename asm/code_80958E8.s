@@ -566,7 +566,7 @@ _08095F48:
 	cmp r0, 0
 	bne _08095F6A
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08095F6A
