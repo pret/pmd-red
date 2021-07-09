@@ -34221,7 +34221,7 @@ _08068C06:
 	bne _08068C50
 	adds r0, r4, 0
 	bl sub_80915D4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
 	strb r5, [r4]

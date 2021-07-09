@@ -9039,7 +9039,7 @@ _080A1EE8:
 	bne _080A1EBE
 _080A1F28:
 	ldr r0, _080A1F38
-	bl sub_80913A0
+	bl AddToTeamMoney
 	b _080A236A
 	.align 2, 0
 _080A1F30: .4byte gUnknown_202DE58

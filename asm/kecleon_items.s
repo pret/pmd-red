@@ -1215,7 +1215,7 @@ _08019874:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
 	negs r0, r0
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
@@ -1285,7 +1285,7 @@ _0801990C:
 	ldr r4, _08019930
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
 	bl sub_80911F8
@@ -1354,7 +1354,7 @@ _0801998E:
 	ldr r0, _080199B8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0xA6
 	lsls r0, 1
 	bl PlaySound

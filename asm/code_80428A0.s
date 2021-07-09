@@ -6641,7 +6641,7 @@ _08045E40:
 	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl sub_80915D4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, _08045E74
 	adds r1, r5, 0
 	bl sub_8045BF8
@@ -9050,7 +9050,7 @@ _0804710A:
 	bne _08047132
 	adds r0, r4, 0
 	bl sub_80915D4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
 	strb r5, [r4]

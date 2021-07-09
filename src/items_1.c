@@ -8,7 +8,7 @@ extern struct unkStruct_203B460 *gUnknown_203B460;
 
 extern s32 sub_80915D4(struct ItemSlot *);
 extern void sub_80910B4();
-extern void sub_80913A0(s32);
+void AddToTeamMoney(s32);
 
 bool8 AddItemToInventory(const struct ItemSlot* x) {
   s32 i;
@@ -37,7 +37,7 @@ void RemoveMoneyFromInventory() {
       s32 result;
 
       result = sub_80915D4(current_slot);
-      sub_80913A0(result);
+      AddToTeamMoney(result);
       current_slot->itemIndex = 0;
       current_slot->numItems = 0;
       current_slot->unk0 = 0;
@@ -75,4 +75,19 @@ void RemoveMoneyFromInventory() {
     }
   } while (++i < 20);
   sub_80910B4();
+}
+
+void AddToTeamMoney(s32 amount) {
+  s32 clamped_money;
+  gUnknown_203B460->teamMoney += amount;
+
+  // clamp money
+  clamped_money = 99999;
+  if (gUnknown_203B460->teamMoney <= 99999) {
+    if (gUnknown_203B460->teamMoney >= 0) {
+      return;
+    }
+    clamped_money = 0;
+  }
+  gUnknown_203B460->teamMoney = clamped_money;
 }

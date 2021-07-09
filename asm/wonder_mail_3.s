@@ -4234,7 +4234,7 @@ _0802F3E8:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	ldr r0, [r0, 0x18]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0
 	bl sub_808D544
 	cmp r0, 0x1
@@ -4314,7 +4314,7 @@ _0802F494:
 	beq _0802F4BC
 	movs r0, 0xFA
 	lsls r0, 2
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, _0802F4B8
 	b _0802F4DA
 	.align 2, 0

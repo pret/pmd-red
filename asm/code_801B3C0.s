@@ -366,7 +366,7 @@ _0801B8FE:
 _0801B914:
 	movs r0, 0xFA
 	lsls r0, 2
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0x4
 	bl sub_801B748
 	b _0801BB0E

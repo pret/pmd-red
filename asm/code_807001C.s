@@ -8171,7 +8171,7 @@ _08073DF4:
 _08073DFC:
 	adds r0, r5, 0
 	bl sub_80915D4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, _08073E1C
 	adds r1, r5, 0
 	bl sub_8045BF8
@@ -30546,7 +30546,7 @@ _0807F04E:
 	ldr r0, [r4]
 	adds r0, r5
 	ldr r0, [r0]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, [r4]
 	ldr r2, _0807F17C
 	adds r1, r0, r2
@@ -30768,7 +30768,7 @@ _0807F22C:
 	lsls r0, 1
 	bl PlaySoundEffect
 	negs r0, r4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r6, 0
 _0807F23C:
 	movs r5, 0

@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80913A0
-sub_80913A0:
-	push {lr}
-	ldr r1, _080913C4
-	ldr r1, [r1]
-	movs r3, 0x98
-	lsls r3, 2
-	adds r2, r1, r3
-	ldr r1, [r2]
-	adds r1, r0
-	str r1, [r2]
-	ldr r0, _080913C8
-	cmp r1, r0
-	bgt _080913BE
-	cmp r1, 0
-	bge _080913C0
-	movs r0, 0
-_080913BE:
-	str r0, [r2]
-_080913C0:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080913C4: .4byte gUnknown_203B460
-_080913C8: .4byte 0x0001869f
-	thumb_func_end sub_80913A0
-
 	thumb_func_start GetItemMove
 GetItemMove:
 	lsls r0, 24
@@ -1702,7 +1675,7 @@ _08091FB8:
 	bne _08091FE8
 	adds r0, r4, 0
 	bl sub_80915D4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
 	strb r5, [r4]
@@ -1733,7 +1706,7 @@ _08091FF4:
 	bne _08092026
 	adds r0, r4, 0
 	bl sub_80915E4
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0
 	strb r0, [r4]
 _08092026:
