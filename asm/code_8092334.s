@@ -3167,7 +3167,7 @@ sub_8093DE8:
 	adds r0, r4, 0
 	movs r1, 0
 	adds r3, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r3, 0x13
 	ldrh r1, [r6, 0x2]
 	ldr r4, _08093E8C
@@ -3187,7 +3187,7 @@ _08093E3A:
 	movs r0, 0x4
 	adds r1, r3, 0
 	adds r3, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl sub_8093E90
@@ -3243,14 +3243,14 @@ sub_8093E90:
 	movs r0, 0x4
 	movs r1, 0x4A
 	adds r3, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _08093F08
 	ldr r2, [r0]
 	str r4, [sp]
 	movs r0, 0x4
 	movs r1, 0x56
 	adds r3, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	bl sub_8092B00
 	lsls r0, 24
@@ -3261,7 +3261,7 @@ sub_8093E90:
 	movs r0, 0x40
 	movs r1, 0x56
 	adds r3, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	bl sub_8092BC0
 	ldr r1, _08093F0C
@@ -3273,7 +3273,7 @@ sub_8093E90:
 	.align 2, 0
 _08093F00: .4byte gAvailablePokemonNames
 _08093F04: .4byte gUnknown_810CF00
-_08093F08: .4byte gUnknown_810CF0C
+_08093F08: .4byte gPtrTypeText
 _08093F0C: .4byte gUnknown_202DE30
 	thumb_func_end sub_8093E90
 
@@ -4189,7 +4189,7 @@ sub_8094558:
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r4, _080945D0
 	adds r1, r6, 0
 	adds r1, 0x18
@@ -4201,7 +4201,7 @@ sub_8094558:
 	movs r0, 0x4
 	movs r1, 0x10
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r5, 0x1A
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -4251,7 +4251,7 @@ _080945EA:
 	adds r1, r5, 0
 	add r2, sp, 0x4
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r5, 0xA
 	movs r1, 0x14
 	ldrsh r0, [r6, r1]
@@ -4268,7 +4268,7 @@ _080945EA:
 	adds r1, r5, 0
 	add r2, sp, 0x4
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r5, 0x10
 	ldr r1, _08094660
 	ldr r0, [r6, 0x20]
@@ -4286,7 +4286,7 @@ _080945EA:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0809467A
 	.align 2, 0
 _0809465C: .4byte gUnknown_8113870
@@ -4300,7 +4300,7 @@ _08094668:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0809467A:
 	adds r5, 0xA
 	ldr r4, _080946D0
@@ -4315,7 +4315,7 @@ _0809467A:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r5, 0xA
 	adds r0, r6, 0
 	adds r0, 0x26
@@ -4339,7 +4339,7 @@ _0809467A:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _080946EC
 	.align 2, 0
 _080946CC: .4byte gUnknown_8113898
@@ -4353,7 +4353,7 @@ _080946DC:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _080946EC:
 	adds r0, r6, 0
 	adds r0, 0x2D
@@ -4371,7 +4371,7 @@ _080946EC:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08094730
 	.align 2, 0
 _08094714: .4byte gUnknown_81138E4
@@ -4384,7 +4384,7 @@ _08094720:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08094730:
 	adds r5, 0xA
 	ldr r2, _0809476C
@@ -4410,7 +4410,7 @@ _08094730:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08094784
 	.align 2, 0
 _08094768: .4byte gUnknown_8113900
@@ -4423,7 +4423,7 @@ _08094774:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08094784:
 	adds r0, r6, 0
 	adds r0, 0x2E
@@ -4441,7 +4441,7 @@ _08094784:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _080947C8
 	.align 2, 0
 _080947AC: .4byte gUnknown_8113918
@@ -4454,7 +4454,7 @@ _080947B8:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _080947C8:
 	adds r5, 0x10
 	adds r2, r6, 0
@@ -4485,7 +4485,7 @@ _080947F6:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r7, 0
 	bl sub_80073E0
 	add sp, 0xCC

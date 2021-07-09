@@ -36,7 +36,7 @@ extern u8 gUnknown_80DBA4C[];
 extern void sub_8008C54(u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
-extern void sub_8014FF0(u32, u32, u8 *, u32, u32);
+extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern u32 sub_8012A64(u32 *, u32);
@@ -115,8 +115,8 @@ void sub_801B480(void)
             sub_80073B8(gUnknown_203B230->unk24);
             preload = gUnknown_203B230->unk10[gUnknown_203B230->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);
-            sub_8014FF0(16, 0, gUnknown_80DBA4C, gUnknown_203B230->unk24, 0); // $m0
-            sub_8014FF0(4, 16, gUnknown_203B230->unk10[gUnknown_203B230->unk8]->unk4, gUnknown_203B230->unk24, 0);
+            xxx_format_and_draw(16, 0, gUnknown_80DBA4C, gUnknown_203B230->unk24, 0); // $m0
+            xxx_format_and_draw(4, 16, gUnknown_203B230->unk10[gUnknown_203B230->unk8]->unk4, gUnknown_203B230->unk24, 0);
             sub_80073E0(gUnknown_203B230->unk24);
             break;
         case 2:

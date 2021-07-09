@@ -248,7 +248,7 @@ void DisplayAdventureLog(void)
             default:
                 break;
         }
-        sub_8014FF0(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(uVar6), gAdventureLog->unk34, 0);
+        xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(uVar6), gAdventureLog->unk34, 0);
     }
     else
     {
@@ -389,7 +389,7 @@ void DisplayAdventureLog(void)
 	"\tstr r0, [sp]\n"
 	"\tmovs r0, 0x8\n"
 	"\tadds r1, r5, 0\n"
-	"\tbl sub_8014FF0\n"
+	"\tbl xxx_format_and_draw\n"
 	"\tb _08032234\n"
 	"\t.align 2, 0\n"
 "_08032214: .4byte gUnknown_202DE30\n"

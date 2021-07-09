@@ -65,7 +65,7 @@ extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(u32, u32, u32 *, u32, u32);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
-extern void sub_8090DC4(u32 *, u8, u32);
+extern void sub_8090DC4(void*, u8, u32);
 extern void sub_801C8C4(u32, u32, s32 *, u32);
 
 

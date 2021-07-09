@@ -599,7 +599,7 @@ sub_801F280:
 	str r0, [sp]
 	movs r0, 0xC
 	movs r1, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r7, 0
 	ldr r0, [r4]
 	movs r1, 0x36
@@ -691,7 +691,7 @@ _0801F372:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	ldr r2, _0801F3F4
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0801F386:
 	adds r7, 0x1
 	mov r1, r8
@@ -728,7 +728,7 @@ _0801F394:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r1, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, [r4]
 	ldr r0, [r0, 0x54]
 	bl sub_80073E0
@@ -1535,7 +1535,7 @@ _0801F9F0:
 	str r4, [sp]
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r3, [r5]
 	ldr r1, [r3, 0xC]
 	lsls r1, 2
@@ -1548,7 +1548,7 @@ _0801F9F0:
 	str r4, [sp]
 	movs r0, 0x4
 	movs r1, 0x10
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, [r5]
 	ldr r0, [r0, 0x5C]
 	bl sub_80073E0
@@ -14162,7 +14162,7 @@ sub_8025E68:
 	movs r0, 0x4
 	movs r1, 0x3
 	adds r3, r6, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	bl sub_80073E0
 	add sp, 0x14
@@ -16045,7 +16045,7 @@ sub_8026DAC:
 	movs r0, 0x4
 	movs r1, 0x3
 	adds r3, r6, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	bl sub_80073E0
 	add sp, 0x14

@@ -17,7 +17,7 @@ extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern s32 sub_80915D4(struct ItemSlot *);
 extern bool8 sub_80914E4(u8);
-extern void sub_8090F58(u32, u8 *, struct ItemSlot *, u32);
+extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u32);
 
 void LoadItemParameters(void)
 {
@@ -285,7 +285,7 @@ u32 GetItemUnkFood(u8 itemIndex, u32 r1)
     return gItemParametersData[itemIndex].unkFood1[r1];
 }
 
-void sub_8090DC4(u32 param_1,u8 itemIndex,u32 param_3)
+void sub_8090DC4(void* param_1,u8 itemIndex,u32 param_3)
 {
   char acStack104 [80];
   struct ItemSlot unkItem;

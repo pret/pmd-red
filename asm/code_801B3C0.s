@@ -1968,7 +1968,7 @@ _0801C5AE:
 	movs r0, 0xC
 	adds r1, r7, 0
 	ldr r2, _0801C5E8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r5, 0x1
 	ldr r0, [r6]
 	movs r1, 0x3E

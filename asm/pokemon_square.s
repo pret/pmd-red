@@ -1708,7 +1708,7 @@ _0801AC10:
 	str r5, [sp]
 _0801AC3C:
 	movs r0, 0x8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0801ACC4
 	.align 2, 0
 _0801AC44: .4byte gUnknown_202DE58
@@ -1768,7 +1768,7 @@ _0801AC9C:
 	ldr r3, [r0]
 	str r5, [sp]
 	movs r0, 0x8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0801ACC4:
 	mov r0, r8
 	bl sub_801AED0

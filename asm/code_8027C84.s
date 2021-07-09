@@ -115,7 +115,7 @@ sub_8027D40:
 	movs r0, 0x4
 	movs r1, 0x3
 	adds r3, r6, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r6, 0
 	bl sub_80073E0
 	add sp, 0x14
