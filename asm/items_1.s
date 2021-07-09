@@ -5,18 +5,18 @@
 
 	.text
 
-	thumb_func_start GetItemMove
-GetItemMove:
-	lsls r0, 24
-	ldr r1, _080913DC
-	ldr r1, [r1]
-	lsrs r0, 19
-	adds r0, r1
-	ldrh r0, [r0, 0x18]
-	bx lr
-	.align 2, 0
-_080913DC: .4byte gItemParametersData
-	thumb_func_end GetItemMove
+@ 	thumb_func_start GetItemMove
+@ GetItemMove:
+@ 	lsls r0, 24
+@ 	ldr r1, _080913DC
+@ 	ldr r1, [r1]
+@ 	lsrs r0, 19
+@ 	adds r0, r1
+@ 	ldrh r0, [r0, 0x18]
+@ 	bx lr
+@ 	.align 2, 0
+@ _080913DC: .4byte gItemParametersData
+@ 	thumb_func_end GetItemMove
 
 	thumb_func_start sub_80913E0
 sub_80913E0:

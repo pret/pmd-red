@@ -5,19 +5,19 @@
 #include <stddef.h>
 
 extern struct unkStruct_203B460 *gUnknown_203B460;
+extern EWRAM_DATA struct Item *gItemParametersData;
 
 extern s32 sub_80915D4(struct ItemSlot *);
 extern void sub_80910B4();
-void AddToTeamMoney(s32);
 
-bool8 AddItemToInventory(const struct ItemSlot* x) {
+bool8 AddItemToInventory(const struct ItemSlot* slot) {
   s32 i;
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < 20; i++) {
     UNUSED struct ItemSlot* current = &gUnknown_203B460->teamItems[i];
     if (!(i[gUnknown_203B460->teamItems].unk0 & 1)) {
-      gUnknown_203B460->teamItems[i] = *x;
+      gUnknown_203B460->teamItems[i] = *slot;
       return 0;
     }
   }
@@ -90,4 +90,8 @@ void AddToTeamMoney(s32 amount) {
     clamped_money = 0;
   }
   gUnknown_203B460->teamMoney = clamped_money;
+}
+
+u16 GetItemMove(u8 index) {
+  return gItemParametersData[index & 0xff].move;
 }
