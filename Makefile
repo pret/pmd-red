@@ -114,12 +114,6 @@ $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 #### Main Rules ####
 
-# Disable dependency scanning when NODEP is used for quick building
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: C_DEP :=
-else
-$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
-endif
 
 ALL_BUILDS := red
 
@@ -137,7 +131,27 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
+infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+
+# Build tools when building the rom
+# Disable dependency scanning for clean/tidy/tools
+# Use a separate minimal makefile for speed
+# Since we don't need to reload most of this makefile
+ifeq (,$(filter-out all rom compare libagbsyscall syms,$(MAKECMDGOALS)))
+$(call infoshell, $(MAKE) -f make_tools.mk)
+else
+NODEP ?= 1
+endif
+
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
+
+
+# Disable dependency scanning when NODEP is used for quick building
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: C_DEP :=
+else
+$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
+endif
 
 
 # Create build subdirectories
