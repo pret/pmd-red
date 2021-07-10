@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80915D4
-sub_80915D4:
-	ldr r1, _080915E0
-	ldrb r0, [r0, 0x1]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_080915E0: .4byte gUnknown_810A3F0
-	thumb_func_end sub_80915D4
-
-	thumb_func_start sub_80915E4
-sub_80915E4:
-	ldr r1, _080915F0
-	ldrb r0, [r0, 0x1]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_080915F0: .4byte gUnknown_810A3F0
-	thumb_func_end sub_80915E4
-
 	thumb_func_start sub_80915F4
 sub_80915F4:
 	push {r4-r7,lr}
@@ -1407,7 +1383,7 @@ _08091FB8:
 	cmp r0, 0x69
 	bne _08091FE8
 	adds r0, r4, 0
-	bl sub_80915D4
+	bl GetMoneyValue
 	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
@@ -1416,7 +1392,7 @@ _08091FE8:
 	adds r6, 0x1
 	cmp r6, 0x13
 	ble _08091FB8
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r6, 0
 _08091FF4:
 	movs r0, 0x58
@@ -1438,7 +1414,7 @@ _08091FF4:
 	cmp r0, 0x69
 	bne _08092026
 	adds r0, r4, 0
-	bl sub_80915E4
+	bl GetMoneyValue2
 	bl AddToTeamMoney
 	movs r0, 0
 	strb r0, [r4]

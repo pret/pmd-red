@@ -697,7 +697,7 @@ _080279D8:
 	adds r0, 0x14
 	bl sub_8091274
 _080279F0:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x14]

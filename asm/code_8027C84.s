@@ -310,7 +310,7 @@ _08027ED8:
 	ldr r0, [r4]
 	adds r0, 0x14
 	bl sub_8091274
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x14]

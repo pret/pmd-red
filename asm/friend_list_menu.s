@@ -8224,7 +8224,7 @@ _08022F68:
 	beq _08022FD0
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4C]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 _08022FD0:
 	movs r0, 0
 	bl sub_8099690
@@ -8339,7 +8339,7 @@ _080230B0:
 _080230B8:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4C]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	bl sub_8090A34
 	cmp r0, 0
 	bne _080230DA
@@ -11772,15 +11772,15 @@ _08024B74:
 	ldr r0, [r1, 0x14]
 	cmp r0, 0x14
 	beq _08024BCA
-	bl sub_8091234
+	bl ClearItemSlotAt
 _08024BCA:
 	ldr r0, [r5]
 	ldr r0, [r0, 0x18]
 	cmp r0, 0x14
 	beq _08024BD6
-	bl sub_8091234
+	bl ClearItemSlotAt
 _08024BD6:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08024C14
 	bl sub_801199C
 	movs r0, 0xD2
@@ -13741,7 +13741,7 @@ _08025B28:
 	adds r0, 0x18
 	bl sub_8091274
 _08025B40:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x18]
@@ -13958,8 +13958,8 @@ _08025CF8:
 	ldr r5, _08025D6C
 	ldr r0, [r5]
 	ldr r0, [r0, 0x10]
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x18]
 	cmp r0, 0
@@ -15567,7 +15567,7 @@ _08026A10:
 	adds r0, 0x14
 	bl sub_8091274
 _08026A28:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x14]
@@ -15861,8 +15861,8 @@ _08026C58:
 	ldr r5, _08026CCC
 	ldr r0, [r5]
 	ldr r0, [r0, 0xC]
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x14]
 	cmp r0, 0
@@ -16296,7 +16296,7 @@ _08026FC4:
 	ldr r0, [r4]
 	adds r0, 0x14
 	bl sub_8091274
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x14]

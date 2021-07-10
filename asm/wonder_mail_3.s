@@ -1443,15 +1443,15 @@ _0802DDFC:
 	ldr r0, [r5]
 	ldr r0, [r0, 0x34]
 	ldrb r0, [r0, 0x10]
-	bl sub_8091130
+	bl FindItemInInventory
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
 	beq _0802DE1A
 	adds r0, r1, 0
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 _0802DE1A:
 	ldr r0, _0802DE2C
 _0802DE1C:

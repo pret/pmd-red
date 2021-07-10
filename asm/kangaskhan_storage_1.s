@@ -407,8 +407,8 @@ _080178F4:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 	movs r0, 0x13
 	bl UpdateKangaskhanStorageState
 	b _0801791E
@@ -531,7 +531,7 @@ _080179F2:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _080179D2
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
 	movs r0, 0x13
 	bl UpdateKangaskhanStorageState
@@ -643,7 +643,7 @@ _08017ACE:
 	adds r5, 0x1
 	cmp r5, 0xEF
 	ble _08017A44
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801CF94
 	movs r0, 0x1D
 	bl UpdateKangaskhanStorageState

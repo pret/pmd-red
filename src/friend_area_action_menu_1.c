@@ -18,8 +18,8 @@ extern void sub_8027184(u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void PlaySound(u32);
-extern void sub_80911F8(u32);
-extern void sub_80910B4();
+extern void ShiftItemsDownFrom(u32);
+extern void FillInventoryGaps();
 extern void nullsub_104();
 extern void sub_8091274(u8 *);
 extern void sub_801A928();
@@ -91,8 +91,8 @@ void sub_8027BD8(void)
   {
     case 10:
         PlaySound(0x14d);
-        sub_80911F8(gUnknown_203B2BC->unkC);
-        sub_80910B4();
+        ShiftItemsDownFrom(gUnknown_203B2BC->unkC);
+        FillInventoryGaps();
         if (gUnknown_203B2BC->unk14 != 0) {
             sub_8091274(&gUnknown_203B2BC->unk14);
         }

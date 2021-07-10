@@ -1094,7 +1094,7 @@ _0808F5C8:
 	b _0808F5E6
 _0808F5D0:
 	ldrb r0, [r7, 0x4]
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F5E6
 	ldrh r0, [r4, 0x4]
@@ -1184,7 +1184,7 @@ _0808F666:
 _0808F670:
 	movs r0, 0x31
 _0808F672:
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F6CA
 	ldrh r0, [r4, 0x4]
@@ -1225,7 +1225,7 @@ _0808F6A4:
 	b _0808F6DE
 _0808F6BC:
 	movs r0, 0x2F
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F6CA
 	movs r0, 0x1

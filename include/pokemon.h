@@ -28,7 +28,7 @@ struct PokemonStruct
     u8 unk20[4];
     u8 unk24;
     u8 fill25[3];
-    u8 unk28;
+    u8 itemIndexHeld;
     u8 unk29;
     u8 fill2A[2];
     u8 unk2C[4];

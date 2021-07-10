@@ -4319,7 +4319,7 @@ sub_8044D40:
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x1]
 	strb r0, [r1]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	b _08044D88
 	.align 2, 0
 _08044D70: .4byte gTeamInventory_203B460
@@ -4419,7 +4419,7 @@ _08044E10:
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x1]
 	strb r0, [r1]
-	bl sub_80910B4
+	bl FillInventoryGaps
 _08044E1C:
 	pop {r4}
 	pop {r0}
@@ -6640,7 +6640,7 @@ _08045E40:
 	lsls r0, 1
 	bl PlaySoundEffect
 	adds r0, r5, 0
-	bl sub_80915D4
+	bl GetMoneyValue
 	bl AddToTeamMoney
 	ldr r0, _08045E74
 	adds r1, r5, 0
@@ -8672,7 +8672,7 @@ _08046DC8:
 _08046E1E:
 	cmp r7, 0
 	bne _08046D96
-	bl sub_80910B4
+	bl FillInventoryGaps
 	cmp r6, 0
 	beq _08046ED4
 	bl sub_8083600
@@ -8856,7 +8856,7 @@ _08046FAE:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08046F90
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 	movs r6, 0
 _08046FBC:
@@ -8922,7 +8922,7 @@ _0804702C:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08047012
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 _08047038:
 	ldr r0, _0804707C
@@ -8985,7 +8985,7 @@ _080470A2:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08047090
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 _080470B0:
 	ldr r0, _080470EC
@@ -9049,7 +9049,7 @@ _0804710A:
 	cmp r0, 0x69
 	bne _08047132
 	adds r0, r4, 0
-	bl sub_80915D4
+	bl GetMoneyValue
 	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
@@ -9067,7 +9067,7 @@ _08047142:
 	adds r6, 0x1
 	cmp r6, 0x13
 	ble _0804710A
-	bl sub_80910B4
+	bl FillInventoryGaps
 	pop {r4-r6}
 	pop {r0}
 	bx r0

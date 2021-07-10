@@ -1288,7 +1288,7 @@ _0801990C:
 	bl AddToTeamMoney
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	movs r0, 0xA6
 	lsls r0, 1
 	bl PlaySound
@@ -1345,12 +1345,12 @@ _0801996C:
 	cmp r0, 0
 	beq _0801998E
 	adds r0, r4, 0
-	bl sub_8091234
+	bl ClearItemSlotAt
 _0801998E:
 	adds r4, 0x1
 	cmp r4, 0x13
 	ble _0801996C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _080199B8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]

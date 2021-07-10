@@ -421,7 +421,7 @@ _0801B986:
 	ldr r0, [r4]
 	adds r0, 0x10
 	bl AddItemToInventory
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	ldr r1, [r4]
@@ -972,11 +972,11 @@ _0801BDD2:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r4]
 	adds r0, 0x10
 	bl AddItemToInventory
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	movs r0, 0
@@ -1049,11 +1049,11 @@ _0801BE78:
 _0801BE80:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r4]
 	adds r0, 0x10
 	bl AddItemToInventory
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	bl sub_801A928

@@ -6509,7 +6509,7 @@ _0809C2CA:
 	movs r2, 0
 	bl sub_8090DC4
 	adds r0, r5, 0
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r6]
 	movs r2, 0x86
 	lsls r2, 3
@@ -7637,7 +7637,7 @@ sub_809CBA4:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0809CBB6
 	movs r0, 0
@@ -7727,7 +7727,7 @@ _0809CC52:
 	ldrb r0, [r4, 0x2]
 	movs r1, 0
 	bl sub_809124C
-	bl sub_80910B4
+	bl FillInventoryGaps
 _0809CC5E:
 	cmp r7, 0
 	beq _0809CC80

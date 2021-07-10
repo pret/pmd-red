@@ -1400,7 +1400,7 @@ _08001E3E:
 	movs r1, 0x1
 	bl sub_80973A8
 	movs r0, 0xE7
-	bl sub_8091130
+	bl FindItemInInventory
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -1499,7 +1499,7 @@ _08001F06:
 	bl ScenarioCalc
 _08001F20:
 	movs r0, 0xE2
-	bl sub_8091130
+	bl FindItemInInventory
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1

@@ -8170,7 +8170,7 @@ _08073DF4:
 	bl PlaySoundEffect
 _08073DFC:
 	adds r0, r5, 0
-	bl sub_80915D4
+	bl GetMoneyValue
 	bl AddToTeamMoney
 	ldr r0, _08073E1C
 	adds r1, r5, 0
@@ -33888,7 +33888,7 @@ sub_8080A5C:
 	str r0, [sp, 0x8]
 	movs r0, 0
 	strb r0, [r2]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r0, r4, 0
@@ -41233,7 +41233,7 @@ _08084514:
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x1]
 	strb r0, [r1]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08084538
 	ldr r1, [r0]
 	movs r0, 0

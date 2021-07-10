@@ -968,7 +968,7 @@ _0801A5F2:
 _0801A604:
 	ldr r0, [r5]
 	str r4, [r0]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
 	ldr r0, [r5]
 	adds r1, r0, 0
@@ -1316,7 +1316,7 @@ sub_801A8D0:
 	movs r1, 0
 	movs r2, 0
 	bl sub_800641C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_8090A34
 	adds r1, r0, 0
 	ldr r0, [r5]

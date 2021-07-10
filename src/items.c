@@ -15,7 +15,6 @@ EWRAM_DATA struct Item *gItemParametersData;
 extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
-extern s32 sub_80915D4(struct ItemSlot *);
 extern bool8 CanSellItem(u8);
 extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u32);
 
@@ -33,21 +32,21 @@ struct TeamInventory *GetMoneyItemsInfo(void)
 
 void InitializeMoneyItems(void)
 {
-  s32 iVar1;
+  s32 i;
   
-  for(iVar1 = 0; iVar1 < 0x14; iVar1++)
+  for(i = 0; i < 20; i++)
   {
-    gTeamInventory_203B460->teamItems[iVar1].unk0 = 0;
+    gTeamInventory_203B460->teamItems[i].unk0 = 0;
   }
 
-  for(iVar1 = 0; iVar1 < 0xF0; iVar1++)
+  for(i = 0; i < 0xF0; i++)
   {
-    gTeamInventory_203B460->unk50[iVar1] = 0;
+    gTeamInventory_203B460->unk50[i] = 0;
   }
 
-  for(iVar1 = 0; iVar1 < 8; iVar1++)
+  for(i = 0; i < 8; i++)
   {
-    sub_8091840(iVar1);
+    sub_8091840(i);
   }
   gTeamInventory_203B460->teamMoney = 0;
   gTeamInventory_203B460->teamSavings = 0;
@@ -83,7 +82,7 @@ void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
   u32 uVar3;
   u32 uVar4;
   
-  if (itemIndex != 0) {
+  if (itemIndex != ITEM_ID_NOTHING) {
     param_1->unk0 = 1;
     param_1->itemIndex = itemIndex;
     if (sub_8090A60(itemIndex)) {
@@ -105,7 +104,7 @@ void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
   }
   else {
     param_1->unk0 = 0;
-    param_1->itemIndex = 0;
+    param_1->itemIndex = ITEM_ID_NOTHING;
     param_1->numItems  = 0;
   }
 }
@@ -140,7 +139,7 @@ void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
 {
     u8 r6;
 
-    if(param_2->itemIndex != 0)
+    if(param_2->itemIndex != ITEM_ID_NOTHING)
     {
         param_1->unk0 = 1;
         param_1->itemIndex = param_2->itemIndex;
@@ -151,7 +150,7 @@ void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
         }
         else
         {
-            if(param_1->itemIndex == 0x7C)
+            if(param_1->itemIndex == ITEM_ID_USED_TM)
             {
                 param_1->numItems = param_2->numItems;
             }
@@ -163,7 +162,7 @@ void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
     }
     else
     {
-        param_1->itemIndex = 0;
+        param_1->itemIndex = ITEM_ID_NOTHING;
         param_1->numItems = 0;
         param_1->unk0 = 0;
     }
@@ -176,7 +175,7 @@ void sub_8090BB0(struct ItemSlot_ALT *param_1,struct ItemSlot *param_2)
     param_1->numItems = param_2->numItems;
   }
   else {
-    param_1->itemIndex = 0;
+    param_1->itemIndex = ITEM_ID_NOTHING;
   }
 }
 
@@ -187,8 +186,8 @@ u8 GetItemType(u8 index)
 
 s32 sub_8090BE4(struct ItemSlot *param_1)
 {
-  if (param_1->itemIndex == 105) {
-    return sub_80915D4(param_1);
+  if (param_1->itemIndex == ITEM_ID_POKE) {
+    return GetMoneyValue(param_1);
   }
   else {
     if (sub_8090A60(param_1->itemIndex)) {
@@ -202,8 +201,8 @@ s32 sub_8090BE4(struct ItemSlot *param_1)
 
 s32 sub_8090C30(struct ItemSlot *param_1)
 {
-  if (param_1->itemIndex == 105) {
-    return sub_80915D4(param_1);
+  if (param_1->itemIndex == ITEM_ID_POKE) {
+    return GetMoneyValue(param_1);
   }
   else {
     if (sub_8090A60(param_1->itemIndex)) {

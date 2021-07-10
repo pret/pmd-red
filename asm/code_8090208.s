@@ -395,7 +395,7 @@ _08090578:
 	mov r2, r10
 	adds r0, r2, r6
 	ldrb r0, [r0]
-	bl sub_80911A4
+	bl GetItemPossessionCount
 	cmp r0, 0
 	beq _080905A6
 _0809059E:

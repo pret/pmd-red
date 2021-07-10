@@ -331,8 +331,10 @@ void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);
 void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex);
 void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2);
 void sub_8090DC4(void* param_1,u8 itemIndex,u32 param_3);
+bool8 AddItemToInventory(const struct ItemSlot* slot);
 void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
+u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
 
 #endif

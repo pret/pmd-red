@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item.h"
 #include "team_inventory.h"
+#include "pokemon.h"
 #include "subStruct_203B240.h"
 
 #include <stddef.h>
@@ -8,8 +9,7 @@
 extern struct TeamInventory *gTeamInventory_203B460;
 extern EWRAM_DATA struct Item *gItemParametersData;
 
-extern s32 sub_80915D4(struct ItemSlot *);
-extern void sub_80910B4();
+extern void FillInventoryGaps();
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_8092A88(void*, u16);  // first arg is some struct
@@ -24,7 +24,165 @@ extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
+extern u32 gUnknown_810A3F0[100];
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
+void FillInventoryGaps() 
+{
+  // fill inventory gaps
+  s32 slot_checking = 0;
+  s32 last_filled = 0;
+
+  do {
+    // effectively just a while loop 
+    if ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+        // find next empty slot
+        do {
+            slot_checking++;
+        } while ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
+    }
+
+    if (slot_checking == 20) {
+        break;
+    }
+
+    if (slot_checking > last_filled) {
+        // shift it down
+        gTeamInventory_203B460->teamItems[last_filled] = gTeamInventory_203B460->teamItems[slot_checking];
+    }
+    slot_checking++;
+    last_filled++;
+  } while (1);
+
+  // clear out the rest of the slots
+  for (; last_filled < 20; last_filled++) {
+      struct ItemSlot *slot;
+#ifdef NONMATCHING
+      slot = &gTeamInventory_203B460->teamItems[last_filled];
+#else
+      size_t offs = last_filled << 2;
+      size_t _slot = offs;
+      _slot += (size_t)gTeamInventory_203B460->teamItems;
+      slot = (struct ItemSlot*)_slot; // &gTeamInventory_203B460->teamItems[end];
+#endif
+      slot->itemIndex = 0;
+      slot->numItems = 0;
+      slot->unk0 = 0;
+  }
+}
+
+s32 FindItemInInventory(u8 itemIndex) {
+  s32 i;
+  for (i = 0; i < 20; i++) {
+    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == itemIndex)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+s32 GetItemCountInInventory(u8 _itemIndex) 
+{
+#ifdef NONMATCHING
+  s32 count = 0;
+  s32 i;
+  for (i = 0; i < 20; i++) {
+    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == _itemIndex)) {
+      count++;
+    }
+  }
+  return count;
+#else
+  // have to do hacky stuff to fix initialization order of r6 and r2
+  u32 itemIndex = _itemIndex;
+  s32 count = 0;
+  struct ItemSlot *slot = gTeamInventory_203B460->teamItems;
+  s32 one = 1;
+  s32 i = 19;
+
+  do {
+    register u32 unk0 asm("r1") = slot->unk0;
+    u32 bottom_bit = one;
+    bottom_bit &= unk0;
+    if (bottom_bit && (slot->itemIndex == itemIndex)) {
+      count++;
+    }
+    slot++;
+  } while(--i >= 0);
+  return count;
+#endif
+}
+
+s32 GetItemPossessionCount(u8 itemIndex) 
+{
+#ifdef NONMATCHING
+  s32 item_count = GetItemCountInInventory(itemIndex);
+  s32 i = 0;
+
+  struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
+  for (i = 0; i < NUM_SPECIES; i++) {
+    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
+    if ((pokemon->unk0 & 1) 
+        && ((pokemon->unk0 >> 1) & 1)
+        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
+        && (pokemon->itemIndexHeld == itemIndex)) {
+      item_count++;
+    }
+  }
+  return item_count;
+#else
+  // hacky stuff again to fix order of operands in & at bottom bit
+  s32 item_count = GetItemCountInInventory(itemIndex);
+  s32 i = 0;
+  
+  struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
+  register s32 one_mask asm("r6") = 1;
+  for (i = 0; i < NUM_SPECIES; i++) {
+    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
+    register int bottom_bit asm("r0") = one_mask;
+    bottom_bit &= pokemon->unk0;
+
+    if (bottom_bit 
+        && ((pokemon->unk0 >> 1) & one_mask)
+        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
+        && (pokemon->itemIndexHeld == itemIndex)) {
+      item_count++;
+    }
+  }
+  return item_count;
+#endif
+}
+
+void ShiftItemsDownFrom(s32 start) 
+{
+  s32 i, j;
+  for (i = start, j = start + 1; i < 19; i++, j++) {
+    gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[j];
+  }
+  gTeamInventory_203B460->teamItems[19].itemIndex = 0;
+  gTeamInventory_203B460->teamItems[19].unk0 = 0;
+}
+
+void ClearItemSlotAt(u32 index)
+{
+  gTeamInventory_203B460->teamItems[index].itemIndex = ITEM_ID_NOTHING;
+  gTeamInventory_203B460->teamItems[index].unk0 = 0;
+}
+
+bool8 sub_809124C(u8 itemIndex, u8 param_3)
+{
+  struct ItemSlot temp;
+  sub_8090A8C(&temp, itemIndex, param_3);
+  return AddItemToInventory(&temp);
+}
+
+bool8 sub_8091274(struct ItemSlot_ALT* slot) 
+{
+  struct ItemSlot temp;
+
+  sub_8090B64(&temp, slot);
+  return AddItemToInventory(&temp);
+}
 
 bool8 AddItemToInventory(const struct ItemSlot* slot) 
 {
@@ -52,16 +210,16 @@ void ConvertMoneyItemToMoney()
 
     struct ItemSlot* current_slot = &gTeamInventory_203B460->teamItems[i];
     if ((current_slot->unk0 & 1) && (current_slot->itemIndex == ITEM_ID_POKE)) {
-      s32 result;
+      u32 result;
 
-      result = sub_80915D4(current_slot);
+      result = GetMoneyValue(current_slot);
       AddToTeamMoney(result);
       current_slot->itemIndex = 0;
       current_slot->numItems = 0;
       current_slot->unk0 = 0;
     }
   } while (++i < 20);
-  sub_80910B4();
+  FillInventoryGaps();
 
   i = 0;
   do {
@@ -92,7 +250,7 @@ void ConvertMoneyItemToMoney()
       }
     }
   } while (++i < 20);
-  sub_80910B4();
+  FillInventoryGaps();
 }
 
 void AddToTeamMoney(s32 amount)
@@ -152,7 +310,8 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
   return sub_8097DF0(GetItemDescription(slot->itemIndex), a3);
 }
 
-bool8 CanSellItem(u32 id) {
+bool8 CanSellItem(u32 id) 
+{
   u8 id_;
   id = (u8)id;
   id_ = id;
@@ -170,7 +329,8 @@ bool8 CanSellItem(u32 id) {
     return 0;
 }
 
-bool8 IsNotMoneyOrUsedTMItem(u8 id) {
+bool8 IsNotMoneyOrUsedTMItem(u8 id) 
+{
   if (id == ITEM_ID_NOTHING) {
     return 0;
   }
@@ -183,7 +343,8 @@ bool8 IsNotMoneyOrUsedTMItem(u8 id) {
   return 1;
 }
 
-bool8 IsNotSpecialItem(u8 id) {
+bool8 IsNotSpecialItem(u8 id) 
+{
   if (id == ITEM_ID_NOTHING) {
     return 0;
   }
@@ -205,14 +366,16 @@ bool8 IsNotSpecialItem(u8 id) {
   return 1;
 }
 
-bool8 IsEdibleItem(u8 id) {
+bool8 IsEdibleItem(u8 id) 
+{
   if (!((GetItemType(id) == ITEM_TYPE_BERRY_SEED) || (GetItemType(id) == ITEM_TYPE_APPLE_GUMMI))) {
     return 0;
   }
   return 1;
 }
 
-bool8 IsTMItem(u8 id) {
+bool8 IsTMItem(u8 id) 
+{
   if (id == ITEM_ID_CUT) {
     return 1;
   }
@@ -238,4 +401,14 @@ bool8 IsTMItem(u8 id) {
     return 1;
   }
   return 0;
+}
+
+u32 GetMoneyValue(struct ItemSlot* slot) 
+{
+  return gUnknown_810A3F0[slot->numItems];
+}
+
+u32 GetMoneyValue2(struct ItemSlot* slot) 
+{
+  return gUnknown_810A3F0[slot->numItems];
 }

@@ -30420,7 +30420,7 @@ _08066DC4:
 	strb r6, [r5, 0x2]
 	strb r6, [r5, 0x1]
 	strb r6, [r5]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08066E00
 	bl PlaySoundEffect
 	ldr r0, _08066E04
@@ -30598,7 +30598,7 @@ _08066F40:
 	mov r0, sp
 	bl AddItemToInventory
 _08066F46:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r4, _08066F90
 	add r1, sp, 0x4
 	adds r0, r4, 0
@@ -30778,7 +30778,7 @@ _080670C4:
 	add r0, sp, 0x4
 	bl AddItemToInventory
 _080670CA:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08067100
 	bl PlaySoundEffect
 	ldr r0, _08067104
@@ -31008,7 +31008,7 @@ _080672A8:
 	strb r0, [r4, 0x2]
 	strb r0, [r4, 0x1]
 	strb r0, [r4]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	b _080672F6
 	.align 2, 0
 _080672C0: .4byte 0xffffff00
@@ -34220,7 +34220,7 @@ _08068C06:
 	cmp r0, 0x69
 	bne _08068C50
 	adds r0, r4, 0
-	bl sub_80915D4
+	bl GetMoneyValue
 	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]

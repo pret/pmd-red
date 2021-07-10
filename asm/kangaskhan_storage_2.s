@@ -476,7 +476,7 @@ _0801866A:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _0801864A
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
 	bl sub_8090A34
 	cmp r0, 0
@@ -636,7 +636,7 @@ _080187B2:
 	adds r6, 0x1
 	cmp r6, 0xEF
 	ble _0801872C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801CF94
 	movs r0, 0x1
 	bl sub_801CF14
@@ -852,8 +852,8 @@ _0801897C:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 	bl sub_8090A34
 	cmp r0, 0
 	bne _080189A4
