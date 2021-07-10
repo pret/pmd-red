@@ -21,8 +21,7 @@ struct unkStruct_203B20C
     u32 unk1C;
     u32 unk20;
     u8 fill24[0x60 - 0x24];
-    u32 unk60;
-    u8 fill64[0x70 - 0x64];
+    u16 unk60[8];
     u32 unk70;
     u8 fill74[0xC0 - 0x74];
     u32 unkC0;
@@ -77,6 +76,13 @@ extern u32 sub_801A8AC(void);
 extern void sub_801A928(void);
 extern void sub_8012CAC(struct UnkTextStruct2 *, u32 *);
 extern void sub_80182E4(void);
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_8013C68(u32 *);
+extern void sub_80073E0(u32);
+extern void sub_8012EA4(u32 *, u32);
+extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
+
 
 extern void sub_801A9E0();
 extern void sub_801841C();
@@ -87,7 +93,7 @@ extern void sub_8013AA0(u32 *);
 extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
-extern void sub_8012D60(u32 *, u32 *, u32, u32 *, u32, u32);
+extern void sub_8012D60(u32 *, u32 *, u32, u16 *, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801A8D0(u32);
 
@@ -96,6 +102,7 @@ extern struct UnkTextStruct2 gUnknown_80DB7E8;
 extern struct UnkTextStruct2 gUnknown_80DB7D0;
 extern struct UnkTextStruct2 gUnknown_80DB800;
 extern struct UnkTextStruct2 gUnknown_80DB818;
+extern u8 gUnknown_80DB830[];
 
 void sub_8017AF8(void)
 {
@@ -410,7 +417,7 @@ void sub_8018100(void)
     switch(gUnknown_203B20C->state)
     {
         case 1:
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, &gUnknown_203B20C->unk60, gUnknown_203B20C->unk14, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk14, 2);
             break;
         case 4:
             sub_801A5D8(3, 3, 0, 0xA);
@@ -421,7 +428,7 @@ void sub_8018100(void)
         case 6:
             sub_801A9E0();
             sub_801841C();
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, &gUnknown_203B20C->unk60, gUnknown_203B20C->unk18, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk18, 2);
             break;
         case 7:
             sub_801B3C0(&gUnknown_203B20C->unk8);
@@ -453,7 +460,7 @@ void sub_8018100(void)
             sub_801CCD8();
             sub_801AD34(0);
             sub_80184D4();
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, &gUnknown_203B20C->unk60, gUnknown_203B20C->unk1C, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk1C, 2);
             break;
         case 14:
             sub_801B3C0(&gUnknown_203B20C->unk8);
@@ -462,4 +469,16 @@ void sub_8018100(void)
         default:
             break;
     }
+}
+
+void sub_8018280(void)
+{
+    sub_8008C54(gUnknown_203B20C->unkD4);
+    sub_80073B8(gUnknown_203B20C->unkD4);
+    xxx_call_draw_string(4, 0, gUnknown_80DB830, gUnknown_203B20C->unkD4, 0); // Number?
+    sub_8013C68(&gUnknown_203B20C->unkC0);
+    sub_80073E0(gUnknown_203B20C->unkD4);
+    sub_801CCD8();
+    sub_801AD34(0);
+    sub_8012EA4(&gUnknown_203B20C->unk70,0);
 }

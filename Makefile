@@ -21,7 +21,7 @@ OBJCOPY   := $(PREFIX)objcopy
 export CC 	 := $(PREFIX)gcc
 export AS        := $(PREFIX)as
 endif
-export CPP       := $(PREFIX)cpp
+export CPP       := $(CC) -E
 export LD        := $(PREFIX)ld
 
 ifeq ($(OS),Windows_NT)
@@ -114,12 +114,6 @@ $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 #### Main Rules ####
 
-# Disable dependency scanning when NODEP is used for quick building
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: C_DEP :=
-else
-$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
-endif
 
 ALL_BUILDS := red
 
@@ -137,7 +131,27 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
+infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+
+# Build tools when building the rom
+# Disable dependency scanning for clean/tidy/tools
+# Use a separate minimal makefile for speed
+# Since we don't need to reload most of this makefile
+ifeq (,$(filter-out all rom compare libagbsyscall syms,$(MAKECMDGOALS)))
+$(call infoshell, $(MAKE) -f make_tools.mk)
+else
+NODEP ?= 1
+endif
+
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
+
+
+# Disable dependency scanning when NODEP is used for quick building
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: C_DEP :=
+else
+$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
+endif
 
 
 # Create build subdirectories
@@ -175,7 +189,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c $$(C_DEP)
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP) dungeon_pokemon dungeon_floor
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
@@ -183,10 +197,11 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
+$(BUILD_DIR)/sym_%.txt: sym_%.txt
+	cp $< $(BUILD_DIR)
+
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.txt $(BUILD_DIR)/sym_ewram2.txt $(BUILD_DIR)/sym_iwram.txt
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
-$(BUILD_DIR)/sym_%.ld: sym_%.txt
-	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)

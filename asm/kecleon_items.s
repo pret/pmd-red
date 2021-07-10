@@ -426,7 +426,7 @@ _0801922A:
 	movs r0, 0
 	bl sub_801AD34
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	bl sub_80195C0
 	ldr r0, _08019250
 	ldr r2, [r0]
@@ -579,12 +579,12 @@ _08019372:
 	bl sub_801A8D0
 _08019378:
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	b _080194E8
 _08019380:
 	bl sub_801A9E0
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 	bl sub_8019660
 	ldr r0, _080193B0
 	ldr r2, [r0]
@@ -1520,7 +1520,7 @@ _08019AF4:
 	movs r0, 0
 	bl sub_801AD34
 	movs r0, 0x1
-	bl sub_8016C40
+	bl DrawTeamMoneyBox
 _08019B00:
 	pop {r4,r5}
 	pop {r0}

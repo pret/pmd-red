@@ -35,7 +35,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   char *monName;
   struct OpenedFile *faceFile;
   
-  gUnknown_203B210 = MemoryAlloc(0x148,8);
+  gUnknown_203B210 = MemoryAlloc(sizeof(struct unkStruct_203B210),8);
   gUnknown_203B210->unk28 = 0;
   gUnknown_203B210->unk2C = 0;
   gUnknown_203B210->unk30 = 0;
