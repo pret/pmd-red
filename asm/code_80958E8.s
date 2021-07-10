@@ -561,12 +561,12 @@ _08095F34:
 _08095F48:
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08095F6A
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08095F6A
@@ -2244,7 +2244,7 @@ _08096B6A:
 	bge _08096B56
 	b _08096B92
 	.align 2, 0
-_08096B74: .4byte gUnknown_203B460
+_08096B74: .4byte gTeamInventory_203B460
 _08096B78:
 	ldrb r0, [r3]
 	cmp r0, 0x9

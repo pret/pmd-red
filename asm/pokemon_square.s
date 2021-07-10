@@ -132,7 +132,7 @@ _08019F24:
 	orrs r1, r0
 	str r1, [sp]
 	mov r0, sp
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _08019F70
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -147,7 +147,7 @@ _08019F24:
 	.align 2, 0
 _08019F68: .4byte 0xff00ffff
 _08019F6C: .4byte 0xffff00ff
-_08019F70: .4byte gUnknown_203B460
+_08019F70: .4byte gTeamInventory_203B460
 _08019F74:
 	movs r0, 0
 	bl PlayMenuSoundEffect
@@ -406,7 +406,7 @@ _0801A122:
 	adds r2, r5, 0
 	bl sub_8090E14
 	adds r0, r4, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _0801A1B8
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -433,7 +433,7 @@ _0801A1A8: .4byte gUnknown_80DB8E4
 _0801A1AC: .4byte 0xff00ffff
 _0801A1B0: .4byte 0xffff00ff
 _0801A1B4: .4byte 0xffffff00
-_0801A1B8: .4byte gUnknown_203B460
+_0801A1B8: .4byte gTeamInventory_203B460
 _0801A1BC:
 	mov r0, r8
 	ldr r1, _0801A204
@@ -600,7 +600,7 @@ _0801A2F0:
 	orrs r1, r0
 	str r1, [sp]
 	mov r0, sp
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _0801A33C
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -615,7 +615,7 @@ _0801A2F0:
 	.align 2, 0
 _0801A334: .4byte 0xff00ffff
 _0801A338: .4byte 0xffff00ff
-_0801A33C: .4byte gUnknown_203B460
+_0801A33C: .4byte gTeamInventory_203B460
 _0801A340:
 	movs r0, 0
 	bl PlayMenuSoundEffect
@@ -874,7 +874,7 @@ _0801A4EE:
 	adds r2, r5, 0
 	bl sub_8090E14
 	adds r0, r4, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _0801A584
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -901,7 +901,7 @@ _0801A574: .4byte gUnknown_80DB92C
 _0801A578: .4byte 0xff00ffff
 _0801A57C: .4byte 0xffff00ff
 _0801A580: .4byte 0xffffff00
-_0801A584: .4byte gUnknown_203B460
+_0801A584: .4byte gTeamInventory_203B460
 _0801A588:
 	mov r0, r8
 	ldr r1, _0801A5D0
@@ -951,7 +951,7 @@ sub_801A5D8:
 	adds r6, r1, 0
 	adds r7, r2, 0
 	mov r8, r3
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _0801A5F2
 	movs r0, 0
@@ -968,7 +968,7 @@ _0801A5F2:
 _0801A604:
 	ldr r0, [r5]
 	str r4, [r0]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
 	ldr r0, [r5]
 	adds r1, r0, 0
@@ -1032,7 +1032,7 @@ _0801A66E:
 	bl sub_800641C
 	ldr r4, [r5]
 	adds r4, 0x54
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	adds r1, r0, 0
 	adds r0, r4, 0
 	mov r2, r8
@@ -1167,12 +1167,12 @@ _0801A7AC:
 	str r0, [sp]
 	mov r0, sp
 	ldrb r0, [r0, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801A7F4
 	mov r0, sp
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, [r5]
 	movs r2, 0x98
 	lsls r2, 2
@@ -1187,7 +1187,7 @@ _0801A7E2:
 	bl PlayMenuSoundEffect
 	b _0801A802
 	.align 2, 0
-_0801A7EC: .4byte gUnknown_203B460
+_0801A7EC: .4byte gTeamInventory_203B460
 _0801A7F0: .4byte 0x0001869f
 _0801A7F4:
 	movs r0, 0x2
@@ -1316,8 +1316,8 @@ sub_801A8D0:
 	movs r1, 0
 	movs r2, 0
 	bl sub_800641C
-	bl sub_80910B4
-	bl sub_8090A34
+	bl FillInventoryGaps
+	bl GetNumberOfFilledInventorySlots
 	adds r1, r0, 0
 	ldr r0, [r5]
 	adds r2, r0, 0
@@ -1522,7 +1522,7 @@ _0801AA90:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801AA9C: .4byte gUnknown_203B460
+_0801AA9C: .4byte gTeamInventory_203B460
 _0801AAA0: .4byte _0801AAA4
 	.align 2, 0
 _0801AAA4:
@@ -1632,7 +1632,7 @@ _0801AB88: .4byte gUnknown_202DE58
 _0801AB8C: .4byte gUnknown_80DB994
 _0801AB90:
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -1651,7 +1651,7 @@ _0801AB90:
 	adds r1, r4, 0
 	bl sub_8090E14
 	adds r0, r4, 0
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, _0801AC00
 	ldr r1, [r1]
 	movs r2, 0x98
@@ -1682,7 +1682,7 @@ _0801AB90:
 	bl xxx_call_draw_string
 	b _0801ACC4
 	.align 2, 0
-_0801AC00: .4byte gUnknown_203B460
+_0801AC00: .4byte gTeamInventory_203B460
 _0801AC04: .4byte 0x0001869f
 _0801AC08: .4byte gUnknown_80DB9A0
 _0801AC0C: .4byte gUnknown_203B224
@@ -1708,7 +1708,7 @@ _0801AC10:
 	str r5, [sp]
 _0801AC3C:
 	movs r0, 0x8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0801ACC4
 	.align 2, 0
 _0801AC44: .4byte gUnknown_202DE58
@@ -1768,7 +1768,7 @@ _0801AC9C:
 	ldr r3, [r0]
 	str r5, [sp]
 	movs r0, 0x8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0801ACC4:
 	mov r0, r8
 	bl sub_801AED0
@@ -1840,7 +1840,7 @@ sub_801AD34:
 	movs r1, 0
 	adds r3, r4, 0
 	bl xxx_call_draw_string
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	adds r2, r0, 0
 	movs r5, 0x7
 	str r5, [sp]
@@ -1883,12 +1883,12 @@ sub_801ADA0:
 	ldr r6, [r1]
 	lsls r4, r6, 8
 	lsrs r0, r4, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801AE12
 	lsrs r0, r4, 24
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801ADF4
@@ -1910,7 +1910,7 @@ sub_801ADA0:
 	ldr r1, _0801ADF0
 	b _0801AE0E
 	.align 2, 0
-_0801ADEC: .4byte gUnknown_203B460
+_0801ADEC: .4byte gTeamInventory_203B460
 _0801ADF0: .4byte 0x000003e7
 _0801ADF4:
 	lsrs r0, r4, 24
@@ -1965,7 +1965,7 @@ _0801AE2E:
 	lsrs r0, r1, 24
 	cmp r0, r7
 	bne _0801AE72
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801AE6C
@@ -1976,7 +1976,7 @@ _0801AE2E:
 	b _0801AE6E
 	.align 2, 0
 _0801AE64: .4byte gUnknown_203B224
-_0801AE68: .4byte gUnknown_203B460
+_0801AE68: .4byte gTeamInventory_203B460
 _0801AE6C:
 	adds r0, r5, 0x1
 _0801AE6E:
@@ -1985,7 +1985,7 @@ _0801AE6E:
 _0801AE72:
 	adds r6, 0x1
 _0801AE74:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r6, r0
 	blt _0801AE2E
 	adds r0, r5, 0
@@ -2131,12 +2131,12 @@ _0801AF4C:
 _0801AF6C:
 	adds r7, 0x1
 _0801AF6E:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r7, r0
 	blt _0801AF12
 	mov r9, r8
 _0801AF78:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	subs r0, 0x1
 	cmp r9, r0
 	blt _0801AF08
@@ -2148,7 +2148,7 @@ _0801AF78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801AF90: .4byte gUnknown_203B460
+_0801AF90: .4byte gTeamInventory_203B460
 _0801AF94: .4byte gUnknown_203B224
 	thumb_func_end sub_801AEF8
 

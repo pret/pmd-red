@@ -1443,15 +1443,15 @@ _0802DDFC:
 	ldr r0, [r5]
 	ldr r0, [r0, 0x34]
 	ldrb r0, [r0, 0x10]
-	bl sub_8091130
+	bl FindItemInInventory
 	adds r1, r0, 0
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
 	beq _0802DE1A
 	adds r0, r1, 0
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 _0802DE1A:
 	ldr r0, _0802DE2C
 _0802DE1C:
@@ -4234,7 +4234,7 @@ _0802F3E8:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	ldr r0, [r0, 0x18]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0
 	bl sub_808D544
 	cmp r0, 0x1
@@ -4314,7 +4314,7 @@ _0802F494:
 	beq _0802F4BC
 	movs r0, 0xFA
 	lsls r0, 2
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, _0802F4B8
 	b _0802F4DA
 	.align 2, 0
@@ -4383,7 +4383,7 @@ _0802F524:
 	lsrs r0, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802F56C

@@ -4,11 +4,11 @@
 #include "save.h"
 #include "memory.h"
 #include "input.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "friend_rescue.h"
 #include "sub_8095228.h"
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 extern void sub_80338C4(u32);
 extern s32 sub_80144A4(s32 *);
@@ -176,7 +176,7 @@ void sub_8034F88(void)
                 temp2 = sub_8095228(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->unk41C.itemIndex != 0)
                     temp2->unk20 = gUnknown_203B33C->unk41C;
-                gUnknown_203B460->unk50[gUnknown_203B33C->unk41C.itemIndex]--;
+                gTeamInventory_203B460->unk50[gUnknown_203B33C->unk41C.itemIndex]--;
                 sub_80338C4(0x75);
                 break;
             case 7:

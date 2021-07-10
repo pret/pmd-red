@@ -2,12 +2,7 @@
 #include "input.h"
 #include "memory.h"
 #include "text.h"
-
-struct subStruct_203B240
-{
-    char * unk0;
-    char * unk4;
-};
+#include "subStruct_203B240.h"
 
 struct unkStruct_203B240
 {
@@ -39,7 +34,7 @@ extern void sub_801317C(u32 *);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 
 
-extern void sub_8014FF0(u32, u32, char *, u32, u32);
+extern void xxx_format_and_draw(u32, u32, char *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void xxx_call_draw_string(u32, u32, char *, u32, u32);
@@ -116,7 +111,7 @@ void sub_801C6E4(void)
         sub_80073B8(gUnknown_203B240->unk24);
         skillName = GetIQSkillName(gUnknown_203B240->unk4);
         strcpy(gUnknown_202DE58,skillName);
-        sub_8014FF0(16,0,gUnknown_80DBE2C,0,0); // $i0
+        xxx_format_and_draw(16,0,gUnknown_80DBE2C,0,0); // $i0
         xxx_call_draw_string(8,16,GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);
         gUnknown_203B240->unkC = sub_8097DF0(GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk10);
@@ -127,8 +122,8 @@ void sub_801C6E4(void)
         sub_80073B8(gUnknown_203B240->unk24);
         preload = gUnknown_203B240->unk10[gUnknown_203B240->unk8];
         strcpy(gAvailablePokemonNames,preload->unk0);
-        sub_8014FF0(16,0,gUnknown_80DBE30,gUnknown_203B240->unk24,0); // $m0
-        sub_8014FF0(4,16,gUnknown_203B240->unk10[gUnknown_203B240->unk8]->unk4, gUnknown_203B240->unk24,0);
+        xxx_format_and_draw(16,0,gUnknown_80DBE30,gUnknown_203B240->unk24,0); // $m0
+        xxx_format_and_draw(4,16,gUnknown_203B240->unk10[gUnknown_203B240->unk8]->unk4, gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);
         break;
     case 2:

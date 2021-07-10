@@ -29,7 +29,7 @@ sub_801B60C:
 	strb r4, [r0, 0x12]
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x12]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -366,7 +366,7 @@ _0801B8FE:
 _0801B914:
 	movs r0, 0xFA
 	lsls r0, 2
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0x4
 	bl sub_801B748
 	b _0801BB0E
@@ -381,12 +381,12 @@ _0801B92A:
 	bl sub_801B748
 	b _0801BB0E
 _0801B938:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0801B986
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801B968
@@ -408,7 +408,7 @@ _0801B968:
 	movs r0, 0x6
 	b _0801B99C
 	.align 2, 0
-_0801B970: .4byte gUnknown_203B460
+_0801B970: .4byte gTeamInventory_203B460
 _0801B974: .4byte 0x000003e7
 _0801B978:
 	strh r1, [r3]
@@ -420,8 +420,8 @@ _0801B978:
 _0801B986:
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
-	bl sub_80910B4
+	bl AddItemToInventory
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	ldr r1, [r4]
@@ -888,7 +888,7 @@ _0801BCFC:
 	b _0801BD7A
 	.align 2, 0
 _0801BD28: .4byte gUnknown_203B234
-_0801BD2C: .4byte gUnknown_203B460
+_0801BD2C: .4byte gTeamInventory_203B460
 _0801BD30: .4byte gUnknown_202DEA8
 _0801BD34:
 	bl sub_801A8AC
@@ -913,7 +913,7 @@ _0801BD34:
 	b _0801BD7A
 	.align 2, 0
 _0801BD64: .4byte gUnknown_203B234
-_0801BD68: .4byte gUnknown_203B460
+_0801BD68: .4byte gTeamInventory_203B460
 _0801BD6C: .4byte gUnknown_202DEA8
 _0801BD70:
 	bl sub_801A928
@@ -972,11 +972,11 @@ _0801BDD2:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
-	bl sub_80910B4
+	bl AddItemToInventory
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	movs r0, 0
@@ -1049,11 +1049,11 @@ _0801BE78:
 _0801BE80:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r4]
 	adds r0, 0x10
-	bl sub_8091290
-	bl sub_80910B4
+	bl AddItemToInventory
+	bl FillInventoryGaps
 	movs r0, 0xCB
 	bl PlaySound
 	bl sub_801A928
@@ -1968,7 +1968,7 @@ _0801C5AE:
 	movs r0, 0xC
 	adds r1, r7, 0
 	ldr r2, _0801C5E8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r5, 0x1
 	ldr r0, [r6]
 	movs r1, 0x3E

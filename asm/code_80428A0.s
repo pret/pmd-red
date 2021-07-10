@@ -2824,7 +2824,7 @@ _080441A4:
 	.align 2, 0
 _080441AC: .4byte gUnknown_203B418
 _080441B0: .4byte 0x00000644
-_080441B4: .4byte gUnknown_203B460
+_080441B4: .4byte gTeamInventory_203B460
 _080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 
@@ -4249,7 +4249,7 @@ sub_8044CC8:
 	adds r0, r1
 	b _08044D34
 	.align 2, 0
-_08044CE8: .4byte gUnknown_203B460
+_08044CE8: .4byte gTeamInventory_203B460
 _08044CEC:
 	adds r0, r1, 0
 	cmp r0, 0x80
@@ -4319,10 +4319,10 @@ sub_8044D40:
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x1]
 	strb r0, [r1]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	b _08044D88
 	.align 2, 0
-_08044D70: .4byte gUnknown_203B460
+_08044D70: .4byte gTeamInventory_203B460
 _08044D74:
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -4419,7 +4419,7 @@ _08044E10:
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x1]
 	strb r0, [r1]
-	bl sub_80910B4
+	bl FillInventoryGaps
 _08044E1C:
 	pop {r4}
 	pop {r0}
@@ -4440,7 +4440,7 @@ sub_8044E24:
 	ldr r0, [r4, 0x70]
 	mov r8, r0
 	ldrb r0, [r5, 0x2]
-	bl sub_80915A0
+	bl IsHMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08044EBA
@@ -6369,7 +6369,7 @@ sub_8045C28:
 	bl sub_8090A8C
 	movs r7, 0
 	adds r0, r4, 0
-	bl sub_8091544
+	bl IsNotSpecialItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045C72
@@ -6519,7 +6519,7 @@ _08045D58:
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08045D6E
@@ -6640,8 +6640,8 @@ _08045E40:
 	lsls r0, 1
 	bl PlaySoundEffect
 	adds r0, r5, 0
-	bl sub_80915D4
-	bl sub_80913A0
+	bl GetMoneyValue
+	bl AddToTeamMoney
 	ldr r0, _08045E74
 	adds r1, r5, 0
 	bl sub_8045BF8
@@ -6679,7 +6679,7 @@ _08045E94:
 	.align 2, 0
 _08045EA8: .4byte gUnknown_203B418
 _08045EAC: .4byte 0x0000065b
-_08045EB0: .4byte gUnknown_203B460
+_08045EB0: .4byte gTeamInventory_203B460
 _08045EB4:
 	ldr r0, [sp, 0xAC]
 	adds r0, 0x60
@@ -6924,7 +6924,7 @@ _0804608C: .4byte gUnknown_202DE58
 _08046090: .4byte gUnknown_80F8FC4
 _08046094:
 	adds r0, r5, 0
-	bl sub_8091290
+	bl AddItemToInventory
 	lsls r0, 24
 	cmp r0, 0
 	beq _080460C0
@@ -7007,7 +7007,7 @@ _08046110:
 	cmp r0, 0
 	beq _08046186
 	ldrb r0, [r6, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046186
@@ -7019,7 +7019,7 @@ _08046110:
 	cmp r7, 0
 	beq _08046186
 	adds r0, r6, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _08046168
 	ldr r2, [r1]
 	ldr r1, _0804616C
@@ -7029,7 +7029,7 @@ _08046168: .4byte gUnknown_203B418
 _0804616C: .4byte 0x0000068c
 _08046170:
 	adds r0, r6, 0
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, _080461BC
 	ldr r2, [r1]
 	movs r1, 0xD2
@@ -7107,7 +7107,7 @@ _080461F2:
 	cmp r0, 0
 	beq _0804624E
 	ldrb r0, [r4, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804624E
@@ -7119,7 +7119,7 @@ _080461F2:
 	cmp r7, 0
 	beq _0804624E
 	adds r0, r4, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _08046230
 	ldr r2, [r1]
 	ldr r1, _08046234
@@ -7130,7 +7130,7 @@ _08046230: .4byte gUnknown_203B418
 _08046234: .4byte 0x0000068c
 _08046238:
 	adds r0, r4, 0
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, _0804628C
 	ldr r2, [r1]
 	movs r3, 0xD2
@@ -8672,7 +8672,7 @@ _08046DC8:
 _08046E1E:
 	cmp r7, 0
 	bne _08046D96
-	bl sub_80910B4
+	bl FillInventoryGaps
 	cmp r6, 0
 	beq _08046ED4
 	bl sub_8083600
@@ -8749,7 +8749,7 @@ _08046ED4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046EDC: .4byte gUnknown_203B460
+_08046EDC: .4byte gTeamInventory_203B460
 _08046EE0: .4byte sub_80861A8
 _08046EE4: .4byte gUnknown_203B418
 _08046EE8: .4byte 0x0001356c
@@ -8775,7 +8775,7 @@ sub_8046F00:
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrb r0, [r4, 0x2]
-	bl sub_80915A0
+	bl IsHMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046F6E
@@ -8856,7 +8856,7 @@ _08046FAE:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08046F90
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 	movs r6, 0
 _08046FBC:
@@ -8895,7 +8895,7 @@ _08046FF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047000: .4byte gUnknown_203B460
+_08047000: .4byte gTeamInventory_203B460
 _08047004: .4byte gUnknown_203B418
 _08047008: .4byte 0x0001357c
 	thumb_func_end sub_8046F84
@@ -8922,7 +8922,7 @@ _0804702C:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08047012
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 _08047038:
 	ldr r0, _0804707C
@@ -8957,7 +8957,7 @@ _0804706C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047078: .4byte gUnknown_203B460
+_08047078: .4byte gTeamInventory_203B460
 _0804707C: .4byte gUnknown_203B418
 _08047080: .4byte 0x0001357c
 	thumb_func_end sub_804700C
@@ -8985,7 +8985,7 @@ _080470A2:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _08047090
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r5, 0
 _080470B0:
 	ldr r0, _080470EC
@@ -9016,7 +9016,7 @@ _080470E2:
 	movs r0, 0x1
 	b _080470FC
 	.align 2, 0
-_080470E8: .4byte gUnknown_203B460
+_080470E8: .4byte gTeamInventory_203B460
 _080470EC: .4byte gUnknown_203B418
 _080470F0: .4byte 0x0001357c
 _080470F4:
@@ -9049,8 +9049,8 @@ _0804710A:
 	cmp r0, 0x69
 	bne _08047132
 	adds r0, r4, 0
-	bl sub_80915D4
-	bl sub_80913A0
+	bl GetMoneyValue
+	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
 	strb r5, [r4]
@@ -9067,12 +9067,12 @@ _08047142:
 	adds r6, 0x1
 	cmp r6, 0x13
 	ble _0804710A
-	bl sub_80910B4
+	bl FillInventoryGaps
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047154: .4byte gUnknown_203B460
+_08047154: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8047104
 
 	thumb_func_start sub_8047158
@@ -9106,7 +9106,7 @@ _08047180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804718C: .4byte gUnknown_203B460
+_0804718C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8047158
 
 	thumb_func_start sub_8047190

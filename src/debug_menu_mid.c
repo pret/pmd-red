@@ -1,7 +1,7 @@
 #include "global.h"
 #include "input.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "memory.h"
 #include "menu.h"
 #include "text.h"
@@ -49,8 +49,8 @@ struct unkStruct_203B3F4
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
-extern void sub_801B3C0(struct ItemStruct_203B460 *);
+extern struct TeamInventory *gTeamInventory_203B460;
+extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_8013AA0(u32 *);
 
 extern struct UnkTextStruct2 gUnknown_80E7E34;
@@ -73,7 +73,7 @@ extern void sub_8012EA4(u32 *, u32);
 extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
 extern void xxx_call_draw_string(s32, u32, const char *, u32, u32);
-extern bool8 sub_8091524(u8);
+extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u32 sub_801CA08(u32);
 extern u8 sub_801CB24();
 extern void sub_801CBB8();
@@ -181,7 +181,7 @@ void sub_803A51C(void)
 
 void sub_803A5A0(void)
 {
-  struct ItemStruct_203B460 auStack8;
+  struct ItemSlot auStack8;
   
   switch(gUnknown_203B3F0->state) {
     case 0:
@@ -199,7 +199,7 @@ void sub_803A5A0(void)
         gUnknown_203B3F0->unkAC = 3;
         gUnknown_203B3F0->unkA4 = 0;
         gUnknown_203B3F0->unkA8 = 0x3e7;
-        gUnknown_203B3F0->unkA0 = gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex];
+        gUnknown_203B3F0->unkA0 = gTeamInventory_203B460->unk50[gUnknown_203B3F0->itemIndex];
         gUnknown_203B3F0->unkB0 = 1;
         gUnknown_203B3F0->unkB4 = &gUnknown_203B3F0->unkD8[1];
         gUnknown_203B3F0->unkB8 = 0x2C;
@@ -235,7 +235,7 @@ void sub_803A6F0(void)
   gUnknown_203B3F0->menus[0].text = &gDebug_NumberText;
   gUnknown_203B3F0->menus[0].menuAction = 2;
   gUnknown_203B3F0->unk8 = 2;
-  if (!sub_8091524(gUnknown_203B3F0->itemIndex)) {
+  if (!IsNotMoneyOrUsedTMItem(gUnknown_203B3F0->itemIndex)) {
     gUnknown_203B3F0->menus[0].menuAction = -1;
     gUnknown_203B3F0->unk8 = 3;
   }
@@ -300,7 +300,7 @@ void sub_803A810(void)
   switch(sub_8013BBC(&gUnknown_203B3F0->unk9C))
   {
       case 3:
-        gUnknown_203B460->unk50[gUnknown_203B3F0->itemIndex] = gUnknown_203B3F0->unk9C;
+        gTeamInventory_203B460->unk50[gUnknown_203B3F0->itemIndex] = gUnknown_203B3F0->unk9C;
         // Fallthrough needed to match
       case 2:
         sub_803A504(1);

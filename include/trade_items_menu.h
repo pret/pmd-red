@@ -44,7 +44,7 @@ struct TradeItemsMenu
 
     /* 0x254 */ struct TradeSubStruct sentItem;
 
-    /* 0x25C */ struct ItemStruct_203B460 itemToSend;
+    /* 0x25C */ struct ItemSlot itemToSend;
 
     u8 fill25F[0x3A0 - 0x260];
 };

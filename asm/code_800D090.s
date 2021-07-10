@@ -7718,7 +7718,7 @@ _08010BD0:
 	movs r0, 0xC
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0x64
@@ -7816,7 +7816,7 @@ _08010C86:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x1
@@ -7826,13 +7826,13 @@ _08010C86:
 	movs r0, 0xA
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r2, _08010D78
 	str r4, [sp]
 	movs r0, 0xA
 	movs r1, 0xC
 	movs r3, 0x1
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0x1
 	bl sub_80073E0
 	add r0, sp, 0x4
@@ -8739,7 +8739,7 @@ _08011406:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, _08011480
@@ -8936,7 +8936,7 @@ _0801152A:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r6, 0
 	cmp r6, r9
 	bge _08011678
@@ -8965,7 +8965,7 @@ _080115DC:
 	adds r1, r4, 0
 	ldr r2, _0801163C
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08011672
 	.align 2, 0
 _08011610: .4byte gUnknown_203B0E4
@@ -9003,7 +9003,7 @@ _08011640:
 	adds r1, r4, 0
 	ldr r2, _08011698
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08011672:
 	adds r6, 0x1
 	cmp r6, r9

@@ -1509,7 +1509,7 @@ _08001266:
 	adds r4, 0x1
 	cmp r4, 0x13
 	ble _0800124E
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r4, 0
 	ldr r5, _080012BC
 	movs r3, 0x1
@@ -1548,7 +1548,7 @@ _08001298:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080012B8: .4byte gUnknown_203B460
+_080012B8: .4byte gTeamInventory_203B460
 _080012BC: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8001248
 
@@ -1568,7 +1568,7 @@ _080012C8:
 	adds r3, 0x1
 	cmp r3, 0x13
 	ble _080012C8
-	bl sub_80910B4
+	bl FillInventoryGaps
 	movs r3, 0
 	ldr r5, _08001328
 	movs r4, 0x1
@@ -1607,7 +1607,7 @@ _08001306:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001324: .4byte gUnknown_203B460
+_08001324: .4byte gTeamInventory_203B460
 _08001328: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_80012C0
 

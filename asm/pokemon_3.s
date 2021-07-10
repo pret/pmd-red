@@ -1094,7 +1094,7 @@ _0808F5C8:
 	b _0808F5E6
 _0808F5D0:
 	ldrb r0, [r7, 0x4]
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F5E6
 	ldrh r0, [r4, 0x4]
@@ -1184,7 +1184,7 @@ _0808F666:
 _0808F670:
 	movs r0, 0x31
 _0808F672:
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F6CA
 	ldrh r0, [r4, 0x4]
@@ -1225,7 +1225,7 @@ _0808F6A4:
 	b _0808F6DE
 _0808F6BC:
 	movs r0, 0x2F
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0808F6CA
 	movs r0, 0x1
@@ -1484,7 +1484,7 @@ _0808F8A0:
 	str r5, [sp]
 	movs r1, 0
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r4, _0808F99C
 	mov r1, r10
 	ldr r0, [r1, 0x2C]
@@ -1497,7 +1497,7 @@ _0808F8A0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xA
 	add r9, r2
 	ldr r0, _0808F9A4
@@ -1506,7 +1506,7 @@ _0808F8A0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r3, 0xA
 	add r9, r3
 	mov r0, r10
@@ -1529,7 +1529,7 @@ _0808F8A0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808F914:
 	movs r3, 0xC
 	add r9, r3
@@ -1544,7 +1544,7 @@ _0808F914:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xA
 	add r9, r2
 	ldr r0, _0808F9B0
@@ -1553,7 +1553,7 @@ _0808F914:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _0808F9B4
 	ldr r2, [r0]
 	mov r0, r10
@@ -1574,7 +1574,7 @@ _0808F964:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r1, r10
 	adds r1, 0x3B
 	ldrb r3, [r1]
@@ -1592,7 +1592,7 @@ _0808F964:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0808F9D8
 	.align 2, 0
 _0808F998: .4byte gUnknown_8107754
@@ -1616,7 +1616,7 @@ _0808F9C0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808F9D8:
 	movs r3, 0xA
 	add r9, r3
@@ -1627,7 +1627,7 @@ _0808F9D8:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _0808FA4C
 	ldr r2, [r0]
 	ldr r4, _0808FA50
@@ -1649,7 +1649,7 @@ _0808FA0E:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r1, r10
 	adds r1, 0x3C
 	ldrb r3, [r1]
@@ -1667,7 +1667,7 @@ _0808FA0E:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0808FA74
 	.align 2, 0
 _0808FA44: .4byte gUnknown_810DE38
@@ -1687,7 +1687,7 @@ _0808FA5C:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808FA74:
 	movs r0, 0xA
 	add r9, r0
@@ -1719,7 +1719,7 @@ _0808FAA6:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r1, 0xC
 	add r9, r1
 	ldr r1, _0808FB30
@@ -1754,7 +1754,7 @@ _0808FAE0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xA
 	add r9, r2
 	mov r0, r10
@@ -1789,13 +1789,13 @@ _0808FB44:
 	str r4, [sp]
 	movs r1, 0
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r2, _0808FBEC
 	str r4, [sp]
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r3, r10
 	ldrb r0, [r3, 0x16]
 	bl GetFormattedTypeString
@@ -1804,7 +1804,7 @@ _0808FB44:
 	movs r0, 0x38
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r1, r10
 	ldrb r0, [r1, 0x17]
 	cmp r0, 0
@@ -1815,7 +1815,7 @@ _0808FB44:
 	movs r0, 0x60
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808FB94:
 	movs r2, 0xC
 	add r9, r2
@@ -1824,7 +1824,7 @@ _0808FB94:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r3, 0xC
 	add r9, r3
 	mov r1, r10
@@ -1867,7 +1867,7 @@ _0808FBF4:
 	movs r1, 0
 	str r1, [sp]
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r0, r10
 	adds r0, 0x56
 	movs r1, 0
@@ -1915,7 +1915,7 @@ _0808FC38:
 	movs r0, 0xC
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r0, r8
 	cmp r0, 0
 	ble _0808FC78
@@ -1960,7 +1960,7 @@ _0808FCB0:
 	movs r1, 0
 	str r1, [sp]
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	add r4, sp, 0x14
 	mov r0, r10
 	movs r2, 0x3E
@@ -2044,7 +2044,7 @@ _0808FD64:
 	movs r0, 0xC
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808FD74:
 	movs r2, 0x1
 	add r8, r2
@@ -2071,7 +2071,7 @@ _0808FD98:
 	movs r0, 0xC
 	movs r1, 0x20
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0808FED6
 	.align 2, 0
 _0808FDA4: .4byte gUnknown_810778C
@@ -2085,7 +2085,7 @@ _0808FDB0:
 	str r5, [sp]
 	movs r1, 0
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r6, _0808FEF0
 	mov r2, r10
 	movs r3, 0
@@ -2103,7 +2103,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0xA
 	add r9, r0
 	mov r1, r10
@@ -2124,7 +2124,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r3, 0xA
 	add r9, r3
 	ldr r0, _0808FF04
@@ -2133,7 +2133,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0xD
 	add r9, r0
 	ldr r0, _0808FF08
@@ -2142,7 +2142,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r1, 0xA
 	add r9, r1
 	mov r1, r10
@@ -2155,7 +2155,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xD
 	add r9, r2
 	mov r3, r10
@@ -2172,7 +2172,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xD
 	add r9, r2
 	ldr r4, _0808FF14
@@ -2192,7 +2192,7 @@ _0808FDB0:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r2, 0xD
 	add r9, r2
 	ldr r1, _0808FF1C
@@ -2207,7 +2207,7 @@ _0808FECC:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0808FED6:
 	ldr r0, [sp, 0x50]
 	bl sub_80073E0

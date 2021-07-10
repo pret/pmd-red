@@ -142,7 +142,7 @@ _08027552:
 	adds r2, r3
 	movs r0, 0xA
 	str r0, [r2]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08027588
 	ldr r0, [r4]
@@ -165,7 +165,7 @@ _08027588:
 	adds r2, r3
 	movs r0, 0xB
 	str r0, [r2]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _080275AE
 	ldr r0, [r4]
@@ -320,7 +320,7 @@ sub_80276A8:
 	adds r1, r2, r3
 	movs r0, 0xA
 	str r0, [r1]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080276E4
 	ldr r0, [r5]
@@ -697,7 +697,7 @@ _080279D8:
 	adds r0, 0x14
 	bl sub_8091274
 _080279F0:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x14]

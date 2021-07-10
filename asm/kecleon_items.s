@@ -489,7 +489,7 @@ _080192B4:
 	.align 2, 0
 _080192BC: .4byte gUnknown_203B210
 _080192C0:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080192EC
 	ldr r0, _080192D8
@@ -636,7 +636,7 @@ _080193F4:
 	bl sub_801B3C0
 	b _080194E8
 _080193FE:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _08019418
 	ldr r0, _08019424
@@ -655,7 +655,7 @@ _08019418:
 	movs r0, 0x1
 	b _08019436
 	.align 2, 0
-_08019424: .4byte gUnknown_203B460
+_08019424: .4byte gTeamInventory_203B460
 _08019428: .4byte 0x0001869e
 _0801942C: .4byte gUnknown_203B210
 _08019430:
@@ -1099,7 +1099,7 @@ _08019784:
 	bl UpdateKecleonStoreState
 	b _0801984A
 _08019794:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080197A4
 	movs r0, 0xA
@@ -1110,7 +1110,7 @@ _080197A4:
 	bl UpdateKecleonStoreState
 	b _0801984A
 _080197AC:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _080197EC
 	ldr r0, _080197D8
@@ -1132,10 +1132,10 @@ _080197AC:
 	b _0801984A
 	.align 2, 0
 _080197D8: .4byte gUnknown_203B210
-_080197DC: .4byte gUnknown_203B460
+_080197DC: .4byte gTeamInventory_203B460
 _080197E0: .4byte 0x0001869e
 _080197E4:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080197F4
 _080197EC:
@@ -1171,7 +1171,7 @@ _08019822:
 	bl UpdateKecleonStoreState
 	b _0801984A
 	.align 2, 0
-_0801982C: .4byte gUnknown_203B460
+_0801982C: .4byte gTeamInventory_203B460
 _08019830: .4byte 0x0001869f
 _08019834:
 	movs r0, 0x1F
@@ -1215,7 +1215,7 @@ _08019874:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
 	negs r0, r0
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
@@ -1285,10 +1285,10 @@ _0801990C:
 	ldr r4, _08019930
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	movs r0, 0xA6
 	lsls r0, 1
 	bl PlaySound
@@ -1340,21 +1340,21 @@ _0801996C:
 	cmp r0, 0
 	beq _0801998E
 	ldrb r0, [r2, 0x2]
-	bl sub_80914E4
+	bl CanSellItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801998E
 	adds r0, r4, 0
-	bl sub_8091234
+	bl ClearItemSlotAt
 _0801998E:
 	adds r4, 0x1
 	cmp r4, 0x13
 	ble _0801996C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _080199B8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
-	bl sub_80913A0
+	bl AddToTeamMoney
 	movs r0, 0xA6
 	lsls r0, 1
 	bl PlaySound
@@ -1362,7 +1362,7 @@ _0801998E:
 	bl UpdateKecleonStoreState
 	b _080199C2
 	.align 2, 0
-_080199B4: .4byte gUnknown_203B460
+_080199B4: .4byte gTeamInventory_203B460
 _080199B8: .4byte gUnknown_203B210
 _080199BC:
 	movs r0, 0x1
@@ -1445,7 +1445,7 @@ _08019A3C:
 	strb r0, [r1, 0x1D]
 	ldr r0, [r4]
 	adds r0, 0x1C
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
 	movs r0, 0x14
@@ -1492,7 +1492,7 @@ _08019AA4:
 	strb r0, [r1, 0x1D]
 	ldr r0, [r4]
 	adds r0, 0x1C
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
 	movs r0, 0x15

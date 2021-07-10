@@ -469,7 +469,7 @@ sub_8012EBC:
 	ldr r3, [r5, 0x10]
 	movs r1, 0
 	str r1, [sp]
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08012F24:
 	ldr r7, [r5, 0x8]
 	ldr r4, [r5, 0x4]
@@ -521,7 +521,7 @@ _08012F64:
 	str r0, [sp]
 	movs r0, 0x8
 	mov r2, r8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r4, 0x8
 	movs r1, 0x1
 	add r9, r1
@@ -4717,8 +4717,8 @@ _08014FE8:
 	bx r1
 	thumb_func_end sub_8014FA8
 
-	thumb_func_start sub_8014FF0
-sub_8014FF0:
+	thumb_func_start xxx_format_and_draw
+xxx_format_and_draw:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4750,7 +4750,7 @@ sub_8014FF0:
 	bx r0
 	.align 2, 0
 _08015030: .4byte 0x000001f7
-	thumb_func_end sub_8014FF0
+	thumb_func_end xxx_format_and_draw
 
 	thumb_func_start sub_8015034
 sub_8015034:

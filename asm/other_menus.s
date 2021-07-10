@@ -1299,7 +1299,7 @@ _08037E5A:
 	ldrb r0, [r4]
 	b _08037E76
 	.align 2, 0
-_08037E6C: .4byte gUnknown_203B460
+_08037E6C: .4byte gTeamInventory_203B460
 _08037E70:
 	ldr r0, _08037E8C
 	ldr r1, [r0]
@@ -1316,7 +1316,7 @@ _08037E76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08037E8C: .4byte gUnknown_203B460
+_08037E8C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8037E38
 
 	thumb_func_start sub_8037E90
@@ -1543,7 +1543,7 @@ _08038036:
 	ldrb r0, [r4]
 	b _08038052
 	.align 2, 0
-_08038048: .4byte gUnknown_203B460
+_08038048: .4byte gTeamInventory_203B460
 _0803804C:
 	ldr r0, _08038070
 	ldr r1, [r0]
@@ -1566,7 +1566,7 @@ _08038068:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08038070: .4byte gUnknown_203B460
+_08038070: .4byte gTeamInventory_203B460
 _08038074: .4byte 0x000003e7
 	thumb_func_end sub_8038014
 

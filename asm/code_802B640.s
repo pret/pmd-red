@@ -409,7 +409,7 @@ _0802B930:
 	str r0, [sp]
 	movs r0, 0x15
 	adds r1, r5, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r6, 0x1
 	ldr r0, [r7]
 	adds r0, 0x52
@@ -668,7 +668,7 @@ sub_802BB28:
 	str r4, [sp]
 	movs r0, 0xA
 	movs r1, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r3, [r5]
 	ldr r1, [r3, 0x8]
 	lsls r1, 2
@@ -680,7 +680,7 @@ sub_802BB28:
 	str r4, [sp]
 	movs r0, 0x6
 	movs r1, 0x14
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, [r5]
 	ldr r0, [r0, 0x24]
 	bl sub_80073E0

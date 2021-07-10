@@ -30,8 +30,8 @@ extern void sub_806F370(struct unkDungeon_8041D5C *r0, struct unkDungeon_8041D5C
 
 
 extern u32 gUnknown_80FD018;
-extern s16 sub_8057600(u32, u32);
-extern u32 sub_8092B00(u32);
+extern s16 sub_8057600(void*, u32);
+extern u32 sub_8092B00(void*);
 
 bool32 sub_8057824(struct unkDungeon_8041D5C *param_1, struct unkDungeon_8041D5C *param_2)
 {
@@ -100,7 +100,7 @@ bool32 sub_8057954(struct unkDungeon_8041D5C *param_1, struct unkDungeon_8041D5C
   return TRUE;
 }
 
-bool32 sub_8057974(struct unkDungeon_8041D5C *param_1, struct unkDungeon_8041D5C *param_2, u32 param_3, u32 param_4)
+bool32 sub_8057974(struct unkDungeon_8041D5C *param_1, struct unkDungeon_8041D5C *param_2, void* param_3, u32 param_4)
 {
   s32 newHP;
   u8 local_24;

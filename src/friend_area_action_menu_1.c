@@ -3,11 +3,11 @@
 #include "input.h"
 #include "menu.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "friend_area_action_menu.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 u32 sub_801B410();
 void sub_801B450();
@@ -18,13 +18,13 @@ extern void sub_8027184(u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void PlaySound(u32);
-extern void sub_80911F8(u32);
-extern void sub_80910B4();
+extern void ShiftItemsDownFrom(u32);
+extern void FillInventoryGaps();
 extern void nullsub_104();
 extern void sub_8091274(u8 *);
 extern void sub_801A928();
 extern void sub_8099690(u32);
-extern void sub_808D800(s16, struct ItemStruct_203B460_ALT *);
+extern void sub_808D800(s16, struct ItemSlot_ALT *);
 extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(u32);
 
@@ -57,14 +57,14 @@ void sub_8027B28(void)
   {
     case 3:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
         sub_8027184(0xc);
         break;
     case 4:
         gUnknown_203B2BC->unkC = sub_801A8AC();
-        gUnknown_203B2BC->unk10.itemIndex = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].itemIndex;
-        gUnknown_203B2BC->unk10.numItems = gUnknown_203B460->fill0[gUnknown_203B2BC->unkC].numItems;
+        gUnknown_203B2BC->unk10.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
+        gUnknown_203B2BC->unk10.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
         sub_8099690(0);
         sub_8027184(0xd);
         break;
@@ -91,8 +91,8 @@ void sub_8027BD8(void)
   {
     case 10:
         PlaySound(0x14d);
-        sub_80911F8(gUnknown_203B2BC->unkC);
-        sub_80910B4();
+        ShiftItemsDownFrom(gUnknown_203B2BC->unkC);
+        FillInventoryGaps();
         if (gUnknown_203B2BC->unk14 != 0) {
             sub_8091274(&gUnknown_203B2BC->unk14);
         }

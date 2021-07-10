@@ -1,7 +1,7 @@
 #include "global.h"
 #include "text.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "friend_rescue.h"
 #include "pokemon.h"
 #include "memory.h"

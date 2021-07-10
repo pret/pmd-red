@@ -8250,7 +8250,7 @@ _0805B7C2:
 	bl sub_80522F4
 	b _0805B7E8
 	.align 2, 0
-_0805B7D4: .4byte gUnknown_203B460
+_0805B7D4: .4byte gTeamInventory_203B460
 _0805B7D8: .4byte gUnknown_80FDC9C
 _0805B7DC:
 	ldr r0, _0805B7F8
@@ -8840,7 +8840,7 @@ _0805BC30:
 	bl sub_80522F4
 	b _0805BC60
 	.align 2, 0
-_0805BC44: .4byte gUnknown_203B460
+_0805BC44: .4byte gTeamInventory_203B460
 _0805BC48: .4byte gUnknown_203B418
 _0805BC4C: .4byte 0x0001357c
 _0805BC50: .4byte gUnknown_80FC8F0
@@ -12726,7 +12726,7 @@ _0805DEFC: .4byte gUnknown_203B46C
 _0805DF00: .4byte gRealInputs
 _0805DF04: .4byte gUnknown_202F22D
 _0805DF08: .4byte 0x01000200
-_0805DF0C: .4byte gUnknown_203B460
+_0805DF0C: .4byte gTeamInventory_203B460
 _0805DF10: .4byte gUnknown_203B418
 _0805DF14: .4byte 0x0001820a
 _0805DF18: .4byte gUnknown_202EE00
@@ -16153,7 +16153,7 @@ _0805FA62:
 	movs r0, 0x73
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _0805FBC8
 	ldr r0, [r0]
 	movs r1, 0x98
@@ -16167,7 +16167,7 @@ _0805FA62:
 	movs r0, 0x73
 	movs r1, 0xC
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r5, _0805FBD0
 	movs r0, 0
 	bl sub_807E580
@@ -16182,7 +16182,7 @@ _0805FA62:
 	movs r0, 0x73
 	movs r1, 0x18
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, [sp, 0x4]
 	str r0, [r4]
 	ldr r0, [sp, 0x8]
@@ -16195,7 +16195,7 @@ _0805FA62:
 	movs r0, 0x73
 	movs r1, 0x24
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r7, 0
 	mov r8, r4
 _0805FB3A:
@@ -16230,7 +16230,7 @@ _0805FB3A:
 	movs r0, 0x4
 	adds r1, r7, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r7, 0xC
 	cmp r7, 0x2F
 	bgt _0805FB8C
@@ -16259,7 +16259,7 @@ _0805FBB8: .4byte gFieldMenuGroundPtr
 _0805FBBC: .4byte gPlayTimeRef
 _0805FBC0: .4byte gUnknown_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
-_0805FBC8: .4byte gUnknown_203B460
+_0805FBC8: .4byte gTeamInventory_203B460
 _0805FBCC: .4byte gUnknown_80F9190
 _0805FBD0: .4byte gAvailablePokemonNames
 _0805FBD4: .4byte gUnknown_80F91A8
@@ -16747,7 +16747,7 @@ _0805FF66:
 	b _0805FFE8
 	.align 2, 0
 _0805FFA8: .4byte gUnknown_202F240
-_0805FFAC: .4byte gUnknown_203B460
+_0805FFAC: .4byte gTeamInventory_203B460
 _0805FFB0: .4byte gUnknown_203B418
 _0805FFB4: .4byte 0x0001357c
 _0805FFB8: .4byte gUnknown_202F258
@@ -16904,7 +16904,7 @@ _080600D8:
 	lsls r0, 1
 	bl PlaySoundEffect
 	bl sub_8047158
-	bl sub_80912C8
+	bl ConvertMoneyItemToMoney
 	movs r0, 0
 	ldr r2, _08060140
 	str r0, [r2]
@@ -17196,7 +17196,7 @@ _0806033C:
 	.align 2, 0
 _0806034C: .4byte gUnknown_202EE10
 _08060350: .4byte gUnknown_202F248
-_08060354: .4byte gUnknown_203B460
+_08060354: .4byte gTeamInventory_203B460
 _08060358: .4byte gUnknown_202F240
 _0806035C: .4byte gRealInputs
 _08060360: .4byte gUnknown_203B418
@@ -17454,7 +17454,7 @@ _08060564:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r4, 0
 	adds r6, r5, 0
 	movs r7, 0
@@ -17486,14 +17486,14 @@ _08060592:
 	movs r0, 0x8
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r4, 0x1
 	cmp r4, 0x9
 	ble _0806057E
 	b _08060794
 	.align 2, 0
 _080605C0: .4byte gTeamToolboxAPtr
-_080605C4: .4byte gUnknown_203B460
+_080605C4: .4byte gTeamInventory_203B460
 _080605C8: .4byte gUnknown_8106B60
 _080605CC:
 	ldr r0, _08060630
@@ -17503,7 +17503,7 @@ _080605CC:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r4, 0
 	adds r6, r5, 0
 	movs r7, 0
@@ -17538,14 +17538,14 @@ _080605FC:
 	movs r0, 0x8
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r4, 0x1
 	cmp r4, 0x9
 	ble _080605E6
 	b _08060794
 	.align 2, 0
 _08060630: .4byte gTeamToolboxBPtr
-_08060634: .4byte gUnknown_203B460
+_08060634: .4byte gTeamInventory_203B460
 _08060638: .4byte gUnknown_8106B60
 _0806063C:
 	mov r1, r9
@@ -17564,7 +17564,7 @@ _0806063C:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldrb r1, [r7]
 	movs r0, 0x1
 	ands r0, r1
@@ -17587,7 +17587,7 @@ _0806063C:
 	movs r0, 0x8
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08060698:
 	ldr r1, [sp, 0x70]
 	cmp r1, 0
@@ -17615,7 +17615,7 @@ _080606B0:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldrb r1, [r7]
 	movs r0, 0x1
 	ands r0, r1
@@ -17638,7 +17638,7 @@ _080606B0:
 	movs r0, 0x8
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08060794
 	.align 2, 0
 _0806070C: .4byte gAvailablePokemonNames
@@ -17676,7 +17676,7 @@ _08060718:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldrb r1, [r7]
 	movs r0, 0x1
 	ands r0, r1
@@ -17700,7 +17700,7 @@ _08060718:
 	movs r0, 0x8
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08060794:
 	ldr r2, _080607F4
 	movs r3, 0x18
@@ -17726,7 +17726,7 @@ _080607A6:
 	movs r0, 0x4
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0x1
 	bl sub_80073E0
 _080607D0:
@@ -17952,7 +17952,7 @@ _08060964: .4byte gUnknown_202F238
 _08060968: .4byte gUnknown_202EE6C
 _0806096C: .4byte gUnknown_203B418
 _08060970: .4byte 0x0000065b
-_08060974: .4byte gUnknown_203B460
+_08060974: .4byte gTeamInventory_203B460
 _08060978:
 	mov r0, r10
 	adds r0, 0x60
@@ -18122,7 +18122,7 @@ _08060ABE:
 	bl sub_8044FF0
 	b _08060B3C
 	.align 2, 0
-_08060AD4: .4byte gUnknown_203B460
+_08060AD4: .4byte gTeamInventory_203B460
 _08060AD8: .4byte gUnknown_202F238
 _08060ADC: .4byte gUnknown_203B418
 _08060AE0: .4byte 0x0001357c
@@ -18150,7 +18150,7 @@ _08060AE8:
 	.align 2, 0
 _08060B10: .4byte gUnknown_203B418
 _08060B14: .4byte 0x0000065b
-_08060B18: .4byte gUnknown_203B460
+_08060B18: .4byte gTeamInventory_203B460
 _08060B1C:
 	ldrb r1, [r7, 0x2]
 	movs r0, 0x37
@@ -18296,7 +18296,7 @@ _08060C32:
 	.align 2, 0
 _08060C50: .4byte gUnknown_203B418
 _08060C54: .4byte 0x0001357c
-_08060C58: .4byte gUnknown_203B460
+_08060C58: .4byte gTeamInventory_203B460
 _08060C5C: .4byte 0x0000065b
 _08060C60:
 	ldrb r1, [r7, 0x2]
@@ -18526,7 +18526,7 @@ _08060E1A:
 	.align 2, 0
 _08060E28: .4byte gUnknown_203B418
 _08060E2C: .4byte 0x0000065b
-_08060E30: .4byte gUnknown_203B460
+_08060E30: .4byte gTeamInventory_203B460
 _08060E34: .4byte 0x0001357c
 	thumb_func_end sub_8060D64
 
@@ -19065,7 +19065,7 @@ _0806125C:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08061286:
 	movs r6, 0
 	cmp r6, r7
@@ -19253,7 +19253,7 @@ _080613EE:
 	movs r0, 0x9
 	ldr r2, _08061428
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08061438
 	.align 2, 0
 _0806141C: .4byte gUnknown_8106BD0
@@ -19265,7 +19265,7 @@ _0806142C:
 	movs r0, 0x9
 	ldr r2, _08061458
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08061438:
 	adds r6, 0x1
 	cmp r6, r7
@@ -19957,7 +19957,7 @@ _080619B8:
 	mov r1, r8
 	ldr r2, _080619E0
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _080619F4
 	.align 2, 0
 _080619DC: .4byte gAvailablePokemonNames
@@ -19969,7 +19969,7 @@ _080619E4:
 	mov r1, r8
 	ldr r2, _08061A34
 	adds r3, r7, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _080619F4:
 	adds r6, 0x1
 	movs r0, 0xC
@@ -21569,7 +21569,7 @@ _08062650:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r0, r10
 	bl GetIQSkillDescription
 	adds r2, r0, 0
@@ -21578,7 +21578,7 @@ _08062650:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -21699,7 +21699,7 @@ _0806276C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r0, r10
 	bl GetTacticsDescription
 	adds r2, r0, 0
@@ -21708,7 +21708,7 @@ _0806276C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -21852,7 +21852,7 @@ sub_806285C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	mov r0, r10
 	bl sub_808E51C
 	adds r2, r0, 0
@@ -21861,7 +21861,7 @@ sub_806285C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	add r4, sp, 0x4
@@ -22180,7 +22180,7 @@ sub_8062B74:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r1, 0x10
 	mov r8, r1
 	mov r0, r9
@@ -22213,7 +22213,7 @@ _08062BDE:
 	movs r0, 0xC
 	mov r1, r8
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08062C8A
 	.align 2, 0
 _08062BF0: .4byte gUnknown_8106C90
@@ -22285,7 +22285,7 @@ _08062C6C:
 	mov r1, r8
 	ldr r2, _08062CA4
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0xC
 	add r8, r0
 _08062C80:
@@ -22331,7 +22331,7 @@ sub_8062CA8:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r7, 0x8
 	movs r6, 0x12
 	adds r0, r5, 0
@@ -22380,7 +22380,7 @@ _08062D18:
 _08062D2C:
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08062D52
 	.align 2, 0
 _08062D38: .4byte gUnknown_8106C9C
@@ -22393,7 +22393,7 @@ _08062D3C:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08062D52:
 	movs r0, 0x2
 	bl sub_80073E0
@@ -23391,7 +23391,7 @@ _08063526:
 	movs r0, 0x4
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0x2
 	bl sub_80073E0
 	add sp, 0x24
@@ -23440,7 +23440,7 @@ sub_8063578:
 	adds r0, r4, 0
 	movs r1, 0
 	mov r3, r8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r1, 0
 	mov r9, r1
 	ldr r0, [sp, 0x10]
@@ -23523,7 +23523,7 @@ _08063658:
 	adds r1, r4, 0
 	ldr r2, _08063694
 	mov r3, r8
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08063668:
 	adds r7, 0x8
 	adds r5, 0x8
@@ -24002,13 +24002,13 @@ sub_80639E4:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r2, [r5, 0x4]
 	str r4, [sp]
 	movs r0, 0x4
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, _08063A6C
@@ -27169,7 +27169,7 @@ _080652D2:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -27179,7 +27179,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -27189,7 +27189,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_8013800
@@ -27199,7 +27199,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r5, 0x4
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -27210,7 +27210,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, _080653D8
 	ldr r0, [r1]
 	movs r1, 0xCB
@@ -27233,7 +27233,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0806540E
 	.align 2, 0
 _080653D0: .4byte gUnknown_202EE10
@@ -27256,7 +27256,7 @@ _080653F4:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0806540E:
 	ldr r0, _08065444
 	adds r1, r5, 0
@@ -27268,7 +27268,7 @@ _0806540E:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -27379,7 +27379,7 @@ sub_806544C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -27392,7 +27392,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -27404,7 +27404,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -27531,28 +27531,28 @@ CreateFieldGameOptionsMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x4]
 	ldr r0, _080656B4
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x8]
 	ldr r0, _080656B8
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0xC]
 	ldr r0, _080656BC
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xD4
@@ -27693,42 +27693,42 @@ CreateFieldDungeonMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x4]
 	ldr r0, _08065848
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x8]
 	ldr r0, _0806584C
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0xC]
 	ldr r0, _08065850
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x10]
 	ldr r0, _08065854
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [sp, 0x14]
 	ldr r0, _08065858
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _0806585C
 	ldrb r0, [r0]
 	adds r4, r7, 0
@@ -27976,14 +27976,14 @@ _08065A0A:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, [r6]
 	ldr r0, _08065A84
 	ldr r2, [r0]
 	str r4, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r0, _08065A88
 	ldrb r1, [r0, 0x8]
 	lsls r3, r1, 2
@@ -28413,7 +28413,7 @@ sub_8065CAC:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r4, 0
 	ldr r5, _08065DB8
 _08065D7A:
@@ -28426,7 +28426,7 @@ _08065D7A:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	adds r4, 0x1
 	cmp r4, 0x6
 	ble _08065D7A
@@ -28582,7 +28582,7 @@ _08065E0C:
 	str r7, [sp]
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	ldr r1, _08065F38
 	ldr r2, [sp, 0xC8]
 	lsls r0, r2, 5
@@ -28593,7 +28593,7 @@ _08065E0C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 _08065EF4:
@@ -29005,7 +29005,7 @@ _08066208:
 	mov r1, r8
 	add r2, sp, 0x4
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08066244:
 	subs r7, 0x1
 	adds r5, 0x2
@@ -29103,7 +29103,7 @@ _080662C4:
 	movs r1, 0x14
 	add r2, sp, 0x4
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x45
@@ -29205,7 +29205,7 @@ _080663A0:
 	adds r1, r6, 0
 	add r2, sp, 0x4
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0xD
@@ -29702,7 +29702,7 @@ _08066798:
 	ldr r0, _080667CC
 	b _080667DE
 	.align 2, 0
-_080667C0: .4byte gUnknown_203B460
+_080667C0: .4byte gTeamInventory_203B460
 _080667C4: .4byte gUnknown_202DE58
 _080667C8: .4byte 0x00000133
 _080667CC: .4byte gUnknown_80F8D04
@@ -29797,7 +29797,7 @@ _08066856:
 	bl sub_80522A8
 	b _080668BE
 	.align 2, 0
-_0806688C: .4byte gUnknown_203B460
+_0806688C: .4byte gTeamInventory_203B460
 _08066890: .4byte gUnknown_202DE58
 _08066894: .4byte gUnknown_80F8C7C
 _08066898:
@@ -29934,7 +29934,7 @@ _08066968:
 _080669A8: .4byte 0xffffff00
 _080669AC:
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 _080669B2:
 	ldr r0, [sp, 0x4]
 	str r0, [r7, 0x60]
@@ -30079,7 +30079,7 @@ sub_8066AC0:
 	ldr r0, _08066AF4
 	b _08066B10
 	.align 2, 0
-_08066AF0: .4byte gUnknown_203B460
+_08066AF0: .4byte gTeamInventory_203B460
 _08066AF4: .4byte gUnknown_80F8D60
 _08066AF8:
 	ldrb r1, [r5]
@@ -30123,7 +30123,7 @@ _08066B24:
 	strb r4, [r5, 0x1]
 	strb r4, [r5]
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 	ldr r0, _08066BC4
 	bl PlaySoundEffect
 	ldr r0, _08066BC8
@@ -30420,7 +30420,7 @@ _08066DC4:
 	strb r6, [r5, 0x2]
 	strb r6, [r5, 0x1]
 	strb r6, [r5]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08066E00
 	bl PlaySoundEffect
 	ldr r0, _08066E04
@@ -30596,9 +30596,9 @@ _08066F30:
 	b _08066F46
 _08066F40:
 	mov r0, sp
-	bl sub_8091290
+	bl AddItemToInventory
 _08066F46:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r4, _08066F90
 	add r1, sp, 0x4
 	adds r0, r4, 0
@@ -30776,9 +30776,9 @@ _080670B4:
 	b _080670CA
 _080670C4:
 	add r0, sp, 0x4
-	bl sub_8091290
+	bl AddItemToInventory
 _080670CA:
-	bl sub_80910B4
+	bl FillInventoryGaps
 	ldr r0, _08067100
 	bl PlaySoundEffect
 	ldr r0, _08067104
@@ -31008,7 +31008,7 @@ _080672A8:
 	strb r0, [r4, 0x2]
 	strb r0, [r4, 0x1]
 	strb r0, [r4]
-	bl sub_80910B4
+	bl FillInventoryGaps
 	b _080672F6
 	.align 2, 0
 _080672C0: .4byte 0xffffff00
@@ -32570,7 +32570,7 @@ sub_8067F00:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	movs r1, 0
 	mov r10, r1
 	b _08067FF6
@@ -32633,7 +32633,7 @@ _08067FA4:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _08067FE6
 	.align 2, 0
 _08067FCC: .4byte gUnknown_202DE58
@@ -32645,7 +32645,7 @@ _08067FD8:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _08067FE6:
 	movs r2, 0x1
 	add r10, r2
@@ -32677,7 +32677,7 @@ _08068000:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 	b _0806804C
 	.align 2, 0
 _08068028: .4byte gUnknown_8106E48
@@ -32694,7 +32694,7 @@ _08068034:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_8014FF0
+	bl xxx_format_and_draw
 _0806804C:
 	movs r0, 0x1
 	bl sub_80073E0
@@ -34220,8 +34220,8 @@ _08068C06:
 	cmp r0, 0x69
 	bne _08068C50
 	adds r0, r4, 0
-	bl sub_80915D4
-	bl sub_80913A0
+	bl GetMoneyValue
+	bl AddToTeamMoney
 	strb r5, [r4, 0x2]
 	strb r5, [r4, 0x1]
 	strb r5, [r4]
@@ -44950,7 +44950,7 @@ _0806DEC8:
 	bl sub_807A5D0
 	b _0806DEF2
 	.align 2, 0
-_0806DED4: .4byte gUnknown_203B460
+_0806DED4: .4byte gTeamInventory_203B460
 _0806DED8: .4byte gUnknown_203B418
 _0806DEDC: .4byte 0x00000679
 _0806DEE0: .4byte 0x00000676

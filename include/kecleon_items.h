@@ -1,7 +1,7 @@
 #ifndef GUARD_KECLEON_ITEMS_H
 #define GUARD_KECLEON_ITEMS_H
 
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "text.h"
 #include "menu.h"
 
@@ -16,7 +16,7 @@ struct unkStruct_203B210
     s32 itemSellPrice;
     u32 unk14;
     u32 unk18;
-    struct ItemStruct_203B460 unk1C;
+    struct ItemSlot unk1C;
     u8 unk20;
     u8 unk21;
     u8 unk22;

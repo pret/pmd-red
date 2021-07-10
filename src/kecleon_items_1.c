@@ -4,13 +4,13 @@
 #include "input.h"
 #include "item.h"
 #include "kecleon_items.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
-extern u32 sub_8090CCC(struct ItemStruct_203B460 *);
-extern bool8 sub_80914E4(u8);
+extern u32 GetStackSellPrice(struct ItemSlot *);
+extern bool8 CanSellItem(u8);
 extern u32 sub_8091814(void);
 extern u32 sub_8091A48(void);
 extern s32 sub_80144A4(s32 *);
@@ -36,14 +36,14 @@ void sub_8019B08(void)
         break;
     case 3:
         gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x1c);
         break;
     case 4:
         gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gUnknown_203B460->fill0[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
         sub_8099690(0);
         UpdateKecleonStoreState(0x1d);
         break;
@@ -74,10 +74,10 @@ void sub_8019BBC(void)
   }
   switch(menuAction){
       case 2:
-        if (gUnknown_203B460->teamMoney == 0) {
+        if (gTeamInventory_203B460->teamMoney == 0) {
             UpdateKecleonStoreState(0x6);
         }
-        else if (gUnknown_203B210->itemSellPrice > gUnknown_203B460->teamMoney) {
+        else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney) {
             UpdateKecleonStoreState(0xC);
         }
         else {
@@ -105,10 +105,10 @@ void sub_8019C78(void)
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (!sub_80914E4(gUnknown_203B210->unk1C.itemIndex)) {
+        if (!CanSellItem(gUnknown_203B210->unk1C.itemIndex)) {
             UpdateKecleonStoreState(0xd);
         }
-        else if (gUnknown_203B210->itemSellPrice + gUnknown_203B460->teamMoney > 99999) {
+        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > 99999) {
             UpdateKecleonStoreState(0xe);
         }
         else {
@@ -176,15 +176,15 @@ u32 sub_8019D8C(void)
 void sub_8019DAC(void)
 {
   s32 iVar3;
-  struct ItemStruct_203B460 *pbVar4;
+  struct ItemSlot *pbVar4;
   s32 iVar5;
   
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < 0x14; iVar5++){
-    pbVar4 = &gUnknown_203B460->fill0[iVar5];
-    if (((pbVar4->unk0 & 1) != 0) && (sub_80914E4(pbVar4->itemIndex))) {
-      iVar3 = sub_8090CCC(pbVar4);
+    pbVar4 = &gTeamInventory_203B460->teamItems[iVar5];
+    if (((pbVar4->unk0 & 1) != 0) && (CanSellItem(pbVar4->itemIndex))) {
+      iVar3 = GetStackSellPrice(pbVar4);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
     }

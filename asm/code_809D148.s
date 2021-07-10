@@ -7038,12 +7038,12 @@ _080A0E3A:
 	ldrh r0, [r0, 0x2]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _080A0E4E
 	bl _0809EAE0
 _080A0E4E:
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	bl _0809EAE0
 _080A0E56:
 	add r0, sp, 0x8
@@ -8685,13 +8685,13 @@ _080A1C16:
 _080A1C28: .4byte gUnknown_81167BC
 _080A1C2C: .4byte gUnknown_2039D98
 _080A1C30:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080A1C70
 	ldr r0, _080A1C64
 	ldrb r4, [r0, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1C4A
@@ -8713,14 +8713,14 @@ _080A1C5E:
 	b _080A236A
 	.align 2, 0
 _080A1C64: .4byte gUnknown_81167E4
-_080A1C68: .4byte gUnknown_203B460
+_080A1C68: .4byte gTeamInventory_203B460
 _080A1C6C: .4byte 0x000003e6
 _080A1C70:
 	ldr r0, _080A1C80
 	ldrb r0, [r0, 0x2]
 	movs r1, 0
 	bl sub_809124C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	b _080A236A
 	.align 2, 0
 _080A1C80: .4byte gUnknown_81167E4
@@ -9039,7 +9039,7 @@ _080A1EE8:
 	bne _080A1EBE
 _080A1F28:
 	ldr r0, _080A1F38
-	bl sub_80913A0
+	bl AddToTeamMoney
 	b _080A236A
 	.align 2, 0
 _080A1F30: .4byte gUnknown_202DE58
@@ -9127,12 +9127,12 @@ _080A1FDA:
 	ldr r7, _080A2010
 	movs r5, 0x2
 _080A1FE0:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080A2018
 	ldrb r4, [r6, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2024
@@ -9150,12 +9150,12 @@ _080A1FE0:
 	.align 2, 0
 _080A200C: .4byte gUnknown_8116844
 _080A2010: .4byte 0x000003e6
-_080A2014: .4byte gUnknown_203B460
+_080A2014: .4byte gTeamInventory_203B460
 _080A2018:
 	ldrb r0, [r6, 0x2]
 	movs r1, 0
 	bl sub_809124C
-	bl sub_80910B4
+	bl FillInventoryGaps
 _080A2024:
 	subs r5, 0x1
 	cmp r5, 0

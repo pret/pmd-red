@@ -6500,7 +6500,7 @@ _0809C2CA:
 	adds r0, r1
 	ldrb r4, [r0, 0x2]
 	adds r0, r4, 0
-	bl sub_8091570
+	bl IsEdibleItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C30C
@@ -6509,7 +6509,7 @@ _0809C2CA:
 	movs r2, 0
 	bl sub_8090DC4
 	adds r0, r5, 0
-	bl sub_80911F8
+	bl ShiftItemsDownFrom
 	ldr r0, [r6]
 	movs r2, 0x86
 	lsls r2, 3
@@ -6517,7 +6517,7 @@ _0809C2CA:
 	movs r1, 0x1
 	b _0809C318
 	.align 2, 0
-_0809C304: .4byte gUnknown_203B460
+_0809C304: .4byte gTeamInventory_203B460
 _0809C308: .4byte gUnknown_202DE58
 _0809C30C:
 	ldr r0, [r6]
@@ -7637,7 +7637,7 @@ sub_809CBA4:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8091130
+	bl FindItemInInventory
 	cmp r0, 0
 	bge _0809CBB6
 	movs r0, 0
@@ -7693,7 +7693,7 @@ sub_809CBBC:
 	.align 2, 0
 _0809CC0C: .4byte gUnknown_81163E4
 _0809CC10: .4byte gItemParametersData
-_0809CC14: .4byte gUnknown_203B460
+_0809CC14: .4byte gTeamInventory_203B460
 _0809CC18: .4byte 0x0001869f
 _0809CC1C:
 	str r1, [r2]
@@ -7709,7 +7709,7 @@ _0809CC20:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8090E14
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0809CC52
 	cmp r5, 0
@@ -7727,7 +7727,7 @@ _0809CC52:
 	ldrb r0, [r4, 0x2]
 	movs r1, 0
 	bl sub_809124C
-	bl sub_80910B4
+	bl FillInventoryGaps
 _0809CC5E:
 	cmp r7, 0
 	beq _0809CC80
@@ -7779,10 +7779,10 @@ sub_809CC90:
 	b _0809CCD6
 	.align 2, 0
 _0809CCBC: .4byte gUnknown_81163BC
-_0809CCC0: .4byte gUnknown_203B460
+_0809CCC0: .4byte gTeamInventory_203B460
 _0809CCC4: .4byte 0x0001869f
 _0809CCC8:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0809CCD4
 	movs r0, 0x2

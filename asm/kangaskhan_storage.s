@@ -389,7 +389,7 @@ _0801731C:
 _0801733C: .4byte gUnknown_203B208
 _08017340: .4byte gUnknown_80D5404
 _08017344:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _0801735C
 	bl sub_801A928
@@ -508,7 +508,7 @@ _08017404:
 	movs r0, 0x63
 	b _0801743A
 	.align 2, 0
-_08017430: .4byte gUnknown_203B460
+_08017430: .4byte gTeamInventory_203B460
 _08017434:
 	adds r1, r2, 0
 	adds r1, 0xB4
@@ -634,7 +634,7 @@ _08017530:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08017544
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _08017554
 _08017544:

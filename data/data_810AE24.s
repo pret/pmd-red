@@ -68,12 +68,15 @@ gRangeNames: @ 810CC0C
 	.global gUnknown_810CF00
 gUnknown_810CF00: @ 810CF00
         .byte 0xF0, 0xCE, 0x10, 0x08 @ (pointer to range string)
+        .global TypeText
+TypeText:
         .string "Type\0"
         .align 2,0
 
-	.global gUnknown_810CF0C
-gUnknown_810CF0C: @ 810CF0C
-        .byte 0x04, 0xCF, 0x10, 0x08 @ (pointer to type string)
+	.global gPtrTypeText
+gPtrTypeText: @ 810CF0C
+        .4byte TypeText
+
         .string "Power\0"
         .align 2,0
         .byte 0x10, 0xCF, 0x10, 0x08 @ (pointer to power string)
@@ -565,11 +568,15 @@ gFriendAreaDescriptions: @ 8113E30
 
 	.global gUnknown_8115718
 gUnknown_8115718: @ 8115718
-	.incbin "baserom.gba", 0x115718, 0x258
+	.incbin "baserom.gba", 0x115718, 0x250
 
-	.global gUnknown_8115970
-gUnknown_8115970: @ 8115970
-        .4byte 0x8115968
+        .global PPD0Text
+PPD0Text:
+        .string "PP $d0 \0"
+
+	.global gPtrPPD0Text
+gPtrPPD0Text: @ 8115970
+        .4byte PPD0Text
 
         .string "There are too many members on your team\n"
         .string "to enter this dungeon. Your team must be\n"

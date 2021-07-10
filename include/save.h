@@ -45,7 +45,7 @@ struct UnkStruct_sub_8011DAC {
 
 
 struct UnkStruct_203B184 {
-    /* 0x0 */ struct unkStruct_203B460 *MoneyItems;
+    /* 0x0 */ struct TeamInventory *MoneyItems;
     /* 0x4 */ struct unkStruct_203B45C *recruitedPokemon;
     /* 0x8 */ u8 *unk8;
     /* 0xC */ u8 *unkC;

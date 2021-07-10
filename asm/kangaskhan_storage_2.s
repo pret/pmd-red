@@ -24,7 +24,7 @@ sub_80182E4:
 	str r0, [r1, 0x20]
 	movs r0, 0x2
 	str r0, [r1, 0x24]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _0801831C
 	movs r0, 0
@@ -59,7 +59,7 @@ _08018324:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08018358
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _08018366
 _08018358:
@@ -276,7 +276,7 @@ sub_80184D4:
 	str r0, [r1, 0x20]
 	movs r0, 0x3
 	str r0, [r1, 0x24]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _08018500
 	ldr r0, [r4]
@@ -394,7 +394,7 @@ _080185C8:
 	beq _080185EA
 	b _08018616
 _080185CE:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _080185F6
 	movs r0, 0
@@ -476,9 +476,9 @@ _0801866A:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _0801864A
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08018690
 	bl sub_801A928
@@ -486,7 +486,7 @@ _0801866A:
 	bl sub_8017F10
 	b _080186F2
 	.align 2, 0
-_0801868C: .4byte gUnknown_203B460
+_0801868C: .4byte gTeamInventory_203B460
 _08018690:
 	movs r0, 0x5
 	bl sub_8017F10
@@ -507,7 +507,7 @@ _08018698:
 	b _080186F2
 	.align 2, 0
 _080186B8: .4byte gUnknown_203B20C
-_080186BC: .4byte gUnknown_203B460
+_080186BC: .4byte gTeamInventory_203B460
 _080186C0:
 	bl sub_801A8AC
 	ldr r1, _080186E0
@@ -524,7 +524,7 @@ _080186C0:
 	b _080186F2
 	.align 2, 0
 _080186E0: .4byte gUnknown_203B20C
-_080186E4: .4byte gUnknown_203B460
+_080186E4: .4byte gTeamInventory_203B460
 _080186E8:
 	bl sub_801A928
 	movs r0, 0x1
@@ -578,7 +578,7 @@ _0801872C:
 	orrs r0, r4
 	str r0, [sp]
 	ldrb r0, [r5]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08018786
@@ -599,7 +599,7 @@ _0801872C:
 	.align 2, 0
 _0801876C: .4byte 0xffff00ff
 _08018770: .4byte 0xffffff00
-_08018774: .4byte gUnknown_203B460
+_08018774: .4byte gTeamInventory_203B460
 _08018778:
 	lsls r1, 24
 	lsrs r1, 16
@@ -636,21 +636,21 @@ _080187B2:
 	adds r6, 0x1
 	cmp r6, 0xEF
 	ble _0801872C
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801CF94
 	movs r0, 0x1
 	bl sub_801CF14
 	lsls r0, 24
 	cmp r0, 0
 	bne _08018838
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _08018838
 	movs r0, 0xB
 	bl sub_8017F10
 	b _0801884A
 	.align 2, 0
-_080187DC: .4byte gUnknown_203B460
+_080187DC: .4byte gTeamInventory_203B460
 _080187E0:
 	bl sub_801CB24
 	ldr r4, _08018808
@@ -760,7 +760,7 @@ sub_8018854:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080188D2
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080188F0
 _080188D2:
@@ -770,7 +770,7 @@ _080188D2:
 	b _080188FC
 	.align 2, 0
 _080188E0: .4byte gUnknown_203B20C
-_080188E4: .4byte gUnknown_203B460
+_080188E4: .4byte gTeamInventory_203B460
 _080188E8: .4byte 0xffffff00
 _080188EC: .4byte 0xffff00ff
 _080188F0:
@@ -828,7 +828,7 @@ _0801894E:
 	ldr r4, _08018978
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801896C
@@ -852,9 +852,9 @@ _0801897C:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
-	bl sub_80911F8
-	bl sub_80910B4
-	bl sub_8090A34
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080189A4
 	bl sub_801A928
@@ -920,7 +920,7 @@ _08018A0C:
 	beq _08018AB0
 	b _08018ABE
 _08018A12:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _08018A2C
 	ldr r0, _08018A28
@@ -935,7 +935,7 @@ _08018A2C:
 	ldr r4, _08018A44
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08018A48
@@ -975,7 +975,7 @@ _08018A48:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08018A90
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _08018AA8
 _08018A90:
@@ -984,7 +984,7 @@ _08018A90:
 	bl sub_8017F10
 	b _08018ABE
 	.align 2, 0
-_08018A9C: .4byte gUnknown_203B460
+_08018A9C: .4byte gTeamInventory_203B460
 _08018AA0: .4byte 0xffffff00
 _08018AA4: .4byte 0xffff00ff
 _08018AA8:

@@ -132,7 +132,7 @@ sub_809034C:
 	lsls r2, 24
 	lsrs r2, 24
 	str r2, [sp, 0xE8]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	str r0, [sp, 0xEC]
 	movs r5, 0
 	movs r0, 0
@@ -395,7 +395,7 @@ _08090578:
 	mov r2, r10
 	adds r0, r2, r6
 	ldrb r0, [r0]
-	bl sub_80911A4
+	bl GetItemPossessionCount
 	cmp r0, 0
 	beq _080905A6
 _0809059E:
@@ -685,7 +685,7 @@ _080907F0: .4byte gUnknown_8115DD4
 _080907F4: .4byte gUnknown_8115E00
 _080907F8: .4byte gUnknown_8115E28
 _080907FC: .4byte gUnknown_8115E54
-_08090800: .4byte gUnknown_203B460
+_08090800: .4byte gTeamInventory_203B460
 _08090804: .4byte gUnknown_8115E80
 _08090808: .4byte gUnknown_8108F50
 _0809080C:

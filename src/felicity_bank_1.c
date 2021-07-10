@@ -1,9 +1,9 @@
 #include "global.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "felicity_bank.h"
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 extern struct unkStruct_203B204 *gUnknown_203B204;
 
 extern u8 gUnknown_80DB738;
@@ -61,8 +61,8 @@ void Felicity_DepositMoney(void)
         break;
       case 3:
           gUnknown_203B204->chosenAmount = gUnknown_203B204->unk64;
-          gUnknown_203B460->teamSavings += gUnknown_203B204->chosenAmount;
-          gUnknown_203B460->teamMoney -= gUnknown_203B204->chosenAmount;
+          gTeamInventory_203B460->teamSavings += gUnknown_203B204->chosenAmount;
+          gTeamInventory_203B460->teamMoney -= gUnknown_203B204->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(9);
           break;
@@ -83,8 +83,8 @@ void Felicity_WithdrawMoney(void)
         break;
       case 3:
           gUnknown_203B204->chosenAmount = gUnknown_203B204->unk64;
-          gUnknown_203B460->teamMoney += gUnknown_203B204->chosenAmount;
-          gUnknown_203B460->teamSavings -= gUnknown_203B204->chosenAmount;
+          gTeamInventory_203B460->teamMoney += gUnknown_203B204->chosenAmount;
+          gTeamInventory_203B460->teamSavings -= gUnknown_203B204->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(0xc);
           break;
@@ -134,9 +134,9 @@ void CreateFelicityMoneySavingsHeader(u32 param_1)
   sub_8008C54(param_1);
   sub_80073B8(param_1);
   xxx_call_draw_string(16, 4, gFelicityMoney, param_1, 0);
-  sub_8012BC4(96, 4, gUnknown_203B460->teamMoney, 5, 5, param_1);
+  sub_8012BC4(96, 4, gTeamInventory_203B460->teamMoney, 5, 5, param_1);
   xxx_call_draw_string(112, 4, gFelicitySavings, param_1, 0);
-  sub_8012BC4(200,4,gUnknown_203B460->teamSavings,7,5,param_1);
+  sub_8012BC4(200,4,gTeamInventory_203B460->teamSavings,7,5,param_1);
   sub_80073E0(param_1);
 }
 
@@ -145,6 +145,6 @@ void DrawTeamMoneyBox(u32 param_1)
   sub_8008C54(param_1);
   sub_80073B8(param_1);
   xxx_call_draw_string(6, 0, &gUnknown_80DB738,param_1, 0); // Money
-  sub_8012BC4(42, 12, gUnknown_203B460->teamMoney, 5, 5, param_1);
+  sub_8012BC4(42, 12, gTeamInventory_203B460->teamMoney, 5, 5, param_1);
   sub_80073E0(param_1);
 }

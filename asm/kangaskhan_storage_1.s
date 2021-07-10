@@ -328,7 +328,7 @@ _08017858:
 	beq _080178BA
 	b _080178C8
 _08017862:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08017872
 	movs r0, 0x5
@@ -357,7 +357,7 @@ _0801788E:
 	bl UpdateKangaskhanStorageState
 	b _080178C8
 _080178A2:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080178B2
 	movs r0, 0x6
@@ -407,8 +407,8 @@ _080178F4:
 	bl sub_80917B8
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
-	bl sub_80911F8
-	bl sub_80910B4
+	bl ShiftItemsDownFrom
+	bl FillInventoryGaps
 	movs r0, 0x13
 	bl UpdateKangaskhanStorageState
 	b _0801791E
@@ -475,7 +475,7 @@ _0801794C:
 	bl UpdateKangaskhanStorageState
 	b _080179A2
 	.align 2, 0
-_0801798C: .4byte gUnknown_203B460
+_0801798C: .4byte gTeamInventory_203B460
 _08017990: .4byte gUnknown_203B208
 _08017994: .4byte 0xffffff00
 _08017998: .4byte 0xffff00ff
@@ -531,13 +531,13 @@ _080179F2:
 	adds r5, 0x1
 	cmp r5, 0x13
 	ble _080179D2
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801AE84
 	movs r0, 0x13
 	bl UpdateKangaskhanStorageState
 	b _08017A12
 	.align 2, 0
-_08017A08: .4byte gUnknown_203B460
+_08017A08: .4byte gTeamInventory_203B460
 _08017A0C:
 	movs r0, 0xE
 	bl UpdateKangaskhanStorageState
@@ -585,7 +585,7 @@ _08017A44:
 	str r0, [sp, 0x4]
 	add r4, sp, 0x4
 	ldrb r0, [r4]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08017AA2
@@ -606,7 +606,7 @@ _08017A44:
 	.align 2, 0
 _08017A88: .4byte 0xffff00ff
 _08017A8C: .4byte 0xffffff00
-_08017A90: .4byte gUnknown_203B460
+_08017A90: .4byte gTeamInventory_203B460
 _08017A94:
 	lsls r1, 24
 	lsrs r1, 16
@@ -643,13 +643,13 @@ _08017ACE:
 	adds r5, 0x1
 	cmp r5, 0xEF
 	ble _08017A44
-	bl sub_80910B4
+	bl FillInventoryGaps
 	bl sub_801CF94
 	movs r0, 0x1D
 	bl UpdateKangaskhanStorageState
 	b _08017AEE
 	.align 2, 0
-_08017AE4: .4byte gUnknown_203B460
+_08017AE4: .4byte gTeamInventory_203B460
 _08017AE8:
 	movs r0, 0x17
 	bl UpdateKangaskhanStorageState
