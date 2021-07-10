@@ -584,7 +584,7 @@ _08048984: .4byte gUnknown_80FE3E8
 _08048988:
 	mov r1, r8
 	ldrb r0, [r1, 0x2]
-	bl IsTMItem
+	bl IsHMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080489A0

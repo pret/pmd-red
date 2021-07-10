@@ -24,7 +24,7 @@ extern u32 gUnknown_80DBA0C;
 
 extern u8 gUnknown_202E1C8[0x50];
 
-extern bool8 IsTMItem(u8);
+extern bool8 IsHMItem(u8);
 extern void DisplayGulpinDialogueSprite(u32, u32, u32 *);
 extern void sub_801B178(void);
 extern void sub_8094060(u32 *, u32 *);
@@ -129,7 +129,7 @@ void sub_801B080(void)
             break;
         case 2:
             sub_8094060(&gUnknown_203B22C->unkC, &gUnknown_203B22C->unk5C->unk2C);
-            if(!IsTMItem(gUnknown_203B22C->unk8))
+            if(!IsHMItem(gUnknown_203B22C->unk8))
             {
                 gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].numItems = gUnknown_203B22C->unk8 - 0x7D;
                 gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].itemIndex = 0x7C;

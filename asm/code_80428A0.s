@@ -4440,7 +4440,7 @@ sub_8044E24:
 	ldr r0, [r4, 0x70]
 	mov r8, r0
 	ldrb r0, [r5, 0x2]
-	bl IsTMItem
+	bl IsHMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08044EBA
@@ -8775,7 +8775,7 @@ sub_8046F00:
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrb r0, [r4, 0x2]
-	bl IsTMItem
+	bl IsHMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046F6E

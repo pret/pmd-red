@@ -9,7 +9,6 @@
 extern struct TeamInventory *gTeamInventory_203B460;
 extern EWRAM_DATA struct Item *gItemParametersData;
 
-extern void FillInventoryGaps();
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_8092A88(void*, u16);  // first arg is some struct
@@ -374,7 +373,7 @@ bool8 IsEdibleItem(u8 id)
   return 1;
 }
 
-bool8 IsTMItem(u8 id) 
+bool8 IsHMItem(u8 id) 
 {
   if (id == ITEM_ID_CUT) {
     return 1;
