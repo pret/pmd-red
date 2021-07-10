@@ -358,7 +358,7 @@ sub_80910B4:
 	movs r3, 0
 	b _080910DA
 	.align 2, 0
-_080910C0: .4byte gUnknown_203B460
+_080910C0: .4byte gTeamInventory_203B460
 _080910C4:
 	cmp r2, r4
 	ble _080910D4
@@ -418,7 +418,7 @@ _08091124:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809112C: .4byte gUnknown_203B460
+_0809112C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_80910B4
 
 	thumb_func_start sub_8091130
@@ -442,7 +442,7 @@ _0809113E:
 	adds r0, r3, 0
 	b _08091164
 	.align 2, 0
-_08091154: .4byte gUnknown_203B460
+_08091154: .4byte gTeamInventory_203B460
 _08091158:
 	adds r2, 0x4
 	adds r3, 0x1
@@ -486,7 +486,7 @@ _0809118E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080911A0: .4byte gUnknown_203B460
+_080911A0: .4byte gTeamInventory_203B460
 	thumb_func_end sub_809116C
 
 	thumb_func_start sub_80911A4
@@ -569,7 +569,7 @@ _0809121C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08091230: .4byte gUnknown_203B460
+_08091230: .4byte gTeamInventory_203B460
 	thumb_func_end sub_80911F8
 
 	thumb_func_start sub_8091234
@@ -585,7 +585,7 @@ sub_8091234:
 	strb r2, [r1]
 	bx lr
 	.align 2, 0
-_08091248: .4byte gUnknown_203B460
+_08091248: .4byte gTeamInventory_203B460
 	thumb_func_end sub_8091234
 
 	thumb_func_start sub_809124C
@@ -647,7 +647,7 @@ sub_8091274:
 @ 	movs r0, 0
 @ 	b _080912C0
 @ 	.align 2, 0
-@ _080912B4: .4byte gUnknown_203B460
+@ _080912B4: .4byte gTeamInventory_203B460
 @ _080912B8:
 @ 	adds r3, 0x1
 @ 	cmp r3, 0x13

@@ -685,7 +685,7 @@ _080907F0: .4byte gUnknown_8115DD4
 _080907F4: .4byte gUnknown_8115E00
 _080907F8: .4byte gUnknown_8115E28
 _080907FC: .4byte gUnknown_8115E54
-_08090800: .4byte gUnknown_203B460
+_08090800: .4byte gTeamInventory_203B460
 _08090804: .4byte gUnknown_8115E80
 _08090808: .4byte gUnknown_8108F50
 _0809080C:

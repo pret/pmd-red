@@ -3,12 +3,12 @@
 #include "memory.h"
 #include "text.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "input.h"
 #include "kangaskhan_storage.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 struct unkStruct_203B20C
 {
@@ -61,7 +61,7 @@ extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8();
 
-extern bool8 sub_8091524(u8);
+extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern bool8 sub_801ADA0(u32);
 extern void sub_8099690(u32);
 extern u32 sub_8013BBC(u32 *);
@@ -110,13 +110,13 @@ void sub_8017AF8(void)
             else
             {
                 gUnknown_203B208->unk10 = sub_801A8AC();
-                gUnknown_203B208->unkC = gUnknown_203B460->teamItems[gUnknown_203B208->unk10];
+                gUnknown_203B208->unkC = gTeamInventory_203B460->teamItems[gUnknown_203B208->unk10];
                 UpdateKangaskhanStorageState(0xF);
             }
             break;
         case 4:
             gUnknown_203B208->unk10 = sub_801A8AC();
-            gUnknown_203B208->unkC = gUnknown_203B460->teamItems[gUnknown_203B208->unk10];
+            gUnknown_203B208->unkC = gTeamInventory_203B460->teamItems[gUnknown_203B208->unk10];
             UpdateKangaskhanStorageState(0x10);
             break;
         case 2:
@@ -194,7 +194,7 @@ void sub_8017C7C(void)
     {
       case 2:
         sub_8099690(0);
-        if(!sub_8091524(gUnknown_203B208->unkC.itemIndex))
+        if(!IsNotMoneyOrUsedTMItem(gUnknown_203B208->unkC.itemIndex))
             UpdateKangaskhanStorageState(9);
         else
             if(!sub_801ADA0(gUnknown_203B208->unk10))
@@ -437,10 +437,10 @@ void sub_8018100(void)
         case 12:
             gUnknown_203B20C->unkD0 = 2;
             gUnknown_203B20C->unkC8 = 1;
-            if(gUnknown_203B460->unk50[gUnknown_203B20C->unk8.itemIndex] > 99)
+            if(gTeamInventory_203B460->unk50[gUnknown_203B20C->unk8.itemIndex] > 99)
                 gUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gUnknown_203B460->unk50[gUnknown_203B20C->unk8.itemIndex];
+                gUnknown_203B20C->unkCC = gTeamInventory_203B460->unk50[gUnknown_203B20C->unk8.itemIndex];
             gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
             gUnknown_203B20C->unkD4 = 1;
             gUnknown_203B20C->unkD8 = &gUnknown_203B20C->unkF0[1];

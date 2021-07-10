@@ -93,7 +93,7 @@ _080165B4:
 	b _08016632
 	.align 2, 0
 _080165FC: .4byte gUnknown_203B204
-_08016600: .4byte gUnknown_203B460
+_08016600: .4byte gTeamInventory_203B460
 _08016604: .4byte gFelicityDialogue
 _08016608:
 	ldr r0, _08016648
@@ -168,7 +168,7 @@ _08016668:
 	ldr r2, [r1]
 	b _08016844
 	.align 2, 0
-_08016698: .4byte gUnknown_203B460
+_08016698: .4byte gTeamInventory_203B460
 _0801669C: .4byte gFelicityDialogue
 _080166A0:
 	ldr r0, _080166BC
@@ -221,7 +221,7 @@ _080166DC:
 	adds r2, 0x1C
 	b _0801683C
 	.align 2, 0
-_08016700: .4byte gUnknown_203B460
+_08016700: .4byte gTeamInventory_203B460
 _08016704: .4byte gFelicityDialogue
 _08016708:
 	movs r5, 0x99
@@ -301,7 +301,7 @@ _0801676E:
 	movs r0, 0x1
 	b _080168AE
 	.align 2, 0
-_080167A0: .4byte gUnknown_203B460
+_080167A0: .4byte gTeamInventory_203B460
 _080167A4: .4byte 0x0098967f
 _080167A8:
 	ldr r3, [r2]
@@ -341,7 +341,7 @@ _080167CC:
 	adds r2, 0x30
 	b _0801683C
 	.align 2, 0
-_080167F4: .4byte gUnknown_203B460
+_080167F4: .4byte gTeamInventory_203B460
 _080167F8: .4byte 0x0001869e
 _080167FC: .4byte gFelicityDialogue
 _08016800:
@@ -439,7 +439,7 @@ _080168B2:
 	bl CreateFelicityMoneySavingsHeader
 	b _080168EC
 	.align 2, 0
-_080168BC: .4byte gUnknown_203B460
+_080168BC: .4byte gTeamInventory_203B460
 _080168C0: .4byte 0x0001869f
 _080168C4:
 	ldr r3, [r2]

@@ -531,7 +531,7 @@ _0801866A:
 	bl sub_8017F10
 	b _080186F2
 	.align 2, 0
-_0801868C: .4byte gUnknown_203B460
+_0801868C: .4byte gTeamInventory_203B460
 _08018690:
 	movs r0, 0x5
 	bl sub_8017F10
@@ -552,7 +552,7 @@ _08018698:
 	b _080186F2
 	.align 2, 0
 _080186B8: .4byte gUnknown_203B20C
-_080186BC: .4byte gUnknown_203B460
+_080186BC: .4byte gTeamInventory_203B460
 _080186C0:
 	bl sub_801A8AC
 	ldr r1, _080186E0
@@ -569,7 +569,7 @@ _080186C0:
 	b _080186F2
 	.align 2, 0
 _080186E0: .4byte gUnknown_203B20C
-_080186E4: .4byte gUnknown_203B460
+_080186E4: .4byte gTeamInventory_203B460
 _080186E8:
 	bl sub_801A928
 	movs r0, 0x1
@@ -644,7 +644,7 @@ _0801872C:
 	.align 2, 0
 _0801876C: .4byte 0xffff00ff
 _08018770: .4byte 0xffffff00
-_08018774: .4byte gUnknown_203B460
+_08018774: .4byte gTeamInventory_203B460
 _08018778:
 	lsls r1, 24
 	lsrs r1, 16
@@ -695,7 +695,7 @@ _080187B2:
 	bl sub_8017F10
 	b _0801884A
 	.align 2, 0
-_080187DC: .4byte gUnknown_203B460
+_080187DC: .4byte gTeamInventory_203B460
 _080187E0:
 	bl sub_801CB24
 	ldr r4, _08018808
@@ -815,7 +815,7 @@ _080188D2:
 	b _080188FC
 	.align 2, 0
 _080188E0: .4byte gUnknown_203B20C
-_080188E4: .4byte gUnknown_203B460
+_080188E4: .4byte gTeamInventory_203B460
 _080188E8: .4byte 0xffffff00
 _080188EC: .4byte 0xffff00ff
 _080188F0:
@@ -873,7 +873,7 @@ _0801894E:
 	ldr r4, _08018978
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801896C
@@ -1029,7 +1029,7 @@ _08018A90:
 	bl sub_8017F10
 	b _08018ABE
 	.align 2, 0
-_08018A9C: .4byte gUnknown_203B460
+_08018A9C: .4byte gTeamInventory_203B460
 _08018AA0: .4byte 0xffffff00
 _08018AA4: .4byte 0xffff00ff
 _08018AA8:

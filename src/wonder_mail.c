@@ -7,11 +7,11 @@
 #include "memory.h"
 #include "text.h"
 #include "sub_8095228.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
@@ -2007,7 +2007,7 @@ void sub_802A798(void)
                 {
                     return_var->unk20 = gUnknown_203B2C4->unk41C;
                 }
-                gUnknown_203B460->unk50[gUnknown_203B2C4->unk41C.itemIndex]--;
+                gTeamInventory_203B460->unk50[gUnknown_203B2C4->unk41C.itemIndex]--;
                 sub_802B2BC(0x29);
                 break;
             case 8:

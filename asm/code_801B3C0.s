@@ -386,7 +386,7 @@ _0801B938:
 	ble _0801B986
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801B968
@@ -408,7 +408,7 @@ _0801B968:
 	movs r0, 0x6
 	b _0801B99C
 	.align 2, 0
-_0801B970: .4byte gUnknown_203B460
+_0801B970: .4byte gTeamInventory_203B460
 _0801B974: .4byte 0x000003e7
 _0801B978:
 	strh r1, [r3]
@@ -888,7 +888,7 @@ _0801BCFC:
 	b _0801BD7A
 	.align 2, 0
 _0801BD28: .4byte gUnknown_203B234
-_0801BD2C: .4byte gUnknown_203B460
+_0801BD2C: .4byte gTeamInventory_203B460
 _0801BD30: .4byte gUnknown_202DEA8
 _0801BD34:
 	bl sub_801A8AC
@@ -913,7 +913,7 @@ _0801BD34:
 	b _0801BD7A
 	.align 2, 0
 _0801BD64: .4byte gUnknown_203B234
-_0801BD68: .4byte gUnknown_203B460
+_0801BD68: .4byte gTeamInventory_203B460
 _0801BD6C: .4byte gUnknown_202DEA8
 _0801BD70:
 	bl sub_801A928

@@ -7475,7 +7475,7 @@ _080738A4:
 	bl sub_8044C94
 	b _080738CE
 	.align 2, 0
-_080738C0: .4byte gUnknown_203B460
+_080738C0: .4byte gTeamInventory_203B460
 _080738C4:
 	adds r0, r6, 0
 	adds r0, 0x44
@@ -8219,7 +8219,7 @@ _08073E48:
 	.align 2, 0
 _08073E64: .4byte gUnknown_203B418
 _08073E68: .4byte 0x0000065b
-_08073E6C: .4byte gUnknown_203B460
+_08073E6C: .4byte gTeamInventory_203B460
 _08073E70:
 	mov r0, r10
 	adds r0, 0x60
@@ -30761,7 +30761,7 @@ _0807F204:
 	movs r0, 0x2
 	b _0807F31C
 	.align 2, 0
-_0807F224: .4byte gUnknown_203B460
+_0807F224: .4byte gTeamInventory_203B460
 _0807F228: .4byte gUnknown_80FE520
 _0807F22C:
 	movs r0, 0xA6
@@ -30888,7 +30888,7 @@ _0807F31C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807F324: .4byte gUnknown_203B460
+_0807F324: .4byte gTeamInventory_203B460
 _0807F328: .4byte gUnknown_203B418
 _0807F32C: .4byte 0x000135cc
 _0807F330: .4byte 0x00000694
@@ -31014,7 +31014,7 @@ _0807F41C: .4byte gUnknown_203B418
 _0807F420: .4byte 0x0000066e
 _0807F424: .4byte 0x0000066f
 _0807F428: .4byte gUnknown_80FE4B8
-_0807F42C: .4byte gUnknown_203B460
+_0807F42C: .4byte gTeamInventory_203B460
 _0807F430: .4byte 0x000135cc
 _0807F434: .4byte 0x00000694
 _0807F438: .4byte 0x0000068c
@@ -32841,7 +32841,7 @@ _08080290:
 	cmp r0, 0
 	beq _080802C2
 	ldrb r0, [r2, 0x2]
-	bl sub_8091544
+	bl IsNotSpecialItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080802C2
@@ -32870,7 +32870,7 @@ _080802C8:
 	mov r0, r8
 	adds r0, 0x62
 	ldrb r0, [r0]
-	bl sub_8091544
+	bl IsNotSpecialItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080802FA
@@ -32896,7 +32896,7 @@ _08080300:
 	bl sub_80522F4
 	b _0808034A
 	.align 2, 0
-_0808030C: .4byte gUnknown_203B460
+_0808030C: .4byte gTeamInventory_203B460
 _08080310: .4byte gUnknown_80FDC40
 _08080314:
 	adds r0, r6, 0
@@ -33137,7 +33137,7 @@ _080804B6:
 	ldr r0, _080804C8
 	b _080804D4
 	.align 2, 0
-_080804C0: .4byte gUnknown_203B460
+_080804C0: .4byte gTeamInventory_203B460
 _080804C4: .4byte gUnknown_80F4E0E
 _080804C8: .4byte gUnknown_80FD788
 _080804CC:
@@ -41223,7 +41223,7 @@ _080844FC: .4byte gUnknown_203B418
 _08084500: .4byte 0x0000068a
 _08084504: .4byte gUnknown_80FA32C
 _08084508: .4byte gUnknown_202DE58
-_0808450C: .4byte gUnknown_203B460
+_0808450C: .4byte gTeamInventory_203B460
 _08084510: .4byte gUnknown_80FA448
 _08084514:
 	lsls r1, r3, 2
@@ -44550,7 +44550,7 @@ _08086104:
 	movs r0, 0x1
 	b _0808611C
 	.align 2, 0
-_08086108: .4byte gUnknown_203B460
+_08086108: .4byte gTeamInventory_203B460
 _0808610C: .4byte gUnknown_203B418
 _08086110: .4byte 0x0001357c
 _08086114:

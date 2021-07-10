@@ -669,7 +669,7 @@ _0801CE44: .4byte 0x000004d2
 _0801CE48: .4byte 0x000004ce
 _0801CE4C: .4byte 0x000004b4
 _0801CE50: .4byte 0x000004ec
-_0801CE54: .4byte gUnknown_203B460
+_0801CE54: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CCD8
 
 	thumb_func_start sub_801CE58
@@ -698,7 +698,7 @@ _0801CE68:
 	lsls r0, r6, 24
 	lsrs r0, 24
 	str r3, [sp]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	ldr r3, [sp]
 	cmp r0, 0
@@ -771,7 +771,7 @@ _0801CEFC:
 	bx r1
 	.align 2, 0
 _0801CF0C: .4byte gUnknown_203B244
-_0801CF10: .4byte gUnknown_203B460
+_0801CF10: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CE58
 
 	thumb_func_start sub_801CF14
@@ -795,7 +795,7 @@ _0801CF20:
 	beq _0801CF3E
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801CF1A
@@ -809,7 +809,7 @@ _0801CF46:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801CF4C: .4byte gUnknown_203B460
+_0801CF4C: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CF14
 
 	thumb_func_start sub_801CF50
@@ -826,7 +826,7 @@ _0801CF5A:
 _0801CF5E:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801CF7C
@@ -849,7 +849,7 @@ _0801CF84:
 	bx r1
 	.align 2, 0
 _0801CF8C: .4byte 0x000003e6
-_0801CF90: .4byte gUnknown_203B460
+_0801CF90: .4byte gTeamInventory_203B460
 	thumb_func_end sub_801CF50
 
 	thumb_func_start sub_801CF94

@@ -1,11 +1,11 @@
 #include "global.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "subStruct_203B240.h"
 
 #include <stddef.h>
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 extern EWRAM_DATA struct Item *gItemParametersData;
 
 extern s32 sub_80915D4(struct ItemSlot *);
@@ -32,9 +32,9 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < 20; i++) {
-    UNUSED struct ItemSlot* current = &gUnknown_203B460->teamItems[i];
-    if (!(i[gUnknown_203B460->teamItems].unk0 & 1)) {
-      gUnknown_203B460->teamItems[i] = *slot;
+    UNUSED struct ItemSlot* current = &gTeamInventory_203B460->teamItems[i];
+    if (!(i[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+      gTeamInventory_203B460->teamItems[i] = *slot;
       return 0;
     }
   }
@@ -47,10 +47,10 @@ void ConvertMoneyItemToMoney()
   s32 i = 0;
 
   do {
-    UNUSED struct unkStruct_203B460 * _gUnknown_203B460 = gUnknown_203B460;
-    UNUSED size_t offs = offsetof(struct unkStruct_203B460, teamItems[i]);
+    UNUSED struct TeamInventory * _gTeamInventory_203B460 = gTeamInventory_203B460;
+    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
-    struct ItemSlot* current_slot = &gUnknown_203B460->teamItems[i];
+    struct ItemSlot* current_slot = &gTeamInventory_203B460->teamItems[i];
     if ((current_slot->unk0 & 1) && (current_slot->itemIndex == ITEM_ID_POKE)) {
       s32 result;
 
@@ -66,29 +66,29 @@ void ConvertMoneyItemToMoney()
   i = 0;
   do {
     s32 lowest_index = -1;
-    UNUSED size_t offs = offsetof(struct unkStruct_203B460, teamItems[i]);
+    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
-    bool8 item_occupied = i[gUnknown_203B460->teamItems].unk0 & 1;
+    bool8 item_occupied = i[gTeamInventory_203B460->teamItems].unk0 & 1;
     s32 next = i + 1;
     
     if (item_occupied) {
-      s32 lowest_order = GetItemOrder(gUnknown_203B460->teamItems[i].itemIndex);
+      s32 lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[i].itemIndex);
       s32 j;
 
       // find next lowest
       for (j = next; j < 20; j++) {
-        UNUSED size_t offs = offsetof(struct unkStruct_203B460, teamItems[j]);
-        if ((j[gUnknown_203B460->teamItems].unk0 & 1) && (lowest_order > GetItemOrder(gUnknown_203B460->teamItems[j].itemIndex))) {
+        UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
+        if ((j[gTeamInventory_203B460->teamItems].unk0 & 1) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex))) {
           lowest_index = j;
-          lowest_order = GetItemOrder(gUnknown_203B460->teamItems[j].itemIndex);
+          lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex);
         }
       }
 
       if (lowest_index >= 0) {
         // swap the slots
-        struct ItemSlot current = gUnknown_203B460->teamItems[i];
-        gUnknown_203B460->teamItems[i] = gUnknown_203B460->teamItems[lowest_index]; 
-        gUnknown_203B460->teamItems[lowest_index] = current;
+        struct ItemSlot current = gTeamInventory_203B460->teamItems[i];
+        gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[lowest_index]; 
+        gTeamInventory_203B460->teamItems[lowest_index] = current;
       }
     }
   } while (++i < 20);
@@ -98,17 +98,17 @@ void ConvertMoneyItemToMoney()
 void AddToTeamMoney(s32 amount)
 {
   s32 clamped_money;
-  gUnknown_203B460->teamMoney += amount;
+  gTeamInventory_203B460->teamMoney += amount;
 
   // clamp money
   clamped_money = 99999;
-  if (gUnknown_203B460->teamMoney <= 99999) {
-    if (gUnknown_203B460->teamMoney >= 0) {
+  if (gTeamInventory_203B460->teamMoney <= 99999) {
+    if (gTeamInventory_203B460->teamMoney >= 0) {
       return;
     }
     clamped_money = 0;
   }
-  gUnknown_203B460->teamMoney = clamped_money;
+  gTeamInventory_203B460->teamMoney = clamped_money;
 }
 
 u16 GetItemMove(u8 index) 
@@ -168,4 +168,74 @@ bool8 CanSellItem(u32 id) {
           return 1;
     }
     return 0;
+}
+
+bool8 IsNotMoneyOrUsedTMItem(u8 id) {
+  if (id == ITEM_ID_NOTHING) {
+    return 0;
+  }
+  else if (id == ITEM_ID_POKE) {
+    return 0;
+  }
+  else if (id == ITEM_ID_USED_TM) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsNotSpecialItem(u8 id) {
+  if (id == ITEM_ID_NOTHING) {
+    return 0;
+  }
+  else if (id == ITEM_ID_POKE) {
+    return 0;
+  }
+  else if (id == ITEM_ID_ROCK_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_ICE_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_STEEL_PART) {
+    return 0;
+  }
+  else if (id == ITEM_ID_MUSIC_BOX) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsEdibleItem(u8 id) {
+  if (!((GetItemType(id) == ITEM_TYPE_BERRY_SEED) || (GetItemType(id) == ITEM_TYPE_APPLE_GUMMI))) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 IsTMItem(u8 id) {
+  if (id == ITEM_ID_CUT) {
+    return 1;
+  }
+  else if (id == ITEM_ID_FLY) {
+    return 1;
+  }
+  else if (id == ITEM_ID_SURF) {
+    return 1;
+  }
+  else if (id == ITEM_ID_STRENGTH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_FLASH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_ROCK_SMASH) {
+    return 1;
+  }
+  else if (id == ITEM_ID_WATERFALL) {
+    return 1;
+  }
+  else if (id == ITEM_ID_DIVE) {
+    return 1;
+  }
+  return 0;
 }

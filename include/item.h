@@ -314,7 +314,7 @@ enum ItemID {
 };
 
 void LoadItemParameters(void);
-struct unkStruct_203B460 *GetMoneyItemsInfo(void);
+struct TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
 u8 GetItemType(u8 index);
 s32 GetItemBuyPrice(u8 itemIndex);

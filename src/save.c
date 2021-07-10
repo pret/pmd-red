@@ -70,7 +70,7 @@ extern s32 gUnknown_202DE28;
 extern u32 gUnknown_203B17C;
 extern char *gUnknown_203B180;
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 extern struct RescueTeamData *gRescueTeamInfoRef;
 extern bool8 *gFriendAreas;
 extern u32 gUnknown_203B46C;
@@ -624,7 +624,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
     gUnknown_203B184 = r0;
     if(r0 != NULL)
     {
-       gUnknown_203B460 = r0->MoneyItems;
+       gTeamInventory_203B460 = r0->MoneyItems;
        gRecruitedPokemonRef = r0->recruitedPokemon;
        gUnknown_203B480 = r0->unk8;
        gUnknown_203B484 = r0->unkC;
@@ -639,7 +639,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gPlayTimeRef     = r0->playTime;
        return;
     }
-       gUnknown_203B460 = GetMoneyItemsInfo();
+       gTeamInventory_203B460 = GetMoneyItemsInfo();
        gRecruitedPokemonRef = GetRecruitedPokemon();
        gUnknown_203B480 = sub_80950F8();
        gUnknown_203B484 = sub_8095100();

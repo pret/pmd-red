@@ -487,7 +487,7 @@ _08001754:
 	lsls r1, 2
 	b _0800176C
 	.align 2, 0
-_08001760: .4byte gUnknown_203B460
+_08001760: .4byte gTeamInventory_203B460
 _08001764:
 	ldr r0, _08001774
 	ldr r0, [r0]
@@ -498,7 +498,7 @@ _0800176C:
 	ldr r0, [r0]
 	b _0800177A
 	.align 2, 0
-_08001774: .4byte gUnknown_203B460
+_08001774: .4byte gTeamInventory_203B460
 _08001778:
 	movs r0, 0
 _0800177A:
@@ -652,7 +652,7 @@ _080018A4:
 	ldr r0, [r0]
 	b _080018CE
 	.align 2, 0
-_080018B4: .4byte gUnknown_203B460
+_080018B4: .4byte gTeamInventory_203B460
 _080018B8:
 	ldr r0, _080018C8
 	ldr r0, [r0]
@@ -662,7 +662,7 @@ _080018B8:
 	ldr r0, [r0]
 	b _080018CE
 	.align 2, 0
-_080018C8: .4byte gUnknown_203B460
+_080018C8: .4byte gTeamInventory_203B460
 _080018CC:
 	movs r0, 0
 _080018CE:
@@ -757,7 +757,7 @@ _08001972:
 	adds r0, r1
 	b _0800198E
 	.align 2, 0
-_08001980: .4byte gUnknown_203B460
+_08001980: .4byte gTeamInventory_203B460
 _08001984:
 	ldr r0, _08001998
 	ldr r0, [r0]
@@ -772,7 +772,7 @@ _08001990:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001998: .4byte gUnknown_203B460
+_08001998: .4byte gTeamInventory_203B460
 	thumb_func_end sub_80018D8
 
 	thumb_func_start sub_800199C
@@ -871,7 +871,7 @@ _08001A4E:
 	lsls r1, 2
 	b _08001A64
 	.align 2, 0
-_08001A58: .4byte gUnknown_203B460
+_08001A58: .4byte gTeamInventory_203B460
 _08001A5C:
 	ldr r0, _08001A70
 	ldr r0, [r0]
@@ -886,7 +886,7 @@ _08001A68:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001A70: .4byte gUnknown_203B460
+_08001A70: .4byte gTeamInventory_203B460
 	thumb_func_end sub_800199C
 
 	thumb_func_start sub_8001A74
@@ -1698,7 +1698,7 @@ _080020D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080020DC: .4byte gUnknown_203B460
+_080020DC: .4byte gTeamInventory_203B460
 _080020E0: .4byte 0x0000021e
 _080020E4: .4byte 0x00000113
 	thumb_func_end sub_8001D88

@@ -237,7 +237,7 @@ sub_8027E4C:
 	adds r4, r5, 0
 	adds r4, 0x28
 	ldrb r0, [r4]
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027E88
@@ -264,7 +264,7 @@ _08027E88:
 	movs r0, 0
 	b _08027EAA
 	.align 2, 0
-_08027E8C: .4byte gUnknown_203B460
+_08027E8C: .4byte gTeamInventory_203B460
 _08027E90: .4byte 0x000003e7
 _08027E94:
 	ldr r0, _08027EB0
@@ -284,7 +284,7 @@ _08027EAA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08027EB0: .4byte gUnknown_203B460
+_08027EB0: .4byte gTeamInventory_203B460
 _08027EB4: .4byte 0x000003e6
 	thumb_func_end sub_8027E4C
 
@@ -348,7 +348,7 @@ _08027F0C:
 	b _08027F52
 	.align 2, 0
 _08027F38: .4byte 0x0000014d
-_08027F3C: .4byte gUnknown_203B460
+_08027F3C: .4byte gTeamInventory_203B460
 _08027F40:
 	ldr r0, _08027F74
 	ldr r1, [r0]
@@ -376,7 +376,7 @@ _08027F52:
 	bl sub_8027184
 	b _08027F82
 	.align 2, 0
-_08027F74: .4byte gUnknown_203B460
+_08027F74: .4byte gTeamInventory_203B460
 _08027F78: .4byte gUnknown_203B2BC
 _08027F7C:
 	movs r0, 0x2

@@ -475,7 +475,7 @@ _0801794C:
 	bl UpdateKangaskhanStorageState
 	b _080179A2
 	.align 2, 0
-_0801798C: .4byte gUnknown_203B460
+_0801798C: .4byte gTeamInventory_203B460
 _08017990: .4byte gUnknown_203B208
 _08017994: .4byte 0xffffff00
 _08017998: .4byte 0xffff00ff
@@ -537,7 +537,7 @@ _080179F2:
 	bl UpdateKangaskhanStorageState
 	b _08017A12
 	.align 2, 0
-_08017A08: .4byte gUnknown_203B460
+_08017A08: .4byte gTeamInventory_203B460
 _08017A0C:
 	movs r0, 0xE
 	bl UpdateKangaskhanStorageState
@@ -606,7 +606,7 @@ _08017A44:
 	.align 2, 0
 _08017A88: .4byte 0xffff00ff
 _08017A8C: .4byte 0xffffff00
-_08017A90: .4byte gUnknown_203B460
+_08017A90: .4byte gTeamInventory_203B460
 _08017A94:
 	lsls r1, 24
 	lsrs r1, 16
@@ -649,7 +649,7 @@ _08017ACE:
 	bl UpdateKangaskhanStorageState
 	b _08017AEE
 	.align 2, 0
-_08017AE4: .4byte gUnknown_203B460
+_08017AE4: .4byte gTeamInventory_203B460
 _08017AE8:
 	movs r0, 0x17
 	bl UpdateKangaskhanStorageState

@@ -3,7 +3,7 @@
 #include "constants/friend_area.h"
 #include "file_system.h"
 #include "item.h"
-#include "gUnknown_203B460.h"
+#include "team_inventory.h"
 #include "memory.h"
 #include "input.h"
 #include "text.h"
@@ -95,7 +95,7 @@ struct unk_203B250
 
 struct unk_203B250 *gUnknown_203B250;
 
-extern struct unkStruct_203B460 *gUnknown_203B460;
+extern struct TeamInventory *gTeamInventory_203B460;
 
 void sub_801D680(void)
 {
@@ -332,7 +332,7 @@ void sub_801D894(void)
   rank = GetRescueTeamRank();
   ExpandPlaceholdersBuffer(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
   xxx_call_draw_string(32, 4, buffer, 2, 0);
-  ExpandPlaceholdersBuffer(buffer, &gUnknown_80DBF4C, gUnknown_203B460->teamMoney);
+  ExpandPlaceholdersBuffer(buffer, &gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
   xxx_call_draw_string(32, 18, buffer, 2, 0);
   sub_80073E0(2);
 }

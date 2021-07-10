@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "team_inventory.h": "c",
+        "xutility": "c",
+        "text.h": "c",
+        "global.h": "c",
+        "kecleon_items.h": "c",
+        "friend_rescue.h": "c",
+        "friend_area_action_menu.h": "c",
+        "team_inventory.h": "c"
+    }
+}

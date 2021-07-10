@@ -8691,7 +8691,7 @@ _080A1C30:
 	ldr r0, _080A1C64
 	ldrb r4, [r0, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1C4A
@@ -8713,7 +8713,7 @@ _080A1C5E:
 	b _080A236A
 	.align 2, 0
 _080A1C64: .4byte gUnknown_81167E4
-_080A1C68: .4byte gUnknown_203B460
+_080A1C68: .4byte gTeamInventory_203B460
 _080A1C6C: .4byte 0x000003e6
 _080A1C70:
 	ldr r0, _080A1C80
@@ -9132,7 +9132,7 @@ _080A1FE0:
 	ble _080A2018
 	ldrb r4, [r6, 0x2]
 	adds r0, r4, 0
-	bl sub_8091524
+	bl IsNotMoneyOrUsedTMItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2024
@@ -9150,7 +9150,7 @@ _080A1FE0:
 	.align 2, 0
 _080A200C: .4byte gUnknown_8116844
 _080A2010: .4byte 0x000003e6
-_080A2014: .4byte gUnknown_203B460
+_080A2014: .4byte gTeamInventory_203B460
 _080A2018:
 	ldrb r0, [r6, 0x2]
 	movs r1, 0
