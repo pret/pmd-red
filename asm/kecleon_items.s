@@ -489,7 +489,7 @@ _080192B4:
 	.align 2, 0
 _080192BC: .4byte gUnknown_203B210
 _080192C0:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080192EC
 	ldr r0, _080192D8
@@ -636,7 +636,7 @@ _080193F4:
 	bl sub_801B3C0
 	b _080194E8
 _080193FE:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _08019418
 	ldr r0, _08019424
@@ -1099,7 +1099,7 @@ _08019784:
 	bl UpdateKecleonStoreState
 	b _0801984A
 _08019794:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080197A4
 	movs r0, 0xA
@@ -1110,7 +1110,7 @@ _080197A4:
 	bl UpdateKecleonStoreState
 	b _0801984A
 _080197AC:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	beq _080197EC
 	ldr r0, _080197D8
@@ -1135,7 +1135,7 @@ _080197D8: .4byte gUnknown_203B210
 _080197DC: .4byte gTeamInventory_203B460
 _080197E0: .4byte 0x0001869e
 _080197E4:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080197F4
 _080197EC:
@@ -1445,7 +1445,7 @@ _08019A3C:
 	strb r0, [r1, 0x1D]
 	ldr r0, [r4]
 	adds r0, 0x1C
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
 	movs r0, 0x14
@@ -1492,7 +1492,7 @@ _08019AA4:
 	strb r0, [r1, 0x1D]
 	ldr r0, [r4]
 	adds r0, 0x1C
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
 	movs r0, 0x15

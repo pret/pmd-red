@@ -561,7 +561,7 @@ _08095F34:
 _08095F48:
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08095F6A

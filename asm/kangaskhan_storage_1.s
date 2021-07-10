@@ -328,7 +328,7 @@ _08017858:
 	beq _080178BA
 	b _080178C8
 _08017862:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08017872
 	movs r0, 0x5
@@ -357,7 +357,7 @@ _0801788E:
 	bl UpdateKangaskhanStorageState
 	b _080178C8
 _080178A2:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080178B2
 	movs r0, 0x6
@@ -585,7 +585,7 @@ _08017A44:
 	str r0, [sp, 0x4]
 	add r4, sp, 0x4
 	ldrb r0, [r4]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08017AA2

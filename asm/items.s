@@ -182,13 +182,13 @@ _08090F6C:
 	bcc _08090F8A
 	cmp r1, 0x2
 	bhi _08090F7E
-	bl sub_8090BE4
+	bl GetStackBuyValue
 	adds r1, r0, 0
 	b _08090F8C
 _08090F7E:
 	cmp r1, 0x4
 	bhi _08090F8A
-	bl sub_8090C30
+	bl GetStackSellValue
 	adds r1, r0, 0
 	b _08090F8C
 _08090F8A:
@@ -348,5 +348,5 @@ _08091080:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8090FEC
-	
+
         .align 2,0

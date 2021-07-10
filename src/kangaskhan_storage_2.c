@@ -232,14 +232,14 @@ void sub_8017D24(void)
     switch(menuAction)
     {
       case 3:
-        if (sub_8090A34() > 0x13)
+        if (GetNumberOfFilledInventorySlots() > 0x13)
         {
             sub_801CBB8();
             UpdateKangaskhanStorageState(6);
         }
         else
         {
-            if(sub_8090A60(gUnknown_203B208->unkC.itemIndex))
+            if(IsThrowableItem(gUnknown_203B208->unkC.itemIndex))
                 UpdateKangaskhanStorageState(0x18);
             else
                 UpdateKangaskhanStorageState(0x1B);

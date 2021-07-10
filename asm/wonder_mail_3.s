@@ -4383,7 +4383,7 @@ _0802F524:
 	lsrs r0, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802F56C

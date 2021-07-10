@@ -9,7 +9,7 @@
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct TeamInventory *gTeamInventory_203B460;
 
-extern u32 sub_8090CCC(struct ItemSlot *);
+extern u32 GetStackSellPrice(struct ItemSlot *);
 extern bool8 CanSellItem(u8);
 extern u32 sub_8091814(void);
 extern u32 sub_8091A48(void);
@@ -37,13 +37,13 @@ void sub_8019B08(void)
     case 3:
         gUnknown_203B210->unk24 = sub_801A8AC();
         gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x1c);
         break;
     case 4:
         gUnknown_203B210->unk24 = sub_801A8AC();
         gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = sub_8090CCC(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
         sub_8099690(0);
         UpdateKecleonStoreState(0x1d);
         break;
@@ -184,7 +184,7 @@ void sub_8019DAC(void)
   for(iVar5 = 0; iVar5 < 0x14; iVar5++){
     pbVar4 = &gTeamInventory_203B460->teamItems[iVar5];
     if (((pbVar4->unk0 & 1) != 0) && (CanSellItem(pbVar4->itemIndex))) {
-      iVar3 = sub_8090CCC(pbVar4);
+      iVar3 = GetStackSellPrice(pbVar4);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
     }

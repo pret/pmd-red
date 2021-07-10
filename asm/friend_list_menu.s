@@ -7295,7 +7295,7 @@ _08022820:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl strcpy
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08022850
 	movs r0, 0x12
@@ -8340,7 +8340,7 @@ _080230B8:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4C]
 	bl ShiftItemsDownFrom
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080230DA
 	movs r0, 0
@@ -12230,7 +12230,7 @@ _08024F36:
 	.align 2, 0
 _08024F48: .4byte gUnknown_203B2B0
 _08024F4C:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08024F5C
 	movs r0, 0xF
@@ -12283,7 +12283,7 @@ _08024FA6:
 	bl sub_80247EC
 	b _08024FCC
 _08024FAE:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x1
 	bgt _08024FBE
 	movs r0, 0x10
@@ -13260,7 +13260,7 @@ sub_8025728:
 	adds r1, 0x4
 	movs r0, 0xA
 	str r0, [r1]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08025774
 	ldr r0, [r5]
@@ -13279,7 +13279,7 @@ _08025774:
 	adds r1, 0xD4
 	movs r0, 0xB
 	str r0, [r1]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _08025796
 	ldr r0, [r5]
@@ -13498,7 +13498,7 @@ sub_802591C:
 	adds r1, 0xCC
 	movs r0, 0xA
 	str r0, [r1]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _08025952
 	ldr r0, [r5]
@@ -15053,7 +15053,7 @@ _080265EC:
 	adds r2, r3
 	movs r0, 0xB
 	str r0, [r2]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _0802661A
 	ldr r0, [r4]
@@ -15076,7 +15076,7 @@ _0802661A:
 	adds r2, r3
 	movs r0, 0xC
 	str r0, [r2]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _08026640
 	ldr r0, [r4]
@@ -15271,7 +15271,7 @@ sub_802678C:
 	adds r1, r2, r3
 	movs r0, 0xB
 	str r0, [r1]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _080267C8
 	ldr r0, [r5]
@@ -16195,7 +16195,7 @@ sub_8026F04:
 	movs r0, 0
 	b _08026F32
 _08026F14:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _08026F20
 	movs r0, 0x1
@@ -16228,7 +16228,7 @@ sub_8026F38:
 	cmp r0, 0
 	beq _08026F74
 	ldrb r0, [r4]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08026F80
@@ -16317,7 +16317,7 @@ _08026FF8:
 	bl PlaySound
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x14]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802702C

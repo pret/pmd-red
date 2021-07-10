@@ -8685,7 +8685,7 @@ _080A1C16:
 _080A1C28: .4byte gUnknown_81167BC
 _080A1C2C: .4byte gUnknown_2039D98
 _080A1C30:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080A1C70
 	ldr r0, _080A1C64
@@ -9127,7 +9127,7 @@ _080A1FDA:
 	ldr r7, _080A2010
 	movs r5, 0x2
 _080A1FE0:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _080A2018
 	ldrb r4, [r6, 0x2]

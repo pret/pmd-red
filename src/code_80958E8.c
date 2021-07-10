@@ -146,7 +146,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
 
         if(sub_8092040(data->targetItem))
             return FALSE;
-        if(sub_8090A60(data->targetItem))
+        if(IsThrowableItem(data->targetItem))
             return FALSE;
         if(!IsNotMoneyOrUsedTMItem(data->targetItem))
             return FALSE;

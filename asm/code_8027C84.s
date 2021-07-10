@@ -209,7 +209,7 @@ sub_8027E18:
 	movs r0, 0
 	b _08027E46
 _08027E28:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	bgt _08027E34
 	movs r0, 0x1
@@ -242,7 +242,7 @@ sub_8027E4C:
 	cmp r0, 0
 	beq _08027E88
 	ldrb r0, [r4]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027E94
@@ -331,7 +331,7 @@ _08027F0C:
 	bl PlaySound
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x14]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027F40

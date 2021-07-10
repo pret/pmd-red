@@ -220,7 +220,7 @@ _0801CA7C:
 	movs r6, 0
 	cmp r0, 0
 	bne _0801CAB0
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	adds r4, r0, 0
 	bl sub_801CFB8
 	adds r4, r0
@@ -1554,7 +1554,7 @@ sub_801D4C0:
 	str r0, [r1, 0x6C]
 	ldr r0, _0801D558
 	str r0, [r1, 0x68]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _0801D4FE
 	ldr r0, [r4]
@@ -1640,7 +1640,7 @@ _0801D59A:
 	str r0, [r1, 0x74]
 	ldr r0, _0801D648
 	str r0, [r1, 0x70]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
 	bne _0801D5B4
 	ldr r0, [r4]

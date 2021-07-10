@@ -29,7 +29,7 @@ sub_801B60C:
 	strb r4, [r0, 0x12]
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x12]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -381,7 +381,7 @@ _0801B92A:
 	bl sub_801B748
 	b _0801BB0E
 _0801B938:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0801B986
 	ldr r0, [r4]

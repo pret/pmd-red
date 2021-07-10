@@ -255,7 +255,7 @@ sub_80917B8:
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x2]
-	bl sub_8090A60
+	bl IsThrowableItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080917E0

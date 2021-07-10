@@ -7709,7 +7709,7 @@ _0809CC20:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8090E14
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0809CC52
 	cmp r5, 0
@@ -7782,7 +7782,7 @@ _0809CCBC: .4byte gUnknown_81163BC
 _0809CCC0: .4byte gTeamInventory_203B460
 _0809CCC4: .4byte 0x0001869f
 _0809CCC8:
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0x13
 	ble _0809CCD4
 	movs r0, 0x2

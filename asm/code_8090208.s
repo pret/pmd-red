@@ -132,7 +132,7 @@ sub_809034C:
 	lsls r2, 24
 	lsrs r2, 24
 	str r2, [sp, 0xE8]
-	bl sub_8090A34
+	bl GetNumberOfFilledInventorySlots
 	str r0, [sp, 0xEC]
 	movs r5, 0
 	movs r0, 0

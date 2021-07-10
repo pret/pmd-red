@@ -7019,7 +7019,7 @@ _08046110:
 	cmp r7, 0
 	beq _08046186
 	adds r0, r6, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _08046168
 	ldr r2, [r1]
 	ldr r1, _0804616C
@@ -7029,7 +7029,7 @@ _08046168: .4byte gUnknown_203B418
 _0804616C: .4byte 0x0000068c
 _08046170:
 	adds r0, r6, 0
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, _080461BC
 	ldr r2, [r1]
 	movs r1, 0xD2
@@ -7119,7 +7119,7 @@ _080461F2:
 	cmp r7, 0
 	beq _0804624E
 	adds r0, r4, 0
-	bl sub_8090C7C
+	bl GetStackBuyPrice
 	ldr r1, _08046230
 	ldr r2, [r1]
 	ldr r1, _08046234
@@ -7130,7 +7130,7 @@ _08046230: .4byte gUnknown_203B418
 _08046234: .4byte 0x0000068c
 _08046238:
 	adds r0, r4, 0
-	bl sub_8090CCC
+	bl GetStackSellPrice
 	ldr r1, _0804628C
 	ldr r2, [r1]
 	movs r3, 0xD2

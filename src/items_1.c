@@ -280,7 +280,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
 
   GetItemDescription(slot->itemIndex);
   sub_8090DC4(buffer88, slot->itemIndex, 0);
-  if (slot->itemIndex == 124) {
+  if (slot->itemIndex == ITEM_ID_USED_TM) {
     // empty HM
     sub_8090DC4(&gUnknown_202DE58, (u8)(slot->numItems + 125), 0);
   }

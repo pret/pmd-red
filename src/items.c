@@ -52,22 +52,22 @@ void InitializeMoneyItems(void)
   gTeamInventory_203B460->teamSavings = 0;
 }
 
-s32 sub_8090A34(void)
+s32 GetNumberOfFilledInventorySlots(void)
 {
-  s32 iVar2;
-  s32 iVar3;
+  s32 i;
+  s32 count;
   
-  iVar3 = 0;
-  for(iVar2 = 0; iVar2 < 0x14; iVar2++)
+  count = 0;
+  for(i = 0; i < 20; i++)
   {
-    if ((gTeamInventory_203B460->teamItems[iVar2].unk0 & 1) != 0) {
-      iVar3++;
+    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) != 0) {
+      count++;
     }
   }
-  return iVar3;
+  return count;
 }
 
-bool8 sub_8090A60(u8 itemIndex)
+bool8 IsThrowableItem(u8 itemIndex)
 {
   if ((GetItemType(itemIndex) != ITEM_TYPE_THROWABLE) && (GetItemType(itemIndex) != ITEM_TYPE_ROCK)) {
     return FALSE;
@@ -85,7 +85,7 @@ void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
   if (itemIndex != ITEM_ID_NOTHING) {
     param_1->unk0 = 1;
     param_1->itemIndex = itemIndex;
-    if (sub_8090A60(itemIndex)) {
+    if (IsThrowableItem(itemIndex)) {
         uVar3 = GetItemUnkThrow(itemIndex,0);
         uVar4 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar3,uVar4);
@@ -114,9 +114,9 @@ void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex)
   u32 uVar2;
   u32 uVar3;
   
-  if (itemIndex != 0) {
+  if (itemIndex != ITEM_ID_NOTHING) {
     param_1->itemIndex = itemIndex;
-    if (sub_8090A60(itemIndex)) {
+    if (IsThrowableItem(itemIndex)) {
         uVar2 = GetItemUnkThrow(itemIndex,0);
         uVar3 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar2,uVar3);
@@ -143,7 +143,7 @@ void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
     {
         param_1->unk0 = 1;
         param_1->itemIndex = param_2->itemIndex;
-        r6 = sub_8090A60(param_1->itemIndex);
+        r6 = IsThrowableItem(param_1->itemIndex);
         if(r6 != 0 || GetItemType(param_1->itemIndex) == ITEM_TYPE_MONEY)
         {
             param_1->numItems = param_2->numItems;
@@ -184,13 +184,13 @@ u8 GetItemType(u8 index)
     return gItemParametersData[index].type;
 }
 
-s32 sub_8090BE4(struct ItemSlot *param_1)
+s32 GetStackBuyValue(struct ItemSlot *param_1)
 {
   if (param_1->itemIndex == ITEM_ID_POKE) {
     return GetMoneyValue(param_1);
   }
   else {
-    if (sub_8090A60(param_1->itemIndex)) {
+    if (IsThrowableItem(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].buyPrice * param_1->numItems;
     }
     else {
@@ -199,13 +199,13 @@ s32 sub_8090BE4(struct ItemSlot *param_1)
   }
 }
 
-s32 sub_8090C30(struct ItemSlot *param_1)
+s32 GetStackSellValue(struct ItemSlot *param_1)
 {
   if (param_1->itemIndex == ITEM_ID_POKE) {
     return GetMoneyValue(param_1);
   }
   else {
-    if (sub_8090A60(param_1->itemIndex)) {
+    if (IsThrowableItem(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].sellPrice * param_1->numItems;
     }
     else {
@@ -214,13 +214,13 @@ s32 sub_8090C30(struct ItemSlot *param_1)
   }
 }
 
-s32 sub_8090C7C(struct ItemSlot *param_1)
+s32 GetStackBuyPrice(struct ItemSlot *param_1)
 {
   if (!CanSellItem(param_1->itemIndex)) {
     return 0;
   }
   else {
-    if (sub_8090A60(param_1->itemIndex)) {
+    if (IsThrowableItem(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].buyPrice * param_1->numItems;
     }
     else {
@@ -229,13 +229,13 @@ s32 sub_8090C7C(struct ItemSlot *param_1)
   }
 }
 
-s32 sub_8090CCC(struct ItemSlot *param_1)
+s32 GetStackSellPrice(struct ItemSlot *param_1)
 {
   if (!CanSellItem(param_1->itemIndex)) {
     return 0;
   }
   else {
-    if (sub_8090A60(param_1->itemIndex)) {
+    if (IsThrowableItem(param_1->itemIndex)) {
       return gItemParametersData[param_1->itemIndex].sellPrice * param_1->numItems;
     }
     else {
