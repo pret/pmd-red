@@ -132,7 +132,7 @@ void sub_801B080(void)
             if(!IsHMItem(gUnknown_203B22C->unk8))
             {
                 gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].numItems = gUnknown_203B22C->unk8 - 0x7D;
-                gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].itemIndex = 0x7C;
+                gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].itemIndex = USED_TM;
             }
             PlaySound(0x9C << 1);
             // #+CM$m8#R learned
