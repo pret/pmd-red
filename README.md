@@ -1,5 +1,7 @@
 # Pokémon Mystery Dungeon: Red Rescue Team
 
+[![build](https://github.com/pret/pmd-red/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/pret/pmd-red/actions/workflows/build.yml)
+
 This is a disassembly of Pokémon Mystery Dungeon: Red Rescue Team.
 
 It builds the following rom:
@@ -16,9 +18,10 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
 * Disassembly of [**Pokémon Pinball**][pokepinball]
 * Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Fire Red**][pokefirered]
+* Disassembly of [**Pokémon Fire Red**/**Leaf Green**][pokefirered]
 * Disassembly of [**Pokémon Ruby/Sapphire**][pokeruby]
 * Disassembly of [**Pokémon Emerald**][pokeemerald]
+* Disassembly of [**Pokémon Diamond/Pearl**][pokediamond]
 * Discord: [**pret**][Discord]
 * irc: **irc.freenode.net** [**#pret**][irc]
 
@@ -31,5 +34,6 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [pokefirered]: https://github.com/pret/pokefirered
 [pokeruby]: https://github.com/pret/pokeruby
 [pokeemerald]: https://github.com/pret/pokeemerald
+[pokediamond]: https://github.com/pret/pokediamond
 [Discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

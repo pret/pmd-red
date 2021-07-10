@@ -57,7 +57,7 @@ u32 DisplayGulpinDialogueSprite(s32 param_1,s16 param_2,struct unkStruct_Gulpin 
 
   param2_32 = param_2; // dumb cast needed to get lsr/asr combo
   
-  gUnknown_203B26C = MemoryAlloc(0x18c,8);
+  gUnknown_203B26C = MemoryAlloc(sizeof(struct unkStruct_203B26C),8);
   gUnknown_203B26C->unk0 = param_1;
   gUnknown_203B26C->unkC = param2_32;
   gUnknown_203B26C->unk10 = param_3;

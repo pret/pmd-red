@@ -140,7 +140,7 @@ void CreateFelicityMoneySavingsHeader(u32 param_1)
   sub_80073E0(param_1);
 }
 
-void sub_8016C40(u32 param_1)
+void DrawTeamMoneyBox(u32 param_1)
 { 
   sub_8008C54(param_1);
   sub_80073B8(param_1);
