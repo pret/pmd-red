@@ -33,7 +33,7 @@ struct unkStruct_203B330
     u8 fillE[2];
     u32 unk10;
     struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[3];
+    struct UnkTextStruct2 unk18[4];
 };
 extern struct unkStruct_203B330 *gUnknown_203B330;
 
@@ -536,7 +536,7 @@ void ReturnToGetHelpMenu(void)
 u32 sub_80319A4(u8 param_1,u8 param_2,int param_3)
 {
   
-  gUnknown_203B330 = MemoryAlloc(0x78,8);
+  gUnknown_203B330 = MemoryAlloc(sizeof(struct unkStruct_203B330),8);
   gUnknown_203B330->unkC = param_1;
   gUnknown_203B330->unkD = param_2;
   sub_801317C(&gUnknown_203B330->unk0);

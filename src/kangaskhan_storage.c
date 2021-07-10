@@ -40,7 +40,7 @@ u32 DisplayKangaskhanDialogueSprite(s32 param_1)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  gUnknown_203B208 = MemoryAlloc(0x14c,8);
+  gUnknown_203B208 = MemoryAlloc(sizeof(struct unkStruct_203B208),8);
   gUnknown_203B208->unk18 = 0;
   gUnknown_203B208->unk1C = 0;
   gUnknown_203B208->unk20 = 0;

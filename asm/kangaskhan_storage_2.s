@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8018280
-sub_8018280:
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r4, _080182DC
-	ldr r0, [r4]
-	adds r0, 0xD4
-	ldr r0, [r0]
-	bl sub_8008C54
-	ldr r0, [r4]
-	adds r0, 0xD4
-	ldr r0, [r0]
-	bl sub_80073B8
-	ldr r2, _080182E0
-	ldr r0, [r4]
-	adds r0, 0xD4
-	ldr r3, [r0]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x4
-	movs r1, 0
-	bl xxx_call_draw_string
-	ldr r0, [r4]
-	adds r0, 0xC0
-	bl sub_8013C68
-	ldr r0, [r4]
-	adds r0, 0xD4
-	ldr r0, [r0]
-	bl sub_80073E0
-	bl sub_801CCD8
-	movs r0, 0
-	bl sub_801AD34
-	ldr r0, [r4]
-	adds r0, 0x70
-	movs r1, 0
-	bl sub_8012EA4
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080182DC: .4byte gUnknown_203B20C
-_080182E0: .4byte gUnknown_80DB830
-	thumb_func_end sub_8018280
-
 	thumb_func_start sub_80182E4
 sub_80182E4:
 	push {r4-r7,lr}
