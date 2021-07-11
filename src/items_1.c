@@ -19,7 +19,6 @@ extern u8* GetUnformattedTypeString(s16);
 extern u32 sub_8092BF4(void*);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
-extern s8 sub_8091764(u8);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
@@ -27,7 +26,7 @@ extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
-extern s16 gUnknown_810A580[0x12][18];
+extern s16 gUnknown_810A580[0x12][NUMBER_OF_GUMMIS];
 extern u16 gUnknown_81097E0;
 
 
@@ -457,25 +456,25 @@ u32 GetMoneyValue2(struct ItemSlot* slot)
   return gUnknown_810A3F0[slot->numItems];
 }
 
-void sub_80915F4(struct PokemonStruct* pokemon, u8 a2, u8 a3, struct unkStruct_80915F4* a4) 
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4) 
 {
   // item stat buff?
   s32 result;
 
   a4->unk0 = (u16)-1;
   a4->unk2 = 0;
-  result = sub_8091764(a2);
+  result = IsGummiItem(itemIndex);
   if (result) {
     u8 pokemon_type_0 = GetPokemonType(pokemon->speciesNum, 0);
     u8 pokemon_type_1 = GetPokemonType(pokemon->speciesNum, 1);
-    u32 index_base = a2 - 0x55;  // enum value checked in sub_8091764
+    u32 gummi_index = itemIndex - ITEM_ID_WHITE_GUMMI + 1;
     s32 value0;
     s32 value1;
     s32 diff;
     u16 boost_amount;
 
-    value0 = gUnknown_810A580[pokemon_type_0][index_base];
-    value1 = gUnknown_810A580[pokemon_type_1][index_base];
+    value0 = gUnknown_810A580[pokemon_type_0][gummi_index];
+    value1 = gUnknown_810A580[pokemon_type_1][gummi_index];
     diff  = (s16)pokemon->unk14;
 
     pokemon->unk14 += value0 + value1;
@@ -547,4 +546,25 @@ void sub_80915F4(struct PokemonStruct* pokemon, u8 a2, u8 a3, struct unkStruct_8
       }
     }
   }
+}
+
+s8 IsGummiItem(u8 itemIndex) {
+  if (itemIndex < ITEM_ID_WHITE_GUMMI) {
+    return 0;
+  }
+  if (itemIndex > ITEM_ID_SILVER_GUMMI) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 HasGummiItem() {
+  s32 i;
+  for (i = 0; i < 20; i++) {
+    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
+    if ((i[gTeamInventory_203B460->teamItems].unk0 & 1) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
+      return 1;
+    }
+  }
+  return 0;
 }

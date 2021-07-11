@@ -319,6 +319,8 @@ enum ItemID {
     ITEM_ID_G_MACHINE_8,
 };
 
+#define NUMBER_OF_GUMMIS 18
+
 void LoadItemParameters(void);
 struct TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
@@ -342,5 +344,6 @@ void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
 u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
+s8 IsGummiItem(u8);
 
 #endif

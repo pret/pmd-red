@@ -5,58 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8091764
-sub_8091764:
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x55
-	bls _08091776
-	cmp r0, 0x66
-	bhi _08091776
-	movs r0, 0x1
-	b _08091778
-_08091776:
-	movs r0, 0
-_08091778:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8091764
-
-	thumb_func_start sub_809177C
-sub_809177C:
-	push {r4,lr}
-	movs r4, 0
-_08091780:
-	lsls r1, r4, 2
-	ldr r0, _080917A4
-	ldr r0, [r0]
-	adds r2, r1, r0
-	ldrb r1, [r2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080917A8
-	ldrb r0, [r2, 0x2]
-	bl sub_8091764
-	lsls r0, 24
-	cmp r0, 0
-	beq _080917A8
-	movs r0, 0x1
-	b _080917B0
-	.align 2, 0
-_080917A4: .4byte gTeamInventory_203B460
-_080917A8:
-	adds r4, 0x1
-	cmp r4, 0x13
-	ble _08091780
-	movs r0, 0
-_080917B0:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809177C
-
 	thumb_func_start sub_80917B8
 sub_80917B8:
 	push {r4,lr}

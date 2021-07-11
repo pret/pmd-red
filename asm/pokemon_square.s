@@ -1727,7 +1727,7 @@ _0801AC50:
 	adds r1, r4, 0
 	bl sub_8090E14
 	ldrb r0, [r4, 0x2]
-	bl sub_8091764
+	bl IsGummiItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
