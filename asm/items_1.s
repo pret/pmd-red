@@ -5,75 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8091874
-sub_8091874:
-	push {r4-r7,lr}
-	movs r2, 0
-	movs r4, 0
-	ldr r7, _08091884
-	movs r6, 0x8C
-	lsls r6, 2
-	movs r3, 0
-	b _080918A0
-	.align 2, 0
-_08091884: .4byte gTeamInventory_203B460
-_08091888:
-	cmp r2, r4
-	ble _0809189A
-	ldr r0, [r7]
-	lsls r1, r4, 2
-	adds r0, r6
-	adds r1, r0, r1
-	adds r0, r3
-	ldr r0, [r0]
-	str r0, [r1]
-_0809189A:
-	adds r3, 0x4
-	adds r2, 0x1
-	adds r4, 0x1
-_080918A0:
-	cmp r2, 0x7
-	bgt _080918CA
-	ldr r0, [r7]
-	adds r0, r3
-	adds r0, r6
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080918CA
-	ldr r5, _080918E8
-	movs r1, 0x8C
-	lsls r1, 2
-_080918B6:
-	adds r3, 0x4
-	adds r2, 0x1
-	cmp r2, 0x7
-	bgt _080918CA
-	ldr r0, [r5]
-	adds r0, r3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080918B6
-_080918CA:
-	cmp r2, 0x8
-	bne _08091888
-	cmp r4, 0x7
-	bgt _080918E0
-_080918D2:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl sub_8091840
-	adds r4, 0x1
-	cmp r4, 0x7
-	ble _080918D2
-_080918E0:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080918E8: .4byte gTeamInventory_203B460
-	thumb_func_end sub_8091874
-
 	thumb_func_start sub_80918EC
 sub_80918EC:
 	push {r4-r7,lr}
@@ -173,7 +104,7 @@ sub_8091980:
 _0809199C:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8091840
+	bl xxx_init_unk230_substruct
 	adds r5, 0x1
 	cmp r5, 0x7
 	ble _0809199C

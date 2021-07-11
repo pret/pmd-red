@@ -593,7 +593,7 @@ s32 xxx_count_inv_unk230() {
   return counter;
 }
 
-void sub_8091840(u8 i) {
+void xxx_init_unk230_substruct(u8 i) {
   struct subStruct_203B460* unk230;
 
   // the masking makes it seem like there should be an item ID passed, but
@@ -605,4 +605,37 @@ void sub_8091840(u8 i) {
 
 struct subStruct_203B460* sub_809185C(u8 i) {
   return &gTeamInventory_203B460->unk230[i & 0xff];
+}
+
+void xxx_fill_unk230_gaps() {
+  // fill unk230 gaps
+  // basically the same as FillInventoryGaps
+  s32 slot_checking = 0;
+  s32 last_filled = 0;
+
+  do {
+    // effectively just a while loop
+    if ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0) {
+        do {
+            // find next empty slot
+            slot_checking++;
+        } while ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0);
+    }
+
+    if (slot_checking == 8) {
+        break;
+    }
+
+    if (slot_checking > last_filled) {
+        // shift it down
+        gTeamInventory_203B460->unk230[last_filled] = gTeamInventory_203B460->unk230[slot_checking];
+    }
+    slot_checking++;
+    last_filled++;
+  } while (1);
+
+  // clear out the rest of the slots
+  for (; last_filled < 8; last_filled++) {
+      xxx_init_unk230_substruct(last_filled);
+  }
 }

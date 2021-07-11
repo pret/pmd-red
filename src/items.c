@@ -14,7 +14,6 @@ extern u16 *gUnknown_81097E0;
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct Item *gItemParametersData;
 
-extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern bool8 CanSellItem(u8);
@@ -48,7 +47,7 @@ void InitializeMoneyItems(void)
 
   for(i = 0; i < 8; i++)
   {
-    sub_8091840(i);
+    xxx_init_unk230_substruct(i);
   }
   gTeamInventory_203B460->teamMoney = 0;
   gTeamInventory_203B460->teamSavings = 0;
