@@ -10,7 +10,7 @@
 sub_8019E40:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8091814
+	bl xxx_count_inv_unk230
 	cmp r0, 0
 	beq _08019ED4
 	ldr r5, _08019EC8
@@ -50,7 +50,7 @@ sub_8019E40:
 	movs r2, 0x1
 	bl sub_800641C
 	ldr r4, [r5]
-	bl sub_8091814
+	bl xxx_count_inv_unk230
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
@@ -212,7 +212,7 @@ sub_8019FCC:
 	movs r1, 0
 	movs r2, 0
 	bl sub_800641C
-	bl sub_8091814
+	bl xxx_count_inv_unk230
 	adds r1, r0, 0
 	ldr r0, [r5]
 	strh r1, [r0, 0x22]

@@ -581,3 +581,28 @@ void MoveToStorage(struct ItemSlot* slot) {
       gTeamInventory_203B460->teamStorage[slot->itemIndex] = 999;
   }
 }
+
+s32 xxx_count_inv_unk230() {
+  s32 i;
+  s32 counter = 0;
+  for (i = 0; i < 8; i++) {
+      if (gTeamInventory_203B460->unk230[i].unk0) {
+          counter++;
+      }
+  }
+  return counter;
+}
+
+void sub_8091840(u8 i) {
+  struct subStruct_203B460* unk230;
+
+  // the masking makes it seem like there should be an item ID passed, but
+  // that would go horribly out of bounds...
+  unk230 = &gTeamInventory_203B460->unk230[i & 0xff];
+  unk230->unk0 = 0;
+  unk230->unk1 = 0;
+}
+
+struct subStruct_203B460* sub_809185C(u8 i) {
+  return &gTeamInventory_203B460->unk230[i & 0xff];
+}

@@ -11,7 +11,7 @@ extern struct TeamInventory *gTeamInventory_203B460;
 
 extern u32 GetStackSellPrice(struct ItemSlot *);
 extern bool8 CanSellItem(u8);
-extern u32 sub_8091814(void);
+extern u32 xxx_count_inv_unk230(void);
 extern u32 sub_8091A48(void);
 extern s32 sub_80144A4(s32 *);
 void UpdateKecleonStoreState(u32);
@@ -168,7 +168,7 @@ void sub_8019D68(void)
 u32 sub_8019D8C(void)
 {
     if(gUnknown_203B210->unk4)
-        return sub_8091814();
+        return xxx_count_inv_unk230();
     else
         return sub_8091A48();
 }
