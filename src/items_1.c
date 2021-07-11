@@ -100,14 +100,14 @@ void FillInventoryGaps()
 
   do {
     // effectively just a while loop 
-    if ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+    if ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
         // find next empty slot
         do {
             slot_checking++;
-        } while ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
+        } while ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
     }
 
-    if (slot_checking == 20) {
+    if (slot_checking == INVENTORY_SIZE) {
         break;
     }
 
@@ -120,7 +120,7 @@ void FillInventoryGaps()
   } while (1);
 
   // clear out the rest of the slots
-  for (; last_filled < 20; last_filled++) {
+  for (; last_filled < INVENTORY_SIZE; last_filled++) {
       struct ItemSlot *slot;
 #ifdef NONMATCHING
       slot = &gTeamInventory_203B460->teamItems[last_filled];
@@ -138,7 +138,7 @@ void FillInventoryGaps()
 
 s32 FindItemInInventory(u8 itemIndex) {
   s32 i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == itemIndex)) {
       return i;
     }
@@ -151,7 +151,7 @@ s32 GetItemCountInInventory(u8 _itemIndex)
 #ifdef NONMATCHING
   s32 count = 0;
   s32 i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == _itemIndex)) {
       count++;
     }
@@ -232,7 +232,7 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
   s32 i;
 
   // try to add item to inventory, return 1 if failed
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED struct ItemSlot* current = &gTeamInventory_203B460->teamItems[i];
     if (!(i[gTeamInventory_203B460->teamItems].unk0 & 1)) {
       gTeamInventory_203B460->teamItems[i] = *slot;
@@ -261,7 +261,7 @@ void ConvertMoneyItemToMoney()
       current_slot->numItems = 0;
       current_slot->unk0 = 0;
     }
-  } while (++i < 20);
+  } while (++i < INVENTORY_SIZE);
   FillInventoryGaps();
 
   i = 0;
@@ -277,7 +277,7 @@ void ConvertMoneyItemToMoney()
       s32 j;
 
       // find next lowest
-      for (j = next; j < 20; j++) {
+      for (j = next; j < INVENTORY_SIZE; j++) {
         UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
         if ((j[gTeamInventory_203B460->teamItems].unk0 & 1) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex))) {
           lowest_index = j;
@@ -292,7 +292,7 @@ void ConvertMoneyItemToMoney()
         gTeamInventory_203B460->teamItems[lowest_index] = current;
       }
     }
-  } while (++i < 20);
+  } while (++i < INVENTORY_SIZE);
   FillInventoryGaps();
 }
 
@@ -459,7 +459,7 @@ u32 GetMoneyValue2(struct ItemSlot* slot)
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4) 
 {
   // item stat buff?
-  s32 result;
+  s8 result;
 
   a4->unk0 = (u16)-1;
   a4->unk2 = 0;
@@ -548,7 +548,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
   }
 }
 
-s8 IsGummiItem(u8 itemIndex) {
+bool8 IsGummiItem(u8 itemIndex) {
   if (itemIndex < ITEM_ID_WHITE_GUMMI) {
     return 0;
   }
@@ -560,11 +560,24 @@ s8 IsGummiItem(u8 itemIndex) {
 
 bool8 HasGummiItem() {
   s32 i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
     if ((i[gTeamInventory_203B460->teamItems].unk0 & 1) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
       return 1;
     }
   }
   return 0;
+}
+
+void MoveToStorage(struct ItemSlot* slot) {
+  if (IsThrowableItem(slot->itemIndex)) {
+    gTeamInventory_203B460->teamStorage[slot->itemIndex] += slot->numItems;
+  }
+  else {
+    gTeamInventory_203B460->teamStorage[slot->itemIndex]++;
+  }
+
+  if (gTeamInventory_203B460->teamStorage[slot->itemIndex] > 999) {
+      gTeamInventory_203B460->teamStorage[slot->itemIndex] = 999;
+  }
 }

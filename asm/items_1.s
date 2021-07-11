@@ -5,56 +5,56 @@
 
 	.text
 
-	thumb_func_start sub_80917B8
-sub_80917B8:
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4, 0x2]
-	bl IsThrowableItem
-	lsls r0, 24
-	cmp r0, 0
-	beq _080917E0
-	ldr r2, _080917DC
-	ldr r1, [r2]
-	ldrb r0, [r4, 0x2]
-	lsls r0, 1
-	adds r1, 0x50
-	adds r1, r0
-	ldrh r0, [r1]
-	ldrb r3, [r4, 0x1]
-	adds r0, r3
-	b _080917F0
-	.align 2, 0
-_080917DC: .4byte gTeamInventory_203B460
-_080917E0:
-	ldr r2, _0809180C
-	ldr r1, [r2]
-	ldrb r0, [r4, 0x2]
-	lsls r0, 1
-	adds r1, 0x50
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-_080917F0:
-	strh r0, [r1]
-	ldr r0, [r2]
-	ldrb r1, [r4, 0x2]
-	lsls r1, 1
-	adds r0, 0x50
-	adds r2, r0, r1
-	ldrh r0, [r2]
-	ldr r1, _08091810
-	cmp r0, r1
-	bls _08091806
-	strh r1, [r2]
-_08091806:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809180C: .4byte gTeamInventory_203B460
-_08091810: .4byte 0x000003e7
-	thumb_func_end sub_80917B8
+@ 	thumb_func_start MoveToStorage
+@ MoveToStorage:
+@ 	push {r4,lr}
+@ 	adds r4, r0, 0
+@ 	ldrb r0, [r4, 0x2]
+@ 	bl IsThrowableItem
+@ 	lsls r0, 24
+@ 	cmp r0, 0
+@ 	beq _080917E0
+@ 	ldr r2, _080917DC
+@ 	ldr r1, [r2]
+@ 	ldrb r0, [r4, 0x2]
+@ 	lsls r0, 1
+@ 	adds r1, 0x50
+@ 	adds r1, r0
+@ 	ldrh r0, [r1]
+@ 	ldrb r3, [r4, 0x1]
+@ 	adds r0, r3
+@ 	b _080917F0
+@ 	.align 2, 0
+@ _080917DC: .4byte gTeamInventory_203B460
+@ _080917E0:
+@ 	ldr r2, _0809180C
+@ 	ldr r1, [r2]
+@ 	ldrb r0, [r4, 0x2]
+@ 	lsls r0, 1
+@ 	adds r1, 0x50
+@ 	adds r1, r0
+@ 	ldrh r0, [r1]
+@ 	adds r0, 0x1
+@ _080917F0:
+@ 	strh r0, [r1]
+@ 	ldr r0, [r2]
+@ 	ldrb r1, [r4, 0x2]
+@ 	lsls r1, 1
+@ 	adds r0, 0x50
+@ 	adds r2, r0, r1
+@ 	ldrh r0, [r2]
+@ 	ldr r1, _08091810
+@ 	cmp r0, r1
+@ 	bls _08091806
+@ 	strh r1, [r2]
+@ _08091806:
+@ 	pop {r4}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _0809180C: .4byte gTeamInventory_203B460
+@ _08091810: .4byte 0x000003e7
+@ 	thumb_func_end MoveToStorage
 
 	thumb_func_start sub_8091814
 sub_8091814:

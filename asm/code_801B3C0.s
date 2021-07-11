@@ -969,7 +969,7 @@ _0801BDD2:
 	ldr r4, _0801BE08
 	ldr r0, [r4]
 	adds r0, 0x20
-	bl sub_80917B8
+	bl MoveToStorage
 	ldr r0, [r4]
 	ldr r0, [r0, 0x24]
 	bl ShiftItemsDownFrom

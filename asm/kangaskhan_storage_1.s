@@ -404,7 +404,7 @@ _080178F4:
 	ldr r4, _08017914
 	ldr r0, [r4]
 	adds r0, 0xC
-	bl sub_80917B8
+	bl MoveToStorage
 	ldr r0, [r4]
 	ldr r0, [r0, 0x10]
 	bl ShiftItemsDownFrom
@@ -520,7 +520,7 @@ _080179D2:
 	lsls r4, r5, 2
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_80917B8
+	bl MoveToStorage
 	ldr r0, [r6]
 	adds r0, r4
 	strb r7, [r0, 0x2]

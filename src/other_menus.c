@@ -378,7 +378,7 @@ void sub_80371B8(void)
     if ((((gUnknown_203B35C->unk4 != 0) &&(gUnknown_203B35C->unk0 == 0)) &&
         (pbVar2 = sub_8035D94(), pbVar2->unk0 != 0)) && (pbVar2->unk4 != 0)) {
         // We received something..
-      gTeamInventory_203B460->unk50[pbVar2->unk0] += pbVar2->unk4;
+      gTeamInventory_203B460->teamStorage[pbVar2->unk0] += pbVar2->unk4;
     }
   }
 }

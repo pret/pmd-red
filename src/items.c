@@ -36,14 +36,14 @@ void InitializeMoneyItems(void)
 {
   s32 i;
   
-  for(i = 0; i < 20; i++)
+  for(i = 0; i < INVENTORY_SIZE; i++)
   {
     gTeamInventory_203B460->teamItems[i].unk0 = 0;
   }
 
   for(i = 0; i < 0xF0; i++)
   {
-    gTeamInventory_203B460->unk50[i] = 0;
+    gTeamInventory_203B460->teamStorage[i] = 0;
   }
 
   for(i = 0; i < 8; i++)
@@ -60,7 +60,7 @@ s32 GetNumberOfFilledInventorySlots(void)
   s32 count;
   
   count = 0;
-  for(i = 0; i < 20; i++)
+  for(i = 0; i < INVENTORY_SIZE; i++)
   {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) != 0) {
       count++;

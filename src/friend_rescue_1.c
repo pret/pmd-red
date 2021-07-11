@@ -176,7 +176,7 @@ void sub_8034F88(void)
                 temp2 = sub_8095228(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->unk41C.itemIndex != 0)
                     temp2->unk20 = gUnknown_203B33C->unk41C;
-                gTeamInventory_203B460->unk50[gUnknown_203B33C->unk41C.itemIndex]--;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B33C->unk41C.itemIndex]--;
                 sub_80338C4(0x75);
                 break;
             case 7:
