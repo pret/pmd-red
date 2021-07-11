@@ -1,8 +1,6 @@
 #ifndef GUARD_TEAM_INVENTORY_H
 #define GUARD_TEAM_INVENTORY_H
 
-#include "item.h"
-
 struct subStruct_203B460
 {
     u8 unk0;
@@ -11,8 +9,8 @@ struct subStruct_203B460
 
 struct TeamInventory
 {
-    struct ItemSlot teamItems[INVENTORY_SIZE];
-    u16 teamStorage[NUMBER_OF_ITEM_IDS];
+    struct ItemSlot teamItems[20];
+    u16 teamStorage[0xF0];
     struct subStruct_203B460 unk230[8];  // this is probably actually the same struct as ItemSlot_ALT (see sub_80919FC)
     struct subStruct_203B460 unk250[4]; // TODO: idk if this is identical struct or not.. Ghidra says sizes are same
     /* 0x260 */ s32 teamMoney;
