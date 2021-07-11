@@ -413,7 +413,7 @@ _08048852:
 	movs r0, 0x1
 	b _08048862
 	.align 2, 0
-_08048858: .4byte gUnknown_810A580
+_08048858: .4byte gTypeGummiIQBoost
 _0804885C: .4byte gUnknown_810A808
 _08048860:
 	movs r0, 0

@@ -8101,13 +8101,13 @@ gUnknown_81097C5: @ 81097C5
         @ replacing .incbin "baserom.gba", 0x001097c5, 0x1b
         .byte 0x9f, 0x83, 0xa0, 0x83, 0xa1, 0x83, 0xa2, 0x83, 0xa3, 0x83, 0xa4, 0x83, 0xa5, 0x83, 0xa6, 0x83, 0xa7, 0x83, 0xa8, 0x00, 0x00, 0x00, 0x00, 0xc4, 0x97, 0x10, 0x08
 
-	.global gUnknown_81097E0
-gUnknown_81097E0: @ 81097E0
+	.global gGummiStatBoostLUT
+gGummiStatBoostLUT: @ 81097E0
         @ replacing .incbin "baserom.gba", 0x001097e0, 0x8
-        .byte 0x01, 0x00
-        .byte 0x02, 0x00
-        .byte 0x04, 0x00
-        .byte 0x08, 0x00
+        .2byte 0x0001
+        .2byte 0x0002
+        .2byte 0x0004
+        .2byte 0x0008
 
 	.global gUnknown_81097E8
 gUnknown_81097E8: @ 81097E8
@@ -8331,8 +8331,10 @@ gUnknown_810A3F0: @ 810A3F0 (money related according to PMDe
 				  @ LUT for money item stack size -> money amount
 	.incbin "baserom.gba", 0x10A3F0, 0x190
 
-	.global gUnknown_810A580
-gUnknown_810A580: @ 810A580
+	.global gTypeGummiIQBoost
+gTypeGummiIQBoost: @ 810A580
+	// s16[0x12][NUMBER_OF_GUMMIS = 18]
+	// relates [type][gummi tyep] -> iq boost amount
 	.incbin "baserom.gba", 0x10A580, 0x288
 
 	.global gUnknown_810A808

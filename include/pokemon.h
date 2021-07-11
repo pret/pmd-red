@@ -18,7 +18,7 @@ struct PokemonStruct
     u8 fillD[0x10 - 0xD];
     u8 unk10;
     u8 fill11[0x14 - 0x11];
-    u16 unk14;
+    /* 0x14 */ u16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ u8 pokeAtt; // attack
     /* 0x19 */ u8 pokeSPAtt; // sp attack

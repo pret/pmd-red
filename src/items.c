@@ -9,7 +9,7 @@ extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
-extern u16 *gUnknown_81097E0;
+extern u16 *gGummiStatBoostLUT;
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct Item *gItemParametersData;
