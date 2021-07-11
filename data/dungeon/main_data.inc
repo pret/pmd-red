@@ -1,5 +1,10 @@
 @ Start of Dungeon Floor Data: Main Data
 
+.include "include/constants/weather.h"
+.include "include/constants/layout_generation.h"
+.include "include/constants/event_floor.h"
+.include "include/constants/visibility.h"
+
 .global DungeonMainData
 DungeonMainData:
 .include "data/dungeon/TinyWoods/main_data.inc"
