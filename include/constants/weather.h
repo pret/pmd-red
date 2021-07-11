@@ -4,7 +4,7 @@
 #define WEATHER_CLEAR                   0
 #define WEATHER_SUNNY                   1
 #define WEATHER_SANDSTORM               2
-#define WEATHER_CLOUDY`                 3
+#define WEATHER_CLOUDY                  3
 #define WEATHER_RAIN                    4
 #define WEATHER_HAIL                    5
 #define WEATHER_FOG                     6

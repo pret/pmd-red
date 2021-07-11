@@ -317,6 +317,47 @@ string generate_floorID_table_text(Json map_data) {
     return text.str();
 }
 
+string generate_mainData_table_text(Json map_data) {
+
+    ostringstream text;
+
+    text << "@ This is auto-generated\n";
+
+    for (auto &table: map_data.array_items()) {
+
+        text << ".byte " << table["dungeonGenerationType"].string_value() << "\n";
+        text << ".byte " << table["floorLayout_H"].int_value()
+            << ", " << table["tileset"].int_value()
+            << ", " << table["bgMusic"].int_value() << "\n";
+        text << ".byte " << table["weather"].string_value() << "\n";
+        text << ".byte " << table["Unknown_05"].int_value()
+            << ", " << table["pokeDensity"].int_value()
+            << ", " << table["shopDensity"].int_value()
+            << ", " << table["MHDensity"].int_value()
+            << ", " << table["Unknown_09"].int_value()
+            << ", " << table["stickyChance"].int_value()
+            << ", " << table["Unknown_11"].int_value()
+            << ", " << table["hasTerrainPond"].int_value()
+            << ", " << table["hasTerrainTiles"].int_value()
+            << ", " << table["Unknown_14"].int_value()
+            << ", " << table["itemDensity"].int_value()
+            << ", " << table["trapDensity"].int_value()
+            << ", " << table["floorNum"].int_value() << "\n";
+        text << ".byte " << table["eventFloor"].string_value() << "\n";
+        text << ".2byte " << table["crossings"].int_value() << "\n";
+        text << ".byte " << table["terrainDensity"].int_value() << "\n";
+        text << ".byte " << table["visibility"].string_value() << "\n";
+        text << ".byte " << table["maxPoke"].int_value()
+            << ", " << table["Unknown_24"].int_value()
+            << ", " << table["Unknown_24_1"].int_value()
+            << ", " << table["Unknown_24_2"].int_value()
+            << ", " << table["Unknown_24_3"].int_value() << "\n" << "\n";
+    }
+    text << "@ END OF TABLE" << "\n";
+
+    return text.str();
+}
+
 string get_directory_name(string filename) {
     size_t dir_pos = filename.find_last_of("/\\");
 
@@ -375,6 +416,21 @@ void process_floorID(string map_filepath) {
 
     string files_dir = get_directory_name(map_filepath);
     write_text_file(files_dir + "floor_id.inc", pokemon_text);
+}
+
+void process_mainData(string map_filepath) {
+    string mapdata_err;
+
+    string mapdata_json_text = read_text_file(map_filepath);
+
+    Json map_data = Json::parse(mapdata_json_text, mapdata_err);
+    if (map_data == Json())
+        FATAL_ERROR("%s\n", mapdata_err.c_str());
+
+    string pokemon_text = generate_mainData_table_text(map_data);
+
+    string files_dir = get_directory_name(map_filepath);
+    write_text_file(files_dir + "main_data.inc", pokemon_text);
 }
 
 string generate_groups_text(Json groups_data) {
@@ -599,8 +655,8 @@ int main(int argc, char *argv[]) {
 
     char *mode_arg = argv[1];
     string mode(mode_arg);
-    if (mode != "layouts" && mode != "map" && mode != "groups" && mode != "dungeon" && mode != "floor")
-        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', 'groups', 'dungeon' or 'floor' '.\n");
+    if (mode != "layouts" && mode != "map" && mode != "groups" && mode != "dungeon" && mode != "floor" && mode != "main_data")
+        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', 'groups', 'dungeon', 'floor' or 'main_data' '.\n");
 
     if (mode == "map") {
         if (argc != 5)
@@ -637,11 +693,19 @@ int main(int argc, char *argv[]) {
     }
     else if (mode == "floor") {
         if (argc != 4)
-            FATAL_ERROR("USAGE: dungeonjson dungeon <game-version> <floor_file>\n");
+            FATAL_ERROR("USAGE: dungeonjson floor <game-version> <floor_file>\n");
 
         string filepath(argv[3]);
 
         process_floorID(filepath);
+    }
+    else if (mode == "main_data") {
+        if (argc != 4)
+            FATAL_ERROR("USAGE: dungeonjson main_data <game-version> <floor_file>\n");
+
+        string filepath(argv[3]);
+
+        process_mainData(filepath);
     }
 
 

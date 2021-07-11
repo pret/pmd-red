@@ -1,0 +1,8 @@
+#ifndef GUARD_CONSTANTS_VISBILITY_H
+#define GUARD_CONSTANTS_VISBILITY_H 
+
+#define VISIBILITY_FULL            0
+#define VISIBILITY_1_TILE          1
+#define VISIBILITY_2_TILE          2
+
+#endif //GUARD_CONSTANTS_VISBILITY_H
