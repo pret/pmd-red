@@ -35,6 +35,12 @@ struct ItemSlot_ALT
     u8 unk2;
 };
 
+struct unkStruct_80915F4
+{
+    u16 unk0;
+    u16 unk2;
+};
+
 enum ItemType
 {
     ITEM_TYPE_THROWABLE,

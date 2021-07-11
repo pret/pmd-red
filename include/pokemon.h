@@ -144,7 +144,7 @@ u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
 u16 GetPokemonAttSpatt(s16 index, u32 r1);
 u16 GetPokemonDefSpdef(s16 index, u32 r1);
-u8 GetPokemonType(s32 index, u32 typeIndex);;
+u8 GetPokemonType(s32 index, u32 typeIndex);
 u8 GetPokemonAbility(s16 index, u32 abilityIndex);
 s16 GetDexInternalNo(s16 index, u32 r1);
 s16 GetBaseRecruit(s16 index);

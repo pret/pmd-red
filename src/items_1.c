@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item.h"
 #include "team_inventory.h"
+#include "random.h"
 #include "pokemon.h"
 #include "subStruct_203B240.h"
 
@@ -18,6 +19,7 @@ extern u8* GetUnformattedTypeString(s16);
 extern u32 sub_8092BF4(void*);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern s8 sub_8091764(u8);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
@@ -25,6 +27,71 @@ extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+extern s16 gUnknown_810A580[0x12][18];
+extern u16 gUnknown_81097E0;
+
+
+// s32 sub_8090FEC(s32 a1, u8* a2, u8 a3) 
+// {
+//   s32 i, j;
+//   s32 cond = 0;
+
+//   j = 0;
+//   for (i = 0; i < 4; i++) {
+//     s32 div = 0;
+//     s32 next = i + 1;
+//     register s32* unk_temp asm("r0");
+
+//     register UNUSED size_t unk_offs asm("r3") = i << 2;
+//     unk_temp = (s32*)0x81097B0;
+//     next = i + 1;
+//     if (a1 >= unk_temp[i]) {
+//       register s32 *temp_81097B0 asm("r2") = (s32*)0x81097B0;
+//       u32 _i = i;
+//       s32 diff;
+//       do {
+//         // correct other than register usage
+//         diff = temp_81097B0[_i];
+//         a1 -= diff;
+//         div++;
+//       } while (a1 >= diff);
+//     }
+
+//     if (div > 9) {
+//       div = 9;
+//     }
+//     // /correct
+
+//     if (!div && !cond) {
+//         if (a3) {
+//           *a2++ = 96;
+//         }
+//     }
+//     else {
+//       u8 temp;
+//       if (div) {
+//         u32 offs;
+
+//         cond = 1;
+//         offs = 2 * div;
+//         *a2++ = ((u8*)0x81097C4)[offs];
+//         temp  = ((u8*)0x81097C5)[offs];
+//       }
+//       else {
+//         *a2++ = ((u8*)0x81097C4)[0];
+//         temp  = ((u8*)0x81097C5)[0];
+//       }
+
+//       *a2++ = temp;
+//       j++;
+//     }
+//   }
+
+//   *a2++ = ((u8*)0x81097C4)[2 * a1];
+//   *a2++ = ((u8*)0x81097C5)[2 * a1];
+//   *a2 = 0;
+//   return j + 1;
+// }
 
 void FillInventoryGaps() 
 {
@@ -114,42 +181,20 @@ s32 GetItemCountInInventory(u8 _itemIndex)
 
 s32 GetItemPossessionCount(u8 itemIndex) 
 {
-#ifdef NONMATCHING
-  s32 item_count = GetItemCountInInventory(itemIndex);
-  s32 i = 0;
-
-  struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  for (i = 0; i < NUM_SPECIES; i++) {
-    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    if ((pokemon->unk0 & 1) 
-        && ((pokemon->unk0 >> 1) & 1)
-        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
-        && (pokemon->itemIndexHeld == itemIndex)) {
-      item_count++;
-    }
-  }
-  return item_count;
-#else
-  // hacky stuff again to fix order of operands in & at bottom bit
   s32 item_count = GetItemCountInInventory(itemIndex);
   s32 i = 0;
   
   struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  register s32 one_mask asm("r6") = 1;
   for (i = 0; i < NUM_SPECIES; i++) {
-    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    register int bottom_bit asm("r0") = one_mask;
-    bottom_bit &= pokemon->unk0;
-
-    if (bottom_bit 
-        && ((pokemon->unk0 >> 1) & one_mask)
-        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
-        && (pokemon->itemIndexHeld == itemIndex)) {
+     struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
+    if ((1 & pokemon->unk0)
+          && ((pokemon->unk0 >> 1) % 2)
+          && (pokemon->itemIndexHeld != ITEM_ID_NOTHING)
+          && (pokemon->itemIndexHeld == itemIndex)) {
       item_count++;
     }
   }
   return item_count;
-#endif
 }
 
 void ShiftItemsDownFrom(s32 start) 
@@ -410,4 +455,96 @@ u32 GetMoneyValue(struct ItemSlot* slot)
 u32 GetMoneyValue2(struct ItemSlot* slot) 
 {
   return gUnknown_810A3F0[slot->numItems];
+}
+
+void sub_80915F4(struct PokemonStruct* pokemon, u8 a2, u8 a3, struct unkStruct_80915F4* a4) 
+{
+  // item stat buff?
+  s32 result;
+
+  a4->unk0 = (u16)-1;
+  a4->unk2 = 0;
+  result = sub_8091764(a2);
+  if (result) {
+    u8 pokemon_type_0 = GetPokemonType(pokemon->speciesNum, 0);
+    u8 pokemon_type_1 = GetPokemonType(pokemon->speciesNum, 1);
+    u32 index_base = a2 - 0x55;  // enum value checked in sub_8091764
+    s32 value0;
+    s32 value1;
+    s32 diff;
+    u16 boost_amount;
+
+    value0 = gUnknown_810A580[pokemon_type_0][index_base];
+    value1 = gUnknown_810A580[pokemon_type_1][index_base];
+    diff  = (s16)pokemon->unk14;
+
+    pokemon->unk14 += value0 + value1;
+    diff = (s16)pokemon->unk14 - diff;
+    if ((s16)pokemon->unk14 <= 0) {
+      pokemon->unk14 = 1;
+    }
+    if ((s16)pokemon->unk14 > 999) {
+      pokemon->unk14 = 999;
+    }
+
+    boost_amount = 0;
+    if (diff <= 8) {
+      boost_amount = 1;
+      if (diff <= 4) {
+        boost_amount = 3;
+        if (diff > 2) {
+          boost_amount = 2;
+        }
+      }
+    }
+    a4->unk0 = boost_amount;
+    if (!a3) {
+      u16 boost_flags;
+      if (!boost_amount && RandomCapped(16) == 10) {
+        boost_flags = 0xf;
+      }
+      else {
+        s32 random_index = RandomCapped(4);
+        u16* table = &gUnknown_81097E0;
+        boost_flags = table[random_index];
+      }
+
+      a4->unk2 = boost_flags;
+      boost_flags = a4->unk2;
+      if (a4->unk2 & 1) {
+        if (pokemon->pokeAtt < 0xffu) {
+          pokemon->pokeAtt++;
+        }
+        else {
+          u16 unk2 = a4->unk2;
+          unk2 &= ~1;
+          a4->unk2 &= unk2;
+        }
+      }
+      if (a4->unk2 & 2) {
+        if (pokemon->pokeSPAtt < 0xffu) {
+          pokemon->pokeSPAtt++;
+        }
+        else {
+          a4->unk2 &= ~2;
+        }
+      }
+      if (a4->unk2 & 4) {
+        if (pokemon->pokeDef < 0xffu) {
+          pokemon->pokeDef++;
+        }
+        else {
+          a4->unk2 &= ~4;
+        }
+      }
+      if (a4->unk2 & 8) {
+        if (pokemon->pokeSPDef < 0xffu) {
+          pokemon->pokeSPDef++;
+        }
+        else {
+          a4->unk2 &= ~8;
+        }
+      }
+    }
+  }
 }

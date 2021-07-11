@@ -3,11 +3,13 @@
 #include "item.h"
 #include "team_inventory.h"
 #include "random.h"
+#include "pokemon.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
+extern u16 *gUnknown_81097E0;
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct Item *gItemParametersData;
