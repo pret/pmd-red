@@ -1,0 +1,7 @@
+#ifndef GUARD_CONSTANTS_EVENT_FLOOR_H
+#define GUARD_CONSTANTS_EVENT_FLOOR_H 
+
+#define EVENT_FLOOR_NONE                0
+#define EVENT_FLOOR_MT_STEEL            1
+
+#endif //GUARD_CONSTANTS_EVENT_FLOOR_H
