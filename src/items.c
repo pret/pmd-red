@@ -3,16 +3,17 @@
 #include "item.h"
 #include "team_inventory.h"
 #include "random.h"
+#include "pokemon.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
+extern u16 *gGummiStatBoostLUT;
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct Item *gItemParametersData;
 
-extern void sub_8091840(u8);
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern bool8 CanSellItem(u8);
@@ -34,19 +35,19 @@ void InitializeMoneyItems(void)
 {
   s32 i;
   
-  for(i = 0; i < 20; i++)
+  for(i = 0; i < INVENTORY_SIZE; i++)
   {
     gTeamInventory_203B460->teamItems[i].unk0 = 0;
   }
 
   for(i = 0; i < 0xF0; i++)
   {
-    gTeamInventory_203B460->unk50[i] = 0;
+    gTeamInventory_203B460->teamStorage[i] = 0;
   }
 
   for(i = 0; i < 8; i++)
   {
-    sub_8091840(i);
+    xxx_init_unk230_substruct(i);
   }
   gTeamInventory_203B460->teamMoney = 0;
   gTeamInventory_203B460->teamSavings = 0;
@@ -58,7 +59,7 @@ s32 GetNumberOfFilledInventorySlots(void)
   s32 count;
   
   count = 0;
-  for(i = 0; i < 20; i++)
+  for(i = 0; i < INVENTORY_SIZE; i++)
   {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) != 0) {
       count++;

@@ -35,6 +35,12 @@ struct ItemSlot_ALT
     u8 unk2;
 };
 
+struct unkStruct_80915F4
+{
+    u16 unk0;
+    u16 unk2;
+};
+
 enum ItemType
 {
     ITEM_TYPE_THROWABLE,
@@ -311,7 +317,11 @@ enum ItemID {
     ITEM_ID_G_MACHINE_6,
     ITEM_ID_G_MACHINE_7,
     ITEM_ID_G_MACHINE_8,
+    NUMBER_OF_ITEM_IDS
 };
+
+#define NUMBER_OF_GUMMIS 18
+#define INVENTORY_SIZE 20
 
 void LoadItemParameters(void);
 struct TeamInventory *GetMoneyItemsInfo(void);
@@ -336,5 +346,7 @@ void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
 u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
+bool8 IsGummiItem(u8);
+void xxx_init_unk230_substruct(u8);
 
 #endif

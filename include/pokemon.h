@@ -18,7 +18,7 @@ struct PokemonStruct
     u8 fillD[0x10 - 0xD];
     u8 unk10;
     u8 fill11[0x14 - 0x11];
-    u16 unk14;
+    /* 0x14 */ u16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ u8 pokeAtt; // attack
     /* 0x19 */ u8 pokeSPAtt; // sp attack
@@ -144,7 +144,7 @@ u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
 u16 GetPokemonAttSpatt(s16 index, u32 r1);
 u16 GetPokemonDefSpdef(s16 index, u32 r1);
-u8 GetPokemonType(s32 index, u32 typeIndex);;
+u8 GetPokemonType(s32 index, u32 typeIndex);
 u8 GetPokemonAbility(s16 index, u32 abilityIndex);
 s16 GetDexInternalNo(s16 index, u32 r1);
 s16 GetBaseRecruit(s16 index);

@@ -1228,8 +1228,8 @@ _08019874:
 	ldr r0, [r4]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_8091840
-	bl sub_8091874
+	bl xxx_init_unk230_substruct
+	bl xxx_fill_unk230_gaps
 	b _080198C8
 	.align 2, 0
 _080198A8: .4byte gUnknown_203B210

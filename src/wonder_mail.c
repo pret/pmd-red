@@ -2007,7 +2007,7 @@ void sub_802A798(void)
                 {
                     return_var->unk20 = gUnknown_203B2C4->unk41C;
                 }
-                gTeamInventory_203B460->unk50[gUnknown_203B2C4->unk41C.itemIndex]--;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.itemIndex]--;
                 sub_802B2BC(0x29);
                 break;
             case 8:

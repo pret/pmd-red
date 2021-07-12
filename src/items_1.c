@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item.h"
 #include "team_inventory.h"
+#include "random.h"
 #include "pokemon.h"
 #include "subStruct_203B240.h"
 
@@ -25,6 +26,71 @@ extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
+extern u16 gGummiStatBoostLUT;
+
+
+// s32 sub_8090FEC(s32 a1, u8* a2, u8 a3) 
+// {
+//   s32 i, j;
+//   s32 cond = 0;
+
+//   j = 0;
+//   for (i = 0; i < 4; i++) {
+//     s32 div = 0;
+//     s32 next = i + 1;
+//     register s32* unk_temp asm("r0");
+
+//     register UNUSED size_t unk_offs asm("r3") = i << 2;
+//     unk_temp = (s32*)0x81097B0;
+//     next = i + 1;
+//     if (a1 >= unk_temp[i]) {
+//       register s32 *temp_81097B0 asm("r2") = (s32*)0x81097B0;
+//       u32 _i = i;
+//       s32 diff;
+//       do {
+//         // correct other than register usage
+//         diff = temp_81097B0[_i];
+//         a1 -= diff;
+//         div++;
+//       } while (a1 >= diff);
+//     }
+
+//     if (div > 9) {
+//       div = 9;
+//     }
+//     // /correct
+
+//     if (!div && !cond) {
+//         if (a3) {
+//           *a2++ = 96;
+//         }
+//     }
+//     else {
+//       u8 temp;
+//       if (div) {
+//         u32 offs;
+
+//         cond = 1;
+//         offs = 2 * div;
+//         *a2++ = ((u8*)0x81097C4)[offs];
+//         temp  = ((u8*)0x81097C5)[offs];
+//       }
+//       else {
+//         *a2++ = ((u8*)0x81097C4)[0];
+//         temp  = ((u8*)0x81097C5)[0];
+//       }
+
+//       *a2++ = temp;
+//       j++;
+//     }
+//   }
+
+//   *a2++ = ((u8*)0x81097C4)[2 * a1];
+//   *a2++ = ((u8*)0x81097C5)[2 * a1];
+//   *a2 = 0;
+//   return j + 1;
+// }
 
 void FillInventoryGaps() 
 {
@@ -34,27 +100,27 @@ void FillInventoryGaps()
 
   do {
     // effectively just a while loop 
-    if ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
-        // find next empty slot
-        do {
-            slot_checking++;
-        } while ((slot_checking < 20) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
+    if ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+      // find next empty slot
+      do {
+        slot_checking++;
+      } while ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
     }
 
-    if (slot_checking == 20) {
-        break;
+    if (slot_checking == INVENTORY_SIZE) {
+      break;
     }
 
     if (slot_checking > last_filled) {
-        // shift it down
-        gTeamInventory_203B460->teamItems[last_filled] = gTeamInventory_203B460->teamItems[slot_checking];
+      // shift it down
+      gTeamInventory_203B460->teamItems[last_filled] = gTeamInventory_203B460->teamItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
   } while (1);
 
   // clear out the rest of the slots
-  for (; last_filled < 20; last_filled++) {
+  for (; last_filled < INVENTORY_SIZE; last_filled++) {
       struct ItemSlot *slot;
 #ifdef NONMATCHING
       slot = &gTeamInventory_203B460->teamItems[last_filled];
@@ -70,9 +136,10 @@ void FillInventoryGaps()
   }
 }
 
-s32 FindItemInInventory(u8 itemIndex) {
+s32 FindItemInInventory(u8 itemIndex) 
+{
   s32 i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == itemIndex)) {
       return i;
     }
@@ -85,7 +152,7 @@ s32 GetItemCountInInventory(u8 _itemIndex)
 #ifdef NONMATCHING
   s32 count = 0;
   s32 i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == _itemIndex)) {
       count++;
     }
@@ -114,42 +181,20 @@ s32 GetItemCountInInventory(u8 _itemIndex)
 
 s32 GetItemPossessionCount(u8 itemIndex) 
 {
-#ifdef NONMATCHING
-  s32 item_count = GetItemCountInInventory(itemIndex);
-  s32 i = 0;
-
-  struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  for (i = 0; i < NUM_SPECIES; i++) {
-    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    if ((pokemon->unk0 & 1) 
-        && ((pokemon->unk0 >> 1) & 1)
-        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
-        && (pokemon->itemIndexHeld == itemIndex)) {
-      item_count++;
-    }
-  }
-  return item_count;
-#else
-  // hacky stuff again to fix order of operands in & at bottom bit
   s32 item_count = GetItemCountInInventory(itemIndex);
   s32 i = 0;
   
   struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  register s32 one_mask asm("r6") = 1;
   for (i = 0; i < NUM_SPECIES; i++) {
-    struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    register int bottom_bit asm("r0") = one_mask;
-    bottom_bit &= pokemon->unk0;
-
-    if (bottom_bit 
-        && ((pokemon->unk0 >> 1) & one_mask)
-        && (pokemon->itemIndexHeld != ITEM_ID_NOTHING) 
-        && (pokemon->itemIndexHeld == itemIndex)) {
+     struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
+    if ((1 & pokemon->unk0)
+          && ((pokemon->unk0 >> 1) % 2)
+          && (pokemon->itemIndexHeld != ITEM_ID_NOTHING)
+          && (pokemon->itemIndexHeld == itemIndex)) {
       item_count++;
     }
   }
   return item_count;
-#endif
 }
 
 void ShiftItemsDownFrom(s32 start) 
@@ -188,7 +233,7 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
   s32 i;
 
   // try to add item to inventory, return 1 if failed
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED struct ItemSlot* current = &gTeamInventory_203B460->teamItems[i];
     if (!(i[gTeamInventory_203B460->teamItems].unk0 & 1)) {
       gTeamInventory_203B460->teamItems[i] = *slot;
@@ -197,7 +242,6 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
   }
   return 1;
 }
-
 
 void ConvertMoneyItemToMoney() 
 {
@@ -217,7 +261,7 @@ void ConvertMoneyItemToMoney()
       current_slot->numItems = 0;
       current_slot->unk0 = 0;
     }
-  } while (++i < 20);
+  } while (++i < INVENTORY_SIZE);
   FillInventoryGaps();
 
   i = 0;
@@ -233,7 +277,7 @@ void ConvertMoneyItemToMoney()
       s32 j;
 
       // find next lowest
-      for (j = next; j < 20; j++) {
+      for (j = next; j < INVENTORY_SIZE; j++) {
         UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
         if ((j[gTeamInventory_203B460->teamItems].unk0 & 1) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex))) {
           lowest_index = j;
@@ -248,7 +292,7 @@ void ConvertMoneyItemToMoney()
         gTeamInventory_203B460->teamItems[lowest_index] = current;
       }
     }
-  } while (++i < 20);
+  } while (++i < INVENTORY_SIZE);
   FillInventoryGaps();
 }
 
@@ -410,4 +454,197 @@ u32 GetMoneyValue(struct ItemSlot* slot)
 u32 GetMoneyValue2(struct ItemSlot* slot) 
 {
   return gUnknown_810A3F0[slot->numItems];
+}
+
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4) 
+{
+  // item stat buff?
+  s8 result;
+
+  a4->unk0 = (u16)-1;
+  a4->unk2 = 0;
+  result = IsGummiItem(itemIndex);
+  if (result) {
+    u8 pokemon_type_0 = GetPokemonType(pokemon->speciesNum, 0);
+    u8 pokemon_type_1 = GetPokemonType(pokemon->speciesNum, 1);
+    u32 gummi_index = itemIndex - ITEM_ID_WHITE_GUMMI + 1;
+    s32 value0;
+    s32 value1;
+    s32 diff;
+    u16 boost_amount;
+
+    value0 = gTypeGummiIQBoost[pokemon_type_0][gummi_index];
+    value1 = gTypeGummiIQBoost[pokemon_type_1][gummi_index];
+    diff  = (s16)pokemon->IQ;
+
+    pokemon->IQ += value0 + value1;
+    diff = (s16)pokemon->IQ - diff;
+    if ((s16)pokemon->IQ <= 0) {
+      pokemon->IQ = 1;
+    }
+    if ((s16)pokemon->IQ > 999) {
+      pokemon->IQ = 999;
+    }
+
+    boost_amount = 0;
+    if (diff <= 8) {
+      boost_amount = 1;
+      if (diff <= 4) {
+        boost_amount = 3;
+        if (diff > 2) {
+          boost_amount = 2;
+        }
+      }
+    }
+    a4->unk0 = boost_amount;
+    if (!a3) {
+      u16 boost_flags;
+      if (!boost_amount && RandomCapped(16) == 10) {
+        // supa gummi (all stats boost)
+        boost_flags = 0xf;
+      }
+      else {
+        s32 random_index = RandomCapped(4);
+        u16* table = &gGummiStatBoostLUT;
+        boost_flags = table[random_index];
+      }
+
+      a4->unk2 = boost_flags;
+      boost_flags = a4->unk2;
+      if (a4->unk2 & 1) {
+        if (pokemon->pokeAtt < 0xffu) {
+          pokemon->pokeAtt++;
+        }
+        else {
+          // fix operand order
+          u16 unk2 = a4->unk2;
+          unk2 &= ~1;
+          a4->unk2 &= unk2;
+        }
+      }
+      if (a4->unk2 & 2) {
+        if (pokemon->pokeSPAtt < 0xffu) {
+          pokemon->pokeSPAtt++;
+        }
+        else {
+          a4->unk2 &= ~2;
+        }
+      }
+      if (a4->unk2 & 4) {
+        if (pokemon->pokeDef < 0xffu) {
+          pokemon->pokeDef++;
+        }
+        else {
+          a4->unk2 &= ~4;
+        }
+      }
+      if (a4->unk2 & 8) {
+        if (pokemon->pokeSPDef < 0xffu) {
+          pokemon->pokeSPDef++;
+        }
+        else {
+          a4->unk2 &= ~8;
+        }
+      }
+    }
+  }
+}
+
+bool8 IsGummiItem(u8 itemIndex) 
+{
+  if (itemIndex < ITEM_ID_WHITE_GUMMI) {
+    return 0;
+  }
+  if (itemIndex > ITEM_ID_SILVER_GUMMI) {
+    return 0;
+  }
+  return 1;
+}
+
+bool8 HasGummiItem() 
+{
+  s32 i;
+  for (i = 0; i < INVENTORY_SIZE; i++) {
+    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
+    if ((i[gTeamInventory_203B460->teamItems].unk0 & 1) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+void MoveToStorage(struct ItemSlot* slot) 
+{
+  if (IsThrowableItem(slot->itemIndex)) {
+    gTeamInventory_203B460->teamStorage[slot->itemIndex] += slot->numItems;
+  }
+  else {
+    gTeamInventory_203B460->teamStorage[slot->itemIndex]++;
+  }
+
+  if (gTeamInventory_203B460->teamStorage[slot->itemIndex] > 999) {
+    gTeamInventory_203B460->teamStorage[slot->itemIndex] = 999;
+  }
+}
+
+s32 xxx_count_inv_unk230() 
+{
+  s32 i;
+  s32 counter = 0;
+  for (i = 0; i < 8; i++) {
+    if (gTeamInventory_203B460->unk230[i].unk0) {
+      counter++;
+    }
+  }
+  return counter;
+}
+
+void xxx_init_unk230_substruct(u8 i) 
+{
+  struct subStruct_203B460* unk230;
+
+  // the masking makes it seem like there should be an item ID passed, but
+  // that would go horribly out of bounds...
+  unk230 = &gTeamInventory_203B460->unk230[i & 0xff];
+  unk230->unk0 = 0;
+  unk230->unk1 = 0;
+}
+
+struct subStruct_203B460* sub_809185C(u8 i) 
+{
+  return &gTeamInventory_203B460->unk230[i & 0xff];
+}
+
+void xxx_fill_unk230_gaps()
+{
+  // fill unk230 gaps
+  // basically the same as FillInventoryGaps
+  s32 slot_checking = 0;
+  s32 last_filled = 0;
+
+  do {
+    // effectively just a while loop
+    if ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0) {
+      do {
+        // find next empty slot
+        slot_checking++;
+      } while ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0);
+    }
+
+    if (slot_checking == 8) {
+      break;
+    }
+
+    if (slot_checking > last_filled) {
+      // shift it down
+      gTeamInventory_203B460->unk230[last_filled] = gTeamInventory_203B460->unk230[slot_checking];
+    }
+    slot_checking++;
+    last_filled++;
+  } while (1);
+
+  // clear out the rest of the slots
+  for (; last_filled < 8; last_filled++) {
+    xxx_init_unk230_substruct(last_filled);
+  }
 }

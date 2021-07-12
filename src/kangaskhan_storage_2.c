@@ -444,10 +444,10 @@ void sub_8018100(void)
         case 12:
             gUnknown_203B20C->unkD0 = 2;
             gUnknown_203B20C->unkC8 = 1;
-            if(gTeamInventory_203B460->unk50[gUnknown_203B20C->unk8.itemIndex] > 99)
+            if(gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex] > 99)
                 gUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gTeamInventory_203B460->unk50[gUnknown_203B20C->unk8.itemIndex];
+                gUnknown_203B20C->unkCC = gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex];
             gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
             gUnknown_203B20C->unkD4 = 1;
             gUnknown_203B20C->unkD8 = &gUnknown_203B20C->unkF0[1];

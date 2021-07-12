@@ -465,7 +465,7 @@ _0801864A:
 	lsls r4, r5, 2
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_80917B8
+	bl MoveToStorage
 	ldr r0, [r6]
 	adds r0, r4
 	strb r7, [r0, 0x2]
@@ -849,7 +849,7 @@ _08018978: .4byte gUnknown_203B20C
 _0801897C:
 	ldr r0, [r4]
 	adds r0, 0x8
-	bl sub_80917B8
+	bl MoveToStorage
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
 	bl ShiftItemsDownFrom

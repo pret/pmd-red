@@ -7271,7 +7271,7 @@ sub_80227B8:
 	adds r1, r5, 0
 	movs r2, 0x6
 	bl sub_808D9AC
-	bl sub_809177C
+	bl HasGummiItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08022818
@@ -7921,7 +7921,7 @@ sub_8022D2C:
 	adds r0, r2, 0
 	adds r0, 0x52
 	ldrb r0, [r0]
-	bl sub_8091764
+	bl IsGummiItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08022D74
@@ -8194,7 +8194,7 @@ _08022F68:
 	ldrb r1, [r1]
 	adds r3, 0x44
 	movs r2, 0
-	bl sub_80915F4
+	bl GetGummiItemStatBoost
 	ldr r1, [r4]
 	adds r0, r1, 0
 	adds r0, 0x20
@@ -15029,7 +15029,7 @@ _080265B4:
 	adds r2, r3
 	movs r0, 0xA
 	str r0, [r2]
-	bl sub_809177C
+	bl HasGummiItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080265EC
