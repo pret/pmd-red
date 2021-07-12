@@ -237,10 +237,10 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
     UNUSED struct ItemSlot* current = &gTeamInventory_203B460->teamItems[i];
     if (!(i[gTeamInventory_203B460->teamItems].unk0 & 1)) {
       gTeamInventory_203B460->teamItems[i] = *slot;
-      return 0;
+      return FALSE;
     }
   }
-  return 1;
+  return TRUE;
 }
 
 void ConvertMoneyItemToMoney() 
@@ -314,7 +314,7 @@ void AddToTeamMoney(s32 amount)
 
 u16 GetItemMove(u8 index) 
 {
-  return gItemParametersData[index & 0xff].move;
+  return gItemParametersData[index].move;
 }
 
 u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3) 
@@ -324,7 +324,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
   GetItemDescription(slot->itemIndex);
   sub_8090DC4(buffer88, slot->itemIndex, 0);
   if (slot->itemIndex == ITEM_ID_USED_TM) {
-    // empty HM
+    // empty TM
     sub_8090DC4(&gUnknown_202DE58, (u8)(slot->numItems + 125), 0);
   }
   sub_80073B8(a2);
@@ -367,83 +367,83 @@ bool8 CanSellItem(u32 id)
       && (id != ITEM_ID_MUSIC_BOX)
       && (GetItemSellPrice(id_))
       && (GetItemBuyPrice(id_))) {
-          return 1;
+          return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 bool8 IsNotMoneyOrUsedTMItem(u8 id) 
 {
   if (id == ITEM_ID_NOTHING) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_POKE) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_USED_TM) {
-    return 0;
+    return FALSE;
   }
-  return 1;
+  return TRUE;
 }
 
 bool8 IsNotSpecialItem(u8 id) 
 {
   if (id == ITEM_ID_NOTHING) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_POKE) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_ROCK_PART) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_ICE_PART) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_STEEL_PART) {
-    return 0;
+    return FALSE;
   }
   else if (id == ITEM_ID_MUSIC_BOX) {
-    return 0;
+    return FALSE;
   }
-  return 1;
+  return TRUE;
 }
 
 bool8 IsEdibleItem(u8 id) 
 {
   if (!((GetItemType(id) == ITEM_TYPE_BERRY_SEED) || (GetItemType(id) == ITEM_TYPE_APPLE_GUMMI))) {
-    return 0;
+    return FALSE;
   }
-  return 1;
+  return TRUE;
 }
 
 bool8 IsHMItem(u8 id) 
 {
   if (id == ITEM_ID_CUT) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_FLY) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_SURF) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_STRENGTH) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_FLASH) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_ROCK_SMASH) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_WATERFALL) {
-    return 1;
+    return TRUE;
   }
   else if (id == ITEM_ID_DIVE) {
-    return 1;
+    return TRUE;
   }
-  return 0;
+  return FALSE;
 }
 
 u32 GetMoneyValue(struct ItemSlot* slot) 
@@ -475,14 +475,14 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
 
     value0 = gTypeGummiIQBoost[pokemon_type_0][gummi_index];
     value1 = gTypeGummiIQBoost[pokemon_type_1][gummi_index];
-    diff  = (s16)pokemon->IQ;
+    diff  = pokemon->IQ;
 
     pokemon->IQ += value0 + value1;
-    diff = (s16)pokemon->IQ - diff;
-    if ((s16)pokemon->IQ <= 0) {
+    diff = pokemon->IQ - diff;
+    if (pokemon->IQ <= 0) {
       pokemon->IQ = 1;
     }
-    if ((s16)pokemon->IQ > 999) {
+    if (pokemon->IQ > 999) {
       pokemon->IQ = 999;
     }
 
@@ -512,7 +512,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
       a4->unk2 = boost_flags;
       boost_flags = a4->unk2;
       if (a4->unk2 & 1) {
-        if (pokemon->pokeAtt < 0xffu) {
+        if (pokemon->pokeAtt < 255) {
           pokemon->pokeAtt++;
         }
         else {
@@ -523,7 +523,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
         }
       }
       if (a4->unk2 & 2) {
-        if (pokemon->pokeSPAtt < 0xffu) {
+        if (pokemon->pokeSPAtt < 255) {
           pokemon->pokeSPAtt++;
         }
         else {
@@ -531,7 +531,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
         }
       }
       if (a4->unk2 & 4) {
-        if (pokemon->pokeDef < 0xffu) {
+        if (pokemon->pokeDef < 255) {
           pokemon->pokeDef++;
         }
         else {
@@ -539,7 +539,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
         }
       }
       if (a4->unk2 & 8) {
-        if (pokemon->pokeSPDef < 0xffu) {
+        if (pokemon->pokeSPDef < 255) {
           pokemon->pokeSPDef++;
         }
         else {
@@ -553,12 +553,12 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
 bool8 IsGummiItem(u8 itemIndex) 
 {
   if (itemIndex < ITEM_ID_WHITE_GUMMI) {
-    return 0;
+    return FALSE;
   }
   if (itemIndex > ITEM_ID_SILVER_GUMMI) {
-    return 0;
+    return FALSE;
   }
-  return 1;
+  return TRUE;
 }
 
 bool8 HasGummiItem() 
@@ -567,10 +567,10 @@ bool8 HasGummiItem()
   for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
     if ((i[gTeamInventory_203B460->teamItems].unk0 & 1) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
-      return 1;
+      return TRUE;
     }
   }
-  return 0;
+  return FALSE;
 }
 
 void MoveToStorage(struct ItemSlot* slot) 
@@ -603,16 +603,14 @@ void xxx_init_unk230_substruct(u8 i)
 {
   struct subStruct_203B460* unk230;
 
-  // the masking makes it seem like there should be an item ID passed, but
-  // that would go horribly out of bounds...
-  unk230 = &gTeamInventory_203B460->unk230[i & 0xff];
+  unk230 = &gTeamInventory_203B460->unk230[i];
   unk230->unk0 = 0;
   unk230->unk1 = 0;
 }
 
 struct subStruct_203B460* sub_809185C(u8 i) 
 {
-  return &gTeamInventory_203B460->unk230[i & 0xff];
+  return &gTeamInventory_203B460->unk230[i];
 }
 
 void xxx_fill_unk230_gaps()

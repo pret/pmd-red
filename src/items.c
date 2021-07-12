@@ -70,12 +70,10 @@ s32 GetNumberOfFilledInventorySlots(void)
 
 bool8 IsThrowableItem(u8 itemIndex)
 {
-  if ((GetItemType(itemIndex) != ITEM_TYPE_THROWABLE) && (GetItemType(itemIndex) != ITEM_TYPE_ROCK)) {
+  if ((GetItemType(itemIndex) != ITEM_TYPE_THROWABLE) && (GetItemType(itemIndex) != ITEM_TYPE_ROCK))
     return FALSE;
-  }
-  else {
+  else 
     return TRUE;
-  }
 }
 
 void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
@@ -91,17 +89,14 @@ void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
         uVar4 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar3,uVar4);
     }
-    else {
-        if (GetItemType(itemIndex) == ITEM_TYPE_MONEY) {
-            param_1->numItems  = 1;
-        }
-        else {
-            param_1->numItems  = 0;
-        }
-    }
-    if (param_3 != 0) {
+    else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
+        param_1->numItems  = 1;
+    else 
+        param_1->numItems  = 0;
+
+    if (param_3 != 0)
         param_1->unk0 |= 8;
-    }
+
   }
   else {
     param_1->unk0 = 0;
@@ -121,14 +116,11 @@ void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex)
         uVar2 = GetItemUnkThrow(itemIndex,0);
         uVar3 = GetItemUnkThrow(itemIndex,1);
         param_1->numItems = RandomRange(uVar2,uVar3);
-    } else {
-      if (GetItemType(itemIndex) == ITEM_TYPE_MONEY) {
+    } 
+    else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
         param_1->numItems = 1;
-      }
-      else {
+    else
         param_1->numItems = 0;
-      }
-    }
   }
   else {
     param_1->itemIndex = 0;
@@ -146,20 +138,11 @@ void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
         param_1->itemIndex = param_2->itemIndex;
         r6 = IsThrowableItem(param_1->itemIndex);
         if(r6 != 0 || GetItemType(param_1->itemIndex) == ITEM_TYPE_MONEY)
-        {
             param_1->numItems = param_2->numItems;
-        }
+        else if(param_1->itemIndex == ITEM_ID_USED_TM)
+            param_1->numItems = param_2->numItems;
         else
-        {
-            if(param_1->itemIndex == ITEM_ID_USED_TM)
-            {
-                param_1->numItems = param_2->numItems;
-            }
-            else
-            {
-                param_1->numItems = r6;
-            }
-        }
+            param_1->numItems = 0;
     }
     else
     {
