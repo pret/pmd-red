@@ -21,7 +21,7 @@ extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void xxx_sort_inv_unk230_80918EC();
-extern s32 sub_8091BB4(u8);
+bool8 xxx_insert_unk250_8091C1C(u8);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
@@ -29,6 +29,7 @@ extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
+extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u16 gGummiStatBoostLUT;
@@ -652,7 +653,6 @@ void xxx_fill_unk230_gaps()
 }
 
 void xxx_sort_inv_unk230_80918EC() {
-  // sort unk230
   s32 i;
 
   for (i = 0; i < 7; i++) {
@@ -680,13 +680,13 @@ void xxx_inv_unk250_random_8091980(u8 a1) {
   for (i = 0; i < 8; i++) {
     s32 rand_1 = RandomCapped(9999);
     s32 rand_2 = RandomCapped(9999);
-    xxx_insert_unk250_80919FC(sub_8091E94(data[a1], rand_1, rand_2));
+    xxx_insert_unk230_80919FC(sub_8091E94(data[a1], rand_1, rand_2));
   }
   xxx_sort_inv_unk230_80918EC();
   sub_8091BB4(a1);
 }
 
-bool8 xxx_insert_unk250_80919FC(u8 itemIndex) {
+bool8 xxx_insert_unk230_80919FC(u8 itemIndex) {
   struct ItemSlot_ALT alt;
   s32 i;
 
@@ -704,7 +704,7 @@ u32 xxx_count_non_empty_inv_unk250_8091A48() {
   s32 i;
   u32 count = 0;
   for (i = 0; i < 4; i++) {
-    if (gTeamInventory_203B460->unk250[i].unk0) {
+    if (gTeamInventory_203B460->unk250[i].itemIndex) {
       count++;
     }
   }
@@ -712,12 +712,12 @@ u32 xxx_count_non_empty_inv_unk250_8091A48() {
 }
 
 void xxx_init_inv_unk250_at_8091A74(u8 index) {
-  struct subStruct_203B460* unk250 = &gTeamInventory_203B460->unk250[index];
-  unk250->unk0 = 0;
-  unk250->unk1 = 0;
+  struct ItemSlot_ALT* unk250 = &gTeamInventory_203B460->unk250[index];
+  unk250->itemIndex = 0;
+  unk250->numItems = 0;
 }
 
-struct subStruct_203B460* xxx_get_unk250_at_8091A90(u8 index) {
+struct ItemSlot_ALT* xxx_get_unk250_at_8091A90(u8 index) {
     return &gTeamInventory_203B460->unk250[index];
 }
 
@@ -727,7 +727,7 @@ void xxx_fill_inv_unk250_gaps_8091AA8(u8 index) {
 
   do {
     while (slot_checking < 4) {
-      if (gTeamInventory_203B460->unk250[slot_checking].unk0) {
+      if (gTeamInventory_203B460->unk250[slot_checking].itemIndex != ITEM_ID_NOTHING) {
         break;
       }
       slot_checking++;
@@ -749,4 +749,51 @@ void xxx_fill_inv_unk250_gaps_8091AA8(u8 index) {
   for (; last_filled < 4; last_filled++) {
     xxx_init_inv_unk250_at_8091A74(last_filled);
   }
+}
+
+void xxx_sort_inv_unk250_8091B20() {
+  s32 i;
+
+  for (i = 0; i < 3; i++) {
+    s32 j;
+    for (j = i + 1; j < 4; j++) {
+      s32 order_i = GetItemOrder(gTeamInventory_203B460->unk250[i].itemIndex);
+      s32 order_j = GetItemOrder(gTeamInventory_203B460->unk250[j].itemIndex);
+      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk250[i].numItems < gTeamInventory_203B460->unk250[j].numItems)) {
+        struct ItemSlot_ALT str_i = gTeamInventory_203B460->unk250[i];
+        gTeamInventory_203B460->unk250[i] = gTeamInventory_203B460->unk250[j];
+        gTeamInventory_203B460->unk250[j] = str_i;
+      }
+    }
+  }
+}
+
+void sub_8091BB4(u8 index) {
+  u32 data[4];
+  s32 i;
+
+  memcpy(data, gUnknown_81097F8, 4 * sizeof(u32));
+  for (i = 0; i < 4; i++) {
+    xxx_init_inv_unk250_at_8091A74(i);
+  }
+  for (i = 0; i < 4; i++) {
+    s32 rand_1 = RandomCapped(9999);
+    s32 rand_2 = RandomCapped(9999);
+    xxx_insert_unk250_8091C1C(sub_8091E94(data[index], rand_1, rand_2));
+  }
+  xxx_sort_inv_unk250_8091B20();
+}
+
+bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
+  struct ItemSlot_ALT alt;
+  s32 i;
+
+  sub_8090B08(&alt, itemIndex);  // initialize
+  for (i = 0; i < 4; i++) {
+    if (!gTeamInventory_203B460->unk250[i].itemIndex) {
+      gTeamInventory_203B460->unk250[i] = alt;
+      return 0;
+    }
+  }
+  return 1;
 }
