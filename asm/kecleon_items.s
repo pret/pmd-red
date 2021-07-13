@@ -1223,7 +1223,7 @@ _08019874:
 	adds r0, r1, 0
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_809185C
+	bl xxx_get_inv_unk230_at_809185C
 	bl sub_8091274
 	ldr r0, [r4]
 	adds r0, 0x20
@@ -1237,13 +1237,13 @@ _080198AC:
 	adds r0, r1, 0
 	adds r0, 0x21
 	ldrb r0, [r0]
-	bl sub_8091A90
+	bl xxx_get_unk250_at_8091A90
 	bl sub_8091274
 	ldr r0, [r4]
 	adds r0, 0x21
 	ldrb r0, [r0]
-	bl sub_8091A74
-	bl sub_8091AA8
+	bl xxx_init_inv_unk250_at_8091A74
+	bl xxx_fill_inv_unk250_gaps_8091AA8
 _080198C8:
 	movs r0, 0xA6
 	lsls r0, 1
@@ -1419,7 +1419,7 @@ _08019A04:
 	ldr r0, [r4]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_809185C
+	bl xxx_get_inv_unk230_at_809185C
 	b _08019A3C
 	.align 2, 0
 _08019A24: .4byte gUnknown_203B210
@@ -1431,7 +1431,7 @@ _08019A28:
 	ldr r0, [r4]
 	adds r0, 0x21
 	ldrb r0, [r0]
-	bl sub_8091A90
+	bl xxx_get_unk250_at_8091A90
 _08019A3C:
 	adds r5, r0, 0
 	ldr r4, _08019A68
@@ -1466,7 +1466,7 @@ _08019A6C:
 	ldr r0, [r4]
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_809185C
+	bl xxx_get_inv_unk230_at_809185C
 	b _08019AA4
 	.align 2, 0
 _08019A8C: .4byte gUnknown_203B210
@@ -1478,7 +1478,7 @@ _08019A90:
 	ldr r0, [r4]
 	adds r0, 0x21
 	ldrb r0, [r0]
-	bl sub_8091A90
+	bl xxx_get_unk250_at_8091A90
 _08019AA4:
 	adds r5, r0, 0
 	ldr r4, _08019AD0

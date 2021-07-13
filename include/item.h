@@ -348,5 +348,7 @@ u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
 bool8 IsGummiItem(u8);
 void xxx_init_unk230_substruct(u8);
+bool8 xxx_insert_unk250_80919FC(u8);
+u32 xxx_count_non_empty_inv_unk250_8091A48();
 
 #endif

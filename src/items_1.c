@@ -19,12 +19,16 @@ extern u8* GetUnformattedTypeString(s16);
 extern u32 sub_8092BF4(void*);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
+extern void xxx_sort_inv_unk230_80918EC();
+extern s32 sub_8091BB4(u8);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
+extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u16 gGummiStatBoostLUT;
@@ -99,12 +103,12 @@ void FillInventoryGaps()
   s32 last_filled = 0;
 
   do {
-    // effectively just a while loop 
-    if ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+    while (slot_checking < INVENTORY_SIZE) {
+      if (slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1) {
+        break;
+      }
       // find next empty slot
-      do {
-        slot_checking++;
-      } while ((slot_checking < INVENTORY_SIZE) && !(slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1));
+      slot_checking++;
     }
 
     if (slot_checking == INVENTORY_SIZE) {
@@ -601,14 +605,14 @@ s32 xxx_count_inv_unk230()
 
 void xxx_init_unk230_substruct(u8 i) 
 {
-  struct subStruct_203B460* unk230;
+  struct ItemSlot_ALT* unk230;
 
   unk230 = &gTeamInventory_203B460->unk230[i];
   unk230->itemIndex = 0;
-  unk230->unk1 = 0;
+  unk230->numItems = 0;
 }
 
-struct subStruct_203B460* sub_809185C(u8 i) 
+struct ItemSlot_ALT* xxx_get_inv_unk230_at_809185C(u8 i) 
 {
   return &gTeamInventory_203B460->unk230[i];
 }
@@ -621,12 +625,12 @@ void xxx_fill_unk230_gaps()
   s32 last_filled = 0;
 
   do {
-    // effectively just a while loop
-    if ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].itemIndex) {
-      do {
-        // find next empty slot
-        slot_checking++;
-      } while ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].itemIndex);
+    while (slot_checking < 8) {
+      if (gTeamInventory_203B460->unk230[slot_checking].itemIndex) {
+        break;
+      }
+      // find next empty slot
+      slot_checking++;
     }
 
     if (slot_checking == 8) {
@@ -647,20 +651,102 @@ void xxx_fill_unk230_gaps()
   }
 }
 
-void sub_80918EC() {
+void xxx_sort_inv_unk230_80918EC() {
   // sort unk230
   s32 i;
 
   for (i = 0; i < 7; i++) {
-      s32 j;
-      for (j = i + 1; j < 8; j++) {
-          s32 order_i = GetItemOrder(gTeamInventory_203B460->unk230[i].itemIndex);
-          s32 order_j = GetItemOrder(gTeamInventory_203B460->unk230[j].itemIndex);
-          if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk230[i].unk1 < gTeamInventory_203B460->unk230[j].unk1)) {
-              struct subStruct_203B460 str_i = gTeamInventory_203B460->unk230[i];
-              gTeamInventory_203B460->unk230[i] = gTeamInventory_203B460->unk230[j];
-              gTeamInventory_203B460->unk230[j] = str_i;
-          }
+    s32 j;
+    for (j = i + 1; j < 8; j++) {
+      s32 order_i = GetItemOrder(gTeamInventory_203B460->unk230[i].itemIndex);
+      s32 order_j = GetItemOrder(gTeamInventory_203B460->unk230[j].itemIndex);
+      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk230[i].numItems < gTeamInventory_203B460->unk230[j].numItems)) {
+        struct ItemSlot_ALT str_i = gTeamInventory_203B460->unk230[i];
+        gTeamInventory_203B460->unk230[i] = gTeamInventory_203B460->unk230[j];
+        gTeamInventory_203B460->unk230[j] = str_i;
       }
+    }
+  }
+}
+
+void xxx_inv_unk250_random_8091980(u8 a1) {
+  u32 data[4];
+  s32 i;
+
+  memcpy(data, gUnknown_81097E8, 4 * sizeof(u32));
+  for (i = 0; i < 8; i++) {
+    xxx_init_unk230_substruct(i);
+  }
+  for (i = 0; i < 8; i++) {
+    s32 rand_1 = RandomCapped(9999);
+    s32 rand_2 = RandomCapped(9999);
+    xxx_insert_unk250_80919FC(sub_8091E94(data[a1], rand_1, rand_2));
+  }
+  xxx_sort_inv_unk230_80918EC();
+  sub_8091BB4(a1);
+}
+
+bool8 xxx_insert_unk250_80919FC(u8 itemIndex) {
+  struct ItemSlot_ALT alt;
+  s32 i;
+
+  sub_8090B08(&alt, itemIndex);  // initialize
+  for (i = 0; i < 8; i++) {
+    if (!gTeamInventory_203B460->unk230[i].itemIndex) {
+      gTeamInventory_203B460->unk230[i] = alt;
+      return 0;
+    }
+  }
+  return 1;
+}
+
+u32 xxx_count_non_empty_inv_unk250_8091A48() {
+  s32 i;
+  u32 count = 0;
+  for (i = 0; i < 4; i++) {
+    if (gTeamInventory_203B460->unk250[i].unk0) {
+      count++;
+    }
+  }
+  return count;
+}
+
+void xxx_init_inv_unk250_at_8091A74(u8 index) {
+  struct subStruct_203B460* unk250 = &gTeamInventory_203B460->unk250[index];
+  unk250->unk0 = 0;
+  unk250->unk1 = 0;
+}
+
+struct subStruct_203B460* xxx_get_unk250_at_8091A90(u8 index) {
+    return &gTeamInventory_203B460->unk250[index];
+}
+
+void xxx_fill_inv_unk250_gaps_8091AA8(u8 index) {
+  s32 slot_checking = 0;
+  s32 last_filled = 0;
+
+  do {
+    while (slot_checking < 4) {
+      if (gTeamInventory_203B460->unk250[slot_checking].unk0) {
+        break;
+      }
+      slot_checking++;
+    }
+
+    if (slot_checking == 4) {
+      break;
+    }
+
+    if (slot_checking > last_filled) {
+      // shift it down
+      gTeamInventory_203B460->unk250[last_filled] = gTeamInventory_203B460->unk250[slot_checking];
+    }
+    slot_checking++;
+    last_filled++;
+  } while (1);
+
+  // clear out the rest of the slots
+  for (; last_filled < 4; last_filled++) {
+    xxx_init_inv_unk250_at_8091A74(last_filled);
   }
 }
