@@ -1,11 +1,10 @@
 #include "global.h"
 #include "play_time.h"
+#include "code_8092334.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
 EWRAM_DATA struct PlayTimeStruct gPlayTime;
 
-extern void sub_809488C(u8 *r0, u8 *r1, u32);
-extern void sub_8094924(u8 *r0, u8 *r1, u32);
 
 void InitializePlayTime(void)
 {
@@ -76,7 +75,7 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
     }
 }
 
-void WritePlayTime(u8 *r0)
+void WritePlayTime(struct unkStruct_8094924 *r0)
 {
     sub_809488C(r0, (&(gPlayTimeRef->frames)), 6);
     sub_809488C(r0, (&(gPlayTimeRef->seconds)), 6);
@@ -84,10 +83,10 @@ void WritePlayTime(u8 *r0)
     sub_809488C(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
 }
 
-void ReadPlayTime(u8 *r0)
+void ReadPlayTime(struct unkStruct_8094924 *r0)
 {
     sub_8094924(r0, (&(gPlayTimeRef->frames)), 6);
     sub_8094924(r0, (&(gPlayTimeRef->seconds)), 6);
     sub_8094924(r0, (&(gPlayTimeRef->minutes)), 6);
-    sub_8094924(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
+    sub_8094924(r0, (u8*)(&(gPlayTimeRef->hours)), 14);
 }

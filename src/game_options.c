@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gUnknown_203B46C.h"
+#include "code_8092334.h"
 
 struct unkStruct_8109954
 {
@@ -19,8 +20,6 @@ extern struct UnkSaveStruct1 *gUnknown_203B46C;
 extern struct UnkSaveStruct1 gUnknown_2038C70;
 extern void sub_8094C14(void);
 extern void sub_80099F0(u32);
-extern void sub_809488C(u8 *r0, u8 *r1, u32 r2);
-extern void sub_8094924(u8 *r0, u8 *r1, u32 r2);
 
 void LoadGameOptions(void)
 {
@@ -67,7 +66,7 @@ bool32 GameOptionsNotChange(struct UnkSaveStruct1 *r0)
     return FALSE;
 }
 
-void WriteGameOptions(u8 *param_1)
+void WriteGameOptions(struct unkStruct_8094924 *param_1)
 {  
     u8 zero;
     u8 neg_1;
@@ -153,7 +152,7 @@ void WriteGameOptions(u8 *param_1)
     sub_809488C(param_1, &gUnknown_203B46C->unkC, 2);
 }
 
-void ReadGameOptions(u8 *param_1)
+void ReadGameOptions(struct unkStruct_8094924 *param_1)
 {
     u8 byteArray[4];
     sub_8094924(param_1, byteArray, 2);

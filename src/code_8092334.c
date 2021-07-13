@@ -1,15 +1,8 @@
+#include "code_8092334.h"
 #include "global.h"
 #include "memory.h"
 #include "item.h"
 
-struct unkStruct_8094924
-{
-    // size: 0x10?
-    u8 *unk0; // head?
-    u8 *unk4; // tail?
-    u32 unk8;
-    u32 unkC;
-};
 
 s16 sub_8094828(u16 r0, u8 itemIndex)
 {

@@ -4,6 +4,7 @@
 #include "random.h"
 #include "pokemon.h"
 #include "subStruct_203B240.h"
+#include "code_8092334.h"
 
 #include <stddef.h>
 
@@ -22,6 +23,10 @@ extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void xxx_sort_inv_unk230_80918EC();
 bool8 xxx_insert_unk250_8091C1C(u8);
+extern void sub_8091E28(struct unkStruct_8094924 *r0, struct ItemSlot*);
+extern void sub_8091DE0(struct unkStruct_8094924 *r0, struct ItemSlot_ALT*);
+extern void sub_8091E00(struct unkStruct_8094924 *r0, struct ItemSlot*);
+extern void sub_8091DC0(struct unkStruct_8094924 *r0, struct ItemSlot_ALT*);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
@@ -694,10 +699,10 @@ bool8 xxx_insert_unk230_80919FC(u8 itemIndex) {
   for (i = 0; i < 8; i++) {
     if (!gTeamInventory_203B460->unk230[i].itemIndex) {
       gTeamInventory_203B460->unk230[i] = alt;
-      return 0;
+      return FALSE;
     }
   }
-  return 1;
+  return TRUE;
 }
 
 u32 xxx_count_non_empty_inv_unk250_8091A48() {
@@ -792,8 +797,56 @@ bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
   for (i = 0; i < 4; i++) {
     if (!gTeamInventory_203B460->unk250[i].itemIndex) {
       gTeamInventory_203B460->unk250[i] = alt;
-      return 0;
+      return FALSE;
     }
   }
-  return 1;
+  return TRUE;
+}
+
+s32 sub_8091C68(u8* unk0, u32 size) 
+{
+  struct unkStruct_8094924 unk;
+  s32 i;
+
+  sub_809486C(&unk, unk0, size);
+  for (i = 0; i < INVENTORY_SIZE; i++) {
+    sub_8091E28(&unk, &gTeamInventory_203B460->teamItems[i]);
+  }
+  for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
+    sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
+  }
+  for (i = 0; i < 8; i++) {
+    sub_8091DE0(&unk, &gTeamInventory_203B460->unk230[i]);
+  }
+  for (i = 0; i < 4; i++) {
+    sub_8091DE0(&unk, &gTeamInventory_203B460->unk250[i]);
+  }
+  sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
+  sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
+  nullsub_102(&unk);
+  return unk.unk8;
+}
+
+s32 sub_8091D14(u8 *unk0, u32 size) 
+{
+  struct unkStruct_8094924 unk;
+  s32 i;
+
+  sub_809485C(&unk, unk0, size);
+  for (i = 0; i < 20; i++) {
+    sub_8091E00(&unk, &gTeamInventory_203B460->teamItems[i]);
+  }
+  for (i = 0; i < 240; i++) {
+    sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
+  }
+  for (i = 0; i < 8; i++) {
+    sub_8091DC0(&unk, &gTeamInventory_203B460->unk230[i]);
+  }
+  for (i = 0; i < 4; i++) {
+    sub_8091DC0(&unk, &gTeamInventory_203B460->unk250[i]);
+  }
+  sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
+  sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
+  nullsub_102(&unk);
+  return unk.unk8;
 }
