@@ -592,7 +592,7 @@ s32 xxx_count_inv_unk230()
   s32 i;
   s32 counter = 0;
   for (i = 0; i < 8; i++) {
-    if (gTeamInventory_203B460->unk230[i].unk0) {
+    if (gTeamInventory_203B460->unk230[i].itemIndex) {
       counter++;
     }
   }
@@ -604,7 +604,7 @@ void xxx_init_unk230_substruct(u8 i)
   struct subStruct_203B460* unk230;
 
   unk230 = &gTeamInventory_203B460->unk230[i];
-  unk230->unk0 = 0;
+  unk230->itemIndex = 0;
   unk230->unk1 = 0;
 }
 
@@ -622,11 +622,11 @@ void xxx_fill_unk230_gaps()
 
   do {
     // effectively just a while loop
-    if ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0) {
+    if ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].itemIndex) {
       do {
         // find next empty slot
         slot_checking++;
-      } while ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].unk0);
+      } while ((slot_checking < 8) && !gTeamInventory_203B460->unk230[slot_checking].itemIndex);
     }
 
     if (slot_checking == 8) {
@@ -644,5 +644,23 @@ void xxx_fill_unk230_gaps()
   // clear out the rest of the slots
   for (; last_filled < 8; last_filled++) {
     xxx_init_unk230_substruct(last_filled);
+  }
+}
+
+void sub_80918EC() {
+  // sort unk230
+  s32 i;
+
+  for (i = 0; i < 7; i++) {
+      s32 j;
+      for (j = i + 1; j < 8; j++) {
+          s32 order_i = GetItemOrder(gTeamInventory_203B460->unk230[i].itemIndex);
+          s32 order_j = GetItemOrder(gTeamInventory_203B460->unk230[j].itemIndex);
+          if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk230[i].unk1 < gTeamInventory_203B460->unk230[j].unk1)) {
+              struct subStruct_203B460 str_i = gTeamInventory_203B460->unk230[i];
+              gTeamInventory_203B460->unk230[i] = gTeamInventory_203B460->unk230[j];
+              gTeamInventory_203B460->unk230[j] = str_i;
+          }
+      }
   }
 }

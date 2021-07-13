@@ -3,7 +3,7 @@
 
 struct subStruct_203B460
 {
-    u8 unk0;
+    u8 itemIndex;  // at least for the 8 size field
     u8 unk1;
 };
 
