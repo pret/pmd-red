@@ -23,10 +23,6 @@ extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void xxx_sort_inv_unk230_80918EC();
 bool8 xxx_insert_unk250_8091C1C(u8);
-extern void sub_8091E28(struct unkStruct_8094924 *r0, struct ItemSlot*);
-extern void sub_8091DE0(struct unkStruct_8094924 *r0, struct ItemSlot_ALT*);
-extern void sub_8091E00(struct unkStruct_8094924 *r0, struct ItemSlot*);
-extern void sub_8091DC0(struct unkStruct_8094924 *r0, struct ItemSlot_ALT*);
 
 extern u8 gUnknown_202DE58[0x58];
 extern u32 gUnknown_202DE30;
@@ -35,6 +31,8 @@ extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
+extern u32 gUnknown_810AF50[];
+extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u16 gGummiStatBoostLUT;
@@ -810,16 +808,16 @@ s32 sub_8091C68(u8* unk0, u32 size)
 
   sub_809486C(&unk, unk0, size);
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    sub_8091E28(&unk, &gTeamInventory_203B460->teamItems[i]);
+    sub_8091E28(&unk, (u8*)&gTeamInventory_203B460->teamItems[i]);
   }
   for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
     sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
-    sub_8091DE0(&unk, &gTeamInventory_203B460->unk230[i]);
+    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk230[i]);
   }
   for (i = 0; i < 4; i++) {
-    sub_8091DE0(&unk, &gTeamInventory_203B460->unk250[i]);
+    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk250[i]);
   }
   sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
   sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
@@ -834,19 +832,58 @@ s32 sub_8091D14(u8 *unk0, u32 size)
 
   sub_809485C(&unk, unk0, size);
   for (i = 0; i < 20; i++) {
-    sub_8091E00(&unk, &gTeamInventory_203B460->teamItems[i]);
+    sub_8091E00(&unk, (u8*)&gTeamInventory_203B460->teamItems[i]);
   }
   for (i = 0; i < 240; i++) {
     sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
-    sub_8091DC0(&unk, &gTeamInventory_203B460->unk230[i]);
+    sub_8091DC0(&unk, (u8*)&gTeamInventory_203B460->unk230[i]);
   }
   for (i = 0; i < 4; i++) {
-    sub_8091DC0(&unk, &gTeamInventory_203B460->unk250[i]);
+    sub_8091DC0(&unk, (u8*)&gTeamInventory_203B460->unk250[i]);
   }
   sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
   sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
   nullsub_102(&unk);
   return unk.unk8;
+}
+
+void sub_8091DC0(struct unkStruct_8094924 *a1, u8 *a2)
+{
+  sub_8094924(a1, a2, 8);
+  sub_8094924(a1, a2 + 1, 7);
+}
+
+void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2) 
+{
+  sub_809488C(a1, a2, 8);
+  sub_809488C(a1, a2 + 1, 7);
+}
+
+void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2)
+{
+  sub_8094924(a1, a2, 8);
+  sub_8094924(a1, a2 + 1, 7);
+  sub_8094924(a1, a2 + 2, 8);
+}
+
+void sub_8091E28(struct unkStruct_8094924 *a1, u8 *a2) 
+{
+  sub_809488C(a1, a2, 8);
+  sub_809488C(a1, a2 + 1, 7);
+  sub_809488C(a1, a2 + 2, 8);
+}
+
+u32 sub_8091E50(u8 index) 
+{
+  return gUnknown_810AF50[index];
+}
+
+u32 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1) 
+{
+  if (i0 > 0x3e)
+    return 0;
+  else
+    return (gUnknown_8108F64[i0][i1 >> 3] >> (i1 & 7)) & 1;
 }

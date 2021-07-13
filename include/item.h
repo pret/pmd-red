@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
+#include "code_8092334.h"
+
 struct Item
 {
     /* 0x0 */ u8 *namePointer;
@@ -351,5 +353,12 @@ void xxx_init_unk230_substruct(u8);
 bool8 xxx_insert_unk230_80919FC(u8);
 u32 xxx_count_non_empty_inv_unk250_8091A48();
 void sub_8091BB4(u8);
+
+// some sort of weird memcpy's?
+// not sure what the second argument should be typed as
+void sub_8091DC0(struct unkStruct_8094924 *r0, u8*);
+void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2);
+void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2);
+void sub_8091E28(struct unkStruct_8094924 *a1, u8 *a2);
 
 #endif

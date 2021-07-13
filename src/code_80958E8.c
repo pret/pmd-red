@@ -36,7 +36,7 @@ extern s16 sub_808E770(s16);
 extern bool8 sub_8092040(u8);
 extern u8 sub_803C1D0(u8 *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
-extern u8 sub_8091E60(u8 ,u8 );
+extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
 extern u8 sub_803C0DC(s16);
 extern void sub_8096040(u8);
@@ -152,7 +152,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
 
         // Item finding
-        if(data->missionType == FIND_ITEM && sub_8091E60(data->dungeon, data->targetItem) == 0)
+        if(data->missionType == FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon, data->targetItem) == 0)
             return FALSE;
 
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
