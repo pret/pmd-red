@@ -1,5 +1,5 @@
-#include "code_8092334.h"
 #include "global.h"
+#include "code_8092334.h"
 #include "memory.h"
 #include "item.h"
 

@@ -1,7 +1,6 @@
 #ifndef GUARD_CODE_8092334_H
 #define GUARD_CODE_8092334_H
 
-#include "global.h"
 
 struct unkStruct_8094924
 {
