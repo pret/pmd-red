@@ -287,29 +287,27 @@ extern const u8 gUnknown_8109784[];
 extern const u8 gUnknown_810978C[];
 
 void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
-  s32 bit8 = 0;
+  s32 unk8 = 0;
   u8 buffer[80];
 
   if (a3) {
-    bit8 = a3[8] != 0;
+    unk8 = a3[8] != 0;
   }
 
   if (GetItemType(slot->itemIndex) == 0) {
     // I feel like these labels might actually be there...
-    if (bit8) {
-      goto label_bit8;
-    }
-    else {
-      goto label_nobit8;
-    }
-  }
-  else if (GetItemType(slot->itemIndex) == 1) {
-    if (bit8) {
-      label_bit8:
+    if (unk8) {
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
     }
     else {
-      label_nobit8:
+      ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
+    }
+  }
+  else if (GetItemType(slot->itemIndex) == 1) {
+    if (unk8) {
+      ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
+    }
+    else {
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
     }
   }
@@ -335,12 +333,11 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
           sub_8090F58(ext_buffer, buffer, slot, a3);
           return;
         }
-        // todo: what is the pattern for this branch?
-        goto label_strncpy;
+      strncpy(ext_buffer, buffer, 80);
+      return;
     }
   }
   else {
-    label_strncpy:
     strncpy(ext_buffer, buffer, 80);
     return;
   }
