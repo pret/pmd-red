@@ -9,6 +9,8 @@ extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_8109764;
+extern const char gUnknown_8109794[];
+extern const char gUnknown_81097A4[];
 extern u16 *gGummiStatBoostLUT;
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
@@ -19,6 +21,7 @@ extern u32 GetItemUnkThrow(u8, u32);
 extern bool8 CanSellItem(u8);
 extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u8*);
 extern void ExpandPlaceholdersBuffer(u8 *, const u8 *, ...);
+extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 
 void LoadItemParameters(void)
 {
@@ -294,7 +297,7 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
     unk8 = a3[8] != 0;
   }
 
-  if (GetItemType(slot->itemIndex) == 0) {
+  if (GetItemType(slot->itemIndex) == ITEM_TYPE_THROWABLE) {
     // I feel like these labels might actually be there...
     if (unk8) {
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
@@ -303,7 +306,7 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
     }
   }
-  else if (GetItemType(slot->itemIndex) == 1) {
+  else if (GetItemType(slot->itemIndex) == ITEM_TYPE_ROCK) {
     if (unk8) {
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
     }
@@ -344,4 +347,45 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
 
   sub_8090F58(ext_buffer, buffer, slot, a3);
   return;
+}
+
+void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, u8* a4) {
+  u32 unk0;
+  s32 value;
+  u8 buffer[40];
+  
+  if (!a4) {
+    strncpy(a1, a2, 80);
+    return;
+  }
+  else {
+    unk0 = *(u32*)a4;
+    switch (unk0) {
+      case 1:
+      case 2:
+        value = GetStackBuyValue(slot);
+        break;
+      case 3:
+      case 4:
+        value = GetStackSellValue(slot);
+        break;
+      default:
+        value = 0;
+        break;
+    }
+
+    if (!value) {
+      strncpy(a1, a2, 80);
+      return;
+    }
+  }
+
+  if (*(s16*)&a4[6]) {    
+    sub_8090FEC(value, buffer, 1);
+    ExpandPlaceholdersBuffer(a1, gUnknown_8109794, a2, *(s16*)&a4[6], buffer);
+  }
+  else {
+    sub_8090FEC(value, buffer, 0);
+    ExpandPlaceholdersBuffer(a1, gUnknown_81097A4, a2, buffer);
+  }
 }
