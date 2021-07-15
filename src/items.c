@@ -17,7 +17,8 @@ EWRAM_DATA struct Item *gItemParametersData;
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern bool8 CanSellItem(u8);
-extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u32);
+extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u8*);
+extern void ExpandPlaceholdersBuffer(u8 *, const u8 *, ...);
 
 void LoadItemParameters(void)
 {
@@ -268,7 +269,7 @@ u32 GetItemUnkFood(u8 itemIndex, u32 r1)
     return gItemParametersData[itemIndex].unkFood1[r1];
 }
 
-void sub_8090DC4(void* param_1,u8 itemIndex,u32 param_3)
+void sub_8090DC4(void* param_1,u8 itemIndex, u8* param_3)
 {
   char acStack104 [80];
   struct ItemSlot unkItem;
@@ -277,4 +278,73 @@ void sub_8090DC4(void* param_1,u8 itemIndex,u32 param_3)
   sub_8090A8C(&unkItem,itemIndex,0);
   unkItem.numItems = 1;
   sub_8090F58(param_1,acStack104,&unkItem,param_3);
+}
+
+extern const u8 gUnknown_8109770[];
+extern const u8 gUnknown_8109778[];
+extern const u8 gUnknown_810977C[];
+extern const u8 gUnknown_8109784[];
+extern const u8 gUnknown_810978C[];
+
+void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
+  s32 bit8 = 0;
+  u8 buffer[80];
+
+  if (a3) {
+    bit8 = a3[8] != 0;
+  }
+
+  if (GetItemType(slot->itemIndex) == 0) {
+    // I feel like these labels might actually be there...
+    if (bit8) {
+      goto label_bit8;
+    }
+    else {
+      goto label_nobit8;
+    }
+  }
+  else if (GetItemType(slot->itemIndex) == 1) {
+    if (bit8) {
+      label_bit8:
+      ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
+    }
+    else {
+      label_nobit8:
+      ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
+    }
+  }
+  else if (slot->itemIndex == 105) {
+    ExpandPlaceholdersBuffer(buffer, gUnknown_810977C, GetMoneyValue(slot));
+  }
+  else {
+    strncpy(buffer, gItemParametersData[slot->itemIndex].namePointer, 80);
+  }
+
+  if (slot->unk0 & 8) {
+    ExpandPlaceholdersBuffer(ext_buffer, gUnknown_8109784, buffer);
+    strncpy(buffer, ext_buffer, 80);
+  }
+
+  if (a3) {
+    if (a3[4] && (slot->unk0 & 0x10)) {
+      ExpandPlaceholdersBuffer(ext_buffer, gUnknown_810978C, buffer);
+      strncpy(buffer, ext_buffer, 80);
+    }
+    if ((*(u32*)a3 == 1) || (*(u32*)a3 == 3)) {
+        if (slot->unk0 & 2) {
+          sub_8090F58(ext_buffer, buffer, slot, a3);
+          return;
+        }
+        // todo: what is the pattern for this branch?
+        goto label_strncpy;
+    }
+  }
+  else {
+    label_strncpy:
+    strncpy(ext_buffer, buffer, 80);
+    return;
+  }
+
+  sub_8090F58(ext_buffer, buffer, slot, a3);
+  return;
 }
