@@ -201,7 +201,6 @@ SECTIONS {
         src/items.o(.text);
         asm/items.o(.text);
         src/items_1.o(.text);
-        asm/items_1.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
         src/friend_area.o(.text);

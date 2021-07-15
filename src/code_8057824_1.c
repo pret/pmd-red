@@ -2,6 +2,7 @@
 #include "gUnknown_203B418.h"
 #include "code_8041D5C.h"
 #include "pokemon.h"
+#include "item.h"
 
 extern struct unkStruct_203B418 *gUnknown_203B418;
 
@@ -257,8 +258,7 @@ extern struct unkDungeon_8041D5C *sub_8083600();
 extern void sub_80421C0(struct unkDungeon_8041D5C *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
-extern void sub_8090A8C(u8 *, u32, u32);
-extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, u8 *);
+extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, struct ItemSlot *);
 extern void sub_8098044(u32);
 extern void PlaySoundEffect(u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
@@ -3095,7 +3095,7 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3103,8 +3103,8 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x79,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      sub_8090A8C(&auStack20,0x79,0);
+      sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
@@ -3118,7 +3118,7 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3126,8 +3126,8 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x77,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      sub_8090A8C(&auStack20,0x77,0);
+      sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
@@ -3140,7 +3140,7 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3148,8 +3148,8 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x78,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      sub_8090A8C(&auStack20,0x78,0);
+      sub_80464C8(sub_8083600(),param_3, &auStack20);
       sub_8083E88(0x72);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item

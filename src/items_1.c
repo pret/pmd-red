@@ -197,8 +197,8 @@ s32 GetItemPossessionCount(u8 itemIndex)
      struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
     if ((1 & pokemon->unk0)
           && ((pokemon->unk0 >> 1) % 2)
-          && (pokemon->itemIndexHeld != ITEM_ID_NOTHING)
-          && (pokemon->itemIndexHeld == itemIndex)) {
+          && (pokemon->heldItem.itemIndex != ITEM_ID_NOTHING)
+          && (pokemon->heldItem.itemIndex == itemIndex)) {
       item_count++;
     }
   }
@@ -459,8 +459,9 @@ u32 GetMoneyValue(struct ItemSlot* slot)
   return gUnknown_810A3F0[slot->numItems];
 }
 
-u32 GetMoneyValue2(struct ItemSlot* slot) 
+u32 GetMoneyValueHeld(struct HeldItem* slot) 
 {
+  // potentially different slot type (used for held item)
   return gUnknown_810A3F0[slot->numItems];
 }
 
@@ -886,4 +887,260 @@ u32 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
     return 0;
   else
     return (gUnknown_8108F64[i0][i1 >> 3] >> (i1 & 7)) & 1;
+}
+
+
+extern u16* gUnknown_8108E58[];
+
+struct UnkStruct_8091E94 {
+  s16 unk0[12];
+  s16 unk18[0xf0];
+};
+
+NAKED
+s32 sub_8091E94(s32 a1, s32 a2, s32 a3)
+{
+#if 0
+  // this is about as good as I got it so far
+  s32 i;
+  u8 item_type;
+  s32 result;
+
+  // struct of 12 + 0xf0 (NUMBER_OF_ITEM_IDS) hwords?
+  struct UnkStruct_8091E94 s1;
+  u16 s2[12 + 0xf0]; 
+  s32 data_index;
+  // 30000: level up exp required?
+
+  data_index = 0;
+  // compressed data?
+  for (i = 0; i < 252; i++) {
+    if (gUnknown_8108E58[a1 - 1][i] > 29999) {
+      s32 j;
+      for (j = gUnknown_8108E58[a1 - 1][i] - 30000; j != 0; j--) {
+        s2[data_index++] = 0;
+      }
+    }
+    else {
+      s2[data_index++] = gUnknown_8108E58[a1 - 1][i];
+    }
+  }
+
+  for (i = 0; i < 12; i++) {
+    s1.unk0[i] = s2[i];
+  }
+
+  for (i = 0; i < 240; i++) {
+    s1.unk18[i] = s2[12 + i];
+  }
+
+  item_type = 0;
+  for (i = 0; i < 12; i++) {
+    if (s1.unk0[i] && s1.unk0[i] >= a2){
+      item_type = i;
+      break;
+    }
+  }
+
+  result = 70;
+  if (item_type != 12) {
+    s32 j;
+    for (j = 0; j < 240; j++) {
+      if (s1.unk18[j] && (GetItemType(j) == item_type) && (s1.unk18[j] >= a3)) {
+        return result;
+      }
+    }
+    result = j;
+  }
+  return result;
+#else
+  asm_unified("\tpush {r4-r7,lr}\n"
+"\tmov r7, r10\n"
+"\tmov r6, r9\n"
+"\tmov r5, r8\n"
+"\tpush {r5-r7}\n"
+"\tldr r4, _08091EE4\n"
+"\tadd sp, r4\n"
+"\tmov r8, r1\n"
+"\tmov r10, r2\n"
+"\tldr r1, _08091EE8\n"
+"\tsubs r0, 0x1\n"
+"\tlsls r0, 2\n"
+"\tadds r0, r1\n"
+"\tmovs r3, 0\n"
+"\tadd r1, sp, 0x18\n"
+"\tmov r9, r1\n"
+"\tldr r2, _08091EEC\n"
+"\tmov r12, r2\n"
+"\tadd r6, sp, 0x1F8\n"
+"\tldr r2, [r0]\n"
+"\tadds r7, r6, 0\n"
+"\tmovs r4, 0\n"
+"_08091EC0:\n"
+"\tldrh r1, [r2]\n"
+"\tcmp r1, r12\n"
+"\tbls _08091EF4\n"
+"\tldrh r0, [r2]\n"
+"\tldr r1, _08091EF0\n"
+"\tadds r0, r1\n"
+"\tcmp r0, 0\n"
+"\tbeq _08091EFC\n"
+"\tmovs r5, 0\n"
+"\tadds r1, r7, r4\n"
+"_08091ED4:\n"
+"\tstrh r5, [r1]\n"
+"\tadds r1, 0x2\n"
+"\tadds r4, 0x2\n"
+"\tadds r3, 0x1\n"
+"\tsubs r0, 0x1\n"
+"\tcmp r0, 0\n"
+"\tbne _08091ED4\n"
+"\tb _08091EFC\n"
+"\t.align 2, 0\n"
+"_08091EE4: .4byte 0xfffffc10\n"
+"_08091EE8: .4byte gUnknown_8108E58\n"
+"_08091EEC: .4byte 0x0000752f\n"
+"_08091EF0: .4byte 0xffff8ad0\n"
+"_08091EF4:\n"
+"\tadds r0, r6, r4\n"
+"\tstrh r1, [r0]\n"
+"\tadds r4, 0x2\n"
+"\tadds r3, 0x1\n"
+"_08091EFC:\n"
+"\tadds r2, 0x2\n"
+"\tcmp r3, 0xFB\n"
+"\tble _08091EC0\n"
+"\tmovs r3, 0xB\n"
+"\tadd r2, sp, 0x1F8\n"
+"\tmov r1, sp\n"
+"_08091F08:\n"
+"\tldrh r0, [r2]\n"
+"\tstrh r0, [r1]\n"
+"\tadds r2, 0x2\n"
+"\tadds r1, 0x2\n"
+"\tsubs r3, 0x1\n"
+"\tcmp r3, 0\n"
+"\tbge _08091F08\n"
+"\tmov r2, r9\n"
+"\tadd r1, sp, 0x210\n"
+"\tmovs r3, 0xEF\n"
+"_08091F1C:\n"
+"\tldrh r0, [r1]\n"
+"\tstrh r0, [r2]\n"
+"\tadds r1, 0x2\n"
+"\tadds r2, 0x2\n"
+"\tsubs r3, 0x1\n"
+"\tcmp r3, 0\n"
+"\tbge _08091F1C\n"
+"\tmovs r7, 0xC\n"
+"\tmovs r6, 0\n"
+"\tmov r0, sp\n"
+"\tmovs r2, 0\n"
+"\tldrsh r0, [r0, r2]\n"
+"\tcmp r0, 0\n"
+"\tbeq _08091F4A\n"
+"\tmov r0, sp\n"
+"\tmovs r1, 0\n"
+"\tldrsh r0, [r0, r1]\n"
+"\tcmp r0, r8\n"
+"\tblt _08091F4A\n"
+"\tmovs r7, 0\n"
+"\tb _08091F66\n"
+"_08091F46:\n"
+"\tmov r8, r5\n"
+"\tb _08091F9C\n"
+"_08091F4A:\n"
+"\tadds r6, 0x1\n"
+"\tcmp r6, 0xB\n"
+"\tbgt _08091F66\n"
+"\tlsls r0, r6, 1\n"
+"\tmov r2, sp\n"
+"\tadds r1, r2, r0\n"
+"\tmovs r2, 0\n"
+"\tldrsh r0, [r1, r2]\n"
+"\tcmp r0, 0\n"
+"\tbeq _08091F4A\n"
+"\tcmp r0, r8\n"
+"\tblt _08091F4A\n"
+"\tlsls r0, r6, 24\n"
+"\tlsrs r7, r0, 24\n"
+"_08091F66:\n"
+"\tmovs r0, 0x46\n"
+"\tmov r8, r0\n"
+"\tcmp r7, 0xC\n"
+"\tbeq _08091F9C\n"
+"\tmovs r6, 0\n"
+"\tmov r4, r9\n"
+"_08091F72:\n"
+"\tmovs r1, 0\n"
+"\tldrsh r0, [r4, r1]\n"
+"\tcmp r0, 0\n"
+"\tbeq _08091F94\n"
+"\tlsls r0, r6, 24\n"
+"\tlsrs r5, r0, 24\n"
+"\tadds r0, r5, 0\n"
+"\tbl GetItemType\n"
+"\tlsls r0, 24\n"
+"\tlsrs r0, 24\n"
+"\tcmp r0, r7\n"
+"\tbne _08091F94\n"
+"\tmovs r2, 0\n"
+"\tldrsh r0, [r4, r2]\n"
+"\tcmp r0, r10\n"
+"\tbge _08091F46\n"
+"_08091F94:\n"
+"\tadds r4, 0x2\n"
+"\tadds r6, 0x1\n"
+"\tcmp r6, 0xEF\n"
+"\tble _08091F72\n"
+"_08091F9C:\n"
+"\tmov r0, r8\n"
+"\tmovs r3, 0xFC\n"
+"\tlsls r3, 2\n"
+"\tadd sp, r3\n"
+"\tpop {r3-r5}\n"
+"\tmov r8, r3\n"
+"\tmov r9, r4\n"
+"\tmov r10, r5\n"
+"\tpop {r4-r7}\n"
+"\tpop {r1}\n"
+"\tbx r1\n");
+#endif
+}
+void sub_8091FB4() {
+  s32 i;
+
+  for (i = 0; i < INVENTORY_SIZE; i++) {
+    struct ItemSlot* slot = &gTeamInventory_203B460->teamItems[i];
+    if (slot->unk0 & 1) {
+      slot->unk0 &= 0xf7;
+      if (slot->itemIndex == ITEM_ID_POKE) {
+        AddToTeamMoney(GetMoneyValue(slot));
+        slot->itemIndex = 0;
+        slot->numItems = 0;
+        slot->unk0 = 0;
+      }
+    }
+  }
+  FillInventoryGaps();
+  for (i = 0; i < NUM_SPECIES; i++) {
+    struct PokemonStruct* pokemon;
+#ifdef NONMATCHING
+    pokemon = &i[gRecruitedPokemonRef->pokemon];
+#else
+    register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[i]);
+    struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
+    size_t addr = offset + (size_t)p;
+    pokemon = (struct PokemonStruct*)addr;
+#endif
+
+    if ((u8)pokemon->unk0 & 1) {
+      if (pokemon->heldItem.itemIndex) {
+        if (pokemon->heldItem.itemIndex == ITEM_ID_POKE) {
+          AddToTeamMoney(GetMoneyValueHeld(&pokemon->heldItem));
+          pokemon->heldItem.itemIndex = 0;
+        }
+      }
+    }
+  }
 }
