@@ -19,7 +19,6 @@ EWRAM_DATA struct Item *gItemParametersData;
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
 extern bool8 CanSellItem(u8);
-extern void sub_8090F58(void*, u8 *, struct ItemSlot *, u8*);
 extern void ExpandPlaceholdersBuffer(u8 *, const u8 *, ...);
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 
@@ -272,7 +271,7 @@ u32 GetItemUnkFood(u8 itemIndex, u32 r1)
     return gItemParametersData[itemIndex].unkFood1[r1];
 }
 
-void sub_8090DC4(void* param_1,u8 itemIndex, u8* param_3)
+void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3)
 {
   char acStack104 [80];
   struct ItemSlot unkItem;
@@ -289,12 +288,12 @@ extern const u8 gUnknown_810977C[];
 extern const u8 gUnknown_8109784[];
 extern const u8 gUnknown_810978C[];
 
-void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
+void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, struct unkStruct_8090F58* a3) {
   s32 unk8 = 0;
   u8 buffer[80];
 
   if (a3) {
-    unk8 = a3[8] != 0;
+    unk8 = a3->unk8 != 0;
   }
 
   if (GetItemType(slot->itemIndex) == ITEM_TYPE_THROWABLE) {
@@ -327,7 +326,7 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
   }
 
   if (a3) {
-    if (a3[4] && (slot->unk0 & 0x10)) {
+    if (a3->unk4 && (slot->unk0 & 0x10)) {
       ExpandPlaceholdersBuffer(ext_buffer, gUnknown_810978C, buffer);
       strncpy(buffer, ext_buffer, 80);
     }
@@ -349,7 +348,7 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, u8* a3) {
   return;
 }
 
-void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, u8* a4) {
+void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, struct unkStruct_8090F58* a4) {
   u32 unk0;
   s32 value;
   u8 buffer[40];
@@ -359,7 +358,7 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, u8* a4) {
     return;
   }
   else {
-    unk0 = *(u32*)a4;
+    unk0 = a4->unk0;
     switch (unk0) {
       case 1:
       case 2:
@@ -380,9 +379,9 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, u8* a4) {
     }
   }
 
-  if (*(s16*)&a4[6]) {    
+  if (a4->unk6) {    
     sub_8090FEC(value, buffer, 1);
-    ExpandPlaceholdersBuffer(a1, gUnknown_8109794, a2, *(s16*)&a4[6], buffer);
+    ExpandPlaceholdersBuffer(a1, gUnknown_8109794, a2, a4->unk6, buffer);
   }
   else {
     sub_8090FEC(value, buffer, 0);
