@@ -8213,7 +8213,7 @@ _0805B75E:
 	lsrs r1, 24
 	adds r0, r2, 0
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	movs r7, 0x1
 _0805B790:
 	adds r4, 0x1
@@ -8238,7 +8238,7 @@ _0805B790:
 	lsrs r1, 24
 	mov r0, r8
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	movs r7, 0x1
 _0805B7C2:
 	cmp r7, 0
@@ -40347,7 +40347,7 @@ _0806BAFC:
 	beq _0806BB24
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	ldr r2, [sp, 0x24]
 	strb r5, [r2]
 _0806BB24:

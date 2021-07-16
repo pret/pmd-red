@@ -4,10 +4,6 @@
 #include "file_system.h"
 #include "item.h"
 
-struct HeldItem {
-  u8 itemIndex;
-  u8 numItems;
-};
 
 struct PokemonStruct
 {

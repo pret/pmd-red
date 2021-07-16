@@ -13139,7 +13139,7 @@ _08025668:
 	ldr r1, [r5]
 	adds r1, 0x14
 	add r0, sp, 0x8
-	bl sub_8090B64
+	bl HeldItemToSlot
 	add r0, sp, 0x8
 	bl sub_801B3C0
 	b _08025720
@@ -13973,7 +13973,7 @@ _08025D24:
 	ldr r1, [r5]
 	adds r1, 0x14
 	adds r0, r4, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	movs r1, 0
 	str r1, [sp]
 	mov r0, sp
@@ -14144,7 +14144,7 @@ sub_8025E68:
 	add r4, sp, 0x10
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	movs r5, 0
 	str r5, [sp, 0x4]
 	add r0, sp, 0x4
@@ -14721,7 +14721,7 @@ _08026350:
 	ldr r1, [r4]
 	adds r1, 0x10
 	add r0, sp, 0x14
-	bl sub_8090B64
+	bl HeldItemToSlot
 	add r0, sp, 0x14
 	bl sub_801B3C0
 	b _080264BA
@@ -15876,7 +15876,7 @@ _08026C84:
 	ldr r1, [r5]
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	movs r1, 0
 	str r1, [sp]
 	mov r0, sp
@@ -16027,7 +16027,7 @@ sub_8026DAC:
 	add r4, sp, 0x10
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	movs r5, 0
 	str r5, [sp, 0x4]
 	add r0, sp, 0x4

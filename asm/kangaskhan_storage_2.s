@@ -661,7 +661,7 @@ _080187E0:
 	adds r0, 0x8
 	ldrb r1, [r1, 0x10]
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	ldr r1, [r4]
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
@@ -680,7 +680,7 @@ _0801880C:
 	adds r0, 0x8
 	ldrb r1, [r1, 0x10]
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	ldr r1, [r4]
 	movs r0, 0x1
 	strb r0, [r1, 0x9]

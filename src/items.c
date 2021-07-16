@@ -106,90 +106,90 @@ bool8 IsThrowableItem(u8 itemIndex)
     return TRUE;
 }
 
-void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3)
+void xxx_init_itemslot_8090A8C(struct ItemSlot *slot, u8 itemIndex, u8 param_3)
 {
   u32 uVar3;
   u32 uVar4;
   
   if (itemIndex != ITEM_ID_NOTHING) {
-    param_1->unk0 = 1;
-    param_1->itemIndex = itemIndex;
+    slot->unk0 = 1;
+    slot->itemIndex = itemIndex;
     if (IsThrowableItem(itemIndex)) {
-        uVar3 = GetItemUnkThrow(itemIndex,0);
-        uVar4 = GetItemUnkThrow(itemIndex,1);
-        param_1->numItems = RandomRange(uVar3,uVar4);
+        uVar3 = GetItemUnkThrow(itemIndex, 0);
+        uVar4 = GetItemUnkThrow(itemIndex, 1);
+        slot->numItems = RandomRange(uVar3, uVar4);
     }
     else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
-        param_1->numItems  = 1;
+        slot->numItems  = 1;
     else 
-        param_1->numItems  = 0;
+        slot->numItems  = 0;
 
     if (param_3 != 0)
-        param_1->unk0 |= 8;
+        slot->unk0 |= 8;
 
   }
   else {
-    param_1->unk0 = 0;
-    param_1->itemIndex = ITEM_ID_NOTHING;
-    param_1->numItems  = 0;
+    slot->unk0 = 0;
+    slot->itemIndex = ITEM_ID_NOTHING;
+    slot->numItems  = 0;
   }
 }
 
-void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex)
+void xxx_init_helditem_8090B08(struct HeldItem *held, u8 itemIndex)
 {
   u32 uVar2;
   u32 uVar3;
   
   if (itemIndex != ITEM_ID_NOTHING) {
-    param_1->itemIndex = itemIndex;
+    held->itemIndex = itemIndex;
     if (IsThrowableItem(itemIndex)) {
         uVar2 = GetItemUnkThrow(itemIndex,0);
         uVar3 = GetItemUnkThrow(itemIndex,1);
-        param_1->numItems = RandomRange(uVar2,uVar3);
+        held->numItems = RandomRange(uVar2, uVar3);
     } 
     else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
-        param_1->numItems = 1;
+        held->numItems = 1;
     else
-        param_1->numItems = 0;
+        held->numItems = 0;
   }
   else {
-    param_1->itemIndex = 0;
-    param_1->numItems = 0;
+    held->itemIndex = 0;
+    held->numItems = 0;
   }
 }
 
-void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2)
+void HeldItemToSlot(struct ItemSlot *slot, struct HeldItem *held)
 {
-    u8 r6;
+    u8 is_throwable;
 
-    if(param_2->itemIndex != ITEM_ID_NOTHING)
+    if(held->itemIndex != ITEM_ID_NOTHING)
     {
-        param_1->unk0 = 1;
-        param_1->itemIndex = param_2->itemIndex;
-        r6 = IsThrowableItem(param_1->itemIndex);
-        if(r6 != 0 || GetItemType(param_1->itemIndex) == ITEM_TYPE_MONEY)
-            param_1->numItems = param_2->numItems;
-        else if(param_1->itemIndex == ITEM_ID_USED_TM)
-            param_1->numItems = param_2->numItems;
+        slot->unk0 = 1;
+        slot->itemIndex = held->itemIndex;
+        is_throwable = IsThrowableItem(slot->itemIndex);
+        if(is_throwable != 0 || GetItemType(slot->itemIndex) == ITEM_TYPE_MONEY)
+            slot->numItems = held->numItems;
+        else if(slot->itemIndex == ITEM_ID_USED_TM)
+            slot->numItems = held->numItems;
         else
-            param_1->numItems = 0;
+            slot->numItems = 0;
     }
     else
     {
-        param_1->itemIndex = ITEM_ID_NOTHING;
-        param_1->numItems = 0;
-        param_1->unk0 = 0;
+        slot->itemIndex = ITEM_ID_NOTHING;
+        slot->numItems = 0;
+        slot->unk0 = 0;
     }
 }
 
-void sub_8090BB0(struct ItemSlot_ALT *param_1,struct ItemSlot *param_2)
+void SlotToHeltItem(struct HeldItem *held,struct ItemSlot *slot)
 {
-  if ((param_2->unk0 & 1) != 0) {
-    param_1->itemIndex = param_2->itemIndex;
-    param_1->numItems = param_2->numItems;
+  if ((slot->unk0 & 1) != 0) {
+    held->itemIndex = slot->itemIndex;
+    held->numItems = slot->numItems;
   }
   else {
-    param_1->itemIndex = ITEM_ID_NOTHING;
+    held->itemIndex = ITEM_ID_NOTHING;
   }
 }
 
@@ -304,7 +304,7 @@ void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3)
   struct ItemSlot unkItem;
   
   strncpy(acStack104,gItemParametersData[itemIndex].namePointer,0x50);
-  sub_8090A8C(&unkItem,itemIndex,0);
+  xxx_init_itemslot_8090A8C(&unkItem,itemIndex,0);
   unkItem.numItems = 1;
   sub_8090F58(param_1,acStack104,&unkItem,param_3);
 }
@@ -582,15 +582,15 @@ void ClearItemSlotAt(u32 index)
 bool8 sub_809124C(u8 itemIndex, u8 param_3)
 {
   struct ItemSlot temp;
-  sub_8090A8C(&temp, itemIndex, param_3);
+  xxx_init_itemslot_8090A8C(&temp, itemIndex, param_3);
   return AddItemToInventory(&temp);
 }
 
-bool8 sub_8091274(struct ItemSlot_ALT* slot) 
+bool8 sub_8091274(struct HeldItem* slot) 
 {
   struct ItemSlot temp;
 
-  sub_8090B64(&temp, slot);
+  HeldItemToSlot(&temp, slot);
   return AddItemToInventory(&temp);
 }
 
@@ -968,14 +968,14 @@ s32 xxx_count_inv_unk230()
 
 void xxx_init_unk230_substruct(u8 i) 
 {
-  struct ItemSlot_ALT* unk230;
+  struct HeldItem* unk230;
 
   unk230 = &gTeamInventory_203B460->unk230[i];
   unk230->itemIndex = 0;
   unk230->numItems = 0;
 }
 
-struct ItemSlot_ALT* xxx_get_inv_unk230_at_809185C(u8 i) 
+struct HeldItem* xxx_get_inv_unk230_at_809185C(u8 i) 
 {
   return &gTeamInventory_203B460->unk230[i];
 }
@@ -1023,7 +1023,7 @@ void xxx_sort_inv_unk230_80918EC() {
       s32 order_i = GetItemOrder(gTeamInventory_203B460->unk230[i].itemIndex);
       s32 order_j = GetItemOrder(gTeamInventory_203B460->unk230[j].itemIndex);
       if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk230[i].numItems < gTeamInventory_203B460->unk230[j].numItems)) {
-        struct ItemSlot_ALT str_i = gTeamInventory_203B460->unk230[i];
+        struct HeldItem str_i = gTeamInventory_203B460->unk230[i];
         gTeamInventory_203B460->unk230[i] = gTeamInventory_203B460->unk230[j];
         gTeamInventory_203B460->unk230[j] = str_i;
       }
@@ -1049,13 +1049,13 @@ void xxx_inv_unk250_random_8091980(u8 a1) {
 }
 
 bool8 xxx_insert_unk230_80919FC(u8 itemIndex) {
-  struct ItemSlot_ALT alt;
+  struct HeldItem held;
   s32 i;
 
-  sub_8090B08(&alt, itemIndex);  // initialize
+  xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
   for (i = 0; i < 8; i++) {
     if (!gTeamInventory_203B460->unk230[i].itemIndex) {
-      gTeamInventory_203B460->unk230[i] = alt;
+      gTeamInventory_203B460->unk230[i] = held;
       return FALSE;
     }
   }
@@ -1074,12 +1074,12 @@ u32 xxx_count_non_empty_inv_unk250_8091A48() {
 }
 
 void xxx_init_inv_unk250_at_8091A74(u8 index) {
-  struct ItemSlot_ALT* unk250 = &gTeamInventory_203B460->unk250[index];
+  struct HeldItem* unk250 = &gTeamInventory_203B460->unk250[index];
   unk250->itemIndex = 0;
   unk250->numItems = 0;
 }
 
-struct ItemSlot_ALT* xxx_get_unk250_at_8091A90(u8 index) {
+struct HeldItem* xxx_get_unk250_at_8091A90(u8 index) {
     return &gTeamInventory_203B460->unk250[index];
 }
 
@@ -1122,7 +1122,7 @@ void xxx_sort_inv_unk250_8091B20() {
       s32 order_i = GetItemOrder(gTeamInventory_203B460->unk250[i].itemIndex);
       s32 order_j = GetItemOrder(gTeamInventory_203B460->unk250[j].itemIndex);
       if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk250[i].numItems < gTeamInventory_203B460->unk250[j].numItems)) {
-        struct ItemSlot_ALT str_i = gTeamInventory_203B460->unk250[i];
+        struct HeldItem str_i = gTeamInventory_203B460->unk250[i];
         gTeamInventory_203B460->unk250[i] = gTeamInventory_203B460->unk250[j];
         gTeamInventory_203B460->unk250[j] = str_i;
       }
@@ -1147,13 +1147,13 @@ void sub_8091BB4(u8 index) {
 }
 
 bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
-  struct ItemSlot_ALT alt;
+  struct HeldItem held;
   s32 i;
 
-  sub_8090B08(&alt, itemIndex);  // initialize
+  xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
   for (i = 0; i < 4; i++) {
     if (!gTeamInventory_203B460->unk250[i].itemIndex) {
-      gTeamInventory_203B460->unk250[i] = alt;
+      gTeamInventory_203B460->unk250[i] = held;
       return FALSE;
     }
   }
@@ -1465,7 +1465,7 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3)
 "\tbx r1\n");
 #endif
 }
-void sub_8091FB4() {
+void ClearAllItems_8091FB4() {
   s32 i;
 
   for (i = 0; i < INVENTORY_SIZE; i++) {

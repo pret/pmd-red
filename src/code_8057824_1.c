@@ -3103,7 +3103,7 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(&auStack20,0x79,0);
+      xxx_init_itemslot_8090A8C(&auStack20,0x79,0);
       sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regirock's body
@@ -3126,7 +3126,7 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(&auStack20,0x77,0);
+      xxx_init_itemslot_8090A8C(&auStack20,0x77,0);
       sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regice's body
@@ -3148,7 +3148,7 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(&auStack20,0x78,0);
+      xxx_init_itemslot_8090A8C(&auStack20,0x78,0);
       sub_80464C8(sub_8083600(),param_3, &auStack20);
       sub_8083E88(0x72);
       // Something fell from Registeel's body
@@ -3341,7 +3341,7 @@ void sub_808B1CC(u8 r0)
 	"\tadds r0, r4, 0\n"
 	"\tadds r1, r6, 0\n"
 	"\tmovs r2, 0\n"
-	"\tbl sub_8090A8C\n"
+	"\tbl xxx_init_itemslot_8090A8C\n"
 	"\tldrh r0, [r5, 0x2]\n"
 	"\tsubs r0, 0x1\n"
 	"\tstrh r0, [r5, 0x2]\n"

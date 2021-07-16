@@ -1439,7 +1439,7 @@ _08019A3C:
 	adds r0, 0x1C
 	ldrb r1, [r5]
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	ldr r1, [r4]
 	ldrb r0, [r5, 0x1]
 	strb r0, [r1, 0x1D]
@@ -1486,7 +1486,7 @@ _08019AA4:
 	adds r0, 0x1C
 	ldrb r1, [r5]
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	ldr r1, [r4]
 	ldrb r0, [r5, 0x1]
 	strb r0, [r1, 0x1D]

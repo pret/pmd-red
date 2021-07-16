@@ -30,11 +30,9 @@ struct ItemSlot
     u8 itemIndex;
 };
 
-struct ItemSlot_ALT
-{
-    u8 itemIndex;
-    u8 numItems;
-    u8 unk2;
+struct HeldItem {
+  u8 itemIndex;
+  u8 numItems;
 };
 
 struct unkStruct_80915F4
@@ -348,9 +346,9 @@ u8 *GetItemDescription(u8 itemIndex);
 u32 GetItemUnkFood(u8 itemIndex, u32 r1);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 itemIndex);
-void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);
-void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex);
-void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2);
+void xxx_init_itemslot_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);
+void xxx_init_helditem_8090B08(struct HeldItem *param_1,u8 itemIndex);
+void HeldItemToSlot(struct ItemSlot *param_1, struct HeldItem *param_2);
 void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3);
 bool8 AddItemToInventory(const struct ItemSlot* slot);
 void ConvertMoneyItemToMoney();
