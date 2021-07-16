@@ -2379,7 +2379,7 @@ _08090026:
 	strb r1, [r0]
 	subs r0, 0x34
 	adds r1, r4, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	ldrh r0, [r6, 0x14]
 	strh r0, [r5, 0x3E]
 	ldr r0, [r6, 0x4]

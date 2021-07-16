@@ -30,17 +30,24 @@ struct ItemSlot
     u8 itemIndex;
 };
 
-struct ItemSlot_ALT
-{
-    u8 itemIndex;
-    u8 numItems;
-    u8 unk2;
+struct HeldItem {
+  u8 itemIndex;
+  u8 numItems;
 };
 
 struct unkStruct_80915F4
 {
     u16 unk0;
     u16 unk2;
+};
+
+struct unkStruct_8090F58
+{
+    u32 unk0;
+    u8 unk4;
+    u8 unk5;
+    s16 unk6;
+    u8 unk8;
 };
 
 enum ItemType
@@ -339,20 +346,22 @@ u8 *GetItemDescription(u8 itemIndex);
 u32 GetItemUnkFood(u8 itemIndex, u32 r1);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 itemIndex);
-void sub_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);
-void sub_8090B08(struct ItemSlot_ALT *param_1,u8 itemIndex);
-void sub_8090B64(struct ItemSlot *param_1, struct ItemSlot_ALT *param_2);
-void sub_8090DC4(void* param_1,u8 itemIndex,u32 param_3);
+void xxx_init_itemslot_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);
+void xxx_init_helditem_8090B08(struct HeldItem *param_1,u8 itemIndex);
+void HeldItemToSlot(struct ItemSlot *param_1, struct HeldItem *param_2);
+void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3);
 bool8 AddItemToInventory(const struct ItemSlot* slot);
 void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
 u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
+bool8 CanSellItem(u32 id);
 bool8 IsGummiItem(u8);
 void xxx_init_unk230_substruct(u8);
 bool8 xxx_insert_unk230_80919FC(u8);
 u32 xxx_count_non_empty_inv_unk250_8091A48();
 void sub_8091BB4(u8);
+void sub_8090F58(void*, u8 *, struct ItemSlot *, struct unkStruct_8090F58*);
 
 // some sort of weird memcpy's?
 // not sure what the second argument should be typed as

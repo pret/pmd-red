@@ -6,8 +6,8 @@ struct TeamInventory
     struct ItemSlot teamItems[INVENTORY_SIZE];
     u16 teamStorage[NUMBER_OF_ITEM_IDS];
     // same type (initialized by same function):
-    struct ItemSlot_ALT unk230[8];
-    struct ItemSlot_ALT unk250[4];
+    struct HeldItem unk230[8];
+    struct HeldItem unk250[4];
     /* 0x260 */ s32 teamMoney;
     /* 0x264 */ u32 teamSavings;
 };

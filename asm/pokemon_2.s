@@ -92,7 +92,7 @@ _0808DEDA:
 	beq _0808DF00
 	adds r0, r2, 0
 	mov r1, r12
-	bl sub_8090B64
+	bl HeldItemToSlot
 	b _0808DF06
 _0808DF00:
 	strb r0, [r2, 0x2]
@@ -204,7 +204,7 @@ _0808DFB2:
 	beq _0808DFD4
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8090BB0
+	bl SlotToHeltItem
 	b _0808DFD6
 _0808DFD4:
 	strb r1, [r6]
@@ -230,7 +230,7 @@ sub_808DFDC:
 	beq _0808E004
 	adds r0, r3, 0
 	adds r0, 0x28
-	bl sub_8090BB0
+	bl SlotToHeltItem
 	b _0808E00A
 	.align 2, 0
 _0808E000: .4byte gRecruitedPokemonRef

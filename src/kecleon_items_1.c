@@ -10,7 +10,6 @@ extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct TeamInventory *gTeamInventory_203B460;
 
 extern u32 GetStackSellPrice(struct ItemSlot *);
-extern bool8 CanSellItem(u8);
 extern u32 xxx_count_inv_unk230(void);
 extern s32 sub_80144A4(s32 *);
 void UpdateKecleonStoreState(u32);
