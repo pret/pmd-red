@@ -3003,16 +3003,16 @@ void sub_808ACC0(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x79);
+    sub_808B1CC(ITEM_ID_ROCK_PART);
   }
   else {
-    if (sub_80860A8(0x79) != 0) {
+    if (sub_80860A8(ITEM_ID_ROCK_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3035,16 +3035,16 @@ void sub_808AD48(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x77);
+    sub_808B1CC(ITEM_ID_ICE_PART);
   }
   else {
-    if (sub_80860A8(0x77) != 0) {
+    if (sub_80860A8(ITEM_ID_ICE_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3068,16 +3068,16 @@ void sub_808ADCC(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x78);
+    sub_808B1CC(ITEM_ID_STEEL_PART);
   }
   else {
-    if (sub_80860A8(0x78) != 0) {
+    if (sub_80860A8(ITEM_ID_STEEL_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3103,7 +3103,7 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,0x79,0);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ROCK_PART,0);
       sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regirock's body
@@ -3126,7 +3126,7 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,0x77,0);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ICE_PART,0);
       sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regice's body
@@ -3148,7 +3148,7 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,0x78,0);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_STEEL_PART,0);
       sub_80464C8(sub_8083600(),param_3, &auStack20);
       sub_8083E88(0x72);
       // Something fell from Registeel's body
@@ -3165,7 +3165,7 @@ void sub_808AFB0(char param_1)
 
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x79) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Rock Part that Regirock was guarding
@@ -3183,7 +3183,7 @@ void sub_808B030(char param_1)
 
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x77) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Ice Part that Regice was guarding
@@ -3201,7 +3201,7 @@ void sub_808B0B0(char param_1)
   
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x78) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames, sub_8083600(), 0);
     // $m0 obatined the Steel Part that Registeel was guarding
