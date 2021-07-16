@@ -182,7 +182,7 @@ void HeldItemToSlot(struct ItemSlot *slot, struct HeldItem *held)
     }
 }
 
-void SlotToHeltItem(struct HeldItem *held,struct ItemSlot *slot)
+void SlotToHeldItem(struct HeldItem *held,struct ItemSlot *slot)
 {
   if ((slot->unk0 & 1) != 0) {
     held->itemIndex = slot->itemIndex;
