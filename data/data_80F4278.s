@@ -7970,6 +7970,7 @@ gUnknown_8108084: @ 8108084
 	.global gUnknown_8108E58
 gUnknown_8108E58: @ 8108E58
 @ replacing .incbin "baserom.gba", 0x00108e58, 0x68
+@ u16*s
         .4byte 0x8108184
         .4byte 0x810819c
         .4byte 0x81081ea

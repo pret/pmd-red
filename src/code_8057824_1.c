@@ -2,6 +2,7 @@
 #include "gUnknown_203B418.h"
 #include "code_8041D5C.h"
 #include "pokemon.h"
+#include "item.h"
 
 extern struct unkStruct_203B418 *gUnknown_203B418;
 
@@ -257,8 +258,7 @@ extern struct unkDungeon_8041D5C *sub_8083600();
 extern void sub_80421C0(struct unkDungeon_8041D5C *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
-extern void sub_8090A8C(u8 *, u32, u32);
-extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, u8 *);
+extern void sub_80464C8(struct unkDungeon_8041D5C *, u32, struct ItemSlot *);
 extern void sub_8098044(u32);
 extern void PlaySoundEffect(u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
@@ -3003,16 +3003,16 @@ void sub_808ACC0(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x79);
+    sub_808B1CC(ITEM_ID_ROCK_PART);
   }
   else {
-    if (sub_80860A8(0x79) != 0) {
+    if (sub_80860A8(ITEM_ID_ROCK_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3035,16 +3035,16 @@ void sub_808AD48(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x77);
+    sub_808B1CC(ITEM_ID_ICE_PART);
   }
   else {
-    if (sub_80860A8(0x77) != 0) {
+    if (sub_80860A8(ITEM_ID_ICE_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3068,16 +3068,16 @@ void sub_808ADCC(void)
     sub_8068FE0(uVar2,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
-    sub_808B1CC(0x78);
+    sub_808B1CC(ITEM_ID_STEEL_PART);
   }
   else {
-    if (sub_80860A8(0x78) != 0) {
+    if (sub_80860A8(ITEM_ID_STEEL_PART) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
     }
     else
     {
-      if (sub_80860A8(0x7a) != 0) {
+      if (sub_80860A8(ITEM_ID_MUSIC_BOX) != 0) {
         sub_8098044(0x22);
         sub_8097FA8(0x1d);
       } 
@@ -3095,7 +3095,7 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3103,8 +3103,8 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x79,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ROCK_PART,0);
+      sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
@@ -3118,7 +3118,7 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3126,8 +3126,8 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x77,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ICE_PART,0);
+      sub_80464C8(sub_8083600(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
@@ -3140,7 +3140,7 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
 {
   struct unkDungeon_8041D5C * uVar3;
   u8 auStack24 [4];
-  u8 auStack20 [4];
+  struct ItemSlot auStack20;
 
 
   uVar3 = sub_8085480();
@@ -3148,8 +3148,8 @@ void sub_808AF3C(char param_1,char param_2,u32 param_3)
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      sub_8090A8C(auStack20,0x78,0);
-      sub_80464C8(sub_8083600(),param_3,auStack20);
+      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_STEEL_PART,0);
+      sub_80464C8(sub_8083600(),param_3, &auStack20);
       sub_8083E88(0x72);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item
@@ -3165,7 +3165,7 @@ void sub_808AFB0(char param_1)
 
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x79) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Rock Part that Regirock was guarding
@@ -3183,7 +3183,7 @@ void sub_808B030(char param_1)
 
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x77) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Ice Part that Regice was guarding
@@ -3201,7 +3201,7 @@ void sub_808B0B0(char param_1)
   
   uVar3 = sub_8085480();
   sub_8052D44(auStack12,uVar3,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(0x78) != 0)) {
+  if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     sub_8045B94(gAvailablePokemonNames, sub_8083600(), 0);
     // $m0 obatined the Steel Part that Registeel was guarding
@@ -3341,7 +3341,7 @@ void sub_808B1CC(u8 r0)
 	"\tadds r0, r4, 0\n"
 	"\tadds r1, r6, 0\n"
 	"\tmovs r2, 0\n"
-	"\tbl sub_8090A8C\n"
+	"\tbl xxx_init_itemslot_8090A8C\n"
 	"\tldrh r0, [r5, 0x2]\n"
 	"\tsubs r0, 0x1\n"
 	"\tstrh r0, [r5, 0x2]\n"

@@ -201,7 +201,7 @@ void sub_8027274(void)
         sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk74,2);
         break;
     case 0xd:
-        sub_8090B64(&auStack12,&gUnknown_203B2BC->unk10);
+        HeldItemToSlot(&auStack12,&gUnknown_203B2BC->unk10);
         sub_801B3C0(&auStack12);
         break;
     case 0xe:

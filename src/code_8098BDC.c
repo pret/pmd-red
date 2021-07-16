@@ -58,10 +58,10 @@ extern void sub_800199C(u8, u8, u8, s32);
 extern void sub_8098CC8();
 extern void sub_809674C();
 extern void sub_80961B4();
-extern void sub_8091FB4();
+extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
 extern u8 sub_8001CC4(u8, u8, u8);
-extern void sub_8091980(u32);
+extern void xxx_inv_unk250_random_8091980(u32);
 
 extern u8 sub_80023E4(u32);
 extern void sub_80118C4(u16);
@@ -166,10 +166,10 @@ void sub_8098CC8(void)
     {
         temp = 3;
     }
-    sub_8091980(temp);
+    xxx_inv_unk250_random_8091980(temp);
     sub_809674C();
     sub_80961B4();
-    sub_8091FB4();
+    ClearAllItems_8091FB4();
 }
 
 bool8 sub_8098D1C(s16 r0, u32 r1, u32 r2)

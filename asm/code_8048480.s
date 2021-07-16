@@ -19331,13 +19331,13 @@ sub_805193C:
 	mov r0, sp
 	movs r1, 0x76
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	b _08051974
 _0805196A:
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 _08051974:
 	mov r0, sp
 	ldrb r0, [r0]

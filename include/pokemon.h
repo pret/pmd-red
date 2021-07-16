@@ -2,6 +2,8 @@
 #define GUARD_POKEMON_H
 
 #include "file_system.h"
+#include "item.h"
+
 
 struct PokemonStruct
 {
@@ -28,9 +30,7 @@ struct PokemonStruct
     u8 unk20[4];
     u8 unk24;
     u8 fill25[3];
-    u8 itemIndexHeld;
-    u8 unk29;
-    u8 fill2A[2];
+    struct HeldItem heldItem;
     u8 unk2C[4];
     u8 fill30[0x4C - 0x30];
     /* 0x4C */ u8 name[0xA];

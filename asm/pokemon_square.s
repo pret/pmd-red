@@ -117,7 +117,7 @@ _08019F24:
 	bl sub_8019FB0
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_809185C
+	bl xxx_get_inv_unk230_at_809185C
 	ldrb r2, [r0]
 	lsls r2, 16
 	ldr r3, _08019F68
@@ -376,7 +376,7 @@ _0801A122:
 	adds r0, r6
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_809185C
+	bl xxx_get_inv_unk230_at_809185C
 	ldrb r2, [r0]
 	lsls r2, 16
 	ldr r3, _0801A1AC
@@ -478,7 +478,7 @@ _0801A208: .4byte gUnknown_203B214
 sub_801A20C:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8091A48
+	bl xxx_count_non_empty_inv_unk250_8091A48
 	cmp r0, 0
 	beq _0801A2A0
 	ldr r5, _0801A294
@@ -518,7 +518,7 @@ sub_801A20C:
 	movs r2, 0x1
 	bl sub_800641C
 	ldr r4, [r5]
-	bl sub_8091A48
+	bl xxx_count_non_empty_inv_unk250_8091A48
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0xA
@@ -585,7 +585,7 @@ _0801A2F0:
 	bl sub_801A37C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8091A90
+	bl xxx_get_unk250_at_8091A90
 	ldrb r2, [r0]
 	lsls r2, 16
 	ldr r3, _0801A334
@@ -680,7 +680,7 @@ sub_801A398:
 	movs r1, 0
 	movs r2, 0
 	bl sub_800641C
-	bl sub_8091A48
+	bl xxx_count_non_empty_inv_unk250_8091A48
 	adds r1, r0, 0
 	ldr r0, [r5]
 	strh r1, [r0, 0x22]
@@ -844,7 +844,7 @@ _0801A4EE:
 	adds r0, r6
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8091A90
+	bl xxx_get_unk250_at_8091A90
 	ldrb r2, [r0]
 	lsls r2, 16
 	ldr r3, _0801A578

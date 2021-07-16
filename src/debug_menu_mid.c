@@ -208,7 +208,7 @@ void sub_803A5A0(void)
         sub_803A690();
         break;
     case 4:
-        sub_8090A8C(&auStack8,gUnknown_203B3F0->itemIndex,0);
+        xxx_init_itemslot_8090A8C(&auStack8,gUnknown_203B3F0->itemIndex,0);
         sub_801B3C0(&auStack8);
         break;
     case 5:

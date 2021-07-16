@@ -97,7 +97,7 @@ sub_8027D40:
 	add r4, sp, 0x10
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8090B64
+	bl HeldItemToSlot
 	movs r5, 0
 	str r5, [sp, 0x4]
 	add r0, sp, 0x4

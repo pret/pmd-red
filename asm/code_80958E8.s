@@ -554,7 +554,7 @@ _08095F34:
 	beq _08095F48
 	lsrs r1, r4, 24
 	adds r0, r7, 0
-	bl sub_8091E60
+	bl xxx_bit_lut_lookup_8091E50
 	lsls r0, 24
 	cmp r0, 0
 	beq _08095F6A
