@@ -357,6 +357,7 @@ void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
 u32 GetMoneyValue(struct ItemSlot* slot);
 u16 GetItemMove(u8 index);
+bool8 CanSellItem(u32 id);
 bool8 IsGummiItem(u8);
 void xxx_init_unk230_substruct(u8);
 bool8 xxx_insert_unk230_80919FC(u8);
