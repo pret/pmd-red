@@ -144,14 +144,14 @@ void sub_8017B88(void)
             else
             {
                 gUnknown_203B208->itemIndex = sub_801CB24();
-                sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
+                xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
                 gUnknown_203B208->unkC.numItems = 1;
                 UpdateKangaskhanStorageState(0x19);
             }
             break;
         case 4:
             gUnknown_203B208->itemIndex = sub_801CB24();
-            sub_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
+            xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
             gUnknown_203B208->unkC.numItems = 1;
             UpdateKangaskhanStorageState(0x1A);
             break;

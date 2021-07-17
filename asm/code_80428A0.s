@@ -6366,7 +6366,7 @@ sub_8045C28:
 	lsrs r4, r1, 24
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 	movs r7, 0
 	adds r0, r4, 0
 	bl IsNotSpecialItem
@@ -8668,7 +8668,7 @@ _08046DC8:
 	adds r0, r1
 	movs r1, 0x7A
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 _08046E1E:
 	cmp r7, 0
 	bne _08046D96
@@ -8917,7 +8917,7 @@ _08047012:
 	adds r0, r2, 0
 	movs r1, 0x46
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 _0804702C:
 	adds r5, 0x1
 	cmp r5, 0x13
@@ -8948,7 +8948,7 @@ _08047038:
 	adds r0, r2, 0
 	movs r1, 0x46
 	movs r2, 0
-	bl sub_8090A8C
+	bl xxx_init_itemslot_8090A8C
 _0804706C:
 	adds r5, 0x1
 	cmp r5, 0x3

@@ -226,7 +226,7 @@ sub_808CFD0:
 	adds r0, r7, 0
 	adds r0, 0x28
 	adds r1, r4, 0
-	bl sub_8090B08
+	bl xxx_init_helditem_8090B08
 	mov r4, r8
 	str r4, [r7, 0x1C]
 	adds r0, r7, 0
@@ -387,7 +387,7 @@ sub_808D144:
 	adds r0, r5, 0
 	adds r0, 0x28
 	ldrb r1, [r7, 0x6]
-	bl sub_8090B08
+	bl xxx_init_helditem_8090B08
 	ldr r0, [r7, 0x24]
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0

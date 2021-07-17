@@ -1,14 +1,10 @@
 #include "global.h"
 #include "rescue_team_info.h"
+#include "code_8092334.h"
 
 extern struct RescueTeamData *gRescueTeamInfoRef;
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo;
 
-extern void sub_809485C(u32 *r0, u8 *r1, u32 r2);
-extern void sub_809486C(u32 *r0, u8 *r1, u32 r2);
-extern void sub_809488C(u32 *r0, u8 *r1, u32 r2);
-extern void sub_8094924(u32 *r0, u8 *r1, u32);
-extern void nullsub_102(u32 *r0);
 extern u8 sub_80023E4(u32);
 extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
@@ -134,7 +130,7 @@ u8 sub_80921B8(void)
 u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
 
 {
-    u32 auStack36[4];
+    struct unkStruct_8094924 auStack36;
     u8 neg1;
     u8 zero;
     u8 *puVar2;
@@ -142,9 +138,9 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     neg1 = -1;
     zero = 0;
 
-    sub_809486C(auStack36, param_1, size);
-    sub_809488C(auStack36, gRescueTeamInfoRef->teamName, 0x58);
-    sub_809488C(auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
+    sub_809486C(&auStack36, param_1, size);
+    sub_809488C(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
+    sub_809488C(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
     gRescueTeamInfoRef->unk10 = sub_80023E4(0);
 
     if (gRescueTeamInfoRef->unk10 != 0)
@@ -155,21 +151,21 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     {
         puVar2 = &zero;
     }
-    sub_809488C(auStack36,puVar2,1);
-    nullsub_102(auStack36);
-    return auStack36[2];
+    sub_809488C(&auStack36,puVar2,1);
+    nullsub_102(&auStack36);
+    return auStack36.unk8;
 }
 
 u32 ReadRescueTeamInfo(u8 *param_1, u32 size)
 {
-  u32 auStack32 [4];
+  struct unkStruct_8094924 auStack32;
   u8 byteArray[4];
 
-  sub_809485C(auStack32, param_1, size);
-  sub_8094924(auStack32, gRescueTeamInfoRef->teamName, 0x58);
-  sub_8094924(auStack32, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
-  sub_8094924(auStack32, byteArray, 1);
+  sub_809485C(&auStack32, param_1, size);
+  sub_8094924(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
+  sub_8094924(&auStack32, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
+  sub_8094924(&auStack32, byteArray, 1);
   gRescueTeamInfoRef->unk10 = byteArray[0] & 1;
-  nullsub_102(auStack32);
-  return auStack32[2];
+  nullsub_102(&auStack32);
+  return auStack32.unk8;
 }

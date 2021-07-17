@@ -533,7 +533,7 @@ _0803C59E:
 	beq _0803C5C6
 	ldrb r0, [r6, 0x4]
 	ldrb r1, [r5, 0x2]
-	bl sub_8091E60
+	bl xxx_bit_lut_lookup_8091E50
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803C5C6
@@ -605,7 +605,7 @@ _0803C624:
 	beq _0803C64C
 	ldrb r0, [r6, 0x4]
 	ldrb r1, [r4, 0x2]
-	bl sub_8091E60
+	bl xxx_bit_lut_lookup_8091E50
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803C64C
