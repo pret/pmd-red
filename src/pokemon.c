@@ -39,7 +39,7 @@ void InitializeRecruitedPokemon(void)
 
   for(iVar3 = 0; iVar3 < 4; iVar3++)
   {
-    gRecruitedPokemonRef->pokemon3[iVar3].unk8 = 0;
-    gRecruitedPokemonRef->pokemon3[iVar3].unk0 = 0;
+    gRecruitedPokemonRef->team[iVar3].speciesNum = 0;
+    gRecruitedPokemonRef->team[iVar3].unk0 = 0;
   }
 }

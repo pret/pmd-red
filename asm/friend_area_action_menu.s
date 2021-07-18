@@ -512,7 +512,7 @@ _0802782C:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D7DC
+	bl PeekPokemonItem
 	movs r0, 0x3
 	bl sub_8027184
 	b _080278AE
@@ -538,7 +538,7 @@ _08027868:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D7DC
+	bl PeekPokemonItem
 	movs r0, 0x4
 	bl sub_8027184
 	b _080278AE
@@ -707,7 +707,7 @@ _080279F0:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	bl nullsub_104
 _08027A0E:
 	movs r0, 0x2

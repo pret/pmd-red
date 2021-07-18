@@ -320,7 +320,7 @@ _08027ED8:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	movs r0, 0x6
 	bl sub_8027184
 	b _08027F82
@@ -371,7 +371,7 @@ _08027F52:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	movs r0, 0x7
 	bl sub_8027184
 	b _08027F82

@@ -43,22 +43,11 @@ struct PokemonStruct2
     u8 fill[0x62];
 };
 
-struct PokemonStruct3
-{
-    // size: 0x58
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u16 unk8;
-    u8 fill[0x4E];
-};
-
 struct unkStruct_203B45C
 {
     /* 0x0 */ struct PokemonStruct pokemon[NUM_SPECIES];
     /* 0x8DF8 */ struct PokemonStruct2 pokemon2[4];
-    /* 0x8F88 */ struct PokemonStruct3 pokemon3[4];
+    /* 0x8F88 */ struct PokemonStruct team[4];
 };
 
 struct EvolveStruct1

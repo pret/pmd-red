@@ -10,6 +10,7 @@ extern u8 gUnknown_810A36B[];
 extern s16 gUnknown_810A378[];
 extern s32 gUnknown_810A390[];
 extern u32 gUnknown_81076E4[];
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 struct unkStruct_808E9EC
 {
@@ -451,4 +452,37 @@ bool8 sub_808ECD0(u8 *param_1, u32 param_2)
 u32 sub_808ECFC(void)
 {
     return 0;
+}
+
+extern s32 sub_808D580(s32*);
+
+void sub_808ED00() {
+    s32 team[4];
+    s32 i;
+    s32 length = sub_808D580(team);
+
+    for (i = 0; i < length; i++) {
+#ifdef NONMATCHING
+        memcpy(&gRecruitedPokemonRef->team[i], &gRecruitedPokemonRef->pokemon[buffer[i]], sizeof(struct PokemonStruct));
+#else
+        // all this to swap 2 registers...
+        size_t grpmr = (size_t)gRecruitedPokemonRef;
+        size_t offs = offsetof(struct unkStruct_203B45C, team);
+        struct PokemonStruct* dest = (void*)(
+            grpmr 
+            + sizeof(struct PokemonStruct) * i
+            + offs
+        );
+        size_t grpmr2 = (size_t)gRecruitedPokemonRef;
+        struct PokemonStruct* src = (void*)grpmr2;
+        size_t index = team[i];
+        src += index;
+        
+        memcpy(dest, src, sizeof(struct PokemonStruct));
+#endif
+    }
+
+    for (; i < 4; i++) {
+        gRecruitedPokemonRef->team[i].unk0 = 0;
+    }
 }

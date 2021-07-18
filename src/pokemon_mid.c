@@ -15,6 +15,8 @@ extern s16 sub_808E770(u32);
 extern void sub_80922B4(u8 *, u8 *, s32);
 extern void sub_808DE50(void* r0, struct PokemonStruct *r1, u32 r2, u32 r3);
 extern int sprintf(char *, const char *, ...);
+extern u32 ReturnIntFromChar(u8 r0);
+extern void CopyStringtoBuffer(char *r0, char *r1);
 
 struct unkStruct {
   s16 unk0;
@@ -29,6 +31,86 @@ extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
+// bool8 sub_808D750(s16 index_) {
+//     s32 i;
+//     register s32 index asm("r8") = index_;
+//     s32 count = 0;
+//     s32 size_count = 0;
+
+//     for (i = 0; i < 413; i++) {
+//         register struct PokemonStruct* pokemon = &i[gRecruitedPokemonRef->pokemon];
+//         register u16 unk0 = pokemon->unk0;
+//         if ((unk0 & 1) && ((pokemon->unk0 >> 1) & 1)) {
+//             size_count += GetPokemonSize(pokemon->speciesNum);
+//             count++;
+//         }
+//     }
+
+//     if (count < 4) {
+//         struct PokemonStruct* pokemon;
+
+//         pokemon = &gRecruitedPokemonRef->pokemon[index];
+
+//         size_count += GetPokemonSize(pokemon->speciesNum);
+//         if (size_count < 7) {
+//             return TRUE;
+//         }
+//     }
+//     return FALSE;
+// }
+
+
+void PeekPokemonItem(s16 index_, struct HeldItem* item) {
+    s32 index = index_;
+    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    item->itemIndex = pokemon->heldItem.itemIndex;
+    item->numItems = pokemon->heldItem.numItems;
+}
+
+void GivePokemonItem(s16 index_, struct HeldItem* item) {
+    s32 index = index_;
+    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    pokemon->heldItem.itemIndex = item->itemIndex;
+    pokemon->heldItem.numItems = item->numItems;
+}
+
+bool8 IsPokemonRenamed(struct PokemonStruct* pokemon) {
+    char species_name[20];
+    char* species = GetMonSpecies(pokemon->speciesNum);
+    s32 i;
+    CopyStringtoBuffer(species_name, species);
+    for (i = 0; i < 10; i++) {
+        if (pokemon->name[i] != species_name[i]) {
+            return FALSE;
+        }
+        if (!pokemon->name[i]) {
+            return TRUE;
+        }
+    }
+    return TRUE;
+}
+
+bool8 ComparePokemonNames(s16 a1, s16 a2) {
+    s32 index1 = a1;
+    s32 index2 = a2;
+    u8* name1 = gRecruitedPokemonRef->pokemon[index1].name;
+    u8* name2 = gRecruitedPokemonRef->pokemon[index2].name;
+
+    s32 i;
+    for (i = 0; i < 10; i++) {
+        s32 c1 = ReturnIntFromChar(*name1);
+        s32 c2 = ReturnIntFromChar(*name2);
+        if (c1 > c2) {
+            return TRUE;
+        }
+        if (c1 < c2) {
+            return FALSE;
+        }
+        name1++;
+        name2++;
+    }
+    return FALSE;
+}
 
 void CopySpeciesNametoBuffer(u8 * buffer, s16 index)
 {
@@ -315,3 +397,63 @@ void sub_808DE30(void* r0, u32 r1)
 {
     sub_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1, r1 * sizeof(struct PokemonStruct));
 }
+
+// void sub_808CE74(s16 species, u8 a2, u8* name) {
+//   struct PokemonStruct pokemon;
+//   u8 buffer[20];
+//   s32 v5;
+//   s32 i;
+//   u8 friend_area;
+//   struct PokemonStruct* table;
+  
+//   pokemon.unk0 = 3;
+//   if (a2) {
+//       pokemon.unk2 = 1;
+//       pokemon.unk4 = 64;
+//   }
+//   else {
+//       pokemon.unk2 = 0;
+//       pokemon.unk4 = 65;
+//   }
+//   pokemon.unk3 = 1;
+//   pokemon.pokeHP = GetBaseHP(species);
+//   pokemon.pokeAtt = GetPokemonAttSpatt(species, 0);
+//   pokemon.pokeSPAtt = GetPokemonAttSpatt(species, 1);
+//   pokemon.pokeDef = GetPokemonDefSpdef(species, 0);
+//   pokemon.pokeSPDef = GetPokemonDefSpdef(species, 1);
+//   pokemon.unk14 = 1;
+//   pokemon.unkC = 0;
+//   pokemon.unk10 = 0;
+//   sub_808EC94(pokemon.unk20, 0);
+//   pokemon.speciesNum = species;
+//   pokemon.heldItem.itemIndex = 0;
+//   pokemon.heldItem.numItems = 0;
+//   memset(pokemon.unk2C, 0, 4);  // empty struct initializer list?
+//   pokemon.unk24 = 0;
+//   pokemon.unk5 = 0;
+
+//   sub_808E490(pokemon.unk2C, species);
+//   if (!name) {
+//     CopySpeciesNametoBuffer(buffer, species);
+//     BoundedCopyStringtoBuffer(pokemon.name, buffer, 10);
+//   }
+//   else {
+//     for (i = 0; i < 10; i++) {
+//       pokemon.name[i] = name[i];
+//     }
+//   }
+//   friend_area = gMonsterParameters[species].friend_area;
+  
+//   for (i = 0; i < 413; i++) {
+//       if (!((u8)gRecruitedPokemonRef->pokemon[i].unk0 & 1)) {
+//           if (sub_80923D4(i) == friend_area) {
+//               s32 length = sizeof(struct PokemonStruct);
+
+//               memcpy(&gRecruitedPokemonRef->pokemon[i], &pokemon, length);
+//               gFriendAreas[i] = 1;
+//               sub_80980B4(species);
+//               break;
+//           }
+//       }
+//   }
+// }
