@@ -24,7 +24,17 @@ struct unkStruct_808E9EC
     u8 unk12;
     u8 unk13;
 };
+extern u32 gUnknown_81076C4[];
 
+struct unkStruct_202F3E8 
+{
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+};
+
+extern struct unkStruct_202F3E8 gUnknown_202F3E8[];
 extern s16 gUnknown_810AC60; // 0xC
 extern s16 gUnknown_810AC62; // 0xC
 extern s16 gUnknown_810AC68; // 0x8
@@ -36,6 +46,7 @@ extern s32 gUnknown_810AC90[10];
 
 extern bool8 sub_808ECD0(u8 *, u32);
 extern void sub_808EC30(u8 *, u32);
+extern void AddSprite(u16 *, u32, u32, u32);
 
 
 struct unkStruct_808E6F4
@@ -43,6 +54,32 @@ struct unkStruct_808E6F4
     s16 unk0;
     u8 unk2;
 };
+
+
+bool8 sub_808E668(s16 a1, s16* a2, s16* a3) 
+{
+    u32 shifted = a1 << 16;
+
+    if (((shifted - 0x320000) >> 16) > 1) {
+        u8 shadow_size = GetShadowSize(a1);
+        u32 unk2, unk6;
+        struct unkStruct_202F3E8* arg0;
+
+        unk2 = a2[0] + a3[8];
+        unk6 = a2[1] + a3[9];
+        unk2 += gUnknown_81076C4[shadow_size];
+        unk6 -= 4;
+        unk2 &= 0x1ff;
+
+        arg0 = &gUnknown_202F3E8[shadow_size];
+        arg0->unk2 = (arg0->unk2 & 0xfe00) | unk2;
+        unk6 &= 0xfff;
+        unk6 <<= 4;
+        arg0->unk6 = (arg0->unk6 & 0xf) | unk6;
+        AddSprite((u16*)arg0, 0, 0, 0);
+    }
+    return 1;
+}
 
 
 void sub_808E6F4(struct unkStruct_808E6F4* a1)
