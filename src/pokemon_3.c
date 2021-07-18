@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "random.h"
 
 extern u32 gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
@@ -30,8 +31,148 @@ extern s16 gUnknown_810AC68; // 0x8
 extern s16 gUnknown_810AC64; // 0x8
 extern s16 gUnknown_810AC66; // 0x8
 
+// 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
+extern s32 gUnknown_810AC90[10];
+
 extern bool8 sub_808ECD0(u8 *, u32);
 extern void sub_808EC30(u8 *, u32);
+
+
+struct unkStruct_808E6F4
+{
+    s16 unk0;
+    u8 unk2;
+};
+
+
+void sub_808E6F4(struct unkStruct_808E6F4* a1)
+{
+  s32 i; 
+
+  a1->unk0 = gUnknown_810AC90[RandomCapped(10)];
+  for (i = 0; i < 100; i++) {
+    a1->unk2 = RandomCapped(18);
+    if ( a1->unk2 )
+      break;
+  }
+  if ( i == 100 )
+    a1->unk2 = 2;
+}
+
+bool8 HasRecruitedMon(s16 species_) {
+    s32 species = species_;
+    s32 i = 0;
+    struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
+    
+    for (i = 0; i < 413; i++) {
+        if (((u8)pokemon->unk0 & 1)) {
+            if(pokemon->speciesNum == species)
+                return TRUE;
+        }
+        pokemon++;
+    }
+    return FALSE;
+}
+
+s32 GetBaseSpecies(s16 index) {
+    if (index == SPECIES_CASTFORM_SNOWY)
+        return SPECIES_CASTFORM;
+    if (index == SPECIES_CASTFORM_SUNNY)
+        return SPECIES_CASTFORM;
+    if (index == SPECIES_CASTFORM_RAINY)
+        return SPECIES_CASTFORM;
+    if(index == SPECIES_UNOWN_B)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_C)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_D)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_E)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_F)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_G)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_H)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_I)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_J)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_K)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_L)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_M)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_N)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_O)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_P)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_Q)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_R)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_S)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_T)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_U)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_V)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_W)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_X)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_Y)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_Z)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_EMARK)
+        return SPECIES_UNOWN;
+    if(index == SPECIES_UNOWN_QMARK)
+        return SPECIES_UNOWN;
+    if (index == SPECIES_DEOXYS_ATTACK)
+        return SPECIES_DEOXYS_NORMAL;
+    if (index == SPECIES_DEOXYS_DEFENSE)
+        return SPECIES_DEOXYS_NORMAL;
+    if (index == SPECIES_DEOXYS_SPEED)
+        return SPECIES_DEOXYS_NORMAL;
+    if (index == SPECIES_RAYQUAZA_CUTSCENE)
+        return SPECIES_RAYQUAZA;
+    
+    return index;
+}
+
+s32 GetBaseSpeciesNoUnown(s16 index) {
+    register s32 a1_ asm("r2") = index;
+    if (index == SPECIES_CASTFORM_SNOWY) {
+        return SPECIES_CASTFORM;
+    }
+    if (index == SPECIES_CASTFORM_SUNNY) {
+        return SPECIES_CASTFORM;
+    }
+    if (index == SPECIES_CASTFORM_RAINY) {
+        return SPECIES_CASTFORM;
+    }
+    if (index == SPECIES_DEOXYS_ATTACK) {
+        return SPECIES_DEOXYS_NORMAL;
+    }
+    if (index == SPECIES_DEOXYS_DEFENSE) {
+        return SPECIES_DEOXYS_NORMAL;
+    }
+    if (index == SPECIES_DEOXYS_SPEED) {
+        return SPECIES_DEOXYS_NORMAL;
+    }
+    // these last 2 use r2 instead of just r0
+    if (a1_ == SPECIES_RAYQUAZA_CUTSCENE) {
+        return SPECIES_RAYQUAZA;
+    }
+    return a1_;
+}
 
 s32 GetUnownIndex(s16 index)
 {
@@ -462,27 +603,11 @@ void sub_808ED00() {
     s32 length = sub_808D580(team);
 
     for (i = 0; i < length; i++) {
-#ifdef NONMATCHING
-        memcpy(&gRecruitedPokemonRef->team[i], &gRecruitedPokemonRef->pokemon[buffer[i]], sizeof(struct PokemonStruct));
-#else
-        // all this to swap 2 registers...
-        size_t grpmr = (size_t)gRecruitedPokemonRef;
-        size_t offs = offsetof(struct unkStruct_203B45C, team);
-        struct PokemonStruct* dest = (void*)(
-            grpmr 
-            + sizeof(struct PokemonStruct) * i
-            + offs
-        );
-        size_t grpmr2 = (size_t)gRecruitedPokemonRef;
-        struct PokemonStruct* src = (void*)grpmr2;
-        size_t index = team[i];
-        src += index;
-        
-        memcpy(dest, src, sizeof(struct PokemonStruct));
-#endif
+        gRecruitedPokemonRef->team[i] = gRecruitedPokemonRef->pokemon[team[i]];
     }
 
     for (; i < 4; i++) {
         gRecruitedPokemonRef->team[i].unk0 = 0;
     }
 }
+

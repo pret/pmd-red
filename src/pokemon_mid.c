@@ -11,7 +11,7 @@ extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
-extern s16 sub_808E770(u32);
+extern s16 GetBaseSpecies(u32);
 extern void sub_80922B4(u8 *, u8 *, s32);
 extern void sub_808DE50(void* r0, struct PokemonStruct *r1, u32 r2, u32 r3);
 extern int sprintf(char *, const char *, ...);
@@ -137,7 +137,7 @@ void sub_808D930(u8 *buffer, s16 index)
   const char *preload;
   
   newIndex = index;
-  if (sub_808E770(newIndex) == SPECIES_UNOWN) {
+  if (GetBaseSpecies(newIndex) == SPECIES_UNOWN) {
     preload = gUnknown_8107630; // %s%c
     unownString = GetMonSpecies(SPECIES_UNOWN);
     unownIndex = GetUnownIndex(newIndex);

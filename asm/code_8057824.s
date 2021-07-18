@@ -38134,7 +38134,7 @@ sub_806AA0C:
 	cmp r0, 0
 	beq _0806AA40
 	adds r0, r4, 0
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -40078,7 +40078,7 @@ sub_806B8CC:
 	str r0, [r1]
 _0806B906:
 	adds r0, r4, 0
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r1, r0, 16
 	movs r0, 0xCF
@@ -40598,7 +40598,7 @@ _0806BD20:
 _0806BD24:
 	movs r4, 0x2
 	ldrsh r0, [r6, r4]
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -40613,7 +40613,7 @@ _0806BD24:
 _0806BD42:
 	movs r2, 0x2
 	ldrsh r0, [r6, r2]
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x97

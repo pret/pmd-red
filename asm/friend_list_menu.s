@@ -3722,7 +3722,7 @@ _08020BD0:
 	ldr r0, [r0, 0x10]
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -5591,7 +5591,7 @@ _08021A8E:
 	cmp r1, r0
 	bne _08021AC4
 	adds r0, r5, 0
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r0, 16
 	cmp r5, r0
@@ -5686,7 +5686,7 @@ sub_8021B58:
 	push {r4,r5,lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r4, r0, 16
 	movs r2, 0
@@ -9086,7 +9086,7 @@ _080236B0:
 	cmp r0, 0
 	beq _080236E2
 	adds r0, r4, 0
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r0, 16
 	cmp r4, r0

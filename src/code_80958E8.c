@@ -32,7 +32,7 @@ struct unkStruct_203B490
 extern bool8 sub_809095C(u8);
 extern s32 sub_8090298(u8);
 extern bool8 sub_809017C(u8 *);
-extern s16 sub_808E770(s16);
+extern s16 GetBaseSpecies(s16);
 extern bool8 sub_8092040(u8);
 extern u8 sub_803C1D0(u8 *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
@@ -127,14 +127,14 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
         if(data->clientPoke > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
-        if(data->clientPoke != sub_808E770(data->clientPoke))
+        if(data->clientPoke != GetBaseSpecies(data->clientPoke))
             return FALSE;
         if(sub_803C0DC(data->clientPoke) == 0)
             return FALSE;
 
         if(data->targetPoke > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
-        if(data->targetPoke != sub_808E770(data->targetPoke))
+        if(data->targetPoke != GetBaseSpecies(data->targetPoke))
             return FALSE;
         if(sub_803C0DC(data->targetPoke) == 0)
             return FALSE;
