@@ -1,7 +1,7 @@
         .section .rodata
 
-	.global gUnknown_80F42C0
-gUnknown_80F42C0: @ 80F42C0
+	.global gPartnerSelectionHeaderText
+gPartnerSelectionHeaderText: @ 80F42C0
 	.string "Pokémon\0"
 	.string "pksdir0\0"
 	.align 2,0
@@ -1151,59 +1151,73 @@ gUnknown_80F4FC8: @ 80F4FC8
 
 	.global gUnknown_80F5004
 gUnknown_80F5004: @ 80F5004
-	.incbin "baserom.gba", 0xF5004, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5004, 0x2
+.byte 0x03, 0x00
 
 	.global gUnknown_80F5006
 gUnknown_80F5006: @ 80F5006
-	.incbin "baserom.gba", 0xF5006, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5006, 0x2
+.byte 0x02, 0x00
 
 	.global gUnknown_80F5008
 gUnknown_80F5008: @ 80F5008
-	.incbin "baserom.gba", 0xF5008, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5008, 0x2
+.byte 0x64, 0x00
 
 	.global gUnknown_80F500A
 gUnknown_80F500A: @ 80F500A
-	.incbin "baserom.gba", 0xF500A, 0x10
+@ replacing .incbin "baserom.gba", 0x000f500a, 0x10
+.byte 0x32, 0x00, 0x50, 0x00, 0x1e, 0x00, 0x28, 0x00, 0x0a, 0x00, 0x0a, 0x00, 0x01, 0x00, 0x01, 0x00
 
 	.global gUnknown_80F501A
 gUnknown_80F501A: @ 80F501A
-	.incbin "baserom.gba", 0xF501A, 0x10
+@ replacing .incbin "baserom.gba", 0x000f501a, 0x10
+.byte 0x32, 0x00, 0x50, 0x00, 0x1e, 0x00, 0x28, 0x00, 0x0a, 0x00, 0x0a, 0x00, 0x01, 0x00, 0x01, 0x00
 
 	.global gUnknown_80F502A
 gUnknown_80F502A: @ 80F502A
-	.incbin "baserom.gba", 0xF502A, 0x10
+@ replacing .incbin "baserom.gba", 0x000f502a, 0x10
+.byte 0x32, 0x00, 0x50, 0x00, 0x1e, 0x00, 0x28, 0x00, 0x0a, 0x00, 0x0a, 0x00, 0x01, 0x00, 0x01, 0x00
 
 	.global gUnknown_80F503A
 gUnknown_80F503A: @ 80F503A
-	.incbin "baserom.gba", 0xF503A, 0x2
+@ replacing .incbin "baserom.gba", 0x000f503a, 0x2
+.byte 0x01, 0x00
 
 	.global gUnknown_80F503C
 gUnknown_80F503C: @ 80F503C
-	.incbin "baserom.gba", 0xF503C, 0x2
+@ replacing .incbin "baserom.gba", 0x000f503c, 0x2
+.byte 0x05, 0x00
 
 	.global gUnknown_80F503E
 gUnknown_80F503E: @ 80F503E
-	.incbin "baserom.gba", 0xF503E, 0x2
+@ replacing .incbin "baserom.gba", 0x000f503e, 0x2
+.byte 0x06, 0x00
 
 	.global gUnknown_80F5040
 gUnknown_80F5040: @ 80F5040
-	.incbin "baserom.gba", 0xF5040, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5040, 0x2
+.byte 0x07, 0x00
 
 	.global gUnknown_80F5042
 gUnknown_80F5042: @ 80F5042
-	.incbin "baserom.gba", 0xF5042, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5042, 0x2
+.byte 0x08, 0x00
 
 	.global gUnknown_80F5044
 gUnknown_80F5044: @ 80F5044
-	.incbin "baserom.gba", 0xF5044, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5044, 0x2
+.byte 0x09, 0x00
 
 	.global gUnknown_80F5046
 gUnknown_80F5046: @ 80F5046
-	.incbin "baserom.gba", 0xF5046, 0x2
+@ replacing .incbin "baserom.gba", 0x000f5046, 0x2
+.byte 0x14, 0x00
 
 	.global gUnknown_80F5048
 gUnknown_80F5048: @ 80F5048
-	.incbin "baserom.gba", 0xF5048, 0x4
+@ replacing .incbin "baserom.gba", 0x000f5048, 0x4
+.byte 0x0f, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F504C
 gUnknown_80F504C: @ 80F504C
@@ -1219,31 +1233,41 @@ gUnknown_80F50F4: @ 80F50F4
 
 	.global gUnknown_80F519C
 gUnknown_80F519C: @ 80F519C
-	.incbin "baserom.gba", 0xF519C, 0x4
+@ replacing .incbin "baserom.gba", 0x000f519c, 0x4
+.byte 0x1e, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F51A0
 gUnknown_80F51A0: @ 80F51A0
-	.incbin "baserom.gba", 0xF51A0, 0x4
+@ replacing .incbin "baserom.gba", 0x000f51a0, 0x4
+.byte 0x1e, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F51A4
 gUnknown_80F51A4: @ 80F51A4
-	.incbin "baserom.gba", 0xF51A4, 0x10
+@ replacing .incbin "baserom.gba", 0x000f51a4, 0x10
+.byte 0x00, 0x08, 0x00, 0x00
+.byte 0x00, 0x04, 0x00, 0x00
+.byte 0x00, 0x02, 0x00, 0x00
+.byte 0x00, 0x01, 0x00, 0x00
 
 	.global gUnknown_80F51B4
 gUnknown_80F51B4: @ 80F51B4
-	.incbin "baserom.gba", 0xF51B4, 0x10
+@ replacing .incbin "baserom.gba", 0x000f51b4, 0x10
+.byte 0x19, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00
 
 	.global gUnknown_80F51C4
 gUnknown_80F51C4: @ 80F51C4
-	.incbin "baserom.gba", 0xF51C4, 0x10
+@ replacing .incbin "baserom.gba", 0x000f51c4, 0x10
+.byte 0x19, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00
 
 	.global gUnknown_80F51D4
 gUnknown_80F51D4: @ 80F51D4
-	.incbin "baserom.gba", 0xF51D4, 0x10
+@ replacing .incbin "baserom.gba", 0x000f51d4, 0x10
+.byte 0x00, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x50, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F51E4
 gUnknown_80F51E4: @ 80F51E4
-	.incbin "baserom.gba", 0xF51E4, 0x8
+@ replacing .incbin "baserom.gba", 0x000f51e4, 0x8
+.byte 0x01, 0x02, 0x0d, 0x01, 0x03, 0x06, 0x03, 0x06
 
 	.global gUnknown_80F51EC
 gUnknown_80F51EC: @ 80F51EC
@@ -1291,23 +1315,28 @@ gUnknown_80F5700: @ 80F5700
 
 	.global gUnknown_80F57CA
 gUnknown_80F57CA: @ 80F57CA
-	.incbin "baserom.gba", 0xF57CA, 0x2
+@ replacing .incbin "baserom.gba", 0x000f57ca, 0x2
+        .byte 0x0a, 0x00
 
 	.global gUnknown_80F57CC
 gUnknown_80F57CC: @ 80F57CC
-	.incbin "baserom.gba", 0xF57CC, 0x2
+@ replacing .incbin "baserom.gba", 0x000f57cc, 0x2
+        .byte 0x14, 0x00
 
 	.global gUnknown_80F57CE
 gUnknown_80F57CE: @ 80F57CE
-	.incbin "baserom.gba", 0xF57CE, 0x2
+@ replacing .incbin "baserom.gba", 0x000f57ce, 0x2
+        .byte 0x14, 0x00
 
 	.global gUnknown_80F57D0
 gUnknown_80F57D0: @ 80F57D0
-	.incbin "baserom.gba", 0xF57D0, 0x2
+@ replacing .incbin "baserom.gba", 0x000f57d0, 0x2
+        .byte 0x14, 0x00
 
 	.global gUnknown_80F57D2
 gUnknown_80F57D2: @ 80F57D2
-	.incbin "baserom.gba", 0xF57D2, 0x2
+@ replacing .incbin "baserom.gba", 0x000f57d2, 0x2
+        .byte 0x0a, 0x00
 
 	.global gUnknown_80F57D4
 gUnknown_80F57D4: @ 80F57D4
@@ -2298,28 +2327,38 @@ gUnknown_80F8988: @ 80F8988
 	.global gUnknown_80F8994
 gUnknown_80F8994: @ 80F8994
         .byte 0x8C, 0x89, 0x0F, 0x08
+
+        .global PartnerFainted_80F8998
+        PartnerFainted_80F8998:
         .string "Your partner $m0 fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89B4
 gUnknown_80F89B4: @ 80F89B4
-        .byte 0x98, 0x89, 0x0F, 0x08
+        .4byte PartnerFainted_80F8998
+
+        .global ClientFainted_80F89B8
+        ClientFainted_80F89B8:
         .string "Your client $m0 fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89D4
 gUnknown_80F89D4: @ 80F89D4
-        .byte 0xB8, 0x89, 0x0F, 0x08
+        .4byte ClientFainted_80F89B8
 
 	.global gUnknown_80F89D8
 gUnknown_80F89D8: @ 80F89D8
-        .byte 0xB8, 0x89, 0x0F, 0x08
+        .4byte ClientFainted_80F89B8
+
+        .global NothingHappened_80F89DC
+        NothingHappened_80F89DC:
         .string "But nothing happened!\0"
         .align 2,0
 
 	.global gUnknown_80F89F4
 gUnknown_80F89F4: @ 80F89F4
-        .byte 0xDC, 0x89, 0x0F, 0x08
+        .4byte NothingHappened_80F89DC
+
         .string "$m0 was blown away!\0"
         .align 2,0
 
@@ -2385,7 +2424,7 @@ gUnknown_80F8B40: @ 80F8B40
 	.global gUnknown_80F8B64
 gUnknown_80F8B64: @ 80F8B64
         .byte 0x44, 0x8B, 0x0F, 0x08
-        .byte 0x20, 0x7F, 0x0F, 0x08
+        .4byte gMenuEmpty
         .string "The move $i0 was delinked.\0"
         .align 2,0
 
@@ -5143,12 +5182,14 @@ gTeamToolboxBPtr: @ 80FE920
 gFieldItemMenuGroundTextPtr: @ 80FE92C
         .4byte FieldItemMenuGroundText
 
+        .global ItemText_80FE930
+        ItemText_80FE930:
         .string "$m0~27s item\0"
         .align 2,0
 
 	.global gUnknown_80FE940
 gUnknown_80FE940: @ 80FE940
-        .byte 0x30, 0xe9, 0x0f, 0x08
+        .4byte ItemText_80FE930
 
         .global WhichText
         WhichText:
@@ -5165,29 +5206,33 @@ gWhichTextPtr2: @ 80FE950
 
 	.global gUnknown_80FE954
 gUnknown_80FE954: @ 80FE954
-        .byte 0xfc, 0x7e, 0x0f, 0x08
+        .4byte gMenuTacticsText
 
+        .global ItemText_80FE958
+        ItemText_80FE958:
         .string "$i0\0"
         .align 2,0
 
 	.global gUnknown_80FE95C
 gUnknown_80FE95C: @ 80FE95C
-        .byte 0x58, 0xe9, 0x0f, 0x08
+        .4byte ItemText_80FE958
 
 	.global gUnknown_80FE960
 gUnknown_80FE960: @ 80FE960
-        .byte 0x58, 0xe9, 0x0f, 0x08
+        .4byte ItemText_80FE958
 
 	.global gUnknown_80FE964
 gUnknown_80FE964: @ 80FE964
-        .byte 0x58, 0xe9, 0x0f, 0x08
+        .4byte ItemText_80FE958
 
+        .global PokeMove_80FE968
+        PokeMove_80FE968:
         .string "$m0~27s moves\0"
         .align 2,0
 
 	.global gUnknown_80FE978
 gUnknown_80FE978: @ 80FE978
-        .byte 0x68, 0xe9, 0x0f, 0x08
+        .4byte PokeMove_80FE968
 
         .global FieldMenuMovesEntry
         FieldMenuMovesEntry:
@@ -5271,12 +5316,14 @@ gUnknown_80FEA50: @ 80FEA50
 gUnknown_80FEA68: @ 80FEA68
         .byte 0x54, 0xEA, 0x0F, 0x08
 
+        .global RecruitedPokemon_80FEA6C
+        RecruitedPokemon_80FEA6C:
         .string "Recruited Pokémon\0"
         .align 2,0
 
 	.global gUnknown_80FEA80
 gUnknown_80FEA80: @ 80FEA80
-        .byte 0x6C, 0xEA, 0x0F, 0x08
+        .4byte RecruitedPokemon_80FEA6C
 
         .string "None\0"
         .align 2,0
@@ -7866,7 +7913,8 @@ gUnknown_810768C: @ 810768C
 
 	.global gUnknown_8107698
 gUnknown_8107698: @ 8107698
-	.incbin "baserom.gba", 0x107698, 0x24
+        .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
 
 	.global gUnknown_81076BC
 gUnknown_81076BC: @ 81076BC
@@ -8325,12 +8373,45 @@ gUnknown_810A378: @ 810A378
 
 	.global gUnknown_810A390
 gUnknown_810A390: @ 810A390
-	.incbin "baserom.gba", 0x10A390, 0x60
+        .byte 0x0f, 0x27, 0x00, 0x00
+        .byte 0x69, 0x00, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0xf4, 0x01, 0x00, 0x00
+        .byte 0x64, 0x00, 0x00, 0x00
+        .byte 0x02, 0x00, 0x00, 0x00
+        .byte 0x28, 0x00, 0x00, 0x00
+        .byte 0x19, 0x00, 0x00, 0x00
+        .byte 0xc8, 0x00, 0x00, 0x00
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .byte 0x7d, 0x00, 0x00, 0x00
+        .byte 0x90, 0x01, 0x00, 0x00
+        .byte 0xde, 0x03, 0x00, 0x00
+        .byte 0x8c, 0x00, 0x00, 0x00
+        .byte 0x20, 0x03, 0x00, 0x00
+        .byte 0xfa, 0x00, 0x00, 0x00
+        .byte 0xa0, 0x00, 0x00, 0x00
+        .byte 0x46, 0x00, 0x00, 0x00
+        .byte 0x58, 0x02, 0x00, 0x00
+        .byte 0x2c, 0x01, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
+        .byte 0x01, 0x00, 0x00, 0x00
 
 	.global gUnknown_810A3F0
 gUnknown_810A3F0: @ 810A3F0 (money related according to PMDe
 				  @ LUT for money item stack size -> money amount
-	.incbin "baserom.gba", 0x10A3F0, 0x190
+
+        .4byte   4,     6,    10,    14,    22,    26,    34,    38,    46,    58
+        .4byte  62,    74,    82,    86,    94,   106,   118,   122,   134,   142
+        .4byte 146,   158,   166,   178,   194,   202,   206,   214,   218,   226
+        .4byte 254,   262,   274,   278,   298,   302,   314,   326,   334,   346
+        .4byte 358,   362,   382,   386,   394,   398,   422,   446,   454,   458
+        .4byte 466,   478,   482,   502,   514,   526,   538,   542,   554,   562
+        .4byte 566,   586,   614,   622,   626,   634,   662,   674,   694,   698
+        .4byte 706,   718,   734,   746,   758,   768,   778,   794,   802,   818
+        .4byte 838,   842,   862,   866,   878,   886,   898,   914,   922,   926
+        .4byte 934,   958,   974,   982,   998,  1000,  1100,  1300,  1500, 20000
 
 	.global gTypeGummiIQBoost
 gTypeGummiIQBoost: @ 810A580

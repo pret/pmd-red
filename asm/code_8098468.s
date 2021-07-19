@@ -392,7 +392,7 @@ _080987C0:
 	bl GroundSprite_Reset
 	bl sub_809C63C
 	bl sub_809A62C
-	bl sub_80A4AEC
+	bl GroundMap_Reset
 	bl sub_809D0BC
 	bl sub_80AD9D0
 	bl sub_80A786C
@@ -528,7 +528,7 @@ _08098970: .4byte gRealInputs
 _08098974: .4byte 0x0000030f
 _08098978: .4byte gPlayTimeRef
 _0809897C:
-	bl sub_80A4AEC
+	bl GroundMap_Reset
 	movs r7, 0x1
 	negs r7, r7
 	ldr r0, _080989E8

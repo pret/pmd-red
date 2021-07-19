@@ -10,17 +10,18 @@ static void FatalErrorHang(void) __attribute__((noreturn));
 extern bool32 gNDS_DebugEnabled;
 extern u8 gUnknown_203B150;
 
-extern const char gFuncFileLineString[];
+ALIGNED(4) const char gFuncFileLineString[] = _("func = '%s'\n"
+                                                "file = '%s'  line = %5d");
 
 ALIGNED(4) const char gNotEntryText[] = _("--- not entry ---");
 ALIGNED(4) const char gFuncFileLineStringWPrefix[] = _("%sfunc = '%s'\n"
-                                                 "file = '%s'  line = %5d\n");
+                                                       "file = '%s'  line = %5d\n");
 
 ALIGNED(4) const char gFuncFileLineString2[] = _("func = '%s'\n"
                                                  "file = '%s'  line = %5d\n");
 
 ALIGNED(4) const char debug_fill14[] = _("pksdir0");
-ALIGNED(4) const char gUnknown_80D421C[] = _("  Print  ");
+ALIGNED(4) const char gDebugPrintPrefix[] = _("  Print  ");
 ALIGNED(4) const char debug_fill13[] = _("pksdir0");
 
 ALIGNED(4) const char Performance_Text[] = _("Performance");
@@ -42,7 +43,7 @@ ALIGNED(4) const char debug_fill11[] = _("pksdir0");
 ALIGNED(4) const char debug_fill12[] = _("pksdir0");
 
 ALIGNED(4) const char gFatalText[] = _("!!!!! Fatal !!!!!\n");
-ALIGNED(4) const char gUnknown_80D42D4[] = _("%s\n");
+ALIGNED(4) const char gFatalErrorBufferPlaceholder[] = _("%s\n");
 
 ALIGNED(4) const char debug_fill0[] = _("pksdir0");
 ALIGNED(4) const char debug_fill1[] = _("pksdir0");
@@ -143,15 +144,15 @@ void nullsub_137(void)
 
 }
 
-static void FatalErrorPrintFuncFileLine(const char *r0, struct DebugLocation *debug)
+static void FatalErrorPrintFuncFileLine(const char *prefix, struct DebugLocation *debug)
 {
     char buf[0x100];
-    if(r0 != NULL){
-        PrintFuncFileLine(buf, debug, r0);
+    if(prefix != NULL){
+        PrintFuncFileLine(buf, debug, prefix);
     }
     else
     {
-        PrintFuncFileLine(buf, debug, gUnknown_80D421C);
+        PrintFuncFileLine(buf, debug, gDebugPrintPrefix);
     }
 }
 
@@ -246,6 +247,6 @@ void FatalError(struct DebugLocation *debug, const char *text, ...)
     va_start(vArgv, text);
     vsprintf(buf, text, vArgv);
     va_end(vArgv);
-    FatalErrorFormatMessage(gUnknown_80D42D4, buf);
+    FatalErrorFormatMessage(gFatalErrorBufferPlaceholder, buf);
     FatalErrorHang();
 }

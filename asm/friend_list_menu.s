@@ -11096,7 +11096,7 @@ sub_80245D0:
 	adds r4, 0xE0
 	ldr r4, [r4]
 	str r4, [sp]
-	bl sub_808F844
+	bl CreatePokemonInfoTabScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}

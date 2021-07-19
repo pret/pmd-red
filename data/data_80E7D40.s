@@ -617,28 +617,40 @@ gUnknown_80EB220: @ 80EB220
 	.global gUnknown_80EB2F0
 gUnknown_80EB2F0: @ 80EB2F0
 @ replacing .incbin "baserom.gba", 0x000eb2f0, 0x108
-        .byte 0xcc, 0xb3, 0x0e, 0x08
-        .byte 0xa4, 0xb3, 0x0e, 0x08
-        .byte 0x7c, 0xb3, 0x0e, 0x08
-        .byte 0x5c, 0xb3, 0x0e, 0x08
-        .byte 0x34, 0xb3, 0x0e, 0x08
-        .byte 0x08, 0xb3, 0x0e, 0x08
+        .4byte WeInLove_80EB3CC
+        .4byte WeBelong_80EB3A4
+        .4byte WePromised_80EB37C
+        .4byte MeansEverything_80EB35C
+        .4byte NoGood_80EB334
+        .4byte Lonely_80EB308
 
+        .global Lonely_80EB308
+        Lonely_80EB308:
         .asciz "I~27m very lonely! Please take me with you!"
         .align 2,0
 
+        .global NoGood_80EB334
+        NoGood_80EB334:
         .asciz "It~27s no good if we~27re not together!"
         .align 2,0
 
+        .global MeansEverything_80EB35C
+        MeansEverything_80EB35C:
         .asciz "This means everything to me!"
         .align 2,0
 
+        .global WePromised_80EB37C
+        WePromised_80EB37C:
         .asciz "We~27ve promised our futures together."
         .align 2,0
 
+        .global WeBelong_80EB3A4
+        WeBelong_80EB3A4:
         .asciz "We belong together! Please escort me!"
         .align 2,0
-
+        
+        .global WeInLove_80EB3CC
+        WeInLove_80EB3CC:
         .asciz "We~27re in love! Please~2c take me there!"
         .align 2,0
 

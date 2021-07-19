@@ -300,7 +300,6 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
-        data/debug.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);

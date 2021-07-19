@@ -632,7 +632,7 @@ _080994B0:
 	movs r1, 0x1
 	movs r2, 0x1
 	bl sub_800641C
-	bl sub_80A4AEC
+	bl GroundMap_Reset
 	bl sub_809D0BC
 	mov r0, r10
 	bl GroundMap_Select
