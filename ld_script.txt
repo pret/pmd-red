@@ -322,6 +322,8 @@ SECTIONS {
         src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
+        data/cutscenes.o(.rodata);
+        data/cutscenes_1.o(.rodata);
         src/m4a_tables.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
