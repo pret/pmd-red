@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E07C
-sub_808E07C:
-	push {r4,lr}
-	adds r2, r0, 0
-	adds r4, r1, 0
-	ldrb r1, [r2]
-	adds r2, 0x1
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E094
-	ldrb r3, [r2]
-	adds r2, 0x1
-	b _0808E098
-_0808E094:
-	adds r3, r1, 0
-	movs r1, 0
-_0808E098:
-	movs r0, 0x7F
-	ands r3, r0
-	ands r1, r0
-	lsls r0, r1, 7
-	orrs r0, r3
-	strh r0, [r4]
-	adds r0, r2, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808E07C
 
 	thumb_func_start sub_808E0AC
 sub_808E0AC:

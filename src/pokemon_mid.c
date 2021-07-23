@@ -534,3 +534,29 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _level, s32 a3)
 
    *a1 = gLevelCurrentData[a3];
 }
+
+u8* sub_808E07C(u8* a1, u16* a2)
+{
+    u32 r1 = *a1++;
+    u32 r3;
+    if (r1 & 0x80) {
+        r3 = *a1++;
+    }
+    else {
+        r3 = r1;
+        r1 = 0;
+    }
+#ifdef NONMATCHING
+    r1 &= 0x7f;
+    r3 &= 0x7f;
+    *a2 = (r1 << 7) | r3;
+#else
+    {
+        register u32 mask asm("r0") = 0x7f;
+        r3 &= mask;
+        r1 &= mask;
+        *a2 = (r1 << 7) | r3;
+    }
+#endif
+    return a1;
+}
