@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "item.h"
 #include "file_system.h"
 
 extern struct gPokemon *gMonsterParameters;
@@ -19,6 +20,7 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
+extern void sub_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
 
 struct unkStruct {
   s16 unk0;
@@ -448,4 +450,46 @@ void sub_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s
   a1->unk44 = somestruct_80943A0;
   sub_80943A0(&somestruct2_80943A0, 100);
   a1->unk48 = somestruct2_80943A0;
+}
+
+void sub_808DF2C(s32 a1, struct unkStruct_808DE50* a2)
+{
+    sub_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
+}
+
+extern void sub_8093FA8(void*, void*);
+
+
+void sub_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
+{
+    s32 i;
+
+    pokemon->unk0 = a2->unk0;
+    pokemon->unk3 = a2->unk3;
+    pokemon->IQ = a2->IQ;
+    pokemon->unk20 = a2->unk4C;
+    pokemon->unk4 = a2->unk4;
+    pokemon->unk2 = a2->unk2;
+    pokemon->speciesNum = a2->speciesNum;
+    pokemon->unk24 = a2->unk50;
+    pokemon->pokeHP = a2->unk12;
+
+    for (i = 0; i < 2; i++) {
+        pokemon->offense.att[i] = a2->offense.att[i];
+        pokemon->offense.def[i] = a2->offense.def[i];
+    }
+
+    pokemon->unk1C = a2->unk18;
+    sub_8093FA8(&pokemon->unk2C, &a2->unk1C);
+
+    for (i = 0; i < 10; i++) {
+        pokemon->name[i] = a2->name[i];
+    }
+
+    if (a2->unk40.unk0 & 1) {
+        SlotToHeldItem(&pokemon->heldItem, &a2->unk40);
+    }
+    else {
+        pokemon->heldItem.itemIndex = 0;
+    }
 }
