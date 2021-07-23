@@ -10,6 +10,12 @@ extern const char gUnownLetters[];
 extern const char gUnknown_8107630[];
 extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
+extern const char gUnknown_810768C[];  // lvmp%03d\0
+extern struct FileArchive gSystemFileArchive;
+
+// wram data:
+extern u16 gLevelCurrentPokeId;
+extern struct LevelData gLevelCurrentData[];
 
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
@@ -20,7 +26,7 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
-extern void sub_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
+extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
 
 struct unkStruct {
   s16 unk0;
@@ -397,12 +403,12 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
     return (gMonsterParameters[index].dialogue_sprites >> r1) & 1;
 }
 
-void sub_808DE30(void* r0, u32 r1)
+void xxx_pokemonstruct_index_to_unk_808DE30(void* r0, u32 r1)
 {
-    sub_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
+    xxx_pokemonstruct_to_unk_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
 
-void sub_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s32 a3)
+void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s32 a3)
 {
     s32 i;
     struct HeldItem* held;
@@ -436,7 +442,7 @@ void sub_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s
     }
     
     held = &pokemon->heldItem;
-    slot = &a1->unk40;
+    slot = &a1->itemSlot;
 
     if ((u32)(-held->itemIndex | held->itemIndex) >> 31) {
         HeldItemToSlot(slot, held);
@@ -452,15 +458,15 @@ void sub_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s
   a1->unk48 = somestruct2_80943A0;
 }
 
-void sub_808DF2C(s32 a1, struct unkStruct_808DE50* a2)
+void xxx_unk_to_pokemonstruct_index_808DF2C(s32 a1, struct unkStruct_808DE50* a2)
 {
-    sub_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
+    xxx_unk_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
 extern void sub_8093FA8(void*, void*);
 
 
-void sub_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
+void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
 {
     s32 i;
 
@@ -486,10 +492,45 @@ void sub_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
         pokemon->name[i] = a2->name[i];
     }
 
-    if (a2->unk40.unk0 & 1) {
-        SlotToHeldItem(&pokemon->heldItem, &a2->unk40);
+    if (a2->itemSlot.unk0 & 1) {
+        SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
         pokemon->heldItem.itemIndex = 0;
     }
+}
+
+void sub_808DFDC(s32 a1, struct unkStruct_808DE50* a2)
+{
+    // transfer item from unk to pokemon at index
+    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
+    if (a2->itemSlot.unk0 & 1) {    
+        SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
+    }
+    else {
+        pokemon->heldItem.itemIndex = 0;
+    }
+}
+
+void GetPokemonLevelData(struct LevelData* a1, s16 _level, s32 a3)
+{
+  u8 buffer[12];
+  s32 level = _level;
+
+  if ((s16)gLevelCurrentPokeId != level)
+  {
+    struct OpenedFile *file;
+
+    gLevelCurrentPokeId = level;
+    // lvmp%03d\0
+    sprintf(buffer, gUnknown_810768C, level);
+    file = OpenFileAndGetFileDataPtr(buffer, &gSystemFileArchive);
+    DecompressATFile((char*)gLevelCurrentData, 0, file);
+    CloseFile(file);
+  }
+  a3 -= 1;
+  if ( a3 < 0 )
+    a3 = 0;
+
+   *a1 = gLevelCurrentData[a3];
 }

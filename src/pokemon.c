@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 
+
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_81075F4;
 EWRAM_DATA struct gPokemon *gMonsterParameters;
@@ -9,6 +10,7 @@ EWRAM_DATA struct OpenedFile *gMonsterParametersFile;
 EWRAM_DATA struct unkStruct_203B45C gRecruitedPokemon;
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 EWRAM_DATA u16 gLevelCurrentPokeId;
+
 
 void LoadMonsterParameters(void)
 {

@@ -143,7 +143,7 @@ struct unkStruct_808DE50
     u32 unk18;  // unk1C
     u32 unk1C;  // unk2C (struct?)
     u8 fill20[0x40 - 0x20];  // part of fill30?
-    /* 40 */ struct ItemSlot unk40;  // heldItem
+    /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
     u32 unk48;  // some struct (same type as 44)
     u32 unk4C;  // unk20
@@ -153,6 +153,10 @@ struct unkStruct_808DE50
     u8 name[10];  // name (other offset)
 };
 
+struct LevelData {
+    // only size is known
+    u8 unk0[12];
+};
 
 
 void LoadMonsterParameters(void);
@@ -196,6 +200,6 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 void sub_808E6F4(struct unkStruct_808E6F4* a1);
-void sub_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
+void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
 
 #endif // GUARD_POKEMON_H  
