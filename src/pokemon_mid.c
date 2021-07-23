@@ -12,6 +12,10 @@ extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
 extern const char gUnknown_810768C[];  // lvmp%03d\0
 extern struct FileArchive gSystemFileArchive;
+extern s16 gUnknown_810ACB8;  // 0x14d
+extern s16 gUnknown_810ACBA;  // 0x14d
+extern s16 gUnknown_810ACBC;  // 0x14d
+extern s16 gUnknown_810ACBE;  // 0x14d
 
 // wram data:
 extern u16 gLevelCurrentPokeId;
@@ -27,15 +31,17 @@ extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
+extern u8* sub_8092B18(s16);
+extern u8* sub_808E07C(u8* a1, u16* a2);
 
-struct unkStruct {
+struct unkStruct_8107654 {
   s16 unk0;
   s16 fill2;
   s32 unk4;
 };
 
 extern u8 gUnknown_8107645[12];
-extern struct unkStruct gUnknown_8107654[6];
+extern struct unkStruct_8107654 gUnknown_8107654[6];
 extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
@@ -206,8 +212,8 @@ bool8 sub_808DA44(s32 a1_, u32 a2_)
   u32 a2 = (u8)a2_;
   if (a2 > 0xc) {
     s32 i;
-    struct unkStruct data[6];
-    memcpy(data, gUnknown_8107654, 6 * sizeof(struct unkStruct));
+    struct unkStruct_8107654 data[6];
+    memcpy(data, gUnknown_8107654, 6 * sizeof(struct unkStruct_8107654));
 
     for (i = 0; i < 10 && data[i].unk0; i++) {
       if (data[i].unk0 == a1 && data[i].unk4 == a2) {
@@ -559,4 +565,51 @@ u8* sub_808E07C(u8* a1, u16* a2)
     }
 #endif
     return a1;
+}
+
+s32 sub_808E0AC(u16* a1, s16 a2, s32 a3, s32 a4)
+{
+  u8* v9;
+  u16 id[1];  // struct?
+  s32 count;
+  register s32 _a2 asm("r2");
+  
+  _a2 = (s16)a2;
+  count = 0;
+
+  if (a2 == 421) return 0;
+  if (!a2)       return 0;
+  if (a2 == 420) return 0;
+  v9 = sub_8092B18(_a2);
+
+  while ( *v9 )
+  {
+    u8 v12;
+
+    v9 = sub_808E07C(v9, id);
+    v12 = *v9++;
+    if ( v12 > a3 )
+      break;
+    if ( v12 == a3 )
+    {
+      bool8 cond = 1;
+      if ((*id == 238) && (a4 < gUnknown_810ACB8))
+        cond = 0;
+      if ((*id == 239) && (a4 < gUnknown_810ACBA))
+        cond = 0;
+      if ((*id == 272) && (a4 < gUnknown_810ACBC))
+        cond = 0;
+      if ((*id == 354) && (a4 < gUnknown_810ACBE))
+        cond = 0;
+      if (cond)
+      {
+        if ( count <= 15 )
+        {
+          *a1++ = *id;
+          ++count;
+        }
+      }
+    }
+  }
+  return count;
 }
