@@ -10,13 +10,15 @@ extern const char gUnknown_8107630[];
 extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
 
+
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
 extern s16 GetBaseSpecies(u32);
 extern void sub_80922B4(u8 *, u8 *, s32);
-extern void sub_808DE50(void* r0, struct PokemonStruct *r1, u32 r2, u32 r3);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
+extern void sub_8093F50(void*, void*);
+extern void sub_80943A0(void*, s32);
 
 struct unkStruct {
   s16 unk0;
@@ -395,65 +397,55 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
 
 void sub_808DE30(void* r0, u32 r1)
 {
-    sub_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1, r1 * sizeof(struct PokemonStruct));
+    sub_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
 
-// void sub_808CE74(s16 species, u8 a2, u8* name) {
-//   struct PokemonStruct pokemon;
-//   u8 buffer[20];
-//   s32 v5;
-//   s32 i;
-//   u8 friend_area;
-//   struct PokemonStruct* table;
-  
-//   pokemon.unk0 = 3;
-//   if (a2) {
-//       pokemon.unk2 = 1;
-//       pokemon.unk4 = 64;
-//   }
-//   else {
-//       pokemon.unk2 = 0;
-//       pokemon.unk4 = 65;
-//   }
-//   pokemon.unk3 = 1;
-//   pokemon.pokeHP = GetBaseHP(species);
-//   pokemon.pokeAtt = GetPokemonAttSpatt(species, 0);
-//   pokemon.pokeSPAtt = GetPokemonAttSpatt(species, 1);
-//   pokemon.pokeDef = GetPokemonDefSpdef(species, 0);
-//   pokemon.pokeSPDef = GetPokemonDefSpdef(species, 1);
-//   pokemon.unk14 = 1;
-//   pokemon.unkC = 0;
-//   pokemon.unk10 = 0;
-//   sub_808EC94(pokemon.unk20, 0);
-//   pokemon.speciesNum = species;
-//   pokemon.heldItem.itemIndex = 0;
-//   pokemon.heldItem.numItems = 0;
-//   memset(pokemon.unk2C, 0, 4);  // empty struct initializer list?
-//   pokemon.unk24 = 0;
-//   pokemon.unk5 = 0;
+void sub_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s32 a3)
+{
+    s32 i;
+    struct HeldItem* held;
+    struct ItemSlot* slot;
+    u32 somestruct_80943A0;
+    u32 somestruct2_80943A0;
 
-//   sub_808E490(pokemon.unk2C, species);
-//   if (!name) {
-//     CopySpeciesNametoBuffer(buffer, species);
-//     BoundedCopyStringtoBuffer(pokemon.name, buffer, 10);
-//   }
-//   else {
-//     for (i = 0; i < 10; i++) {
-//       pokemon.name[i] = name[i];
-//     }
-//   }
-//   friend_area = gMonsterParameters[species].friend_area;
-  
-//   for (i = 0; i < 413; i++) {
-//       if (!((u8)gRecruitedPokemonRef->pokemon[i].unk0 & 1)) {
-//           if (sub_80923D4(i) == friend_area) {
-//               s32 length = sizeof(struct PokemonStruct);
+    a1->unk0 = pokemon->unk0;
+    a1->unk3 = pokemon->unk3;
+    a1->IQ = pokemon->IQ;
+    a1->unk4C = pokemon->unk20;
+    sub_808E6F4(&a1->unk54);
+    a1->unk4 = pokemon->unk4;
+    a1->unk2 = pokemon->unk2;
+    a1->unkA = a3;
+    a1->speciesNum = pokemon->speciesNum;
+    a1->unk50 = pokemon->unk24;
+    a1->unk12 = pokemon->pokeHP;
+    a1->unk10 = pokemon->pokeHP;
 
-//               memcpy(&gRecruitedPokemonRef->pokemon[i], &pokemon, length);
-//               gFriendAreas[i] = 1;
-//               sub_80980B4(species);
-//               break;
-//           }
-//       }
-//   }
-// }
+    for (i = 0; i < 2; i++) {
+        a1->offense.att[i] = pokemon->offense.att[i];
+        a1->offense.def[i] = pokemon->offense.def[i];
+    }
+
+    a1->unk18 = pokemon->unk1C;
+    sub_8093F50(&a1->unk1C, &pokemon->unk2C);
+
+    for (i = 0; i < 10; i++) {
+        a1->name[i] = pokemon->name[i];
+    }
+    
+    held = &pokemon->heldItem;
+    slot = &a1->unk40;
+
+    if ((u32)(-held->itemIndex | held->itemIndex) >> 31) {
+        HeldItemToSlot(slot, held);
+    }
+    else {
+        slot->itemIndex = 0;
+        slot->numItems = 0;
+        slot->unk0 = 0;
+    }  
+  sub_80943A0(&somestruct_80943A0, 100);
+  a1->unk44 = somestruct_80943A0;
+  sub_80943A0(&somestruct2_80943A0, 100);
+  a1->unk48 = somestruct2_80943A0;
+}

@@ -49,13 +49,6 @@ extern void sub_808EC30(u8 *, u32);
 extern void AddSprite(u16 *, u32, u32, u32);
 
 
-struct unkStruct_808E6F4
-{
-    s16 unk0;
-    u8 unk2;
-};
-
-
 bool8 sub_808E668(s16 a1, s16* a2, s16* a3) 
 {
     u32 shifted = a1 << 16;
