@@ -34,7 +34,6 @@ extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkSt
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
-extern s32 sub_808E3B8(struct PokemonStruct*, void*);
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -593,7 +592,7 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
     // read from stream
     stream = sub_808E07C(stream, &result);
     v12 = *stream++;
-    
+
     if (v12 > a3)
       break;
     if (v12 == a3) {
@@ -707,5 +706,40 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
   }
 
   a1->count = count;
+  return count;
+}
+
+
+s32 sub_808E3B8(struct PokemonStruct* pokemon, struct unkStruct_808E218* a2) 
+{
+  s32 count;
+  s32 species;
+  s32 i;
+  struct unkStruct_808E6F4* stage;
+  u8* has_next_stage;
+
+  a2->unk0[0].unk0 = pokemon->speciesNum;
+  a2->unk0[0].unk2 = pokemon->unk3;
+
+  count = 1;
+  species = pokemon->speciesNum;
+  i = 0;
+  has_next_stage = &pokemon->unkC;
+  stage = &a2->unk0[1];
+
+  for (; i < 2; i++) {
+      if (!*has_next_stage) {
+          break;
+      }
+      species = GetPokemonEvolveFrom(species);
+      if (!species) {
+          break;
+      }
+      stage->unk0 = species;
+      stage->unk2 = *has_next_stage;
+      stage++;
+      count++;
+      has_next_stage += 4;
+  }
   return count;
 }

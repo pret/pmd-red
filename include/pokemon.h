@@ -220,6 +220,7 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 void sub_808E6F4(struct unkStruct_808E6F4* a1);
+s32 sub_808E3B8(struct PokemonStruct* pokemon, struct unkStruct_808E218* a2);
 void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
 
 #endif // GUARD_POKEMON_H  

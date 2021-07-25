@@ -6,47 +6,47 @@
 	.text
 
 
-	thumb_func_start sub_808E3B8
-sub_808E3B8:
-	push {r4-r7,lr}
-	ldrh r2, [r0, 0x8]
-	strh r2, [r1]
-	ldrb r2, [r0, 0x3]
-	strb r2, [r1, 0x2]
-	movs r7, 0x1
-	movs r3, 0x8
-	ldrsh r2, [r0, r3]
-	movs r6, 0
-	adds r5, r0, 0
-	adds r5, 0xC
-	adds r4, r1, 0x4
-	b _0808E3E0
-_0808E3D2:
-	strh r2, [r4]
-	ldrb r0, [r5]
-	strb r0, [r4, 0x2]
-	adds r4, 0x4
-	adds r7, 0x1
-	adds r5, 0x4
-	adds r6, 0x1
-_0808E3E0:
-	cmp r6, 0x1
-	bgt _0808E3F8
-	ldrb r0, [r5]
-	cmp r0, 0
-	beq _0808E3F8
-	adds r0, r2, 0
-	bl GetPokemonEvolveFrom
-	lsls r0, 16
-	asrs r2, r0, 16
-	cmp r2, 0
-	bne _0808E3D2
-_0808E3F8:
-	adds r0, r7, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808E3B8
+@ 	thumb_func_start sub_808E3B8
+@ sub_808E3B8:
+@ 	push {r4-r7,lr}
+@ 	ldrh r2, [r0, 0x8]
+@ 	strh r2, [r1]
+@ 	ldrb r2, [r0, 0x3]
+@ 	strb r2, [r1, 0x2]
+@ 	movs r7, 0x1
+@ 	movs r3, 0x8
+@ 	ldrsh r2, [r0, r3]
+@ 	movs r6, 0
+@ 	adds r5, r0, 0
+@ 	adds r5, 0xC
+@ 	adds r4, r1, 0x4
+@ 	b _0808E3E0
+@ _0808E3D2:
+@ 	strh r2, [r4]
+@ 	ldrb r0, [r5]
+@ 	strb r0, [r4, 0x2]
+@ 	adds r4, 0x4
+@ 	adds r7, 0x1
+@ 	adds r5, 0x4
+@ 	adds r6, 0x1
+@ _0808E3E0:
+@ 	cmp r6, 0x1
+@ 	bgt _0808E3F8
+@ 	ldrb r0, [r5]
+@ 	cmp r0, 0
+@ 	beq _0808E3F8
+@ 	adds r0, r2, 0
+@ 	bl GetPokemonEvolveFrom
+@ 	lsls r0, 16
+@ 	asrs r2, r0, 16
+@ 	cmp r2, 0
+@ 	bne _0808E3D2
+@ _0808E3F8:
+@ 	adds r0, r7, 0
+@ 	pop {r4-r7}
+@ 	pop {r1}
+@ 	bx r1
+@ 	thumb_func_end sub_808E3B8
 
 	thumb_func_start sub_808E400
 sub_808E400:
