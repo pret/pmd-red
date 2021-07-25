@@ -33850,7 +33850,7 @@ _08068922:
 	mov r9, r0
 	adds r0, r2, r0
 	mov r1, r10
-	bl sub_808DE30
+	bl xxx_pokemonstruct_index_to_unk_808DE30
 	ldr r0, _08068A68
 	ldr r0, [r0]
 	ldr r1, _08068A6C
@@ -34079,7 +34079,7 @@ _08068B08:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	ldr r2, _08068B74
-	bl sub_808DE50
+	bl xxx_pokemonstruct_to_unk_808DE50
 	ldrh r0, [r4]
 	movs r1, 0x1
 	movs r2, 0
@@ -34293,7 +34293,7 @@ _08068CDC:
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
 	adds r1, r4, 0
-	bl sub_808DF2C
+	bl xxx_unk_to_pokemonstruct_index_808DF2C
 	b _08068CFE
 _08068CE8:
 	ldr r0, [sp, 0x220]
@@ -34401,7 +34401,7 @@ _08068D6A:
 	adds r0, r1
 	str r0, [r4]
 	adds r1, r5, 0
-	bl sub_808DF44
+	bl xxx_unk_to_pokemonstruct_808DF44
 	ldr r2, [r4]
 	ldrh r0, [r2]
 	movs r3, 0x80
@@ -34997,7 +34997,7 @@ _08069228:
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	adds r1, r4, 0
-	bl sub_808DF2C
+	bl xxx_unk_to_pokemonstruct_index_808DF2C
 _0806926E:
 	bl sub_8044210
 	lsls r0, 24
@@ -35196,7 +35196,7 @@ _080693CC:
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	adds r1, r4, 0
-	bl sub_808DF2C
+	bl xxx_unk_to_pokemonstruct_index_808DF2C
 _0806940E:
 	bl sub_8044210
 	lsls r0, 24
@@ -38134,7 +38134,7 @@ sub_806AA0C:
 	cmp r0, 0
 	beq _0806AA40
 	adds r0, r4, 0
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -40078,7 +40078,7 @@ sub_806B8CC:
 	str r0, [r1]
 _0806B906:
 	adds r0, r4, 0
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r1, r0, 16
 	movs r0, 0xCF
@@ -40598,7 +40598,7 @@ _0806BD20:
 _0806BD24:
 	movs r4, 0x2
 	ldrsh r0, [r6, r4]
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -40613,7 +40613,7 @@ _0806BD24:
 _0806BD42:
 	movs r2, 0x2
 	ldrsh r0, [r6, r2]
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x97

@@ -362,6 +362,7 @@ bool8 xxx_insert_unk230_80919FC(u8);
 u32 xxx_count_non_empty_inv_unk250_8091A48();
 void sub_8091BB4(u8);
 void sub_8090F58(void*, u8 *, struct ItemSlot *, struct unkStruct_8090F58*);
+void SlotToHeldItem(struct HeldItem *held,struct ItemSlot *slot);
 
 // some sort of weird memcpy's?
 // not sure what the second argument should be typed as

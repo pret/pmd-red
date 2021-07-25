@@ -189,8 +189,6 @@ SECTIONS {
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
         src/pokemon_mid.o(.text);
-        asm/pokemon_1.o(.text);
-        src/pokemon_1.o(.text);
         asm/pokemon_2.o(.text);
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);

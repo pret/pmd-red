@@ -24,7 +24,7 @@ extern void nullsub_104();
 extern void sub_8091274(u8 *);
 extern void sub_801A928();
 extern void sub_8099690(u32);
-extern void sub_808D800(s16, struct HeldItem *);
+extern void GivePokemonItem(s16, struct HeldItem *);
 extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(u32);
 
@@ -96,7 +96,7 @@ void sub_8027BD8(void)
         if (gUnknown_203B2BC->unk14 != 0) {
             sub_8091274(&gUnknown_203B2BC->unk14);
         }
-        sub_808D800(gUnknown_203B2BC->unk8,&gUnknown_203B2BC->unk10);
+        GivePokemonItem(gUnknown_203B2BC->unk8,&gUnknown_203B2BC->unk10);
         sub_801A928();
         nullsub_104();
         sub_8027184(2);
