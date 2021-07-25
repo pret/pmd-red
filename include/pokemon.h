@@ -24,6 +24,14 @@ struct unkPokeSubStruct_4 {
     u16 fill6;
 };
 
+struct unkPokeSubStruct_2C 
+{
+    u8 unk0;
+    u8 fill1;
+    u16 unk2;
+    u32 fill4;
+};
+
 struct PokemonStruct
 {
     // size: 0x58
@@ -45,8 +53,7 @@ struct PokemonStruct
     u8 unk24;
     u8 fill25[3];
     struct HeldItem heldItem;
-    u8 unk2C[4];
-    u8 fill30[0x4C - 0x30];
+    struct unkPokeSubStruct_2C unk2C[4];
     /* 0x4C */ u8 name[0xA];
 };
 
@@ -141,8 +148,8 @@ struct unkStruct_808DE50
     u16 unk12;  // pokeHP
     struct Offense offense;  // offense (other offset)
     u32 unk18;  // unk1C
-    u32 unk1C;  // unk2C (struct?)
-    u8 fill20[0x40 - 0x20];  // part of fill30?
+    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
+    u8 fill3c[4];
     /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
     u32 unk48;  // some struct (same type as 44)
@@ -153,9 +160,22 @@ struct unkStruct_808DE50
     u8 name[10];  // name (other offset)
 };
 
-struct LevelData {
+struct LevelData 
+{
     // only size is known
-    u8 unk0[12];
+    u32 unk0[3];
+};
+
+struct unkStruct_808E218_arg 
+{
+    u16 unk0[NUM_SPECIES];
+    u32 count;
+};
+
+struct unkStruct_808E218 
+{
+    // leveldata? (same size)
+    struct unkStruct_808E6F4 unk0[3];
 };
 
 

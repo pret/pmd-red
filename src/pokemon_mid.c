@@ -33,6 +33,8 @@ extern void sub_80943A0(void*, s32);
 extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
+extern u8* sub_8092B54(s32);
+extern s32 sub_808E3B8(struct PokemonStruct*, void*);
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -469,7 +471,7 @@ void xxx_unk_to_pokemonstruct_index_808DF2C(s32 a1, struct unkStruct_808DE50* a2
     xxx_unk_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(void*, void*);
+extern void sub_8093FA8(struct unkPokeSubStruct_2C*, struct unkPokeSubStruct_2C*);
 
 
 void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
@@ -492,7 +494,7 @@ void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkS
     }
 
     pokemon->unk1C = a2->unk18;
-    sub_8093FA8(&pokemon->unk2C, &a2->unk1C);
+    sub_8093FA8(pokemon->unk2C, a2->unk1C);
 
     for (i = 0; i < 10; i++) {
         pokemon->name[i] = a2->name[i];
@@ -518,18 +520,18 @@ void sub_808DFDC(s32 a1, struct unkStruct_808DE50* a2)
     }
 }
 
-void GetPokemonLevelData(struct LevelData* a1, s16 _level, s32 a3)
+void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
 {
   u8 buffer[12];
-  s32 level = _level;
+  s32 id = _id;
 
-  if ((s16)gLevelCurrentPokeId != level)
+  if ((s16)gLevelCurrentPokeId != id)
   {
     struct OpenedFile *file;
 
-    gLevelCurrentPokeId = level;
+    gLevelCurrentPokeId = id;
     // lvmp%03d\0
-    sprintf(buffer, gUnknown_810768C, level);
+    sprintf(buffer, gUnknown_810768C, id);
     file = OpenFileAndGetFileDataPtr(buffer, &gSystemFileArchive);
     DecompressATFile((char*)gLevelCurrentData, 0, file);
     CloseFile(file);
@@ -553,6 +555,7 @@ u8* sub_808E07C(u8* a1, u16* a2)
         r1 = 0;
     }
 #ifdef NONMATCHING
+    // wrong order
     r1 &= 0x7f;
     r3 &= 0x7f;
     *a2 = (r1 << 7) | r3;
@@ -567,49 +570,142 @@ u8* sub_808E07C(u8* a1, u16* a2)
     return a1;
 }
 
-s32 sub_808E0AC(u16* a1, s16 a2, s32 a3, s32 a4)
+s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
 {
-  u8* v9;
-  u16 id[1];  // struct?
+  u8* stream;
+  u16 result;  // struct?
   s32 count;
-  register s32 _a2 asm("r2");
+  register s32 _species asm("r2");  // weird regalloc
   
-  _a2 = (s16)a2;
+  _species = (s16)species;
   count = 0;
 
-  if (a2 == 421) return 0;
-  if (!a2)       return 0;
-  if (a2 == 420) return 0;
-  v9 = sub_8092B18(_a2);
+  if (species == SPECIES_DECOY) return 0;
+  if (species == SPECIES_NONE) return 0;
+  if (species == SPECIES_MUNCHLAX) return 0;
+  // get stream
+  stream = sub_8092B18(_species);
 
-  while ( *v9 )
+  while (*stream)
   {
     u8 v12;
 
-    v9 = sub_808E07C(v9, id);
-    v12 = *v9++;
-    if ( v12 > a3 )
+    // read from stream
+    stream = sub_808E07C(stream, &result);
+    v12 = *stream++;
+    
+    if (v12 > a3)
       break;
-    if ( v12 == a3 )
-    {
+    if (v12 == a3) {
       bool8 cond = 1;
-      if ((*id == 238) && (a4 < gUnknown_810ACB8))
-        cond = 0;
-      if ((*id == 239) && (a4 < gUnknown_810ACBA))
-        cond = 0;
-      if ((*id == 272) && (a4 < gUnknown_810ACBC))
-        cond = 0;
-      if ((*id == 354) && (a4 < gUnknown_810ACBE))
-        cond = 0;
-      if (cond)
-      {
-        if ( count <= 15 )
-        {
-          *a1++ = *id;
+      // I don't think these are species IDs
+      // the pokemon they would correspond to are pretty random if they are
+      // shuckle, heracross, pupitar, vibrava
+      if ((result == 238) && (a4 < gUnknown_810ACB8)) cond = 0;
+      if ((result == 239) && (a4 < gUnknown_810ACBA)) cond = 0;
+      if ((result == 272) && (a4 < gUnknown_810ACBC)) cond = 0;
+      if ((result == 354) && (a4 < gUnknown_810ACBE)) cond = 0;
+
+      if (cond) {
+        if (count < 16) {
+          *a1++ = result;
           ++count;
         }
       }
     }
   }
+  return count;
+}
+
+bool8 sub_808E190(u16 a1, s16 _species) 
+{
+  u16 result;
+  u16 result2;
+  s32 species = _species;  // r4
+  u8* ptr;
+  
+  if (species == SPECIES_DECOY) return 0;
+  if (species == SPECIES_NONE) return 0;
+  if (species == SPECIES_MUNCHLAX) return 0;
+  if (a1 == 352) return 0;
+
+  ptr = sub_8092B18(species);
+  while (*ptr) {
+    ptr = sub_808E07C(ptr, &result);
+    ptr++;
+    if (a1 == result) {
+      return 1;
+    }
+  }
+
+  ptr = sub_8092B54(species);
+  while (*ptr) {
+    ptr = sub_808E07C(ptr, &result2);
+    if (result2 == a1) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon) 
+{
+  s32 i;
+  s32 count;
+  struct unkStruct_808E218 data;  // LevelData?
+  s32 limit;
+
+  count = 0;
+  a1->count = 0;
+  if (pokemon->speciesNum == SPECIES_DECOY) return 0;
+  if (pokemon->speciesNum == SPECIES_NONE) return 0;
+  if (pokemon->speciesNum == SPECIES_MUNCHLAX) return 0;
+
+  limit = sub_808E3B8(pokemon, &data);
+  for (i = 0; i < limit; i++) {
+    u8* ptr;
+    u16 result;
+
+    ptr = sub_8092B18(data.unk0[i].unk0);
+    while (*ptr) {
+      s32 value;
+      ptr = sub_808E07C(ptr, &result);
+      value = *ptr++;
+
+      if (value > data.unk0[i].unk2) {
+        break;
+      }
+
+      if (count < 413) {
+        s32 j;
+        bool8 cond = 1;
+        // I don't think these are species IDs
+        // the pokemon they would correspond to are pretty random if they are
+        // shuckle, heracross, pupitar, vibrava
+        if ((result == 238) && (pokemon->IQ < gUnknown_810ACB8)) cond = 0;
+        if ((result == 239) && (pokemon->IQ < gUnknown_810ACBA)) cond = 0;
+        if ((result == 272) && (pokemon->IQ < gUnknown_810ACBC)) cond = 0;
+        if ((result == 354) && (pokemon->IQ < gUnknown_810ACBE)) cond = 0;
+
+        for (j = 0; j < 4; j++) {
+          if ((pokemon->unk2C[j].unk0 & 1) && pokemon->unk2C[j].unk2 == result) {
+            cond = 0;
+          }
+        }
+
+        if (cond) {
+          s32 k;
+          for (k = 0; k < count && a1->unk0[k] != result; k++) {}
+
+          if (k == count) {
+            a1->unk0[count++] = result;
+          }
+        }
+      }
+    }
+  }
+
+  a1->count = count;
   return count;
 }
