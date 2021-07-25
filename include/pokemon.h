@@ -32,19 +32,22 @@ struct unkPokeSubStruct_2C
     u32 fill4;
 };
 
+struct unkPokeSubStruct_C
+{
+    u8 unk0;
+    u8 fill1[3];
+};
+
 struct PokemonStruct
 {
     // size: 0x58
     u16 unk0; // recruited??
     u8 unk2;
-    u8 unk3;
+    u8 unkHasNextStage;  // set to a random value?
     struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
     u8 fillA[0xC - 0xA];
-    u8 unkC;
-    u8 fillD[0x10 - 0xD];
-    u8 unk10;
-    u8 fill11[0x14 - 0x11];
+    struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ struct Offense offense;
@@ -134,11 +137,17 @@ struct unkStruct_808E6F4
     u8 unk2;
 };
 
+struct EvolveStage
+{
+    s16 speciesNum;
+    u8 unkHasNextStage;
+};
+
 struct unkStruct_808DE50
 {
     u16 unk0;  // corresponds to unk0 inPokemonStruct
     u8 unk2;   // unk2
-    u8 unk3;   // unk3
+    u8 unkHasNextStage;   // unk3
     struct unkPokeSubStruct_4 unk4;  // unk4
     u16 IQ;    // IQ (other offset)
     u16 unkA;
@@ -220,7 +229,7 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 void sub_808E6F4(struct unkStruct_808E6F4* a1);
-s32 sub_808E3B8(struct PokemonStruct* pokemon, struct unkStruct_808E218* a2);
+s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
 void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
 
 #endif // GUARD_POKEMON_H  

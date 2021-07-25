@@ -424,7 +424,7 @@ void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct Poke
     u32 somestruct2_80943A0;
 
     a1->unk0 = pokemon->unk0;
-    a1->unk3 = pokemon->unk3;
+    a1->unkHasNextStage = pokemon->unkHasNextStage;
     a1->IQ = pokemon->IQ;
     a1->unk4C = pokemon->unk20;
     sub_808E6F4(&a1->unk54);
@@ -478,7 +478,7 @@ void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkS
     s32 i;
 
     pokemon->unk0 = a2->unk0;
-    pokemon->unk3 = a2->unk3;
+    pokemon->unkHasNextStage = a2->unkHasNextStage;
     pokemon->IQ = a2->IQ;
     pokemon->unk20 = a2->unk4C;
     pokemon->unk4 = a2->unk4;
@@ -652,8 +652,8 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 {
   s32 i;
   s32 count;
-  struct unkStruct_808E218 data;  // LevelData?
-  s32 limit;
+  struct EvolveStage evolve_sequence[3];
+  s32 sequence_length;
 
   count = 0;
   a1->count = 0;
@@ -661,22 +661,22 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
   if (pokemon->speciesNum == SPECIES_NONE) return 0;
   if (pokemon->speciesNum == SPECIES_MUNCHLAX) return 0;
 
-  limit = sub_808E3B8(pokemon, &data);
-  for (i = 0; i < limit; i++) {
+  sequence_length = GetEvolutionSequence(pokemon, evolve_sequence);
+  for (i = 0; i < sequence_length; i++) {
     u8* ptr;
     u16 result;
 
-    ptr = sub_8092B18(data.unk0[i].unk0);
+    ptr = sub_8092B18(evolve_sequence[i].speciesNum);
     while (*ptr) {
       s32 value;
       ptr = sub_808E07C(ptr, &result);
       value = *ptr++;
 
-      if (value > data.unk0[i].unk2) {
+      if (value > evolve_sequence[i].unkHasNextStage) {
         break;
       }
 
-      if (count < 413) {
+      if (count < NUM_SPECIES) {
         s32 j;
         bool8 cond = 1;
         // I don't think these are species IDs
@@ -710,36 +710,64 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 }
 
 
-s32 sub_808E3B8(struct PokemonStruct* pokemon, struct unkStruct_808E218* a2) 
+s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2) 
 {
+#ifdef NONMATCHING
   s32 count;
   s32 species;
   s32 i;
-  struct unkStruct_808E6F4* stage;
-  u8* has_next_stage;
 
-  a2->unk0[0].unk0 = pokemon->speciesNum;
-  a2->unk0[0].unk2 = pokemon->unk3;
+  a2[0].specesNum = pokemon->speciesNum;
+  a2[0].unkHasNextStage = pokemon->unkHasNextStage;
 
   count = 1;
   species = pokemon->speciesNum;
   i = 0;
-  has_next_stage = &pokemon->unkC;
-  stage = &a2->unk0[1];
 
   for (; i < 2; i++) {
-      if (!*has_next_stage) {
+      if (!pokemon->unkC[i].unk0) {
           break;
       }
       species = GetPokemonEvolveFrom(species);
       if (!species) {
           break;
       }
-      stage->unk0 = species;
-      stage->unk2 = *has_next_stage;
-      stage++;
+      a2[1 + i].speciesNum = species;
+      a2[1 + i].unkHasNextStage = pokemon->unkC[i].unk0;
+      // wrong increment order:
       count++;
-      has_next_stage += 4;
   }
   return count;
+#else
+  s32 count;
+  s32 species;
+  s32 i;
+  struct EvolveStage* stage;
+  struct unkPokeSubStruct_C* has_next_stage;
+
+  a2[0].speciesNum = pokemon->speciesNum;
+  a2[0].unkHasNextStage = pokemon->unkHasNextStage;
+
+  count = 1;
+  species = pokemon->speciesNum;
+  i = 0;
+  has_next_stage = pokemon->unkC;
+  stage = &a2[1];
+
+  for (; i < 2; i++) {
+      if (!has_next_stage->unk0) {
+          break;
+      }
+      species = GetPokemonEvolveFrom(species);
+      if (!species) {
+          break;
+      }
+      stage->speciesNum = species;
+      stage->unkHasNextStage = has_next_stage->unk0;
+      stage++;
+      count++;
+      has_next_stage++;
+  }
+  return count;
+#endif
 }

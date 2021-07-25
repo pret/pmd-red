@@ -155,7 +155,7 @@ void sub_803AD88(void)
             gUnknown_203B3F8->unk70 = 3;
             gUnknown_203B3F8->unk68 = 1;
             gUnknown_203B3F8->unk6C = 0x64;
-            gUnknown_203B3F8->unk64 = gUnknown_203B3F8->pokemon->unk3;
+            gUnknown_203B3F8->unk64 = gUnknown_203B3F8->pokemon->unkHasNextStage;
             gUnknown_203B3F8->unk74 = 3;
             gUnknown_203B3F8->unk78 = &gUnknown_203B3F8->unkE0[3];
             gUnknown_203B3F8->unk7C = 0x2C;
