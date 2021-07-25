@@ -1,0 +1,294 @@
+.macro warpDungeon id:req
+    .byte 0x02
+    .byte 0x00
+    .2byte \id
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro changeTileset id:req
+    .byte 0x08, 0x00, 0x00, 0x00
+    .2byte \id
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+@ Start Scene? Run Call?
+.macro StartSceneRunCall id:req
+    .byte 0x0C
+    .byte \id
+    .byte 0xFF, 0xFF
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro RunCall id:req
+    .byte 0x0D
+    .byte \id
+    .byte 0xFF, 0xFF
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro loadData type:req charac:req source:req
+    .byte 0x2D
+    .byte \type
+    .2byte \charac
+    .2byte \source
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+@ Face Locations
+.set bottomL, 0x2
+.set bottomR, 0x3
+.set insetTopL, 0xE
+.set insetTopR, 0xF
+
+.set previousLoc, 0x15
+
+.macro selectFace loc:req charac:req face:req
+    .byte 0x2E
+    .byte \loc
+    .2byte \charac
+    .4byte \face
+    .4byte 0x00, 0x00
+.endm
+
+.macro closeTextBox
+    .byte 0x30
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+.macro scrollTextBox textPtr:req character:req
+    .byte 0x33, 0x00
+    .2byte \character
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro PicNameTextBox textPtr:req character:req
+    .byte 0x34, 0x00
+    .2byte \character
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro fadeFloatingText textPtr:req time:req
+    .byte 0x39, 0x00
+    .2byte \time
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro renamePoke id:req
+    .byte 0x3D, 0x00, 0x00, 0x00
+    .byte \id, 0x00, 0x00, 0x00
+    .4byte 0x00, 0x00
+.endm
+
+.macro abruptStopMusic
+    .byte 0x42
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+.macro fadeMusic time:req
+    .byte 0x43
+    .byte 0x00
+    .2byte \time
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro abruptPlayMusic id:req
+    .byte 0x44
+    .byte 0x00
+    .2byte 0x0
+    .2byte \id
+    .2byte 0x00
+    .4byte 0x00, 0x00
+.endm
+
+.macro fadeInMusic id:req time:req
+    .byte 0x45, 0x00
+    .2byte \id
+    .2byte \time
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+@ Also seen referred to as StopSng
+.macro pushR14
+    .byte 0x47
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+.macro fadeMusicOut time:req
+    .byte 0x48
+    .byte 0x00
+    .2byte \time
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro playSound id:req
+    .byte 0x4C
+    .byte 0x00, 0x00, 0x00
+    .2byte \id
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+.macro stopSound id:req
+    .byte 0x4D
+    .byte 0x00, 0x00, 0x00
+    .2byte \id
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+.macro setAnimation anim:req
+    .byte 0x54
+    .byte 0x00
+    .2byte \anim
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+@ move to prefined location along grid
+.macro gridMoveTo speed:req id:req
+    .byte 0x6B, 0x00
+    .2byte \speed
+    .byte \id
+    .4byte 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+@ Rotation Directions
+.set CW, 0x01
+
+.set CCW, 0x02
+
+.set shortestDir, 0x0A
+
+@ Cardinal Directions / Facing Directions
+.set south, 0x0
+.set east,  0x2
+.set north, 0x4
+.set west,  0x6
+
+.macro setFaceDir delay:req faceDir:req
+    .byte 0x8B
+    .byte \delay
+    .byte \faceDir
+    .byte 0x00
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro rotate time:req rotDir:req faceDir:req
+    .byte 0x91
+    .byte \time
+    .byte \rotDir
+    .byte 0x00
+    .byte \faceDir
+    .byte 0x00
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
+.macro initVariableTextBox arg0:req arg1:req speaker:req
+    .byte 0xCF
+    .byte \arg0
+    .byte \arg1
+    .byte 0x00
+    .4byte \speaker
+    .4byte 0x00, 0x00
+.endm
+
+.macro variableTextBox version:req textPtr:req
+    .byte 0xD0, 0x00
+    .2byte \version
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro elseTextBox textPtr:req
+    .byte 0xD1, 0x00
+    .4byte 0x00, 0x00
+    .byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro pause time:req
+    .byte 0xDB
+    .byte 0x00
+    .2byte \time
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+@ Wait for sound to finish playing?
+.macro waitSound id:req
+    .byte 0xE2
+    .byte 0x00
+    .2byte \id
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro waitFlag flagnum:req
+    .byte 0xE3
+    .byte 0x00
+    .2byte \flagnum
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro setFlag flagnum:req
+    .byte 0xE4
+    .byte 0x00
+    .2byte \flagnum
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro goTo id:req
+    .byte 0xE5
+    .byte 0x00
+    .byte \id
+    .byte 0x00
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+@ Loop at label until end of scene
+.macro loopLabel id:req
+    .byte 0xE7, 0x00
+    .byte \id, 0x00
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro executeScript scriptNum:req
+    .byte 0xE8
+    .byte 0x00
+    .2byte \scriptNum
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro MsgEnd arg0:req
+    .byte 0xE9
+    .byte 0x00
+    .2byte \arg0
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro endFuncandScript
+    .byte 0xEF
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+.macro closeThread
+    .byte 0xF0
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+@ Set label for loop
+.macro label id:req
+    .byte 0xF4, 0x00
+    .byte \id, 0x00
+    .4byte 0x00, 0x00, 0x00
+.endm
