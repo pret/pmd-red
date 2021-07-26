@@ -26,7 +26,7 @@ extern struct LevelData gLevelCurrentData[];
 
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
-extern s16 GetBaseSpecies(u32);
+extern s16 GetBaseSpecies(s16);
 extern void sub_80922B4(u8 *, u8 *, s32);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
