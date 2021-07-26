@@ -27,6 +27,14 @@
     .4byte 0x00, 0x00, 0x00
 .endm
 
+.macro fadeOut arg0:req time:req arg2:req
+    .byte 0x23
+    .byte \arg0
+    .2byte \time
+    .4byte \arg2
+    .4byte 0x00, 0x00
+.endm
+
 .macro loadData type:req charac:req source:req
     .byte 0x2D
     .byte \type
@@ -98,7 +106,7 @@
     .4byte 0x00, 0x00, 0x00
 .endm
 
-.macro abruptPlayMusic id:req
+.macro PlayMusic id:req
     .byte 0x44
     .byte 0x00
     .2byte 0x0
@@ -150,6 +158,14 @@
     .byte 0x00
     .2byte \anim
     .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro warpToLoc id:req
+    .byte 0x5B, 0x00
+    .2byte 0x00
+    .byte \id
+    .byte 0x00, 0x00, 0x00
+    .4byte 0x00, 0x00
 .endm
 
 @ move to prefined location along grid
