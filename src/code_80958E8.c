@@ -123,25 +123,25 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         if(sub_809017C(&(data->dungeon)))
             return FALSE;
 
-        if(data->clientPoke == SPECIES_NONE)
+        if(data->clientSpecies == SPECIES_NONE)
             return FALSE;
-        if(data->clientPoke > SPECIES_RAYQUAZA_CUTSCENE)
+        if(data->clientSpecies > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
-        if(data->clientPoke != GetBaseSpecies(data->clientPoke))
+        if(data->clientSpecies != GetBaseSpecies(data->clientSpecies))
             return FALSE;
-        if(sub_803C0DC(data->clientPoke) == 0)
+        if(sub_803C0DC(data->clientSpecies) == 0)
             return FALSE;
 
-        if(data->targetPoke > SPECIES_RAYQUAZA_CUTSCENE)
+        if(data->targetSpecies > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
-        if(data->targetPoke != GetBaseSpecies(data->targetPoke))
+        if(data->targetSpecies != GetBaseSpecies(data->targetSpecies))
             return FALSE;
-        if(sub_803C0DC(data->targetPoke) == 0)
+        if(sub_803C0DC(data->targetSpecies) == 0)
             return FALSE;
 
         // Item Delivery/Finding
         if((u8)(data->missionType - 1) > FIND_POKE)
-            if(data->targetPoke != data->clientPoke)
+            if(data->targetSpecies != data->clientSpecies)
                 return FALSE;
 
         if(sub_8092040(data->targetItem))
