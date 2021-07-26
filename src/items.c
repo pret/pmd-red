@@ -879,8 +879,8 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
       a4->unk2 = boost_flags;
       boost_flags = a4->unk2;
       if (a4->unk2 & 1) {
-        if (pokemon->pokeAtt < 255) {
-          pokemon->pokeAtt++;
+        if (pokemon->offense.att[OFFENSE_NRM] < 255) {
+          pokemon->offense.att[OFFENSE_NRM]++;
         }
         else {
           // fix operand order
@@ -890,24 +890,24 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
         }
       }
       if (a4->unk2 & 2) {
-        if (pokemon->pokeSPAtt < 255) {
-          pokemon->pokeSPAtt++;
+        if (pokemon->offense.att[OFFENSE_SP] < 255) {
+          pokemon->offense.att[OFFENSE_SP]++;
         }
         else {
           a4->unk2 &= ~2;
         }
       }
       if (a4->unk2 & 4) {
-        if (pokemon->pokeDef < 255) {
-          pokemon->pokeDef++;
+        if (pokemon->offense.def[OFFENSE_NRM] < 255) {
+          pokemon->offense.def[OFFENSE_NRM]++;
         }
         else {
           a4->unk2 &= ~4;
         }
       }
       if (a4->unk2 & 8) {
-        if (pokemon->pokeSPDef < 255) {
-          pokemon->pokeSPDef++;
+        if (pokemon->offense.def[OFFENSE_SP] < 255) {
+          pokemon->offense.def[OFFENSE_SP] ++;
         }
         else {
           a4->unk2 &= ~8;

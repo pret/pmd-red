@@ -2062,7 +2062,7 @@ sub_803C0DC:
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r2, r0, 16
 	ldr r1, _0803C0F0
@@ -2100,7 +2100,7 @@ sub_803C110:
 	cmp r0, 0
 	beq _0803C180
 	adds r0, r4, 0
-	bl sub_808E770
+	bl GetBaseSpecies
 	lsls r0, 16
 	asrs r0, 16
 	cmp r4, r0

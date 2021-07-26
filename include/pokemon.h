@@ -5,34 +5,58 @@
 #include "item.h"
 
 
+#define OFFENSE_NRM 0
+#define OFFENSE_SP 1
+
+struct Offense {
+    /* 0x18: att   */
+    /* 0x19: spatt */
+    /* 0x1a: def   */
+    /* 0x1b: spdef */
+
+    u8 att[2];
+    u8 def[2];
+};
+
+struct unkPokeSubStruct_4 {
+    u8 unk4;
+    u8 unk5;
+    u16 fill6;
+};
+
+struct unkPokeSubStruct_2C 
+{
+    u8 unk0;
+    u8 fill1;
+    u16 unk2;
+    u32 fill4;
+};
+
+struct unkPokeSubStruct_C
+{
+    u8 unk0;
+    u8 fill1[3];
+};
+
 struct PokemonStruct
 {
     // size: 0x58
     u16 unk0; // recruited??
     u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 fill6[0x8 - 0x6];
+    u8 unkHasNextStage;  // set to a random value?
+    struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
     u8 fillA[0xC - 0xA];
-    u8 unkC;
-    u8 fillD[0x10 - 0xD];
-    u8 unk10;
-    u8 fill11[0x14 - 0x11];
+    struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
-    /* 0x18 */ u8 pokeAtt; // attack
-    /* 0x19 */ u8 pokeSPAtt; // sp attack
-    /* 0x1A */ u8 pokeDef; // def
-    /* 0x1B */ u8 pokeSPDef; // spdef
+    /* 0x18 */ struct Offense offense;
     u32 unk1C;
-    u8 unk20[4];
+    u32 unk20;
     u8 unk24;
     u8 fill25[3];
     struct HeldItem heldItem;
-    u8 unk2C[4];
-    u8 fill30[0x4C - 0x30];
+    struct unkPokeSubStruct_2C unk2C[4];
     /* 0x4C */ u8 name[0xA];
 };
 
@@ -43,22 +67,11 @@ struct PokemonStruct2
     u8 fill[0x62];
 };
 
-struct PokemonStruct3
-{
-    // size: 0x58
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u16 unk8;
-    u8 fill[0x4E];
-};
-
 struct unkStruct_203B45C
 {
     /* 0x0 */ struct PokemonStruct pokemon[NUM_SPECIES];
     /* 0x8DF8 */ struct PokemonStruct2 pokemon2[4];
-    /* 0x8F88 */ struct PokemonStruct3 pokemon3[4];
+    /* 0x8F88 */ struct PokemonStruct team[4];
 };
 
 struct EvolveStruct1
@@ -117,6 +130,64 @@ struct gPokemon
     /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
 };
 
+
+struct unkStruct_808E6F4
+{
+    s16 unk0;
+    u8 unk2;
+};
+
+struct EvolveStage
+{
+    s16 speciesNum;
+    u8 unkHasNextStage;
+};
+
+struct unkStruct_808DE50
+{
+    u16 unk0;  // corresponds to unk0 inPokemonStruct
+    u8 unk2;   // unk2
+    u8 unkHasNextStage;   // unk3
+    struct unkPokeSubStruct_4 unk4;  // unk4
+    u16 IQ;    // IQ (other offset)
+    u16 unkA;
+    u16 unkC;
+    s16 speciesNum;  // speciesNum (other offset)
+    u16 unk10;  // pokeHP
+    u16 unk12;  // pokeHP
+    struct Offense offense;  // offense (other offset)
+    u32 unk18;  // unk1C
+    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
+    u8 fill3c[4];
+    /* 40 */ struct ItemSlot itemSlot;  // heldItem
+    u32 unk44;  // some struct
+    u32 unk48;  // some struct (same type as 44)
+    u32 unk4C;  // unk20
+    u8 unk50;   // unk24
+    u8 fill51[3];
+    struct unkStruct_808E6F4 unk54;
+    u8 name[10];  // name (other offset)
+};
+
+struct LevelData 
+{
+    // only size is known
+    u32 unk0[3];
+};
+
+struct unkStruct_808E218_arg 
+{
+    u16 unk0[NUM_SPECIES];
+    u32 count;
+};
+
+struct unkStruct_808E218 
+{
+    // leveldata? (same size)
+    struct unkStruct_808E6F4 unk0[3];
+};
+
+
 void LoadMonsterParameters(void);
 struct unkStruct_203B45C *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
@@ -157,5 +228,8 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
 struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
+void sub_808E6F4(struct unkStruct_808E6F4* a1);
+s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
+void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
 
 #endif // GUARD_POKEMON_H  

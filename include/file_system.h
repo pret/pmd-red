@@ -36,6 +36,7 @@ struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc)
 u8 *GetFileDataPtr(struct OpenedFile *openedFile, int unused);
 struct OpenedFile *OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc);
 struct OpenedFile *Call_OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc);
+u32 DecompressATFile(char *result, s32 resultLength, struct OpenedFile *file);
 void CloseFile(struct OpenedFile *openedFile);
 
 #endif //GUARD_FILE_SYSTEM_H

@@ -10,7 +10,7 @@ sub_80978C8:
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r3, r0, 16
 	ldr r0, _080978FC
@@ -42,7 +42,7 @@ sub_8097900:
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r3, r0, 16
 	ldr r0, _08097938

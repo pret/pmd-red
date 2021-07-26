@@ -3722,7 +3722,7 @@ _08020BD0:
 	ldr r0, [r0, 0x10]
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	movs r1, 0xCF
 	lsls r1, 17
@@ -5591,7 +5591,7 @@ _08021A8E:
 	cmp r1, r0
 	bne _08021AC4
 	adds r0, r5, 0
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r0, 16
 	cmp r5, r0
@@ -5686,7 +5686,7 @@ sub_8021B58:
 	push {r4,r5,lr}
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r4, r0, 16
 	movs r2, 0
@@ -9086,7 +9086,7 @@ _080236B0:
 	cmp r0, 0
 	beq _080236E2
 	adds r0, r4, 0
-	bl sub_808E858
+	bl GetBaseSpeciesNoUnown
 	lsls r0, 16
 	asrs r0, 16
 	cmp r4, r0
@@ -10802,7 +10802,7 @@ _080243A8:
 	ldrsh r0, [r5, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_808D864
+	bl ComparePokemonNames
 	lsls r0, 24
 	cmp r0, 0
 	beq _080243C6
@@ -11170,7 +11170,7 @@ sub_802465C:
 	bl sub_808D33C
 	ldr r1, [r5]
 	str r0, [r1, 0xC]
-	bl sub_808D824
+	bl IsPokemonRenamed
 	ldr r1, [r5]
 	strb r0, [r1, 0x10]
 	ldr r0, [r5]
@@ -12590,7 +12590,7 @@ sub_8025204:
 	ldr r4, _0802522C
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
-	bl sub_808D824
+	bl IsPokemonRenamed
 	ldr r1, [r4]
 	strb r0, [r1, 0x10]
 	movs r0, 0x3
@@ -13351,7 +13351,7 @@ _08025810:
 	cmp r1, r0
 	bne _08025840
 	adds r0, r7, 0
-	bl sub_808D824
+	bl IsPokemonRenamed
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025840
@@ -13620,7 +13620,7 @@ _08025A0C:
 	movs r2, 0xE
 	ldrsh r0, [r1, r2]
 	adds r1, 0x18
-	bl sub_808D7DC
+	bl PeekPokemonItem
 	movs r0, 0x3
 	bl sub_8025434
 	b _08025A7E
@@ -13643,7 +13643,7 @@ _08025A40:
 	movs r2, 0xE
 	ldrsh r0, [r1, r2]
 	adds r1, 0x18
-	bl sub_808D7DC
+	bl PeekPokemonItem
 	movs r0, 0x4
 	bl sub_8025434
 	b _08025A7E
@@ -13751,7 +13751,7 @@ _08025B40:
 	movs r2, 0xE
 	ldrsh r0, [r1, r2]
 	adds r1, 0x18
-	bl sub_808D800
+	bl GivePokemonItem
 	bl nullsub_104
 	movs r0, 0xA
 	bl sub_8025434
@@ -13990,7 +13990,7 @@ _08025D24:
 	movs r2, 0xE
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	bl sub_801A928
 	bl nullsub_104
 	adds r0, r6, 0
@@ -14930,7 +14930,7 @@ sub_80264CC:
 	movs r3, 0xA
 	ldrsh r0, [r1, r3]
 	adds r1, 0x14
-	bl sub_808D7DC
+	bl PeekPokemonItem
 	mov r1, r8
 	ldrh r0, [r1]
 	lsrs r0, 1
@@ -15577,7 +15577,7 @@ _08026A28:
 	movs r2, 0xA
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	bl nullsub_104
 	movs r0, 0x11
 	bl sub_8026074
@@ -15893,7 +15893,7 @@ _08026C84:
 	movs r2, 0xA
 	ldrsh r0, [r1, r2]
 	adds r1, 0x10
-	bl sub_808D800
+	bl GivePokemonItem
 	bl sub_801A928
 	bl nullsub_104
 	adds r0, r6, 0
@@ -16306,7 +16306,7 @@ _08026FC4:
 	movs r2, 0xA
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	movs r0, 0xA
 	bl sub_8026074
 	b _0802706E
@@ -16357,7 +16357,7 @@ _0802703E:
 	movs r2, 0xA
 	ldrsh r0, [r1, r2]
 	adds r1, 0x14
-	bl sub_808D800
+	bl GivePokemonItem
 	movs r0, 0xB
 	bl sub_8026074
 	b _0802706E
