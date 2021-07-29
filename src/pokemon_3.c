@@ -641,3 +641,66 @@ void sub_808ED00() {
     }
 }
 
+// second arg struct PokemonStruct*?
+void sub_808EFA0(struct unkStruct_8094924*, void*);
+
+
+s32 SaveRecruitedPokemon(u8 *a1, s32 a2)  
+{
+    u16 buffer[6];
+    struct unkStruct_8094924 backup;
+    u8 data_u8;
+    s16 data_s16;
+    s32 count;
+    s32 i;
+
+    sub_809486C(&backup, a1, a2);
+
+    for (i = 0; i < 6; i++) {
+        buffer[i] = -1;
+    }
+
+    data_s16 = 1;
+    data_s16 = -data_s16;
+    count = 0;
+    for (i = 0; i < 413; i++) {
+#ifdef NONMATCHING
+        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
+#else
+        struct PokemonStruct* pokemon;
+        register struct unkStruct_203B45C** recruited asm("r2") = &gRecruitedPokemonRef;
+
+        pokemon = &(*recruited)->pokemon[i];
+#endif
+        if (pokemon->unk0 & 1) {
+            if (pokemon->unk0 & 2) {
+                buffer[count++] = i;
+            }
+            if (pokemon->unk2) {
+                data_s16 = i;
+            }
+        }
+        else {
+            pokemon->unkHasNextStage = 0;
+        }    
+        sub_808EFA0(&backup, pokemon);
+    }
+
+    for (i = 0; i < 4; i++) {
+        if ((u8)i[gRecruitedPokemonRef->team].unk0 & 1) {
+            data_u8 = 0xff;
+        }
+        else {
+            data_u8 = 0;
+        }    
+        sub_809488C(&backup, &data_u8, 1);
+        sub_808EFA0(&backup, &gRecruitedPokemonRef->team[i]);
+    }
+
+    for (i = 0; i < 6; i++) {
+        sub_809488C(&backup, (u8*)&buffer[i], 16);
+    }
+    sub_809488C(&backup, (u8*)&data_s16, 16);
+    nullsub_102(&backup);
+    return backup.unk8;
+}

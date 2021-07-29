@@ -5,152 +5,152 @@
 
 	.text	
 
-	thumb_func_start SaveRecruitedPokemon
-SaveRecruitedPokemon:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x24
-	adds r3, r0, 0
-	adds r2, r1, 0
-	add r4, sp, 0xC
-	adds r0, r4, 0
-	adds r1, r3, 0
-	bl sub_809486C
-	mov r10, r4
-	mov r0, sp
-	adds r0, 0x1E
-	str r0, [sp, 0x20]
-	add r1, sp, 0x1C
-	mov r8, r1
-	ldr r0, _0808EDF0
-	adds r2, r0, 0
-	mov r1, sp
-	movs r5, 0x5
-_0808EDA6:
-	ldrh r0, [r1]
-	orrs r0, r2
-	strh r0, [r1]
-	adds r1, 0x2
-	subs r5, 0x1
-	cmp r5, 0
-	bge _0808EDA6
-	movs r0, 0x1
-	negs r0, r0
-	ldr r1, [sp, 0x20]
-	strh r0, [r1]
-	movs r5, 0
-	mov r4, sp
-_0808EDC0:
-	ldr r2, _0808EDF4
-	movs r0, 0x58
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, [r2]
-	adds r1, r0, r1
-	ldrh r2, [r1]
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	beq _0808EDF8
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	beq _0808EDE2
-	strh r5, [r4]
-	adds r4, 0x2
-_0808EDE2:
-	ldrb r0, [r1, 0x2]
-	cmp r0, 0
-	beq _0808EDFA
-	ldr r0, [sp, 0x20]
-	strh r5, [r0]
-	b _0808EDFA
-	.align 2, 0
-_0808EDF0: .4byte 0x0000ffff
-_0808EDF4: .4byte gRecruitedPokemonRef
-_0808EDF8:
-	strb r0, [r1, 0x3]
-_0808EDFA:
-	mov r0, r10
-	bl sub_808EFA0
-	adds r5, 0x1
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r5, r0
-	ble _0808EDC0
-	ldr r1, _0808EE34
-	mov r9, r1
-	mov r4, r10
-	ldr r7, _0808EE38
-	movs r6, 0
-	movs r5, 0x3
-_0808EE16:
-	mov r1, r9
-	ldr r0, [r1]
-	adds r0, r6, r0
-	ldr r1, _0808EE38
-	adds r0, r1
-	ldrb r0, [r0]
-	movs r1, 0x1
-	ands r1, r0
-	cmp r1, 0
-	beq _0808EE3C
-	movs r0, 0xFF
-	mov r1, r8
-	strb r0, [r1]
-	b _0808EE40
-	.align 2, 0
-_0808EE34: .4byte gRecruitedPokemonRef
-_0808EE38: .4byte 0x00008f88
-_0808EE3C:
-	mov r0, r8
-	strb r1, [r0]
-_0808EE40:
-	adds r0, r4, 0
-	mov r1, r8
-	movs r2, 0x1
-	bl sub_809488C
-	mov r0, r9
-	ldr r1, [r0]
-	adds r1, r7
-	adds r0, r4, 0
-	bl sub_808EFA0
-	adds r7, 0x58
-	adds r6, 0x58
-	subs r5, 0x1
-	cmp r5, 0
-	bge _0808EE16
-	mov r4, sp
-	movs r5, 0x5
-_0808EE64:
-	mov r0, r10
-	adds r1, r4, 0
-	movs r2, 0x10
-	bl sub_809488C
-	adds r4, 0x2
-	subs r5, 0x1
-	cmp r5, 0
-	bge _0808EE64
-	mov r0, r10
-	ldr r1, [sp, 0x20]
-	movs r2, 0x10
-	bl sub_809488C
-	mov r0, r10
-	bl nullsub_102
-	mov r1, r10
-	ldr r0, [r1, 0x8]
-	add sp, 0x24
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end SaveRecruitedPokemon
+@ 	thumb_func_start SaveRecruitedPokemon
+@ SaveRecruitedPokemon:
+@ 	push {r4-r7,lr}
+@ 	mov r7, r10
+@ 	mov r6, r9
+@ 	mov r5, r8
+@ 	push {r5-r7}
+@ 	sub sp, 0x24
+@ 	adds r3, r0, 0
+@ 	adds r2, r1, 0
+@ 	add r4, sp, 0xC
+@ 	adds r0, r4, 0
+@ 	adds r1, r3, 0
+@ 	bl sub_809486C
+@ 	mov r10, r4
+@ 	mov r0, sp
+@ 	adds r0, 0x1E
+@ 	str r0, [sp, 0x20]
+@ 	add r1, sp, 0x1C
+@ 	mov r8, r1
+@ 	ldr r0, _0808EDF0
+@ 	adds r2, r0, 0
+@ 	mov r1, sp
+@ 	movs r5, 0x5
+@ _0808EDA6:
+@ 	ldrh r0, [r1]
+@ 	orrs r0, r2
+@ 	strh r0, [r1]
+@ 	adds r1, 0x2
+@ 	subs r5, 0x1
+@ 	cmp r5, 0
+@ 	bge _0808EDA6
+@ 	movs r0, 0x1
+@ 	negs r0, r0
+@ 	ldr r1, [sp, 0x20]
+@ 	strh r0, [r1]
+@ 	movs r5, 0
+@ 	mov r4, sp
+@ _0808EDC0:
+@ 	ldr r2, _0808EDF4
+@ 	movs r0, 0x58
+@ 	adds r1, r5, 0
+@ 	muls r1, r0
+@ 	ldr r0, [r2]
+@ 	adds r1, r0, r1
+@ 	ldrh r2, [r1]
+@ 	movs r0, 0x1
+@ 	ands r0, r2
+@ 	cmp r0, 0
+@ 	beq _0808EDF8
+@ 	movs r0, 0x2
+@ 	ands r0, r2
+@ 	cmp r0, 0
+@ 	beq _0808EDE2
+@ 	strh r5, [r4]
+@ 	adds r4, 0x2
+@ _0808EDE2:
+@ 	ldrb r0, [r1, 0x2]
+@ 	cmp r0, 0
+@ 	beq _0808EDFA
+@ 	ldr r0, [sp, 0x20]
+@ 	strh r5, [r0]
+@ 	b _0808EDFA
+@ 	.align 2, 0
+@ _0808EDF0: .4byte 0x0000ffff
+@ _0808EDF4: .4byte gRecruitedPokemonRef
+@ _0808EDF8:
+@ 	strb r0, [r1, 0x3]
+@ _0808EDFA:
+@ 	mov r0, r10
+@ 	bl sub_808EFA0
+@ 	adds r5, 0x1
+@ 	movs r0, 0xCE
+@ 	lsls r0, 1
+@ 	cmp r5, r0
+@ 	ble _0808EDC0
+@ 	ldr r1, _0808EE34
+@ 	mov r9, r1
+@ 	mov r4, r10
+@ 	ldr r7, _0808EE38
+@ 	movs r6, 0
+@ 	movs r5, 0x3
+@ _0808EE16:
+@ 	mov r1, r9
+@ 	ldr r0, [r1]
+@ 	adds r0, r6, r0
+@ 	ldr r1, _0808EE38
+@ 	adds r0, r1
+@ 	ldrb r0, [r0]
+@ 	movs r1, 0x1
+@ 	ands r1, r0
+@ 	cmp r1, 0
+@ 	beq _0808EE3C
+@ 	movs r0, 0xFF
+@ 	mov r1, r8
+@ 	strb r0, [r1]
+@ 	b _0808EE40
+@ 	.align 2, 0
+@ _0808EE34: .4byte gRecruitedPokemonRef
+@ _0808EE38: .4byte 0x00008f88
+@ _0808EE3C:
+@ 	mov r0, r8
+@ 	strb r1, [r0]
+@ _0808EE40:
+@ 	adds r0, r4, 0
+@ 	mov r1, r8
+@ 	movs r2, 0x1
+@ 	bl sub_809488C
+@ 	mov r0, r9
+@ 	ldr r1, [r0]
+@ 	adds r1, r7
+@ 	adds r0, r4, 0
+@ 	bl sub_808EFA0
+@ 	adds r7, 0x58
+@ 	adds r6, 0x58
+@ 	subs r5, 0x1
+@ 	cmp r5, 0
+@ 	bge _0808EE16
+@ 	mov r4, sp
+@ 	movs r5, 0x5
+@ _0808EE64:
+@ 	mov r0, r10
+@ 	adds r1, r4, 0
+@ 	movs r2, 0x10
+@ 	bl sub_809488C
+@ 	adds r4, 0x2
+@ 	subs r5, 0x1
+@ 	cmp r5, 0
+@ 	bge _0808EE64
+@ 	mov r0, r10
+@ 	ldr r1, [sp, 0x20]
+@ 	movs r2, 0x10
+@ 	bl sub_809488C
+@ 	mov r0, r10
+@ 	bl nullsub_102
+@ 	mov r1, r10
+@ 	ldr r0, [r1, 0x8]
+@ 	add sp, 0x24
+@ 	pop {r3-r5}
+@ 	mov r8, r3
+@ 	mov r9, r4
+@ 	mov r10, r5
+@ 	pop {r4-r7}
+@ 	pop {r1}
+@ 	bx r1
+@ 	thumb_func_end SaveRecruitedPokemon
 
 	thumb_func_start ReadRecruitedPokemon
 ReadRecruitedPokemon:
