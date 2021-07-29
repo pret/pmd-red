@@ -367,7 +367,7 @@ void SlotToHeldItem(struct HeldItem *held,struct ItemSlot *slot);
 // some sort of weird memcpy's?
 // not sure what the second argument should be typed as
 void sub_8091DC0(struct unkStruct_8094924 *r0, u8*);
-void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2);
+void sub_8091DE0(struct unkStruct_8094924*, struct HeldItem*);
 void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2);
 void sub_8091E28(struct unkStruct_8094924 *a1, u8 *a2);
 

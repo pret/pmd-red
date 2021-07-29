@@ -13,7 +13,7 @@ void sub_8097FF8(void);
 u8 sub_8098100(u8);
 u8 sub_8098134(s16);
 u8 sub_80981A0(s32);
-void sub_809488C(u32 *, u8 *, s32);
+void sub_809488C(u32 *, void *, s32);
 
 bool8 IsExclusivePokemonUnlocked(s16 pokeID)
 {

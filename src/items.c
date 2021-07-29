@@ -1173,10 +1173,10 @@ s32 sub_8091C68(u8* unk0, u32 size)
     sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
-    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk230[i]);
+    sub_8091DE0(&unk, &gTeamInventory_203B460->unk230[i]);
   }
   for (i = 0; i < 4; i++) {
-    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk250[i]);
+    sub_8091DE0(&unk, &gTeamInventory_203B460->unk250[i]);
   }
   sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
   sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
@@ -1214,10 +1214,10 @@ void sub_8091DC0(struct unkStruct_8094924 *a1, u8 *a2)
   sub_8094924(a1, a2 + 1, 7);
 }
 
-void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2) 
+void sub_8091DE0(struct unkStruct_8094924 *a1, struct HeldItem *a2) 
 {
-  sub_809488C(a1, a2, 8);
-  sub_809488C(a1, a2 + 1, 7);
+  sub_809488C(a1, &a2->itemIndex, 8);
+  sub_809488C(a1, &a2->numItems, 7);
 }
 
 void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2)

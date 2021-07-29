@@ -641,10 +641,6 @@ void sub_808ED00() {
     }
 }
 
-// second arg struct PokemonStruct*?
-void sub_808EFA0(struct unkStruct_8094924*, void*);
-
-
 s32 SaveRecruitedPokemon(u8 *a1, s32 a2)  
 {
     u16 buffer[6];
@@ -742,4 +738,29 @@ s32 ReadRecruitedPokemon(u8 *a1, s32 a2)
     }
     nullsub_102(&backup);
     return backup.unk8;
+}
+
+void sub_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+void sub_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
+void sub_8094108(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+
+void sub_808EFA0(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)  
+{
+  sub_809488C(a1, &pokemon->unkHasNextStage, 7);
+  sub_809488C(a1, &pokemon->speciesNum, 9);
+  sub_80902F4(a1, &pokemon->unk4);
+  sub_808F41C(a1, &pokemon->unkC[0]);
+  sub_808F41C(a1, &pokemon->unkC[1]);
+  sub_809488C(a1, &pokemon->IQ, 10);
+  sub_809488C(a1, &pokemon->pokeHP, 10);
+  sub_809488C(a1, &pokemon->offense.att[0], 8);
+  sub_809488C(a1, &pokemon->offense.att[1], 8);
+  sub_809488C(a1, &pokemon->offense.def[0], 8);
+  sub_809488C(a1, &pokemon->offense.def[1], 8);
+  sub_809488C(a1, &pokemon->unk1C, 24);
+  sub_809488C(a1, &pokemon->unk20, 24);
+  sub_809488C(a1, &pokemon->unk24, 4);
+  sub_8091DE0(a1, &pokemon->heldItem);
+  sub_8094108(a1, pokemon->unk2C);
+  sub_809488C(a1, pokemon->name, 80);
 }

@@ -41,7 +41,7 @@ void nullsub_102(struct unkStruct_8094924 *r0)
 
 }
 
-void sub_809488C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+void sub_809488C(struct unkStruct_8094924 *r0, void *r1, s32 size)
 {
     s32 r5;
     u8 *r6;
