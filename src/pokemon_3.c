@@ -663,7 +663,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     data_s16 = 1;
     data_s16 = -data_s16;
     count = 0;
-    for (i = 0; i < 413; i++) {
+    for (i = 0; i < NUM_SPECIES; i++) {
 #ifdef NONMATCHING
         struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
 #else
@@ -701,6 +701,45 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         sub_809488C(&backup, (u8*)&buffer[i], 16);
     }
     sub_809488C(&backup, (u8*)&data_s16, 16);
+    nullsub_102(&backup);
+    return backup.unk8;
+}
+
+extern void sub_808F068(struct unkStruct_8094924*, void*);
+
+s32 ReadRecruitedPokemon(u8 *a1, s32 a2)  
+{
+    struct unkStruct_8094924 backup;
+    u8 data_u8;  // same as saverecruitedpokemon
+    s16 data_s16;  // same as saverecruitedpokemon
+    s32 i;
+
+    sub_809485C(&backup, a1, a2);
+    for (i = 0; i < 413; i++) {
+        sub_808F068(&backup, &gRecruitedPokemonRef->pokemon[i]);
+    }
+
+    for (i = 0; i < 4; i++) {
+        sub_8094924(&backup, &data_u8, 1);
+        sub_808F068(&backup, &gRecruitedPokemonRef->team[i]);
+        if (data_u8 & 1) {
+            gRecruitedPokemonRef->team[i].unk0 = 3;
+        }
+        else {
+            gRecruitedPokemonRef->team[i].unk0 = 0;
+        }
+    }
+
+    for (i = 0; i < 6; i++) {
+        sub_8094924(&backup, (u8*)&data_s16, 16);
+        if ((u16)data_s16 < 413) {
+            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= 2;
+        }
+    }
+    sub_8094924(&backup, (u8*)&data_s16, 16);
+    if ((u16)data_s16 < 413) {
+        gRecruitedPokemonRef->pokemon[data_s16].unk2 = 1;
+    }
     nullsub_102(&backup);
     return backup.unk8;
 }
