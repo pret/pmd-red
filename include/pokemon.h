@@ -169,10 +169,18 @@ struct unkStruct_808DE50
     u8 name[10];  // name (other offset)
 };
 
+
+// https://www.pokecommunity.com/showthread.php?t=407371
 struct LevelData 
 {
-    // only size is known
-    u32 unk0[3];
+    s32 expRequired;
+    u8 gainHP;
+    u8 gainUnused;
+    u8 gainAtt;
+    u8 gainSPAtt;
+    u8 gainDef;
+    u8 gainSPDef;
+    u16 fillA;
 };
 
 struct unkStruct_808E218_arg 
