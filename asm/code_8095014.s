@@ -476,7 +476,7 @@ sub_80954CC:
 	adds r2, r1, 0
 	mov r0, sp
 	adds r1, r3, 0
-	bl sub_809485C
+	bl xxx_init_struct_8094924_restore_809485C
 	ldr r6, _08095618
 	movs r5, 0
 	movs r4, 0x1F
@@ -493,7 +493,7 @@ _080954E2:
 	ldr r1, [r4]
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	ldr r5, [r4]
 	adds r4, r5, 0x4
 	adds r0, r4, 0
@@ -503,95 +503,95 @@ _080954E2:
 	mov r0, sp
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0x6
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0x7
 	mov r0, sp
 	movs r2, 0x7
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r4, 0x4
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_8090314
+	bl xxx_restore_poke_sub_4_8090314
 	adds r1, r5, 0
 	adds r1, 0xC
 	mov r0, sp
 	movs r2, 0x9
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x10
 	mov r0, sp
-	bl sub_808F410
+	bl xxx_restore_poke_sub_c_808F410
 	adds r1, r5, 0
 	adds r1, 0x14
 	mov r0, sp
-	bl sub_808F410
+	bl xxx_restore_poke_sub_c_808F410
 	adds r1, r5, 0
 	adds r1, 0x18
 	mov r0, sp
 	movs r2, 0xA
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1A
 	mov r0, sp
 	movs r2, 0xA
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1C
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1D
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1E
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1F
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x20
 	mov r0, sp
 	movs r2, 0x18
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x24
 	mov r0, sp
 	movs r2, 0x18
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x28
 	mov r0, sp
 	movs r2, 0x4
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x2C
 	mov r0, sp
-	bl sub_8091DC0
+	bl RestoreHeldItem
 	adds r1, r5, 0
 	adds r1, 0x30
 	mov r0, sp
-	bl sub_8094128
+	bl xxx_restore_poke_sub_2c_8094128
 	adds r1, r5, 0
 	adds r1, 0x50
 	mov r0, sp
 	movs r2, 0x50
-	bl sub_8094924
+	bl RestoreIntegerBits
 	ldr r4, _08095620
 	ldr r1, [r4]
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r6, r4, 0
 	movs r5, 0x4
 	movs r4, 0x1F
@@ -600,7 +600,7 @@ _080955F4:
 	adds r1, r5
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r5, 0x4
 	subs r4, 0x1
 	cmp r4, 0
@@ -626,7 +626,7 @@ sub_8095624:
 	adds r2, r1, 0
 	mov r0, sp
 	adds r1, r3, 0
-	bl sub_809486C
+	bl xxx_init_struct_8094924_save_809486C
 	ldr r6, _08095768
 	movs r5, 0
 	movs r4, 0x1F
@@ -643,101 +643,101 @@ _0809563A:
 	ldr r1, [r4]
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	ldr r5, [r4]
 	adds r4, r5, 0x4
 	mov r0, sp
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0x6
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0x7
 	mov r0, sp
 	movs r2, 0x7
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r4, 0x4
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_80902F4
+	bl xxx_save_poke_sub_4_80902F4
 	adds r1, r5, 0
 	adds r1, 0xC
 	mov r0, sp
 	movs r2, 0x9
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x10
 	mov r0, sp
-	bl sub_808F41C
+	bl xxx_save_poke_sub_c_808F41C
 	adds r1, r5, 0
 	adds r1, 0x14
 	mov r0, sp
-	bl sub_808F41C
+	bl xxx_save_poke_sub_c_808F41C
 	adds r1, r5, 0
 	adds r1, 0x18
 	mov r0, sp
 	movs r2, 0xA
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1A
 	mov r0, sp
 	movs r2, 0xA
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1C
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1D
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1E
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x1F
 	mov r0, sp
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x20
 	mov r0, sp
 	movs r2, 0x18
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x24
 	mov r0, sp
 	movs r2, 0x18
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x28
 	mov r0, sp
 	movs r2, 0x4
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x2C
 	mov r0, sp
-	bl sub_8091DE0
+	bl SaveHeldItem
 	adds r1, r5, 0
 	adds r1, 0x30
 	mov r0, sp
-	bl sub_8094108
+	bl xxx_save_poke_sub_2c_8094108
 	adds r1, r5, 0
 	adds r1, 0x50
 	mov r0, sp
 	movs r2, 0x50
-	bl sub_809488C
+	bl SaveIntegerBits
 	ldr r4, _08095770
 	ldr r1, [r4]
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r6, r4, 0
 	movs r5, 0x4
 	movs r4, 0x1F
@@ -746,7 +746,7 @@ _08095742:
 	adds r1, r5
 	mov r0, sp
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r5, 0x4
 	subs r4, 0x1
 	cmp r4, 0
@@ -771,64 +771,64 @@ sub_8095774:
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x4
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0x4
 	adds r0, r4, 0
-	bl sub_8090314
+	bl xxx_restore_poke_sub_4_8090314
 	adds r1, r5, 0
 	adds r1, 0x8
 	adds r0, r4, 0
 	movs r2, 0x18
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0xC
 	adds r0, r4, 0
 	movs r2, 0x9
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x10
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x14
 	adds r0, r4, 0
 	movs r2, 0x50
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x20
 	adds r0, r4, 0
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x21
 	adds r0, r4, 0
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x22
 	adds r0, r4, 0
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x24
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x28
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r1, r5, 0
 	adds r1, 0x2C
 	adds r0, r4, 0
 	movs r2, 0x8
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r0, r4, 0
 	mov r1, sp
 	movs r2, 0x1
-	bl sub_8094924
+	bl RestoreIntegerBits
 	mov r0, sp
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -858,60 +858,60 @@ sub_8095824:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x4
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0x4
 	adds r0, r5, 0
-	bl sub_80902F4
+	bl xxx_save_poke_sub_4_80902F4
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r0, r5, 0
 	movs r2, 0x18
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0xC
 	adds r0, r5, 0
 	movs r2, 0x9
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x10
 	adds r0, r5, 0
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x14
 	adds r0, r5, 0
 	movs r2, 0x50
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x20
 	adds r0, r5, 0
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x21
 	adds r0, r5, 0
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x22
 	adds r0, r5, 0
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x24
 	adds r0, r5, 0
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x28
 	adds r0, r5, 0
 	movs r2, 0x20
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r1, r4, 0
 	adds r1, 0x2C
 	adds r0, r5, 0
 	movs r2, 0x8
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r0, r4, 0
 	adds r0, 0x2D
 	ldrb r0, [r0]
@@ -922,7 +922,7 @@ sub_8095824:
 _080958D2:
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_809488C
+	bl SaveIntegerBits
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}

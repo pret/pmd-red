@@ -239,6 +239,8 @@ s32 GetUnownIndex(s16 index);
 void sub_808E6F4(struct unkStruct_808E6F4* a1);
 s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
 void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
-void sub_808EFA0(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon);
+void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon);
+void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
+
 
 #endif // GUARD_POKEMON_H  

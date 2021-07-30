@@ -19,7 +19,7 @@ s16 sub_8094828(u16 r0, u8 itemIndex)
     }
 }
 
-void sub_809485C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+void xxx_init_struct_8094924_restore_809485C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
 {
     r0->unk0 = r1;
     r0->unk8 = 0;
@@ -27,7 +27,7 @@ void sub_809485C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
     r0->unk4 = &r1[size];
 }
 
-void sub_809486C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+void xxx_init_struct_8094924_save_809486C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
 {
     r0->unk0 = r1;
     r0->unk8 = 0;
@@ -41,7 +41,7 @@ void nullsub_102(struct unkStruct_8094924 *r0)
 
 }
 
-void sub_809488C(struct unkStruct_8094924 *r0, void *r1, s32 size)
+void SaveIntegerBits(struct unkStruct_8094924 *r0, void *r1, s32 size)
 {
     s32 r5;
     u8 *r6;
@@ -115,7 +115,7 @@ void sub_80948E4(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
 	"\tbx r0");
 }
 
-void sub_8094924(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+void RestoreIntegerBits(struct unkStruct_8094924 *r0, void *r1, s32 size)
 {
     s32 r6;
     u8 *r2;
