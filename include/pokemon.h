@@ -62,9 +62,28 @@ struct PokemonStruct
 
 struct PokemonStruct2
 {
-    // size 0x64
-    u16 unk0;
-    u8 fill[0x62];
+    // size 0x64 (comments are bit sizes)
+    u16 unk0;  // 2
+    bool8 unk2;   // 1
+    u8 unk3;   // 7 (unkHasNextStage?)
+    struct unkPokeSubStruct_4 unk4;
+    u16 unk8;  // 10 (HP?)
+    u16 unkA;  // 16
+    u16 unkC;  // 16
+    u16 unkE;  // 9 (speciesNum?)
+    u16 unk10;  // 10 (IQ?)
+    u16 unk12;  // 10 (HP?)
+    /* 0x14 */ struct Offense offense;
+    u32 unk18;  // 24 (unk1C / unk20?)
+    u8 unk1C[0x40 - 0x1c];  // 36 / 0x24 bytes
+    /* 0x40 */ struct ItemSlot itemSlot;
+    u32 unk44;  // some struct (unkC[0]?)
+    u32 unk48;  // same struct as previous (unkC[1]?)
+    u32 unk4C;  // 24 (unk1C / unk20?)
+    u8 unk50;   // 4 (unk24?)
+    u8 fill51[3];
+    u32 unk54;  // other struct
+    /* 58 */ u8 name[10];
 };
 
 struct unkStruct_203B45C

@@ -153,8 +153,8 @@ extern void sub_80141B4(const char *r0, u32 r1, u8 *r2, u16 r3);
 extern u32 sub_80144A4(u32 *a);
 extern u32 SaveRecruitedPokemon(u8 *, u32);
 extern u32 RestoreRecruitedPokemon(void* a, s32 b);
-extern u32 sub_808F154(u8 *, u32);
-extern u32 sub_808F2B0(void* a, s32 b);
+extern u32 SavePokemonStruct2(u8 *, u32);
+extern u32 RestorePokemonStruct2(void* a, s32 b);
 extern u32 sub_80921C4(u8 *, u32);
 extern u8 *sub_8095100(void);
 extern u32 *sub_8095108(void);
@@ -368,7 +368,7 @@ u32 ReadSaveFromPak(u32 *a)
             r7 = 3;
         }
         r4 += 0x4650;
-        r1 = sub_808F2B0(r4, 0x258);
+        r1 = RestorePokemonStruct2(r4, 0x258);
         if (r1 != r5->unk428) {
             r7 = 3;
         }
@@ -486,7 +486,7 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
 
   iVar1->savedRecruitedPokemon = SaveRecruitedPokemon(array_ptr,0x4650);
   array_ptr += 0x4650;
-  iVar1->unk428 = sub_808F154(array_ptr,0x258);
+  iVar1->unk428 = SavePokemonStruct2(array_ptr,0x258);
   array_ptr += 0x258;
   iVar1->unk430 = SaveTeamInventory(array_ptr,0x1D8);
   array_ptr += 0x1D8;
