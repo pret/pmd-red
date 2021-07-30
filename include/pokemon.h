@@ -60,6 +60,19 @@ struct PokemonStruct
     /* 0x4C */ u8 name[0xA];
 };
 
+
+struct unkStruct_808E6F4
+{
+    s16 unk0;
+    u8 unk2;
+};
+
+struct EvolveStage
+{
+    s16 speciesNum;
+    u8 unkHasNextStage;
+};
+
 struct PokemonStruct2
 {
     // size 0x64 (comments are bit sizes)
@@ -82,7 +95,9 @@ struct PokemonStruct2
     u32 unk4C;  // 24 (unk1C / unk20?)
     u8 unk50;   // 4 (unk24?)
     u8 fill51[3];
-    u32 unk54;  // other struct
+    // I am not sure the following struct is correct
+    // same internal data as this one
+    struct unkStruct_808E6F4 unk54;  // other struct
     /* 58 */ u8 name[10];
 };
 
@@ -149,18 +164,6 @@ struct gPokemon
     /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
 };
 
-
-struct unkStruct_808E6F4
-{
-    s16 unk0;
-    u8 unk2;
-};
-
-struct EvolveStage
-{
-    s16 speciesNum;
-    u8 unkHasNextStage;
-};
 
 struct unkStruct_808DE50
 {

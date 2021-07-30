@@ -57,10 +57,10 @@ void xxx_restore_poke_sub_2c_8094128(struct unkStruct_8094924*, struct unkPokeSu
 
 extern void sub_8094184(struct unkStruct_8094924*, void*);
 extern void sub_809449C(struct unkStruct_8094924*, void*);
-extern void sub_808F448(struct unkStruct_8094924*, void*);
+extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 extern void sub_80941FC(struct unkStruct_8094924*, void*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
-extern void sub_808F428(struct unkStruct_8094924*, void*);
+extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 
 
 bool8 sub_808E668(s16 a1, s16* a2, s16* a3) 
@@ -889,4 +889,26 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
   }
   nullsub_102(&backup);
   return backup.unk8;
+}
+
+void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
+{
+  RestoreIntegerBits(a1, &unkC->unk0, 7);
+}
+
+void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
+{
+  SaveIntegerBits(a1, &unkC->unk0, 7);
+}
+
+void sub_808F428(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+{
+  RestoreIntegerBits(a1, &a2->unk0, 10);
+  RestoreIntegerBits(a1, &a2->unk2, 5);
+}
+
+void sub_808F448(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+{
+  SaveIntegerBits(a1, &a2->unk0, 10);
+  SaveIntegerBits(a1, &a2->unk2, 5);
 }

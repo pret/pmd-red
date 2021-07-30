@@ -5,59 +5,6 @@
 
 	.text
 
-
-	thumb_func_start xxx_restore_poke_sub_c_808F410
-xxx_restore_poke_sub_c_808F410:
-	push {lr}
-	movs r2, 0x7
-	bl RestoreIntegerBits
-	pop {r0}
-	bx r0
-	thumb_func_end xxx_restore_poke_sub_c_808F410
-
-	thumb_func_start xxx_save_poke_sub_c_808F41C
-xxx_save_poke_sub_c_808F41C:
-	push {lr}
-	movs r2, 0x7
-	bl SaveIntegerBits
-	pop {r0}
-	bx r0
-	thumb_func_end xxx_save_poke_sub_c_808F41C
-
-	thumb_func_start sub_808F428
-sub_808F428:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	movs r2, 0xA
-	bl RestoreIntegerBits
-	adds r4, 0x2
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0x5
-	bl RestoreIntegerBits
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808F428
-
-	thumb_func_start sub_808F448
-sub_808F448:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	movs r2, 0xA
-	bl SaveIntegerBits
-	adds r4, 0x2
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0x5
-	bl SaveIntegerBits
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808F448
-
 	thumb_func_start sub_808F468
 sub_808F468:
 	push {r4-r7,lr}
