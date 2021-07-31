@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "item.h"
 #include "file_system.h"
+#include "subStruct_203B240.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -16,6 +17,7 @@ extern s16 gUnknown_810ACB8;  // 0x14d
 extern s16 gUnknown_810ACBA;  // 0x14d
 extern s16 gUnknown_810ACBC;  // 0x14d
 extern s16 gUnknown_810ACBE;  // 0x14d
+extern char* gFormattedStatusNames[];
 
 // wram data:
 extern u16 gLevelCurrentPokeId;
@@ -34,6 +36,8 @@ extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkSt
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
+extern void sub_8092AD4(struct unkPokeSubStruct_2C*, u16);
+extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -784,7 +788,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   register s16* a2 asm("r6");
   i = 1;
   a2 = _a2;
-  for (i = 1; i < 424; i++) {
+  for (i = 1; i <= SPECIES_RAYQUAZA_CUTSCENE; i++) {
     register s32 current asm("r8") = (s16)i;
     if (species != GetPokemonEvolveFrom(i)) {
       continue;
@@ -801,171 +805,40 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
+void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)  
+{
+    u16 buffer[0x10];
+    s32 i;
+    s32 count = sub_808E0AC(buffer, species, 1, 999);
+    if (count == 0) {
+        count = 1;
+        buffer[0] = 408;
+    }
 
-// void sub_808F468(struct PokemonStruct* pokemon, struct unkStruct_808F468_arg* a2, u8 a3)  
-// {
-//     s32 i;
-//     struct unkEvolve evolve;
-//     struct unkStruct_808F468 friend_area;
+    i = 0;
+    if (i < count) {
+        while (i < count) {
+            sub_8092AD4(&a1[i], buffer[i]);
+            i++;
+        }
+        i = count;
+    }
+    while (i < 4) {
+        a1[i].unk0 = 0;
+        i++;
+    }
+}
 
-//     *(u16*)&pokemon->unk4 = 0;
-//     for (i = 0; i < 424; i++) {
-//         s16 species = i;
-//         if (species == 65) {
-//             GetPokemonEvolveConditions(65, &evolve);
-//         }
-//         else {
-//             GetPokemonEvolveConditions(species, &evolve);
-//         }
-//         if (evolve.conditions.evolve_type && (pokemon->speciesNum == evolve.conditions.evolve_from)) {
-//             break;
-//         }
-//     }
-//     if (i != 424) {
-//         for (i = 1; i < 423; i++) {
-//             bool8 cond = 0;
-//             s32 species = i;     
-//             u8 new_friend_area, current_friend_area;
-//             u16 unk4;
+char* sub_808E4FC(s32 a1)  
+{
+    struct subStruct_203B240 *result[4];  
+    sub_8097DF0(gFormattedStatusNames[a1], result);
+    return result[0]->unk0;
+}
 
-//             GetPokemonEvolveConditions(i, &evolve);
-//             if (!evolve.conditions.evolve_type || pokemon->speciesNum != evolve.conditions.evolve_from) {
-//                 continue;
-//             }
-
-//             new_friend_area = GetFriendArea(species);
-//             current_friend_area = GetFriendArea(pokemon->speciesNum);
-//             sub_8092638(new_friend_area, &friend_area);
-
-//             if (!friend_area.unk4) {
-//                 a2->unk4 |= 0x20;
-//                 cond = 1;
-//             }
-//             else {
-//                 s16 need1 = evolve.needs.evolve_need1;
-//                 if (new_friend_area == current_friend_area) {
-//                     need1 = friend_area.unk2 - 1;
-//                 }
-//                 if (friend_area.unk0 <= need1) {
-//                     a2->unk4 |= 0x40;
-//                     cond = 1;
-//                 }
-//             }
-
-//             if (evolve.conditions.evolve_type == 1) {
-//                 unk4 = a2->unk4;
-//                 if (unk4 & 1) {
-//                     continue;
-//                 }
-//                 if (pokemon->unkHasNextStage < evolve.needs.evolve_need1) {
-//                     a2->unk4 = unk4 | 2;
-//                     cond = 1;
-//                 }
-//             }
-//             else if (evolve.conditions.evolve_type == 2) {
-//                 if (pokemon->IQ < evolve.needs.evolve_need1) {
-//                     a2->unk4 |= 0x10;
-//                     cond = 1;
-//                 }
-//             }
-//             else if (evolve.conditions.evolve_type == 3) {
-//                 if (a3) {
-//                     if (a2->unk0 != evolve.needs.evolve_need1 && a2->unk1 != evolve.needs.evolve_need1) {
-//                         a2->unk4 = a2->unk4 | 8;
-//                     }
-//                 }
-//                 else if (FindItemInInventory(evolve.needs.evolve_need1) < 0) {
-//                     a2->unk4 |= 8;
-//                     cond = 1;
-//                 }
-//             }
-
-//             if (evolve.needs.evolve_need2 == 4) {
-//                 if (a3) {
-//                     if ((a2->unk0 != 118) && (a2->unk1 != 118)) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//                 else {
-//                     if (FindItemInInventory(118) < 0) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 5) {
-//                 if (pokemon->offense.att[0] <= pokemon->offense.def[0]) {
-//                     continue;
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 6) {
-//                 if (pokemon->offense.att[0] >= pokemon->offense.def[0]) {
-//                     continue;
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 7) {
-//                 if (pokemon->offense.att[0] != pokemon->offense.def[0]) {
-//                     continue;
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 8) {
-//                 if (a3) {
-//                     if (a2->unk0 != 48 && a2->unk1 != 48) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//                 else {
-//                     if (FindItemInInventory(48) < 0) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 9) {
-//                 if (a3) {
-//                     if (a2->unk0 != 49 && a2->unk1 != 49) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//                 else {
-//                     if (FindItemInInventory(49) < 0) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 11) {
-//                 if (!((u8)a2->unk4 & 1)) {
-//                     continue;
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 12) {
-//                 if (!((u8)a2->unk4 & 1)) {
-//                     continue;
-//                 }
-//             }
-//             else if (evolve.needs.evolve_need2 == 10) {
-//                 if (a3) {
-//                     if (a2->unk0 != 47 && a2->unk1 != 47) {
-//                         a2->unk4 |= 8;
-//                         continue;
-//                     }
-//                 }
-//                 else {
-//                     if (FindItemInInventory(49) < 0) {
-//                         cond = 1;
-//                     }
-//                 }
-//             }
-
-//             if (!cond) { 
-//                 a2->unk4 |= 1; 
-//                 a2->unk6 = species; 
-//             }
-//         }
-//     }
-//     a2->unk4 = 4;
-// }
+char* sub_808E51C(s32 a1)  
+{
+    struct subStruct_203B240 *result[4];  
+    sub_8097DF0(gFormattedStatusNames[a1], result);
+    return result[0]->unk4;
+}
