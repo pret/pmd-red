@@ -110,8 +110,8 @@ struct unkStruct_203B45C
 
 struct EvolveStruct1
 {
-    /* 0x34 */ u16 evolve_from;
-    /* 0x36 */ u16 evolve_type;
+    /* 0x34 */ s16 evolve_from;
+    /* 0x36 */ s16 evolve_type;
 };
 
 struct EvolveNeeds
