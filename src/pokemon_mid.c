@@ -52,6 +52,103 @@ extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
+
+bool8 sub_808D6E8()  
+{
+    s32 i;
+    s32 count = 0;
+    s32 size_count = 0;
+    for (i = 0; i < NUM_SPECIES; i++) {
+        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
+        if ((1 & pokemon->unk0) && ((pokemon->unk0 >> 1) % 2)) {
+            size_count += GetPokemonSize(pokemon->speciesNum);
+            count++;
+        }
+    }
+    if ((size_count < 6) && (count < 4)) {
+        return 1;
+    }
+    return 0;
+}
+
+// this one is surprisingly frustrating
+NAKED
+bool8 sub_808D750(s16 index_) {
+  asm_unified(
+"\tpush {r4-r7,lr}\n"
+"\tmov r7, r9\n"
+"\tmov r6, r8\n"
+"\tpush {r6,r7}\n"
+"\tlsls r0, 16\n"
+"\tasrs r0, 16\n"
+"\tmov r8, r0\n"
+"\tmovs r6, 0\n"
+"\tmovs r5, 0\n"
+"\tmovs r4, 0\n"
+"\tldr r0, _0808D7C8\n"
+"\tmov r9, r0\n"
+"\tmovs r7, 0x1\n"
+"_0808D76A:\n"
+"\tmovs r0, 0x58\n"
+"\tadds r1, r4, 0\n"
+"\tmuls r1, r0\n"
+"\tmov r2, r9\n"
+"\tldr r0, [r2]\n"
+"\tadds r1, r0, r1\n"
+"\tldrh r2, [r1]\n"
+"\tadds r0, r7, 0\n"
+"\tands r0, r2\n"
+"\tcmp r0, 0\n"
+"\tbeq _0808D798\n"
+"\tlsrs r0, r2, 1\n"
+"\tands r0, r7\n"
+"\tcmp r0, 0\n"
+"\tbeq _0808D798\n"
+"\tmovs r2, 0x8\n"
+"\tldrsh r0, [r1, r2]\n"
+"\tbl GetPokemonSize\n"
+"\tlsls r0, 24\n"
+"\tlsrs r0, 24\n"
+"\tadds r5, r0\n"
+"\tadds r6, 0x1\n"
+"_0808D798:\n"
+"\tadds r4, 0x1\n"
+"\tmovs r0, 0xCE\n"
+"\tlsls r0, 1\n"
+"\tcmp r4, r0\n"
+"\tble _0808D76A\n"
+"\tcmp r6, 0x3\n"
+"\tbgt _0808D7CC\n"
+"\tldr r2, _0808D7C8\n"
+"\tmovs r0, 0x58\n"
+"\tmov r1, r8\n"
+"\tmuls r1, r0\n"
+"\tldr r0, [r2]\n"
+"\tadds r1, r0, r1\n"
+"\tmovs r2, 0x8\n"
+"\tldrsh r0, [r1, r2]\n"
+"\tbl GetPokemonSize\n"
+"\tlsls r0, 24\n"
+"\tlsrs r0, 24\n"
+"\tadds r5, r0\n"
+"\tcmp r5, 0x6\n"
+"\tbgt _0808D7CC\n"
+"\tmovs r0, 0x1\n"
+"\tb _0808D7CE\n"
+"\t.align 2, 0\n"
+"_0808D7C8: .4byte gRecruitedPokemonRef\n"
+"_0808D7CC:\n"
+"\tmovs r0, 0\n"
+"_0808D7CE:\n"
+"\tpop {r3,r4}\n"
+"\tmov r8, r3\n"
+"\tmov r9, r4\n"
+"\tpop {r4-r7}\n"
+"\tpop {r1}\n"
+"\tbx r1\n"
+  );
+}
+
 // bool8 sub_808D750(s16 index_) {
 //     s32 i;
 //     register s32 index asm("r8") = index_;
