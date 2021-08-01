@@ -75,30 +75,29 @@ struct EvolveStage
 
 struct PokemonStruct2
 {
-    // size 0x64 (comments are bit sizes)
-    u16 unk0;  // 2
-    bool8 unk2;   // 1
-    u8 unk3;   // 7 (unkHasNextStage?)
-    struct unkPokeSubStruct_4 unk4;
-    u16 unk8;  // 10 (HP?)
-    u16 unkA;  // 16
-    u16 unkC;  // 16
-    u16 unkE;  // 9 (speciesNum?)
-    u16 unk10;  // 10 (IQ?)
-    u16 unk12;  // 10 (HP?)
-    /* 0x14 */ struct Offense offense;
-    u32 unk18;  // 24 (unk1C / unk20?)
-    u8 unk1C[0x40 - 0x1c];  // 36 / 0x24 bytes
-    /* 0x40 */ struct ItemSlot itemSlot;
-    u32 unk44;  // some struct (unkC[0]?)
-    u32 unk48;  // same struct as previous (unkC[1]?)
-    u32 unk4C;  // 24 (unk1C / unk20?)
-    u8 unk50;   // 4 (unk24?)
+    // size 0x68
+    u16 unk0;  // corresponds to unk0 inPokemonStruct
+    u8 unk2;   // unk2
+    u8 unkHasNextStage;   // unk3
+    struct unkPokeSubStruct_4 unk4;  // unk4
+    u16 IQ;    // IQ (other offset)
+    u16 unkA;
+    u16 unkC;
+    s16 speciesNum;  // speciesNum (other offset)
+    u16 unk10;  // pokeHP
+    u16 unk12;  // pokeHP
+    struct Offense offense;  // offense (other offset)
+    u32 unk18;  // unk1C
+    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
+    u8 fill3c[4];
+    /* 40 */ struct ItemSlot itemSlot;  // heldItem
+    u32 unk44;  // some struct
+    u32 unk48;  // some struct (same type as 44)
+    u32 unk4C;  // unk20
+    u8 unk50;   // unk24
     u8 fill51[3];
-    // I am not sure the following struct is correct
-    // same internal data as this one
-    struct unkStruct_808E6F4 unk54;  // other struct
-    /* 58 */ u8 name[10];
+    struct unkStruct_808E6F4 unk54;
+    u8 name[10];  // name (other offset)
 };
 
 struct unkStruct_203B45C
@@ -162,33 +161,6 @@ struct gPokemon
     /* 0x3C */ s16 dexInternal[2]; // dexNo and internalNo
     /* 0x40 */ s16 base_recruit;
     /* 0x42 */ s16 alphabetParent[2]; // alphabetNo and parentNo
-};
-
-
-struct unkStruct_808DE50
-{
-    u16 unk0;  // corresponds to unk0 inPokemonStruct
-    u8 unk2;   // unk2
-    u8 unkHasNextStage;   // unk3
-    struct unkPokeSubStruct_4 unk4;  // unk4
-    u16 IQ;    // IQ (other offset)
-    u16 unkA;
-    u16 unkC;
-    s16 speciesNum;  // speciesNum (other offset)
-    u16 unk10;  // pokeHP
-    u16 unk12;  // pokeHP
-    struct Offense offense;  // offense (other offset)
-    u32 unk18;  // unk1C
-    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
-    u8 fill3c[4];
-    /* 40 */ struct ItemSlot itemSlot;  // heldItem
-    u32 unk44;  // some struct
-    u32 unk48;  // some struct (same type as 44)
-    u32 unk4C;  // unk20
-    u8 unk50;   // unk24
-    u8 fill51[3];
-    struct unkStruct_808E6F4 unk54;
-    u8 name[10];  // name (other offset)
 };
 
 
@@ -260,7 +232,7 @@ struct OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 void sub_808E6F4(struct unkStruct_808E6F4* a1);
 s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
-void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50* r0, struct PokemonStruct *r1, s32 r2);
+void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2* r0, struct PokemonStruct *r1, s32 r2);
 void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon);
 void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
 

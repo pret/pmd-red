@@ -816,13 +816,13 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
     SaveIntegerBits(&backup, pokemon2->unk2 ? &data_u8_neg1 : &data_u8_zero, 1);
-    SaveIntegerBits(&backup, &pokemon2->unk3, 7);
+    SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
     xxx_save_poke_sub_4_80902F4(&backup, &pokemon2->unk4);  
-    SaveIntegerBits(&backup, &pokemon2->unk8, 10);
+    SaveIntegerBits(&backup, &pokemon2->IQ, 10);
     SaveIntegerBits(&backup, &pokemon2->unkA, 16);
     SaveIntegerBits(&backup, &pokemon2->unkC, 16);
-    SaveIntegerBits(&backup, &pokemon2->unkE, 9);
+    SaveIntegerBits(&backup, &pokemon2->speciesNum, 9);
     SaveIntegerBits(&backup, &pokemon2->unk10, 10);
     SaveIntegerBits(&backup, &pokemon2->unk12, 10);
     SaveIntegerBits(&backup, &pokemon2->offense.att[0], 8);
@@ -864,13 +864,13 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     else {
         pokemon2->unk2 = FALSE;
     }
-    RestoreIntegerBits(&backup, &pokemon2->unk3, 7);
+    RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
     xxx_restore_poke_sub_4_8090314(&backup, &pokemon2->unk4);  
-    RestoreIntegerBits(&backup, &pokemon2->unk8, 10);
+    RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
     RestoreIntegerBits(&backup, &pokemon2->unkA, 16);
     RestoreIntegerBits(&backup, &pokemon2->unkC, 16);
-    RestoreIntegerBits(&backup, &pokemon2->unkE, 9);
+    RestoreIntegerBits(&backup, &pokemon2->speciesNum, 9);
     RestoreIntegerBits(&backup, &pokemon2->unk10, 10);
     RestoreIntegerBits(&backup, &pokemon2->unk12, 10);
     RestoreIntegerBits(&backup, &pokemon2->offense.att[0], 8);

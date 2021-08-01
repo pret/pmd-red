@@ -32,7 +32,7 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
-extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
+extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
@@ -511,12 +511,12 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
     return (gMonsterParameters[index].dialogue_sprites >> r1) & 1;
 }
 
-void xxx_pokemonstruct_index_to_unk_808DE30(void* r0, u32 r1)
+void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
 {
-    xxx_pokemonstruct_to_unk_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
+    xxx_pokemonstruct_to_pokemon2_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
 
-void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s32 a3)
+void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct PokemonStruct *pokemon, s32 a3)
 {
     s32 i;
     struct HeldItem* held;
@@ -566,15 +566,15 @@ void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct Poke
   a1->unk48 = somestruct2_80943A0;
 }
 
-void xxx_unk_to_pokemonstruct_index_808DF2C(s32 a1, struct unkStruct_808DE50* a2)
+void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* a2)
 {
-    xxx_unk_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
+    xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
 extern void sub_8093FA8(struct unkPokeSubStruct_2C*, struct unkPokeSubStruct_2C*);
 
 
-void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
+void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
 {
     s32 i;
 
@@ -608,7 +608,7 @@ void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkS
     }
 }
 
-void sub_808DFDC(s32 a1, struct unkStruct_808DE50* a2)
+void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
 {
     // transfer item from unk to pokemon at index
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
