@@ -35,6 +35,24 @@
     .4byte 0x00, 0x00
 .endm
 
+.macro fadeColorOut arg0:req arg1:req time:req color:req
+    .byte 0x27
+    .byte \arg0
+    .2byte \arg1
+    .4byte \time
+    .4byte \color
+    .4byte 0x00
+.endm
+
+.macro fadeColorIn arg0:req arg1:req time:req color:req
+    .byte 0x28
+    .byte \arg0
+    .2byte \arg1
+    .4byte \time
+    .4byte \color
+    .4byte 0x00
+.endm
+
 .macro loadData type:req charac:req source:req
     .byte 0x2D
     .byte \type
@@ -76,6 +94,13 @@
 .macro PicNameTextBox textPtr:req character:req
     .byte 0x34, 0x00
     .2byte \character
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro floatingText textPtr:req arg1:req
+    .byte 0x37, 0x00
+    .2byte \arg1
     .4byte 0x00, 0x00
     .4byte \textPtr
 .endm
@@ -298,6 +323,12 @@
 
 .macro closeThread
     .byte 0xF0
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
+.endm
+
+.macro closeThreadRemoveObject
+    .byte 0xF1
     .4byte 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00
 .endm
