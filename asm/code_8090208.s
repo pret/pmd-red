@@ -60,25 +60,25 @@ _080902EE:
 	bx r1
 	thumb_func_end sub_80902C8
 
-	thumb_func_start sub_80902F4
-sub_80902F4:
+	thumb_func_start xxx_save_poke_sub_4_80902F4
+xxx_save_poke_sub_4_80902F4:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
 	movs r2, 0x7
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r4, 0x1
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x7
-	bl sub_809488C
+	bl SaveIntegerBits
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80902F4
+	thumb_func_end xxx_save_poke_sub_4_80902F4
 
-	thumb_func_start sub_8090314
-sub_8090314:
+	thumb_func_start xxx_restore_poke_sub_4_8090314
+xxx_restore_poke_sub_4_8090314:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -87,16 +87,16 @@ sub_8090314:
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
 	movs r2, 0x7
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r4, 0x1
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x7
-	bl sub_8094924
+	bl RestoreIntegerBits
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8090314
+	thumb_func_end xxx_restore_poke_sub_4_8090314
 
 	thumb_func_start sub_809033C
 sub_809033C:

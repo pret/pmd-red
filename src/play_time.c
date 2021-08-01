@@ -77,16 +77,16 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
 
 void WritePlayTime(struct unkStruct_8094924 *r0)
 {
-    sub_809488C(r0, (&(gPlayTimeRef->frames)), 6);
-    sub_809488C(r0, (&(gPlayTimeRef->seconds)), 6);
-    sub_809488C(r0, (&(gPlayTimeRef->minutes)), 6);
-    sub_809488C(r0, (u8 *)(&(gPlayTimeRef->hours)), 14);
+    SaveIntegerBits(r0, &gPlayTimeRef->frames, 6);
+    SaveIntegerBits(r0, &gPlayTimeRef->seconds, 6);
+    SaveIntegerBits(r0, &gPlayTimeRef->minutes, 6);
+    SaveIntegerBits(r0, &gPlayTimeRef->hours, 14);
 }
 
 void ReadPlayTime(struct unkStruct_8094924 *r0)
 {
-    sub_8094924(r0, (&(gPlayTimeRef->frames)), 6);
-    sub_8094924(r0, (&(gPlayTimeRef->seconds)), 6);
-    sub_8094924(r0, (&(gPlayTimeRef->minutes)), 6);
-    sub_8094924(r0, (u8*)(&(gPlayTimeRef->hours)), 14);
+    RestoreIntegerBits(r0, &gPlayTimeRef->frames, 6);
+    RestoreIntegerBits(r0, &gPlayTimeRef->seconds, 6);
+    RestoreIntegerBits(r0, &gPlayTimeRef->minutes, 6);
+    RestoreIntegerBits(r0, &gPlayTimeRef->hours, 14);
 }

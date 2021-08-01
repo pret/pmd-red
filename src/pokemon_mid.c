@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "item.h"
 #include "file_system.h"
+#include "subStruct_203B240.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -16,6 +17,7 @@ extern s16 gUnknown_810ACB8;  // 0x14d
 extern s16 gUnknown_810ACBA;  // 0x14d
 extern s16 gUnknown_810ACBC;  // 0x14d
 extern s16 gUnknown_810ACBE;  // 0x14d
+extern char* gFormattedStatusNames[];
 
 // wram data:
 extern u16 gLevelCurrentPokeId;
@@ -30,10 +32,12 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
-extern void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct*, struct unkStruct_808DE50*);
+extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
+extern void sub_8092AD4(struct unkPokeSubStruct_2C*, u16);
+extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -47,6 +51,103 @@ extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+
+
+bool8 sub_808D6E8()  
+{
+    s32 i;
+    s32 count = 0;
+    s32 size_count = 0;
+    for (i = 0; i < NUM_SPECIES; i++) {
+        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
+        if ((1 & pokemon->unk0) && ((pokemon->unk0 >> 1) % 2)) {
+            size_count += GetPokemonSize(pokemon->speciesNum);
+            count++;
+        }
+    }
+    if ((size_count < 6) && (count < 4)) {
+        return 1;
+    }
+    return 0;
+}
+
+// this one is surprisingly frustrating
+NAKED
+bool8 sub_808D750(s16 index_) {
+  asm_unified(
+"\tpush {r4-r7,lr}\n"
+"\tmov r7, r9\n"
+"\tmov r6, r8\n"
+"\tpush {r6,r7}\n"
+"\tlsls r0, 16\n"
+"\tasrs r0, 16\n"
+"\tmov r8, r0\n"
+"\tmovs r6, 0\n"
+"\tmovs r5, 0\n"
+"\tmovs r4, 0\n"
+"\tldr r0, _0808D7C8\n"
+"\tmov r9, r0\n"
+"\tmovs r7, 0x1\n"
+"_0808D76A:\n"
+"\tmovs r0, 0x58\n"
+"\tadds r1, r4, 0\n"
+"\tmuls r1, r0\n"
+"\tmov r2, r9\n"
+"\tldr r0, [r2]\n"
+"\tadds r1, r0, r1\n"
+"\tldrh r2, [r1]\n"
+"\tadds r0, r7, 0\n"
+"\tands r0, r2\n"
+"\tcmp r0, 0\n"
+"\tbeq _0808D798\n"
+"\tlsrs r0, r2, 1\n"
+"\tands r0, r7\n"
+"\tcmp r0, 0\n"
+"\tbeq _0808D798\n"
+"\tmovs r2, 0x8\n"
+"\tldrsh r0, [r1, r2]\n"
+"\tbl GetPokemonSize\n"
+"\tlsls r0, 24\n"
+"\tlsrs r0, 24\n"
+"\tadds r5, r0\n"
+"\tadds r6, 0x1\n"
+"_0808D798:\n"
+"\tadds r4, 0x1\n"
+"\tmovs r0, 0xCE\n"
+"\tlsls r0, 1\n"
+"\tcmp r4, r0\n"
+"\tble _0808D76A\n"
+"\tcmp r6, 0x3\n"
+"\tbgt _0808D7CC\n"
+"\tldr r2, _0808D7C8\n"
+"\tmovs r0, 0x58\n"
+"\tmov r1, r8\n"
+"\tmuls r1, r0\n"
+"\tldr r0, [r2]\n"
+"\tadds r1, r0, r1\n"
+"\tmovs r2, 0x8\n"
+"\tldrsh r0, [r1, r2]\n"
+"\tbl GetPokemonSize\n"
+"\tlsls r0, 24\n"
+"\tlsrs r0, 24\n"
+"\tadds r5, r0\n"
+"\tcmp r5, 0x6\n"
+"\tbgt _0808D7CC\n"
+"\tmovs r0, 0x1\n"
+"\tb _0808D7CE\n"
+"\t.align 2, 0\n"
+"_0808D7C8: .4byte gRecruitedPokemonRef\n"
+"_0808D7CC:\n"
+"\tmovs r0, 0\n"
+"_0808D7CE:\n"
+"\tpop {r3,r4}\n"
+"\tmov r8, r3\n"
+"\tmov r9, r4\n"
+"\tpop {r4-r7}\n"
+"\tpop {r1}\n"
+"\tbx r1\n"
+  );
+}
 
 // bool8 sub_808D750(s16 index_) {
 //     s32 i;
@@ -410,12 +511,12 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
     return (gMonsterParameters[index].dialogue_sprites >> r1) & 1;
 }
 
-void xxx_pokemonstruct_index_to_unk_808DE30(void* r0, u32 r1)
+void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
 {
-    xxx_pokemonstruct_to_unk_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
+    xxx_pokemonstruct_to_pokemon2_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
 
-void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct PokemonStruct *pokemon, s32 a3)
+void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct PokemonStruct *pokemon, s32 a3)
 {
     s32 i;
     struct HeldItem* held;
@@ -465,15 +566,15 @@ void xxx_pokemonstruct_to_unk_808DE50(struct unkStruct_808DE50 * a1, struct Poke
   a1->unk48 = somestruct2_80943A0;
 }
 
-void xxx_unk_to_pokemonstruct_index_808DF2C(s32 a1, struct unkStruct_808DE50* a2)
+void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* a2)
 {
-    xxx_unk_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
+    xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
 extern void sub_8093FA8(struct unkPokeSubStruct_2C*, struct unkPokeSubStruct_2C*);
 
 
-void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkStruct_808DE50* a2)
+void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
 {
     s32 i;
 
@@ -507,7 +608,7 @@ void xxx_unk_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct unkS
     }
 }
 
-void sub_808DFDC(s32 a1, struct unkStruct_808DE50* a2)
+void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
 {
     // transfer item from unk to pokemon at index
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
@@ -770,4 +871,71 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
   }
   return count;
 #endif
+}
+
+
+s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)  
+{
+  // this is horrible
+  s32 i;
+  register s32 species asm("r9") = (s16)_species;
+  s32 a3 = (u8)_a3;
+  s32 a4 = (u8)_a4;
+  s32 count = 0;
+  register s16* a2 asm("r6");
+  i = 1;
+  a2 = _a2;
+  for (i = 1; i <= SPECIES_RAYQUAZA_CUTSCENE; i++) {
+    register s32 current asm("r8") = (s16)i;
+    if (species != GetPokemonEvolveFrom(i)) {
+      continue;
+    }
+    if (!a3 && (GetPokemonSize(species) != GetPokemonSize(i))) {
+      continue;
+    }
+    if (!a4 && ((s16)i == SPECIES_SHEDINJA)) {
+      continue;
+    }
+    *a2++ = current;
+    count++;
+  }
+  return count;
+}
+
+void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)  
+{
+    u16 buffer[0x10];
+    s32 i;
+    s32 count = sub_808E0AC(buffer, species, 1, 999);
+    if (count == 0) {
+        count = 1;
+        buffer[0] = 408;
+    }
+
+    i = 0;
+    if (i < count) {
+        while (i < count) {
+            sub_8092AD4(&a1[i], buffer[i]);
+            i++;
+        }
+        i = count;
+    }
+    while (i < 4) {
+        a1[i].unk0 = 0;
+        i++;
+    }
+}
+
+char* sub_808E4FC(s32 a1)  
+{
+    struct subStruct_203B240 *result[4];  
+    sub_8097DF0(gFormattedStatusNames[a1], result);
+    return result[0]->unk0;
+}
+
+char* sub_808E51C(s32 a1)  
+{
+    struct subStruct_203B240 *result[4];  
+    sub_8097DF0(gFormattedStatusNames[a1], result);
+    return result[0]->unk4;
 }

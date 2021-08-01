@@ -364,11 +364,11 @@ void sub_8091BB4(u8);
 void sub_8090F58(void*, u8 *, struct ItemSlot *, struct unkStruct_8090F58*);
 void SlotToHeldItem(struct HeldItem *held,struct ItemSlot *slot);
 
-// some sort of weird memcpy's?
-// not sure what the second argument should be typed as
-void sub_8091DC0(struct unkStruct_8094924 *r0, u8*);
-void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2);
-void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2);
-void sub_8091E28(struct unkStruct_8094924 *a1, u8 *a2);
+void RestoreHeldItem(struct unkStruct_8094924*, struct HeldItem*);
+void SaveHeldItem(struct unkStruct_8094924*, struct HeldItem*);
+void RestoreItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *a2);
+void SaveItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *a2);
+s32 RestoreTeamInventory(u8 *unk0, u32 size);
+s32 SaveTeamInventory(u8 *unk0, u32 size);
 
 #endif

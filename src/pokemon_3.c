@@ -48,6 +48,20 @@ extern bool8 sub_808ECD0(u8 *, u32);
 extern void sub_808EC30(u8 *, u32);
 extern void AddSprite(u16 *, u32, u32, u32);
 
+extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
+extern void xxx_save_poke_sub_2c_8094108(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
+void xxx_restore_poke_sub_2c_8094128(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+
+extern void sub_8094184(struct unkStruct_8094924*, void*);
+extern void sub_809449C(struct unkStruct_8094924*, void*);
+extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+extern void sub_80941FC(struct unkStruct_8094924*, void*);
+extern void sub_809447C(struct unkStruct_8094924*, void*);
+extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+
 
 bool8 sub_808E668(s16 a1, s16* a2, s16* a3) 
 {
@@ -94,7 +108,7 @@ bool8 HasRecruitedMon(s16 species_) {
     s32 i = 0;
     struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
     
-    for (i = 0; i < 413; i++) {
+    for (i = 0; i < NUM_SPECIES; i++) {
         if (((u8)pokemon->unk0 & 1)) {
             if(pokemon->speciesNum == species)
                 return TRUE;
@@ -641,3 +655,260 @@ void sub_808ED00() {
     }
 }
 
+s32 SaveRecruitedPokemon(u8 *a1, s32 a2)  
+{
+    u16 buffer[6];
+    struct unkStruct_8094924 backup;
+    u8 data_u8;
+    s16 data_s16;
+    s32 count;
+    s32 i;
+
+    xxx_init_struct_8094924_save_809486C(&backup, a1, a2);
+
+    for (i = 0; i < 6; i++) {
+        buffer[i] = -1;
+    }
+
+    data_s16 = 1;
+    data_s16 = -data_s16;
+    count = 0;
+    for (i = 0; i < NUM_SPECIES; i++) {
+#ifdef NONMATCHING
+        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
+#else
+        struct PokemonStruct* pokemon;
+        register struct unkStruct_203B45C** recruited asm("r2") = &gRecruitedPokemonRef;
+
+        pokemon = &(*recruited)->pokemon[i];
+#endif
+        if (pokemon->unk0 & 1) {
+            if (pokemon->unk0 & 2) {
+                buffer[count++] = i;
+            }
+            if (pokemon->unk2) {
+                data_s16 = i;
+            }
+        }
+        else {
+            pokemon->unkHasNextStage = 0;
+        }    
+        SavePokemonStruct(&backup, pokemon);
+    }
+
+    for (i = 0; i < 4; i++) {
+        if ((u8)i[gRecruitedPokemonRef->team].unk0 & 1) {
+            data_u8 = 0xff;
+        }
+        else {
+            data_u8 = 0;
+        }    
+        SaveIntegerBits(&backup, &data_u8, 1);
+        SavePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
+    }
+
+    for (i = 0; i < 6; i++) {
+        SaveIntegerBits(&backup, (u8*)&buffer[i], 16);
+    }
+    SaveIntegerBits(&backup, (u8*)&data_s16, 16);
+    nullsub_102(&backup);
+    return backup.unk8;
+}
+
+s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)  
+{
+    struct unkStruct_8094924 backup;
+    u8 data_u8;  // same as saverecruitedpokemon
+    s16 data_s16;  // same as saverecruitedpokemon
+    s32 i;
+
+    xxx_init_struct_8094924_restore_809485C(&backup, a1, a2);
+    for (i = 0; i < NUM_SPECIES; i++) {
+        RestorePokemonStruct(&backup, &gRecruitedPokemonRef->pokemon[i]);
+    }
+
+    for (i = 0; i < 4; i++) {
+        RestoreIntegerBits(&backup, &data_u8, 1);
+        RestorePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
+        if (data_u8 & 1) {
+            gRecruitedPokemonRef->team[i].unk0 = 3;
+        }
+        else {
+            gRecruitedPokemonRef->team[i].unk0 = 0;
+        }
+    }
+
+    for (i = 0; i < 6; i++) {
+        RestoreIntegerBits(&backup, &data_s16, 16);
+        if ((u16)data_s16 < NUM_SPECIES) {
+            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= 2;
+        }
+    }
+    RestoreIntegerBits(&backup, &data_s16, 16);
+    if ((u16)data_s16 < NUM_SPECIES) {
+        gRecruitedPokemonRef->pokemon[data_s16].unk2 = 1;
+    }
+    nullsub_102(&backup);
+    return backup.unk8;
+}
+
+void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)  
+{
+  SaveIntegerBits(a1, &pokemon->unkHasNextStage, 7);
+  SaveIntegerBits(a1, &pokemon->speciesNum, 9);
+  xxx_save_poke_sub_4_80902F4(a1, &pokemon->unk4);
+  xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[0]);
+  xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[1]);
+  SaveIntegerBits(a1, &pokemon->IQ, 10);
+  SaveIntegerBits(a1, &pokemon->pokeHP, 10);
+  SaveIntegerBits(a1, &pokemon->offense.att[0], 8);
+  SaveIntegerBits(a1, &pokemon->offense.att[1], 8);
+  SaveIntegerBits(a1, &pokemon->offense.def[0], 8);
+  SaveIntegerBits(a1, &pokemon->offense.def[1], 8);
+  SaveIntegerBits(a1, &pokemon->unk1C, 24);
+  SaveIntegerBits(a1, &pokemon->unk20, 24);
+  SaveIntegerBits(a1, &pokemon->unk24, 4);
+  SaveHeldItem(a1, &pokemon->heldItem);
+  xxx_save_poke_sub_2c_8094108(a1, pokemon->unk2C);
+  SaveIntegerBits(a1, pokemon->name, 80);
+}
+
+void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)  
+{
+  memset(pokemon, 0, sizeof(struct PokemonStruct));
+  pokemon->unk0 = 0;
+  pokemon->unk2 = 0;
+  RestoreIntegerBits(a1, &pokemon->unkHasNextStage, 7);
+  if (pokemon->unkHasNextStage) {
+      pokemon->unk0 |= 1;
+  }
+  RestoreIntegerBits(a1, &pokemon->speciesNum, 9);
+  xxx_restore_poke_sub_4_8090314(a1, &pokemon->unk4);
+  xxx_restore_poke_sub_c_808F410(a1, &pokemon->unkC[0]);
+  xxx_restore_poke_sub_c_808F410(a1, &pokemon->unkC[1]);
+  RestoreIntegerBits(a1, &pokemon->IQ, 10);
+  RestoreIntegerBits(a1, &pokemon->pokeHP, 10);
+  RestoreIntegerBits(a1, &pokemon->offense.att[0], 8);
+  RestoreIntegerBits(a1, &pokemon->offense.att[1], 8);
+  RestoreIntegerBits(a1, &pokemon->offense.def[0], 8);
+  RestoreIntegerBits(a1, &pokemon->offense.def[1], 8);
+  RestoreIntegerBits(a1, &pokemon->unk1C, 24);
+  RestoreIntegerBits(a1, &pokemon->unk20, 24);
+  RestoreIntegerBits(a1, &pokemon->unk24, 4);
+  RestoreHeldItem(a1, &pokemon->heldItem);
+  xxx_restore_poke_sub_2c_8094128(a1, pokemon->unk2C);
+  RestoreIntegerBits(a1, pokemon->name, 80);
+}
+
+s32 SavePokemonStruct2(u8* a1, s32 size)  
+{
+  struct unkStruct_8094924 backup;
+  s32 i;
+  u8 data_u8_neg1;
+  u8 data_u8_zero;
+
+  xxx_init_struct_8094924_save_809486C(&backup, a1, size);
+  data_u8_neg1 = -1;
+  data_u8_zero = 0;
+
+  for (i = 0; i < 4; i++) {
+    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];  
+    SaveIntegerBits(&backup, &pokemon2->unk0, 2);
+
+    SaveIntegerBits(&backup, pokemon2->unk2 ? &data_u8_neg1 : &data_u8_zero, 1);
+    SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+
+    xxx_save_poke_sub_4_80902F4(&backup, &pokemon2->unk4);  
+    SaveIntegerBits(&backup, &pokemon2->IQ, 10);
+    SaveIntegerBits(&backup, &pokemon2->unkA, 16);
+    SaveIntegerBits(&backup, &pokemon2->unkC, 16);
+    SaveIntegerBits(&backup, &pokemon2->speciesNum, 9);
+    SaveIntegerBits(&backup, &pokemon2->unk10, 10);
+    SaveIntegerBits(&backup, &pokemon2->unk12, 10);
+    SaveIntegerBits(&backup, &pokemon2->offense.att[0], 8);
+    SaveIntegerBits(&backup, &pokemon2->offense.att[1], 8);
+    SaveIntegerBits(&backup, &pokemon2->offense.def[0], 8);
+    SaveIntegerBits(&backup, &pokemon2->offense.def[1], 8);
+    SaveIntegerBits(&backup, &pokemon2->unk18, 24);
+    sub_8094184(&backup, &pokemon2->unk1C);
+    SaveItemSlot(&backup, &pokemon2->itemSlot);
+    sub_809449C(&backup, &pokemon2->unk44);
+    sub_809449C(&backup, &pokemon2->unk48);
+    SaveIntegerBits(&backup, &pokemon2->unk4C, 24);
+    SaveIntegerBits(&backup, &pokemon2->unk50, 4);
+    sub_808F448(&backup, &pokemon2->unk54);
+    SaveIntegerBits(&backup, &pokemon2->name, 80);
+  }
+  nullsub_102(&backup);
+  return backup.unk8;
+}
+
+s32 RestorePokemonStruct2(u8* a1, s32 size)  
+{
+  struct unkStruct_8094924 backup;
+  s32 i;  
+  
+  xxx_init_struct_8094924_restore_809485C(&backup, a1, size);
+  for (i = 0; i < 4; i++) {
+    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];  
+    u8 unk2;
+
+    memset(pokemon2, 0, sizeof(struct PokemonStruct2));
+    
+    RestoreIntegerBits(&backup, &pokemon2->unk0, 2);
+
+    RestoreIntegerBits(&backup, &unk2, 1);
+    if (unk2 & 1) {
+        pokemon2->unk2 = TRUE;
+    }
+    else {
+        pokemon2->unk2 = FALSE;
+    }
+    RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+
+    xxx_restore_poke_sub_4_8090314(&backup, &pokemon2->unk4);  
+    RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
+    RestoreIntegerBits(&backup, &pokemon2->unkA, 16);
+    RestoreIntegerBits(&backup, &pokemon2->unkC, 16);
+    RestoreIntegerBits(&backup, &pokemon2->speciesNum, 9);
+    RestoreIntegerBits(&backup, &pokemon2->unk10, 10);
+    RestoreIntegerBits(&backup, &pokemon2->unk12, 10);
+    RestoreIntegerBits(&backup, &pokemon2->offense.att[0], 8);
+    RestoreIntegerBits(&backup, &pokemon2->offense.att[1], 8);
+    RestoreIntegerBits(&backup, &pokemon2->offense.def[0], 8);
+    RestoreIntegerBits(&backup, &pokemon2->offense.def[1], 8);
+    RestoreIntegerBits(&backup, &pokemon2->unk18, 24);
+    sub_80941FC(&backup, &pokemon2->unk1C);
+    RestoreItemSlot(&backup, &pokemon2->itemSlot);
+    sub_809447C(&backup, &pokemon2->unk44);
+    sub_809447C(&backup, &pokemon2->unk48);
+    RestoreIntegerBits(&backup, &pokemon2->unk4C, 24);
+    RestoreIntegerBits(&backup, &pokemon2->unk50, 4);
+    sub_808F428(&backup, &pokemon2->unk54);
+    RestoreIntegerBits(&backup, &pokemon2->name, 80);
+  }
+  nullsub_102(&backup);
+  return backup.unk8;
+}
+
+void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
+{
+  RestoreIntegerBits(a1, &unkC->unk0, 7);
+}
+
+void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
+{
+  SaveIntegerBits(a1, &unkC->unk0, 7);
+}
+
+void sub_808F428(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+{
+  RestoreIntegerBits(a1, &a2->unk0, 10);
+  RestoreIntegerBits(a1, &a2->unk2, 5);
+}
+
+void sub_808F448(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+{
+  SaveIntegerBits(a1, &a2->unk0, 10);
+  SaveIntegerBits(a1, &a2->unk2, 5);
+}

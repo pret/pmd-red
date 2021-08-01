@@ -57,7 +57,7 @@ _0803D164:
 	mov r8, r2
 	mov r0, sp
 	adds r1, r7, 0
-	bl sub_809486C
+	bl xxx_init_struct_8094924_save_809486C
 	movs r4, 0
 	cmp r4, r5
 	bge _0803D188
@@ -66,7 +66,7 @@ _0803D178:
 	adds r1, r6, r4
 	mov r0, sp
 	movs r2, 0x5
-	bl sub_809488C
+	bl SaveIntegerBits
 	adds r4, 0x1
 	cmp r4, r5
 	blt _0803D178
@@ -103,7 +103,7 @@ sub_803D1A8:
 _0803D1BC:
 	asrs r2, 3
 	mov r0, sp
-	bl sub_809485C
+	bl xxx_init_struct_8094924_restore_809485C
 	movs r4, 0
 	cmp r4, r5
 	bge _0803D1DC
@@ -112,7 +112,7 @@ _0803D1CC:
 	adds r1, r6, r4
 	mov r0, sp
 	movs r2, 0x5
-	bl sub_8094924
+	bl RestoreIntegerBits
 	adds r4, 0x1
 	cmp r4, r5
 	blt _0803D1CC
@@ -213,7 +213,7 @@ _0803D26C:
 	adds r1, 0x1
 	adds r0, r4, 0
 	movs r2, 0x21
-	bl sub_809485C
+	bl xxx_init_struct_8094924_restore_809485C
 	adds r0, r4, 0
 	mov r1, r9
 	bl sub_8095774
@@ -262,7 +262,7 @@ _0803D2E2:
 	bge _0803D2E2
 	adds r0, r4, 0
 	movs r2, 0x21
-	bl sub_809486C
+	bl xxx_init_struct_8094924_save_809486C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_8095824
@@ -388,7 +388,7 @@ _0803D3C0:
 	adds r1, 0x1
 	adds r0, r4, 0
 	movs r2, 0xC
-	bl sub_809485C
+	bl xxx_init_struct_8094924_restore_809485C
 	adds r0, r4, 0
 	mov r1, r9
 	bl sub_80971EC
@@ -437,7 +437,7 @@ _0803D436:
 	bge _0803D436
 	adds r0, r4, 0
 	movs r2, 0xC
-	bl sub_809486C
+	bl xxx_init_struct_8094924_save_809486C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_8097270

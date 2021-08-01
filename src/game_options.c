@@ -76,7 +76,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     neg_1 = -1;
     zero = 0;
 
-    sub_809488C(param_1, &gUnknown_203B46C->unk8, 2);
+    SaveIntegerBits(param_1, &gUnknown_203B46C->unk8, 2);
 
     if(gUnknown_203B46C->unk9 != 0)
     {
@@ -86,7 +86,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->unkA != 0)
     {
@@ -96,7 +96,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->playerGender != 0)
     {
@@ -106,7 +106,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->unk0 != 0)
     {
@@ -116,7 +116,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->unk1 != 0)
     {
@@ -126,7 +126,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->unk2 != 0)
     {
@@ -136,7 +136,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
     if(gUnknown_203B46C->unk3 != 0)
     {
@@ -146,43 +146,43 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    sub_809488C(param_1, puVar2, 1);
+    SaveIntegerBits(param_1, puVar2, 1);
 
-    sub_809488C(param_1, &gUnknown_203B46C->unk4, 3);
-    sub_809488C(param_1, &gUnknown_203B46C->unkC, 2);
+    SaveIntegerBits(param_1, &gUnknown_203B46C->unk4, 3);
+    SaveIntegerBits(param_1, &gUnknown_203B46C->unkC, 2);
 }
 
 void ReadGameOptions(struct unkStruct_8094924 *param_1)
 {
     u8 byteArray[4];
-    sub_8094924(param_1, byteArray, 2);
+    RestoreIntegerBits(param_1, byteArray, 2);
     gUnknown_203B46C->unk8  = byteArray[0] & 3;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unk9  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unkA  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->playerGender  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unk0  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unk1  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unk2  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 1);
+    RestoreIntegerBits(param_1, byteArray, 1);
     gUnknown_203B46C->unk3  = byteArray[0] & 1;
 
-    sub_8094924(param_1, byteArray, 3);
+    RestoreIntegerBits(param_1, byteArray, 3);
     gUnknown_203B46C->unk4  = byteArray[0] & 7;
 
-    sub_8094924(param_1, byteArray, 2);
+    RestoreIntegerBits(param_1, byteArray, 2);
     gUnknown_203B46C->unkC  = byteArray[0] & 3;
 
     sub_8094C14();

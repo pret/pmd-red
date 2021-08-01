@@ -18,6 +18,7 @@ bool32 sub_8092040(u8 param_1)
 {
   s32 index;
 
+  // NUMBER_OF_ITEM_IDS == 0xf0
   if (param_1 >= 0xF0)
       return TRUE;
   else {
@@ -138,9 +139,9 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     neg1 = -1;
     zero = 0;
 
-    sub_809486C(&auStack36, param_1, size);
-    sub_809488C(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
-    sub_809488C(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
+    xxx_init_struct_8094924_save_809486C(&auStack36, param_1, size);
+    SaveIntegerBits(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
+    SaveIntegerBits(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
     gRescueTeamInfoRef->unk10 = sub_80023E4(0);
 
     if (gRescueTeamInfoRef->unk10 != 0)
@@ -151,7 +152,7 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     {
         puVar2 = &zero;
     }
-    sub_809488C(&auStack36,puVar2,1);
+    SaveIntegerBits(&auStack36,puVar2,1);
     nullsub_102(&auStack36);
     return auStack36.unk8;
 }
@@ -161,10 +162,10 @@ u32 ReadRescueTeamInfo(u8 *param_1, u32 size)
   struct unkStruct_8094924 auStack32;
   u8 byteArray[4];
 
-  sub_809485C(&auStack32, param_1, size);
-  sub_8094924(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
-  sub_8094924(&auStack32, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
-  sub_8094924(&auStack32, byteArray, 1);
+  xxx_init_struct_8094924_restore_809485C(&auStack32, param_1, size);
+  RestoreIntegerBits(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
+  RestoreIntegerBits(&auStack32, &gRescueTeamInfoRef->teamRankPts, 0x20);
+  RestoreIntegerBits(&auStack32, byteArray, 1);
   gRescueTeamInfoRef->unk10 = byteArray[0] & 1;
   nullsub_102(&auStack32);
   return auStack32.unk8;

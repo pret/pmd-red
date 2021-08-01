@@ -1160,78 +1160,78 @@ bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
   return TRUE;
 }
 
-s32 sub_8091C68(u8* unk0, u32 size) 
+s32 SaveTeamInventory(u8* unk0, u32 size) 
 {
   struct unkStruct_8094924 unk;
   s32 i;
 
-  sub_809486C(&unk, unk0, size);
+  xxx_init_struct_8094924_save_809486C(&unk, unk0, size);
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    sub_8091E28(&unk, (u8*)&gTeamInventory_203B460->teamItems[i]);
+    SaveItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
   }
   for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
-    sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
+    SaveIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
-    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk230[i]);
+    SaveHeldItem(&unk, &gTeamInventory_203B460->unk230[i]);
   }
   for (i = 0; i < 4; i++) {
-    sub_8091DE0(&unk, (u8*)&gTeamInventory_203B460->unk250[i]);
+    SaveHeldItem(&unk, &gTeamInventory_203B460->unk250[i]);
   }
-  sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
-  sub_809488C(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
+  SaveIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
+  SaveIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
   nullsub_102(&unk);
   return unk.unk8;
 }
 
-s32 sub_8091D14(u8 *unk0, u32 size) 
+s32 RestoreTeamInventory(u8 *unk0, u32 size) 
 {
   struct unkStruct_8094924 unk;
   s32 i;
 
-  sub_809485C(&unk, unk0, size);
+  xxx_init_struct_8094924_restore_809485C(&unk, unk0, size);
   for (i = 0; i < 20; i++) {
-    sub_8091E00(&unk, (u8*)&gTeamInventory_203B460->teamItems[i]);
+    RestoreItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
   }
   for (i = 0; i < 240; i++) {
-    sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamStorage[i], 10);
+    RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
-    sub_8091DC0(&unk, (u8*)&gTeamInventory_203B460->unk230[i]);
+    RestoreHeldItem(&unk, &gTeamInventory_203B460->unk230[i]);
   }
   for (i = 0; i < 4; i++) {
-    sub_8091DC0(&unk, (u8*)&gTeamInventory_203B460->unk250[i]);
+    RestoreHeldItem(&unk, &gTeamInventory_203B460->unk250[i]);
   }
-  sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamMoney, 24);
-  sub_8094924(&unk, (u8*)&gTeamInventory_203B460->teamSavings, 24);
+  RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
+  RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
   nullsub_102(&unk);
   return unk.unk8;
 }
 
-void sub_8091DC0(struct unkStruct_8094924 *a1, u8 *a2)
+void RestoreHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item)
 {
-  sub_8094924(a1, a2, 8);
-  sub_8094924(a1, a2 + 1, 7);
+  RestoreIntegerBits(a1, &item->itemIndex, 8);
+  RestoreIntegerBits(a1, &item->numItems, 7);
 }
 
-void sub_8091DE0(struct unkStruct_8094924 *a1, u8 *a2) 
+void SaveHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item) 
 {
-  sub_809488C(a1, a2, 8);
-  sub_809488C(a1, a2 + 1, 7);
+  SaveIntegerBits(a1, &item->itemIndex, 8);
+  SaveIntegerBits(a1, &item->numItems, 7);
 }
 
-void sub_8091E00(struct unkStruct_8094924 *a1, u8 *a2)
+void RestoreItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot)
 {
-  sub_8094924(a1, a2, 8);
-  sub_8094924(a1, a2 + 1, 7);
-  sub_8094924(a1, a2 + 2, 8);
+  RestoreIntegerBits(a1, &slot->unk0, 8);
+  RestoreIntegerBits(a1, &slot->numItems, 7);
+  RestoreIntegerBits(a1, &slot->itemIndex, 8);
 }
 
-void sub_8091E28(struct unkStruct_8094924 *a1, u8 *a2) 
+void SaveItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot) 
 {
-  sub_809488C(a1, a2, 8);
-  sub_809488C(a1, a2 + 1, 7);
-  sub_809488C(a1, a2 + 2, 8);
+  SaveIntegerBits(a1, &slot->unk0, 8);
+  SaveIntegerBits(a1, &slot->numItems, 7);
+  SaveIntegerBits(a1, &slot->itemIndex, 8);
 }
 
 u32 sub_8091E50(u8 index) 
@@ -1465,6 +1465,7 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3)
 "\tbx r1\n");
 #endif
 }
+
 void ClearAllItems_8091FB4() {
   s32 i;
 

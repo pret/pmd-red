@@ -45,3 +45,64 @@ void InitializeRecruitedPokemon(void)
     gRecruitedPokemonRef->team[iVar3].unk0 = 0;
   }
 }
+
+// void sub_808CE74(s32 _species, u8 a2, u8* a3)  
+// {
+//     struct PokemonStruct pokemon;
+//     u8 name_buffer[20];
+//     u8 friend_area;
+//     s32 i;
+//     register s16 species asm("r7") = (s16)_species;
+//     s32 cond = a2 << 24;
+
+//     pokemon.unk0 = 3;
+//     if (cond) {
+//         pokemon.unk2 = 1;
+//         pokemon.unk4.unk4 = 64;
+//     }
+//     else {
+//         pokemon.unk2 = 1;
+//         pokemon.unk4.unk4 = 65;
+//     }
+//     pokemon.unkHasNextStage = 1;
+//     pokemon.pokeHP = GetBaseHP(species);
+//     pokemon.offense.att[0] = GetPokemonAttSpatt(species, 0);
+//     pokemon.offense.att[1] = GetPokemonAttSpatt(species, 1);
+//     pokemon.offense.def[0] = GetPokemonDefSpdef(species, 0);
+//     pokemon.offense.def[1] = GetPokemonDefSpdef(species, 1);
+//     pokemon.IQ = 1;
+//     pokemon.unkC[0].unk0 = 0;
+//     pokemon.unkC[1].unk0 = 0;
+//     sub_808EC94((u8*)&pokemon.unk20, 0);
+//     pokemon.speciesNum = species;
+//     pokemon.heldItem.itemIndex = 0;
+//     pokemon.heldItem.numItems = 0;
+//     pokemon.unk1C = 0;
+//     pokemon.unk24 = 0;
+//     pokemon.unk4.unk5 = 0;
+//     sub_808E490(pokemon.unk2C, species);
+
+//     // mostly incorrect below this:
+//     if (!a3) {
+//         CopySpeciesNametoBuffer(name_buffer, species);
+//         BoundedCopyStringtoBuffer(pokemon.name, name_buffer, 10);
+//     }
+//     else {
+//         s32 j;
+//         for (j = 0; j < 10; j++) {
+//             pokemon.name[j] = a3[j];
+//         }
+//     }
+//     friend_area = gMonsterParameters[species].friend_area;
+//     for (i = 0; i < 413; i++) {
+//         if (!((u8)gRecruitedPokemonRef->pokemon[i].unk0 & 1)) {
+//             u8 species_friend_area = sub_80923D4(i);
+//             if (species_friend_area == friend_area) {
+//                 gRecruitedPokemonRef->pokemon[i] = pokemon;
+//                 gFriendAreas[species_friend_area] = 1;
+//                 sub_80980B4(species);
+//                 break;
+//             }
+//         }
+//     }  
+// }
