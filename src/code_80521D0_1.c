@@ -294,7 +294,7 @@ void sub_808BDEC(void)
     gUnknown_203B418->unk7 = 1;
     sub_8085918(uVar3,0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LUGIA);
 }
 
@@ -432,7 +432,7 @@ void sub_808C10C(void)
     gUnknown_203B418->unk7 = 1;
     sub_8085918(uVar2,0);
   }
-  sub_8085860(iVar1->unk4,iVar1->unk6);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + -0x1000);
@@ -550,7 +550,7 @@ void sub_808C3A0(void)
     gUnknown_203B418->unk7 = 1;
     sub_808563C(sub_808C5A0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_DEOXYS_NORMAL);
 }
 
@@ -650,7 +650,7 @@ void sub_808C5C0(void)
   sub_80854D4();
   sub_8085930(4);
   sub_8085918(uVar2,0);
-  sub_8085860(iVar1->unk4,iVar1->unk6);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + 0xfffff000);
@@ -1076,11 +1076,11 @@ void sub_808C8E0(struct unkDungeon_8041D5C *param_1)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(param_1, 0, 0);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    param_1->unk70->unk174 = iVar1 << 8;
+    param_1->unk70->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    param_1->unk70->unk174 = iVar1 << 8;
+    param_1->unk70->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   sub_8086A3C(param_1);
@@ -1138,7 +1138,7 @@ void sub_808C9C4(void)
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
     sub_8085918(temp_2, 0);
-    sub_8085860(temp->unk4, temp->unk6 - 3);
+    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
@@ -1206,7 +1206,7 @@ void sub_808CB5C(void)
     sub_80854D4();
     sub_8085930(4);
     sub_8068FE0(temp_2, 0x21C, 0);
-    sub_8085860(temp->unk4, temp->unk6);
+    sub_8085860(temp->posWorldX, temp->posWorldY);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
@@ -1226,7 +1226,7 @@ void sub_808CBB0(void)
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
     sub_8085918(temp_2, 0);
-    sub_8085860(temp->unk4, temp->unk6 - 3);
+    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 
@@ -1298,7 +1298,7 @@ void sub_808CD44(void)
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
     sub_8068FE0(temp_2, 0x21C, 0);
-    sub_8085860(temp->unk4, temp->unk6 - 3);
+    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 

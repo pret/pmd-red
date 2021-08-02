@@ -484,7 +484,7 @@ void sub_80877E8(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4 + -3,iVar1->unk6 + -2);
+  sub_8085860(iVar1->posWorldX + -3,iVar1->posWorldY + -2);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MOLTRES);
 }
 
@@ -510,7 +510,7 @@ void sub_8087848(void)
     sub_8085918(uVar3,0);
     sub_8086A3C(uVar3);
   }
-  sub_8085860(iVar2->unk4 - 5, iVar2->unk6);
+  sub_8085860(iVar2->posWorldX - 5, iVar2->posWorldY);
   uVar4 = sub_803F994();
   iVar3 = sub_803F9B0();
   sub_803F878(uVar4,iVar3 + -0x1000);
@@ -689,7 +689,7 @@ void sub_8087D30(struct unkDungeon_8041D5C * param_1)
   iVar1 = 200;
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    param_1->unk70->unk174 = iVar1 << 8;
+    param_1->unk70->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
 }
@@ -896,7 +896,7 @@ void sub_8087F54(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar3, 0);
   sub_8086A3C(uVar3);
-  sub_8085860(iVar2->unk4,iVar2->unk6 + -3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ARTICUNO);
 }
 
@@ -933,7 +933,7 @@ void sub_8087FF8(void)
     sub_8085918(uVar3,0);
     sub_8086A3C(uVar3);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 + -3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ARTICUNO);
 }
 
@@ -1155,7 +1155,7 @@ void sub_80885C4(void)
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
 }
 
 void sub_8088608(void)
@@ -1191,7 +1191,7 @@ void sub_808862C(void)
   sub_80861D4(uVar2,0xd,4);
   sub_8085918(uVar3,0);
   sub_8086A3C(uVar3);
-  sub_8085860(iVar1->unk4,iVar1->unk6 -3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1216,7 +1216,7 @@ void sub_80886C4(void)
   sub_8068FE0(uVar2,0x21c,0);
   sub_8085918(uVar3,0);
   sub_8086A3C(uVar3);
-  sub_8085860(iVar1->unk4,iVar1->unk6);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
   uVar4 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar4,iVar2 + -0x1000);
@@ -1246,7 +1246,7 @@ void sub_808875C(void)
     sub_8085918(uVar4,0);
     sub_80861D4(uVar4,0xf,0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1425,7 +1425,7 @@ void sub_8088C08(struct unkDungeon_8041D5C * param_1)
     }
     sub_803E46C(0x46);
   }
-  sub_80856C8(param_1,param_1->unk4,param_1->unk6 + 1);
+  sub_80856C8(param_1,param_1->posWorldX,param_1->posWorldY + 1);
   sub_80861D4(param_1,0xf,0);
   sub_803E708(10,0x46);
   sub_808682C();
@@ -1507,7 +1507,7 @@ void sub_8088DC0(void)
   sub_806CDD4(uVar2,0xe,0);
   sub_8086A3C(uVar3);
   sub_806CDD4(uVar3,0xe,0);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1528,7 +1528,7 @@ void sub_8088E5C(void)
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(uVar2,0x21c,0);
   sub_8068FE0(uVar3,0x21c,0);
-  sub_8085860(iVar1->unk4,iVar1->unk6 + -3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1772,7 +1772,7 @@ void sub_80892C8(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
 }
 
@@ -1794,7 +1794,7 @@ void sub_8089328(void)
     sub_8072008(uVar3,uVar3,gUnknown_80F57CA,0,0);
     sub_8086A3C(uVar3);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
 }
 
@@ -1957,7 +1957,7 @@ void sub_808970C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8089908);
-  sub_8085860(iVar1->unk4,iVar1->unk6 + -3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY + -3);
 }
 
 void sub_808974C(void)
@@ -1969,7 +1969,7 @@ void sub_808974C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_80898F8);
-  sub_8085860(iVar1->unk4,iVar1->unk6 + -3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY + -3);
 }
 
 void sub_8089788(struct unkDungeon_8041D5C *param_1, u8 param_2, s32 param_3)
@@ -2081,7 +2081,7 @@ void sub_8089914(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
 }
 
@@ -2105,7 +2105,7 @@ void sub_8089978(void)
     sub_8085918(uVar3,0);
     sub_8086A3C(uVar3);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
 }
 
@@ -2230,7 +2230,7 @@ void sub_8089C44(void)
   sub_80854D4();
   sub_8085930(4);
   sub_8085918(uVar3, 0);
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
 }
 
@@ -2251,7 +2251,7 @@ void sub_8089C90(void)
   else {
       sub_8085918(uVar3,0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
 }
 
@@ -2361,7 +2361,7 @@ void sub_8089EFC(void)
   sub_80854D4();
   sub_8085930(4);
   sub_8085918(uVar3, 0);
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2377,7 +2377,7 @@ void sub_8089F44(void)
   sub_80854D4();
   sub_8085930(4);
   sub_8085918(uVar3, 0);
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2398,7 +2398,7 @@ void sub_8089F8C(void)
   else {
       sub_8085918(uVar3,0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2519,7 +2519,7 @@ void sub_808A264(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2534,7 +2534,7 @@ void sub_808A2C0(void)
   sub_80854D4();
   sub_8085930(4);
   sub_8085918(uVar2,0);
-  sub_8085860(iVar1->unk4,iVar1->unk6);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2554,7 +2554,7 @@ void sub_808A308(void)
   else {
      sub_8085918(uVar3,0);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2695,7 +2695,7 @@ void sub_808A608(void)
   sub_8085930(4);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4,iVar1->unk6 + -6);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY + -6);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_HO_OH);
 }
 
@@ -2718,7 +2718,7 @@ void sub_808A668(void)
     sub_8085918(uVar3,0);
     sub_8086A3C(uVar3);
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 6);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 6);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_HO_OH);
 }
 
@@ -2872,7 +2872,7 @@ void sub_808A9E4(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,4);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 4);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 4);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -2888,7 +2888,7 @@ void sub_808AA3C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,4);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -2904,7 +2904,7 @@ void sub_808AA94(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(uVar2,0x21c,0);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -3399,7 +3399,7 @@ void sub_808B2F4(void)
   sub_80855E4(sub_8086A3C);
   sub_8085918(uVar2,0);
   sub_8086A3C(uVar2);
-  sub_8085860(iVar1->unk4,iVar1->unk6 - 3);
+  sub_8085860(iVar1->posWorldX,iVar1->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_JIRACHI);
 }
 
@@ -3424,7 +3424,7 @@ void sub_808B35C(void)
     sub_8049ED4();
 
   }
-  sub_8085860(iVar2->unk4,iVar2->unk6 - 3);
+  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_JIRACHI);
 }
 

@@ -1,8 +1,28 @@
+.macro warpLocation id:req
+    .byte 0x01
+    .byte 0x00
+    .2byte \id
+    .4byte 0x00, 0x00, 0x00
+.endm
+
 .macro warpDungeon id:req
     .byte 0x02
     .byte 0x00
     .2byte \id
     .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro warpFriendArea time:req
+    .byte 0x02
+    .byte 0x00
+    .2byte \time
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro ConfirmDungeonRules
+    .byte 0x05
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
 .endm
 
 .macro changeTileset id:req
@@ -24,6 +44,13 @@
     .byte 0x0D
     .byte \id
     .byte 0xFF, 0xFF
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro triggerCutscene id:req
+    .byte 0x1B
+    .byte 0x00
+    .2byte \id
     .4byte 0x00, 0x00, 0x00
 .endm
 
@@ -84,38 +111,69 @@
     .byte 0x00, 0x00, 0x00
 .endm
 
-.macro scrollTextBox textPtr:req character:req
+.macro scrollTextBox character:req textPtr:req
     .byte 0x33, 0x00
     .2byte \character
     .4byte 0x00, 0x00
     .4byte \textPtr
 .endm
 
-.macro PicNameTextBox textPtr:req character:req
+.macro PicNameTextBox character:req textPtr:req
     .byte 0x34, 0x00
     .2byte \character
     .4byte 0x00, 0x00
     .4byte \textPtr
 .endm
 
-.macro floatingText textPtr:req arg1:req
-    .byte 0x37, 0x00
-    .2byte \arg1
+.macro quickCloseTextBox character:req textPtr:req
+    .byte 0x36, 0x00
+    .2byte \character
     .4byte 0x00, 0x00
     .4byte \textPtr
 .endm
 
-.macro fadeFloatingText textPtr:req time:req
+@ Is it always 0xff, 0xff?
+.macro floatingText textPtr:req
+    .byte 0x37, 0x00
+    .byte 0xff, 0xff
+    .4byte 0x00, 0x00
+    .4byte \textPtr
+.endm
+
+.macro fadeFloatingText time:req textPtr:req
     .byte 0x39, 0x00
     .2byte \time
     .4byte 0x00, 0x00
     .4byte \textPtr
 .endm
 
+.macro YesNoTextBox eventID:req character:req textPtr:req
+    .byte 0x3A, 0x00
+    .2byte \eventID
+    .2byte \character
+    .2byte 0x00
+    .4byte 0x00
+    .4byte \textPtr
+.endm
+
+.macro showName arg0:req
+    .byte 0x3B
+    .byte \arg0
+    .2byte 0x00
+    .4byte 0x00, 0x00, 0x00
+.endm
+
+@ TODO: 0x3C has a lot of different cases...
+
 .macro renamePoke id:req
     .byte 0x3D, 0x00, 0x00, 0x00
     .byte \id, 0x00, 0x00, 0x00
     .4byte 0x00, 0x00
+.endm
+
+.macro renameTeam
+    .byte 0x3D, 0x00, 0x00, 0x00
+    .4byte 0x00, 0x00, 0x00
 .endm
 
 .macro abruptStopMusic
@@ -202,18 +260,28 @@
     .byte 0x00, 0x00, 0x00
 .endm
 
+.macro changeSpriteZ speed:req targetHeight:req
+    .byte 0x70, 0x00
+    .byte \speed
+    .3byte \targetHeight
+    .4byte 0x00, 0x00
+    .2byte 0x00
+.endm
+
 @ Rotation Directions
-.set CW, 0x01
-
-.set CCW, 0x02
-
-.set shortestDir, 0x0A
+.set CW, 1
+.set CCW, 2
+.set shortestDir, 0xA
 
 @ Cardinal Directions / Facing Directions
-.set south, 0x0
-.set east,  0x2
-.set north, 0x4
-.set west,  0x6
+.set south,      0
+.set southeast,  1
+.set east,       2
+.set northeast,  3
+.set north,      4
+.set northwest,  5
+.set west,       6
+.set southwest,  7
 
 .macro setFaceDir delay:req faceDir:req
     .byte 0x8B
@@ -313,6 +381,12 @@
     .byte 0x00
     .2byte \arg0
     .4byte 0x00, 0x00, 0x00
+.endm
+
+.macro endFuncContinueScript
+    .byte 0xEE
+    .4byte 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00
 .endm
 
 .macro endFuncandScript
