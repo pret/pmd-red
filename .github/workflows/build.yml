@@ -5,6 +5,11 @@ on:
     branches: [ master ]
   pull_request:
 
+env:
+  CALCROM_DISCORD_WEBHOOK_USERNAME: ${{ secrets.CALCROM_DISCORD_WEBHOOK_USERNAME }}
+  CALCROM_DISCORD_WEBHOOK_AVATAR_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_AVATAR_URL }}
+  CALCROM_DISCORD_WEBHOOK_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,8 +43,7 @@ jobs:
       - name: Run OK webhook
         shell: bash
         if: ${{ github.event_name == 'push' }}
-        env:
-          CALCROM_DISCORD_WEBHOOK_USERNAME: ${{ secrets.CALCROM_DISCORD_WEBHOOK_USERNAME }}
-          CALCROM_DISCORD_WEBHOOK_AVATAR_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_AVATAR_URL }}
-          CALCROM_DISCORD_WEBHOOK_URL:  ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
-        run: sh .github/calcrom/webhook.sh pmd_red
+        run: |
+          sudo chmod 755 $GITHUB_WORKSPACE/.github/calcrom/webhook.sh
+          $GITHUB_WORKSPACE/.github/calcrom/webhook.sh pmd_red "$CALCROM_DISCORD_WEBHOOK_URL"
+        continue-on-error: true
