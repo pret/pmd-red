@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_LAYOUT_GENERATION_H
 #define GUARD_CONSTANTS_LAYOUT_GENERATION_H
 
+// TODO not sure what 0 is as some floors do use this generator and don't fall back to monster house
 #define LAYOUT_NONE                                 0
 #define LAYOUT_STANDARD_HALF_WIDTH                  1
 #define LAYOUT_ONE_ROOM_MONSTER_HOUSE               2

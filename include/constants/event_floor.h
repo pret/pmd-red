@@ -3,5 +3,7 @@
 
 #define EVENT_FLOOR_NONE                0
 #define EVENT_FLOOR_MT_STEEL            1
+#define EVENT_FLOOR_MT_THUNDER          3
+#define EVENT_FLOOR_SKY_TOWER           8
 
 #endif //GUARD_CONSTANTS_EVENT_FLOOR_H
