@@ -47,21 +47,21 @@ const struct MenuItem gDebugMenuItems[8] =
     {NULL, 10},
 };
 
-ALIGNED(4) const char h_open_string[] = _("h-open");
-ALIGNED(4) const char storage_string[] = _("Storage");
-ALIGNED(4) const char debug_menu_string[] = _("Debug Menu");
-ALIGNED(4) const char field_script_string[] = _("Field Script");
-ALIGNED(4) const char field_map_string[] = _("Field Map");
-ALIGNED(4) const char field_string[] = _("Field");
-ALIGNED(4) const char dungeons_string[] = _("Dungeons");
+ALIGNED(4) const char h_open_string[] = "h-open";
+ALIGNED(4) const char storage_string[] = "Storage";
+ALIGNED(4) const char debug_menu_string[] = "Debug Menu";
+ALIGNED(4) const char field_script_string[] = "Field Script";
+ALIGNED(4) const char field_map_string[] = "Field Map";
+ALIGNED(4) const char field_string[] = "Field";
+ALIGNED(4) const char dungeons_string[] = "Dungeons";
 
-ALIGNED(4) const char debug_menu_fill0[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill1[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill2[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill3[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill4[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill5[] = _("pksdir0");
-ALIGNED(4) const char debug_menu_fill6[] = _("pksdir0");
+ALIGNED(4) const char debug_menu_fill0[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill1[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill2[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill3[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill4[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill5[] = "pksdir0";
+ALIGNED(4) const char debug_menu_fill6[] = "pksdir0";
 
 
 extern void ResetUnusedInputStruct(void);

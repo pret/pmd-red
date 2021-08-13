@@ -300,7 +300,6 @@ SECTIONS {
         data/data.o(.rodata);
         src/file_system.o(.rodata);
         data/data_80B9BB8.o(.rodata);
-        data/debug.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);
@@ -323,6 +322,8 @@ SECTIONS {
         src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
+        data/cutscenes.o(.rodata);
+        data/cutscenes_1.o(.rodata);
         src/m4a_tables.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);

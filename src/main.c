@@ -9,7 +9,7 @@ extern char ewram_start[];
 typedef void (*IntrCallback)(void);
 
 EWRAM_DATA u8 IntrMain_Buffer[0x120];
-EWRAM_DATA u32 gIntrTable[6];
+EWRAM_DATA IntrCallback gIntrTable[6];
 EWRAM_DATA IntrCallback gIntrCallbacks[6];
 extern u16 gBldCnt;
 extern u8 gUnknown_202D7FE;
@@ -31,7 +31,7 @@ extern char unk_code_ram[];
 extern char unk_code_ram_end[];
 
 extern u8 gUnknown_80B9BF1[];
-extern u32 gUnknown_80B9C00;
+extern IntrCallback gInitialIntrTable[6];
 
 extern char gUnknown_8270000[];
 
@@ -58,8 +58,8 @@ extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
 
 bool8 EnableInterrupts(void);
-void InitIntrTable(const u32 *interrupt_table);
-void *SetInterruptCallback(u32 index, void * new_callback);
+void InitIntrTable(const IntrCallback *interrupt_table);
+IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);
 
 
 void AgbMain(void)
@@ -121,7 +121,7 @@ void AgbMain(void)
     LoadCharmaps();
     sub_80098A0();
     InitGraphics();
-    SetInterruptCallback(1, VBlank_CB);
+    SetInterruptCallback(1, (IntrCallback)VBlank_CB);
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576
     GameLoop();
     Hang();
@@ -143,7 +143,7 @@ void sub_800B540(void)
 
     *(u8*)&REG_DISPCNT |= DISPCNT_FORCED_BLANK; 
 
-    InitIntrTable(&gUnknown_80B9C00); // set up intrrupt vector/table
+    InitIntrTable(gInitialIntrTable); // set up intrrupt vector/table
 
     REG_TM3CNT = (TIMER_64CLK | TIMER_INTR_ENABLE | TIMER_ENABLE) << 16; 
 
@@ -225,21 +225,21 @@ void AckInterrupt(u16 flag)
     REG_IME = 1;
 }
 
-void InitIntrTable(const u32 *interrupt_table)
+void InitIntrTable(const IntrCallback *interrupt_table)
 {
     CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4f00 is 32 bits)
     CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
     INTR_VECTOR = IntrMain_Buffer;
 }
 
-u32 *GetInterruptCallback(u32 index)
+IntrCallback *GetInterruptHandler(u32 index)
 {
     return &gIntrTable[index];
 }
 
-void *SetInterruptCallback(u32 index, void * new_callback)
+IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
 {
-    void *old_callback;
+    IntrCallback old_callback;
     u32 interrupt_var;
 
     interrupt_var = DisableInterrupts();

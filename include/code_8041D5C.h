@@ -33,14 +33,15 @@ struct subStruct_8048524
 struct unkDungeon_8041D5C
 {
     u8 fill0[4];
-    s16 unk4;
-    s16 unk6;
-    u32 unk8;
-    s32 unkC;
-    s32 unk10;
-    u8 fill14[0x20 - 0x14];
-    u8 unk20;
-    u8 unk21[0x70 - 0x21];
+    /* 0x4 */ s16 posWorldX;
+    /* 0x6 */ s16 posWorldY;
+    /* 0x8 */ s16 prevPosWorldX;
+    /* 0xA */ s16 prevPosWorldY;
+    /* 0xC */ s32 unkC;
+    /* 0x10 */ s32 unk10;
+    /* 0x14 */ u8 fill14[0x20 - 0x14];
+    /* 0x20 */ u8 unk20;
+    /* 0x21 */ u8 unk21[0x70 - 0x21];
     struct subStruct_8048524 *unk70;
 };
 

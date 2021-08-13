@@ -31,7 +31,7 @@ extern s32 sub_80144A4(s32 *);
 extern void sub_80151C0(u32, u8 *);
 extern void CreateConfirmNameMenu(void);
 extern void sub_80160F4(u32);
-bool8 sub_80162B8(void);
+bool8 IsNameEmpty(void);
 extern u32 sub_80154F0(void);
 extern void sub_80155F0(void);
 extern void sub_80922B4(u8 *, u8 *, s32);
@@ -171,10 +171,10 @@ void sub_8016110(void)
     case 1:
         CreateConfirmNameMenu();
         if (gUnknown_203B200->unk4 == 1) {
-            sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName,10);
+            sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
         }
         else {
-            sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName,10);
+            sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
         }
         // Is the name #C5$m0#R OK?
         sub_8014248(&gUnknown_80DB688,0,3,gUnknown_203B200->menus,0,4,0,0,0x20);
@@ -210,11 +210,11 @@ void sub_80161F8(void)
   
   if (sub_80154F0() == 3) {
     sub_80155F0();
-    if (sub_80162B8()) {
+    if (IsNameEmpty()) {
         sub_80160F4(3);
     }
     else{
-      iVar2 = sub_8015FEC(gUnknown_203B200->pokeName,10);
+      iVar2 = sub_8015FEC(gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
       maxLength = sub_8016028(); // returns 60
       if (iVar2 > maxLength) {
         sub_80160F4(2);
@@ -265,19 +265,19 @@ void sub_801629C(void)
   }
 }
 
-bool8 sub_80162B8(void)
+bool8 IsNameEmpty(void)
 {
   u8 character;
   s32 index;
   s32 max;
 
-  max = 10; // constant needed at top of loop to match
+  max =  POKEMON_NAME_LENGTH; // constant needed at top of loop to match
   index = 0;
   do {
     character = gUnknown_203B200->pokeName[index];
     if (character == '\0') break;
-    if (character != ' ') return 0;
+    if (character != ' ') return FALSE;
     index++;
   } while (index < max);
-  return 1;
+  return TRUE;
 }

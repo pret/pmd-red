@@ -16,8 +16,8 @@ struct WonderMail
     /* 0x4 */ u8 dungeon; // dungeon
     /* 0x5 */ u8 floor; // floor
     /* 0x8 */ u32 unk8;
-    /* 0xC */ s16 clientPoke; // client pokemon
-    /* 0xE */ s16 targetPoke; // target
+    /* 0xC */ s16 clientSpecies; // client pokemon
+    /* 0xE */ s16 targetSpecies; // target
     /* 0x10 */ u8 targetItem; // item to find/deliver
     /* 0x11 */ u8 rewardType; // reward type
     /* 0x12 */ u8 itemReward; // item reward

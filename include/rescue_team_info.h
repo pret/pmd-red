@@ -1,8 +1,6 @@
 #ifndef GUARD_RESCUE_TEAM_INFO_H
 #define GUARD_RESCUE_TEAM_INFO_H
 
-#define TEAM_NAME_LENGTH 10
-
 enum TeamRanks
 {
     NORMAL_RANK,

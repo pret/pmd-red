@@ -539,8 +539,8 @@ sub_808F83C:
 	bx lr
 	thumb_func_end sub_808F83C
 
-	thumb_func_start sub_808F844
-sub_808F844:
+	thumb_func_start CreatePokemonInfoTabScreen
+CreatePokemonInfoTabScreen:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -701,8 +701,8 @@ _0808F964:
 	.align 2, 0
 _0808F998: .4byte gUnknown_8107754
 _0808F99C: .4byte gUnknown_202DE30
-_0808F9A0: .4byte gUnknown_810DD80
-_0808F9A4: .4byte gUnknown_810DD9C
+_0808F9A0: .4byte gLevel810DD6C_Ptr
+_0808F9A4: .4byte gExpPts810DD9C_Ptr
 _0808F9A8: .4byte gUnknown_810DDB8
 _0808F9AC: .4byte gUnknown_810DDD0
 _0808F9B0: .4byte gUnknown_810DDE4
@@ -1092,7 +1092,7 @@ _0808FCE4:
 	mov r8, r4
 	b _0808FD84
 	.align 2, 0
-_0808FCF8: .4byte gUnknown_810DD68
+_0808FCF8: .4byte gIQSkill810DD68_Ptr
 _0808FCFC:
 	mov r5, sp
 	adds r5, r7
@@ -1337,7 +1337,7 @@ _0808FF10: .4byte gUnknown_810DEF4
 _0808FF14: .4byte gUnknown_810E02C
 _0808FF18: .4byte gUnknown_810DF98
 _0808FF1C: .4byte gEvolutionStrings
-	thumb_func_end sub_808F844
+	thumb_func_end CreatePokemonInfoTabScreen
 
 	thumb_func_start sub_808FF20
 sub_808FF20:

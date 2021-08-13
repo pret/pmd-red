@@ -9,7 +9,7 @@ gUnknown_80DCAB8:: @ 80DCAB8
 	.string "#+Do ye seek evolution?\0"
 	.align 2, 0
 
-gUnknown_80DCAD0:: @ 80DCAD0
+gLuminousCaveEvolutionInfo:: @ 80DCAD0
 	.string "#+There are those among Pokémon\n"
 	.string "#+that can evolve.#P"
 	.string "#+Such Pokémon can evolve at this very\n"
@@ -36,11 +36,11 @@ gUnknown_80DCD5C:: @ 80DCD5C
 	.string "#+is what ye seek...\0"
 	.align 2, 0
 
-gUnknown_80DCD90:: @ 80DCD90
+gLuminousCaveGiveItem:: @ 80DCD90
 	.string "#+Will ye give an item for evolution?\0"
 	.align 2, 0
 
-gUnknown_80DCDB8:: @ 80DCDB8
+gLuminousCaveGiveAnotherItem:: @ 80DCDB8
 	.string "#+Will ye give yet another item?\0"
 	.align 2, 0
 
@@ -75,7 +75,7 @@ gUnknown_80DCEDC:: @ 80DCEDC
 	.string "#+Come alone if ye wish to evolve.\0"
 	.align 2, 0
 
-gUnknown_80DCF44:: @ 80DCF44
+gLuminousCaveLackLevel:: @ 80DCF44
 	.string "#+...#P"
 	.string "#+Ye cannot evolve yet.#P"
 	.string "#+Ye have not high enough a level.\0"
@@ -86,26 +86,26 @@ gUnknown_80DCF88:: @ 80DCF88
 	.string "#+Ye cannot evolve anymore.\0"
 	.align 2, 0
 
-gUnknown_80DCFAC:: @ 80DCFAC
+gLuminousCaveLackFriendArea:: @ 80DCFAC
 	.string "#+...#P"
 	.string "#+Ye cannot evolve yet.#P"
 	.string "#+Ye need your Friend Area to evolve.\0"
 	.align 2, 0
 
-gUnknown_80DCFF4:: @ 80DCFF4
+gLuminousCaveLackRoom:: @ 80DCFF4
 	.string "#+...#P"
 	.string "#+Ye cannot evolve yet.#P"
 	.string "#+The Friend Area to which ye shall go\n"
 	.string "#+has no room for ye.\0"
 	.align 2, 0
 
-gUnknown_80DD054:: @ 80DD054
+gLuminousCaveLackIQ:: @ 80DD054
 	.string "#+...#P"
 	.string "#+Ye cannot evolve yet.#P"
 	.string "#+Ye seem to lack the IQ to evolve.\0"
 	.align 2, 0
 
-gUnknown_80DD098:: @ 80DD098
+gLuminousCaveLackItem:: @ 80DD098
 	.string "#+#+...#P"
 	.string "#+Ye cannot evolve yet.#P"
 	.string "#+Ye seem to lack an item to evolve.\0"
@@ -116,7 +116,7 @@ gUnknown_80DD0E0:: @ 80DD0E0
 	.string "#+Ye cannot evolve yet. \0"
 	.align 2, 0
 
-gUnknown_80DD104:: @ 80DD104
+gLuminousCaveGiveName:: @ 80DD104
 	.string "#+Ye must give a name to\n"
 	.string "#+the evolved Pokémon. \0"
 	.align 2, 0

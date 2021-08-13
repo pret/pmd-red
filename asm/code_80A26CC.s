@@ -4526,7 +4526,7 @@ sub_80A4A7C:
 	bl sub_809D600
 	movs r0, 0
 	bl sub_80A5E8C
-	bl sub_80A4AEC
+	bl GroundMap_Reset
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -4540,7 +4540,7 @@ _080A4AC0: .4byte gUnknown_811736C
 	thumb_func_start sub_80A4AC4
 sub_80A4AC4:
 	push {r4,lr}
-	bl sub_80A4AEC
+	bl GroundMap_Reset
 	bl sub_80A5EBC
 	ldr r4, _080A4AE8
 	ldr r0, [r4]
@@ -4556,8 +4556,8 @@ sub_80A4AC4:
 _080A4AE8: .4byte gUnknown_3001B6C
 	thumb_func_end sub_80A4AC4
 
-	thumb_func_start sub_80A4AEC
-sub_80A4AEC:
+	thumb_func_start GroundMap_Reset
+GroundMap_Reset:
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0x37
@@ -4588,7 +4588,7 @@ _080A4B1E:
 _080A4B2C: .4byte gUnknown_3001B6C
 _080A4B30: .4byte gUnknown_8117538
 _080A4B34: .4byte gUnknown_3001B70
-	thumb_func_end sub_80A4AEC
+	thumb_func_end GroundMap_Reset
 
 	thumb_func_start sub_80A4B38
 sub_80A4B38:

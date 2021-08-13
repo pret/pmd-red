@@ -20163,7 +20163,7 @@ _08061B18:
 	str r2, [sp]
 	ldr r2, [sp, 0x12C]
 	add r3, sp, 0x80
-	bl sub_808F844
+	bl CreatePokemonInfoTabScreen
 	add r0, sp, 0x114
 	ldrh r0, [r0]
 	strh r0, [r7, 0x1E]
@@ -32810,7 +32810,7 @@ _080680C4:
 	adds r1, r7, 0
 	add r2, sp, 0x4
 	mov r3, r10
-	bl sub_808F844
+	bl CreatePokemonInfoTabScreen
 	ldr r1, _080681C8
 	movs r2, 0
 	ldrsh r0, [r1, r2]

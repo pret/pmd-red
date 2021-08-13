@@ -55,7 +55,7 @@ extern struct UnkSaveStruct1 *gUnknown_203B46C;
 extern const char gStarterReveal[];
 extern const char gGenderText[];
 extern u32 gGenderMenu;
-extern const char gUnknown_80F42C0;
+extern const char gPartnerSelectionHeaderText;
 
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern u8 gAvailablePokemonNames[0x50];
@@ -710,7 +710,7 @@ void RedrawPartnerSelectionMenu(void)
   sub_800641C(gUnknown_203B404->unk54,1,1);
   sub_8008C54(gUnknown_203B404->unk4C);
   sub_80073B8(gUnknown_203B404->unk4C);
-  xxx_call_draw_string(0xc, 0, &gUnknown_80F42C0, gUnknown_203B404->unk4C, 0);
+  xxx_call_draw_string(0xc, 0, &gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);
 
   monCounter = 0;
   while (monCounter < gUnknown_203B404->unk32) {
@@ -778,7 +778,7 @@ void RedrawPartnerSelectionMenu(void)
 	"\tb _0803CF98\n"
 	"\t.align 2, 0\n"
 "_0803CF60: .4byte gUnknown_203B404\n"
-"_0803CF64: .4byte gUnknown_80F42C0\n"
+"_0803CF64: .4byte gPartnerSelectionHeaderText\n"
 "_0803CF68:\n"
 	"\tldr r0, [r6]\n"
 	"\tadds r0, 0x18\n"

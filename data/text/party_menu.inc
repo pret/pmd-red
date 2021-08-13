@@ -57,47 +57,47 @@ gUnknown_80DD63C:: @ 80DD63C
 	.string "#+sent to storage.\0"
 	.align 2, 0
 
-gUnknown_80DD664:: @ 80DD664
+gPartyMenuStandBy:: @ 80DD664
 	.string "Stand By\0"
 	.align 2, 0
 
-gUnknown_80DD670:: @ 80DD670
+gPartyMenuMakeLeader:: @ 80DD670
 	.string "Make Leader\0"
 	.align 2,0
 
-gUnknown_80DD67C:: @ 80DD67C
+gPartyMenuJoinTeam:: @ 80DD67C
 	.string "Join Team\0"
 	.align 2, 0
 
-gUnknown_80DD688:: @ 80DD688
+gPartyMenuGiveGummi:: @ 80DD688
 	.string "Give Gummi\0"
 	.align 2, 0
 
-gUnknown_80DD694:: @ 80DD694
+gPartyMenuGive:: @ 80DD694
 	.string "Give\0"
 	.align 2, 0
 
-gUnknown_80DD69C:: @ 80DD69C
+gPartyMenuTake:: @ 80DD69C
 	.string "Take\0"
 	.align 2, 0
 
-gUnknown_80DD6A4:: @ 80DD6A4
+gPartyMenuSayFarewell:: @ 80DD6A4
 	.string "Say Farewell\0"
 	.align 2, 0
 
-gUnknown_80DD6B4:: @ 80DD6B4
+gPartyMenuSummary:: @ 80DD6B4
 	.string "Summary\0"
 	.align 2, 0
 
-gUnknown_80DD6BC:: @ 80DD6BC
+gPartyMenuMoves:: @ 80DD6BC
 	.string "Moves\0"
 	.align 2, 0
 
-gUnknown_80DD6C4:: @ 80DD6C4
+gPartyMenuCheckIQ:: @ 80DD6C4
 	.string "Check IQ\0"
 	.align 2, 0
 
-gUnknown_80DD6D0:: @ 80DD6D0
+gPartyMenuItemPlaceholder:: @ 80DD6D0
 	.string "Item: #C4$i0#R \0"
 	.align 2, 0
 

@@ -11096,7 +11096,7 @@ sub_80245D0:
 	adds r4, 0xE0
 	ldr r4, [r4]
 	str r4, [sp]
-	bl sub_808F844
+	bl CreatePokemonInfoTabScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -11549,7 +11549,7 @@ _080249E8:
 	ldr r0, _080249F4
 	b _08024CAE
 	.align 2, 0
-_080249F4: .4byte gUnknown_80DCAD0
+_080249F4: .4byte gLuminousCaveEvolutionInfo
 _080249F8:
 	ldr r1, [r5]
 	movs r0, 0x4
@@ -11568,7 +11568,7 @@ _08024A14:
 	ldr r0, _08024A1C
 	b _08024A3C
 	.align 2, 0
-_08024A1C: .4byte gUnknown_80DCD90
+_08024A1C: .4byte gLuminousCaveGiveItem
 _08024A20:
 	movs r0, 0x2
 	movs r1, 0x3
@@ -11603,7 +11603,7 @@ _08024A42:
 	bl sub_8014248
 	b _08024CF4
 	.align 2, 0
-_08024A60: .4byte gUnknown_80DCDB8
+_08024A60: .4byte gLuminousCaveGiveAnotherItem
 _08024A64: .4byte gUnknown_203B2B0
 _08024A68:
 	movs r0, 0x2
@@ -11824,7 +11824,7 @@ _08024C2C:
 	ldr r0, _08024C38
 	b _08024CAE
 	.align 2, 0
-_08024C38: .4byte gUnknown_80DCF44
+_08024C38: .4byte gLuminousCaveLackLevel
 _08024C3C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11840,7 +11840,7 @@ _08024C4C:
 	ldr r0, _08024C58
 	b _08024CAE
 	.align 2, 0
-_08024C58: .4byte gUnknown_80DCFAC
+_08024C58: .4byte gLuminousCaveLackFriendArea
 _08024C5C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11848,7 +11848,7 @@ _08024C5C:
 	ldr r0, _08024C68
 	b _08024CAE
 	.align 2, 0
-_08024C68: .4byte gUnknown_80DCFF4
+_08024C68: .4byte gLuminousCaveLackRoom
 _08024C6C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11856,7 +11856,7 @@ _08024C6C:
 	ldr r0, _08024C78
 	b _08024CAE
 	.align 2, 0
-_08024C78: .4byte gUnknown_80DD054
+_08024C78: .4byte gLuminousCaveLackIQ
 _08024C7C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11864,7 +11864,7 @@ _08024C7C:
 	ldr r0, _08024C88
 	b _08024CAE
 	.align 2, 0
-_08024C88: .4byte gUnknown_80DD098
+_08024C88: .4byte gLuminousCaveLackItem
 _08024C8C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11891,7 +11891,7 @@ _08024CB0:
 	b _08024CF4
 	.align 2, 0
 _08024CBC: .4byte gUnknown_203B2B0
-_08024CC0: .4byte gUnknown_80DD104
+_08024CC0: .4byte gLuminousCaveGiveName
 _08024CC4: .4byte 0x00000105
 _08024CC8:
 	ldr r1, [r5]
@@ -14986,8 +14986,8 @@ _08026542:
 	.align 2, 0
 _08026574: .4byte gRecruitedPokemonRef
 _08026578: .4byte gUnknown_203B2B8
-_0802657C: .4byte gUnknown_80DD664
-_08026580: .4byte gUnknown_80DD670
+_0802657C: .4byte gPartyMenuStandBy
+_08026580: .4byte gPartyMenuMakeLeader
 _08026584:
 	ldr r2, [r4]
 	movs r3, 0xB6
@@ -15211,15 +15211,15 @@ _08026710:
 	str r0, [r1, 0x70]
 	b _08026780
 	.align 2, 0
-_08026734: .4byte gUnknown_80DD67C
+_08026734: .4byte gPartyMenuJoinTeam
 _08026738: .4byte gUnknown_203B2B8
-_0802673C: .4byte gUnknown_80DD688
-_08026740: .4byte gUnknown_80DD694
-_08026744: .4byte gUnknown_80DD69C
-_08026748: .4byte gUnknown_80DD6A4
-_0802674C: .4byte gUnknown_80DD6B4
-_08026750: .4byte gUnknown_80DD6BC
-_08026754: .4byte gUnknown_80DD6C4
+_0802673C: .4byte gPartyMenuGiveGummi
+_08026740: .4byte gPartyMenuGive
+_08026744: .4byte gPartyMenuTake
+_08026748: .4byte gPartyMenuSayFarewell
+_0802674C: .4byte gPartyMenuSummary
+_08026750: .4byte gPartyMenuMoves
+_08026754: .4byte gPartyMenuCheckIQ
 _08026758:
 	adds r3, 0x1
 	cmp r3, r6
@@ -15343,7 +15343,7 @@ _08026814:
 	b _08026872
 	.align 2, 0
 _08026840: .4byte gUnknown_203B2B8
-_08026844: .4byte gUnknown_80DD694
+_08026844: .4byte gPartyMenuGive
 _08026848: .4byte gUnknown_80D4970
 _0802684C:
 	adds r3, 0x1
@@ -16054,7 +16054,7 @@ sub_8026DAC:
 	bx r0
 	.align 2, 0
 _08026E00: .4byte gUnknown_202DE58
-_08026E04: .4byte gUnknown_80DD6D0
+_08026E04: .4byte gPartyMenuItemPlaceholder
 	thumb_func_end sub_8026DAC
 
 	thumb_func_start sub_8026E08

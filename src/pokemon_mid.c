@@ -3,6 +3,7 @@
 #include "item.h"
 #include "file_system.h"
 #include "subStruct_203B240.h"
+#include "constants/colors.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -25,7 +26,7 @@ extern struct LevelData gLevelCurrentData[];
 
 
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
-extern s16 GetBaseSpecies(u32);
+extern s16 GetBaseSpecies(s16);
 extern void sub_80922B4(u8 *, u8 *, s32);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
@@ -250,19 +251,17 @@ void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index)
 void sub_808D930(u8 *buffer, s16 index)
 {
   char *unownString;
-  s32 newIndex;
   s32 unownIndex;
   const char *preload;
   
-  newIndex = index;
-  if (GetBaseSpecies(newIndex) == SPECIES_UNOWN) {
+  if (GetBaseSpecies(index) == SPECIES_UNOWN) {
     preload = gUnknown_8107630; // %s%c
     unownString = GetMonSpecies(SPECIES_UNOWN);
-    unownIndex = GetUnownIndex(newIndex);
+    unownIndex = GetUnownIndex(index);
     ExpandPlaceholdersBuffer(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!? 
   }
   else {
-    ExpandPlaceholdersBuffer(buffer,gUnknown_8107638, gMonsterParameters[newIndex].species); // %s
+    ExpandPlaceholdersBuffer(buffer,gUnknown_8107638, gMonsterParameters[index].species); // %s
   }
 }
 
@@ -273,37 +272,37 @@ char * GetMonSpecies(s16 index)
 
 void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum)
 {
-  u8 auStack32 [20];
+  u8 nameBuffer [20];
 
-  sub_80922B4(auStack32, pokemon->name, 10);
+  sub_80922B4(nameBuffer, pokemon->name, POKEMON_NAME_LENGTH);
   if (colorNum == 0) {
-    colorNum = 5;
+    colorNum = COLOR_CYAN;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,auStack32); // #c%c%s#r
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s#r
 }
 
 void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
 {
-  u8 auStack32 [20];
+  u8 nameBuffer [20];
 
-  sub_80922B4(auStack32, param_2 + 0x58, 10);
+  sub_80922B4(nameBuffer, param_2 + 0x58, POKEMON_NAME_LENGTH);
   if (colorNum == 0) {
-    colorNum = 6;
+    colorNum = COLOR_YELLOW;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,auStack32); // #c%c%s#r
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s#r
 }
 
 void sub_808DA0C(u8 *buffer, u8 *param_2)
 {
-  u8 auStack32 [20];
+  u8 nameBuffer [20];
 
-  sub_80922B4(auStack32, param_2 + 0x58, 10);
-  ExpandPlaceholdersBuffer(buffer,gUnknown_8107638,auStack32); // %s
+  sub_80922B4(nameBuffer, param_2 + 0x58, POKEMON_NAME_LENGTH);
+  ExpandPlaceholdersBuffer(buffer,gUnknown_8107638,nameBuffer); // %s
 }
 
 void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon)
 {
-  sub_80922B4(buffer, pokemon->name, 10);
+  sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
 bool8 sub_808DA44(s32 a1_, u32 a2_) 
@@ -872,7 +871,6 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
   return count;
 #endif
 }
-
 
 s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)  
 {

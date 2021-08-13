@@ -8,8 +8,8 @@ gUnknown_80B9BF1: @ 80B9BF1
         .byte 0xB9, 0x48, 0x00
         .string "pksdir0\0"
 
-	.global gUnknown_80B9C00
-gUnknown_80B9C00: @ 80B9C00
+	.global gInitialIntrTable
+gInitialIntrTable: @ 80B9C00
         .4byte gUnknown_202DBB8
         .4byte VBlankIntr
         .4byte VCountIntr
