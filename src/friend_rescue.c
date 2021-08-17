@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "memory.h"
 
-extern void sub_80338C4(u32);
+extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
 extern u8 sub_809539C(u32, u32);
@@ -134,13 +134,13 @@ u32 CreateFriendRescueMenu(void)
   gUnknown_203B33C->unk4 = 0x7E;
   gUnknown_203B33C->unk52C = sub_8039880();
   gUnknown_203B33C->unk52D = gUnknown_203B33C->unk52C;
-  sub_80338C4(0);
+  SetFriendRescueMenuState(0);
   return 1;
 }
 
 u32 UpdateFriendRescueMenu(void)
 {
-  switch(gUnknown_203B33C->unk0)
+  switch(gUnknown_203B33C->state)
   {
     case 0x78:
         sub_8035300();
