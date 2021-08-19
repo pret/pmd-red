@@ -129,7 +129,7 @@ u32 CreateFriendRescueMenu(void)
   monName = GetMonSpecies(SPECIES_PELIPPER);
   strcpy(gAvailablePokemonNames,monName);
   for(counter = 0; counter < 0x36; counter++){
-    gUnknown_203B33C->unk8[counter] = 0;
+    gUnknown_203B33C->passwordBuffer[counter] = 0;
   }
   gUnknown_203B33C->unk4 = 0x7E;
   gUnknown_203B33C->unk52C = sub_8039880();

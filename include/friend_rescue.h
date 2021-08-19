@@ -6,9 +6,9 @@ struct WonderMailStruct_203B33C
     // size: 0x568
     u32 state;
     u32 unk4;
-    u8 unk8[0x36];
+    u8 passwordBuffer[0x36];
     u32 unk40;
-    u32 unk44;
+    u32 status;
     u16 unk48[(0xE0 - 0x48) / 2];
     s16 unkE0;
     u8 unkE2[0x168 - 0xE2];

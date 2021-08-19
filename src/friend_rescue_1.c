@@ -69,7 +69,7 @@ extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E10(void);
 extern void sub_8031E00(void);
-extern void sub_80338DC(u32);
+extern void PrintFriendRescueError(u32);
 extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
@@ -117,9 +117,9 @@ void SetFriendRescueMenuState(u32 newState)
     sub_8032828();
 }
 
-void sub_80338DC(u32 r0)
+void PrintFriendRescueError(u32 status)
 {
-    switch(r0)
+    switch(status)
     {
         case 0:
             break;
@@ -349,7 +349,7 @@ void sub_8033CAC(void)
     u32 test_var;
     if(sub_80144A4(&temp) == 0)
     {
-        if(gUnknown_203B33C->unk44 == 0)
+        if(gUnknown_203B33C->status == 0)
         {
             switch(gUnknown_203B33C->unk528)
             {
@@ -377,7 +377,7 @@ void sub_8033CAC(void)
         }
         else
         {
-            sub_80338DC(gUnknown_203B33C->unk44);
+            PrintFriendRescueError(gUnknown_203B33C->status);
             SetFriendRescueMenuState(8);
         }
     }
@@ -455,7 +455,7 @@ void sub_8033DBC(void)
                     default:
                         break;
                 }
-                switch(sub_8039068(input_var, gUnknown_203B33C->unk8, &temp.unk0))
+                switch(sub_8039068(input_var, gUnknown_203B33C->passwordBuffer, &temp.unk0))
                 {
                     case 17:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
@@ -1056,11 +1056,11 @@ void sub_8034848(void)
     if(sub_80144A4(&temp) == 0)
     {
         MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
-        gUnknown_203B33C->unk41C.itemIndex = 0;
+        gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.unk0 = 0;
 
-        if(gUnknown_203B33C->unk44 == 0)
+        if(gUnknown_203B33C->status == 0)
         {
             switch(gUnknown_203B33C->unk40)
             {
@@ -1074,7 +1074,7 @@ void sub_8034848(void)
         }
         else
         {
-            sub_80338DC(gUnknown_203B33C->unk44);
+            PrintFriendRescueError(gUnknown_203B33C->status);
             SetFriendRescueMenuState(0x6B);
         }
     }
@@ -1090,7 +1090,7 @@ void sub_80348C4(void)
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.unk0 = 0;
 
-        if(gUnknown_203B33C->unk44 == 0)
+        if(gUnknown_203B33C->status == 0)
         {
             switch(gUnknown_203B33C->unk40)
             {
@@ -1116,7 +1116,7 @@ void sub_80348C4(void)
         }
         else
         {
-            sub_80338DC(gUnknown_203B33C->unk44);
+            PrintFriendRescueError(gUnknown_203B33C->status);
             SetFriendRescueMenuState(0x6B);
         }
     }
@@ -1340,7 +1340,7 @@ void sub_8034D74(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x20, (gUnknown_203B33C->unk8), &temp.unk0))
+                switch(sub_8039068(0x20, gUnknown_203B33C->passwordBuffer, &temp.unk0))
                 {
                     case 17:
                         sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2440, 0, 4, 0, 0, 0x101);

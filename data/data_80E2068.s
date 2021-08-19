@@ -2,7 +2,6 @@
 
         .global gUnknown_80E2068
 gUnknown_80E2068: @ 80E2068
-@ replacing .incbin "baserom.gba", 0x000e2068, 0x50
         .4byte GoRescue_80E20AC
         .byte 0x00, 0x00, 0x00, 0x00
         .4byte GetHelp_80E20A0
@@ -36,7 +35,6 @@ gUnknown_80E2068: @ 80E2068
 
 	.global gUnknown_80E20B8
 gUnknown_80E20B8: @ 80E20B8
-@ replacing .incbin "baserom.gba", 0x000e20b8, 0x28
         .4byte GoRescue_80E20AC
         .byte 0x00, 0x00, 0x00, 0x00
         .4byte GetHelp_80E20A0
@@ -50,7 +48,6 @@ gUnknown_80E20B8: @ 80E20B8
 
 	.global gUnknown_80E20E0
 gUnknown_80E20E0: @ 80E20E0
-@ replacing .incbin "baserom.gba", 0x000e20e0, 0x28
         .4byte GoRescue_80E20AC
         .byte 0xff, 0xff, 0xff, 0xff
         .4byte GetHelp_80E20A0
@@ -64,7 +61,6 @@ gUnknown_80E20E0: @ 80E20E0
 
 	.global gUnknown_80E2108
 gUnknown_80E2108: @ 80E2108
-@ replacing .incbin "baserom.gba", 0x000e2108, 0x28
         .4byte GoRescue_80E20AC
         .byte 0xff, 0xff, 0xff, 0xff
         .4byte GetHelp_80E20A0
@@ -79,7 +75,6 @@ gUnknown_80E2108: @ 80E2108
 	.global gUnknown_80E2130
 gUnknown_80E2130: @ 80E2130
         @ Friend Resuce Pelipper Menu
-@ replacing .incbin "baserom.gba", 0x000e2130, 0x60
         .4byte ReceiveSOSMail_80E217C
         .byte 0x03, 0x00, 0x00, 0x00
         .4byte SendAOKMail_80E216C
@@ -108,7 +103,6 @@ gUnknown_80E2130: @ 80E2130
 
 	.global gUnknown_80E2190
 gUnknown_80E2190: @ 80E2190
-@ replacing .incbin "baserom.gba", 0x000e2190, 0x28
         .4byte ReceiveSOSMail_80E217C
         .byte 0x03, 0x00, 0x00, 0x00
         .4byte SendAOKMail_80E216C
@@ -122,7 +116,6 @@ gUnknown_80E2190: @ 80E2190
 
 	.global gUnknown_80E21B8
 gUnknown_80E21B8: @ 80E21B8
-@ replacing .incbin "baserom.gba", 0x000e21b8, 0x60
         .4byte SendSOS_80E2208
         .byte 0x11, 0x00, 0x00, 0x00
         .4byte ReceiveAOK_80E21F4
@@ -151,7 +144,6 @@ gUnknown_80E21B8: @ 80E21B8
 
 	.global gUnknown_80E2218
 gUnknown_80E2218: @ 80E2218
-@ replacing .incbin "baserom.gba", 0x000e2218, 0x28
         .4byte SendSOS_80E2208
         .byte 0xff, 0xff, 0xff, 0xff
         .4byte ReceiveAOK_80E21F4
@@ -165,7 +157,6 @@ gUnknown_80E2218: @ 80E2218
 
 	.global gUnknown_80E2240
 gUnknown_80E2240: @ 80E2240
-@ replacing .incbin "baserom.gba", 0x000e2240, 0x28
         .4byte SendSOS_80E2208
         .byte 0x11, 0x00, 0x00, 0x00
         .4byte ReceiveAOK_80E21F4
@@ -179,7 +170,6 @@ gUnknown_80E2240: @ 80E2240
 
 	.global gUnknown_80E2268
 gUnknown_80E2268: @ 80E2268
-@ replacing .incbin "baserom.gba", 0x000e2268, 0x28
         .4byte SendSOS_80E2208
         .byte 0xff, 0xff, 0xff, 0xff
         .4byte ReceiveAOK_80E21F4
@@ -193,7 +183,6 @@ gUnknown_80E2268: @ 80E2268
 
 	.global gUnknown_80E2290
 gUnknown_80E2290: @ 80E2290
-@ replacing .incbin "baserom.gba", 0x000e2290, 0x24
         .4byte Yes_80E22B0
         .byte 0x06, 0x00, 0x00, 0x00
         .4byte Cancel_80E22A8
@@ -213,7 +202,6 @@ gUnknown_80E2290: @ 80E2290
 
 	.global gUnknown_80E22B4
 gUnknown_80E22B4: @ 80E22B4
-@ replacing .incbin "baserom.gba", 0x000e22b4, 0x1c
         .4byte Yes_80E22B0
         .byte 0x06, 0x00, 0x00, 0x00
         .4byte No_80E22CC
@@ -228,7 +216,6 @@ gUnknown_80E22B4: @ 80E22B4
 
 	.global gUnknown_80E22D0
 gUnknown_80E22D0: @ 80E22D0
-@ replacing .incbin "baserom.gba", 0x000e22d0, 0x20
         .4byte Yes_80E22B0
         .byte 0x06, 0x00, 0x00, 0x00
         .4byte No_80E22CC
@@ -240,7 +227,6 @@ gUnknown_80E22D0: @ 80E22D0
 
 	.global gUnknown_80E22F0
 gUnknown_80E22F0: @ 80E22F0
-@ replacing .incbin "baserom.gba", 0x000e22f0, 0x2c
         .4byte SendPokemon_80E2308
         .byte 0x10, 0x00, 0x00, 0x00
         .4byte Cancel_80E22A8
@@ -306,7 +292,6 @@ gUnknown_80E236C: @ 80E236C
 
 	.global gUnknown_80E23A8
 gUnknown_80E23A8: @ 80E23A8
-@ replacing .incbin "baserom.gba", 0x000e23a8, 0x48
         .4byte SendPokemon_80E23E0
         .byte 0x0f, 0x00, 0x00, 0x00
         .4byte DontSendPokemon_80E23C8
@@ -328,7 +313,6 @@ gUnknown_80E23A8: @ 80E23A8
 
 	.global gUnknown_80E23F0
 gUnknown_80E23F0: @ 80E23F0
-        @ replacing .incbin "baserom.gba", 0x000e23f0, 0x18
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x15, 0x00, 0x04, 0x00
@@ -338,7 +322,6 @@ gUnknown_80E23F0: @ 80E23F0
 
 	.global gUnknown_80E2408
 gUnknown_80E2408: @ 80E2408
-        @ replacing .incbin "baserom.gba", 0x000e2408, 0x38
         .4byte Confirm_80E2364
         .byte 0x09, 0x00, 0x00, 0x00
         .4byte Info_80E2098
@@ -357,7 +340,6 @@ gUnknown_80E2408: @ 80E2408
 
 	.global gUnknown_80E2440
 gUnknown_80E2440: @ 80E2440
-        @ replacing .incbin "baserom.gba", 0x000e2440, 0x18
         .4byte Yes_80E22B0
         .byte 0x06, 0x00, 0x00, 0x00
         .4byte Cancel_80E22A8
@@ -367,7 +349,6 @@ gUnknown_80E2440: @ 80E2440
 
 	.global gUnknown_80E2458
 gUnknown_80E2458: @ 80E2458
-        @ replacing .incbin "baserom.gba", 0x000e2458, 0x18
         .4byte Yes_80E22B0
         .byte 0x06, 0x00, 0x00, 0x00
         .4byte No_80E22CC
@@ -377,7 +358,6 @@ gUnknown_80E2458: @ 80E2458
 
 	.global gUnknown_80E2470
 gUnknown_80E2470: @ 80E2470
-        @ replacing .incbin "baserom.gba", 0x000e2470, 0x40
         .byte 0xa4, 0x24, 0x0e, 0x08
         .byte 0x15, 0x00, 0x00, 0x00
         .byte 0x90, 0x24, 0x0e, 0x08
@@ -758,79 +738,125 @@ gUnknown_80E4480: @ 80E4480
 
 	.global gUnknown_80E44A4
 gUnknown_80E44A4: @ 80E44A4
-	.incbin "baserom.gba", 0xE44A4, 0x5C
+.string "An incorrect number of GBA systems are\n"
+.string "connected.\n"
+.string "Please redo this process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E4500
 gUnknown_80E4500: @ 80E4500
-	.incbin "baserom.gba", 0xE4500, 0x50
+.string "There is no response from your friend.\n"
+.string "Please redo this process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E4550
 gUnknown_80E4550: @ 80E4550
-	.incbin "baserom.gba", 0xE4550, 0x64
+.string "The sender and receiver appear to be\n"
+.string "in different modes.\n"
+.string "Please redo the process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E45B4
 gUnknown_80E45B4: @ 80E45B4
-	.incbin "baserom.gba", 0xE45B4, 0x58
+.string "Your storage space is full.\n"
+.string "Please make room~2c then redo the\n"
+.string "process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E460C
 gUnknown_80E460C: @ 80E460C
-	.incbin "baserom.gba", 0xE460C, 0x44
+.string "This mail has been received before.\n"
+.string "It cannot be received again.\0"
+.align 2,0
 
 	.global gUnknown_80E4650
 gUnknown_80E4650: @ 80E4650
-	.incbin "baserom.gba", 0xE4650, 0x3C
+.string "This mail has been sent already.\n"
+.string "It cannot be sent again.\0"
+.align 2,0
 
 	.global gUnknown_80E468C
 gUnknown_80E468C: @ 80E468C
-	.incbin "baserom.gba", 0xE468C, 0x3C
+.string "You do not appear eligible to receive\n"
+.string "this #CGA-OK Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E46C8
 gUnknown_80E46C8: @ 80E46C8
-	.incbin "baserom.gba", 0xE46C8, 0x3C
+.string "Your friend is not eligible to receive\n"
+.string "this #CGA-OK Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E4704
 gUnknown_80E4704: @ 80E4704
-	.incbin "baserom.gba", 0xE4704, 0x40
+.string "You do not appear eligible to receive\n"
+.string "this #CGThank-You Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E4744
 gUnknown_80E4744: @ 80E4744
-	.incbin "baserom.gba", 0xE4744, 0x44
+.string "Your friend is not eligible to receive\n"
+.string "this #CGThank-You Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E4788
 gUnknown_80E4788: @ 80E4788
-	.incbin "baserom.gba", 0xE4788, 0x50
+.string "Something went wrong.\n"
+.string "Please turn off the power and\n"
+.string "reinsert the GBA Game Pak.\0"
+.align 2,0
 
 	.global gUnknown_80E47D8
 gUnknown_80E47D8: @ 80E47D8
-	.incbin "baserom.gba", 0xE47D8, 0x54
+.string "There is no space for receiving new\n"
+.string "mail.\n"
+.string "Please delete old mail~2c then try again.\0"
+.align 2,0
 
 	.global gUnknown_80E482C
 gUnknown_80E482C: @ 80E482C
-	.incbin "baserom.gba", 0xE482C, 0x7C
+.string "There is no response from your friend.\n"
+.string "Please make sure the sender and receiver\n"
+.string "are ready~2c then redo this from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E48A8
 gUnknown_80E48A8: @ 80E48A8
-	.incbin "baserom.gba", 0xE48A8, 0x40
+.string "This password is incorrect.\n"
+.string "Would you like to enter it again?\0"
+.align 2,0
 
 	.global gUnknown_80E48E8
 gUnknown_80E48E8: @ 80E48E8
-	.incbin "baserom.gba", 0xE48E8, 0x40
+.string "This password does not appear to be\n"
+.string "that of an #CGSOS Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E4928
 gUnknown_80E4928: @ 80E4928
-	.incbin "baserom.gba", 0xE4928, 0x3C
+.string "Received the #CGSOS Mail#R.\n"
+.string "Your adventure will be saved.\0"
+.align 2,0
 
 	.global gUnknown_80E4964
 gUnknown_80E4964: @ 80E4964
-	.incbin "baserom.gba", 0xE4964, 0x38
+.string "This password does not appear to be\n"
+.string "an #CGA-OK Mail#R.\0"
+.align 2,0
 
 	.global gUnknown_80E499C
 gUnknown_80E499C: @ 80E499C
-	.incbin "baserom.gba", 0xE499C, 0x28
+.string "This password can no longer be used.\0"
+.align 2,0
 
 	.global gUnknown_80E49C4
 gUnknown_80E49C4: @ 80E49C4
-	.incbin "baserom.gba", 0xE49C4, 0x4C
+.string "This password does not appear to be\n"
+.string "that of a #CGThank-You Mail#R.\0"
+.align 2,0
+.string "pksdir0\0"
+.align 2,0
+
 
 	.global gUnknown_80E4A10
 gUnknown_80E4A10: @ 80E4A10
@@ -852,7 +878,6 @@ gUnknown_80E4A28: @ 80E4A28
 
 	.global gUnknown_80E4A40
 gUnknown_80E4A40: @ 80E4A40
-@ replacing .incbin "baserom.gba", 0x000e4a40, 0xedc
         .byte 0x18, 0x18
         .byte 0x38, 0x00
         .byte 0x21, 0xff
@@ -1231,19 +1256,30 @@ gTradeItemsCommunicationError: @ 80E6378
 
 	.global gUnknown_80E639C
 gUnknown_80E639C: @ 80E639C
-	.incbin "baserom.gba", 0xE639C, 0x5C
+.string "An incorrect number of GBA systems are\n"
+.string "connected.\n"
+.string "Please redo this process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E63F8
 gUnknown_80E63F8: @ 80E63F8
-	.incbin "baserom.gba", 0xE63F8, 0x50
+.string "There is no response from your friend.\n"
+.string "Please redo this process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E6448
 gUnknown_80E6448: @ 80E6448
-	.incbin "baserom.gba", 0xE6448, 0x64
+.string "The sender and receiver appear to be\n"
+.string "in different modes.\n"
+.string "Please redo the process from the start.\0"
+.align 2,0
 
 	.global gUnknown_80E64AC
 gUnknown_80E64AC: @ 80E64AC
-	.incbin "baserom.gba", 0xE64AC, 0x7C
+.string "There is no response from your friend.\n"
+.string "Please make sure the sender and receiver\n"
+.string "are ready~2c then redo this from the start.\0"
+.align 2,0
 
 	.global gTradeItemsHowManyText
 gTradeItemsHowManyText: @ 80E6528
@@ -1845,23 +1881,81 @@ gUnknown_80E762C: @ 80E762C
 
 	.global gUnknown_80E7644
 gUnknown_80E7644: @ 80E7644
-	.incbin "baserom.gba", 0xE7644, 0x40
+        .4byte ResumeQuicksave_80E7668
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte IsThatOK_80E765C
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+
+        IsThatOK_80E765C:
+        .string "Is that OK?\0"
+        .align 2,0
+
+        ResumeQuicksave_80E7668:
+        .string "Resuming from quicksave.\0"
+        .align 2,0
 
 	.global gUnknown_80E7684
 gUnknown_80E7684: @ 80E7684
-	.incbin "baserom.gba", 0xE7684, 0x34
+        .4byte ResumeAdventure_80E769C
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte IsThatOK_80E765C
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+
+        ResumeAdventure_80E769C:
+        .string "Resuming saved adventure.\0"
+        .align 2,0
 
 	.global gUnknown_80E76B8
 gUnknown_80E76B8: @ 80E76B8
-	.incbin "baserom.gba", 0xE76B8, 0x30
+        .4byte QuitAwaitingResuce_80E76D0
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte IsThatOK_80E765C
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+
+        QuitAwaitingResuce_80E76D0:
+        .string "Quit awaiting rescue?\0"
+        .align 2,0
 
 	.global gUnknown_80E76E8
 gUnknown_80E76E8: @ 80E76E8
-	.incbin "baserom.gba", 0xE76E8, 0x48
+        .4byte Deleted_80E7718
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte Deleted_80E7700
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+
+        Deleted_80E7700:
+        .string "deleted. Is that OK?\0"
+        .align 2,0
+
+        Deleted_80E7718:
+        .string "Your saved data will be\0"
+        .align 2,0
 
 	.global gUnknown_80E7730
 gUnknown_80E7730: @ 80E7730
-	.incbin "baserom.gba", 0xE7730, 0x54
+        .4byte Deleted_80E7768
+        .byte 0x05, 0x00, 0x00, 0x00
+        .4byte Deleted_80E7748
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+
+        Deleted_80E7748:
+        .string "delete all of your saved data?\0"
+        .align 2,0
+
+        Deleted_80E7768:
+        .string "Are you sure you want to\0"
+        .align 2,0
+
 
 	.global gUnknown_80E7784
 gUnknown_80E7784: @ 80E7784
