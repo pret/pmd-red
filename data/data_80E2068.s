@@ -358,37 +358,113 @@ gUnknown_80E2458: @ 80E2458
 
 	.global gUnknown_80E2470
 gUnknown_80E2470: @ 80E2470
-        .byte 0xa4, 0x24, 0x0e, 0x08
+        .4byte SendItem_80E24A4
         .byte 0x15, 0x00, 0x00, 0x00
-        .byte 0x90, 0x24, 0x0e, 0x08
+        .4byte DontSendItem_80E2490
         .byte 0x16, 0x00, 0x00, 0x00
-        .byte 0xa8, 0x22, 0x0e, 0x08
+        .4byte Cancel_80E22A8
         .byte 0x08, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x08, 0x00, 0x00, 0x00
-        .byte 0x44, 0x6f, 0x6e, 0x7e, 0x32, 0x37, 0x74, 0x20, 0x53, 0x65, 0x6e, 0x64, 0x20, 0x49, 0x74, 0x65, 0x6d, 0x00, 0x00, 0x00
-        .byte 0x53, 0x65, 0x6e, 0x64, 0x20, 0x49, 0x74, 0x65, 0x6d, 0x00, 0x00, 0x00
+
+        DontSendItem_80E2490:
+        .string "Don~27t Send Item\0"
+        .align 2,0
+        SendItem_80E24A4:
+        .string "Send Item\0"
+        .align 2,0
 
 
 	.global gUnknown_80E24B0
 gUnknown_80E24B0: @ 80E24B0
-	.incbin "baserom.gba", 0xE24B0, 0x28
+        .4byte SendwoItem_80E24C8
+        .byte 0x16, 0x00, 0x00, 0x00
+        .4byte Cancel_80E22A8
+        .byte 0x08, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x08, 0x00, 0x00, 0x00
+
+        SendwoItem_80E24C8:
+        .string "Send w/o Item\0"
+        .align 2,0
 
 	.global gUnknown_80E24D8
 gUnknown_80E24D8: @ 80E24D8
-	.incbin "baserom.gba", 0xE24D8, 0x20
+        .4byte Yes_80E22B0
+        .byte 0x06, 0x00, 0x00, 0x00
+        .4byte No_80E22CC
+        .byte 0x07, 0x00, 0x00, 0x00
+        .4byte Cancel_80E22A8
+        .byte 0x08, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x08, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E24F8
 gUnknown_80E24F8: @ 80E24F8
-	.incbin "baserom.gba", 0xE24F8, 0x5C
+        .4byte RescueInfo_80E2540
+        .byte 0x1A, 0x00, 0x00, 0x00
+        .4byte GoRescue_80E530
+        .byte 0x1B, 0x00, 0x00, 0x00
+        .4byte GetHelp_80E2520
+        .byte 0x1C, 0x00, 0x00, 0x00
+        .4byte Cancel_80E22A8
+        .byte 0x19, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x19, 0x00, 0x00, 0x00
+
+        GetHelp_80E2520:
+        .string "#C6Get help#R \0"
+        .align 2,0
+        GoRescue_80E530:
+        .string "#C6Go rescue#R \0"
+        .align 2,0
+        RescueInfo_80E2540:
+        .string "Friend Rescue Info\0"
+        .align 2,0
 
 	.global gUnknown_80E2554
 gUnknown_80E2554: @ 80E2554
-	.incbin "baserom.gba", 0xE2554, 0x60
+        .4byte RescueProcedures_80E25A0
+        .byte 0x1E, 0x00, 0x00, 0x00
+        .4byte ReceiveSOSMail_80E217C
+        .byte 0x1F, 0x00, 0x00, 0x00
+        .4byte LeaveForRescue_80E258C
+        .byte 0x20, 0x00, 0x00, 0x00
+        .4byte SendAOKMail_80E216C
+        .byte 0x21, 0x00, 0x00, 0x00
+        .4byte GetThankYouMail_80E2158
+        .byte 0x22, 0x00, 0x00, 0x00
+        .4byte Exit_80E2090
+        .byte 0x19, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x19, 0x00, 0x00, 0x00
+
+        LeaveForRescue_80E258C:
+        .string "Leave for Rescue\0"
+        .align 2,0
+
+        RescueProcedures_80E25A0:
+        .string "Rescue Procedures\0"
+        .align 2,0
 
 	.global gUnknown_80E25B4
 gUnknown_80E25B4: @ 80E25B4
-	.incbin "baserom.gba", 0xE25B4, 0x40
+        .4byte GettingHelp_80E25E4
+        .byte 0x23, 0x00, 0x00, 0x00
+        .4byte SendSOS_80E2208
+        .byte 0x24, 0x00, 0x00, 0x00
+        .4byte ReceiveAOK_80E21F4
+        .byte 0x25, 0x00, 0x00, 0x00
+        .4byte SendThankYou_80E21E0
+        .byte 0x26, 0x00, 0x00, 0x00
+        .4byte Exit_80E2090
+        .byte 0x19, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x19, 0x00, 0x00, 0x00
+
+        GettingHelp_80E25E4:
+        .string "Getting Help\0"
+        .align 2,0
 
 	.global gUnknown_80E25F4
 gUnknown_80E25F4: @ 80E25F4
@@ -397,71 +473,104 @@ gUnknown_80E25F4: @ 80E25F4
 
 	.global gUnknown_80E2610
 gUnknown_80E2610: @ 80E2610
-	.incbin "baserom.gba", 0xE2610, 0x30
+        .string "How would you like to send your\n"
+        .string "#CGSOS Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E2640
 gUnknown_80E2640: @ 80E2640
-	.incbin "baserom.gba", 0xE2640, 0x40
+        .string "How would you like to receive your\n"
+        .string "friend~27s #CGSOS Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E2680
 gUnknown_80E2680: @ 80E2680
-	.incbin "baserom.gba", 0xE2680, 0x30
+        .string "How would you like to send your\n"
+        .string "#CGA-OK Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E26B0
 gUnknown_80E26B0: @ 80E26B0
-	.incbin "baserom.gba", 0xE26B0, 0x40
+        .string "How would you like to receive your\n"
+        .string "friend~27s #CGA-OK Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E26F0
 gUnknown_80E26F0: @ 80E26F0
-	.incbin "baserom.gba", 0xE26F0, 0x38
+        .string "How would you like to send your\n"
+        .string "#CGThank-You Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E2728
 gUnknown_80E2728: @ 80E2728
-	.incbin "baserom.gba", 0xE2728, 0x44
+        .string "How would you like to receive your\n"
+        .string "friend~27s #CGThank-You Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E276C
 gUnknown_80E276C: @ 80E276C
-	.incbin "baserom.gba", 0xE276C, 0x38
+        .string "The GBA Game Pak does not have\n"
+        .string "an #CGA-OK Mail#R on it.\0"
+        .align 2,0
 
 	.global gUnknown_80E27A4
 gUnknown_80E27A4: @ 80E27A4
-	.incbin "baserom.gba", 0xE27A4, 0x70
+        .string "If you accept an #CGA-OK Mail#R~2c the\n"
+        .string "#CGThank-You Mail#R you received before\n"
+        .string "will be overwritten. Is that OK?\0"
+        .align 2,0
 
 	.global gUnknown_80E2814
 gUnknown_80E2814: @ 80E2814
-	.incbin "baserom.gba", 0xE2814, 0x2C
+        .string "Please enter the #CGA-OK Mail password#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E2840
 gUnknown_80E2840: @ 80E2840
-	.incbin "baserom.gba", 0xE2840, 0x34
+        .string "The #CGA-OK Mail#R will be received and\n"
+        .string "processed.\0"
+        .align 2,0
 
 	.global gUnknown_80E2874
 gUnknown_80E2874: @ 80E2874
-	.incbin "baserom.gba", 0xE2874, 0x24
+        .string "A #CGhelper Pokémon#R also arrived!\0"
+        .align 2,0
 
 	.global gUnknown_80E2898
 gUnknown_80E2898: @ 80E2898
-	.incbin "baserom.gba", 0xE2898, 0x40
+        .string "An #CGA-OK Mail#R was received.\n"
+        .string "Your adventure will be saved.\0"
+        .align 2,0
 
 	.global gUnknown_80E28D8
 gUnknown_80E28D8: @ 80E28D8
-	.incbin "baserom.gba", 0xE28D8, 0x2C
+        .string "Resume your game using #CGRevive Team#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E2904
 gUnknown_80E2904: @ 80E2904
-	.incbin "baserom.gba", 0xE2904, 0x68
+        .string "Your friend~27s Mailbox is full.\n"
+        .string "This piece of mail cannot be sent.\n"
+        .string "The recipient must delete old mail.\0"
+        .align 2,0
 
 	.global gUnknown_80E296C
 gUnknown_80E296C: @ 80E296C
-	.incbin "baserom.gba", 0xE296C, 0x34
+        .string "Please choose the #CGSOS Mail#R you want\n"
+        .string "to send.\0"
+        .align 2,0
 
 	.global gUnknown_80E29A0
 gUnknown_80E29A0: @ 80E29A0
-	.incbin "baserom.gba", 0xE29A0, 0x30
+        .string "This #CGSOS Mail#R will be sent.\n"
+        .string "Is that OK?\0"
+        .align 2,0
 
 	.global gUnknown_80E29D0
 gUnknown_80E29D0: @ 80E29D0
-	.incbin "baserom.gba", 0xE29D0, 0x3C
+        .string "Your #CGSOS Mail#R was sent.\n"
+        .string "Your adventure will be saved.\0"
+        .align 2,0
 
 	.global gUnknown_80E2A0C
 gUnknown_80E2A0C: @ 80E2A0C
