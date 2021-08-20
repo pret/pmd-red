@@ -579,7 +579,9 @@ gUnknown_80E2A0C: @ 80E2A0C
 
 	.global gUnknown_80E2A1C
 gUnknown_80E2A1C: @ 80E2A1C
-	.incbin "baserom.gba", 0xE2A1C, 0x40
+        .string "Please give this password to the friend\n"
+        .string "coming to your rescue.\0"
+        .align 2,0
 
 	.global gUnknown_80E2A5C
 gUnknown_80E2A5C: @ 80E2A5C
@@ -593,43 +595,65 @@ gUnknown_80E2A80: @ 80E2A80
 
 	.global gUnknown_80E2AA8
 gUnknown_80E2AA8: @ 80E2AA8
-	.incbin "baserom.gba", 0xE2AA8, 0x3C
+.string "Please give this password to the friend\n"
+.string "that you rescued.\0"
+.align 2,0
 
 	.global gUnknown_80E2AE4
 gUnknown_80E2AE4: @ 80E2AE4
-	.incbin "baserom.gba", 0xE2AE4, 0x70
+.string "Please connect a #CGLink Cable#R.\n"
+.string "When your friend~27s side is ready~2c you may\n"
+.string "communicate and exchange data.\0"
+.align 2,0
 
 	.global gUnknown_80E2B54
 gUnknown_80E2B54: @ 80E2B54
-	.incbin "baserom.gba", 0xE2B54, 0x3C
+.string "Your #CGA-OK Mail#R was sent.\n"
+.string "Your adventure will be saved.\0"
+.align 2,0
 
 	.global gUnknown_80E2B90
 gUnknown_80E2B90: @ 80E2B90
-	.incbin "baserom.gba", 0xE2B90, 0x50
+.string "Using a #CGGame Link cable#R~2c\n"
+.string "you can send a #CGhelper Pokémon#R to\n"
+.string "a friend.\0"
+.align 2,0
 
 	.global gUnknown_80E2BE0
 gUnknown_80E2BE0: @ 80E2BE0
-	.incbin "baserom.gba", 0xE2BE0, 0x68
+.string "Your own Pokémon will not disappear\n"
+.string "if you send it as a helper.\n"
+.string "Will you send a helper to your friend?\0"
+.align 2,0
 
 	.global gUnknown_80E2C48
 gUnknown_80E2C48: @ 80E2C48
-	.incbin "baserom.gba", 0xE2C48, 0x4C
+.string "Pick the Pokémon to be sent as a helper.\n"
+.string "(Any hold item will not be sent.)\0"
+.align 2,0
 
 	.global gUnknown_80E2C94
 gUnknown_80E2C94: @ 80E2C94
-	.incbin "baserom.gba", 0xE2C94, 0x40
+.string "No Pokémon are in your Friend Areas.\n"
+.string "What would you like to do?\0"
+.align 2,0
 
 	.global gUnknown_80E2CD4
 gUnknown_80E2CD4: @ 80E2CD4
-	.incbin "baserom.gba", 0xE2CD4, 0x14
+.string "Is this Pokémon OK?\0"
+.align 2,0
 
 	.global gUnknown_80E2CE8
 gUnknown_80E2CE8: @ 80E2CE8
-	.incbin "baserom.gba", 0xE2CE8, 0x48
+.string "Please choose the #CGA-OK Mail#R that should\n"
+.string "be sent to your friend.\0"
+.align 2,0
 
 	.global gUnknown_80E2D30
 gUnknown_80E2D30: @ 80E2D30
-	.incbin "baserom.gba", 0xE2D30, 0x30
+.string "This #CGA-OK Mail#R will be sent.\n"
+.string "Is that OK?\0"
+.align 2,0
 
 	.global gUnknown_80E2D60
 gUnknown_80E2D60: @ 80E2D60
@@ -638,67 +662,100 @@ gUnknown_80E2D60: @ 80E2D60
 
 	.global gUnknown_80E2D7C
 gUnknown_80E2D7C: @ 80E2D7C
-	.incbin "baserom.gba", 0xE2D7C, 0x54
+.string "Connect the #CGGame Link cable#R.\n"
+.string "When your friend is ready~2c begin\n"
+.string "communication.\0"
+.align 2,0
 
 	.global gUnknown_80E2DD0
 gUnknown_80E2DD0: @ 80E2DD0
-	.incbin "baserom.gba", 0xE2DD0, 0x50
+.string "#+Communicating...\n"
+.string "#+Please wait with the power on.\n"
+.string "#+To cancel~2c press {B_BUTTON}.\0"
+.align 2,0
 
 	.global gUnknown_80E2E20
 gUnknown_80E2E20: @ 80E2E20
-	.incbin "baserom.gba", 0xE2E20, 0x34
+.string "The GBA Game Pak will be written to.\n"
+.string "Is that OK?\0"
+.align 2,0
 
 	.global gUnknown_80E2E54
 gUnknown_80E2E54: @ 80E2E54
-	.incbin "baserom.gba", 0xE2E54, 0x60
+.string "#+Reading from GBA Game Pak.\n"
+.string "#+Do not remove the GBA Game Pak.\n"
+.string "#+Please wait with the power on.\0"
+.align 2,0
 
 	.global gUnknown_80E2EB4
 gUnknown_80E2EB4: @ 80E2EB4
-	.incbin "baserom.gba", 0xE2EB4, 0x60
+.string "#+Writing to GBA Game Pak.\n"
+.string "#+Do not remove the GBA Game Pak.\n"
+.string "#+Please wait with the power on.\0"
+.align 2,0
 
 	.global gUnknown_80E2F14
 gUnknown_80E2F14: @ 80E2F14
-	.incbin "baserom.gba", 0xE2F14, 0x30
+.string "There is no #CGSOS Mail#R on\n"
+.string "the GBA Game Pak.\0"
+.align 2,0
 
 	.global gUnknown_80E2F44
 gUnknown_80E2F44: @ 80E2F44
-	.incbin "baserom.gba", 0xE2F44, 0x34
+.string "Please choose an #CGSOS Mail#R\n"
+.string "on the GBA Game Pak.\0"
+.align 2,0
 
 	.global gUnknown_80E2F78
 gUnknown_80E2F78: @ 80E2F78
-	.incbin "baserom.gba", 0xE2F78, 0x28
+.string "Is it OK to accept this #CGSOS Mail#R?\0"
+.align 2,0
 
 	.global gUnknown_80E2FA0
 gUnknown_80E2FA0: @ 80E2FA0
-	.incbin "baserom.gba", 0xE2FA0, 0x4C
+.string "There is no more space for accepting\n"
+.string "new mail.\n"
+.string "You must delete old mail.\0"
+.align 2,0
 
 	.global gUnknown_80E2FEC
 gUnknown_80E2FEC: @ 80E2FEC
-	.incbin "baserom.gba", 0xE2FEC, 0x44
+.string "The #CGSOS Mail#R has been received.\n"
+.string "Your adventure will be saved.\0"
+.align 2,0
 
 	.global gUnknown_80E3030
 gUnknown_80E3030: @ 80E3030
-	.incbin "baserom.gba", 0xE3030, 0x48
+.string "Please embark on your rescue mission\n"
+.string "from the Pelipper Post Office. \0"
+.align 2,0
 
 	.global gUnknown_80E3078
 gUnknown_80E3078: @ 80E3078
-	.incbin "baserom.gba", 0xE3078, 0x2C
+.string "Please enter the #CGSOS Mail password#R.\0"
+.align 2,0
 
 	.global gUnknown_80E30A4
 gUnknown_80E30A4: @ 80E30A4
-	.incbin "baserom.gba", 0xE30A4, 0x2C
+.string "Is it OK to send this #CGThank-You Mail#R?\0"
+.align 2,0
 
 	.global gUnknown_80E30D0
 gUnknown_80E30D0: @ 80E30D0
-	.incbin "baserom.gba", 0xE30D0, 0x4C
+.string "Please choose the #CGThank-You Mail#R that\n"
+.string "should be sent to your friend.\0"
+.align 2,0
 
 	.global gUnknown_80E311C
 gUnknown_80E311C: @ 80E311C
-	.incbin "baserom.gba", 0xE311C, 0x30
+.string "Please enter the #CGThank-You Mail password#R.\0"
+.align 2,0
 
 	.global gUnknown_80E314C
 gUnknown_80E314C: @ 80E314C
-	.incbin "baserom.gba", 0xE314C, 0x30
+.string "The #CGThank-You Mail password#R will be\n"
+.string "shown.\0"
+.align 2,0
 
 	.global gUnknown_80E317C
 gUnknown_80E317C: @ 80E317C
@@ -707,7 +764,9 @@ gUnknown_80E317C: @ 80E317C
 
 	.global gUnknown_80E319C
 gUnknown_80E319C: @ 80E319C
-	.incbin "baserom.gba", 0xE319C, 0x3C
+        .string "Steps will now be taken to receive the\n"
+        .string "#CGThank-You Mail#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E31D8
 gUnknown_80E31D8: @ 80E31D8
@@ -726,19 +785,29 @@ gUnknown_80E3220: @ 80E3220
 
 	.global gUnknown_80E3248
 gUnknown_80E3248: @ 80E3248
-	.incbin "baserom.gba", 0xE3248, 0x40
+        .string "The #CGThank-You Mail#R was sent.\n"
+        .string "Your adventure will be saved.\0"
+        .align 2,0
 
 	.global gUnknown_80E3288
 gUnknown_80E3288: @ 80E3288
-	.incbin "baserom.gba", 0xE3288, 0x3C
+        .string "Steps will now be taken to send your\n"
+        .string "#CGThank-You Mail#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E32C4
 gUnknown_80E32C4: @ 80E32C4
-	.incbin "baserom.gba", 0xE32C4, 0x58
+        .string "OK. You~27re good to go.\n"
+        .string "#CN%s#R~2c I hope your sense of\n"
+        .string "gratitude reaches your friend.\0"
+        .align 2,0
 
 	.global gUnknown_80E331C
 gUnknown_80E331C: @ 80E331C
-	.incbin "baserom.gba", 0xE331C, 0x5C
+        .string "The item chosen here can~27t be exchanged\n"
+        .string "with anything else.\n"
+        .string "Are you sure this item is OK?\0"
+        .align 2,0
 
 	.global gUnknown_80E3378
 gUnknown_80E3378: @ 80E3378
@@ -747,23 +816,35 @@ gUnknown_80E3378: @ 80E3378
 
 	.global gUnknown_80E339C
 gUnknown_80E339C: @ 80E339C
-	.incbin "baserom.gba", 0xE339C, 0x3C
+.string "There are no items in storage.\n"
+.string "What would you like to do?\0"
+.align 2,0
 
 	.global gUnknown_80E33D8
 gUnknown_80E33D8: @ 80E33D8
-	.incbin "baserom.gba", 0xE33D8, 0x58
+.string "Would you like to choose\n"
+.string "a #CGreward item#R from storage and\n"
+.string "send it with your mail?\0"
+.align 2,0
 
 	.global gUnknown_80E3430
 gUnknown_80E3430: @ 80E3430
-	.incbin "baserom.gba", 0xE3430, 0x80
+.string "This mail already has an attached\n"
+.string "#CGreward item#R.#POnce an item has been chosen~2c it may not\n"
+.string "be exchanged with another item.\0"
+.align 2,0
 
 	.global gUnknown_80E34B0
 gUnknown_80E34B0: @ 80E34B0
-	.incbin "baserom.gba", 0xE34B0, 0x40
+.string "Would you like to resend the mail\n"
+.string "with the same item attached?\0"
+.align 2,0
 
 	.global gUnknown_80E34F0
 gUnknown_80E34F0: @ 80E34F0
-	.incbin "baserom.gba", 0xE34F0, 0x3C
+.string "Please select a #CGThank-You Mail#R\n"
+.string "from the GBA Game Pak.\0"
+.align 2,0
 
 	.global gUnknown_80E352C
 gUnknown_80E352C: @ 80E352C
@@ -798,47 +879,125 @@ gUnknown_80E367C: @ 80E367C
 
 	.global gUnknown_80E3690
 gUnknown_80E3690: @ 80E3690
-	.incbin "baserom.gba", 0xE3690, 0x188
+.string "If your team is defeated and in need\n"
+.string "of rescuing~2c send an #CGSOS Mail#R\n"
+.string "to a friend.#POnce you send your mail~2c you must wait\n"
+.string "for your friend to send you\n"
+.string "an #CGA-OK Mail#R.#PIf the #CGA-OK Mail#R arrives~2c your\n"
+.string "team can be revived to resume exploring\n"
+.string "the dungeon it was in.#PWhen your team is revived~2c don~27t forget\n"
+.string "to send a #CGThank-You Mail#R to the friend\n"
+.string "who came to your rescue.\0"
+.align 2,0
 
 	.global gUnknown_80E3818
 gUnknown_80E3818: @ 80E3818
-	.incbin "baserom.gba", 0xE3818, 0x180
+.string "If your team is defeated in\n"
+.string "a dungeon~2c you may send a friend\n"
+.string "an #CGSOS Mail#R for help.#PHowever~2c there are some places\n"
+.string "where it is impossible for you to\n"
+.string "call for a rescue.#PAlso~2c if you send an #CGSOS Mail#R~2c\n"
+.string "you may not continue with your\n"
+.string "adventure while awaiting rescue.#PIf you cannot wait to be rescued~2c\n"
+.string "you will have to give up and return\n"
+.string "to your rescue team base.\0"
+.align 2,0
 
 	.global gUnknown_80E3998
 gUnknown_80E3998: @ 80E3998
-	.incbin "baserom.gba", 0xE3998, 0x184
+.string "If your friend successfully rescues\n"
+.string "your team~2c accept your friend~27s\n"
+.string "#CGA-OK Mail#R.#POnce the #CGA-OK Mail#R is received~2c\n"
+.string "you may revive your team and resume\n"
+.string "exploring the dungeon you were in.#PUsing a #CGGame Link cable#R~2c\n"
+.string "your friend can also send you\n"
+.string "a #CGhelper Pokémon#R.#PHowever~2c the #CGhelper Pokémon#R will not\n"
+.string "be able to bring an item with it when\n"
+.string "joining your team.\0"
+.align 2,0
 
 	.global gUnknown_80E3B1C
 gUnknown_80E3B1C: @ 80E3B1C
-	.incbin "baserom.gba", 0xE3B1C, 0xDC
+.string "If your team has been rescued~2c be sure\n"
+.string "to send a #CGThank-You Mail#R to the friend\n"
+.string "that came to your help.#PYou may also attach a #CGreward item#R\n"
+.string "from storage to your #CGThank-You Mail#R\n"
+.string "and send it to your friend.\0"
+.align 2,0
 
 	.global gUnknown_80E3BF8
 gUnknown_80E3BF8: @ 80E3BF8
-	.incbin "baserom.gba", 0xE3BF8, 0x1EC
+.string "If your friend~27s team needs rescuing~2c\n"
+.string "you must first receive an #CGSOS Mail#R\n"
+.string "from your friend.#PWhen you get the mail~2c you may embark\n"
+.string "on your rescue mission from the\n"
+.string "#CGPelipper Post Office#R.#PIf you rescue your friend~27s defeated\n"
+.string "team~2c send an #CGA-OK Mail#R to your\n"
+.string "friend.#PIf you rescue a friend~2c you will be eligible\n"
+.string "to receive a #CGThank-You Mail#R.#PIf you have quicksaved inside a dungeon~2c\n"
+.string "you may not choose #CGGo Rescue#R.\n"
+.string "Your last save must be out of a dungeon.\0"
+.align 2,0
 
 	.global gUnknown_80E3DE4
 gUnknown_80E3DE4: @ 80E3DE4
-	.incbin "baserom.gba", 0xE3DE4, 0xB4
+.string "You may receive an #CGSOS Mail#R from\n"
+.string "a friend~27s team that lies defeated in\n"
+.string "a dungeon.#PIf there is no space for new mail~2c delete\n"
+.string "old mail at the #CGPelipper Post Office#R.\0"
+.align 2,0
 
 	.global gUnknown_80E3E98
 gUnknown_80E3E98: @ 80E3E98
-	.incbin "baserom.gba", 0xE3E98, 0x17C
+.string "If you successfully rescue your friend~27s\n"
+.string "team~2c send your friend an #CGA-OK Mail#R.#PUsing a #CGGame Link cable#R~2c you may\n"
+.string "also send your friend a Pokémon from\n"
+.string "your Friend Area as a helper.#PDon~27t worry--sending a Pokémon as\n"
+.string "a helper will not make it disappear from\n"
+.string "its Friend Area.#PIf there is no space for new mail~2c delete\n"
+.string "old mail at the #CGPelipper Post Office#R.\0"
+.align 2,0
 
 	.global gUnknown_80E4014
 gUnknown_80E4014: @ 80E4014
-	.incbin "baserom.gba", 0xE4014, 0x11C
+.string "When you receive an #CGSOS Mail#R~2c\n"
+.string "you may embark on your rescue mission\n"
+.string "from the #CGPelipper Post Office#R.#PBeware--if you do not have access to\n"
+.string "the dungeon they are in~2c you may not go\n"
+.string "on a rescue mission there.#PAccept challenging rescues only\n"
+.string "if you are ready and qualified!\0"
+.align 2,0
 
 	.global gUnknown_80E4130
 gUnknown_80E4130: @ 80E4130
-	.incbin "baserom.gba", 0xE4130, 0xAC
+.string "If you send an #CGA-OK Mail#R~2c you may\n"
+.string "receive a #CGThank-You Mail#R in return\n"
+.string "from your friend.#PThe #CGThank-You Mail#R may also come\n"
+.string "with a #CGreward item#R attached.\0"
+.align 2,0
 
 	.global gUnknown_80E41DC
 gUnknown_80E41DC: @ 80E41DC
-	.incbin "baserom.gba", 0xE41DC, 0x138
+.string "Using the #CGDual Slot#R function~2c\n"
+.string "you may perform rescue operations with\n"
+.string "friends using the GBA Game Pak version.#PInsert the DS Game Card and the GBA\n"
+.string "Game Pak in your Nintendo DS system~2c\n"
+.string "then turn on the power.#PFriend Rescue missions using\n"
+.string "the #CGDual Slot#R function will be\n"
+.string "available on the main menu. \0"
+.align 2,0
 
 	.global gUnknown_80E4314
 gUnknown_80E4314: @ 80E4314
-	.incbin "baserom.gba", 0xE4314, 0x16C
+.string "Friends can rescue each other~27s defeated\n"
+.string "teams using a #CGGame Link cable#R~2c\n"
+.string "#CGpasswords#R~2c and so on.#PYou may go on a rescue mission to save\n"
+.string "your friend~27s team that has been defeated\n"
+.string "in a dungeon.#POr~2c you may call for help from a friend\n"
+.string "to save your fallen team in a dungeon.#PUsing #CGpasswords#R~2c you can even\n"
+.string "exchange help with faraway friends.\0"
+.align 2,0
+
 
 	.global gUnknown_80E4480
 gUnknown_80E4480: @ 80E4480
