@@ -4,12 +4,16 @@
 struct WonderMailStruct_203B33C
 {
     // size: 0x568
-    u32 unk0;
+    u32 state;
     u32 unk4;
-    u8 unk8[0x36];
+    u8 passwordBuffer[0x36];
     u32 unk40;
-    u32 unk44;
-    u16 unk48[232];
+    u32 status;
+    u16 unk48[(0xE0 - 0x48) / 2];
+    s16 unkE0;
+    u8 unkE2[0x168 - 0xE2];
+    s16 unk168;
+    u8 unk16A[0x218 - 0x16A];
     u8 unk218;
     u8 padding7[3];
     u32 unk21C;
@@ -31,7 +35,7 @@ struct WonderMailStruct_203B33C
     u8 fill52E;
     u32 unk530;
     u32 unk534;
-    u16 unk538; // A7 << 3
+    s16 unk538; // A7 << 3
     u32 unk53C;
     u32 unk540; // A8 << 4
     s16 unk544;

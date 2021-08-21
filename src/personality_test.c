@@ -227,13 +227,13 @@ u8 HandleTestTrackerState(void)
         RevealStarter();
         break;
     case 6:
-        sub_803CA8C();
+        AdvanceToPickPartnerPrompt();
         break;
     case 7:
         PromptPickPartner();
         break;
     case 8:
-        sub_803CAD4();
+        AdvanceToPartnerSelection();
         break;
     case 9:
         CallCreatePartnerSelectionMenu();
@@ -242,16 +242,16 @@ u8 HandleTestTrackerState(void)
         PromptForPartnerNickname();
         break;
     case 11:
-        sub_803CB5C();
+        AdvanceToPartnerNickhameScreen();
         break;
     case 12:
-        sub_803CB7C();
+        NicknamePartner();
         break;
     case 13:
         PrintEndIntroText();
         break;
     case 14:
-        sub_803CBE4();
+        AdvanceToTestEnd();
         break;
     case 15:
         iVar1 = Random() * gUnknown_203B400->FrameCounter;
@@ -471,7 +471,7 @@ void RevealStarter(void)
   }
 }
 
-void sub_803CA8C(void)
+void AdvanceToPickPartnerPrompt(void)
 {
   s32 temp;
 
@@ -486,7 +486,7 @@ void PromptPickPartner(void)
     gUnknown_203B400->TestState = 8;
 }
 
-void sub_803CAD4(void)
+void AdvanceToPartnerSelection(void)
 {
   s32 temp;
 
@@ -517,7 +517,7 @@ void PromptForPartnerNickname(void)
   }
 }
 
-void sub_803CB5C(void)
+void AdvanceToPartnerNickhameScreen(void)
 {
   s32 temp;
 
@@ -526,7 +526,7 @@ void sub_803CB5C(void)
   }
 }
 
-void sub_803CB7C(void)
+void NicknamePartner(void)
 {
   CopyStringtoBuffer(gUnknown_203B400->PartnerNick, GetMonSpecies(gUnknown_203B400->PartnerID));
   sub_801602C(3, gUnknown_203B400->PartnerNick);
@@ -542,7 +542,7 @@ void PrintEndIntroText(void)
   }
 }
 
-void sub_803CBE4(void)
+void AdvanceToTestEnd(void)
 {
   s32 temp;
 
@@ -624,9 +624,9 @@ void CreatePartnerSelectionMenu(s16 starterID)
 
 u16 HandlePartnerSelectionInput(void)
 {
-  s32 sVar1;
+  s32 partnerID;
 
-  sVar1 = gUnknown_203B404->currPartnerSelection;
+  partnerID = gUnknown_203B404->currPartnerSelection;
   gUnknown_203B404->unk16 = 0;
   if (GetKeyPress(&gUnknown_203B404->unk18) == A_BUTTON) {
     PlayMenuSoundEffect(0);
@@ -636,7 +636,7 @@ u16 HandlePartnerSelectionInput(void)
     if (sub_80138B8(&gUnknown_203B404->unk18, 1) != '\0') {
       RedrawPartnerSelectionMenu();
     }
-    if (sVar1 != gUnknown_203B404->currPartnerSelection) {
+    if (partnerID != gUnknown_203B404->currPartnerSelection) {
       PersonalityTest_DisplayPartnerSprite();
     }
     if (gUnknown_203B404->unk16 != '\0') {
