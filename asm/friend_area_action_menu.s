@@ -514,7 +514,7 @@ _0802782C:
 	adds r1, 0x14
 	bl PeekPokemonItem
 	movs r0, 0x3
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _080278AE
 	.align 2, 0
 _08027860: .4byte gUnknown_203B2BC
@@ -540,7 +540,7 @@ _08027868:
 	adds r1, 0x14
 	bl PeekPokemonItem
 	movs r0, 0x4
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _080278AE
 	.align 2, 0
 _0802789C: .4byte gUnknown_203B2BC
@@ -548,7 +548,7 @@ _080278A0: .4byte gRecruitedPokemonRef
 _080278A4:
 	bl sub_8023C60
 	movs r0, 0x11
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _080278AE:
 	pop {r4}
 	pop {r0}
@@ -675,15 +675,15 @@ _080279B8: .4byte gRecruitedPokemonRef
 _080279BC: .4byte gUnknown_203B2BC
 _080279C0:
 	movs r0, 0x8
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 _080279C8:
 	movs r0, 0xE
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 _080279D0:
 	movs r0, 0xA
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 _080279D8:
 	ldr r0, _08027A18
@@ -711,22 +711,22 @@ _080279F0:
 	bl nullsub_104
 _08027A0E:
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 	.align 2, 0
 _08027A18: .4byte 0x0000014d
 _08027A1C: .4byte gUnknown_203B2BC
 _08027A20:
 	movs r0, 0x4
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 _08027A28:
 	movs r0, 0x5
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027A36
 _08027A30:
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027A36:
 	add sp, 0x4
 	pop {r4}
@@ -744,7 +744,7 @@ sub_8027A40:
 	bhi _08027A58
 	bl sub_802453C
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027A58:
 	pop {r0}
 	bx r0
@@ -760,7 +760,7 @@ sub_8027A5C:
 	bhi _08027A74
 	bl sub_801BF98
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027A74:
 	pop {r0}
 	bx r0
@@ -787,7 +787,7 @@ _08027A96:
 	bne _08027AD8
 _08027A9A:
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027AD8
 _08027AA2:
 	ldr r0, _08027AB8
@@ -809,7 +809,7 @@ _08027ABE:
 	cmp r0, 0
 	beq _08027ACA
 	movs r0, 0x9
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027AD8
 _08027ACA:
 	bl sub_8027EB8

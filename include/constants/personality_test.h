@@ -1,8 +1,24 @@
 #ifndef GUARD_CONSTANTS_PERSONALITY_TEST_H
 #define GUARD_CONSTANTS_PERSONALITY_TEST_H
 
+enum NaturePersonalities {
+    HARDY,
+    DOCILE,
+    BRAVE,
+    JOLLY,
+    IMPISH,
+    NAIVE,
+    TIMID,
+    HASTY,
+    SASSY,
+    CALM,
+    RELAXED,
+    LONELY,
+    QUIRKY,
+    NUM_PERSONALITIES
+};
+
 #define NUM_PARTNERS 10
-#define NUM_PERSONALITIES 13
 #define NUM_QUIZ_QUESTIONS 55
 #define MAX_ASKED_QUESTIONS 8
 

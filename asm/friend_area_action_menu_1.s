@@ -36,14 +36,14 @@ _08027CD0:
 	ldrh r0, [r0, 0x2A]
 	strh r0, [r1, 0x24]
 	movs r0, 0x10
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027CFA
 	.align 2, 0
 _08027CEC: .4byte gUnknown_203B2BC
 _08027CF0:
 	bl sub_801F214
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027CFA:
 	pop {r0}
 	bx r0
@@ -59,7 +59,7 @@ sub_8027D00:
 	bhi _08027D18
 	bl sub_801F8D0
 	movs r0, 0xF
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027D18:
 	pop {r0}
 	bx r0
@@ -76,7 +76,7 @@ sub_8027D1C:
 	ldr r0, _08027D3C
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027D34:
 	add sp, 0x4
 	pop {r0}
@@ -322,7 +322,7 @@ _08027ED8:
 	adds r1, 0x14
 	bl GivePokemonItem
 	movs r0, 0x6
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027F82
 	.align 2, 0
 _08027F08: .4byte 0x0000014d
@@ -373,14 +373,14 @@ _08027F52:
 	adds r1, 0x14
 	bl GivePokemonItem
 	movs r0, 0x7
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 	b _08027F82
 	.align 2, 0
 _08027F74: .4byte gTeamInventory_203B460
 _08027F78: .4byte gUnknown_203B2BC
 _08027F7C:
 	movs r0, 0x2
-	bl sub_8027184
+	bl SetFriendAreaActionMenuState
 _08027F82:
 	pop {r4}
 	pop {r0}

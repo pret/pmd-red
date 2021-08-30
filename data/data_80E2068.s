@@ -853,11 +853,15 @@ gUnknown_80E352C: @ 80E352C
 
 	.global gUnknown_80E355C
 gUnknown_80E355C: @ 80E355C
-	.incbin "baserom.gba", 0xE355C, 0x50
+        .string "Mail can~27t be sent to a GBA Game Pak\n"
+        .string "with the game quicksaved in a dungeon.\0"
+        .align 2,0
 
 	.global gUnknown_80E35AC
 gUnknown_80E35AC: @ 80E35AC
-	.incbin "baserom.gba", 0xE35AC, 0x3C
+        .string "The GBA Game Pak does not have\n"
+        .string "a #CGThank-You Mail#R on it.\0"
+        .align 2,0
 
 	.global gUnknown_80E35E8
 gUnknown_80E35E8: @ 80E35E8
@@ -866,11 +870,15 @@ gUnknown_80E35E8: @ 80E35E8
 
 	.global gUnknown_80E360C
 gUnknown_80E360C: @ 80E360C
-	.incbin "baserom.gba", 0xE360C, 0x38
+        .string "How would you like to send\n"
+        .string "your #CGThank-You Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E3644
 gUnknown_80E3644: @ 80E3644
-	.incbin "baserom.gba", 0xE3644, 0x38
+        .string "How would you like to receive\n"
+        .string "the #CGThank-You Mail#R?\0"
+        .align 2,0
 
 	.global gUnknown_80E367C
 gUnknown_80E367C: @ 80E367C
@@ -1279,11 +1287,48 @@ gUnknown_80E5A78: @ 80E5A78
 
 	.global gUnknown_80E5A90
 gUnknown_80E5A90: @ 80E5A90
-	.incbin "baserom.gba", 0xE5A90, 0x6C
+        .4byte Continue_80E5AF0
+        .byte 0x07, 0x00, 0x00, 0x00
+        .4byte DeleteSaveData_80E5ADC
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte 0x80E5A10
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .4byte FriendRescue_80E5ACC
+        .byte 0x0b, 0x00, 0x00, 0x00
+        .4byte TradeItems_80E5AC0
+        .byte 0x0c, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xdd, 0xff, 0x00, 0x00
+
+        TradeItems_80E5AC0:
+        .string "Trade Items\0"
+        .align 2,0
+        FriendRescue_80E5ACC:
+        .string "Friend Rescue\0"
+        .align 2,0
+        DeleteSaveData_80E5ADC:
+        .string "Delete Save Data\0"
+        .align 2,0
+        Continue_80E5AF0:
+        .string "Continue\0"
+        .align 2,0
 
 	.global gUnknown_80E5AFC
 gUnknown_80E5AFC: @ 80E5AFC
-	.incbin "baserom.gba", 0xE5AFC, 0x38
+        .4byte Continue_80E5AF0
+        .byte 0x07, 0x00, 0x00, 0x00
+        .4byte DeleteSaveData_80E5ADC
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte 0x80E5A10
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .4byte FriendRescue_80E5ACC
+        .byte 0x0b, 0x00, 0x00, 0x00
+        .4byte TradeItems_80E5AC0
+        .byte 0x0c, 0x00, 0x00, 0x00
+        .4byte 0x80E5A54
+        .byte 0x0d, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xdd, 0xff, 0x00, 0x00
 
 	.global gUnknown_80E5B34
 gUnknown_80E5B34: @ 80E5B34
@@ -1296,11 +1341,39 @@ gUnknown_80E5B34: @ 80E5B34
 
 	.global gUnknown_80E5B4C
 gUnknown_80E5B4C: @ 80E5B4C
-	.incbin "baserom.gba", 0xE5B4C, 0x40
+        .4byte AwaitingRescue_80E5B7C
+        .byte 0x06, 0x00, 0x00, 0x00
+        .4byte DeleteSaveData_80E5ADC
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte 0x80E5A10
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .4byte FriendRescue_80E5ACC
+        .byte 0x0b, 0x00, 0x00, 0x00
+        .4byte TradeItems_80E5AC0
+        .byte 0x0c, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xdd, 0xff, 0x00, 0x00
+       
+        AwaitingRescue_80E5B7C:
+        .string "Awaiting Rescue\0"
+        .align 2,0
 
 	.global gUnknown_80E5B8C
 gUnknown_80E5B8C: @ 80E5B8C
-	.incbin "baserom.gba", 0xE5B8C, 0x38
+        .4byte AwaitingRescue_80E5B7C
+        .byte 0x06, 0x00, 0x00, 0x00
+        .4byte DeleteSaveData_80E5ADC
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte 0x80E5A10
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .4byte FriendRescue_80E5ACC
+        .byte 0x0b, 0x00, 0x00, 0x00
+        .4byte TradeItems_80E5AC0
+        .byte 0x0c, 0x00, 0x00, 0x00
+        .4byte 0x80E5A54
+        .byte 0x0d, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xdd, 0xff, 0x00, 0x00
 
 	.global gUnknown_80E5BC4
 gUnknown_80E5BC4: @ 80E5BC4
@@ -1313,7 +1386,22 @@ gUnknown_80E5BC4: @ 80E5BC4
 
 	.global gUnknown_80E5BDC
 gUnknown_80E5BDC: @ 80E5BDC
-	.incbin "baserom.gba", 0xE5BDC, 0x3C
+        .4byte ReviveTeam_80E5C0C
+        .byte 0x07, 0x00, 0x00, 0x00
+        .4byte DeleteSaveData_80E5ADC
+        .byte 0x08, 0x00, 0x00, 0x00
+        .4byte 0x80E5A10
+        .byte 0x0a, 0x00, 0x00, 0x00
+        .4byte FriendRescue_80E5ACC
+        .byte 0x0b, 0x00, 0x00, 0x00
+        .4byte TradeItems_80E5AC0
+        .byte 0x0c, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0xdd, 0xff, 0x00, 0x00
+       
+        ReviveTeam_80E5C0C:
+        .string "Revive Team\0"
+        .align 2,0
 
 	.global gUnknown_80E5C18
 gUnknown_80E5C18: @ 80E5C18
@@ -1494,27 +1582,43 @@ gUnknown_80E61C0: @ 80E61C0
 
 	.global gUnknown_80E61E4
 gUnknown_80E61E4: @ 80E61E4
-	.incbin "baserom.gba", 0xE61E4, 0x30
+        .string "#CG$d0#R #CI$i0(s)#R\n"
+        .string "will be sent.\n"
+        .string "Is that OK?\0"
+        .align 2,0
 
 	.global gUnknown_80E6214
 gUnknown_80E6214: @ 80E6214
-	.incbin "baserom.gba", 0xE6214, 0x54
+        .string "Your friend will send you an item.\n"
+        .string "When you are both ready~2c you\n"
+        .string "may communicate.\0"
+        .align 2,0
 
 	.global gUnknown_80E6268
 gUnknown_80E6268: @ 80E6268
-	.incbin "baserom.gba", 0xE6268, 0x5C
+        .string "Preparing to send an item to your\n"
+        .string "friend. When you are both ready~2c\n"
+        .string "you may communicate.\0"
+        .align 2,0
 
 	.global gUnknown_80E62C4
 gUnknown_80E62C4: @ 80E62C4
-	.incbin "baserom.gba", 0xE62C4, 0x50
+        .string "#+In communication...\n"
+        .string "#+Please wait with the power on.\n"
+        .string "#+To cancel~2c press {B_BUTTON}.\0"
+        .align 2,0
 
 	.global gUnknown_80E6314
 gUnknown_80E6314: @ 80E6314
-	.incbin "baserom.gba", 0xE6314, 0x44
+        .string "You received\n"
+        .string "#CG$d0#R #CI$i0(s)#R.\n"
+        .string "Your adventure will be saved.\0"
+        .align 2,0
 
 	.global gUnknown_80E6358
 gUnknown_80E6358: @ 80E6358
-	.incbin "baserom.gba", 0xE6358, 0x20
+        .string "You sent #CG$d0#R #CI$i0(s)#R.\0"
+        .align 2,0
 
 @ Trade Items Link Errors
 	.global gTradeItemsCommunicationError
@@ -1524,30 +1628,30 @@ gTradeItemsCommunicationError: @ 80E6378
 
 	.global gUnknown_80E639C
 gUnknown_80E639C: @ 80E639C
-.string "An incorrect number of GBA systems are\n"
-.string "connected.\n"
-.string "Please redo this process from the start.\0"
-.align 2,0
+        .string "An incorrect number of GBA systems are\n"
+        .string "connected.\n"
+        .string "Please redo this process from the start.\0"
+        .align 2,0
 
 	.global gUnknown_80E63F8
 gUnknown_80E63F8: @ 80E63F8
-.string "There is no response from your friend.\n"
-.string "Please redo this process from the start.\0"
-.align 2,0
+        .string "There is no response from your friend.\n"
+        .string "Please redo this process from the start.\0"
+        .align 2,0
 
 	.global gUnknown_80E6448
 gUnknown_80E6448: @ 80E6448
-.string "The sender and receiver appear to be\n"
-.string "in different modes.\n"
-.string "Please redo the process from the start.\0"
-.align 2,0
+        .string "The sender and receiver appear to be\n"
+        .string "in different modes.\n"
+        .string "Please redo the process from the start.\0"
+        .align 2,0
 
 	.global gUnknown_80E64AC
 gUnknown_80E64AC: @ 80E64AC
-.string "There is no response from your friend.\n"
-.string "Please make sure the sender and receiver\n"
-.string "are ready~2c then redo this from the start.\0"
-.align 2,0
+        .string "There is no response from your friend.\n"
+        .string "Please make sure the sender and receiver\n"
+        .string "are ready~2c then redo this from the start.\0"
+        .align 2,0
 
 	.global gTradeItemsHowManyText
 gTradeItemsHowManyText: @ 80E6528
@@ -2435,7 +2539,10 @@ gUnknown_80E79E4: @ 80E79E4
 
 	.global gUnknown_80E7A48
 gUnknown_80E7A48: @ 80E7A48
-	.incbin "baserom.gba", 0xE7A48, 0x7C
+        .string "There is no response from your friend.\n"
+        .string "Please make sure the sender and receiver\n"
+        .string "are ready~2c then redo this from the start.\0"
+        .align 2,0
 
 	.global gUnknown_80E7AC4
 gUnknown_80E7AC4: @ 80E7AC4
@@ -2466,7 +2573,9 @@ gUnknown_80E7B68: @ 80E7B68
 
 	.global gUnknown_80E7B88
 gUnknown_80E7B88: @ 80E7B88
-	.incbin "baserom.gba", 0xE7B88, 0x40
+        .string "The received #CGWonder Mail#R was\n"
+        .string "added to the #CGJob List#R.\0"
+        .align 2,0
 
 	.global gUnknown_80E7BC8
 gUnknown_80E7BC8: @ 80E7BC8
@@ -2475,11 +2584,17 @@ gUnknown_80E7BC8: @ 80E7BC8
 
 	.global gUnknown_80E7BEC
 gUnknown_80E7BEC: @ 80E7BEC
-	.incbin "baserom.gba", 0xE7BEC, 0x5C
+        .string "Connect a #CGGame Link cable#R.\n"
+        .string "When you and your friend are ready~2c\n"
+        .string "you may communicate. \0"
+        .align 2,0
 
 	.global gUnknown_80E7C48
 gUnknown_80E7C48: @ 80E7C48
-	.incbin "baserom.gba", 0xE7C48, 0x50
+        .string "#+In communication...\n"
+        .string "#+Please wait with the power on.\n"
+        .string "#+To cancel~2c press {B_BUTTON}.\0"
+        .align 2,0
 
 	.global gUnknown_80E7C98
 gUnknown_80E7C98: @ 80E7C98

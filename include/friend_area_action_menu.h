@@ -17,8 +17,7 @@ struct unkStruct_203B2BC
     u16 unkA;
     u32 unkC;
     struct HeldItem unk10;
-    u8 unk14;
-    u8 fill15[3];
+    struct ItemSlot unk14;
     struct unkSubStruct_203B2BC *unk18;
     u32 unk1C;
     u32 unk20;

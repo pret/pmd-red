@@ -19,8 +19,7 @@ struct unkStruct_203B20C
     u32 unk14;
     u32 unk18;
     u32 unk1C;
-    u32 unk20;
-    u8 fill24[0x60 - 0x24];
+    struct MenuItem unk20[8];
     u16 unk60[8];
     u32 unk70;
     u8 fill74[0xC0 - 0x74];
@@ -74,7 +73,7 @@ extern u32 sub_801A6E8(u32);
 extern u32 sub_801AEA8(void);
 extern u32 sub_801A8AC(void);
 extern void sub_801A928(void);
-extern void sub_8012CAC(struct UnkTextStruct2 *, u32 *);
+extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_80182E4(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
@@ -93,7 +92,7 @@ extern void sub_8013AA0(u32 *);
 extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
-extern void sub_8012D60(u32 *, u32 *, u32, u16 *, u32, u32);
+extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801A8D0(u32);
 
@@ -376,7 +375,7 @@ void sub_8017F28(void)
             gUnknown_203B20C->unkF0[0] = gUnknown_80DB7B8;
             sub_80182E4();
             gUnknown_203B20C->unkF0[2] = gUnknown_80DB7D0;
-            sub_8012CAC(&gUnknown_203B20C->unkF0[2], &gUnknown_203B20C->unk20);
+            sub_8012CAC(&gUnknown_203B20C->unkF0[2], gUnknown_203B20C->unk20);
             break;
         case 4:
         case 5:
@@ -417,7 +416,7 @@ void sub_8018100(void)
     switch(gUnknown_203B20C->state)
     {
         case 1:
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk14, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk14, 2);
             break;
         case 4:
             sub_801A5D8(3, 3, 0, 0xA);
@@ -428,7 +427,7 @@ void sub_8018100(void)
         case 6:
             sub_801A9E0();
             sub_801841C();
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk18, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk18, 2);
             break;
         case 7:
             sub_801B3C0(&gUnknown_203B20C->unk8);
@@ -460,7 +459,7 @@ void sub_8018100(void)
             sub_801CCD8();
             sub_801AD34(0);
             sub_80184D4();
-            sub_8012D60(&gUnknown_203B20C->unk70, &gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk1C, 2);
+            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->unk1C, 2);
             break;
         case 14:
             sub_801B3C0(&gUnknown_203B20C->unk8);

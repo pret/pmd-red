@@ -329,7 +329,7 @@ void sub_8036788(void)
     case 3:
         // Confirm # of item
         gTradeItemsMenu->itemToSend.numItems = gTradeItemsMenu->numItemsToSend;
-        gTradeItemsMenu->sentItem.itemIndex = gTradeItemsMenu->itemToSend.itemIndex;
+        gTradeItemsMenu->sentItem.itemIdx.itemIndex = gTradeItemsMenu->itemToSend.itemIndex;
         gTradeItemsMenu->sentItem.numItems = gTradeItemsMenu->numItemsToSend;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
@@ -392,7 +392,7 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if ((gTradeItemsMenu->sentItem.itemIndex != 0) && (gTradeItemsMenu->sentItem.numItems != 0))
+            if ((gTradeItemsMenu->sentItem.itemIdx.itemIndex != 0) && (gTradeItemsMenu->sentItem.numItems != 0))
             {
                 TradeItem_AddItem();
                 SetTradeItemMenu(0x11);
@@ -430,7 +430,7 @@ void sub_8036950(void)
       }
     }
     else {
-      if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->sentItem.itemIndex != 0))
+      if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->sentItem.itemIdx.itemIndex != 0))
          && (gTradeItemsMenu->sentItem.numItems != 0)) {
           // Link Failure
         TradeItem_AddItem(); // Add back the item
@@ -449,9 +449,9 @@ void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements 
     u16 load;
-    load = gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIndex];
+    load = gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIdx.itemIndex];
     load += gTradeItemsMenu->sentItem.numItems;
-    gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIndex] = load;
+    gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIdx.itemIndex] = load;
 }
 
 void sub_80369FC(void)
@@ -554,9 +554,7 @@ void nullsub_52(void)
 void sub_8036B28(void)
 {
   int iVar3;
-  u32 uVar4;
   s32 local_10;
-  u32 load_1;
   u32 load_2;
   struct TradeSubStruct *temp;
   struct TradeSubStruct *temp2;
@@ -612,13 +610,13 @@ void sub_8036B28(void)
     // Regs mess up here
     // Needs a mov r2, 0
     // and     mov r3, 0
+
         temp = &gTradeItemsMenu->unk244;
-        temp->itemIndex = 0;
+        temp->itemIdx.itemIndex_u32 = 0;
         temp->numItems = 0;
 
-        temp += 1; // move to unk24C
-
-        temp->itemIndex = 0;
+        temp = &gTradeItemsMenu->unk24C;
+        temp->itemIdx.itemIndex_u32 = 0;
         temp->numItems = 0;
     // Regs are fixed back up after
 
@@ -632,7 +630,7 @@ void sub_8036B28(void)
                 temp = &gTradeItemsMenu->unk244;
                 temp2 = &gTradeItemsMenu->sentItem;
                 load_2 = temp2->numItems;
-                temp->itemIndex = temp2->itemIndex;
+                temp->itemIdx.itemIndex_u32 = temp2->itemIdx.itemIndex_u32;
                 temp->numItems = load_2;
             case TRADE_ITEMS_RECEIVE_ITEM_MODE:
                 gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
@@ -650,12 +648,12 @@ void sub_8036B28(void)
         if (gTradeItemsMenu->unk24C.numItems == 0) {
             gUnknown_202DE30 = gTradeItemsMenu->unk244.numItems;
             // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk244.itemIndex,0);
+            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk244.itemIdx.itemIndex,0);
         }
         else {
             gUnknown_202DE30 = gTradeItemsMenu->unk24C.numItems;
             // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk24C.itemIndex,0);
+            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk24C.itemIdx.itemIndex,0);
         }
         sub_80141B4(&gUnknown_80E6314,0,0,0x101);
         break;

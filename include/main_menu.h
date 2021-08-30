@@ -18,6 +18,7 @@ enum MainMenuScreens
     MENU_DEBUG = 16,
     MENU_COMMUNICATION_1 = 19,
     MENU_COMMUNICATION_2,
+    // NOTE: 0x1B - 0x22 used by Rescue Password Menu
     MENU_DISPLAY_RESCUE_PASSWORD = 33,
     MENU_RESCUE_PASSWORD_ENTRY,
     MENU_DELETE_SAVE = 46,

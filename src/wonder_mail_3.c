@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "text.h"
 #include "input.h"
+#include "menu.h"
 
 struct unkStruct_203B2F8
 {
@@ -18,10 +19,8 @@ struct unkStruct_203B2F8
     u32 unk70;
     u32 unk74;
     u8 fill78[0x118 - 0x78];
-    u32 unk118;
-    u8 fill11C[0x158 - 0x11C];
-    u32 unk158;
-    u8 fill15C[0x198 - 0x15C];
+    struct MenuItem unk118[8];
+    struct MenuItem unk158[8];
     u16 unk198[8];
     struct UnkTextStruct2 unk1A8[4];
     u32 unk1E4;
@@ -30,7 +29,7 @@ extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
 extern struct UnkTextStruct2 gUnknown_80DFE04;
 extern struct UnkTextStruct2 gUnknown_80DFE1C;
 extern struct UnkTextStruct2 gUnknown_80DFDD4;
-extern void sub_8012CAC(struct UnkTextStruct2 *, u32 *);
+extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
 
@@ -129,13 +128,13 @@ void sub_802D1B8(void)
         case 0xD:
            sub_802D5A4();
            gUnknown_203B2F8->unk1A8[2] = gUnknown_80DFE04;
-           sub_8012CAC(&gUnknown_203B2F8->unk1A8[2], &gUnknown_203B2F8->unk118);
+           sub_8012CAC(&gUnknown_203B2F8->unk1A8[2], gUnknown_203B2F8->unk118);
            gUnknown_203B2F8->unk1A8[2].unk0c = 6;
            break;
         case 0xE:
            sub_802D63C();
            gUnknown_203B2F8->unk1A8[3] = gUnknown_80DFE1C;
-           sub_8012CAC(&gUnknown_203B2F8->unk1A8[3], &gUnknown_203B2F8->unk158);
+           sub_8012CAC(&gUnknown_203B2F8->unk1A8[3], gUnknown_203B2F8->unk158);
            gUnknown_203B2F8->unk1A8[3].unk0c = 6;
            break;
         default:

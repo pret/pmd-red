@@ -28,7 +28,7 @@ extern u8 sub_80953D4(u32);
 extern u8 sub_801CF14(u32);
 
 extern u8 gUnknown_80E48A8[];
-extern u32 gUnknown_80E2440;
+extern struct MenuItem gUnknown_80E2440[];
 extern u8 gUnknown_80E49C4[];
 extern u8 gUnknown_80E4704[];
 extern u8 gUnknown_80E48E8[];
@@ -36,7 +36,7 @@ extern u8 gUnknown_80E4928[];
 extern u8 gUnknown_80E4964[];
 extern u8 gUnknown_80E499C[];
 extern u8 gUnknown_80E460C[];
-extern u32 gUnknown_80E2290[];
+extern struct MenuItem gUnknown_80E2290[];
 extern u8 gUnknown_80E31FC[];
 
 
@@ -44,7 +44,7 @@ extern u32 sub_80154F0();
 extern void sub_80155F0();
 struct unkStruct_8095228 *sub_8095228(u8);
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, u32 *r4, u32, u32, u32, u32 *r5, u32);
+extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
@@ -69,7 +69,6 @@ extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E10(void);
 extern void sub_8031E00(void);
-extern void PrintFriendRescueError(u32);
 extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
@@ -1343,7 +1342,7 @@ void sub_8034D74(void)
                 switch(sub_8039068(0x20, gUnknown_203B33C->passwordBuffer, &temp.unk0))
                 {
                     case 17:
-                        sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2440, 0, 4, 0, 0, 0x101);
+                        sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x74);
                         break;
                     case 20:

@@ -5350,28 +5350,4 @@ _0802FCCE:
 _0802FCEC: .4byte gUnknown_203B314
 	thumb_func_end sub_802FBF4
 
-	thumb_func_start sub_802FCF0
-sub_802FCF0:
-	push {r4,lr}
-	movs r4, 0
-_0802FCF4:
-	lsls r0, r4, 16
-	asrs r0, 16
-	bl sub_80A27CC
-	lsls r0, 24
-	cmp r0, 0
-	beq _0802FD06
-	movs r0, 0
-	b _0802FD0E
-_0802FD06:
-	adds r4, 0x1
-	cmp r4, 0x2D
-	ble _0802FCF4
-	movs r0, 0x1
-_0802FD0E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_802FCF0
-
         .align 2,0

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_8041D5C.h"
+#include "gUnknown_203B418.h"
 
 struct unkStruct_80420E8
 {
@@ -8,7 +9,7 @@ struct unkStruct_80420E8
     u32 unk8;
 };
 
-extern u8 *gUnknown_203B418;
+extern struct unkStruct_203B418 *gUnknown_203B418;
 
 
 extern void sub_803ED30(u8, struct unkDungeon_8041D5C *r0, u8, u8); 
@@ -593,7 +594,7 @@ void sub_80420E8(struct unkDungeon_8041D5C *r0, struct unkStruct_80420E8 *r1)
     u32 temp;
     u32 arg;
     temp = r1->unk8;
-    if(gUnknown_203B418[0x16d] != 0)
+    if(gUnknown_203B418->unk16D != 0)
         temp = sub_806F62C(r1->unk8);
     switch(temp)
     {

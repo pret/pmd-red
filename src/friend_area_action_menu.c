@@ -20,7 +20,7 @@ extern const char gUnknown_80DD8D0[];
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32 *, u32, u32);
-extern void sub_8027D40(u32, u8 *);
+extern void sub_8027D40(u32, struct ItemSlot *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
@@ -38,7 +38,7 @@ extern void sub_809401C(u32 *, u32 *);
 extern void sub_801EE10(u32, s16, u32 *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
-extern void sub_8027184(u32);
+extern void SetFriendAreaActionMenuState(u32);
 extern void ResetSprites(u8 );
 extern void sub_802719C();
 extern void sub_8027274();
@@ -65,7 +65,7 @@ u32 sub_8027074(void)
     gUnknown_203B2BC->unk70 = 0;
     gUnknown_203B2BC->unk74 = 0;
     gUnknown_203B2BC->unk78 = 0;
-    sub_8027184(0);
+    SetFriendAreaActionMenuState(0);
     return 1;
 }
 
@@ -73,7 +73,7 @@ u32 sub_80270A4(void)
 {
   switch(gUnknown_203B2BC->state) {
       case 0:
-        sub_8027184(1);
+        SetFriendAreaActionMenuState(1);
         break;
       case 1:
       case 2:
@@ -129,7 +129,7 @@ void sub_8027168(void)
     }
 }
 
-void sub_8027184(u32 newState)
+void SetFriendAreaActionMenuState(u32 newState)
 {
     gUnknown_203B2BC->state = newState;
     sub_802719C();

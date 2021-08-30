@@ -9,6 +9,7 @@
 #include "memory.h"
 #include "gUnknown_203B46C.h"
 #include "text.h"
+#include "menu.h"
 
 extern void sub_801317C(u32 *);
 extern void sub_8001024(u32 *);
@@ -17,7 +18,7 @@ extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
 extern void sub_80141B4(const char *text, u32 r1, u32 r2, u16 r3);
-extern void sub_8014248(const char *text, u32, u32, u32 *r0, u32, u32, u32, u32, u32);
+extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
 
 extern u32 sub_80144A4(s32 *);
 
@@ -54,7 +55,7 @@ extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 extern const char gStarterReveal[];
 extern const char gGenderText[];
-extern u32 gGenderMenu;
+extern struct MenuItem gGenderMenu[];
 extern const char gPartnerSelectionHeaderText;
 
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
@@ -96,19 +97,19 @@ const char * const gEndIntroTextPtr = gEndIntroText;
 
 const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] = 
 {
-    gHardyDescription,
-    gDocileDescription,
-    gBraveDescription,
-    gJollyDescription,
-    gImpishDescription,
-    gNaiveDescription,
-    gTimidDescription,
-    gHastyDescription,
-    gSassyDescription,
-    gCalmDescription,
-    gRelaxedDescription,
-    gLonelyDescription,
-    gQuirkyDescription
+    [HARDY] = gHardyDescription,
+    [DOCILE] = gDocileDescription,
+    [BRAVE] = gBraveDescription,
+    [JOLLY] = gJollyDescription,
+    [IMPISH] = gImpishDescription,
+    [NAIVE] = gNaiveDescription,
+    [TIMID] = gTimidDescription,
+    [HASTY] = gHastyDescription,
+    [SASSY] = gSassyDescription,
+    [CALM] = gCalmDescription,
+    [RELAXED] = gRelaxedDescription,
+    [LONELY] = gLonelyDescription,
+    [QUIRKY] = gQuirkyDescription
 };
 
 #include "data/nature_description.h"
@@ -289,7 +290,7 @@ void GenerateNewQuestionOrGender(void)
   gUnknown_203B400->QuestionCounter++;
   if (gUnknown_203B400->QuestionCounter > MAX_ASKED_QUESTIONS) {
       // We've asked enough questions
-        sub_8014248(gGenderText, 0, 0, &gGenderMenu, 0, 3, 0, 0, 257);
+        sub_8014248(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
         gUnknown_203B400->TestState = 3;
   }
   else
@@ -335,7 +336,8 @@ void UpdateNatureTotals()
         {
             pointArray = gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->effects;
             // Skip until we get to the one for our answer
-            pointArray += 16 * answerIndex;
+            // Each Answer has 16 bytes. 13 are currently used with 3 remaining
+            pointArray += (NUM_PERSONALITIES + 3) * answerIndex;
             for (natureIndex = 0; natureIndex < NUM_PERSONALITIES; natureIndex++)
             {
                 gUnknown_203B400->NatureTotals[natureIndex] += pointArray[natureIndex];
@@ -555,7 +557,7 @@ void PromptNewQuestion(void)
 {
   sub_8014248(gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->question,
               0, 0,
-              (void *)gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->answers,
+              (struct MenuItem *)gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->answers,
               0, 3, 0, 0, 0x101);
 }
 

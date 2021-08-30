@@ -13,8 +13,7 @@ struct unkStruct_203B25C
     u32 unk18;
     const char *unk1C;
     u8 fill20[0x6C - 0x20];
-    struct MenuItem unk6C[3];
-    u8 fill84[0xAC - 0x84];
+    struct MenuItem menuItems[8];
     u16 unkAC[8];
     struct UnkTextStruct2 unkBC[4];
 };
@@ -137,7 +136,7 @@ void sub_801DD84(void)
             // TODO probably could be cleaned up to actually match
             iVar3 = 0;
             if (gUnknown_203B25C->unkAC[iVar3] == 0) {
-                gUnknown_203B25C->unk18 = gUnknown_203B25C->unk6C[iVar3].menuAction;
+                gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
             }
             else {
                 do {
@@ -145,7 +144,7 @@ void sub_801DD84(void)
                     if(iVar3 > 7)
                         break;
                     if(gUnknown_203B25C->unkAC[iVar3] == 0){
-                        gUnknown_203B25C->unk18 = gUnknown_203B25C->unk6C[iVar3].menuAction;
+                        gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
                         break;
                     }
                 } while (iVar3 < 8);
@@ -155,7 +154,7 @@ void sub_801DD84(void)
                 gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFCC;
             }
             gUnknown_203B25C->unkBC[0] = gUnknown_80DBFB0;
-            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->unk6C);
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
             gUnknown_203B25C->unkBC[0].unk0c = 0xA;
             break;
         case 1:
@@ -165,7 +164,7 @@ void sub_801DD84(void)
                 gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
             }
             gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
-            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->unk6C);
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
             gUnknown_203B25C->unkBC[0].unk0c = 0xA;
             break;
         default:
@@ -353,7 +352,7 @@ void sub_801DED0(void)
     case 0:
     case 1:
         gUnknown_203B25C->unk1C = gOthers_MenuOption;
-        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->unk6C,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->unk18,0);
+        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->unk18,0);
         break;
     case 3:
         sub_801E3F0(0);
@@ -372,7 +371,7 @@ void sub_801DED0(void)
     case 7:
         CreateChangeSettingsConfirmMenu();
         // Change settings?
-        sub_8014248(gUnknown_80DBFEC,0,4,gUnknown_203B25C->unk6C,0,4,0,0,0x20);
+        sub_8014248(gUnknown_80DBFEC,0,4,gUnknown_203B25C->menuItems,0,4,0,0,0x20);
         break;
   }
 }
@@ -388,13 +387,13 @@ void CreateOthersMenu(void)
   // This is dumb that I have to squeeze this in like this
   preload = gUnknown_203B25C;
   blankText = NULL;
-  preload->unk6C[0].text = gOthers_GameOptions;
-  preload->unk6C[0].menuAction = MENU_OPTION_GAMEOPTIONS;
+  preload->menuItems[0].text = gOthers_GameOptions;
+  preload->menuItems[0].menuAction = MENU_OPTION_GAMEOPTIONS;
   defaultAction = MENU_OPTION_DEFAULT;
-  preload->unk6C[1].text = gOthers_Hints;
-  preload->unk6C[1].menuAction = MENU_OPTION_HINTS;
-  preload->unk6C[2].text = blankText;
-  preload->unk6C[2].menuAction = defaultAction;
+  preload->menuItems[1].text = gOthers_Hints;
+  preload->menuItems[1].menuAction = MENU_OPTION_HINTS;
+  preload->menuItems[2].text = blankText;
+  preload->menuItems[2].menuAction = defaultAction;
 }
 
 void CreateChangeSettingsConfirmMenu(void)
@@ -408,13 +407,13 @@ void CreateChangeSettingsConfirmMenu(void)
   // This is dumb that I have to squeeze this in like this
   preload = gUnknown_203B25C;
   blankText = NULL;
-  preload->unk6C[0].text = *gUnknown_80D4920; // Yes
-  preload->unk6C[0].menuAction = MENU_OPTION_YES;
+  preload->menuItems[0].text = *gUnknown_80D4920; // Yes
+  preload->menuItems[0].menuAction = MENU_OPTION_YES;
   defaultAction = MENU_OPTION_DEFAULT;
-  preload->unk6C[1].text = *gUnknown_80D4928; // No
-  preload->unk6C[1].menuAction = MENU_OPTION_NO;
-  preload->unk6C[2].text = blankText;
-  preload->unk6C[2].menuAction = defaultAction;
+  preload->menuItems[1].text = *gUnknown_80D4928; // No
+  preload->menuItems[1].menuAction = MENU_OPTION_NO;
+  preload->menuItems[2].text = blankText;
+  preload->menuItems[2].menuAction = defaultAction;
 }
 
 void HandleOthersMenu(void)

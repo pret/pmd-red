@@ -29515,7 +29515,7 @@ _0807E816:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_807EA18
+	bl GetWeatherName
 	ldr r0, _0807E884
 	ldr r1, [r0]
 	adds r0, r5, 0
@@ -29752,8 +29752,8 @@ _0807EA0A:
 	bx r0
 	thumb_func_end sub_807E8F0
 
-	thumb_func_start sub_807EA18
-sub_807EA18:
+	thumb_func_start GetWeatherName
+GetWeatherName:
 	push {lr}
 	lsls r1, 24
 	ldr r2, _0807EA2C
@@ -29764,8 +29764,8 @@ sub_807EA18:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EA2C: .4byte gUnknown_80F9A54
-	thumb_func_end sub_807EA18
+_0807EA2C: .4byte gWeatherNames
+	thumb_func_end GetWeatherName
 
 	thumb_func_start sub_807EA30
 sub_807EA30:
@@ -32341,8 +32341,8 @@ _0807FE7E:
 	bx r1
 	thumb_func_end sub_807FE44
 
-	thumb_func_start sub_807FE84
-sub_807FE84:
+	thumb_func_start GetTrapName
+GetTrapName:
 	push {lr}
 	lsls r1, 24
 	ldr r2, _0807FE98
@@ -32353,8 +32353,8 @@ sub_807FE84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FE98: .4byte gUnknown_80F91F0
-	thumb_func_end sub_807FE84
+_0807FE98: .4byte gTrapNames
+	thumb_func_end GetTrapName
 
 	thumb_func_start sub_807FE9C
 sub_807FE9C:
@@ -32394,7 +32394,7 @@ _0807FED8:
 	ldr r0, _0807FF58
 	mov r2, r8
 	ldrb r1, [r2]
-	bl sub_807FE84
+	bl GetTrapName
 	ldr r3, [sp, 0x4]
 	ldr r4, [r3, 0x10]
 	cmp r4, 0

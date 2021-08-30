@@ -13,8 +13,7 @@ struct unkStruct_203B204
     u32 unk8;
     u32 chosenAmount;
     u32 unk10;
-    struct MenuItem unk14[5];
-    u8 fill3C[0x54 - 0x3C];
+    struct MenuItem unk14[8];
     u16 unk54[8];
     u32 unk64;
     u8 fill68[0x78 - 0x68];
