@@ -2,6 +2,7 @@
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
+#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "memory.h"
 

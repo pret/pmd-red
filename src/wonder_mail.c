@@ -3,10 +3,10 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "item.h"
+#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text.h"
-#include "sub_8095228.h"
 #include "team_inventory.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;

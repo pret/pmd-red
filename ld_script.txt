@@ -122,7 +122,6 @@ SECTIONS {
         src/wonder_mail_pre.o(.text);
         asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
-        asm/wonder_mail_1.o(.text);
         src/wonder_mail_2.o(.text);
         asm/wonder_mail_2.o(.text);
         src/wonder_mail_3.o(.text);

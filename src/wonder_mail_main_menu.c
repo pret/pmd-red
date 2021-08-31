@@ -3,6 +3,7 @@
 #include "memory.h"
 #include "text.h"
 #include "input.h"
+#include "sub_8095228.h"
 #include "wonder_mail.h"
 
 #define WONDER_MAIL_MAIN_SCREEN 4

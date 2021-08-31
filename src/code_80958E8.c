@@ -3,6 +3,7 @@
 #include "item.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
+#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "constants/wonder_mail.h"
 
