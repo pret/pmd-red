@@ -43,6 +43,51 @@ struct unkStruct_203B2C8
     u32 fill13C;
 };
 
+struct unkStruct_203B2CC
+{
+    // size: 0xD4;
+    u8 unk0[0x38];
+
+    u32 unk38;
+    u8 fill3C[0x50 - 0x3C];
+
+    s16 unk50;
+    s16 unk52;
+    s16 unk54;
+    s16 unk56;
+
+    u16 unk58;
+    u16 unk5A;
+
+    u8 fill5C[0x6C - 0x5C];
+
+    u32 unk6C;
+
+    struct UnkTextStruct2 *unk70;
+    struct UnkTextStruct2 unk74[4];
+};
+
+extern struct unkStruct_203B2CC *gUnknown_203B2CC;
+extern u32 sub_802B9A8(void);
+extern void sub_802B880(void);
+extern void sub_802B8D4(void);
+extern void sub_8013818(void *, u32, u32, u32);
+extern void sub_8012D08(struct UnkTextStruct2 *, s32);
+extern void sub_8013984(u32 *);
+extern u8 sub_802B9D8(void);
+extern u16 gUnknown_203B2D0;
+extern u16 gUnknown_203B2D2;
+
+extern u8 sub_80138B8(void *, u32);
+extern void PlayMenuSoundEffect(u32);
+extern s32 GetKeyPress(u32 *);
+extern void sub_8013660(u32 *);
+extern void AddMenuCursorSprite(u32 *);
+
+extern struct UnkTextStruct2 gUnknown_80DFBEC;
+
+extern struct UnkTextStruct2 gUnknown_80DFBD0;
+
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
 extern struct MenuItem gUnknown_80DED78[];
@@ -549,4 +594,121 @@ void sub_802B624(void)
   if (sub_80144A4(&temp) == 0) {
     sub_802B548(5);
   }
+}
+
+u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
+{
+
+    if(sub_802B9D8())
+    {
+        return 0;
+    }
+    else
+    {
+        if(gUnknown_203B2CC == NULL)
+        {
+            gUnknown_203B2CC = MemoryAlloc(0xD4, 8);
+        }
+        gUnknown_203B2CC->unk6C = r0;
+        gUnknown_203B2CC->unk70 = &gUnknown_203B2CC->unk74[r0];
+
+        sub_8006518(gUnknown_203B2CC->unk74);
+
+        gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBEC;
+
+        if(r1 != NULL)
+        {
+            gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C].unk08 = *r1;
+        }
+
+        sub_8012D08(gUnknown_203B2CC->unk70, r2);
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
+
+        sub_8013818(&gUnknown_203B2CC->unk38, sub_802B9A8(), r2, r0);
+
+        gUnknown_203B2CC->unk50 = gUnknown_203B2D0;
+        gUnknown_203B2CC->unk56 = gUnknown_203B2D2;
+
+        sub_8013984(&gUnknown_203B2CC->unk38);
+        sub_802B880();
+        sub_802B8D4();
+
+        return 1;
+    }
+}
+
+u32 sub_802B720(u8 r0)
+{
+    if(r0 == 0)
+    {
+        sub_8013660(&gUnknown_203B2CC->unk38);
+        return 0;
+    }
+    else
+    {
+        switch(GetKeyPress(&gUnknown_203B2CC->unk38))
+        {
+            case 2:
+                PlayMenuSoundEffect(1);
+                return 2;
+            case 1:
+                PlayMenuSoundEffect(0);
+                return 3;
+            case 4:
+                PlayMenuSoundEffect(4);
+                return 4;
+        }
+        if(sub_80138B8(&gUnknown_203B2CC->unk38, 1) != 0)
+        {
+            sub_802B880();
+            sub_802B8D4();
+            return 1;
+        }
+        else
+            return 0;
+    }
+}
+
+u8 sub_802B7A8(void)
+{
+    return gUnknown_203B2CC->unk0[(gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + gUnknown_203B2CC->unk50];
+}
+
+void sub_802B7D0(u32 r0)
+{
+    u8 temp;
+
+    temp = r0;
+
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2CC->unk74, 0, 0);
+
+    gUnknown_203B2CC->unk5A = sub_802B9A8();
+    sub_8013984(&gUnknown_203B2CC->unk38);
+    sub_802B880();
+    sub_802B8D4();
+
+    if(temp != 0)
+    {
+        AddMenuCursorSprite(&gUnknown_203B2CC->unk38);
+    }
+}
+
+void sub_802B81C(void)
+{
+    if(gUnknown_203B2CC  != NULL)
+    {
+        gUnknown_203B2D0 = gUnknown_203B2CC->unk50;
+
+        gUnknown_203B2D2 = gUnknown_203B2CC->unk56;
+
+        gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBD0;
+
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
+
+        MemoryFree(gUnknown_203B2CC);
+        gUnknown_203B2CC = NULL;
+    }
 }

@@ -10,8 +10,17 @@ struct UnkTextStruct1 {
     u8 unk46;
 };
 
+struct UnkTextStruct2_sub
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
 struct UnkTextStruct2 {
-    u8 fill00[0x0c];
+    u8 fill00[0x08];
+    struct UnkTextStruct2_sub unk08;
     s16 unk0c;
     s16 unkE;
     s16 unk10;
