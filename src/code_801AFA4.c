@@ -3,6 +3,7 @@
 #include "text.h"
 #include "item.h"
 #include "team_inventory.h"
+#include "menu.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 
@@ -30,7 +31,7 @@ extern void sub_801B178(void);
 extern void sub_8094060(u32 *, u32 *);
 extern void PlaySound(u32);
 extern void sub_80141B4(u32 *, u32, u32 ,u32);
-extern void sub_8014248(u32 *, u32, u32, u32 *, u32, u32, u32, u32, u32);
+extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 
 struct subStruct_203B22C
 {
@@ -51,13 +52,13 @@ struct unkStruct_203B22C
     u16 unk5A;
     struct subStruct_203B22C *unk5C;
     u32 unk60;
-    u32 unk64;
+    /* 0x64 */ struct MenuItem menuItems[8];
 };
 extern struct unkStruct_203B22C *gUnknown_203B22C;
 
 u32 sub_801AFA4(u32 r0)
 {
-    gUnknown_203B22C = MemoryAlloc(0xA4, 8);
+    gUnknown_203B22C = MemoryAlloc(sizeof(struct unkStruct_203B22C), 8);
     gUnknown_203B22C->unk4 = r0;
     gUnknown_203B22C->unk8 = gTeamInventory_203B460->teamItems[r0].itemIndex;
     gUnknown_203B22C->unkA = GetItemMove(gUnknown_203B22C->unk8);
@@ -122,7 +123,7 @@ void sub_801B080(void)
             sub_801B178();
             // #+Who will learn the move
             // #+#C5$m7#R?
-            sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, &gUnknown_203B22C->unk64, 0, 4, 0, 0, 0x20);
+            sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
             break;
         case 1:
             DisplayGulpinDialogueSprite(2, gUnknown_203B22C->unk58, &gUnknown_203B22C->unkC);

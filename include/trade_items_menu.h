@@ -6,8 +6,10 @@
 
 struct TradeSubStruct
 {
-    u8 itemIndex; // item id?
-    u8 fill3[0x3];
+    union ItemIdx {
+        u8 itemIndex; // item id?
+        u32 itemIndex_u32;
+    } itemIdx;
     u32 numItems; // number of items?
 };
 

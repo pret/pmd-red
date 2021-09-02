@@ -24,8 +24,7 @@ struct unkStruct_203B3F8
     u32 unk7C;
     u32 unk80;
     u8 fill84[0x90 - 0x84];
-    struct MenuItem unk90[3];
-    u8 fillA8[0xD0 - 0xA8];
+    struct MenuItem unk90[8];
     u16 unkD0[8];
     struct UnkTextStruct2 unkE0[4];
 };

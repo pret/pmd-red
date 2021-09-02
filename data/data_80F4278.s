@@ -2653,8 +2653,8 @@ gUnknown_80F91E0: @ 80F91E0
 gUnknown_80F91EC: @ 80F91EC
 	.incbin "baserom.gba", 0xF91EC, 0x4
 
-	.global gUnknown_80F91F0
-gUnknown_80F91F0: @ 80F91F0
+	.global gTrapNames
+gTrapNames: @ 80F91F0
 	.incbin "baserom.gba", 0xF91F0, 0x174
 
 	.global gUnknown_80F9364
@@ -2809,8 +2809,8 @@ gUnknown_80F9760: @ 80F9760
 gUnknown_80F9764: @ 80F9764
 	.incbin "baserom.gba", 0xF9764, 0x2F0
 
-	.global gUnknown_80F9A54
-gUnknown_80F9A54: @ 80F9A54
+	.global gWeatherNames
+gWeatherNames: @ 80F9A54
 	.incbin "baserom.gba", 0xF9A54, 0x78
 
 	.global gUnknown_80F9ACC

@@ -13,8 +13,7 @@ struct unkStruct_203B3F0
     u8 itemIndex;
     u8 fill5[0x8 - 5];
     u32 unk8;
-    struct MenuItem menus[3];
-    u8 fill24[0x4C - 0x24];
+    struct MenuItem menuItems[8];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
     u32 unk9C;
@@ -39,8 +38,7 @@ struct unkStruct_203B3F4
     u8 unk4;
     u8 fill5[0x8 - 5];
     u32 unk8;
-    struct MenuItem menus[3];
-    u8 fill24[0x4C - 0x24];
+    struct MenuItem menuItems[8];
     u32 unk4C;
     u8 fill50[0x9C - 0x50];
     struct UnkTextStruct2 unk9C[4];
@@ -193,7 +191,7 @@ void sub_803A5A0(void)
     case 2:
         sub_801CCD8();
         sub_803A6F0();
-        sub_8012D60(&gUnknown_203B3F0->unk4C, gUnknown_203B3F0->menus, 0, 0, gUnknown_203B3F0->unk8, 2);
+        sub_8012D60(&gUnknown_203B3F0->unk4C, gUnknown_203B3F0->menuItems, 0, 0, gUnknown_203B3F0->unk8, 2);
         break;
     case 3:
         gUnknown_203B3F0->unkAC = 3;
@@ -232,20 +230,20 @@ void sub_803A6F0(void)
   s32 temp1;
   struct unkStruct_203B3F0 *preload;
 
-  gUnknown_203B3F0->menus[0].text = &gDebug_NumberText;
-  gUnknown_203B3F0->menus[0].menuAction = 2;
+  gUnknown_203B3F0->menuItems[0].text = &gDebug_NumberText;
+  gUnknown_203B3F0->menuItems[0].menuAction = 2;
   gUnknown_203B3F0->unk8 = 2;
   if (!IsNotMoneyOrUsedTMItem(gUnknown_203B3F0->itemIndex)) {
-    gUnknown_203B3F0->menus[0].menuAction = -1;
+    gUnknown_203B3F0->menuItems[0].menuAction = -1;
     gUnknown_203B3F0->unk8 = 3;
   }
   preload = gUnknown_203B3F0;
   // this var gets loaded in between the sets... very dumb
   temp1 = 1;
-  preload->menus[1].text = *gUnknown_80D4970;
-  preload->menus[1].menuAction = 3;
-  preload->menus[2].text = NULL;
-  preload->menus[2].menuAction = temp1;
+  preload->menuItems[1].text = *gUnknown_80D4970;
+  preload->menuItems[1].menuAction = 3;
+  preload->menuItems[2].text = NULL;
+  preload->menuItems[2].menuAction = temp1;
 }
 
 void sub_803A740(void)
@@ -403,7 +401,7 @@ void sub_803A9AC(void)
     case 2:
         sub_8021494();
         sub_803AA34();
-        sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->menus,0,0,gUnknown_203B3F4->unk8,2);
+        sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->menuItems,0,0,gUnknown_203B3F4->unk8,2);
         break;
     case 3:
         sub_8021774(gUnknown_203B3F4->unk4,1,0);

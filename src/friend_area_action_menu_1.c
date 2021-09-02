@@ -14,14 +14,14 @@ void sub_801B450();
 u32 sub_801EF38(u8 r0);
 void sub_801F214();
 
-extern void sub_8027184(u32);
+extern void SetFriendAreaActionMenuState(u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void PlaySound(u32);
 extern void ShiftItemsDownFrom(u32);
 extern void FillInventoryGaps();
 extern void nullsub_104();
-extern void sub_8091274(u8 *);
+extern void sub_8091274(struct ItemSlot *);
 extern void sub_801A928();
 extern void sub_8099690(u32);
 extern void GivePokemonItem(s16, struct HeldItem *);
@@ -41,7 +41,7 @@ void sub_8027AE4(void)
       {
         case 1:
         case 3:
-            sub_8027184(2);
+            SetFriendAreaActionMenuState(2);
             break;
         case 2:
             sub_8027EB8();
@@ -59,18 +59,18 @@ void sub_8027B28(void)
         gUnknown_203B2BC->unkC = sub_801A8AC();
         gUnknown_203B2BC->unk10.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
         gUnknown_203B2BC->unk10.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
-        sub_8027184(0xc);
+        SetFriendAreaActionMenuState(0xc);
         break;
     case 4:
         gUnknown_203B2BC->unkC = sub_801A8AC();
         gUnknown_203B2BC->unk10.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].itemIndex;
         gUnknown_203B2BC->unk10.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->unkC].numItems;
         sub_8099690(0);
-        sub_8027184(0xd);
+        SetFriendAreaActionMenuState(0xd);
         break;
     case 2:
         sub_801A928();
-        sub_8027184(2);
+        SetFriendAreaActionMenuState(2);
         break;
     case 0:
     case 1:
@@ -93,20 +93,20 @@ void sub_8027BD8(void)
         PlaySound(0x14d);
         ShiftItemsDownFrom(gUnknown_203B2BC->unkC);
         FillInventoryGaps();
-        if (gUnknown_203B2BC->unk14 != 0) {
+        if (gUnknown_203B2BC->unk14.unk0 != 0) {
             sub_8091274(&gUnknown_203B2BC->unk14);
         }
         GivePokemonItem(gUnknown_203B2BC->unk8,&gUnknown_203B2BC->unk10);
         sub_801A928();
         nullsub_104();
-        sub_8027184(2);
+        SetFriendAreaActionMenuState(2);
         break;
     case 4:
         sub_8099690(0);
-        sub_8027184(0xd);
+        SetFriendAreaActionMenuState(0xd);
         break;
     case 1:
-        sub_8027184(0xb);
+        SetFriendAreaActionMenuState(0xb);
         break;
   }
 }
@@ -119,5 +119,5 @@ void sub_8027C84()
     if(temp > 3)
         return;
     sub_801B450();
-    sub_8027184(0xB);
+    SetFriendAreaActionMenuState(0xB);
 }

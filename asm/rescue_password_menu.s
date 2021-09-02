@@ -5,193 +5,6 @@
 
 	.text
 
-	thumb_func_start CreateRescuePasswordMenu
-CreateRescuePasswordMenu:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	adds r6, r0, 0
-	ldr r5, _080389B8
-	ldr r0, [r5]
-	cmp r0, 0
-	bne _0803892A
-	movs r4, 0x85
-	lsls r4, 2
-	adds r0, r4, 0
-	movs r1, 0x8
-	bl MemoryAlloc
-	str r0, [r5]
-	movs r1, 0
-	adds r2, r4, 0
-	bl MemoryFill8
-_0803892A:
-	movs r0, 0x1B
-	negs r0, r0
-	adds r0, r6
-	mov r8, r0
-	mov r12, r5
-	movs r1, 0xA4
-	lsls r1, 1
-	mov r9, r1
-	ldr r4, _080389BC
-	mov r10, r4
-	movs r3, 0
-	movs r2, 0x3
-_08038942:
-	mov r5, r12
-	ldr r1, [r5]
-	adds r1, r3
-	add r1, r9
-	mov r0, r10
-	ldm r0!, {r4,r5,r7}
-	stm r1!, {r4,r5,r7}
-	ldm r0!, {r4,r5,r7}
-	stm r1!, {r4,r5,r7}
-	adds r3, 0x18
-	subs r2, 0x1
-	cmp r2, 0
-	bge _08038942
-	bl ResetUnusedInputStruct
-	ldr r4, _080389B8
-	ldr r0, [r4]
-	movs r7, 0xA4
-	lsls r7, 1
-	adds r0, r7
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_800641C
-	ldr r2, _080389C0
-	ldrb r0, [r2]
-	cmp r0, 0
-	bne _08038986
-	ldr r0, _080389C4
-	ldr r1, [r0]
-	adds r7, r4, 0
-	adds r5, r0, 0
-	cmp r1, r6
-	beq _080389A0
-_08038986:
-	adds r7, r4, 0
-	adds r3, r2, 0
-	ldr r5, _080389C4
-	ldr r1, _080389C8
-	movs r2, 0
-	adds r0, r1, 0
-	adds r0, 0x35
-_08038994:
-	strb r2, [r0]
-	subs r0, 0x1
-	cmp r0, r1
-	bge _08038994
-	movs r0, 0
-	strb r0, [r3]
-_080389A0:
-	ldr r0, [r7]
-	str r6, [r0]
-	str r6, [r5]
-	mov r0, r8
-	cmp r0, 0x7
-	bhi _08038A36
-	lsls r0, 2
-	ldr r1, _080389CC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080389B8: .4byte gRescuePasswordMenu
-_080389BC: .4byte gUnknown_80E71E4
-_080389C0: .4byte gUnknown_203B368
-_080389C4: .4byte gUnknown_203B36C
-_080389C8: .4byte gUnknown_202EC50
-_080389CC: .4byte _080389D0
-	.align 2, 0
-_080389D0:
-	.4byte _080389F0
-	.4byte _080389FC
-	.4byte _080389F0
-	.4byte _080389FC
-	.4byte _080389F0
-	.4byte _080389FC
-	.4byte _08038A0C
-	.4byte _08038A2E
-_080389F0:
-	bl sub_8035D74
-	movs r1, 0
-	bl sub_8031D70
-	b _08038A36
-_080389FC:
-	ldr r1, _08038A08
-	movs r0, 0x4
-	bl sub_80151C0
-	b _08038A36
-	.align 2, 0
-_08038A08: .4byte gUnknown_202EC50
-_08038A0C:
-	movs r0, 0x1F
-	bl sub_8095228
-	adds r4, r0, 0
-	movs r1, 0
-	movs r2, 0x30
-	bl MemoryFill8
-	movs r1, 0
-	movs r0, 0x2
-	strb r0, [r4]
-	adds r4, 0x22
-	strb r1, [r4]
-	movs r0, 0x1F
-	bl sub_8031D70
-	b _08038A36
-_08038A2E:
-	ldr r1, _08038A54
-	movs r0, 0x4
-	bl sub_80151C0
-_08038A36:
-	adds r0, r6, 0
-	bl sub_8039000
-	ldr r1, _08038A58
-	ldr r1, [r1]
-	str r0, [r1, 0x4]
-	bl sub_8039174
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08038A54: .4byte gUnknown_202EC50
-_08038A58: .4byte gRescuePasswordMenu
-	thumb_func_end CreateRescuePasswordMenu
-
-	thumb_func_start CleanRescuePasswordMenu
-CleanRescuePasswordMenu:
-	push {r4,lr}
-	bl ResetUnusedInputStruct
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_800641C
-	ldr r4, _08038A8C
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _08038A86
-	bl sub_80155F0
-	bl sub_8031E10
-	ldr r0, [r4]
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-_08038A86:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08038A8C: .4byte gRescuePasswordMenu
-	thumb_func_end CleanRescuePasswordMenu
-
 	thumb_func_start UpdateRescuePasswordMenu
 UpdateRescuePasswordMenu:
 	push {r4-r6,lr}
@@ -535,7 +348,7 @@ _08038D66:
 	ldr r4, _08038DA0
 	ldr r0, [r4]
 	ldr r0, [r0]
-	bl sub_8039000
+	bl ConvertMenutoRescuePasswordState
 	ldr r1, [r4]
 	str r0, [r1, 0x4]
 	ldr r0, [r1]
@@ -822,8 +635,8 @@ _08038FF8: .4byte gUnknown_80E7278
 _08038FFC: .4byte gUnknown_80E7290
 	thumb_func_end sub_8038F98
 
-	thumb_func_start sub_8039000
-sub_8039000:
+	thumb_func_start ConvertMenutoRescuePasswordState
+ConvertMenutoRescuePasswordState:
 	push {lr}
 	movs r1, 0xB
 	ldr r0, _0803901C
@@ -877,7 +690,7 @@ _08039062:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8039000
+	thumb_func_end ConvertMenutoRescuePasswordState
 
 	thumb_func_start sub_8039068
 sub_8039068:
@@ -1084,54 +897,5 @@ _080391EC: .4byte 0x0000dfff
 _080391F0: .4byte 0x00003fff
 _080391F4: .4byte 0x00000fff
 	thumb_func_end sub_8039174
-
-	thumb_func_start sub_80391F8
-sub_80391F8:
-	push {r4-r6,lr}
-	ldr r6, _08039250
-	ldr r2, [r6]
-	movs r0, 0x82
-	lsls r0, 2
-	adds r4, r2, r0
-	ldrh r1, [r4, 0x2]
-	movs r0, 0xFE
-	lsls r0, 8
-	ands r0, r1
-	movs r1, 0x70
-	orrs r0, r1
-	strh r0, [r4, 0x2]
-	movs r3, 0xE0
-	lsls r3, 3
-	ldrh r1, [r4, 0x6]
-	movs r0, 0xF
-	ands r0, r1
-	orrs r0, r3
-	strh r0, [r4, 0x6]
-	movs r5, 0x84
-	lsls r5, 2
-	adds r2, r5
-	ldr r0, [r2]
-	movs r1, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0803923C
-	adds r1, 0xF8
-	adds r0, r4, 0
-	movs r2, 0
-	movs r3, 0
-	bl AddSprite
-_0803923C:
-	bl xxx_draw_string_80144C4
-	ldr r1, [r6]
-	adds r1, r5
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08039250: .4byte gRescuePasswordMenu
-	thumb_func_end sub_80391F8
 
         .align 2,0

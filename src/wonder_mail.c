@@ -3,10 +3,10 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "item.h"
+#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text.h"
-#include "sub_8095228.h"
 #include "team_inventory.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
@@ -25,7 +25,7 @@ extern u32 sub_8095350();
 extern u8 sub_801CF14(u32);
 extern u32 sub_802F298();
 
-extern u8 sub_80A2824(u32);
+extern u8 sub_80A2824(u8);
 
 #include "data/wonder_mail_1.h"
 
@@ -35,7 +35,7 @@ const struct ItemSlot gUnknown_80DED44 =
 };
 
 
-extern u32 gUnknown_80DDA48;
+extern struct MenuItem gUnknown_80DDA48[];
 extern const char gUnknown_80DEF04[];
 extern const char gUnknown_80DEF28[];
 extern const char gUnknown_80DEF80[];
@@ -45,7 +45,7 @@ extern const char gUnknown_80DF0A0[];
 extern const char gUnknown_80DF0E0[];
 extern const char gUnknown_80DF138[];
 extern const char gUnknown_80DF194[];
-extern u32 gUnknown_80DEE44;
+extern struct MenuItem gUnknown_80DEE44[];
 extern const char gUnknown_80DF1C0[];
 extern const char gUnknown_80DF208[];
 extern const char gUnknown_80DF0A0[];
@@ -74,7 +74,7 @@ extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
-extern void sub_8014248(const char *r0, u32, u32, u32 *r4, u32, u32, u32, u32 *r5, u32);
+extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_80951BC(u8 *r0);
@@ -868,7 +868,7 @@ void sub_80293F4(void)
                 switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp.unk0))
                 {
                     case 17:
-                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, &gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
+                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, gUnknown_80DDA48, 0, 4, 0, (u32 *)&gUnknown_203B2C0->faceFile, 0xC);
                         sub_8028B04(40);
                         break;
                     case 18:
@@ -1533,7 +1533,7 @@ void PrintWonderMailLinkError(u32 param_1)
         sub_80141B4(gUnknown_80DEF04, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 15:
-        sub_80141B4(gUnknown_80DF138,0,(u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DF138, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 0:
     default:
@@ -1873,17 +1873,17 @@ void sub_802A50C(void)
         {
             case 0x11:
                 // Wrong password
-                sub_8014248(gUnknown_80DF1C0,0,7,&gUnknown_80DEE44,0,4,0,(u32 *)&gUnknown_203B2C4->faceFile,0xc);
+                sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0xc);
                 sub_802B2BC(0x28);
                 break;
             case 0x14:
                 // Incorrect password
-                sub_80141B4(gUnknown_80DF208,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_80141B4(gUnknown_80DF208, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
                 sub_802B2BC(0x1f);
                 break;
             case 0xB:
                 // Not eligible to receive
-                sub_80141B4(gUnknown_80DF0A0,0,(u32 *)&gUnknown_203B2C4->faceFile,0x10d);
+                sub_80141B4(gUnknown_80DF0A0, 0, (u32 *)&gUnknown_203B2C4->faceFile, 0x10d);
                 sub_802B2BC(0x1f);
                 break;
             case 0x18:

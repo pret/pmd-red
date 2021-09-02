@@ -70,7 +70,9 @@ struct WonderMailStruct_203B2C4
     u8 unk3E;
     u32 unk40;
     u32 linkError; // another link status
-    u8 filler48[0x218 - 0x48];
+    u8 filler48[0x1B8 - 0x48];
+    struct unkStruct_8095228 unk1B8;
+    struct unkStruct_8095228 unk1E8;
     s8 unk218;
     u32 unk21C;
     u8 filler220[0x30C - 0x220];
@@ -87,10 +89,23 @@ struct WonderMailStruct_203B2C4
     u8 unk42D;
     u8 unk42E;
     u32 unk430;
-    u8 padding3[0x534 - 0x434];
+    u8 formattedString[0x100];
     s32 unk534;
     u32 unk538;
-    u8 fill53C[0x564 - 0x53C];
+    u8 unk53C[0xA];
+    u32 unk548;
+    u32 unk54C;
+    u16 unk550;
+    u8 unk552;
+    u8 unk553;
+    u32 unk554;
+    u8 unk558;
+    u8 unk559;
+    u8 unk55A;
+    u8 unk55B;
+    u8 unk55C;
+    u8 fill55C[0x560 - 0x55D];
+    u32 unk560;
 };
 
 void sub_8028B04(u32 r0);

@@ -16175,7 +16175,7 @@ _0805FA62:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_807EA18
+	bl GetWeatherName
 	ldr r0, _0805FBD4
 	ldr r2, [r0]
 	str r6, [sp]
@@ -25622,7 +25622,7 @@ _080646C4:
 	adds r4, r0, 0
 	ldrb r1, [r4]
 	mov r0, r10
-	bl sub_807FE84
+	bl GetTrapName
 	movs r0, 0
 	bl sub_80073B8
 	str r7, [sp]

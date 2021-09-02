@@ -6309,7 +6309,7 @@ _08045BD2:
 	bl sub_804510C
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_807FE84
+	bl GetTrapName
 	b _08045BEC
 _08045BE2:
 	ldr r0, _08045BF4
