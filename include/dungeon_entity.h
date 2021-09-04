@@ -86,9 +86,9 @@ struct DungeonEntity
 
 enum EntityType
 {
-    POKEMON = 1,
-    ITEM = 2,
-    TRAP = 3
+    ENTITY_POKEMON = 1,
+    ENTITY_ITEM = 2,
+    ENTITY_TRAP = 3
 };
 
 enum FacingDirection
