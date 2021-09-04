@@ -1,12 +1,12 @@
 #include "global.h"
 #include "gUnknown_203B418.h"
-#include "code_8041D5C.h"
+#include "dungeon_entity.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "pokemon.h"
 
-extern struct unkDungeon_8041D5C *sub_8085480(void);
-extern struct unkDungeon_8041D5C *sub_8085680(u32);
+extern struct DungeonEntity *sub_8085480(void);
+extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
 extern struct unkStruct_203B418 *gUnknown_203B418;
 extern u32 gUnknown_202EDC8;
@@ -65,12 +65,12 @@ extern u8 sub_800E9A8(u32);
 extern void sub_800DC14(u32);
 extern void sub_808BAA4();
 
-extern void sub_8086A3C(struct unkDungeon_8041D5C *r0);
+extern void sub_8086A3C(struct DungeonEntity *r0);
 extern void sub_8083E88(u32);
 extern void sub_80854D4(void);
 extern void sub_80855E4(void *);
 extern void sub_8085930(u32);
-extern void sub_8068FE0(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_8068FE0(struct DungeonEntity *, u32, u32);
 extern void sub_8085860(s16 r0, u32 r1);
 extern void sub_80866C4(u32 *);
 extern void sub_8083EA8(u32, u32);
@@ -80,33 +80,33 @@ extern void sub_80866C4(u32 *r0);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void sub_8086598(void);
-extern void SpriteLookAroundEffect(struct unkDungeon_8041D5C *);
-extern void sub_80862BC(struct unkDungeon_8041D5C *);
+extern void SpriteLookAroundEffect(struct DungeonEntity *);
+extern void sub_80862BC(struct DungeonEntity *);
 extern void PlaySoundEffect(u32);
-extern void sub_806CDD4(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_80869E4(struct unkDungeon_8041D5C *, u32, u32, u32);
-extern void sub_806CE68(struct unkDungeon_8041D5C *, u32);
-extern void sub_804539C(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_806CDD4(struct DungeonEntity *, u32, u32);
+extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
+extern void sub_806CE68(struct DungeonEntity *, u32);
+extern void sub_804539C(struct DungeonEntity *, u32, u32);
 extern void sub_803E46C(u32);
-extern void sub_8042B0C(struct unkDungeon_8041D5C *);
-extern void sub_8085918(struct unkDungeon_8041D5C *, u32);
-extern void sub_806CE68(struct unkDungeon_8041D5C *r0, u32);
+extern void sub_8042B0C(struct DungeonEntity *);
+extern void sub_8085918(struct DungeonEntity *, u32);
+extern void sub_806CE68(struct DungeonEntity *r0, u32);
 extern void sub_8052910(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 sub_80450E0(struct unkDungeon_8041D5C *);
+extern u8 sub_80450E0(struct DungeonEntity *);
 extern u8 HasRecruitedMon(u32);
-extern u8 sub_806FD18(struct unkDungeon_8041D5C *);
+extern u8 sub_806FD18(struct DungeonEntity *);
 extern u8 sub_8083E74(u32);
 extern s32 sub_8052C68(u32 *, u32 *, u32 *, u32);
 extern void sub_8083F14();
-extern void sub_80861D4(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_806FDF4(struct unkDungeon_8041D5C *, struct unkDungeon_8041D5C *, struct unkDungeon_8041D5C **);
-extern u32 sub_80861F8(u32, struct unkDungeon_8041D5C *, u32);
+extern void sub_80861D4(struct DungeonEntity *, u32, u32);
+extern void sub_806FDF4(struct DungeonEntity *, struct DungeonEntity *, struct DungeonEntity **);
+extern u32 sub_80861F8(u32, struct DungeonEntity *, u32);
 extern void sub_8083ED8(u32);
 extern u32 sub_803F994();
 extern s32 sub_803F9B0();
 extern void sub_803F878(u32, s32);
-extern void sub_8086A70(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_8086A70(struct DungeonEntity *, u32, u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void sub_803E9D0(void);
 extern void DeoxysScreenFlash(void);
@@ -114,19 +114,19 @@ extern void sub_8085EB0();
 extern void sub_808563C(void *);
 extern void sub_80858AC(u32 *, u32);
 
-void sub_808C5AC(struct unkDungeon_8041D5C *r0);
+void sub_808C5AC(struct DungeonEntity *r0);
 void sub_808C550(void);
-void sub_808C590(struct unkDungeon_8041D5C *r0);
-void sub_808C5A0(struct unkDungeon_8041D5C *r0);
+void sub_808C590(struct DungeonEntity *r0);
+void sub_808C5A0(struct DungeonEntity *r0);
 void sub_808C9B0();
-void sub_808C8E0(struct unkDungeon_8041D5C *param_1);
+void sub_808C8E0(struct DungeonEntity *param_1);
 void sub_808C360(void);
 void KyogreScreenFlash();
 
 void sub_808C0CC();
 void sub_808BFA0();
 void sub_808C02C();
-extern void sub_80861B8(struct unkDungeon_8041D5C *, u32, u32);
+extern void sub_80861B8(struct DungeonEntity *, u32, u32);
 
 void nullsub_99();
 extern u32 sub_8084100(s32);
@@ -136,7 +136,7 @@ extern void sub_8049884();
 extern void sub_8049B8C();
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void sub_8086A54(struct unkDungeon_8041D5C *);
+extern void sub_8086A54(struct DungeonEntity *);
 
 struct unk8049590
 {
@@ -150,16 +150,16 @@ struct unk8049590
 extern struct unk8049590 *sub_8049590(u32, u32);
 extern void sub_806BFC0(struct subStruct_8048524 *, u32);
 
-void sub_808BBA8(struct unkDungeon_8041D5C *param_1)
+void sub_808BBA8(struct DungeonEntity *param_1)
 {
   sub_806BFC0(param_1->unk70,0);
 }
 
-void sub_808BBB8(struct unkDungeon_8041D5C *param_1)
+void sub_808BBB8(struct DungeonEntity *param_1)
 {
   s32 iVar1;
   s32 iVar2;
-  
+
   sub_80861F8(0x1b,param_1,0);
   sub_8086A54(param_1);
   sub_80861B8(param_1,0xe,0);
@@ -178,10 +178,10 @@ void sub_808BBB8(struct unkDungeon_8041D5C *param_1)
  param_1->unk70->unk174 = 0;
 }
 
-void sub_808BC20(struct unkDungeon_8041D5C * param_1)
+void sub_808BC20(struct DungeonEntity * param_1)
 {
   s32 uVar1;
-  
+
   PlaySoundEffect(0x298);
   for(uVar1 = 0; uVar1 < 0x19; uVar1++){
     sub_8085918(param_1,uVar1 & 7);
@@ -192,10 +192,10 @@ void sub_808BC20(struct unkDungeon_8041D5C * param_1)
   sub_80861F8(99,param_1,1);
 }
 
-void JirachiWishGrantDialogue(struct unkDungeon_8041D5C *param_1)
+void JirachiWishGrantDialogue(struct DungeonEntity *param_1)
 {
   u32 uVar2;
-  
+
   param_1->unk70->unk15D = 1;
   // Nnnnnnnnnn!
   sub_8052910(&gUnknown_81058A8);
@@ -277,8 +277,8 @@ u8 JirachiFriendAreaSearch(void)
 
 void sub_808BDEC(void)
 {
-  struct unkDungeon_8041D5C * iVar2;
-  struct unkDungeon_8041D5C * uVar3;
+  struct DungeonEntity * iVar2;
+  struct DungeonEntity * uVar3;
 
   iVar2 = sub_8085480();
   uVar3 = sub_8085680(0x1b);
@@ -308,8 +308,8 @@ void sub_808BE70(u8 param_1,u8 param_2)
 
 void LugiaPreFightDialogue(void)
 {
-  struct unkDungeon_8041D5C * iVar2;
-  struct unkDungeon_8041D5C * uVar3;
+  struct DungeonEntity * iVar2;
+  struct DungeonEntity * uVar3;
 
   iVar2 = sub_8085480();
   uVar3 = sub_8085680(0x1b);
@@ -343,7 +343,7 @@ void LugiaPreFightDialogue(void)
     sub_808BFA0();
     sub_8086A70(uVar3,800,0x20);
     sub_8083E88(0x23);
-    sub_80858AC(&iVar2->unkC,0x10);
+    sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
 
@@ -414,8 +414,8 @@ void sub_808C0CC(void)
 
 void sub_808C10C(void)
 {
-  struct unkDungeon_8041D5C * iVar1;
-  struct unkDungeon_8041D5C * uVar2;
+  struct DungeonEntity * iVar1;
+  struct DungeonEntity * uVar2;
 
   u32 uVar3;
   s32 iVar2;
@@ -451,8 +451,8 @@ void sub_808C1A4(u8 param_1,u8 param_2)
 
 void KyogrePreFightDialogue(void)
 {
-  struct unkDungeon_8041D5C *iVar2;
-  struct unkDungeon_8041D5C *uVar3;
+  struct DungeonEntity *iVar2;
+  struct DungeonEntity *uVar3;
 
   iVar2 = sub_8085480();
   uVar3 = sub_8085680(0x1c);
@@ -493,7 +493,7 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     sub_8086A70(uVar3,600,0xb);
     sub_8083E88(0x23);
-    sub_80858AC(&iVar2->unkC,0x10);
+    sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
 
@@ -536,7 +536,7 @@ void sub_808C360(void)
 
 void sub_808C3A0(void)
 {
-  struct unkDungeon_8041D5C * iVar2;
+  struct DungeonEntity * iVar2;
 
   iVar2 = sub_8085480();
   sub_8083F14();
@@ -564,8 +564,8 @@ void sub_808C414(u8 param_1,u8 param_2)
 
 void DeoxysPreFightDialogue(void)
 {
-  struct unkDungeon_8041D5C * iVar2;
-  
+  struct DungeonEntity * iVar2;
+
   iVar2 = sub_8085480();
   sub_8086448();
   if (HasRecruitedMon(SPECIES_DEOXYS_NORMAL)) {
@@ -584,14 +584,14 @@ void DeoxysPreFightDialogue(void)
     sub_8052910(&gUnknown_8106390);
     sub_803E708(10,0x46);
     sub_808563C(sub_808C5AC);
-    sub_80858AC(&iVar2->unkC,0x10);
+    sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
 
 void DeoxysScreenFlash(void)
 {
   s32 iVar1;
-  
+
   PlaySoundEffect(0x2c1);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     sub_8085C54(iVar1,0,0,1,1);
@@ -621,25 +621,25 @@ void sub_808C550(void)
   DeoxysScreenFlash();
 }
 
-void sub_808C590(struct unkDungeon_8041D5C *r0)
+void sub_808C590(struct DungeonEntity *r0)
 {
     sub_8068FE0(r0, 0x21C, 0);
 }
 
-void sub_808C5A0(struct unkDungeon_8041D5C *r0)
+void sub_808C5A0(struct DungeonEntity *r0)
 {
     sub_8085918(r0, 0);
 }
 
-void sub_808C5AC(struct unkDungeon_8041D5C *r0)
+void sub_808C5AC(struct DungeonEntity *r0)
 {
     sub_8086A70(r0, 0x3b6, 0x20);
 }
 
 void sub_808C5C0(void)
 {
-  struct unkDungeon_8041D5C * iVar1;
-  struct unkDungeon_8041D5C * uVar2;
+  struct DungeonEntity * iVar1;
+  struct DungeonEntity * uVar2;
 
   u32 uVar3;
   s32 iVar2;
@@ -665,14 +665,14 @@ void nullsub_100(void)
 #ifdef NONMATCHING
 void CelebiJoinDialogue(void)
 {
-  struct unkDungeon_8041D5C *uVar2;
+  struct DungeonEntity *uVar2;
   s32 state;
   s32 menuChoice;
-  struct unkDungeon_8041D5C *local_1c;
+  struct DungeonEntity *local_1c;
 
   uVar2 = sub_8085480();
   local_1c = sub_8085680(0x1e);
-  if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(local_1c) == '\0')) 
+  if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(local_1c) == '\0'))
   {
     sub_8068FE0(local_1c,0x21c,0);
     SpriteLookAroundEffect(uVar2);
@@ -680,7 +680,7 @@ void CelebiJoinDialogue(void)
     // .........
     sub_8052910(&gUnknown_810663C);
   }
-  else 
+  else
   {
     SpriteLookAroundEffect(uVar2);
     sub_803E708(10,0x46);
@@ -715,7 +715,7 @@ void CelebiJoinDialogue(void)
                                 &gPurityForestAllowCelebiToJoinPrompt,0x701);
             } while (menuChoice < 1);
             sub_803E708(10,0x46);
-            if (menuChoice == 1) 
+            if (menuChoice == 1)
             {
                 sub_8083F14();
                 PlaySoundEffect(0xcc);
@@ -1069,7 +1069,7 @@ void CelebiJoinDialogue(void)
 }
 #endif
 
-void sub_808C8E0(struct unkDungeon_8041D5C *param_1)
+void sub_808C8E0(struct DungeonEntity *param_1)
 {
   s32 iVar1;
 
@@ -1091,11 +1091,11 @@ void sub_808C938(void)
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(struct unkDungeon_8041D5C *param_1, u8 param_2)
+void sub_808C948(struct DungeonEntity *param_1, u8 param_2)
 {
   bool8 flag;
   s32 iVar3;
-  struct unkDungeon_8041D5C *iVar2;
+  struct DungeonEntity *iVar2;
 
   if (param_2 == 0x37) {
     flag = FALSE;
@@ -1120,7 +1120,7 @@ void sub_808C998(void)
     sub_803E708(0xA, 0x46);
 }
 
-void sub_808C9B0(struct unkDungeon_8041D5C *param_1)
+void sub_808C9B0(struct DungeonEntity *param_1)
 {
     param_1->unk70->unk46 = 4;
     sub_806CE68(param_1, 4);
@@ -1128,8 +1128,8 @@ void sub_808C9B0(struct unkDungeon_8041D5C *param_1)
 
 void sub_808C9C4(void)
 {
-    struct unkDungeon_8041D5C *temp;
-    struct unkDungeon_8041D5C *temp_2;
+    struct DungeonEntity *temp;
+    struct DungeonEntity *temp_2;
 
     temp = sub_8085480();
     temp_2 = sub_8085680(7);
@@ -1145,7 +1145,7 @@ void sub_808C9C4(void)
 // Medicham Rescue Dialogue?
 void MedichamRescueDialogue(void)
 {
-    struct unkDungeon_8041D5C *temp;
+    struct DungeonEntity *temp;
     s32 counter;
 
     temp = sub_8085680(7);
@@ -1197,8 +1197,8 @@ void MedichamRescueDialogue(void)
 
 void sub_808CB5C(void)
 {
-    struct unkDungeon_8041D5C *temp;
-    struct unkDungeon_8041D5C *temp_2;
+    struct DungeonEntity *temp;
+    struct DungeonEntity *temp_2;
 
     temp = sub_8085480();
     temp_2 = sub_8085680(7);
@@ -1216,8 +1216,8 @@ void DummyFightDialogue(void)
 
 void sub_808CBB0(void)
 {
-    struct unkDungeon_8041D5C *temp;
-    struct unkDungeon_8041D5C *temp_2;
+    struct DungeonEntity *temp;
+    struct DungeonEntity *temp_2;
 
     temp = sub_8085480();
     temp_2 = sub_8085680(0x1F);
@@ -1233,7 +1233,7 @@ void sub_808CBB0(void)
 // Smeargle Rescue dialogue scene
 void SmeargleRescueDialogue(void)
 {
-    struct unkDungeon_8041D5C *temp;
+    struct DungeonEntity *temp;
     s32 counter;
 
     temp = sub_8085680(0x1F);
@@ -1288,8 +1288,8 @@ void SmeargleRescueDialogue(void)
 
 void sub_808CD44(void)
 {
-    struct unkDungeon_8041D5C *temp;
-    struct unkDungeon_8041D5C *temp_2;
+    struct DungeonEntity *temp;
+    struct DungeonEntity *temp_2;
 
     temp = sub_8085480();
     temp_2 = sub_8085680(0x1F);

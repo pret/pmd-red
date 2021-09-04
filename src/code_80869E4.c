@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8041D5C.h"
+#include "dungeon_entity.h"
 #include "gUnknown_203B418.h"
 #include "random.h"
 
@@ -18,14 +18,14 @@ extern struct unkStruct_203B418 *gUnknown_203B418;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
-void sub_80869E4(struct unkDungeon_8041D5C *r0, u32, u8, s8);
+void sub_80869E4(struct DungeonEntity *r0, u32, u8, s8);
 extern void sub_80859F0(u32);
 extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-extern struct unkDungeon_8041D5C *sub_8085480(void);
-void SpriteLookAroundEffect(struct unkDungeon_8041D5C *r0);
+extern struct DungeonEntity *sub_8085480(void);
+void SpriteLookAroundEffect(struct DungeonEntity *r0);
 extern void sub_8052910(u32);
 void sub_8086494();
 
@@ -39,109 +39,109 @@ extern void sub_80855E4(void *);
 extern u32 sub_803F994(void);
 extern u32 sub_803F9B0(void);
 extern void sub_803F878(u32, u32);
-extern void sub_8086384(struct unkDungeon_8041D5C *r0);
+extern void sub_8086384(struct DungeonEntity *r0);
 extern void sub_8085930(u32);
-extern void sub_804539C(struct unkDungeon_8041D5C *, u32, u32);
-extern void sub_806CE68(struct unkDungeon_8041D5C *, u32);
-extern void sub_806CDD4(struct unkDungeon_8041D5C *, u8, u32);
-extern void sub_804535C(struct unkDungeon_8041D5C *, u32 *);
-extern void sub_8086A54(struct unkDungeon_8041D5C *);
-extern void sub_8086A3C(struct unkDungeon_8041D5C *);
+extern void sub_804539C(struct DungeonEntity *, u32, u32);
+extern void sub_806CE68(struct DungeonEntity *, u32);
+extern void sub_806CDD4(struct DungeonEntity *, u8, u32);
+extern void sub_804535C(struct DungeonEntity *, u32 *);
+extern void sub_8086A54(struct DungeonEntity *);
+extern void sub_8086A3C(struct DungeonEntity *);
 extern void PlaySoundEffect(u32);
-extern void sub_80861F8(u32, struct unkDungeon_8041D5C *, u32);
+extern void sub_80861F8(u32, struct DungeonEntity *, u32);
 
-void sub_80862BC(struct unkDungeon_8041D5C *r0)
+void sub_80862BC(struct DungeonEntity *r0)
 {
     PlaySoundEffect(0xE8 << 1);
     sub_80861F8(0x143, r0, 0);
 }
 
-void sub_80862DC(struct unkDungeon_8041D5C *r0)
+void sub_80862DC(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->unkC;
-    array[1] = r0->unk10 + (0xE0 << 6);
+    array[0] = r0->posPixelX;
+    array[1] = r0->posPixelY + (0xE0 << 6);
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, 4);
     sub_8086A54(r0);
 }
 
-void sub_8086310(struct unkDungeon_8041D5C *r0)
+void sub_8086310(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->unkC;
-    array[1] = r0->unk10 + (0x90 << 8);
+    array[0] = r0->posPixelX;
+    array[1] = r0->posPixelY + (0x90 << 8);
 
     sub_804535C(r0, array);
     sub_806CE68(r0, 0);
     sub_8086A3C(r0);
-    r0->unk20 = 0;
+    r0->active = 0;
 }
 
-void sub_8086348(struct unkDungeon_8041D5C *r0)
+void sub_8086348(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->unkC + (0xF0 << 7);
-    array[1] = r0->unk10 + 0xffffe000;
+    array[0] = r0->posPixelX + (0xF0 << 7);
+    array[1] = r0->posPixelY + 0xffffe000;
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, 6);
     sub_8086A54(r0);
 }
 
-void sub_8086384(struct unkDungeon_8041D5C *r0)
+void sub_8086384(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->unkC + (0xF0 << 7);
-    array[1] = r0->unk10;
+    array[0] = r0->posPixelX + (0xF0 << 7);
+    array[1] = r0->posPixelY;
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, 6);
     sub_8086A54(r0);
 }
 
-void sub_80863B8(struct unkDungeon_8041D5C *r0)
+void sub_80863B8(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 0, 4);
 }
 
-void sub_80863C8(struct unkDungeon_8041D5C *r0)
+void sub_80863C8(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 0, 0);
 }
 
-void sub_80863D8(struct unkDungeon_8041D5C *r0)
+void sub_80863D8(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 0, 6);
 }
 
-void sub_80863E8(struct unkDungeon_8041D5C *r0)
+void sub_80863E8(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 6, 4);
 }
 
-void sub_80863F8(struct unkDungeon_8041D5C *r0)
+void sub_80863F8(struct DungeonEntity *r0)
 {
     sub_806CE68(r0, 4);
 }
 
-void sub_8086404(struct unkDungeon_8041D5C *r0)
+void sub_8086404(struct DungeonEntity *r0)
 {
     sub_806CE68(r0, 6);
 }
 
-void sub_8086410(struct unkDungeon_8041D5C *r0)
+void sub_8086410(struct DungeonEntity *r0)
 {
     sub_804539C(r0, 0, 0xffffff00);
 }
 
-void sub_8086424(struct unkDungeon_8041D5C *r0)
+void sub_8086424(struct DungeonEntity *r0)
 {
     sub_804539C(r0, 0, 0x80 << 1);
 }
 
-void sub_8086434(struct unkDungeon_8041D5C *r0)
+void sub_8086434(struct DungeonEntity *r0)
 {
     sub_804539C(r0, 0xffffff00, 0);
 }
@@ -446,13 +446,13 @@ void sub_8086854(void)
     }
 }
 
-void sub_80868F4(struct unkDungeon_8041D5C *r0)
+void sub_80868F4(struct DungeonEntity *r0)
 {
     r0->unk70->unk15C = 1;
     r0->unk70->unk15D = 1;
 }
 
-void sub_8086910(struct unkDungeon_8041D5C *r0)
+void sub_8086910(struct DungeonEntity *r0)
 {
     r0->unk70->unk15C = 0;
     r0->unk70->unk15D = 0;
@@ -473,7 +473,7 @@ void sub_808692C(void)
     sub_803E708(0x4, 0x46);
 }
 
-void SpriteLookAroundEffect(struct unkDungeon_8041D5C *r0)
+void SpriteLookAroundEffect(struct DungeonEntity *r0)
 {
     s8 r4;
     s8 r3;
