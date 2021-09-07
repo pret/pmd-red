@@ -3362,7 +3362,7 @@ void sub_808B1CC(u8 r0)
 
 void sub_808B2B0(struct DungeonEntity *r0)
 {
-    r0->unk70->facingDir = 4;
+    r0->unk70->facingDir = NORTH;
     sub_806CE68(r0, 4);
 }
 
