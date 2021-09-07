@@ -101,7 +101,7 @@ extern u8 gUnknown_80E46C8[];
 extern u8 gUnknown_80E4704[];
 extern u8 gUnknown_80E4744[];
 extern u8 gUnknown_80E4788[];
-extern u8 gUnknown_80E47D8[]; 
+extern u8 gUnknown_80E47D8[];
 extern u8 gUnknown_80E4480[];
 extern u8 gUnknown_80E482C[];
 
@@ -1057,7 +1057,7 @@ void sub_8034848(void)
         MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
         gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
         gUnknown_203B33C->unk41C.numItems = 1;
-        gUnknown_203B33C->unk41C.unk0 = 0;
+        gUnknown_203B33C->unk41C.itemFlags = 0;
 
         if(gUnknown_203B33C->status == 0)
         {
@@ -1087,7 +1087,7 @@ void sub_80348C4(void)
         MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
         gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
         gUnknown_203B33C->unk41C.numItems = 1;
-        gUnknown_203B33C->unk41C.unk0 = 0;
+        gUnknown_203B33C->unk41C.itemFlags = 0;
 
         if(gUnknown_203B33C->status == 0)
         {
@@ -1240,7 +1240,7 @@ void sub_8034B88(void)
 {
     gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
     gUnknown_203B33C->unk41C.numItems = 1;
-    gUnknown_203B33C->unk41C.unk0 = 0;
+    gUnknown_203B33C->unk41C.itemFlags = 0;
     switch(sub_801CA08(1))
     {
         case 2:

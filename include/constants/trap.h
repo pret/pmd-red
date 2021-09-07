@@ -1,0 +1,28 @@
+#ifndef GUARD_CONSTANTS_TRAP_H
+#define GUARD_CONSTANTS_TRAP_H
+
+enum TrapType
+{
+    TRIP_TRAP = 0x0,
+    MUD_TRAP = 0x1,
+    STICKY_TRAP = 0x2,
+    GRIMY_TRAP = 0x3,
+    SUMMON_TRAP = 0x4,
+    PITFALL_TRAP = 0x5,
+    WARP_TRAP = 0x6,
+    WHIRLWIND_TRAP = 0x7,
+    SPIN_TRAP = 0x8,
+    SLUMBER_TRAP = 0x9,
+    SLOW_TRAP = 0xA,
+    SEAL_TRAP = 0xB,
+    POISON_TRAP = 0xC,
+    SELFDESTRUCT_TRAP = 0xD,
+    EXPLOSION_TRAP = 0xE,
+    PP_ZERO_TRAP = 0xF,
+    CHESTNUT_TRAP = 0x10,
+    WONDER_TILE = 0x11,
+    POKEMON_TRAP = 0x12,
+    SPIKE_TRAP = 0x13
+};
+
+#endif

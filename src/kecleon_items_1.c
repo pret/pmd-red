@@ -28,7 +28,7 @@ extern void DrawTeamMoneyBox(u32);
 
 void sub_8019B08(void)
 {
-  switch(sub_801A6E8(1)) 
+  switch(sub_801A6E8(1))
   {
     case 0:
         break;
@@ -59,7 +59,7 @@ void sub_8019B08(void)
 void sub_8019BBC(void)
 {
   int menuAction;
-  
+
   menuAction = 0;
   if (gUnknown_203B210->unk4) {
     sub_8019EDC(0);
@@ -94,7 +94,7 @@ void sub_8019BBC(void)
 void sub_8019C78(void)
 {
   int menuAction;
-  
+
   menuAction = 0;
   sub_801A6E8(0);
   if ((sub_8012FD8(&gUnknown_203B210->unk84) == '\0') && (sub_8013114(&gUnknown_203B210->unk84,&menuAction), menuAction != 1)) {
@@ -176,12 +176,12 @@ void sub_8019DAC(void)
   s32 iVar3;
   struct ItemSlot *pbVar4;
   s32 iVar5;
-  
+
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < 0x14; iVar5++){
     pbVar4 = &gTeamInventory_203B460->teamItems[iVar5];
-    if (((pbVar4->unk0 & 1) != 0) && (CanSellItem(pbVar4->itemIndex))) {
+    if (((pbVar4->itemFlags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(pbVar4->itemIndex))) {
       iVar3 = GetStackSellPrice(pbVar4);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
@@ -191,7 +191,7 @@ void sub_8019DAC(void)
 
 void sub_8019E04(s32 param_1)
 {
-  
+
   if (gUnknown_203B210->unk4) {
     if (param_1 == 1)
         gUnknown_203B210->unkE0 = 1;

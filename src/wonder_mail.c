@@ -29,7 +29,7 @@ extern u8 sub_80A2824(u8);
 
 #include "data/wonder_mail_1.h"
 
-const struct ItemSlot gUnknown_80DED44 = 
+const struct ItemSlot gUnknown_80DED44 =
 {
     1, 0, 0
 };
@@ -239,7 +239,7 @@ void sub_8028B1C(u32 r0)
 }
 
 void sub_8028BF0(void)
-{  
+{
     u32 temp;
     if(sub_80144A4(&temp) != 0)
     {
@@ -1429,7 +1429,7 @@ u32 sub_8029C98(void)
     case 0x20:
         sub_802A490();
         break;
-    case 0xd: 
+    case 0xd:
         sub_802A474();
         break;
     case 0xc:
@@ -1551,9 +1551,9 @@ void sub_8029F98(void)
   MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemSlot));
   gUnknown_203B2C4->unk41C.itemIndex = 0;
   gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.unk0 = 0;
+  gUnknown_203B2C4->unk41C.itemFlags = 0;
   if (gUnknown_203B2C4->linkError == 0) {
-      switch(gUnknown_203B2C4->unk40) 
+      switch(gUnknown_203B2C4->unk40)
         {
             case 6:
                 switch(gUnknown_203B2C4->unk534)
@@ -1666,7 +1666,7 @@ void sub_802A174(void)
   if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
     sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
   }
-  
+
   switch(menuAction)
   {
       case 0xB:
@@ -1692,7 +1692,7 @@ void sub_802A174(void)
 }
 
 void sub_802A230(void)
-{  
+{
   switch(sub_8030DA0())
   {
       case 2:
@@ -1719,7 +1719,7 @@ void sub_802A28C(void)
 
   gUnknown_203B2C4->unk41C.itemIndex = 0;
   gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.unk0 = 0;
+  gUnknown_203B2C4->unk41C.itemFlags = 0;
 
   switch(sub_801CA08(1))
   {
@@ -1869,7 +1869,7 @@ void sub_802A50C(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0)) 
+        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0))
         {
             case 0x11:
                 // Wrong password

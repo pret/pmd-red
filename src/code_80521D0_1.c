@@ -1,14 +1,15 @@
 #include "global.h"
-#include "gUnknown_203B418.h"
+#include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "pokemon.h"
+#include "constants/direction.h"
 
 extern struct DungeonEntity *sub_8085480(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
-extern struct unkStruct_203B418 *gUnknown_203B418;
+extern struct DungeonGlobalData *gUnknown_203B418;
 extern u32 gUnknown_202EDC8;
 
 extern u32 gUnknown_81062A8;
@@ -148,11 +149,11 @@ struct unk8049590
 };
 
 extern struct unk8049590 *sub_8049590(u32, u32);
-extern void sub_806BFC0(struct subStruct_8048524 *, u32);
+extern void sub_806BFC0(struct DungeonEntityData *, u32);
 
 void sub_808BBA8(struct DungeonEntity *param_1)
 {
-  sub_806BFC0(param_1->unk70,0);
+  sub_806BFC0(param_1->entityData,0);
 }
 
 void sub_808BBB8(struct DungeonEntity *param_1)
@@ -172,10 +173,10 @@ void sub_808BBB8(struct DungeonEntity *param_1)
       iVar2 = 0x100;
     }
     if (iVar1 < 0) break;
-    param_1->unk70->unk174 = iVar1;
+    param_1->entityData->unk174 = iVar1;
     sub_803E46C(0x46);
   }
- param_1->unk70->unk174 = 0;
+ param_1->entityData->unk174 = 0;
 }
 
 void sub_808BC20(struct DungeonEntity * param_1)
@@ -187,7 +188,7 @@ void sub_808BC20(struct DungeonEntity * param_1)
     sub_8085918(param_1,uVar1 & 7);
     sub_803E708(3,0x46);
   }
-  param_1->unk70->unk15E = 1;
+  param_1->entityData->unk15E = 1;
   PlaySoundEffect(0x27f);
   sub_80861F8(99,param_1,1);
 }
@@ -196,7 +197,7 @@ void JirachiWishGrantDialogue(struct DungeonEntity *param_1)
 {
   u32 uVar2;
 
-  param_1->unk70->unk15D = 1;
+  param_1->entityData->unk15D = 1;
   // Nnnnnnnnnn!
   sub_8052910(&gUnknown_81058A8);
   PlaySoundEffect(0x375);
@@ -1076,11 +1077,11 @@ void sub_808C8E0(struct DungeonEntity *param_1)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(param_1, 0, 0);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    param_1->unk70->unk174 = iVar1 * 256;
+    param_1->entityData->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    param_1->unk70->unk174 = iVar1 * 256;
+    param_1->entityData->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   sub_8086A3C(param_1);
@@ -1122,7 +1123,7 @@ void sub_808C998(void)
 
 void sub_808C9B0(struct DungeonEntity *param_1)
 {
-    param_1->unk70->unk46 = 4;
+    param_1->entityData->facingDirection = DIRECTION_NORTH;
     sub_806CE68(param_1, 4);
 }
 

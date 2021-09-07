@@ -1,10 +1,11 @@
 #include "global.h"
-#include "gUnknown_203B418.h"
+#include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 #include "pokemon.h"
 #include "item.h"
+#include "constants/direction.h"
 
-extern struct unkStruct_203B418 *gUnknown_203B418;
+extern struct DungeonGlobalData *gUnknown_203B418;
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -424,13 +425,13 @@ void sub_8087704(struct DungeonEntity *param_1)
 {
   int iVar1;
 
-  param_1->unk70->unk15C = 1;
-  param_1->unk70->unk15E = 0;
-  param_1->unk70->unk174 = 200;
+  param_1->entityData->unk15C = 1;
+  param_1->entityData->unk15E = 0;
+  param_1->entityData->unk174 = 200;
   PlaySoundEffect(0x1ea);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    param_1->unk70->unk174 = iVar1 * 256;
+    param_1->entityData->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   sub_803E708(0x1e,0x46);
@@ -682,14 +683,14 @@ void sub_8087D30(struct DungeonEntity * param_1)
 {
   s32 iVar1;
 
-  param_1->unk70->unk15C = 1;
-  param_1->unk70->unk15E = 0;
-  param_1->unk70->unk174 = 0xc800;
+  param_1->entityData->unk15C = 1;
+  param_1->entityData->unk15E = 0;
+  param_1->entityData->unk174 = 0xc800;
   PlaySoundEffect(0x1f8);
   iVar1 = 200;
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    param_1->unk70->unk174 = iVar1 * 256;
+    param_1->entityData->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
 }
@@ -1088,12 +1089,12 @@ void sub_8088484(struct DungeonEntity *param_1)
 {
   int iVar1;
 
-  param_1->unk70->unk15C = 1;
-  param_1->unk70->unk15E = 0;
+  param_1->entityData->unk15C = 1;
+  param_1->entityData->unk15E = 0;
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    param_1->unk70->unk174 = iVar1 * 256;
+    param_1->entityData->unk174 = iVar1 * 256;
     sub_8085C54(iVar1,iVar1,iVar1 / 2,1,0);
     sub_803E46C(0x46);
   }
@@ -1597,8 +1598,8 @@ void MagmaCavernMidDialogue(void)
   // Hey! $m0!
   // Over there!
   sub_8052910(&gUnknown_8102C30);
-  iVar3->unk70->unk15E = 0;
-  iVar4->unk70->unk15E =0;
+  iVar3->entityData->unk15E = 0;
+  iVar4->entityData->unk15E =0;
   local_20[0] = (iVar3->posPixelX + iVar4->posPixelX) / 2;
   local_20[1] = (iVar3->posPixelY + iVar4->posPixelY) / 2 + 0x800;
   sub_80858AC(local_20,0x20);
@@ -1680,14 +1681,14 @@ void sub_808919C(struct DungeonEntity *r0)
 void sub_80891B0(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 0, 4);
-    r0->unk70->unk15F = 1;
+    r0->entityData->unk15F = 1;
 }
 
 
 void sub_80891D0(struct DungeonEntity *r0)
 {
     sub_806CDD4(r0, 7, 4);
-    r0->unk70->unk15F = 0;
+    r0->entityData->unk15F = 0;
 }
 
 void sub_80891F0(void)
@@ -1903,7 +1904,7 @@ void sub_8089620(struct DungeonEntity *param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->unk70->unk15E = 0;
+  param_1->entityData->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 0x600;
   PlaySoundEffect(0x1f8);
@@ -1914,10 +1915,10 @@ void sub_8089620(struct DungeonEntity *param_1)
       iVar1 = 0x14;
     }
     if (iVar2 < 0) break;
-    param_1->unk70->unk174 = iVar2;
+    param_1->entityData->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  param_1->unk70->unk174 = 0;
+  param_1->entityData->unk174 = 0;
 }
 
 void RayquazaScreenFlash(void)
@@ -1984,7 +1985,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
     for(iVar3 = 0; iVar3 < 0x10; iVar3++)
     {
       iVar2 = gUnknown_203B418->unk1358C[iVar3];
-      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->unk70->unkA4 == param_2)) {
+      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientFlags == param_2)) {
         return;
       }
     }
@@ -2176,7 +2177,7 @@ void sub_8089B64(struct DungeonEntity *param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->unk70->unk15E = 0;
+  param_1->entityData->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 0x400;
   PlaySoundEffect(0x1f8);
@@ -2187,10 +2188,10 @@ void sub_8089B64(struct DungeonEntity *param_1)
       iVar1 = 0x1e;
     }
     if (iVar2 < 0) break;
-    param_1->unk70->unk174 = iVar2;
+    param_1->entityData->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  param_1->unk70->unk174 = 0;
+  param_1->entityData->unk174 = 0;
 }
 
 void MewtwoScreenFlash(void)
@@ -2638,7 +2639,7 @@ void sub_808A528(struct DungeonEntity * param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->unk70->unk15E = 0;
+  param_1->entityData->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 3072;
   PlaySoundEffect(0x1f8);
@@ -2649,10 +2650,10 @@ void sub_808A528(struct DungeonEntity * param_1)
       iVar1 = 20;
     }
     if (iVar2 < 0) break;
-    param_1->unk70->unk174 = iVar2;
+    param_1->entityData->unk174 = iVar2;
     sub_803E46C(70);
   }
-  param_1->unk70->unk174 = 0;
+  param_1->entityData->unk174 = 0;
 }
 
 void SuicuneScreenFlash(void)
@@ -2817,7 +2818,7 @@ void sub_808A904(struct DungeonEntity * param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->unk70->unk15E = 0;
+  param_1->entityData->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 3072;
   PlaySoundEffect(0x1f8);
@@ -2828,10 +2829,10 @@ void sub_808A904(struct DungeonEntity * param_1)
       iVar1 = 20;
     }
     if (iVar2 < 0) break;
-    param_1->unk70->unk174 = iVar2;
+    param_1->entityData->unk174 = iVar2;
     sub_803E46C(70);
   }
-  param_1->unk70->unk174 = 0;
+  param_1->entityData->unk174 = 0;
 }
 
 void HoOhScreenFlash(void)
@@ -3362,7 +3363,7 @@ void sub_808B1CC(u8 r0)
 
 void sub_808B2B0(struct DungeonEntity *r0)
 {
-    r0->unk70->unk46 = 4;
+    r0->entityData->facingDirection = DIRECTION_NORTH;
     sub_806CE68(r0, 4);
 }
 
@@ -3553,8 +3554,8 @@ void sub_808B50C(void)
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(iVar1);
   sub_8041888(0);
-  iVar1->unk70->unk15C = 1;
-  iVar1->unk70->unk15E = 0;
+  iVar1->entityData->unk15C = 1;
+  iVar1->entityData->unk15E = 0;
   sub_80861B8(iVar1,0xe,0);
   sub_8083ED8(0x1e);
   sub_803E708(0x1e,70);

@@ -25,7 +25,7 @@ struct Item
 
 struct ItemSlot
 {
-    u8 unk0;  // some sort of flags, bit 0 seems to indicate an empty slot
+    u8 itemFlags;
     u8 numItems;
     u8 itemIndex;
 };
@@ -82,6 +82,14 @@ enum ItemCategory
     ITEM_CATEGORY_SPECS,
     ITEM_CATEGORY_SCARFS,
     ITEM_CATEGORY_ORBS
+};
+
+enum ItemFlag
+{
+    ITEM_FLAG_EXISTS = 1 << 0,
+    ITEM_FLAG_FOR_SALE = 1 << 1,
+    ITEM_FLAG_STICKY = 1 << 3,
+    ITEM_FLAG_SET = 1 << 4 // This item can be thrown by pressing L+R instead of having to go to the bag menu.
 };
 
 // see https://bulbapedia.bulbagarden.net/wiki/List_of_items_by_index_number_(Rescue_Team)

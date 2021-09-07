@@ -1,7 +1,8 @@
 #include "global.h"
 #include "dungeon_entity.h"
-#include "gUnknown_203B418.h"
+#include "dungeon_global_data.h"
 #include "random.h"
+#include "constants/direction.h"
 
 struct unkStruct_202F3D0
 {
@@ -14,7 +15,7 @@ struct unkStruct_202F3D0
 };
 
 EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
-extern struct unkStruct_203B418 *gUnknown_203B418;
+extern struct DungeonGlobalData *gUnknown_203B418;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
@@ -448,14 +449,14 @@ void sub_8086854(void)
 
 void sub_80868F4(struct DungeonEntity *r0)
 {
-    r0->unk70->unk15C = 1;
-    r0->unk70->unk15D = 1;
+    r0->entityData->unk15C = 1;
+    r0->entityData->unk15D = 1;
 }
 
 void sub_8086910(struct DungeonEntity *r0)
 {
-    r0->unk70->unk15C = 0;
-    r0->unk70->unk15D = 0;
+    r0->entityData->unk15C = 0;
+    r0->entityData->unk15D = 0;
 }
 
 void sub_808692C(void)
@@ -478,7 +479,7 @@ void SpriteLookAroundEffect(struct DungeonEntity *r0)
     s8 r4;
     s8 r3;
 
-    r4 = sub_8002984(r0->unk70->unk46, 4);
+    r4 = sub_8002984(r0->entityData->facingDirection, DIRECTION_NORTH);
 
     sub_80869E4(r0, 4, 2, r4);
 

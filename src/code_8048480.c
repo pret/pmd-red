@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_entity.h"
+#include "status.h"
 
 extern u32 gUnknown_80F89F4;
 extern u8 gAvailablePokemonNames[0x58];
@@ -81,7 +82,7 @@ void sub_804841C(struct DungeonEntity *r0, struct DungeonEntity *r1)
 
 void sub_8048428(struct DungeonEntity *r0, struct DungeonEntity *r1)
 {
-    if(r1->unk70->statusCondition == 4) // 4 - Paralyzed??
+    if(r1->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED)
         sub_807A290(r0, r1);
     else
         // Pointer to "But nothing happened!"
@@ -90,7 +91,7 @@ void sub_8048428(struct DungeonEntity *r0, struct DungeonEntity *r1)
 
 void sub_8048450(struct DungeonEntity *r0, struct DungeonEntity *r1)
 {
-    if((u8)(r1->unk70->statusCondition - 2) <= 1)
+    if((u8)(r1->entityData->nonVolatileStatus - 2) <= 1)
         sub_807A290(r0, r1);
     else
         // Pointer to "But nothing happened!"
@@ -135,7 +136,7 @@ void sub_80484DC(struct DungeonEntity *r0, struct DungeonEntity *r1)
 
 void sub_80484E8(struct DungeonEntity *r0, struct DungeonEntity *r1)
 {
-    if(r1->unk70->statusCondition == 1) // 1 - Burn??
+    if(r1->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
         sub_807A290(r0, r1);
     else
     {

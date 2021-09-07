@@ -64,10 +64,10 @@ struct TeamInventory *GetMoneyItemsInfo(void)
 void InitializeMoneyItems(void)
 {
   s32 i;
-  
+
   for(i = 0; i < INVENTORY_SIZE; i++)
   {
-    gTeamInventory_203B460->teamItems[i].unk0 = 0;
+    gTeamInventory_203B460->teamItems[i].itemFlags = 0;
   }
 
   for(i = 0; i < 0xF0; i++)
@@ -87,11 +87,11 @@ s32 GetNumberOfFilledInventorySlots(void)
 {
   s32 i;
   s32 count;
-  
+
   count = 0;
   for(i = 0; i < INVENTORY_SIZE; i++)
   {
-    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) != 0) {
+    if ((gTeamInventory_203B460->teamItems[i].itemFlags & ITEM_FLAG_EXISTS) != 0) {
       count++;
     }
   }
@@ -102,7 +102,7 @@ bool8 IsThrowableItem(u8 itemIndex)
 {
   if ((GetItemType(itemIndex) != ITEM_TYPE_THROWABLE) && (GetItemType(itemIndex) != ITEM_TYPE_ROCK))
     return FALSE;
-  else 
+  else
     return TRUE;
 }
 
@@ -110,9 +110,9 @@ void xxx_init_itemslot_8090A8C(struct ItemSlot *slot, u8 itemIndex, u8 param_3)
 {
   u32 uVar3;
   u32 uVar4;
-  
+
   if (itemIndex != ITEM_ID_NOTHING) {
-    slot->unk0 = 1;
+    slot->itemFlags = ITEM_FLAG_EXISTS;
     slot->itemIndex = itemIndex;
     if (IsThrowableItem(itemIndex)) {
         uVar3 = GetItemUnkThrow(itemIndex, 0);
@@ -121,15 +121,15 @@ void xxx_init_itemslot_8090A8C(struct ItemSlot *slot, u8 itemIndex, u8 param_3)
     }
     else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
         slot->numItems  = 1;
-    else 
+    else
         slot->numItems  = 0;
 
     if (param_3 != 0)
-        slot->unk0 |= 8;
+        slot->itemFlags |= ITEM_FLAG_STICKY;
 
   }
   else {
-    slot->unk0 = 0;
+    slot->itemFlags = 0;
     slot->itemIndex = ITEM_ID_NOTHING;
     slot->numItems  = 0;
   }
@@ -139,14 +139,14 @@ void xxx_init_helditem_8090B08(struct HeldItem *held, u8 itemIndex)
 {
   u32 uVar2;
   u32 uVar3;
-  
+
   if (itemIndex != ITEM_ID_NOTHING) {
     held->itemIndex = itemIndex;
     if (IsThrowableItem(itemIndex)) {
         uVar2 = GetItemUnkThrow(itemIndex,0);
         uVar3 = GetItemUnkThrow(itemIndex,1);
         held->numItems = RandomRange(uVar2, uVar3);
-    } 
+    }
     else if (GetItemType(itemIndex) == ITEM_TYPE_MONEY)
         held->numItems = 1;
     else
@@ -164,7 +164,7 @@ void HeldItemToSlot(struct ItemSlot *slot, struct HeldItem *held)
 
     if(held->itemIndex != ITEM_ID_NOTHING)
     {
-        slot->unk0 = 1;
+        slot->itemFlags = ITEM_FLAG_EXISTS;
         slot->itemIndex = held->itemIndex;
         is_throwable = IsThrowableItem(slot->itemIndex);
         if(is_throwable != 0 || GetItemType(slot->itemIndex) == ITEM_TYPE_MONEY)
@@ -178,13 +178,13 @@ void HeldItemToSlot(struct ItemSlot *slot, struct HeldItem *held)
     {
         slot->itemIndex = ITEM_ID_NOTHING;
         slot->numItems = 0;
-        slot->unk0 = 0;
+        slot->itemFlags = 0;
     }
 }
 
 void SlotToHeldItem(struct HeldItem *held,struct ItemSlot *slot)
 {
-  if ((slot->unk0 & 1) != 0) {
+  if ((slot->itemFlags & ITEM_FLAG_EXISTS) != 0) {
     held->itemIndex = slot->itemIndex;
     held->numItems = slot->numItems;
   }
@@ -302,7 +302,7 @@ void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3)
 {
   char acStack104 [80];
   struct ItemSlot unkItem;
-  
+
   strncpy(acStack104,gItemParametersData[itemIndex].namePointer,0x50);
   xxx_init_itemslot_8090A8C(&unkItem,itemIndex,0);
   unkItem.numItems = 1;
@@ -347,18 +347,18 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, struct unkStruct_8090F58
     strncpy(buffer, gItemParametersData[slot->itemIndex].namePointer, 80);
   }
 
-  if (slot->unk0 & 8) {
+  if (slot->itemFlags & ITEM_FLAG_STICKY) {
     ExpandPlaceholdersBuffer(ext_buffer, gUnknown_8109784, buffer);
     strncpy(buffer, ext_buffer, 80);
   }
 
   if (a3) {
-    if (a3->unk4 && (slot->unk0 & 0x10)) {
+    if (a3->unk4 && (slot->itemFlags & ITEM_FLAG_SET)) {
       ExpandPlaceholdersBuffer(ext_buffer, gUnknown_810978C, buffer);
       strncpy(buffer, ext_buffer, 80);
     }
     if ((*(u32*)a3 == 1) || (*(u32*)a3 == 3)) {
-        if (slot->unk0 & 2) {
+        if (slot->itemFlags & ITEM_FLAG_FOR_SALE) {
           sub_8090F58(ext_buffer, buffer, slot, a3);
           return;
         }
@@ -379,7 +379,7 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, struct unkStruct_8090F
   u32 unk0;
   s32 value;
   u8 buffer[40];
-  
+
   if (!a4) {
     strncpy(a1, a2, 80);
     return;
@@ -406,7 +406,7 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, struct unkStruct_8090F
     }
   }
 
-  if (a4->unk6) {    
+  if (a4->unk6) {
     sub_8090FEC(value, buffer, 1);
     ExpandPlaceholdersBuffer(a1, gUnknown_8109794, a2, a4->unk6, buffer);
   }
@@ -416,7 +416,7 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, struct unkStruct_8090F
   }
 }
 
-s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3) 
+s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3)
 {
   s32 i, count;
   s32 cond = 0;
@@ -424,7 +424,7 @@ s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3)
   count = 0;
   for (i = 0; i < 5; i++) {
     s32 div;
-    
+
     div = 0;
     while (a1 >= gUnknown_81097B0[i]) {
         a1 -= gUnknown_81097B0[i];
@@ -458,7 +458,7 @@ s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3)
   return count;
 }
 
-void FillInventoryGaps() 
+void FillInventoryGaps()
 {
   // fill inventory gaps
   s32 slot_checking = 0;
@@ -466,7 +466,7 @@ void FillInventoryGaps()
 
   do {
     while (slot_checking < INVENTORY_SIZE) {
-      if (slot_checking[gTeamInventory_203B460->teamItems].unk0 & 1) {
+      if (slot_checking[gTeamInventory_203B460->teamItems].itemFlags & ITEM_FLAG_EXISTS) {
         break;
       }
       // find next empty slot
@@ -498,22 +498,22 @@ void FillInventoryGaps()
 #endif
       slot->itemIndex = 0;
       slot->numItems = 0;
-      slot->unk0 = 0;
+      slot->itemFlags = 0;
   }
 }
 
-s32 FindItemInInventory(u8 itemIndex) 
+s32 FindItemInInventory(u8 itemIndex)
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].itemIndex == itemIndex)) {
+    if ((gTeamInventory_203B460->teamItems[i].itemFlags & ITEM_FLAG_EXISTS) && (gTeamInventory_203B460->teamItems[i].itemIndex == itemIndex)) {
       return i;
     }
   }
   return -1;
 }
 
-s32 GetItemCountInInventory(u8 _itemIndex) 
+s32 GetItemCountInInventory(u8 _itemIndex)
 {
 #ifdef NONMATCHING
   s32 count = 0;
@@ -533,7 +533,7 @@ s32 GetItemCountInInventory(u8 _itemIndex)
   s32 i = 19;
 
   do {
-    register u32 unk0 asm("r1") = slot->unk0;
+    register u32 unk0 asm("r1") = slot->itemFlags;
     u32 bottom_bit = one;
     bottom_bit &= unk0;
     if (bottom_bit && (slot->itemIndex == itemIndex)) {
@@ -545,11 +545,11 @@ s32 GetItemCountInInventory(u8 _itemIndex)
 #endif
 }
 
-s32 GetItemPossessionCount(u8 itemIndex) 
+s32 GetItemPossessionCount(u8 itemIndex)
 {
   s32 item_count = GetItemCountInInventory(itemIndex);
   s32 i = 0;
-  
+
   struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
   for (i = 0; i < NUM_SPECIES; i++) {
      struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
@@ -563,20 +563,20 @@ s32 GetItemPossessionCount(u8 itemIndex)
   return item_count;
 }
 
-void ShiftItemsDownFrom(s32 start) 
+void ShiftItemsDownFrom(s32 start)
 {
   s32 i, j;
   for (i = start, j = start + 1; i < 19; i++, j++) {
     gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[j];
   }
   gTeamInventory_203B460->teamItems[19].itemIndex = 0;
-  gTeamInventory_203B460->teamItems[19].unk0 = 0;
+  gTeamInventory_203B460->teamItems[19].itemFlags = 0;
 }
 
 void ClearItemSlotAt(u32 index)
 {
   gTeamInventory_203B460->teamItems[index].itemIndex = ITEM_ID_NOTHING;
-  gTeamInventory_203B460->teamItems[index].unk0 = 0;
+  gTeamInventory_203B460->teamItems[index].itemFlags = 0;
 }
 
 bool8 sub_809124C(u8 itemIndex, u8 param_3)
@@ -586,7 +586,7 @@ bool8 sub_809124C(u8 itemIndex, u8 param_3)
   return AddItemToInventory(&temp);
 }
 
-bool8 sub_8091274(struct HeldItem* slot) 
+bool8 sub_8091274(struct HeldItem* slot)
 {
   struct ItemSlot temp;
 
@@ -594,14 +594,14 @@ bool8 sub_8091274(struct HeldItem* slot)
   return AddItemToInventory(&temp);
 }
 
-bool8 AddItemToInventory(const struct ItemSlot* slot) 
+bool8 AddItemToInventory(const struct ItemSlot* slot)
 {
   s32 i;
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED struct ItemSlot* current = &gTeamInventory_203B460->teamItems[i];
-    if (!(i[gTeamInventory_203B460->teamItems].unk0 & 1)) {
+    if (!(i[gTeamInventory_203B460->teamItems].itemFlags & ITEM_FLAG_EXISTS)) {
       gTeamInventory_203B460->teamItems[i] = *slot;
       return FALSE;
     }
@@ -609,7 +609,7 @@ bool8 AddItemToInventory(const struct ItemSlot* slot)
   return TRUE;
 }
 
-void ConvertMoneyItemToMoney() 
+void ConvertMoneyItemToMoney()
 {
   s32 i = 0;
 
@@ -618,14 +618,14 @@ void ConvertMoneyItemToMoney()
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
     struct ItemSlot* current_slot = &gTeamInventory_203B460->teamItems[i];
-    if ((current_slot->unk0 & 1) && (current_slot->itemIndex == ITEM_ID_POKE)) {
+    if ((current_slot->itemFlags & ITEM_FLAG_EXISTS) && (current_slot->itemIndex == ITEM_ID_POKE)) {
       u32 result;
 
       result = GetMoneyValue(current_slot);
       AddToTeamMoney(result);
       current_slot->itemIndex = 0;
       current_slot->numItems = 0;
-      current_slot->unk0 = 0;
+      current_slot->itemFlags = 0;
     }
   } while (++i < INVENTORY_SIZE);
   FillInventoryGaps();
@@ -635,9 +635,9 @@ void ConvertMoneyItemToMoney()
     s32 lowest_index = -1;
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
-    bool8 item_occupied = i[gTeamInventory_203B460->teamItems].unk0 & 1;
+    bool8 item_occupied = i[gTeamInventory_203B460->teamItems].itemFlags & ITEM_FLAG_EXISTS;
     s32 next = i + 1;
-    
+
     if (item_occupied) {
       s32 lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[i].itemIndex);
       s32 j;
@@ -645,7 +645,7 @@ void ConvertMoneyItemToMoney()
       // find next lowest
       for (j = next; j < INVENTORY_SIZE; j++) {
         UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
-        if ((j[gTeamInventory_203B460->teamItems].unk0 & 1) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex))) {
+        if ((j[gTeamInventory_203B460->teamItems].itemFlags & ITEM_FLAG_EXISTS) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex))) {
           lowest_index = j;
           lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[j].itemIndex);
         }
@@ -654,7 +654,7 @@ void ConvertMoneyItemToMoney()
       if (lowest_index >= 0) {
         // swap the slots
         struct ItemSlot current = gTeamInventory_203B460->teamItems[i];
-        gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[lowest_index]; 
+        gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[lowest_index];
         gTeamInventory_203B460->teamItems[lowest_index] = current;
       }
     }
@@ -678,12 +678,12 @@ void AddToTeamMoney(s32 amount)
   gTeamInventory_203B460->teamMoney = clamped_money;
 }
 
-u16 GetItemMove(u8 index) 
+u16 GetItemMove(u8 index)
 {
   return gItemParametersData[index].move;
 }
 
-u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3) 
+u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
 {
   u8 buffer88[88];  // some struct
 
@@ -695,7 +695,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
   }
   sub_80073B8(a2);
   xxx_format_and_draw(16, 0, buffer88, a2, 0);
-  
+
   xxx_format_and_draw(8, 24, GetItemDescription(slot->itemIndex), a2, 0);
   if (GetItemType(slot->itemIndex) == ITEM_TYPE_TM) {
     u8* buffer8 = buffer88 + 0x50;  // field in struct
@@ -719,7 +719,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
   return sub_8097DF0(GetItemDescription(slot->itemIndex), a3);
 }
 
-bool8 CanSellItem(u32 id) 
+bool8 CanSellItem(u32 id)
 {
   u8 id_;
   id = (u8)id;
@@ -738,7 +738,7 @@ bool8 CanSellItem(u32 id)
     return FALSE;
 }
 
-bool8 IsNotMoneyOrUsedTMItem(u8 id) 
+bool8 IsNotMoneyOrUsedTMItem(u8 id)
 {
   if (id == ITEM_ID_NOTHING) {
     return FALSE;
@@ -752,7 +752,7 @@ bool8 IsNotMoneyOrUsedTMItem(u8 id)
   return TRUE;
 }
 
-bool8 IsNotSpecialItem(u8 id) 
+bool8 IsNotSpecialItem(u8 id)
 {
   if (id == ITEM_ID_NOTHING) {
     return FALSE;
@@ -775,7 +775,7 @@ bool8 IsNotSpecialItem(u8 id)
   return TRUE;
 }
 
-bool8 IsEdibleItem(u8 id) 
+bool8 IsEdibleItem(u8 id)
 {
   if (!((GetItemType(id) == ITEM_TYPE_BERRY_SEED) || (GetItemType(id) == ITEM_TYPE_APPLE_GUMMI))) {
     return FALSE;
@@ -783,7 +783,7 @@ bool8 IsEdibleItem(u8 id)
   return TRUE;
 }
 
-bool8 IsHMItem(u8 id) 
+bool8 IsHMItem(u8 id)
 {
   if (id == ITEM_ID_CUT) {
     return TRUE;
@@ -812,18 +812,18 @@ bool8 IsHMItem(u8 id)
   return FALSE;
 }
 
-u32 GetMoneyValue(struct ItemSlot* slot) 
+u32 GetMoneyValue(struct ItemSlot* slot)
 {
   return gUnknown_810A3F0[slot->numItems];
 }
 
-u32 GetMoneyValueHeld(struct HeldItem* slot) 
+u32 GetMoneyValueHeld(struct HeldItem* slot)
 {
   // potentially different slot type (used for held item)
   return gUnknown_810A3F0[slot->numItems];
 }
 
-void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4) 
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4)
 {
   // item stat buff?
   s8 result;
@@ -917,7 +917,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, s
   }
 }
 
-bool8 IsGummiItem(u8 itemIndex) 
+bool8 IsGummiItem(u8 itemIndex)
 {
   if (itemIndex < ITEM_ID_WHITE_GUMMI) {
     return FALSE;
@@ -928,19 +928,19 @@ bool8 IsGummiItem(u8 itemIndex)
   return TRUE;
 }
 
-bool8 HasGummiItem() 
+bool8 HasGummiItem()
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
-    if ((i[gTeamInventory_203B460->teamItems].unk0 & 1) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
+    if ((i[gTeamInventory_203B460->teamItems].itemFlags & ITEM_FLAG_EXISTS) && IsGummiItem(i[gTeamInventory_203B460->teamItems].itemIndex)) {
       return TRUE;
     }
   }
   return FALSE;
 }
 
-void MoveToStorage(struct ItemSlot* slot) 
+void MoveToStorage(struct ItemSlot* slot)
 {
   if (IsThrowableItem(slot->itemIndex)) {
     gTeamInventory_203B460->teamStorage[slot->itemIndex] += slot->numItems;
@@ -954,7 +954,7 @@ void MoveToStorage(struct ItemSlot* slot)
   }
 }
 
-s32 xxx_count_inv_unk230() 
+s32 xxx_count_inv_unk230()
 {
   s32 i;
   s32 counter = 0;
@@ -966,7 +966,7 @@ s32 xxx_count_inv_unk230()
   return counter;
 }
 
-void xxx_init_unk230_substruct(u8 i) 
+void xxx_init_unk230_substruct(u8 i)
 {
   struct HeldItem* unk230;
 
@@ -975,7 +975,7 @@ void xxx_init_unk230_substruct(u8 i)
   unk230->numItems = 0;
 }
 
-struct HeldItem* xxx_get_inv_unk230_at_809185C(u8 i) 
+struct HeldItem* xxx_get_inv_unk230_at_809185C(u8 i)
 {
   return &gTeamInventory_203B460->unk230[i];
 }
@@ -1160,7 +1160,7 @@ bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
   return TRUE;
 }
 
-s32 SaveTeamInventory(u8* unk0, u32 size) 
+s32 SaveTeamInventory(u8* unk0, u32 size)
 {
   struct unkStruct_8094924 unk;
   s32 i;
@@ -1184,7 +1184,7 @@ s32 SaveTeamInventory(u8* unk0, u32 size)
   return unk.unk8;
 }
 
-s32 RestoreTeamInventory(u8 *unk0, u32 size) 
+s32 RestoreTeamInventory(u8 *unk0, u32 size)
 {
   struct unkStruct_8094924 unk;
   s32 i;
@@ -1214,7 +1214,7 @@ void RestoreHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item)
   RestoreIntegerBits(a1, &item->numItems, 7);
 }
 
-void SaveHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item) 
+void SaveHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item)
 {
   SaveIntegerBits(a1, &item->itemIndex, 8);
   SaveIntegerBits(a1, &item->numItems, 7);
@@ -1222,24 +1222,24 @@ void SaveHeldItem(struct unkStruct_8094924 *a1, struct HeldItem *item)
 
 void RestoreItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot)
 {
-  RestoreIntegerBits(a1, &slot->unk0, 8);
+  RestoreIntegerBits(a1, &slot->itemFlags, 8);
   RestoreIntegerBits(a1, &slot->numItems, 7);
   RestoreIntegerBits(a1, &slot->itemIndex, 8);
 }
 
-void SaveItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot) 
+void SaveItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot)
 {
-  SaveIntegerBits(a1, &slot->unk0, 8);
+  SaveIntegerBits(a1, &slot->itemFlags, 8);
   SaveIntegerBits(a1, &slot->numItems, 7);
   SaveIntegerBits(a1, &slot->itemIndex, 8);
 }
 
-u32 sub_8091E50(u8 index) 
+u32 sub_8091E50(u8 index)
 {
   return gUnknown_810AF50[index];
 }
 
-u32 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1) 
+u32 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
 {
   if (i0 > 0x3e)
     return 0;
@@ -1266,7 +1266,7 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3)
 
   // struct of 12 + 0xf0 (NUMBER_OF_ITEM_IDS) hwords?
   struct UnkStruct_8091E94 s1;
-  u16 s2[12 + 0xf0]; 
+  u16 s2[12 + 0xf0];
   s32 data_index;
   // 30000: level up exp required?
 
@@ -1471,13 +1471,13 @@ void ClearAllItems_8091FB4() {
 
   for (i = 0; i < INVENTORY_SIZE; i++) {
     struct ItemSlot* slot = &gTeamInventory_203B460->teamItems[i];
-    if (slot->unk0 & 1) {
-      slot->unk0 &= 0xf7;
+    if (slot->itemFlags & ITEM_FLAG_EXISTS) {
+      slot->itemFlags &= 0xf7;
       if (slot->itemIndex == ITEM_ID_POKE) {
         AddToTeamMoney(GetMoneyValue(slot));
         slot->itemIndex = 0;
         slot->numItems = 0;
-        slot->unk0 = 0;
+        slot->itemFlags = 0;
       }
     }
   }
