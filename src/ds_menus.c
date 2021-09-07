@@ -2,17 +2,6 @@
 #include "input.h"
 #include "text.h"
 
-extern u8 *gUnknown_203B3E8;
-extern void nullsub_54();
-extern void sub_8039E18();
-
-void SetWonderMailMainMenuState(u8 r0)
-{
-    *gUnknown_203B3E8 = r0;
-    nullsub_54();
-    sub_8039E18();
-}
-
 u32 CreateDualSlotMenu(void)
 {
     return 1;

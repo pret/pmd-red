@@ -234,7 +234,7 @@ extern void sub_80862BC(struct DungeonEntity *);
 extern void sub_8086448();
 extern void SpriteLookAroundEffect();
 extern u32 sub_80861F8(u32, struct DungeonEntity *, u32);
-extern void sub_8086A70(struct DungeonEntity *, u32, u32);
+extern void SetupBossFightHP(struct DungeonEntity *, u32, u32);
 extern void sub_80858AC(u32 *, u32);
 
 extern void sub_8097FA8(u32);
@@ -386,7 +386,7 @@ void ZapdosReFightDialogue(void)
   sub_8052910(&gUnknown_81018EC);
   sub_808775C(2);
   sub_8052910(&gUnknown_8101918);
-  sub_8086A70(uVar2,300,0xb);
+  SetupBossFightHP(uVar2,300,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -414,7 +414,7 @@ void ZapdosPostStoryPreFightDialogue(void)
     sub_808775C(2);
     sub_8052910(&gUnknown_8101A04);
     sub_803E708(10,0x46);
-    sub_8086A70(uVar3,300,0xb);
+    SetupBossFightHP(uVar3,300,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -592,7 +592,7 @@ void MoltresPreFightDialogue(void)
   sub_8087DE8(0xb,6);
   sub_8052910(&gUnknown_8102108);
   sub_803E708(10,0x46);
-  sub_8086A70(uVar3,400,0xb);
+  SetupBossFightHP(uVar3,400,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -635,7 +635,7 @@ void MoltresReFightDialogue(void)
   sub_803E708(10,0x46);
   sub_8052910(&gUnknown_81022F8);
   sub_803E708(10,0x46);
-  sub_8086A70(uVar3,400,0xb);
+  SetupBossFightHP(uVar3,400,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -673,7 +673,7 @@ void MoltresPostStoryPreFightDialogue(void)
     sub_8087DE8(0xb,6);
     sub_8052910(&gUnknown_8102454);
     sub_803E708(10,0x46);
-    sub_8086A70(uVar3,400,0xb);
+    SetupBossFightHP(uVar3,400,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -1021,7 +1021,7 @@ void ArticunoPreFightDialogue(void)
   sub_8052910(&gUnknown_81028B8);
   sub_806CDD4(uVar3,0xf,0);
   sub_803E708(0x10,0x46);
-  sub_8086A70(uVar3,0x1c2,0xb);
+  SetupBossFightHP(uVar3,0x1c2,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1043,7 +1043,7 @@ void ArticunoReFightDialogue(void)
   sub_8052910(&gUnknown_8102948);
   sub_806CDD4(uVar2,0xf,0);
   sub_803E708(0x28,0x46);
-  sub_8086A70(uVar2,0x1c2,0xb);
+  SetupBossFightHP(uVar2,0x1c2,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1079,7 +1079,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_8052910(&gUnknown_8102A74);
     sub_806CDD4(uVar3,0xf,0);
     sub_803E708(0x28,0x46);
-    sub_8086A70(uVar3,0x1c2,0xb);
+    SetupBossFightHP(uVar3,0x1c2,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -1342,7 +1342,7 @@ void GroudonPreFightDialogue(void)
   sub_8086A54(uVar4);
   sub_8085930(4);
   sub_8086764();
-  sub_8086A70(uVar4,500,0xb);
+  SetupBossFightHP(uVar4,500,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1374,7 +1374,7 @@ void GroudonReFightDialogue(void)
   sub_8086A54(uVar2);
   sub_8085930(4);
   sub_8086764();
-  sub_8086A70(uVar2,500,0xb);
+  SetupBossFightHP(uVar2,500,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1402,7 +1402,7 @@ void GroudonPostStoryPreFightDialogue(void)
     sub_8088CA0();
     sub_8052910(&gUnknown_810347C);
     sub_803E708(10,0x46);
-    sub_8086A70(uVar3,500,0xb);
+    SetupBossFightHP(uVar3,500,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -1843,7 +1843,7 @@ void RayquazaPreFightDialogue(void)
   sub_8052910(&gUnknown_81037D4);
   RayquazaScreenFlash();
   sub_8052910(&gUnknown_8103820);
-  sub_8086A70(uVar3,600,0x20);
+  SetupBossFightHP(uVar3,600,0x20);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1867,7 +1867,7 @@ void RayquazaReFightDialogue(void)
   sub_8052910(&gUnknown_81038A8);
   RayquazaScreenFlash();
   sub_8052910(&gUnknown_81038F8);
-  sub_8086A70(uVar2,600,0x20);
+  SetupBossFightHP(uVar2,600,0x20);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -1893,7 +1893,7 @@ void RayquazaPostStoryPreFightDialogue(void)
     sub_8052910(&gUnknown_8103AE4);
     RayquazaScreenFlash();
     sub_8052910(&gUnknown_8103B30);
-    sub_8086A70(uVar3,600,0xb);
+    SetupBossFightHP(uVar3,600,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -1984,7 +1984,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
     for(iVar3 = 0; iVar3 < 0x10; iVar3++)
     {
       iVar2 = gUnknown_203B418->unk1358C[iVar3];
-      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->unk70->unkA4 == param_2)) {
+      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->unk70->clientFlags == param_2)) {
         return;
       }
     }
@@ -2140,7 +2140,7 @@ void MewtwoPreFightDialogue(void)
   MewtwoScreenFlash();
   sub_8052910(&gUnknown_8104008);
   sub_803E708(10,0x46);
-  sub_8086A70(uVar2,900,0x20);
+  SetupBossFightHP(uVar2,900,0x20);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2166,7 +2166,7 @@ void MewtwoPreFightDialogue1(void)
     sub_8052910(&gUnknown_81040CC);
     MewtwoScreenFlash();
     sub_8052910(&gUnknown_8104114);
-    sub_8086A70(uVar3,900,0x20);
+    SetupBossFightHP(uVar3,900,0x20);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -2279,7 +2279,7 @@ void EnteiPreFightDialogue(void)
   EnteiScreenFlash();
   sub_8052910(&gUnknown_81041F8);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,600,0xb);
+  SetupBossFightHP(uVar2,600,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2297,7 +2297,7 @@ void EnteiPreFightDialogue1(void)
   EnteiScreenFlash();
   sub_8052910(&gUnknown_81042B8);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,600,0xb);
+  SetupBossFightHP(uVar2,600,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2319,7 +2319,7 @@ void EnteiPreFightDialogue2(void)
     EnteiScreenFlash();
     sub_8052910(&gUnknown_81043C0);
     sub_803E708(10,70);
-    sub_8086A70(uVar3,600,0xb);
+    SetupBossFightHP(uVar3,600,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -2432,7 +2432,7 @@ void RaikouPreFightDialogue(void)
   RaikouScreenFlash();
   sub_8052910(&gUnknown_81045B0);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,0x28a,0xb);
+  SetupBossFightHP(uVar2,0x28a,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2452,7 +2452,7 @@ void RaikouPreFightDialogue1(void)
   RaikouScreenFlash();
   sub_8052910(&gUnknown_81046A0);
   sub_803E708(10,70);
-  sub_8086A70(uVar3,0x28a,0xb);
+  SetupBossFightHP(uVar3,0x28a,0xb);
   sub_80858AC(&iVar2->posPixelX,0x10);
 }
 
@@ -2475,7 +2475,7 @@ void RaikouPreFightDialogue2(void)
     RaikouScreenFlash();
     sub_8052910(&gUnknown_810476C);
     sub_803E708(10,70);
-    sub_8086A70(uVar3,0x28a,0xb);
+    SetupBossFightHP(uVar3,0x28a,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -2590,7 +2590,7 @@ void SuicunePreFightDialogue(void)
   SuicuneScreenFlash();
   sub_8052910(&gUnknown_8104914);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,0x28a,0xb);
+  SetupBossFightHP(uVar2,0x28a,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2607,7 +2607,7 @@ void SuicunePreFightDialogue1(void)
   SuicuneScreenFlash();
   sub_8052910(&gUnknown_8104998);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,0x28a,0xb);
+  SetupBossFightHP(uVar2,0x28a,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2628,7 +2628,7 @@ void SuicunePreFightDialogue2(void)
     SuicuneScreenFlash();
     sub_8052910(&gUnknown_8104A9C);
     sub_803E708(10,70);
-    sub_8086A70(uVar3,0x28a,0xb);
+    SetupBossFightHP(uVar3,0x28a,0xb);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -2771,7 +2771,7 @@ void HoOhPreFightDialogue(void)
   HoOhScreenFlash();
   sub_8052910(&gUnknown_8104CE0);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,800,0x20);
+  SetupBossFightHP(uVar2,800,0x20);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2807,7 +2807,7 @@ void HoOhPreFightDialogue1(void)
     HoOhScreenFlash();
     sub_8052910(&gUnknown_8104E0C);
     sub_803E708(10,70);
-    sub_8086A70(uVar3,800,0x20);
+    SetupBossFightHP(uVar3,800,0x20);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
 }
@@ -2943,7 +2943,7 @@ void LatiosPreFightDialogue(void)
   LatiosScreenFlash();
   sub_8052910(&gUnknown_8104F30);
   sub_803E708(10,70);
-  sub_8086A70(iVar2,600,0xb);
+  SetupBossFightHP(iVar2,600,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -2962,7 +2962,7 @@ void LatiosReFightDialogue(void)
   LatiosScreenFlash();
   sub_8052910(&gUnknown_8104F30);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,600,0xb);
+  SetupBossFightHP(uVar2,600,0xb);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 
@@ -3362,26 +3362,26 @@ void sub_808B1CC(u8 r0)
 
 void sub_808B2B0(struct DungeonEntity *r0)
 {
-    r0->unk70->unk46 = 4;
+    r0->unk70->facingDir = 4;
     sub_806CE68(r0, 4);
 }
 
 
 void sub_808B2C4(struct DungeonEntity *r0)
 {
-    sub_8086A70(r0, 0xE1 << 1, 0xB);
+    SetupBossFightHP(r0, 0xE1 << 1, 0xB);
 }
 
 
 void sub_808B2D4(struct DungeonEntity *r0)
 {
-    sub_8086A70(r0, 0xE1 << 1, 0xB);
+    SetupBossFightHP(r0, 0xE1 << 1, 0xB);
 }
 
 
 void sub_808B2E4(struct DungeonEntity *r0)
 {
-    sub_8086A70(r0, 0xE1 << 1, 0xB);
+    SetupBossFightHP(r0, 0xE1 << 1, 0xB);
 }
 
 void sub_808B2F4(void)
@@ -3540,7 +3540,7 @@ void JirachiPreFightDialogue(void)
   sub_803E708(10,70);
   sub_8052910(&gUnknown_810550C);
   sub_803E708(10,70);
-  sub_8086A70(uVar2,0x15e,0x20);
+  SetupBossFightHP(uVar2,0x15e,0x20);
   sub_80858AC(&iVar1->posPixelX,0x10);
 }
 

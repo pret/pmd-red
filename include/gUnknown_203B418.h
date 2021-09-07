@@ -16,7 +16,11 @@ struct unkStruct_203B418
     u8 unk11;
     u8 fill12[0x16D - 0x12];
     u8 unk16D;
-    u8 fill16E[0xE23C - 0x16E];
+    u8 fill16E[0x65C - 0x16E];
+    u8 unk65C;
+    u8 fill65D[0x66A - 0x65D];
+    u16 unk66A;
+    u8 fill66B[0xE23C - 0x66C];
     s16 unkE23C;
     s16 unkE23E;
     u8 fillE240[0xE265 - 0xE240];

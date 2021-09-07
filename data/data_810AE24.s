@@ -1537,7 +1537,7 @@ gUnknown_81161E8: @ 81161E8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .4byte CleanFelicityBank
-        .4byte sub_80163A0
+        .4byte FelicityBankCallback
 
 	.global gUnknown_81161F8
 gUnknown_81161F8: @ 81161F8
@@ -1577,9 +1577,9 @@ gUnknown_8116238: @ 8116238
 	.global gUnknown_8116248
 gUnknown_8116248: @ 8116248
         .byte 0x01, 0x00, 0x00, 0x00
-        .4byte sub_8029B50
-        .4byte sub_8029E60
-        .4byte sub_8029C98
+        .4byte CreateThankYouMailPelipper
+        .4byte CleanThankYouMailPelipper
+        .4byte ThankYouMailPelipperCallback
 
 	.global gUnknown_8116258
 gUnknown_8116258: @ 8116258

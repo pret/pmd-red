@@ -106,7 +106,7 @@ extern void sub_8083ED8(u32);
 extern u32 sub_803F994();
 extern s32 sub_803F9B0();
 extern void sub_803F878(u32, s32);
-extern void sub_8086A70(struct DungeonEntity *, u32, u32);
+extern void SetupBossFightHP(struct DungeonEntity *, u32, u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void sub_803E9D0(void);
 extern void DeoxysScreenFlash(void);
@@ -341,7 +341,7 @@ void LugiaPreFightDialogue(void)
     sub_80861D4(uVar3,7,0);
     sub_8052910(&gUnknown_8106024);
     sub_808BFA0();
-    sub_8086A70(uVar3,800,0x20);
+    SetupBossFightHP(uVar3,800,0x20);
     sub_8083E88(0x23);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
@@ -491,7 +491,7 @@ void KyogrePreFightDialogue(void)
     // power!
     sub_8052910(&gUnknown_810627C);
     sub_803E708(10,0x46);
-    sub_8086A70(uVar3,600,0xb);
+    SetupBossFightHP(uVar3,600,0xb);
     sub_8083E88(0x23);
     sub_80858AC(&iVar2->posPixelX,0x10);
   }
@@ -633,7 +633,7 @@ void sub_808C5A0(struct DungeonEntity *r0)
 
 void sub_808C5AC(struct DungeonEntity *r0)
 {
-    sub_8086A70(r0, 0x3b6, 0x20);
+    SetupBossFightHP(r0, 0x3b6, 0x20);
 }
 
 void sub_808C5C0(void)
@@ -1122,7 +1122,7 @@ void sub_808C998(void)
 
 void sub_808C9B0(struct DungeonEntity *param_1)
 {
-    param_1->unk70->unk46 = 4;
+    param_1->unk70->facingDir = 4;
     sub_806CE68(param_1, 4);
 }
 
