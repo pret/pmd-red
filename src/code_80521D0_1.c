@@ -9,7 +9,7 @@
 extern struct DungeonEntity *sub_8085480(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
-extern struct DungeonGlobalData *gUnknown_203B418;
+extern struct DungeonGlobalData *dungeonGlobalData;
 extern u32 gUnknown_202EDC8;
 
 extern u32 gUnknown_81062A8;
@@ -217,7 +217,7 @@ void sub_808BCE4(void)
 {
   struct unk8049590 *puVar1;
 
-  puVar1 = sub_8049590(gUnknown_203B418->unkE23C, gUnknown_203B418->unkE23E);
+  puVar1 = sub_8049590(dungeonGlobalData->unkE23C, dungeonGlobalData->unkE23E);
   puVar1->unk0 &= 0xfffc;
   puVar1->unk0 |= 16;
   puVar1->unk0 &= 0xfdff;
@@ -231,7 +231,7 @@ void sub_808BD38(void)
 {
   struct unk8049590 *puVar1;
 
-  puVar1 = sub_8049590(gUnknown_203B418->unkE23C, gUnknown_203B418->unkE23E);
+  puVar1 = sub_8049590(dungeonGlobalData->unkE23C, dungeonGlobalData->unkE23E);
   puVar1->unk0 &= 0xfffc;
   puVar1->unk0 |= 1;
   puVar1->unk0 &= 0xffef;
@@ -292,7 +292,7 @@ void sub_808BDEC(void)
     sub_8068FE0(uVar3,0x21c,0);
   }
   else {
-    gUnknown_203B418->unk7 = 1;
+    dungeonGlobalData->unk7 = 1;
     sub_8085918(uVar3,0);
   }
   sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
@@ -302,7 +302,7 @@ void sub_808BDEC(void)
 void sub_808BE70(u8 param_1,u8 param_2)
 {
   if ((param_2 == 0x33) && (param_1 == 0x1B)) {
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -409,7 +409,7 @@ void sub_808C0CC(void)
   sub_8085C54(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
-  gUnknown_203B418->unk7 = 0;
+  dungeonGlobalData->unk7 = 0;
   sub_808BFA0();
 }
 
@@ -430,7 +430,7 @@ void sub_808C10C(void)
     sub_8068FE0(uVar2,0x21c,0);
   }
   else {
-    gUnknown_203B418->unk7 = 1;
+    dungeonGlobalData->unk7 = 1;
     sub_8085918(uVar2,0);
   }
   sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
@@ -445,7 +445,7 @@ void sub_808C10C(void)
 void sub_808C1A4(u8 param_1,u8 param_2)
 {
   if ((param_2 == 0x34) && (param_1 == 0x1C)) {
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
     sub_8083E88(0x23);
   }
 }
@@ -464,7 +464,7 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_81062A8);
     sub_803E708(10,0x46);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
   else {
     sub_8052910(&gUnknown_8106074);
@@ -531,7 +531,7 @@ void sub_808C360(void)
   sub_8085C54(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
-  gUnknown_203B418->unk7 = 0;
+  dungeonGlobalData->unk7 = 0;
   KyogreScreenFlash();
 }
 
@@ -548,7 +548,7 @@ void sub_808C3A0(void)
     sub_808563C(sub_808C590);
   }
   else {
-    gUnknown_203B418->unk7 = 1;
+    dungeonGlobalData->unk7 = 1;
     sub_808563C(sub_808C5A0);
   }
   sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
@@ -558,7 +558,7 @@ void sub_808C3A0(void)
 void sub_808C414(u8 param_1,u8 param_2)
 {
   if ((param_2 == 0x35) && (param_1 == 0x1D)) {
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
     sub_8083E88(0x1a);
   }
 }
@@ -618,7 +618,7 @@ void sub_808C550(void)
   sub_8085C54(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
-  gUnknown_203B418->unk7 = 0;
+  dungeonGlobalData->unk7 = 0;
   DeoxysScreenFlash();
 }
 
@@ -782,7 +782,7 @@ void CelebiJoinDialogue(void)
   }
   sub_8083ED8(0x1e);
   sub_803E708(0x1e,0x46);
-  gUnknown_203B418->unk2 = 1;
+  dungeonGlobalData->unk2 = 1;
 }
 #else
 NAKED
@@ -1066,7 +1066,7 @@ void CelebiJoinDialogue(void)
 "_0808C8D0: .4byte gUnknown_8106500\n"
 "_0808C8D4: .4byte gUnknown_8106534\n"
 "_0808C8D8: .4byte gUnknown_8106560\n"
-"_0808C8DC: .4byte gUnknown_203B418");
+"_0808C8DC: .4byte dungeonGlobalData");
 }
 #endif
 
@@ -1101,14 +1101,14 @@ void sub_808C948(struct DungeonEntity *param_1, u8 param_2)
   if (param_2 == 0x37) {
     flag = FALSE;
     for(iVar3 = 0; iVar3 < 0x10; iVar3++){
-      iVar2 = gUnknown_203B418->unk1358C[iVar3];
+      iVar2 = dungeonGlobalData->wildPokemon[iVar3];
       if ((iVar2 != param_1) && (sub_80450E0(iVar2) != 0)) {
         flag = TRUE;
         break;
       }
     }
     if (!flag) {
-      gUnknown_203B418->unk2 = 1;
+      dungeonGlobalData->unk2 = 1;
     }
   }
 }
@@ -1192,8 +1192,8 @@ void MedichamRescueDialogue(void)
     sub_803E708(0x20, 0x46);
     sub_8042B0C(temp);
     sub_8068FE0(temp, 0x21C, 0);
-    gUnknown_203B418->unk4 = 1;
-    gUnknown_203B418->unk11 = 4;
+    dungeonGlobalData->unk4 = 1;
+    dungeonGlobalData->unk11 = 4;
 }
 
 void sub_808CB5C(void)
@@ -1282,8 +1282,8 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0x20, 0x46);
     sub_8042B0C(temp);
     sub_8068FE0(temp, 0x21C, 0);
-    gUnknown_203B418->unk4 = 1;
-    gUnknown_203B418->unk11 = 4;
+    dungeonGlobalData->unk4 = 1;
+    dungeonGlobalData->unk11 = 4;
 
 }
 

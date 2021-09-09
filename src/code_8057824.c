@@ -2,7 +2,7 @@
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 
-extern struct DungeonGlobalData *gUnknown_203B418;
+extern struct DungeonGlobalData *dungeonGlobalData;
 
 extern u32 gUnknown_80FCF74;
 extern u32 gUnknown_80FCF80;
@@ -49,7 +49,7 @@ bool32 sub_805783C(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 
 bool32 sub_805785C(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 {
-  gUnknown_203B418->unkE26B = gUnknown_80F4F42;
+  dungeonGlobalData->unkE26B = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == '\0') {
     // The weather remains unchanged
     sub_80522F4(param_1,param_2,gUnknown_80FCF74);
@@ -59,7 +59,7 @@ bool32 sub_805785C(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 
 bool32 sub_80578A4(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 {
-  gUnknown_203B418->unkE26C = gUnknown_80F4F42;
+  dungeonGlobalData->weatherTurnsLeft = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == '\0') {
     // The weather remains unchanged
     sub_80522F4(param_1,param_2,gUnknown_80FCF80);

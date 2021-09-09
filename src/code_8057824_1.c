@@ -5,7 +5,7 @@
 #include "item.h"
 #include "constants/direction.h"
 
-extern struct DungeonGlobalData *gUnknown_203B418;
+extern struct DungeonGlobalData *dungeonGlobalData;
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -524,7 +524,7 @@ void sub_80878F4(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xF6000000U) >> 0x18 < 3) && (param_1 == 0x9)) {
     sub_8097FA8(0x7);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -657,7 +657,7 @@ void MoltresPostStoryPreFightDialogue(void)
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_8100D3C);
     sub_803E708(10,0x46);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
   else {
     sub_8052910(&gUnknown_810232C);
@@ -944,7 +944,7 @@ void sub_8088088(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xF3000000U) >> 0x18 < 3) && (param_1 == 0xD)) {
     sub_8097FA8(0x9);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -998,7 +998,7 @@ void ArticunoPreFightDialogue(void)
   sub_8052910(&gUnknown_810272C);
   sub_803E708(10,0x46);
   PlaySoundEffect(0); // snow flurry
-  gUnknown_203B418->unkE265 = 7;
+  dungeonGlobalData->unkE265 = 7;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
@@ -1033,7 +1033,7 @@ void ArticunoReFightDialogue(void)
 
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0xd);
-  gUnknown_203B418->unkE265 = 7;
+  dungeonGlobalData->unkE265 = 7;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
   sub_8052910(&gUnknown_81028D4);
@@ -1060,7 +1060,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_80866C4(&gUnknown_8102A9C);
   }
   else {
-    gUnknown_203B418->unkE265 = 7;
+    dungeonGlobalData->unkE265 = 7;
     sub_807EAA0(0,1);
     ArticunoScreenFlash();
     sub_8086738();
@@ -1142,7 +1142,7 @@ void sub_80885A0(void)
   sub_8083ED8(0x3c);
   sub_803E708(0x3c,0x46);
   sub_8083F14();
-  gUnknown_203B418->unk7 = 1;
+  dungeonGlobalData->unk7 = 1;
 }
 
 void sub_80885C4(void)
@@ -1161,7 +1161,7 @@ void sub_80885C4(void)
 
 void sub_8088608(void)
 {
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
 }
 
 void sub_8088618(void)
@@ -1256,7 +1256,7 @@ void sub_8088818(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xEE000000U) >> 0x18 < 3) && (param_1 == 0xE)) {
     sub_8097FA8(0xC);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -1658,7 +1658,7 @@ void MagmaCavernMidDialogue(void)
   // Be careful!
   sub_8052910(&gUnknown_8102E54);
   sub_803E708(10,0x46);
-  gUnknown_203B418->unk2 = 1;
+  dungeonGlobalData->unk2 = 1;
 }
 
 void sub_8089168(void)
@@ -1803,7 +1803,7 @@ void sub_80893B4(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xE9000000U) >> 0x18 < 3) && (param_1 == 0xF)) {
     sub_8097FA8(0xF);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -1984,7 +1984,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
   if ((((param_3 * 0x1000000) + 0xe6000000U) >> 0x18) < 2) {
     for(iVar3 = 0; iVar3 < 0x10; iVar3++)
     {
-      iVar2 = gUnknown_203B418->unk1358C[iVar3];
+      iVar2 = dungeonGlobalData->wildPokemon[iVar3];
       if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientFlags == param_2)) {
         return;
       }
@@ -1992,7 +1992,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
     // WTF is this??
     if(!unk1){
         sub_8097FA8(0x11);
-        gUnknown_203B418->unk2 = 1;
+        dungeonGlobalData->unk2 = 1;
     }
   }
 }
@@ -2076,7 +2076,7 @@ void sub_8089914(void)
   iVar1 = sub_8085480();
   uVar2 = sub_8085680(0x11);
   sub_8083F14();
-  gUnknown_203B418->unk7 = 1;
+  dungeonGlobalData->unk7 = 1;
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
@@ -2102,7 +2102,7 @@ void sub_8089978(void)
     sub_8068FE0(uVar3,0x21c,0);
   }
   else {
-    gUnknown_203B418->unk7 = 1;
+    dungeonGlobalData->unk7 = 1;
     sub_8085918(uVar3,0);
     sub_8086A3C(uVar3);
   }
@@ -2114,7 +2114,7 @@ void sub_8089A00(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xE3000000U) >> 0x18 < 3) && (param_1 == 0x11)) {
     sub_8097FA8(0x13);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -2261,7 +2261,7 @@ void sub_8089CFC(char param_1,int param_2)
 {
   if ((((param_2 * 0x1000000) + 0xE0000000U) >> 0x18 < 3) && (param_1 == 0x12)) {
     sub_8097FA8(0x15);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -2407,7 +2407,7 @@ void sub_8089FF0(char param_1,int param_2)
 {
   if ((((param_2 * 0x1000000) + 0xdD000000U) >> 0x18 < 3) && (param_1 == 0x13)) {
     sub_8097FA8(0x17);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -2422,7 +2422,7 @@ void RaikouPreFightDialogue(void)
   sub_8052910(&gUnknown_8104450);
   RaikouScreenFlash();
   sub_8052910(&gUnknown_81044B4);
-  gUnknown_203B418->unkE265 = 4;
+  dungeonGlobalData->unkE265 = 4;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
   sub_8052910(&gUnknown_8104510);
@@ -2444,7 +2444,7 @@ void RaikouPreFightDialogue1(void)
 
   iVar2 = sub_8085480();
   uVar3 = sub_8085680(0x13);
-  gUnknown_203B418->unkE265 = 4;
+  dungeonGlobalData->unkE265 = 4;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
   sub_8052910(&gUnknown_81045F8);
@@ -2468,7 +2468,7 @@ void RaikouPreFightDialogue2(void)
     sub_80866C4(&gUnknown_8104778);
   }
   else {
-    gUnknown_203B418->unkE265 = 4;
+    dungeonGlobalData->unkE265 = 4;
     sub_807EAA0(0,1);
     sub_8052910(&gUnknown_81046CC);
     RaikouScreenFlash();
@@ -2563,7 +2563,7 @@ void sub_808A36C(char param_1,int param_2)
 {
   if ((((param_2 * 0x1000000) + 0xda000000U) >> 0x18 < 3) && (param_1 == 0x14)) {
     sub_8097FA8(0x19);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -2727,7 +2727,7 @@ void sub_808A6E8(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xd7000000U) >> 0x18 < 2) && (param_1 == 0x15)) {
     sub_8097FA8(0x1A);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -2913,7 +2913,7 @@ void sub_808AAF0(char param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) + 0xd5000000U) >> 0x18 < 3) && (param_1 == 0x16)) {
     sub_8097FA8(0x1c);
-    gUnknown_203B418->unk2 = 1;
+    dungeonGlobalData->unk2 = 1;
   }
 }
 
@@ -3293,7 +3293,7 @@ void sub_808B1CC(u8 r0)
 	"\tstrb r0, [r1, 0x2]\n"
 	"\tb _0808B2A8\n"
 	"\t.align 2, 0\n"
-"_0808B21C: .4byte gUnknown_203B418\n"
+"_0808B21C: .4byte dungeonGlobalData\n"
 "_0808B220: .4byte 0x00000684\n"
 "_0808B224: .4byte 0xffff0000\n"
 "_0808B228: .4byte 0x00000686\n"
@@ -3438,17 +3438,17 @@ void sub_808B3E4(u8 param_1,u8 param_2,u8 param_3)
   if (((((param_2 * 0x1000000) + 0xcf000000U) >> 0x18) < 2) && (param_1 == 0x1A)){
     sub_8097FA8(0x1e);
     if (param_3 != 0) {
-      gUnknown_203B418->unk2 = 1;
+      dungeonGlobalData->unk2 = 1;
     }
     else {
-      uVar1 = gUnknown_203B418->unk1356C;
+      uVar1 = dungeonGlobalData->unk1356C;
       if (sub_80860A8(0x36) != 0) {
            JirachiWish();
       }
       else {
           sub_808B50C();
       }
-      gUnknown_203B418->unk1356C = uVar1;
+      dungeonGlobalData->unk1356C = uVar1;
       sub_8040A84();
     }
   }
@@ -3482,7 +3482,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 	"\tstrb r0, [r1, 0x2]\n"
 	"\tb _0808B44E\n"
 	"\t.align 2, 0\n"
-"_0808B414: .4byte gUnknown_203B418\n"
+"_0808B414: .4byte dungeonGlobalData\n"
 "_0808B418:\n"
 	"\tldr r0, _0808B434\n"
 	"\tldr r0, [r0]\n"
@@ -3497,7 +3497,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 	"\tbl JirachiWish\n"
 	"\tb _0808B440\n"
 	"\t.align 2, 0\n"
-"_0808B434: .4byte gUnknown_203B418\n"
+"_0808B434: .4byte dungeonGlobalData\n"
 "_0808B438: .4byte 0x0001356c\n"
 "_0808B43C:\n"
 	"\tbl sub_808B50C\n"
@@ -3513,7 +3513,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_0808B454: .4byte gUnknown_203B418\n"
+"_0808B454: .4byte dungeonGlobalData\n"
 "_0808B458: .4byte 0x0001356c");
 }
 #endif
@@ -3570,5 +3570,5 @@ void sub_808B50C(void)
   sub_808BC20(iVar1);
   sub_8052910(&gUnknown_81055F4);
   sub_803E708(10,70);
-  gUnknown_203B418->unk2 = 1;
+  dungeonGlobalData->unk2 = 1;
 }

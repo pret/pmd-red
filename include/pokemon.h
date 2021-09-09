@@ -24,7 +24,7 @@ struct unkPokeSubStruct_4 {
     u16 fill6;
 };
 
-struct unkPokeSubStruct_2C 
+struct unkPokeSubStruct_2C
 {
     u8 unk0;
     u8 fill1;
@@ -138,13 +138,13 @@ struct gPokemon
     /* 0x10 */ u16 dialogue_sprites;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ u8 types[2];
-    /* 0x15 */ u8 walkable_tiles;
+    /* 0x15 */ u8 walkable_tiles; // Uses the CrossableTerrain enum in map.h.
     /* 0x16 */ u8 friend_area;
     /* 0x17 */ u8 abilities[2];
     /* 0x19 */ u8 shadow_size;
     /* 0x1A */ u8 unk1A;
     /* 0x1B */ u8 unk1B;
-    /* 0x1C */ bool8 isMoving;
+    /* 0x1C */ bool8 isMoving; // Set to false for Pokémon who don't move unless they're the leader, like Kakuna.
     /* 0x1D */ u8 unk1D;
     /* 0x1E */ u16 base_hp;
     /* 0x20 */ s32 base_exp;
@@ -155,7 +155,7 @@ struct gPokemon
     /* 0x30 */ u8 unk30;
     /* 0x31 */ u8 unk31;
     /* 0x32 */ u8 unk32;
-    /* 0x33 */ bool8 unk33;
+    /* 0x33 */ bool8 toolboxEnabled; // If false, the AI can't use items. Doesn't seem to be used, as it's true for all Pokémon.
     /* 0x34 */ struct EvolveStruct1 pre;
     /* 0x38 */ struct EvolveNeeds need;
     /* 0x3C */ s16 dexInternal[2]; // dexNo and internalNo
@@ -165,7 +165,7 @@ struct gPokemon
 
 
 // https://www.pokecommunity.com/showthread.php?t=407371
-struct LevelData 
+struct LevelData
 {
     s32 expRequired;
     u8 gainHP;
@@ -177,18 +177,17 @@ struct LevelData
     u16 fillA;
 };
 
-struct unkStruct_808E218_arg 
+struct unkStruct_808E218_arg
 {
     u16 unk0[NUM_SPECIES];
     u32 count;
 };
 
-struct unkStruct_808E218 
+struct unkStruct_808E218
 {
     // leveldata? (same size)
     struct unkStruct_808E6F4 unk0[3];
 };
-
 
 void LoadMonsterParameters(void);
 struct unkStruct_203B45C *GetRecruitedPokemon(void);
@@ -212,7 +211,7 @@ u16 GetLowKickDmg(s16 index);
 u16 GetSizeOrbDmg(s16 index);
 u8 GetFriendArea(s16 index);
 u16 GetBaseHP(s16 index);
-bool8 GetUnk33(s16 index);
+bool8 IsToolboxEnabled(s16 index);
 u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
 u16 GetPokemonAttSpatt(s16 index, u32 r1);
@@ -237,4 +236,4 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
 void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
 
 
-#endif // GUARD_POKEMON_H  
+#endif // GUARD_POKEMON_H

@@ -293,9 +293,9 @@ u8 *GetItemDescription(u8 itemIndex)
     return gItemParametersData[itemIndex].descriptionPointer;
 }
 
-u32 GetItemUnkFood(u8 itemIndex, u32 r1)
+u32 GetItemAIFlags(u8 itemIndex, u32 r1)
 {
-    return gItemParametersData[itemIndex].unkFood1[r1];
+    return gItemParametersData[itemIndex].aiFlags[r1];
 }
 
 void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3)

@@ -12,8 +12,11 @@ struct Item
     /* 0xD */ u8 icon;
     /* 0xE */ u16 fill;
     /* 0x10 */ u8 *descriptionPointer;
-    /* 0x14 */ bool8 unkFood1[2];
-    /* 0x16 */ u8 throwDmg;
+    // Determines how the AI can use the item.
+    // Index 0: Item can be used on self.
+    // Index 1: Item can be thrown at allies.
+    // Index 2: Item can be thrown at enemies.
+    /* 0x14 */ bool8 aiFlags[3];
     /* 0x17 */ u8 fill2;
     /* 0x18 */ s16 move;
     /* 0x1A */ u8 order; // Numbered order they are in storage
@@ -351,7 +354,7 @@ u8 GetItemPalette(u8 itemIndex);
 u8 GetItemCategory(u8 itemIndex);
 u32 GetItemUnkThrow(u8 itemIndex, u32 r1);
 u8 *GetItemDescription(u8 itemIndex);
-u32 GetItemUnkFood(u8 itemIndex, u32 r1);
+u32 GetItemAIFlags(u8 itemIndex, u32 r1);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 itemIndex);
 void xxx_init_itemslot_8090A8C(struct ItemSlot *param_1,u8 itemIndex,u8 param_3);

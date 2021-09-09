@@ -222,7 +222,7 @@ sub_804869C:
 	bl sub_80522F4
 	b _080486EA
 	.align 2, 0
-_080486D4: .4byte gUnknown_203B418
+_080486D4: .4byte dungeonGlobalData
 _080486D8: .4byte 0x00000675
 _080486DC: .4byte gUnknown_80F4FA8
 _080486E0: .4byte gUnknown_80FEAE8
@@ -294,7 +294,7 @@ _08048748:
 	bl sub_80522F4
 	b _08048786
 	.align 2, 0
-_08048770: .4byte gUnknown_203B418
+_08048770: .4byte dungeonGlobalData
 _08048774: .4byte 0x00000675
 _08048778: .4byte gUnknown_80F4FAA
 _0804877C: .4byte gUnknown_80FEAE8
@@ -640,7 +640,7 @@ _080489F6:
 	movs r0, 0x1
 	b _08048A06
 	.align 2, 0
-_080489FC: .4byte gUnknown_203B418
+_080489FC: .4byte dungeonGlobalData
 _08048A00: .4byte 0x0001357c
 _08048A04:
 	movs r0, 0
@@ -727,7 +727,7 @@ _08048A90:
 	ldr r0, _08048AAC
 	b _08048A80
 	.align 2, 0
-_08048AA4: .4byte gUnknown_203B418
+_08048AA4: .4byte dungeonGlobalData
 _08048AA8: .4byte 0x0000065c
 _08048AAC: .4byte gUnknown_80F9BD8
 _08048AB0:
@@ -793,7 +793,7 @@ _08048B20:
 	movs r0, 0x1
 	b _08048B36
 	.align 2, 0
-_08048B24: .4byte gUnknown_203B418
+_08048B24: .4byte dungeonGlobalData
 _08048B28: .4byte 0x0001357c
 _08048B2C: .4byte gRecruitedPokemonRef
 _08048B30: .4byte 0x00008df8
@@ -840,7 +840,7 @@ _08048B4A:
 	b _08048B8E
 	.align 2, 0
 _08048B84: .4byte 0x00000157
-_08048B88: .4byte gUnknown_203B418
+_08048B88: .4byte dungeonGlobalData
 _08048B8C:
 	movs r0, 0
 _08048B8E:
@@ -926,7 +926,7 @@ _08048C24:
 	movs r0, 0x1
 	b _08048C32
 	.align 2, 0
-_08048C28: .4byte gUnknown_203B418
+_08048C28: .4byte dungeonGlobalData
 _08048C2C: .4byte 0x0001357c
 _08048C30:
 	movs r0, 0
@@ -1970,7 +1970,7 @@ sub_804954C:
 	ldr r0, [r1]
 	b _08049588
 	.align 2, 0
-_0804957C: .4byte gUnknown_203B418
+_0804957C: .4byte dungeonGlobalData
 _08049580: .4byte 0x0000e8c0
 _08049584:
 	ldr r0, _0804958C
@@ -2025,7 +2025,7 @@ _080495D6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080495DC: .4byte gUnknown_203B418
+_080495DC: .4byte dungeonGlobalData
 _080495E0: .4byte 0x0000e8c0
 	thumb_func_end sub_8049590
 
@@ -2092,7 +2092,7 @@ _08049614:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08049658: .4byte gUnknown_203B418
+_08049658: .4byte dungeonGlobalData
 _0804965C: .4byte 0x0000e8c0
 _08049660: .4byte 0x00003a18
 _08049664: .4byte 0x00003a0e
@@ -2190,7 +2190,7 @@ sub_804966C:
 	.align 2, 0
 _08049734: .4byte gUnknown_80F6A04
 _08049738: .4byte gUnknown_8108EC0
-_0804973C: .4byte gUnknown_203B418
+_0804973C: .4byte dungeonGlobalData
 _08049740: .4byte 0x00003a0e
 _08049744: .4byte gDungeonFileArchive
 _08049748: .4byte 0x06008000
@@ -2264,7 +2264,7 @@ _08049794:
 _080497E8: .4byte gUnknown_80F6A34
 _080497EC: .4byte 0x00012c24
 _080497F0: .4byte gUnknown_80F6A40
-_080497F4: .4byte gUnknown_203B418
+_080497F4: .4byte dungeonGlobalData
 _080497F8: .4byte 0x00003a0e
 _080497FC: .4byte gDungeonFileArchive
 _08049800: .4byte gUnknown_202F18C
@@ -2316,7 +2316,7 @@ sub_8049840:
 	ldr r0, _0804986C
 	b _08049874
 	.align 2, 0
-_08049860: .4byte gUnknown_203B418
+_08049860: .4byte dungeonGlobalData
 _08049864: .4byte 0x00003a0e
 _08049868: .4byte gUnknown_203B430
 _0804986C: .4byte gUnknown_80F69EC
@@ -2413,7 +2413,7 @@ _080498D0:
 	add r1, r10
 	b _08049B68
 	.align 2, 0
-_08049914: .4byte gUnknown_203B418
+_08049914: .4byte dungeonGlobalData
 _08049918: .4byte 0x00003a0e
 _0804991C:
 	mov r0, r10
@@ -2754,7 +2754,7 @@ _08049B72:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08049B84: .4byte gUnknown_203B418
+_08049B84: .4byte dungeonGlobalData
 _08049B88: .4byte 0x00012c24
 	thumb_func_end sub_80498A8
 
@@ -3289,7 +3289,7 @@ _08049F1C:
 	adds r2, r6, r0
 	b _0804A06A
 	.align 2, 0
-_08049F78: .4byte gUnknown_203B418
+_08049F78: .4byte dungeonGlobalData
 _08049F7C: .4byte 0x00018210
 _08049F80: .4byte 0x0001820f
 _08049F84: .4byte 0x000181f0
@@ -3686,7 +3686,7 @@ sub_804A1F0:
 	adds r2, r7, r0
 	b _0804A356
 	.align 2, 0
-_0804A284: .4byte gUnknown_203B418
+_0804A284: .4byte dungeonGlobalData
 _0804A288: .4byte 0x00018210
 _0804A28C: .4byte 0x0001820f
 _0804A290: .4byte 0x000181f0
@@ -4034,7 +4034,7 @@ sub_804A49C:
 	adds r2, r7, r0
 	b _0804A5DA
 	.align 2, 0
-_0804A52C: .4byte gUnknown_203B418
+_0804A52C: .4byte dungeonGlobalData
 _0804A530: .4byte 0x00018210
 _0804A534: .4byte 0x0001820f
 _0804A538: .4byte gUnknown_80F6A4A
@@ -4415,7 +4415,7 @@ _0804A7AC:
 	str r1, [sp, 0x38]
 	b _0804A8FC
 	.align 2, 0
-_0804A814: .4byte gUnknown_203B418
+_0804A814: .4byte dungeonGlobalData
 _0804A818: .4byte 0x000181f0
 _0804A81C: .4byte 0x0001821a
 _0804A820: .4byte gUnknown_80F4448
@@ -4749,7 +4749,7 @@ _0804AA78:
 	bx r0
 	.align 2, 0
 _0804AAA0: .4byte gUnknown_202B038
-_0804AAA4: .4byte gUnknown_203B418
+_0804AAA4: .4byte dungeonGlobalData
 _0804AAA8: .4byte 0x0001821a
 	thumb_func_end sub_804AA60
 
@@ -4940,7 +4940,7 @@ _0804ABE4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804AC04: .4byte gUnknown_203B418
+_0804AC04: .4byte dungeonGlobalData
 _0804AC08: .4byte 0x0000270f
 _0804AC0C: .4byte 0x0000d8f1
 _0804AC10: .4byte 0x000104c4
@@ -4990,7 +4990,7 @@ _0804AC52:
 	mov r8, r0
 	b _0804ACA2
 	.align 2, 0
-_0804AC6C: .4byte gUnknown_203B418
+_0804AC6C: .4byte dungeonGlobalData
 _0804AC70: .4byte 0x00018209
 _0804AC74:
 	lsls r0, r1, 3
@@ -5203,7 +5203,7 @@ _0804ADEE:
 	bx r1
 	.align 2, 0
 _0804ADFC: .4byte 0x0000fffc
-_0804AE00: .4byte gUnknown_203B418
+_0804AE00: .4byte dungeonGlobalData
 _0804AE04: .4byte 0x000135cc
 	thumb_func_end sub_804AD34
 
@@ -5347,7 +5347,7 @@ _0804AF0E:
 	bx r0
 	.align 2, 0
 _0804AF14: .4byte 0x0000ffef
-_0804AF18: .4byte gUnknown_203B418
+_0804AF18: .4byte dungeonGlobalData
 _0804AF1C: .4byte 0x000135cc
 	thumb_func_end sub_804AE84
 
@@ -5392,7 +5392,7 @@ _0804AF5E:
 	bx r1
 	.align 2, 0
 _0804AF68: .4byte gUnknown_810ACC0
-_0804AF6C: .4byte gUnknown_203B418
+_0804AF6C: .4byte dungeonGlobalData
 _0804AF70: .4byte 0x00003a0e
 	thumb_func_end sub_804AF20
 
@@ -5419,7 +5419,7 @@ _0804AF96:
 	movs r0, 0x1
 	b _0804AFA6
 	.align 2, 0
-_0804AF9C: .4byte gUnknown_203B418
+_0804AF9C: .4byte dungeonGlobalData
 _0804AFA0: .4byte 0x00003a0e
 _0804AFA4:
 	movs r0, 0
@@ -5589,7 +5589,7 @@ _0804B09C:
 _0804B0E4:
 	b _0804B2F6
 	.align 2, 0
-_0804B0E8: .4byte gUnknown_203B418
+_0804B0E8: .4byte dungeonGlobalData
 _0804B0EC: .4byte 0x0001c574
 _0804B0F0: .4byte gUnknown_80F6DCC
 _0804B0F4: .4byte gDungeonFileArchive
@@ -5692,7 +5692,7 @@ _0804B1C0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804B1EC: .4byte gUnknown_203B418
+_0804B1EC: .4byte dungeonGlobalData
 _0804B1F0: .4byte 0x00003a08
 _0804B1F4: .4byte 0x00003a0c
 _0804B1F8: .4byte gUnknown_202F1D0
@@ -5755,7 +5755,7 @@ _0804B280:
 	adds r0, r1
 	b _0804B2BC
 	.align 2, 0
-_0804B290: .4byte gUnknown_203B418
+_0804B290: .4byte dungeonGlobalData
 _0804B294: .4byte 0x00003a08
 _0804B298:
 	mov r0, r8
@@ -5781,7 +5781,7 @@ _0804B2BC:
 	strb r1, [r0]
 	b _0804B2F6
 	.align 2, 0
-_0804B2C4: .4byte gUnknown_203B418
+_0804B2C4: .4byte dungeonGlobalData
 _0804B2C8: .4byte 0x00003a08
 _0804B2CC:
 	mov r0, r8
@@ -6027,7 +6027,7 @@ _0804B498:
 _0804B4B4: .4byte gUnknown_202F1A9
 _0804B4B8: .4byte gUnknown_202F1D8
 _0804B4BC: .4byte 0x0000ffff
-_0804B4C0: .4byte gUnknown_203B418
+_0804B4C0: .4byte dungeonGlobalData
 _0804B4C4: .4byte 0x00003a08
 _0804B4C8: .4byte 0x0000e218
 _0804B4CC: .4byte 0x0000e21a
@@ -6069,7 +6069,7 @@ _0804B504:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804B524: .4byte gUnknown_203B418
+_0804B524: .4byte dungeonGlobalData
 _0804B528: .4byte 0x00003a0a
 _0804B52C: .4byte gUnknown_202F1A8
 _0804B530: .4byte 0x00013568
@@ -8305,7 +8305,7 @@ _0804C736:
 	bl sub_804C918
 	b _0804C782
 	.align 2, 0
-_0804C73C: .4byte gUnknown_203B418
+_0804C73C: .4byte dungeonGlobalData
 _0804C740: .4byte 0x00013568
 _0804C744:
 	cmp r7, 0x31
@@ -13258,7 +13258,7 @@ _0804EBA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804EBB4: .4byte gUnknown_203B418
+_0804EBB4: .4byte dungeonGlobalData
 _0804EBB8: .4byte 0x00010882
 _0804EBBC: .4byte 0x00010844
 _0804EBC0: .4byte 0x00010884
@@ -13651,7 +13651,7 @@ _0804EE6C:
 	strh r4, [r0, 0x2]
 	b _0804EED4
 	.align 2, 0
-_0804EE90: .4byte gUnknown_203B418
+_0804EE90: .4byte dungeonGlobalData
 _0804EE94: .4byte gUnknown_202F1D8
 _0804EE98: .4byte 0x0000ffff
 _0804EE9C: .4byte gUnknown_202F1AB
@@ -13916,7 +13916,7 @@ _0804F086:
 	blt _0804F046
 	b _0804F0C0
 	.align 2, 0
-_0804F094: .4byte gUnknown_203B418
+_0804F094: .4byte dungeonGlobalData
 _0804F098: .4byte gUnknown_202F1AA
 _0804F09C: .4byte gUnknown_202F1AB
 _0804F0A0: .4byte 0x00003a0c
@@ -14145,7 +14145,7 @@ _0804F1DE:
 	bl sub_804F278
 	b _0804F266
 	.align 2, 0
-_0804F244: .4byte gUnknown_203B418
+_0804F244: .4byte dungeonGlobalData
 _0804F248: .4byte 0x00003a16
 _0804F24C:
 	movs r0, 0x1
@@ -15795,7 +15795,7 @@ _0804FE96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804FEB4: .4byte gUnknown_203B418
+_0804FEB4: .4byte dungeonGlobalData
 _0804FEB8: .4byte 0x0000e21c
 _0804FEBC: .4byte 0x0000ffff
 _0804FEC0: .4byte 0x0000e21e
@@ -16253,7 +16253,7 @@ _08050230:
 	b _08050254
 	.align 2, 0
 _08050234: .4byte 0xffffe3fc
-_08050238: .4byte gUnknown_203B418
+_08050238: .4byte dungeonGlobalData
 _0805023C: .4byte 0x0000e21c
 _08050240: .4byte 0x0000e21e
 _08050244: .4byte 0x0000fffd
@@ -16501,7 +16501,7 @@ _08050410:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050424: .4byte gUnknown_203B418
+_08050424: .4byte dungeonGlobalData
 _08050428: .4byte 0x0000065c
 _0805042C: .4byte 0x0000e218
 _08050430: .4byte 0x0000e21a
@@ -16538,7 +16538,7 @@ sub_8050438:
 	b _0805047A
 	.align 2, 0
 _08050470: .4byte 0xffffe3f8
-_08050474: .4byte gUnknown_203B418
+_08050474: .4byte dungeonGlobalData
 _08050478:
 	adds r7, r1, 0
 _0805047A:
@@ -16827,7 +16827,7 @@ _0805068C:
 	.align 2, 0
 _080506A0: .4byte 0x0000e218
 _080506A4: .4byte 0x0000e21a
-_080506A8: .4byte gUnknown_203B418
+_080506A8: .4byte dungeonGlobalData
 _080506AC: .4byte 0x00003a08
 _080506B0: .4byte gUnknown_80F4DA4
 _080506B4: .4byte 0x00001c04
@@ -17991,7 +17991,7 @@ _08050F36:
 	.align 2, 0
 _08050F3C: .4byte 0xfffff8ec
 _08050F40: .4byte 0x00007fff
-_08050F44: .4byte gUnknown_203B418
+_08050F44: .4byte dungeonGlobalData
 _08050F48: .4byte 0x0000e21c
 _08050F4C: .4byte 0x0000e21e
 _08050F50: .4byte gUnknown_202F1D4
@@ -18557,7 +18557,7 @@ _08051350:
 	orrs r1, r0
 	b _0805139E
 	.align 2, 0
-_08051374: .4byte gUnknown_203B418
+_08051374: .4byte dungeonGlobalData
 _08051378: .4byte 0x00013568
 _0805137C: .4byte 0x0000e260
 _08051380: .4byte 0x0000e262
@@ -18647,7 +18647,7 @@ _08051416:
 	bx r0
 	.align 2, 0
 _0805142C: .4byte 0x0000fffc
-_08051430: .4byte gUnknown_203B418
+_08051430: .4byte dungeonGlobalData
 _08051434: .4byte 0x00003a0e
 	thumb_func_end sub_8051288
 
@@ -18842,7 +18842,7 @@ _08051598:
 	blt _080514C4
 	b _08051640
 	.align 2, 0
-_080515AC: .4byte gUnknown_203B418
+_080515AC: .4byte dungeonGlobalData
 _080515B0: .4byte gUnknown_202F1DC
 _080515B4: .4byte 0x00013568
 _080515B8: .4byte gUnknown_202F1E1
@@ -19603,7 +19603,7 @@ _08051BF0:
 	movs r2, 0
 	b _08051D42
 	.align 2, 0
-_08051BFC: .4byte gUnknown_203B418
+_08051BFC: .4byte dungeonGlobalData
 _08051C00: .4byte 0x00000684
 _08051C04: .4byte 0x00000686
 _08051C08: .4byte 0x0000fffc
@@ -19637,7 +19637,7 @@ _08051C20:
 	b _08051E1A
 	.align 2, 0
 _08051C44: .4byte 0x0000fffc
-_08051C48: .4byte gUnknown_203B418
+_08051C48: .4byte dungeonGlobalData
 _08051C4C: .4byte 0x0000e218
 _08051C50: .4byte 0x0000e21a
 _08051C54:
@@ -19698,7 +19698,7 @@ _08051C94:
 	.align 2, 0
 _08051CC0: .4byte 0x0000fffc
 _08051CC4: .4byte 0x0000fffd
-_08051CC8: .4byte gUnknown_203B418
+_08051CC8: .4byte dungeonGlobalData
 _08051CCC: .4byte 0x0000e21c
 _08051CD0: .4byte 0x0000e21e
 _08051CD4:
@@ -19817,7 +19817,7 @@ _08051DA4:
 	strb r1, [r0]
 	b _08051DDC
 	.align 2, 0
-_08051DB0: .4byte gUnknown_203B418
+_08051DB0: .4byte dungeonGlobalData
 _08051DB4: .4byte 0x0000068b
 _08051DB8:
 	ldr r2, [r5, 0x4]
@@ -19880,7 +19880,7 @@ _08051E1A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08051E2C: .4byte gUnknown_203B418
+_08051E2C: .4byte dungeonGlobalData
 _08051E30: .4byte 0x0000e220
 _08051E34: .4byte 0x0000e222
 _08051E38: .4byte 0x0000fffc
@@ -19981,7 +19981,7 @@ _08051EC8:
 	subs r6, 0x15
 	b _08051FE0
 	.align 2, 0
-_08051EF0: .4byte gUnknown_203B418
+_08051EF0: .4byte dungeonGlobalData
 _08051EF4: .4byte 0x00003a09
 _08051EF8:
 	mov r2, r9
@@ -20214,7 +20214,7 @@ _0805207A:
 	bl sub_803E708
 	b _080520F6
 	.align 2, 0
-_080520C0: .4byte gUnknown_203B418
+_080520C0: .4byte dungeonGlobalData
 _080520C4: .4byte 0x0000e250
 _080520C8: .4byte 0x0000e254
 _080520CC: .4byte 0x0000e258
@@ -20377,7 +20377,7 @@ _080521DE:
 	.align 2, 0
 _08052200: .4byte gUnknown_202F1E8
 _08052204: .4byte gUnknown_203B434
-_08052208: .4byte gUnknown_203B418
+_08052208: .4byte dungeonGlobalData
 _0805220C: .4byte 0x0001c054
 	thumb_func_end sub_80521D0
 
@@ -20438,7 +20438,7 @@ _08052278:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052280: .4byte gUnknown_203B418
+_08052280: .4byte dungeonGlobalData
 _08052284: .4byte 0x0001bdd4
 _08052288: .4byte gUnknown_80F7AE8
 _0805228C: .4byte 0x0001c05f

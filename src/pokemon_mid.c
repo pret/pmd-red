@@ -388,9 +388,9 @@ u16 GetBaseHP(s16 index)
     return gMonsterParameters[index].base_hp;
 }
 
-bool8 GetUnk33(s16 index)
+bool8 IsToolboxEnabled(s16 index)
 {
-    return gMonsterParameters[index].unk33;
+    return gMonsterParameters[index].toolboxEnabled;
 }
 
 u8 GetUnk12(s16 index)

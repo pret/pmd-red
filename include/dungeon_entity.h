@@ -176,7 +176,7 @@ struct DungeonEntityData
     // Unclear where this is set in-game; it is not set by statuses (e.g., confusion) or mission clients.
     /* 0x114 */ bool8 moveRandomly;
     u8 fill115[0x118 - 0x115];
-    /* 0x118 */ struct Move moves[4];
+    /* 0x118 */ struct PokemonMove moves[4];
     /* 0x138 */ u8 struggleMoveFlags;
     u8 fill139[0x13C - 0x139];
     /* 0x13C */ u32 belly;
@@ -239,7 +239,7 @@ struct DungeonEntity
     /* 0x14 */ s32 prevPosPixelX;
     /* 0x18 */ s32 prevPosPixelY;
     u8 fill1C[0x20 - 0x1C];
-    /* 0x20 */ bool8 active; // Turned off when a Pokémon faints.
+    /* 0x20 */ bool8 visible; // Turned off when a Pokémon faints.
     u8 fill21[0x25 - 0x21];
     /* 0x25 */ u8 roomIndex;
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
