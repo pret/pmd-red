@@ -55,7 +55,7 @@ u32 CreateFelicityBank(s32 param_1)
   return 1;
 }
 
-u32 sub_80163A0(void)
+u32 FelicityBankCallback(void)
 { 
   switch(gUnknown_203B204->currState) {
     case 1:

@@ -122,6 +122,7 @@ SECTIONS {
         src/wonder_mail_pre.o(.text);
         asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
+        src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
         asm/wonder_mail_2.o(.text);
         src/wonder_mail_3.o(.text);
@@ -155,7 +156,6 @@ SECTIONS {
         src/rescue_password_menu_1.o(.text);
         src/load_screen.o(.text);
         src/wonder_mail_main_menu.o(.text);
-        asm/wonder_mail_main_menu.o(.text);
         src/ds_menus.o(.text);
         src/debug_menu.o(.text);
         asm/debug_menu.o(.text);
@@ -186,6 +186,8 @@ SECTIONS {
         asm/code_807001C.o(.text);
         src/code_80869E4.o(.text);
         asm/code_80869E4.o(.text);
+        src/code_8086A3C.o(.text);
+        asm/code_8086A3C.o(.text);
         src/code_8057824_1.o(.text);
         asm/jirachi_wish.o(.text);
         src/code_80521D0_1.o(.text);
@@ -307,6 +309,8 @@ SECTIONS {
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/wonder_mail.o(.rodata);
+        src/thank_you_wonder_mail.o(.rodata);
+        src/wonder_mail_2.o(.rodata);
         data/data_80DED44.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);

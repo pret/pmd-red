@@ -6,9 +6,14 @@
 #include "sub_8095228.h"
 #include "wonder_mail.h"
 
-#define WONDER_MAIL_MAIN_SCREEN 4
+#define SEND_WONDER_MAIL_MAIN_SCREEN 1
+#define SEND_GAME_LINK_CABLE 2
+#define RECEIVE_WONDER_MAIL_MAIN_SCREEN 4
 #define EXIT_TO_MAIN_MENU 5
+#define WONDER_MAIL_SENT 7
+#define GAME_LINK_CABLE_MENU 8
 #define COMMUNICATION_ERROR 10
+#define RECEIVE_GAME_LINK_CABLE 12
 #define PASSWORD_SUCCESS 13
 #define PREPARE_SAVE 14
 #define SAVE_ADVENTURE 15
@@ -16,6 +21,17 @@
 #define PROMPT_PASSWORD_ENTRY 17
 #define PASSWORD_INVALID 19
 #define PASSWORD_ENTRY_SCREEN 18
+
+
+struct unkStruct_803B344
+{
+    // size: 0xB4
+    struct WonderMail unk0;
+    u8* unk14;
+    u8* unk18;
+    u8 fill1C[0x3C - 0x1C];
+    u8 unk3C[0x78];
+};
 
 struct unkStruct_203B3E8
 {
@@ -31,15 +47,21 @@ struct unkStruct_203B3E8
     struct UnkTextStruct2 unk1EC[4];
     u32 unk24C;
     u32 wonderMailStatus;
-    u8 fill254[0x3C0 - 0x254];
-    struct WonderMail unk3C0;
-    u8 fill3D0[0x490 - 0x3D4];
-    u32 unk490;
-    u32 unk494;
+
+    struct unkStruct_803B344 unk254;
+
+    struct unkStruct_803B344 unk308;
+    u8 unk3BC;
+    u8 fill3BD[0x3C0 - 0x3BD];
+
+    struct unkStruct_803B344 unk3C0;
+
+    struct WonderMail unk474;
+    u8 **unk488;
+    u8 *unk48C;
+    s32 wonderMailMethod;
+    u32 wonderMailMode;
     u8 unk498;
-    u8 unk499;
-    u8 unk49A;
-    u8 unk49B;
 };
 
 extern u32 sub_8095324(u32);
@@ -54,6 +76,39 @@ extern void sub_801CBB8(void);
 extern void sub_80155F0(void);
 extern void sub_8031E10(void);
 
+extern u8 sub_800D588(void);
+extern s32 sub_8037D64(u32, void *, void *);
+extern s32 sub_80381F4(u32, void *, void *);
+extern void sub_8011830(void);
+extern void sub_80151C0(u32, u8 *);
+extern void xxx_call_start_bg_music(void);
+extern void sub_8014248(u8 *, u32, u32, u8 *, u32, u32, u32, u32, u32);
+extern void nullsub_23(u32);
+extern void sub_802EF48(void);
+extern void sub_802D098(struct WonderMail *);
+
+
+extern struct unkStruct_803B344 *sub_803B344(u8);
+
+
+
+extern u8 gUnknown_80E7CC4[];
+extern u8 gUnknown_80E78F8;
+extern u8 gUnknown_80E7AC4[];
+extern u8 gUnknown_80E786C;
+extern u8 gUnknown_80E7AE0[];
+extern u8 gUnknown_80E7894;
+extern u8 gUnknown_80E7C48[];
+extern u8 gUnknown_80E7B14[];
+extern u8 gUnknown_80E78D8;
+extern u8 gUnknown_80E7B68[];
+extern u8 gUnknown_80E7BEC[];
+extern u8 gUnknown_80E7BC8[];
+extern u8 gUnknown_80E7B88[];
+extern u8 gUnknown_80E7C98[];
+extern u8 gUnknown_80E7B48[];
+extern s32 sub_8037B28(u32);
+
 extern u32 sub_802D0E0();
 extern u8 sub_802D178();
 extern void sub_802D184();
@@ -61,30 +116,30 @@ extern void sub_802D184();
 extern s32 sub_80154F0();
 extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
 extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
-extern void sub_80141B4(u32 *r0, u32, u32 *r1, u32);
+extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
-void sub_8039AA8(void);
+void HandleGameLinkCableMenu(void);
 void sub_8039B14(void);
 void sub_8039B20(void);
 void sub_8039B58(void);
-void sub_8039D88(void);
+void ReturnToGameLinkCableMenu(void);
 void HandlePasswordSuccess(void);
 void HandlePrepareSaveScreen(void);
 void HandleSaveAdventureScreen(void);
 void HandleWonderMailAddedScreen(void);
-void ReturnToWonderMailMainScreen(void);
+void ReturnToReceiveWonderMailMainScreen(void);
 void AdvanceToPasswordEntryScreen(void);
 void HandlePasswordEntryScreen(void);
 void HandleInvalidPasswordMenu(void);
 
 
-extern u32 gUnknown_80E7914;
-extern u32 gUnknown_80E7938;
-extern u32 gUnknown_80E7994;
-extern u32 gUnknown_80E79E4;
-extern u32 gUnknown_80E7A48;
+extern u8 gUnknown_80E7914[];
+extern u8 gUnknown_80E7938[];
+extern u8 gUnknown_80E7994[];
+extern u8 gUnknown_80E79E4[];
+extern u8 gUnknown_80E7A48[];
 
 bool8 sub_8039880(void)
 {
@@ -105,10 +160,10 @@ bool8 CreateWonderMailMenu(void)
     gUnknown_203B3E8->PasswordEntryBuffer[iVar2] = 0;
   }
 
-  gUnknown_203B3E8->unk490 = 3;
-  gUnknown_203B3E8->unk494 = 2;
+  gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_GAME_LINK;
+  gUnknown_203B3E8->wonderMailMode = WONDER_MAIL_MODE_RECEIVE;
   gUnknown_203B3E8->unk498 = 1;
-  gUnknown_203B3E8->unk490 = 5; // ??? Why?
+  gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_PASSWORD; // ??? Why?
   SetWonderMailMainMenuState(PROMPT_PASSWORD_ENTRY); // -> Display "Enter Wonder Mail Password"
   return 1;
 }
@@ -116,17 +171,15 @@ bool8 CreateWonderMailMenu(void)
 u8 UpdateWonderMailMenu(void)
 {
   switch(gUnknown_203B3E8->state) {
-    case WONDER_MAIL_MAIN_SCREEN:
+    case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
         HandleWonderMailMainScreen();
         break;
     case EXIT_TO_MAIN_MENU: // When you exit out of the menu
         return 3;
-    case 8:
-        sub_8039AA8();
+    case GAME_LINK_CABLE_MENU:
+        HandleGameLinkCableMenu();
         break;
-    case 11:
-        break;
-    case 12:
+    case RECEIVE_GAME_LINK_CABLE:
         sub_8039B14();
         break;
     case 6:
@@ -135,8 +188,8 @@ u8 UpdateWonderMailMenu(void)
     case 9:
         sub_8039B58();
         break;
-    case 7:
-        sub_8039D88();
+    case WONDER_MAIL_SENT:
+        ReturnToGameLinkCableMenu();
         break;
     case PASSWORD_SUCCESS:
         HandlePasswordSuccess();
@@ -151,7 +204,7 @@ u8 UpdateWonderMailMenu(void)
         HandleWonderMailAddedScreen();
         break;
     case COMMUNICATION_ERROR:
-        ReturnToWonderMailMainScreen();
+        ReturnToReceiveWonderMailMainScreen();
         break;
     case PROMPT_PASSWORD_ENTRY: // "Please enter the Wonder Mail Password" Screen 
         AdvanceToPasswordEntryScreen();
@@ -188,11 +241,11 @@ void HandleWonderMailMainScreen(void)
     switch(menuAction) {
         case 3:
         case 4:
-            gUnknown_203B3E8->unk490 = 3;
-            SetWonderMailMainMenuState(8);
+            gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_GAME_LINK;
+            SetWonderMailMainMenuState(GAME_LINK_CABLE_MENU);
             break;
         case 5:
-            gUnknown_203B3E8->unk490 = 5;
+            gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_PASSWORD;
             SetWonderMailMainMenuState(PROMPT_PASSWORD_ENTRY);
             break;
         case 0:
@@ -203,26 +256,26 @@ void HandleWonderMailMainScreen(void)
   }
 }
 
-void sub_8039AA8(void)
+void HandleGameLinkCableMenu(void)
 {
   s32 menuAction;
 
   if (sub_80144A4(&menuAction) == 0) {
     switch(menuAction){
         case 6:
-            if (gUnknown_203B3E8->unk494 == 1) {
-                SetWonderMailMainMenuState(2);
+            if (gUnknown_203B3E8->wonderMailMode == WONDER_MAIL_MODE_SEND) {
+                SetWonderMailMainMenuState(SEND_GAME_LINK_CABLE);
             }
             else {
-                SetWonderMailMainMenuState(12);
+                SetWonderMailMainMenuState(RECEIVE_GAME_LINK_CABLE);
             }
             break;
         case 0:
-            if (gUnknown_203B3E8->unk494 == 1) {
-                SetWonderMailMainMenuState(1);
+            if (gUnknown_203B3E8->wonderMailMode == WONDER_MAIL_MODE_SEND) {
+                SetWonderMailMainMenuState(SEND_WONDER_MAIL_MAIN_SCREEN);
             }
             else {
-                SetWonderMailMainMenuState(WONDER_MAIL_MAIN_SCREEN);
+                SetWonderMailMainMenuState(RECEIVE_WONDER_MAIL_MAIN_SCREEN);
             }
             break;
     }
@@ -243,12 +296,12 @@ void sub_8039B20(void)
   }
 }
 
-void ReturnToWonderMailMainScreen(void)
+void ReturnToReceiveWonderMailMainScreen(void)
 {
   s32 local_8;
 
   if (sub_80144A4(&local_8) == 0) {
-      SetWonderMailMainMenuState(WONDER_MAIL_MAIN_SCREEN);
+      SetWonderMailMainMenuState(RECEIVE_WONDER_MAIL_MAIN_SCREEN);
   }
 }
 
@@ -260,7 +313,7 @@ void sub_8039B58(void)
     if (gUnknown_203B3E8->wonderMailStatus == 0) {
       switch(gUnknown_203B3E8->unk24C){
         case 9: 
-            SetWonderMailMainMenuState(7);
+            SetWonderMailMainMenuState(WONDER_MAIL_SENT);
             break;
         case 10:
             SetWonderMailMainMenuState(PASSWORD_SUCCESS);
@@ -274,6 +327,7 @@ void sub_8039B58(void)
   }
 }
 
+/* NOTE: I think the error codes for wonder mail are the same across SOS/WONDER */
 void PrintWonderMailMainMenuError(u32 status)
 {
     switch(status)
@@ -282,42 +336,42 @@ void PrintWonderMailMainMenuError(u32 status)
             break;
         case 1:
             // "Communication Error"
-            sub_80141B4(&gUnknown_80E7914, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case 3:
             // Incorrect number of GBA Systems
-            sub_80141B4(&gUnknown_80E7938, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7938, 0, 0, 0x101);
             break;
         case 2:
             // No response from friend. Redo from start
-            sub_80141B4(&gUnknown_80E7994, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7994, 0, 0, 0x101);
             break;
         case 4:
             // Sender and receiver in different modes
-            sub_80141B4(&gUnknown_80E79E4, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E79E4, 0, 0, 0x101);
             break;
         case 5:
             // "Communication Error"
-            sub_80141B4(&gUnknown_80E7914, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case 14:
             // "Communication Error"
-            sub_80141B4(&gUnknown_80E7914, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case 15: // "No response from your friend. Make sure sender and receiver are ready"
-            sub_80141B4(&gUnknown_80E7A48, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7A48, 0, 0, 0x101);
             break;
         case 6:
         case 7:
         case 8:
         case 9:
-        case COMMUNICATION_ERROR:
+        case 10:
         case 11:
         case 12:
-        case PASSWORD_SUCCESS:
+        case 13:
         default:
             // "Communication Error"
-            sub_80141B4(&gUnknown_80E7914, 0, 0, 0x101);
+            sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
 
     }
@@ -342,7 +396,7 @@ void HandlePasswordEntryScreen(void)
       else {
         // Successful password
         // Copy the decoded data to another buffer?
-        gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->UNK38.decodedMail;
+        gUnknown_203B3E8->unk3C0.unk0 = gUnknown_203B3E8->UNK38.decodedMail;
 
         gUnknown_203B3E8->unk498 = 1;
         SetWonderMailMainMenuState(PASSWORD_SUCCESS);
@@ -390,12 +444,12 @@ void HandlePrepareSaveScreen(void)
   }
 }
 
-void sub_8039D88(void)
+void ReturnToGameLinkCableMenu(void)
 {
   int iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
-      SetWonderMailMainMenuState(8);
+      SetWonderMailMainMenuState(GAME_LINK_CABLE_MENU);
   }
 }
 
@@ -442,4 +496,138 @@ void HandleInvalidPasswordMenu(void)
 
 void nullsub_54(void)
 {
+}
+
+void WonderMailMainMenuCallback(void)
+{
+  int iVar2;
+  struct unkStruct_803B344 *temp;
+  
+  switch(gUnknown_203B3E8->state) {
+    case 0:
+        sub_8014248(gUnknown_80E7AC4,0,1,&gUnknown_80E786C,0,4,0,0,0x101);
+        break;
+    case SEND_WONDER_MAIL_MAIN_SCREEN:
+        sub_8014248(gUnknown_80E7AE0,0,3,&gUnknown_80E7894,0,4,0,0,0x101);
+        break;
+    case 3:
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_802EF48();
+        break;
+    case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
+        sub_8014248(gUnknown_80E7B14,0,3,&gUnknown_80E78D8,0,4,0,0,0x101);
+        break;
+    case PASSWORD_SUCCESS:
+        gUnknown_203B3E8->unk474 = gUnknown_203B3E8->unk3C0.unk0;
+        if(gUnknown_203B3E8->unk474.unk2 == 4)
+        {
+            gUnknown_203B3E8->unk488 = &gUnknown_203B3E8->unk3C0.unk14;
+            gUnknown_203B3E8->unk48C = gUnknown_203B3E8->unk3C0.unk3C;
+        }
+        else
+        {
+            gUnknown_203B3E8->unk488 = NULL;
+            gUnknown_203B3E8->unk48C = NULL;
+        } 
+        sub_802D098(&gUnknown_203B3E8->unk474);
+        break;
+    case PREPARE_SAVE:
+        if(gUnknown_203B3E8->unk498 != 0)
+        {
+            switch(gUnknown_203B3E8->wonderMailMethod)
+            {
+                case WONDER_MAIL_GAME_LINK:
+                case WONDER_MAIL_PASSWORD:
+                    sub_80141B4(gUnknown_80E7B48,0,0,0x101);
+                    break;
+                case 4:
+                    break;
+            }
+        }
+        else
+            sub_80141B4(gUnknown_80E7B48,0,0,0x101);
+        break;
+    case WONDER_MAIL_SENT:
+        sub_80141B4(gUnknown_80E7B68,0,0,0x101);
+        break;
+    case WONDER_MAIL_ADDED:
+        if (gUnknown_203B3E8->unk498 != '\0') {
+            sub_80141B4(gUnknown_80E7B88,0,0,0x101);
+        }
+        else {
+            // Wonder Mail was refused
+            sub_80141B4(gUnknown_80E7BC8,0,0,0x101);
+        }
+        break;
+    case GAME_LINK_CABLE_MENU:
+        sub_8014248(gUnknown_80E7BEC,0,6,&gUnknown_80E78F8,0,4,0,0,0x101);
+        break;
+    case 6:
+        nullsub_23(0);
+        sub_80141B4(gUnknown_80E7C48,0,0,0);
+        break;
+    case 9:
+        gUnknown_203B3E8->wonderMailStatus = 0;
+        sub_8011830();
+        iVar2 = sub_8037B28(gUnknown_203B3E8->unk24C);
+        gUnknown_203B3E8->wonderMailStatus = iVar2;
+        if (iVar2 == 0) {
+            switch(gUnknown_203B3E8->unk24C)
+            {
+                case 9:
+                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk254,0,0xb4);
+                    temp = sub_803B344(gUnknown_203B3E8->unk3BC);
+                    if(temp->unk14 != NULL){
+                        MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk14,temp->unk14,0x28);
+                        MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk3C,temp->unk18,0x78);
+                    }
+                    gUnknown_203B3E8->unk254.unk0 = temp->unk0;
+                    gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
+                    break;
+                case 10:
+                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk254,0,0xb4);
+                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk308,0,0xb4);
+                    gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
+                    break;
+            }
+            if (gUnknown_203B3E8->wonderMailStatus == 0)
+            {
+                switch(gUnknown_203B3E8->unk24C)
+                {
+                    case 9:
+                    case 10:
+                        gUnknown_203B3E8->wonderMailStatus = sub_80381F4(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
+                        if (sub_800D588() != '\0') {
+                            gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->unk308;
+                        }
+                        else {
+                            gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->unk254;
+                        }
+                        break;
+                }
+            }
+        }
+        xxx_call_start_bg_music();
+        break;
+    case PROMPT_PASSWORD_ENTRY:
+        sub_80141B4(gUnknown_80E7C98,0,0,0x101);
+        break;
+    case PASSWORD_ENTRY_SCREEN:
+        sub_8006518(gUnknown_203B3E8->unk1EC);
+        ResetUnusedInputStruct();
+        sub_800641C(0,1,1);
+        sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
+        break;
+    case PASSWORD_INVALID:
+        sub_8014248(gUnknown_80E7CC4,0,6,&gUnknown_80E78F8,0,4,0,0,0x101);
+        break;
+  }
+}
+
+void SetWonderMailMainMenuState(u8 newState)
+{
+    gUnknown_203B3E8->state = newState;
+    nullsub_54();
+    WonderMailMainMenuCallback();
 }

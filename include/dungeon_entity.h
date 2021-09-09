@@ -3,24 +3,35 @@
 
 struct subStruct_8048524
 {
-    u8 fill0[0x6];
-    u8 unk6;
-    u8 unk7;
-    u8 fill8[0xE - 0x8];
-    /* 0xE */ s16 HP; // HP??
-    s16 unk10;
-    u8 fill12[0x46 - 0x12];
-    s8 unk46;
-    u8 fill47[0xA4 - 0x47];
-    u8 unkA4;
+    /* 0x0 */ u8 unk0;
+    /* 0x1 */ u8 unk1;
+    /* 0x2 */ s16 species;
+    /* 0x4 */ s16 transformSpecies;
+    /* 0x6 */ bool8 isEnemy;
+    /* 0x7 */ bool8 isLeader;
+    /* 0x8 */ u8 shopKeeper;
+    /* 0x9 */ u8 level;
+    /* 0xA */ u16 partyIndex;
+    /* 0xC */ u16 IQ;
+    /* 0xE */ s16 HP;
+    /* 0x10 */ s16 maxHP;
+    /* 0x12 */ s16 bossHPBackup;
+    u8 fill14[0x46 - 0x14];
+    /* 0x46 */ s8 facingDir;
+    u8 fill47[0x8C - 0x47];
+    u8 unk8C[4];
+    u8 fill90[0xA4 - 0x90];
+    /* 0xA4 */ u8 clientFlags;
     u8 fillA5[0xAC - 0xA5];
     /* 0xAC */ u8 statusCondition;
-    u8 fillAD[0xFB - 0xAD];
+    u8 fillAD[0xF7 - 0xAD];
+    /* 0xF7 */ bool8 isBoss;
+    u8 fillF8[0xFB - 0xF8];
     u8 unkFB;
     u8 fillFC[0x112 - 0xFC];
-    u8 unk112;
+    /* 0x112 */ u8 stockpileCount;
     u8 fill113[0x13C - 0x113];
-    u32 unk13C;
+    /* 0x13C */ u32 belly;
     u8 fill140[0x15C - 0x140];
     u8 unk15C;
     u8 unk15D;

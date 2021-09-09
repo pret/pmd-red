@@ -90,8 +90,8 @@ struct WonderMailStruct_203B2C4
     u8 unk42E;
     u32 unk430;
     u8 formattedString[0x100];
-    s32 unk534;
-    u32 unk538;
+    s32 wonderMailMethod;
+    u32 wonderMailMode;
     u8 unk53C[0xA];
     u32 unk548;
     u32 unk54C;
@@ -109,6 +109,17 @@ struct WonderMailStruct_203B2C4
 };
 
 void sub_8028B04(u32 r0);
+
+enum WonderMailMode {
+    WONDER_MAIL_MODE_SEND = 1,
+    WONDER_MAIL_MODE_RECEIVE = 2,
+};
+
+enum WonderMailMethod {
+   WONDER_MAIL_GAME_LINK = 3,
+   WONDER_MAIL_PASSWORD = 5, 
+};
+
 
 
 #endif
