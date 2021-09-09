@@ -53,7 +53,7 @@ void sub_8027AE4(void)
 
 void sub_8027B28(void)
 {
-  switch(sub_801A6E8(1)) 
+  switch(sub_801A6E8(1))
   {
     case 3:
         gUnknown_203B2BC->unkC = sub_801A8AC();
@@ -81,7 +81,7 @@ void sub_8027B28(void)
 void sub_8027BD8(void)
 {
   s32 menuAction;
-  
+
   menuAction = 0;
   sub_801A6E8(0);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
@@ -93,7 +93,7 @@ void sub_8027BD8(void)
         PlaySound(0x14d);
         ShiftItemsDownFrom(gUnknown_203B2BC->unkC);
         FillInventoryGaps();
-        if (gUnknown_203B2BC->unk14.unk0 != 0) {
+        if (gUnknown_203B2BC->unk14.itemFlags != 0) {
             sub_8091274(&gUnknown_203B2BC->unk14);
         }
         GivePokemonItem(gUnknown_203B2BC->unk8,&gUnknown_203B2BC->unk10);

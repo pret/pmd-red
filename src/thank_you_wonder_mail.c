@@ -41,7 +41,7 @@ extern struct TeamInventory *gTeamInventory_203B460;
 #define PROCESS_THANK_YOU_PASSWORD 0x27
 #define THANK_YOU_PASSWORD_WRONG 0x28
 
-const struct ItemSlot gUnknown_80DED44 = 
+const struct ItemSlot gUnknown_80DED44 =
 {
     1, 0, 0
 };
@@ -50,7 +50,7 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
 
-const struct UnkTextStruct2 gUnknown_80DED48 = 
+const struct UnkTextStruct2 gUnknown_80DED48 =
 {
         0x00, 0x00, 0x00, 0x00,
         0x03, 0x00, 0x00, 0x00,
@@ -60,7 +60,7 @@ const struct UnkTextStruct2 gUnknown_80DED48 =
         NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DED60 = 
+const struct UnkTextStruct2 gUnknown_80DED60 =
 {
         0x00, 0x00, 0x00, 0x00,
         0x03, 0x00, 0x00, 0x00,
@@ -83,7 +83,7 @@ extern const u8 SendItem_Text[];
 extern const u8 DontSendItem_Text[];
 extern const u8 SendWOItem_Text[];
 
-const struct MenuItem gUnknown_80DED78[3] = 
+const struct MenuItem gUnknown_80DED78[3] =
 {
     {Confirm_80DED98, 0xB},
     {Info_80DED90, 0xC},
@@ -94,7 +94,7 @@ ALIGNED(4) const u8 Info_80DED90[] = "Info";
 ALIGNED(4) const u8 Confirm_80DED98[] = "Confirm";
 
 // Unused
-const struct UnkTextStruct2 gUnknown_80DEDA0 = 
+const struct UnkTextStruct2 gUnknown_80DEDA0 =
 {
         0x00, 0x00, 0x00, 0x00,
         0x03, 0x00, 0x00, 0x00,
@@ -105,7 +105,7 @@ const struct UnkTextStruct2 gUnknown_80DEDA0 =
 };
 
 
-const struct MenuItem gThankYouMailMainMenuItems[4] = 
+const struct MenuItem gThankYouMailMainMenuItems[4] =
 {
     {SendThankYou_Text, 0x1},
     {GetThankYou_Text, 0x2},
@@ -117,7 +117,7 @@ ALIGNED(4) const u8 Cancel_80DEDD8[] = "Cancel";
 ALIGNED(4) const u8 GetThankYou_Text[] = "Get Thank-You Mail";
 ALIGNED(4) const u8 SendThankYou_Text[] = "Send Thank-You Mail";
 
-const struct MenuItem gUnknown_80DEE08[4] = 
+const struct MenuItem gUnknown_80DEE08[4] =
 {
     {GameLinkCable_Text, WONDER_MAIL_GAME_LINK},
     {Password_Text, WONDER_MAIL_PASSWORD},
@@ -128,7 +128,7 @@ const struct MenuItem gUnknown_80DEE08[4] =
 ALIGNED(4) const u8 Password_Text[] = "Password";
 ALIGNED(4) const u8 GameLinkCable_Text[] = "Game Link cable";
 
-const struct MenuItem gUnknown_80DEE44[3] = 
+const struct MenuItem gUnknown_80DEE44[3] =
 {
     {Yes_80DEE5C, 0x7},
     {Cancel_80DEDD8, 0x0},
@@ -138,7 +138,7 @@ const struct MenuItem gUnknown_80DEE44[3] =
 ALIGNED(4) const u8 Yes_80DEE5C[] = "Yes";
 
 
-const struct MenuItem gUnknown_80DEE60[3] = 
+const struct MenuItem gUnknown_80DEE60[3] =
 {
     {Yes_80DEE5C, 0x7},
     {No_80DEE78, 0x8},
@@ -147,7 +147,7 @@ const struct MenuItem gUnknown_80DEE60[3] =
 
 ALIGNED(4) const u8 No_80DEE78[] = "No";
 
-const struct MenuItem gUnknown_80DEE7C[4] = 
+const struct MenuItem gUnknown_80DEE7C[4] =
 {
     {SendItem_Text, 0x9},
     {DontSendItem_Text, 0xA},
@@ -158,7 +158,7 @@ const struct MenuItem gUnknown_80DEE7C[4] =
 ALIGNED(4) const u8 DontSendItem_Text[] = "Don~27t Send Item";
 ALIGNED(4) const u8 SendItem_Text[] = "Send Item";
 
-const struct MenuItem gUnknown_80DEEBC[3] = 
+const struct MenuItem gUnknown_80DEEBC[3] =
 {
     {SendWOItem_Text, 0xA},
     {Cancel_80DEDD8, 0x0},
@@ -167,7 +167,7 @@ const struct MenuItem gUnknown_80DEEBC[3] =
 
 ALIGNED(4) const u8 SendWOItem_Text[] = "Send w/o Item";
 
-const struct MenuItem gUnknown_80DEEE4[4] = 
+const struct MenuItem gUnknown_80DEEE4[4] =
 {
     {Yes_80DEE5C, 0x7},
     {No_80DEE78, 0x8},
@@ -594,7 +594,7 @@ u32 ThankYouMailPelipperCallback(void)
     case 0x20:
         ExitThankYouMailMenu2();
         break;
-    case THANK_YOU_MAIL_COMMS_CLEANUP: 
+    case THANK_YOU_MAIL_COMMS_CLEANUP:
         ExitThankYouMailMenu1();
         break;
     case CONFIRM_ITEM_TO_SEND:
@@ -715,9 +715,9 @@ void DisplayThankYouMailCommsOutcome(void)
   MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemSlot));
   gUnknown_203B2C4->unk41C.itemIndex = 0;
   gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.unk0 = 0;
+  gUnknown_203B2C4->unk41C.itemFlags = 0;
   if (gUnknown_203B2C4->linkError == 0) {
-      switch(gUnknown_203B2C4->unk40) 
+      switch(gUnknown_203B2C4->unk40)
         {
             case 6:
                 switch(gUnknown_203B2C4->wonderMailMethod)
@@ -830,7 +830,7 @@ void sub_802A174(void)
   if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
     sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
   }
-  
+
   switch(menuAction)
   {
       case 0xB:
@@ -856,7 +856,7 @@ void sub_802A174(void)
 }
 
 void sub_802A230(void)
-{  
+{
   switch(sub_8030DA0())
   {
       case 2:
@@ -883,7 +883,7 @@ void sub_802A28C(void)
 
   gUnknown_203B2C4->unk41C.itemIndex = 0;
   gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.unk0 = 0;
+  gUnknown_203B2C4->unk41C.itemFlags = 0;
 
   switch(sub_801CA08(1))
   {
@@ -1033,7 +1033,7 @@ void HandleThankYouMailPasswordMenu(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0)) 
+        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0))
         {
             case 0x11:
                 // Wrong password

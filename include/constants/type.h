@@ -1,0 +1,25 @@
+#ifndef GUARD_CONSTANTS_TYPE_H
+#define GUARD_CONSTANTS_TYPE_H
+
+enum Type
+{
+    TYPE_NORMAL = 0x1,
+    TYPE_FIRE = 0x2,
+    TYPE_WATER = 0x3,
+    TYPE_GRASS = 0x4,
+    TYPE_ELECTRIC = 0x5,
+    TYPE_ICE = 0x6,
+    TYPE_FIGHTING = 0x7,
+    TYPE_POISON = 0x8,
+    TYPE_GROUND = 0x9,
+    TYPE_FLYING = 0xA,
+    TYPE_PSYCHIC = 0xB,
+    TYPE_BUG = 0xC,
+    TYPE_ROCK = 0xD,
+    TYPE_GHOST = 0xE,
+    TYPE_DRAGON = 0xF,
+    TYPE_DARK = 0x10,
+    TYPE_STEEL = 0x11
+};
+
+#endif

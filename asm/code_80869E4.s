@@ -53,4 +53,4 @@ _08086A30:
 	bx r0
 	thumb_func_end sub_80869E4
 
-        .align 2,0
+    .align 2,0

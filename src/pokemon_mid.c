@@ -54,7 +54,7 @@ extern const char gUnknown_8107684[];
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 
-bool8 sub_808D6E8()  
+bool8 sub_808D6E8()
 {
     s32 i;
     s32 count = 0;
@@ -253,12 +253,12 @@ void sub_808D930(u8 *buffer, s16 index)
   char *unownString;
   s32 unownIndex;
   const char *preload;
-  
+
   if (GetBaseSpecies(index) == SPECIES_UNOWN) {
     preload = gUnknown_8107630; // %s%c
     unownString = GetMonSpecies(SPECIES_UNOWN);
     unownIndex = GetUnownIndex(index);
-    ExpandPlaceholdersBuffer(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!? 
+    ExpandPlaceholdersBuffer(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!?
   }
   else {
     ExpandPlaceholdersBuffer(buffer,gUnknown_8107638, gMonsterParameters[index].species); // %s
@@ -305,7 +305,7 @@ void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon)
   sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
-bool8 sub_808DA44(s32 a1_, u32 a2_) 
+bool8 sub_808DA44(s32 a1_, u32 a2_)
 {
   // this is the dumbest thing ever, but just making a1 a s16 and
   // a2 a u8 did weird stuff with shifting...
@@ -388,9 +388,9 @@ u16 GetBaseHP(s16 index)
     return gMonsterParameters[index].base_hp;
 }
 
-bool8 GetUnk33(s16 index)
+bool8 IsToolboxEnabled(s16 index)
 {
-    return gMonsterParameters[index].unk33;
+    return gMonsterParameters[index].toolboxEnabled;
 }
 
 u8 GetUnk12(s16 index)
@@ -472,7 +472,7 @@ u8 GetPokemonOverworldPalette(s16 index, u32 r1)
     {
         return 10;
     }
-    else 
+    else
     {
         return gMonsterParameters[temp].overworld_palette;
     }
@@ -547,7 +547,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     for (i = 0; i < 10; i++) {
         a1->name[i] = pokemon->name[i];
     }
-    
+
     held = &pokemon->heldItem;
     slot = &a1->itemSlot;
 
@@ -557,8 +557,8 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     else {
         slot->itemIndex = 0;
         slot->numItems = 0;
-        slot->unk0 = 0;
-    }  
+        slot->itemFlags = 0;
+    }
   sub_80943A0(&somestruct_80943A0, 100);
   a1->unk44 = somestruct_80943A0;
   sub_80943A0(&somestruct2_80943A0, 100);
@@ -599,7 +599,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
         pokemon->name[i] = a2->name[i];
     }
 
-    if (a2->itemSlot.unk0 & 1) {
+    if (a2->itemSlot.itemFlags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
@@ -611,7 +611,7 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
 {
     // transfer item from unk to pokemon at index
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
-    if (a2->itemSlot.unk0 & 1) {    
+    if (a2->itemSlot.itemFlags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
@@ -675,7 +675,7 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
   u16 result;  // struct?
   s32 count;
   register s32 _species asm("r2");  // weird regalloc
-  
+
   _species = (s16)species;
   count = 0;
 
@@ -716,13 +716,13 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
   return count;
 }
 
-bool8 sub_808E190(u16 a1, s16 _species) 
+bool8 sub_808E190(u16 a1, s16 _species)
 {
   u16 result;
   u16 result2;
   s32 species = _species;  // r4
   u8* ptr;
-  
+
   if (species == SPECIES_DECOY) return 0;
   if (species == SPECIES_NONE) return 0;
   if (species == SPECIES_MUNCHLAX) return 0;
@@ -748,7 +748,7 @@ bool8 sub_808E190(u16 a1, s16 _species)
 }
 
 
-s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon) 
+s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 {
   s32 i;
   s32 count;
@@ -810,7 +810,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 }
 
 
-s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2) 
+s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
 {
 #ifdef NONMATCHING
   s32 count;
@@ -872,7 +872,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
 #endif
 }
 
-s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)  
+s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
 {
   // this is horrible
   s32 i;
@@ -900,7 +900,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
-void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)  
+void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
 {
     u16 buffer[0x10];
     s32 i;
@@ -924,16 +924,16 @@ void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
     }
 }
 
-char* sub_808E4FC(s32 a1)  
+char* sub_808E4FC(s32 a1)
 {
-    struct subStruct_203B240 *result[4];  
+    struct subStruct_203B240 *result[4];
     sub_8097DF0(gFormattedStatusNames[a1], result);
     return result[0]->unk0;
 }
 
-char* sub_808E51C(s32 a1)  
+char* sub_808E51C(s32 a1)
 {
-    struct subStruct_203B240 *result[4];  
+    struct subStruct_203B240 *result[4];
     sub_8097DF0(gFormattedStatusNames[a1], result);
     return result[0]->unk4;
 }

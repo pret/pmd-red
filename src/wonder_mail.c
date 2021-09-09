@@ -145,7 +145,7 @@ void sub_8028B1C(u32 r0)
 }
 
 void sub_8028BF0(void)
-{  
+{
     u32 temp;
     if(sub_80144A4(&temp) != 0)
     {
@@ -1199,4 +1199,3 @@ void sub_8029B34(void)
     }
     sub_8028B04(3);
 }
-

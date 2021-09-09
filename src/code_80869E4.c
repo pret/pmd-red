@@ -1,7 +1,8 @@
 #include "global.h"
 #include "dungeon_entity.h"
-#include "gUnknown_203B418.h"
+#include "dungeon_global_data.h"
 #include "random.h"
+#include "constants/direction.h"
 
 struct unkStruct_202F3D0
 {
@@ -14,7 +15,7 @@ struct unkStruct_202F3D0
 };
 
 EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
-extern struct unkStruct_203B418 *gUnknown_203B418;
+extern struct DungeonGlobalData *gDungeonGlobalData;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
@@ -76,7 +77,7 @@ void sub_8086310(struct DungeonEntity *r0)
     sub_804535C(r0, array);
     sub_806CE68(r0, 0);
     sub_8086A3C(r0);
-    r0->active = 0;
+    r0->visible = 0;
 }
 
 void sub_8086348(struct DungeonEntity *r0)
@@ -314,7 +315,7 @@ void sub_80866C4(u32 r0)
     sub_8052910(r0);
     sub_803E708(0xA, 0x46);
     sub_8086494();
-    gUnknown_203B418->unk2 = 1;
+    gDungeonGlobalData->unk2 = 1;
 }
 
 void sub_80866FC(void)
@@ -375,7 +376,7 @@ void sub_8086794(void)
         }
     }
     sub_803E46C(0x46);
-    gUnknown_203B418->unk7 = 0;
+    gDungeonGlobalData->unk7 = 0;
 }
 
 void sub_80867F4(void)
@@ -438,24 +439,24 @@ void sub_8086854(void)
         }
         if(gUnknown_202F3D0.unk5 != 0)
             gUnknown_202F3D0.unk5--;
-        gUnknown_203B418->unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
+        gDungeonGlobalData->unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
     }
     else
     {
-        gUnknown_203B418->unk181FC = 0;
+        gDungeonGlobalData->unk181FC = 0;
     }
 }
 
 void sub_80868F4(struct DungeonEntity *r0)
 {
-    r0->unk70->unk15C = 1;
-    r0->unk70->unk15D = 1;
+    r0->entityData->unk15C = 1;
+    r0->entityData->unk15D = 1;
 }
 
 void sub_8086910(struct DungeonEntity *r0)
 {
-    r0->unk70->unk15C = 0;
-    r0->unk70->unk15D = 0;
+    r0->entityData->unk15C = 0;
+    r0->entityData->unk15D = 0;
 }
 
 void sub_808692C(void)
@@ -478,7 +479,7 @@ void SpriteLookAroundEffect(struct DungeonEntity *r0)
     s8 r4;
     s8 r3;
 
-    r4 = sub_8002984(r0->unk70->facingDir, 4);
+    r4 = sub_8002984(r0->entityData->facingDir, 4);
 
     sub_80869E4(r0, 4, 2, r4);
 

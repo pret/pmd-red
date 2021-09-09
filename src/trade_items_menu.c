@@ -51,8 +51,8 @@ extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();
 extern void sub_801B450();
-extern void sub_801CB5C(u32); 
-extern void sub_8035CF4(u32 *, u32, u32); 
+extern void sub_801CB5C(u32);
+extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_8013BBC(u32 *);
 extern void sub_80141B4(u32 *, u32, u32, u32);
 
@@ -113,7 +113,7 @@ enum TradeItemsModes
 
 s32 CreateTradeItemsMenu(void)
 {
-  
+
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
@@ -127,7 +127,7 @@ s32 CreateTradeItemsMenu(void)
 
 s32 UpdateTradeItemsMenu(void)
 {
-  
+
   switch(gTradeItemsMenu->currMenu) {
       case TRADE_ITEMS_MAIN_MENU:
         TradeItem_MainMenu();
@@ -192,7 +192,7 @@ s32 UpdateTradeItemsMenu(void)
 void TradeItem_MainMenu(void)
 {
   s32 menuAction;
-  
+
   if (sub_80144A4(&menuAction) == 0) {
       switch(menuAction)
       {
@@ -219,16 +219,16 @@ void TradeItem_MainMenu(void)
 void sub_8036590(void)
 {
   s32 iVar1;
-  
+
   if (sub_80144A4(&iVar1) == 0)
     SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_SELECTION);
 }
 
 void sub_80365AC(void)
-{ 
+{
   gTradeItemsMenu->itemToSend.itemIndex = 0;
   gTradeItemsMenu->itemToSend.numItems = 1;
-  gTradeItemsMenu->itemToSend.unk0 = 0;
+  gTradeItemsMenu->itemToSend.itemFlags = 0;
   switch(sub_801CA08(1)){
     case 2:
         // Cancel
@@ -257,7 +257,7 @@ void sub_80365AC(void)
 void sub_8036674(void)
 {
   int menuAction;
-  
+
   menuAction = -1;
   sub_801CA08(0);
   if (sub_8012FD8(&gTradeItemsMenu->unk134) == '\0') {
@@ -309,7 +309,7 @@ void sub_8036728(void)
 }
 
 void sub_8036788(void)
-{ 
+{
   sub_8012FD8(&gTradeItemsMenu->unk134);
   sub_801CA08(0);
   switch(sub_8013BBC(&gTradeItemsMenu->numItemsToSend)){
@@ -344,7 +344,7 @@ void TradeItem_SendItemConfirm(void)
   int menuAction;
   u16 load;
 
-  if (sub_80144A4(&menuAction) == 0) 
+  if (sub_80144A4(&menuAction) == 0)
   {
       switch(menuAction){
         case 5:
@@ -447,7 +447,7 @@ void sub_8036950(void)
 
 void TradeItem_AddItem(void)
 {
-    // Use temp var to get correct statements 
+    // Use temp var to get correct statements
     u16 load;
     load = gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIdx.itemIndex];
     load += gTradeItemsMenu->sentItem.numItems;
@@ -558,7 +558,7 @@ void sub_8036B28(void)
   u32 load_2;
   struct TradeSubStruct *temp;
   struct TradeSubStruct *temp2;
-  
+
   switch(gTradeItemsMenu->currMenu) {
     case 0:
         if (sub_801CF14(0) != '\0') {

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_entity.h"
-#include "gUnknown_203B418.h"
+#include "dungeon_global_data.h"
 
 struct unkStruct_80420E8
 {
@@ -9,7 +9,7 @@ struct unkStruct_80420E8
     u32 unk8;
 };
 
-extern struct unkStruct_203B418 *gUnknown_203B418;
+extern struct DungeonGlobalData *gDungeonGlobalData;
 
 
 extern void sub_803ED30(u8, struct DungeonEntity *r0, u8, u8);
@@ -289,7 +289,7 @@ void sub_8041D5C(struct DungeonEntity *r0)
     {
         return;
     }
-    sub_803ED30(r0->unk70->stockpileCount , r0, 1, 0xB);
+    sub_803ED30(r0->entityData->stockpileCount, r0, 1, 0xB);
 }
 
 void sub_8041D84(struct DungeonEntity * r0)
@@ -594,7 +594,7 @@ void sub_80420E8(struct DungeonEntity *r0, struct unkStruct_80420E8 *r1)
     u32 temp;
     u32 arg;
     temp = r1->unk8;
-    if(gUnknown_203B418->unk16D != 0)
+    if(gDungeonGlobalData->unk16D != 0)
         temp = sub_806F62C(r1->unk8);
     switch(temp)
     {
@@ -675,7 +675,7 @@ void sub_8042208(struct DungeonEntity *r0, u8 r1)
 
 void sub_8042238(u32 r0, struct DungeonEntity *r1)
 {
-    if(r1->unk70->isEnemy)
+    if(r1->entityData->isEnemy)
         PlaySoundEffect(0x157);
     else
         PlaySoundEffect(0x156);

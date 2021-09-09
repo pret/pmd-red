@@ -545,7 +545,7 @@ gUnknown_203B410 = .; /* 203B410 */
 gUnknown_203B414 = .; /* 203B414 */
 	. += 0x4;
 
-gUnknown_203B418 = .; /* 203B418 */
+gDungeonGlobalData = .; /* 203B418 */
 	. += 0x4;
 
 gUnknown_203B41C = .; /* 203B41C */

@@ -180,7 +180,7 @@ void sub_803A51C(void)
 void sub_803A5A0(void)
 {
   struct ItemSlot auStack8;
-  
+
   switch(gUnknown_203B3F0->state) {
     case 0:
         sub_801C8C4(2,3,0,10);
