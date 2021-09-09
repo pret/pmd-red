@@ -1,8 +1,8 @@
 #ifndef GUARD_DUNGEON_DATA_H
 #define GUARD_DUNGEON_DATA_H
 
-#define DUNGEON_SIZE_X 55
-#define DUNGEON_SIZE_Y 31
+#define DUNGEON_MAX_SIZE_X 55
+#define DUNGEON_MAX_SIZE_Y 31
 
 #include "constants/species.h"
 #include "dungeon_entity.h"
@@ -46,7 +46,7 @@ struct DungeonGlobalData
     u8 fill3A10[0x3A14 - 0x3A10];
     /* 0x3A14 */ s16 bossBattleIndex;
     u8 fill3A16[0x3A18 - 0x3A16];
-    /* 0x3A18 */ struct MapTile mapTiles[DUNGEON_SIZE_X * DUNGEON_SIZE_Y];
+    /* 0x3A18 */ struct MapTile mapTiles[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     u8 fill54BC[0xE23C - 0xD9F0];
     s16 unkE23C;
     s16 unkE23E;
@@ -63,7 +63,7 @@ struct DungeonGlobalData
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
     u8 fillE279[0xE8C0 - 0xE279];
-    /* 0xE8C0 */ u32 mapEntityPointers[DUNGEON_SIZE_X * DUNGEON_SIZE_Y];
+    /* 0xE8C0 */ u32 mapEntityPointers[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     u8 fill10364[0x10844 - 0x10364];
     /* 0x10844 */ u16 numRoomExits[MAX_ROOM_COUNT];
     u8 fill10874[0x10884 - 0x10874];

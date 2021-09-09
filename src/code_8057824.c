@@ -105,7 +105,7 @@ bool32 sub_8057974(struct DungeonEntity *param_1, struct DungeonEntity *param_2,
   s32 newHP;
   u8 local_24;
 
-  newHP = param_2->entityData->hp / 2;
+  newHP = param_2->entityData->HP / 2;
   local_24 = 0;
   if (newHP != 0) {
     sub_806F370(param_1,param_2,newHP,1,&local_24,sub_8092B00(param_3),sub_8057600(param_3,param_4),0,1,0);

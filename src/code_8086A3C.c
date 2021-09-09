@@ -52,11 +52,11 @@ void SetupBossFightHP(struct DungeonEntity *param_1, s32 newHP, u16 param_3)
   iVar1->originalHP = iVar1->maxHP;
   if (newHP != 0) {
     iVar1->maxHP = newHP;
-    iVar1->hp = newHP;
+    iVar1->HP = newHP;
   }
 
   gDungeonGlobalData->unk66A = param_3;
-  sub_808EC94(iVar2->iqSkillsSelected,iVar2->isBoss);
+  sub_808EC94(iVar2->IQSkillsSelected,iVar2->isBoss);
   sub_807191C(param_1);
 }
 

@@ -2,7 +2,7 @@
 #define GUARD_DUNGEON_ENTITY_H
 
 #include "item.h"
-#include "move.h"
+#include "constants/move.h"
 
 struct DungeonEntityData
 {
@@ -12,7 +12,7 @@ struct DungeonEntityData
     // Traps: TrapType
     /* 0x0 */ u8 flags;
     /* 0x1 */ bool8 moving;
-    /* 0x2 */ u16 entityType; // Pokémon species or item ID.
+    /* 0x2 */ u16 entityID; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
     /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
     /* 0x6 */ bool8 isEnemy;
@@ -21,8 +21,8 @@ struct DungeonEntityData
     /* 0x9 */ u8 level;
     /* 0xA */ u8 partyIndex; // Leader is 0, partner is 1, etc.
     u8 fillB;
-    /* 0xC */ u16 iq;
-    /* 0xE */ s16 hp;
+    /* 0xC */ u16 IQ;
+    /* 0xE */ s16 HP;
     /* 0x10 */ u16 maxHP;
     // Bosses have higher HP than normal for their level. This is the max HP they would normally have given their level.
     /* 0x12 */ u16 originalHP;
@@ -93,8 +93,8 @@ struct DungeonEntityData
     /* 0x88 */ s16 targetMovePositionX;
     /* 0x8A */ s16 targetMovePositionY;
     // Bitwise flags corresponding to selected IQ skills.
-    /* 0x8C */ u8 iqSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
-    /* 0x90 */ u8 iqSkillsEnabled[4];
+    /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
+    /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactics;
     u8 fill95[0xA4 - 0x95];
     /* 0xA4 */ u8 clientFlags;
