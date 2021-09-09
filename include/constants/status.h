@@ -119,6 +119,6 @@ enum TargetingDecoy
 {
     TARGETING_DECOY_TEAM = 1,
     TARGETING_DECOY_WILD = 2
-}
+};
 
 #endif

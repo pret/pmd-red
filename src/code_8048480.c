@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_entity.h"
-#include "status.h"
+#include "constants/status.h"
 
 extern u32 gUnknown_80F89F4;
 extern u8 gAvailablePokemonNames[0x58];
