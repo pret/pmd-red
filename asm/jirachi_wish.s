@@ -286,7 +286,7 @@ _0808B82C: .4byte gUnknown_202E038
 _0808B830: .4byte 0x0000019d
 _0808B834: .4byte sub_808BBA8
 _0808B838: .4byte sub_80861A8
-_0808B83C: .4byte dungeonGlobalData
+_0808B83C: .4byte gDungeonGlobalData
 _0808B840: .4byte 0x0001356c
 _0808B844: .4byte gUnknown_8105668
 _0808B848: .4byte 0x000001a7
@@ -501,7 +501,7 @@ _0808BA58: .4byte gUnknown_8105BF4
 _0808BA5C: .4byte gUnknown_8105D2C
 _0808BA60: .4byte gUnknown_8105D80
 _0808BA64: .4byte gUnknown_8105D9C
-_0808BA68: .4byte dungeonGlobalData
+_0808BA68: .4byte gDungeonGlobalData
 _0808BA6C: .4byte 0x00000674
 _0808BA70: .4byte gUnknown_81058E0
 _0808BA74: .4byte gUnknown_810593C

@@ -4,7 +4,7 @@
 #include "dungeon_global_data.h"
 
 extern struct PlayTimeStruct *gPlayTimeRef;
-extern struct DungeonGlobalData *dungeonGlobalData;
+extern struct DungeonGlobalData *gDungeonGlobalData;
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
 extern const char gUnknown_80F6604; // "zmappat"
@@ -42,7 +42,7 @@ void sub_804002C(u32 param_1)
   int iVar3;
   int iVar4;
 
-  dungeonGlobalData->unk1820B = 1;
+  gDungeonGlobalData->unk1820B = 1;
   iVar3 = 0;
   do {
     innerCounter = 0;
@@ -62,7 +62,7 @@ void sub_804002C(u32 param_1)
 
 void sub_8040094(u8 r0)
 {
-    dungeonGlobalData->unk18217 = r0;
+    gDungeonGlobalData->unk18217 = r0;
     sub_803F7BC();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
@@ -76,15 +76,15 @@ void sub_8040094(u8 r0)
 void sub_80400D4(void)
 {
     s32 temp;
-    temp = dungeonGlobalData->unk18200;
+    temp = gDungeonGlobalData->unk18200;
     if(temp == 0)
         return;
     if(temp > 0x1E)
         temp = 0x1F;
-    dungeonGlobalData->unk181FC = gUnknown_80F6568[temp];
-    dungeonGlobalData->unk18200--;
-    if(dungeonGlobalData->unk18200 == 0)
-        dungeonGlobalData->unk18200 = dungeonGlobalData->unk18204;
+    gDungeonGlobalData->unk181FC = gUnknown_80F6568[temp];
+    gDungeonGlobalData->unk18200--;
+    if(gDungeonGlobalData->unk18200 == 0)
+        gDungeonGlobalData->unk18200 = gDungeonGlobalData->unk18204;
 }
 
 void sub_8040124(void)

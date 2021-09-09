@@ -15,7 +15,7 @@ struct unkStruct_202F3D0
 };
 
 EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
-extern struct DungeonGlobalData *dungeonGlobalData;
+extern struct DungeonGlobalData *gDungeonGlobalData;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
@@ -315,7 +315,7 @@ void sub_80866C4(u32 r0)
     sub_8052910(r0);
     sub_803E708(0xA, 0x46);
     sub_8086494();
-    dungeonGlobalData->unk2 = 1;
+    gDungeonGlobalData->unk2 = 1;
 }
 
 void sub_80866FC(void)
@@ -376,7 +376,7 @@ void sub_8086794(void)
         }
     }
     sub_803E46C(0x46);
-    dungeonGlobalData->unk7 = 0;
+    gDungeonGlobalData->unk7 = 0;
 }
 
 void sub_80867F4(void)
@@ -439,11 +439,11 @@ void sub_8086854(void)
         }
         if(gUnknown_202F3D0.unk5 != 0)
             gUnknown_202F3D0.unk5--;
-        dungeonGlobalData->unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
+        gDungeonGlobalData->unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
     }
     else
     {
-        dungeonGlobalData->unk181FC = 0;
+        gDungeonGlobalData->unk181FC = 0;
     }
 }
 
