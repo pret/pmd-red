@@ -15,7 +15,7 @@ struct DungeonEntityData
     /* 0x2 */ u16 entityType; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
     /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
-    /* 0x6 */ bool8 isWild;
+    /* 0x6 */ bool8 isEnemy;
     /* 0x7 */ bool8 isLeader;
     /* 0x8 */ u8 shopkeeperMode;
     /* 0x9 */ u8 level;

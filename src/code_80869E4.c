@@ -479,7 +479,7 @@ void SpriteLookAroundEffect(struct DungeonEntity *r0)
     s8 r4;
     s8 r3;
 
-    r4 = sub_8002984(r0->unk70->facingDir, 4);
+    r4 = sub_8002984(r0->entityData->facingDir, 4);
 
     sub_80869E4(r0, 4, 2, r4);
 

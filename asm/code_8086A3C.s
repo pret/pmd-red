@@ -248,7 +248,7 @@ sub_8086E40:
 	bx r0
 	.align 2, 0
 _08086E6C: .4byte gUnknown_8100D3C
-_08086E70: .4byte gUnknown_203B418
+_08086E70: .4byte gDungeonGlobalData
 	thumb_func_end sub_8086E40
 
 	thumb_func_start sub_8086E74
@@ -398,7 +398,7 @@ _08086FA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086FB0: .4byte gUnknown_203B418
+_08086FB0: .4byte gDungeonGlobalData
 _08086FB4: .4byte 0x0001358c
 	thumb_func_end sub_8086F54
 
@@ -799,7 +799,7 @@ _0808735A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087360: .4byte gUnknown_203B418
+_08087360: .4byte gDungeonGlobalData
 	thumb_func_end sub_8087334
 
 	thumb_func_start ZapdosPreFightDialogue
