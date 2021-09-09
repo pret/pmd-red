@@ -12,7 +12,7 @@ struct DungeonEntityData
     // Traps: TrapType
     /* 0x0 */ u8 flags;
     /* 0x1 */ bool8 moving;
-    /* 0x2 */ u16 entityType; // Pokémon species or item ID.
+    /* 0x2 */ u16 entityID; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
     /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
     /* 0x6 */ bool8 isEnemy;
