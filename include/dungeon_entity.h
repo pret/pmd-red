@@ -14,18 +14,18 @@ struct DungeonEntityData
     /* 0x1 */ bool8 moving;
     /* 0x2 */ u16 entityType; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
-    /* 0x4 */ u16 apparentSpecies; // Shows a different Pokémon when using Transform.
-    /* 0x6 */ bool8 wild;
-    /* 0x7 */ bool8 leader;
+    /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
+    /* 0x6 */ bool8 isWild;
+    /* 0x7 */ bool8 isLeader;
     /* 0x8 */ u8 shopkeeperMode;
     /* 0x9 */ u8 level;
     /* 0xA */ u8 partyIndex; // Leader is 0, partner is 1, etc.
     u8 fillB;
     /* 0xC */ u16 iq;
     /* 0xE */ s16 hp;
-    /* 0x10 */ u16 maxHp;
+    /* 0x10 */ u16 maxHP;
     // Bosses have higher HP than normal for their level. This is the max HP they would normally have given their level.
-    /* 0x12 */ u16 originalHp;
+    /* 0x12 */ u16 originalHP;
     /* 0x14 */ u8 attack;
     /* 0x15 */ u8 specialAttack;
     /* 0x16 */ u8 defense;
@@ -53,7 +53,7 @@ struct DungeonEntityData
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
     u8 fill41[0x44 - 0x41];
     /* 0x44 */ u16 action;
-    /* 0x46 */ s8 facingDirection;
+    /* 0x46 */ s8 facingDir;
     u8 fill47;
     // Additional parameter alongside actionIndex. Used for things like indiciating which move a Pokémon should use from its moveset.
     /* 0x48 */ u8 actionUseIndex;
@@ -92,8 +92,9 @@ struct DungeonEntityData
     u8 fill84[0x88 - 0x84];
     /* 0x88 */ s16 targetMovePositionX;
     /* 0x8A */ s16 targetMovePositionY;
-    /* 0x8C */ u32 iqSkillsSelected; // IQ skills selected in the IQ skills menu.
-    /* 0x90 */ u32 iqSkillsEnabled;
+    // Bitwise flags corresponding to selected IQ skills.
+    /* 0x8C */ u8 iqSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
+    /* 0x90 */ u8 iqSkillsEnabled[4];
     /* 0x94 */ u8 tactics;
     u8 fill95[0xA4 - 0x95];
     /* 0xA4 */ u8 clientFlags;
@@ -155,7 +156,7 @@ struct DungeonEntityData
     /* 0xF4 */ bool8 grudgeStatus;
     /* 0xF5 */ bool8 exposedStatus;
     u8 fillF7;
-    /* 0xF7 */ bool8 boss;
+    /* 0xF7 */ bool8 isBoss;
     u8 fillF8[0xFA - 0xF8];
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
     u8 unkFB;
@@ -271,8 +272,8 @@ struct DungeonEntity
     u8 fill52[0x54 - 0x52];
     /* 0x54 */ u16 spriteGlobalIndex;
     u8 fill56[0x6C - 0x56];
-    /* 0x6C */ u8 facingDirection;
-    /* 0x6D */ u8 facingDirection2; // Duplicate of 0x6C?
+    /* 0x6C */ u8 facingDir;
+    /* 0x6D */ u8 facingDir2; // Duplicate of 0x6C?
     u8 fill6D[0x70 - 0x6D];
     /* 0x70 */ struct DungeonEntityData *entityData;
 };

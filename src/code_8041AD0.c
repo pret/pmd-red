@@ -289,7 +289,7 @@ void sub_8041D5C(struct DungeonEntity *r0)
     {
         return;
     }
-    sub_803ED30(r0->entityData->stockpileCount , r0, 1, 0xB);
+    sub_803ED30(r0->entityData->stockpileCount, r0, 1, 0xB);
 }
 
 void sub_8041D84(struct DungeonEntity * r0)
@@ -675,7 +675,7 @@ void sub_8042208(struct DungeonEntity *r0, u8 r1)
 
 void sub_8042238(u32 r0, struct DungeonEntity *r1)
 {
-    if(r1->entityData->wild != 0)
+    if(r1->entityData->isEnemy)
         PlaySoundEffect(0x157);
     else
         PlaySoundEffect(0x156);

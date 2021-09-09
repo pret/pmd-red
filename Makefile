@@ -39,7 +39,7 @@ REVISION    := 0
 ifeq ($(OS),Windows_NT)
 LIB := ../../tools/agbcc/lib/libc.a ../../tools/agbcc/lib/libgcc.a ../../libagbsyscall/libagbsyscall.a
 else
-LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall 
+LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall
 endif
 
 
@@ -47,7 +47,7 @@ endif
 
 SHELL     := /bin/bash -o pipefail
 CC1       := tools/agbcc/bin/agbcc
-SHA1SUM   := sha1sum -c
+SHA1SUM   := shasum -c
 GBAGFX    := tools/gbagfx/gbagfx
 GBAFIX    := tools/gbafix/gbafix
 AIF2PCM   := tools/aif2pcm/aif2pcm
