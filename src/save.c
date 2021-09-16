@@ -603,7 +603,7 @@ void InitializePlayerData(void)
     InitializeFriendAreas();
     InitializeRecruitedPokemon();
     InitializeMoneyItems();
-    InitializeResuceTeamInfo();
+    InitializeRescueTeamInfo();
     sub_80972F4();
     sub_8095118();
     sub_8095900();

@@ -53,7 +53,7 @@ extern struct UnkTextStruct2 gUnknown_80E7610;
 extern struct UnkTextStruct2 gUnknown_80E762C;
 extern struct MenuItem gResumeQuicksaveMenuItems[];
 extern struct MenuItem gResumeAdventureMenuItems[];
-extern struct MenuItem gQuitWaitingResuceMenuItems[];
+extern struct MenuItem gQuitWaitingRescueMenuItems[];
 extern struct MenuItem gUnknown_80E76E8[];
 extern struct MenuItem gUnknown_80E7730[];
 extern struct UnkTextStruct2 gUnknown_80E7784;
@@ -146,7 +146,7 @@ void CreateLoadScreen(u32 currMenu)
             SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gQuitWaitingResuceMenuItems,0,6,0);
+        SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
         break;
     case MENU_DELETE_SAVE_PROMPT:
         SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gUnknown_80E76E8,0,6,0);

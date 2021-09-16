@@ -2281,16 +2281,16 @@ gResumeAdventureMenuItems: @ 80E7684
         .string "Resuming saved adventure.\0"
         .align 2,0
 
-	.global gQuitWaitingResuceMenuItems
-gQuitWaitingResuceMenuItems: @ 80E76B8
-        .4byte QuitAwaitingResuce_80E76D0
+	.global gQuitWaitingRescueMenuItems
+gQuitWaitingRescueMenuItems: @ 80E76B8
+        .4byte QuitAwaitingRescue_80E76D0
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte IsThatOK_80E765C
         .byte 0x05, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
 
-        QuitAwaitingResuce_80E76D0:
+        QuitAwaitingRescue_80E76D0:
         .string "Quit awaiting rescue?\0"
         .align 2,0
 

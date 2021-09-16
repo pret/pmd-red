@@ -42,7 +42,7 @@ struct RescueTeamData *GetRescueTeamInfo(void)
     return &gRescueTeamInfo;
 }
 
-void InitializeResuceTeamInfo(void)
+void InitializeRescueTeamInfo(void)
 {
     BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, TEAM_NAME_LENGTH);
     gRescueTeamInfoRef->teamRankPts = 0;

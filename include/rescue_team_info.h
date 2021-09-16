@@ -22,7 +22,7 @@ struct RescueTeamData
 
 void LoadRescueTeamInfo(void);
 struct RescueTeamData *GetRescueTeamInfo(void);
-void InitializeResuceTeamInfo(void);
+void InitializeRescueTeamInfo(void);
 void sub_80920B8(u8 *buffer);
 void sub_80920D8(u8 *buffer);
 void SetRescueTeamName(u8 *buffer);
