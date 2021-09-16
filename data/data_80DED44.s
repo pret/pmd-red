@@ -399,13 +399,13 @@ gUnknown_80E0378: @ 80E0378
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gPelliperBoard_BulletinBoard
-gPelliperBoard_BulletinBoard: @ 80E0390
+	.global gPelipperBoard_BulletinBoard
+gPelipperBoard_BulletinBoard: @ 80E0390
         .string "Bulletin Board\0"
         .align 2,0
 
-	.global gPelliperBoard_JobList
-gPelliperBoard_JobList: @ 80E03A0
+	.global gPelipperBoard_JobList
+gPelipperBoard_JobList: @ 80E03A0
         .string "Job List\0"
         .align 2,0
 

@@ -127,6 +127,13 @@ SECTIONS {
         asm/wonder_mail_2.o(.text);
         src/wonder_mail_3.o(.text);
         asm/wonder_mail_3.o(.text);
+        src/mailbox.o(.text);
+        asm/mailbox.o(.text);
+        src/mailbox_1.o(.text);
+        src/pelipper_board.o(.text);
+        asm/pelipper_board.o(.text);
+        src/pelipper_board_1.o(.text);
+        asm/wonder_mail_3_mid.o(.text);
         src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo.o(.text);
         asm/makuhita_dojo.o(.text);
@@ -316,6 +323,8 @@ SECTIONS {
         data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
+        src/load_screen.o(.rodata);
+        src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu.o(.rodata);
         data/data_80E7D40.o(.rodata);
         data/pokemon_mail.o(.rodata);

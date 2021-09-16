@@ -72,7 +72,7 @@ extern void sub_802B8D4(void);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_8012D08(struct UnkTextStruct2 *, s32);
 extern void sub_8013984(u32 *);
-extern u8 sub_802B9D8(void);
+extern u8 HasNoPKMNNews(void);
 extern u16 gUnknown_203B2D0;
 extern u16 gUnknown_203B2D2;
 
@@ -330,10 +330,11 @@ void sub_802B624(void)
   }
 }
 
+// Start of some Pokemon News related stuff
 u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
 {
 
-    if(sub_802B9D8())
+    if(HasNoPKMNNews())
     {
         return 0;
     }

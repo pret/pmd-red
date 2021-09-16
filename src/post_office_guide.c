@@ -20,7 +20,7 @@ struct PostOfficeHelper
     u8 unk16;
 };
 
-extern struct PostOfficeHelper *gPostOfficeHelper;
+EWRAM_DATA struct PostOfficeHelper *gPostOfficeHelper;
 
 
 struct unkStruct_203B330
@@ -35,7 +35,7 @@ struct unkStruct_203B330
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
 };
-extern struct unkStruct_203B330 *gUnknown_203B330;
+EWRAM_DATA struct unkStruct_203B330 *gUnknown_203B330;
 
 
 extern const char DeletingMailInfo_Text[];

@@ -1578,7 +1578,7 @@ _0801D4FE:
 	str r0, [r1, 0x78]
 	movs r0, 0x9
 	str r0, [r1, 0x7C]
-	bl sub_802C83C
+	bl HasNoAcceptedJobs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801D532
