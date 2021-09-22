@@ -11531,7 +11531,7 @@ _080249B6:
 	b _08024A42
 	.align 2, 0
 _080249C8: .4byte gUnknown_203B2B0
-_080249CC: .4byte gUnknown_80DCA34
+_080249CC: .4byte gLuminousCaveIntroText
 _080249D0:
 	bl sub_8024CFC
 	ldr r0, _080249E0
@@ -11540,7 +11540,7 @@ _080249D0:
 	ldr r2, [r1, 0x28]
 	b _08024A42
 	.align 2, 0
-_080249E0: .4byte gUnknown_80DCAB8
+_080249E0: .4byte gLuminousCave_DoYouWantToEvolve
 _080249E4: .4byte gUnknown_203B2B0
 _080249E8:
 	ldr r1, [r5]
@@ -11561,7 +11561,7 @@ _080249F8:
 	ldr r3, _08024A10
 	b _08024CB0
 	.align 2, 0
-_08024A0C: .4byte gUnknown_80DCD5C
+_08024A0C: .4byte gLuminousCave_YeShallReturn
 _08024A10: .4byte 0x00000305
 _08024A14:
 	bl sub_8024D48
@@ -11657,7 +11657,7 @@ _08024ACA:
 	ldr r0, _08024AD4
 	b _08024CAE
 	.align 2, 0
-_08024AD4: .4byte gUnknown_80DCDDC
+_08024AD4: .4byte gLuminousCave_YeLackWhatIsNeeded
 _08024AD8:
 	ldr r1, [r5]
 	movs r0, 0xA
@@ -11816,7 +11816,7 @@ _08024C1C:
 	ldr r0, _08024C28
 	b _08024CAE
 	.align 2, 0
-_08024C28: .4byte gUnknown_80DCEDC
+_08024C28: .4byte gLuminousCave_ComeAlone
 _08024C2C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11832,7 +11832,7 @@ _08024C3C:
 	ldr r0, _08024C48
 	b _08024CAE
 	.align 2, 0
-_08024C48: .4byte gUnknown_80DCF88
+_08024C48: .4byte gLuminousCave_CannotEvolveAnymore
 _08024C4C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11872,7 +11872,7 @@ _08024C8C:
 	ldr r0, _08024C98
 	b _08024CAE
 	.align 2, 0
-_08024C98: .4byte gUnknown_80DD0E0
+_08024C98: .4byte gLuminousCave_CantEvolveYet
 _08024C9C:
 	movs r0, 0x8
 	movs r1, 0x3C
