@@ -1,11 +1,11 @@
-gUnknown_80DCA34:: @ 80DCA34
+gLuminousCaveIntroText:: @ 80DCA34
 	.string "#+...#WA voice emanates from somewhere...#P"
 	.string "#+...Ye who seek awakening...#P"
 	.string "#+This is Luminous Cave.#W\n"
 	.string "#+Do ye seek a new evolution?\0"
 	.align 2, 0
 
-gUnknown_80DCAB8:: @ 80DCAB8
+gLuminousave_DoYouWantToEvolve:: @ 80DCAB8
 	.string "#+Do ye seek evolution?\0"
 	.align 2, 0
 
@@ -31,7 +31,7 @@ gLuminousCaveEvolutionInfo:: @ 80DCAD0
 	.string "#+before committing to evolution.\0"
 	.align 2, 0
 
-gUnknown_80DCD5C:: @ 80DCD5C
+gLuminousCave_YeShallReturn:: @ 80DCD5C
 	.string "#+Ye shall return if evolution\n"
 	.string "#+is what ye seek...\0"
 	.align 2, 0
@@ -44,7 +44,7 @@ gLuminousCaveGiveAnotherItem:: @ 80DCDB8
 	.string "#+Will ye give yet another item?\0"
 	.align 2, 0
 
-gUnknown_80DCDDC:: @ 80DCDDC
+gLuminousCave_YeLackWhatIsNeeded:: @ 80DCDDC
 	.string "#+Alas~2c ye seem to lack what is needed\n"
 	.string "#+for evolution.\0"
 	.align 2, 0
@@ -68,7 +68,7 @@ gUnknown_80DCEB0:: @ 80DCEB0
 	.string "#+to #C6$m1#R!\0"
 	.align 2, 0
 
-gUnknown_80DCEDC:: @ 80DCEDC
+gLuminousCave_ComeAlone:: @ 80DCEDC
 	.string "#+...#P"
 	.string "#+One cannot evolve if one\n"
 	.string "#+is in the company of others.#P"
@@ -81,7 +81,7 @@ gLuminousCaveLackLevel:: @ 80DCF44
 	.string "#+Ye have not high enough a level.\0"
 	.align 2, 0
 
-gUnknown_80DCF88:: @ 80DCF88
+gLuminousCave_CannotEvolveAnymore:: @ 80DCF88
 	.string "#+...#P"
 	.string "#+Ye cannot evolve anymore.\0"
 	.align 2, 0
@@ -111,7 +111,7 @@ gLuminousCaveLackItem:: @ 80DD098
 	.string "#+Ye seem to lack an item to evolve.\0"
 	.align 2, 0
 
-gUnknown_80DD0E0:: @ 80DD0E0
+gLuminousCave_CantEvolveYet:: @ 80DD0E0
 	.string "#+#+...#P"
 	.string "#+Ye cannot evolve yet. \0"
 	.align 2, 0
