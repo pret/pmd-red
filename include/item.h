@@ -342,6 +342,7 @@ enum ItemID {
 
 #define NUMBER_OF_GUMMIS 18
 #define INVENTORY_SIZE 20
+#define STORAGE_SIZE NUMBER_OF_ITEM_IDS
 
 void LoadItemParameters(void);
 struct TeamInventory *GetMoneyItemsInfo(void);

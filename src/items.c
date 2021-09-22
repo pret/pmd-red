@@ -12,7 +12,7 @@ extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
-extern const char gUnknown_8109764;
+extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
 extern const char gUnknown_81097A4[];
 extern s32 gUnknown_81097B0[];
@@ -52,7 +52,7 @@ bool8 xxx_insert_unk250_8091C1C(u8);
 void LoadItemParameters(void)
 {
   gTeamInventory_203B460 = &gUnknown_20389A8;
-  gItemParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_8109764,&gSystemFileArchive);
+  gItemParametersFile = OpenFileAndGetFileDataPtr(gItemParaFileName,&gSystemFileArchive);
   gItemParametersData = (struct Item *) gItemParametersFile->data;
 }
 
@@ -70,7 +70,7 @@ void InitializeMoneyItems(void)
     gTeamInventory_203B460->teamItems[i].itemFlags = 0;
   }
 
-  for(i = 0; i < 0xF0; i++)
+  for(i = 0; i < STORAGE_SIZE; i++)
   {
     gTeamInventory_203B460->teamStorage[i] = 0;
   }
@@ -1169,7 +1169,7 @@ s32 SaveTeamInventory(u8* unk0, u32 size)
   for (i = 0; i < INVENTORY_SIZE; i++) {
     SaveItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
   }
-  for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
+  for (i = 0; i < STORAGE_SIZE; i++) {
     SaveIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {
@@ -1190,10 +1190,10 @@ s32 RestoreTeamInventory(u8 *unk0, u32 size)
   s32 i;
 
   xxx_init_struct_8094924_restore_809485C(&unk, unk0, size);
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < INVENTORY_SIZE; i++) {
     RestoreItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
   }
-  for (i = 0; i < 240; i++) {
+  for (i = 0; i < STORAGE_SIZE; i++) {
     RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
   for (i = 0; i < 8; i++) {

@@ -2294,8 +2294,8 @@ gQuitWaitingRescueMenuItems: @ 80E76B8
         .string "Quit awaiting rescue?\0"
         .align 2,0
 
-	.global gUnknown_80E76E8
-gUnknown_80E76E8: @ 80E76E8
+	.global gDeleteSavePromptMenuItems
+gDeleteSavePromptMenuItems: @ 80E76E8
         .4byte Deleted_80E7718
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte Deleted_80E7700
@@ -2311,8 +2311,8 @@ gUnknown_80E76E8: @ 80E76E8
         .string "Your saved data will be\0"
         .align 2,0
 
-	.global gUnknown_80E7730
-gUnknown_80E7730: @ 80E7730
+	.global gDeleteSaveConfirmMenuItems
+gDeleteSaveConfirmMenuItems: @ 80E7730
         .4byte Deleted_80E7768
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte Deleted_80E7748

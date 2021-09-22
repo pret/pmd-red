@@ -8092,8 +8092,8 @@ gUnknown_8108F50: @ 8108F50
 gUnknown_8108F64: @ 8108F64
 	.incbin "baserom.gba", 0x108F64, 0x800
 
-	.global gUnknown_8109764
-gUnknown_8109764: @ 8109764
+	.global gItemParaFileName
+gItemParaFileName: @ 8109764
         .string "itempara\0"
         .align 2,0
 

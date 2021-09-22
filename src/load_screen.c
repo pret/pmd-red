@@ -22,7 +22,7 @@ struct unkStruct_203B484
     /* 0x50 */ u8 helperName[10];
 };
 
-struct unkStruct_203B374
+struct LoadScreen
 {
     // size: 0x27c
     u32 currMenu;
@@ -41,7 +41,7 @@ struct unkStruct_203B374
     /* 0x258 */ u8 formattedHelperInfo[0x24];
 };
 
-EWRAM_DATA struct unkStruct_203B374 *gUnknown_203B374;
+EWRAM_DATA struct LoadScreen *gLoadScreen;
 EWRAM_DATA struct MenuItem gUnknown_203B378[2];
 EWRAM_DATA u32 gUnknown_203B388[12];
 EWRAM_DATA u32 gUnknown_203B3B8[12];
@@ -54,8 +54,8 @@ extern struct UnkTextStruct2 gUnknown_80E762C;
 extern struct MenuItem gResumeQuicksaveMenuItems[];
 extern struct MenuItem gResumeAdventureMenuItems[];
 extern struct MenuItem gQuitWaitingRescueMenuItems[];
-extern struct MenuItem gUnknown_80E76E8[];
-extern struct MenuItem gUnknown_80E7730[];
+extern struct MenuItem gDeleteSavePromptMenuItems[];
+extern struct MenuItem gDeleteSaveConfirmMenuItems[];
 extern struct UnkTextStruct2 gUnknown_80E7784;
 
 extern const char No_80E77B4[];
@@ -71,12 +71,12 @@ const struct MenuItem gLoadScreenYesNoMenu[3] =
 ALIGNED(4) const char No_80E77B4[] = "No";
 ALIGNED(4) const char Yes_80E77B8[] = "Yes";
 
-ALIGNED(4) const char gUnknown_80E77BC[] = "Team:";
-ALIGNED(4) const char gUnknown_80E77C4[] = "Name:";
-ALIGNED(4) const char gUnknown_80E77CC[] = "Location:";
-ALIGNED(4) const char gUnknown_80E77D8[] = "Play time:";
-ALIGNED(4) const char gUnknown_80E77E4[] = "Adventures:";
-ALIGNED(4) const char gUnknown_80E77F0[] = "Helper:";
+ALIGNED(4) const char gTeamHeadingText[] = "Team:";
+ALIGNED(4) const char gNameHeadingText[] = "Name:";
+ALIGNED(4) const char gLocationHeadingText[] = "Location:";
+ALIGNED(4) const char gPlayTimeHeadingText[] = "Play time:";
+ALIGNED(4) const char gAdventuresHeadingText[] = "Adventures:";
+ALIGNED(4) const char gHelperHeadingText[] = "Helper:";
 ALIGNED(4) const char gNoTeamNamePlaceholder[] = _("？？？？");
 ALIGNED(4) const char gUnknown_80E7804[] = "%s ";
 ALIGNED(4) const char gNoNamePlaceholder[] = "???";
@@ -127,38 +127,38 @@ void CreateLoadScreen(u32 currMenu)
 {
   int iVar8;
   
-  if (gUnknown_203B374 == NULL) {
-    gUnknown_203B374 = MemoryAlloc(sizeof(struct unkStruct_203B374),8);
-    MemoryFill8((u8 *)gUnknown_203B374,0,sizeof(struct unkStruct_203B374));
+  if (gLoadScreen == NULL) {
+    gLoadScreen = MemoryAlloc(sizeof(struct LoadScreen),8);
+    MemoryFill8((u8 *)gLoadScreen,0,sizeof(struct LoadScreen));
   }
-  gUnknown_203B374->currMenu = currMenu;
+  gLoadScreen->currMenu = currMenu;
   for(iVar8 = 0; iVar8 < 4; iVar8++){
-    gUnknown_203B374->unk144[iVar8] = gUnknown_80E75F8;
+    gLoadScreen->unk144[iVar8] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B374->unk144,1,1);
-  SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
-  switch(gUnknown_203B374->currMenu){
+  sub_800641C(gLoadScreen->unk144,1,1);
+  SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
+  switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,0,6,0);
+            SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,0,6,0);
         else
-            SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
+            SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
+        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C,gUnknown_80E76E8,0,6,0);
+        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,0,6,0);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,1,&gUnknown_80E762C, gUnknown_80E7730,0,6,0);
+        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,0,6,0);
         break;
   }
-  SetMenuItems(&gUnknown_203B374->unk4,gUnknown_203B374->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,1,2,0);
-  sub_8035CF4(&gUnknown_203B374->unk4,0,0);
-  sub_8035CF4(&gUnknown_203B374->unk4,1,0);
-  sub_8035CF4(&gUnknown_203B374->unk4,2,1);
+  SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,1,2,0);
+  sub_8035CF4(&gLoadScreen->unk4,0,0);
+  sub_8035CF4(&gLoadScreen->unk4,1,0);
+  sub_8035CF4(&gLoadScreen->unk4,2,1);
   DrawLoadScreenText();
 }
 
@@ -166,10 +166,10 @@ void CleanLoadScreen(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, 1, 1);
-    if(gUnknown_203B374 != NULL)
+    if(gLoadScreen != NULL)
     {
-        MemoryFree(gUnknown_203B374);
-        gUnknown_203B374 = NULL;
+        MemoryFree(gLoadScreen);
+        gLoadScreen = NULL;
     }
 }
 
@@ -180,9 +180,9 @@ u32 UpdateLoadScreenMenu(void)
   
   nextMenu = MENU_NO_SCREEN_CHANGE;
   menuAction = 4;
-  sub_8012FD8(&gUnknown_203B374->unk54);
-  if (sub_8012FD8(&gUnknown_203B374->unkA4) == '\0') {
-    sub_8013114(&gUnknown_203B374->unkA4,&menuAction);
+  sub_8012FD8(&gLoadScreen->unk54);
+  if (sub_8012FD8(&gLoadScreen->unkA4) == '\0') {
+    sub_8013114(&gLoadScreen->unkA4,&menuAction);
   }
 
   switch(menuAction)
@@ -192,7 +192,7 @@ u32 UpdateLoadScreenMenu(void)
         nextMenu =  MENU_MAIN_SCREEN;
         break;
       case 1:
-        switch(gUnknown_203B374->currMenu)
+        switch(gLoadScreen->currMenu)
         {
             case MENU_CONTINUE:
                 nextMenu = 2; // MENU_???
@@ -241,12 +241,12 @@ void DrawLoadScreenText(void)
   iVar2 = sub_8011FA8();
   sub_8008C54(0);
   sub_80073B8(0);
-  xxx_call_draw_string(8,0, gUnknown_80E77BC,0,0); // Team:
-  xxx_call_draw_string(8,12,gUnknown_80E77C4,0,0); // Name:
-  xxx_call_draw_string(8,24,gUnknown_80E77CC,0,0); // Location:
-  xxx_call_draw_string(8,36,gUnknown_80E77D8,0,0); // Play time:
-  xxx_call_draw_string(8,48,gUnknown_80E77E4,0,0); // Adventures:
-  xxx_call_draw_string(8,60,gUnknown_80E77F0,0,0); // Helper:
+  xxx_call_draw_string(8,0, gTeamHeadingText,0,0); // Team:
+  xxx_call_draw_string(8,12,gNameHeadingText,0,0); // Name:
+  xxx_call_draw_string(8,24,gLocationHeadingText,0,0); // Location:
+  xxx_call_draw_string(8,36,gPlayTimeHeadingText,0,0); // Play time:
+  xxx_call_draw_string(8,48,gAdventuresHeadingText,0,0); // Adventures:
+  xxx_call_draw_string(8,60,gHelperHeadingText,0,0); // Helper:
 
   // Draw Team Name
   if (sub_80023E4(0) != '\0') {
@@ -258,8 +258,8 @@ void DrawLoadScreenText(void)
     r2 = DrawLoadScreenTextSub(teamNameBuffer);
   }
 
-  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedTeamName,gUnknown_80E7804,r2);
-  xxx_call_draw_string(64,0,gUnknown_203B374->formattedTeamName,0,0);
+  ExpandPlaceholdersBuffer(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
+  xxx_call_draw_string(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
   playerInfo = sub_808D33C();
@@ -267,15 +267,15 @@ void DrawLoadScreenText(void)
         sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else
         sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
-  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedPlayerName,gUnknown_80E7804,playerName);
-  xxx_call_draw_string(64,12,gUnknown_203B374->formattedPlayerName,0,0);
+  ExpandPlaceholdersBuffer(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
+  xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
   if ((sub_8095324(1) != 0) || (sub_8095324(7) != 0)) {
     if (iVar2 == 0xf1207)
-        PrintDungeonLocationtoBuffer(gUnknown_203B374->formattedLocation,GetDungeonLocationInfo());
+        PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
     else
-        ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+        ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
   }
   else {
     switch(sub_8011C1C())
@@ -285,36 +285,36 @@ void DrawLoadScreenText(void)
             {
                 default:
                     ExpandPlaceholdersBuffer(auStack356,gUnknown_80E7804,sub_8098FB4());
-                    xxx_format_string(auStack356,gUnknown_203B374->formattedLocation,gUnknown_203B374->formattedPlayTime,0);
+                    xxx_format_string(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:
-                    ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                    ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
                     break;
             }
             break;
         case 2:
             if (iVar2 == 0xf1207)
-                PrintDungeonLocationtoBuffer(gUnknown_203B374->formattedLocation,GetDungeonLocationInfo());
+                PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
             else
-                ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
             break;
         default:
-            ExpandPlaceholdersBuffer(gUnknown_203B374->formattedLocation,gLocationUnknownText); // Location unknown
+            ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gLocationUnknownText); // Location unknown
             break;
     }
   }
-  xxx_call_draw_string(64,24,gUnknown_203B374->formattedLocation,0,0);
+  xxx_call_draw_string(64,24,gLoadScreen->formattedLocation,0,0);
 
   // Draw Play Time
   DeconstructPlayTime(gPlayTimeRef,&hours,&minutes,&seconds);
-  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
-  xxx_call_draw_string(64,36,gUnknown_203B374->formattedPlayTime,0,0);
+  ExpandPlaceholdersBuffer(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
+  xxx_call_draw_string(64,36,gLoadScreen->formattedPlayTime,0,0);
 
   // Draw Adventures Info 
   numAdventures = GetNumAdventures();
-  ExpandPlaceholdersBuffer(gUnknown_203B374->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
-  xxx_call_draw_string(64,48,gUnknown_203B374->formattedAdventures,0,0);
+  ExpandPlaceholdersBuffer(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
+  xxx_call_draw_string(64,48,gLoadScreen->formattedAdventures,0,0);
 
   // Draw Helper Info
   if (iVar2 == 0xf1207){
@@ -323,16 +323,16 @@ void DrawLoadScreenText(void)
        if(temp2->speciesIndex != SPECIES_NONE) {
             sub_808D930(speciesHelper,temp2->speciesIndex);
             sub_80922B4(nameHelper,temp2->helperName,POKEMON_NAME_LENGTH);
-            ExpandPlaceholdersBuffer(gUnknown_203B374->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
+            ExpandPlaceholdersBuffer(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else
             goto print_helper_placeholder;
   }
   else {
     print_helper_placeholder:
-        ExpandPlaceholdersBuffer(gUnknown_203B374->formattedHelperInfo,gNoHelperText); // -----
+        ExpandPlaceholdersBuffer(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
   }
-  xxx_call_draw_string(64,60,gUnknown_203B374->formattedHelperInfo,0,0);
+  xxx_call_draw_string(64,60,gLoadScreen->formattedHelperInfo,0,0);
 
   sub_80397B4(); // Draw event icons??
   sub_80073E0(0);
