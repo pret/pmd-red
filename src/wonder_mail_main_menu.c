@@ -5,7 +5,9 @@
 #include "input.h"
 #include "sub_8095228.h"
 #include "wonder_mail.h"
+#include "menu.h"
 
+#define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
 #define SEND_GAME_LINK_CABLE 2
 #define RECEIVE_WONDER_MAIL_MAIN_SCREEN 4
@@ -21,6 +23,120 @@
 #define PROMPT_PASSWORD_ENTRY 17
 #define PASSWORD_INVALID 19
 #define PASSWORD_ENTRY_SCREEN 18
+
+extern const char Cancel_80E7D24[];
+extern const char Cancel_80E78B4[];
+extern const char Yes_80E7D2C[];
+extern const char Yes_80E7910[];
+extern const char GameLinkCable_80E78C8[];
+extern const char Password_80E78BC[];
+
+extern const char Receive_80E7884[];
+extern const char Send_80E788C[];
+
+const struct MenuItem gSelectWonderMailModeMainMenuItems[3] =
+{
+    {Send_80E788C, WONDER_MAIL_MODE_SEND},
+    {Receive_80E7884, WONDER_MAIL_MODE_RECEIVE},
+    {NULL, 0}
+};
+
+ALIGNED(4) const char Receive_80E7884[] = "Receive";
+ALIGNED(4) const char Send_80E788C[] = "Send";
+
+
+const struct MenuItem gSendWonderMailMainMenuItems[4] =
+{
+    {GameLinkCable_80E78C8, WONDER_MAIL_GAME_LINK},
+    {Password_80E78BC, -1},
+    {Cancel_80E78B4, 8},
+    {NULL, 0}
+
+};
+
+ALIGNED(4) const char Cancel_80E78B4[] = "Cancel";
+ALIGNED(4) const char Password_80E78BC[] = "Password";
+ALIGNED(4) const char GameLinkCable_80E78C8[] = "Game Link cable";
+
+const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
+{
+    {GameLinkCable_80E78C8, WONDER_MAIL_GAME_LINK},
+    {Password_80E78BC, WONDER_MAIL_PASSWORD},
+    {Cancel_80E78B4, 8},
+    {NULL, 0}
+};
+
+const struct MenuItem gUnknown_80E78F8[3] =
+{
+    {Yes_80E7910, 6},
+    {Cancel_80E78B4, 0},
+    {NULL, 0}
+};
+
+ALIGNED(4) const char Yes_80E7910[] = "Yes";
+
+ALIGNED(4) const char gUnknown_80E7914[] = "There was a communication error.";
+
+ALIGNED(4) const char gUnknown_80E7938[] = "An incorrect number of GBA systems are\n"
+                                           "connected.\n"
+                                           "Please redo this process from the start.";
+
+ALIGNED(4) const char gUnknown_80E7994[] = "There is no response from your friend.\n"
+                                           "Please redo this process from the start.";
+
+ALIGNED(4) const char gUnknown_80E79E4[] = "The sender and receiver appear to be\n"
+                                           "in different modes.\n"
+                                           "Please redo the process from the start.";
+
+ALIGNED(4) const char gUnknown_80E7A48[] = "There is no response from your friend.\n"
+                                           "Please make sure the sender and receiver\n"
+                                           "are ready~2c then redo this from the start.";
+
+ALIGNED(4) const char gUnknown_80E7AC4[] = "What would you like to do?";
+
+ALIGNED(4) const char gUnknown_80E7AE0[] = "How would you like to send your\n"
+                                           "#CGWonder Mail#R?";
+
+ALIGNED(4) const char gUnknown_80E7B14[] = "How would you like to receive the\n"
+                                           "#CGWonder Mail#R?";
+
+ALIGNED(4) const char gUnknown_80E7B48[] = "Your adventure will be saved.";
+
+ALIGNED(4) const char gUnknown_80E7B68[] = "Your #CGWonder Mail#R was sent.";
+
+ALIGNED(4) const char gUnknown_80E7B88[] = "The received #CGWonder Mail#R was\n"
+                                           "added to the #CGJob List#R.";
+
+ALIGNED(4) const char gUnknown_80E7BC8[] = "The #CGWonder Mail#R was refused.";
+
+ALIGNED(4) const char gUnknown_80E7BEC[] = _("Connect a #CGGame Link cable#R.\n"
+                                             "When you and your friend are ready~2c\n"
+                                             "you may communicate. ");
+
+ALIGNED(4) const char gUnknown_80E7C48[] = _("#+In communication...\n"
+                                           "#+Please wait with the power on.\n"
+                                           "#+To cancel~2c press {B_BUTTON}.");
+
+ALIGNED(4) const char gUnknown_80E7C98[] = "Please enter the\n"
+                                           "#CGWonder Mail password#R.";
+
+ALIGNED(4) const char gUnknown_80E7CC4[] = "This password is incorrect.\n"
+                                           "Would you like to enter it again?";
+
+ALIGNED(4) const char wonder_mail_main_fill0[] = "pksdir0";
+
+const struct MenuItem WonderMailMainUnused[3] = 
+{
+    {Yes_80E7D2C, 1},
+    {Cancel_80E7D24, 0},
+    {NULL, 0},
+};
+
+ALIGNED(4) const char Cancel_80E7D24[] = "Cancel";
+ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
+
+ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
+ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 
 
 struct unkStruct_803B344
@@ -64,10 +180,11 @@ struct unkStruct_203B3E8
     u8 unk498;
 };
 
+EWRAM_DATA struct unkStruct_203B3E8 *gUnknown_203B3E8;
+
 extern u32 sub_8095324(u32);
 extern u32 sub_80144A4(s32 *);
 extern u32 sub_8011C1C(void);
-extern struct unkStruct_203B3E8 *gUnknown_203B3E8;
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
 extern void sub_801B450(void);
@@ -82,7 +199,7 @@ extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_8011830(void);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
-extern void sub_8014248(u8 *, u32, u32, u8 *, u32, u32, u32, u32, u32);
+extern void sub_8014248(const char *, u32, u32, const struct MenuItem *, u32, u32, u32, u32, u32);
 extern void nullsub_23(u32);
 extern void sub_802EF48(void);
 extern void sub_802D098(struct WonderMail *);
@@ -92,21 +209,6 @@ extern struct unkStruct_803B344 *sub_803B344(u8);
 
 
 
-extern u8 gUnknown_80E7CC4[];
-extern u8 gUnknown_80E78F8;
-extern u8 gUnknown_80E7AC4[];
-extern u8 gUnknown_80E786C;
-extern u8 gUnknown_80E7AE0[];
-extern u8 gUnknown_80E7894;
-extern u8 gUnknown_80E7C48[];
-extern u8 gUnknown_80E7B14[];
-extern u8 gUnknown_80E78D8;
-extern u8 gUnknown_80E7B68[];
-extern u8 gUnknown_80E7BEC[];
-extern u8 gUnknown_80E7BC8[];
-extern u8 gUnknown_80E7B88[];
-extern u8 gUnknown_80E7C98[];
-extern u8 gUnknown_80E7B48[];
 extern s32 sub_8037B28(u32);
 
 extern u32 sub_802D0E0();
@@ -116,7 +218,7 @@ extern void sub_802D184();
 extern s32 sub_80154F0();
 extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
 extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
-extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
+extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
@@ -134,12 +236,6 @@ void AdvanceToPasswordEntryScreen(void);
 void HandlePasswordEntryScreen(void);
 void HandleInvalidPasswordMenu(void);
 
-
-extern u8 gUnknown_80E7914[];
-extern u8 gUnknown_80E7938[];
-extern u8 gUnknown_80E7994[];
-extern u8 gUnknown_80E79E4[];
-extern u8 gUnknown_80E7A48[];
 
 bool8 sub_8039880(void)
 {
@@ -504,11 +600,11 @@ void WonderMailMainMenuCallback(void)
   struct unkStruct_803B344 *temp;
   
   switch(gUnknown_203B3E8->state) {
-    case 0:
-        sub_8014248(gUnknown_80E7AC4,0,1,&gUnknown_80E786C,0,4,0,0,0x101);
+    case SELECT_WONDER_MAIL_MODE_MAIN_SCREEN:
+        sub_8014248(gUnknown_80E7AC4,0,1,gSelectWonderMailModeMainMenuItems,0,4,0,0,0x101);
         break;
     case SEND_WONDER_MAIL_MAIN_SCREEN:
-        sub_8014248(gUnknown_80E7AE0,0,3,&gUnknown_80E7894,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E7AE0,0,3,gSendWonderMailMainMenuItems,0,4,0,0,0x101);
         break;
     case 3:
         ResetUnusedInputStruct();
@@ -516,7 +612,7 @@ void WonderMailMainMenuCallback(void)
         sub_802EF48();
         break;
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
-        sub_8014248(gUnknown_80E7B14,0,3,&gUnknown_80E78D8,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E7B14,0,3,gReceiveWonderMailMainMenuItems,0,4,0,0,0x101);
         break;
     case PASSWORD_SUCCESS:
         gUnknown_203B3E8->unk474 = gUnknown_203B3E8->unk3C0.unk0;
@@ -561,7 +657,7 @@ void WonderMailMainMenuCallback(void)
         }
         break;
     case GAME_LINK_CABLE_MENU:
-        sub_8014248(gUnknown_80E7BEC,0,6,&gUnknown_80E78F8,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E7BEC,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
         break;
     case 6:
         nullsub_23(0);
@@ -620,7 +716,7 @@ void WonderMailMainMenuCallback(void)
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
         break;
     case PASSWORD_INVALID:
-        sub_8014248(gUnknown_80E7CC4,0,6,&gUnknown_80E78F8,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E7CC4,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
         break;
   }
 }

@@ -198,7 +198,7 @@ bool8 IsPokemonRenamed(struct PokemonStruct* pokemon) {
     char* species = GetMonSpecies(pokemon->speciesNum);
     s32 i;
     CopyStringtoBuffer(species_name, species);
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         if (pokemon->name[i] != species_name[i]) {
             return FALSE;
         }
@@ -216,7 +216,7 @@ bool8 ComparePokemonNames(s16 a1, s16 a2) {
     u8* name2 = gRecruitedPokemonRef->pokemon[index2].name;
 
     s32 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         s32 c1 = ReturnIntFromChar(*name1);
         s32 c2 = ReturnIntFromChar(*name2);
         if (c1 > c2) {
@@ -544,7 +544,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     a1->unk18 = pokemon->unk1C;
     sub_8093F50(&a1->unk1C, &pokemon->unk2C);
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];
     }
 
@@ -595,7 +595,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     pokemon->unk1C = a2->unk18;
     sub_8093FA8(pokemon->unk2C, a2->unk1C);
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];
     }
 

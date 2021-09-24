@@ -42,7 +42,7 @@ struct PersonalityStruct_203B400
     u32 unkb8;
     u32 unkbc;
 };
-extern struct PersonalityStruct_203B400 *gUnknown_203B400;
+EWRAM_DATA struct PersonalityStruct_203B400 *gUnknown_203B400;
 
 struct PersonalityStruct_203B404
 {
@@ -62,7 +62,7 @@ struct PersonalityStruct_203B404
     /* 0x54 */ struct UnkTextStruct2 unk54[4];
     /* 0xB4 */ u8 unkb4[4];
 };
-extern struct PersonalityStruct_203B404 *gUnknown_203B404;
+EWRAM_DATA struct PersonalityStruct_203B404 *gUnknown_203B404;
 
 void InitializeTestStats(void);
 void GenerateNewQuestionOrGender(void);

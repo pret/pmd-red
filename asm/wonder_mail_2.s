@@ -156,7 +156,7 @@ sub_802B9A8:
 _0802B9AE:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096E14
+	bl CheckPKMNNewsSlot
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802B9C6
@@ -177,14 +177,14 @@ _0802B9C6:
 _0802B9D4: .4byte gUnknown_203B2CC
 	thumb_func_end sub_802B9A8
 
-	thumb_func_start sub_802B9D8
-sub_802B9D8:
+	thumb_func_start HasNoPKMNNews
+HasNoPKMNNews:
 	push {r4,lr}
 	movs r4, 0
 _0802B9DC:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096E14
+	bl CheckPKMNNewsSlot
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802B9EE
@@ -199,7 +199,7 @@ _0802B9F6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802B9D8
+	thumb_func_end HasNoPKMNNews
 
 	thumb_func_start sub_802B9FC
 sub_802B9FC:
@@ -622,7 +622,7 @@ sub_802BD14:
 	adds r6, r0, 0
 	adds r4, r1, 0
 	mov r8, r2
-	bl sub_802C0E8
+	bl HasNoMailinMailbox
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802BD2E
@@ -1074,7 +1074,7 @@ sub_802C0B8:
 _0802C0BE:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096000
+	bl CheckMailSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C0D6
@@ -1095,14 +1095,14 @@ _0802C0D6:
 _0802C0E4: .4byte gUnknown_203B2D8
 	thumb_func_end sub_802C0B8
 
-	thumb_func_start sub_802C0E8
-sub_802C0E8:
+	thumb_func_start HasNoMailinMailbox
+HasNoMailinMailbox:
 	push {r4,lr}
 	movs r4, 0
 _0802C0EC:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096000
+	bl CheckMailSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C0FE
@@ -1117,7 +1117,7 @@ _0802C106:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802C0E8
+	thumb_func_end HasNoMailinMailbox
 
 	thumb_func_start sub_802C10C
 sub_802C10C:
@@ -1605,7 +1605,7 @@ sub_802C4C8:
 	adds r6, r0, 0
 	adds r4, r1, 0
 	mov r8, r2
-	bl sub_802C83C
+	bl HasNoAcceptedJobs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802C4E2
@@ -2013,7 +2013,7 @@ sub_802C80C:
 _0802C812:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096ACC
+	bl CheckJobSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C82A
@@ -2034,14 +2034,14 @@ _0802C82A:
 _0802C838: .4byte gUnknown_203B2E8
 	thumb_func_end sub_802C80C
 
-	thumb_func_start sub_802C83C
-sub_802C83C:
+	thumb_func_start HasNoAcceptedJobs
+HasNoAcceptedJobs:
 	push {r4,lr}
 	movs r4, 0
 _0802C840:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096ACC
+	bl CheckJobSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C852
@@ -2056,13 +2056,13 @@ _0802C85A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802C83C
+	thumb_func_end HasNoAcceptedJobs
 
 	thumb_func_start sub_802C860
 sub_802C860:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_802C83C
+	bl HasNoAcceptedJobs
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -2717,7 +2717,7 @@ _0802CD88:
 	ldrb r0, [r0, 0xC]
 	bl sub_8096C3C
 	bl sub_8096C80
-	bl sub_802C83C
+	bl HasNoAcceptedJobs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802CDAA

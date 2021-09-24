@@ -8,6 +8,11 @@
 #include "save.h"
 #include "exclusive_pokemon.h"
 
+
+EWRAM_DATA u32 gUnknown_203B17C;
+EWRAM_DATA char *gUnknown_203B180;
+EWRAM_DATA struct UnkStruct_203B184 *gUnknown_203B184;
+
 struct unk_struct
 {
     // size: 0x800
@@ -26,7 +31,7 @@ struct SavePakRead
     u32 readStatus;
 };
 
-extern struct SavePakRead *gSavePakRead;
+EWRAM_DATA struct SavePakRead *gSavePakRead;
 
 struct SavePakWrite
 {
@@ -44,7 +49,7 @@ struct SavePakWrite
     u16 pokeID;
 };
 
-extern struct SavePakWrite *gSavePakWrite;
+EWRAM_DATA struct SavePakWrite *gSavePakWrite;
 
 struct QuickSaveRead
 {
@@ -53,7 +58,7 @@ struct QuickSaveRead
     u32 size;
     bool8 saveValid;
 };
-extern struct QuickSaveRead *gQuickSaveRead;
+EWRAM_DATA struct QuickSaveRead *gQuickSaveRead;
 
 struct QuickSaveWrite
 {
@@ -63,12 +68,10 @@ struct QuickSaveWrite
     u8 unkC;
     u32 quickSaveStatus;
 };
-extern struct QuickSaveWrite *gQuickSaveWrite;
+EWRAM_DATA struct QuickSaveWrite *gQuickSaveWrite;
 
 
 extern s32 gUnknown_202DE28;
-extern u32 gUnknown_203B17C;
-extern char *gUnknown_203B180;
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct RescueTeamData *gRescueTeamInfoRef;
@@ -141,7 +144,6 @@ ALIGNED(4) const char gSaveNotWritten2[] = _("{CENTER_ALIGN}The data could not b
 ALIGNED(4) const char gSaveFailed2[] = _("{CENTER_ALIGN}Save failed.");
 ALIGNED(4) const char fill_save7[] = _("pksdir0");
 
-extern volatile struct UnkStruct_203B184 *gUnknown_203B184;
 
 extern bool8 sub_800DAB0(u16, u8*, s32);
 extern bool8 sub_800DAB4(u16, u8*, s32);
@@ -601,7 +603,7 @@ void InitializePlayerData(void)
     InitializeFriendAreas();
     InitializeRecruitedPokemon();
     InitializeMoneyItems();
-    InitializeResuceTeamInfo();
+    InitializeRescueTeamInfo();
     sub_80972F4();
     sub_8095118();
     sub_8095900();

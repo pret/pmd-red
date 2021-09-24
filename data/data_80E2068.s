@@ -2251,8 +2251,8 @@ gUnknown_80E762C: @ 80E762C
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7644
-gUnknown_80E7644: @ 80E7644
+	.global gResumeQuicksaveMenuItems
+gResumeQuicksaveMenuItems: @ 80E7644
         .4byte ResumeQuicksave_80E7668
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte IsThatOK_80E765C
@@ -2268,8 +2268,8 @@ gUnknown_80E7644: @ 80E7644
         .string "Resuming from quicksave.\0"
         .align 2,0
 
-	.global gUnknown_80E7684
-gUnknown_80E7684: @ 80E7684
+	.global gResumeAdventureMenuItems
+gResumeAdventureMenuItems: @ 80E7684
         .4byte ResumeAdventure_80E769C
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte IsThatOK_80E765C
@@ -2281,21 +2281,21 @@ gUnknown_80E7684: @ 80E7684
         .string "Resuming saved adventure.\0"
         .align 2,0
 
-	.global gUnknown_80E76B8
-gUnknown_80E76B8: @ 80E76B8
-        .4byte QuitAwaitingResuce_80E76D0
+	.global gQuitWaitingRescueMenuItems
+gQuitWaitingRescueMenuItems: @ 80E76B8
+        .4byte QuitAwaitingRescue_80E76D0
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte IsThatOK_80E765C
         .byte 0x05, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
 
-        QuitAwaitingResuce_80E76D0:
+        QuitAwaitingRescue_80E76D0:
         .string "Quit awaiting rescue?\0"
         .align 2,0
 
-	.global gUnknown_80E76E8
-gUnknown_80E76E8: @ 80E76E8
+	.global gDeleteSavePromptMenuItems
+gDeleteSavePromptMenuItems: @ 80E76E8
         .4byte Deleted_80E7718
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte Deleted_80E7700
@@ -2311,8 +2311,8 @@ gUnknown_80E76E8: @ 80E76E8
         .string "Your saved data will be\0"
         .align 2,0
 
-	.global gUnknown_80E7730
-gUnknown_80E7730: @ 80E7730
+	.global gDeleteSaveConfirmMenuItems
+gDeleteSaveConfirmMenuItems: @ 80E7730
         .4byte Deleted_80E7768
         .byte 0x05, 0x00, 0x00, 0x00
         .4byte Deleted_80E7748
@@ -2337,292 +2337,3 @@ gUnknown_80E7784: @ 80E7784
         .byte 0x05, 0x00, 0x03, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80E779C
-gUnknown_80E779C: @ 80E779C
-        .4byte Yes_80E77B8
-        .4byte 1
-        .4byte No_80E77B4
-        .4byte 2
-        .4byte 0
-        .4byte 3
-
-        .global No_80E77B4
-        No_80E77B4:
-        .asciz "No"
-        .align 2,0
-
-        .global Yes_80E77B8
-        Yes_80E77B8:
-        .asciz "Yes"
-        .align 2,0
-
-	.global gUnknown_80E77BC
-gUnknown_80E77BC: @ 80E77BC
-        .string "Team:\0"
-        .align 2,0
-
-	.global gUnknown_80E77C4
-gUnknown_80E77C4: @ 80E77C4
-        .string "Name:\0"
-        .align 2,0
-
-	.global gUnknown_80E77CC
-gUnknown_80E77CC: @ 80E77CC
-        .string "Location:\0"
-        .align 2,0
-
-	.global gUnknown_80E77D8
-gUnknown_80E77D8: @ 80E77D8
-        .string "Play time:\0"
-        .align 2,0
-
-	.global gUnknown_80E77E4
-gUnknown_80E77E4: @ 80E77E4
-        .string "Adventures:\0"
-        .align 2,0
-
-	.global gUnknown_80E77F0
-gUnknown_80E77F0: @ 80E77F0
-        .string "Helper:\0"
-        .align 2,0
-
-	.global gUnknown_80E77F8
-gUnknown_80E77F8: @ 80E77F8
-        .byte 0x81, 0x48
-        .byte 0x81, 0x48
-        .byte 0x81, 0x48
-        .byte 0x81, 0x48
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80E7804
-gUnknown_80E7804: @ 80E7804
-        .string "%s \0"
-        .align 2,0
-
-	.global gUnknown_80E7808
-gUnknown_80E7808: @ 80E7808
-        .string "???\0"
-        .align 2,0
-
-	.global gUnknown_80E780C
-gUnknown_80E780C: @ 80E780C
-        .string "Quicksave data deleted.\0"
-        .align 2,0
-
-	.global gUnknown_80E7824
-gUnknown_80E7824: @ 80E7824
-        .string "Location unknown.\0"
-        .align 2,0
-
-	.global gUnknown_80E7838
-gUnknown_80E7838: @ 80E7838
-        .string "%d:%02d:%02d \0"
-        .align 2,0
-
-	.global gUnknown_80E7848
-gUnknown_80E7848: @ 80E7848
-        .string "%d\0"
-        .align 2,0
-
-	.global gUnknown_80E784C
-gUnknown_80E784C: @ 80E784C
-        .string "%s (%s)\0"
-        .align 2,0
-
-	.global gUnknown_80E7854
-gUnknown_80E7854: @ 80E7854
-        .string "-----\0"
-        .align 2,0
-
-	.global gUnknown_80E785C
-gUnknown_80E785C: @ 80E785C
-        .string "clmkpat\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80E786C
-gUnknown_80E786C: @ 80E786C
-        .4byte Send_80E788C
-        .4byte 1
-        .4byte Receive_80E7884
-        .4byte 2
-        .4byte 0
-        .4byte 0
-
-        .global Receive_80E7884
-        Receive_80E7884:
-        .asciz "Receive"
-        .align 2,0
-
-        .global Send_80E788C
-        Send_80E788C:
-        .asciz "Send"
-        .align 2,0
-
-	.global gUnknown_80E7894
-gUnknown_80E7894: @ 80E7894
-        .4byte GameLinkCable_80E78C8
-        .4byte 3
-        .4byte Password_80E78BC
-        .4byte -1
-        .4byte Cancel_80E78B4
-        .4byte 8
-        .4byte 0
-        .4byte 0
-
-        .global Cancel_80E78B4
-        Cancel_80E78B4:
-        .asciz "Cancel"
-        .align 2,0
-
-        .global Password_80E78BC
-        Password_80E78BC:
-        .asciz "Password"
-        .align 2,0
-
-        .global GameLinkCable_80E78C8
-        GameLinkCable_80E78C8:
-        .asciz "Game Link cable"
-        .align 2,0
-
-	.global gUnknown_80E78D8
-gUnknown_80E78D8: @ 80E78D8
-        .4byte GameLinkCable_80E78C8
-        .4byte 3
-        .4byte Password_80E78BC
-        .4byte 5
-        .4byte Cancel_80E78B4
-        .4byte 8
-        .4byte 0
-        .4byte 0
-
-	.global gUnknown_80E78F8
-gUnknown_80E78F8: @ 80E78F8
-        .4byte Yes_80E7910
-        .4byte 6
-        .4byte Cancel_80E78B4
-        .4byte 0
-        .4byte 0
-        .4byte 0
-
-        .global Yes_80E7910
-        Yes_80E7910:
-        .asciz "Yes"
-        .align 2,0
-
-	.global gUnknown_80E7914
-gUnknown_80E7914: @ 80E7914
-        .asciz "There was a communication error."
-        .align 2,0
-
-	.global gUnknown_80E7938
-gUnknown_80E7938: @ 80E7938
-        .string "An incorrect number of GBA systems are\n"
-        .string "connected.\n"
-        .asciz "Please redo this process from the start."
-        .align 2,0
-
-	.global gUnknown_80E7994
-gUnknown_80E7994: @ 80E7994
-        .string "There is no response from your friend.\n"
-        .asciz "Please redo this process from the start."
-        .align 2,0
-
-	.global gUnknown_80E79E4
-gUnknown_80E79E4: @ 80E79E4
-        .string "The sender and receiver appear to be\n"
-        .string "in different modes.\n"
-        .asciz "Please redo the process from the start."
-        .align 2,0
-
-	.global gUnknown_80E7A48
-gUnknown_80E7A48: @ 80E7A48
-        .string "There is no response from your friend.\n"
-        .string "Please make sure the sender and receiver\n"
-        .string "are ready~2c then redo this from the start.\0"
-        .align 2,0
-
-	.global gUnknown_80E7AC4
-gUnknown_80E7AC4: @ 80E7AC4
-        .asciz "What would you like to do?"
-        .align 2,0
-
-	.global gUnknown_80E7AE0
-gUnknown_80E7AE0: @ 80E7AE0
-        .string "How would you like to send your\n"
-        .asciz "#CGWonder Mail#R?"
-        .align 2,0
-
-	.global gUnknown_80E7B14
-gUnknown_80E7B14: @ 80E7B14
-        .string "How would you like to receive the\n"
-        .asciz "#CGWonder Mail#R?"
-        .align 2,0
-
-	.global gUnknown_80E7B48
-gUnknown_80E7B48: @ 80E7B48
-        .asciz "Your adventure will be saved."
-        .align 2,0
-
-	.global gUnknown_80E7B68
-gUnknown_80E7B68: @ 80E7B68
-        .asciz "Your #CGWonder Mail#R was sent."
-        .align 2,0
-
-	.global gUnknown_80E7B88
-gUnknown_80E7B88: @ 80E7B88
-        .string "The received #CGWonder Mail#R was\n"
-        .string "added to the #CGJob List#R.\0"
-        .align 2,0
-
-	.global gUnknown_80E7BC8
-gUnknown_80E7BC8: @ 80E7BC8
-        .asciz "The #CGWonder Mail#R was refused."
-        .align 2,0
-
-	.global gUnknown_80E7BEC
-gUnknown_80E7BEC: @ 80E7BEC
-        .string "Connect a #CGGame Link cable#R.\n"
-        .string "When you and your friend are ready~2c\n"
-        .string "you may communicate. \0"
-        .align 2,0
-
-	.global gUnknown_80E7C48
-gUnknown_80E7C48: @ 80E7C48
-        .string "#+In communication...\n"
-        .string "#+Please wait with the power on.\n"
-        .string "#+To cancel~2c press {B_BUTTON}.\0"
-        .align 2,0
-
-	.global gUnknown_80E7C98
-gUnknown_80E7C98: @ 80E7C98
-        .string "Please enter the\n"
-        .string "#CGWonder Mail password#R.\0"
-        .align 2,0
-
-	.global gUnknown_80E7CC4
-gUnknown_80E7CC4: @ 80E7CC4
-        .string "This password is incorrect.\n"
-        .string "Would you like to enter it again?\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .4byte Yes_80E7D2C 
-        .byte 0x01, 0x00, 0x00, 0x00
-        .4byte Cancel_80E7D24 
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-        .global Cancel_80E7D24
-        Cancel_80E7D24:
-        .string "Cancel\0"
-        .align 2,0
-        .global Yes_80E7D2C
-        Yes_80E7D2C:
-        .string "Yes\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-

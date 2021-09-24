@@ -94,7 +94,7 @@ bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
     // Has to equal 5 for Wonder Mail
     // https://web.archive.org/web/20080913124416/http://www.upokecenter.com/games/dungeon/guides/passwords.html
     //
-    if(WonderMailData->mailType != 5)
+    if(WonderMailData->mailType != WONDER_MAIL_TYPE_WONDER)
     {
         return FALSE;
     }

@@ -120,6 +120,13 @@ enum WonderMailMethod {
    WONDER_MAIL_PASSWORD = 5, 
 };
 
+enum WonderMailTypes {
+  WONDER_MAIL_TYPE_SOS = 1,
+  WONDER_MAIL_TYPE_AOK = 4,
+  WONDER_MAIL_TYPE_THANK_YOU = 5,
+  WONDER_MAIL_TYPE_WONDER = 5,
+};
+
 
 
 #endif

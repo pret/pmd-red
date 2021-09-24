@@ -602,7 +602,7 @@ sub_8095F8C:
 _08095F92:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096000
+	bl CheckMailSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _08095FA2
@@ -666,8 +666,8 @@ sub_8095FE8:
 _08095FFC: .4byte gUnknown_203B490
 	thumb_func_end sub_8095FE8
 
-	thumb_func_start sub_8096000
-sub_8096000:
+	thumb_func_start CheckMailSlot
+CheckMailSlot:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -689,7 +689,7 @@ _08096020:
 _08096022:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096000
+	thumb_func_end CheckMailSlot
 
 	thumb_func_start sub_8096028
 sub_8096028:
@@ -1994,7 +1994,7 @@ sub_80969AC:
 _080969B2:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096ACC
+	bl CheckJobSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _080969C2
@@ -2155,8 +2155,8 @@ sub_8096AB4:
 _08096AC8: .4byte gUnknown_203B490
 	thumb_func_end sub_8096AB4
 
-	thumb_func_start sub_8096ACC
-sub_8096ACC:
+	thumb_func_start CheckJobSlot
+CheckJobSlot:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2179,7 +2179,7 @@ _08096AF0:
 _08096AF2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096ACC
+	thumb_func_end CheckJobSlot
 
 	thumb_func_start sub_8096AF8
 sub_8096AF8:
@@ -2632,8 +2632,8 @@ sub_8096DF8:
 _08096E10: .4byte gUnknown_203B490
 	thumb_func_end sub_8096DF8
 
-	thumb_func_start sub_8096E14
-sub_8096E14:
+	thumb_func_start CheckPKMNNewsSlot
+CheckPKMNNewsSlot:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08096E28
@@ -2646,7 +2646,7 @@ sub_8096E14:
 	bx lr
 	.align 2, 0
 _08096E28: .4byte gUnknown_203B490
-	thumb_func_end sub_8096E14
+	thumb_func_end CheckPKMNNewsSlot
 
 	thumb_func_start sub_8096E2C
 sub_8096E2C:

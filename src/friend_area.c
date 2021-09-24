@@ -3,8 +3,8 @@
 #include "friend_area.h"
 #include "pokemon.h"
 
-EWRAM_DATA bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
-extern bool8 *gFriendAreas;
+bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
+EWRAM_DATA bool8 *gFriendAreas;
 
 
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
