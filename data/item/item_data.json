@@ -7,17 +7,7 @@
         "type": "ITEM_TYPE_BERRY_SEED",
         "icon": 2,
         "descriptionPointer": "0x08306580",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 0,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_NOTHING"
     },
@@ -34,7 +24,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 50,
         "unkThrow1B": [
             6,
@@ -56,7 +45,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 48,
         "unkThrow1B": [
             5,
@@ -78,7 +66,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 49,
         "unkThrow1B": [
             5,
@@ -100,7 +87,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 47,
         "unkThrow1B": [
             5,
@@ -122,7 +108,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 45,
         "unkThrow1B": [
             5,
@@ -144,7 +129,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 46,
         "unkThrow1B": [
             5,
@@ -166,7 +150,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 52,
         "unkThrow1B": [
             3,
@@ -188,7 +171,6 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 51,
         "unkThrow1B": [
             7,
@@ -205,17 +187,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x0830665f",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 4,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -227,17 +199,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306718",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 14,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -249,17 +211,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083067a0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 32,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -271,17 +223,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x08306802",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 42,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -298,12 +240,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 28,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -315,17 +252,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083068be",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 33,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -337,17 +264,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306915",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 22,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -359,17 +276,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306992",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 15,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -381,17 +288,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x083069d7",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 44,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -403,17 +300,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306a26",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 29,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -425,17 +312,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306a6b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 23,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -447,17 +324,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306aa2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 6,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -469,17 +336,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x08306afb",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 37,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -491,17 +348,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306b7c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 9,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -513,17 +360,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306bd3",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 31,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -535,17 +372,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306c25",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 7,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -557,17 +384,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306ca7",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 13,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -579,17 +396,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x08306d07",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 40,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -606,12 +413,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 11,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -623,17 +425,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306e2b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 8,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -645,17 +437,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306e84",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 30,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -667,17 +449,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306eff",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 2,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -689,17 +461,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306f37",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 19,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -711,17 +473,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306f82",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 17,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -733,17 +485,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08306fc3",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 18,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -755,17 +497,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307002",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 25,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -777,17 +509,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307042",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 26,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -799,17 +521,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x0830707a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 39,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -821,17 +533,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083070dc",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 3,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -843,17 +545,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307122",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 10,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -865,17 +557,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307160",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 21,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -892,12 +574,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 43,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -914,12 +591,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 38,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -931,17 +603,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 13,
         "descriptionPointer": "0x083072ab",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 41,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_SPECS"
     },
@@ -953,17 +615,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083072fa",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 27,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -975,17 +627,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307398",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 5,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -997,17 +639,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307461",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 24,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -1019,17 +651,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083074b2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 12,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1041,17 +663,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307526",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 1,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_SCARFS"
     },
@@ -1063,17 +675,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083075b8",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 20,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1085,17 +687,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x08307641",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 16,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1107,17 +699,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083076ca",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 34,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1129,17 +711,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083076d2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 35,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1151,17 +723,7 @@
         "type": "ITEM_TYPE_HOLD_ITEM",
         "icon": 4,
         "descriptionPointer": "0x083076da",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 36,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_RIBBONS"
     },
@@ -1178,12 +740,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 87,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1195,17 +752,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 7,
         "descriptionPointer": "0x08307743",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 110,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_MONEY_WISH_STONE"
     },
@@ -1222,12 +769,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 78,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1244,12 +786,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 81,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1266,12 +803,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 86,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1283,17 +815,7 @@
         "type": "ITEM_TYPE_BERRY_SEED",
         "icon": 14,
         "descriptionPointer": "0x08307994",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 93,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1310,12 +832,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 84,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1332,12 +849,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 85,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1354,12 +866,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 82,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1376,12 +883,7 @@
             false,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 90,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1398,12 +900,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 80,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1420,12 +917,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 88,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1442,12 +934,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 92,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1464,12 +951,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 79,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1486,12 +968,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 76,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1508,12 +985,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 96,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1530,12 +1002,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 94,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1547,17 +1014,7 @@
         "type": "ITEM_TYPE_BERRY_SEED",
         "icon": 14,
         "descriptionPointer": "0x08308052",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 91,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1574,12 +1031,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 97,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1596,12 +1048,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 83,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1613,17 +1060,7 @@
         "type": "ITEM_TYPE_BERRY_SEED",
         "icon": 12,
         "descriptionPointer": "0x083081a6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 99,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1640,12 +1077,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 89,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1662,12 +1094,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 77,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1684,12 +1111,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 95,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1706,12 +1128,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 101,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1728,12 +1145,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 102,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1750,12 +1162,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 98,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1772,12 +1179,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 100,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1794,12 +1196,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 103,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_HEALING"
     },
@@ -1816,12 +1213,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 53,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1838,12 +1230,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 55,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1860,12 +1247,7 @@
             false,
             true
         ],
-        "move": "MOVE_NONE",
         "order": 57,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1882,12 +1264,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 58,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1899,17 +1276,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308858",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 74,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 11,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1921,17 +1288,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308908",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 70,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1943,17 +1300,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x083089b6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 60,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1965,17 +1312,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308a65",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 64,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -1987,17 +1324,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308b14",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 75,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2009,17 +1336,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308bc6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 62,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 11,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2031,17 +1348,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308c73",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 67,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 9,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2053,17 +1360,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308d25",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 68,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 4,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2075,17 +1372,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308dd5",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 61,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 8,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2097,17 +1384,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308e85",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 73,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2119,17 +1396,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308f35",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 63,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2141,17 +1408,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08308fe6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 66,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2163,17 +1420,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08309093",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 65,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 11,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2185,17 +1432,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x08309141",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 69,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 7,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2207,17 +1444,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x083091f0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 71,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2229,17 +1456,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x083092a0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 59,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2251,17 +1468,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 17,
         "descriptionPointer": "0x0830934e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 72,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 11,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2278,12 +1485,7 @@
             true,
             false
         ],
-        "move": "MOVE_NONE",
         "order": 54,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_FOOD"
     },
@@ -2295,17 +1497,7 @@
         "type": "ITEM_TYPE_APPLE_GUMMI",
         "icon": 11,
         "descriptionPointer": "0x083094bd",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 56,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_CHESTNUT"
     },
@@ -2317,17 +1509,7 @@
         "type": "ITEM_TYPE_MONEY",
         "icon": 6,
         "descriptionPointer": "0x08309515",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 239,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_MONEY_WISH_STONE"
     },
@@ -2339,39 +1521,19 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x08309532",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 117,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_MISC"
     },
     {
-        "name": "King\u2019s Rock",
+        "name": "King's Rock",
         "namePointer": "0x0830f134",
         "buyPrice": 3000,
         "sellPrice": 1,
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 114,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 1,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2383,17 +1545,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 108,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2405,17 +1557,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 20,
         "descriptionPointer": "0x08309532",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 111,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2427,17 +1569,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x08309532",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 113,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2449,17 +1581,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 107,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2471,17 +1593,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 106,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 7,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2493,17 +1605,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 104,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2515,17 +1617,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 109,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2537,17 +1629,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 116,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 7,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2559,17 +1641,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 1,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 105,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2581,17 +1653,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 20,
         "descriptionPointer": "0x08309532",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 112,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2603,17 +1665,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x0830959a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 115,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 10,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2625,17 +1677,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 18,
         "descriptionPointer": "0x08309601",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 118,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2647,17 +1689,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 18,
         "descriptionPointer": "0x083096da",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 122,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 11,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2669,17 +1701,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 18,
         "descriptionPointer": "0x08309781",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 121,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 6,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2691,17 +1713,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 5,
         "descriptionPointer": "0x083097f5",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 120,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2713,17 +1725,7 @@
         "type": "ITEM_TYPE_MISC",
         "icon": 16,
         "descriptionPointer": "0x08309875",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 119,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_MISC"
     },
@@ -2735,17 +1737,7 @@
         "type": "ITEM_TYPE_USED_TM",
         "icon": 8,
         "descriptionPointer": "0x083098a3",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 123,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 2,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2757,17 +1749,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309925",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FOCUS_PUNCH",
         "order": 142,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2779,17 +1762,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x083099cb",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DRAGON_CLAW",
         "order": 134,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2801,17 +1775,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309a12",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_WATER_PULSE",
         "order": 176,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2823,17 +1788,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309a9a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_CALM_MIND",
         "order": 130,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2845,17 +1801,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309b13",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ROAR",
         "order": 156,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2867,17 +1814,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309b90",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TOXIC",
         "order": 174,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2889,17 +1827,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x08309c26",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_HAIL",
         "order": 186,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -2911,17 +1840,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309c9c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BULK_UP",
         "order": 128,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2933,17 +1853,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309d00",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BULLET_SEED",
         "order": 129,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2955,17 +1866,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309d7f",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_HIDDEN_POWER",
         "order": 145,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -2977,17 +1879,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x08309df5",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SUNNY_DAY",
         "order": 221,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -2999,17 +1892,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309e6c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TAUNT",
         "order": 169,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3021,17 +1905,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309ec5",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ICE_BEAM",
         "order": 147,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3043,17 +1918,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309f60",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BLIZZARD",
         "order": 126,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3065,17 +1931,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x08309fe8",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_HYPER_BEAM",
         "order": 146,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3087,17 +1944,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a08a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_LIGHT_SCREEN",
         "order": 149,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3109,17 +1957,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a117",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_PROTECT",
         "order": 151,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3131,17 +1970,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830a19e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_RAIN_DANCE",
         "order": 205,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3153,17 +1983,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a214",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_GIGA_DRAIN",
         "order": 144,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3175,17 +1996,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a2a4",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SAFEGUARD",
         "order": 158,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3197,17 +2009,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a33d",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FRUSTRATION",
         "order": 143,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3219,17 +2022,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a3c1",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SOLARBEAM",
         "order": 164,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3241,17 +2035,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a460",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_IRON_TAIL",
         "order": 148,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3263,17 +2048,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a4e3",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_THUNDERBOLT",
         "order": 172,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3285,17 +2061,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a575",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_THUNDER",
         "order": 171,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3307,17 +2074,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a605",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_EARTHQUAKE",
         "order": 135,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3329,17 +2087,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a68b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_RETURN",
         "order": 155,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3351,17 +2100,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a6f9",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DIG",
         "order": 132,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3373,17 +2113,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a790",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_PSYCHIC",
         "order": 152,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3395,17 +2126,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a819",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SHADOW_BALL",
         "order": 160,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3417,17 +2139,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a8b9",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BRICK_BREAK",
         "order": 127,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3439,17 +2152,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830a92f",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DOUBLE_TEAM",
         "order": 184,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3461,17 +2165,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830a97e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_REFLECT",
         "order": 153,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3483,17 +2178,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830aa1b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SHOCK_WAVE",
         "order": 161,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3505,17 +2191,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830aa87",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FLAMETHROWER",
         "order": 139,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3527,17 +2204,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ab26",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SLUDGE_BOMB",
         "order": 163,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3549,17 +2217,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830abd0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SANDSTORM",
         "order": 210,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3571,17 +2230,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ac4b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FIRE_BLAST",
         "order": 138,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3593,17 +2243,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830acd5",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ROCK_TOMB",
         "order": 208,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3615,17 +2256,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ad51",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_AERIAL_ACE",
         "order": 124,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3637,17 +2269,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ada9",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TORMENT",
         "order": 173,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3659,17 +2282,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ae29",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FACADE",
         "order": 137,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3681,17 +2295,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830aed0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SECRET_POWER",
         "order": 159,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3703,17 +2308,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830af56",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_REST",
         "order": 154,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3725,17 +2321,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830afef",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ATTRACT",
         "order": 125,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3747,17 +2334,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b046",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_THIEF",
         "order": 170,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3769,17 +2347,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b0d8",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_STEEL_WING",
         "order": 166,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3791,17 +2360,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b15a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SKILL_SWAP",
         "order": 162,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3813,17 +2373,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b1c6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SNATCH",
         "order": 218,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3835,17 +2386,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b23a",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_OVERHEAT",
         "order": 150,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3857,17 +2399,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b2e1",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_WIDE_SLASH",
         "order": 178,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3879,17 +2412,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b352",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_EXCAVATE",
         "order": 136,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3901,17 +2425,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830b3a1",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SPIN_SLASH",
         "order": 165,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -3923,17 +2438,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b3fb",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SEE_TRAP",
         "order": 212,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3945,17 +2451,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b43c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TAKEAWAY",
         "order": 195,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3967,17 +2464,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b4bb",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_REBOUND",
         "order": 206,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -3989,17 +2477,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b555",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BLOOP_SLASH",
         "order": 191,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4011,17 +2490,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b59d",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SWITCHER",
         "order": 222,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4033,17 +2503,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b601",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BLOWBACK",
         "order": 179,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4055,17 +2516,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b680",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_WARP",
         "order": 230,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4077,17 +2529,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b6da",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TRANSFER",
         "order": 225,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4099,17 +2542,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b725",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SLOW_DOWN",
         "order": 216,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4121,17 +2555,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b786",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SPEED_BOOST",
         "order": 203,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4143,17 +2568,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b802",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SEARCHLIGHT",
         "order": 193,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4165,17 +2581,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b83c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_PETRIFY",
         "order": 199,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4187,17 +2594,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b8b4",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_STAY_AWAY",
         "order": 220,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4209,17 +2607,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b920",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_POUNCE",
         "order": 202,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4231,17 +2620,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830b9b2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TRAWL",
         "order": 228,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4253,17 +2633,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830ba36",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_CLEANSE",
         "order": 180,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4275,17 +2646,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830baab",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_OBSERVER",
         "order": 196,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4297,17 +2659,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bb18",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DECOY_MAKER",
         "order": 181,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4319,17 +2672,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bb90",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SIESTA",
         "order": 217,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4341,17 +2685,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bc08",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TOTTER",
         "order": 224,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4363,17 +2698,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bc8e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TWO_EDGE",
         "order": 229,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4385,17 +2711,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bd0e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_NO_MOVE",
         "order": 214,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4407,17 +2724,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bd95",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ESCAPE",
         "order": 183,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4429,17 +2737,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bdf0",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SCAN",
         "order": 211,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4451,17 +2750,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830be3d",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_POWER_EARS",
         "order": 204,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4473,17 +2763,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830be7f",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DROUGHT",
         "order": 182,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4495,17 +2776,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bec4",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TRAP_BUSTER",
         "order": 226,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4524,10 +2796,6 @@
         ],
         "move": "MOVE_WILD_CALL",
         "order": 209,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4539,17 +2807,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bf46",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_INVISIFY",
         "order": 189,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4561,17 +2820,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bf8b",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ONE_SHOT",
         "order": 198,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4583,17 +2833,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830bfd3",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_HP_GAUGE",
         "order": 188,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4605,17 +2846,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c030",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_VACUUM_CUT",
         "order": 175,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 5,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -4627,17 +2859,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c080",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_REVIVER",
         "order": 207,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4649,17 +2872,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c0ff",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SHOCKER",
         "order": 213,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4671,17 +2885,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c17c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ECHO",
         "order": 215,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4693,17 +2898,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c1ef",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ONE_ROOM",
         "order": 197,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4715,17 +2911,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c24e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FILL_IN",
         "order": 185,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4737,17 +2924,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c2ac",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_TRAPPER",
         "order": 227,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4759,17 +2937,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c30e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_POSSESS",
         "order": 201,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4781,17 +2950,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c384",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ITEMIZE",
         "order": 190,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4803,17 +2963,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c3c7",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_HURL",
         "order": 187,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4825,17 +2976,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c415",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_MOBILE",
         "order": 194,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4847,17 +2989,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c4a6",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ITEM_TOSS",
         "order": 223,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4869,17 +3002,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c4cb",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SEE_STAIRS",
         "order": 219,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4891,17 +3015,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c50f",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_LONG_TOSS",
         "order": 192,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4913,17 +3028,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830c596",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_PIERCE",
         "order": 200,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -4935,17 +3041,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c622",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_CUT",
         "order": 131,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -4957,17 +3054,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c6a2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FLY",
         "order": 141,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -4979,17 +3067,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c74c",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_SURF",
         "order": 168,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5001,17 +3080,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c7ec",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_STRENGTH",
         "order": 167,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5023,17 +3093,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c886",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_FLASH",
         "order": 140,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5045,17 +3106,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c918",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_ROCK_SMASH",
         "order": 157,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5067,17 +3119,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830c9a7",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_WATERFALL",
         "order": 177,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5089,17 +3132,8 @@
         "type": "ITEM_TYPE_TM",
         "icon": 8,
         "descriptionPointer": "0x0830ca1e",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_DIVE",
         "order": 133,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 3,
         "category": "ITEM_CATEGORY_TM"
     },
@@ -5111,17 +3145,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cad2",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 235,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     },
@@ -5133,17 +3157,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cb67",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 237,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     },
@@ -5155,17 +3169,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cbec",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 238,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     },
@@ -5177,17 +3181,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cc01",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 236,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     },
@@ -5199,17 +3193,8 @@
         "type": "ITEM_TYPE_ORB",
         "icon": 15,
         "descriptionPointer": "0x0830cc17",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
         "move": "MOVE_BEAT_UP",
         "order": 231,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_ORBS"
     },
@@ -5221,17 +3206,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cc17",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 232,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     },
@@ -5243,17 +3218,7 @@
         "type": "ITEM_TYPE_LINK_BOX",
         "icon": 10,
         "descriptionPointer": "0x0830cc17",
-        "aiFlags": [
-            false,
-            false,
-            false
-        ],
-        "move": "MOVE_NONE",
         "order": 233,
-        "unkThrow1B": [
-            0,
-            0
-        ],
         "palette": 0,
         "category": "ITEM_CATEGORY_LINK_BOX"
     }

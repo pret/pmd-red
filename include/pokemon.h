@@ -136,7 +136,7 @@ struct gPokemon
     /* 0x10 */ u16 dialogue_sprites;
     /* 0x12 */ bool8 unk12;
     /* 0x13 */ u8 types[2];
-    /* 0x15 */ u8 walkable_tiles; // Uses the CrossableTerrain enum in map.h.
+    /* 0x15 */ u8 walkable_tiles;
     /* 0x16 */ u8 friend_area;
     /* 0x17 */ u8 abilities[2];
     /* 0x19 */ u8 shadow_size;

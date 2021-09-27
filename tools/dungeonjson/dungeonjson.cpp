@@ -331,7 +331,7 @@ string get_json_int_value(Json data) {
 }
 
 string get_json_string_value(Json data) {
-    return data.string_value();
+    return data.is_string() ? data.string_value() : "0";
 }
 
 string read_json(Json data, int num_bytes, string(*json_reader)(Json)) {
@@ -350,26 +350,29 @@ string read_json_string(Json data, int num_bytes) {
     return read_json(data, num_bytes, get_json_string_value);
 }
 
-string read_json_array(Json data, int num_bytes, string(*json_reader)(Json)) {
+string read_json_array(Json data, int num_bytes, int expected_count, string(*json_reader)(Json)) {
     ostringstream data_string;
     bool first = true;
-    for (Json data_entry : data.array_items()) {
-        data_string << (first ? "" : ", ") << json_reader(data_entry);
+    vector<Json> data_items = data.array_items();
+    for (int i = 0; i < expected_count; i++) {
+        string item = i < data_items.size() ? json_reader(data_items[i]) : "0";
+
+        data_string << (first ? "" : ", ") << item;
         first = false;
     }
     return get_start_bytes(num_bytes) + data_string.str();
 }
 
-string read_json_bool_array(Json data, int num_bytes) {
-    return read_json_array(data, num_bytes, get_json_bool_value);
+string read_json_bool_array(Json data, int num_bytes, int expected_count) {
+    return read_json_array(data, num_bytes, expected_count, get_json_bool_value);
 }
 
-string read_json_int_array(Json data, int num_bytes) {
-    return read_json_array(data, num_bytes, get_json_int_value);
+string read_json_int_array(Json data, int num_bytes, int expected_count) {
+    return read_json_array(data, num_bytes, expected_count, get_json_int_value);
 }
 
-string read_json_string_array(Json data, int num_bytes) {
-    return read_json_array(data, num_bytes, get_json_string_value);
+string read_json_string_array(Json data, int num_bytes, int expected_count) {
+    return read_json_array(data, num_bytes, expected_count, get_json_string_value);
 }
 
 string generate_species_data_text(Json data) {
@@ -379,8 +382,10 @@ string generate_species_data_text(Json data) {
     text << ".include \"include/constants/ability.h\"\n";
     text << ".include \"include/constants/evolve_type.h\"\n";
     text << ".include \"include/constants/friend_area.h\"\n";
+    text << ".include \"include/constants/item.h\"\n";
     text << ".include \"include/constants/species.h\"\n";
     text << ".include \"include/constants/type.h\"\n";
+    text << ".include \"include/constants/walkable_tile.h\"\n";
     text << ".global gSpeciesData\n";
     text << "gSpeciesData:";
     for (Json data_entry : data.array_items()) {
@@ -392,10 +397,10 @@ string generate_species_data_text(Json data) {
             << read_json_int(data_entry["move_speed"], 4)
             << read_json_int(data_entry["dialogue_sprites"], 2)
             << read_json_bool(data_entry["unk12"])
-            << read_json_string_array(data_entry["types"], 1)
-            << read_json_int(data_entry["walkable_tiles"], 1)
+            << read_json_string_array(data_entry["types"], 1, 2)
+            << read_json_string(data_entry["walkable_tiles"], 1)
             << read_json_string(data_entry["friend_area"], 1)
-            << read_json_string_array(data_entry["abilities"], 1)
+            << read_json_string_array(data_entry["abilities"], 1, 2)
             << read_json_int(data_entry["shadow_size"], 1)
             << read_json_int(data_entry["unk1A"], 1)
             << read_json_int(data_entry["unk1B"], 1)
@@ -403,8 +408,8 @@ string generate_species_data_text(Json data) {
             << read_json_int(data_entry["unk1D"], 1)
             << read_json_int(data_entry["base_hp"], 2)
             << read_json_int(data_entry["base_exp"], 4)
-            << read_json_int_array(data_entry["base_att_spatt"], 2)
-            << read_json_int_array(data_entry["base_def_spdef"], 2)
+            << read_json_int_array(data_entry["base_att_spatt"], 2, 2)
+            << read_json_int_array(data_entry["base_def_spdef"], 2, 2)
             << read_json_int(data_entry["lowkick_dmg"], 2)
             << read_json_int(data_entry["sizeorb_dmg"], 2)
             << read_json_int(data_entry["unk30"], 1)
@@ -412,12 +417,18 @@ string generate_species_data_text(Json data) {
             << read_json_int(data_entry["unk32"], 1)
             << read_json_bool(data_entry["toolboxEnabled"])
             << read_json_string(data_entry["pre"]["evolve_from"], 2)
-            << read_json_string(data_entry["pre"]["evolve_type"], 2)
-            << read_json_int(data_entry["needs"]["evolve_need1"], 2)
-            << read_json_int(data_entry["needs"]["evolve_need2"], 2)
-            << read_json_int_array(data_entry["dexInternal"], 2)
+            << read_json_string(data_entry["pre"]["evolve_type"], 2);
+
+        if (data_entry["pre"]["evolve_type"] == "EVOLVE_TYPE_ITEM") {
+            text << read_json_string(data_entry["needs"]["evolve_need1"], 2);
+        } else {
+            text << read_json_int(data_entry["needs"]["evolve_need1"], 2);
+        }
+
+        text << read_json_int(data_entry["needs"]["evolve_need2"], 2)
+            << read_json_int_array(data_entry["dexInternal"], 2, 2)
             << read_json_int(data_entry["base_recruit"], 2)
-            << read_json_int_array(data_entry["alphabetParent"], 2)
+            << read_json_int_array(data_entry["alphabetParent"], 2, 2)
             << "\n.2byte 0\n";
     }
     text << TABLE_END;
@@ -440,11 +451,11 @@ string generate_item_data_text(Json data) {
             << read_json_int(data_entry["icon"], 1)
             << "\n.2byte 0"
             << read_json_string(data_entry["descriptionPointer"], 4)
-            << read_json_bool_array(data_entry["aiFlags"], 1)
+            << read_json_bool_array(data_entry["aiFlags"], 1, 3)
             << "\n.byte 0"
             << read_json_string(data_entry["move"], 2)
             << read_json_int(data_entry["order"], 1)
-            << read_json_int_array(data_entry["unkThrow1B"], 1)
+            << read_json_int_array(data_entry["unkThrow1B"], 1, 2)
             << read_json_int(data_entry["palette"], 1)
             << read_json_string(data_entry["category"], 1)
             << "\n.byte 0\n";
