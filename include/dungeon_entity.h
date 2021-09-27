@@ -160,7 +160,9 @@ struct DungeonEntityData
     u8 fillF8[0xFA - 0xF8];
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
     u8 unkFB;
-    /* 0xFC */ bool8 forceUseItem; // If true, an AI Pokémon is forced to try using their held item next turn. Unknown when this is set in regular gameplay.
+    // Set to true if the player makes a teammate use their held item.
+    // This is done by going to the teammate's held item in the toolbox and selecting "Use".
+    /* 0xFC */ bool8 useHeldItem;
     /* 0xFD */ u8 perishSongTimer; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
     u8 fillFE[0x100 - 0xFE];
     /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.

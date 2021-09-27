@@ -164,6 +164,7 @@ tools: $(TOOLDIRS)
 
 include dungeon_pokemon.mk
 include dungeon_floor.mk
+include data_pokemon.mk
 
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
@@ -188,7 +189,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c $$(C_DEP)
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP) dungeon_pokemon dungeon_floor
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP) dungeon_pokemon dungeon_floor data_pokemon
 	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
