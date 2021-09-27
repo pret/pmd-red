@@ -1,0 +1,5499 @@
+[
+    {
+        "name": "None",
+        "address": "0x0830cc28",
+        "namePointer": "0x0830f664",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x08306580",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 0,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_NOTHING"
+    },
+    {
+        "name": "Stick",
+        "address": "0x0830cc48",
+        "namePointer": "0x0830f65c",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 50,
+        "unkThrow1B": [
+            6,
+            10
+        ],
+        "palette": 1,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Iron Thorn",
+        "address": "0x0830cc68",
+        "namePointer": "0x0830f650",
+        "buyPrice": 4,
+        "sellPrice": 2,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 48,
+        "unkThrow1B": [
+            5,
+            8
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Silver Spike",
+        "address": "0x0830cc88",
+        "namePointer": "0x0830f640",
+        "buyPrice": 6,
+        "sellPrice": 3,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 49,
+        "unkThrow1B": [
+            5,
+            8
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Gold Fang",
+        "address": "0x0830cca8",
+        "namePointer": "0x0830f634",
+        "buyPrice": 8,
+        "sellPrice": 4,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 47,
+        "unkThrow1B": [
+            5,
+            5
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Cacnea Spike",
+        "address": "0x0830ccc8",
+        "namePointer": "0x0830f624",
+        "buyPrice": 10,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 45,
+        "unkThrow1B": [
+            5,
+            5
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Corsola Twig",
+        "address": "0x0830cce8",
+        "namePointer": "0x0830f614",
+        "buyPrice": 12,
+        "sellPrice": 6,
+        "type": "ITEM_TYPE_THROWABLE",
+        "icon": 0,
+        "descriptionPointer": "0x0830659b",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 46,
+        "unkThrow1B": [
+            5,
+            5
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_THROWABLE"
+    },
+    {
+        "name": "Gravelerock",
+        "address": "0x0830cd08",
+        "namePointer": "0x0830f608",
+        "buyPrice": 10,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_ROCK",
+        "icon": 1,
+        "descriptionPointer": "0x083065ce",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 52,
+        "unkThrow1B": [
+            3,
+            5
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_ROCKS"
+    },
+    {
+        "name": "Geo Pebble",
+        "address": "0x0830cd28",
+        "namePointer": "0x0830f5fc",
+        "buyPrice": 5,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_ROCK",
+        "icon": 1,
+        "descriptionPointer": "0x083065ce",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 51,
+        "unkThrow1B": [
+            7,
+            10
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_ROCKS"
+    },
+    {
+        "name": "Mobile Scarf",
+        "address": "0x0830cd48",
+        "namePointer": "0x0830f5ec",
+        "buyPrice": 1000,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x0830665f",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 4,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Heal Ribbon",
+        "address": "0x0830cd68",
+        "namePointer": "0x0830f5e0",
+        "buyPrice": 1100,
+        "sellPrice": 350,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306718",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 14,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Twist Band",
+        "address": "0x0830cd88",
+        "namePointer": "0x0830f5d4",
+        "buyPrice": 1200,
+        "sellPrice": 400,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083067a0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 32,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Scope Lens",
+        "address": "0x0830cda8",
+        "namePointer": "0x0830f5c8",
+        "buyPrice": 1300,
+        "sellPrice": 450,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x08306802",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 42,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Patsy Band",
+        "address": "0x0830cdc8",
+        "namePointer": "0x0830f5bc",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306855",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 28,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "No-Stick Cap",
+        "address": "0x0830cde8",
+        "namePointer": "0x0830f5ac",
+        "buyPrice": 1500,
+        "sellPrice": 550,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083068be",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 33,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Pierce Band",
+        "address": "0x0830ce08",
+        "namePointer": "0x0830f5a0",
+        "buyPrice": 1600,
+        "sellPrice": 600,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306915",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 22,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Joy Ribbon",
+        "address": "0x0830ce28",
+        "namePointer": "0x0830f594",
+        "buyPrice": 5000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306992",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 15,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "X-Ray Specs",
+        "address": "0x0830ce48",
+        "namePointer": "0x0830f588",
+        "buyPrice": 4000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x083069d7",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 44,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Persim Band",
+        "address": "0x0830ce68",
+        "namePointer": "0x0830f57c",
+        "buyPrice": 1500,
+        "sellPrice": 750,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306a26",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 29,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Power Band",
+        "address": "0x0830ce88",
+        "namePointer": "0x0830f570",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306a6b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 23,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Pecha Scarf",
+        "address": "0x0830cea8",
+        "namePointer": "0x0830f564",
+        "buyPrice": 1200,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306aa2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 6,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Insomniscope",
+        "address": "0x0830cec8",
+        "namePointer": "0x0830f554",
+        "buyPrice": 1200,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x08306afb",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 37,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Warp Scarf",
+        "address": "0x0830cee8",
+        "namePointer": "0x0830f548",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306b7c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 9,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Tight Belt",
+        "address": "0x0830cf08",
+        "namePointer": "0x0830f53c",
+        "buyPrice": 5000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306bd3",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 31,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Sneak Scarf",
+        "address": "0x0830cf28",
+        "namePointer": "0x0830f530",
+        "buyPrice": 2500,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306c25",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 7,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Gold Ribbon",
+        "address": "0x0830cf48",
+        "namePointer": "0x0830f524",
+        "buyPrice": 3000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306ca7",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 13,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Goggle Specs",
+        "address": "0x0830cf68",
+        "namePointer": "0x0830f514",
+        "buyPrice": 1500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x08306d07",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 40,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Diet Ribbon",
+        "address": "0x0830cf88",
+        "namePointer": "0x0830f508",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306d71",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 11,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Trap Scarf",
+        "address": "0x0830cfa8",
+        "namePointer": "0x0830f4fc",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306e2b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 8,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Racket Band",
+        "address": "0x0830cfc8",
+        "namePointer": "0x0830f4f0",
+        "buyPrice": 3000,
+        "sellPrice": 1300,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306e84",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 30,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Def. Scarf",
+        "address": "0x0830cfe8",
+        "namePointer": "0x0830f4e4",
+        "buyPrice": 3000,
+        "sellPrice": 1350,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306eff",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 2,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Stamina Band",
+        "address": "0x0830d008",
+        "namePointer": "0x0830f4d4",
+        "buyPrice": 3200,
+        "sellPrice": 1400,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306f37",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 19,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Plain Ribbon",
+        "address": "0x0830d028",
+        "namePointer": "0x0830f4c4",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306f82",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 17,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Special Band",
+        "address": "0x0830d048",
+        "namePointer": "0x0830f4b4",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08306fc3",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 18,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Zinc Band",
+        "address": "0x0830d068",
+        "namePointer": "0x0830f4a8",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307002",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 25,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Detect Band",
+        "address": "0x0830d088",
+        "namePointer": "0x0830f49c",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307042",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 26,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Alert Specs",
+        "address": "0x0830d0a8",
+        "namePointer": "0x0830f490",
+        "buyPrice": 4000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x0830707a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 39,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Dodge Scarf",
+        "address": "0x0830d0c8",
+        "namePointer": "0x0830f484",
+        "buyPrice": 5000,
+        "sellPrice": 2500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083070dc",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 3,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Bounce Band",
+        "address": "0x0830d0e8",
+        "namePointer": "0x0830f478",
+        "buyPrice": 3500,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307122",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 10,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Curve Band",
+        "address": "0x0830d108",
+        "namePointer": "0x0830f46c",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307160",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 21,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Whiff Specs",
+        "address": "0x0830d128",
+        "namePointer": "0x0830f460",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x083071fd",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 43,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "No-Aim Scope",
+        "address": "0x0830d148",
+        "namePointer": "0x0830f450",
+        "buyPrice": 100,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x08307254",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 38,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Lockon Specs",
+        "address": "0x0830d168",
+        "namePointer": "0x0830f440",
+        "buyPrice": 4000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 13,
+        "descriptionPointer": "0x083072ab",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 41,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_SPECS"
+    },
+    {
+        "name": "Munch Belt",
+        "address": "0x0830d188",
+        "namePointer": "0x0830f434",
+        "buyPrice": 4000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083072fa",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 27,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Pass Scarf",
+        "address": "0x0830d1a8",
+        "namePointer": "0x0830f428",
+        "buyPrice": 4000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307398",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 5,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Weather Band",
+        "address": "0x0830d1c8",
+        "namePointer": "0x0830f418",
+        "buyPrice": 4000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307461",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 24,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Friend Bow",
+        "address": "0x0830d1e8",
+        "namePointer": "0x0830f40c",
+        "buyPrice": 5000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083074b2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 12,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Beauty Scarf",
+        "address": "0x0830d208",
+        "namePointer": "0x0830f3fc",
+        "buyPrice": 9000,
+        "sellPrice": 5000,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307526",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 1,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_SCARFS"
+    },
+    {
+        "name": "Sun Ribbon",
+        "address": "0x0830d228",
+        "namePointer": "0x0830f3f0",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083075b8",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 20,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Lunar Ribbon",
+        "address": "0x0830d248",
+        "namePointer": "0x0830f3e0",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x08307641",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 16,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Ring D",
+        "address": "0x0830d268",
+        "namePointer": "0x0830f3d8",
+        "buyPrice": 5100,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083076ca",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 34,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Ring E",
+        "address": "0x0830d288",
+        "namePointer": "0x0830f3d0",
+        "buyPrice": 5200,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083076d2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 35,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Ring F",
+        "address": "0x0830d2a8",
+        "namePointer": "0x0830f3c8",
+        "buyPrice": 5300,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_HOLD_ITEM",
+        "icon": 4,
+        "descriptionPointer": "0x083076da",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 36,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_RIBBONS"
+    },
+    {
+        "name": "Heal Seed",
+        "address": "0x0830d2c8",
+        "namePointer": "0x0830f3bc",
+        "buyPrice": 250,
+        "sellPrice": 120,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x083076e2",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 87,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Wish Stone",
+        "address": "0x0830d2e8",
+        "namePointer": "0x0830f3b0",
+        "buyPrice": 4,
+        "sellPrice": 2,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 7,
+        "descriptionPointer": "0x08307743",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 110,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_MONEY_WISH_STONE"
+    },
+    {
+        "name": "Oran Berry",
+        "address": "0x0830d308",
+        "namePointer": "0x0830f3a4",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x083077d7",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 78,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Sitrus Berry",
+        "address": "0x0830d328",
+        "namePointer": "0x0830f394",
+        "buyPrice": 4000,
+        "sellPrice": 100,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x0830782f",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 81,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Eyedrop Seed",
+        "address": "0x0830d348",
+        "namePointer": "0x0830f384",
+        "buyPrice": 60,
+        "sellPrice": 20,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x083078e6",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 86,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Reviver Seed",
+        "address": "0x0830d368",
+        "namePointer": "0x0830f374",
+        "buyPrice": 800,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307994",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 93,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Blinker Seed",
+        "address": "0x0830d388",
+        "namePointer": "0x0830f364",
+        "buyPrice": 50,
+        "sellPrice": 20,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307a3c",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 84,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Doom Seed",
+        "address": "0x0830d3a8",
+        "namePointer": "0x0830f358",
+        "buyPrice": 20,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307afb",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 85,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Allure Seed",
+        "address": "0x0830d3c8",
+        "namePointer": "0x0830f34c",
+        "buyPrice": 60,
+        "sellPrice": 30,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307b6c",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 82,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Life Seed",
+        "address": "0x0830d3e8",
+        "namePointer": "0x0830f340",
+        "buyPrice": 1000,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307bdd",
+        "aiFlags": [
+            true,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 90,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Rawst Berry",
+        "address": "0x0830d408",
+        "namePointer": "0x0830f334",
+        "buyPrice": 150,
+        "sellPrice": 20,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x08307c55",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 80,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Hunger Seed",
+        "address": "0x0830d428",
+        "namePointer": "0x0830f328",
+        "buyPrice": 50,
+        "sellPrice": 20,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307cbc",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 88,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Quick Seed",
+        "address": "0x0830d448",
+        "namePointer": "0x0830f31c",
+        "buyPrice": 30,
+        "sellPrice": 15,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307d93",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 92,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Pecha Berry",
+        "address": "0x0830d468",
+        "namePointer": "0x0830f310",
+        "buyPrice": 80,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x08307e13",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 79,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Cheri Berry",
+        "address": "0x0830d488",
+        "namePointer": "0x0830f304",
+        "buyPrice": 120,
+        "sellPrice": 20,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x08307e97",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 76,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Totter Seed",
+        "address": "0x0830d4a8",
+        "namePointer": "0x0830f2f8",
+        "buyPrice": 60,
+        "sellPrice": 30,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307f05",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 96,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Sleep Seed",
+        "address": "0x0830d4c8",
+        "namePointer": "0x0830f2ec",
+        "buyPrice": 70,
+        "sellPrice": 35,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08307fc4",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 94,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Plain Seed",
+        "address": "0x0830d4e8",
+        "namePointer": "0x0830f2e0",
+        "buyPrice": 6,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08308052",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 91,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Warp Seed",
+        "address": "0x0830d508",
+        "namePointer": "0x0830f2d4",
+        "buyPrice": 20,
+        "sellPrice": 10,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x083080ae",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 97,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Blast Seed",
+        "address": "0x0830d528",
+        "namePointer": "0x0830f2c8",
+        "buyPrice": 30,
+        "sellPrice": 15,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x0830812f",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 83,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Ginseng",
+        "address": "0x0830d548",
+        "namePointer": "0x0830f2c0",
+        "buyPrice": 2600,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x083081a6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 99,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Joy Seed",
+        "address": "0x0830d568",
+        "namePointer": "0x0830f2b4",
+        "buyPrice": 3000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x0830824f",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 89,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Chesto Berry",
+        "address": "0x0830d588",
+        "namePointer": "0x0830f2a4",
+        "buyPrice": 30,
+        "sellPrice": 15,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 2,
+        "descriptionPointer": "0x083082c0",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 77,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Stun Seed",
+        "address": "0x0830d5a8",
+        "namePointer": "0x0830f298",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 14,
+        "descriptionPointer": "0x08308368",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 95,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Max Elixir",
+        "address": "0x0830d5c8",
+        "namePointer": "0x0830f28c",
+        "buyPrice": 250,
+        "sellPrice": 100,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x0830841f",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 101,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Protein",
+        "address": "0x0830d5e8",
+        "namePointer": "0x0830f284",
+        "buyPrice": 5000,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x083084a0",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 102,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Calcium",
+        "address": "0x0830d608",
+        "namePointer": "0x0830f27c",
+        "buyPrice": 6000,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x08308507",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 98,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Iron",
+        "address": "0x0830d628",
+        "namePointer": "0x0830f274",
+        "buyPrice": 7000,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x08308576",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 100,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Zinc",
+        "address": "0x0830d648",
+        "namePointer": "0x0830f26c",
+        "buyPrice": 8000,
+        "sellPrice": 5,
+        "type": "ITEM_TYPE_BERRY_SEED",
+        "icon": 12,
+        "descriptionPointer": "0x083085de",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 103,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_HEALING"
+    },
+    {
+        "name": "Apple",
+        "address": "0x0830d668",
+        "namePointer": "0x0830f264",
+        "buyPrice": 25,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 3,
+        "descriptionPointer": "0x0830864e",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 53,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Big Apple",
+        "address": "0x0830d688",
+        "namePointer": "0x0830f258",
+        "buyPrice": 50,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 3,
+        "descriptionPointer": "0x083086e1",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 55,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Grimy Food",
+        "address": "0x0830d6a8",
+        "namePointer": "0x0830f24c",
+        "buyPrice": 5,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 1,
+        "descriptionPointer": "0x08308771",
+        "aiFlags": [
+            false,
+            false,
+            true
+        ],
+        "move": "MOVE_NONE",
+        "order": 57,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Huge Apple",
+        "address": "0x0830d6c8",
+        "namePointer": "0x0830f240",
+        "buyPrice": 100,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 3,
+        "descriptionPointer": "0x083087e8",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 58,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "White Gummi",
+        "address": "0x0830d6e8",
+        "namePointer": "0x0830f234",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308858",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 74,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Red Gummi",
+        "address": "0x0830d708",
+        "namePointer": "0x0830f228",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308908",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 70,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Blue Gummi",
+        "address": "0x0830d728",
+        "namePointer": "0x0830f21c",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x083089b6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 60,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Grass Gummi",
+        "address": "0x0830d748",
+        "namePointer": "0x0830f210",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308a65",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 64,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Yellow Gummi",
+        "address": "0x0830d768",
+        "namePointer": "0x0830f200",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308b14",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 75,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Clear Gummi",
+        "address": "0x0830d788",
+        "namePointer": "0x0830f1f4",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308bc6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 62,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Orange Gummi",
+        "address": "0x0830d7a8",
+        "namePointer": "0x0830f1e4",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308c73",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 67,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 9,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Pink Gummi",
+        "address": "0x0830d7c8",
+        "namePointer": "0x0830f1d8",
+        "buyPrice": 1500,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308d25",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 68,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 4,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Brown Gummi",
+        "address": "0x0830d7e8",
+        "namePointer": "0x0830f1cc",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308dd5",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 61,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 8,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Sky Gummi",
+        "address": "0x0830d808",
+        "namePointer": "0x0830f1c0",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308e85",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 73,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Gold Gummi",
+        "address": "0x0830d828",
+        "namePointer": "0x0830f1b4",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308f35",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 63,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Green Gummi",
+        "address": "0x0830d848",
+        "namePointer": "0x0830f1a8",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08308fe6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 66,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Gray Gummi",
+        "address": "0x0830d868",
+        "namePointer": "0x0830f19c",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08309093",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 65,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Purple Gummi",
+        "address": "0x0830d888",
+        "namePointer": "0x0830f18c",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x08309141",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 69,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 7,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Royal Gummi",
+        "address": "0x0830d8a8",
+        "namePointer": "0x0830f180",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x083091f0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 71,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Black Gummi",
+        "address": "0x0830d8c8",
+        "namePointer": "0x0830f174",
+        "buyPrice": 200,
+        "sellPrice": 50,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x083092a0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 59,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Silver Gummi",
+        "address": "0x0830d8e8",
+        "namePointer": "0x0830f164",
+        "buyPrice": 1000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 17,
+        "descriptionPointer": "0x0830934e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 72,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Banana",
+        "address": "0x0830d908",
+        "namePointer": "0x0830f15c",
+        "buyPrice": 9000,
+        "sellPrice": 5000,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 19,
+        "descriptionPointer": "0x083093fd",
+        "aiFlags": [
+            true,
+            true,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 54,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_FOOD"
+    },
+    {
+        "name": "Chestnut",
+        "address": "0x0830d928",
+        "namePointer": "0x0830f150",
+        "buyPrice": 3,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_APPLE_GUMMI",
+        "icon": 11,
+        "descriptionPointer": "0x083094bd",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 56,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_CHESTNUT"
+    },
+    {
+        "name": "Pok\u00e9",
+        "address": "0x0830d948",
+        "namePointer": "0x0830f148",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "type": "ITEM_TYPE_MONEY",
+        "icon": 6,
+        "descriptionPointer": "0x08309515",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 239,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_MONEY_WISH_STONE"
+    },
+    {
+        "name": "Upgrade",
+        "address": "0x0830d968",
+        "namePointer": "0x0830f140",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x08309532",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 117,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "King\u2019s Rock",
+        "address": "0x0830d988",
+        "namePointer": "0x0830f134",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 114,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 1,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Thunderstone",
+        "address": "0x0830d9a8",
+        "namePointer": "0x0830f124",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 108,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Deepseascale",
+        "address": "0x0830d9c8",
+        "namePointer": "0x0830f114",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 20,
+        "descriptionPointer": "0x08309532",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 111,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Deepseatooth",
+        "address": "0x0830d9e8",
+        "namePointer": "0x0830f104",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x08309532",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 113,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Sun Stone",
+        "address": "0x0830da08",
+        "namePointer": "0x0830f0f8",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 107,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Moon Stone",
+        "address": "0x0830da28",
+        "namePointer": "0x0830f0ec",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 106,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 7,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Fire Stone",
+        "address": "0x0830da48",
+        "namePointer": "0x0830f0e0",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 104,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Water Stone",
+        "address": "0x0830da68",
+        "namePointer": "0x0830f0d4",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 109,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Metal Coat",
+        "address": "0x0830da88",
+        "namePointer": "0x0830f0c8",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 116,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 7,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Leaf Stone",
+        "address": "0x0830daa8",
+        "namePointer": "0x0830f0bc",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 1,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 105,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Dragon Scale",
+        "address": "0x0830dac8",
+        "namePointer": "0x0830f0ac",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 20,
+        "descriptionPointer": "0x08309532",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 112,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Link Cable",
+        "address": "0x0830dae8",
+        "namePointer": "0x0830f0a0",
+        "buyPrice": 3000,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x0830959a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 115,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 10,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Ice Part",
+        "address": "0x0830db08",
+        "namePointer": "0x0830f094",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 18,
+        "descriptionPointer": "0x08309601",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 118,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Steel Part",
+        "address": "0x0830db28",
+        "namePointer": "0x0830f088",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 18,
+        "descriptionPointer": "0x083096da",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 122,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 11,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Rock Part",
+        "address": "0x0830db48",
+        "namePointer": "0x0830f07c",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 18,
+        "descriptionPointer": "0x08309781",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 121,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 6,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Music Box",
+        "address": "0x0830db68",
+        "namePointer": "0x0830f070",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 5,
+        "descriptionPointer": "0x083097f5",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 120,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Key",
+        "address": "0x0830db88",
+        "namePointer": "0x0830f06c",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_MISC",
+        "icon": 16,
+        "descriptionPointer": "0x08309875",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 119,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_MISC"
+    },
+    {
+        "name": "Used TM",
+        "address": "0x0830dba8",
+        "namePointer": "0x0830f060",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_USED_TM",
+        "icon": 8,
+        "descriptionPointer": "0x083098a3",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 123,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 2,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Focus Punch",
+        "address": "0x0830dbc8",
+        "namePointer": "0x0830f050",
+        "buyPrice": 5000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309925",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FOCUS_PUNCH",
+        "order": 142,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Dragon Claw",
+        "address": "0x0830dbe8",
+        "namePointer": "0x0830f040",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x083099cb",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DRAGON_CLAW",
+        "order": 134,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Water Pulse",
+        "address": "0x0830dc08",
+        "namePointer": "0x0830f030",
+        "buyPrice": 7500,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309a12",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_WATER_PULSE",
+        "order": 176,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Calm Mind",
+        "address": "0x0830dc28",
+        "namePointer": "0x0830f024",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309a9a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_CALM_MIND",
+        "order": 130,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Roar",
+        "address": "0x0830dc48",
+        "namePointer": "0x0830f01c",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309b13",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ROAR",
+        "order": 156,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Toxic",
+        "address": "0x0830dc68",
+        "namePointer": "0x0830f014",
+        "buyPrice": 6000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309b90",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TOXIC",
+        "order": 174,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Hail",
+        "address": "0x0830dc88",
+        "namePointer": "0x0830f008",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x08309c26",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_HAIL",
+        "order": 186,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Bulk Up",
+        "address": "0x0830dca8",
+        "namePointer": "0x0830effc",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309c9c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BULK_UP",
+        "order": 128,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Bullet Seed",
+        "address": "0x0830dcc8",
+        "namePointer": "0x0830efec",
+        "buyPrice": 6000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309d00",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BULLET_SEED",
+        "order": 129,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Hidden Power",
+        "address": "0x0830dce8",
+        "namePointer": "0x0830efdc",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309d7f",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_HIDDEN_POWER",
+        "order": 145,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Sunny Day",
+        "address": "0x0830dd08",
+        "namePointer": "0x0830efd0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x08309df5",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SUNNY_DAY",
+        "order": 221,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Taunt",
+        "address": "0x0830dd28",
+        "namePointer": "0x0830efc8",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309e6c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TAUNT",
+        "order": 169,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Ice Beam",
+        "address": "0x0830dd48",
+        "namePointer": "0x0830efbc",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309ec5",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ICE_BEAM",
+        "order": 147,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Blizzard",
+        "address": "0x0830dd68",
+        "namePointer": "0x0830efb0",
+        "buyPrice": 9000,
+        "sellPrice": 3000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309f60",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BLIZZARD",
+        "order": 126,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Hyper Beam",
+        "address": "0x0830dd88",
+        "namePointer": "0x0830efa0",
+        "buyPrice": 9000,
+        "sellPrice": 3000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x08309fe8",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_HYPER_BEAM",
+        "order": 146,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Light Screen",
+        "address": "0x0830dda8",
+        "namePointer": "0x0830ef90",
+        "buyPrice": 2500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a08a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_LIGHT_SCREEN",
+        "order": 149,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Protect",
+        "address": "0x0830ddc8",
+        "namePointer": "0x0830ef84",
+        "buyPrice": 6000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a117",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_PROTECT",
+        "order": 151,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Rain Dance",
+        "address": "0x0830dde8",
+        "namePointer": "0x0830ef78",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830a19e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_RAIN_DANCE",
+        "order": 205,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Giga Drain",
+        "address": "0x0830de08",
+        "namePointer": "0x0830ef68",
+        "buyPrice": 7000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a214",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_GIGA_DRAIN",
+        "order": 144,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Safeguard",
+        "address": "0x0830de28",
+        "namePointer": "0x0830ef5c",
+        "buyPrice": 6000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a2a4",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SAFEGUARD",
+        "order": 158,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Frustration",
+        "address": "0x0830de48",
+        "namePointer": "0x0830ef4c",
+        "buyPrice": 3000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a33d",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FRUSTRATION",
+        "order": 143,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "SolarBeam",
+        "address": "0x0830de68",
+        "namePointer": "0x0830ef40",
+        "buyPrice": 7000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a3c1",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SOLARBEAM",
+        "order": 164,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Iron Tail",
+        "address": "0x0830de88",
+        "namePointer": "0x0830ef34",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a460",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_IRON_TAIL",
+        "order": 148,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Thunderbolt",
+        "address": "0x0830dea8",
+        "namePointer": "0x0830ef24",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a4e3",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_THUNDERBOLT",
+        "order": 172,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Thunder",
+        "address": "0x0830dec8",
+        "namePointer": "0x0830ef18",
+        "buyPrice": 9000,
+        "sellPrice": 3000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a575",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_THUNDER",
+        "order": 171,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Earthquake",
+        "address": "0x0830dee8",
+        "namePointer": "0x0830ef08",
+        "buyPrice": 6500,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a605",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_EARTHQUAKE",
+        "order": 135,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Return",
+        "address": "0x0830df08",
+        "namePointer": "0x0830eefc",
+        "buyPrice": 3000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a68b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_RETURN",
+        "order": 155,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Dig",
+        "address": "0x0830df28",
+        "namePointer": "0x0830eef4",
+        "buyPrice": 3000,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a6f9",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DIG",
+        "order": 132,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Psychic",
+        "address": "0x0830df48",
+        "namePointer": "0x0830eee8",
+        "buyPrice": 5000,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a790",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_PSYCHIC",
+        "order": 152,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Shadow Ball",
+        "address": "0x0830df68",
+        "namePointer": "0x0830eed8",
+        "buyPrice": 6500,
+        "sellPrice": 1000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a819",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SHADOW_BALL",
+        "order": 160,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Brick Break",
+        "address": "0x0830df88",
+        "namePointer": "0x0830eec8",
+        "buyPrice": 2500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a8b9",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BRICK_BREAK",
+        "order": 127,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Double Team",
+        "address": "0x0830dfa8",
+        "namePointer": "0x0830eeb8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830a92f",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DOUBLE_TEAM",
+        "order": 184,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Reflect",
+        "address": "0x0830dfc8",
+        "namePointer": "0x0830eeac",
+        "buyPrice": 2500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830a97e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_REFLECT",
+        "order": 153,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Shock Wave",
+        "address": "0x0830dfe8",
+        "namePointer": "0x0830ee9c",
+        "buyPrice": 7500,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830aa1b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SHOCK_WAVE",
+        "order": 161,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Flamethrower",
+        "address": "0x0830e008",
+        "namePointer": "0x0830ee8c",
+        "buyPrice": 8000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830aa87",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FLAMETHROWER",
+        "order": 139,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Sludge Bomb",
+        "address": "0x0830e028",
+        "namePointer": "0x0830ee7c",
+        "buyPrice": 7500,
+        "sellPrice": 1500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ab26",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SLUDGE_BOMB",
+        "order": 163,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Sandstorm",
+        "address": "0x0830e048",
+        "namePointer": "0x0830ee70",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830abd0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SANDSTORM",
+        "order": 210,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Fire Blast",
+        "address": "0x0830e068",
+        "namePointer": "0x0830ee60",
+        "buyPrice": 9000,
+        "sellPrice": 3000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ac4b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FIRE_BLAST",
+        "order": 138,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Rock Tomb",
+        "address": "0x0830e088",
+        "namePointer": "0x0830ee54",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830acd5",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ROCK_TOMB",
+        "order": 208,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Aerial Ace",
+        "address": "0x0830e0a8",
+        "namePointer": "0x0830ee44",
+        "buyPrice": 7500,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ad51",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_AERIAL_ACE",
+        "order": 124,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Torment",
+        "address": "0x0830e0c8",
+        "namePointer": "0x0830ee38",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ada9",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TORMENT",
+        "order": 173,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Facade",
+        "address": "0x0830e0e8",
+        "namePointer": "0x0830ee2c",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ae29",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FACADE",
+        "order": 137,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Secret Power",
+        "address": "0x0830e108",
+        "namePointer": "0x0830ee1c",
+        "buyPrice": 1500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830aed0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SECRET_POWER",
+        "order": 159,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Rest",
+        "address": "0x0830e128",
+        "namePointer": "0x0830ee14",
+        "buyPrice": 3000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830af56",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_REST",
+        "order": 154,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Attract",
+        "address": "0x0830e148",
+        "namePointer": "0x0830ee08",
+        "buyPrice": 1500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830afef",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ATTRACT",
+        "order": 125,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Thief",
+        "address": "0x0830e168",
+        "namePointer": "0x0830ee00",
+        "buyPrice": 1500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b046",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_THIEF",
+        "order": 170,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Steel WIng",
+        "address": "0x0830e188",
+        "namePointer": "0x0830edf0",
+        "buyPrice": 7000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b0d8",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_STEEL_WING",
+        "order": 166,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Skill Swap",
+        "address": "0x0830e1a8",
+        "namePointer": "0x0830ede0",
+        "buyPrice": 7000,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b15a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SKILL_SWAP",
+        "order": 162,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Snatch",
+        "address": "0x0830e1c8",
+        "namePointer": "0x0830edd0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b1c6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SNATCH",
+        "order": 218,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Overheat",
+        "address": "0x0830e1e8",
+        "namePointer": "0x0830edc4",
+        "buyPrice": 6500,
+        "sellPrice": 2000,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b23a",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_OVERHEAT",
+        "order": 150,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Wide Slash",
+        "address": "0x0830e208",
+        "namePointer": "0x0830edb4",
+        "buyPrice": 2500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b2e1",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_WIDE_SLASH",
+        "order": 178,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Excavate",
+        "address": "0x0830e228",
+        "namePointer": "0x0830eda8",
+        "buyPrice": 2500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b352",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_EXCAVATE",
+        "order": 136,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Spin Slash",
+        "address": "0x0830e248",
+        "namePointer": "0x0830ed98",
+        "buyPrice": 2500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830b3a1",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SPIN_SLASH",
+        "order": 165,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "See-Trap Orb",
+        "address": "0x0830e268",
+        "namePointer": "0x0830ed88",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b3fb",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SEE_TRAP",
+        "order": 212,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Mug Orb",
+        "address": "0x0830e288",
+        "namePointer": "0x0830ed7c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b43c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TAKEAWAY",
+        "order": 195,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Rebound Orb",
+        "address": "0x0830e2a8",
+        "namePointer": "0x0830ed6c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b4bb",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_REBOUND",
+        "order": 206,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Lob Orb",
+        "address": "0x0830e2c8",
+        "namePointer": "0x0830ed60",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b555",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BLOOP_SLASH",
+        "order": 191,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Switcher Orb",
+        "address": "0x0830e2e8",
+        "namePointer": "0x0830ed50",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b59d",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SWITCHER",
+        "order": 222,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Blowback Orb",
+        "address": "0x0830e308",
+        "namePointer": "0x0830ed40",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b601",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BLOWBACK",
+        "order": 179,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Warp Orb",
+        "address": "0x0830e328",
+        "namePointer": "0x0830ed34",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b680",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_WARP",
+        "order": 230,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Transfer Orb",
+        "address": "0x0830e348",
+        "namePointer": "0x0830ed24",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b6da",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TRANSFER",
+        "order": 225,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Slow Orb",
+        "address": "0x0830e368",
+        "namePointer": "0x0830ed18",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b725",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SLOW_DOWN",
+        "order": 216,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Quick Orb",
+        "address": "0x0830e388",
+        "namePointer": "0x0830ed0c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b786",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SPEED_BOOST",
+        "order": 203,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Luminous Orb",
+        "address": "0x0830e3a8",
+        "namePointer": "0x0830ecfc",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b802",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SEARCHLIGHT",
+        "order": 193,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Petrify Orb",
+        "address": "0x0830e3c8",
+        "namePointer": "0x0830ecec",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b83c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_PETRIFY",
+        "order": 199,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Stayaway Orb",
+        "address": "0x0830e3e8",
+        "namePointer": "0x0830ecdc",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b8b4",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_STAY_AWAY",
+        "order": 220,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Pounce Orb",
+        "address": "0x0830e408",
+        "namePointer": "0x0830eccc",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b920",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_POUNCE",
+        "order": 202,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Trawl Orb",
+        "address": "0x0830e428",
+        "namePointer": "0x0830ecc0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830b9b2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TRAWL",
+        "order": 228,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Cleanse Orb",
+        "address": "0x0830e448",
+        "namePointer": "0x0830ecb0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830ba36",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_CLEANSE",
+        "order": 180,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Observer Orb",
+        "address": "0x0830e468",
+        "namePointer": "0x0830eca0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830baab",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_OBSERVER",
+        "order": 196,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Decoy Orb",
+        "address": "0x0830e488",
+        "namePointer": "0x0830ec94",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bb18",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DECOY_MAKER",
+        "order": 181,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Slumber Orb",
+        "address": "0x0830e4a8",
+        "namePointer": "0x0830ec84",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bb90",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SIESTA",
+        "order": 217,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Totter Orb",
+        "address": "0x0830e4c8",
+        "namePointer": "0x0830ec74",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bc08",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TOTTER",
+        "order": 224,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Two-Edge Orb",
+        "address": "0x0830e4e8",
+        "namePointer": "0x0830ec64",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bc8e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TWO_EDGE",
+        "order": 229,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Silence Orb",
+        "address": "0x0830e508",
+        "namePointer": "0x0830ec54",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bd0e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NO_MOVE",
+        "order": 214,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Escape Orb",
+        "address": "0x0830e528",
+        "namePointer": "0x0830ec44",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bd95",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ESCAPE",
+        "order": 183,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Scanner Orb",
+        "address": "0x0830e548",
+        "namePointer": "0x0830ec34",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bdf0",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SCAN",
+        "order": 211,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Radar Orb",
+        "address": "0x0830e568",
+        "namePointer": "0x0830ec28",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830be3d",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_POWER_EARS",
+        "order": 204,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Drought Orb",
+        "address": "0x0830e588",
+        "namePointer": "0x0830ec18",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830be7f",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DROUGHT",
+        "order": 182,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Trapbust Orb",
+        "address": "0x0830e5a8",
+        "namePointer": "0x0830ec08",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bec4",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TRAP_BUSTER",
+        "order": 226,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Rollcall Orb",
+        "address": "0x0830e5c8",
+        "namePointer": "0x0830ebf8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bef9",
+        "aiFlags": [
+            true,
+            false,
+            false
+        ],
+        "move": "MOVE_WILD_CALL",
+        "order": 209,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Invisify Orb",
+        "address": "0x0830e5e8",
+        "namePointer": "0x0830ebe8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bf46",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_INVISIFY",
+        "order": 189,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "One-Shot Orb",
+        "address": "0x0830e608",
+        "namePointer": "0x0830ebd8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bf8b",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ONE_SHOT",
+        "order": 198,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Identify Orb",
+        "address": "0x0830e628",
+        "namePointer": "0x0830ebc8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830bfd3",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_HP_GAUGE",
+        "order": 188,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Vacuum-Cut",
+        "address": "0x0830e648",
+        "namePointer": "0x0830ebb8",
+        "buyPrice": 2500,
+        "sellPrice": 300,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c030",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_VACUUM_CUT",
+        "order": 175,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 5,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Reviver Orb",
+        "address": "0x0830e668",
+        "namePointer": "0x0830eba8",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c080",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_REVIVER",
+        "order": 207,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Shocker Orb",
+        "address": "0x0830e688",
+        "namePointer": "0x0830eb98",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c0ff",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SHOCKER",
+        "order": 213,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Sizebust Orb",
+        "address": "0x0830e6a8",
+        "namePointer": "0x0830eb88",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c17c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ECHO",
+        "order": 215,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "One-Room Orb",
+        "address": "0x0830e6c8",
+        "namePointer": "0x0830eb78",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c1ef",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ONE_ROOM",
+        "order": 197,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Fill-In Orb",
+        "address": "0x0830e6e8",
+        "namePointer": "0x0830eb68",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c24e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FILL_IN",
+        "order": 185,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Trapper Orb",
+        "address": "0x0830e708",
+        "namePointer": "0x0830eb58",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c2ac",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_TRAPPER",
+        "order": 227,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Possess Orb",
+        "address": "0x0830e728",
+        "namePointer": "0x0830eb48",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c30e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_POSSESS",
+        "order": 201,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Itemizer Orb",
+        "address": "0x0830e748",
+        "namePointer": "0x0830eb38",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c384",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ITEMIZE",
+        "order": 190,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Hurl Orb",
+        "address": "0x0830e768",
+        "namePointer": "0x0830eb2c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c3c7",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_HURL",
+        "order": 187,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Mobile Orb",
+        "address": "0x0830e788",
+        "namePointer": "0x0830eb1c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c415",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_MOBILE",
+        "order": 194,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Toss Orb",
+        "address": "0x0830e7a8",
+        "namePointer": "0x0830eb10",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c4a6",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ITEM_TOSS",
+        "order": 223,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Stairs Orb",
+        "address": "0x0830e7c8",
+        "namePointer": "0x0830eb00",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c4cb",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SEE_STAIRS",
+        "order": 219,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Longtoss Orb",
+        "address": "0x0830e7e8",
+        "namePointer": "0x0830eaf0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c50f",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_LONG_TOSS",
+        "order": 192,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Pierce Orb",
+        "address": "0x0830e808",
+        "namePointer": "0x0830eae0",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830c596",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_PIERCE",
+        "order": 200,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "Cut",
+        "address": "0x0830e828",
+        "namePointer": "0x0830ead8",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c622",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_CUT",
+        "order": 131,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Fly",
+        "address": "0x0830e848",
+        "namePointer": "0x0830ead0",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c6a2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FLY",
+        "order": 141,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Surf",
+        "address": "0x0830e868",
+        "namePointer": "0x0830eac8",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c74c",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_SURF",
+        "order": 168,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Strength",
+        "address": "0x0830e888",
+        "namePointer": "0x0830eabc",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c7ec",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_STRENGTH",
+        "order": 167,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Flash",
+        "address": "0x0830e8a8",
+        "namePointer": "0x0830eab4",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c886",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_FLASH",
+        "order": 140,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Rock Smash",
+        "address": "0x0830e8c8",
+        "namePointer": "0x0830eaa4",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c918",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_ROCK_SMASH",
+        "order": 157,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Waterfall",
+        "address": "0x0830e8e8",
+        "namePointer": "0x0830ea98",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830c9a7",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_WATERFALL",
+        "order": 177,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Dive",
+        "address": "0x0830e908",
+        "namePointer": "0x0830ea90",
+        "buyPrice": 2,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_TM",
+        "icon": 8,
+        "descriptionPointer": "0x0830ca1e",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_DIVE",
+        "order": 133,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 3,
+        "category": "ITEM_CATEGORY_TM"
+    },
+    {
+        "name": "Link Box",
+        "address": "0x0830e928",
+        "namePointer": "0x0830ea84",
+        "buyPrice": 3000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cad2",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 235,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    },
+    {
+        "name": "Switch Box",
+        "address": "0x0830e948",
+        "namePointer": "0x0830ea78",
+        "buyPrice": 1500,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cb67",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 237,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    },
+    {
+        "name": "Weavile Fig",
+        "address": "0x0830e968",
+        "namePointer": "0x0830ea6c",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cbec",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 238,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    },
+    {
+        "name": "Mime Jr. Fig",
+        "address": "0x0830e988",
+        "namePointer": "0x0830ea5c",
+        "buyPrice": 1,
+        "sellPrice": 1,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cc01",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 236,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    },
+    {
+        "name": "Beatup Orb",
+        "address": "0x0830e9a8",
+        "namePointer": "0x0830ea4c",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "type": "ITEM_TYPE_ORB",
+        "icon": 15,
+        "descriptionPointer": "0x0830cc17",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_BEAT_UP",
+        "order": 231,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_ORBS"
+    },
+    {
+        "name": "G Machine 6",
+        "address": "0x0830e9c8",
+        "namePointer": "0x0830ea40",
+        "buyPrice": 8000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cc17",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 232,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    },
+    {
+        "name": "G Machine 7",
+        "address": "0x0830e9e8",
+        "namePointer": "0x0830ea34",
+        "buyPrice": 8000,
+        "sellPrice": 500,
+        "type": "ITEM_TYPE_LINK_BOX",
+        "icon": 10,
+        "descriptionPointer": "0x0830cc17",
+        "aiFlags": [
+            false,
+            false,
+            false
+        ],
+        "move": "MOVE_NONE",
+        "order": 233,
+        "unkThrow1B": [
+            0,
+            0
+        ],
+        "palette": 0,
+        "category": "ITEM_CATEGORY_LINK_BOX"
+    }
+]
