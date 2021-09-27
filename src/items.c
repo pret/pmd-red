@@ -1,6 +1,5 @@
 #include "global.h"
 #include "file_system.h"
-#include "constants/item.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "random.h"

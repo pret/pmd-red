@@ -1,7 +1,6 @@
 [
     {
         "name": "None",
-        "address": "0x0830cc28",
         "namePointer": "0x0830f664",
         "buyPrice": 0,
         "sellPrice": 0,
@@ -24,7 +23,6 @@
     },
     {
         "name": "Stick",
-        "address": "0x0830cc48",
         "namePointer": "0x0830f65c",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -47,7 +45,6 @@
     },
     {
         "name": "Iron Thorn",
-        "address": "0x0830cc68",
         "namePointer": "0x0830f650",
         "buyPrice": 4,
         "sellPrice": 2,
@@ -70,7 +67,6 @@
     },
     {
         "name": "Silver Spike",
-        "address": "0x0830cc88",
         "namePointer": "0x0830f640",
         "buyPrice": 6,
         "sellPrice": 3,
@@ -93,7 +89,6 @@
     },
     {
         "name": "Gold Fang",
-        "address": "0x0830cca8",
         "namePointer": "0x0830f634",
         "buyPrice": 8,
         "sellPrice": 4,
@@ -116,7 +111,6 @@
     },
     {
         "name": "Cacnea Spike",
-        "address": "0x0830ccc8",
         "namePointer": "0x0830f624",
         "buyPrice": 10,
         "sellPrice": 5,
@@ -139,7 +133,6 @@
     },
     {
         "name": "Corsola Twig",
-        "address": "0x0830cce8",
         "namePointer": "0x0830f614",
         "buyPrice": 12,
         "sellPrice": 6,
@@ -162,7 +155,6 @@
     },
     {
         "name": "Gravelerock",
-        "address": "0x0830cd08",
         "namePointer": "0x0830f608",
         "buyPrice": 10,
         "sellPrice": 5,
@@ -185,7 +177,6 @@
     },
     {
         "name": "Geo Pebble",
-        "address": "0x0830cd28",
         "namePointer": "0x0830f5fc",
         "buyPrice": 5,
         "sellPrice": 5,
@@ -208,7 +199,6 @@
     },
     {
         "name": "Mobile Scarf",
-        "address": "0x0830cd48",
         "namePointer": "0x0830f5ec",
         "buyPrice": 1000,
         "sellPrice": 300,
@@ -231,7 +221,6 @@
     },
     {
         "name": "Heal Ribbon",
-        "address": "0x0830cd68",
         "namePointer": "0x0830f5e0",
         "buyPrice": 1100,
         "sellPrice": 350,
@@ -254,7 +243,6 @@
     },
     {
         "name": "Twist Band",
-        "address": "0x0830cd88",
         "namePointer": "0x0830f5d4",
         "buyPrice": 1200,
         "sellPrice": 400,
@@ -277,7 +265,6 @@
     },
     {
         "name": "Scope Lens",
-        "address": "0x0830cda8",
         "namePointer": "0x0830f5c8",
         "buyPrice": 1300,
         "sellPrice": 450,
@@ -300,7 +287,6 @@
     },
     {
         "name": "Patsy Band",
-        "address": "0x0830cdc8",
         "namePointer": "0x0830f5bc",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -323,7 +309,6 @@
     },
     {
         "name": "No-Stick Cap",
-        "address": "0x0830cde8",
         "namePointer": "0x0830f5ac",
         "buyPrice": 1500,
         "sellPrice": 550,
@@ -346,7 +331,6 @@
     },
     {
         "name": "Pierce Band",
-        "address": "0x0830ce08",
         "namePointer": "0x0830f5a0",
         "buyPrice": 1600,
         "sellPrice": 600,
@@ -369,7 +353,6 @@
     },
     {
         "name": "Joy Ribbon",
-        "address": "0x0830ce28",
         "namePointer": "0x0830f594",
         "buyPrice": 5000,
         "sellPrice": 2000,
@@ -392,7 +375,6 @@
     },
     {
         "name": "X-Ray Specs",
-        "address": "0x0830ce48",
         "namePointer": "0x0830f588",
         "buyPrice": 4000,
         "sellPrice": 2000,
@@ -415,7 +397,6 @@
     },
     {
         "name": "Persim Band",
-        "address": "0x0830ce68",
         "namePointer": "0x0830f57c",
         "buyPrice": 1500,
         "sellPrice": 750,
@@ -438,7 +419,6 @@
     },
     {
         "name": "Power Band",
-        "address": "0x0830ce88",
         "namePointer": "0x0830f570",
         "buyPrice": 500,
         "sellPrice": 250,
@@ -461,7 +441,6 @@
     },
     {
         "name": "Pecha Scarf",
-        "address": "0x0830cea8",
         "namePointer": "0x0830f564",
         "buyPrice": 1200,
         "sellPrice": 500,
@@ -484,7 +463,6 @@
     },
     {
         "name": "Insomniscope",
-        "address": "0x0830cec8",
         "namePointer": "0x0830f554",
         "buyPrice": 1200,
         "sellPrice": 500,
@@ -507,7 +485,6 @@
     },
     {
         "name": "Warp Scarf",
-        "address": "0x0830cee8",
         "namePointer": "0x0830f548",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -530,7 +507,6 @@
     },
     {
         "name": "Tight Belt",
-        "address": "0x0830cf08",
         "namePointer": "0x0830f53c",
         "buyPrice": 5000,
         "sellPrice": 1000,
@@ -553,7 +529,6 @@
     },
     {
         "name": "Sneak Scarf",
-        "address": "0x0830cf28",
         "namePointer": "0x0830f530",
         "buyPrice": 2500,
         "sellPrice": 1000,
@@ -576,7 +551,6 @@
     },
     {
         "name": "Gold Ribbon",
-        "address": "0x0830cf48",
         "namePointer": "0x0830f524",
         "buyPrice": 3000,
         "sellPrice": 2000,
@@ -599,7 +573,6 @@
     },
     {
         "name": "Goggle Specs",
-        "address": "0x0830cf68",
         "namePointer": "0x0830f514",
         "buyPrice": 1500,
         "sellPrice": 500,
@@ -622,7 +595,6 @@
     },
     {
         "name": "Diet Ribbon",
-        "address": "0x0830cf88",
         "namePointer": "0x0830f508",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -645,7 +617,6 @@
     },
     {
         "name": "Trap Scarf",
-        "address": "0x0830cfa8",
         "namePointer": "0x0830f4fc",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -668,7 +639,6 @@
     },
     {
         "name": "Racket Band",
-        "address": "0x0830cfc8",
         "namePointer": "0x0830f4f0",
         "buyPrice": 3000,
         "sellPrice": 1300,
@@ -691,7 +661,6 @@
     },
     {
         "name": "Def. Scarf",
-        "address": "0x0830cfe8",
         "namePointer": "0x0830f4e4",
         "buyPrice": 3000,
         "sellPrice": 1350,
@@ -714,7 +683,6 @@
     },
     {
         "name": "Stamina Band",
-        "address": "0x0830d008",
         "namePointer": "0x0830f4d4",
         "buyPrice": 3200,
         "sellPrice": 1400,
@@ -737,7 +705,6 @@
     },
     {
         "name": "Plain Ribbon",
-        "address": "0x0830d028",
         "namePointer": "0x0830f4c4",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -760,7 +727,6 @@
     },
     {
         "name": "Special Band",
-        "address": "0x0830d048",
         "namePointer": "0x0830f4b4",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -783,7 +749,6 @@
     },
     {
         "name": "Zinc Band",
-        "address": "0x0830d068",
         "namePointer": "0x0830f4a8",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -806,7 +771,6 @@
     },
     {
         "name": "Detect Band",
-        "address": "0x0830d088",
         "namePointer": "0x0830f49c",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -829,7 +793,6 @@
     },
     {
         "name": "Alert Specs",
-        "address": "0x0830d0a8",
         "namePointer": "0x0830f490",
         "buyPrice": 4000,
         "sellPrice": 2000,
@@ -852,7 +815,6 @@
     },
     {
         "name": "Dodge Scarf",
-        "address": "0x0830d0c8",
         "namePointer": "0x0830f484",
         "buyPrice": 5000,
         "sellPrice": 2500,
@@ -875,7 +837,6 @@
     },
     {
         "name": "Bounce Band",
-        "address": "0x0830d0e8",
         "namePointer": "0x0830f478",
         "buyPrice": 3500,
         "sellPrice": 1500,
@@ -898,7 +859,6 @@
     },
     {
         "name": "Curve Band",
-        "address": "0x0830d108",
         "namePointer": "0x0830f46c",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -921,7 +881,6 @@
     },
     {
         "name": "Whiff Specs",
-        "address": "0x0830d128",
         "namePointer": "0x0830f460",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -944,7 +903,6 @@
     },
     {
         "name": "No-Aim Scope",
-        "address": "0x0830d148",
         "namePointer": "0x0830f450",
         "buyPrice": 100,
         "sellPrice": 50,
@@ -967,7 +925,6 @@
     },
     {
         "name": "Lockon Specs",
-        "address": "0x0830d168",
         "namePointer": "0x0830f440",
         "buyPrice": 4000,
         "sellPrice": 1500,
@@ -990,7 +947,6 @@
     },
     {
         "name": "Munch Belt",
-        "address": "0x0830d188",
         "namePointer": "0x0830f434",
         "buyPrice": 4000,
         "sellPrice": 1500,
@@ -1013,7 +969,6 @@
     },
     {
         "name": "Pass Scarf",
-        "address": "0x0830d1a8",
         "namePointer": "0x0830f428",
         "buyPrice": 4000,
         "sellPrice": 1500,
@@ -1036,7 +991,6 @@
     },
     {
         "name": "Weather Band",
-        "address": "0x0830d1c8",
         "namePointer": "0x0830f418",
         "buyPrice": 4000,
         "sellPrice": 1500,
@@ -1059,7 +1013,6 @@
     },
     {
         "name": "Friend Bow",
-        "address": "0x0830d1e8",
         "namePointer": "0x0830f40c",
         "buyPrice": 5000,
         "sellPrice": 500,
@@ -1082,7 +1035,6 @@
     },
     {
         "name": "Beauty Scarf",
-        "address": "0x0830d208",
         "namePointer": "0x0830f3fc",
         "buyPrice": 9000,
         "sellPrice": 5000,
@@ -1105,7 +1057,6 @@
     },
     {
         "name": "Sun Ribbon",
-        "address": "0x0830d228",
         "namePointer": "0x0830f3f0",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -1128,7 +1079,6 @@
     },
     {
         "name": "Lunar Ribbon",
-        "address": "0x0830d248",
         "namePointer": "0x0830f3e0",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -1151,7 +1101,6 @@
     },
     {
         "name": "Ring D",
-        "address": "0x0830d268",
         "namePointer": "0x0830f3d8",
         "buyPrice": 5100,
         "sellPrice": 1500,
@@ -1174,7 +1123,6 @@
     },
     {
         "name": "Ring E",
-        "address": "0x0830d288",
         "namePointer": "0x0830f3d0",
         "buyPrice": 5200,
         "sellPrice": 1500,
@@ -1197,7 +1145,6 @@
     },
     {
         "name": "Ring F",
-        "address": "0x0830d2a8",
         "namePointer": "0x0830f3c8",
         "buyPrice": 5300,
         "sellPrice": 1500,
@@ -1220,7 +1167,6 @@
     },
     {
         "name": "Heal Seed",
-        "address": "0x0830d2c8",
         "namePointer": "0x0830f3bc",
         "buyPrice": 250,
         "sellPrice": 120,
@@ -1243,7 +1189,6 @@
     },
     {
         "name": "Wish Stone",
-        "address": "0x0830d2e8",
         "namePointer": "0x0830f3b0",
         "buyPrice": 4,
         "sellPrice": 2,
@@ -1266,7 +1211,6 @@
     },
     {
         "name": "Oran Berry",
-        "address": "0x0830d308",
         "namePointer": "0x0830f3a4",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -1289,7 +1233,6 @@
     },
     {
         "name": "Sitrus Berry",
-        "address": "0x0830d328",
         "namePointer": "0x0830f394",
         "buyPrice": 4000,
         "sellPrice": 100,
@@ -1312,7 +1255,6 @@
     },
     {
         "name": "Eyedrop Seed",
-        "address": "0x0830d348",
         "namePointer": "0x0830f384",
         "buyPrice": 60,
         "sellPrice": 20,
@@ -1335,7 +1277,6 @@
     },
     {
         "name": "Reviver Seed",
-        "address": "0x0830d368",
         "namePointer": "0x0830f374",
         "buyPrice": 800,
         "sellPrice": 150,
@@ -1358,7 +1299,6 @@
     },
     {
         "name": "Blinker Seed",
-        "address": "0x0830d388",
         "namePointer": "0x0830f364",
         "buyPrice": 50,
         "sellPrice": 20,
@@ -1381,7 +1321,6 @@
     },
     {
         "name": "Doom Seed",
-        "address": "0x0830d3a8",
         "namePointer": "0x0830f358",
         "buyPrice": 20,
         "sellPrice": 5,
@@ -1404,7 +1343,6 @@
     },
     {
         "name": "Allure Seed",
-        "address": "0x0830d3c8",
         "namePointer": "0x0830f34c",
         "buyPrice": 60,
         "sellPrice": 30,
@@ -1427,7 +1365,6 @@
     },
     {
         "name": "Life Seed",
-        "address": "0x0830d3e8",
         "namePointer": "0x0830f340",
         "buyPrice": 1000,
         "sellPrice": 50,
@@ -1450,7 +1387,6 @@
     },
     {
         "name": "Rawst Berry",
-        "address": "0x0830d408",
         "namePointer": "0x0830f334",
         "buyPrice": 150,
         "sellPrice": 20,
@@ -1473,7 +1409,6 @@
     },
     {
         "name": "Hunger Seed",
-        "address": "0x0830d428",
         "namePointer": "0x0830f328",
         "buyPrice": 50,
         "sellPrice": 20,
@@ -1496,7 +1431,6 @@
     },
     {
         "name": "Quick Seed",
-        "address": "0x0830d448",
         "namePointer": "0x0830f31c",
         "buyPrice": 30,
         "sellPrice": 15,
@@ -1519,7 +1453,6 @@
     },
     {
         "name": "Pecha Berry",
-        "address": "0x0830d468",
         "namePointer": "0x0830f310",
         "buyPrice": 80,
         "sellPrice": 5,
@@ -1542,7 +1475,6 @@
     },
     {
         "name": "Cheri Berry",
-        "address": "0x0830d488",
         "namePointer": "0x0830f304",
         "buyPrice": 120,
         "sellPrice": 20,
@@ -1565,7 +1497,6 @@
     },
     {
         "name": "Totter Seed",
-        "address": "0x0830d4a8",
         "namePointer": "0x0830f2f8",
         "buyPrice": 60,
         "sellPrice": 30,
@@ -1588,7 +1519,6 @@
     },
     {
         "name": "Sleep Seed",
-        "address": "0x0830d4c8",
         "namePointer": "0x0830f2ec",
         "buyPrice": 70,
         "sellPrice": 35,
@@ -1611,7 +1541,6 @@
     },
     {
         "name": "Plain Seed",
-        "address": "0x0830d4e8",
         "namePointer": "0x0830f2e0",
         "buyPrice": 6,
         "sellPrice": 1,
@@ -1634,7 +1563,6 @@
     },
     {
         "name": "Warp Seed",
-        "address": "0x0830d508",
         "namePointer": "0x0830f2d4",
         "buyPrice": 20,
         "sellPrice": 10,
@@ -1657,7 +1585,6 @@
     },
     {
         "name": "Blast Seed",
-        "address": "0x0830d528",
         "namePointer": "0x0830f2c8",
         "buyPrice": 30,
         "sellPrice": 15,
@@ -1680,7 +1607,6 @@
     },
     {
         "name": "Ginseng",
-        "address": "0x0830d548",
         "namePointer": "0x0830f2c0",
         "buyPrice": 2600,
         "sellPrice": 1000,
@@ -1703,7 +1629,6 @@
     },
     {
         "name": "Joy Seed",
-        "address": "0x0830d568",
         "namePointer": "0x0830f2b4",
         "buyPrice": 3000,
         "sellPrice": 1000,
@@ -1726,7 +1651,6 @@
     },
     {
         "name": "Chesto Berry",
-        "address": "0x0830d588",
         "namePointer": "0x0830f2a4",
         "buyPrice": 30,
         "sellPrice": 15,
@@ -1749,7 +1673,6 @@
     },
     {
         "name": "Stun Seed",
-        "address": "0x0830d5a8",
         "namePointer": "0x0830f298",
         "buyPrice": 50,
         "sellPrice": 25,
@@ -1772,7 +1695,6 @@
     },
     {
         "name": "Max Elixir",
-        "address": "0x0830d5c8",
         "namePointer": "0x0830f28c",
         "buyPrice": 250,
         "sellPrice": 100,
@@ -1795,7 +1717,6 @@
     },
     {
         "name": "Protein",
-        "address": "0x0830d5e8",
         "namePointer": "0x0830f284",
         "buyPrice": 5000,
         "sellPrice": 5,
@@ -1818,7 +1739,6 @@
     },
     {
         "name": "Calcium",
-        "address": "0x0830d608",
         "namePointer": "0x0830f27c",
         "buyPrice": 6000,
         "sellPrice": 5,
@@ -1841,7 +1761,6 @@
     },
     {
         "name": "Iron",
-        "address": "0x0830d628",
         "namePointer": "0x0830f274",
         "buyPrice": 7000,
         "sellPrice": 5,
@@ -1864,7 +1783,6 @@
     },
     {
         "name": "Zinc",
-        "address": "0x0830d648",
         "namePointer": "0x0830f26c",
         "buyPrice": 8000,
         "sellPrice": 5,
@@ -1887,7 +1805,6 @@
     },
     {
         "name": "Apple",
-        "address": "0x0830d668",
         "namePointer": "0x0830f264",
         "buyPrice": 25,
         "sellPrice": 1,
@@ -1910,7 +1827,6 @@
     },
     {
         "name": "Big Apple",
-        "address": "0x0830d688",
         "namePointer": "0x0830f258",
         "buyPrice": 50,
         "sellPrice": 1,
@@ -1933,7 +1849,6 @@
     },
     {
         "name": "Grimy Food",
-        "address": "0x0830d6a8",
         "namePointer": "0x0830f24c",
         "buyPrice": 5,
         "sellPrice": 1,
@@ -1956,7 +1871,6 @@
     },
     {
         "name": "Huge Apple",
-        "address": "0x0830d6c8",
         "namePointer": "0x0830f240",
         "buyPrice": 100,
         "sellPrice": 50,
@@ -1979,7 +1893,6 @@
     },
     {
         "name": "White Gummi",
-        "address": "0x0830d6e8",
         "namePointer": "0x0830f234",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2002,7 +1915,6 @@
     },
     {
         "name": "Red Gummi",
-        "address": "0x0830d708",
         "namePointer": "0x0830f228",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2025,7 +1937,6 @@
     },
     {
         "name": "Blue Gummi",
-        "address": "0x0830d728",
         "namePointer": "0x0830f21c",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2048,7 +1959,6 @@
     },
     {
         "name": "Grass Gummi",
-        "address": "0x0830d748",
         "namePointer": "0x0830f210",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2071,7 +1981,6 @@
     },
     {
         "name": "Yellow Gummi",
-        "address": "0x0830d768",
         "namePointer": "0x0830f200",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2094,7 +2003,6 @@
     },
     {
         "name": "Clear Gummi",
-        "address": "0x0830d788",
         "namePointer": "0x0830f1f4",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2117,7 +2025,6 @@
     },
     {
         "name": "Orange Gummi",
-        "address": "0x0830d7a8",
         "namePointer": "0x0830f1e4",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2140,7 +2047,6 @@
     },
     {
         "name": "Pink Gummi",
-        "address": "0x0830d7c8",
         "namePointer": "0x0830f1d8",
         "buyPrice": 1500,
         "sellPrice": 50,
@@ -2163,7 +2069,6 @@
     },
     {
         "name": "Brown Gummi",
-        "address": "0x0830d7e8",
         "namePointer": "0x0830f1cc",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2186,7 +2091,6 @@
     },
     {
         "name": "Sky Gummi",
-        "address": "0x0830d808",
         "namePointer": "0x0830f1c0",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2209,7 +2113,6 @@
     },
     {
         "name": "Gold Gummi",
-        "address": "0x0830d828",
         "namePointer": "0x0830f1b4",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2232,7 +2135,6 @@
     },
     {
         "name": "Green Gummi",
-        "address": "0x0830d848",
         "namePointer": "0x0830f1a8",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2255,7 +2157,6 @@
     },
     {
         "name": "Gray Gummi",
-        "address": "0x0830d868",
         "namePointer": "0x0830f19c",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2278,7 +2179,6 @@
     },
     {
         "name": "Purple Gummi",
-        "address": "0x0830d888",
         "namePointer": "0x0830f18c",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2301,7 +2201,6 @@
     },
     {
         "name": "Royal Gummi",
-        "address": "0x0830d8a8",
         "namePointer": "0x0830f180",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2324,7 +2223,6 @@
     },
     {
         "name": "Black Gummi",
-        "address": "0x0830d8c8",
         "namePointer": "0x0830f174",
         "buyPrice": 200,
         "sellPrice": 50,
@@ -2347,7 +2245,6 @@
     },
     {
         "name": "Silver Gummi",
-        "address": "0x0830d8e8",
         "namePointer": "0x0830f164",
         "buyPrice": 1000,
         "sellPrice": 500,
@@ -2370,7 +2267,6 @@
     },
     {
         "name": "Banana",
-        "address": "0x0830d908",
         "namePointer": "0x0830f15c",
         "buyPrice": 9000,
         "sellPrice": 5000,
@@ -2393,7 +2289,6 @@
     },
     {
         "name": "Chestnut",
-        "address": "0x0830d928",
         "namePointer": "0x0830f150",
         "buyPrice": 3,
         "sellPrice": 1,
@@ -2416,7 +2311,6 @@
     },
     {
         "name": "Pok\u00e9",
-        "address": "0x0830d948",
         "namePointer": "0x0830f148",
         "buyPrice": 0,
         "sellPrice": 0,
@@ -2439,7 +2333,6 @@
     },
     {
         "name": "Upgrade",
-        "address": "0x0830d968",
         "namePointer": "0x0830f140",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2462,7 +2355,6 @@
     },
     {
         "name": "King\u2019s Rock",
-        "address": "0x0830d988",
         "namePointer": "0x0830f134",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2485,7 +2377,6 @@
     },
     {
         "name": "Thunderstone",
-        "address": "0x0830d9a8",
         "namePointer": "0x0830f124",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2508,7 +2399,6 @@
     },
     {
         "name": "Deepseascale",
-        "address": "0x0830d9c8",
         "namePointer": "0x0830f114",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2531,7 +2421,6 @@
     },
     {
         "name": "Deepseatooth",
-        "address": "0x0830d9e8",
         "namePointer": "0x0830f104",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2554,7 +2443,6 @@
     },
     {
         "name": "Sun Stone",
-        "address": "0x0830da08",
         "namePointer": "0x0830f0f8",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2577,7 +2465,6 @@
     },
     {
         "name": "Moon Stone",
-        "address": "0x0830da28",
         "namePointer": "0x0830f0ec",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2600,7 +2487,6 @@
     },
     {
         "name": "Fire Stone",
-        "address": "0x0830da48",
         "namePointer": "0x0830f0e0",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2623,7 +2509,6 @@
     },
     {
         "name": "Water Stone",
-        "address": "0x0830da68",
         "namePointer": "0x0830f0d4",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2646,7 +2531,6 @@
     },
     {
         "name": "Metal Coat",
-        "address": "0x0830da88",
         "namePointer": "0x0830f0c8",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2669,7 +2553,6 @@
     },
     {
         "name": "Leaf Stone",
-        "address": "0x0830daa8",
         "namePointer": "0x0830f0bc",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2692,7 +2575,6 @@
     },
     {
         "name": "Dragon Scale",
-        "address": "0x0830dac8",
         "namePointer": "0x0830f0ac",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2715,7 +2597,6 @@
     },
     {
         "name": "Link Cable",
-        "address": "0x0830dae8",
         "namePointer": "0x0830f0a0",
         "buyPrice": 3000,
         "sellPrice": 1,
@@ -2738,7 +2619,6 @@
     },
     {
         "name": "Ice Part",
-        "address": "0x0830db08",
         "namePointer": "0x0830f094",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2761,7 +2641,6 @@
     },
     {
         "name": "Steel Part",
-        "address": "0x0830db28",
         "namePointer": "0x0830f088",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2784,7 +2663,6 @@
     },
     {
         "name": "Rock Part",
-        "address": "0x0830db48",
         "namePointer": "0x0830f07c",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2807,7 +2685,6 @@
     },
     {
         "name": "Music Box",
-        "address": "0x0830db68",
         "namePointer": "0x0830f070",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2830,7 +2707,6 @@
     },
     {
         "name": "Key",
-        "address": "0x0830db88",
         "namePointer": "0x0830f06c",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2853,7 +2729,6 @@
     },
     {
         "name": "Used TM",
-        "address": "0x0830dba8",
         "namePointer": "0x0830f060",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -2876,7 +2751,6 @@
     },
     {
         "name": "Focus Punch",
-        "address": "0x0830dbc8",
         "namePointer": "0x0830f050",
         "buyPrice": 5000,
         "sellPrice": 1000,
@@ -2899,7 +2773,6 @@
     },
     {
         "name": "Dragon Claw",
-        "address": "0x0830dbe8",
         "namePointer": "0x0830f040",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -2922,7 +2795,6 @@
     },
     {
         "name": "Water Pulse",
-        "address": "0x0830dc08",
         "namePointer": "0x0830f030",
         "buyPrice": 7500,
         "sellPrice": 2000,
@@ -2945,7 +2817,6 @@
     },
     {
         "name": "Calm Mind",
-        "address": "0x0830dc28",
         "namePointer": "0x0830f024",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -2968,7 +2839,6 @@
     },
     {
         "name": "Roar",
-        "address": "0x0830dc48",
         "namePointer": "0x0830f01c",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -2991,7 +2861,6 @@
     },
     {
         "name": "Toxic",
-        "address": "0x0830dc68",
         "namePointer": "0x0830f014",
         "buyPrice": 6000,
         "sellPrice": 1500,
@@ -3014,7 +2883,6 @@
     },
     {
         "name": "Hail",
-        "address": "0x0830dc88",
         "namePointer": "0x0830f008",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -3037,7 +2905,6 @@
     },
     {
         "name": "Bulk Up",
-        "address": "0x0830dca8",
         "namePointer": "0x0830effc",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -3060,7 +2927,6 @@
     },
     {
         "name": "Bullet Seed",
-        "address": "0x0830dcc8",
         "namePointer": "0x0830efec",
         "buyPrice": 6000,
         "sellPrice": 1500,
@@ -3083,7 +2949,6 @@
     },
     {
         "name": "Hidden Power",
-        "address": "0x0830dce8",
         "namePointer": "0x0830efdc",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -3106,7 +2971,6 @@
     },
     {
         "name": "Sunny Day",
-        "address": "0x0830dd08",
         "namePointer": "0x0830efd0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -3129,7 +2993,6 @@
     },
     {
         "name": "Taunt",
-        "address": "0x0830dd28",
         "namePointer": "0x0830efc8",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -3152,7 +3015,6 @@
     },
     {
         "name": "Ice Beam",
-        "address": "0x0830dd48",
         "namePointer": "0x0830efbc",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -3175,7 +3037,6 @@
     },
     {
         "name": "Blizzard",
-        "address": "0x0830dd68",
         "namePointer": "0x0830efb0",
         "buyPrice": 9000,
         "sellPrice": 3000,
@@ -3198,7 +3059,6 @@
     },
     {
         "name": "Hyper Beam",
-        "address": "0x0830dd88",
         "namePointer": "0x0830efa0",
         "buyPrice": 9000,
         "sellPrice": 3000,
@@ -3221,7 +3081,6 @@
     },
     {
         "name": "Light Screen",
-        "address": "0x0830dda8",
         "namePointer": "0x0830ef90",
         "buyPrice": 2500,
         "sellPrice": 300,
@@ -3244,7 +3103,6 @@
     },
     {
         "name": "Protect",
-        "address": "0x0830ddc8",
         "namePointer": "0x0830ef84",
         "buyPrice": 6000,
         "sellPrice": 2000,
@@ -3267,7 +3125,6 @@
     },
     {
         "name": "Rain Dance",
-        "address": "0x0830dde8",
         "namePointer": "0x0830ef78",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -3290,7 +3147,6 @@
     },
     {
         "name": "Giga Drain",
-        "address": "0x0830de08",
         "namePointer": "0x0830ef68",
         "buyPrice": 7000,
         "sellPrice": 2000,
@@ -3313,7 +3169,6 @@
     },
     {
         "name": "Safeguard",
-        "address": "0x0830de28",
         "namePointer": "0x0830ef5c",
         "buyPrice": 6000,
         "sellPrice": 1500,
@@ -3336,7 +3191,6 @@
     },
     {
         "name": "Frustration",
-        "address": "0x0830de48",
         "namePointer": "0x0830ef4c",
         "buyPrice": 3000,
         "sellPrice": 1000,
@@ -3359,7 +3213,6 @@
     },
     {
         "name": "SolarBeam",
-        "address": "0x0830de68",
         "namePointer": "0x0830ef40",
         "buyPrice": 7000,
         "sellPrice": 2000,
@@ -3382,7 +3235,6 @@
     },
     {
         "name": "Iron Tail",
-        "address": "0x0830de88",
         "namePointer": "0x0830ef34",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -3405,7 +3257,6 @@
     },
     {
         "name": "Thunderbolt",
-        "address": "0x0830dea8",
         "namePointer": "0x0830ef24",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -3428,7 +3279,6 @@
     },
     {
         "name": "Thunder",
-        "address": "0x0830dec8",
         "namePointer": "0x0830ef18",
         "buyPrice": 9000,
         "sellPrice": 3000,
@@ -3451,7 +3301,6 @@
     },
     {
         "name": "Earthquake",
-        "address": "0x0830dee8",
         "namePointer": "0x0830ef08",
         "buyPrice": 6500,
         "sellPrice": 1500,
@@ -3474,7 +3323,6 @@
     },
     {
         "name": "Return",
-        "address": "0x0830df08",
         "namePointer": "0x0830eefc",
         "buyPrice": 3000,
         "sellPrice": 1000,
@@ -3497,7 +3345,6 @@
     },
     {
         "name": "Dig",
-        "address": "0x0830df28",
         "namePointer": "0x0830eef4",
         "buyPrice": 3000,
         "sellPrice": 1000,
@@ -3520,7 +3367,6 @@
     },
     {
         "name": "Psychic",
-        "address": "0x0830df48",
         "namePointer": "0x0830eee8",
         "buyPrice": 5000,
         "sellPrice": 1500,
@@ -3543,7 +3389,6 @@
     },
     {
         "name": "Shadow Ball",
-        "address": "0x0830df68",
         "namePointer": "0x0830eed8",
         "buyPrice": 6500,
         "sellPrice": 1000,
@@ -3566,7 +3411,6 @@
     },
     {
         "name": "Brick Break",
-        "address": "0x0830df88",
         "namePointer": "0x0830eec8",
         "buyPrice": 2500,
         "sellPrice": 500,
@@ -3589,7 +3433,6 @@
     },
     {
         "name": "Double Team",
-        "address": "0x0830dfa8",
         "namePointer": "0x0830eeb8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -3612,7 +3455,6 @@
     },
     {
         "name": "Reflect",
-        "address": "0x0830dfc8",
         "namePointer": "0x0830eeac",
         "buyPrice": 2500,
         "sellPrice": 500,
@@ -3635,7 +3477,6 @@
     },
     {
         "name": "Shock Wave",
-        "address": "0x0830dfe8",
         "namePointer": "0x0830ee9c",
         "buyPrice": 7500,
         "sellPrice": 2000,
@@ -3658,7 +3499,6 @@
     },
     {
         "name": "Flamethrower",
-        "address": "0x0830e008",
         "namePointer": "0x0830ee8c",
         "buyPrice": 8000,
         "sellPrice": 2000,
@@ -3681,7 +3521,6 @@
     },
     {
         "name": "Sludge Bomb",
-        "address": "0x0830e028",
         "namePointer": "0x0830ee7c",
         "buyPrice": 7500,
         "sellPrice": 1500,
@@ -3704,7 +3543,6 @@
     },
     {
         "name": "Sandstorm",
-        "address": "0x0830e048",
         "namePointer": "0x0830ee70",
         "buyPrice": 500,
         "sellPrice": 250,
@@ -3727,7 +3565,6 @@
     },
     {
         "name": "Fire Blast",
-        "address": "0x0830e068",
         "namePointer": "0x0830ee60",
         "buyPrice": 9000,
         "sellPrice": 3000,
@@ -3750,7 +3587,6 @@
     },
     {
         "name": "Rock Tomb",
-        "address": "0x0830e088",
         "namePointer": "0x0830ee54",
         "buyPrice": 500,
         "sellPrice": 250,
@@ -3773,7 +3609,6 @@
     },
     {
         "name": "Aerial Ace",
-        "address": "0x0830e0a8",
         "namePointer": "0x0830ee44",
         "buyPrice": 7500,
         "sellPrice": 2000,
@@ -3796,7 +3631,6 @@
     },
     {
         "name": "Torment",
-        "address": "0x0830e0c8",
         "namePointer": "0x0830ee38",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -3819,7 +3653,6 @@
     },
     {
         "name": "Facade",
-        "address": "0x0830e0e8",
         "namePointer": "0x0830ee2c",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -3842,7 +3675,6 @@
     },
     {
         "name": "Secret Power",
-        "address": "0x0830e108",
         "namePointer": "0x0830ee1c",
         "buyPrice": 1500,
         "sellPrice": 300,
@@ -3865,7 +3697,6 @@
     },
     {
         "name": "Rest",
-        "address": "0x0830e128",
         "namePointer": "0x0830ee14",
         "buyPrice": 3000,
         "sellPrice": 500,
@@ -3888,7 +3719,6 @@
     },
     {
         "name": "Attract",
-        "address": "0x0830e148",
         "namePointer": "0x0830ee08",
         "buyPrice": 1500,
         "sellPrice": 500,
@@ -3911,7 +3741,6 @@
     },
     {
         "name": "Thief",
-        "address": "0x0830e168",
         "namePointer": "0x0830ee00",
         "buyPrice": 1500,
         "sellPrice": 500,
@@ -3934,7 +3763,6 @@
     },
     {
         "name": "Steel WIng",
-        "address": "0x0830e188",
         "namePointer": "0x0830edf0",
         "buyPrice": 7000,
         "sellPrice": 2000,
@@ -3957,7 +3785,6 @@
     },
     {
         "name": "Skill Swap",
-        "address": "0x0830e1a8",
         "namePointer": "0x0830ede0",
         "buyPrice": 7000,
         "sellPrice": 2000,
@@ -3980,7 +3807,6 @@
     },
     {
         "name": "Snatch",
-        "address": "0x0830e1c8",
         "namePointer": "0x0830edd0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4003,7 +3829,6 @@
     },
     {
         "name": "Overheat",
-        "address": "0x0830e1e8",
         "namePointer": "0x0830edc4",
         "buyPrice": 6500,
         "sellPrice": 2000,
@@ -4026,7 +3851,6 @@
     },
     {
         "name": "Wide Slash",
-        "address": "0x0830e208",
         "namePointer": "0x0830edb4",
         "buyPrice": 2500,
         "sellPrice": 300,
@@ -4049,7 +3873,6 @@
     },
     {
         "name": "Excavate",
-        "address": "0x0830e228",
         "namePointer": "0x0830eda8",
         "buyPrice": 2500,
         "sellPrice": 300,
@@ -4072,7 +3895,6 @@
     },
     {
         "name": "Spin Slash",
-        "address": "0x0830e248",
         "namePointer": "0x0830ed98",
         "buyPrice": 2500,
         "sellPrice": 300,
@@ -4095,7 +3917,6 @@
     },
     {
         "name": "See-Trap Orb",
-        "address": "0x0830e268",
         "namePointer": "0x0830ed88",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4118,7 +3939,6 @@
     },
     {
         "name": "Mug Orb",
-        "address": "0x0830e288",
         "namePointer": "0x0830ed7c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4141,7 +3961,6 @@
     },
     {
         "name": "Rebound Orb",
-        "address": "0x0830e2a8",
         "namePointer": "0x0830ed6c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4164,7 +3983,6 @@
     },
     {
         "name": "Lob Orb",
-        "address": "0x0830e2c8",
         "namePointer": "0x0830ed60",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4187,7 +4005,6 @@
     },
     {
         "name": "Switcher Orb",
-        "address": "0x0830e2e8",
         "namePointer": "0x0830ed50",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4210,7 +4027,6 @@
     },
     {
         "name": "Blowback Orb",
-        "address": "0x0830e308",
         "namePointer": "0x0830ed40",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4233,7 +4049,6 @@
     },
     {
         "name": "Warp Orb",
-        "address": "0x0830e328",
         "namePointer": "0x0830ed34",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4256,7 +4071,6 @@
     },
     {
         "name": "Transfer Orb",
-        "address": "0x0830e348",
         "namePointer": "0x0830ed24",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4279,7 +4093,6 @@
     },
     {
         "name": "Slow Orb",
-        "address": "0x0830e368",
         "namePointer": "0x0830ed18",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4302,7 +4115,6 @@
     },
     {
         "name": "Quick Orb",
-        "address": "0x0830e388",
         "namePointer": "0x0830ed0c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4325,7 +4137,6 @@
     },
     {
         "name": "Luminous Orb",
-        "address": "0x0830e3a8",
         "namePointer": "0x0830ecfc",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4348,7 +4159,6 @@
     },
     {
         "name": "Petrify Orb",
-        "address": "0x0830e3c8",
         "namePointer": "0x0830ecec",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4371,7 +4181,6 @@
     },
     {
         "name": "Stayaway Orb",
-        "address": "0x0830e3e8",
         "namePointer": "0x0830ecdc",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4394,7 +4203,6 @@
     },
     {
         "name": "Pounce Orb",
-        "address": "0x0830e408",
         "namePointer": "0x0830eccc",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4417,7 +4225,6 @@
     },
     {
         "name": "Trawl Orb",
-        "address": "0x0830e428",
         "namePointer": "0x0830ecc0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4440,7 +4247,6 @@
     },
     {
         "name": "Cleanse Orb",
-        "address": "0x0830e448",
         "namePointer": "0x0830ecb0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4463,7 +4269,6 @@
     },
     {
         "name": "Observer Orb",
-        "address": "0x0830e468",
         "namePointer": "0x0830eca0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4486,7 +4291,6 @@
     },
     {
         "name": "Decoy Orb",
-        "address": "0x0830e488",
         "namePointer": "0x0830ec94",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4509,7 +4313,6 @@
     },
     {
         "name": "Slumber Orb",
-        "address": "0x0830e4a8",
         "namePointer": "0x0830ec84",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4532,7 +4335,6 @@
     },
     {
         "name": "Totter Orb",
-        "address": "0x0830e4c8",
         "namePointer": "0x0830ec74",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4555,7 +4357,6 @@
     },
     {
         "name": "Two-Edge Orb",
-        "address": "0x0830e4e8",
         "namePointer": "0x0830ec64",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4578,7 +4379,6 @@
     },
     {
         "name": "Silence Orb",
-        "address": "0x0830e508",
         "namePointer": "0x0830ec54",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4601,7 +4401,6 @@
     },
     {
         "name": "Escape Orb",
-        "address": "0x0830e528",
         "namePointer": "0x0830ec44",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4624,7 +4423,6 @@
     },
     {
         "name": "Scanner Orb",
-        "address": "0x0830e548",
         "namePointer": "0x0830ec34",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4647,7 +4445,6 @@
     },
     {
         "name": "Radar Orb",
-        "address": "0x0830e568",
         "namePointer": "0x0830ec28",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4670,7 +4467,6 @@
     },
     {
         "name": "Drought Orb",
-        "address": "0x0830e588",
         "namePointer": "0x0830ec18",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4693,7 +4489,6 @@
     },
     {
         "name": "Trapbust Orb",
-        "address": "0x0830e5a8",
         "namePointer": "0x0830ec08",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4716,7 +4511,6 @@
     },
     {
         "name": "Rollcall Orb",
-        "address": "0x0830e5c8",
         "namePointer": "0x0830ebf8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4739,7 +4533,6 @@
     },
     {
         "name": "Invisify Orb",
-        "address": "0x0830e5e8",
         "namePointer": "0x0830ebe8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4762,7 +4555,6 @@
     },
     {
         "name": "One-Shot Orb",
-        "address": "0x0830e608",
         "namePointer": "0x0830ebd8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4785,7 +4577,6 @@
     },
     {
         "name": "Identify Orb",
-        "address": "0x0830e628",
         "namePointer": "0x0830ebc8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4808,7 +4599,6 @@
     },
     {
         "name": "Vacuum-Cut",
-        "address": "0x0830e648",
         "namePointer": "0x0830ebb8",
         "buyPrice": 2500,
         "sellPrice": 300,
@@ -4831,7 +4621,6 @@
     },
     {
         "name": "Reviver Orb",
-        "address": "0x0830e668",
         "namePointer": "0x0830eba8",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4854,7 +4643,6 @@
     },
     {
         "name": "Shocker Orb",
-        "address": "0x0830e688",
         "namePointer": "0x0830eb98",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4877,7 +4665,6 @@
     },
     {
         "name": "Sizebust Orb",
-        "address": "0x0830e6a8",
         "namePointer": "0x0830eb88",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4900,7 +4687,6 @@
     },
     {
         "name": "One-Room Orb",
-        "address": "0x0830e6c8",
         "namePointer": "0x0830eb78",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4923,7 +4709,6 @@
     },
     {
         "name": "Fill-In Orb",
-        "address": "0x0830e6e8",
         "namePointer": "0x0830eb68",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4946,7 +4731,6 @@
     },
     {
         "name": "Trapper Orb",
-        "address": "0x0830e708",
         "namePointer": "0x0830eb58",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4969,7 +4753,6 @@
     },
     {
         "name": "Possess Orb",
-        "address": "0x0830e728",
         "namePointer": "0x0830eb48",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -4992,7 +4775,6 @@
     },
     {
         "name": "Itemizer Orb",
-        "address": "0x0830e748",
         "namePointer": "0x0830eb38",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5015,7 +4797,6 @@
     },
     {
         "name": "Hurl Orb",
-        "address": "0x0830e768",
         "namePointer": "0x0830eb2c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5038,7 +4819,6 @@
     },
     {
         "name": "Mobile Orb",
-        "address": "0x0830e788",
         "namePointer": "0x0830eb1c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5061,7 +4841,6 @@
     },
     {
         "name": "Toss Orb",
-        "address": "0x0830e7a8",
         "namePointer": "0x0830eb10",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5084,7 +4863,6 @@
     },
     {
         "name": "Stairs Orb",
-        "address": "0x0830e7c8",
         "namePointer": "0x0830eb00",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5107,7 +4885,6 @@
     },
     {
         "name": "Longtoss Orb",
-        "address": "0x0830e7e8",
         "namePointer": "0x0830eaf0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5130,7 +4907,6 @@
     },
     {
         "name": "Pierce Orb",
-        "address": "0x0830e808",
         "namePointer": "0x0830eae0",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5153,7 +4929,6 @@
     },
     {
         "name": "Cut",
-        "address": "0x0830e828",
         "namePointer": "0x0830ead8",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5176,7 +4951,6 @@
     },
     {
         "name": "Fly",
-        "address": "0x0830e848",
         "namePointer": "0x0830ead0",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5199,7 +4973,6 @@
     },
     {
         "name": "Surf",
-        "address": "0x0830e868",
         "namePointer": "0x0830eac8",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5222,7 +4995,6 @@
     },
     {
         "name": "Strength",
-        "address": "0x0830e888",
         "namePointer": "0x0830eabc",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5245,7 +5017,6 @@
     },
     {
         "name": "Flash",
-        "address": "0x0830e8a8",
         "namePointer": "0x0830eab4",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5268,7 +5039,6 @@
     },
     {
         "name": "Rock Smash",
-        "address": "0x0830e8c8",
         "namePointer": "0x0830eaa4",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5291,7 +5061,6 @@
     },
     {
         "name": "Waterfall",
-        "address": "0x0830e8e8",
         "namePointer": "0x0830ea98",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5314,7 +5083,6 @@
     },
     {
         "name": "Dive",
-        "address": "0x0830e908",
         "namePointer": "0x0830ea90",
         "buyPrice": 2,
         "sellPrice": 1,
@@ -5337,7 +5105,6 @@
     },
     {
         "name": "Link Box",
-        "address": "0x0830e928",
         "namePointer": "0x0830ea84",
         "buyPrice": 3000,
         "sellPrice": 500,
@@ -5360,7 +5127,6 @@
     },
     {
         "name": "Switch Box",
-        "address": "0x0830e948",
         "namePointer": "0x0830ea78",
         "buyPrice": 1500,
         "sellPrice": 500,
@@ -5383,7 +5149,6 @@
     },
     {
         "name": "Weavile Fig",
-        "address": "0x0830e968",
         "namePointer": "0x0830ea6c",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -5406,7 +5171,6 @@
     },
     {
         "name": "Mime Jr. Fig",
-        "address": "0x0830e988",
         "namePointer": "0x0830ea5c",
         "buyPrice": 1,
         "sellPrice": 1,
@@ -5429,7 +5193,6 @@
     },
     {
         "name": "Beatup Orb",
-        "address": "0x0830e9a8",
         "namePointer": "0x0830ea4c",
         "buyPrice": 300,
         "sellPrice": 150,
@@ -5452,7 +5215,6 @@
     },
     {
         "name": "G Machine 6",
-        "address": "0x0830e9c8",
         "namePointer": "0x0830ea40",
         "buyPrice": 8000,
         "sellPrice": 500,
@@ -5475,7 +5237,6 @@
     },
     {
         "name": "G Machine 7",
-        "address": "0x0830e9e8",
         "namePointer": "0x0830ea34",
         "buyPrice": 8000,
         "sellPrice": 500,

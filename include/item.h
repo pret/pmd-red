@@ -1,6 +1,7 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
+#include "constants/item.h"
 #include "code_8092334.h"
 
 struct Item

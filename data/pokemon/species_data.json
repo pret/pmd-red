@@ -1,7 +1,6 @@
 [
     {
         "name": "None",
-        "address": "0x08357b98",
         "species": "0x08360be8",
         "category": "0x08360bdc",
         "overworld_palette": 0,
@@ -60,7 +59,6 @@
     },
     {
         "name": "Bulbasaur",
-        "address": "0x08357be0",
         "species": "0x08360bd0",
         "category": "0x08360bc8",
         "overworld_palette": 3,
@@ -119,7 +117,6 @@
     },
     {
         "name": "Ivysaur",
-        "address": "0x08357c28",
         "species": "0x08360bc0",
         "category": "0x08360bc8",
         "overworld_palette": 3,
@@ -178,7 +175,6 @@
     },
     {
         "name": "Venusaur",
-        "address": "0x08357c70",
         "species": "0x08360bb4",
         "category": "0x08360bc8",
         "overworld_palette": 3,
@@ -237,7 +233,6 @@
     },
     {
         "name": "Charmander",
-        "address": "0x08357cb8",
         "species": "0x08360ba8",
         "category": "0x08360ba0",
         "overworld_palette": 2,
@@ -296,7 +291,6 @@
     },
     {
         "name": "Charmeleon",
-        "address": "0x08357d00",
         "species": "0x08360b94",
         "category": "0x08360b8c",
         "overworld_palette": 0,
@@ -355,7 +349,6 @@
     },
     {
         "name": "Charizard",
-        "address": "0x08357d48",
         "species": "0x08360b80",
         "category": "0x08360b8c",
         "overworld_palette": 2,
@@ -414,7 +407,6 @@
     },
     {
         "name": "Squirtle",
-        "address": "0x08357d90",
         "species": "0x08360b74",
         "category": "0x08360b68",
         "overworld_palette": 5,
@@ -473,7 +465,6 @@
     },
     {
         "name": "Wartortle",
-        "address": "0x08357dd8",
         "species": "0x08360b5c",
         "category": "0x08360b54",
         "overworld_palette": 9,
@@ -532,7 +523,6 @@
     },
     {
         "name": "Blastoise",
-        "address": "0x08357e20",
         "species": "0x08360b48",
         "category": "0x08360b3c",
         "overworld_palette": 9,
@@ -591,7 +581,6 @@
     },
     {
         "name": "Caterpie",
-        "address": "0x08357e68",
         "species": "0x08360b30",
         "category": "0x08360b28",
         "overworld_palette": 3,
@@ -650,7 +639,6 @@
     },
     {
         "name": "Metapod",
-        "address": "0x08357eb0",
         "species": "0x08360b20",
         "category": "0x08360b18",
         "overworld_palette": 3,
@@ -709,7 +697,6 @@
     },
     {
         "name": "Butterfree",
-        "address": "0x08357ef8",
         "species": "0x08360b0c",
         "category": "0x08360b00",
         "overworld_palette": 5,
@@ -768,7 +755,6 @@
     },
     {
         "name": "Weedle",
-        "address": "0x08357f40",
         "species": "0x08360af8",
         "category": "0x08360aec",
         "overworld_palette": 4,
@@ -827,7 +813,6 @@
     },
     {
         "name": "Kakuna",
-        "address": "0x08357f88",
         "species": "0x08360ae4",
         "category": "0x08360b18",
         "overworld_palette": 0,
@@ -886,7 +871,6 @@
     },
     {
         "name": "Beedrill",
-        "address": "0x08357fd0",
         "species": "0x08360ad8",
         "category": "0x08360acc",
         "overworld_palette": 2,
@@ -945,7 +929,6 @@
     },
     {
         "name": "Pidgey",
-        "address": "0x08358018",
         "species": "0x08360ac4",
         "category": "0x08360ab8",
         "overworld_palette": 4,
@@ -1004,7 +987,6 @@
     },
     {
         "name": "Pidgeotto",
-        "address": "0x08358060",
         "species": "0x08360aac",
         "category": "0x08360aa4",
         "overworld_palette": 4,
@@ -1063,7 +1045,6 @@
     },
     {
         "name": "Pidgeot",
-        "address": "0x083580a8",
         "species": "0x08360a9c",
         "category": "0x08360aa4",
         "overworld_palette": 4,
@@ -1122,7 +1103,6 @@
     },
     {
         "name": "Rattata",
-        "address": "0x083580f0",
         "species": "0x08360a94",
         "category": "0x08360a8c",
         "overworld_palette": 2,
@@ -1181,7 +1161,6 @@
     },
     {
         "name": "Raticate",
-        "address": "0x08358138",
         "species": "0x08360a80",
         "category": "0x08360a8c",
         "overworld_palette": 4,
@@ -1240,7 +1219,6 @@
     },
     {
         "name": "Spearow",
-        "address": "0x08358180",
         "species": "0x08360a78",
         "category": "0x08360ab8",
         "overworld_palette": 4,
@@ -1299,7 +1277,6 @@
     },
     {
         "name": "Fearow",
-        "address": "0x083581c8",
         "species": "0x08360a70",
         "category": "0x08360a68",
         "overworld_palette": 4,
@@ -1358,7 +1335,6 @@
     },
     {
         "name": "Ekans",
-        "address": "0x08358210",
         "species": "0x08360a60",
         "category": "0x08360a58",
         "overworld_palette": 2,
@@ -1417,7 +1393,6 @@
     },
     {
         "name": "Arbok",
-        "address": "0x08358258",
         "species": "0x08360a50",
         "category": "0x08360a48",
         "overworld_palette": 2,
@@ -1476,7 +1451,6 @@
     },
     {
         "name": "Pikachu",
-        "address": "0x083582a0",
         "species": "0x08360a40",
         "category": "0x08360a8c",
         "overworld_palette": 0,
@@ -1535,7 +1509,6 @@
     },
     {
         "name": "Raichu",
-        "address": "0x083582e8",
         "species": "0x08360a38",
         "category": "0x08360a8c",
         "overworld_palette": 4,
@@ -1594,7 +1567,6 @@
     },
     {
         "name": "Sandshrew",
-        "address": "0x08358330",
         "species": "0x08360a2c",
         "category": "0x08360a8c",
         "overworld_palette": 0,
@@ -1653,7 +1625,6 @@
     },
     {
         "name": "Sandslash",
-        "address": "0x08358378",
         "species": "0x08360a20",
         "category": "0x08360a8c",
         "overworld_palette": 4,
@@ -1712,7 +1683,6 @@
     },
     {
         "name": "Nidoran\u2640",
-        "address": "0x083583c0",
         "species": "0x08360a14",
         "category": "0x08360a08",
         "overworld_palette": 7,
@@ -1771,7 +1741,6 @@
     },
     {
         "name": "Nidorina",
-        "address": "0x08358408",
         "species": "0x083609fc",
         "category": "0x08360a08",
         "overworld_palette": 7,
@@ -1830,7 +1799,6 @@
     },
     {
         "name": "Nidoqueen",
-        "address": "0x08358450",
         "species": "0x083609f0",
         "category": "0x083609e8",
         "overworld_palette": 5,
@@ -1889,7 +1857,6 @@
     },
     {
         "name": "Nidoran\u2642",
-        "address": "0x08358498",
         "species": "0x083609dc",
         "category": "0x08360a08",
         "overworld_palette": 10,
@@ -1948,7 +1915,6 @@
     },
     {
         "name": "Nidorino",
-        "address": "0x083584e0",
         "species": "0x083609d0",
         "category": "0x08360a08",
         "overworld_palette": 1,
@@ -2007,7 +1973,6 @@
     },
     {
         "name": "Nidoking",
-        "address": "0x08358528",
         "species": "0x083609c4",
         "category": "0x083609e8",
         "overworld_palette": 7,
@@ -2066,7 +2031,6 @@
     },
     {
         "name": "Clefairy",
-        "address": "0x08358570",
         "species": "0x083609b8",
         "category": "0x083609b0",
         "overworld_palette": 1,
@@ -2125,7 +2089,6 @@
     },
     {
         "name": "Clefable",
-        "address": "0x083585b8",
         "species": "0x083609a4",
         "category": "0x083609b0",
         "overworld_palette": 1,
@@ -2184,7 +2147,6 @@
     },
     {
         "name": "Vulpix",
-        "address": "0x08358600",
         "species": "0x0836099c",
         "category": "0x08360998",
         "overworld_palette": 4,
@@ -2243,7 +2205,6 @@
     },
     {
         "name": "Ninetales",
-        "address": "0x08358648",
         "species": "0x0836098c",
         "category": "0x08360998",
         "overworld_palette": 4,
@@ -2302,7 +2263,6 @@
     },
     {
         "name": "Jigglypuff",
-        "address": "0x08358690",
         "species": "0x08360980",
         "category": "0x08360978",
         "overworld_palette": 1,
@@ -2361,7 +2321,6 @@
     },
     {
         "name": "Wigglytuff",
-        "address": "0x083586d8",
         "species": "0x0836096c",
         "category": "0x08360978",
         "overworld_palette": 1,
@@ -2420,7 +2379,6 @@
     },
     {
         "name": "Zubat",
-        "address": "0x08358720",
         "species": "0x08360964",
         "category": "0x08360960",
         "overworld_palette": 7,
@@ -2479,7 +2437,6 @@
     },
     {
         "name": "Golbat",
-        "address": "0x08358768",
         "species": "0x08360958",
         "category": "0x08360960",
         "overworld_palette": 7,
@@ -2538,7 +2495,6 @@
     },
     {
         "name": "Oddish",
-        "address": "0x083587b0",
         "species": "0x08360950",
         "category": "0x08360948",
         "overworld_palette": 3,
@@ -2597,7 +2553,6 @@
     },
     {
         "name": "Gloom",
-        "address": "0x083587f8",
         "species": "0x08360940",
         "category": "0x08360948",
         "overworld_palette": 6,
@@ -2656,7 +2611,6 @@
     },
     {
         "name": "Vileplume",
-        "address": "0x08358840",
         "species": "0x08360934",
         "category": "0x0836092c",
         "overworld_palette": 2,
@@ -2715,7 +2669,6 @@
     },
     {
         "name": "Paras",
-        "address": "0x08358888",
         "species": "0x08360924",
         "category": "0x08360918",
         "overworld_palette": 0,
@@ -2774,7 +2727,6 @@
     },
     {
         "name": "Parasect",
-        "address": "0x083588d0",
         "species": "0x0836090c",
         "category": "0x08360918",
         "overworld_palette": 0,
@@ -2833,7 +2785,6 @@
     },
     {
         "name": "Venonat",
-        "address": "0x08358918",
         "species": "0x08360904",
         "category": "0x083608fc",
         "overworld_palette": 2,
@@ -2892,7 +2843,6 @@
     },
     {
         "name": "Venomoth",
-        "address": "0x08358960",
         "species": "0x083608f0",
         "category": "0x083608e4",
         "overworld_palette": 7,
@@ -2951,7 +2901,6 @@
     },
     {
         "name": "Diglett",
-        "address": "0x083589a8",
         "species": "0x083608dc",
         "category": "0x083608d4",
         "overworld_palette": 4,
@@ -3010,7 +2959,6 @@
     },
     {
         "name": "Dugtrio",
-        "address": "0x083589f0",
         "species": "0x083608cc",
         "category": "0x083608d4",
         "overworld_palette": 4,
@@ -3069,7 +3017,6 @@
     },
     {
         "name": "Meowth",
-        "address": "0x08358a38",
         "species": "0x083608c4",
         "category": "0x083608b8",
         "overworld_palette": 4,
@@ -3128,7 +3075,6 @@
     },
     {
         "name": "Persian",
-        "address": "0x08358a80",
         "species": "0x083608b0",
         "category": "0x083608a4",
         "overworld_palette": 4,
@@ -3187,7 +3133,6 @@
     },
     {
         "name": "Psyduck",
-        "address": "0x08358ac8",
         "species": "0x0836089c",
         "category": "0x08360894",
         "overworld_palette": 4,
@@ -3246,7 +3191,6 @@
     },
     {
         "name": "Golduck",
-        "address": "0x08358b10",
         "species": "0x0836088c",
         "category": "0x08360894",
         "overworld_palette": 0,
@@ -3305,7 +3249,6 @@
     },
     {
         "name": "Mankey",
-        "address": "0x08358b58",
         "species": "0x08360884",
         "category": "0x08360878",
         "overworld_palette": 4,
@@ -3364,7 +3307,6 @@
     },
     {
         "name": "Primeape",
-        "address": "0x08358ba0",
         "species": "0x0836086c",
         "category": "0x08360878",
         "overworld_palette": 6,
@@ -3423,7 +3365,6 @@
     },
     {
         "name": "Growlithe",
-        "address": "0x08358be8",
         "species": "0x08360860",
         "category": "0x08360858",
         "overworld_palette": 0,
@@ -3482,7 +3423,6 @@
     },
     {
         "name": "Arcanine",
-        "address": "0x08358c30",
         "species": "0x0836084c",
         "category": "0x08360840",
         "overworld_palette": 0,
@@ -3541,7 +3481,6 @@
     },
     {
         "name": "Poliwag",
-        "address": "0x08358c78",
         "species": "0x08360838",
         "category": "0x08360830",
         "overworld_palette": 2,
@@ -3600,7 +3539,6 @@
     },
     {
         "name": "Poliwhirl",
-        "address": "0x08358cc0",
         "species": "0x08360824",
         "category": "0x08360830",
         "overworld_palette": 2,
@@ -3659,7 +3597,6 @@
     },
     {
         "name": "Poliwrath",
-        "address": "0x08358d08",
         "species": "0x08360818",
         "category": "0x08360830",
         "overworld_palette": 2,
@@ -3718,7 +3655,6 @@
     },
     {
         "name": "Abra",
-        "address": "0x08358d50",
         "species": "0x08360810",
         "category": "0x0836080c",
         "overworld_palette": 4,
@@ -3777,7 +3713,6 @@
     },
     {
         "name": "Kadabra",
-        "address": "0x08358d98",
         "species": "0x08360804",
         "category": "0x0836080c",
         "overworld_palette": 4,
@@ -3836,7 +3771,6 @@
     },
     {
         "name": "Alakazam",
-        "address": "0x08358de0",
         "species": "0x083607f8",
         "category": "0x0836080c",
         "overworld_palette": 4,
@@ -3895,7 +3829,6 @@
     },
     {
         "name": "Machop",
-        "address": "0x08358e28",
         "species": "0x083607f0",
         "category": "0x083607e4",
         "overworld_palette": 12,
@@ -3954,7 +3887,6 @@
     },
     {
         "name": "Machoke",
-        "address": "0x08358e70",
         "species": "0x083607dc",
         "category": "0x083607e4",
         "overworld_palette": 2,
@@ -4013,7 +3945,6 @@
     },
     {
         "name": "Machamp",
-        "address": "0x08358eb8",
         "species": "0x083607d4",
         "category": "0x083607e4",
         "overworld_palette": 12,
@@ -4072,7 +4003,6 @@
     },
     {
         "name": "Bellsprout",
-        "address": "0x08358f00",
         "species": "0x083607c8",
         "category": "0x0836092c",
         "overworld_palette": 3,
@@ -4131,7 +4061,6 @@
     },
     {
         "name": "Weepinbell",
-        "address": "0x08358f48",
         "species": "0x083607bc",
         "category": "0x083607b0",
         "overworld_palette": 3,
@@ -4190,7 +4119,6 @@
     },
     {
         "name": "Victreebel",
-        "address": "0x08358f90",
         "species": "0x083607a4",
         "category": "0x083607b0",
         "overworld_palette": 3,
@@ -4249,7 +4177,6 @@
     },
     {
         "name": "Tentacool",
-        "address": "0x08358fd8",
         "species": "0x08360798",
         "category": "0x0836078c",
         "overworld_palette": 1,
@@ -4308,7 +4235,6 @@
     },
     {
         "name": "Tentacruel",
-        "address": "0x08359020",
         "species": "0x08360780",
         "category": "0x0836078c",
         "overworld_palette": 1,
@@ -4367,7 +4293,6 @@
     },
     {
         "name": "Geodude",
-        "address": "0x08359068",
         "species": "0x08360778",
         "category": "0x08360770",
         "overworld_palette": 7,
@@ -4426,7 +4351,6 @@
     },
     {
         "name": "Graveler",
-        "address": "0x083590b0",
         "species": "0x08360764",
         "category": "0x08360770",
         "overworld_palette": 6,
@@ -4485,7 +4409,6 @@
     },
     {
         "name": "Golem",
-        "address": "0x083590f8",
         "species": "0x0836075c",
         "category": "0x08360754",
         "overworld_palette": 6,
@@ -4544,7 +4467,6 @@
     },
     {
         "name": "Ponyta",
-        "address": "0x08359140",
         "species": "0x0836074c",
         "category": "0x08360740",
         "overworld_palette": 0,
@@ -4603,7 +4525,6 @@
     },
     {
         "name": "Rapidash",
-        "address": "0x08359188",
         "species": "0x08360734",
         "category": "0x08360740",
         "overworld_palette": 0,
@@ -4662,7 +4583,6 @@
     },
     {
         "name": "Slowpoke",
-        "address": "0x083591d0",
         "species": "0x08360728",
         "category": "0x08360720",
         "overworld_palette": 5,
@@ -4721,7 +4641,6 @@
     },
     {
         "name": "Slowbro",
-        "address": "0x08359218",
         "species": "0x08360718",
         "category": "0x0836070c",
         "overworld_palette": 5,
@@ -4780,7 +4699,6 @@
     },
     {
         "name": "Magnemite",
-        "address": "0x08359260",
         "species": "0x08360700",
         "category": "0x083606f8",
         "overworld_palette": 5,
@@ -4839,7 +4757,6 @@
     },
     {
         "name": "Magneton",
-        "address": "0x083592a8",
         "species": "0x083606ec",
         "category": "0x083606f8",
         "overworld_palette": 5,
@@ -4898,7 +4815,6 @@
     },
     {
         "name": "Farfetch",
-        "address": "0x083592f0",
         "species": "0x083606e0",
         "category": "0x083606d4",
         "overworld_palette": 8,
@@ -4957,7 +4873,6 @@
     },
     {
         "name": "Doduo",
-        "address": "0x08359338",
         "species": "0x083606cc",
         "category": "0x083606c0",
         "overworld_palette": 4,
@@ -5016,7 +4931,6 @@
     },
     {
         "name": "Dodrio",
-        "address": "0x08359380",
         "species": "0x083606b8",
         "category": "0x083606ac",
         "overworld_palette": 4,
@@ -5075,7 +4989,6 @@
     },
     {
         "name": "Seel",
-        "address": "0x083593c8",
         "species": "0x083606a4",
         "category": "0x08360698",
         "overworld_palette": 5,
@@ -5134,7 +5047,6 @@
     },
     {
         "name": "Dewgong",
-        "address": "0x08359410",
         "species": "0x08360690",
         "category": "0x08360698",
         "overworld_palette": 5,
@@ -5193,7 +5105,6 @@
     },
     {
         "name": "Grimer",
-        "address": "0x08359458",
         "species": "0x08360688",
         "category": "0x08360680",
         "overworld_palette": 2,
@@ -5252,7 +5163,6 @@
     },
     {
         "name": "Muk",
-        "address": "0x083594a0",
         "species": "0x0836067c",
         "category": "0x08360680",
         "overworld_palette": 2,
@@ -5311,7 +5221,6 @@
     },
     {
         "name": "Shellder",
-        "address": "0x083594e8",
         "species": "0x08360670",
         "category": "0x08360668",
         "overworld_palette": 2,
@@ -5370,7 +5279,6 @@
     },
     {
         "name": "Cloyster",
-        "address": "0x08359530",
         "species": "0x0836065c",
         "category": "0x08360668",
         "overworld_palette": 7,
@@ -5429,7 +5337,6 @@
     },
     {
         "name": "Gastly",
-        "address": "0x08359578",
         "species": "0x08360654",
         "category": "0x08360650",
         "overworld_palette": 2,
@@ -5488,7 +5395,6 @@
     },
     {
         "name": "Haunter",
-        "address": "0x083595c0",
         "species": "0x08360648",
         "category": "0x08360650",
         "overworld_palette": 2,
@@ -5547,7 +5453,6 @@
     },
     {
         "name": "Gengar",
-        "address": "0x08359608",
         "species": "0x08360640",
         "category": "0x08360638",
         "overworld_palette": 2,
@@ -5606,7 +5511,6 @@
     },
     {
         "name": "Onix",
-        "address": "0x08359650",
         "species": "0x08360630",
         "category": "0x08360624",
         "overworld_palette": 5,
@@ -5665,7 +5569,6 @@
     },
     {
         "name": "Drowzee",
-        "address": "0x08359698",
         "species": "0x0836061c",
         "category": "0x08360610",
         "overworld_palette": 4,
@@ -5724,7 +5627,6 @@
     },
     {
         "name": "Hypno",
-        "address": "0x083596e0",
         "species": "0x08360608",
         "category": "0x08360610",
         "overworld_palette": 2,
@@ -5783,7 +5685,6 @@
     },
     {
         "name": "Krabby",
-        "address": "0x08359728",
         "species": "0x08360600",
         "category": "0x083605f4",
         "overworld_palette": 0,
@@ -5842,7 +5743,6 @@
     },
     {
         "name": "Kingler",
-        "address": "0x08359770",
         "species": "0x083605ec",
         "category": "0x083605e4",
         "overworld_palette": 0,
@@ -5901,7 +5801,6 @@
     },
     {
         "name": "Voltorb",
-        "address": "0x083597b8",
         "species": "0x083605dc",
         "category": "0x083605d4",
         "overworld_palette": 5,
@@ -5960,7 +5859,6 @@
     },
     {
         "name": "Electrode",
-        "address": "0x08359800",
         "species": "0x083605c8",
         "category": "0x083605d4",
         "overworld_palette": 5,
@@ -6019,7 +5917,6 @@
     },
     {
         "name": "Exeggcute",
-        "address": "0x08359848",
         "species": "0x083605bc",
         "category": "0x083605b8",
         "overworld_palette": 10,
@@ -6078,7 +5975,6 @@
     },
     {
         "name": "Exeggutor",
-        "address": "0x08359890",
         "species": "0x083605ac",
         "category": "0x083605a4",
         "overworld_palette": 8,
@@ -6137,7 +6033,6 @@
     },
     {
         "name": "Cubone",
-        "address": "0x083598d8",
         "species": "0x0836059c",
         "category": "0x08360594",
         "overworld_palette": 6,
@@ -6196,7 +6091,6 @@
     },
     {
         "name": "Marowak",
-        "address": "0x08359920",
         "species": "0x0836058c",
         "category": "0x08360580",
         "overworld_palette": 6,
@@ -6255,7 +6149,6 @@
     },
     {
         "name": "Hitmonlee",
-        "address": "0x08359968",
         "species": "0x08360574",
         "category": "0x0836056c",
         "overworld_palette": 6,
@@ -6314,7 +6207,6 @@
     },
     {
         "name": "Hitmonchan",
-        "address": "0x083599b0",
         "species": "0x08360560",
         "category": "0x08360554",
         "overworld_palette": 6,
@@ -6373,7 +6265,6 @@
     },
     {
         "name": "Lickitung",
-        "address": "0x083599f8",
         "species": "0x08360548",
         "category": "0x08360540",
         "overworld_palette": 4,
@@ -6432,7 +6323,6 @@
     },
     {
         "name": "Koffing",
-        "address": "0x08359a40",
         "species": "0x08360538",
         "category": "0x0836052c",
         "overworld_palette": 2,
@@ -6491,7 +6381,6 @@
     },
     {
         "name": "Weezing",
-        "address": "0x08359a88",
         "species": "0x08360524",
         "category": "0x0836052c",
         "overworld_palette": 7,
@@ -6550,7 +6439,6 @@
     },
     {
         "name": "Rhyhorn",
-        "address": "0x08359ad0",
         "species": "0x0836051c",
         "category": "0x08360514",
         "overworld_palette": 6,
@@ -6609,7 +6497,6 @@
     },
     {
         "name": "Rhydon",
-        "address": "0x08359b18",
         "species": "0x0836050c",
         "category": "0x083609e8",
         "overworld_palette": 6,
@@ -6668,7 +6555,6 @@
     },
     {
         "name": "Chansey",
-        "address": "0x08359b60",
         "species": "0x08360504",
         "category": "0x083605b8",
         "overworld_palette": 4,
@@ -6727,7 +6613,6 @@
     },
     {
         "name": "Tangela",
-        "address": "0x08359ba8",
         "species": "0x083604fc",
         "category": "0x083604f4",
         "overworld_palette": 11,
@@ -6786,7 +6671,6 @@
     },
     {
         "name": "Kangaskhan",
-        "address": "0x08359bf0",
         "species": "0x083604e8",
         "category": "0x083604e0",
         "overworld_palette": 6,
@@ -6845,7 +6729,6 @@
     },
     {
         "name": "Horsea",
-        "address": "0x08359c38",
         "species": "0x083604d8",
         "category": "0x083604d0",
         "overworld_palette": 0,
@@ -6904,7 +6787,6 @@
     },
     {
         "name": "Seadra",
-        "address": "0x08359c80",
         "species": "0x083604c8",
         "category": "0x083604d0",
         "overworld_palette": 0,
@@ -6963,7 +6845,6 @@
     },
     {
         "name": "Goldeen",
-        "address": "0x08359cc8",
         "species": "0x083604c0",
         "category": "0x083604b4",
         "overworld_palette": 0,
@@ -7022,7 +6903,6 @@
     },
     {
         "name": "Seaking",
-        "address": "0x08359d10",
         "species": "0x083604ac",
         "category": "0x083604b4",
         "overworld_palette": 0,
@@ -7081,7 +6961,6 @@
     },
     {
         "name": "Staryu",
-        "address": "0x08359d58",
         "species": "0x083604a4",
         "category": "0x08360498",
         "overworld_palette": 4,
@@ -7140,7 +7019,6 @@
     },
     {
         "name": "Starmie",
-        "address": "0x08359da0",
         "species": "0x08360490",
         "category": "0x08360484",
         "overworld_palette": 2,
@@ -7199,7 +7077,6 @@
     },
     {
         "name": "Mr. Mime",
-        "address": "0x08359de8",
         "species": "0x08360478",
         "category": "0x08360470",
         "overworld_palette": 11,
@@ -7258,7 +7135,6 @@
     },
     {
         "name": "Scyther",
-        "address": "0x08359e30",
         "species": "0x08360468",
         "category": "0x08360460",
         "overworld_palette": 8,
@@ -7317,7 +7193,6 @@
     },
     {
         "name": "Jynx",
-        "address": "0x08359e78",
         "species": "0x08360458",
         "category": "0x0836044c",
         "overworld_palette": 2,
@@ -7376,7 +7251,6 @@
     },
     {
         "name": "Electabuzz",
-        "address": "0x08359ec0",
         "species": "0x08360440",
         "category": "0x08360434",
         "overworld_palette": 4,
@@ -7435,7 +7309,6 @@
     },
     {
         "name": "Magmar",
-        "address": "0x08359f08",
         "species": "0x0836042c",
         "category": "0x08360420",
         "overworld_palette": 2,
@@ -7494,7 +7367,6 @@
     },
     {
         "name": "Pinsir",
-        "address": "0x08359f50",
         "species": "0x08360418",
         "category": "0x0836040c",
         "overworld_palette": 6,
@@ -7553,7 +7425,6 @@
     },
     {
         "name": "Tauros",
-        "address": "0x08359f98",
         "species": "0x08360404",
         "category": "0x083603f8",
         "overworld_palette": 6,
@@ -7612,7 +7483,6 @@
     },
     {
         "name": "Magikarp",
-        "address": "0x08359fe0",
         "species": "0x083603ec",
         "category": "0x083603e4",
         "overworld_palette": 0,
@@ -7671,7 +7541,6 @@
     },
     {
         "name": "Gyarados",
-        "address": "0x0835a028",
         "species": "0x083603d8",
         "category": "0x083603cc",
         "overworld_palette": 5,
@@ -7730,7 +7599,6 @@
     },
     {
         "name": "Lapras",
-        "address": "0x0835a070",
         "species": "0x083603c4",
         "category": "0x083603b8",
         "overworld_palette": 5,
@@ -7789,7 +7657,6 @@
     },
     {
         "name": "Ditto",
-        "address": "0x0835a0b8",
         "species": "0x083603b0",
         "category": "0x083603a4",
         "overworld_palette": 7,
@@ -7848,7 +7715,6 @@
     },
     {
         "name": "Eevee",
-        "address": "0x0835a100",
         "species": "0x0836039c",
         "category": "0x08360390",
         "overworld_palette": 4,
@@ -7907,7 +7773,6 @@
     },
     {
         "name": "Vaporeon",
-        "address": "0x0835a148",
         "species": "0x08360384",
         "category": "0x08360378",
         "overworld_palette": 0,
@@ -7966,7 +7831,6 @@
     },
     {
         "name": "Jolteon",
-        "address": "0x0835a190",
         "species": "0x08360370",
         "category": "0x08360364",
         "overworld_palette": 2,
@@ -8025,7 +7889,6 @@
     },
     {
         "name": "Flareon",
-        "address": "0x0835a1d8",
         "species": "0x0836035c",
         "category": "0x08360b8c",
         "overworld_palette": 0,
@@ -8084,7 +7947,6 @@
     },
     {
         "name": "Porygon",
-        "address": "0x0835a220",
         "species": "0x08360354",
         "category": "0x0836034c",
         "overworld_palette": 1,
@@ -8143,7 +8005,6 @@
     },
     {
         "name": "Omanyte",
-        "address": "0x0835a268",
         "species": "0x08360344",
         "category": "0x0836033c",
         "overworld_palette": 0,
@@ -8202,7 +8063,6 @@
     },
     {
         "name": "Omastar",
-        "address": "0x0835a2b0",
         "species": "0x08360334",
         "category": "0x0836033c",
         "overworld_palette": 0,
@@ -8261,7 +8121,6 @@
     },
     {
         "name": "Kabuto",
-        "address": "0x0835a2f8",
         "species": "0x0836032c",
         "category": "0x08360b3c",
         "overworld_palette": 4,
@@ -8320,7 +8179,6 @@
     },
     {
         "name": "Kabutops",
-        "address": "0x0835a340",
         "species": "0x08360320",
         "category": "0x08360b3c",
         "overworld_palette": 6,
@@ -8379,7 +8237,6 @@
     },
     {
         "name": "Aerodactyl",
-        "address": "0x0835a388",
         "species": "0x08360314",
         "category": "0x0836030c",
         "overworld_palette": 2,
@@ -8438,7 +8295,6 @@
     },
     {
         "name": "Snorlax",
-        "address": "0x0835a3d0",
         "species": "0x08360304",
         "category": "0x083602f8",
         "overworld_palette": 6,
@@ -8497,7 +8353,6 @@
     },
     {
         "name": "Articuno",
-        "address": "0x0835a418",
         "species": "0x083602ec",
         "category": "0x083602e4",
         "overworld_palette": 5,
@@ -8556,7 +8411,6 @@
     },
     {
         "name": "Zapdos",
-        "address": "0x0835a460",
         "species": "0x083602dc",
         "category": "0x08360434",
         "overworld_palette": 4,
@@ -8615,7 +8469,6 @@
     },
     {
         "name": "Moltres",
-        "address": "0x0835a4a8",
         "species": "0x083602d4",
         "category": "0x08360b8c",
         "overworld_palette": 0,
@@ -8674,7 +8527,6 @@
     },
     {
         "name": "Dratini",
-        "address": "0x0835a4f0",
         "species": "0x083602cc",
         "category": "0x083604d0",
         "overworld_palette": 5,
@@ -8733,7 +8585,6 @@
     },
     {
         "name": "Dragonair",
-        "address": "0x0835a538",
         "species": "0x083602c0",
         "category": "0x083604d0",
         "overworld_palette": 9,
@@ -8792,7 +8643,6 @@
     },
     {
         "name": "Dragonite",
-        "address": "0x0835a580",
         "species": "0x083602b4",
         "category": "0x083604d0",
         "overworld_palette": 8,
@@ -8851,7 +8701,6 @@
     },
     {
         "name": "Mewtwo",
-        "address": "0x0835a5c8",
         "species": "0x083602ac",
         "category": "0x083602a4",
         "overworld_palette": 7,
@@ -8910,7 +8759,6 @@
     },
     {
         "name": "Mew",
-        "address": "0x0835a610",
         "species": "0x083602a0",
         "category": "0x08360294",
         "overworld_palette": 1,
@@ -8969,7 +8817,6 @@
     },
     {
         "name": "Chikorita",
-        "address": "0x0835a658",
         "species": "0x08360288",
         "category": "0x08360280",
         "overworld_palette": 3,
@@ -9028,7 +8875,6 @@
     },
     {
         "name": "Bayleef",
-        "address": "0x0835a6a0",
         "species": "0x08360278",
         "category": "0x08360280",
         "overworld_palette": 3,
@@ -9087,7 +8933,6 @@
     },
     {
         "name": "Meganium",
-        "address": "0x0835a6e8",
         "species": "0x0836026c",
         "category": "0x08360264",
         "overworld_palette": 3,
@@ -9146,7 +8991,6 @@
     },
     {
         "name": "Cyndaquil",
-        "address": "0x0835a730",
         "species": "0x08360258",
         "category": "0x0836024c",
         "overworld_palette": 2,
@@ -9205,7 +9049,6 @@
     },
     {
         "name": "Quilava",
-        "address": "0x0835a778",
         "species": "0x08360244",
         "category": "0x0836023c",
         "overworld_palette": 2,
@@ -9264,7 +9107,6 @@
     },
     {
         "name": "Typhlosion",
-        "address": "0x0835a7c0",
         "species": "0x08360230",
         "category": "0x0836023c",
         "overworld_palette": 2,
@@ -9323,7 +9165,6 @@
     },
     {
         "name": "Totodile",
-        "address": "0x0835a808",
         "species": "0x08360224",
         "category": "0x0836021c",
         "overworld_palette": 0,
@@ -9382,7 +9223,6 @@
     },
     {
         "name": "Croconaw",
-        "address": "0x0835a850",
         "species": "0x08360210",
         "category": "0x0836021c",
         "overworld_palette": 0,
@@ -9441,7 +9281,6 @@
     },
     {
         "name": "Feraligatr",
-        "address": "0x0835a898",
         "species": "0x08360204",
         "category": "0x0836021c",
         "overworld_palette": 0,
@@ -9500,7 +9339,6 @@
     },
     {
         "name": "Sentret",
-        "address": "0x0835a8e0",
         "species": "0x083601fc",
         "category": "0x083601f4",
         "overworld_palette": 1,
@@ -9559,7 +9397,6 @@
     },
     {
         "name": "Furret",
-        "address": "0x0835a928",
         "species": "0x083601ec",
         "category": "0x083601e0",
         "overworld_palette": 4,
@@ -9618,7 +9455,6 @@
     },
     {
         "name": "Hoothoot",
-        "address": "0x0835a970",
         "species": "0x083601d4",
         "category": "0x083601d0",
         "overworld_palette": 6,
@@ -9677,7 +9513,6 @@
     },
     {
         "name": "Noctowl",
-        "address": "0x0835a9b8",
         "species": "0x083601c8",
         "category": "0x083601d0",
         "overworld_palette": 4,
@@ -9736,7 +9571,6 @@
     },
     {
         "name": "Ledyba",
-        "address": "0x0835aa00",
         "species": "0x083601c0",
         "category": "0x083601b4",
         "overworld_palette": 2,
@@ -9795,7 +9629,6 @@
     },
     {
         "name": "Ledian",
-        "address": "0x0835aa48",
         "species": "0x083601ac",
         "category": "0x083601b4",
         "overworld_palette": 2,
@@ -9854,7 +9687,6 @@
     },
     {
         "name": "Spinarak",
-        "address": "0x0835aa90",
         "species": "0x083601a0",
         "category": "0x08360194",
         "overworld_palette": 3,
@@ -9913,7 +9745,6 @@
     },
     {
         "name": "Ariados",
-        "address": "0x0835aad8",
         "species": "0x0836018c",
         "category": "0x08360180",
         "overworld_palette": 2,
@@ -9972,7 +9803,6 @@
     },
     {
         "name": "Crobat",
-        "address": "0x0835ab20",
         "species": "0x08360178",
         "category": "0x08360960",
         "overworld_palette": 7,
@@ -10031,7 +9861,6 @@
     },
     {
         "name": "Chinchou",
-        "address": "0x0835ab68",
         "species": "0x0836016c",
         "category": "0x08360164",
         "overworld_palette": 0,
@@ -10090,7 +9919,6 @@
     },
     {
         "name": "Lanturn",
-        "address": "0x0835abb0",
         "species": "0x0836015c",
         "category": "0x08360154",
         "overworld_palette": 0,
@@ -10149,7 +9977,6 @@
     },
     {
         "name": "Pichu",
-        "address": "0x0835abf8",
         "species": "0x0836014c",
         "category": "0x08360140",
         "overworld_palette": 0,
@@ -10208,7 +10035,6 @@
     },
     {
         "name": "Cleffa",
-        "address": "0x0835ac40",
         "species": "0x08360138",
         "category": "0x08360498",
         "overworld_palette": 1,
@@ -10267,7 +10093,6 @@
     },
     {
         "name": "Igglybuff",
-        "address": "0x0835ac88",
         "species": "0x0836012c",
         "category": "0x08360978",
         "overworld_palette": 1,
@@ -10326,7 +10151,6 @@
     },
     {
         "name": "Togepi",
-        "address": "0x0835acd0",
         "species": "0x08360124",
         "category": "0x08360118",
         "overworld_palette": 5,
@@ -10385,7 +10209,6 @@
     },
     {
         "name": "Togetic",
-        "address": "0x0835ad18",
         "species": "0x08360110",
         "category": "0x08360104",
         "overworld_palette": 5,
@@ -10444,7 +10267,6 @@
     },
     {
         "name": "Natu",
-        "address": "0x0835ad60",
         "species": "0x083600fc",
         "category": "0x08360ab8",
         "overworld_palette": 3,
@@ -10503,7 +10325,6 @@
     },
     {
         "name": "Xatu",
-        "address": "0x0835ada8",
         "species": "0x083600f4",
         "category": "0x083600ec",
         "overworld_palette": 3,
@@ -10562,7 +10383,6 @@
     },
     {
         "name": "Mareep",
-        "address": "0x0835adf0",
         "species": "0x083600e4",
         "category": "0x083600dc",
         "overworld_palette": 0,
@@ -10621,7 +10441,6 @@
     },
     {
         "name": "Flaaffy",
-        "address": "0x0835ae38",
         "species": "0x083600d4",
         "category": "0x083600dc",
         "overworld_palette": 11,
@@ -10680,7 +10499,6 @@
     },
     {
         "name": "Ampharos",
-        "address": "0x0835ae80",
         "species": "0x083600c8",
         "category": "0x08360154",
         "overworld_palette": 2,
@@ -10739,7 +10557,6 @@
     },
     {
         "name": "Bellossom",
-        "address": "0x0835aec8",
         "species": "0x083600bc",
         "category": "0x0836092c",
         "overworld_palette": 3,
@@ -10798,7 +10615,6 @@
     },
     {
         "name": "Marill",
-        "address": "0x0835af10",
         "species": "0x083600b4",
         "category": "0x083600a8",
         "overworld_palette": 5,
@@ -10857,7 +10673,6 @@
     },
     {
         "name": "Azumarill",
-        "address": "0x0835af58",
         "species": "0x0836009c",
         "category": "0x08360090",
         "overworld_palette": 5,
@@ -10916,7 +10731,6 @@
     },
     {
         "name": "Sudowoodo",
-        "address": "0x0835afa0",
         "species": "0x08360084",
         "category": "0x08360078",
         "overworld_palette": 8,
@@ -10975,7 +10789,6 @@
     },
     {
         "name": "Politoed",
-        "address": "0x0835afe8",
         "species": "0x0836006c",
         "category": "0x08360064",
         "overworld_palette": 3,
@@ -11034,7 +10847,6 @@
     },
     {
         "name": "Hoppip",
-        "address": "0x0835b030",
         "species": "0x0836005c",
         "category": "0x08360050",
         "overworld_palette": 10,
@@ -11093,7 +10905,6 @@
     },
     {
         "name": "Skiploom",
-        "address": "0x0835b078",
         "species": "0x08360044",
         "category": "0x08360050",
         "overworld_palette": 3,
@@ -11152,7 +10963,6 @@
     },
     {
         "name": "Jumpluff",
-        "address": "0x0835b0c0",
         "species": "0x08360038",
         "category": "0x08360050",
         "overworld_palette": 12,
@@ -11211,7 +11021,6 @@
     },
     {
         "name": "Aipom",
-        "address": "0x0835b108",
         "species": "0x08360030",
         "category": "0x08360024",
         "overworld_palette": 7,
@@ -11270,7 +11079,6 @@
     },
     {
         "name": "Sunkern",
-        "address": "0x0835b150",
         "species": "0x0836001c",
         "category": "0x08360bc8",
         "overworld_palette": 3,
@@ -11329,7 +11137,6 @@
     },
     {
         "name": "Sunflora",
-        "address": "0x0835b198",
         "species": "0x08360010",
         "category": "0x0836000c",
         "overworld_palette": 3,
@@ -11388,7 +11195,6 @@
     },
     {
         "name": "Yanma",
-        "address": "0x0835b1e0",
         "species": "0x08360004",
         "category": "0x0835fff8",
         "overworld_palette": 3,
@@ -11447,7 +11253,6 @@
     },
     {
         "name": "Wooper",
-        "address": "0x0835b228",
         "species": "0x0835fff0",
         "category": "0x0835ffe4",
         "overworld_palette": 7,
@@ -11506,7 +11311,6 @@
     },
     {
         "name": "Quagsire",
-        "address": "0x0835b270",
         "species": "0x0835ffd8",
         "category": "0x0835ffe4",
         "overworld_palette": 7,
@@ -11565,7 +11369,6 @@
     },
     {
         "name": "Espeon",
-        "address": "0x0835b2b8",
         "species": "0x0835ffd0",
         "category": "0x0836000c",
         "overworld_palette": 2,
@@ -11624,7 +11427,6 @@
     },
     {
         "name": "Umbreon",
-        "address": "0x0835b300",
         "species": "0x0835ffc8",
         "category": "0x0835ffbc",
         "overworld_palette": 5,
@@ -11683,7 +11485,6 @@
     },
     {
         "name": "Murkrow",
-        "address": "0x0835b348",
         "species": "0x0835ffb4",
         "category": "0x0835ffa8",
         "overworld_palette": 2,
@@ -11742,7 +11543,6 @@
     },
     {
         "name": "Slowking",
-        "address": "0x0835b390",
         "species": "0x0835ff9c",
         "category": "0x0835ff94",
         "overworld_palette": 6,
@@ -11801,7 +11601,6 @@
     },
     {
         "name": "Misdreavus",
-        "address": "0x0835b3d8",
         "species": "0x0835ff88",
         "category": "0x0835ff80",
         "overworld_palette": 11,
@@ -11860,7 +11659,6 @@
     },
     {
         "name": "Unown-A",
-        "address": "0x0835b420",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -11919,7 +11717,6 @@
     },
     {
         "name": "Unown-B",
-        "address": "0x0835b468",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -11978,7 +11775,6 @@
     },
     {
         "name": "Unown-C",
-        "address": "0x0835b4b0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12037,7 +11833,6 @@
     },
     {
         "name": "Unown-D",
-        "address": "0x0835b4f8",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12096,7 +11891,6 @@
     },
     {
         "name": "Unown-E",
-        "address": "0x0835b540",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12155,7 +11949,6 @@
     },
     {
         "name": "Unown-F",
-        "address": "0x0835b588",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12214,7 +12007,6 @@
     },
     {
         "name": "Unown-G",
-        "address": "0x0835b5d0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12273,7 +12065,6 @@
     },
     {
         "name": "Unown-H",
-        "address": "0x0835b618",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12332,7 +12123,6 @@
     },
     {
         "name": "Unown-I",
-        "address": "0x0835b660",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12391,7 +12181,6 @@
     },
     {
         "name": "Unown-J",
-        "address": "0x0835b6a8",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12450,7 +12239,6 @@
     },
     {
         "name": "Unown-K",
-        "address": "0x0835b6f0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12509,7 +12297,6 @@
     },
     {
         "name": "Unown-L",
-        "address": "0x0835b738",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12568,7 +12355,6 @@
     },
     {
         "name": "Unown-M",
-        "address": "0x0835b780",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12627,7 +12413,6 @@
     },
     {
         "name": "Unown-N",
-        "address": "0x0835b7c8",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12686,7 +12471,6 @@
     },
     {
         "name": "Unown-O",
-        "address": "0x0835b810",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12745,7 +12529,6 @@
     },
     {
         "name": "Unown-P",
-        "address": "0x0835b858",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12804,7 +12587,6 @@
     },
     {
         "name": "Unown-Q",
-        "address": "0x0835b8a0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12863,7 +12645,6 @@
     },
     {
         "name": "Unown-R",
-        "address": "0x0835b8e8",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12922,7 +12703,6 @@
     },
     {
         "name": "Unown-S",
-        "address": "0x0835b930",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -12981,7 +12761,6 @@
     },
     {
         "name": "Unown-T",
-        "address": "0x0835b978",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13040,7 +12819,6 @@
     },
     {
         "name": "Unown-U",
-        "address": "0x0835b9c0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13099,7 +12877,6 @@
     },
     {
         "name": "Unown-V",
-        "address": "0x0835ba08",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13158,7 +12935,6 @@
     },
     {
         "name": "Unown-W",
-        "address": "0x0835ba50",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13217,7 +12993,6 @@
     },
     {
         "name": "Unown-X",
-        "address": "0x0835ba98",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13276,7 +13051,6 @@
     },
     {
         "name": "Unown-Y",
-        "address": "0x0835bae0",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13335,7 +13109,6 @@
     },
     {
         "name": "Unown-Z",
-        "address": "0x0835bb28",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -13394,7 +13167,6 @@
     },
     {
         "name": "Wobbuffet",
-        "address": "0x0835bb70",
         "species": "0x0835ff64",
         "category": "0x0835ff5c",
         "overworld_palette": 5,
@@ -13453,7 +13225,6 @@
     },
     {
         "name": "Girafarig",
-        "address": "0x0835bbb8",
         "species": "0x0835ff50",
         "category": "0x0835ff44",
         "overworld_palette": 4,
@@ -13512,7 +13283,6 @@
     },
     {
         "name": "Pineco",
-        "address": "0x0835bc00",
         "species": "0x0835ff3c",
         "category": "0x0835ff34",
         "overworld_palette": 2,
@@ -13571,7 +13341,6 @@
     },
     {
         "name": "Forretress",
-        "address": "0x0835bc48",
         "species": "0x0835ff28",
         "category": "0x0835ff34",
         "overworld_palette": 6,
@@ -13630,7 +13399,6 @@
     },
     {
         "name": "Dunsparce",
-        "address": "0x0835bc90",
         "species": "0x0835ff1c",
         "category": "0x0835ff10",
         "overworld_palette": 0,
@@ -13689,7 +13457,6 @@
     },
     {
         "name": "Gligar",
-        "address": "0x0835bcd8",
         "species": "0x0835ff08",
         "category": "0x0835fefc",
         "overworld_palette": 7,
@@ -13748,7 +13515,6 @@
     },
     {
         "name": "Steelix",
-        "address": "0x0835bd20",
         "species": "0x0835fef4",
         "category": "0x0835fee8",
         "overworld_palette": 5,
@@ -13807,7 +13573,6 @@
     },
     {
         "name": "Snubbull",
-        "address": "0x0835bd68",
         "species": "0x0835fedc",
         "category": "0x083609b0",
         "overworld_palette": 11,
@@ -13866,7 +13631,6 @@
     },
     {
         "name": "Granbull",
-        "address": "0x0835bdb0",
         "species": "0x0835fed0",
         "category": "0x083609b0",
         "overworld_palette": 2,
@@ -13925,7 +13689,6 @@
     },
     {
         "name": "Qwilfish",
-        "address": "0x0835bdf8",
         "species": "0x0835fec4",
         "category": "0x08360978",
         "overworld_palette": 2,
@@ -13984,7 +13747,6 @@
     },
     {
         "name": "Scizor",
-        "address": "0x0835be40",
         "species": "0x0835febc",
         "category": "0x083605e4",
         "overworld_palette": 2,
@@ -14043,7 +13805,6 @@
     },
     {
         "name": "Shuckle",
-        "address": "0x0835be88",
         "species": "0x0835feb4",
         "category": "0x0835feac",
         "overworld_palette": 0,
@@ -14102,7 +13863,6 @@
     },
     {
         "name": "Heracross",
-        "address": "0x0835bed0",
         "species": "0x0835fea0",
         "category": "0x0835fe94",
         "overworld_palette": 2,
@@ -14161,7 +13921,6 @@
     },
     {
         "name": "Sneasel",
-        "address": "0x0835bf18",
         "species": "0x0835fe8c",
         "category": "0x0835fe80",
         "overworld_palette": 2,
@@ -14220,7 +13979,6 @@
     },
     {
         "name": "Teddiursa",
-        "address": "0x0835bf60",
         "species": "0x0835fe74",
         "category": "0x0835fe68",
         "overworld_palette": 4,
@@ -14279,7 +14037,6 @@
     },
     {
         "name": "Ursaring",
-        "address": "0x0835bfa8",
         "species": "0x0835fe5c",
         "category": "0x0835fe50",
         "overworld_palette": 4,
@@ -14338,7 +14095,6 @@
     },
     {
         "name": "Slugma",
-        "address": "0x0835bff0",
         "species": "0x0835fe48",
         "category": "0x0835fe40",
         "overworld_palette": 0,
@@ -14397,7 +14153,6 @@
     },
     {
         "name": "Magcargo",
-        "address": "0x0835c038",
         "species": "0x0835fe34",
         "category": "0x0835fe40",
         "overworld_palette": 2,
@@ -14456,7 +14211,6 @@
     },
     {
         "name": "Swinub",
-        "address": "0x0835c080",
         "species": "0x0835fe2c",
         "category": "0x0835fe28",
         "overworld_palette": 1,
@@ -14515,7 +14269,6 @@
     },
     {
         "name": "Piloswine",
-        "address": "0x0835c0c8",
         "species": "0x0835fe1c",
         "category": "0x0835fe14",
         "overworld_palette": 1,
@@ -14574,7 +14327,6 @@
     },
     {
         "name": "Corsola",
-        "address": "0x0835c110",
         "species": "0x0835fe0c",
         "category": "0x0835fe04",
         "overworld_palette": 1,
@@ -14633,7 +14385,6 @@
     },
     {
         "name": "Remoraid",
-        "address": "0x0835c158",
         "species": "0x0835fdf8",
         "category": "0x0835fdf4",
         "overworld_palette": 5,
@@ -14692,7 +14443,6 @@
     },
     {
         "name": "Octillery",
-        "address": "0x0835c1a0",
         "species": "0x0835fde8",
         "category": "0x0835fdf4",
         "overworld_palette": 2,
@@ -14751,7 +14501,6 @@
     },
     {
         "name": "Delibird",
-        "address": "0x0835c1e8",
         "species": "0x0835fddc",
         "category": "0x0835fdd0",
         "overworld_palette": 2,
@@ -14810,7 +14559,6 @@
     },
     {
         "name": "Mantine",
-        "address": "0x0835c230",
         "species": "0x0835fdc8",
         "category": "0x0835fdc0",
         "overworld_palette": 7,
@@ -14869,7 +14617,6 @@
     },
     {
         "name": "Skarmory",
-        "address": "0x0835c278",
         "species": "0x0835fdb4",
         "category": "0x0835fda8",
         "overworld_palette": 5,
@@ -14928,7 +14675,6 @@
     },
     {
         "name": "Houndour",
-        "address": "0x0835c2c0",
         "species": "0x0835fd9c",
         "category": "0x0835fd94",
         "overworld_palette": 6,
@@ -14987,7 +14733,6 @@
     },
     {
         "name": "Houndoom",
-        "address": "0x0835c308",
         "species": "0x0835fd88",
         "category": "0x0835fd94",
         "overworld_palette": 6,
@@ -15046,7 +14791,6 @@
     },
     {
         "name": "Kingdra",
-        "address": "0x0835c350",
         "species": "0x0835fd80",
         "category": "0x083604d0",
         "overworld_palette": 0,
@@ -15105,7 +14849,6 @@
     },
     {
         "name": "Phanpy",
-        "address": "0x0835c398",
         "species": "0x0835fd78",
         "category": "0x0835fd6c",
         "overworld_palette": 0,
@@ -15164,7 +14907,6 @@
     },
     {
         "name": "Donphan",
-        "address": "0x0835c3e0",
         "species": "0x0835fd64",
         "category": "0x0835fd5c",
         "overworld_palette": 5,
@@ -15223,7 +14965,6 @@
     },
     {
         "name": "Porygon2",
-        "address": "0x0835c428",
         "species": "0x0835fd50",
         "category": "0x0836034c",
         "overworld_palette": 1,
@@ -15282,7 +15023,6 @@
     },
     {
         "name": "Stantler",
-        "address": "0x0835c470",
         "species": "0x0835fd44",
         "category": "0x0835fd38",
         "overworld_palette": 4,
@@ -15341,7 +15081,6 @@
     },
     {
         "name": "Smeargle",
-        "address": "0x0835c4b8",
         "species": "0x0835fd2c",
         "category": "0x0835fd24",
         "overworld_palette": 8,
@@ -15400,7 +15139,6 @@
     },
     {
         "name": "Tyrogue",
-        "address": "0x0835c500",
         "species": "0x0835fd1c",
         "category": "0x0835fd14",
         "overworld_palette": 2,
@@ -15459,7 +15197,6 @@
     },
     {
         "name": "Hitmontop",
-        "address": "0x0835c548",
         "species": "0x0835fd08",
         "category": "0x0835fcfc",
         "overworld_palette": 9,
@@ -15518,7 +15255,6 @@
     },
     {
         "name": "Smoochum",
-        "address": "0x0835c590",
         "species": "0x0835fcf0",
         "category": "0x0835fce8",
         "overworld_palette": 0,
@@ -15577,7 +15313,6 @@
     },
     {
         "name": "Elekid",
-        "address": "0x0835c5d8",
         "species": "0x0835fce0",
         "category": "0x08360434",
         "overworld_palette": 4,
@@ -15636,7 +15371,6 @@
     },
     {
         "name": "Magby",
-        "address": "0x0835c620",
         "species": "0x0835fcd8",
         "category": "0x0835fccc",
         "overworld_palette": 0,
@@ -15695,7 +15429,6 @@
     },
     {
         "name": "Miltank",
-        "address": "0x0835c668",
         "species": "0x0835fcc4",
         "category": "0x0835fcb8",
         "overworld_palette": 11,
@@ -15754,7 +15487,6 @@
     },
     {
         "name": "Blissey",
-        "address": "0x0835c6b0",
         "species": "0x0835fcb0",
         "category": "0x08360104",
         "overworld_palette": 10,
@@ -15813,7 +15545,6 @@
     },
     {
         "name": "Raikou",
-        "address": "0x0835c6f8",
         "species": "0x0835fca8",
         "category": "0x0835fca0",
         "overworld_palette": 2,
@@ -15872,7 +15603,6 @@
     },
     {
         "name": "Entei",
-        "address": "0x0835c740",
         "species": "0x0835fc98",
         "category": "0x0836023c",
         "overworld_palette": 12,
@@ -15931,7 +15661,6 @@
     },
     {
         "name": "Suicune",
-        "address": "0x0835c788",
         "species": "0x0835fc90",
         "category": "0x0835fc88",
         "overworld_palette": 7,
@@ -15990,7 +15719,6 @@
     },
     {
         "name": "Larvitar",
-        "address": "0x0835c7d0",
         "species": "0x0835fc7c",
         "category": "0x0835fc70",
         "overworld_palette": 3,
@@ -16049,7 +15777,6 @@
     },
     {
         "name": "Pupitar",
-        "address": "0x0835c818",
         "species": "0x0835fc68",
         "category": "0x0835fc5c",
         "overworld_palette": 0,
@@ -16108,7 +15835,6 @@
     },
     {
         "name": "Tyranitar",
-        "address": "0x0835c860",
         "species": "0x0835fc50",
         "category": "0x0835fd5c",
         "overworld_palette": 3,
@@ -16167,7 +15893,6 @@
     },
     {
         "name": "Lugia",
-        "address": "0x0835c8a8",
         "species": "0x0835fc48",
         "category": "0x0835fc40",
         "overworld_palette": 9,
@@ -16226,7 +15951,6 @@
     },
     {
         "name": "Ho-Oh",
-        "address": "0x0835c8f0",
         "species": "0x0835fc38",
         "category": "0x0835fc30",
         "overworld_palette": 3,
@@ -16285,7 +16009,6 @@
     },
     {
         "name": "Celebi",
-        "address": "0x0835c938",
         "species": "0x0835fc28",
         "category": "0x0835fc1c",
         "overworld_palette": 3,
@@ -16344,7 +16067,6 @@
     },
     {
         "name": "Treecko",
-        "address": "0x0835c980",
         "species": "0x0835fc14",
         "category": "0x0835fc08",
         "overworld_palette": 3,
@@ -16403,7 +16125,6 @@
     },
     {
         "name": "Grovyle",
-        "address": "0x0835c9c8",
         "species": "0x0835fc00",
         "category": "0x0835fc08",
         "overworld_palette": 12,
@@ -16462,7 +16183,6 @@
     },
     {
         "name": "Sceptile",
-        "address": "0x0835ca10",
         "species": "0x0835fbf4",
         "category": "0x0835fbec",
         "overworld_palette": 3,
@@ -16521,7 +16241,6 @@
     },
     {
         "name": "Torchic",
-        "address": "0x0835ca58",
         "species": "0x0835fbe4",
         "category": "0x0835fbdc",
         "overworld_palette": 4,
@@ -16580,7 +16299,6 @@
     },
     {
         "name": "Combusken",
-        "address": "0x0835caa0",
         "species": "0x0835fbd0",
         "category": "0x0835fbc4",
         "overworld_palette": 4,
@@ -16639,7 +16357,6 @@
     },
     {
         "name": "Blaziken",
-        "address": "0x0835cae8",
         "species": "0x0835fbb8",
         "category": "0x0835fbb0",
         "overworld_palette": 12,
@@ -16698,7 +16415,6 @@
     },
     {
         "name": "Mudkip",
-        "address": "0x0835cb30",
         "species": "0x0835fba8",
         "category": "0x0835fb9c",
         "overworld_palette": 9,
@@ -16757,7 +16473,6 @@
     },
     {
         "name": "Marshtomp",
-        "address": "0x0835cb78",
         "species": "0x0835fb90",
         "category": "0x0835fb9c",
         "overworld_palette": 5,
@@ -16816,7 +16531,6 @@
     },
     {
         "name": "Swampert",
-        "address": "0x0835cbc0",
         "species": "0x0835fb84",
         "category": "0x0835fb9c",
         "overworld_palette": 5,
@@ -16875,7 +16589,6 @@
     },
     {
         "name": "Poochyena",
-        "address": "0x0835cc08",
         "species": "0x0835fb78",
         "category": "0x0835fb70",
         "overworld_palette": 6,
@@ -16934,7 +16647,6 @@
     },
     {
         "name": "Mightyena",
-        "address": "0x0835cc50",
         "species": "0x0835fb64",
         "category": "0x0835fb70",
         "overworld_palette": 11,
@@ -16993,7 +16705,6 @@
     },
     {
         "name": "Zigzagoon",
-        "address": "0x0835cc98",
         "species": "0x0835fb58",
         "category": "0x0835fb4c",
         "overworld_palette": 6,
@@ -17052,7 +16763,6 @@
     },
     {
         "name": "Linoone",
-        "address": "0x0835cce0",
         "species": "0x0835fb44",
         "category": "0x0835fb3c",
         "overworld_palette": 9,
@@ -17111,7 +16821,6 @@
     },
     {
         "name": "Wurmple",
-        "address": "0x0835cd28",
         "species": "0x0835fb34",
         "category": "0x08360b28",
         "overworld_palette": 5,
@@ -17170,7 +16879,6 @@
     },
     {
         "name": "Silcoon",
-        "address": "0x0835cd70",
         "species": "0x0835fb2c",
         "category": "0x08360b18",
         "overworld_palette": 5,
@@ -17229,7 +16937,6 @@
     },
     {
         "name": "Beautifly",
-        "address": "0x0835cdb8",
         "species": "0x0835fb20",
         "category": "0x08360b00",
         "overworld_palette": 5,
@@ -17288,7 +16995,6 @@
     },
     {
         "name": "Cascoon",
-        "address": "0x0835ce00",
         "species": "0x0835fb18",
         "category": "0x08360b18",
         "overworld_palette": 2,
@@ -17347,7 +17053,6 @@
     },
     {
         "name": "Dustox",
-        "address": "0x0835ce48",
         "species": "0x0835fb10",
         "category": "0x083608e4",
         "overworld_palette": 10,
@@ -17406,7 +17111,6 @@
     },
     {
         "name": "Lotad",
-        "address": "0x0835ce90",
         "species": "0x0835fb08",
         "category": "0x0835fafc",
         "overworld_palette": 3,
@@ -17465,7 +17169,6 @@
     },
     {
         "name": "Lombre",
-        "address": "0x0835ced8",
         "species": "0x0835faf4",
         "category": "0x0835faec",
         "overworld_palette": 3,
@@ -17524,7 +17227,6 @@
     },
     {
         "name": "Ludicolo",
-        "address": "0x0835cf20",
         "species": "0x0835fae0",
         "category": "0x0835fad4",
         "overworld_palette": 8,
@@ -17583,7 +17285,6 @@
     },
     {
         "name": "Seedot",
-        "address": "0x0835cf68",
         "species": "0x0835facc",
         "category": "0x0835fac4",
         "overworld_palette": 6,
@@ -17642,7 +17343,6 @@
     },
     {
         "name": "Nuzleaf",
-        "address": "0x0835cfb0",
         "species": "0x0835fabc",
         "category": "0x0835fab4",
         "overworld_palette": 8,
@@ -17701,7 +17401,6 @@
     },
     {
         "name": "Shiftry",
-        "address": "0x0835cff8",
         "species": "0x0835faac",
         "category": "0x0835faa4",
         "overworld_palette": 8,
@@ -17760,7 +17459,6 @@
     },
     {
         "name": "Taillow",
-        "address": "0x0835d040",
         "species": "0x0835fa9c",
         "category": "0x0835fa90",
         "overworld_palette": 2,
@@ -17819,7 +17517,6 @@
     },
     {
         "name": "Swellow",
-        "address": "0x0835d088",
         "species": "0x0835fa88",
         "category": "0x0835fa80",
         "overworld_palette": 2,
@@ -17878,7 +17575,6 @@
     },
     {
         "name": "Wingull",
-        "address": "0x0835d0d0",
         "species": "0x0835fa78",
         "category": "0x0835fa70",
         "overworld_palette": 5,
@@ -17937,7 +17633,6 @@
     },
     {
         "name": "Pelipper",
-        "address": "0x0835d118",
         "species": "0x0835fa64",
         "category": "0x0835fa58",
         "overworld_palette": 5,
@@ -17996,7 +17691,6 @@
     },
     {
         "name": "Ralts",
-        "address": "0x0835d160",
         "species": "0x0835fa50",
         "category": "0x0835fa48",
         "overworld_palette": 10,
@@ -18055,7 +17749,6 @@
     },
     {
         "name": "Kirlia",
-        "address": "0x0835d1a8",
         "species": "0x0835fa40",
         "category": "0x0835fa38",
         "overworld_palette": 10,
@@ -18114,7 +17807,6 @@
     },
     {
         "name": "Gardevoir",
-        "address": "0x0835d1f0",
         "species": "0x0835fa2c",
         "category": "0x0835fa24",
         "overworld_palette": 10,
@@ -18173,7 +17865,6 @@
     },
     {
         "name": "Surskit",
-        "address": "0x0835d238",
         "species": "0x0835fa1c",
         "category": "0x0835fa10",
         "overworld_palette": 0,
@@ -18232,7 +17923,6 @@
     },
     {
         "name": "Masquerain",
-        "address": "0x0835d280",
         "species": "0x0835fa04",
         "category": "0x0835f9fc",
         "overworld_palette": 3,
@@ -18291,7 +17981,6 @@
     },
     {
         "name": "Shroomish",
-        "address": "0x0835d2c8",
         "species": "0x0835f9f0",
         "category": "0x08360918",
         "overworld_palette": 8,
@@ -18350,7 +18039,6 @@
     },
     {
         "name": "Breloom",
-        "address": "0x0835d310",
         "species": "0x0835f9e8",
         "category": "0x08360918",
         "overworld_palette": 8,
@@ -18409,7 +18097,6 @@
     },
     {
         "name": "Slakoth",
-        "address": "0x0835d358",
         "species": "0x0835f9e0",
         "category": "0x0835f9d8",
         "overworld_palette": 4,
@@ -18468,7 +18155,6 @@
     },
     {
         "name": "Vigoroth",
-        "address": "0x0835d3a0",
         "species": "0x0835f9cc",
         "category": "0x0835f9c0",
         "overworld_palette": 6,
@@ -18527,7 +18213,6 @@
     },
     {
         "name": "Slaking",
-        "address": "0x0835d3e8",
         "species": "0x0835f9b8",
         "category": "0x0835f9b0",
         "overworld_palette": 4,
@@ -18586,7 +18271,6 @@
     },
     {
         "name": "Nincada",
-        "address": "0x0835d430",
         "species": "0x0835f9a8",
         "category": "0x0835f9a0",
         "overworld_palette": 10,
@@ -18645,7 +18329,6 @@
     },
     {
         "name": "Ninjask",
-        "address": "0x0835d478",
         "species": "0x0835f998",
         "category": "0x0835f990",
         "overworld_palette": 5,
@@ -18704,7 +18387,6 @@
     },
     {
         "name": "Shedinja",
-        "address": "0x0835d4c0",
         "species": "0x0835f984",
         "category": "0x0835f97c",
         "overworld_palette": 6,
@@ -18763,7 +18445,6 @@
     },
     {
         "name": "Whismur",
-        "address": "0x0835d508",
         "species": "0x0835f974",
         "category": "0x0835f96c",
         "overworld_palette": 4,
@@ -18822,7 +18503,6 @@
     },
     {
         "name": "Loudred",
-        "address": "0x0835d550",
         "species": "0x0835f964",
         "category": "0x0835f958",
         "overworld_palette": 3,
@@ -18881,7 +18561,6 @@
     },
     {
         "name": "Exploud",
-        "address": "0x0835d598",
         "species": "0x0835f950",
         "category": "0x0835f944",
         "overworld_palette": 3,
@@ -18940,7 +18619,6 @@
     },
     {
         "name": "Makuhita",
-        "address": "0x0835d5e0",
         "species": "0x0835f938",
         "category": "0x0835f930",
         "overworld_palette": 2,
@@ -18999,7 +18677,6 @@
     },
     {
         "name": "Hariyama",
-        "address": "0x0835d628",
         "species": "0x0835f924",
         "category": "0x0835f918",
         "overworld_palette": 9,
@@ -19058,7 +18735,6 @@
     },
     {
         "name": "Azurill",
-        "address": "0x0835d670",
         "species": "0x0835f910",
         "category": "0x0835f904",
         "overworld_palette": 5,
@@ -19117,7 +18793,6 @@
     },
     {
         "name": "Nosepass",
-        "address": "0x0835d6b8",
         "species": "0x0835f8f8",
         "category": "0x0835f8f0",
         "overworld_palette": 0,
@@ -19176,7 +18851,6 @@
     },
     {
         "name": "Skitty",
-        "address": "0x0835d700",
         "species": "0x0835f8e8",
         "category": "0x0835f8e0",
         "overworld_palette": 11,
@@ -19235,7 +18909,6 @@
     },
     {
         "name": "Delcatty",
-        "address": "0x0835d748",
         "species": "0x0835f8d4",
         "category": "0x0835f8cc",
         "overworld_palette": 7,
@@ -19294,7 +18967,6 @@
     },
     {
         "name": "Sableye",
-        "address": "0x0835d790",
         "species": "0x0835f8c4",
         "category": "0x0835ffa8",
         "overworld_palette": 2,
@@ -19353,7 +19025,6 @@
     },
     {
         "name": "Mawile",
-        "address": "0x0835d7d8",
         "species": "0x0835f8bc",
         "category": "0x0835f8b0",
         "overworld_palette": 5,
@@ -19412,7 +19083,6 @@
     },
     {
         "name": "Aron",
-        "address": "0x0835d820",
         "species": "0x0835f8a8",
         "category": "0x0835f89c",
         "overworld_palette": 5,
@@ -19471,7 +19141,6 @@
     },
     {
         "name": "Lairon",
-        "address": "0x0835d868",
         "species": "0x0835f894",
         "category": "0x0835f89c",
         "overworld_palette": 5,
@@ -19530,7 +19199,6 @@
     },
     {
         "name": "Aggron",
-        "address": "0x0835d8b0",
         "species": "0x0835f88c",
         "category": "0x0835f89c",
         "overworld_palette": 5,
@@ -19589,7 +19257,6 @@
     },
     {
         "name": "Meditite",
-        "address": "0x0835d8f8",
         "species": "0x0835f880",
         "category": "0x0835f874",
         "overworld_palette": 5,
@@ -19648,7 +19315,6 @@
     },
     {
         "name": "Medicham",
-        "address": "0x0835d940",
         "species": "0x0835f868",
         "category": "0x0835f874",
         "overworld_palette": 5,
@@ -19707,7 +19373,6 @@
     },
     {
         "name": "Electrike",
-        "address": "0x0835d988",
         "species": "0x0835f85c",
         "category": "0x08360364",
         "overworld_palette": 3,
@@ -19766,7 +19431,6 @@
     },
     {
         "name": "Manectric",
-        "address": "0x0835d9d0",
         "species": "0x0835f850",
         "category": "0x0835f844",
         "overworld_palette": 0,
@@ -19825,7 +19489,6 @@
     },
     {
         "name": "Plusle",
-        "address": "0x0835da18",
         "species": "0x0835f83c",
         "category": "0x0835f830",
         "overworld_palette": 0,
@@ -19884,7 +19547,6 @@
     },
     {
         "name": "Minun",
-        "address": "0x0835da60",
         "species": "0x0835f828",
         "category": "0x0835f830",
         "overworld_palette": 0,
@@ -19943,7 +19605,6 @@
     },
     {
         "name": "Volbeat",
-        "address": "0x0835daa8",
         "species": "0x0835f820",
         "category": "0x0835f818",
         "overworld_palette": 6,
@@ -20002,7 +19663,6 @@
     },
     {
         "name": "Illumise",
-        "address": "0x0835daf0",
         "species": "0x0835f80c",
         "category": "0x0835f818",
         "overworld_palette": 7,
@@ -20061,7 +19721,6 @@
     },
     {
         "name": "Roselia",
-        "address": "0x0835db38",
         "species": "0x0835f804",
         "category": "0x0835f7fc",
         "overworld_palette": 3,
@@ -20120,7 +19779,6 @@
     },
     {
         "name": "Gulpin",
-        "address": "0x0835db80",
         "species": "0x0835f7f4",
         "category": "0x0835f7ec",
         "overworld_palette": 10,
@@ -20179,7 +19837,6 @@
     },
     {
         "name": "Swalot",
-        "address": "0x0835dbc8",
         "species": "0x0835f7e4",
         "category": "0x0835f7d8",
         "overworld_palette": 2,
@@ -20238,7 +19895,6 @@
     },
     {
         "name": "Carvanha",
-        "address": "0x0835dc10",
         "species": "0x0835f7cc",
         "category": "0x0835f7c4",
         "overworld_palette": 2,
@@ -20297,7 +19953,6 @@
     },
     {
         "name": "Sharpedo",
-        "address": "0x0835dc58",
         "species": "0x0835f7b8",
         "category": "0x0835f7b0",
         "overworld_palette": 2,
@@ -20356,7 +20011,6 @@
     },
     {
         "name": "Wailmer",
-        "address": "0x0835dca0",
         "species": "0x0835f7a8",
         "category": "0x0835f79c",
         "overworld_palette": 9,
@@ -20415,7 +20069,6 @@
     },
     {
         "name": "Wailord",
-        "address": "0x0835dce8",
         "species": "0x0835f794",
         "category": "0x0835f788",
         "overworld_palette": 5,
@@ -20474,7 +20127,6 @@
     },
     {
         "name": "Numel",
-        "address": "0x0835dd30",
         "species": "0x0835f780",
         "category": "0x0835f778",
         "overworld_palette": 8,
@@ -20533,7 +20185,6 @@
     },
     {
         "name": "Camerupt",
-        "address": "0x0835dd78",
         "species": "0x0835f76c",
         "category": "0x08360bdc",
         "overworld_palette": 5,
@@ -20592,7 +20243,6 @@
     },
     {
         "name": "Torkoal",
-        "address": "0x0835ddc0",
         "species": "0x0835f764",
         "category": "0x0835f75c",
         "overworld_palette": 6,
@@ -20651,7 +20301,6 @@
     },
     {
         "name": "Spoink",
-        "address": "0x0835de08",
         "species": "0x0835f754",
         "category": "0x0835f74c",
         "overworld_palette": 10,
@@ -20710,7 +20359,6 @@
     },
     {
         "name": "Grumpig",
-        "address": "0x0835de50",
         "species": "0x0835f744",
         "category": "0x0835f738",
         "overworld_palette": 10,
@@ -20769,7 +20417,6 @@
     },
     {
         "name": "Spinda",
-        "address": "0x0835de98",
         "species": "0x0835f730",
         "category": "0x0835f724",
         "overworld_palette": 6,
@@ -20828,7 +20475,6 @@
     },
     {
         "name": "Trapinch",
-        "address": "0x0835dee0",
         "species": "0x0835f718",
         "category": "0x0835f710",
         "overworld_palette": 4,
@@ -20887,7 +20533,6 @@
     },
     {
         "name": "Vibrava",
-        "address": "0x0835df28",
         "species": "0x0835f708",
         "category": "0x0835f6fc",
         "overworld_palette": 10,
@@ -20946,7 +20591,6 @@
     },
     {
         "name": "Flygon",
-        "address": "0x0835df70",
         "species": "0x0835f6f4",
         "category": "0x083600ec",
         "overworld_palette": 3,
@@ -21005,7 +20649,6 @@
     },
     {
         "name": "Cacnea",
-        "address": "0x0835dfb8",
         "species": "0x0835f6ec",
         "category": "0x0835f6e4",
         "overworld_palette": 3,
@@ -21064,7 +20707,6 @@
     },
     {
         "name": "Cacturne",
-        "address": "0x0835e000",
         "species": "0x0835f6d8",
         "category": "0x0835f6cc",
         "overworld_palette": 3,
@@ -21123,7 +20765,6 @@
     },
     {
         "name": "Swablu",
-        "address": "0x0835e048",
         "species": "0x0835f6c4",
         "category": "0x0835f6b8",
         "overworld_palette": 5,
@@ -21182,7 +20823,6 @@
     },
     {
         "name": "Altaria",
-        "address": "0x0835e090",
         "species": "0x0835f6b0",
         "category": "0x0835f6a8",
         "overworld_palette": 5,
@@ -21241,7 +20881,6 @@
     },
     {
         "name": "Zangoose",
-        "address": "0x0835e0d8",
         "species": "0x0835f69c",
         "category": "0x0835f690",
         "overworld_palette": 5,
@@ -21300,7 +20939,6 @@
     },
     {
         "name": "Seviper",
-        "address": "0x0835e120",
         "species": "0x0835f688",
         "category": "0x0835f67c",
         "overworld_palette": 2,
@@ -21359,7 +20997,6 @@
     },
     {
         "name": "Lunatone",
-        "address": "0x0835e168",
         "species": "0x0835f670",
         "category": "0x0835f664",
         "overworld_palette": 0,
@@ -21418,7 +21055,6 @@
     },
     {
         "name": "Solrock",
-        "address": "0x0835e1b0",
         "species": "0x0835f65c",
         "category": "0x0835f664",
         "overworld_palette": 4,
@@ -21477,7 +21113,6 @@
     },
     {
         "name": "Barboach",
-        "address": "0x0835e1f8",
         "species": "0x0835f650",
         "category": "0x0835f644",
         "overworld_palette": 5,
@@ -21536,7 +21171,6 @@
     },
     {
         "name": "Whiscash",
-        "address": "0x0835e240",
         "species": "0x0835f638",
         "category": "0x0835f644",
         "overworld_palette": 9,
@@ -21595,7 +21229,6 @@
     },
     {
         "name": "Corphish",
-        "address": "0x0835e288",
         "species": "0x0835f62c",
         "category": "0x0835f624",
         "overworld_palette": 0,
@@ -21654,7 +21287,6 @@
     },
     {
         "name": "Crawdaunt",
-        "address": "0x0835e2d0",
         "species": "0x0835f618",
         "category": "0x0835f610",
         "overworld_palette": 5,
@@ -21713,7 +21345,6 @@
     },
     {
         "name": "Baltoy",
-        "address": "0x0835e318",
         "species": "0x0835f608",
         "category": "0x0835f5fc",
         "overworld_palette": 0,
@@ -21772,7 +21403,6 @@
     },
     {
         "name": "Claydol",
-        "address": "0x0835e360",
         "species": "0x0835f5f4",
         "category": "0x0835f5fc",
         "overworld_palette": 5,
@@ -21831,7 +21461,6 @@
     },
     {
         "name": "Lileep",
-        "address": "0x0835e3a8",
         "species": "0x0835f5ec",
         "category": "0x0835f5e0",
         "overworld_palette": 10,
@@ -21890,7 +21519,6 @@
     },
     {
         "name": "Cradily",
-        "address": "0x0835e3f0",
         "species": "0x0835f5d8",
         "category": "0x0835f5cc",
         "overworld_palette": 10,
@@ -21949,7 +21577,6 @@
     },
     {
         "name": "Anorith",
-        "address": "0x0835e438",
         "species": "0x0835f5c4",
         "category": "0x0835f5b8",
         "overworld_palette": 5,
@@ -22008,7 +21635,6 @@
     },
     {
         "name": "Armaldo",
-        "address": "0x0835e480",
         "species": "0x0835f5b0",
         "category": "0x0835f5a8",
         "overworld_palette": 5,
@@ -22067,7 +21693,6 @@
     },
     {
         "name": "Feebas",
-        "address": "0x0835e4c8",
         "species": "0x0835f5a0",
         "category": "0x083603e4",
         "overworld_palette": 0,
@@ -22126,7 +21751,6 @@
     },
     {
         "name": "Milotic",
-        "address": "0x0835e510",
         "species": "0x0835f598",
         "category": "0x0835f590",
         "overworld_palette": 0,
@@ -22185,7 +21809,6 @@
     },
     {
         "name": "Castform",
-        "address": "0x0835e558",
         "species": "0x0835f584",
         "category": "0x0835f57c",
         "overworld_palette": 5,
@@ -22244,7 +21867,6 @@
     },
     {
         "name": "Castform-Sunny",
-        "address": "0x0835e5a0",
         "species": "0x0835f584",
         "category": "0x0835f57c",
         "overworld_palette": 7,
@@ -22303,7 +21925,6 @@
     },
     {
         "name": "Castform-Rainy",
-        "address": "0x0835e5e8",
         "species": "0x0835f584",
         "category": "0x0835f57c",
         "overworld_palette": 0,
@@ -22362,7 +21983,6 @@
     },
     {
         "name": "Castform-Snowy",
-        "address": "0x0835e630",
         "species": "0x0835f584",
         "category": "0x0835f57c",
         "overworld_palette": 7,
@@ -22421,7 +22041,6 @@
     },
     {
         "name": "Kecleon",
-        "address": "0x0835e678",
         "species": "0x0835f574",
         "category": "0x0835f568",
         "overworld_palette": 3,
@@ -22480,7 +22099,6 @@
     },
     {
         "name": "Shuppet",
-        "address": "0x0835e6c0",
         "species": "0x0835f560",
         "category": "0x0835f558",
         "overworld_palette": 9,
@@ -22539,7 +22157,6 @@
     },
     {
         "name": "Banette",
-        "address": "0x0835e708",
         "species": "0x0835f550",
         "category": "0x0835f544",
         "overworld_palette": 5,
@@ -22598,7 +22215,6 @@
     },
     {
         "name": "Duskull",
-        "address": "0x0835e750",
         "species": "0x0835f53c",
         "category": "0x0835f534",
         "overworld_palette": 5,
@@ -22657,7 +22273,6 @@
     },
     {
         "name": "Dusclops",
-        "address": "0x0835e798",
         "species": "0x0835f528",
         "category": "0x0835f520",
         "overworld_palette": 5,
@@ -22716,7 +22331,6 @@
     },
     {
         "name": "Tropius",
-        "address": "0x0835e7e0",
         "species": "0x0835f518",
         "category": "0x0835f510",
         "overworld_palette": 8,
@@ -22775,7 +22389,6 @@
     },
     {
         "name": "Chimecho",
-        "address": "0x0835e828",
         "species": "0x0835f504",
         "category": "0x0835f4f8",
         "overworld_palette": 5,
@@ -22834,7 +22447,6 @@
     },
     {
         "name": "Absol",
-        "address": "0x0835e870",
         "species": "0x0835f4f0",
         "category": "0x0835f4e4",
         "overworld_palette": 5,
@@ -22893,7 +22505,6 @@
     },
     {
         "name": "Wynaut",
-        "address": "0x0835e8b8",
         "species": "0x0835f4dc",
         "category": "0x0835f4d4",
         "overworld_palette": 5,
@@ -22952,7 +22563,6 @@
     },
     {
         "name": "Snorunt",
-        "address": "0x0835e900",
         "species": "0x0835f4cc",
         "category": "0x0835f4c0",
         "overworld_palette": 5,
@@ -23011,7 +22621,6 @@
     },
     {
         "name": "Glalie",
-        "address": "0x0835e948",
         "species": "0x0835f4b8",
         "category": "0x0835f4b0",
         "overworld_palette": 5,
@@ -23070,7 +22679,6 @@
     },
     {
         "name": "Spheal",
-        "address": "0x0835e990",
         "species": "0x0835f4a8",
         "category": "0x0835f4a0",
         "overworld_palette": 5,
@@ -23129,7 +22737,6 @@
     },
     {
         "name": "Sealeo",
-        "address": "0x0835e9d8",
         "species": "0x0835f498",
         "category": "0x0835f48c",
         "overworld_palette": 5,
@@ -23188,7 +22795,6 @@
     },
     {
         "name": "Walrein",
-        "address": "0x0835ea20",
         "species": "0x0835f484",
         "category": "0x0835f478",
         "overworld_palette": 5,
@@ -23247,7 +22853,6 @@
     },
     {
         "name": "Clamperl",
-        "address": "0x0835ea68",
         "species": "0x0835f46c",
         "category": "0x08360668",
         "overworld_palette": 1,
@@ -23306,7 +22911,6 @@
     },
     {
         "name": "Huntail",
-        "address": "0x0835eab0",
         "species": "0x0835f464",
         "category": "0x0835f458",
         "overworld_palette": 1,
@@ -23365,7 +22969,6 @@
     },
     {
         "name": "Gorebyss",
-        "address": "0x0835eaf8",
         "species": "0x0835f44c",
         "category": "0x0835f440",
         "overworld_palette": 10,
@@ -23424,7 +23027,6 @@
     },
     {
         "name": "Relicanth",
-        "address": "0x0835eb40",
         "species": "0x0835f434",
         "category": "0x0835f428",
         "overworld_palette": 6,
@@ -23483,7 +23085,6 @@
     },
     {
         "name": "Luvdisc",
-        "address": "0x0835eb88",
         "species": "0x0835f420",
         "category": "0x0835f414",
         "overworld_palette": 10,
@@ -23542,7 +23143,6 @@
     },
     {
         "name": "Bagon",
-        "address": "0x0835ebd0",
         "species": "0x0835f40c",
         "category": "0x0835f400",
         "overworld_palette": 5,
@@ -23601,7 +23201,6 @@
     },
     {
         "name": "Shelgon",
-        "address": "0x0835ec18",
         "species": "0x0835f3f8",
         "category": "0x0835f3ec",
         "overworld_palette": 5,
@@ -23660,7 +23259,6 @@
     },
     {
         "name": "Salamence",
-        "address": "0x0835ec60",
         "species": "0x0835f3e0",
         "category": "0x083604d0",
         "overworld_palette": 5,
@@ -23719,7 +23317,6 @@
     },
     {
         "name": "Beldum",
-        "address": "0x0835eca8",
         "species": "0x0835f3d8",
         "category": "0x0835f3cc",
         "overworld_palette": 11,
@@ -23778,7 +23375,6 @@
     },
     {
         "name": "Metang",
-        "address": "0x0835ecf0",
         "species": "0x0835f3c4",
         "category": "0x0835f3b8",
         "overworld_palette": 11,
@@ -23837,7 +23433,6 @@
     },
     {
         "name": "Metagross",
-        "address": "0x0835ed38",
         "species": "0x0835f3ac",
         "category": "0x0835f3a0",
         "overworld_palette": 11,
@@ -23896,7 +23491,6 @@
     },
     {
         "name": "Regirock",
-        "address": "0x0835ed80",
         "species": "0x0835f394",
         "category": "0x0835f388",
         "overworld_palette": 6,
@@ -23955,7 +23549,6 @@
     },
     {
         "name": "Regice",
-        "address": "0x0835edc8",
         "species": "0x0835f380",
         "category": "0x0835f378",
         "overworld_palette": 9,
@@ -24014,7 +23607,6 @@
     },
     {
         "name": "Registeel",
-        "address": "0x0835ee10",
         "species": "0x0835f36c",
         "category": "0x0835f364",
         "overworld_palette": 5,
@@ -24073,7 +23665,6 @@
     },
     {
         "name": "Latias",
-        "address": "0x0835ee58",
         "species": "0x0835f35c",
         "category": "0x0835f358",
         "overworld_palette": 5,
@@ -24132,7 +23723,6 @@
     },
     {
         "name": "Latios",
-        "address": "0x0835eea0",
         "species": "0x0835f350",
         "category": "0x0835f358",
         "overworld_palette": 5,
@@ -24191,7 +23781,6 @@
     },
     {
         "name": "Kyogre",
-        "address": "0x0835eee8",
         "species": "0x0835f348",
         "category": "0x0835f33c",
         "overworld_palette": 5,
@@ -24250,7 +23839,6 @@
     },
     {
         "name": "Groudon",
-        "address": "0x0835ef30",
         "species": "0x0835f334",
         "category": "0x0835f328",
         "overworld_palette": 5,
@@ -24309,7 +23897,6 @@
     },
     {
         "name": "Rayquaza",
-        "address": "0x0835ef78",
         "species": "0x0835f31c",
         "category": "0x0835f310",
         "overworld_palette": 3,
@@ -24368,7 +23955,6 @@
     },
     {
         "name": "Jirachi",
-        "address": "0x0835efc0",
         "species": "0x0835f308",
         "category": "0x0835f300",
         "overworld_palette": 10,
@@ -24427,7 +24013,6 @@
     },
     {
         "name": "Deoxys",
-        "address": "0x0835f008",
         "species": "0x0835f2f8",
         "category": "0x0835f2f4",
         "overworld_palette": 9,
@@ -24486,7 +24071,6 @@
     },
     {
         "name": "Unown-!",
-        "address": "0x0835f050",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -24545,7 +24129,6 @@
     },
     {
         "name": "Unown-?",
-        "address": "0x0835f098",
         "species": "0x0835ff78",
         "category": "0x0835ff70",
         "overworld_palette": 5,
@@ -24604,7 +24187,6 @@
     },
     {
         "name": "Deoxys-Attack",
-        "address": "0x0835f0e0",
         "species": "0x0835f2f8",
         "category": "0x0835f2f4",
         "overworld_palette": 9,
@@ -24663,7 +24245,6 @@
     },
     {
         "name": "Deoxys-Defense",
-        "address": "0x0835f128",
         "species": "0x0835f2f8",
         "category": "0x0835f2f4",
         "overworld_palette": 9,
@@ -24722,7 +24303,6 @@
     },
     {
         "name": "Deoxys-Speed",
-        "address": "0x0835f170",
         "species": "0x0835f2f8",
         "category": "0x0835f2f4",
         "overworld_palette": 9,
@@ -24781,7 +24361,6 @@
     },
     {
         "name": "Munchlax",
-        "address": "0x0835f1b8",
         "species": "0x0835f2e8",
         "category": "0x0835f958",
         "overworld_palette": 12,
@@ -24840,7 +24419,6 @@
     },
     {
         "name": "Decoy",
-        "address": "0x0835f200",
         "species": "0x0835f2e0",
         "category": "0x0835f9d8",
         "overworld_palette": 3,
@@ -24899,7 +24477,6 @@
     },
     {
         "name": "Statue",
-        "address": "0x0835f248",
         "species": "0x0835f2d8",
         "category": "0x0835f75c",
         "overworld_palette": 5,
@@ -24958,7 +24535,6 @@
     },
     {
         "name": "Rayquaza-Cutscene",
-        "address": "0x0835f290",
         "species": "0x0835f31c",
         "category": "0x0835f310",
         "overworld_palette": 3,
