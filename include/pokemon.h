@@ -132,18 +132,16 @@ struct gPokemon
     /* 0x4 */ u8* category;
     /* 0x8 */ u8 overworld_palette;
     /* 0x9 */ u8 size;
-    /* 0xA */ u8 unkA;
-    /* 0xB */ u8 unkB;
     /* 0xC */ s32 move_speed;
     /* 0x10 */ u16 dialogue_sprites;
-    /* 0x12 */ u8 unk12;
+    /* 0x12 */ bool8 unk12;
     /* 0x13 */ u8 types[2];
-    /* 0x15 */ u8 walkable_tiles; // Uses the CrossableTerrain enum in map.h.
+    /* 0x15 */ u8 walkable_tiles;
     /* 0x16 */ u8 friend_area;
     /* 0x17 */ u8 abilities[2];
     /* 0x19 */ u8 shadow_size;
-    /* 0x1A */ u8 unk1A;
-    /* 0x1B */ u8 unk1B;
+    /* 0x1A */ u8 fill1A; // 0 for all Pokémon.
+    /* 0x1B */ u8 unk1B; // 100 for all Pokémon.
     /* 0x1C */ bool8 isMoving; // Set to false for Pokémon who don't move unless they're the leader, like Kakuna.
     /* 0x1D */ u8 unk1D;
     /* 0x1E */ u16 base_hp;
@@ -152,9 +150,9 @@ struct gPokemon
     /* 0x28 */ u16 base_def_spdef[2];
     /* 0x2C */ u16 lowkick_dmg;
     /* 0x2E */ u16 sizeorb_dmg;
-    /* 0x30 */ u8 unk30;
-    /* 0x31 */ u8 unk31;
-    /* 0x32 */ u8 unk32;
+    /* 0x30 */ u8 unk30; // 10 for all Pokémon.
+    /* 0x31 */ u8 unk31; // 10 for all Pokémon.
+    /* 0x32 */ u8 unk32; // 24 for all Pokémon.
     /* 0x33 */ bool8 toolboxEnabled; // If false, the AI can't use items. Doesn't seem to be used, as it's true for all Pokémon.
     /* 0x34 */ struct EvolveStruct1 pre;
     /* 0x38 */ struct EvolveNeeds need;

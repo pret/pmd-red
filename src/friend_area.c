@@ -19,7 +19,7 @@ extern const char gUnknown_81098AC;
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
 extern void sub_8090FEC(u32, u32 *r1, u32);
 
-const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] = 
+const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
 {
     [NONE] = {
         .num_pokemon = 0,
@@ -211,7 +211,7 @@ const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 800
     },
-    [DECRPEPIT_LAB] = {
+    [DECREPIT_LAB] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1000
@@ -462,7 +462,7 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 	"\t.align 2, 0\n"
 "_08092494: .4byte gRecruitedPokemonRef\n"
 "_08092498: .4byte 0x0000ffff");
-} 
+}
 #endif
 
 #ifdef NONMATCHING
@@ -507,7 +507,7 @@ void sub_809249C(u8 index, u8 clear)
     }
 }
 #else
-NAKED void sub_809249C(u8 index, u8 clear) 
+NAKED void sub_809249C(u8 index, u8 clear)
 {
 	asm_unified("\tpush {r4-r7,lr}\n"
 	"\tlsls r0, 24\n"

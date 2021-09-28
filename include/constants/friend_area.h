@@ -48,7 +48,7 @@
 #define DRAGON_CAVE 35
 #define BOULDER_CAVE 36
 #define JUNGLE 37
-#define DECRPEPIT_LAB 38
+#define DECREPIT_LAB 38
 #define MT_DISCIPLINE 39
 #define THUNDER_MEADOW 40
 #define POWER_PLANT 41
