@@ -2,7 +2,7 @@
 #include "memory.h"
 
 extern u32 gUnknown_80B7F14;
-extern u32 gUnknown_80B7F20;
+extern const char gLocateSetErrorMessage[];
 extern struct HeapDescriptor gMainHeapDescriptor;
 
 extern s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32, s32);
@@ -12,7 +12,7 @@ extern struct HeapDescriptor * _LocateSetFront(struct HeapDescriptor *, u32, u32
 void DoFree(struct HeapDescriptor *, void *);
 void *DoAlloc(struct HeapDescriptor *, s32, u32);
 
-void FatalError(u32 *, u32 *, ...) __attribute__((noreturn));
+void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
 
 
 s32 _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
@@ -48,7 +48,7 @@ error:
     // LocateSet [%p] buffer %8x size can't locate
         // atb %02x grp %3d
    FatalError(&gUnknown_80B7F14,
-                 &gUnknown_80B7F20,
+                 gLocateSetErrorMessage,
                  heap,size,atb,group);
 }
 

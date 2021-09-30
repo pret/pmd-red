@@ -25,7 +25,7 @@ _08003412:
 	cmp r1, 0
 	bge _08003438
 	ldr r0, =gUnknown_80B7F88
-	ldr r1, =gUnknown_80B7F94
+	ldr r1, =gLocalCreateErrorMessage
 	adds r2, r5, 0
 	bl FatalError
 	.align 2, 0
