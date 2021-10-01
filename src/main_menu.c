@@ -22,9 +22,6 @@
 // Deletes the Save
 
 
-extern struct MainMenu *gMainMenu;
-void sub_8035DA0(void);
-
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
@@ -65,12 +62,7 @@ s32 sub_8035DB4(u32);
 void sub_803623C(void);
 bool8 SetMainMenuText();
 void SetMainMenuItems();
-
-struct unkSubStruct
-{
-    u32 unk0;
-    u32 unk4;
-};
+void sub_8035DA0(void);
 
 struct unkStruct_203B34C
 {
@@ -96,6 +88,19 @@ EWRAM_DATA struct MainMenu *gMainMenu;
 EWRAM_DATA struct unkStruct_203B34C *gUnknown_203B34C;
 EWRAM_DATA u32 gUnknown_203B350;
 EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
+
+
+extern const char NewGame_80E5A20[];
+extern const char AdventureLog_80E5A10[];
+extern const char WonderMail_80E5A54[];
+extern const char Continue_80E5AF0[];
+extern const char DeleteSaveData_80E5ADC[];
+extern const char FriendRescue_80E5ACC[];
+extern const char TradeItems_80E5AC0[];
+extern const char ReviveTeam_80E5C0C[];
+extern const char SendItems_80E5C90[];
+extern const char ReceiveItems_80E5C80[];
+extern const char AwaitingRescue_80E5B7C[];
 
 const struct UnkTextStruct2 gUnknown_80E59A8 = {
    0x00, 0x00, 0x00, 0x00,
@@ -125,11 +130,6 @@ const struct UnkTextStruct2 gUnknown_80E59E0 = {
    0x03, 0x00,
    NULL
 };
-
-
-extern const char NewGame_80E5A20[];
-extern const char AdventureLog_80E5A10[];
-extern const char WonderMail_80E5A54[];
 
 const struct MenuItem gUnknown_80E59F8[] =
 {
@@ -176,14 +176,121 @@ const struct UnkTextStruct2 gUnknown_80E5A78 = {
    NULL
 };
 
-extern const struct MenuItem gUnknown_80E5A90[];
-extern const struct MenuItem gUnknown_80E5AFC[];
-extern const struct UnkTextStruct2 gUnknown_80E5B34;
-extern const struct MenuItem gUnknown_80E5B4C[];
-extern const struct MenuItem gUnknown_80E5B8C[];
-extern const struct UnkTextStruct2 gUnknown_80E5BC4;
-extern const struct MenuItem gUnknown_80E5BDC[];
-extern const struct MenuItem gUnknown_80E5C18[];
+const struct MenuItem gUnknown_80E5A90[] = 
+{
+    {Continue_80E5AF0, MENU_CONTINUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {NULL, 0xffdd},
+};
+
+const char TradeItems_80E5AC0[] = "Trade Items";
+const char FriendRescue_80E5ACC[] = "Friend Rescue";
+const char DeleteSaveData_80E5ADC[] = "Delete Save Data";
+const char Continue_80E5AF0[] = "Continue";
+
+
+const struct MenuItem gUnknown_80E5AFC[] =
+{
+    {Continue_80E5AF0, MENU_CONTINUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {WonderMail_80E5A54, MENU_WONDER_MAIL},
+    {NULL, 0xffdd},
+};
+
+const struct UnkTextStruct2 gUnknown_80E5B34 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x02, 0x00,
+   0x0A, 0x08,
+   0x08, 0x00,
+   NULL
+};
+
+const struct MenuItem gUnknown_80E5B4C[] =
+{
+    {AwaitingRescue_80E5B7C, MENU_AWAITING_RESCUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {NULL, 0xffdd},
+};
+const char AwaitingRescue_80E5B7C[] = "Awaiting Rescue";
+
+const struct MenuItem gUnknown_80E5B8C[] = 
+{
+    {AwaitingRescue_80E5B7C, MENU_AWAITING_RESCUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {WonderMail_80E5A54, MENU_WONDER_MAIL},
+    {NULL, 0xffdd},
+};
+
+const struct UnkTextStruct2 gUnknown_80E5BC4 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x02, 0x00,
+   0x0A, 0x08,
+   0x08, 0x00,
+   NULL
+};
+
+const struct MenuItem gUnknown_80E5BDC[] =
+{
+    {ReviveTeam_80E5C0C, MENU_CONTINUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {NULL, 0xffdd},
+};
+const char ReviveTeam_80E5C0C[] = "Revive Team";
+
+const struct MenuItem gUnknown_80E5C18[] =
+{
+    {ReviveTeam_80E5C0C, MENU_CONTINUE},
+    {DeleteSaveData_80E5ADC, MENU_DELETE_SAVE_PROMPT},
+    {AdventureLog_80E5A10, MENU_ADVENTURE_LOG},
+    {FriendRescue_80E5ACC, MENU_FRIEND_RESCUE},
+    {TradeItems_80E5AC0, MENU_TRADE_ITEMS},
+    {WonderMail_80E5A54, MENU_WONDER_MAIL},
+    {NULL, 0xffdd},
+};
+
+const struct UnkTextStruct2 gUnknown_80E5C50 = { 
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x02, 0x00,
+   0x0A, 0x03,
+   0x03, 0x00,
+   NULL
+};
+
+const struct MenuItem gUnknown_80E5C68[] = 
+{
+    {SendItems_80E5C90, MENU_SEND_ITEMS},
+    {ReceiveItems_80E5C80, MENU_RECEIVE_ITEMS},
+    {NULL, 0xffdd},
+};
+
+const char ReceiveItems_80E5C80[] = "Receive Items";
+const char SendItems_80E5C90[] = "Send Items";
+
+const struct MenuItem gUnknown_80E5C9C[] = 
+{
+    {SendItems_80E5C90, -1},
+    {ReceiveItems_80E5C80, MENU_RECEIVE_ITEMS},
+    {NULL, 0xffdd},
+};
+
 extern const struct UnkTextStruct2 gUnknown_80E5CB4;
 extern const struct MenuItem gUnknown_80E5CCC[];
 extern const struct MenuItem gUnknown_80E5D0C[];
@@ -509,6 +616,7 @@ void sub_8035D1C(void)
     gMainMenu->unk38 = -1;
 }
 
+// Unused
 void sub_8035D30(s32 r0)
 {
     gMainMenu->unk38 = r0;
@@ -524,11 +632,13 @@ struct MainMenu *GetMainMenu(void)
     return gMainMenu;
 }
 
+// Unused
 void sub_8035D58(void)
 {
     gMainMenu->unk3C = -1;
 }
 
+// Unused
 void sub_8035D68(s32 r0)
 {
     gMainMenu->unk3C = r0;
@@ -698,11 +808,11 @@ u32 UpdateMainMenu(void)
                     gUnknown_203B34C->unk0 = 1;
                     nextMenu = MENU_NO_SCREEN_CHANGE;
                     break;
-                case 0x11:
+                case MENU_SEND_ITEMS:
                     gUnknown_203B354 = nextMenu;
                     nextMenu = MENU_TRADE_ITEMS;
                     break;
-                case 0x12:
+                case MENU_RECEIVE_ITEMS:
                     gUnknown_203B354 = nextMenu;
                     nextMenu = MENU_COMMUNICATION_2;
                     break;

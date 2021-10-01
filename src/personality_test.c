@@ -56,7 +56,6 @@ extern struct UnkSaveStruct1 *gUnknown_203B46C;
 extern const char gStarterReveal[];
 extern const char gGenderText[];
 extern struct MenuItem gGenderMenu[];
-extern const char gPartnerSelectionHeaderText;
 
 extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern u8 gAvailablePokemonNames[0x50];
@@ -170,7 +169,8 @@ const struct UnkTextStruct2 gUnknown_80F42A8 =
     NULL
 };
 
-
+const char gPartnerSelectionHeaderText[] = _("Pokémon");
+const char personality_test_fill[] = "pksdir0";
 
 u8 CreateTestTracker(void)
 {
@@ -712,7 +712,7 @@ void RedrawPartnerSelectionMenu(void)
   sub_800641C(gUnknown_203B404->unk54,1,1);
   sub_8008C54(gUnknown_203B404->unk4C);
   sub_80073B8(gUnknown_203B404->unk4C);
-  xxx_call_draw_string(0xc, 0, &gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);
+  xxx_call_draw_string(0xc, 0, gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);
 
   monCounter = 0;
   while (monCounter < gUnknown_203B404->unk32) {

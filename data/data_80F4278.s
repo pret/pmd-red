@@ -1,11 +1,5 @@
         .section .rodata
 
-	.global gPartnerSelectionHeaderText
-gPartnerSelectionHeaderText: @ 80F42C0
-	.string "Pokémon\0"
-	.string "pksdir0\0"
-	.align 2,0
-
 	.global gUnknown_80F42D0
 gUnknown_80F42D0: @ 80F42D0
         @ replacing .incbin "baserom.gba", 0x000f42d0, 0x20

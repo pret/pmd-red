@@ -6,7 +6,7 @@ enum MainMenuScreens
     MENU_MAIN_SCREEN = 1,
     MENU_NEW_GAME = 3,
     MENU_AWAITING_RESCUE = 6,
-    MENU_CONTINUE = 7,
+    MENU_CONTINUE = 7, // used by Revive Team/Continue
     MENU_DELETE_SAVE_PROMPT,
     MENU_DELETE_SAVE_CONFIRM,
     MENU_ADVENTURE_LOG = 10,
@@ -16,6 +16,8 @@ enum MainMenuScreens
     MENU_DUAL_SLOT,
     MENU_WIRELESS_COMMS,
     MENU_DEBUG = 16,
+    MENU_SEND_ITEMS,
+    MENU_RECEIVE_ITEMS,
     MENU_COMMUNICATION_1 = 19,
     MENU_COMMUNICATION_2,
     // NOTE: 0x1B - 0x22 used by Rescue Password Menu
@@ -53,5 +55,13 @@ struct MainMenu
     s32 unk3C;
 };
 
+
+
+void InitMainMenu(void);
+void DeleteMainMenu(void);
+void SetUpMenu(void);
+s32 UpdateMenu(void);
+void CleanUpMenu(void);
+bool8 sub_80363E0(void);
 
 #endif // GUARD_MAIN_MENU_H
