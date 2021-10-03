@@ -659,7 +659,7 @@ void sub_808C5C0(void)
 }
 
 // Dummy Celebi Fight Dialogue??
-void nullsub_100(void)
+void nullsub_100(u32 r0, u32 r1, u32 r2)
 {
 }
 

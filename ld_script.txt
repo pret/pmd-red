@@ -190,6 +190,8 @@ SECTIONS {
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         asm/code_807001C.o(.text);
+        src/code_80848F0.o(.text);
+        asm/code_80848F0.o(.text);
         src/code_80869E4.o(.text);
         asm/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
