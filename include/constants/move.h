@@ -33,7 +33,7 @@ struct MoveData
     /* 0x13 */ u8 criticalHitChance;
     /* 0x14 */ bool8 affectedByMagicCoat; // If true, this move is reflected by Magic Coat.
     /* 0x15 */ bool8 targetsUser;
-    /* 0x16 */ bool8 affectedByMuzzled; // If true, this moved can't be used with the Muzzled status.
+    /* 0x16 */ bool8 affectedByMuzzled; // If true, this move can't be used with the Muzzled status.
     /* 0x17 */ bool8 cannotHitFrozen; // Used by Status Checker to determine if a move can be used on a frozen target.
     /* 0x18 */ bool8 dealsDirectDamage;
     u8 unk19;
