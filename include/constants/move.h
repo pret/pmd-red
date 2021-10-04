@@ -13,19 +13,32 @@ enum MoveFlags
 
 struct MoveData
 {
-    u8 fill0[0x8 - 0x0];
+    u8 *namePointer;
+    /* 0x4 */ u8 power;
+    u8 fill5;
+    u8 type;
+    u8 fill7;
     // Determines the range of moves.
     /* 0x8 */ u16 targetingFlags;
     /* 0xA */ u16 aiTargetingFlags; // The AI consider certain moves to have different range than they actually do.
     /* 0xC */ u8 maxPP;
-    /* 0xD */ u8 defaultMoveWeight;
-    u8 fillE[0x10 - 0xE];
+    /* 0xD */ u8 weight;
+    /* 0xE */ u8 accuracy1;
+    /* 0xF */ u8 accuracy2;
     // Used by the AI to determine how often to use Spikes.
     // Values exist for all other moves, though they seem to be unused.
-    /* 0x10 */ u8 moveUseChance;
-    u8 fill11[0x17 - 0x11];
+    /* 0x10 */ u8 useChance;
+    /* 0x11 */ u8 hitCount; // Maximum number of times the move will hit. Used for multi-hit moves like Fury Attack.
+    u8 unk12;
+    /* 0x13 */ u8 criticalHitChance;
+    /* 0x14 */ bool8 affectedByMagicCoat; // If true, this move is reflected by Magic Coat.
+    /* 0x15 */ bool8 targetsUser;
+    /* 0x16 */ bool8 affectedByMuzzled; // If true, this moved can't be used with the Muzzled status.
     /* 0x17 */ bool8 cannotHitFrozen; // Used by Status Checker to determine if a move can be used on a frozen target.
     /* 0x18 */ bool8 dealsDirectDamage;
+    u8 unk19;
+    u8 *descriptionPointer;
+    u8 *useText; // The text displayed when this move is used.
 };
 
 struct PokemonMove
