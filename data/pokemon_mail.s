@@ -200,7 +200,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global PelipperText
-    PelipperMessage:
+    PelipperText:
     .string "Yo! Amigo! It~27s awesome you~27re back!\n"
     .string "I~27ll be delivering mail to you again!\n"
     .string "I~27ve been looking forward to this with\n"
@@ -274,7 +274,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global PitfallText
-    PitfallMessage:
+    PitfallText:
     .string "As a result of the natural disasters~2c\n"
     .string "there have been many reports of Pitfall\n"
     .string "Traps appearing in dungeons.\n"
@@ -291,7 +291,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global SeaRescueText
-    SeaRescueMessage:
+    SeaRescueText:
     .string "A high-seas rescue in the #C2Stormy Sea#R by\n"
     .string "#C5Team Sea Dragons#R ended yesterday with\n"
     .string "the successful recovery of Tentacool.\n"
@@ -308,7 +308,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global VileplumeText
-    VileplumeMessage:
+    VileplumeText:
     .string "Vileplume are widely recognized for \n"
     .string "their massive flower. However~2c few dare\n"
     .string "to approach Vileplume because they\n"
@@ -324,7 +324,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global RawstText
-    RawstMessage:
+    RawstText:
     .string "Research has revealed that #C4Rawst Berries#R\n"
     .string "found in dungeons are usually unripened\n"
     .string "and colored green. When ripe~2c they turn a\n"
@@ -340,7 +340,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global ClubText
-    ClubMessage:
+    ClubText:
     .string "We proudly announce the foundation of\n"
     .string "the Red & Blue Fan Club~2c an organization\n"
     .string "for supporting Pokémon rescue teams.\n"
@@ -356,7 +356,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global ChanseyText
-    ChanseyMessage:
+    ChanseyText:
     .string "As a special treat~2c I~27ll share a simple\n"
     .string "way to tell fortunes with you!\n"
     .string "The key is the first thing you find in the\n"
@@ -373,7 +373,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global KabutoText
-    KabutoMessage:
+    KabutoText:
     .string "One of our oldest residents claims to feel\n"
     .string "rejuvenated. Kabuto reportedly had an\n"
     .string "encounter with Relicanth in which both\n"
@@ -390,7 +390,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global SmeargleText
-    SmeargleMessage:
+    SmeargleText:
     .string "Smeargle~2c the artist known for his unique\n"
     .string "artistic vision~2c had a windfall day as one\n"
     .string "of his paintings was auctioned for 300\n"
@@ -407,7 +407,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global CastformText
-    CastformMessage:
+    CastformText:
     .string "Today~2c the weather over Pokémon\n"
     .string "Square promises to be clear with no\n"
     .string "chance of showers.\n"
@@ -422,7 +422,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global GasText
-    GasMessage:
+    GasText:
     .string "Reports of a noxious gas leak caused\n"
     .string "widespread chaos in the #CDSinister Woods#R.\n"
     .string "Specialists speculate that the recent\n"
@@ -470,7 +470,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global SwitchText
-    SwitchMessage:
+    SwitchText:
     .string "#+#C6Power Up Combination Attacks!#R\n"
     .string "Some dungeons allow rescue teams to\n"
     .string "switch leaders on the spot for doing\n"
@@ -487,7 +487,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global KecleonText
-    KecleonMessage:
+    KecleonText:
     .string "There have been numerous reports that\n"
     .string "the older of the Kecleon merchants in\n"
     .string "Pok\233mon Square occasionally goes\n"
@@ -520,7 +520,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global WobbuffetText
-    WobbuffetMessage:
+    WobbuffetText:
     .string "Earlier today~2c Wobbuffet reportedly\n"
     .string "wobbled the wrong way and wandered off.\n"
     .string "It had to be rescued by the famous\n"
@@ -536,7 +536,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global PechaText
-    PechaMessage:
+    PechaText:
     .string "Among rescue teams~2c there is growing\n"
     .string "demand for equipment that is not only\n"
     .string "practical~2c but also fashionably appealing.\n"
@@ -570,7 +570,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global AzurillText
-    AzurillMessage:
+    AzurillText:
     .string "With a simple act of courage~2c Azurill\n"
     .string "became a hero despite being small in size.\n"
     .string "Azurill came across Slowpoke~2c who had\n"
@@ -587,7 +587,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global KeyText
-    KeyMessage:
+    KeyText:
     .string "#+#C6Head Out to the Desert Region!#R\n"
     .string "If you~27ve been wondering what lies behind\n"
     .string "the mysterious locked doors of the #CDSolar\n"
@@ -604,7 +604,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global SweetText
-    SweetMessage:
+    SweetText:
     .string "#+#C6Feel a Little Envious?#R\n"
     .string "Teddiursa is often seen licking its paws\n"
     .string "that have soaked up sweet honey. While it\n"
@@ -619,7 +619,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global RangeText
-    RangeMessage:
+    RangeText:
     .string "#+#C6All Moves Have Effective Ranges#R\n"
     .string "Moves that affect an entire room have a\n"
     .string "range of two tiles in a corridor. The move\n"
@@ -636,7 +636,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global IQText
-    IQMessage:
+    IQText:
     .string "#+#C6Make Your Explorations Easier by#R\n"
     .string "#+#C6Boosting the IQ of Team Members!#R\n"
     .string "Eating Gummis boosts the IQ of Pok\233mon.\n"
@@ -653,7 +653,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global TrapTileText
-    TrapTileMessage:
+    TrapTileText:
     .string "#+#C6New Types of Floor Tiles?#R\n"
     .string "There have been numerous reports of new\n"
     .string "floor tiles other than Wonder Tiles.\n"
@@ -670,7 +670,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global MakuhitaText
-    MakuhitaMessage:
+    MakuhitaText:
     .string "#+#C6Study Type Matchups#R\n"
     .string "#+#C6at the Makuhita Dojo!#R\n"
     .string "At the Makuhita Dojo~2c one can learn how\n"
@@ -687,7 +687,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global MachineText
-    MachineMessage:
+    MachineText:
     .string "#+#C6New Types of Machines Discovered?#R\n"
     .string "In a recently discovered cave~2c explorers\n"
     .string "found unique types of Technical Machines.\n"
@@ -704,7 +704,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global UltimateText
-    UltimateMessage:
+    UltimateText:
     .string "#+#C6The Ultimate Dungeon#R\n"
     .string "#+#C6Challenges You to Do Your Best!#R\n"
     .string "Somewhere in the world~2c there supposedly\n"
@@ -721,7 +721,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global GummiText
-    GummiMessage:
+    GummiText:
     .string "#+#C6Gummis That Make You Smart#R\n"
     .string "Research has revealed that popular Gummi\n"
     .string "treats not only enhance intelligence~2c they\n"
@@ -738,7 +738,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global MoveTipsText
-    MoveTipsMessage:
+    MoveTipsText:
     .string "#+#C6Moving Diagonally#R\n"
     .string "Move diagonally to avoid foes!\n"
     .string "Keeping \132\134 pressed~2c use\n"
@@ -755,7 +755,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global AddMembersText
-    AddMembersMessage:
+    AddMembersText:
     .string "If you want to enlarge your rescue team~2c\n"
     .string "you must first get Friend Areas. When\n"
     .string "a Pok\233mon that can live in an obtained\n"
@@ -772,7 +772,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global TeamMoveText
-    TeamMoveMessage:
+    TeamMoveText:
     .string "#+#C6Use Team Members Effectively!#R\n"
     .string "When you~27re fighting in a dungeon~2c it~27s\n"
     .string "important to use your team members. If\n"
@@ -789,7 +789,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global WondersText
-    WondersMessage:
+    WondersText:
     .string "#+#C6The Seven Wonders of Pok\233mon?#R\n"
     .string "The mysterious feet of Diglett.\n"
     .string "What is inside Forretress~27s shell.\n"
@@ -806,7 +806,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global PollText
-    PollMessage:
+    PollText:
     .string "#C6First#=2Gravelerock#R\n"
     .string "#C6Second#=2Oran Berry#R\n"
     .string "In a nationwide survey involving rescue\n"
@@ -886,7 +886,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global TypeText
-    TypeMessage:
+    TypeText:
     .string "#+#C6Learn How Types Match Up!#R\n"
     .string "All Pok\233mon are of certain types~2c such as\n"
     .string "#C2Fire#R and #C5Water#R. In a battle~2c the damage\n"
@@ -903,7 +903,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global DungeonText
-    DungeonMessage:
+    DungeonText:
     .string "If your rescue team is defeated in a\n"
     .string "dungeon~2c you lose several items and\n"
     .string "all the money you are carrying.\n"
@@ -920,7 +920,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global WonderText
-    WonderMessage:
+    WonderText:
     .string "#+#C6Wonder Tiles Reset Attack and Defense!#R\n"
     .string "If your Attack is lowered by a foe~27s\n"
     .string "#C4Growl#R~2c or your Defense is lowered\n"
@@ -937,7 +937,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global MoveText
-    MoveMessage:
+    MoveText:
     .string "#+#C6The Benefits of Using Moves#R\n"
     .string "If a move is used on a foe~2c when it is\n"
     .string "defeated~2c #C5you earn more Exp. Points#R!\n"
@@ -954,7 +954,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global OptionsText
-    OptionsMessage:
+    OptionsText:
     .string "#+#C6Change Your Option Settings#R\n"
     .string "#+#C6to Suit Your Play Style!#R\n"
     .string "Press \135Q to open the menu~2c then\n"
@@ -969,7 +969,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global DisasterText
-    DisasterMessage:
+    DisasterText:
     .string "#+#C6Investigations Under Way into#R\n"
     .string "#+#C6Recent Rash of Natural Disasters#R\n"
     .string "Pok\233mon in affected areas attack any\n"
@@ -986,7 +986,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global SeedText
-    SeedMessage:
+    SeedText:
     .string "#+#C6Seeds Can Be Thrown~2c Too!#R\n"
     .string "Seeds are usually meant to be eaten.\n"
     .string "But did you know? They can also be thrown\n"
@@ -1002,7 +1002,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global HungerText
-    HungerMessage:
+    HungerText:
     .string "#+#C6Eat Something When You Get Hungry!#R\n"
     .string "While you~27re exploring a dungeon~2c you will\n"
     .string "get progressively hungry (your Belly goes\n"
@@ -1019,7 +1019,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global JobText
-    JobMessage:
+    JobText:
     .string "If you want to go on a rescue job listed\n"
     .string "on the Bulletin Board at the Pelipper Post\n"
     .string "Office~2c or one that~27s delivered to your\n"
@@ -1036,7 +1036,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global BasicsText
-    BasicsMessage:
+    BasicsText:
     .string "#+#C6Saving Your Adventure and Pok\233mon News#R\n"
     .string "You can save your adventure by going to\n"
     .string "your bed. Get in the habit of saving often.\n"
@@ -1053,7 +1053,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global WelcomeText
-    WelcomeMessage:
+    WelcomeText:
     .string "#+#C6To All New Members!#R\n"
     .string "Your badge has the power to send back\n"
     .string "to town any Pok\233mon you~27ve rescued. Just\n"
