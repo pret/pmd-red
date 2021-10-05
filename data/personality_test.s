@@ -317,7 +317,7 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		BraveQuest2_Ignore:
+		BraveQuest2A_Ignore:
     .string "Ignore it.\0"
     .align 2,0
 
