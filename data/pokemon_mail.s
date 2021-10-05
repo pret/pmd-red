@@ -113,10 +113,10 @@ gPokemonMail: @ 80EBA18
     .4byte BuriedRelicText
     .4byte LucarioRankHeadline
     .4byte LucarioRankText
-    .4byte NewFriendAreasHeadline
-    .4byte NewFriendAreasText
+    .4byte NewFriendAreaHeadline
+    .4byte NewFriendAreaText
 
-    .global NewFriendAreasText
+    .global NewFriendAreaText
     NewFriendAreaText:
     .string "The Wigglytuff Club has added new Friend\n"
     .string "Areas for sale!\n"
@@ -127,7 +127,7 @@ gPokemonMail: @ 80EBA18
     .string "rescue team before!\0"
     .align 2,0
 
-    .global NewFriendAreasHeadline
+    .global NewFriendAreaHeadline
     NewFriendAreasHeadline:
     .string "New Friend Areas!\0"
     .align 2,0
