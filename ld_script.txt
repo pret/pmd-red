@@ -133,6 +133,7 @@ SECTIONS {
         src/pelipper_board.o(.text);
         asm/pelipper_board.o(.text);
         src/pelipper_board_1.o(.text);
+        src/wonder_mail_3_mid.o(.text);
         asm/wonder_mail_3_mid.o(.text);
         src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo.o(.text);

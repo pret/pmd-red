@@ -1616,7 +1616,7 @@ void UpdateThankYouMailText(void)
     case 0x22:
         monName = GetMonSpecies(SPECIES_PELIPPER);
         strcpy(gUnknown_203B2C4->unk53C,monName);
-        gUnknown_203B2C4->unk550 = 0x130;
+        gUnknown_203B2C4->unk550 = SPECIES_PELIPPER;
         gUnknown_203B2C4->unk552 = 2;
         gUnknown_203B2C4->unk554 = 0;
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);

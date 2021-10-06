@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "text.h"
 #include "item.h"
+#include "sub_8095228.h"
 
 #define PASSWORD_BUFFER_SIZE 54
 
