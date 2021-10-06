@@ -25,19 +25,7 @@ struct unkStruct_203B2C8
     /* 0x13 */ u8 unk13;
     /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
-    u8 speciesName[0xA]; // holds species name
-    u8 fill118[0x128 - 0x11E];
-    u16 unk128;
-    u8 unk12A;
-    u8 unk12B;
-    u32 unk12C;
-    u8 unk130;
-    u8 unk131;
-    u8 unk132;
-    u8 unk133;
-    u8 unk134;
-    u8 fill135[0x3];
-    u32 unk138;
+    struct unkStruct_802F204 unk114;
     u32 fill13C;
 };
 
@@ -107,7 +95,7 @@ extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
 void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
-extern void sub_802F204(u8 *, u32);
+extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_803C37C(u8 *, u32, u8 *);
 extern u32 sub_803C200(u8 *, u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
@@ -233,19 +221,19 @@ void sub_802B3E0(void)
         break;
       case 1:
         monName = GetMonSpecies(SPECIES_PELIPPER);
-        strcpy(gUnknown_203B2C8->speciesName, monName);
-        gUnknown_203B2C8->unk128 = 0x130;
-        gUnknown_203B2C8->unk12A = 2;
-        gUnknown_203B2C8->unk12C = 0;
+        strcpy(gUnknown_203B2C8->unk114.clientName, monName);
+        gUnknown_203B2C8->unk114.unk14 = SPECIES_PELIPPER;
+        gUnknown_203B2C8->unk114.unk16 = 2;
+        gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
         iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-        sub_803C37C(&iVar3->unk4, 0, &gUnknown_203B2C8->unk130);
-        gUnknown_203B2C8->unk138 = sub_803C200(&iVar3->unk4, 0);
-        gUnknown_203B2C8->unk131 = 0;
-        gUnknown_203B2C8->unk132 = 0;
-        gUnknown_203B2C8->unk133 = 10;
-        gUnknown_203B2C8->unk134 = 0;
-        sub_802F204(gUnknown_203B2C8->speciesName, 0);
+        sub_803C37C(&iVar3->unk4, 0, gUnknown_203B2C8->unk114.itemRewards);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = sub_803C200(&iVar3->unk4, 0);
+        gUnknown_203B2C8->unk114.itemRewards[1] = 0;
+        gUnknown_203B2C8->unk114.itemRewards[2] = 0;
+        gUnknown_203B2C8->unk114.numItems = 10;
+        gUnknown_203B2C8->unk114.friendAreaReward = 0;
+        sub_802F204(&gUnknown_203B2C8->unk114, 0);
         break;
       case 2:
         // I hope you will keep on rescuing your friends
