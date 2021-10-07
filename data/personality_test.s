@@ -191,7 +191,7 @@
     .4byte DocileQuest2Answers
     .4byte DocileQuest2Points
 
-		DocileQuest2Question:
+    DocileQuest2Question:
     .string "You broke a rotten egg in your room!\n"
     .string "What will you do?\0"
     .align 2,0
@@ -225,7 +225,7 @@
     .align 2,0
 
     .global DocileQuest3
-		DocileQuest3:
+    DocileQuest3:
     .4byte DocileQuest3Question
     .4byte DocileQuest3Answers
     .4byte DocileQuest3Points
@@ -237,12 +237,12 @@
     .align 2,0
 
     @ Question 4, Category 2 (Docile)
-		DocileQuest4Points:
+    DocileQuest4Points:
     .byte 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		DocileQuest4Answers:
+    DocileQuest4Answers:
     .4byte DocileQuest4_Police
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte DocileQuest4_Yay
@@ -252,15 +252,15 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		DocileQuest4_Watching:
+    DocileQuest4_Watching:
     .string "Is anyone watching...?\0"
     .align 2,0
 
-		DocileQuest4_Yay:
+    DocileQuest4_Yay:
     .string "Yay! Yay!\0"
     .align 2,0
 
-		DocileQuest4_Police:
+    DocileQuest4_Police:
     .string "Turn it in to the police!\0"
     .align 2,0
 
@@ -275,11 +275,11 @@
     .align 2,0
 
     @ Question 1, Category 3 (Brave)
-		BraveQuest1Points:
+    BraveQuest1Points:
     .byte 0x00, 0x00, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		BraveQuest1Answers:
+    BraveQuest1Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -293,7 +293,7 @@
     .4byte BraveQuest1Answers
     .4byte BraveQuest1Points
 
-		BraveQuest1Question:
+    BraveQuest1Question:
     .string "You~27re going bungee jumping for the first\n"
     .string "time.#PSince it~27s scary~2c you decide to test the\n"
     .string "jump with a doll...#W\n"
@@ -302,12 +302,12 @@
     .align 2,0
 
     @ Question 2, Category 3 (Brave)
-		BraveQuest2APoints:
+    BraveQuest2APoints:
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		BraveQuest2AAnswers:
+    BraveQuest2AAnswers:
     .4byte BraveQuest2A_Fight
     .byte 0x63, 0x00, 0x00, 0x00
     .4byte BraveQuest2A_Run
@@ -317,15 +317,15 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		BraveQuest2A_Ignore:
+    BraveQuest2A_Ignore:
     .string "Ignore it.\0"
     .align 2,0
 
-		BraveQuest2A_Run:
+    BraveQuest2A_Run:
     .string "Run.\0"
     .align 2,0
 
-		BraveQuest2A_Fight:
+    BraveQuest2A_Fight:
     .string "Fight.\0"
     .align 2,0
 
@@ -335,16 +335,16 @@
     .4byte BraveQuest2AAnswers
     .4byte BraveQuest2APoints
 
-		BraveQuest2AQuestion:
+    BraveQuest2AQuestion:
     .string "There is an alien invasion!\n"
     .string "What will you do?\0"
     .align 2,0
 
-		BraveQuest2BPoints:
+    BraveQuest2BPoints:
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		BraveQuest2BAnswers:
+    BraveQuest2BAnswers:
     .4byte BraveQuest2B_Rule
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte BraveQuest2B_Refuse
@@ -352,11 +352,11 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		BraveQuest2B_Refuse:
+    BraveQuest2B_Refuse:
     .string "Refuse.\0"
     .align 2,0
 
-		BraveQuest2B_Rule:
+    BraveQuest2B_Rule:
     .string "Rule with the aliens.\0"
     .align 2,0
 
@@ -366,7 +366,7 @@
     .4byte BraveQuest2BAnswers
     .4byte BraveQuest2BPoints
 
-		BraveQuest2BQuestion:
+    BraveQuest2BQuestion:
     .string "You valiantly fight the aliens...#W\n"
     .string "But~2c you are defeated...#PAn alien says to you...#P~93YOU HAVE IMPRESSED US.\n"
     .string "IT WAS A PLEASURE TO SEE.#PJOIN US~2c AND TOGETHER WE SHALL\n"
@@ -375,11 +375,11 @@
     .align 2,0
 
     @ Question 3, Category 3 (Brave)
-		BraveQuest3Points:
+    BraveQuest3Points:
     .byte 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		BraveQuest3Answers:
+    BraveQuest3Answers:
     .4byte BraveQuest3_Yank
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte BraveQuest3_Scream
@@ -387,11 +387,11 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		BraveQuest3_Scream:
+    BraveQuest3_Scream:
     .string "Scream in unison.\0"
     .align 2,0
 
-		BraveQuest3_Yank:
+    BraveQuest3_Yank:
     .string "Yank open the door.\0"
     .align 2,0
 
@@ -401,19 +401,19 @@
     .4byte BraveQuest3Answers
     .4byte BraveQuest3Points
 
-		BraveQuest3Question:
+    BraveQuest3Question:
     .string "There is a scream from behind a door!#W\n"
     .string "How will you react?\0"
     .align 2,0
 
     @ Question 4, Category 3 (Brave)
-		BraveQuest4Points:
+    BraveQuest4Points:
     .byte 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x02, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		BraveQuest4Answers:
+    BraveQuest4Answers:
     .4byte BraveQuest4_Hesitation
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte BraveQuest4_Scared
@@ -425,21 +425,21 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		BraveQuest4_Nothing:
-		.string "Do nothing out of fear.\0"
-		.align 2,0
+    BraveQuest4_Nothing:
+    .string "Do nothing out of fear.\0"
+    .align 2,0
 
-		BraveQuest4_Police:
-		.string "Call the police.\0"
-		.align 2,0
+    BraveQuest4_Police:
+    .string "Call the police.\0"
+    .align 2,0
 
-		BraveQuest4_Scared:
-		.string "Help~2c even if scared.\0"
-		.align 2,0
+    BraveQuest4_Scared:
+    .string "Help~2c even if scared.\0"
+    .align 2,0
 
-		BraveQuest4_Hesitation:
-		.string "Help without hesitation.\0"
-		.align 2,0
+    BraveQuest4_Hesitation:
+    .string "Help without hesitation.\0"
+    .align 2,0
 
     .global BraveQuest4
     BraveQuest4:
@@ -448,17 +448,17 @@
     .4byte BraveQuest4Points
 
     BraveQuest4Question:
-		.string "A delinquent is hassling a girl on\n"
-		.string "a busy city street!#W\n"
-		.string "What will you do?\0"
-		.align 2,0
+    .string "A delinquent is hassling a girl on\n"
+    .string "a busy city street!#W\n"
+    .string "What will you do?\0"
+    .align 2,0
 
     @ Question 1, Category 4 (Jolly)
-		JollyQuest1Points:
+    JollyQuest1Points:
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
  
- 		JollyQuest1Answers:
+     JollyQuest1Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -473,15 +473,15 @@
     .4byte JollyQuest1Points
 
     @ Question 2, Category 4 (Jolly)
-		JollyQuest1Question:
-		.string "Are you a cheerful personality?\0"
-		.align 2,0
+    JollyQuest1Question:
+    .string "Are you a cheerful personality?\0"
+    .align 2,0
 
-		JollyQuest2Points:
+    JollyQuest2Points:
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		JollyQuest2Answers:
+    JollyQuest2Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -495,18 +495,18 @@
     .4byte JollyQuest2Answers
     .4byte JollyQuest2Points
 
-		JollyQuest2Question:
-		.string "Do you like to noisily enjoy yourself\n"
-		.string "with others?\0"
-		.align 2,0
+    JollyQuest2Question:
+    .string "Do you like to noisily enjoy yourself\n"
+    .string "with others?\0"
+    .align 2,0
 
     @ Question 3, Category 4 (Jolly)
-		JollyQuest3Points:
+    JollyQuest3Points:
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
 
-		JollyQuest3Answers:
+    JollyQuest3Answers:
     .4byte JollyQuest3_Beach
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte JollyQuest3_Spas
@@ -516,17 +516,17 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		JollyQuest3_Anywhere:
-		.string "Anywhere.\0"
-		.align 2,0
+    JollyQuest3_Anywhere:
+    .string "Anywhere.\0"
+    .align 2,0
 
-		JollyQuest3_Spas:
-		.string "Spas.\0"
-		.align 2,0
+    JollyQuest3_Spas:
+    .string "Spas.\0"
+    .align 2,0
 
-		JollyQuest3_Beach:
-		.string "The beach!\0"
-		.align 2,0
+    JollyQuest3_Beach:
+    .string "The beach!\0"
+    .align 2,0
 
     .global JollyQuest3
     JollyQuest3:
@@ -534,18 +534,18 @@
     .4byte JollyQuest3Answers
     .4byte JollyQuest3Points
 
-		JollyQuest3Question:
-		.string "It~27s the summer holidays!\n"
-		.string "Where would you like to go?\0"
-		.align 2,0
+    JollyQuest3Question:
+    .string "It~27s the summer holidays!\n"
+    .string "Where would you like to go?\0"
+    .align 2,0
 
     @ Question 4, Category 4 (Jolly)
-		JollyQuest4Points:
+    JollyQuest4Points:
     .byte 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		JollyQuest4Answers:
+    JollyQuest4Answers:
     .4byte JollyQuest4_Funny
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte JollyQuest4_Again
@@ -555,17 +555,17 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		JollyQuest4_Go:
-		.string "Right... Well~2c I gotta go.\0"
-		.align 2,0
+    JollyQuest4_Go:
+    .string "Right... Well~2c I gotta go.\0"
+    .align 2,0
 
-		JollyQuest4_Again:
-		.string "Um... Could you say that again?\0"
-		.align 2,0
+    JollyQuest4_Again:
+    .string "Um... Could you say that again?\0"
+    .align 2,0
 
-		JollyQuest4_Funny:
-		.string "Haha! Yes. Very funny!\0"
-		.align 2,0
+    JollyQuest4_Funny:
+    .string "Haha! Yes. Very funny!\0"
+    .align 2,0
 
     .global JollyQuest4
     JollyQuest4:
@@ -573,20 +573,20 @@
     .4byte JollyQuest4Answers
     .4byte JollyQuest4Points
 
-		JollyQuest4Question:
-		.string "A foreign person has started up a\n"
-		.string "conversation with you.#P"
-		.string "To be honest~2c you don~27t have a clue what\n"
-		.string "this fellow is saying.#W\n"
-		.string "How do you reply?\0"
-		.align 2,0
+    JollyQuest4Question:
+    .string "A foreign person has started up a\n"
+    .string "conversation with you.#P"
+    .string "To be honest~2c you don~27t have a clue what\n"
+    .string "this fellow is saying.#W\n"
+    .string "How do you reply?\0"
+    .align 2,0
 
     @ Question 1, Category 5 (Impish)
-		ImpishQuest1Points:
+    ImpishQuest1Points:
     .byte 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		ImpishQuest1Answers:
+    ImpishQuest1Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -600,16 +600,16 @@
     .4byte ImpishQuest1Answers
     .4byte ImpishQuest1Points
 
-		ImpishQuest1Question:
-		.string "Have you ever made a pitfall trap?\0"
-		.align 2,0
+    ImpishQuest1Question:
+    .string "Have you ever made a pitfall trap?\0"
+    .align 2,0
 
     @ Question 2, Category 5 (Impish)
-		ImpishQuest2Points:
+    ImpishQuest2Points:
     .byte 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		ImpishQuest2Answers:
+    ImpishQuest2Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -623,16 +623,16 @@
     .4byte ImpishQuest2Answers
     .4byte ImpishQuest2Points
 
-		ImpishQuest2Question:
-		.string "Do you like pranks?\0"
-		.align 2,0
+    ImpishQuest2Question:
+    .string "Do you like pranks?\0"
+    .align 2,0
 
     @ Question 3, Category 5 (Impish)
-		ImpishQuest3Points:
+    ImpishQuest3Points:
     .byte 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
 
-		ImpishQuest3Answers:
+    ImpishQuest3Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest3_No
@@ -646,17 +646,17 @@
     .4byte ImpishQuest3Answers
     .4byte ImpishQuest3Points
 
-		ImpishQuest3Question:
-		.string "Are there many things that you would like\nto do?\0"
-		.align 2,0
+    ImpishQuest3Question:
+    .string "Are there many things that you would like\nto do?\0"
+    .align 2,0
 
     @ Question 4, Category 5 (Impish)
-		ImpishQuest4Points:
+    ImpishQuest4Points:
     .byte 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		ImpishQuest4Answers:
+    ImpishQuest4Answers:
     .4byte ImpishQuest4_Face
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte ImpishQuest4_Caution
@@ -666,17 +666,17 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		ImpishQuest4_Heckle:
-		.string "Heckle the bully from behind.\0"
-		.align 2,0
+    ImpishQuest4_Heckle:
+    .string "Heckle the bully from behind.\0"
+    .align 2,0
 
-		ImpishQuest4_Caution:
-		.string "Caution the bully from afar.\0"
-		.align 2,0
+    ImpishQuest4_Caution:
+    .string "Caution the bully from afar.\0"
+    .align 2,0
 
-		ImpishQuest4_Face:
-		.string "Face up to the bully.\0"
-		.align 2,0
+    ImpishQuest4_Face:
+    .string "Face up to the bully.\0"
+    .align 2,0
 
     .global ImpishQuest4
     ImpishQuest4:
@@ -684,18 +684,18 @@
     .4byte ImpishQuest4Answers
     .4byte ImpishQuest4Points
 
-		ImpishQuest4Question:
-		.string "Your friend is being bullied!\n"
-		.string "What do you do?\0"
-		.align 2,0
+    ImpishQuest4Question:
+    .string "Your friend is being bullied!\n"
+    .string "What do you do?\0"
+    .align 2,0
 
     @ Question 1, Category 6 (Naive)
-		NaiveQuest1Points:
+    NaiveQuest1Points:
     .byte 0x00, 0x00, 0x00, 0x00, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-		NaiveQuest1Answers:
+    NaiveQuest1Answers:
     .4byte NaiveQuest1_Love
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte HardyQuest4_Little
@@ -705,13 +705,13 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		NaiveQuest1_Spare:
-		.string "Spare me.\0"
-		.align 2,0
+    NaiveQuest1_Spare:
+    .string "Spare me.\0"
+    .align 2,0
 
-		NaiveQuest1_Love:
-		.string "Love them!\0"
-		.align 2,0
+    NaiveQuest1_Love:
+    .string "Love them!\0"
+    .align 2,0
 
     .global NaiveQuest1
     NaiveQuest1:
@@ -719,9 +719,9 @@
     .4byte NaiveQuest1Answers
     .4byte NaiveQuest1Points
 
-		NaiveQuest1Question:
-		.string "Do you like groan-inducing puns?\0"
-		.align 2,0
+    NaiveQuest1Question:
+    .string "Do you like groan-inducing puns?\0"
+    .align 2,0
 
     @ Question 2, Category 6 (Naive)
     .global NaiveQuest2Points
@@ -927,15 +927,15 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .4byte -1
 
-		TimidQuest3_Clean:
+    TimidQuest3_Clean:
     .string "Clean it.\0"
     .align 2,0
 
-		TimidQuest3_Cry:
+    TimidQuest3_Cry:
     .string "Cry.\0"
     .align 2,0
 
-		TimidQuest3_Kick:
+    TimidQuest3_Kick:
     .string "Kick the door.\0"
     .align 2,0
 
@@ -947,10 +947,10 @@
 
     .global TimidQuest3Question
     TimidQuest3Question:
-		.string "You are suddenly locked inside a\n"
-		.string "pitch-black room!#W\n"
-		.string "What do you do?\0"
-		.align 2,0
+    .string "You are suddenly locked inside a\n"
+    .string "pitch-black room!#W\n"
+    .string "What do you do?\0"
+    .align 2,0
 
     @ Question 4, Category 7 (Timid)
     .global TimidQuest4Points
@@ -1947,7 +1947,7 @@
     .string "How does that make you feel?\0"
     .align 2,0
 
-	.global gPersonalityQuestionPointerTable
+  .global gPersonalityQuestionPointerTable
 gPersonalityQuestionPointerTable: @ 80F2624 (pointers to each question text)
         .4byte HardyQuest1
         .4byte HardyQuest2
@@ -2006,7 +2006,7 @@ gPersonalityQuestionPointerTable: @ 80F2624 (pointers to each question text)
         .4byte MiscQuest3
         .4byte BraveQuest2B
 
-	.global gNatureQuestionTable
+  .global gNatureQuestionTable
 gNatureQuestionTable: @ 80F2704 (Categories)
         .byte 0x00, 0x00, 0x00, 0x00 @ (Hardy)
         .byte 0x01, 0x01, 0x01, 0x01 @ (Docile)
@@ -2024,13 +2024,13 @@ gNatureQuestionTable: @ 80F2704 (Categories)
         .byte 0x0D, 0x0D, 0x0D @ (Miscellaneous)
         .byte 0x02 @ (Question 2b for Brave Category)
 
-	.global gGenderText
+  .global gGenderText
 gGenderText: @ 80F273C
-	.string "Are you a boy or a girl?\0"
+  .string "Are you a boy or a girl?\0"
         .align 2,0
         .4byte gGenderText
 
-	.global gGenderMenu
+  .global gGenderMenu
 gGenderMenu: @ 80F275C
         .4byte BoyText @ Pointer to boy text
         .byte 0x00, 0x00, 0x00, 0x00
@@ -2062,7 +2062,7 @@ gGenderMenu: @ 80F275C
         .byte 0x0C
         .byte 0x0D
 
-	.global gStarters
+  .global gStarters
 gStarters: @ 80F278E (2D Array / [Male][Female])
         .byte 0x04, 0x00 @ Charmander (Hardy M)
         .byte 0x19, 0x00 @ Pikachu (Hardy F)
