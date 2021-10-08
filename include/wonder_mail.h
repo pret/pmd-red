@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "text.h"
 #include "item.h"
+#include "pokemon.h"
 #include "sub_8095228.h"
 
 #define PASSWORD_BUFFER_SIZE 54
@@ -50,7 +51,15 @@ struct WonderMailStruct_203B2C0
     u8 unk3E;
     u32 unk40;
     u32 linkError;
-    u16 unk48[232];
+    u8 unk48[0x78 - 0x48];
+    u8 unk78;
+    u8 fill79[0xA8 - 0x79];
+    struct unkStruct_8095228 unkA8;
+    struct PokemonStruct unkD8;
+    u8 unk130;
+    u8 fill131[0x168 - 0x131];
+    u16 unk168;
+    u8 fill16A[0x218 - 0x16A];
     u8 unk218;
     u32 unk21C;
     u8 padding[0x7C];

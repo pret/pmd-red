@@ -119,8 +119,6 @@ SECTIONS {
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
         asm/friend_area_action_menu_1.o(.text);
-        src/wonder_mail_pre.o(.text);
-        asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
