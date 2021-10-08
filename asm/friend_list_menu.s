@@ -11561,7 +11561,7 @@ _080249F8:
 	ldr r3, _08024A10
 	b _08024CB0
 	.align 2, 0
-_08024A0C: .4byte gUnknown_80DCD5C
+_08024A0C: .4byte gLuminousCaveYeShallReturn
 _08024A10: .4byte 0x00000305
 _08024A14:
 	bl sub_8024D48
@@ -11657,7 +11657,7 @@ _08024ACA:
 	ldr r0, _08024AD4
 	b _08024CAE
 	.align 2, 0
-_08024AD4: .4byte gUnknown_80DCDDC
+_08024AD4: .4byte gLuminousCaveLackWhatIsNeeded
 _08024AD8:
 	ldr r1, [r5]
 	movs r0, 0xA
@@ -11665,7 +11665,7 @@ _08024AD8:
 	ldr r0, _08024AE4
 	b _08024CAE
 	.align 2, 0
-_08024AE4: .4byte gUnknown_80DCE18
+_08024AE4: .4byte gLuminousCaveOnlyOneItem
 _08024AE8:
 	bl sub_8025254
 	ldr r0, _08024B00
@@ -11720,7 +11720,7 @@ _08024B3A:
 	ldr r0, _08024B48
 	b _08024CAE
 	.align 2, 0
-_08024B48: .4byte gUnknown_80DCE38
+_08024B48: .4byte gLuminousCaveLetUsBegin
 _08024B4C:
 	ldr r0, _08024B68
 	ldr r1, [r5]
@@ -11737,7 +11737,7 @@ _08024B4C:
 	.align 2, 0
 _08024B68: .4byte gPlayerName
 _08024B6C: .4byte 0x000001ff
-_08024B70: .4byte gUnknown_80DCE68
+_08024B70: .4byte gLuminousCaveChangedAppearance
 _08024B74:
 	ldr r0, [r5]
 	ldr r0, [r0, 0xC]
@@ -11808,7 +11808,7 @@ _08024C06:
 	.align 2, 0
 _08024C10: .4byte gAvailablePokemonNames
 _08024C14: .4byte 0x000001ff
-_08024C18: .4byte gUnknown_80DCEB0
+_08024C18: .4byte gLuminousCaveEvolved
 _08024C1C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11816,7 +11816,7 @@ _08024C1C:
 	ldr r0, _08024C28
 	b _08024CAE
 	.align 2, 0
-_08024C28: .4byte gUnknown_80DCEDC
+_08024C28: .4byte gLuminousCaveComeAlone
 _08024C2C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11832,7 +11832,7 @@ _08024C3C:
 	ldr r0, _08024C48
 	b _08024CAE
 	.align 2, 0
-_08024C48: .4byte gUnknown_80DCF88
+_08024C48: .4byte gLuminousCaveCantEvolveAnymore
 _08024C4C:
 	ldr r1, [r5]
 	movs r0, 0x3
@@ -11872,7 +11872,7 @@ _08024C8C:
 	ldr r0, _08024C98
 	b _08024CAE
 	.align 2, 0
-_08024C98: .4byte gUnknown_80DD0E0
+_08024C98: .4byte gLuminousCaveCantEvolveYet
 _08024C9C:
 	movs r0, 0x8
 	movs r1, 0x3C
