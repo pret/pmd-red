@@ -11540,7 +11540,7 @@ _080249D0:
 	ldr r2, [r1, 0x28]
 	b _08024A42
 	.align 2, 0
-_080249E0: .4byte gUnknown_80DCAB8
+_080249E0: .4byte gLuminousCaveAskEvolution
 _080249E4: .4byte gUnknown_203B2B0
 _080249E8:
 	ldr r1, [r5]
