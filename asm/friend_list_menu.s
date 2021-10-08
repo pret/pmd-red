@@ -11531,7 +11531,7 @@ _080249B6:
 	b _08024A42
 	.align 2, 0
 _080249C8: .4byte gUnknown_203B2B0
-_080249CC: .4byte gUnknown_80DCA34
+_080249CC: .4byte gLuminousCaveSeekAwakening
 _080249D0:
 	bl sub_8024CFC
 	ldr r0, _080249E0
