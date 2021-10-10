@@ -1658,13 +1658,13 @@ SpeciesNameWobbuffet:
 .string "Wobbuffet\0"
 .align 2,0
 
-.global SpeciesCategoryUnownA
-SpeciesCategoryUnownA:
+.global SpeciesCategoryUnown
+SpeciesCategoryUnown:
 .string "Symbol\0"
 .align 2,0
 
-.global SpeciesNameUnownA
-SpeciesNameUnownA:
+.global SpeciesNameUnown
+SpeciesNameUnown:
 .string "Unown\0"
 .align 2,0
 

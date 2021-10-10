@@ -334,6 +334,10 @@ string get_json_string_value(Json data) {
     return data.is_string() ? data.string_value() : "0";
 }
 
+string get_json_binary_value(Json data) {
+    return data.is_string() ? std::to_string(std::stoi(data.string_value().substr(2), NULL, 2)) : "0";
+}
+
 string read_json(Json data, int num_bytes, string(*json_reader)(Json)) {
     return get_start_bytes(num_bytes) + json_reader(data);
 }
@@ -348,6 +352,10 @@ string read_json_int(Json data, int num_bytes) {
 
 string read_json_string(Json data, int num_bytes) {
     return read_json(data, num_bytes, get_json_string_value);
+}
+
+string read_json_binary(Json data, int num_bytes) {
+    return read_json(data, num_bytes, get_json_binary_value);
 }
 
 string read_json_array(Json data, int num_bytes, int expected_count, string(*json_reader)(Json)) {
@@ -395,7 +403,7 @@ string generate_species_data_text(Json data) {
             << read_json_int(data_entry["size"], 1)
             << "\n.2byte 0"
             << read_json_int(data_entry["move_speed"], 4)
-            << read_json_int(data_entry["dialogue_sprites"], 2)
+            << read_json_binary(data_entry["dialogue_sprites"], 2)
             << read_json_bool(data_entry["unk12"])
             << read_json_string_array(data_entry["types"], 1, 2)
             << read_json_string(data_entry["walkable_tiles"], 1)
@@ -477,8 +485,8 @@ string generate_move_data_text(Json data) {
             << "\n.byte 0"
             << read_json_string(data_entry["type"], 1)
             << "\n.byte 0"
-            << read_json_int(data_entry["targetingFlags"], 2)
-            << read_json_int(data_entry["aiTargetingFlags"], 2)
+            << read_json_binary(data_entry["targetingFlags"], 2)
+            << read_json_binary(data_entry["aiTargetingFlags"], 2)
             << read_json_int(data_entry["maxPP"], 1)
             << read_json_int(data_entry["weight"], 1)
             << read_json_int(data_entry["accuracy1"], 1)

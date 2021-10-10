@@ -50,7 +50,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_GRASS",
             "TYPE_POISON"
@@ -200,7 +200,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_FIRE"
         ],
@@ -298,7 +298,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 31,
+        "dialogue_sprites": "0b0000000000011111",
         "types": [
             "TYPE_FIRE",
             "TYPE_FLYING"
@@ -352,7 +352,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_WATER"
         ],
@@ -450,7 +450,7 @@
         "overworld_palette": 9,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 15,
+        "dialogue_sprites": "0b0000000000001111",
         "types": [
             "TYPE_WATER"
         ],
@@ -503,7 +503,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 7,
+        "dialogue_sprites": "0b0000000000000111",
         "types": [
             "TYPE_BUG"
         ],
@@ -548,7 +548,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_BUG"
         ],
@@ -600,7 +600,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_BUG",
             "TYPE_FLYING"
@@ -1147,7 +1147,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 7,
+        "dialogue_sprites": "0b0000000000000111",
         "types": [
             "TYPE_POISON"
         ],
@@ -1245,7 +1245,7 @@
         "overworld_palette": 0,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_ELECTRIC"
         ],
@@ -1884,7 +1884,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_FIRE"
         ],
@@ -1988,7 +1988,7 @@
         "overworld_palette": 1,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -2483,7 +2483,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_GROUND"
         ],
@@ -2529,7 +2529,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_GROUND"
         ],
@@ -2582,7 +2582,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -2627,7 +2627,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -2679,7 +2679,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_WATER"
         ],
@@ -2779,7 +2779,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_FIGHTING"
         ],
@@ -3225,7 +3225,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 7,
+        "dialogue_sprites": "0b0000000000000111",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -3279,7 +3279,7 @@
         "overworld_palette": 12,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_FIGHTING"
         ],
@@ -3427,7 +3427,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_GRASS",
             "TYPE_POISON"
@@ -3777,7 +3777,7 @@
         "overworld_palette": 6,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_ROCK",
             "TYPE_GROUND"
@@ -4032,7 +4032,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_ELECTRIC",
             "TYPE_STEEL"
@@ -4671,7 +4671,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 127,
+        "dialogue_sprites": "0b0000000001111111",
         "types": [
             "TYPE_GHOST",
             "TYPE_POISON"
@@ -5160,7 +5160,7 @@
         "overworld_palette": 6,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_GROUND"
         ],
@@ -5692,7 +5692,7 @@
         "overworld_palette": 6,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -6554,7 +6554,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -7100,7 +7100,7 @@
         "overworld_palette": 5,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_ICE",
@@ -7148,7 +7148,7 @@
         "overworld_palette": 4,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_ELECTRIC",
@@ -7196,7 +7196,7 @@
         "overworld_palette": 0,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_FIRE",
@@ -7394,7 +7394,7 @@
         "overworld_palette": 7,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -7484,7 +7484,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_GRASS"
         ],
@@ -7631,7 +7631,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_FIRE"
         ],
@@ -7781,7 +7781,7 @@
         "overworld_palette": 0,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_WATER"
         ],
@@ -8757,7 +8757,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_PSYCHIC",
             "TYPE_FLYING"
@@ -9310,7 +9310,7 @@
         "overworld_palette": 12,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_GRASS",
             "TYPE_FLYING"
@@ -9895,8 +9895,8 @@
     },
     {
         "name": "Unown-A",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -9940,8 +9940,8 @@
     },
     {
         "name": "Unown-B",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -9985,8 +9985,8 @@
     },
     {
         "name": "Unown-C",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10030,8 +10030,8 @@
     },
     {
         "name": "Unown-D",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10075,8 +10075,8 @@
     },
     {
         "name": "Unown-E",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10120,8 +10120,8 @@
     },
     {
         "name": "Unown-F",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10165,8 +10165,8 @@
     },
     {
         "name": "Unown-G",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10210,8 +10210,8 @@
     },
     {
         "name": "Unown-H",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10255,8 +10255,8 @@
     },
     {
         "name": "Unown-I",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10300,8 +10300,8 @@
     },
     {
         "name": "Unown-J",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10345,8 +10345,8 @@
     },
     {
         "name": "Unown-K",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10390,8 +10390,8 @@
     },
     {
         "name": "Unown-L",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10435,8 +10435,8 @@
     },
     {
         "name": "Unown-M",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10480,8 +10480,8 @@
     },
     {
         "name": "Unown-N",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10525,8 +10525,8 @@
     },
     {
         "name": "Unown-O",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10570,8 +10570,8 @@
     },
     {
         "name": "Unown-P",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10615,8 +10615,8 @@
     },
     {
         "name": "Unown-Q",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10660,8 +10660,8 @@
     },
     {
         "name": "Unown-R",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10705,8 +10705,8 @@
     },
     {
         "name": "Unown-S",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10750,8 +10750,8 @@
     },
     {
         "name": "Unown-T",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10795,8 +10795,8 @@
     },
     {
         "name": "Unown-U",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10840,8 +10840,8 @@
     },
     {
         "name": "Unown-V",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10885,8 +10885,8 @@
     },
     {
         "name": "Unown-W",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10930,8 +10930,8 @@
     },
     {
         "name": "Unown-X",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -10975,8 +10975,8 @@
     },
     {
         "name": "Unown-Y",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -11020,8 +11020,8 @@
     },
     {
         "name": "Unown-Z",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -11070,7 +11070,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -11410,7 +11410,7 @@
         "overworld_palette": 11,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 7,
+        "dialogue_sprites": "0b0000000000000111",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -11456,7 +11456,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -12129,7 +12129,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_WATER"
         ],
@@ -12275,7 +12275,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_STEEL",
             "TYPE_FLYING"
@@ -12669,7 +12669,7 @@
         "overworld_palette": 8,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -13040,7 +13040,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_ELECTRIC"
         ],
@@ -13085,7 +13085,7 @@
         "overworld_palette": 12,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_FIRE"
         ],
@@ -13131,7 +13131,7 @@
         "overworld_palette": 7,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_WATER"
         ],
@@ -13274,7 +13274,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_ROCK",
             "TYPE_DARK"
@@ -13327,7 +13327,7 @@
         "overworld_palette": 9,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_PSYCHIC",
@@ -13375,7 +13375,7 @@
         "overworld_palette": 3,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_FIRE",
             "TYPE_FLYING"
@@ -13469,7 +13469,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_GRASS"
         ],
@@ -13616,7 +13616,7 @@
         "overworld_palette": 4,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_FIRE"
         ],
@@ -13768,7 +13768,7 @@
         "overworld_palette": 9,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_WATER"
         ],
@@ -14411,7 +14411,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 255,
+        "dialogue_sprites": "0b0000000011111111",
         "types": [
             "TYPE_WATER",
             "TYPE_GRASS"
@@ -14618,7 +14618,7 @@
         "overworld_palette": 8,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 15,
+        "dialogue_sprites": "0b0000000000001111",
         "types": [
             "TYPE_GRASS",
             "TYPE_DARK"
@@ -14815,7 +14815,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_WATER",
             "TYPE_FLYING"
@@ -14966,7 +14966,7 @@
         "overworld_palette": 10,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 7,
+        "dialogue_sprites": "0b0000000000000111",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -15657,7 +15657,7 @@
         "overworld_palette": 2,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_FIGHTING"
         ],
@@ -15846,7 +15846,7 @@
         "overworld_palette": 11,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 8191,
+        "dialogue_sprites": "0b0001111111111111",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -16230,7 +16230,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 127,
+        "dialogue_sprites": "0b0000000001111111",
         "types": [
             "TYPE_FIGHTING",
             "TYPE_PSYCHIC"
@@ -16603,7 +16603,7 @@
         "overworld_palette": 10,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_POISON"
         ],
@@ -17140,7 +17140,7 @@
         "overworld_palette": 6,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 15,
+        "dialogue_sprites": "0b0000000000001111",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -17756,7 +17756,7 @@
         "overworld_palette": 9,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_WATER",
             "TYPE_GROUND"
@@ -18477,7 +18477,7 @@
         "overworld_palette": 3,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 195,
+        "dialogue_sprites": "0b0000000011000011",
         "types": [
             "TYPE_NORMAL"
         ],
@@ -18805,7 +18805,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "unk12": true,
         "types": [
             "TYPE_DARK"
@@ -18851,7 +18851,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -19816,7 +19816,7 @@
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "unk12": true,
         "types": [
             "TYPE_DRAGON",
@@ -19864,7 +19864,7 @@
         "overworld_palette": 5,
         "size": 2,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "unk12": true,
         "types": [
             "TYPE_DRAGON",
@@ -19912,7 +19912,7 @@
         "overworld_palette": 5,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_WATER"
@@ -19959,7 +19959,7 @@
         "overworld_palette": 5,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_GROUND"
@@ -20006,7 +20006,7 @@
         "overworld_palette": 3,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_DRAGON",
@@ -20054,7 +20054,7 @@
         "overworld_palette": 10,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 3,
+        "dialogue_sprites": "0b0000000000000011",
         "types": [
             "TYPE_STEEL",
             "TYPE_PSYCHIC"
@@ -20101,7 +20101,7 @@
         "overworld_palette": 9,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "unk12": true,
         "types": [
             "TYPE_PSYCHIC"
@@ -20143,8 +20143,8 @@
     },
     {
         "name": "Unown-!",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -20188,8 +20188,8 @@
     },
     {
         "name": "Unown-?",
-        "species": "SpeciesNameUnownA",
-        "category": "SpeciesCategoryUnownA",
+        "species": "SpeciesNameUnown",
+        "category": "SpeciesCategoryUnown",
         "overworld_palette": 5,
         "size": 1,
         "move_speed": 1,
@@ -20376,7 +20376,7 @@
         "overworld_palette": 12,
         "size": 1,
         "move_speed": 1,
-        "dialogue_sprites": 63,
+        "dialogue_sprites": "0b0000000000111111",
         "types": [
             "TYPE_PSYCHIC"
         ],
@@ -20509,7 +20509,7 @@
         "overworld_palette": 3,
         "size": 4,
         "move_speed": 1,
-        "dialogue_sprites": 1,
+        "dialogue_sprites": "0b0000000000000001",
         "types": [
             "TYPE_DRAGON",
             "TYPE_FLYING"

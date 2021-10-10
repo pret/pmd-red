@@ -133,7 +133,7 @@ struct gPokemon
     /* 0x8 */ u8 overworld_palette;
     /* 0x9 */ u8 size;
     /* 0xC */ s32 move_speed;
-    /* 0x10 */ u16 dialogue_sprites;
+    /* 0x10 */ u16 dialogue_sprites; // Bitwise flags for whether a dialogue sprite/portrait is available for each emotion.
     /* 0x12 */ bool8 unk12;
     /* 0x13 */ u8 types[2];
     /* 0x15 */ u8 walkable_tiles;
