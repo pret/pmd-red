@@ -1069,22 +1069,22 @@ _0802DDDC:
 	ldr r0, _0802DDE0
 	b _0802DE1C
 	.align 2, 0
-_0802DDE0: .4byte gUnknown_80E0184
+_0802DDE0: .4byte gWonderMailClientThanksForRescuingMe
 _0802DDE4:
 	ldr r0, _0802DDE8
 	b _0802DE1C
 	.align 2, 0
-_0802DDE8: .4byte gUnknown_80E01A0
+_0802DDE8: .4byte gWonderMailClientThanksForRescuingThem
 _0802DDEC:
 	ldr r0, _0802DDF0
 	b _0802DE1C
 	.align 2, 0
-_0802DDF0: .4byte gUnknown_80E01C4
+_0802DDF0: .4byte gWonderMailClientEscorted
 _0802DDF4:
 	ldr r0, _0802DDF8
 	b _0802DE1C
 	.align 2, 0
-_0802DDF8: .4byte gUnknown_80E01F0
+_0802DDF8: .4byte gWonderMailClientItemDelivered1
 _0802DDFC:
 	ldr r0, [r5]
 	ldr r0, [r0, 0x34]
@@ -1108,7 +1108,7 @@ _0802DE1C:
 	bl sub_80141B4
 	b _0802DE3E
 	.align 2, 0
-_0802DE2C: .4byte gUnknown_80E0218
+_0802DE2C: .4byte gWonderMailClientItemDelivered2
 _0802DE30: .4byte 0x0000010d
 _0802DE34:
 	ldr r0, [r5]
