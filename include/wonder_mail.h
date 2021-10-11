@@ -51,9 +51,8 @@ struct WonderMailStruct_203B2C0
     u8 unk3E;
     u32 unk40;
     u32 linkError;
-    u8 unk48[0x78 - 0x48];
-    u8 unk78;
-    u8 fill79[0xA8 - 0x79];
+    u8 unk48[0x30];
+    u8 unk78[0x30];
     struct unkStruct_8095228 unkA8;
     struct PokemonStruct unkD8;
     u8 unk130;
