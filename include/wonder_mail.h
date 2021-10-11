@@ -4,8 +4,25 @@
 #include "file_system.h"
 #include "text.h"
 #include "item.h"
+#include "pokemon.h"
+#include "sub_8095228.h"
 
 #define PASSWORD_BUFFER_SIZE 54
+#define MAX_ITEM_REWARDS 3
+
+struct unkStruct_802F204
+{
+    /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH]; // client name?
+    /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
+    /* 0x14 */ s16 unk14; // poke species (client??)
+    /* 0x16 */ u8 unk16;
+    /* 0x18 */ s32 moneyReward;
+    /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
+    /* 0x1F */ u8 numItems;
+    /* 0x20 */ u8 friendAreaReward;
+    u8 fill21[0x24 - 0x21];
+    /* 0x24 */ u32 teamRankPtsReward;
+};
 
 struct WonderMail
 {
@@ -34,7 +51,14 @@ struct WonderMailStruct_203B2C0
     u8 unk3E;
     u32 unk40;
     u32 linkError;
-    u16 unk48[232];
+    u8 unk48[0x30];
+    u8 unk78[0x30];
+    struct unkStruct_8095228 unkA8;
+    struct PokemonStruct unkD8;
+    u8 unk130;
+    u8 fill131[0x168 - 0x131];
+    u16 unk168;
+    u8 fill16A[0x218 - 0x16A];
     u8 unk218;
     u32 unk21C;
     u8 padding[0x7C];
@@ -92,20 +116,7 @@ struct WonderMailStruct_203B2C4
     u8 formattedString[0x100];
     s32 wonderMailMethod;
     u32 wonderMailMode;
-    u8 unk53C[0xA];
-    u32 unk548;
-    u32 unk54C;
-    u16 unk550;
-    u8 unk552;
-    u8 unk553;
-    u32 unk554;
-    u8 unk558;
-    u8 unk559;
-    u8 unk55A;
-    u8 unk55B;
-    u8 unk55C;
-    u8 fill55C[0x560 - 0x55D];
-    u32 unk560;
+    struct unkStruct_802F204 unk53C;
 };
 
 void sub_8028B04(u32 r0);

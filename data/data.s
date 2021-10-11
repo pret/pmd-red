@@ -525,8 +525,8 @@ gUnknown_80B7F14: @ 80B7F14
         .byte 0x2C, 0x03, 0x00, 0x00
         .4byte LocateSetText
 
-	.global gUnknown_80B7F20
-gUnknown_80B7F20: @ 80B7F20
+	.global gLocateSetErrorMessage
+gLocateSetErrorMessage: @ 80B7F20
         .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
         .string "    atb %02x grp %3d \0"
         .align 2,0
@@ -542,8 +542,8 @@ gUnknown_80B7F88: @ 80B7F88
         .byte 0x55, 0x04, 0x00, 0x00
         .4byte MemoryLocate_LocalCreateText
 
-	.global gUnknown_80B7F94
-gUnknown_80B7F94: @ 80B7F94
+	.global gLocalCreateErrorMessage
+gLocalCreateErrorMessage: @ 80B7F94
         .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
         .string "pksdir0\0"

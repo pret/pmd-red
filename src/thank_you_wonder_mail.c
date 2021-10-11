@@ -424,7 +424,7 @@ extern struct PokemonStruct *sub_808D33C(void);
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
 extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_80922B4(u8 *, u8 *, u32);
-extern void sub_802F204(u8 *, u32);
+extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
 extern void sub_803092C(void);
@@ -1615,23 +1615,23 @@ void UpdateThankYouMailText(void)
         break;
     case 0x22:
         monName = GetMonSpecies(SPECIES_PELIPPER);
-        strcpy(gUnknown_203B2C4->unk53C,monName);
-        gUnknown_203B2C4->unk550 = 0x130;
-        gUnknown_203B2C4->unk552 = 2;
-        gUnknown_203B2C4->unk554 = 0;
+        strcpy(gUnknown_203B2C4->unk53C.clientName,monName); // 0x53C
+        gUnknown_203B2C4->unk53C.unk14 = SPECIES_PELIPPER; // 0x550
+        gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
+        gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
         puVar4 = sub_8095228(uVar2);
         cVar1 = puVar4->unk20.itemIndex;
         if (cVar1 != '\0')
-            gUnknown_203B2C4->unk558 = cVar1;
+            gUnknown_203B2C4->unk53C.itemRewards[0] = cVar1; // unk558
         else
-            gUnknown_203B2C4->unk558 = 0;
-        gUnknown_203B2C4->unk55B = 1;
-        gUnknown_203B2C4->unk560 = sub_803C200(&puVar4->unk4, 0);
-        gUnknown_203B2C4->unk559 = 0;
-        gUnknown_203B2C4->unk55A = 0;
-        gUnknown_203B2C4->unk55C = 0;
-        sub_802F204(gUnknown_203B2C4->unk53C,0);
+            gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
+        gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = sub_803C200(&puVar4->unk4, 0); // unk560
+        gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
+        gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
+        gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C
+        sub_802F204(&gUnknown_203B2C4->unk53C,0); // unk53C
         break;
     case COMMUNICATING_THANK_YOU_MAIL:
         // Communicating..

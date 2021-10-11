@@ -259,7 +259,7 @@ extern struct DungeonEntity *sub_8083600();
 extern void sub_80421C0(struct DungeonEntity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
-extern void sub_80464C8(struct DungeonEntity *, u32, struct ItemSlot *);
+extern void sub_80464C8(struct DungeonEntity *, u32 *, struct ItemSlot *);
 extern void sub_8098044(u32);
 extern void PlaySoundEffect(u32);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
@@ -3092,7 +3092,7 @@ void sub_808ADCC(void)
   }
 }
 
-void sub_808AE54(char param_1,char param_2,u32 param_3)
+void sub_808AE54(char param_1,char param_2,u32 *param_3)
 {
   struct DungeonEntity * uVar3;
   u8 auStack24 [4];
@@ -3115,7 +3115,7 @@ void sub_808AE54(char param_1,char param_2,u32 param_3)
 }
 
 
-void sub_808AEC8(char param_1,char param_2,u32 param_3)
+void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 {
   struct DungeonEntity * uVar3;
   u8 auStack24 [4];
@@ -3137,7 +3137,7 @@ void sub_808AEC8(char param_1,char param_2,u32 param_3)
   }
 }
 
-void sub_808AF3C(char param_1,char param_2,u32 param_3)
+void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 {
   struct DungeonEntity * uVar3;
   u8 auStack24 [4];
