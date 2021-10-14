@@ -1,3 +1,5 @@
+#ifndef GUARD_SUB_8095228_H
+#define GUARD_SUB_8095228_H
 
 struct unkStruct_8095228
 {
@@ -18,4 +20,4 @@ struct unkStruct_8095228
 
 extern struct unkStruct_8095228 *sub_8095228(u8);
 
-
+#endif // GUARD_SUB_8095228_H

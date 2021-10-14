@@ -173,7 +173,7 @@ QuickSave:
 	b _08000892
 	.align 2, 0
 _080007AC: .4byte gUnknown_2026E4E
-_080007B0: .4byte gUnknown_80B6A34
+_080007B0: .4byte gSaveTextQuicksaving
 _080007B4:
 	cmp r4, 0x1
 	beq _0800086C
@@ -227,7 +227,7 @@ _08000812:
 	b _08000822
 	.align 2, 0
 _08000818: .4byte 0x000f1206
-_0800081C: .4byte gUnknown_80B6A7C
+_0800081C: .4byte gSaveTextYourAdventureHasBeenSaved
 _08000820:
 	ldr r0, _08000834
 _08000822:
@@ -239,7 +239,7 @@ _08000822:
 	movs r4, 0x1
 	b _08000892
 	.align 2, 0
-_08000834: .4byte gUnknown_80B6AA0
+_08000834: .4byte gSaveTextYourAdventureHasBeenSavedLong
 _08000838: .4byte 0x00000321
 _0800083C:
 	cmp r4, 0x1
@@ -252,7 +252,7 @@ _0800083C:
 	movs r4, 0x3
 	b _08000892
 	.align 2, 0
-_08000850: .4byte gUnknown_80B6B14
+_08000850: .4byte gSaveTextTheDataCouldNotBeWritten
 _08000854:
 	ldr r0, _08000864
 	movs r1, 0
@@ -263,7 +263,7 @@ _08000860:
 	movs r4, 0x2
 	b _08000892
 	.align 2, 0
-_08000864: .4byte gUnknown_80B6B78
+_08000864: .4byte gSaveTextFailed
 _08000868: .4byte 0x00000301
 _0800086C:
 	cmp r6, 0
@@ -362,12 +362,12 @@ _08000934:
 	movs r4, 0x2
 	b _080009A2
 	.align 2, 0
-_08000944: .4byte gUnknown_80B6B88
+_08000944: .4byte gSaveTextError
 _08000948:
 	ldr r0, _0800094C
 	b _08000952
 	.align 2, 0
-_0800094C: .4byte gUnknown_80B6BDC
+_0800094C: .4byte gSaveTextCantResume
 _08000950:
 	ldr r0, _08000960
 _08000952:
@@ -379,7 +379,7 @@ _0800095C:
 	movs r4, 0x1
 	b _080009A2
 	.align 2, 0
-_08000960: .4byte gUnknown_80B6CB8
+_08000960: .4byte gSaveTextMayNotResume
 _08000964: .4byte 0x00000301
 _08000968:
 	cmp r4, 0x1

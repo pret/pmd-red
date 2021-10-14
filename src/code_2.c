@@ -6,6 +6,7 @@
 #include "friend_area.h"
 #include "input.h"
 #include "memory.h"
+#include "main_menu.h"
 #include "music.h"
 #include "play_time.h"
 #include "save.h"
@@ -41,12 +42,6 @@ extern void sub_800CDA8(u32);
 extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
-extern void InitMainMenu(void);
-extern bool8 sub_80363E0(void);
-extern void SetUpMenu(void);
-extern u32 UpdateMenu(void);
-extern void CleanUpMenu(void);
-extern void DeleteMainMenu(void);
 extern s32 sub_80953D4(u32);
 extern void sub_8095240(u8);
 extern void nullsub_33(void);
@@ -168,7 +163,7 @@ void GameLoop(void)
             CleanUpMenu();
             if (nextMenu == 2) break;
             if (nextMenu == 4) break;
-            if (nextMenu == 3) break;
+            if (nextMenu == MENU_NEW_GAME) break;
         }
         DeleteMainMenu();
         while (gUnknown_2000A80 > 0) {
@@ -193,7 +188,7 @@ void GameLoop(void)
             case 4:
                 tmp3 = sub_80009D0(3);
                 break;
-            case 3:
+            case MENU_NEW_GAME:
                 sub_80122A8();
                 nullsub_33();
                 tmp3 = sub_80009D0(0);

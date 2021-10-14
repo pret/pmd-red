@@ -41,7 +41,8 @@ struct DungeonGlobalData
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
     u8 fill37E3[0x37FC - 0x37D9];
     /* 0x37FC */ bool8 decoyActive;
-    u8 fill37FD[0x3A0E - 0x37FD];
+    u8 fill37FD[0x3A0D - 0x37FD];
+    /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
     u8 fill3A10[0x3A14 - 0x3A10];
     /* 0x3A14 */ s16 bossBattleIndex;

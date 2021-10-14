@@ -357,6 +357,10 @@
 #define MOVE_AEROBLAST 0x161
 #define MOVE_VOLT_TACKLE 0x162
 #define MOVE_REGULAR_ATTACK 0x163
+#define MOVE_IS_WATCHING 0x164
+#define MOVE_BIDE_2 0x165 // Unused
+#define MOVE_DOLLAR_1 0x166 // Unused
+#define MOVE_DOLLAR_2 0x167 // Unused
 #define MOVE_WIDE_SLASH 0x168
 #define MOVE_EXCAVATE 0x169 // Unused
 #define MOVE_SPIN_SLASH 0x16A // Unused
@@ -402,11 +406,14 @@
 #define MOVE_TRAPPER 0x191
 #define MOVE_POSSESS 0x192
 #define MOVE_ITEMIZE 0x193
+#define MOVE_MD1 0x194 // Unused
+#define MOVE_PROJECTILE 0x195
 #define MOVE_HURL 0x196
 #define MOVE_MOBILE 0x197
 #define MOVE_ITEM_TOSS 0x198
 #define MOVE_SEE_STAIRS 0x199
 #define MOVE_LONG_TOSS 0x19A
+#define MOVE_MD1_2 0x19B // Unused
 #define MOVE_PIERCE 0x19C
 
 #endif

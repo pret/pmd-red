@@ -119,8 +119,6 @@ SECTIONS {
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
         asm/friend_area_action_menu_1.o(.text);
-        src/wonder_mail_pre.o(.text);
-        asm/wonder_mail.o(.text);
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
@@ -133,10 +131,12 @@ SECTIONS {
         src/pelipper_board.o(.text);
         asm/pelipper_board.o(.text);
         src/pelipper_board_1.o(.text);
+        src/wonder_mail_3_mid.o(.text);
         asm/wonder_mail_3_mid.o(.text);
         src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo.o(.text);
         asm/makuhita_dojo.o(.text);
+        src/wonder_mail_4.o(.text);
         asm/wonder_mail_4.o(.text);
         src/post_office_guide.o(.text);
         asm/wonder_mail_5.o(.text);
@@ -147,8 +147,6 @@ SECTIONS {
         asm/credits.o(.text);
         src/credits.o(.text);
         src/main_menu.o(.text);
-        asm/main_menu_1.o(.text);
-        src/main_menu_1.o(.text);
         src/trade_items_menu.o(.text);
         src/other_menus.o(.text);
         asm/other_menus.o(.text);
@@ -191,6 +189,8 @@ SECTIONS {
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         asm/code_807001C.o(.text);
+        src/code_80848F0.o(.text);
+        asm/code_80848F0.o(.text);
         src/code_80869E4.o(.text);
         asm/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
@@ -323,6 +323,8 @@ SECTIONS {
         data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
+        src/main_menu.o(.rodata);
+        data/data_80E59A8.o(.rodata);
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu.o(.rodata);

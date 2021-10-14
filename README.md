@@ -23,7 +23,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 * Disassembly of [**Pokémon Emerald**][pokeemerald]
 * Disassembly of [**Pokémon Diamond/Pearl**][pokediamond]
 * Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
+* irc: **irc.libera.chat** [**#pret**][irc]
 
 [pokered]: https://github.com/pret/pokered
 [pokeyellow]: https://github.com/pret/pokeyellow
@@ -36,4 +36,4 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [pokeemerald]: https://github.com/pret/pokeemerald
 [pokediamond]: https://github.com/pret/pokediamond
 [Discord]: https://discord.gg/d5dubZ3
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[irc]: https://web.libera.chat/?#pret
