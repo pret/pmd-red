@@ -700,7 +700,7 @@ _080427B0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080427FA

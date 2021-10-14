@@ -2755,7 +2755,7 @@ sub_8058E5C:
 	cmp r0, 0
 	beq _08058ED0
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058ED0
@@ -3255,7 +3255,7 @@ sub_80591E4:
 	movs r4, 0x1
 _0805922A:
 	adds r0, r7, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805927E
@@ -5701,7 +5701,7 @@ sub_805A464:
 	cmp r0, 0
 	beq _0805A4B4
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -6373,7 +6373,7 @@ _0805A9B0:
 	cmp r4, 0
 	bne _0805AAB6
 	mov r0, r8
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6397,13 +6397,13 @@ _0805A9B0:
 	cmp r0, 0
 	bne _0805AAB6
 	mov r0, r8
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
 _0805A9FE:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6448,7 +6448,7 @@ _0805AA4C:
 	bl sub_80694C0
 _0805AA5E:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6872,7 +6872,7 @@ _0805ADA0:
 	adds r0, r7
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AE0C
@@ -8806,7 +8806,7 @@ _0805BBF0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BC2A
@@ -9448,7 +9448,7 @@ _0805C0BA:
 _0805C0BE:
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C0F2
@@ -10866,7 +10866,7 @@ _0805CE08:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE46
@@ -10909,7 +10909,7 @@ _0805CE5E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE9C
@@ -15469,7 +15469,7 @@ _0805F4D8:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F526
@@ -15524,7 +15524,7 @@ _0805F544:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F542
@@ -16207,7 +16207,7 @@ _0805FB3A:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805FB86
@@ -16662,7 +16662,7 @@ _0805FEF4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	adds r5, r6, 0x1
 	mov r12, r5
@@ -17658,7 +17658,7 @@ _08060718:
 	adds r1, r0
 	ldr r4, [r1]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060794
@@ -18093,7 +18093,7 @@ _08060A86:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060ABE
@@ -18244,7 +18244,7 @@ _08060BD0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060CCC
@@ -18497,7 +18497,7 @@ _08060DE4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060E14
@@ -18573,7 +18573,7 @@ _08060E7A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060E9E
@@ -18928,7 +18928,7 @@ _08061164:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080611AC
@@ -19089,7 +19089,7 @@ _0806129E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _080612BA
@@ -21996,7 +21996,7 @@ _080629FC:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08062A5A
@@ -25468,7 +25468,7 @@ sub_806455C:
 	movs r3, 0
 	bl xxx_call_draw_string
 	ldr r0, [r4, 0x14]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080645C0
@@ -31266,7 +31266,7 @@ _080674BC:
 	bl sub_8047190
 _080674D0:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080674F8
@@ -31777,7 +31777,7 @@ _080678C6:
 	cmp r0, 0
 	bne _080678F6
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080678F0
@@ -31888,7 +31888,7 @@ _0806798E:
 	movs r3, 0
 	bl sub_8055FA0
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080679DE
@@ -31907,7 +31907,7 @@ _080679D2:
 	blt _0806798E
 _080679DE:
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067A56
@@ -33603,7 +33603,7 @@ _0806876C:
 	cmp r4, 0
 	beq _08068796
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08068796
@@ -34751,7 +34751,7 @@ _08069044:
 	cmp r4, 0
 	beq _08069072
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069072
@@ -34956,7 +34956,7 @@ _080691FE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080691FC
@@ -36627,7 +36627,7 @@ _08069EAA:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069F3E
@@ -36750,14 +36750,14 @@ sub_8069F9C:
 	mov r8, r0
 	adds r6, r1, 0
 	mov r9, r2
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069FB8
 	b _0806A0FA
 _08069FB8:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069FC6
@@ -36935,12 +36935,12 @@ sub_806A120:
 	adds r7, r0, 0
 	adds r6, r1, 0
 	adds r4, r2, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A19C
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A19C
@@ -36999,7 +36999,7 @@ sub_806A1B0:
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A1DE
@@ -37028,7 +37028,7 @@ sub_806A1E8:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A234
@@ -37076,7 +37076,7 @@ sub_806A240:
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A2B4
@@ -37140,7 +37140,7 @@ sub_806A2BC:
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r6, r1, 24
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A328
@@ -37211,7 +37211,7 @@ _0806A33E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A384
@@ -37552,7 +37552,7 @@ sub_806A5B8:
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806A5CE
@@ -37799,7 +37799,7 @@ _0806A7A4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A7D2
@@ -38003,7 +38003,7 @@ _0806A92A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A95C
@@ -38046,7 +38046,7 @@ _0806A978:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A99E
@@ -38072,7 +38072,7 @@ sub_806A9B4:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AA02
@@ -38184,7 +38184,7 @@ _0806AA7C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AB12
@@ -38280,7 +38280,7 @@ _0806AB3A:
 	adds r0, r1
 	ldr r7, [r0]
 	adds r0, r7, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	adds r4, 0x1
 	mov r8, r4
@@ -38297,7 +38297,7 @@ _0806AB5C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AB8C
@@ -39481,7 +39481,7 @@ _0806B460:
 	str r0, [r2]
 	bl sub_8083600
 	adds r5, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806B49C
@@ -39755,7 +39755,7 @@ _0806B67C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806B6B8
@@ -41212,7 +41212,7 @@ _0806C1E2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	adds r5, 0x1
 	mov r9, r5
@@ -42553,7 +42553,7 @@ _0806CC14:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CC5C
@@ -42604,7 +42604,7 @@ _0806CC74:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CCA0
@@ -42749,7 +42749,7 @@ _0806CD94:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CDC0
@@ -42966,7 +42966,7 @@ sub_806CEFC:
 sub_806CF18:
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CF4C
@@ -43018,7 +43018,7 @@ _0806CF64:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CF84
@@ -43136,14 +43136,14 @@ _0806D04A:
 	b _0806D514
 _0806D054:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D062
 	b _0806D514
 _0806D062:
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D070
@@ -43235,14 +43235,14 @@ _0806D100:
 	bl sub_8077084
 _0806D118:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D126
 	b _0806D514
 _0806D126:
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D134
@@ -43363,14 +43363,14 @@ _0806D1E0:
 	bl sub_806D528
 _0806D216:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D224
 	b _0806D514
 _0806D224:
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D232
@@ -43665,12 +43665,12 @@ _0806D45A:
 	strh r0, [r2]
 _0806D48A:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D514
 	adds r0, r5, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D514
@@ -44364,7 +44364,7 @@ _0806DA2E:
 	movs r0, 0x1
 	mov r8, r0
 	mov r0, r9
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DA50
@@ -44672,7 +44672,7 @@ _0806DC86:
 	adds r0, r1
 	ldr r0, [r0]
 	mov r8, r0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DCDE
@@ -45094,7 +45094,7 @@ _0806DFF8:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E020
@@ -45138,7 +45138,7 @@ _0806E040:
 	strb r1, [r0, 0xD]
 _0806E066:
 	mov r0, r9
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E08A
@@ -45246,7 +45246,7 @@ sub_806E100:
 	movs r1, 0
 	str r1, [sp, 0x1C]
 	ldr r0, [sp, 0x18]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E14E
@@ -45883,7 +45883,7 @@ sub_806E654:
 	movs r0, 0
 	str r0, [sp, 0x10]
 	adds r0, r1, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E6DC
@@ -48222,7 +48222,7 @@ _0806F8C6:
 	adds r0, r3
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F8C4
@@ -48272,7 +48272,7 @@ _0806F91C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	adds r1, r6, 0x1
 	mov r8, r1
@@ -48848,7 +48848,7 @@ _0806FDBE:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FDBC
