@@ -3976,7 +3976,7 @@ _08046F2A:
 	movs r2, 0x2
 	ldrsh r1, [r0, r2]
 	adds r0, r7, 0
-	bl sub_808E190
+	bl CanMonLearnMove
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
