@@ -4,10 +4,11 @@
 #include "item.h"
 #include "team_inventory.h"
 #include "menu.h"
+#include "pokemon.h"
 
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
-extern u32 sub_801B2F4(void);
+extern s32 sub_801B2F4(void);
 extern void sub_801B064(s32);
 
 
@@ -22,20 +23,26 @@ extern u32 gUnknown_80DB9E4;
 extern u32 gUnknown_80DBA0C;
 
 extern u8 gUnknown_202E1C8[0x50];
+extern u8 gAvailablePokemonNames[0x50];
+extern u8 gUnknown_202E218[0x50];
 
+extern void sub_8092AD4(struct unkPokeSubStruct_2C*, u16);
+extern void sub_809401C(void *, void *);
 extern bool8 IsHMItem(u8);
-extern void DisplayGulpinDialogueSprite(u32, u32, u32 *);
+extern void DisplayGulpinDialogueSprite(u32, u32, void *);
 extern void sub_801B178(void);
-extern void sub_8094060(u32 *, u32 *);
+extern void sub_8094060(void *, struct unkPokeSubStruct_2C *);
 extern void PlaySound(u32);
 extern void sub_80141B4(u32 *, u32, u32 ,u32);
 extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
+extern void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon);
+extern s32 sub_80144A4(s32 *);
+extern u32 sub_801E8C0(void);
+extern void sub_801E93C(void);
 
-struct subStruct_203B22C
-{
-    u8 fill0[0x2C];
-    u32 unk2C;
-};
+extern bool8 sub_808E190(u16 a1, s16 _species);
+extern s32 sub_808D580(s32*);
+
 
 struct unkStruct_203B22C
 {
@@ -44,11 +51,12 @@ struct unkStruct_203B22C
     u32 unk4;
     u8 unk8; // item index
     u16 unkA; // item move??
-    u32 unkC;
-    u8 fill10[0x58 - 0x10];
+    struct unkPokeSubStruct_2C unkC[8];
+    s32 unk4C; // number of party members?
+    s16 unk50[0x4];
     s16 unk58;
     u16 unk5A;
-    struct subStruct_203B22C *unk5C;
+    struct PokemonStruct *unk5C;
     u32 unk60;
     /* 0x64 */ struct MenuItem menuItems[8];
 };
@@ -124,10 +132,10 @@ void sub_801B080(void)
             sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
             break;
         case 1:
-            DisplayGulpinDialogueSprite(2, gUnknown_203B22C->unk58, &gUnknown_203B22C->unkC);
+            DisplayGulpinDialogueSprite(2, gUnknown_203B22C->unk58, gUnknown_203B22C->unkC);
             break;
         case 2:
-            sub_8094060(&gUnknown_203B22C->unkC, &gUnknown_203B22C->unk5C->unk2C);
+            sub_8094060(gUnknown_203B22C->unkC, gUnknown_203B22C->unk5C->unk2C);
             if(!IsHMItem(gUnknown_203B22C->unk8))
             {
                 gTeamInventory_203B460->teamItems[gUnknown_203B22C->unk4].numItems = gUnknown_203B22C->unk8 - 0x7D;
@@ -147,4 +155,113 @@ void sub_801B080(void)
         case 4:
             break;
     }
+}
+
+void sub_801B178(void)
+{
+  int iVar2;
+  u8 *bufferPtr;
+  
+  for(iVar2 = 0; iVar2 < gUnknown_203B22C->unk4C; iVar2++)
+  {
+      bufferPtr = gAvailablePokemonNames + (0x50 * iVar2);
+      sub_808DA34(bufferPtr, &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->unk50[iVar2]]);
+      gUnknown_203B22C->menuItems[iVar2].text = bufferPtr;
+      gUnknown_203B22C->menuItems[iVar2].menuAction = iVar2 + 4;
+  }
+  gUnknown_203B22C->menuItems[iVar2].text = NULL;
+  gUnknown_203B22C->menuItems[iVar2].menuAction = 1;
+}
+
+void sub_801B200(void)
+{
+    s32 temp;
+    s32 iVar2;
+    struct unkPokeSubStruct_2C *preload;
+
+    if(sub_80144A4(&temp) == 0)
+    {
+        gUnknown_203B22C->unk60 = temp;
+        switch(temp)
+        {
+            case 1:
+                sub_801B064(4);
+                break;
+            default:
+                gUnknown_203B22C->unk58 = gUnknown_203B22C->unk50[temp - 4];
+                gUnknown_203B22C->unk5C = &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->unk58];
+                sub_808DA34(gUnknown_202E218, gUnknown_203B22C->unk5C);
+                sub_809401C(gUnknown_203B22C->unkC, gUnknown_203B22C->unk5C->unk2C);
+                for(iVar2 = 0; iVar2 < 8; iVar2++)
+                {
+                    preload = &gUnknown_203B22C->unkC[iVar2];
+                    if((preload->unk0 & 1) == 0)
+                    {
+                        sub_8092AD4(preload, gUnknown_203B22C->unkA);
+                        break;
+                    }
+                }
+                if(iVar2 > 3)
+                    sub_801B064(1);
+                else
+                    sub_801B064(2);
+                break;
+            case 0:
+                break;
+        }
+    }
+}
+
+void sub_801B2AC(void)
+{
+    switch(sub_801E8C0())
+    {
+        case 3:
+            sub_801E93C();
+            sub_801B064(2);
+            break;
+        case 2:
+            sub_801E93C();
+            sub_801B064(0);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+
+void sub_801B2D8(void)
+{
+    s32 temp;
+
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_801B064(4);
+    }
+}
+
+s32 sub_801B2F4(void)
+{
+  s32 length;
+  s32 iVar4;
+  s32 index;
+  s32 team [4];
+  struct PokemonStruct *preload;
+  
+  
+  length = sub_808D580(team);
+  gUnknown_203B22C->unk4C = 0;
+
+  for(index = 0; index < length; index++)
+  {
+      preload = &gRecruitedPokemonRef->pokemon[team[index]];
+      if (sub_808E190(gUnknown_203B22C->unkA, preload->speciesNum) != '\0') {
+        gUnknown_203B22C->unk50[gUnknown_203B22C->unk4C] = team[index];
+        iVar4 = gUnknown_203B22C->unk4C;
+        if (3 < iVar4) break;
+        gUnknown_203B22C->unk4C = iVar4 + 1;
+      }
+  }
+  return gUnknown_203B22C->unk4C;
 }
