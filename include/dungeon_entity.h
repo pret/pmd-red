@@ -229,8 +229,7 @@ struct DungeonEntityData
 // Used for Pokémon, items, and traps.
 struct DungeonEntity
 {
-    /* 0x0 */ u8 entityType;
-    u8 fill1[0x4 - 0x1];
+    /* 0x0 */ u32 entityType;
     /* 0x4 */ s16 posWorldX;
     /* 0x6 */ s16 posWorldY;
     /* 0x8 */ s16 prevPosWorldX;
@@ -282,6 +281,7 @@ struct DungeonEntity
 
 enum EntityType
 {
+    ENTITY_NONE = 0,
     ENTITY_POKEMON = 1,
     ENTITY_ITEM = 2,
     ENTITY_TRAP = 3

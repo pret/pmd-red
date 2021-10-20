@@ -313,7 +313,7 @@ void sub_808919C();
 void sub_8088D30(void);
 
 extern void sub_8083F14();
-extern u8 sub_80450E0(struct DungeonEntity *);
+extern u8 entityExists(struct DungeonEntity *);
 extern u8 sub_8086AE4(u32);
 
 
@@ -1985,7 +1985,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
     for(iVar3 = 0; iVar3 < 0x10; iVar3++)
     {
       iVar2 = gDungeonGlobalData->wildPokemon[iVar3];
-      if ((sub_80450E0(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientFlags == param_2)) {
+      if ((entityExists(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientFlags == param_2)) {
         return;
       }
     }

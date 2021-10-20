@@ -3688,7 +3688,7 @@ sub_803EDF0:
 	b _0803EF42
 _0803EE06:
 	ldr r0, [r6, 0x4]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -4668,7 +4668,7 @@ sub_803F580:
 	b _0803F7A0
 _0803F59E:
 	adds r0, r6, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803F5AC
@@ -4914,7 +4914,7 @@ _0803F774:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803F79A

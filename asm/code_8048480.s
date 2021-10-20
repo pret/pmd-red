@@ -603,7 +603,7 @@ _080489A2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048A12
@@ -660,7 +660,7 @@ _08048A12:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048A58
@@ -741,7 +741,7 @@ _08048AB2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048B4A
@@ -820,7 +820,7 @@ _08048B4A:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048B8C
@@ -892,7 +892,7 @@ _08048BD6:
 	ldr r4, [r0]
 	adds r0, r4, 0
 	str r2, [sp, 0x1C]
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	ldr r2, [sp, 0x1C]
 	cmp r0, 0
@@ -946,7 +946,7 @@ _08048C3E:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048C60
@@ -5181,7 +5181,7 @@ _0804ADBE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804ADDE
@@ -5328,7 +5328,7 @@ _0804AEDE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_80450E0
+	bl entityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AEFE
