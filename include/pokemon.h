@@ -187,6 +187,8 @@ struct unkStruct_808E218
     struct unkStruct_808E6F4 unk0[3];
 };
 
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
+
 void LoadMonsterParameters(void);
 struct unkStruct_203B45C *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);

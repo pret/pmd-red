@@ -12,4 +12,6 @@ struct TeamInventory
     /* 0x264 */ u32 teamSavings;
 };
 
+extern struct TeamInventory *gTeamInventory_203B460;
+
 #endif

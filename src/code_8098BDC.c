@@ -3,7 +3,6 @@
 #include "input.h"
 #include "debug.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
 extern u32 gUnknown_20398A8;
 extern u32 gUnknown_20398AC;
 extern u32 gUnknown_20398B0;

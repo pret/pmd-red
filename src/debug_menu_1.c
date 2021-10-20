@@ -1,26 +1,38 @@
 #include "global.h"
 #include "pokemon.h"
+#include "debug_menu.h"
 
-struct unkStruct_203B3F8
-{
-    // size: 0x140
-    u32 state;
-    u32 unk4;
-    struct PokemonStruct *pokemon;
-    u8 fill4[4];
-    u32 unk10;
-    u8 fill14[0x60 - 0x14];
-    u32 unk60;
-};
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
 extern u32 sub_8013BBC(u32 *);
-extern void sub_8023A94(u32);
-extern u8 sub_8012FD8(u32 *);
+extern u8 sub_8012FD8(void *);
 extern void sub_803AE58(void);
 extern u32 sub_8016080(void);
 extern void sub_803ACD0(u32);
 extern void sub_80160D8(void);
-extern void sub_8013114(u32 *, s32 *);
+extern void sub_8013114(void *, s32 *);
+
+extern u32 sub_8023A94(u32);
+extern s16 sub_8023B44(void);
+extern void sub_8023C60(void);
+
+void sub_803AF38(void)
+{
+    switch(sub_8023A94(1))
+    {
+        case 3:
+            gUnknown_203B3F8->unk4 = sub_8023B44();
+            gUnknown_203B3F8->pokemon = &gRecruitedPokemonRef->pokemon[gUnknown_203B3F8->unk4];
+            sub_803ACD0(3);
+            break;
+        case 2:
+            sub_8023C60();
+            sub_803ACD0(7);
+            break;
+        case 1:
+        case 0:
+            break;
+    }
+}
 
 void sub_803AF88(void)
 {

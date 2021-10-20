@@ -5,8 +5,6 @@
 #include "team_inventory.h"
 #include "menu.h"
 
-extern struct TeamInventory *gTeamInventory_203B460;
-
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
 extern u32 sub_801B2F4(void);

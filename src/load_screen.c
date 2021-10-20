@@ -9,9 +9,6 @@
 #include "pokemon.h"
 #include "save.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
-extern struct PlayTimeStruct gPlayTime;
-
 extern const struct FileArchive gTitleMenuFileArchive;
 
 struct unkStruct_203B484

@@ -4,4 +4,7 @@
 #define POKEMON_NAME_LENGTH 10
 #define TEAM_NAME_LENGTH 10
 
+#define MALE 0
+#define FEMALE 1
+
 #endif // GUARD_CONSTANTS_GLOBAL_H

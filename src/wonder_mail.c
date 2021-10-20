@@ -11,7 +11,6 @@
 #include "team_inventory.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
-extern struct TeamInventory *gTeamInventory_203B460;
 
 extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
@@ -89,7 +88,6 @@ extern struct MenuItem gUnknown_80DDA80[];
 extern struct MenuItem gUnknown_80DDAFC[];
 extern struct MenuItem gUnknown_80DDB60[];
 extern struct MenuItem gUnknown_80DDA64[];
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 extern struct MenuItem gUnknown_80DDB24[];
 extern struct MenuItem gUnknown_80DD9EC[];
 extern u8 gUnknown_80DDACC[];

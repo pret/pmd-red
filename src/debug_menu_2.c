@@ -4,30 +4,8 @@
 #include "text.h"
 #include "input.h"
 #include "menu.h"
+#include "debug_menu.h"
 
-struct unkStruct_203B3F8
-{
-    // size: 0x140
-    u32 state;
-    u32 unk4;
-    struct PokemonStruct *pokemon;
-    u32 unkC;
-    const char *unk10;
-    u8 fill14[0x60 - 0x14];
-    u32 unk60;
-    u32 unk64;
-    u32 unk68;
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
-    struct UnkTextStruct2 *unk78;
-    u32 unk7C;
-    u32 unk80;
-    u8 fill84[0x90 - 0x84];
-    struct MenuItem unk90[8];
-    u16 unkD0[8];
-    struct UnkTextStruct2 unkE0[4];
-};
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
 extern struct UnkTextStruct2 gUnknown_80E7ED4;
 extern struct UnkTextStruct2 gUnknown_80E7EEC;

@@ -25,4 +25,8 @@ enum RewardType
     END_REWARDS
 };
 
+#define NUM_POKEMON_NEWS 56 // 50 normal + 6 special issues
+#define PASSWORD_BUFFER_SIZE 54
+#define MAX_ITEM_REWARDS 3
+
 #endif //GUARD_CONSTANTS_WONDER_MAIL_H

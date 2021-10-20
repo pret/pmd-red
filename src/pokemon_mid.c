@@ -51,7 +51,6 @@ extern struct unkStruct_8107654 gUnknown_8107654[6];
 extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 
 bool8 sub_808D6E8()

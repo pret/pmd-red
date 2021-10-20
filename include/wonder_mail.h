@@ -7,8 +7,7 @@
 #include "pokemon.h"
 #include "sub_8095228.h"
 
-#define PASSWORD_BUFFER_SIZE 54
-#define MAX_ITEM_REWARDS 3
+#include "constants/wonder_mail.h"
 
 struct unkStruct_802F204
 {

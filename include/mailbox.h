@@ -1,13 +1,17 @@
 #ifndef GUARD_MAILBOX_H
 #define GUARD_MAILBOX_H 
 
+#include "menu.h"
+#include "text.h"
+#include "constants/mailbox.h"
+
 struct unkStruct_203B304
 {
     // size: 0xB6 << 1
     u32 state;
     u32 unk4;
     u8 unk8;
-    u8 unk9;
+    u8 mailIndex;
     u8 fillA[0xC - 0xA];
     u32 unkC;
     u8 fill10[0x50 - 0x10];
@@ -23,5 +27,6 @@ struct unkStruct_203B304
 };
 
 extern void SetMailboxState(u32);
+extern s32 GetNumAcceptedJobs(void);
 
 #endif // GUARD_MAILBOX_H

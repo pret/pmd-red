@@ -167,7 +167,7 @@ void sub_802719C(void)
 
 void sub_8027274(void)
 {
-  struct ItemSlot auStack12;
+  struct ItemSlot slot;
 
   switch(gUnknown_203B2BC->state) {
     case 0:
@@ -185,10 +185,10 @@ void sub_8027274(void)
         sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk70,2);
         break;
     case 4:
-        sub_8024458(gUnknown_203B2BC->unk8,2);
+        sub_8024458(gUnknown_203B2BC->targetPoke,2);
         break;
     case 5:
-        sub_801BEEC(gUnknown_203B2BC->unk8);
+        sub_801BEEC(gUnknown_203B2BC->targetPoke);
         break;
     case 10:
         sub_801A5D8(1,0,0,10);
@@ -201,12 +201,12 @@ void sub_8027274(void)
         sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk74,2);
         break;
     case 0xd:
-        HeldItemToSlot(&auStack12,&gUnknown_203B2BC->unk10);
-        sub_801B3C0(&auStack12);
+        HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);
+        sub_801B3C0(&slot);
         break;
     case 0xe:
         sub_809401C(&gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk18->unk2C);
-        sub_801EE10(3,gUnknown_203B2BC->unk8,&gUnknown_203B2BC->unk28,0,0,0);
+        sub_801EE10(3,gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk28,0,0,0);
         break;
     case 0xf:
         sub_801F1B0(1,0);

@@ -11,7 +11,6 @@ extern u8 gUnknown_810A36B[];
 extern s16 gUnknown_810A378[];
 extern s32 gUnknown_810A390[];
 extern u32 gUnknown_81076E4[];
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 struct unkStruct_808E9EC
 {

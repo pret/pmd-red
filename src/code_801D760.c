@@ -95,7 +95,6 @@ struct unk_203B250
 
 struct unk_203B250 *gUnknown_203B250;
 
-extern struct TeamInventory *gTeamInventory_203B460;
 
 void sub_801D680(void)
 {

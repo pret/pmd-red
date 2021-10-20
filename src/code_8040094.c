@@ -3,7 +3,6 @@
 #include "file_system.h"
 #include "dungeon_global_data.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct DungeonGlobalData *gDungeonGlobalData;
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;

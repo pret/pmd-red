@@ -82,7 +82,7 @@ extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void sub_802C750(void);
-extern s32 sub_80969AC(void);
+extern s32 GetNumAcceptedJobs(void);
 extern void sub_802D1A0(u32);
 extern void sub_8012EA4(u8 *, u32);
 extern void* sub_8096AB4(u8);
@@ -228,7 +228,7 @@ void sub_802D2A8(void)
           }
         }
         else {
-          if (sub_80969AC() >= 8) {
+          if (GetNumAcceptedJobs() >= 8) {
             if (sub_802DADC() != 0) {
                 sub_802D1A0(10);
             }

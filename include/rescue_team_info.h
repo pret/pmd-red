@@ -20,6 +20,8 @@ struct RescueTeamData
     u8 unk10;
 };
 
+extern struct RescueTeamData *gRescueTeamInfoRef;
+
 void LoadRescueTeamInfo(void);
 struct RescueTeamData *GetRescueTeamInfo(void);
 void InitializeRescueTeamInfo(void);

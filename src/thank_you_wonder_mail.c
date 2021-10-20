@@ -12,7 +12,6 @@
 #include "team_inventory.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
-extern struct TeamInventory *gTeamInventory_203B460;
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
