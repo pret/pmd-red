@@ -2391,7 +2391,7 @@ _08043E46:
 	cmp r0, 0
 	beq _08043E58
 	adds r0, r5, 0
-	bl sub_8092BF4
+	bl GetMoveMaxPP
 	strb r0, [r4, 0x4]
 _08043E58:
 	adds r4, 0x8
@@ -2710,7 +2710,7 @@ _080440D0:
 	bne _080440F0
 	ldrh r1, [r5]
 	adds r0, r2, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 	b _080440F8
 	.align 2, 0
 _080440E4: .4byte gRecruitedPokemonRef

@@ -38,7 +38,7 @@ extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct 
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
-extern void sub_8092AD4(struct PokemonMove*, u16);
+extern void InitZeroedPPPokemonMove(struct PokemonMove*, u16);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
@@ -570,7 +570,7 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(struct PokemonMove*, struct PokemonMove*);
+extern void sub_8093FA8(struct PokemonMove*, struct unkStruct_8094184*);
 
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
@@ -593,7 +593,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 
     pokemon->unk1C = a2->unk18;
-    sub_8093FA8(pokemon->moves, a2->moves);
+    sub_8093FA8(pokemon->moves, &a2->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];
@@ -910,7 +910,7 @@ void sub_808E490(struct PokemonMove* a1, s16 species)
     i = 0;
     if (i < count) {
         while (i < count) {
-            sub_8092AD4(&a1[i], buffer[i]);
+            InitZeroedPPPokemonMove(&a1[i], buffer[i]);
             i++;
         }
         i = count;

@@ -65,6 +65,13 @@ struct EvolveStage
     u8 unkHasNextStage;
 };
 
+
+struct unkStruct_8094184
+{
+    struct PokemonMove moves[MAX_MON_MOVES];
+    u8 unk20;
+};
+
 struct PokemonStruct2
 {
     // size 0x68
@@ -80,8 +87,7 @@ struct PokemonStruct2
     u16 unk12;  // pokeHP
     struct Offense offense;  // offense (other offset)
     u32 unk18;  // unk1C
-    struct PokemonMove moves[MAX_MON_MOVES];
-    u8 fill3c[4];
+    struct unkStruct_8094184 moves;
     /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
     u32 unk48;  // some struct (same type as 44)

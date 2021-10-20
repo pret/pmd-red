@@ -21,13 +21,13 @@ extern const char gUnknown_80DD8D0[];
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32 *, u32, u32);
-extern void sub_8027D40(u32, struct ItemSlot *);
+extern void sub_8027D40(u32, struct HeldItem *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8093560(u32, u32 *, u32 *);
+extern void sub_8093560(u32, struct PokemonMove *, u32 *);
 extern void sub_801F808(u32 *);
 extern void sub_8027794();
 extern void sub_801A5D8(u32, u32, u32, u32);
@@ -35,8 +35,8 @@ extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
 extern void sub_801B3C0(struct ItemSlot *);
-extern void sub_809401C(u32 *, struct PokemonMove *);
-extern void sub_801EE10(u32, s16, u32 *, u32, u32, u32);
+extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
+extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void SetFriendAreaActionMenuState(u32);
@@ -206,8 +206,8 @@ void sub_8027274(void)
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        sub_809401C(&gUnknown_203B2BC->unk28,gUnknown_203B2BC->unk18->moves);
-        sub_801EE10(3,gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk28,0,0,0);
+        sub_809401C(gUnknown_203B2BC->unk28,gUnknown_203B2BC->unk18->moves);
+        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->unk28,0,0,0);
         break;
     case 0xf:
         sub_801F1B0(1,0);
@@ -229,7 +229,7 @@ void sub_8027274(void)
         sub_8014248(gUnknown_80DD7FC,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 0x10:
-        sub_8093560(gUnknown_203B2BC->unk20,&gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk68);
+        sub_8093560(gUnknown_203B2BC->unk20,gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk68);
         sub_801F808(&gUnknown_203B2BC->unk68);
         break;
     case 6:

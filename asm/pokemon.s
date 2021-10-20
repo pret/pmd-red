@@ -258,7 +258,7 @@ _0808D06E:
 	beq _0808D07E
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 	b _0808D080
 _0808D07E:
 	strb r0, [r4]
@@ -415,7 +415,7 @@ _0808D19E:
 	cmp r1, 0
 	beq _0808D1B4
 	adds r0, r4, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 	b _0808D1B6
 _0808D1B4:
 	strb r1, [r4]

@@ -392,7 +392,7 @@ sub_80573CC:
 	cmp r1, 0x5
 	bne _08057414
 	adds r0, r4, 0
-	bl sub_8092C54
+	bl GetMoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805743E
@@ -460,7 +460,7 @@ sub_805744C:
 	cmp r1, 0x5
 	bne _0805748E
 	adds r0, r4, 0
-	bl sub_8092C54
+	bl GetMoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _080574B6
@@ -603,7 +603,7 @@ sub_805755C:
 	b _08057580
 _08057576:
 	adds r0, r4, 0
-	bl sub_809422C
+	bl DoesMoveCharge
 	lsls r0, 24
 	lsrs r0, 24
 _08057580:
