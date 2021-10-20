@@ -611,7 +611,7 @@ _080489A2:
 	movs r0, 0x2
 	ldrsh r1, [r6, r0]
 	mov r0, r9
-	bl sub_808E190
+	bl CanMonLearnMove
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0

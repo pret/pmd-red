@@ -77,21 +77,21 @@ gUnknown_810AC90: @ 810AC90
         .byte 0x0F, 0x00, 0x00, 0x00
         .byte 0x11, 0x00, 0x00, 0x00
 
-	.global gUnknown_810ACB8
-gUnknown_810ACB8: @ 810ACB8
-        .byte 0x4D, 0x01
+	.global gFrenzyPlantIQReq
+gFrenzyPlantIQReq: @ 810ACB8
+        .2byte 333
 
-	.global gUnknown_810ACBA
-gUnknown_810ACBA: @ 810ACBA
-        .byte 0x4D, 0x01
+	.global gHydroCannonIQReq
+gHydroCannonIQReq: @ 810ACBA
+        .2byte 333
 
-	.global gUnknown_810ACBC
-gUnknown_810ACBC: @ 810ACBC
-        .byte 0x4D, 0x01
+	.global gBlastBurnIQReq
+gBlastBurnIQReq: @ 810ACBC
+        .2byte 333
 
-	.global gUnknown_810ACBE
-gUnknown_810ACBE: @ 810ACBE
-        .byte 0x4D, 0x01
+	.global gVoltTackleIQReq
+gVoltTackleIQReq: @ 810ACBE
+        .2byte 333
 
 	.global gUnknown_810ACC0
 gUnknown_810ACC0: @ 810ACC0

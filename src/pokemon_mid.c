@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "subStruct_203B240.h"
 #include "constants/colors.h"
+#include "constants/move_id.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -14,10 +15,10 @@ extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
 extern const char gUnknown_810768C[];  // lvmp%03d\0
 extern struct FileArchive gSystemFileArchive;
-extern s16 gUnknown_810ACB8;  // 0x14d
-extern s16 gUnknown_810ACBA;  // 0x14d
-extern s16 gUnknown_810ACBC;  // 0x14d
-extern s16 gUnknown_810ACBE;  // 0x14d
+extern s16 gFrenzyPlantIQReq;  // 0x14d
+extern s16 gHydroCannonIQReq;  // 0x14d
+extern s16 gBlastBurnIQReq;  // 0x14d
+extern s16 gVoltTackleIQReq;  // 0x14d
 extern char* gFormattedStatusNames[];
 
 // wram data:
@@ -668,7 +669,7 @@ u8* sub_808E07C(u8* a1, u16* a2)
     return a1;
 }
 
-s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
+s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
 {
   u8* stream;
   u16 result;  // struct?
@@ -696,13 +697,12 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
       break;
     if (v12 == a3) {
       bool8 cond = 1;
-      // I don't think these are species IDs
-      // the pokemon they would correspond to are pretty random if they are
-      // shuckle, heracross, pupitar, vibrava
-      if ((result == 238) && (a4 < gUnknown_810ACB8)) cond = 0;
-      if ((result == 239) && (a4 < gUnknown_810ACBA)) cond = 0;
-      if ((result == 272) && (a4 < gUnknown_810ACBC)) cond = 0;
-      if ((result == 354) && (a4 < gUnknown_810ACBE)) cond = 0;
+
+      // NOTE: these moves require IQ to be > 333
+      if ((result == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = 0;
+      if ((result == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = 0;
+      if ((result == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = 0;
+      if ((result == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = 0;
 
       if (cond) {
         if (count < 16) {
@@ -715,7 +715,7 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
   return count;
 }
 
-bool8 sub_808E190(u16 a1, s16 _species)
+bool8 CanMonLearnMove(u16 moveID, s16 _species)
 {
   u16 result;
   u16 result2;
@@ -725,13 +725,13 @@ bool8 sub_808E190(u16 a1, s16 _species)
   if (species == SPECIES_DECOY) return 0;
   if (species == SPECIES_NONE) return 0;
   if (species == SPECIES_MUNCHLAX) return 0;
-  if (a1 == 352) return 0;
+  if (moveID == MOVE_STRUGGLE) return 0;
 
   ptr = sub_8092B18(species);
   while (*ptr) {
     ptr = sub_808E07C(ptr, &result);
     ptr++;
-    if (a1 == result) {
+    if (moveID == result) {
       return 1;
     }
   }
@@ -739,7 +739,7 @@ bool8 sub_808E190(u16 a1, s16 _species)
   ptr = sub_8092B54(species);
   while (*ptr) {
     ptr = sub_808E07C(ptr, &result2);
-    if (result2 == a1) {
+    if (result2 == moveID) {
       return 1;
     }
   }
@@ -778,13 +778,11 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
       if (count < NUM_SPECIES) {
         s32 j;
         bool8 cond = 1;
-        // I don't think these are species IDs
-        // the pokemon they would correspond to are pretty random if they are
-        // shuckle, heracross, pupitar, vibrava
-        if ((result == 238) && (pokemon->IQ < gUnknown_810ACB8)) cond = 0;
-        if ((result == 239) && (pokemon->IQ < gUnknown_810ACBA)) cond = 0;
-        if ((result == 272) && (pokemon->IQ < gUnknown_810ACBC)) cond = 0;
-        if ((result == 354) && (pokemon->IQ < gUnknown_810ACBE)) cond = 0;
+
+        if ((result == MOVE_FRENZY_PLANT) && (pokemon->IQ < gFrenzyPlantIQReq)) cond = 0;
+        if ((result == MOVE_HYDRO_CANNON) && (pokemon->IQ < gHydroCannonIQReq)) cond = 0;
+        if ((result == MOVE_BLAST_BURN) && (pokemon->IQ < gBlastBurnIQReq)) cond = 0;
+        if ((result == MOVE_VOLT_TACKLE) && (pokemon->IQ < gVoltTackleIQReq)) cond = 0;
 
         for (j = 0; j < 4; j++) {
           if ((pokemon->unk2C[j].unk0 & 1) && pokemon->unk2C[j].unk2 == result) {

@@ -40,7 +40,7 @@ extern s32 sub_80144A4(s32 *);
 extern u32 sub_801E8C0(void);
 extern void sub_801E93C(void);
 
-extern bool8 sub_808E190(u16 a1, s16 _species);
+extern bool8 CanMonLearnMove(u16 moveID, s16 _species);
 extern s32 sub_808D580(s32*);
 
 
@@ -256,7 +256,7 @@ s32 sub_801B2F4(void)
   for(index = 0; index < length; index++)
   {
       preload = &gRecruitedPokemonRef->pokemon[team[index]];
-      if (sub_808E190(gUnknown_203B22C->unkA, preload->speciesNum) != '\0') {
+      if (CanMonLearnMove(gUnknown_203B22C->unkA, preload->speciesNum) != '\0') {
         gUnknown_203B22C->unk50[gUnknown_203B22C->unk4C] = team[index];
         iVar4 = gUnknown_203B22C->unk4C;
         if (3 < iVar4) break;

@@ -26,7 +26,7 @@ _0801B388:
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]
 	adds r0, r6, 0
-	bl sub_808E190
+	bl CanMonLearnMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801B3AC
