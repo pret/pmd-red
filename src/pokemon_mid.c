@@ -38,7 +38,7 @@ extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct 
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
-extern void sub_8092AD4(struct unkPokeSubStruct_2C*, u16);
+extern void sub_8092AD4(struct PokemonMove*, u16);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
@@ -542,7 +542,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     }
 
     a1->unk18 = pokemon->unk1C;
-    sub_8093F50(&a1->unk1C, &pokemon->unk2C);
+    sub_8093F50(&a1->moves, &pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];
@@ -570,7 +570,7 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(struct unkPokeSubStruct_2C*, struct unkPokeSubStruct_2C*);
+extern void sub_8093FA8(struct PokemonMove*, struct PokemonMove*);
 
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
@@ -593,7 +593,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 
     pokemon->unk1C = a2->unk18;
-    sub_8093FA8(pokemon->unk2C, a2->unk1C);
+    sub_8093FA8(pokemon->moves, a2->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];
@@ -784,8 +784,8 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
         if ((result == MOVE_BLAST_BURN) && (pokemon->IQ < gBlastBurnIQReq)) cond = 0;
         if ((result == MOVE_VOLT_TACKLE) && (pokemon->IQ < gVoltTackleIQReq)) cond = 0;
 
-        for (j = 0; j < 4; j++) {
-          if ((pokemon->unk2C[j].unk0 & 1) && pokemon->unk2C[j].unk2 == result) {
+        for (j = 0; j < MAX_MON_MOVES; j++) {
+          if ((pokemon->moves[j].moveFlags & MOVE_FLAG_EXISTS) && pokemon->moves[j].moveID == result) {
             cond = 0;
           }
         }
@@ -897,7 +897,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
-void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
+void sub_808E490(struct PokemonMove* a1, s16 species)
 {
     u16 buffer[0x10];
     s32 i;
@@ -915,8 +915,8 @@ void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
         }
         i = count;
     }
-    while (i < 4) {
-        a1[i].unk0 = 0;
+    while (i < MAX_MON_MOVES) {
+        a1[i].moveFlags = 0;
         i++;
     }
 }

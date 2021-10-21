@@ -49,10 +49,10 @@ extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void xxx_save_poke_sub_2c_8094108(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+extern void SavePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
 void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-void xxx_restore_poke_sub_2c_8094128(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+void RestorePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
 
 extern void sub_8094184(struct unkStruct_8094924*, void*);
 extern void sub_809449C(struct unkStruct_8094924*, void*);
@@ -768,7 +768,7 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, &pokemon->unk20, 24);
   SaveIntegerBits(a1, &pokemon->unk24, 4);
   SaveHeldItem(a1, &pokemon->heldItem);
-  xxx_save_poke_sub_2c_8094108(a1, pokemon->unk2C);
+  SavePokemonMoves(a1, pokemon->moves);
   SaveIntegerBits(a1, pokemon->name, 80);
 }
 
@@ -795,7 +795,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, &pokemon->unk20, 24);
   RestoreIntegerBits(a1, &pokemon->unk24, 4);
   RestoreHeldItem(a1, &pokemon->heldItem);
-  xxx_restore_poke_sub_2c_8094128(a1, pokemon->unk2C);
+  RestorePokemonMoves(a1, pokemon->moves);
   RestoreIntegerBits(a1, pokemon->name, 80);
 }
 
@@ -829,7 +829,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[1], 8);
     SaveIntegerBits(&backup, &pokemon2->unk18, 24);
-    sub_8094184(&backup, &pokemon2->unk1C);
+    sub_8094184(&backup, &pokemon2->moves);
     SaveItemSlot(&backup, &pokemon2->itemSlot);
     sub_809449C(&backup, &pokemon2->unk44);
     sub_809449C(&backup, &pokemon2->unk48);
@@ -877,7 +877,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[1], 8);
     RestoreIntegerBits(&backup, &pokemon2->unk18, 24);
-    sub_80941FC(&backup, &pokemon2->unk1C);
+    sub_80941FC(&backup, &pokemon2->moves);
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
     sub_809447C(&backup, &pokemon2->unk44);
     sub_809447C(&backup, &pokemon2->unk48);

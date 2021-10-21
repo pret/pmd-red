@@ -4,6 +4,7 @@
 #include "input.h"
 #include "menu.h"
 #include "item.h"
+#include "pokemon.h"
 #include "team_inventory.h"
 #include "friend_area_action_menu.h"
 
@@ -34,7 +35,7 @@ extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
 extern void sub_801B3C0(struct ItemSlot *);
-extern void sub_809401C(u32 *, u32 *);
+extern void sub_809401C(u32 *, struct PokemonMove *);
 extern void sub_801EE10(u32, s16, u32 *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
@@ -205,7 +206,7 @@ void sub_8027274(void)
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        sub_809401C(&gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk18->unk2C);
+        sub_809401C(&gUnknown_203B2BC->unk28,gUnknown_203B2BC->unk18->moves);
         sub_801EE10(3,gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk28,0,0,0);
         break;
     case 0xf:

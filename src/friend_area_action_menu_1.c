@@ -30,7 +30,7 @@ extern u32 sub_801A6E8(u32);
 
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
-extern void sub_808D31C(struct unkSubStruct_203B2BC *);
+extern void sub_808D31C(struct PokemonStruct *);
 
 void sub_8027AE4(void)
 {

@@ -3,6 +3,7 @@
 
 #include "file_system.h"
 #include "item.h"
+#include "constants/move.h"
 
 
 #define OFFENSE_NRM 0
@@ -22,14 +23,6 @@ struct unkPokeSubStruct_4 {
     u8 unk4;
     u8 unk5;
     u16 fill6;
-};
-
-struct unkPokeSubStruct_2C
-{
-    u8 unk0;
-    u8 fill1;
-    u16 unk2;
-    u32 fill4;
 };
 
 struct unkPokeSubStruct_C
@@ -55,7 +48,7 @@ struct PokemonStruct
     u8 unk24;
     u8 fill25[3];
     struct HeldItem heldItem;
-    struct unkPokeSubStruct_2C unk2C[4];
+    struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
 };
 
@@ -87,7 +80,7 @@ struct PokemonStruct2
     u16 unk12;  // pokeHP
     struct Offense offense;  // offense (other offset)
     u32 unk18;  // unk1C
-    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
+    struct PokemonMove moves[MAX_MON_MOVES];
     u8 fill3c[4];
     /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
