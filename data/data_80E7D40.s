@@ -477,84 +477,124 @@ gUnknown_80EAE5C: @ 80EAE5C
 	.global gUnknown_80EAEB8
 gUnknown_80EAEB8: @ 80EAEB8
 @ replacing .incbin "baserom.gba", 0x000eaeb8, 0x2e0
-        .byte 0x7c, 0xb1, 0x0e, 0x08
-        .byte 0x58, 0xb1, 0x0e, 0x08
-        .byte 0x38, 0xb1, 0x0e, 0x08
-        .byte 0x18, 0xb1, 0x0e, 0x08
-        .byte 0xfc, 0xb0, 0x0e, 0x08
-        .byte 0xdc, 0xb0, 0x0e, 0x08
-        .byte 0xb4, 0xb0, 0x0e, 0x08
-        .byte 0x90, 0xb0, 0x0e, 0x08
-        .byte 0x6c, 0xb0, 0x0e, 0x08
-        .byte 0x48, 0xb0, 0x0e, 0x08
-        .byte 0x30, 0xb0, 0x0e, 0x08
-        .byte 0x14, 0xb0, 0x0e, 0x08
-        .byte 0xf0, 0xaf, 0x0e, 0x08
-        .byte 0xd4, 0xaf, 0x0e, 0x08
-        .byte 0xa4, 0xaf, 0x0e, 0x08
-        .byte 0x94, 0xaf, 0x0e, 0x08
-        .byte 0x70, 0xaf, 0x0e, 0x08
-        .byte 0x4c, 0xaf, 0x0e, 0x08
-        .byte 0x2c, 0xaf, 0x0e, 0x08
-        .byte 0x08, 0xaf, 0x0e, 0x08
+        .4byte WaitingForMe_80EB17C
+        .4byte PromisedMeet_80EB158
+        .4byte WantMeet_80EB138
+        .4byte WorriedAbout_80EB118
+        .4byte GoMyself_80EB0FC
+        .4byte OwnPower_80EB0DC
+        .4byte TooWeak_80EB0B4
+        .4byte WaitingInDungeon_80EB090
+        .4byte WaitingForever_80EB06C
+        .4byte InTrouble_80EB048
+        .4byte WantToHelp_80EB030
+        .4byte HasntReturned_80EB014
+        .4byte FaintedInside_80EAFF0
+        .4byte SickWorry_80EAFD4
+        .4byte LongTime_80EAFA4
+        .4byte HaveToGo_80EAF94
+        .4byte HaveToMeet_80EAF70
+        .4byte MustMeet_80EAF4C
+        .4byte Apologize_80EAF2C
+        .4byte CloseFriends_80EAF08
 
+        .global CloseFriends_80EAF08
+	CloseFriends_80EAF08:
         .asciz "I~27m close friends with #C6%s#R!"
         .align 2,0
 
+        .global Apologize_80EAF2C
+	Apologize_80EAF2C:
         .asciz "I want to apologize to #C6%s#R."
         .align 2,0
 
+        .global MustMeet_80EAF4C
+	MustMeet_80EAF4C:
         .asciz "I don~27t care how--we must meet!"
         .align 2,0
 
+        .global HaveToMeet_80EAF70
+	HaveToMeet_80EAF70:
         .asciz "We have to meet--whatever it takes!"
         .align 2,0
 
+        .global HaveToGo_80EAF94
+	HaveToGo_80EAF94:
         .asciz "I have to go!"
         .align 2,0
 
+        .global LongTime_80EAFA4
+	LongTime_80EAFA4:
         .asciz "We haven~27t seen each other in a long time."
         .align 2,0
 
+        .global SickWorry_80EAFD4
+	SickWorry_80EAFD4:
         .asciz "I~27m sick with worry..."
         .align 2,0
 
+        .global FaintedInside_80EAFF0
+	SickWorry_80EAFF0:
         .asciz "#C6%s#R may have fainted inside..."
         .align 2,0
 
+        .global HasntReturned_80EB014
+	HasntReturned_80EB014:
         .asciz "#C6%s#R hasn~27t returned!"
         .align 2,0
 
+        .global WantToHelp_80EB030
+	HasntReturned_80EB030:
         .asciz "I want to help #C6%s#R!"
         .align 2,0
 
+        .global InTrouble_80EB048
+	InTrouble_80EB048:
         .asciz "Hurry~2c #C6%s#R is in trouble..."
         .align 2,0
 
+        .global WaitingForever_80EB06C
+	WaitingForever_80EB06C:
         .asciz "#C6%s#R has been waiting forever..."
         .align 2,0
 
+        .global WaitingInDungeon_80EB090
+	WaitingInDungeon_80EB090:
         .asciz "#C6%s#R is waiting in the dungeon."
         .align 2,0
 
+        .global TooWeak_80EB0B4
+	TooWeak_80EB0B4:
         .asciz "I~27m too weak. It~27s not possible."
         .align 2,0
 
+        .global OwnPower_80EB0DC
+	OwnPower_80EB0DC:
         .asciz "I can~27t go on my own power..."
         .align 2,0
 
+        .global GoMyself_80EB0FC
+	GoMyself_80EB0FC:
         .asciz "I can~27t go by myself..."
         .align 2,0
 
+        .global WorriedAbout_80EB118
+	WorriedAbout_80EB118:
         .asciz "I~27m worried about #C6%s#R..."
         .align 2,0
 
+        .global WantMeet_80EB138
+	WantMeet_80EB138:
         .asciz "I want to meet with #C6%s#R."
         .align 2,0
 
+        .global PromisedMeet_80EB158
+	PromisedMeet_80EB158:
         .asciz "We promised to meet in the dungeon!"
         .align 2,0
 
+        .global WaitingForMe_80EB17C
+	WaitingForMe_80EB17C:
         .asciz "#C6%s#R is waiting for me!"
         .align 2,0
 
@@ -589,28 +629,40 @@ gUnknown_80EB198: @ 80EB198
 	.global gUnknown_80EB220
 gUnknown_80EB220: @ 80EB220
 @ replacing .incbin "baserom.gba", 0x000eb220, 0xd0
-        .byte 0xcc, 0xb2, 0x0e, 0x08
-        .byte 0xac, 0xb2, 0x0e, 0x08
-        .byte 0x94, 0xb2, 0x0e, 0x08
-        .byte 0x74, 0xb2, 0x0e, 0x08
-        .byte 0x50, 0xb2, 0x0e, 0x08
-        .byte 0x38, 0xb2, 0x0e, 0x08
+        .4byte TakeMeet_80EB2CC
+        .4byte Escort_80EB2AC
+        .4byte HelpMeet_80EB294
+        .4byte WantMeet_80EB274
+        .4byte Worried_80EB250
+        .4byte Without_80EB238
 
+        .global Without_80EB238
+	Without_80EB238:
         .asciz "Without #C6%s#R~2c I..."
         .align 2,0
 
+        .global Worried_80EB250
+	Worried_80EB250:
         .asciz "I~27m so worried about #C6%s#R..."
         .align 2,0
 
+        .global WantMeet_80EB274
+	WantMeet_80EB274:
         .asciz "I really want to meet #C6%s#R!"
         .align 2,0
 
+        .global HelpMeet_80EB294
+	HelpMeet_80EB294:
         .asciz "Help me meet #C6%s#R!"
         .align 2,0
 
+        .global Escort_80EB2AC
+	Escort_80EB2AC:
         .asciz "Please escort me to my #C6%s#R!"
         .align 2,0
 
+        .global TakeMeet_80EB2CC
+	TakeMeet_80EB2CC:
         .asciz "Please! Take me to meet #C6%s#R!"
         .align 2,0
 
