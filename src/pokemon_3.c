@@ -649,7 +649,7 @@ void sub_808ED00() {
         gRecruitedPokemonRef->team[i] = gRecruitedPokemonRef->pokemon[team[i]];
     }
 
-    for (; i < 4; i++) {
+    for (; i < MAX_TEAM_MEMBERS; i++) {
         gRecruitedPokemonRef->team[i].unk0 = 0;
     }
 }
@@ -695,7 +695,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         SavePokemonStruct(&backup, pokemon);
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         if ((u8)i[gRecruitedPokemonRef->team].unk0 & 1) {
             data_u8 = 0xff;
         }
@@ -726,7 +726,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->pokemon[i]);
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         RestoreIntegerBits(&backup, &data_u8, 1);
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1) {

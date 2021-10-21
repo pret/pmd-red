@@ -46,7 +46,6 @@ struct PokemonStruct
     u8 unkHasNextStage;  // set to a random value?
     struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
-    u8 fillA[0xC - 0xA];
     struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
@@ -57,7 +56,7 @@ struct PokemonStruct
     u8 fill25[3];
     struct HeldItem heldItem;
     struct unkPokeSubStruct_2C unk2C[4];
-    /* 0x4C */ u8 name[0xA];
+    /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
 };
 
 
@@ -97,14 +96,14 @@ struct PokemonStruct2
     u8 unk50;   // unk24
     u8 fill51[3];
     struct unkStruct_808E6F4 unk54;
-    u8 name[10];  // name (other offset)
+    u8 name[POKEMON_NAME_LENGTH];  // name (other offset)
 };
 
 struct unkStruct_203B45C
 {
     /* 0x0 */ struct PokemonStruct pokemon[NUM_SPECIES];
     /* 0x8DF8 */ struct PokemonStruct2 pokemon2[4];
-    /* 0x8F88 */ struct PokemonStruct team[4];
+    /* 0x8F88 */ struct PokemonStruct team[MAX_TEAM_MEMBERS];
 };
 
 struct EvolveStruct1
