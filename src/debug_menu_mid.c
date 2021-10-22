@@ -47,7 +47,6 @@ struct unkStruct_203B3F4
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
-extern struct TeamInventory *gTeamInventory_203B460;
 extern void sub_801B3C0(struct ItemSlot *);
 extern void sub_8013AA0(u32 *);
 

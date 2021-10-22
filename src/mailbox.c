@@ -176,7 +176,7 @@ void sub_802E1AC(void)
             sub_802B7D0(1);
             break;
         case 0xB:
-            sub_802B9FC(gUnknown_203B304->unk9);
+            sub_802B9FC(gUnknown_203B304->mailIndex);
             break;
         case 0:
         case 2:

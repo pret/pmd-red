@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800D1E0
-sub_800D1E0:
-	push {r4-r7,lr}
-	movs r0, 0
-	ldr r1, _0800D218
-	mov r12, r1
-	ldr r6, _0800D21C
-	ldr r7, _0800D220
-	movs r5, 0x1
-_0800D1EE:
-	movs r2, 0
-	lsls r1, r0, 4
-	adds r4, r0, 0x1
-	lsls r0, 2
-	adds r3, r0, r7
-	add r1, r12
-_0800D1FA:
-	ldrh r0, [r1]
-	cmp r0, r6
-	bne _0800D202
-	str r5, [r3]
-_0800D202:
-	adds r1, 0x2
-	adds r2, 0x1
-	cmp r2, 0x7
-	bls _0800D1FA
-	adds r0, r4, 0
-	cmp r0, 0x1
-	ble _0800D1EE
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800D218: .4byte gUnknown_202DB30
-_0800D21C: .4byte 0x0000fdfd
-_0800D220: .4byte gUnknown_202DB60
-	thumb_func_end sub_800D1E0
-
 	thumb_func_start sub_800D224
 sub_800D224:
 	push {r4-r7,lr}

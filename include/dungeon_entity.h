@@ -179,7 +179,7 @@ struct DungeonEntityData
     // Unclear where this is set in-game; it is not set by statuses (e.g., confusion) or mission clients.
     /* 0x114 */ bool8 moveRandomly;
     u8 fill115[0x118 - 0x115];
-    /* 0x118 */ struct PokemonMove moves[4];
+    /* 0x118 */ struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
     u8 fill139[0x13C - 0x139];
     /* 0x13C */ u32 belly;

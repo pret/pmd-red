@@ -65,7 +65,6 @@ extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
 extern struct OpenedFile *gTitlePaletteFile;
-extern struct Inputs gRealInputs;
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 extern char gPMDBuildVersion[];

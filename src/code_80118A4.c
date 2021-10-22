@@ -17,8 +17,6 @@ extern void sub_801199C(u16 r0);
 extern void sub_800C298(u16 r0);
 extern u8 sub_800C5D0(u16 r0);
 
-extern struct PlayTimeStruct *gPlayTimeRef;
-
 struct UnkSaveStruct1
 {
     /* 0x0 */ u32 unk0;

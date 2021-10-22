@@ -3,7 +3,6 @@
 #include "team_inventory.h"
 #include "felicity_bank.h"
 
-extern struct TeamInventory *gTeamInventory_203B460;
 extern struct unkStruct_203B204 *gUnknown_203B204;
 
 extern u8 gUnknown_80DB738;

@@ -65,14 +65,8 @@ extern struct unkStruct_203B310 *gUnknown_203B310;
 // TODO: port to ItemSlot
 struct ItemSlot_Alt
 {
-    // OG struct
-    // u8 itemFlags
-    // u8 numItems
-    // u8 itemIndex
     union temp {
-        u8 itemFlags;
-        u8 numItems;
-        u8 itemIndex;
+        struct ItemSlot norm;
         u32 full_bits;
     } temp;
 };

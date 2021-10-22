@@ -1,24 +1,17 @@
 #ifndef GUARD_FRIEND_AREA_ACTION_MENU_H
 #define GUARD_FRIEND_AREA_ACTION_MENU_H
 
-struct unkSubStruct_203B2BC
-{
-    u8 fill0[0x2C];
-    u32 unk2C;
-};
-
-
 struct unkStruct_203B2BC
 {
     // size: 0x1E0
     u32 state;
     u32 unk4;
-    s16 unk8;
+    s16 targetPoke;
     u16 unkA;
-    u32 unkC;
-    struct HeldItem unk10;
+    u32 itemIndex;
+    struct HeldItem itemToGive;
     struct ItemSlot unk14;
-    struct unkSubStruct_203B2BC *unk18;
+    struct PokemonStruct *unk18;
     u32 unk1C;
     u32 unk20;
     u32 unk24;

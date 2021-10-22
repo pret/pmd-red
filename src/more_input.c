@@ -3,7 +3,6 @@
 
 
 extern void nullsub_34(struct UnkInputStruct *r0);
-extern struct Inputs gRealInputs;
 u32 sub_8012AE8(void);
 
 u32 sub_8012A64(struct UnkInputStruct *r0, u32 r1)

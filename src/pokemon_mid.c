@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "subStruct_203B240.h"
 #include "constants/colors.h"
+#include "constants/move_id.h"
 
 extern struct gPokemon *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -14,10 +15,10 @@ extern const char gUnknown_8107638[];
 extern const char gUnknown_810763C[];
 extern const char gUnknown_810768C[];  // lvmp%03d\0
 extern struct FileArchive gSystemFileArchive;
-extern s16 gUnknown_810ACB8;  // 0x14d
-extern s16 gUnknown_810ACBA;  // 0x14d
-extern s16 gUnknown_810ACBC;  // 0x14d
-extern s16 gUnknown_810ACBE;  // 0x14d
+extern s16 gFrenzyPlantIQReq;  // 0x14d
+extern s16 gHydroCannonIQReq;  // 0x14d
+extern s16 gBlastBurnIQReq;  // 0x14d
+extern s16 gVoltTackleIQReq;  // 0x14d
 extern char* gFormattedStatusNames[];
 
 // wram data:
@@ -37,7 +38,7 @@ extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct 
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
-extern void sub_8092AD4(struct unkPokeSubStruct_2C*, u16);
+extern void sub_8092AD4(struct PokemonMove*, u16);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
@@ -51,7 +52,6 @@ extern struct unkStruct_8107654 gUnknown_8107654[6];
 extern struct gPokemon *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 
 bool8 sub_808D6E8()
@@ -542,7 +542,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     }
 
     a1->unk18 = pokemon->unk1C;
-    sub_8093F50(&a1->unk1C, &pokemon->unk2C);
+    sub_8093F50(&a1->moves, &pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];
@@ -570,7 +570,7 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(struct unkPokeSubStruct_2C*, struct unkPokeSubStruct_2C*);
+extern void sub_8093FA8(struct PokemonMove*, struct PokemonMove*);
 
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
@@ -593,7 +593,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 
     pokemon->unk1C = a2->unk18;
-    sub_8093FA8(pokemon->unk2C, a2->unk1C);
+    sub_8093FA8(pokemon->moves, a2->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];
@@ -669,7 +669,7 @@ u8* sub_808E07C(u8* a1, u16* a2)
     return a1;
 }
 
-s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
+s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
 {
   u8* stream;
   u16 result;  // struct?
@@ -697,13 +697,12 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
       break;
     if (v12 == a3) {
       bool8 cond = 1;
-      // I don't think these are species IDs
-      // the pokemon they would correspond to are pretty random if they are
-      // shuckle, heracross, pupitar, vibrava
-      if ((result == 238) && (a4 < gUnknown_810ACB8)) cond = 0;
-      if ((result == 239) && (a4 < gUnknown_810ACBA)) cond = 0;
-      if ((result == 272) && (a4 < gUnknown_810ACBC)) cond = 0;
-      if ((result == 354) && (a4 < gUnknown_810ACBE)) cond = 0;
+
+      // NOTE: these moves require IQ to be > 333
+      if ((result == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = 0;
+      if ((result == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = 0;
+      if ((result == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = 0;
+      if ((result == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = 0;
 
       if (cond) {
         if (count < 16) {
@@ -716,7 +715,7 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 a4)
   return count;
 }
 
-bool8 sub_808E190(u16 a1, s16 _species)
+bool8 CanMonLearnMove(u16 moveID, s16 _species)
 {
   u16 result;
   u16 result2;
@@ -726,13 +725,13 @@ bool8 sub_808E190(u16 a1, s16 _species)
   if (species == SPECIES_DECOY) return 0;
   if (species == SPECIES_NONE) return 0;
   if (species == SPECIES_MUNCHLAX) return 0;
-  if (a1 == 352) return 0;
+  if (moveID == MOVE_STRUGGLE) return 0;
 
   ptr = sub_8092B18(species);
   while (*ptr) {
     ptr = sub_808E07C(ptr, &result);
     ptr++;
-    if (a1 == result) {
+    if (moveID == result) {
       return 1;
     }
   }
@@ -740,7 +739,7 @@ bool8 sub_808E190(u16 a1, s16 _species)
   ptr = sub_8092B54(species);
   while (*ptr) {
     ptr = sub_808E07C(ptr, &result2);
-    if (result2 == a1) {
+    if (result2 == moveID) {
       return 1;
     }
   }
@@ -779,16 +778,14 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
       if (count < NUM_SPECIES) {
         s32 j;
         bool8 cond = 1;
-        // I don't think these are species IDs
-        // the pokemon they would correspond to are pretty random if they are
-        // shuckle, heracross, pupitar, vibrava
-        if ((result == 238) && (pokemon->IQ < gUnknown_810ACB8)) cond = 0;
-        if ((result == 239) && (pokemon->IQ < gUnknown_810ACBA)) cond = 0;
-        if ((result == 272) && (pokemon->IQ < gUnknown_810ACBC)) cond = 0;
-        if ((result == 354) && (pokemon->IQ < gUnknown_810ACBE)) cond = 0;
 
-        for (j = 0; j < 4; j++) {
-          if ((pokemon->unk2C[j].unk0 & 1) && pokemon->unk2C[j].unk2 == result) {
+        if ((result == MOVE_FRENZY_PLANT) && (pokemon->IQ < gFrenzyPlantIQReq)) cond = 0;
+        if ((result == MOVE_HYDRO_CANNON) && (pokemon->IQ < gHydroCannonIQReq)) cond = 0;
+        if ((result == MOVE_BLAST_BURN) && (pokemon->IQ < gBlastBurnIQReq)) cond = 0;
+        if ((result == MOVE_VOLT_TACKLE) && (pokemon->IQ < gVoltTackleIQReq)) cond = 0;
+
+        for (j = 0; j < MAX_MON_MOVES; j++) {
+          if ((pokemon->moves[j].moveFlags & MOVE_FLAG_EXISTS) && pokemon->moves[j].moveID == result) {
             cond = 0;
           }
         }
@@ -900,7 +897,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
-void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
+void sub_808E490(struct PokemonMove* a1, s16 species)
 {
     u16 buffer[0x10];
     s32 i;
@@ -918,8 +915,8 @@ void sub_808E490(struct unkPokeSubStruct_2C* a1, s16 species)
         }
         i = count;
     }
-    while (i < 4) {
-        a1[i].unk0 = 0;
+    while (i < MAX_MON_MOVES) {
+        a1[i].moveFlags = 0;
         i++;
     }
 }

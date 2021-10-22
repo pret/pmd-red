@@ -72,7 +72,7 @@ struct DungeonGlobalData
     u8 fill11444[0x1356C - 0x11484];
     u8 unk1356C;
     u8 fill1356D[0x1357C - 0x1356D];
-    /* 0x1357C */ struct DungeonEntity *teamPokemon[4];
+    /* 0x1357C */ struct DungeonEntity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ struct DungeonEntity *wildPokemon[0x10];
     /* 0x135CC */ struct DungeonEntity *allPokemon[0x14]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.

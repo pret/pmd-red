@@ -21,16 +21,16 @@ extern void sub_801EA28();
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_801EBC4();
 
-u32 DisplayGulpinDialogueSprite(s32 param_1,s16 param_2,struct unkStruct_Gulpin *param_3)
+u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct unkStruct_Gulpin *param_3)
 {
   struct OpenedFile *faceFile;
-  s32 param2_32;
+  s32 species_32;
 
-  param2_32 = param_2; // dumb cast needed to get lsr/asr combo
+  species_32 = pokeSpecies; // dumb cast needed to get lsr/asr combo
   
   gUnknown_203B26C = MemoryAlloc(sizeof(struct unkStruct_203B26C),8);
   gUnknown_203B26C->unk0 = param_1;
-  gUnknown_203B26C->unkC = param2_32;
+  gUnknown_203B26C->speciesNum = species_32;
   gUnknown_203B26C->unk10 = param_3;
   gUnknown_203B26C->unk1C = param_3->unk22;
 

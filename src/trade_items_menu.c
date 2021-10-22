@@ -8,7 +8,6 @@
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
-extern struct TeamInventory *gTeamInventory_203B460;
 extern u32 gUnknown_202DE30;
 extern u32 gUnknown_202DE58;
 extern struct UnkTextStruct2 gUnknown_80E6174;

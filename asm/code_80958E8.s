@@ -1986,8 +1986,8 @@ _0809699C:
 _080969A8: .4byte gUnknown_203B490
 	thumb_func_end sub_809693C
 
-	thumb_func_start sub_80969AC
-sub_80969AC:
+	thumb_func_start GetNumAcceptedJobs
+GetNumAcceptedJobs:
 	push {r4,r5,lr}
 	movs r5, 0
 	movs r4, 0
@@ -2007,7 +2007,7 @@ _080969C2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80969AC
+	thumb_func_end GetNumAcceptedJobs
 
 	thumb_func_start sub_80969D0
 sub_80969D0:

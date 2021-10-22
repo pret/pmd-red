@@ -3570,8 +3570,8 @@ sub_80940E0:
 	bx r0
 	thumb_func_end sub_80940E0
 
-	thumb_func_start xxx_save_poke_sub_2c_8094108
-xxx_save_poke_sub_2c_8094108:
+	thumb_func_start SavePokemonMoves
+SavePokemonMoves:
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -3587,10 +3587,10 @@ _08094110:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end xxx_save_poke_sub_2c_8094108
+	thumb_func_end SavePokemonMoves
 
-	thumb_func_start xxx_restore_poke_sub_2c_8094128
-xxx_restore_poke_sub_2c_8094128:
+	thumb_func_start RestorePokemonMoves
+RestorePokemonMoves:
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -3606,7 +3606,7 @@ _08094130:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end xxx_restore_poke_sub_2c_8094128
+	thumb_func_end RestorePokemonMoves
 
 	thumb_func_start sub_8094148
 sub_8094148:

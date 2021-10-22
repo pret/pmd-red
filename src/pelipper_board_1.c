@@ -1,10 +1,10 @@
 #include "global.h"
+#include "mailbox.h"
 
-extern u8 gUnknown_80E03AC[];
+extern u8 gPelipperBoard_Accepted[];
 extern u8 gUnknown_80E03B8[];
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
-extern u32 sub_80969AC(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -52,9 +52,9 @@ void CreatePelipperAcceptedStatusBox(u32 r0)
 {
     sub_8008C54(r0);
     sub_80073B8(r0);
-    xxx_call_draw_string(3, 0, gUnknown_80E03AC, r0, 0);
-    sub_8012BC4(0x12, 0xD, sub_80969AC(), 2, 7, r0);
-    xxx_call_draw_string(0x16, 0xD, gUnknown_80E03B8, r0, 0);
-    sub_8012BC4(0x23, 0xD, 0x8, 0x2, 7, r0);
+    xxx_call_draw_string(3, 0, gPelipperBoard_Accepted, r0, 0);
+    sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
+    xxx_call_draw_string(0x16, 0xD, gUnknown_80E03B8, r0, 0); // "/"
+    sub_8012BC4(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
     sub_80073E0(r0);
 }

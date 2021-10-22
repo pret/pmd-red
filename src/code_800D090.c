@@ -8,13 +8,8 @@
 extern void SoundBiasReset(void);
 extern void SoundBiasSet(void);
 
-struct unkStruct_202DB60
-{
-    u32 unk0;
-    u32 unk4;
-};
-
-extern struct unkStruct_202DB60 gUnknown_202DB60;
+extern u32 gUnknown_202DB60[2];
+extern u16 gUnknown_202DB30[2][8];
 
 void Hang(void)
 {
@@ -23,7 +18,6 @@ void Hang(void)
         asm("swi 0x2");
     }
 }
-
 
 // Unused
 void sub_800D098(void)
@@ -127,9 +121,25 @@ void nullsub_187(void)
 
 u32 sub_800D1C0(void)
 {
-    if(gUnknown_202DB60.unk0 != 2)
+    if(gUnknown_202DB60[0] != 2)
         return 0;
-    if(gUnknown_202DB60.unk4 != 2)
+    if(gUnknown_202DB60[1] != 2)
         return 0;
     return 1;
+}
+
+void sub_800D1E0(void)
+{
+    s32 iVar1;
+    u32 iVar2;
+    for(iVar1 = 0; iVar1 < 2; iVar1++)
+    {
+        for(iVar2 = 0; iVar2 < 8; iVar2++)
+        {
+            if(gUnknown_202DB30[iVar1][iVar2] == 0xfdfd)
+            {
+                gUnknown_202DB60[iVar1] = 1;
+            }
+        }
+    }
 }

@@ -31,6 +31,7 @@ struct ExclusivePokemonData
     .in_brt = TRUE,             \
 }
 
+extern struct ExclusivePokemonData *gUnknown_203B498;
 
 void LoadExclusivePokemon(void);
 struct ExclusivePokemonData *GetExclusivePokemon(void);
