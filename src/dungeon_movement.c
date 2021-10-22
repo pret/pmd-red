@@ -64,7 +64,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                 {
                     s32 i;
                     struct DungeonEntity *target;
-                    for (i = 0; i < ALL_POKEMON_SIZE; i++)
+                    for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
                         target = gDungeonGlobalData->allPokemon[i];
                         if (EntityExists(target) &&

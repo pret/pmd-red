@@ -1,13 +1,15 @@
 #ifndef GUARD_DUNGEON_DATA_H
 #define GUARD_DUNGEON_DATA_H
 
-#define DUNGEON_MAX_SIZE_X 55
-#define DUNGEON_MAX_SIZE_Y 31
-#define ALL_POKEMON_SIZE 0x14
-
 #include "constants/species.h"
 #include "dungeon_entity.h"
+#include "global.h"
 #include "map.h"
+
+#define DUNGEON_MAX_SIZE_X 55
+#define DUNGEON_MAX_SIZE_Y 31
+#define DUNGEON_MAX_WILD_POKEMON 16
+#define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
 
 struct DungeonGlobalData
 {
@@ -74,8 +76,8 @@ struct DungeonGlobalData
     u8 unk1356C;
     u8 fill1356D[0x1357C - 0x1356D];
     /* 0x1357C */ struct DungeonEntity *teamPokemon[MAX_TEAM_MEMBERS];
-    /* 0x1358C */ struct DungeonEntity *wildPokemon[0x10];
-    /* 0x135CC */ struct DungeonEntity *allPokemon[ALL_POKEMON_SIZE]; // Contains both team and wild Pokémon
+    /* 0x1358C */ struct DungeonEntity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
+    /* 0x135CC */ struct DungeonEntity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.
     u8 fill13624[0x181F8 - 0x13624];
     /* 0x181F8 */ struct DungeonEntity *leader; // Pointer to the team leader.
@@ -87,7 +89,7 @@ struct DungeonGlobalData
     /* 0x1820A */ bool8 displayBlinker; // Blacks out the screen when the player has the Blinker status.
     u8 unk1820B;
     u32 unk1820C;
-    /* 0x18210 */ bool8 displayCrossEyed; // Displays Subsitute and flower sprites when the player has the Cross-Eyed status.
+    /* 0x18210 */ bool8 displayCrossEyed; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     u8 fill18211[0x18217 - 0x18211];
     u8 unk18217;
 };
