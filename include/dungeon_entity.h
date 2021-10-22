@@ -10,9 +10,8 @@ struct DungeonEntityData
     // Pokemon: MovementFlag
     // Items: ItemFlag
     // Traps: TrapType
-    /* 0x0 */ u8 flags;
-    /* 0x1 */ bool8 moving;
-    /* 0x2 */ u16 entityID; // Pokémon species or item ID.
+    /* 0x0 */ u16 flags;
+    /* 0x2 */ s16 entityID; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
     /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
     /* 0x6 */ bool8 isEnemy;
@@ -97,7 +96,7 @@ struct DungeonEntityData
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactics;
     u8 fill95[0xA4 - 0x95];
-    /* 0xA4 */ u8 clientFlags;
+    /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
@@ -290,6 +289,7 @@ enum EntityType
 enum MovementFlag
 {
     MOVEMENT_FLAG_SWAPPED_PLACES = 1 << 5,
+    MOVEMENT_FLAG_MOVING = 1 << 9,
     MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED = 1 << 15 // Set if the Pokémon is petrified and the leader cures them by swapping places.
 };
 
@@ -312,10 +312,11 @@ enum MovementAction
     MOVEMENT_ACTION_TAKE_ITEM = 7
 };
 
-enum ClientFlag
+enum ClientType
 {
-    CLIENT_FLAGS_CLIENT = 1, // Used for mission clients that need rescuing.
-    CLIENT_FLAGS_DONT_MOVE = 3 // Used for Diglett in the Skarmory boss fight.
+    CLIENT_TYPE_NONE = 0,
+    CLIENT_TYPE_CLIENT = 1, // Used for mission clients that need rescuing.
+    CLIENT_TYPE_DONT_MOVE = 3 // Used for Diglett in the Skarmory boss fight.
 };
 
 enum VisualFlag

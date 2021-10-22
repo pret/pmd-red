@@ -132,7 +132,7 @@ _0808B6D2:
 	cmp r5, 0
 	bge _0808B6D2
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r1, [r6, 0x4]
 	adds r1, r0
 	subs r1, 0x1
@@ -144,7 +144,7 @@ _0808B6D2:
 	orrs r0, r1
 	str r0, [sp, 0x6C]
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r2, [r6, 0x6]
 	adds r2, r0
 	subs r2, 0x1
@@ -216,7 +216,7 @@ _0808B77E:
 	cmp r5, 0
 	bge _0808B77E
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r1, [r6, 0x4]
 	adds r1, r0
 	subs r1, 0x1
@@ -228,7 +228,7 @@ _0808B77E:
 	orrs r0, r1
 	str r0, [sp, 0x70]
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r2, [r6, 0x6]
 	adds r2, r0
 	subs r2, 0x1
@@ -325,7 +325,7 @@ _0808B87C:
 	adds r1, r0, 0
 	ldr r0, _0808BA3C
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0808BA40
 	adds r1, r4, 0
 	movs r2, 0
@@ -354,7 +354,7 @@ _0808B8EC:
 	movs r5, 0x3
 _0808B8F4:
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r2, _0808BA4C
 	adds r0, r2
 	ldrb r1, [r0]
@@ -366,7 +366,7 @@ _0808B8F4:
 	cmp r5, 0
 	bge _0808B8F4
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r1, [r6, 0x4]
 	adds r1, r0
 	subs r1, 0x1
@@ -378,7 +378,7 @@ _0808B8F4:
 	orrs r0, r1
 	str r0, [sp, 0x74]
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldrh r2, [r6, 0x6]
 	adds r2, r0
 	subs r2, 0x1

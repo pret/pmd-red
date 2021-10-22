@@ -1,7 +1,7 @@
 #include "global.h"
-#include "dungeon_engine.h"
+#include "dungeon_util.h"
 
-bool8 entityExists(struct DungeonEntity *entity)
+bool8 EntityExists(struct DungeonEntity *entity)
 {
     if (!entity)
     {

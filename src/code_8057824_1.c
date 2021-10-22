@@ -254,7 +254,7 @@ extern void sub_806CE68(struct DungeonEntity *, u32);
 
 extern void sub_8052D44(u8 *, struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8097FD0(u32);
-extern void sub_8045B94(u8 *, struct DungeonEntity *, u32);
+extern void SetMessageArgument(u8 *, struct DungeonEntity *, u32);
 extern struct DungeonEntity *sub_8083600();
 extern void sub_80421C0(struct DungeonEntity *, u32);
 extern void sub_8046D20();
@@ -313,7 +313,7 @@ void sub_808919C();
 void sub_8088D30(void);
 
 extern void sub_8083F14();
-extern u8 entityExists(struct DungeonEntity *);
+extern u8 EntityExists(struct DungeonEntity *);
 extern u8 sub_8086AE4(u32);
 
 
@@ -1985,7 +1985,7 @@ void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
     for(iVar3 = 0; iVar3 < 0x10; iVar3++)
     {
       iVar2 = gDungeonGlobalData->wildPokemon[iVar3];
-      if ((entityExists(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientFlags == param_2)) {
+      if ((EntityExists(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->entityData->clientType == param_2)) {
         return;
       }
     }
@@ -3168,7 +3168,7 @@ void sub_808AFB0(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
-    sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
+    SetMessageArgument(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Rock Part that Regirock was guarding
     sub_8052910(&gUnknown_81050B4);
     sub_80421C0(0,0xd4);
@@ -3186,7 +3186,7 @@ void sub_808B030(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
-    sub_8045B94(gAvailablePokemonNames,sub_8083600(),0);
+    SetMessageArgument(gAvailablePokemonNames,sub_8083600(),0);
     // $m0 obatined the Ice Part that Regice was guarding
     sub_8052910(&gUnknown_810517C);
     sub_80421C0(0,0xd4);
@@ -3204,7 +3204,7 @@ void sub_808B0B0(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
-    sub_8045B94(gAvailablePokemonNames, sub_8083600(), 0);
+    SetMessageArgument(gAvailablePokemonNames, sub_8083600(), 0);
     // $m0 obatined the Steel Part that Registeel was guarding
     sub_8052910(&gUnknown_8105244);
     sub_80421C0(0,0xd4);

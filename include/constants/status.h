@@ -117,6 +117,7 @@ enum VolatileStatus
 
 enum TargetingDecoy
 {
+    TARGETING_DECOY_NONE = 0,
     TARGETING_DECOY_TEAM = 1,
     TARGETING_DECOY_WILD = 2
 };

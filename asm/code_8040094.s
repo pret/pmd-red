@@ -1663,7 +1663,7 @@ _08040E24:
 	adds r6, r7, 0
 _08040E26:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08040E34
@@ -1707,7 +1707,7 @@ _08040E6E:
 	cmp r1, r0
 	bne _08040ED0
 	movs r0, 0x7
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _08040EB8
 	str r0, [r1]
 	ldr r1, _08040EBC
@@ -1728,7 +1728,7 @@ _08040E6E:
 	ldr r0, _08040ECC
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	movs r1, 0xD2
 	lsls r1, 1
 	adds r0, r6, 0
@@ -2104,7 +2104,7 @@ _0804118A:
 	movs r2, 0
 	str r2, [sp, 0x14]
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080411CA
@@ -2137,7 +2137,7 @@ _080411D0:
 	cmp r5, r0
 	beq _08041216
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08041216
@@ -2452,7 +2452,7 @@ sub_804143C:
 	cmp r0, 0xED
 	bne _08041476
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080414A4
@@ -2613,7 +2613,7 @@ sub_8041550:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r7, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804159C
@@ -3034,7 +3034,7 @@ _08041890:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080418C0
@@ -3065,7 +3065,7 @@ _080418D0: .4byte 0x000135cc
 sub_80418D4:
 	push {r4,lr}
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _080418E4
