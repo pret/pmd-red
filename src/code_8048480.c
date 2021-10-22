@@ -18,7 +18,7 @@ extern void sub_8072008(struct DungeonEntity *r0, struct DungeonEntity *r1, u32 
 extern void sub_8076D10(struct DungeonEntity *r0, struct DungeonEntity *r1);
 extern void LevelDownTarget(struct DungeonEntity *r0, struct DungeonEntity *r1, u32 r2);
 
-extern void sub_8045B94(u8 *r0, struct DungeonEntity *r1, u32);
+extern void SetMessageArgument(u8 *r0, struct DungeonEntity *r1, u32);
 extern void sub_807A290(struct DungeonEntity *r0, struct DungeonEntity *r1);
 extern void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, u32);
 extern void RestoreVisionTarget(struct DungeonEntity *r0, struct DungeonEntity *r1);
@@ -140,7 +140,7 @@ void sub_80484E8(struct DungeonEntity *r0, struct DungeonEntity *r1)
         sub_807A290(r0, r1);
     else
     {
-        sub_8045B94(gAvailablePokemonNames, r1, 0);
+        SetMessageArgument(gAvailablePokemonNames, r1, 0);
         // Pointer to "But nothing happened!"
         sub_80522F4(r0, r1, gUnknown_80FB580);
     }

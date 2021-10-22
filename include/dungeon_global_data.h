@@ -3,6 +3,7 @@
 
 #define DUNGEON_MAX_SIZE_X 55
 #define DUNGEON_MAX_SIZE_Y 31
+#define ALL_POKEMON_SIZE 0x14
 
 #include "constants/species.h"
 #include "dungeon_entity.h"
@@ -74,7 +75,7 @@ struct DungeonGlobalData
     u8 fill1356D[0x1357C - 0x1356D];
     /* 0x1357C */ struct DungeonEntity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ struct DungeonEntity *wildPokemon[0x10];
-    /* 0x135CC */ struct DungeonEntity *allPokemon[0x14]; // Contains both team and wild Pokémon
+    /* 0x135CC */ struct DungeonEntity *allPokemon[ALL_POKEMON_SIZE]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.
     u8 fill13624[0x181F8 - 0x13624];
     /* 0x181F8 */ struct DungeonEntity *leader; // Pointer to the team leader.

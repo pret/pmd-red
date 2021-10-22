@@ -371,7 +371,7 @@ _08086F6A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086F8E

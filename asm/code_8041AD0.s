@@ -700,7 +700,7 @@ _080427B0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080427FA
@@ -720,7 +720,7 @@ _080427B0:
 	ldr r0, _08042810
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08042814
 	ldr r1, [r0]
 	adds r0, r4, 0

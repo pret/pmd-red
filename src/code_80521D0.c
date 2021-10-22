@@ -11,7 +11,7 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void sub_80522A8(u32 r0, u32 r1)
+void SendMessage(u32 r0, u32 r1)
 {
     if (sub_8045888(r0) != 0){
         sub_80523A8(r0, r1, 1);

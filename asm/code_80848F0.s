@@ -159,7 +159,7 @@ _0808538E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080853BE
@@ -290,7 +290,7 @@ _08085490:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080854C0
@@ -336,7 +336,7 @@ _080854E6:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085504
@@ -481,7 +481,7 @@ _080855EC:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085618
@@ -527,7 +527,7 @@ _08085642:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808566C
@@ -565,7 +565,7 @@ _08085688:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080856B8
@@ -687,7 +687,7 @@ _08085770:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808579E
@@ -734,7 +734,7 @@ _080857CA:
 	adds r0, r1
 	ldr r6, [r0]
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085840
@@ -921,7 +921,7 @@ _0808593C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085982
@@ -960,7 +960,7 @@ _08085990:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080859E2
@@ -1014,7 +1014,7 @@ _080859FC:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085A42
@@ -1045,8 +1045,8 @@ _08085A42:
 	bx r0
 	thumb_func_end sub_80859F0
 
-	thumb_func_start sub_8085A50
-sub_8085A50:
+	thumb_func_start IsMovingClient
+IsMovingClient:
 	push {lr}
 	ldr r0, [r0, 0x70]
 	adds r0, 0xA4
@@ -1107,7 +1107,7 @@ _08085B04:
 _08085B06:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085A50
+	thumb_func_end IsMovingClient
 
 	thumb_func_start sub_8085B0C
 sub_8085B0C:
@@ -1834,7 +1834,7 @@ _080860D0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086114

@@ -48,12 +48,12 @@ _08057A52:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	mov r1, r8
 	adds r1, 0xFB
 	ldrb r0, [r1]
@@ -520,7 +520,7 @@ _08057DD4:
 	mov r0, r8
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	cmp r5, 0
 	beq _08057E00
 	ldr r0, _08057DFC
@@ -819,7 +819,7 @@ sub_8057FF4:
 	ldr r0, _0805802C
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	cmp r6, 0x1
 	bne _08058034
 	ldr r0, _08058030
@@ -949,7 +949,7 @@ GrudgeMoveAction:
 	ldr r4, [r5, 0x70]
 	ldr r0, _08058134
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0xF4
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -2718,7 +2718,7 @@ _08058DCE:
 	ldr r0, _08058E54
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08058E58
 	ldr r2, [r0]
 	adds r0, r7, 0
@@ -2755,7 +2755,7 @@ sub_8058E5C:
 	cmp r0, 0
 	beq _08058ED0
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058ED0
@@ -3255,7 +3255,7 @@ sub_80591E4:
 	movs r4, 0x1
 _0805922A:
 	adds r0, r7, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805927E
@@ -4567,7 +4567,7 @@ _08059C08:
 	mov r0, r8
 	cmp r0, 0
 	beq _08059C5C
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r0, 2
 	mov r1, sp
 	adds r4, r1, r0
@@ -5195,7 +5195,7 @@ sub_805A0A8:
 	cmp r0, 0
 	beq _0805A114
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x1
 	beq _0805A0FC
 	cmp r0, 0x1
@@ -5253,12 +5253,12 @@ sub_805A120:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r5, 0
 	movs r1, 0x2C
 	bl sub_8071824
@@ -5701,7 +5701,7 @@ sub_805A464:
 	cmp r0, 0
 	beq _0805A4B4
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -6023,12 +6023,12 @@ sub_805A6C8:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r5, 0
 	movs r1, 0x2C
 	bl sub_8071824
@@ -6187,7 +6187,7 @@ sub_805A7D4:
 	ldr r0, _0805A858
 	add r1, sp, 0x4
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	str r5, [sp]
 	mov r0, r8
 	add r1, sp, 0x4
@@ -6225,10 +6225,10 @@ sub_805A85C:
 	movs r5, 0
 _0805A880:
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r2, r0, 0
 	subs r4, 0x1
 	subs r2, 0x1
@@ -6373,7 +6373,7 @@ _0805A9B0:
 	cmp r4, 0
 	bne _0805AAB6
 	mov r0, r8
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6397,13 +6397,13 @@ _0805A9B0:
 	cmp r0, 0
 	bne _0805AAB6
 	mov r0, r8
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
 _0805A9FE:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6448,7 +6448,7 @@ _0805AA4C:
 	bl sub_80694C0
 _0805AA5E:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AAB6
@@ -6545,7 +6545,7 @@ _0805AB20:
 	ldr r0, _0805AB40
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0805AB44
 	ldr r2, [r0]
 	adds r0, r4, 0
@@ -6872,7 +6872,7 @@ _0805ADA0:
 	adds r0, r7
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805AE0C
@@ -7084,7 +7084,7 @@ sub_805AF30:
 	adds r6, r2, 0
 	adds r4, r3, 0
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r1, r0, 0
 	cmp r0, 0x9
 	bgt _0805AF54
@@ -7338,7 +7338,7 @@ sub_805B0D0:
 	ldr r0, _0805B140
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r6, 0
 	bl GetUnformattedTypeString
 	adds r1, r0, 0
@@ -7864,7 +7864,7 @@ _0805B4D4:
 	ldr r0, _0805B510
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	cmp r5, 0
 	beq _0805B518
 	mov r1, r8
@@ -8618,12 +8618,12 @@ sub_805BA50:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r5, 0
 	movs r1, 0x2C
 	bl sub_8071824
@@ -8806,7 +8806,7 @@ _0805BBF0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BC2A
@@ -9041,7 +9041,7 @@ TransferOrbAction:
 	ldr r0, _0805BDD0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	mov r0, r9
 	adds r0, 0xA4
 	ldrb r0, [r0]
@@ -9125,7 +9125,7 @@ _0805BE60:
 	ldr r0, _0805BE88
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0805BE8C
 	ldr r2, [r0]
 	mov r0, r10
@@ -9203,7 +9203,7 @@ EscapeOrbAction:
 	ldr r0, _0805BF00
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r5, _0805BF04
 	ldr r0, [r5]
 	ldr r1, _0805BF08
@@ -9273,7 +9273,7 @@ TrapbustOrbAction:
 	ldr r0, _0805BF74
 	ldr r1, [r0]
 	ldr r0, [sp, 0x4]
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0
 	b _0805C06A
 	.align 2, 0
@@ -9448,7 +9448,7 @@ _0805C0BA:
 _0805C0BE:
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C0F2
@@ -9729,7 +9729,7 @@ FillInOrbAction:
 	ldr r0, _0805C2D8
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0
 	b _0805C3CA
 	.align 2, 0
@@ -10866,7 +10866,7 @@ _0805CE08:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE46
@@ -10874,7 +10874,7 @@ _0805CE08:
 	beq _0805CE46
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE46
@@ -10909,7 +10909,7 @@ _0805CE5E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE9C
@@ -10917,7 +10917,7 @@ _0805CE5E:
 	beq _0805CE9C
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE9C
@@ -12086,7 +12086,7 @@ _0805DA08:
 	ldr r0, _0805DA14
 	ldr r1, [r0]
 	mov r0, r10
-	bl sub_80522A8
+	bl SendMessage
 	b _0805DBDA
 	.align 2, 0
 _0805DA14: .4byte gUnknown_80FD4B0
@@ -12436,7 +12436,7 @@ _0805DCB6:
 _0805DCBC:
 	ldr r1, [r0]
 	mov r0, r10
-	bl sub_80522A8
+	bl SendMessage
 	b _0805E1AE
 	.align 2, 0
 _0805DCC8: .4byte gUnknown_80F8A4C
@@ -12984,7 +12984,7 @@ _0805E0F4:
 	beq _0805E114
 	mov r0, r10
 	adds r1, r3, 0
-	bl sub_80522A8
+	bl SendMessage
 _0805E114:
 	movs r0, 0x1
 	bl sub_8044C50
@@ -13792,7 +13792,7 @@ _0805E76A:
 	ldr r1, [r4, 0x10]
 	ldr r4, [r1, 0x70]
 	adds r0, r6, 0
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E7B8
@@ -14667,7 +14667,7 @@ _0805EE4E:
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0xD
-	bl sub_80718D8
+	bl HasIQSkill
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EE82
@@ -14728,7 +14728,7 @@ _0805EED0:
 	movs r7, 0
 	adds r0, r5, 0
 	movs r1, 0x13
-	bl sub_80718D8
+	bl HasIQSkill
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EF00
@@ -14870,7 +14870,7 @@ _0805EFE2:
 	cmp r0, 0x2
 	bne _0805F020
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r5, 0
 _0805EFF6:
@@ -15053,11 +15053,11 @@ _0805F12A:
 	ldr r0, _0805F198
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0805F19C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0
 	bl sub_807EC28
 	ldr r0, [sp, 0x4]
@@ -15469,7 +15469,7 @@ _0805F4D8:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F526
@@ -15524,7 +15524,7 @@ _0805F544:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F542
@@ -15916,7 +15916,7 @@ _0805F8B4:
 	adds r1, r0, 0
 	ldr r0, _0805F8D8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0805F8DC
 	ldr r1, [r0]
 	movs r0, 0
@@ -16207,7 +16207,7 @@ _0805FB3A:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805FB86
@@ -16215,7 +16215,7 @@ _0805FB3A:
 	ldr r0, _0805FBD0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
 	mov r2, r8
@@ -16662,7 +16662,7 @@ _0805FEF4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	adds r5, r6, 0x1
 	mov r12, r5
@@ -17658,7 +17658,7 @@ _08060718:
 	adds r1, r0
 	ldr r4, [r1]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060794
@@ -18093,7 +18093,7 @@ _08060A86:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060ABE
@@ -18103,7 +18103,7 @@ _08060A86:
 	movs r0, 0
 	strb r0, [r5]
 	adds r0, r4, 0
-	bl sub_8070C60
+	bl CannotUseItems
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060ABE
@@ -18157,7 +18157,7 @@ _08060B1C:
 	bl sub_8044F5C
 _08060B24:
 	mov r0, r9
-	bl sub_8070C60
+	bl CannotUseItems
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060B3C
@@ -18244,7 +18244,7 @@ _08060BD0:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060CCC
@@ -18252,7 +18252,7 @@ _08060BD0:
 	mov r8, r3
 	movs r5, 0
 	adds r0, r4, 0
-	bl sub_8070C60
+	bl CannotUseItems
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -18497,7 +18497,7 @@ _08060DE4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060E14
@@ -18573,7 +18573,7 @@ _08060E7A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060E9E
@@ -18928,7 +18928,7 @@ _08061164:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080611AC
@@ -19089,7 +19089,7 @@ _0806129E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _080612BA
@@ -19846,7 +19846,7 @@ _080618C4:
 _080618F0:
 	ldr r0, [sp, 0x74]
 	movs r1, 0x1
-	bl sub_807ADB8
+	bl MoveIfPossible
 	b _080617C4
 	.align 2, 0
 _080618FC: .4byte 0x00000133
@@ -21996,7 +21996,7 @@ _080629FC:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08062A5A
@@ -22172,7 +22172,7 @@ sub_8062B74:
 	ldr r0, _08062BD0
 	mov r1, r10
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08062BD4
 	ldr r2, [r0]
 	movs r0, 0
@@ -22323,7 +22323,7 @@ sub_8062CA8:
 	ldr r0, _08062CF8
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08062CFC
 	ldr r2, [r0]
 	movs r0, 0
@@ -23430,7 +23430,7 @@ sub_8063578:
 	ldr r0, _080635FC
 	ldr r1, [sp, 0x14]
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	lsls r4, 3
 	adds r4, 0xA
 	ldr r0, _08063600
@@ -24123,7 +24123,7 @@ _08063AEC:
 	ldr r0, _08063B2C
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08063B3A
 	.align 2, 0
 _08063B1C: .4byte gDungeonGlobalData
@@ -24135,7 +24135,7 @@ _08063B30:
 	ldr r0, _08063B50
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 _08063B3A:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -24443,7 +24443,7 @@ _08063D70:
 	ldr r0, _08063DAC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08063DBA
 	.align 2, 0
 _08063D98: .4byte gDungeonGlobalData
@@ -24456,7 +24456,7 @@ _08063DB0:
 	ldr r0, _08063DD0
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 _08063DBA:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -25468,14 +25468,14 @@ sub_806455C:
 	movs r3, 0
 	bl xxx_call_draw_string
 	ldr r0, [r4, 0x14]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080645C0
 	ldr r1, [r4, 0x14]
 	add r0, sp, 0x4
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	str r5, [sp]
 	movs r0, 0x8
 	movs r1, 0x12
@@ -29716,7 +29716,7 @@ _080667D0:
 _080667DE:
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066812
 	.align 2, 0
 _080667E8: .4byte gUnknown_80F8CE4
@@ -29726,7 +29726,7 @@ _080667EC:
 	ldr r0, _08066804
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066838
 	.align 2, 0
 _08066800: .4byte gUnknown_202DE58
@@ -29735,7 +29735,7 @@ _08066808:
 	ldr r0, _08066840
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 _08066812:
 	ldrb r0, [r4]
 	movs r1, 0x10
@@ -29753,7 +29753,7 @@ _08066812:
 	ldr r0, _08066848
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 _08066838:
 	pop {r4-r7}
 	pop {r0}
@@ -29794,7 +29794,7 @@ _08066856:
 	ldr r0, _08066894
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _080668BE
 	.align 2, 0
 _0806688C: .4byte gTeamInventory_203B460
@@ -29813,7 +29813,7 @@ _08066898:
 	ldr r0, _080668CC
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 _080668B8:
 	adds r4, 0x1
 	cmp r4, 0x13
@@ -29875,7 +29875,7 @@ _08066928:
 	ldr r0, _0806695C
 	mov r1, r8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r1, r7, 0
 	adds r1, 0x60
 	ldrb r2, [r1]
@@ -29893,7 +29893,7 @@ _08066928:
 _08066950:
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066A96
 	.align 2, 0
 _0806695C: .4byte gUnknown_202DFE8
@@ -29951,7 +29951,7 @@ _080669B2:
 	ldr r0, _080669FC
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	add r0, sp, 0x4
 	ldrb r1, [r0]
 	movs r0, 0x8
@@ -29961,7 +29961,7 @@ _080669B2:
 	ldr r0, _08066A00
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066A52
 	.align 2, 0
 _080669F4: .4byte gUnknown_202DE58
@@ -29993,7 +29993,7 @@ _08066A04:
 	ldr r0, _08066AB0
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	ldrb r1, [r4]
 	movs r0, 0x8
 	ands r0, r1
@@ -30002,7 +30002,7 @@ _08066A04:
 	ldr r0, _08066AB4
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 _08066A52:
 	mov r0, r8
 	bl sub_806A6E8
@@ -30096,7 +30096,7 @@ _08066AF8:
 _08066B10:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066BAC
 	.align 2, 0
 _08066B1C: .4byte gUnknown_202DE58
@@ -30118,7 +30118,7 @@ _08066B24:
 	ldr r0, _08066BC0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	strb r4, [r5, 0x2]
 	strb r4, [r5, 0x1]
 	strb r4, [r5]
@@ -30129,7 +30129,7 @@ _08066B24:
 	ldr r0, _08066BC8
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	adds r0, r6, 0
 	bl sub_806A6E8
 	adds r1, r6, 0x4
@@ -30225,7 +30225,7 @@ _08066C26:
 	ldr r0, _08066C3C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066CC8
 	.align 2, 0
 _08066C38: .4byte gUnknown_202DE58
@@ -30249,7 +30249,7 @@ _08066C40:
 	ldr r0, _08066CDC
 	mov r1, r9
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	mov r2, r8
 	ldr r1, [r2, 0x60]
 	ldr r0, [r5]
@@ -30260,7 +30260,7 @@ _08066C40:
 	ldr r0, _08066CE4
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	mov r1, r9
 	adds r1, 0x4
 	mov r0, r9
@@ -30411,7 +30411,7 @@ _08066DB0:
 _08066DB2:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08066DF8
 	.align 2, 0
 _08066DBC: .4byte gUnknown_202DE58
@@ -30426,11 +30426,11 @@ _08066DC4:
 	ldr r0, _08066E04
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08066E08
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 	ldr r0, _08066E0C
 	ldr r0, [r0]
 	ldr r1, _08066E10
@@ -30580,7 +30580,7 @@ _08066ECC:
 _08066F1E:
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80522A8
+	bl SendMessage
 	b _08066F7E
 	.align 2, 0
 _08066F28: .4byte 0xffffff00
@@ -30612,7 +30612,7 @@ _08066F46:
 	ldr r0, _08066F98
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80522A8
+	bl SendMessage
 	ldr r0, _08066F9C
 	ldr r0, [r0]
 	ldr r2, _08066FA0
@@ -30759,7 +30759,7 @@ _08067040:
 _0806709E:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _080670EE
 	.align 2, 0
 _080670A8: .4byte gUnknown_202DEA8
@@ -30784,7 +30784,7 @@ _080670CA:
 	ldr r0, _08067104
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80522A8
+	bl SendMessage
 	ldr r0, _08067108
 	ldr r0, [r0]
 	ldr r1, _0806710C
@@ -30835,7 +30835,7 @@ sub_8067110:
 	bl sub_80464AC
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 	ldr r0, [r6]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
@@ -30943,7 +30943,7 @@ _08067220:
 _08067230:
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0x14
 	movs r1, 0x4C
 	bl sub_803E708
@@ -31045,7 +31045,7 @@ _080672F6:
 	cmp r0, 0
 	beq _08067310
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r1, r8
 	adds r1, 0x46
 	strb r0, [r1]
@@ -31122,7 +31122,7 @@ _08067384:
 	ldr r0, _080673B8
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _080673C6
 	.align 2, 0
 _080673B0: .4byte gUnknown_202DE58
@@ -31132,7 +31132,7 @@ _080673BC:
 	ldr r0, _080673F8
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_80522A8
+	bl SendMessage
 _080673C6:
 	add r0, sp, 0x4
 	ldrb r0, [r0, 0x2]
@@ -31266,7 +31266,7 @@ _080674BC:
 	bl sub_8047190
 _080674D0:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080674F8
@@ -31643,7 +31643,7 @@ _080677B4:
 	ldr r0, _080677F0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _080677F4
 	ldr r5, [r0]
 	ldr r0, _080677F8
@@ -31777,7 +31777,7 @@ _080678C6:
 	cmp r0, 0
 	bne _080678F6
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080678F0
@@ -31825,7 +31825,7 @@ sub_8067904:
 	ldr r0, _08067944
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08067948
 	b _08067962
 	.align 2, 0
@@ -31841,12 +31841,12 @@ _0806794C:
 	ldr r0, _0806796C
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08067970
 _08067962:
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _08067A56
 	.align 2, 0
 _0806796C: .4byte gAvailablePokemonNames
@@ -31888,7 +31888,7 @@ _0806798E:
 	movs r3, 0
 	bl sub_8055FA0
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080679DE
@@ -31907,7 +31907,7 @@ _080679D2:
 	blt _0806798E
 _080679DE:
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067A56
@@ -31922,7 +31922,7 @@ _080679DE:
 	ldr r0, _08067A70
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_80522A8
+	bl SendMessage
 _08067A04:
 	ldrb r0, [r6, 0x7]
 	cmp r0, 0
@@ -33603,7 +33603,7 @@ _0806876C:
 	cmp r4, 0
 	beq _08068796
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08068796
@@ -34751,7 +34751,7 @@ _08069044:
 	cmp r4, 0
 	beq _08069072
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069072
@@ -34817,7 +34817,7 @@ _080690A2:
 	adds r0, r2
 	mov r1, r8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	b _08069484
 	.align 2, 0
 _080690E4: .4byte gDungeonGlobalData
@@ -34956,7 +34956,7 @@ _080691FE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080691FC
@@ -35090,7 +35090,7 @@ _0806930A:
 	adds r0, r2
 	mov r1, r8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	b _08069352
 	.align 2, 0
 _0806932C: .4byte gUnknown_202EE70
@@ -35108,7 +35108,7 @@ _08069338:
 	adds r0, r3
 	mov r1, r8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 _08069352:
 	bl sub_8083600
 	cmp r0, 0
@@ -35322,7 +35322,7 @@ _080694FC:
 _0806950A:
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_807A324
+	bl SendImmobilizeEndMessage
 _08069512:
 	movs r0, 0x4
 	ldrsh r2, [r4, r0]
@@ -36627,7 +36627,7 @@ _08069EAA:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069F3E
@@ -36750,14 +36750,14 @@ sub_8069F9C:
 	mov r8, r0
 	adds r6, r1, 0
 	mov r9, r2
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069FB8
 	b _0806A0FA
 _08069FB8:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069FC6
@@ -36817,7 +36817,7 @@ _0806A018:
 	b _0806A030
 _0806A024:
 	adds r0, r1, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _0806A068
@@ -36835,7 +36835,7 @@ _0806A030:
 	ldr r0, _0806A10C
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806A110
 	ldr r2, [r0]
 	mov r0, r8
@@ -36899,7 +36899,7 @@ _0806A0AA:
 	ldr r0, _0806A10C
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldrb r0, [r4]
 	bl GetUnformattedTypeString
 	adds r1, r0, 0
@@ -36935,12 +36935,12 @@ sub_806A120:
 	adds r7, r0, 0
 	adds r6, r1, 0
 	adds r4, r2, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A19C
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A19C
@@ -36973,7 +36973,7 @@ sub_806A120:
 	ldr r0, _0806A1A4
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r4, 0
 	bl GetUnformattedTypeString
 	adds r1, r0, 0
@@ -36999,7 +36999,7 @@ sub_806A1B0:
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A1DE
@@ -37028,7 +37028,7 @@ sub_806A1E8:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A234
@@ -37076,7 +37076,7 @@ sub_806A240:
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A2B4
@@ -37140,7 +37140,7 @@ sub_806A2BC:
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r6, r1, 24
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A328
@@ -37211,7 +37211,7 @@ _0806A33E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A384
@@ -37552,7 +37552,7 @@ sub_806A5B8:
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806A5CE
@@ -37584,7 +37584,7 @@ _0806A5CE:
 	bne _0806A608
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl sub_807A324
+	bl SendImmobilizeEndMessage
 _0806A608:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
@@ -37677,7 +37677,7 @@ _0806A6C4:
 	beq _0806A6D2
 	adds r0, r6, 0
 	mov r1, r8
-	bl sub_80522A8
+	bl SendMessage
 _0806A6D2:
 	add sp, 0x4
 	pop {r3}
@@ -37799,7 +37799,7 @@ _0806A7A4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A7D2
@@ -37941,7 +37941,7 @@ sub_806A898:
 	b _0806A8C8
 _0806A8C2:
 	adds r0, r4, 0
-	bl sub_807ADB8
+	bl MoveIfPossible
 _0806A8C8:
 	movs r0, 0xB6
 	lsls r0, 1
@@ -38003,7 +38003,7 @@ _0806A92A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A95C
@@ -38046,7 +38046,7 @@ _0806A978:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A99E
@@ -38072,7 +38072,7 @@ sub_806A9B4:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AA02
@@ -38095,7 +38095,7 @@ _0806A9E0:
 _0806A9E6:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 	b _0806AA02
 	.align 2, 0
 _0806A9F0: .4byte gPtrLinkMoveOneUseWarningMessage
@@ -38105,7 +38105,7 @@ _0806A9F4:
 	ldr r0, _0806AA08
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 _0806AA02:
 	pop {r4,r5}
 	pop {r0}
@@ -38184,7 +38184,7 @@ _0806AA7C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AB12
@@ -38280,7 +38280,7 @@ _0806AB3A:
 	adds r0, r1
 	ldr r7, [r0]
 	adds r0, r7, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	adds r4, 0x1
 	mov r8, r4
@@ -38297,7 +38297,7 @@ _0806AB5C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806AB8C
@@ -38440,7 +38440,7 @@ _0806AC72:
 	bne _0806AC92
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_807A324
+	bl SendImmobilizeEndMessage
 _0806AC92:
 	adds r0, r4, 0
 	movs r1, 0x45
@@ -39481,7 +39481,7 @@ _0806B460:
 	str r0, [r2]
 	bl sub_8083600
 	adds r5, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806B49C
@@ -39755,7 +39755,7 @@ _0806B67C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806B6B8
@@ -39829,10 +39829,10 @@ _0806B710:
 _0806B71A:
 	strb r1, [r0]
 	movs r0, 0x38
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	movs r0, 0x20
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r7, r0, 0
 	movs r0, 0
 _0806B72E:
@@ -40016,7 +40016,7 @@ _0806B838:
 	cmp r0, 0
 	bne _0806B8B6
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -41212,7 +41212,7 @@ _0806C1E2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	adds r5, 0x1
 	mov r9, r5
@@ -42553,7 +42553,7 @@ _0806CC14:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CC5C
@@ -42604,7 +42604,7 @@ _0806CC74:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CCA0
@@ -42749,7 +42749,7 @@ _0806CD94:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CDC0
@@ -42966,7 +42966,7 @@ sub_806CEFC:
 sub_806CF18:
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CF4C
@@ -43018,7 +43018,7 @@ _0806CF64:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CF84
@@ -43136,14 +43136,14 @@ _0806D04A:
 	b _0806D514
 _0806D054:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D062
 	b _0806D514
 _0806D062:
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D070
@@ -43235,14 +43235,14 @@ _0806D100:
 	bl sub_8077084
 _0806D118:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D126
 	b _0806D514
 _0806D126:
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D134
@@ -43363,14 +43363,14 @@ _0806D1E0:
 	bl sub_806D528
 _0806D216:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D224
 	b _0806D514
 _0806D224:
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D232
@@ -43436,7 +43436,7 @@ _0806D26C:
 	cmp r0, 0
 	bne _0806D2C2
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3C4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43457,7 +43457,7 @@ _0806D2C2:
 	cmp r0, 0
 	beq _0806D2EE
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3C8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43484,7 +43484,7 @@ _0806D2EE:
 	cmp r0, 0
 	beq _0806D328
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3CC
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43507,7 +43507,7 @@ _0806D328:
 	cmp r7, 0
 	beq _0806D358
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3D0
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43528,7 +43528,7 @@ _0806D358:
 	cmp r0, 0
 	beq _0806D384
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3D4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43551,14 +43551,14 @@ _0806D384:
 	cmp r7, 0
 	beq _0806D3FA
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D3D8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
 	cmp r0, r1
 	bge _0806D3FA
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0
 	bgt _0806D3DC
 	movs r3, 0xBC
@@ -43602,7 +43602,7 @@ _0806D3FA:
 	cmp r0, 0
 	beq _0806D428
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D4D4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43626,7 +43626,7 @@ _0806D428:
 	cmp r7, 0
 	beq _0806D45A
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D4D8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43648,7 +43648,7 @@ _0806D45A:
 	cmp r0, 0
 	beq _0806D48A
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0806D4DC
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -43665,12 +43665,12 @@ _0806D45A:
 	strh r0, [r2]
 _0806D48A:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D514
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D514
@@ -43809,7 +43809,7 @@ _0806D592:
 	ldr r0, _0806D5D4
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806D5D8
 	ldr r2, [r0]
 	mov r0, r9
@@ -43832,7 +43832,7 @@ _0806D5DC:
 	ldr r0, _0806D610
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806D614
 	ldr r2, [r0]
 	mov r0, r9
@@ -43947,12 +43947,12 @@ _0806D6D0:
 	adds r0, r4, 0
 	mov r1, r9
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r1, [r5]
 	cmp r1, 0
 	bne _0806D760
@@ -44161,7 +44161,7 @@ _0806D858:
 	bne _0806D8B6
 	adds r0, r7, 0
 	mov r1, r9
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -44364,7 +44364,7 @@ _0806DA2E:
 	movs r0, 0x1
 	mov r8, r0
 	mov r0, r9
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DA50
@@ -44386,12 +44386,12 @@ _0806DA50:
 	adds r0, r4, 0
 	mov r1, r9
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, [r5, 0x4]
 	subs r0, 0x13
 	cmp r0, 0x1
@@ -44672,7 +44672,7 @@ _0806DC86:
 	adds r0, r1
 	ldr r0, [r0]
 	mov r8, r0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DCDE
@@ -44680,7 +44680,7 @@ _0806DC86:
 	beq _0806DCDE
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DCDE
@@ -44822,12 +44822,12 @@ _0806DDA2:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r4, 0x50
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806DDF4
 	b _0806DF2E
 	.align 2, 0
@@ -44839,7 +44839,7 @@ _0806DDF8:
 _0806DDFC:
 	adds r0, r7, 0
 	movs r1, 0x16
-	bl sub_80718D8
+	bl HasIQSkill
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DE0C
@@ -44982,7 +44982,7 @@ _0806DEF2:
 	ldr r0, _0806DF40
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806DF44
 _0806DF2E:
 	ldr r1, [r0]
@@ -45094,7 +45094,7 @@ _0806DFF8:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E020
@@ -45138,7 +45138,7 @@ _0806E040:
 	strb r1, [r0, 0xD]
 _0806E066:
 	mov r0, r9
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E08A
@@ -45246,7 +45246,7 @@ sub_806E100:
 	movs r1, 0
 	str r1, [sp, 0x1C]
 	ldr r0, [sp, 0x18]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E14E
@@ -45883,7 +45883,7 @@ sub_806E654:
 	movs r0, 0
 	str r0, [sp, 0x10]
 	adds r0, r1, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E6DC
@@ -46750,7 +46750,7 @@ _0806ED0E:
 	asrs r0, 8
 	str r0, [sp, 0xC]
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	str r0, [sp, 0x84]
 	ldr r0, [sp, 0x80]
 	cmp r0, 0
@@ -47151,7 +47151,7 @@ _0806F036:
 	ldr r0, _0806F0A8
 	mov r1, r9
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	cmp r4, 0x1
 	bne _0806F0B0
 	ldr r0, _0806F0AC
@@ -47297,7 +47297,7 @@ _0806F1B6:
 	beq _0806F1DA
 	ldr r0, [sp, 0x70]
 	movs r1, 0x1
-	bl sub_80718D8
+	bl HasIQSkill
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F1DA
@@ -47312,7 +47312,7 @@ _0806F1B6:
 	strb r0, [r1]
 _0806F1DA:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, r4
 	bge _0806F1F4
 	ldr r2, _0806F2B8
@@ -47358,7 +47358,7 @@ _0806F1F4:
 	str r0, [r1]
 	movs r0, 0x80
 	lsls r0, 7
-	bl sub_8084100
+	bl DungeonRandomCapped
 	movs r6, 0
 	str r6, [sp, 0x58]
 	movs r1, 0xE0
@@ -48091,7 +48091,7 @@ _0806F7C2:
 _0806F7CE:
 	mov r0, r8
 	adds r1, r6, 0
-	bl sub_8045990
+	bl CanSee
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F7DE
@@ -48100,7 +48100,7 @@ _0806F7DE:
 	bl sub_806F910
 	movs r0, 0xFA
 	lsls r0, 2
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r7, r0, 0
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
@@ -48222,7 +48222,7 @@ _0806F8C6:
 	adds r0, r3
 	adds r0, r1
 	ldr r0, [r0]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F8C4
@@ -48272,7 +48272,7 @@ _0806F91C:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	adds r1, r6, 0x1
 	mov r8, r1
@@ -48478,7 +48478,7 @@ sub_806FA5C:
 	ldr r0, _0806FAE0
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_80522A8
+	bl SendMessage
 	b _0806FB28
 	.align 2, 0
 _0806FAD4: .4byte gAvailablePokemonNames
@@ -48520,7 +48520,7 @@ _0806FB1A:
 	ldr r0, _0806FB34
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_80522A8
+	bl SendMessage
 _0806FB28:
 	movs r0, 0
 	b _0806FCF0
@@ -48651,7 +48651,7 @@ _0806FBC4:
 	ldr r0, _0806FC54
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_80522A8
+	bl SendMessage
 	strh r7, [r5]
 	b _0806FCEE
 	.align 2, 0
@@ -48697,7 +48697,7 @@ _0806FC94:
 	ldr r0, _0806FD08
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_80522A8
+	bl SendMessage
 	mov r0, r10
 	cmp r0, 0
 	beq _0806FCD8
@@ -48705,7 +48705,7 @@ _0806FC94:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _0806FD0C
 	mov r1, r9
 	bl sub_8092558
@@ -48848,7 +48848,7 @@ _0806FDBE:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FDBC
@@ -49091,7 +49091,7 @@ _0806FFB8:
 	adds r1, r0, 0
 	ldr r0, _0807000C
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08070010
 	adds r1, r7, 0
 	bl sub_8092558
