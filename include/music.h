@@ -8,7 +8,7 @@ void StartNewBGM(u16 songIndex);
 bool8 IsBGSong(u32 songIndex);
 bool8 sub_800CAAC(u32 songIndex);
 bool8 sub_800CACC(u32 songIndex);
-u16 sub_800CAE0(u16 songIndex);
+u16 GetMusicPlayerIndex(u16 songIndex);
 bool8 sub_800CAF0(u16 songIndex);
 void StartNewBGM(u16 songIndex);
 void FadeInNewBGM(u16 SongIndex, u16 speed);
@@ -17,6 +17,7 @@ void sub_800BF48(u16 SongIndex);
 void sub_800BF80(void);
 void FadeOutBGM(u16 speed);
 void sub_800C074(u16 SongIndex, u16 param_2);
+void sub_800C298(u16 songIndex);
 
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);

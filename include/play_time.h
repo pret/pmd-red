@@ -9,6 +9,10 @@ struct PlayTimeStruct
     u8 frames;
 };
 
+
+extern struct PlayTimeStruct *gPlayTimeRef;
+extern struct PlayTimeStruct gPlayTime;
+
 void IncrementPlayTime(struct PlayTimeStruct *Time);
 void ResetPlayTime(struct PlayTimeStruct *Time);
 struct PlayTimeStruct *GetPlayTime(void);

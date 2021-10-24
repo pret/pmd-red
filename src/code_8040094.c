@@ -3,7 +3,6 @@
 #include "file_system.h"
 #include "dungeon_global_data.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
 extern struct DungeonGlobalData *gDungeonGlobalData;
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
@@ -22,7 +21,7 @@ extern void sub_8011860(void);
 extern void sub_803F580(u32);
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void sub_80522A8(u32, const char *);
+extern void SendMessage(u32, const char *);
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
@@ -57,7 +56,7 @@ void sub_804002C(u32 param_1)
   sub_803F580(0);
   sub_8049ED4();
   sub_8040A84();
-  sub_80522A8(param_1, gUnknown_80FD040);
+  SendMessage(param_1, gUnknown_80FD040);
 }
 
 void sub_8040094(u8 r0)

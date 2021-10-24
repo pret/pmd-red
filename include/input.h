@@ -12,6 +12,8 @@ struct Inputs
     /* 0xC */ s32 repeatTimerDpad;
 };
 
+extern struct Inputs gRealInputs;
+
 struct InputTimers
 {
     /* 0x0 */ s16 holdTimerB;

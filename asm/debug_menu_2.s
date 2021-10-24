@@ -75,42 +75,4 @@ _0803AF2C:
 _0803AF34: .4byte gUnknown_203B3F8
 	thumb_func_end sub_803AEB0
 
-	thumb_func_start sub_803AF38
-sub_803AF38:
-	push {lr}
-	movs r0, 0x1
-	bl sub_8023A94
-	cmp r0, 0x2
-	beq _0803AF78
-	cmp r0, 0x2
-	bcc _0803AF82
-	cmp r0, 0x3
-	bne _0803AF82
-	bl sub_8023B44
-	ldr r1, _0803AF70
-	ldr r1, [r1]
-	strh r0, [r1, 0x4]
-	ldr r3, _0803AF74
-	movs r0, 0x4
-	ldrsh r2, [r1, r0]
-	movs r0, 0x58
-	muls r2, r0
-	ldr r0, [r3]
-	adds r0, r2
-	str r0, [r1, 0x8]
-	movs r0, 0x3
-	bl sub_803ACD0
-	b _0803AF82
-	.align 2, 0
-_0803AF70: .4byte gUnknown_203B3F8
-_0803AF74: .4byte gRecruitedPokemonRef
-_0803AF78:
-	bl sub_8023C60
-	movs r0, 0x7
-	bl sub_803ACD0
-_0803AF82:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_803AF38
-
         .align 2,0

@@ -1112,7 +1112,7 @@ _08043346:
 	adds r0, r2
 	strb r6, [r0]
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, [r4]
 	ldr r3, _080434CC
 	adds r1, r3
@@ -1605,7 +1605,7 @@ _080437C8:
 _080437DA:
 	bl sub_8083600
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080437F0
@@ -1646,7 +1646,7 @@ _08043822:
 	bl sub_806AA70
 _08043830:
 	bl sub_8083600
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804384A
@@ -2280,7 +2280,7 @@ _08043D6A:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08043DCE
@@ -2341,7 +2341,7 @@ _08043DDC:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	adds r7, r5, 0x1
 	cmp r0, 0
@@ -2413,7 +2413,7 @@ _08043E6E:
 	bl sub_8049590
 	ldr r4, [r0, 0x14]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08043EA0
@@ -2473,7 +2473,7 @@ _08043EEA:
 	bne _08043F40
 	bl sub_8083600
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08043FB6
@@ -2505,7 +2505,7 @@ _08043F40:
 	bne _08043F74
 	bl sub_8083600
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08043FB6
@@ -2527,7 +2527,7 @@ _08043F74:
 	bne _08043FB6
 	bl sub_8083600
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08043FB6
@@ -3171,7 +3171,7 @@ _08044466:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080444DC
@@ -3190,7 +3190,7 @@ _08044466:
 	adds r0, r4, 0
 	bl sub_8074B54
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080444DC
@@ -3198,7 +3198,7 @@ _08044466:
 	bl sub_8071DA4
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075990
+	bl DecideAction
 	adds r0, r4, 0
 	bl sub_8072CF4
 	bl sub_8086AC0
@@ -3251,7 +3251,7 @@ _08044510:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044560
@@ -3271,7 +3271,7 @@ _08044510:
 	bne _08044566
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075990
+	bl DecideAction
 	adds r0, r4, 0
 	bl sub_8072CF4
 	bl sub_8086AC0
@@ -3315,7 +3315,7 @@ _08044592:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080446A4
@@ -3395,7 +3395,7 @@ _08044644:
 	adds r0, r5, 0
 	bl sub_8074B54
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080446A4
@@ -3412,7 +3412,7 @@ _0804466E:
 	bgt _080446A4
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8075990
+	bl DecideAction
 	bl sub_8044B28
 	lsls r0, 24
 	cmp r0, 0
@@ -3466,7 +3466,7 @@ _080446D4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044760
@@ -3551,14 +3551,14 @@ _0804476A:
 	strb r6, [r0]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8075990
+	bl DecideAction
 	adds r0, r4, 0
 	bl sub_8072CF4
 	bl sub_8086AC0
 	movs r0, 0
 	bl sub_8043ED0
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 _080447A0:
 	ldr r5, [r5, 0x4]
 	cmp r5, 0
@@ -3580,7 +3580,7 @@ _080447B8:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080447FC
@@ -3594,7 +3594,7 @@ _080447B8:
 	adds r0, r4, 0
 	bl sub_8074094
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080447FC
@@ -3700,7 +3700,7 @@ _0804486C:
 	adds r0, r5, 0
 	bl sub_8074B54
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080448FA
@@ -3708,7 +3708,7 @@ _0804486C:
 	bl sub_8071DA4
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8075990
+	bl DecideAction
 	bl sub_8044B28
 	lsls r0, 24
 	cmp r0, 0
@@ -3735,7 +3735,7 @@ _080448FC:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _080448FA
@@ -3758,7 +3758,7 @@ _08044930:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044974
@@ -3772,7 +3772,7 @@ _08044930:
 	adds r0, r4, 0
 	bl sub_8074094
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044974
@@ -3854,7 +3854,7 @@ _080449F2:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044A7A
@@ -3974,7 +3974,7 @@ _08044AE6:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044AE4
@@ -4187,15 +4187,15 @@ sub_8044C50:
 _08044C84: .4byte 0x0000ffff
 	thumb_func_end sub_8044C50
 
-	thumb_func_start sub_8044C88
-sub_8044C88:
+	thumb_func_start ResetAction
+ResetAction:
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0]
 	strb r2, [r0, 0x4]
 	strb r2, [r0, 0xC]
 	bx lr
-	thumb_func_end sub_8044C88
+	thumb_func_end ResetAction
 
 	thumb_func_start sub_8044C94
 sub_8044C94:
@@ -4206,8 +4206,8 @@ sub_8044C94:
 	bx lr
 	thumb_func_end sub_8044C94
 
-	thumb_func_start sub_8044CA0
-sub_8044CA0:
+	thumb_func_start SetWalkAction
+SetWalkAction:
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r0, r1, 16
@@ -4228,7 +4228,7 @@ _08044CB8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044CA0
+	thumb_func_end SetWalkAction
 
 	thumb_func_start sub_8044CC8
 sub_8044CC8:

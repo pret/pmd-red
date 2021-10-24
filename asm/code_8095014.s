@@ -581,7 +581,7 @@ _080954E2:
 	adds r1, r5, 0
 	adds r1, 0x30
 	mov r0, sp
-	bl xxx_restore_poke_sub_2c_8094128
+	bl RestorePokemonMoves
 	adds r1, r5, 0
 	adds r1, 0x50
 	mov r0, sp
@@ -727,7 +727,7 @@ _0809563A:
 	adds r1, r5, 0
 	adds r1, 0x30
 	mov r0, sp
-	bl xxx_save_poke_sub_2c_8094108
+	bl SavePokemonMoves
 	adds r1, r5, 0
 	adds r1, 0x50
 	mov r0, sp

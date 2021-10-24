@@ -94,7 +94,7 @@ extern void sub_8085918(struct DungeonEntity *, u32);
 extern void sub_806CE68(struct DungeonEntity *r0, u32);
 extern void sub_8052910(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 entityExists(struct DungeonEntity *);
+extern u8 EntityExists(struct DungeonEntity *);
 extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct DungeonEntity *);
 extern u8 sub_8083E74(u32);
@@ -130,7 +130,7 @@ void sub_808C02C();
 extern void sub_80861B8(struct DungeonEntity *, u32, u32);
 
 void nullsub_99();
-extern u32 sub_8084100(s32);
+extern u32 DungeonRandomCapped(s32);
 extern bool8 *gFriendAreas;
 
 extern void sub_8049884();
@@ -271,7 +271,7 @@ u8 JirachiFriendAreaSearch(void)
   }
   else {
       // Randomly pick 1
-    friendAreaIndex = sub_8084100(numUnlockableAreas);
+    friendAreaIndex = DungeonRandomCapped(numUnlockableAreas);
     return friendAreas[friendAreaIndex];
   }
 }
@@ -1102,7 +1102,7 @@ void sub_808C948(struct DungeonEntity *param_1, u8 param_2)
     flag = FALSE;
     for(iVar3 = 0; iVar3 < 0x10; iVar3++){
       iVar2 = gDungeonGlobalData->wildPokemon[iVar3];
-      if ((iVar2 != param_1) && (entityExists(iVar2) != 0)) {
+      if ((iVar2 != param_1) && (EntityExists(iVar2) != 0)) {
         flag = TRUE;
         break;
       }

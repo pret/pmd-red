@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "save.h"
+#include "team_inventory.h"
 #include "exclusive_pokemon.h"
 
 
@@ -72,9 +73,6 @@ EWRAM_DATA struct QuickSaveWrite *gQuickSaveWrite;
 
 
 extern s32 gUnknown_202DE28;
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
-extern struct TeamInventory *gTeamInventory_203B460;
-extern struct RescueTeamData *gRescueTeamInfoRef;
 extern bool8 *gFriendAreas;
 extern u32 gUnknown_203B46C;
 extern u8 *gUnknown_203B480;
@@ -83,7 +81,6 @@ extern u32 *gUnknown_203B488;
 extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B490;
 extern u32 gUnknown_203B494;
-extern struct ExclusivePokemonData *gUnknown_203B498;
 
 ALIGNED(4) const char PokeDungeon_Text[] = _("POKE_DUNGEON__05");
 
@@ -183,8 +180,6 @@ extern u32 *GetDungeonLocationInfo(void);
 extern void sub_80974E8(void);
 extern void ResetNumAdventures(void);
 extern void sub_80993D8(void);
-
-extern struct PlayTimeStruct *gPlayTimeRef;
 
 extern void xxx_call_start_bg_music(void);
 

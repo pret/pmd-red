@@ -62,8 +62,6 @@ struct unkStruct_8035D94
 
 extern struct unkStruct_8035D94 *sub_8035D94();
 
-extern struct TeamInventory *gTeamInventory_203B460;
-
 extern void sub_8037400(void);
 extern void ResetSprites(u32);
 extern void sub_8035CF4(u32 *,u32, u32);

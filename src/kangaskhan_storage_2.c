@@ -8,7 +8,6 @@
 #include "kangaskhan_storage.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
-extern struct TeamInventory *gTeamInventory_203B460;
 
 struct unkStruct_203B20C
 {

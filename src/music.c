@@ -1,6 +1,7 @@
 #include "global.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
+#include "music.h"
 
 extern u8 sub_80023E4(u32);
 extern void sub_80118C4(u16);
@@ -26,11 +27,6 @@ extern u16 gUnknown_202D690;
 extern u8 gUnknown_202D694;
 extern u32 gUnknown_203B0B8;
 extern u16 gRawKeyInput;
-
-bool8 IsBGSong(u32);
-bool8 sub_800CAAC(u32);
-bool8 sub_800CACC(u32);
-u16 sub_800CAE0(u16);
 
 void StopBGMusicVSync(void)
 {
@@ -106,21 +102,21 @@ u8 sub_800CA38(u32 songIndex)
 {
     if(IsBGSong(songIndex))
     {
-        if(sub_800CAE0(songIndex) == 0)
+        if(GetMusicPlayerIndex(songIndex) == 0)
         {
             return 1;
         }
     }
     if(sub_800CACC(songIndex))
     {
-        if(sub_800CAE0(songIndex) == 1)
+        if(GetMusicPlayerIndex(songIndex) == 1)
         {
             return 1;
         }
     }
     else if(sub_800CAAC(songIndex))
     {
-        if(sub_800CAE0(songIndex) > 1)
+        if(GetMusicPlayerIndex(songIndex) > 1)
         {
             return 1;
         }
@@ -159,7 +155,7 @@ bool8 sub_800CACC(u32 songIndex)
     return FALSE;
 }
 
-u16 sub_800CAE0(u16 songIndex)
+u16 GetMusicPlayerIndex(u16 songIndex)
 {
     return gSongTable[songIndex].ms;
 }
@@ -178,7 +174,7 @@ void nullsub_20(u16 songIndex)
 {
 }
 
-void nullsub_21(void)
+void nullsub_21(u16 songIndex)
 {
 }
 

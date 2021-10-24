@@ -3,6 +3,7 @@
 
 enum DungeonAction
 {
+    DUNGEON_ACTION_NONE = 0x0,
     DUNGEON_ACTION_WAIT = 0x1,
     DUNGEON_ACTION_WALK = 0x2,
     // Switching between Pokémon in the moves menu.

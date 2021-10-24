@@ -3,6 +3,7 @@
 
 #include "file_system.h"
 #include "item.h"
+#include "constants/move.h"
 
 
 #define OFFENSE_NRM 0
@@ -24,14 +25,6 @@ struct unkPokeSubStruct_4 {
     u16 fill6;
 };
 
-struct unkPokeSubStruct_2C
-{
-    u8 unk0;
-    u8 fill1;
-    u16 unk2;
-    u32 fill4;
-};
-
 struct unkPokeSubStruct_C
 {
     u8 unk0;
@@ -46,7 +39,6 @@ struct PokemonStruct
     u8 unkHasNextStage;  // set to a random value?
     struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
-    u8 fillA[0xC - 0xA];
     struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
@@ -56,8 +48,8 @@ struct PokemonStruct
     u8 unk24;
     u8 fill25[3];
     struct HeldItem heldItem;
-    struct unkPokeSubStruct_2C unk2C[4];
-    /* 0x4C */ u8 name[0xA];
+    struct PokemonMove moves[MAX_MON_MOVES];
+    /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
 };
 
 
@@ -88,7 +80,7 @@ struct PokemonStruct2
     u16 unk12;  // pokeHP
     struct Offense offense;  // offense (other offset)
     u32 unk18;  // unk1C
-    struct unkPokeSubStruct_2C unk1C[4];  // unk2C
+    struct PokemonMove moves[MAX_MON_MOVES];
     u8 fill3c[4];
     /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
@@ -97,14 +89,14 @@ struct PokemonStruct2
     u8 unk50;   // unk24
     u8 fill51[3];
     struct unkStruct_808E6F4 unk54;
-    u8 name[10];  // name (other offset)
+    u8 name[POKEMON_NAME_LENGTH];  // name (other offset)
 };
 
 struct unkStruct_203B45C
 {
     /* 0x0 */ struct PokemonStruct pokemon[NUM_SPECIES];
     /* 0x8DF8 */ struct PokemonStruct2 pokemon2[4];
-    /* 0x8F88 */ struct PokemonStruct team[4];
+    /* 0x8F88 */ struct PokemonStruct team[MAX_TEAM_MEMBERS];
 };
 
 struct EvolveStruct1
@@ -186,6 +178,8 @@ struct unkStruct_808E218
     // leveldata? (same size)
     struct unkStruct_808E6F4 unk0[3];
 };
+
+extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 void LoadMonsterParameters(void);
 struct unkStruct_203B45C *GetRecruitedPokemon(void);

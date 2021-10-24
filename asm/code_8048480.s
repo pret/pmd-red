@@ -25,10 +25,10 @@ _08048542:
 	ldr r0, _08048560
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl sub_80718D8
+	bl HasIQSkill
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048568
@@ -90,7 +90,7 @@ sub_80485B0:
 	mov r10, r2
 	ldr r4, [r1, 0x70]
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, _0804865C
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -238,7 +238,7 @@ _080486EA:
 	bne _080486FC
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_807A324
+	bl SendImmobilizeEndMessage
 _080486FC:
 	add r0, sp, 0x18
 	str r0, [sp]
@@ -310,7 +310,7 @@ _08048786:
 	bne _08048798
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_807A324
+	bl SendImmobilizeEndMessage
 _08048798:
 	add r0, sp, 0x18
 	str r0, [sp]
@@ -603,7 +603,7 @@ _080489A2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048A12
@@ -611,7 +611,7 @@ _080489A2:
 	movs r0, 0x2
 	ldrsh r1, [r6, r0]
 	mov r0, r9
-	bl sub_808E190
+	bl CanMonLearnMove
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -660,7 +660,7 @@ _08048A12:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048A58
@@ -741,7 +741,7 @@ _08048AB2:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048B4A
@@ -820,7 +820,7 @@ _08048B4A:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048B8C
@@ -892,7 +892,7 @@ _08048BD6:
 	ldr r4, [r0]
 	adds r0, r4, 0
 	str r2, [sp, 0x1C]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	ldr r2, [sp, 0x1C]
 	cmp r0, 0
@@ -946,7 +946,7 @@ _08048C3E:
 	movs r1, 0x1
 	bl DrawFieldGiveItemMenu
 	adds r4, r0, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048C60
@@ -1017,7 +1017,7 @@ _08048CD0:
 	bl sub_8063B54
 _08048CE2:
 	adds r0, r6, 0
-	bl sub_8044C88
+	bl ResetAction
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r4, 0
@@ -1102,12 +1102,12 @@ _08048D78:
 	ldr r0, _08048DA8
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8045B94
+	bl SetMessageArgument
 	ldr r0, _08048DAC
 _08048D9A:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0
 	b _08048DB2
 	.align 2, 0
@@ -1173,7 +1173,7 @@ sub_8048E04:
 	movs r3, 0
 	bl sub_8078B5C
 	movs r0, 0x5
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x4
 	bhi _08048E9E
 	lsls r0, 2
@@ -1247,7 +1247,7 @@ sub_8048EB0:
 	push {lr}
 	ldr r1, _08048EC0
 	ldr r1, [r1]
-	bl sub_80522A8
+	bl SendMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1259,7 +1259,7 @@ sub_8048EC4:
 	push {lr}
 	ldr r1, _08048ED4
 	ldr r1, [r1]
-	bl sub_80522A8
+	bl SendMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1271,7 +1271,7 @@ sub_8048ED8:
 	push {lr}
 	ldr r1, _08048EE8
 	ldr r1, [r1]
-	bl sub_80522A8
+	bl SendMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1283,7 +1283,7 @@ sub_8048EEC:
 	push {lr}
 	ldr r1, _08048EFC
 	ldr r1, [r1]
-	bl sub_80522A8
+	bl SendMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1299,7 +1299,7 @@ sub_8048F00:
 	ldr r0, _08048F24
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0x3C
 	movs r1, 0x46
 	bl sub_803E708
@@ -5181,7 +5181,7 @@ _0804ADBE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804ADDE
@@ -5328,7 +5328,7 @@ _0804AEDE:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AEFE
@@ -5713,7 +5713,7 @@ _0804B200:
 	.4byte _0804B250
 _0804B230:
 	movs r0, 0x2
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0x2
 	ldr r1, _0804B24C
 	movs r0, 0x1
@@ -5727,7 +5727,7 @@ _0804B230:
 _0804B24C: .4byte gUnknown_202F1AE
 _0804B250:
 	movs r0, 0x2
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0x2
 	ldr r1, _0804B270
 	movs r0, 0x2
@@ -5901,7 +5901,7 @@ _0804B398:
 	bl sub_80506F0
 _0804B3AA:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	movs r4, 0
 	mov r3, r8
 	ldrb r3, [r3, 0x19]
@@ -6577,12 +6577,12 @@ _0804B8B4:
 	mov r2, r8
 	subs r4, r2
 	adds r0, r4, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	add r4, r10
 	subs r5, r6
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r5, _0804B9E4
 	add r5, sp
 	ldr r3, [r5]
@@ -7188,12 +7188,12 @@ _0804BDD8:
 	mov r0, r8
 	subs r4, r0
 	adds r0, r4, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	add r4, r9
 	subs r5, r6
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r2, _0804BEF0
 	add r2, sp
 	ldr r1, [r2]
@@ -8435,10 +8435,10 @@ _0804C836:
 	cmp r7, 0x3F
 	bgt _0804C864
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r6, r0, 0
 	adds r0, r4, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r8, r0
 	mov r0, r8
 	muls r0, r5
@@ -8740,12 +8740,12 @@ _0804CA3C:
 	mov r0, r8
 	subs r4, r0
 	adds r0, r4, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	add r4, r10
 	subs r5, r6
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r2, _0804CBD4
 	add r2, sp
 	ldr r1, [r2]
@@ -8912,10 +8912,10 @@ _0804CC06:
 	b _0804D006
 _0804CC0E:
 	ldr r0, [sp, 0x4]
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r9, r0
 	ldr r0, [sp, 0x8]
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r10, r0
 	lsls r0, 5
 	mov r2, r9
@@ -8960,7 +8960,7 @@ _0804CC52:
 	bl sub_808411C
 	adds r6, r0, 0
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r0, 1
 	mov r8, r0
 	ldr r1, [sp, 0x8]
@@ -9145,7 +9145,7 @@ _0804CDA2:
 	b _0804CFFC
 _0804CDC8:
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r0, 0x3
 	str r0, [sp, 0x10]
 	b _0804CFD4
@@ -9354,11 +9354,11 @@ _0804CF16:
 	cmp r0, 0
 	bne _0804CFC0
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r0, 0x3
 	str r0, [sp, 0x10]
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r8, r4
 	cmp r0, 0x31
 	bgt _0804CF96
@@ -9619,7 +9619,7 @@ sub_804D154:
 	mov r8, r2
 	adds r4, r3, 0
 	movs r0, 0x3
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r3, r0, 0
 	cmp r4, 0
 	bge _0804D17E
@@ -9662,10 +9662,10 @@ _0804D1AC:
 	movs r6, 0x3F
 _0804D1B0:
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r1, sp
 	adds r2, r1, r4
 	ldrb r3, [r2]
@@ -9780,7 +9780,7 @@ _0804D282:
 	movs r0, 0x64
 	str r1, [sp, 0x108]
 	str r2, [sp, 0x10C]
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r1, [sp, 0x108]
 	ldr r2, [sp, 0x10C]
 	cmp r0, 0x3B
@@ -9935,12 +9935,12 @@ _0804D394:
 	adds r5, r0, 0
 _0804D3A4:
 	subs r0, r4, r6
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	add r4, r9
 	mov r1, r8
 	subs r0, r1, r5
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r2, [sp, 0x18]
 	adds r0, r2
 	mov r8, r0
@@ -9991,7 +9991,7 @@ _0804D40C:
 _0804D412:
 	movs r5, 0x1
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	movs r1, 0
 	cmp r0, 0x4F
 	bgt _0804D422
@@ -10016,7 +10016,7 @@ _0804D43A:
 	cmp r4, 0
 	beq _0804D44E
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x31
 	ble _0804D466
 	movs r4, 0
@@ -10224,10 +10224,10 @@ sub_804D5B0:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r0, r4, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	str r0, [sp]
 	str r6, [sp, 0x4]
 	mov r0, r9
@@ -10261,7 +10261,7 @@ sub_804D5F0:
 	ldrb r0, [r0, 0x5]
 	str r0, [sp, 0xC]
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	movs r1, 0
 	mov r10, r1
@@ -10280,10 +10280,10 @@ _0804D620:
 	mov r8, r0
 _0804D630:
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r4, 0x3
 	bgt _0804D644
 	adds r5, r0, 0
@@ -10488,7 +10488,7 @@ _0804D796:
 _0804D79C:
 	movs r0, 0x4
 	str r3, [sp, 0x1C]
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	movs r2, 0
 	mov r10, r2
@@ -11088,7 +11088,7 @@ _0804DBDA:
 	b _0804E018
 _0804DBEC:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r2, r10
 	adds r2, 0x1
 	str r2, [sp, 0x3C]
@@ -11133,7 +11133,7 @@ _0804DC34:
 	b _0804E00C
 _0804DC3C:
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x1
 	bne _0804DC48
 	b _0804DD50
@@ -11770,7 +11770,7 @@ _0804E0BE:
 	b _0804E302
 _0804E0C6:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x3B
 	bgt _0804E0D2
 	b _0804E302
@@ -11820,7 +11820,7 @@ _0804E11A:
 	str r1, [sp, 0x30]
 _0804E120:
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	str r0, [sp, 0x1C]
 	cmp r0, 0x1
 	beq _0804E14A
@@ -13304,7 +13304,7 @@ _0804EC06:
 	b _0804EED4
 _0804EC0C:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r4, r0
 	bgt _0804EC18
 	b _0804EED4
@@ -13324,10 +13324,10 @@ _0804EC20:
 	movs r5, 0xC7
 _0804EC30:
 	movs r0, 0xF
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r0, 0xF
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r4, 1
 	mov r1, sp
 	adds r2, r1, r4
@@ -13345,10 +13345,10 @@ _0804EC30:
 	movs r5, 0xC7
 _0804EC5C:
 	movs r0, 0xF
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r0, 0xF
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r4, 1
 	adds r4, r6, r4
 	movs r1, 0
@@ -13705,7 +13705,7 @@ sub_804EEE4:
 	b _0804F0C0
 _0804EF04:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r4, r0
 	bgt _0804EF10
 	b _0804F0C0
@@ -13801,10 +13801,10 @@ _0804EFA0:
 	movs r5, 0x3F
 _0804EFB0:
 	adds r0, r6, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r3, sp
 	adds r2, r3, r4
 	ldrb r3, [r2]
@@ -13967,7 +13967,7 @@ sub_804F0D0:
 	b _0804F266
 _0804F0EE:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r4, r0
 	bgt _0804F0FA
 	b _0804F266
@@ -14064,10 +14064,10 @@ _0804F18E:
 	mov r8, r7
 _0804F1A0:
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r1, sp
 	adds r2, r1, r4
 	ldrb r3, [r2]
@@ -14475,7 +14475,7 @@ sub_804F494:
 	mov r10, r0
 _0804F4BA:
 	movs r0, 0x4
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r6, r0, 0
 	movs r7, 0
 	adds r0, r5, 0
@@ -14745,7 +14745,7 @@ sub_804F694:
 	sub sp, 0x8
 	adds r7, r0, 0
 	movs r0, 0x6
-	bl sub_8084100
+	bl DungeonRandomCapped
 	subs r0, 0x1
 	cmp r0, 0x4
 	bls _0804F6B0
@@ -14777,7 +14777,7 @@ _0804F6DE:
 	adds r0, r7, 0
 	bl sub_804F5D8
 	movs r0, 0x2
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0
 	beq _0804F78E
 	movs r5, 0
@@ -15264,14 +15264,14 @@ _0804FAD4:
 	movs r5, 0
 	ldrsh r1, [r7, r5]
 	subs r0, r1
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	movs r1, 0x6
 	ldrsh r0, [r7, r1]
 	movs r2, 0x2
 	ldrsh r1, [r7, r2]
 	subs r0, r1
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r2, r0, 0
 	adds r0, r4, r2
 	movs r5, 0x1
@@ -15813,10 +15813,10 @@ sub_804FED0:
 	b _0804FEFA
 _0804FEDA:
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r4, 2
 	adds r4, r7
 	ldr r2, [r4]
@@ -15930,7 +15930,7 @@ _0804FFAA:
 	mov r0, r8
 	cmp r0, 0
 	beq _08050038
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r0, 2
 	mov r1, sp
 	adds r4, r1, r0
@@ -16064,7 +16064,7 @@ _080500BC:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _080500FA
@@ -16139,7 +16139,7 @@ _08050128:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _0805018E
@@ -16240,7 +16240,7 @@ _08050214:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _08050294
@@ -16265,7 +16265,7 @@ _08050254:
 	bl sub_8049590
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0
 	beq _0805026C
 	ldrh r0, [r4, 0x4]
@@ -16368,7 +16368,7 @@ _08050318:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _08050356
@@ -16478,7 +16478,7 @@ _080503E2:
 	cmp r2, 0
 	beq _08050410
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r0, 2
 	mov r1, sp
 	adds r2, r1, r0
@@ -16633,7 +16633,7 @@ _0805051C:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r7, 0
 	ble _0805055E
@@ -16788,7 +16788,7 @@ _0805064E:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r5, r0, 0
 	cmp r7, 0
 	ble _0805068C
@@ -16883,7 +16883,7 @@ sub_80506F0:
 _08050708:
 	ldr r4, _08050738
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	lsls r0, 2
 	adds r0, r4
 	ldr r4, [r0]
@@ -16892,7 +16892,7 @@ _08050708:
 	b _08050A7C
 _0805071C:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x31
 	bgt _0805073C
 	movs r0, 0x1
@@ -16913,7 +16913,7 @@ _0805073C:
 	str r1, [sp, 0x70]
 _08050746:
 	movs r0, 0x32
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r0, 0xA
 	str r0, [sp, 0x78]
 	movs r0, 0x2
@@ -16926,7 +16926,7 @@ _08050746:
 	str r4, [sp, 0x98]
 _08050762:
 	movs r0, 0x6
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r0, 0x2
 	str r0, [sp, 0x68]
 	cmp r0, 0
@@ -16993,11 +16993,11 @@ _080507DA:
 	str r1, [sp, 0x7C]
 _080507DE:
 	movs r0, 0x7
-	bl sub_8084100
+	bl DungeonRandomCapped
 	subs r0, 0x3
 	str r0, [sp, 0x84]
 	movs r0, 0x7
-	bl sub_8084100
+	bl DungeonRandomCapped
 	subs r1, r0, 0x3
 	ldr r6, [sp, 0x84]
 	add r6, r9
@@ -17314,7 +17314,7 @@ _08050A4E:
 	b _08050A6C
 _08050A54:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	movs r2, 0x1
 	str r2, [sp, 0x6C]
 	cmp r0, 0x31
@@ -17410,11 +17410,11 @@ _08050AEE:
 	movs r5, 0x4F
 _08050AFE:
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r4, r0, 0
 	adds r7, r4, 0x1
 	movs r0, 0x8
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r2, r0, 0x1
 	lsls r0, r4, 2
 	adds r0, r4
@@ -18150,11 +18150,11 @@ _08051062:
 	adds r5, r0, 0
 _08051072:
 	subs r0, r4, r6
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r2, r9
 	adds r4, r0, r2
 	subs r0, r7, r5
-	bl sub_8084100
+	bl DungeonRandomCapped
 	mov r3, r10
 	adds r7, r0, r3
 	adds r3, r4, r6
@@ -18969,7 +18969,7 @@ _08051694:
 	adds r6, r4, 0
 _080516B0:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x31
 	bgt _080516F4
 	ldr r4, [r6, 0x4]
@@ -19048,7 +19048,7 @@ _08051734:
 	adds r6, r3, 0
 _08051748:
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	cmp r0, 0x31
 	bgt _0805178C
 	ldr r4, [r6]
@@ -19230,7 +19230,7 @@ _08051864:
 	movs r0, 0
 	ldrsh r4, [r2, r0]
 	movs r0, 0x64
-	bl sub_8084100
+	bl DungeonRandomCapped
 	ldr r3, [sp, 0x10]
 	cmp r4, r0
 	ble _080518BA
@@ -19948,7 +19948,7 @@ sub_8051E7C:
 	ldr r0, _08051EB4
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80522A8
+	bl SendMessage
 	b _080520F6
 	.align 2, 0
 _08051EB4: .4byte gUnknown_80FDDF0
@@ -20208,7 +20208,7 @@ _0805207A:
 	ldr r0, _080520E8
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80522A8
+	bl SendMessage
 	movs r0, 0x14
 	movs r1, 0x3C
 	bl sub_803E708
@@ -20229,7 +20229,7 @@ _080520EC:
 	ldr r0, _08052108
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80522A8
+	bl SendMessage
 _080520F6:
 	add sp, 0x14
 	pop {r3-r5}

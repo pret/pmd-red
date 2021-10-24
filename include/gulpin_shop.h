@@ -13,7 +13,7 @@ struct unkStruct_203B26C
     u32 unk0;
     s32 state;
     u32 unk8;
-    s16 unkC;
+    s16 speciesNum; // species of chosen Pokemon
     u8 unkE;
     struct unkStruct_Gulpin * unk10;
     u32 unk14;

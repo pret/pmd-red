@@ -2,8 +2,6 @@
 #include "input.h"
 #include "memory.h"
 
-extern struct Inputs gRealInputs;
-
 struct unkStruct_203B344
 {
     u32 state; // state variable

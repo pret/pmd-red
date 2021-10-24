@@ -11,7 +11,6 @@ extern u8 gUnknown_810A36B[];
 extern s16 gUnknown_810A378[];
 extern s32 gUnknown_810A390[];
 extern u32 gUnknown_81076E4[];
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 
 struct unkStruct_808E9EC
 {
@@ -50,10 +49,10 @@ extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void xxx_save_poke_sub_2c_8094108(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+extern void SavePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
 void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-void xxx_restore_poke_sub_2c_8094128(struct unkStruct_8094924*, struct unkPokeSubStruct_2C*);
+void RestorePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
 
 extern void sub_8094184(struct unkStruct_8094924*, void*);
 extern void sub_809449C(struct unkStruct_8094924*, void*);
@@ -650,7 +649,7 @@ void sub_808ED00() {
         gRecruitedPokemonRef->team[i] = gRecruitedPokemonRef->pokemon[team[i]];
     }
 
-    for (; i < 4; i++) {
+    for (; i < MAX_TEAM_MEMBERS; i++) {
         gRecruitedPokemonRef->team[i].unk0 = 0;
     }
 }
@@ -696,7 +695,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         SavePokemonStruct(&backup, pokemon);
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         if ((u8)i[gRecruitedPokemonRef->team].unk0 & 1) {
             data_u8 = 0xff;
         }
@@ -727,7 +726,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->pokemon[i]);
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         RestoreIntegerBits(&backup, &data_u8, 1);
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1) {
@@ -769,7 +768,7 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, &pokemon->unk20, 24);
   SaveIntegerBits(a1, &pokemon->unk24, 4);
   SaveHeldItem(a1, &pokemon->heldItem);
-  xxx_save_poke_sub_2c_8094108(a1, pokemon->unk2C);
+  SavePokemonMoves(a1, pokemon->moves);
   SaveIntegerBits(a1, pokemon->name, 80);
 }
 
@@ -796,7 +795,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, &pokemon->unk20, 24);
   RestoreIntegerBits(a1, &pokemon->unk24, 4);
   RestoreHeldItem(a1, &pokemon->heldItem);
-  xxx_restore_poke_sub_2c_8094128(a1, pokemon->unk2C);
+  RestorePokemonMoves(a1, pokemon->moves);
   RestoreIntegerBits(a1, pokemon->name, 80);
 }
 
@@ -830,7 +829,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[1], 8);
     SaveIntegerBits(&backup, &pokemon2->unk18, 24);
-    sub_8094184(&backup, &pokemon2->unk1C);
+    sub_8094184(&backup, &pokemon2->moves);
     SaveItemSlot(&backup, &pokemon2->itemSlot);
     sub_809449C(&backup, &pokemon2->unk44);
     sub_809449C(&backup, &pokemon2->unk48);
@@ -878,7 +877,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[1], 8);
     RestoreIntegerBits(&backup, &pokemon2->unk18, 24);
-    sub_80941FC(&backup, &pokemon2->unk1C);
+    sub_80941FC(&backup, &pokemon2->moves);
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
     sub_809447C(&backup, &pokemon2->unk44);
     sub_809447C(&backup, &pokemon2->unk48);

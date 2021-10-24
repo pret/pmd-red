@@ -22,7 +22,4 @@ enum NaturePersonalities {
 #define NUM_QUIZ_QUESTIONS 55
 #define MAX_ASKED_QUESTIONS 8
 
-#define MALE 0
-#define FEMALE 1
-
 #endif

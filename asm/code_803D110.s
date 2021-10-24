@@ -789,7 +789,7 @@ _0803D6F8: .4byte 0x0001c5a8
 sub_803D6FC:
 	push {r4,lr}
 	ldr r0, _0803D720
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r3, r0, 0
 	movs r2, 0
 	ldr r0, _0803D724
@@ -829,7 +829,7 @@ sub_803D73C:
 	sub sp, 0x8
 	adds r4, r0, 0
 	ldr r0, _0803D784
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r7, r0, 0
 	movs r0, 0xC
 	mov r8, r0
@@ -874,7 +874,7 @@ _0803D798:
 	b _0803D7EE
 _0803D79C:
 	ldr r0, _0803D7FC
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r7, r0, 0
 	movs r6, 0
 	ldr r2, _0803D800
@@ -1127,7 +1127,7 @@ sub_803D970:
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	ldr r0, _0803D9EC
-	bl sub_8084100
+	bl DungeonRandomCapped
 	adds r6, r0, 0
 	movs r3, 0
 	ldr r1, _0803D9F0
@@ -3688,7 +3688,7 @@ sub_803EDF0:
 	b _0803EF42
 _0803EE06:
 	ldr r0, [r6, 0x4]
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -4668,7 +4668,7 @@ sub_803F580:
 	b _0803F7A0
 _0803F59E:
 	adds r0, r6, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803F5AC
@@ -4914,7 +4914,7 @@ _0803F774:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl entityExists
+	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803F79A

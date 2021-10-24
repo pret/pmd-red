@@ -409,8 +409,8 @@ gPelipperBoard_JobList: @ 80E03A0
         .string "Job List\0"
         .align 2,0
 
-	.global gUnknown_80E03AC
-gUnknown_80E03AC: @ 80E03AC
+	.global gPelipperBoard_Accepted
+gPelipperBoard_Accepted: @ 80E03AC
         .string "Accepted\0"
         .align 2,0
 

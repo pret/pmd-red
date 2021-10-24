@@ -140,7 +140,7 @@ sub_802EC10:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802EC40
-	bl sub_80969AC
+	bl GetNumAcceptedJobs
 	cmp r0, 0x7
 	ble _0802EC4A
 _0802EC40:
