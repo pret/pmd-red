@@ -715,7 +715,7 @@ gEvolutionStrings: @ 810DFCC
         NoMoreText:
         .string "Evolution: #>54.No more\0"
         .align 2,0
-        
+
         .global PossibleText
         PossibleText:
         .string "Evolution: #>54.Possible\0"
@@ -1586,7 +1586,7 @@ gUnknown_8116258: @ 8116258
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .4byte CleanHelperPelipper
-        .4byte HelperPelliperCallback
+        .4byte HelperPelipperCallback
 
 	.global gUnknown_8116268
 gUnknown_8116268: @ 8116268
