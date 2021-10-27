@@ -3,9 +3,9 @@
 
 #include "constants/ability.h"
 #include "constants/tactic.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 
-extern bool8 HasAbility(struct DungeonEntity*, u8);
 extern bool8 HasTactic(struct DungeonEntity*, u8);
 
 bool8 ShouldAvoidEnemies(struct DungeonEntity *pokemon)
