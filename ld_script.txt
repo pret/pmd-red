@@ -191,6 +191,8 @@ SECTIONS {
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         asm/code_807001C.o(.text);
+        src/dungeon_capabilities.o(.text);
+        asm/code_8070CD0.o(.text);
         src/dungeon_movement.o(.text);
         asm/code_8075BA4.o(.text);
         src/code_80848F0.o(.text);

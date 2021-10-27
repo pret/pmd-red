@@ -14536,7 +14536,7 @@ _0805ED3E:
 _0805ED50:
 	mov r0, r8
 	movs r1, 0
-	bl sub_80570F4
+	bl IsCharging
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805ED96
@@ -19393,7 +19393,7 @@ _08061530:
 _08061532:
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061542
@@ -19747,7 +19747,7 @@ _080617F4:
 	bl sub_8044F5C
 	ldr r0, [sp, 0x74]
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061832
@@ -20864,7 +20864,7 @@ _080620C4:
 	bl sub_8044F5C
 	ldr r0, [sp, 0x110]
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08062102
@@ -31411,7 +31411,7 @@ _080675C0:
 	beq _08067600
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067610
@@ -36327,7 +36327,7 @@ _08069C74:
 	adds r4, 0x1
 _08069C8E:
 	mov r0, r8
-	bl sub_8071494
+	bl ShouldAvoidEnemies
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069CAA
@@ -37951,12 +37951,12 @@ _0806A8C8:
 	beq _0806A90E
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A8EE
 	adds r0, r4, 0
-	bl sub_8070CD0
+	bl CannotAct
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806A90E
@@ -43164,7 +43164,7 @@ _0806D088:
 	ldr r0, [sp, 0x44]
 	mov r9, r0
 	adds r0, r5, 0
-	bl sub_8070CD0
+	bl CannotAct
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A2

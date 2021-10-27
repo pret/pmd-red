@@ -616,7 +616,7 @@ _080489A2:
 	lsrs r5, r0, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080489DC
@@ -769,7 +769,7 @@ _08048AF4:
 _08048AF6:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048B06
@@ -901,7 +901,7 @@ _08048BD6:
 	movs r7, 0x1
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	ldr r2, [sp, 0x1C]
 	cmp r0, 0

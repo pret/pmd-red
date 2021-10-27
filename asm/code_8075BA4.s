@@ -27792,7 +27792,7 @@ sub_8083904:
 	ldrb r6, [r5]
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083954

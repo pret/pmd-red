@@ -9231,8 +9231,8 @@ _080570EA:
 _080570F0: .4byte gUnknown_81069F4
 	thumb_func_end sub_80570AC
 
-	thumb_func_start sub_80570F4
-sub_80570F4:
+	thumb_func_start IsCharging
+IsCharging:
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -9275,7 +9275,7 @@ _0805713E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80570F4
+	thumb_func_end IsCharging
 
 	thumb_func_start sub_8057144
 sub_8057144:
