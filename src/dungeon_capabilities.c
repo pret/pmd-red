@@ -1,40 +1,25 @@
 #include "global.h"
 #include "dungeon_capabilities.h"
 
-#include "constants/dungeon.h"
-#include "dungeon_ai.h"
+#include "constants/status.h"
 
-extern bool8 CannotMove(struct DungeonEntity*, bool8);
-extern bool8 CannotAct(struct DungeonEntity*);
-extern bool8 IsCharging(struct DungeonEntity*, bool8);
-
-static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)
-{
-    if (pokemonData->joinLocation == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonData->joinLocation == DUNGEON_RESCUE_TEAM_BASE)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-bool8 CannotUseItems(struct DungeonEntity *pokemon)
+bool8 CannotMove(struct DungeonEntity *pokemon, bool8 checkBlinker)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (pokemonData->clientType == CLIENT_TYPE_CLIENT
-        || JoinLocationCannotUseItems(pokemonData)
-        || (!pokemonData->isLeader && ShouldAvoidEnemies(pokemon))
-        || CannotMove(pokemon, FALSE)
-        || CannotAct(pokemon))
+    if ((checkBlinker && pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
+        || pokemonData->sleepStatus == SLEEP_STATUS_SLEEP
+        || pokemonData->sleepStatus == SLEEP_STATUS_NAPPING
+        || pokemonData->sleepStatus == SLEEP_STATUS_NIGHTMARE
+        || pokemonData->volatileStatus == VOLATILE_STATUS_PAUSED
+        || pokemonData->volatileStatus == VOLATILE_STATUS_INFATUATED
+        || pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
     {
         return TRUE;
     }
-    if (IsCharging(pokemon, FALSE))
+    if (pokemonData->terrifiedTurnsLeft != 0)
     {
         return TRUE;
     }
     return FALSE;
 }
+

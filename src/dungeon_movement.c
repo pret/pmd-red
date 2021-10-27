@@ -5,7 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "dungeon_global_data.h"
-#include "dungeon_capabilities.h"
+#include "dungeon_capabilities_1.h"
 #include "map.h"
 
 extern char gAvailablePokemonNames[];
