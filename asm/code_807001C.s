@@ -1124,7 +1124,7 @@ sub_8070828:
 _08070840:
 	adds r0, r4, 0
 	movs r1, 0x1B
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807085E
@@ -1138,7 +1138,7 @@ _08070840:
 _0807085E:
 	adds r0, r4, 0
 	movs r1, 0x4A
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807087C

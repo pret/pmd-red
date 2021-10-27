@@ -3873,7 +3873,7 @@ _080449F2:
 _08044A24:
 	adds r0, r5, 0
 	movs r1, 0x32
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044A46
@@ -3890,7 +3890,7 @@ _08044A24:
 _08044A46:
 	adds r0, r5, 0
 	movs r1, 0x3F
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044A60
@@ -3903,7 +3903,7 @@ _08044A46:
 _08044A60:
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044A7A

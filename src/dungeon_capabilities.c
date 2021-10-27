@@ -1,8 +1,9 @@
 #include "global.h"
 #include "dungeon_capabilities.h"
-#include "constants/dungeon.h"
 
-extern bool8 ShouldAvoidEnemies(struct DungeonEntity*);
+#include "constants/dungeon.h"
+#include "dungeon_ai.h"
+
 extern bool8 CannotMove(struct DungeonEntity*, bool8);
 extern bool8 CannotAct(struct DungeonEntity*);
 extern bool8 IsCharging(struct DungeonEntity*, bool8);

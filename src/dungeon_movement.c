@@ -5,6 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "dungeon_global_data.h"
+#include "dungeon_capabilities.h"
 #include "map.h"
 
 extern char gAvailablePokemonNames[];
@@ -13,7 +14,6 @@ extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern bool8 IsMovingClient(struct DungeonEntity*);
-extern bool8 CannotUseItems(struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SendMessage(struct DungeonEntity*, char*);
 extern void DecideUseItem(struct DungeonEntity*);

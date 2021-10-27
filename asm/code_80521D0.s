@@ -3001,7 +3001,7 @@ _08053BC0:
 	beq _08053C4A
 	adds r0, r5, 0
 	movs r1, 0x3C
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053BFA
@@ -3266,7 +3266,7 @@ _08053DCE:
 _08053DF2:
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053E4A
@@ -5990,7 +5990,7 @@ sub_8055728:
 _08055768:
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055790
@@ -8529,7 +8529,7 @@ _08056BCA:
 	ldrsh r4, [r1, r0]
 	adds r0, r7, 0
 	movs r1, 0x33
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056BE0
@@ -8595,7 +8595,7 @@ _08056C3C:
 	bne _08056C5A
 	adds r0, r6, 0
 	movs r1, 0x1D
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056C5A
@@ -8603,7 +8603,7 @@ _08056C3C:
 _08056C5A:
 	adds r0, r7, 0
 	movs r1, 0x30
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056C86
@@ -9481,7 +9481,7 @@ sub_805727C:
 	beq _080572DE
 	adds r0, r6, 0
 	movs r1, 0x26
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080572D2
@@ -9503,7 +9503,7 @@ _080572E0:
 	beq _08057300
 	adds r0, r5, 0
 	movs r1, 0x4C
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08057300
@@ -9539,7 +9539,7 @@ _0805731C:
 _08057324:
 	adds r0, r5, 0
 	movs r1, 0x26
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	bne _08057336
