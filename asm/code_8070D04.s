@@ -5,39 +5,6 @@
 
 	.text
 
-	thumb_func_start CannotAct
-CannotAct:
-	push {lr}
-	ldr r1, [r0, 0x70]
-	adds r0, r1, 0
-	adds r0, 0xA8
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	beq _08070CE2
-	cmp r0, 0
-	bne _08070CFE
-_08070CE2:
-	adds r0, r1, 0
-	adds r0, 0xB0
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08070CFE
-	cmp r0, 0x6
-	beq _08070CFE
-	adds r0, r1, 0
-	adds r0, 0xC0
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08070CFE
-	movs r0, 0
-	b _08070D00
-_08070CFE:
-	movs r0, 0x1
-_08070D00:
-	pop {r1}
-	bx r1
-	thumb_func_end CannotAct
-
 	thumb_func_start sub_8070D04
 sub_8070D04:
 	push {lr}

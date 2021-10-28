@@ -7374,9 +7374,20 @@ gUnknown_81069D4: @ 81069D4
 gUnknown_81069F4: @ 81069F4
 	.incbin "baserom.gba", 0x1069F4, 0x28
 
-	.global gUnknown_8106A1C
-gUnknown_8106A1C: @ 8106A1C
-	.incbin "baserom.gba", 0x106A1C, 0x30
+	.global gMultiTurnChargingStatuses
+gMultiTurnChargingStatuses: @ 8106A1C
+		.include "include/constants/status.h"
+		.4byte CHARGING_STATUS_SOLARBEAM
+		.4byte CHARGING_STATUS_SKY_ATTACK
+		.4byte CHARGING_STATUS_RAZOR_WIND
+		.4byte CHARGING_STATUS_FOCUS_PUNCH
+		.4byte CHARGING_STATUS_SKULL_BASH
+		.4byte CHARGING_STATUS_FLY
+		.4byte CHARGING_STATUS_BOUNCE
+		.4byte CHARGING_STATUS_DIVE
+		.4byte CHARGING_STATUS_DIG
+		.4byte 0
+		.string "pksdir0\0"
 
 	.global gUnknown_8106A4C
 gUnknown_8106A4C: @ 8106A4C

@@ -5,5 +5,7 @@
 
 // 0x70C60
 bool8 CannotUseItems(struct DungeonEntity *pokemon);
+// 0x70CD0
+bool8 CannotAct(struct DungeonEntity *pokemon);
 
 #endif

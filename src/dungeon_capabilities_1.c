@@ -2,11 +2,10 @@
 #include "dungeon_capabilities_1.h"
 
 #include "constants/dungeon.h"
+#include "constants/status.h"
+#include "charge_move.h"
 #include "dungeon_ai.h"
-
-extern bool8 CannotMove(struct DungeonEntity*, bool8);
-extern bool8 CannotAct(struct DungeonEntity*);
-extern bool8 IsCharging(struct DungeonEntity*, bool8);
+#include "dungeon_capabilities.h"
 
 static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)
 {
@@ -33,6 +32,23 @@ bool8 CannotUseItems(struct DungeonEntity *pokemon)
         return TRUE;
     }
     if (IsCharging(pokemon, FALSE))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 CannotAct(struct DungeonEntity *pokemon)
+{
+    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    if ((pokemonData->sleepStatus != SLEEP_STATUS_SLEEPLESS
+        && pokemonData->sleepStatus != SLEEP_STATUS_NONE)
+        || pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN
+        || pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
+    {
+        return TRUE;
+    }
+    if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
     {
         return TRUE;
     }
