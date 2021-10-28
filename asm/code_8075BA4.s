@@ -74,7 +74,7 @@ _08075C0A:
 	beq _08075C3C
 	adds r0, r5, 0
 	movs r1, 0x2F
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075C3C
@@ -230,7 +230,7 @@ _08075D50: .4byte gUnknown_80FCD54
 _08075D54:
 	adds r0, r4, 0
 	movs r1, 0x36
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D70
@@ -243,7 +243,7 @@ _08075D6C: .4byte gUnknown_80FCD58
 _08075D70:
 	adds r0, r4, 0
 	movs r1, 0x49
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D8C
@@ -315,7 +315,7 @@ sub_8075DBC:
 	strb r0, [r4]
 	adds r0, r5, 0
 	movs r1, 0x2F
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E1E
@@ -413,7 +413,7 @@ _08075EB2:
 	strb r0, [r4]
 	adds r0, r5, 0
 	movs r1, 0x2F
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075EDC
@@ -763,7 +763,7 @@ sub_807614C:
 	bne _08076206
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080761A8
@@ -870,7 +870,7 @@ _0807624A:
 	bl sub_80708B4
 	adds r0, r5, 0
 	movs r1, 0x42
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807627C
@@ -985,7 +985,7 @@ _08076344:
 	bl sub_80418D4
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080763DA
@@ -1118,7 +1118,7 @@ _08076458: .4byte gUnknown_80FD524
 _0807645C:
 	adds r0, r5, 0
 	movs r1, 0x45
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807647C
@@ -1217,7 +1217,7 @@ _08076520:
 _0807652C:
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080765BA
@@ -1352,7 +1352,7 @@ _08076640: .4byte gUnknown_80FD524
 _08076644:
 	adds r0, r5, 0
 	movs r1, 0x45
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076664
@@ -1440,7 +1440,7 @@ _080766F0:
 _080766FC:
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807678A
@@ -1558,7 +1558,7 @@ _080767CE:
 	bne _080768C8
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076814
@@ -2382,7 +2382,7 @@ _08076EAC: .4byte gUnknown_80FD550
 _08076EB0:
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076EE4
@@ -2813,7 +2813,7 @@ sub_807723C:
 	beq _08077258
 	adds r0, r4, 0
 	movs r1, 0x48
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807725C
@@ -2946,7 +2946,7 @@ _0807734C: .4byte gUnknown_80FD550
 _08077350:
 	adds r0, r5, 0
 	movs r1, 0x9
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807738C
@@ -3301,7 +3301,7 @@ _08077616:
 	bne _080776B6
 	adds r0, r5, 0
 	movs r1, 0x1E
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077664
@@ -3390,7 +3390,7 @@ sub_80776C0:
 	bne _08077776
 	adds r0, r4, 0
 	movs r1, 0x1F
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077718
@@ -3489,7 +3489,7 @@ _080777A2:
 _080777B4:
 	adds r0, r5, 0
 	movs r1, 0x16
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -3564,7 +3564,7 @@ _08077850:
 _0807785C:
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080778EA
@@ -3918,7 +3918,7 @@ _08077B30: .4byte gUnknown_80FD500
 _08077B34:
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077B58
@@ -8103,7 +8103,7 @@ sub_8079D1C:
 	ldr r6, [r4, 0x70]
 	adds r0, r4, 0
 	movs r1, 0x25
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _08079D50
@@ -10212,7 +10212,7 @@ MoveIfPossible:
 	strb r6, [r0]
 	adds r0, r5, 0
 	movs r1, 0x7
-	bl sub_80718AC
+	bl HasTactic
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807ADFA
@@ -10232,7 +10232,7 @@ MoveIfPossible:
 _0807ADFA:
 	adds r0, r5, 0
 	movs r1, 0x9
-	bl sub_80718AC
+	bl HasTactic
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807AE12
@@ -10599,7 +10599,7 @@ _0807B09E:
 	str r2, [r0]
 	mov r0, r8
 	movs r1, 0x8
-	bl sub_80718AC
+	bl HasTactic
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B0E4
@@ -10648,7 +10648,7 @@ _0807B124:
 _0807B12C:
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_80718AC
+	bl HasTactic
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B17C
@@ -12043,7 +12043,7 @@ _0807BBB6:
 _0807BBC6:
 	mov r0, r10
 	movs r1, 0x8
-	bl sub_80718AC
+	bl HasTactic
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807BBD6
@@ -14445,7 +14445,7 @@ _0807CDE4:
 	bl SetMessageArgument
 	adds r0, r6, 0
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CE28
@@ -14871,7 +14871,7 @@ sub_807D148:
 	bl SetMessageArgument
 	adds r0, r5, 0
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D188
@@ -15959,7 +15959,7 @@ sub_807DA14:
 	mov r10, r0
 	adds r0, r6, 0
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DA50
@@ -16622,7 +16622,7 @@ _0807DF62:
 	beq _0807DF60
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DF60
@@ -16977,7 +16977,7 @@ sub_807E254:
 	adds r6, r0, 0
 	adds r7, r1, 0
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E274
@@ -16989,7 +16989,7 @@ _0807E270: .4byte gAvailablePokemonNames
 _0807E274:
 	adds r0, r7, 0
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E2A4
@@ -17815,7 +17815,7 @@ _0807E90E:
 	bl sub_8070774
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E958
@@ -17882,7 +17882,7 @@ _0807E9A4:
 	bhi _0807E9FE
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E9D4
@@ -19209,7 +19209,7 @@ sub_807F43C:
 	mov r8, r1
 	mov r0, r8
 	movs r1, 0xE
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F470
@@ -27792,7 +27792,7 @@ sub_8083904:
 	ldrb r6, [r5]
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083954
@@ -28979,7 +28979,7 @@ sub_808417C:
 _080841C4:
 	adds r0, r5, 0
 	movs r1, 0x14
-	bl sub_8071824
+	bl HasAbility
 	lsls r0, 24
 	cmp r0, 0
 	beq _080841DC

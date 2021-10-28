@@ -170,7 +170,7 @@ ALIGNED(4) const char gUnknown_80DF9F8[] = _(
 	"Here is your reward from the Pokémon\n"
 	"Rescue Organization!");
 
-ALIGNED(4) const char gUnknown_80DFAA8[] = 
+ALIGNED(4) const char gUnknown_80DFAA8[] =
 	" I hope you will keep on\n"
 	"rescuing your friends in\n"
 	"dire straits.#P"
@@ -192,7 +192,7 @@ u32 sub_802B2D4(void)
 {
   s32 iVar1;
   struct OpenedFile *faceFile;
-  
+
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
@@ -272,7 +272,7 @@ void sub_802B3E0(void)
         }
         // Print and expand placeholders?
         ExpandPlaceholdersBuffer(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
-        // Display to screen with Peliper face
+        // Display to screen with Pelipper face
         sub_80141B4(gUnknown_203B2C8->teamName, 0, &gUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 1:
@@ -355,7 +355,7 @@ void sub_802B5B8(void)
 void sub_802B5FC(void)
 {
   s32 temp;
-  
+
   if (sub_80144A4(&temp) == 0) {
     if (!WriteSavePak()) {
       FinishWriteSavePak();
@@ -368,7 +368,7 @@ void sub_802B5FC(void)
 void sub_802B624(void)
 {
   s32 temp;
-  
+
   if (sub_80144A4(&temp) == 0) {
     sub_802B548(5);
   }

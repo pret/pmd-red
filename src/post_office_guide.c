@@ -77,9 +77,9 @@ enum PostOfficeStates
 
 enum PostOfficeMenuActions
 {
-    POST_OFFICE, 
-    BULLETIN_BOARD, 
-    DELIVERY, 
+    POST_OFFICE,
+    BULLETIN_BOARD,
+    DELIVERY,
     FRIEND_RESCUE,
     CANCEL,
     EXIT,
@@ -168,7 +168,7 @@ ALIGNED(4) const char GettingHelp_Text[] = _("Getting Help");
 
 ALIGNED(4) const u8 wonder_mail_fill[] = _("pksdir0");
 
-const struct UnkTextStruct2 gUnknown_80E1EFC = 
+const struct UnkTextStruct2 gUnknown_80E1EFC =
 {
     0, 0, 0, 0,
     3, 0, 0, 0,
@@ -180,7 +180,7 @@ const struct UnkTextStruct2 gUnknown_80E1EFC =
 
 const u8 gUnkData_80E1F14[] = {1, 0, 8, 0};
 
-const struct UnkTextStruct2 gUnknown_80E1F18 = 
+const struct UnkTextStruct2 gUnknown_80E1F18 =
 {
     0, 0, 0, 0,
     6, 0, 0, 0,
@@ -221,7 +221,7 @@ u32 CreateHelperPelipperMenu(s16 speciesID)
   char *monName;
   struct OpenedFile *faceFile;
   int species_32;
-  
+
   species_32 = speciesID;
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -249,7 +249,7 @@ u32 CreateHelperPelipperMenu(s16 speciesID)
 }
 
 
-u32 HelperPelliperCallback(void)
+u32 HelperPelipperCallback(void)
 {
   switch(gPostOfficeHelper->state) {
       case IM_GUIDE_START_MENU:
@@ -304,7 +304,7 @@ void UpdateHelperPelipperText(void)
     faceFile = NULL;
     if(gPostOfficeHelper->faceFile != NULL)
         faceFile = &gPostOfficeHelper->faceFile;
-    
+
     switch(gPostOfficeHelper->state)
     {
         case DISPLAY_GET_HELP_MENU:
@@ -535,7 +535,7 @@ void ReturnToGetHelpMenu(void)
 
 u32 sub_80319A4(u8 param_1,u8 param_2,int param_3)
 {
-  
+
   gUnknown_203B330 = MemoryAlloc(sizeof(struct unkStruct_203B330),8);
   gUnknown_203B330->unkC = param_1;
   gUnknown_203B330->unkD = param_2;
@@ -582,7 +582,7 @@ void sub_8031A3C(void)
 void sub_8031A84(void)
 {
   s32 iVar1;
-  
+
   sub_8006518(gUnknown_203B330->unk18);
   gUnknown_203B330->unk18[gUnknown_203B330->unk10] = gUnknown_80E1F18;
   if (gUnknown_203B330->unkC == 2) {

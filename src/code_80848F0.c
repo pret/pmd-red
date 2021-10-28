@@ -3,11 +3,11 @@
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
-extern void SkarmonyPreFightDialogue();
-extern void SkarmonyReFightDialogue();
+extern void SkarmoryPreFightDialogue();
+extern void SkarmoryReFightDialogue();
 extern void sub_8086E40();
-extern void TeamMeaniePreFightDialogue();
-extern void TeamMeanieReFightDialogue();
+extern void TeamMeaniesPreFightDialogue();
+extern void TeamMeaniesReFightDialogue();
 extern void sub_8087130();
 extern void ZapdosPreFightDialogue();
 extern void ZapdosReFightDialogue();
@@ -97,24 +97,24 @@ extern void sub_808B0B0(u8);
 
 void DisplayPreFightDialogue(void)
 {
-  
+
   switch(gDungeonGlobalData->unk3A0D) {
       case 0:
         break;
       case 1:
-        SkarmonyPreFightDialogue();
+        SkarmoryPreFightDialogue();
         break;
       case 2:
-        SkarmonyReFightDialogue();
+        SkarmoryReFightDialogue();
         break;
       case 3:
         sub_8086E40();
         break;
       case 4:
-        TeamMeaniePreFightDialogue();
+        TeamMeaniesPreFightDialogue();
         break;
       case 5:
-        TeamMeanieReFightDialogue();
+        TeamMeaniesReFightDialogue();
         break;
       case 6:
         sub_8087130();

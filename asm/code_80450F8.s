@@ -3981,7 +3981,7 @@ _08046F2A:
 	lsrs r5, r0, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8070B6C
+	bl CannotMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046F64
