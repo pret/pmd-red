@@ -22,9 +22,9 @@ struct DungeonEntityData
     u8 fillB;
     /* 0xC */ u16 IQ;
     /* 0xE */ s16 HP;
-    /* 0x10 */ u16 maxHP;
+    /* 0x10 */ s16 maxHP;
     // Bosses have higher HP than normal for their level. This is the max HP they would normally have given their level.
-    /* 0x12 */ u16 originalHP;
+    /* 0x12 */ s16 originalHP;
     /* 0x14 */ u8 attack;
     /* 0x15 */ u8 specialAttack;
     /* 0x16 */ u8 defense;
@@ -94,7 +94,7 @@ struct DungeonEntityData
     // Bitwise flags corresponding to selected IQ skills.
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
-    /* 0x94 */ u8 tactics;
+    /* 0x94 */ u8 tactic;
     u8 fill95[0xA4 - 0x95];
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];

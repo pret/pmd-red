@@ -5988,14 +5988,14 @@ gUnknown_8100B80: @ 8100B80
 gUnknown_8100BC0: @ 8100BC0
 	.incbin "baserom.gba", 0x100BC0, 0xD0
 
-@ Skarmony Re-Fight?
+@ Skarmory Re-Fight?
 
 	.global gUnknown_8100C90
 gUnknown_8100C90: @ 8100C90
         .byte 0x00, 0x00, 0x00, 0x0D
         .byte 0xFC, 0x00, 0x00, 0x00
         .4byte _08100C9C
-    
+
         .global _08100C9C
         _08100C9C:
         .string " You again?!\n"
@@ -7374,9 +7374,20 @@ gUnknown_81069D4: @ 81069D4
 gUnknown_81069F4: @ 81069F4
 	.incbin "baserom.gba", 0x1069F4, 0x28
 
-	.global gUnknown_8106A1C
-gUnknown_8106A1C: @ 8106A1C
-	.incbin "baserom.gba", 0x106A1C, 0x30
+	.global gMultiTurnChargingStatuses
+gMultiTurnChargingStatuses: @ 8106A1C
+		.include "include/constants/status.h"
+		.4byte CHARGING_STATUS_SOLARBEAM
+		.4byte CHARGING_STATUS_SKY_ATTACK
+		.4byte CHARGING_STATUS_RAZOR_WIND
+		.4byte CHARGING_STATUS_FOCUS_PUNCH
+		.4byte CHARGING_STATUS_SKULL_BASH
+		.4byte CHARGING_STATUS_FLY
+		.4byte CHARGING_STATUS_BOUNCE
+		.4byte CHARGING_STATUS_DIVE
+		.4byte CHARGING_STATUS_DIG
+		.4byte 0
+		.string "pksdir0\0"
 
 	.global gUnknown_8106A4C
 gUnknown_8106A4C: @ 8106A4C
@@ -7774,7 +7785,7 @@ gUnknown_8106FD5: @ 8106FD5
 	.global gUnknown_8106FDD
 gUnknown_8106FDD: @ 8106FDD
 @ replacing .incbin "baserom.gba", 0x00106fdd, 0x8
-        .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80	
+        .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
         .global gUnknown_8106FE5
 gUnknown_8106FE5: @ 8106FE5
@@ -8231,11 +8242,11 @@ gUnknown_81098EC: @ 81098EC
 
 	.global gUnknown_8109908
 gUnknown_8109908: @ 8109908
-        .byte 0x87, 0x41, 0x00, 0x00 @ apparently shows A in memory viewer 
+        .byte 0x87, 0x41, 0x00, 0x00 @ apparently shows A in memory viewer
 
 	.global gUnknown_810990C
 gUnknown_810990C: @ 810990C
-        .byte 0x87, 0x40, 0x00, 0x00 @ apparently shows @ in memory viewer 
+        .byte 0x87, 0x40, 0x00, 0x00 @ apparently shows @ in memory viewer
 
 	.global gUnknown_8109910
 gUnknown_8109910: @ 8109910
@@ -8352,10 +8363,10 @@ gUnknown_810A36B: @ 810A36B
 	.global gUnknown_810A378
 gUnknown_810A378: @ 810A378
         @ replacing .incbin "baserom.gba", 0x0010a378, 0x18
-        .2byte 0x01 
-        .2byte 0x19 
-        .2byte 0x01 
-        .2byte 0x01 
+        .2byte 0x01
+        .2byte 0x19
+        .2byte 0x01
+        .2byte 0x01
         .2byte 0x3e7
         .2byte 0x3e7
         .2byte 0x23

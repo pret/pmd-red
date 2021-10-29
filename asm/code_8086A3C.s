@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start SkarmonyPreFightDialogue
-SkarmonyPreFightDialogue:
+	thumb_func_start SkarmoryPreFightDialogue
+SkarmoryPreFightDialogue:
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -165,10 +165,10 @@ _08086D9C: .4byte gUnknown_8100928
 _08086DA0: .4byte gUnknown_8100A04
 _08086DA4: .4byte gUnknown_8100B80
 _08086DA8: .4byte gUnknown_8100BC0
-	thumb_func_end SkarmonyPreFightDialogue
+	thumb_func_end SkarmoryPreFightDialogue
 
-	thumb_func_start SkarmonyReFightDialogue
-SkarmonyReFightDialogue:
+	thumb_func_start SkarmoryReFightDialogue
+SkarmoryReFightDialogue:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	bl sub_8085480
@@ -225,7 +225,7 @@ SkarmonyReFightDialogue:
 _08086E34: .4byte gUnknown_8100C90
 _08086E38: .4byte gUnknown_8100CBC
 _08086E3C: .4byte gUnknown_8100CDC
-	thumb_func_end SkarmonyReFightDialogue
+	thumb_func_end SkarmoryReFightDialogue
 
 	thumb_func_start sub_8086E40
 sub_8086E40:
@@ -402,8 +402,8 @@ _08086FB0: .4byte gDungeonGlobalData
 _08086FB4: .4byte 0x0001358c
 	thumb_func_end sub_8086F54
 
-	thumb_func_start TeamMeaniePreFightDialogue
-TeamMeaniePreFightDialogue:
+	thumb_func_start TeamMeaniesPreFightDialogue
+TeamMeaniesPreFightDialogue:
 	push {r4,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -464,10 +464,10 @@ _08087054: .4byte gUnknown_8100F14
 _08087058: .4byte gUnknown_8101004
 _0808705C: .4byte gUnknown_8101050
 _08087060: .4byte gUnknown_81010D0
-	thumb_func_end TeamMeaniePreFightDialogue
+	thumb_func_end TeamMeaniesPreFightDialogue
 
-	thumb_func_start TeamMeanieReFightDialogue
-TeamMeanieReFightDialogue:
+	thumb_func_start TeamMeaniesReFightDialogue
+TeamMeaniesReFightDialogue:
 	push {r4,r5,lr}
 	bl sub_8085480
 	adds r4, r0, 0
@@ -541,7 +541,7 @@ _08087120: .4byte gUnknown_8101240
 _08087124: .4byte gUnknown_8101310
 _08087128: .4byte gUnknown_810137C
 _0808712C: .4byte gUnknown_8101408
-	thumb_func_end TeamMeanieReFightDialogue
+	thumb_func_end TeamMeaniesReFightDialogue
 
 	thumb_func_start sub_8087130
 sub_8087130:
