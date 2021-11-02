@@ -13,7 +13,7 @@
         "useChance": 0,
         "hitCount": 0,
         "cannotHitFrozen": false,
-        "unk19": 0,
+        "rangeType": 0,
         "descriptionPointer": "MoveDescriptionNone",
         "useText": "MoveDescriptionNone"
     },
@@ -34,7 +34,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -55,7 +55,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMultiHitUntilMiss",
         "useText": "MoveUseTextUse"
     },
@@ -76,7 +76,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionYawn",
         "useText": "MoveUseTextUse"
     },
@@ -97,7 +97,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionLovelyKiss",
         "useText": "MoveUseTextUse"
     },
@@ -116,7 +116,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNightmare",
         "useText": "MoveUseTextUse"
     },
@@ -136,7 +136,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 4,
+        "rangeType": 4,
         "descriptionPointer": "MoveDescriptionMorningSun",
         "useText": "MoveUseTextUse"
     },
@@ -155,7 +155,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionVitalThrow",
         "useText": "MoveUseTextUse"
     },
@@ -176,7 +176,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionDig",
         "useText": "MoveUseTextUse"
     },
@@ -197,7 +197,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 12,
+        "rangeType": 12,
         "descriptionPointer": "MoveDescriptionThrash",
         "useText": "MoveUseTextUse"
     },
@@ -217,7 +217,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionSweetScent",
         "useText": "MoveUseTextUse"
     },
@@ -237,7 +237,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCharm",
         "useText": "MoveUseTextUse"
     },
@@ -256,7 +256,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionRainDance",
         "useText": "MoveUseTextUse"
     },
@@ -276,7 +276,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConfuseRay",
         "useText": "MoveUseTextUse"
     },
@@ -295,7 +295,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionHail",
         "useText": "MoveUseTextUse"
     },
@@ -315,7 +315,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": false,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionHealTeamStatus",
         "useText": "MoveUseTextUse"
     },
@@ -336,7 +336,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionLowerSpeedChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -355,7 +355,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionEncore",
         "useText": "MoveUseTextUse"
     },
@@ -376,7 +376,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionCut",
         "useText": "MoveUseTextUse"
     },
@@ -395,7 +395,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionRage",
         "useText": "MoveUseTextUse"
     },
@@ -416,7 +416,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSuperFang",
         "useText": "MoveUseTextUse"
     },
@@ -435,7 +435,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPainSplit",
         "useText": "MoveUseTextUse"
     },
@@ -455,7 +455,7 @@
         "criticalHitChance": 12,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTorment",
         "useText": "MoveUseTextUse"
     },
@@ -475,7 +475,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionStringShot",
         "useText": "MoveUseTextUse"
     },
@@ -495,7 +495,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSwagger",
         "useText": "MoveUseTextUse"
     },
@@ -517,7 +517,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionSnore",
         "useText": "MoveUseTextUse"
     },
@@ -537,7 +537,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": false,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionHealTeamStatus",
         "useText": "MoveUseTextUse"
     },
@@ -558,7 +558,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionScreech",
         "useText": "MoveUseTextUse"
     },
@@ -579,7 +579,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -599,7 +599,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 25,
+        "rangeType": 25,
         "descriptionPointer": "MoveDescriptionRockSmash",
         "useText": "MoveUseTextUse"
     },
@@ -620,7 +620,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionRockSlide",
         "useText": "MoveUseTextUse"
     },
@@ -641,7 +641,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionWeatherBall",
         "useText": "MoveUseTextUse"
     },
@@ -662,7 +662,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionWhirlpool",
         "useText": "MoveUseTextUse"
     },
@@ -683,7 +683,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFakeTears",
         "useText": "MoveUseTextUse"
     },
@@ -704,7 +704,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionSing",
         "useText": "MoveUseTextUse"
     },
@@ -723,7 +723,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSpite",
         "useText": "MoveUseTextUse"
     },
@@ -744,7 +744,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -764,7 +764,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionSmokescreen",
         "useText": "MoveUseTextUse"
     },
@@ -783,7 +783,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionCounter",
         "useText": "MoveUseTextUse"
     },
@@ -804,7 +804,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -823,7 +823,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionMirrorMove",
         "useText": "MoveUseTextUse"
     },
@@ -844,7 +844,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionOverheat",
         "useText": "MoveUseTextUse"
     },
@@ -865,7 +865,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionAuroraBeam",
         "useText": "MoveUseTextUse"
     },
@@ -884,7 +884,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionMemento",
         "useText": "MoveUseTextUse"
     },
@@ -906,7 +906,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionOctazooka",
         "useText": "MoveUseTextUse"
     },
@@ -927,7 +927,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFlatter",
         "useText": "MoveUseTextUse"
     },
@@ -948,7 +948,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -968,7 +968,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionWillOWisp",
         "useText": "MoveUseTextUse"
     },
@@ -988,7 +988,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionReturn",
         "useText": "MoveUseTextUse"
     },
@@ -1007,7 +1007,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionGrudge",
         "useText": "MoveUseTextUse"
     },
@@ -1026,7 +1026,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionStrength",
         "useText": "MoveUseTextUse"
     },
@@ -1045,7 +1045,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionCounter",
         "useText": "MoveUseTextUse"
     },
@@ -1066,7 +1066,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -1087,7 +1087,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionFlamethrower",
         "useText": "MoveUseTextUse"
     },
@@ -1106,7 +1106,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionOdorSleuth",
         "useText": "MoveUseTextUse"
     },
@@ -1126,7 +1126,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -1146,7 +1146,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostEvasion",
         "useText": "MoveUseTextUse"
     },
@@ -1167,7 +1167,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionGust",
         "useText": "MoveUseTextUse"
     },
@@ -1187,7 +1187,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -1206,7 +1206,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -1227,7 +1227,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 28,
+        "rangeType": 28,
         "descriptionPointer": "MoveDescriptionRazorWind",
         "useText": "MoveUseTextUse"
     },
@@ -1246,7 +1246,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBide",
         "useText": "MoveUseTextUse"
     },
@@ -1268,7 +1268,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -1290,7 +1290,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -1311,7 +1311,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionThunder",
         "useText": "MoveUseTextUse"
     },
@@ -1332,7 +1332,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -1352,7 +1352,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionEndeavor",
         "useText": "MoveUseTextUse"
     },
@@ -1373,7 +1373,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFacade",
         "useText": "MoveUseTextUse"
     },
@@ -1394,7 +1394,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1415,7 +1415,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -1435,7 +1435,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -1456,7 +1456,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConstrict",
         "useText": "MoveUseTextUse"
     },
@@ -1477,7 +1477,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionBrickBreak",
         "useText": "MoveUseTextUse"
     },
@@ -1498,7 +1498,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamageLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -1518,7 +1518,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionFocusEnergy",
         "useText": "MoveUseTextUse"
     },
@@ -1539,7 +1539,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionFocusPunch",
         "useText": "MoveUseTextUse"
     },
@@ -1560,7 +1560,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -1581,7 +1581,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionReversal",
         "useText": "MoveUseTextUse"
     },
@@ -1602,7 +1602,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSmellingsalt",
         "useText": "MoveUseTextUse"
     },
@@ -1622,7 +1622,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionSpore",
         "useText": "MoveUseTextUse"
     },
@@ -1644,7 +1644,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -1665,7 +1665,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1686,7 +1686,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionSilverWind",
         "useText": "MoveUseTextUse"
     },
@@ -1706,7 +1706,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMetalSound",
         "useText": "MoveUseTextUse"
     },
@@ -1727,7 +1727,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionSleep",
         "useText": "MoveUseTextUse"
     },
@@ -1747,7 +1747,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTickle",
         "useText": "MoveUseTextUse"
     },
@@ -1767,7 +1767,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionLegHolder",
         "useText": "MoveUseTextUse"
     },
@@ -1788,7 +1788,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1807,7 +1807,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 17,
+        "rangeType": 17,
         "descriptionPointer": "MoveDescriptionHaze",
         "useText": "MoveUseTextUse"
     },
@@ -1827,7 +1827,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLegHolder",
         "useText": "MoveUseTextUse"
     },
@@ -1848,7 +1848,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1869,7 +1869,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionOutrage",
         "useText": "MoveUseTextUse"
     },
@@ -1890,7 +1890,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowKick",
         "useText": "MoveUseTextUse"
     },
@@ -1911,7 +1911,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionAncientpower",
         "useText": "MoveUseTextUse"
     },
@@ -1931,7 +1931,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 21,
+        "rangeType": 21,
         "descriptionPointer": "MoveDescriptionSynthesis",
         "useText": "MoveUseTextUse"
     },
@@ -1951,7 +1951,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionAgility",
         "useText": "MoveUseTextUse"
     },
@@ -1972,7 +1972,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionRapidSpin",
         "useText": "MoveUseTextUse"
     },
@@ -1993,7 +1993,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionIcyWind",
         "useText": "MoveUseTextUse"
     },
@@ -2012,7 +2012,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionMindReader",
         "useText": "MoveUseTextUse"
     },
@@ -2032,7 +2032,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionCosmicPower",
         "useText": "MoveUseTextUse"
     },
@@ -2053,7 +2053,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 28,
+        "rangeType": 28,
         "descriptionPointer": "MoveDescriptionSkyAttack",
         "useText": "MoveUseTextUse"
     },
@@ -2074,7 +2074,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -2093,7 +2093,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionFollowMe",
         "useText": "MoveUseTextUse"
     },
@@ -2114,7 +2114,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionMeteorMash",
         "useText": "MoveUseTextUse"
     },
@@ -2133,7 +2133,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionEndure",
         "useText": "MoveUseTextUse"
     },
@@ -2154,7 +2154,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHitUntilMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2174,7 +2174,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -2195,7 +2195,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionConfuseChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -2215,7 +2215,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionPsywave",
         "useText": "MoveUseTextUse"
     },
@@ -2236,7 +2236,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -2257,7 +2257,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPsychoBoost",
         "useText": "MoveUseTextUse"
     },
@@ -2277,7 +2277,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionSleep",
         "useText": "MoveUseTextUse"
     },
@@ -2297,7 +2297,7 @@
         "criticalHitChance": 12,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionUproar",
         "useText": "MoveUseTextUse"
     },
@@ -2318,7 +2318,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionWaterSpout",
         "useText": "MoveUseTextUse"
     },
@@ -2339,7 +2339,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionConfuseChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -2358,7 +2358,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 30,
+        "rangeType": 30,
         "descriptionPointer": "MoveDescriptionPsychUp",
         "useText": "MoveUseTextUse"
     },
@@ -2379,7 +2379,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionRecoil",
         "useText": "MoveUseTextUse"
     },
@@ -2399,7 +2399,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionRecover",
         "useText": "MoveUseTextUse"
     },
@@ -2420,7 +2420,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 18,
+        "rangeType": 18,
         "descriptionPointer": "MoveDescriptionEarthquake",
         "useText": "MoveUseTextUse"
     },
@@ -2440,7 +2440,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNaturePower",
         "useText": "MoveUseTextUse"
     },
@@ -2462,7 +2462,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -2483,7 +2483,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFlail",
         "useText": "MoveUseTextUse"
     },
@@ -2503,7 +2503,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerDefense",
         "useText": "MoveUseTextUse"
     },
@@ -2523,7 +2523,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 26,
+        "rangeType": 26,
         "descriptionPointer": "MoveDescriptionSelfdestruct",
         "useText": "MoveUseTextUse"
     },
@@ -2543,7 +2543,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionStunSpore",
         "useText": "MoveUseTextUse"
     },
@@ -2564,7 +2564,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -2585,7 +2585,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2606,7 +2606,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionShadowBall",
         "useText": "MoveUseTextUse"
     },
@@ -2626,7 +2626,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionCharge",
         "useText": "MoveUseTextUse"
     },
@@ -2647,7 +2647,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionThunderbolt",
         "useText": "MoveUseTextUse"
     },
@@ -2667,7 +2667,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionMist",
         "useText": "MoveUseTextUse"
     },
@@ -2687,7 +2687,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFissure",
         "useText": "MoveUseTextUse"
     },
@@ -2708,7 +2708,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 13,
+        "rangeType": 13,
         "descriptionPointer": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -2729,7 +2729,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionExtrasensory",
         "useText": "MoveUseTextUse"
     },
@@ -2749,7 +2749,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionSafeguard",
         "useText": "MoveUseTextUse"
     },
@@ -2771,7 +2771,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -2792,7 +2792,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSkyUppercut",
         "useText": "MoveUseTextUse"
     },
@@ -2811,7 +2811,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSkillSwap",
         "useText": "MoveUseTextUse"
     },
@@ -2830,7 +2830,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSketch",
         "useText": "MoveUseTextUse"
     },
@@ -2851,7 +2851,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -2872,7 +2872,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionRecoil",
         "useText": "MoveUseTextUse"
     },
@@ -2891,7 +2891,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionSandstorm",
         "useText": "MoveUseTextUse"
     },
@@ -2911,7 +2911,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -2932,7 +2932,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -2953,7 +2953,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -2974,7 +2974,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2993,7 +2993,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -3014,7 +3014,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPoisonChance",
         "useText": "MoveUseTextUse"
     },
@@ -3034,7 +3034,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionGrowth",
         "useText": "MoveUseTextUse"
     },
@@ -3055,7 +3055,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSacredFire",
         "useText": "MoveUseTextUse"
     },
@@ -3075,7 +3075,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSheerCold",
         "useText": "MoveUseTextUse"
     },
@@ -3096,7 +3096,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 28,
+        "rangeType": 28,
         "descriptionPointer": "MoveDescriptionSolarbeam",
         "useText": "MoveUseTextUse"
     },
@@ -3116,7 +3116,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionSonicboom",
         "useText": "MoveUseTextUse"
     },
@@ -3137,7 +3137,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionFly",
         "useText": "MoveUseTextUse"
     },
@@ -3158,7 +3158,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3178,7 +3178,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 27,
+        "rangeType": 27,
         "descriptionPointer": "MoveDescriptionExplosion",
         "useText": "MoveUseTextUse"
     },
@@ -3199,7 +3199,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionDive",
         "useText": "MoveUseTextUse"
     },
@@ -3220,7 +3220,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -3241,7 +3241,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3262,7 +3262,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMuddyWater",
         "useText": "MoveUseTextUse"
     },
@@ -3283,7 +3283,7 @@
         "targetsUser": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionStockpile",
         "useText": "MoveUseTextUse"
     },
@@ -3304,7 +3304,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3325,7 +3325,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTwister",
         "useText": "MoveUseTextUse"
     },
@@ -3346,7 +3346,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -3367,7 +3367,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionTwineedle",
         "useText": "MoveUseTextUse"
     },
@@ -3387,7 +3387,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionSoftboiled",
         "useText": "MoveUseTextUse"
     },
@@ -3408,7 +3408,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3429,7 +3429,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -3450,7 +3450,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3470,7 +3470,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostEvasion",
         "useText": "MoveUseTextUse"
     },
@@ -3490,7 +3490,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSeismicToss",
         "useText": "MoveUseTextUse"
     },
@@ -3511,7 +3511,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionConfuse",
         "useText": "MoveUseTextUse"
     },
@@ -3530,7 +3530,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTaunt",
         "useText": "MoveUseTextUse"
     },
@@ -3550,7 +3550,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 5,
+        "rangeType": 5,
         "descriptionPointer": "MoveDescriptionMoonlight",
         "useText": "MoveUseTextUse"
     },
@@ -3571,7 +3571,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3592,7 +3592,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3613,7 +3613,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3633,7 +3633,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionOneHit",
         "useText": "MoveUseTextUse"
     },
@@ -3654,7 +3654,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3675,7 +3675,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -3696,7 +3696,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3716,7 +3716,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionSwordsDance",
         "useText": "MoveUseTextUse"
     },
@@ -3737,7 +3737,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3756,7 +3756,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionConversion",
         "useText": "MoveUseTextUse"
     },
@@ -3775,7 +3775,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionConversion2",
         "useText": "MoveUseTextUse"
     },
@@ -3794,7 +3794,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 22,
+        "rangeType": 22,
         "descriptionPointer": "MoveDescriptionHelpingHand",
         "useText": "MoveUseTextUse"
     },
@@ -3814,7 +3814,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -3833,7 +3833,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionTeleport",
         "useText": "MoveUseTextUse"
     },
@@ -3854,7 +3854,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -3875,7 +3875,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionShockWave",
         "useText": "MoveUseTextUse"
     },
@@ -3896,7 +3896,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 13,
+        "rangeType": 13,
         "descriptionPointer": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -3917,7 +3917,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConfuse",
         "useText": "MoveUseTextUse"
     },
@@ -3937,7 +3937,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -3958,7 +3958,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionZapCannon",
         "useText": "MoveUseTextUse"
     },
@@ -3978,7 +3978,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionBlock",
         "useText": "MoveUseTextUse"
     },
@@ -3999,7 +3999,7 @@
         "targetsUser": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -4019,7 +4019,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPoison",
         "useText": "MoveUseTextUse"
     },
@@ -4039,7 +4039,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionToxic",
         "useText": "MoveUseTextUse"
     },
@@ -4060,7 +4060,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPoisonFang",
         "useText": "MoveUseTextUse"
     },
@@ -4080,7 +4080,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPoison",
         "useText": "MoveUseTextUse"
     },
@@ -4101,7 +4101,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionPoisonChance",
         "useText": "MoveUseTextUse"
     },
@@ -4122,7 +4122,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -4142,7 +4142,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -4163,7 +4163,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTakeDown",
         "useText": "MoveUseTextUse"
     },
@@ -4184,7 +4184,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionJumpKick",
         "useText": "MoveUseTextUse"
     },
@@ -4205,7 +4205,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionBounce",
         "useText": "MoveUseTextUse"
     },
@@ -4226,7 +4226,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionJumpKick",
         "useText": "MoveUseTextUse"
     },
@@ -4247,7 +4247,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionTriAttack",
         "useText": "MoveUseTextUse"
     },
@@ -4268,7 +4268,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4287,7 +4287,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTrick",
         "useText": "MoveUseTextUse"
     },
@@ -4308,7 +4308,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionTripleKick",
         "useText": "MoveUseTextUse"
     },
@@ -4329,7 +4329,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4348,7 +4348,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionMudSport",
         "useText": "MoveUseTextUse"
     },
@@ -4369,7 +4369,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMudSlap",
         "useText": "MoveUseTextUse"
     },
@@ -4390,7 +4390,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionThief",
         "useText": "MoveUseTextUse"
     },
@@ -4410,7 +4410,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionAmnesia",
         "useText": "MoveUseTextUse"
     },
@@ -4430,7 +4430,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionNightShade",
         "useText": "MoveUseTextUse"
     },
@@ -4451,7 +4451,7 @@
         "affectedByMagicCoat": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionGrowl",
         "useText": "MoveUseTextUse"
     },
@@ -4471,7 +4471,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionRecover",
         "useText": "MoveUseTextUse"
     },
@@ -4492,7 +4492,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSurf",
         "useText": "MoveUseTextUse"
     },
@@ -4511,7 +4511,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionRolePlay",
         "useText": "MoveUseTextUse"
     },
@@ -4532,7 +4532,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -4553,7 +4553,7 @@
         "criticalHitChance": 3,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHitTwice",
         "useText": "MoveUseTextUse"
     },
@@ -4572,7 +4572,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionSunnyDay",
         "useText": "MoveUseTextUse"
     },
@@ -4592,7 +4592,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerDefense",
         "useText": "MoveUseTextUse"
     },
@@ -4611,7 +4611,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionWish",
         "useText": "MoveUseTextUse"
     },
@@ -4632,7 +4632,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 13,
+        "rangeType": 13,
         "descriptionPointer": "MoveDescriptionFakeOut",
         "useText": "MoveUseTextUse"
     },
@@ -4652,7 +4652,7 @@
         "criticalHitChance": 12,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionSleepTalk",
         "useText": "MoveUseTextUse"
     },
@@ -4673,7 +4673,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPayDay",
         "useText": "MoveUseTextUse"
     },
@@ -4694,7 +4694,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionAssist",
         "useText": "MoveUseTextAssist"
     },
@@ -4715,7 +4715,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionHeatWave",
         "useText": "MoveUseTextUse"
     },
@@ -4735,7 +4735,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionSleepPowder",
         "useText": "MoveUseTextUse"
     },
@@ -4755,7 +4755,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionRest",
         "useText": "MoveUseTextUse"
     },
@@ -4775,7 +4775,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionIngrain",
         "useText": "MoveUseTextUse"
     },
@@ -4796,7 +4796,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConfuseChance",
         "useText": "MoveUseTextUse"
     },
@@ -4817,7 +4817,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -4838,7 +4838,7 @@
         "targetsUser": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 21,
+        "rangeType": 21,
         "descriptionPointer": "MoveDescriptionSwallow",
         "useText": "MoveUseTextUse"
     },
@@ -4857,7 +4857,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionCurse",
         "useText": "MoveUseTextUse"
     },
@@ -4878,7 +4878,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionFrenzyPlant",
         "useText": "MoveUseTextUse"
     },
@@ -4899,7 +4899,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionHydroCannon",
         "useText": "MoveUseTextUse"
     },
@@ -4920,7 +4920,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionHydroPump",
         "useText": "MoveUseTextUse"
     },
@@ -4942,7 +4942,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4963,7 +4963,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionHyperBeam",
         "useText": "MoveUseTextUse"
     },
@@ -4984,7 +4984,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSuperpower",
         "useText": "MoveUseTextUse"
     },
@@ -5005,7 +5005,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSteelWing",
         "useText": "MoveUseTextUse"
     },
@@ -5027,7 +5027,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSpitUp",
         "useText": "MoveUseTextUse"
     },
@@ -5048,7 +5048,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDynamicpunch",
         "useText": "MoveUseTextUse"
     },
@@ -5068,7 +5068,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionOneHit",
         "useText": "MoveUseTextUse"
     },
@@ -5089,7 +5089,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5108,7 +5108,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionKnockOff",
         "useText": "MoveUseTextUse"
     },
@@ -5129,7 +5129,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5150,7 +5150,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionHighCriticalDistance",
         "useText": "MoveUseTextUse"
     },
@@ -5169,7 +5169,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 17,
+        "rangeType": 17,
         "descriptionPointer": "MoveDescriptionBatonPass",
         "useText": "MoveUseTextUse"
     },
@@ -5190,7 +5190,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPetalDance",
         "useText": "MoveUseTextUse"
     },
@@ -5209,7 +5209,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionSplash",
         "useText": "MoveUseTextUse"
     },
@@ -5230,7 +5230,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionLowerSpeedChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -5249,7 +5249,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionFixedDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5269,7 +5269,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBellyDrum",
         "useText": "MoveUseTextUse"
     },
@@ -5289,7 +5289,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -5309,7 +5309,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionLightScreen",
         "useText": "MoveUseTextUse"
     },
@@ -5330,7 +5330,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5352,7 +5352,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5373,7 +5373,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -5394,7 +5394,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionSecretPower",
         "useText": "MoveUseTextUse"
     },
@@ -5415,7 +5415,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionConfuseChance",
         "useText": "MoveUseTextUse"
     },
@@ -5435,7 +5435,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBulkUp",
         "useText": "MoveUseTextUse"
     },
@@ -5454,7 +5454,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionImprison",
         "useText": "MoveUseTextUse"
     },
@@ -5474,7 +5474,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFeatherdance",
         "useText": "MoveUseTextUse"
     },
@@ -5493,7 +5493,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionWhirlwind",
         "useText": "MoveUseTextUse"
     },
@@ -5512,7 +5512,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 4,
+        "rangeType": 4,
         "descriptionPointer": "MoveDescriptionBeatUp",
         "useText": "MoveUseTextUse"
     },
@@ -5533,7 +5533,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -5554,7 +5554,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5576,7 +5576,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 2,
+        "rangeType": 2,
         "descriptionPointer": "MoveDescriptionBlastBurn",
         "useText": "MoveUseTextUse"
     },
@@ -5596,7 +5596,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -5615,7 +5615,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionTeeterDance",
         "useText": "MoveUseTextUse"
     },
@@ -5636,7 +5636,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -5657,7 +5657,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionBlazeKick",
         "useText": "MoveUseTextUse"
     },
@@ -5677,7 +5677,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionPresent",
         "useText": "MoveUseTextUse"
     },
@@ -5698,7 +5698,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionEruption",
         "useText": "MoveUseTextUse"
     },
@@ -5719,7 +5719,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionSludge",
         "useText": "MoveUseTextUse"
     },
@@ -5740,7 +5740,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionSludgeBomb",
         "useText": "MoveUseTextUse"
     },
@@ -5760,7 +5760,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -5779,7 +5779,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionTransform",
         "useText": "MoveUseTextUse"
     },
@@ -5800,7 +5800,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionPoisonTail",
         "useText": "MoveUseTextUse"
     },
@@ -5820,7 +5820,7 @@
         "criticalHitChance": 12,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionWhirlwind",
         "useText": "MoveUseTextUse"
     },
@@ -5841,7 +5841,7 @@
         "criticalHitChance": 2,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -5861,7 +5861,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionCamouflage",
         "useText": "MoveUseTextUse"
     },
@@ -5882,7 +5882,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionThief",
         "useText": "MoveUseTextUse"
     },
@@ -5902,7 +5902,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionTailGlow",
         "useText": "MoveUseTextUse"
     },
@@ -5923,7 +5923,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5944,7 +5944,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionBonemerang",
         "useText": "MoveUseTextUse"
     },
@@ -5965,7 +5965,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFireSpin",
         "useText": "MoveUseTextUse"
     },
@@ -5986,7 +5986,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": false,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -6006,7 +6006,7 @@
         "criticalHitChance": 12,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 7,
+        "rangeType": 7,
         "descriptionPointer": "MoveDescriptionPerishSong",
         "useText": "MoveUseTextUse"
     },
@@ -6025,7 +6025,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionWrap",
         "useText": "MoveUseTextUse"
     },
@@ -6044,7 +6044,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 24,
+        "rangeType": 24,
         "descriptionPointer": "MoveDescriptionSpikes",
         "useText": "MoveUseTextUse"
     },
@@ -6064,7 +6064,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 18,
+        "rangeType": 18,
         "descriptionPointer": "MoveDescriptionMagnitude",
         "useText": "MoveUseTextUse"
     },
@@ -6085,7 +6085,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -6104,7 +6104,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionMagicCoat",
         "useText": "MoveUseTextUse"
     },
@@ -6125,7 +6125,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDamageLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -6146,7 +6146,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 13,
+        "rangeType": 13,
         "descriptionPointer": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -6165,7 +6165,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionProtect",
         "useText": "MoveUseTextUse"
     },
@@ -6185,7 +6185,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -6206,7 +6206,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -6226,7 +6226,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 30,
+        "rangeType": 30,
         "descriptionPointer": "MoveDescriptionSubstitute",
         "useText": "MoveUseTextUse"
     },
@@ -6245,7 +6245,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionProtect",
         "useText": "MoveUseTextUse"
     },
@@ -6266,7 +6266,7 @@
         "criticalHitChance": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -6285,7 +6285,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionWaterSport",
         "useText": "MoveUseTextUse"
     },
@@ -6306,7 +6306,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6327,7 +6327,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMistBall",
         "useText": "MoveUseTextUse"
     },
@@ -6348,7 +6348,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionWaterPulse",
         "useText": "MoveUseTextUse"
     },
@@ -6369,7 +6369,7 @@
         "criticalHitChance": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6390,7 +6390,7 @@
         "criticalHitChance": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6409,7 +6409,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDestinyBond",
         "useText": "MoveUseTextUse"
     },
@@ -6429,7 +6429,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFalseSwipe",
         "useText": "MoveUseTextUse"
     },
@@ -6448,7 +6448,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionForesight",
         "useText": "MoveUseTextUse"
     },
@@ -6467,7 +6467,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionMirrorCoat",
         "useText": "MoveUseTextUse"
     },
@@ -6486,7 +6486,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionFixedDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6507,7 +6507,7 @@
         "targetsUser": true,
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
-        "unk19": 5,
+        "rangeType": 5,
         "descriptionPointer": "MoveDescriptionMilkDrink",
         "useText": "MoveUseTextUse"
     },
@@ -6527,7 +6527,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionCalmMind",
         "useText": "MoveUseTextUse"
     },
@@ -6548,7 +6548,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -6569,7 +6569,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6590,7 +6590,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6611,7 +6611,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6632,7 +6632,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHiddenPower",
         "useText": "MoveUseTextUse"
     },
@@ -6653,7 +6653,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMetalClaw",
         "useText": "MoveUseTextUse"
     },
@@ -6673,7 +6673,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionAttract",
         "useText": "MoveUseTextUse"
     },
@@ -6692,7 +6692,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMimic",
         "useText": "MoveUseTextUse"
     },
@@ -6712,7 +6712,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFrustration",
         "useText": "MoveUseTextUse"
     },
@@ -6732,7 +6732,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionLeechSeed",
         "useText": "MoveUseTextUse"
     },
@@ -6752,7 +6752,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionMetronome",
         "useText": "MoveUseTextUse"
     },
@@ -6774,7 +6774,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionDreamEater",
         "useText": "MoveUseTextUse"
     },
@@ -6795,7 +6795,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionAcid",
         "useText": "MoveUseTextUse"
     },
@@ -6815,7 +6815,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -6834,7 +6834,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionSnatch",
         "useText": "MoveUseTextUse"
     },
@@ -6855,7 +6855,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -6876,7 +6876,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -6895,7 +6895,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 23,
+        "rangeType": 23,
         "descriptionPointer": "MoveDescriptionRecycle",
         "useText": "MoveUseTextUse"
     },
@@ -6915,7 +6915,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionReflect",
         "useText": "MoveUseTextUse"
     },
@@ -6935,7 +6935,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": false,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionRefresh",
         "useText": "MoveUseTextUse"
     },
@@ -6954,7 +6954,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionBide",
         "useText": "MoveUseTextUse"
     },
@@ -6974,7 +6974,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionDragonRage",
         "useText": "MoveUseTextUse"
     },
@@ -6996,7 +6996,7 @@
         "affectedByMuzzled": true,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionDragonbreath",
         "useText": "MoveUseTextUse"
     },
@@ -7016,7 +7016,7 @@
         "criticalHitChance": 12,
         "targetsUser": true,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionDragonDance",
         "useText": "MoveUseTextUse"
     },
@@ -7037,7 +7037,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -7058,7 +7058,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionIceBeam",
         "useText": "MoveUseTextUse"
     },
@@ -7079,7 +7079,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionHitTwice",
         "useText": "MoveUseTextUse"
     },
@@ -7100,7 +7100,7 @@
         "criticalHitChance": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -7121,7 +7121,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 20,
+        "rangeType": 20,
         "descriptionPointer": "MoveDescriptionSkullBash",
         "useText": "MoveUseTextUse"
     },
@@ -7140,7 +7140,7 @@
         "hitCount": 1,
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionLockOn",
         "useText": "MoveUseTextUse"
     },
@@ -7161,7 +7161,7 @@
         "criticalHitChance": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -7181,7 +7181,7 @@
         "criticalHitChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -7201,7 +7201,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionStruggle",
         "useText": "MoveUseTextUse"
     },
@@ -7222,7 +7222,7 @@
         "criticalHitChance": 50,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionHighCriticalDistance",
         "useText": "MoveUseTextUse"
     },
@@ -7243,7 +7243,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionVoltTackle",
         "useText": "MoveUseTextUse"
     },
@@ -7263,7 +7263,7 @@
         "unk12": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextRegularAttack"
     },
@@ -7284,7 +7284,7 @@
         "criticalHitChance": 6,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionIsWatching",
         "useText": "MoveUseTextUse"
     },
@@ -7305,7 +7305,7 @@
         "criticalHitChance": 6,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextBide"
     },
@@ -7326,7 +7326,7 @@
         "criticalHitChance": 6,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -7347,7 +7347,7 @@
         "criticalHitChance": 6,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -7368,7 +7368,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 1,
+        "rangeType": 1,
         "descriptionPointer": "MoveDescriptionWideSlash",
         "useText": "MoveUseTextUse"
     },
@@ -7388,7 +7388,7 @@
         "unk12": 99,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7409,7 +7409,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 9,
+        "rangeType": 9,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7427,7 +7427,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7446,7 +7446,7 @@
         "hitCount": 1,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7464,7 +7464,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7485,7 +7485,7 @@
         "criticalHitChance": 12,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 13,
+        "rangeType": 13,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7503,7 +7503,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7521,7 +7521,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 14,
+        "rangeType": 14,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7539,7 +7539,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7557,7 +7557,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7575,7 +7575,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7593,7 +7593,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 16,
+        "rangeType": 16,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7611,7 +7611,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7629,7 +7629,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7647,7 +7647,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7665,7 +7665,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7683,7 +7683,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7701,7 +7701,7 @@
         "useChance": 20,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7719,7 +7719,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7737,7 +7737,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7755,7 +7755,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7773,7 +7773,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7791,7 +7791,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7809,7 +7809,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7827,7 +7827,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7845,7 +7845,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7863,7 +7863,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7881,7 +7881,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 29,
+        "rangeType": 29,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7899,7 +7899,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 29,
+        "rangeType": 29,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7917,7 +7917,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 4,
+        "rangeType": 4,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7935,7 +7935,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7955,7 +7955,7 @@
         "unk12": 99,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7973,7 +7973,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 6,
+        "rangeType": 6,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7991,7 +7991,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionVacuumCut",
         "useText": "MoveUseTextUse"
     },
@@ -8009,7 +8009,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8029,7 +8029,7 @@
         "unk12": 99,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8049,7 +8049,7 @@
         "unk12": 99,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8067,7 +8067,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 15,
+        "rangeType": 15,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8085,7 +8085,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 29,
+        "rangeType": 29,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8103,7 +8103,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 29,
+        "rangeType": 29,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8121,7 +8121,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8139,7 +8139,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8157,7 +8157,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 3,
+        "rangeType": 3,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8175,7 +8175,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -8193,7 +8193,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -8213,7 +8213,7 @@
         "unk12": 99,
         "cannotHitFrozen": true,
         "dealsDirectDamage": true,
-        "unk19": 11,
+        "rangeType": 11,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8231,7 +8231,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8249,7 +8249,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 10,
+        "rangeType": 10,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8267,7 +8267,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8285,7 +8285,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -8303,7 +8303,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -8321,7 +8321,7 @@
         "useChance": 75,
         "hitCount": 1,
         "cannotHitFrozen": true,
-        "unk19": 19,
+        "rangeType": 19,
         "descriptionPointer": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     }

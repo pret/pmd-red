@@ -1,12 +1,6 @@
 #ifndef GUARD_GULPIN_SHOP_H
 #define GUARD_GULPIN_SHOP_H 
 
-struct unkStruct_Gulpin
-{
-    u8 fill0[0x22];
-    u16 unk22;
-};
-
 struct unkStruct_203B26C
 {
 // size: 0x18C
@@ -15,7 +9,7 @@ struct unkStruct_203B26C
     u32 unk8;
     s16 speciesNum; // species of chosen Pokemon
     u8 unkE;
-    struct unkStruct_Gulpin * unk10;
+    struct PokemonMove * unk10;
     u32 unk14;
     u32 unk18;
     u16 unk1C;

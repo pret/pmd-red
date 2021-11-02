@@ -3915,7 +3915,7 @@ _08020D38:
 	bne _08020D34
 	ldrh r1, [r3, 0x1E]
 	adds r0, r2, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 _08020D52:
 	cmp r5, 0x3
 	ble _08020D5E

@@ -500,7 +500,7 @@ string generate_move_data_text(Json data) {
             << read_json_bool(data_entry["affectedByMuzzled"])
             << read_json_bool(data_entry["cannotHitFrozen"])
             << read_json_bool(data_entry["dealsDirectDamage"])
-            << read_json_int(data_entry["unk19"], 1)
+            << read_json_int(data_entry["rangeType"], 1)
             << "\n.2byte 0"
             << read_json_string(data_entry["descriptionPointer"], 4)
             << read_json_string(data_entry["useText"], 4);

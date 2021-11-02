@@ -37,11 +37,11 @@ extern void ExpandPlaceholdersBuffer(u8 *, const u8 *, ...);
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
-extern void sub_8092A88(void*, u16);  // first arg is some struct
+extern void InitPokemonMove(void*, u16);  // first arg is some struct
 extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u32 sub_8092B00(void*);
+extern u32 GetMoveType(void*);
 extern u8* GetUnformattedTypeString(s16);
-extern u32 sub_8092BF4(void*);
+extern u32 GetMoveMaxPP(void*);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
@@ -565,11 +565,11 @@ s32 GetItemPossessionCount(u8 itemIndex)
 void ShiftItemsDownFrom(s32 start)
 {
   s32 i, j;
-  for (i = start, j = start + 1; i < 19; i++, j++) {
+  for (i = start, j = start + 1; i < INVENTORY_SIZE - 1; i++, j++) {
     gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[j];
   }
-  gTeamInventory_203B460->teamItems[19].itemIndex = 0;
-  gTeamInventory_203B460->teamItems[19].itemFlags = 0;
+  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].itemIndex = 0;
+  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].itemFlags = 0;
 }
 
 void ClearItemSlotAt(u32 index)
@@ -703,13 +703,13 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
     u8* typestring;
     u32 result;
 
-    sub_8092A88(buffer8, move);
+    InitPokemonMove(buffer8, move);
     sub_80078A4(a2, 4, 82, 200, 7);
     xxx_format_and_draw(4, 84, gPtrTypeText, a2, 0);
-    moves_data = sub_8092B00(buffer8);
+    moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
     xxx_format_and_draw(64, 84, typestring, a2, 0);
-    result = sub_8092BF4(buffer8);
+    result = GetMoveMaxPP(buffer8);
     gUnknown_202DE30 = result;
     xxx_format_and_draw(128, 84, gPtrPPD0Text, a2, 0);
   }

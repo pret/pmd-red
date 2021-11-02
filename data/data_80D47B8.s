@@ -2678,8 +2678,8 @@ gUnknown_80DAA44:
     .string "true power.\0"
     .align 2, 0
 
-	.global gUnknown_80DAA98
-gUnknown_80DAA98: @ 80DAA98 (Help Menu?)
+	.global gGameHints
+gGameHints: @ 80DAA98 (Help Menu?)
     .4byte gUnknown_80DAF54
     .4byte gUnknown_80DAEE0
     .4byte gUnknown_80DAECC
@@ -2770,6 +2770,7 @@ gUnknown_80DAF54:
     .align 2, 0
 
     .string "pksdir0\0"
+
 	.global gUnknown_80DAF70
 gUnknown_80DAF70: @ 80DAF70
         .byte 0x00, 0x00, 0x00, 0x00

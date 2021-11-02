@@ -62,7 +62,6 @@ extern u8 sub_8019FB0(void);
 extern u8 sub_80138B8(void *, u32);
 
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetStackBuyPrice(struct ItemSlot *);
 extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
 
@@ -228,7 +227,7 @@ void sub_8019DAC(void)
 
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
-  for(iVar5 = 0; iVar5 < 0x14; iVar5++){
+  for(iVar5 = 0; iVar5 < INVENTORY_SIZE; iVar5++){
     pbVar4 = &gTeamInventory_203B460->teamItems[iVar5];
     if (((pbVar4->itemFlags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(pbVar4->itemIndex))) {
       iVar3 = GetStackSellPrice(pbVar4);

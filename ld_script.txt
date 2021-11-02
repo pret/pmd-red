@@ -111,6 +111,7 @@ SECTIONS {
         asm/code_801D760.o(.text);
         src/code_801DCC4.o(.text);
         asm/code_801DCC4.o(.text);
+        src/hints_menu.o(.text);
         src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);
         src/gulpin_shop_1.o(.text);
@@ -118,7 +119,6 @@ SECTIONS {
         src/friend_area_action_menu.o(.text);
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
-        asm/friend_area_action_menu_1.o(.text);
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
@@ -232,7 +232,10 @@ SECTIONS {
         src/friend_area.o(.text);
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
-        asm/code_8092334.o(.text);
+        src/moves.o(.text);
+        asm/moves_1.o(.text);
+        src/moves_1.o(.text);
+        asm/code_8094148.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
         asm/code_8094D28.o(.text);

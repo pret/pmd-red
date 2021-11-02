@@ -8,7 +8,7 @@ struct unkStruct_203B25C
 {
     // size: 0x11C
     u32 state;
-    u32 unk4;
+    u32 chosenHintIndex;
     struct UnkSaveStruct1 unk8;
     u32 unk18;
     const char *unk1C;
@@ -31,17 +31,17 @@ extern void sub_801DED0();
 extern void sub_8012D60(const char **, struct MenuItem *, u32, u16 *, u32, u32);
 extern u32 sub_801E198(struct UnkSaveStruct1 *);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
-extern void sub_801E658(u32);
+extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
-extern void sub_801E510(u32);
+extern void CreateHintSelectionScreen(u32);
 extern void CreateChangeSettingsConfirmMenu(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_801E474(u32);
-extern u32 sub_801E4F4(void);
+extern u32 GetChosenHintIndex(void);
 extern void sub_801E54C(void);
-extern u32 sub_801E6CC(void);
-extern void sub_801E724(void);
+extern u32 HandleHintDisplayScreenInput(void);
+extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern bool8 GameOptionsNotChange(struct UnkSaveStruct1 *);
 extern void sub_801E2C4(void);
@@ -358,10 +358,10 @@ void sub_801DED0(void)
         sub_801E3F0(0);
         break;
     case 4:
-        sub_801E510(1);
+        CreateHintSelectionScreen(1);
         break;
     case 5:
-        sub_801E658(gUnknown_203B25C->unk4);
+        CreateHintDisplayScreen(gUnknown_203B25C->chosenHintIndex);
         break;
     case 6:
         // Load our current options?
@@ -446,7 +446,7 @@ void sub_801E088(void)
   {
     case 3:
     case 4:
-        gUnknown_203B25C->unk4 = sub_801E4F4();
+        gUnknown_203B25C->chosenHintIndex = GetChosenHintIndex();
         sub_801DD6C(5);
         break;
     case 2:
@@ -463,11 +463,11 @@ void sub_801E088(void)
 
 void sub_801E0E0(void)
 {
-  switch(sub_801E6CC()) 
+  switch(HandleHintDisplayScreenInput())
   {
     case 3:
     case 2:
-        sub_801E724();
+        DestroyHintDisplayScreen();
         sub_801DD6C(4);
         break;
     case 0:

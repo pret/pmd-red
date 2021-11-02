@@ -190,7 +190,7 @@ sub_8071A1C:
 	cmp r1, r0
 	beq _08071A38
 	adds r0, r2, 0
-	bl sub_8092B00
+	bl GetMoveType
 	lsls r0, 24
 	lsrs r0, 24
 	b _08071A3E
@@ -214,7 +214,7 @@ sub_8071A44:
 	cmp r1, r0
 	beq _08071A60
 	adds r0, r4, 0
-	bl sub_8092BC0
+	bl GetMovePower
 	ldrb r1, [r4, 0x5]
 	adds r0, r1
 	b _08071A6A
@@ -1983,7 +1983,7 @@ _080727E4:
 	bne _08072806
 	ldrh r1, [r6]
 	adds r0, r3, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r1, [r5]
 	movs r0, 0x4
 	orrs r0, r1
@@ -2177,7 +2177,7 @@ _08072964:
 	bne _08072980
 	adds r0, r2, 0
 	adds r1, r5, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	orrs r0, r1
@@ -6311,7 +6311,7 @@ _08074A46:
 	add r4, sp, 0x28
 	ldr r1, _08074B48
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r0, [r4]
 	movs r1, 0x10
 	orrs r0, r1

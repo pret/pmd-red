@@ -39,4 +39,31 @@ struct unkStruct_203B208
     struct UnkTextStruct2 unkEC[4];
 };
 
+struct unkStruct_203B20C
+{
+    u32 state;
+    u8 unk4[4];
+    struct ItemSlot unk8;
+    u32 unkC;
+    u8 itemIndex;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    struct MenuItem unk20[8];
+    u16 unk60[8];
+    u32 unk70;
+    u8 fill74[0xC0 - 0x74];
+    u32 unkC0;
+    u32 unkC4;
+    u32 unkC8;
+    u32 unkCC;
+    u32 unkD0;
+    u32 unkD4;
+    struct UnkTextStruct2 *unkD8;
+    u32 unkDC;
+    u32 unkE0;
+    u8 fillE4[0xF0 - 0xE4];
+    struct UnkTextStruct2 unkF0[4];
+};
+
 #endif
