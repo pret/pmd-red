@@ -75,7 +75,7 @@ _08017094:
 	b _080170DA
 	.align 2, 0
 _080170B4: .4byte gUnknown_203B208
-_080170B8: .4byte gUnknown_80D5404
+_080170B8: .4byte gKangaskhanStorageDialogue
 _080170BC:
 	bl sub_80175FC
 	ldr r1, _08017104
@@ -113,7 +113,7 @@ _080170DA:
 	b _08017584
 	.align 2, 0
 _08017104: .4byte gUnknown_203B208
-_08017108: .4byte gUnknown_80D5404
+_08017108: .4byte gKangaskhanStorageDialogue
 _0801710C:
 	ldr r0, [r4]
 	movs r1, 0x1
@@ -135,7 +135,7 @@ _0801710C:
 	ldr r3, _08017138
 	b _080173D8
 	.align 2, 0
-_08017134: .4byte gUnknown_80D5404
+_08017134: .4byte gKangaskhanStorageDialogue
 _08017138: .4byte 0x0000010d
 _0801713C:
 	ldr r0, [r4]
@@ -153,7 +153,7 @@ _0801713C:
 	adds r2, 0x8
 	b _080173CE
 	.align 2, 0
-_08017158: .4byte gUnknown_80D5404
+_08017158: .4byte gKangaskhanStorageDialogue
 _0801715C:
 	ldr r0, [r4]
 	movs r1, 0x1
@@ -175,7 +175,7 @@ _0801715C:
 	ldr r3, _08017188
 	b _080173D8
 	.align 2, 0
-_08017184: .4byte gUnknown_80D5404
+_08017184: .4byte gKangaskhanStorageDialogue
 _08017188: .4byte 0x0000010d
 _0801718C:
 	ldr r0, [r4]
@@ -198,7 +198,7 @@ _0801718C:
 	ldr r3, _080171B8
 	b _080173D8
 	.align 2, 0
-_080171B4: .4byte gUnknown_80D5404
+_080171B4: .4byte gKangaskhanStorageDialogue
 _080171B8: .4byte 0x0000010d
 _080171BC:
 	ldr r0, [r4]
@@ -221,7 +221,7 @@ _080171BC:
 	ldr r3, _080171E8
 	b _080173D8
 	.align 2, 0
-_080171E4: .4byte gUnknown_80D5404
+_080171E4: .4byte gKangaskhanStorageDialogue
 _080171E8: .4byte 0x0000010d
 _080171EC:
 	ldr r0, [r4]
@@ -244,7 +244,7 @@ _080171EC:
 	ldr r3, _08017218
 	b _080173D8
 	.align 2, 0
-_08017214: .4byte gUnknown_80D5404
+_08017214: .4byte gKangaskhanStorageDialogue
 _08017218: .4byte 0x0000010d
 _0801721C:
 	ldr r0, _08017244
@@ -268,7 +268,7 @@ _0801721C:
 	b _080173CE
 	.align 2, 0
 _08017244: .4byte gUnknown_202DE58
-_08017248: .4byte gUnknown_80D5404
+_08017248: .4byte gKangaskhanStorageDialogue
 _0801724C:
 	ldr r0, [r4]
 	movs r1, 0xE
@@ -285,7 +285,7 @@ _0801724C:
 	adds r2, 0x44
 	b _080173CE
 	.align 2, 0
-_08017268: .4byte gUnknown_80D5404
+_08017268: .4byte gKangaskhanStorageDialogue
 _0801726C:
 	ldr r0, [r4]
 	movs r1, 0xD
@@ -302,7 +302,7 @@ _0801726C:
 	adds r2, 0xC
 	b _080173CE
 	.align 2, 0
-_08017288: .4byte gUnknown_80D5404
+_08017288: .4byte gKangaskhanStorageDialogue
 _0801728C:
 	ldr r0, [r4]
 	movs r1, 0xE
@@ -319,7 +319,7 @@ _0801728C:
 	adds r2, 0x10
 	b _080173CE
 	.align 2, 0
-_080172A8: .4byte gUnknown_80D5404
+_080172A8: .4byte gKangaskhanStorageDialogue
 _080172AC:
 	movs r0, 0x3
 	movs r1, 0x3
@@ -369,7 +369,7 @@ _080172E4:
 	.align 2, 0
 _08017310: .4byte gUnknown_202DE58
 _08017314: .4byte gUnknown_203B208
-_08017318: .4byte gUnknown_80D5404
+_08017318: .4byte gKangaskhanStorageDialogue
 _0801731C:
 	bl sub_80177F8
 	ldr r1, _0801733C
@@ -387,7 +387,7 @@ _0801731C:
 	b _08017504
 	.align 2, 0
 _0801733C: .4byte gUnknown_203B208
-_08017340: .4byte gUnknown_80D5404
+_08017340: .4byte gKangaskhanStorageDialogue
 _08017344:
 	bl GetNumberOfFilledInventorySlots
 	cmp r0, 0
@@ -425,7 +425,7 @@ _08017362:
 	b _080173D8
 	.align 2, 0
 _08017388: .4byte gUnknown_203B208
-_0801738C: .4byte gUnknown_80D5404
+_0801738C: .4byte gKangaskhanStorageDialogue
 _08017390: .4byte 0x0000010d
 _08017394:
 	ldr r0, [r4]
@@ -443,7 +443,7 @@ _08017394:
 	adds r2, 0x20
 	b _080173CE
 	.align 2, 0
-_080173B0: .4byte gUnknown_80D5404
+_080173B0: .4byte gKangaskhanStorageDialogue
 _080173B4:
 	ldr r0, [r4]
 	movs r1, 0x17
@@ -469,7 +469,7 @@ _080173D8:
 	bl sub_80141B4
 	b _08017584
 	.align 2, 0
-_080173E0: .4byte gUnknown_80D5404
+_080173E0: .4byte gKangaskhanStorageDialogue
 _080173E4: .4byte 0x0000030d
 _080173E8:
 	movs r0, 0x1
@@ -592,7 +592,7 @@ _080174B2:
 	.align 2, 0
 _080174DC: .4byte gUnknown_202DE58
 _080174E0: .4byte gUnknown_203B208
-_080174E4: .4byte gUnknown_80D5404
+_080174E4: .4byte gKangaskhanStorageDialogue
 _080174E8:
 	bl sub_80177F8
 	ldr r1, _08017528
@@ -627,7 +627,7 @@ _08017504:
 	b _08017584
 	.align 2, 0
 _08017528: .4byte gUnknown_203B208
-_0801752C: .4byte gUnknown_80D5404
+_0801752C: .4byte gKangaskhanStorageDialogue
 _08017530:
 	movs r0, 0x1
 	bl sub_801CF14
@@ -677,7 +677,7 @@ _08017584:
 	bx r0
 	.align 2, 0
 _0801758C: .4byte gUnknown_203B208
-_08017590: .4byte gUnknown_80D5404
+_08017590: .4byte gKangaskhanStorageDialogue
 _08017594: .4byte 0x0000010d
 	thumb_func_end sub_8016FF8
 
