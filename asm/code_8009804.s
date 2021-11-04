@@ -320,8 +320,10 @@ _08009C54: .4byte gUnknown_202D2A0
 _08009C58: .4byte gUnknown_202B038
 	thumb_func_end sub_8009BE4
 
-	thumb_func_start sub_8009C5C
-sub_8009C5C:
+	thumb_func_start FastMod3
+    @ return arg % 3
+    @ Has a lookup table up to 0x100
+FastMod3:
 	push {lr}
 	adds r1, r0, 0
 	cmp r1, 0xFF
@@ -330,15 +332,14 @@ sub_8009C5C:
 	bl __modsi3
 	b _08009C72
 _08009C6C:
-	ldr r0, _08009C78
+	ldr r0, =gFastMod3Lookup
 	adds r0, r1, r0
 	ldrb r0, [r0]
 _08009C72:
 	pop {r1}
 	bx r1
-	.align 2, 0
-_08009C78: .4byte gUnknown_80B88E4
-	thumb_func_end sub_8009C5C
+.pool
+	thumb_func_end FastMod3
 
 	thumb_func_start sub_8009C7C
 sub_8009C7C:
