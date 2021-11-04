@@ -159,6 +159,7 @@ include dungeon_floor.mk
 include data_pokemon.mk
 include data_item.mk
 include data_move.mk
+include graphics.mk
 
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
