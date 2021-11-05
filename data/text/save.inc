@@ -46,4 +46,25 @@ gSaveTextMayNotResume:: @ 80B6CB8
 	.string "pksdir0\0"
 	.align 2, 0
 
-	.incbin "baserom.gba", 0xB6D30, 0x60
+	.global gUnknown_80B6D30
+gUnknown_80B6D30:
+    .2byte 5, 7, 0, 0, 1, 0; .4byte gUnknown_80B6D88
+    .2byte 5, 7, 2, 0, 1, 0; .4byte gUnknown_80B6D80
+    .2byte 5, 7, 4, 0, 1, 0; .4byte gUnknown_80B6D78
+    .2byte 5, 7, 6, 0, 1, 0; .4byte gUnknown_80B6D70
+
+gUnknown_80B6D70:
+    .string "LOCAL3\0"
+    .align 2, 0
+
+gUnknown_80B6D78:
+    .string "LOCAL2\0"
+    .align 2, 0
+
+gUnknown_80B6D80:
+    .string "LOCAL1\0"
+    .align 2, 0
+
+gUnknown_80B6D88:
+    .string "LOCAL0\0"
+    .align 2, 0

@@ -4709,7 +4709,7 @@ _0800F404:
 	mov pc, r0
 	.align 2, 0
 _0800F410: .4byte gUnknown_80D3474
-_0800F414: .4byte gUnknown_80CE79C
+_0800F414: .4byte gStatusGraphics
 _0800F418: .4byte 0x0000032b
 _0800F41C: .4byte gUnknown_203B0DC
 _0800F420: .4byte 0x0000f3ff
@@ -4980,10 +4980,10 @@ _0800F63C:
 	bl sub_80098BC
 	b _0800F67E
 	.align 2, 0
-_0800F660: .4byte gUnknown_80CE79C
+_0800F660: .4byte gStatusGraphics
 _0800F664: .4byte 0x0000032b
 _0800F668: .4byte gUnknown_203B0D8
-_0800F66C: .4byte gUnknown_80CE934
+_0800F66C: .4byte gStatusGraphics4bpp
 _0800F670: .4byte 0x06010000
 _0800F674:
 	ldr r2, _0800F68C
