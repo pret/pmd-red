@@ -1,0 +1,824 @@
+#include "global.h"
+#include "constants/bg_music.h"
+#include "input.h"
+#include "item.h"
+#include "memory.h"
+#include "menu.h"
+#include "pokemon.h"
+#include "random.h"
+#include "text.h"
+#include "team_inventory.h"
+
+struct unkStruct_203B2B0
+{
+    // size: 0x174
+    u8 unk0;
+    u8 fill1[0x3];
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u16 unk8;
+    s16 unkA;
+    struct PokemonStruct *unkC;
+    /* 0x10 */ bool8 pokeRenamed;
+    /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
+    /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
+    struct ItemSlot unk1C;
+    u32 state;
+    u32 unk24;
+    u32 unk28;
+    u32 unk2C;
+    u32 unk30;
+    struct MenuItem unk34[8];
+    u16 unk74[0x8];
+    u32 unk84;
+    u8 fill88[0x104 - 0x88];
+    struct OpenedFile *unk104;
+    u8 *unk108;
+    u16 unk10C;
+    u16 unk10E;
+    u8 unk110;
+    u8 unk111;
+    u8 unk112;
+    struct UnkTextStruct2 unk114[4];
+};
+
+extern struct unkStruct_203B2B0 *gUnknown_203B2B0;
+extern struct UnkTextStruct2 gUnknown_80DCA00;
+extern struct UnkTextStruct2 gUnknown_80DC9E8;
+extern u8 gPlayerName[];
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202DFE8[];
+extern u8 gLuminousCaveSeekAwakening[];
+extern u8 gLuminousCaveEvolutionInfo[];
+extern u8 gLuminousCaveAskEvolution[];
+extern u8 gLuminousCaveYeShallReturn[];
+extern u8 gLuminousCaveGiveItem[];
+extern u8 gLuminousCaveGiveAnotherItem[];
+extern u8 gLuminousCaveLackWhatIsNeeded[];
+extern u8 gLuminousCaveOnlyOneItem[];
+extern u8 gLuminousCaveLetUsBegin[];
+extern u8 gLuminousCaveChangedAppearance[];
+extern u8 gLuminousCaveEvolved[];
+extern u8 gLuminousCaveGiveName[];
+extern u8 gLuminousCaveComeAlone[];
+extern u8 gLuminousCaveLackLevel[];
+extern u8 gLuminousCaveCantEvolveAnymore[];
+extern u8 gLuminousCaveLackFriendArea[];
+extern u8 gLuminousCaveLackRoom[];
+extern u8 gLuminousCaveLackIQ[];
+extern u8 gLuminousCaveLackItem[];
+extern u8 gLuminousCaveCantEvolveYet[];
+extern u8 gUnknown_80DCA18[];
+extern u8 *gUnknown_80D4970[];
+extern u8 *gUnknown_80D4934[];
+extern u8 gUnknown_80DCA24[];
+extern u8 gUnknown_80DCA2C[];
+
+extern bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
+extern struct PokemonStruct *sub_808D33C(void);
+extern void UpdateLuminousCaveState(u32);
+
+extern void sub_8024E9C(void);
+extern void sub_8024F00(void);
+extern void sub_8024FD4(void);
+extern void sub_80250EC(void);
+extern void sub_80251CC(void);
+extern void sub_8024F70(void);
+extern void sub_8025058(void);
+extern void sub_802515C(void);
+extern void sub_80251E8(void);
+extern void sub_8025204(void);
+extern void sub_8025230(void);
+extern void sub_8024804(void);
+extern void sub_80248FC(void);
+
+extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
+extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
+void xxx_call_fade_out_bgm(u16 speed);
+void sub_801199C(u16 songIndex);
+void ClearItemSlotAt(u32 index);
+void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed);
+void sub_80977D0(void);
+void PlaySound(u32);
+void sub_8024CFC(void);
+void sub_8025254(void);
+void sub_8024D48(void);
+extern void sub_801A5D8(u32, u32, u32, u32);
+extern void sub_801A8D0(u32);
+extern void sub_801A9E0();
+extern void sub_801B3C0(struct ItemSlot *);
+extern void nullsub_104();
+void sub_8024DBC(void);
+void sub_8024E30(void);
+void sub_801AEE4(u32, u32);
+extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
+void sub_808F734(struct PokemonStruct *, s16);
+void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
+u32 sub_801602C(u32 r0, u8 *name);
+void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
+extern u8 sub_80252B8(void);
+extern s32 sub_80144A4(s32 *);
+extern u32 sub_801A6E8(u32);
+extern s32 sub_801A8AC(void);
+extern void sub_8099690(u32);
+extern void sub_801A928(void);
+extern void PlayMenuSoundEffect(u32);
+extern u8 sub_8012FD8(u32 *);
+extern void sub_8013114(u32 *, u32 *);
+extern u32 sub_801B410(void);
+extern void sub_801B450(void);
+extern u32 sub_8016080(void);
+extern void sub_80160D8(void);
+extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
+
+u32 sub_802465C(void)
+{
+  struct OpenedFile *faceFile;
+
+  ResetUnusedInputStruct();
+  sub_800641C(0,1,1);
+  gUnknown_203B2B0 = MemoryAlloc(sizeof(struct unkStruct_203B2B0),8);
+  gUnknown_203B2B0->unk28 = 0;
+  gUnknown_203B2B0->unk2C = 0;
+  gUnknown_203B2B0->unk30 = 0;
+  gUnknown_203B2B0->unkC = sub_808D33C();
+  gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->unkC);
+  gUnknown_203B2B0->unk0 = 0;
+  faceFile = GetDialogueSpriteDataPtr(SPECIES_GULPIN);
+  gUnknown_203B2B0->unk104 = faceFile;
+  gUnknown_203B2B0->unk108 = faceFile->data;
+  gUnknown_203B2B0->unk110 = 0;
+  gUnknown_203B2B0->unk111 = 0;
+  gUnknown_203B2B0->unk112 = 0;
+  gUnknown_203B2B0->unk10C = 2;
+  gUnknown_203B2B0->unk10E = 8;
+  UpdateLuminousCaveState(0);
+  return 1;
+}
+
+u32 sub_80246F0(void)
+{
+  switch(gUnknown_203B2B0->state) {
+    case 0:
+    case 1:
+        sub_8024E9C();
+        break;
+    case 5:
+        sub_8024F00();
+        break;
+    case 6:
+    case 7:
+        sub_8024FD4();
+        break;
+    case 8:
+        sub_80250EC();
+        break;
+    case 9:
+        sub_80251CC();
+        break;
+    case 10:
+        sub_8024F70();
+        break;
+    case 0xb:
+    case 0xc:
+        sub_8025058();
+        break;
+    case 0xd:
+        sub_802515C();
+        break;
+    case 0xe:
+        sub_80251E8();
+        break;
+    case 0x15:
+        sub_8025204();
+        break;
+    case 4:
+        return 3;
+    default:
+        sub_8025230();
+        break;
+  }
+  return 0;
+}
+
+u8 sub_80247B4(void)
+{
+    return gUnknown_203B2B0->unk0;
+}
+
+void sub_80247C0(void)
+{
+    if(gUnknown_203B2B0 != NULL)
+    {
+        CloseFile(gUnknown_203B2B0->unk104);
+        MemoryFree(gUnknown_203B2B0);
+        gUnknown_203B2B0 = NULL;
+    }
+}
+
+void UpdateLuminousCaveState(u32 newState)
+{
+    gUnknown_203B2B0->state = newState;
+    sub_8024804();
+    sub_80248FC();
+}
+
+void sub_8024804(void)
+{
+  s32 iVar4;
+
+  sub_8006518(gUnknown_203B2B0->unk114);
+  switch(gUnknown_203B2B0->state) {
+    case 8:
+    case 0xD:
+        gUnknown_203B2B0->unk114[2] = gUnknown_80DCA00;
+        break;
+    case 0x11:
+    case 0x12:
+    case 0x13:
+    case 0x16:
+    case 0x17:
+    case 0x18:
+    case 0x19:
+    case 0x1a:
+    case 0x1b:
+    case 0x1c:
+        break;
+    default:
+        for(iVar4 = 0; iVar4 < 4; iVar4++)
+        {
+            gUnknown_203B2B0->unk114[iVar4] = gUnknown_80DC9E8;
+        }
+        break;
+  }
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B2B0->unk114, 1, 1);
+}
+
+void sub_80248FC(void)
+{
+  char *monName;
+  
+  switch(gUnknown_203B2B0->state) {
+    case 0:
+        if (sub_80252B8() != '\0') {
+            gUnknown_203B2B0->unk28 = 3;
+        }
+        else {
+            gUnknown_203B2B0->unk28 = 1;
+        }
+        sub_8024CFC();
+        sub_8014248(gLuminousCaveSeekAwakening,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        break;
+    case 1:
+        sub_8024CFC();
+        sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        break;
+    case 2:
+        gUnknown_203B2B0->unk24 = 1;
+        sub_80141B4(gLuminousCaveEvolutionInfo,0,0,0x105);
+        break;
+    case 3:
+        gUnknown_203B2B0->unk24 = 4;
+        xxx_call_fade_in_new_bgm(MUS_LOADING_SCREEN,0x3c);
+        sub_80141B4(gLuminousCaveYeShallReturn,0,0,0x305);
+        break;
+
+    case 5:
+        sub_8024D48();
+        sub_8014248(gLuminousCaveGiveItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        break;
+    case 6:
+        sub_801A5D8(2,3,0,10);
+        break;
+    case 7:
+        sub_801A8D0(1);
+        break;
+    case 10:
+        sub_8024DBC();
+        sub_8014248(gLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        break;
+    case 0xb:
+        sub_801A5D8(2,3,0,10);
+        sub_801AEE4(gUnknown_203B2B0->evoItem1_InvIndex,1);
+        sub_801A9E0();
+        break;
+    case 0xc:
+        sub_801A8D0(1);
+        sub_801AEE4(gUnknown_203B2B0->evoItem1_InvIndex,1);
+        sub_801A9E0();
+        break;
+    case 8:
+    case 0xd:
+        sub_801A9E0();
+        sub_8024E30();
+        sub_8012D60(&gUnknown_203B2B0->unk84,gUnknown_203B2B0->unk34,0,gUnknown_203B2B0->unk74,
+                    gUnknown_203B2B0->unk30,2);
+        break;
+    case 9:
+    case 0xe:
+        sub_801B3C0(&gUnknown_203B2B0->unk1C);
+        break;
+    case 0xf:
+        gUnknown_203B2B0->unk24 = 5;
+        sub_80141B4(gLuminousCaveLackWhatIsNeeded,0,0,0x105);
+        break;
+    case 0x10:
+        gUnknown_203B2B0->unk24 = 10;
+        sub_80141B4(gLuminousCaveOnlyOneItem,0,0,0x105);
+        break;
+    case 0x11:
+        sub_8025254();
+
+        if((gUnknown_203B2B0->unk8 & 1) != 0)
+            gUnknown_203B2B0->unk24 = 0x12;
+        else if(gUnknown_203B2B0->unk8 == 4)
+            gUnknown_203B2B0->unk24 = 0x18;
+        else if(gUnknown_203B2B0->unk8 == 2)
+            gUnknown_203B2B0->unk24 = 0x17;
+        else if(gUnknown_203B2B0->unk8 == 0x10)
+            gUnknown_203B2B0->unk24 = 0x1B;
+        else if(gUnknown_203B2B0->unk8 == 0x20)
+            gUnknown_203B2B0->unk24 = 0x19;
+        else if(gUnknown_203B2B0->unk8 == 0x40)
+            gUnknown_203B2B0->unk24 = 0x1A;
+        else if(gUnknown_203B2B0->unk8 == 8)
+            gUnknown_203B2B0->unk24 = 0x1C;
+        else
+            gUnknown_203B2B0->unk24 = 0x1D;
+        xxx_call_fade_out_bgm(0x3c);
+        sub_80141B4(gLuminousCaveLetUsBegin,0,0,0x105);
+        break;
+    case 0x12:
+        sub_808D9AC(gPlayerName,gUnknown_203B2B0->unkC,5);
+        PlaySound(0x1ff);
+        gUnknown_203B2B0->unk24 = 0x13;
+        sub_80141B4(gLuminousCaveChangedAppearance,0,0,0x105);
+        break;
+    case 0x13:
+        monName = GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum);
+        strcpy(gAvailablePokemonNames,monName);
+        monName = GetMonSpecies(gUnknown_203B2B0->unkA);
+        strcpy(gAvailablePokemonNames + 0x50,monName);
+        gUnknown_203B2B0->unk0 = 1;
+        sub_80977D0();
+        sub_808F734(gUnknown_203B2B0->unkC,gUnknown_203B2B0->unkA);
+        nullsub_104();
+        gUnknown_203B2B0->unkC = sub_808D33C();
+        if (gUnknown_203B2B0->evoItem1_InvIndex != INVENTORY_SIZE) {
+            ClearItemSlotAt(gUnknown_203B2B0->evoItem1_InvIndex);
+        }
+        if (gUnknown_203B2B0->evoItem2_InvIndex != INVENTORY_SIZE) {
+            ClearItemSlotAt(gUnknown_203B2B0->evoItem2_InvIndex);
+        }
+        FillInventoryGaps();
+        sub_801199C(0x1ff);
+        PlaySound(0xd2);
+        if (gUnknown_203B2B0->pokeRenamed) {
+                BoundedCopyStringtoBuffer(gUnknown_203B2B0->unkC->name,GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum),POKEMON_NAME_LENGTH);
+        }
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveEvolved,0,0,0x105);
+        break;
+    case 0x16:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveComeAlone,0,0,0x105);
+        break;
+    case 0x17:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveLackLevel,0,0,0x105);
+        break;
+    case 0x18:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveCantEvolveAnymore,0,0,0x105);
+        break;
+    case 0x19:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveLackFriendArea,0,0,0x105);
+        break;
+    case 0x1a:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveLackRoom,0,0,0x105);
+        break;
+    case 0x1b:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveLackIQ,0,0,0x105);
+        break;
+    case 0x1c:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveLackItem,0,0,0x105);
+        break;
+    case 0x1d:
+        gUnknown_203B2B0->unk24 = 3;
+        sub_80141B4(gLuminousCaveCantEvolveYet,0,0,0x105);
+        break;
+    case 0x14:
+        xxx_call_fade_in_new_bgm(8,0x3c);
+        gUnknown_203B2B0->unk24 = 0x15;
+        sub_80141B4(gLuminousCaveGiveName,0,0,0x105);
+        break;
+    case 0x15:
+        if (gUnknown_203B2B0->pokeRenamed) {
+                BoundedCopyStringtoBuffer(gUnknown_203B2B0->unkC->name,GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum),POKEMON_NAME_LENGTH);
+        }
+        sub_801602C(0,gUnknown_203B2B0->unkC->name);
+        break;
+    default:
+        break;
+  }
+}
+
+void sub_8024CFC(void)
+{
+    u8 *nullString;
+    struct unkStruct_203B2B0 *preload;
+    u32 defaultAction;
+
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    preload = gUnknown_203B2B0;
+    nullString = NULL;
+    preload->unk34[0].text = gUnknown_80DCA18;
+    preload->unk34[0].menuAction = 3;
+    defaultAction = 1;
+    preload->unk34[1].text = *gUnknown_80D4970;
+    preload->unk34[1].menuAction = 2;
+    preload->unk34[2].text = *gUnknown_80D4934;
+    preload->unk34[2].menuAction = defaultAction;
+    preload->unk34[3].text = nullString;
+    preload->unk34[3].menuAction = defaultAction;
+}
+
+void sub_8024D48(void)
+{
+    u8 *nullString;
+    struct unkStruct_203B2B0 *preload;
+    u32 defaultAction;
+    s32 iVar4;
+    s32 loopMax;
+
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    preload = gUnknown_203B2B0;
+    nullString = NULL;
+    preload->unk34[0].text = gUnknown_80DCA24;
+    preload->unk34[0].menuAction = 4;
+    defaultAction = 1;
+    preload->unk34[1].text = gUnknown_80DCA2C;
+    preload->unk34[1].menuAction = 5;
+    preload->unk34[2].text = *gUnknown_80D4934;
+    preload->unk34[2].menuAction = defaultAction;
+
+    loopMax = 3;
+
+    preload->unk34[3].text = nullString;
+    preload->unk34[3].menuAction = defaultAction;
+
+    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    {
+        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        {
+            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk2C)
+                return;
+        }
+    }
+
+    gUnknown_203B2B0->unk2C = 4;
+}
+
+void sub_8024DBC(void)
+{
+    u8 *nullString;
+    struct unkStruct_203B2B0 *preload;
+    u32 defaultAction;
+    s32 iVar4;
+    s32 loopMax;
+
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    preload = gUnknown_203B2B0;
+    nullString = NULL;
+    preload->unk34[0].text = gUnknown_80DCA24;
+    preload->unk34[0].menuAction = 4;
+    defaultAction = 1;
+    preload->unk34[1].text = gUnknown_80DCA2C;
+    preload->unk34[1].menuAction = 5;
+    preload->unk34[2].text = *gUnknown_80D4934;
+    preload->unk34[2].menuAction = defaultAction;
+
+    loopMax = 3;
+
+    preload->unk34[3].text = nullString;
+    preload->unk34[3].menuAction = defaultAction;
+
+    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    {
+        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        {
+            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk2C)
+                return;
+        }
+    }
+
+    gUnknown_203B2B0->unk2C = 4;
+}
+
+void sub_8024E30(void)
+{
+    u8 *nullString;
+    struct unkStruct_203B2B0 *preload;
+    u32 defaultAction;
+    s32 iVar4;
+    s32 loopMax;
+
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    preload = gUnknown_203B2B0;
+    nullString = NULL;
+    preload->unk34[0].text = gUnknown_80DCA2C;
+    preload->unk34[0].menuAction = 5;
+    defaultAction = 1;
+    preload->unk34[1].text = *gUnknown_80D4970;
+    preload->unk34[1].menuAction = 2;
+
+    loopMax = 2;
+
+    preload->unk34[2].text = nullString;
+    preload->unk34[2].menuAction = defaultAction;
+
+    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    {
+        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        {
+            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk30)
+                return;
+        }
+    }
+
+    gUnknown_203B2B0->unk30 = 5;
+}
+
+void sub_8024E9C(void)
+{
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
+    {
+        if(menuAction != 1) gUnknown_203B2B0->unk28 = menuAction;
+        switch(menuAction)
+        {
+            case 3:
+                if(sub_80252B8())
+                    UpdateLuminousCaveState(5);
+                else
+                    UpdateLuminousCaveState(0x16);
+                break;
+            case 2:
+                UpdateLuminousCaveState(2);
+                break;
+            case 1:
+                UpdateLuminousCaveState(3);
+                break;
+        }
+    }
+}
+
+void sub_8024F00(void)
+{
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
+    {
+        if(menuAction != 1) gUnknown_203B2B0->unk2C = menuAction;
+        switch(menuAction)
+        {
+            case 4:
+                gUnknown_203B2B0->evoItem1_InvIndex = INVENTORY_SIZE;
+                gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
+                UpdateLuminousCaveState(0x11);
+                break;
+            case 5:
+                if(GetNumberOfFilledInventorySlots() == 0)
+                    UpdateLuminousCaveState(0xF);
+                else
+                    UpdateLuminousCaveState(0x6);
+                break;
+            case 1:
+                UpdateLuminousCaveState(1);
+                break;
+        }
+    }
+}
+
+void sub_8024F70(void)
+{
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
+    {
+        if(menuAction != 1) gUnknown_203B2B0->unk2C = menuAction;
+        switch(menuAction)
+        {
+            case 4:
+                UpdateLuminousCaveState(0x11);
+                break;
+            case 5:
+                if(GetNumberOfFilledInventorySlots() < 2)
+                    UpdateLuminousCaveState(0x10);
+                else
+                    UpdateLuminousCaveState(0xB);
+                break;
+            case 1:
+                UpdateLuminousCaveState(1);
+                break;
+        }
+    }
+}
+
+void sub_8024FD4(void)
+{
+    switch(sub_801A6E8(1))
+    {
+        case 3:
+            gUnknown_203B2B0->evoItem1_InvIndex = sub_801A8AC();
+            gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
+            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
+            UpdateLuminousCaveState(8);
+            break;
+        case 4:
+            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            sub_8099690(0);
+            UpdateLuminousCaveState(9);
+            break;
+        case 2:
+            sub_801A928();
+            UpdateLuminousCaveState(5);
+            break;
+    }
+}
+
+void sub_8025058(void)
+{
+    switch(sub_801A6E8(1))
+    {
+        case 3:
+            if(gUnknown_203B2B0->evoItem1_InvIndex != sub_801A8AC())
+            {
+                gUnknown_203B2B0->evoItem2_InvIndex = sub_801A8AC();
+                gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
+                UpdateLuminousCaveState(0xD);
+            }
+            else
+                PlayMenuSoundEffect(2);
+            break;
+        case 4:
+            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            sub_8099690(0);
+            UpdateLuminousCaveState(0xE);
+            break;
+        case 2:
+            sub_801A928();
+            UpdateLuminousCaveState(0xA);
+            break;
+    }
+}
+
+void sub_80250EC(void)
+{
+    s32 menuAction;
+    menuAction = 0;
+    sub_801A6E8(0);
+
+    if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
+    {
+        sub_8013114(&gUnknown_203B2B0->unk84, &menuAction);
+        if(menuAction != 1) gUnknown_203B2B0->unk30 = menuAction;
+    }
+    switch(menuAction)
+    {
+        case 5:
+            sub_801A928();
+            UpdateLuminousCaveState(0xA);
+            break;
+        case 2:
+            sub_8099690(0);
+            UpdateLuminousCaveState(0x9);
+            break;
+        case 1:
+            UpdateLuminousCaveState(0x7);
+            break;
+    }
+}
+
+void sub_802515C(void)
+{
+    s32 menuAction;
+    menuAction = 0;
+    sub_801A6E8(0);
+
+    if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
+    {
+        sub_8013114(&gUnknown_203B2B0->unk84, &menuAction);
+        if(menuAction != 1) gUnknown_203B2B0->unk30 = menuAction;
+    }
+    switch(menuAction)
+    {
+        case 5:
+            sub_801A928();
+            UpdateLuminousCaveState(0x11);
+            break;
+        case 2:
+            sub_8099690(0);
+            UpdateLuminousCaveState(0xE);
+            break;
+        case 1:
+            UpdateLuminousCaveState(0xC);
+            break;
+    }
+}
+
+void sub_80251CC(void)
+{
+    switch(sub_801B410())
+    {
+        case 2:
+        case 3:
+            sub_801B450();
+            UpdateLuminousCaveState(0x7);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_80251E8(void)
+{
+    switch(sub_801B410())
+    {
+        case 2:
+        case 3:
+            sub_801B450();
+            UpdateLuminousCaveState(0xC);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_8025204(void)
+{
+    switch(sub_8016080())
+    {
+        case 3:
+            sub_80160D8();
+            gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->unkC);
+            UpdateLuminousCaveState(0x3);
+            break;
+        default:
+            break;
+    }
+}
+
+void sub_8025230(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        UpdateLuminousCaveState(gUnknown_203B2B0->unk24);
+    }
+}
+
+void sub_8025254(void)
+{
+    if(gUnknown_203B2B0->evoItem1_InvIndex == INVENTORY_SIZE)
+        gUnknown_203B2B0->unk4 = 0;
+    else
+    {
+        gUnknown_203B2B0->unk4 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].itemIndex;
+    }
+    if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
+        gUnknown_203B2B0->unk5 = 0;
+    else
+    {
+        gUnknown_203B2B0->unk5 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].itemIndex;
+    }
+
+    gUnknown_203B2B0->unk6 = RandomCapped(0xFF);
+    sub_808F468(gUnknown_203B2B0->unkC, &gUnknown_203B2B0->unk4, 1);
+}
+
+bool8 sub_80252B8(void)
+{
+    s32 r3;
+    s32 iVar3; // loop index
+    struct PokemonStruct *preload;
+
+    preload = &gRecruitedPokemonRef->pokemon[0];
+    r3 = 0;
+    for(iVar3 = 0; iVar3 < NUM_SPECIES; iVar3++, preload++)
+    {
+        if((preload->unk0 >> 1) & 1)
+            r3++;
+    }
+
+    if(r3 == 1)
+        return TRUE;
+    else
+        return FALSE;
+}

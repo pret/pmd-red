@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item.h"
 #include "kangaskhan_storage.h"
 #include "team_inventory.h"
 
@@ -24,7 +25,6 @@ extern void sub_801CBB8(void);
 extern void sub_8017F10(u32);
 extern void sub_8012EA4(u32 *, u32);
 
-bool8 IsNotMoneyOrUsedTMItem(u8 id);
 extern u8 sub_801ADA0(s32);
 extern void sub_801A928(void);
 extern void sub_8099690(u32);

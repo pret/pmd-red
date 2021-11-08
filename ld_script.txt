@@ -100,7 +100,8 @@ SECTIONS {
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
-        asm/pokemon_square.o(.text);
+        asm/kecleon_items_1.o(.text);
+        src/kecleon_items_2.o(.text);
         src/code_801AFA4.o(.text);
         asm/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
@@ -115,7 +116,10 @@ SECTIONS {
         src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);
         src/gulpin_shop_1.o(.text);
+        asm/code_801EE10.o(.text);
+        src/luminous_cave.o(.text);
         asm/friend_list_menu.o(.text);
+        src/friend_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
