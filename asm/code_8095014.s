@@ -405,11 +405,11 @@ sub_809542C:
 	bl sub_8094E4C
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldr r1, [r4]
 	ldrh r0, [r0, 0x8]
 	strh r0, [r1, 0xC]
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	mov r0, sp
 	bl sub_808DA34

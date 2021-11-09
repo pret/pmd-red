@@ -1727,7 +1727,7 @@ sub_801FB50:
 	subs r0, 0x50
 	bl strcpy
 	subs r5, 0xF0
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl sub_808DA34

@@ -2816,7 +2816,7 @@ _080269B4:
 	muls r1, r0
 	ldr r0, [r2]
 	adds r4, r0, r1
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldrb r1, [r4, 0x2]
 	cmp r1, 0
 	bne _080269DA

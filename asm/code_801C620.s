@@ -1008,7 +1008,7 @@ _0801D08C:
 	strb r5, [r0, 0x8]
 	ldr r0, [r4]
 	strb r5, [r0, 0x9]
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 	strb r5, [r1, 0x7]
@@ -1128,7 +1128,7 @@ _0801D196:
 	movs r0, 0x1
 	b _0801D1CC
 _0801D1A0:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldr r1, [r4, 0xC]
 	cmp r1, r0
 	bne _0801D1C6

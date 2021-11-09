@@ -1530,7 +1530,7 @@ _080335B8:
 	.align 2, 0
 _080335BC: .4byte gUnknown_80E2D7C
 _080335C0:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	adds r1, 0x4C
 	add r0, sp, 0x14

@@ -19,13 +19,13 @@ struct unkStruct_203B2B0
     u8 unk6;
     u16 unk8;
     s16 unkA;
-    struct PokemonStruct *unkC;
+    struct PokemonStruct *pokeStruct;
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
     struct ItemSlot unk1C;
     u32 state;
-    u32 unk24;
+    u32 fallbackState;
     u32 unk28;
     u32 unk2C;
     u32 unk30;
@@ -76,7 +76,7 @@ extern u8 gUnknown_80DCA24[];
 extern u8 gUnknown_80DCA2C[];
 
 extern bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
-extern struct PokemonStruct *sub_808D33C(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void UpdateLuminousCaveState(u32);
 
 extern void sub_8024E9C(void);
@@ -89,7 +89,7 @@ extern void sub_8025058(void);
 extern void sub_802515C(void);
 extern void sub_80251E8(void);
 extern void sub_8025204(void);
-extern void sub_8025230(void);
+extern void LuminousCave_AdvancetoFallbackState(void);
 extern void sub_8024804(void);
 extern void sub_80248FC(void);
 
@@ -142,8 +142,8 @@ u32 sub_802465C(void)
   gUnknown_203B2B0->unk28 = 0;
   gUnknown_203B2B0->unk2C = 0;
   gUnknown_203B2B0->unk30 = 0;
-  gUnknown_203B2B0->unkC = sub_808D33C();
-  gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->unkC);
+  gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
+  gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
   gUnknown_203B2B0->unk0 = 0;
   faceFile = GetDialogueSpriteDataPtr(SPECIES_GULPIN);
   gUnknown_203B2B0->unk104 = faceFile;
@@ -196,7 +196,7 @@ u32 sub_80246F0(void)
     case 4:
         return 3;
     default:
-        sub_8025230();
+        LuminousCave_AdvancetoFallbackState();
         break;
   }
   return 0;
@@ -276,11 +276,11 @@ void sub_80248FC(void)
         sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case 2:
-        gUnknown_203B2B0->unk24 = 1;
+        gUnknown_203B2B0->fallbackState = 1;
         sub_80141B4(gLuminousCaveEvolutionInfo,0,0,0x105);
         break;
     case 3:
-        gUnknown_203B2B0->unk24 = 4;
+        gUnknown_203B2B0->fallbackState = 4;
         xxx_call_fade_in_new_bgm(MUS_LOADING_SCREEN,0x3c);
         sub_80141B4(gLuminousCaveYeShallReturn,0,0,0x305);
         break;
@@ -321,51 +321,51 @@ void sub_80248FC(void)
         sub_801B3C0(&gUnknown_203B2B0->unk1C);
         break;
     case 0xf:
-        gUnknown_203B2B0->unk24 = 5;
+        gUnknown_203B2B0->fallbackState = 5;
         sub_80141B4(gLuminousCaveLackWhatIsNeeded,0,0,0x105);
         break;
     case 0x10:
-        gUnknown_203B2B0->unk24 = 10;
+        gUnknown_203B2B0->fallbackState = 10;
         sub_80141B4(gLuminousCaveOnlyOneItem,0,0,0x105);
         break;
     case 0x11:
         sub_8025254();
 
         if((gUnknown_203B2B0->unk8 & 1) != 0)
-            gUnknown_203B2B0->unk24 = 0x12;
+            gUnknown_203B2B0->fallbackState = 0x12;
         else if(gUnknown_203B2B0->unk8 == 4)
-            gUnknown_203B2B0->unk24 = 0x18;
+            gUnknown_203B2B0->fallbackState = 0x18;
         else if(gUnknown_203B2B0->unk8 == 2)
-            gUnknown_203B2B0->unk24 = 0x17;
+            gUnknown_203B2B0->fallbackState = 0x17;
         else if(gUnknown_203B2B0->unk8 == 0x10)
-            gUnknown_203B2B0->unk24 = 0x1B;
+            gUnknown_203B2B0->fallbackState = 0x1B;
         else if(gUnknown_203B2B0->unk8 == 0x20)
-            gUnknown_203B2B0->unk24 = 0x19;
+            gUnknown_203B2B0->fallbackState = 0x19;
         else if(gUnknown_203B2B0->unk8 == 0x40)
-            gUnknown_203B2B0->unk24 = 0x1A;
+            gUnknown_203B2B0->fallbackState = 0x1A;
         else if(gUnknown_203B2B0->unk8 == 8)
-            gUnknown_203B2B0->unk24 = 0x1C;
+            gUnknown_203B2B0->fallbackState = 0x1C;
         else
-            gUnknown_203B2B0->unk24 = 0x1D;
+            gUnknown_203B2B0->fallbackState = 0x1D;
         xxx_call_fade_out_bgm(0x3c);
         sub_80141B4(gLuminousCaveLetUsBegin,0,0,0x105);
         break;
     case 0x12:
-        sub_808D9AC(gPlayerName,gUnknown_203B2B0->unkC,5);
+        sub_808D9AC(gPlayerName,gUnknown_203B2B0->pokeStruct,5);
         PlaySound(0x1ff);
-        gUnknown_203B2B0->unk24 = 0x13;
+        gUnknown_203B2B0->fallbackState = 0x13;
         sub_80141B4(gLuminousCaveChangedAppearance,0,0,0x105);
         break;
     case 0x13:
-        monName = GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum);
+        monName = GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum);
         strcpy(gAvailablePokemonNames,monName);
         monName = GetMonSpecies(gUnknown_203B2B0->unkA);
         strcpy(gAvailablePokemonNames + 0x50,monName);
         gUnknown_203B2B0->unk0 = 1;
         sub_80977D0();
-        sub_808F734(gUnknown_203B2B0->unkC,gUnknown_203B2B0->unkA);
+        sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->unkA);
         nullsub_104();
-        gUnknown_203B2B0->unkC = sub_808D33C();
+        gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
         if (gUnknown_203B2B0->evoItem1_InvIndex != INVENTORY_SIZE) {
             ClearItemSlotAt(gUnknown_203B2B0->evoItem1_InvIndex);
         }
@@ -376,53 +376,53 @@ void sub_80248FC(void)
         sub_801199C(0x1ff);
         PlaySound(0xd2);
         if (gUnknown_203B2B0->pokeRenamed) {
-                BoundedCopyStringtoBuffer(gUnknown_203B2B0->unkC->name,GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum),POKEMON_NAME_LENGTH);
+                BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
         }
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveEvolved,0,0,0x105);
         break;
     case 0x16:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveComeAlone,0,0,0x105);
         break;
     case 0x17:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveLackLevel,0,0,0x105);
         break;
     case 0x18:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveCantEvolveAnymore,0,0,0x105);
         break;
     case 0x19:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveLackFriendArea,0,0,0x105);
         break;
     case 0x1a:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveLackRoom,0,0,0x105);
         break;
     case 0x1b:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveLackIQ,0,0,0x105);
         break;
     case 0x1c:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveLackItem,0,0,0x105);
         break;
     case 0x1d:
-        gUnknown_203B2B0->unk24 = 3;
+        gUnknown_203B2B0->fallbackState = 3;
         sub_80141B4(gLuminousCaveCantEvolveYet,0,0,0x105);
         break;
     case 0x14:
         xxx_call_fade_in_new_bgm(8,0x3c);
-        gUnknown_203B2B0->unk24 = 0x15;
+        gUnknown_203B2B0->fallbackState = 0x15;
         sub_80141B4(gLuminousCaveGiveName,0,0,0x105);
         break;
     case 0x15:
         if (gUnknown_203B2B0->pokeRenamed) {
-                BoundedCopyStringtoBuffer(gUnknown_203B2B0->unkC->name,GetMonSpecies(gUnknown_203B2B0->unkC->speciesNum),POKEMON_NAME_LENGTH);
+                BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
         }
-        sub_801602C(0,gUnknown_203B2B0->unkC->name);
+        sub_801602C(0,gUnknown_203B2B0->pokeStruct->name);
         break;
     default:
         break;
@@ -767,7 +767,7 @@ void sub_8025204(void)
     {
         case 3:
             sub_80160D8();
-            gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->unkC);
+            gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
             UpdateLuminousCaveState(0x3);
             break;
         default:
@@ -775,12 +775,12 @@ void sub_8025204(void)
     }
 }
 
-void sub_8025230(void)
+void LuminousCave_AdvancetoFallbackState(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        UpdateLuminousCaveState(gUnknown_203B2B0->unk24);
+        UpdateLuminousCaveState(gUnknown_203B2B0->fallbackState);
     }
 }
 
@@ -800,7 +800,7 @@ void sub_8025254(void)
     }
 
     gUnknown_203B2B0->unk6 = RandomCapped(0xFF);
-    sub_808F468(gUnknown_203B2B0->unkC, &gUnknown_203B2B0->unk4, 1);
+    sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->unk4, 1);
 }
 
 bool8 sub_80252B8(void)
