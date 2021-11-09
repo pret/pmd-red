@@ -18,7 +18,7 @@ struct unkStruct_203B2B0
     u8 unk5;
     u8 unk6;
     u16 unk8;
-    s16 unkA;
+    /* 0xA */ s16 targetSpecies; // species # of the evolved pokemon (what we are evolving to)
     struct PokemonStruct *pokeStruct;
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
@@ -91,7 +91,7 @@ extern void sub_80251E8(void);
 extern void sub_8025204(void);
 extern void LuminousCave_AdvancetoFallbackState(void);
 extern void sub_8024804(void);
-extern void sub_80248FC(void);
+extern void UpdateLuminousCaveDialogue(void);
 
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
@@ -117,7 +117,6 @@ void sub_808F734(struct PokemonStruct *, s16);
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 u32 sub_801602C(u32 r0, u8 *name);
 void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
-extern u8 sub_80252B8(void);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801A6E8(u32);
 extern s32 sub_801A8AC(void);
@@ -131,6 +130,33 @@ extern void sub_801B450(void);
 extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
+
+bool8 LuminousCave_HasOnly1Member(void);
+
+enum 
+{
+    LUMINOUS_CAVE_ENTRY,
+    LUMINOUS_CAVE_ASK_EVOLVE,
+    LUMINOUS_CAVE_EVOLVE_INFO,
+    LUMINOUS_CAVE_SHALL_RETURN,
+    LUMINOUS_CAVE_GIVE_ITEM_1 = 5,
+    LUMINOUS_CAVE_GIVE_ITEM_2 = 10,
+    LUMINOUS_CAVE_LACK_WHAT_NEEDED = 0xF,
+    LUMINOUS_CAVE_ONLY_ONE_ITEM = 0x10,
+    LUMINOUS_CAVE_LET_US_BEGIN = 0x11,
+    LUMINOUS_CAVE_CHANGED_APPEARANCE = 0x12,
+    LUMINOUS_CAVE_EVOLVED = 0x13,
+    LUMINOUS_CAVE_PROMPT_NAME = 0x14,
+    LUMINOUS_CAVE_FINISH_NAME = 0x15,
+    LUMINOUS_CAVE_COME_ALONE = 0x16,
+    LUMINOUS_CAVE_LACK_LEVEL = 0x17,
+    LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE = 0x18,
+    LUMINOUS_CAVE_LACK_FRIEND_AREA = 0x19,
+    LUMINOUS_CAVE_LACK_ROOM = 0x1A,
+    LUMINOUS_CAVE_LACK_IQ = 0x1B,
+    LUMINOUS_CAVE_LACK_ITEM = 0x1C,
+    LUMINOUS_CAVE_CANT_EVOLVE_YET = 0x1D,
+};
 
 u32 sub_802465C(void)
 {
@@ -153,18 +179,18 @@ u32 sub_802465C(void)
   gUnknown_203B2B0->unk112 = 0;
   gUnknown_203B2B0->unk10C = 2;
   gUnknown_203B2B0->unk10E = 8;
-  UpdateLuminousCaveState(0);
+  UpdateLuminousCaveState(LUMINOUS_CAVE_ENTRY);
   return 1;
 }
 
 u32 sub_80246F0(void)
 {
   switch(gUnknown_203B2B0->state) {
-    case 0:
-    case 1:
+    case LUMINOUS_CAVE_ENTRY:
+    case LUMINOUS_CAVE_ASK_EVOLVE:
         sub_8024E9C();
         break;
-    case 5:
+    case LUMINOUS_CAVE_GIVE_ITEM_1:
         sub_8024F00();
         break;
     case 6:
@@ -177,7 +203,7 @@ u32 sub_80246F0(void)
     case 9:
         sub_80251CC();
         break;
-    case 10:
+    case LUMINOUS_CAVE_GIVE_ITEM_2:
         sub_8024F70();
         break;
     case 0xb:
@@ -190,7 +216,7 @@ u32 sub_80246F0(void)
     case 0xe:
         sub_80251E8();
         break;
-    case 0x15:
+    case LUMINOUS_CAVE_FINISH_NAME:
         sub_8025204();
         break;
     case 4:
@@ -207,7 +233,7 @@ u8 sub_80247B4(void)
     return gUnknown_203B2B0->unk0;
 }
 
-void sub_80247C0(void)
+void CleanLuminousCave(void)
 {
     if(gUnknown_203B2B0 != NULL)
     {
@@ -221,7 +247,7 @@ void UpdateLuminousCaveState(u32 newState)
 {
     gUnknown_203B2B0->state = newState;
     sub_8024804();
-    sub_80248FC();
+    UpdateLuminousCaveDialogue();
 }
 
 void sub_8024804(void)
@@ -234,16 +260,16 @@ void sub_8024804(void)
     case 0xD:
         gUnknown_203B2B0->unk114[2] = gUnknown_80DCA00;
         break;
-    case 0x11:
-    case 0x12:
-    case 0x13:
-    case 0x16:
-    case 0x17:
-    case 0x18:
-    case 0x19:
-    case 0x1a:
-    case 0x1b:
-    case 0x1c:
+    case LUMINOUS_CAVE_LET_US_BEGIN:
+    case LUMINOUS_CAVE_CHANGED_APPEARANCE:
+    case LUMINOUS_CAVE_EVOLVED:
+    case LUMINOUS_CAVE_COME_ALONE:
+    case LUMINOUS_CAVE_LACK_LEVEL:
+    case LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE:
+    case LUMINOUS_CAVE_LACK_FRIEND_AREA:
+    case LUMINOUS_CAVE_LACK_ROOM:
+    case LUMINOUS_CAVE_LACK_IQ:
+    case LUMINOUS_CAVE_LACK_ITEM:
         break;
     default:
         for(iVar4 = 0; iVar4 < 4; iVar4++)
@@ -256,13 +282,13 @@ void sub_8024804(void)
   sub_800641C(gUnknown_203B2B0->unk114, 1, 1);
 }
 
-void sub_80248FC(void)
+void UpdateLuminousCaveDialogue(void)
 {
   char *monName;
   
   switch(gUnknown_203B2B0->state) {
-    case 0:
-        if (sub_80252B8() != '\0') {
+    case LUMINOUS_CAVE_ENTRY:
+        if (LuminousCave_HasOnly1Member()) {
             gUnknown_203B2B0->unk28 = 3;
         }
         else {
@@ -271,21 +297,21 @@ void sub_80248FC(void)
         sub_8024CFC();
         sub_8014248(gLuminousCaveSeekAwakening,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
-    case 1:
+    case LUMINOUS_CAVE_ASK_EVOLVE:
         sub_8024CFC();
         sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
-    case 2:
-        gUnknown_203B2B0->fallbackState = 1;
+    case LUMINOUS_CAVE_EVOLVE_INFO:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_ASK_EVOLVE;
         sub_80141B4(gLuminousCaveEvolutionInfo,0,0,0x105);
         break;
-    case 3:
+    case LUMINOUS_CAVE_SHALL_RETURN:
         gUnknown_203B2B0->fallbackState = 4;
         xxx_call_fade_in_new_bgm(MUS_LOADING_SCREEN,0x3c);
         sub_80141B4(gLuminousCaveYeShallReturn,0,0,0x305);
         break;
 
-    case 5:
+    case LUMINOUS_CAVE_GIVE_ITEM_1:
         sub_8024D48();
         sub_8014248(gLuminousCaveGiveItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
@@ -295,7 +321,7 @@ void sub_80248FC(void)
     case 7:
         sub_801A8D0(1);
         break;
-    case 10:
+    case LUMINOUS_CAVE_GIVE_ITEM_2:
         sub_8024DBC();
         sub_8014248(gLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
@@ -320,50 +346,50 @@ void sub_80248FC(void)
     case 0xe:
         sub_801B3C0(&gUnknown_203B2B0->unk1C);
         break;
-    case 0xf:
-        gUnknown_203B2B0->fallbackState = 5;
+    case LUMINOUS_CAVE_LACK_WHAT_NEEDED:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_1;
         sub_80141B4(gLuminousCaveLackWhatIsNeeded,0,0,0x105);
         break;
-    case 0x10:
-        gUnknown_203B2B0->fallbackState = 10;
+    case LUMINOUS_CAVE_ONLY_ONE_ITEM:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_2;
         sub_80141B4(gLuminousCaveOnlyOneItem,0,0,0x105);
         break;
-    case 0x11:
+    case LUMINOUS_CAVE_LET_US_BEGIN:
         sub_8025254();
 
         if((gUnknown_203B2B0->unk8 & 1) != 0)
-            gUnknown_203B2B0->fallbackState = 0x12;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CHANGED_APPEARANCE;
         else if(gUnknown_203B2B0->unk8 == 4)
-            gUnknown_203B2B0->fallbackState = 0x18;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE;
         else if(gUnknown_203B2B0->unk8 == 2)
-            gUnknown_203B2B0->fallbackState = 0x17;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_LEVEL;
         else if(gUnknown_203B2B0->unk8 == 0x10)
-            gUnknown_203B2B0->fallbackState = 0x1B;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_IQ;
         else if(gUnknown_203B2B0->unk8 == 0x20)
-            gUnknown_203B2B0->fallbackState = 0x19;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_FRIEND_AREA;
         else if(gUnknown_203B2B0->unk8 == 0x40)
-            gUnknown_203B2B0->fallbackState = 0x1A;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ROOM;
         else if(gUnknown_203B2B0->unk8 == 8)
-            gUnknown_203B2B0->fallbackState = 0x1C;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ITEM;
         else
-            gUnknown_203B2B0->fallbackState = 0x1D;
+            gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
         xxx_call_fade_out_bgm(0x3c);
         sub_80141B4(gLuminousCaveLetUsBegin,0,0,0x105);
         break;
-    case 0x12:
+    case LUMINOUS_CAVE_CHANGED_APPEARANCE:
         sub_808D9AC(gPlayerName,gUnknown_203B2B0->pokeStruct,5);
         PlaySound(0x1ff);
-        gUnknown_203B2B0->fallbackState = 0x13;
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_EVOLVED;
         sub_80141B4(gLuminousCaveChangedAppearance,0,0,0x105);
         break;
-    case 0x13:
+    case LUMINOUS_CAVE_EVOLVED:
         monName = GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum);
         strcpy(gAvailablePokemonNames,monName);
-        monName = GetMonSpecies(gUnknown_203B2B0->unkA);
+        monName = GetMonSpecies(gUnknown_203B2B0->targetSpecies);
         strcpy(gAvailablePokemonNames + 0x50,monName);
         gUnknown_203B2B0->unk0 = 1;
         sub_80977D0();
-        sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->unkA);
+        sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->targetSpecies);
         nullsub_104();
         gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
         if (gUnknown_203B2B0->evoItem1_InvIndex != INVENTORY_SIZE) {
@@ -378,47 +404,47 @@ void sub_80248FC(void)
         if (gUnknown_203B2B0->pokeRenamed) {
                 BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
         }
-        gUnknown_203B2B0->fallbackState = 3;
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveEvolved,0,0,0x105);
         break;
-    case 0x16:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_COME_ALONE:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveComeAlone,0,0,0x105);
         break;
-    case 0x17:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_LACK_LEVEL:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveLackLevel,0,0,0x105);
         break;
-    case 0x18:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveCantEvolveAnymore,0,0,0x105);
         break;
-    case 0x19:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_LACK_FRIEND_AREA:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveLackFriendArea,0,0,0x105);
         break;
-    case 0x1a:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_LACK_ROOM:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveLackRoom,0,0,0x105);
         break;
-    case 0x1b:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_LACK_IQ:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveLackIQ,0,0,0x105);
         break;
-    case 0x1c:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_LACK_ITEM:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveLackItem,0,0,0x105);
         break;
-    case 0x1d:
-        gUnknown_203B2B0->fallbackState = 3;
+    case LUMINOUS_CAVE_CANT_EVOLVE_YET:
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
         sub_80141B4(gLuminousCaveCantEvolveYet,0,0,0x105);
         break;
-    case 0x14:
+    case LUMINOUS_CAVE_PROMPT_NAME:
         xxx_call_fade_in_new_bgm(8,0x3c);
-        gUnknown_203B2B0->fallbackState = 0x15;
+        gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_FINISH_NAME;
         sub_80141B4(gLuminousCaveGiveName,0,0,0x105);
         break;
-    case 0x15:
+    case LUMINOUS_CAVE_FINISH_NAME:
         if (gUnknown_203B2B0->pokeRenamed) {
                 BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
         }
@@ -435,7 +461,7 @@ void sub_8024CFC(void)
     struct unkStruct_203B2B0 *preload;
     u32 defaultAction;
 
-    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
     preload = gUnknown_203B2B0;
     nullString = NULL;
     preload->unk34[0].text = gUnknown_80DCA18;
@@ -457,7 +483,7 @@ void sub_8024D48(void)
     s32 iVar4;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
     preload = gUnknown_203B2B0;
     nullString = NULL;
     preload->unk34[0].text = gUnknown_80DCA24;
@@ -493,7 +519,7 @@ void sub_8024DBC(void)
     s32 iVar4;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
     preload = gUnknown_203B2B0;
     nullString = NULL;
     preload->unk34[0].text = gUnknown_80DCA24;
@@ -529,7 +555,7 @@ void sub_8024E30(void)
     s32 iVar4;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B2B0->unk74, 0, 0x10);
+    MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
     preload = gUnknown_203B2B0;
     nullString = NULL;
     preload->unk34[0].text = gUnknown_80DCA2C;
@@ -564,16 +590,16 @@ void sub_8024E9C(void)
         switch(menuAction)
         {
             case 3:
-                if(sub_80252B8())
-                    UpdateLuminousCaveState(5);
+                if(LuminousCave_HasOnly1Member())
+                    UpdateLuminousCaveState(LUMINOUS_CAVE_GIVE_ITEM_1);
                 else
-                    UpdateLuminousCaveState(0x16);
+                    UpdateLuminousCaveState(LUMINOUS_CAVE_COME_ALONE);
                 break;
             case 2:
-                UpdateLuminousCaveState(2);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_EVOLVE_INFO);
                 break;
             case 1:
-                UpdateLuminousCaveState(3);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_SHALL_RETURN);
                 break;
         }
     }
@@ -590,16 +616,16 @@ void sub_8024F00(void)
             case 4:
                 gUnknown_203B2B0->evoItem1_InvIndex = INVENTORY_SIZE;
                 gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
-                UpdateLuminousCaveState(0x11);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
                 break;
             case 5:
                 if(GetNumberOfFilledInventorySlots() == 0)
-                    UpdateLuminousCaveState(0xF);
+                    UpdateLuminousCaveState(LUMINOUS_CAVE_LACK_WHAT_NEEDED);
                 else
                     UpdateLuminousCaveState(0x6);
                 break;
             case 1:
-                UpdateLuminousCaveState(1);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_ASK_EVOLVE);
                 break;
         }
     }
@@ -614,16 +640,16 @@ void sub_8024F70(void)
         switch(menuAction)
         {
             case 4:
-                UpdateLuminousCaveState(0x11);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
                 break;
             case 5:
                 if(GetNumberOfFilledInventorySlots() < 2)
-                    UpdateLuminousCaveState(0x10);
+                    UpdateLuminousCaveState(LUMINOUS_CAVE_ONLY_ONE_ITEM);
                 else
                     UpdateLuminousCaveState(0xB);
                 break;
             case 1:
-                UpdateLuminousCaveState(1);
+                UpdateLuminousCaveState(LUMINOUS_CAVE_ASK_EVOLVE);
                 break;
         }
     }
@@ -646,7 +672,7 @@ void sub_8024FD4(void)
             break;
         case 2:
             sub_801A928();
-            UpdateLuminousCaveState(5);
+            UpdateLuminousCaveState(LUMINOUS_CAVE_GIVE_ITEM_1);
             break;
     }
 }
@@ -719,7 +745,7 @@ void sub_802515C(void)
     {
         case 5:
             sub_801A928();
-            UpdateLuminousCaveState(0x11);
+            UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
             break;
         case 2:
             sub_8099690(0);
@@ -768,7 +794,7 @@ void sub_8025204(void)
         case 3:
             sub_80160D8();
             gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
-            UpdateLuminousCaveState(0x3);
+            UpdateLuminousCaveState(LUMINOUS_CAVE_SHALL_RETURN);
             break;
         default:
             break;
@@ -803,7 +829,7 @@ void sub_8025254(void)
     sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->unk4, 1);
 }
 
-bool8 sub_80252B8(void)
+bool8 LuminousCave_HasOnly1Member(void)
 {
     s32 r3;
     s32 iVar3; // loop index
