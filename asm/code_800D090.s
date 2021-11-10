@@ -6923,7 +6923,7 @@ sub_801059C:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x14
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r7, r0, 0
 	ldr r6, _080106E4
 	ldr r0, [r6]
@@ -7898,7 +7898,7 @@ sub_8010DA4:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	mov r9, r0
 	ldr r6, _08010EBC
 	ldr r0, [r6]

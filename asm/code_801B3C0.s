@@ -59,7 +59,7 @@ _0801B65E:
 	ldr r0, [r5]
 	strb r2, [r0, 0x1C]
 	ldr r4, _0801B6A4
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x6

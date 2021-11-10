@@ -10,8 +10,8 @@
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventory_203B460;
 
-u32 sub_801B410();
-void sub_801B450();
+extern u32 sub_801B410();
+extern void sub_801B450();
 extern u32 sub_801EF38(u8 r0);
 extern void sub_801F214();
 
@@ -29,9 +29,6 @@ extern u32 sub_801A6E8(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
 extern void sub_808D31C(struct PokemonStruct *);
-u32 sub_8027E18(struct PokemonStruct *);
-bool8 IsNotMoneyOrUsedTMItem(u8 id);
-u8 sub_8027E4C(struct PokemonStruct *r0);
 extern u8 sub_80023E4(u32);
 extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
@@ -44,6 +41,74 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern u8 gUnknown_202DE58[];
 extern u32 sub_801F194(void);
+
+u32 sub_8027E18(struct PokemonStruct *);
+u8 sub_8027E4C(struct PokemonStruct *r0);
+extern u32 sub_801BF48(void);
+extern void sub_801BF98(void);
+extern u32 sub_80244E4(void);
+extern void sub_802453C(void);
+
+void sub_8027A40(void)
+{
+    switch(sub_80244E4())
+    {
+        case 2:
+        case 3:
+            sub_802453C();
+            SetFriendAreaActionMenuState(2);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_8027A5C(void)
+{
+    switch(sub_801BF48())
+    {
+        case 2:
+        case 3:
+            sub_801BF98();
+            SetFriendAreaActionMenuState(2);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+static inline bool8 sub_8027A78_sub(void) {
+    if (gUnknown_203B2BC->unk18->unk4.unk4 == 0x44 || gUnknown_203B2BC->unk18->unk4.unk4 == 0x45)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_8027A78(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 1:
+            case 3:
+                SetFriendAreaActionMenuState(2);
+                break;
+            case 2:
+                if (sub_8027A78_sub())
+                    SetFriendAreaActionMenuState(9);
+                else
+                {
+                    sub_8027EB8();
+                    sub_808D31C(gUnknown_203B2BC->unk18);
+                }
+                break;
+        }
+    }
+}
 
 void sub_8027AE4(void)
 {
@@ -194,7 +259,7 @@ void sub_8027D40(u32 r0, struct HeldItem *heldItem)
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
-    slot.itemFlags = 1;
+    slot.itemFlags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &slot, &a3);
     xxx_format_and_draw(4, 3, gUnknown_80DD958, r0, 0);
     sub_80073E0(r0);

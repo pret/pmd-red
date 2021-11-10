@@ -533,7 +533,7 @@ _080A7BDE:
 	strh r0, [r7]
 	b _080A7C10
 _080A7BE4:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r6, r0, 0
 	bl sub_808D3BC
 	cmp r0, r6
@@ -601,7 +601,7 @@ _080A7C5A:
 	beq _080A7C60
 	b _080A7DA6
 _080A7C60:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r4, r0, 0
 	bl sub_808D3BC
 	cmp r0, r4
@@ -636,7 +636,7 @@ _080A7C94:
 	b _080A7CCA
 _080A7C9A:
 	movs r6, 0x2
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r4, r0, 0
 	bl sub_808D3BC
 	cmp r4, r0
@@ -647,7 +647,7 @@ _080A7CAC:
 	b _080A7DD2
 _080A7CB0:
 	movs r6, 0x1
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r4, r0, 0
 	bl sub_808D3F8
 	cmp r4, r0
@@ -779,7 +779,7 @@ _080A7DAC:
 _080A7DB0:
 	cmp r2, 0x23
 	bne _080A7DD2
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r4, r0, 0
 	bl sub_808D3BC
 	cmp r0, r4
@@ -1046,7 +1046,7 @@ _080A7FEC:
 	ldrh r0, [r0, 0x8]
 	b _080A8094
 _080A7FF4:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldrh r0, [r0, 0x8]
 	b _080A8094
 _080A7FFC:
@@ -2893,7 +2893,7 @@ _080A8D8E:
 	cmp r0, 0x23
 	bne _080A8DA0
 _080A8D9A:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	b _080A8E94
 _080A8DA0:
 	adds r0, r1, 0

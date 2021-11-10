@@ -339,7 +339,7 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, struct unkStruct_8090F58
       ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
     }
   }
-  else if (slot->itemIndex == 105) {
+  else if (slot->itemIndex == ITEM_ID_POKE) {
     ExpandPlaceholdersBuffer(buffer, gUnknown_810977C, GetMoneyValue(slot));
   }
   else {

@@ -443,7 +443,7 @@ _0802BFE8:
 	adds r1, r4, 0
 	movs r2, 0x6
 	bl sub_803B6B0
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	mov r0, r9
 	bl sub_808DA34

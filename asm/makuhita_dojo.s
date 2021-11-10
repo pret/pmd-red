@@ -190,7 +190,7 @@ _080300F4:
 _08030108: .4byte gMakuhitaDialogue
 _0803010C:
 	ldr r4, _08030138
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x6
