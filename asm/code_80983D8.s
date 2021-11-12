@@ -5,8 +5,8 @@
 
 	.text
 
-        thumb_func_start sub_80983D8
-sub_80983D8:
+        thumb_func_start CalculateFacingDir
+CalculateFacingDir:
 	push {r4,lr}
 	movs r2, 0
 	ldrsh r3, [r1, r2]
@@ -58,6 +58,6 @@ _08098428:
 	bx r1
 	.align 2, 0
 _08098430: .4byte gUnknown_8115E94
-	thumb_func_end sub_80983D8
+	thumb_func_end CalculateFacingDir
 
         .align 2,0

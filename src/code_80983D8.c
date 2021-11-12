@@ -2,12 +2,12 @@
 
 extern u32 gUnknown_8115E94[5][3]; // NOTE: Factor of two difference in array sizes
 
-s32 sub_80983D8(short *param_1,short *param_2)
+s32 CalculateFacingDir(short *param_1,short *param_2)
 {
   s32 uVar1;
   s32 uVar2;
   s32 uVar3;
-  
+
   uVar3 = param_2[0] - param_1[0];
   uVar2 = param_2[1] - param_1[1];
   if ((uVar3 == 0) && (uVar2 == 0)) {

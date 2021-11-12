@@ -846,13 +846,13 @@ gUnknown_202F32C = .; /* 202F32C */
 gUnknown_202F32D = .; /* 202F32D */
 	. += 0x3;
 
-gUnknown_202F330 = .; /* 202F330 */
+gPotentialTargetDirections = .; /* 202F330 */
 	. += 0x20;
 
 gUnknown_202F350 = .; /* 202F350 */
 	. += 0x8;
 
-gUnknown_202F358 = .; /* 202F358 */
+gPotentialTargetWeights = .; /* 202F358 */
 	. += 0x20;
 
 gUnknown_202F378 = .; /* 202F378 */
