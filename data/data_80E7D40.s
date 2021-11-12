@@ -534,7 +534,7 @@ gUnknown_80EAEB8: @ 80EAEB8
         .align 2,0
 
         .global FaintedInside_80EAFF0
-	SickWorry_80EAFF0:
+	FaintedInside_80EAFF0:
         .asciz "#C6%s#R may have fainted inside..."
         .align 2,0
 
@@ -544,7 +544,7 @@ gUnknown_80EAEB8: @ 80EAEB8
         .align 2,0
 
         .global WantToHelp_80EB030
-	HasntReturned_80EB030:
+	WantToHelp_80EB030:
         .asciz "I want to help #C6%s#R!"
         .align 2,0
 
@@ -714,4 +714,3 @@ gUnknown_80EB3F8: @ 80EB3F8
 	.global gUnknown_80EB72C
 gUnknown_80EB72C: @ 80EB72C
 	.incbin "baserom.gba", 0xEB72C, 0x2EC
-
