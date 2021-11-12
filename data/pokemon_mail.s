@@ -455,7 +455,7 @@ gPokemonMail: @ 80EBA18
     
     .global KeyItemText1
     KeyItemMessage1:
-    .string"#+#C6When Used Somewhere Special...#R\n"
+    .string "#+#C6When Used Somewhere Special...#R\n"
     .string "Sunkern and Sun Stone...\n"
     .string "Skitty and Moon Stone...\n"
     .string "Growlithe and Fire Stone...\n"
