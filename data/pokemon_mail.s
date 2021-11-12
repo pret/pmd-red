@@ -113,11 +113,11 @@ gPokemonMail: @ 80EBA18
     .4byte BuriedRelicText
     .4byte LucarioRankHeadline
     .4byte LucarioRankText
-    .4byte NewFriendAreaHeadline
-    .4byte NewFriendAreaText
+    .4byte NewFriendAreasHeadline
+    .4byte NewFriendAreasText
 
-    .global NewFriendAreaText
-    NewFriendAreaText:
+    .global NewFriendAreasText
+    NewFriendAreasText:
     .string "The Wigglytuff Club has added new Friend\n"
     .string "Areas for sale!\n"
     .string "Rescue Teams are urged to check with\n"
@@ -127,7 +127,7 @@ gPokemonMail: @ 80EBA18
     .string "rescue team before!\0"
     .align 2,0
 
-    .global NewFriendAreaHeadline
+    .global NewFriendAreasHeadline
     NewFriendAreasHeadline:
     .string "New Friend Areas!\0"
     .align 2,0
@@ -166,7 +166,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global NewsText2
-    NewsMessage2:
+    NewsText2:
     .string "#+#C5$m0 Innocent! Part 2#R\n"
     .string "#C4Quote from Charizard on the scene:#R\n"
     .string "~93That~27s what I thought right from\n"
@@ -183,7 +183,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global NewsText1
-    NewsMessage1:
+    NewsText1:
     .string "#+#C5$m0 Innocent! Part 1#R\n"
     .string "$m1 met with Ninetales on #C2Mt. Freeze#R.\n"
     .string "Ninetales testified that $m0 was\n"
@@ -216,7 +216,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global LinkedProText2
-    LinkedProMessage2:
+    LinkedProText2:
     .string "#+#C6Try These Linked Moves to KO Foes!#R\n\n"
     .string "Psyduck\n"
     .string "#C4Confusion#R + #C4Disable#R\n"
@@ -236,7 +236,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global LinkedProText1
-    LinkedProMessage1:
+    LinkedProText1:
     .string "#+#C6These Linked Move Combinations#R\n"
     .string "#+#C6Can Be Devastating!#R\n\n"
     .string "Bulbasaur\n"
@@ -257,7 +257,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global SlakothText
-    SlakothHeadline:
+    SlakothText:
     .string "#+#C6Relief for Delicate Souls Who Can~27t#R\n"
     .string "#+#C6Sleep with Different Pillows!#R\n"
     .string "Insomniacs rejoiced over the announcement\n"
@@ -439,7 +439,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global KeyItemText2
-    KeyItemMessage2:
+    KeyItemText2:
     .string "#+#C6When Used Somewhere Special...#R\n"
     .string "Eevee and Water Stone~2c Fire Stone~2c\n"
     .string "Thunderstone~2c or...\n"
@@ -450,11 +450,11 @@ gPokemonMail: @ 80EBA18
     
     .global KeyItemHeadline2
     KeyItemHeadline2:
-    .string "#37 Key Items for Pok\233mon 2\0"
+    .string "#37 Key Items for Pokémon 2\0"
     .align 2,0
     
     .global KeyItemText1
-    KeyItemMessage1:
+    KeyItemText1:
     .string "#+#C6When Used Somewhere Special...#R\n"
     .string "Sunkern and Sun Stone...\n"
     .string "Skitty and Moon Stone...\n"
@@ -466,7 +466,7 @@ gPokemonMail: @ 80EBA18
     
     .global KeyItemHeadline1
     KeyItemHeadline1:
-    .string "#36 Key Items for Pok\233mon 1\0"
+    .string "#36 Key Items for Pokémon 1\0"
     .align 2,0
     
     .global SwitchText
@@ -476,7 +476,7 @@ gPokemonMail: @ 80EBA18
     .string "switch leaders on the spot for doing\n"
     .string "combination attacks and so on.\n"
     .string "When you enter a dungeon~2c open the menu~2c\n"
-    .string "choose the Pok\233mon you want as the\n"
+    .string "choose the Pokémon you want as the\n"
     .string "leader under #C6Team#R~2c then select the\n"
     .string "command #C6Leader#R.\0"
     .align 2,0
@@ -490,7 +490,7 @@ gPokemonMail: @ 80EBA18
     KecleonText:
     .string "There have been numerous reports that\n"
     .string "the older of the Kecleon merchants in\n"
-    .string "Pok\233mon Square occasionally goes\n"
+    .string "Pokémon Square occasionally goes\n"
     .string "missing. Some residents claim~2c ~93He~27s\n"
     .string "greedy. He must be off doing business\n"
     .string "somewhere.~94 His younger brother denies\n"
@@ -504,14 +504,14 @@ gPokemonMail: @ 80EBA18
     .align 2,0
     
     .global WeatherText2
-    WeatherMessage2:
+    WeatherText2:
     .string "Clear: Pleasant weather.\n"
     .string "Hail: Regularly inflicts damage~2c\n"
     .string "except on the Ice type.\n"
-    .string "Fog: Turns the status of all Pok\233mon on\n"
+    .string "Fog: Turns the status of all Pokémon on\n"
     .string "the floor to Mud Sport.\n"
     .string "Blizzard: Boosts the movement speed of\n"
-    .string "Ice-type Pok\233mon by one level.\0"
+    .string "Ice-type Pokémon by one level.\0"
     .align 2,0
     
     .global WeatherHeadline2
@@ -553,7 +553,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global WeatherText1
-    WeatherMessage1:
+    WeatherText1:
     .string "Sunny: Boosts Fire-type moves~2c and\n"
     .string "weakens Water-type moves.\n"
     .string "Sandstorm: Regularly inflicts damage\n"
@@ -594,7 +594,7 @@ gPokemonMail: @ 80EBA18
     .string "Cave#R~2c there~27s been a breakthrough!\n"
     .string "Reports indicate the door keys are easily\n"
     .string "found in the #CDDesert Region#R. Explorers are\n"
-    .string "advised to compose teams with Pok\233mon\n"
+    .string "advised to compose teams with Pokémon\n"
     .string "adapted to the desert environment.\0"
     .align 2,0
     
@@ -639,8 +639,8 @@ gPokemonMail: @ 80EBA18
     IQText:
     .string "#+#C6Make Your Explorations Easier by#R\n"
     .string "#+#C6Boosting the IQ of Team Members!#R\n"
-    .string "Eating Gummis boosts the IQ of Pok\233mon.\n"
-    .string "Upon reaching certain IQ levels~2c a Pok\233mon\n"
+    .string "Eating Gummis boosts the IQ of Pokémon.\n"
+    .string "Upon reaching certain IQ levels~2c a Pokémon\n"
     .string "learns IQ Skills that can be very helpful\n"
     .string "(for example~2c learning to seek out foes\n"
     .string "with type disadvantages). Check\n"
@@ -674,10 +674,10 @@ gPokemonMail: @ 80EBA18
     .string "#+#C6Study Type Matchups#R\n"
     .string "#+#C6at the Makuhita Dojo!#R\n"
     .string "At the Makuhita Dojo~2c one can learn how\n"
-    .string "Pok\233mon type matchups affect battles.\n"
+    .string "Pokémon type matchups affect battles.\n"
     .string "It~27s because the dojo~27s training rooms are\n"
     .string "divided by type. For example~2c in the #CDFire\n"
-    .string "Maze#R~2c there are only Fire-type Pok\233mon.\n"
+    .string "Maze#R~2c there are only Fire-type Pokémon.\n"
     .string "Try move types to see what works best!\0"
     .align 2,0
 
@@ -741,8 +741,8 @@ gPokemonMail: @ 80EBA18
     MoveTipsText:
     .string "#+#C6Moving Diagonally#R\n"
     .string "Move diagonally to avoid foes!\n"
-    .string "Keeping \132\134 pressed~2c use\n"
-    .string "\135R to move diagonally.\n"
+    .string "Keeping \x84\x86 pressed~2c use\n"
+    .string "\x87R to move diagonally.\n"
     .string "#+#C6Changing Direction#R\n"
     .string "It~27s also very important to change\n"
     .string "directions without moving. Check Hints to\n"
@@ -758,7 +758,7 @@ gPokemonMail: @ 80EBA18
     AddMembersText:
     .string "If you want to enlarge your rescue team~2c\n"
     .string "you must first get Friend Areas. When\n"
-    .string "a Pok\233mon that can live in an obtained\n"
+    .string "a Pokémon that can live in an obtained\n"
     .string "Friend Area is defeated~2c it may ask to\n"
     .string "join your rescue team. Add to your\n"
     .string "Friend Areas so you can recruit more\n"
@@ -779,7 +779,7 @@ gPokemonMail: @ 80EBA18
     .string "attacked from the side~2c move horizontally.\n"
     .string "If attacked from above or below~2c move\n"
     .string "vertically. That way~2c you can have several\n"
-    .string "Pok\233mon fighting a single foe. Change\n"
+    .string "Pokémon fighting a single foe. Change\n"
     .string "Tactics if members don~27t move properly.\0"
     .align 2,0
 
@@ -790,19 +790,19 @@ gPokemonMail: @ 80EBA18
 
     .global WondersText
     WondersText:
-    .string "#+#C6The Seven Wonders of Pok\233mon?#R\n"
+    .string "#+#C6The Seven Wonders of Pokémon?#R\n"
     .string "The mysterious feet of Diglett.\n"
     .string "What is inside Forretress~27s shell.\n"
     .string "The intelligence of Girafarig~27s tail.\n"
     .string "Arbok~27s variety of patterns.\n"
     .string "We await submissions from readers on\n"
-    .string "other Pok\233mon mysteries!\n"
+    .string "other Pokémon mysteries!\n"
     .string "  - Mystery Hunter Team -\0"
     .align 2,0
 
     .global WondersHeadline
     WondersHeadline:
-    .string "#16 Seven Wonders of Pok\233mon\0"
+    .string "#16 Seven Wonders of Pokémon\0"
     .align 2,0
 
     .global PollText
@@ -823,7 +823,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global LinkedEntryText3
-    LinkedEntryMessage3:
+    LinkedEntryText3:
     .string "#+#C6These Are the Final Linked Moves#R\n"
     .string "#+#C6We Recommend in the Entry Level!#R\n"
     .string "#C2Electric and Water Types#R\n"
@@ -844,7 +844,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global LinkedEntryText2
-    LinkedEntryMessage2:
+    LinkedEntryText2:
     .string "#C2Fire and Normal Types#R\n"
     .string "Charmander\n"
     .string "#C4Ember#R + #C4Growl#R\n"
@@ -865,7 +865,7 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .global LinkedEntryText1
-    LinkedEntryMessage1:
+    LinkedEntryText1:
     .string "#+#C6These Are the Recommended#R\n"
     .string "#+#C6Linked Moves for Beginners!#R\n"
     .string "#C2Grass~2c Fighting~2c and Ground Types#R\n"
@@ -888,11 +888,11 @@ gPokemonMail: @ 80EBA18
     .global TypeText
     TypeText:
     .string "#+#C6Learn How Types Match Up!#R\n"
-    .string "All Pok\233mon are of certain types~2c such as\n"
+    .string "All Pokémon are of certain types~2c such as\n"
     .string "#C2Fire#R and #C5Water#R. In a battle~2c the damage\n"
-    .string "inflicted depends on how the Pok\233mon~27s\n"
+    .string "inflicted depends on how the Pokémon~27s\n"
     .string "type matches up with the move~27s type.\n"
-    .string "For example~2c a #C2Fire#R-type Pok\233mon is\n"
+    .string "For example~2c a #C2Fire#R-type Pokémon is\n"
     .string "weak against #C5Water#R-type moves.\n"
     .string "Exploit type matchups to win battles!\0"
     .align 2,0
@@ -911,7 +911,7 @@ gPokemonMail: @ 80EBA18
     .string "you go off on a rescue or an outing.\n"
     .string "Use #C5Kangaskhan Storage#R to keep\n"
     .string "invaluable items safely stored.\n"
-    .string "   - Pok\233mon Rescue Organization -\0"
+    .string "   - Pokémon Rescue Organization -\0"
     .align 2,0
 
     .global DungeonHeadline
@@ -957,7 +957,7 @@ gPokemonMail: @ 80EBA18
     OptionsText:
     .string "#+#C6Change Your Option Settings#R\n"
     .string "#+#C6to Suit Your Play Style!#R\n"
-    .string "Press \135Q to open the menu~2c then\n"
+    .string "Press \x87Q to open the menu~2c then\n"
     .string "choose #C6Others#R and #C6Game Options#R.\n"
     .string "You can change settings to suit the way\n"
     .string "you play.\0"
@@ -972,7 +972,7 @@ gPokemonMail: @ 80EBA18
     DisasterText:
     .string "#+#C6Investigations Under Way into#R\n"
     .string "#+#C6Recent Rash of Natural Disasters#R\n"
-    .string "Pok\233mon in affected areas attack any\n"
+    .string "Pokémon in affected areas attack any\n"
     .string "outsider without hesitation. Some believe\n"
     .string "a mysterious force is behind their\n"
     .string "behavior. One source blamed Diglett\n"
@@ -990,7 +990,7 @@ gPokemonMail: @ 80EBA18
     .string "#+#C6Seeds Can Be Thrown~2c Too!#R\n"
     .string "Seeds are usually meant to be eaten.\n"
     .string "But did you know? They can also be thrown\n"
-    .string "at other Pok\233mon to unlock their effects.\n"
+    .string "at other Pokémon to unlock their effects.\n"
     .string "Toss seeds you don~27t want to eat at foes!\n"
     .string "Throw good seeds at friends!\n"
     .string "Don~27t be afraid to throw your seeds!\0"
@@ -1027,7 +1027,7 @@ gPokemonMail: @ 80EBA18
     .string "then choose #C6Take Job#R. Only then will you\n"
     .string "be able to handle that job.\n"
     .string "Try to do accepted jobs quickly!\n"
-    .string "   - Pok\233mon Rescue Organization -\0"
+    .string "   - Pokémon Rescue Organization -\0"
     .align 2,0
 
     .global JobHeadline
@@ -1037,14 +1037,14 @@ gPokemonMail: @ 80EBA18
     
     .global BasicsText
     BasicsText:
-    .string "#+#C6Saving Your Adventure and Pok\233mon News#R\n"
+    .string "#+#C6Saving Your Adventure and Pokémon News#R\n"
     .string "You can save your adventure by going to\n"
     .string "your bed. Get in the habit of saving often.\n"
-    .string "You should also store old Pok\233mon News.\n"
+    .string "You should also store old Pokémon News.\n"
     .string "If your Mailbox is full~2c you won~27t get the\n"
     .string "latest issue of the news or any job mail.\n"
     .string "Check the Mailbox and store old news!\n"
-    .string "   - Pok\233mon Rescue Organization -\0"
+    .string "   - Pokémon Rescue Organization -\0"
     .align 2,0
 
     .global BasicsHeadline
@@ -1056,12 +1056,12 @@ gPokemonMail: @ 80EBA18
     WelcomeText:
     .string "#+#C6To All New Members!#R\n"
     .string "Your badge has the power to send back\n"
-    .string "to town any Pok\233mon you~27ve rescued. Just\n"
+    .string "to town any Pokémon you~27ve rescued. Just\n"
     .string "hold the badge up~2c and it does the rest.\n"
     .string "By completing rescue jobs~2c you will be\n"
     .string "awarded points that raise your team~27s\n"
     .string "ranking. Aim for the Bronze Rank for now!\n"
-    .string " - Pok\233mon Rescue Organization -\0"
+    .string "   - Pokémon Rescue Organization -\0"
     .align 2,0
 
     .global WelcomeHeadline
