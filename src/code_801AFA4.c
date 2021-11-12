@@ -26,7 +26,7 @@ extern u8 gUnknown_202E1C8[0x50];
 extern u8 gAvailablePokemonNames[0x50];
 extern u8 gUnknown_202E218[0x50];
 
-extern void sub_8092AD4(struct PokemonMove*, u16);
+extern void InitZeroedPPPokemonMove(struct PokemonMove*, u16);
 extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
 extern bool8 IsHMItem(u8);
 extern void DisplayGulpinDialogueSprite(u32, u32, void *);
@@ -195,7 +195,7 @@ void sub_801B200(void)
                     pokeMove = &gUnknown_203B22C->moves[moveIndex];
                     if((pokeMove->moveFlags & MOVE_FLAG_EXISTS) == 0)
                     {
-                        sub_8092AD4(pokeMove, gUnknown_203B22C->moveID);
+                        InitZeroedPPPokemonMove(pokeMove, gUnknown_203B22C->moveID);
                         break;
                     }
                 }

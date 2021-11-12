@@ -412,7 +412,7 @@ _080905A6:
 	adds r0, 0xCC
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldr r0, _080905E0
 	adds r1, r4, 0
 	movs r2, 0

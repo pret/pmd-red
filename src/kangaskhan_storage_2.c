@@ -9,31 +9,6 @@
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
 
-struct unkStruct_203B20C
-{
-    u32 state;
-    u8 unk4[4];
-    struct ItemSlot unk8;
-    u8 fillC[0x14 - 0xC];
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    struct MenuItem unk20[8];
-    u16 unk60[8];
-    u32 unk70;
-    u8 fill74[0xC0 - 0x74];
-    u32 unkC0;
-    u32 unkC4;
-    u32 unkC8;
-    u32 unkCC;
-    u32 unkD0;
-    u32 unkD4;
-    struct UnkTextStruct2 *unkD8;
-    u32 unkDC;
-    u32 unkE0;
-    u8 fillE4[0xF0 - 0xE4];
-    struct UnkTextStruct2 unkF0[4];
-};
 extern struct unkStruct_203B20C *gUnknown_203B20C;
 
 extern void sub_8017F10(u32);
@@ -58,7 +33,6 @@ extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8();
 
-extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern bool8 sub_801ADA0(u32);
 extern void sub_8099690(u32);
 extern u32 sub_8013BBC(u32 *);

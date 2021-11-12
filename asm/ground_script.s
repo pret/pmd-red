@@ -7814,7 +7814,7 @@ _080A1B18:
 	bl HasRecruitedMon
 	b _080A171E
 _080A1B20:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	ldrh r0, [r0, 0x8]
 	subs r0, 0x90
 	lsls r0, 16
@@ -7825,7 +7825,7 @@ _080A1B20:
 _080A1B32:
 	bl _080A236A
 _080A1B36:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	cmp r0, 0
 	beq _080A1B4A
 	movs r5, 0x8
@@ -8420,7 +8420,7 @@ _080A2024:
 	bge _080A1FE0
 	b _080A236A
 _080A202C:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	cmp r0, 0
 	beq _080A2040
 	movs r4, 0x8

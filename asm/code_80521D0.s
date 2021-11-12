@@ -2451,7 +2451,7 @@ _08053734:
 	ldrb r1, [r1]
 	strb r1, [r0]
 	ldr r0, [sp, 0x18]
-	bl sub_8092CD8
+	bl GetMoveTargetsUser
 	lsls r0, 24
 	cmp r0, 0
 	beq _080537B4
@@ -2856,7 +2856,7 @@ _08053A86:
 	cmp r0, 0x5
 	bne _08053AE8
 	ldr r0, [sp, 0x18]
-	bl sub_8092CC0
+	bl GetMoveAffectedByMagicCoat
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053B5C
@@ -3006,7 +3006,7 @@ _08053BC0:
 	cmp r0, 0
 	beq _08053BFA
 	mov r0, r8
-	bl sub_8092D08
+	bl IsBlockedBySoundproof
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053BFA
@@ -5866,7 +5866,7 @@ sub_8055640:
 	bl sub_8071A44
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_8092C24
+	bl GetMoveCriticalHitChance
 	str r0, [sp]
 	add r0, sp, 0x14
 	str r0, [sp, 0x4]
@@ -5920,7 +5920,7 @@ sub_80556BC:
 	bl sub_8071A44
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_8092C24
+	bl GetMoveCriticalHitChance
 	str r0, [sp]
 	add r0, sp, 0x14
 	str r0, [sp, 0x4]
@@ -6179,7 +6179,7 @@ sub_80558DC:
 	mov r9, r2
 	ldr r1, [r1, 0x70]
 	mov r10, r1
-	bl sub_8092B00
+	bl GetMoveType
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -7042,7 +7042,7 @@ sub_8055FA0:
 	adds r0, r1
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r1, [r7]
 	add r0, sp, 0x110
 	strb r1, [r0]
@@ -7084,7 +7084,7 @@ _0805602C:
 	adds r0, r1
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r1, [r7]
 	add r0, sp, 0x118
 	strb r1, [r0]
@@ -7142,7 +7142,7 @@ _08056084:
 	beq _080560CC
 _080560AE:
 	ldrh r0, [r7, 0x2]
-	bl sub_809422C
+	bl DoesMoveCharge
 	lsls r0, 24
 	cmp r0, 0
 	beq _080560CC
@@ -7194,7 +7194,7 @@ _08056124:
 	cmp r0, 0
 	bne _08056132
 	ldrh r0, [r7, 0x2]
-	bl sub_8092CA8
+	bl GetMoveUseText
 	b _08056136
 _08056132:
 	ldr r0, _08056194
@@ -7222,7 +7222,7 @@ _08056156:
 	cmp r0, 0x1
 	bne _080561A0
 	ldrh r0, [r7, 0x2]
-	bl sub_8092CF0
+	bl GetMoveAffectedByMuzzled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080561A0
@@ -8461,7 +8461,7 @@ sub_8056B34:
 	lsls r4, 24
 	lsrs r4, 24
 	mov r0, r8
-	bl sub_8092BD8
+	bl GetMoveAccuracy
 	adds r5, r0, 0
 	movs r0, 0x64
 	bl DungeonRandomCapped
@@ -8608,7 +8608,7 @@ _08056C5A:
 	cmp r0, 0
 	beq _08056C86
 	mov r0, r8
-	bl sub_8092B00
+	bl GetMoveType
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092354
@@ -9152,7 +9152,7 @@ _0805706C: .4byte gUnknown_203B438
 	thumb_func_start sub_8057070
 sub_8057070:
 	push {lr}
-	bl sub_8092BA8
+	bl GetMoveHitCount
 	cmp r0, 0
 	bne _08057082
 	movs r0, 0x2

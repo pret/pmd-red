@@ -258,7 +258,7 @@ _0808D06E:
 	beq _0808D07E
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 	b _0808D080
 _0808D07E:
 	strb r0, [r4]
@@ -415,7 +415,7 @@ _0808D19E:
 	cmp r1, 0
 	beq _0808D1B4
 	adds r0, r4, 0
-	bl sub_8092AD4
+	bl InitZeroedPPPokemonMove
 	b _0808D1B6
 _0808D1B4:
 	strb r1, [r4]
@@ -636,8 +636,8 @@ _0808D338:
 	bx r0
 	thumb_func_end sub_808D31C
 
-	thumb_func_start sub_808D33C
-sub_808D33C:
+	thumb_func_start GetPlayerPokemonStruct
+GetPlayerPokemonStruct:
 	push {r4,lr}
 	movs r3, 0
 	ldr r0, _0808D360
@@ -669,7 +669,7 @@ _0808D370:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808D33C
+	thumb_func_end GetPlayerPokemonStruct
 
 	thumb_func_start sub_808D378
 sub_808D378:

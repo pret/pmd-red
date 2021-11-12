@@ -146,14 +146,6 @@ endif
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
 
-# Disable dependency scanning when NODEP is used for quick building
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: C_DEP :=
-else
-$(C_BUILDDIR)/%.o: C_DEP = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
-endif
-
-
 # Create build subdirectories
 
 $(shell mkdir -p $(SUBDIRS))
@@ -167,15 +159,17 @@ include dungeon_floor.mk
 include data_pokemon.mk
 include data_item.mk
 include data_move.mk
+include graphics.mk
 
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
+$(SCANINC): tools/scaninc
 
 compare: all
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 
 clean: tidy clean-tools
-	$(RM) $(ALL_OBJECTS)
+	$(RM) $(ALL_OBJECTS) $(ALL_OBJECTS:.o=.d)
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
@@ -185,17 +179,29 @@ tidy:
 	$(RM) -r $(BUILD_DIR)
 	@$(MAKE) clean -C libagbsyscall
 
-$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c $$(C_DEP)
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(ASM_DEP) dungeon_pokemon dungeon_floor data_pokemon data_item data_move
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c $(SCANINC)
+	@echo -n "$(@:.d=.o): " > $@
+	@$(SCANINC) -I include -I tools/agbcc/include -I gflib $< | xargs printf "%s " >> $@
+
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor data_pokemon data_item data_move
 	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
-$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(ASM_DEP)
+$(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s $(SCANINC)
+	@echo -n "$(@:.d=.o): " > $@
+	@$(SCANINC) -I include $< | xargs printf "%s " >> $@
+
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) $< -o $@
+
+$(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s $(SCANINC)
+	@echo -n "$(@:.d=.o): " > $@
+	@$(SCANINC) $< | xargs printf "%s " >> $@
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
@@ -213,3 +219,6 @@ $(ROM): %.gba: $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
+ifeq (,$(filter clean,$(MAKECMDGOALS)))
+include $(ALL_OBJECTS:.o=.d)
+endif

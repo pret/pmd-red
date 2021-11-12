@@ -2133,7 +2133,7 @@ _0803C154:
 	cmp r0, 0
 	bne _0803C154
 _0803C168:
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
 	cmp r0, r4

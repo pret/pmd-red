@@ -118,12 +118,12 @@ _080485EE:
 	cmp r0, 0
 	beq _0804862C
 	adds r0, r5, 0
-	bl sub_8092BC0
+	bl GetMovePower
 	cmp r0, 0
 	beq _0804862C
 	ldrb r6, [r4, 0x5]
 	adds r0, r5, 0
-	bl sub_8092C0C
+	bl GetMoveUnk12
 	adds r1, r0, 0
 	ldrb r0, [r4, 0x5]
 	add r0, r10
@@ -1615,7 +1615,7 @@ _080492FA:
 	ldrb r4, [r5, 0x4]
 	adds r0, r7, 0
 	str r2, [sp]
-	bl sub_8092BF4
+	bl GetMoveMaxPP
 	ldr r2, [sp]
 	cmp r4, r0
 	beq _0804930C

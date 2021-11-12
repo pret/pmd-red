@@ -779,8 +779,7 @@ ItemNameUpgrade:
 
 .global ItemNamePoke
 ItemNamePoke:
-.byte 0x83, 0xbf, 0x83, 0xc4
-.string "\0"
+.string "{POKE}\0"
 .align 2,0
 
 .global ItemNameChestnut

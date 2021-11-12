@@ -430,7 +430,65 @@ gUnknown_80B71A0: @ 80B71A0
 
 	.global gUnknown_80B71E4
 gUnknown_80B71E4: @ 80B71E4
-	.incbin "baserom.gba", 0xB71E4, 0xE8
+    @ struct unkEventStruct
+    .2byte 105, 1
+    .2byte 106, 2
+    .2byte 107, 3
+    .2byte 108, 4
+    .2byte 109, 5
+    .2byte 110, 6
+    .2byte 111, 7
+    .2byte 112, 8
+    .2byte 113, 9
+    .2byte 114, 10
+    .2byte 115, 11
+    .2byte 116, 12
+    .2byte 117, 13
+    .2byte 118, 14
+    .2byte 119, 15
+    .2byte 120, 16
+    .2byte 121, 17
+    .2byte 122, 18
+    .2byte 123, 19
+    .2byte 124, 20
+    .2byte 125, 21
+    .2byte 126, 22
+    .2byte 127, 23
+    .2byte 128, 24
+    .2byte 129, 25
+    .2byte 130, 26
+    .2byte 131, 27
+    .2byte 132, 28
+    .2byte 133, 29
+    .2byte 134, 30
+    .2byte 135, 31
+    .2byte 136, 32
+    .2byte 137, 33
+    .2byte 138, 34
+    .2byte 139, 35
+    .2byte 140, 36
+    .2byte 141, 37
+    .2byte 142, 38
+    .2byte 143, 39
+    .2byte 144, 40
+    .2byte 145, 41
+    .2byte 146, 42
+    .2byte 147, 43
+    .2byte 148, 44
+    .2byte 149, 45
+    .2byte 150, 46
+    .2byte 151, 47
+    .2byte 152, 48
+    .2byte 153, 49
+    .2byte 154, 50
+    .2byte 155, 51
+    .2byte 156, 52
+    .2byte 157, 53
+    .2byte 158, 54
+    .2byte 159, 55
+    .2byte 160, 56
+    .2byte 161, 57
+    .2byte -1, 0
 
 	.global gUnknown_80B72CC
 gUnknown_80B72CC: @ 80B72CC
@@ -486,61 +544,475 @@ gUnknown_80B7388: @ 80B7388
 
 	.global gUnknown_80B7394
 gUnknown_80B7394: @ 80B7394
-	.incbin "baserom.gba", 0xB7394, 0xAA8
+    .2byte 6, 2, 0, 0, 1, 29; .4byte gUnknown_80B7DF8
+    .2byte 6, 2, 4, 0, 1, 0; .4byte gUnknown_80B7DEC
+    .2byte 2, 2, 110, 0, 2, 0; .4byte gUnknown_80B7DDC
+    .2byte 2, 2, 112, 0, 2, 0; .4byte gUnknown_80B7DCC
+    .2byte 2, 2, 114, 0, 2, 0; .4byte gUnknown_80B7DBC
+    .2byte 2, 2, 116, 0, 2, 0; .4byte gUnknown_80B7DAC
+    .2byte 2, 2, 118, 0, 2, 0; .4byte gUnknown_80B7D9C
+    .2byte 2, 2, 120, 0, 2, 0; .4byte gUnknown_80B7D8C
+    .2byte 2, 2, 122, 0, 2, 0; .4byte gUnknown_80B7D7C
+    .2byte 2, 2, 124, 0, 2, 0; .4byte gUnknown_80B7D6C
+    .2byte 2, 2, 126, 0, 2, 0; .4byte gUnknown_80B7D5C
+    .2byte 2, 2, 128, 0, 2, 0; .4byte gUnknown_80B7D4C
+    .2byte 2, 2, 130, 0, 2, 0; .4byte gUnknown_80B7D3C
+    .2byte 5, 2, 44, 0, 1, 0; .4byte gUnknown_80B7D2C
+    .2byte 2, 2, 132, 0, 1, 0; .4byte gUnknown_80B7D18
+    .2byte 5, 2, 46, 0, 1, 0; .4byte gUnknown_80B7D08
+    .2byte 5, 2, 48, 0, 1, 0; .4byte gUnknown_80B7CFC
+    .2byte 5, 2, 50, 0, 1, 0; .4byte gUnknown_80B7CEC
+    .2byte 5, 2, 52, 0, 1, 0; .4byte gUnknown_80B7CDC
+    .2byte 5, 2, 54, 0, 1, 0; .4byte gUnknown_80B7CCC
+    .2byte 5, 2, 56, 0, 1, 0; .4byte gUnknown_80B7CB8
+    .2byte 4, 2, 94, 0, 1, 0; .4byte gUnknown_80B7CA0
+    .2byte 2, 2, 133, 0, 1, 0; .4byte gUnknown_80B7C90
+    .2byte 8, 2, 0, 0, 1, 0; .4byte gUnknown_80B7C84
+    .2byte 2, 2, 134, 0, 1, 0; .4byte gUnknown_80B7C78
+    .2byte 2, 2, 135, 0, 1, 0; .4byte gUnknown_80B7C6C
+    .2byte 2, 2, 136, 0, 1, 0; .4byte gUnknown_80B7C5C
+    .2byte 3, 2, 96, 0, 1, 0; .4byte gUnknown_80B7C4C
+    .2byte 2, 2, 137, 0, 1, 0; .4byte gUnknown_80B7C40
+    .2byte 2, 2, 138, 0, 1, 0; .4byte gUnknown_80B7C30
+    .2byte 2, 2, 139, 0, 1, 0; .4byte gUnknown_80B7C20
+    .2byte 5, 2, 58, 0, 1, 0; .4byte gUnknown_80B7C10
+    .2byte 8, 2, 0, 0, 1, 0; .4byte gUnknown_80B7C04
+    .2byte 8, 2, 0, 0, 1, 0; .4byte gUnknown_80B7BF8
+    .2byte 8, 2, 0, 0, 1, 0; .4byte gUnknown_80B7BF0
+    .2byte 8, 2, 0, 0, 1, 0; .4byte gUnknown_80B7BE4
+    .2byte 1, 2, 140, 0, 16, 0; .4byte gUnknown_80B7BD8
+    .2byte 3, 2, 97, 0, 1, 0; .4byte gUnknown_80B7BCC
+    .2byte 3, 2, 98, 0, 1, 0; .4byte gUnknown_80B7BB8
+    .2byte 3, 2, 99, 0, 1, 0; .4byte gUnknown_80B7BAC
+    .2byte 3, 2, 100, 0, 1, 0; .4byte gUnknown_80B7BA0
+    .2byte 3, 2, 101, 0, 1, 0; .4byte gUnknown_80B7B94
+    .2byte 3, 2, 102, 0, 1, 0; .4byte gUnknown_80B7B78
+    .2byte 1, 2, 142, 0, 64, 0; .4byte gUnknown_80B7B5C
+    .2byte 1, 2, 150, 0, 64, 0; .4byte gUnknown_80B7B40
+    .2byte 1, 2, 158, 0, 64, 0; .4byte gUnknown_80B7B20
+    .2byte 1, 2, 166, 0, 32, 0; .4byte gUnknown_80B7B08
+    .2byte 1, 2, 170, 0, 32, 0; .4byte gUnknown_80B7AF0
+    .2byte 1, 2, 174, 0, 96, 0; .4byte gUnknown_80B7ADC
+    .2byte 1, 2, 186, 0, 96, 0; .4byte gUnknown_80B7AC8
+    .2byte 6, 2, 8, 0, 3, 0; .4byte gUnknown_80B7ABC
+    .2byte 6, 2, 20, 0, 3, 0; .4byte gUnknown_80B7AB0
+    .2byte 6, 2, 32, 0, 3, 0; .4byte gUnknown_80B7AA0
+    .2byte 3, 2, 103, 0, 3, 0; .4byte gUnknown_80B7A8C
+    .2byte 5, 5, 60, 0, 1, 0; .4byte gUnknown_80B7A7C
+    .2byte 5, 5, 62, 0, 1, 0; .4byte gUnknown_80B7A70
+    .2byte 1, 5, 198, 0, 8, 0; .4byte gUnknown_80B7A60
+    .2byte 5, 5, 64, 0, 1, 0; .4byte gUnknown_80B7A54
+    .2byte 1, 5, 199, 0, 32, 0; .4byte gUnknown_80B7A40
+    .2byte 1, 5, 203, 0, 32, 0; .4byte gUnknown_80B7A2C
+    .2byte 1, 5, 207, 0, 16, 0; .4byte gUnknown_80B7A18
+    .2byte 1, 5, 209, 0, 16, 0; .4byte gUnknown_80B7A04
+    .2byte 5, 5, 66, 0, 8, 0; .4byte gUnknown_80B79F8
+    .2byte 1, 5, 211, 0, 16, 0; .4byte gUnknown_80B79EC
+    .2byte 1, 6, 213, 0, 16, 0; .4byte gUnknown_80B79DC
+    .2byte 5, 6, 82, 0, 2, 0; .4byte gUnknown_80B79CC
+    .2byte 5, 6, 86, 0, 4, 0; .4byte gUnknown_80B79C0
+    .2byte 3, 6, 106, 0, 1, 0; .4byte gUnknown_80B79AC
+    .2byte 3, 6, 107, 0, 1, 0; .4byte gUnknown_80B7998
+    .2byte 3, 6, 108, 0, 1, 0; .4byte gUnknown_80B7984
+    .2byte 3, 6, 109, 0, 1, 0; .4byte gUnknown_80B7970
+    .2byte 1, 6, 215, 0, 16, 0; .4byte gUnknown_80B7960
+    .2byte 1, 6, 217, 0, 16, 0; .4byte gUnknown_80B7950
+    .2byte 1, 6, 219, 0, 16, 0; .4byte gUnknown_80B7940
+    .2byte 1, 6, 221, 0, 16, 0; .4byte gUnknown_80B7930
+    .2byte 1, 6, 223, 0, 8, 0; .4byte gUnknown_80B791C
+    .2byte 1, 6, 224, 0, 8, 0; .4byte gUnknown_80B7908
+    .2byte 1, 6, 225, 0, 8, 0; .4byte gUnknown_80B78F4
+    .2byte 1, 6, 226, 0, 8, 0; .4byte gUnknown_80B78E0
+    .2byte 1, 6, 227, 0, 8, 0; .4byte gUnknown_80B78CC
+    .2byte 1, 6, 228, 0, 8, 0; .4byte gUnknown_80B78B8
+    .2byte 0, 0, 229, 0, 0, 0; .4byte gUnknown_80B78B4
+
+gUnknown_80B78B4:
+    .string "SUM\0"
+
+gUnknown_80B78B8:
+    .string "EVENT_M02E01A_2N\0"
+    .align 2, 0
+
+gUnknown_80B78CC:
+    .string "EVENT_M01E10A_5N\0"
+    .align 2, 0
+
+gUnknown_80B78E0:
+    .string "EVENT_M01E10A_3N\0"
+    .align 2, 0
+
+gUnknown_80B78F4:
+    .string "EVENT_M01E10A_1N\0"
+    .align 2, 0
+
+gUnknown_80B7908:
+    .string "EVENT_M01E09A_8N\0"
+    .align 2, 0
+
+gUnknown_80B791C:
+    .string "EVENT_M01E09A_2N\0"
+    .align 2, 0
+
+gUnknown_80B7930:
+    .string "EVENT_T01P03\0"
+    .align 2, 0
+
+gUnknown_80B7940:
+    .string "EVENT_T01P02\0"
+    .align 2, 0
+
+gUnknown_80B7950:
+    .string "EVENT_T01P01\0"
+    .align 2, 0
+
+gUnknown_80B7960:
+    .string "EVENT_B01P01\0"
+    .align 2, 0
+
+gUnknown_80B7970:
+    .string "EVENT_ORNAMENT_04\0"
+    .align 2, 0
+
+gUnknown_80B7984:
+    .string "EVENT_ORNAMENT_03\0"
+    .align 2, 0
+
+gUnknown_80B7998:
+    .string "EVENT_ORNAMENT_02\0"
+    .align 2, 0
+
+gUnknown_80B79AC:
+    .string "EVENT_ORNAMENT_01\0"
+    .align 2, 0
+
+gUnknown_80B79C0:
+    .string "EVENT_GONBE\0"
+    .align 2, 0
+
+gUnknown_80B79CC:
+    .string "EVENT_S08E01\0"
+    .align 2, 0
+
+gUnknown_80B79DC:
+    .string "EVENT_S07E01\0"
+    .align 2, 0
+
+gUnknown_80B79EC:
+    .string "INN_TEMP\0"
+    .align 2, 0
+
+gUnknown_80B79F8:
+    .string "SHOP_TEMP\0"
+    .align 2, 0
+
+gUnknown_80B7A04:
+    .string "DELIVER_ITEM_TEMP\0"
+    .align 2, 0
+
+gUnknown_80B7A18:
+    .string "DELIVER_ITEM_STATIC\0"
+    .align 2, 0
+
+gUnknown_80B7A2C:
+    .string "STATION_ITEM_TEMP\0"
+    .align 2, 0
+
+gUnknown_80B7A40:
+    .string "STATION_ITEM_STATIC\0"
+    .align 2, 0
+
+gUnknown_80B7A54:
+    .string "EVENT_LOCAL\0"
+    .align 2, 0
+
+gUnknown_80B7A60:
+    .string "MAP_LOCAL_DOOR\0"
+    .align 2, 0
+
+gUnknown_80B7A70:
+    .string "MAP_LOCAL\0"
+    .align 2, 0
+
+gUnknown_80B7A7C:
+    .string "GROUND_LOCAL\0"
+    .align 2, 0
+
+gUnknown_80B7A8C:
+    .string "POSITION_DIRECTION\0"
+    .align 2, 0
+
+gUnknown_80B7AA0:
+    .string "POSITION_HEIGHT\0"
+    .align 2, 0
+
+gUnknown_80B7AB0:
+    .string "POSITION_Y\0"
+    .align 2, 0
+
+gUnknown_80B7ABC:
+    .string "POSITION_X\0"
+    .align 2, 0
+
+gUnknown_80B7AC8:
+    .string "DUNGEON_CLEAR_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7ADC:
+    .string "DUNGEON_ENTER_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7AF0:
+    .string "TRAINING_PRESENT_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7B08:
+    .string "TRAINING_CONQUEST_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7B20:
+    .string "RESCUE_SCENARIO_CONQUEST_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7B40:
+    .string "RESCUE_SCENARIO_JOB_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7B5C:
+    .string "RESCUE_SCENARIO_ORDER_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7B78:
+    .string "FLAG_KIND_CHANGE_REQUEST\0"
+    .align 2, 0
+
+gUnknown_80B7B94:
+    .string "FLAG_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7BA0:
+    .string "BASE_LEVEL\0"
+    .align 2, 0
+
+gUnknown_80B7BAC:
+    .string "BASE_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7BB8:
+    .string "PARTNER_TALK_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7BCC:
+    .string "WARP_LOCK\0"
+    .align 2, 0
+
+gUnknown_80B7BD8:
+    .string "WARP_LIST\0"
+    .align 2, 0
+
+gUnknown_80B7BE4:
+    .string "BANK_GOLD\0"
+    .align 2, 0
+
+gUnknown_80B7BF0:
+    .string "GOLD\0"
+    .align 2, 0
+
+gUnknown_80B7BF8:
+    .string "UNIT_SUM\0"
+    .align 2, 0
+
+gUnknown_80B7C04:
+    .string "FRIEND_SUM\0"
+    .align 2, 0
+
+gUnknown_80B7C10:
+    .string "NEW_FRIEND_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C20:
+    .string "PARTNER2_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C30:
+    .string "PARTNER1_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C40:
+    .string "PLAYER_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C4C:
+    .string "WEATHER_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C5C:
+    .string "CONDITION_KIND\0"
+    .align 2, 0
+
+gUnknown_80B7C6C:
+    .string "CLEAR_COUNT\0"
+    .align 2, 0
+
+gUnknown_80B7C78:
+    .string "START_MODE\0"
+    .align 2, 0
+
+gUnknown_80B7C84:
+    .string "SCRIPT_MODE\0"
+    .align 2, 0
+
+gUnknown_80B7C90:
+    .string "DUNGEON_RESULT\0"
+    .align 2, 0
+
+gUnknown_80B7CA0:
+    .string "DUNGEON_ENTER_FREQUENCY\0"
+    .align 2, 0
+
+gUnknown_80B7CB8:
+    .string "DUNGEON_ENTER_INDEX\0"
+    .align 2, 0
+
+gUnknown_80B7CCC:
+    .string "DUNGEON_ENTER\0"
+    .align 2, 0
+
+gUnknown_80B7CDC:
+    .string "DUNGEON_SELECT\0"
+    .align 2, 0
+
+gUnknown_80B7CEC:
+    .string "GROUND_PLACE\0"
+    .align 2, 0
+
+gUnknown_80B7CFC:
+    .string "GROUND_MAP\0"
+    .align 2, 0
+
+gUnknown_80B7D08:
+    .string "GROUND_GETOUT\0"
+    .align 2, 0
+
+gUnknown_80B7D18:
+    .string "GROUND_ENTER_LINK\0"
+    .align 2, 0
+
+gUnknown_80B7D2C:
+    .string "GROUND_ENTER\0"
+    .align 2, 0
+
+gUnknown_80B7D3C:
+    .string "SCENARIO_SUB9\0"
+    .align 2, 0
+
+gUnknown_80B7D4C:
+    .string "SCENARIO_SUB8\0"
+    .align 2, 0
+
+gUnknown_80B7D5C:
+    .string "SCENARIO_SUB7\0"
+    .align 2, 0
+
+gUnknown_80B7D6C:
+    .string "SCENARIO_SUB6\0"
+    .align 2, 0
+
+gUnknown_80B7D7C:
+    .string "SCENARIO_SUB5\0"
+    .align 2, 0
+
+gUnknown_80B7D8C:
+    .string "SCENARIO_SUB4\0"
+    .align 2, 0
+
+gUnknown_80B7D9C:
+    .string "SCENARIO_SUB3\0"
+    .align 2, 0
+
+gUnknown_80B7DAC:
+    .string "SCENARIO_SUB2\0"
+    .align 2, 0
+
+gUnknown_80B7DBC:
+    .string "SCENARIO_SUB1\0"
+    .align 2, 0
+
+gUnknown_80B7DCC:
+    .string "SCENARIO_MAIN\0"
+    .align 2, 0
+
+gUnknown_80B7DDC:
+    .string "SCENARIO_SELECT\0"
+    .align 2, 0
+
+gUnknown_80B7DEC:
+    .string "CONDITION\0"
+    .align 2, 0
+
+gUnknown_80B7DF8:
+    .string "VERSION\0"
+    .align 2, 0
+
+    .string "pksdir0\0"
+    .string "pksdir0\0"
+    .fill 28, 1, 0
+    .string "pksdir0\0"
+    .fill 8, 1, 0
 
 	.global gUnknown_80B7E3C
 gUnknown_80B7E3C: @ 80B7E3C
-	.incbin "baserom.gba", 0xB7E3C, 0x7C
+    .4byte 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1
+
+    .string "pksdir0\0"
+    .string "pksdir0\0"
+
+gUnknown_80B7E8C:
+    .string "../system/memory_locate.c\0"
+    .align 2, 0
+
+gUnknown_80B7EA8:
+    .string "_LocateSetFront\0"
+    .align 2, 0
 
 	.global gUnknown_80B7EB8
 gUnknown_80B7EB8: @ 80B7EB8
-        .byte 0x8C, 0x7E, 0x0B, 0x08
-        .byte 0x45, 0x02, 0x00, 0x00
-        .byte 0xA8, 0x7E, 0x0B, 0x08 @ Pointer to _LocateSetFront
+    .4byte gUnknown_80B7E8C, 581, gUnknown_80B7EA8
 
-	.global gUnknown_80B7EC4
+    .global gUnknown_80B7EC4
 gUnknown_80B7EC4: @ 80B7EC4
-        .string "Memory Locate sprit max over [%3d/%3d]\0"
-        .align 2,0
+    .string "Memory Locate sprit max over [%3d/%3d]\0"
+    .align 2,0
 
-        .global LocateSetBackText
-        LocateSetBackText:
-        .string "_LocateSetBack\0"
-        .align 2,0
+LocateSetBackText:
+    .string "_LocateSetBack\0"
+    .align 2,0
 
 	.global gUnknown_80B7EFC
 gUnknown_80B7EFC: @ 80B7EFC
-        .byte 0x8C, 0x7E, 0x0B, 0x08
-        .byte 0xA1, 0x02, 0x00, 0x00
-        .4byte LocateSetBackText
+    .4byte gUnknown_80B7E8C, 673, LocateSetBackText
 
-        .global LocateSetText
-        LocateSetText:
-        .string "_LocateSet\0"
-        .align 2,0
+LocateSetText:
+    .string "_LocateSet\0"
+    .align 2,0
 
 	.global gUnknown_80B7F14
 gUnknown_80B7F14: @ 80B7F14
-        .byte 0x8C, 0x7E, 0x0B, 0x08
-        .byte 0x2C, 0x03, 0x00, 0x00
-        .4byte LocateSetText
+    .4byte gUnknown_80B7E8C, 812, LocateSetText
 
-	.global gLocateSetErrorMessage
+    .global gLocateSetErrorMessage
 gLocateSetErrorMessage: @ 80B7F20
-        .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
-        .string "    atb %02x grp %3d \0"
-        .align 2,0
+    .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
+    .string "    atb %02x grp %3d \0"
+    .align 2,0
 
-        .global MemoryLocate_LocalCreateText
-        MemoryLocate_LocalCreateText:
-        .string "MemoryLocate_LocalCreate\0"
-        .align 2,0
+MemoryLocate_LocalCreateText:
+    .string "MemoryLocate_LocalCreate\0"
+    .align 2,0
 
 	.global gUnknown_80B7F88
 gUnknown_80B7F88: @ 80B7F88
-        .byte 0x8C, 0x7E, 0x0B, 0x08 @ Pointer to ../system/memory_locate.c
-        .byte 0x55, 0x04, 0x00, 0x00
-        .4byte MemoryLocate_LocalCreateText
+    .4byte gUnknown_80B7E8C, 1109, MemoryLocate_LocalCreateText
 
 	.global gLocalCreateErrorMessage
 gLocalCreateErrorMessage: @ 80B7F94
@@ -557,35 +1029,681 @@ gLocalCreateErrorMessage: @ 80B7F94
 
 	.global gUnknown_80B8008
 gUnknown_80B8008: @ 80B8008
-        .byte 0x10, 0x00, 0x0c, 0x00 
-        .byte 0x09, 0x00, 0x07, 0x00
-        .byte 0x06, 0x00, 0x05, 0x00
-        .byte 0x04, 0x00, 0x03, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x01, 0x00, 0x01, 0x00
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00
+    .2byte 16, 12, 9, 7, 6, 5, 4, 3, 2, 2, 1, 1, 1, 0, 0, 0, 0
 
 	.global gUnknown_80B802A
 gUnknown_80B802A: @ 80B802A
-	.incbin "baserom.gba", 0xB802A, 0x140
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x846C
+    .2byte 0x8967
+    .2byte 0x8C64
+    .2byte 0x8E62
+    .2byte 0x9060
+    .2byte 0x915F
+    .2byte 0x935D
+    .2byte 0x945C
+    .2byte 0x955B
+    .2byte 0x965A
+    .2byte 0x965A
+    .2byte 0x9759
+    .2byte 0x9858
+    .2byte 0x9858
+    .2byte 0x9957
+    .2byte 0x9957
+    .2byte 0x9A56
+    .2byte 0x9A56
+    .2byte 0x9A56
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9C55
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9C54
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9B55
+    .2byte 0x9A56
+    .2byte 0x9A56
+    .2byte 0x9A56
+    .2byte 0x9957
+    .2byte 0x9957
+    .2byte 0x9858
+    .2byte 0x9858
+    .2byte 0x9759
+    .2byte 0x965A
+    .2byte 0x965A
+    .2byte 0x955B
+    .2byte 0x945C
+    .2byte 0x935D
+    .2byte 0x915F
+    .2byte 0x9060
+    .2byte 0x8E62
+    .2byte 0x8C64
+    .2byte 0x8967
+    .2byte 0x846C
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
 
 	.global gUnknown_80B816A
 gUnknown_80B816A: @ 80B816A
-	.incbin "baserom.gba", 0xB816A, 0x140
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x8071
+    .2byte 0x866B
+    .2byte 0x8A67
+    .2byte 0x8D64
+    .2byte 0x8F62
+    .2byte 0x9160
+    .2byte 0x935E
+    .2byte 0x955C
+    .2byte 0x975A
+    .2byte 0x9958
+    .2byte 0x9A57
+    .2byte 0x9B56
+    .2byte 0x9D54
+    .2byte 0x9E53
+    .2byte 0xA051
+    .2byte 0xA051
+    .2byte 0xA150
+    .2byte 0xA24F
+    .2byte 0xA44D
+    .2byte 0xA54C
+    .2byte 0xA54C
+    .2byte 0xA64B
+    .2byte 0xA74A
+    .2byte 0xA849
+    .2byte 0xA948
+    .2byte 0xA948
+    .2byte 0xAA47
+    .2byte 0xAA47
+    .2byte 0xAB46
+    .2byte 0xAC45
+    .2byte 0xAC45
+    .2byte 0xAD44
+    .2byte 0xAD44
+    .2byte 0xAE43
+    .2byte 0xAE43
+    .2byte 0xAF42
+    .2byte 0xAF42
+    .2byte 0xB041
+    .2byte 0xB041
+    .2byte 0xB140
+    .2byte 0xB140
+    .2byte 0xB140
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB43D
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB33E
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB23F
+    .2byte 0xB140
+    .2byte 0xB140
+    .2byte 0xB140
+    .2byte 0xB041
+    .2byte 0xB041
+    .2byte 0xAF42
+    .2byte 0xAF42
+    .2byte 0xAE43
+    .2byte 0xAE43
+    .2byte 0xAD44
+    .2byte 0xAD44
+    .2byte 0xAC45
+    .2byte 0xAC45
+    .2byte 0xAB46
+    .2byte 0xAA47
+    .2byte 0xAA47
+    .2byte 0xA948
+    .2byte 0xA948
+    .2byte 0xA849
+    .2byte 0xA74A
+    .2byte 0xA64B
+    .2byte 0xA54C
+    .2byte 0xA54C
+    .2byte 0xA44D
+    .2byte 0xA24F
+    .2byte 0xA150
+    .2byte 0xA051
+    .2byte 0xA051
+    .2byte 0x9E53
+    .2byte 0x9D54
+    .2byte 0x9B56
+    .2byte 0x9A57
+    .2byte 0x9958
+    .2byte 0x975A
+    .2byte 0x955C
+    .2byte 0x935E
+    .2byte 0x9160
+    .2byte 0x8F62
+    .2byte 0x8D64
+    .2byte 0x8A67
+    .2byte 0x866B
+    .2byte 0x8071
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
 
 	.global gUnknown_80B82AA
 gUnknown_80B82AA: @ 80B82AA
-	.incbin "baserom.gba", 0xB82AA, 0x140
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x9392
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
+    .2byte 0x0100
 
 	.global gUnknown_80B83EA
 gUnknown_80B83EA: @ 80B83EA
-	.incbin "baserom.gba", 0xB83EA, 0x152
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
+    .2byte 0x0000
 
+    .align 2, 0
+    .string "pksdir0\0"
+    .string "pksdir0\0"
 	.global gUnknown_80B853C
 gUnknown_80B853C: @ 80B853C
-	.incbin "baserom.gba", 0xB853C, 0x40
+    .4byte 0x66666666
+    .4byte 0x00000000
+    .4byte 0x11111111
+    .4byte 0x22222222
+    .4byte 0x33333333
+    .4byte 0x44444444
+    .4byte 0x55555555
+    .4byte 0x66666666
+    .4byte 0x77777777
+    .4byte 0x88888888
+    .4byte 0x99999999
+    .4byte 0xAAAAAAAA
+    .4byte 0xBBBBBBBB
+    .4byte 0xCCCCCCCC
+    .4byte 0xDDDDDDDD
+    .4byte 0xEEEEEEEE
 
 	.global gUnknown_80B857C
 gUnknown_80B857C: @ 80B857C
@@ -593,18 +1711,41 @@ gUnknown_80B857C: @ 80B857C
 
 	.global gUnknown_80B85DC
 gUnknown_80B85DC: @ 80B85DC
-	.incbin "baserom.gba", 0xB85DC, 0xC8
+    @ Some kind of bit shifting and masking table
+    @      byte1, byte2, shift_left, shift_right
+    .4byte 0xFFFFFFFF, 0x00000000, 0x00, 0x20
+    .4byte 0x0FFFFFFF, 0xF0000000, 0x04, 0x1C
+    .4byte 0x00FFFFFF, 0xFF000000, 0x08, 0x18
+    .4byte 0x000FFFFF, 0xFFF00000, 0x0C, 0x14
+    .4byte 0x0000FFFF, 0xFFFF0000, 0x10, 0x10
+    .4byte 0x00000FFF, 0xFFFFF000, 0x14, 0x0C
+    .4byte 0x000000FF, 0xFFFFFF00, 0x18, 0x08
+    .4byte 0x0000000F, 0xFFFFFFF0, 0x1C, 0x04
+
+    .global gUnknown_80B865C
+gUnknown_80B865C:
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+    .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80B86A4
 gUnknown_80B86A4: @ 80B86A4
-        .byte 0x5C, 0x86, 0x0B, 0x08
-        .byte 0xA1, 0x81, 0x07, 0x00
-        .byte 0x0A, 0x00, 0x00, 0x00
-        .byte 0x08, 0x00, 0x00, 0x00
+    @ Fallback character with bitmap?
+    .4byte gUnknown_80B865C
+    .4byte 0x781A1, 10, 8
 
 	.global gUnknown_80B86B4
 gUnknown_80B86B4: @ 80B86B4
-	.incbin "baserom.gba", 0xB86B4, 0x100
+    .incbin "graphics/warning.4bpp"
 
 	.global gKanjiA_file_string
 gKanjiA_file_string: @ 80B87B4

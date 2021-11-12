@@ -162,7 +162,7 @@ _08057B12:
 	movs r1, 0xB0
 	lsls r1, 1
 	mov r0, sp
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r1, [r4]
 	movs r0, 0x20
 	orrs r0, r1
@@ -896,7 +896,7 @@ _080580A0:
 	bge _08058088
 _080580B0:
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1285,7 +1285,7 @@ sub_805836C:
 	adds r4, r0, 0
 _0805838A:
 	adds r0, r2, 0
-	bl sub_8092B00
+	bl GetMoveType
 	lsls r0, 24
 	lsrs r0, 24
 	add r1, sp, 0x18
@@ -1470,7 +1470,7 @@ sub_80584C0:
 	movs r5, 0
 _080584F0:
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2902,7 +2902,7 @@ _08058F7E:
 	adds r0, r5, r4
 	ldrh r1, [r0]
 	mov r0, sp
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r4, 0x4
 	adds r5, r4
 	ldr r4, [r5]
@@ -2975,7 +2975,7 @@ sub_8059004:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3094,7 +3094,7 @@ sub_80590D4:
 	mov r1, r9
 	strb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3125,7 +3125,7 @@ _0805911C:
 _08059130: .4byte gUnknown_80FEB88
 _08059134:
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3469,7 +3469,7 @@ _080593C8: .4byte gUnknown_80FE3BC
 _080593CC:
 	adds r0, r5, 0
 	mov r1, r12
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldr r0, _0805941C
 	adds r1, r5, 0
 	movs r2, 0
@@ -3765,7 +3765,7 @@ sub_80595EC:
 	add r0, sp, 0x18
 	strb r7, [r0]
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3785,7 +3785,7 @@ sub_80595EC:
 _0805962C: .4byte gUnknown_80FEB8C
 _08059630:
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3916,7 +3916,7 @@ sub_8059714:
 	add r0, sp, 0x18
 	strb r5, [r0]
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4023,7 +4023,7 @@ sub_80597F0:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4328,7 +4328,7 @@ sub_8059A2C:
 	ldrb r0, [r0, 0x9]
 	mov r10, r0
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4433,7 +4433,7 @@ sub_8059AF8:
 	add r0, sp, 0x18
 	strb r7, [r0]
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4453,7 +4453,7 @@ sub_8059AF8:
 _08059B38: .4byte gUnknown_80FEB90
 _08059B3C:
 	adds r0, r5, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4921,7 +4921,7 @@ _08059E8A:
 	bl sub_8071A44
 	adds r5, r0, 0
 	adds r0, r7, 0
-	bl sub_8092C24
+	bl GetMoveCriticalHitChance
 	str r0, [sp]
 	add r2, sp, 0x18
 	str r2, [sp, 0x4]
@@ -5103,7 +5103,7 @@ _08059FFE:
 	bl sub_8071A44
 	adds r5, r0, 0
 	adds r0, r7, 0
-	bl sub_8092C24
+	bl GetMoveCriticalHitChance
 	str r0, [sp]
 	add r2, sp, 0x18
 	str r2, [sp, 0x4]
@@ -6340,7 +6340,7 @@ _0805A94C:
 	add r4, sp, 0x1C
 	ldr r1, _0805AA44
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80571F0
@@ -7957,7 +7957,7 @@ _0805B588:
 	bge _0805B570
 _0805B598:
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8039,7 +8039,7 @@ sub_805B618:
 	adds r0, r4, r5
 	ldrh r1, [r0]
 	mov r0, sp
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r5, 0x4
 	adds r4, r5
 	ldr r4, [r4]
@@ -8295,7 +8295,7 @@ sub_805B808:
 	add r0, sp, 0x18
 	strb r5, [r0]
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -9523,7 +9523,7 @@ sub_805C138:
 	add r0, sp, 0x18
 	strb r5, [r0]
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -9643,7 +9643,7 @@ sub_805C208:
 	bl GetSizeOrbDmg
 	mov r10, r0
 	adds r0, r6, 0
-	bl sub_8092B00
+	bl GetMoveType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -10965,7 +10965,7 @@ sub_805CEB8:
 	cmp r0, 0x1
 	bne _0805CEE0
 	adds r0, r7, 0
-	bl sub_8092C3C
+	bl GetMoveCannotHitFrozen
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CEE0
@@ -24313,7 +24313,7 @@ sub_8063C88:
 	lsls r1, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_809422C
+	bl DoesMoveCharge
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063CAE
@@ -24333,7 +24333,7 @@ _08063CAE:
 	adds r4, r0, r4
 _08063CBC:
 	ldrh r0, [r4, 0x2]
-	bl sub_809422C
+	bl DoesMoveCharge
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063CA6
@@ -31816,7 +31816,7 @@ sub_8067904:
 	str r0, [r1]
 	add r0, sp, 0x8
 	mov r1, r9
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r0, r6, 0
 	adds r0, 0xBC
 	ldrb r0, [r0]
@@ -37270,7 +37270,7 @@ _0806A3A0:
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_8092BF4
+	bl GetMoveMaxPP
 	strb r0, [r4, 0x4]
 _0806A3C2:
 	adds r4, 0x8

@@ -70,7 +70,6 @@ extern void sub_8012EA4(u32 *, u32);
 extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
 extern void xxx_call_draw_string(s32, u32, const char *, u32, u32);
-extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u32 sub_801CA08(u32);
 extern u8 sub_801CB24();
 extern void sub_801CBB8();

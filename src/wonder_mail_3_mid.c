@@ -136,7 +136,7 @@ extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
 extern void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon);
-extern struct PokemonStruct *sub_808D33C(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
 extern void sub_802F718(void);
 extern u8 sub_80138B8(u32 *, u32);
@@ -368,7 +368,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, u8 r1)
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
-    sub_808DA34(gAvailablePokemonNames, sub_808D33C());
+    sub_808DA34(gAvailablePokemonNames, GetPlayerPokemonStruct());
 
     gUnknown_203B310->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->unk14);
     gUnknown_203B310->faceData = NULL;

@@ -5878,7 +5878,7 @@ _0809BD84:
 _0809BDB2:
 	cmp r4, 0x3
 	bne _0809BDCC
-	bl sub_80247C0
+	bl CleanLuminousCave
 	ldr r0, _0809BDC8
 	ldr r0, [r0]
 	movs r2, 0x86
@@ -5892,7 +5892,7 @@ _0809BDCC:
 	beq _0809BDD2
 	b _0809B784
 _0809BDD2:
-	bl sub_80247C0
+	bl CleanLuminousCave
 	ldr r0, _0809BDE4
 	ldr r0, [r0]
 	movs r3, 0x86

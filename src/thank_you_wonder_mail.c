@@ -419,7 +419,7 @@ extern void sub_8031E10();
 extern void sub_802F2C0();
 extern u32 sub_80144A4(s32 *r0);
 extern void SetThankYouMailMenuState(u32);
-extern struct PokemonStruct *sub_808D33C(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
 extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_80922B4(u8 *, u8 *, u32);
@@ -1487,7 +1487,7 @@ void UpdateThankYouMailText(void)
 
   switch(gUnknown_203B2C4->state) {
     case 5:
-        pokeStruct = sub_808D33C();
+        pokeStruct = GetPlayerPokemonStruct();
         sub_80922B4(auStack180,pokeStruct->name, POKEMON_NAME_LENGTH);
         ExpandPlaceholdersBuffer(gUnknown_203B2C4->formattedString,gUnknown_80DF250,auStack180);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
@@ -1646,7 +1646,7 @@ void UpdateThankYouMailText(void)
         sub_8014248(gUnknown_80DF5E4,0,7,gUnknown_80DEE44,0,4,0,&gUnknown_203B2C4->faceFile,0xc);
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
-        pokeStruct2 = sub_808D33C();
+        pokeStruct2 = GetPlayerPokemonStruct();
         sub_80922B4(auStack100, pokeStruct2->name, POKEMON_NAME_LENGTH);
         ExpandPlaceholdersBuffer(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,auStack100);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);

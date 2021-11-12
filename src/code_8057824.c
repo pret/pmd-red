@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "constants/move.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
@@ -31,7 +32,7 @@ extern void sub_806F370(struct DungeonEntity *r0, struct DungeonEntity *r1, u32,
 
 extern u32 gUnknown_80FD018;
 extern s16 sub_8057600(void*, u32);
-extern u32 sub_8092B00(void*);
+extern u32 GetMoveType(void*);
 
 bool32 sub_8057824(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 {
@@ -100,7 +101,7 @@ bool32 sub_8057954(struct DungeonEntity *param_1, struct DungeonEntity *param_2,
   return TRUE;
 }
 
-bool32 sub_8057974(struct DungeonEntity *param_1, struct DungeonEntity *param_2, void* param_3, u32 param_4)
+bool32 sub_8057974(struct DungeonEntity *param_1, struct DungeonEntity *param_2, struct PokemonMove *param_3, u32 param_4)
 {
   s32 newHP;
   u8 local_24;
@@ -108,7 +109,7 @@ bool32 sub_8057974(struct DungeonEntity *param_1, struct DungeonEntity *param_2,
   newHP = param_2->entityData->HP / 2;
   local_24 = 0;
   if (newHP != 0) {
-    sub_806F370(param_1,param_2,newHP,1,&local_24,sub_8092B00(param_3),sub_8057600(param_3,param_4),0,1,0);
+    sub_806F370(param_1,param_2,newHP,1,&local_24,GetMoveType(param_3),sub_8057600(param_3,param_4),0,1,0);
     local_24 = local_24 == 0;
   }
   else

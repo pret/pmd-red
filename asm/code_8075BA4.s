@@ -6847,7 +6847,7 @@ _08079326:
 	ldrb r0, [r4, 0x4]
 	str r0, [sp]
 	adds r0, r5, 0
-	bl sub_8092BF4
+	bl GetMoveMaxPP
 	str r0, [sp, 0x4]
 	ldr r1, [sp]
 	ldr r0, [sp, 0x4]
@@ -12176,7 +12176,7 @@ _0807BCB0:
 	movs r1, 0xB0
 	lsls r1, 1
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	mov r0, sp
 	mov r1, r10
 	adds r2, r4, 0
@@ -12380,7 +12380,7 @@ _0807BE38:
 	b _0807BE54
 _0807BE4A:
 	adds r0, r6, 0
-	bl sub_8092B90
+	bl GetMoveWeight
 	lsls r0, 24
 	lsrs r0, 24
 _0807BE54:
@@ -12698,7 +12698,7 @@ _0807C06E:
 	cmp r0, 0x5
 	bne _0807C0B0
 	mov r0, r10
-	bl sub_8092C54
+	bl GetMoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807C0C4
@@ -13610,7 +13610,7 @@ _0807C77C:
 _0807C78A:
 	mov r0, r8
 	movs r1, 0x2
-	bl sub_8092BD8
+	bl GetMoveAccuracy
 	adds r4, r0, 0
 	movs r0, 0x64
 	bl DungeonRandomCapped
@@ -14176,7 +14176,7 @@ _0807CBAC:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldrb r0, [r7, 0x7]
 	mov r10, r4
 	mov r9, r5
@@ -14394,7 +14394,7 @@ sub_807CD64:
 _0807CD88:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8092AE0
+	bl GetMoveTargetingFlags
 	lsls r0, 16
 	asrs r0, 16
 _0807CD94:
@@ -14625,7 +14625,7 @@ _0807CF4E:
 	add r4, sp, 0x1C
 	ldr r1, _0807D058
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldr r0, [sp, 0x28]
 	adds r1, r4, 0
 	bl sub_80571F0
@@ -16903,7 +16903,7 @@ sub_807E1A0:
 	add r4, sp, 0x1C
 	ldr r1, _0807E20C
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl sub_80571F0
@@ -19797,7 +19797,7 @@ _0807F8FA:
 	add r4, sp, 0xE4
 	ldr r1, _0807F9AC
 	adds r0, r4, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl sub_80571F0

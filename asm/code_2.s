@@ -1251,7 +1251,7 @@ _08001060: .4byte gUnknown_203B040
 sub_8001064:
 	push {r4,r5,lr}
 	sub sp, 0x28
-	bl sub_808D33C
+	bl GetPlayerPokemonStruct
 	cmp r0, 0
 	bne _080010AE
 	ldr r5, _0800109C

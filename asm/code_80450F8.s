@@ -4593,7 +4593,7 @@ _080473E0:
 	add r4, sp, 0x208
 	adds r0, r4, 0
 	ldr r1, _080474B8
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldr r0, [r5, 0x10]
 	adds r1, r4, 0
 	bl sub_80571F0
@@ -5120,7 +5120,7 @@ _080477FA:
 	lsrs r7, r1, 31
 	ldr r1, _08047854
 	add r0, sp, 0x8
-	bl sub_8092A88
+	bl InitPokemonMove
 	ldr r0, [r4, 0x10]
 	add r1, sp, 0x8
 	bl sub_80571F0
@@ -6275,7 +6275,7 @@ sub_80482FC:
 	add r5, sp, 0x4
 	ldr r1, _0804833C
 	adds r0, r5, 0
-	bl sub_8092A88
+	bl InitPokemonMove
 	strb r6, [r5, 0x4]
 	movs r3, 0x80
 	lsls r3, 1

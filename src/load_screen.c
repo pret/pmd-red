@@ -98,7 +98,7 @@ extern void sub_8013114(u32 *, u32 *);
 extern void sub_8095240(u32);
 
 extern void sub_80920D8(u8 *);
-extern struct PokemonStruct *sub_808D33C(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
 extern void ExpandPlaceholdersBuffer(u8 *buffer, const u8 *text, ...);
@@ -259,7 +259,7 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
-  playerInfo = sub_808D33C();
+  playerInfo = GetPlayerPokemonStruct();
   if (playerInfo == NULL)
         sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else

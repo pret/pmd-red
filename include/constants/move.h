@@ -14,17 +14,15 @@ enum MoveFlags
 struct MoveData
 {
     u8 *namePointer;
-    /* 0x4 */ u8 power;
-    u8 fill5;
+    /* 0x4 */ s16 power;
     u8 type;
     u8 fill7;
     // Determines the range of moves.
-    /* 0x8 */ u16 targetingFlags;
-    /* 0xA */ u16 aiTargetingFlags; // The AI consider certain moves to have different range than they actually do.
+    /* 0x8 */ u16 targetingFlags[2]; // 0 for player and 1 for AI
+    // The AI consider certain moves to have different range than they actually do.
     /* 0xC */ u8 maxPP;
     /* 0xD */ u8 weight;
-    /* 0xE */ u8 accuracy1;
-    /* 0xF */ u8 accuracy2;
+    /* 0xE */ u8 accuracy[2];
     // Used by the AI to determine how often to use Spikes.
     // Values exist for all other moves, though they seem to be unused.
     /* 0x10 */ u8 useChance;
@@ -36,7 +34,7 @@ struct MoveData
     /* 0x16 */ bool8 affectedByMuzzled; // If true, this move can't be used with the Muzzled status.
     /* 0x17 */ bool8 cannotHitFrozen; // Used by Status Checker to determine if a move can be used on a frozen target.
     /* 0x18 */ bool8 dealsDirectDamage;
-    u8 unk19;
+    u8 rangeType;
     u8 *descriptionPointer;
     u8 *useText; // The text displayed when this move is used.
 };
