@@ -742,7 +742,7 @@ gPokemonMail: @ 80EBA18
     .string "#+#C6Moving Diagonally#R\n"
     .string "Move diagonally to avoid foes!\n"
     .string "Keeping "
-    .byte 0x84 0x86
+    .byte 0x84, 0x86
     .string " pressed~2c use\n"
     .byte 0x87
     .string "R to move diagonally.\n"
