@@ -741,8 +741,11 @@ gPokemonMail: @ 80EBA18
     MoveTipsText:
     .string "#+#C6Moving Diagonally#R\n"
     .string "Move diagonally to avoid foes!\n"
-    .string "Keeping \204\206 pressed~2c use\n"
-    .string "\207R to move diagonally.\n"
+    .string "Keeping "
+    .byte 0x84 0x86
+    .string " pressed~2c use\n"
+    .byte 0x87
+    .string "R to move diagonally.\n"
     .string "#+#C6Changing Direction#R\n"
     .string "It~27s also very important to change\n"
     .string "directions without moving. Check Hints to\n"
@@ -957,7 +960,9 @@ gPokemonMail: @ 80EBA18
     OptionsText:
     .string "#+#C6Change Your Option Settings#R\n"
     .string "#+#C6to Suit Your Play Style!#R\n"
-    .string "Press \207Q to open the menu~2c then\n"
+    .string "Press "
+    .byte 0x87
+		.string "Q to open the menu~2c then\n"
     .string "choose #C6Others#R and #C6Game Options#R.\n"
     .string "You can change settings to suit the way\n"
     .string "you play.\0"
