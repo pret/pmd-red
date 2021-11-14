@@ -2463,7 +2463,7 @@ _08053734:
 	cmp r4, 0
 	beq _080537B4
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x1
 	beq _0805376C
 	b _08053A1C
@@ -2519,7 +2519,7 @@ _080537B4:
 	beq _08053854
 	adds r4, r0, 0
 	str r2, [sp, 0x44]
-	bl sub_80450F8
+	bl GetEntityType
 	ldr r2, [sp, 0x44]
 	cmp r0, 0x1
 	beq _080537E2
@@ -2668,7 +2668,7 @@ _080538DA:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldr r0, [r0, 0x10]
 	str r0, [sp, 0x38]
 	bl EntityExists
@@ -2676,7 +2676,7 @@ _080538DA:
 	cmp r0, 0
 	beq _080539DC
 	ldr r0, [sp, 0x38]
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x1
 	bne _080539DC
 	adds r0, r5, 0
@@ -3244,7 +3244,7 @@ _08053DA8:
 	beq _08053DCE
 	adds r0, r5, 0x4
 	adds r1, r7, 0x4
-	bl sub_80983D8
+	bl CalculateFacingDir
 	strb r0, [r4]
 _08053DCE:
 	ldr r1, [sp, 0x24]
@@ -3261,7 +3261,7 @@ _08053DCE:
 	beq _08053DF2
 	adds r0, r5, 0x4
 	adds r1, r7, 0x4
-	bl sub_80983D8
+	bl CalculateFacingDir
 	strb r0, [r4]
 _08053DF2:
 	adds r0, r5, 0
@@ -6290,7 +6290,7 @@ _080559B6:
 	bgt _080559D4
 	adds r0, r4, 0x4
 	adds r1, r2, 0x4
-	bl sub_80983D8
+	bl CalculateFacingDir
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_8071138
@@ -6314,7 +6314,7 @@ sub_80559DC:
 	ldr r4, [r5, 0x70]
 	adds r0, r5, 0x4
 	adds r1, 0x4
-	bl sub_80983D8
+	bl CalculateFacingDir
 	adds r1, r0, 0
 	movs r2, 0x7
 	ands r0, r2
@@ -7995,7 +7995,7 @@ _08056780:
 	movs r2, 0
 	ldrsh r0, [r6, r2]
 	asrs r1, 16
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -8005,7 +8005,7 @@ _08056780:
 	ldr r0, [r2, 0x10]
 	cmp r0, 0
 	beq _080567C6
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x1
 	beq _080567EC
 _080567C6:
@@ -8307,7 +8307,7 @@ _08056A0E:
 	ldrsh r0, [r7, r2]
 	movs r6, 0x2
 	ldrsh r1, [r7, r6]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r6, r0, 0
 	ldrh r1, [r6]
 	movs r0, 0x3
@@ -8317,7 +8317,7 @@ _08056A0E:
 	ldr r0, [r6, 0x10]
 	cmp r0, 0
 	beq _08056A8E
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x1
 	bne _08056A8E
 	ldr r0, [r6, 0x10]

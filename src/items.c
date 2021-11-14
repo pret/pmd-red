@@ -292,7 +292,7 @@ u8 *GetItemDescription(u8 itemIndex)
     return gItemParametersData[itemIndex].descriptionPointer;
 }
 
-u32 GetItemAIFlags(u8 itemIndex, u32 r1)
+bool8 GetItemAIFlag(u8 itemIndex, u32 r1)
 {
     return gItemParametersData[itemIndex].aiFlags[r1];
 }

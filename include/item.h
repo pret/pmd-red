@@ -59,6 +59,13 @@ enum ItemFlag
     ITEM_FLAG_SET = 1 << 4 // This item can be thrown by pressing L+R instead of having to go to the bag menu.
 };
 
+enum ItemAIFlag
+{
+    ITEM_AI_FLAG_TARGET_SELF,
+    ITEM_AI_FLAG_TARGET_ALLY,
+    ITEM_AI_FLAG_TARGET_ENEMY
+};
+
 #define NUMBER_OF_GUMMIS 18
 #define INVENTORY_SIZE 20
 #define STORAGE_SIZE NUMBER_OF_ITEM_IDS
@@ -84,7 +91,7 @@ u8 GetItemPalette(u8 itemIndex);
 u8 GetItemCategory(u8 itemIndex);
 u32 GetItemUnkThrow(u8 itemIndex, u32 r1);
 u8 *GetItemDescription(u8 itemIndex);
-u32 GetItemAIFlags(u8 itemIndex, u32 r1);
+bool8 GetItemAIFlag(u8 itemIndex, u32 r1);
 void sub_8090DC4(void* param_1,u8 itemIndex, struct unkStruct_8090F58* param_3);
 void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, struct unkStruct_8090F58* a3);
 bool8 AddItemToInventory(const struct ItemSlot* slot);

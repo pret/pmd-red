@@ -446,7 +446,7 @@ _0808B98E:
 	adds r1, r0, 0
 	adds r1, 0x4
 	adds r0, r6, 0x4
-	bl sub_80983D8
+	bl CalculateFacingDir
 	adds r1, r0, 0
 	adds r0, r6, 0
 	bl sub_8085918

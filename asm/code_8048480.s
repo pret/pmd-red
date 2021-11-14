@@ -1050,7 +1050,7 @@ _08048CE2:
 	bl sub_8044DF0
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl sub_8044C94
+	bl SetAction
 	b _08048D3E
 	.align 2, 0
 _08048D34: .4byte gUnknown_80FECA0
@@ -1310,8 +1310,8 @@ sub_8048F00:
 _08048F24: .4byte gPtrMusicBoxPlayedCrumbledMessage
 	thumb_func_end sub_8048F00
 
-	thumb_func_start sub_8048F28
-sub_8048F28:
+	thumb_func_start EvaluateItem
+EvaluateItem:
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1891,7 +1891,7 @@ _080494E4:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8048F28
+	thumb_func_end EvaluateItem
 
 	thumb_func_start sub_80494EC
 sub_80494EC:
@@ -1912,12 +1912,12 @@ _080494F2:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldr r4, [r0, 0x10]
 	cmp r4, 0
 	beq _0804953C
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0
 	beq _0804953C
 	adds r0, r5, 0
@@ -1944,8 +1944,8 @@ _08049544:
 	bx r1
 	thumb_func_end sub_80494EC
 
-	thumb_func_start sub_804954C
-sub_804954C:
+	thumb_func_start GetMapTileAtPosition
+GetMapTileAtPosition:
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -1980,7 +1980,7 @@ _08049588:
 	bx r1
 	.align 2, 0
 _0804958C: .4byte gUnknown_203B430
-	thumb_func_end sub_804954C
+	thumb_func_end GetMapTileAtPosition
 
 	thumb_func_start sub_8049590
 sub_8049590:
@@ -2381,7 +2381,7 @@ _080498CA:
 	b _08049B72
 _080498D0:
 	movs r7, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r0, [r0]
 	movs r1, 0x3
 	mov r8, r1
@@ -2427,7 +2427,7 @@ _08049928:
 	str r0, [sp, 0x24]
 	mov r0, r10
 	ldr r1, [sp, 0x24]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -2436,14 +2436,14 @@ _08049928:
 	adds r4, 0x1
 	adds r0, r4, 0
 	ldr r1, [sp, 0x24]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -2452,14 +2452,14 @@ _08049928:
 	subs r5, 0x1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
 	str r0, [sp, 0xC]
 	mov r0, r10
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -2467,21 +2467,21 @@ _08049928:
 	subs r4, 0x2
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
 	str r0, [sp, 0x18]
 	adds r0, r4, 0
 	ldr r1, [sp, 0x24]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r0, [r0]
 	mov r1, r8
 	ands r1, r0
@@ -2800,7 +2800,7 @@ sub_8049BB0:
 	mov r9, r0
 	mov r0, r10
 	mov r1, r9
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r4, 0x3
 	adds r0, r4, 0
@@ -2811,14 +2811,14 @@ sub_8049BB0:
 	adds r5, 0x1
 	adds r0, r5, 0
 	mov r1, r9
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
 	str r0, [r6, 0x4]
 	adds r0, r5, 0
 	ldr r1, [sp, 0x40]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
@@ -2828,14 +2828,14 @@ sub_8049BB0:
 	mov r8, r0
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
 	str r0, [r6, 0xC]
 	mov r0, r10
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
@@ -2843,21 +2843,21 @@ sub_8049BB0:
 	subs r5, 0x2
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
 	str r0, [r6, 0x14]
 	adds r0, r5, 0
 	ldr r1, [sp, 0x40]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
 	str r0, [r6, 0x18]
 	adds r0, r5, 0
 	mov r1, r9
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r0, [r0]
 	ands r4, r0
 	str r4, [r6, 0x1C]
@@ -3273,7 +3273,7 @@ _08049F1C:
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r3, [sp, 0x34]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r2, [r5]
 	movs r1, 0x80
@@ -3340,7 +3340,7 @@ _08049FDC:
 	beq _0804A028
 	adds r0, r4, 0
 	str r3, [sp, 0x34]
-	bl sub_80450F8
+	bl GetEntityType
 	ldr r3, [sp, 0x34]
 	cmp r0, 0x2
 	bne _0804A014
@@ -3460,7 +3460,7 @@ _0804A098:
 	ldr r0, [sp, 0x10]
 	adds r1, r2, 0
 	str r3, [sp, 0x34]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r2, [r5]
 	movs r0, 0x20
@@ -3505,7 +3505,7 @@ _0804A124:
 	beq _0804A174
 	adds r0, r4, 0
 	str r3, [sp, 0x34]
-	bl sub_80450F8
+	bl GetEntityType
 	ldr r3, [sp, 0x34]
 	cmp r0, 0x2
 	bne _0804A15C
@@ -3673,7 +3673,7 @@ sub_804A1F0:
 	adds r6, r3, r0
 	ldr r0, [sp, 0xC]
 	mov r1, r10
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -3724,7 +3724,7 @@ _0804A2D0:
 	cmp r4, 0
 	beq _0804A318
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x2
 	bne _0804A304
 	adds r0, r4, 0
@@ -3823,7 +3823,7 @@ _0804A386:
 	ldr r6, [sp, 0x10]
 	ldr r0, [sp, 0xC]
 	mov r1, r10
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -3871,7 +3871,7 @@ _0804A3EC:
 	cmp r4, 0
 	beq _0804A434
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x2
 	bne _0804A420
 	adds r0, r4, 0
@@ -4021,7 +4021,7 @@ sub_804A49C:
 	mov r3, r9
 	adds r6, r3, r0
 	mov r0, r10
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -4071,7 +4071,7 @@ _0804A574:
 	cmp r4, 0
 	beq _0804A59A
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x2
 	bne _0804A5C8
 	adds r0, r4, 0
@@ -4156,7 +4156,7 @@ _0804A60C:
 	adds r6, r0, r3
 	mov r0, r10
 	ldr r1, [sp, 0xC]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -4204,7 +4204,7 @@ _0804A678:
 	cmp r4, 0
 	beq _0804A6C0
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x2
 	bne _0804A6AC
 	adds r0, r4, 0
@@ -4831,7 +4831,7 @@ _0804AB2E:
 _0804AB32:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r2, [r0, 0x9]
 	adds r3, r4, 0x1
 	cmp r2, 0xFF
@@ -4960,7 +4960,7 @@ sub_804AC20:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r1, [r0, 0x9]
 	ldr r0, _0804AC6C
 	ldr r3, [r0]
@@ -5062,11 +5062,11 @@ sub_804ACE4:
 	movs r3, 0x2
 	ldrsh r1, [r0, r3]
 	adds r0, r2, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
 	beq _0804AD06
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x3
 	bne _0804AD06
 	movs r0, 0x1
@@ -5086,7 +5086,7 @@ sub_804AD0C:
 	movs r3, 0x2
 	ldrsh r1, [r0, r3]
 	adds r0, r2, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldr r1, [r0, 0x10]
 	cmp r1, 0
 	beq _0804AD2C
@@ -5828,7 +5828,7 @@ _0804B318:
 _0804B31C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r0, [r1]
 	movs r2, 0x3
@@ -6124,7 +6124,7 @@ _0804B55A:
 	subs r0, r5, 0x1
 	adds r1, r4, 0
 	str r2, [sp, 0x8]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r7, 0
 	ands r0, r1
@@ -6140,7 +6140,7 @@ _0804B5A4:
 	adds r0, r5, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -6156,7 +6156,7 @@ _0804B5C4:
 	adds r1, r4, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -6173,7 +6173,7 @@ _0804B5E4:
 	adds r1, r6, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -7965,7 +7965,7 @@ _0804C498:
 	movs r2, 0
 	ldrsh r0, [r3, r2]
 	mov r1, r10
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	ldr r5, [sp, 0x8]
@@ -9011,7 +9011,7 @@ _0804CCC0:
 	bge _0804CC84
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r5, [r0, 0x9]
 	ldr r1, _0804CCE0
 	mov r3, r8
@@ -9030,7 +9030,7 @@ _0804CCE4:
 _0804CCF0:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	cmp r5, r0
 	beq _0804CCE4
@@ -9051,7 +9051,7 @@ _0804CD0C:
 _0804CD18:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -9060,7 +9060,7 @@ _0804CD18:
 	beq _0804CD0C
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -9115,7 +9115,7 @@ _0804CD72:
 	adds r0, r7, r0
 	adds r1, r6, r1
 	str r2, [sp, 0x1C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -9136,7 +9136,7 @@ _0804CDA2:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	adds r1, r6, r1
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -9154,7 +9154,7 @@ _0804CDD4: .4byte gUnknown_80F4448
 _0804CDD8:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x10
 	ands r0, r1
@@ -9167,7 +9167,7 @@ _0804CDEC:
 	adds r4, r7, 0x1
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r10
 	ands r0, r1
@@ -9177,7 +9177,7 @@ _0804CDEC:
 	adds r5, r6, 0x1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r0, [r0]
 	mov r4, r10
 	ands r4, r0
@@ -9185,7 +9185,7 @@ _0804CDEC:
 	bne _0804CE32
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r0, [r0]
 	mov r1, r10
 	ands r0, r1
@@ -9197,7 +9197,7 @@ _0804CDEC:
 _0804CE32:
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -9207,7 +9207,7 @@ _0804CE32:
 	subs r4, r6, 0x1
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -9215,7 +9215,7 @@ _0804CE32:
 	bne _0804CE70
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -9227,7 +9227,7 @@ _0804CE70:
 	subs r4, r7, 0x1
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -9238,7 +9238,7 @@ _0804CE70:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x1C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -9247,7 +9247,7 @@ _0804CE70:
 	bne _0804CEB6
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -9259,7 +9259,7 @@ _0804CE70:
 _0804CEB6:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -9270,7 +9270,7 @@ _0804CEB6:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x1C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -9279,7 +9279,7 @@ _0804CEB6:
 	bne _0804CEFA
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -9321,7 +9321,7 @@ _0804CF16:
 	adds r0, r7, r0
 	adds r1, r6, r1
 	str r2, [sp, 0x1C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -9342,7 +9342,7 @@ _0804CF16:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	adds r1, r6, r1
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -9408,7 +9408,7 @@ _0804CFD4:
 	bgt _0804CFFC
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r3, 0x3
 	mov r10, r3
@@ -11221,7 +11221,7 @@ _0804DCCA:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r8, r0
 	ldr r5, [sp, 0x28]
@@ -11351,7 +11351,7 @@ _0804DDB4:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	ldr r5, [sp, 0x2C]
@@ -11482,7 +11482,7 @@ _0804DEAC:
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
 	ldr r0, [sp, 0x30]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r8, r0
 	ldr r5, [sp, 0x30]
@@ -11600,7 +11600,7 @@ _0804DF88:
 	ldrsh r0, [r4, r1]
 	adds r1, r6, 0
 	str r3, [sp, 0x54]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r10, r0
 	ldr r5, [sp, 0x34]
@@ -11937,7 +11937,7 @@ _0804E1EA:
 	mov r1, r8
 	str r2, [sp, 0x38]
 	str r3, [sp, 0x3C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -11977,7 +11977,7 @@ _0804E22E:
 	mov r2, r9
 	adds r1, r2, r5
 	str r3, [sp, 0x3C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -12019,7 +12019,7 @@ _0804E278:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	add r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12138,7 +12138,7 @@ _0804E352:
 _0804E360:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12188,7 +12188,7 @@ _0804E3B2:
 _0804E3BC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12244,7 +12244,7 @@ _0804E416:
 _0804E420:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12298,7 +12298,7 @@ _0804E478:
 _0804E482:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12345,7 +12345,7 @@ _0804E4D0:
 	bgt _0804E57E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -12394,7 +12394,7 @@ _0804E52C:
 	bgt _0804E57E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -13032,7 +13032,7 @@ _0804E9F2:
 _0804E9F8:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -13043,7 +13043,7 @@ _0804E9F8:
 _0804EA0E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFF
 	bne _0804EAF4
@@ -13157,7 +13157,7 @@ _0804EAF0: .4byte 0x0000fffc
 _0804EAF4:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFE
 	bne _0804EB0E
@@ -13209,7 +13209,7 @@ _0804EB4A:
 _0804EB4E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -13217,7 +13217,7 @@ _0804EB4E:
 	beq _0804EBA2
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r3, [r0, 0x9]
 	cmp r3, 0x1F
 	bhi _0804EBA2
@@ -13896,7 +13896,7 @@ _0804F05A:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r1, [r0, 0x9]
 	ldr r2, [sp, 0x104]
 	ldr r3, _0804F0A0
@@ -14195,7 +14195,7 @@ sub_804F278:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	movs r5, 0
@@ -14209,7 +14209,7 @@ _0804F2B4:
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
 	adds r0, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14250,7 +14250,7 @@ _0804F306:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14290,7 +14290,7 @@ _0804F354:
 	movs r0, 0x6
 	ldrsh r1, [r4, r0]
 	adds r0, r6, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14332,7 +14332,7 @@ _0804F3A4:
 	ldrsh r0, [r4, r1]
 	subs r0, 0x1
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14383,7 +14383,7 @@ _0804F3F2:
 _0804F40A:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14532,7 +14532,7 @@ _0804F50A:
 	ldr r3, [sp, 0x2C]
 	cmp r3, r1
 	ble _0804F534
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r10
 	ands r0, r1
@@ -14688,7 +14688,7 @@ _0804F634:
 _0804F63C:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -14696,7 +14696,7 @@ _0804F63C:
 	bne _0804F660
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFF
 	bne _0804F660
@@ -15482,7 +15482,7 @@ _0804FC86:
 _0804FC8A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -15525,7 +15525,7 @@ _0804FCD4:
 _0804FCD8:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x10
 	ands r0, r1
@@ -15881,7 +15881,7 @@ _0804FF4C:
 _0804FF56:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -16005,7 +16005,7 @@ _0805003E:
 _0805004A:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -16104,7 +16104,7 @@ _08050100:
 _0805010C:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -16185,7 +16185,7 @@ _080501A0:
 _080501AC:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -16309,7 +16309,7 @@ _0805029A:
 _080502A6:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -16423,7 +16423,7 @@ _08050378:
 _08050384:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -16556,7 +16556,7 @@ _08050480:
 _0805048E:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r3, [r1]
 	movs r2, 0x3
@@ -16707,7 +16707,7 @@ _080505A2:
 _080505B0:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -16937,7 +16937,7 @@ _08050772:
 	cmp r0, 0x37
 	bhi _080507B8
 	mov r1, r10
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -17015,7 +17015,7 @@ _080507DE:
 	mov r8, r0
 	adds r0, r4, 0
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -17025,7 +17025,7 @@ _080507DE:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x9C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17035,7 +17035,7 @@ _080507DE:
 	subs r7, r5, 0x1
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17044,7 +17044,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r6, 0
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17053,7 +17053,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17063,7 +17063,7 @@ _080507DE:
 	subs r4, r6, 0x1
 	adds r0, r4, 0
 	mov r1, r8
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17072,7 +17072,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17081,7 +17081,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -17154,7 +17154,7 @@ _0805091A:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	str r3, [sp, 0xA0]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	movs r2, 0x3
 	mov r8, r2
@@ -17168,7 +17168,7 @@ _0805093A:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r3, [sp, 0xA0]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17182,7 +17182,7 @@ _08050952:
 	adds r1, r2, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17196,7 +17196,7 @@ _08050970:
 	adds r1, r3, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17210,7 +17210,7 @@ _0805098C:
 	adds r1, r2, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17224,7 +17224,7 @@ _080509A8:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	str r2, [sp, 0x9C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17236,7 +17236,7 @@ _080509C2:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x9C]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -17247,7 +17247,7 @@ _080509C2:
 _080509DA:
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1

@@ -62,17 +62,13 @@ struct DungeonEntityData
     /* 0x4E */ s16 lastItemThrowPositionY;
     u8 fill50[0x58 - 0x50];
     // Position of the target that the Pokémon wants throw an item at.
-    /* 0x58 */ s16 itemTargetPositionX;
-    /* 0x5A */ s16 itemTargetPositionY;
+    /* 0x58 */ s16 *itemTargetPosition;
     /* 0x5C */ u8 type1;
     /* 0x5D */ u8 type2;
     /* 0x5E */ u8 ability1;
     /* 0x5F */ u8 ability2;
-    // Same format as ItemSlot struct.
-    /* 0x60 */ u8 heldItemFlags;
-    /* 0x61 */ u8 heldItemNumItems;
-    /* 0x62 */ u8 heldItemIndex;
-    u8 fill63[0x68 - 0x63];
+    /* 0x60 */ struct ItemSlot heldItem;
+    u8 fill64[0x68 - 0x64];
     /* 0x68 */ s16 previousPosition1X;
     /* 0x6A */ s16 previousPosition1Y;
     /* 0x6C */ s16 previousPosition2X;
@@ -282,8 +278,8 @@ enum EntityType
 {
     ENTITY_NONE = 0,
     ENTITY_POKEMON = 1,
-    ENTITY_ITEM = 2,
-    ENTITY_TRAP = 3
+    ENTITY_TRAP = 2,
+    ENTITY_ITEM = 3
 };
 
 enum MovementFlag
