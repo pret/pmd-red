@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start HasIQSkill
-HasIQSkill:
-	push {lr}
-	lsls r2, r1, 24
-	lsrs r2, 24
-	ldr r0, [r0, 0x70]
-	adds r0, 0x90
-	movs r1, 0x1
-	lsls r1, r2
-	bl sub_808ECD0
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end HasIQSkill
-
-	thumb_func_start sub_80718F4
-sub_80718F4:
-	push {r4,lr}
-	adds r4, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r0, [r0, 0x70]
-	adds r0, 0x90
-	movs r3, 0x1
-	adds r1, r3, 0
-	lsls r1, r4
-	lsls r3, r2
-	orrs r1, r3
-	bl sub_808ECD0
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80718F4
-
 	thumb_func_start sub_807191C
 sub_807191C:
 	push {r4-r6,lr}
@@ -55,13 +16,13 @@ sub_807191C:
 	adds r4, 0x90
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_808EC30
+	bl SetIQSkill
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_808EC30
+	bl SetIQSkill
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_808EC30
+	bl SetIQSkill
 	adds r0, r5, 0
 	adds r0, 0xF7
 	ldrb r0, [r0]
@@ -69,7 +30,7 @@ sub_807191C:
 	beq _08071954
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl sub_808EC30
+	bl SetIQSkill
 _08071954:
 	ldrb r0, [r5, 0x9]
 	ldr r1, _08071974
@@ -79,7 +40,7 @@ _08071954:
 	blt _08071968
 	adds r0, r4, 0
 	movs r1, 0x16
-	bl sub_808EC30
+	bl SetIQSkill
 _08071968:
 	adds r1, r5, 0
 	adds r1, 0x94
@@ -104,7 +65,7 @@ _0807198C:
 	ldrsh r0, [r5, r1]
 	lsls r1, r4, 24
 	lsrs r1, 24
-	bl sub_808EB7C
+	bl HasIQForSkill
 	lsls r0, 24
 	cmp r0, 0
 	beq _080719B8
@@ -112,13 +73,13 @@ _0807198C:
 	lsls r1, r4
 	adds r0, r5, 0
 	adds r0, 0x8C
-	bl sub_808ECD0
+	bl IsIQSkillSet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080719B8
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_808EC30
+	bl SetIQSkill
 _080719B8:
 	adds r4, 0x1
 	cmp r4, 0x17

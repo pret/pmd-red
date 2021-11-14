@@ -37833,13 +37833,13 @@ sub_806A7E8:
 	sub sp, 0x30
 	adds r5, r0, 0
 	mov r0, sp
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	mov r9, r0
 	add r4, sp, 0x18
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	adds r6, r0, 0
 	ldr r0, _0806A828
 	adds r1, r5, 0
@@ -40669,7 +40669,7 @@ _0806BDA6:
 	adds r0, r6, 0
 	adds r0, 0x8C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	adds r0, r6, 0
 	adds r0, 0x3C
 	bl sub_808E6F4
@@ -48562,7 +48562,7 @@ _0806FB4E:
 	adds r0, r5, 0
 	adds r0, 0x4C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	ldr r0, [r6, 0x44]
 	str r0, [r5, 0x54]
 	adds r0, r5, 0
@@ -48945,7 +48945,7 @@ _0806FE58:
 	adds r0, r5, 0
 	adds r0, 0x4C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	ldr r0, [sp, 0x50]
 	str r0, [r5, 0x54]
 	adds r0, r5, 0

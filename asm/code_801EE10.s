@@ -8185,7 +8185,7 @@ _08022F68:
 	ldr r1, [r1, 0x48]
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	ldr r3, [r4]
 	str r0, [r3, 0x38]
 	ldr r0, [r3, 0x48]
@@ -8201,7 +8201,7 @@ _08022F68:
 	ldr r1, [r1, 0x48]
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	ldr r1, [r4]
 	str r0, [r1, 0x3C]
 	movs r0, 0x1

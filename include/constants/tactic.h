@@ -13,7 +13,9 @@ enum Tactic
     TACTIC_BE_PATIENT = 0x7,
     TACTIC_KEEP_YOUR_DISTANCE = 0x8,
     TACTIC_WAIT_THERE = 0x9,
-    TACTIC_GET_AWAY = 0xA
+    TACTIC_GET_AWAY = 0xA,
+    TACTIC_UNUSED = 0xB,
+    NUM_TACTICS = 0xC
 };
 
 #endif
