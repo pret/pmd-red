@@ -256,7 +256,7 @@ _08075D88: .4byte gUnknown_80FCD88
 _08075D8C:
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075DB4
@@ -1101,7 +1101,7 @@ _0807642C:
 	bl sub_80708B4
 	adds r0, r5, 0
 	movs r1, 0x14
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807645C
@@ -1335,7 +1335,7 @@ _08076614:
 	bl sub_80708B4
 	adds r0, r5, 0
 	movs r1, 0x14
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076644
@@ -2364,7 +2364,7 @@ _08076E6E:
 	bne _08076F6E
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076EB0
@@ -2926,7 +2926,7 @@ _0807730A:
 _08077320:
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077350
@@ -3904,7 +3904,7 @@ sub_8077AE4:
 	bl SetMessageArgument
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077B34
@@ -5932,7 +5932,7 @@ _08078B86:
 	bne _08078BB8
 	adds r0, r6, 0
 	movs r1, 0x1B
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08078BB8
@@ -9761,7 +9761,7 @@ _0807AA3C:
 	mov r9, r0
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r6, 0
@@ -9780,7 +9780,7 @@ _0807AA82:
 	beq _0807AB00
 	adds r0, r4, 0
 	movs r1, 0x18
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807AB00
@@ -9816,12 +9816,12 @@ _0807AAE0: .4byte 0x0001357c
 _0807AAE4:
 	adds r0, r4, 0
 	movs r1, 0x1D
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807AB00
 	adds r0, r4, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r7, r0
@@ -11280,7 +11280,7 @@ sub_807B5E0:
 	ldr r1, [r7, 0x70]
 	str r1, [sp, 0x10]
 	adds r0, r7, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -11366,7 +11366,7 @@ _0807B69A:
 	str r0, [sp, 0x8]
 	str r4, [sp, 0xC]
 	adds r0, r4, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -11706,7 +11706,7 @@ sub_807B920:
 	sub sp, 0x10
 	adds r6, r0, 0
 	ldr r7, [r6, 0x70]
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -15172,7 +15172,7 @@ sub_807D3CC:
 _0807D3E8:
 	mov r0, r8
 	str r2, [sp]
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r2, [sp]
@@ -17339,7 +17339,7 @@ sub_807E580:
 	cmp r0, 0
 	beq _0807E596
 	movs r1, 0x2D
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E596
@@ -18286,10 +18286,10 @@ _0807ECC6:
 	cmp r0, 0
 	beq _0807ED0E
 	adds r0, r7, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -18392,10 +18392,10 @@ _0807EDB8:
 	b _0807EEC4
 _0807EDC6:
 	adds r0, r7, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -20604,7 +20604,7 @@ _0807FEFE:
 	movs r6, 0
 	adds r0, r4, 0
 	movs r1, 0x1C
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FF3C
@@ -20987,7 +20987,7 @@ sub_808024C:
 	mov r8, r0
 	mov r0, r10
 	movs r1, 0xE
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080278

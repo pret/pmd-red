@@ -7930,8 +7930,8 @@ gUnknown_81076BC: @ 81076BC
 gUnknown_81076C4: @ 81076C4
 .byte 0xfc, 0xff, 0xff, 0xff, 0xf8, 0xff, 0xff, 0xff, 0xf0, 0xff, 0xff, 0xff, 0xfc, 0xff, 0xff, 0xff, 0xf8, 0xff, 0xff, 0xff, 0xf0, 0xff, 0xff, 0xff, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
 
-	.global gUnknown_81076E4
-gUnknown_81076E4: @ 81076E4
+	.global gIQSkillGroups
+gIQSkillGroups: @ 81076E4
         .4byte 9999
         .4byte 4
         .4byte 1
@@ -8360,24 +8360,24 @@ gUnknown_810A36B: @ 810A36B
         .byte 0x00
         .byte 0x00
 
-	.global gUnknown_810A378
-gUnknown_810A378: @ 810A378
+	.global gReqTacticLvls
+gReqTacticLvls: @ 810A378
         @ replacing .incbin "baserom.gba", 0x0010a378, 0x18
-        .2byte 0x01
-        .2byte 0x19
-        .2byte 0x01
-        .2byte 0x01
-        .2byte 0x3e7
-        .2byte 0x3e7
-        .2byte 0x23
-        .2byte 0x28
-        .2byte 0x14
-        .2byte 0x0f
-        .2byte 0x0a
-        .2byte 0x3e7
+        .2byte 1
+        .2byte 25
+        .2byte 1
+        .2byte 1
+        .2byte 999
+        .2byte 999
+        .2byte 35
+        .2byte 40
+        .2byte 20
+        .2byte 15
+        .2byte 10
+        .2byte 999
 
-	.global gUnknown_810A390
-gUnknown_810A390: @ 810A390
+	.global gReqIQSkillPts
+gReqIQSkillPts: @ 810A390
         .byte 0x0f, 0x27, 0x00, 0x00
         .byte 0x69, 0x00, 0x00, 0x00
         .byte 0x01, 0x00, 0x00, 0x00

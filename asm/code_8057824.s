@@ -5273,7 +5273,7 @@ _0805A170: .4byte gUnknown_80FCCE4
 _0805A174:
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805A18C
@@ -6043,7 +6043,7 @@ _0805A70C: .4byte gUnknown_80FCCE8
 _0805A710:
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -8637,7 +8637,7 @@ _0805BAC0: .4byte gAvailablePokemonNames
 _0805BAC4:
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BADC
@@ -14678,7 +14678,7 @@ _0805EE4E:
 	beq _0805EE82
 	adds r0, r5, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805EE82
@@ -31040,7 +31040,7 @@ _080672F0:
 _080672F6:
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067310
@@ -31144,7 +31144,7 @@ _080673C6:
 	bl sub_8042208
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067400
@@ -31216,7 +31216,7 @@ _0806745E:
 _08067462:
 	adds r0, r6, 0
 	movs r1, 0xF
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067486
@@ -37833,13 +37833,13 @@ sub_806A7E8:
 	sub sp, 0x30
 	adds r5, r0, 0
 	mov r0, sp
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	mov r9, r0
 	add r4, sp, 0x18
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	adds r6, r0, 0
 	ldr r0, _0806A828
 	adds r1, r5, 0
@@ -40669,7 +40669,7 @@ _0806BDA6:
 	adds r0, r6, 0
 	adds r0, 0x8C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	adds r0, r6, 0
 	adds r0, 0x3C
 	bl sub_808E6F4
@@ -44287,7 +44287,7 @@ _0806D978:
 _0806D98E:
 	adds r0, r7, 0
 	movs r1, 0x10
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D9B2
@@ -46757,7 +46757,7 @@ _0806ED0E:
 	bne _0806EDC8
 	ldr r0, [sp, 0x70]
 	movs r1, 0x13
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED4A
@@ -46778,7 +46778,7 @@ _0806ED0E:
 _0806ED4A:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x2B
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED74
@@ -46802,7 +46802,7 @@ _0806ED74:
 	beq _0806EE4A
 	mov r0, r9
 	movs r1, 0x1E
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE4A
@@ -46836,7 +46836,7 @@ _0806EDC8:
 	beq _0806EDF6
 	mov r0, r9
 	movs r1, 0x22
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EDF6
@@ -46856,7 +46856,7 @@ _0806EDC8:
 _0806EDF6:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x21
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE20
@@ -46877,7 +46877,7 @@ _0806EDF6:
 _0806EE20:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x2B
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE4A
@@ -47260,7 +47260,7 @@ _0806F16C: .4byte 0x000003e7
 _0806F170:
 	ldr r0, [sp, 0x70]
 	movs r1, 0xC
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F194
@@ -47278,7 +47278,7 @@ _0806F170:
 _0806F194:
 	mov r0, r9
 	movs r1, 0xD
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F1B6
@@ -48114,7 +48114,7 @@ _0806F7DE:
 _0806F800:
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F816
@@ -48562,7 +48562,7 @@ _0806FB4E:
 	adds r0, r5, 0
 	adds r0, 0x4C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	ldr r0, [r6, 0x44]
 	str r0, [r5, 0x54]
 	adds r0, r5, 0
@@ -48945,7 +48945,7 @@ _0806FE58:
 	adds r0, r5, 0
 	adds r0, 0x4C
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	ldr r0, [sp, 0x50]
 	str r0, [r5, 0x54]
 	adds r0, r5, 0

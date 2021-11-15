@@ -2582,7 +2582,7 @@ _08053850: .4byte gUnknown_80FCD0C
 _08053854:
 	adds r0, r5, 0
 	movs r1, 0x2C
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053864
@@ -8506,7 +8506,7 @@ _08056B9C:
 _08056BA2:
 	adds r0, r6, 0
 	movs r1, 0x23
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056BB6

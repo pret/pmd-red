@@ -7,7 +7,7 @@ extern struct DungeonGlobalData *gDungeonGlobalData;
 extern void sub_807191C(struct DungeonEntity *);
 extern struct DungeonEntity *sub_8085480(void);
 extern struct DungeonEntity *sub_8085680(u32);
-extern void sub_808EC94(u8 *param_1, u8 param_2);
+extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
 extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
 extern u8 HasRecruitedMon(u32);
@@ -56,7 +56,7 @@ void SetupBossFightHP(struct DungeonEntity *param_1, s32 newHP, u16 param_3)
   }
 
   gDungeonGlobalData->unk66A = param_3;
-  sub_808EC94(iVar2->IQSkillsSelected,iVar2->isBoss);
+  SetDefaultIQSkills(iVar2->IQSkillsSelected,iVar2->isBoss);
   sub_807191C(param_1);
 }
 

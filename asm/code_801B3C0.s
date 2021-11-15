@@ -1131,7 +1131,7 @@ sub_801BEEC:
 	adds r0, 0xC
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	ldr r1, [r4]
 	str r0, [r1, 0x2C]
 	movs r0, 0
@@ -1570,7 +1570,7 @@ _0801C270:
 	adds r0, 0x8
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	adds r1, r0, 0
 	ldr r0, [r5]
 	str r1, [r0, 0x20]
@@ -1941,7 +1941,7 @@ _0801C53C:
 	adds r0, 0x20
 	movs r1, 0x1
 	lsls r1, r4
-	bl sub_808ECD0
+	bl IsIQSkillSet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801C5A4
@@ -2006,7 +2006,7 @@ sub_801C5F0:
 	movs r2, 0x14
 	ldrsh r1, [r0, r2]
 	mov r0, sp
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	cmp r0, 0
 	beq _0801C618
 	movs r0, 0

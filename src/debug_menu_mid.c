@@ -35,7 +35,7 @@ struct unkStruct_203B3F4
 {
     // size: 0xFC
     u32 state;
-    u8 unk4;
+    u8 friendArea;
     u8 fill5[0x8 - 5];
     u32 unk8;
     struct MenuItem menuItems[8];
@@ -56,7 +56,7 @@ extern struct UnkTextStruct2 gUnknown_80E7E64;
 extern const char gDebug_NumberText;
 extern struct UnkTextStruct2 gUnknown_80E7E8C;
 extern struct UnkTextStruct2 gUnknown_80E7EA4;
-
+extern bool8 *gFriendAreas;
 extern const char *gUnknown_80D4970[];
 
 
@@ -83,8 +83,16 @@ extern void sub_8021354(u32);
 extern void sub_8021494();
 extern void sub_803AA34();
 extern void sub_8021774(u8,u32, u32);
-
-
+extern u8 gDebug_CloseText[];
+extern u8 gDebug_OpenText[];
+extern void UnlockFriendArea(u8);
+extern void sub_809249C(u8, u32);
+extern void sub_8021830(void);
+extern u32 sub_80217EC(void);
+extern u8 sub_803ABC8(void);
+extern u32 sub_8021274(u32);
+extern u8 sub_802132C(void);
+extern void sub_80213A0(void);
 extern void sub_803AAC4();
 extern void sub_803AB34();
 extern void sub_803ABAC();
@@ -402,9 +410,108 @@ void sub_803A9AC(void)
         sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->menuItems,0,0,gUnknown_203B3F4->unk8,2);
         break;
     case 3:
-        sub_8021774(gUnknown_203B3F4->unk4,1,0);
+        sub_8021774(gUnknown_203B3F4->friendArea,1,0);
         break;
     case 4:
         break;
   }
+}
+
+void sub_803AA34(void)
+{
+    s32 iVar4;
+    u8 *FriendAreas;
+
+
+    iVar4 = 0;
+
+    // So dumb that it matches...
+    FriendAreas = gFriendAreas;
+
+    if(FriendAreas[gUnknown_203B3F4->friendArea])
+    {
+        gUnknown_203B3F4->menuItems[0].text = gDebug_CloseText;
+        if(sub_803ABC8())
+            gUnknown_203B3F4->menuItems[0].menuAction = 3;
+        else
+            gUnknown_203B3F4->menuItems[0].menuAction = -1;
+    }
+    else
+    {
+        gUnknown_203B3F4->menuItems[0].text = gDebug_OpenText;
+        gUnknown_203B3F4->menuItems[0].menuAction = 2;
+    }
+
+    iVar4++;
+    gUnknown_203B3F4->menuItems[iVar4].text = *gUnknown_80D4970;
+    gUnknown_203B3F4->menuItems[iVar4].menuAction = 4;
+
+    iVar4++;
+    gUnknown_203B3F4->menuItems[iVar4].text = NULL;
+    gUnknown_203B3F4->menuItems[iVar4].menuAction = 1;
+
+    gUnknown_203B3F4->unk8 = gUnknown_203B3F4->menuItems[0].menuAction;
+}
+
+void sub_803AAC4(void)
+{
+    switch(sub_8021274(1))
+    {
+        case 0:
+        case 1:
+            break;
+        case 3:
+            gUnknown_203B3F4->friendArea = sub_802132C();
+            sub_803A924(2);
+            break;
+        case 4:
+            gUnknown_203B3F4->friendArea = sub_802132C();
+            sub_803A924(3);
+            break;
+        case 2:
+            sub_80213A0();
+            sub_803A924(4);
+            break;
+   }
+}
+
+void sub_803AB34(void)
+{
+    s32 temp;
+    temp = 0;
+    sub_8021274(0);
+    if(!sub_8012FD8(&gUnknown_203B3F4->unk4C))
+        sub_8013114(&gUnknown_203B3F4->unk4C, &temp);
+    switch(temp)
+    {
+        case 2:
+            UnlockFriendArea(gUnknown_203B3F4->friendArea);
+            sub_803A924(1);
+            break;
+        case 3:
+            sub_809249C(gUnknown_203B3F4->friendArea, 1);
+            sub_803A924(1);
+            break;
+        case 4:
+            sub_803A924(3);
+            break;
+        case 1:
+            sub_803A924(1);
+            break;
+    }
+}
+
+void sub_803ABAC(void)
+{
+    switch(sub_80217EC())
+    {
+        case 2:
+        case 3:
+            sub_8021830();
+            sub_803A924(1);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
 }

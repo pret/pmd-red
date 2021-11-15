@@ -920,7 +920,7 @@ _080740C8:
 	bl sub_807E8F0
 	adds r0, r5, 0
 	movs r1, 0x16
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074170
@@ -998,7 +998,7 @@ _0807417A:
 	movs r4, 0xA
 	adds r0, r5, 0
 	movs r1, 0x17
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074190
@@ -1006,7 +1006,7 @@ _0807417A:
 _08074190:
 	adds r0, r5, 0
 	movs r1, 0x1F
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741A0
@@ -1022,7 +1022,7 @@ _080741A0:
 _080741B0:
 	adds r0, r5, 0
 	movs r1, 0x1B
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741C0
@@ -1030,7 +1030,7 @@ _080741B0:
 _080741C0:
 	adds r0, r5, 0
 	movs r1, 0xA
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741D0
@@ -1038,7 +1038,7 @@ _080741C0:
 _080741D0:
 	adds r0, r5, 0
 	movs r1, 0x2B
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741E0
@@ -2219,7 +2219,7 @@ _08074BAE:
 	beq _08074C48
 	adds r0, r7, 0
 	movs r1, 0xA
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074BC8
@@ -3666,7 +3666,7 @@ sub_8075708:
 	beq _08075752
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08075752
