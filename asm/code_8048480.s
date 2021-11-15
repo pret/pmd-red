@@ -19970,7 +19970,7 @@ _08051EC8:
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, r9
-	bl sub_80450FC
+	bl GetEntityRoomIndex
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0xC]

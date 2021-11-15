@@ -107,7 +107,7 @@ sub_8070D6C:
 	beq _08070DD2
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070DDC
@@ -217,7 +217,7 @@ _08070E8A:
 	beq _08070EAC
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070EB4
@@ -382,7 +382,7 @@ _08070FCC:
 	beq _08070FEE
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070FF8
@@ -496,7 +496,7 @@ _080710AE:
 	beq _080710D0
 	adds r0, r5, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080710D8
@@ -609,7 +609,7 @@ _0807118A:
 	beq _080711AC
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080711B4
@@ -785,7 +785,7 @@ _080712E6:
 	beq _08071308
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071320
@@ -877,7 +877,7 @@ sub_807138C:
 	beq _080713E0
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080713E0

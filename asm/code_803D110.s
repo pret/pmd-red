@@ -4701,7 +4701,7 @@ _0803F5D4:
 	strh r0, [r5, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803F610

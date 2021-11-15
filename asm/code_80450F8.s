@@ -5,69 +5,6 @@
 
 	.text
 
-	thumb_func_start GetEntityType
-GetEntityType:
-	ldr r0, [r0]
-	bx lr
-	thumb_func_end GetEntityType
-
-	thumb_func_start sub_80450FC
-sub_80450FC:
-	adds r0, 0x25
-	ldrb r0, [r0]
-	bx lr
-	thumb_func_end sub_80450FC
-
-	thumb_func_start sub_8045104
-sub_8045104:
-	ldr r0, [r0, 0x70]
-	bx lr
-	thumb_func_end sub_8045104
-
-	thumb_func_start GetItemData
-GetItemData:
-	ldr r0, [r0, 0x70]
-	bx lr
-	thumb_func_end GetItemData
-
-	thumb_func_start sub_804510C
-sub_804510C:
-	ldr r0, [r0, 0x70]
-	bx lr
-	thumb_func_end sub_804510C
-
-	thumb_func_start sub_8045110
-sub_8045110:
-	ldr r0, [r0, 0x70]
-	bx lr
-	thumb_func_end sub_8045110
-
-	thumb_func_start sub_8045114
-sub_8045114:
-	push {lr}
-	movs r1, 0x4
-	ldrsh r2, [r0, r1]
-	movs r3, 0x6
-	ldrsh r1, [r0, r3]
-	adds r0, r2, 0
-	bl GetMapTileAtPosition
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8045114
-
-	thumb_func_start sub_8045128
-sub_8045128:
-	push {lr}
-	movs r1, 0x4
-	ldrsh r2, [r0, r1]
-	movs r3, 0x6
-	ldrsh r1, [r0, r3]
-	adds r0, r2, 0
-	bl sub_8049590
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8045128
-
 	thumb_func_start sub_804513C
 sub_804513C:
 	push {r4-r7,lr}
@@ -3647,8 +3584,8 @@ _08046CA8: .4byte 0x0000052c
 _08046CAC: .4byte 0x0000048c
 	thumb_func_end sub_804687C
 
-	thumb_func_start sub_8046CB0
-sub_8046CB0:
+	thumb_func_start HasItem
+HasItem:
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3676,7 +3613,7 @@ _08046CDC:
 _08046CDE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8046CB0
+	thumb_func_end HasItem
 
 	thumb_func_start sub_8046CE4
 sub_8046CE4:
@@ -4346,7 +4283,7 @@ sub_8047190:
 	bne _08047214
 	mov r0, r9
 	movs r1, 0x2A
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -4568,7 +4505,7 @@ _080473A2:
 	bne _080473CE
 	ldr r0, [r5, 0x10]
 	movs r1, 0x26
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -4887,7 +4824,7 @@ sub_80475C4:
 	bne _0804765E
 	ldr r0, [sp, 0x10]
 	movs r1, 0x2A
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -5112,7 +5049,7 @@ _080477FA:
 	bne _08047834
 	ldr r0, [r4, 0x10]
 	movs r1, 0x26
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -5284,7 +5221,7 @@ _08047964:
 	bne _08047994
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047984
@@ -5295,7 +5232,7 @@ _08047980: .4byte gUnknown_80F4FA2
 _08047984:
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047994
@@ -5307,7 +5244,7 @@ _08047994:
 	bne _080479AE
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080479AE

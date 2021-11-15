@@ -530,7 +530,7 @@ sub_80703A0:
 	beq _0807044E
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807044E
@@ -602,7 +602,7 @@ sub_8070460:
 	beq _08070492
 	adds r0, r1, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070492
@@ -670,7 +670,7 @@ _080704E2:
 	beq _08070552
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070552
@@ -854,7 +854,7 @@ _08070636:
 	beq _08070696
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070696
@@ -951,7 +951,7 @@ _080706F2:
 	beq _08070762
 	adds r0, r7, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070762

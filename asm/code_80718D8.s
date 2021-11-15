@@ -2946,7 +2946,7 @@ _08072FE8:
 	beq _08073038
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073038
