@@ -73,14 +73,14 @@ void InitializeRecruitedPokemon(void)
 //     pokemon.IQ = 1;
 //     pokemon.unkC[0].unk0 = 0;
 //     pokemon.unkC[1].unk0 = 0;
-//     SetDefaultIQSkills((u8*)&pokemon.unk20, 0);
+//     SetDefaultIQSkills((u8*)&pokemon.IQSkills, 0);
 //     pokemon.speciesNum = species;
 //     pokemon.heldItem.itemIndex = 0;
 //     pokemon.heldItem.numItems = 0;
 //     pokemon.unk1C = 0;
 //     pokemon.unk24 = 0;
 //     pokemon.unk4.unk5 = 0;
-//     sub_808E490(pokemon.unk2C, species);
+//     sub_808E490(pokemon.moves, species);
 
 //     // mostly incorrect below this:
 //     if (!a3) {
