@@ -99,7 +99,7 @@ struct unk_203B250 *gUnknown_203B250;
 void sub_801D680(void)
 {
   int local_c;
-  
+
   local_c = 0;
   if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&local_c), local_c != 1)) {
     gUnknown_203B250->unk14 = local_c;
@@ -307,7 +307,7 @@ void sub_801D894(void)
   u32 *preload_string;
   u32 *r5; // R5
   u8 buffer [96]; // sp +4
-  
+
   if (gUnknown_203B250->currFriendAreaLocation == NONE) {
     location = sub_8098FB4();
   }
@@ -327,7 +327,7 @@ void sub_801D894(void)
   LoadTeamRankBadge(2, 8, 6);
 
 // Have to load before TeamRank funcs
-  r5 = &gUnknown_80DBF3C; // %s #C5%d#R Pts.
+  r5 = &gUnknown_80DBF3C; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
   rank = GetRescueTeamRank();
   ExpandPlaceholdersBuffer(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
   xxx_call_draw_string(32, 4, buffer, 2, 0);
@@ -374,7 +374,7 @@ u32 sub_801D9E4(void)
 }
 
 void sub_801DA58(s16 param_0)
-{  
+{
     s32 cast;
     cast = param_0;
     sub_8013878(gUnknown_203B258, cast);

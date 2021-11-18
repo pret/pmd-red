@@ -463,28 +463,28 @@ gUnknown_80E041C: @ 80E041C
 	.global gUnknown_80E0434
 gUnknown_80E0434: @ 80E0434
         .string " Here~27s your reward!\n"
-        .string "#C5$d0#R {POKE}!\0"
+        .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}!\0"
         .align 2,0
 
 	.global gUnknown_80E045C
 gUnknown_80E045C: @ 80E045C
 @ replacing .incbin "baserom.gba", 0x000e045c, 0x28
-        .string "#+#CN$m0#R received\n"
-        .string "#+#C5$d0#R"
+        .string "#+#CN$m0{END_COLOR_TEXT_1} received\n"
+        .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1}"
         .byte 0x20, 0x83
         .byte 0xbf, 0x83, 0xc4, 0x2e, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0484
 gUnknown_80E0484: @ 80E0484
-        .string "#+#CN$m0#R~27s team received\n"
-        .string "#+#C5$d0#R {POKE}"
+        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team received\n"
+        .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}"
         .byte 0x2E, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E04B4
 gUnknown_80E04B4: @ 80E04B4
         .string " As your reward~2c you can\n"
         .string "now go to the Friend Area\n"
-        .string "#C4$h#R!\0"
+        .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80E04F4
@@ -493,34 +493,34 @@ gUnknown_80E04F4: @ 80E04F4
 
 	.global gUnknown_80E05C0
 gUnknown_80E05C0: @ 80E05C0
-        .string "#+#CN$m0#R gained access\n"
+        .string "#+#CN$m0{END_COLOR_TEXT_1} gained access\n"
         .string "#+to the Friend Area\n"
-        .string "#+#C4$h#R.\0"
+        .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E05FC
 gUnknown_80E05FC: @ 80E05FC
-        .string "#+#CN$m0#R~27s team gained access\n"
+        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team gained access\n"
         .string "#+to the Friend Area\n"
-        .string "#+#C4$h#R.\0"
+        .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0640
 gUnknown_80E0640: @ 80E0640
         .string " Here~27s your reward!\n"
-        .string "The promised #C4$i1#R!\0"
+        .string "The promised {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80E0670
 gUnknown_80E0670: @ 80E0670
-        .string "#+Rescue Team #CG$t#R\n"
-        .string "#+gained #C5$d0#R rescue points.\0"
+        .string "#+Rescue Team {COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1}\n"
+        .string "#+gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.\0"
         .align 2,0
 
 	.global gUnknown_80E06A8
 gUnknown_80E06A8: @ 80E06A8
         .string "#+Congratulations!#P"
-        .string "#+#CG$t#R went up in rank\n"
+        .string "#+{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
         .string "#+from the $m2\n"
         .string "#+to the $m3!\0"
         .align 2,0
@@ -579,7 +579,7 @@ gUnknown_80E0760: @ 80E0760
 
 	.global gUnknown_80E0778
 gUnknown_80E0778: @ 80E0778
-        .string "#+#CN$n0#R received the #CIBonsly Doll#R!\n"
+        .string "#+#CN$n0{END_COLOR_TEXT_1} received the #CIBonsly Doll{END_COLOR_TEXT_1}!\n"
         .string "#+It has been placed outside your\n"
         .string "#+rescue team base.\0"
         .align 2,0
@@ -620,7 +620,7 @@ gUnknown_80E0824: @ 80E0824
 
 	.global gUnknown_80E0828
 gUnknown_80E0828: @ 80E0828
-        .string "#c%c%s#r\0"
+        .string "#c%c%s{END_COLOR_TEXT_2}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -799,12 +799,12 @@ gUnknown_80E09C0: @ 80E09C0
 	.global gUnknown_80E09D8
 gUnknown_80E09D8: @ 80E09D8
         .string " ...Uh~2c no?\n"
-        .asciz "You don~27t have any #CGSOS Mail#R."
+        .string "You don~27t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0A0C
 gUnknown_80E0A0C: @ 80E0A0C
         .string " ...Uh~2c no?\n"
-        .asciz "You don~27t have any #CGA-OK Mail#R."
+        .string "You don~27t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
         .asciz "pksdir0"

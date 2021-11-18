@@ -126,7 +126,7 @@ void sub_801B080(void)
         case 0:
             sub_801B178();
             // #+Who will learn the move
-            // #+#C5$m7#R?
+            // #+{COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}?
             sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
             break;
         case 1:
@@ -140,8 +140,8 @@ void sub_801B080(void)
                 gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].itemIndex = ITEM_ID_USED_TM;
             }
             PlaySound(0x9C << 1);
-            // #+CM$m8#R learned
-            // #+the move #C5$m7#R!
+            // #+CM$m8{END_COLOR_TEXT_1} learned
+            // #+the move {COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}!
             sub_80141B4(&gUnknown_80DB9E4, 0, 0, 0x121);
             break;
         case 3:

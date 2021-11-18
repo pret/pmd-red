@@ -410,22 +410,22 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CWEND_text
         CWEND_text:
-        .string "#CWEND#R\0"
+        .string "#CWEND{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CNLAST_text
         CNLAST_text:
-        .string "#CNLAST#R\0"
+        .string "#CNLAST{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CECONTINUE_text
         CECONTINUE_text:
-        .string "#CECONTINUE#R\0"
+        .string "{COLOR_1 LIGHT_BLUE}CONTINUE{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CISTART_text
         CISTART_text:
-        .string "#CISTART#R\0"
+        .string "#CISTART{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80B71E4

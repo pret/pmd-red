@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/text_formatting.h"
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
@@ -212,7 +213,7 @@ ALIGNED(4) const u8 gUnknown_80DF138[]=
 	 "Please try again from the start.";
 
 ALIGNED(4) const u8 gUnknown_80DF194[]=
-	" Your #CGThank-You Mail#R\n"
+	" Your "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1"\n"
 	"has been sent.";
 
 ALIGNED(4) const u8 gUnknown_80DF1C0[]=
@@ -222,28 +223,28 @@ ALIGNED(4) const u8 gUnknown_80DF1C0[]=
 
 ALIGNED(4) const u8 gUnknown_80DF208[]=
 	" ...Oh? This password doesn~27t\n"
-	"appear to be for a #CGThank-You Mail#R.";
+	"appear to be for a "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1".";
 
 ALIGNED(4) const u8 gUnknown_80DF250[]=
 	 ": This is the counter for\n"
-	 "#CGThank-You Mail#R.#P"
-	 ": Oh~2c hi~2c #CN%s#R.\n"
+	 COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1".#P"
+	 ": Oh~2c hi~2c #CN%s"END_COLOR_TEXT_1".\n"
 	 "I~27ve been waiting for you. You wanted me\n"
-	 "to process a #CGThank-You Mail#R?#P"
+	 "to process a "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1"?#P"
 	 ": Let me get on it right away.";
 
 ALIGNED(4) const u8 gUnknown_80DF304[]=
 	" Is it OK to send this\n"
-	"#CGThank-You Mail#R?";
+	COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1"?";
 
 ALIGNED(4) const u8 gUnknown_80DF330[]=
 	 " Please choose the\n"
-	 "#CGThank-You Mail#R that you want to\n"
+	 COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1" that you want to\n"
 	 "send to your friend.";
 
 ALIGNED(4) const u8 gUnknown_80DF380[]=
 	" OK. Please enter the\n"
-	"#CGThank-You Mail password#R.";
+	COLOR_1 LIGHT_BLUE_2"Thank-You Mail password"END_COLOR_TEXT_1".";
 
 ALIGNED(4) const u8 gUnknown_80DF3B4[]=
 	" Please give this password\n"
@@ -253,7 +254,7 @@ ALIGNED(4) const u8 gUnknown_80DF3B4[]=
 
 ALIGNED(4) const u8 gUnknown_80DF418[]=
 	" OK~2c here is your\n"
-	"#CGThank-You Mail password#R.";
+	COLOR_1 LIGHT_BLUE_2"Thank-You Mail password"END_COLOR_TEXT_1".";
 
 ALIGNED(4) const u8 gUnknown_80DF44C[]=
 	" I need to save your\n"
@@ -267,7 +268,7 @@ ALIGNED(4) const u8 gUnknown_80DF46C[]=
 	"Please keep up your rescue work!";
 
 ALIGNED(4) const u8 gUnknown_80DF4F4[]=
-	 " A #CGThank-You Mail#R has\n"
+	 " A "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1" has\n"
 	 "arrived from your friend for your rescue\n"
 	 "mission.";
 
@@ -278,17 +279,17 @@ ALIGNED(4) const u8 gUnknown_80DF544[]= _(
 
 ALIGNED(4) const u8 gUnknown_80DF594[]=
 	 " There. I~27ve sent your\n"
-	 "#CGThank-You Mail#R.\n"
+	 COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1".\n"
 	 "I need to save your adventure.";
 
 ALIGNED(4) const u8 gUnknown_80DF5E4[]=
 	 " Please connect the GBA\n"
-	 "systems with a #CGGame Link cable#R.\n"
+	 "systems with a "COLOR_1 LIGHT_BLUE_2"Game Link cable"END_COLOR_TEXT_1".\n"
 	 "Is your friend also ready?";
 
 ALIGNED(4) const u8 gUnknown_80DF63C[]=
 	 " There~2c all done.\n"
-	 "#CN%s#R~2c I hope your friend\n"
+	 "#CN%s"END_COLOR_TEXT_1"~2c I hope your friend\n"
 	 "appreciates your sense of gratitude.";
 
 ALIGNED(4) const u8 gUnknown_80DF694[]=
@@ -310,12 +311,12 @@ ALIGNED(4) const u8 gUnknown_80DF73C[]=
 
 ALIGNED(4) const u8 gUnknown_80DF77C[]=
 	 " Would you like to choose\n"
-	 "a #CGreward item#R from storage and\n"
+	 "a "COLOR_1 LIGHT_BLUE_2"reward item"END_COLOR_TEXT_1" from storage and\n"
 	 "send it with your mail?";
 
 ALIGNED(4) const u8 gUnknown_80DF7D4[]=
 	" ...Oh?\n"
-	"You~27ve already attached a #CGreward item#R\n"
+	"You~27ve already attached a "COLOR_1 LIGHT_BLUE_2"reward item"END_COLOR_TEXT_1"\n"
 	"to this mail.#P"
 	" I~27m sorry~2c but once an item\n"
 	"has been attached to mail~2c it can~27t be\n"
@@ -327,11 +328,11 @@ ALIGNED(4) const u8 gUnknown_80DF870[]=
 
 ALIGNED(4) const u8 gUnknown_80DF8B4[]=
 	" ...Oh?\n"
-	"You don~27t seem to have a #CGThank-You Mail#R.";
+	"You don~27t seem to have a "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1".";
 
 ALIGNED(4) const u8 gUnknown_80DF8EC[]=
 	" Hello.\n"
-	"I handle #CGThank-You Mail#R.\n"
+	"I handle "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1".\n"
 	"How may I serve you?";
 
 ALIGNED(4) const u8 gUnknown_80DF928[]=
@@ -344,11 +345,11 @@ ALIGNED(4) const u8 gUnknown_80DF94C[] =
 
 ALIGNED(4) const u8 gUnknown_80DF96C[] =
 	" How would you like to send\n"
-	"your #CGThank-You Mail#R?";
+	"your "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1"?";
 
 ALIGNED(4) const u8 gUnknown_80DF9A4[]=
 	" How would you like to\n"
-	"receive your friend~27s #CGThank-You Mail#R?";
+	"receive your friend~27s "COLOR_1 LIGHT_BLUE_2"Thank-You Mail"END_COLOR_TEXT_1"?";
 
 ALIGNED(4) const u8 thank_you_fill[] = "pksdir0";
 

@@ -150,7 +150,7 @@ gPokemonMail: @ 80EBA18
 
     .global BuriedRelicText
     BuriedRelicText:
-    .string "#+#C6Mystery Ruin Found Underground!#R\n"
+    .string "#+{COLOR_1 YELLOW}Mystery Ruin Found Underground!{END_COLOR_TEXT_1}\n"
     .string "Its site had been hidden by the crater of a\n"
     .string "meteor strike in ancient times. The Buried\n"
     .string "Relic is thought to date back beyond\n"
@@ -165,11 +165,11 @@ gPokemonMail: @ 80EBA18
     .string "Buried Relic Discovered!\0"
     .align 2,0
 
-    .string "#+#C5$m0 Innocent! Part 2#R\n"
-    .string "#C4Quote from Charizard on the scene:#R\n"
+    .string "#+{COLOR_1 CYAN}$m0 Innocent! Part 2{END_COLOR_TEXT_1}\n"
+    .string "{COLOR_1 GREEN}Quote from Charizard on the scene:{END_COLOR_TEXT_1}\n"
     .string "~93That~27s what I thought right from\n"
     .string "the start~2c hahaha!~94\n"
-    .string "#C4Quote from Tyranitar on the scene:#R\n"
+    .string "{COLOR_1 GREEN}Quote from Tyranitar on the scene:{END_COLOR_TEXT_1}\n"
     .string "~93That muckraking Gengar...\n"
     .string "He~27s not getting away with this!\n"
     .string "He~27d better be ready for it!~94\0"
@@ -178,13 +178,13 @@ gPokemonMail: @ 80EBA18
     .string "Pokémon News Extra 2\0"
     .align 2,0
 
-    .string "#+#C5$m0 Innocent! Part 1#R\n"
-    .string "$m1 met with Ninetales on #C2Mt. Freeze#R.\n"
+    .string "#+{COLOR_1 CYAN}$m0 Innocent! Part 1{END_COLOR_TEXT_1}\n"
+    .string "$m1 met with Ninetales on {COLOR_1 RED}Mt. Freeze{END_COLOR_TEXT_1}.\n"
     .string "Ninetales testified that $m0 was\n"
     .string "not the human that appeared in the legend.\n"
     .string "As a result~2c Gengar~27s claims were found to\n"
     .string "be malicious lies.\n"
-    .string "#C4The clearly dismayed Gengar~27s quote:#R\n"
+    .string "{COLOR_1 GREEN}The clearly dismayed Gengar~27s quote:{END_COLOR_TEXT_1}\n"
     .string "~93Ugegegegegegegegegegegeh!~94\0"
     .align 2,0
 
@@ -203,41 +203,41 @@ gPokemonMail: @ 80EBA18
     .string "A Letter from Pelipper\0"
     .align 2,0
 
-    .string "#+#C6Try These Linked Moves to KO Foes!#R\n\n"
+    .string "#+{COLOR_1 YELLOW}Try These Linked Moves to KO Foes!{END_COLOR_TEXT_1}\n\n"
     .string "Psyduck\n"
-    .string "#C4Confusion#R + #C4Disable#R\n"
+    .string "{COLOR_1 GREEN}Confusion{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Disable{END_COLOR_TEXT_1}\n"
     .string "Totodile\n"
-    .string "#C4Bite#R + #C4Scary Face#R\n"
+    .string "{COLOR_1 GREEN}Bite{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scary Face{END_COLOR_TEXT_1}\n"
     .string "Cyndaquil\n"
-    .string "#C4Flame Wheel#R + #C4Smokescreen#R#P"
+    .string "{COLOR_1 GREEN}Flame Wheel{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Smokescreen{END_COLOR_TEXT_1}#P"
     .string "Pikachu\n"
-    .string "#C4Thunderbolt#R + #C4Double Team#R\n"
+    .string "{COLOR_1 GREEN}Thunderbolt{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Double Team{END_COLOR_TEXT_1}\n"
     .string "Skitty\n"
-    .string "#C4Tail Whip#R + #C4Doubleslap#R\0"
+    .string "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Doubleslap{END_COLOR_TEXT_1}\0"
     .align 2,0
 
     .string "#50 Linked Moves Pro Level 2\0"
     .align 2,0
 
-    .string "#+#C6These Linked Move Combinations#R\n"
-    .string "#+#C6Can Be Devastating!#R\n\n"
+    .string "#+{COLOR_1 YELLOW}These Linked Move Combinations{END_COLOR_TEXT_1}\n"
+    .string "#+{COLOR_1 YELLOW}Can Be Devastating!{END_COLOR_TEXT_1}\n\n"
     .string "Bulbasaur\n"
-    .string "#C4Razor Leaf#R + #C4Sleep Powder#R\n"
+    .string "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Sleep Powder{END_COLOR_TEXT_1}\n"
     .string "Chikorita\n"
-    .string "#C4Body Slam#R + #C4Reflect#R#P"
+    .string "{COLOR_1 GREEN}Body Slam{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Reflect{END_COLOR_TEXT_1}#P"
     .string "Treecko\n"
-    .string "#C4Screech#R + #C4Pound#R\n"
+    .string "{COLOR_1 GREEN}Screech{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Pound{END_COLOR_TEXT_1}\n"
     .string "Machop\n"
-    .string "#C4Focus Energy#R + #C4Karate Chop#R\n"
+    .string "{COLOR_1 GREEN}Focus Energy{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Karate Chop{END_COLOR_TEXT_1}\n"
     .string "Cubone\n"
-    .string "#C4Tail Whip#R + #C4Bonemerang#R\0"
+    .string "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Bonemerang{END_COLOR_TEXT_1}\0"
     .align 2,0
 
     .string "#49 Linked Moves Pro Level 1\0"
     .align 2,0
 
-    .string "#+#C6Relief for Delicate Souls Who Can~27t#R\n"
-    .string "#+#C6Sleep with Different Pillows!#R\n"
+    .string "#+{COLOR_1 YELLOW}Relief for Delicate Souls Who Can~27t{END_COLOR_TEXT_1}\n"
+    .string "#+{COLOR_1 YELLOW}Sleep with Different Pillows!{END_COLOR_TEXT_1}\n"
     .string "Insomniacs rejoiced over the announcement\n"
     .string "of the Slakoth Pillow~2c which is said to\n"
     .string "induce sleepiness just by seeing it.\n"
@@ -262,14 +262,14 @@ gPokemonMail: @ 80EBA18
     .string "#47 Beware of Pitfalls\0"
     .align 2,0
 
-    .string "A high-seas rescue in the #C2Stormy Sea#R by\n"
-    .string "#C5Team Sea Dragons#R ended yesterday with\n"
+    .string "A high-seas rescue in the {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} by\n"
+    .string "{COLOR_1 CYAN}Team Sea Dragons{END_COLOR_TEXT_1} ended yesterday with\n"
     .string "the successful recovery of Tentacool.\n"
     .string "The client~2c Corsola~2c is said to be delighted\n"
     .string "by the outcome.\n"
     .string "Tentacool stated~2c ~93I didn~27t realize how far\n"
     .string "I~27d been washed out to sea.~94\n"
-    .string "The #C2Stormy Sea#R is unforgiving!\0"
+    .string "The {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} is unforgiving!\0"
     .align 2,0
 
     .string "#46 Sea Rescue a Success!\0"
@@ -287,7 +287,7 @@ gPokemonMail: @ 80EBA18
     .string "#45 Vileplume~27s Weighty Problem\0"
     .align 2,0
 
-    .string "Research has revealed that #C4Rawst Berries#R\n"
+    .string "Research has revealed that {COLOR_1 GREEN}Rawst Berries{END_COLOR_TEXT_1}\n"
     .string "found in dungeons are usually unripened\n"
     .string "and colored green. When ripe~2c they turn a\n"
     .string "sky blue color. An unripened one is easier\n"
@@ -360,10 +360,10 @@ gPokemonMail: @ 80EBA18
     .align 2,0
 
     .string "Reports of a noxious gas leak caused\n"
-    .string "widespread chaos in the #CDSinister Woods#R.\n"
+    .string "widespread chaos in the {COLOR_1 YELLOW_3}Sinister Woods{END_COLOR_TEXT_1}.\n"
     .string "Specialists speculate that the recent\n"
     .string "natural disasters are to blame. However~2c\n"
-    .string "some also blame #C5Team Koffing#R~27s training\n"
+    .string "some also blame {COLOR_1 CYAN}Team Koffing{END_COLOR_TEXT_1}~27s training\n"
     .string "in the area for the foul-smelling gas.\n"
     .string "The answer~2c apparently~2c is blowing in the\n"
     .string "wind.\0"

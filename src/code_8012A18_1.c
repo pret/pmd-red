@@ -69,7 +69,7 @@ s32 sub_8015FEC(u8 *buffer, s32 size)
   s32 currLength;
   s32 iVar4;
   u8 *bufferPtr;
-  
+
   iVar4 = 0;
   currLength = 0;
 
@@ -162,7 +162,7 @@ void nullsub_36(void)
 }
 
 void sub_8016110(void)
-{ 
+{
   switch(gUnknown_203B200->state)
   {
     case 0:
@@ -176,7 +176,7 @@ void sub_8016110(void)
         else {
             sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
         }
-        // Is the name #C5$m0#R OK?
+        // Is the name {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} OK?
         sub_8014248(&gUnknown_80DB688,0,3,gUnknown_203B200->menus,0,4,0,0,0x20);
         break;
 
@@ -194,7 +194,7 @@ void sub_8016110(void)
 }
 
 void CreateConfirmNameMenu(void)
-{ 
+{
   gUnknown_203B200->menus[0].text = gUnknown_80D4920; // Yes
   gUnknown_203B200->menus[0].menuAction = MENU_ACTION_YES;
   gUnknown_203B200->menus[1].text = gUnknown_80D4928; // No
@@ -207,7 +207,7 @@ void sub_80161F8(void)
 {
   s32 iVar2;
   s32 maxLength;
-  
+
   if (sub_80154F0() == 3) {
     sub_80155F0();
     if (IsNameEmpty()) {

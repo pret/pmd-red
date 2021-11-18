@@ -260,28 +260,28 @@ NEW_LINE = 23 4E     @ #N
 @
 @ TO USE: {COLOR_(1 or 2) ______} text here {END_COLOR_(# from first one)}
 @ EX: {COLOR_2 YELLOW}Steel{END_COLOR_TEXT_2} gets you a colored yellow "Steel"
-COLOR_1 = 23 43
-COLOR_2 = 23 63
-END_COLOR_TEXT_1 = 23 52
-END_COLOR_TEXT_2 = 23 72
+COLOR_1 = 23 43 @ #C
+COLOR_2 = 23 63 @ #c
+END_COLOR_TEXT_1 = 23 52 @ #R
+END_COLOR_TEXT_2 = 23 72 @ #r
 
 @ COLORS
-WHITE = 30 @ C0
-BLUE = 31 @ C1
-RED = 32 @ C2
-BLACK = 33 @ C3
-GREEN = 34 @ C4
-CYAN = 35 @ C5
-CYAN_ALT = 63 05 @ c5 (used in #c5%s#r)
-YELLOW = 36 @ C6
-YELLOW_ALT = 63 06 @ c6 (used in #c6%s#r)
-WHITE_2 = 37 @ C7
-DARKER_GRAY = 38 @ C8
-DARK_GRAY = 39 @ C9
-WHITE_3     = 41 @ CA
-WHITE_4     = 42 @ CB
-YELLOW_2    = 43 @ CC
-YELLOW_3    = 44 @ CD
-LIGHT_BLUE = 45  @ CE
-WHITE_5     = 46 @ CF
-LIGHT_BLUE_2 = 47 @ CG (TODO CHECK THIS)
+WHITE = 30 @ 0
+BLUE = 31 @ 1
+RED = 32 @ 2
+BLACK = 33 @ 3
+GREEN = 34 @ 4
+CYAN = 35 @ 5
+CYAN_ALT = 05
+YELLOW = 36 @ 6
+YELLOW_ALT = 06
+WHITE_2 = 37 @ 7
+DARKER_GRAY = 38 @ 8
+DARK_GRAY = 39 @ 9
+WHITE_3 = 41 @ A
+WHITE_4 = 42 @ B
+YELLOW_2 = 43 @ C
+YELLOW_3 = 44 @ D
+LIGHT_BLUE = 45 @ E
+WHITE_5 = 46 @ F
+LIGHT_BLUE_2 = 47 @ G (TODO CHECK THIS)

@@ -234,13 +234,13 @@ void sub_8027274(void)
         break;
     case 6:
         gUnknown_203B2BC->unk4 = 2;
-        // The #C4$i0#R was
+        // The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was
         // returned to the Toolbox
         sub_80141B4(gUnknown_80DD8A0,0,0,0x101);
         break;
     case 7:
         gUnknown_203B2BC->unk4 = 2;
-        // The #C4$i0#R was
+        // The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was
         // returned to storage
         sub_80141B4(gUnknown_80DD8D0,0,0,0x101);
         break;
