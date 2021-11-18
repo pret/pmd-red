@@ -275,8 +275,7 @@ MoveUseTextBide:
 
 .global MoveNameBide2
 MoveNameBide2:
-.byte 0x82, 0xaa, 0x82, 0xdc, 0x82, 0xf1
-.string "\0"
+.string "かみん\0"
 .align 2,0
 
 .global MoveDescriptionIsWatching
@@ -286,8 +285,7 @@ MoveDescriptionIsWatching:
 
 .global MoveNameIsWatching
 MoveNameIsWatching:
-.byte 0x82, 0xe6, 0x82, 0xa4, 0x82, 0xb7, 0x82, 0xf0, 0x82, 0xdd, 0x82
-.string "é\0"
+.string "ようすをまる\0"
 .align 2,0
 
 .global MoveUseTextRegularAttack
@@ -442,9 +440,7 @@ MoveNameReflect:
 
 .global MoveDescriptionRecycle
 MoveDescriptionRecycle:
-.string "Repairs the item #c4"
-.byte 0x87
-.string "NUsed TM#r and restores\nit to its original~2c unused state.\0"
+.string "Repairs the item #c4{TM}Used TM#r and restores\nit to its original~2c unused state.\0"
 .align 2,0
 
 .global MoveNameRecycle
@@ -3284,6 +3280,5 @@ MoveDescriptionNone:
 
 .global MoveNameNone
 MoveNameNone:
-.byte 0x82, 0xc8, 0x82, 0xc9, 0x82, 0xe0, 0x82, 0xcc, 0x81
-.string "H\0"
+.string "なにのも？\0"
 .align 2,0

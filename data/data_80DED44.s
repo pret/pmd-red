@@ -463,9 +463,7 @@ gUnknown_80E041C: @ 80E041C
 	.global gUnknown_80E0434
 gUnknown_80E0434: @ 80E0434
         .string " Here~27s your reward!\n"
-        .string "#C5$d0#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4
-        .string "!\0"
+        .string "#C5$d0#R {POKE}!\0"
         .align 2,0
 
 	.global gUnknown_80E045C
@@ -479,8 +477,7 @@ gUnknown_80E045C: @ 80E045C
 	.global gUnknown_80E0484
 gUnknown_80E0484: @ 80E0484
         .string "#+#CN$m0#R~27s team received\n"
-        .string "#+#C5$d0#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4
+        .string "#+#C5$d0#R {POKE}"
         .byte 0x2E, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E04B4
@@ -648,7 +645,7 @@ gUnknown_80E0854: @ 80E0854
 
 	.global gUnknown_80E086C
 gUnknown_80E086C: @ 80E086C
-        
+
         .4byte SOSList
         .4byte RequestList
         .4byte SOSMail
@@ -657,7 +654,7 @@ gUnknown_80E086C: @ 80E086C
         .4byte ThanksList
         .4byte CompletedJobs
         .4byte OkdRescue
-       
+
         .global OkdRescue
         OkdRescue:
         .string "OK~27d Rescues\0"
@@ -766,7 +763,7 @@ gUnknown_80E0968: @ 80E0968
         Info_80E0980:
         .string "Info\0"
         .align 2,0
-       
+
        .global Delete_80E0988
        Delete_80E0988:
         .string "Delete\0"

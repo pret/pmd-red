@@ -3329,8 +3329,7 @@ gUnknown_80DBB38: @ 80DBB38
 gUnknown_80DBB9C: @ 80DBB9C
         .string "#+The #C4$i0#R...\n"
         .string "#+You~27ve already acquired it.#P#+Sorry to see that...#P#+In its place~2c #CN$m0#R~2c\n"
-        .string "#+you can have #CG1~2c000#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4, 0x2E
+        .string "#+you can have #CG1~2c000#R {POKE}."
         .align 2,0
 
 	.global gUnknown_80DBC28
@@ -3553,8 +3552,7 @@ gUnknown_80DBF3C: @ 80DBF3C
 
 	.global gUnknown_80DBF4C
 gUnknown_80DBF4C: @ 80DBF4C
-        .string "Money: #C5%d#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4
+        .string "Money: #C5%d#R {POKE}"
         .align 2,0
 
 	.global gTeamRankBadgeFileName
@@ -3609,7 +3607,7 @@ gUnknown_80DBFCC: @ 80DBFCC
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x0A, 0x00, 0x06, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
-        
+
         .4byte UnkData_80DBFC8
 
 	.global gOthers_MenuOption

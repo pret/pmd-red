@@ -47,7 +47,7 @@ endif
 
 SHELL     := /bin/bash -o pipefail
 CC1       := tools/agbcc/bin/agbcc
-SHA1SUM   := sha1sum -c
+SHA1SUM   := shasum -c
 GBAGFX    := tools/gbagfx/gbagfx
 GBAFIX    := tools/gbafix/gbafix
 AIF2PCM   := tools/aif2pcm/aif2pcm

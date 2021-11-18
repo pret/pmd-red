@@ -340,9 +340,7 @@ gPokemonMail: @ 80EBA18
     .string "Smeargle~2c the artist known for his unique\n"
     .string "artistic vision~2c had a windfall day as one\n"
     .string "of his paintings was auctioned for 300\n"
-    .string "million "
-    .byte 0x83, 0xbf, 0x83, 0xc4, 0x20 @ POKE
-    .string "yesterday. The auctioned\n"
+    .string "million {POKE} yesterday. The auctioned\n"
     .string "artwork was one of Smeargle~27s signature\n"
     .string "works from early in his career.\0"
     .align 2,0
