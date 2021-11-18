@@ -239,13 +239,13 @@ void CopySpeciesNametoBuffer(u8 * buffer, s16 index)
 void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    ExpandPlaceholdersBuffer(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // #c6%s#r
+    ExpandPlaceholdersBuffer(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {COLOR_2 YELLOW}%s{END_COLOR_TEXT_2}
 }
 
 void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    ExpandPlaceholdersBuffer(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // #c5%s#r
+    ExpandPlaceholdersBuffer(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {COLOR_2 CYAN}%s{END_COLOR_TEXT_2}
 }
 
 void sub_808D930(u8 *buffer, s16 index)
@@ -278,7 +278,7 @@ void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum)
   if (colorNum == 0) {
     colorNum = COLOR_CYAN;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s#r
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
@@ -289,7 +289,7 @@ void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
   if (colorNum == 0) {
     colorNum = COLOR_YELLOW;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s#r
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808DA0C(u8 *buffer, u8 *param_2)

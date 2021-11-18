@@ -36,24 +36,24 @@ gUnknown_80DD564:: @ 80DD564
 	.align 2,0
 
 gUnknown_80DD594:: @ 80DD594
-	.string "#+The #C4$i1#R was\n"
+	.string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was\n"
 	.string "#+handed over. \0"
 	.align 2, 0
 
 gUnknown_80DD5B8:: @ 80DD5B8
-	.string "#+The #C4$i1#R was\n"
+	.string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was\n"
 	.string "#+handed over.#P"
-	.string "#+The #C4$i0#R was\n"
+	.string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n"
 	.string "#+returned to the Toolbox.\0"
 	.align 2, 0
 
 gUnknown_80DD60C:: @ 80DD60C
-	.string "#+The #C4$i0#R was\n"
+	.string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n"
 	.string "#+returned to the Toolbox.\0"
 	.align 2, 0
 
 gUnknown_80DD63C:: @ 80DD63C
-	.string "#+The #C4$i0#R was\n"
+	.string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n"
 	.string "#+sent to storage.\0"
 	.align 2, 0
 
@@ -98,7 +98,7 @@ gPartyMenuCheckIQ:: @ 80DD6C4
 	.align 2, 0
 
 gPartyMenuItemPlaceholder:: @ 80DD6D0
-	.string "Item: #C4$i0#R \0"
+	.string "Item: {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} \0"
 	.align 2, 0
 
 gUnknown_80DD6E0:: @ 80DD6E0

@@ -1824,14 +1824,14 @@ gUnknown_80F7AF8: @ 80F7AF8
 
 	.global gUnknown_80F7AFC
 gUnknown_80F7AFC: @ 80F7AFC
-        .string "#C6%s#R\0"
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80F7B04
 gUnknown_80F7B04: @ 80F7B04
-        .string "#C6"
+        .string "{COLOR_1 YELLOW}"
         .byte 0x87, 0x45
-        .string "#R\0"
+        .string "{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -2260,7 +2260,7 @@ gUnknown_80F7F70: @ 80F7F70
 gRescueSpotDescription: @ 80F7F7C
 	.string "You reached the rescue spot where your\n"
 	.string "friend~27s team went down!\n"
-	.string "Send an #c2A-OK Mail#r from the Pelipper Post\n"
+	.string "Send an {COLOR_2 RED}A-OK Mail{END_COLOR_TEXT_2} from the Pelipper Post\n"
 	.string "Office to let your friend know you~27ve\n"
 	.string "rescued the defeated team.\0"
 	.align 2,0
@@ -5673,8 +5673,8 @@ gPtrLinkedMovesComeApartMessage: @ 81002FC
 
 	.global gLinkMoveOneUseWarningMessage
 gLinkMoveOneUseWarningMessage: @ 8100300
-	.string "#c6The linked moves are almost out of PP!#r\n"
-	.string "#c6Use them again and they will come apart!#r\0"
+	.string "{COLOR_2 YELLOW}The linked moves are almost out of PP!{END_COLOR_TEXT_2}\n"
+	.string "{COLOR_2 YELLOW}Use them again and they will come apart!{END_COLOR_TEXT_2}\0"
 	.align 2, 0
 
 	.global gPtrLinkMoveOneUseWarningMessage
@@ -5683,8 +5683,8 @@ gPtrLinkMoveOneUseWarningMessage: @ 810035C
 
 	.global gLinkMoveTwoUsesWarningMessage
 gLinkMoveTwoUsesWarningMessage: @ 8100360
-	.string "#c6The linked moves are almost out of PP!#r\n"
-	.string "#c6Use them twice and they will come apart!#r\0"
+	.string "{COLOR_2 YELLOW}The linked moves are almost out of PP!{END_COLOR_TEXT_2}\n"
+	.string "{COLOR_2 YELLOW}Use them twice and they will come apart!{END_COLOR_TEXT_2}\0"
 	.align 2, 0
 
 	.global gPtrLinkMoveTwoUsesWarningMessage
@@ -7635,12 +7635,12 @@ gUnknown_8106E30: @ 8106E30
 
 	.global gUnknown_8106E34
 gUnknown_8106E34: @ 8106E34
-        .string "$i0#c5$v02:$m0#r\0"
+        .string "$i0{COLOR_2 CYAN}$v02:$m0{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8106E48
 gUnknown_8106E48: @ 8106E48
-        .string "$i0#c6$v02:$m0#r\0"
+        .string "$i0{COLOR_2 YELLOW}$v02:$m0{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8106E5C
@@ -7870,12 +7870,12 @@ gUnknown_81075F4: @ 81075F4
 
 	.global gUnknown_8107600
 gUnknown_8107600: @ 8107600
-        .string "#{YELLOW_ALT}%s#r"
+        .string "{COLOR_2 YELLOW_ALT}%s{END_COLOR_TEXT_2}"
         .align 2,0
 
 	.global gUnknown_8107608
 gUnknown_8107608: @ 8107608
-        .string "#{CYAN_ALT}%s#r"
+        .string "{COLOR_2 CYAN_ALT}%s{END_COLOR_TEXT_2}"
         .align 2,0
 
 	.global gUnownLetters
@@ -7895,7 +7895,7 @@ gUnknown_8107638: @ 8107638
 
 	.global gUnknown_810763C
 gUnknown_810763C: @ 810763C
-        .string "#c%c%s#r\0"
+        .string "#c%c%s{END_COLOR_TEXT_2}\0"
 
 	.global gUnknown_8107645
 gUnknown_8107645: @ 8107645
@@ -8057,21 +8057,21 @@ gUnknown_8108EC0: @ 8108EC0
 
 	.global gUnknown_8108F10
 gUnknown_8108F10: @ 8108F10
-        .asciz "#cD%s#r"
+        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8108F18
 gUnknown_8108F18: @ 8108F18
-        .string "#cD%s#r"
+        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}"
         .byte 0x81, 0x40
-        .asciz "#c5%d#rF"
+        .string "{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
 
 	.global gUnknown_8108F2C
 gUnknown_8108F2C: @ 8108F2C
-        .string "#cD%s#r"
+        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}"
         .byte 0x81, 0x40
-        .asciz "B#c5%d#rF"
+        .string "B{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
 
 	.global gUnknown_8108F40
@@ -8204,14 +8204,14 @@ gUnknown_810983C: @ 810983C
 gUnknown_81098A4: @ 81098A4
 	.string "#c"
         .byte 0x4
-        .string "%s#r\0"
+        .string "%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_81098AC
 gUnknown_81098AC: @ 81098AC
         .string "%s#=%c#C"
         .byte 0x4
-        .string "%s#R\0"
+        .string "%s{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0"
         .align 2,0
@@ -8232,12 +8232,12 @@ gUnknown_81098DC: @ 81098DC
 
 	.global gUnknown_81098E0
 gUnknown_81098E0: @ 81098E0
-        .string "#c%c%s%s#r\0"
+        .string "#c%c%s%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_81098EC
 gUnknown_81098EC: @ 81098EC
-        .string "#c%c#:%s%s%s#;%c%2d/%2d#r\0"
+        .string "#c%c#:%s%s%s#;%c%2d/%2d{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8109908
@@ -8250,7 +8250,7 @@ gUnknown_810990C: @ 810990C
 
 	.global gUnknown_8109910
 gUnknown_8109910: @ 8109910
-        .string "#c%c%s%s%s#=%c%2d/%2d#r\0"
+        .string "#c%c%s%s%s#=%c%2d/%2d{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8109928
@@ -8306,12 +8306,12 @@ gStoryMissionText: @ 8109994
 
 	.global gDummyScenarioText
 gDummyScenarioText: @ 8109CA8
-        .string "#CCScenario try dummy#R\0"
+        .string "{COLOR_1 YELLOW_2}Scenario try dummy{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_8109CC0
 gUnknown_8109CC0: @ 8109CC0
-        .string "#CW???#R\0"
+        .string "#CW???{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
 

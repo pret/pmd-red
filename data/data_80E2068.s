@@ -413,10 +413,10 @@ gUnknown_80E24F8: @ 80E24F8
         .byte 0x19, 0x00, 0x00, 0x00
 
         GetHelp_80E2520:
-        .string "#C6Get help#R \0"
+        .string "{COLOR_1 YELLOW}Get help{END_COLOR_TEXT_1} \0"
         .align 2,0
         GoRescue_80E530:
-        .string "#C6Go rescue#R \0"
+        .string "{COLOR_1 YELLOW}Go rescue{END_COLOR_TEXT_1} \0"
         .align 2,0
         RescueInfo_80E2540:
         .string "Friend Rescue Info\0"
@@ -474,77 +474,77 @@ gUnknown_80E25F4: @ 80E25F4
 	.global gUnknown_80E2610
 gUnknown_80E2610: @ 80E2610
         .string "How would you like to send your\n"
-        .string "#CGSOS Mail#R?\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2640
 gUnknown_80E2640: @ 80E2640
         .string "How would you like to receive your\n"
-        .string "friend~27s #CGSOS Mail#R?\0"
+        .string "friend~27s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2680
 gUnknown_80E2680: @ 80E2680
         .string "How would you like to send your\n"
-        .string "#CGA-OK Mail#R?\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E26B0
 gUnknown_80E26B0: @ 80E26B0
         .string "How would you like to receive your\n"
-        .string "friend~27s #CGA-OK Mail#R?\0"
+        .string "friend~27s {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E26F0
 gUnknown_80E26F0: @ 80E26F0
         .string "How would you like to send your\n"
-        .string "#CGThank-You Mail#R?\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2728
 gUnknown_80E2728: @ 80E2728
         .string "How would you like to receive your\n"
-        .string "friend~27s #CGThank-You Mail#R?\0"
+        .string "friend~27s {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E276C
 gUnknown_80E276C: @ 80E276C
         .string "The GBA Game Pak does not have\n"
-        .string "an #CGA-OK Mail#R on it.\0"
+        .string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} on it.\0"
         .align 2,0
 
 	.global gUnknown_80E27A4
 gUnknown_80E27A4: @ 80E27A4
-        .string "If you accept an #CGA-OK Mail#R~2c the\n"
-        .string "#CGThank-You Mail#R you received before\n"
+        .string "If you accept an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}~2c the\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
         .string "will be overwritten. Is that OK?\0"
         .align 2,0
 
 	.global gUnknown_80E2814
 gUnknown_80E2814: @ 80E2814
-        .string "Please enter the #CGA-OK Mail password#R.\0"
+        .string "Please enter the {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2840
 gUnknown_80E2840: @ 80E2840
-        .string "The #CGA-OK Mail#R will be received and\n"
+        .string "The {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} will be received and\n"
         .string "processed.\0"
         .align 2,0
 
 	.global gUnknown_80E2874
 gUnknown_80E2874: @ 80E2874
-        .string "A #CGhelper Pokémon#R also arrived!\0"
+        .string "A {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} also arrived!\0"
         .align 2,0
 
 	.global gUnknown_80E2898
 gUnknown_80E2898: @ 80E2898
-        .string "An #CGA-OK Mail#R was received.\n"
+        .string "An {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} was received.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E28D8
 gUnknown_80E28D8: @ 80E28D8
-        .string "Resume your game using #CGRevive Team#R.\0"
+        .string "Resume your game using {COLOR_1 LIGHT_BLUE_2}Revive Team{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2904
@@ -556,19 +556,19 @@ gUnknown_80E2904: @ 80E2904
 
 	.global gUnknown_80E296C
 gUnknown_80E296C: @ 80E296C
-        .string "Please choose the #CGSOS Mail#R you want\n"
+        .string "Please choose the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} you want\n"
         .string "to send.\0"
         .align 2,0
 
 	.global gUnknown_80E29A0
 gUnknown_80E29A0: @ 80E29A0
-        .string "This #CGSOS Mail#R will be sent.\n"
+        .string "This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
 
 	.global gUnknown_80E29D0
 gUnknown_80E29D0: @ 80E29D0
-        .string "Your #CGSOS Mail#R was sent.\n"
+        .string "Your {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} was sent.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
@@ -585,12 +585,12 @@ gUnknown_80E2A1C: @ 80E2A1C
 
 	.global gUnknown_80E2A5C
 gUnknown_80E2A5C: @ 80E2A5C
-        .asciz "Here is the #CGSOS Mail password#R."
+        .string "Here is the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2A80
 gUnknown_80E2A80: @ 80E2A80
-        .asciz "Here is the #CGA-OK Mail password#R."
+        .string "Here is the {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2AA8
@@ -601,21 +601,21 @@ gUnknown_80E2AA8: @ 80E2AA8
 
 	.global gUnknown_80E2AE4
 gUnknown_80E2AE4: @ 80E2AE4
-.string "Please connect a #CGLink Cable#R.\n"
+.string "Please connect a {COLOR_1 LIGHT_BLUE_2}Link Cable{END_COLOR_TEXT_1}.\n"
 .string "When your friend~27s side is ready~2c you may\n"
 .string "communicate and exchange data.\0"
 .align 2,0
 
 	.global gUnknown_80E2B54
 gUnknown_80E2B54: @ 80E2B54
-.string "Your #CGA-OK Mail#R was sent.\n"
+.string "Your {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} was sent.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
 	.global gUnknown_80E2B90
 gUnknown_80E2B90: @ 80E2B90
-.string "Using a #CGGame Link cable#R~2c\n"
-.string "you can send a #CGhelper Pokémon#R to\n"
+.string "Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c\n"
+.string "you can send a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} to\n"
 .string "a friend.\0"
 .align 2,0
 
@@ -645,24 +645,24 @@ gUnknown_80E2CD4: @ 80E2CD4
 
 	.global gUnknown_80E2CE8
 gUnknown_80E2CE8: @ 80E2CE8
-.string "Please choose the #CGA-OK Mail#R that should\n"
+.string "Please choose the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} that should\n"
 .string "be sent to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E2D30
 gUnknown_80E2D30: @ 80E2D30
-.string "This #CGA-OK Mail#R will be sent.\n"
+.string "This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} will be sent.\n"
 .string "Is that OK?\0"
 .align 2,0
 
 	.global gUnknown_80E2D60
 gUnknown_80E2D60: @ 80E2D60
-        .asciz "There is no #CGA-OK Mail#R."
+        .string "There is no {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2D7C
 gUnknown_80E2D7C: @ 80E2D7C
-.string "Connect the #CGGame Link cable#R.\n"
+.string "Connect the {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}.\n"
 .string "When your friend is ready~2c begin\n"
 .string "communication.\0"
 .align 2,0
@@ -696,19 +696,19 @@ gUnknown_80E2EB4: @ 80E2EB4
 
 	.global gUnknown_80E2F14
 gUnknown_80E2F14: @ 80E2F14
-.string "There is no #CGSOS Mail#R on\n"
+.string "There is no {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} on\n"
 .string "the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E2F44
 gUnknown_80E2F44: @ 80E2F44
-.string "Please choose an #CGSOS Mail#R\n"
+.string "Please choose an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "on the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E2F78
 gUnknown_80E2F78: @ 80E2F78
-.string "Is it OK to accept this #CGSOS Mail#R?\0"
+.string "Is it OK to accept this {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
 .align 2,0
 
 	.global gUnknown_80E2FA0
@@ -720,7 +720,7 @@ gUnknown_80E2FA0: @ 80E2FA0
 
 	.global gUnknown_80E2FEC
 gUnknown_80E2FEC: @ 80E2FEC
-.string "The #CGSOS Mail#R has been received.\n"
+.string "The {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
@@ -732,28 +732,28 @@ gUnknown_80E3030: @ 80E3030
 
 	.global gUnknown_80E3078
 gUnknown_80E3078: @ 80E3078
-.string "Please enter the #CGSOS Mail password#R.\0"
+.string "Please enter the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E30A4
 gUnknown_80E30A4: @ 80E30A4
-.string "Is it OK to send this #CGThank-You Mail#R?\0"
+.string "Is it OK to send this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
 .align 2,0
 
 	.global gUnknown_80E30D0
 gUnknown_80E30D0: @ 80E30D0
-.string "Please choose the #CGThank-You Mail#R that\n"
+.string "Please choose the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} that\n"
 .string "should be sent to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E311C
 gUnknown_80E311C: @ 80E311C
-.string "Please enter the #CGThank-You Mail password#R.\0"
+.string "Please enter the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E314C
 gUnknown_80E314C: @ 80E314C
-.string "The #CGThank-You Mail password#R will be\n"
+.string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1} will be\n"
 .string "shown.\0"
 .align 2,0
 
@@ -765,7 +765,7 @@ gUnknown_80E317C: @ 80E317C
 	.global gUnknown_80E319C
 gUnknown_80E319C: @ 80E319C
         .string "Steps will now be taken to receive the\n"
-        .string "#CGThank-You Mail#R.\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E31D8
@@ -775,30 +775,30 @@ gUnknown_80E31D8: @ 80E31D8
 
 	.global gUnknown_80E31FC
 gUnknown_80E31FC: @ 80E31FC
-        .string "The #CGThank-You Mail#R was sent.\0"
+        .string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} was sent.\0"
         .align 2,0
 
 	.global gUnknown_80E3220
 gUnknown_80E3220: @ 80E3220
-        .string "You received the #CGThank-You Mail#R.\0"
+        .string "You received the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E3248
 gUnknown_80E3248: @ 80E3248
-        .string "The #CGThank-You Mail#R was sent.\n"
+        .string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} was sent.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E3288
 gUnknown_80E3288: @ 80E3288
         .string "Steps will now be taken to send your\n"
-        .string "#CGThank-You Mail#R.\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E32C4
 gUnknown_80E32C4: @ 80E32C4
         .string "OK. You~27re good to go.\n"
-        .string "#CN%s#R~2c I hope your sense of\n"
+        .string "#CN%s{END_COLOR_TEXT_1}~2c I hope your sense of\n"
         .string "gratitude reaches your friend.\0"
         .align 2,0
 
@@ -823,14 +823,14 @@ gUnknown_80E339C: @ 80E339C
 	.global gUnknown_80E33D8
 gUnknown_80E33D8: @ 80E33D8
 .string "Would you like to choose\n"
-.string "a #CGreward item#R from storage and\n"
+.string "a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} from storage and\n"
 .string "send it with your mail?\0"
 .align 2,0
 
 	.global gUnknown_80E3430
 gUnknown_80E3430: @ 80E3430
 .string "This mail already has an attached\n"
-.string "#CGreward item#R.#POnce an item has been chosen~2c it may not\n"
+.string "{COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}.#POnce an item has been chosen~2c it may not\n"
 .string "be exchanged with another item.\0"
 .align 2,0
 
@@ -842,13 +842,13 @@ gUnknown_80E34B0: @ 80E34B0
 
 	.global gUnknown_80E34F0
 gUnknown_80E34F0: @ 80E34F0
-.string "Please select a #CGThank-You Mail#R\n"
+.string "Please select a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
 .string "from the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E352C
 gUnknown_80E352C: @ 80E352C
-        .string "Is it OK to accept this #CGThank-You Mail#R?\0"
+        .string "Is it OK to accept this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E355C
@@ -860,24 +860,24 @@ gUnknown_80E355C: @ 80E355C
 	.global gUnknown_80E35AC
 gUnknown_80E35AC: @ 80E35AC
         .string "The GBA Game Pak does not have\n"
-        .string "a #CGThank-You Mail#R on it.\0"
+        .string "a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} on it.\0"
         .align 2,0
 
 	.global gUnknown_80E35E8
 gUnknown_80E35E8: @ 80E35E8
-        .string "There is no #CGThank-You Mail#R.\0"
+        .string "There is no {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E360C
 gUnknown_80E360C: @ 80E360C
         .string "How would you like to send\n"
-        .string "your #CGThank-You Mail#R?\0"
+        .string "your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E3644
 gUnknown_80E3644: @ 80E3644
         .string "How would you like to receive\n"
-        .string "the #CGThank-You Mail#R?\0"
+        .string "the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E367C
@@ -888,13 +888,13 @@ gUnknown_80E367C: @ 80E367C
 	.global gUnknown_80E3690
 gUnknown_80E3690: @ 80E3690
 .string "If your team is defeated and in need\n"
-.string "of rescuing~2c send an #CGSOS Mail#R\n"
+.string "of rescuing~2c send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "to a friend.#POnce you send your mail~2c you must wait\n"
 .string "for your friend to send you\n"
-.string "an #CGA-OK Mail#R.#PIf the #CGA-OK Mail#R arrives~2c your\n"
+.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#PIf the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} arrives~2c your\n"
 .string "team can be revived to resume exploring\n"
 .string "the dungeon it was in.#PWhen your team is revived~2c don~27t forget\n"
-.string "to send a #CGThank-You Mail#R to the friend\n"
+.string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
 .string "who came to your rescue.\0"
 .align 2,0
 
@@ -902,9 +902,9 @@ gUnknown_80E3690: @ 80E3690
 gUnknown_80E3818: @ 80E3818
 .string "If your team is defeated in\n"
 .string "a dungeon~2c you may send a friend\n"
-.string "an #CGSOS Mail#R for help.#PHowever~2c there are some places\n"
+.string "an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} for help.#PHowever~2c there are some places\n"
 .string "where it is impossible for you to\n"
-.string "call for a rescue.#PAlso~2c if you send an #CGSOS Mail#R~2c\n"
+.string "call for a rescue.#PAlso~2c if you send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}~2c\n"
 .string "you may not continue with your\n"
 .string "adventure while awaiting rescue.#PIf you cannot wait to be rescued~2c\n"
 .string "you will have to give up and return\n"
@@ -915,11 +915,11 @@ gUnknown_80E3818: @ 80E3818
 gUnknown_80E3998: @ 80E3998
 .string "If your friend successfully rescues\n"
 .string "your team~2c accept your friend~27s\n"
-.string "#CGA-OK Mail#R.#POnce the #CGA-OK Mail#R is received~2c\n"
+.string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#POnce the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} is received~2c\n"
 .string "you may revive your team and resume\n"
-.string "exploring the dungeon you were in.#PUsing a #CGGame Link cable#R~2c\n"
+.string "exploring the dungeon you were in.#PUsing a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c\n"
 .string "your friend can also send you\n"
-.string "a #CGhelper Pokémon#R.#PHowever~2c the #CGhelper Pokémon#R will not\n"
+.string "a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1}.#PHowever~2c the {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} will not\n"
 .string "be able to bring an item with it when\n"
 .string "joining your team.\0"
 .align 2,0
@@ -927,50 +927,50 @@ gUnknown_80E3998: @ 80E3998
 	.global gUnknown_80E3B1C
 gUnknown_80E3B1C: @ 80E3B1C
 .string "If your team has been rescued~2c be sure\n"
-.string "to send a #CGThank-You Mail#R to the friend\n"
-.string "that came to your help.#PYou may also attach a #CGreward item#R\n"
-.string "from storage to your #CGThank-You Mail#R\n"
+.string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
+.string "that came to your help.#PYou may also attach a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
+.string "from storage to your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
 .string "and send it to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E3BF8
 gUnknown_80E3BF8: @ 80E3BF8
 .string "If your friend~27s team needs rescuing~2c\n"
-.string "you must first receive an #CGSOS Mail#R\n"
+.string "you must first receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "from your friend.#PWhen you get the mail~2c you may embark\n"
 .string "on your rescue mission from the\n"
-.string "#CGPelipper Post Office#R.#PIf you rescue your friend~27s defeated\n"
-.string "team~2c send an #CGA-OK Mail#R to your\n"
+.string "{COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.#PIf you rescue your friend~27s defeated\n"
+.string "team~2c send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} to your\n"
 .string "friend.#PIf you rescue a friend~2c you will be eligible\n"
-.string "to receive a #CGThank-You Mail#R.#PIf you have quicksaved inside a dungeon~2c\n"
-.string "you may not choose #CGGo Rescue#R.\n"
+.string "to receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.#PIf you have quicksaved inside a dungeon~2c\n"
+.string "you may not choose {COLOR_1 LIGHT_BLUE_2}Go Rescue{END_COLOR_TEXT_1}.\n"
 .string "Your last save must be out of a dungeon.\0"
 .align 2,0
 
 	.global gUnknown_80E3DE4
 gUnknown_80E3DE4: @ 80E3DE4
-.string "You may receive an #CGSOS Mail#R from\n"
+.string "You may receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} from\n"
 .string "a friend~27s team that lies defeated in\n"
 .string "a dungeon.#PIf there is no space for new mail~2c delete\n"
-.string "old mail at the #CGPelipper Post Office#R.\0"
+.string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E3E98
 gUnknown_80E3E98: @ 80E3E98
 .string "If you successfully rescue your friend~27s\n"
-.string "team~2c send your friend an #CGA-OK Mail#R.#PUsing a #CGGame Link cable#R~2c you may\n"
+.string "team~2c send your friend an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#PUsing a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c you may\n"
 .string "also send your friend a Pokémon from\n"
 .string "your Friend Area as a helper.#PDon~27t worry--sending a Pokémon as\n"
 .string "a helper will not make it disappear from\n"
 .string "its Friend Area.#PIf there is no space for new mail~2c delete\n"
-.string "old mail at the #CGPelipper Post Office#R.\0"
+.string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4014
 gUnknown_80E4014: @ 80E4014
-.string "When you receive an #CGSOS Mail#R~2c\n"
+.string "When you receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}~2c\n"
 .string "you may embark on your rescue mission\n"
-.string "from the #CGPelipper Post Office#R.#PBeware--if you do not have access to\n"
+.string "from the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.#PBeware--if you do not have access to\n"
 .string "the dungeon they are in~2c you may not go\n"
 .string "on a rescue mission there.#PAccept challenging rescues only\n"
 .string "if you are ready and qualified!\0"
@@ -978,31 +978,31 @@ gUnknown_80E4014: @ 80E4014
 
 	.global gUnknown_80E4130
 gUnknown_80E4130: @ 80E4130
-.string "If you send an #CGA-OK Mail#R~2c you may\n"
-.string "receive a #CGThank-You Mail#R in return\n"
-.string "from your friend.#PThe #CGThank-You Mail#R may also come\n"
-.string "with a #CGreward item#R attached.\0"
+.string "If you send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}~2c you may\n"
+.string "receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} in return\n"
+.string "from your friend.#PThe {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} may also come\n"
+.string "with a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} attached.\0"
 .align 2,0
 
 	.global gUnknown_80E41DC
 gUnknown_80E41DC: @ 80E41DC
-.string "Using the #CGDual Slot#R function~2c\n"
+.string "Using the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function~2c\n"
 .string "you may perform rescue operations with\n"
 .string "friends using the GBA Game Pak version.#PInsert the DS Game Card and the GBA\n"
 .string "Game Pak in your Nintendo DS system~2c\n"
 .string "then turn on the power.#PFriend Rescue missions using\n"
-.string "the #CGDual Slot#R function will be\n"
+.string "the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function will be\n"
 .string "available on the main menu. \0"
 .align 2,0
 
 	.global gUnknown_80E4314
 gUnknown_80E4314: @ 80E4314
 .string "Friends can rescue each other~27s defeated\n"
-.string "teams using a #CGGame Link cable#R~2c\n"
-.string "#CGpasswords#R~2c and so on.#PYou may go on a rescue mission to save\n"
+.string "teams using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}~2c\n"
+.string "{COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}~2c and so on.#PYou may go on a rescue mission to save\n"
 .string "your friend~27s team that has been defeated\n"
 .string "in a dungeon.#POr~2c you may call for help from a friend\n"
-.string "to save your fallen team in a dungeon.#PUsing #CGpasswords#R~2c you can even\n"
+.string "to save your fallen team in a dungeon.#PUsing {COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}~2c you can even\n"
 .string "exchange help with faraway friends.\0"
 .align 2,0
 
@@ -1054,25 +1054,25 @@ gUnknown_80E4650: @ 80E4650
 	.global gUnknown_80E468C
 gUnknown_80E468C: @ 80E468C
 .string "You do not appear eligible to receive\n"
-.string "this #CGA-OK Mail#R.\0"
+.string "this {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E46C8
 gUnknown_80E46C8: @ 80E46C8
 .string "Your friend is not eligible to receive\n"
-.string "this #CGA-OK Mail#R.\0"
+.string "this {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4704
 gUnknown_80E4704: @ 80E4704
 .string "You do not appear eligible to receive\n"
-.string "this #CGThank-You Mail#R.\0"
+.string "this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4744
 gUnknown_80E4744: @ 80E4744
 .string "Your friend is not eligible to receive\n"
-.string "this #CGThank-You Mail#R.\0"
+.string "this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4788
@@ -1105,19 +1105,19 @@ gUnknown_80E48A8: @ 80E48A8
 	.global gUnknown_80E48E8
 gUnknown_80E48E8: @ 80E48E8
 .string "This password does not appear to be\n"
-.string "that of an #CGSOS Mail#R.\0"
+.string "that of an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4928
 gUnknown_80E4928: @ 80E4928
-.string "Received the #CGSOS Mail#R.\n"
+.string "Received the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
 	.global gUnknown_80E4964
 gUnknown_80E4964: @ 80E4964
 .string "This password does not appear to be\n"
-.string "an #CGA-OK Mail#R.\0"
+.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E499C
@@ -1128,7 +1128,7 @@ gUnknown_80E499C: @ 80E499C
 	.global gUnknown_80E49C4
 gUnknown_80E49C4: @ 80E49C4
 .string "This password does not appear to be\n"
-.string "that of a #CGThank-You Mail#R.\0"
+.string "that of a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 .string "pksdir0\0"
 .align 2,0

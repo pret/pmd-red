@@ -361,7 +361,7 @@ gUnknown_80D4A58:
     .global gUnknown_80D4C14
 gUnknown_80D4C14:
     .string " {POKE}... Purr...\n"
-    .string "Very well~2c #C5$d0#R {POKE}.\n"
+    .string "Very well~2c {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Here you are.\0"
     .align 2, 0
 
@@ -390,7 +390,7 @@ gUnknown_80D4D20:
     .global gUnknown_80D4D44
 gUnknown_80D4D44:
     .string " Zzz...\n"
-    .string "#C5$d0#R {POKE}... Very well...#W\n"
+    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}... Very well...#W\n"
     .string "I will guard it jealously...\0"
     .align 2, 0
 
@@ -439,7 +439,7 @@ gUnknown_80D4F08:
     .global gUnknown_80D4F24
 gUnknown_80D4F24:
     .string " Sssnore... Purr...\n"
-    .string "Your account contains #C5$d0#R {POKE}...\n"
+    .string "Your account contains {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "How may I serve you?\0"
     .align 2, 0
 
@@ -475,7 +475,7 @@ gUnknown_80D4FC8:
 
     .global gUnknown_80D5158
 gUnknown_80D5158:
-    .string " Very well~2c #C5$d0#R {POKE}.\n"
+    .string " Very well~2c {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Here you are.\0"
     .align 2, 0
 
@@ -500,7 +500,7 @@ gUnknown_80D5224:
 
     .global gUnknown_80D5244
 gUnknown_80D5244:
-    .string " #C5$d0#R {POKE}. Very well.#W\n"
+    .string " {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}. Very well.#W\n"
     .string "I will guard it jealously.\0"
     .align 2, 0
 
@@ -537,7 +537,7 @@ gUnknown_80D5380:
     .global gUnknown_80D538C
 gUnknown_80D538C:
     .string " Your account contains\n"
-    .string "#C5$d0#R {POKE}.\n"
+    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "How may I serve you?\0"
     .align 2, 0
 
@@ -622,7 +622,7 @@ gUnknown_80D5590:
     .global gUnknown_80D55C0
 gUnknown_80D55C0:
     .string " Zzz... Zzz...\n"
-    .string "That #C4$i0#R...\n"
+    .string "That {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
     .string "Can~27t store it...\0"
     .align 2, 0
 
@@ -662,7 +662,7 @@ gUnknown_80D56CC:
     .global gUnknown_80D5710
 gUnknown_80D5710:
     .string " Hunh...? Taking...?\n"
-    .string "Oh... You want your #C4$i0#R...\n"
+    .string "Oh... You want your {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -695,7 +695,7 @@ gUnknown_80D57F4:
     .global gUnknown_80D5844
 gUnknown_80D5844:
     .string " Zzz... Store something?\n"
-    .string "Gonna put #C4$i0#R in storage...\n"
+    .string "Gonna put {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} in storage...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -763,7 +763,7 @@ gUnknown_80D5B24:
     .global gUnknown_80D5B5C
 gUnknown_80D5B5C:
     .string " Oh~2c dear~2c sorry.#W\n"
-    .string "That #C4$i0#R is an item you\n"
+    .string "That {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} is an item you\n"
     .string "can~27t put in storage.\0"
     .align 2, 0
 
@@ -800,7 +800,7 @@ gUnknown_80D5C74:
     .global gUnknown_80D5CAC
 gUnknown_80D5CAC:
     .string " Fine~2c I~27ll take your\n"
-    .string "#C4$i0#R out of storage. OK?\0"
+    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} out of storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5CE4
@@ -831,7 +831,7 @@ gUnknown_80D5D8C:
     .global gUnknown_80D5DBC
 gUnknown_80D5DBC:
     .string " I~27ll put your\n"
-    .string "#C4$i0#R in storage. OK?\0"
+    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} in storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5DE8
@@ -1051,14 +1051,14 @@ gUnknown_80D6364:
 gUnknown_80D6394:
     .string " Zzz... Reep~2c what...?\n"
     .string "For all that I can buy~2c I will pay\n"
-    .string "#C5$d0#R {POKE}... OK?\0"
+    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}... OK?\0"
     .align 2, 0
 
     .global gUnknown_80D63E8
 gUnknown_80D63E8:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "#C4$i0#R?\n"
-    .string "Is #C5$d0#R {POKE} OK?\0"
+    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string "Is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE} OK?\0"
     .align 2, 0
 
     .global gUnknown_80D6420
@@ -1082,7 +1082,7 @@ gUnknown_80D6478:
     .global gUnknown_80D6494
 gUnknown_80D6494:
     .string " Zzzzzz...\n"
-    .string "#C4$i0#R is #C5$d0#R {POKE}...\n"
+    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -1224,14 +1224,14 @@ gUnknown_80D6B18:
     .global gUnknown_80D6B50
 gUnknown_80D6B50:
     .string " For all that I can buy~2c I can\n"
-    .string "offer you #C5$d0#R {POKE}.\n"
+    .string "offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
     .global gUnknown_80D6BA0
 gUnknown_80D6BA0:
-    .string " #C4$i0#R~2c you say?\n"
-    .string "For that~2c I can offer #C5$d0#R {POKE}.\n"
+    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}~2c you say?\n"
+    .string "For that~2c I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
@@ -1249,8 +1249,8 @@ gUnknown_80D6C1C:
 
     .global gUnknown_80D6C48
 gUnknown_80D6C48:
-    .string " #C4$i0#R~2c you say?\n"
-    .string "That will be #C5$d0#R {POKE}.\n"
+    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}~2c you say?\n"
+    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
@@ -1372,15 +1372,15 @@ gUnknown_80D7090:
     .global gUnknown_80D70B4
 gUnknown_80D70B4:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "I can pay you #C5$d0#R {POKE}\n"
+    .string "I can pay you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}\n"
     .string "for everything I can buy... OK?\0"
     .align 2, 0
 
     .global gUnknown_80D7108
 gUnknown_80D7108:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "Selling that #C4$i0#R...?\n"
-    .string "How about #C5$d0#R {POKE}?\0"
+    .string "Selling that {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...?\n"
+    .string "How about {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}?\0"
     .align 2, 0
 
     .global gUnknown_80D7154
@@ -1404,8 +1404,8 @@ gUnknown_80D71B0:
     .global gUnknown_80D71CC
 gUnknown_80D71CC:
     .string " Zzz... Meep meep...\n"
-    .string "#C4$i0#R...?\n"
-    .string "#C5$d0#R {POKE}~2c OK?\0"
+    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...?\n"
+    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}~2c OK?\0"
     .align 2, 0
 
     .global gUnknown_80D7204
@@ -1536,14 +1536,14 @@ gUnknown_80D7740:
     .global gUnknown_80D776C
 gUnknown_80D776C:
     .string " For everything I can buy~2c\n"
-    .string "I can offer #C5$d0#R {POKE}.\n"
+    .string "I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable to you?\0"
     .align 2, 0
 
     .global gUnknown_80D77C0
 gUnknown_80D77C0:
-    .string " #C4$i0#R?\n"
-    .string "I can offer you #C5$d0#R {POKE}.\n"
+    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string "I can offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Will you sell it for that price?\0"
     .align 2, 0
 
@@ -1567,8 +1567,8 @@ gUnknown_80D785C:
 
     .global gUnknown_80D788C
 gUnknown_80D788C:
-    .string " #C4$i0#R?\n"
-    .string "That will be #C5$d0#R {POKE}.\n"
+    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that to your liking?\0"
     .align 2, 0
 
@@ -1662,7 +1662,7 @@ gUnknown_80D7A44:
     .string "their species...#P"
     .string " Kwoo... Sssnore...\n"
     .string "See what Pokémon can live there by\n"
-    .string "checking #C6Info#R...#P"
+    .string "checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}...#P"
     .string " Zzz...\n"
     .string "I don~27t sell some Friend Areas...#P"
     .string " Kwoo...\n"
@@ -1676,7 +1676,7 @@ gUnknown_80D7A44:
     .global gUnknown_80D7C94
 gUnknown_80D7C94:
     .string " Sssnore...\n"
-    .string "#C4$h#R...?\n"
+    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
     .string "I can~27t get that Friend Area...#P"
     .string " Zzz... Zzz...\n"
     .string "Sorry...\0"
@@ -1685,7 +1685,7 @@ gUnknown_80D7C94:
     .global gUnknown_80D7CE8
 gUnknown_80D7CE8:
     .string " Zzz... Hunh...?\n"
-    .string "#C4$h#R...?\n"
+    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
     .string "I don~27t know... I~27ll check...#P"
     .string " Sssnore...\n"
     .string "I~27ll have it for sale...\n"
@@ -1696,14 +1696,14 @@ gUnknown_80D7CE8:
 gUnknown_80D7D64:
     .string " Sssnore...\n"
     .string "You can already go...\n"
-    .string "Friend Area #C4$h#R...\0"
+    .string "Friend Area {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7DA0
 gUnknown_80D7DA0:
     .string " Dwee... Kwoo...\n"
-    .string "#C5$m0#R~27s Friend Area...\n"
-    .string "Zzz... #C4$h#R...\0"
+    .string "{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}~27s Friend Area...\n"
+    .string "Zzz... {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7DE0
@@ -1748,10 +1748,10 @@ gUnknown_80D7ED0:
     .global gUnknown_80D7F10
 gUnknown_80D7F10:
     .string " Grats... Zzz...#W\n"
-    .string "You can go to #C4$h#R...#P"
+    .string "You can go to {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...#P"
     .string " Dwee... Sssnore...\n"
     .string "Make friends with Pokémon in...\n"
-    .string "#C4$h#R...\0"
+    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7F7C
@@ -1767,8 +1767,8 @@ gUnknown_80D7F7C:
 
     .global gUnknown_80D8000
 gUnknown_80D8000:
-    .string " Kwoo? #C4$h#R?\n"
-    .string "That~27s #C5$d0#R {POKE}...\n"
+    .string " Kwoo? {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string "That~27s {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -1821,7 +1821,7 @@ gUnknown_80D8104:
     .string "their species.#P"
     .string " If you~27re buying a Friend\n"
     .string "Area~2c you should confirm what Pokémon\n"
-    .string "can live there by checking #C6Info#R.#P"
+    .string "can live there by checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}.#P"
     .string " Also~2c there are some Friend\n"
     .string "Areas that I don~27t sell.#P"
     .string " I think there are some\n"
@@ -1836,14 +1836,14 @@ gUnknown_80D8104:
 
     .global gUnknown_80D8420
 gUnknown_80D8420:
-    .string " #C4$h#R?\n"
+    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
     .string "I can~27t get that Friend Area for you.#W\n"
     .string "I~27m really sorry.\0"
     .align 2, 0
 
     .global gUnknown_80D8468
 gUnknown_80D8468:
-    .string " #C4$h#R?\n"
+    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
     .string "I don~27t know much about it at all.#W\n"
     .string "I~27ll check up on it.#P"
     .string " I~27ll add it to the Friend\n"
@@ -1853,13 +1853,13 @@ gUnknown_80D8468:
     .global gUnknown_80D84F8
 gUnknown_80D84F8:
     .string " You can already go to the\n"
-    .string "Friend Area #C4$h#R.\0"
+    .string "Friend Area {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D8528
 gUnknown_80D8528:
-    .string " #C5$m0#R~27s Friend Area\n"
-    .string "is #C4$h#R.\0"
+    .string " {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}~27s Friend Area\n"
+    .string "is {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D8550
@@ -1903,10 +1903,10 @@ gUnknown_80D8644:
     .global gUnknown_80D8674
 gUnknown_80D8674:
     .string " Congratulations!#W\n"
-    .string "You can go to #C4$h#R now!#P"
+    .string "You can go to {COLOR_1 GREEN}$h{END_COLOR_TEXT_1} now!#P"
     .string " You can recruit\n"
     .string "Pokémon that live in the Friend Area\n"
-    .string "#C4$h#R.\0"
+    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D86E4
@@ -1918,8 +1918,8 @@ gUnknown_80D86E4:
 
     .global gUnknown_80D8738
 gUnknown_80D8738:
-    .string " #C4$h#R?\n"
-    .string "That will be #C5$d0#R {POKE}.\n"
+    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that OK?\0"
     .align 2, 0
 
@@ -2014,16 +2014,16 @@ gUnknown_80D8950:
     .string "I~27d go broke if it weren~27t for those\n"
     .string "forgetful Pokémon...#P"
     .string " Zzz... Gwaaah...\n"
-    .string "Especially that #C5$m4#R...\n"
+    .string "Especially that {COLOR_1 CYAN}$m4{END_COLOR_TEXT_1}...\n"
     .string "It seems to be forgetful...#P"
     .string " Sssnore...\n"
     .string "I hope it forgets more moves...\n"
     .string "So it needs to see me...#P"
     .string " Zzz... Mumble...\n"
     .string "But we decided to get rid of that\n"
-    .string "#C5$m4#R...#P"
+    .string "{COLOR_1 CYAN}$m4{END_COLOR_TEXT_1}...#P"
     .string " Gwaaaah... Gweh...\n"
-    .string "#C5$m4#R won~27t be coming around\n"
+    .string "{COLOR_1 CYAN}$m4{END_COLOR_TEXT_1} won~27t be coming around\n"
     .string "anymore... \0"
     .align 2, 0
 
@@ -2071,8 +2071,8 @@ gUnknown_80D8CC8:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mutter...\n"
-    .string "#C5$m5#R forgot...\n"
-    .string "#C4$m1#R and moves linked to it...\0"
+    .string "{COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} forgot...\n"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and moves linked to it...\0"
     .align 2, 0
 
     .global gUnknown_80D8D64
@@ -2084,21 +2084,21 @@ gUnknown_80D8D64:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mumble...\n"
-    .string "#C5$m5#R forgot...\n"
-    .string "#C4$m1#R...\0"
+    .string "{COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} forgot...\n"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D8DE8
 gUnknown_80D8DE8:
     .string " Zzz... Fwaah? Forget...?\n"
-    .string "#C4$m1#R and any moves\n"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves\n"
     .string "linked to it?\0"
     .align 2, 0
 
     .global gUnknown_80D8E28
 gUnknown_80D8E28:
     .string " Zzz... Forget...?\n"
-    .string "#C4$m1#R?\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D8E48
@@ -2124,10 +2124,10 @@ gUnknown_80D8EC4:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mumble...\n"
-    .string "#CM$m5#R~27s OK...#P"
+    .string "#CM$m5{END_COLOR_TEXT_1}~27s OK...#P"
     .string " Sssnork... Forgotten...\n"
-    .string "#C4$m1#R and moves linked to it...\n"
-    .string "Remembered #C5$m0#R...\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and moves linked to it...\n"
+    .string "Remembered {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D8F98
@@ -2138,36 +2138,36 @@ gUnknown_80D8F98:
     .string "Gggggggg...#W Pwah! Gulpin!#P"
     .string " Fwaah hah!\n"
     .string "There...#P"
-    .string " Zzz... Zzz... #CM$m5#R\n"
-    .string "forgot #C4$m1#R...\n"
-    .string "Remembered #C5$m0#R...\0"
+    .string " Zzz... Zzz... #CM$m5{END_COLOR_TEXT_1}\n"
+    .string "forgot {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...\n"
+    .string "Remembered {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D9034
 gUnknown_80D9034:
     .string " Zzz? Fnurf? \n"
-    .string "Forget #C4$m1#R...and moves linked\n"
-    .string "to it? Remember #C5$m0#R?\0"
+    .string "Forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...and moves linked\n"
+    .string "to it? Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9080
 gUnknown_80D9080:
     .string " Zzznort... Grumble...\n"
-    .string "Forget #C4$m1#R?\n"
-    .string "Remember #C5$m0#R?\0"
+    .string "Forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\n"
+    .string "Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D90BC
 gUnknown_80D90BC:
     .string " Zzzznort... Move...?\n"
-    .string "Remember #C5$m0#R?#P"
+    .string "Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?#P"
     .string " Fwaah...\n"
     .string "Gggggggggggg...#W Gulpin!#P"
     .string " Fgwaah...\n"
     .string "There...#P"
     .string " Zzz... Zzz...\n"
-    .string "#CM$m5#R remembered...\n"
-    .string "Hunh? That move~2c #C5$m0#R...\0"
+    .string "#CM$m5{END_COLOR_TEXT_1} remembered...\n"
+    .string "Hunh? That move~2c {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D9168
@@ -2254,9 +2254,9 @@ gUnknown_80D9498:
     .string "Two or more moves can be used one after\n"
     .string "another in one turn!#P"
     .string " For example~2c if the moves\n"
-    .string "#C5Scratch#R and #C5Growl#R are\n"
+    .string "{COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     .string "linked...#P"
-    .string " Both #C5Scratch#R and #C5Growl#R are\n"
+    .string " Both {COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     .string "used in one turn!#W\n"
     .string "See? Amazing~2c huh?#P"
     .string " Using links~2c heheh...#W\n"
@@ -2306,8 +2306,8 @@ gUnknown_80D9904:
     .string " Gggggggg...#W Poof!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #C5$m5#R has forgotten\n"
-    .string "the move #C4$m1#R and any moves\n"
+    .string " {COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves\n"
     .string "linked to it!\0"
     .align 2, 0
 
@@ -2317,20 +2317,20 @@ gUnknown_80D9988:
     .string " Gggggggg...#W Poof!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #C5$m5#R has forgotten\n"
-    .string "the move #C4$m1#R!\0"
+    .string " {COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D99F0
 gUnknown_80D99F0:
     .string " So~2c forget the move\n"
-    .string "#C4$m1#R and any moves linked to it?\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves linked to it?\0"
     .align 2, 0
 
     .global gUnknown_80D9A2C
 gUnknown_80D9A2C:
     .string " So~2c forget the move\n"
-    .string "#C4$m1#R?\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9A50
@@ -2355,10 +2355,10 @@ gUnknown_80D9B1C:
     .string " Gggggggg...#W Pwah! Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5#R is done!#P"
+    .string " #CM$m5{END_COLOR_TEXT_1} is done!#P"
     .string " It~27s forgotten the move\n"
-    .string "#C4$m1#R and any moves linked to it~2c\n"
-    .string "and #C5$m0#R has been remembered!\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves linked to it~2c\n"
+    .string "and {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} has been remembered!\0"
     .align 2, 0
 
     .global gUnknown_80D9BD8
@@ -2367,35 +2367,35 @@ gUnknown_80D9BD8:
     .string " Gggggggg...#W Pwah! Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5#R has forgotten\n"
-    .string "the move #C4$m1#R and remembered\n"
-    .string "the move #C5$m0#R!\0"
+    .string " #CM$m5{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and remembered\n"
+    .string "the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D9C68
 gUnknown_80D9C68:
-    .string " So~2c forget #C4$m1#R\n"
+    .string " So~2c forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}\n"
     .string "and any moves linked to it~2c and remember\n"
-    .string "the move #C5$m0#R?\0"
+    .string "the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9CC0
 gUnknown_80D9CC0:
     .string " So~2c forget the move\n"
-    .string "#C4$m1#R and remember the move\n"
-    .string "#C5$m0#R?\0"
+    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and remember the move\n"
+    .string "{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9D00
 gUnknown_80D9D00:
-    .string " So~2c the move #C5$m0#R\n"
+    .string " So~2c the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}\n"
     .string "is the one to be remembered?#W\n"
     .string "OK~2c here goes!#P"
     .string " Gggggggggggg...#W Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5#R has\n"
-    .string "remembered the move #C5$m0#R!\0"
+    .string " #CM$m5{END_COLOR_TEXT_1} has\n"
+    .string "remembered the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D9DA4
@@ -2518,7 +2518,7 @@ gUnknown_80DA100:
     .string "Your reward...\n"
     .string "Promised...#P"
     .string " Zzz... Urr!\n"
-    .string "#CIBonsly Doll#R...\0"
+    .string "#CIBonsly Doll{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80DA204
@@ -2575,9 +2575,9 @@ gUnknown_80DA338:
     .string "level up...#W\n"
     .string "And toughen up your rescue team.#P"
     .string " Also...#W\n"
-    .string "In the #CDFire Maze#R you will find only\n"
+    .string "In the {COLOR_1 YELLOW_3}Fire Maze{END_COLOR_TEXT_1} you will find only\n"
     .string "Fire-type Pokémon.#P"
-    .string " In the #CDWater Maze#R there\n"
+    .string " In the {COLOR_1 YELLOW_3}Water Maze{END_COLOR_TEXT_1} there\n"
     .string "will only be Water-type Pokémon.#P"
     .string " In such ways~2c only one type\n"
     .string "of Pokémon will be in a given room.\n"
@@ -2623,7 +2623,7 @@ gUnknown_80DA688:
     .string "I promised you a reward for completing\n"
     .string "the training courses!#P"
     .string " So... Here it is!#W\n"
-    .string "My #CIBonsly Doll#R!#P"
+    .string "My #CIBonsly Doll{END_COLOR_TEXT_1}!#P"
     .string " Isn~27t it smashing? Hey?!\0"
     .align 2, 0
 
@@ -2871,12 +2871,12 @@ gUnknown_80DB580: @ 80DB580
 
 	.global gUnknown_80DB598
 gUnknown_80DB598: @ 80DB598
-        .string "#C4OVR#R\0"
+        .string "{COLOR_1 GREEN}OVR{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB5A4
 gUnknown_80DB5A4: @ 80DB5A4
-        .string "#C6INS#R\0"
+        .string "{COLOR_1 YELLOW}INS{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB5B0
@@ -2917,12 +2917,12 @@ gUnknown_80DB638: @ 80DB638
 
 	.global gUnknown_80DB654
 gUnknown_80DB654: @ 80DB654
-        .string "#C2%s#R\0"
+        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB65C
 gUnknown_80DB65C: @ 80DB65C
-        .string "#C5%s#R\0"
+        .string "{COLOR_1 CYAN}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB664
@@ -2940,7 +2940,7 @@ gUnknown_80DB664: @ 80DB664
 
 	.global gUnknown_80DB688
 gUnknown_80DB688: @ 80DB688
-        .string "Is the name #C5$m0#R OK?\0"
+        .string "Is the name {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} OK?\0"
         .align 2,0
 
 	.global gUnknown_80DB6A4
@@ -3161,7 +3161,7 @@ gUnknown_80DB8E4: @ 80DB8E4
 
 	.global gUnknown_80DB8EC
 gUnknown_80DB8EC: @ 80DB8EC
-        .string "#C2%s#R\0"
+        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
         .string "pksdir0\0"
         .align 2,0
 
@@ -3190,7 +3190,7 @@ gUnknown_80DB92C: @ 80DB92C
 
 	.global gUnknown_80DB934
 gUnknown_80DB934: @ 80DB934
-        .string "#C2%s#R\0"
+        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
         .string "pksdir0\0"
         .align 2,0
 
@@ -3228,12 +3228,12 @@ gTeamToolboxB: @ 80DB984
 gUnknown_80DB994: @ 80DB994
         .string "#C"
         .byte 0x02
-        .string "$i0#R\0"
+        .string "$i0{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB9A0
 gUnknown_80DB9A0: @ 80DB9A0
-        .string "#C2%s#R\0"
+        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB9A8
@@ -3251,13 +3251,13 @@ gUnknown_80DB9B0: @ 80DB9B0
 	.global gUnknown_80DB9BC
 gUnknown_80DB9BC: @ 80DB9BC
         .string "#+Who will learn the move\n"
-        .string "#+#C5$m7#R?\0"
+        .string "#+{COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DB9E4
 gUnknown_80DB9E4: @ 80DB9E4
-        .string "#+#CM$m8#R learned\n"
-        .string "#+the move #C5$m7#R!\0"
+        .string "#+#CM$m8{END_COLOR_TEXT_1} learned\n"
+        .string "#+the move {COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80DBA0C
@@ -3303,34 +3303,33 @@ gUnknown_80DBA88: @ 80DBA88
 
 	.global gUnknown_80DBAA0
 gUnknown_80DBAA0: @ 80DBAA0
-        .string "#+#CN$m0#R received\n"
-        .string "#+the promised #C4$i0#R. \0"
+        .string "#+#CN$m0{END_COLOR_TEXT_1} received\n"
+        .string "#+the promised {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}. \0"
         .align 2,0
 
 	.global gUnknown_80DBAD0
 gUnknown_80DBAD0: @ 80DBAD0
-        .string "#+#CN$m0#R~27s team received\n"
-        .string "#+the promised #C4$i0#R.\0"
+        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team received\n"
+        .string "#+the promised {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBB08
 gUnknown_80DBB08: @ 80DBB08
         .string "#+The team also received\n"
-        .string "#+the item #C4$i0#R.\0"
+        .string "#+the item {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBB38
 gUnknown_80DBB38: @ 80DBB38
-        .string "#+Received the #C4$i0#R!#P#+A very rare statue. It has been placed\n"
+        .string "#+Received the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}!#P#+A very rare statue. It has been placed\n"
         .string "#+outside your rescue team base.\0"
         .align 2,0
 
 	.global gUnknown_80DBB9C
 gUnknown_80DBB9C: @ 80DBB9C
-        .string "#+The #C4$i0#R...\n"
-        .string "#+You~27ve already acquired it.#P#+Sorry to see that...#P#+In its place~2c #CN$m0#R~2c\n"
-        .string "#+you can have #CG1~2c000#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4, 0x2E
+        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
+        .string "#+You~27ve already acquired it.#P#+Sorry to see that...#P#+In its place~2c #CN$m0{END_COLOR_TEXT_1}~2c\n"
+        .string "#+you can have {COLOR_1 LIGHT_BLUE_2}1~2c000{END_COLOR_TEXT_1} {POKE}."
         .align 2,0
 
 	.global gUnknown_80DBC28
@@ -3348,25 +3347,25 @@ gUnknown_80DBC60: @ 80DBC60
 	.global gUnknown_80DBC98
 gUnknown_80DBC98: @ 80DBC98
         .string "#+Is it OK to throw away\n"
-        .string "#+this #C4$i0#R?\0"
+        .string "#+this {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DBCC4
 gUnknown_80DBCC4: @ 80DBCC4
-        .string "#+The #C4$i0#R\n"
+        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}\n"
         .string "#+was thrown away.\0"
         .align 2,0
 
 	.global gUnknown_80DBCE8
 gUnknown_80DBCE8: @ 80DBCE8
-        .string "#+The #C4$i1#R was put in\n"
-        .string "#+storage to get the #C4$i0#R.\0"
+        .string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was put in\n"
+        .string "#+storage to get the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBD24
 gUnknown_80DBD24: @ 80DBD24
-        .string "#+The #C4$i1#R was discarded\n"
-        .string "#+to get the #C4$i0#R.\0"
+        .string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was discarded\n"
+        .string "#+to get the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gKangaskhanTrashToolboxItem
@@ -3548,13 +3547,12 @@ gUnknown_80DBF34: @ 80DBF34
 
 	.global gUnknown_80DBF3C
 gUnknown_80DBF3C: @ 80DBF3C
-        .string "%s #C5%d#R Pts.\0"
+        .string "%s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.\0"
         .align 2,0
 
 	.global gUnknown_80DBF4C
 gUnknown_80DBF4C: @ 80DBF4C
-        .string "Money: #C5%d#R "
-        .byte 0x83, 0xBF, 0x83, 0xC4
+        .string "Money: {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} {POKE}"
         .align 2,0
 
 	.global gTeamRankBadgeFileName
@@ -3609,7 +3607,7 @@ gUnknown_80DBFCC: @ 80DBFCC
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x0A, 0x00, 0x06, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
-        
+
         .4byte UnkData_80DBFC8
 
 	.global gOthers_MenuOption
@@ -3770,15 +3768,15 @@ gUnknown_80DC164: @ 80DC164
 
 	.global gUnknown_80DC1A0
 gUnknown_80DC1A0: @ 80DC1A0
-        .string "#+Forget the move #C4$m1#R and\n"
+        .string "#+Forget the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and\n"
         .string "#+any moves linked to it~2c and learn the move\n"
-        .string "#+#C5$m0#R?\0"
+        .string "#+{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DC1FC
 gUnknown_80DC1FC: @ 80DC1FC
-        .string "#+Forget the move #C4$m1#R\n"
-        .string "#+and learn #C5$m0#R?\0"
+        .string "#+Forget the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}\n"
+        .string "#+and learn {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DC230
@@ -3827,7 +3825,7 @@ gUnknown_80DC274: @ 80DC274
 
 	.global gUnknown_80DC28C
 gUnknown_80DC28C: @ 80DC28C
-        .string "Moves: #C6$m0#R \0"
+        .string "Moves: {COLOR_1 YELLOW}$m0{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80DC2A0
@@ -3939,7 +3937,7 @@ gGulpinProceed: @ 80DC3C4
 
 	.global gGulpinInfo
 gGulpinInfo: @ 80DC3CC
-        .string "#C6Info#R \0"
+        .string "{COLOR_1 YELLOW}Info{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80DC3D8
@@ -4035,12 +4033,12 @@ gUnknown_80DC494: @ 80DC494
 
 	.global gUnknown_80DC4A4
 gUnknown_80DC4A4: @ 80DC4A4
-        .string "#C2%s#R\0"
+        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DC4AC
 gUnknown_80DC4AC: @ 80DC4AC
-        .string "#C4%s#R\0"
+        .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -4075,7 +4073,7 @@ gUnknown_80DC4D8: @ 80DC4D8
 
 	.global gUnknown_80DC4F0
 gUnknown_80DC4F0: @ 80DC4F0
-        .string "Inhabitants (Friends: #c5Light blue#r)\0"
+        .string "Inhabitants (Friends: {COLOR_2 CYAN}Light blue{END_COLOR_TEXT_2})\0"
         .align 2,0
 
 	.global gUnknown_80DC518
@@ -4085,7 +4083,7 @@ gUnknown_80DC518: @ 80DC518
 
 	.global gUnknown_80DC524
 gUnknown_80DC524: @ 80DC524
-        .string "#c5%s#r\0"
+        .string "{COLOR_2 CYAN}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -4310,7 +4308,7 @@ gUnknown_80DC934: @ 80DC934
 	.global gUnknown_80DC93C
 gUnknown_80DC93C: @ 80DC93C
 @ replacing .incbin "baserom.gba", 0x000dc93c, 0x14
-        .string "#c%c%s#r\0"
+        .string "#c%c%s{END_COLOR_TEXT_2}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -4348,7 +4346,7 @@ gUnknown_80DC988: @ 80DC988
 	.global gUnknown_80DC998
 gUnknown_80DC998: @ 80DC998
 @ replacing .incbin "baserom.gba", 0x000dc998, 0xc
-        .string "#c%c%s#r\0"
+        .string "#c%c%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_80DC9A4
@@ -4495,13 +4493,13 @@ gUnknown_80DD7FC: @ 80DD7FC
 
 	.global gUnknown_80DD8A0
 gUnknown_80DD8A0: @ 80DD8A0
-        .string "#+The #C4$i0#R was\n"
+        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n"
         .string "#+returned to the Toolbox.\0"
         .align 2,0
 
 	.global gUnknown_80DD8D0
 gUnknown_80DD8D0: @ 80DD8D0
-        .string "#+The #C4$i0#R was\n#+sent to storage.\0"
+        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n#+sent to storage.\0"
         .align 2,0
 
 	.global gFriendActionStandby
@@ -4550,7 +4548,7 @@ gFriendActionCheckIQ: @ 80DD94C
 
 	.global gUnknown_80DD958
 gUnknown_80DD958: @ 80DD958
-        .string "Item: #C4$i0#R \0"
+        .string "Item: {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} \0"
         .string "pksdir0\0"
 
 	.global gUnknown_80DD970

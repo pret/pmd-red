@@ -175,27 +175,27 @@ gUnknown_80E81D4: @ 80E81D4
 
 	.global gMankeyMission
 gMankeyMission: @ 80E87DC
-        .string "Punish bad #C6Mankey#R!\0"
+        .string "Punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gSmeargleMission
 gSmeargleMission: @ 80E87F4
-        .string "#C6Smeargle#R~27s desperate plea!\0"
+        .string "{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}~27s desperate plea!\0"
         .align 2,0
 
 	.global gMedichamMission
 gMedichamMission: @ 80E8818
-        .string "#C6Medicham#R: Help me!\0"
+        .string "{COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}: Help me!\0"
         .align 2,0
 
 	.global gUnknown_80E8830
 gUnknown_80E8830: @ 80E8830
-        .string "Deliver one #C4%s#R.\0"
+        .string "Deliver one {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E8848
 gUnknown_80E8848: @ 80E8848
-        .string "One #C4%s#R wanted!\0"
+        .string "One {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted!\0"
         .align 2,0
 
 	.global gUnknown_80E885C
@@ -220,7 +220,7 @@ gUnknown_80E888C: @ 80E888C
 
 	.global gMankeyMissionDescription
 gMankeyMissionDescription: @ 80E88A0
-        .string "Please punish bad #C6Mankey#R~27s gang.\0"
+        .string "Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}~27s gang.\0"
         .align 2,0
 
 	.global gSmeargleMissionDescription
@@ -231,7 +231,7 @@ gSmeargleMissionDescription: @ 80E88C8
 
 	.global gMedichamMissionDescription
 gMedichamMissionDescription: @ 80E8920
-        .string "This is #C6Medicham#R. Rescue me~2c please!\n"
+        .string "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me~2c please!\n"
         .string "The reward is a secret"
         .byte 0x81, 0x60
         .string "♪ "
@@ -239,13 +239,13 @@ gMedichamMissionDescription: @ 80E8920
 
 	.global gUnknown_80E8968
 gUnknown_80E8968: @ 80E8968
-        .string "With the item #C4%s#R~2c I can\n"
+        .string "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}~2c I can\n"
         .string "evolve! I~27m yearning to evolve! Help!\0"
         .align 2,0
 
 	.global gUnknown_80E89B0
 gUnknown_80E89B0: @ 80E89B0
-        .string "The #C4%s#R! What I love to eat\n"
+        .string "The {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! What I love to eat\n"
         .string "and can~27t live without! Please get one!\0"
         .align 2,0
 
@@ -274,11 +274,11 @@ gUnknown_80E8AC8: @ 80E8AC8
 
 	.global gUnknown_80E8AD0
 gUnknown_80E8AD0: @ 80E8AD0
-        .string "%s#C4"
+        .string "%s{COLOR_1 GREEN}"
         .byte 0x81
         .string "i%s"
         .byte 0x81
-        .string "j#R\0"
+        .string "j{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80E8AE0
@@ -293,12 +293,12 @@ gUnknown_80E8AEC: @ 80E8AEC
 
 	.global gUnknown_80E8AFC
 gUnknown_80E8AFC: @ 80E8AFC
-        .string "Deliver #C4%s#R.\0"
+        .string "Deliver {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E8B10
 gUnknown_80E8B10: @ 80E8B10
-        .string "Find #C4%s#R.\0"
+        .string "Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E8B20
@@ -308,12 +308,12 @@ gUnknown_80E8B20: @ 80E8B20
 
 	.global gUnknown_80E8B2C
 gUnknown_80E8B2C: @ 80E8B2C
-        .string "Escort to #C6%s#R.\0"
+        .string "Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E8B40
 gUnknown_80E8B40: @ 80E8B40
-        .string "Find #C6%s#R.\0"
+        .string "Find {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gSpecialMissionText
@@ -466,7 +466,7 @@ gUnknown_80EAE5C: @ 80EAE5C
 
         .global WantToSee_Text
         WantToSee_Text:
-        .asciz "I want to see #C6%s#R."
+        .string "I want to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
         .global TakeMe_Text
@@ -498,10 +498,10 @@ gUnknown_80EAEB8: @ 80EAEB8
         .byte 0x2c, 0xaf, 0x0e, 0x08
         .byte 0x08, 0xaf, 0x0e, 0x08
 
-        .asciz "I~27m close friends with #C6%s#R!"
+        .string "I~27m close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
-        .asciz "I want to apologize to #C6%s#R."
+        .string "I want to apologize to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
         .asciz "I don~27t care how--we must meet!"
@@ -519,22 +519,22 @@ gUnknown_80EAEB8: @ 80EAEB8
         .asciz "I~27m sick with worry..."
         .align 2,0
 
-        .asciz "#C6%s#R may have fainted inside..."
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted inside...\0"
         .align 2,0
 
-        .asciz "#C6%s#R hasn~27t returned!"
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn~27t returned!\0"
         .align 2,0
 
-        .asciz "I want to help #C6%s#R!"
+        .string "I want to help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
-        .asciz "Hurry~2c #C6%s#R is in trouble..."
+        .string "Hurry~2c {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is in trouble...\0"
         .align 2,0
 
-        .asciz "#C6%s#R has been waiting forever..."
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been waiting forever...\0"
         .align 2,0
 
-        .asciz "#C6%s#R is waiting in the dungeon."
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting in the dungeon.\0"
         .align 2,0
 
         .asciz "I~27m too weak. It~27s not possible."
@@ -546,16 +546,16 @@ gUnknown_80EAEB8: @ 80EAEB8
         .asciz "I can~27t go by myself..."
         .align 2,0
 
-        .asciz "I~27m worried about #C6%s#R..."
+        .string "I~27m worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
-        .asciz "I want to meet with #C6%s#R."
+        .string "I want to meet with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
         .asciz "We promised to meet in the dungeon!"
         .align 2,0
 
-        .asciz "#C6%s#R is waiting for me!"
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting for me!\0"
         .align 2,0
 
 
@@ -583,7 +583,7 @@ gUnknown_80EB198: @ 80EB198
 
         .global PleaseTakeMeToSee
         PleaseTakeMeToSee:
-        .asciz "Please take me to see #C6%s#R!"
+        .string "Please take me to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80EB220
@@ -596,22 +596,22 @@ gUnknown_80EB220: @ 80EB220
         .byte 0x50, 0xb2, 0x0e, 0x08
         .byte 0x38, 0xb2, 0x0e, 0x08
 
-        .asciz "Without #C6%s#R~2c I..."
+        .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}~2c I...\0"
         .align 2,0
 
-        .asciz "I~27m so worried about #C6%s#R..."
+        .string "I~27m so worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
-        .asciz "I really want to meet #C6%s#R!"
+        .string "I really want to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
-        .asciz "Help me meet #C6%s#R!"
+        .string "Help me meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
-        .asciz "Please escort me to my #C6%s#R!"
+        .string "Please escort me to my {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
-        .asciz "Please! Take me to meet #C6%s#R!"
+        .string "Please! Take me to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80EB2F0
@@ -648,7 +648,7 @@ gUnknown_80EB2F0: @ 80EB2F0
         WeBelong_80EB3A4:
         .asciz "We belong together! Please escort me!"
         .align 2,0
-        
+
         .global WeInLove_80EB3CC
         WeInLove_80EB3CC:
         .asciz "We~27re in love! Please~2c take me there!"

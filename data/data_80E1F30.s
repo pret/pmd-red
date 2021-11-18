@@ -1,4 +1,4 @@
-        .section .rodata	
+        .section .rodata
 
         .global gUnknown_80E1F30
 gUnknown_80E1F30: @ 80E1F30
@@ -11,7 +11,7 @@ gUnknown_80E1F3C: @ 80E1F3C
 
 	.global gUnknown_80E1F40
 gUnknown_80E1F40: @ 80E1F40
-        .string "  Rescue #C6%s#R\0"
+        .string "  Rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80E1F54
@@ -21,22 +21,22 @@ gUnknown_80E1F54: @ 80E1F54
 
 	.global gUnknown_80E1F60
 gUnknown_80E1F60: @ 80E1F60
-        .string "  Bring #C4%s#R\0"
+        .string "  Bring {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80E1F70
 gUnknown_80E1F70: @ 80E1F70
-        .string "  Find #C4%s#R\0"
+        .string "  Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80E1F80
 gUnknown_80E1F80: @ 80E1F80
-        .string "  Escort to #C6%s#R\0"
+        .string "  Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80E1F94
 gUnknown_80E1F94: @ 80E1F94
-        .string "#CW???#R\0"
+        .string "#CW???{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
 

@@ -15,8 +15,7 @@ ItemNameGMachine6:
 
 .global ItemNameBeatupOrb
 ItemNameBeatupOrb:
-.byte 0x87
-.string "OBeatup Orb\0"
+.string "{ORB}Beatup Orb\0"
 .align 2,0
 
 .global ItemNameMimeJrFig
@@ -41,650 +40,542 @@ ItemNameLinkBox:
 
 .global ItemNameDive
 ItemNameDive:
-.byte 0x87
-.string "NDive\0"
+.string "{TM}Dive\0"
 .align 2,0
 
 .global ItemNameWaterfall
 ItemNameWaterfall:
-.byte 0x87
-.string "NWaterfall\0"
+.string "{TM}Waterfall\0"
 .align 2,0
 
 .global ItemNameRockSmash
 ItemNameRockSmash:
-.byte 0x87
-.string "NRock Smash\0"
+.string "{TM}Rock Smash\0"
 .align 2,0
 
 .global ItemNameFlash
 ItemNameFlash:
-.byte 0x87
-.string "NFlash\0"
+.string "{TM}Flash\0"
 .align 2,0
 
 .global ItemNameStrength
 ItemNameStrength:
-.byte 0x87
-.string "NStrength\0"
+.string "{TM}Strength\0"
 .align 2,0
 
 .global ItemNameSurf
 ItemNameSurf:
-.byte 0x87
-.string "NSurf\0"
+.string "{TM}Surf\0"
 .align 2,0
 
 .global ItemNameFly
 ItemNameFly:
-.byte 0x87
-.string "NFly\0"
+.string "{TM}Fly\0"
 .align 2,0
 
 .global ItemNameCut
 ItemNameCut:
-.byte 0x87
-.string "NCut\0"
+.string "{TM}Cut\0"
 .align 2,0
 
 .global ItemNamePierceOrb
 ItemNamePierceOrb:
-.byte 0x87
-.string "OPierce Orb\0"
+.string "{ORB}Pierce Orb\0"
 .align 2,0
 
 .global ItemNameLongtossOrb
 ItemNameLongtossOrb:
-.byte 0x87
-.string "OLongtoss Orb\0"
+.string "{ORB}Longtoss Orb\0"
 .align 2,0
 
 .global ItemNameStairsOrb
 ItemNameStairsOrb:
-.byte 0x87
-.string "OStairs Orb\0"
+.string "{ORB}Stairs Orb\0"
 .align 2,0
 
 .global ItemNameTossOrb
 ItemNameTossOrb:
-.byte 0x87
-.string "OToss Orb\0"
+.string "{ORB}Toss Orb\0"
 .align 2,0
 
 .global ItemNameMobileOrb
 ItemNameMobileOrb:
-.byte 0x87
-.string "OMobile Orb\0"
+.string "{ORB}Mobile Orb\0"
 .align 2,0
 
 .global ItemNameHurlOrb
 ItemNameHurlOrb:
-.byte 0x87
-.string "OHurl Orb\0"
+.string "{ORB}Hurl Orb\0"
 .align 2,0
 
 .global ItemNameItemizerOrb
 ItemNameItemizerOrb:
-.byte 0x87
-.string "OItemizer Orb\0"
+.string "{ORB}Itemizer Orb\0"
 .align 2,0
 
 .global ItemNamePossessOrb
 ItemNamePossessOrb:
-.byte 0x87
-.string "OPossess Orb\0"
+.string "{ORB}Possess Orb\0"
 .align 2,0
 
 .global ItemNameTrapperOrb
 ItemNameTrapperOrb:
-.byte 0x87
-.string "OTrapper Orb\0"
+.string "{ORB}Trapper Orb\0"
 .align 2,0
 
 .global ItemNameFillInOrb
 ItemNameFillInOrb:
-.byte 0x87
-.string "OFill-In Orb\0"
+.string "{ORB}Fill-In Orb\0"
 .align 2,0
 
 .global ItemNameOneRoomOrb
 ItemNameOneRoomOrb:
-.byte 0x87
-.string "OOne-Room Orb\0"
+.string "{ORB}One-Room Orb\0"
 .align 2,0
 
 .global ItemNameSizebustOrb
 ItemNameSizebustOrb:
-.byte 0x87
-.string "OSizebust Orb\0"
+.string "{ORB}Sizebust Orb\0"
 .align 2,0
 
 .global ItemNameShockerOrb
 ItemNameShockerOrb:
-.byte 0x87
-.string "OShocker Orb\0"
+.string "{ORB}Shocker Orb\0"
 .align 2,0
 
 .global ItemNameReviverOrb
 ItemNameReviverOrb:
-.byte 0x87
-.string "OReviver Orb\0"
+.string "{ORB}Reviver Orb\0"
 .align 2,0
 
 .global ItemNameVacuumCut
 ItemNameVacuumCut:
-.byte 0x87
-.string "NVacuum-Cut\0"
+.string "{TM}Vacuum-Cut\0"
 .align 2,0
 
 .global ItemNameIdentifyOrb
 ItemNameIdentifyOrb:
-.byte 0x87
-.string "OIdentify Orb\0"
+.string "{ORB}Identify Orb\0"
 .align 2,0
 
 .global ItemNameOneShotOrb
 ItemNameOneShotOrb:
-.byte 0x87
-.string "OOne-Shot Orb\0"
+.string "{ORB}One-Shot Orb\0"
 .align 2,0
 
 .global ItemNameInvisifyOrb
 ItemNameInvisifyOrb:
-.byte 0x87
-.string "OInvisify Orb\0"
+.string "{ORB}Invisify Orb\0"
 .align 2,0
 
 .global ItemNameRollcallOrb
 ItemNameRollcallOrb:
-.byte 0x87
-.string "ORollcall Orb\0"
+.string "{ORB}Rollcall Orb\0"
 .align 2,0
 
 .global ItemNameTrapbustOrb
 ItemNameTrapbustOrb:
-.byte 0x87
-.string "OTrapbust Orb\0"
+.string "{ORB}Trapbust Orb\0"
 .align 2,0
 
 .global ItemNameDroughtOrb
 ItemNameDroughtOrb:
-.byte 0x87
-.string "ODrought Orb\0"
+.string "{ORB}Drought Orb\0"
 .align 2,0
 
 .global ItemNameRadarOrb
 ItemNameRadarOrb:
-.byte 0x87
-.string "ORadar Orb\0"
+.string "{ORB}Radar Orb\0"
 .align 2,0
 
 .global ItemNameScannerOrb
 ItemNameScannerOrb:
-.byte 0x87
-.string "OScanner Orb\0"
+.string "{ORB}Scanner Orb\0"
 .align 2,0
 
 .global ItemNameEscapeOrb
 ItemNameEscapeOrb:
-.byte 0x87
-.string "OEscape Orb\0"
+.string "{ORB}Escape Orb\0"
 .align 2,0
 
 .global ItemNameSilenceOrb
 ItemNameSilenceOrb:
-.byte 0x87
-.string "OSilence Orb\0"
+.string "{ORB}Silence Orb\0"
 .align 2,0
 
 .global ItemNameTwoEdgeOrb
 ItemNameTwoEdgeOrb:
-.byte 0x87
-.string "OTwo-Edge Orb\0"
+.string "{ORB}Two-Edge Orb\0"
 .align 2,0
 
 .global ItemNameTotterOrb
 ItemNameTotterOrb:
-.byte 0x87
-.string "OTotter Orb\0"
+.string "{ORB}Totter Orb\0"
 .align 2,0
 
 .global ItemNameSlumberOrb
 ItemNameSlumberOrb:
-.byte 0x87
-.string "OSlumber Orb\0"
+.string "{ORB}Slumber Orb\0"
 .align 2,0
 
 .global ItemNameDecoyOrb
 ItemNameDecoyOrb:
-.byte 0x87
-.string "ODecoy Orb\0"
+.string "{ORB}Decoy Orb\0"
 .align 2,0
 
 .global ItemNameObserverOrb
 ItemNameObserverOrb:
-.byte 0x87
-.string "OObserver Orb\0"
+.string "{ORB}Observer Orb\0"
 .align 2,0
 
 .global ItemNameCleanseOrb
 ItemNameCleanseOrb:
-.byte 0x87
-.string "OCleanse Orb\0"
+.string "{ORB}Cleanse Orb\0"
 .align 2,0
 
 .global ItemNameTrawlOrb
 ItemNameTrawlOrb:
-.byte 0x87
-.string "OTrawl Orb\0"
+.string "{ORB}Trawl Orb\0"
 .align 2,0
 
 .global ItemNamePounceOrb
 ItemNamePounceOrb:
-.byte 0x87
-.string "OPounce Orb\0"
+.string "{ORB}Pounce Orb\0"
 .align 2,0
 
 .global ItemNameStayawayOrb
 ItemNameStayawayOrb:
-.byte 0x87
-.string "OStayaway Orb\0"
+.string "{ORB}Stayaway Orb\0"
 .align 2,0
 
 .global ItemNamePetrifyOrb
 ItemNamePetrifyOrb:
-.byte 0x87
-.string "OPetrify Orb\0"
+.string "{ORB}Petrify Orb\0"
 .align 2,0
 
 .global ItemNameLuminousOrb
 ItemNameLuminousOrb:
-.byte 0x87
-.string "OLuminous Orb\0"
+.string "{ORB}Luminous Orb\0"
 .align 2,0
 
 .global ItemNameQuickOrb
 ItemNameQuickOrb:
-.byte 0x87
-.string "OQuick Orb\0"
+.string "{ORB}Quick Orb\0"
 .align 2,0
 
 .global ItemNameSlowOrb
 ItemNameSlowOrb:
-.byte 0x87
-.string "OSlow Orb\0"
+.string "{ORB}Slow Orb\0"
 .align 2,0
 
 .global ItemNameTransferOrb
 ItemNameTransferOrb:
-.byte 0x87
-.string "OTransfer Orb\0"
+.string "{ORB}Transfer Orb\0"
 .align 2,0
 
 .global ItemNameWarpOrb
 ItemNameWarpOrb:
-.byte 0x87
-.string "OWarp Orb\0"
+.string "{ORB}Warp Orb\0"
 .align 2,0
 
 .global ItemNameBlowbackOrb
 ItemNameBlowbackOrb:
-.byte 0x87
-.string "OBlowback Orb\0"
+.string "{ORB}Blowback Orb\0"
 .align 2,0
 
 .global ItemNameSwitcherOrb
 ItemNameSwitcherOrb:
-.byte 0x87
-.string "OSwitcher Orb\0"
+.string "{ORB}Switcher Orb\0"
 .align 2,0
 
 .global ItemNameLobOrb
 ItemNameLobOrb:
-.byte 0x87
-.string "OLob Orb\0"
+.string "{ORB}Lob Orb\0"
 .align 2,0
 
 .global ItemNameReboundOrb
 ItemNameReboundOrb:
-.byte 0x87
-.string "ORebound Orb\0"
+.string "{ORB}Rebound Orb\0"
 .align 2,0
 
 .global ItemNameMugOrb
 ItemNameMugOrb:
-.byte 0x87
-.string "OMug Orb\0"
+.string "{ORB}Mug Orb\0"
 .align 2,0
 
 .global ItemNameSeeTrapOrb
 ItemNameSeeTrapOrb:
-.byte 0x87
-.string "OSee-Trap Orb\0"
+.string "{ORB}See-Trap Orb\0"
 .align 2,0
 
 .global ItemNameSpinSlash
 ItemNameSpinSlash:
-.byte 0x87
-.string "NSpin Slash\0"
+.string "{TM}Spin Slash\0"
 .align 2,0
 
 .global ItemNameExcavate
 ItemNameExcavate:
-.byte 0x87
-.string "NExcavate\0"
+.string "{TM}Excavate\0"
 .align 2,0
 
 .global ItemNameWideSlash
 ItemNameWideSlash:
-.byte 0x87
-.string "NWide Slash\0"
+.string "{TM}Wide Slash\0"
 .align 2,0
 
 .global ItemNameOverheat
 ItemNameOverheat:
-.byte 0x87
-.string "NOverheat\0"
+.string "{TM}Overheat\0"
 .align 2,0
 
 .global ItemNameSnatch
 ItemNameSnatch:
-.byte 0x87
-.string "OSnatch Orb\0"
+.string "{ORB}Snatch Orb\0"
 .align 2,0
 
 .global ItemNameSkillSwap
 ItemNameSkillSwap:
-.byte 0x87
-.string "NSkill Swap\0"
+.string "{TM}Skill Swap\0"
 .align 2,0
 
 .global ItemNameSteelWIng
 ItemNameSteelWIng:
-.byte 0x87
-.string "NSteel Wing\0"
+.string "{TM}Steel Wing\0"
 .align 2,0
 
 .global ItemNameThief
 ItemNameThief:
-.byte 0x87
-.string "NThief\0"
+.string "{TM}Thief\0"
 .align 2,0
 
 .global ItemNameAttract
 ItemNameAttract:
-.byte 0x87
-.string "NAttract\0"
+.string "{TM}Attract\0"
 .align 2,0
 
 .global ItemNameRest
 ItemNameRest:
-.byte 0x87
-.string "NRest\0"
+.string "{TM}Rest\0"
 .align 2,0
 
 .global ItemNameSecretPower
 ItemNameSecretPower:
-.byte 0x87
-.string "NSecret Power\0"
+.string "{TM}Secret Power\0"
 .align 2,0
 
 .global ItemNameFacade
 ItemNameFacade:
-.byte 0x87
-.string "NFacade\0"
+.string "{TM}Facade\0"
 .align 2,0
 
 .global ItemNameTorment
 ItemNameTorment:
-.byte 0x87
-.string "NTorment\0"
+.string "{TM}Torment\0"
 .align 2,0
 
 .global ItemNameAerialAce
 ItemNameAerialAce:
-.byte 0x87
-.string "NAerial Ace\0"
+.string "{TM}Aerial Ace\0"
 .align 2,0
 
 .global ItemNameRockTomb
 ItemNameRockTomb:
-.byte 0x87
-.string "ORocky Orb\0"
+.string "{ORB}Rocky Orb\0"
 .align 2,0
 
 .global ItemNameFireBlast
 ItemNameFireBlast:
-.byte 0x87
-.string "NFire Blast\0"
+.string "{TM}Fire Blast\0"
 .align 2,0
 
 .global ItemNameSandstorm
 ItemNameSandstorm:
-.byte 0x87
-.string "OSandy Orb\0"
+.string "{ORB}Sandy Orb\0"
 .align 2,0
 
 .global ItemNameSludgeBomb
 ItemNameSludgeBomb:
-.byte 0x87
-.string "NSludge Bomb\0"
+.string "{TM}Sludge Bomb\0"
 .align 2,0
 
 .global ItemNameFlamethrower
 ItemNameFlamethrower:
-.byte 0x87
-.string "NFlamethrower\0"
+.string "{TM}Flamethrower\0"
 .align 2,0
 
 .global ItemNameShockWave
 ItemNameShockWave:
-.byte 0x87
-.string "NShock Wave\0"
+.string "{TM}Shock Wave\0"
 .align 2,0
 
 .global ItemNameReflect
 ItemNameReflect:
-.byte 0x87
-.string "NReflect\0"
+.string "{TM}Reflect\0"
 .align 2,0
 
 .global ItemNameDoubleTeam
 ItemNameDoubleTeam:
-.byte 0x87
-.string "OEvasion Orb\0"
+.string "{ORB}Evasion Orb\0"
 .align 2,0
 
 .global ItemNameBrickBreak
 ItemNameBrickBreak:
-.byte 0x87
-.string "NBrick Break\0"
+.string "{TM}Brick Break\0"
 .align 2,0
 
 .global ItemNameShadowBall
 ItemNameShadowBall:
-.byte 0x87
-.string "NShadow Ball\0"
+.string "{TM}Shadow Ball\0"
 .align 2,0
 
 .global ItemNamePsychic
 ItemNamePsychic:
-.byte 0x87
-.string "NPsychic\0"
+.string "{TM}Psychic\0"
 .align 2,0
 
 .global ItemNameDig
 ItemNameDig:
-.byte 0x87
-.string "NDig\0"
+.string "{TM}Dig\0"
 .align 2,0
 
 .global ItemNameReturn
 ItemNameReturn:
-.byte 0x87
-.string "NReturn\0"
+.string "{TM}Return\0"
 .align 2,0
 
 .global ItemNameEarthquake
 ItemNameEarthquake:
-.byte 0x87
-.string "NEarthquake\0"
+.string "{TM}Earthquake\0"
 .align 2,0
 
 .global ItemNameThunder
 ItemNameThunder:
-.byte 0x87
-.string "NThunder\0"
+.string "{TM}Thunder\0"
 .align 2,0
 
 .global ItemNameThunderbolt
 ItemNameThunderbolt:
-.byte 0x87
-.string "NThunderbolt\0"
+.string "{TM}Thunderbolt\0"
 .align 2,0
 
 .global ItemNameIronTail
 ItemNameIronTail:
-.byte 0x87
-.string "NIron Tail\0"
+.string "{TM}Iron Tail\0"
 .align 2,0
 
 .global ItemNameSolarBeam
 ItemNameSolarBeam:
-.byte 0x87
-.string "NSolarbeam\0"
+.string "{TM}Solarbeam\0"
 .align 2,0
 
 .global ItemNameFrustration
 ItemNameFrustration:
-.byte 0x87
-.string "NFrustration\0"
+.string "{TM}Frustration\0"
 .align 2,0
 
 .global ItemNameSafeguard
 ItemNameSafeguard:
-.byte 0x87
-.string "NSafeguard\0"
+.string "{TM}Safeguard\0"
 .align 2,0
 
 .global ItemNameGigaDrain
 ItemNameGigaDrain:
-.byte 0x87
-.string "NGiga Drain\0"
+.string "{TM}Giga Drain\0"
 .align 2,0
 
 .global ItemNameRainDance
 ItemNameRainDance:
-.byte 0x87
-.string "ORainy Orb\0"
+.string "{ORB}Rainy Orb\0"
 .align 2,0
 
 .global ItemNameProtect
 ItemNameProtect:
-.byte 0x87
-.string "NProtect\0"
+.string "{TM}Protect\0"
 .align 2,0
 
 .global ItemNameLightScreen
 ItemNameLightScreen:
-.byte 0x87
-.string "NLight Screen\0"
+.string "{TM}Light Screen\0"
 .align 2,0
 
 .global ItemNameHyperBeam
 ItemNameHyperBeam:
-.byte 0x87
-.string "NHyper Beam\0"
+.string "{TM}Hyper Beam\0"
 .align 2,0
 
 .global ItemNameBlizzard
 ItemNameBlizzard:
-.byte 0x87
-.string "NBlizzard\0"
+.string "{TM}Blizzard\0"
 .align 2,0
 
 .global ItemNameIceBeam
 ItemNameIceBeam:
-.byte 0x87
-.string "NIce Beam\0"
+.string "{TM}Ice Beam\0"
 .align 2,0
 
 .global ItemNameTaunt
 ItemNameTaunt:
-.byte 0x87
-.string "NTaunt\0"
+.string "{TM}Taunt\0"
 .align 2,0
 
 .global ItemNameSunnyDay
 ItemNameSunnyDay:
-.byte 0x87
-.string "OSunny Orb\0"
+.string "{ORB}Sunny Orb\0"
 .align 2,0
 
 .global ItemNameHiddenPower
 ItemNameHiddenPower:
-.byte 0x87
-.string "NHidden Power\0"
+.string "{TM}Hidden Power\0"
 .align 2,0
 
 .global ItemNameBulletSeed
 ItemNameBulletSeed:
-.byte 0x87
-.string "NBullet Seed\0"
+.string "{TM}Bullet Seed\0"
 .align 2,0
 
 .global ItemNameBulkUp
 ItemNameBulkUp:
-.byte 0x87
-.string "NBulk Up\0"
+.string "{TM}Bulk Up\0"
 .align 2,0
 
 .global ItemNameHail
 ItemNameHail:
-.byte 0x87
-.string "OHail Orb\0"
+.string "{ORB}Hail Orb\0"
 .align 2,0
 
 .global ItemNameToxic
 ItemNameToxic:
-.byte 0x87
-.string "NToxic\0"
+.string "{TM}Toxic\0"
 .align 2,0
 
 .global ItemNameRoar
 ItemNameRoar:
-.byte 0x87
-.string "NRoar\0"
+.string "{TM}Roar\0"
 .align 2,0
 
 .global ItemNameCalmMind
 ItemNameCalmMind:
-.byte 0x87
-.string "NCalm Mind\0"
+.string "{TM}Calm Mind\0"
 .align 2,0
 
 .global ItemNameWaterPulse
 ItemNameWaterPulse:
-.byte 0x87
-.string "NWater Pulse\0"
+.string "{TM}Water Pulse\0"
 .align 2,0
 
 .global ItemNameDragonClaw
 ItemNameDragonClaw:
-.byte 0x87
-.string "NDragon Claw\0"
+.string "{TM}Dragon Claw\0"
 .align 2,0
 
 .global ItemNameFocusPunch
 ItemNameFocusPunch:
-.byte 0x87
-.string "NFocus Punch\0"
+.string "{TM}Focus Punch\0"
 .align 2,0
 
 .global ItemNameUsedTM
 ItemNameUsedTM:
-.byte 0x87
-.string "NUsed TM\0"
+.string "{TM}Used TM\0"
 .align 2,0
 
 .global ItemNameKey
