@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/text_formatting.h"
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
@@ -166,7 +165,7 @@ ALIGNED(4) const char gUnknown_80DF9F0[] = "????";
 ALIGNED(4) const char gUnknown_80DF9F8[] = _(
 	" Oh~2c hello!\n"
 	"Your rescue mission went well~2c didn~27t it?\n"
-	"I wouldn~27t expect any less~2c "COLOR_1 LIGHT_BLUE_2"%s"END_COLOR_TEXT_1"!#P"
+	"I wouldn~27t expect any less~2c {COLOR_1 LIGHT_BLUE_2}%s{END_COLOR_TEXT_1}!#P"
 	" Well~2c well!\n"
 	"Here is your reward from the Pokémon\n"
 	"Rescue Organization!");
@@ -178,12 +177,12 @@ ALIGNED(4) const char gUnknown_80DFAA8[] =
 	" And now~2c I must save\n"
 	"your adventure.";
 
-ALIGNED(4) const char gUnknown_80DFB14[] =
+ALIGNED(4) const char gUnknown_80DFB14[] = _(
 	" Oh~2c yes~2c that~27s right.\n"
-	"Please don~27t forget to send an "COLOR_1 LIGHT_BLUE_2"A-OK Mail"END_COLOR_TEXT_1"\n"
+	"Please don~27t forget to send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}\n"
 	"to the friend you just rescued.#P"
 	" Please give me a shout if\n"
-	"you would like to send "COLOR_1 LIGHT_BLUE_2"A-OK Mail"END_COLOR_TEXT_1".";
+	"you would like to send {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
 
