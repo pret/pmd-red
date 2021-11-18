@@ -422,7 +422,7 @@ gPokemonMail: @ 80EBA18
     .global gMail_GasText
     gMail_GasText:
     .string "Reports of a noxious gas leak caused\n"
-    .string "widespread chaos in the #CDSinister Woods{END_COLOR_TEXT_1}.\n"
+    .string "widespread chaos in the {COLOR_1 YELLOW_3}Sinister Woods{END_COLOR_TEXT_1}.\n"
     .string "Specialists speculate that the recent\n"
     .string "natural disasters are to blame. However~2c\n"
     .string "some also blame {COLOR_1 CYAN}Team Koffing{END_COLOR_TEXT_1}~27s training\n"

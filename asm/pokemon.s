@@ -69,7 +69,7 @@ _0808CEA4:
 	strb r4, [r0, 0x10]
 	add r0, sp, 0x20
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	mov r0, sp
 	strh r7, [r0, 0x8]
 	add r0, sp, 0x28
@@ -241,7 +241,7 @@ sub_808CFD0:
 	adds r0, r7, 0
 	adds r0, 0x20
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	ldr r4, [sp, 0x38]
 	cmp r4, 0
 	beq _0808D08C
@@ -350,7 +350,7 @@ sub_808D0D8:
 	strh r4, [r7, 0x14]
 	subs r0, 0x4
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	adds r0, r7, 0
 	adds r0, 0x2C
 	movs r2, 0x8
@@ -402,7 +402,7 @@ sub_808D144:
 	adds r0, r5, 0
 	adds r0, 0x20
 	movs r1, 0
-	bl sub_808EC94
+	bl SetDefaultIQSkills
 	movs r6, 0
 	adds r4, r5, 0
 	adds r4, 0x2C

@@ -44,7 +44,7 @@ struct PokemonStruct
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ struct Offense offense;
     u32 unk1C;
-    u32 unk20;
+    u32 IQSkills;
     u8 unk24;
     u8 fill25[3];
     struct HeldItem heldItem;
@@ -91,7 +91,7 @@ struct PokemonStruct2
     /* 40 */ struct ItemSlot itemSlot;  // heldItem
     u32 unk44;  // some struct
     u32 unk48;  // some struct (same type as 44)
-    u32 unk4C;  // unk20
+    u32 IQSkills;  // unk20
     u8 unk50;   // unk24
     u8 fill51[3];
     struct unkStruct_808E6F4 unk54;

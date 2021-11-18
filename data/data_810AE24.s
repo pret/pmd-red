@@ -556,7 +556,7 @@ gUnknown_810DE0C: @ 810DE0C
 
         .global UnkText_810DE10
         UnkText_810DE10:
-        .string "#>92.#c2$v03#r/\0"
+        .string "#>92.{COLOR_2 RED}$v03{END_COLOR_TEXT_2}/\0"
         .align 2,0
 
 	.global gUnknown_810DE20
@@ -582,7 +582,7 @@ gUnknown_810DE38: @ 810DE38
 
         .global UnkText_810DE3C
         UnkText_810DE3C:
-        .string "#>118.#c2$v03#r\0"
+        .string "#>118.{COLOR_2 RED}$v03{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_810DE4C
@@ -630,7 +630,7 @@ gUnknown_810DE98: @ 810DE98
 
         .global Species_810DE9C
         Species_810DE9C:
-        .string "Species:#>54.#C6$m0#R \0"
+        .string "Species:#>54.{COLOR_1 YELLOW}$m0{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_810DEB4
@@ -646,14 +646,14 @@ gUnknown_810DEB4: @ 810DEB4
 gUnknown_810DEC8: @ 810DEC8
         .4byte FriendArea_810DEB8
 
-        .string "#>22.#C4$i0#R\0"
+        .string "#>22.{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_810DEDC
 gUnknown_810DEDC: @ 810DEDC
         .4byte 0x810DECC
 
-        .string "#C5$m0 Pokémon#R \0"
+        .string "{COLOR_1 CYAN}$m0 Pokémon{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_810DEF4
@@ -693,7 +693,7 @@ gUnknown_810DFB4: @ 810DFB4
 
         .global ItemPlaceholder_810DFB8
         ItemPlaceholder_810DFB8:
-        .string "#>22.#C5$i0#R\0"
+        .string "#>22.{COLOR_1 CYAN}$i0{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_810DFC8
@@ -926,7 +926,7 @@ gUnknown_8113934: @ 8113934
 
         .global Attack_8113938
         Attack_8113938:
-        .string "Attack#>42.#c2$d0#r  \0"
+        .string "Attack#>42.{COLOR_2 RED}$d0{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113950
@@ -935,7 +935,7 @@ gUnknown_8113950: @ 8113950
 
         .global Defense_8113954
         Defense_8113954:
-        .string "#>80.Defense#>128.#c2$d1#r  \0"
+        .string "#>80.Defense#>128.{COLOR_2 RED}$d1{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113974
@@ -944,7 +944,7 @@ gUnknown_8113974: @ 8113974
 
         .global SpAtk_8113978
         SpAtk_8113978:
-        .string "Sp. Atk.#>42.#c2$d0#r  \0"
+        .string "Sp. Atk.#>42.{COLOR_2 RED}$d0{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113990
@@ -953,7 +953,7 @@ gUnknown_8113990: @ 8113990
 
         .global SpDef_8113994
         SpDef_8113994:
-        .string "#>80.Sp. Def.#>128.#c2$d1#r  \0"
+        .string "#>80.Sp. Def.#>128.{COLOR_2 RED}$d1{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_81139B4
@@ -1476,12 +1476,12 @@ gUnknown_8116148: @ 8116148
 
 	.global gInvalidityText
 gInvalidityText: @ 811615C
-        .string "#CWinvalidity#R\0"
+        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUndefineText
 gUndefineText: @ 811616C
-        .string "#CWundefine#R\0"
+        .string "#CWundefine{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_811617C
@@ -1492,11 +1492,11 @@ gUnknown_811617C: @ 811617C
 gUnknown_8116180: @ 8116180
         .string "#CN"
         .byte 0x87, 0x45
-        .string "#R\0"
+        .string "{END_COLOR_TEXT_1}\0"
 
 	.global gUnknown_8116188
 gUnknown_8116188: @ 8116188
-        .string "#CN%s#R\0"
+        .string "#CN%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_8116190
@@ -1675,7 +1675,7 @@ gUnknown_81163BC: @ 81163BC
 
 	.global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4
-        .string "#CG%d#R %s\0"
+        .string "{COLOR_1 LIGHT_BLUE_2}%d{END_COLOR_TEXT_1} %s\0"
         .align 2,0
 
 	.global gUnknown_81163F0
@@ -1987,13 +1987,13 @@ gUnknown_8117000: @ 8117000
         .4byte 0x81170ac
         .4byte 0x811709c
 
-        .string "#CWinvalidity#R\0"
+        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
-        .string "#CCscene#R\0"
+        .string "{COLOR_1 YELLOW_2}scene{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "New Game\0"
         .align 2,0
-        .string "#CCdirection#R\0"
+        .string "{COLOR_1 YELLOW_2}direction{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "Western Cave\0"
         .align 2,0
@@ -2551,7 +2551,7 @@ gUnknown_8118250: @ 8118250
 
 	.global gGroundLives_InvalidityText
 gGroundLives_InvalidityText: @ 811825C
-        .string "#CWinvalidity#R\0"
+        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global GroundLives_ActionText

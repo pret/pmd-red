@@ -94,38 +94,38 @@ ALIGNED(4) const char gUnknown_80E7A48[] = "There is no response from your frien
 
 ALIGNED(4) const char gUnknown_80E7AC4[] = "What would you like to do?";
 
-ALIGNED(4) const char gUnknown_80E7AE0[] = "How would you like to send your\n"
-                                           "#CGWonder Mail#R?";
+ALIGNED(4) const char gUnknown_80E7AE0[] = _("How would you like to send your\n"
+                                           "{COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}?");
 
-ALIGNED(4) const char gUnknown_80E7B14[] = "How would you like to receive the\n"
-                                           "#CGWonder Mail#R?";
+ALIGNED(4) const char gUnknown_80E7B14[] = _("How would you like to receive the\n"
+                                           "{COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const char gUnknown_80E7B48[] = "Your adventure will be saved.";
 
-ALIGNED(4) const char gUnknown_80E7B68[] = "Your #CGWonder Mail#R was sent.";
+ALIGNED(4) const char gUnknown_80E7B68[] = _("Your {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} was sent.");
 
-ALIGNED(4) const char gUnknown_80E7B88[] = "The received #CGWonder Mail#R was\n"
-                                           "added to the #CGJob List#R.";
+ALIGNED(4) const char gUnknown_80E7B88[] = _("The received {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} was\n"
+                                             "added to the {COLOR_1 LIGHT_BLUE_2}Job List{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char gUnknown_80E7BC8[] = "The #CGWonder Mail#R was refused.";
+ALIGNED(4) const char gUnknown_80E7BC8[] = _("The {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} was refused.");
 
-ALIGNED(4) const char gUnknown_80E7BEC[] = _("Connect a #CGGame Link cable#R.\n"
+ALIGNED(4) const char gUnknown_80E7BEC[] = _("Connect a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}.\n"
                                              "When you and your friend are ready~2c\n"
                                              "you may communicate. ");
 
 ALIGNED(4) const char gUnknown_80E7C48[] = _("#+In communication...\n"
-                                           "#+Please wait with the power on.\n"
-                                           "#+To cancel~2c press {B_BUTTON}.");
+                                             "#+Please wait with the power on.\n"
+                                             "#+To cancel~2c press {B_BUTTON}.");
 
-ALIGNED(4) const char gUnknown_80E7C98[] = "Please enter the\n"
-                                           "#CGWonder Mail password#R.";
+ALIGNED(4) const char gUnknown_80E7C98[] = _("Please enter the\n"
+                                             "{COLOR_1 LIGHT_BLUE_2}Wonder Mail password{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gUnknown_80E7CC4[] = "This password is incorrect.\n"
                                            "Would you like to enter it again?";
 
 ALIGNED(4) const char wonder_mail_main_fill0[] = "pksdir0";
 
-const struct MenuItem WonderMailMainUnused[3] = 
+const struct MenuItem WonderMailMainUnused[3] =
 {
     {Yes_80E7D2C, 1},
     {Cancel_80E7D24, 0},
@@ -302,7 +302,7 @@ u8 UpdateWonderMailMenu(void)
     case COMMUNICATION_ERROR:
         ReturnToReceiveWonderMailMainScreen();
         break;
-    case PROMPT_PASSWORD_ENTRY: // "Please enter the Wonder Mail Password" Screen 
+    case PROMPT_PASSWORD_ENTRY: // "Please enter the Wonder Mail Password" Screen
         AdvanceToPasswordEntryScreen();
         break;
     case PASSWORD_ENTRY_SCREEN: // Password Entry
@@ -408,7 +408,7 @@ void sub_8039B58(void)
   if (sub_80144A4(&temp) == 0) {
     if (gUnknown_203B3E8->wonderMailStatus == 0) {
       switch(gUnknown_203B3E8->unk24C){
-        case 9: 
+        case 9:
             SetWonderMailMainMenuState(WONDER_MAIL_SENT);
             break;
         case 10:
@@ -476,7 +476,7 @@ void PrintWonderMailMainMenuError(u32 status)
 void HandlePasswordEntryScreen(void)
 {
   int iVar2;
-  
+
   iVar2 = sub_80154F0();
   MemoryFill8(gUnknown_203B3E8->UNK38.unk38_u8, 0, sizeof(gUnknown_203B3E8->UNK38));
   switch(iVar2){
@@ -484,7 +484,7 @@ void HandlePasswordEntryScreen(void)
       sub_80155F0();
       ResetUnusedInputStruct();
       sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
-      if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) ) 
+      if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) )
       {
         // Invalid password
         SetWonderMailMainMenuState(PASSWORD_INVALID);
@@ -574,7 +574,7 @@ void HandleWonderMailAddedScreen(void)
 void HandleInvalidPasswordMenu(void)
 {
   s32 menuAction;
-  
+
   // Prompt to re-enter password
   if(sub_80144A4(&menuAction) == 0)
   {
@@ -598,7 +598,7 @@ void WonderMailMainMenuCallback(void)
 {
   int iVar2;
   struct unkStruct_803B344 *temp;
-  
+
   switch(gUnknown_203B3E8->state) {
     case SELECT_WONDER_MAIL_MODE_MAIN_SCREEN:
         sub_8014248(gUnknown_80E7AC4,0,1,gSelectWonderMailModeMainMenuItems,0,4,0,0,0x101);
@@ -625,7 +625,7 @@ void WonderMailMainMenuCallback(void)
         {
             gUnknown_203B3E8->unk488 = NULL;
             gUnknown_203B3E8->unk48C = NULL;
-        } 
+        }
         sub_802D098(&gUnknown_203B3E8->unk474);
         break;
     case PREPARE_SAVE:

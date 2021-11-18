@@ -2418,7 +2418,7 @@ _08043E6E:
 	cmp r0, 0
 	beq _08043EA0
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x2
 	bne _08043EA0
 	adds r0, r4, 0
@@ -4197,14 +4197,14 @@ ResetAction:
 	bx lr
 	thumb_func_end ResetAction
 
-	thumb_func_start sub_8044C94
-sub_8044C94:
+	thumb_func_start SetAction
+SetAction:
 	movs r2, 0
 	strh r1, [r0]
 	strb r2, [r0, 0x4]
 	strb r2, [r0, 0xC]
 	bx lr
-	thumb_func_end sub_8044C94
+	thumb_func_end SetAction
 
 	thumb_func_start SetWalkAction
 SetWalkAction:
@@ -4258,9 +4258,9 @@ _08044CEC:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldr r0, [r0, 0x14]
-	bl sub_8045108
+	bl GetItemData
 	b _08044D34
 _08044D06:
 	cmp r0, 0x81

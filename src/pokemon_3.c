@@ -1,6 +1,8 @@
 #include "global.h"
 #include "pokemon.h"
 #include "random.h"
+#include "constants/iq_skill.h"
+#include "constants/tactic.h"
 
 extern u32 gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
@@ -8,9 +10,9 @@ extern u32 gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern u8 gUnknown_810A36B[];
 
-extern s16 gUnknown_810A378[];
-extern s32 gUnknown_810A390[];
-extern u32 gUnknown_81076E4[];
+extern s16 gReqTacticLvls[];
+extern s32 gReqIQSkillPts[];
+extern u32 gIQSkillGroups[];
 
 struct unkStruct_808E9EC
 {
@@ -43,8 +45,8 @@ extern s16 gUnknown_810AC66; // 0x8
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
 
-extern bool8 sub_808ECD0(u8 *, u32);
-extern void sub_808EC30(u8 *, u32);
+extern bool8 IsIQSkillSet(u8 *, u32);
+extern void SetIQSkill(u8 *, u32);
 extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
@@ -484,84 +486,79 @@ u8 sub_808EAFC(u8 r0)
     return gUnknown_810A36B[r0];
 }
 
-void sub_808EB0C(u8 *r0, s32 r1)
+void sub_808EB0C(u8 *r0, s32 pokeLevel)
 {
-    s32 counter;
-    s32 storage;
-    u32 index;
-    storage = 0;
-    index = 0;
-    for(counter = 0; counter <= 0xB; counter++)
+    s32 tactic;
+    s32 availTactics;
+
+    availTactics = 0;
+    for(tactic = TACTIC_LETS_GO_TOGETHER; tactic < NUM_TACTICS; tactic++)
     {
-        if(gUnknown_810A378[index] <= r1)
+        if(gReqTacticLvls[tactic] <= pokeLevel)
         {
-            r0[storage] = counter;
-            storage++;
+            r0[availTactics] = tactic;
+            availTactics++;
         }
-        index++;
     }
-    if(storage > 0xB)
+    if(availTactics > TACTIC_UNUSED)
     {
         return;
     }
-    while(storage <= 0xB)
+    while(availTactics < NUM_TACTICS)
     {
-        r0[storage] = 0xB;
-        storage++;
+        r0[availTactics] = TACTIC_UNUSED;
+        availTactics++;
     }
 }
 
-void sub_808EB48(u8 *r0, s32 r1)
+void sub_808EB48(u8 *r0, s32 pokeLevel)
 {
-    s32 counter;
+    s32 tactic;
 
-    for(counter = 0; counter <= 0xB; counter++)
+    for(tactic = TACTIC_LETS_GO_TOGETHER; tactic < NUM_TACTICS; tactic++)
     {
-        if(gUnknown_810A378[counter] <= r1)
+        if(gReqTacticLvls[tactic] <= pokeLevel)
         {
-            r0[counter] = TRUE;
+            r0[tactic] = TRUE;
         }
         else
         {
-            r0[counter] = FALSE;
+            r0[tactic] = FALSE;
         }
     }
 }
 
-bool8 sub_808EB7C(s32 r0, u8 r1)
+bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex)
 {
-    if(r1 == 0)
+    if(IQSkillIndex == 0)
     {
         return FALSE;
     }
 
-    return gUnknown_810A390[r1] <= r0;
+    return gReqIQSkillPts[IQSkillIndex] <= pokeIQ;
 }
 
-s32 sub_808EBA8(u8 param_1[], s32 param_2)
+s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ)
 {
   s32 counter_2;
   s32 counter_1;
-  u8 cast_u8;
-  s32 index;
-  
-  index = 0;
+  u8 iqSkill_u8;
+  s32 availIQSkills;
 
-  for(counter_1 = 1; counter_1 < 0x18; counter_1++) {
-    cast_u8 = counter_1; // force this cast to be in a reg
-    if (sub_808EB7C(param_2, cast_u8)) {
-      param_1[index] = cast_u8;
-      index++;
+  availIQSkills = 0;
+
+  for(counter_1 = IQ_SKILL_TYPE_ADVANTAGE_MASTER; counter_1 < NUM_IQ_SKILLS; counter_1++) {
+    iqSkill_u8 = counter_1; // force this cast to be in a reg
+    if (HasIQForSkill(pokeIQ, iqSkill_u8)) {
+      param_1[availIQSkills] = iqSkill_u8;
+      availIQSkills++;
     }
   }
 
-  counter_2 = index; // set counter to where the first loop ended
-
-  while (counter_2 < 0x18) {
+  for (counter_2 = availIQSkills; counter_2 < NUM_IQ_SKILLS; counter_2++) {
     param_1[counter_2] = 0;
-    counter_2++;
   }
-  return index;
+  return availIQSkills;
 }
 
 void sub_808EBF4(u8 *param_1, u32 param_2)
@@ -569,67 +566,68 @@ void sub_808EBF4(u8 *param_1, u32 param_2)
   int iVar2; // a mask?
 
   iVar2 = 1 << (param_2);
-  if (sub_808ECD0(param_1,iVar2)) {
+  if (IsIQSkillSet(param_1, iVar2)) {
     param_1[0] = param_1[0] & ~iVar2;
     param_1[1] = param_1[1] & ~(iVar2 >> 8);
     param_1[2] = param_1[2] & ~(iVar2 >> 0x10);
   }
   else
   {
-    sub_808EC30(param_1,param_2);
+    SetIQSkill(param_1, param_2);
   }
 }
 
-void sub_808EC30(u8 *param_1, u32 param_2)
+void SetIQSkill(u8 *param_1, u32 skillIndex)
 {
   s32 iVar1;
-  s32 counter;
-  s32 iVar4;
+  s32 iqSkill;
+  s32 iqSkillGroup;
   s32 iVar5;
 
-  counter = 0;
-  iVar4 = gUnknown_81076E4[param_2];
-  do {
-    if (iVar4 == gUnknown_81076E4[counter]) {
-      iVar1 = 1 << (counter);
+  for (iqSkill = 0, iqSkillGroup = gIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++)
+  {
+    // Turn off each IQ Skill that's in the same group as the chosen skill
+    if (iqSkillGroup == gIQSkillGroups[iqSkill]) {
+      iVar1 = 1 << (iqSkill);
       param_1[0] = param_1[0] & ~iVar1;
       param_1[1] = param_1[1] & ~(iVar1 >> 8);
       param_1[2] = param_1[2] & ~(iVar1 >> 0x10);
     }
-    counter++;
-  } while (counter < 0x18);
+  }
 
-  iVar5 = 1 << (param_2);
-  param_1[0] = iVar5           | param_1[0];
-  param_1[1] = (iVar5 >> 8)    | param_1[1];
-  param_1[2] = (iVar5 >> 0x10) | param_1[2];
+  iVar5 = 1 << (skillIndex);
+  param_1[0] |= iVar5;
+  param_1[1] |= (iVar5 >> 8);
+  param_1[2] |= (iVar5 >> 0x10);
 }
 
-void sub_808EC94(u8 *param_1, u8 param_2)
+void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer)
 {
 
   param_1[0] = 0;
   param_1[1] = 0;
   param_1[2] = 0;
-  sub_808EC30(param_1, 2);
-  sub_808EC30(param_1, 3);
-  sub_808EC30(param_1, 0x16);
-  if (param_2 != 0) {
-    sub_808EC30(param_1, 0x12);
+  SetIQSkill(param_1, IQ_SKILL_ITEM_CATCHER);
+  SetIQSkill(param_1, IQ_SKILL_COURSE_CHECKER);
+  SetIQSkill(param_1, IQ_SKILL_ITEM_MASTER);
+
+  // Flag is usually enabled for Boss fights..
+  if (enableSelfCurer) {
+    SetIQSkill(param_1, IQ_SKILL_SELF_CURER);
   }
 }
 
-bool8 sub_808ECD0(u8 *param_1, u32 param_2)
+bool8 IsIQSkillSet(u8 *param_1, u32 param_2)
 {
 
   if ((((param_1[0] & param_2) == 0) && 
        ((param_1[1] & param_2 >> 8) == 0)) &&
        ((param_1[2] & param_2 >> 0x10) == 0)) 
   {
-    return 0;
+    return FALSE;
   }
   else {
-    return 1;
+    return TRUE;
   }
 }
 
@@ -765,7 +763,7 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, &pokemon->offense.def[0], 8);
   SaveIntegerBits(a1, &pokemon->offense.def[1], 8);
   SaveIntegerBits(a1, &pokemon->unk1C, 24);
-  SaveIntegerBits(a1, &pokemon->unk20, 24);
+  SaveIntegerBits(a1, &pokemon->IQSkills, 24);
   SaveIntegerBits(a1, &pokemon->unk24, 4);
   SaveHeldItem(a1, &pokemon->heldItem);
   SavePokemonMoves(a1, pokemon->moves);
@@ -792,7 +790,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, &pokemon->offense.def[0], 8);
   RestoreIntegerBits(a1, &pokemon->offense.def[1], 8);
   RestoreIntegerBits(a1, &pokemon->unk1C, 24);
-  RestoreIntegerBits(a1, &pokemon->unk20, 24);
+  RestoreIntegerBits(a1, &pokemon->IQSkills, 24);
   RestoreIntegerBits(a1, &pokemon->unk24, 4);
   RestoreHeldItem(a1, &pokemon->heldItem);
   RestorePokemonMoves(a1, pokemon->moves);
@@ -833,7 +831,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveItemSlot(&backup, &pokemon2->itemSlot);
     sub_809449C(&backup, &pokemon2->unk44);
     sub_809449C(&backup, &pokemon2->unk48);
-    SaveIntegerBits(&backup, &pokemon2->unk4C, 24);
+    SaveIntegerBits(&backup, &pokemon2->IQSkills, 24);
     SaveIntegerBits(&backup, &pokemon2->unk50, 4);
     sub_808F448(&backup, &pokemon2->unk54);
     SaveIntegerBits(&backup, &pokemon2->name, 80);
@@ -881,7 +879,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
     sub_809447C(&backup, &pokemon2->unk44);
     sub_809447C(&backup, &pokemon2->unk48);
-    RestoreIntegerBits(&backup, &pokemon2->unk4C, 24);
+    RestoreIntegerBits(&backup, &pokemon2->IQSkills, 24);
     RestoreIntegerBits(&backup, &pokemon2->unk50, 4);
     sub_808F428(&backup, &pokemon2->unk54);
     RestoreIntegerBits(&backup, &pokemon2->name, 80);

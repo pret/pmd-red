@@ -64,8 +64,8 @@ gLuminousCaveChangedAppearance:: @ 80DCE68
 	.align 2, 0
 
 gLuminousCaveEvolved:: @ 80DCEB0
-	.string "#+It evolved from #C4$m0#R\n"
-	.string "#+to #C6$m1#R!\0"
+	.string "#+It evolved from {COLOR_1 GREEN}$m0{END_COLOR_TEXT_1}\n"
+	.string "#+to {COLOR_1 YELLOW}$m1{END_COLOR_TEXT_1}!\0"
 	.align 2, 0
 
 gLuminousCaveComeAlone:: @ 80DCEDC

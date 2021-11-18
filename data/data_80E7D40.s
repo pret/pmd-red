@@ -700,7 +700,7 @@ gUnknown_80EB2F0: @ 80EB2F0
         WeBelong_80EB3A4:
         .asciz "We belong together! Please escort me!"
         .align 2,0
-        
+
         .global WeInLove_80EB3CC
         WeInLove_80EB3CC:
         .asciz "We~27re in love! Please~2c take me there!"

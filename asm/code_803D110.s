@@ -4701,7 +4701,7 @@ _0803F5D4:
 	strh r0, [r5, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_8046CB0
+	bl HasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803F610
@@ -4953,7 +4953,7 @@ sub_803F7BC:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl sub_804954C
+	bl GetMapTileAtPosition
 	ldrb r1, [r0, 0x9]
 	ldr r2, _0803F808
 	adds r0, r4, r2
@@ -5236,7 +5236,7 @@ sub_803F9CC:
 	cmp r4, 0
 	beq _0803FA08
 	adds r0, r4, 0
-	bl sub_80450F8
+	bl GetEntityType
 	cmp r0, 0x1
 	bne _0803FA08
 	movs r5, 0x1

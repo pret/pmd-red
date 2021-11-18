@@ -185,7 +185,7 @@ gUnknown_80E61C0: @ 80E61C0
 
 	.global gUnknown_80E61E4
 gUnknown_80E61E4: @ 80E61E4
-        .string "#CG$d0#R #CI$i0(s)#R\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}\n"
         .string "will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
@@ -214,13 +214,13 @@ gUnknown_80E62C4: @ 80E62C4
 	.global gUnknown_80E6314
 gUnknown_80E6314: @ 80E6314
         .string "You received\n"
-        .string "#CG$d0#R #CI$i0(s)#R.\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E6358
 gUnknown_80E6358: @ 80E6358
-        .string "You sent #CG$d0#R #CI$i0(s)#R.\0"
+        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 @ Trade Items Link Errors
@@ -540,7 +540,7 @@ gUnknown_80E6EAC: @ 80E6EAC
 
         .global Caution_80E6F04
         Caution_80E6F04:
-        .asciz "#+#C2Caution!#R "
+        .string "#+{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
         .asciz "pksdir0"
@@ -661,7 +661,7 @@ gUnknown_80E7214: @ 80E7214
 
         .global Error_80E7268
         Error_80E7268:
-        .asciz "#+#C2Error!#R "
+        .string "#+{COLOR_1 RED}Error!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80E7278
@@ -692,10 +692,10 @@ gUnknown_80E7290: @ 80E7290
         PasswordAccept_80E72B4:
         .asciz "#+The password has been accepted."
         .align 2,0
-        
+
         .global Success_80E72D8
         Success_80E72D8:
-        .asciz "#+#CGSuccess!#R "
+        .string "#+{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80E72EC
@@ -720,7 +720,7 @@ gUnknown_80E7304: @ 80E7304
 
         .global NotSOSMail_80E7324
         NotSOSMail_80E7324:
-        .asciz "#+This is not an #CGSOS Mail#R."
+        .string "#+This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E7344
@@ -745,7 +745,7 @@ gUnknown_80E735C: @ 80E735C
 
         .global ReceiveSOSMail_80E737C
         ReceiveSOSMail_80E737C:
-        .asciz "#+This #CGSOS Mail#R has been received already."
+        .string "#+This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
         .align 2,0
 
 	.global gUnknown_80E73AC

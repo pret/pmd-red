@@ -1070,7 +1070,7 @@ _0808FCB0:
 	movs r2, 0x3E
 	ldrsh r1, [r0, r2]
 	adds r0, r4, 0
-	bl sub_808EBA8
+	bl GetNumAvailableIQSkills
 	mov r0, r10
 	adds r0, 0x40
 	movs r3, 0
@@ -1112,7 +1112,7 @@ _0808FCFC:
 	adds r1, r4, 0
 	ldrb r5, [r5]
 	lsls r1, r5
-	bl sub_808ECD0
+	bl IsIQSkillSet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808FD44
