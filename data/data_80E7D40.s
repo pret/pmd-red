@@ -466,7 +466,7 @@ gUnknown_80EAE5C: @ 80EAE5C
 
         .global WantToSee_Text
         WantToSee_Text:
-        .string "I want to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
+        .string "I want to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}."
         .align 2,0
 
         .global TakeMe_Text
@@ -477,84 +477,124 @@ gUnknown_80EAE5C: @ 80EAE5C
 	.global gUnknown_80EAEB8
 gUnknown_80EAEB8: @ 80EAEB8
 @ replacing .incbin "baserom.gba", 0x000eaeb8, 0x2e0
-        .byte 0x7c, 0xb1, 0x0e, 0x08
-        .byte 0x58, 0xb1, 0x0e, 0x08
-        .byte 0x38, 0xb1, 0x0e, 0x08
-        .byte 0x18, 0xb1, 0x0e, 0x08
-        .byte 0xfc, 0xb0, 0x0e, 0x08
-        .byte 0xdc, 0xb0, 0x0e, 0x08
-        .byte 0xb4, 0xb0, 0x0e, 0x08
-        .byte 0x90, 0xb0, 0x0e, 0x08
-        .byte 0x6c, 0xb0, 0x0e, 0x08
-        .byte 0x48, 0xb0, 0x0e, 0x08
-        .byte 0x30, 0xb0, 0x0e, 0x08
-        .byte 0x14, 0xb0, 0x0e, 0x08
-        .byte 0xf0, 0xaf, 0x0e, 0x08
-        .byte 0xd4, 0xaf, 0x0e, 0x08
-        .byte 0xa4, 0xaf, 0x0e, 0x08
-        .byte 0x94, 0xaf, 0x0e, 0x08
-        .byte 0x70, 0xaf, 0x0e, 0x08
-        .byte 0x4c, 0xaf, 0x0e, 0x08
-        .byte 0x2c, 0xaf, 0x0e, 0x08
-        .byte 0x08, 0xaf, 0x0e, 0x08
+        .4byte WaitingForMe_80EB17C
+        .4byte PromisedMeet_80EB158
+        .4byte WantMeet_80EB138
+        .4byte WorriedAbout_80EB118
+        .4byte GoMyself_80EB0FC
+        .4byte OwnPower_80EB0DC
+        .4byte TooWeak_80EB0B4
+        .4byte WaitingInDungeon_80EB090
+        .4byte WaitingForever_80EB06C
+        .4byte InTrouble_80EB048
+        .4byte WantToHelp_80EB030
+        .4byte HasntReturned_80EB014
+        .4byte FaintedInside_80EAFF0
+        .4byte SickWorry_80EAFD4
+        .4byte LongTime_80EAFA4
+        .4byte HaveToGo_80EAF94
+        .4byte HaveToMeet_80EAF70
+        .4byte MustMeet_80EAF4C
+        .4byte Apologize_80EAF2C
+        .4byte CloseFriends_80EAF08
 
-        .string "I~27m close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
+        .global CloseFriends_80EAF08
+	CloseFriends_80EAF08:
+        .string "I~27m close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!"
         .align 2,0
 
-        .string "I want to apologize to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
+        .global Apologize_80EAF2C
+	Apologize_80EAF2C:
+        .string "I want to apologize to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}."
         .align 2,0
 
+        .global MustMeet_80EAF4C
+	MustMeet_80EAF4C:
         .asciz "I don~27t care how--we must meet!"
         .align 2,0
 
+        .global HaveToMeet_80EAF70
+	HaveToMeet_80EAF70:
         .asciz "We have to meet--whatever it takes!"
         .align 2,0
 
+        .global HaveToGo_80EAF94
+	HaveToGo_80EAF94:
         .asciz "I have to go!"
         .align 2,0
 
+        .global LongTime_80EAFA4
+	LongTime_80EAFA4:
         .asciz "We haven~27t seen each other in a long time."
         .align 2,0
 
+        .global SickWorry_80EAFD4
+	SickWorry_80EAFD4:
         .asciz "I~27m sick with worry..."
         .align 2,0
 
-        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted inside...\0"
+        .global FaintedInside_80EAFF0
+	FaintedInside_80EAFF0:
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted inside..."
         .align 2,0
 
+        .global HasntReturned_80EB014
+	HasntReturned_80EB014:
         .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn~27t returned!\0"
         .align 2,0
 
+        .global WantToHelp_80EB030
+	WantToHelp_80EB030:
         .string "I want to help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
+        .global InTrouble_80EB048
+	InTrouble_80EB048:
         .string "Hurry~2c {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is in trouble...\0"
         .align 2,0
 
+        .global WaitingForever_80EB06C
+	WaitingForever_80EB06C:
         .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been waiting forever...\0"
         .align 2,0
 
+        .global WaitingInDungeon_80EB090
+	WaitingInDungeon_80EB090:
         .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting in the dungeon.\0"
         .align 2,0
 
+        .global TooWeak_80EB0B4
+	TooWeak_80EB0B4:
         .asciz "I~27m too weak. It~27s not possible."
         .align 2,0
 
+        .global OwnPower_80EB0DC
+	OwnPower_80EB0DC:
         .asciz "I can~27t go on my own power..."
         .align 2,0
 
+        .global GoMyself_80EB0FC
+	GoMyself_80EB0FC:
         .asciz "I can~27t go by myself..."
         .align 2,0
 
+        .global WorriedAbout_80EB118
+	WorriedAbout_80EB118:
         .string "I~27m worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
+        .global WantMeet_80EB138
+	WantMeet_80EB138:
         .string "I want to meet with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
+        .global PromisedMeet_80EB158
+	PromisedMeet_80EB158:
         .asciz "We promised to meet in the dungeon!"
         .align 2,0
 
+        .global WaitingForMe_80EB17C
+	WaitingForMe_80EB17C:
         .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting for me!\0"
         .align 2,0
 
@@ -589,28 +629,40 @@ gUnknown_80EB198: @ 80EB198
 	.global gUnknown_80EB220
 gUnknown_80EB220: @ 80EB220
 @ replacing .incbin "baserom.gba", 0x000eb220, 0xd0
-        .byte 0xcc, 0xb2, 0x0e, 0x08
-        .byte 0xac, 0xb2, 0x0e, 0x08
-        .byte 0x94, 0xb2, 0x0e, 0x08
-        .byte 0x74, 0xb2, 0x0e, 0x08
-        .byte 0x50, 0xb2, 0x0e, 0x08
-        .byte 0x38, 0xb2, 0x0e, 0x08
+        .4byte TakeMeet_80EB2CC
+        .4byte Escort_80EB2AC
+        .4byte HelpMeet_80EB294
+        .4byte WantMeet_80EB274
+        .4byte Worried_80EB250
+        .4byte Without_80EB238
 
+        .global Without_80EB238
+	Without_80EB238:
         .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}~2c I...\0"
         .align 2,0
 
+        .global Worried_80EB250
+	Worried_80EB250:
         .string "I~27m so worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
+        .global WantMeet_80EB274
+	WantMeet_80EB274:
         .string "I really want to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
+        .global HelpMeet_80EB294
+	HelpMeet_80EB294:
         .string "Help me meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
+        .global Escort_80EB2AC
+	Escort_80EB2AC:
         .string "Please escort me to my {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
+        .global TakeMeet_80EB2CC
+	TakeMeet_80EB2CC:
         .string "Please! Take me to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
@@ -662,4 +714,3 @@ gUnknown_80EB3F8: @ 80EB3F8
 	.global gUnknown_80EB72C
 gUnknown_80EB72C: @ 80EB72C
 	.incbin "baserom.gba", 0xEB72C, 0x2EC
-
