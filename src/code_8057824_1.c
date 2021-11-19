@@ -255,7 +255,7 @@ extern void sub_806CE68(struct DungeonEntity *, u32);
 extern void sub_8052D44(u8 *, struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8097FD0(u32);
 extern void SetMessageArgument(u8 *, struct DungeonEntity *, u32);
-extern struct DungeonEntity *GetLeader();
+extern struct DungeonEntity *GetLeaderEntity();
 extern void sub_80421C0(struct DungeonEntity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
@@ -3105,7 +3105,7 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ROCK_PART,0);
-      sub_80464C8(GetLeader(),param_3,&auStack20);
+      sub_80464C8(GetLeaderEntity(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
@@ -3128,7 +3128,7 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_ICE_PART,0);
-      sub_80464C8(GetLeader(),param_3,&auStack20);
+      sub_80464C8(GetLeaderEntity(),param_3,&auStack20);
       sub_8083E88(0x72);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
@@ -3150,7 +3150,7 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&auStack20,ITEM_ID_STEEL_PART,0);
-      sub_80464C8(GetLeader(),param_3, &auStack20);
+      sub_80464C8(GetLeaderEntity(),param_3, &auStack20);
       sub_8083E88(0x72);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item
@@ -3168,7 +3168,7 @@ void sub_808AFB0(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
+    SetMessageArgument(gAvailablePokemonNames,GetLeaderEntity(),0);
     // {ARG_POKEMON_0} obtained the Rock Part that Regirock was guarding
     sub_8052910(&gUnknown_81050B4);
     sub_80421C0(0,0xd4);
@@ -3186,7 +3186,7 @@ void sub_808B030(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
+    SetMessageArgument(gAvailablePokemonNames,GetLeaderEntity(),0);
     // {ARG_POKEMON_0} obtained the Ice Part that Regice was guarding
     sub_8052910(&gUnknown_810517C);
     sub_80421C0(0,0xd4);
@@ -3204,7 +3204,7 @@ void sub_808B0B0(char param_1)
   sub_8052D44(auStack12,uVar3,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
+    SetMessageArgument(gAvailablePokemonNames, GetLeaderEntity(), 0);
     // {ARG_POKEMON_0} obtained the Steel Part that Registeel was guarding
     sub_8052910(&gUnknown_8105244);
     sub_80421C0(0,0xd4);
@@ -3284,7 +3284,7 @@ void sub_808B1CC(u8 r0)
 	"\tcmp r2, 0\n"
 	"\tbge _0808B244\n"
 "_0808B208:\n"
-	"\tbl GetLeader\n"
+	"\tbl GetLeaderEntity\n"
 	"\tadds r2, r0, 0\n"
 	"\tcmp r2, 0\n"
 	"\tbne _0808B230\n"

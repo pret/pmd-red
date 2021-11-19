@@ -3922,7 +3922,7 @@ sub_8075900:
 	ands r0, r1
 	cmp r0, 0
 	beq _0807597A
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _08075988
 	ldr r1, [r1]
 	bl SendMessage

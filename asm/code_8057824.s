@@ -11963,10 +11963,10 @@ sub_805D8C8:
 	movs r5, 0
 	movs r0, 0
 	strh r0, [r1, 0x12]
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806A2BC
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_80701A4
 	lsls r0, 24
 	cmp r0, 0
@@ -11999,7 +11999,7 @@ _0805D928:
 	cmp r0, 0
 	beq _0805D976
 	strb r5, [r1, 0x1]
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl ShouldAvoidEnemies_2
 	lsls r0, 24
@@ -12008,7 +12008,7 @@ _0805D928:
 	movs r0, 0x1
 	bl sub_8044C10
 	bl sub_805E804
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_80647F0
 	bl ResetRepeatTimers
 	bl ResetUnusedInputStruct
@@ -12023,7 +12023,7 @@ _0805D976:
 	movs r2, 0x1
 	bl sub_806A914
 _0805D980:
-	bl GetLeader
+	bl GetLeaderEntity
 	mov r10, r0
 	ldr r5, [r0, 0x70]
 	mov r8, r5
@@ -13911,7 +13911,7 @@ sub_805E874:
 	sub sp, 0x24
 	ldr r0, _0805E90C
 	ldr r4, [r0]
-	bl GetLeader
+	bl GetLeaderEntity
 	mov r9, r0
 	ldr r0, [r0, 0x70]
 	adds r0, 0x46
@@ -14650,7 +14650,7 @@ sub_805EE30:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _0805EE42
@@ -14916,7 +14916,7 @@ sub_805F02C:
 	ldr r0, [r5]
 	adds r0, 0xBC
 	ldr r7, [r0]
-	bl GetLeader
+	bl GetLeaderEntity
 	mov r9, r0
 	ldr r0, [r7, 0x70]
 	mov r8, r0
@@ -15048,7 +15048,7 @@ _0805F12A:
 	bl sub_803F508
 	mov r0, r9
 	bl sub_8041AD0
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_8041AE0
 	ldr r0, _0805F198
 	adds r1, r7, 0
@@ -15146,12 +15146,12 @@ _0805F1F8:
 _0805F208: .4byte gDungeonGlobalData
 _0805F20C: .4byte 0x00000137
 _0805F210:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806675C
 	b _0805F226
 _0805F21C:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806684C
 _0805F226:
@@ -15177,7 +15177,7 @@ _0805F240:
 	str r1, [r0]
 	ldr r0, [sp, 0xC]
 	bl DrawFieldMenu
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 	ldr r4, _0805F38C
@@ -15274,7 +15274,7 @@ _0805F304:
 	ldr r1, _0805F3A4
 	ands r0, r1
 	str r0, [sp, 0x4]
-	bl GetLeader
+	bl GetLeaderEntity
 	add r1, sp, 0x4
 	bl sub_805FD74
 	lsls r0, 24
@@ -15289,7 +15289,7 @@ _0805F33A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F35C
-	bl GetLeader
+	bl GetLeaderEntity
 	add r1, sp, 0x4
 	bl sub_805FD74
 	lsls r0, 24
@@ -15303,7 +15303,7 @@ _0805F35C:
 	lsrs r0, 16
 	cmp r0, 0xC
 	bne _0805F3B2
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xC
 	bl sub_8044D90
@@ -15331,36 +15331,36 @@ _0805F3A8:
 _0805F3B2:
 	cmp r0, 0x35
 	bne _0805F3D0
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xD
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048A68
 	b _0805F40A
 _0805F3D0:
 	cmp r0, 0x10
 	bne _0805F3EE
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xE
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048950
 	b _0805F40A
 _0805F3EE:
 	cmp r0, 0x2C
 	bne _0805F41A
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xF
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048B9C
 _0805F40A:
@@ -15390,7 +15390,7 @@ _0805F428:
 _0805F430:
 	movs r0, 0x1
 	bl sub_8044C10
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_8060E38
 	lsls r0, 24
 	cmp r0, 0
@@ -15567,7 +15567,7 @@ _0805F5A0:
 	ble _0805F57A
 	cmp r6, 0
 	bne _0805F5B0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r6, r0, 0
 _0805F5B0:
 	adds r0, r6, 0
@@ -15733,10 +15733,10 @@ _0805F6FA:
 	bl sub_8063CF0
 	b _0805F56C
 _0805F712:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r0, 0x4
 	movs r1, 0
 	movs r2, 0x1
@@ -15756,7 +15756,7 @@ _0805F73A:
 	beq _0805F742
 	b _0805F8E0
 _0805F742:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x4
 	ldrsh r2, [r0, r1]
 	movs r3, 0x6
@@ -15794,7 +15794,7 @@ _0805F768:
 	adds r1, 0x1
 	orrs r0, r1
 	str r0, [sp, 0x8]
-	bl GetLeader
+	bl GetLeaderEntity
 	add r4, sp, 0x8
 	adds r1, r4, 0
 	bl sub_805FD74
@@ -15804,7 +15804,7 @@ _0805F768:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F7C2
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_805FD74
 	lsls r0, 24
@@ -15819,7 +15819,7 @@ _0805F7C2:
 	adds r1, r0, 0
 	cmp r0, 0xC
 	bne _0805F800
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x10
 	bl sub_8044D90
@@ -15838,24 +15838,24 @@ _0805F7FC: .4byte 0x00ffffff
 _0805F800:
 	cmp r0, 0x35
 	bne _0805F81E
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x11
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048A68
 	b _0805F83A
 _0805F81E:
 	cmp r0, 0x10
 	bne _0805F848
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x12
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048950
 _0805F83A:
@@ -15869,12 +15869,12 @@ _0805F840:
 _0805F848:
 	cmp r1, 0x2C
 	bne _0805F8A8
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x13
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048B9C
 	lsls r0, 24
@@ -15890,7 +15890,7 @@ _0805F872:
 	bne _0805F8CE
 	movs r0, 0x1
 	bl sub_8044C10
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_80643AC
 	b _0805F8A8
 _0805F88C:
@@ -15903,7 +15903,7 @@ _0805F88C:
 	beq _0805F8B4
 	movs r0, 0x1
 	bl sub_8044C10
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_80647F0
 _0805F8A8:
 	bl sub_805F1AC
@@ -15912,7 +15912,7 @@ _0805F8A8:
 	bne _0805F92A
 	b _0805F8CE
 _0805F8B4:
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	ldr r0, _0805F8D8
 	movs r2, 0
@@ -15960,7 +15960,7 @@ _0805F904:
 	.align 2, 0
 _0805F91C: .4byte gDungeonGlobalData
 _0805F920:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 _0805F92A:
@@ -16022,7 +16022,7 @@ _0805F998:
 _0805F9A0:
 	movs r0, 0
 	bl sub_80073B8
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl ShouldAvoidEnemies_2
 	lsls r0, 24
@@ -16106,7 +16106,7 @@ _0805F9DA:
 	bne _0805FA62
 	b _0805FB92
 _0805FA62:
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r7, [r0, 0x70]
 	bl sub_805317C
 	adds r5, r0, 0
@@ -18395,7 +18395,7 @@ _08060D20: .4byte gUnknown_202F238
 	thumb_func_start sub_8060D24
 sub_8060D24:
 	push {r4,lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xB
 	bl sub_8044D90
@@ -18874,7 +18874,7 @@ _08061100: .4byte gRealInputs
 _08061104: .4byte gUnknown_202EE39
 _08061108: .4byte gUnknown_202EE10
 _0806110C:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 _08061116:
@@ -18914,7 +18914,7 @@ DrawFieldTeamMenu:
 	movs r1, 0x1
 _08061154:
 	mov r10, r1
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	add r0, sp, 0x4
 	bl sub_8069D18
@@ -22101,7 +22101,7 @@ _08062AF4:
 	movs r0, 0x1B
 	bl sub_803E46C
 	bl sub_804AA60
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 	movs r0, 0
@@ -22693,7 +22693,7 @@ sub_8062F90:
 	str r2, [sp, 0xD8]
 	ldr r0, [r0, 0x70]
 	mov r9, r0
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r0, [r0, 0x70]
 	str r0, [sp, 0xE4]
 	add r4, sp, 0x70
@@ -27034,7 +27034,7 @@ sub_80651FC:
 	movs r1, 0x2E
 	bl SetAction
 	ldr r4, _0806523C
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -31322,7 +31322,7 @@ sub_806752C:
 	adds r1, r2
 	adds r1, r0
 	ldr r4, [r1]
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8067558
@@ -31611,7 +31611,7 @@ sub_8067768:
 	adds r1, r2
 	adds r1, r0
 	ldr r4, [r1]
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8067794
@@ -34645,7 +34645,7 @@ _08068F74:
 	thumb_func_start sub_8068F80
 sub_8068F80:
 	push {r4,r5,lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	ldr r0, _08068FD4
 	ldr r4, [r0]
@@ -35110,7 +35110,7 @@ _08069338:
 	movs r2, 0
 	bl SetMessageArgument
 _08069352:
-	bl GetLeader
+	bl GetLeaderEntity
 	cmp r0, 0
 	beq _080693C6
 	movs r0, 0x87
@@ -39479,7 +39479,7 @@ _0806B460:
 	movs r0, 0
 	mov r2, r9
 	str r0, [r2]
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	bl EntityExists
 	lsls r0, 24

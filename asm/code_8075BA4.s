@@ -10659,7 +10659,7 @@ _0807B12C:
 	cmp r5, 0
 	bne _0807B222
 	mov r0, r8
-	bl GetLeaderIfVisible
+	bl GetLeaderEntityIfVisible
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -17105,7 +17105,7 @@ _0807E374: .4byte 0x00003a08
 	thumb_func_start sub_807E378
 sub_807E378:
 	push {r4-r7,lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -17674,7 +17674,7 @@ sub_807E7FC:
 	ldr r5, [r0]
 	cmp r5, 0
 	bne _0807E816
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 _0807E816:
 	cmp r4, 0
@@ -17959,7 +17959,7 @@ sub_807EA30:
 	ldr r2, _0807EA64
 	adds r1, r2
 	strb r0, [r1]
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _0807EA68
 	ldr r1, [r1]
 	bl SendMessage
@@ -17979,7 +17979,7 @@ _0807EA6C:
 	ldr r2, _0807EA98
 	adds r1, r2
 	strb r0, [r1]
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _0807EA9C
 	ldr r1, [r1]
 	bl SendMessage
@@ -18142,7 +18142,7 @@ _0807EBA6:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807EBD4
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _0807EC1C
 	ldr r1, [r1]
 	bl SendMessage
@@ -18162,7 +18162,7 @@ _0807EBD4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807EC00
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _0807EC24
 	ldr r1, [r1]
 	bl SendMessage
@@ -18201,7 +18201,7 @@ sub_807EC28:
 	beq _0807EC46
 	b _0807EF32
 _0807EC46:
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r7, r0, 0
 	ldr r0, [r7, 0x70]
 	mov r9, r0
@@ -18635,7 +18635,7 @@ sub_807EF84:
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0807EFE2
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_8045128
 	ldrh r1, [r0]
 	movs r0, 0x20
@@ -19086,7 +19086,7 @@ sub_807F33C:
 	ldr r2, _0807F424
 	adds r0, r2
 	strb r1, [r0]
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r1, _0807F428
 	ldr r1, [r1]
 	bl SendMessage
@@ -27364,8 +27364,8 @@ _080835FA:
 	bx r1
 	thumb_func_end sub_8083568
 
-	thumb_func_start GetLeader
-GetLeader:
+	thumb_func_start GetLeaderEntity
+GetLeaderEntity:
 	push {r4,r5,lr}
 	ldr r0, _08083638
 	ldr r0, [r0]
@@ -27409,12 +27409,12 @@ _0808364A:
 	bx r1
 	.align 2, 0
 _08083650: .4byte gLeaderPokemon
-	thumb_func_end GetLeader
+	thumb_func_end GetLeaderEntity
 
 	thumb_func_start sub_8083654
 sub_8083654:
 	push {lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r0, [r0, 0x70]
 	pop {r1}
 	bx r1
@@ -27433,7 +27433,7 @@ sub_8083660:
 	lsls r1, 5
 	add r1, sp
 	str r0, [r1]
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r2, _080836D8
 	add r2, sp
 	str r0, [r2]
@@ -29312,7 +29312,7 @@ sub_8084448:
 	adds r5, r0, 0
 	ldr r7, [r5, 0x70]
 	ldr r4, _0808447C
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -29506,7 +29506,7 @@ sub_80845E0:
 	movs r1, 0
 	mov r9, r1
 	ldr r4, _08084620
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0

@@ -753,7 +753,7 @@ sub_8042818:
 	ldr r4, [r0]
 	cmp r4, 0
 	bne _08042836
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 _08042836:
 	ldr r1, _0804287C

@@ -1299,8 +1299,8 @@ gUnknown_80F55EC: @ 80F55EC
 gDungeonCamouflageTypes: @ 80F561C
 	.incbin "baserom.gba", 0xF561C, 0x4C
 
-	.global gCurrentMusic
-gCurrentMusic: @ 80F5668
+	.global gDungeonMusic
+gDungeonMusic: @ 80F5668
 	.incbin "baserom.gba", 0xF5668, 0x98
 
 	.global gUnknown_80F5700

@@ -4312,7 +4312,7 @@ sub_804A728:
 	ldr r6, _0804A814
 	ldr r0, [r6]
 	mov r8, r0
-	bl GetLeader
+	bl GetLeaderEntity
 	str r0, [sp, 0x24]
 	ldr r0, _0804A818
 	add r0, r8

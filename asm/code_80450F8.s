@@ -1690,7 +1690,7 @@ sub_8045DB4:
 	lsls r1, 24
 	lsrs r1, 24
 	str r1, [sp, 0xA8]
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r7, r0, 0
 	ldr r0, [r7, 0x70]
 	str r0, [sp, 0xAC]
@@ -3791,7 +3791,7 @@ _08046E1E:
 	bl FillInventoryGaps
 	cmp r6, 0
 	beq _08046ED4
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	ldr r0, _08046EE0
 	bl sub_80855E4

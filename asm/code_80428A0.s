@@ -1050,7 +1050,7 @@ _080432CC: .4byte 0x00000226
 _080432D0:
 	ldr r4, _080432E4
 _080432D2:
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -1368,7 +1368,7 @@ _08043594:
 	bl sub_806B6C4
 	b _080435D4
 	.align 2, 0
-_080435B4: .4byte gCurrentMusic
+_080435B4: .4byte gDungeonMusic
 _080435B8: .4byte gDungeonGlobalData
 _080435BC: .4byte 0x00003a10
 _080435C0: .4byte gUnknown_202EDC8
@@ -1534,7 +1534,7 @@ _08043734: .4byte 0x0000066c
 _08043738: .4byte 0x0000066d
 _0804373C: .4byte gLeaderPokemon
 _08043740:
-	bl GetLeader
+	bl GetLeaderEntity
 	bl sub_803F4A0
 	bl sub_8040A84
 _0804374C:
@@ -1565,7 +1565,7 @@ _0804377C:
 	b _080437A2
 _08043784:
 	bl sub_80427AC
-	bl GetLeader
+	bl GetLeaderEntity
 	ldr r2, _08043960
 	ldr r1, [r2]
 	ldr r3, _08043964
@@ -1603,7 +1603,7 @@ _080437C8:
 	cmp r0, 0
 	beq _080437C8
 _080437DA:
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -1645,7 +1645,7 @@ _08043822:
 	bne _08043830
 	bl sub_806AA70
 _08043830:
-	bl GetLeader
+	bl GetLeaderEntity
 	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
@@ -1743,7 +1743,7 @@ _080438AC:
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
 	beq _08043926
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	ldr r0, _0804398C
 	ldr r1, [r0]
@@ -1831,7 +1831,7 @@ _080439D4:
 _080439DC:
 	cmp r0, 0x2
 	bne _08043A00
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	ldr r0, _080439F8
 	movs r1, 0
@@ -1846,7 +1846,7 @@ _080439FC: .4byte 0x0000066e
 _08043A00:
 	cmp r0, 0x3
 	bne _08043A24
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	ldr r0, _08043A1C
 	movs r1, 0
@@ -1879,7 +1879,7 @@ _08043A2A:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _08043A74
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	movs r0, 0x8A
 	lsls r0, 2
@@ -1947,7 +1947,7 @@ _08043ADC: .4byte 0x00000644
 _08043AE0: .4byte 0x0000060b
 _08043AE4:
 	ldr r4, _08043B80
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -2471,7 +2471,7 @@ _08043EEA:
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x1
 	bne _08043F40
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2503,7 +2503,7 @@ _08043F3C: .4byte 0x0000021f
 _08043F40:
 	cmp r0, 0x2
 	bne _08043F74
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2525,7 +2525,7 @@ _08043F70: .4byte gUnknown_80F89D4
 _08043F74:
 	cmp r0, 0x3
 	bne _08043FB6
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2973,7 +2973,7 @@ xxx_dungeon_80442D0:
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0804431A
@@ -3011,7 +3011,7 @@ _0804431A:
 _08044320: .4byte gSpeedTurns
 _08044324: .4byte gDungeonGlobalData
 _08044328:
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0804431A
@@ -3231,7 +3231,7 @@ _080444F0: .4byte 0x00007fff
 sub_80444F4:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl GetLeader
+	bl GetLeaderEntity
 	cmp r6, r0
 	bne _08044566
 	ldr r0, _0804456C
@@ -3298,7 +3298,7 @@ sub_8044574:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x44
-	bl GetLeader
+	bl GetLeaderEntity
 	mov r10, r0
 	movs r7, 0
 	mov r0, sp
@@ -4004,7 +4004,7 @@ sub_8044B28:
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _08044B76
-	bl GetLeader
+	bl GetLeaderEntity
 	cmp r0, 0
 	bne _08044B50
 	ldr r0, [r4]

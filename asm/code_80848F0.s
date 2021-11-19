@@ -272,7 +272,7 @@ _0808547C: .4byte gUnknown_80F4598
 	thumb_func_start sub_8085480
 sub_8085480:
 	push {lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8085480

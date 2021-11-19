@@ -1272,7 +1272,7 @@ sub_8052DC0:
 	thumb_func_start sub_8052DD0
 sub_8052DD0:
 	push {r4-r6,lr}
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	ldr r6, _08052E68
 	ldr r4, [r6]

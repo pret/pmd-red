@@ -1295,7 +1295,7 @@ _080722E2:
 	movs r2, 0x1
 	bl PrintFieldMessage
 _080722F4:
-	bl GetLeader
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 	add sp, 0x190
@@ -2560,15 +2560,15 @@ _08072CA4:
 	bx r1
 	thumb_func_end TargetLeader
 
-	thumb_func_start GetLeaderIfVisible
-GetLeaderIfVisible:
+	thumb_func_start GetLeaderEntityIfVisible
+GetLeaderEntityIfVisible:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x70]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	bne _08072CEC
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _08072CEC
@@ -2599,7 +2599,7 @@ _08072CEE:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end GetLeaderIfVisible
+	thumb_func_end GetLeaderEntityIfVisible
 
 	thumb_func_start sub_8072CF4
 sub_8072CF4:

@@ -321,7 +321,7 @@ _0808B87C:
 	bl UnlockFriendArea
 	movs r0, 0xD4
 	bl PlaySoundEffect
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	ldr r0, _0808BA3C
 	movs r2, 0
@@ -442,7 +442,7 @@ _0808B98E:
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
-	bl GetLeader
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	adds r1, 0x4
 	adds r0, r6, 0x4
