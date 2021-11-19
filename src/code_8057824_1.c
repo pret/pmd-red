@@ -3169,7 +3169,7 @@ void sub_808AFB0(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
-    // {ARG_POKEMON_0} obatined the Rock Part that Regirock was guarding
+    // {ARG_POKEMON_0} obtained the Rock Part that Regirock was guarding
     sub_8052910(&gUnknown_81050B4);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
@@ -3187,7 +3187,7 @@ void sub_808B030(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
-    // {ARG_POKEMON_0} obatined the Ice Part that Regice was guarding
+    // {ARG_POKEMON_0} obtained the Ice Part that Regice was guarding
     sub_8052910(&gUnknown_810517C);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
@@ -3205,7 +3205,7 @@ void sub_808B0B0(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ID_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
-    // {ARG_POKEMON_0} obatined the Steel Part that Registeel was guarding
+    // {ARG_POKEMON_0} obtained the Steel Part that Registeel was guarding
     sub_8052910(&gUnknown_8105244);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
