@@ -16,7 +16,7 @@ struct unkDungeonStruct
 
 void sub_8090208(u8 *buffer, struct unkDungeonStruct *dungeonLocation)
 {
-    ExpandPlaceholdersBuffer(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->index].name1); // {COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2} (normal floor print (no B)
+    ExpandPlaceholdersBuffer(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->index].name1); // {COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2} (normal floor print (no B)
 }
 
 void PrintDungeonLocationtoBuffer(u8 *buffer, struct unkDungeonStruct *dungeonLocation)

@@ -157,7 +157,7 @@ _0808B6D2:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -241,7 +241,7 @@ _0808B77E:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -321,7 +321,7 @@ _0808B87C:
 	bl UnlockFriendArea
 	movs r0, 0xD4
 	bl PlaySoundEffect
-	bl sub_8083600
+	bl GetLeader
 	adds r1, r0, 0
 	ldr r0, _0808BA3C
 	movs r2, 0
@@ -391,7 +391,7 @@ _0808B8F4:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -442,7 +442,7 @@ _0808B98E:
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
-	bl sub_8083600
+	bl GetLeader
 	adds r1, r0, 0
 	adds r1, 0x4
 	adds r0, r6, 0x4

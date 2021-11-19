@@ -12,7 +12,7 @@ struct unk8049590
     u8 unk8;
 };
 
-extern struct unk8049590 *sub_8049590(s16, s16);
+extern struct unk8049590 *GetMapEntity(s16, s16);
 
 bool8 EntityExists(struct DungeonEntity *entity)
 {
@@ -60,5 +60,5 @@ struct MapTile *sub_8045114(struct DungeonEntity *entity)
 
 struct unk8049590 *sub_8045128(struct DungeonEntity *entity)
 {
-    return sub_8049590(entity->posWorldX, entity->posWorldY);
+    return GetMapEntity(entity->posWorldX, entity->posWorldY);
 }

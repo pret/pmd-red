@@ -95,7 +95,7 @@ ALIGNED(4) const char gSaveCorrupted[] = _("{CENTER_ALIGN}The game data is corru
 ALIGNED(4) const char fill_save4[] = _("pksdir0");
 
 ALIGNED(4) const char gSavingAdventure[] = _("{CENTER_ALIGN}Saving your adventure...\n"
-                                            "{CENTER_ALIGN}Please don~27t turn off the power.");
+                                            "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");
 
 ALIGNED(4) const char gWriteGamePak[] = _("{CENTER_ALIGN}Writing to GBA Game Pak.\n"
                                       "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
@@ -111,27 +111,27 @@ ALIGNED(4) const char gSaveFailed[] = _("{CENTER_ALIGN}Save failed.");
 
 ALIGNED(4) const char fill_save5[] = _("pksdir0");
 
-ALIGNED(4) const char gUnknown_80D44C8[] = _("{CENTER_ALIGN}Your data was not properly saved~2c\n"
+ALIGNED(4) const char gUnknown_80D44C8[] = _("{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
                                              "{CENTER_ALIGN}so your game cannot be resumed\n"
                                              "{CENTER_ALIGN}from your last spot.{EXTRA_MSG}"
                                              "{CENTER_ALIGN}Your last outing is considered a defeat.\n"
-                                             "{CENTER_ALIGN}Before shutting down~2c save in your\n"
-                                             "{CENTER_ALIGN}team base~2c or quicksave in a dungeon.");
+                                             "{CENTER_ALIGN}Before shutting down{COMMA} save in your\n"
+                                             "{CENTER_ALIGN}team base{COMMA} or quicksave in a dungeon.");
 
 ALIGNED(4) const char fill_save6[] = _("pksdir0");
 
 ALIGNED(4) const char gUnknown_80D45AC[] = _("{CENTER_ALIGN}Quicksaving your adventure...\n"
-                                             "{CENTER_ALIGN}Please don~27t turn off the power.");
+                                             "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");
 
 ALIGNED(4) const char gUnknown_80D45F4[] = _("{CENTER_ALIGN}Your adventure has been saved.\n"
-                                             "{CENTER_ALIGN}When you are in a dungeon~2c quicksave\n"
+                                             "{CENTER_ALIGN}When you are in a dungeon{COMMA} quicksave\n"
                                              "{CENTER_ALIGN}your progress before ending the game.");
 
 ALIGNED(4) const char gUnknown_80D4668[] = _("{CENTER_ALIGN}Your adventure has been saved.\n"
-                                             "{CENTER_ALIGN}When you resume play~2c the quicksave\n"
+                                             "{CENTER_ALIGN}When you resume play{COMMA} the quicksave\n"
                                              "{CENTER_ALIGN}data will be deleted.{EXTRA_MSG}"
-                                             "{CENTER_ALIGN}When you are shutting down the game~2c\n"
-                                             "{CENTER_ALIGN}save your progress in your team base~2c\n"
+                                             "{CENTER_ALIGN}When you are shutting down the game{COMMA}\n"
+                                             "{CENTER_ALIGN}save your progress in your team base{COMMA}\n"
                                              "{CENTER_ALIGN}or quicksave in a dungeon.");
 
 ALIGNED(4) const char gSaveNotWritten2[] = _("{CENTER_ALIGN}The data could not be written.\n"
@@ -458,7 +458,7 @@ u32 WriteSavetoPak(s32 *param_1,u32 param_2)
   int r5;
   int r4;
   u8 *array_ptr;
-  
+
   iVar1 = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC),5);
   array_ptr = iVar1->unk448;
   if (gUnknown_203B184 == NULL) {
@@ -720,7 +720,7 @@ void PrepareSavePakWrite(s16 PokemonID)
   u8 *preload_face;
 
   id_s32 = PokemonID; // had to cast for asr shift
-  
+
   sub_80993D8();
   gSavePakWrite = MemoryAlloc(sizeof(struct SavePakWrite),5);
   gSavePakWrite->pokeID = id_s32;
@@ -737,7 +737,7 @@ void PrepareSavePakWrite(s16 PokemonID)
     gSavePakWrite->unk16 = 8;
   }
   if (gSavePakWrite->faceFile != 0) {
-      preload_face = (u8 *)&gSavePakWrite->faceFile; 
+      preload_face = (u8 *)&gSavePakWrite->faceFile;
       sub_80141B4(gSavingAdventure,0,preload_face,0x20);
   }
   else {
@@ -751,12 +751,12 @@ bool8 WriteSavePak(void)
   struct OpenedFile **faceFile;
   u32 local_14;
   u32 other_stack;
-  
+
   faceFile = NULL;
   if (gSavePakWrite->faceFile != 0) {
     faceFile = &gSavePakWrite->faceFile;
   }
-  switch(gSavePakWrite->state) 
+  switch(gSavePakWrite->state)
   {
     case 0:
         gSavePakWrite->state = 7;

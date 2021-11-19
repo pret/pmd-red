@@ -31,7 +31,7 @@ struct unk8049590
     u16 unk4;
 };
 
-extern struct unk8049590 *sub_8049590(u32, u32);
+extern struct unk8049590 *GetMapEntity(u32, u32);
 
 // Luminous Orb???
 void sub_804002C(u32 param_1)
@@ -47,7 +47,7 @@ void sub_804002C(u32 param_1)
     innerCounter = 0;
     iVar4 = iVar3 + 1;
     do {
-      iVar1 = sub_8049590(innerCounter, iVar3);
+      iVar1 = GetMapEntity(innerCounter, iVar3);
       iVar1->unk4 = iVar1->unk4 | 1;
       innerCounter++;
     } while (innerCounter < 0x38);

@@ -300,7 +300,7 @@ BrokeCurse_810B3C4:
 
 .global PreventMeteor_810B3E4
 PreventMeteor_810B3E4:
-.string "Prevented the meteor~27s collision.\0"
+.string "Prevented the meteor{APOSTROPHE}s collision.\0"
 .align 2,0
 
 .global Fugitive_810B408
@@ -603,7 +603,7 @@ gUnknown_810DE58: @ 810DE58
 
         .global Item_810DE5C
         Item_810DE5C:
-        .string "Item:#>46.$i0 \0"
+        .string "Item:#>46.{ARG_MOVE_ITEM_0} \0"
         .align 2,0
 
 	.global gUnknown_810DE6C
@@ -612,7 +612,7 @@ gUnknown_810DE6C: @ 810DE6C
 
         .global IQ_810DE70
         IQ_810DE70:
-        .string "IQ:#>52.$m0 \0"
+        .string "IQ:#>52.{ARG_POKEMON_0} \0"
         .align 2,0
 
 	.global gUnknown_810DE80
@@ -621,7 +621,7 @@ gUnknown_810DE80: @ 810DE80
 
         .global Tactics_810DE84
         Tactics_810DE84:
-        .string "Tactics:#>52.$m0 \0"
+        .string "Tactics:#>52.{ARG_POKEMON_0} \0"
         .align 2,0
 
 	.global gUnknown_810DE98
@@ -630,7 +630,7 @@ gUnknown_810DE98: @ 810DE98
 
         .global Species_810DE9C
         Species_810DE9C:
-        .string "Species:#>54.{COLOR_1 YELLOW}$m0{END_COLOR_TEXT_1} \0"
+        .string "Species:#>54.{COLOR_1 YELLOW}{ARG_POKEMON_0}{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_810DEB4
@@ -646,14 +646,14 @@ gUnknown_810DEB4: @ 810DEB4
 gUnknown_810DEC8: @ 810DEC8
         .4byte FriendArea_810DEB8
 
-        .string "#>22.{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}\0"
+        .string "#>22.{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_810DEDC
 gUnknown_810DEDC: @ 810DEDC
         .4byte 0x810DECC
 
-        .string "{COLOR_1 CYAN}$m0 Pokémon{END_COLOR_TEXT_1} \0"
+        .string "{COLOR_1 CYAN}{ARG_POKEMON_0} Pokémon{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_810DEF4
@@ -675,7 +675,7 @@ gUnknown_810DF84: @ 810DF84
 
         .global Size_810DF88
         Size_810DF88:
-        .string "Size:#>82.$m0\0"
+        .string "Size:#>82.{ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_810DF98
@@ -693,7 +693,7 @@ gUnknown_810DFB4: @ 810DFB4
 
         .global ItemPlaceholder_810DFB8
         ItemPlaceholder_810DFB8:
-        .string "#>22.{COLOR_1 CYAN}$i0{END_COLOR_TEXT_1}\0"
+        .string "#>22.{COLOR_1 CYAN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_810DFC8
@@ -819,7 +819,7 @@ gTactics: @ 8112C14
 
         .global LetsGoTogetherTactic
         LetsGoTogetherTactic:
-        .string "Let~27s go together\0"
+        .string "Let{APOSTROPHE}s go together\0"
         .align 2,0
 
 
@@ -837,7 +837,7 @@ gUnknown_811383C: @ 811383C
 
         .global PlaceText
         PlaceText:
-        .string "#+Place: $m0\0"
+        .string "#+Place: {ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_8113850
@@ -846,7 +846,7 @@ gUnknown_8113850: @ 8113850
 
         .global DefeatedbyText
         DefeatedbyText:
-        .string "$m1 was defeated by\0"
+        .string "{ARG_POKEMON_1} was defeated by\0"
 
 	.global gUnknown_8113868
 gUnknown_8113868: @ 8113868
@@ -854,7 +854,7 @@ gUnknown_8113868: @ 8113868
 
         .global Monster_811386C
         Monster_811386C:
-        .string "$m1\0"
+        .string "{ARG_POKEMON_1}\0"
         .align 2,0
 
 	.global gUnknown_8113870
@@ -966,7 +966,7 @@ gUnknown_81139B8: @ 81139B8
 
         .global Item_81139BC
         Item_81139BC:
-        .string "Item:#>42.$i0 \0"
+        .string "Item:#>42.{ARG_MOVE_ITEM_0} \0"
         .align 2,0
 
 	.global gUnknown_81139CC
@@ -1213,7 +1213,7 @@ gUnknown_8115A80: @ 8115A80
 
         .global ItemLimitAlsoText_8105A84
         ItemLimitAlsoText_8105A84:
-        .string "Also~2c only $d0 items may be brought\n"
+        .string "Also{COMMA} only $d0 items may be brought\n"
         .string "into this dungeon.\n"
         .string "Please put away $d1 item(s).\0"
         .align 2,0
@@ -1224,7 +1224,7 @@ gUnknown_8115ADC: @ 8115ADC
 
         .global PartyMemberLimitText_8115AE0
         PartyMemberLimitText_8115AE0:
-        .string "Your client~2c $m0~2c could not join\n"
+        .string "Your client{COMMA} {ARG_POKEMON_0}{COMMA} could not join\n"
         .string "the team because there are too many\n"
         .string "members already.\0"
         .align 2,0
@@ -1235,7 +1235,7 @@ gUnknown_8115B3C: @ 8115B3C
 
         .global PartyMemberLimitText_8115B40
         PartyMemberLimitText_8115B40:
-        .string "Also~2c your client~2c $m0~2c could not\n"
+        .string "Also{COMMA} your client{COMMA} {ARG_POKEMON_0}{COMMA} could not\n"
         .string "join the team because there are too many\n"
         .string "members already.\0"
         .align 2,0
@@ -1246,7 +1246,7 @@ gUnknown_8115BA4: @ 8115BA4
 
         .global SizeLimitText_8115BA8
         SizeLimitText_8115BA8:
-        .string "Your client~2c $m0~2c could not join\n"
+        .string "Your client{COMMA} {ARG_POKEMON_0}{COMMA} could not join\n"
         .string "the team because there is no space.\0"
         .align 2,0
 
@@ -1256,7 +1256,7 @@ gUnknown_8115BF4: @ 8115BF4
 
         .global SizeLimitText_8115BF8
         SizeLimitText_8115BF8:
-        .string "Also~2c your client~2c $m0~2c could not\n"
+        .string "Also{COMMA} your client{COMMA} {ARG_POKEMON_0}{COMMA} could not\n"
         .string "join the team because there is no space.\0"
         .align 2,0
 
@@ -1266,9 +1266,9 @@ gUnknown_8115C4C: @ 8115C4C
 
         .global MoveReqText_8115C50
         MoveReqText_8115C50:
-        .string "To enter this dungeon~2c the team must have\n"
-        .string "a Pokémon with the move $i0\n"
-        .string "or have the Hidden Machine $i0.\0"
+        .string "To enter this dungeon{COMMA} the team must have\n"
+        .string "a Pokémon with the move {ARG_MOVE_ITEM_0}\n"
+        .string "or have the Hidden Machine {ARG_MOVE_ITEM_0}.\0"
         .align 2,0
 
 	.global gUnknown_8115CB8
@@ -1277,9 +1277,9 @@ gUnknown_8115CB8: @ 8115CB8
 
         .global MoveReqText_8115CBC
         MoveReqText_8115CBC:
-        .string "Also~2c the team must have a Pokémon with\n"
-        .string "the move $i0 or have the\n"
-        .string "Hidden Machine $i0.\0"
+        .string "Also{COMMA} the team must have a Pokémon with\n"
+        .string "the move {ARG_MOVE_ITEM_0} or have the\n"
+        .string "Hidden Machine {ARG_MOVE_ITEM_0}.\0"
         .align 2,0
 
 	.global gUnknown_8115D14
@@ -1288,7 +1288,7 @@ gUnknown_8115D14: @ 8115D14
 
         .global WaterTypeNeeded_8115D18
         WaterTypeNeeded_8115D18:
-        .string "To enter this dungeon~2c the team must have\n"
+        .string "To enter this dungeon{COMMA} the team must have\n"
         .string "a Water-type Pokémon.\0"
         .align 2,0
 
@@ -1298,7 +1298,7 @@ gUnknown_8115D5C: @ 8115D5C
 
         .global AlsoWaterTypeNeeded_8115D60
         AlsoWaterTypeNeeded_8115D60:
-        .string "Also~2c the team must have a Water-type\n"
+        .string "Also{COMMA} the team must have a Water-type\n"
         .string "Pokémon.\0"
         .align 2,0
 
@@ -1490,13 +1490,13 @@ gUnknown_811617C: @ 811617C
 
 	.global gUnknown_8116180
 gUnknown_8116180: @ 8116180
-        .string "#CN"
+        .string "{COLOR_1 YELLOW_5}"
         .byte 0x87, 0x45
         .string "{END_COLOR_TEXT_1}\0"
 
 	.global gUnknown_8116188
 gUnknown_8116188: @ 8116188
-        .string "#CN%s{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_8116190
@@ -1680,13 +1680,13 @@ gUnknown_81163E4: @ 81163E4
 
 	.global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-        .string "#+However~2c $n0~27s team\n"
+        .string "#+However{COMMA} $n0{APOSTROPHE}s team\n"
         .string "#+had too much money already...\0"
         .align 2,0
 
 	.global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-        .string "#+However~2c $n0~27s team\n"
+        .string "#+However{COMMA} $n0{APOSTROPHE}s team\n"
         .string "#+had too many items already...\0"
         .align 2,0
         .string "pksdir0\0"
@@ -1902,7 +1902,7 @@ gUnknown_81167E8: @ 81167E8
 	.global gUnknown_81167EC
 gUnknown_81167EC: @ 81167EC
         .string "#+The rescue rank went up from\n"
-        .string "#+$i0 to $i1!\0"
+        .string "#+{ARG_MOVE_ITEM_0} to {ARG_MOVE_ITEM_1}!\0"
         .align 2,0
 
 	.global gUnknown_811681C
@@ -1989,11 +1989,11 @@ gUnknown_8117000: @ 8117000
 
         .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
-        .string "{COLOR_1 YELLOW_2}scene{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_3}scene{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "New Game\0"
         .align 2,0
-        .string "{COLOR_1 YELLOW_2}direction{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_3}direction{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "Western Cave\0"
         .align 2,0

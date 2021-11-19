@@ -48,7 +48,7 @@
     .align 2,0
 
     SeveralQuestions_826E16C:
-    .string "#+But before I can let you through~2c\n"
+    .string "#+But before I can let you through{COMMA}\n"
     .string "#+I have several questions for you.\0"
     .align 2,0
 

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_807191C
-sub_807191C:
+	thumb_func_start LoadIQSkills
+LoadIQSkills:
 	push {r4-r6,lr}
 	ldr r5, [r0, 0x70]
 	ldrb r1, [r5, 0x6]
@@ -48,7 +48,7 @@ _08071968:
 	strb r0, [r1]
 	b _080719BE
 	.align 2, 0
-_08071974: .4byte gUnknown_80F59C4
+_08071974: .4byte gItemMasterMinWildLevel
 _08071978:
 	adds r0, r5, 0
 	adds r0, 0x90
@@ -88,10 +88,10 @@ _080719BE:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807191C
+	thumb_func_end LoadIQSkills
 
-	thumb_func_start sub_80719C4
-sub_80719C4:
+	thumb_func_start CanSeeTeammate
+CanSeeTeammate:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x70]
@@ -138,10 +138,10 @@ _08071A0C:
 	.align 2, 0
 _08071A14: .4byte gDungeonGlobalData
 _08071A18: .4byte 0x0001357c
-	thumb_func_end sub_80719C4
+	thumb_func_end CanSeeTeammate
 
-	thumb_func_start sub_8071A1C
-sub_8071A1C:
+	thumb_func_start GetMoveType_2
+GetMoveType_2:
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -162,7 +162,7 @@ _08071A38:
 _08071A3E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071A1C
+	thumb_func_end GetMoveType_2
 
 	thumb_func_start sub_8071A44
 sub_8071A44:
@@ -248,8 +248,8 @@ _08071AC4:
 	bx r1
 	thumb_func_end sub_8071A8C
 
-	thumb_func_start sub_8071ACC
-sub_8071ACC:
+	thumb_func_start SetVisualFlags
+SetVisualFlags:
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	lsls r1, 16
@@ -318,7 +318,7 @@ _08071B42:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071ACC
+	thumb_func_end SetVisualFlags
 
 	thumb_func_start sub_8071B48
 sub_8071B48:
@@ -746,7 +746,7 @@ _08071E68:
 	ldr r0, _08071EEC
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _08071EF0
 	ldr r2, [r0]
 	ldr r0, [sp, 0xB4]
@@ -1128,7 +1128,7 @@ sub_807218C:
 	ldr r0, _080721C8
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	adds r0, r4, 0
 	bl sub_8070BC0
 	lsls r0, 24
@@ -1295,7 +1295,7 @@ _080722E2:
 	movs r2, 0x1
 	bl PrintFieldMessage
 _080722F4:
-	bl sub_8083600
+	bl GetLeader
 	movs r1, 0
 	bl sub_806A2BC
 	add sp, 0x190
@@ -1477,7 +1477,7 @@ _08072456:
 	ldr r0, _08072478
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _0807247C
 	ldr r1, [r0]
 	mov r0, r10
@@ -1499,7 +1499,7 @@ _0807248A:
 	ldr r0, _0807258C
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _08072590
 	ldr r1, [r0]
 	mov r0, r10
@@ -1581,7 +1581,7 @@ _08072524:
 	str r3, [r6, 0x4]
 _0807252E:
 	mov r0, r10
-	bl sub_807191C
+	bl LoadIQSkills
 	mov r0, r10
 	bl sub_8079764
 	ldr r0, [r7]
@@ -1812,7 +1812,7 @@ _080726DE:
 	str r1, [r6, 0x4]
 _080726E8:
 	ldr r0, [sp, 0x10]
-	bl sub_807191C
+	bl LoadIQSkills
 	ldr r0, [sp, 0x10]
 	bl sub_8079764
 	ldr r0, [r7]
@@ -1834,7 +1834,7 @@ _08072710:
 	ldr r0, _0807273C
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldrb r1, [r5, 0x9]
 	ldr r0, [sp, 0x20]
 	cmp r1, r0
@@ -2038,7 +2038,7 @@ _08072894:
 	ldr r0, _080728C8
 	mov r1, r8
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _080728CC
 	add r1, sp, 0x60
 	bl strcpy
@@ -2428,7 +2428,7 @@ sub_8072B78:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -2473,7 +2473,7 @@ sub_8072B78:
 	.align 2, 0
 _08072BFC: .4byte gAvailablePokemonNames
 _08072C00: .4byte gUnknown_80FE2EC
-_08072C04: .4byte gUnknown_80F4448
+_08072C04: .4byte gAdjacentTileOffsets
 _08072C08:
 	adds r4, 0x4
 	adds r5, 0x1
@@ -2536,11 +2536,11 @@ _08072C74:
 	bx r0
 	.align 2, 0
 _08072C80: .4byte 0x0000013d
-_08072C84: .4byte gUnknown_80F4448
+_08072C84: .4byte gAdjacentTileOffsets
 	thumb_func_end sub_8072B78
 
-	thumb_func_start sub_8072C88
-sub_8072C88:
+	thumb_func_start TargetLeader
+TargetLeader:
 	push {lr}
 	ldr r1, [r0, 0x70]
 	ldrb r0, [r1, 0x6]
@@ -2549,7 +2549,7 @@ sub_8072C88:
 	adds r0, r1, 0
 	adds r0, 0x94
 	ldrb r0, [r0]
-	bl sub_808EAFC
+	bl TacticsTargetLeader
 	lsls r0, 24
 	lsrs r0, 24
 	b _08072CA4
@@ -2558,17 +2558,17 @@ _08072CA2:
 _08072CA4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072C88
+	thumb_func_end TargetLeader
 
-	thumb_func_start sub_8072CA8
-sub_8072CA8:
+	thumb_func_start GetLeaderIfVisible
+GetLeaderIfVisible:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x70]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	bne _08072CEC
-	bl sub_8083600
+	bl GetLeader
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _08072CEC
@@ -2581,13 +2581,13 @@ sub_8072CA8:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072CEC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8045A00
+	bl CanSee_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072CEC
@@ -2599,7 +2599,7 @@ _08072CEE:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072CA8
+	thumb_func_end GetLeaderIfVisible
 
 	thumb_func_start sub_8072CF4
 sub_8072CF4:
@@ -2657,7 +2657,7 @@ _08072D58:
 _08072D64:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072D86
@@ -2693,12 +2693,12 @@ _08072DA4:
 	bge _08072D92
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8045028
+	bl IsNotAttacking
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072E08
 	adds r0, r4, 0
-	bl sub_807520C
+	bl UseAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072DF0
@@ -2895,7 +2895,7 @@ _08072F84:
 	bne _08072FCC
 	adds r0, r4, 0
 	adds r1, r3, 0
-	bl sub_8070D6C
+	bl CannotMoveForward
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072FCC
@@ -2914,7 +2914,7 @@ _08072FDA:
 	strb r0, [r1]
 	b _080731B8
 	.align 2, 0
-_08072FE0: .4byte gUnknown_80F4448
+_08072FE0: .4byte gAdjacentTileOffsets
 _08072FE4: .4byte 0x00000147
 _08072FE8:
 	ldrh r1, [r4, 0x6]
@@ -3327,12 +3327,12 @@ _08073332:
 	mov r9, r2
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807336E
 	mov r0, r8
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073364
@@ -3416,7 +3416,7 @@ _080733DE:
 	mov r0, r8
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80573CC
+	bl IsMoveUsable_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073440
@@ -3537,7 +3537,7 @@ _080734CC:
 	mov r8, r1
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _080734F4
@@ -3552,7 +3552,7 @@ _080734EC: .4byte 0x000135cc
 _080734F0: .4byte 0x00000165
 _080734F4:
 	adds r0, r7, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073514
@@ -3627,7 +3627,7 @@ _0807357A:
 	adds r1, r5, 0
 	movs r2, 0x1
 	str r3, [sp, 0x14]
-	bl sub_80573CC
+	bl IsMoveUsable_2
 	lsls r0, 24
 	ldr r3, [sp, 0x14]
 	cmp r0, 0

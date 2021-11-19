@@ -31,7 +31,7 @@ s32 CalculateFacingDir(short *param_1,short *param_2)
   return uVar1;
 }
 
-s32 sub_8098434(short param_1[],short param_2[])
+s32 GetMaxPositionDifference(short param_1[],short param_2[])
 {
   s32 diff_index1;
   s32 diff_index0;

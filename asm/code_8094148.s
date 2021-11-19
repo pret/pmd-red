@@ -279,8 +279,8 @@ _08094448: .4byte 0xffff0000
 _0809444C: .4byte 0x0000ffff
 	thumb_func_end sub_80943DC
 
-	thumb_func_start sub_8094450
-sub_8094450:
+	thumb_func_start GetBellyRoundedUp
+GetBellyRoundedUp:
 	push {lr}
 	adds r1, r0, 0
 	lsls r0, r1, 16
@@ -306,7 +306,7 @@ _08094474:
 _08094476:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8094450
+	thumb_func_end GetBellyRoundedUp
 
 	thumb_func_start sub_809447C
 sub_809447C:

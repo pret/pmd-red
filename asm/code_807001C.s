@@ -64,7 +64,7 @@ _0807007A:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_08070088: .4byte gUnknown_80F954C
+_08070088: .4byte gFrozenMessage
 _0807008C:
 	ldr r0, _08070098
 	ldr r1, [r0]
@@ -72,7 +72,7 @@ _0807008C:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_08070098: .4byte gUnknown_80F956C
+_08070098: .4byte gWrappedAroundMessage
 _0807009C:
 	ldr r0, _080700A8
 	ldr r1, [r0]
@@ -80,7 +80,7 @@ _0807009C:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_080700A8: .4byte gUnknown_80F958C
+_080700A8: .4byte gWrappedByMessage
 _080700AC:
 	adds r0, r4, 0
 	adds r0, 0xBC
@@ -100,7 +100,7 @@ _080700AC:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_080700D0: .4byte gUnknown_80F95D8
+_080700D0: .4byte gBideMessage
 _080700D4:
 	ldr r0, _080700E0
 	ldr r1, [r0]
@@ -108,7 +108,7 @@ _080700D4:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_080700E0: .4byte gUnknown_80F95A4
+_080700E0: .4byte gPausedMessage
 _080700E4:
 	ldr r0, _080700F0
 	ldr r1, [r0]
@@ -116,7 +116,7 @@ _080700E4:
 	bl SendMessage
 	b _0807019C
 	.align 2, 0
-_080700F0: .4byte gUnknown_80F95BC
+_080700F0: .4byte gInfatuatedMessage
 _080700F4:
 	adds r0, r4, 0
 	adds r0, 0xC8
@@ -158,7 +158,7 @@ _0807012E:
 	adds r6, 0x46
 	ldrb r1, [r6]
 	adds r0, r5, 0
-	bl sub_8070D6C
+	bl CannotMoveForward
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070166
@@ -261,17 +261,17 @@ _08070202:
 	ldr r0, _08070208
 	b _08070278
 	.align 2, 0
-_08070208: .4byte gUnknown_80F954C
+_08070208: .4byte gFrozenMessage
 _0807020C:
 	ldr r0, _08070210
 	b _08070278
 	.align 2, 0
-_08070210: .4byte gUnknown_80F956C
+_08070210: .4byte gWrappedAroundMessage
 _08070214:
 	ldr r0, _08070218
 	b _08070278
 	.align 2, 0
-_08070218: .4byte gUnknown_80F958C
+_08070218: .4byte gWrappedByMessage
 _0807021C:
 	adds r0, r6, 0
 	adds r0, 0xBC
@@ -303,12 +303,12 @@ _0807025C:
 	ldr r0, _08070260
 	b _08070278
 	.align 2, 0
-_08070260: .4byte gUnknown_80F95A4
+_08070260: .4byte gPausedMessage
 _08070264:
 	ldr r0, _08070268
 	b _08070278
 	.align 2, 0
-_08070268: .4byte gUnknown_80F95BC
+_08070268: .4byte gInfatuatedMessage
 _0807026C:
 	adds r0, r6, 0
 	adds r0, 0xC0
@@ -324,7 +324,7 @@ _08070280:
 	movs r0, 0x1
 	b _08070322
 	.align 2, 0
-_08070284: .4byte gUnknown_80F95D8
+_08070284: .4byte gBideMessage
 _08070288:
 	cmp r0, 0
 	beq _08070320
@@ -412,8 +412,8 @@ _08070322:
 	bx r1
 	thumb_func_end sub_80701A4
 
-	thumb_func_start sub_8070328
-sub_8070328:
+	thumb_func_start GetCrossableTerrain
+GetCrossableTerrain:
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
@@ -433,7 +433,7 @@ _08070344:
 	bx r1
 	.align 2, 0
 _08070348: .4byte gUnknown_202F314
-	thumb_func_end sub_8070328
+	thumb_func_end GetCrossableTerrain
 
 	thumb_func_start sub_807034C
 sub_807034C:
@@ -450,7 +450,7 @@ sub_807034C:
 	cmp r0, 0
 	bne _08070398
 	adds r0, r2, 0
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldrh r0, [r4]
@@ -519,7 +519,7 @@ sub_80703A0:
 	ands r0, r1
 	cmp r0, 0
 	bne _08070456
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070400
@@ -537,7 +537,7 @@ sub_80703A0:
 _08070400:
 	movs r1, 0x2
 	ldrsh r0, [r7, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrh r0, [r5]
@@ -590,8 +590,8 @@ _08070458:
 	bx r1
 	thumb_func_end sub_80703A0
 
-	thumb_func_start sub_8070460
-sub_8070460:
+	thumb_func_start CanCrossWalls
+CanCrossWalls:
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r0, [r1, 0x70]
@@ -608,7 +608,7 @@ sub_8070460:
 	bne _08070492
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -621,7 +621,7 @@ _08070494:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070460
+	thumb_func_end CanCrossWalls
 
 	thumb_func_start sub_807049C
 sub_807049C:
@@ -659,7 +659,7 @@ sub_807049C:
 	cmp r0, 0x1
 	bne _0807055A
 _080704E2:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070504
@@ -677,7 +677,7 @@ _080704E2:
 _08070504:
 	movs r1, 0x2
 	ldrsh r0, [r7, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrh r0, [r5]
@@ -767,7 +767,7 @@ sub_8070564:
 _080705A8:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r3, r2, 0
@@ -843,7 +843,7 @@ sub_80705F0:
 	cmp r0, 0x1
 	bne _0807069A
 _08070636:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070658
@@ -861,7 +861,7 @@ _08070636:
 _08070658:
 	movs r1, 0x2
 	ldrsh r0, [r7, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrh r0, [r5]
@@ -940,7 +940,7 @@ sub_80706A4:
 	cmp r0, r6
 	bne _0807076A
 _080706F2:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070714
@@ -958,7 +958,7 @@ _080706F2:
 _08070714:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrh r0, [r5]
@@ -1011,8 +1011,8 @@ _0807076C:
 	bx r1
 	thumb_func_end sub_80706A4
 
-	thumb_func_start sub_8070774
-sub_8070774:
+	thumb_func_start GetMovementSpeed
+GetMovementSpeed:
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r5, [r6, 0x70]
@@ -1049,12 +1049,12 @@ _080707A8:
 	adds r4, r0
 	adds r0, r6, 0
 	movs r1, 0x6
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _080707D0
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x7
@@ -1106,7 +1106,7 @@ _0807080A:
 _0807081C: .4byte 0x000001a3
 _08070820: .4byte gDungeonGlobalData
 _08070824: .4byte 0x0000066e
-	thumb_func_end sub_8070774
+	thumb_func_end GetMovementSpeed
 
 	thumb_func_start sub_8070828
 sub_8070828:
@@ -1129,7 +1129,7 @@ _08070840:
 	cmp r0, 0
 	beq _0807085E
 	adds r0, r4, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -1143,7 +1143,7 @@ _0807085E:
 	cmp r0, 0
 	beq _0807087C
 	adds r0, r4, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1155,7 +1155,7 @@ _0807087C:
 	ldr r0, [r4, 0x70]
 	movs r1, 0x40
 	adds r2, r5, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _080708A0
@@ -1180,8 +1180,8 @@ _080708AE:
 	bx r1
 	thumb_func_end sub_8070828
 
-	thumb_func_start sub_80708B4
-sub_80708B4:
+	thumb_func_start SetMessageArgument_2
+SetMessageArgument_2:
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	adds r4, r2, 0
@@ -1271,7 +1271,7 @@ _0807095A:
 	.align 2, 0
 _08070960: .4byte gRecruitedPokemonRef
 _08070964: .4byte 0x00008df8
-	thumb_func_end sub_80708B4
+	thumb_func_end SetMessageArgument_2
 
 	thumb_func_start sub_8070968
 sub_8070968:
@@ -1397,8 +1397,8 @@ _08070A50: .4byte gRecruitedPokemonRef
 _08070A54: .4byte 0x00008df8
 	thumb_func_end sub_80709C8
 
-	thumb_func_start sub_8070A58
-sub_8070A58:
+	thumb_func_start HasNegativeStatus
+HasNegativeStatus:
 	push {r4,lr}
 	ldr r0, [r0, 0x70]
 	mov r12, r0
@@ -1510,10 +1510,10 @@ _08070B1E:
 	bx r1
 	.align 2, 0
 _08070B24: .4byte 0x0000010d
-	thumb_func_end sub_8070A58
+	thumb_func_end HasNegativeStatus
 
-	thumb_func_start sub_8070B28
-sub_8070B28:
+	thumb_func_start IsSleeping
+IsSleeping:
 	push {lr}
 	ldr r0, [r0, 0x70]
 	adds r0, 0xA8
@@ -1531,10 +1531,10 @@ _08070B40:
 _08070B42:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070B28
+	thumb_func_end IsSleeping
 
-	thumb_func_start sub_8070B48
-sub_8070B48:
+	thumb_func_start HasQuarterHPOrLess
+HasQuarterHPOrLess:
 	push {lr}
 	ldr r0, [r0, 0x70]
 	adds r1, r0, 0
@@ -1556,6 +1556,6 @@ _08070B66:
 _08070B68:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070B48
+	thumb_func_end HasQuarterHPOrLess
 
 	.align 2, 0

@@ -792,7 +792,7 @@ sub_8045708:
 	ldrsh r0, [r1, r2]
 	movs r3, 0x2
 	ldrsh r1, [r1, r3]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -800,7 +800,7 @@ sub_8045708:
 	bne _0804579C
 	b _080457C4
 	.align 2, 0
-_08045744: .4byte gUnknown_810ACC0
+_08045744: .4byte gDungeonWaterType
 _08045748: .4byte gDungeonGlobalData
 _0804574C: .4byte 0x00003a0e
 _08045750:
@@ -952,7 +952,7 @@ _0804584C:
 	beq _08045880
 	adds r1, r4, 0x4
 	adds r0, r2, 0
-	bl sub_8083294
+	bl InSameRoom_2
 	lsls r0, 24
 	lsrs r0, 24
 	b _08045882
@@ -1127,7 +1127,7 @@ CanSee:
 	cmp r0, 0x1
 	bne _080459DE
 	adds r0, r5, 0
-	bl sub_8071884
+	bl CanSeeInvisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080459D8
@@ -1153,7 +1153,7 @@ _080459E8:
 _080459EC:
 	adds r0, r5, 0x4
 	adds r1, r4, 0x4
-	bl sub_8083294
+	bl InSameRoom_2
 	lsls r0, 24
 	lsrs r0, 24
 _080459F8:
@@ -1162,8 +1162,8 @@ _080459F8:
 	bx r1
 	thumb_func_end CanSee
 
-	thumb_func_start sub_8045A00
-sub_8045A00:
+	thumb_func_start CanSee_2
+CanSee_2:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -1188,7 +1188,7 @@ sub_8045A00:
 	cmp r0, 0x1
 	bne _08045A4E
 	adds r0, r5, 0
-	bl sub_8071884
+	bl CanSeeInvisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08045A48
@@ -1214,14 +1214,14 @@ _08045A58:
 _08045A5C:
 	adds r0, r5, 0x4
 	adds r1, r4, 0x4
-	bl sub_808333C
+	bl InSameRoom_3
 	lsls r0, 24
 	lsrs r0, 24
 _08045A68:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045A00
+	thumb_func_end CanSee_2
 
 	thumb_func_start sub_8045A70
 sub_8045A70:
@@ -1244,7 +1244,7 @@ sub_8045A70:
 	beq _08045AA4
 	adds r0, r5, 0x4
 	adds r1, r4, 0x4
-	bl sub_8083294
+	bl InSameRoom_2
 	lsls r0, 24
 	lsrs r0, 24
 	b _08045AA6
@@ -1260,23 +1260,23 @@ _08045AA6:
 sub_8045AAC:
 	push {lr}
 	adds r0, 0x4
-	bl sub_8083294
+	bl InSameRoom_2
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8045AAC
 
-	thumb_func_start sub_8045ABC
-sub_8045ABC:
+	thumb_func_start InSameRoom
+InSameRoom:
 	push {lr}
 	adds r0, 0x4
-	bl sub_808333C
+	bl InSameRoom_3
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045ABC
+	thumb_func_end InSameRoom
 
 	thumb_func_start sub_8045ACC
 sub_8045ACC:
@@ -1411,7 +1411,7 @@ _08045BB6:
 	ldr r1, [r4, 0x70]
 	adds r0, r5, 0
 	adds r2, r6, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	b _08045BEC
 _08045BC2:
 	adds r0, r4, 0
@@ -1690,7 +1690,7 @@ sub_8045DB4:
 	lsls r1, 24
 	lsrs r1, 24
 	str r1, [sp, 0xA8]
-	bl sub_8083600
+	bl GetLeader
 	adds r7, r0, 0
 	ldr r0, [r7, 0x70]
 	str r0, [sp, 0xAC]
@@ -1723,7 +1723,7 @@ _08045DF4:
 _08045E08:
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_8071518
+	bl ShouldAvoidEnemies_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045E40
@@ -2115,7 +2115,7 @@ _08046110:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	str r4, [r0, 0x14]
 	ldrh r1, [r0]
 	movs r0, 0x20
@@ -2201,7 +2201,7 @@ sub_80461C8:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x2
 	ldrsh r1, [r2, r3]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r6, r0, 0
 	ldr r5, [r6, 0x14]
 	cmp r5, 0
@@ -3791,7 +3791,7 @@ _08046E1E:
 	bl FillInventoryGaps
 	cmp r6, 0
 	beq _08046ED4
-	bl sub_8083600
+	bl GetLeader
 	adds r4, r0, 0
 	ldr r0, _08046EE0
 	bl sub_80855E4
@@ -4404,7 +4404,7 @@ _080472E8: .4byte 0xfffffdc0
 _080472EC: .4byte gDungeonGlobalData
 _080472F0: .4byte 0x00018210
 _080472F4: .4byte 0x0001c05e
-_080472F8: .4byte gUnknown_80F4448
+_080472F8: .4byte gAdjacentTileOffsets
 _080472FC: .4byte gUnknown_80F4D64
 _08047300:
 	mov r8, r4
@@ -4427,7 +4427,7 @@ _0804731A:
 	ldr r1, [sp, 0x228]
 	ldr r2, [sp, 0x22C]
 	bl sub_804539C
-	bl sub_804AF74
+	bl IsWaterTileset
 	lsls r0, 24
 	movs r2, 0
 	cmp r0, 0
@@ -4709,7 +4709,7 @@ _0804752C:
 	b _080475A8
 	.align 2, 0
 _08047564: .4byte gUnknown_80F94F0
-_08047568: .4byte gUnknown_80F4448
+_08047568: .4byte gAdjacentTileOffsets
 _0804756C: .4byte 0xffff0000
 _08047570: .4byte 0x0000ffff
 _08047574:
@@ -4975,7 +4975,7 @@ _08047762:
 	ldr r0, [sp, 0x1C]
 	adds r1, r3, 0
 	bl sub_8045394
-	bl sub_804AF74
+	bl IsWaterTileset
 	lsls r0, 24
 	movs r2, 0
 	cmp r0, 0
@@ -5383,7 +5383,7 @@ _08047ABC:
 	bl sub_8042390
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806F450
+	bl SetShopkeeperAggression
 _08047AD0:
 	ldrb r1, [r7]
 	movs r0, 0x8

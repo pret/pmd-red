@@ -1,8 +1,8 @@
 #include "global.h"
 
-extern u8 gUnknown_810ACC0[];
+extern u8 gDungeonWaterType[];
 
 bool8 sub_8097F40(u32 r0)
 {
-    return gUnknown_810ACC0[r0] == 2;
+    return gDungeonWaterType[r0] == 2;
 }

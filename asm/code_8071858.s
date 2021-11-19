@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8071858
-sub_8071858:
+	thumb_func_start HasType
+HasType:
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -32,6 +32,6 @@ _0807187E:
 _08071880:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071858
+	thumb_func_end HasType
 
 	.align 2, 0

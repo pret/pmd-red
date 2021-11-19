@@ -17,7 +17,7 @@ extern void sub_804151C(struct DungeonEntity *r0, u32 r1, u8 r2);
 extern void sub_80416E0(struct DungeonEntity *r0, u32, u32);
 extern u8 sub_8042768(struct DungeonEntity *r0);
 extern void sub_806CDD4(struct DungeonEntity *r0, u8, u32);
-extern u8 sub_8071858(struct DungeonEntity *r0, u8);
+extern u8 HasType(struct DungeonEntity *r0, u8);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(struct DungeonEntity *r0);
@@ -344,7 +344,7 @@ void sub_8041DD8(struct DungeonEntity *r0, s16 r1)
     u32 temp;
     temp = r1;
 
-    if(sub_8071858(r0, 0xE) != 0)
+    if(HasType(r0, 0xE) != 0)
         sub_804151C(r0, temp, 1);
     else
         sub_804151C(r0, 0xE, 1);

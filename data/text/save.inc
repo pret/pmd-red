@@ -1,6 +1,6 @@
 gSaveTextQuicksaving:: @ 80B6A34
 	.string "#+Quicksaving your adventure...\n"
-	.string "#+Please don~27t turn off the power.\0"
+	.string "#+Please don{APOSTROPHE}t turn off the power.\0"
 	.align 2, 0
 
 gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
@@ -9,7 +9,7 @@ gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
 
 gSaveTextYourAdventureHasBeenSavedLong:: @ 80B6AA0
 	.string "#+Your adventure has been saved.\n"
-	.string "#+When you are in a dungeon~2c quicksave\n"
+	.string "#+When you are in a dungeon{COMMA} quicksave\n"
 	.string "#+your progress before ending the game.\0"
 	.align 2, 0
 
@@ -30,11 +30,11 @@ gSaveTextError:: @ 80B6B88
 	.align 2, 0
 
 gSaveTextCantResume:: @ 80B6BDC
-	.string "#+Your data was not properly saved~2c\n"
+	.string "#+Your data was not properly saved{COMMA}\n"
 	.string "#+so your game cannot be resumed\n"
 	.string "#+from your last spot.#P#+Your last outing is considered a defeat.\n"
-	.string "#+Before shutting down~2c save in your\n"
-	.string "#+team base~2c or quicksave in a dungeon.\0"
+	.string "#+Before shutting down{COMMA} save in your\n"
+	.string "#+team base{COMMA} or quicksave in a dungeon.\0"
 	.align 2, 0
 
 gSaveTextMayNotResume:: @ 80B6CB8

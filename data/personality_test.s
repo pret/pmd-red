@@ -89,7 +89,7 @@
     .4byte HardyQuest3Points
 
     HardyQuest3Question:
-    .string "When the going gets tough~2c do you get\n"
+    .string "When the going gets tough{COMMA} do you get\n"
     .string "going?\0"
     .align 2,0
 
@@ -129,7 +129,7 @@
 
     HardyQuest4Question:
     .string "There is a bucket. If you put\n"
-    .string "water in it~2c how high will you fill it?\0"
+    .string "water in it{COMMA} how high will you fill it?\0"
     .align 2,0
 
     @ Question 1, Category 2 (Docile)
@@ -213,7 +213,7 @@
     .4byte -1
 
     DocileQuest3_Cool:
-    .string "Say thanks~2c but be cool.\0"
+    .string "Say thanks{COMMA} but be cool.\0"
     .align 2,0
 
     DocileQuest3_Joke:
@@ -231,7 +231,7 @@
     .4byte DocileQuest3Points
 
     DocileQuest3Question:
-    .string "A friend brought over something you~27d\n"
+    .string "A friend brought over something you{APOSTROPHE}d\n"
     .string "forgotten.#W\n"
     .string "How do you thank your friend?\0"
     .align 2,0
@@ -294,8 +294,8 @@
     .4byte BraveQuest1Points
 
     BraveQuest1Question:
-    .string "You~27re going bungee jumping for the first\n"
-    .string "time.#PSince it~27s scary~2c you decide to test the\n"
+    .string "You{APOSTROPHE}re going bungee jumping for the first\n"
+    .string "time.#PSince it{APOSTROPHE}s scary{COMMA} you decide to test the\n"
     .string "jump with a doll...#W\n"
     .string "And the bungee cord snaps!#P"
     .string "Will you still try to make a jump anyway?\0"
@@ -368,9 +368,9 @@
 
     BraveQuest2BQuestion:
     .string "You valiantly fight the aliens...#W\n"
-    .string "But~2c you are defeated...#PAn alien says to you...#P~93YOU HAVE IMPRESSED US.\n"
-    .string "IT WAS A PLEASURE TO SEE.#PJOIN US~2c AND TOGETHER WE SHALL\n"
-    .string "RULE THE WORLD.~94#W\n"
+    .string "But{COMMA} you are defeated...#PAn alien says to you...#P{QUOTE_START}YOU HAVE IMPRESSED US.\n"
+    .string "IT WAS A PLEASURE TO SEE.#PJOIN US{COMMA} AND TOGETHER WE SHALL\n"
+    .string "RULE THE WORLD.{QUOTE_END}#W\n"
     .string "What will you do?\0"
     .align 2,0
 
@@ -434,7 +434,7 @@
     .align 2,0
 
     BraveQuest4_Scared:
-    .string "Help~2c even if scared.\0"
+    .string "Help{COMMA} even if scared.\0"
     .align 2,0
 
     BraveQuest4_Hesitation:
@@ -457,7 +457,7 @@
     JollyQuest1Points:
     .byte 0x00, 0x00, 0x00, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
- 
+
      JollyQuest1Answers:
     .4byte HardyQuest2_Yes
     .byte 0x00, 0x00, 0x00, 0x00
@@ -535,7 +535,7 @@
     .4byte JollyQuest3Points
 
     JollyQuest3Question:
-    .string "It~27s the summer holidays!\n"
+    .string "It{APOSTROPHE}s the summer holidays!\n"
     .string "Where would you like to go?\0"
     .align 2,0
 
@@ -556,7 +556,7 @@
     .4byte -1
 
     JollyQuest4_Go:
-    .string "Right... Well~2c I gotta go.\0"
+    .string "Right... Well{COMMA} I gotta go.\0"
     .align 2,0
 
     JollyQuest4_Again:
@@ -576,7 +576,7 @@
     JollyQuest4Question:
     .string "A foreign person has started up a\n"
     .string "conversation with you.#P"
-    .string "To be honest~2c you don~27t have a clue what\n"
+    .string "To be honest{COMMA} you don{APOSTROPHE}t have a clue what\n"
     .string "this fellow is saying.#W\n"
     .string "How do you reply?\0"
     .align 2,0
@@ -1038,8 +1038,8 @@
     .global HastyQuest1Question
     HastyQuest1Question:
     .string "You receive a gift!#W\n"
-    .string "But you don~27t know what~27s in it.#W\n"
-    .string "You~27re curious~2c so what do you do?\0"
+    .string "But you don{APOSTROPHE}t know what{APOSTROPHE}s in it.#W\n"
+    .string "You{APOSTROPHE}re curious{COMMA} so what do you do?\0"
     .align 2,0
 
     @ Question 2, Category 8 (Hasty)
@@ -1107,7 +1107,7 @@
 
     .global HastyQuest3_Empty
     HastyQuest3_Empty:
-    .string "It~27s going to be empty...\0"
+    .string "It{APOSTROPHE}s going to be empty...\0"
     .align 2,0
 
     .global HastyQuest3_Trap
@@ -1219,7 +1219,7 @@
 
     .global SassyQuest1Question
     SassyQuest1Question:
-    .string "Your country~27s leader is in front of you.\n"
+    .string "Your country{APOSTROPHE}s leader is in front of you.\n"
     .string "How do you speak to him or her?\0"
     .align 2,0
 
@@ -1458,7 +1458,7 @@
 
     .global RelaxedQuest2Question
     RelaxedQuest2Question:
-    .string "Do you get the feeling that you~27ve slowed\n"
+    .string "Do you get the feeling that you{APOSTROPHE}ve slowed\n"
     .string "down lately?\0"
     .align 2,0
 
@@ -1621,8 +1621,8 @@
 
     .global LonelyQuest3Question
     LonelyQuest3Question:
-    .string "What do you do with your room~27s light\n"
-    .string "when you~27re going to bed at night?\0"
+    .string "What do you do with your room{APOSTROPHE}s light\n"
+    .string "when you{APOSTROPHE}re going to bed at night?\0"
     .align 2,0
 
     @ Question 4, Category 12 (Lonely)
@@ -1666,7 +1666,7 @@
 
     .global LonelyQuest4Question
     LonelyQuest4Question:
-    .string "It~27s a weekend~2c but no one will play\n"
+    .string "It{APOSTROPHE}s a weekend{COMMA} but no one will play\n"
     .string "with you...\n"
     .string "What do you do?\0"
     .align 2,0
@@ -1723,7 +1723,7 @@
 
     .global QuirkyQuest2_MayMayNot
     QuirkyQuest2_MayMayNot:
-    .string "May reply~2c may not.\0"
+    .string "May reply{COMMA} may not.\0"
     .align 2,0
 
     .global QuirkyQuest2_Reply
@@ -1792,7 +1792,7 @@
     .global QuirkyQuest3Question
     QuirkyQuest3Question:
     .string "There is a person you like...#W\n"
-    .string "But there~27s no opportunity to get close.\n"
+    .string "But there{APOSTROPHE}s no opportunity to get close.\n"
     .string "What do you do?\0"
     .align 2,0
 
@@ -1821,7 +1821,7 @@
 
     .global QuirkyQuest4_GoLeft
     QuirkyQuest4_GoLeft:
-    .string "It~27s a trap! Go left.\0"
+    .string "It{APOSTROPHE}s a trap! Go left.\0"
     .align 2,0
 
     .global QuirkyQuest4_GoRight
@@ -1875,7 +1875,7 @@
 
     .global MiscQuest1Question
     MiscQuest1Question:
-    .string "On vacation outings~2c you want to...\0"
+    .string "On vacation outings{COMMA} you want to...\0"
     .align 2,0
 
     @ Question 2, Category 14 (Miscellaneous)
@@ -1895,7 +1895,7 @@
 
     .global MiscQuest2_DontCare
     MiscQuest2_DontCare:
-    .string "Don~27t care.\0"
+    .string "Don{APOSTROPHE}t care.\0"
     .align 2,0
 
     .global MiscQuest2
@@ -1906,7 +1906,7 @@
 
     .global MiscQuest2Question
     MiscQuest2Question:
-    .string "It~27s the summer festival!\n"
+    .string "It{APOSTROPHE}s the summer festival!\n"
     .string "Do you like carnivals?\0"
     .align 2,0
 
@@ -1943,7 +1943,7 @@
 
     .global MiscQuest3Question
     MiscQuest3Question:
-    .string "Somebody calls you ~93weird but funny.~94\n"
+    .string "Somebody calls you {QUOTE_START}weird but funny.{QUOTE_END}\n"
     .string "How does that make you feel?\0"
     .align 2,0
 

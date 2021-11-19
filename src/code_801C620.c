@@ -23,8 +23,8 @@ struct unkStruct_203B240
 };
 
 extern struct unkStruct_203B240 *gUnknown_203B240;
-extern char gUnknown_80DBE2C[]; // $i0
-extern char gUnknown_80DBE30[]; // $m0
+extern char gUnknown_80DBE2C[]; // {ARG_MOVE_ITEM_0}
+extern char gUnknown_80DBE30[]; // {ARG_POKEMON_0}
 extern u8 gUnknown_202DE58[0x58];
 extern u8 gAvailablePokemonNames[0x58];
 
@@ -103,7 +103,7 @@ void sub_801C6E4(void)
 {
   char *skillName;
   struct subStruct_203B240 *preload;
-  
+
   switch(gUnknown_203B240->state)
   {
     case 0:
@@ -111,7 +111,7 @@ void sub_801C6E4(void)
         sub_80073B8(gUnknown_203B240->unk24);
         skillName = GetIQSkillName(gUnknown_203B240->unk4);
         strcpy(gUnknown_202DE58,skillName);
-        xxx_format_and_draw(16,0,gUnknown_80DBE2C,0,0); // $i0
+        xxx_format_and_draw(16,0,gUnknown_80DBE2C,0,0); // {ARG_MOVE_ITEM_0}
         xxx_call_draw_string(8,16,GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);
         gUnknown_203B240->unkC = sub_8097DF0(GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk10);
@@ -122,7 +122,7 @@ void sub_801C6E4(void)
         sub_80073B8(gUnknown_203B240->unk24);
         preload = gUnknown_203B240->unk10[gUnknown_203B240->unk8];
         strcpy(gAvailablePokemonNames,preload->unk0);
-        xxx_format_and_draw(16,0,gUnknown_80DBE30,gUnknown_203B240->unk24,0); // $m0
+        xxx_format_and_draw(16,0,gUnknown_80DBE30,gUnknown_203B240->unk24,0); // {ARG_POKEMON_0}
         xxx_format_and_draw(4,16,gUnknown_203B240->unk10[gUnknown_203B240->unk8]->unk4, gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);
         break;
@@ -161,7 +161,7 @@ void sub_801C7D4(void)
 
 void sub_801C848(void)
 {
-  
+
   if (gUnknown_203B240->unk8 < (gUnknown_203B240->unkC - 1)) {
     if ((gUnknown_203B240->unk20 & 8)) {
       sub_8013F84();

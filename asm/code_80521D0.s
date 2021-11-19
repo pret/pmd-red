@@ -1272,7 +1272,7 @@ sub_8052DC0:
 	thumb_func_start sub_8052DD0
 sub_8052DD0:
 	push {r4-r6,lr}
-	bl sub_8083600
+	bl GetLeader
 	adds r5, r0, 0
 	ldr r6, _08052E68
 	ldr r4, [r6]
@@ -2505,7 +2505,7 @@ _080537B0: .4byte gUnknown_80FCD28
 _080537B4:
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8071A1C
+	bl GetMoveType_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2541,7 +2541,7 @@ _080537F8:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2590,7 +2590,7 @@ _08053854:
 _08053864:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053874
@@ -2599,7 +2599,7 @@ _08053874:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	movs r1, 0xF0
 	ands r1, r0
 	cmp r1, 0
@@ -2611,7 +2611,7 @@ _08053888:
 	lsls r2, 1
 	adds r0, r1, r2
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	ldr r1, _080538C4
 	movs r3, 0
 	ldrsh r1, [r1, r3]
@@ -2630,7 +2630,7 @@ _080538AE:
 	adds r0, 0x46
 	ldrb r4, [r0]
 	mov r10, r4
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080538CC
@@ -2749,7 +2749,7 @@ _0805397C:
 	bl sub_80522F4
 	b _080539D0
 	.align 2, 0
-_080539B4: .4byte gUnknown_80F4448
+_080539B4: .4byte gAdjacentTileOffsets
 _080539B8: .4byte gUnknown_80F5006
 _080539BC: .4byte 0x00000163
 _080539C0: .4byte gUnknown_80FDDA8
@@ -2897,7 +2897,7 @@ _08053AE8:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	lsls r0, 16
 	asrs r1, r0, 16
 	ldr r0, _08053C88
@@ -2958,7 +2958,7 @@ _08053B5C:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 12
@@ -3109,7 +3109,7 @@ _08053CA8:
 	ldr r0, _08053CC8
 	ldr r1, [r5, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	cmp r7, r5
 	bne _08053CD0
 	ldr r0, _08053CCC
@@ -3127,7 +3127,7 @@ _08053CD0:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053CEC
@@ -3274,7 +3274,7 @@ _08053DF2:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3310,14 +3310,14 @@ _08053E4A:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0
 	bne _08053E64
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_806F450
+	bl SetShopkeeperAggression
 _08053E64:
 	ldr r2, [sp, 0x24]
 	movs r3, 0xAC
@@ -5857,7 +5857,7 @@ sub_8055640:
 	mov r9, r3
 	ldr r7, [sp, 0x44]
 	adds r1, r5, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -6030,7 +6030,7 @@ _080557C0:
 	ldr r0, _08055808
 	ldr r1, [r4, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	adds r0, r6, 0
 	bl sub_8045888
 	lsls r0, 24
@@ -6114,7 +6114,7 @@ sub_8055864:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r1, r5, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6223,7 +6223,7 @@ _0805591C:
 	b _0805595A
 	.align 2, 0
 _08055944: .4byte gUnknown_81069BC
-_08055948: .4byte gUnknown_80F522C
+_08055948: .4byte gTypeEffectivenessChart
 _0805594C:
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -6293,7 +6293,7 @@ _080559B6:
 	bl CalculateFacingDir
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8071138
+	bl CanAttackInFront
 	lsls r0, 24
 	cmp r0, 0
 	beq _080559D4
@@ -6485,7 +6485,7 @@ _08055B30:
 	bne _08055B4E
 _08055B3C:
 	adds r0, r5, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	bne _08055B5E
@@ -6496,7 +6496,7 @@ _08055B4E:
 	adds r0, r5, 0
 	movs r1, 0
 _08055B52:
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055B5E
@@ -7112,7 +7112,7 @@ _08056068:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl sub_807CD64
+	bl GetTargetingFlags
 	movs r4, 0xF0
 	adds r1, r4, 0
 	ands r1, r0
@@ -7124,7 +7124,7 @@ _08056084:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl sub_807CD64
+	bl GetTargetingFlags
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0x80
@@ -7135,7 +7135,7 @@ _08056084:
 	cmp r0, 0x97
 	bne _080560AE
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7158,7 +7158,7 @@ _080560CC:
 	ldr r0, _08056118
 	ldr r1, [r5, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _0805611C
 	adds r1, r7, 0
 	movs r2, 0
@@ -7204,7 +7204,7 @@ _08056136:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl sub_80573CC
+	bl IsMoveUsable_2
 _08056142:
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -7254,7 +7254,7 @@ _080561A0:
 	ldr r0, _080561D4
 	ldr r1, [r5, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	mov r1, r10
 	cmp r1, 0
 	bne _080561E0
@@ -7366,7 +7366,7 @@ _0805629A:
 	bne _080562BE
 _080562AC:
 	adds r0, r5, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	bne _080562CE
@@ -7377,7 +7377,7 @@ _080562BE:
 	adds r0, r5, 0
 	movs r1, 0
 _080562C2:
-	bl sub_8070D04
+	bl CannotAttack
 	lsls r0, 24
 	cmp r0, 0
 	beq _080562CE
@@ -7397,7 +7397,7 @@ _080562CE:
 	adds r4, 0x46
 	strb r0, [r4]
 	adds r0, r5, 0
-	bl sub_8069DCC
+	bl TargetTileInFront
 	movs r2, 0
 	str r2, [sp, 0x12C]
 _080562F4:
@@ -7632,7 +7632,7 @@ _080564BC:
 	ldr r0, _080564DC
 	ldr r1, [r6, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, [sp, 0x24]
 	cmp r0, 0
 	bne _080564E4
@@ -7746,7 +7746,7 @@ _0805658C:
 _080565A4:
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7801,7 +7801,7 @@ _08056602:
 	beq _080566E4
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7819,7 +7819,7 @@ _08056602:
 	ldrsh r5, [r0, r1]
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7854,7 +7854,7 @@ _08056690:
 _08056694:
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8047,7 +8047,7 @@ _080567EC:
 	str r6, [sp, 0x40]
 	b _0805682E
 	.align 2, 0
-_08056814: .4byte gUnknown_80F4448
+_08056814: .4byte gAdjacentTileOffsets
 _08056818: .4byte 0xffff0000
 _0805681C: .4byte 0x0000ffff
 _08056820:
@@ -8093,7 +8093,7 @@ _0805682E:
 	str r0, [sp, 0x38]
 	b _0805687C
 	.align 2, 0
-_08056874: .4byte gUnknown_80F4448
+_08056874: .4byte gAdjacentTileOffsets
 _08056878:
 	movs r2, 0x20
 	str r2, [sp, 0x38]
@@ -8349,7 +8349,7 @@ _08056A66:
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	adds r2, r0, 0
 	lsls r2, 16
 	asrs r2, 16
@@ -8540,7 +8540,7 @@ _08056BE0:
 	cmp r0, 0x40
 	bne _08056BFC
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -8588,7 +8588,7 @@ _08056C2A:
 	movs r4, 0xA
 _08056C3C:
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -8731,7 +8731,7 @@ _08056D44:
 	adds r0, r5, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_807CD64
+	bl GetTargetingFlags
 	lsls r0, 16
 	asrs r7, r0, 16
 	movs r0, 0xF
@@ -8748,7 +8748,7 @@ _08056D44:
 	cmp r0, 0x97
 	bne _08056D7E
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8845,7 +8845,7 @@ _08056E1C:
 	bne _08056DCC
 	b _08056F64
 	.align 2, 0
-_08056E28: .4byte gUnknown_80F4448
+_08056E28: .4byte gAdjacentTileOffsets
 _08056E2C: .4byte 0xffff0000
 _08056E30: .4byte 0x0000ffff
 _08056E34:
@@ -9066,7 +9066,7 @@ _08056FD0:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9079,7 +9079,7 @@ _08056FE6:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805702E
@@ -9099,7 +9099,7 @@ _0805700C:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805702E
@@ -9228,7 +9228,7 @@ _080570EA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080570F0: .4byte gUnknown_81069F4
+_080570F0: .4byte gChargeMovesToStatuses
 	thumb_func_end sub_80570AC
 
 	.align 2, 0

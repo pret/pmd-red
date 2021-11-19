@@ -462,27 +462,27 @@ gUnknown_80E041C: @ 80E041C
 
 	.global gUnknown_80E0434
 gUnknown_80E0434: @ 80E0434
-        .string " Here~27s your reward!\n"
+        .string " Here{APOSTROPHE}s your reward!\n"
         .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}!\0"
         .align 2,0
 
 	.global gUnknown_80E045C
 gUnknown_80E045C: @ 80E045C
 @ replacing .incbin "baserom.gba", 0x000e045c, 0x28
-        .string "#+#CN$m0{END_COLOR_TEXT_1} received\n"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
         .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1}"
         .byte 0x20, 0x83
         .byte 0xbf, 0x83, 0xc4, 0x2e, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0484
 gUnknown_80E0484: @ 80E0484
-        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team received\n"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
         .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}"
         .byte 0x2E, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E04B4
 gUnknown_80E04B4: @ 80E04B4
-        .string " As your reward~2c you can\n"
+        .string " As your reward{COMMA} you can\n"
         .string "now go to the Friend Area\n"
         .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}!\0"
         .align 2,0
@@ -493,22 +493,22 @@ gUnknown_80E04F4: @ 80E04F4
 
 	.global gUnknown_80E05C0
 gUnknown_80E05C0: @ 80E05C0
-        .string "#+#CN$m0{END_COLOR_TEXT_1} gained access\n"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
         .string "#+to the Friend Area\n"
         .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E05FC
 gUnknown_80E05FC: @ 80E05FC
-        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team gained access\n"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
         .string "#+to the Friend Area\n"
         .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0640
 gUnknown_80E0640: @ 80E0640
-        .string " Here~27s your reward!\n"
-        .string "The promised {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1}!\0"
+        .string " Here{APOSTROPHE}s your reward!\n"
+        .string "The promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80E0670
@@ -521,8 +521,8 @@ gUnknown_80E0670: @ 80E0670
 gUnknown_80E06A8: @ 80E06A8
         .string "#+Congratulations!#P"
         .string "#+{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
-        .string "#+from the $m2\n"
-        .string "#+to the $m3!\0"
+        .string "#+from the {ARG_POKEMON_2}\n"
+        .string "#+to the {ARG_POKEMON_3}!\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -579,7 +579,7 @@ gUnknown_80E0760: @ 80E0760
 
 	.global gUnknown_80E0778
 gUnknown_80E0778: @ 80E0778
-        .string "#+#CN$n0{END_COLOR_TEXT_1} received the #CIBonsly Doll{END_COLOR_TEXT_1}!\n"
+        .string "#+{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the #CIBonsly Doll{END_COLOR_TEXT_1}!\n"
         .string "#+It has been placed outside your\n"
         .string "#+rescue team base.\0"
         .align 2,0
@@ -657,7 +657,7 @@ gUnknown_80E086C: @ 80E086C
 
         .global OkdRescue
         OkdRescue:
-        .string "OK~27d Rescues\0"
+        .string "OK{APOSTROPHE}d Rescues\0"
         .align 2,0
 
         .global CompletedJobs
@@ -798,13 +798,13 @@ gUnknown_80E09C0: @ 80E09C0
 
 	.global gUnknown_80E09D8
 gUnknown_80E09D8: @ 80E09D8
-        .string " ...Uh~2c no?\n"
-        .string "You don~27t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+        .string " ...Uh{COMMA} no?\n"
+        .string "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0A0C
 gUnknown_80E0A0C: @ 80E0A0C
-        .string " ...Uh~2c no?\n"
-        .string "You don~27t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+        .string " ...Uh{COMMA} no?\n"
+        .string "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
         .asciz "pksdir0"

@@ -163,23 +163,23 @@ ALIGNED(4) const char gUnknown_80DF9F0[] = "????";
 
 // NOTE: had to be pre-proc'd to match
 ALIGNED(4) const char gUnknown_80DF9F8[] = _(
-	" Oh~2c hello!\n"
-	"Your rescue mission went well~2c didn~27t it?\n"
-	"I wouldn~27t expect any less~2c {COLOR_1 LIGHT_BLUE_2}%s{END_COLOR_TEXT_1}!#P"
-	" Well~2c well!\n"
+	" Oh{COMMA} hello!\n"
+	"Your rescue mission went well{COMMA} didn{APOSTROPHE}t it?\n"
+	"I wouldn{APOSTROPHE}t expect any less{COMMA} {COLOR_1 LIGHT_BLUE_2}%s{END_COLOR_TEXT_1}!#P"
+	" Well{COMMA} well!\n"
 	"Here is your reward from the Pokémon\n"
 	"Rescue Organization!");
 
-ALIGNED(4) const char gUnknown_80DFAA8[] =
+ALIGNED(4) const char gUnknown_80DFAA8[] = _(
 	" I hope you will keep on\n"
 	"rescuing your friends in\n"
 	"dire straits.#P"
-	" And now~2c I must save\n"
-	"your adventure.";
+	" And now{COMMA} I must save\n"
+	"your adventure.");
 
 ALIGNED(4) const char gUnknown_80DFB14[] = _(
-	" Oh~2c yes~2c that~27s right.\n"
-	"Please don~27t forget to send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}\n"
+	" Oh{COMMA} yes{COMMA} that{APOSTROPHE}s right.\n"
+	"Please don{APOSTROPHE}t forget to send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}\n"
 	"to the friend you just rescued.#P"
 	" Please give me a shout if\n"
 	"you would like to send {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");

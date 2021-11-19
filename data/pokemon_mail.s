@@ -122,8 +122,8 @@ gPokemonMail: @ 80EBA18
     .string "Areas for sale!\n"
     .string "Rescue Teams are urged to check with\n"
     .string "Wigglytuff for what is available.\n"
-    .string "By adding to your Friend Areas~2c you can\n"
-    .string "recruit Pokémon that wouldn~27t join your\n"
+    .string "By adding to your Friend Areas{COMMA} you can\n"
+    .string "recruit Pokémon that wouldn{APOSTROPHE}t join your\n"
     .string "rescue team before!\0"
     .align 2,0
 
@@ -137,8 +137,8 @@ gPokemonMail: @ 80EBA18
     .string "Congratulations! Your team has attained\n"
     .string "the Lucario Rank--the top rank among\n"
     .string "rescue teams! In commemoration of your\n"
-    .string "fantastic achievement~2c we award you the\n"
-    .string "Lucario Statue~2c crafted after the legendary\n"
+    .string "fantastic achievement{COMMA} we award you the\n"
+    .string "Lucario Statue{COMMA} crafted after the legendary\n"
     .string "rescue team leader.\n"
     .string "Keep working for world peace!\n"
     .string "   - Pokémon Rescue Organization -\0"
@@ -167,14 +167,14 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_NewsText2
     gMail_NewsText2:
-    .string "#+{COLOR_1 CYAN}$m0 Innocent! Part 2{END_COLOR_TEXT_1}\n"
+    .string "#+{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 2{END_COLOR_TEXT_1}\n"
     .string "{COLOR_1 GREEN}Quote from Charizard on the scene:{END_COLOR_TEXT_1}\n"
-    .string "~93That~27s what I thought right from\n"
-    .string "the start~2c hahaha!~94\n"
+    .string "{QUOTE_START}That{APOSTROPHE}s what I thought right from\n"
+    .string "the start{COMMA} hahaha!{QUOTE_END}\n"
     .string "{COLOR_1 GREEN}Quote from Tyranitar on the scene:{END_COLOR_TEXT_1}\n"
-    .string "~93That muckraking Gengar...\n"
-    .string "He~27s not getting away with this!\n"
-    .string "He~27d better be ready for it!~94\0"
+    .string "{QUOTE_START}That muckraking Gengar...\n"
+    .string "He{APOSTROPHE}s not getting away with this!\n"
+    .string "He{APOSTROPHE}d better be ready for it!{QUOTE_END}\0"
     .align 2,0
 
     .global gMail_NewsHeadline2
@@ -184,14 +184,14 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_NewsText1
     gMail_NewsText1:
-    .string "#+{COLOR_1 CYAN}$m0 Innocent! Part 1{END_COLOR_TEXT_1}\n"
-    .string "$m1 met with Ninetales on {COLOR_1 RED}Mt. Freeze{END_COLOR_TEXT_1}.\n"
-    .string "Ninetales testified that $m0 was\n"
+    .string "#+{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 1{END_COLOR_TEXT_1}\n"
+    .string "{ARG_POKEMON_1} met with Ninetales on {COLOR_1 RED}Mt. Freeze{END_COLOR_TEXT_1}.\n"
+    .string "Ninetales testified that {ARG_POKEMON_0} was\n"
     .string "not the human that appeared in the legend.\n"
-    .string "As a result~2c Gengar~27s claims were found to\n"
+    .string "As a result{COMMA} Gengar{APOSTROPHE}s claims were found to\n"
     .string "be malicious lies.\n"
-    .string "{COLOR_1 GREEN}The clearly dismayed Gengar~27s quote:{END_COLOR_TEXT_1}\n"
-    .string "~93Ugegegegegegegegegegegeh!~94\0"
+    .string "{COLOR_1 GREEN}The clearly dismayed Gengar{APOSTROPHE}s quote:{END_COLOR_TEXT_1}\n"
+    .string "{QUOTE_START}Ugegegegegegegegegegegeh!{QUOTE_END}\0"
     .align 2,0
 
     .global gMail_NewsHeadline1
@@ -201,13 +201,13 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_PelipperText
     gMail_PelipperText:
-    .string "Yo! Amigo! It~27s awesome you~27re back!\n"
-    .string "I~27ll be delivering mail to you again!\n"
-    .string "I~27ve been looking forward to this with\n"
+    .string "Yo! Amigo! It{APOSTROPHE}s awesome you{APOSTROPHE}re back!\n"
+    .string "I{APOSTROPHE}ll be delivering mail to you again!\n"
+    .string "I{APOSTROPHE}ve been looking forward to this with\n"
     .string "my bill outstretched!\n"
-    .string "I~27ll deliver tons of mail~2c so you~27d better\n"
-    .string "be ready~2c amigo!\n\n"
-    .string " - The wandering postal carrier~2c Pelipper -\0"
+    .string "I{APOSTROPHE}ll deliver tons of mail{COMMA} so you{APOSTROPHE}d better\n"
+    .string "be ready{COMMA} amigo!\n\n"
+    .string " - The wandering postal carrier{COMMA} Pelipper -\0"
     .align 2,0
 
     .global gMail_PelipperHeadline
@@ -258,13 +258,13 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_SlakothText
     gMail_SlakothText:
-    .string "{CENTER_ALIGN COLOR_1 YELLOW}Relief for Delicate Souls Who Can~27t{END_COLOR_TEXT_1}\n"
+    .string "{CENTER_ALIGN COLOR_1 YELLOW}Relief for Delicate Souls Who Can{APOSTROPHE}t{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Sleep with Different Pillows!{END_COLOR_TEXT_1}\n"
     .string "Insomniacs rejoiced over the announcement\n"
-    .string "of the Slakoth Pillow~2c which is said to\n"
+    .string "of the Slakoth Pillow{COMMA} which is said to\n"
     .string "induce sleepiness just by seeing it.\n"
     .string "Already the inventor is swamped with\n"
-    .string "inquiries from all over. However~2c\n"
+    .string "inquiries from all over. However{COMMA}\n"
     .string "production is said to be not yet ready.\0"
     .align 2,0
 
@@ -275,10 +275,10 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_PitfallText
     gMail_PitfallText:
-    .string "As a result of the natural disasters~2c\n"
+    .string "As a result of the natural disasters{COMMA}\n"
     .string "there have been many reports of Pitfall\n"
     .string "Traps appearing in dungeons.\n"
-    .string "However~2c there also appear to be pitfalls\n"
+    .string "However{COMMA} there also appear to be pitfalls\n"
     .string "made by Pokémon that are not harmful.\n"
     .string "The latter are thought to be made by\n"
     .string "foraging Swinub. Some even turn out to\n"
@@ -295,10 +295,10 @@ gPokemonMail: @ 80EBA18
     .string "A high-seas rescue in the {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} by\n"
     .string "{COLOR_1 CYAN}Team Sea Dragons{END_COLOR_TEXT_1} ended yesterday with\n"
     .string "the successful recovery of Tentacool.\n"
-    .string "The client~2c Corsola~2c is said to be delighted\n"
+    .string "The client{COMMA} Corsola{COMMA} is said to be delighted\n"
     .string "by the outcome.\n"
-    .string "Tentacool stated~2c ~93I didn~27t realize how far\n"
-    .string "I~27d been washed out to sea.~94\n"
+    .string "Tentacool stated{COMMA} {QUOTE_START}I didn{APOSTROPHE}t realize how far\n"
+    .string "I{APOSTROPHE}d been washed out to sea.{QUOTE_END}\n"
     .string "The {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} is unforgiving!\0"
     .align 2,0
 
@@ -310,42 +310,42 @@ gPokemonMail: @ 80EBA18
     .global gMail_VileplumeText
     gMail_VileplumeText:
     .string "Vileplume are widely recognized for \n"
-    .string "their massive flower. However~2c few dare\n"
+    .string "their massive flower. However{COMMA} few dare\n"
     .string "to approach Vileplume because they\n"
     .string "scatter clouds of allergy-inducing\n"
     .string "pollen. Vileplume complain that they tire\n"
-    .string "very easily because the flower~27s weight\n"
+    .string "very easily because the flower{APOSTROPHE}s weight\n"
     .string "makes their head heavy.\0"
     .align 2,0
 
     .global gMail_VileplumeHeadline
     gMail_VileplumeHeadline:
-    .string "#45 Vileplume~27s Weighty Problem\0"
+    .string "#45 Vileplume{APOSTROPHE}s Weighty Problem\0"
     .align 2,0
 
     .global gMail_RawstText
     gMail_RawstText:
     .string "Research has revealed that {COLOR_1 GREEN}Rawst Berries{END_COLOR_TEXT_1}\n"
     .string "found in dungeons are usually unripened\n"
-    .string "and colored green. When ripe~2c they turn a\n"
+    .string "and colored green. When ripe{COMMA} they turn a\n"
     .string "sky blue color. An unripened one is easier\n"
-    .string "to eat~2c however~2c because it has not yet\n"
+    .string "to eat{COMMA} however{COMMA} because it has not yet\n"
     .string "turned bitter. It is known to heal all\n"
     .string "burns.\0"
     .align 2,0
 
     .global gMail_RawstHeadline
     gMail_RawstHeadline:
-    .string "#44 Rawst Berry~27s Effect\0"
+    .string "#44 Rawst Berry{APOSTROPHE}s Effect\0"
     .align 2,0
 
     .global gMail_ClubText
     gMail_ClubText:
     .string "We proudly announce the foundation of\n"
-    .string "the Red & Blue Fan Club~2c an organization\n"
+    .string "the Red & Blue Fan Club{COMMA} an organization\n"
     .string "for supporting Pokémon rescue teams.\n"
     .string "We are currently recruiting new members.\n"
-    .string "Won~27t you join and throw your support\n"
+    .string "Won{APOSTROPHE}t you join and throw your support\n"
     .string "behind our hard-working rescue heroes?\n\n"
     .string "  - Plusle and Minun -\0"
     .align 2,0
@@ -357,19 +357,19 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_ChanseyText
     gMail_ChanseyText:
-    .string "As a special treat~2c I~27ll share a simple\n"
+    .string "As a special treat{COMMA} I{APOSTROPHE}ll share a simple\n"
     .string "way to tell fortunes with you!\n"
     .string "The key is the first thing you find in the\n"
-    .string "day~27s first dungeon.\n"
-    .string "If it~27s money~2c you~27ll be sure to make more.\n"
-    .string "If it~27s a Berry~2c your health luck is good.\n"
-    .string "If it~27s an Apple~2c you~27re super lucky!\n"
+    .string "day{APOSTROPHE}s first dungeon.\n"
+    .string "If it{APOSTROPHE}s money{COMMA} you{APOSTROPHE}ll be sure to make more.\n"
+    .string "If it{APOSTROPHE}s a Berry{COMMA} your health luck is good.\n"
+    .string "If it{APOSTROPHE}s an Apple{COMMA} you{APOSTROPHE}re super lucky!\n"
     .string "  - Chansey -\0"
     .align 2,0
 
     .global gMail_ChanseyHeadline
     gMail_ChanseyHeadline:
-    .string "#42 Chansey~27s Fortune-Telling\0"
+    .string "#42 Chansey{APOSTROPHE}s Fortune-Telling\0"
     .align 2,0
 
     .global gMail_KabutoText
@@ -377,11 +377,11 @@ gPokemonMail: @ 80EBA18
     .string "One of our oldest residents claims to feel\n"
     .string "rejuvenated. Kabuto reportedly had an\n"
     .string "encounter with Relicanth in which both\n"
-    .string "parties reminisced about the ~93old days.~94\n"
-    .string "However~2c even Kabuto could not keep up\n"
-    .string "with Relicanth~27s tales from a hundred\n"
-    .string "million years ago. Kabuto stated~2c ~93It\n"
-    .string "made me feel young talking to Relicanth.~94\0"
+    .string "parties reminisced about the {QUOTE_START}old days.{QUOTE_END}\n"
+    .string "However{COMMA} even Kabuto could not keep up\n"
+    .string "with Relicanth{APOSTROPHE}s tales from a hundred\n"
+    .string "million years ago. Kabuto stated{COMMA} {QUOTE_START}It\n"
+    .string "made me feel young talking to Relicanth.{QUOTE_END}\0"
     .align 2,0
 
     .global gMail_KabutoHeadline
@@ -391,11 +391,11 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_SmeargleText
     gMail_SmeargleText:
-    .string "Smeargle~2c the artist known for his unique\n"
-    .string "artistic vision~2c had a windfall day as one\n"
+    .string "Smeargle{COMMA} the artist known for his unique\n"
+    .string "artistic vision{COMMA} had a windfall day as one\n"
     .string "of his paintings was auctioned for 300\n"
     .string "million {POKE} yesterday. The auctioned\n"
-    .string "artwork was one of Smeargle~27s signature\n"
+    .string "artwork was one of Smeargle{APOSTROPHE}s signature\n"
     .string "works from early in his career.\0"
     .align 2,0
 
@@ -406,28 +406,28 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_CastformText
     gMail_CastformText:
-    .string "Today~2c the weather over Pokémon\n"
+    .string "Today{COMMA} the weather over Pokémon\n"
     .string "Square promises to be clear with no\n"
     .string "chance of showers.\n"
     .string "Other regions can expect showers followed\n"
     .string "by clouds. There may be sun breaks\n"
-    .string "depending on the day~27s moods.\0"
+    .string "depending on the day{APOSTROPHE}s moods.\0"
     .align 2,0
 
     .global gMail_CastformHeadline
     gMail_CastformHeadline:
-    .string "#39 Castform~27s Daily Weather\0"
+    .string "#39 Castform{APOSTROPHE}s Daily Weather\0"
     .align 2,0
 
     .global gMail_GasText
     gMail_GasText:
     .string "Reports of a noxious gas leak caused\n"
-    .string "widespread chaos in the {COLOR_1 YELLOW_3}Sinister Woods{END_COLOR_TEXT_1}.\n"
+    .string "widespread chaos in the {COLOR_1 YELLOW_4}Sinister Woods{END_COLOR_TEXT_1}.\n"
     .string "Specialists speculate that the recent\n"
-    .string "natural disasters are to blame. However~2c\n"
-    .string "some also blame {COLOR_1 CYAN}Team Koffing{END_COLOR_TEXT_1}~27s training\n"
+    .string "natural disasters are to blame. However{COMMA}\n"
+    .string "some also blame {COLOR_1 CYAN}Team Koffing{END_COLOR_TEXT_1}{APOSTROPHE}s training\n"
     .string "in the area for the foul-smelling gas.\n"
-    .string "The answer~2c apparently~2c is blowing in the\n"
+    .string "The answer{COMMA} apparently{COMMA} is blowing in the\n"
     .string "wind.\0"
     .align 2,0
 
@@ -439,18 +439,18 @@ gPokemonMail: @ 80EBA18
     .global gMail_KeyItemText2
     gMail_KeyItemText2:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}When Used Somewhere Special...{END_COLOR_TEXT_1}\n"
-    .string "Eevee and Water Stone~2c Fire Stone~2c\n"
-    .string "Thunderstone~2c or...\n"
+    .string "Eevee and Water Stone{COMMA} Fire Stone{COMMA}\n"
+    .string "Thunderstone{COMMA} or...\n"
     .string "Exeggcute and Leaf Stone...\n"
-    .string "Onix~2c Metal Coat~2c and Link Cable...\n"
+    .string "Onix{COMMA} Metal Coat{COMMA} and Link Cable...\n"
     .string "There appear to be many others!\0"
     .align 2,0
-    
+
     .global gMail_KeyItemHeadline2
     gMail_KeyItemHeadline2:
     .string "#37 Key Items for Pokémon 2\0"
     .align 2,0
-    
+
     .global gMail_KeyItemText1
     gMail_KeyItemText1:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}When Used Somewhere Special...{END_COLOR_TEXT_1}\n"
@@ -461,90 +461,90 @@ gPokemonMail: @ 80EBA18
     .string "Clamperl and Deepseatooth...\n"
     .string "There appear to be many others!\0"
     .align 2,0
-    
+
     .global gMail_KeyItemHeadline1
     gMail_KeyItemHeadline1:
     .string "#36 Key Items for Pokémon 1\0"
     .align 2,0
-    
+
     .global gMail_SwitchText
     gMail_SwitchText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Power Up Combination Attacks!{END_COLOR_TEXT_1}\n"
     .string "Some dungeons allow rescue teams to\n"
     .string "switch leaders on the spot for doing\n"
     .string "combination attacks and so on.\n"
-    .string "When you enter a dungeon~2c open the menu~2c\n"
+    .string "When you enter a dungeon{COMMA} open the menu{COMMA}\n"
     .string "choose the Pokémon you want as the\n"
-    .string "leader under {COLOR_1 YELLOW}Team{END_COLOR_TEXT_1}~2c then select the\n"
+    .string "leader under {COLOR_1 YELLOW}Team{END_COLOR_TEXT_1}{COMMA} then select the\n"
     .string "command {COLOR_1 YELLOW}Leader{END_COLOR_TEXT_1}.\0"
     .align 2,0
-    
+
     .global gMail_SwitchHeadline
     gMail_SwitchHeadline:
     .string "#35 Switching Leaders\0"
     .align 2,0
-    
+
     .global gMail_KecleonText
     gMail_KecleonText:
     .string "There have been numerous reports that\n"
     .string "the older of the Kecleon merchants in\n"
     .string "Pokémon Square occasionally goes\n"
-    .string "missing. Some residents claim~2c ~93He~27s\n"
+    .string "missing. Some residents claim{COMMA} {QUOTE_START}He{APOSTROPHE}s\n"
     .string "greedy. He must be off doing business\n"
-    .string "somewhere.~94 His younger brother denies\n"
-    .string "such claims: ~93He wouldn~27t get free items\n"
-    .string "in dungeons and try to sell them...~94\0"
+    .string "somewhere.{QUOTE_END} His younger brother denies\n"
+    .string "such claims: {QUOTE_START}He wouldn{APOSTROPHE}t get free items\n"
+    .string "in dungeons and try to sell them...{QUOTE_END}\0"
     .align 2,0
-    
+
     .global gMail_KecleonHeadline
     gMail_KecleonHeadline:
     .string "#34 Where Is Kecleon?\0"
     .align 2,0
-    
+
     .global gMail_WeatherText2
     gMail_WeatherText2:
     .string "Clear: Pleasant weather.\n"
-    .string "Hail: Regularly inflicts damage~2c\n"
+    .string "Hail: Regularly inflicts damage{COMMA}\n"
     .string "except on the Ice type.\n"
     .string "Fog: Turns the status of all Pokémon on\n"
     .string "the floor to Mud Sport.\n"
     .string "Blizzard: Boosts the movement speed of\n"
     .string "Ice-type Pokémon by one level.\0"
     .align 2,0
-    
+
     .global gMail_WeatherHeadline2
     gMail_WeatherHeadline2:
     .string "#33 Dungeons and Weather 2\0"
     .align 2,0
-    
+
     .global gMail_WobbuffetText
     gMail_WobbuffetText:
-    .string "Earlier today~2c Wobbuffet reportedly\n"
+    .string "Earlier today{COMMA} Wobbuffet reportedly\n"
     .string "wobbled the wrong way and wandered off.\n"
     .string "It had to be rescued by the famous\n"
     .string "{COLOR_1 CYAN}Team Hydro{END_COLOR_TEXT_1}.\n"
-    .string "Fortunately~2c the wayward wanderer\n"
+    .string "Fortunately{COMMA} the wayward wanderer\n"
     .string "Wobbuffet was only wobbly and otherwise\n"
     .string "unharmed.\0"
     .align 2,0
-    
+
     .global gMail_WobbuffetHeadline
     gMail_WobbuffetHeadline:
     .string "#32 Wobbly Wobbuffet Wanders!\0"
     .align 2,0
-    
+
     .global gMail_PechaText
     gMail_PechaText:
-    .string "Among rescue teams~2c there is growing\n"
+    .string "Among rescue teams{COMMA} there is growing\n"
     .string "demand for equipment that is not only\n"
-    .string "practical~2c but also fashionably appealing.\n"
+    .string "practical{COMMA} but also fashionably appealing.\n"
     .string "The pink {COLOR_1 GREEN}Pecha Scarf{END_COLOR_TEXT_1} is especially popular.\n"
     .string "Even the {COLOR_1 CYAN}Kecleon Shop{END_COLOR_TEXT_1} is having trouble\n"
     .string "keeping it in stock.\n"
-    .string "If you~27re lucky enough to spot one~2c make a\n"
+    .string "If you{APOSTROPHE}re lucky enough to spot one{COMMA} make a\n"
     .string "beeline for it!\0"
     .align 2,0
-    
+
     .global gMail_PechaHeadline
     gMail_PechaHeadline:
     .string "#31 Pecha Scarf--Top Popularity!\0"
@@ -552,79 +552,79 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_WeatherText1
     gMail_WeatherText1:
-    .string "Sunny: Boosts Fire-type moves~2c and\n"
+    .string "Sunny: Boosts Fire-type moves{COMMA} and\n"
     .string "weakens Water-type moves.\n"
     .string "Sandstorm: Regularly inflicts damage\n"
-    .string "except on Ground~2c Rock~2c and Steel types.\n"
-    .string "Cloudy: All moves and attacks~2c excluding\n"
-    .string "the Normal type~2c are weakened.\n"
-    .string "Rain: Boosts Water-type moves~2c and\n"
+    .string "except on Ground{COMMA} Rock{COMMA} and Steel types.\n"
+    .string "Cloudy: All moves and attacks{COMMA} excluding\n"
+    .string "the Normal type{COMMA} are weakened.\n"
+    .string "Rain: Boosts Water-type moves{COMMA} and\n"
     .string "weakens Fire. Prevents explosions.\0"
     .align 2,0
-    
+
     .global gMail_WeatherHeadline1
     gMail_WeatherHeadline1:
     .string "#30 Dungeons and Weather 1\0"
     .align 2,0
-    
+
     .global gMail_AzurillText
     gMail_AzurillText:
-    .string "With a simple act of courage~2c Azurill\n"
+    .string "With a simple act of courage{COMMA} Azurill\n"
     .string "became a hero despite being small in size.\n"
-    .string "Azurill came across Slowpoke~2c who had\n"
-    .string "fallen into a pond. Our hero~27s tail~2c thrown\n"
-    .string "at the struggling Slowpoke~2c saved a sure\n"
+    .string "Azurill came across Slowpoke{COMMA} who had\n"
+    .string "fallen into a pond. Our hero{APOSTROPHE}s tail{COMMA} thrown\n"
+    .string "at the struggling Slowpoke{COMMA} saved a sure\n"
     .string "drowning! Slowpoke claimed to have\n"
     .string "entirely forgotten having the ability to\n"
     .string "swim capably.\0"
     .align 2,0
-    
+
     .global gMail_AzurillHeadline
     gMail_AzurillHeadline:
     .string "#29 Azurill--the Little Hero!\0"
     .align 2,0
-    
+
     .global gMail_KeyText
     gMail_KeyText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Head Out to the Desert Region!{END_COLOR_TEXT_1}\n"
-    .string "If you~27ve been wondering what lies behind\n"
+    .string "If you{APOSTROPHE}ve been wondering what lies behind\n"
     .string "the mysterious locked doors of the #CDSolar\n"
-    .string "Cave{END_COLOR_TEXT_1}~2c there~27s been a breakthrough!\n"
+    .string "Cave{END_COLOR_TEXT_1}{COMMA} there{APOSTROPHE}s been a breakthrough!\n"
     .string "Reports indicate the door keys are easily\n"
     .string "found in the #CDDesert Region{END_COLOR_TEXT_1}. Explorers are\n"
     .string "advised to compose teams with Pokémon\n"
     .string "adapted to the desert environment.\0"
     .align 2,0
-    
+
     .global gMail_KeyHeadline
     gMail_KeyHeadline:
     .string "#28 The Key\0"
     .align 2,0
-    
+
     .global gMail_SweetText
     gMail_SweetText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Feel a Little Envious?{END_COLOR_TEXT_1}\n"
     .string "Teddiursa is often seen licking its paws\n"
     .string "that have soaked up sweet honey. While it\n"
     .string "may be sticky shaking paws with\n"
-    .string "Teddiursa~2c one can~27t help but feel a\n"
+    .string "Teddiursa{COMMA} one can{APOSTROPHE}t help but feel a\n"
     .string "twinge of envy.\0"
     .align 2,0
-    
+
     .global gMail_SweetHeadline
     gMail_SweetHeadline:
     .string "#27 Sweet Hands!\0"
     .align 2,0
-    
+
     .global gMail_RangeText
     gMail_RangeText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}All Moves Have Effective Ranges{END_COLOR_TEXT_1}\n"
     .string "Moves that affect an entire room have a\n"
     .string "range of two tiles in a corridor. The move\n"
-    .string "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}~2c which lowers the Attack stat of\n"
-    .string "foes in a room~2c will reach two tiles away\n"
-    .string "in a corridor~2c for example. If~2c however~2c\n"
-    .string "the visibility is limited to just one tile~2c\n"
+    .string "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{COMMA} which lowers the Attack stat of\n"
+    .string "foes in a room{COMMA} will reach two tiles away\n"
+    .string "in a corridor{COMMA} for example. If{COMMA} however{COMMA}\n"
+    .string "the visibility is limited to just one tile{COMMA}\n"
     .string "the range of moves will also be limited.\0"
     .align 2,0
 
@@ -638,9 +638,9 @@ gPokemonMail: @ 80EBA18
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Make Your Explorations Easier by{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Boosting the IQ of Team Members!{END_COLOR_TEXT_1}\n"
     .string "Eating Gummis boosts the IQ of Pokémon.\n"
-    .string "Upon reaching certain IQ levels~2c a Pokémon\n"
+    .string "Upon reaching certain IQ levels{COMMA} a Pokémon\n"
     .string "learns IQ Skills that can be very helpful\n"
-    .string "(for example~2c learning to seek out foes\n"
+    .string "(for example{COMMA} learning to seek out foes\n"
     .string "with type disadvantages). Check\n"
     .string "the IQ Skills of your team members!\0"
     .align 2,0
@@ -656,7 +656,7 @@ gPokemonMail: @ 80EBA18
     .string "There have been numerous reports of new\n"
     .string "floor tiles other than Wonder Tiles.\n"
     .string "Believed to have been made by the recent\n"
-    .string "natural disasters~2c these floor tiles remain\n"
+    .string "natural disasters{COMMA} these floor tiles remain\n"
     .string "hidden until they are stepped on. They then\n"
     .string "trigger a variety of traps. Rescue teams\n"
     .string "are urged to use extreme caution.\0"
@@ -671,11 +671,11 @@ gPokemonMail: @ 80EBA18
     gMail_MakuhitaText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Study Type Matchups{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}at the Makuhita Dojo!{END_COLOR_TEXT_1}\n"
-    .string "At the Makuhita Dojo~2c one can learn how\n"
+    .string "At the Makuhita Dojo{COMMA} one can learn how\n"
     .string "Pokémon type matchups affect battles.\n"
-    .string "It~27s because the dojo~27s training rooms are\n"
-    .string "divided by type. For example~2c in the #CDFire\n"
-    .string "Maze{END_COLOR_TEXT_1}~2c there are only Fire-type Pokémon.\n"
+    .string "It{APOSTROPHE}s because the dojo{APOSTROPHE}s training rooms are\n"
+    .string "divided by type. For example{COMMA} in the #CDFire\n"
+    .string "Maze{END_COLOR_TEXT_1}{COMMA} there are only Fire-type Pokémon.\n"
     .string "Try move types to see what works best!\0"
     .align 2,0
 
@@ -687,12 +687,12 @@ gPokemonMail: @ 80EBA18
     .global gMail_MachineText
     gMail_MachineText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}New Types of Machines Discovered?{END_COLOR_TEXT_1}\n"
-    .string "In a recently discovered cave~2c explorers\n"
+    .string "In a recently discovered cave{COMMA} explorers\n"
     .string "found unique types of Technical Machines.\n"
     .string "They apparently do not break after a single\n"
     .string "use. Further studies are said to be under\n"
     .string "consideration by the authorities.\n"
-    .string "In related news~2c the cave is to be named\n"
+    .string "In related news{COMMA} the cave is to be named\n"
     .string "the #CDSolar Cave{END_COLOR_TEXT_1}.\0"
     .align 2,0
 
@@ -705,12 +705,12 @@ gPokemonMail: @ 80EBA18
     gMail_UltimateText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}The Ultimate Dungeon{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Challenges You to Do Your Best!{END_COLOR_TEXT_1}\n"
-    .string "Somewhere in the world~2c there supposedly\n"
+    .string "Somewhere in the world{COMMA} there supposedly\n"
     .string "is an incredibly tough dungeon. One must\n"
-    .string "enter alone at Level 1~2c and without any\n"
+    .string "enter alone at Level 1{COMMA} and without any\n"
     .string "items. No one has ever completed the\n"
     .string "challenge. It is considered a test not of\n"
-    .string "power~2c but of intelligence and wits.\0"
+    .string "power{COMMA} but of intelligence and wits.\0"
     .align 2,0
 
     .global gMail_UltimateHeadline
@@ -722,11 +722,11 @@ gPokemonMail: @ 80EBA18
     gMail_GummiText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Gummis That Make You Smart{END_COLOR_TEXT_1}\n"
     .string "Research has revealed that popular Gummi\n"
-    .string "treats not only enhance intelligence~2c they\n"
+    .string "treats not only enhance intelligence{COMMA} they\n"
     .string "also have different effects depending on\n"
     .string "type. Share Gummis with your friends and\n"
     .string "get smarter for your adventures! In\n"
-    .string "dungeons~2c throw them at your friends.\n"
+    .string "dungeons{COMMA} throw them at your friends.\n"
     .string "Use them in Friend Areas and...?\0"
     .align 2,0
 
@@ -740,11 +740,11 @@ gPokemonMail: @ 80EBA18
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Moving Diagonally{END_COLOR_TEXT_1}\n"
     .string "Move diagonally to avoid foes!\n"
     .string "Keeping {R_BUTTON}"
-    .string " pressed~2c use\n"
+    .string " pressed{COMMA} use\n"
     .byte 0x87
     .string "R to move diagonally.\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Changing Direction{END_COLOR_TEXT_1}\n"
-    .string "It~27s also very important to change\n"
+    .string "It{APOSTROPHE}s also very important to change\n"
     .string "directions without moving. Check Hints to\n"
     .string "see how you can do this maneuver!\0"
     .align 2,0
@@ -756,13 +756,13 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_AddMembersText
     gMail_AddMembersText:
-    .string "If you want to enlarge your rescue team~2c\n"
+    .string "If you want to enlarge your rescue team{COMMA}\n"
     .string "you must first get Friend Areas. When\n"
     .string "a Pokémon that can live in an obtained\n"
-    .string "Friend Area is defeated~2c it may ask to\n"
+    .string "Friend Area is defeated{COMMA} it may ask to\n"
     .string "join your rescue team. Add to your\n"
     .string "Friend Areas so you can recruit more\n"
-    .string "members! Incidentally~2c you may take no\n"
+    .string "members! Incidentally{COMMA} you may take no\n"
     .string "more than three friends into a dungeon.\0"
     .align 2,0
 
@@ -774,13 +774,13 @@ gPokemonMail: @ 80EBA18
     .global gMail_TeamMoveText
     gMail_TeamMoveText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Use Team Members Effectively!{END_COLOR_TEXT_1}\n"
-    .string "When you~27re fighting in a dungeon~2c it~27s\n"
+    .string "When you{APOSTROPHE}re fighting in a dungeon{COMMA} it{APOSTROPHE}s\n"
     .string "important to use your team members. If\n"
-    .string "attacked from the side~2c move horizontally.\n"
-    .string "If attacked from above or below~2c move\n"
-    .string "vertically. That way~2c you can have several\n"
+    .string "attacked from the side{COMMA} move horizontally.\n"
+    .string "If attacked from above or below{COMMA} move\n"
+    .string "vertically. That way{COMMA} you can have several\n"
     .string "Pokémon fighting a single foe. Change\n"
-    .string "Tactics if members don~27t move properly.\0"
+    .string "Tactics if members don{APOSTROPHE}t move properly.\0"
     .align 2,0
 
     .global gMail_TeamMoveHeadline
@@ -792,9 +792,9 @@ gPokemonMail: @ 80EBA18
     gMail_WondersText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}The Seven Wonders of Pokémon?{END_COLOR_TEXT_1}\n"
     .string "The mysterious feet of Diglett.\n"
-    .string "What is inside Forretress~27s shell.\n"
-    .string "The intelligence of Girafarig~27s tail.\n"
-    .string "Arbok~27s variety of patterns.\n"
+    .string "What is inside Forretress{APOSTROPHE}s shell.\n"
+    .string "The intelligence of Girafarig{APOSTROPHE}s tail.\n"
+    .string "Arbok{APOSTROPHE}s variety of patterns.\n"
     .string "We await submissions from readers on\n"
     .string "other Pokémon mysteries!\n"
     .string "  - Mystery Hunter Team -\0"
@@ -810,10 +810,10 @@ gPokemonMail: @ 80EBA18
     .string "{COLOR_1 YELLOW}First#=2Gravelerock{END_COLOR_TEXT_1}\n"
     .string "{COLOR_1 YELLOW}Second#=2Oran Berry{END_COLOR_TEXT_1}\n"
     .string "In a nationwide survey involving rescue\n"
-    .string "teams~2c the most popular item was found to\n"
+    .string "teams{COMMA} the most popular item was found to\n"
     .string "be {COLOR_1 GREEN}Gravelerocks{END_COLOR_TEXT_1}. According to Sudowoodo\n"
-    .string "of {COLOR_1 CYAN}Team Fakers{END_COLOR_TEXT_1}~2c ~93It lets you attack\n"
-    .string "from far away. It~27s invaluable.~94 The next\n"
+    .string "of {COLOR_1 CYAN}Team Fakers{END_COLOR_TEXT_1}{COMMA} {QUOTE_START}It lets you attack\n"
+    .string "from far away. It{APOSTROPHE}s invaluable.{QUOTE_END} The next\n"
     .string "most popular item was {COLOR_1 GREEN}Oran Berries{END_COLOR_TEXT_1}.\0"
     .align 2,0
 
@@ -868,7 +868,7 @@ gPokemonMail: @ 80EBA18
     gMail_LinkedEntryText1:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}These Are the Recommended{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Linked Moves for Beginners!{END_COLOR_TEXT_1}\n"
-    .string "{COLOR_1 RED}Grass~2c Fighting~2c and Ground Types{END_COLOR_TEXT_1}\n"
+    .string "{COLOR_1 RED}Grass{COMMA} Fighting{COMMA} and Ground Types{END_COLOR_TEXT_1}\n"
     .string "Bulbasaur\n"
     .string "{COLOR_1 GREEN}Vine Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
     .string "Chikorita\n"
@@ -888,11 +888,11 @@ gPokemonMail: @ 80EBA18
     .global gMail_TypeText
     gMail_TypeText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Learn How Types Match Up!{END_COLOR_TEXT_1}\n"
-    .string "All Pokémon are of certain types~2c such as\n"
-    .string "{COLOR_1 RED}Fire{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Water{END_COLOR_TEXT_1}. In a battle~2c the damage\n"
-    .string "inflicted depends on how the Pokémon~27s\n"
-    .string "type matches up with the move~27s type.\n"
-    .string "For example~2c a {COLOR_1 RED}Fire{END_COLOR_TEXT_1}-type Pokémon is\n"
+    .string "All Pokémon are of certain types{COMMA} such as\n"
+    .string "{COLOR_1 RED}Fire{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Water{END_COLOR_TEXT_1}. In a battle{COMMA} the damage\n"
+    .string "inflicted depends on how the Pokémon{APOSTROPHE}s\n"
+    .string "type matches up with the move{APOSTROPHE}s type.\n"
+    .string "For example{COMMA} a {COLOR_1 RED}Fire{END_COLOR_TEXT_1}-type Pokémon is\n"
     .string "weak against {COLOR_1 CYAN}Water{END_COLOR_TEXT_1}-type moves.\n"
     .string "Exploit type matchups to win battles!\0"
     .align 2,0
@@ -905,9 +905,9 @@ gPokemonMail: @ 80EBA18
     .global gMail_DungeonText
     gMail_DungeonText:
     .string "If your rescue team is defeated in a\n"
-    .string "dungeon~2c you lose several items and\n"
+    .string "dungeon{COMMA} you lose several items and\n"
     .string "all the money you are carrying.\n"
-    .string "Beware of what you~27re carrying before\n"
+    .string "Beware of what you{APOSTROPHE}re carrying before\n"
     .string "you go off on a rescue or an outing.\n"
     .string "Use {COLOR_1 CYAN}Kangaskhan Storage{END_COLOR_TEXT_1} to keep\n"
     .string "invaluable items safely stored.\n"
@@ -922,12 +922,12 @@ gPokemonMail: @ 80EBA18
     .global gMail_WonderText
     gMail_WonderText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Wonder Tiles Reset Attack and Defense!{END_COLOR_TEXT_1}\n"
-    .string "If your Attack is lowered by a foe~27s\n"
-    .string "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}~2c or your Defense is lowered\n"
-    .string "by a foe~27s {COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1}~2c for example~2c the\n"
+    .string "If your Attack is lowered by a foe{APOSTROPHE}s\n"
+    .string "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{COMMA} or your Defense is lowered\n"
+    .string "by a foe{APOSTROPHE}s {COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1}{COMMA} for example{COMMA} the\n"
     .string "affected stat can be reset to normal by\n"
     .string "stepping on a Wonder Tile or going to the\n"
-    .string "next floor. Beware~2c enhanced stats are\n"
+    .string "next floor. Beware{COMMA} enhanced stats are\n"
     .string "also reset to normal!\0"
     .align 2,0
 
@@ -939,25 +939,25 @@ gPokemonMail: @ 80EBA18
     .global gMail_MoveText
     gMail_MoveText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}The Benefits of Using Moves{END_COLOR_TEXT_1}\n"
-    .string "If a move is used on a foe~2c when it is\n"
-    .string "defeated~2c {COLOR_1 CYAN}you earn more Exp. Points{END_COLOR_TEXT_1}!\n"
+    .string "If a move is used on a foe{COMMA} when it is\n"
+    .string "defeated{COMMA} {COLOR_1 CYAN}you earn more Exp. Points{END_COLOR_TEXT_1}!\n"
     .string "A move only has to be used once on the\n"
     .string "foe: after that it can be defeated using a\n"
     .string "regular attack to earn more Exp. Points.\n"
     .string "Moves are also more likely to become\n"
-    .string "{COLOR_1 CYAN}critical hits{END_COLOR_TEXT_1}! Don~27t overuse them~2c though!\0"
+    .string "{COLOR_1 CYAN}critical hits{END_COLOR_TEXT_1}! Don{APOSTROPHE}t overuse them{COMMA} though!\0"
     .align 2,0
 
     .global gMail_MoveHeadline
     gMail_MoveHeadline:
-    .string "#8 Let~27s Use Moves!\0"
+    .string "#8 Let{APOSTROPHE}s Use Moves!\0"
     .align 2,0
 
     .global gMail_OptionsText
     gMail_OptionsText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Change Your Option Settings{END_COLOR_TEXT_1}\n"
     .string "{CENTER_ALIGN COLOR_1 YELLOW}to Suit Your Play Style!{END_COLOR_TEXT_1}\n"
-    .string "Press {B_BUTTON} to open the menu~2c then\n"
+    .string "Press {B_BUTTON} to open the menu{COMMA} then\n"
     .string "choose {COLOR_1 YELLOW}Others{END_COLOR_TEXT_1} and {COLOR_1 YELLOW}Game Options{END_COLOR_TEXT_1}.\n"
     .string "You can change settings to suit the way\n"
     .string "you play.\0"
@@ -976,7 +976,7 @@ gPokemonMail: @ 80EBA18
     .string "outsider without hesitation. Some believe\n"
     .string "a mysterious force is behind their\n"
     .string "behavior. One source blamed Diglett\n"
-    .string "for triggering earthquakes~2c but the\n"
+    .string "for triggering earthquakes{COMMA} but the\n"
     .string "investigative team is skeptical.\0"
     .align 2,0
 
@@ -987,13 +987,13 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_SeedText
     gMail_SeedText:
-    .string "{CENTER_ALIGN COLOR_1 YELLOW}Seeds Can Be Thrown~2c Too!{END_COLOR_TEXT_1}\n"
+    .string "{CENTER_ALIGN COLOR_1 YELLOW}Seeds Can Be Thrown{COMMA} Too!{END_COLOR_TEXT_1}\n"
     .string "Seeds are usually meant to be eaten.\n"
     .string "But did you know? They can also be thrown\n"
     .string "at other Pokémon to unlock their effects.\n"
-    .string "Toss seeds you don~27t want to eat at foes!\n"
+    .string "Toss seeds you don{APOSTROPHE}t want to eat at foes!\n"
     .string "Throw good seeds at friends!\n"
-    .string "Don~27t be afraid to throw your seeds!\0"
+    .string "Don{APOSTROPHE}t be afraid to throw your seeds!\0"
     .align 2,0
 
     .global gMail_SeedHeadline
@@ -1004,11 +1004,11 @@ gPokemonMail: @ 80EBA18
     .global gMail_HungerText
     gMail_HungerText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Eat Something When You Get Hungry!{END_COLOR_TEXT_1}\n"
-    .string "While you~27re exploring a dungeon~2c you will\n"
+    .string "While you{APOSTROPHE}re exploring a dungeon{COMMA} you will\n"
     .string "get progressively hungry (your Belly goes\n"
-    .string "down). If you become famished~2c you will\n"
+    .string "down). If you become famished{COMMA} you will\n"
     .string "eventually lose HP and even faint.\n"
-    .string "That~27s why you should eat something to fill\n"
+    .string "That{APOSTROPHE}s why you should eat something to fill\n"
     .string "your Belly! You can always buy food at the\n"
     .string "{COLOR_1 CYAN}Kecleon Shop{END_COLOR_TEXT_1}.\0"
     .align 2,0
@@ -1022,8 +1022,8 @@ gPokemonMail: @ 80EBA18
     gMail_JobText:
     .string "If you want to go on a rescue job listed\n"
     .string "on the Bulletin Board at the Pelipper Post\n"
-    .string "Office~2c or one that~27s delivered to your\n"
-    .string "Mailbox~2c you first need to {COLOR_1 YELLOW}Accept{END_COLOR_TEXT_1} the job~2c\n"
+    .string "Office{COMMA} or one that{APOSTROPHE}s delivered to your\n"
+    .string "Mailbox{COMMA} you first need to {COLOR_1 YELLOW}Accept{END_COLOR_TEXT_1} the job{COMMA}\n"
     .string "then choose {COLOR_1 YELLOW}Take Job{END_COLOR_TEXT_1}. Only then will you\n"
     .string "be able to handle that job.\n"
     .string "Try to do accepted jobs quickly!\n"
@@ -1034,14 +1034,14 @@ gPokemonMail: @ 80EBA18
     gMail_JobHeadline:
     .string "#3 Accepting Rescue Jobs\0"
     .align 2,0
-    
+
     .global gMail_BasicsText
     gMail_BasicsText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Saving Your Adventure and Pokémon News{END_COLOR_TEXT_1}\n"
     .string "You can save your adventure by going to\n"
     .string "your bed. Get in the habit of saving often.\n"
     .string "You should also store old Pokémon News.\n"
-    .string "If your Mailbox is full~2c you won~27t get the\n"
+    .string "If your Mailbox is full{COMMA} you won{APOSTROPHE}t get the\n"
     .string "latest issue of the news or any job mail.\n"
     .string "Check the Mailbox and store old news!\n"
     .string "   - Pokémon Rescue Organization -\0"
@@ -1056,10 +1056,10 @@ gPokemonMail: @ 80EBA18
     gMail_WelcomeText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}To All New Members!{END_COLOR_TEXT_1}\n"
     .string "Your badge has the power to send back\n"
-    .string "to town any Pokémon you~27ve rescued. Just\n"
-    .string "hold the badge up~2c and it does the rest.\n"
-    .string "By completing rescue jobs~2c you will be\n"
-    .string "awarded points that raise your team~27s\n"
+    .string "to town any Pokémon you{APOSTROPHE}ve rescued. Just\n"
+    .string "hold the badge up{COMMA} and it does the rest.\n"
+    .string "By completing rescue jobs{COMMA} you will be\n"
+    .string "awarded points that raise your team{APOSTROPHE}s\n"
     .string "ranking. Aim for the Bronze Rank for now!\n"
     .string "   - Pokémon Rescue Organization -\0"
     .align 2,0

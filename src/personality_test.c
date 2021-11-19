@@ -74,7 +74,7 @@ extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 
-ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon $m0!");
+ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon {ARG_POKEMON_0}!");
 const char * const gStarterRevealPtr = gStarterReveal;
 
 ALIGNED(4) const char gPartnerPrompt[] = _(
@@ -84,17 +84,17 @@ ALIGNED(4) const char gPartnerPrompt[] = _(
         "{CENTER_ALIGN}as your partner from this group.");
 const char * const gPartnerPromptPtr = gPartnerPrompt;
 
-ALIGNED(4) const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner~27s nickname?");
+ALIGNED(4) const char gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner{APOSTROPHE}s nickname?");
 const char * const gPartnerNickPromptPtr = gPartnerNickPrompt;
 
 ALIGNED(4) const char gEndIntroText[] = _(
-        "{CENTER_ALIGN}OK! We~27re all set!{EXTRA_MSG}"
-        "{CENTER_ALIGN}Let~27s get you into the\n"
+        "{CENTER_ALIGN}OK! We{APOSTROPHE}re all set!{EXTRA_MSG}"
+        "{CENTER_ALIGN}Let{APOSTROPHE}s get you into the\n"
         "{CENTER_ALIGN}world of Pokémon!{EXTRA_MSG}"
         "{CENTER_ALIGN}Go for it!");
 const char * const gEndIntroTextPtr = gEndIntroText;
 
-const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] = 
+const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 {
     [HARDY] = gHardyDescription,
     [DOCILE] = gDocileDescription,
@@ -113,7 +113,7 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 #include "data/nature_description.h"
 
-const struct UnkTextStruct2 gUnknown_80F4244 = 
+const struct UnkTextStruct2 gUnknown_80F4244 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05, 0x00, 0x00, 0x00,
@@ -125,7 +125,7 @@ const struct UnkTextStruct2 gUnknown_80F4244 =
 
 const char filler[] = "pksdir0"; // CHUNSOFT inserted for aligning data
 
-const s16 gPartners[NUM_PARTNERS] = 
+const s16 gPartners[NUM_PARTNERS] =
 {
     SPECIES_CHARMANDER,
     SPECIES_BULBASAUR,
@@ -139,7 +139,7 @@ const s16 gPartners[NUM_PARTNERS] =
     SPECIES_MUDKIP
 };
 
-const struct UnkTextStruct2 gUnknown_80F4278 = 
+const struct UnkTextStruct2 gUnknown_80F4278 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03, 0x00, 0x00, 0x00,
@@ -149,7 +149,7 @@ const struct UnkTextStruct2 gUnknown_80F4278 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F4290 = 
+const struct UnkTextStruct2 gUnknown_80F4290 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06, 0x00, 0x00, 0x00,
@@ -159,7 +159,7 @@ const struct UnkTextStruct2 gUnknown_80F4290 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F42A8 = 
+const struct UnkTextStruct2 gUnknown_80F42A8 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05, 0x00, 0x00, 0x00,
@@ -324,7 +324,7 @@ void UpdateNatureTotals()
     s32 answerIndex;
     s32 natureIndex;
     const u8 *pointArray;
-    
+
     if (!sub_80144A4(&answerIndex))
     {
         if (answerIndex == 99)
@@ -585,7 +585,7 @@ void PersonalityTest_DisplayStarterSprite(void)
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(starterID);
-  r6 = ((struct FaceData *)(faceFile->data))->unk0[1 + EMOTION_HAPPY]; 
+  r6 = ((struct FaceData *)(faceFile->data))->unk0[1 + EMOTION_HAPPY];
   faceIndex = EMOTION_HAPPY;
   for(palleteIndex = 0; palleteIndex < 16; palleteIndex++){
     SetBGPaletteBufferColorArray(palleteIndex + 224, &((struct FaceData *)(faceFile->data))->unk0[faceIndex][palleteIndex << 2]);
@@ -696,10 +696,10 @@ void RedrawPartnerSelectionMenu(void)
   u32 yCoord;
   const char *monName;
   s32 monCounter;
- 
+
   sVar1 = sub_80095E4(gUnknown_203B404->unk32, 0xc);
 
-  // Have a feeling this is some graphical thing but 
+  // Have a feeling this is some graphical thing but
   // still not sure structure so it's not matching yet bc of that
   // and some casting stuff
   sVar1 += 2;
@@ -855,7 +855,7 @@ s32 GetValidPartners(void)
   s32 counter;
   s32 ValidPartnerCounter;
   s32 CurrentPartnerID;
-  
+
   ValidPartnerCounter = 0;
   PlayerType[0] = GetPokemonType(gUnknown_203B404->StarterID, 0);
   PlayerType[1] = GetPokemonType(gUnknown_203B404->StarterID, 1);

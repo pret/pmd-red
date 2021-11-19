@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8071518
-sub_8071518:
+	thumb_func_start ShouldAvoidEnemies_2
+ShouldAvoidEnemies_2:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -20,16 +20,16 @@ sub_8071518:
 _0807152E:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8071540
+	bl CheckRunAwayVisualFlag
 	movs r0, 0x1
 _08071538:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071518
+	thumb_func_end ShouldAvoidEnemies_2
 
-	thumb_func_start sub_8071540
-sub_8071540:
+	thumb_func_start CheckRunAwayVisualFlag
+CheckRunAwayVisualFlag:
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -59,7 +59,7 @@ sub_8071540:
 _08071576:
 	adds r0, r6, 0
 	movs r1, 0x4
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r7, 0
@@ -67,15 +67,15 @@ _08071576:
 	cmp r0, 0
 	beq _08071590
 	adds r0, r5, 0
-	bl sub_8042910
+	bl ShowVisualFlags
 _08071590:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071540
+	thumb_func_end CheckRunAwayVisualFlag
 
-	thumb_func_start sub_8071598
-sub_8071598:
+	thumb_func_start CanTarget
+CanTarget:
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r2, 24
@@ -128,7 +128,7 @@ _080715EC:
 	cmp r0, 0x1
 	bne _0807160A
 	adds r0, r6, 0
-	bl sub_8071884
+	bl CanSeeInvisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807160A
@@ -199,7 +199,7 @@ _08071670:
 	bx r1
 	.align 2, 0
 _08071678: .4byte gUnknown_8106FE5
-	thumb_func_end sub_8071598
+	thumb_func_end CanTarget
 
 	thumb_func_start sub_807167C
 sub_807167C:

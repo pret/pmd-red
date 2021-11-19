@@ -340,36 +340,36 @@ gFelicityDialogue: @ 80D49E0 (Felicity Bank Dialogue)
     .global gUnknown_80D4A58
 gUnknown_80D4A58:
     .string " Sssnore...\n"
-    .string "Ah~2c you wish to know how the bank\n"
+    .string "Ah{COMMA} you wish to know how the bank\n"
     .string "operates... Very well...#P"
     .string " Zzz...\n"
-    .string "If you~27re defeated in a dungeon~2c\n"
-    .string "you~27ll lose all your money. Did you know?#P"
+    .string "If you{APOSTROPHE}re defeated in a dungeon{COMMA}\n"
+    .string "you{APOSTROPHE}ll lose all your money. Did you know?#P"
     .string " Purr...\n"
-    .string "But~2c you~27ve nothing to fear if you leave\n"
+    .string "But{COMMA} you{APOSTROPHE}ve nothing to fear if you leave\n"
     .string "your money with Felicity Bank...#P"
     .string " Meow... Even if you\n"
-    .string "return defeated from a dungeon~2c your\n"
+    .string "return defeated from a dungeon{COMMA} your\n"
     .string "money will be safe with me...#P"
     .string " Sssnore...\n"
-    .string "I assure you~2c my bank will keep your\n"
+    .string "I assure you{COMMA} my bank will keep your\n"
     .string "money safe...#P"
     .string " Zzz...\n"
-    .string "Simple~2c isn~27t it...?\0"
+    .string "Simple{COMMA} isn{APOSTROPHE}t it...?\0"
     .align 2, 0
 
     .global gUnknown_80D4C14
 gUnknown_80D4C14:
     .string " {POKE}... Purr...\n"
-    .string "Very well~2c {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "Very well{COMMA} {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Here you are.\0"
     .align 2, 0
 
     .global gUnknown_80D4C50
 gUnknown_80D4C50:
     .string " Fnarf? Hunh...?#P"
-    .string " Purr... I so do apologize~2c\n"
-    .string "but you couldn~27t possibly carry any more\n"
+    .string " Purr... I so do apologize{COMMA}\n"
+    .string "but you couldn{APOSTROPHE}t possibly carry any more\n"
     .string "money with you...\0"
     .align 2, 0
 
@@ -377,7 +377,7 @@ gUnknown_80D4C50:
 gUnknown_80D4CC0:
     .string " Fnarf? Meow...?#P"
     .string " Purr...\n"
-    .string "I so hate to disappoint~2c but you have no\n"
+    .string "I so hate to disappoint{COMMA} but you have no\n"
     .string "money saved with me...\0"
     .align 2, 0
 
@@ -400,7 +400,7 @@ gUnknown_80D4D8C:
     .string "Meow! All this money...#W\n"
     .string "Our safe is about to burst...#P"
     .string " Purr...\n"
-    .string "I am so sorry to say~2c but I can~27t accept\n"
+    .string "I am so sorry to say{COMMA} but I can{APOSTROPHE}t accept\n"
     .string "any more of your money...\0"
     .align 2, 0
 
@@ -408,7 +408,7 @@ gUnknown_80D4D8C:
 gUnknown_80D4E28:
     .string " Sssnore... Hmm?#P"
     .string " Zzz...\n"
-    .string "I~27m so sorry to say~2c but you appear not\n"
+    .string "I{APOSTROPHE}m so sorry to say{COMMA} but you appear not\n"
     .string "to have any money...\0"
     .align 2, 0
 
@@ -457,38 +457,38 @@ gUnknown_80D4F94:
 
     .global gUnknown_80D4FC8
 gUnknown_80D4FC8:
-    .string " Ah~2c you wish to know how\n"
+    .string " Ah{COMMA} you wish to know how\n"
     .string "the bank operates. Very well.#P"
     .string " If you are defeated\n"
-    .string "in a dungeon~2c you~27ll lose all your money.\n"
+    .string "in a dungeon{COMMA} you{APOSTROPHE}ll lose all your money.\n"
     .string "Did you know that?#P"
     .string " But you can avoid that!#W\n"
-    .string "You~27ve nothing to fear if you leave your\n"
+    .string "You{APOSTROPHE}ve nothing to fear if you leave your\n"
     .string "money with Felicity Bank.#P"
     .string " Even if you return\n"
-    .string "defeated from a dungeon~2c your money will\n"
+    .string "defeated from a dungeon{COMMA} your money will\n"
     .string "be safe with me!#P"
-    .string " I assure you~2c my bank\n"
+    .string " I assure you{COMMA} my bank\n"
     .string "will keep your money safe.#P"
-    .string " Simple~2c isn~27t it?\0"
+    .string " Simple{COMMA} isn{APOSTROPHE}t it?\0"
     .align 2, 0
 
     .global gUnknown_80D5158
 gUnknown_80D5158:
-    .string " Very well~2c {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string " Very well{COMMA} {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Here you are.\0"
     .align 2, 0
 
     .global gUnknown_80D5184
 gUnknown_80D5184:
-    .string " Oh?#W I do so apologize~2c\n"
-    .string "but you couldn~27t possibly carry any more\n"
+    .string " Oh?#W I do so apologize{COMMA}\n"
+    .string "but you couldn{APOSTROPHE}t possibly carry any more\n"
     .string "money with you.\0"
     .align 2, 0
 
     .global gUnknown_80D51DC
 gUnknown_80D51DC:
-    .string " Oh?#W I so hate to disappoint~2c\n"
+    .string " Oh?#W I so hate to disappoint{COMMA}\n"
     .string "but you have no money saved with me.\0"
     .align 2, 0
 
@@ -508,13 +508,13 @@ gUnknown_80D5244:
 gUnknown_80D527C:
     .string " Meow! All this money!#W\n"
     .string "Our safe is about to burst!#P"
-    .string " I am so sorry to say~2c but\n"
-    .string "I can~27t accept any more of your money!\0"
+    .string " I am so sorry to say{COMMA} but\n"
+    .string "I can{APOSTROPHE}t accept any more of your money!\0"
     .align 2, 0
 
     .global gUnknown_80D52F8
 gUnknown_80D52F8:
-    .string " Oh?#W I~27m so sorry to say~2c\n"
+    .string " Oh?#W I{APOSTROPHE}m so sorry to say{COMMA}\n"
     .string "but you appear not to have any money.\0"
     .align 2, 0
 
@@ -601,9 +601,9 @@ gUnknown_80D54A4:
     .string "I can store items that you\n"
     .string "found in dungeons...#P"
     .string " Snarfle...\n"
-    .string "Things in storage don~27t get lost...#P"
+    .string "Things in storage don{APOSTROPHE}t get lost...#P"
     .string " Zzz... Zzz...\n"
-    .string "That~27s why...\n"
+    .string "That{APOSTROPHE}s why...\n"
     .string "Keep important items in storage...\0"
     .align 2, 0
 
@@ -616,14 +616,14 @@ gUnknown_80D555C:
     .global gUnknown_80D5590
 gUnknown_80D5590:
     .string " Zzz... No...\n"
-    .string "Can~27t store any more of that...\0"
+    .string "Can{APOSTROPHE}t store any more of that...\0"
     .align 2, 0
 
     .global gUnknown_80D55C0
 gUnknown_80D55C0:
     .string " Zzz... Zzz...\n"
-    .string "That {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
-    .string "Can~27t store it...\0"
+    .string "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
+    .string "Can{APOSTROPHE}t store it...\0"
     .align 2, 0
 
     .global gUnknown_80D55F4
@@ -636,14 +636,14 @@ gUnknown_80D55F4:
 gUnknown_80D5630:
     .string " Snarfle? Hunh...?#W\n"
     .string "Zzz...\n"
-    .string "You don~27t have enough space...\0"
+    .string "You don{APOSTROPHE}t have enough space...\0"
     .align 2, 0
 
     .global gUnknown_80D5670
 gUnknown_80D5670:
     .string " Snarfle? Hunh...?#W\n"
     .string "Zzz...\n"
-    .string "You don~27t have anything...?\0"
+    .string "You don{APOSTROPHE}t have anything...?\0"
     .align 2, 0
 
     .global gUnknown_80D56AC
@@ -662,7 +662,7 @@ gUnknown_80D56CC:
     .global gUnknown_80D5710
 gUnknown_80D5710:
     .string " Hunh...? Taking...?\n"
-    .string "Oh... You want your {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
+    .string "Oh... You want your {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -682,20 +682,20 @@ gUnknown_80D5774:
     .global gUnknown_80D57C4
 gUnknown_80D57C4:
     .string " Zzz... Zzz...\n"
-    .string "Yup~2c I did... Stored away...\0"
+    .string "Yup{COMMA} I did... Stored away...\0"
     .align 2, 0
 
     .global gUnknown_80D57F4
 gUnknown_80D57F4:
-    .string " Hunh~2c wha--? Storage...?\n"
-    .string "I~27ll put away the things you chose...\n"
+    .string " Hunh{COMMA} wha--? Storage...?\n"
+    .string "I{APOSTROPHE}ll put away the things you chose...\n"
     .string "That OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5844
 gUnknown_80D5844:
     .string " Zzz... Store something?\n"
-    .string "Gonna put {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} in storage...\n"
+    .string "Gonna put {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -707,7 +707,7 @@ gUnknown_80D5884:
 
     .global gUnknown_80D58B0
 gUnknown_80D58B0:
-    .string " Hunh~2c wha--? Store what...?\n"
+    .string " Hunh{COMMA} wha--? Store what...?\n"
     .string "You can choose more than one using\n"
     .string "{L_BUTTON} or {R_BUTTON}...\0"
     .align 2, 0
@@ -728,79 +728,79 @@ gUnknown_80D5934:
     .global gUnknown_80D5954
 gUnknown_80D5954:
     .string " Zzz... Zzz...\n"
-    .string "Hello~2c there...\n"
-    .string "$m6 Storage...\0"
+    .string "Hello{COMMA} there...\n"
+    .string "{ARG_POKEMON_6} Storage...\0"
     .align 2, 0
 
     .global gUnknown_80D5984
 gUnknown_80D5984:
     .string " I can store items that you\n"
-    .string "found in dungeons~2c or that you\n"
+    .string "found in dungeons{COMMA} or that you\n"
     .string "bought from shops.#P"
     .string " If you faint in\n"
-    .string "a dungeon~2c your items will be lost...#W\n"
-    .string "But what~27s in storage will be safe.#P"
+    .string "a dungeon{COMMA} your items will be lost...#W\n"
+    .string "But what{APOSTROPHE}s in storage will be safe.#P"
     .string " I keep guard over the\n"
-    .string "storage space~2c so anything you leave\n"
-    .string "with me won~27t ever disappear!#P"
+    .string "storage space{COMMA} so anything you leave\n"
+    .string "with me won{APOSTROPHE}t ever disappear!#P"
     .string " If you have any items that\n"
-    .string "you can~27t bear to lose~2c be sure to leave\n"
+    .string "you can{APOSTROPHE}t bear to lose{COMMA} be sure to leave\n"
     .string "them with me!\0"
     .align 2, 0
 
     .global gUnknown_80D5AF0
 gUnknown_80D5AF0:
-    .string " Sorry~2c dear.\n"
-    .string "I~27ve run out of storage space.\0"
+    .string " Sorry{COMMA} dear.\n"
+    .string "I{APOSTROPHE}ve run out of storage space.\0"
     .align 2, 0
 
     .global gUnknown_80D5B24
 gUnknown_80D5B24:
-    .string " Sorry~2c dear.\n"
-    .string "I can~27t take any more of that item.\0"
+    .string " Sorry{COMMA} dear.\n"
+    .string "I can{APOSTROPHE}t take any more of that item.\0"
     .align 2, 0
 
     .global gUnknown_80D5B5C
 gUnknown_80D5B5C:
-    .string " Oh~2c dear~2c sorry.#W\n"
-    .string "That {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} is an item you\n"
-    .string "can~27t put in storage.\0"
+    .string " Oh{COMMA} dear{COMMA} sorry.#W\n"
+    .string "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is an item you\n"
+    .string "can{APOSTROPHE}t put in storage.\0"
     .align 2, 0
 
     .global gUnknown_80D5BAC
 gUnknown_80D5BAC:
     .string " Oh?\n"
-    .string "You don~27t have anything stored~2c dear.\0"
+    .string "You don{APOSTROPHE}t have anything stored{COMMA} dear.\0"
     .align 2, 0
 
     .global gUnknown_80D5BDC
 gUnknown_80D5BDC:
-    .string " Oh? You don~27t have the room\n"
-    .string "to carry any more items~2c dear.\0"
+    .string " Oh? You don{APOSTROPHE}t have the room\n"
+    .string "to carry any more items{COMMA} dear.\0"
     .align 2, 0
 
     .global gUnknown_80D5C1C
 gUnknown_80D5C1C:
     .string " Oh?\n"
-    .string "You don~27t seem to have anything?\0"
+    .string "You don{APOSTROPHE}t seem to have anything?\0"
     .align 2, 0
 
     .global gUnknown_80D5C44
 gUnknown_80D5C44:
     .string " There you go!\n"
-    .string "Just like you asked~2c sweetie!\0"
+    .string "Just like you asked{COMMA} sweetie!\0"
     .align 2, 0
 
     .global gUnknown_80D5C74
 gUnknown_80D5C74:
-    .string " I~27ll take the items you\n"
+    .string " I{APOSTROPHE}ll take the items you\n"
     .string "chose out of storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5CAC
 gUnknown_80D5CAC:
-    .string " Fine~2c I~27ll take your\n"
-    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} out of storage. OK?\0"
+    .string " Fine{COMMA} I{APOSTROPHE}ll take your\n"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} out of storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5CE4
@@ -818,20 +818,20 @@ gUnknown_80D5D0C:
 
     .global gUnknown_80D5D58
 gUnknown_80D5D58:
-    .string " OK~2c stored away!\n"
-    .string "You can count on me~2c honey.\0"
+    .string " OK{COMMA} stored away!\n"
+    .string "You can count on me{COMMA} honey.\0"
     .align 2, 0
 
     .global gUnknown_80D5D8C
 gUnknown_80D5D8C:
-    .string " I~27ll put the items you chose\n"
+    .string " I{APOSTROPHE}ll put the items you chose\n"
     .string "in storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5DBC
 gUnknown_80D5DBC:
-    .string " I~27ll put your\n"
-    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} in storage. OK?\0"
+    .string " I{APOSTROPHE}ll put your\n"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage. OK?\0"
     .align 2, 0
 
     .global gUnknown_80D5DE8
@@ -849,19 +849,19 @@ gUnknown_80D5E10:
 
     .global gUnknown_80D5E60
 gUnknown_80D5E60:
-    .string " Thank you~2c sweetie.\n"
+    .string " Thank you{COMMA} sweetie.\n"
     .string "Come again!\0"
     .align 2, 0
 
     .global gUnknown_80D5E84
 gUnknown_80D5E84:
-    .string " Anything else~2c dear?\0"
+    .string " Anything else{COMMA} dear?\0"
     .align 2, 0
 
     .global gUnknown_80D5E9C
 gUnknown_80D5E9C:
-    .string " Hello~2c there!\n"
-    .string "Welcome to $m6 Storage.\0"
+    .string " Hello{COMMA} there!\n"
+    .string "Welcome to {ARG_POKEMON_6} Storage.\0"
     .align 2, 0
 
 	.global gKecleonShopDialogue
@@ -976,14 +976,14 @@ gUnknown_80D6038:
 
     .global gUnknown_80D6128
 gUnknown_80D6128:
-    .string " Zzz... Eep? No~2c no...#W\n"
+    .string " Zzz... Eep? No{COMMA} no...#W\n"
     .string "You cannot hold any more money...\0"
     .align 2, 0
 
     .global gUnknown_80D6168
 gUnknown_80D6168:
     .string " Zzz... Hunh? Wha--? Whoa!#W\n"
-    .string "I... I can~27t accept anything like that!\0"
+    .string "I... I can{APOSTROPHE}t accept anything like that!\0"
     .align 2, 0
 
     .global gUnknown_80D61B0
@@ -1009,7 +1009,7 @@ gUnknown_80D6204:
     .global gUnknown_80D6250
 gUnknown_80D6250:
     .string " Zzzzzz... Oh?#W\n"
-    .string "You~27ve got nothing...\0"
+    .string "You{APOSTROPHE}ve got nothing...\0"
     .align 2, 0
 
     .global gUnknown_80D627C
@@ -1024,7 +1024,7 @@ gUnknown_80D62B0:
     .string " Eep...? Zzz...\n"
     .string "You have too much money!#P"
     .string " Zzz... Eh?\n"
-    .string "You can~27t hold any more money...\0"
+    .string "You can{APOSTROPHE}t hold any more money...\0"
     .align 2, 0
 
     .global gUnknown_80D630C
@@ -1049,15 +1049,15 @@ gUnknown_80D6364:
 
     .global gUnknown_80D6394
 gUnknown_80D6394:
-    .string " Zzz... Reep~2c what...?\n"
-    .string "For all that I can buy~2c I will pay\n"
+    .string " Zzz... Reep{COMMA} what...?\n"
+    .string "For all that I can buy{COMMA} I will pay\n"
     .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}... OK?\0"
     .align 2, 0
 
     .global gUnknown_80D63E8
 gUnknown_80D63E8:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
     .string "Is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE} OK?\0"
     .align 2, 0
 
@@ -1082,7 +1082,7 @@ gUnknown_80D6478:
     .global gUnknown_80D6494
 gUnknown_80D6494:
     .string " Zzzzzz...\n"
-    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -1118,27 +1118,27 @@ gUnknown_80D6544:
 
     .global gUnknown_80D6564
 gUnknown_80D6564:
-    .string " Wonder Orbs are very~2c\n"
+    .string " Wonder Orbs are very{COMMA}\n"
     .string "very convenient〜♪#P"
-    .string " However~2c they disappear\n"
+    .string " However{COMMA} they disappear\n"
     .string "after one use...#W\n"
     .string "But they are useful in a pinch!#P"
-    .string " Use them cleverly~2c and your\n"
+    .string " Use them cleverly{COMMA} and your\n"
     .string "adventures will be made much easier〜♪#P"
     .string " And moves...#W\n"
     .string "They are the ultimate power!#P"
     .string " Smash rocks!#W Fly!#W\n"
-    .string "There are many kinds of moves~2c all of\n"
-    .string "them dynamic~2c yet elegant!#P"
+    .string "There are many kinds of moves{COMMA} all of\n"
+    .string "them dynamic{COMMA} yet elegant!#P"
     .string " There are even moves of\n"
     .string "obscure rarity...#W\n"
-    .string "Simply gorgeous~2c they are!#P"
-    .string " Now~2c we have these moves!#W\n"
+    .string "Simply gorgeous{COMMA} they are!#P"
+    .string " Now{COMMA} we have these moves!#W\n"
     .string "They can be learned using our Technical\n"
-    .string "Machines~2c or TMs for short!#P"
+    .string "Machines{COMMA} or TMs for short!#P"
     .string " You see?\n"
-    .string "Isn~27t it exciting? Even dreamy?#P"
-    .string " Why~2c it gets me so excited~2c\n"
+    .string "Isn{APOSTROPHE}t it exciting? Even dreamy?#P"
+    .string " Why{COMMA} it gets me so excited{COMMA}\n"
     .string "my color has turned a rosy tint!#P"
     .string " I do hope you will shop\n"
     .string "with us--me and my brother next to\n"
@@ -1147,91 +1147,91 @@ gUnknown_80D6564:
 
     .global gUnknown_80D6818
 gUnknown_80D6818:
-    .string " Oh~2c no~2c no!#W\n"
-    .string "My friend~2c you cannot add to your money!\n"
+    .string " Oh{COMMA} no{COMMA} no!#W\n"
+    .string "My friend{COMMA} you cannot add to your money!\n"
     .string "I cannot do this.\0"
     .align 2, 0
 
     .global gUnknown_80D6868
 gUnknown_80D6868:
-    .string " Whoa~2c whoa!#W\n"
-    .string "I... I can~27t accept anything like that!\0"
+    .string " Whoa{COMMA} whoa!#W\n"
+    .string "I... I can{APOSTROPHE}t accept anything like that!\0"
     .align 2, 0
 
     .global gUnknown_80D68A4
 gUnknown_80D68A4:
-    .string " Eep! Oh~2c dear!#W\n"
-    .string "You~27re short on money~2c my friend!\0"
+    .string " Eep! Oh{COMMA} dear!#W\n"
+    .string "You{APOSTROPHE}re short on money{COMMA} my friend!\0"
     .align 2, 0
 
     .global gUnknown_80D68E0
 gUnknown_80D68E0:
     .string " Oh? Uh-oh!#W\n"
     .string "My shelves are bare of wares!#P"
-    .string " I am completely sold out~2c\n"
+    .string " I am completely sold out{COMMA}\n"
     .string "my friend!\0"
     .align 2, 0
 
     .global gUnknown_80D6938
 gUnknown_80D6938:
-    .string " Oh~2c dear me!#W\n"
-    .string "My friend~2c you~27ve run out of space for\n"
+    .string " Oh{COMMA} dear me!#W\n"
+    .string "My friend{COMMA} you{APOSTROPHE}ve run out of space for\n"
     .string "my wares!\0"
     .align 2, 0
 
     .global gUnknown_80D6980
 gUnknown_80D6980:
     .string " Oh?#W\n"
-    .string "My friend~2c you seem to have nothing?\0"
+    .string "My friend{COMMA} you seem to have nothing?\0"
     .align 2, 0
 
     .global gUnknown_80D69B0
 gUnknown_80D69B0:
-    .string " Oh~2c oh~2c oh?#W\n"
-    .string "My friend~2c you seem to not have anything\n"
+    .string " Oh{COMMA} oh{COMMA} oh?#W\n"
+    .string "My friend{COMMA} you seem to not have anything\n"
     .string "that you can sell?\0"
     .align 2, 0
 
     .global gUnknown_80D6A04
 gUnknown_80D6A04:
-    .string " Oh~2c my~2c my!\n"
-    .string "My friend~2c you have too much money!#P"
-    .string " You can~27t carry any more\n"
+    .string " Oh{COMMA} my{COMMA} my!\n"
+    .string "My friend{COMMA} you have too much money!#P"
+    .string " You can{APOSTROPHE}t carry any more\n"
     .string "money than you have now.\0"
     .align 2, 0
 
     .global gUnknown_80D6A74
 gUnknown_80D6A74:
     .string " Oh?#W\n"
-    .string "My friend~2c you seem not to have\n"
+    .string "My friend{COMMA} you seem not to have\n"
     .string "enough money?\0"
     .align 2, 0
 
     .global gUnknown_80D6AAC
 gUnknown_80D6AAC:
     .string " ...#WI am all out of wares...\n"
-    .string "I am so sorry~2c my friend...#P"
+    .string "I am so sorry{COMMA} my friend...#P"
     .string " Tomorrow!\n"
     .string "Tomorrow I shall have more wares!\0"
     .align 2, 0
 
     .global gUnknown_80D6B18
 gUnknown_80D6B18:
-    .string " Fine~2c fine~2c we have a deal!\n"
+    .string " Fine{COMMA} fine{COMMA} we have a deal!\n"
     .string "Thank you so much〜♪ \0"
     .align 2, 0
 
     .global gUnknown_80D6B50
 gUnknown_80D6B50:
-    .string " For all that I can buy~2c I can\n"
+    .string " For all that I can buy{COMMA} I can\n"
     .string "offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
     .global gUnknown_80D6BA0
 gUnknown_80D6BA0:
-    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}~2c you say?\n"
-    .string "For that~2c I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
+    .string "For that{COMMA} I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
@@ -1249,7 +1249,7 @@ gUnknown_80D6C1C:
 
     .global gUnknown_80D6C48
 gUnknown_80D6C48:
-    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}~2c you say?\n"
+    .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
     .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
@@ -1262,7 +1262,7 @@ gUnknown_80D6C90:
 
     .global gUnknown_80D6CB8
 gUnknown_80D6CB8:
-    .string " Ah~2c very well!\n"
+    .string " Ah{COMMA} very well!\n"
     .string "Do examine my merchandise.\n"
     .string "I have chosen it with pride〜♪ \0"
     .align 2, 0
@@ -1298,21 +1298,21 @@ gUnknown_80D6D98:
 
     .global gUnknown_80D6E30
 gUnknown_80D6E30:
-    .string " Zzz... Hunh~2c what...?#W\n"
-    .string "Zzz... You can~27t hold any more money...\0"
+    .string " Zzz... Hunh{COMMA} what...?#W\n"
+    .string "Zzz... You can{APOSTROPHE}t hold any more money...\0"
     .align 2, 0
 
     .global gUnknown_80D6E78
 gUnknown_80D6E78:
     .string " Zzz... Whoa...#W\n"
-    .string "I... I can~27t take that!\0"
+    .string "I... I can{APOSTROPHE}t take that!\0"
     .align 2, 0
 
     .global gUnknown_80D6EA4
 gUnknown_80D6EA4:
-    .string " Zzz... Huh~2c my...!#W\n"
+    .string " Zzz... Huh{COMMA} my...!#W\n"
     .string "Meep... Meep...\n"
-    .string "You don~27t have enough money!\0"
+    .string "You don{APOSTROPHE}t have enough money!\0"
     .align 2, 0
 
     .global gUnknown_80D6EEC
@@ -1324,14 +1324,14 @@ gUnknown_80D6EEC:
 
     .global gUnknown_80D6F18
 gUnknown_80D6F18:
-    .string " Zzz... Oh~2c my!#W\n"
+    .string " Zzz... Oh{COMMA} my!#W\n"
     .string "Meep... You have no space...\0"
     .align 2, 0
 
     .global gUnknown_80D6F4C
 gUnknown_80D6F4C:
     .string " Zzz... Eep...?#W\n"
-    .string "Meep... You don~27t seem to have\n"
+    .string "Meep... You don{APOSTROPHE}t seem to have\n"
     .string "anything...?\0"
     .align 2, 0
 
@@ -1339,28 +1339,28 @@ gUnknown_80D6F4C:
 gUnknown_80D6F8C:
     .string " Zzz... Huh?#W\n"
     .string "Meep meep...\n"
-    .string "You don~27t seem to have anything to sell?\0"
+    .string "You don{APOSTROPHE}t seem to have anything to sell?\0"
     .align 2, 0
 
     .global gUnknown_80D6FD4
 gUnknown_80D6FD4:
-    .string " Zzz... Oh~2c my!\n"
+    .string " Zzz... Oh{COMMA} my!\n"
     .string "You have so much money...!#P"
     .string " Zzz... Meep...\n"
-    .string "You can~27t carry any more money...\0"
+    .string "You can{APOSTROPHE}t carry any more money...\0"
     .align 2, 0
 
     .global gUnknown_80D7038
 gUnknown_80D7038:
     .string " Hunh?#W\n"
     .string "Eep...?\n"
-    .string "You don~27t have money?\0"
+    .string "You don{APOSTROPHE}t have money?\0"
     .align 2, 0
 
     .global gUnknown_80D7064
 gUnknown_80D7064:
     .string " ...#W ZZZ!\n"
-    .string "I~27m sold out... Forgive me...\0"
+    .string "I{APOSTROPHE}m sold out... Forgive me...\0"
     .align 2, 0
 
     .global gUnknown_80D7090
@@ -1379,7 +1379,7 @@ gUnknown_80D70B4:
     .global gUnknown_80D7108
 gUnknown_80D7108:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "Selling that {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...?\n"
+    .string "Selling that {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
     .string "How about {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}?\0"
     .align 2, 0
 
@@ -1392,7 +1392,7 @@ gUnknown_80D7154:
     .global gUnknown_80D7184
 gUnknown_80D7184:
     .string " Zzz... Zzz...?\n"
-    .string "You~27re selling what...?\0"
+    .string "You{APOSTROPHE}re selling what...?\0"
     .align 2, 0
 
     .global gUnknown_80D71B0
@@ -1404,13 +1404,13 @@ gUnknown_80D71B0:
     .global gUnknown_80D71CC
 gUnknown_80D71CC:
     .string " Zzz... Meep meep...\n"
-    .string "{COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...?\n"
-    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}~2c OK?\0"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
+    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}{COMMA} OK?\0"
     .align 2, 0
 
     .global gUnknown_80D7204
 gUnknown_80D7204:
-    .string " Buy? Huh~2c eep?\n"
+    .string " Buy? Huh{COMMA} eep?\n"
     .string "Anything else?\0"
     .align 2, 0
 
@@ -1440,21 +1440,21 @@ gUnknown_80D72A0:
 
     .global gUnknown_80D72B8
 gUnknown_80D72B8:
-    .string " We~2c the $m6\n"
-    .string "Brothers~2c have a passion for selling\n"
+    .string " We{COMMA} the {ARG_POKEMON_6}\n"
+    .string "Brothers{COMMA} have a passion for selling\n"
     .string "items.#P"
     .string " Items are useful for your\n"
     .string "dungeon adventures.#P"
     .string " Use your imagination and\n"
-    .string "discover innovative uses~2c please.#P"
-    .string " Ah~2c yes.\n"
+    .string "discover innovative uses{COMMA} please.#P"
+    .string " Ah{COMMA} yes.\n"
     .string "If my shop sells out...#P"
     .string " New merchandise will\n"
     .string "arrive the following day.#P"
-    .string " Until then~2c please go to\n"
+    .string " Until then{COMMA} please go to\n"
     .string "a dungeon and spend some time.\n"
     .string "Please visit on your return〜♪#P"
-    .string " Ah~2c yes. The $m6\n"
+    .string " Ah{COMMA} yes. The {ARG_POKEMON_6}\n"
     .string "Shop is a nationwide chain.#P"
     .string " There are shops even in\n"
     .string "dungeons.\n"
@@ -1463,40 +1463,40 @@ gUnknown_80D72B8:
 
     .global gUnknown_80D7480
 gUnknown_80D7480:
-    .string " Oh~2c my!#W\n"
-    .string "You can~27t add any more to your money.\n"
-    .string "I can~27t complete this deal~2c sorry.\0"
+    .string " Oh{COMMA} my!#W\n"
+    .string "You can{APOSTROPHE}t add any more to your money.\n"
+    .string "I can{APOSTROPHE}t complete this deal{COMMA} sorry.\0"
     .align 2, 0
 
     .global gUnknown_80D74DC
 gUnknown_80D74DC:
-    .string " Oh~2c whoa~2c whoa!#W\n"
-    .string "I... I couldn~27t possibly take that from you!\0"
+    .string " Oh{COMMA} whoa{COMMA} whoa!#W\n"
+    .string "I... I couldn{APOSTROPHE}t possibly take that from you!\0"
     .align 2, 0
 
     .global gUnknown_80D7524
 gUnknown_80D7524:
-    .string " Oh~2c my!#W\n"
-    .string "Sorry~2c but you don~27t have enough money!\0"
+    .string " Oh{COMMA} my!#W\n"
+    .string "Sorry{COMMA} but you don{APOSTROPHE}t have enough money!\0"
     .align 2, 0
 
     .global gUnknown_80D7560
 gUnknown_80D7560:
     .string " Uh-oh?!#W\n"
-    .string "That~27s it! No more merchandise!#P"
-    .string " I~27m completely sold out!\0"
+    .string "That{APOSTROPHE}s it! No more merchandise!#P"
+    .string " I{APOSTROPHE}m completely sold out!\0"
     .align 2, 0
 
     .global gUnknown_80D75AC
 gUnknown_80D75AC:
-    .string " Oh~2c my!#W\n"
+    .string " Oh{COMMA} my!#W\n"
     .string "You have no space for any more items!\0"
     .align 2, 0
 
     .global gUnknown_80D75E0
 gUnknown_80D75E0:
     .string " Oh? Oh?#W\n"
-    .string "You don~27t seem to have anything?\0"
+    .string "You don{APOSTROPHE}t seem to have anything?\0"
     .align 2, 0
 
     .global gUnknown_80D7610
@@ -1507,24 +1507,24 @@ gUnknown_80D7610:
 
     .global gUnknown_80D7640
 gUnknown_80D7640:
-    .string " Oh~2c my goodness!\n"
-    .string "You~27re overflowing with money!#P"
-    .string " You couldn~27t possibly carry\n"
+    .string " Oh{COMMA} my goodness!\n"
+    .string "You{APOSTROPHE}re overflowing with money!#P"
+    .string " You couldn{APOSTROPHE}t possibly carry\n"
     .string "any more money! \0"
     .align 2, 0
 
     .global gUnknown_80D76A8
 gUnknown_80D76A8:
     .string " Huh?#W\n"
-    .string "You don~27t seem to have the money?\0"
+    .string "You don{APOSTROPHE}t seem to have the money?\0"
     .align 2, 0
 
     .global gUnknown_80D76D4
 gUnknown_80D76D4:
-    .string " ...#WI~27m sold out...\n"
-    .string "Please~2c forgive me.#P"
+    .string " ...#WI{APOSTROPHE}m sold out...\n"
+    .string "Please{COMMA} forgive me.#P"
     .string " I will have new merchandise\n"
-    .string "for you tomorrow~2c I swear!\0"
+    .string "for you tomorrow{COMMA} I swear!\0"
     .align 2, 0
 
     .global gUnknown_80D7740
@@ -1535,14 +1535,14 @@ gUnknown_80D7740:
 
     .global gUnknown_80D776C
 gUnknown_80D776C:
-    .string " For everything I can buy~2c\n"
+    .string " For everything I can buy{COMMA}\n"
     .string "I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable to you?\0"
     .align 2, 0
 
     .global gUnknown_80D77C0
 gUnknown_80D77C0:
-    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
     .string "I can offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Will you sell it for that price?\0"
     .align 2, 0
@@ -1555,7 +1555,7 @@ gUnknown_80D780C:
 
     .global gUnknown_80D7830
 gUnknown_80D7830:
-    .string " Ah~2c very well!\n"
+    .string " Ah{COMMA} very well!\n"
     .string "What do you wish to sell?\0"
     .align 2, 0
 
@@ -1567,7 +1567,7 @@ gUnknown_80D785C:
 
     .global gUnknown_80D788C
 gUnknown_80D788C:
-    .string " {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\n"
+    .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
     .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that to your liking?\0"
     .align 2, 0
@@ -1580,7 +1580,7 @@ gUnknown_80D78CC:
 
     .global gUnknown_80D78F8
 gUnknown_80D78F8:
-    .string " Ah~2c very well!\n"
+    .string " Ah{COMMA} very well!\n"
     .string "Feel free to examine my merchandise〜♪\0"
     .align 2, 0
 
@@ -1599,7 +1599,7 @@ gUnknown_80D7958:
     .global gUnknown_80D797C
 gUnknown_80D797C:
     .string " Hello〜♪\n"
-    .string "Welcome to the $m6 Shop〜♪ \0"
+    .string "Welcome to the {ARG_POKEMON_6} Shop〜♪ \0"
     .align 2, 0
 
 	.global gWigglytuffDialogue
@@ -1652,10 +1652,10 @@ gUnknown_80D7A44:
     .string " Zzz... Kwoo...\n"
     .string "You need Friend Areas for friends...#P"
     .string " Zzz... Zzz...\n"
-    .string "A Pokémon becomes your pal when it~27s in\n"
+    .string "A Pokémon becomes your pal when it{APOSTROPHE}s in\n"
     .string "the right Friend Area...#P"
     .string " Zzz... Dwee...\n"
-    .string "That~27s why you should get more Friend\n"
+    .string "That{APOSTROPHE}s why you should get more Friend\n"
     .string "Areas...#P"
     .string " Zzz... Pokémon can only\n"
     .string "live in the right Friend Area for\n"
@@ -1664,12 +1664,12 @@ gUnknown_80D7A44:
     .string "See what Pokémon can live there by\n"
     .string "checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}...#P"
     .string " Zzz...\n"
-    .string "I don~27t sell some Friend Areas...#P"
+    .string "I don{APOSTROPHE}t sell some Friend Areas...#P"
     .string " Kwoo...\n"
     .string "Some rescue missions reward you with\n"
     .string "Friend Areas...#P"
     .string " Zzz... Dwee...\n"
-    .string "Check the Pelipper Post Office~27s Bulletin\n"
+    .string "Check the Pelipper Post Office{APOSTROPHE}s Bulletin\n"
     .string "Board or your Mailbox for missions...\0"
     .align 2, 0
 
@@ -1677,7 +1677,7 @@ gUnknown_80D7A44:
 gUnknown_80D7C94:
     .string " Sssnore...\n"
     .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
-    .string "I can~27t get that Friend Area...#P"
+    .string "I can{APOSTROPHE}t get that Friend Area...#P"
     .string " Zzz... Zzz...\n"
     .string "Sorry...\0"
     .align 2, 0
@@ -1686,9 +1686,9 @@ gUnknown_80D7C94:
 gUnknown_80D7CE8:
     .string " Zzz... Hunh...?\n"
     .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
-    .string "I don~27t know... I~27ll check...#P"
+    .string "I don{APOSTROPHE}t know... I{APOSTROPHE}ll check...#P"
     .string " Sssnore...\n"
-    .string "I~27ll have it for sale...\n"
+    .string "I{APOSTROPHE}ll have it for sale...\n"
     .string "When I find out...\0"
     .align 2, 0
 
@@ -1702,7 +1702,7 @@ gUnknown_80D7D64:
     .global gUnknown_80D7DA0
 gUnknown_80D7DA0:
     .string " Dwee... Kwoo...\n"
-    .string "{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}~27s Friend Area...\n"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s Friend Area...\n"
     .string "Zzz... {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
@@ -1734,7 +1734,7 @@ gUnknown_80D7E58:
     .global gUnknown_80D7E9C
 gUnknown_80D7E9C:
     .string " Hunh...?#W\n"
-    .string "You don~27t have any money...\n"
+    .string "You don{APOSTROPHE}t have any money...\n"
     .string "Zzzzzz...\0"
     .align 2, 0
 
@@ -1742,7 +1742,7 @@ gUnknown_80D7E9C:
 gUnknown_80D7ED0:
     .string " Zzz... Zzz?#W\n"
     .string "Hunh...?\n"
-    .string "You can~27t add to your Friend Areas...\0"
+    .string "You can{APOSTROPHE}t add to your Friend Areas...\0"
     .align 2, 0
 
     .global gUnknown_80D7F10
@@ -1757,10 +1757,10 @@ gUnknown_80D7F10:
     .global gUnknown_80D7F7C
 gUnknown_80D7F7C:
     .string " Zzz... Dwee... Gotcha...#W\n"
-    .string "Zzz... Let~27s do it...#P"
+    .string "Zzz... Let{APOSTROPHE}s do it...#P"
     .string " Sssnore♪ Sssnore♪\n"
-    .string "$m6〜♪ $m6〜♪\n"
-    .string "Let~27s be friends...#P"
+    .string "{ARG_POKEMON_6}〜♪ {ARG_POKEMON_6}〜♪\n"
+    .string "Let{APOSTROPHE}s be friends...#P"
     .string " Kwoo!\n"
     .string "Taaaaaaah!\0"
     .align 2, 0
@@ -1768,7 +1768,7 @@ gUnknown_80D7F7C:
     .global gUnknown_80D8000
 gUnknown_80D8000:
     .string " Kwoo? {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
-    .string "That~27s {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
+    .string "That{APOSTROPHE}s {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -1788,7 +1788,7 @@ gUnknown_80D8054:
     .global gUnknown_80D8080
 gUnknown_80D8080:
     .string " Thank... Zzz... You...\n"
-    .string "Friends~2c friend...\0"
+    .string "Friends{COMMA} friend...\0"
     .align 2, 0
 
     .global gUnknown_80D80B0
@@ -1800,7 +1800,7 @@ gUnknown_80D80B0:
     .global gUnknown_80D80D4
 gUnknown_80D80D4:
     .string " Friends... Zzz...\n"
-    .string "Welcome to the $m6 Club...\0"
+    .string "Welcome to the {ARG_POKEMON_6} Club...\0"
     .align 2, 0
 
     .global gUnknown_80D8104
@@ -1808,45 +1808,45 @@ gUnknown_80D8104:
     .string " Would you like to get more\n"
     .string "friends...#W\n"
     .string "...More members for your team?#P"
-    .string " To add new friends~2c what\n"
+    .string " To add new friends{COMMA} what\n"
     .string "you need are Friend Areas.#P"
     .string " A Pokémon can join your\n"
     .string "rescue team only after it settles in\n"
     .string "the right Friend Area.#P"
-    .string " So~2c if you want to recruit\n"
-    .string "new members~2c you should add to your\n"
+    .string " So{COMMA} if you want to recruit\n"
+    .string "new members{COMMA} you should add to your\n"
     .string "Friend Areas.#P"
-    .string " Oh~2c yes~2c Pokémon can\n"
+    .string " Oh{COMMA} yes{COMMA} Pokémon can\n"
     .string "only live in the right Friend Area for\n"
     .string "their species.#P"
-    .string " If you~27re buying a Friend\n"
-    .string "Area~2c you should confirm what Pokémon\n"
+    .string " If you{APOSTROPHE}re buying a Friend\n"
+    .string "Area{COMMA} you should confirm what Pokémon\n"
     .string "can live there by checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}.#P"
-    .string " Also~2c there are some Friend\n"
-    .string "Areas that I don~27t sell.#P"
+    .string " Also{COMMA} there are some Friend\n"
+    .string "Areas that I don{APOSTROPHE}t sell.#P"
     .string " I think there are some\n"
     .string "rescue missions that give you access\n"
-    .string "to Friend Areas~2c too.#P"
+    .string "to Friend Areas{COMMA} too.#P"
     .string " You should check the\n"
-    .string "Pelipper Post Office~27s Bulletin Board or\n"
+    .string "Pelipper Post Office{APOSTROPHE}s Bulletin Board or\n"
     .string "your Mailbox for rescue requests.#P"
-    .string " You know~2c it makes me\n"
+    .string " You know{COMMA} it makes me\n"
     .string "delighted when you make new friends!\0"
     .align 2, 0
 
     .global gUnknown_80D8420
 gUnknown_80D8420:
     .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
-    .string "I can~27t get that Friend Area for you.#W\n"
-    .string "I~27m really sorry.\0"
+    .string "I can{APOSTROPHE}t get that Friend Area for you.#W\n"
+    .string "I{APOSTROPHE}m really sorry.\0"
     .align 2, 0
 
     .global gUnknown_80D8468
 gUnknown_80D8468:
     .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
-    .string "I don~27t know much about it at all.#W\n"
-    .string "I~27ll check up on it.#P"
-    .string " I~27ll add it to the Friend\n"
+    .string "I don{APOSTROPHE}t know much about it at all.#W\n"
+    .string "I{APOSTROPHE}ll check up on it.#P"
+    .string " I{APOSTROPHE}ll add it to the Friend\n"
     .string "Areas you can buy when I find out more.\0"
     .align 2, 0
 
@@ -1858,14 +1858,14 @@ gUnknown_80D84F8:
 
     .global gUnknown_80D8528
 gUnknown_80D8528:
-    .string " {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}~27s Friend Area\n"
+    .string " {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s Friend Area\n"
     .string "is {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D8550
 gUnknown_80D8550:
     .string " Is there another Pokémon\n"
-    .string "you~27d like to check?\0"
+    .string "you{APOSTROPHE}d like to check?\0"
     .align 2, 0
 
     .global gUnknown_80D8584
@@ -1877,27 +1877,27 @@ gUnknown_80D8584:
     .global gUnknown_80D85AC
 gUnknown_80D85AC:
     .string " Oops?#W\n"
-    .string "It doesn~27t look like you have enough\n"
+    .string "It doesn{APOSTROPHE}t look like you have enough\n"
     .string "money!\0"
     .align 2, 0
 
     .global gUnknown_80D85E4
 gUnknown_80D85E4:
     .string " Oops?#W\n"
-    .string "Oh~2c too bad.#W\n"
-    .string "I~27m fresh out of Friend Areas.\0"
+    .string "Oh{COMMA} too bad.#W\n"
+    .string "I{APOSTROPHE}m fresh out of Friend Areas.\0"
     .align 2, 0
 
     .global gUnknown_80D8620
 gUnknown_80D8620:
     .string " Um?#W\n"
-    .string "You don~27t have any money.\0"
+    .string "You don{APOSTROPHE}t have any money.\0"
     .align 2, 0
 
     .global gUnknown_80D8644
 gUnknown_80D8644:
     .string " Oops!#W\n"
-    .string "You can~27t add to your Friend Areas.\0"
+    .string "You can{APOSTROPHE}t add to your Friend Areas.\0"
     .align 2, 0
 
     .global gUnknown_80D8674
@@ -1911,9 +1911,9 @@ gUnknown_80D8674:
 
     .global gUnknown_80D86E4
 gUnknown_80D86E4:
-    .string " Gotcha! Let~27s do it!#W\n"
-    .string "$m6〜♪ $m6〜♪#W\n"
-    .string "Let~27s be friends... Yoomtaaaaaaah!\0"
+    .string " Gotcha! Let{APOSTROPHE}s do it!#W\n"
+    .string "{ARG_POKEMON_6}〜♪ {ARG_POKEMON_6}〜♪#W\n"
+    .string "Let{APOSTROPHE}s be friends... Yoomtaaaaaaah!\0"
     .align 2, 0
 
     .global gUnknown_80D8738
@@ -1931,7 +1931,7 @@ gUnknown_80D876C:
 
     .global gUnknown_80D8798
 gUnknown_80D8798:
-    .string " You~27d like to add to your\n"
+    .string " You{APOSTROPHE}d like to add to your\n"
     .string "Friend Areas?\n"
     .string "Which one would you like?\0"
     .align 2, 0
@@ -1939,7 +1939,7 @@ gUnknown_80D8798:
     .global gUnknown_80D87E0
 gUnknown_80D87E0:
     .string " Thank you! Come again!\n"
-    .string "We~27re all friends~2c friend!\0"
+    .string "We{APOSTROPHE}re all friends{COMMA} friend!\0"
     .align 2, 0
 
     .global gUnknown_80D8818
@@ -1951,7 +1951,7 @@ gUnknown_80D8818:
     .global gUnknown_80D883C
 gUnknown_80D883C:
     .string " Friends are my treasures!\n"
-    .string "Welcome to the $m6 Club--\n"
+    .string "Welcome to the {ARG_POKEMON_6} Club--\n"
     .string "a circle of friends! \0"
     .align 2, 0
 
@@ -2011,19 +2011,19 @@ gGulpinDialogue: @ 80D8888 (Gulpin Link Shop)
     .global gUnknown_80D8950
 gUnknown_80D8950:
     .string " Zzz... Snuffle...\n"
-    .string "I~27d go broke if it weren~27t for those\n"
+    .string "I{APOSTROPHE}d go broke if it weren{APOSTROPHE}t for those\n"
     .string "forgetful Pokémon...#P"
     .string " Zzz... Gwaaah...\n"
-    .string "Especially that {COLOR_1 CYAN}$m4{END_COLOR_TEXT_1}...\n"
+    .string "Especially that {COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1}...\n"
     .string "It seems to be forgetful...#P"
     .string " Sssnore...\n"
     .string "I hope it forgets more moves...\n"
     .string "So it needs to see me...#P"
     .string " Zzz... Mumble...\n"
     .string "But we decided to get rid of that\n"
-    .string "{COLOR_1 CYAN}$m4{END_COLOR_TEXT_1}...#P"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1}...#P"
     .string " Gwaaaah... Gweh...\n"
-    .string "{COLOR_1 CYAN}$m4{END_COLOR_TEXT_1} won~27t be coming around\n"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1} won{APOSTROPHE}t be coming around\n"
     .string "anymore... \0"
     .align 2, 0
 
@@ -2053,7 +2053,7 @@ gUnknown_80D8BD4:
     .string "Press {L_BUTTON} and {A_BUTTON}...#W Use move!#W\n"
     .string "Convenient...#P"
     .string " Sssnore...\n"
-    .string "Switch the set move in a dungeon~2c too...\0"
+    .string "Switch the set move in a dungeon{COMMA} too...\0"
     .align 2, 0
 
     .global gUnknown_80D8C98
@@ -2071,8 +2071,8 @@ gUnknown_80D8CC8:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mutter...\n"
-    .string "{COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} forgot...\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and moves linked to it...\0"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_5}{END_COLOR_TEXT_1} forgot...\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and moves linked to it...\0"
     .align 2, 0
 
     .global gUnknown_80D8D64
@@ -2084,29 +2084,29 @@ gUnknown_80D8D64:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mumble...\n"
-    .string "{COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} forgot...\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...\0"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_5}{END_COLOR_TEXT_1} forgot...\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D8DE8
 gUnknown_80D8DE8:
     .string " Zzz... Fwaah? Forget...?\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves\n"
     .string "linked to it?\0"
     .align 2, 0
 
     .global gUnknown_80D8E28
 gUnknown_80D8E28:
     .string " Zzz... Forget...?\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\0"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D8E48
 gUnknown_80D8E48:
     .string " Zzznork...? Hunh?\n"
-    .string "You~27re a special Pokémon...#P"
+    .string "You{APOSTROPHE}re a special Pokémon...#P"
     .string " Mumble...\n"
-    .string "I can~27t help you...\0"
+    .string "I can{APOSTROPHE}t help you...\0"
     .align 2, 0
 
     .global gUnknown_80D8E9C
@@ -2124,10 +2124,10 @@ gUnknown_80D8EC4:
     .string " Fwaaah hah!\n"
     .string "There...#P"
     .string " Zzz... Mumble...\n"
-    .string "#CM$m5{END_COLOR_TEXT_1}~27s OK...#P"
+    .string "#CM{ARG_POKEMON_5}{END_COLOR_TEXT_1}{APOSTROPHE}s OK...#P"
     .string " Sssnork... Forgotten...\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and moves linked to it...\n"
-    .string "Remembered {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and moves linked to it...\n"
+    .string "Remembered {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D8F98
@@ -2138,36 +2138,36 @@ gUnknown_80D8F98:
     .string "Gggggggg...#W Pwah! Gulpin!#P"
     .string " Fwaah hah!\n"
     .string "There...#P"
-    .string " Zzz... Zzz... #CM$m5{END_COLOR_TEXT_1}\n"
-    .string "forgot {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...\n"
-    .string "Remembered {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
+    .string " Zzz... Zzz... #CM{ARG_POKEMON_5}{END_COLOR_TEXT_1}\n"
+    .string "forgot {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}...\n"
+    .string "Remembered {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D9034
 gUnknown_80D9034:
     .string " Zzz? Fnurf? \n"
-    .string "Forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}...and moves linked\n"
-    .string "to it? Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+    .string "Forget {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}...and moves linked\n"
+    .string "to it? Remember {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9080
 gUnknown_80D9080:
     .string " Zzznort... Grumble...\n"
-    .string "Forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\n"
-    .string "Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+    .string "Forget {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}?\n"
+    .string "Remember {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D90BC
 gUnknown_80D90BC:
     .string " Zzzznort... Move...?\n"
-    .string "Remember {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?#P"
+    .string "Remember {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?#P"
     .string " Fwaah...\n"
     .string "Gggggggggggg...#W Gulpin!#P"
     .string " Fgwaah...\n"
     .string "There...#P"
     .string " Zzz... Zzz...\n"
-    .string "#CM$m5{END_COLOR_TEXT_1} remembered...\n"
-    .string "Hunh? That move~2c {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}...\0"
+    .string "#CM{ARG_POKEMON_5}{END_COLOR_TEXT_1} remembered...\n"
+    .string "Hunh? That move{COMMA} {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D9168
@@ -2179,7 +2179,7 @@ gUnknown_80D9168:
     .global gUnknown_80D9194
 gUnknown_80D9194:
     .string " Gwaah... Gwaah...\n"
-    .string "Who~27s gonna link moves?\0"
+    .string "Who{APOSTROPHE}s gonna link moves?\0"
     .align 2, 0
 
     .global gUnknown_80D91C4
@@ -2197,7 +2197,7 @@ gUnknown_80D91E4:
     .global gUnknown_80D9204
 gUnknown_80D9204:
     .string " Zzznort... Zzznnort...\n"
-    .string "Can~27t forget that...\0"
+    .string "Can{APOSTROPHE}t forget that...\0"
     .align 2, 0
 
     .global gUnknown_80D9234
@@ -2234,13 +2234,13 @@ gUnknown_80D92EC:
     .global gUnknown_80D9328
 gUnknown_80D9328:
     .string " What if you had to forget\n"
-    .string "a move~2c but you wanted it back?#W\n"
+    .string "a move{COMMA} but you wanted it back?#W\n"
     .string "Ever face that situation?#P"
     .string " I can help!#W\n"
-    .string "Come to me~2c and I can make you instantly\n"
+    .string "Come to me{COMMA} and I can make you instantly\n"
     .string "remember forgotten moves!#P"
     .string " I...#W\n"
-    .string "Well~2c when Pokémon remember...#W\n"
+    .string "Well{COMMA} when Pokémon remember...#W\n"
     .string "I love seeing that instant!#P"
     .string " That look of enlightenment!#W\n"
     .string "That amazed look of pleasure!#P"
@@ -2253,22 +2253,22 @@ gUnknown_80D9498:
     .string " When moves are linked...#W\n"
     .string "Two or more moves can be used one after\n"
     .string "another in one turn!#P"
-    .string " For example~2c if the moves\n"
+    .string " For example{COMMA} if the moves\n"
     .string "{COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     .string "linked...#P"
     .string " Both {COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     .string "used in one turn!#W\n"
-    .string "See? Amazing~2c huh?#P"
-    .string " Using links~2c heheh...#W\n"
-    .string "Well~2c depending on the moves you link~2c\n"
+    .string "See? Amazing{COMMA} huh?#P"
+    .string " Using links{COMMA} heheh...#W\n"
+    .string "Well{COMMA} depending on the moves you link{COMMA}\n"
     .string "you can get incredible results!#P"
-    .string " Oh~2c yes.\n"
-    .string "When moves are linked~2c they are used in\n"
+    .string " Oh{COMMA} yes.\n"
+    .string "When moves are linked{COMMA} they are used in\n"
     .string "sequence from the top one first.#P"
     .string " You can also separate linked\n"
     .string "moves by selecting the Delink command.#P"
     .string " The sequence of moves can\n"
-    .string "be changed by pressing {R_BUTTON}~2c\n"
+    .string "be changed by pressing {R_BUTTON}{COMMA}\n"
     .string "then pressing up or down on {DPAD}.#P"
     .string " Try to innovate with links.#W\n"
     .string "Try creating links of your very own!\0"
@@ -2276,18 +2276,18 @@ gUnknown_80D9498:
 
     .global gUnknown_80D972C
 gUnknown_80D972C:
-    .string " When you~27re in a dungeon\n"
-    .string "and you~27re about to use a move...#W\n"
-    .string "Isn~27t it a pain to open a window each time?#P"
+    .string " When you{APOSTROPHE}re in a dungeon\n"
+    .string "and you{APOSTROPHE}re about to use a move...#W\n"
+    .string "Isn{APOSTROPHE}t it a pain to open a window each time?#P"
     .string " You can avoid that!#W\n"
-    .string "You can just conveniently ~93Set~94\n"
+    .string "You can just conveniently {QUOTE_START}Set{QUOTE_END}\n"
     .string "a move for instant use!#P"
     .string " A set move can be instantly\n"
     .string "used with {L_BUTTON} and {A_BUTTON}!#W\n"
-    .string "See? Isn~27t it easy?#P"
+    .string "See? Isn{APOSTROPHE}t it easy?#P"
     .string " Just set the move...#W\n"
     .string "Hold {L_BUTTON} and then press {A_BUTTON} to use it!#W\n"
-    .string "It~27s very convenient!#P"
+    .string "It{APOSTROPHE}s very convenient!#P"
     .string " You can also switch the set\n"
     .string "move in a dungeon.\n"
     .string "Do try it out!\n"
@@ -2302,100 +2302,100 @@ gUnknown_80D98D4:
 
     .global gUnknown_80D9904
 gUnknown_80D9904:
-    .string " OK~2c here goes!#P"
+    .string " OK{COMMA} here goes!#P"
     .string " Gggggggg...#W Poof!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " {COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} has forgotten\n"
-    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves\n"
+    .string " {COLOR_1 CYAN}{ARG_POKEMON_5}{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves\n"
     .string "linked to it!\0"
     .align 2, 0
 
     .global gUnknown_80D9988
 gUnknown_80D9988:
-    .string " OK~2c here goes!#P"
+    .string " OK{COMMA} here goes!#P"
     .string " Gggggggg...#W Poof!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " {COLOR_1 CYAN}$m5{END_COLOR_TEXT_1} has forgotten\n"
-    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}!\0"
+    .string " {COLOR_1 CYAN}{ARG_POKEMON_5}{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D99F0
 gUnknown_80D99F0:
-    .string " So~2c forget the move\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves linked to it?\0"
+    .string " So{COMMA} forget the move\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves linked to it?\0"
     .align 2, 0
 
     .global gUnknown_80D9A2C
 gUnknown_80D9A2C:
-    .string " So~2c forget the move\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}?\0"
+    .string " So{COMMA} forget the move\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9A50
 gUnknown_80D9A50:
     .string " Uh... Huh?#W\n"
     .string "You appear to be a special Pokémon.#P"
-    .string " I can~27t help you remember\n"
-    .string "any moves~2c I don~27t think.\n"
-    .string "I~27m sorry.\0"
+    .string " I can{APOSTROPHE}t help you remember\n"
+    .string "any moves{COMMA} I don{APOSTROPHE}t think.\n"
+    .string "I{APOSTROPHE}m sorry.\0"
     .align 2, 0
 
     .global gUnknown_80D9ACC
 gUnknown_80D9ACC:
     .string " Uh... Hello?#W\n"
-    .string "There don~27t appear to be any moves that\n"
+    .string "There don{APOSTROPHE}t appear to be any moves that\n"
     .string "can be remembered.\0"
     .align 2, 0
 
     .global gUnknown_80D9B1C
 gUnknown_80D9B1C:
-    .string " OK~2c here goes!#P"
+    .string " OK{COMMA} here goes!#P"
     .string " Gggggggg...#W Pwah! Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5{END_COLOR_TEXT_1} is done!#P"
-    .string " It~27s forgotten the move\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and any moves linked to it~2c\n"
-    .string "and {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} has been remembered!\0"
+    .string " #CM{ARG_POKEMON_5}{END_COLOR_TEXT_1} is done!#P"
+    .string " It{APOSTROPHE}s forgotten the move\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves linked to it{COMMA}\n"
+    .string "and {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1} has been remembered!\0"
     .align 2, 0
 
     .global gUnknown_80D9BD8
 gUnknown_80D9BD8:
-    .string " OK~2c here goes!#P"
+    .string " OK{COMMA} here goes!#P"
     .string " Gggggggg...#W Pwah! Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5{END_COLOR_TEXT_1} has forgotten\n"
-    .string "the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and remembered\n"
-    .string "the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}!\0"
+    .string " #CM{ARG_POKEMON_5}{END_COLOR_TEXT_1} has forgotten\n"
+    .string "the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and remembered\n"
+    .string "the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D9C68
 gUnknown_80D9C68:
-    .string " So~2c forget {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}\n"
-    .string "and any moves linked to it~2c and remember\n"
-    .string "the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+    .string " So{COMMA} forget {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
+    .string "and any moves linked to it{COMMA} and remember\n"
+    .string "the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9CC0
 gUnknown_80D9CC0:
-    .string " So~2c forget the move\n"
-    .string "{COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and remember the move\n"
-    .string "{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+    .string " So{COMMA} forget the move\n"
+    .string "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and remember the move\n"
+    .string "{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
     .global gUnknown_80D9D00
 gUnknown_80D9D00:
-    .string " So~2c the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}\n"
+    .string " So{COMMA} the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
     .string "is the one to be remembered?#W\n"
-    .string "OK~2c here goes!#P"
+    .string "OK{COMMA} here goes!#P"
     .string " Gggggggggggg...#W Gulpin!#P"
     .string " There!\n"
     .string "Success!#P"
-    .string " #CM$m5{END_COLOR_TEXT_1} has\n"
-    .string "remembered the move {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}!\0"
+    .string " #CM{ARG_POKEMON_5}{END_COLOR_TEXT_1} has\n"
+    .string "remembered the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
     .global gUnknown_80D9DA4
@@ -2407,13 +2407,13 @@ gUnknown_80D9DA4:
     .global gUnknown_80D9DCC
 gUnknown_80D9DCC:
     .string " Good!\n"
-    .string "Now~2c who wants to link moves?\0"
+    .string "Now{COMMA} who wants to link moves?\0"
     .align 2, 0
 
     .global gUnknown_80D9DF4
 gUnknown_80D9DF4:
     .string " Whenever you get the urge\n"
-    .string "to link moves~2c please come see me!\0"
+    .string "to link moves{COMMA} please come see me!\0"
     .align 2, 0
 
     .global gUnknown_80D9E34
@@ -2423,14 +2423,14 @@ gUnknown_80D9E34:
 
     .global gUnknown_80D9E48
 gUnknown_80D9E48:
-    .string " If you forget that move~2c\n"
-    .string "you won~27t have any moves at all.\0"
+    .string " If you forget that move{COMMA}\n"
+    .string "you won{APOSTROPHE}t have any moves at all.\0"
     .align 2, 0
 
     .global gUnknown_80D9E88
 gUnknown_80D9E88:
-    .string " That move isn~27t linked~2c\n"
-    .string "so it can~27t be delinked.\0"
+    .string " That move isn{APOSTROPHE}t linked{COMMA}\n"
+    .string "so it can{APOSTROPHE}t be delinked.\0"
     .align 2, 0
 
     .global gUnknown_80D9EC0
@@ -2442,7 +2442,7 @@ gUnknown_80D9EC0:
     .global gUnknown_80D9EF4
 gUnknown_80D9EF4:
     .string " Uh... Hello?\n"
-    .string "You don~27t have enough money?\0"
+    .string "You don{APOSTROPHE}t have enough money?\0"
     .align 2, 0
 
     .global gUnknown_80D9F24
@@ -2492,7 +2492,7 @@ gUnknown_80DA018:
     .string " Zzznarr... Urr!\n"
     .string "Make stronger rescue team...#P"
     .string " Urr... Zzznarr!\n"
-    .string "Don~27t let up!\0"
+    .string "Don{APOSTROPHE}t let up!\0"
     .align 2, 0
 
     .global gUnknown_80DA0DC
@@ -2532,7 +2532,7 @@ gUnknown_80DA204:
     .global gUnknown_80DA248
 gUnknown_80DA248:
     .string " Aiyah... Zzznarr...\n"
-    .string "Didn~27t finish...#P"
+    .string "Didn{APOSTROPHE}t finish...#P"
     .string " Zzz... Urr?\n"
     .string "No giving up...\0"
     .align 2, 0
@@ -2540,7 +2540,7 @@ gUnknown_80DA248:
     .global gUnknown_80DA290
 gUnknown_80DA290:
     .string " Zzz... Narr...\n"
-    .string "$m0? ~27K~2c go...\0"
+    .string "{ARG_POKEMON_0}? {APOSTROPHE}K{COMMA} go...\0"
     .align 2, 0
 
     .global gUnknown_80DA2B4
@@ -2575,22 +2575,22 @@ gUnknown_80DA338:
     .string "level up...#W\n"
     .string "And toughen up your rescue team.#P"
     .string " Also...#W\n"
-    .string "In the {COLOR_1 YELLOW_3}Fire Maze{END_COLOR_TEXT_1} you will find only\n"
+    .string "In the {COLOR_1 YELLOW_4}Fire Maze{END_COLOR_TEXT_1} you will find only\n"
     .string "Fire-type Pokémon.#P"
-    .string " In the {COLOR_1 YELLOW_3}Water Maze{END_COLOR_TEXT_1} there\n"
+    .string " In the {COLOR_1 YELLOW_4}Water Maze{END_COLOR_TEXT_1} there\n"
     .string "will only be Water-type Pokémon.#P"
-    .string " In such ways~2c only one type\n"
+    .string " In such ways{COMMA} only one type\n"
     .string "of Pokémon will be in a given room.\n"
     .string "Study how types match up in battle.#P"
-    .string " The Pokémon in this dojo~2c\n"
-    .string "by the way~2c are all volunteers.#P"
+    .string " The Pokémon in this dojo{COMMA}\n"
+    .string "by the way{COMMA} are all volunteers.#P"
     .string " They are participating\n"
     .string "because they want to see rescue teams\n"
     .string "succeed.#P"
     .string " The only thanks they expect\n"
     .string "is to see you become stronger.\n"
-    .string "Don~27t let them down!#P"
-    .string " There~27s more.#W\n"
+    .string "Don{APOSTROPHE}t let them down!#P"
+    .string " There{APOSTROPHE}s more.#W\n"
     .string "For a rescue team that successfully\n"
     .string "completes all training courses...#P"
     .string " I have a special reward!#P"
@@ -2600,7 +2600,7 @@ gUnknown_80DA338:
 
     .global gUnknown_80DA62C
 gUnknown_80DA62C:
-    .string " Don~27t let up on your training!\n"
+    .string " Don{APOSTROPHE}t let up on your training!\n"
     .string "Keep bettering yourself!#P"
     .string " May you never lose your\n"
     .string "drive!\0"
@@ -2610,29 +2610,29 @@ gUnknown_80DA62C:
 gUnknown_80DA688:
     .string " Ah...\n"
     .string "You have succeeded in your training!#P"
-    .string " You~27ve shown your worth!#W\n"
-    .string "Without a doubt~2c you have grown more\n"
+    .string " You{APOSTROPHE}ve shown your worth!#W\n"
+    .string "Without a doubt{COMMA} you have grown more\n"
     .string "powerful from your training!#W Wait...#W ...#P"
     .string " Wuh?#W\n"
-    .string "What~2c what~2c what?!#P"
+    .string "What{COMMA} what{COMMA} what?!#P"
     .string " Did you maybe...#W\n"
     .string "Conquer all the training courses?#P"
-    .string " That~27s...#W Amazing! You!#W\n"
+    .string " That{APOSTROPHE}s...#W Amazing! You!#W\n"
     .string "Congratulations!#P"
     .string " I promised!#W\n"
     .string "I promised you a reward for completing\n"
     .string "the training courses!#P"
     .string " So... Here it is!#W\n"
     .string "My #CIBonsly Doll{END_COLOR_TEXT_1}!#P"
-    .string " Isn~27t it smashing? Hey?!\0"
+    .string " Isn{APOSTROPHE}t it smashing? Hey?!\0"
     .align 2, 0
 
     .global gUnknown_80DA844
 gUnknown_80DA844:
     .string " Ah...\n"
     .string "You have succeeded in your training!#P"
-    .string " You~27ve shown your worth!#W\n"
-    .string "Without a doubt~2c you have grown more\n"
+    .string " You{APOSTROPHE}ve shown your worth!#W\n"
+    .string "Without a doubt{COMMA} you have grown more\n"
     .string "powerful from your training!#P"
     .string " May this success drive\n"
     .string "you to train even harder!\0"
@@ -2650,7 +2650,7 @@ gUnknown_80DA908:
 
     .global gUnknown_80DA998
 gUnknown_80DA998:
-    .string " The $m0?#W\n"
+    .string " The {ARG_POKEMON_0}?#W\n"
     .string "Your decision stands!#W\n"
     .string "Let the training begin!\0"
     .align 2, 0
@@ -2662,7 +2662,7 @@ gUnknown_80DA9D4:
 
     .global gUnknown_80DA9F4
 gUnknown_80DA9F4:
-    .string " Fine~2c farewell.\n"
+    .string " Fine{COMMA} farewell.\n"
     .string "Return if you seek more training.\0"
     .align 2, 0
 
@@ -2674,7 +2674,7 @@ gUnknown_80DAA2C:
     .global gUnknown_80DAA44
 gUnknown_80DAA44:
     .string " This is the Makuhita Dojo!#W\n"
-    .string "Through rigorous training~2c one begets\n"
+    .string "Through rigorous training{COMMA} one begets\n"
     .string "true power.\0"
     .align 2, 0
 
@@ -2693,7 +2693,7 @@ gGameHints: @ 80DAA98 (Help Menu?)
 
     .global gUnknown_80DAAC0
 gUnknown_80DAAC0:
-    .string "Before leaving on an adventure~2c go visit\n"
+    .string "Before leaving on an adventure{COMMA} go visit\n"
     .string "friends in their Friend Areas and pick\n"
     .string "your mission members.\n"
     .string "The team can include members up to\n"
@@ -2710,14 +2710,14 @@ gUnknown_80DABD8:
 
     .global gUnknown_80DABE8
 gUnknown_80DABE8:
-    .string "If new recruits join you~2c try to return to\n"
+    .string "If new recruits join you{COMMA} try to return to\n"
     .string "your base without letting them faint.\n"
-    .string "If you get them out safely~2c they~27ll wait\n"
+    .string "If you get them out safely{COMMA} they{APOSTROPHE}ll wait\n"
     .string "for you in their Friend Areas.\n"
-    .string "Once you get them out~2c they~27ll always\n"
+    .string "Once you get them out{COMMA} they{APOSTROPHE}ll always\n"
     .string "return home if they faint in a dungeon.\n"
-    .string "If you faint in a dungeon~2c you lose all your\n"
-    .string "money and some items~2c too.\0"
+    .string "If you faint in a dungeon{COMMA} you lose all your\n"
+    .string "money and some items{COMMA} too.\0"
     .align 2, 0
 
     .global gUnknown_80DAD28
@@ -2741,9 +2741,9 @@ gUnknown_80DADCC:
     .global gUnknown_80DADD4
 gUnknown_80DADD4:
     .string "Selecting multiple items in storage:\n"
-    .string "  Select an item~2c then press {L_BUTTON} or {R_BUTTON}.\n"
+    .string "  Select an item{COMMA} then press {L_BUTTON} or {R_BUTTON}.\n"
     .string "Moving to the Friend Area Map:\n"
-    .string "  Move out from the town~27s west side\n"
+    .string "  Move out from the town{APOSTROPHE}s west side\n"
     .string "  while pressing {L_BUTTON} or {R_BUTTON}.\n"
     .string "Moving diagonally on the Friend Area Map:\n"
     .string "  {DPAD} while keeping {R_BUTTON} pressed.\0"
@@ -2761,7 +2761,7 @@ gUnknown_80DAEE0:
     .string "Window: {B_BUTTON} lightly\n"
     .string "Message scroll: {A_BUTTON} or {B_BUTTON}\n"
     .string "Cancel: {B_BUTTON}\n"
-    .string "Description: Choose item or move~2c {START_BUTTON}\0"
+    .string "Description: Choose item or move{COMMA} {START_BUTTON}\0"
     .align 2, 0
 
     .global gUnknown_80DAF54
@@ -2897,17 +2897,17 @@ gUnknown_80DB5C0: @ 80DB5C0
 
 	.global gUnknown_80DB5D4
 gUnknown_80DB5D4: @ 80DB5D4
-        .string "What is this Pokémon~27s nickname?\0"
+        .string "What is this Pokémon{APOSTROPHE}s nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB5F8
 gUnknown_80DB5F8: @ 80DB5F8
-        .string "What is your partner~27s nickname?\0"
+        .string "What is your partner{APOSTROPHE}s nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB61C
 gUnknown_80DB61C: @ 80DB61C
-        .string "What is your team~27s name?\0"
+        .string "What is your team{APOSTROPHE}s name?\0"
         .align 2,0
 
 	.global gUnknown_80DB638
@@ -2940,7 +2940,7 @@ gUnknown_80DB664: @ 80DB664
 
 	.global gUnknown_80DB688
 gUnknown_80DB688: @ 80DB688
-        .string "Is the name {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} OK?\0"
+        .string "Is the name {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1} OK?\0"
         .align 2,0
 
 	.global gUnknown_80DB6A4
@@ -3228,7 +3228,7 @@ gTeamToolboxB: @ 80DB984
 gUnknown_80DB994: @ 80DB994
         .string "#C"
         .byte 0x02
-        .string "$i0{END_COLOR_TEXT_1}\0"
+        .string "{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80DB9A0
@@ -3251,13 +3251,13 @@ gUnknown_80DB9B0: @ 80DB9B0
 	.global gUnknown_80DB9BC
 gUnknown_80DB9BC: @ 80DB9BC
         .string "#+Who will learn the move\n"
-        .string "#+{COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}?\0"
+        .string "#+{COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DB9E4
 gUnknown_80DB9E4: @ 80DB9E4
-        .string "#+#CM$m8{END_COLOR_TEXT_1} learned\n"
-        .string "#+the move {COLOR_1 CYAN}$m7{END_COLOR_TEXT_1}!\0"
+        .string "#+#CM{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned\n"
+        .string "#+the move {COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80DBA0C
@@ -3270,7 +3270,7 @@ gUnknown_80DBA0C: @ 80DBA0C
 
 	.global gUnknown_80DBA4C
 gUnknown_80DBA4C: @ 80DBA4C
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .string "pksdir0\0"
         .align 2,0
 
@@ -3303,33 +3303,33 @@ gUnknown_80DBA88: @ 80DBA88
 
 	.global gUnknown_80DBAA0
 gUnknown_80DBAA0: @ 80DBAA0
-        .string "#+#CN$m0{END_COLOR_TEXT_1} received\n"
-        .string "#+the promised {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}. \0"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
+        .string "#+the promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}. \0"
         .align 2,0
 
 	.global gUnknown_80DBAD0
 gUnknown_80DBAD0: @ 80DBAD0
-        .string "#+#CN$m0{END_COLOR_TEXT_1}~27s team received\n"
-        .string "#+the promised {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
+        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
+        .string "#+the promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBB08
 gUnknown_80DBB08: @ 80DBB08
         .string "#+The team also received\n"
-        .string "#+the item {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
+        .string "#+the item {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBB38
 gUnknown_80DBB38: @ 80DBB38
-        .string "#+Received the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}!#P#+A very rare statue. It has been placed\n"
+        .string "#+Received the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}!#P#+A very rare statue. It has been placed\n"
         .string "#+outside your rescue team base.\0"
         .align 2,0
 
 	.global gUnknown_80DBB9C
 gUnknown_80DBB9C: @ 80DBB9C
-        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}...\n"
-        .string "#+You~27ve already acquired it.#P#+Sorry to see that...#P#+In its place~2c #CN$m0{END_COLOR_TEXT_1}~2c\n"
-        .string "#+you can have {COLOR_1 LIGHT_BLUE_2}1~2c000{END_COLOR_TEXT_1} {POKE}."
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
+        .string "#+You{APOSTROPHE}ve already acquired it.#P#+Sorry to see that...#P#+In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
+        .string "#+you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}."
         .align 2,0
 
 	.global gUnknown_80DBC28
@@ -3347,25 +3347,25 @@ gUnknown_80DBC60: @ 80DBC60
 	.global gUnknown_80DBC98
 gUnknown_80DBC98: @ 80DBC98
         .string "#+Is it OK to throw away\n"
-        .string "#+this {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}?\0"
+        .string "#+this {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DBCC4
 gUnknown_80DBCC4: @ 80DBCC4
-        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}\n"
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\n"
         .string "#+was thrown away.\0"
         .align 2,0
 
 	.global gUnknown_80DBCE8
 gUnknown_80DBCE8: @ 80DBCE8
-        .string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was put in\n"
-        .string "#+storage to get the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was put in\n"
+        .string "#+storage to get the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80DBD24
 gUnknown_80DBD24: @ 80DBD24
-        .string "#+The {COLOR_1 GREEN}$i1{END_COLOR_TEXT_1} was discarded\n"
-        .string "#+to get the {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1}.\0"
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was discarded\n"
+        .string "#+to get the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gKangaskhanTrashToolboxItem
@@ -3449,19 +3449,19 @@ gUnknown_80DBE18: @ 80DBE18
 
 	.global gUnknown_80DBE1C
 gUnknown_80DBE1C: @ 80DBE1C
-        .string "$i0$i1\0"
+        .string "{ARG_MOVE_ITEM_0}{ARG_MOVE_ITEM_1}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE2C
 gUnknown_80DBE2C: @ 80DBE2C
-        .string "$i0\0"
+        .string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_80DBE30
 gUnknown_80DBE30: @ 80DBE30
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .string "pksdir0\0"
         .align 2,0
 
@@ -3768,15 +3768,15 @@ gUnknown_80DC164: @ 80DC164
 
 	.global gUnknown_80DC1A0
 gUnknown_80DC1A0: @ 80DC1A0
-        .string "#+Forget the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1} and\n"
-        .string "#+any moves linked to it~2c and learn the move\n"
-        .string "#+{COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+        .string "#+Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and\n"
+        .string "#+any moves linked to it{COMMA} and learn the move\n"
+        .string "#+{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DC1FC
 gUnknown_80DC1FC: @ 80DC1FC
-        .string "#+Forget the move {COLOR_1 GREEN}$m1{END_COLOR_TEXT_1}\n"
-        .string "#+and learn {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1}?\0"
+        .string "#+Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
+        .string "#+and learn {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80DC230
@@ -3825,12 +3825,12 @@ gUnknown_80DC274: @ 80DC274
 
 	.global gUnknown_80DC28C
 gUnknown_80DC28C: @ 80DC28C
-        .string "Moves: {COLOR_1 YELLOW}$m0{END_COLOR_TEXT_1} \0"
+        .string "Moves: {COLOR_1 YELLOW}{ARG_POKEMON_0}{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80DC2A0
 gUnknown_80DC2A0: @ 80DC2A0
-        .string "$i0\0"
+        .string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -3877,7 +3877,7 @@ gUnknown_80DC2F8: @ 80DC2F8
 
 	.global gUnknown_80DC310
 gUnknown_80DC310: @ 80DC310
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -4171,68 +4171,68 @@ gUnknown_80DC5EC: @ 80DC5EC
 
 	.global gUnknown_80DC5F4
 gUnknown_80DC5F4: @ 80DC5F4
-        .string "It doesn~27t appear to be hungry.\0"
+        .string "It doesn{APOSTROPHE}t appear to be hungry.\0"
         .align 2,0
 
 	.global gUnknown_80DC618
 gUnknown_80DC618: @ 80DC618
-        .string "$m1 took the Gummi and ate it.\n"
+        .string "{ARG_POKEMON_1} took the Gummi and ate it.\n"
         .string "This Gummi looks like a big favorite!\n"
-        .string "$m1~27s IQ went up!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s IQ went up!\0"
         .align 2,0
 
 	.global gUnknown_80DC674
 gUnknown_80DC674: @ 80DC674
-        .string "$m1 took the Gummi and ate it.\n"
+        .string "{ARG_POKEMON_1} took the Gummi and ate it.\n"
         .string "This Gummi looks like a favorite!\n"
-        .string "$m1~27s IQ went up!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s IQ went up!\0"
         .align 2,0
 
 	.global gUnknown_80DC6CC
 gUnknown_80DC6CC: @ 80DC6CC
-        .string "$m1 took the Gummi and ate it.\n"
-        .string "It doesn~27t seem to dislike this Gummi.\n"
-        .string "$m1~27s IQ went up!\0"
+        .string "{ARG_POKEMON_1} took the Gummi and ate it.\n"
+        .string "It doesn{APOSTROPHE}t seem to dislike this Gummi.\n"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s IQ went up!\0"
         .align 2,0
 
 	.global gUnknown_80DC728
 gUnknown_80DC728: @ 80DC728
-        .string "$m1 took the Gummi and ate it.\n"
+        .string "{ARG_POKEMON_1} took the Gummi and ate it.\n"
         .string "It appears to be just a little satisfied.\n"
-        .string "$m1~27s IQ went up!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s IQ went up!\0"
         .align 2,0
 
 	.global gUnknown_80DC788
 gUnknown_80DC788: @ 80DC788
-        .string "$m1~27s IQ helped it learn how to\n"
-        .string "use $i1!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s IQ helped it learn how to\n"
+        .string "use {ARG_MOVE_ITEM_1}!\0"
         .align 2,0
 
 	.global gUnknown_80DC7B4
 gUnknown_80DC7B4: @ 80DC7B4
-        .string "Yes! $m1 grew explosively!\n"
-        .string "Attack~2c Defense~2c and so on rose by 1!\0"
+        .string "Yes! {ARG_POKEMON_1} grew explosively!\n"
+        .string "Attack{COMMA} Defense{COMMA} and so on rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC7FC
 gUnknown_80DC7FC: @ 80DC7FC
 @ replacing .incbin "baserom.gba", 0x000dc7fc, 0x20
         .string "Yes!\n"
-        .string "$m1~27s Attack rose by 1!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s Attack rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC81C
 gUnknown_80DC81C: @ 80DC81C
 @ replacing .incbin "baserom.gba", 0x000dc81c, 0x28
         .string "Yes!\n"
-        .string "$m1~27s Special Attack rose by 1!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s Special Attack rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC844
 gUnknown_80DC844: @ 80DC844
 @ replacing .incbin "baserom.gba", 0x000dc844, 0x20
         .string "Yes!\n"
-        .string "$m1~27s Defense rose by 1!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s Defense rose by 1!\0"
         .align 2,0
 
 
@@ -4240,19 +4240,19 @@ gUnknown_80DC844: @ 80DC844
 gUnknown_80DC864: @ 80DC864
 @ replacing .incbin "baserom.gba", 0x000dc864, 0x28
         .string "Yes!\n"
-        .string "$m1~27s Special Defense rose by 1!\0"
+        .string "{ARG_POKEMON_1}{APOSTROPHE}s Special Defense rose by 1!\0"
         .align 2,0
 
 	.global gUnknown_80DC88C
 gUnknown_80DC88C: @ 80DC88C
 @ replacing .incbin "baserom.gba", 0x000dc88c, 0x20
-        .string "You don~27t have any Gummis.\0"
+        .string "You don{APOSTROPHE}t have any Gummis.\0"
         .align 2,0
 
 	.global gUnknown_80DC8AC
 gUnknown_80DC8AC: @ 80DC8AC
 @ replacing .incbin "baserom.gba", 0x000dc8ac, 0x1c
-        .string "You don~27t have an item.\0"
+        .string "You don{APOSTROPHE}t have an item.\0"
         .align 2,0
 
 	.global gUnknown_80DC8C8
@@ -4485,7 +4485,7 @@ gUnknown_80DD764: @ 80DD764
 	.global gUnknown_80DD7FC
 gUnknown_80DD7FC: @ 80DD7FC
         .string "If you say farewell to this\n"
-        .string "Pokémon~2c it will be gone forever.#P"
+        .string "Pokémon{COMMA} it will be gone forever.#P"
         .string "You will never be able to get another one\n"
         .string "like it to join your team.\n"
         .string "Will you release it anyway?\0"
@@ -4493,13 +4493,13 @@ gUnknown_80DD7FC: @ 80DD7FC
 
 	.global gUnknown_80DD8A0
 gUnknown_80DD8A0: @ 80DD8A0
-        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n"
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
         .string "#+returned to the Toolbox.\0"
         .align 2,0
 
 	.global gUnknown_80DD8D0
 gUnknown_80DD8D0: @ 80DD8D0
-        .string "#+The {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} was\n#+sent to storage.\0"
+        .string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n#+sent to storage.\0"
         .align 2,0
 
 	.global gFriendActionStandby
@@ -4548,7 +4548,7 @@ gFriendActionCheckIQ: @ 80DD94C
 
 	.global gUnknown_80DD958
 gUnknown_80DD958: @ 80DD958
-        .string "Item: {COLOR_1 GREEN}$i0{END_COLOR_TEXT_1} \0"
+        .string "Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} \0"
         .string "pksdir0\0"
 
 	.global gUnknown_80DD970
@@ -4750,7 +4750,7 @@ gUnknown_80DDB60: @ 80DDB60
 
     .global DontSendPokemon_80DDB80
     DontSendPokemon_80DDB80:
-    .string "Don~27t Send Pokémon\0"
+    .string "Don{APOSTROPHE}t Send Pokémon\0"
     .align 2,0
 
     .global SendPokemon_80DDB98

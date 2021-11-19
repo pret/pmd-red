@@ -115,7 +115,7 @@ void sub_801B480(void)
             sub_80073B8(gUnknown_203B230->unk24);
             preload = gUnknown_203B230->unk10[gUnknown_203B230->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);
-            xxx_format_and_draw(16, 0, gUnknown_80DBA4C, gUnknown_203B230->unk24, 0); // $m0
+            xxx_format_and_draw(16, 0, gUnknown_80DBA4C, gUnknown_203B230->unk24, 0); // {ARG_POKEMON_0}
             xxx_format_and_draw(4, 16, gUnknown_203B230->unk10[gUnknown_203B230->unk8]->unk4, gUnknown_203B230->unk24, 0);
             sub_80073E0(gUnknown_203B230->unk24);
             break;
@@ -156,7 +156,7 @@ void sub_801B51C(void)
 
 void sub_801B590(void)
 {
-  
+
   if (gUnknown_203B230->unk8 < (gUnknown_203B230->unkC - 1)) {
     if ((gUnknown_203B230->unk20 & 8)) {
       sub_8013F84();

@@ -415,7 +415,7 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CNLAST_text
         CNLAST_text:
-        .string "#CNLAST{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_5}LAST{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CECONTINUE_text
