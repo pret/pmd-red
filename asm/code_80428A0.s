@@ -1050,7 +1050,7 @@ _080432CC: .4byte 0x00000226
 _080432D0:
 	ldr r4, _080432E4
 _080432D2:
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -1283,7 +1283,7 @@ _080434A6:
 	b _0804351C
 	.align 2, 0
 _080434B8: .4byte gPtrFinalChanceMessage
-_080434BC: .4byte gUnknown_203B450
+_080434BC: .4byte gLeaderPokemon
 _080434C0: .4byte gDungeonGlobalData
 _080434C4: .4byte 0x000037ec
 _080434C8: .4byte 0x000037fc
@@ -1368,7 +1368,7 @@ _08043594:
 	bl sub_806B6C4
 	b _080435D4
 	.align 2, 0
-_080435B4: .4byte gUnknown_80F5668
+_080435B4: .4byte gDungeonMusic
 _080435B8: .4byte gDungeonGlobalData
 _080435BC: .4byte 0x00003a10
 _080435C0: .4byte gUnknown_202EDC8
@@ -1532,9 +1532,9 @@ _08043728:
 _08043730: .4byte gDungeonGlobalData
 _08043734: .4byte 0x0000066c
 _08043738: .4byte 0x0000066d
-_0804373C: .4byte gUnknown_203B450
+_0804373C: .4byte gLeaderPokemon
 _08043740:
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_803F4A0
 	bl sub_8040A84
 _0804374C:
@@ -1547,7 +1547,7 @@ _0804374C:
 	bne _0804377C
 	bl sub_807E5AC
 	movs r0, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804377C
@@ -1557,7 +1557,7 @@ _0804374C:
 	.align 2, 0
 _08043774: .4byte gDungeonGlobalData
 _08043778:
-	bl sub_8069E8C
+	bl TriggerWeatherAbilities
 _0804377C:
 	cmp r6, 0
 	beq _08043784
@@ -1565,7 +1565,7 @@ _0804377C:
 	b _080437A2
 _08043784:
 	bl sub_80427AC
-	bl sub_8083600
+	bl GetLeaderEntity
 	ldr r2, _08043960
 	ldr r1, [r2]
 	ldr r3, _08043964
@@ -1603,7 +1603,7 @@ _080437C8:
 	cmp r0, 0
 	beq _080437C8
 _080437DA:
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -1645,7 +1645,7 @@ _08043822:
 	bne _08043830
 	bl sub_806AA70
 _08043830:
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
@@ -1743,7 +1743,7 @@ _080438AC:
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
 	beq _08043926
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	ldr r0, _0804398C
 	ldr r1, [r0]
@@ -1831,7 +1831,7 @@ _080439D4:
 _080439DC:
 	cmp r0, 0x2
 	bne _08043A00
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	ldr r0, _080439F8
 	movs r1, 0
@@ -1846,7 +1846,7 @@ _080439FC: .4byte 0x0000066e
 _08043A00:
 	cmp r0, 0x3
 	bne _08043A24
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	ldr r0, _08043A1C
 	movs r1, 0
@@ -1879,7 +1879,7 @@ _08043A2A:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _08043A74
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	movs r0, 0x8A
 	lsls r0, 2
@@ -1947,7 +1947,7 @@ _08043ADC: .4byte 0x00000644
 _08043AE0: .4byte 0x0000060b
 _08043AE4:
 	ldr r4, _08043B80
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -2212,7 +2212,7 @@ _08043D08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043D0C: .4byte gUnknown_810ACC0
+_08043D0C: .4byte gDungeonWaterType
 	thumb_func_end sub_8043CE4
 
 	thumb_func_start sub_8043D10
@@ -2239,7 +2239,7 @@ sub_8043D10:
 	.align 2, 0
 _08043D38: .4byte gDungeonGlobalData
 _08043D3C:
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08043D4A
@@ -2410,7 +2410,7 @@ _08043E6A:
 _08043E6E:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r4, [r0, 0x14]
 	adds r0, r4, 0
 	bl EntityExists
@@ -2471,7 +2471,7 @@ _08043EEA:
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x1
 	bne _08043F40
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2503,7 +2503,7 @@ _08043F3C: .4byte 0x0000021f
 _08043F40:
 	cmp r0, 0x2
 	bne _08043F74
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2525,7 +2525,7 @@ _08043F70: .4byte gUnknown_80F89D4
 _08043F74:
 	cmp r0, 0x3
 	bne _08043FB6
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2828,8 +2828,8 @@ _080441B4: .4byte gTeamInventory_203B460
 _080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 
-	thumb_func_start sub_80441BC
-sub_80441BC:
+	thumb_func_start IsBossBattle
+IsBossBattle:
 	push {lr}
 	ldr r0, _080441D8
 	ldr r0, [r0]
@@ -2851,10 +2851,10 @@ _080441E0:
 _080441E2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80441BC
+	thumb_func_end IsBossBattle
 
-	thumb_func_start sub_80441E8
-sub_80441E8:
+	thumb_func_start IsFixedDungeon
+IsFixedDungeon:
 	push {lr}
 	ldr r0, _08044200
 	ldr r0, [r0]
@@ -2874,7 +2874,7 @@ _08044208:
 _0804420A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80441E8
+	thumb_func_end IsFixedDungeon
 
 	thumb_func_start sub_8044210
 sub_8044210:
@@ -2973,13 +2973,13 @@ xxx_dungeon_80442D0:
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0804431A
-	bl sub_8069E8C
+	bl TriggerWeatherAbilities
 	adds r0, r5, 0
-	bl sub_8070774
+	bl GetMovementSpeed
 	ldr r3, _08044320
 	ldr r1, _08044324
 	ldr r1, [r1]
@@ -3008,15 +3008,15 @@ _0804431A:
 	movs r0, 0
 	b _0804444E
 	.align 2, 0
-_08044320: .4byte gUnknown_80F6860
+_08044320: .4byte gSpeedTurns
 _08044324: .4byte gDungeonGlobalData
 _08044328:
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0804431A
 	movs r0, 0
-	bl sub_807520C
+	bl UseAttack
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804435C
@@ -3062,7 +3062,7 @@ _0804438C: .4byte 0x0000066c
 _08044390: .4byte 0x00000673
 _08044394:
 	adds r0, r5, 0
-	bl sub_8074B54
+	bl TickStatusHeal
 _0804439A:
 	bl sub_8044B28
 	lsls r0, 24
@@ -3188,7 +3188,7 @@ _08044466:
 	cmp r0, 0
 	bne _080444E2
 	adds r0, r4, 0
-	bl sub_8074B54
+	bl TickStatusHeal
 	adds r0, r4, 0
 	bl EntityExists
 	lsls r0, 24
@@ -3231,7 +3231,7 @@ _080444F0: .4byte 0x00007fff
 sub_80444F4:
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	cmp r6, r0
 	bne _08044566
 	ldr r0, _0804456C
@@ -3298,7 +3298,7 @@ sub_8044574:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x44
-	bl sub_8083600
+	bl GetLeaderEntity
 	mov r10, r0
 	movs r7, 0
 	mov r0, sp
@@ -3333,13 +3333,13 @@ _08044592:
 	ldr r0, [r1]
 	adds r0, 0xB8
 	str r5, [r0]
-	bl sub_8069E8C
+	bl TriggerWeatherAbilities
 	movs r2, 0xA2
 	lsls r2, 1
 	adds r0, r6, r2
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl sub_8070774
+	bl GetMovementSpeed
 	mov r3, r9
 	ldr r1, [r3]
 	movs r2, 0xCC
@@ -3386,14 +3386,14 @@ _08044592:
 	.align 2, 0
 _08044634: .4byte gDungeonGlobalData
 _08044638: .4byte 0x0001357c
-_0804463C: .4byte gUnknown_80F6860
+_0804463C: .4byte gSpeedTurns
 _08044640: .4byte 0x0000bfff
 _08044644:
 	ldr r1, _08044668
 	add r1, r8
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8074B54
+	bl TickStatusHeal
 	adds r0, r5, 0
 	bl EntityExists
 	lsls r0, 24
@@ -3631,13 +3631,13 @@ sub_8044820:
 	mov r8, r0
 	b _080448FC
 	.align 2, 0
-_08044830: .4byte gUnknown_80F6860
+_08044830: .4byte gSpeedTurns
 _08044834:
 	ldr r4, [r5, 0x70]
 	ldr r0, [r6]
 	adds r0, 0xB8
 	str r5, [r0]
-	bl sub_8069E8C
+	bl TriggerWeatherAbilities
 	ldrh r2, [r4]
 	movs r1, 0x80
 	lsls r1, 8
@@ -3666,7 +3666,7 @@ _0804486C:
 	adds r0, r4, r2
 	strb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8070774
+	bl GetMovementSpeed
 	ldr r1, [r6]
 	movs r2, 0xCC
 	lsls r2, 3
@@ -3698,7 +3698,7 @@ _0804486C:
 	adds r1, r4, r2
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8074B54
+	bl TickStatusHeal
 	adds r0, r5, 0
 	bl EntityExists
 	lsls r0, 24
@@ -3928,7 +3928,7 @@ _08044A8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08044A94: .4byte gUnknown_80F6860
+_08044A94: .4byte gSpeedTurns
 _08044A98: .4byte gDungeonGlobalData
 _08044A9C: .4byte 0x000037f8
 _08044AA0: .4byte 0x000037f9
@@ -3960,7 +3960,7 @@ sub_8044AB4:
 	movs r4, 0
 	b _08044AE6
 	.align 2, 0
-_08044ADC: .4byte gUnknown_80F6860
+_08044ADC: .4byte gSpeedTurns
 _08044AE0: .4byte gDungeonGlobalData
 _08044AE4:
 	adds r4, 0x1
@@ -3979,7 +3979,7 @@ _08044AE6:
 	cmp r0, 0
 	beq _08044AE4
 	movs r0, 0
-	bl sub_807520C
+	bl UseAttack
 _08044B08:
 	movs r0, 0x1
 	movs r1, 0
@@ -4004,7 +4004,7 @@ sub_8044B28:
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _08044B76
-	bl sub_8083600
+	bl GetLeaderEntity
 	cmp r0, 0
 	bne _08044B50
 	ldr r0, [r4]
@@ -4705,8 +4705,8 @@ _08045022:
 	bx r0
 	thumb_func_end sub_8044FF0
 
-	thumb_func_start sub_8045028
-sub_8045028:
+	thumb_func_start IsNotAttacking
+IsNotAttacking:
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -4738,7 +4738,7 @@ _0804505C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045028
+	thumb_func_end IsNotAttacking
 
 	thumb_func_start sub_8045064
 sub_8045064:

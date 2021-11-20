@@ -244,6 +244,25 @@ DPAD = 87 52
 '\0' = 00
 '\n' = 0A
 
+@ Character codes escaped with a '~'.
+APOSTROPHE = 7E 32 37 @ ~27
+COMMA = 7E 32 63 @ ~2c
+QUOTE_START = 7E 39 33 @ ~93
+QUOTE_END = 7E 39 34 @ ~94
+
+@ Placeholders for message arguments to swap out for names within strings.
+ARG_POKEMON_0 = 24 6D 30 @ $m0
+ARG_POKEMON_1 = 24 6D 31 @ $m1
+ARG_POKEMON_2 = 24 6D 32 @ $m2
+ARG_POKEMON_3 = 24 6D 33 @ $m3
+ARG_POKEMON_4 = 24 6D 34 @ $m4
+ARG_POKEMON_5 = 24 6D 35 @ $m5
+ARG_POKEMON_6 = 24 6D 36 @ $m6
+ARG_POKEMON_7 = 24 6D 37 @ $m7
+ARG_POKEMON_8 = 24 6D 38 @ $m8
+ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
+ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
+
 @ TEXT MACROS
 @
 @ "#" is a text macro for different things
@@ -253,7 +272,7 @@ DPAD = 87 52
 EXTRA_MSG  = 23 50   @ #P
 WAIT_PRESS = 23 57   @ #W
 CENTER_ALIGN = 23 2B @ #+
-NEW_LINE = 23 4E     @ #N
+NEW_LINE = 23 6E     @ #n
 
 
 @ COLOR FORMATTING MACROS
@@ -272,16 +291,17 @@ RED = 32 @ 2
 BLACK = 33 @ 3
 GREEN = 34 @ 4
 CYAN = 35 @ 5
-CYAN_ALT = 05
+CYAN_2 = 05
 YELLOW = 36 @ 6
-YELLOW_ALT = 06
+YELLOW_2 = 06
 WHITE_2 = 37 @ 7
 DARKER_GRAY = 38 @ 8
 DARK_GRAY = 39 @ 9
 WHITE_3 = 41 @ A
 WHITE_4 = 42 @ B
-YELLOW_2 = 43 @ C
-YELLOW_3 = 44 @ D
+YELLOW_3 = 43 @ C
+YELLOW_4 = 44 @ D
 LIGHT_BLUE = 45 @ E
 WHITE_5 = 46 @ F
 LIGHT_BLUE_2 = 47 @ G (TODO CHECK THIS)
+YELLOW_5 = 4E @ N

@@ -42,7 +42,7 @@ _08048568:
 	lsls r0, 1
 	adds r5, r0
 	ldr r0, [r5]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	beq _08048598
 	mov r0, sp
@@ -494,7 +494,7 @@ _080488D8:
 	mov r1, r8
 	bl sub_80522F4
 	mov r0, r8
-	bl sub_807191C
+	bl LoadIQSkills
 	adds r0, r5, 0
 	adds r1, r7, 0
 	bl sub_806A7E8
@@ -1559,7 +1559,7 @@ _0804929C:
 	lsls r1, 1
 	adds r0, r3, r1
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	ble _080492AE
 	b _0804948A
@@ -1634,7 +1634,7 @@ _0804931C:
 	b _080494E2
 _08049320:
 	adds r0, r4, 0
-	bl sub_8070A58
+	bl HasNegativeStatus
 	lsls r0, 24
 	movs r6, 0
 	b _080494BC
@@ -1662,7 +1662,7 @@ _08049344:
 	b _080494E0
 _0804934A:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x64
 	cmp r0, 0
@@ -1673,14 +1673,14 @@ _0804935A:
 	b _080494E2
 _0804935E:
 	adds r0, r4, 0
-	bl sub_8071884
+	bl CanSeeInvisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804936C
 	b _080494A2
 _0804936C:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
@@ -1695,7 +1695,7 @@ _08049378:
 	b _080494A2
 _08049388:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
@@ -1708,7 +1708,7 @@ _08049394:
 	b _080494A2
 _080493A0:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
@@ -1726,7 +1726,7 @@ _080493B8:
 	cmp r0, 0x2
 	beq _080494A2
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0xF
 	b _080494BC
@@ -1747,7 +1747,7 @@ _080493E0:
 	cmp r0, 0x1
 	beq _080494A2
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
@@ -1755,7 +1755,7 @@ _080493F6:
 	cmp r2, 0
 	bne _0804940C
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	cmp r0, 0
@@ -1776,7 +1776,7 @@ _0804940C:
 	bne _08049432
 _08049420:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x32
 	cmp r0, 0
@@ -1797,7 +1797,7 @@ _08049436:
 	cmp r0, 0x3
 	beq _080494A2
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
@@ -1829,7 +1829,7 @@ _0804947A:
 	lsls r1, 1
 	adds r0, r3, r1
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	ble _080494E0
 _0804948A:
@@ -1852,13 +1852,13 @@ _080494A2:
 	b _080494E4
 _080494A6:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x5
 	b _080494BC
 _080494B2:
 	adds r0, r4, 0
-	bl sub_80494EC
+	bl CanTargetAdjacentPokemon
 	lsls r0, 24
 	movs r6, 0x1E
 _080494BC:
@@ -1870,7 +1870,7 @@ _080494C2:
 	lsls r2, 1
 	adds r0, r3, r2
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x9
 	bgt _080494E0
 	movs r0, 0x64
@@ -1893,8 +1893,8 @@ _080494E4:
 	bx r1
 	thumb_func_end EvaluateItem
 
-	thumb_func_start sub_80494EC
-sub_80494EC:
+	thumb_func_start CanTargetAdjacentPokemon
+CanTargetAdjacentPokemon:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r6, 0
@@ -1924,7 +1924,7 @@ _080494F2:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1932,7 +1932,7 @@ _080494F2:
 	movs r0, 0x1
 	b _08049544
 	.align 2, 0
-_08049538: .4byte gUnknown_80F4448
+_08049538: .4byte gAdjacentTileOffsets
 _0804953C:
 	adds r6, 0x1
 	cmp r6, 0x7
@@ -1942,7 +1942,7 @@ _08049544:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80494EC
+	thumb_func_end CanTargetAdjacentPokemon
 
 	thumb_func_start GetMapTileAtPosition
 GetMapTileAtPosition:
@@ -1982,8 +1982,8 @@ _08049588:
 _0804958C: .4byte gUnknown_203B430
 	thumb_func_end GetMapTileAtPosition
 
-	thumb_func_start sub_8049590
-sub_8049590:
+	thumb_func_start GetMapEntity
+GetMapEntity:
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -2027,7 +2027,7 @@ _080495D6:
 	.align 2, 0
 _080495DC: .4byte gDungeonGlobalData
 _080495E0: .4byte 0x0000e8c0
-	thumb_func_end sub_8049590
+	thumb_func_end GetMapEntity
 
 	thumb_func_start sub_80495E4
 sub_80495E4:
@@ -2270,7 +2270,7 @@ _080497FC: .4byte gDungeonFileArchive
 _08049800: .4byte gUnknown_202F18C
 _08049804: .4byte gUnknown_202EE8C
 _08049808: .4byte gUnknown_202F314
-_0804980C: .4byte gUnknown_810ACC0
+_0804980C: .4byte gDungeonWaterType
 _08049810:
 	strb r6, [r2, 0x4]
 	strb r3, [r2, 0x5]
@@ -2404,7 +2404,7 @@ _080498D0:
 	bgt _0804991C
 	mov r0, r10
 	mov r1, r9
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r2, [r4]
 	mov r3, r9
 	lsls r1, r3, 1
@@ -2418,7 +2418,7 @@ _08049918: .4byte 0x00003a0e
 _0804991C:
 	mov r0, r10
 	mov r1, r9
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	b _08049B70
 _08049928:
@@ -2723,7 +2723,7 @@ _08049B3C:
 	bne _08049B4A
 	movs r4, 0
 _08049B4A:
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08049B56
@@ -2731,7 +2731,7 @@ _08049B4A:
 _08049B56:
 	mov r0, r10
 	mov r1, r9
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, _08049B84
 	ldr r2, [r1]
 	lsls r1, r7, 1
@@ -3177,22 +3177,22 @@ _08049E84:
 _08049E94:
 	mov r0, r10
 	ldr r1, [sp, 0x40]
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, [sp]
 	strb r1, [r0, 0xA]
 	mov r0, r10
 	ldr r1, [sp, 0x40]
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, [sp, 0x4]
 	strb r1, [r0, 0xB]
 	mov r0, r10
 	ldr r1, [sp, 0x40]
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, [sp, 0x8]
 	strb r1, [r0, 0xC]
 	mov r0, r10
 	ldr r1, [sp, 0x40]
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, [sp, 0xC]
 	strb r1, [r0, 0xD]
 	add sp, 0x44
@@ -4312,7 +4312,7 @@ sub_804A728:
 	ldr r6, _0804A814
 	ldr r0, [r6]
 	mov r8, r0
-	bl sub_8083600
+	bl GetLeaderEntity
 	str r0, [sp, 0x24]
 	ldr r0, _0804A818
 	add r0, r8
@@ -4418,7 +4418,7 @@ _0804A7AC:
 _0804A814: .4byte gDungeonGlobalData
 _0804A818: .4byte 0x000181f0
 _0804A81C: .4byte 0x0001821a
-_0804A820: .4byte gUnknown_80F4448
+_0804A820: .4byte gAdjacentTileOffsets
 _0804A824: .4byte gUnknown_80F6A4A
 _0804A828: .4byte gUnknown_80F6C06
 _0804A82C: .4byte 0x000181f2
@@ -4764,7 +4764,7 @@ _0804AAB2:
 _0804AAB6:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	strh r7, [r0, 0x4]
 	adds r4, 0x1
 	cmp r4, 0x37
@@ -5028,7 +5028,7 @@ _0804ACA8:
 _0804ACB0:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x3
 	orrs r1, r2
@@ -5114,7 +5114,7 @@ sub_804AD34:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -5219,7 +5219,7 @@ sub_804AE08:
 	ldrsh r0, [r7, r1]
 	movs r2, 0x2
 	ldrsh r1, [r7, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -5281,7 +5281,7 @@ sub_804AE84:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	movs r0, 0x10
@@ -5351,12 +5351,12 @@ _0804AF18: .4byte gDungeonGlobalData
 _0804AF1C: .4byte 0x000135cc
 	thumb_func_end sub_804AE84
 
-	thumb_func_start sub_804AF20
-sub_804AF20:
+	thumb_func_start IsTileWater
+IsTileWater:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0
-	bl sub_804AF74
+	bl IsWaterTileset
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AF3C
@@ -5391,13 +5391,13 @@ _0804AF5E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804AF68: .4byte gUnknown_810ACC0
+_0804AF68: .4byte gDungeonWaterType
 _0804AF6C: .4byte gDungeonGlobalData
 _0804AF70: .4byte 0x00003a0e
-	thumb_func_end sub_804AF20
+	thumb_func_end IsTileWater
 
-	thumb_func_start sub_804AF74
-sub_804AF74:
+	thumb_func_start IsWaterTileset
+IsWaterTileset:
 	push {lr}
 	ldr r0, _0804AF9C
 	ldr r0, [r0]
@@ -5426,7 +5426,7 @@ _0804AFA4:
 _0804AFA6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804AF74
+	thumb_func_end IsWaterTileset
 
 	thumb_func_start sub_804AFAC
 sub_804AFAC:
@@ -5598,7 +5598,7 @@ _0804B0FC: .4byte gUnknown_202F1AA
 _0804B100: .4byte gUnknown_202F1AB
 _0804B104: .4byte gUnknown_202F1AC
 _0804B108: .4byte gUnknown_202F1A8
-_0804B10C: .4byte gUnknown_810ACC0
+_0804B10C: .4byte gDungeonWaterType
 _0804B110: .4byte 0x00003a0e
 _0804B114: .4byte gUnknown_202F1B4
 _0804B118: .4byte gUnknown_202F1AE
@@ -6102,7 +6102,7 @@ _0804B55A:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0xC]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	ldr r6, _0804B630
@@ -6619,7 +6619,7 @@ _0804B962:
 	ldr r2, _0804B9F0
 	add r2, sp
 	str r3, [r2]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -6628,7 +6628,7 @@ _0804B962:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, _0804B9D0
 	add r1, sp
 	ldrb r1, [r1]
@@ -6717,7 +6717,7 @@ _0804B9F4:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, _0804BBF8
 	adds r2, r3, 0
@@ -6727,7 +6727,7 @@ _0804B9F4:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BA72:
@@ -7228,7 +7228,7 @@ _0804BE84:
 	ldr r2, _0804BEFC
 	add r2, sp
 	str r3, [r2]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -7237,7 +7237,7 @@ _0804BE84:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r1, _0804BEE0
 	add r1, sp
 	ldrb r1, [r1]
@@ -7325,7 +7325,7 @@ _0804BF00:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r6, _0804C090
 	adds r2, r6, 0
@@ -7335,7 +7335,7 @@ _0804BF00:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BF88:
@@ -7986,7 +7986,7 @@ _0804C4C2:
 _0804C4CE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x1
@@ -8587,7 +8587,7 @@ _0804C95C:
 _0804C972:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -8596,7 +8596,7 @@ _0804C972:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	strb r1, [r0, 0x9]
 	adds r4, 0x1
@@ -8796,7 +8796,7 @@ _0804CB0C:
 	lsls r2, 5
 	add r2, sp
 	str r3, [r2]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -8805,7 +8805,7 @@ _0804CB0C:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xE5
 	lsls r1, 5
 	add r1, sp
@@ -9019,7 +9019,7 @@ _0804CCC0:
 	adds r4, r0, r1
 	b _0804CCF0
 	.align 2, 0
-_0804CCE0: .4byte gUnknown_80F4448
+_0804CCE0: .4byte gAdjacentTileOffsets
 _0804CCE4:
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -9040,7 +9040,7 @@ _0804CCF0:
 	adds r4, r0, r1
 	b _0804CD18
 	.align 2, 0
-_0804CD08: .4byte gUnknown_80F4448
+_0804CD08: .4byte gAdjacentTileOffsets
 _0804CD0C:
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -9150,7 +9150,7 @@ _0804CDC8:
 	str r0, [sp, 0x10]
 	b _0804CFD4
 	.align 2, 0
-_0804CDD4: .4byte gUnknown_80F4448
+_0804CDD4: .4byte gAdjacentTileOffsets
 _0804CDD8:
 	adds r0, r7, 0
 	adds r1, r6, 0
@@ -9294,7 +9294,7 @@ _0804CEFA:
 	beq _0804CF16
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, _0804D018
 	adds r2, r3, 0
@@ -9434,7 +9434,7 @@ _0804D006:
 	bx r0
 	.align 2, 0
 _0804D018: .4byte 0x0000fffc
-_0804D01C: .4byte gUnknown_80F4448
+_0804D01C: .4byte gAdjacentTileOffsets
 _0804D020: .4byte gUnknown_202F1AE
 	thumb_func_end sub_804CBEC
 
@@ -9967,7 +9967,7 @@ _0804D3E0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x34]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -9976,7 +9976,7 @@ _0804D3E0:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, sp
 	ldrb r1, [r1, 0x10]
 	strb r1, [r0, 0x9]
@@ -10103,7 +10103,7 @@ _0804D4BA:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, _0804D530
 	adds r2, r3, 0
@@ -10113,7 +10113,7 @@ _0804D4BA:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xFE
 	strb r1, [r0, 0x9]
 _0804D508:
@@ -11238,7 +11238,7 @@ _0804DCF0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -11368,7 +11368,7 @@ _0804DDE0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -11499,7 +11499,7 @@ _0804DED0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -11618,7 +11618,7 @@ _0804DFB6:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -11966,7 +11966,7 @@ _0804E222:
 	negs r4, r4
 	b _0804E22E
 	.align 2, 0
-_0804E228: .4byte gUnknown_80F4448
+_0804E228: .4byte gAdjacentTileOffsets
 _0804E22C:
 	adds r4, 0x1
 _0804E22E:
@@ -12040,7 +12040,7 @@ _0804E2AA:
 	bne _0804E2F0
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r4, _0804E2CC
 	adds r1, r4, 0
@@ -12049,7 +12049,7 @@ _0804E2AA:
 	b _0804E2F0
 	.align 2, 0
 _0804E2C4: .4byte gUnknown_80F6DD5
-_0804E2C8: .4byte gUnknown_80F4448
+_0804E2C8: .4byte gAdjacentTileOffsets
 _0804E2CC: .4byte 0x0000fffc
 _0804E2D0:
 	adds r7, r3
@@ -12146,7 +12146,7 @@ _0804E360:
 	beq _0804E390
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E38C
 	adds r1, r3, 0
@@ -12196,7 +12196,7 @@ _0804E3BC:
 	beq _0804E3EC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E3E8
 	adds r1, r3, 0
@@ -12252,7 +12252,7 @@ _0804E420:
 	beq _0804E450
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E44C
 	adds r1, r3, 0
@@ -12306,7 +12306,7 @@ _0804E482:
 	beq _0804E4B0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E4AC
 	adds r1, r3, 0
@@ -12353,7 +12353,7 @@ _0804E4D0:
 	beq _0804E508
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E504
 	adds r1, r3, 0
@@ -12402,7 +12402,7 @@ _0804E52C:
 	beq _0804E564
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E560
 	adds r1, r3, 0
@@ -12802,7 +12802,7 @@ _0804E848:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, _0804E99C
 	adds r2, r3, 0
@@ -12917,7 +12917,7 @@ _0804E908:
 _0804E926:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	ldr r3, _0804E99C
 	adds r1, r3, 0
@@ -13051,7 +13051,7 @@ _0804EA0E:
 	ble _0804EA4E
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -13076,7 +13076,7 @@ _0804EA4E:
 	ble _0804EA82
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -13103,7 +13103,7 @@ _0804EA82:
 	bgt _0804EABA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -13130,7 +13130,7 @@ _0804EABA:
 	bgt _0804EB0E
 	mov r0, r10
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -13163,7 +13163,7 @@ _0804EAF4:
 	bne _0804EB0E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804EB0E:
@@ -13522,7 +13522,7 @@ _0804ED98:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x50]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x20
 	orrs r1, r2
@@ -13608,7 +13608,7 @@ _0804EE18:
 _0804EE38:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x10
 	orrs r1, r2
@@ -13889,7 +13889,7 @@ _0804F046:
 _0804F05A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
@@ -14394,7 +14394,7 @@ _0804F40A:
 	beq _0804F438
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x2
@@ -14405,7 +14405,7 @@ _0804F434: .4byte 0x0000fffc
 _0804F438:
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ands r1, r7
 _0804F444:
@@ -14480,7 +14480,7 @@ _0804F4BA:
 	movs r7, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -14563,7 +14563,7 @@ _0804F550:
 _0804F55A:
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -14573,7 +14573,7 @@ _0804F55A:
 _0804F570:
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -14583,7 +14583,7 @@ _0804F570:
 _0804F586:
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -14593,7 +14593,7 @@ _0804F586:
 _0804F59C:
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -14643,7 +14643,7 @@ _0804F5E2:
 _0804F5F0:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x20
 	orrs r1, r2
@@ -14823,7 +14823,7 @@ _0804F730:
 _0804F73C:
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -14848,7 +14848,7 @@ _0804F75E:
 _0804F76C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -14905,7 +14905,7 @@ _0804F7C8:
 _0804F7D4:
 	adds r0, r4, 0
 	mov r1, r8
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -14930,7 +14930,7 @@ _0804F7F6:
 _0804F804:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -14991,7 +14991,7 @@ _0804F864:
 	mov r10, r0
 	adds r0, r5, 0
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r1, [sp]
@@ -14999,12 +14999,12 @@ _0804F864:
 	mov r9, r1
 	mov r0, r9
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r2, [sp]
@@ -15012,118 +15012,118 @@ _0804F864:
 	mov r8, r2
 	mov r0, r8
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r6, [sp, 0x4]
 	subs r6, 0x1
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r4, [sp, 0x4]
 	adds r4, 0x1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x4
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	movs r2, 0x40
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x2
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x10
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0, 0x4]
 	orrs r4, r1
 	strh r4, [r0, 0x4]
@@ -15212,7 +15212,7 @@ _0804FA6C:
 _0804FA76:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -15284,7 +15284,7 @@ _0804FAD4:
 	movs r4, 0x2
 	ldrsh r1, [r7, r4]
 	adds r1, r2
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 _0804FB14:
@@ -15340,28 +15340,28 @@ _0804FB54:
 	ble _0804FBAE
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 _0804FBAE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0
 	bl sub_804F5C4
 	b _0804FBD2
@@ -15402,7 +15402,7 @@ _0804FBF4:
 _0804FBFA:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -15490,7 +15490,7 @@ _0804FC8A:
 	bne _0804FCAE
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ands r1, r7
 	mov r2, r8
@@ -15533,7 +15533,7 @@ _0804FCD8:
 	beq _0804FCF8
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ands r1, r7
 	strh r1, [r0]
@@ -15583,7 +15583,7 @@ _0804FD3A:
 _0804FD3E:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8049590
+	bl GetMapEntity
 	bl sub_804FD10
 	subs r3, r7, 0x1
 	cmp r6, 0
@@ -15721,7 +15721,7 @@ _0804FE20:
 _0804FE24:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x10
 	orrs r1, r2
@@ -15936,7 +15936,7 @@ _0804FFAA:
 	adds r4, r1, r0
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r5, r0, 0
 	ldrh r1, [r5, 0x4]
 	movs r0, 0x1
@@ -15967,7 +15967,7 @@ _08050002:
 _08050004:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -16075,7 +16075,7 @@ _080500BC:
 _080500D8:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x2
 	orrs r1, r2
@@ -16150,7 +16150,7 @@ _08050128:
 _0805016C:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x2
 	orrs r1, r2
@@ -16262,7 +16262,7 @@ _0805024C: .4byte 0x00003a0c
 _08050250: .4byte gUnknown_80F4DA0
 _08050254:
 	ldrb r1, [r7, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r4, r0, 0
 	movs r0, 0x2
 	bl DungeonRandomCapped
@@ -16379,7 +16379,7 @@ _08050318:
 _08050334:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x4
 	orrs r1, r2
@@ -16644,7 +16644,7 @@ _0805051C:
 _0805053C:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x8
 	orrs r1, r2
@@ -16799,7 +16799,7 @@ _0805064E:
 _0805066A:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x8
 	orrs r1, r2
@@ -16967,7 +16967,7 @@ _080507A8:
 	bne _080507B8
 	mov r0, r9
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	bl sub_80506BC
 _080507B8:
 	ldr r2, [sp, 0x68]
@@ -17108,7 +17108,7 @@ _080508CC:
 	cmp r1, 0
 	bne _080508DA
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	bl sub_80506BC
 _080508DA:
 	ldr r1, [sp, 0x7C]
@@ -17276,7 +17276,7 @@ _08050A0A:
 	bne _08050A1A
 	ldr r0, [sp, 0x90]
 	ldr r1, [sp, 0x94]
-	bl sub_8049590
+	bl GetMapEntity
 	bl sub_80506BC
 _08050A1A:
 	adds r5, 0x1
@@ -17480,7 +17480,7 @@ _08050B7C:
 	subs r0, r7, 0x5
 	adds r1, r6, 0
 	str r2, [sp, 0x9C]
-	bl sub_8049590
+	bl GetMapEntity
 	bl sub_80506BC
 	ldr r2, [sp, 0x9C]
 _08050B92:
@@ -17513,7 +17513,7 @@ _08050BB8:
 _08050BC0:
 	mov r0, r9
 	mov r1, r10
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r3, [r2]
 	movs r0, 0x3
@@ -17607,7 +17607,7 @@ _08050C5C:
 _08050C68:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	movs r3, 0x3
@@ -17965,7 +17965,7 @@ _08050F00:
 _08050F08:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r1, [r4]
 	movs r0, 0x87
@@ -18204,7 +18204,7 @@ _080510D6:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x38]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -18213,7 +18213,7 @@ _080510D6:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	mov r1, sp
 	ldrb r1, [r1, 0x10]
 	strb r1, [r0, 0x9]
@@ -18299,7 +18299,7 @@ _08051162:
 	strh r0, [r6, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r3, _080511EC
 	adds r2, r3, 0
@@ -18309,7 +18309,7 @@ _08051162:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 	ldr r4, [sp, 0x14]
@@ -18493,7 +18493,7 @@ _080512EE:
 	lsrs r4, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	movs r1, 0x1
 	str r1, [sp]
 	adds r1, r4, 0
@@ -18541,7 +18541,7 @@ _08051338:
 _08051350:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -18590,7 +18590,7 @@ _080513B8:
 _080513BC:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r2, [r0]
 	movs r1, 0x10
 	orrs r1, r2
@@ -18618,7 +18618,7 @@ _080513EC:
 _080513F0:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -18753,7 +18753,7 @@ _080514EE:
 	lsrs r5, 24
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8049590
+	bl GetMapEntity
 	adds r6, r0, 0
 	ldr r1, [sp, 0x4]
 	ldr r2, _080515D0
@@ -18877,7 +18877,7 @@ _080515F6:
 	lsrs r4, 24
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8049590
+	bl GetMapEntity
 	adds r5, r0, 0
 	ldrb r6, [r5, 0x9]
 	movs r0, 0x1
@@ -18984,7 +18984,7 @@ _080516CA:
 	ldr r0, [r5]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -19017,7 +19017,7 @@ _0805170A:
 	ldr r0, [r5, 0x8]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -19063,7 +19063,7 @@ _08051762:
 	ldr r1, [r5, 0x4]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -19096,7 +19096,7 @@ _080517A2:
 	ldr r1, [r5, 0xC]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl sub_8049590
+	bl GetMapEntity
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -19136,7 +19136,7 @@ _080517EC:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x20
@@ -19200,7 +19200,7 @@ _08051864:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r6, r0, 0
 	ldrh r1, [r6]
 	movs r0, 0x20
@@ -19276,7 +19276,7 @@ sub_80518F0:
 _080518F8:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_8049590
+	bl GetMapEntity
 	adds r4, r0, 0
 	bl sub_804FD10
 	cmp r5, 0
@@ -19290,7 +19290,7 @@ _0805190E:
 _08051914:
 	adds r0, r5, 0
 	movs r1, 0x1E
-	bl sub_8049590
+	bl GetMapEntity
 	adds r4, r0, 0
 	bl sub_804FD10
 	cmp r5, 0
@@ -19444,7 +19444,7 @@ sub_8051A24:
 	mov r8, r3
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r7, r0, 0
 	lsls r4, 16
 	lsls r5, 16
@@ -19897,7 +19897,7 @@ _08051E42:
 _08051E46:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrb r0, [r2, 0xE]
 	cmp r0, 0xF
@@ -19937,7 +19937,7 @@ sub_8051E7C:
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
 	subs r1, 0x1
-	bl sub_8049590
+	bl GetMapEntity
 	str r0, [sp, 0x8]
 	ldrh r1, [r0]
 	movs r0, 0x80
@@ -20037,7 +20037,7 @@ _08051F10:
 	bge _08051FCA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r4, r0, 0
 	ldrh r0, [r4]
 	movs r3, 0x80

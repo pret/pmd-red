@@ -1375,7 +1375,7 @@ sub_8040BB0:
 	mov r8, r0
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1387,7 +1387,7 @@ sub_8040BB0:
 	mov r9, r5
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1446,7 +1446,7 @@ sub_8040C4C:
 	adds r4, r1, 0
 	adds r6, r2, 0
 	ldrh r5, [r4, 0x2]
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1466,7 +1466,7 @@ sub_8040C4C:
 	ldrsh r5, [r6, r0]
 	ldrh r4, [r4, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1619,7 +1619,7 @@ sub_8040DA0:
 	mov r1, r8
 	ldrh r4, [r1, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1764,7 +1764,7 @@ _08040EF0:
 	mov r0, r8
 	ldrh r4, [r0, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1933,7 +1933,7 @@ sub_8041038:
 	mov r9, r0
 	ldrh r4, [r2, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1954,7 +1954,7 @@ sub_8041038:
 	mov r0, r8
 	ldrh r4, [r0, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2031,7 +2031,7 @@ sub_8041108:
 	adds r5, r3, 0
 	ldrh r4, [r2, 0x2]
 	adds r0, r7, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2088,7 +2088,7 @@ sub_8041168:
 _0804118A:
 	ldrh r4, [r7, 0x2]
 	mov r0, r8
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2479,7 +2479,7 @@ _08041476:
 	bne _0804148E
 _0804147E:
 	adds r0, r4, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	beq _080414A0
@@ -2490,7 +2490,7 @@ _0804148E:
 	cmp r0, 0x97
 	bne _080414A4
 	adds r0, r4, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2524,7 +2524,7 @@ sub_80414C0:
 	bne _080414DC
 	adds r0, r5, 0
 	bl sub_8045128
-	bl sub_804AF20
+	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
 	bne _080414F2

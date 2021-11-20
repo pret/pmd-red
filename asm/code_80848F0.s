@@ -272,7 +272,7 @@ _0808547C: .4byte gUnknown_80F4598
 	thumb_func_start sub_8085480
 sub_8085480:
 	push {lr}
-	bl sub_8083600
+	bl GetLeaderEntity
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8085480
@@ -794,7 +794,7 @@ _08085840:
 	bx r0
 	.align 2, 0
 _08085854: .4byte gDungeonGlobalData
-_08085858: .4byte gUnknown_80F4448
+_08085858: .4byte gAdjacentTileOffsets
 _0808585C: .4byte 0x000135cc
 	thumb_func_end sub_80857B8
 

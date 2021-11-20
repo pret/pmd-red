@@ -7,7 +7,7 @@
 extern bool8 IsIQSkillSet(u8 *, u32);
 extern u8 HasItem(struct DungeonEntity *, u32);
 
-bool8 sub_8071884(struct DungeonEntity *pokemon)
+bool8 CanSeeInvisible(struct DungeonEntity *pokemon)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
     if(pokemonData->eyesightStatus != EYESIGHT_STATUS_EYEDROPS)

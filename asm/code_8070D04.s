@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8070D04
-sub_8070D04:
+	thumb_func_start CannotAttack
+CannotAttack:
 	push {lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -60,17 +60,17 @@ _08070D64:
 _08070D66:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070D04
+	thumb_func_end CannotAttack
 
-	thumb_func_start sub_8070D6C
-sub_8070D6C:
+	thumb_func_start CannotMoveForward
+CannotMoveForward:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0x4
@@ -96,7 +96,7 @@ sub_8070D6C:
 	ldr r0, [r2, 0x10]
 	cmp r0, 0
 	bne _08070E34
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070E04
@@ -115,7 +115,7 @@ _08070DD2:
 	movs r5, 0x3
 	b _08070E04
 	.align 2, 0
-_08070DD8: .4byte gUnknown_80F4448
+_08070DD8: .4byte gAdjacentTileOffsets
 _08070DDC:
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -158,14 +158,14 @@ _08070E04:
 	movs r0, 0x1
 	b _08070E36
 	.align 2, 0
-_08070E30: .4byte gUnknown_8106FAD
+_08070E30: .4byte gDirectionBitMasks
 _08070E34:
 	movs r0, 0
 _08070E36:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070D6C
+	thumb_func_end CannotMoveForward
 
 	thumb_func_start sub_8070E3C
 sub_8070E3C:
@@ -176,7 +176,7 @@ sub_8070E3C:
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0
@@ -206,7 +206,7 @@ sub_8070E3C:
 	cmp r0, 0x1
 	bne _08070F0C
 _08070E8A:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070EDC
@@ -225,7 +225,7 @@ _08070EAC:
 	movs r5, 0x3
 	b _08070EDC
 	.align 2, 0
-_08070EB0: .4byte gUnknown_80F4448
+_08070EB0: .4byte gAdjacentTileOffsets
 _08070EB4:
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -323,7 +323,7 @@ sub_8070F14:
 	movs r0, 0x1
 	b _08070F7A
 	.align 2, 0
-_08070F70: .4byte gUnknown_80F4448
+_08070F70: .4byte gAdjacentTileOffsets
 _08070F74: .4byte gUnknown_8106FBD
 _08070F78:
 	movs r0, 0
@@ -341,7 +341,7 @@ sub_8070F80:
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0x4
@@ -371,7 +371,7 @@ sub_8070F80:
 	cmp r0, 0x1
 	bne _08071050
 _08070FCC:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08071020
@@ -390,7 +390,7 @@ _08070FEE:
 	movs r5, 0x3
 	b _08071020
 	.align 2, 0
-_08070FF4: .4byte gUnknown_80F4448
+_08070FF4: .4byte gAdjacentTileOffsets
 _08070FF8:
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -450,7 +450,7 @@ sub_8071058:
 	ldr r0, [r5, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r2, 0x4
@@ -485,7 +485,7 @@ sub_8071058:
 	cmp r0, 0
 	bne _08071130
 _080710AE:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08071100
@@ -504,7 +504,7 @@ _080710D0:
 	movs r6, 0x3
 	b _08071100
 	.align 2, 0
-_080710D4: .4byte gUnknown_80F4448
+_080710D4: .4byte gAdjacentTileOffsets
 _080710D8:
 	adds r0, r5, 0
 	movs r1, 0xC
@@ -556,15 +556,15 @@ _08071132:
 	bx r1
 	thumb_func_end sub_8071058
 
-	thumb_func_start sub_8071138
-sub_8071138:
+	thumb_func_start CanAttackInFront
+CanAttackInFront:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -598,7 +598,7 @@ _08071152:
 	cmp r0, 0x1
 	bne _0807120C
 _0807118A:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080711DC
@@ -617,7 +617,7 @@ _080711AC:
 	movs r5, 0x3
 	b _080711DC
 	.align 2, 0
-_080711B0: .4byte gUnknown_80F4448
+_080711B0: .4byte gAdjacentTileOffsets
 _080711B4:
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -660,17 +660,17 @@ _080711DC:
 	movs r0, 0x1
 	b _0807120E
 	.align 2, 0
-_08071208: .4byte gUnknown_8106FD5
+_08071208: .4byte gDirectionBitMasks_2
 _0807120C:
 	movs r0, 0
 _0807120E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071138
+	thumb_func_end CanAttackInFront
 
-	thumb_func_start sub_8071214
-sub_8071214:
+	thumb_func_start CanMoveForward
+CanMoveForward:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -680,7 +680,7 @@ sub_8071214:
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0
@@ -774,7 +774,7 @@ _080712B8:
 	cmp r0, 0
 	bne _0807137E
 _080712E6:
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08071348
@@ -793,10 +793,10 @@ _08071308:
 	movs r6, 0x3
 	b _08071348
 	.align 2, 0
-_0807130C: .4byte gUnknown_80F4448
+_0807130C: .4byte gAdjacentTileOffsets
 _08071310: .4byte gDungeonGlobalData
 _08071314: .4byte 0x00000671
-_08071318: .4byte gUnknown_810ACC0
+_08071318: .4byte gDungeonWaterType
 _0807131C: .4byte 0x00003a0e
 _08071320:
 	adds r0, r4, 0
@@ -841,7 +841,7 @@ _08071348:
 	movs r0, 0x1
 	b _08071380
 	.align 2, 0
-_08071374: .4byte gUnknown_8106FDD
+_08071374: .4byte gDirectionBitMasks_3
 _08071378:
 	movs r0, 0x1
 	mov r3, r8
@@ -854,19 +854,19 @@ _08071380:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071214
+	thumb_func_end CanMoveForward
 
-	thumb_func_start sub_807138C
-sub_807138C:
+	thumb_func_start IsAtJunction
+IsAtJunction:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x70]
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
-	bl sub_8070328
+	bl GetCrossableTerrain
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_80441E8
+	bl IsFixedDungeon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080713E2
@@ -961,7 +961,7 @@ _08071458:
 	movs r0, 0
 	b _0807146A
 	.align 2, 0
-_0807145C: .4byte gUnknown_810ACC0
+_0807145C: .4byte gDungeonWaterType
 _08071460: .4byte gDungeonGlobalData
 _08071464: .4byte 0x00003a0e
 _08071468:
@@ -970,10 +970,10 @@ _0807146A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807138C
+	thumb_func_end IsAtJunction
 
-	thumb_func_start sub_8071470
-sub_8071470:
+	thumb_func_start ShouldAvoidFirstHit
+ShouldAvoidFirstHit:
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -992,6 +992,6 @@ _0807148C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071470
+	thumb_func_end ShouldAvoidFirstHit
 
 	.align 2, 0

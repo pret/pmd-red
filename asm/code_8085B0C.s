@@ -176,7 +176,7 @@ _08085C3E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08085C4C: .4byte gUnknown_80F4448
+_08085C4C: .4byte gAdjacentTileOffsets
 _08085C50: .4byte gUnknown_202F3D8
 	thumb_func_end sub_8085B80
 

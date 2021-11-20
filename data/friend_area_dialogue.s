@@ -24,8 +24,8 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaSleepyEnergy
     FriendAreaSleepyEnergy:
-    .string "#+It appears to be a little sleepy~2c\n"
-    .string "#+but it~27s still full of energy.\0"
+    .string "#+It appears to be a little sleepy{COMMA}\n"
+    .string "#+but it{APOSTROPHE}s still full of energy.\0"
     .align 2,0
 
     .global FriendAreaGummi
@@ -41,13 +41,13 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaPensive
     FriendAreaPensive:
-    .string "#+It looked pensive for a moment~2c\n"
-    .string "#+but it~27s grinning widely again.\0"
+    .string "#+It looked pensive for a moment{COMMA}\n"
+    .string "#+but it{APOSTROPHE}s grinning widely again.\0"
     .align 2,0
 
     .global FriendAreaGrin
     FriendAreaGrin:
-    .string "#+It~27s looking this way with a grin.\0"
+    .string "#+It{APOSTROPHE}s looking this way with a grin.\0"
     .align 2,0
 
     .global FriendAreaEager
@@ -58,7 +58,7 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaWorried
     FriendAreaWorried:
-    .string "#+It appeared to have been worried~2c\n"
+    .string "#+It appeared to have been worried{COMMA}\n"
     .string "#+but seems to have solved it.\0"
     .align 2,0
 
@@ -94,8 +94,8 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaStraight
     FriendAreaStraight:
-    .string "#+It~27s trying to keep a straight face~2c\n"
-    .string "#+but it can~27t stop laughing!\0"
+    .string "#+It{APOSTROPHE}s trying to keep a straight face{COMMA}\n"
+    .string "#+but it can{APOSTROPHE}t stop laughing!\0"
     .align 2,0
 
     .global FriendAreaGrinning

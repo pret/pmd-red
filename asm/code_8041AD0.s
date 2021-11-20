@@ -511,7 +511,7 @@ _08042650: .4byte 0x0000ffff
 _08042654: .4byte gDungeonGlobalData
 _08042658: .4byte 0x000181f2
 _0804265C: .4byte 0x00000165
-_08042660: .4byte gUnknown_80F4448
+_08042660: .4byte gAdjacentTileOffsets
 _08042664:
 	movs r6, 0x1
 	negs r6, r6
@@ -753,7 +753,7 @@ sub_8042818:
 	ldr r4, [r0]
 	cmp r4, 0
 	bne _08042836
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r4, r0, 0
 _08042836:
 	ldr r1, _0804287C
@@ -775,7 +775,7 @@ _0804284A:
 	blt _08042896
 	cmp r7, 0
 	beq _08042888
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08042888

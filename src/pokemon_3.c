@@ -27,7 +27,7 @@ struct unkStruct_808E9EC
 };
 extern u32 gUnknown_81076C4[];
 
-struct unkStruct_202F3E8 
+struct unkStruct_202F3E8
 {
     u16 unk0;
     u16 unk2;
@@ -64,7 +64,7 @@ extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 
 
-bool8 sub_808E668(s16 a1, s16* a2, s16* a3) 
+bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
 {
     u32 shifted = a1 << 16;
 
@@ -92,7 +92,7 @@ bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
 
 void sub_808E6F4(struct unkStruct_808E6F4* a1)
 {
-  s32 i; 
+  s32 i;
 
   a1->unk0 = gUnknown_810AC90[RandomCapped(10)];
   for (i = 0; i < 100; i++) {
@@ -108,7 +108,7 @@ bool8 HasRecruitedMon(s16 species_) {
     s32 species = species_;
     s32 i = 0;
     struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
-    
+
     for (i = 0; i < NUM_SPECIES; i++) {
         if (((u8)pokemon->unk0 & 1)) {
             if(pokemon->speciesNum == species)
@@ -188,7 +188,7 @@ s32 GetBaseSpecies(s16 index) {
         return SPECIES_DEOXYS_NORMAL;
     if (index == SPECIES_RAYQUAZA_CUTSCENE)
         return SPECIES_RAYQUAZA;
-    
+
     return index;
 }
 
@@ -278,7 +278,7 @@ s32 GetUnownIndex(s16 index)
     return 0;
 }
 
-u32 sub_808E9B8(struct PokemonStruct *r0)
+u32 ExtractSpeciesIndex(struct PokemonStruct *r0)
 {
     return r0->unk0 & 0x000001ff;
 }
@@ -295,7 +295,7 @@ void sub_808E9D8(struct PokemonStruct *r0, s32 r1, s16 r2)
     r0->unk0 =  r2_32 | (r1 << 9) ;
 }
 
-u32 sub_808E9E4(struct PokemonStruct *r0)
+u32 ExtractLevel(struct PokemonStruct *r0)
 {
     return (r0->unk0 >> 9);
 }
@@ -481,7 +481,7 @@ u32 GetTacticsDescription(u8 r0)
     return gTacticsDescriptions[r0];
 }
 
-u8 sub_808EAFC(u8 r0)
+u8 TacticsTargetLeader(u8 r0)
 {
     return gUnknown_810A36B[r0];
 }
@@ -620,9 +620,9 @@ void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer)
 bool8 IsIQSkillSet(u8 *param_1, u32 param_2)
 {
 
-  if ((((param_1[0] & param_2) == 0) && 
+  if ((((param_1[0] & param_2) == 0) &&
        ((param_1[1] & param_2 >> 8) == 0)) &&
-       ((param_1[2] & param_2 >> 0x10) == 0)) 
+       ((param_1[2] & param_2 >> 0x10) == 0))
   {
     return FALSE;
   }
@@ -652,7 +652,7 @@ void sub_808ED00() {
     }
 }
 
-s32 SaveRecruitedPokemon(u8 *a1, s32 a2)  
+s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
 {
     u16 buffer[6];
     struct unkStruct_8094924 backup;
@@ -689,7 +689,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         }
         else {
             pokemon->unkHasNextStage = 0;
-        }    
+        }
         SavePokemonStruct(&backup, pokemon);
     }
 
@@ -699,7 +699,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         }
         else {
             data_u8 = 0;
-        }    
+        }
         SaveIntegerBits(&backup, &data_u8, 1);
         SavePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
     }
@@ -712,7 +712,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     return backup.unk8;
 }
 
-s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)  
+s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 {
     struct unkStruct_8094924 backup;
     u8 data_u8;  // same as saverecruitedpokemon
@@ -749,7 +749,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     return backup.unk8;
 }
 
-void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)  
+void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
 {
   SaveIntegerBits(a1, &pokemon->unkHasNextStage, 7);
   SaveIntegerBits(a1, &pokemon->speciesNum, 9);
@@ -770,7 +770,7 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, pokemon->name, 80);
 }
 
-void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)  
+void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
 {
   memset(pokemon, 0, sizeof(struct PokemonStruct));
   pokemon->unk0 = 0;
@@ -797,7 +797,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, pokemon->name, 80);
 }
 
-s32 SavePokemonStruct2(u8* a1, s32 size)  
+s32 SavePokemonStruct2(u8* a1, s32 size)
 {
   struct unkStruct_8094924 backup;
   s32 i;
@@ -809,13 +809,13 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
   data_u8_zero = 0;
 
   for (i = 0; i < 4; i++) {
-    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];  
+    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
     SaveIntegerBits(&backup, pokemon2->unk2 ? &data_u8_neg1 : &data_u8_zero, 1);
     SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
-    xxx_save_poke_sub_4_80902F4(&backup, &pokemon2->unk4);  
+    xxx_save_poke_sub_4_80902F4(&backup, &pokemon2->unk4);
     SaveIntegerBits(&backup, &pokemon2->IQ, 10);
     SaveIntegerBits(&backup, &pokemon2->unkA, 16);
     SaveIntegerBits(&backup, &pokemon2->unkC, 16);
@@ -840,18 +840,18 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
   return backup.unk8;
 }
 
-s32 RestorePokemonStruct2(u8* a1, s32 size)  
+s32 RestorePokemonStruct2(u8* a1, s32 size)
 {
   struct unkStruct_8094924 backup;
-  s32 i;  
-  
+  s32 i;
+
   xxx_init_struct_8094924_restore_809485C(&backup, a1, size);
   for (i = 0; i < 4; i++) {
-    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];  
+    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     u8 unk2;
 
     memset(pokemon2, 0, sizeof(struct PokemonStruct2));
-    
+
     RestoreIntegerBits(&backup, &pokemon2->unk0, 2);
 
     RestoreIntegerBits(&backup, &unk2, 1);
@@ -863,7 +863,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     }
     RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
-    xxx_restore_poke_sub_4_8090314(&backup, &pokemon2->unk4);  
+    xxx_restore_poke_sub_4_8090314(&backup, &pokemon2->unk4);
     RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
     RestoreIntegerBits(&backup, &pokemon2->unkA, 16);
     RestoreIntegerBits(&backup, &pokemon2->unkC, 16);

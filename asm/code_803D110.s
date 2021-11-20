@@ -641,7 +641,7 @@ _0803D5A8:
 	str r1, [r7]
 	str r2, [r7, 0x4]
 	adds r0, r6
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	cmp r0, 0
 	beq _0803D5E8
@@ -966,7 +966,7 @@ _0803D840:
 	ldr r0, [r5]
 	adds r0, r2
 	str r2, [sp]
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	ldr r2, [sp]
 	cmp r0, 0
@@ -1033,7 +1033,7 @@ _0803D8B8:
 	adds r1, r4, r0
 	ldr r0, [r7]
 	adds r0, r1
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1109,7 +1109,7 @@ _0803D954:
 	bgt _0803D968
 	ldr r0, [r7]
 	adds r0, r4
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1185,7 +1185,7 @@ _0803D9D0:
 	beq _0803DA00
 _0803D9E0:
 	adds r0, r2, r4
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	b _0803DA14
@@ -1233,14 +1233,14 @@ sub_803DA20:
 _0803DA3A:
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, r7
 	bne _0803DA60
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_808E9E4
+	bl ExtractLevel
 	b _0803DA72
 	.align 2, 0
 _0803DA54: .4byte gDungeonGlobalData
@@ -4516,7 +4516,7 @@ _0803F45A:
 	beq _0803F494
 	adds r0, r2, 0
 	adds r1, r4, 0
-	bl sub_8083294
+	bl InSameRoom_2
 	lsls r0, 24
 	lsrs r0, 24
 	b _0803F49A
@@ -4813,7 +4813,7 @@ _0803F6B4:
 	ldrb r2, [r4]
 	mov r8, r2
 	adds r0, r6, 0
-	bl sub_8071884
+	bl CanSeeInvisible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -5469,7 +5469,7 @@ _0803FBBA:
 	lsls r3, 1
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	bne _0803FBD2
 	movs r0, 0x1

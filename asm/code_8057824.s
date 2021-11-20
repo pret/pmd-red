@@ -267,7 +267,7 @@ sub_8057BEC:
 	movs r0, 0
 	mov r8, r0
 	adds r0, r4, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	beq _08057C48
@@ -382,7 +382,7 @@ sub_8057CD0:
 	adds r6, r1, 0
 	mov r8, r2
 	adds r5, r3, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08057D18
@@ -802,7 +802,7 @@ sub_8057FF4:
 	adds r5, r0, 0
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_807723C
+	bl GetFlashFireStatus
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -2131,7 +2131,7 @@ sub_80589D4:
 	adds r5, r0, 0
 	adds r6, r1, 0
 	ldr r4, _08058A04
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -3840,7 +3840,7 @@ sub_805968C:
 	mov r8, r1
 	adds r6, r2, 0
 	adds r7, r3, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -4062,7 +4062,7 @@ DiveMoveAction:
 	mov r8, r3
 	movs r6, 0
 	bl sub_8045128
-	bl sub_804AF20
+	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
 	beq _08059870
@@ -4397,7 +4397,7 @@ sub_8059AC4:
 	adds r5, r0, 0
 	adds r6, r1, 0
 	ldr r4, _08059AF4
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -4548,7 +4548,7 @@ _08059BE2:
 	beq _08059C08
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08059C08
@@ -4573,7 +4573,7 @@ _08059C08:
 	adds r4, r1, r0
 	ldr r1, [r4]
 	adds r0, r5, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	adds r1, r7, 0
 	adds r1, 0x5C
 	movs r2, 0
@@ -4912,7 +4912,7 @@ _08059E8A:
 	bne _08059F1A
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4940,7 +4940,7 @@ _08059E8A:
 	ldr r0, _08059F2C
 	ldr r1, [r6, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _08059F30
 	ldr r2, [r0]
 	adds r0, r6, 0
@@ -5094,7 +5094,7 @@ _08059FFE:
 	bne _0805A090
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5122,7 +5122,7 @@ _08059FFE:
 	ldr r0, _0805A0A0
 	ldr r1, [r6, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _0805A0A4
 	ldr r2, [r0]
 	adds r0, r6, 0
@@ -6131,7 +6131,7 @@ _0805A7B4:
 	bx r1
 	.align 2, 0
 _0805A7C4: .4byte gUnknown_80FD170
-_0805A7C8: .4byte gUnknown_80F4448
+_0805A7C8: .4byte gAdjacentTileOffsets
 _0805A7CC: .4byte 0xffff0000
 _0805A7D0: .4byte 0x0000ffff
 	thumb_func_end sub_805A6C8
@@ -6328,7 +6328,7 @@ _0805A94C:
 	add r4, sp, 0x18
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r5, [r0, 0x10]
 	cmp r5, 0
 	beq _0805AA4C
@@ -6523,7 +6523,7 @@ sub_805AAE0:
 	lsls r1, 1
 	adds r5, r0, r1
 	ldr r0, [r5]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x1
 	ble _0805AB20
 	ldr r0, _0805AB1C
@@ -6882,7 +6882,7 @@ _0805ADA0:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805AE0C
@@ -7228,7 +7228,7 @@ TransformMoveAction:
 	adds r5, r0, 0
 	adds r6, r1, 0
 	adds r4, r2, 0
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7352,7 +7352,7 @@ sub_805B0D0:
 	movs r0, 0x1
 	b _0805B15A
 	.align 2, 0
-_0805B134: .4byte gUnknown_80F561C
+_0805B134: .4byte gDungeonCamouflageTypes
 _0805B138: .4byte gDungeonGlobalData
 _0805B13C: .4byte 0x00003a0e
 _0805B140: .4byte gUnknown_202DFE8
@@ -8082,7 +8082,7 @@ sub_805B668:
 	lsrs r0, 24
 	mov r9, r0
 	adds r0, r4, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B712
@@ -9266,7 +9266,7 @@ TrapbustOrbAction:
 	adds r0, r1, 0
 	bl sub_8045128
 	adds r4, r0, 0
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BF78
@@ -9344,7 +9344,7 @@ _0805BFE0:
 _0805BFF0:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8049590
+	bl GetMapEntity
 	ldr r4, [r0, 0x14]
 	cmp r4, 0
 	beq _0805C028
@@ -9458,7 +9458,7 @@ _0805C0BE:
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C0F2
@@ -9722,7 +9722,7 @@ FillInOrbAction:
 	movs r0, 0
 	mov r9, r0
 	ldr r5, [r7, 0x70]
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C2DC
@@ -9770,7 +9770,7 @@ _0805C2DC:
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8049590
+	bl GetMapEntity
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -9832,7 +9832,7 @@ _0805C372:
 	bl sub_80522F4
 	b _0805C3C0
 	.align 2, 0
-_0805C3A0: .4byte gUnknown_80F4448
+_0805C3A0: .4byte gAdjacentTileOffsets
 _0805C3A4: .4byte 0xffff0000
 _0805C3A8: .4byte 0x0000ffff
 _0805C3AC: .4byte 0x0000fffc
@@ -9973,8 +9973,8 @@ sub_805C48C:
 	bx r1
 	thumb_func_end sub_805C48C
 
-	thumb_func_start sub_805C498
-sub_805C498:
+	thumb_func_start CanUseWithStatusChecker
+CanUseWithStatusChecker:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r2, [r5, 0x70]
@@ -10397,7 +10397,7 @@ _0805C4C0:
 	.4byte _0805CDE8
 _0805CB00:
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CC5A
@@ -10426,7 +10426,7 @@ _0805CB24:
 	lsls r1, 1
 	adds r0, r2, r1
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	ble _0805CB3E
 	b _0805CEA8
@@ -10552,10 +10552,10 @@ _0805CBF0:
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8071858
+	bl HasType
 	b _0805CDEC
 	.align 2, 0
-_0805CC0C: .4byte gUnknown_80F561C
+_0805CC0C: .4byte gDungeonCamouflageTypes
 _0805CC10: .4byte gDungeonGlobalData
 _0805CC14: .4byte 0x00003a0e
 _0805CC18:
@@ -10618,19 +10618,19 @@ _0805CC6E:
 	b _0805CB6E
 _0805CC70:
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CCAE
 _0805CC7C:
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CDB6
 _0805CC88:
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CCA0
@@ -10669,25 +10669,25 @@ _0805CCB6:
 	b _0805CDEE
 _0805CCC2:
 	adds r0, r5, 0
-	bl sub_8070B48
+	bl HasQuarterHPOrLess
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CCD0
 	b _0805CEA8
 _0805CCD0:
 	adds r0, r5, 0
-	bl sub_8070A58
+	bl HasNegativeStatus
 	b _0805CDC2
 _0805CCD8:
 	adds r0, r5, 0
 	bl sub_8045128
-	bl sub_804AF20
+	bl IsTileWater
 	b _0805CDEC
 _0805CCE4:
 	adds r0, r5, 0
 	bl sub_8045128
 	adds r4, r0, 0
-	bl sub_804AF20
+	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CCF8
@@ -10808,7 +10808,7 @@ _0805CDB6:
 	b _0805CB6E
 _0805CDBC:
 	adds r0, r5, 0x4
-	bl sub_807FC80
+	bl CanLayTrap
 _0805CDC2:
 	lsls r0, 24
 _0805CDC4:
@@ -10837,7 +10837,7 @@ _0805CDE0:
 	bne _0805CEA8
 	b _0805CB6E
 _0805CDE8:
-	bl sub_80441BC
+	bl IsBossBattle
 _0805CDEC:
 	lsls r0, 24
 _0805CDEE:
@@ -10947,10 +10947,10 @@ _0805CEAA:
 	.align 2, 0
 _0805CEB0: .4byte gDungeonGlobalData
 _0805CEB4: .4byte 0x0001357c
-	thumb_func_end sub_805C498
+	thumb_func_end CanUseWithStatusChecker
 
-	thumb_func_start sub_805CEB8
-sub_805CEB8:
+	thumb_func_start CanUseWithStatusChecker_2
+CanUseWithStatusChecker_2:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -11370,7 +11370,7 @@ _0805CF00:
 	.4byte _0805D7F6
 _0805D4F0:
 	adds r0, r6, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	b _0805D7A6
 _0805D4FA:
@@ -11380,7 +11380,7 @@ _0805D4FA:
 	cmp r0, 0x4
 	beq _0805D540
 	adds r0, r6, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	b _0805D7A6
 _0805D50E:
@@ -11422,7 +11422,7 @@ _0805D544:
 	lsls r3, 1
 	adds r4, r3
 	adds r0, r4, 0
-	bl sub_805D810
+	bl HasDisabledMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805D540
@@ -11446,7 +11446,7 @@ _0805D570:
 	movs r2, 0x8C
 	lsls r2, 1
 	adds r0, r4, r2
-	bl sub_805D850
+	bl LastMoveOutOfPP
 	lsls r0, 24
 	b _0805D7A6
 _0805D57E:
@@ -11723,7 +11723,7 @@ _0805D74A:
 _0805D75C:
 	mov r0, r8
 	movs r1, 0xE
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D770
@@ -11773,7 +11773,7 @@ _0805D7AC:
 	lsls r2, 1
 	adds r0, r4, r2
 _0805D7B2:
-	bl sub_805D888
+	bl HasLastUsedMove
 	lsls r0, 24
 _0805D7B8:
 	cmp r0, 0
@@ -11829,10 +11829,10 @@ _0805D804:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805CEB8
+	thumb_func_end CanUseWithStatusChecker_2
 
-	thumb_func_start sub_805D810
-sub_805D810:
+	thumb_func_start HasDisabledMove
+HasDisabledMove:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r3, 0
@@ -11869,10 +11869,10 @@ _0805D84A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805D810
+	thumb_func_end HasDisabledMove
 
-	thumb_func_start sub_805D850
-sub_805D850:
+	thumb_func_start LastMoveOutOfPP
+LastMoveOutOfPP:
 	push {r4,r5,lr}
 	movs r3, 0
 	movs r5, 0x1
@@ -11903,10 +11903,10 @@ _0805D880:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805D850
+	thumb_func_end LastMoveOutOfPP
 
-	thumb_func_start sub_805D888
-sub_805D888:
+	thumb_func_start HasLastUsedMove
+HasLastUsedMove:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r3, 0
@@ -11943,7 +11943,7 @@ _0805D8C2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805D888
+	thumb_func_end HasLastUsedMove
 
 	thumb_func_start sub_805D8C8
 sub_805D8C8:
@@ -11963,10 +11963,10 @@ sub_805D8C8:
 	movs r5, 0
 	movs r0, 0
 	strh r0, [r1, 0x12]
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806A2BC
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_80701A4
 	lsls r0, 24
 	cmp r0, 0
@@ -11999,16 +11999,16 @@ _0805D928:
 	cmp r0, 0
 	beq _0805D976
 	strb r5, [r1, 0x1]
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x1
-	bl sub_8071518
+	bl ShouldAvoidEnemies_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805D976
 	movs r0, 0x1
 	bl sub_8044C10
 	bl sub_805E804
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_80647F0
 	bl ResetRepeatTimers
 	bl ResetUnusedInputStruct
@@ -12023,7 +12023,7 @@ _0805D976:
 	movs r2, 0x1
 	bl sub_806A914
 _0805D980:
-	bl sub_8083600
+	bl GetLeaderEntity
 	mov r10, r0
 	ldr r5, [r0, 0x70]
 	mov r8, r5
@@ -12282,7 +12282,7 @@ _0805DB7A:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	beq _0805DBAA
 	b _0805D9EC
@@ -12307,7 +12307,7 @@ _0805DBBE:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	bne _0805DBDA
 	b _0805DD02
@@ -12327,7 +12327,7 @@ _0805DBF4: .4byte 0x00000673
 _0805DBF8:
 	mov r0, r10
 	movs r1, 0x1
-	bl sub_8071518
+	bl ShouldAvoidEnemies_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DC08
@@ -12949,7 +12949,7 @@ _0805E0C2:
 	mov r0, r10
 	adds r1, r5, 0
 	str r3, [sp, 0x20]
-	bl sub_8070D6C
+	bl CannotMoveForward
 	lsls r0, 24
 	ldr r3, [sp, 0x20]
 	cmp r0, 0
@@ -13016,7 +13016,7 @@ _0805E14C:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	beq _0805E188
 	mov r1, r10
@@ -13098,7 +13098,7 @@ _0805E1E0:
 	beq _0805E218
 	mov r0, r10
 	movs r1, 0
-	bl sub_8045028
+	bl IsNotAttacking
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E2B0
@@ -13827,7 +13827,7 @@ _0805E7C6:
 	bl sub_806CDD4
 	b _0805E7F6
 	.align 2, 0
-_0805E7E8: .4byte gUnknown_80F4448
+_0805E7E8: .4byte gAdjacentTileOffsets
 _0805E7EC:
 	movs r3, 0x1
 	add r8, r3
@@ -13911,7 +13911,7 @@ sub_805E874:
 	sub sp, 0x24
 	ldr r0, _0805E90C
 	ldr r4, [r0]
-	bl sub_8083600
+	bl GetLeaderEntity
 	mov r9, r0
 	ldr r0, [r0, 0x70]
 	adds r0, 0x46
@@ -13976,7 +13976,7 @@ _0805E906:
 	b _0805EC1A
 	.align 2, 0
 _0805E90C: .4byte gDungeonGlobalData
-_0805E910: .4byte gUnknown_80F4448
+_0805E910: .4byte gAdjacentTileOffsets
 _0805E914: .4byte 0x0000066c
 _0805E918:
 	ldrh r1, [r5]
@@ -14140,7 +14140,7 @@ _0805EA42:
 	beq _0805EA94
 	b _0805E906
 	.align 2, 0
-_0805EA54: .4byte gUnknown_80F4448
+_0805EA54: .4byte gAdjacentTileOffsets
 _0805EA58: .4byte gDungeonGlobalData
 _0805EA5C: .4byte 0x0001820f
 _0805EA60:
@@ -14462,7 +14462,7 @@ _0805ECC2:
 	movs r0, 0x1
 	b _0805ECCE
 	.align 2, 0
-_0805ECC8: .4byte gUnknown_80F4448
+_0805ECC8: .4byte gAdjacentTileOffsets
 _0805ECCC:
 	movs r0, 0
 _0805ECCE:
@@ -14650,7 +14650,7 @@ sub_805EE30:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _0805EE42
@@ -14878,7 +14878,7 @@ _0805EFF6:
 	bne _0805F008
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_8070D6C
+	bl CannotMoveForward
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F014
@@ -14916,7 +14916,7 @@ sub_805F02C:
 	ldr r0, [r5]
 	adds r0, 0xBC
 	ldr r7, [r0]
-	bl sub_8083600
+	bl GetLeaderEntity
 	mov r9, r0
 	ldr r0, [r7, 0x70]
 	mov r8, r0
@@ -15048,7 +15048,7 @@ _0805F12A:
 	bl sub_803F508
 	mov r0, r9
 	bl sub_8041AD0
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_8041AE0
 	ldr r0, _0805F198
 	adds r1, r7, 0
@@ -15078,7 +15078,7 @@ _0805F184:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F194: .4byte gUnknown_203B450
+_0805F194: .4byte gLeaderPokemon
 _0805F198: .4byte gAvailablePokemonNames
 _0805F19C: .4byte gUnknown_80F9BB0
 	thumb_func_end sub_805F02C
@@ -15146,12 +15146,12 @@ _0805F1F8:
 _0805F208: .4byte gDungeonGlobalData
 _0805F20C: .4byte 0x00000137
 _0805F210:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806675C
 	b _0805F226
 _0805F21C:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x1
 	bl sub_806684C
 _0805F226:
@@ -15177,7 +15177,7 @@ _0805F240:
 	str r1, [r0]
 	ldr r0, [sp, 0xC]
 	bl DrawFieldMenu
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 	ldr r4, _0805F38C
@@ -15274,7 +15274,7 @@ _0805F304:
 	ldr r1, _0805F3A4
 	ands r0, r1
 	str r0, [sp, 0x4]
-	bl sub_8083600
+	bl GetLeaderEntity
 	add r1, sp, 0x4
 	bl sub_805FD74
 	lsls r0, 24
@@ -15289,7 +15289,7 @@ _0805F33A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F35C
-	bl sub_8083600
+	bl GetLeaderEntity
 	add r1, sp, 0x4
 	bl sub_805FD74
 	lsls r0, 24
@@ -15303,7 +15303,7 @@ _0805F35C:
 	lsrs r0, 16
 	cmp r0, 0xC
 	bne _0805F3B2
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xC
 	bl sub_8044D90
@@ -15331,36 +15331,36 @@ _0805F3A8:
 _0805F3B2:
 	cmp r0, 0x35
 	bne _0805F3D0
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xD
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048A68
 	b _0805F40A
 _0805F3D0:
 	cmp r0, 0x10
 	bne _0805F3EE
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xE
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048950
 	b _0805F40A
 _0805F3EE:
 	cmp r0, 0x2C
 	bne _0805F41A
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xF
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048B9C
 _0805F40A:
@@ -15390,7 +15390,7 @@ _0805F428:
 _0805F430:
 	movs r0, 0x1
 	bl sub_8044C10
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_8060E38
 	lsls r0, 24
 	cmp r0, 0
@@ -15567,7 +15567,7 @@ _0805F5A0:
 	ble _0805F57A
 	cmp r6, 0
 	bne _0805F5B0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r6, r0, 0
 _0805F5B0:
 	adds r0, r6, 0
@@ -15733,10 +15733,10 @@ _0805F6FA:
 	bl sub_8063CF0
 	b _0805F56C
 _0805F712:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r0, 0x4
 	movs r1, 0
 	movs r2, 0x1
@@ -15756,7 +15756,7 @@ _0805F73A:
 	beq _0805F742
 	b _0805F8E0
 _0805F742:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x4
 	ldrsh r2, [r0, r1]
 	movs r3, 0x6
@@ -15794,7 +15794,7 @@ _0805F768:
 	adds r1, 0x1
 	orrs r0, r1
 	str r0, [sp, 0x8]
-	bl sub_8083600
+	bl GetLeaderEntity
 	add r4, sp, 0x8
 	adds r1, r4, 0
 	bl sub_805FD74
@@ -15804,7 +15804,7 @@ _0805F768:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F7C2
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_805FD74
 	lsls r0, 24
@@ -15819,7 +15819,7 @@ _0805F7C2:
 	adds r1, r0, 0
 	cmp r0, 0xC
 	bne _0805F800
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x10
 	bl sub_8044D90
@@ -15838,24 +15838,24 @@ _0805F7FC: .4byte 0x00ffffff
 _0805F800:
 	cmp r0, 0x35
 	bne _0805F81E
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x11
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048A68
 	b _0805F83A
 _0805F81E:
 	cmp r0, 0x10
 	bne _0805F848
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x12
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048950
 _0805F83A:
@@ -15869,12 +15869,12 @@ _0805F840:
 _0805F848:
 	cmp r1, 0x2C
 	bne _0805F8A8
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0x13
 	bl sub_8044D90
 	adds r4, r0, 0
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	bl sub_8048B9C
 	lsls r0, 24
@@ -15890,7 +15890,7 @@ _0805F872:
 	bne _0805F8CE
 	movs r0, 0x1
 	bl sub_8044C10
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_80643AC
 	b _0805F8A8
 _0805F88C:
@@ -15903,7 +15903,7 @@ _0805F88C:
 	beq _0805F8B4
 	movs r0, 0x1
 	bl sub_8044C10
-	bl sub_8083600
+	bl GetLeaderEntity
 	bl sub_80647F0
 _0805F8A8:
 	bl sub_805F1AC
@@ -15912,7 +15912,7 @@ _0805F8A8:
 	bne _0805F92A
 	b _0805F8CE
 _0805F8B4:
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	ldr r0, _0805F8D8
 	movs r2, 0
@@ -15960,7 +15960,7 @@ _0805F904:
 	.align 2, 0
 _0805F91C: .4byte gDungeonGlobalData
 _0805F920:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 _0805F92A:
@@ -16022,9 +16022,9 @@ _0805F998:
 _0805F9A0:
 	movs r0, 0
 	bl sub_80073B8
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0x1
-	bl sub_8071518
+	bl ShouldAvoidEnemies_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F9CC
@@ -16106,7 +16106,7 @@ _0805F9DA:
 	bne _0805FA62
 	b _0805FB92
 _0805FA62:
-	bl sub_8083600
+	bl GetLeaderEntity
 	ldr r7, [r0, 0x70]
 	bl sub_805317C
 	adds r5, r0, 0
@@ -16138,14 +16138,14 @@ _0805FA62:
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	ldr r4, _0805FBC0
 	str r0, [r4]
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r7, r2
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	str r0, [r4, 0x4]
 	ldr r0, _0805FBC4
 	ldr r2, [r0]
@@ -16170,7 +16170,7 @@ _0805FA62:
 	bl xxx_format_and_draw
 	ldr r5, _0805FBD0
 	movs r0, 0
-	bl sub_807E580
+	bl GetWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -17607,7 +17607,7 @@ _080606B0:
 	ldr r0, _0806070C
 	ldr r1, [sp, 0x74]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _08060710
 	ldr r2, [r0]
 	mov r4, r8
@@ -17667,7 +17667,7 @@ _08060718:
 	adds r7, 0x60
 	ldr r0, _080607EC
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldr r0, _080607F0
 	ldr r2, [r0]
 	movs r4, 0
@@ -18395,7 +18395,7 @@ _08060D20: .4byte gUnknown_202F238
 	thumb_func_start sub_8060D24
 sub_8060D24:
 	push {r4,lr}
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	movs r2, 0xB
 	bl sub_8044D90
@@ -18874,7 +18874,7 @@ _08061100: .4byte gRealInputs
 _08061104: .4byte gUnknown_202EE39
 _08061108: .4byte gUnknown_202EE10
 _0806110C:
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 _08061116:
@@ -18914,7 +18914,7 @@ DrawFieldTeamMenu:
 	movs r1, 0x1
 _08061154:
 	mov r10, r1
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r0, 0
 	add r0, sp, 0x4
 	bl sub_8069D18
@@ -21007,7 +21007,7 @@ _0806220C:
 	movs r1, 0
 	bl sub_803EAF0
 	ldr r0, [sp, 0x110]
-	bl sub_807191C
+	bl LoadIQSkills
 	add sp, 0x130
 	pop {r3-r5}
 	mov r8, r3
@@ -22101,7 +22101,7 @@ _08062AF4:
 	movs r0, 0x1B
 	bl sub_803E46C
 	bl sub_804AA60
-	bl sub_8083600
+	bl GetLeaderEntity
 	movs r1, 0
 	bl sub_806A2BC
 	movs r0, 0
@@ -22248,7 +22248,7 @@ _08062C24:
 	mov r0, r10
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80573CC
+	bl IsMoveUsable_2
 	add r1, sp, 0x4
 	movs r2, 0
 	lsls r0, 24
@@ -22693,7 +22693,7 @@ sub_8062F90:
 	str r2, [sp, 0xD8]
 	ldr r0, [r0, 0x70]
 	mov r9, r0
-	bl sub_8083600
+	bl GetLeaderEntity
 	ldr r0, [r0, 0x70]
 	str r0, [sp, 0xE4]
 	add r4, sp, 0x70
@@ -23330,7 +23330,7 @@ _0806343E:
 	ldr r0, _08063518
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	movs r3, 0
 	movs r5, 0x1
 _080634DE:
@@ -23482,7 +23482,7 @@ _08063606:
 	ldr r0, [sp, 0x14]
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80573CC
+	bl IsMoveUsable_2
 	add r1, sp, 0x4
 	movs r2, 0
 	lsls r0, 24
@@ -23659,7 +23659,7 @@ _0806376A:
 	bgt _08063788
 	mov r0, r8
 	movs r2, 0x1
-	bl sub_8057348
+	bl IsMoveUsable
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -25125,7 +25125,7 @@ _08064262:
 	mov r7, r9
 	ldr r1, [r7, 0x70]
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	mov r0, r8
@@ -26332,7 +26332,7 @@ _08064C6A:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08064CA4
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064CA4
@@ -26401,7 +26401,7 @@ _08064D06:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08064D2A
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064D2A
@@ -27034,7 +27034,7 @@ sub_80651FC:
 	movs r1, 0x2E
 	bl SetAction
 	ldr r4, _0806523C
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -27219,7 +27219,7 @@ _080652D2:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806540E
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080653F4
@@ -29380,7 +29380,7 @@ _08066530:
 _08066554:
 	adds r0, r2, r6
 	str r3, [sp, 0x1BC]
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	add r0, sp
@@ -30824,7 +30824,7 @@ sub_8067110:
 	ldr r0, _08067194
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	adds r0, r5, 0
 	adds r1, r6, 0
 	bl sub_8048D50
@@ -30935,7 +30935,7 @@ _0806721C: .4byte gUnknown_80F8BE0
 _08067220:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_8071518
+	bl ShouldAvoidEnemies_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067248
@@ -31113,7 +31113,7 @@ _08067384:
 	ldr r0, _080673B4
 	mov r1, r8
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldrb r0, [r4, 0x2]
 	bl GetItemType
 	lsls r0, 24
@@ -31322,7 +31322,7 @@ sub_806752C:
 	adds r1, r2
 	adds r1, r0
 	ldr r4, [r1]
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8067558
@@ -31371,7 +31371,7 @@ _08067594:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -31382,7 +31382,7 @@ _080675AA:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8071598
+	bl CanTarget
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -31394,12 +31394,12 @@ _080675C0:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	adds r4, 0x50
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x7
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	bl sub_8084778
 	adds r0, r6, 0
 	adds r1, r5, 0
@@ -31611,7 +31611,7 @@ sub_8067768:
 	adds r1, r2
 	adds r1, r0
 	ldr r4, [r1]
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8067794
@@ -31977,7 +31977,7 @@ _08067A56:
 _08067A68: .4byte 0x00000159
 _08067A6C: .4byte gUnknown_202F208
 _08067A70: .4byte gUnknown_80FC690
-_08067A74: .4byte gUnknown_80F4448
+_08067A74: .4byte gAdjacentTileOffsets
 _08067A78: .4byte 0xffff0000
 _08067A7C: .4byte 0x0000ffff
 	thumb_func_end sub_8067904
@@ -33488,7 +33488,7 @@ _08068664:
 _08068690:
 	ldr r0, [r6]
 	adds r0, r5
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	movs r1, 0x1
@@ -34645,7 +34645,7 @@ _08068F74:
 	thumb_func_start sub_8068F80
 sub_8068F80:
 	push {r4,r5,lr}
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	ldr r0, _08068FD4
 	ldr r4, [r0]
@@ -34823,7 +34823,7 @@ _080690A2:
 _080690E4: .4byte gDungeonGlobalData
 _080690E8: .4byte 0x000135cc
 _080690EC: .4byte 0x000037fc
-_080690F0: .4byte gUnknown_203B450
+_080690F0: .4byte gLeaderPokemon
 _080690F4: .4byte 0x0000065c
 _080690F8: .4byte 0x000005f4
 _080690FC:
@@ -35110,7 +35110,7 @@ _08069338:
 	movs r2, 0
 	bl SetMessageArgument
 _08069352:
-	bl sub_8083600
+	bl GetLeaderEntity
 	cmp r0, 0
 	beq _080693C6
 	movs r0, 0x87
@@ -35145,7 +35145,7 @@ _08069384:
 	lsrs r0, 16
 	cmp r0, 0x2
 	bhi _080693C6
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080693C6
@@ -35278,7 +35278,7 @@ _080694AC: .4byte 0x00008df8
 _080694B0: .4byte 0x00000644
 _080694B4: .4byte 0x0000065c
 _080694B8: .4byte 0x0000fffd
-_080694BC: .4byte gUnknown_203B450
+_080694BC: .4byte gLeaderPokemon
 	thumb_func_end sub_8068FE0
 
 	thumb_func_start sub_80694C0
@@ -35296,7 +35296,7 @@ sub_80694C0:
 	mov r9, r3
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_8049590
+	bl GetMapEntity
 	mov r10, r0
 	ldr r5, [r4, 0x70]
 	adds r6, r5, 0
@@ -35343,7 +35343,7 @@ _08069522:
 	blt _08069552
 	adds r1, r0, 0
 	adds r0, r2, 0
-	bl sub_8049590
+	bl GetMapEntity
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	cmp r0, r4
@@ -35538,7 +35538,7 @@ _0806969E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080696A4: .4byte gUnknown_80F4448
+_080696A4: .4byte gAdjacentTileOffsets
 	thumb_func_end sub_8069660
 
 	thumb_func_start sub_80696A8
@@ -35550,7 +35550,7 @@ sub_80696A8:
 	adds r5, 0x46
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8071138
+	bl CanAttackInFront
 	lsls r0, 24
 	cmp r0, 0
 	beq _080696F4
@@ -35578,7 +35578,7 @@ sub_80696A8:
 	adds r0, r1, 0
 	b _080696F6
 	.align 2, 0
-_080696F0: .4byte gUnknown_80F4448
+_080696F0: .4byte gAdjacentTileOffsets
 _080696F4:
 	movs r0, 0
 _080696F6:
@@ -35640,7 +35640,7 @@ sub_80696FC:
 	adds r0, r1, 0
 	b _08069772
 	.align 2, 0
-_08069764: .4byte gUnknown_80F4448
+_08069764: .4byte gAdjacentTileOffsets
 _08069768: .4byte 0xffff0000
 _0806976C: .4byte 0x0000ffff
 _08069770:
@@ -35738,7 +35738,7 @@ sub_806977C:
 	adds r0, r1, 0
 	b _0806983A
 	.align 2, 0
-_0806982C: .4byte gUnknown_80F4448
+_0806982C: .4byte gAdjacentTileOffsets
 _08069830: .4byte 0xffff0000
 _08069834: .4byte 0x0000ffff
 _08069838:
@@ -35761,7 +35761,7 @@ sub_8069844:
 	adds r0, r6, 0x2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	ldrh r0, [r5, 0x2]
 	strh r0, [r6]
 	movs r1, 0xE
@@ -35982,7 +35982,7 @@ _08069A02:
 	lsls r1, 1
 	adds r0, r5, r1
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0
 	bne _08069A38
 	ldrb r0, [r5, 0x7]
@@ -36428,7 +36428,7 @@ sub_8069D18:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08069D48: .4byte gUnknown_80F4448
+_08069D48: .4byte gAdjacentTileOffsets
 	thumb_func_end sub_8069D18
 
 	thumb_func_start sub_8069D4C
@@ -36500,8 +36500,8 @@ _08069D6C:
 	bx r0
 	thumb_func_end sub_8069D4C
 
-	thumb_func_start sub_8069DCC
-sub_8069DCC:
+	thumb_func_start TargetTileInFront
+TargetTileInFront:
 	push {r4,lr}
 	ldr r1, [r0, 0x70]
 	mov r12, r1
@@ -36532,8 +36532,8 @@ sub_8069DCC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069E08: .4byte gUnknown_80F4448
-	thumb_func_end sub_8069DCC
+_08069E08: .4byte gAdjacentTileOffsets
+	thumb_func_end TargetTileInFront
 
 	thumb_func_start sub_8069E0C
 sub_8069E0C:
@@ -36546,7 +36546,7 @@ sub_8069E0C:
 	cmp r0, 0
 	beq _08069E44
 	adds r0, r4, 0
-	bl sub_807E580
+	bl GetWeather
 	ldr r1, _08069E40
 	lsls r0, 24
 	lsrs r0, 22
@@ -36602,8 +36602,8 @@ _08069E64:
 _08069E88: .4byte gDungeonGlobalData
 	thumb_func_end sub_8069E0C
 
-	thumb_func_start sub_8069E8C
-sub_8069E8C:
+	thumb_func_start TriggerWeatherAbilities
+TriggerWeatherAbilities:
 	push {r4-r7,lr}
 	ldr r3, _08069ED8
 	ldr r2, [r3]
@@ -36700,7 +36700,7 @@ _08069F44:
 	.align 2, 0
 _08069F4C: .4byte 0x0000e270
 _08069F50: .4byte 0x0000e279
-	thumb_func_end sub_8069E8C
+	thumb_func_end TriggerWeatherAbilities
 
 	thumb_func_start sub_8069F54
 sub_8069F54:
@@ -36721,7 +36721,7 @@ sub_8069F54:
 	beq _08069F90
 	ldr r4, _08069F8C
 	adds r0, r5, 0
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -36863,7 +36863,7 @@ _0806A068:
 	beq _0806A0FA
 	mov r0, r8
 	mov r1, r9
-	bl sub_8071A1C
+	bl GetMoveType_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r1, r9
@@ -36871,7 +36871,7 @@ _0806A068:
 	cmp r0, 0x1F
 	bne _0806A0AA
 	mov r0, r8
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806A114
@@ -36882,7 +36882,7 @@ _0806A0AA:
 	beq _0806A0FA
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -36954,7 +36954,7 @@ sub_806A120:
 	bne _0806A19C
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8071A1C
+	bl GetMoveType_2
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092364
@@ -37380,7 +37380,7 @@ _0806A488:
 	movs r2, 0x6
 	ldrsh r1, [r6, r2]
 	adds r1, r7
-	bl sub_8049590
+	bl GetMapEntity
 	adds r4, r0, 0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0
@@ -37612,7 +37612,7 @@ _0806A608:
 	bl sub_8076210
 	b _0806A6D2
 	.align 2, 0
-_0806A640: .4byte gUnknown_810ACC0
+_0806A640: .4byte gDungeonWaterType
 _0806A644: .4byte gDungeonGlobalData
 _0806A648: .4byte 0x00003a0e
 _0806A64C: .4byte 0x00000113
@@ -37646,11 +37646,11 @@ _0806A664:
 	movs r1, 0
 	mov r8, r1
 	adds r0, r5, 0
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x13
 	ble _0806A6A4
 	ldr r0, [r4]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x13
 	bgt _0806A6A4
 	ldr r0, _0806A6E0
@@ -37658,14 +37658,14 @@ _0806A664:
 	mov r8, r0
 _0806A6A4:
 	adds r0, r5, 0
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x9
 	ble _0806A6C4
 	movs r2, 0x9E
 	lsls r2, 1
 	adds r0, r7, r2
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	cmp r0, 0x9
 	bgt _0806A6C4
 	ldr r0, _0806A6E4
@@ -37844,7 +37844,7 @@ sub_806A7E8:
 	ldr r0, _0806A828
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_80708B4
+	bl SetMessageArgument_2
 	movs r2, 0x1
 	mov r8, r4
 _0806A818:
@@ -38411,7 +38411,7 @@ _0806AC34:
 	beq _0806AC72
 _0806AC50:
 	adds r0, r4, 0
-	bl sub_8070B28
+	bl IsSleeping
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806AC66
@@ -38557,10 +38557,10 @@ sub_806AD3C:
 	adds r7, r0, 0
 _0806AD66:
 	adds r0, r6, 0
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	strh r0, [r4]
 	adds r0, r6, 0
-	bl sub_808E9E4
+	bl ExtractLevel
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0x4
 	movs r2, 0
@@ -38665,7 +38665,7 @@ _0806AE30:
 	adds r6, r3, 0
 _0806AE42:
 	adds r0, r5, 0
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r4, r0, 16
 	ldr r1, _0806AECC
@@ -38677,7 +38677,7 @@ _0806AE42:
 	cmp r0, 0
 	bne _0806AE72
 	adds r0, r5, 0
-	bl sub_808E9E4
+	bl ExtractLevel
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl CalculateEXPGain
@@ -39020,7 +39020,7 @@ _0806B0EE:
 	bge _0806B106
 	lsls r0, r4, 3
 	add r0, r8
-	bl sub_808E9B8
+	bl ExtractSpeciesIndex
 	lsls r0, 16
 	asrs r0, 16
 	movs r2, 0xE
@@ -39479,7 +39479,7 @@ _0806B460:
 	movs r0, 0
 	mov r2, r9
 	str r0, [r2]
-	bl sub_8083600
+	bl GetLeaderEntity
 	adds r5, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -39490,7 +39490,7 @@ _0806B460:
 	ldrh r4, [r5, 0x4]
 	b _0806B4AE
 	.align 2, 0
-_0806B480: .4byte gUnknown_203B450
+_0806B480: .4byte gLeaderPokemon
 _0806B484: .4byte gRecruitedPokemonRef
 _0806B488: .4byte 0x000055aa
 _0806B48C: .4byte 0x00008df8
@@ -40317,7 +40317,7 @@ _0806BA72:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806BB24
-	bl sub_80441BC
+	bl IsBossBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806BB24
@@ -40354,7 +40354,7 @@ _0806BB24:
 	ldr r0, [sp, 0x1C]
 	bl sub_806A6E8
 	ldr r0, [sp, 0x1C]
-	bl sub_807191C
+	bl LoadIQSkills
 	ldr r3, [sp, 0x4C]
 	cmp r3, 0
 	beq _0806BB3A
@@ -40372,12 +40372,12 @@ _0806BB3C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806BB4C: .4byte gUnknown_80F4448
+_0806BB4C: .4byte gAdjacentTileOffsets
 _0806BB50: .4byte gUnknown_202F32C
 _0806BB54: .4byte 0xffff0000
 _0806BB58: .4byte 0x0000ffff
 _0806BB5C: .4byte gUnknown_202EE0C
-_0806BB60: .4byte gUnknown_203B450
+_0806BB60: .4byte gLeaderPokemon
 _0806BB64: .4byte gDungeonGlobalData
 _0806BB68: .4byte 0x00000644
 	thumb_func_end sub_806B8CC
@@ -40856,7 +40856,7 @@ _0806BE12:
 	adds r0, r6, r1
 	strb r7, [r0]
 	mov r0, r8
-	bl sub_8070774
+	bl GetMovementSpeed
 	movs r2, 0xAB
 	lsls r2, 1
 	adds r1, r6, r2
@@ -40903,7 +40903,7 @@ _0806BF70:
 	ldrb r3, [r3]
 	bl sub_800F8D0
 	mov r0, r8
-	bl sub_807191C
+	bl LoadIQSkills
 	mov r0, r8
 	movs r1, 0
 	movs r2, 0
@@ -41125,7 +41125,7 @@ _0806C11E:
 	cmp r1, 0
 	beq _0806C170
 	movs r0, 0
-	bl sub_807E580
+	bl GetWeather
 	ldr r1, _0806C16C
 	lsls r0, 24
 	lsrs r0, 22
@@ -43058,7 +43058,7 @@ sub_806CF98:
 _0806CFBE:
 	cmp r5, 0x1
 	bne _0806CFCE
-	bl sub_804AF74
+	bl IsWaterTileset
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806CFEE
@@ -43092,7 +43092,7 @@ _0806CFF8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D000: .4byte gUnknown_810ACC0
+_0806D000: .4byte gDungeonWaterType
 _0806D004: .4byte gDungeonGlobalData
 _0806D008: .4byte 0x00003a0e
 _0806D00C: .4byte gUnknown_8106EEF
@@ -43425,7 +43425,7 @@ _0806D26C:
 	beq _0806D2C2
 	adds r0, r6, 0
 	movs r1, 0xA
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D2C2
@@ -43479,7 +43479,7 @@ _0806D2EE:
 	beq _0806D328
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D328
@@ -43773,7 +43773,7 @@ _0806D55C:
 	bl sub_807A96C
 	mov r0, r9
 	adds r1, r7, 0
-	bl sub_806F450
+	bl SetShopkeeperAggression
 	mov r0, r9
 	bl GetEntityType
 	cmp r0, 0x1
@@ -44196,7 +44196,7 @@ _0806D8C8:
 	strb r0, [r4]
 _0806D8E0:
 	adds r0, r7, 0
-	bl sub_8069DCC
+	bl TargetTileInFront
 _0806D8E6:
 	ldr r0, [r7, 0x70]
 	adds r0, 0x46
@@ -45404,7 +45404,7 @@ _0806E26C:
 	cmp r7, 0x2
 	bne _0806E2A0
 	ldr r0, [sp, 0x18]
-	bl sub_807723C
+	bl GetFlashFireStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E2A0
@@ -45477,7 +45477,7 @@ _0806E300:
 	ldr r0, [sp, 0x24]
 	movs r1, 0x80
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r4, 0
@@ -45531,7 +45531,7 @@ _0806E36E:
 	ldr r0, [sp, 0x24]
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r4, 0
@@ -45584,7 +45584,7 @@ _0806E3DA:
 	ldr r0, [sp, 0x24]
 	movs r1, 0x10
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r4, 0
@@ -45638,7 +45638,7 @@ _0806E448:
 	ldr r0, [sp, 0x24]
 	movs r1, 0x20
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r4, 0
@@ -45671,7 +45671,7 @@ _0806E486:
 	bne _0806E4B8
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E4B8
@@ -45688,7 +45688,7 @@ _0806E486:
 	bl sub_800A34C
 _0806E4B8:
 	mov r0, r8
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -45707,7 +45707,7 @@ _0806E4B8:
 	bl sub_800A34C
 	b _0806E53E
 	.align 2, 0
-_0806E4E4: .4byte gUnknown_80F522C
+_0806E4E4: .4byte gTypeEffectivenessChart
 _0806E4E8: .4byte gDungeonGlobalData
 _0806E4EC: .4byte gUnknown_8106F54
 _0806E4F0: .4byte gUnknown_80F54B4
@@ -45867,8 +45867,8 @@ _0806E64C: .4byte 0x00000177
 _0806E650: .4byte gUnknown_8106F0C
 	thumb_func_end sub_806E100
 
-	thumb_func_start sub_806E654
-sub_806E654:
+	thumb_func_start WeightWeakTypePicker
+WeightWeakTypePicker:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -45904,7 +45904,7 @@ _0806E686:
 	cmp r4, 0x2
 	bne _0806E6A2
 	ldr r0, [sp, 0x14]
-	bl sub_807723C
+	bl GetFlashFireStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E6C6
@@ -45977,7 +45977,7 @@ _0806E6F0:
 	strb r0, [r1]
 	b _0806E73E
 	.align 2, 0
-_0806E724: .4byte gUnknown_8106F6C
+_0806E724: .4byte gTypeEffectivenessMultipliers
 _0806E728: .4byte gDungeonGlobalData
 _0806E72C: .4byte 0x00000179
 _0806E730:
@@ -46114,14 +46114,14 @@ _0806E824:
 	beq _0806E84E
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E838
 	lsls r5, 1
 _0806E838:
 	mov r0, r9
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -46134,7 +46134,7 @@ _0806E84E:
 	movs r0, 0x2
 	b _0806E894
 	.align 2, 0
-_0806E854: .4byte gUnknown_80F522C
+_0806E854: .4byte gTypeEffectivenessChart
 _0806E858:
 	lsls r5, 1
 _0806E85A:
@@ -46184,7 +46184,7 @@ _0806E894:
 _0806E8A4: .4byte gDungeonGlobalData
 _0806E8A8: .4byte 0x0000e277
 _0806E8AC: .4byte 0x0000e278
-	thumb_func_end sub_806E654
+	thumb_func_end WeightWeakTypePicker
 
 	thumb_func_start sub_806E8B0
 sub_806E8B0:
@@ -46223,14 +46223,14 @@ _0806E8E6:
 	beq _0806E92C
 	ldr r5, [r6, 0x70]
 	adds r0, r6, 0
-	bl sub_8070A58
+	bl HasNegativeStatus
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0
@@ -46274,7 +46274,7 @@ _0806E95A:
 	lsls r1, 1
 	adds r0, r2, 0
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r4, 0
@@ -46392,14 +46392,14 @@ _0806EA38:
 	bne _0806EA90
 	mov r0, r9
 	ldr r5, [r0, 0x70]
-	bl sub_8070A58
+	bl HasNegativeStatus
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x8
 	adds r2, r4, 0
-	bl sub_8071ACC
+	bl SetVisualFlags
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r4, 0
@@ -46514,7 +46514,7 @@ _0806EB3A:
 	lsls r0, 1
 	add r0, r10
 	ldr r0, [r0]
-	bl sub_8094450
+	bl GetBellyRoundedUp
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0806EB72
@@ -47131,7 +47131,7 @@ _0806F036:
 	cmp r2, 0x2
 	bne _0806F0BC
 	mov r0, r9
-	bl sub_807723C
+	bl GetFlashFireStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -47582,7 +47582,7 @@ _0806F3FC:
 	movs r0, 0x1
 	b _0806F414
 	.align 2, 0
-_0806F408: .4byte gUnknown_80F522C
+_0806F408: .4byte gTypeEffectivenessChart
 _0806F40C: .4byte gUnknown_80F54B4
 _0806F410:
 	add r1, sp, 0x10
@@ -47620,8 +47620,8 @@ _0806F440:
 	bx r0
 	thumb_func_end sub_806F370
 
-	thumb_func_start sub_806F450
-sub_806F450:
+	thumb_func_start SetShopkeeperAggression
+SetShopkeeperAggression:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r4, [r1, 0x70]
@@ -47647,7 +47647,7 @@ _0806F47A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806F450
+	thumb_func_end SetShopkeeperAggression
 
 	thumb_func_start sub_806F480
 sub_806F480:
@@ -47679,7 +47679,7 @@ sub_806F4A4:
 	lsrs r4, r1, 24
 	ldr r5, [r0, 0x70]
 	movs r1, 0xE
-	bl sub_8071858
+	bl HasType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F4CE
@@ -47723,7 +47723,7 @@ _0806F4F6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F4FC: .4byte gUnknown_80F522C
+_0806F4FC: .4byte gTypeEffectivenessChart
 	thumb_func_end sub_806F4A4
 
 	thumb_func_start sub_806F500

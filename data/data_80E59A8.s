@@ -185,7 +185,7 @@ gUnknown_80E61C0: @ 80E61C0
 
 	.global gUnknown_80E61E4
 gUnknown_80E61E4: @ 80E61E4
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
         .string "will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
@@ -193,14 +193,14 @@ gUnknown_80E61E4: @ 80E61E4
 	.global gUnknown_80E6214
 gUnknown_80E6214: @ 80E6214
         .string "Your friend will send you an item.\n"
-        .string "When you are both ready~2c you\n"
+        .string "When you are both ready{COMMA} you\n"
         .string "may communicate.\0"
         .align 2,0
 
 	.global gUnknown_80E6268
 gUnknown_80E6268: @ 80E6268
         .string "Preparing to send an item to your\n"
-        .string "friend. When you are both ready~2c\n"
+        .string "friend. When you are both ready{COMMA}\n"
         .string "you may communicate.\0"
         .align 2,0
 
@@ -208,19 +208,19 @@ gUnknown_80E6268: @ 80E6268
 gUnknown_80E62C4: @ 80E62C4
         .string "#+In communication...\n"
         .string "#+Please wait with the power on.\n"
-        .string "#+To cancel~2c press {B_BUTTON}.\0"
+        .string "#+To cancel{COMMA} press {B_BUTTON}.\0"
         .align 2,0
 
 	.global gUnknown_80E6314
 gUnknown_80E6314: @ 80E6314
         .string "You received\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}.\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E6358
 gUnknown_80E6358: @ 80E6358
-        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI$i0(s){END_COLOR_TEXT_1}.\0"
+        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 @ Trade Items Link Errors
@@ -253,7 +253,7 @@ gUnknown_80E6448: @ 80E6448
 gUnknown_80E64AC: @ 80E64AC
         .string "There is no response from your friend.\n"
         .string "Please make sure the sender and receiver\n"
-        .string "are ready~2c then redo this from the start.\0"
+        .string "are ready{COMMA} then redo this from the start.\0"
         .align 2,0
 
 	.global gTradeItemsHowManyText

@@ -16,7 +16,7 @@ gLuminousCaveEvolutionInfo:: @ 80DCAD0
 	.string "#+spot if they satisfy certain conditions.#P"
 	.string "#+Evolution brings about changes\n"
 	.string "#+in appearance and abilities.#P"
-	.string "#+Not only that~2c some Pokémon even change\n"
+	.string "#+Not only that{COMMA} some Pokémon even change\n"
 	.string "#+type and learn different moves.#P"
 	.string "#+However...#W The requirements for\n"
 	.string "#+evolution differ among Pokémon.#P"
@@ -25,7 +25,7 @@ gLuminousCaveEvolutionInfo:: @ 80DCAD0
 	.string "#+Still others may need special items\n"
 	.string "#+to attain evolution.#P"
 	.string "#+Ye must also be aware of this:#P"
-	.string "#+Once it has evolved~2c a Pokémon\n"
+	.string "#+Once it has evolved{COMMA} a Pokémon\n"
 	.string "#+can never regain its previous form.#P"
 	.string "#+That is why ye must think carefully\n"
 	.string "#+before committing to evolution.\0"
@@ -45,7 +45,7 @@ gLuminousCaveGiveAnotherItem:: @ 80DCDB8
 	.align 2, 0
 
 gLuminousCaveLackWhatIsNeeded:: @ 80DCDDC
-	.string "#+Alas~2c ye seem to lack what is needed\n"
+	.string "#+Alas{COMMA} ye seem to lack what is needed\n"
 	.string "#+for evolution.\0"
 	.align 2, 0
 
@@ -60,12 +60,12 @@ gLuminousCaveLetUsBegin:: @ 80DCE38
 
 gLuminousCaveChangedAppearance:: @ 80DCE68
 	.string "#+...#W$n0 is undergoing changes...#P"
-	.string "#+$n0~27s appearance changed...#P\0"
+	.string "#+$n0{APOSTROPHE}s appearance changed...#P\0"
 	.align 2, 0
 
 gLuminousCaveEvolved:: @ 80DCEB0
-	.string "#+It evolved from {COLOR_1 GREEN}$m0{END_COLOR_TEXT_1}\n"
-	.string "#+to {COLOR_1 YELLOW}$m1{END_COLOR_TEXT_1}!\0"
+	.string "#+It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
+	.string "#+to {COLOR_1 YELLOW}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!\0"
 	.align 2, 0
 
 gLuminousCaveComeAlone:: @ 80DCEDC

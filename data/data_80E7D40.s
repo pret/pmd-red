@@ -180,7 +180,7 @@ gMankeyMission: @ 80E87DC
 
 	.global gSmeargleMission
 gSmeargleMission: @ 80E87F4
-        .string "{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}~27s desperate plea!\0"
+        .string "{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}{APOSTROPHE}s desperate plea!\0"
         .align 2,0
 
 	.global gMedichamMission
@@ -220,18 +220,18 @@ gUnknown_80E888C: @ 80E888C
 
 	.global gMankeyMissionDescription
 gMankeyMissionDescription: @ 80E88A0
-        .string "Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}~27s gang.\0"
+        .string "Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}{APOSTROPHE}s gang.\0"
         .align 2,0
 
 	.global gSmeargleMissionDescription
 gSmeargleMissionDescription: @ 80E88C8
-        .string "I didn~27t want to become a grown-up~2c so I\n"
-        .string "fled~2c but now I~27ve lost my way! Help!\0"
+        .string "I didn{APOSTROPHE}t want to become a grown-up{COMMA} so I\n"
+        .string "fled{COMMA} but now I{APOSTROPHE}ve lost my way! Help!\0"
         .align 2,0
 
 	.global gMedichamMissionDescription
 gMedichamMissionDescription: @ 80E8920
-        .string "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me~2c please!\n"
+        .string "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me{COMMA} please!\n"
         .string "The reward is a secret"
         .byte 0x81, 0x60
         .string "♪ "
@@ -239,14 +239,14 @@ gMedichamMissionDescription: @ 80E8920
 
 	.global gUnknown_80E8968
 gUnknown_80E8968: @ 80E8968
-        .string "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}~2c I can\n"
-        .string "evolve! I~27m yearning to evolve! Help!\0"
+        .string "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}{COMMA} I can\n"
+        .string "evolve! I{APOSTROPHE}m yearning to evolve! Help!\0"
         .align 2,0
 
 	.global gUnknown_80E89B0
 gUnknown_80E89B0: @ 80E89B0
         .string "The {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! What I love to eat\n"
-        .string "and can~27t live without! Please get one!\0"
+        .string "and can{APOSTROPHE}t live without! Please get one!\0"
         .align 2,0
 
 	.global gUnknown_80E89FC
@@ -500,7 +500,7 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global CloseFriends_80EAF08
 	CloseFriends_80EAF08:
-        .string "I~27m close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!"
+        .string "I{APOSTROPHE}m close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!"
         .align 2,0
 
         .global Apologize_80EAF2C
@@ -510,7 +510,7 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global MustMeet_80EAF4C
 	MustMeet_80EAF4C:
-        .asciz "I don~27t care how--we must meet!"
+        .string "I don{APOSTROPHE}t care how--we must meet!\0"
         .align 2,0
 
         .global HaveToMeet_80EAF70
@@ -525,12 +525,12 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global LongTime_80EAFA4
 	LongTime_80EAFA4:
-        .asciz "We haven~27t seen each other in a long time."
+        .string "We haven{APOSTROPHE}t seen each other in a long time.\0"
         .align 2,0
 
         .global SickWorry_80EAFD4
 	SickWorry_80EAFD4:
-        .asciz "I~27m sick with worry..."
+        .string "I{APOSTROPHE}m sick with worry...\0"
         .align 2,0
 
         .global FaintedInside_80EAFF0
@@ -540,7 +540,7 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global HasntReturned_80EB014
 	HasntReturned_80EB014:
-        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn~27t returned!\0"
+        .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn{APOSTROPHE}t returned!\0"
         .align 2,0
 
         .global WantToHelp_80EB030
@@ -550,7 +550,7 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global InTrouble_80EB048
 	InTrouble_80EB048:
-        .string "Hurry~2c {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is in trouble...\0"
+        .string "Hurry{COMMA} {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is in trouble...\0"
         .align 2,0
 
         .global WaitingForever_80EB06C
@@ -565,22 +565,22 @@ gUnknown_80EAEB8: @ 80EAEB8
 
         .global TooWeak_80EB0B4
 	TooWeak_80EB0B4:
-        .asciz "I~27m too weak. It~27s not possible."
+        .string "I{APOSTROPHE}m too weak. It{APOSTROPHE}s not possible.\0"
         .align 2,0
 
         .global OwnPower_80EB0DC
 	OwnPower_80EB0DC:
-        .asciz "I can~27t go on my own power..."
+        .string "I can{APOSTROPHE}t go on my own power...\0"
         .align 2,0
 
         .global GoMyself_80EB0FC
 	GoMyself_80EB0FC:
-        .asciz "I can~27t go by myself..."
+        .string "I can{APOSTROPHE}t go by myself...\0"
         .align 2,0
 
         .global WorriedAbout_80EB118
 	WorriedAbout_80EB118:
-        .string "I~27m worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
+        .string "I{APOSTROPHE}m worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
         .global WantMeet_80EB138
@@ -608,7 +608,7 @@ gUnknown_80EB198: @ 80EB198
 
         .global SomeonePleaseEscort
         SomeonePleaseEscort:
-        .asciz "Someone~2c please escort me!"
+        .string "Someone{COMMA} please escort me!\0"
         .align 2,0
 
         .global PleaseEscortMe
@@ -638,12 +638,12 @@ gUnknown_80EB220: @ 80EB220
 
         .global Without_80EB238
 	Without_80EB238:
-        .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}~2c I...\0"
+        .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{COMMA} I...\0"
         .align 2,0
 
         .global Worried_80EB250
 	Worried_80EB250:
-        .string "I~27m so worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
+        .string "I{APOSTROPHE}m so worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...\0"
         .align 2,0
 
         .global WantMeet_80EB274
@@ -678,12 +678,12 @@ gUnknown_80EB2F0: @ 80EB2F0
 
         .global Lonely_80EB308
         Lonely_80EB308:
-        .asciz "I~27m very lonely! Please take me with you!"
+        .string "I{APOSTROPHE}m very lonely! Please take me with you!\0"
         .align 2,0
 
         .global NoGood_80EB334
         NoGood_80EB334:
-        .asciz "It~27s no good if we~27re not together!"
+        .string "It{APOSTROPHE}s no good if we{APOSTROPHE}re not together!\0"
         .align 2,0
 
         .global MeansEverything_80EB35C
@@ -693,17 +693,17 @@ gUnknown_80EB2F0: @ 80EB2F0
 
         .global WePromised_80EB37C
         WePromised_80EB37C:
-        .asciz "We~27ve promised our futures together."
+        .string "We{APOSTROPHE}ve promised our futures together.\0"
         .align 2,0
 
         .global WeBelong_80EB3A4
         WeBelong_80EB3A4:
-        .asciz "We belong together! Please escort me!"
+        .string "We belong together! Please escort me!\0"
         .align 2,0
 
         .global WeInLove_80EB3CC
         WeInLove_80EB3CC:
-        .asciz "We~27re in love! Please~2c take me there!"
+        .string "We{APOSTROPHE}re in love! Please{COMMA} take me there!\0"
         .align 2,0
 
 @ Item Delivery Mission Text

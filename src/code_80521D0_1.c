@@ -148,7 +148,7 @@ struct unk8049590
     u8 unk8;
 };
 
-extern struct unk8049590 *sub_8049590(u32, u32);
+extern struct unk8049590 *GetMapEntity(u32, u32);
 extern void sub_806BFC0(struct DungeonEntityData *, u32);
 
 void sub_808BBA8(struct DungeonEntity *param_1)
@@ -217,7 +217,7 @@ void sub_808BCE4(void)
 {
   struct unk8049590 *puVar1;
 
-  puVar1 = sub_8049590(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
+  puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
   puVar1->unk0 &= 0xfffc;
   puVar1->unk0 |= 16;
   puVar1->unk0 &= 0xfdff;
@@ -231,7 +231,7 @@ void sub_808BD38(void)
 {
   struct unk8049590 *puVar1;
 
-  puVar1 = sub_8049590(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
+  puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
   puVar1->unk0 &= 0xfffc;
   puVar1->unk0 |= 1;
   puVar1->unk0 &= 0xffef;
@@ -478,10 +478,10 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     sub_8083EA8(0x23,0x3c);
     sub_808C360();
-    // My duels agaisnt $m3 (Groudon) left us both exhausted
+    // My duels against {ARG_POKEMON_3} (Groudon) left us both exhausted
     sub_8052910(&gUnknown_8106140);
     KyogreScreenFlash();
-    // I am $m2 (Kyogre)!
+    // I am {ARG_POKEMON_2} (Kyogre)!
     // The lord of the sea!
     sub_8052910(&gUnknown_8106214);
     KyogreScreenFlash();
@@ -694,7 +694,7 @@ void CelebiJoinDialogue(void)
     sub_8086598();
     sub_8086598();
     sub_8086598();
-    // The Time-Traveling Pokemon $m2 (Celebi)!
+    // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
     sub_8052910(&gUnknown_8106400);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(local_1c,10,0);

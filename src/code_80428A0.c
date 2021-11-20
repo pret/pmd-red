@@ -40,7 +40,7 @@ void sub_8042900(struct DungeonEntity *r0)
     sub_804151C(r0, 0xD4 << 1, 0);
 }
 
-void sub_8042910(struct DungeonEntity *r0)
+void ShowVisualFlags(struct DungeonEntity *r0)
 {
     sub_804151C(r0, 0x29, 0);
 }

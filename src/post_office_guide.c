@@ -314,16 +314,16 @@ void UpdateHelperPelipperText(void)
             switch(gPostOfficeHelper->currMenuChoice)
             {
                 case GETTING_HELP:
-                    sub_80141B4(gGettingHelpExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gGettingHelpExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_SOS_MAIL:
-                    sub_80141B4(gSendSOSMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gSendSOSMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case RECEIVE_AOK_MAIL:
-                    sub_80141B4(gReceiveAOKMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gReceiveAOKMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_THANK_YOU_MAIL:
-                    sub_80141B4(gSendThankYouMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gSendThankYouMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -336,19 +336,19 @@ void UpdateHelperPelipperText(void)
             switch(gPostOfficeHelper->currMenuChoice)
             {
                 case RESCUE_PROCEDURES:
-                    sub_80141B4(gRescueProceduresExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gRescueProceduresExplanation, 0, faceFile, 0x10d);
                     break;
                 case RECEIVE_SOS_MAIL:
-                    sub_80141B4(gReceiveSOSMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gReceiveSOSMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_AOK_MAIL:
-                    sub_80141B4(gSendAOKMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gSendAOKMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case LEAVE_FOR_RESCUE:
-                    sub_80141B4(gLeaveForRescueExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gLeaveForRescueExplanation, 0, faceFile, 0x10d);
                     break;
                 case GET_THANK_YOU_MAIL:
-                    sub_80141B4(gGetThankYouMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gGetThankYouMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -364,13 +364,13 @@ void UpdateHelperPelipperText(void)
             switch(gPostOfficeHelper->currMenuChoice)
             {
                 case POST_OFFICE:
-                    sub_80141B4(gPostOfficeExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gPostOfficeExplanation, 0, faceFile, 0x10d);
                     break;
                 case BULLETIN_BOARD:
-                    sub_80141B4(gBulletinBoardExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gBulletinBoardExplanation, 0, faceFile, 0x10d);
                     break;
                 case DELIVERY:
-                    sub_80141B4(gDeliveryExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gDeliveryExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -383,10 +383,10 @@ void UpdateHelperPelipperText(void)
             switch(gPostOfficeHelper->currMenuChoice)
             {
                 case FRIEND_RESCUE_INFO:
-                    sub_80141B4(gFriendRescueExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gFriendRescueExplanation, 0, faceFile, 0x10d);
                     break;
                 case DELETING_MAIL:
-                    sub_80141B4(gDeletingMailExplaination, 0, faceFile, 0x10d);
+                    sub_80141B4(gDeletingMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;

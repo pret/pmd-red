@@ -62,7 +62,7 @@
 
     .global PleaseWakeUp_822C4C0
     PleaseWakeUp_822C4C0:
-    .string " ...Please~2c wake up.#W\nCome on~2c wake up.\0"
+    .string " ...Please{COMMA} wake up.#W\nCome on{COMMA} wake up.\0"
     .align 2,0
 
     .global ExcuseMe_822C4F0
@@ -72,7 +72,7 @@
 
     .global HeyWakeUp_822C500
     HeyWakeUp_822C500:
-    .string " ...Hey~2c wake up.#W\nWake up already.\0"
+    .string " ...Hey{COMMA} wake up.#W\nWake up already.\0"
     .align 2,0
 
     .global Hey_822C528
@@ -318,7 +318,7 @@
 
     .global HelpTheKid_822D18C
     HelpTheKid_822D18C:
-    .string " We can~27t just do nothing!\nLet~27s go help this kid!\0"
+    .string " We can{APOSTROPHE}t just do nothing!\nLet{APOSTROPHE}s go help this kid!\0"
     .align 2,0
 
     .byte 0x20, 0x4f, 0x68, 0x21, 0x20, 0x57, 0x68, 0x61, 0x74, 0x20, 0x61, 0x6d, 0x20, 0x49, 0x20, 0x74, 0x6f, 0x20, 0x64, 0x6f, 0x3f, 0x21, 0x0a, 0x4f
@@ -9115,7 +9115,7 @@
     .byte 0x72, 0x65, 0x73, 0x63, 0x75, 0x65, 0x20, 0x64, 0x6f, 0x6e, 0x65, 0x2e, 0x00, 0x00, 0x00, 0x00
 
     .string " Look. Over there.\n"
-    .string "Let~27s get this rescue done.\0"
+    .string "Let{APOSTROPHE}s get this rescue done.\0"
     .align 2,0
 
     @ Partner

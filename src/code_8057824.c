@@ -96,7 +96,7 @@ bool32 sub_8057948(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 
 bool32 sub_8057954(struct DungeonEntity *param_1, struct DungeonEntity *param_2, u32 param_3)
 {
-  // $m0 is enraged
+  // {ARG_POKEMON_0} is enraged
   sub_8079618(param_1,param_2,0xc,param_3,gUnknown_80FAC88);
   return TRUE;
 }

@@ -93,8 +93,8 @@ gBlastBurnIQReq: @ 810ACBC
 gVoltTackleIQReq: @ 810ACBE
         .2byte 333
 
-	.global gUnknown_810ACC0
-gUnknown_810ACC0: @ 810ACC0
+	.global gDungeonWaterType
+gDungeonWaterType: @ 810ACC0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x02, 0x00, 0x00

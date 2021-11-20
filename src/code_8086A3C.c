@@ -4,7 +4,7 @@
 #include "pokemon.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
-extern void sub_807191C(struct DungeonEntity *);
+extern void LoadIQSkills(struct DungeonEntity *);
 extern struct DungeonEntity *sub_8085480(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
@@ -57,7 +57,7 @@ void SetupBossFightHP(struct DungeonEntity *param_1, s32 newHP, u16 param_3)
 
   gDungeonGlobalData->unk66A = param_3;
   SetDefaultIQSkills(iVar2->IQSkillsSelected,iVar2->isBoss);
-  sub_807191C(param_1);
+  LoadIQSkills(param_1);
 }
 
 void sub_8086AC0(void)

@@ -429,7 +429,7 @@ gUnknown_80D406C: @ 80D406C
 
 	.global gUnknown_80D4074
 gUnknown_80D4074: @ 80D4074
-        .string "#+$m0\0"
+        .string "#+{ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_80D407C
@@ -509,12 +509,12 @@ gUnknown_80D4104: @ 80D4104
 
 	.global gUnknown_80D4120
 gUnknown_80D4120: @ 80D4120
-	.string "$i0\0"
+	.string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_80D4124
 gUnknown_80D4124: @ 80D4124
-        .string "$i0($v02"
+        .string "{ARG_MOVE_ITEM_0}($v02"
         .byte 0x81, 0x5E
         .asciz "$v12)"
         .align 2,0

@@ -285,8 +285,8 @@ _08057340:
 	bx r1
 	thumb_func_end sub_8057308
 
-	thumb_func_start sub_8057348
-sub_8057348:
+	thumb_func_start IsMoveUsable
+IsMoveUsable:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -334,7 +334,7 @@ _08057394:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl sub_80573CC
+	bl IsMoveUsable_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805738A
@@ -357,10 +357,10 @@ _080573C0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057348
+	thumb_func_end IsMoveUsable
 
-	thumb_func_start sub_80573CC
-sub_80573CC:
+	thumb_func_start IsMoveUsable_2
+IsMoveUsable_2:
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r2, 24
@@ -428,7 +428,7 @@ _08057444:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80573CC
+	thumb_func_end IsMoveUsable_2
 
 	thumb_func_start sub_805744C
 sub_805744C:
@@ -594,7 +594,7 @@ sub_805755C:
 	lsrs r4, r1, 16
 	cmp r4, 0x97
 	bne _08057576
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -865,7 +865,7 @@ sub_8057748:
 	adds r5, r0, 0
 	adds r6, r1, 0
 	ldr r4, _08057778
-	bl sub_807E580
+	bl GetWeather
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -911,7 +911,7 @@ sub_8057788:
 	adds r0, r4, 0
 	bl sub_8045128
 	adds r5, r0, 0
-	bl sub_804AF20
+	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
 	beq _080577BA

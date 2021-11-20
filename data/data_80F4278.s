@@ -29,8 +29,8 @@ gUnknown_80F4426: @ 80F4426
         .byte 0x0c, 0x06, 0x13, 0x08, 0x04, 0x0d, 0x0f, 0x09, 0x10, 0x02, 0x14, 0x12, 0x00, 0x15, 0x0b, 0x05, 0x17, 0x03, 0x11, 0x0a, 0x01, 0x0e, 0x16, 0x07, 0x00, 0x00
         .byte 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
 
-	.global gUnknown_80F4448
-gUnknown_80F4448: @ 80F4448
+	.global gAdjacentTileOffsets
+gAdjacentTileOffsets: @ 80F4448
         @ replacing .incbin "baserom.gba", 0x000f4448, 0x20
         .byte 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0xff, 0xff, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0xff, 0xff, 0x01, 0x00
 
@@ -116,8 +116,8 @@ gUnknown_80F4CC4: @ 80F4CC4
         .byte 0x10, 0x48, 0x0f, 0x08, 0x01, 0x00, 0x01, 0x00, 0x30, 0x4b, 0x0f, 0x08, 0x01, 0x00, 0x01, 0x00, 0x9c, 0x49, 0x0f, 0x08, 0x01, 0x00, 0x01, 0x00, 0x30, 0x4b, 0x0f, 0x08, 0x01, 0x00, 0xff, 0xff
         .byte 0x10, 0x48, 0x0f, 0x08, 0xff, 0xff, 0xff, 0xff, 0x30, 0x4b, 0x0f, 0x08, 0xff, 0xff, 0xff, 0xff, 0x9c, 0x49, 0x0f, 0x08, 0xff, 0xff, 0xff, 0xff, 0x30, 0x4b, 0x0f, 0x08, 0xff, 0xff, 0x01, 0x00
 
-	.global gUnknown_80F4D04
-gUnknown_80F4D04: @ 80F4D04
+	.global gFaceDirectionIncrements
+gFaceDirectionIncrements: @ 80F4D04
         @ replacing .incbin "baserom.gba", 0x000f4d04, 0x40
         .byte 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x02, 0x00, 0x00, 0x00, 0xfe, 0xff, 0xff, 0xff, 0x03, 0x00, 0x00, 0x00, 0xfd, 0xff, 0xff, 0xff, 0x04, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x01, 0x00, 0x00, 0x00, 0xfe, 0xff, 0xff, 0xff, 0x02, 0x00, 0x00, 0x00, 0xfd, 0xff, 0xff, 0xff, 0x03, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00
@@ -180,8 +180,8 @@ gUnknown_80F4DB0: @ 80F4DB0
 @ replacing .incbin "baserom.gba", 0x000f4db0, 0x2
     .byte 0x28, 0x00
 
-	.global gUnknown_80F4DB2
-gUnknown_80F4DB2: @ 80F4DB2
+	.global gConfusedAttackChance
+gConfusedAttackChance: @ 80F4DB2
 @ replacing .incbin "baserom.gba", 0x000f4db2, 0x2
     .byte 0x46, 0x00
 
@@ -1271,8 +1271,8 @@ gUnknown_80F51EC: @ 80F51EC
 gUnknown_80F520C: @ 80F520C
 	.incbin "baserom.gba", 0xF520C, 0x20
 
-	.global gUnknown_80F522C
-gUnknown_80F522C: @ 80F522C
+	.global gTypeEffectivenessChart
+gTypeEffectivenessChart: @ 80F522C
 	.incbin "baserom.gba", 0xF522C, 0x288
 
 	.global gUnknown_80F54B4
@@ -1295,12 +1295,12 @@ gUnknown_80F55BC: @ 80F55BC
 gUnknown_80F55EC: @ 80F55EC
 	.incbin "baserom.gba", 0xF55EC, 0x30
 
-	.global gUnknown_80F561C
-gUnknown_80F561C: @ 80F561C
+	.global gDungeonCamouflageTypes
+gDungeonCamouflageTypes: @ 80F561C
 	.incbin "baserom.gba", 0xF561C, 0x4C
 
-	.global gUnknown_80F5668
-gUnknown_80F5668: @ 80F5668
+	.global gDungeonMusic
+gDungeonMusic: @ 80F5668
 	.incbin "baserom.gba", 0xF5668, 0x98
 
 	.global gUnknown_80F5700
@@ -1344,8 +1344,8 @@ gUnknown_80F58F4: @ 80F58F4
 gUnknown_80F5978: @ 80F5978
 	.incbin "baserom.gba", 0xF5978, 0x4C
 
-	.global gUnknown_80F59C4
-gUnknown_80F59C4: @ 80F59C4
+	.global gItemMasterMinWildLevel
+gItemMasterMinWildLevel: @ 80F59C4
 	.incbin "baserom.gba", 0xF59C4, 0x4
 
 	.global gUnknown_80F59C8
@@ -1725,8 +1725,8 @@ gUnknown_80F683C: @ 80F683C
 gUnknown_80F6850: @ 80F6850
 	.incbin "baserom.gba", 0xF6850, 0x10
 
-	.global gUnknown_80F6860
-gUnknown_80F6860: @ 80F6860
+	.global gSpeedTurns
+gSpeedTurns: @ 80F6860
 	.incbin "baserom.gba", 0xF6860, 0x104
 
 	.global gUnknown_80F6964
@@ -1873,8 +1873,8 @@ gActions: @ 80F7B14
 
 	.global gEquipPutOnDescription
 gEquipPutOnDescription: @ 80F7B94
-	.string "$m0 put on\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} put on\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 
 	.global gPeelText
 gPeelText: @ 80F7BA8
@@ -1883,8 +1883,8 @@ gPeelText: @ 80F7BA8
 
 	.global gPeelDescription
 gPeelDescription: @ 80F7BB0
-	.string "$m0 peeled\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} peeled\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gIngestText
@@ -1894,8 +1894,8 @@ gIngestText: @ 80F7BC4
 
 	.global gIngestDescription
 gIngestDescription: @ 80F7BCC
-	.string "$m0 swallowed\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} swallowed\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gEatText
@@ -1905,8 +1905,8 @@ gEatText: @ 80F7BE4
 
 	.global gEatDescription
 gEatDescription: @ 80F7BE8
-	.string "$m0 ate\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} ate\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gEquipText
@@ -1916,8 +1916,8 @@ gEquipText: @ 80F7BFC
 
 	.global gEquipDescription
 gEquipDescription: @ 80F7C04
-	.string "$m0 equipped\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} equipped\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gThrowText
@@ -1927,8 +1927,8 @@ gThrowText: @ 80F7C1C
 
 	.global gThrowDescription
 gThrowDescription: @ 80F7C24
-	.string "$m0 threw\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} threw\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gUseText
@@ -1938,8 +1938,8 @@ gUseText: @ 80F7C38
 
 	.global gUseDescription
 gUseDescription: @ 80F7C3C
-	.string "$m0 used\n"
-	.string "the $i0.\0"
+	.string "{ARG_POKEMON_0} used\n"
+	.string "the {ARG_MOVE_ITEM_0}.\0"
 	.align 2,0
 
 	.global gUnknown_80F7C50
@@ -2259,23 +2259,23 @@ gUnknown_80F7F70: @ 80F7F70
 	.global gRescueSpotDescription
 gRescueSpotDescription: @ 80F7F7C
 	.string "You reached the rescue spot where your\n"
-	.string "friend~27s team went down!\n"
+	.string "friend{APOSTROPHE}s team went down!\n"
 	.string "Send an {COLOR_2 RED}A-OK Mail{END_COLOR_TEXT_2} from the Pelipper Post\n"
-	.string "Office to let your friend know you~27ve\n"
+	.string "Office to let your friend know you{APOSTROPHE}ve\n"
 	.string "rescued the defeated team.\0"
 	.align 2,0
 
 	.global gWarpZoneDescription
 gWarpZoneDescription: @ 80F8030
 	.string "The warp zone leading to the next floor.\n"
-	.string "If you are on the final floor~2c you will\n"
+	.string "If you are on the final floor{COMMA} you will\n"
 	.string "escape from the dungeon.\0"
 	.align 2,0
 
 	.global gDungeonStairsDescription
 gDungeonStairsDescription: @ 80F809C
 	.string "Stairs leading to the next floor.\n"
-	.string "If you are on the final floor~2c you will\n"
+	.string "If you are on the final floor{COMMA} you will\n"
 	.string "escape from the dungeon.\0"
 	.align 2,0
 
@@ -2324,7 +2324,7 @@ gUnknown_80F8994: @ 80F8994
 
         .global PartnerFainted_80F8998
         PartnerFainted_80F8998:
-        .string "Your partner $m0 fainted!\0"
+        .string "Your partner {ARG_POKEMON_0} fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89B4
@@ -2333,7 +2333,7 @@ gUnknown_80F89B4: @ 80F89B4
 
         .global ClientFainted_80F89B8
         ClientFainted_80F89B8:
-        .string "Your client $m0 fainted!\0"
+        .string "Your client {ARG_POKEMON_0} fainted!\0"
         .align 2,0
 
 	.global gUnknown_80F89D4
@@ -2353,7 +2353,7 @@ gUnknown_80F89D8: @ 80F89D8
 gUnknown_80F89F4: @ 80F89F4
         .4byte NothingHappened_80F89DC
 
-        .string "$m0 was blown away!\0"
+        .string "{ARG_POKEMON_0} was blown away!\0"
         .align 2,0
 
 	.global gUnknown_80F8A0C
@@ -2365,37 +2365,37 @@ gUnknown_80F8A0C: @ 80F8A0C
 	.global gUnknown_80F8A28
 gUnknown_80F8A28: @ 80F8A28
         .byte 0x10, 0x8A, 0x0F, 0x08
-        .string "The set move can~27t be used.\0"
+        .string "The set move can{APOSTROPHE}t be used.\0"
         .align 2,0
 
 	.global gUnknown_80F8A4C
 gUnknown_80F8A4C: @ 80F8A4C
         .byte 0x2C, 0x8A, 0x0F, 0x08
-        .string "You~27re being constricted!\0"
+        .string "You{APOSTROPHE}re being constricted!\0"
         .align 2,0
 
 	.global gUnknown_80F8A6C
 gUnknown_80F8A6C: @ 80F8A6C
         .byte 0x50, 0x8A, 0x0F, 0x08
-        .string "You can~27t move!\0"
+        .string "You can{APOSTROPHE}t move!\0"
         .align 2,0
 
 	.global gUnknown_80F8A84
 gUnknown_80F8A84: @ 80F8A84
         .byte 0x70, 0x8A, 0x0F, 0x08
-        .string "You can~27t move while you~27re rooted!\0"
+        .string "You can{APOSTROPHE}t move while you{APOSTROPHE}re rooted!\0"
         .align 2,0
 
 	.global gUnknown_80F8AB0
 gUnknown_80F8AB0: @ 80F8AB0
         .byte 0x88, 0x8A, 0x0F, 0x08
-        .string "You can~27t move while wrapping a foe!\0"
+        .string "You can{APOSTROPHE}t move while wrapping a foe!\0"
         .align 2,0
 
 	.global gUnknown_80F8ADC
 gUnknown_80F8ADC: @ 80F8ADC
         .byte 0xB4, 0x8A, 0x0F, 0x08
-        .string "The foe has you wrapped! You can~27t move!\0"
+        .string "The foe has you wrapped! You can{APOSTROPHE}t move!\0"
         .align 2,0
 
 	.global gUnknown_80F8B0C
@@ -2406,20 +2406,20 @@ gUnknown_80F8B0C: @ 80F8B0C
 	.global gUnknown_80F8B24
 gUnknown_80F8B24: @ 80F8B24
         .byte 0x10, 0x8B, 0x0F, 0x08
-        .string "The move $i0 was set.\0"
+        .string "The move {ARG_MOVE_ITEM_0} was set.\0"
         .align 2,0
 
 	.global gUnknown_80F8B40
 gUnknown_80F8B40: @ 80F8B40
         .byte 0x28, 0x8B, 0x0F, 0x08
-        .string "The move $i0 was deselected.\0"
+        .string "The move {ARG_MOVE_ITEM_0} was deselected.\0"
         .align 2,0
 
 	.global gUnknown_80F8B64
 gUnknown_80F8B64: @ 80F8B64
         .byte 0x44, 0x8B, 0x0F, 0x08
         .4byte gMenuEmpty
-        .string "The move $i0 was delinked.\0"
+        .string "The move {ARG_MOVE_ITEM_0} was delinked.\0"
         .align 2,0
 
 	.global gUnknown_80F8B88
@@ -2431,7 +2431,7 @@ gUnknown_80F8B88: @ 80F8B88
 	.global gUnknown_80F8BB4
 gUnknown_80F8BB4: @ 80F8BB4
         .byte 0x8C, 0x8B, 0x0F, 0x08
-        .string "It~27s all sticky and doesn~27t work!\0"
+        .string "It{APOSTROPHE}s all sticky and doesn{APOSTROPHE}t work!\0"
         .align 2,0
 
 	.global gUnknown_80F8BE0
@@ -2449,14 +2449,14 @@ gUnknown_80F8C44: @ 80F8C44
 	.global gUnknown_80F8C48
 gUnknown_80F8C48: @ 80F8C48
         .byte 0x14, 0x8C, 0x0F, 0x08
-        .string "The $i0 is all sticky!\nIt can~27t be equipped.\0"
+        .string "The {ARG_MOVE_ITEM_0} is all sticky!\nIt can{APOSTROPHE}t be equipped.\0"
         .align 2,0
 
 	.global gUnknown_80F8C7C
 gUnknown_80F8C7C: @ 80F8C7C
         .byte 0x4C, 0x8C, 0x0F, 0x08
-        .string "$m1 took the $i0\n"
-        .string "and returned the $i1.\0"
+        .string "{ARG_POKEMON_1} took the {ARG_MOVE_ITEM_0}\n"
+        .string "and returned the {ARG_MOVE_ITEM_1}.\0"
         .align 2,0
 
 	.global gUnknown_80F8CA8
@@ -2470,19 +2470,19 @@ gUnknown_80F8CE4: @ 80F8CE4
 	.global gUnknown_80F8CE8
 gUnknown_80F8CE8: @ 80F8CE8
         .byte 0xAC, 0x8C, 0x0F, 0x08
-        .string "Equipped the item $i0.\0"
+        .string "Equipped the item {ARG_MOVE_ITEM_0}.\0"
         .align 2,0
 
 	.global gUnknown_80F8D04
 gUnknown_80F8D04: @ 80F8D04
         .byte 0xEC, 0x8C, 0x0F, 0x08
-        .string "The $i0 was deselected.\0"
+        .string "The {ARG_MOVE_ITEM_0} was deselected.\0"
 
 	.global gUnknown_80F8D20
 gUnknown_80F8D20: @ 80F8D20
         .byte 0x08, 0x8D, 0x0F, 0x08
-        .string "The item $i0 was given\n"
-        .string "to $m1.\0"
+        .string "The item {ARG_MOVE_ITEM_0} was given\n"
+        .string "to {ARG_POKEMON_1}.\0"
         .align 2,0
 
 	.global gUnknown_80F8D44
@@ -2719,28 +2719,28 @@ gUnknown_80F9510: @ 80F9510
 gUnknown_80F9530: @ 80F9530
 	.incbin "baserom.gba", 0xF9530, 0x1C
 
-	.global gUnknown_80F954C
-gUnknown_80F954C: @ 80F954C
+	.global gFrozenMessage
+gFrozenMessage: @ 80F954C
 	.incbin "baserom.gba", 0xF954C, 0x20
 
-	.global gUnknown_80F956C
-gUnknown_80F956C: @ 80F956C
+	.global gWrappedAroundMessage
+gWrappedAroundMessage: @ 80F956C
 	.incbin "baserom.gba", 0xF956C, 0x20
 
-	.global gUnknown_80F958C
-gUnknown_80F958C: @ 80F958C
+	.global gWrappedByMessage
+gWrappedByMessage: @ 80F958C
 	.incbin "baserom.gba", 0xF958C, 0x18
 
-	.global gUnknown_80F95A4
-gUnknown_80F95A4: @ 80F95A4
+	.global gPausedMessage
+gPausedMessage: @ 80F95A4
 	.incbin "baserom.gba", 0xF95A4, 0x18
 
-	.global gUnknown_80F95BC
-gUnknown_80F95BC: @ 80F95BC
+	.global gInfatuatedMessage
+gInfatuatedMessage: @ 80F95BC
 	.incbin "baserom.gba", 0xF95BC, 0x1C
 
-	.global gUnknown_80F95D8
-gUnknown_80F95D8: @ 80F95D8
+	.global gBideMessage
+gBideMessage: @ 80F95D8
 	.incbin "baserom.gba", 0xF95D8, 0x14
 
 	.global gUnknown_80F95EC
@@ -5178,7 +5178,7 @@ gFieldItemMenuGroundTextPtr: @ 80FE92C
 
         .global ItemText_80FE930
         ItemText_80FE930:
-        .string "$m0~27s item\0"
+        .string "{ARG_POKEMON_0}{APOSTROPHE}s item\0"
         .align 2,0
 
 	.global gUnknown_80FE940
@@ -5204,7 +5204,7 @@ gUnknown_80FE954: @ 80FE954
 
         .global ItemText_80FE958
         ItemText_80FE958:
-        .string "$i0\0"
+        .string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_80FE95C
@@ -5221,7 +5221,7 @@ gUnknown_80FE964: @ 80FE964
 
         .global PokeMove_80FE968
         PokeMove_80FE968:
-        .string "$m0~27s moves\0"
+        .string "{ARG_POKEMON_0}{APOSTROPHE}s moves\0"
         .align 2,0
 
 	.global gUnknown_80FE978
@@ -5610,7 +5610,7 @@ gUnknown_8100208: @ 8100208
 
 	.global gMagnitudeMessage
 gMagnitudeMessage: @ 810020C
-	.string "It~27s Magnitude $d0!\0"
+	.string "It{APOSTROPHE}s Magnitude $d0!\0"
 	.align 2, 0
 
 	.global gPtrMagnitudeMessage
@@ -5628,7 +5628,7 @@ gPtrSleepingTargetOnlyMessage: @ 810024C
 
 	.global gFeralFoundItemMessage
 gFeralFoundItemMessage: @ 8100250
-	.string "$m0 found an item somewhere.\0"
+	.string "{ARG_POKEMON_0} found an item somewhere.\0"
 	.align 2, 0
 
 	.global gPtrFeralFoundItemMessage
@@ -5729,7 +5729,7 @@ gPtrWishStoneCrumbledMessage: @ 810044C
 
 	.global gMusicBoxPlayedCrumbledMessage
 gMusicBoxPlayedCrumbledMessage: @ 8100450
-	.string "The Music Box played a beautiful melody~2c\n"
+	.string "The Music Box played a beautiful melody{COMMA}\n"
 	.string "then crumbled away...\0"
 	.align 2, 0
 
@@ -5748,7 +5748,7 @@ gPtrMysteriousPowerPreventedUseMessage: @ 81004C4
 
 	.global gCouldntBeUsedMessage
 gCouldntBeUsedMessage: @ 81004C8
-	.string "But it couldn~27t be used!\0"
+	.string "But it couldn{APOSTROPHE}t be used!\0"
 	.align 2, 0
 
 	.global gPtrCouldntBeUsedMessage
@@ -5769,7 +5769,7 @@ gUnknown_81004F0: @ 81004F0
 
 	.global gUnknown_81004F4
 gUnknown_81004F4: @ 81004F4
-	.string "$m1~27s Soundproof suppressed\n"
+	.string "{ARG_POKEMON_1}{APOSTROPHE}s Soundproof suppressed\n"
 	.string "the sound move!\0"
 	.align 2, 0
 
@@ -5797,7 +5797,7 @@ gUnknown_810056C: @ 810056C
 
 	.global gUnknown_8100570
 gUnknown_8100570: @ 8100570
-	.string "Perish Song~27s effect wore off!\0"
+	.string "Perish Song{APOSTROPHE}s effect wore off!\0"
 	.align 2, 0
 
 	.global gUnknown_8100594
@@ -5824,7 +5824,7 @@ gPtrSealedMoveReleasedMessage: @ 81005DC
 
 	.global gCantLeechSeedSelfMessage
 gCantLeechSeedSelfMessage: @ 81005E0
-	.string "A leech seed can~27t be planted on the user!\0"
+	.string "A leech seed can{APOSTROPHE}t be planted on the user!\0"
 	.align 2, 0
 
 	.global gPtrCantLeechSeedSelfMessage
@@ -5833,8 +5833,8 @@ gPtrCantLeechSeedSelfMessage: @ 8100610
 
 	.global gCantLeechSeedMonMessage
 gCantLeechSeedMonMessage: @ 8100614
-	.string "A leech seed couldn~27t be planted on\n"
-	.string "$m0!\0"
+	.string "A leech seed couldn{APOSTROPHE}t be planted on\n"
+	.string "{ARG_POKEMON_0}!\0"
 	.align 2, 0
 
 	.global gPtrCantLeechSeedMonMessage
@@ -5853,7 +5853,7 @@ gPtrMoveInterruptedMessage: @ 8100660
 	.global gClientFaintedMessage
 gClientFaintedMessage: @ 8100664
 	.string "Your client Pokémon has fainted!\n"
-	.string "A rescue call can~27t be made!\0"
+	.string "A rescue call can{APOSTROPHE}t be made!\0"
 	.align 2, 0
 
 	.global gPtrClientFaintedMessage
@@ -5862,7 +5862,7 @@ gPtrClientFaintedMessage: @ 81006A4
 
 	.global gCantUseInDungeonMessage
 gCantUseInDungeonMessage: @ 81006A8
-	.string "It can~27t be used in a dungeon!\0"
+	.string "It can{APOSTROPHE}t be used in a dungeon!\0"
 	.align 2, 0
 
 	.global gPtrCantUseInDungeonMessage
@@ -5917,8 +5917,8 @@ gUnknown_8100768: @ 8100768
 
 	.global gUnknown_8100774
 gUnknown_8100774: @ 8100774
-	.string " Look~2c $m0!\n"
-	.string "$m2~27s over there!\0"
+	.string " Look{COMMA} {ARG_POKEMON_0}!\n"
+	.string "{ARG_POKEMON_2}{APOSTROPHE}s over there!\0"
 	.align 2, 0
 
 	.global gUnknown_8100798
@@ -5931,13 +5931,13 @@ gUnknown_8100798: @ 8100798
 	.global gUnknown_81007B0
 gUnknown_81007B0: @ 81007B0
 	.string " Hey! Are you all right?\n"
-	.string "We~27ve come to rescue you!\0"
+	.string "We{APOSTROPHE}ve come to rescue you!\0"
 	.align 2, 0
 
 	.global gUnknown_81007E8
 gUnknown_81007E8: @ 81007E8
 	.string " Hey! Are you all right?\n"
-	.string "We~27re here to rescue you!\0"
+	.string "We{APOSTROPHE}re here to rescue you!\0"
 	.align 2, 0
 
 	.global gUnknown_8100820
@@ -5948,7 +5948,7 @@ gUnknown_8100820: @ 8100820
 	.global gUnknown_810082C
 gUnknown_810082C: @ 810082C
 	.string " ...I...\n"
-	.string "I~27m scared.\0"
+	.string "I{APOSTROPHE}m scared.\0"
 	.align 2, 0
 
 	.global gUnknown_8100844
@@ -5967,12 +5967,12 @@ gUnknown_8100928: @ 8100928
 	.global gUnknown_8100934
 gUnknown_8100934: @ 8100934
 	.string " How dare you!#W\n"
-	.string "It~27s their fault!#P"
-	.string " I haven~27t slept in days\n"
+	.string "It{APOSTROPHE}s their fault!#P"
+	.string " I haven{APOSTROPHE}t slept in days\n"
 	.string "because the earthquakes frighten me so!\n"
 	.string "Every night we had them!#P"
 	.string " Those earthquakes are\n"
-	.string "caused by this brat~27s ilk running wild\n"
+	.string "caused by this brat{APOSTROPHE}s ilk running wild\n"
 	.string "underground!\0"
 	.align 2, 0
 
@@ -6611,8 +6611,8 @@ gUnknown_8103E34: @ 8103E34
 	.global gUnknown_8103E40
 gUnknown_8103E40: @ 8103E40
 	.string "#+There appears to be no one here.#P"
-	.string "#+It~27s impossible to go farther.#W\n"
-	.string "#+It~27s time to go back.\0"
+	.string "#+It{APOSTROPHE}s impossible to go farther.#W\n"
+	.string "#+It{APOSTROPHE}s time to go back.\0"
 	.align 2, 0
 
 	.global gUnknown_8103EA4
@@ -7136,7 +7136,7 @@ gUnknown_81063D0: @ 81063D0
 	.global gPurityForestSomeoneThereText
 gPurityForestSomeoneThereText: @ 81063DC
 	.string "#+Oh?#W\n"
-	.string "#+There~27s someone there.\0"
+	.string "#+There{APOSTROPHE}s someone there.\0"
 	.align 2, 0
 
 	.global gUnknown_8106400
@@ -7147,8 +7147,8 @@ gUnknown_8106400: @ 8106400
 
 	.global gPurityForestCelebiIntroText
 gPurityForestCelebiIntroText: @ 810640C
-	.string "#+It~27s...#W\n"
-	.string "#+The Time Travel Pokémon $m2!\0"
+	.string "#+It{APOSTROPHE}s...#W\n"
+	.string "#+The Time Travel Pokémon {ARG_POKEMON_2}!\0"
 	.align 2, 0
 
 	.global gUnknown_810643C
@@ -7159,7 +7159,7 @@ gUnknown_810643C: @ 810643C
 
 	.global gPurityForestCelebiWantsToJoinText
 gPurityForestCelebiWantsToJoinText: @ 8106448
-	.string "#+$m2 wants to join the team.\0"
+	.string "#+{ARG_POKEMON_2} wants to join the team.\0"
 	.align 2, 0
 
 	.global gUnknown_8106468
@@ -7170,7 +7170,7 @@ gUnknown_8106468: @ 8106468
 
 	.global gPurityForestCelebiJoinedText
 gPurityForestCelebiJoinedText: @ 8106474
-	.string "#+$m2 joined the team! \0"
+	.string "#+{ARG_POKEMON_2} joined the team! \0"
 	.align 2, 0
 
 	.global gUnknown_810648C
@@ -7181,7 +7181,7 @@ gUnknown_810648C: @ 810648C
 
 	.global gPurityForestCelebiVeryHappyText
 gPurityForestCelebiVeryHappyText: @ 8106498
-	.string "#+$m3 appears to\n"
+	.string "#+{ARG_POKEMON_3} appears to\n"
 	.string "#+be very happy!\0"
 	.align 2, 0
 
@@ -7193,7 +7193,7 @@ gUnknown_81064BC: @ 81064BC
 
 	.global gPurityForestCelebiDelightedToJoinText
 gPurityForestCelebiDelightedToJoinText: @ 81064C8
-	.string "#+It~27s delighted to have\n"
+	.string "#+It{APOSTROPHE}s delighted to have\n"
 	.string "#+joined the rescue team!\0"
 	.align 2, 0
 
@@ -7205,7 +7205,7 @@ gUnknown_8106500: @ 8106500
 
 	.global gPurityForestTurnedDownOfferText
 gPurityForestTurnedDownOfferText: @ 810650C
-	.string "#+$m0 turned down\n"
+	.string "#+{ARG_POKEMON_0} turned down\n"
 	.string "#+the offer to join.\0"
 	.align 2, 0
 
@@ -7228,13 +7228,13 @@ gUnknown_8106560: @ 8106560
 
 	.global gPurityForestCelebiLeftDejectedlyText
 gPurityForestCelebiLeftDejectedlyText: @ 810656C
-	.string "#+$m2 left\n"
+	.string "#+{ARG_POKEMON_2} left\n"
 	.string "#+dejectedly...\0"
 	.align 2, 0
 
 	.global gPurityForestAllowCelebiToJoinText
 gPurityForestAllowCelebiToJoinText: @ 8106588
-	.string "#+Allow $m2\n"
+	.string "#+Allow {ARG_POKEMON_2}\n"
 	.string "#+to join the team?\0"
 	.align 2, 0
 
@@ -7264,7 +7264,7 @@ gPurityForestAllowCelebiToJoinYesText: @ 81065C8
 	.global gPurityForestRefuseCelebiConfirmText
 gPurityForestRefuseCelebiConfirmText: @ 81065D0
 	.string "#+Are you sure?#W\n"
-	.string "#+You~27re sure you won~27t accept it?\0"
+	.string "#+You{APOSTROPHE}re sure you won{APOSTROPHE}t accept it?\0"
 	.align 2, 0
 
 	.global gPtrPurityForestRefuseCelebiConfirmText
@@ -7370,8 +7370,8 @@ gUnknown_81069BC: @ 81069BC
 gUnknown_81069D4: @ 81069D4
 	.incbin "baserom.gba", 0x1069D4, 0x20
 
-	.global gUnknown_81069F4
-gUnknown_81069F4: @ 81069F4
+	.global gChargeMovesToStatuses
+gChargeMovesToStatuses: @ 81069F4
 	.incbin "baserom.gba", 0x1069F4, 0x28
 
 	.global gMultiTurnChargingStatuses
@@ -7536,7 +7536,7 @@ gUnknown_8106C90: @ 8106C90
 
 	.global gUnknown_8106C98
 gUnknown_8106C98: @ 8106C98
-        .string "$i0\0"
+        .string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_8106C9C
@@ -7557,7 +7557,7 @@ gUnknown_8106CAC: @ 8106CAC
 
 	.global gUnknown_8106CC4
 gUnknown_8106CC4: @ 8106CC4
-        .string "$i0\0"
+        .string "{ARG_MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_8106CC8
@@ -7566,7 +7566,7 @@ gUnknown_8106CC8: @ 8106CC8
 
 	.global gUnknown_8106CCC
 gUnknown_8106CCC: @ 8106CCC
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -7602,7 +7602,7 @@ gUnknown_8106D68: @ 8106D68
 
 	.global gUnknown_8106D8C
 gUnknown_8106D8C: @ 8106D8C
-        .string "#c%d$m0\0"
+        .string "#c%d{ARG_POKEMON_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -7622,7 +7622,7 @@ gUnknown_8106DC8: @ 8106DC8
 
 	.global gUnknown_8106E28
 gUnknown_8106E28: @ 8106E28
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_8106E2C
@@ -7635,12 +7635,12 @@ gUnknown_8106E30: @ 8106E30
 
 	.global gUnknown_8106E34
 gUnknown_8106E34: @ 8106E34
-        .string "$i0{COLOR_2 CYAN}$v02:$m0{END_COLOR_TEXT_2}\0"
+        .string "{ARG_MOVE_ITEM_0}{COLOR_2 CYAN}$v02:{ARG_POKEMON_0}{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8106E48
 gUnknown_8106E48: @ 8106E48
-        .string "$i0{COLOR_2 YELLOW}$v02:$m0{END_COLOR_TEXT_2}\0"
+        .string "{ARG_MOVE_ITEM_0}{COLOR_2 YELLOW}$v02:{ARG_POKEMON_0}{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8106E5C
@@ -7737,8 +7737,8 @@ gUnknown_8106F64: @ 8106F64
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0xC0, 0x00, 0x00
 
-	.global gUnknown_8106F6C
-gUnknown_8106F6C: @ 8106F6C
+	.global gTypeEffectivenessMultipliers
+gTypeEffectivenessMultipliers: @ 8106F6C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x00, 0x00
@@ -7752,8 +7752,8 @@ gUnknown_8106F7C: @ 8106F7C
 gUnknown_8106FA4: @ 8106FA4
         .string "{COLOR_2}%c%s{END_COLOR_TEXT_2}\0"
 
-	.global gUnknown_8106FAD
-gUnknown_8106FAD: @ 8106FAD
+	.global gDirectionBitMasks
+gDirectionBitMasks: @ 8106FAD
 @ replacing .incbin "baserom.gba", 0x00106fad, 0x8
         .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
@@ -7777,13 +7777,13 @@ gUnknown_8106FCD: @ 8106FCD
 @ replacing .incbin "baserom.gba", 0x00106fcd, 0x8
         .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
-	.global gUnknown_8106FD5
-gUnknown_8106FD5: @ 8106FD5
+	.global gDirectionBitMasks_2
+gDirectionBitMasks_2: @ 8106FD5
 @ replacing .incbin "baserom.gba", 0x00106fd5, 0x8
         .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
-	.global gUnknown_8106FDD
-gUnknown_8106FDD: @ 8106FDD
+	.global gDirectionBitMasks_3
+gDirectionBitMasks_3: @ 8106FDD
 @ replacing .incbin "baserom.gba", 0x00106fdd, 0x8
         .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
@@ -7870,12 +7870,12 @@ gUnknown_81075F4: @ 81075F4
 
 	.global gUnknown_8107600
 gUnknown_8107600: @ 8107600
-        .string "{COLOR_2 YELLOW_ALT}%s{END_COLOR_TEXT_2}"
+        .string "{COLOR_2 YELLOW_2}%s{END_COLOR_TEXT_2}"
         .align 2,0
 
 	.global gUnknown_8107608
 gUnknown_8107608: @ 8107608
-        .string "{COLOR_2 CYAN_ALT}%s{END_COLOR_TEXT_2}"
+        .string "{COLOR_2 CYAN_2}%s{END_COLOR_TEXT_2}"
         .align 2,0
 
 	.global gUnownLetters
@@ -7981,7 +7981,7 @@ gUnknown_8107770: @ 8107770
 
 	.global gUnknown_8107784
 gUnknown_8107784: @ 8107784
-        .string "$i1\0"
+        .string "{ARG_MOVE_ITEM_1}\0"
         .align 2,0
 
 	.global gUnknown_8107788
@@ -7994,7 +7994,7 @@ gUnknown_810778C: @ 810778C
 
 	.global gUnknown_8107790
 gUnknown_8107790: @ 8107790
-        .string "$i0$i1\0"
+        .string "{ARG_MOVE_ITEM_0}{ARG_MOVE_ITEM_1}\0"
         .align 2,0
 
 	.global gUnknown_8107798
@@ -8057,19 +8057,19 @@ gUnknown_8108EC0: @ 8108EC0
 
 	.global gUnknown_8108F10
 gUnknown_8108F10: @ 8108F10
-        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8108F18
 gUnknown_8108F18: @ 8108F18
-        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}"
+        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}"
         .byte 0x81, 0x40
         .string "{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
 
 	.global gUnknown_8108F2C
 gUnknown_8108F2C: @ 8108F2C
-        .string "{COLOR_2 YELLOW_3}%s{END_COLOR_TEXT_2}"
+        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}"
         .byte 0x81, 0x40
         .string "B{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
@@ -8268,7 +8268,7 @@ gUnknown_810992C: @ 810992C
 
 	.global gUnknown_8109930
 gUnknown_8109930: @ 8109930
-        .string "$m0\0"
+        .string "{ARG_POKEMON_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -8306,7 +8306,7 @@ gStoryMissionText: @ 8109994
 
 	.global gDummyScenarioText
 gDummyScenarioText: @ 8109CA8
-        .string "{COLOR_1 YELLOW_2}Scenario try dummy{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_3}Scenario try dummy{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_8109CC0

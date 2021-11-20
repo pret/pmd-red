@@ -176,7 +176,7 @@ void sub_8016110(void)
         else {
             sub_80922B4(gAvailablePokemonNames,gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
         }
-        // Is the name {COLOR_1 CYAN}$m0{END_COLOR_TEXT_1} OK?
+        // Is the name {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1} OK?
         sub_8014248(&gUnknown_80DB688,0,3,gUnknown_203B200->menus,0,4,0,0,0x20);
         break;
 
