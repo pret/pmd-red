@@ -4440,7 +4440,7 @@ _08014DDC:
 	ldr r4, _08014DF8
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	b _08014F0E
 	.align 2, 0
 _08014DF8: .4byte gUnknown_202EB80

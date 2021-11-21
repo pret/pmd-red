@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/bg_music.h"
+#include "constants/colors.h"
 #include "input.h"
 #include "item.h"
 #include "memory.h"
@@ -75,7 +76,6 @@ extern u8 *gUnknown_80D4934[];
 extern u8 gUnknown_80DCA24[];
 extern u8 gUnknown_80DCA2C[];
 
-extern bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void UpdateLuminousCaveState(u32);
 
@@ -116,7 +116,6 @@ extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 u32 sub_801602C(u32 r0, u8 *name);
-void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801A6E8(u32);
 extern s32 sub_801A8AC(void);
@@ -377,7 +376,7 @@ void UpdateLuminousCaveDialogue(void)
         sub_80141B4(gLuminousCaveLetUsBegin,0,0,0x105);
         break;
     case LUMINOUS_CAVE_CHANGED_APPEARANCE:
-        sub_808D9AC(gPlayerName,gUnknown_203B2B0->pokeStruct,5);
+        PrintColoredPokeNameToBuffer(gPlayerName,gUnknown_203B2B0->pokeStruct, COLOR_CYAN);
         PlaySound(0x1ff);
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_EVOLVED;
         sub_80141B4(gLuminousCaveChangedAppearance,0,0,0x105);

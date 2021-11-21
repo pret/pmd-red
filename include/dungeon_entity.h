@@ -13,7 +13,7 @@ struct DungeonEntityData
     /* 0x0 */ u16 flags;
     /* 0x2 */ s16 entityID; // Pokémon species or item ID.
     // Everything from here on only applies to Pokémon.
-    /* 0x4 */ u16 transformSpecies; // Shows a different Pokémon when using Transform.
+    /* 0x4 */ s16 transformSpecies; // Shows a different Pokémon when using Transform.
     /* 0x6 */ bool8 isEnemy;
     /* 0x7 */ bool8 isLeader;
     /* 0x8 */ u8 shopkeeperMode;
@@ -261,16 +261,19 @@ struct DungeonEntity
     // The sprite index to display, among the Pokémon's possible sprites.
     /* 0x48 */ u16 spriteIndexForEntity;
     /* 0x4A */ u16 spriteIndexForEntity2;
+    u8 unk4C[0x50 - 0x4C];
     // Some kind of base sprite index depending on which way the Pokémon is facing.
     // and which animation is playing (e.g., idle, moving).
     // Compared to 0x48, 0x50 and 0x54 are much larger and could be global indexes among all sprites in the game.
     /* 0x50 */ u16 spriteBaseForDirection;
     u8 fill52[0x54 - 0x52];
     /* 0x54 */ u16 spriteGlobalIndex;
-    u8 fill56[0x6C - 0x56];
+    u8 fill56[0x6A - 0x56];
+    /* 0x6A */ u8 unk6A;
+    /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 facingDir;
     /* 0x6D */ u8 facingDir2; // Duplicate of 0x6C?
-    u8 fill6D[0x70 - 0x6D];
+    u8 fill6D[0x70 - 0x6E];
     /* 0x70 */ struct DungeonEntityData *entityData;
 };
 

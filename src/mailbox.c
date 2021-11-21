@@ -6,10 +6,10 @@
 #include "mailbox.h"
 
 
-extern void sub_802E4B0(void);
+extern void HandleMailboxMenu(void);
 extern void nullsub_133(void);
 extern void sub_802E578(void);
-extern void sub_802E60C(void);
+extern void HandleMailActionMenu(void);
 extern void sub_802E73C(void);
 extern void sub_802E758(void);
 extern void sub_802E774(void);
@@ -61,7 +61,7 @@ u32 sub_802DFD8(void)
             SetMailboxState(1);
             break;
         case 1:
-            sub_802E4B0();
+            HandleMailboxMenu();
             break;
         case 2:
             nullsub_133();
@@ -71,7 +71,7 @@ u32 sub_802DFD8(void)
             sub_802E578();
             break;
         case 6:
-            sub_802E60C();
+            HandleMailActionMenu();
             break;
         case 7:
             sub_802E73C();

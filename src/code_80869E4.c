@@ -25,7 +25,7 @@ extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-extern struct DungeonEntity *sub_8085480(void);
+extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 void SpriteLookAroundEffect(struct DungeonEntity *r0);
 extern void sub_8052910(u32);
 void sub_8086494();
@@ -64,7 +64,7 @@ void sub_80862DC(struct DungeonEntity *r0)
     array[1] = r0->posPixelY + (0xE0 << 6);
 
     sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, 4);
+    sub_806CDD4(r0, 0, DIRECTION_NORTH);
     sub_8086A54(r0);
 }
 
@@ -75,7 +75,7 @@ void sub_8086310(struct DungeonEntity *r0)
     array[1] = r0->posPixelY + (0x90 << 8);
 
     sub_804535C(r0, array);
-    sub_806CE68(r0, 0);
+    sub_806CE68(r0, DIRECTION_SOUTH);
     sub_8086A3C(r0);
     r0->visible = 0;
 }
@@ -87,7 +87,7 @@ void sub_8086348(struct DungeonEntity *r0)
     array[1] = r0->posPixelY + 0xffffe000;
 
     sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, 6);
+    sub_806CDD4(r0, 0, DIRECTION_WEST);
     sub_8086A54(r0);
 }
 
@@ -98,38 +98,38 @@ void sub_8086384(struct DungeonEntity *r0)
     array[1] = r0->posPixelY;
 
     sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, 6);
+    sub_806CDD4(r0, 0, DIRECTION_WEST);
     sub_8086A54(r0);
 }
 
 void sub_80863B8(struct DungeonEntity *r0)
 {
-    sub_806CDD4(r0, 0, 4);
+    sub_806CDD4(r0, 0, DIRECTION_NORTH);
 }
 
 void sub_80863C8(struct DungeonEntity *r0)
 {
-    sub_806CDD4(r0, 0, 0);
+    sub_806CDD4(r0, 0, DIRECTION_SOUTH);
 }
 
 void sub_80863D8(struct DungeonEntity *r0)
 {
-    sub_806CDD4(r0, 0, 6);
+    sub_806CDD4(r0, 0, DIRECTION_WEST);
 }
 
 void sub_80863E8(struct DungeonEntity *r0)
 {
-    sub_806CDD4(r0, 6, 4);
+    sub_806CDD4(r0, 6, DIRECTION_NORTH);
 }
 
 void sub_80863F8(struct DungeonEntity *r0)
 {
-    sub_806CE68(r0, 4);
+    sub_806CE68(r0, DIRECTION_NORTH);
 }
 
 void sub_8086404(struct DungeonEntity *r0)
 {
-    sub_806CE68(r0, 6);
+    sub_806CE68(r0, DIRECTION_WEST);
 }
 
 void sub_8086410(struct DungeonEntity *r0)
@@ -310,7 +310,7 @@ void sub_8086690(void)
 void sub_80866C4(u32 r0)
 {
 
-    SpriteLookAroundEffect(sub_8085480());
+    SpriteLookAroundEffect(xxx_call_GetLeaderEntity());
     sub_803E708(0xA, 0x46);
     sub_8052910(r0);
     sub_803E708(0xA, 0x46);

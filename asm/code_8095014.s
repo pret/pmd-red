@@ -412,7 +412,7 @@ sub_809542C:
 	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	mov r0, sp
-	bl sub_808DA34
+	bl PrintPokeNameToBuffer
 	ldr r0, [r4]
 	adds r0, 0x14
 	mov r1, sp

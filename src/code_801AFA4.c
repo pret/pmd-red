@@ -35,7 +35,7 @@ extern void sub_8094060(void *, struct PokemonMove *);
 extern void PlaySound(u32);
 extern void sub_80141B4(u32 *, u32, u32 ,u32);
 extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
-extern void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon);
+extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801E8C0(void);
 extern void sub_801E93C(void);
@@ -163,7 +163,7 @@ void sub_801B178(void)
     for(monIndex = 0; monIndex < gUnknown_203B22C->monsAbleToLearnMove; monIndex++)
     {
         bufferPtr = gAvailablePokemonNames + (0x50 * monIndex);
-        sub_808DA34(bufferPtr, &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->unk50[monIndex]]);
+        PrintPokeNameToBuffer(bufferPtr, &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->unk50[monIndex]]);
         gUnknown_203B22C->menuItems[monIndex].text = bufferPtr;
         gUnknown_203B22C->menuItems[monIndex].menuAction = monIndex + 4;
     }
@@ -188,7 +188,7 @@ void sub_801B200(void)
             default:
                 gUnknown_203B22C->chosenPokemon = gUnknown_203B22C->unk50[temp - 4];
                 gUnknown_203B22C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->chosenPokemon];
-                sub_808DA34(gUnknown_202E218, gUnknown_203B22C->pokeStruct);
+                PrintPokeNameToBuffer(gUnknown_202E218, gUnknown_203B22C->pokeStruct);
                 sub_809401C(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
                 for(moveIndex = 0; moveIndex < MAX_MON_MOVES * 2; moveIndex++)
                 {

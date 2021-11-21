@@ -22,7 +22,6 @@ extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_801A928();
 extern void sub_8099690(u32);
-extern void GivePokemonItem(s16, struct HeldItem *);
 extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(u32);
 

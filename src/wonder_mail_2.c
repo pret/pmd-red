@@ -86,7 +86,7 @@ extern void sub_8013984(u32 *);
 extern u8 HasNoPKMNNews(void);
 extern u8 CheckPKMNNewsSlot(u8 r0);
 extern struct PokemonStruct *sub_808D3BC(void);
-extern void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon);
+extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern u16 gUnknown_203B2D0;
 extern u16 gUnknown_203B2D2;
 
@@ -719,7 +719,7 @@ void sub_802BC08(void)
 
 void sub_802BC7C(void)
 {
-    sub_808DA34(gAvailablePokemonNames, sub_808D3BC());
+    PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
     if(gUnknown_203B46C->playerGender == FEMALE)
     {
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC4C); // She

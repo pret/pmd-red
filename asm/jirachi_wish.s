@@ -449,7 +449,7 @@ _0808B98E:
 	bl CalculateFacingDir
 	adds r1, r0, 0
 	adds r0, r6, 0
-	bl sub_8085918
+	bl SetFacingDirection
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708

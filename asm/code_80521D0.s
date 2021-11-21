@@ -698,9 +698,9 @@ sub_8052910:
 	push {r6,r7}
 	sub sp, 0x14
 	adds r6, r0, 0
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	adds r4, r0, 0
-	bl sub_808548C
+	bl GetPartnerEntity
 	adds r5, r0, 0
 	movs r0, 0
 	mov r9, r0

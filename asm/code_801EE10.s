@@ -1730,7 +1730,7 @@ sub_801FB50:
 	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl sub_808DA34
+	bl PrintPokeNameToBuffer
 	ldr r2, [r6]
 	ldr r0, [r2]
 	cmp r0, 0x1
@@ -3613,7 +3613,7 @@ _08020AB0:
 	ldr r0, _08020AE8
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
-	bl sub_808DA34
+	bl PrintPokeNameToBuffer
 	movs r0, 0x11
 	bl sub_801FDA8
 	b _08020B32
@@ -3639,7 +3639,7 @@ _08020AEC:
 	ldr r0, _08020B24
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
-	bl sub_808DA34
+	bl PrintPokeNameToBuffer
 	movs r0, 0x12
 	bl sub_801FDA8
 	b _08020B32
@@ -7265,12 +7265,12 @@ sub_80227B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x7
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x6
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	bl HasGummiItem
 	lsls r0, 24
 	cmp r0, 0

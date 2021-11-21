@@ -94,6 +94,236 @@ extern void sub_808AFB0(u8);
 extern void sub_808B030(u8);
 extern void sub_808B0B0(u8);
 
+extern void sub_8086B14(void);
+extern void sub_8086B94(void);
+extern void sub_8086E9C(void);
+extern void sub_8086F00(void);
+extern void sub_8087230(void);
+extern void sub_808729C(void);
+extern void sub_80877E8(void);
+extern void sub_8087848(void);
+extern void sub_8087F54(void);
+extern void sub_8087FB4(void);
+extern void sub_8087FF8(void);
+extern void sub_80885A0(void);
+extern void sub_80885C4(void);
+extern void sub_808862C(void);
+extern void sub_80886C4(void);
+extern void sub_808875C(void);
+extern void sub_8088DC0(void);
+extern void sub_8088E5C(void);
+extern void sub_80892C8(void);
+extern void sub_8089328(void);
+extern void sub_808970C(void);
+extern void sub_808974C(void);
+extern void sub_8089914(void);
+extern void sub_8089978(void);
+extern void sub_8089C44(void);
+extern void sub_8089C90(void);
+extern void sub_8089EFC(void);
+extern void sub_8089F44(void);
+extern void sub_8089F8C(void);
+extern void sub_808A264(void);
+extern void sub_808A2C0(void);
+extern void sub_808A308(void);
+extern void sub_808A608(void);
+extern void sub_808A668(void);
+extern void sub_808A9E4(void);
+extern void sub_808AA3C(void);
+extern void sub_808AA94(void);
+extern void sub_808ACC0(void);
+extern void sub_808AD48(void);
+extern void sub_808ADCC(void);
+extern void sub_808B2F4(void);
+extern void sub_808B35C(void);
+extern void sub_808BDEC(void);
+extern void sub_808C10C(void);
+extern void sub_808C3A0(void);
+extern void sub_808C5C0(void);
+extern void sub_808C938(void);
+extern void sub_808C9C4(void);
+extern void sub_808CB5C(void);
+extern void sub_808CBB0(void);
+extern void sub_808CD44(void);
+extern void sub_8097FF8(void);
+
+u32 sub_80848EC(void)
+{
+    return 1;
+}
+
+void sub_80848F0(void)
+{
+  gDungeonGlobalData->unk1356C = 1;
+  switch(gDungeonGlobalData->unk3A0D) {
+    case 0:
+    case 0x3c:
+        gDungeonGlobalData->unk1356C = 0;
+        break;
+    case 1:
+    case 2:
+        sub_8086B14();
+        break;
+    case 3:
+        sub_8086B94();
+        break;
+    case 4:
+    case 5:
+        sub_8086E9C();
+        break;
+    case 6:
+        sub_8086F00();
+        break;
+    case 7:
+    case 8:
+        sub_8087230();
+        break;
+    case 9:
+        sub_808729C();
+        break;
+    case 10:
+    case 0xb:
+        sub_80877E8();
+        break;
+    case 0xc:
+        sub_8087848();
+        break;
+    case 0xd:
+        sub_8087F54();
+        break;
+    case 0xe:
+        sub_8087FB4();
+        break;
+    case 0xf:
+        sub_8087FF8();
+        break;
+    case 0x10:
+        sub_80885A0();
+        break;
+    case 0x11:
+        sub_80885C4();
+        break;
+    case 0x12:
+        sub_808862C();
+        break;
+    case 0x13:
+        sub_80886C4();
+        break;
+    case 0x14:
+        sub_808875C();
+        break;
+    case 0x15:
+        sub_8088DC0();
+        break;
+    case 0x16:
+        sub_8088E5C();
+        break;
+    case 0x17:
+    case 0x18:
+        sub_80892C8();
+        break;
+    case 0x19:
+        sub_8089328();
+        break;
+    case 0x1a:
+    case 0x1b:
+        sub_808970C();
+        break;
+    case 0x1c:
+        sub_808974C();
+        break;
+    case 0x1d:
+    case 0x1e:
+        sub_8089914();
+        break;
+    case 0x1f:
+        sub_8089978();
+        break;
+    case 0x20:
+    case 0x21:
+        sub_8089C44();
+        break;
+    case 0x22:
+        sub_8089C90();
+        break;
+    case 0x23:
+        sub_8089EFC();
+        break;
+    case 0x24:
+        sub_8089F44();
+        break;
+    case 0x25:
+        sub_8089F8C();
+        break;
+    case 0x26:
+        sub_808A264();
+        break;
+    case 0x27:
+        sub_808A2C0();
+        break;
+    case 0x28:
+        sub_808A308();
+        break;
+    case 0x29:
+        sub_808A608();
+        break;
+    case 0x2a:
+        sub_808A668();
+        break;
+    case 0x2b:
+        sub_808A9E4();
+        break;
+    case 0x2c:
+        sub_808AA3C();
+        break;
+    case 0x2d:
+        sub_808AA94();
+        break;
+    case 0x2e:
+        sub_808ACC0();
+        break;
+    case 0x2f:
+        sub_808AD48();
+        break;
+    case 0x30:
+        sub_808ADCC();
+        break;
+    case 0x31:
+        sub_808B2F4();
+        break;
+    case 0x32:
+        sub_808B35C();
+        break;
+    case 0x33:
+        sub_808BDEC();
+        break;
+    case 0x34:
+        sub_808C10C();
+        break;
+    case 0x35:
+        sub_808C3A0();
+        break;
+    case 0x36:
+        sub_808C5C0();
+        break;
+    case 0x37:
+        sub_808C938();
+        break;
+    case 0x38:
+        sub_808C9C4();
+        break;
+    case 0x39:
+        sub_808CB5C();
+        break;
+    case 0x3a:
+        sub_808CBB0();
+        break;
+    case 0x3b:
+        sub_808CD44();
+        break;
+  }
+  sub_8097FF8();
+}
 
 void DisplayPreFightDialogue(void)
 {

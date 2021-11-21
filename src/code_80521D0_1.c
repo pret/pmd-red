@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "constants/direction.h"
 
-extern struct DungeonEntity *sub_8085480(void);
+extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
 extern struct DungeonGlobalData *gDungeonGlobalData;
@@ -90,8 +90,7 @@ extern void sub_806CE68(struct DungeonEntity *, u32);
 extern void sub_804539C(struct DungeonEntity *, u32, u32);
 extern void sub_803E46C(u32);
 extern void sub_8042B0C(struct DungeonEntity *);
-extern void sub_8085918(struct DungeonEntity *, u32);
-extern void sub_806CE68(struct DungeonEntity *r0, u32);
+extern void SetFacingDirection(struct DungeonEntity *, u32);
 extern void sub_8052910(u32 *);
 extern void sub_803E708(u32, u32);
 extern u8 EntityExists(struct DungeonEntity *);
@@ -185,7 +184,7 @@ void sub_808BC20(struct DungeonEntity * param_1)
 
   PlaySoundEffect(0x298);
   for(uVar1 = 0; uVar1 < 0x19; uVar1++){
-    sub_8085918(param_1,uVar1 & 7);
+    SetFacingDirection(param_1,uVar1 & DIRECTION_MASK);
     sub_803E708(3,0x46);
   }
   param_1->entityData->unk15E = 1;
@@ -278,24 +277,24 @@ u8 JirachiFriendAreaSearch(void)
 
 void sub_808BDEC(void)
 {
-  struct DungeonEntity * iVar2;
-  struct DungeonEntity * uVar3;
+  struct DungeonEntity * LeaderEntity;
+  struct DungeonEntity * LugiaEntity;
 
-  iVar2 = sub_8085480();
-  uVar3 = sub_8085680(0x1b);
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  LugiaEntity = sub_8085680(0x1b);
   sub_8083F14();
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(SPECIES_LUGIA)) {
     sub_8083E88(0x23);
-    sub_8068FE0(uVar3,0x21c,0);
+    sub_8068FE0(LugiaEntity,0x21c,0);
   }
   else {
     gDungeonGlobalData->unk7 = 1;
-    sub_8085918(uVar3,0);
+    SetFacingDirection(LugiaEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LUGIA);
 }
 
@@ -309,11 +308,11 @@ void sub_808BE70(u8 param_1,u8 param_2)
 
 void LugiaPreFightDialogue(void)
 {
-  struct DungeonEntity * iVar2;
-  struct DungeonEntity * uVar3;
+  struct DungeonEntity * LeaderEntity;
+  struct DungeonEntity * LugiaEntity;
 
-  iVar2 = sub_8085480();
-  uVar3 = sub_8085680(0x1b);
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  LugiaEntity = sub_8085680(0x1b);
   if (HasRecruitedMon(SPECIES_LUGIA)) {
     sub_8086448();
     sub_80866C4(&gUnknown_8106068);
@@ -330,21 +329,21 @@ void LugiaPreFightDialogue(void)
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_8105F74);
     PlaySoundEffect(0x1f8);
-    sub_80861D4(uVar3,0xd,0);
+    sub_80861D4(LugiaEntity,0xd,0);
     sub_803E708(0x2b,0x46);
-    sub_80861B8(uVar3,0,0);
+    sub_80861B8(LugiaEntity,0,0);
     sub_8052910(&gUnknown_8105FA0);
     sub_808BFA0();
     sub_8052910(&gUnknown_8105FD8);
     sub_808C02C();
     sub_8085C54(0xffffff06,0xffffff06,0xffffff06,1,0);
     sub_8083F14();
-    sub_80861D4(uVar3,7,0);
+    sub_80861D4(LugiaEntity,7,0);
     sub_8052910(&gUnknown_8106024);
     sub_808BFA0();
-    SetupBossFightHP(uVar3,800,0x20);
+    SetupBossFightHP(LugiaEntity,800,0x20);
     sub_8083E88(0x23);
-    sub_80858AC(&iVar2->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixelX,0x10);
   }
 }
 
@@ -415,25 +414,25 @@ void sub_808C0CC(void)
 
 void sub_808C10C(void)
 {
-  struct DungeonEntity * iVar1;
-  struct DungeonEntity * uVar2;
+  struct DungeonEntity * LeaderEntity;
+  struct DungeonEntity * KyogreEntity;
 
   u32 uVar3;
   s32 iVar2;
 
-  iVar1 = sub_8085480();
-  uVar2 = sub_8085680(0x1c);
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  KyogreEntity = sub_8085680(0x1c);
   sub_8083F14();
   sub_80854D4();
   sub_8085930(4);
   if (HasRecruitedMon(SPECIES_KYOGRE)) {
-    sub_8068FE0(uVar2,0x21c,0);
+    sub_8068FE0(KyogreEntity,0x21c,0);
   }
   else {
     gDungeonGlobalData->unk7 = 1;
-    sub_8085918(uVar2,0);
+    SetFacingDirection(KyogreEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
+  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + -0x1000);
@@ -452,15 +451,15 @@ void sub_808C1A4(u8 param_1,u8 param_2)
 
 void KyogrePreFightDialogue(void)
 {
-  struct DungeonEntity *iVar2;
-  struct DungeonEntity *uVar3;
+  struct DungeonEntity *LeaderEntity;
+  struct DungeonEntity *KyogreEntity;
 
-  iVar2 = sub_8085480();
-  uVar3 = sub_8085680(0x1c);
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  KyogreEntity = sub_8085680(0x1c);
   sub_8083F14();
   if (HasRecruitedMon(SPECIES_KYOGRE)) {
     sub_8083EA8(0x23,0x3c);
-    SpriteLookAroundEffect(iVar2);
+    SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
     sub_8052910(&gUnknown_81062A8);
     sub_803E708(10,0x46);
@@ -492,9 +491,9 @@ void KyogrePreFightDialogue(void)
     // power!
     sub_8052910(&gUnknown_810627C);
     sub_803E708(10,0x46);
-    SetupBossFightHP(uVar3,600,0xb);
+    SetupBossFightHP(KyogreEntity,600,0xb);
     sub_8083E88(0x23);
-    sub_80858AC(&iVar2->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixelX,0x10);
   }
 }
 
@@ -537,9 +536,9 @@ void sub_808C360(void)
 
 void sub_808C3A0(void)
 {
-  struct DungeonEntity * iVar2;
+  struct DungeonEntity * LeaderEntity;
 
-  iVar2 = sub_8085480();
+  LeaderEntity = xxx_call_GetLeaderEntity();
   sub_8083F14();
   sub_80854D4();
   sub_8085930(4);
@@ -551,7 +550,7 @@ void sub_808C3A0(void)
     gDungeonGlobalData->unk7 = 1;
     sub_808563C(sub_808C5A0);
   }
-  sub_8085860(iVar2->posWorldX,iVar2->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_DEOXYS_NORMAL);
 }
 
@@ -565,9 +564,9 @@ void sub_808C414(u8 param_1,u8 param_2)
 
 void DeoxysPreFightDialogue(void)
 {
-  struct DungeonEntity * iVar2;
+  struct DungeonEntity * LeaderEntity;
 
-  iVar2 = sub_8085480();
+  LeaderEntity = xxx_call_GetLeaderEntity();
   sub_8086448();
   if (HasRecruitedMon(SPECIES_DEOXYS_NORMAL)) {
     // There appears to be no one here.
@@ -585,7 +584,7 @@ void DeoxysPreFightDialogue(void)
     sub_8052910(&gUnknown_8106390);
     sub_803E708(10,0x46);
     sub_808563C(sub_808C5AC);
-    sub_80858AC(&iVar2->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixelX,0x10);
   }
 }
 
@@ -629,29 +628,29 @@ void sub_808C590(struct DungeonEntity *r0)
 
 void sub_808C5A0(struct DungeonEntity *r0)
 {
-    sub_8085918(r0, 0);
+    SetFacingDirection(r0, DIRECTION_SOUTH);
 }
 
 void sub_808C5AC(struct DungeonEntity *r0)
 {
-    SetupBossFightHP(r0, 0x3b6, 0x20);
+    SetupBossFightHP(r0, 950, 0x20);
 }
 
 void sub_808C5C0(void)
 {
-  struct DungeonEntity * iVar1;
-  struct DungeonEntity * uVar2;
+  struct DungeonEntity * LeaderEntity;
+  struct DungeonEntity * CelebiEntity;
 
   u32 uVar3;
   s32 iVar2;
 
-  iVar1 = sub_8085480();
-  uVar2 = sub_8085680(0x1e);
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  CelebiEntity = sub_8085680(0x1e);
   sub_8083E88(0x7f);
   sub_80854D4();
   sub_8085930(4);
-  sub_8085918(uVar2,0);
-  sub_8085860(iVar1->posWorldX,iVar1->posWorldY);
+  SetFacingDirection(CelebiEntity, DIRECTION_SOUTH);
+  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + 0xfffff000);
@@ -666,26 +665,26 @@ void nullsub_100(u32 r0, u32 r1, u32 r2)
 #ifdef NONMATCHING
 void CelebiJoinDialogue(void)
 {
-  struct DungeonEntity *uVar2;
+  struct DungeonEntity *LeaderEntity;
   s32 state;
   s32 menuChoice;
-  struct DungeonEntity *local_1c;
+  struct DungeonEntity *CelebiEntity;
 
-  uVar2 = sub_8085480();
-  local_1c = sub_8085680(0x1e);
-  if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(local_1c) == '\0'))
+  LeaderEntity = xxx_call_GetLeaderEntity();
+  CelebiEntity = sub_8085680(0x1e);
+  if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(CelebiEntity) == '\0'))
   {
     sub_8068FE0(local_1c,0x21c,0);
-    SpriteLookAroundEffect(uVar2);
+    SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
     // .........
     sub_8052910(&gUnknown_810663C);
   }
   else
   {
-    SpriteLookAroundEffect(uVar2);
+    SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
-    sub_80862BC(uVar2);
+    sub_80862BC(LeaderEntity);
     sub_803E708(10,0x46);
     // Oh? There's someone there.
     sub_8052910(&gUnknown_81063D0);
@@ -697,12 +696,12 @@ void CelebiJoinDialogue(void)
     // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
     sub_8052910(&gUnknown_8106400);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(local_1c,10,0);
+    sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
     sub_803E708(0x14,0x46);
-    sub_806CE68(local_1c,0);
+    sub_806CE68(CelebiEntity, DIRECTION_SOUTH);
     sub_803E708(4,0x46);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(local_1c,10,0);
+    sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
     sub_8052910(&gUnknown_810643C);
     sub_803E708(10,0x46);
     state = 0;
@@ -725,7 +724,7 @@ void CelebiJoinDialogue(void)
                 }
                 sub_8083E88(0x7f);
                 PlaySoundEffect(0x1c7);
-                sub_80861D4(local_1c,0xd,0);
+                sub_80861D4(CelebiEntity,0xd,0);
                 sub_803E708(0x37,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1a,0x46);
@@ -733,12 +732,12 @@ void CelebiJoinDialogue(void)
                 sub_803E708(0x1c,0x46);
                 sub_8052910(&gUnknown_8106468);
                 sub_803E708(10,0x46);
-                sub_806FDF4(uVar2,local_1c,&local_1c);
+                sub_806FDF4(LeaderEntity,CelebiEntity,&CelebiEntity);
                 sub_8083E88(0x7f);
                 sub_8052910(&gUnknown_810648C);
                 sub_803E708(10,0x46);
                 PlaySoundEffect(0x1c7);
-                sub_80861D4(local_1c,0xd,0);
+                sub_80861D4(CelebiEntity,0xd,0);
                 sub_803E708(0x37,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1a,0x46);
@@ -765,13 +764,13 @@ void CelebiJoinDialogue(void)
             {
                 sub_803E708(10,0x46);
                 sub_8052910(&gUnknown_8106500);
-                sub_80861F8(0x3e,local_1c,1);
+                sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0x18,0x46);
-                sub_80861F8(0x3e,local_1c,1);
+                sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0xe,0x46);
                 sub_8052910(&gUnknown_8106534);
                 sub_803E708(10,0x46);
-                sub_808C8E0(local_1c);
+                sub_808C8E0(CelebiEntity);
                 sub_8052910(&gUnknown_8106560);
                 sub_803E708(10,0x46);
                 state = 2;
@@ -793,7 +792,7 @@ void CelebiJoinDialogue(void)
 	"\tmov r7, r8\n"
 	"\tpush {r7}\n"
 	"\tsub sp, 0x4\n"
-	"\tbl sub_8085480\n"
+	"\tbl xxx_call_GetLeaderEntity\n"
 	"\tadds r7, r0, 0\n"
 	"\tmovs r0, 0x1E\n"
 	"\tbl sub_8085680\n"
@@ -1075,7 +1074,7 @@ void sub_808C8E0(struct DungeonEntity *param_1)
   s32 iVar1;
 
   PlaySoundEffect(0x1a5);
-  sub_806CDD4(param_1, 0, 0);
+  sub_806CDD4(param_1, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
     param_1->entityData->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
@@ -1100,7 +1099,7 @@ void sub_808C948(struct DungeonEntity *param_1, u8 param_2)
 
   if (param_2 == 0x37) {
     flag = FALSE;
-    for(iVar3 = 0; iVar3 < 0x10; iVar3++){
+    for(iVar3 = 0; iVar3 < DUNGEON_MAX_WILD_POKEMON; iVar3++){
       iVar2 = gDungeonGlobalData->wildPokemon[iVar3];
       if ((iVar2 != param_1) && (EntityExists(iVar2) != 0)) {
         flag = TRUE;
@@ -1124,38 +1123,38 @@ void sub_808C998(void)
 void sub_808C9B0(struct DungeonEntity *param_1)
 {
     param_1->entityData->facingDir = DIRECTION_NORTH;
-    sub_806CE68(param_1, 4);
+    sub_806CE68(param_1, DIRECTION_NORTH);
 }
 
 void sub_808C9C4(void)
 {
-    struct DungeonEntity *temp;
-    struct DungeonEntity *temp_2;
+    struct DungeonEntity *LeaderEntity;
+    struct DungeonEntity *MedichamEntity;
 
-    temp = sub_8085480();
-    temp_2 = sub_8085680(7);
+    LeaderEntity = xxx_call_GetLeaderEntity();
+    MedichamEntity = sub_8085680(7);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
-    sub_8085918(temp_2, 0);
-    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
+    SetFacingDirection(MedichamEntity, DIRECTION_SOUTH);
+    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
 // Medicham Rescue Dialogue?
 void MedichamRescueDialogue(void)
 {
-    struct DungeonEntity *temp;
+    struct DungeonEntity *MedichamEntity;
     s32 counter;
 
-    temp = sub_8085680(7);
-    SpriteLookAroundEffect(temp);
+    MedichamEntity = sub_8085680(7);
+    SpriteLookAroundEffect(MedichamEntity);
     sub_803E708(0xA, 0x46);
     // Oh my I can't seem to find a way out...
     sub_8052910(&gUnknown_8106778);
     sub_803E708(0xA, 0x46);
-    sub_80869E4(temp, 4, 2, 4);
+    sub_80869E4(MedichamEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // What am I to do...?
     sub_8052910(&gUnknown_81067BC);
@@ -1163,18 +1162,18 @@ void MedichamRescueDialogue(void)
     sub_8086448();
     sub_8086598();
     sub_803E708(0x20, 0x46);
-    sub_80862BC(temp);
+    sub_80862BC(MedichamEntity);
     sub_803E708(0x20, 0x46);
-    sub_80869E4(temp, 4, 2, 0);
+    sub_80869E4(MedichamEntity, 4, 2, 0);
     sub_8052910(&gUnknown_81067E0);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(temp, 0xA, 0);
+    sub_806CDD4(MedichamEntity, 0xA, DIRECTION_SOUTH);
     sub_803E708(0x14, 0x46);
-    sub_806CE68(temp, 0);
+    sub_806CE68(MedichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x4, 0x46);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(temp, 0xA, 0);
+    sub_806CDD4(MedichamEntity, 0xA, DIRECTION_SOUTH);
     sub_803E708(0x14, 0x46);
     // Yes Yes
     // I am so lucky
@@ -1182,32 +1181,32 @@ void MedichamRescueDialogue(void)
     // There appears to be no one here
     sub_8052910(&gUnknown_8106834);
     sub_803E708(0xA, 0x46);
-    sub_806CDD4(temp, 0, 0);
+    sub_806CDD4(MedichamEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
     {
-        sub_804539C(temp, 0, 0x80 << 1);
+        sub_804539C(MedichamEntity, 0, 0x80 << 1);
         sub_803E46C(0x46);
     }
-    sub_806CE68(temp, 0);
+    sub_806CE68(MedichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
-    sub_8042B0C(temp);
-    sub_8068FE0(temp, 0x21C, 0);
+    sub_8042B0C(MedichamEntity);
+    sub_8068FE0(MedichamEntity, 0x21C, 0);
     gDungeonGlobalData->unk4 = 1;
     gDungeonGlobalData->unk11 = 4;
 }
 
 void sub_808CB5C(void)
 {
-    struct DungeonEntity *temp;
-    struct DungeonEntity *temp_2;
+    struct DungeonEntity *LeaderEntity;
+    struct DungeonEntity *MedichamEntity;
 
-    temp = sub_8085480();
-    temp_2 = sub_8085680(7);
+    LeaderEntity = xxx_call_GetLeaderEntity();
+    MedichamEntity = sub_8085680(7);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(4);
-    sub_8068FE0(temp_2, 0x21C, 0);
-    sub_8085860(temp->posWorldX, temp->posWorldY);
+    sub_8068FE0(MedichamEntity, 0x21C, 0);
+    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
@@ -1217,34 +1216,34 @@ void DummyFightDialogue(void)
 
 void sub_808CBB0(void)
 {
-    struct DungeonEntity *temp;
-    struct DungeonEntity *temp_2;
+    struct DungeonEntity *LeaderEntity;
+    struct DungeonEntity *SmeargleEntity;
 
-    temp = sub_8085480();
-    temp_2 = sub_8085680(0x1F);
+    LeaderEntity = xxx_call_GetLeaderEntity();
+    SmeargleEntity = sub_8085680(0x1F);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
-    sub_8085918(temp_2, 0);
-    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
+    SetFacingDirection(SmeargleEntity, DIRECTION_SOUTH);
+    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 
 // Smeargle Rescue dialogue scene
 void SmeargleRescueDialogue(void)
 {
-    struct DungeonEntity *temp;
+    struct DungeonEntity *SmeargleEntity;
     s32 counter;
 
-    temp = sub_8085680(0x1F);
-    SpriteLookAroundEffect(temp);
+    SmeargleEntity = sub_8085680(0x1F);
+    SpriteLookAroundEffect(SmeargleEntity);
     sub_803E708(0xA, 0x46);
     // Ohhh...
     // I've lost my bearings
     sub_8052910(&gUnknown_810688C);
     sub_803E708(0xA, 0x46);
-    sub_80869E4(temp, 4, 2, 4);
+    sub_80869E4(SmeargleEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // I can't get out...
     // I'm hungry...
@@ -1254,34 +1253,34 @@ void SmeargleRescueDialogue(void)
     sub_8086448();
     sub_8086598();
     sub_803E708(0x20, 0x46);
-    sub_80862BC(temp);
+    sub_80862BC(SmeargleEntity);
     sub_803E708(0x20, 0x46);
-    sub_80869E4(temp, 4, 2, 0);
+    sub_80869E4(SmeargleEntity, 4, 2, 0);
     // Oh! You are?
     sub_8052910(&gUnknown_8106918);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(temp, 0xA, 0);
+    sub_806CDD4(SmeargleEntity, 0xA, DIRECTION_SOUTH);
     sub_803E708(0x14, 0x46);
-    sub_806CE68(temp, 0);
+    sub_806CE68(SmeargleEntity, DIRECTION_SOUTH);
     sub_803E708(0x4, 0x46);
     PlaySoundEffect(0x1c7);
-    sub_806CDD4(temp, 0xA, 0);
+    sub_806CDD4(SmeargleEntity, 0xA, DIRECTION_SOUTH);
     sub_803E708(0x14, 0x46);
     // Did you maybe come to rescue me?
     // Am I glad to see you
     sub_8052910(&gUnknown_8106934);
     sub_803E708(0xA, 0x46);
-    sub_806CDD4(temp, 0, 0);
+    sub_806CDD4(SmeargleEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
     {
-        sub_804539C(temp, 0, 0x80 << 1);
+        sub_804539C(SmeargleEntity, 0, 0x80 << 1);
         sub_803E46C(0x46);
     }
-    sub_806CE68(temp, 0);
+    sub_806CE68(SmeargleEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
-    sub_8042B0C(temp);
-    sub_8068FE0(temp, 0x21C, 0);
+    sub_8042B0C(SmeargleEntity);
+    sub_8068FE0(SmeargleEntity, 0x21C, 0);
     gDungeonGlobalData->unk4 = 1;
     gDungeonGlobalData->unk11 = 4;
 
@@ -1289,17 +1288,17 @@ void SmeargleRescueDialogue(void)
 
 void sub_808CD44(void)
 {
-    struct DungeonEntity *temp;
-    struct DungeonEntity *temp_2;
+    struct DungeonEntity *LeaderEntity;
+    struct DungeonEntity *SmeargleEntity;
 
-    temp = sub_8085480();
-    temp_2 = sub_8085680(0x1F);
+    LeaderEntity = xxx_call_GetLeaderEntity();
+    SmeargleEntity = sub_8085680(0x1F);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(4);
     sub_80855E4(sub_8086A3C);
-    sub_8068FE0(temp_2, 0x21C, 0);
-    sub_8085860(temp->posWorldX, temp->posWorldY - 3);
+    sub_8068FE0(SmeargleEntity, 0x21C, 0);
+    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 

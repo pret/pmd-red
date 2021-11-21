@@ -1352,7 +1352,7 @@ sub_808FF20:
 	mov r8, r2
 	adds r0, r5, 0x2
 	movs r2, 0
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	ldrh r0, [r6, 0x8]
 	strh r0, [r5]
 	movs r1, 0x16

@@ -204,7 +204,7 @@ void sub_8017D24(void)
     switch(menuAction)
     {
       case 3:
-        if (GetNumberOfFilledInventorySlots() > 0x13)
+        if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
         {
             sub_801CBB8();
             UpdateKangaskhanStorageState(6);
