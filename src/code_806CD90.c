@@ -86,26 +86,3 @@ void sub_806CE94(struct DungeonEntity *r0, u32 newDir)
         }
     }
 }
-
-//u8 sub_806CEBC(struct DungeonEntity *r0)
-//{
-//    struct DungeonEntityData *pokeData = r0->entityData;
-//    if(pokeData->sleepStatus == 1 ||
-//        pokeData->sleepStatus == 5 ||
-//        pokeData->sleepStatus == 3)
-//        {
-//            if(pokeData->transformSpecies == 0xB9)
-//            {
-//                if(pokeData->sleepStatusTurnsLeft != 0x7F)
-//                    return 5;
-//                else
-//                    return 7;
-//            }
-//            else
-//                return 5;
-//        }
-//    if(pokeData->chargingStatus == 1)
-//        return 0xB;
-//    else
-//        return 7;
-//}
