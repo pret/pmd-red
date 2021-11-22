@@ -9,7 +9,7 @@ struct unkStruct_203B304
 {
     // size: 0xB6 << 1
     u32 state;
-    u32 unk4;
+    u32 fallbackState;
     u8 unk8;
     u8 mailIndex;
     u8 fillA[0xC - 0xA];

@@ -195,6 +195,10 @@ void InitializeRecruitedPokemon(void);
 void CopySpeciesNametoBuffer(u8 * buffer, s16 index);
 void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index);
 void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index);
+void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
+void PeekPokemonItem(s16 index_, struct HeldItem* item);
+void GivePokemonItem(s16 index_, struct HeldItem* item);
+bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
 
 u8 *GetCategoryString(s16 index);
 u8 GetPokemonSize(s16 index);

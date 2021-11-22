@@ -194,7 +194,7 @@ _0803010C:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x6
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	ldr r0, _0803013C
 	ldr r1, [r0]
 	movs r0, 0xB

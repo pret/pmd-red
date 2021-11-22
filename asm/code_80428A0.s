@@ -110,7 +110,7 @@ sub_8042B34:
 	adds r6, r2, 0
 	movs r0, 0
 	mov r8, r0
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	mov r10, r0
 	ldr r7, _08042CB0
 	movs r0, 0xCC

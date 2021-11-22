@@ -270,12 +270,12 @@ char * GetMonSpecies(s16 index)
     return gMonsterParameters[index].species;
 }
 
-void sub_808D9AC(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum)
+void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum)
 {
   u8 nameBuffer [20];
 
   sub_80922B4(nameBuffer, pokemon->name, POKEMON_NAME_LENGTH);
-  if (colorNum == 0) {
+  if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
   ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
@@ -286,7 +286,7 @@ void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
   u8 nameBuffer [20];
 
   sub_80922B4(nameBuffer, param_2 + 0x58, POKEMON_NAME_LENGTH);
-  if (colorNum == 0) {
+  if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
   ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
@@ -300,7 +300,7 @@ void sub_808DA0C(u8 *buffer, u8 *param_2)
   ExpandPlaceholdersBuffer(buffer,gUnknown_8107638,nameBuffer); // %s
 }
 
-void sub_808DA34(u8 *buffer, struct PokemonStruct *pokemon)
+void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon)
 {
   sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }

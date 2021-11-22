@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "constants/direction.h"
 
 struct unkStruct_80420E8
 {
@@ -147,7 +148,7 @@ void sub_8041BE8(struct DungeonEntity *r0)
 
 void sub_8041BF8(struct DungeonEntity *r0)
 {
-    sub_806CDD4(r0, 0xA, 8);
+    sub_806CDD4(r0, 0xA, NUM_DIRECTIONS);
 }
 
 void sub_8041C08(struct DungeonEntity *r0)

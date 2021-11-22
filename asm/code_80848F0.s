@@ -269,16 +269,16 @@ _0808546E:
 _0808547C: .4byte gUnknown_80F4598
 	thumb_func_end sub_8085374
 
-	thumb_func_start sub_8085480
-sub_8085480:
+	thumb_func_start xxx_call_GetLeaderEntity
+xxx_call_GetLeaderEntity:
 	push {lr}
 	bl GetLeaderEntity
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085480
+	thumb_func_end xxx_call_GetLeaderEntity
 
-	thumb_func_start sub_808548C
-sub_808548C:
+	thumb_func_start GetPartnerEntity
+GetPartnerEntity:
 	push {r4,r5,lr}
 	movs r5, 0
 _08085490:
@@ -314,7 +314,7 @@ _080854CC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808548C
+	thumb_func_end GetPartnerEntity
 
 	thumb_func_start sub_80854D4
 sub_80854D4:
@@ -500,7 +500,7 @@ _08085618:
 	ble _080855EC
 	cmp r7, 0
 	bne _0808562E
-	bl sub_808548C
+	bl GetPartnerEntity
 	cmp r0, 0
 	beq _0808562E
 	bl _call_via_r6
@@ -889,8 +889,8 @@ _080858FE:
 	bx r0
 	thumb_func_end sub_80858AC
 
-	thumb_func_start sub_8085918
-sub_8085918:
+	thumb_func_start SetFacingDirection
+SetFacingDirection:
 	push {r4,lr}
 	ldr r3, [r0, 0x70]
 	movs r4, 0x7
@@ -902,7 +902,7 @@ sub_8085918:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8085918
+	thumb_func_end SetFacingDirection
 
 	thumb_func_start sub_8085930
 sub_8085930:

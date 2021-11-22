@@ -5,350 +5,6 @@
 
 	.text
 
-	thumb_func_start SkarmoryPreFightDialogue
-SkarmoryPreFightDialogue:
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x10
-	bl sub_8085480
-	mov r8, r0
-	bl sub_808548C
-	mov r9, r0
-	movs r0, 0x4
-	bl sub_8085680
-	adds r4, r0, 0
-	movs r0, 0x3
-	bl sub_8085680
-	adds r6, r0, 0
-	ldr r0, [r4, 0xC]
-	str r0, [sp]
-	ldr r0, [r4, 0x10]
-	movs r1, 0xC0
-	lsls r1, 6
-	adds r0, r1
-	str r0, [sp, 0x4]
-	ldr r0, [r6, 0xC]
-	str r0, [sp, 0x8]
-	ldr r0, [r6, 0x10]
-	movs r2, 0x80
-	lsls r2, 6
-	adds r0, r2
-	add r5, sp, 0x8
-	str r0, [r5, 0x4]
-	bl sub_8086448
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	mov r0, r9
-	bl sub_80862BC
-	movs r0, 0x20
-	movs r1, 0x46
-	bl sub_803E708
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086D84
-	bl sub_8052910
-	mov r0, sp
-	movs r1, 0x40
-	bl sub_80858AC
-	movs r0, 0x40
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r5, 0
-	movs r1, 0x30
-	bl sub_80858AC
-	ldr r0, _08086D88
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, [r4, 0x70]
-	ldr r2, _08086D8C
-	adds r1, r0, r2
-	movs r0, 0x1
-	strb r0, [r1]
-	mov r0, sp
-	movs r1, 0x30
-	bl sub_80858AC
-	ldr r0, _08086D90
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r5, 0
-	movs r1, 0x20
-	bl sub_80858AC
-	movs r0, 0x20
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r6, 0
-	bl sub_8086E74
-	ldr r0, _08086D94
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086D98
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086D9C
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086DA0
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r6, 0
-	movs r1, 0xD
-	movs r2, 0
-	bl sub_806CDD4
-	ldr r0, _08086DA4
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	mov r0, r9
-	movs r1, 0x4
-	movs r2, 0x1
-	movs r3, 0x2
-	bl sub_80869E4
-	mov r0, r8
-	movs r1, 0x4
-	movs r2, 0x2
-	movs r3, 0x6
-	bl sub_80869E4
-	ldr r0, _08086DA8
-	bl sub_8052910
-	mov r0, r9
-	movs r1, 0x4
-	movs r2, 0x2
-	movs r3, 0x4
-	bl sub_80869E4
-	mov r0, r8
-	movs r1, 0x4
-	movs r2, 0x1
-	movs r3, 0x4
-	bl sub_80869E4
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	movs r0, 0xB
-	bl sub_8083E88
-	movs r0, 0xC
-	add r8, r0
-	mov r0, r8
-	movs r1, 0x10
-	bl sub_80858AC
-	add sp, 0x10
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086D84: .4byte gUnknown_8100768
-_08086D88: .4byte gUnknown_8100798
-_08086D8C: .4byte 0x0000015d
-_08086D90: .4byte gUnknown_8100820
-_08086D94: .4byte gUnknown_8100844
-_08086D98: .4byte gUnknown_8100880
-_08086D9C: .4byte gUnknown_8100928
-_08086DA0: .4byte gUnknown_8100A04
-_08086DA4: .4byte gUnknown_8100B80
-_08086DA8: .4byte gUnknown_8100BC0
-	thumb_func_end SkarmoryPreFightDialogue
-
-	thumb_func_start SkarmoryReFightDialogue
-SkarmoryReFightDialogue:
-	push {r4,r5,lr}
-	sub sp, 0x8
-	bl sub_8085480
-	adds r5, r0, 0
-	movs r0, 0x3
-	bl sub_8085680
-	adds r4, r0, 0
-	ldr r0, [r4, 0xC]
-	str r0, [sp]
-	ldr r0, [r4, 0x10]
-	movs r1, 0x80
-	lsls r1, 6
-	adds r0, r1
-	str r0, [sp, 0x4]
-	bl sub_8086448
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r4, 0
-	bl sub_8086E74
-	mov r0, sp
-	movs r1, 0x10
-	bl sub_80858AC
-	ldr r0, _08086E34
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086E38
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	adds r0, r4, 0
-	movs r1, 0xD
-	movs r2, 0
-	bl sub_806CDD4
-	ldr r0, _08086E3C
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	adds r5, 0xC
-	adds r0, r5, 0
-	movs r1, 0x10
-	bl sub_80858AC
-	movs r0, 0xB
-	bl sub_8083E88
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086E34: .4byte gUnknown_8100C90
-_08086E38: .4byte gUnknown_8100CBC
-_08086E3C: .4byte gUnknown_8100CDC
-	thumb_func_end SkarmoryReFightDialogue
-
-	thumb_func_start sub_8086E40
-sub_8086E40:
-	push {lr}
-	bl sub_8085480
-	bl SpriteLookAroundEffect
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086E6C
-	bl sub_8052910
-	movs r0, 0xA
-	movs r1, 0x46
-	bl sub_803E708
-	ldr r0, _08086E70
-	ldr r1, [r0]
-	movs r0, 0x1
-	strb r0, [r1, 0x2]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086E6C: .4byte gUnknown_8100D3C
-_08086E70: .4byte gDungeonGlobalData
-	thumb_func_end sub_8086E40
-
-	thumb_func_start sub_8086E74
-sub_8086E74:
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0xF
-	movs r2, 0
-	bl sub_806CDD4
-	adds r0, r4, 0
-	bl sub_8086A54
-	movs r0, 0xFC
-	lsls r0, 1
-	bl PlaySoundEffect
-	movs r0, 0x44
-	movs r1, 0x46
-	bl sub_803E708
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8086E74
-
-	thumb_func_start sub_8086E9C
-sub_8086E9C:
-	push {r4,r5,lr}
-	bl sub_8085480
-	adds r5, r0, 0
-	movs r0, 0x72
-	bl sub_8083E88
-	bl sub_8085374
-	bl sub_80854D4
-	movs r0, 0x4
-	bl sub_8085930
-	ldr r4, _08086EF8
-	adds r0, r4, 0
-	bl sub_80855E4
-	adds r0, r4, 0
-	bl sub_808563C
-	movs r1, 0x4
-	ldrsh r0, [r5, r1]
-	movs r2, 0x6
-	ldrsh r1, [r5, r2]
-	subs r1, 0x3
-	bl sub_8085860
-	ldr r4, _08086EFC
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl CopySpeciesNametoBuffer
-	adds r0, r4, 0
-	adds r0, 0x50
-	movs r1, 0x5E
-	bl CopySpeciesNametoBuffer
-	adds r4, 0xA0
-	adds r0, r4, 0
-	movs r1, 0xA
-	bl CopySpeciesNametoBuffer
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086EF8: .4byte sub_8086A3C
-_08086EFC: .4byte gUnknown_202E038
-	thumb_func_end sub_8086E9C
-
-	thumb_func_start sub_8086F00
-sub_8086F00:
-	push {r4,lr}
-	bl sub_8085480
-	adds r4, r0, 0
-	bl sub_80854D4
-	movs r0, 0x4
-	bl sub_8085930
-	ldr r0, _08086F4C
-	bl sub_80855E4
-	movs r1, 0x4
-	ldrsh r0, [r4, r1]
-	movs r2, 0x6
-	ldrsh r1, [r4, r2]
-	subs r1, 0x3
-	bl sub_8085860
-	ldr r4, _08086F50
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl CopySpeciesNametoBuffer
-	adds r0, r4, 0
-	adds r0, 0x50
-	movs r1, 0x5E
-	bl CopySpeciesNametoBuffer
-	adds r4, 0xA0
-	adds r0, r4, 0
-	movs r1, 0xA
-	bl CopySpeciesNametoBuffer
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086F4C: .4byte sub_8086A3C
-_08086F50: .4byte gUnknown_202E038
-	thumb_func_end sub_8086F00
-
 	thumb_func_start sub_8086F54
 sub_8086F54:
 	push {r4-r6,lr}
@@ -405,7 +61,7 @@ _08086FB4: .4byte 0x0001358c
 	thumb_func_start TeamMeaniesPreFightDialogue
 TeamMeaniesPreFightDialogue:
 	push {r4,lr}
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	adds r4, r0, 0
 	bl sub_8086448
 	movs r0, 0xA
@@ -469,9 +125,9 @@ _08087060: .4byte gUnknown_81010D0
 	thumb_func_start TeamMeaniesReFightDialogue
 TeamMeaniesReFightDialogue:
 	push {r4,r5,lr}
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	adds r4, r0, 0
-	bl sub_808548C
+	bl GetPartnerEntity
 	adds r5, r0, 0
 	bl sub_8086448
 	ldr r0, _08087118
@@ -665,7 +321,7 @@ _0808722C: .4byte 0x0000015f
 	thumb_func_start sub_8087230
 sub_8087230:
 	push {r4-r6,lr}
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	adds r6, r0, 0
 	movs r0, 0x8
 	bl sub_8085680
@@ -681,7 +337,7 @@ sub_8087230:
 	bl sub_80855E4
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8085918
+	bl SetFacingDirection
 	adds r0, r5, 0
 	bl _call_via_r4
 	movs r1, 0x4
@@ -711,7 +367,7 @@ _08087298: .4byte gUnknown_202E038
 sub_808729C:
 	push {r4-r6,lr}
 	sub sp, 0x4
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	adds r5, r0, 0
 	movs r0, 0x8
 	bl sub_8085680
@@ -747,7 +403,7 @@ _080872E0:
 	bl sub_8072008
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8085918
+	bl SetFacingDirection
 	adds r0, r4, 0
 	bl _call_via_r6
 _08087300:
@@ -810,9 +466,9 @@ ZapdosPreFightDialogue:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x70
-	bl sub_8085480
+	bl xxx_call_GetLeaderEntity
 	mov r9, r0
-	bl sub_808548C
+	bl GetPartnerEntity
 	adds r6, r0, 0
 	movs r0, 0x8
 	bl sub_8085680

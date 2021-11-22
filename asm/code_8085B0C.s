@@ -22,7 +22,7 @@ sub_8085B0C:
 _08085B26:
 	ldrb r1, [r4]
 	adds r0, r5, 0
-	bl sub_8085918
+	bl SetFacingDirection
 	movs r0, 0x6
 	movs r1, 0x46
 	bl sub_803E708

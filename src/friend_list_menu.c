@@ -37,7 +37,6 @@ extern u8 gPartyMenuItemPlaceholder[];
 extern struct UnkTextStruct2 gUnknown_80DD370;
 
 extern u32 sub_8026F04(struct PokemonStruct *);
-extern void GivePokemonItem(s16 index_, struct HeldItem* item);
 extern void sub_8026074(u32);
 extern void PlaySound(u32);
 bool8 sub_8026F38(struct PokemonStruct *r0);

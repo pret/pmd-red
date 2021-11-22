@@ -446,7 +446,7 @@ _0802BFE8:
 	bl GetPlayerPokemonStruct
 	adds r1, r0, 0
 	mov r0, r9
-	bl sub_808DA34
+	bl PrintPokeNameToBuffer
 	ldrb r0, [r5, 0x5]
 	bl GetPokemonMailHeadline
 	adds r1, r0, 0

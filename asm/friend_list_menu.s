@@ -364,13 +364,13 @@ _080255D2:
 	ldr r1, [r0, 0x1C]
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	adds r4, 0x50
 	ldr r0, [r5]
 	ldr r1, [r0, 0x1C]
 	adds r0, r4, 0
 	movs r2, 0x6
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	ldr r2, [r5]
 	adds r0, r2, 0
 	adds r0, 0x78
@@ -1911,13 +1911,13 @@ _0802625C:
 	ldr r1, [r0, 0x18]
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	adds r4, 0x50
 	ldr r0, [r5]
 	ldr r1, [r0, 0x18]
 	adds r0, r4, 0
 	movs r2, 0x6
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	ldr r2, [r5]
 	adds r0, r2, 0
 	adds r0, 0x7C
@@ -1945,13 +1945,13 @@ _080262A8:
 	ldr r1, [r0, 0x18]
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	adds r4, 0x50
 	ldr r0, [r5]
 	ldr r1, [r0, 0x18]
 	adds r0, r4, 0
 	movs r2, 0x6
-	bl sub_808D9AC
+	bl PrintColoredPokeNameToBuffer
 	ldr r0, [r5]
 	adds r0, 0x7C
 	movs r1, 0x1
