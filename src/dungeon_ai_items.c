@@ -1,4 +1,5 @@
 #include "global.h"
+#include "dungeon_action.h"
 #include "dungeon_ai_items.h"
 
 #include "constants/direction.h"
@@ -15,7 +16,6 @@
 #define HELD_ITEM_TOOLBOX_INDEX 0x81
 #define ITEM_TARGET_ALLY 1 << 1
 
-extern void SetAction(u16*, u16);
 extern void FindStraightThrowableTargets(struct DungeonEntity*, s32 thrownAIFlag, struct ItemSlot*, bool8 ignoreRollChance);
 extern bool8 RollPercentChance(u32);
 extern void FindRockItemTargets(struct DungeonEntity*, struct ItemSlot*, s16*[], bool8 ignoreRollChance);
