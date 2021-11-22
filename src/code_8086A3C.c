@@ -36,7 +36,7 @@ extern void PlaySoundEffect(u32);
 extern void sub_808563C(void *);
 
 // X / Y Coords??
-struct subStruct_Skarmony
+struct subStruct_Skarmory
 {
     int x;
     int y;
@@ -165,8 +165,8 @@ void SkarmoryPreFightDialogue(void)
   struct DungeonEntity * DiglettEntity;
   struct DungeonEntity * SkarmoryEntity;
 
-  struct subStruct_Skarmony local_1c;
-  struct subStruct_Skarmony local_20;
+  struct subStruct_Skarmory local_1c;
+  struct subStruct_Skarmory local_20;
   
   LeaderEntity = xxx_call_GetLeaderEntity(); // Player
   PartnerEntity = GetPartnerEntity(); // Partner
@@ -222,7 +222,7 @@ void SkarmoryReFightDialogue(void)
 {
   struct DungeonEntity * LeaderEntity;
   struct DungeonEntity * SkarmoryEntity;
-  struct subStruct_Skarmony local_14;
+  struct subStruct_Skarmory local_14;
   
   LeaderEntity = xxx_call_GetLeaderEntity();
   SkarmoryEntity = sub_8085680(3);
