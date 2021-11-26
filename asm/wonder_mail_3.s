@@ -213,8 +213,8 @@ _0802D722:
 _0802D728: .4byte gUnknown_203B2F8
 _0802D72C: .4byte gUnknown_80D4920
 _0802D730: .4byte gUnknown_80D4928
-_0802D734: .4byte gUnknown_80E014C
-_0802D738: .4byte gUnknown_80E0158
+_0802D734: .4byte gWonderMailText_NewMail
+_0802D738: .4byte gWonderMailText_OldMail
 	thumb_func_end sub_802D690
 
 	thumb_func_start sub_802D73C
@@ -291,7 +291,7 @@ _0802D7BA:
 _0802D7C0: .4byte gUnknown_203B2F8
 _0802D7C4: .4byte gUnknown_80D4920
 _0802D7C8: .4byte gUnknown_80D4928
-_0802D7CC: .4byte gUnknown_80E014C
+_0802D7CC: .4byte gWonderMailText_NewMail
 	thumb_func_end sub_802D73C
 
 	thumb_func_start sub_802D7D0

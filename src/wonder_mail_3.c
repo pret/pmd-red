@@ -65,15 +65,15 @@ extern void sub_802DA84();
 extern void sub_802D1B8();
 extern void sub_802D2A8();
 
-extern u8 gUnknown_80E0010[];
-extern u8 gUnknown_80DFFA4[];
-extern u8 gUnknown_80DFF2C[];
-extern u8 gUnknown_80DFED0[];
-extern u8 gUnknown_80DFE9C[];
+extern u8 gWonderMailText_QuicksavedCannotDeleteMail[];
+extern u8 gWonderMailText_QuicksavedCompleteMissionFirst[];
+extern u8 gWonderMailText_ReceiveAfterMissions[];
+extern u8 gWonderMailText_AlreadyReceivedLong[];
+extern u8 gWonderMailText_AlreadyReceivedShort[];
 extern u8 gUnknown_80DFE4C[];
-extern u8 gUnknown_80E0108[];
-extern u8 gUnknown_80E0094[];
-extern u8 gUnknown_80E0074[];
+extern u8 gWonderMailText_JobListFullDeleteMail[];
+extern u8 gWonderMailText_OnlyOneOKToReplace[];
+extern u8 gWonderMailText_ReceivedTheWonderMail[];
 
 extern u8 sub_80968B0(void *);
 extern u8 sub_8096F50(void *);
@@ -250,23 +250,23 @@ void sub_802D2A8(void)
     break;
   case 3:
     gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
+    sub_80141B4(gWonderMailText_AlreadyReceivedShort,0,0,0x101);
     break;
   case 4:
     gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFED0,0,0,0x101);
+    sub_80141B4(gWonderMailText_AlreadyReceivedLong,0,0,0x101);
     break;
   case 5:
     gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
+    sub_80141B4(gWonderMailText_ReceiveAfterMissions,0,0,0x101);
     break;
   case 6:
     gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
+    sub_80141B4(gWonderMailText_QuicksavedCompleteMissionFirst,0,0,0x101);
     break;
   case 7:
     gUnknown_203B2F8->unk4 = 0xc;
-    sub_80141B4(gUnknown_80E0010,0,0,0x101);
+    sub_80141B4(gWonderMailText_QuicksavedCannotDeleteMail,0,0,0x101);
     break;
   case 8:
     gUnknown_203B2F8->unk8 = 1;
@@ -294,15 +294,15 @@ void sub_802D2A8(void)
             break;
     }
     gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80E0074,0,0,0x101);
+    sub_80141B4(gWonderMailText_ReceivedTheWonderMail,0,0,0x101);
     break;
   case 9:
     sub_802D690();
-    sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
+    sub_8014248(gWonderMailText_OnlyOneOKToReplace,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
     break;
   case 10:
     gUnknown_203B2F8->unk4 = 0xb;
-    sub_80141B4(gUnknown_80E0108,0,0,0x101);
+    sub_80141B4(gWonderMailText_JobListFullDeleteMail,0,0,0x101);
     break;
   case 0xb:
     sub_802C4C8(0,0,4);
