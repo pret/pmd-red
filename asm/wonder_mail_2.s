@@ -5,319 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_802BCC4
-sub_802BCC4:
-	push {r4,lr}
-	ldr r4, _0802BCDC
-	ldr r0, [r4]
-	ldrb r0, [r0, 0x4]
-	bl GetPokemonMailText
-	adds r3, r0, 0
-	ldr r1, [r4]
-	movs r0, 0
-	str r0, [r1, 0xC]
-	str r3, [r1, 0x10]
-	b _0802BD08
-	.align 2, 0
-_0802BCDC: .4byte gUnknown_203B2D4
-_0802BCE0:
-	cmp r0, 0x23
-	bne _0802BD06
-	ldrb r2, [r3, 0x1]
-	cmp r2, 0x50
-	beq _0802BCF0
-	adds r1, r3, 0x2
-	cmp r2, 0x70
-	bne _0802BD02
-_0802BCF0:
-	ldr r0, [r4]
-	ldr r1, [r0, 0xC]
-	adds r1, 0x1
-	str r1, [r0, 0xC]
-	lsls r1, 2
-	adds r0, 0x10
-	adds r0, r1
-	adds r1, r3, 0x2
-	str r1, [r0]
-_0802BD02:
-	adds r3, r1, 0
-	b _0802BD08
-_0802BD06:
-	adds r3, 0x1
-_0802BD08:
-	ldrb r0, [r3]
-	cmp r0, 0
-	bne _0802BCE0
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_802BCC4
-
-	thumb_func_start sub_802BD14
-sub_802BD14:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r6, r0, 0
-	adds r4, r1, 0
-	mov r8, r2
-	bl HasNoMailinMailbox
-	lsls r0, 24
-	cmp r0, 0
-	beq _0802BD2E
-	movs r0, 0
-	b _0802BDD4
-_0802BD2E:
-	ldr r5, _0802BDE0
-	ldr r0, [r5]
-	cmp r0, 0
-	bne _0802BD40
-	movs r0, 0xA4
-	movs r1, 0x8
-	bl MemoryAlloc
-	str r0, [r5]
-_0802BD40:
-	ldr r0, [r5]
-	str r6, [r0, 0x38]
-	lsls r1, r6, 1
-	adds r1, r6
-	lsls r1, 3
-	adds r1, 0x40
-	adds r1, r0, r1
-	str r1, [r0, 0x3C]
-	adds r0, 0x40
-	bl sub_8006518
-	ldr r1, [r5]
-	ldr r2, [r1, 0x38]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0
-	adds r1, 0x40
-	ldr r0, _0802BDE4
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldr r2, [r5]
-	ldr r1, [r2, 0x3C]
-	adds r0, r2, 0
-	adds r0, 0xA0
-	str r0, [r1, 0x14]
-	cmp r4, 0
-	beq _0802BD8E
-	ldr r1, [r2, 0x38]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r1, r2, 0
-	adds r1, 0x48
-	adds r1, r0
-	ldr r0, [r4]
-	str r0, [r1]
-_0802BD8E:
-	ldr r0, [r5]
-	ldr r0, [r0, 0x3C]
-	mov r1, r8
-	bl sub_8012D34
-	bl ResetUnusedInputStruct
-	ldr r0, [r5]
-	adds r0, 0x40
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_800641C
-	ldr r4, [r5]
-	adds r4, 0x4
-	bl sub_802C0B8
-	adds r1, r0, 0
-	adds r0, r4, 0
-	mov r2, r8
-	adds r3, r6, 0
-	bl sub_8013848
-	ldr r0, [r5]
-	ldr r1, _0802BDE8
-	ldrh r1, [r1]
-	strh r1, [r0, 0x1C]
-	adds r0, 0x4
-	bl sub_8013984
-	bl sub_802BF30
-	bl CreateMailMenu
-	movs r0, 0x1
-_0802BDD4:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0802BDE0: .4byte gUnknown_203B2D8
-_0802BDE4: .4byte gUnknown_80DFC74
-_0802BDE8: .4byte gUnknown_203B2DC
-	thumb_func_end sub_802BD14
-
-	thumb_func_start sub_802BDEC
-sub_802BDEC:
-	push {lr}
-	lsls r0, 24
-	cmp r0, 0
-	bne _0802BE08
-	ldr r0, _0802BE04
-	ldr r0, [r0]
-	adds r0, 0x4
-	bl sub_8013660
-	movs r0, 0
-	b _0802BE6E
-	.align 2, 0
-_0802BE04: .4byte gUnknown_203B2D8
-_0802BE08:
-	ldr r0, _0802BE20
-	ldr r0, [r0]
-	adds r0, 0x4
-	bl GetKeyPress
-	cmp r0, 0x2
-	beq _0802BE2A
-	cmp r0, 0x2
-	bgt _0802BE24
-	cmp r0, 0x1
-	beq _0802BE34
-	b _0802BE48
-	.align 2, 0
-_0802BE20: .4byte gUnknown_203B2D8
-_0802BE24:
-	cmp r0, 0x4
-	beq _0802BE3E
-	b _0802BE48
-_0802BE2A:
-	movs r0, 0x1
-	bl PlayMenuSoundEffect
-	movs r0, 0x2
-	b _0802BE6E
-_0802BE34:
-	movs r0, 0
-	bl PlayMenuSoundEffect
-	movs r0, 0x3
-	b _0802BE6E
-_0802BE3E:
-	movs r0, 0x4
-	bl PlayMenuSoundEffect
-	movs r0, 0x4
-	b _0802BE6E
-_0802BE48:
-	ldr r0, _0802BE60
-	ldr r0, [r0]
-	adds r0, 0x4
-	movs r1, 0x1
-	bl sub_80138B8
-	lsls r0, 24
-	cmp r0, 0
-	bne _0802BE64
-	movs r0, 0
-	b _0802BE6E
-	.align 2, 0
-_0802BE60: .4byte gUnknown_203B2D8
-_0802BE64:
-	bl sub_802BF30
-	bl CreateMailMenu
-	movs r0, 0x1
-_0802BE6E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_802BDEC
-
-	thumb_func_start sub_802BE74
-sub_802BE74:
-	ldr r0, _0802BE90
-	ldr r1, [r0]
-	movs r0, 0x22
-	ldrsh r2, [r1, r0]
-	movs r3, 0x20
-	ldrsh r0, [r1, r3]
-	muls r0, r2
-	movs r3, 0x1C
-	ldrsh r2, [r1, r3]
-	adds r0, r2
-	adds r1, r0
-	ldrb r0, [r1]
-	bx lr
-	.align 2, 0
-_0802BE90: .4byte gUnknown_203B2D8
-	thumb_func_end sub_802BE74
-
-	thumb_func_start sub_802BE94
-sub_802BE94:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl ResetUnusedInputStruct
-	ldr r5, _0802BED8
-	ldr r0, [r5]
-	adds r0, 0x40
-	movs r1, 0
-	movs r2, 0
-	bl sub_800641C
-	bl sub_802C0B8
-	adds r1, r0, 0
-	ldr r0, [r5]
-	strh r1, [r0, 0x26]
-	adds r0, 0x4
-	bl sub_8013984
-	bl sub_802BF30
-	bl CreateMailMenu
-	cmp r4, 0
-	beq _0802BED2
-	ldr r0, [r5]
-	adds r0, 0x4
-	bl AddMenuCursorSprite
-_0802BED2:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0802BED8: .4byte gUnknown_203B2D8
-	thumb_func_end sub_802BE94
-
-	thumb_func_start sub_802BEDC
-sub_802BEDC:
-	push {r4,r5,lr}
-	ldr r4, _0802BF24
-	ldr r2, [r4]
-	cmp r2, 0
-	beq _0802BF1C
-	ldr r1, _0802BF28
-	ldrh r0, [r2, 0x1C]
-	strh r0, [r1]
-	ldr r0, [r2, 0x38]
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2, r1
-	adds r1, 0x40
-	ldr r0, _0802BF2C
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	bl ResetUnusedInputStruct
-	ldr r0, [r4]
-	adds r0, 0x40
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_800641C
-	ldr r0, [r4]
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-_0802BF1C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0802BF24: .4byte gUnknown_203B2D8
-_0802BF28: .4byte gUnknown_203B2DC
-_0802BF2C: .4byte gUnknown_80DFC5C
-	thumb_func_end sub_802BEDC
-
 	thumb_func_start sub_802BF30
 sub_802BF30:
 	push {r4,lr}
@@ -505,15 +192,15 @@ _0802C09A:
 _0802C0B4: .4byte gUnknown_203B2D8
 	thumb_func_end CreateMailMenu
 
-	thumb_func_start sub_802C0B8
-sub_802C0B8:
+	thumb_func_start CountEmptyMailSlots
+CountEmptyMailSlots:
 	push {r4,r5,lr}
 	movs r5, 0
 	movs r4, 0
 _0802C0BE:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckMailSlot
+	bl IsMailSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C0D6
@@ -532,7 +219,7 @@ _0802C0D6:
 	bx r1
 	.align 2, 0
 _0802C0E4: .4byte gUnknown_203B2D8
-	thumb_func_end sub_802C0B8
+	thumb_func_end CountEmptyMailSlots
 
 	thumb_func_start HasNoMailinMailbox
 HasNoMailinMailbox:
@@ -541,7 +228,7 @@ HasNoMailinMailbox:
 _0802C0EC:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckMailSlot
+	bl IsMailSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C0FE
@@ -1452,7 +1139,7 @@ sub_802C80C:
 _0802C812:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckJobSlot
+	bl IsJobSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C82A
@@ -1480,7 +1167,7 @@ HasNoAcceptedJobs:
 _0802C840:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckJobSlot
+	bl IsJobSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802C852

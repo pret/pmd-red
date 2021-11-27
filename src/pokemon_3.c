@@ -8,7 +8,7 @@ extern u32 gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
 extern u32 gTacticsDescriptions[];
 extern u8 *gTactics[];
-extern u8 gUnknown_810A36B[];
+extern u8 gTacticsTargetLeader[];
 
 extern s16 gReqTacticLvls[];
 extern s32 gReqIQSkillPts[];
@@ -483,10 +483,10 @@ u32 GetTacticsDescription(u8 r0)
 
 u8 TacticsTargetLeader(u8 r0)
 {
-    return gUnknown_810A36B[r0];
+    return gTacticsTargetLeader[r0];
 }
 
-void sub_808EB0C(u8 *r0, s32 pokeLevel)
+void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel)
 {
     s32 tactic;
     s32 availTactics;
@@ -496,7 +496,7 @@ void sub_808EB0C(u8 *r0, s32 pokeLevel)
     {
         if(gReqTacticLvls[tactic] <= pokeLevel)
         {
-            r0[availTactics] = tactic;
+            tacticsBuffer[availTactics] = tactic;
             availTactics++;
         }
     }
@@ -506,12 +506,13 @@ void sub_808EB0C(u8 *r0, s32 pokeLevel)
     }
     while(availTactics < NUM_TACTICS)
     {
-        r0[availTactics] = TACTIC_UNUSED;
+        tacticsBuffer[availTactics] = TACTIC_UNUSED;
         availTactics++;
     }
 }
 
-void sub_808EB48(u8 *r0, s32 pokeLevel)
+// Instead of assigning the Tactic, a bool is assigned showing it is available
+void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel)
 {
     s32 tactic;
 
@@ -519,18 +520,18 @@ void sub_808EB48(u8 *r0, s32 pokeLevel)
     {
         if(gReqTacticLvls[tactic] <= pokeLevel)
         {
-            r0[tactic] = TRUE;
+            tacticsBuffer[tactic] = TRUE;
         }
         else
         {
-            r0[tactic] = FALSE;
+            tacticsBuffer[tactic] = FALSE;
         }
     }
 }
 
 bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex)
 {
-    if(IQSkillIndex == 0)
+    if(IQSkillIndex == IQ_SKILL_NONE)
     {
         return FALSE;
     }
@@ -538,7 +539,8 @@ bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex)
     return gReqIQSkillPts[IQSkillIndex] <= pokeIQ;
 }
 
-s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ)
+// Fills buffer with all avaiable IQ Skills and returns the amount
+s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ)
 {
   s32 counter_2;
   s32 counter_1;
@@ -550,22 +552,22 @@ s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ)
   for(counter_1 = IQ_SKILL_TYPE_ADVANTAGE_MASTER; counter_1 < NUM_IQ_SKILLS; counter_1++) {
     iqSkill_u8 = counter_1; // force this cast to be in a reg
     if (HasIQForSkill(pokeIQ, iqSkill_u8)) {
-      param_1[availIQSkills] = iqSkill_u8;
+      iqSkillBuffer[availIQSkills] = iqSkill_u8;
       availIQSkills++;
     }
   }
 
   for (counter_2 = availIQSkills; counter_2 < NUM_IQ_SKILLS; counter_2++) {
-    param_1[counter_2] = 0;
+    iqSkillBuffer[counter_2] = IQ_SKILL_NONE;
   }
   return availIQSkills;
 }
 
-void sub_808EBF4(u8 *param_1, u32 param_2)
+void ToggleIQSkill(u8 *param_1, u32 skillIndex)
 {
   int iVar2; // a mask?
 
-  iVar2 = 1 << (param_2);
+  iVar2 = 1 << (skillIndex);
   if (IsIQSkillSet(param_1, iVar2)) {
     param_1[0] = param_1[0] & ~iVar2;
     param_1[1] = param_1[1] & ~(iVar2 >> 8);
@@ -573,7 +575,7 @@ void sub_808EBF4(u8 *param_1, u32 param_2)
   }
   else
   {
-    SetIQSkill(param_1, param_2);
+    SetIQSkill(param_1, skillIndex);
   }
 }
 

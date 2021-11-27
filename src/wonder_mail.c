@@ -197,7 +197,7 @@ u32 sub_8027F88(void)
   for(counter = 0; counter < PASSWORD_BUFFER_SIZE; counter++){
     gUnknown_203B2C0->passwordBuffer[counter] = 0;
   }
-  gUnknown_203B2C0->unk0 = 0x3D;
+  gUnknown_203B2C0->fallbackState = 0x3D;
   sub_8028B04(0); // Set initial state to 0?
   return 1;
 }
@@ -706,50 +706,44 @@ void sub_8028B04(u32 r0)
 }
 
 // Wonder Mail Linking...
-void sub_8028B1C(u32 r0)
+void sub_8028B1C(u32 errorCode)
 {
-    switch(r0)
+    switch(errorCode)
     {
-        case 0:
+        case WONDER_MAIL_GOOD:
             break;
         case 1:
-        case 2:
+        case WONDER_MAIL_NO_RESPONSE:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 3:
+        case WONDER_MAIL_INCORRECT_NUM_SYSTEMS:
             sub_80141B4(gWonderMailNumGBAsText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 4:
+        case WONDER_MAIL_DIFFERENT_MODES:
             sub_80141B4(gWonderMailWrongModeText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 5:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 6:
+        case WONDER_MAIL_NO_ROOM_STORAGE:
             sub_80141B4(gWonderMailStorageFullText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 7:
+        case WONDER_MAIL_DUPLICATE_MAIL:
             sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 8:
-            break;
-        case 9:
+        case WONDER_MAIL_NOT_ELIGIBLE_1:
             sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 10:
-            break;
-        case 11:
+        case WONDER_MAIL_NOT_ELIGIBLE_2:
             sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 12:
-            break;
-        case 13:
+        case WONDER_MAIL_NO_ROOM_MAIL:
             sub_80141B4(gWonderMailNoRoomText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 14:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case 15:
+        case WONDER_MAIL_NOT_READY:
             sub_80141B4(gWonderMailFriendErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         default:
@@ -1134,7 +1128,7 @@ void sub_8029044(void)
             sub_8028B04(32);
             break;
         case 4:
-            gUnknown_203B2C0->unk0 = 0x1F;
+            gUnknown_203B2C0->fallbackState = 0x1F;
             gUnknown_203B2C0->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1171,7 +1165,7 @@ void sub_80290F0(void)
             sub_8028B04(34);
             break;
         case 12:
-            gUnknown_203B2C0->unk0 = 0x3D;
+            gUnknown_203B2C0->fallbackState = 0x3D;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1199,14 +1193,14 @@ void sub_80291AC(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_803092C();
-            if(gUnknown_203B2C0->unk0 == 0x3D)
+            if(gUnknown_203B2C0->fallbackState == 0x3D)
             {
                 sub_8035CF4(&(gUnknown_203B2C0->unk21C), 3, 1);
                 sub_8028B04(0x20);
             }
             else
             {
-                sub_8028B04(gUnknown_203B2C0->unk0);
+                sub_8028B04(gUnknown_203B2C0->fallbackState);
             }
         default:
             break;
@@ -1484,7 +1478,7 @@ void sub_80295D8(void)
             sub_8028B04(0x2B);
             break;
         case 4:
-            gUnknown_203B2C0->unk0 = 0x2A;
+            gUnknown_203B2C0->fallbackState = 0x2A;
             gUnknown_203B2C0->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1521,7 +1515,7 @@ void sub_8029684(void)
             sub_8028B04(0x2D);
             break;
         case 0xC:
-            gUnknown_203B2C0->unk0 = 0x3D;
+            gUnknown_203B2C0->fallbackState = 0x3D;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1547,14 +1541,14 @@ void sub_8029740(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_803092C();
-            if(gUnknown_203B2C0->unk0 == 0x3D)
+            if(gUnknown_203B2C0->fallbackState == 0x3D)
             {
                 sub_8035CF4(&(gUnknown_203B2C0->unk21C), 3, 1);
                 sub_8028B04(0x2B);
             }
             else
             {
-                sub_8028B04(gUnknown_203B2C0->unk0);
+                sub_8028B04(gUnknown_203B2C0->fallbackState);
             }
             break;
     }
@@ -1594,7 +1588,7 @@ void sub_80297D4(void)
             sub_8028B04(0x34);
             break;
         case 4:
-            gUnknown_203B2C0->unk0 = 0x33;
+            gUnknown_203B2C0->fallbackState = 0x33;
             gUnknown_203B2C0->unk544 = sub_8023B44();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1621,7 +1615,7 @@ void sub_8029884(void)
             sub_8028B04(4);
             break;
         case 0xC:
-            gUnknown_203B2C0->unk0 = 0x3D;
+            gUnknown_203B2C0->fallbackState = 0x3D;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1656,14 +1650,14 @@ void sub_8029944(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
             sub_8023B7C(1);
-            if(gUnknown_203B2C0->unk0 == 0x3D)
+            if(gUnknown_203B2C0->fallbackState == 0x3D)
             {
                 sub_8035CF4(&(gUnknown_203B2C0->unk21C), 3, 1);
                 sub_8028B04(0x34);
             }
             else
             {
-                sub_8028B04(gUnknown_203B2C0->unk0);
+                sub_8028B04(gUnknown_203B2C0->fallbackState);
             }
 
     }

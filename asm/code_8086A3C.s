@@ -68,12 +68,12 @@ TeamMeaniesPreFightDialogue:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087048
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808704C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -81,27 +81,27 @@ TeamMeaniesPreFightDialogue:
 	movs r0, 0xA
 	bl sub_8083E88
 	ldr r0, _08087050
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087054
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087058
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808705C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087060
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -131,12 +131,12 @@ TeamMeaniesReFightDialogue:
 	adds r5, r0, 0
 	bl sub_8086448
 	ldr r0, _08087118
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808711C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -145,12 +145,12 @@ TeamMeaniesReFightDialogue:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087120
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087124
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -177,9 +177,9 @@ TeamMeaniesReFightDialogue:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _08087128
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	ldr r0, _0808712C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -493,7 +493,7 @@ ZapdosPreFightDialogue:
 	movs r3, 0x6
 	bl sub_80869E4
 	ldr r0, _08087470
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -508,7 +508,7 @@ ZapdosPreFightDialogue:
 	movs r3, 0x4
 	bl sub_80869E4
 	ldr r0, _08087474
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -519,7 +519,7 @@ ZapdosPreFightDialogue:
 	lsls r0, 1
 	bl PlaySoundEffect
 	ldr r0, _08087478
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	ldr r0, [sp, 0x68]
 	bl sub_8087704
 	movs r0, 0x9
@@ -529,7 +529,7 @@ ZapdosPreFightDialogue:
 	movs r2, 0x4
 	bl sub_806CDD4
 	ldr r0, _0808747C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -599,12 +599,12 @@ _0808748E:
 	movs r3, 0x4
 	bl sub_80869E4
 	ldr r0, _08087518
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0x3C
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808751C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -655,28 +655,28 @@ _0808752A:
 	movs r3, 0x3
 	bl sub_80869E4
 	ldr r0, _080875B0
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x3
 	bl sub_808775C
 	ldr r0, _080875B4
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x1
 	bl sub_808775C
 	ldr r0, _080875B8
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x2
 	bl sub_808775C
 	ldr r0, _080875BC
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708

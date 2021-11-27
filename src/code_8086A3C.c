@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/direction.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "pokemon.h"
@@ -22,7 +23,7 @@ extern void sub_8085860(s32 r0, u32 r1);
 extern void sub_8068FE0(struct DungeonEntity *, u32, u32);
 extern void sub_8097FA8(u32);
 extern void sub_80858AC(void *, u32);
-extern void sub_8052910(u8 *);
+extern void DisplayDungeonDialogue(u8 *);
 extern void sub_806CDD4(struct DungeonEntity *, u32, u32);
 extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
 extern void sub_8083E88(u32);
@@ -124,7 +125,7 @@ void sub_8086B14(void)
   sub_8083E88(0x72);
   sub_8085374();
   sub_80854D4();
-  sub_8085930(4);
+  sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8086A3C(SkarmoryEntity);
   DiglettEntity->entityData->unk15C = 1;
@@ -146,7 +147,7 @@ void sub_8086B94(void)
   sub_8068FE0(SkarmoryEntity,0x21c,0);
   sub_8068FE0(DiglettEntity,0x21c,0);
   sub_80854D4();
-  sub_8085930(4);
+  sub_8085930(DIRECTION_NORTH);
   sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
 }
 
@@ -184,33 +185,33 @@ void SkarmoryPreFightDialogue(void)
   sub_80862BC(PartnerEntity);
   sub_803E708(0x20,0x46);
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100768);
+  DisplayDungeonDialogue(&gUnknown_8100768);
   sub_80858AC(&local_1c,0x40);
   sub_803E708(0x40,0x46);
   sub_80858AC(&local_20,0x30);
-  sub_8052910(&gUnknown_8100798);
+  DisplayDungeonDialogue(&gUnknown_8100798);
   sub_803E708(10,0x46);
   DiglettEntity->entityData->unk15D = 1;
   sub_80858AC(&local_1c,0x30);
-  sub_8052910(&gUnknown_8100820); // Diglett: ...I...\nI'm scared.
+  DisplayDungeonDialogue(&gUnknown_8100820); // Diglett: ...I...\nI'm scared.
   sub_803E708(10,0x46);
   sub_80858AC(&local_20,0x20);
   sub_803E708(0x20,0x46);
   sub_8086E74(SkarmoryEntity);
-  sub_8052910(&gUnknown_8100844); // Skarmory: You!\nWhat do you think you're doing here?!
+  DisplayDungeonDialogue(&gUnknown_8100844); // Skarmory: You!\nWhat do you think you're doing here?!
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100880);
+  DisplayDungeonDialogue(&gUnknown_8100880);
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100928);
+  DisplayDungeonDialogue(&gUnknown_8100928);
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100A04);
+  DisplayDungeonDialogue(&gUnknown_8100A04);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  sub_8052910(&gUnknown_8100B80);
+  DisplayDungeonDialogue(&gUnknown_8100B80);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  sub_8052910(&gUnknown_8100BC0);
+  DisplayDungeonDialogue(&gUnknown_8100BC0);
   sub_80869E4(PartnerEntity,4,2,4);
   sub_80869E4(LeaderEntity,4,1,4);
   sub_803E708(10,0x46);
@@ -232,12 +233,12 @@ void SkarmoryReFightDialogue(void)
   sub_803E708(10,0x46);
   sub_8086E74(SkarmoryEntity);
   sub_80858AC(&local_14,0x10);
-  sub_8052910(&gUnknown_8100C90);
+  DisplayDungeonDialogue(&gUnknown_8100C90);
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100CBC);
+  DisplayDungeonDialogue(&gUnknown_8100CBC);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  sub_8052910(&gUnknown_8100CDC);
+  DisplayDungeonDialogue(&gUnknown_8100CDC);
   sub_803E708(10,0x46);
   sub_80858AC(&LeaderEntity->posPixelX,0x10);
   sub_8083E88(0xb);
@@ -247,7 +248,7 @@ void sub_8086E40(void)
 {
   SpriteLookAroundEffect(xxx_call_GetLeaderEntity());
   sub_803E708(10,0x46);
-  sub_8052910(&gUnknown_8100D3C);
+  DisplayDungeonDialogue(&gUnknown_8100D3C);
   sub_803E708(10,0x46);
   gDungeonGlobalData->unk2 = 1;
 }
@@ -268,7 +269,7 @@ void sub_8086E9C(void)
   sub_8083E88(0x72);
   sub_8085374();
   sub_80854D4();
-  sub_8085930(4);
+  sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8086A3C);
   sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
@@ -283,7 +284,7 @@ void sub_8086F00(void)
   
   LeaderEntity = xxx_call_GetLeaderEntity();
   sub_80854D4();
-  sub_8085930(4);
+  sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_METAPOD);

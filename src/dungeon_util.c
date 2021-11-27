@@ -2,17 +2,7 @@
 #include "dungeon_util.h"
 
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
-
-struct unk8049590
-{
-    u16 unk0;
-    u16 fill2;
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-};
-
-extern struct unk8049590 *GetMapEntity(s16, s16);
+extern struct MapTile *GetMapEntity(s16, s16);
 
 bool8 EntityExists(struct DungeonEntity *entity)
 {
@@ -33,7 +23,7 @@ u8 GetEntityRoomIndex(struct DungeonEntity *entity)
     return entity->roomIndex;
 }
 
-struct DungeonEntityData *sub_8045104(struct DungeonEntity *entity)
+struct DungeonEntityData *GetTrapData(struct DungeonEntity *entity)
 {
     return entity->entityData;
 }
@@ -58,7 +48,7 @@ struct MapTile *sub_8045114(struct DungeonEntity *entity)
     return GetMapTileAtPosition(entity->posWorldX, entity->posWorldY);
 }
 
-struct unk8049590 *sub_8045128(struct DungeonEntity *entity)
+struct MapTile *sub_8045128(struct DungeonEntity *entity)
 {
     return GetMapEntity(entity->posWorldX, entity->posWorldY);
 }

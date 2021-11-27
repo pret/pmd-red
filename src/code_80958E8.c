@@ -34,7 +34,7 @@ extern bool8 sub_809095C(u8);
 extern s32 sub_8090298(u8);
 extern bool8 sub_809017C(u8 *);
 extern s16 GetBaseSpecies(s16);
-extern bool8 sub_8092040(u8);
+extern bool8 IsInvalidItemReward(u8);
 extern u8 sub_803C1D0(u8 *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
@@ -107,11 +107,11 @@ bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
 bool8 ValidateWonderMail(struct WonderMail *data)
 {
 
-    if(data->missionType > DELIVER_ITEM)
+    if(data->missionType > WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM)
         return FALSE;
     else
     {
-        if(data->missionType == DELIVER_ITEM && GetMaxItemCount(data->dungeon) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemCount(data->dungeon) == 0)
             return FALSE;
 
         if(data->unk2 > 9)
@@ -141,11 +141,11 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
 
         // Item Delivery/Finding
-        if((u8)(data->missionType - 1) > FIND_POKE)
+        if((u8)(data->missionType - 1) > WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET)
             if(data->targetSpecies != data->clientSpecies)
                 return FALSE;
 
-        if(sub_8092040(data->targetItem))
+        if(IsInvalidItemReward(data->targetItem))
             return FALSE;
         if(IsThrowableItem(data->targetItem))
             return FALSE;
@@ -153,13 +153,13 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
 
         // Item finding
-        if(data->missionType == FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon, data->targetItem) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon, data->targetItem) == 0)
             return FALSE;
 
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
             return FALSE;
 
-        if(sub_8092040(data->itemReward))
+        if(IsInvalidItemReward(data->itemReward))
             return FALSE;
 
         // Friend Area Reward

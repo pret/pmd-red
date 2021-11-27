@@ -27,7 +27,7 @@ extern void sub_8085C54(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 void SpriteLookAroundEffect(struct DungeonEntity *r0);
-extern void sub_8052910(u32);
+extern void DisplayDungeonDialogue(u32);
 void sub_8086494();
 
 extern u32 gUnknown_8107314[];
@@ -171,16 +171,16 @@ void sub_8086494(void)
 {
     s32 iVar1;
 
-    sub_8085930(3);
+    sub_8085930(DIRECTION_NORTHEAST);
     sub_803E708(4, 0x46);
 
-    sub_8085930(2);
+    sub_8085930(DIRECTION_EAST);
     sub_803E708(4, 0x46);
 
-    sub_8085930(1);
+    sub_8085930(DIRECTION_SOUTHEAST);
     sub_803E708(4, 0x46);
 
-    sub_8085930(0);
+    sub_8085930(DIRECTION_SOUTH);
     sub_803E708(4, 0x46);
 
     sub_80855E4(sub_80863C8);
@@ -312,7 +312,7 @@ void sub_80866C4(u32 r0)
 
     SpriteLookAroundEffect(xxx_call_GetLeaderEntity());
     sub_803E708(0xA, 0x46);
-    sub_8052910(r0);
+    DisplayDungeonDialogue(r0);
     sub_803E708(0xA, 0x46);
     sub_8086494();
     gDungeonGlobalData->unk2 = 1;
@@ -461,16 +461,16 @@ void sub_8086910(struct DungeonEntity *r0)
 
 void sub_808692C(void)
 {
-    sub_80859F0(5);
+    sub_80859F0(DIRECTION_NORTHWEST);
     sub_803E708(0x4, 0x46);
 
-    sub_80859F0(6);
+    sub_80859F0(DIRECTION_WEST);
     sub_803E708(0x4, 0x46);
 
-    sub_80859F0(7);
+    sub_80859F0(DIRECTION_SOUTHWEST);
     sub_803E708(0x4, 0x46);
 
-    sub_80859F0(0);
+    sub_80859F0(DIRECTION_SOUTH);
     sub_803E708(0x4, 0x46);
 }
 

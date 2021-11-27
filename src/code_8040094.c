@@ -25,34 +25,25 @@ extern void SendMessage(u32, const char *);
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
-struct unk8049590
-{
-    u32 unk0;
-    u16 unk4;
-};
-
-extern struct unk8049590 *GetMapEntity(u32, u32);
+extern struct MapTile *GetMapEntity(u32, u32);
 
 // Luminous Orb???
-void sub_804002C(u32 param_1)
+void HandleLuminousOrbAction(u32 param_1)
 {
-  struct unk8049590 *iVar1;
-  int innerCounter;
-  int iVar3;
-  int iVar4;
+  struct MapTile *mapTile;
+  int XCoord;
+  int YCoord;
 
   gDungeonGlobalData->unk1820B = 1;
-  iVar3 = 0;
-  do {
-    innerCounter = 0;
-    iVar4 = iVar3 + 1;
-    do {
-      iVar1 = GetMapEntity(innerCounter, iVar3);
-      iVar1->unk4 = iVar1->unk4 | 1;
-      innerCounter++;
-    } while (innerCounter < 0x38);
-    iVar3 = iVar4;
-  } while (iVar4 < 0x20);
+
+  for(YCoord = 0; YCoord <= DUNGEON_MAX_SIZE_Y; YCoord++)
+  {
+    for(XCoord = 0; XCoord <= DUNGEON_MAX_SIZE_X; XCoord++)
+    {
+      mapTile = GetMapEntity(XCoord, YCoord);
+      mapTile->unk4 = mapTile->unk4 | 1;
+    }
+  }
   sub_803F580(0);
   sub_8049ED4();
   sub_8040A84();

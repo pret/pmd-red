@@ -602,7 +602,7 @@ sub_8095F8C:
 _08095F92:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckMailSlot
+	bl IsMailSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _08095FA2
@@ -666,8 +666,8 @@ sub_8095FE8:
 _08095FFC: .4byte gUnknown_203B490
 	thumb_func_end sub_8095FE8
 
-	thumb_func_start CheckMailSlot
-CheckMailSlot:
+	thumb_func_start IsMailSlotEmpty
+IsMailSlotEmpty:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -689,7 +689,7 @@ _08096020:
 _08096022:
 	pop {r1}
 	bx r1
-	thumb_func_end CheckMailSlot
+	thumb_func_end IsMailSlotEmpty
 
 	thumb_func_start sub_8096028
 sub_8096028:
@@ -1994,7 +1994,7 @@ GetNumAcceptedJobs:
 _080969B2:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl CheckJobSlot
+	bl IsJobSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _080969C2
@@ -2155,8 +2155,8 @@ sub_8096AB4:
 _08096AC8: .4byte gUnknown_203B490
 	thumb_func_end sub_8096AB4
 
-	thumb_func_start CheckJobSlot
-CheckJobSlot:
+	thumb_func_start IsJobSlotEmpty
+IsJobSlotEmpty:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2179,7 +2179,7 @@ _08096AF0:
 _08096AF2:
 	pop {r1}
 	bx r1
-	thumb_func_end CheckJobSlot
+	thumb_func_end IsJobSlotEmpty
 
 	thumb_func_start sub_8096AF8
 sub_8096AF8:

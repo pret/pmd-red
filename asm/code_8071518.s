@@ -5,29 +5,6 @@
 
 	.text
 
-	thumb_func_start ShouldAvoidEnemies_2
-ShouldAvoidEnemies_2:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	bl ShouldAvoidEnemies
-	lsls r0, 24
-	cmp r0, 0
-	bne _0807152E
-	movs r0, 0
-	b _08071538
-_0807152E:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl CheckRunAwayVisualFlag
-	movs r0, 0x1
-_08071538:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end ShouldAvoidEnemies_2
-
 	thumb_func_start CheckRunAwayVisualFlag
 CheckRunAwayVisualFlag:
 	push {r4-r7,lr}

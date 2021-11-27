@@ -1,15 +1,6 @@
 #ifndef GUARD_CONSTANTS_WONDER_MAIL_H
 #define GUARD_CONSTANTS_WONDER_MAIL_H 
 
-enum MissionType
-{
-    HELP_POKE,
-    FIND_POKE,
-    ESCORT,
-    FIND_ITEM,
-    DELIVER_ITEM
-};
-
 enum RewardType
 {
     MONEY,

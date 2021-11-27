@@ -690,8 +690,8 @@ sub_80528F4:
 	bx r0
 	thumb_func_end sub_80528F4
 
-	thumb_func_start sub_8052910
-sub_8052910:
+	thumb_func_start DisplayDungeonDialogue
+DisplayDungeonDialogue:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -987,7 +987,7 @@ _08052B72:
 	bx r0
 	.align 2, 0
 _08052B88: .4byte gUnknown_80F7AEA
-	thumb_func_end sub_8052910
+	thumb_func_end DisplayDungeonDialogue
 
 	thumb_func_start sub_8052B8C
 sub_8052B8C:
@@ -4954,7 +4954,7 @@ _08054F40:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BEA0
+	bl LuminousOrbAction
 	b _080554BA
 _08054F4E:
 	adds r0, r7, 0

@@ -20350,10 +20350,10 @@ _0807FD12:
 	cmp r0, 0x2
 	bne _0807FD6E
 	ldr r0, [r6, 0x14]
-	bl sub_8045104
+	bl GetTrapData
 	strb r5, [r0]
 	ldr r0, [r6, 0x14]
-	bl sub_8045104
+	bl GetTrapData
 	mov r1, r8
 	strb r1, [r0, 0x1]
 	ldr r0, [r6, 0x14]
@@ -20566,7 +20566,7 @@ _0807FECE:
 	b _080801B4
 _0807FED8:
 	mov r0, r10
-	bl sub_8045104
+	bl GetTrapData
 	mov r8, r0
 	ldr r0, _0807FF58
 	mov r2, r8
@@ -22129,7 +22129,7 @@ sub_8080B00:
 	cmp r0, 0x2
 	bne _08080B26
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	strb r5, [r0]
 _08080B26:
 	bl sub_8049ED4
@@ -22305,7 +22305,7 @@ _08080C6A:
 	cmp r0, 0x2
 	bne _08080CC8
 	adds r0, r5, 0
-	bl sub_8045104
+	bl GetTrapData
 	adds r4, r0, 0
 	adds r0, r6, 0
 	adds r1, r4, 0

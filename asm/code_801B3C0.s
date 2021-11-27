@@ -465,7 +465,7 @@ sub_801BEEC:
 	lsls r0, 16
 	asrs r5, r0, 16
 	adds r0, r5, 0
-	bl sub_801C5F0
+	bl HasNoAvailIQSkills
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -854,7 +854,7 @@ _0801C1EA:
 	adds r0, 0x20
 	adds r1, 0x28
 	ldrb r1, [r1]
-	bl sub_808EBF4
+	bl ToggleIQSkill
 	movs r0, 0x1
 	bl sub_801BFB4
 	b _0801C21E
@@ -899,7 +899,7 @@ sub_801C244:
 	lsls r0, 16
 	asrs r0, 16
 	adds r4, r0, 0
-	bl sub_801C5F0
+	bl HasNoAvailIQSkills
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801C25E
@@ -1348,34 +1348,5 @@ _0801C5E4: .4byte gUnknown_80DBE18
 _0801C5E8: .4byte gUnknown_80DBE1C
 _0801C5EC: .4byte gUnknown_203B23C
 	thumb_func_end sub_801C4C8
-
-	thumb_func_start sub_801C5F0
-sub_801C5F0:
-	push {lr}
-	sub sp, 0x18
-	lsls r0, 16
-	asrs r0, 16
-	ldr r2, _0801C614
-	movs r1, 0x58
-	muls r1, r0
-	ldr r0, [r2]
-	adds r0, r1
-	movs r2, 0x14
-	ldrsh r1, [r0, r2]
-	mov r0, sp
-	bl GetNumAvailableIQSkills
-	cmp r0, 0
-	beq _0801C618
-	movs r0, 0
-	b _0801C61A
-	.align 2, 0
-_0801C614: .4byte gRecruitedPokemonRef
-_0801C618:
-	movs r0, 0x1
-_0801C61A:
-	add sp, 0x18
-	pop {r1}
-	bx r1
-	thumb_func_end sub_801C5F0
 
         .align 2,0
