@@ -472,11 +472,863 @@ gUnknown_810CF00: @ 810CF00
 
 	.global gStatusNames
 gStatusNames: @ 810CF1C
-	.incbin "baserom.gba", 0x10CF1C, 0x70C
+    .4byte sUnknown_810D624
+    .4byte sUnknown_810D61C
+    .4byte sUnknown_810D608
+    .4byte sUnknown_810D5F0
+    .4byte sUnknown_810D5E8
+    .4byte sUnknown_810D5E0
+    .4byte sUnknown_810D5C4
+    .4byte sUnknown_810D5BC
+    .4byte sUnknown_810D5B0
+    .4byte sUnknown_810D5A0
+    .4byte sUnknown_810D594
+    .4byte sUnknown_810D588
+    .4byte sUnknown_810D580
+    .4byte sUnknown_810D574
+    .4byte sUnknown_810D560
+    .4byte sUnknown_810D550
+    .4byte sUnknown_810D540
+    .4byte sUnknown_810D534
+    .4byte sUnknown_810D524
+    .4byte sUnknown_810D508
+    .4byte sUnknown_810D4FC
+    .4byte sUnknown_810D4F0
+    .4byte sUnknown_810D4E8
+    .4byte sUnknown_810D4DC
+    .4byte sUnknown_810D4D4
+    .4byte sUnknown_810D4C0
+    .4byte sUnknown_810D4B4
+    .4byte sUnknown_810D4AC
+    .4byte sUnknown_810D4A0
+    .4byte sUnknown_810D48C
+    .4byte sUnknown_810D478
+    .4byte sUnknown_810D464
+    .4byte sUnknown_810D44C
+    .4byte sUnknown_810D438
+    .4byte sUnknown_810D428
+    .4byte sUnknown_810D41C
+    .4byte sUnknown_810D408
+    .4byte sUnknown_810D3F0
+    .4byte sUnknown_810D3E0
+    .4byte sUnknown_810D3CC
+    .4byte sUnknown_810D3C0
+    .4byte sUnknown_810D3B0
+    .4byte sUnknown_810D3A0
+    .4byte sUnknown_810D38C
+    .4byte sUnknown_810D378
+    .4byte sUnknown_810D364
+    .4byte sUnknown_810D354
+    .4byte sUnknown_810D340
+    .4byte sUnknown_810D32C
+    .4byte sUnknown_810D31C
+    .4byte sUnknown_810D30C
+    .4byte sUnknown_810D2F8
+    .4byte sUnknown_810D2E4
+    .4byte sUnknown_810D2C8
+    .4byte sUnknown_810D2BC
+    .4byte sUnknown_810D2B0
+    .4byte sUnknown_810D2A8
+    .4byte sUnknown_810D2A0
+    .4byte sUnknown_810D28C
+    .4byte sUnknown_810D274
+    .4byte sUnknown_810D25C
+    .4byte sUnknown_810D248
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D228
+    .4byte sUnknown_810D20C
+    .4byte sUnknown_810D1F8
+    .4byte sUnknown_810D1DC
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D1C4
+    .4byte sUnknown_810D1A8
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D19C
+    .4byte sUnknown_810D188
+    .4byte sUnknown_810D178
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D170
+    .4byte sUnknown_810D160
+    .4byte sUnknown_810D148
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D130
+    .4byte sUnknown_810D11C
+    .4byte sUnknown_810D100
+    .4byte sUnknown_810D0EC
+    .4byte sUnknown_810D0D8
+    .4byte sUnknown_810D0C4
+    .4byte sUnknown_810D0B8
+    .4byte sUnknown_810D0A4
+    .4byte sUnknown_810D094
+    .4byte sUnknown_810D080
+
+sUnknown_810D080:
+    .string "Can locate stairs\0"
+    .align 2, 0
+
+sUnknown_810D094:
+    .string "Sped up attacks\0"
+    .align 2, 0
+
+sUnknown_810D0A4:
+    .string "Heard Perish Song\0"
+    .align 2, 0
+
+sUnknown_810D0B8:
+    .string "Terrified\0"
+    .align 2, 0
+
+sUnknown_810D0C4:
+    .string "Exposed to sight\0"
+    .align 2, 0
+
+sUnknown_810D0D8:
+    .string "Bearing a grudge\0"
+    .align 2, 0
+
+sUnknown_810D0EC:
+    .string "Can locate items\0"
+    .align 2, 0
+
+sUnknown_810D100:
+    .string "Can locate other Pokémon\0"
+    .align 2, 0
+
+sUnknown_810D11C:
+    .string "Stockpiling power\0"
+    .align 2, 0
+
+sUnknown_810D130:
+    .string "Unable to use its mouth\0"
+    .align 2, 0
+
+sUnknown_810D148:
+    .string "Seeing the unseeable\0"
+    .align 2, 0
+
+sUnknown_810D160:
+    .string "Hallucinating\0"
+    .align 2, 0
+
+sUnknown_810D170:
+    .string "Blinded\0"
+    .align 2, 0
+
+sUnknown_810D178:
+    .string "Travel anywhere\0"
+    .align 2, 0
+
+sUnknown_810D188:
+    .string "Transformed Pokémon\0"
+    .align 2, 0
+
+sUnknown_810D19C:
+    .string "Invisible\0"
+    .align 2, 0
+
+sUnknown_810D1A8:
+    .string "Thrown items pierce things\0"
+    .align 2, 0
+
+sUnknown_810D1C4:
+    .string "Capable of throwing far\0"
+    .align 2, 0
+
+sUnknown_810D1DC:
+    .string "Enhanced critical-hit rate\0"
+    .align 2, 0
+
+sUnknown_810D1F8:
+    .string "Inflicts set damage\0"
+    .align 2, 0
+
+sUnknown_810D20C:
+    .string "Afflicted by Smokescreen\0"
+    .align 2, 0
+
+sUnknown_810D228:
+    .string "Total accuracy for moves\0"
+    .align 2, 0
+
+sUnknown_810D244:
+    .string "- \0"
+    .align 2, 0
+
+sUnknown_810D248:
+    .string "Destiny Bond in use\0"
+    .align 2, 0
+
+sUnknown_810D25C:
+    .string "Afflicted by Leech Seed\0"
+    .align 2, 0
+
+sUnknown_810D274:
+    .string "Immobilized by hunger\0"
+    .align 2, 0
+
+sUnknown_810D28C:
+    .string "Ready to use Snatch\0"
+    .align 2, 0
+
+sUnknown_810D2A0:
+    .string "Decoy\0"
+    .align 2, 0
+
+sUnknown_810D2A8:
+    .string "Cursed\0"
+    .align 2, 0
+
+sUnknown_810D2B0:
+    .string "Weakened\0"
+    .align 2, 0
+
+sUnknown_810D2BC:
+    .string "Mist in use\0"
+    .align 2, 0
+
+sUnknown_810D2C8:
+    .string "Ready to use Vital Throw\0"
+    .align 2, 0
+
+sUnknown_810D2E4:
+    .string "Conversion 2 in use\0"
+    .align 2, 0
+
+sUnknown_810D2F8:
+    .string "Mirror Move in use\0"
+    .align 2, 0
+
+sUnknown_810D30C:
+    .string "Mini Counter\0"
+    .align 2, 0
+
+sUnknown_810D31C:
+    .string "Set to endure\0"
+    .align 2, 0
+
+sUnknown_810D32C:
+    .string "Mirror Coat is up\0"
+    .align 2, 0
+
+sUnknown_810D340:
+    .string "Protecting itself\0"
+    .align 2, 0
+
+sUnknown_810D354:
+    .string "Making a wish\0"
+    .align 2, 0
+
+sUnknown_810D364:
+    .string "Magic Coat is up\0"
+    .align 2, 0
+
+sUnknown_810D378:
+    .string "Ready to counter\0"
+    .align 2, 0
+
+sUnknown_810D38C:
+    .string "Light Screen is up\0"
+    .align 2, 0
+
+sUnknown_810D3A0:
+    .string "Safeguard is up\0"
+    .align 2, 0
+
+sUnknown_810D3B0:
+    .string "Reflect in use\0"
+    .align 2, 0
+
+sUnknown_810D3C0:
+    .string "Slowed down\0"
+    .align 2, 0
+
+sUnknown_810D3CC:
+    .string "Shaking with rage\0"
+    .align 2, 0
+
+sUnknown_810D3E0:
+    .string "Using Charge\0"
+    .align 2, 0
+
+sUnknown_810D3F0:
+    .string "Burrowed underground\0"
+    .align 2, 0
+
+sUnknown_810D408:
+    .string "Hiding underwater\0"
+    .align 2, 0
+
+sUnknown_810D41C:
+    .string "Bouncing\0"
+    .align 2, 0
+
+sUnknown_810D428:
+    .string "Flying high up\0"
+    .align 2, 0
+
+sUnknown_810D438:
+    .string "Charging Skull Bash\0"
+    .align 2, 0
+
+sUnknown_810D44C:
+    .string "Charging Focus Punch\0"
+    .align 2, 0
+
+sUnknown_810D464:
+    .string "Charging Razor Wind\0"
+    .align 2, 0
+
+sUnknown_810D478:
+    .string "Charging Sky Attack\0"
+    .align 2, 0
+
+sUnknown_810D48C:
+    .string "Charging Solarbeam\0"
+    .align 2, 0
+
+sUnknown_810D4A0:
+    .string "Bide in use\0"
+    .align 2, 0
+
+sUnknown_810D4AC:
+    .string "Sped up\0"
+    .align 2, 0
+
+sUnknown_810D4B4:
+    .string "Infatuated\0"
+    .align 2, 0
+
+sUnknown_810D4C0:
+    .string "Encore in effect\0"
+    .align 2, 0
+
+sUnknown_810D4D4:
+    .string "Taunted\0"
+    .align 2, 0
+
+sUnknown_810D4DC:
+    .string "Cowering\0"
+    .align 2, 0
+
+sUnknown_810D4E8:
+    .string "Paused\0"
+    .align 2, 0
+
+sUnknown_810D4F0:
+    .string "Confused\0"
+    .align 2, 0
+
+sUnknown_810D4FC:
+    .string "Cringing\0"
+    .align 2, 0
+
+sUnknown_810D508:
+    .string "About to drop from hunger\0"
+    .align 2, 0
+
+sUnknown_810D524:
+    .string "Being squeezed\0"
+    .align 2, 0
+
+sUnknown_810D534:
+    .string "Petrified\0"
+    .align 2, 0
+
+sUnknown_810D540:
+    .string "Ingrain in use\0"
+    .align 2, 0
+
+sUnknown_810D550:
+    .string "Wrapped by foe\0"
+    .align 2, 0
+
+sUnknown_810D560:
+    .string "Wrapped around foe\0"
+    .align 2, 0
+
+sUnknown_810D574:
+    .string "Immobilized\0"
+    .align 2, 0
+
+sUnknown_810D580:
+    .string "Frozen\0"
+    .align 2, 0
+
+sUnknown_810D588:
+    .string "Identifying\0"
+    .align 2, 0
+
+sUnknown_810D594:
+    .string "Paralyzed\0"
+    .align 2, 0
+
+sUnknown_810D5A0:
+    .string "Badly poisoned\0"
+    .align 2, 0
+
+sUnknown_810D5B0:
+    .string "Poisoned\0"
+    .align 2, 0
+
+sUnknown_810D5BC:
+    .string "Burned\0"
+    .align 2, 0
+
+sUnknown_810D5C4:
+    .string "Low HP! Situation critical!\0"
+    .align 2, 0
+
+sUnknown_810D5E0:
+    .string "Napping\0"
+    .align 2, 0
+
+sUnknown_810D5E8:
+    .string "Yawning\0"
+    .align 2, 0
+
+sUnknown_810D5F0:
+    .string "Caught in a nightmare\0"
+    .align 2, 0
+
+sUnknown_810D608:
+    .string "Won~27t get sleepy\0"
+    .align 2, 0
+
+sUnknown_810D61C:
+    .string "Asleep\0"
+    .align 2, 0
+
+sUnknown_810D624:
+    .string "-\0"
+    .align 2, 0
 
 	.global gFormattedStatusNames
 gFormattedStatusNames: @ 810D628
-	.incbin "baserom.gba", 0x10D628, 0x730
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810DD40
+    .4byte sUnknown_810DD2C
+    .4byte sUnknown_810DD18
+    .4byte sUnknown_810DD08
+    .4byte sUnknown_810DCF8
+    .4byte sUnknown_810DCE8
+    .4byte sUnknown_810DCDC
+    .4byte sUnknown_810DCCC
+    .4byte sUnknown_810DCB4
+    .4byte sUnknown_810DCA0
+    .4byte sUnknown_810DC8C
+    .4byte sUnknown_810DC7C
+    .4byte sUnknown_810DC6C
+    .4byte sUnknown_810DC60
+    .4byte sUnknown_810DC50
+    .4byte sUnknown_810DC40
+    .4byte sUnknown_810DC2C
+    .4byte sUnknown_810DC18
+    .4byte sUnknown_810DC08
+    .4byte sUnknown_810DBF8
+    .4byte sUnknown_810DBE8
+    .4byte sUnknown_810DBD8
+    .4byte sUnknown_810DBC8
+    .4byte sUnknown_810DBB8
+    .4byte sUnknown_810DBA8
+    .4byte sUnknown_810DB94
+    .4byte sUnknown_810DB80
+    .4byte sUnknown_810DB74
+    .4byte sUnknown_810DB60
+    .4byte sUnknown_810DB4C
+    .4byte sUnknown_810DB38
+    .4byte sUnknown_810DB24
+    .4byte sUnknown_810DB10
+    .4byte sUnknown_810DB00
+    .4byte sUnknown_810DAF0
+    .4byte sUnknown_810DAE0
+    .4byte sUnknown_810DAD0
+    .4byte sUnknown_810DAC0
+    .4byte sUnknown_810DAB0
+    .4byte sUnknown_810DA9C
+    .4byte sUnknown_810DA8C
+    .4byte sUnknown_810DA78
+    .4byte sUnknown_810DA64
+    .4byte sUnknown_810DA54
+    .4byte sUnknown_810DA40
+    .4byte sUnknown_810DA34
+    .4byte sUnknown_810DA24
+    .4byte sUnknown_810DA10
+    .4byte sUnknown_810DA00
+    .4byte sUnknown_810D9EC
+    .4byte sUnknown_810D9D8
+    .4byte sUnknown_810D9C4
+    .4byte sUnknown_810D9B0
+    .4byte sUnknown_810D9A4
+    .4byte sUnknown_810D994
+    .4byte sUnknown_810D984
+    .4byte sUnknown_810D974
+    .4byte sUnknown_810D964
+    .4byte sUnknown_810D950
+    .4byte sUnknown_810D93C
+    .4byte sUnknown_810D928
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D914
+    .4byte sUnknown_810D904
+    .4byte sUnknown_810D8F0
+    .4byte sUnknown_810D8DC
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D8C8
+    .4byte sUnknown_810D8B8
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D8A4
+    .4byte sUnknown_810D890
+    .4byte sUnknown_810D880
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D870
+    .4byte sUnknown_810D85C
+    .4byte sUnknown_810D84C
+    .4byte sUnknown_810D244
+    .4byte sUnknown_810D83C
+    .4byte sUnknown_810D828
+    .4byte sUnknown_810D814
+    .4byte sUnknown_810D804
+    .4byte sUnknown_810D7F4
+    .4byte sUnknown_810D7E4
+    .4byte sUnknown_810D7D0
+    .4byte sUnknown_810D7BC
+    .4byte sUnknown_810D7A4
+    .4byte sUnknown_810D78C
+
+sUnknown_810D78C:
+    .string "#c5Stair Spotter#r  \0"
+    .align 2, 0
+
+sUnknown_810D7A4:
+    .string "#c5Doubled Attack#r  \0"
+    .align 2, 0
+
+sUnknown_810D7BC:
+    .string "#c5Perish Song#r  \0"
+    .align 2, 0
+
+sUnknown_810D7D0:
+    .string "#c5Terrified#r  \0"
+    .align 2, 0
+
+sUnknown_810D7E4:
+    .string "#c5Exposed#r  \0"
+    .align 2, 0
+
+sUnknown_810D7F4:
+    .string "#c5Grudge#r  \0"
+    .align 2, 0
+
+sUnknown_810D804:
+    .string "#c5Scanning#r  \0"
+    .align 2, 0
+
+sUnknown_810D814:
+    .string "#c5Power Ears#r  \0"
+    .align 2, 0
+
+sUnknown_810D828:
+    .string "#c5Stockpiling#r  \0"
+    .align 2, 0
+
+sUnknown_810D83C:
+    .string "#c5Muzzled#r  \0"
+    .align 2, 0
+
+sUnknown_810D84C:
+    .string "#c5Eyedrops#r  \0"
+    .align 2, 0
+
+sUnknown_810D85C:
+    .string "#c5Cross-Eyed#r  \0"
+    .align 2, 0
+
+sUnknown_810D870:
+    .string "#c5Blinker#r  \0"
+    .align 2, 0
+
+sUnknown_810D880:
+    .string "#c5Mobile#r  \0"
+    .align 2, 0
+
+sUnknown_810D890:
+    .string "#c5Transformed#r  \0"
+    .align 2, 0
+
+sUnknown_810D8A4:
+    .string "#c5Invisible#r  \0"
+    .align 2, 0
+
+sUnknown_810D8B8:
+    .string "#c5Pierce#r  \0"
+    .align 2, 0
+
+sUnknown_810D8C8:
+    .string "#c5Long Toss#r  \0"
+    .align 2, 0
+
+sUnknown_810D8DC:
+    .string "#c5Focus Energy#r  \0"
+    .align 2, 0
+
+sUnknown_810D8F0:
+    .string "#c5Set Damage#r  \0"
+    .align 2, 0
+
+sUnknown_810D904:
+    .string "#c5Whiffer#r  \0"
+    .align 2, 0
+
+sUnknown_810D914:
+    .string "#c5Sure Shot#r  \0"
+    .align 2, 0
+
+sUnknown_810D928:
+    .string "#c5Destiny Bond#r  \0"
+    .align 2, 0
+
+sUnknown_810D93C:
+    .string "#c5Leech Seed#r  \0"
+    .align 2, 0
+
+sUnknown_810D950:
+    .string "#c5Hungry Pal#r  \0"
+    .align 2, 0
+
+sUnknown_810D964:
+    .string "#c5Snatch#r  \0"
+    .align 2, 0
+
+sUnknown_810D974:
+    .string "#c5Decoy#r  \0"
+    .align 2, 0
+
+sUnknown_810D984:
+    .string "#c5Cursed#r  \0"
+    .align 2, 0
+
+sUnknown_810D994:
+    .string "#c5Weakened#r  \0"
+    .align 2, 0
+
+sUnknown_810D9A4:
+    .string "#c5Mist#r  \0"
+    .align 2, 0
+
+sUnknown_810D9B0:
+    .string "#c5Vital Throw#r  \0"
+    .align 2, 0
+
+sUnknown_810D9C4:
+    .string "#c5Conversion 2#r  \0"
+    .align 2, 0
+
+sUnknown_810D9D8:
+    .string "#c5Mirror Move#r  \0"
+    .align 2, 0
+
+sUnknown_810D9EC:
+    .string "#c5Mini Counter#r  \0"
+    .align 2, 0
+
+sUnknown_810DA00:
+    .string "#c5Enduring#r  \0"
+    .align 2, 0
+
+sUnknown_810DA10:
+    .string "#c5Mirror Coat#r  \0"
+    .align 2, 0
+
+sUnknown_810DA24:
+    .string "#c5Protect#r  \0"
+    .align 2, 0
+
+sUnknown_810DA34:
+    .string "#c5Wish#r  \0"
+    .align 2, 0
+
+sUnknown_810DA40:
+    .string "#c5Magic Coat#r  \0"
+    .align 2, 0
+
+sUnknown_810DA54:
+    .string "#c5Counter#r  \0"
+    .align 2, 0
+
+sUnknown_810DA64:
+    .string "#c5Light Screen#r  \0"
+    .align 2, 0
+
+sUnknown_810DA78:
+    .string "#c5Safeguard#r  \0"
+    .align 2, 0
+
+sUnknown_810DA8C:
+    .string "#c5Reflect#r  \0"
+    .align 2, 0
+
+sUnknown_810DA9C:
+    .string "#c5Half Speed#r  \0"
+    .align 2, 0
+
+sUnknown_810DAB0:
+    .string "#c5Enraged#r  \0"
+    .align 2, 0
+
+sUnknown_810DAC0:
+    .string "#c5Charging#r  \0"
+    .align 2, 0
+
+sUnknown_810DAD0:
+    .string "#c5Digging#r  \0"
+    .align 2, 0
+
+sUnknown_810DAE0:
+    .string "#c5Diving#r  \0"
+    .align 2, 0
+
+sUnknown_810DAF0:
+    .string "#c5Bouncing#r  \0"
+    .align 2, 0
+
+sUnknown_810DB00:
+    .string "#c5Flying#r  \0"
+    .align 2, 0
+
+sUnknown_810DB10:
+    .string "#c5Skull Bash#r  \0"
+    .align 2, 0
+
+sUnknown_810DB24:
+    .string "#c5Focus Punch#r  \0"
+    .align 2, 0
+
+sUnknown_810DB38:
+    .string "#c5Razor Wind#r  \0"
+    .align 2, 0
+
+sUnknown_810DB4C:
+    .string "#c5Sky Attack#r  \0"
+    .align 2, 0
+
+sUnknown_810DB60:
+    .string "#c5Solarbeam#r  \0"
+    .align 2, 0
+
+sUnknown_810DB74:
+    .string "#c5Bide#r  \0"
+    .align 2, 0
+
+sUnknown_810DB80:
+    .string "#c5Double Speed#r  \0"
+    .align 2, 0
+
+sUnknown_810DB94:
+    .string "#c5Infatuated#r  \0"
+    .align 2, 0
+
+sUnknown_810DBA8:
+    .string "#c5Encore#r  \0"
+    .align 2, 0
+
+sUnknown_810DBB8:
+    .string "#c5Taunted#r  \0"
+    .align 2, 0
+
+sUnknown_810DBC8:
+    .string "#c5Cowering#r  \0"
+    .align 2, 0
+
+sUnknown_810DBD8:
+    .string "#c5Paused#r  \0"
+    .align 2, 0
+
+sUnknown_810DBE8:
+    .string "#c5Confused#r  \0"
+    .align 2, 0
+
+sUnknown_810DBF8:
+    .string "#c5Cringe#r  \0"
+    .align 2, 0
+
+sUnknown_810DC08:
+    .string "#c5Famished#r  \0"
+    .align 2, 0
+
+sUnknown_810DC18:
+    .string "#c5Constriction#r  \0"
+    .align 2, 0
+
+sUnknown_810DC2C:
+    .string "#c5Petrified#r  \0"
+    .align 2, 0
+
+sUnknown_810DC40:
+    .string "#c5Ingrain#r  \0"
+    .align 2, 0
+
+sUnknown_810DC50:
+    .string "#c5Wrapped#r  \0"
+    .align 2, 0
+
+sUnknown_810DC60:
+    .string "#c5Wrap#r  \0"
+    .align 2, 0
+
+sUnknown_810DC6C:
+    .string "#c5Leg Hold#r  \0"
+    .align 2, 0
+
+sUnknown_810DC7C:
+    .string "#c5Frozen#r  \0"
+    .align 2, 0
+
+sUnknown_810DC8C:
+    .string "#c5Identifying#r  \0"
+    .align 2, 0
+
+sUnknown_810DCA0:
+    .string "#c5Paralysis#r  \0"
+    .align 2, 0
+
+sUnknown_810DCB4:
+    .string "#c5Badly Poisoned#r  \0"
+    .align 2, 0
+
+sUnknown_810DCCC:
+    .string "#c5Poisoned#r  \0"
+    .align 2, 0
+
+sUnknown_810DCDC:
+    .string "#c5Burn#r  \0"
+    .align 2, 0
+
+sUnknown_810DCE8:
+    .string "#c5Low HP#r  \0"
+    .align 2, 0
+
+sUnknown_810DCF8:
+    .string "#c5Napping#r  \0"
+    .align 2, 0
+
+sUnknown_810DD08:
+    .string "#c5Yawning#r  \0"
+    .align 2, 0
+
+sUnknown_810DD18:
+    .string "#c5Nightmare#r  \0"
+    .align 2, 0
+
+sUnknown_810DD2C:
+    .string "#c5Sleepless#r  \0"
+    .align 2, 0
+
+sUnknown_810DD40:
+    .string "#c5Sleep#r  \0"
+    .align 2, 0
+
+sUnknown_810DD50:
+    .string "Status\0"
+    .align 2, 0
 
 	.global gUnknown_810DD58
 gUnknown_810DD58: @ 810DD58
@@ -732,7 +1584,951 @@ gUnknown_810E02C: @ 810E02C
 
 	.global gStatusDescriptions
 gStatusDescriptions: @ 810E074
-	.incbin "baserom.gba", 0x10E074, 0x39B4
+    .4byte sUnknown_810DD2C
+    .4byte sUnknown_81119CC
+    .4byte sUnknown_810DD40
+    .4byte sUnknown_8111964
+    .4byte sUnknown_810DD18
+    .4byte sUnknown_8111900
+    .4byte sUnknown_810DD08
+    .4byte sUnknown_81118BC
+    .4byte sUnknown_810DCF8
+    .4byte sUnknown_8111824
+    .4byte sUnknown_810DCE8
+    .4byte sUnknown_81117BC
+    .4byte sUnknown_810DCDC
+    .4byte sUnknown_8111718
+    .4byte sUnknown_810DCCC
+    .4byte sUnknown_8111644
+    .4byte sUnknown_810DCB4
+    .4byte sUnknown_8111568
+    .4byte sUnknown_810DCA0
+    .4byte sUnknown_8111498
+    .4byte sUnknown_810DC8C
+    .4byte sUnknown_8111440
+    .4byte sUnknown_810DC08
+    .4byte sUnknown_8111398
+    .4byte sUnknown_810DC7C
+    .4byte sUnknown_81112BC
+    .4byte sUnknown_810DC6C
+    .4byte sUnknown_8111270
+    .4byte sUnknown_810DC18
+    .4byte sUnknown_81111FC
+    .4byte sUnknown_810DC60
+    .4byte sUnknown_811113C
+    .4byte sUnknown_810DC50
+    .4byte sUnknown_81110AC
+    .4byte sUnknown_810DC40
+    .4byte sUnknown_811100C
+    .4byte sUnknown_810DBD8
+    .4byte sUnknown_8110FA4
+    .4byte sUnknown_810DBC8
+    .4byte sUnknown_8110EDC
+    .4byte sUnknown_810DBB8
+    .4byte sUnknown_8110E50
+    .4byte sUnknown_810DB94
+    .4byte sUnknown_8110DE0
+    .4byte sUnknown_810DB74
+    .4byte sUnknown_8110D44
+    .4byte sUnknown_810DB60
+    .4byte sUnknown_8110CD0
+    .4byte sUnknown_810DB4C
+    .4byte sUnknown_8110C5C
+    .4byte sUnknown_810DB38
+    .4byte sUnknown_8110BE8
+    .4byte sUnknown_810DB24
+    .4byte sUnknown_8110B74
+    .4byte sUnknown_810DB10
+    .4byte sUnknown_8110B00
+    .4byte sUnknown_810DB00
+    .4byte sUnknown_8110A84
+    .4byte sUnknown_810DAF0
+    .4byte sUnknown_8110A14
+    .4byte sUnknown_810DAE0
+    .4byte sUnknown_8110988
+    .4byte sUnknown_810DAD0
+    .4byte sUnknown_81108FC
+    .4byte sUnknown_810DAC0
+    .4byte sUnknown_811088C
+    .4byte sUnknown_810DAB0
+    .4byte sUnknown_8110814
+    .4byte sUnknown_810DA8C
+    .4byte sUnknown_8110794
+    .4byte sUnknown_810DA78
+    .4byte sUnknown_8110734
+    .4byte sUnknown_810DA64
+    .4byte sUnknown_81106C8
+    .4byte sUnknown_810DA54
+    .4byte sUnknown_81105F8
+    .4byte sUnknown_810DA40
+    .4byte sUnknown_8110588
+    .4byte sUnknown_810DA34
+    .4byte sUnknown_8110530
+    .4byte sUnknown_810DA24
+    .4byte sUnknown_8110470
+    .4byte sUnknown_810DA10
+    .4byte sUnknown_81103A0
+    .4byte sUnknown_810DA00
+    .4byte sUnknown_811030C
+    .4byte sUnknown_810D9EC
+    .4byte sUnknown_8110234
+    .4byte sUnknown_810D9C4
+    .4byte sUnknown_81101A8
+    .4byte sUnknown_810D9B0
+    .4byte sUnknown_81100DC
+    .4byte sUnknown_810D9A4
+    .4byte sUnknown_8110004
+    .4byte sUnknown_810D9D8
+    .4byte sUnknown_810FF58
+    .4byte sUnknown_810D984
+    .4byte sUnknown_810FEF8
+    .4byte sUnknown_810D974
+    .4byte sUnknown_810FE18
+    .4byte sUnknown_810D93C
+    .4byte sUnknown_810FD84
+    .4byte sUnknown_810D928
+    .4byte sUnknown_810FCDC
+    .4byte sUnknown_810D8F0
+    .4byte sUnknown_810FC44
+    .4byte sUnknown_810D8C8
+    .4byte sUnknown_810FBC4
+    .4byte sUnknown_810D8B8
+    .4byte sUnknown_810FAFC
+    .4byte sUnknown_810D8A4
+    .4byte sUnknown_810FA90
+    .4byte sUnknown_810D890
+    .4byte sUnknown_810FA14
+    .4byte sUnknown_810D880
+    .4byte sUnknown_810F93C
+    .4byte sUnknown_810D870
+    .4byte sUnknown_810F8A8
+    .4byte sUnknown_810D85C
+    .4byte sUnknown_810F818
+    .4byte sUnknown_810D84C
+    .4byte sUnknown_810F798
+    .4byte sUnknown_810D83C
+    .4byte sUnknown_810F720
+    .4byte sUnknown_810DBF8
+    .4byte sUnknown_810F6C4
+    .4byte sUnknown_810DC2C
+    .4byte sUnknown_810F650
+    .4byte sUnknown_810D914
+    .4byte sUnknown_810F5D8
+    .4byte sUnknown_810D8DC
+    .4byte sUnknown_810F564
+    .4byte sUnknown_810D904
+    .4byte sUnknown_810F4C8
+    .4byte sUnknown_810DBE8
+    .4byte sUnknown_810F42C
+    .4byte sUnknown_810DBA8
+    .4byte sUnknown_810F3B8
+    .4byte sUnknown_810F3A0
+    .4byte sUnknown_810F334
+    .4byte sUnknown_810D964
+    .4byte sUnknown_810F2BC
+    .4byte sUnknown_810D950
+    .4byte sUnknown_810F288
+    .4byte sUnknown_810F27C
+    .4byte sUnknown_810F210
+    .4byte sUnknown_810F204
+    .4byte sUnknown_810F1A8
+    .4byte sUnknown_810F198
+    .4byte sUnknown_810F13C
+    .4byte sUnknown_810F128
+    .4byte sUnknown_810F0A0
+    .4byte sUnknown_810F090
+    .4byte sUnknown_810F004
+    .4byte sUnknown_810EFF8
+    .4byte sUnknown_810EFA8
+    .4byte sUnknown_810EF9C
+    .4byte sUnknown_810EF24
+    .4byte sUnknown_810EF14
+    .4byte sUnknown_810EE48
+    .4byte sUnknown_810EE30
+    .4byte sUnknown_810ED54
+    .4byte sUnknown_810DB80
+    .4byte sUnknown_810ED0C
+    .4byte sUnknown_810DA9C
+    .4byte sUnknown_810ECC4
+    .4byte sUnknown_810D828
+    .4byte sUnknown_810EBF4
+    .4byte sUnknown_810D814
+    .4byte sUnknown_810EB60
+    .4byte sUnknown_810D804
+    .4byte sUnknown_810EAD4
+    .4byte sUnknown_810D7F4
+    .4byte sUnknown_810EA30
+    .4byte sUnknown_810D7E4
+    .4byte sUnknown_810E9A8
+    .4byte sUnknown_810D7D0
+    .4byte sUnknown_810E95C
+    .4byte sUnknown_810D7BC
+    .4byte sUnknown_810E920
+    .4byte sUnknown_810D7A4
+    .4byte sUnknown_810E8DC
+    .4byte sUnknown_810E8C8
+    .4byte sUnknown_810E870
+    .4byte sUnknown_810E85C
+    .4byte sUnknown_810E804
+    .4byte sUnknown_810E7F8
+    .4byte sUnknown_810E714
+    .4byte sUnknown_810D994
+    .4byte sUnknown_810E5F4
+    .4byte sUnknown_810D78C
+    .4byte sUnknown_810E56C
+    .4byte sUnknown_810E550
+    .4byte sUnknown_810E47C
+    .4byte sUnknown_810E45C
+    .4byte sUnknown_810E38C
+    .4byte 0
+    .4byte 0
+
+sUnknown_810E38C:
+    .string "Physical Attack moves are those based on\n"
+    .string "the stats #c6Attack#r and #c6Defense#r.\n"
+    .string "Physical Attack moves are of the types\n"
+    .string "Normal~2c Fighting~2c Poison~2c Ground~2c Flying~2c\n"
+    .string "Bug~2c Rock~2c Ghost~2c and Steel.\0"
+    .align 2, 0
+
+sUnknown_810E45C:
+    .string "#c5Physical Attack Moves#r  \0"
+    .align 2, 0
+
+sUnknown_810E47C:
+    .string "Special Attack moves are those based on\n"
+    .string "the stats #c6Special Attack#r and\n"
+    .string "#c6Special Defense#r.\n"
+    .string "Special Attack moves are of the types\n"
+    .string "Fire~2c Water~2c Grass~2c Electric~2c Ice~2c Psychic~2c\n"
+    .string "Dragon~2c and Dark.\0"
+    .align 2, 0
+
+sUnknown_810E550:
+    .string "#c5Special Attack Moves#r  \0"
+    .align 2, 0
+
+sUnknown_810E56C:
+    .string "The Pokémon gains the ability to pinpoint\n"
+    .string "the location of the stairs on the map.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810E5F4:
+    .string "Because of moves~2c special abilities~2c etc.~2c\n"
+    .string "the Pokémon is weakened in terms of such\n"
+    .string "stats as #c6Attack#r~2c #c6Defense#r~2c #c6Special Attack#r~2c\n"
+    .string "and #c6Special Defense#r. It is possible to heal\n"
+    .string "this condition with a Wonder Tile~2c etc.\n"
+    .string "Moving to the next floor will also heal it.\0"
+    .align 2, 0
+
+sUnknown_810E714:
+    .string "Two or more moves can be linked together\n"
+    .string "to use them in succession in one turn.\n"
+    .string "Although linked moves can be powerful~2c\n"
+    .string "they also make the Pokémon hungry faster.\n"
+    .string "The link is broken if the #c6PP#r of a linked\n"
+    .string "move is used up.\0"
+    .align 2, 0
+
+sUnknown_810E7F8:
+    .string "#c5Link#r  \0"
+    .align 2, 0
+
+sUnknown_810E804:
+    .string "The floor~27s status changes to Water Sport.\n"
+    .string "The power of Fire-type moves is halved.\0"
+    .align 2, 0
+
+sUnknown_810E85C:
+    .string "#c5Water Sport#r  \0"
+    .align 2, 0
+
+sUnknown_810E870:
+    .string "The floor~27s status changes to Mud Sport.\n"
+    .string "The power of Electric-type moves is\n"
+    .string "halved.\0"
+    .align 2, 0
+
+sUnknown_810E8C8:
+    .string "#c5Mud Sport#r  \0"
+    .align 2, 0
+
+sUnknown_810E8DC:
+    .string "The Pokémon is sped up.\n"
+    .string "Its #c6attack frequency#r has been boosted.\0"
+    .align 2, 0
+
+sUnknown_810E920:
+    .string "Any Pokémon hearing Perish Song\n"
+    .string "will faint in three turns.\0"
+    .align 2, 0
+
+sUnknown_810E95C:
+    .string "The Pokémon is badly frightened.\n"
+    .string "It will try to flee from other Pokémon.\0"
+    .align 2, 0
+
+sUnknown_810E9A8:
+    .string "The Ghost-type Pokémon~27s identity is\n"
+    .string "revealed.\n"
+    .string "Its type matchup changes~2c making it weak\n"
+    .string "against Normal- and Fighting-type moves.\0"
+    .align 2, 0
+
+sUnknown_810EA30:
+    .string "If the Pokémon is defeated~2c its Grudge\n"
+    .string "causes the victorious foe to completely\n"
+    .string "lose the PP of its last move.\n"
+    .string "Its effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810EAD4:
+    .string "The Pokémon gains the ability to pinpoint\n"
+    .string "on the map the locations of unclaimed\n"
+    .string "items.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810EB60:
+    .string "The Pokémon gains the ability to pinpoint\n"
+    .string "the locations of other Pokémon on the\n"
+    .string "floor~27s map.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810EBF4:
+    .string "The Pokémon is storing power with the\n"
+    .string "move #c4Stockpile#r.\n"
+    .string "The more power Stockpiled~2c the more\n"
+    .string "powerful the move #c4Spit Up#r#r becomes.\n"
+    .string "The stored power is lost if the Pokémon\n"
+    .string "goes on to the next floor.\0"
+    .align 2, 0
+
+sUnknown_810ECC4:
+    .string "The Pokémon~27s #c6Movement Speed#r is\n"
+    .string "reduced from its usual level.\0"
+    .align 2, 0
+
+sUnknown_810ED0C:
+    .string "The Pokémon~27s #c6Movement Speed#r is boosted\n"
+    .string "over its usual level.\0"
+    .align 2, 0
+
+sUnknown_810ED54:
+    .string "The Pokémon (or trap) explodes savagely\n"
+    .string "and inflicts damage on all Pokémon within\n"
+    .string "a 2-tile range.\n"
+    .string "The huge explosion halves the #c6HP#r of\n"
+    .string "rescue team members. It also destroys\n"
+    .string "walls and items within the 2-tile range.\0"
+    .align 2, 0
+
+sUnknown_810EE30:
+    .string "#c5Huge Explosion#r  \0"
+    .align 2, 0
+
+sUnknown_810EE48:
+    .string "The Pokémon (or trap) explodes and\n"
+    .string "inflicts damage on all Pokémon within\n"
+    .string "a 1-tile range.\n"
+    .string "The explosion halves the #c6HP#r of rescue\n"
+    .string "team members. It also destroys walls and\n"
+    .string "items within the 1-tile range.\0"
+    .align 2, 0
+
+sUnknown_810EF14:
+    .string "#c5Explode#r  \0"
+    .align 2, 0
+
+sUnknown_810EF24:
+    .string "There is a raging snowstorm.\n"
+    .string "This weather condition boosts the\n"
+    .string "#c6Movement Speed#r of Ice-type Pokémon\n"
+    .string "by one level.\0"
+    .align 2, 0
+
+sUnknown_810EF9C:
+    .string "#c5Snow#r  \0"
+    .align 2, 0
+
+sUnknown_810EFA8:
+    .string "The weather is foggy.\n"
+    .string "This condition weakens the power\n"
+    .string "of Electric-type moves.\0"
+    .align 2, 0
+
+sUnknown_810EFF8:
+    .string "#c5Fog#r  \0"
+    .align 2, 0
+
+sUnknown_810F004:
+    .string "The weather is cloudy and dark.\n"
+    .string "This condition lowers the #c6Attack#r\n"
+    .string "and #c6Special Attack#r of all Pokémon\n"
+    .string "except for the Normal type.\0"
+    .align 2, 0
+
+sUnknown_810F090:
+    .string "#c5Cloudy#r  \0"
+    .align 2, 0
+
+sUnknown_810F0A0:
+    .string "There is a raging sandstorm.\n"
+    .string "This weather condition inflicts damage\n"
+    .string "on all Pokémon except for the Ground~2c\n"
+    .string "Rock~2c and Steel types.\0"
+    .align 2, 0
+
+sUnknown_810F128:
+    .string "#c5Sandstorm#r  \0"
+    .align 2, 0
+
+sUnknown_810F13C:
+    .string "The sun is blazing.\n"
+    .string "It boosts the power of Fire-type moves\n"
+    .string "and weakens Water-type moves.\0"
+    .align 2, 0
+
+sUnknown_810F198:
+    .string "#c5Sunny#r  \0"
+    .align 2, 0
+
+sUnknown_810F1A8:
+    .string "The weather is rainy.\n"
+    .string "It boosts the power of Water-type moves\n"
+    .string "and weakens Fire-type moves.\0"
+    .align 2, 0
+
+sUnknown_810F204:
+    .string "#c5Rain#r  \0"
+    .align 2, 0
+
+sUnknown_810F210:
+    .string "The weather is bitterly cold with hail.\n"
+    .string "This condition inflicts damage on\n"
+    .string "all Pokémon except the Ice type.\0"
+    .align 2, 0
+
+sUnknown_810F27C:
+    .string "#c5Hail#r  \0"
+    .align 2, 0
+
+sUnknown_810F288:
+    .string "The Pokémon becomes famished and\n"
+    .string "unable to move.\0"
+    .align 2, 0
+
+sUnknown_810F2BC:
+    .string "The Pokémon steals the effects of moves\n"
+    .string "used by other Pokémon on the floor.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F334:
+    .string "If the Pokémon is defeated~2c its grudge\n"
+    .string "causes the foe to completely lose the PP\n"
+    .string "of the move it used last.\0"
+    .align 2, 0
+
+sUnknown_810F3A0:
+    .string "#c5Grudge Effect#r  \0"
+    .align 2, 0
+
+sUnknown_810F3B8:
+    .string "The Pokémon is prevented from using\n"
+    .string "anything but the last move it used.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F42C:
+    .string "The Pokémon~27s sense of direction becomes\n"
+    .string "completely scrambled.\n"
+    .string "Its moves and attacks will hit even\n"
+    .string "team members.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F4C8:
+    .string "The Pokémon~27s accuracy of moves and\n"
+    .string "attacks is minimized so they hardly\n"
+    .string "ever hit.\n"
+    .string "Even sure-hit moves may miss.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F564:
+    .string "The critical-hit rate of the Pokémon~27s\n"
+    .string "moves is boosted to the maximum.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F5D8:
+    .string "The Pokémon~27s accuracy of moves and\n"
+    .string "attacks is boosted so they always hit.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F650:
+    .string "The Pokémon becomes incapable of any\n"
+    .string "action.\n"
+    .string "This effect wears off if the Pokémon\n"
+    .string "is hit by an attack or a move.\0"
+    .align 2, 0
+
+sUnknown_810F6C4:
+    .string "The Pokémon~27s attacks and moves will\n"
+    .string "all fail.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F720:
+    .string "The Pokémon is prevented from using any\n"
+    .string "moves or items that involve its mouth.\n"
+    .string "Its effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F798:
+    .string "The Pokémon gains the ability to see\n"
+    .string "unsprung traps and invisible Pokémon.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810F818:
+    .string "The Pokémon sees hallucinations.\n"
+    .string "Other Pokémon and items on the ground\n"
+    .string "take on different appearances.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F8A8:
+    .string "The Pokémon~27s eyesight fails.\n"
+    .string "It can~27t see the terrain~2c other Pokémon~2c or\n"
+    .string "items on the ground.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810F93C:
+    .string "The Pokémon can move~2c attack~2c and use\n"
+    .string "moves inside walls and on water~2c lava~2c\n"
+    .string "or clouds. Beware--it will grow hungry\n"
+    .string "faster while traveling through walls.\n"
+    .string "Its effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810FA14:
+    .string "The Pokémon transforms into\n"
+    .string "a different Pokémon~2c appearance-wise.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810FA90:
+    .string "The Pokémon becomes invisible and\n"
+    .string "unnoticeable to other Pokémon.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FAFC:
+    .string "Any item thrown by the Pokémon will fly\n"
+    .string "through all obstacles~2c including walls~2c\n"
+    .string "until disappearing. This will affect all\n"
+    .string "Pokémon in its path.\n"
+    .string "Its effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810FBC4:
+    .string "If the Pokémon throws an item~2c it will fly\n"
+    .string "until it hits an obstacle.\n"
+    .string "This effect wears off upon moving to the\n"
+    .string "next floor.\0"
+    .align 2, 0
+
+sUnknown_810FC44:
+    .string "The amount of damage inflicted by the\n"
+    .string "Pokémon~27s moves and regular attack\n"
+    .string "becomes set at a certain figure.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FCDC:
+    .string "The Pokémon that Destiny Bond is used on\n"
+    .string "will take the same amount of damage as\n"
+    .string "the Pokémon that used Destiny Bond on it.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FD84:
+    .string "A Leech Seed is planted on the\n"
+    .string "Pokémon. The Leech Seed drains the\n"
+    .string "Pokémon~27s #c6HP#r every several turns.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FE18:
+    .string "The Pokémon is transformed into a decoy\n"
+    .string "Pokémon and is viewed as a foe by\n"
+    .string "team members. It also becomes likely to\n"
+    .string "draw the attention of foes.\n"
+    .string "There can be only one decoy on a floor.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FEF8:
+    .string "The Pokémon takes heavy damage every\n"
+    .string "several turns.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_810FF58:
+    .string "The Pokémon bounces back any move\n"
+    .string "before it strikes.\n"
+    .string "Moves can only be bounced back if the foe\n"
+    .string "is directly around the Pokémon.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110004:
+    .string "The Pokémon is protected from any\n"
+    .string "reduction of the stats #c6Attack#r~2c #c6Defense#r~2c\n"
+    .string "#c6Special Attack#r~2c #c6Special Defense#r~2c\n"
+    .string "#c6Accuracy#r~2c and #c6Evasion#r.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81100DC:
+    .string "The Pokémon counters any Physical Attack\n"
+    .string "move or regular attack by picking up and\n"
+    .string "hurling the foe.\n"
+    .string "If the Pokémon faints~2c it cannot retaliate\n"
+    .string "with a throw.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81101A8:
+    .string "If hit by a move~2c the Pokémon changes its\n"
+    .string "type to one that is resistant to the move~27s\n"
+    .string "type.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110234:
+    .string "The Pokémon counters any Physical Attack\n"
+    .string "move or regular attack~2c and inflicts one\n"
+    .string "quarter the damage it took from the foe.\n"
+    .string "If the Pokémon faints~2c it cannot hit back.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_811030C:
+    .string "If the Pokémon takes damage that would\n"
+    .string "usually cause it to faint~2c it will hold on\n"
+    .string "with just #c61HP#r.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81103A0:
+    .string "The Pokémon bounces back the power of\n"
+    .string "any Special Attack used by a foe directly\n"
+    .string "around it. If the Pokémon faints from\n"
+    .string "the Special Attack~2c it can~27t strike back.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110470:
+    .string "The Pokémon will take no damage from\n"
+    .string "attacks and moves. It will also resist\n"
+    .string "effects of moves. It may take damage\n"
+    .string "from rocks~2c explosions~2c etc.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110530:
+    .string "The Pokémon regains #c6HP#r faster than usual.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110588:
+    .string "The Pokémon will bounce back any move\n"
+    .string "that causes a status problem.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81105F8:
+    .string "The Pokémon counters any Physical Attack\n"
+    .string "move or regular attack~2c and inflicts the\n"
+    .string "same damage it took from the foe.\n"
+    .string "If the Pokémon faints~2c it cannot hit back.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81106C8:
+    .string "The Pokémon takes only half the damage\n"
+    .string "from Special Attack moves.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110734:
+    .string "The Pokémon is protected against all\n"
+    .string "status problems.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110794:
+    .string "The Pokémon takes only half the damage\n"
+    .string "from Physical Attack moves and regular\n"
+    .string "attacks.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110814:
+    .string "The Pokémon~27s Attack rises by one level\n"
+    .string "each time it takes damage.\n"
+    .string "This effect wears off in a set amount\n"
+    .string "of turns.\0"
+    .align 2, 0
+
+sUnknown_811088C:
+    .string "The Pokémon is charging electricity.\n"
+    .string "It boosts the power of any Electric-type\n"
+    .string "move used right after charging.\0"
+    .align 2, 0
+
+sUnknown_81108FC:
+    .string "Using the move #c4Dig#r~2c \n"
+    .string "the Pokémon has gone underground to\n"
+    .string "prepare for its attack.\n"
+    .string "It will strike on the next turn to inflict\n"
+    .string "damage.\0"
+    .align 2, 0
+
+sUnknown_8110988:
+    .string "Using the move #c4Dive#r~2c \n"
+    .string "the Pokémon has gone underwater to\n"
+    .string "prepare for its attack.\n"
+    .string "It will strike on the next turn to inflict\n"
+    .string "damage.\0"
+    .align 2, 0
+
+sUnknown_8110A14:
+    .string "The Pokémon has bounced high to ready\n"
+    .string "its attack.\n"
+    .string "On the next turn~2c it will strike down\n"
+    .string "to inflict damage.\0"
+    .align 2, 0
+
+sUnknown_8110A84:
+    .string "The Pokémon is preparing to attack from\n"
+    .string "high in the sky.\n"
+    .string "On the next turn~2c it will strike from\n"
+    .string "the sky to inflict damage.\0"
+    .align 2, 0
+
+sUnknown_8110B00:
+    .string "The Pokémon is preparing to use\n"
+    .string "the move #c4Skull Bash#r.\n"
+    .string "On the next turn~2c #c4Skull Bash#r will be\n"
+    .string "unleashed.\0"
+    .align 2, 0
+
+sUnknown_8110B74:
+    .string "The Pokémon is preparing to use\n"
+    .string "the move #c4Focus Punch#r.\n"
+    .string "On the next turn~2c #c4Focus Punch#r will be\n"
+    .string "unleashed.\0"
+    .align 2, 0
+
+sUnknown_8110BE8:
+    .string "The Pokémon is preparing to use\n"
+    .string "the move #c4Razor Wind#r.\n"
+    .string "On the next turn~2c #c4Razor Wind#r will be\n"
+    .string "unleashed.\0"
+    .align 2, 0
+
+sUnknown_8110C5C:
+    .string "The Pokémon is preparing to use\n"
+    .string "the move #c4Sky Attack#r.\n"
+    .string "On the next turn~2c #c4Sky Attack#r will be\n"
+    .string "unleashed.\0"
+    .align 2, 0
+
+sUnknown_8110CD0:
+    .string "The Pokémon is preparing to launch\n"
+    .string "the move #c4Solarbeam#r.\n"
+    .string "On the next turn~2c #c4Solarbeam#r will be\n"
+    .string "unleashed.\0"
+    .align 2, 0
+
+sUnknown_8110D44:
+    .string "The Pokémon stops moving for several\n"
+    .string "turns and takes hits from foes.\n"
+    .string "In the end~2c it will strike back to cause\n"
+    .string "double the damage it took over that time.\0"
+    .align 2, 0
+
+sUnknown_8110DE0:
+    .string "The Pokémon becomes infatuated with\n"
+    .string "the foe and stops doing anything.\n"
+    .string "It recovers after a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110E50:
+    .string "When using moves or Wonder Orbs~2c the\n"
+    .string "Pokémon will only use offensive ones\n"
+    .string "that inflict damage.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110EDC:
+    .string "The Pokémon is frightened~2c making it\n"
+    .string "launch attacks and moves completely\n"
+    .string "backwards. If an ally is behind it~2c the\n"
+    .string "backward attacks and moves will hit.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8110FA4:
+    .string "The Pokémon pauses and watches without\n"
+    .string "doing anything else.\n"
+    .string "This condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_811100C:
+    .string "The Pokémon lays down roots in the\n"
+    .string "ground. It becomes immobilized~2c but\n"
+    .string "it regenerates #c6HP#r every several turns.\n"
+    .string "These effects last a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81110AC:
+    .string "The Pokémon is wrapped by a foe.\n"
+    .string "It becomes incapable of action\n"
+    .string "and takes damage every several turns.\n"
+    .string "These effects last a set number of turns.\0"
+    .align 2, 0
+
+sUnknown_811113C:
+    .string "The Pokémon wraps around the foe and\n"
+    .string "inflicts damage every several turns.\n"
+    .string "During that time~2c the Pokémon is also\n"
+    .string "incapable of doing anything else.\n"
+    .string "These effects last a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81111FC:
+    .string "The Pokémon becomes immobilized and\n"
+    .string "sustains damage over several turns.\n"
+    .string "These effects last a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8111270:
+    .string "The Pokémon becomes immobilized.\n"
+    .string "This effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81112BC:
+    .string "The Pokémon becomes frozen solid.\n"
+    .string "While frozen~2c it will not take damage\n"
+    .string "from attacks and almost all moves.\n"
+    .string "Fire-type moves can thaw out the Pokémon\n"
+    .string "and may inflict damage.\n"
+    .string "The condition lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8111398:
+    .string "The Pokémon is on the verge of collapse\n"
+    .string "from hunger. Every action results in a\n"
+    .string "loss of #c6HP#r.\n"
+    .string "This condition will persist until the\n"
+    .string "Pokémon~27s #c6Belly#r is filled.\0"
+    .align 2, 0
+
+sUnknown_8111440:
+    .string "The Pokémon gains the ability to identify\n"
+    .string "if other Pokémon are holding items or not.\0"
+    .align 2, 0
+
+sUnknown_8111498:
+    .string "The Pokémon~27s #c6Movement Speed#r and\n"
+    .string "#c6attack frequency#r are reduced.\n"
+    .string "Attacks and moves become unusable.\n"
+    .string "Wonder Orbs also won~27t work~2c but other\n"
+    .string "items will.\n"
+    .string "Its effects last a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_8111568:
+    .string "The Pokémon takes damage every\n"
+    .string "two turns. It is also prevented from \n"
+    .string "regenerating #c6HP#r. This condition does not\n"
+    .string "disappear over turns.\n"
+    .string "Heal it quickly by using certain moves or\n"
+    .string "items~2c or by going to the next floor.\n"
+    .string "\0"
+    .align 2, 0
+
+sUnknown_8111644:
+    .string "The Pokémon takes damage every ten\n"
+    .string "turns. It is also prevented from \n"
+    .string "regenerating #c6HP#r.\n"
+    .string "Poison does not disappear over turns.\n"
+    .string "Heal it quickly by using certain moves or\n"
+    .string "items~2c or by going to the next floor.\0"
+    .align 2, 0
+
+sUnknown_8111718:
+    .string "The Pokémon takes damage every few\n"
+    .string "turns from its burn.\n"
+    .string "A burn can be healed by going into water~2c\n"
+    .string "using certain moves or items~2c or by\n"
+    .string "going to the next floor.\0"
+    .align 2, 0
+
+sUnknown_81117BC:
+    .string "The Pokémon~27s #c6HP#r is low from taking\n"
+    .string "damage. It is in danger.\n"
+    .string "Do something to restore #c6HP#r!\0"
+    .align 2, 0
+
+sUnknown_8111824:
+    .string "The Pokémon falls asleep and becomes\n"
+    .string "incapable of any action.\n"
+    .string "Upon awakening~2c the Pokémon fully\n"
+    .string "regains #c6HP#r and heals from any\n"
+    .string "status problems.\0"
+    .align 2, 0
+
+sUnknown_81118BC:
+    .string "The Pokémon becomes drowsy and falls\n"
+    .string "asleep after several turns.\0"
+    .align 2, 0
+
+sUnknown_8111900:
+    .string "The Pokémon falls asleep and becomes\n"
+    .string "incapable of any action.\n"
+    .string "It also takes damage upon awakening.\0"
+    .align 2, 0
+
+sUnknown_8111964:
+    .string "The Pokémon falls asleep and becomes\n"
+    .string "incapable of any action.\n"
+    .string "Its effect lasts a set amount of turns.\0"
+    .align 2, 0
+
+sUnknown_81119CC:
+    .string "The Pokémon becomes incapable of falling\n"
+    .string "asleep.\n"
+    .string "Its effect lasts a set amount of turns.\0"
+    .align 2, 0
 
 	.global gDungeonNames
 gDungeonNames: @ 8111A28
