@@ -2,6 +2,7 @@
 #include "dungeon_movement.h"
 
 #include "constants/dungeon_action.h"
+#include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "dungeon_global_data.h"
@@ -38,6 +39,7 @@ extern struct DungeonEntity *GetLeaderEntity();
 struct ItemSlot *GetItemData(struct DungeonEntity *entity);
 u8 *GetTrapData(struct DungeonEntity *entity);
 u32 GetEntityType(struct DungeonEntity *entity);
+extern void TargetTileInFront(struct DungeonEntity *);
 
 u32 sub_8075818(struct DungeonEntity *entity)
 {
@@ -272,4 +274,18 @@ void DecideAction(struct DungeonEntity *pokemon)
             }
         }
     }
+}
+
+void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
+{
+  struct DungeonEntityData * iVar2 = param_1->entityData;
+
+  if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
+      iVar2->facingDir = (iVar2->facingDir + 4) & DIRECTION_MASK;
+      TargetTileInFront(param_1);
+  }
+  else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
+      iVar2->facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+      TargetTileInFront(param_1);
+  }
 }

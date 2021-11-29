@@ -1,9 +1,10 @@
 #include "global.h"
+#include "dungeon_entity.h"
 
 extern void sub_80526D0(u8 r0);
-extern u8 sub_8045888(u32 r0);
-extern void sub_80523A8(u32 r0, u32 r1, u8 r2);
-extern u8 sub_8052DC0(u32);
+extern u8 sub_8045888(struct DungeonEntity *r0);
+extern void sub_80523A8(struct DungeonEntity *r0, u32 r1, u8 r2);
+extern u8 sub_8052DC0(struct DungeonEntity *);
 extern u8 sub_803F428(u32);
 
 void sub_805229C(void)
@@ -11,26 +12,26 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void SendMessage(u32 r0, u32 r1)
+void SendMessage(struct DungeonEntity *r0, u32 r1)
 {
     if (sub_8045888(r0) != 0){
         sub_80523A8(r0, r1, 1);
     }
 }
 
-void sub_80522C8(u32 r0, u32 r1)
+void sub_80522C8(struct DungeonEntity *r0, u32 r1)
 {
     if (sub_8045888(r0) != 0){
         sub_80523A8(r0, r1, 0);
     }
 }
 
-void sub_80522E8(u32 r0, u32 r1)
+void sub_80522E8(struct DungeonEntity *r0, u32 r1)
 {
     sub_80523A8(r0, r1, 0);
 }
 
-void sub_80522F4(u32 r0, u32 r1, u32 r2)
+void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, u32 r2)
 {
     u8 temp;
     u32 temp_reg;
@@ -48,7 +49,7 @@ void sub_80522F4(u32 r0, u32 r1, u32 r2)
     }
 }
 
-void sub_805232C(u32 r0, u32 r1, u32 r2)
+void sub_805232C(struct DungeonEntity *r0, struct DungeonEntity *r1, u32 r2)
 {
     u8 temp;
     u32 temp_reg;
@@ -66,7 +67,7 @@ void sub_805232C(u32 r0, u32 r1, u32 r2)
     }
 }
 
-void sub_8052364(u32 r0, u32 r1, u32 r2)
+void sub_8052364(struct DungeonEntity *r0, u32 r1, u32 r2)
 {
     u8 temp;
     u32 temp_reg;
@@ -84,7 +85,7 @@ void sub_8052364(u32 r0, u32 r1, u32 r2)
     }
 }
 
-void sub_805239C(u32 r0, u32 r1)
+void sub_805239C(struct DungeonEntity *r0, u32 r1)
 {
     sub_80523A8(r0, r1, 1);
 }
