@@ -247,7 +247,6 @@ s32 GetNumMonsAbleToLearnItemMove(void)
     s32 team [MAX_TEAM_MEMBERS];
     struct PokemonStruct *preload;
 
-
     length = sub_808D580(team);
     gUnknown_203B22C->monsAbleToLearnMove = 0;
 
@@ -262,4 +261,23 @@ s32 GetNumMonsAbleToLearnItemMove(void)
         }
     }
     return gUnknown_203B22C->monsAbleToLearnMove;
+}
+
+// Unused
+bool8 sub_801B374(u8 itemIndex)
+{
+  u16 moveID;
+  struct PokemonStruct *puVar4;
+  s32 iVar5;
+
+  puVar4 = &gRecruitedPokemonRef->pokemon[0];
+  moveID = GetItemMove(itemIndex);
+
+  for(iVar5 = 0; iVar5 < NUM_SPECIES; iVar5++, puVar4++)
+  {
+      if((puVar4->unk0 >> 1 & 1) != 0)
+        if(CanMonLearnMove(moveID, puVar4->speciesNum))
+            return FALSE;
+  }
+  return TRUE;
 }
