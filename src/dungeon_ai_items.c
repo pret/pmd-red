@@ -27,11 +27,34 @@ extern u32 GetEntityType(struct DungeonEntity*);
 extern struct ItemSlot* GetItemData(struct DungeonEntity*);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
 extern bool8 ToolboxEnabled(struct DungeonEntityData*);
+extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
+extern bool8 EntityExists(struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
 extern u32 gPotentialTargetWeights[NUM_DIRECTIONS];
 extern u32 gPotentialTargetDirections[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
+
+extern struct DungeonGlobalData *gDungeonGlobalData;
+
+void sub_807360C(struct DungeonEntity *pokemon)
+{
+    s32 iVar2;
+    struct DungeonEntity *entity;
+
+    for(iVar2 = 0; iVar2 < DUNGEON_MAX_POKEMON; iVar2++)
+    {
+        entity = gDungeonGlobalData->allPokemon[iVar2];
+        if(EntityExists(entity))
+        {
+            if(entity->entityData->unk152 != 0)
+            {
+               entity->entityData->unk152 = 0; 
+               sub_8077274(entity, entity);
+            }
+        }
+    }
+}
 
 void DecideUseItem(struct DungeonEntity *pokemon)
 {

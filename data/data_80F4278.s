@@ -4854,8 +4854,8 @@ gUnknown_80FE2D0: @ 80FE2D0
 gUnknown_80FE2EC: @ 80FE2EC
 	.incbin "baserom.gba", 0xFE2EC, 0x1C
 
-	.global gUnknown_80FE308
-gUnknown_80FE308: @ 80FE308
+	.global gPtrItsaMonsterHouseMessage
+gPtrItsaMonsterHouseMessage: @ 80FE308
 	.incbin "baserom.gba", 0xFE308, 0x28
 
 	.global gUnknown_80FE330
@@ -8338,13 +8338,13 @@ gUnknown_810A350: @ 810A350
         @ replacing .incbin "baserom.gba", 0x0010a350, 0xb
         .byte 0x18, 0x19, 0x1e, 0x27, 0x31, 0x32, 0x33, 0x36, 0x37, 0x3d, 0x3f
 
-	.global gUnknown_810A35B
-gUnknown_810A35B: @ 810A35B (item related)
+	.global gInvalidItemIDs
+gInvalidItemIDs: @ 810A35B (item related)
         @ replacing .incbin "baserom.gba", 0x0010a35b, 0x10
         .byte 0xed, 0xee, 0xef, 0xb1, 0xe9, 0x24, 0xd8, 0xd2, 0xb0, 0xdc, 0x32, 0x33, 0x34, 0xc2, 0xec, 0xf0
 
-	.global gUnknown_810A36B
-gUnknown_810A36B: @ 810A36B
+	.global gTacticsTargetLeader
+gTacticsTargetLeader: @ 810A36B
         @ replacing .incbin "baserom.gba", 0x0010a36b, 0xd
         .byte 0x01
         .byte 0x00

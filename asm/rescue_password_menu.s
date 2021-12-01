@@ -721,7 +721,7 @@ sub_8039068:
 	adds r0, r5, 0
 	adds r0, 0x22
 	ldrb r0, [r0]
-	bl sub_8092040
+	bl IsInvalidItemReward
 	lsls r0, 24
 	cmp r0, 0
 	beq _080390B4

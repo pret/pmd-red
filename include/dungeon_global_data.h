@@ -40,7 +40,8 @@ struct DungeonGlobalData
     u16 unk66A;
     u8 fill66C[0x671 - 0x66C];
     /* 0x671 */ bool8 monsterHouseActive;
-    u8 fill672[0x363C - 0x672];
+    /* 0x672 */ u8 unk672;
+    u8 fill673[0x363C - 0x673];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
     u8 fill37E3[0x37FC - 0x37D9];
     /* 0x37FC */ bool8 decoyActive;

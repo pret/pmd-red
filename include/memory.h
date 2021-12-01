@@ -5,33 +5,33 @@
 
 struct HeapSettings
 {
-    u8 *start;
-    u32 size;
+    /* 0x0 */ u8 *start;
+    /* 0x4 */ u32 size;
 };
 
 struct HeapMemoryBlock {
-    u8 *start;
-    s32 size;
-    s32 allocatedSize;
+    /* 0x0 */ u8 *start;
+    /* 0x4 */ s32 size;
+    /* 0x8 */ s32 allocatedSize;
 };
 
 struct HeapFreeListElement
 {
-    u32 unk_atb;
-    u32 atb;
-    u32 grp;
-    struct HeapMemoryBlock block;
+    /* 0x0 */ u32 unk_atb;
+    /* 0x4 */ u32 atb;
+    /* 0x8 */ u32 grp;
+    /* 0xC */ struct HeapMemoryBlock block;
 };
 
 struct HeapDescriptor
 {
     u32 unk0;
-    struct HeapDescriptor *parentHeap;
-    struct HeapFreeListElement *freeList;
-    s32 freeCount;
-    u32 freeListLength;
-    u8 *start;
-    u32 size;
+    /* 0x4 */ struct HeapDescriptor *parentHeap;
+    /* 0x8 */ struct HeapFreeListElement *freeList;
+    /* 0xC */ s32 freeCount;
+    /* 0x10 */ u32 freeListLength;
+    /* 0x14 */ u8 *start;
+    /* 0x18 */ u32 size;
 };
 
 void InitHeap(void);

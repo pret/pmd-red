@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start CannotAttack
-CannotAttack:
-	push {lr}
-	adds r3, r0, 0
-	lsls r1, 24
-	ldr r2, [r3, 0x70]
-	cmp r1, 0
-	bne _08070D22
-	adds r0, r2, 0
-	adds r0, 0xA8
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	beq _08070D22
-	cmp r0, 0x4
-	beq _08070D22
-	cmp r0, 0
-	bne _08070D64
-_08070D22:
-	adds r0, r2, 0
-	adds r0, 0xB0
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08070D64
-	cmp r0, 0x3
-	beq _08070D64
-	cmp r0, 0x4
-	beq _08070D64
-	cmp r0, 0x6
-	beq _08070D64
-	adds r0, r2, 0
-	adds r0, 0xBC
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08070D64
-	cmp r0, 0x3
-	beq _08070D64
-	cmp r0, 0x7
-	beq _08070D64
-	adds r0, r2, 0
-	adds r0, 0xAC
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	beq _08070D64
-	adds r0, r3, 0
-	bl ShouldAvoidEnemies
-	lsls r0, 24
-	cmp r0, 0
-	bne _08070D64
-	movs r0, 0
-	b _08070D66
-_08070D64:
-	movs r0, 0x1
-_08070D66:
-	pop {r1}
-	bx r1
-	thumb_func_end CannotAttack
-
 	thumb_func_start CannotMoveForward
 CannotMoveForward:
 	push {r4-r6,lr}
@@ -971,27 +914,5 @@ _0807146A:
 	pop {r1}
 	bx r1
 	thumb_func_end IsAtJunction
-
-	thumb_func_start ShouldAvoidFirstHit
-ShouldAvoidFirstHit:
-	push {r4,lr}
-	lsls r1, 24
-	lsrs r4, r1, 24
-	movs r1, 0x3
-	bl HasTactic
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807148A
-	cmp r4, 0
-	beq _0807148A
-	movs r0, 0x1
-	b _0807148C
-_0807148A:
-	movs r0, 0
-_0807148C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end ShouldAvoidFirstHit
 
 	.align 2, 0

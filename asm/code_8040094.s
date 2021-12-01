@@ -445,7 +445,7 @@ _0804049E:
 	beq _080404C4
 _080404B2:
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	ldr r1, _080404FC
 	ldrb r0, [r0]
 	adds r0, r1

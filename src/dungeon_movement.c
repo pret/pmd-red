@@ -2,6 +2,7 @@
 #include "dungeon_movement.h"
 
 #include "constants/dungeon_action.h"
+#include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "dungeon_global_data.h"
@@ -10,6 +11,7 @@
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
+extern char *gPtrItsaMonsterHouseMessage;
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
@@ -27,6 +29,132 @@ extern bool8 HasIQSkill(struct DungeonEntity*, u8);
 extern void DecideAttack(struct DungeonEntity*);
 extern bool8 GetIsMoving(s16);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
+extern u8 sub_8044B28(void);
+struct MapTile *sub_8045128(struct DungeonEntity *entity);
+extern void sub_807AB38(struct DungeonEntity *, u32);
+extern void sub_8041888(u32);
+extern u8 sub_803F428(s16 *);
+extern void sub_803E708(u32, u32);
+extern struct DungeonEntity *GetLeaderEntity();
+struct ItemSlot *GetItemData(struct DungeonEntity *entity);
+u8 *GetTrapData(struct DungeonEntity *entity);
+u32 GetEntityType(struct DungeonEntity *entity);
+extern void TargetTileInFront(struct DungeonEntity *);
+
+u32 sub_8075818(struct DungeonEntity *entity)
+{
+    struct MapTile *tile;
+    struct DungeonEntityData *entityData;
+    struct DungeonEntity *subEntity;
+    struct ItemSlot *item;
+    u8 *trapData; // TODO: turn into struct when more research is done..
+    u8 r1;
+
+    entityData = entity->entityData;
+    if(EntityExists(entity))
+    {
+        tile = sub_8045128(entity);
+        if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
+            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+                return 1;
+        subEntity = tile->mapObject;
+        if(subEntity != NULL)
+        {
+            switch(GetEntityType(subEntity))
+            {
+                case ENTITY_NONE:
+                case ENTITY_POKEMON:
+                case 4:
+                case 5:
+                    break;
+                case ENTITY_TRAP:
+                    trapData = GetTrapData(subEntity);
+                    r1 = 0;
+                    if(trapData[1] == 0)
+                    {
+                        if(!subEntity->visible || entityData->isEnemy)
+                            goto flag_check;
+                        else
+                            goto error;
+                    }
+                    else if(trapData[1] == 1)
+                    {
+                        if(!entityData->isEnemy)
+                            goto flag_check;
+                        else
+                            goto error;
+                    }
+                    else if(trapData[1] == 2)
+                    {
+                        if(!entityData->isEnemy)
+                            r1 = 1;
+                    }
+flag_check:
+                    if(r1 == 0)
+                        break;
+                    else
+                        goto error;
+                case ENTITY_ITEM:
+                    if(!entityData->isLeader)
+                    {
+                        if(!(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
+                        {
+                            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+                            {
+                                if(entityData->isEnemy)
+                                    break;
+                                else
+                                {
+                                    item = GetItemData(subEntity);
+                                    if(!(item->itemFlags & ITEM_FLAG_FOR_SALE))
+                                    {
+                                        return 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                item = GetItemData(subEntity);
+                                if(!(item->itemFlags & ITEM_FLAG_FOR_SALE))
+                                {
+error:
+                                    return 1;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+    return 0;
+}
+
+void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
+{
+    if(EntityExists(pokemon))
+    {
+        if(!pokemon->entityData->isEnemy)
+        {
+            if(!sub_8044B28())
+            {
+                if(!gDungeonGlobalData->monsterHouseActive)
+                {
+                    if((sub_8045128(pokemon)->MapTileUnion.tileFlags_u16 & TILE_TYPE_MONSTER_HOUSE))
+                    {
+                        // It's a monster house!
+                        SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);
+                        gDungeonGlobalData->unk672 = 1;
+                        sub_807AB38(pokemon, r1);
+                        sub_8041888(0);
+                        if(sub_803F428(&pokemon->posWorldX) != 0)
+                            sub_803E708(0x78, 0x39);
+                    }
+                }
+            }
+        }
+    }
+}
 
 void DecideAction(struct DungeonEntity *pokemon)
 {
@@ -35,7 +163,7 @@ void DecideAction(struct DungeonEntity *pokemon)
     {
         if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
         {
-            SendImmobilizeEndMessage(pokemon, pokemon);
+            SendImmobilizeEndMessage(pokemon, pokemon); 
         }
     }
     else
@@ -146,4 +274,18 @@ void DecideAction(struct DungeonEntity *pokemon)
             }
         }
     }
+}
+
+void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
+{
+  struct DungeonEntityData * iVar2 = param_1->entityData;
+
+  if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
+      iVar2->facingDir = (iVar2->facingDir + 4) & DIRECTION_MASK;
+      TargetTileInFront(param_1);
+  }
+  else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
+      iVar2->facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+      TargetTileInFront(param_1);
+  }
 }

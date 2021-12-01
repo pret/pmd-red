@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8075BA4
-sub_8075BA4:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	ldr r4, [r5, 0x70]
-	cmp r1, 0
-	beq _08075BD0
-	adds r0, r4, 0
-	adds r0, 0xBC
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bne _08075BD0
-	adds r0, r4, 0
-	adds r0, 0x46
-	ldrb r1, [r0]
-	adds r1, 0x4
-	movs r2, 0x7
-	ands r1, r2
-	strb r1, [r0]
-	adds r0, r5, 0
-	bl TargetTileInFront
-	b _08075BEC
-_08075BD0:
-	adds r0, r4, 0
-	adds r0, 0xBC
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	bne _08075BEC
-	movs r0, 0x8
-	bl DungeonRandomCapped
-	adds r1, r4, 0
-	adds r1, 0x46
-	strb r0, [r1]
-	adds r0, r5, 0
-	bl TargetTileInFront
-_08075BEC:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8075BA4
-
 	thumb_func_start sub_8075BF4
 sub_8075BF4:
 	push {r4-r7,lr}
@@ -20350,10 +20308,10 @@ _0807FD12:
 	cmp r0, 0x2
 	bne _0807FD6E
 	ldr r0, [r6, 0x14]
-	bl sub_8045104
+	bl GetTrapData
 	strb r5, [r0]
 	ldr r0, [r6, 0x14]
-	bl sub_8045104
+	bl GetTrapData
 	mov r1, r8
 	strb r1, [r0, 0x1]
 	ldr r0, [r6, 0x14]
@@ -20566,7 +20524,7 @@ _0807FECE:
 	b _080801B4
 _0807FED8:
 	mov r0, r10
-	bl sub_8045104
+	bl GetTrapData
 	mov r8, r0
 	ldr r0, _0807FF58
 	mov r2, r8
@@ -22129,7 +22087,7 @@ sub_8080B00:
 	cmp r0, 0x2
 	bne _08080B26
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	strb r5, [r0]
 _08080B26:
 	bl sub_8049ED4
@@ -22305,7 +22263,7 @@ _08080C6A:
 	cmp r0, 0x2
 	bne _08080CC8
 	adds r0, r5, 0
-	bl sub_8045104
+	bl GetTrapData
 	adds r4, r0, 0
 	adds r0, r6, 0
 	adds r1, r4, 0

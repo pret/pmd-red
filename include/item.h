@@ -114,6 +114,7 @@ void MoveToStorage(struct ItemSlot* slot);
 void FillInventoryGaps();
 bool8 sub_8091274(struct HeldItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
+s32 FindItemInInventory(u8 itemIndex);
 
 
 void RestoreHeldItem(struct unkStruct_8094924*, struct HeldItem*);

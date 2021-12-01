@@ -1,6 +1,8 @@
 #include "global.h"
+#include "constants/iq_skill.h"
 #include "input.h"
 #include "memory.h"
+#include "pokemon.h"
 #include "text.h"
 #include "subStruct_203B240.h"
 
@@ -8,7 +10,7 @@ struct unkStruct_203B240
 {
     // size: 0x94
     s32 state;
-    u8 unk4;
+    u8 chosenIQSkill;
     u8 fill5[3];
     s32 unk8;
     s32 unkC;
@@ -45,17 +47,33 @@ extern void sub_8013F84();
 extern void PlayMenuSoundEffect(u32);
 extern char * GetIQSkillName(u8 r0);
 extern char * GetIQSkillDescription(u8 r0);
+extern s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ);
 
 void sub_801C6D0(s32);
 void sub_801C7D4();
 void sub_801C6E4();
 void sub_801C848();
 
-u32 sub_801C620(u8 param_1)
+bool8 HasNoAvailIQSkills(s16 species)
+{
+    s32 species_s32;
+    u8 iqSkillBuffer[NUM_IQ_SKILLS];
+    struct PokemonStruct *pokeStruct;
+
+    species_s32 = species;
+
+    pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
+    if(GetNumAvailableIQSkills(iqSkillBuffer, pokeStruct->IQ) == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u32 sub_801C620(u8 iqSkill)
 {
   ResetSprites(1);
   gUnknown_203B240 = MemoryAlloc(sizeof(struct unkStruct_203B240),8);
-  gUnknown_203B240->unk4 = param_1;
+  gUnknown_203B240->chosenIQSkill = iqSkill;
   sub_801317C(&gUnknown_203B240->unk88);
   gUnknown_203B240->unk24 = 0;
   sub_80140B4(gUnknown_203B240->unk28);
@@ -109,12 +127,12 @@ void sub_801C6E4(void)
     case 0:
         sub_8008C54(gUnknown_203B240->unk24);
         sub_80073B8(gUnknown_203B240->unk24);
-        skillName = GetIQSkillName(gUnknown_203B240->unk4);
+        skillName = GetIQSkillName(gUnknown_203B240->chosenIQSkill);
         strcpy(gUnknown_202DE58,skillName);
         xxx_format_and_draw(16,0,gUnknown_80DBE2C,0,0); // {ARG_MOVE_ITEM_0}
-        xxx_call_draw_string(8,16,GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk24,0);
+        xxx_call_draw_string(8,16,GetIQSkillDescription(gUnknown_203B240->chosenIQSkill),gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);
-        gUnknown_203B240->unkC = sub_8097DF0(GetIQSkillDescription(gUnknown_203B240->unk4),gUnknown_203B240->unk10);
+        gUnknown_203B240->unkC = sub_8097DF0(GetIQSkillDescription(gUnknown_203B240->chosenIQSkill),gUnknown_203B240->unk10);
         gUnknown_203B240->unk20 = 0;
         break;
     case 1:

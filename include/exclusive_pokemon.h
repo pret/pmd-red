@@ -14,7 +14,7 @@ struct ExclusivePokemonData
 {
     u8 fill0[0x48];
     u32 unk48[4];
-    bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
+    /* 0x58 */ bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
 };
 
 #define RED_EXCLUSIVE(species)  \
@@ -36,5 +36,6 @@ extern struct ExclusivePokemonData *gUnknown_203B498;
 void LoadExclusivePokemon(void);
 struct ExclusivePokemonData *GetExclusivePokemon(void);
 void InitializeExclusivePokemon(void);
+void UnlockExclusivePokemon(s16 pokeID);
 
 #endif // GUARD_EXCLUSIVE_POKEMON_H

@@ -2422,7 +2422,7 @@ _08043E6E:
 	cmp r0, 0x2
 	bne _08043EA0
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	adds r1, r0, 0
 	ldrb r0, [r1]
 	cmp r0, 0x1B

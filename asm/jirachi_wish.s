@@ -55,7 +55,7 @@ JirachiWish:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808B844
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -67,7 +67,7 @@ JirachiWish:
 	adds r0, r6, 0
 	bl sub_80862BC
 	ldr r0, _0808B84C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0x79
 	bl sub_8083E88
 	movs r0, 0xA
@@ -80,14 +80,14 @@ JirachiWish:
 	lsls r0, 1
 	bl PlaySoundEffect
 	ldr r0, _0808B850
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	adds r0, r6, 0
 	bl SpriteLookAroundEffect
 	ldr r0, _0808B854
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -109,7 +109,7 @@ _0808B692:
 	cmp r2, 0x1
 	bne _0808B754
 	ldr r0, _0808B864
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -187,7 +187,7 @@ _0808B754:
 	cmp r0, 0x2
 	bne _0808B80A
 	ldr r0, _0808B874
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -276,7 +276,7 @@ _0808B80A:
 	cmp r4, 0x3A
 	bne _0808B87C
 	ldr r0, _0808B878
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -304,7 +304,7 @@ _0808B874: .4byte gUnknown_8105974
 _0808B878: .4byte gUnknown_8105A08
 _0808B87C:
 	ldr r0, _0808BA30
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -316,7 +316,7 @@ _0808B87C:
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0808BA38
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	adds r0, r4, 0
 	bl UnlockFriendArea
 	movs r0, 0xD4
@@ -331,13 +331,13 @@ _0808B87C:
 	movs r2, 0
 	bl sub_8092578
 	ldr r0, _0808BA44
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 _0808B8CA:
 	mov r0, r9
 	cmp r0, 0x4
 	bne _0808B98E
 	ldr r0, _0808BA48
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -417,7 +417,7 @@ _0808B970:
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0808BA58
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -426,7 +426,7 @@ _0808B98E:
 	cmp r0, 0x5
 	bne _0808B9F8
 	ldr r0, _0808BA5C
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -438,7 +438,7 @@ _0808B98E:
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0808BA60
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -454,7 +454,7 @@ _0808B98E:
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808BA64
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -466,14 +466,14 @@ _0808B98E:
 	strb r1, [r0]
 _0808B9F8:
 	ldr r0, _0808BA70
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	adds r0, r6, 0
 	bl sub_808BC20
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	ldr r0, _0808BA74
-	bl sub_8052910
+	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708

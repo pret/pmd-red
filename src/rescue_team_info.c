@@ -12,25 +12,6 @@ extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 extern const char *gRescueTeamRanks[];
 extern s32 gRescueRankMaxPoints[7];
 extern u8 gTeamNamePlaceholder[0x8]; // Pokemon
-extern u8 gUnknown_810A35B[0x10];
-
-bool32 sub_8092040(u8 param_1)
-{
-  s32 index;
-
-  // NUMBER_OF_ITEM_IDS == 0xf0
-  if (param_1 >= 0xF0)
-      return TRUE;
-  else {
-    index = 0;
-    while (gUnknown_810A35B[index] != 0xF0){
-      if (gUnknown_810A35B[index] == param_1)
-        return TRUE;
-      index++;
-    };
-    return FALSE;
-  }
-}
 
 void LoadRescueTeamInfo(void)
 {

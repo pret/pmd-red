@@ -9158,14 +9158,14 @@ sub_805BE90:
 	bx r1
 	thumb_func_end sub_805BE90
 
-	thumb_func_start sub_805BEA0
-sub_805BEA0:
+	thumb_func_start LuminousOrbAction
+LuminousOrbAction:
 	push {lr}
-	bl sub_804002C
+	bl HandleLuminousOrbAction
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805BEA0
+	thumb_func_end LuminousOrbAction
 
 	thumb_func_start sub_805BEAC
 sub_805BEAC:
@@ -9353,7 +9353,7 @@ _0805BFF0:
 	cmp r0, 0x2
 	bne _0805C028
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	ldrb r0, [r0]
 	cmp r0, 0x11
 	beq _0805C028
@@ -14721,7 +14721,7 @@ _0805EEB8:
 	.4byte _0805EF52
 _0805EED0:
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	adds r6, r0, 0
 	movs r0, 0
 	mov r8, r0
@@ -19934,7 +19934,7 @@ _08061994:
 	bl sub_8083654
 	ldrb r1, [r0, 0x9]
 	add r0, sp, 0x4
-	bl sub_808EB0C
+	bl GetAvailTacticsforLvl
 	movs r6, 0x1
 	negs r6, r6
 	movs r1, 0
@@ -20947,7 +20947,7 @@ _08062198:
 	ldr r0, [sp, 0x11C]
 	adds r0, 0x8C
 	adds r1, r6, 0
-	bl sub_808EBF4
+	bl ToggleIQSkill
 	b _080621BA
 	.align 2, 0
 _080621AC: .4byte 0x00000133
@@ -25618,7 +25618,7 @@ _080646C4:
 	movs r1, 0
 	bl sub_803ECB4
 	adds r0, r4, 0
-	bl sub_8045104
+	bl GetTrapData
 	adds r4, r0, 0
 	ldrb r1, [r4]
 	mov r0, r10

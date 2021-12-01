@@ -27,6 +27,7 @@ extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
 extern u32 gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
+extern u8 gInvalidItemIDs[0x10];
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct Item *gItemParametersData;
@@ -1500,5 +1501,22 @@ void ClearAllItems_8091FB4() {
         }
       }
     }
+  }
+}
+
+bool32 IsInvalidItemReward(u8 itemID)
+{
+  s32 index;
+
+  if (itemID >= NUMBER_OF_ITEM_IDS)
+      return TRUE;
+  else {
+    index = 0;
+    while (gInvalidItemIDs[index] != NUMBER_OF_ITEM_IDS){
+      if (gInvalidItemIDs[index] == itemID)
+        return TRUE;
+      index++;
+    };
+    return FALSE;
   }
 }

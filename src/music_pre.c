@@ -277,20 +277,18 @@ void sub_800BA5C(void)
 
 void xxx_update_bg_sound_input(void)
 {
-    u32 store;
-    store = gUnknown_203B09B;
     if(gUnknown_203B09B != 0){
         gUnknown_203B09C++;
     }
     else {
         gUnknown_203B09B = 1;
-        gUnknown_203B09A = store;
-        gUnknown_203B09C = store;
+        gUnknown_203B09A = 0;
+        gUnknown_203B09C = 0;
         UpdateBGControlRegisters();
         if(gUnknown_203B099 != 0)
             UpdateSound();
         UpdateInput();
-        gUnknown_203B099 = store;
+        gUnknown_203B099 = 0;
         gUnknown_203B0A4 = gUnknown_203B0A0;
     }
 }

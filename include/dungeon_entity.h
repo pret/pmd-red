@@ -187,7 +187,8 @@ struct DungeonEntityData
     u8 fill149[0x14E - 0x149];
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
-    u8 fill152[0x15C - 0x152];
+    /* 0x152 */ u8 unk152;
+    u8 fill153[0x15C - 0x153];
     u8 unk15C;
     u8 unk15D;
     u8 unk15E;

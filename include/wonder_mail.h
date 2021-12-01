@@ -44,9 +44,9 @@ struct WonderMail
 struct WonderMailStruct_203B2C0
 {
     // size: 0x548
-    u32 unk0;
-    u32 state;
-    u8 passwordBuffer[PASSWORD_BUFFER_SIZE];
+    /* 0x0 */ u32 fallbackState;
+    /* 0x4 */ u32 state;
+    /* 0x8 */ u8 passwordBuffer[PASSWORD_BUFFER_SIZE];
     u8 unk3E;
     u32 unk40;
     u32 linkError;
@@ -67,9 +67,9 @@ struct WonderMailStruct_203B2C0
     u8 padding8[0x4C];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    u32 unkfill; // unkStruct_41C?
-    struct OpenedFile *faceFile;
-    u8 *faceData;
+    /* 0x41C */ u32 unkfill; // ItemSlot?
+    /* 0x420 */ struct OpenedFile *faceFile;
+    /* 0x424 */ u8 *faceData;
     u16 unk428;
     u16 unk42A;
     u8 unk42C;
@@ -87,12 +87,12 @@ struct WonderMailStruct_203B2C0
 struct WonderMailStruct_203B2C4
 {
     // size: 0x564
-    u8 state;
-    u32 unk4; // wonder mail link status??
-    u8 passwordBuffer[PASSWORD_BUFFER_SIZE]; // Probably a buffer for entry
+    /* 0x0 */ u8 state;
+    /* 0x4 */ u32 fallbackState; // wonder mail link status??
+    /* 0x8 */ u8 passwordBuffer[PASSWORD_BUFFER_SIZE]; // Probably a buffer for entry
     u8 unk3E;
     u32 unk40;
-    u32 linkError; // another link status
+    /* 0x44 */ u32 linkError; // another link status
     u8 filler48[0x1B8 - 0x48];
     struct unkStruct_8095228 unk1B8;
     struct unkStruct_8095228 unk1E8;
@@ -112,9 +112,9 @@ struct WonderMailStruct_203B2C4
     u8 unk42D;
     u8 unk42E;
     u32 unk430;
-    u8 formattedString[0x100];
-    s32 wonderMailMethod;
-    u32 wonderMailMode;
+    /* 0x434 */ u8 formattedString[0x100];
+    /* 0x534 */ s32 wonderMailMethod;
+    /* 0x538 */ u32 wonderMailMode;
     struct unkStruct_802F204 unk53C;
 };
 
@@ -126,17 +126,41 @@ enum WonderMailMode {
 };
 
 enum WonderMailMethod {
-   WONDER_MAIL_GAME_LINK = 3,
-   WONDER_MAIL_PASSWORD = 5, 
+    WONDER_MAIL_GAME_LINK = 3,
+    WONDER_MAIL_PASSWORD = 5, 
 };
 
 enum WonderMailTypes {
-  WONDER_MAIL_TYPE_SOS = 1,
-  WONDER_MAIL_TYPE_AOK = 4,
-  WONDER_MAIL_TYPE_THANK_YOU = 5,
-  WONDER_MAIL_TYPE_WONDER = 5,
+    WONDER_MAIL_TYPE_SOS = 1,
+    WONDER_MAIL_TYPE_AOK = 4,
+    WONDER_MAIL_TYPE_THANK_YOU = 5,
+    WONDER_MAIL_TYPE_WONDER = 5,
+    // TODO: document 7
 };
 
+enum WonderMailMissionTypes
+{
+    WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT = 0,
+    WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET = 1,
+    WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT = 2,
+    WONDER_MAIL_MISSION_TYPE_FIND_ITEM = 3,
+    WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM = 4,
+};
 
+enum WonderMailErrorMode {
+    WONDER_MAIL_GOOD = 0,
+    // TODO: document 1
+    WONDER_MAIL_NO_RESPONSE = 2,
+    WONDER_MAIL_INCORRECT_NUM_SYSTEMS = 3,
+    WONDER_MAIL_DIFFERENT_MODES = 4,
+    // TODO: document 5
+    WONDER_MAIL_NO_ROOM_STORAGE = 6,
+    WONDER_MAIL_DUPLICATE_MAIL = 7,
+    WONDER_MAIL_NOT_ELIGIBLE_1 = 9,
+    WONDER_MAIL_NOT_ELIGIBLE_2 = 11,
+    WONDER_MAIL_NO_ROOM_MAIL = 13,
+    // TODO: document 14
+    WONDER_MAIL_NOT_READY = 15,
+};
 
 #endif

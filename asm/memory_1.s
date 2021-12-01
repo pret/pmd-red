@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start MemoryLocate_LocalCreate
-MemoryLocate_LocalCreate:
-	push {r4-r7,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r7, r2, 0
-	adds r6, r3, 0
-	cmp r4, 0
-	bne _08003412
-	ldr r4, =gMainHeapDescriptor
-_08003412:
-	adds r0, r4, 0
-	movs r1, 0x9
-	adds r2, r5, 0
-	bl MemorySearchFromBack
-	adds r1, r0, 0
-	cmp r1, 0
-	bge _08003438
-	ldr r0, =gUnknown_80B7F88
-	ldr r1, =gLocalCreateErrorMessage
-	adds r2, r5, 0
-	bl FatalError
-	.align 2, 0
-	.pool
-_08003438:
-	str r6, [sp]
-	adds r0, r4, 0
-	movs r2, 0x9
-	adds r3, r5, 0
-	bl _LocateSetBack
-	ldr r1, [r0, 0xC]
-	str r1, [sp, 0x4]
-	ldr r0, [r0, 0x10]
-	str r0, [sp, 0x8]
-	add r0, sp, 0x4
-	adds r1, r7, 0
-	bl DoCreateSubHeap
-	str r4, [r0, 0x4]
-	add sp, 0xC
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end MemoryLocate_LocalCreate
-
 	thumb_func_start DoCreateSubHeap
 DoCreateSubHeap:
 	push {r4,lr}

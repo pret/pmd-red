@@ -721,7 +721,7 @@ _08071E4C:
 	beq _08071E68
 	ldrb r1, [r6, 0x9]
 	add r0, sp, 0x74
-	bl sub_808EB48
+	bl GetAvailTacticsforLvl_Bool
 _08071E68:
 	movs r0, 0x10
 	ldrsh r2, [r6, r0]
@@ -863,7 +863,7 @@ _08071F7A:
 	beq _08071FCA
 	ldrb r1, [r6, 0x9]
 	add r0, sp, 0x80
-	bl sub_808EB48
+	bl GetAvailTacticsforLvl_Bool
 	movs r4, 0
 	add r7, sp, 0x74
 	add r5, sp, 0x80
@@ -958,7 +958,7 @@ _08072036:
 	beq _0807204C
 	add r0, sp, 0xC
 	ldrb r1, [r5, 0x9]
-	bl sub_808EB48
+	bl GetAvailTacticsforLvl_Bool
 _0807204C:
 	movs r0, 0x10
 	ldrsh r2, [r5, r0]
@@ -1045,7 +1045,7 @@ _080720E6:
 	add r4, sp, 0x18
 	ldrb r1, [r5, 0x9]
 	adds r0, r4, 0
-	bl sub_808EB48
+	bl GetAvailTacticsforLvl_Bool
 	movs r6, 0
 	add r7, sp, 0xC
 _080720FA:
@@ -3693,46 +3693,5 @@ _08073600: .4byte gAvailablePokemonNames
 _08073604: .4byte gUnknown_80FCF50
 _08073608: .4byte 0x00000165
 	thumb_func_end sub_807348C
-
-	thumb_func_start sub_807360C
-sub_807360C:
-	push {r4,r5,lr}
-	movs r5, 0
-_08073610:
-	ldr r0, _08073650
-	ldr r0, [r0]
-	lsls r1, r5, 2
-	ldr r2, _08073654
-	adds r0, r2
-	adds r0, r1
-	ldr r4, [r0]
-	adds r0, r4, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _08073644
-	ldr r0, [r4, 0x70]
-	movs r2, 0xA9
-	lsls r2, 1
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08073644
-	movs r0, 0
-	strb r0, [r1]
-	adds r0, r4, 0
-	adds r1, r4, 0
-	bl sub_8077274
-_08073644:
-	adds r5, 0x1
-	cmp r5, 0x13
-	ble _08073610
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08073650: .4byte gDungeonGlobalData
-_08073654: .4byte 0x000135cc
-	thumb_func_end sub_807360C
 
 	.align 2, 0

@@ -504,7 +504,7 @@ u32 CreateThankYouMailPelipper(void)
     gUnknown_203B2C4->unk218 = -1;
     SetThankYouMailMenuState(THANK_YOU_MAIL_MAIN_MENU);
   }
-  gUnknown_203B2C4->unk4 = 0x2b;
+  gUnknown_203B2C4->fallbackState = 0x2b;
   return 1;
 }
 
@@ -665,40 +665,40 @@ void ReturnToThankYouMainFromError(void)
     }
 }
 
-void PrintThankYouMailLinkError(u32 param_1)
+void PrintThankYouMailLinkError(u32 errorCode)
 {
-  switch(param_1) {
-    case 3:
+  switch(errorCode) {
+    case WONDER_MAIL_INCORRECT_NUM_SYSTEMS:
         sub_80141B4(gUnknown_80DEF28, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 4:
+    case WONDER_MAIL_DIFFERENT_MODES:
         sub_80141B4(gUnknown_80DEF80, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 6:
+    case WONDER_MAIL_NO_ROOM_STORAGE:
         sub_80141B4(gUnknown_80DEFDC, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 7:
+    case WONDER_MAIL_DUPLICATE_MAIL:
         sub_80141B4(gUnknown_80DF044, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 9:
+    case WONDER_MAIL_NOT_ELIGIBLE_1:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 11:
+    case WONDER_MAIL_NOT_ELIGIBLE_2:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 13:
+    case WONDER_MAIL_NO_ROOM_MAIL:
         sub_80141B4(gUnknown_80DF0E0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 1:
-    case 2:
+    case WONDER_MAIL_NO_RESPONSE:
     case 5:
     case 14:
         sub_80141B4(gUnknown_80DEF04, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 15:
+    case WONDER_MAIL_NOT_READY:
         sub_80141B4(gUnknown_80DF138, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case 0:
+    case WONDER_MAIL_GOOD:
     default:
         break;
   }
@@ -800,7 +800,7 @@ void sub_802A0C8(void)
         SetThankYouMailMenuState(0x11);
         break;
     case 4:
-        gUnknown_203B2C4->unk4 = 0x10;
+        gUnknown_203B2C4->fallbackState = 0x10;
         gUnknown_203B2C4->unk218 = sub_80307EC();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
@@ -837,7 +837,7 @@ void sub_802A174(void)
         SetThankYouMailMenuState(0xe);
         break;
       case 0xC:
-        gUnknown_203B2C4->unk4 = 0x2b;
+        gUnknown_203B2C4->fallbackState = 0x2b;
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
@@ -864,12 +864,12 @@ void sub_802A230(void)
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
         sub_803092C();
-        if (gUnknown_203B2C4->unk4 == 0x2b) {
+        if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(&gUnknown_203B2C4->unk21C, 3, 1);
             SetThankYouMailMenuState(0x11);
         }
         else {
-            SetThankYouMailMenuState(gUnknown_203B2C4->unk4);
+            SetThankYouMailMenuState(gUnknown_203B2C4->fallbackState);
         }
         break;
     default:
@@ -895,7 +895,7 @@ void sub_802A28C(void)
         SetThankYouMailMenuState(0x14);
         break;
     case 4:
-        gUnknown_203B2C4->unk4 = 0x13;
+        gUnknown_203B2C4->fallbackState = 0x13;
         gUnknown_203B2C4->unk41C.itemIndex = sub_801CB24();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
@@ -916,12 +916,12 @@ void sub_802A33C(void)
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
         sub_801CB5C(1);
-        if (gUnknown_203B2C4->unk4 == 0x2b) {
+        if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
             SetThankYouMailMenuState(0x14);
         }
         else {
-            SetThankYouMailMenuState(gUnknown_203B2C4->unk4);
+            SetThankYouMailMenuState(gUnknown_203B2C4->fallbackState);
         }
         break;
     case 1:
@@ -947,7 +947,7 @@ void sub_802A39C(void)
             SetThankYouMailMenuState(CONFIRM_ITEM_TO_SEND);
             break;
       case 0xC:
-            gUnknown_203B2C4->unk4 = 0x2b;
+            gUnknown_203B2C4->fallbackState = 0x2b;
             sub_8006518(gUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0,1,1);
