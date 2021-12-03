@@ -55,7 +55,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
     {
         tile = sub_8045128(entity);
         if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
-            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                 return 1;
         subEntity = tile->mapObject;
         if(subEntity != NULL)
@@ -99,7 +99,7 @@ flag_check:
                     {
                         if(!(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
                         {
-                            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+                            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                             {
                                 if(entityData->isEnemy)
                                     break;
@@ -140,7 +140,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
             {
                 if(!gDungeonGlobalData->monsterHouseActive)
                 {
-                    if((sub_8045128(pokemon)->MapTileUnion.tileFlags_u16 & TILE_TYPE_MONSTER_HOUSE))
+                    if((sub_8045128(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);
@@ -163,7 +163,7 @@ void DecideAction(struct DungeonEntity *pokemon)
     {
         if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
         {
-            SendImmobilizeEndMessage(pokemon, pokemon); 
+            SendImmobilizeEndMessage(pokemon, pokemon);
         }
     }
     else
