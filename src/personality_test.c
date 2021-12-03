@@ -11,6 +11,10 @@
 #include "text.h"
 #include "menu.h"
 
+EWRAM_DATA struct PersonalityStruct_203B400 *gUnknown_203B400;
+EWRAM_DATA struct PersonalityStruct_203B404 *gUnknown_203B404;
+
+
 extern void sub_801317C(u32 *);
 extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
@@ -18,7 +22,7 @@ extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
 extern void sub_80141B4(const char *text, u32 r1, u32 r2, u16 r3);
-extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
+extern void sub_8014248(const char *text, u32, u32, const struct MenuItem *r0, u32, u32, u32, u32, u32);
 
 extern u32 sub_80144A4(s32 *);
 
@@ -54,10 +58,7 @@ extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUE
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 extern const char gStarterReveal[];
-extern const char gGenderText[];
-extern struct MenuItem gGenderMenu[];
 
-extern u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS];
 extern u8 gAvailablePokemonNames[0x50];
 
 extern const char gHardyDescription[];
@@ -73,6 +74,121 @@ extern const char gCalmDescription[];
 extern const char gRelaxedDescription[];
 extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
+extern const u8 GirlText[];
+extern const u8 BoyText[];
+
+
+// NOTE: 2nd Part of Brave is included at the end so it isn't actually chosen
+const u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS + 1] =
+{
+    HARDY,
+    HARDY,
+    HARDY,
+    HARDY,
+    DOCILE,
+    DOCILE,
+    DOCILE,
+    DOCILE,
+    BRAVE,
+    BRAVE,
+    BRAVE,
+    BRAVE,
+    JOLLY,
+    JOLLY,
+    JOLLY,
+    JOLLY,
+    IMPISH,
+    IMPISH,
+    IMPISH,
+    IMPISH,
+    NAIVE,
+    NAIVE,
+    NAIVE,
+    NAIVE,
+    TIMID,
+    TIMID,
+    TIMID,
+    TIMID,
+    HASTY,
+    HASTY,
+    HASTY,
+    HASTY,
+    SASSY,
+    SASSY,
+    SASSY,
+    SASSY,
+    CALM,
+    CALM,
+    CALM,
+    CALM,
+    RELAXED,
+    RELAXED,
+    RELAXED,
+    RELAXED,
+    LONELY,
+    LONELY,
+    LONELY,
+    LONELY,
+    QUIRKY,
+    QUIRKY,
+    QUIRKY,
+    QUIRKY,
+    MISC,
+    MISC,
+    MISC,
+    BRAVE
+};
+
+ALIGNED(4) const u8 gGenderText[] = "Are you a boy or a girl?";
+const char * const gGenderTextPtr = gGenderText;
+
+
+const struct MenuItem gGenderMenu[] =
+{
+    {BoyText, 0},
+    {GirlText, 1},
+    {NULL, -1},
+};
+
+ALIGNED(4) const u8 GirlText[] = "Girl.";
+ALIGNED(4) const u8 BoyText[] = "Boy.";
+
+const u8 unknownPersonality[] = 
+{
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD
+};
+
+const s16 gStarters[] =
+{
+    SPECIES_CHARMANDER,
+    SPECIES_PIKACHU,
+    SPECIES_BULBASAUR,
+    SPECIES_CHIKORITA,
+    SPECIES_MACHOP,
+    SPECIES_CHARMANDER,
+    SPECIES_SQUIRTLE,
+    SPECIES_TOTODILE,
+    SPECIES_PIKACHU,
+    SPECIES_CUBONE,
+    SPECIES_TOTODILE,
+    SPECIES_EEVEE,
+    SPECIES_CYNDAQUIL,
+    SPECIES_MUDKIP,
+    SPECIES_TORCHIC,
+    SPECIES_SKITTY,
+    SPECIES_TREECKO,
+    SPECIES_TORCHIC,
+    SPECIES_MUDKIP,
+    SPECIES_BULBASAUR,
+    SPECIES_PSYDUCK,
+    SPECIES_SQUIRTLE,
+    SPECIES_CUBONE,
+    SPECIES_PSYDUCK,
+    SPECIES_MEOWTH,
+    SPECIES_TREECKO,
+    SPECIES_NONE,
+};
+
 
 ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon {ARG_POKEMON_0}!");
 const char * const gStarterRevealPtr = gStarterReveal;
