@@ -2,7 +2,7 @@
 #include "dungeon_util.h"
 
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
-extern struct MapTile *GetMapEntity(s16, s16);
+extern struct MapTile* GetMapEntity(s16, s16);
 
 bool8 EntityExists(struct DungeonEntity *entity)
 {
