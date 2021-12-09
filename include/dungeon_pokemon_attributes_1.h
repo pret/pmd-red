@@ -5,5 +5,7 @@
 
 // 0x718AC
 bool8 HasTactic(struct DungeonEntity *pokemon, u8 tactic);
+// 0x718D8
+bool8 HasIQSkill(struct DungeonEntity* pokemon, u8 IQSkill);
 
 #endif

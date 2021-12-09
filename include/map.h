@@ -5,21 +5,11 @@
 
 #define MAX_ROOM_COUNT 24 // Empirical max, not sure if the code supports any more.
 
-
-struct MapTileBitFlagStair
-{
-    /* 0x0 */ u8 tileFlags;
-    /* 0x1 */ bool8 stairs;
-};
-
 struct MapTile
 {
-    // TODO: can we get rid of the union... is tileFlags a u16 only?
-    union MapTileUnion
-    {
-        struct MapTileBitFlagStair unk0;
-        u16 tileFlags_u16;
-    } MapTileUnion;
+    // Uses the TileType bit flags.
+    /* 0x0 */ u16 tileType;
+    u8 fill2[0x4 - 0x2];
     u16 unk4;
     u16 unk6;
     u8 unk8;
@@ -52,9 +42,10 @@ struct RoomExit
     s16 y;
 };
 
-enum TileFlag
+enum TileType
 {
     TILE_TYPE_FLOOR = 1 << 0,
+    TILE_TYPE_UNK_1 = 1 << 1,
     TILE_TYPE_LIQUID = 1 << 2, // Water or lava depending on the dungeon.
     TILE_TYPE_ROOM_EXIT = 1 << 3,
     TILE_TYPE_MAP_EDGE = 1 << 4,

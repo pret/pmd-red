@@ -1,14 +1,13 @@
 #include "global.h"
-#include "dungeon_global_data.h"
-#include "dungeon_entity.h"
 #include "constants/direction.h"
+#include "dungeon_entity.h"
+#include "dungeon_global_data.h"
+#include "dungeon_util.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern u8 sub_806CEBC(struct DungeonEntity *);
-extern bool8 EntityExists(struct DungeonEntity *);
 extern void sub_806CCB4(struct DungeonEntity *, u8);
-extern u32 GetEntityType(struct DungeonEntity *);
 
 void sub_806CD90(void)
 {
@@ -57,7 +56,7 @@ void sub_806CE34(struct DungeonEntity *r0, u32 newDir)
         r0->unk6A = sub_806CEBC(r0);
         if(newDir < NUM_DIRECTIONS)
         {
-            r0->entityData->facingDir = newDir & DIRECTION_MASK;
+            r0->entityData->action.facingDir = newDir & DIRECTION_MASK;
             r0->facingDir = newDir & DIRECTION_MASK;
         }
     }

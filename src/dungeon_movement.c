@@ -5,9 +5,14 @@
 #include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
-#include "dungeon_global_data.h"
+#include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
+#include "dungeon_global_data.h"
+#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_util.h"
+#include "dungeon_util_1.h"
 #include "map.h"
+#include "pokemon.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
@@ -15,30 +20,21 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
-extern bool8 IsMovingClient(struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SendMessage(struct DungeonEntity*, char*);
-extern void DecideUseItem(struct DungeonEntity*);
 extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
-extern bool8 EntityExists(struct DungeonEntity*);
 extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
 extern s32 DungeonRandomCapped(s32);
-extern bool8 HasIQSkill(struct DungeonEntity*, u8);
 extern void DecideAttack(struct DungeonEntity*);
-extern bool8 GetIsMoving(s16);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
-struct MapTile *sub_8045128(struct DungeonEntity *entity);
 extern void sub_807AB38(struct DungeonEntity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 extern struct DungeonEntity *GetLeaderEntity();
-struct ItemSlot *GetItemData(struct DungeonEntity *entity);
-u8 *GetTrapData(struct DungeonEntity *entity);
-u32 GetEntityType(struct DungeonEntity *entity);
 extern void TargetTileInFront(struct DungeonEntity *);
 
 u32 sub_8075818(struct DungeonEntity *entity)
@@ -55,7 +51,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
     {
         tile = sub_8045128(entity);
         if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
-            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                 return 1;
         subEntity = tile->mapObject;
         if(subEntity != NULL)
@@ -68,7 +64,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
                 case 5:
                     break;
                 case ENTITY_TRAP:
-                    trapData = GetTrapData(subEntity);
+                    trapData = (u8*) GetTrapData(subEntity);
                     r1 = 0;
                     if(trapData[1] == 0)
                     {
@@ -99,7 +95,7 @@ flag_check:
                     {
                         if(!(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
                         {
-                            if(!(tile->MapTileUnion.tileFlags_u16 & 3))
+                            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                             {
                                 if(entityData->isEnemy)
                                     break;
@@ -140,7 +136,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
             {
                 if(!gDungeonGlobalData->monsterHouseActive)
                 {
-                    if((sub_8045128(pokemon)->MapTileUnion.tileFlags_u16 & TILE_TYPE_MONSTER_HOUSE))
+                    if((sub_8045128(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);
@@ -163,7 +159,7 @@ void DecideAction(struct DungeonEntity *pokemon)
     {
         if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
         {
-            SendImmobilizeEndMessage(pokemon, pokemon); 
+            SendImmobilizeEndMessage(pokemon, pokemon);
         }
     }
     else
@@ -181,7 +177,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                     return;
                 }
                 DecideUseItem(pokemon);
-                if (pokemonData->action != DUNGEON_ACTION_NONE)
+                if (pokemonData->action.action != DUNGEON_ACTION_NONE)
                 {
                     return;
                 }
@@ -210,29 +206,29 @@ void DecideAction(struct DungeonEntity *pokemon)
                         }
                     }
                 }
-                ResetAction(&pokemonData->action);
+                ResetAction(&pokemonData->action.action);
                 if (pokemonData->clientType == CLIENT_TYPE_CLIENT)
                 {
-                    SetWalkAction(&pokemonData->action, pokemonData->entityID);
-                    pokemonData->facingDir = DungeonRandomCapped(8);
+                    SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
+                    pokemonData->action.facingDir = DungeonRandomCapped(8);
                     pokemonData->targetPositionX = pokemon->posWorldX;
                     pokemonData->targetPositionY = pokemon->posWorldY - 1;
                 }
                 else
                 {
                     DecideUseItem(pokemon);
-                    if (pokemonData->action == DUNGEON_ACTION_NONE)
+                    if (pokemonData->action.action == DUNGEON_ACTION_NONE)
                     {
                         if (!HasIQSkill(pokemon, IQ_SKILL_DEDICATED_TRAVELER))
                         {
                             DecideAttack(pokemon);
-                            if (pokemonData->action != DUNGEON_ACTION_NONE)
+                            if (pokemonData->action.action != DUNGEON_ACTION_NONE)
                             {
                                 return;
                             }
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                             }
                             else
                             {
@@ -247,7 +243,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                         {
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                             }
                             else
                             {
@@ -255,12 +251,12 @@ void DecideAction(struct DungeonEntity *pokemon)
                                 {
                                     MoveIfPossible(pokemon, TRUE);
                                 }
-                                if (pokemonData->action > DUNGEON_ACTION_WAIT)
+                                if (pokemonData->action.action > DUNGEON_ACTION_WAIT)
                                 {
                                     return;
                                 }
                                 DecideAttack(pokemon);
-                                if (pokemonData->action <= DUNGEON_ACTION_WAIT)
+                                if (pokemonData->action.action <= DUNGEON_ACTION_WAIT)
                                 {
                                     return;
                                 }
@@ -281,11 +277,11 @@ void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
   struct DungeonEntityData * iVar2 = param_1->entityData;
 
   if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
-      iVar2->facingDir = (iVar2->facingDir + 4) & DIRECTION_MASK;
+      iVar2->action.facingDir = (iVar2->action.facingDir + 4) & DIRECTION_MASK;
       TargetTileInFront(param_1);
   }
   else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
-      iVar2->facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+      iVar2->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
       TargetTileInFront(param_1);
   }
 }

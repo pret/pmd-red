@@ -55,24 +55,22 @@ bool8 CannotAct(struct DungeonEntity *pokemon)
     return FALSE;
 }
 
-bool8 CannotAttack(struct DungeonEntity *pokemon, u8 param_2)
+bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep)
 {
-  struct DungeonEntityData *iVar3;
-  
-  iVar3 = pokemon->entityData;
-  if ((((((param_2 != '\0') || 
-    (iVar3->sleepStatus == SLEEP_STATUS_SLEEPLESS)) ||
-    (iVar3->sleepStatus == SLEEP_STATUS_YAWNING)) ||
-    (iVar3->sleepStatus == SLEEP_STATUS_NONE)) &&
-    ((((iVar3->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN && 
-    (iVar3->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE)) &&
-    ((iVar3->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_BY_FOE &&
-    ((iVar3->immobilizeStatus != IMMOBILIZE_STATUS_PETRIFIED &&
-    (iVar3->volatileStatus != VOLATILE_STATUS_CRINGING)))))) &&
-    (iVar3->volatileStatus != VOLATILE_STATUS_PAUSED)))) &&
-     (((iVar3->volatileStatus != VOLATILE_STATUS_INFATUATED &&
-     iVar3->nonVolatileStatus != NON_VOLATILE_STATUS_PARALYZED)) &&
-      !ShouldAvoidEnemies(pokemon))) {
+  struct DungeonEntityData *pokemonData = pokemon->entityData;
+  if ((skipSleep ||
+      pokemonData->sleepStatus == SLEEP_STATUS_SLEEPLESS ||
+      pokemonData->sleepStatus == SLEEP_STATUS_YAWNING ||
+      pokemonData->sleepStatus == SLEEP_STATUS_NONE) &&
+      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN &&
+      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE &&
+      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_BY_FOE &&
+      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_PETRIFIED &&
+      pokemonData->volatileStatus != VOLATILE_STATUS_CRINGING &&
+      pokemonData->volatileStatus != VOLATILE_STATUS_PAUSED &&
+      pokemonData->volatileStatus != VOLATILE_STATUS_INFATUATED &&
+      pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_PARALYZED &&
+      !ShouldAvoidEnemies(pokemon)) {
       return FALSE;
   }
   return TRUE;

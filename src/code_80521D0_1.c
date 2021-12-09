@@ -209,9 +209,9 @@ void sub_808BCE4(void)
   struct MapTile *puVar1;
 
   puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
-  puVar1->MapTileUnion.tileFlags_u16 &= 0xfffc;
-  puVar1->MapTileUnion.tileFlags_u16 |= TILE_TYPE_MAP_EDGE;
-  puVar1->MapTileUnion.tileFlags_u16 &= 0xfdff;
+  puVar1->tileType &= ~(TILE_TYPE_FLOOR | TILE_TYPE_UNK_1);
+  puVar1->tileType |= TILE_TYPE_MAP_EDGE;
+  puVar1->tileType &= ~TILE_TYPE_STAIRS;
   sub_8049884();
   sub_8049B8C();
   sub_8049ED4();
@@ -223,10 +223,10 @@ void sub_808BD38(void)
   struct MapTile *puVar1;
 
   puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
-  puVar1->MapTileUnion.tileFlags_u16 &= 0xfffc;
-  puVar1->MapTileUnion.tileFlags_u16 |= TILE_TYPE_FLOOR;
-  puVar1->MapTileUnion.tileFlags_u16 &= 0xffef;
-  puVar1->MapTileUnion.tileFlags_u16 |= TILE_TYPE_STAIRS;
+  puVar1->tileType &= ~(TILE_TYPE_FLOOR | TILE_TYPE_UNK_1);
+  puVar1->tileType |= TILE_TYPE_FLOOR;
+  puVar1->tileType &= ~TILE_TYPE_MAP_EDGE;
+  puVar1->tileType |= TILE_TYPE_STAIRS;
   puVar1->unk8 = 1;
   sub_8049884();
   sub_8049B8C();
@@ -1114,7 +1114,7 @@ void sub_808C998(void)
 
 void sub_808C9B0(struct DungeonEntity *param_1)
 {
-    param_1->entityData->facingDir = DIRECTION_NORTH;
+    param_1->entityData->action.facingDir = DIRECTION_NORTH;
     sub_806CE68(param_1, DIRECTION_NORTH);
 }
 

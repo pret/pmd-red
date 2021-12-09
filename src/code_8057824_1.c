@@ -3364,7 +3364,7 @@ void sub_808B1CC(u8 r0)
 
 void SetupRegiFacingDirection(struct DungeonEntity *r0)
 {
-    r0->entityData->facingDir = DIRECTION_NORTH;
+    r0->entityData->action.facingDir = DIRECTION_NORTH;
     sub_806CE68(r0, DIRECTION_NORTH);
 }
 
