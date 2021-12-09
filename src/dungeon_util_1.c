@@ -1,11 +1,12 @@
 #include "global.h"
-#include "constants/direction.h"
 #include "dungeon_util_1.h"
+
+#include "constants/direction.h"
 #include "dungeon_global_data.h"
+#include "dungeon_util.h"
 #include "random.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
-extern bool8 EntityExists(struct DungeonEntity *);
 extern void sub_806CE68(struct DungeonEntity *, s32);
 
 extern s32 sub_803F994(void);
@@ -16,7 +17,7 @@ extern void sub_803E46C(u32);
 
 void sub_8085860(s32 x, s32 y)
 {
-  
+
   sub_803F4A0(0);
   sub_803F878(x * 0x1800 + 0xc00, y * 0x1800 + 0x1000);
 }
@@ -33,7 +34,7 @@ void sub_80858AC(s32 *param_1, s32 param_2)
   s32 iVar2;
   s32 iVar3;
   s32 iVar4;
-  
+
   iVar1 = sub_803F994();
   iVar2 = sub_803F9B0();
   iVar3 = (param_1[0] - iVar1) / param_2;

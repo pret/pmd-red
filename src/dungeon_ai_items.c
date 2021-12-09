@@ -17,8 +17,19 @@
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
 #define HELD_ITEM_TOOLBOX_INDEX 0x81
-#define ITEM_TARGET_OTHER 1 << 0
-#define ITEM_TARGET_ALLY 1 << 1
+
+enum ItemTargetFlag
+{
+    ITEM_TARGET_OTHER = 1 << 0,
+    ITEM_TARGET_ALLY = 1 << 1
+};
+
+enum TargetCapability
+{
+    TARGET_CAPABILITY_CANNOT_ATTACK,
+    TARGET_CAPABILITY_CAN_TARGET,
+    TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+};
 
 extern bool8 RollPercentChance(u32);
 extern void FindRockItemTargets(struct DungeonEntity*, struct ItemSlot*, s16*[], bool8);
@@ -38,13 +49,6 @@ extern u32 gPotentialTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct DungeonGlobalData *gDungeonGlobalData;
-
-enum TargetCapability
-{
-    TARGET_CAPABILITY_CANNOT_ATTACK,
-    TARGET_CAPABILITY_CAN_TARGET,
-    TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET,
-};
 
 void sub_807360C(struct DungeonEntity *pokemon)
 {

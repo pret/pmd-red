@@ -5,9 +5,14 @@
 #include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
-#include "dungeon_global_data.h"
+#include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
+#include "dungeon_global_data.h"
+#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_util.h"
+#include "dungeon_util_1.h"
 #include "map.h"
+#include "pokemon.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
@@ -15,30 +20,21 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
-extern bool8 IsMovingClient(struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SendMessage(struct DungeonEntity*, char*);
-extern void DecideUseItem(struct DungeonEntity*);
 extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
-extern bool8 EntityExists(struct DungeonEntity*);
 extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
 extern s32 DungeonRandomCapped(s32);
-extern bool8 HasIQSkill(struct DungeonEntity*, u8);
 extern void DecideAttack(struct DungeonEntity*);
-extern bool8 GetIsMoving(s16);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
-struct MapTile *sub_8045128(struct DungeonEntity *entity);
 extern void sub_807AB38(struct DungeonEntity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 extern struct DungeonEntity *GetLeaderEntity();
-struct ItemSlot *GetItemData(struct DungeonEntity *entity);
-u8 *GetTrapData(struct DungeonEntity *entity);
-u32 GetEntityType(struct DungeonEntity *entity);
 extern void TargetTileInFront(struct DungeonEntity *);
 
 u32 sub_8075818(struct DungeonEntity *entity)
@@ -68,7 +64,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
                 case 5:
                     break;
                 case ENTITY_TRAP:
-                    trapData = GetTrapData(subEntity);
+                    trapData = (u8*) GetTrapData(subEntity);
                     r1 = 0;
                     if(trapData[1] == 0)
                     {

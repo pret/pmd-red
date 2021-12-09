@@ -1,14 +1,13 @@
 #include "global.h"
-#include "dungeon_global_data.h"
-#include "dungeon_entity.h"
 #include "constants/direction.h"
+#include "dungeon_entity.h"
+#include "dungeon_global_data.h"
+#include "dungeon_util.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern u8 sub_806CEBC(struct DungeonEntity *);
-extern bool8 EntityExists(struct DungeonEntity *);
 extern void sub_806CCB4(struct DungeonEntity *, u8);
-extern u32 GetEntityType(struct DungeonEntity *);
 
 void sub_806CD90(void)
 {
