@@ -1114,7 +1114,7 @@ void sub_808C998(void)
 
 void sub_808C9B0(struct DungeonEntity *param_1)
 {
-    param_1->entityData->facingDir = DIRECTION_NORTH;
+    param_1->entityData->action.facingDir = DIRECTION_NORTH;
     sub_806CE68(param_1, DIRECTION_NORTH);
 }
 

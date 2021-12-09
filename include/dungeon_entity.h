@@ -4,6 +4,20 @@
 #include "item.h"
 #include "constants/move.h"
 
+struct DungeonActionContainer
+{
+    /* 0x0 */ u16 action;
+    /* 0x2 */ s8 facingDir;
+    u8 fill3;
+    // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
+    /* 0x4 */ u8 actionUseIndex;
+    u8 fill5[0x8 - 0x5];
+    // Position of the Pokémon the last time it threw an item.
+    /* 0x8 */ s16 lastItemThrowPositionX;
+    /* 0xA */ s16 lastItemThrowPositionY;
+    u8 unkC;
+};
+
 struct DungeonEntityData
 {
     // This has different purposes for Pokémon, items, and traps.
@@ -51,17 +65,8 @@ struct DungeonEntityData
     u8 fill3F;
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
     u8 fill41[0x44 - 0x41];
-    /* 0x44 */ u16 action;
-    /* 0x46 */ s8 facingDir;
-    u8 fill47;
-    // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
-    /* 0x48 */ u8 actionUseIndex;
-    u8 fill49[0x4C - 0x49];
-    // Position of the Pokémon the last time it threw an item.
-    /* 0x4C */ s16 lastItemThrowPositionX;
-    /* 0x4E */ s16 lastItemThrowPositionY;
-    u8 unk50;
-    u8 fill51[0x58 - 0x51];
+    /* 0x44 */ struct DungeonActionContainer action;
+    u8 fill55[0x58 - 0x55];
     // Position of the target that the Pokémon wants throw an item at.
     /* 0x58 */ s16 *itemTargetPosition;
     /* 0x5C */ u8 type1;

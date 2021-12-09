@@ -177,7 +177,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                     return;
                 }
                 DecideUseItem(pokemon);
-                if (pokemonData->action != DUNGEON_ACTION_NONE)
+                if (pokemonData->action.action != DUNGEON_ACTION_NONE)
                 {
                     return;
                 }
@@ -206,29 +206,29 @@ void DecideAction(struct DungeonEntity *pokemon)
                         }
                     }
                 }
-                ResetAction(&pokemonData->action);
+                ResetAction(&pokemonData->action.action);
                 if (pokemonData->clientType == CLIENT_TYPE_CLIENT)
                 {
-                    SetWalkAction(&pokemonData->action, pokemonData->entityID);
-                    pokemonData->facingDir = DungeonRandomCapped(8);
+                    SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
+                    pokemonData->action.facingDir = DungeonRandomCapped(8);
                     pokemonData->targetPositionX = pokemon->posWorldX;
                     pokemonData->targetPositionY = pokemon->posWorldY - 1;
                 }
                 else
                 {
                     DecideUseItem(pokemon);
-                    if (pokemonData->action == DUNGEON_ACTION_NONE)
+                    if (pokemonData->action.action == DUNGEON_ACTION_NONE)
                     {
                         if (!HasIQSkill(pokemon, IQ_SKILL_DEDICATED_TRAVELER))
                         {
                             DecideAttack(pokemon);
-                            if (pokemonData->action != DUNGEON_ACTION_NONE)
+                            if (pokemonData->action.action != DUNGEON_ACTION_NONE)
                             {
                                 return;
                             }
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                             }
                             else
                             {
@@ -243,7 +243,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                         {
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                             }
                             else
                             {
@@ -251,12 +251,12 @@ void DecideAction(struct DungeonEntity *pokemon)
                                 {
                                     MoveIfPossible(pokemon, TRUE);
                                 }
-                                if (pokemonData->action > DUNGEON_ACTION_WAIT)
+                                if (pokemonData->action.action > DUNGEON_ACTION_WAIT)
                                 {
                                     return;
                                 }
                                 DecideAttack(pokemon);
-                                if (pokemonData->action <= DUNGEON_ACTION_WAIT)
+                                if (pokemonData->action.action <= DUNGEON_ACTION_WAIT)
                                 {
                                     return;
                                 }
@@ -277,11 +277,11 @@ void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
   struct DungeonEntityData * iVar2 = param_1->entityData;
 
   if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
-      iVar2->facingDir = (iVar2->facingDir + 4) & DIRECTION_MASK;
+      iVar2->action.facingDir = (iVar2->action.facingDir + 4) & DIRECTION_MASK;
       TargetTileInFront(param_1);
   }
   else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
-      iVar2->facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+      iVar2->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
       TargetTileInFront(param_1);
   }
 }

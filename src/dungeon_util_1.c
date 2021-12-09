@@ -55,7 +55,7 @@ void sub_80858AC(s32 *param_1, s32 param_2)
 
 void SetFacingDirection(struct DungeonEntity *pokemon, s32 direction)
 {
-    pokemon->entityData->facingDir = direction & DIRECTION_MASK;
+    pokemon->entityData->action.facingDir = direction & DIRECTION_MASK;
     sub_806CE68(pokemon, direction);
 }
 
@@ -74,7 +74,7 @@ void sub_8085930(s32 direction)
             }
             else
             {
-                entity->entityData->facingDir = direction & DIRECTION_MASK;
+                entity->entityData->action.facingDir = direction & DIRECTION_MASK;
                 sub_806CE68(entity, direction);
             }
         }
@@ -92,7 +92,7 @@ void sub_8085930(s32 direction)
                 }
                 else
                 {
-                    entity->entityData->facingDir = direction & DIRECTION_MASK;
+                    entity->entityData->action.facingDir = direction & DIRECTION_MASK;
                     sub_806CE68(entity, direction);
                 }
             }
@@ -115,7 +115,7 @@ void sub_80859F0(s32 direction)
             }
             else
             {
-                entity->entityData->facingDir = direction & DIRECTION_MASK;
+                entity->entityData->action.facingDir = direction & DIRECTION_MASK;
                 sub_806CE68(entity, direction);
             }
         }

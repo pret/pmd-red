@@ -56,7 +56,7 @@ void sub_806CE34(struct DungeonEntity *r0, u32 newDir)
         r0->unk6A = sub_806CEBC(r0);
         if(newDir < NUM_DIRECTIONS)
         {
-            r0->entityData->facingDir = newDir & DIRECTION_MASK;
+            r0->entityData->action.facingDir = newDir & DIRECTION_MASK;
             r0->facingDir = newDir & DIRECTION_MASK;
         }
     }
