@@ -28806,22 +28806,7 @@ sub_80840D8:
 	str r1, [r2]
 	bx lr
 	.align 2, 0
-_080840E4: .4byte gUnknown_203B454
+_080840E4: .4byte gDungeonRngState
 	thumb_func_end sub_80840D8
-
-	thumb_func_start DungeonRandom
-DungeonRandom:
-	ldr r2, _080840F8
-	ldr r1, [r2]
-	ldr r0, _080840FC
-	muls r0, r1
-	adds r0, 0x1
-	str r0, [r2]
-	lsrs r0, 16
-	bx lr
-	.align 2, 0
-_080840F8: .4byte gUnknown_203B454
-_080840FC: .4byte 0x5d588b65
-	thumb_func_end DungeonRandom
 
 	.align 2, 0

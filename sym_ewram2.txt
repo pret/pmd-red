@@ -578,7 +578,7 @@ gUnknown_203B444 = .; /* 203B444 */
 gLeaderPokemon = .; /* 203B450 */
 	. += 0x4;
 
-gUnknown_203B454 = .; /* 203B454 */
+gDungeonRngState = .; /* 203B454 */
 	. += 0x4;
 
 gUnknown_203B458 = .; /* 203B458 */
