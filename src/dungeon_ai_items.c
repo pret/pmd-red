@@ -10,6 +10,8 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_random.h"
+#include "dungeon_random_1.h"
 #include "dungeon_util.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -31,10 +33,7 @@ enum TargetCapability
     TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
 };
 
-extern bool8 RollPercentChance(u32);
-extern void FindRockItemTargets(struct DungeonEntity*, struct ItemSlot*, s16*[], bool8);
-extern s32 DungeonRandomCapped(s32);
-extern s32 CalculateFacingDir(s16*, s16*);
+extern s32 CalculateFacingDir(struct Position*, struct Position*);
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
 extern bool8 ToolboxEnabled(struct DungeonEntityData*);
@@ -105,8 +104,8 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                     {
                         SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
                         pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                        pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                        pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
+                        pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                        pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                         pokemonData->action.facingDir = gPotentialTargetDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
@@ -118,7 +117,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
             }
             else if (itemType == ITEM_TYPE_ROCK)
             {
-                s16 *potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                 FindRockItemTargets(pokemon, item, potentialTargetPositions, TRUE);
                 if (gNumPotentialTargets == 0)
                 {
@@ -129,9 +128,9 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                     u32 chosenTargetIndex = DungeonRandomCapped(gNumPotentialTargets);
                     SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
                     pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                    pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
-                    pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorldX, (s16 *) (&potentialTargetPositions[chosenTargetIndex])) & DIRECTION_MASK;
+                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
+                    pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                     pokemonData->itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                 }
             }
@@ -142,8 +141,8 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                 {
                     SetAction(&pokemonData->action, DUNGEON_ACTION_CONSUME_ITEM_AI);
                     pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                    pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
+                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                 }
                 else
                 {
@@ -164,7 +163,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
             else if (toolboxIndex == 0)
             {
                 // This seems unused. toolboxIndex can never be 0.
-                struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorldX, pokemon->posWorldY);
+                struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorld.x, pokemon->posWorld.y);
                 struct DungeonEntity *mapObject = mapTile->mapObject;
                 if (mapObject != null)
                 {
@@ -214,8 +213,8 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                                     SetAction(&pokemonData->action, DUNGEON_ACTION_CONSUME_ITEM_AI);
                                 }
                                 pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                                pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
+                                pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                                pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                                 return;
                             }
                         }
@@ -241,16 +240,16 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                         u8 itemType = GetItemType(item->itemIndex);
                         if (itemType == ITEM_TYPE_ROCK)
                         {
-                            s16 *potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                            struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                             FindRockItemTargets(pokemon, item, potentialTargetPositions, FALSE);
                             if (gNumPotentialTargets != 0)
                             {
                                 u32 chosenTargetIndex = DungeonRandomCapped(gNumPotentialTargets);
                                 SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
                                 pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                                pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
-                                pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorldX, (s16 *) (&potentialTargetPositions[chosenTargetIndex])) & DIRECTION_MASK;
+                                pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                                pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
+                                pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                                 pokemonData->itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                                 return;
                             }
@@ -265,8 +264,8 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                                 {
                                     SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
                                     pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                    pokemonData->action.lastItemThrowPositionX = pokemon->posWorldX;
-                                    pokemonData->action.lastItemThrowPositionY = pokemon->posWorldY;
+                                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
+                                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                                     pokemonData->action.facingDir = gPotentialTargetDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }
@@ -279,7 +278,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
     }
 }
 
-void FindStraightThrowableTargets(struct DungeonEntity* pokemon, s32 thrownAIFlag, struct ItemSlot* item, bool8 ignoreRollChance)
+void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFlag, struct ItemSlot *item, bool8 ignoreRollChance)
 {
     s32 i;
     gNumPotentialTargets = 0;
@@ -315,6 +314,52 @@ void FindStraightThrowableTargets(struct DungeonEntity* pokemon, s32 thrownAIFla
             if (CanSee(pokemon, targetPokemon))
             {
                 TargetThrownItem(pokemon, targetPokemon, item, targetingFlags, ignoreRollChance);
+            }
+        }
+    }
+}
+
+void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, struct Position potentialTargets[], bool8 ignoreRollChance)
+{
+    s32 i;
+    gNumPotentialTargets = 0;
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
+    {
+        struct DungeonEntity* targetPokemon = gDungeonGlobalData->allPokemon[i];
+        if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
+            CanSee(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+        {
+            s32 posDiffX;
+            s32 maxPosDiff;
+            posDiffX = targetPokemon->posWorld.x - pokemon->posWorld.x;
+            if (posDiffX < 0)
+            {
+                posDiffX = -posDiffX;
+            }
+            maxPosDiff = targetPokemon->posWorld.y - pokemon->posWorld.y;
+            if (maxPosDiff < 0)
+            {
+                maxPosDiff = -maxPosDiff;
+            }
+            if (maxPosDiff < posDiffX)
+            {
+                maxPosDiff = posDiffX;
+            }
+            if (maxPosDiff <= 10)
+            {
+                struct Position *newPotentialTarget;
+                if (!ignoreRollChance)
+                {
+                    u32 itemWeight = EvaluateItem(targetPokemon, item, ITEM_TARGET_OTHER);
+                    if (!RollPercentChance(itemWeight))
+                    {
+                        continue;
+                    }
+                }
+                newPotentialTarget = &potentialTargets[gNumPotentialTargets];
+                newPotentialTarget->x = targetPokemon->posWorld.x;
+                newPotentialTarget->y = targetPokemon->posWorld.y;
+                gNumPotentialTargets++;
             }
         }
     }

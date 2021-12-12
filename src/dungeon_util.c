@@ -45,10 +45,10 @@ struct DungeonEntityData *sub_8045110(struct DungeonEntity *entity)
 
 struct MapTile *sub_8045114(struct DungeonEntity *entity)
 {
-    return GetMapTileAtPosition(entity->posWorldX, entity->posWorldY);
+    return GetMapTileAtPosition(entity->posWorld.x, entity->posWorld.y);
 }
 
 struct MapTile *sub_8045128(struct DungeonEntity *entity)
 {
-    return GetMapEntity(entity->posWorldX, entity->posWorldY);
+    return GetMapEntity(entity->posWorld.x, entity->posWorld.y);
 }

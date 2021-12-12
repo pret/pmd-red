@@ -25,21 +25,25 @@ struct MapTile
     /* 0x14 */ struct DungeonEntity *mapObject; // Item or trap on the tile.
 };
 
+struct Position
+{
+    s16 x;
+    s16 y;
+};
+
+struct Position32
+{
+    s32 x;
+    s32 y;
+};
+
 struct MapRoom
 {
     u8 fill0[0x2 - 0x0];
     // All coordinates are inclusive.
-    /* 0x2 */ s16 startX;
-    /* 0x4 */ s16 startY;
-    /* 0x6 */ s16 endX;
-    /* 0x8 */ s16 endY;
+    /* 0x2 */ struct Position start;
+    /* 0x6 */ struct Position end;
     u8 fillA[0x1C - 0xA];
-};
-
-struct RoomExit
-{
-    s16 x;
-    s16 y;
 };
 
 enum TileType

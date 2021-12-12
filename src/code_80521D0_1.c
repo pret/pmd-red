@@ -1,11 +1,12 @@
 #include "global.h"
+#include "constants/direction.h"
+#include "constants/friend_area.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "dungeon_random.h"
 #include "friend_area.h"
-#include "constants/friend_area.h"
-#include "pokemon.h"
-#include "constants/direction.h"
 #include "map.h"
+#include "pokemon.h"
 
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *sub_8085680(u32);
@@ -130,7 +131,6 @@ void sub_808C02C();
 extern void sub_80861B8(struct DungeonEntity *, u32, u32);
 
 void nullsub_99();
-extern u32 DungeonRandomCapped(s32);
 extern bool8 *gFriendAreas;
 
 extern void sub_8049884();
@@ -286,7 +286,7 @@ void sub_808BDEC(void)
     gDungeonGlobalData->unk7 = 1;
     SetFacingDirection(LugiaEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LUGIA);
 }
 
@@ -335,7 +335,7 @@ void LugiaPreFightDialogue(void)
     sub_808BFA0();
     SetupBossFightHP(LugiaEntity,800,0x20);
     sub_8083E88(0x23);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -424,7 +424,7 @@ void sub_808C10C(void)
     gDungeonGlobalData->unk7 = 1;
     SetFacingDirection(KyogreEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + -0x1000);
@@ -485,7 +485,7 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     SetupBossFightHP(KyogreEntity,600,0xb);
     sub_8083E88(0x23);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -542,7 +542,7 @@ void sub_808C3A0(void)
     gDungeonGlobalData->unk7 = 1;
     sub_808563C(SetupDeoxysFacingDirection);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_DEOXYS_NORMAL);
 }
 
@@ -576,7 +576,7 @@ void DeoxysPreFightDialogue(void)
     DisplayDungeonDialogue(&gUnknown_8106390);
     sub_803E708(10,0x46);
     sub_808563C(SetupDeoxysFightHP);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -642,7 +642,7 @@ void sub_808C5C0(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(CelebiEntity, DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   uVar3 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar3,iVar2 + 0xfffff000);
@@ -1130,7 +1130,7 @@ void sub_808C9C4(void)
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(MedichamEntity, DIRECTION_SOUTH);
-    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
+    sub_8085860(LeaderEntity->posWorld.x, LeaderEntity->posWorld.y - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
@@ -1198,7 +1198,7 @@ void sub_808CB5C(void)
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_8068FE0(MedichamEntity, 0x21C, 0);
-    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY);
+    sub_8085860(LeaderEntity->posWorld.x, LeaderEntity->posWorld.y);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MEDICHAM);
 }
 
@@ -1218,7 +1218,7 @@ void sub_808CBB0(void)
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(SmeargleEntity, DIRECTION_SOUTH);
-    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
+    sub_8085860(LeaderEntity->posWorld.x, LeaderEntity->posWorld.y - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 
@@ -1290,7 +1290,7 @@ void sub_808CD44(void)
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     sub_8068FE0(SmeargleEntity, 0x21C, 0);
-    sub_8085860(LeaderEntity->posWorldX, LeaderEntity->posWorldY - 3);
+    sub_8085860(LeaderEntity->posWorld.x, LeaderEntity->posWorld.y - 3);
     CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SMEARGLE);
 }
 

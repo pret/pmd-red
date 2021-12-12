@@ -9,6 +9,7 @@
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "map.h"
@@ -26,7 +27,6 @@ extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
 extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
-extern s32 DungeonRandomCapped(s32);
 extern void DecideAttack(struct DungeonEntity*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
@@ -143,7 +143,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
                         gDungeonGlobalData->unk672 = 1;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
-                        if(sub_803F428(&pokemon->posWorldX) != 0)
+                        if(sub_803F428(&pokemon->posWorld.x) != 0)
                             sub_803E708(0x78, 0x39);
                     }
                 }
@@ -211,8 +211,8 @@ void DecideAction(struct DungeonEntity *pokemon)
                 {
                     SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                     pokemonData->action.facingDir = DungeonRandomCapped(8);
-                    pokemonData->targetPositionX = pokemon->posWorldX;
-                    pokemonData->targetPositionY = pokemon->posWorldY - 1;
+                    pokemonData->targetPosition.x = pokemon->posWorld.x;
+                    pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
                 }
                 else
                 {

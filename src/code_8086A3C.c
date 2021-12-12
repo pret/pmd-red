@@ -129,7 +129,7 @@ void sub_8086B14(void)
   sub_80855E4(sub_8086A3C);
   sub_8086A3C(SkarmoryEntity);
   DiglettEntity->entityData->unk15C = 1;
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -2);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -2);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_DIGLETT);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_SKARMORY);
 }
@@ -148,7 +148,7 @@ void sub_8086B94(void)
   sub_8068FE0(DiglettEntity,0x21c,0);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
 }
 
 void sub_8086BDC(char param_1, s32 param_2)
@@ -168,17 +168,17 @@ void SkarmoryPreFightDialogue(void)
 
   struct subStruct_Skarmory local_1c;
   struct subStruct_Skarmory local_20;
-  
+
   LeaderEntity = xxx_call_GetLeaderEntity(); // Player
   PartnerEntity = GetPartnerEntity(); // Partner
   DiglettEntity = sub_8085680(4); // Diglett
   SkarmoryEntity = sub_8085680(3); // Skarmory
 
-  local_1c.x = DiglettEntity->posPixelX;
-  local_1c.y = DiglettEntity->posPixelY + 0x3000;
+  local_1c.x = DiglettEntity->posPixel.x;
+  local_1c.y = DiglettEntity->posPixel.y + 0x3000;
 
-  local_20.x = SkarmoryEntity->posPixelX;
-  local_20.y = SkarmoryEntity->posPixelY + 0x2000;
+  local_20.x = SkarmoryEntity->posPixel.x;
+  local_20.y = SkarmoryEntity->posPixel.y + 0x2000;
 
   sub_8086448();
   sub_803E708(10,0x46);
@@ -216,7 +216,7 @@ void SkarmoryPreFightDialogue(void)
   sub_80869E4(LeaderEntity,4,1,4);
   sub_803E708(10,0x46);
   sub_8083E88(0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void SkarmoryReFightDialogue(void)
@@ -224,11 +224,11 @@ void SkarmoryReFightDialogue(void)
   struct DungeonEntity * LeaderEntity;
   struct DungeonEntity * SkarmoryEntity;
   struct subStruct_Skarmory local_14;
-  
+
   LeaderEntity = xxx_call_GetLeaderEntity();
   SkarmoryEntity = sub_8085680(3);
-  local_14.x = SkarmoryEntity->posPixelX;
-  local_14.y = SkarmoryEntity->posPixelY + 0x2000;
+  local_14.x = SkarmoryEntity->posPixel.x;
+  local_14.y = SkarmoryEntity->posPixel.y + 0x2000;
   sub_8086448();
   sub_803E708(10,0x46);
   sub_8086E74(SkarmoryEntity);
@@ -240,7 +240,7 @@ void SkarmoryReFightDialogue(void)
   sub_806CDD4(SkarmoryEntity,0xd,0);
   DisplayDungeonDialogue(&gUnknown_8100CDC);
   sub_803E708(10,0x46);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   sub_8083E88(0xb);
 }
 
@@ -272,7 +272,7 @@ void sub_8086E9C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8086A3C);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_METAPOD);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_GENGAR);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0xA0, SPECIES_CATERPIE);
@@ -281,12 +281,12 @@ void sub_8086E9C(void)
 void sub_8086F00(void)
 {
   struct DungeonEntity * LeaderEntity;
-  
+
   LeaderEntity = xxx_call_GetLeaderEntity();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_METAPOD);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_GENGAR);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0xA0, SPECIES_CATERPIE);
