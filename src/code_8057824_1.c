@@ -1,9 +1,10 @@
 #include "global.h"
+#include "constants/direction.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
-#include "pokemon.h"
+#include "dungeon_util.h"
 #include "item.h"
-#include "constants/direction.h"
+#include "pokemon.h"
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
@@ -313,7 +314,6 @@ void sub_808919C();
 void GroudonScreenFlash2(void);
 
 extern void sub_8083F14();
-extern u8 EntityExists(struct DungeonEntity *);
 extern u8 sub_8086AE4(u32);
 
 
@@ -388,7 +388,7 @@ void ZapdosReFightDialogue(void)
   sub_808775C(2);
   DisplayDungeonDialogue(&gUnknown_8101918);
   SetupBossFightHP(ZapdosEntity,300,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void ZapdosPostStoryPreFightDialogue(void)
@@ -416,7 +416,7 @@ void ZapdosPostStoryPreFightDialogue(void)
     DisplayDungeonDialogue(&gUnknown_8101A04);
     sub_803E708(10,0x46);
     SetupBossFightHP(ZapdosEntity,300,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -485,7 +485,7 @@ void sub_80877E8(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(MoltresEntity, DIRECTION_SOUTH);
   sub_8086A3C(MoltresEntity);
-  sub_8085860(LeaderEntity->posWorldX + -3,LeaderEntity->posWorldY + -2);
+  sub_8085860(LeaderEntity->posWorld.x + -3,LeaderEntity->posWorld.y + -2);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_MOLTRES);
 }
 
@@ -511,7 +511,7 @@ void sub_8087848(void)
     SetFacingDirection(MoltresEntity, DIRECTION_SOUTH);
     sub_8086A3C(MoltresEntity);
   }
-  sub_8085860(LeaderEntity->posWorldX - 5, LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x - 5, LeaderEntity->posWorld.y);
   uVar4 = sub_803F994();
   iVar3 = sub_803F9B0();
   sub_803F878(uVar4,iVar3 + -0x1000);
@@ -594,7 +594,7 @@ void MoltresPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8102108);
   sub_803E708(10,0x46);
   SetupBossFightHP(MoltresEntity,400,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 
@@ -637,7 +637,7 @@ void MoltresReFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_81022F8);
   sub_803E708(10,0x46);
   SetupBossFightHP(MoltresEntity,400,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void MoltresPostStoryPreFightDialogue(void)
@@ -675,7 +675,7 @@ void MoltresPostStoryPreFightDialogue(void)
     DisplayDungeonDialogue(&gUnknown_8102454);
     sub_803E708(10,0x46);
     SetupBossFightHP(MoltresEntity,400,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -897,7 +897,7 @@ void sub_8087F54(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(ArticunoEntity, DIRECTION_SOUTH);
   sub_8086A3C(ArticunoEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ARTICUNO);
 }
 
@@ -934,7 +934,7 @@ void sub_8087FF8(void)
     SetFacingDirection(ArticunoEntity, DIRECTION_SOUTH);
     sub_8086A3C(ArticunoEntity);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ARTICUNO);
 }
 
@@ -1023,7 +1023,7 @@ void ArticunoPreFightDialogue(void)
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x10,0x46);
   SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void ArticunoReFightDialogue(void)
@@ -1045,7 +1045,7 @@ void ArticunoReFightDialogue(void)
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x28,0x46);
   SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void ArticunoPostStoryPreFightDialogue(void)
@@ -1081,7 +1081,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
     sub_803E708(0x28,0x46);
     SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -1156,7 +1156,7 @@ void sub_80885C4(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
 }
 
 void sub_8088608(void)
@@ -1192,7 +1192,7 @@ void sub_808862C(void)
   sub_80861D4(AlakazamEntity,0xd,4);
   SetFacingDirection(GroudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(GroudonEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1217,7 +1217,7 @@ void sub_80886C4(void)
   sub_8068FE0(AlakazamEntity,0x21c,0);
   SetFacingDirection(GroudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(GroudonEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   uVar4 = sub_803F994();
   iVar2 = sub_803F9B0();
   sub_803F878(uVar4,iVar2 + -0x1000);
@@ -1247,7 +1247,7 @@ void sub_808875C(void)
     SetFacingDirection(GroudonEntity, DIRECTION_SOUTH);
     sub_80861D4(GroudonEntity,0xf,0);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1344,7 +1344,7 @@ void GroudonPreFightDialogue(void)
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
   SetupBossFightHP(GroudonEntity,500,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void GroudonReFightDialogue(void)
@@ -1376,7 +1376,7 @@ void GroudonReFightDialogue(void)
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
   SetupBossFightHP(GroudonEntity,500,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void GroudonPostStoryPreFightDialogue(void)
@@ -1404,7 +1404,7 @@ void GroudonPostStoryPreFightDialogue(void)
     DisplayDungeonDialogue(&gUnknown_810347C);
     sub_803E708(10,0x46);
     SetupBossFightHP(GroudonEntity,500,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -1427,7 +1427,7 @@ void SceneGroudonMovement(struct DungeonEntity * param_1)
     }
     sub_803E46C(0x46);
   }
-  sub_80856C8(param_1,param_1->posWorldX,param_1->posWorldY + 1);
+  sub_80856C8(param_1,param_1->posWorld.x,param_1->posWorld.y + 1);
   sub_80861D4(param_1,0xf,0);
   sub_803E708(10,0x46);
   sub_808682C();
@@ -1509,7 +1509,7 @@ void sub_8088DC0(void)
   sub_806CDD4(uVar2,0xe,DIRECTION_SOUTH);
   sub_8086A3C(uVar3);
   sub_806CDD4(uVar3,0xe,DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1530,7 +1530,7 @@ void sub_8088E5C(void)
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(uVar2,0x21c,0);
   sub_8068FE0(uVar3,0x21c,0);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_GROUDON);
   CopySpeciesNametoBuffer(gUnknown_202E038 + 0x50, SPECIES_ALAKAZAM);
 }
@@ -1601,8 +1601,8 @@ void MagmaCavernMidDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8102C30);
   iVar3->entityData->unk15E = 0;
   iVar4->entityData->unk15E =0;
-  local_20[0] = (iVar3->posPixelX + iVar4->posPixelX) / 2;
-  local_20[1] = (iVar3->posPixelY + iVar4->posPixelY) / 2 + 0x800;
+  local_20[0] = (iVar3->posPixel.x + iVar4->posPixel.x) / 2;
+  local_20[1] = (iVar3->posPixel.y + iVar4->posPixel.y) / 2 + 0x800;
   sub_80858AC(local_20,0x20);
   sub_803E708(0x3c,0x46);
   sub_80891F0();
@@ -1671,7 +1671,7 @@ void sub_8089168(void)
   sub_803E708(10,0x46);
   SpriteLookAroundEffect(LeaderEntity);
   sub_803E708(10,0x46);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void sub_808919C(struct DungeonEntity *r0)
@@ -1709,10 +1709,10 @@ void sub_8089224(struct DungeonEntity * param_1)
 {
   s32 iVar1;
 
-  if (param_1->posPixelY < 0x9001) {
+  if (param_1->posPixel.y < 0x9001) {
     return;
   }
-  iVar1 = param_1->posPixelX;
+  iVar1 = param_1->posPixel.x;
 
   if(iVar1 < 0xE400)
   {
@@ -1774,7 +1774,7 @@ void sub_80892C8(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(RayquazaEntity, DIRECTION_SOUTH);
   sub_8086A3C(RayquazaEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
 }
 
@@ -1796,7 +1796,7 @@ void sub_8089328(void)
     sub_8072008(RayquazaEntity,RayquazaEntity,gUnknown_80F57CA,0,0);
     sub_8086A3C(RayquazaEntity);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_RAYQUAZA);
 }
 
@@ -1846,7 +1846,7 @@ void RayquazaPreFightDialogue(void)
   RayquazaScreenFlash();
   DisplayDungeonDialogue(&gUnknown_8103820);
   SetupBossFightHP(RayquazaEntity,600,0x20);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void RayquazaReFightDialogue(void)
@@ -1870,7 +1870,7 @@ void RayquazaReFightDialogue(void)
   RayquazaScreenFlash();
   DisplayDungeonDialogue(&gUnknown_81038F8);
   SetupBossFightHP(RayquazaEntity,600,0x20);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void RayquazaPostStoryPreFightDialogue(void)
@@ -1896,7 +1896,7 @@ void RayquazaPostStoryPreFightDialogue(void)
     RayquazaScreenFlash();
     DisplayDungeonDialogue(&gUnknown_8103B30);
     SetupBossFightHP(RayquazaEntity,600,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -1959,7 +1959,7 @@ void sub_808970C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8089908);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -3);
 }
 
 void sub_808974C(void)
@@ -1971,7 +1971,7 @@ void sub_808974C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_80898F8);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -3);
 }
 
 void sub_8089788(struct DungeonEntity *param_1, u8 param_2, s32 param_3)
@@ -2030,7 +2030,7 @@ void sub_80897F0(void)
   // Get 'em! It's frenzy time!
   DisplayDungeonDialogue(&gUnknown_8103D50);
   sub_803E708(10,0x46);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 
@@ -2050,7 +2050,7 @@ void sub_8089878(void)
   DisplayDungeonDialogue(&gUnknown_8103DD8);
   DisplayDungeonDialogue(&gUnknown_8103E28);
   sub_803E708(10,0x46);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void sub_80898E4(void)
@@ -2083,7 +2083,7 @@ void sub_8089914(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(MewtwoEntity, DIRECTION_SOUTH);
   sub_8086A3C(MewtwoEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
 }
 
@@ -2107,7 +2107,7 @@ void sub_8089978(void)
     SetFacingDirection(MewtwoEntity, DIRECTION_SOUTH);
     sub_8086A3C(MewtwoEntity);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_MEWTWO);
 }
 
@@ -2143,7 +2143,7 @@ void MewtwoPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104008);
   sub_803E708(10,0x46);
   SetupBossFightHP(MewtwoEntity,900,0x20);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void MewtwoPreFightDialogue1(void)
@@ -2169,7 +2169,7 @@ void MewtwoPreFightDialogue1(void)
     MewtwoScreenFlash();
     DisplayDungeonDialogue(&gUnknown_8104114);
     SetupBossFightHP(MewtwoEntity,900,0x20);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -2232,7 +2232,7 @@ void sub_8089C44(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
 }
 
@@ -2253,7 +2253,7 @@ void sub_8089C90(void)
   else {
       SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_ENTEI);
 }
 
@@ -2282,7 +2282,7 @@ void EnteiPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_81041F8);
   sub_803E708(10,70);
   SetupBossFightHP(EnteiEntity,600,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void EnteiPreFightDialogue1(void)
@@ -2300,7 +2300,7 @@ void EnteiPreFightDialogue1(void)
   DisplayDungeonDialogue(&gUnknown_81042B8);
   sub_803E708(10,70);
   SetupBossFightHP(EnteiEntity,600,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void EnteiPreFightDialogue2(void)
@@ -2322,7 +2322,7 @@ void EnteiPreFightDialogue2(void)
     DisplayDungeonDialogue(&gUnknown_81043C0);
     sub_803E708(10,70);
     SetupBossFightHP(EnteiEntity,600,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -2363,7 +2363,7 @@ void sub_8089EFC(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2379,7 +2379,7 @@ void sub_8089F44(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2400,7 +2400,7 @@ void sub_8089F8C(void)
   else {
       SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_RAIKOU);
 }
 
@@ -2435,7 +2435,7 @@ void RaikouPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_81045B0);
   sub_803E708(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void RaikouPreFightDialogue1(void)
@@ -2455,7 +2455,7 @@ void RaikouPreFightDialogue1(void)
   DisplayDungeonDialogue(&gUnknown_81046A0);
   sub_803E708(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void RaikouPreFightDialogue2(void)
@@ -2478,7 +2478,7 @@ void RaikouPreFightDialogue2(void)
     DisplayDungeonDialogue(&gUnknown_810476C);
     sub_803E708(10,70);
     SetupBossFightHP(RaikouEntity,0x28a,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -2521,7 +2521,7 @@ void sub_808A264(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   sub_8086A3C(SuicuneEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2536,7 +2536,7 @@ void sub_808A2C0(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2556,7 +2556,7 @@ void sub_808A308(void)
   else {
      SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_SUICUNE);
 }
 
@@ -2593,7 +2593,7 @@ void SuicunePreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104914);
   sub_803E708(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void SuicunePreFightDialogue1(void)
@@ -2610,7 +2610,7 @@ void SuicunePreFightDialogue1(void)
   DisplayDungeonDialogue(&gUnknown_8104998);
   sub_803E708(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void SuicunePreFightDialogue2(void)
@@ -2631,7 +2631,7 @@ void SuicunePreFightDialogue2(void)
     DisplayDungeonDialogue(&gUnknown_8104A9C);
     sub_803E708(10,70);
     SetupBossFightHP(SuicuneEntity,0x28a,0xb);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -2697,7 +2697,7 @@ void sub_808A608(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
   sub_8086A3C(HoOhEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY + -6);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y + -6);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_HO_OH);
 }
 
@@ -2720,7 +2720,7 @@ void sub_808A668(void)
     SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
     sub_8086A3C(HoOhEntity);
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 6);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 6);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_HO_OH);
 }
 
@@ -2746,8 +2746,8 @@ void HoOhPreFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeaderEntity();
   HoOhEntity = sub_8085680(0x15);
-  local_14[0] = LeaderEntity->posPixelX;
-  local_14[1] = LeaderEntity->posPixelY + -0x1000;
+  local_14[0] = LeaderEntity->posPixel.x;
+  local_14[1] = LeaderEntity->posPixel.y + -0x1000;
   sub_80858AC(local_14,0x88);
   sub_803E708(0x40,70);
   DisplayDungeonDialogue(&gUnknown_8104AD4);
@@ -2774,7 +2774,7 @@ void HoOhPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104CE0);
   sub_803E708(10,70);
   SetupBossFightHP(HoOhEntity,800,0x20);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void HoOhPreFightDialogue1(void)
@@ -2786,8 +2786,8 @@ void HoOhPreFightDialogue1(void)
   LeaderEntity = xxx_call_GetLeaderEntity();
   HoOhEntity = sub_8085680(0x15);
 
-  local_14[0] = LeaderEntity->posPixelX;
-  local_14[1] = LeaderEntity->posPixelY + -0x1000;
+  local_14[0] = LeaderEntity->posPixel.x;
+  local_14[1] = LeaderEntity->posPixel.y + -0x1000;
   sub_80858AC(local_14,0x88);
   sub_803E708(0x40,70);
   if (HasRecruitedMon(SPECIES_HO_OH)) {
@@ -2810,7 +2810,7 @@ void HoOhPreFightDialogue1(void)
     DisplayDungeonDialogue(&gUnknown_8104E0C);
     sub_803E708(10,70);
     SetupBossFightHP(HoOhEntity,800,0x20);
-    sub_80858AC(&LeaderEntity->posPixelX,0x10);
+    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
   }
 }
 
@@ -2874,7 +2874,7 @@ void sub_808A9E4(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 4);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 4);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -2890,7 +2890,7 @@ void sub_808AA3C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -2906,7 +2906,7 @@ void sub_808AA94(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(LatiosEntity,0x21c,0);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_LATIOS);
 }
 
@@ -2927,8 +2927,8 @@ void LatiosPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeaderEntity();
   LatiosEntity = sub_8085680(0x16);
 
-  local_18[0] = LatiosEntity->posPixelX;
-  local_18[1] = LatiosEntity->posPixelY + (0x80 << 6);
+  local_18[0] = LatiosEntity->posPixel.x;
+  local_18[1] = LatiosEntity->posPixel.y + (0x80 << 6);
   local_18[2] = 0x7000fc;
   sub_8085EC8(0x1bd,0,0,&local_18[2],1);
 
@@ -2946,7 +2946,7 @@ void LatiosPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104F30);
   sub_803E708(10,70);
   SetupBossFightHP(LatiosEntity,600,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void LatiosReFightDialogue(void)
@@ -2965,7 +2965,7 @@ void LatiosReFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104F30);
   sub_803E708(10,70);
   SetupBossFightHP(LatiosEntity,600,0xb);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void sub_808AC3C(void)
@@ -3401,7 +3401,7 @@ void sub_808B2F4(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(JirachiEntity, DIRECTION_SOUTH);
   sub_8086A3C(JirachiEntity);
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_JIRACHI);
 }
 
@@ -3426,7 +3426,7 @@ void sub_808B35C(void)
     sub_8049ED4();
 
   }
-  sub_8085860(LeaderEntity->posWorldX,LeaderEntity->posWorldY - 3);
+  sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y - 3);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_JIRACHI);
 }
 
@@ -3543,7 +3543,7 @@ void JirachiPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_810550C);
   sub_803E708(10,70);
   SetupBossFightHP(JirachiEntity,0x15e,0x20);
-  sub_80858AC(&LeaderEntity->posPixelX,0x10);
+  sub_80858AC(&LeaderEntity->posPixel.x,0x10);
 }
 
 void sub_808B50C(void)

@@ -60,8 +60,8 @@ void sub_80862BC(struct DungeonEntity *r0)
 void sub_80862DC(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->posPixelX;
-    array[1] = r0->posPixelY + (0xE0 << 6);
+    array[0] = r0->posPixel.x;
+    array[1] = r0->posPixel.y + (0xE0 << 6);
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, DIRECTION_NORTH);
@@ -71,8 +71,8 @@ void sub_80862DC(struct DungeonEntity *r0)
 void sub_8086310(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->posPixelX;
-    array[1] = r0->posPixelY + (0x90 << 8);
+    array[0] = r0->posPixel.x;
+    array[1] = r0->posPixel.y + (0x90 << 8);
 
     sub_804535C(r0, array);
     sub_806CE68(r0, DIRECTION_SOUTH);
@@ -83,8 +83,8 @@ void sub_8086310(struct DungeonEntity *r0)
 void sub_8086348(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->posPixelX + (0xF0 << 7);
-    array[1] = r0->posPixelY + 0xffffe000;
+    array[0] = r0->posPixel.x + (0xF0 << 7);
+    array[1] = r0->posPixel.y + 0xffffe000;
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, DIRECTION_WEST);
@@ -94,8 +94,8 @@ void sub_8086348(struct DungeonEntity *r0)
 void sub_8086384(struct DungeonEntity *r0)
 {
     u32 array[2];
-    array[0] = r0->posPixelX + (0xF0 << 7);
-    array[1] = r0->posPixelY;
+    array[0] = r0->posPixel.x + (0xF0 << 7);
+    array[1] = r0->posPixel.y;
 
     sub_804535C(r0, array);
     sub_806CDD4(r0, 0, DIRECTION_WEST);

@@ -2,10 +2,13 @@
 #define GUARD_DUNGEON_AI_ITEMS_H
 
 #include "dungeon_entity.h"
+#include "map.h"
 
 // 0x73658
 void DecideUseItem(struct DungeonEntity *pokemon);
 // 0x739DC
-void FindStraightThrowableTargets(struct DungeonEntity* pokemon, s32 thrownAIFlag, struct ItemSlot* item, bool8 ignoreRollChance);
+void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFlag, struct ItemSlot *item, bool8 ignoreRollChance);
+// 0x73AA0
+void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, struct Position potentialTargets[], bool8 ignoreRollChance);
 
 #endif

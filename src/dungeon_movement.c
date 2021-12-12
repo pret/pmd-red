@@ -143,7 +143,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
                         gDungeonGlobalData->unk672 = 1;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
-                        if(sub_803F428(&pokemon->posWorldX) != 0)
+                        if(sub_803F428(&pokemon->posWorld.x) != 0)
                             sub_803E708(0x78, 0x39);
                     }
                 }
@@ -211,8 +211,8 @@ void DecideAction(struct DungeonEntity *pokemon)
                 {
                     SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
                     pokemonData->action.facingDir = DungeonRandomCapped(8);
-                    pokemonData->targetPositionX = pokemon->posWorldX;
-                    pokemonData->targetPositionY = pokemon->posWorldY - 1;
+                    pokemonData->targetPosition.x = pokemon->posWorld.x;
+                    pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
                 }
                 else
                 {

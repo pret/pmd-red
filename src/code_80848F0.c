@@ -589,13 +589,13 @@ void sub_8084E00(struct DungeonEntity *param_1,char param_2,char param_3)
             sub_808AAF0(param_2,gDungeonGlobalData->unk3A0D);
             break;
         case 0x2e:
-            sub_808AE54(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorldX);
+            sub_808AE54(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
             break;
         case 0x2f:
-            sub_808AEC8(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorldX);
+            sub_808AEC8(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
             break;
         case 0x30:
-            sub_808AF3C(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorldX);
+            sub_808AF3C(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
             break;
         case 0x31:
         case 0x32:
