@@ -10,6 +10,7 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -31,7 +32,6 @@ enum TargetCapability
     TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
 };
 
-extern bool8 RollPercentChance(u32);
 extern void FindRockItemTargets(struct DungeonEntity*, struct ItemSlot*, s16*[], bool8);
 extern s32 DungeonRandomCapped(s32);
 extern s32 CalculateFacingDir(s16*, s16*);
