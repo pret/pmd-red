@@ -1,11 +1,12 @@
 #include "global.h"
+#include "constants/direction.h"
+#include "constants/friend_area.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "dungeon_random.h"
 #include "friend_area.h"
-#include "constants/friend_area.h"
-#include "pokemon.h"
-#include "constants/direction.h"
 #include "map.h"
+#include "pokemon.h"
 
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *sub_8085680(u32);
@@ -130,7 +131,6 @@ void sub_808C02C();
 extern void sub_80861B8(struct DungeonEntity *, u32, u32);
 
 void nullsub_99();
-extern u32 DungeonRandomCapped(s32);
 extern bool8 *gFriendAreas;
 
 extern void sub_8049884();

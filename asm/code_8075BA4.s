@@ -28809,8 +28809,8 @@ sub_80840D8:
 _080840E4: .4byte gUnknown_203B454
 	thumb_func_end sub_80840D8
 
-	thumb_func_start GetRandomNumber
-GetRandomNumber:
+	thumb_func_start DungeonRandom
+DungeonRandom:
 	ldr r2, _080840F8
 	ldr r1, [r2]
 	ldr r0, _080840FC
@@ -28822,46 +28822,6 @@ GetRandomNumber:
 	.align 2, 0
 _080840F8: .4byte gUnknown_203B454
 _080840FC: .4byte 0x5d588b65
-	thumb_func_end GetRandomNumber
-
-	thumb_func_start DungeonRandomCapped
-DungeonRandomCapped:
-	push {r4,lr}
-	adds r4, r0, 0
-	bl GetRandomNumber
-	ldr r1, _08084118
-	ands r0, r1
-	muls r0, r4
-	asrs r0, 16
-	ands r0, r1
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08084118: .4byte 0x0000ffff
-	thumb_func_end DungeonRandomCapped
-
-	thumb_func_start sub_808411C
-sub_808411C:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	cmp r5, r4
-	beq _0808413C
-	cmp r5, r4
-	blt _08084134
-	subs r0, r5, r4
-	bl DungeonRandomCapped
-	adds r0, r4
-	b _0808413C
-_08084134:
-	subs r0, r4, r5
-	bl DungeonRandomCapped
-	adds r0, r5
-_0808413C:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808411C
+	thumb_func_end DungeonRandom
 
 	.align 2, 0

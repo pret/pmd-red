@@ -9,6 +9,7 @@
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "map.h"
@@ -26,7 +27,6 @@ extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
 extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
-extern s32 DungeonRandomCapped(s32);
 extern void DecideAttack(struct DungeonEntity*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);

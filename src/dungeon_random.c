@@ -1,13 +1,9 @@
 #include "global.h"
 #include "dungeon_random.h"
 
-extern s32 DungeonRandomCapped(s32);
+extern s32 DungeonRandom(void);
 
-bool8 RollPercentChance(s32 percentChance)
+s32 DungeonRandomCapped(s32 cap)
 {
-    if (DungeonRandomCapped(100) < percentChance)
-    {
-        return TRUE;
-    }
-    return FALSE;
+    return (((DungeonRandom() & 0xFFFF) * cap) >> 16) & 0xFFFF;
 }

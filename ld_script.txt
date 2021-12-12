@@ -216,6 +216,8 @@ SECTIONS {
         src/dungeon_movement.o(.text);
         asm/code_8075BA4.o(.text);
         src/dungeon_random.o(.text);
+        asm/code_808411C.o(.text);
+        src/dungeon_random_1.o(.text);
         asm/code_8084160.o(.text);
         src/code_80848F0.o(.text);
         asm/code_80848F0.o(.text);

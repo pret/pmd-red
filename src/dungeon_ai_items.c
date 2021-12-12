@@ -11,6 +11,7 @@
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
 #include "dungeon_random.h"
+#include "dungeon_random_1.h"
 #include "dungeon_util.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -33,7 +34,6 @@ enum TargetCapability
 };
 
 extern void FindRockItemTargets(struct DungeonEntity*, struct ItemSlot*, s16*[], bool8);
-extern s32 DungeonRandomCapped(s32);
 extern s32 CalculateFacingDir(s16*, s16*);
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
