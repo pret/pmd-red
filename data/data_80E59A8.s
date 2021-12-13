@@ -18,50 +18,150 @@ gUnknown_80E5CCC: @ 80E5CCC
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0xdd, 0xff, 0x00, 0x00
 
-        .string "  \0"
-        .align 2,0
-        .string "Start an entirely new adventure.\0"
-        .align 2,0
+sUnknown_80E5CE4: @ 80E5CE4
+    .string "  \0"
+    .align 2,0
+
+    .string "Start an entirely new adventure.\0"
+    .align 2,0
 
 	.global gUnknown_80E5D0C
 gUnknown_80E5D0C: @ 80E5D0C
-	.incbin "baserom.gba", 0xE5D0C, 0x3C
+    .4byte sUnknown_80E5D24, 0xFFDE
+    .4byte sUnknown_80E5CE4, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5D24: @ 80E5D24
+    .string "Check your career as an adventurer.\0"
+    .align 2, 0
 
 	.global gUnknown_80E5D48
 gUnknown_80E5D48: @ 80E5D48
-	.incbin "baserom.gba", 0xE5D48, 0x58
+    .4byte sUnknown_80E5D88, 0xFFDE
+    .4byte sUnknown_80E5D60, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5D60: @ 80E5D60
+    .string "It won~27t be in the release version.\0"
+    .align 2, 0
+
+sUnknown_80E5D88: @ 80E5D88
+    .string "This is the Debug Mode.\0"
+    .align 2, 0
 
 	.global gUnknown_80E5DA0
 gUnknown_80E5DA0: @ 80E5DA0
-	.incbin "baserom.gba", 0xE5DA0, 0x50
+    .4byte sUnknown_80E5DCC, 0xFFDE
+    .4byte sUnknown_80E5DB8, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5DB8:
+    .string "you last saved.  \0"
+    .align 2, 0
+
+sUnknown_80E5DCC:
+    .string "Resume your adventure from where\0"
+    .align 2, 0
 
 	.global gUnknown_80E5DF0
 gUnknown_80E5DF0: @ 80E5DF0
-	.incbin "baserom.gba", 0xE5DF0, 0x6C
+    .4byte sUnknown_80E5E34, 0xFFDE
+    .4byte sUnknown_80E5E08, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5E08:
+    .string "#C2Beware#R! This will delete it forever!\0"
+    .align 2, 0
+
+sUnknown_80E5E34:
+    .string "This will delete your saved game data.\0"
+    .align 2, 0
 
 	.global gUnknown_80E5E5C
 gUnknown_80E5E5C: @ 80E5E5C
-	.incbin "baserom.gba", 0xE5E5C, 0x60
+    .4byte sUnknown_80E5EA0, 0xFFDE
+    .4byte sUnknown_80E5E74, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5E74:
+    .string "passwords~2c friends may rescue each other.\0"
+    .align 2, 0
+
+sUnknown_80E5EA0:
+    .string "Using a Game Link cable or\0"
+    .align 2, 0
 
 	.global gUnknown_80E5EBC
 gUnknown_80E5EBC: @ 80E5EBC
-	.incbin "baserom.gba", 0xE5EBC, 0x60
+    .4byte sUnknown_80E5EF8, 0xFFDE
+    .4byte sUnknown_80E5ED4, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5ED4:
+    .string "trade stored items with a friend.\0"
+    .align 2, 0
+
+sUnknown_80E5EF8:
+    .string "Using a Game Link cable~2c you can\0"
+    .align 2, 0
 
 	.global gUnknown_80E5F1C
 gUnknown_80E5F1C: @ 80E5F1C
-	.incbin "baserom.gba", 0xE5F1C, 0x64
+    .4byte sUnknown_80E5F58, 0xFFDE
+    .4byte sUnknown_80E5F34, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5F34:
+    .string "You can give up waiting for rescue.\0"
+    .align 2, 0
+
+sUnknown_80E5F58:
+    .string "You are awaiting rescue by a friend.\0"
+    .align 2, 0
 
 	.global gUnknown_80E5F80
 gUnknown_80E5F80: @ 80E5F80
-	.incbin "baserom.gba", 0xE5F80, 0x4C
+    .4byte sUnknown_80E5FB0, 0xFFDE
+    .4byte sUnknown_80E5F98, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5F98:
+    .string "receive Wonder Mail.\0"
+    .align 2, 0
+
+sUnknown_80E5FB0:
+    .string "Using passwords~2c you can\0"
+    .align 2, 0
 
 	.global gUnknown_80E5FCC
 gUnknown_80E5FCC: @ 80E5FCC
-	.incbin "baserom.gba", 0xE5FCC, 0x64
+    .4byte sUnknown_80E6008, 0xFFDE
+    .4byte sUnknown_80E5FE4, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E5FE4:
+    .string "receive teams from your friends.\0"
+    .align 2, 0
+
+sUnknown_80E6008:
+    .string "Using the Dual Slot function~2c you can\0"
+    .align 2, 0
 
 	.global gUnknown_80E6030
 gUnknown_80E6030: @ 80E6030
-	.incbin "baserom.gba", 0xE6030, 0x70
+    .4byte sUnknown_80E6070, 0xFFDE
+    .4byte sUnknown_80E6048, 0xFFDE
+    .4byte 0, 0xFFDD
+
+sUnknown_80E6048:
+    .string "go on an adventure to unknown worlds.\0"
+    .align 2, 0
+
+sUnknown_80E6070:
+    .string "Using wireless communication~2c you can\0"
+    .align 2, 0
+
+    .string "pksdir0\0"
 
 @ Start of Trade Items Data
 
@@ -285,23 +385,62 @@ gUnknown_80E6554: @ 80E6554
 
 	.global gUnknown_80E656C
 gUnknown_80E656C: @ 80E656C
-	.incbin "baserom.gba", 0xE656C, 0x6C
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E65AC, 0x5
+    .4byte sUnknown_80E658C, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E658C:
+    .string "#+Don~27t turn the power off!\0"
+    .align 2, 0
+
+sUnknown_80E65AC:
+    .string "#+Item transmitting!\0"
+    .align 2, 0
+
+sUnknown_80E65C4:
+    .string "#+#C2Caution!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E65D8
 gUnknown_80E65D8: @ 80E65D8
-	.incbin "baserom.gba", 0xE65D8, 0x44
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E65F8, 0x5
+    .4byte sUnknown_80E658C, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E65F8:
+    .string "#+Thank-You Mail in transmission!\0"
+    .align 2, 0
 
 	.global gUnknown_80E661C
 gUnknown_80E661C: @ 80E661C
-	.incbin "baserom.gba", 0xE661C, 0x40
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E663C, 0x5
+    .4byte sUnknown_80E658C, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E663C:
+    .string "#+A-OK Mail in transmission!\0"
+    .align 2, 0
 
 	.global gUnknown_80E665C
 gUnknown_80E665C: @ 80E665C
-	.incbin "baserom.gba", 0xE665C, 0x20
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E65F8, 0x5
+    .4byte sUnknown_80E658C, 0x5
+    .4byte 0, 0x3
 
 	.global gUnknown_80E667C
 gUnknown_80E667C: @ 80E667C
-	.incbin "baserom.gba", 0xE667C, 0x40
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E669C, 0x5
+    .4byte sUnknown_80E658C, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E669C:
+    .string "#+Wonder Mail in transmission!\0"
+    .align 2, 0
 
 	.global gUnknown_80E66BC
 gUnknown_80E66BC: @ 80E66BC
@@ -314,7 +453,22 @@ gUnknown_80E66BC: @ 80E66BC
 
 	.global gUnknown_80E66D4
 gUnknown_80E66D4: @ 80E66D4
-	.incbin "baserom.gba", 0xE66D4, 0x74
+    .4byte sUnknown_80E6734, 0x5
+    .4byte sUnknown_80E6710, 0x5
+    .4byte sUnknown_80E66F4, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E66F4:
+    .string "#+Please press any button.\0"
+    .align 2, 0
+
+sUnknown_80E6710:
+    .string "#+Your adventure will be continued.\0"
+    .align 2, 0
+
+sUnknown_80E6734:
+    .string "#+#CGSuccess!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E6748
 gUnknown_80E6748: @ 80E6748
@@ -327,7 +481,22 @@ gUnknown_80E6748: @ 80E6748
 
 	.global gUnknown_80E6760
 gUnknown_80E6760: @ 80E6760
-	.incbin "baserom.gba", 0xE6760, 0x74
+    .4byte sUnknown_80E67B4, 0x5
+    .4byte sUnknown_80E6794, 0x5
+    .4byte sUnknown_80E6780, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6780:
+    .string "#+please try again.\0"
+    .align 2, 0
+
+sUnknown_80E6794:
+    .string "#+Check the Game Link cable and\0"
+    .align 2, 0
+
+sUnknown_80E67B4:
+    .string "#+#C2Communication error!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E67D4
 gUnknown_80E67D4: @ 80E67D4
@@ -340,7 +509,38 @@ gUnknown_80E67D4: @ 80E67D4
 
 	.global gUnknown_80E67EC
 gUnknown_80E67EC: @ 80E67EC
-	.incbin "baserom.gba", 0xE67EC, 0xB0
+    .4byte sUnknown_80E67B4, 0x5
+    .4byte sUnknown_80E680C, 0x5
+    .4byte sUnknown_80E6780, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E680C:
+    .string "#+Check your communication mode and\0"
+    .align 2, 0
+
+    .global gUnknown_80E6830
+gUnknown_80E6830: @ 80E6830
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x08, 0x00
+        .byte 0x18, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+    .global gUnknown_80E6848
+gUnknown_80E6848: @ 80E6848
+    .4byte sUnknown_80E67B4, 0x5
+    .4byte sUnknown_80E6888, 0x5
+    .4byte sUnknown_80E6868, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6868:
+    .string "#+Please inform the programmer.\0"
+    .align 2, 0
+
+sUnknown_80E6888:
+    .string "#+Check sum error.\0"
+    .align 2, 0
 
 	.global gUnknown_80E689C
 gUnknown_80E689C: @ 80E689C
@@ -353,7 +553,22 @@ gUnknown_80E689C: @ 80E689C
 
 	.global gUnknown_80E68B4
 gUnknown_80E68B4: @ 80E68B4
-	.incbin "baserom.gba", 0xE68B4, 0x84
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E68FC, 0x5
+    .4byte sUnknown_80E68D4, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E68D4:
+    .string "#+someone~27s storage space was full.\0"
+    .align 2, 0
+
+sUnknown_80E68FC:
+    .string "#+An item could not be transferred because\0"
+    .align 2, 0
+
+sUnknown_80E6928:
+    .string "#+#C2Error!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E6938
 gUnknown_80E6938: @ 80E6938
@@ -366,7 +581,18 @@ gUnknown_80E6938: @ 80E6938
 
 	.global gUnknown_80E6950
 gUnknown_80E6950: @ 80E6950
-	.incbin "baserom.gba", 0xE6950, 0x60
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6988, 0x5
+    .4byte sUnknown_80E6970, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6970:
+    .string "#+Please check again.\0"
+    .align 2, 0
+
+sUnknown_80E6988:
+    .string "#+This #CGSOS Mail#R can~27t be used.\0"
+    .align 2, 0
 
 	.global gUnknown_80E69B0
 gUnknown_80E69B0: @ 80E69B0
@@ -379,7 +605,14 @@ gUnknown_80E69B0: @ 80E69B0
 
 	.global gUnknown_80E69C8
 gUnknown_80E69C8: @ 80E69C8
-	.incbin "baserom.gba", 0xE69C8, 0x48
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E69E8, 0x5
+    .4byte sUnknown_80E6970, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E69E8:
+    .string "#+This #CGA-OK Mail#R can~27t be used.\0"
+    .align 2, 0
 
 	.global gUnknown_80E6A10
 gUnknown_80E6A10: @ 80E6A10
@@ -392,7 +625,14 @@ gUnknown_80E6A10: @ 80E6A10
 
 	.global gUnknown_80E6A28
 gUnknown_80E6A28: @ 80E6A28
-	.incbin "baserom.gba", 0xE6A28, 0x4C
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6A48, 0x5
+    .4byte sUnknown_80E6970, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6A48:
+    .string "#+This #CGThank-You Mail#R can~27t be used.\0"
+    .align 2, 0
 
 	.global gUnknown_80E6A74
 gUnknown_80E6A74: @ 80E6A74
@@ -405,7 +645,42 @@ gUnknown_80E6A74: @ 80E6A74
 
 	.global gUnknown_80E6A8C
 gUnknown_80E6A8C: @ 80E6A8C
-	.incbin "baserom.gba", 0xE6A8C, 0xEC
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6AC8, 0x5
+    .4byte sUnknown_80E6AAC, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6AAC:
+    .string "#+It can~27t be received.\0"
+    .align 2, 0
+
+sUnknown_80E6AC8:
+    .string "#+There is no space for new mail.\0"
+    .align 2, 0
+
+    .global gUnknown_80E6AEC
+gUnknown_80E6AEC: @ 80E6AEC
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x00, 0x00
+        .byte 0x03, 0x00, 0x08, 0x00
+        .byte 0x18, 0x00, 0x05, 0x00
+        .byte 0x05, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+    .global gUnknown_80E6B04
+gUnknown_80E6B04: @ 80E6B04
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6B4C, 0x5
+    .4byte sUnknown_80E6B24, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6B24:
+    .string "#+You need to go further in the story.\0"
+    .align 2, 0
+
+sUnknown_80E6B4C:
+    .string "#+You may not go to that #CGdungeon#R yet.\0"
+    .align 2, 0
 
 	.global gUnknown_80E6B78
 gUnknown_80E6B78: @ 80E6B78
@@ -418,7 +693,18 @@ gUnknown_80E6B78: @ 80E6B78
 
 	.global gUnknown_80E6B90
 gUnknown_80E6B90: @ 80E6B90
-	.incbin "baserom.gba", 0xE6B90, 0x64
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6BC4, 0x5
+    .4byte sUnknown_80E6BB0, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6BB0:
+    .string "#+Please try again.\0"
+    .align 2, 0
+
+sUnknown_80E6BC4:
+    .string "#+There was a problem on your friend~27s end.\0"
+    .align 2, 0
 
 	.global gUnknown_80E6BF4
 gUnknown_80E6BF4: @ 80E6BF4
@@ -431,7 +717,14 @@ gUnknown_80E6BF4: @ 80E6BF4
 
 	.global gUnknown_80E6C0C
 gUnknown_80E6C0C: @ 80E6C0C
-	.incbin "baserom.gba", 0xE6C0C, 0x44
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6C2C, 0x5
+    .4byte sUnknown_80E6BB0, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6C2C:
+    .string "#+Your friend is not responding.\0"
+    .align 2, 0
 
 	.global gUnknown_80E6C50
 gUnknown_80E6C50: @ 80E6C50
@@ -444,7 +737,18 @@ gUnknown_80E6C50: @ 80E6C50
 
 	.global gUnknown_80E6C68
 gUnknown_80E6C68: @ 80E6C68
-	.incbin "baserom.gba", 0xE6C68, 0x68
+    .4byte sUnknown_80E6734, 0x5
+    .4byte sUnknown_80E6CA8, 0x5
+    .4byte sUnknown_80E6C88, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6C88:
+    .string "#+went through successfully.\0"
+    .align 2, 0
+
+sUnknown_80E6CA8:
+    .string "#+The item exchange with your friend\0"
+    .align 2, 0
 
 	.global gUnknown_80E6CD0
 gUnknown_80E6CD0: @ 80E6CD0
@@ -457,7 +761,18 @@ gUnknown_80E6CD0: @ 80E6CD0
 
 	.global gUnknown_80E6CE8
 gUnknown_80E6CE8: @ 80E6CE8
-	.incbin "baserom.gba", 0xE6CE8, 0x6C
+    .4byte sUnknown_80E65C4, 0x5
+    .4byte sUnknown_80E6D2C, 0x5
+    .4byte sUnknown_80E6D08, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6D08:
+    .string "#+you and your friend are ready.\0"
+    .align 2, 0
+
+sUnknown_80E6D2C:
+    .string "#+Please communicate only after both\0"
+    .align 2, 0
 
 	.global gUnknown_80E6D54
 gUnknown_80E6D54: @ 80E6D54
@@ -470,7 +785,18 @@ gUnknown_80E6D54: @ 80E6D54
 
 	.global gUnknown_80E6D6C
 gUnknown_80E6D6C: @ 80E6D6C
-	.incbin "baserom.gba", 0xE6D6C, 0x70
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6DB0, 0x5
+    .4byte sUnknown_80E6D8C, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6D8C:
+    .string "#+connected. Please check again.\0"
+    .align 2, 0
+
+sUnknown_80E6DB0:
+    .string "#+An incorrect number of GBA systems are\0"
+    .align 2, 0
 
 	.global gUnknown_80E6DDC
 gUnknown_80E6DDC: @ 80E6DDC
@@ -483,7 +809,20 @@ gUnknown_80E6DDC: @ 80E6DDC
 
 	.global gUnknown_80E6DF4
 gUnknown_80E6DF4: @ 80E6DF4
-	.incbin "baserom.gba", 0xE6DF4, 0x5C
+    .4byte sUnknown_80E6928, 0x5
+    .4byte sUnknown_80E6E30, 0x5
+    .4byte sUnknown_80E6E14, 0x5
+    .4byte 0, 0x3
+
+sUnknown_80E6E14:
+    .string "#+Please check it again.\0"
+    .align 2, 0
+
+sUnknown_80E6E30:
+    .string "#+Communication failed.\0"
+    .align 2, 0
+
+    .string "pksdir0\0"
 
         .global gUnknown_80E6E50
 gUnknown_80E6E50:: @ 80E6E50
@@ -565,60 +904,110 @@ gUnknown_80E6F38: @ 80E6F38
 
 	.global gUnknown_80E6F50
 gUnknown_80E6F50: @ 80E6F50
-	.incbin "baserom.gba", 0xE6F50, 0x6C
+    .4byte sUnknown_80E6FAC, 0x4
+    .4byte sUnknown_80E6F90, 0x4
+    .4byte sUnknown_80E6F70, 0x4
+    .4byte 0, 0x2
+
+sUnknown_80E6F70:
+    .string "#+Don~27t turn off the power.\0"
+    .align 2, 0
+
+sUnknown_80E6F90:
+    .string "#+Saving your adventure!\0"
+    .align 2, 0
+
+sUnknown_80E6FAC:
+    .string "#+#C2Beware!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E6FBC
 gUnknown_80E6FBC: @ 80E6FBC
-	.incbin "baserom.gba", 0xE6FBC, 0x60
+    .4byte sUnknown_80E7008, 0x4
+    .4byte sUnknown_80E6FF0, 0x4
+    .4byte sUnknown_80E6FDC, 0x4
+    .4byte 0, 0x2
+
+sUnknown_80E6FDC:
+    .string "#+has been saved.\0"
+    .align 2, 0
+
+sUnknown_80E6FF0:
+    .string "#+Your adventure so far\0"
+    .align 2, 0
+
+sUnknown_80E7008:
+    .string "#+#CGSuccess!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E701C
 gUnknown_80E701C: @ 80E701C
-	.incbin "baserom.gba", 0xE701C, 0x74
+    .4byte sUnknown_80E7078, 0x4
+    .4byte sUnknown_80E7050, 0x4
+    .4byte sUnknown_80E703C, 0x4
+    .4byte 0, 0x2
+
+sUnknown_80E703C:
+    .string "#+Please try again.\0"
+    .align 2, 0
+
+sUnknown_80E7050:
+    .string "#+Your adventure could not be saved.\0"
+    .align 2, 0
+
+sUnknown_80E7078:
+    .string "#+#C2Save failed!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E7090
 gUnknown_80E7090: @ 80E7090
-        .4byte 0x80e6fac
-        .4byte 4
-        .4byte DeletingAdventure_80E70B0
-        .4byte 4
-        .4byte 0x80e6f70
-        .4byte 4
-        .4byte 0
-        .4byte 2
+    .4byte sUnknown_80E6FAC, 0x4
+    .4byte DeletingAdventure_80E70B0, 0x4
+    .4byte sUnknown_80E6F70, 0x4
+    .4byte 0, 0x2
 
-        .global DeletingAdventure_80E70B0
-        DeletingAdventure_80E70B0:
-        .string "{CENTER_ALIGN}Deleting your adventure!"
-        .align 2,0
+DeletingAdventure_80E70B0:
+    .string "{CENTER_ALIGN}Deleting your adventure!\0"
+    .align 2, 0
 
 	.global gUnknown_80E70CC
 gUnknown_80E70CC: @ 80E70CC
-        .4byte 0x80e7008
-        .4byte 4
-        .4byte AdventureDeleted_80E70F0
-        .4byte 4
-        .4byte Data_80E70EC
-        .4byte 4
-        .4byte 0
-        .4byte 2
+    .4byte sUnknown_80E7008, 0x4
+    .4byte AdventureDeleted_80E70F0, 0x4
+    .4byte Data_80E70EC, 0x4
+    .4byte 0, 0x2
 
-        .global Data_80E70EC
-        Data_80E70EC:
-        .string "  "
-        .align 2,0
+Data_80E70EC:
+    .string "  \0"
+    .align 2, 0
 
-        .global AdventureDeleted_80E70F0
-        AdventureDeleted_80E70F0:
-        .string "{CENTER_ALIGN}Your adventure has been deleted."
-        .align 2,0
+AdventureDeleted_80E70F0:
+    .string "{CENTER_ALIGN}Your adventure has been deleted.\0"
+    .align 2, 0
 
 	.global gUnknown_80E7114
 gUnknown_80E7114: @ 80E7114
-	.incbin "baserom.gba", 0xE7114, 0x64
+    .4byte sUnknown_80E715C, 0x4
+    .4byte sUnknown_80E7134, 0x4
+    .4byte sUnknown_80E703C, 0x4
+    .4byte 0, 0x2
+
+sUnknown_80E7134:
+    .string "#+Your adventure could not be deleted.\0"
+    .align 2, 0
+
+sUnknown_80E715C:
+    .string "#+#C2Deletion failed!#R \0"
+    .align 2, 0
 
 	.global gUnknown_80E7178
 gUnknown_80E7178: @ 80E7178
-	.incbin "baserom.gba", 0xE7178, 0x6C
+    .string "#+The data could not be written.\n"
+    .string "#+Please turn off the power and remove\n"
+    .string "#+and reinsert the DS Card.\0"
+    .align 2, 0
+
+    .string "pksdir0\0"
 
 	.global gUnknown_80E71E4
 gUnknown_80E71E4: @ 80E71E4
@@ -640,29 +1029,22 @@ gUnknown_80E71FC: @ 80E71FC
 
 	.global gUnknown_80E7214
 gUnknown_80E7214: @ 80E7214
-        .4byte Error_80E7268
-        .4byte 0xC
-        .4byte IncorrectPassword_80E7250
-        .4byte 0xC
-        .4byte CheckAgain_80E7234
-        .4byte 0xC
-        .4byte 0
-        .4byte 0xA
+    .4byte Error_80E7268, 0xC
+    .4byte IncorrectPassword_80E7250, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
 
-        .global CheckAgain_80E7234
-        CheckAgain_80E7234:
-        .string "{CENTER_ALIGN}Please check it again.\0"
-        .align 2,0
+CheckAgain_80E7234:
+    .string "{CENTER_ALIGN}Please check it again.\0"
+    .align 2, 0
 
-        .global IncorrectPassword_80E7250
-        IncorrectPassword_80E7250:
-        .string "{CENTER_ALIGN}Incorrect password!\0"
-        .align 2,0
+IncorrectPassword_80E7250:
+    .string "{CENTER_ALIGN}Incorrect password!\0"
+    .align 2, 0
 
-        .global Error_80E7268
-        Error_80E7268:
-        .string "{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} \0"
-        .align 2,0
+Error_80E7268:
+    .string "{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} \0"
+    .align 2, 0
 
 	.global gUnknown_80E7278
 gUnknown_80E7278: @ 80E7278
@@ -675,28 +1057,22 @@ gUnknown_80E7278: @ 80E7278
 
 	.global gUnknown_80E7290
 gUnknown_80E7290: @ 80E7290
-        .4byte Success_80E72D8
-        .4byte 0xC
-        .4byte PasswordAccept_80E72B4
-        .4byte 0xC
-        .4byte DATA_80E72B0
-        .4byte 0xC
-        .4byte 0
-        .4byte 0xA
+    .4byte Success_80E72D8, 0xC
+    .4byte PasswordAccept_80E72B4, 0xC
+    .4byte DATA_80E72B0, 0xC
+    .4byte 0, 0xA
 
-        .global DATA_80E72B0
-        DATA_80E72B0:
-        .byte 0x20, 0x20, 0x00, 0x00 @ 2 spaces??
+DATA_80E72B0:
+    .string "  \0"
+    .align 2, 0
 
-        .global PasswordAccept_80E72B4
-        PasswordAccept_80E72B4:
-        .string "{CENTER_ALIGN}The password has been accepted.\0"
-        .align 2,0
+PasswordAccept_80E72B4:
+    .string "{CENTER_ALIGN}The password has been accepted.\0"
+    .align 2, 0
 
-        .global Success_80E72D8
-        Success_80E72D8:
-        .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
-        .align 2,0
+Success_80E72D8:
+    .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
+    .align 2, 0
 
 	.global gUnknown_80E72EC
 gUnknown_80E72EC: @ 80E72EC
@@ -709,19 +1085,14 @@ gUnknown_80E72EC: @ 80E72EC
 
 	.global gUnknown_80E7304
 gUnknown_80E7304: @ 80E7304
-        .4byte Error_80E7268
-        .4byte 0xC
-        .4byte NotSOSMail_80E7324
-        .4byte 0xC
-        .4byte CheckAgain_80E7234
-        .4byte 0xC
-        .4byte 0
-        .4byte 0xA
+    .4byte Error_80E7268, 0xC
+    .4byte NotSOSMail_80E7324, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
 
-        .global NotSOSMail_80E7324
-        NotSOSMail_80E7324:
-        .string "{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
-        .align 2,0
+NotSOSMail_80E7324:
+    .string "{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+    .align 2, 0
 
 	.global gUnknown_80E7344
 gUnknown_80E7344: @ 80E7344
@@ -734,19 +1105,14 @@ gUnknown_80E7344: @ 80E7344
 
 	.global gUnknown_80E735C
 gUnknown_80E735C: @ 80E735C
-        .4byte Error_80E7268
-        .4byte 0xC
-        .4byte ReceiveSOSMail_80E737C
-        .4byte 0xC
-        .4byte CheckAgain_80E7234
-        .4byte 0xC
-        .4byte 0
-        .4byte 0xA
+    .4byte Error_80E7268, 0xC
+    .4byte ReceiveSOSMail_80E737C, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
 
-        .global ReceiveSOSMail_80E737C
-        ReceiveSOSMail_80E737C:
-        .string "{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
-        .align 2,0
+ReceiveSOSMail_80E737C:
+    .string "{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
+    .align 2, 0
 
 	.global gUnknown_80E73AC
 gUnknown_80E73AC: @ 80E73AC
@@ -759,7 +1125,14 @@ gUnknown_80E73AC: @ 80E73AC
 
 	.global gUnknown_80E73C4
 gUnknown_80E73C4: @ 80E73C4
-	.incbin "baserom.gba", 0xE73C4, 0x44
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E73E4, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E73E4:
+    .string "#+This is not an #CGA-OK Mail#R.\0"
+    .align 2, 0
 
 	.global gUnknown_80E7408
 gUnknown_80E7408: @ 80E7408
@@ -772,7 +1145,14 @@ gUnknown_80E7408: @ 80E7408
 
 	.global gUnknown_80E7420
 gUnknown_80E7420: @ 80E7420
-	.incbin "baserom.gba", 0xE7420, 0x48
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E7440, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E7440:
+    .string "#+This #CGA-OK Mail#R cannot be used.\0"
+    .align 2, 0
 
 	.global gUnknown_80E7468
 gUnknown_80E7468: @ 80E7468
@@ -785,7 +1165,14 @@ gUnknown_80E7468: @ 80E7468
 
 	.global gUnknown_80E7480
 gUnknown_80E7480: @ 80E7480
-	.incbin "baserom.gba", 0xE7480, 0x48
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E74A0, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E74A0:
+    .string "#+This is not a #CGThank-You Mail#R.\0"
+    .align 2, 0
 
 	.global gUnknown_80E74C8
 gUnknown_80E74C8: @ 80E74C8
@@ -798,7 +1185,14 @@ gUnknown_80E74C8: @ 80E74C8
 
 	.global gUnknown_80E74E0
 gUnknown_80E74E0: @ 80E74E0
-	.incbin "baserom.gba", 0xE74E0, 0x4C
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E7500, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E7500:
+    .string "#+This #CGThank-You Mail#R cannot be used.\0"
+    .align 2, 0
 
 	.global gUnknown_80E752C
 gUnknown_80E752C: @ 80E752C
@@ -811,7 +1205,14 @@ gUnknown_80E752C: @ 80E752C
 
 	.global gUnknown_80E7544
 gUnknown_80E7544: @ 80E7544
-	.incbin "baserom.gba", 0xE7544, 0x44
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E7564, 0xC
+    .4byte CheckAgain_80E7234, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E7564:
+    .string "#+This is not a #CGWonder Mail#R.\0"
+    .align 2, 0
 
 	.global gUnknown_80E7588
 gUnknown_80E7588: @ 80E7588
@@ -824,7 +1225,20 @@ gUnknown_80E7588: @ 80E7588
 
 	.global gUnknown_80E75A0
 gUnknown_80E75A0: @ 80E75A0
-	.incbin "baserom.gba", 0xE75A0, 0x58
+    .4byte Error_80E7268, 0xC
+    .4byte sUnknown_80E75CC, 0xC
+    .4byte sUnknown_80E75C0, 0xC
+    .4byte 0, 0xA
+
+sUnknown_80E75C0:
+    .string "#+new mail.\0"
+    .align 2, 0
+
+sUnknown_80E75CC:
+    .string "#+There is no space for receiving\0"
+    .align 2, 0
+
+    .string "pksdir0\0"
 
 	.global gUnknown_80E75F8
 gUnknown_80E75F8: @ 80E75F8
@@ -856,81 +1270,65 @@ gUnknown_80E762C: @ 80E762C
 
 	.global gResumeQuicksaveMenuItems
 gResumeQuicksaveMenuItems: @ 80E7644
-        .4byte ResumeQuicksave_80E7668
-        .byte 0x05, 0x00, 0x00, 0x00
-        .4byte IsThatOK_80E765C
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
+    .4byte ResumeQuicksave_80E7668, 0x5
+    .4byte IsThatOK_80E765C, 0x5
+    .4byte 0, 0x3
 
-        IsThatOK_80E765C:
-        .string "Is that OK?\0"
-        .align 2,0
+IsThatOK_80E765C:
+    .string "Is that OK?\0"
+    .align 2, 0
 
-        ResumeQuicksave_80E7668:
-        .string "Resuming from quicksave.\0"
-        .align 2,0
+ResumeQuicksave_80E7668:
+    .string "Resuming from quicksave.\0"
+    .align 2, 0
 
 	.global gResumeAdventureMenuItems
 gResumeAdventureMenuItems: @ 80E7684
-        .4byte ResumeAdventure_80E769C
-        .byte 0x05, 0x00, 0x00, 0x00
-        .4byte IsThatOK_80E765C
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
+    .4byte ResumeAdventure_80E769C, 0x5
+    .4byte IsThatOK_80E765C, 0x5
+    .4byte 0, 0x3
 
-        ResumeAdventure_80E769C:
-        .string "Resuming saved adventure.\0"
-        .align 2,0
+ResumeAdventure_80E769C:
+    .string "Resuming saved adventure.\0"
+    .align 2, 0
 
 	.global gQuitWaitingRescueMenuItems
 gQuitWaitingRescueMenuItems: @ 80E76B8
-        .4byte QuitAwaitingRescue_80E76D0
-        .byte 0x05, 0x00, 0x00, 0x00
-        .4byte IsThatOK_80E765C
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
+    .4byte QuitAwaitingRescue_80E76D0, 0x5
+    .4byte IsThatOK_80E765C, 0x5
+    .4byte 0, 0x3
 
-        QuitAwaitingRescue_80E76D0:
-        .string "Quit awaiting rescue?\0"
-        .align 2,0
+QuitAwaitingRescue_80E76D0:
+    .string "Quit awaiting rescue?\0"
+    .align 2, 0
 
 	.global gDeleteSavePromptMenuItems
 gDeleteSavePromptMenuItems: @ 80E76E8
-        .4byte Deleted_80E7718
-        .byte 0x05, 0x00, 0x00, 0x00
-        .4byte Deleted_80E7700
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
+        .4byte Deleted_80E7718, 0x5
+        .4byte Deleted_80E7700, 0x5
+        .4byte 0, 0x3
 
-        Deleted_80E7700:
-        .string "deleted. Is that OK?\0"
-        .align 2,0
+Deleted_80E7700:
+    .string "deleted. Is that OK?\0"
+    .align 2, 0
 
-        Deleted_80E7718:
-        .string "Your saved data will be\0"
-        .align 2,0
+Deleted_80E7718:
+    .string "Your saved data will be\0"
+    .align 2, 0
 
 	.global gDeleteSaveConfirmMenuItems
 gDeleteSaveConfirmMenuItems: @ 80E7730
-        .4byte Deleted_80E7768
-        .byte 0x05, 0x00, 0x00, 0x00
-        .4byte Deleted_80E7748
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
+    .4byte Deleted_80E7768, 0x5
+    .4byte Deleted_80E7748, 0x5
+    .4byte 0, 0x3
 
-        Deleted_80E7748:
-        .string "delete all of your saved data?\0"
-        .align 2,0
+Deleted_80E7748:
+    .string "delete all of your saved data?\0"
+    .align 2, 0
 
-        Deleted_80E7768:
-        .string "Are you sure you want to\0"
-        .align 2,0
-
+Deleted_80E7768:
+    .string "Are you sure you want to\0"
+    .align 2, 0
 
 	.global gUnknown_80E7784
 gUnknown_80E7784: @ 80E7784
