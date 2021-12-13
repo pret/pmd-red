@@ -35247,7 +35247,7 @@ _08069462:
 _08069466:
 	mov r1, r10
 	ldr r0, [r1]
-	bl sub_800F934
+	bl DeletePokemonDungeonSprite
 	ldr r0, _080694BC
 	movs r2, 0
 	str r2, [r0]
@@ -37746,7 +37746,7 @@ _0806A744:
 	cmp r0, 0
 	beq _0806A776
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	b _0806A776
 	.align 2, 0
 _0806A75C: .4byte gDungeonGlobalData
@@ -40398,7 +40398,7 @@ sub_806BB6C:
 	mov r8, r9
 	adds r0, 0x98
 	ldr r0, [r0]
-	bl sub_800F934
+	bl DeletePokemonDungeonSprite
 	add r0, sp, 0x8
 	movs r1, 0
 	mov r10, r1
@@ -40494,7 +40494,7 @@ _0806BC14:
 	adds r0, r7, 0
 	bl sub_80429E8
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -40901,7 +40901,7 @@ _0806BF70:
 	ldr r4, _0806BFBC
 	adds r3, r4
 	ldrb r3, [r3]
-	bl sub_800F8D0
+	bl AddPokemonDungeonSprite
 	mov r0, r8
 	bl LoadIQSkills
 	mov r0, r8
@@ -42175,7 +42175,7 @@ _0806C904:
 	add r2, sp, 0xC
 	bl sub_800F958
 	adds r0, r6, 0
-	bl sub_804187C
+	bl EntityGetStatusSprites
 	adds r2, r0, 0
 	ldr r4, [r4]
 	mov r0, r8
@@ -42195,7 +42195,7 @@ _0806C904:
 _0806C958:
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_800F75C
+	bl UpdateDungeonPokemonSprite
 	adds r0, r6, 0
 	mov r1, r9
 	bl sub_8042EC8

@@ -3009,15 +3009,16 @@ _08041874: .4byte 0x00000808
 _08041878: .4byte gUnknown_203B40D
 	thumb_func_end sub_804178C
 
-	thumb_func_start sub_804187C
-sub_804187C:
+	thumb_func_start EntityGetStatusSprites
+    @ int EntityGetStatusSprites(struct DungeonEntity *entity)
+EntityGetStatusSprites:
 	ldr r0, [r0, 0x70]
 	movs r1, 0x80
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
 	bx lr
-	thumb_func_end sub_804187C
+	thumb_func_end EntityGetStatusSprites
 
 	thumb_func_start sub_8041888
 sub_8041888:
@@ -3048,7 +3049,7 @@ _08041890:
 	strb r0, [r1]
 _080418BA:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080418C0:
 	adds r5, 0x1
 	cmp r5, 0x13
@@ -3061,8 +3062,8 @@ _080418CC: .4byte gDungeonGlobalData
 _080418D0: .4byte 0x000135cc
 	thumb_func_end sub_8041888
 
-	thumb_func_start sub_80418D4
-sub_80418D4:
+	thumb_func_start DungeonEntityUpdateStatusSprites
+DungeonEntityUpdateStatusSprites:
 	push {r4,lr}
 	adds r4, r0, 0
 	bl EntityExists
@@ -3297,21 +3298,21 @@ _08041A8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08041A94: .4byte gUnknown_80F669C
-_08041A98: .4byte gUnknown_80F66B4
-_08041A9C: .4byte gUnknown_80F66C8
-_08041AA0: .4byte gUnknown_80F66E8
-_08041AA4: .4byte gUnknown_80F6708
-_08041AA8: .4byte gUnknown_80F673C
-_08041AAC: .4byte gUnknown_80F6778
-_08041AB0: .4byte gUnknown_80F6788
-_08041AB4: .4byte gUnknown_80F6794
-_08041AB8: .4byte gUnknown_80F67A8
-_08041ABC: .4byte gUnknown_80F67B4
-_08041AC0: .4byte gUnknown_80F67C4
-_08041AC4: .4byte gUnknown_80F67D4
+_08041A94: .4byte gStatusSpriteMasks_SleepStatus
+_08041A98: .4byte gStatusSpriteMasks_NonVolatileStatus
+_08041A9C: .4byte gStatusSpriteMasks_ImmobilizeStatus
+_08041AA0: .4byte gStatusSpriteMasks_VolatileStatus
+_08041AA4: .4byte gStatusSpriteMasks_ChargingStatus
+_08041AA8: .4byte gStatusSpriteMasks_ProtectionStatus
+_08041AAC: .4byte gStatusSpriteMasks_WaitingStatus
+_08041AB0: .4byte gStatusSpriteMasks_LinkedStatus
+_08041AB4: .4byte gStatusSpriteMasks_MoveStatus
+_08041AB8: .4byte gStatusSpriteMasks_ItemStatus
+_08041ABC: .4byte gStatusSpriteMasks_TransformStatus
+_08041AC0: .4byte gStatusSpriteMasks_EyesightStatus
+_08041AC4: .4byte gStatusSpriteMasks_MuzzledStatus
 _08041AC8: .4byte gDungeonGlobalData
 _08041ACC: .4byte 0x00000676
-	thumb_func_end sub_80418D4
+	thumb_func_end DungeonEntityUpdateStatusSprites
 
         .align 2,0

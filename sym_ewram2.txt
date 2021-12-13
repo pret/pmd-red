@@ -146,7 +146,7 @@ gUnknown_203B0D0 = .; /* 203B0D0 */
 gUnknown_203B0D4 = .; /* 203B0D4 */
 	. += 0x4;
 
-gUnknown_203B0D8 = .; /* 203B0D8 */
+gDungeonPokemonSprites = .; /* 203B0D8 */
 	. += 0x4;
 
 gUnknown_203B0DC = .; /* 203B0DC */

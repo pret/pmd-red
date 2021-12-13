@@ -4407,8 +4407,9 @@ sub_800F204:
 	bx r0
 	thumb_func_end sub_800F204
 
-	thumb_func_start sub_800F210
-sub_800F210:
+	thumb_func_start GetDungeonPokemonSprite
+    @ struct DungeonPokemonSprite *GetDungeonPokemonSprite(int id)
+GetDungeonPokemonSprite:
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r3, 0
@@ -4427,7 +4428,7 @@ _0800F220:
 	adds r0, r1, 0
 	b _0800F240
 	.align 2, 0
-_0800F230: .4byte gUnknown_203B0D8
+_0800F230: .4byte gDungeonPokemonSprites
 _0800F234:
 	adds r1, 0x40
 	adds r2, 0x40
@@ -4439,10 +4440,11 @@ _0800F240:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800F210
+	thumb_func_end GetDungeonPokemonSprite
 
-	thumb_func_start sub_800F248
-sub_800F248:
+	thumb_func_start NewDungeonPokemonSprite
+    @ struct DungeonPokemonSprite *NewDungeonPokemonSprite(void)
+NewDungeonPokemonSprite:
 	push {lr}
 	movs r2, 0
 	ldr r0, _0800F25C
@@ -4455,7 +4457,7 @@ _0800F252:
 	adds r0, r1, 0
 	b _0800F26A
 	.align 2, 0
-_0800F25C: .4byte gUnknown_203B0D8
+_0800F25C: .4byte gDungeonPokemonSprites
 _0800F260:
 	adds r1, 0x40
 	adds r2, 0x1
@@ -4465,10 +4467,14 @@ _0800F260:
 _0800F26A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800F248
+	thumb_func_end NewDungeonPokemonSprite
 
-	thumb_func_start sub_800F270
-sub_800F270:
+	thumb_func_start GetNextStatusSymbol
+    @ u32 GetNextStatusSymbol(?, int select)
+    @ The "select" parameter exists to differentiate between the two kinds of
+    @ status symbols that can appear at the same time.
+    @ Only frozen falls under select = 1, every other symbol falls under select = 0
+GetNextStatusSymbol:
 	push {r4-r6,lr}
 	adds r2, r0, 0
 	lsls r0, r1, 3
@@ -4529,10 +4535,10 @@ _0800F2CE:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800F270
+	thumb_func_end GetNextStatusSymbol
 
-	thumb_func_start sub_800F2D4
-sub_800F2D4:
+	thumb_func_start StatusSymbolBitToIndex
+StatusSymbolBitToIndex:
 	push {lr}
 	movs r1, 0
 	cmp r0, 0
@@ -4546,7 +4552,7 @@ _0800F2E4:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800F2D4
+	thumb_func_end StatusSymbolBitToIndex
 
 	thumb_func_start sub_800F2EC
 sub_800F2EC:
@@ -4574,7 +4580,7 @@ _0800F30E:
 	bgt _0800F32A
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_800F270
+	bl GetNextStatusSymbol
 	adds r1, r0, 0
 	ldr r0, [r4]
 	cmp r0, r1
@@ -4593,7 +4599,7 @@ _0800F32C:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0800F35C
-	bl sub_800F2D4
+	bl StatusSymbolBitToIndex
 	adds r1, r0, 0
 	movs r2, 0x8
 	ldrsh r0, [r5, r2]
@@ -4607,7 +4613,7 @@ _0800F32C:
 	str r4, [sp, 0x4]
 	ldr r4, [r5, 0x4]
 	str r4, [sp, 0x8]
-	bl sub_800F364
+	bl DrawStatusSprite
 _0800F35C:
 	add sp, 0xC
 	pop {r4-r7}
@@ -4615,8 +4621,9 @@ _0800F35C:
 	bx r0
 	thumb_func_end sub_800F2EC
 
-	thumb_func_start sub_800F364
-sub_800F364:
+	thumb_func_start DrawStatusSprite
+    @ void DrawStatusSprite(?, int status, struct Position *pos, struct Position *pos_offset, struct Position *pos_screen, ?)
+DrawStatusSprite:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4708,7 +4715,7 @@ _0800F404:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800F410: .4byte gUnknown_80D3474
+_0800F410: .4byte gStatusSprites
 _0800F414: .4byte gStatusGraphics
 _0800F418: .4byte 0x0000032b
 _0800F41C: .4byte gUnknown_203B0DC
@@ -4929,10 +4936,10 @@ _0800F5F0: .4byte 0x00003fff
 _0800F5F4: .4byte 0x000001ff
 _0800F5F8: .4byte 0x00000fff
 _0800F5FC: .4byte 0x000003ff
-	thumb_func_end sub_800F364
+	thumb_func_end DrawStatusSprite
 
-	thumb_func_start sub_800F600
-sub_800F600:
+	thumb_func_start LoadStatusGraphics
+LoadStatusGraphics:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4982,7 +4989,7 @@ _0800F63C:
 	.align 2, 0
 _0800F660: .4byte gStatusGraphics
 _0800F664: .4byte 0x0000032b
-_0800F668: .4byte gUnknown_203B0D8
+_0800F668: .4byte gDungeonPokemonSprites
 _0800F66C: .4byte gStatusGraphics4bpp
 _0800F670: .4byte 0x06010000
 _0800F674:
@@ -4999,10 +5006,10 @@ _0800F67E:
 	bx r0
 	.align 2, 0
 _0800F68C: .4byte 0x06010000
-	thumb_func_end sub_800F600
+	thumb_func_end LoadStatusGraphics
 
-	thumb_func_start sub_800F690
-sub_800F690:
+	thumb_func_start InitDungeonPokemonSprites
+InitDungeonPokemonSprites:
 	push {r4,r5,lr}
 	ldr r5, _0800F738
 	ldr r0, [r5]
@@ -5021,62 +5028,62 @@ _0800F6AC:
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x5
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x7
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x8
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x9
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xA
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xB
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xC
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xD
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xE
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xF
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_800F600
+	bl LoadStatusGraphics
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F738: .4byte gUnknown_203B0D8
+_0800F738: .4byte gDungeonPokemonSprites
 _0800F73C: .4byte 0x00000584
-	thumb_func_end sub_800F690
+	thumb_func_end InitDungeonPokemonSprites
 
-	thumb_func_start sub_800F740
-sub_800F740:
+	thumb_func_start FreeDungeonPokemonSprites
+FreeDungeonPokemonSprites:
 	push {r4,lr}
 	ldr r4, _0800F758
 	ldr r0, [r4]
@@ -5090,11 +5097,12 @@ _0800F752:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F758: .4byte gUnknown_203B0D8
-	thumb_func_end sub_800F740
+_0800F758: .4byte gDungeonPokemonSprites
+	thumb_func_end FreeDungeonPokemonSprites
 
-	thumb_func_start sub_800F75C
-sub_800F75C:
+	thumb_func_start UpdateDungeonPokemonSprite
+    @ void UpdateDungeonPokemonSprite(int id, short species, int status, char visible)
+UpdateDungeonPokemonSprite:
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r7, r2, 0
@@ -5107,7 +5115,7 @@ sub_800F75C:
 	cmp r0, 0
 	beq _0800F788
 	adds r0, r4, 0
-	bl sub_800F210
+	bl GetDungeonPokemonSprite
 	cmp r0, 0
 	beq _0800F788
 	movs r1, 0
@@ -5121,8 +5129,8 @@ _0800F788:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F790: .4byte gUnknown_203B0D8
-	thumb_func_end sub_800F75C
+_0800F790: .4byte gDungeonPokemonSprites
+	thumb_func_end UpdateDungeonPokemonSprite
 
 	thumb_func_start sub_800F794
 sub_800F794:
@@ -5136,7 +5144,7 @@ sub_800F794:
 	cmp r0, 0
 	beq _0800F7C6
 	adds r0, r1, 0
-	bl sub_800F210
+	bl GetDungeonPokemonSprite
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _0800F7C6
@@ -5155,7 +5163,7 @@ _0800F7C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F7CC: .4byte gUnknown_203B0D8
+_0800F7CC: .4byte gDungeonPokemonSprites
 	thumb_func_end sub_800F794
 
 	thumb_func_start sub_800F7D0
@@ -5185,7 +5193,7 @@ _0800F7EA:
 	beq _0800F80E
 	b _0800F888
 	.align 2, 0
-_0800F800: .4byte gUnknown_203B0D8
+_0800F800: .4byte gDungeonPokemonSprites
 _0800F804:
 	cmp r0, 0x2
 	beq _0800F846
@@ -5195,55 +5203,55 @@ _0800F804:
 _0800F80E:
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x3
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x4
 	b _0800F860
 _0800F82A:
 	movs r0, 0x5
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x6
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x7
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x8
 	b _0800F860
 _0800F846:
 	movs r0, 0x9
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xA
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xB
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xC
 _0800F860:
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	b _0800F888
 _0800F868:
 	movs r0, 0xD
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xE
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0xF
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 	movs r0, 0x10
 	movs r1, 0x1
-	bl sub_800F600
+	bl LoadStatusGraphics
 _0800F888:
 	movs r5, 0
 	movs r6, 0x4
@@ -5280,11 +5288,12 @@ _0800F8C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F8CC: .4byte gUnknown_203B0D8
+_0800F8CC: .4byte gDungeonPokemonSprites
 	thumb_func_end sub_800F7D0
 
-	thumb_func_start sub_800F8D0
-sub_800F8D0:
+	thumb_func_start AddPokemonDungeonSprite
+    @ void AddPokemonDungeonSprite(int id, short species, struct Position *pos, ?)
+AddPokemonDungeonSprite:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5298,11 +5307,11 @@ sub_800F8D0:
 	cmp r0, 0
 	beq _0800F920
 	adds r0, r5, 0
-	bl sub_800F210
+	bl GetDungeonPokemonSprite
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0800F920
-	bl sub_800F248
+	bl NewDungeonPokemonSprite
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _0800F920
@@ -5330,12 +5339,13 @@ _0800F920:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F92C: .4byte gUnknown_203B0D8
+_0800F92C: .4byte gDungeonPokemonSprites
 _0800F930: .4byte gUnknown_80D3564
-	thumb_func_end sub_800F8D0
+	thumb_func_end AddPokemonDungeonSprite
 
-	thumb_func_start sub_800F934
-sub_800F934:
+	thumb_func_start DeletePokemonDungeonSprite
+    @ void DeletePokemonDungeonSprite(int id)
+DeletePokemonDungeonSprite:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _0800F954
@@ -5343,7 +5353,7 @@ sub_800F934:
 	cmp r0, 0
 	beq _0800F950
 	adds r0, r1, 0
-	bl sub_800F210
+	bl GetDungeonPokemonSprite
 	cmp r0, 0
 	beq _0800F950
 	movs r1, 0x40
@@ -5352,8 +5362,8 @@ _0800F950:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F954: .4byte gUnknown_203B0D8
-	thumb_func_end sub_800F934
+_0800F954: .4byte gDungeonPokemonSprites
+	thumb_func_end DeletePokemonDungeonSprite
 
 	thumb_func_start sub_800F958
 sub_800F958:
@@ -5367,7 +5377,7 @@ sub_800F958:
 	cmp r0, 0
 	beq _0800F984
 	adds r0, r4, 0
-	bl sub_800F210
+	bl GetDungeonPokemonSprite
 	adds r3, r0, 0
 	cmp r3, 0
 	beq _0800F984
@@ -5383,7 +5393,7 @@ _0800F984:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F98C: .4byte gUnknown_203B0D8
+_0800F98C: .4byte gDungeonPokemonSprites
 	thumb_func_end sub_800F958
 
 	thumb_func_start sub_800F990

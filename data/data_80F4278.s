@@ -1,3 +1,4 @@
+#include "constants/status.h"
         .section .rodata
 
 	.global gUnknown_80F42D0
@@ -1628,72 +1629,124 @@ gUnknown_80F6604: @ 80F6604
 gUnknown_80F6624: @ 80F6624
 	.incbin "baserom.gba", 0xF6624, 0x78
 
-	.global gUnknown_80F669C
-gUnknown_80F669C: @ 80F669C
-	.incbin "baserom.gba", 0xF669C, 0x18
+	.global gStatusSpriteMasks_SleepStatus
+gStatusSpriteMasks_SleepStatus: @ 80F669C
+    .4byte 0                       @ SLEEP_STATUS_NONE
+    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_SLEEP
+    .4byte STATUS_SPRITE_SLEEPLESS @ SLEEP_STATUS_SLEEPLESS
+    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_NIGHTMARE
+    .4byte 0                       @ SLEEP_STATUS_YAWNING
+    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_NAPPING
 
-	.global gUnknown_80F66B4
-gUnknown_80F66B4: @ 80F66B4
-	.incbin "baserom.gba", 0xF66B4, 0x14
+	.global gStatusSpriteMasks_NonVolatileStatus
+gStatusSpriteMasks_NonVolatileStatus: @ 80F66B4
+    .4byte 0                            @ NON_VOLATILE_STATUS_NONE
+    .4byte STATUS_SPRITE_BURNED         @ NON_VOLATILE_STATUS_BURNED
+    .4byte STATUS_SPRITE_POISONED       @ NON_VOLATILE_STATUS_POISONED
+    .4byte STATUS_SPRITE_BADLY_POISONED @ NON_VOLATILE_STATUS_BADLY_POISONED
+    .4byte 0                            @ NON_VOLATILE_STATUS_PARALYZED
 
-	.global gUnknown_80F66C8
-gUnknown_80F66C8: @ 80F66C8
-	.incbin "baserom.gba", 0xF66C8, 0x20
+	.global gStatusSpriteMasks_ImmobilizeStatus
+gStatusSpriteMasks_ImmobilizeStatus: @ 80F66C8
+    .4byte 0                    @ IMMOBILIZE_STATUS_NONE
+    .4byte STATUS_SPRITE_FROZEN @ IMMOBILIZE_STATUS_FROZEN
+    .4byte 0                    @ IMMOBILIZE_STATUS_IMMOBILIZED
+    .4byte 0                    @ IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE
+    .4byte 0                    @ IMMOBILIZE_STATUS_WRAPPED_BY_FOE
+    .4byte 0                    @ IMMOBILIZE_STATUS_INGRAIN
+    .4byte 0                    @ IMMOBILIZE_STATUS_PETRIFIED
+    .4byte 0                    @ IMMOBILIZE_STATUS_SQUEEZED
 
-	.global gUnknown_80F66E8
-gUnknown_80F66E8: @ 80F66E8
-	.incbin "baserom.gba", 0xF66E8, 0x20
+	.global gStatusSpriteMasks_VolatileStatus
+gStatusSpriteMasks_VolatileStatus: @ 80F66E8
+    .4byte 0                      @ VOLATILE_STATUS_NONE
+    .4byte 0                      @ VOLATILE_STATUS_CRINGING
+    .4byte STATUS_SPRITE_CONFUSED @ VOLATILE_STATUS_CONFUSED
+    .4byte 0                      @ VOLATILE_STATUS_PAUSED
+    .4byte STATUS_SPRITE_COWERING @ VOLATILE_STATUS_COWERING
+    .4byte STATUS_SPRITE_TAUNTED  @ VOLATILE_STATUS_TAUNTED
+    .4byte STATUS_SPRITE_ENCORE   @ VOLATILE_STATUS_ENCORE
+    .4byte 0                      @ VOLATILE_STATUS_INFATUATED
 
-	.global gUnknown_80F6708
-gUnknown_80F6708: @ 80F6708
-	.incbin "baserom.gba", 0xF6708, 0x34
+	.global gStatusSpriteMasks_ChargingStatus
+gStatusSpriteMasks_ChargingStatus: @ 80F6708
+    .4byte 0 @ CHARGING_STATUS_NONE
+    .4byte 0 @ CHARGING_STATUS_BIDE
+    .4byte 0 @ CHARGING_STATUS_SOLARBEAM
+    .4byte 0 @ CHARGING_STATUS_SKY_ATTACK
+    .4byte 0 @ CHARGING_STATUS_RAZOR_WIND
+    .4byte 0 @ CHARGING_STATUS_FOCUS_PUNCH
+    .4byte 0 @ CHARGING_STATUS_SKULL_BASH
+    .4byte 0 @ CHARGING_STATUS_FLY
+    .4byte 0 @ CHARGING_STATUS_BOUNCE
+    .4byte 0 @ CHARGING_STATUS_DIVE
+    .4byte 0 @ CHARGING_STATUS_DIG
+    .4byte 0 @ CHARGING_STATUS_CHARGE
+    .4byte 0 @ CHARGING_STATUS_RAGE
 
-	.global gUnknown_80F673C
-gUnknown_80F673C: @ 80F673C
-	.incbin "baserom.gba", 0xF673C, 0x3C
+	.global gStatusSpriteMasks_ProtectionStatus
+gStatusSpriteMasks_ProtectionStatus: @ 80F673C
+    .4byte 0                           @ PROTECTION_STATUS_NONE
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_REFLECT
+    .4byte STATUS_SPRITE_SHIELD_RED    @ PROTECTION_STATUS_SAFEGUARD
+    .4byte STATUS_SPRITE_SHIELD_YELLOW @ PROTECTION_STATUS_LIGHT_SCREEN
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_COUNTER
+    .4byte STATUS_SPRITE_SHIELD_YELLOW @ PROTECTION_STATUS_MAGIC_COAT
+    .4byte 0                           @ PROTECTION_STATUS_WISH
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_PROTECT
+    .4byte STATUS_SPRITE_SHIELD_RED    @ PROTECTION_STATUS_MIRROR_COAT
+    .4byte STATUS_SPRITE_ENDURE        @ PROTECTION_STATUS_ENDURE
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_MINI_COUNTER
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_MIRROR_MOVE
+    .4byte 0                           @ PROTECTION_STATUS_CONVERSION_2
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_VITAL_THROW
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_MIST
 
-	.global gUnknown_80F6778
-gUnknown_80F6778: @ 80F6778
-	.incbin "baserom.gba", 0xF6778, 0x10
+	.global gStatusSpriteMasks_WaitingStatus
+gStatusSpriteMasks_WaitingStatus: @ 80F6778
+    .4byte 0                    @ WAITING_STATUS_NONE
+    .4byte STATUS_SPRITE_CURSED @ WAITING_STATUS_CURSED
+    .4byte 0                    @ WAITING_STATUS_DECOY
+    .4byte STATUS_SPRITE_SNATCH @ WAITING_STATUS_SNATCH
 
-	.global gUnknown_80F6788
-gUnknown_80F6788: @ 80F6788
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+	.global gStatusSpriteMasks_LinkedStatus
+gStatusSpriteMasks_LinkedStatus: @ 80F6788
+    .4byte 0 @ LINKED_STATUS_NONE
+    .4byte 0 @ LINKED_STATUS_LEECH_SEED
+    .4byte 0 @ LINKED_STATUS_DESTINY_BOND
 
-	.global gUnknown_80F6794
-gUnknown_80F6794: @ 80F6794
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x01, 0x00
-        .byte 0x00, 0x00, 0x02, 0x00
-        .byte 0x00, 0x00, 0x04, 0x00
-        .byte 0x00, 0x00, 0x08, 0x00
+	.global gStatusSpriteMasks_MoveStatus
+gStatusSpriteMasks_MoveStatus: @ 80F6794
+    .4byte 0                          @ MOVE_STATUS_NONE
+    .4byte STATUS_SPRITE_SURE_SHOT    @ MOVE_STATUS_SURE_SHOT
+    .4byte STATUS_SPRITE_WHIFFER      @ MOVE_STATUS_WHIFFER
+    .4byte STATUS_SPRITE_SET_DAMAGE   @ MOVE_STATUS_SET_DAMAGE
+    .4byte STATUS_SPRITE_FOCUS_ENERGY @ MOVE_STATUS_FOCUS_ENERGY
 
-	.global gUnknown_80F67A8
-gUnknown_80F67A8: @ 80F67A8
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+	.global gStatusSpriteMasks_ItemStatus
+gStatusSpriteMasks_ItemStatus: @ 80F67A8
+    .4byte 0 @ ITEM_STATUS_NONE
+    .4byte 0 @ ITEM_STATUS_LONG_TOSS
+    .4byte 0 @ ITEM_STATUS_PIERCE
 
-	.global gUnknown_80F67B4
-gUnknown_80F67B4: @ 80F67B4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+	.global gStatusSpriteMasks_TransformStatus
+gStatusSpriteMasks_TransformStatus: @ 80F67B4
+    .4byte 0 @ TRANSFORM_STATUS_NONE
+    .4byte 0 @ TRANSFORM_STATUS_INVISIBLE
+    .4byte 0 @ TRANSFORM_STATUS_TRANSFORMED
+    .4byte 0 @ TRANSFORM_STATUS_MOBILE
 
-	.global gUnknown_80F67C4
-gUnknown_80F67C4: @ 80F67C4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x10, 0x00
-        .byte 0x00, 0x00, 0x20, 0x00
-        .byte 0x00, 0x00, 0x40, 0x00
+	.global gStatusSpriteMasks_EyesightStatus
+gStatusSpriteMasks_EyesightStatus: @ 80F67C4
+    .4byte 0                        @ EYESIGHT_STATUS_NONE
+    .4byte STATUS_SPRITE_BLINKER    @ EYESIGHT_STATUS_BLINKER
+    .4byte STATUS_SPRITE_CROSS_EYED @ EYESIGHT_STATUS_CROSS_EYED
+    .4byte STATUS_SPRITE_EYEDROPS   @ EYESIGHT_STATUS_EYEDROPS
 
-	.global gUnknown_80F67D4
-gUnknown_80F67D4: @ 80F67D4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x80, 0x00
+	.global gStatusSpriteMasks_MuzzledStatus
+gStatusSpriteMasks_MuzzledStatus: @ 80F67D4
+    .4byte 0                     @ MUZZLED_STATUS_NONE
+    .4byte STATUS_SPRITE_MUZZLED @ MUZZLED_STATUS_MUZZLED
 
 	.global gUnknown_80F67DC
 gUnknown_80F67DC: @ 80F67DC

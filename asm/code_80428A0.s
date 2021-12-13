@@ -1074,7 +1074,7 @@ _080432FC:
 	bl nullsub_16
 	bl sub_80521D0
 	bl sub_80531A8
-	bl sub_800F690
+	bl InitDungeonPokemonSprites
 	cmp r6, 0
 	bne _08043318
 	bl sub_804513C
@@ -1762,7 +1762,7 @@ _08043926:
 	ldr r0, _08043994
 	ldr r0, [r0]
 	bl CloseFile
-	bl sub_800F740
+	bl FreeDungeonPokemonSprites
 	ldr r0, _08043998
 	mov r3, r10
 	strb r3, [r0]
