@@ -1919,7 +1919,7 @@ _0806DDA2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	ldr r4, _0806DDF0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -2080,7 +2080,7 @@ _0806DEF2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	ldr r0, _0806DF40
 	adds r1, r7, 0
 	movs r2, 0

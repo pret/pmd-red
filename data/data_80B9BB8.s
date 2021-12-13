@@ -5599,15 +5599,78 @@ gUnknown_80CE788: @ 80CE788
 
 	.global gStatusGraphics
 gStatusGraphics: @ 80CE79C
-	.incbin "baserom.gba", 0xCE79C, 0x198
+    @      width, height, vram index, unk, graphic count, offset into graphic
+    .4byte 0, 0, 0,  0,  0,  0
+    .4byte 1, 1, 0,  0,  14, TILE_SIZE_2BPP * 0    @ sleepless
+    .4byte 2, 2, 1,  0,  7,  TILE_SIZE_2BPP * 14   @ burned
+    .4byte 2, 2, 5,  0,  16, TILE_SIZE_2BPP * 42   @ poisoned
+    .4byte 4, 4, 9,  0,  6,  TILE_SIZE_2BPP * 106  @ frozen
+    .4byte 4, 2, 25, 0,  4,  TILE_SIZE_2BPP * 202  @ confused
+    .4byte 2, 2, 33, 0,  9,  TILE_SIZE_2BPP * 234  @ whiffer
+    .4byte 2, 2, 37, 0,  8,  TILE_SIZE_2BPP * 270  @ taunted
+    .4byte 1, 2, 41, 0,  8,  TILE_SIZE_2BPP * 302  @ lowhp
+    .4byte 2, 2, 43, 0,  13, TILE_SIZE_2BPP * 318  @ shield
+    .4byte 2, 2, 47, 10, 10, TILE_SIZE_2BPP * 370  @ statdown
+    .4byte 2, 2, 51, 0,  13, TILE_SIZE_2BPP * 410  @ sword
+    .4byte 1, 1, 55, 0,  14, TILE_SIZE_2BPP * 462  @ blinker
+    .4byte 2, 2, 56, 0,  10, TILE_SIZE_2BPP * 476  @ cross-eyed
+    .4byte 1, 1, 60, 0,  14, TILE_SIZE_2BPP * 516  @ eyedrops
+    .4byte 2, 2, 61, 0,  8,  TILE_SIZE_2BPP * 530  @ muzzled
+    .4byte 2, 2, 65, 4,  10, TILE_SIZE_2BPP * 562  @ sleep
 
 	.global gStatusGraphics4bpp
 gStatusGraphics4bpp: @ 80CE934
-	.incbin "baserom.gba", 0xCE934, 0x4B40
+    .incbin "graphics/status/sleepless.4bpp"
+    .incbin "graphics/status/burned.4bpp"
+    .incbin "graphics/status/poisoned.4bpp"
+    .incbin "graphics/status/frozen.4bpp"
+    .incbin "graphics/status/confused.4bpp"
+    .incbin "graphics/status/whiffer.4bpp"
+    .incbin "graphics/status/taunted.4bpp"
+    .incbin "graphics/status/lowhp.4bpp"
+    .incbin "graphics/status/shield.4bpp"
+    .incbin "graphics/status/statdown.4bpp"
+    .incbin "graphics/status/sword.4bpp"
+    .incbin "graphics/status/blinker.4bpp"
+    .incbin "graphics/status/cross_eyed.4bpp"
+    .incbin "graphics/status/eyedrops.4bpp"
+    .incbin "graphics/status/muzzled.4bpp"
+    .incbin "graphics/status/sleep.4bpp"
 
-	.global gUnknown_80D3474
-gUnknown_80D3474: @ 80D3474
-	.incbin "baserom.gba", 0xD3474, 0xF0
+	.global gStatusSprites
+gStatusSprites: @ 80D3474
+    @ Status to status image conversion
+    @      image, palette
+    .4byte 0,  0
+    .4byte 1,  0   @ STATUS_SPRITE_SLEEPLESS
+    .4byte 2,  0   @ STATUS_SPRITE_BURNED
+    .4byte 3,  11  @ STATUS_SPRITE_POISONED
+    .4byte 3,  7   @ STATUS_SPRITE_BADLY_POISONED
+    .4byte 5,  0   @ STATUS_SPRITE_CONFUSED
+    .4byte 6,  0   @ STATUS_SPRITE_COWERING
+    .4byte 7,  0   @ STATUS_SPRITE_TAUNTED
+    .4byte 8,  0   @ STATUS_SPRITE_ENCORE
+    .4byte 9,  0   @ STATUS_SPRITE_SHIELD_BLUE
+    .4byte 9,  4   @ STATUS_SPRITE_SHIELD_RED
+    .4byte 9,  3   @ STATUS_SPRITE_SHIELD_YELLOW
+    .4byte 9,  10  @ STATUS_SPRITE_SHIELD_GREEN
+    .4byte 9,  5   @ STATUS_SPRITE_ENDURE
+    .4byte 8,  0   @ STATUS_SPRITE_LOWHP
+    .4byte 3,  6   @ STATUS_SPRITE_CURSED
+    .4byte 8,  3   @ STATUS_SPRITE_SNATCH
+    .4byte 11, 0   @ STATUS_SPRITE_SURE_SHOT
+    .4byte 6,  10  @ STATUS_SPRITE_WHIFFER
+    .4byte 11, 5   @ STATUS_SPRITE_SET_DAMAGE
+    .4byte 11, 4   @ STATUS_SPRITE_FOCUS_ENERGY
+    .4byte 12, 0   @ STATUS_SPRITE_BLINKER
+    .4byte 13, 0   @ STATUS_SPRITE_CROSS_EYED
+    .4byte 14, 0   @ STATUS_SPRITE_EYEDROPS
+    .4byte 15, 0   @ STATUS_SPRITE_MUZZLED
+    .4byte 9,  7   @ STATUS_SPRITE_GRUDGE
+    .4byte 14, 4   @ STATUS_SPRITE_EXPOSED
+    .4byte 16, 4   @ STATUS_SPRITE_SLEEP
+    .4byte 10, 3   @ STATUS_SPRITE_STAT_DOWN
+    .4byte 4,  0   @ STATUS_SPRITE_FROZEN
 
         .global gUnknown_80D3564
 gUnknown_80D3564: @ 80D3564

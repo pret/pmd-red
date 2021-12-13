@@ -170,7 +170,7 @@ _08045284: .4byte 0x000181f8
 _08045288:
 	ldr r4, [r5, 0x70]
 	adds r0, r5, 0
-	bl sub_804187C
+	bl EntityGetStatusSprites
 	adds r2, r0, 0
 	adds r0, r4, 0
 	adds r0, 0x98
@@ -178,7 +178,7 @@ _08045288:
 	movs r3, 0x4
 	ldrsh r1, [r4, r3]
 	movs r3, 0
-	bl sub_800F75C
+	bl UpdateDungeonPokemonSprite
 _080452A2:
 	adds r6, 0x1
 	cmp r6, 0x13

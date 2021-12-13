@@ -80,7 +80,11 @@ struct DungeonGlobalData
     /* 0x1358C */ struct DungeonEntity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ struct DungeonEntity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.
-    u8 fill13624[0x181F8 - 0x13624];
+    u8 fill13624[0x181E8 - 0x13624];
+    /* 0x181E8 */ struct Position posScreenWorld;
+    /* 0x181EC */ struct Position prevPosScreenWorld;
+    /* 0x181F0 */ struct Position posScreenPixel;
+    /* 0x181F4 */ struct Position prevPosScreenPixel;
     /* 0x181F8 */ struct DungeonEntity *leader; // Pointer to the team leader.
     u32 unk181FC;
     u32 unk18200;

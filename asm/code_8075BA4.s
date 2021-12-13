@@ -54,7 +54,7 @@ _08075C48:
 	movs r7, 0x2
 _08075C4A:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	adds r0, r7, 0
 _08075C52:
 	pop {r4-r7}
@@ -321,7 +321,7 @@ _08075E50:
 	bl sub_80522F4
 _08075E5C:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08075E62:
 	pop {r3,r4}
 	mov r8, r3
@@ -419,7 +419,7 @@ _08075F10:
 	bl sub_80522F4
 _08075F1C:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08075F22:
 	pop {r3,r4}
 	mov r8, r3
@@ -502,7 +502,7 @@ _08075FB0:
 	bl sub_80522F4
 _08075FBC:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08075FC2:
 	pop {r4-r6}
 	pop {r0}
@@ -596,7 +596,7 @@ _08076074:
 	bl sub_80522F4
 _08076080:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076086:
 	pop {r4-r7}
 	pop {r0}
@@ -687,7 +687,7 @@ _08076128:
 	bl sub_80522F4
 _08076134:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807613A:
 	pop {r3,r4}
 	mov r8, r3
@@ -780,7 +780,7 @@ _080761F4:
 	bl sub_80522F4
 _08076200:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076206:
 	pop {r4-r7}
 	pop {r0}
@@ -940,7 +940,7 @@ _08076338:
 	bl sub_80522F4
 _08076344:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	adds r0, r5, 0
 	movs r1, 0x19
 	bl HasAbility
@@ -1241,7 +1241,7 @@ _080765B4:
 	ble _08076544
 _080765BA:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080765C0:
 	pop {r3-r5}
 	mov r8, r3
@@ -1464,7 +1464,7 @@ _08076784:
 	ble _08076714
 _0807678A:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076790:
 	pop {r3-r5}
 	mov r8, r3
@@ -1609,7 +1609,7 @@ _08076892:
 	adds r1, r5, 0
 	bl sub_80522F4
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080768C8:
 	pop {r3}
 	mov r8, r3
@@ -1724,7 +1724,7 @@ _080769AC:
 	bl sub_80522F4
 _080769B8:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080769BE:
 	pop {r3}
 	mov r8, r3
@@ -1828,7 +1828,7 @@ _08076A88:
 	bl sub_80522F4
 _08076A94:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076A9A:
 	pop {r4-r7}
 	pop {r0}
@@ -1905,7 +1905,7 @@ _08076B28:
 	bl sub_80522F4
 _08076B34:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076B3A:
 	pop {r3}
 	mov r8, r3
@@ -2074,7 +2074,7 @@ _08076C7C:
 	bl sub_80522F4
 _08076C98:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076C9E:
 	pop {r3}
 	mov r8, r3
@@ -2124,7 +2124,7 @@ _08076CF2:
 	str r6, [r2]
 _08076CF4:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076CFA:
 	adds r5, 0x1
 	cmp r5, 0x13
@@ -2260,7 +2260,7 @@ _08076E02:
 	ble _08076DC2
 _08076E08:
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076E0E:
 	pop {r4-r7}
 	pop {r0}
@@ -2422,7 +2422,7 @@ _08076F5C:
 	bl sub_80522F4
 _08076F68:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08076F6E:
 	pop {r3,r4}
 	mov r8, r3
@@ -2545,7 +2545,7 @@ _08077060:
 	bl sub_80522F4
 _0807706C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077072:
 	pop {r3,r4}
 	mov r8, r3
@@ -2648,7 +2648,7 @@ _08077140:
 	bl sub_80522F4
 _0807714C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077152:
 	pop {r3}
 	mov r8, r3
@@ -2750,7 +2750,7 @@ _0807721C:
 	bl sub_80522F4
 _08077228:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807722E:
 	pop {r3}
 	mov r8, r3
@@ -2825,7 +2825,7 @@ _0807729E:
 	bl sub_8041C58
 _080772AE:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080772B4:
 	pop {r4,r5}
 	pop {r0}
@@ -3001,7 +3001,7 @@ _08077410:
 	bl sub_80522F4
 _0807741C:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077422:
 	pop {r3-r5}
 	mov r8, r3
@@ -3134,7 +3134,7 @@ _0807751C:
 	bl sub_80522F4
 _08077528:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807752E:
 	pop {r3-r5}
 	mov r8, r3
@@ -3212,7 +3212,7 @@ _080775C0:
 	bl sub_80522F4
 _080775CC:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080775D2:
 	pop {r4-r7}
 	pop {r0}
@@ -3318,7 +3318,7 @@ _080776A4:
 	bl sub_80522F4
 _080776B0:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080776B6:
 	pop {r4-r7}
 	pop {r0}
@@ -3408,7 +3408,7 @@ _08077764:
 	bl sub_80522F4
 _08077770:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077776:
 	pop {r4-r6}
 	pop {r0}
@@ -3588,7 +3588,7 @@ _080778E4:
 	ble _08077874
 _080778EA:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080778F0:
 	pop {r3-r5}
 	mov r8, r3
@@ -3703,7 +3703,7 @@ _080779B0:
 	strb r2, [r0]
 _080779D8:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080779DE:
 	pop {r3,r4}
 	mov r8, r3
@@ -3822,7 +3822,7 @@ _08077AB4:
 	bl sub_80522F4
 _08077ACA:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077AD0:
 	add sp, 0x4
 	pop {r3-r5}
@@ -3927,7 +3927,7 @@ _08077B98:
 	bl sub_80522F4
 _08077BA4:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077BAA:
 	pop {r4-r7}
 	pop {r0}
@@ -3995,7 +3995,7 @@ _08077C28:
 	bl sub_80522F4
 _08077C34:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077C3A:
 	pop {r4-r6}
 	pop {r0}
@@ -4101,7 +4101,7 @@ _08077CE8:
 	ldrsh r0, [r4, r2]
 	subs r6, r0, r6
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	ldr r0, _08077D1C
 	str r6, [r0]
 	str r7, [r0, 0x4]
@@ -4256,7 +4256,7 @@ _08077E0C:
 	bl sub_803F580
 	bl sub_8040A84
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077E3C:
 	pop {r4,r5}
 	pop {r0}
@@ -4318,7 +4318,7 @@ _08077E90:
 	bl sub_803F580
 	bl sub_8040A84
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077EC0:
 	pop {r4,r5}
 	pop {r0}
@@ -4370,7 +4370,7 @@ _08077F00:
 	bl sub_803F580
 	bl sub_8040A84
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08077F30:
 	pop {r4,r5}
 	pop {r0}
@@ -4523,7 +4523,7 @@ _08078050:
 	adds r1, r4, 0
 	bl sub_80522F4
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078068:
 	pop {r3-r5}
 	mov r8, r3
@@ -4576,7 +4576,7 @@ _0807808A:
 	movs r0, 0
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080780D0:
 	adds r5, 0x1
 	cmp r5, 0x13
@@ -4692,7 +4692,7 @@ _080781AC:
 	adds r1, r5, 0
 	bl sub_80522F4
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080781C4:
 	pop {r3}
 	mov r8, r3
@@ -4751,7 +4751,7 @@ _08078230:
 	bl sub_80522F4
 _0807823C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078242:
 	pop {r4-r7}
 	pop {r0}
@@ -4813,7 +4813,7 @@ _080782B0:
 	bl sub_80522F4
 _080782BC:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080782C2:
 	pop {r4-r7}
 	pop {r0}
@@ -4872,7 +4872,7 @@ _0807832C:
 	bl sub_80522F4
 _08078338:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807833E:
 	pop {r4-r6}
 	pop {r0}
@@ -4931,7 +4931,7 @@ _080783A8:
 	bl sub_80522F4
 _080783B4:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080783BA:
 	pop {r4-r6}
 	pop {r0}
@@ -5141,7 +5141,7 @@ _0807855E:
 	cmp r6, 0x13
 	ble _08078502
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807856A:
 	add sp, 0x24
 	pop {r3-r5}
@@ -5259,7 +5259,7 @@ _08078640:
 	bl sub_80779F0
 _08078668:
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807866E:
 	pop {r4-r7}
 	pop {r0}
@@ -5356,7 +5356,7 @@ _08078700:
 	adds r1, r6, 0
 	bl sub_80522F4
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078732:
 	pop {r3}
 	mov r8, r3
@@ -5430,7 +5430,7 @@ _080787C8:
 	bl sub_80522F4
 _080787D4:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080787DA:
 	pop {r4-r6}
 	pop {r0}
@@ -5487,7 +5487,7 @@ _08078840:
 	bl sub_80522F4
 _0807884C:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078852:
 	pop {r4-r6}
 	pop {r0}
@@ -5554,7 +5554,7 @@ _080788CC:
 	bl sub_80522F4
 _080788D8:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080788DE:
 	pop {r4-r7}
 	pop {r0}
@@ -5615,7 +5615,7 @@ _0807894C:
 	bl sub_80522F4
 _08078958:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807895E:
 	pop {r4-r6}
 	pop {r0}
@@ -5731,7 +5731,7 @@ _08078A38:
 	bl sub_80522F4
 _08078A44:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078A4A:
 	pop {r3}
 	mov r8, r3
@@ -5849,7 +5849,7 @@ _08078B38:
 	bl sub_80522F4
 _08078B44:
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078B4A:
 	add sp, 0x14
 	pop {r3}
@@ -6106,7 +6106,7 @@ _08078D60:
 	bl sub_80522F4
 _08078D72:
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078D78:
 	add sp, 0x28
 	pop {r3-r5}
@@ -6177,7 +6177,7 @@ _08078DFC:
 	bl sub_80522F4
 _08078E08:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078E0E:
 	pop {r4-r6}
 	pop {r0}
@@ -6313,7 +6313,7 @@ _08078ED4:
 	adds r1, r5, 0
 	bl sub_80522F4
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078F2E:
 	movs r3, 0x80
 	lsls r3, 2
@@ -6389,7 +6389,7 @@ _08078FC0:
 	bl sub_80522F4
 _08078FCC:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08078FD2:
 	pop {r4-r7}
 	pop {r0}
@@ -6499,7 +6499,7 @@ _080790A0:
 	bl sub_80522F4
 _080790B0:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080790B6:
 	pop {r3-r5}
 	mov r8, r3
@@ -6544,7 +6544,7 @@ sub_80790C8:
 	movs r1, 0x1
 	strb r1, [r0]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	ldr r0, _08079124
 	ldr r2, [r0]
 	adds r0, r5, 0
@@ -6630,7 +6630,7 @@ _080791BC:
 	bl sub_80522F4
 _080791C8:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080791CE:
 	pop {r4-r6}
 	pop {r0}
@@ -6700,7 +6700,7 @@ _08079254:
 	bl sub_80522F4
 _08079260:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079266:
 	pop {r4-r7}
 	pop {r0}
@@ -6763,7 +6763,7 @@ _080792DC:
 	bl sub_80522F4
 _080792E8:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080792EE:
 	pop {r4-r6}
 	pop {r0}
@@ -6852,7 +6852,7 @@ _08079388:
 	bl sub_80522F4
 _08079394:
 	adds r0, r6, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807939A:
 	add sp, 0x8
 	pop {r3-r5}
@@ -6914,7 +6914,7 @@ _08079404:
 	bl sub_80522F4
 _08079410:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079416:
 	pop {r4-r6}
 	pop {r0}
@@ -6971,7 +6971,7 @@ _08079474:
 	bl sub_80522F4
 _08079480:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079486:
 	pop {r4-r6}
 	pop {r0}
@@ -7028,7 +7028,7 @@ _080794E4:
 	bl sub_80522F4
 _080794F0:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080794F6:
 	pop {r4-r6}
 	pop {r0}
@@ -7085,7 +7085,7 @@ _08079554:
 	bl sub_80522F4
 _08079560:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079566:
 	pop {r4-r6}
 	pop {r0}
@@ -7128,7 +7128,7 @@ _080795A8:
 	bl sub_80522F4
 _080795B4:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -7170,7 +7170,7 @@ _080795FC:
 	bl sub_80522F4
 _08079608:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -7304,7 +7304,7 @@ _080796FA:
 	ldr r2, [sp, 0x1C]
 	bl sub_80522F4
 	adds r0, r7, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	movs r4, 0
 	ldr r6, _08079720
 	b _0807972C
@@ -7375,7 +7375,7 @@ sub_8079764:
 	strb r1, [r0]
 _08079794:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807979A:
 	pop {r4}
 	pop {r0}
@@ -7441,7 +7441,7 @@ _0807980A:
 	adds r1, r4, 0
 	bl sub_80522F4
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079822:
 	pop {r3}
 	mov r8, r3
@@ -7503,7 +7503,7 @@ _08079894:
 	bl sub_80522F4
 _080798A0:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _080798A6:
 	pop {r4-r6}
 	pop {r0}
@@ -7562,7 +7562,7 @@ _08079910:
 	bl sub_80522F4
 _0807991C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079922:
 	pop {r4-r6}
 	pop {r0}
@@ -7621,7 +7621,7 @@ _0807998C:
 	bl sub_80522F4
 _08079998:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807999E:
 	pop {r4-r6}
 	pop {r0}
@@ -7680,7 +7680,7 @@ _08079A08:
 	bl sub_80522F4
 _08079A14:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079A1A:
 	pop {r4-r6}
 	pop {r0}
@@ -7739,7 +7739,7 @@ _08079A84:
 	bl sub_80522F4
 _08079A90:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079A96:
 	pop {r4-r6}
 	pop {r0}
@@ -7798,7 +7798,7 @@ _08079B00:
 	bl sub_80522F4
 _08079B0C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079B12:
 	pop {r4-r6}
 	pop {r0}
@@ -7861,7 +7861,7 @@ _08079B7C:
 	bl sub_80522F4
 _08079B92:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079B98:
 	pop {r4-r6}
 	pop {r0}
@@ -7921,7 +7921,7 @@ _08079C08:
 	bl sub_80522F4
 _08079C14:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079C1A:
 	pop {r4-r6}
 	pop {r0}
@@ -7980,7 +7980,7 @@ _08079C84:
 	bl sub_80522F4
 _08079C90:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079C96:
 	pop {r4-r6}
 	pop {r0}
@@ -8039,7 +8039,7 @@ _08079D00:
 	bl sub_80522F4
 _08079D0C:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079D12:
 	pop {r4-r6}
 	pop {r0}
@@ -8113,7 +8113,7 @@ _08079D9C:
 	bl sub_80522F4
 _08079DA8:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079DAE:
 	pop {r4-r6}
 	pop {r0}
@@ -8172,7 +8172,7 @@ _08079E18:
 	bl sub_80522F4
 _08079E24:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079E2A:
 	pop {r4-r6}
 	pop {r0}
@@ -8293,7 +8293,7 @@ _08079EFC:
 	bl sub_80522F4
 _08079F08:
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _08079F0E:
 	pop {r3,r4}
 	mov r8, r3
@@ -8496,7 +8496,7 @@ _0807A0A0:
 	bl sub_80522F4
 _0807A0B2:
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A0B8:
 	add sp, 0x4
 	pop {r3-r5}
@@ -8551,7 +8551,7 @@ _0807A110:
 	cmp r3, 0
 	bge _0807A0FE
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A11E:
 	pop {r4-r7}
 	pop {r0}
@@ -8711,7 +8711,7 @@ _0807A260:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	mov r2, r9
 	cmp r2, 0
 	beq _0807A27C
@@ -8793,7 +8793,7 @@ _0807A30C:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A31A:
 	pop {r4-r6}
 	pop {r0}
@@ -8892,7 +8892,7 @@ _0807A3DC:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	cmp r7, 0
 	beq _0807A3F4
 	adds r0, r4, 0
@@ -8991,7 +8991,7 @@ _0807A4A8:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	adds r0, r5, 0
 	bl GetMovementSpeed
 _0807A4BC:
@@ -9124,7 +9124,7 @@ _0807A5B6:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A5C4:
 	pop {r4,r5}
 	pop {r0}
@@ -9235,7 +9235,7 @@ _0807A6A4:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A6B2:
 	pop {r4-r7}
 	pop {r0}
@@ -9295,7 +9295,7 @@ _0807A716:
 	movs r0, 0xFF
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A72A:
 	pop {r4,r5}
 	pop {r0}
@@ -9369,7 +9369,7 @@ _0807A7AE:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A7BC:
 	pop {r4,r5}
 	pop {r0}
@@ -9455,7 +9455,7 @@ _0807A866:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	cmp r6, 0
 	beq _0807A87E
 	movs r0, 0x1
@@ -9527,7 +9527,7 @@ _0807A8F6:
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	ldrb r0, [r5, 0x7]
 	cmp r0, 0
 	beq _0807A918
@@ -9569,7 +9569,7 @@ _0807A952:
 	movs r0, 0
 	strb r0, [r4]
 	adds r0, r5, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807A95C:
 	pop {r4,r5}
 	pop {r0}
@@ -9632,7 +9632,7 @@ sub_807A9B0:
 	movs r2, 0x1
 	bl sub_806A898
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -9671,7 +9671,7 @@ sub_807A9D8:
 	adds r1, r4, 0
 	bl sub_80522F4
 	adds r0, r4, 0
-	bl sub_80418D4
+	bl DungeonEntityUpdateStatusSprites
 _0807AA20:
 	pop {r4,r5}
 	pop {r0}
@@ -25838,7 +25838,7 @@ _08082B46:
 	ldrsh r1, [r4, r2]
 	mov r2, sp
 	movs r3, 0x3
-	bl sub_800F8D0
+	bl AddPokemonDungeonSprite
 	movs r1, 0x4
 	ldrsh r0, [r5, r1]
 	movs r2, 0x6
