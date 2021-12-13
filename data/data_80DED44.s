@@ -489,7 +489,14 @@ gUnknown_80E04B4: @ 80E04B4
 
 	.global gUnknown_80E04F4
 gUnknown_80E04F4: @ 80E04F4
-	.incbin "baserom.gba", 0xE04F4, 0xCC
+    .string "#+...Oh~2c wait~2c sorry.#P"
+    .string "#+You already have the \n"
+    .string "#+#C4$h Friend Area#R.#P"
+    .string "#+I~27m sorry that my reward is\n"
+    .string "#+something you already have.#P"
+    .string "#+In its place~2c #CN$m0#R~2c\n"
+    .string "#+you can have #CG1~2c000#R {POKE}.\0"
+    .align 2, 0
 
 	.global gUnknown_80E05C0
 gUnknown_80E05C0: @ 80E05C0

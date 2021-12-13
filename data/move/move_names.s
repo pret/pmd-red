@@ -275,7 +275,7 @@ MoveUseTextBide:
 
 .global MoveNameBide2
 MoveNameBide2:
-.string "かみん\0"
+.string "がみん\0"
 .align 2,0
 
 .global MoveDescriptionIsWatching
