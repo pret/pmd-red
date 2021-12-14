@@ -3,7 +3,9 @@
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
+#include "constants/targeting.h"
 #include "dungeon_action.h"
+#include "dungeon_ai_1.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_capabilities_1.h"
@@ -26,19 +28,11 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-enum TargetCapability
-{
-    TARGET_CAPABILITY_CANNOT_ATTACK,
-    TARGET_CAPABILITY_CAN_TARGET,
-    TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
-};
-
 extern s32 CalculateFacingDir(struct Position*, struct Position*);
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
 extern bool8 ToolboxEnabled(struct DungeonEntityData*);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
-extern bool8 CanTarget(struct DungeonEntity*, struct DungeonEntity*, bool8, bool8);
 extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void TargetThrownItem(struct DungeonEntity*, struct DungeonEntity*, struct ItemSlot*, u8, bool8);
 

@@ -207,6 +207,8 @@ SECTIONS {
         asm/code_8070D04.o(.text);
         src/dungeon_ai.o(.text);
         asm/code_8071518.o(.text);
+        src/dungeon_ai_1.o(.text);
+        asm/code_807167C.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
         asm/code_8071858.o(.text);
         src/dungeon_pokemon_attributes_1.o(.text);

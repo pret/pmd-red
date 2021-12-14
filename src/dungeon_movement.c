@@ -5,6 +5,7 @@
 #include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
+#include "constants/targeting.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
