@@ -13,6 +13,7 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_visibility.h"
 #include "map.h"
 #include "pokemon.h"
 
@@ -25,7 +26,6 @@ extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SendMessage(struct DungeonEntity*, char*);
 extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
-extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
 extern void DecideAttack(struct DungeonEntity*);

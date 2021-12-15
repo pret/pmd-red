@@ -15,6 +15,7 @@
 #include "dungeon_random.h"
 #include "dungeon_random_1.h"
 #include "dungeon_util.h"
+#include "dungeon_visibility.h"
 #include "item.h"
 #include "team_inventory.h"
 
@@ -33,7 +34,6 @@ extern struct MapTile* GetMapTileAtPosition(s16, s16);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
 extern bool8 ToolboxEnabled(struct DungeonEntityData*);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
-extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void TargetThrownItem(struct DungeonEntity*, struct DungeonEntity*, struct ItemSlot*, u8, bool8);
 
 extern s32 gNumPotentialTargets;

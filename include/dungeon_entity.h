@@ -272,10 +272,10 @@ struct DungeonEntity
 
 enum EntityType
 {
-    ENTITY_NONE = 0,
-    ENTITY_POKEMON = 1,
-    ENTITY_TRAP = 2,
-    ENTITY_ITEM = 3
+    ENTITY_NONE,
+    ENTITY_POKEMON,
+    ENTITY_TRAP,
+    ENTITY_ITEM
 };
 
 enum MovementFlag
