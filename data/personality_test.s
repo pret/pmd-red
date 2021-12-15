@@ -232,7 +232,7 @@
 
     DocileQuest3Question:
     .string "A friend brought over something you{APOSTROPHE}d\n"
-    .string "forgotten.#W\n"
+    .string "forgotten.{WAIT_PRESS}\n"
     .string "How do you thank your friend?\0"
     .align 2,0
 
@@ -295,9 +295,9 @@
 
     BraveQuest1Question:
     .string "You{APOSTROPHE}re going bungee jumping for the first\n"
-    .string "time.#PSince it{APOSTROPHE}s scary{COMMA} you decide to test the\n"
-    .string "jump with a doll...#W\n"
-    .string "And the bungee cord snaps!#P"
+    .string "time.{EXTRA_MSG}Since it{APOSTROPHE}s scary{COMMA} you decide to test the\n"
+    .string "jump with a doll...{WAIT_PRESS}\n"
+    .string "And the bungee cord snaps!{EXTRA_MSG}"
     .string "Will you still try to make a jump anyway?\0"
     .align 2,0
 
@@ -367,10 +367,10 @@
     .4byte BraveQuest2BPoints
 
     BraveQuest2BQuestion:
-    .string "You valiantly fight the aliens...#W\n"
-    .string "But{COMMA} you are defeated...#PAn alien says to you...#P{QUOTE_START}YOU HAVE IMPRESSED US.\n"
-    .string "IT WAS A PLEASURE TO SEE.#PJOIN US{COMMA} AND TOGETHER WE SHALL\n"
-    .string "RULE THE WORLD.{QUOTE_END}#W\n"
+    .string "You valiantly fight the aliens...{WAIT_PRESS}\n"
+    .string "But{COMMA} you are defeated...{EXTRA_MSG}An alien says to you...{EXTRA_MSG}{QUOTE_START}YOU HAVE IMPRESSED US.\n"
+    .string "IT WAS A PLEASURE TO SEE.{EXTRA_MSG}JOIN US{COMMA} AND TOGETHER WE SHALL\n"
+    .string "RULE THE WORLD.{QUOTE_END}{WAIT_PRESS}\n"
     .string "What will you do?\0"
     .align 2,0
 
@@ -402,7 +402,7 @@
     .4byte BraveQuest3Points
 
     BraveQuest3Question:
-    .string "There is a scream from behind a door!#W\n"
+    .string "There is a scream from behind a door!{WAIT_PRESS}\n"
     .string "How will you react?\0"
     .align 2,0
 
@@ -449,7 +449,7 @@
 
     BraveQuest4Question:
     .string "A delinquent is hassling a girl on\n"
-    .string "a busy city street!#W\n"
+    .string "a busy city street!{WAIT_PRESS}\n"
     .string "What will you do?\0"
     .align 2,0
 
@@ -575,9 +575,9 @@
 
     JollyQuest4Question:
     .string "A foreign person has started up a\n"
-    .string "conversation with you.#P"
+    .string "conversation with you.{EXTRA_MSG}"
     .string "To be honest{COMMA} you don{APOSTROPHE}t have a clue what\n"
-    .string "this fellow is saying.#W\n"
+    .string "this fellow is saying.{WAIT_PRESS}\n"
     .string "How do you reply?\0"
     .align 2,0
 
@@ -905,7 +905,7 @@
     .global TimidQuest2Question
     TimidQuest2Question:
     .string "Grab any digit on your left hand with your\n"
-    .string "right hand.#W\n"
+    .string "right hand.{WAIT_PRESS}\n"
     .string "Which digit did you grab?\0"
     .align 2,0
 
@@ -948,7 +948,7 @@
     .global TimidQuest3Question
     TimidQuest3Question:
     .string "You are suddenly locked inside a\n"
-    .string "pitch-black room!#W\n"
+    .string "pitch-black room!{WAIT_PRESS}\n"
     .string "What do you do?\0"
     .align 2,0
 
@@ -1037,8 +1037,8 @@
 
     .global HastyQuest1Question
     HastyQuest1Question:
-    .string "You receive a gift!#W\n"
-    .string "But you don{APOSTROPHE}t know what{APOSTROPHE}s in it.#W\n"
+    .string "You receive a gift!{WAIT_PRESS}\n"
+    .string "But you don{APOSTROPHE}t know what{APOSTROPHE}s in it.{WAIT_PRESS}\n"
     .string "You{APOSTROPHE}re curious{COMMA} so what do you do?\0"
     .align 2,0
 
@@ -1083,7 +1083,7 @@
 
     .global HastyQuest2Question
     HastyQuest2Question:
-    .string "You win a lottery!#W\n"
+    .string "You win a lottery!{WAIT_PRESS}\n"
     .string "What do you do with the money?\0"
     .align 2,0
 
@@ -1791,7 +1791,7 @@
 
     .global QuirkyQuest3Question
     QuirkyQuest3Question:
-    .string "There is a person you like...#W\n"
+    .string "There is a person you like...{WAIT_PRESS}\n"
     .string "But there{APOSTROPHE}s no opportunity to get close.\n"
     .string "What do you do?\0"
     .align 2,0

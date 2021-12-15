@@ -226,10 +226,10 @@ ALIGNED(4) const u8 gUnknown_80DF208[]= _(
 
 ALIGNED(4) const u8 gUnknown_80DF250[]= _(
 	": This is the counter for\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.#P"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	": Oh{COMMA} hi{COMMA} {COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}.\n"
 	"I{APOSTROPHE}ve been waiting for you. You wanted me\n"
-	"to process a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?#P"
+	"to process a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?{EXTRA_MSG}"
 	": Let me get on it right away.");
 
 ALIGNED(4) const u8 gUnknown_80DF304[]= _(
@@ -245,11 +245,11 @@ ALIGNED(4) const u8 gUnknown_80DF380[]= _(
 	" OK. Please enter the\n"
 	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const u8 gUnknown_80DF3B4[]=
+ALIGNED(4) const u8 gUnknown_80DF3B4[]= _(
 	" Please give this password\n"
-	"to the friend that rescued your team.#P"
+	"to the friend that rescued your team.{EXTRA_MSG}"
 	" I also must save your\n"
-	"adventure.";
+	"adventure.");
 
 ALIGNED(4) const u8 gUnknown_80DF418[]= _(
 	" OK{COMMA} here is your\n"
@@ -261,7 +261,7 @@ ALIGNED(4) const u8 gUnknown_80DF44C[]=
 
 ALIGNED(4) const u8 gUnknown_80DF46C[]= _(
 	" There we go.\n"
-	"I{APOSTROPHE}m all done.#P"
+	"I{APOSTROPHE}m all done.{EXTRA_MSG}"
 	" Doesn{APOSTROPHE}t it feel great to\n"
 	"be appreciated for doing something good?\n"
 	"Please keep up your rescue work!");
@@ -272,9 +272,9 @@ ALIGNED(4) const u8 gUnknown_80DF4F4[]= _(
 	"mission.");
 
 ALIGNED(4) const u8 gUnknown_80DF544[]= _(
-	 "#+Communicating...\n"
-	 "#+Please wait with the power on.\n"
-	 "#+To cancel{COMMA} press {B_BUTTON}.");
+	 "{CENTER_ALIGN}Communicating...\n"
+	 "{CENTER_ALIGN}Please wait with the power on.\n"
+	 "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
 
 ALIGNED(4) const u8 gUnknown_80DF594[]= _(
 	" There. I{APOSTROPHE}ve sent your\n"
@@ -316,7 +316,7 @@ ALIGNED(4) const u8 gUnknown_80DF77C[]= _(
 ALIGNED(4) const u8 gUnknown_80DF7D4[]= _(
 	" ...Oh?\n"
 	"You{APOSTROPHE}ve already attached a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
-	"to this mail.#P"
+	"to this mail.{EXTRA_MSG}"
 	" I{APOSTROPHE}m sorry{COMMA} but once an item\n"
 	"has been attached to mail{COMMA} it can{APOSTROPHE}t be\n"
 	"exchanged.");

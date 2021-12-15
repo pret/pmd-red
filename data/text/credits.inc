@@ -7,7 +7,7 @@
 
         .global StaffCredits_80E4AD8
         StaffCredits_80E4AD8:
-        .string "#+"
+        .string "{CENTER_ALIGN}"
         .byte 0x82, 0xa0
         .string "STAFF CREDITS"
         .byte 0x82, 0xa2, 0x00

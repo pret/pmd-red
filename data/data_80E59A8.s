@@ -185,7 +185,7 @@ gUnknown_80E61C0: @ 80E61C0
 
 	.global gUnknown_80E61E4
 gUnknown_80E61E4: @ 80E61E4
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
         .string "will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
@@ -206,21 +206,21 @@ gUnknown_80E6268: @ 80E6268
 
 	.global gUnknown_80E62C4
 gUnknown_80E62C4: @ 80E62C4
-        .string "#+In communication...\n"
-        .string "#+Please wait with the power on.\n"
-        .string "#+To cancel{COMMA} press {B_BUTTON}.\0"
+        .string "{CENTER_ALIGN}In communication...\n"
+        .string "{CENTER_ALIGN}Please wait with the power on.\n"
+        .string "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.\0"
         .align 2,0
 
 	.global gUnknown_80E6314
 gUnknown_80E6314: @ 80E6314
         .string "You received\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E6358
 gUnknown_80E6358: @ 80E6358
-        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} #CI{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\0"
+        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 @ Trade Items Link Errors
@@ -530,17 +530,17 @@ gUnknown_80E6EAC: @ 80E6EAC
 
         .global CheckAgain_80E6ECC
         CheckAgain_80E6ECC:
-        .asciz "#+Please check again."
+        .string "{CENTER_ALIGN}Please check again.\0"
         .align 2,0
 
         .global StorageEmpty_80E6EE4
         StorageEmpty_80E6EE4:
-        .asciz "#+The storage space is empty!"
+        .string "{CENTER_ALIGN}The storage space is empty!\0"
         .align 2,0
 
         .global Caution_80E6F04
         Caution_80E6F04:
-        .string "#+{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} \0"
+        .string "{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
         .asciz "pksdir0"
@@ -588,7 +588,7 @@ gUnknown_80E7090: @ 80E7090
 
         .global DeletingAdventure_80E70B0
         DeletingAdventure_80E70B0:
-        .string "#+Deleting your adventure!"
+        .string "{CENTER_ALIGN}Deleting your adventure!"
         .align 2,0
 
 	.global gUnknown_80E70CC
@@ -609,7 +609,7 @@ gUnknown_80E70CC: @ 80E70CC
 
         .global AdventureDeleted_80E70F0
         AdventureDeleted_80E70F0:
-        .string "#+Your adventure has been deleted."
+        .string "{CENTER_ALIGN}Your adventure has been deleted."
         .align 2,0
 
 	.global gUnknown_80E7114
@@ -651,17 +651,17 @@ gUnknown_80E7214: @ 80E7214
 
         .global CheckAgain_80E7234
         CheckAgain_80E7234:
-        .asciz "#+Please check it again."
+        .string "{CENTER_ALIGN}Please check it again.\0"
         .align 2,0
 
         .global IncorrectPassword_80E7250
         IncorrectPassword_80E7250:
-        .asciz "#+Incorrect password!"
+        .string "{CENTER_ALIGN}Incorrect password!\0"
         .align 2,0
 
         .global Error_80E7268
         Error_80E7268:
-        .string "#+{COLOR_1 RED}Error!{END_COLOR_TEXT_1} \0"
+        .string "{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80E7278
@@ -690,12 +690,12 @@ gUnknown_80E7290: @ 80E7290
 
         .global PasswordAccept_80E72B4
         PasswordAccept_80E72B4:
-        .asciz "#+The password has been accepted."
+        .string "{CENTER_ALIGN}The password has been accepted.\0"
         .align 2,0
 
         .global Success_80E72D8
         Success_80E72D8:
-        .string "#+{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
+        .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
         .align 2,0
 
 	.global gUnknown_80E72EC
@@ -720,7 +720,7 @@ gUnknown_80E7304: @ 80E7304
 
         .global NotSOSMail_80E7324
         NotSOSMail_80E7324:
-        .string "#+This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E7344
@@ -745,7 +745,7 @@ gUnknown_80E735C: @ 80E735C
 
         .global ReceiveSOSMail_80E737C
         ReceiveSOSMail_80E737C:
-        .string "#+This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
+        .string "{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
         .align 2,0
 
 	.global gUnknown_80E73AC

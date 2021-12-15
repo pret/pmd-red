@@ -1,46 +1,46 @@
 gSaveTextQuicksaving:: @ 80B6A34
-	.string "#+Quicksaving your adventure...\n"
-	.string "#+Please don{APOSTROPHE}t turn off the power.\0"
+	.string "{CENTER_ALIGN}Quicksaving your adventure...\n"
+	.string "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.\0"
 	.align 2, 0
 
 gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
-	.string "#+Your adventure has been saved.\0"
+	.string "{CENTER_ALIGN}Your adventure has been saved.\0"
 	.align 2, 0
 
 gSaveTextYourAdventureHasBeenSavedLong:: @ 80B6AA0
-	.string "#+Your adventure has been saved.\n"
-	.string "#+When you are in a dungeon{COMMA} quicksave\n"
-	.string "#+your progress before ending the game.\0"
+	.string "{CENTER_ALIGN}Your adventure has been saved.\n"
+	.string "{CENTER_ALIGN}When you are in a dungeon{COMMA} quicksave\n"
+	.string "{CENTER_ALIGN}your progress before ending the game.\0"
 	.align 2, 0
 
 gSaveTextTheDataCouldNotBeWritten:: @ 80B6B14
-	.string "#+The data could not be written.\n"
-	.string "#+Please turn off the power and remove\n"
-	.string "#+and reinsert the DS Card.\0"
+	.string "{CENTER_ALIGN}The data could not be written.\n"
+	.string "{CENTER_ALIGN}Please turn off the power and remove\n"
+	.string "{CENTER_ALIGN}and reinsert the DS Card.\0"
 	.align 2, 0
 
 gSaveTextFailed:: @ 80B6B78
-	.string "#+Save failed.\0"
+	.string "{CENTER_ALIGN}Save failed.\0"
 	.align 2, 0
 
 gSaveTextError:: @ 80B6B88
-	.string "#+Error reading data.\n"
-	.string "#+Please turn off the power and reinsert\n"
-	.string "#+the DS Game Card.\0"
+	.string "{CENTER_ALIGN}Error reading data.\n"
+	.string "{CENTER_ALIGN}Please turn off the power and reinsert\n"
+	.string "{CENTER_ALIGN}the DS Game Card.\0"
 	.align 2, 0
 
 gSaveTextCantResume:: @ 80B6BDC
-	.string "#+Your data was not properly saved{COMMA}\n"
-	.string "#+so your game cannot be resumed\n"
-	.string "#+from your last spot.#P#+Your last outing is considered a defeat.\n"
-	.string "#+Before shutting down{COMMA} save in your\n"
-	.string "#+team base{COMMA} or quicksave in a dungeon.\0"
+	.string "{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
+	.string "{CENTER_ALIGN}so your game cannot be resumed\n"
+	.string "{CENTER_ALIGN}from your last spot.{EXTRA_MSG}{CENTER_ALIGN}Your last outing is considered a defeat.\n"
+	.string "{CENTER_ALIGN}Before shutting down{COMMA} save in your\n"
+	.string "{CENTER_ALIGN}team base{COMMA} or quicksave in a dungeon.\0"
 	.align 2, 0
 
 gSaveTextMayNotResume:: @ 80B6CB8
-	.string "#+You may not resume your dungeon\n"
-	.string "#+adventure using this saved data.\n"
-	.string "#+Your last outing is considered a defeat.\0"
+	.string "{CENTER_ALIGN}You may not resume your dungeon\n"
+	.string "{CENTER_ALIGN}adventure using this saved data.\n"
+	.string "{CENTER_ALIGN}Your last outing is considered a defeat.\0"
 	.align 2, 0
 
 	.string "pksdir0\0"

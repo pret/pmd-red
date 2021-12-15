@@ -891,7 +891,7 @@ sUnknown_810D5F0:
     .align 2, 0
 
 sUnknown_810D608:
-    .string "Won~27t get sleepy\0"
+    .string "Won{APOSTROPHE}t get sleepy\0"
     .align 2, 0
 
 sUnknown_810D61C:
@@ -995,335 +995,335 @@ gFormattedStatusNames: @ 810D628
     .4byte sUnknown_810D78C
 
 sUnknown_810D78C:
-    .string "#c5Stair Spotter#r  \0"
+    .string "{COLOR_2 CYAN}Stair Spotter{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D7A4:
-    .string "#c5Doubled Attack#r  \0"
+    .string "{COLOR_2 CYAN}Doubled Attack{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D7BC:
-    .string "#c5Perish Song#r  \0"
+    .string "{COLOR_2 CYAN}Perish Song{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D7D0:
-    .string "#c5Terrified#r  \0"
+    .string "{COLOR_2 CYAN}Terrified{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D7E4:
-    .string "#c5Exposed#r  \0"
+    .string "{COLOR_2 CYAN}Exposed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D7F4:
-    .string "#c5Grudge#r  \0"
+    .string "{COLOR_2 CYAN}Grudge{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D804:
-    .string "#c5Scanning#r  \0"
+    .string "{COLOR_2 CYAN}Scanning{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D814:
-    .string "#c5Power Ears#r  \0"
+    .string "{COLOR_2 CYAN}Power Ears{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D828:
-    .string "#c5Stockpiling#r  \0"
+    .string "{COLOR_2 CYAN}Stockpiling{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D83C:
-    .string "#c5Muzzled#r  \0"
+    .string "{COLOR_2 CYAN}Muzzled{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D84C:
-    .string "#c5Eyedrops#r  \0"
+    .string "{COLOR_2 CYAN}Eyedrops{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D85C:
-    .string "#c5Cross-Eyed#r  \0"
+    .string "{COLOR_2 CYAN}Cross-Eyed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D870:
-    .string "#c5Blinker#r  \0"
+    .string "{COLOR_2 CYAN}Blinker{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D880:
-    .string "#c5Mobile#r  \0"
+    .string "{COLOR_2 CYAN}Mobile{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D890:
-    .string "#c5Transformed#r  \0"
+    .string "{COLOR_2 CYAN}Transformed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D8A4:
-    .string "#c5Invisible#r  \0"
+    .string "{COLOR_2 CYAN}Invisible{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D8B8:
-    .string "#c5Pierce#r  \0"
+    .string "{COLOR_2 CYAN}Pierce{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D8C8:
-    .string "#c5Long Toss#r  \0"
+    .string "{COLOR_2 CYAN}Long Toss{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D8DC:
-    .string "#c5Focus Energy#r  \0"
+    .string "{COLOR_2 CYAN}Focus Energy{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D8F0:
-    .string "#c5Set Damage#r  \0"
+    .string "{COLOR_2 CYAN}Set Damage{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D904:
-    .string "#c5Whiffer#r  \0"
+    .string "{COLOR_2 CYAN}Whiffer{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D914:
-    .string "#c5Sure Shot#r  \0"
+    .string "{COLOR_2 CYAN}Sure Shot{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D928:
-    .string "#c5Destiny Bond#r  \0"
+    .string "{COLOR_2 CYAN}Destiny Bond{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D93C:
-    .string "#c5Leech Seed#r  \0"
+    .string "{COLOR_2 CYAN}Leech Seed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D950:
-    .string "#c5Hungry Pal#r  \0"
+    .string "{COLOR_2 CYAN}Hungry Pal{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D964:
-    .string "#c5Snatch#r  \0"
+    .string "{COLOR_2 CYAN}Snatch{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D974:
-    .string "#c5Decoy#r  \0"
+    .string "{COLOR_2 CYAN}Decoy{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D984:
-    .string "#c5Cursed#r  \0"
+    .string "{COLOR_2 CYAN}Cursed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D994:
-    .string "#c5Weakened#r  \0"
+    .string "{COLOR_2 CYAN}Weakened{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D9A4:
-    .string "#c5Mist#r  \0"
+    .string "{COLOR_2 CYAN}Mist{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D9B0:
-    .string "#c5Vital Throw#r  \0"
+    .string "{COLOR_2 CYAN}Vital Throw{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D9C4:
-    .string "#c5Conversion 2#r  \0"
+    .string "{COLOR_2 CYAN}Conversion 2{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D9D8:
-    .string "#c5Mirror Move#r  \0"
+    .string "{COLOR_2 CYAN}Mirror Move{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810D9EC:
-    .string "#c5Mini Counter#r  \0"
+    .string "{COLOR_2 CYAN}Mini Counter{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA00:
-    .string "#c5Enduring#r  \0"
+    .string "{COLOR_2 CYAN}Enduring{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA10:
-    .string "#c5Mirror Coat#r  \0"
+    .string "{COLOR_2 CYAN}Mirror Coat{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA24:
-    .string "#c5Protect#r  \0"
+    .string "{COLOR_2 CYAN}Protect{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA34:
-    .string "#c5Wish#r  \0"
+    .string "{COLOR_2 CYAN}Wish{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA40:
-    .string "#c5Magic Coat#r  \0"
+    .string "{COLOR_2 CYAN}Magic Coat{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA54:
-    .string "#c5Counter#r  \0"
+    .string "{COLOR_2 CYAN}Counter{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA64:
-    .string "#c5Light Screen#r  \0"
+    .string "{COLOR_2 CYAN}Light Screen{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA78:
-    .string "#c5Safeguard#r  \0"
+    .string "{COLOR_2 CYAN}Safeguard{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA8C:
-    .string "#c5Reflect#r  \0"
+    .string "{COLOR_2 CYAN}Reflect{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DA9C:
-    .string "#c5Half Speed#r  \0"
+    .string "{COLOR_2 CYAN}Half Speed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DAB0:
-    .string "#c5Enraged#r  \0"
+    .string "{COLOR_2 CYAN}Enraged{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DAC0:
-    .string "#c5Charging#r  \0"
+    .string "{COLOR_2 CYAN}Charging{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DAD0:
-    .string "#c5Digging#r  \0"
+    .string "{COLOR_2 CYAN}Digging{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DAE0:
-    .string "#c5Diving#r  \0"
+    .string "{COLOR_2 CYAN}Diving{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DAF0:
-    .string "#c5Bouncing#r  \0"
+    .string "{COLOR_2 CYAN}Bouncing{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB00:
-    .string "#c5Flying#r  \0"
+    .string "{COLOR_2 CYAN}Flying{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB10:
-    .string "#c5Skull Bash#r  \0"
+    .string "{COLOR_2 CYAN}Skull Bash{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB24:
-    .string "#c5Focus Punch#r  \0"
+    .string "{COLOR_2 CYAN}Focus Punch{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB38:
-    .string "#c5Razor Wind#r  \0"
+    .string "{COLOR_2 CYAN}Razor Wind{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB4C:
-    .string "#c5Sky Attack#r  \0"
+    .string "{COLOR_2 CYAN}Sky Attack{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB60:
-    .string "#c5Solarbeam#r  \0"
+    .string "{COLOR_2 CYAN}Solarbeam{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB74:
-    .string "#c5Bide#r  \0"
+    .string "{COLOR_2 CYAN}Bide{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB80:
-    .string "#c5Double Speed#r  \0"
+    .string "{COLOR_2 CYAN}Double Speed{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DB94:
-    .string "#c5Infatuated#r  \0"
+    .string "{COLOR_2 CYAN}Infatuated{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBA8:
-    .string "#c5Encore#r  \0"
+    .string "{COLOR_2 CYAN}Encore{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBB8:
-    .string "#c5Taunted#r  \0"
+    .string "{COLOR_2 CYAN}Taunted{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBC8:
-    .string "#c5Cowering#r  \0"
+    .string "{COLOR_2 CYAN}Cowering{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBD8:
-    .string "#c5Paused#r  \0"
+    .string "{COLOR_2 CYAN}Paused{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBE8:
-    .string "#c5Confused#r  \0"
+    .string "{COLOR_2 CYAN}Confused{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DBF8:
-    .string "#c5Cringe#r  \0"
+    .string "{COLOR_2 CYAN}Cringe{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC08:
-    .string "#c5Famished#r  \0"
+    .string "{COLOR_2 CYAN}Famished{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC18:
-    .string "#c5Constriction#r  \0"
+    .string "{COLOR_2 CYAN}Constriction{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC2C:
-    .string "#c5Petrified#r  \0"
+    .string "{COLOR_2 CYAN}Petrified{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC40:
-    .string "#c5Ingrain#r  \0"
+    .string "{COLOR_2 CYAN}Ingrain{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC50:
-    .string "#c5Wrapped#r  \0"
+    .string "{COLOR_2 CYAN}Wrapped{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC60:
-    .string "#c5Wrap#r  \0"
+    .string "{COLOR_2 CYAN}Wrap{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC6C:
-    .string "#c5Leg Hold#r  \0"
+    .string "{COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC7C:
-    .string "#c5Frozen#r  \0"
+    .string "{COLOR_2 CYAN}Frozen{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DC8C:
-    .string "#c5Identifying#r  \0"
+    .string "{COLOR_2 CYAN}Identifying{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCA0:
-    .string "#c5Paralysis#r  \0"
+    .string "{COLOR_2 CYAN}Paralysis{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCB4:
-    .string "#c5Badly Poisoned#r  \0"
+    .string "{COLOR_2 CYAN}Badly Poisoned{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCCC:
-    .string "#c5Poisoned#r  \0"
+    .string "{COLOR_2 CYAN}Poisoned{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCDC:
-    .string "#c5Burn#r  \0"
+    .string "{COLOR_2 CYAN}Burn{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCE8:
-    .string "#c5Low HP#r  \0"
+    .string "{COLOR_2 CYAN}Low HP{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DCF8:
-    .string "#c5Napping#r  \0"
+    .string "{COLOR_2 CYAN}Napping{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DD08:
-    .string "#c5Yawning#r  \0"
+    .string "{COLOR_2 CYAN}Yawning{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DD18:
-    .string "#c5Nightmare#r  \0"
+    .string "{COLOR_2 CYAN}Nightmare{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DD2C:
-    .string "#c5Sleepless#r  \0"
+    .string "{COLOR_2 CYAN}Sleepless{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DD40:
-    .string "#c5Sleep#r  \0"
+    .string "{COLOR_2 CYAN}Sleep{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810DD50:
@@ -1785,27 +1785,27 @@ gStatusDescriptions: @ 810E074
 
 sUnknown_810E38C:
     .string "Physical Attack moves are those based on\n"
-    .string "the stats #c6Attack#r and #c6Defense#r.\n"
+    .string "the stats {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}.\n"
     .string "Physical Attack moves are of the types\n"
-    .string "Normal~2c Fighting~2c Poison~2c Ground~2c Flying~2c\n"
-    .string "Bug~2c Rock~2c Ghost~2c and Steel.\0"
+    .string "Normal{COMMA} Fighting{COMMA} Poison{COMMA} Ground{COMMA} Flying{COMMA}\n"
+    .string "Bug{COMMA} Rock{COMMA} Ghost{COMMA} and Steel.\0"
     .align 2, 0
 
 sUnknown_810E45C:
-    .string "#c5Physical Attack Moves#r  \0"
+    .string "{COLOR_2 CYAN}Physical Attack Moves{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810E47C:
     .string "Special Attack moves are those based on\n"
-    .string "the stats #c6Special Attack#r and\n"
-    .string "#c6Special Defense#r.\n"
+    .string "the stats {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} and\n"
+    .string "{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}.\n"
     .string "Special Attack moves are of the types\n"
-    .string "Fire~2c Water~2c Grass~2c Electric~2c Ice~2c Psychic~2c\n"
-    .string "Dragon~2c and Dark.\0"
+    .string "Fire{COMMA} Water{COMMA} Grass{COMMA} Electric{COMMA} Ice{COMMA} Psychic{COMMA}\n"
+    .string "Dragon{COMMA} and Dark.\0"
     .align 2, 0
 
 sUnknown_810E550:
-    .string "#c5Special Attack Moves#r  \0"
+    .string "{COLOR_2 CYAN}Special Attack Moves{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810E56C:
@@ -1816,49 +1816,49 @@ sUnknown_810E56C:
     .align 2, 0
 
 sUnknown_810E5F4:
-    .string "Because of moves~2c special abilities~2c etc.~2c\n"
+    .string "Because of moves{COMMA} special abilities{COMMA} etc.{COMMA}\n"
     .string "the Pokémon is weakened in terms of such\n"
-    .string "stats as #c6Attack#r~2c #c6Defense#r~2c #c6Special Attack#r~2c\n"
-    .string "and #c6Special Defense#r. It is possible to heal\n"
-    .string "this condition with a Wonder Tile~2c etc.\n"
+    .string "stats as {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}{COMMA}\n"
+    .string "and {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}. It is possible to heal\n"
+    .string "this condition with a Wonder Tile{COMMA} etc.\n"
     .string "Moving to the next floor will also heal it.\0"
     .align 2, 0
 
 sUnknown_810E714:
     .string "Two or more moves can be linked together\n"
     .string "to use them in succession in one turn.\n"
-    .string "Although linked moves can be powerful~2c\n"
+    .string "Although linked moves can be powerful{COMMA}\n"
     .string "they also make the Pokémon hungry faster.\n"
-    .string "The link is broken if the #c6PP#r of a linked\n"
+    .string "The link is broken if the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2} of a linked\n"
     .string "move is used up.\0"
     .align 2, 0
 
 sUnknown_810E7F8:
-    .string "#c5Link#r  \0"
+    .string "{COLOR_2 CYAN}Link{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810E804:
-    .string "The floor~27s status changes to Water Sport.\n"
+    .string "The floor{APOSTROPHE}s status changes to Water Sport.\n"
     .string "The power of Fire-type moves is halved.\0"
     .align 2, 0
 
 sUnknown_810E85C:
-    .string "#c5Water Sport#r  \0"
+    .string "{COLOR_2 CYAN}Water Sport{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810E870:
-    .string "The floor~27s status changes to Mud Sport.\n"
+    .string "The floor{APOSTROPHE}s status changes to Mud Sport.\n"
     .string "The power of Electric-type moves is\n"
     .string "halved.\0"
     .align 2, 0
 
 sUnknown_810E8C8:
-    .string "#c5Mud Sport#r  \0"
+    .string "{COLOR_2 CYAN}Mud Sport{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810E8DC:
     .string "The Pokémon is sped up.\n"
-    .string "Its #c6attack frequency#r has been boosted.\0"
+    .string "Its {COLOR_2 YELLOW}attack frequency{END_COLOR_TEXT_2} has been boosted.\0"
     .align 2, 0
 
 sUnknown_810E920:
@@ -1872,14 +1872,14 @@ sUnknown_810E95C:
     .align 2, 0
 
 sUnknown_810E9A8:
-    .string "The Ghost-type Pokémon~27s identity is\n"
+    .string "The Ghost-type Pokémon{APOSTROPHE}s identity is\n"
     .string "revealed.\n"
-    .string "Its type matchup changes~2c making it weak\n"
+    .string "Its type matchup changes{COMMA} making it weak\n"
     .string "against Normal- and Fighting-type moves.\0"
     .align 2, 0
 
 sUnknown_810EA30:
-    .string "If the Pokémon is defeated~2c its Grudge\n"
+    .string "If the Pokémon is defeated{COMMA} its Grudge\n"
     .string "causes the victorious foe to completely\n"
     .string "lose the PP of its last move.\n"
     .string "Its effect wears off upon moving to the\n"
@@ -1897,27 +1897,27 @@ sUnknown_810EAD4:
 sUnknown_810EB60:
     .string "The Pokémon gains the ability to pinpoint\n"
     .string "the locations of other Pokémon on the\n"
-    .string "floor~27s map.\n"
+    .string "floor{APOSTROPHE}s map.\n"
     .string "This effect wears off upon moving to the\n"
     .string "next floor.\0"
     .align 2, 0
 
 sUnknown_810EBF4:
     .string "The Pokémon is storing power with the\n"
-    .string "move #c4Stockpile#r.\n"
-    .string "The more power Stockpiled~2c the more\n"
-    .string "powerful the move #c4Spit Up#r#r becomes.\n"
+    .string "move {COLOR_2 GREEN}Stockpile{END_COLOR_TEXT_2}.\n"
+    .string "The more power Stockpiled{COMMA} the more\n"
+    .string "powerful the move {COLOR_2 GREEN}Spit Up{END_COLOR_TEXT_2}{END_COLOR_TEXT_2} becomes.\n"
     .string "The stored power is lost if the Pokémon\n"
     .string "goes on to the next floor.\0"
     .align 2, 0
 
 sUnknown_810ECC4:
-    .string "The Pokémon~27s #c6Movement Speed#r is\n"
+    .string "The Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} is\n"
     .string "reduced from its usual level.\0"
     .align 2, 0
 
 sUnknown_810ED0C:
-    .string "The Pokémon~27s #c6Movement Speed#r is boosted\n"
+    .string "The Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} is boosted\n"
     .string "over its usual level.\0"
     .align 2, 0
 
@@ -1925,37 +1925,37 @@ sUnknown_810ED54:
     .string "The Pokémon (or trap) explodes savagely\n"
     .string "and inflicts damage on all Pokémon within\n"
     .string "a 2-tile range.\n"
-    .string "The huge explosion halves the #c6HP#r of\n"
+    .string "The huge explosion halves the {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} of\n"
     .string "rescue team members. It also destroys\n"
     .string "walls and items within the 2-tile range.\0"
     .align 2, 0
 
 sUnknown_810EE30:
-    .string "#c5Huge Explosion#r  \0"
+    .string "{COLOR_2 CYAN}Huge Explosion{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810EE48:
     .string "The Pokémon (or trap) explodes and\n"
     .string "inflicts damage on all Pokémon within\n"
     .string "a 1-tile range.\n"
-    .string "The explosion halves the #c6HP#r of rescue\n"
+    .string "The explosion halves the {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} of rescue\n"
     .string "team members. It also destroys walls and\n"
     .string "items within the 1-tile range.\0"
     .align 2, 0
 
 sUnknown_810EF14:
-    .string "#c5Explode#r  \0"
+    .string "{COLOR_2 CYAN}Explode{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810EF24:
     .string "There is a raging snowstorm.\n"
     .string "This weather condition boosts the\n"
-    .string "#c6Movement Speed#r of Ice-type Pokémon\n"
+    .string "{COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} of Ice-type Pokémon\n"
     .string "by one level.\0"
     .align 2, 0
 
 sUnknown_810EF9C:
-    .string "#c5Snow#r  \0"
+    .string "{COLOR_2 CYAN}Snow{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810EFA8:
@@ -1965,29 +1965,29 @@ sUnknown_810EFA8:
     .align 2, 0
 
 sUnknown_810EFF8:
-    .string "#c5Fog#r  \0"
+    .string "{COLOR_2 CYAN}Fog{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F004:
     .string "The weather is cloudy and dark.\n"
-    .string "This condition lowers the #c6Attack#r\n"
-    .string "and #c6Special Attack#r of all Pokémon\n"
+    .string "This condition lowers the {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}\n"
+    .string "and {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} of all Pokémon\n"
     .string "except for the Normal type.\0"
     .align 2, 0
 
 sUnknown_810F090:
-    .string "#c5Cloudy#r  \0"
+    .string "{COLOR_2 CYAN}Cloudy{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F0A0:
     .string "There is a raging sandstorm.\n"
     .string "This weather condition inflicts damage\n"
-    .string "on all Pokémon except for the Ground~2c\n"
-    .string "Rock~2c and Steel types.\0"
+    .string "on all Pokémon except for the Ground{COMMA}\n"
+    .string "Rock{COMMA} and Steel types.\0"
     .align 2, 0
 
 sUnknown_810F128:
-    .string "#c5Sandstorm#r  \0"
+    .string "{COLOR_2 CYAN}Sandstorm{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F13C:
@@ -1997,7 +1997,7 @@ sUnknown_810F13C:
     .align 2, 0
 
 sUnknown_810F198:
-    .string "#c5Sunny#r  \0"
+    .string "{COLOR_2 CYAN}Sunny{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F1A8:
@@ -2007,7 +2007,7 @@ sUnknown_810F1A8:
     .align 2, 0
 
 sUnknown_810F204:
-    .string "#c5Rain#r  \0"
+    .string "{COLOR_2 CYAN}Rain{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F210:
@@ -2017,7 +2017,7 @@ sUnknown_810F210:
     .align 2, 0
 
 sUnknown_810F27C:
-    .string "#c5Hail#r  \0"
+    .string "{COLOR_2 CYAN}Hail{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F288:
@@ -2032,13 +2032,13 @@ sUnknown_810F2BC:
     .align 2, 0
 
 sUnknown_810F334:
-    .string "If the Pokémon is defeated~2c its grudge\n"
+    .string "If the Pokémon is defeated{COMMA} its grudge\n"
     .string "causes the foe to completely lose the PP\n"
     .string "of the move it used last.\0"
     .align 2, 0
 
 sUnknown_810F3A0:
-    .string "#c5Grudge Effect#r  \0"
+    .string "{COLOR_2 CYAN}Grudge Effect{END_COLOR_TEXT_2}  \0"
     .align 2, 0
 
 sUnknown_810F3B8:
@@ -2048,7 +2048,7 @@ sUnknown_810F3B8:
     .align 2, 0
 
 sUnknown_810F42C:
-    .string "The Pokémon~27s sense of direction becomes\n"
+    .string "The Pokémon{APOSTROPHE}s sense of direction becomes\n"
     .string "completely scrambled.\n"
     .string "Its moves and attacks will hit even\n"
     .string "team members.\n"
@@ -2056,7 +2056,7 @@ sUnknown_810F42C:
     .align 2, 0
 
 sUnknown_810F4C8:
-    .string "The Pokémon~27s accuracy of moves and\n"
+    .string "The Pokémon{APOSTROPHE}s accuracy of moves and\n"
     .string "attacks is minimized so they hardly\n"
     .string "ever hit.\n"
     .string "Even sure-hit moves may miss.\n"
@@ -2064,13 +2064,13 @@ sUnknown_810F4C8:
     .align 2, 0
 
 sUnknown_810F564:
-    .string "The critical-hit rate of the Pokémon~27s\n"
+    .string "The critical-hit rate of the Pokémon{APOSTROPHE}s\n"
     .string "moves is boosted to the maximum.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_810F5D8:
-    .string "The Pokémon~27s accuracy of moves and\n"
+    .string "The Pokémon{APOSTROPHE}s accuracy of moves and\n"
     .string "attacks is boosted so they always hit.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
@@ -2083,7 +2083,7 @@ sUnknown_810F650:
     .align 2, 0
 
 sUnknown_810F6C4:
-    .string "The Pokémon~27s attacks and moves will\n"
+    .string "The Pokémon{APOSTROPHE}s attacks and moves will\n"
     .string "all fail.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
@@ -2109,15 +2109,15 @@ sUnknown_810F818:
     .align 2, 0
 
 sUnknown_810F8A8:
-    .string "The Pokémon~27s eyesight fails.\n"
-    .string "It can~27t see the terrain~2c other Pokémon~2c or\n"
+    .string "The Pokémon{APOSTROPHE}s eyesight fails.\n"
+    .string "It can{APOSTROPHE}t see the terrain{COMMA} other Pokémon{COMMA} or\n"
     .string "items on the ground.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_810F93C:
-    .string "The Pokémon can move~2c attack~2c and use\n"
-    .string "moves inside walls and on water~2c lava~2c\n"
+    .string "The Pokémon can move{COMMA} attack{COMMA} and use\n"
+    .string "moves inside walls and on water{COMMA} lava{COMMA}\n"
     .string "or clouds. Beware--it will grow hungry\n"
     .string "faster while traveling through walls.\n"
     .string "Its effect wears off upon moving to the\n"
@@ -2126,7 +2126,7 @@ sUnknown_810F93C:
 
 sUnknown_810FA14:
     .string "The Pokémon transforms into\n"
-    .string "a different Pokémon~2c appearance-wise.\n"
+    .string "a different Pokémon{COMMA} appearance-wise.\n"
     .string "This effect wears off upon moving to the\n"
     .string "next floor.\0"
     .align 2, 0
@@ -2139,7 +2139,7 @@ sUnknown_810FA90:
 
 sUnknown_810FAFC:
     .string "Any item thrown by the Pokémon will fly\n"
-    .string "through all obstacles~2c including walls~2c\n"
+    .string "through all obstacles{COMMA} including walls{COMMA}\n"
     .string "until disappearing. This will affect all\n"
     .string "Pokémon in its path.\n"
     .string "Its effect wears off upon moving to the\n"
@@ -2147,7 +2147,7 @@ sUnknown_810FAFC:
     .align 2, 0
 
 sUnknown_810FBC4:
-    .string "If the Pokémon throws an item~2c it will fly\n"
+    .string "If the Pokémon throws an item{COMMA} it will fly\n"
     .string "until it hits an obstacle.\n"
     .string "This effect wears off upon moving to the\n"
     .string "next floor.\0"
@@ -2155,7 +2155,7 @@ sUnknown_810FBC4:
 
 sUnknown_810FC44:
     .string "The amount of damage inflicted by the\n"
-    .string "Pokémon~27s moves and regular attack\n"
+    .string "Pokémon{APOSTROPHE}s moves and regular attack\n"
     .string "becomes set at a certain figure.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
@@ -2170,7 +2170,7 @@ sUnknown_810FCDC:
 sUnknown_810FD84:
     .string "A Leech Seed is planted on the\n"
     .string "Pokémon. The Leech Seed drains the\n"
-    .string "Pokémon~27s #c6HP#r every several turns.\n"
+    .string "Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} every several turns.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2199,9 +2199,9 @@ sUnknown_810FF58:
 
 sUnknown_8110004:
     .string "The Pokémon is protected from any\n"
-    .string "reduction of the stats #c6Attack#r~2c #c6Defense#r~2c\n"
-    .string "#c6Special Attack#r~2c #c6Special Defense#r~2c\n"
-    .string "#c6Accuracy#r~2c and #c6Evasion#r.\n"
+    .string "reduction of the stats {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA}\n"
+    .string "{COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}{COMMA}\n"
+    .string "{COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2}{COMMA} and {COLOR_2 YELLOW}Evasion{END_COLOR_TEXT_2}.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2209,30 +2209,30 @@ sUnknown_81100DC:
     .string "The Pokémon counters any Physical Attack\n"
     .string "move or regular attack by picking up and\n"
     .string "hurling the foe.\n"
-    .string "If the Pokémon faints~2c it cannot retaliate\n"
+    .string "If the Pokémon faints{COMMA} it cannot retaliate\n"
     .string "with a throw.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_81101A8:
-    .string "If hit by a move~2c the Pokémon changes its\n"
-    .string "type to one that is resistant to the move~27s\n"
+    .string "If hit by a move{COMMA} the Pokémon changes its\n"
+    .string "type to one that is resistant to the move{APOSTROPHE}s\n"
     .string "type.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_8110234:
     .string "The Pokémon counters any Physical Attack\n"
-    .string "move or regular attack~2c and inflicts one\n"
+    .string "move or regular attack{COMMA} and inflicts one\n"
     .string "quarter the damage it took from the foe.\n"
-    .string "If the Pokémon faints~2c it cannot hit back.\n"
+    .string "If the Pokémon faints{COMMA} it cannot hit back.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_811030C:
     .string "If the Pokémon takes damage that would\n"
-    .string "usually cause it to faint~2c it will hold on\n"
-    .string "with just #c61HP#r.\n"
+    .string "usually cause it to faint{COMMA} it will hold on\n"
+    .string "with just {COLOR_2 YELLOW}1HP{END_COLOR_TEXT_2}.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2240,7 +2240,7 @@ sUnknown_81103A0:
     .string "The Pokémon bounces back the power of\n"
     .string "any Special Attack used by a foe directly\n"
     .string "around it. If the Pokémon faints from\n"
-    .string "the Special Attack~2c it can~27t strike back.\n"
+    .string "the Special Attack{COMMA} it can{APOSTROPHE}t strike back.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2248,12 +2248,12 @@ sUnknown_8110470:
     .string "The Pokémon will take no damage from\n"
     .string "attacks and moves. It will also resist\n"
     .string "effects of moves. It may take damage\n"
-    .string "from rocks~2c explosions~2c etc.\n"
+    .string "from rocks{COMMA} explosions{COMMA} etc.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_8110530:
-    .string "The Pokémon regains #c6HP#r faster than usual.\n"
+    .string "The Pokémon regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} faster than usual.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2265,9 +2265,9 @@ sUnknown_8110588:
 
 sUnknown_81105F8:
     .string "The Pokémon counters any Physical Attack\n"
-    .string "move or regular attack~2c and inflicts the\n"
+    .string "move or regular attack{COMMA} and inflicts the\n"
     .string "same damage it took from the foe.\n"
-    .string "If the Pokémon faints~2c it cannot hit back.\n"
+    .string "If the Pokémon faints{COMMA} it cannot hit back.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
 
@@ -2291,7 +2291,7 @@ sUnknown_8110794:
     .align 2, 0
 
 sUnknown_8110814:
-    .string "The Pokémon~27s Attack rises by one level\n"
+    .string "The Pokémon{APOSTROPHE}s Attack rises by one level\n"
     .string "each time it takes damage.\n"
     .string "This effect wears off in a set amount\n"
     .string "of turns.\0"
@@ -2304,7 +2304,7 @@ sUnknown_811088C:
     .align 2, 0
 
 sUnknown_81108FC:
-    .string "Using the move #c4Dig#r~2c \n"
+    .string "Using the move {COLOR_2 GREEN}Dig{END_COLOR_TEXT_2}{COMMA} \n"
     .string "the Pokémon has gone underground to\n"
     .string "prepare for its attack.\n"
     .string "It will strike on the next turn to inflict\n"
@@ -2312,7 +2312,7 @@ sUnknown_81108FC:
     .align 2, 0
 
 sUnknown_8110988:
-    .string "Using the move #c4Dive#r~2c \n"
+    .string "Using the move {COLOR_2 GREEN}Dive{END_COLOR_TEXT_2}{COMMA} \n"
     .string "the Pokémon has gone underwater to\n"
     .string "prepare for its attack.\n"
     .string "It will strike on the next turn to inflict\n"
@@ -2322,56 +2322,56 @@ sUnknown_8110988:
 sUnknown_8110A14:
     .string "The Pokémon has bounced high to ready\n"
     .string "its attack.\n"
-    .string "On the next turn~2c it will strike down\n"
+    .string "On the next turn{COMMA} it will strike down\n"
     .string "to inflict damage.\0"
     .align 2, 0
 
 sUnknown_8110A84:
     .string "The Pokémon is preparing to attack from\n"
     .string "high in the sky.\n"
-    .string "On the next turn~2c it will strike from\n"
+    .string "On the next turn{COMMA} it will strike from\n"
     .string "the sky to inflict damage.\0"
     .align 2, 0
 
 sUnknown_8110B00:
     .string "The Pokémon is preparing to use\n"
-    .string "the move #c4Skull Bash#r.\n"
-    .string "On the next turn~2c #c4Skull Bash#r will be\n"
+    .string "the move {COLOR_2 GREEN}Skull Bash{END_COLOR_TEXT_2}.\n"
+    .string "On the next turn{COMMA} {COLOR_2 GREEN}Skull Bash{END_COLOR_TEXT_2} will be\n"
     .string "unleashed.\0"
     .align 2, 0
 
 sUnknown_8110B74:
     .string "The Pokémon is preparing to use\n"
-    .string "the move #c4Focus Punch#r.\n"
-    .string "On the next turn~2c #c4Focus Punch#r will be\n"
+    .string "the move {COLOR_2 GREEN}Focus Punch{END_COLOR_TEXT_2}.\n"
+    .string "On the next turn{COMMA} {COLOR_2 GREEN}Focus Punch{END_COLOR_TEXT_2} will be\n"
     .string "unleashed.\0"
     .align 2, 0
 
 sUnknown_8110BE8:
     .string "The Pokémon is preparing to use\n"
-    .string "the move #c4Razor Wind#r.\n"
-    .string "On the next turn~2c #c4Razor Wind#r will be\n"
+    .string "the move {COLOR_2 GREEN}Razor Wind{END_COLOR_TEXT_2}.\n"
+    .string "On the next turn{COMMA} {COLOR_2 GREEN}Razor Wind{END_COLOR_TEXT_2} will be\n"
     .string "unleashed.\0"
     .align 2, 0
 
 sUnknown_8110C5C:
     .string "The Pokémon is preparing to use\n"
-    .string "the move #c4Sky Attack#r.\n"
-    .string "On the next turn~2c #c4Sky Attack#r will be\n"
+    .string "the move {COLOR_2 GREEN}Sky Attack{END_COLOR_TEXT_2}.\n"
+    .string "On the next turn{COMMA} {COLOR_2 GREEN}Sky Attack{END_COLOR_TEXT_2} will be\n"
     .string "unleashed.\0"
     .align 2, 0
 
 sUnknown_8110CD0:
     .string "The Pokémon is preparing to launch\n"
-    .string "the move #c4Solarbeam#r.\n"
-    .string "On the next turn~2c #c4Solarbeam#r will be\n"
+    .string "the move {COLOR_2 GREEN}Solarbeam{END_COLOR_TEXT_2}.\n"
+    .string "On the next turn{COMMA} {COLOR_2 GREEN}Solarbeam{END_COLOR_TEXT_2} will be\n"
     .string "unleashed.\0"
     .align 2, 0
 
 sUnknown_8110D44:
     .string "The Pokémon stops moving for several\n"
     .string "turns and takes hits from foes.\n"
-    .string "In the end~2c it will strike back to cause\n"
+    .string "In the end{COMMA} it will strike back to cause\n"
     .string "double the damage it took over that time.\0"
     .align 2, 0
 
@@ -2382,16 +2382,16 @@ sUnknown_8110DE0:
     .align 2, 0
 
 sUnknown_8110E50:
-    .string "When using moves or Wonder Orbs~2c the\n"
+    .string "When using moves or Wonder Orbs{COMMA} the\n"
     .string "Pokémon will only use offensive ones\n"
     .string "that inflict damage.\n"
     .string "This effect lasts a set amount of turns.\0"
     .align 2, 0
 
 sUnknown_8110EDC:
-    .string "The Pokémon is frightened~2c making it\n"
+    .string "The Pokémon is frightened{COMMA} making it\n"
     .string "launch attacks and moves completely\n"
-    .string "backwards. If an ally is behind it~2c the\n"
+    .string "backwards. If an ally is behind it{COMMA} the\n"
     .string "backward attacks and moves will hit.\n"
     .string "This condition lasts a set amount of turns.\0"
     .align 2, 0
@@ -2404,8 +2404,8 @@ sUnknown_8110FA4:
 
 sUnknown_811100C:
     .string "The Pokémon lays down roots in the\n"
-    .string "ground. It becomes immobilized~2c but\n"
-    .string "it regenerates #c6HP#r every several turns.\n"
+    .string "ground. It becomes immobilized{COMMA} but\n"
+    .string "it regenerates {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} every several turns.\n"
     .string "These effects last a set amount of turns.\0"
     .align 2, 0
 
@@ -2419,7 +2419,7 @@ sUnknown_81110AC:
 sUnknown_811113C:
     .string "The Pokémon wraps around the foe and\n"
     .string "inflicts damage every several turns.\n"
-    .string "During that time~2c the Pokémon is also\n"
+    .string "During that time{COMMA} the Pokémon is also\n"
     .string "incapable of doing anything else.\n"
     .string "These effects last a set amount of turns.\0"
     .align 2, 0
@@ -2437,7 +2437,7 @@ sUnknown_8111270:
 
 sUnknown_81112BC:
     .string "The Pokémon becomes frozen solid.\n"
-    .string "While frozen~2c it will not take damage\n"
+    .string "While frozen{COMMA} it will not take damage\n"
     .string "from attacks and almost all moves.\n"
     .string "Fire-type moves can thaw out the Pokémon\n"
     .string "and may inflict damage.\n"
@@ -2447,9 +2447,9 @@ sUnknown_81112BC:
 sUnknown_8111398:
     .string "The Pokémon is on the verge of collapse\n"
     .string "from hunger. Every action results in a\n"
-    .string "loss of #c6HP#r.\n"
+    .string "loss of {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\n"
     .string "This condition will persist until the\n"
-    .string "Pokémon~27s #c6Belly#r is filled.\0"
+    .string "Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}Belly{END_COLOR_TEXT_2} is filled.\0"
     .align 2, 0
 
 sUnknown_8111440:
@@ -2458,10 +2458,10 @@ sUnknown_8111440:
     .align 2, 0
 
 sUnknown_8111498:
-    .string "The Pokémon~27s #c6Movement Speed#r and\n"
-    .string "#c6attack frequency#r are reduced.\n"
+    .string "The Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} and\n"
+    .string "{COLOR_2 YELLOW}attack frequency{END_COLOR_TEXT_2} are reduced.\n"
     .string "Attacks and moves become unusable.\n"
-    .string "Wonder Orbs also won~27t work~2c but other\n"
+    .string "Wonder Orbs also won{APOSTROPHE}t work{COMMA} but other\n"
     .string "items will.\n"
     .string "Its effects last a set amount of turns.\0"
     .align 2, 0
@@ -2469,41 +2469,41 @@ sUnknown_8111498:
 sUnknown_8111568:
     .string "The Pokémon takes damage every\n"
     .string "two turns. It is also prevented from \n"
-    .string "regenerating #c6HP#r. This condition does not\n"
+    .string "regenerating {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}. This condition does not\n"
     .string "disappear over turns.\n"
     .string "Heal it quickly by using certain moves or\n"
-    .string "items~2c or by going to the next floor.\n"
+    .string "items{COMMA} or by going to the next floor.\n"
     .string "\0"
     .align 2, 0
 
 sUnknown_8111644:
     .string "The Pokémon takes damage every ten\n"
     .string "turns. It is also prevented from \n"
-    .string "regenerating #c6HP#r.\n"
+    .string "regenerating {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\n"
     .string "Poison does not disappear over turns.\n"
     .string "Heal it quickly by using certain moves or\n"
-    .string "items~2c or by going to the next floor.\0"
+    .string "items{COMMA} or by going to the next floor.\0"
     .align 2, 0
 
 sUnknown_8111718:
     .string "The Pokémon takes damage every few\n"
     .string "turns from its burn.\n"
-    .string "A burn can be healed by going into water~2c\n"
-    .string "using certain moves or items~2c or by\n"
+    .string "A burn can be healed by going into water{COMMA}\n"
+    .string "using certain moves or items{COMMA} or by\n"
     .string "going to the next floor.\0"
     .align 2, 0
 
 sUnknown_81117BC:
-    .string "The Pokémon~27s #c6HP#r is low from taking\n"
+    .string "The Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} is low from taking\n"
     .string "damage. It is in danger.\n"
-    .string "Do something to restore #c6HP#r!\0"
+    .string "Do something to restore {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}!\0"
     .align 2, 0
 
 sUnknown_8111824:
     .string "The Pokémon falls asleep and becomes\n"
     .string "incapable of any action.\n"
-    .string "Upon awakening~2c the Pokémon fully\n"
-    .string "regains #c6HP#r and heals from any\n"
+    .string "Upon awakening{COMMA} the Pokémon fully\n"
+    .string "regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} and heals from any\n"
     .string "status problems.\0"
     .align 2, 0
 
@@ -2633,7 +2633,7 @@ gUnknown_811383C: @ 811383C
 
         .global PlaceText
         PlaceText:
-        .string "#+Place: {ARG_POKEMON_0}\0"
+        .string "{CENTER_ALIGN}Place: {ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_8113850
@@ -3272,12 +3272,12 @@ gUnknown_8116148: @ 8116148
 
 	.global gInvalidityText
 gInvalidityText: @ 811615C
-        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUndefineText
 gUndefineText: @ 811616C
-        .string "#CWundefine{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 UNKNOWN_COLOR}undefine{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_811617C
@@ -3476,14 +3476,14 @@ gUnknown_81163E4: @ 81163E4
 
 	.global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-        .string "#+However{COMMA} $n0{APOSTROPHE}s team\n"
-        .string "#+had too much money already...\0"
+        .string "{CENTER_ALIGN}However{COMMA} $n0{APOSTROPHE}s team\n"
+        .string "{CENTER_ALIGN}had too much money already...\0"
         .align 2,0
 
 	.global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-        .string "#+However{COMMA} $n0{APOSTROPHE}s team\n"
-        .string "#+had too many items already...\0"
+        .string "{CENTER_ALIGN}However{COMMA} $n0{APOSTROPHE}s team\n"
+        .string "{CENTER_ALIGN}had too many items already...\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -3697,8 +3697,8 @@ gUnknown_81167E8: @ 81167E8
 
 	.global gUnknown_81167EC
 gUnknown_81167EC: @ 81167EC
-        .string "#+The rescue rank went up from\n"
-        .string "#+{ARG_MOVE_ITEM_0} to {ARG_MOVE_ITEM_1}!\0"
+        .string "{CENTER_ALIGN}The rescue rank went up from\n"
+        .string "{CENTER_ALIGN}{ARG_MOVE_ITEM_0} to {ARG_MOVE_ITEM_1}!\0"
         .align 2,0
 
 	.global gUnknown_811681C
@@ -3783,7 +3783,7 @@ gUnknown_8117000: @ 8117000
         .4byte 0x81170ac
         .4byte 0x811709c
 
-        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "{COLOR_1 YELLOW_3}scene{END_COLOR_TEXT_1}\0"
         .align 2,0
@@ -4347,7 +4347,7 @@ gUnknown_8118250: @ 8118250
 
 	.global gGroundLives_InvalidityText
 gGroundLives_InvalidityText: @ 811825C
-        .string "#CWinvalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global GroundLives_ActionText

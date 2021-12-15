@@ -278,7 +278,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
@@ -289,7 +289,7 @@ void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
-  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // #c%c%s{END_COLOR_TEXT_2}
+  ExpandPlaceholdersBuffer(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808DA0C(u8 *buffer, u8 *param_2)

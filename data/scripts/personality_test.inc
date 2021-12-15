@@ -35,30 +35,30 @@
     endFuncAndScript
 
     InterviewBegin_826E108:
-    .string "#+OK...#W\n"
-    .string "#+Let the interview begin!\0"
+    .string "{CENTER_ALIGN}OK...{WAIT_PRESS}\n"
+    .string "{CENTER_ALIGN}Let the interview begin!\0"
     .align 2,0
 
     AreYouReady_826E130:
-    .string "#+Are you ready?\0"
+    .string "{CENTER_ALIGN}Are you ready?\0"
     .align 2,0
 
     AnswerSincerely_826E144:
-    .string "#+I want you to answer them sincerely.\0"
+    .string "{CENTER_ALIGN}I want you to answer them sincerely.\0"
     .align 2,0
 
     SeveralQuestions_826E16C:
-    .string "#+But before I can let you through{COMMA}\n"
-    .string "#+I have several questions for you.\0"
+    .string "{CENTER_ALIGN}But before I can let you through{COMMA}\n"
+    .string "{CENTER_ALIGN}I have several questions for you.\0"
     .align 2,0
 
     WorldOfPokemon_826E1B8:
-    .string "#+This is the portal that leads\n"
-    .string "#+to the world of Pokémon!\0"
+    .string "{CENTER_ALIGN}This is the portal that leads\n"
+    .string "{CENTER_ALIGN}to the world of Pokémon!\0"
     .align 2,0
 
     Welcome_826E1F4:
-    .string "#+Welcome!\0"
+    .string "{CENTER_ALIGN}Welcome!\0"
     .align 2,0
 
     .byte 0x90, 0x01, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00

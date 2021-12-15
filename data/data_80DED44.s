@@ -469,15 +469,15 @@ gUnknown_80E0434: @ 80E0434
 	.global gUnknown_80E045C
 gUnknown_80E045C: @ 80E045C
 @ replacing .incbin "baserom.gba", 0x000e045c, 0x28
-        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
-        .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1}"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
+        .string "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1}"
         .byte 0x20, 0x83
         .byte 0xbf, 0x83, 0xc4, 0x2e, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E0484
 gUnknown_80E0484: @ 80E0484
-        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
-        .string "#+{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
+        .string "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}"
         .byte 0x2E, 0x00, 0x00, 0x00
 
 	.global gUnknown_80E04B4
@@ -493,16 +493,16 @@ gUnknown_80E04F4: @ 80E04F4
 
 	.global gUnknown_80E05C0
 gUnknown_80E05C0: @ 80E05C0
-        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
-        .string "#+to the Friend Area\n"
-        .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
+        .string "{CENTER_ALIGN}to the Friend Area\n"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E05FC
 gUnknown_80E05FC: @ 80E05FC
-        .string "#+{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
-        .string "#+to the Friend Area\n"
-        .string "#+{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
+        .string "{CENTER_ALIGN}to the Friend Area\n"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0640
@@ -513,16 +513,16 @@ gUnknown_80E0640: @ 80E0640
 
 	.global gUnknown_80E0670
 gUnknown_80E0670: @ 80E0670
-        .string "#+Rescue Team {COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1}\n"
-        .string "#+gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.\0"
+        .string "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1}\n"
+        .string "{CENTER_ALIGN}gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.\0"
         .align 2,0
 
 	.global gUnknown_80E06A8
 gUnknown_80E06A8: @ 80E06A8
-        .string "#+Congratulations!#P"
-        .string "#+{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
-        .string "#+from the {ARG_POKEMON_2}\n"
-        .string "#+to the {ARG_POKEMON_3}!\0"
+        .string "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
+        .string "{CENTER_ALIGN}from the {ARG_POKEMON_2}\n"
+        .string "{CENTER_ALIGN}to the {ARG_POKEMON_3}!\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -579,9 +579,9 @@ gUnknown_80E0760: @ 80E0760
 
 	.global gUnknown_80E0778
 gUnknown_80E0778: @ 80E0778
-        .string "#+{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the #CIBonsly Doll{END_COLOR_TEXT_1}!\n"
-        .string "#+It has been placed outside your\n"
-        .string "#+rescue team base.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 ITEM_COLOR}Bonsly Doll{END_COLOR_TEXT_1}!\n"
+        .string "{CENTER_ALIGN}It has been placed outside your\n"
+        .string "{CENTER_ALIGN}rescue team base.\0"
         .align 2,0
 
 	.global gUnknown_80E07D8
@@ -620,7 +620,7 @@ gUnknown_80E0824: @ 80E0824
 
 	.global gUnknown_80E0828
 gUnknown_80E0828: @ 80E0828
-        .string "#c%c%s{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2}%c%s{END_COLOR_TEXT_2}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0

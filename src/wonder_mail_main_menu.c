@@ -113,9 +113,9 @@ ALIGNED(4) const char gUnknown_80E7BEC[] = _("Connect a {COLOR_1 LIGHT_BLUE_2}Ga
                                              "When you and your friend are ready{COMMA}\n"
                                              "you may communicate. ");
 
-ALIGNED(4) const char gUnknown_80E7C48[] = _("#+In communication...\n"
-                                             "#+Please wait with the power on.\n"
-                                             "#+To cancel{COMMA} press {B_BUTTON}.");
+ALIGNED(4) const char gUnknown_80E7C48[] = _("{CENTER_ALIGN}In communication...\n"
+                                             "{CENTER_ALIGN}Please wait with the power on.\n"
+                                             "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
 
 ALIGNED(4) const char gUnknown_80E7C98[] = _("Please enter the\n"
                                              "{COLOR_1 LIGHT_BLUE_2}Wonder Mail password{END_COLOR_TEXT_1}.");
