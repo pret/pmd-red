@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_POKEMON_SPRITES_H
 #define GUARD_DUNGEON_POKEMON_SPRITES_H
 
-#include "map.h"
+#include "position.h"
 
 struct DungeonPokemonStatusSprite
 {

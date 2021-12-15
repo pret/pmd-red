@@ -3,7 +3,7 @@
 
 #include "constants/move.h"
 #include "item.h"
-#include "map.h"
+#include "position.h"
 
 struct DungeonActionContainer
 {

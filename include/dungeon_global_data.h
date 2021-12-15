@@ -5,6 +5,7 @@
 #include "dungeon_entity.h"
 #include "global.h"
 #include "map.h"
+#include "position.h"
 
 #define DUNGEON_MAX_SIZE_X 55
 #define DUNGEON_MAX_SIZE_Y 31
@@ -69,7 +70,9 @@ struct DungeonGlobalData
     /* 0xE278 */ u8 waterSportTurnsLeft;
     u8 fillE279[0xE8C0 - 0xE279];
     /* 0xE8C0 */ u32 mapEntityPointers[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
-    u8 fill10364[0x10844 - 0x10364];
+    u8 fill10364[0x104C4 - 0x10364];
+    /* 0x104C4 */ struct MapRoom roomData[MAX_ROOM_COUNT];
+    u8 fill10604[0x10844 - 0x10764];
     /* 0x10844 */ u16 numRoomExits[MAX_ROOM_COUNT];
     u8 fill10874[0x10884 - 0x10874];
     /* 0x10884 */ struct Position roomExits[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.

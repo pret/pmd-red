@@ -2,8 +2,10 @@
 #define GUARD_MAP_H
 
 #include "dungeon_entity.h"
+#include "position.h"
 
 #define MAX_ROOM_COUNT 24 // Empirical max, not sure if the code supports any more.
+#define CORRIDOR_ROOM_INDEX 0xFF
 
 struct MapTile
 {
@@ -25,25 +27,16 @@ struct MapTile
     /* 0x14 */ struct DungeonEntity *mapObject; // Item or trap on the tile.
 };
 
-struct Position
-{
-    s16 x;
-    s16 y;
-};
-
-struct Position32
-{
-    s32 x;
-    s32 y;
-};
-
 struct MapRoom
 {
     u8 fill0[0x2 - 0x0];
     // All coordinates are inclusive.
-    /* 0x2 */ struct Position start;
-    /* 0x6 */ struct Position end;
-    u8 fillA[0x1C - 0xA];
+    // These are not aligned properly to use the Position struct.
+    /* 0x2 */ s16 startX;
+    /* 0x4 */ s16 startY;
+    /* 0x6 */ s16 endX;
+    /* 0x8 */ s16 endY;
+    u8 fillA[0x1A - 0xA];
 };
 
 enum TileType

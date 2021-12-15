@@ -3,9 +3,8 @@
 
 #include "constants/status.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_range.h"
 #include "dungeon_util.h"
-
-extern bool8 InSameRoom_2(struct Position*, struct Position*);
 
 bool8 CanSee(struct DungeonEntity *entity, struct DungeonEntity *targetEntity)
 {

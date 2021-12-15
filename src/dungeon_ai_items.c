@@ -17,6 +17,7 @@
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "item.h"
+#include "position.h"
 #include "team_inventory.h"
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
