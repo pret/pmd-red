@@ -12,7 +12,6 @@
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern u32 gUnknown_202EDC8;
 
 extern u32 gUnknown_81062A8;

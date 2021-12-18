@@ -4,8 +4,6 @@
 #include "dungeon_global_data.h"
 #include "dungeon_util.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
-
 extern u8 sub_806CEBC(struct DungeonEntity *);
 extern void sub_806CCB4(struct DungeonEntity *, u8);
 

@@ -20,7 +20,6 @@
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
-extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);

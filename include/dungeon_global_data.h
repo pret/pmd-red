@@ -12,6 +12,8 @@
 #define DUNGEON_MAX_WILD_POKEMON 16
 #define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
 
+extern struct DungeonGlobalData *gDungeonGlobalData;
+
 struct DungeonGlobalData
 {
     u8 unk0;

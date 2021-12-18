@@ -6,7 +6,6 @@
 #include "dungeon_util.h"
 #include "random.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern void sub_806CE68(struct DungeonEntity *, s32);
 
 extern s32 sub_803F994(void);

@@ -42,7 +42,6 @@ extern u32 gPotentialTargetWeights[NUM_DIRECTIONS];
 extern u32 gPotentialTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
-extern struct DungeonGlobalData *gDungeonGlobalData;
 
 void sub_807360C(struct DungeonEntity *pokemon)
 {

@@ -1,8 +1,6 @@
 #include "global.h"
 #include "dungeon_global_data.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
-
 extern void SkarmoryPreFightDialogue();
 extern void SkarmoryReFightDialogue();
 extern void sub_8086E40();

@@ -10,8 +10,6 @@ struct unkStruct_80420E8
     u32 unk8;
 };
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
-
 
 extern void sub_803ED30(u8, struct DungeonEntity *r0, u8, u8);
 extern void sub_804151C(struct DungeonEntity *r0, u32 r1, u8 r2);

@@ -4,7 +4,6 @@
 #include "dungeon_global_data.h"
 #include "map.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern struct MapTile* GetMapTileAtPosition(s16, s16);
 
 bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
