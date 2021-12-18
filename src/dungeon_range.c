@@ -2,9 +2,8 @@
 #include "dungeon_range.h"
 
 #include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "map.h"
-
-extern struct MapTile* GetMapTileAtPosition(s16, s16);
 
 bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
 {

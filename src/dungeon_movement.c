@@ -49,7 +49,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
     entityData = entity->entityData;
     if(EntityExists(entity))
     {
-        tile = sub_8045128(entity);
+        tile = GetMapEntityForDungeonEntity(entity);
         if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
             if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                 return 1;
@@ -136,7 +136,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
             {
                 if(!gDungeonGlobalData->monsterHouseActive)
                 {
-                    if((sub_8045128(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
+                    if((GetMapEntityForDungeonEntity(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);

@@ -909,7 +909,7 @@ sub_8057788:
 	movs r0, 0
 	mov r9, r0
 	adds r0, r4, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r5, r0, 0
 	bl IsTileWater
 	lsls r0, 24

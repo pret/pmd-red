@@ -35,9 +35,9 @@ void HandleLuminousOrbAction(u32 param_1)
 
   gDungeonGlobalData->unk1820B = 1;
 
-  for(YCoord = 0; YCoord <= DUNGEON_MAX_SIZE_Y; YCoord++)
+  for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
-    for(XCoord = 0; XCoord <= DUNGEON_MAX_SIZE_X; XCoord++)
+    for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
       mapTile = GetMapEntity(XCoord, YCoord);
       mapTile->unk4 = mapTile->unk4 | 1;

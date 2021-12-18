@@ -860,7 +860,7 @@ _08076292:
 _08076298: .4byte gUnknown_80FCE84
 _0807629C:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -1542,7 +1542,7 @@ _08076814:
 _0807682C: .4byte gUnknown_80FCE00
 _08076830:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -9836,7 +9836,7 @@ sub_807AB38:
 _0807AB54:
 	adds r0, r2, 0
 	str r2, [sp, 0x1A4]
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -10300,7 +10300,7 @@ CanTakeItem:
 	cmp r0, 0
 	bne _0807AF50
 	adds r0, r4, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r6, r0, 0
 	ldr r4, [r6, 0x14]
 	cmp r4, 0
@@ -18171,7 +18171,7 @@ _0807EC46:
 	ldrb r0, [r0]
 	str r0, [sp, 0x8]
 	adds r0, r7, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r0, [r0]
 	lsrs r0, 5
 	mov r10, r0
@@ -18594,7 +18594,7 @@ sub_807EF84:
 	cmp r4, 0
 	beq _0807EFE2
 	bl GetLeaderEntity
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r1, [r0]
 	movs r0, 0x20
 	ands r0, r1

@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start TargetThrownItem
 TargetThrownItem:
 	push {r4-r7,lr}
@@ -240,7 +240,7 @@ sub_8073D14:
 	sub sp, 0xB0
 	adds r6, r0, 0
 	ldr r4, [r6, 0x70]
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldr r5, [r0, 0x14]
 	cmp r5, 0
 	bne _08073D30
@@ -3443,7 +3443,7 @@ sub_8075708:
 	cmp r0, 0
 	beq _0807580C
 	adds r0, r4, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0xD

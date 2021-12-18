@@ -11,6 +11,7 @@
 #include "dungeon_capabilities_1.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes_1.h"
 #include "dungeon_random.h"
 #include "dungeon_random_1.h"
@@ -31,7 +32,6 @@ enum ItemTargetFlag
 };
 
 extern s32 CalculateFacingDir(struct Position*, struct Position*);
-extern struct MapTile* GetMapTileAtPosition(s16, s16);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
 extern bool8 ToolboxEnabled(struct DungeonEntityData*);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);

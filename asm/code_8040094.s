@@ -2523,7 +2523,7 @@ sub_80414C0:
 	cmp r0, 0x9C
 	bne _080414DC
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
@@ -2533,7 +2533,7 @@ _080414DC:
 	cmp r0, 0x8
 	bne _080414F6
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
