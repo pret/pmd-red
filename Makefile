@@ -117,7 +117,7 @@ $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 ALL_BUILDS := red
 
 # Available targets
-.PHONY: all clean tidy libagbsyscall tools clean-tools $(TOOLDIRS)
+.PHONY: all clean compare tidy libagbsyscall tools clean-tools $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
 
@@ -136,7 +136,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 # Disable dependency scanning for clean/tidy/tools
 # Use a separate minimal makefile for speed
 # Since we don't need to reload most of this makefile
-ifeq (,$(filter-out clean,$(MAKECMDGOALS)))
+ifeq (,$(filter clean,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) -f make_tools.mk)
 endif
 
