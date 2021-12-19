@@ -23,4 +23,6 @@ enum NaturePersonalities {
 #define MAX_ASKED_QUESTIONS 8
 #define NUM_PERSONALITIES MISC
 
+#define BRAVE_2B_TRIGGER 99
+
 #endif

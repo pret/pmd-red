@@ -53,8 +53,6 @@ extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
 extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
-extern struct PersonalityQuestion *gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS];
-
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
 extern const char gStarterReveal[];
@@ -76,6 +74,124 @@ extern const char gLonelyDescription[];
 extern const char gQuirkyDescription[];
 extern const u8 GirlText[];
 extern const u8 BoyText[];
+
+extern const struct PersonalityQuestion HardyQuest1;
+extern const struct PersonalityQuestion HardyQuest2;
+extern const struct PersonalityQuestion HardyQuest3;
+extern const struct PersonalityQuestion HardyQuest4;
+extern const struct PersonalityQuestion DocileQuest1;
+extern const struct PersonalityQuestion DocileQuest2;
+extern const struct PersonalityQuestion DocileQuest3;
+extern const struct PersonalityQuestion DocileQuest4;
+extern const struct PersonalityQuestion BraveQuest1;
+extern const struct PersonalityQuestion BraveQuest2A;
+extern const struct PersonalityQuestion BraveQuest3;
+extern const struct PersonalityQuestion BraveQuest4;
+extern const struct PersonalityQuestion JollyQuest1;
+extern const struct PersonalityQuestion JollyQuest2;
+extern const struct PersonalityQuestion JollyQuest3;
+extern const struct PersonalityQuestion JollyQuest4;
+extern const struct PersonalityQuestion ImpishQuest1;
+extern const struct PersonalityQuestion ImpishQuest2;
+extern const struct PersonalityQuestion ImpishQuest3;
+extern const struct PersonalityQuestion ImpishQuest4;
+extern const struct PersonalityQuestion NaiveQuest1;
+extern const struct PersonalityQuestion NaiveQuest2;
+extern const struct PersonalityQuestion NaiveQuest3;
+extern const struct PersonalityQuestion NaiveQuest4;
+extern const struct PersonalityQuestion TimidQuest1;
+extern const struct PersonalityQuestion TimidQuest2;
+extern const struct PersonalityQuestion TimidQuest3;
+extern const struct PersonalityQuestion TimidQuest4;
+extern const struct PersonalityQuestion HastyQuest1;
+extern const struct PersonalityQuestion HastyQuest2;
+extern const struct PersonalityQuestion HastyQuest3;
+extern const struct PersonalityQuestion HastyQuest4;
+extern const struct PersonalityQuestion SassyQuest1;
+extern const struct PersonalityQuestion SassyQuest2;
+extern const struct PersonalityQuestion SassyQuest3;
+extern const struct PersonalityQuestion SassyQuest4;
+extern const struct PersonalityQuestion CalmQuest1;
+extern const struct PersonalityQuestion CalmQuest2;
+extern const struct PersonalityQuestion CalmQuest3;
+extern const struct PersonalityQuestion CalmQuest4;
+extern const struct PersonalityQuestion RelaxedQuest1;
+extern const struct PersonalityQuestion RelaxedQuest2;
+extern const struct PersonalityQuestion RelaxedQuest3;
+extern const struct PersonalityQuestion RelaxedQuest4;
+extern const struct PersonalityQuestion LonelyQuest1;
+extern const struct PersonalityQuestion LonelyQuest2;
+extern const struct PersonalityQuestion LonelyQuest3;
+extern const struct PersonalityQuestion LonelyQuest4;
+extern const struct PersonalityQuestion QuirkyQuest1;
+extern const struct PersonalityQuestion QuirkyQuest2;
+extern const struct PersonalityQuestion QuirkyQuest3;
+extern const struct PersonalityQuestion QuirkyQuest4;
+extern const struct PersonalityQuestion MiscQuest1;
+extern const struct PersonalityQuestion MiscQuest2;
+extern const struct PersonalityQuestion MiscQuest3;
+extern const struct PersonalityQuestion BraveQuest2B;
+
+
+const struct PersonalityQuestion * const gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS + 1] =
+{
+    &HardyQuest1,
+    &HardyQuest2,
+    &HardyQuest3,
+    &HardyQuest4,
+    &DocileQuest1,
+    &DocileQuest2,
+    &DocileQuest3,
+    &DocileQuest4,
+    &BraveQuest1,
+    &BraveQuest2A,
+    &BraveQuest3,
+    &BraveQuest4,
+    &JollyQuest1,
+    &JollyQuest2,
+    &JollyQuest3,
+    &JollyQuest4,
+    &ImpishQuest1,
+    &ImpishQuest2,
+    &ImpishQuest3,
+    &ImpishQuest4,
+    &NaiveQuest1,
+    &NaiveQuest2,
+    &NaiveQuest3,
+    &NaiveQuest4,
+    &TimidQuest1,
+    &TimidQuest2,
+    &TimidQuest3,
+    &TimidQuest4,
+    &HastyQuest1,
+    &HastyQuest2,
+    &HastyQuest3,
+    &HastyQuest4,
+    &SassyQuest1,
+    &SassyQuest2,
+    &SassyQuest3,
+    &SassyQuest4,
+    &CalmQuest1,
+    &CalmQuest2,
+    &CalmQuest3,
+    &CalmQuest4,
+    &RelaxedQuest1,
+    &RelaxedQuest2,
+    &RelaxedQuest3,
+    &RelaxedQuest4,
+    &LonelyQuest1,
+    &LonelyQuest2,
+    &LonelyQuest3,
+    &LonelyQuest4,
+    &QuirkyQuest1,
+    &QuirkyQuest2,
+    &QuirkyQuest3,
+    &QuirkyQuest4,
+    &MiscQuest1,
+    &MiscQuest2,
+    &MiscQuest3,
+    &BraveQuest2B
+};
 
 
 // NOTE: 2nd Part of Brave is included at the end so it isn't actually chosen
@@ -158,35 +274,22 @@ const u8 unknownPersonality[] =
     1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD
 };
 
-const s16 gStarters[] =
+const s16 gStarters[NUM_PERSONALITIES][2] =
 {
-    SPECIES_CHARMANDER,
-    SPECIES_PIKACHU,
-    SPECIES_BULBASAUR,
-    SPECIES_CHIKORITA,
-    SPECIES_MACHOP,
-    SPECIES_CHARMANDER,
-    SPECIES_SQUIRTLE,
-    SPECIES_TOTODILE,
-    SPECIES_PIKACHU,
-    SPECIES_CUBONE,
-    SPECIES_TOTODILE,
-    SPECIES_EEVEE,
-    SPECIES_CYNDAQUIL,
-    SPECIES_MUDKIP,
-    SPECIES_TORCHIC,
-    SPECIES_SKITTY,
-    SPECIES_TREECKO,
-    SPECIES_TORCHIC,
-    SPECIES_MUDKIP,
-    SPECIES_BULBASAUR,
-    SPECIES_PSYDUCK,
-    SPECIES_SQUIRTLE,
-    SPECIES_CUBONE,
-    SPECIES_PSYDUCK,
-    SPECIES_MEOWTH,
-    SPECIES_TREECKO,
-    SPECIES_NONE,
+    //          MALE / FEMALE
+    [HARDY]  =  {SPECIES_CHARMANDER, SPECIES_PIKACHU},
+    [DOCILE] =  {SPECIES_BULBASAUR, SPECIES_CHIKORITA},
+    [BRAVE]  =  {SPECIES_MACHOP, SPECIES_CHARMANDER},
+    [JOLLY]  =  {SPECIES_SQUIRTLE, SPECIES_TOTODILE},
+    [IMPISH] =  {SPECIES_PIKACHU, SPECIES_CUBONE},
+    [NAIVE]  =  {SPECIES_TOTODILE, SPECIES_EEVEE},
+    [TIMID]  =  {SPECIES_CYNDAQUIL, SPECIES_MUDKIP},
+    [HASTY]  =  {SPECIES_TORCHIC, SPECIES_SKITTY},
+    [SASSY]  =  {SPECIES_TREECKO, SPECIES_TORCHIC},
+    [CALM]   =  {SPECIES_MUDKIP, SPECIES_BULBASAUR},
+    [RELAXED] = {SPECIES_PSYDUCK, SPECIES_SQUIRTLE},
+    [LONELY]  = {SPECIES_CUBONE, SPECIES_PSYDUCK},
+    [QUIRKY]  = {SPECIES_MEOWTH, SPECIES_TREECKO}
 };
 
 
@@ -443,8 +546,10 @@ void UpdateNatureTotals()
 
     if (!sub_80144A4(&answerIndex))
     {
-        if (answerIndex == 99)
+        // This is for the second part of Brave 2 Question if you fight..
+        if (answerIndex == BRAVE_2B_TRIGGER)
         {
+            // Set question to BRAVE_2B and ask the question..
             gUnknown_203B400->currQuestionIndex = NUM_QUIZ_QUESTIONS;
             gUnknown_203B400->TestState = 1;
         }
@@ -483,7 +588,6 @@ void SetPlayerGender(void)
     }
 }
 
-#ifdef NONMATCHING
 void RevealPersonality(void)
 {
   s32 currentNature;
@@ -492,9 +596,7 @@ void RevealPersonality(void)
   gUnknown_203B400->playerNature = RandomCapped(NUM_PERSONALITIES);
   currentNature = gUnknown_203B400->playerNature;
 
-  // 2 Statements flip-flop but is functionaly equivalent
-  // Struct saving into register and intialize of the counter
-  for(counter = NUM_PERSONALITIES - 2; counter >= 0; counter--){
+  for(counter = 0; counter < NUM_PERSONALITIES - 1; counter++){
     currentNature = currentNature++;
 
     // Wraparound check
@@ -510,73 +612,6 @@ void RevealPersonality(void)
   PrintPersonalityTypeDescription();
   gUnknown_203B400->TestState = 5;
 }
-#else
-NAKED
-void RevealPersonality(void)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tmovs r0, 0xD\n"
-	"\tbl RandomCapped\n"
-	"\tldr r2, _0803CA4C\n"
-	"\tldr r1, [r2]\n"
-	"\tadds r1, 0x40\n"
-	"\tstrb r0, [r1]\n"
-	"\tldr r0, [r2]\n"
-	"\tadds r0, 0x40\n"
-	"\tldrb r3, [r0]\n"
-	"\tadds r7, r2, 0\n"
-	"\tmovs r5, 0xB\n"
-"_0803C9F2:\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0xC\n"
-	"\tble _0803C9FA\n"
-	"\tmovs r3, 0\n"
-"_0803C9FA:\n"
-	"\tldr r0, [r7]\n"
-	"\tlsls r2, r3, 2\n"
-	"\tadds r1, r0, 0\n"
-	"\tadds r1, 0x44\n"
-	"\tadds r2, r1, r2\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r4, 0x40\n"
-	"\tldrb r0, [r4]\n"
-	"\tlsls r0, 2\n"
-	"\tadds r1, r0\n"
-	"\tldr r2, [r2]\n"
-	"\tldr r0, [r1]\n"
-	"\tldr r6, _0803CA4C\n"
-	"\tcmp r2, r0\n"
-	"\tble _0803CA1A\n"
-	"\tstrb r3, [r4]\n"
-"_0803CA1A:\n"
-	"\tsubs r5, 0x1\n"
-	"\tcmp r5, 0\n"
-	"\tbge _0803C9F2\n"
-	"\tldr r3, [r6]\n"
-	"\tldr r2, _0803CA50\n"
-	"\tadds r0, r3, 0\n"
-	"\tadds r0, 0xB0\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r1, 1\n"
-	"\tsubs r0, 0x70\n"
-	"\tldrb r0, [r0]\n"
-	"\tlsls r0, 2\n"
-	"\tadds r1, r0\n"
-	"\tadds r1, r2\n"
-	"\tldrh r0, [r1]\n"
-	"\tstrh r0, [r3, 0x8]\n"
-	"\tbl PrintPersonalityTypeDescription\n"
-	"\tldr r1, [r6]\n"
-	"\tmovs r0, 0x5\n"
-	"\tstr r0, [r1, 0x34]\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0803CA4C: .4byte gUnknown_203B400\n"
-"_0803CA50: .4byte gStarters");
-}
-#endif
 
 void RevealStarter(void)
 {
