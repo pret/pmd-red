@@ -65,7 +65,8 @@ TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 ASFLAGS         := -mcpu=arm7tdmi
 
 override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS        := -I tools/agbcc/include -iquote include -nostdinc -undef
+INCLUDE_PATHS   := -I include -I tools/agbcc/include
+CPPFLAGS        := -iquote include -I tools/agbcc/include -nostdinc -undef
 
 #### Files ####
 
@@ -77,7 +78,6 @@ ELF := $(ROM:%.gba=%.elf)
 MAP := $(ROM:%.gba=%.map)
 
 C_SUBDIR = src
-GFLIB_SUBDIR = gflib
 ASM_SUBDIR = asm
 DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
@@ -86,7 +86,6 @@ MID_SUBDIR = sound/songs/midi
 SAMPLE_SUBDIR = sound/direct_sound_samples
 
 C_BUILDDIR = $(BUILD_DIR)/$(C_SUBDIR)
-GFLIB_BUILDDIR = $(BUILD_DIR)/$(GFLIB_SUBDIR)
 ASM_BUILDDIR = $(BUILD_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(BUILD_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(BUILD_DIR)/$(SONG_SUBDIR)
@@ -137,10 +136,8 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 # Disable dependency scanning for clean/tidy/tools
 # Use a separate minimal makefile for speed
 # Since we don't need to reload most of this makefile
-ifeq (,$(filter-out all rom compare libagbsyscall syms,$(MAKECMDGOALS)))
+ifeq (,$(filter-out clean,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) -f make_tools.mk)
-else
-NODEP ?= 1
 endif
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
@@ -163,9 +160,8 @@ include graphics.mk
 
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
-$(SCANINC): tools/scaninc
 
-compare: all
+compare: $(ROM)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 
 clean: tidy clean-tools
@@ -179,29 +175,37 @@ tidy:
 	$(RM) -r $(BUILD_DIR)
 	@$(MAKE) clean -C libagbsyscall
 
+define scaninc
+	( paths="$$($(SCANINC) $1 $<)"; \
+		echo -n "$(@:.d=.o): " > $@; \
+		echo "$$paths" | xargs printf "%s " >> $@; \
+		test -n "$$paths" && echo "$$paths" | xargs printf "\n%s:" >> $@; \
+		echo >> $@; )
+endef
+
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
-$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c $(SCANINC)
-	@echo -n "$(@:.d=.o): " > $@
-	@$(SCANINC) -I include -I tools/agbcc/include -I gflib $< | xargs printf "%s " >> $@
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
+	@$(call scaninc,$(INCLUDE_PATHS))
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor data_pokemon data_item data_move
-	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
+	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(DATA_ASM_BUILDDIR)/$*.i.s
+	@$(PREPROC) $(DATA_ASM_BUILDDIR)/$*.i.s charmap.txt > $(DATA_ASM_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(DATA_ASM_BUILDDIR)/$*.s
 
-$(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s $(SCANINC)
-	@echo -n "$(@:.d=.o): " > $@
-	@$(SCANINC) -I include $< | xargs printf "%s " >> $@
+$(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
+	@$(call scaninc,$(INCLUDE_PATHS))
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) $< -o $@
+	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(ASM_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(ASM_BUILDDIR)/$*.s
 
-$(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s $(SCANINC)
-	@echo -n "$(@:.d=.o): " > $@
-	@$(SCANINC) $< | xargs printf "%s " >> $@
+$(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
+	@$(call scaninc,$(INCLUDE_PATHS))
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
@@ -220,5 +224,5 @@ $(ROM): %.gba: $(ELF)
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 ifeq (,$(filter clean,$(MAKECMDGOALS)))
-include $(ALL_OBJECTS:.o=.d)
+-include $(ALL_OBJECTS:.o=.d)
 endif

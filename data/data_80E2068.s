@@ -1219,7 +1219,7 @@ gUnknown_80E4A40: @ 80E4A40
         .byte 0x18, 0xff
         .byte 0x19, 0xff
 
-        .include "data/text/credits.inc"
+        #include "text/credits.inc"
 
 	.global gUnknown_80E5990
 gUnknown_80E5990: @ 80E5990

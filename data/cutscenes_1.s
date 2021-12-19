@@ -1,8 +1,8 @@
     .section .rodata
 
-    .include "asm/macros.inc"
-    .include "constants/script_func_constants.inc"
-    .include "include/constants/bg_music.h"
+    #include "asm/macros.inc"
+    #include "asm/constants/script_func_constants.inc"
+    #include "constants/bg_music.h"
 
     .global Unk_822C248
     Unk_822C248:
@@ -9156,25 +9156,25 @@
     .string "pksdir0\0"
     .align 2,0
 
-    .include "data/scripts/personality_test.inc"
+    #include "scripts/personality_test.inc"
     .string "pksdir0\0"
     .align 2,0
 
 
-    .include "data/scripts/title.inc"
+    #include "scripts/title.inc"
     .string "pksdir0\0"
     .align 2,0
 
-    .include "data/scripts/intro.inc"
+    #include "scripts/intro.inc"
     .string "pksdir0\0"
     .align 2,0
 
-    .include "data/scripts/company_screens.inc"
+    #include "scripts/company_screens.inc"
     .string "pksdir0\0"
     .align 2,0
 
-    .include "data/scripts/health_safety.inc"
+    #include "scripts/health_safety.inc"
     .string "pksdir0\0"
     .align 2,0
 
-    .include "data/scripts/world_map.inc"
+    #include "scripts/world_map.inc"

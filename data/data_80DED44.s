@@ -257,7 +257,7 @@ gUnknown_80DFE1C: @ 80DFE1C
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.include "data/text/wonder_mail_3.inc"
+	#include "text/wonder_mail_3.inc"
 
 	.global gUnknown_80E016C
 gUnknown_80E016C: @ 80E016C
@@ -268,7 +268,7 @@ gUnknown_80E016C: @ 80E016C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.include "data/text/wonder_mail_complete.inc"
+	#include "text/wonder_mail_complete.inc"
 
 	.global gUnknown_80E0248
 gUnknown_80E0248: @ 80E0248

@@ -4617,11 +4617,11 @@ gUnknown_80DCA2C: @ 80DCA2C
         .align 2,0
         .4byte gUnknown_80DCA2C
 
-	.include "data/text/luminous_cave.inc"
+	#include "text/luminous_cave.inc"
 
-        .include "data/friend_area.inc"
+        #include "friend_area.inc"
 
-	.include "data/text/party_menu.inc"
+	#include "text/party_menu.inc"
 
 	.global gUnknown_80DD6EC
 gUnknown_80DD6EC: @ 80DD6EC

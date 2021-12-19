@@ -99,7 +99,7 @@ gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
         .4byte titlen1p_text
         .4byte titlen2p_text
 
-	.include "data/text/save.inc"
+	#include "text/save.inc"
 
 	.global gUnknown_80B6D90
 gUnknown_80B6D90: @ 80B6D90

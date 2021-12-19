@@ -1,5 +1,5 @@
-.include "include/constants/status.h"
-.include "include/constants/targeting.h"
+#include "constants/status.h"
+#include "constants/targeting.h"
         .section .rodata
 
 	.global gUnknown_80F42D0
@@ -7430,7 +7430,7 @@ gChargeMovesToStatuses: @ 81069F4
 
 	.global gMultiTurnChargingStatuses
 gMultiTurnChargingStatuses: @ 8106A1C
-		.include "include/constants/status.h"
+		#include "constants/status.h"
 		.4byte CHARGING_STATUS_SOLARBEAM
 		.4byte CHARGING_STATUS_SKY_ATTACK
 		.4byte CHARGING_STATUS_RAZOR_WIND
