@@ -1,7 +1,8 @@
 #include "global.h"
 #include "dungeon_util.h"
 
-extern struct MapTile* GetMapTileAtPosition(s16, s16);
+#include "dungeon_map_access.h"
+
 extern struct MapTile* GetMapEntity(s16, s16);
 
 bool8 EntityExists(struct DungeonEntity *entity)
@@ -23,32 +24,32 @@ u8 GetEntityRoomIndex(struct DungeonEntity *entity)
     return entity->roomIndex;
 }
 
-struct DungeonEntityData *GetTrapData(struct DungeonEntity *entity)
+struct DungeonEntityData* GetTrapData(struct DungeonEntity *entity)
 {
     return entity->entityData;
 }
 
-struct ItemSlot *GetItemData(struct DungeonEntity *entity)
+struct ItemSlot* GetItemData(struct DungeonEntity *entity)
 {
     return (struct ItemSlot *)entity->entityData;
 }
 
-struct DungeonEntityData *sub_804510C(struct DungeonEntity *entity)
+struct DungeonEntityData* sub_804510C(struct DungeonEntity *entity)
 {
     return entity->entityData;
 }
 
-struct DungeonEntityData *sub_8045110(struct DungeonEntity *entity)
+struct DungeonEntityData* sub_8045110(struct DungeonEntity *entity)
 {
     return entity->entityData;
 }
 
-struct MapTile *sub_8045114(struct DungeonEntity *entity)
+struct MapTile* GetMapTileForDungeonEntity(struct DungeonEntity *entity)
 {
     return GetMapTileAtPosition(entity->posWorld.x, entity->posWorld.y);
 }
 
-struct MapTile *sub_8045128(struct DungeonEntity *entity)
+struct MapTile* GetMapEntityForDungeonEntity(struct DungeonEntity *entity)
 {
     return GetMapEntity(entity->posWorld.x, entity->posWorld.y);
 }

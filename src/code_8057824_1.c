@@ -6,8 +6,6 @@
 #include "item.h"
 #include "pokemon.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
-
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
 extern u8 gAvailablePokemonNames[0x58];

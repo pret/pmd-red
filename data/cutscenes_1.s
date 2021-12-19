@@ -62,7 +62,7 @@
 
     .global PleaseWakeUp_822C4C0
     PleaseWakeUp_822C4C0:
-    .string " ...Please{COMMA} wake up.#W\nCome on{COMMA} wake up.\0"
+    .string " ...Please{COMMA} wake up.{WAIT_PRESS}\nCome on{COMMA} wake up.\0"
     .align 2,0
 
     .global ExcuseMe_822C4F0
@@ -72,7 +72,7 @@
 
     .global HeyWakeUp_822C500
     HeyWakeUp_822C500:
-    .string " ...Hey{COMMA} wake up.#W\nWake up already.\0"
+    .string " ...Hey{COMMA} wake up.{WAIT_PRESS}\nWake up already.\0"
     .align 2,0
 
     .global Hey_822C528
@@ -97,27 +97,27 @@
 
     .global WonderWhoItIs_822C554
     WonderWhoItIs_822C554:
-    .string "#+I wonder who it is?\0"
+    .string "{CENTER_ALIGN}I wonder who it is?\0"
     .align 2,0
 
     .global VoiceSomewhere_822C56C
     VoiceSomewhere_822C56C:
-    .string "#+...I hear a voice from somewhere...\0"
+    .string "{CENTER_ALIGN}...I hear a voice from somewhere...\0"
     .align 2,0
 
     .global PleasantBreeze_822C594
     PleasantBreeze_822C594:
-    .string "#+I feel a pleasant breeze.\0"
+    .string "{CENTER_ALIGN}I feel a pleasant breeze.\0"
     .align 2,0
 
     .global AmIDreamingThis_822C5B0
     AmIDreamingThis_822C5B0:
-    .string "#+Am I dreaming this?\0"
+    .string "{CENTER_ALIGN}Am I dreaming this?\0"
     .align 2,0
 
     .global WhereAmI_822C5C8
     WhereAmI_822C5C8:
-    .string "#+Where am I?\0"
+    .string "{CENTER_ALIGN}Where am I?\0"
     .align 2,0
 
     .byte 0x90, 0x01, 0x07

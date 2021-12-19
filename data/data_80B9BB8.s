@@ -5969,7 +5969,7 @@ gUnknown_80D406C: @ 80D406C
 
 	.global gUnknown_80D4074
 gUnknown_80D4074: @ 80D4074
-        .string "#+{ARG_POKEMON_0}\0"
+        .string "{CENTER_ALIGN}{ARG_POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_80D407C
@@ -6039,7 +6039,7 @@ gUnknown_80D40F4: @ 80D40F4
 
 	.global gUnknown_80D40FC
 gUnknown_80D40FC: @ 80D40FC
-        .string "#+%s\0"
+        .string "{CENTER_ALIGN}%s\0"
         .align 2,0
 
 	.global gUnknown_80D4104

@@ -189,7 +189,7 @@ ALIGNED(4) const char gUnknown_80DF9F0[] = "????";
 ALIGNED(4) const char gUnknown_80DF9F8[] = _(
 	" Oh{COMMA} hello!\n"
 	"Your rescue mission went well{COMMA} didn{APOSTROPHE}t it?\n"
-	"I wouldn{APOSTROPHE}t expect any less{COMMA} {COLOR_1 LIGHT_BLUE_2}%s{END_COLOR_TEXT_1}!#P"
+	"I wouldn{APOSTROPHE}t expect any less{COMMA} {COLOR_1 LIGHT_BLUE_2}%s{END_COLOR_TEXT_1}!{EXTRA_MSG}"
 	" Well{COMMA} well!\n"
 	"Here is your reward from the Pokémon\n"
 	"Rescue Organization!");
@@ -197,14 +197,14 @@ ALIGNED(4) const char gUnknown_80DF9F8[] = _(
 ALIGNED(4) const char gUnknown_80DFAA8[] = _(
 	" I hope you will keep on\n"
 	"rescuing your friends in\n"
-	"dire straits.#P"
+	"dire straits.{EXTRA_MSG}"
 	" And now{COMMA} I must save\n"
 	"your adventure.");
 
 ALIGNED(4) const char gUnknown_80DFB14[] = _(
 	" Oh{COMMA} yes{COMMA} that{APOSTROPHE}s right.\n"
 	"Please don{APOSTROPHE}t forget to send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}\n"
-	"to the friend you just rescued.#P"
+	"to the friend you just rescued.{EXTRA_MSG}"
 	" Please give me a shout if\n"
 	"you would like to send {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
 
@@ -779,7 +779,7 @@ void sub_802BCC4(void)
 
 u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
 {
-  
+
   if (HasNoMailinMailbox()) {
       return 0;
   }

@@ -167,7 +167,7 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_NewsText2
     gMail_NewsText2:
-    .string "#+{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 2{END_COLOR_TEXT_1}\n"
+    .string "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 2{END_COLOR_TEXT_1}\n"
     .string "{COLOR_1 GREEN}Quote from Charizard on the scene:{END_COLOR_TEXT_1}\n"
     .string "{QUOTE_START}That{APOSTROPHE}s what I thought right from\n"
     .string "the start{COMMA} hahaha!{QUOTE_END}\n"
@@ -184,7 +184,7 @@ gPokemonMail: @ 80EBA18
 
     .global gMail_NewsText1
     gMail_NewsText1:
-    .string "#+{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 1{END_COLOR_TEXT_1}\n"
+    .string "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 1{END_COLOR_TEXT_1}\n"
     .string "{ARG_POKEMON_1} met with Ninetales on {COLOR_1 RED}Mt. Freeze{END_COLOR_TEXT_1}.\n"
     .string "Ninetales testified that {ARG_POKEMON_0} was\n"
     .string "not the human that appeared in the legend.\n"
@@ -223,7 +223,7 @@ gPokemonMail: @ 80EBA18
     .string "Totodile\n"
     .string "{COLOR_1 GREEN}Bite{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scary Face{END_COLOR_TEXT_1}\n"
     .string "Cyndaquil\n"
-    .string "{COLOR_1 GREEN}Flame Wheel{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Smokescreen{END_COLOR_TEXT_1}#P"
+    .string "{COLOR_1 GREEN}Flame Wheel{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Smokescreen{END_COLOR_TEXT_1}{EXTRA_MSG}"
     .string "Pikachu\n"
     .string "{COLOR_1 GREEN}Thunderbolt{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Double Team{END_COLOR_TEXT_1}\n"
     .string "Skitty\n"
@@ -242,7 +242,7 @@ gPokemonMail: @ 80EBA18
     .string "Bulbasaur\n"
     .string "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Sleep Powder{END_COLOR_TEXT_1}\n"
     .string "Chikorita\n"
-    .string "{COLOR_1 GREEN}Body Slam{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Reflect{END_COLOR_TEXT_1}#P"
+    .string "{COLOR_1 GREEN}Body Slam{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Reflect{END_COLOR_TEXT_1}{EXTRA_MSG}"
     .string "Treecko\n"
     .string "{COLOR_1 GREEN}Screech{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Pound{END_COLOR_TEXT_1}\n"
     .string "Machop\n"
@@ -588,10 +588,10 @@ gPokemonMail: @ 80EBA18
     gMail_KeyText:
     .string "{CENTER_ALIGN COLOR_1 YELLOW}Head Out to the Desert Region!{END_COLOR_TEXT_1}\n"
     .string "If you{APOSTROPHE}ve been wondering what lies behind\n"
-    .string "the mysterious locked doors of the #CDSolar\n"
+    .string "the mysterious locked doors of the {COLOR_1 YELLOW_4}Solar\n"
     .string "Cave{END_COLOR_TEXT_1}{COMMA} there{APOSTROPHE}s been a breakthrough!\n"
     .string "Reports indicate the door keys are easily\n"
-    .string "found in the #CDDesert Region{END_COLOR_TEXT_1}. Explorers are\n"
+    .string "found in the {COLOR_1 YELLOW_4}Desert Region{END_COLOR_TEXT_1}. Explorers are\n"
     .string "advised to compose teams with Pokémon\n"
     .string "adapted to the desert environment.\0"
     .align 2,0
@@ -674,7 +674,7 @@ gPokemonMail: @ 80EBA18
     .string "At the Makuhita Dojo{COMMA} one can learn how\n"
     .string "Pokémon type matchups affect battles.\n"
     .string "It{APOSTROPHE}s because the dojo{APOSTROPHE}s training rooms are\n"
-    .string "divided by type. For example{COMMA} in the #CDFire\n"
+    .string "divided by type. For example{COMMA} in the {COLOR_1 YELLOW_4}Fire\n"
     .string "Maze{END_COLOR_TEXT_1}{COMMA} there are only Fire-type Pokémon.\n"
     .string "Try move types to see what works best!\0"
     .align 2,0
@@ -693,7 +693,7 @@ gPokemonMail: @ 80EBA18
     .string "use. Further studies are said to be under\n"
     .string "consideration by the authorities.\n"
     .string "In related news{COMMA} the cave is to be named\n"
-    .string "the #CDSolar Cave{END_COLOR_TEXT_1}.\0"
+    .string "the {COLOR_1 YELLOW_4}Solar Cave{END_COLOR_TEXT_1}.\0"
     .align 2,0
 
     .global gMail_MachineHeadline
@@ -830,7 +830,7 @@ gPokemonMail: @ 80EBA18
     .string "Pikachu\n"
     .string "{COLOR_1 GREEN}Thundershock{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
     .string "Squirtle\n"
-    .string "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}#PTotodile\n"
+    .string "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}{EXTRA_MSG}Totodile\n"
     .string "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scratch{END_COLOR_TEXT_1}\n"
     .string "Mudkip\n"
     .string "{COLOR_1 GREEN}Water Gun{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Mud-Slap{END_COLOR_TEXT_1}\n"
@@ -851,7 +851,7 @@ gPokemonMail: @ 80EBA18
     .string "Cyndaquil\n"
     .string "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}\n"
     .string "Torchic\n"
-    .string "{COLOR_1 GREEN}Ember{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}#PEevee\n"
+    .string "{COLOR_1 GREEN}Ember{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{EXTRA_MSG}Eevee\n"
     .string "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}\n"
     .string "Meowth\n"
     .string "{COLOR_1 GREEN}Scratch{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
@@ -872,7 +872,7 @@ gPokemonMail: @ 80EBA18
     .string "Bulbasaur\n"
     .string "{COLOR_1 GREEN}Vine Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
     .string "Chikorita\n"
-    .string "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}#PTreecko\n"
+    .string "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{EXTRA_MSG}Treecko\n"
     .string "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Pound{END_COLOR_TEXT_1}\n"
     .string "Machop\n"
     .string "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Low Kick{END_COLOR_TEXT_1}\n"

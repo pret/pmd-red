@@ -11,6 +11,6 @@ u32 GetEntityType(struct DungeonEntity *entity);
 struct DungeonEntityData *GetTrapData(struct DungeonEntity *entity);
 // 0x45108
 struct ItemSlot *GetItemData(struct DungeonEntity *entity);
-struct MapTile *sub_8045128(struct DungeonEntity *entity);
+struct MapTile *GetMapEntityForDungeonEntity(struct DungeonEntity *entity);
 
 #endif

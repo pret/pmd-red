@@ -4,7 +4,6 @@
 #include "dungeon_global_data.h"
 #include "pokemon.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern void LoadIQSkills(struct DungeonEntity *);
 extern struct DungeonEntity *GetPartnerEntity();
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);

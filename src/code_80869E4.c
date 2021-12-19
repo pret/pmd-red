@@ -15,7 +15,6 @@ struct unkStruct_202F3D0
 };
 
 EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
-extern struct DungeonGlobalData *gDungeonGlobalData;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);

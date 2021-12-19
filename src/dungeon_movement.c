@@ -5,6 +5,7 @@
 #include "constants/direction.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
+#include "constants/targeting.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
@@ -12,19 +13,18 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_visibility.h"
 #include "map.h"
 #include "pokemon.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
-extern struct DungeonGlobalData *gDungeonGlobalData;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SendMessage(struct DungeonEntity*, char*);
 extern bool8 HasStatusAffectingActions(struct DungeonEntity*);
-extern bool8 CanSee(struct DungeonEntity*, struct DungeonEntity*);
 extern void ResetAction(u16*);
 extern void SetWalkAction(u16*, s16);
 extern void DecideAttack(struct DungeonEntity*);
@@ -49,7 +49,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
     entityData = entity->entityData;
     if(EntityExists(entity))
     {
-        tile = sub_8045128(entity);
+        tile = GetMapEntityForDungeonEntity(entity);
         if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
             if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
                 return 1;
@@ -136,7 +136,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
             {
                 if(!gDungeonGlobalData->monsterHouseActive)
                 {
-                    if((sub_8045128(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
+                    if((GetMapEntityForDungeonEntity(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);

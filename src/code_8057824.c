@@ -3,8 +3,6 @@
 #include "dungeon_entity.h"
 #include "constants/move.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
-
 extern u32 gUnknown_80FCF74;
 extern u32 gUnknown_80FCF80;
 extern u16 gUnknown_80F4F42;

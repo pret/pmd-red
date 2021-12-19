@@ -49,28 +49,28 @@ gUnknown_80DD1A8: @ 80DD1A8
 
 	.global gUnknown_80DD1C8
 gUnknown_80DD1C8: @ 80DD1C8
-	.string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	.string "#+handed over. \0"
+	.string "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	.string "{CENTER_ALIGN}handed over. \0"
 	.align 2,0
 
 	.global gUnknown_80DD1EC
 gUnknown_80DD1EC: @ 80DD1EC
-	.string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	.string "#+handed over.#P"
-	.string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	.string "#+returned to the Toolbox.\0"
+	.string "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	.string "{CENTER_ALIGN}handed over.{EXTRA_MSG}"
+	.string "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	.string "{CENTER_ALIGN}returned to the Toolbox.\0"
 	.align 2,0
 
 	.global gUnknown_80DD240
 gUnknown_80DD240: @ 80DD240
-	.string "#+The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	.string "#+returned to the Toolbox.\0"
+	.string "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	.string "{CENTER_ALIGN}returned to the Toolbox.\0"
 	.align 2,0
 
 	.global gUnknown_80DD270
 gUnknown_80DD270: @ 80DD270
-        .string "#+{ARG_POKEMON_1} left the team to remain\n"
-        .string "#+on standby in the Friend Area.\0"
+        .string "{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
+        .string "{CENTER_ALIGN}on standby in the Friend Area.\0"
         .align 2,0
 
 	.global gUnknown_80DD2B0

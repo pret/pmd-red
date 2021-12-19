@@ -6,7 +6,6 @@
 #include "dungeon_util.h"
 #include "random.h"
 
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern void sub_806CE68(struct DungeonEntity *, s32);
 
 extern s32 sub_803F994(void);
@@ -128,7 +127,7 @@ bool8 IsMovingClient(struct DungeonEntity *pokemon)
     switch (pokemonData->clientType)
     {
         case CLIENT_TYPE_CLIENT:
-        case CLIENT_TYPE_DONT_MOVE:
+        case 0x3:
         case 0x5:
         case 0x6:
         case 0x7:
@@ -161,7 +160,7 @@ bool8 IsMovingClient(struct DungeonEntity *pokemon)
             return TRUE;
         case CLIENT_TYPE_NONE:
         case 0x2:
-        case 0x4:
+        case CLIENT_TYPE_DONT_MOVE:
         case 0xA:
         case 0xB:
         case 0xC:

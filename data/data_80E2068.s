@@ -669,9 +669,9 @@ gUnknown_80E2D7C: @ 80E2D7C
 
 	.global gUnknown_80E2DD0
 gUnknown_80E2DD0: @ 80E2DD0
-.string "#+Communicating...\n"
-.string "#+Please wait with the power on.\n"
-.string "#+To cancel{COMMA} press {B_BUTTON}.\0"
+.string "{CENTER_ALIGN}Communicating...\n"
+.string "{CENTER_ALIGN}Please wait with the power on.\n"
+.string "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.\0"
 .align 2,0
 
 	.global gUnknown_80E2E20
@@ -682,16 +682,16 @@ gUnknown_80E2E20: @ 80E2E20
 
 	.global gUnknown_80E2E54
 gUnknown_80E2E54: @ 80E2E54
-.string "#+Reading from GBA Game Pak.\n"
-.string "#+Do not remove the GBA Game Pak.\n"
-.string "#+Please wait with the power on.\0"
+.string "{CENTER_ALIGN}Reading from GBA Game Pak.\n"
+.string "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
+.string "{CENTER_ALIGN}Please wait with the power on.\0"
 .align 2,0
 
 	.global gUnknown_80E2EB4
 gUnknown_80E2EB4: @ 80E2EB4
-.string "#+Writing to GBA Game Pak.\n"
-.string "#+Do not remove the GBA Game Pak.\n"
-.string "#+Please wait with the power on.\0"
+.string "{CENTER_ALIGN}Writing to GBA Game Pak.\n"
+.string "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
+.string "{CENTER_ALIGN}Please wait with the power on.\0"
 .align 2,0
 
 	.global gUnknown_80E2F14
@@ -830,7 +830,7 @@ gUnknown_80E33D8: @ 80E33D8
 	.global gUnknown_80E3430
 gUnknown_80E3430: @ 80E3430
 .string "This mail already has an attached\n"
-.string "{COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}.#POnce an item has been chosen{COMMA} it may not\n"
+.string "{COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}.{EXTRA_MSG}Once an item has been chosen{COMMA} it may not\n"
 .string "be exchanged with another item.\0"
 .align 2,0
 
@@ -889,11 +889,11 @@ gUnknown_80E367C: @ 80E367C
 gUnknown_80E3690: @ 80E3690
 .string "If your team is defeated and in need\n"
 .string "of rescuing{COMMA} send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
-.string "to a friend.#POnce you send your mail{COMMA} you must wait\n"
+.string "to a friend.{EXTRA_MSG}Once you send your mail{COMMA} you must wait\n"
 .string "for your friend to send you\n"
-.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#PIf the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} arrives{COMMA} your\n"
+.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} arrives{COMMA} your\n"
 .string "team can be revived to resume exploring\n"
-.string "the dungeon it was in.#PWhen your team is revived{COMMA} don{APOSTROPHE}t forget\n"
+.string "the dungeon it was in.{EXTRA_MSG}When your team is revived{COMMA} don{APOSTROPHE}t forget\n"
 .string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
 .string "who came to your rescue.\0"
 .align 2,0
@@ -902,11 +902,11 @@ gUnknown_80E3690: @ 80E3690
 gUnknown_80E3818: @ 80E3818
 .string "If your team is defeated in\n"
 .string "a dungeon{COMMA} you may send a friend\n"
-.string "an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} for help.#PHowever{COMMA} there are some places\n"
+.string "an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} for help.{EXTRA_MSG}However{COMMA} there are some places\n"
 .string "where it is impossible for you to\n"
-.string "call for a rescue.#PAlso{COMMA} if you send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
+.string "call for a rescue.{EXTRA_MSG}Also{COMMA} if you send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
 .string "you may not continue with your\n"
-.string "adventure while awaiting rescue.#PIf you cannot wait to be rescued{COMMA}\n"
+.string "adventure while awaiting rescue.{EXTRA_MSG}If you cannot wait to be rescued{COMMA}\n"
 .string "you will have to give up and return\n"
 .string "to your rescue team base.\0"
 .align 2,0
@@ -915,11 +915,11 @@ gUnknown_80E3818: @ 80E3818
 gUnknown_80E3998: @ 80E3998
 .string "If your friend successfully rescues\n"
 .string "your team{COMMA} accept your friend{APOSTROPHE}s\n"
-.string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#POnce the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} is received{COMMA}\n"
+.string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Once the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} is received{COMMA}\n"
 .string "you may revive your team and resume\n"
-.string "exploring the dungeon you were in.#PUsing a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+.string "exploring the dungeon you were in.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
 .string "your friend can also send you\n"
-.string "a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1}.#PHowever{COMMA} the {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} will not\n"
+.string "a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1}.{EXTRA_MSG}However{COMMA} the {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} will not\n"
 .string "be able to bring an item with it when\n"
 .string "joining your team.\0"
 .align 2,0
@@ -928,7 +928,7 @@ gUnknown_80E3998: @ 80E3998
 gUnknown_80E3B1C: @ 80E3B1C
 .string "If your team has been rescued{COMMA} be sure\n"
 .string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
-.string "that came to your help.#PYou may also attach a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
+.string "that came to your help.{EXTRA_MSG}You may also attach a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
 .string "from storage to your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
 .string "and send it to your friend.\0"
 .align 2,0
@@ -937,12 +937,12 @@ gUnknown_80E3B1C: @ 80E3B1C
 gUnknown_80E3BF8: @ 80E3BF8
 .string "If your friend{APOSTROPHE}s team needs rescuing{COMMA}\n"
 .string "you must first receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
-.string "from your friend.#PWhen you get the mail{COMMA} you may embark\n"
+.string "from your friend.{EXTRA_MSG}When you get the mail{COMMA} you may embark\n"
 .string "on your rescue mission from the\n"
-.string "{COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.#PIf you rescue your friend{APOSTROPHE}s defeated\n"
+.string "{COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}If you rescue your friend{APOSTROPHE}s defeated\n"
 .string "team{COMMA} send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} to your\n"
-.string "friend.#PIf you rescue a friend{COMMA} you will be eligible\n"
-.string "to receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.#PIf you have quicksaved inside a dungeon{COMMA}\n"
+.string "friend.{EXTRA_MSG}If you rescue a friend{COMMA} you will be eligible\n"
+.string "to receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If you have quicksaved inside a dungeon{COMMA}\n"
 .string "you may not choose {COLOR_1 LIGHT_BLUE_2}Go Rescue{END_COLOR_TEXT_1}.\n"
 .string "Your last save must be out of a dungeon.\0"
 .align 2,0
@@ -951,18 +951,18 @@ gUnknown_80E3BF8: @ 80E3BF8
 gUnknown_80E3DE4: @ 80E3DE4
 .string "You may receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} from\n"
 .string "a friend{APOSTROPHE}s team that lies defeated in\n"
-.string "a dungeon.#PIf there is no space for new mail{COMMA} delete\n"
+.string "a dungeon.{EXTRA_MSG}If there is no space for new mail{COMMA} delete\n"
 .string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E3E98
 gUnknown_80E3E98: @ 80E3E98
 .string "If you successfully rescue your friend{APOSTROPHE}s\n"
-.string "team{COMMA} send your friend an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.#PUsing a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA} you may\n"
+.string "team{COMMA} send your friend an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA} you may\n"
 .string "also send your friend a Pokémon from\n"
-.string "your Friend Area as a helper.#PDon{APOSTROPHE}t worry--sending a Pokémon as\n"
+.string "your Friend Area as a helper.{EXTRA_MSG}Don{APOSTROPHE}t worry--sending a Pokémon as\n"
 .string "a helper will not make it disappear from\n"
-.string "its Friend Area.#PIf there is no space for new mail{COMMA} delete\n"
+.string "its Friend Area.{EXTRA_MSG}If there is no space for new mail{COMMA} delete\n"
 .string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
@@ -970,9 +970,9 @@ gUnknown_80E3E98: @ 80E3E98
 gUnknown_80E4014: @ 80E4014
 .string "When you receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
 .string "you may embark on your rescue mission\n"
-.string "from the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.#PBeware--if you do not have access to\n"
+.string "from the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}Beware--if you do not have access to\n"
 .string "the dungeon they are in{COMMA} you may not go\n"
-.string "on a rescue mission there.#PAccept challenging rescues only\n"
+.string "on a rescue mission there.{EXTRA_MSG}Accept challenging rescues only\n"
 .string "if you are ready and qualified!\0"
 .align 2,0
 
@@ -980,7 +980,7 @@ gUnknown_80E4014: @ 80E4014
 gUnknown_80E4130: @ 80E4130
 .string "If you send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}{COMMA} you may\n"
 .string "receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} in return\n"
-.string "from your friend.#PThe {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} may also come\n"
+.string "from your friend.{EXTRA_MSG}The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} may also come\n"
 .string "with a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} attached.\0"
 .align 2,0
 
@@ -988,9 +988,9 @@ gUnknown_80E4130: @ 80E4130
 gUnknown_80E41DC: @ 80E41DC
 .string "Using the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function{COMMA}\n"
 .string "you may perform rescue operations with\n"
-.string "friends using the GBA Game Pak version.#PInsert the DS Game Card and the GBA\n"
+.string "friends using the GBA Game Pak version.{EXTRA_MSG}Insert the DS Game Card and the GBA\n"
 .string "Game Pak in your Nintendo DS system{COMMA}\n"
-.string "then turn on the power.#PFriend Rescue missions using\n"
+.string "then turn on the power.{EXTRA_MSG}Friend Rescue missions using\n"
 .string "the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function will be\n"
 .string "available on the main menu. \0"
 .align 2,0
@@ -999,10 +999,10 @@ gUnknown_80E41DC: @ 80E41DC
 gUnknown_80E4314: @ 80E4314
 .string "Friends can rescue each other{APOSTROPHE}s defeated\n"
 .string "teams using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
-.string "{COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} and so on.#PYou may go on a rescue mission to save\n"
+.string "{COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} and so on.{EXTRA_MSG}You may go on a rescue mission to save\n"
 .string "your friend{APOSTROPHE}s team that has been defeated\n"
-.string "in a dungeon.#POr{COMMA} you may call for help from a friend\n"
-.string "to save your fallen team in a dungeon.#PUsing {COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} you can even\n"
+.string "in a dungeon.{EXTRA_MSG}Or{COMMA} you may call for help from a friend\n"
+.string "to save your fallen team in a dungeon.{EXTRA_MSG}Using {COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} you can even\n"
 .string "exchange help with faraway friends.\0"
 .align 2,0
 

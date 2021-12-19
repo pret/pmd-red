@@ -1,4 +1,5 @@
-#include "constants/status.h"
+.include "include/constants/status.h"
+.include "include/constants/targeting.h"
         .section .rodata
 
 	.global gUnknown_80F42D0
@@ -6019,11 +6020,11 @@ gUnknown_8100928: @ 8100928
 
 	.global gUnknown_8100934
 gUnknown_8100934: @ 8100934
-	.string " How dare you!#W\n"
-	.string "It{APOSTROPHE}s their fault!#P"
+	.string " How dare you!{WAIT_PRESS}\n"
+	.string "It{APOSTROPHE}s their fault!{EXTRA_MSG}"
 	.string " I haven{APOSTROPHE}t slept in days\n"
 	.string "because the earthquakes frighten me so!\n"
-	.string "Every night we had them!#P"
+	.string "Every night we had them!{EXTRA_MSG}"
 	.string " Those earthquakes are\n"
 	.string "caused by this brat{APOSTROPHE}s ilk running wild\n"
 	.string "underground!\0"
@@ -6663,9 +6664,9 @@ gUnknown_8103E34: @ 8103E34
 
 	.global gUnknown_8103E40
 gUnknown_8103E40: @ 8103E40
-	.string "#+There appears to be no one here.#P"
-	.string "#+It{APOSTROPHE}s impossible to go farther.#W\n"
-	.string "#+It{APOSTROPHE}s time to go back.\0"
+	.string "{CENTER_ALIGN}There appears to be no one here.{EXTRA_MSG}"
+	.string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
+	.string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 	.align 2, 0
 
 	.global gUnknown_8103EA4
@@ -7188,8 +7189,8 @@ gUnknown_81063D0: @ 81063D0
 
 	.global gPurityForestSomeoneThereText
 gPurityForestSomeoneThereText: @ 81063DC
-	.string "#+Oh?#W\n"
-	.string "#+There{APOSTROPHE}s someone there.\0"
+	.string "{CENTER_ALIGN}Oh?{WAIT_PRESS}\n"
+	.string "{CENTER_ALIGN}There{APOSTROPHE}s someone there.\0"
 	.align 2, 0
 
 	.global gUnknown_8106400
@@ -7200,8 +7201,8 @@ gUnknown_8106400: @ 8106400
 
 	.global gPurityForestCelebiIntroText
 gPurityForestCelebiIntroText: @ 810640C
-	.string "#+It{APOSTROPHE}s...#W\n"
-	.string "#+The Time Travel Pokémon {ARG_POKEMON_2}!\0"
+	.string "{CENTER_ALIGN}It{APOSTROPHE}s...{WAIT_PRESS}\n"
+	.string "{CENTER_ALIGN}The Time Travel Pokémon {ARG_POKEMON_2}!\0"
 	.align 2, 0
 
 	.global gUnknown_810643C
@@ -7212,7 +7213,7 @@ gUnknown_810643C: @ 810643C
 
 	.global gPurityForestCelebiWantsToJoinText
 gPurityForestCelebiWantsToJoinText: @ 8106448
-	.string "#+{ARG_POKEMON_2} wants to join the team.\0"
+	.string "{CENTER_ALIGN}{ARG_POKEMON_2} wants to join the team.\0"
 	.align 2, 0
 
 	.global gUnknown_8106468
@@ -7223,7 +7224,7 @@ gUnknown_8106468: @ 8106468
 
 	.global gPurityForestCelebiJoinedText
 gPurityForestCelebiJoinedText: @ 8106474
-	.string "#+{ARG_POKEMON_2} joined the team! \0"
+	.string "{CENTER_ALIGN}{ARG_POKEMON_2} joined the team! \0"
 	.align 2, 0
 
 	.global gUnknown_810648C
@@ -7234,8 +7235,8 @@ gUnknown_810648C: @ 810648C
 
 	.global gPurityForestCelebiVeryHappyText
 gPurityForestCelebiVeryHappyText: @ 8106498
-	.string "#+{ARG_POKEMON_3} appears to\n"
-	.string "#+be very happy!\0"
+	.string "{CENTER_ALIGN}{ARG_POKEMON_3} appears to\n"
+	.string "{CENTER_ALIGN}be very happy!\0"
 	.align 2, 0
 
 	.global gUnknown_81064BC
@@ -7246,8 +7247,8 @@ gUnknown_81064BC: @ 81064BC
 
 	.global gPurityForestCelebiDelightedToJoinText
 gPurityForestCelebiDelightedToJoinText: @ 81064C8
-	.string "#+It{APOSTROPHE}s delighted to have\n"
-	.string "#+joined the rescue team!\0"
+	.string "{CENTER_ALIGN}It{APOSTROPHE}s delighted to have\n"
+	.string "{CENTER_ALIGN}joined the rescue team!\0"
 	.align 2, 0
 
 	.global gUnknown_8106500
@@ -7258,8 +7259,8 @@ gUnknown_8106500: @ 8106500
 
 	.global gPurityForestTurnedDownOfferText
 gPurityForestTurnedDownOfferText: @ 810650C
-	.string "#+{ARG_POKEMON_0} turned down\n"
-	.string "#+the offer to join.\0"
+	.string "{CENTER_ALIGN}{ARG_POKEMON_0} turned down\n"
+	.string "{CENTER_ALIGN}the offer to join.\0"
 	.align 2, 0
 
 	.global gUnknown_8106534
@@ -7270,7 +7271,7 @@ gUnknown_8106534: @ 8106534
 
 	.global gPurityForestCelebiDisappointedText
 gPurityForestCelebiDisappointedText: @ 8106540
-	.string "#+Celebi is very disappointed.\0"
+	.string "{CENTER_ALIGN}Celebi is very disappointed.\0"
 	.align 2, 0
 
 	.global gUnknown_8106560
@@ -7281,14 +7282,14 @@ gUnknown_8106560: @ 8106560
 
 	.global gPurityForestCelebiLeftDejectedlyText
 gPurityForestCelebiLeftDejectedlyText: @ 810656C
-	.string "#+{ARG_POKEMON_2} left\n"
-	.string "#+dejectedly...\0"
+	.string "{CENTER_ALIGN}{ARG_POKEMON_2} left\n"
+	.string "{CENTER_ALIGN}dejectedly...\0"
 	.align 2, 0
 
 	.global gPurityForestAllowCelebiToJoinText
 gPurityForestAllowCelebiToJoinText: @ 8106588
-	.string "#+Allow {ARG_POKEMON_2}\n"
-	.string "#+to join the team?\0"
+	.string "{CENTER_ALIGN}Allow {ARG_POKEMON_2}\n"
+	.string "{CENTER_ALIGN}to join the team?\0"
 	.align 2, 0
 
 	.global gPtrPurityForestAllowCelebiToJoinText
@@ -7316,8 +7317,8 @@ gPurityForestAllowCelebiToJoinYesText: @ 81065C8
 
 	.global gPurityForestRefuseCelebiConfirmText
 gPurityForestRefuseCelebiConfirmText: @ 81065D0
-	.string "#+Are you sure?#W\n"
-	.string "#+You{APOSTROPHE}re sure you won{APOSTROPHE}t accept it?\0"
+	.string "{CENTER_ALIGN}Are you sure?{WAIT_PRESS}\n"
+	.string "{CENTER_ALIGN}You{APOSTROPHE}re sure you won{APOSTROPHE}t accept it?\0"
 	.align 2, 0
 
 	.global gPtrPurityForestRefuseCelebiConfirmText
@@ -7472,7 +7473,7 @@ gUnknown_8106AEC: @ 8106AEC
 
 	.global gUnknown_8106B50
 gUnknown_8106B50: @ 8106B50
-        .string "#C%c%s\0"
+        .string "{COLOR_1}%c%s\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -7655,7 +7656,7 @@ gUnknown_8106D68: @ 8106D68
 
 	.global gUnknown_8106D8C
 gUnknown_8106D8C: @ 8106D8C
-        .string "#c%d{ARG_POKEMON_0}\0"
+        .string "{COLOR_2}%d{ARG_POKEMON_0}\0"
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
@@ -7840,9 +7841,25 @@ gDirectionBitMasks_3: @ 8106FDD
 @ replacing .incbin "baserom.gba", 0x00106fdd, 0x8
         .byte 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
-        .global gUnknown_8106FE5
-gUnknown_8106FE5: @ 8106FE5
-	.incbin "baserom.gba", 0x106FE5, 0x2B
+  .global gTargetingData
+gTargetingData: @ 8106FE5
+@ replacing .incbin "baserom.gba", 0x106FE5, 0x2B
+        .byte TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET
+        .byte TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET
+        .byte TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET
+        .byte TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET
+        .byte TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+        .byte TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET
+
+        .byte 0x00, 0x00, 0x00
+        .string "pksdir0\0"
+        .string "pksdir0\0"
 
 	.global gUnknown_8107010
 gUnknown_8107010: @ 8107010
@@ -7948,7 +7965,7 @@ gUnknown_8107638: @ 8107638
 
 	.global gUnknown_810763C
 gUnknown_810763C: @ 810763C
-        .string "#c%c%s{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2}%c%s{END_COLOR_TEXT_2}\0"
 
 	.global gUnknown_8107645
 gUnknown_8107645: @ 8107645
@@ -8255,14 +8272,14 @@ gUnknown_810983C: @ 810983C
 
 	.global gUnknown_81098A4
 gUnknown_81098A4: @ 81098A4
-	.string "#c"
+	.string "{COLOR_2}"
         .byte 0x4
         .string "%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_81098AC
 gUnknown_81098AC: @ 81098AC
-        .string "%s#=%c#C"
+        .string "%s#=%c{COLOR_1}"
         .byte 0x4
         .string "%s{END_COLOR_TEXT_1}\0"
         .align 2,0
@@ -8285,12 +8302,12 @@ gUnknown_81098DC: @ 81098DC
 
 	.global gUnknown_81098E0
 gUnknown_81098E0: @ 81098E0
-        .string "#c%c%s%s{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2}%c%s%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_81098EC
 gUnknown_81098EC: @ 81098EC
-        .string "#c%c#:%s%s%s#;%c%2d/%2d{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2}%c#:%s%s%s#;%c%2d/%2d{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8109908
@@ -8303,7 +8320,7 @@ gUnknown_810990C: @ 810990C
 
 	.global gUnknown_8109910
 gUnknown_8109910: @ 8109910
-        .string "#c%c%s%s%s#=%c%2d/%2d{END_COLOR_TEXT_2}\0"
+        .string "{COLOR_2}%c%s%s%s#=%c%2d/%2d{END_COLOR_TEXT_2}\0"
         .align 2,0
 
 	.global gUnknown_8109928
@@ -8364,7 +8381,7 @@ gDummyScenarioText: @ 8109CA8
 
 	.global gUnknown_8109CC0
 gUnknown_8109CC0: @ 8109CC0
-        .string "#CW???{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 UNKNOWN_COLOR}???{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
 

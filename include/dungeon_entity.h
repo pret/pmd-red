@@ -3,7 +3,7 @@
 
 #include "constants/move.h"
 #include "item.h"
-#include "map.h"
+#include "position.h"
 
 struct DungeonActionContainer
 {
@@ -272,10 +272,10 @@ struct DungeonEntity
 
 enum EntityType
 {
-    ENTITY_NONE = 0,
-    ENTITY_POKEMON = 1,
-    ENTITY_TRAP = 2,
-    ENTITY_ITEM = 3
+    ENTITY_NONE,
+    ENTITY_POKEMON,
+    ENTITY_TRAP,
+    ENTITY_ITEM
 };
 
 enum MovementFlag
@@ -287,10 +287,11 @@ enum MovementFlag
 
 enum ShopkeeperMode
 {
-    SHOPKEEPER_FRIENDLY = 1,
+    SHOPKEEPER_NONE,
+    SHOPKEEPER_FRIENDLY,
     // These two modes trigger if an explosion damages the shopkeeper. The shopkeeper attacks the side that damaged it.
-    SHOPKEEPER_AGGRESSIVE_TO_WILD = 2,
-    SHOPKEEPER_AGGRESSIVE_TO_PLAYER = 3
+    SHOPKEEPER_AGGRESSIVE_TO_WILD,
+    SHOPKEEPER_AGGRESSIVE_TO_PLAYER
 };
 
 enum MovementAction
@@ -308,7 +309,7 @@ enum ClientType
 {
     CLIENT_TYPE_NONE = 0,
     CLIENT_TYPE_CLIENT = 1, // Used for mission clients that need rescuing.
-    CLIENT_TYPE_DONT_MOVE = 3 // Used for Diglett in the Skarmory boss fight.
+    CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
 };
 
 enum VisualFlag

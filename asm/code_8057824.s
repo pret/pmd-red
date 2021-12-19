@@ -4061,7 +4061,7 @@ DiveMoveAction:
 	adds r5, r2, 0
 	mov r8, r3
 	movs r6, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	bl IsTileWater
 	lsls r0, 24
 	cmp r0, 0
@@ -9264,7 +9264,7 @@ TrapbustOrbAction:
 	movs r0, 0
 	str r0, [sp, 0x10]
 	adds r0, r1, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r4, r0, 0
 	bl IsBossBattle
 	lsls r0, 24
@@ -10680,12 +10680,12 @@ _0805CCD0:
 	b _0805CDC2
 _0805CCD8:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	bl IsTileWater
 	b _0805CDEC
 _0805CCE4:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r4, r0, 0
 	bl IsTileWater
 	lsls r0, 24
@@ -10703,7 +10703,7 @@ _0805CD04:
 	b _0805CB6E
 _0805CD06:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
 	bne _0805CD14
@@ -14663,7 +14663,7 @@ _0805EE42:
 	b _0805EF52
 _0805EE4E:
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0xD
@@ -34665,7 +34665,7 @@ sub_8068F80:
 	cmp r5, 0
 	beq _08068FCC
 	adds r0, r5, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r0, [r0]
 	lsrs r0, 5
 	movs r1, 0x1
@@ -34703,7 +34703,7 @@ sub_8068FE0:
 	asrs r1, 16
 	mov r9, r1
 	ldr r7, [r0, 0x70]
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	adds r4, r0, 0
 	ldr r0, [sp, 0x74]
 	cmp r0, 0
@@ -37559,7 +37559,7 @@ sub_806A5B8:
 	b _0806A6D2
 _0806A5CE:
 	adds r0, r6, 0
-	bl sub_8045128
+	bl GetMapEntityForDungeonEntity
 	ldrh r0, [r0]
 	movs r1, 0x3
 	ands r1, r0

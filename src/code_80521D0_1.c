@@ -4,6 +4,7 @@
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 #include "dungeon_random.h"
+#include "dungeon_util.h"
 #include "friend_area.h"
 #include "map.h"
 #include "pokemon.h"
@@ -11,7 +12,6 @@
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *sub_8085680(u32);
 extern char gUnknown_202E038[0x50];
-extern struct DungeonGlobalData *gDungeonGlobalData;
 extern u32 gUnknown_202EDC8;
 
 extern u32 gUnknown_81062A8;
@@ -95,7 +95,6 @@ extern void sub_8042B0C(struct DungeonEntity *);
 extern void SetFacingDirection(struct DungeonEntity *, u32);
 extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 EntityExists(struct DungeonEntity *);
 extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct DungeonEntity *);
 extern u8 sub_8083E74(u32);
