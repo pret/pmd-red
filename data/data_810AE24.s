@@ -3272,12 +3272,12 @@ gUnknown_8116148: @ 8116148
 
 	.global gInvalidityText
 gInvalidityText: @ 811615C
-        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUndefineText
 gUndefineText: @ 811616C
-        .string "{COLOR_1 UNKNOWN_COLOR}undefine{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}undefine{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_811617C
@@ -3783,7 +3783,7 @@ gUnknown_8117000: @ 8117000
         .4byte 0x81170ac
         .4byte 0x811709c
 
-        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "{COLOR_1 YELLOW_3}scene{END_COLOR_TEXT_1}\0"
         .align 2,0
@@ -4347,7 +4347,7 @@ gUnknown_8118250: @ 8118250
 
 	.global gGroundLives_InvalidityText
 gGroundLives_InvalidityText: @ 811825C
-        .string "{COLOR_1 UNKNOWN_COLOR}invalidity{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global GroundLives_ActionText

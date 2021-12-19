@@ -8381,7 +8381,7 @@ gDummyScenarioText: @ 8109CA8
 
 	.global gUnknown_8109CC0
 gUnknown_8109CC0: @ 8109CC0
-        .string "{COLOR_1 UNKNOWN_COLOR}???{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}???{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
 

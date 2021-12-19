@@ -579,7 +579,7 @@ gUnknown_80E0760: @ 80E0760
 
 	.global gUnknown_80E0778
 gUnknown_80E0778: @ 80E0778
-        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 ITEM_COLOR}Bonsly Doll{END_COLOR_TEXT_1}!\n"
+        .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!\n"
         .string "{CENTER_ALIGN}It has been placed outside your\n"
         .string "{CENTER_ALIGN}rescue team base.\0"
         .align 2,0
