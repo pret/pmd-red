@@ -410,7 +410,7 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CWEND_text
         CWEND_text:
-        .string "{COLOR_1 UNKNOWN_COLOR}END{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}END{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CNLAST_text
@@ -425,7 +425,7 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CISTART_text
         CISTART_text:
-        .string "{COLOR_1 ITEM_COLOR}START{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 GREEN_2}START{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_80B71E4

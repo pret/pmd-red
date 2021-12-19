@@ -2518,7 +2518,7 @@ gUnknown_80DA100:
     .string "Your reward...\n"
     .string "Promised...{EXTRA_MSG}"
     .string " Zzz... Urr!\n"
-    .string "{COLOR_1 ITEM_COLOR}Bonsly Doll{END_COLOR_TEXT_1}...\0"
+    .string "{COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80DA204
@@ -2623,7 +2623,7 @@ gUnknown_80DA688:
     .string "I promised you a reward for completing\n"
     .string "the training courses!{EXTRA_MSG}"
     .string " So... Here it is!{WAIT_PRESS}\n"
-    .string "My {COLOR_1 ITEM_COLOR}Bonsly Doll{END_COLOR_TEXT_1}!{EXTRA_MSG}"
+    .string "My {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!{EXTRA_MSG}"
     .string " Isn{APOSTROPHE}t it smashing? Hey?!\0"
     .align 2, 0
 

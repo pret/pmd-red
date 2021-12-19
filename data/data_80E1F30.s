@@ -36,7 +36,7 @@ gUnknown_80E1F80: @ 80E1F80
 
 	.global gUnknown_80E1F94
 gUnknown_80E1F94: @ 80E1F94
-        .string "{COLOR_1 UNKNOWN_COLOR}???{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 RED_2}???{END_COLOR_TEXT_1}\0"
         .align 2,0
         .string "pksdir0\0"
 

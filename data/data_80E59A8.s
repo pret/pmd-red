@@ -185,7 +185,7 @@ gUnknown_80E61C0: @ 80E61C0
 
 	.global gUnknown_80E61E4
 gUnknown_80E61E4: @ 80E61E4
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
         .string "will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
@@ -214,13 +214,13 @@ gUnknown_80E62C4: @ 80E62C4
 	.global gUnknown_80E6314
 gUnknown_80E6314: @ 80E6314
         .string "You received\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
+        .string "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E6358
 gUnknown_80E6358: @ 80E6358
-        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 ITEM_COLOR}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\0"
+        .string "You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 @ Trade Items Link Errors
