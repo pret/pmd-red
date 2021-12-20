@@ -173,6 +173,11 @@ clean-tools:
 tidy:
 	$(RM) -f $(ROM) $(ELF) $(MAP)
 	$(RM) -r $(BUILD_DIR)
+	$(RM) -f $(ITEM_DATA)
+	$(RM) -f $(MOVE_DATA)
+	$(RM) -f $(POKEMON_SPECIES)
+	$(RM) -f $(DUNGEON_FLOOR)
+	$(RM) -f $(DUNGEON_POKEMON)
 	@$(MAKE) clean -C libagbsyscall
 
 define scaninc
