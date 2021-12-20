@@ -178,6 +178,7 @@ tidy:
 	$(RM) -f $(POKEMON_SPECIES)
 	$(RM) -f $(DUNGEON_FLOOR)
 	$(RM) -f $(DUNGEON_POKEMON)
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	@$(MAKE) clean -C libagbsyscall
 
 define scaninc
