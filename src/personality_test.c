@@ -597,11 +597,11 @@ void RevealPersonality(void)
   currentNature = gUnknown_203B400->playerNature;
 
   for(counter = 0; counter < NUM_PERSONALITIES - 1; counter++){
-    currentNature = currentNature++;
+    currentNature++;
 
     // Wraparound check
-    if (currentNature > NUM_PERSONALITIES - 1) {
-      currentNature = 0;
+    if (currentNature > QUIRKY) {
+      currentNature = HARDY;
     }
 
     if (gUnknown_203B400->NatureTotals[currentNature] > gUnknown_203B400->NatureTotals[gUnknown_203B400->playerNature]) {
