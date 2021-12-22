@@ -380,7 +380,7 @@ SECTIONS {
         src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu.o(.rodata);
         data/data_80E7D40.o(.rodata);
-        data/pokemon_mail.o(.rodata);
+        src/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
