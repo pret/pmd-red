@@ -1099,7 +1099,7 @@ _08043318:
 	movs r0, 0xA
 	strh r0, [r1]
 	ldr r0, [r2]
-	bl sub_80840D8
+	bl SetDungeonRNG
 _08043346:
 	ldr r0, [r4]
 	ldr r1, _080434C4

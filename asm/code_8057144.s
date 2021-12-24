@@ -218,7 +218,7 @@ sub_805727C:
 _080572D2:
 	adds r0, r4, 0
 _080572D4:
-	bl sub_8084160
+	bl RollPercentChance_2
 	lsls r0, 24
 	lsrs r4, r0, 24
 	b _080572E0
@@ -276,7 +276,7 @@ _08057324:
 _08057336:
 	lsls r0, r4, 1
 _08057338:
-	bl sub_8084160
+	bl RollPercentChance_2
 	lsls r0, 24
 	lsrs r0, 24
 _08057340:

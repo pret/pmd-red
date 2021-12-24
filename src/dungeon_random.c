@@ -3,6 +3,11 @@
 
 extern u32 gDungeonRngState;
 
+void SetDungeonRNG(u32 value)
+{
+    gDungeonRngState = (value | 1);
+}
+
 s32 DungeonRandom(void)
 {
     gDungeonRngState = 1566083941 * gDungeonRngState + 1;
