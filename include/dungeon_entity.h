@@ -2,6 +2,7 @@
 #define GUARD_DUNGEON_ENTITY_H
 
 #include "constants/move.h"
+#include "global.h"
 #include "item.h"
 #include "position.h"
 

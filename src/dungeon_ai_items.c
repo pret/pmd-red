@@ -3,6 +3,7 @@
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
+#include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_1.h"
@@ -24,6 +25,7 @@
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
 #define HELD_ITEM_TOOLBOX_INDEX 0x81
+#define RANGED_ATTACK_RANGE 10
 
 enum ItemTargetFlag
 {
@@ -32,9 +34,9 @@ enum ItemTargetFlag
 };
 
 extern s32 CalculateFacingDir(struct Position*, struct Position*);
-extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
+extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u32);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
-extern void TargetThrownItem(struct DungeonEntity*, struct DungeonEntity*, struct ItemSlot*, u8, bool8);
+extern bool8 IsTargetStraightAhead(struct DungeonEntity*, struct DungeonEntity*, s32, s32);
 
 extern s32 gNumPotentialTargets;
 extern u32 gPotentialTargetWeights[NUM_DIRECTIONS];
@@ -284,7 +286,7 @@ void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFla
         struct DungeonEntity* targetPokemon = gDungeonGlobalData->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
-            u8 targetingFlags;
+            s32 targetingFlags;
             if (thrownAIFlag == ITEM_AI_FLAG_TARGET_ALLY)
             {
                 if (CanTarget(pokemon, targetPokemon, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK)
@@ -355,5 +357,74 @@ void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, s
                 gNumPotentialTargets++;
             }
         }
+    }
+}
+
+void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, struct ItemSlot *item, s32 targetingFlags, bool8 ignoreRollChance)
+{
+    s32 posDiffX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 posDiffY;
+    s32 targetDirection;
+    posDiffX = posDiffX < 0 ? -posDiffX : posDiffX;
+    posDiffY = pokemon->posWorld.y - targetPokemon->posWorld.y;
+    posDiffY = posDiffY < 0 ? -posDiffY : posDiffY;
+    if (pokemon->entityData->itemStatus == ITEM_STATUS_NONE)
+    {
+        s32 maxPosDiff = posDiffY < posDiffX ? posDiffX : posDiffY;
+        if (maxPosDiff > RANGED_ATTACK_RANGE)
+        {
+            return;
+        }
+    }
+    targetDirection = -1;
+    if (posDiffX == posDiffY)
+    {
+        if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y < targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_SOUTHEAST;
+        }
+        else if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_NORTHEAST;
+        }
+        else if (pokemon->posWorld.x > targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_NORTHWEST;
+        }
+        else
+        {
+            targetDirection = DIRECTION_SOUTHWEST;
+        }
+    }
+    else
+    {
+        if (pokemon->posWorld.x == targetPokemon->posWorld.x && pokemon->posWorld.y < targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_SOUTH;
+        }
+        else if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y == targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_EAST;
+        }
+        else if (pokemon->posWorld.x == targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_NORTH;
+        }
+        else if (pokemon->posWorld.x > targetPokemon->posWorld.x && pokemon->posWorld.y == targetPokemon->posWorld.y)
+        {
+            targetDirection = DIRECTION_WEST;
+        }
+    }
+
+    if (targetDirection > -1 && !gTargetAhead[targetDirection] && IsTargetStraightAhead(pokemon, targetPokemon, targetDirection, RANGED_ATTACK_RANGE))
+    {
+        u32 itemWeight;
+        u32 *targetWeight;
+        gTargetAhead[targetDirection] = TRUE;
+        gPotentialTargetDirections[gNumPotentialTargets] = targetDirection;
+        targetWeight = &gPotentialTargetWeights[gNumPotentialTargets];
+        itemWeight = !ignoreRollChance ? EvaluateItem(targetPokemon, item, targetingFlags) : 100;
+        *targetWeight = itemWeight;
+        gNumPotentialTargets++;
     }
 }
