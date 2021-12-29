@@ -51,7 +51,7 @@ u32 sub_8075818(struct DungeonEntity *entity)
     {
         tile = GetMapEntityForDungeonEntity(entity);
         if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
-            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
+            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
                 return 1;
         subEntity = tile->mapObject;
         if(subEntity != NULL)
@@ -95,7 +95,7 @@ flag_check:
                     {
                         if(!(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
                         {
-                            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_UNK_1)))
+                            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
                             {
                                 if(entityData->isEnemy)
                                     break;

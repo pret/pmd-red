@@ -218,9 +218,11 @@ SECTIONS {
         src/dungeon_pokemon_attributes_1.o(.text);
         asm/code_80718D8.o(.text);
         src/dungeon_ai_items.o(.text);
-        asm/code_8073B78.o(.text);
+        asm/code_8073CF0.o(.text);
         src/dungeon_movement.o(.text);
         asm/code_8075BA4.o(.text);
+        src/dungeon_ai_attack.o(.text);
+        asm/code_807CABC.o(.text);
         src/dungeon_range.o(.text);
         asm/code_808333C.o(.text);
         src/dungeon_random.o(.text);

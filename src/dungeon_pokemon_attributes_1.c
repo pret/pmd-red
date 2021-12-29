@@ -9,6 +9,7 @@
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
+#include "pokemon_3.h"
 
 extern s16 gItemMasterMinWildLevel;
 
@@ -26,9 +27,9 @@ extern s32 GetMovePower(struct PokemonMove *move);
 bool8 CanSeeInvisible(struct DungeonEntity *pokemon)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if(pokemonData->eyesightStatus != EYESIGHT_STATUS_EYEDROPS)
+    if (pokemonData->eyesightStatus != EYESIGHT_STATUS_EYEDROPS)
     {
-        if(!HasItem(pokemon, ITEM_ID_GOGGLE_SPECS))
+        if (!HasItem(pokemon, ITEM_ID_GOGGLE_SPECS))
             return FALSE;
         else
             return TRUE;
@@ -63,7 +64,7 @@ void LoadIQSkills(struct DungeonEntity *pokemon)
   u8 *iVar2;
   s32 IQSkill;
   struct DungeonEntityData *pokemonData;
-  
+
   pokemonData = pokemon->entityData;
   if (pokemonData->isEnemy) {
     iVar2 = pokemonData->IQSkillsEnabled;
@@ -82,8 +83,8 @@ void LoadIQSkills(struct DungeonEntity *pokemon)
     pokemonData->IQSkillsEnabled[2] = 0;
     for(IQSkill = IQ_SKILL_TYPE_ADVANTAGE_MASTER; IQSkill < NUM_IQ_SKILLS; IQSkill++)
     {
-      if (HasIQForSkill(pokemonData->IQ,IQSkill) && 
-            IsIQSkillSet(pokemonData->IQSkillsSelected, 1 << IQSkill)) 
+      if (HasIQForSkill(pokemonData->IQ,IQSkill) &&
+            IsIQSkillSet(pokemonData->IQSkillsSelected, 1 << IQSkill))
         {
             SetIQSkill(pokemonData->IQSkillsEnabled,IQSkill);
       }
@@ -95,7 +96,7 @@ bool8 CanSeeTeammate(struct DungeonEntity * pokemon)
 {
   struct DungeonEntity *teamMember;
   s32 memberIdx;
-  
+
   if (pokemon->entityData->isEnemy) {
       return FALSE;
   }
@@ -132,13 +133,13 @@ s32 CalculateMovePower(struct DungeonEntity *pokemon, struct PokemonMove *pokeMo
 bool8 ToolboxEnabled(struct DungeonEntityData *pokemon)
 {
     if(!IsToolboxEnabled(pokemon->entityID))
-        return FALSE; 
+        return FALSE;
     return TRUE;
 }
 
 static inline bool8 sub_8071A8C_sub(struct DungeonEntityData *pokemonData)
 {
-    if(pokemonData->joinLocation == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON || 
+    if(pokemonData->joinLocation == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
         pokemonData->joinLocation == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     else

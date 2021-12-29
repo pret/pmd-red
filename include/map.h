@@ -42,8 +42,8 @@ struct MapRoom
 enum TileType
 {
     TILE_TYPE_FLOOR = 1 << 0,
-    TILE_TYPE_UNK_1 = 1 << 1,
-    TILE_TYPE_LIQUID = 1 << 2, // Water or lava depending on the dungeon.
+    TILE_TYPE_LIQUID = 1 << 1, // Water or lava depending on the dungeon.
+    TILE_TYPE_UNK_2 = 1 << 2,
     TILE_TYPE_ROOM_EXIT = 1 << 3,
     TILE_TYPE_MAP_EDGE = 1 << 4,
     TILE_TYPE_SHOP = 1 << 5,
