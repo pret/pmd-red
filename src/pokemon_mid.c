@@ -642,7 +642,7 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
    *a1 = gLevelCurrentData[a3];
 }
 
-u8* sub_808E07C(u8* a1, u16* a2)
+u8* sub_808E07C(u8* a1, u16* moveID)
 {
     u32 r1 = *a1++;
     u32 r3;
@@ -657,13 +657,13 @@ u8* sub_808E07C(u8* a1, u16* a2)
     // wrong order
     r1 &= 0x7f;
     r3 &= 0x7f;
-    *a2 = (r1 << 7) | r3;
+    *moveID = (r1 << 7) | r3;
 #else
     {
         register u32 mask asm("r0") = 0x7f;
         r3 &= mask;
         r1 &= mask;
-        *a2 = (r1 << 7) | r3;
+        *moveID = (r1 << 7) | r3;
     }
 #endif
     return a1;
@@ -672,7 +672,7 @@ u8* sub_808E07C(u8* a1, u16* a2)
 s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
 {
   u8* stream;
-  u16 result;  // struct?
+  u16 moveID;  // moveID
   s32 count;
   register s32 _species asm("r2");  // weird regalloc
 
@@ -690,7 +690,7 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
     u8 v12;
 
     // read from stream
-    stream = sub_808E07C(stream, &result);
+    stream = sub_808E07C(stream, &moveID);
     v12 = *stream++;
 
     if (v12 > a3)
@@ -699,14 +699,14 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
       bool8 cond = 1;
 
       // NOTE: these moves require IQ to be > 333
-      if ((result == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = 0;
-      if ((result == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = 0;
-      if ((result == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = 0;
-      if ((result == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = 0;
+      if ((moveID == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = 0;
+      if ((moveID == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = 0;
+      if ((moveID == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = 0;
+      if ((moveID == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = 0;
 
       if (cond) {
         if (count < 16) {
-          *a1++ = result;
+          *a1++ = moveID;
           ++count;
         }
       }
@@ -732,7 +732,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
     ptr = sub_808E07C(ptr, &result);
     ptr++;
     if (moveID == result) {
-      return 1;
+      return TRUE;
     }
   }
 
@@ -740,10 +740,10 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   while (*ptr) {
     ptr = sub_808E07C(ptr, &result2);
     if (result2 == moveID) {
-      return 1;
+      return TRUE;
     }
   }
-  return 0;
+  return FALSE;
 }
 
 
@@ -899,12 +899,12 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
 
 void sub_808E490(struct PokemonMove* a1, s16 species)
 {
-    u16 buffer[0x10];
+    u16 buffer[0x10]; // of moveIDs
     s32 i;
     s32 count = sub_808E0AC(buffer, species, 1, 999);
     if (count == 0) {
         count = 1;
-        buffer[0] = 408;
+        buffer[0] = MOVE_ITEM_TOSS;
     }
 
     i = 0;

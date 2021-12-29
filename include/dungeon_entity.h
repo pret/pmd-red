@@ -34,7 +34,7 @@ struct DungeonEntityData
     /* 0x9 */ u8 level;
     /* 0xA */ u8 partyIndex; // Leader is 0, partner is 1, etc.
     u8 fillB;
-    /* 0xC */ u16 IQ;
+    /* 0xC */ s16 IQ;
     /* 0xE */ s16 HP;
     /* 0x10 */ s16 maxHP;
     // Bosses have higher HP than normal for their level. This is the max HP they would normally have given their level.
@@ -60,7 +60,7 @@ struct DungeonEntityData
     /* 0x30 */ s32 specialAttackMultiplier;
     /* 0x34 */ s32 defenseMultiplier;
     /* 0x38 */ s32 specialDefenseMultiplier;
-    u8 fill3C[0x3E - 0x3C];
+    /* 0x3C */ s16 hiddenPowerPower;
     /* 0x3E */ u8 hiddenPowerType;
     u8 fill3F;
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
@@ -151,7 +151,7 @@ struct DungeonEntityData
     u8 fillF3;
     /* 0xF4 */ bool8 grudgeStatus;
     /* 0xF5 */ bool8 exposedStatus;
-    u8 fillF7;
+    u8 fillF6;
     /* 0xF7 */ bool8 isBoss;
     u8 fillF8[0xFA - 0xF8];
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.

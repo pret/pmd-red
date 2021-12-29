@@ -1865,15 +1865,4 @@ _080840D0: .4byte 0xffff0000
 _080840D4: .4byte 0x00ffffff
 	thumb_func_end sub_80840A4
 
-	thumb_func_start sub_80840D8
-sub_80840D8:
-	ldr r2, _080840E4
-	movs r1, 0x1
-	orrs r1, r0
-	str r1, [r2]
-	bx lr
-	.align 2, 0
-_080840E4: .4byte gDungeonRngState
-	thumb_func_end sub_80840D8
-
 	.align 2, 0

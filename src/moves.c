@@ -246,7 +246,7 @@ u8 GetMoveHitCount(struct PokemonMove *move)
     return gMovesData[move->moveID].hitCount;
 }
 
-s16 GetMovePower(struct PokemonMove *move)
+s32 GetMovePower(struct PokemonMove *move)
 {
     return gMovesData[move->moveID].power;
 }

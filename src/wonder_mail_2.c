@@ -2,6 +2,7 @@
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
+#include "pokemon_mail.h"
 #include "memory.h"
 #include "text.h"
 #include "menu.h"
@@ -61,7 +62,7 @@ struct unkStruct_203B2D4
     /* 0x4 */ u8 currMailIndex;
     s32 unk8;
     s32 unkC;
-    u8 *unk10[4];
+    const u8 *unk10[4];
     u32 unk20;
     u32 unk24;
     struct UnkTextStruct2 unk28[4];
@@ -161,21 +162,19 @@ extern u8 gUnknown_80DFC04[];
 extern u8 gUnknown_80DFBE8[];
 extern struct UnkTextStruct2 gUnknown_80DFC74;
 extern struct UnkTextStruct2 gUnknown_80DFC5C;
-extern char *GetPokemonMailHeadline(u8 index);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
-extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s32 sub_8013800(u32 *, s32);
 
 extern void sub_802BCC4(void);
 extern void sub_802BB14(u32);
 extern void sub_801317C(u32 *);
-char *GetPokemonMailText(u8 index);
 extern u8 HasNoMailinMailbox(void);
 extern void sub_802BF30(void);
 extern void CreateMailMenu(void);
@@ -756,7 +755,7 @@ void sub_802BC7C(void)
 
 void sub_802BCC4(void)
 {
-  char *mailTextPtr;
+  const char *mailTextPtr;
 
   mailTextPtr = GetPokemonMailText(gUnknown_203B2D4->currMailIndex);
   gUnknown_203B2D4->unkC = 0;

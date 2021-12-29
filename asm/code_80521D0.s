@@ -5863,7 +5863,7 @@ sub_8055640:
 	lsrs r4, 24
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8071A44
+	bl CalculateMovePower
 	mov r8, r0
 	adds r0, r5, 0
 	bl GetMoveCriticalHitChance
@@ -5917,7 +5917,7 @@ sub_80556BC:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r1, r5, 0
-	bl sub_8071A44
+	bl CalculateMovePower
 	mov r8, r0
 	adds r0, r5, 0
 	bl GetMoveCriticalHitChance

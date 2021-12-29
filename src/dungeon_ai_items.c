@@ -33,7 +33,6 @@ enum ItemTargetFlag
 
 extern s32 CalculateFacingDir(struct Position*, struct Position*);
 extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u8);
-extern bool8 ToolboxEnabled(struct DungeonEntityData*);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
 extern void TargetThrownItem(struct DungeonEntity*, struct DungeonEntity*, struct ItemSlot*, u8, bool8);
 
