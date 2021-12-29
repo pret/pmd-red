@@ -1,4 +1,6 @@
 #include "global.h"
+#include "pokemon_3.h"
+
 #include "pokemon.h"
 #include "random.h"
 #include "constants/iq_skill.h"
@@ -45,7 +47,6 @@ extern s16 gUnknown_810AC66; // 0x8
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
 
-extern bool8 IsIQSkillSet(u8 *, u32);
 extern void SetIQSkill(u8 *, u32);
 extern void AddSprite(u16 *, u32, u32, u32);
 
@@ -613,22 +614,22 @@ void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer)
   SetIQSkill(param_1, IQ_SKILL_COURSE_CHECKER);
   SetIQSkill(param_1, IQ_SKILL_ITEM_MASTER);
 
-  // Flag is usually enabled for Boss fights..
+  // Flag is usually enabled for Boss fights.
   if (enableSelfCurer) {
     SetIQSkill(param_1, IQ_SKILL_SELF_CURER);
   }
 }
 
-bool8 IsIQSkillSet(u8 *param_1, u32 param_2)
+bool8 IsIQSkillSet(u8 *IQSkillsEnabled, u32 IQSkill)
 {
-
-  if ((((param_1[0] & param_2) == 0) &&
-       ((param_1[1] & param_2 >> 8) == 0)) &&
-       ((param_1[2] & param_2 >> 0x10) == 0))
+  if (!(IQSkillsEnabled[0] & IQSkill) &&
+      !(IQSkillsEnabled[1] & IQSkill >> 8) &&
+      !(IQSkillsEnabled[2] & IQSkill >> 16))
   {
     return FALSE;
   }
-  else {
+  else
+  {
     return TRUE;
   }
 }

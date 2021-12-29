@@ -1,8 +1,8 @@
 #ifndef GUARD_DUNGEON_ENTITY_H
 #define GUARD_DUNGEON_ENTITY_H
 
+#include "constants/global.h"
 #include "constants/move.h"
-#include "global.h"
 #include "item.h"
 #include "position.h"
 

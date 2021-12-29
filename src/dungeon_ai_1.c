@@ -3,8 +3,8 @@
 
 #include "constants/status.h"
 #include "constants/targeting.h"
+#include "dungeon_pokemon_attributes_1.h"
 
-extern bool8 CanSeeInvisible(struct DungeonEntity*);
 extern bool8 gTargetingData[3][2][2][2];
 
 u8 CanTarget(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
