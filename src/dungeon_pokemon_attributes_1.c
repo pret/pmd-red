@@ -1,19 +1,19 @@
 #include "global.h"
-#include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
-#include "dungeon_util.h"
-#include "pokemon.h"
 
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
+#include "dungeon_global_data.h"
+#include "dungeon_items.h"
+#include "dungeon_util.h"
+#include "pokemon.h"
 #include "pokemon_3.h"
 
 extern s16 gItemMasterMinWildLevel;
 
-extern u8 HasItem(struct DungeonEntity *, u32);
 
 extern bool8 IsIQSkillSet(u8 *, u32);
 extern void SetIQSkill(u8 *param_1, u32 skillIndex);

@@ -192,6 +192,8 @@ SECTIONS {
         asm/code_80450F8.o(.text);
         src/dungeon_visibility.o(.text);
         asm/code_8045A00.o(.text);
+        src/dungeon_items.o(.text);
+        asm/code_8046CE4.o(.text);
         src/code_8048480.o(.text);
         asm/code_8048480.o(.text);
         src/dungeon_map_access.o(.text);
