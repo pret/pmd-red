@@ -2,7 +2,7 @@
 #include "moves.h"
 
 #include "file_system.h"
-#include "constants/move_id.h"
+#include "moves.h"
 
 struct MoveDataFile
 {

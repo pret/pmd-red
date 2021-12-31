@@ -7,6 +7,7 @@
 #include "input.h"
 #include "memory.h"
 #include "main_menu.h"
+#include "moves.h"
 #include "music.h"
 #include "play_time.h"
 #include "save.h"
@@ -23,7 +24,6 @@ extern void sub_8097670(void);
 extern void LoadGameOptions(void);
 extern void sub_8094C14(void);
 extern void LoadItemParameters(void);
-extern void LoadWazaParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);
 extern void sub_800CD64(u32, u32);
