@@ -1,5 +1,7 @@
 #include "global.h"
 #include "debug_menu.h"
+#include "ds_menus.h"
+#include "load_screen.h"
 #include "main_menu.h"
 #include "adventure_log.h"
 #include "input.h"
@@ -22,47 +24,13 @@
 // Deletes the Save
 
 
-extern void sub_8094C14(void);
-extern void sub_8099690(u32);
-extern void sub_8036FDC(s32);
-extern void CreateWirelessCommsMenu(void);
-extern void CreateFriendRescueMenu(void);
-extern void CreateDualSlotMenu(void);
-extern void CreateWonderMailMenu(void);
-extern void CreateLoadScreen(u32);
-extern void CreateRescuePasswordMenu(u32);
-extern void CreateSaveMenu(u32);
-extern u32 UpdateMainMenu(void);
-extern s32 UpdateLoadScreenMenu(void);
-extern s32 UpdateFriendRescueMenu(void);
-extern s32 UpdateWonderMailMenu(void);
-extern s32 UpdateDualSlotMenu(void);
-extern s32 UpdateWirelessCommsMenu(void);
-extern s32 UpdateRescuePasswordMenu(void);
-extern s32 sub_80383D4(void);
-extern s32 UpdateSaveMenu(void);
-extern void CleanLoadScreen(void);
-extern void sub_80370D4(void);
-extern void CleanFriendRescueMenu(void);
-extern void CleanWonderMailMenu(void);
-extern void CleanDualSlotMenu(void);
-extern void CleanWirelessCommsMenu(void);
-extern void CleanRescuePasswordMenu(void);
-extern void sub_80383A8(void);
-extern void CleanSaveMenu(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
-extern u8 sub_803D0D8();
-extern s32 sub_8011C34();
-extern s32 sub_8095324(u32);
-
-void CleanMainMenu(void);
-void DrawMainMenu(void);
-s32 sub_8035DB4(u32);
-void sub_803623C(void);
-bool8 SetMainMenuText();
-void SetMainMenuItems();
-void sub_8035DA0(void);
+struct unkStruct_Menu
+{
+    // size 0x50;
+    u8 fil0[0x4C];
+    u8 unk4C;
+    u8 fill4D[0x50 - 0x4D];
+};
 
 struct unkStruct_203B34C
 {
@@ -90,17 +58,73 @@ EWRAM_DATA u32 gUnknown_203B350;
 EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
 
 
-extern const char NewGame_80E5A20[];
-extern const char AdventureLog_80E5A10[];
-extern const char WonderMail_80E5A54[];
-extern const char Continue_80E5AF0[];
-extern const char DeleteSaveData_80E5ADC[];
-extern const char FriendRescue_80E5ACC[];
-extern const char TradeItems_80E5AC0[];
-extern const char ReviveTeam_80E5C0C[];
-extern const char SendItems_80E5C90[];
-extern const char ReceiveItems_80E5C80[];
-extern const char AwaitingRescue_80E5B7C[];
+extern void sub_8094C14(void);
+extern void sub_8099690(u32);
+extern void sub_8036FDC(s32);
+extern void CreateFriendRescueMenu(void);
+extern void CreateWonderMailMenu(void);
+extern void CreateRescuePasswordMenu(u32);
+extern void CreateSaveMenu(u32);
+extern u32 UpdateMainMenu(void);
+extern s32 UpdateFriendRescueMenu(void);
+extern s32 UpdateWonderMailMenu(void);
+extern s32 UpdateRescuePasswordMenu(void);
+extern s32 sub_80383D4(void);
+extern s32 UpdateSaveMenu(void);
+extern void sub_80370D4(void);
+extern void CleanFriendRescueMenu(void);
+extern void CleanWonderMailMenu(void);
+extern void CleanRescuePasswordMenu(void);
+extern void sub_80383A8(void);
+extern void CleanSaveMenu(void);
+extern u8 sub_8012FD8(u32 *);
+extern void sub_8013114(u32 *, s32 *);
+extern u8 sub_803D0D8();
+extern s32 sub_8011C34();
+extern s32 sub_8095324(u32);
+extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
+extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
+
+void CleanMainMenu(void);
+void DrawMainMenu(void);
+s32 sub_8035DB4(u32);
+void sub_803623C(void);
+bool8 SetMainMenuText();
+void SetMainMenuItems();
+void sub_8035DA0(void);
+
+static const char NewGame_80E5A20[];
+static const char AdventureLog_80E5A10[];
+static const char WonderMail_80E5A54[];
+static const char Continue_80E5AF0[];
+static const char DeleteSaveData_80E5ADC[];
+static const char FriendRescue_80E5ACC[];
+static const char TradeItems_80E5AC0[];
+static const char ReviveTeam_80E5C0C[];
+static const char SendItems_80E5C90[];
+static const char ReceiveItems_80E5C80[];
+static const char AwaitingRescue_80E5B7C[];
+static const u8 sUnknown_80E5CE4[];
+static const u8 sUnknown_80E5CE8[];
+static const u8 sUnknown_80E5D24[];
+static const u8 sUnknown_80E5D60[];
+static const u8 sUnknown_80E5D88[];
+static const u8 sUnknown_80E5DB8[];
+static const u8 sUnknown_80E5DCC[];
+static const u8 sUnknown_80E5E08[];
+static const u8 sUnknown_80E5E34[];
+static const u8 sUnknown_80E5EA0[];
+static const u8 sUnknown_80E5E74[];
+static const u8 sUnknown_80E5EF8[];
+static const u8 sUnknown_80E5ED4[];
+static const u8 sUnknown_80E5F58[];
+static const u8 sUnknown_80E5F34[];
+static const u8 sUnknown_80E5FB0[];
+static const u8 sUnknown_80E5F98[];
+static const u8 sUnknown_80E5FE4[];
+static const u8 sUnknown_80E6008[];
+static const u8 sUnknown_80E6048[];
+static const u8 sUnknown_80E6070[];
 
 const struct UnkTextStruct2 gUnknown_80E59A8 = {
    0x00, 0x00, 0x00, 0x00,
@@ -186,11 +210,10 @@ const struct MenuItem gUnknown_80E5A90[] =
     {NULL, 0xffdd},
 };
 
-const char TradeItems_80E5AC0[] = "Trade Items";
-const char FriendRescue_80E5ACC[] = "Friend Rescue";
-const char DeleteSaveData_80E5ADC[] = "Delete Save Data";
-const char Continue_80E5AF0[] = "Continue";
-
+static const char TradeItems_80E5AC0[] = "Trade Items";
+static const char FriendRescue_80E5ACC[] = "Friend Rescue";
+static const char DeleteSaveData_80E5ADC[] = "Delete Save Data";
+static const char Continue_80E5AF0[] = "Continue";
 
 const struct MenuItem gUnknown_80E5AFC[] =
 {
@@ -281,8 +304,8 @@ const struct MenuItem gUnknown_80E5C68[] =
     {NULL, 0xffdd},
 };
 
-const char ReceiveItems_80E5C80[] = "Receive Items";
-const char SendItems_80E5C90[] = "Send Items";
+static const char ReceiveItems_80E5C80[] = "Receive Items";
+static const char SendItems_80E5C90[] = "Send Items";
 
 const struct MenuItem gUnknown_80E5C9C[] = 
 {
@@ -291,32 +314,117 @@ const struct MenuItem gUnknown_80E5C9C[] =
     {NULL, 0xffdd},
 };
 
-extern const struct UnkTextStruct2 gUnknown_80E5CB4;
-extern const struct MenuItem gUnknown_80E5CCC[];
-extern const struct MenuItem gUnknown_80E5D0C[];
-extern const struct MenuItem gUnknown_80E5D48[];
-extern const struct MenuItem gUnknown_80E5DA0[];
-extern const struct MenuItem gUnknown_80E5DF0[];
-extern const struct MenuItem gUnknown_80E5E5C[];
-extern const struct MenuItem gUnknown_80E5EBC[];
-extern const struct MenuItem gUnknown_80E5F1C[];
-extern const struct MenuItem gUnknown_80E5F80[];
-extern const struct MenuItem gUnknown_80E5FCC[];
-extern const struct MenuItem gUnknown_80E6030[];
-
-
-
-struct unkStruct_Menu
-{
-    // size 0x50;
-    u8 fil0[0x4C];
-    u8 unk4C;
-    u8 fill4D[0x50 - 0x4D];
+const struct UnkTextStruct2 gUnknown_80E5CB4 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x0F, 0x00,
+   0x1A, 0x03,
+   0x03, 0x00,
+   NULL
 };
 
-extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
-extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
+const struct MenuItem gUnknown_80E5CCC[] = 
+{
+    {sUnknown_80E5CE8, 0xffde},
+    {sUnknown_80E5CE4, 0xffde},
+    {NULL, 0xffdd},
+};
 
+static const u8 sUnknown_80E5CE4[] = "  ";
+static const u8 sUnknown_80E5CE8[] = "Start an entirely new adventure.";
+
+const struct MenuItem gUnknown_80E5D0C[] = 
+{
+    {sUnknown_80E5D24, 0xffde},
+    {sUnknown_80E5CE4, 0xffde},
+    {NULL, 0xffdd},
+};
+
+static const u8 sUnknown_80E5D24[] = "Check your career as an adventurer.";
+
+const struct MenuItem gUnknown_80E5D48[] = 
+{
+    {sUnknown_80E5D88, 0xffde},
+    {sUnknown_80E5D60, 0xffde},
+    {NULL, 0xffdd},
+};
+
+static const u8 sUnknown_80E5D60[] = _("It won{APOSTROPHE}t be in the release version.");
+static const u8 sUnknown_80E5D88[] = "This is the Debug Mode.";
+
+const struct MenuItem gUnknown_80E5DA0[] = 
+{
+    {sUnknown_80E5DCC, 0xffde},
+    {sUnknown_80E5DB8, 0xffde},
+    {NULL, 0xffdd},
+};
+
+static const u8 sUnknown_80E5DB8[] = "you last saved.  ";
+static const u8 sUnknown_80E5DCC[] = "Resume your adventure from where";
+
+const struct MenuItem gUnknown_80E5DF0[] = {
+    {sUnknown_80E5E34, 0xFFDE},
+    {sUnknown_80E5E08, 0xFFDE},
+    {0, 0xFFDD}
+};
+
+static const u8 sUnknown_80E5E08[] = _("#C2Beware#R! This will delete it forever!");
+static const u8 sUnknown_80E5E34[] = "This will delete your saved game data.";
+
+const struct MenuItem gUnknown_80E5E5C[] = {
+    {sUnknown_80E5EA0, 0xFFDE},
+    {sUnknown_80E5E74, 0xFFDE},
+    {0, 0xFFDD}
+};
+
+ALIGNED(4) static const u8 sUnknown_80E5E74[] = _("passwords{COMMA} friends may rescue each other.");
+static const u8 sUnknown_80E5EA0[] = "Using a Game Link cable or";
+
+const struct MenuItem gUnknown_80E5EBC[] = {
+    {sUnknown_80E5EF8, 0xFFDE},
+    {sUnknown_80E5ED4, 0xFFDE},
+    {0, 0xFFDD}
+};
+
+static const u8 sUnknown_80E5ED4[] = "trade stored items with a friend.";
+ALIGNED(4) static const u8 sUnknown_80E5EF8[] = _("Using a Game Link cable{COMMA} you can");
+
+const struct MenuItem gUnknown_80E5F1C[] = {
+    {sUnknown_80E5F58, 0xFFDE},
+    {sUnknown_80E5F34, 0xFFDE},
+    {0, 0xFFDD}
+};
+
+static const u8 sUnknown_80E5F34[] = "You can give up waiting for rescue.";
+static const u8 sUnknown_80E5F58[] = "You are awaiting rescue by a friend.";
+
+const struct MenuItem gUnknown_80E5F80[] = {
+    {sUnknown_80E5FB0, 0xFFDE},
+    {sUnknown_80E5F98, 0xFFDE},
+    {0, 0xFFDD}
+};
+
+static const u8 sUnknown_80E5F98[] = "receive Wonder Mail.";
+ALIGNED(4) static const u8 sUnknown_80E5FB0[] = _("Using passwords{COMMA} you can");
+
+const struct MenuItem gUnknown_80E5FCC[] = {
+    {sUnknown_80E6008, 0xFFDE},
+    {sUnknown_80E5FE4, 0xFFDE},
+    {NULL, 0xFFDD}
+};
+
+static const u8 sUnknown_80E5FE4[] = "receive teams from your friends.";
+ALIGNED(4) static const u8 sUnknown_80E6008[] = _("Using the Dual Slot function{COMMA} you can");
+
+const struct MenuItem gUnknown_80E6030[] = {
+    {sUnknown_80E6070, 0xFFDE},
+    {sUnknown_80E6048, 0xFFDE},
+    {NULL, 0xFFDD}
+};
+
+static const u8 sUnknown_80E6048[] = "go on an adventure to unknown worlds.";
+ALIGNED(4) static const u8 sUnknown_80E6070[] = _("Using wireless communication{COMMA} you can");
+static const u8 sMainMenu_fill0[] = "pksdir0";
 
 void InitMainMenu(void)
 {

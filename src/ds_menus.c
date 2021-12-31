@@ -12,7 +12,7 @@ u32 UpdateDualSlotMenu(void)
     return 0;
 }
 
-void CleanDualSlotMenu()
+void CleanDualSlotMenu(void)
 {
 }
 

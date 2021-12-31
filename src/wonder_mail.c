@@ -23,6 +23,46 @@ extern void sub_80310B4();
 extern u32 sub_8095350();
 extern u8 sub_80A2824(u8);
 
+extern const u8 DontSendPokemon_80DDB80[];
+extern const u8 SendPokemon_80DDB98[];
+extern const u8 gWonderMailCancel[];
+extern const u8 Password_80DDB44[];
+extern const u8 GameLinkCable_80DDB50[];
+extern const u8 Confirm_80DDB1C[];
+extern const u8 Info_80DDB14[];
+
+const struct MenuItem gUnknown_80DDAFC[] =
+{
+    {Confirm_80DDB1C, 0xB},
+    {Info_80DDB14, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 Info_80DDB14[] = "Info";
+ALIGNED(4) const u8 Confirm_80DDB1C[] = "Confirm";
+
+const struct MenuItem gUnknown_80DDB24[] =
+{
+    {GameLinkCable_80DDB50, 0xD},
+    {Password_80DDB44, 0xF},
+    {gWonderMailCancel, 0xA},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 Password_80DDB44[] = "Password";
+ALIGNED(4) const u8 GameLinkCable_80DDB50[] = "Game Link cable";
+
+const struct MenuItem gUnknown_80DDB60[] =
+{
+    {SendPokemon_80DDB98, 0x11},
+    {DontSendPokemon_80DDB80, 0x12},
+    {gWonderMailCancel, 0xA},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 DontSendPokemon_80DDB80[] = _("Don{APOSTROPHE}t Send Pokémon");
+ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
+
 #include "data/wonder_mail_1.h"
 
 extern u8 sub_809539C(u32, u32);
@@ -51,7 +91,7 @@ extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
-extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, void *r5, u32);
+extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_80951BC(u8 *r0);
@@ -83,15 +123,13 @@ extern void sub_8031E10(void);
 extern void sub_803084C(void);
 extern void sub_8030DE4();
 extern u8 gUnknown_80DDAE4[];
+extern u8 gUnknown_80DDACC[];
 extern struct MenuItem gUnknown_80DDAA0[];
 extern struct MenuItem gUnknown_80DDA80[];
-extern struct MenuItem gUnknown_80DDAFC[];
-extern struct MenuItem gUnknown_80DDB60[];
 extern struct MenuItem gUnknown_80DDA64[];
-extern struct MenuItem gUnknown_80DDB24[];
 extern struct MenuItem gUnknown_80DD9EC[];
-extern u8 gUnknown_80DDACC[];
 extern struct MenuItem gUnknown_80DD970[];
+
 
 extern void nullsub_23(u32);
 extern s32 sub_8037D64(u32, void *, void *);
@@ -108,7 +146,7 @@ extern u32 sub_8023CE8(void);
 extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);
 extern void sub_8023DA4(void);
-extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, u8 *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, u8 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
 extern void sub_8029AF4(void);
