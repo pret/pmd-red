@@ -1,13 +1,17 @@
 #include "global.h"
+#include "text.h"
+#include "menu.h"
+#include "input.h"
+
+#include "adventure_log.h"
 #include "debug_menu.h"
 #include "ds_menus.h"
+#include "friend_rescue.h"
 #include "load_screen.h"
 #include "main_menu.h"
-#include "adventure_log.h"
-#include "input.h"
-#include "menu.h"
 #include "memory.h"
-#include "text.h"
+#include "rescue_password_menu.h"
+#include "save.h"
 #include "trade_items_menu.h"
 
 // NOTE: 0x13 and 0x14 
@@ -57,30 +61,22 @@ EWRAM_DATA struct unkStruct_203B34C *gUnknown_203B34C;
 EWRAM_DATA u32 gUnknown_203B350;
 EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
 
-
 extern void sub_8094C14(void);
 extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
-extern void CreateFriendRescueMenu(void);
 extern void CreateWonderMailMenu(void);
-extern void CreateRescuePasswordMenu(u32);
 extern void CreateSaveMenu(u32);
 extern u32 UpdateMainMenu(void);
-extern s32 UpdateFriendRescueMenu(void);
 extern s32 UpdateWonderMailMenu(void);
-extern s32 UpdateRescuePasswordMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 UpdateSaveMenu(void);
 extern void sub_80370D4(void);
-extern void CleanFriendRescueMenu(void);
 extern void CleanWonderMailMenu(void);
-extern void CleanRescuePasswordMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern u8 sub_803D0D8();
-extern s32 sub_8011C34();
 extern s32 sub_8095324(u32);
 extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
