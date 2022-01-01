@@ -27,5 +27,6 @@ u8 GetMoveAffectedByMagicCoat(u16 moveID);
 u8 GetMoveTargetsUser(u16 moveID);
 u8 GetMoveAffectedByMuzzled(u16 moveID);
 bool8 IsBlockedBySoundproof(struct PokemonMove *move);
+bool8 DoesMoveCharge(u16 move);
 
 #endif // GUARD_MOVES_H
