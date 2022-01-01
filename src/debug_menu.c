@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug_menu.h"
+#include "input.h"
 #include "main_menu.h"
 #include "menu.h"
 #include "memory.h"
@@ -47,24 +48,23 @@ const struct MenuItem gDebugMenuItems[8] =
     {NULL, 10},
 };
 
-ALIGNED(4) const char h_open_string[] = "h-open";
-ALIGNED(4) const char storage_string[] = "Storage";
-ALIGNED(4) const char debug_menu_string[] = "Debug Menu";
-ALIGNED(4) const char field_script_string[] = "Field Script";
-ALIGNED(4) const char field_map_string[] = "Field Map";
-ALIGNED(4) const char field_string[] = "Field";
-ALIGNED(4) const char dungeons_string[] = "Dungeons";
+ALIGNED(4) static const char h_open_string[] = "h-open";
+ALIGNED(4) static const char storage_string[] = "Storage";
+ALIGNED(4) static const char debug_menu_string[] = "Debug Menu";
+ALIGNED(4) static const char field_script_string[] = "Field Script";
+ALIGNED(4) static const char field_map_string[] = "Field Map";
+ALIGNED(4) static const char field_string[] = "Field";
+ALIGNED(4) static const char dungeons_string[] = "Dungeons";
 
-ALIGNED(4) const char debug_menu_fill0[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill1[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill2[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill3[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill4[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill5[] = "pksdir0";
-ALIGNED(4) const char debug_menu_fill6[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill0[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill1[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill2[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill3[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill4[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill5[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill6[] = "pksdir0";
 
 
-extern void ResetUnusedInputStruct(void);
 extern u8 sub_8012FD8(struct DebugMenu *);
 extern void sub_8013114(struct DebugMenu *, s32 *);
 extern void sub_80976F8(u8);
