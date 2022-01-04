@@ -164,8 +164,7 @@ struct DungeonEntityData
     u8 fillFE[0x100 - 0xFE];
     /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     u8 fill101[0x104 - 0x101];
-    /* 0x104 */ u8 movementSpeed;
-    u8 fill105[0x108 - 0x105];
+    /* 0x104 */ s32 movementSpeed;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
     /* 0x108 */ u8 speedUpTurnsLeft[5];

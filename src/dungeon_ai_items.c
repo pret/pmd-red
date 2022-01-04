@@ -8,6 +8,7 @@
 #include "dungeon_action.h"
 #include "dungeon_ai_1.h"
 #include "dungeon_ai_attack.h"
+#include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_capabilities_1.h"
@@ -35,7 +36,6 @@ enum ItemTargetFlag
 };
 
 extern s32 CalculateFacingDir(struct Position*, struct Position*);
-extern u32 EvaluateItem(struct DungeonEntity*, struct ItemSlot*, u32);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
