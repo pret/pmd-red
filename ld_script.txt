@@ -390,6 +390,14 @@ SECTIONS {
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         data/data_80F4278.o(.rodata);
+        src/dungeon_ai_attack.o(.rodata);
+        data/data_80F4468.o(.rodata);
+        src/dungeon_pokemon_attributes_1.o(.rodata);
+        data/data_80F59C8.o(.rodata);
+        src/charge_move.o(.rodata);
+        data/data_8106A4C.o(.rodata);
+        src/dungeon_ai_1.o(.rodata);
+        data/data_8107010.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/exclusive_pokemon.o(.rodata);

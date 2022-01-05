@@ -12,8 +12,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 
-extern s16 gItemMasterMinWildLevel;
-
+const s16 gItemMasterMinWildLevel[] = {16};
 
 extern bool8 IsIQSkillSet(u8 *, u32);
 extern void SetIQSkill(u8 *param_1, u32 skillIndex);
@@ -73,7 +72,7 @@ void LoadIQSkills(struct DungeonEntity *pokemon)
     SetIQSkill(iVar2, IQ_SKILL_ITEM_CATCHER);
     if (pokemonData->isBoss)
       SetIQSkill(iVar2, IQ_SKILL_SELF_CURER);
-    if (pokemonData->level >= gItemMasterMinWildLevel)
+    if (pokemonData->level >= *gItemMasterMinWildLevel)
       SetIQSkill(iVar2, IQ_SKILL_ITEM_MASTER);
     pokemonData->tactic = TACTIC_GO_AFTER_FOES;
   }

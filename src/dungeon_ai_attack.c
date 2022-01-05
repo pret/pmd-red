@@ -2,11 +2,10 @@
 #include "dungeon_ai_attack.h"
 
 #include "constants/iq_skill.h"
+#include "data/adjacent_tile_offsets.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes_1.h"
-
-extern struct Position gAdjacentTileOffsets[8];
 
 bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
 {
