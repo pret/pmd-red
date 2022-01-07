@@ -1,0 +1,177 @@
+ALIGNED(4) const char gUnknown_80DEF04[] =  _(" ...Oh?\n"
+                                              "Something{APOSTROPHE}s gone wrong.");
+
+ALIGNED(4) const char gUnknown_80DEF28[] = " ...Oh? The number of linked\n"
+                                           "GBA systems is incorrect.\n"
+                                           "Please try again from the start.";
+
+ALIGNED(4) const u8 gUnknown_80DEF80[]=
+	 " ...Oh? It looks like your\n"
+	 "friend chose a different mode.\n"
+	 "Please try again from the start.";
+
+ALIGNED(4) const u8 gUnknown_80DEFDC[]=
+	 " ...Oh? It looks like your\n"
+	 "storage space is full. Please clear some\n"
+	 "space and try again from the start.";
+
+ALIGNED(4) const u8 gUnknown_80DF044[]= _(
+	 " ...Oh?\n"
+	 "I think you{APOSTROPHE}ve received this mail before.\n"
+	 "You can{APOSTROPHE}t get the same mail twice.");
+
+ALIGNED(4) const u8 gUnknown_80DF0A0[]= _(
+	 " ...Oh?\n"
+	 "I don{APOSTROPHE}t think you{APOSTROPHE}re eligible to receive\n"
+	 "this mail.");
+
+ALIGNED(4) const u8 gUnknown_80DF0E0[]=
+	 " ...Oh?\n"
+	 "There is no room to receive new mail.\n"
+	 "Please delete some mail and try again.";
+
+ALIGNED(4) const u8 gUnknown_80DF138[]= _(
+	 " ...Oh? Your friend didn{APOSTROPHE}t\n"
+	 "follow through on their side.\n"
+	 "Please try again from the start.");
+
+ALIGNED(4) const u8 gUnknown_80DF194[]= _(
+	" Your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
+	"has been sent.");
+
+ALIGNED(4) const u8 gUnknown_80DF1C0[]=
+	" ...Oh?\n"
+	"This password appears to be wrong.\n"
+	"Would you like to try again?";
+
+ALIGNED(4) const u8 gUnknown_80DF208[]= _(
+	" ...Oh? This password doesn{APOSTROPHE}t\n"
+	"appear to be for a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80DF250[]= _(
+	": This is the counter for\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	": Oh{COMMA} hi{COMMA} {COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}.\n"
+	"I{APOSTROPHE}ve been waiting for you. You wanted me\n"
+	"to process a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?{EXTRA_MSG}"
+	": Let me get on it right away.");
+
+ALIGNED(4) const u8 gUnknown_80DF304[]= _(
+	" Is it OK to send this\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80DF330[]= _(
+	" Please choose the\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} that you want to\n"
+	"send to your friend.");
+
+ALIGNED(4) const u8 gUnknown_80DF380[]= _(
+	" OK. Please enter the\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80DF3B4[]= _(
+	" Please give this password\n"
+	"to the friend that rescued your team.{EXTRA_MSG}"
+	" I also must save your\n"
+	"adventure.");
+
+ALIGNED(4) const u8 gUnknown_80DF418[]= _(
+	" OK{COMMA} here is your\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80DF44C[]=
+	" I need to save your\n"
+	"adventure.";
+
+ALIGNED(4) const u8 gUnknown_80DF46C[]= _(
+	" There we go.\n"
+	"I{APOSTROPHE}m all done.{EXTRA_MSG}"
+	" Doesn{APOSTROPHE}t it feel great to\n"
+	"be appreciated for doing something good?\n"
+	"Please keep up your rescue work!");
+
+ALIGNED(4) const u8 gUnknown_80DF4F4[]= _(
+	" A {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} has\n"
+	"arrived from your friend for your rescue\n"
+	"mission.");
+
+ALIGNED(4) const u8 gUnknown_80DF544[]= _(
+	 "{CENTER_ALIGN}Communicating...\n"
+	 "{CENTER_ALIGN}Please wait with the power on.\n"
+	 "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
+
+ALIGNED(4) const u8 gUnknown_80DF594[]= _(
+	" There. I{APOSTROPHE}ve sent your\n"
+	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\n"
+	"I need to save your adventure.");
+
+ALIGNED(4) const u8 gUnknown_80DF5E4[]= _(
+	" Please connect the GBA\n"
+	"systems with a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}.\n"
+	"Is your friend also ready?");
+
+ALIGNED(4) const u8 gUnknown_80DF63C[]= _(
+	" There{COMMA} all done.\n"
+	"{COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}{COMMA} I hope your friend\n"
+	"appreciates your sense of gratitude.");
+
+ALIGNED(4) const u8 gUnknown_80DF694[]= _(
+	" The item you{APOSTROPHE}ve chosen\n"
+	"here can{APOSTROPHE}t be exchanged later.\n"
+	"Are you certain this item is OK?");
+
+ALIGNED(4) const u8 gUnknown_80DF6F0[]= _(
+	" I{APOSTROPHE}ve saved your adventure. ");
+
+ALIGNED(4) const u8 gUnknown_80DF710[]= _(
+	" OK{COMMA} please choose\n"
+	"the item to be sent.");
+
+ALIGNED(4) const u8 gUnknown_80DF73C[]=
+	" ...Oh?\n"
+	"Your storage space is empty.\n"
+	"What would you like to do?";
+
+ALIGNED(4) const u8 gUnknown_80DF77C[]= _(
+	" Would you like to choose\n"
+	"a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} from storage and\n"
+	"send it with your mail?");
+
+ALIGNED(4) const u8 gUnknown_80DF7D4[]= _(
+	" ...Oh?\n"
+	"You{APOSTROPHE}ve already attached a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
+	"to this mail.{EXTRA_MSG}"
+	" I{APOSTROPHE}m sorry{COMMA} but once an item\n"
+	"has been attached to mail{COMMA} it can{APOSTROPHE}t be\n"
+	"exchanged.");
+
+ALIGNED(4) const u8 gUnknown_80DF870[]=
+	" Would you like to send it\n"
+	"again with the item you chose before?";
+
+ALIGNED(4) const u8 gUnknown_80DF8B4[]= _(
+	" ...Oh?\n"
+	"You don{APOSTROPHE}t seem to have a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80DF8EC[]= _(
+	" Hello.\n"
+	"I handle {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\n"
+	"How may I serve you?");
+
+ALIGNED(4) const u8 gUnknown_80DF928[]=
+	" May I help you with\n"
+	"anything else?";
+
+ALIGNED(4) const u8 gUnknown_80DF94C[] =
+	" Please come see me\n"
+	"anytime.";
+
+ALIGNED(4) const u8 gUnknown_80DF96C[] = _(
+	" How would you like to send\n"
+	"your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80DF9A4[]= _(
+	" How would you like to\n"
+	"receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 thank_you_fill[] = "pksdir0";
