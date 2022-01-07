@@ -42,7 +42,7 @@ _08048568:
 	lsls r0, 1
 	adds r5, r0
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	beq _08048598
 	mov r0, sp

@@ -5786,10 +5786,10 @@ sub_8078A58:
 	movs r2, 0
 	bl SetMessageArgument
 	adds r0, r7, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r4, r0
 	beq _08078AD8
 	adds r0, r6, 0
@@ -5823,10 +5823,10 @@ _08078AE0:
 	movs r2, 0
 	bl SetMessageArgument
 	adds r0, r7, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r5, r0, 0
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r5, r0
 	beq _08078B38
 	adds r0, r6, 0
@@ -5916,13 +5916,13 @@ _08078BB8:
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	movs r1, 0xA0
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r4, r0
 	blt _08078BE0
 	movs r5, 0x1
@@ -5943,10 +5943,10 @@ _08078BE8:
 	adds r0, r7
 	mov r10, r0
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	movs r1, 0
 	str r1, [sp, 0x24]
 	cmp r4, r0
@@ -5987,13 +5987,13 @@ _08078C16:
 	bl sub_80522F4
 _08078C5E:
 	ldr r0, [sp, 0x20]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	movs r1, 0xA0
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r4, r0
 	bne _08078C9C
 	ldr r0, _08078C94
@@ -6060,10 +6060,10 @@ _08078CFA:
 	movs r2, 0
 	bl SetMessageArgument
 	adds r0, r4, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r4, r0
 	bne _08078D34
 	mov r1, r8
@@ -6077,10 +6077,10 @@ _08078D2C: .4byte gAvailablePokemonNames
 _08078D30: .4byte gUnknown_80FBE14
 _08078D34:
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r4, r0, 0
 	ldr r0, [r7]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r4, r0
 	blt _08078D60
 	mov r0, r8
@@ -10207,7 +10207,7 @@ _0807AE12:
 	lsls r1, 1
 	adds r0, r4, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0807AE32

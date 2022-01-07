@@ -4,8 +4,8 @@
 #include "constants/status.h"
 #include "dungeon_pokemon_attributes_1.h"
 #include "moves.h"
+#include "number_util.h"
 
-extern s32 GetBellyRoundedUp(u32);
 extern bool8 CanTargetAdjacentPokemon(struct DungeonEntity*);
 extern bool8 HasNegativeStatus(struct DungeonEntity*);
 
@@ -34,7 +34,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             }
             break;
         case ITEM_ID_DIET_RIBBON:
-            if (targetOther && GetBellyRoundedUp(pokemonData->belly) > 0)
+            if (targetOther && RoundUpFixedPoint(pokemonData->belly) > 0)
             {
                 return 50;
             }
@@ -366,7 +366,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             }
             break;
         case ITEM_ID_HUNGER_SEED:
-            if (GetBellyRoundedUp(pokemonData->belly) > 0)
+            if (RoundUpFixedPoint(pokemonData->belly) > 0)
             {
                 return 50;
             }
@@ -412,7 +412,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
         case ITEM_ID_APPLE:
         case ITEM_ID_BIG_APPLE:
         case ITEM_ID_HUGE_APPLE:
-            if (GetBellyRoundedUp(pokemonData->belly) < 10)
+            if (RoundUpFixedPoint(pokemonData->belly) < 10)
             {
                 return 100;
             }

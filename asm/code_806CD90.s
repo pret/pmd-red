@@ -3616,7 +3616,7 @@ _0806EB3A:
 	lsls r0, 1
 	add r0, r10
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0806EB72

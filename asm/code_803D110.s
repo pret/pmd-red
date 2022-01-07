@@ -5469,7 +5469,7 @@ _0803FBBA:
 	lsls r3, 1
 	adds r0, r3
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bne _0803FBD2
 	movs r0, 0x1
