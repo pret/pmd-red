@@ -5,5 +5,7 @@
 
 // 0x48F28
 u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags);
+// 0x494EC
+bool8 CanTargetAdjacentPokemon(struct DungeonEntity *pokemon);
 
 #endif

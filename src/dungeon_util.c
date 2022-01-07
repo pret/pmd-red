@@ -3,6 +3,17 @@
 
 #include "dungeon_map_access.h"
 
+const struct Position gAdjacentTileOffsets[NUM_DIRECTIONS] = {
+    {0, 1},
+    {1, 1},
+    {1, 0},
+    {1, -1},
+    {0, -1},
+    {-1, -1},
+    {-1, 0},
+    {-1, 1}
+};
+
 extern struct MapTile* GetMapEntity(s16, s16);
 
 bool8 EntityExists(struct DungeonEntity *entity)

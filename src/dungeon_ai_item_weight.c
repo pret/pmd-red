@@ -2,11 +2,14 @@
 #include "dungeon_ai_item_weight.h"
 
 #include "constants/status.h"
+#include "constants/targeting.h"
+#include "dungeon_ai_1.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_util.h"
 #include "moves.h"
 #include "number_util.h"
 
-extern bool8 CanTargetAdjacentPokemon(struct DungeonEntity*);
 extern bool8 HasNegativeStatus(struct DungeonEntity*);
 
 u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags)
@@ -439,4 +442,20 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             itemWeight = 0;
     }
     return itemWeight;
+}
+
+bool8 CanTargetAdjacentPokemon(struct DungeonEntity *pokemon)
+{
+    s32 facingDir;
+    for (facingDir = 0; facingDir < NUM_DIRECTIONS; facingDir++)
+    {
+        struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
+        struct DungeonEntity *adjacentPokemon = mapTile->pokemon;
+        if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NONE &&
+            CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
