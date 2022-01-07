@@ -126,7 +126,7 @@ gAdventureLogText: @ 810B04C
 .4byte BrokeCurse_810B3C4
 .4byte TeamBaseDone_810B3A0
 .4byte Smeargle_810B38C
-.4byte SpottedMunclax_810B378
+.4byte SpottedMunchlax_810B378
 .4byte NumMoves_810B360
 .4byte NumFriendRescues_810B33C
 .4byte NumPokemonEvolved_810B324
@@ -278,8 +278,8 @@ NumMoves_810B360:
 .string "$d0 moves were learned.\0"
 .align 2,0
 
-.global SpottedMunclax_810B378
-SpottedMunclax_810B378:
+.global SpottedMunchlax_810B378
+SpottedMunchlax_810B378:
 .string "Spotted Munchlax.\0"
 .align 2,0
 
