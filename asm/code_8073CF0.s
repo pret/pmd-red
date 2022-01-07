@@ -809,7 +809,7 @@ _08074320:
 	b _080743B0
 	.align 2, 0
 _0807434C: .4byte 0x00000169
-_08074350: .4byte gUnknown_80F5594
+_08074350: .4byte gWarpScarfActivationChances
 _08074354: .4byte gDungeonGlobalData
 _08074358: .4byte 0x0000199a
 _0807435C: .4byte gUnknown_80F54F4

@@ -194,7 +194,9 @@ struct DungeonEntityData
     u8 unk15D;
     u8 unk15E;
     u8 unk15F;
-    u8 fill160[0x16C - 0x160];
+    u8 fill160[0x169 - 0x160];
+    u8 turnsSinceWarpScarfActivation;
+    u8 fill16A[0x16C - 0x16A];
     /* 0x16C */ struct Position targetPosition;
     /* 0x170 */ struct Position posPixel;
     u32 unk174;
