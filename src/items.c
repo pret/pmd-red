@@ -1,6 +1,7 @@
 #include "global.h"
 #include "file_system.h"
 #include "item.h"
+#include "moves.h"
 #include "team_inventory.h"
 #include "random.h"
 #include "pokemon.h"
@@ -42,7 +43,6 @@ extern void InitPokemonMove(void*, u16);  // first arg is some struct
 extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern u32 GetMoveType(void*);
 extern u8* GetUnformattedTypeString(s16);
-extern u32 GetMoveMaxPP(void*);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
@@ -698,7 +698,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
 
   xxx_format_and_draw(8, 24, GetItemDescription(slot->itemIndex), a2, 0);
   if (GetItemType(slot->itemIndex) == ITEM_TYPE_TM) {
-    u8* buffer8 = buffer88 + 0x50;  // field in struct
+    struct PokemonMove *buffer8 = (struct PokemonMove*) (buffer88 + 0x50);  // field in struct
     u16 move = GetItemMove(slot->itemIndex);
     u8 moves_data;
     u8* typestring;

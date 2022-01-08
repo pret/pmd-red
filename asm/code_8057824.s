@@ -6523,7 +6523,7 @@ sub_805AAE0:
 	lsls r1, 1
 	adds r5, r0, r1
 	ldr r0, [r5]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x1
 	ble _0805AB20
 	ldr r0, _0805AB1C
@@ -10426,7 +10426,7 @@ _0805CB24:
 	lsls r1, 1
 	adds r0, r2, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	ble _0805CB3E
 	b _0805CEA8
@@ -12282,7 +12282,7 @@ _0805DB7A:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	beq _0805DBAA
 	b _0805D9EC
@@ -12307,7 +12307,7 @@ _0805DBBE:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bne _0805DBDA
 	b _0805DD02
@@ -13016,7 +13016,7 @@ _0805E14C:
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	beq _0805E188
 	mov r1, r10
@@ -16138,14 +16138,14 @@ _0805FA62:
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	ldr r4, _0805FBC0
 	str r0, [r4]
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r7, r2
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	str r0, [r4, 0x4]
 	ldr r0, _0805FBC4
 	ldr r2, [r0]
@@ -35982,7 +35982,7 @@ _08069A02:
 	lsls r1, 1
 	adds r0, r5, r1
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bne _08069A38
 	ldrb r0, [r5, 0x7]
@@ -37646,11 +37646,11 @@ _0806A664:
 	movs r1, 0
 	mov r8, r1
 	adds r0, r5, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x13
 	ble _0806A6A4
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x13
 	bgt _0806A6A4
 	ldr r0, _0806A6E0
@@ -37658,14 +37658,14 @@ _0806A664:
 	mov r8, r0
 _0806A6A4:
 	adds r0, r5, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x9
 	ble _0806A6C4
 	movs r2, 0x9E
 	lsls r2, 1
 	adds r0, r7, r2
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x9
 	bgt _0806A6C4
 	ldr r0, _0806A6E4

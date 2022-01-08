@@ -1,6 +1,7 @@
 #include "global.h"
+#include "moves.h"
+
 #include "file_system.h"
-#include "constants/move.h"
 #include "constants/move_id.h"
 
 struct MoveDataFile
@@ -36,7 +37,6 @@ extern u8 gUnknown_810992C[];
 
 extern void sub_8093F10(struct PokemonMove *, struct PokemonMove *);
 extern void sub_80928C0(u8 *, struct PokemonMove *, struct unkStruct_80928C0 *);
-extern u32 GetMoveMaxPP(struct PokemonMove*);
 bool8 DoesMoveCharge(u16 move);
 extern void ExpandPlaceholdersBuffer(u8 *, u8 *, ...);
 

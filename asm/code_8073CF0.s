@@ -685,11 +685,11 @@ _0807421E:
 	str r0, [r4]
 	movs r6, 0x1
 	adds r0, r7, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x13
 	ble _0807425C
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x13
 	bgt _0807425C
 	ldr r0, _08074368
@@ -697,14 +697,14 @@ _0807421E:
 	mov r9, r0
 _0807425C:
 	adds r0, r7, 0
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x9
 	ble _0807427C
 	movs r0, 0x9E
 	lsls r0, 1
 	add r0, r8
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0x9
 	bgt _0807427C
 	ldr r0, _0807436C
@@ -715,7 +715,7 @@ _0807427C:
 	lsls r4, 1
 	add r4, r8
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bne _08074298
 	add r0, sp, 0x20
@@ -725,7 +725,7 @@ _0807427C:
 	str r0, [r4]
 _08074298:
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bge _080742AE
 	add r0, sp, 0x24
@@ -735,7 +735,7 @@ _08074298:
 	str r0, [r4]
 _080742AE:
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	bne _08074384
 	bl sub_805E804
@@ -803,13 +803,13 @@ _08074320:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, [r4]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	cmp r0, 0
 	beq _08074390
 	b _080743B0
 	.align 2, 0
 _0807434C: .4byte 0x00000169
-_08074350: .4byte gUnknown_80F5594
+_08074350: .4byte gWarpScarfActivationChances
 _08074354: .4byte gDungeonGlobalData
 _08074358: .4byte 0x0000199a
 _0807435C: .4byte gUnknown_80F54F4

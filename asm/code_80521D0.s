@@ -2611,7 +2611,7 @@ _08053888:
 	lsls r2, 1
 	adds r0, r1, r2
 	ldr r0, [r0]
-	bl GetBellyRoundedUp
+	bl RoundUpFixedPoint
 	ldr r1, _080538C4
 	movs r3, 0
 	ldrsh r1, [r1, r3]

@@ -4,7 +4,20 @@
 #include "constants/status.h"
 #include "dungeon_util.h"
 
-extern u32 gMultiTurnChargingStatuses[];
+const u32 gMultiTurnChargingStatuses[10] = {
+    CHARGING_STATUS_SOLARBEAM,
+    CHARGING_STATUS_SKY_ATTACK,
+    CHARGING_STATUS_RAZOR_WIND,
+    CHARGING_STATUS_FOCUS_PUNCH,
+    CHARGING_STATUS_SKULL_BASH,
+    CHARGING_STATUS_FLY,
+    CHARGING_STATUS_BOUNCE,
+    CHARGING_STATUS_DIVE,
+    CHARGING_STATUS_DIG,
+    CHARGING_STATUS_NONE
+};
+
+ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
 
 bool8 IsCharging(struct DungeonEntity *pokemon, bool8 checkCharge)
 {

@@ -1,19 +1,18 @@
 #include "global.h"
-#include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes_1.h"
-#include "dungeon_util.h"
-#include "pokemon.h"
 
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
+#include "dungeon_global_data.h"
+#include "dungeon_items.h"
+#include "dungeon_util.h"
+#include "pokemon.h"
 #include "pokemon_3.h"
 
-extern s16 gItemMasterMinWildLevel;
-
-extern u8 HasItem(struct DungeonEntity *, u32);
+const s16 gItemMasterMinWildLevel[] = {16};
 
 extern bool8 IsIQSkillSet(u8 *, u32);
 extern void SetIQSkill(u8 *param_1, u32 skillIndex);
@@ -73,7 +72,7 @@ void LoadIQSkills(struct DungeonEntity *pokemon)
     SetIQSkill(iVar2, IQ_SKILL_ITEM_CATCHER);
     if (pokemonData->isBoss)
       SetIQSkill(iVar2, IQ_SKILL_SELF_CURER);
-    if (pokemonData->level >= gItemMasterMinWildLevel)
+    if (pokemonData->level >= *gItemMasterMinWildLevel)
       SetIQSkill(iVar2, IQ_SKILL_ITEM_MASTER);
     pokemonData->tactic = TACTIC_GO_AFTER_FOES;
   }
