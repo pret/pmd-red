@@ -6,6 +6,8 @@
 #include "item.h"
 #include "position.h"
 
+#define NUM_SPEED_TURN_COUNTERS 5
+
 struct DungeonActionContainer
 {
     /* 0x0 */ u16 action;
@@ -167,8 +169,8 @@ struct DungeonEntityData
     /* 0x104 */ s32 movementSpeed;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
-    /* 0x108 */ u8 speedUpTurnsLeft[5];
-    /* 0x10D */ u8 slowTurnsLeft[5];
+    /* 0x108 */ u8 speedUpTurnsLeft[NUM_SPEED_TURN_COUNTERS];
+    /* 0x10D */ u8 slowTurnsLeft[NUM_SPEED_TURN_COUNTERS];
     /* 0x112 */ u8 stockpileCount;
     u8 fill113;
     // When true, an AI Pokémon will move in a random direction every turn.

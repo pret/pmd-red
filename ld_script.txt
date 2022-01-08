@@ -208,6 +208,8 @@ SECTIONS {
         src/code_806CD90.o(.text);
         asm/code_806CD90.o(.text);
         asm/code_807001C.o(.text);
+        src/status_checks.o(.text);
+        asm/code_8070B28.o(.text);
         src/dungeon_capabilities.o(.text);
         asm/code_8070BC0.o(.text);
         src/dungeon_capabilities_1.o(.text);
