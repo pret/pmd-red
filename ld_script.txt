@@ -284,7 +284,7 @@ SECTIONS {
         src/exclusive_pokemon.o(.text);
         asm/exclusive_pokemon.o(.text);
         src/exclusive_pokemon_1.o(.text);
-        src/code_80983D8.o(.text);
+        src/position_util.o(.text);
         asm/code_8098468.o(.text);
         src/code_8098BDC.o(.text);
         asm/code_8098BDC.o(.text);
@@ -407,6 +407,8 @@ SECTIONS {
         src/rescue_team_info.o(.rodata);
         src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
+        src/position_util.o(.rodata);
+        data/data_8115EB8.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         data/cutscenes.o(.rodata);
         data/cutscenes_1.o(.rodata);
