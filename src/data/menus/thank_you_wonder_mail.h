@@ -18,8 +18,8 @@ const struct MenuItem gUnknown_80DED78[3] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 Info_80DED90[] = "Info";
-ALIGNED(4) const u8 Confirm_80DED98[] = "Confirm";
+ALIGNED(4) static const u8 Info_80DED90[] = "Info";
+ALIGNED(4) static const u8 Confirm_80DED98[] = "Confirm";
 
 // Unused
 const struct UnkTextStruct2 gUnknown_80DEDA0 =
@@ -41,9 +41,9 @@ const struct MenuItem gThankYouMailMainMenuItems[4] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 Cancel_80DEDD8[] = "Cancel";
-ALIGNED(4) const u8 GetThankYou_Text[] = "Get Thank-You Mail";
-ALIGNED(4) const u8 SendThankYou_Text[] = "Send Thank-You Mail";
+ALIGNED(4) static const u8 Cancel_80DEDD8[] = "Cancel";
+ALIGNED(4) static const u8 GetThankYou_Text[] = "Get Thank-You Mail";
+ALIGNED(4) static const u8 SendThankYou_Text[] = "Send Thank-You Mail";
 
 const struct MenuItem gUnknown_80DEE08[4] =
 {
@@ -53,8 +53,8 @@ const struct MenuItem gUnknown_80DEE08[4] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 Password_Text[] = "Password";
-ALIGNED(4) const u8 GameLinkCable_Text[] = "Game Link cable";
+ALIGNED(4) static const u8 Password_Text[] = "Password";
+ALIGNED(4) static const u8 GameLinkCable_Text[] = "Game Link cable";
 
 const struct MenuItem gUnknown_80DEE44[3] =
 {
@@ -63,8 +63,7 @@ const struct MenuItem gUnknown_80DEE44[3] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 Yes_80DEE5C[] = "Yes";
-
+ALIGNED(4) static const u8 Yes_80DEE5C[] = "Yes";
 
 const struct MenuItem gUnknown_80DEE60[3] =
 {
@@ -73,7 +72,7 @@ const struct MenuItem gUnknown_80DEE60[3] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 No_80DEE78[] = "No";
+ALIGNED(4) static const u8 No_80DEE78[] = "No";
 
 const struct MenuItem gUnknown_80DEE7C[4] =
 {
@@ -83,8 +82,8 @@ const struct MenuItem gUnknown_80DEE7C[4] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
-ALIGNED(4) const u8 SendItem_Text[] = "Send Item";
+ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
+ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const struct MenuItem gUnknown_80DEEBC[3] =
 {
@@ -93,7 +92,7 @@ const struct MenuItem gUnknown_80DEEBC[3] =
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 SendWOItem_Text[] = "Send w/o Item";
+ALIGNED(4) static const u8 SendWOItem_Text[] = "Send w/o Item";
 
 const struct MenuItem gUnknown_80DEEE4[4] =
 {
