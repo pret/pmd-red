@@ -1423,31 +1423,65 @@ gUnknown_80F9510: @ 80F9510
 
 	.global gUnknown_80F9530
 gUnknown_80F9530: @ 80F9530
-	.incbin "baserom.gba", 0xF9530, 0x1C
+	.incbin "baserom.gba", 0xF9530, 0x4
 
 	.global gFrozenMessage
-gFrozenMessage: @ 80F954C
-	.incbin "baserom.gba", 0xF954C, 0x20
+gFrozenMessage: @ 80F9534
+	.string "{ARG_POKEMON_0} is frozen solid!\0"
+	.align 2, 0
+
+	.global gPtrFrozenMessage
+gPtrFrozenMessage: @ 80F954C
+	.4byte gFrozenMessage
 
 	.global gWrappedAroundMessage
-gWrappedAroundMessage: @ 80F956C
-	.incbin "baserom.gba", 0xF956C, 0x20
+gWrappedAroundMessage: @ 80F9550
+	.string "{ARG_POKEMON_0} has its foe wrapped!\0"
+	.align 2, 0
+
+	.global gPtrWrappedAroundMessage
+gPtrWrappedAroundMessage: @ 80F956C
+	.4byte gWrappedAroundMessage
 
 	.global gWrappedByMessage
-gWrappedByMessage: @ 80F958C
-	.incbin "baserom.gba", 0xF958C, 0x18
+gWrappedByMessage: @ 80F9570
+	.string "{ARG_POKEMON_0} is wrapped by its foe!\0"
+	.align 2, 0
+
+	.global gPtrWrappedByMessage
+gPtrWrappedByMessage: @ 80F958C
+	.4byte gWrappedByMessage
 
 	.global gPausedMessage
-gPausedMessage: @ 80F95A4
-	.incbin "baserom.gba", 0xF95A4, 0x18
+gPausedMessage: @ 80F9590
+	.string "{ARG_POKEMON_0} can{APOSTROPHE}t move!\0"
+	.align 2, 0
+
+	.global gPtrPausedMessage
+gPtrPausedMessage: @ 80F95A4
+	.4byte gPausedMessage
 
 	.global gInfatuatedMessage
-gInfatuatedMessage: @ 80F95BC
-	.incbin "baserom.gba", 0xF95BC, 0x1C
+gInfatuatedMessage: @ 80F95A8
+	.string "{ARG_POKEMON_0} is infatuated!\0"
+	.align 2, 0
+
+	.global gPtrInfatuatedMessage
+gPtrInfatuatedMessage: @ 80F95BC
+	.4byte gInfatuatedMessage
 
 	.global gBideMessage
-gBideMessage: @ 80F95D8
-	.incbin "baserom.gba", 0xF95D8, 0x14
+gBideMessage: @ 80F95C0
+	.string "{ARG_POKEMON_0} is storing energy!\0"
+	.align 2, 0
+
+	.global gPtrBideMessage
+gPtrBideMessage: @ 80F95D8
+	.4byte gBideMessage
+
+	.global gUnknown_80F95DC
+gUnknown_80F95DC: @ 80F95DC
+	.incbin "baserom.gba", 0xF95DC, 0x10
 
 	.global gUnknown_80F95EC
 gUnknown_80F95EC: @ 80F95EC

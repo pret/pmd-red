@@ -9,7 +9,7 @@
 #include "dungeon_util.h"
 #include "moves.h"
 #include "number_util.h"
-#include "status_checks.h"
+#include "status_checks_1.h"
 
 u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags)
 {

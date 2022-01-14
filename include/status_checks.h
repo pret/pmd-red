@@ -3,7 +3,7 @@
 
 #include "dungeon_entity.h"
 
-// 0x70A58
-bool8 HasNegativeStatus(struct DungeonEntity *pokemon);
+// 0x7001C
+bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon);
 
 #endif

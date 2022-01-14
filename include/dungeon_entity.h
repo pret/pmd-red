@@ -11,7 +11,7 @@
 struct DungeonActionContainer
 {
     /* 0x0 */ u16 action;
-    /* 0x2 */ s8 facingDir;
+    /* 0x2 */ u8 facingDir;
     u8 fill3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ u8 actionUseIndex;

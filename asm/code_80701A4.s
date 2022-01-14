@@ -1,210 +1,9 @@
 	#include "asm/constants/gba_constants.inc"
-	#include "asm/macros.inc"
+  	#include "asm/macros.inc"
 
-	.syntax unified
+  	.syntax unified
 
-	.text
-
-        thumb_func_start HasStatusAffectingActions
-HasStatusAffectingActions:
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	ldr r4, [r5, 0x70]
-	ldr r0, _08070050
-	adds r1, r5, 0
-	movs r2, 0
-	bl SetMessageArgument
-	adds r0, r4, 0
-	adds r0, 0x44
-	movs r1, 0x1
-	bl SetAction
-	adds r0, r4, 0
-	adds r0, 0xA8
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	bne _08070042
-	b _0807019C
-_08070042:
-	cmp r0, 0x3
-	bgt _08070054
-	cmp r0, 0x1
-	bne _0807004C
-	b _0807019C
-_0807004C:
-	b _0807005A
-	.align 2, 0
-_08070050: .4byte gAvailablePokemonNames
-_08070054:
-	cmp r0, 0x5
-	bne _0807005A
-	b _0807019C
-_0807005A:
-	adds r0, r4, 0
-	adds r0, 0xB0
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	beq _0807008C
-	cmp r0, 0x3
-	bgt _0807006E
-	cmp r0, 0x1
-	beq _0807007A
-	b _080700AC
-_0807006E:
-	cmp r0, 0x4
-	beq _0807009C
-	cmp r0, 0x6
-	bne _08070078
-	b _0807019C
-_08070078:
-	b _080700AC
-_0807007A:
-	ldr r0, _08070088
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_08070088: .4byte gFrozenMessage
-_0807008C:
-	ldr r0, _08070098
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_08070098: .4byte gWrappedAroundMessage
-_0807009C:
-	ldr r0, _080700A8
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_080700A8: .4byte gWrappedByMessage
-_080700AC:
-	adds r0, r4, 0
-	adds r0, 0xBC
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	beq _080700D4
-	cmp r0, 0x7
-	beq _080700E4
-	adds r0, r4, 0
-	adds r0, 0xC0
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080700F4
-	ldr r0, _080700D0
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_080700D0: .4byte gBideMessage
-_080700D4:
-	ldr r0, _080700E0
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_080700E0: .4byte gPausedMessage
-_080700E4:
-	ldr r0, _080700F0
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807019C
-	.align 2, 0
-_080700F0: .4byte gInfatuatedMessage
-_080700F4:
-	adds r0, r4, 0
-	adds r0, 0xC8
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	bne _0807012E
-	adds r0, r4, 0
-	adds r0, 0x44
-	movs r2, 0x2
-	ldrsh r1, [r4, r2]
-	bl SetWalkAction
-	movs r0, 0x8
-	bl DungeonRandomCapped
-	adds r1, r4, 0
-	adds r1, 0x46
-	strb r0, [r1]
-	ldrh r1, [r5, 0x4]
-	movs r2, 0xB6
-	lsls r2, 1
-	adds r0, r4, r2
-	strh r1, [r0]
-	ldrh r0, [r5, 0x6]
-	subs r0, 0x1
-	movs r1, 0xB7
-	lsls r1, 1
-	adds r2, r4, r1
-	strh r0, [r2]
-	b _0807019C
-_0807012E:
-	ldrb r0, [r4, 0x8]
-	cmp r0, 0x1
-	beq _0807019C
-	adds r0, r4, 0
-	adds r0, 0xE8
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0807017C
-	adds r6, r4, 0
-	adds r6, 0x46
-	ldrb r1, [r6]
-	adds r0, r5, 0
-	bl CannotMoveForward
-	lsls r0, 24
-	cmp r0, 0
-	bne _08070166
-	movs r0, 0x2
-	bl DungeonRandomCapped
-	cmp r0, 0
-	beq _08070174
-	movs r0, 0x8
-	bl DungeonRandomCapped
-	movs r1, 0x7
-	ands r1, r0
-	strb r1, [r6]
-_08070166:
-	adds r0, r4, 0
-	adds r0, 0x44
-	movs r2, 0x2
-	ldrsh r1, [r4, r2]
-	bl SetWalkAction
-	b _0807019C
-_08070174:
-	adds r0, r5, 0
-	bl DecideAttack
-	b _0807019C
-_0807017C:
-	cmp r0, 0x2
-	beq _08070184
-	movs r0, 0
-	b _0807019E
-_08070184:
-	adds r0, r4, 0
-	adds r0, 0x44
-	movs r2, 0x2
-	ldrsh r1, [r4, r2]
-	bl SetWalkAction
-	movs r0, 0x8
-	bl DungeonRandomCapped
-	adds r1, r4, 0
-	adds r1, 0x46
-	strb r0, [r1]
-_0807019C:
-	movs r0, 0x1
-_0807019E:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end HasStatusAffectingActions
+  	.text
 
 	thumb_func_start sub_80701A4
 sub_80701A4:
@@ -261,17 +60,17 @@ _08070202:
 	ldr r0, _08070208
 	b _08070278
 	.align 2, 0
-_08070208: .4byte gFrozenMessage
+_08070208: .4byte gPtrFrozenMessage
 _0807020C:
 	ldr r0, _08070210
 	b _08070278
 	.align 2, 0
-_08070210: .4byte gWrappedAroundMessage
+_08070210: .4byte gPtrWrappedAroundMessage
 _08070214:
 	ldr r0, _08070218
 	b _08070278
 	.align 2, 0
-_08070218: .4byte gWrappedByMessage
+_08070218: .4byte gPtrWrappedByMessage
 _0807021C:
 	adds r0, r6, 0
 	adds r0, 0xBC
@@ -303,12 +102,12 @@ _0807025C:
 	ldr r0, _08070260
 	b _08070278
 	.align 2, 0
-_08070260: .4byte gPausedMessage
+_08070260: .4byte gPtrPausedMessage
 _08070264:
 	ldr r0, _08070268
 	b _08070278
 	.align 2, 0
-_08070268: .4byte gInfatuatedMessage
+_08070268: .4byte gPtrInfatuatedMessage
 _0807026C:
 	adds r0, r6, 0
 	adds r0, 0xC0
@@ -324,7 +123,7 @@ _08070280:
 	movs r0, 0x1
 	b _08070322
 	.align 2, 0
-_08070284: .4byte gBideMessage
+_08070284: .4byte gPtrBideMessage
 _08070288:
 	cmp r0, 0
 	beq _08070320

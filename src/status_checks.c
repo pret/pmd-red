@@ -1,44 +1,103 @@
 #include "global.h"
 #include "status_checks.h"
 
+#include "constants/direction.h"
+#include "constants/dungeon_action.h"
 #include "constants/status.h"
+#include "code_80521D0.h"
+#include "dungeon_action.h"
+#include "dungeon_random.h"
 
-bool8 HasNegativeStatus(struct DungeonEntity *pokemon)
+extern char *gPtrFrozenMessage;
+extern char *gPtrWrappedAroundMessage;
+extern char *gPtrWrappedByMessage;
+extern char *gPtrBideMessage;
+extern char *gPtrPausedMessage;
+extern char *gPtrInfatuatedMessage;
+
+extern char gAvailablePokemonNames[];
+extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
+extern void SetWalkAction(struct DungeonActionContainer*, s16);
+extern bool8 CanMoveForward2(struct DungeonEntity*, u8);
+extern void DecideAttack(struct DungeonEntity*);
+
+bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
-    s32 i;
-    if (pokemonData->sleepStatus == SLEEP_STATUS_SLEEP ||
-        pokemonData->sleepStatus == SLEEP_STATUS_NIGHTMARE ||
-        pokemonData->sleepStatus == SLEEP_STATUS_YAWNING ||
-        pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_NONE ||
-        (pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_INGRAIN && pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_NONE) ||
-        pokemonData->volatileStatus != VOLATILE_STATUS_NONE ||
-        pokemonData->waitingStatus == WAITING_STATUS_CURSED ||
-        pokemonData->waitingStatus == WAITING_STATUS_DECOY ||
-        pokemonData->linkedStatus == LINKED_STATUS_LEECH_SEED ||
-        pokemonData->moveStatus == MOVE_STATUS_WHIFFER ||
-        pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER ||
-        pokemonData->eyesightStatus == EYESIGHT_STATUS_CROSS_EYED ||
-        pokemonData->muzzledStatus == MUZZLED_STATUS_MUZZLED ||
-        pokemonData->exposedStatus ||
-        pokemonData->perishSongTimer != 0)
+    SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+    SetAction(&pokemonData->action, DUNGEON_ACTION_WAIT);
+    switch (pokemonData->sleepStatus)
+    {
+        case SLEEP_STATUS_NIGHTMARE:
+        case SLEEP_STATUS_SLEEP:
+        case SLEEP_STATUS_NAPPING:
+            return TRUE;
+    }
+    switch (pokemonData->immobilizeStatus)
+    {
+        case IMMOBILIZE_STATUS_FROZEN:
+            SendMessage(pokemon, gPtrFrozenMessage);
+            return TRUE;
+        case IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE:
+            SendMessage(pokemon, gPtrWrappedAroundMessage);
+            return TRUE;
+        case IMMOBILIZE_STATUS_WRAPPED_BY_FOE:
+            SendMessage(pokemon, gPtrWrappedByMessage);
+            return TRUE;
+        case IMMOBILIZE_STATUS_PETRIFIED:
+            return TRUE;
+    }
+    switch (pokemonData->volatileStatus)
+    {
+        case VOLATILE_STATUS_PAUSED:
+            SendMessage(pokemon, gPtrPausedMessage);
+            return TRUE;
+        case VOLATILE_STATUS_INFATUATED:
+            SendMessage(pokemon, gPtrInfatuatedMessage);
+            return TRUE;
+    }
+    if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
+    {
+        SendMessage(pokemon, gPtrBideMessage);
+        return TRUE;
+    }
+    if (pokemonData->waitingStatus == WAITING_STATUS_DECOY)
+    {
+        SetWalkAction(&pokemonData->action, pokemonData->entityID);
+        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+        pokemonData->targetPosition.x = pokemon->posWorld.x;
+        pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
+        return TRUE;
+    }
+    if (pokemonData->shopkeeperMode == SHOPKEEPER_FRIENDLY)
     {
         return TRUE;
     }
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
     {
-        struct PokemonMove *moves = pokemonData->moves;
-        if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].sealed & TRUE)
+        if (!CanMoveForward2(pokemon, pokemonData->action.facingDir))
         {
+            if (DungeonRandomCapped(2) != 0)
+            {
+                pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+                pokemonData->action.facingDir = pokemonData->action.facingDir & DIRECTION_MASK;
+                goto walk;
+            }
+        }
+        else
+        {
+            walk:
+            SetWalkAction(&pokemonData->action, pokemonData->entityID);
             return TRUE;
         }
+        DecideAttack(pokemon);
+        return TRUE;
     }
-    for (i = 0; i < NUM_SPEED_TURN_COUNTERS; i++)
+    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_CROSS_EYED)
     {
-        if (pokemonData->slowTurnsLeft[i] != 0)
-        {
-            return TRUE;
-        }
+        SetWalkAction(&pokemonData->action, pokemonData->entityID);
+        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+        return TRUE;
     }
     return FALSE;
 }

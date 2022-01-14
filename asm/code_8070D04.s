@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start CannotMoveForward
-CannotMoveForward:
+	thumb_func_start CanMoveForward2
+CanMoveForward2:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -108,7 +108,7 @@ _08070E36:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end CannotMoveForward
+	thumb_func_end CanMoveForward2
 
 	thumb_func_start sub_8070E3C
 sub_8070E3C:
