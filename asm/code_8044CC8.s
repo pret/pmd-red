@@ -1,34 +1,10 @@
 	#include "asm/constants/gba_constants.inc"
-	#include "asm/macros.inc"
+  	#include "asm/macros.inc"
 
-	.syntax unified
+  	.syntax unified
 
-	.text
-
-	thumb_func_start SetWalkAction
-SetWalkAction:
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r0, r1, 16
-	asrs r0, 16
-	bl GetIsMoving
-	lsls r0, 24
-	cmp r0, 0
-	beq _08044CB6
-	movs r0, 0x2
-	b _08044CB8
-_08044CB6:
-	movs r0, 0x1
-_08044CB8:
-	strh r0, [r4]
-	movs r0, 0
-	strb r0, [r4, 0x4]
-	strb r0, [r4, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end SetWalkAction
-
+  	.text
+  
 	thumb_func_start sub_8044CC8
 sub_8044CC8:
 	push {lr}

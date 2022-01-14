@@ -7,6 +7,7 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "code_80521D0.h"
+#include "dungeon_action.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
@@ -26,7 +27,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void ResetAction(u16*);
-extern void SetWalkAction(u16*, s16);
 extern void DecideAttack(struct DungeonEntity*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
@@ -209,7 +209,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                 ResetAction(&pokemonData->action.action);
                 if (pokemonData->clientType == CLIENT_TYPE_CLIENT)
                 {
-                    SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
+                    SetWalkAction(&pokemonData->action, pokemonData->entityID);
                     pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
                     pokemonData->targetPosition.x = pokemon->posWorld.x;
                     pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
@@ -228,7 +228,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                             }
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
                             }
                             else
                             {
@@ -243,7 +243,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                         {
                             if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action.action, pokemonData->entityID);
+                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
                             }
                             else
                             {

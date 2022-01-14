@@ -14,10 +14,9 @@ extern char *gPtrWrappedByMessage;
 extern char *gPtrBideMessage;
 extern char *gPtrPausedMessage;
 extern char *gPtrInfatuatedMessage;
-
 extern char gAvailablePokemonNames[];
+
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern void SetWalkAction(struct DungeonActionContainer*, s16);
 extern bool8 CanMoveForward2(struct DungeonEntity*, u8);
 extern void DecideAttack(struct DungeonEntity*);
 
