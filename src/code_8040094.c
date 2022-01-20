@@ -1,7 +1,10 @@
 #include "global.h"
-#include "play_time.h"
-#include "file_system.h"
+
+#include "code_80521D0.h"
+#include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "file_system.h"
+#include "play_time.h"
 
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
@@ -20,14 +23,13 @@ extern void sub_8011860(void);
 extern void sub_803F580(u32);
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void SendMessage(u32, const char *);
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
 extern struct MapTile *GetMapEntity(u32, u32);
 
 // Luminous Orb???
-void HandleLuminousOrbAction(u32 param_1)
+void HandleLuminousOrbAction(struct DungeonEntity *param_1)
 {
   struct MapTile *mapTile;
   int XCoord;

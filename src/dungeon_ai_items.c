@@ -22,6 +22,7 @@
 #include "dungeon_visibility.h"
 #include "item.h"
 #include "position.h"
+#include "position_util.h"
 #include "team_inventory.h"
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
@@ -35,7 +36,6 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-extern s32 CalculateFacingDir(struct Position*, struct Position*);
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;

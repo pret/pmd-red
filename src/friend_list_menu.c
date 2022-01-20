@@ -208,7 +208,7 @@ void sub_8026C14(void)
   struct unkStruct_8090F58 temp;
   int menuAction;
   struct ItemSlot slot;
-  
+
   menuAction = 0;
   sub_801A6E8(0);
   if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {

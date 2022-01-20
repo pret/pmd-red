@@ -12949,7 +12949,7 @@ _0805E0C2:
 	mov r0, r10
 	adds r1, r5, 0
 	str r3, [sp, 0x20]
-	bl CannotMoveForward
+	bl CanMoveForward2
 	lsls r0, 24
 	ldr r3, [sp, 0x20]
 	cmp r0, 0
@@ -14878,7 +14878,7 @@ _0805EFF6:
 	bne _0805F008
 	mov r0, r8
 	adds r1, r4, 0
-	bl CannotMoveForward
+	bl CanMoveForward2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F014

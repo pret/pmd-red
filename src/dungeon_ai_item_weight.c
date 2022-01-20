@@ -9,8 +9,7 @@
 #include "dungeon_util.h"
 #include "moves.h"
 #include "number_util.h"
-
-extern bool8 HasNegativeStatus(struct DungeonEntity*);
+#include "status_checks_1.h"
 
 u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags)
 {
@@ -96,7 +95,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                     }
                 }
             }
-            if (itemWeight > 98)
+            if (itemWeight >= 99)
             {
                 itemWeight = 99;
             }
