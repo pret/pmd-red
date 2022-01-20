@@ -42,3 +42,14 @@ bool8 HasNegativeStatus(struct DungeonEntity *pokemon)
     }
     return FALSE;
 }
+
+bool8 IsSleeping(struct DungeonEntity *pokemon)
+{
+    if (pokemon->entityData->sleepStatus != SLEEP_STATUS_SLEEP &&
+        pokemon->entityData->sleepStatus != SLEEP_STATUS_NAPPING &&
+        pokemon->entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}

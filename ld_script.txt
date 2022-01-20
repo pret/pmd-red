@@ -210,7 +210,7 @@ SECTIONS {
         src/status_checks.o(.text);
         asm/code_80701A4.o(.text);
         src/status_checks_1.o(.text);
-        asm/code_8070B28.o(.text);
+        asm/code_8070B48.o(.text);
         src/dungeon_capabilities.o(.text);
         asm/code_8070BC0.o(.text);
         src/dungeon_capabilities_1.o(.text);

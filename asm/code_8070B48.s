@@ -5,27 +5,6 @@
 
   	.text
   
-	thumb_func_start IsSleeping
-IsSleeping:
-	push {lr}
-	ldr r0, [r0, 0x70]
-	adds r0, 0xA8
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08070B40
-	cmp r0, 0x5
-	beq _08070B40
-	cmp r0, 0x3
-	beq _08070B40
-	movs r0, 0
-	b _08070B42
-_08070B40:
-	movs r0, 0x1
-_08070B42:
-	pop {r1}
-	bx r1
-	thumb_func_end IsSleeping
-
 	thumb_func_start HasQuarterHPOrLess
 HasQuarterHPOrLess:
 	push {lr}
