@@ -2652,7 +2652,7 @@ _08072F84:
 	bne _08072FCC
 	adds r0, r4, 0
 	adds r1, r3, 0
-	bl CanMoveForward2
+	bl CanMoveInDirection
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072FCC

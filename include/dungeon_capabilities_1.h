@@ -7,5 +7,7 @@
 bool8 CannotUseItems(struct DungeonEntity *pokemon);
 // 0x70CD0
 bool8 CannotAct(struct DungeonEntity *pokemon);
+// 0x70D6C
+bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir);
 
 #endif
