@@ -9,13 +9,13 @@
 #include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes_1.h"
 #include "dungeon_util.h"
 #include "map.h"
 
 const u8 gDirectionBitMasks[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
-extern u8 GetCrossableTerrain(s16);
 extern bool8 IsFixedDungeon();
 
 static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)

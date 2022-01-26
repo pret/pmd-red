@@ -209,6 +209,8 @@ SECTIONS {
         asm/code_806CD90.o(.text);
         src/status_checks.o(.text);
         asm/code_80701A4.o(.text);
+        src/dungeon_movement.o(.text);
+        asm/code_807034C.o(.text);
         src/status_checks_1.o(.text);
         asm/code_8070B48.o(.text);
         src/dungeon_capabilities.o(.text);
@@ -225,7 +227,7 @@ SECTIONS {
         asm/code_80718D8.o(.text);
         src/dungeon_ai_items.o(.text);
         asm/code_8073CF0.o(.text);
-        src/dungeon_movement.o(.text);
+        src/dungeon_ai_movement.o(.text);
         asm/code_8075BA4.o(.text);
         src/dungeon_ai_attack.o(.text);
         asm/code_807CABC.o(.text);

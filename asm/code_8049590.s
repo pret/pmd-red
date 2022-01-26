@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start GetMapEntity
 GetMapEntity:
 	push {r4,r5,lr}
@@ -292,7 +292,7 @@ _080497F8: .4byte 0x00003a0e
 _080497FC: .4byte gDungeonFileArchive
 _08049800: .4byte gUnknown_202F18C
 _08049804: .4byte gUnknown_202EE8C
-_08049808: .4byte gUnknown_202F314
+_08049808: .4byte gWalkableTileToCrossableTerrain
 _0804980C: .4byte gDungeonWaterType
 _08049810:
 	strb r6, [r2, 0x4]
