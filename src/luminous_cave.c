@@ -132,7 +132,7 @@ extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
 
 bool8 LuminousCave_HasOnly1Member(void);
 
-enum 
+enum
 {
     LUMINOUS_CAVE_ENTRY,
     LUMINOUS_CAVE_ASK_EVOLVE,
@@ -284,7 +284,7 @@ void sub_8024804(void)
 void UpdateLuminousCaveDialogue(void)
 {
   char *monName;
-  
+
   switch(gUnknown_203B2B0->state) {
     case LUMINOUS_CAVE_ENTRY:
         if (LuminousCave_HasOnly1Member()) {
@@ -306,7 +306,7 @@ void UpdateLuminousCaveDialogue(void)
         break;
     case LUMINOUS_CAVE_SHALL_RETURN:
         gUnknown_203B2B0->fallbackState = 4;
-        xxx_call_fade_in_new_bgm(MUS_LOADING_SCREEN,0x3c);
+        xxx_call_fade_in_new_bgm(MUS_FILE_SELECT,0x3c);
         sub_80141B4(gLuminousCaveYeShallReturn,0,0,0x305);
         break;
 

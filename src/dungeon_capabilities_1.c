@@ -2,10 +2,20 @@
 #include "dungeon_capabilities_1.h"
 
 #include "constants/dungeon.h"
+#include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "charge_move.h"
 #include "dungeon_ai.h"
 #include "dungeon_capabilities.h"
+#include "dungeon_engine.h"
+#include "dungeon_items.h"
+#include "dungeon_map_access.h"
+#include "dungeon_movement.h"
+#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_util.h"
+#include "map.h"
+
+const u8 gDirectionBitMasks[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
 static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)
 {
@@ -74,4 +84,44 @@ bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep)
       return FALSE;
   }
   return TRUE;
+}
+
+bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
+{
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
+    struct MapTile *currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
+        pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
+    if (currentMapTile->tileType & TILE_TYPE_MAP_EDGE || currentMapTile->pokemon != NULL)
+    {
+        return FALSE;
+    }
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE || HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            if (facingDir & 1)
+            {
+                // Super Mobile can't break walls diagonally.
+                crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
+            }
+            else
+            {
+                crossableTerrain = CROSSABLE_TERRAIN_WALL;
+            }
+        }
+    }
+    currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x, pokemon->posWorld.y);
+    if (!(currentMapTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks[facingDir & DIRECTION_MASK]))
+    {
+        return FALSE;
+    }
+    return TRUE;
 }

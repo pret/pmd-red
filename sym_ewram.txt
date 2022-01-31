@@ -831,7 +831,7 @@ gUnknown_202F30C = .; /* 202F30C */
 gUnknown_202F310 = .; /* 202F310 */
 	. += 0x4;
 
-gUnknown_202F314 = .; /* 202F314 */
+gWalkableTileToCrossableTerrain = .; /* 202F314 */
 	. += 0x8;
 
 gUnknown_202F31C = .; /* 202F31C */

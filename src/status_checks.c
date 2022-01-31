@@ -6,6 +6,7 @@
 #include "constants/status.h"
 #include "code_80521D0.h"
 #include "dungeon_action.h"
+#include "dungeon_capabilities_1.h"
 #include "dungeon_random.h"
 
 extern char *gPtrFrozenMessage;
@@ -17,7 +18,6 @@ extern char *gPtrInfatuatedMessage;
 extern char gAvailablePokemonNames[];
 
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern bool8 CanMoveForward2(struct DungeonEntity*, u8);
 extern void DecideAttack(struct DungeonEntity*);
 
 bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
@@ -74,7 +74,7 @@ bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
     }
     if (pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
     {
-        if (!CanMoveForward2(pokemon, pokemonData->action.facingDir))
+        if (!CanMoveInDirection(pokemon, pokemonData->action.facingDir))
         {
             if (DungeonRandomCapped(2) != 0)
             {

@@ -3,7 +3,7 @@
 
 #include "dungeon_map_access.h"
 
-const struct Position gAdjacentTileOffsets[NUM_DIRECTIONS] = {
+const struct Position gAdjacentTileOffsets[] = {
     {0, 1},
     {1, 1},
     {1, 0},

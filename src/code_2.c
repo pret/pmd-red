@@ -138,7 +138,7 @@ void GameLoop(void)
             FinishReadSavePak();
         }
         tmp3 = 1;
-        StartNewBGM(MUS_LOADING_SCREEN);
+        StartNewBGM(MUS_FILE_SELECT);
         flag = TRUE;
         sub_80095CC(0, 20);
         InitMainMenu();
