@@ -113,9 +113,9 @@ bool8 CanSeeTeammate(struct DungeonEntity * pokemon)
   }
 }
 
-u8 GetMoveType_2(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove)
+u8 GetMoveTypeForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove)
 {
-    if(pokeMove->moveID == MOVE_HIDDEN_POWER)
+    if (pokeMove->moveID == MOVE_HIDDEN_POWER)
         return pokemon->entityData->hiddenPowerType;
     else
         return GetMoveType(pokeMove);

@@ -51,7 +51,7 @@ bool8 sub_80717A4(struct DungeonEntity *param_1, u16 moveID)
 {
   struct DungeonEntityData * entityData;
   s32 iVar3;
-  
+
   entityData = param_1->entityData;
   if ((entityData->sleepStatus != SLEEP_STATUS_SLEEP) && (entityData->sleepStatus != SLEEP_STATUS_NAPPING) && (entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE)) {
       return FALSE;
@@ -66,10 +66,10 @@ bool8 sub_80717A4(struct DungeonEntity *param_1, u16 moveID)
     for(iVar3 = 0, pokeMove = entityData->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
     {
       if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS) != 0) && (entityData->isLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED) != 0)))
-            if((sub_805744C(param_1, pokeMove2, 1) != '\0') && (pokeMove->pp != 0))
+            if((sub_805744C(param_1, pokeMove2, 1) != '\0') && (pokeMove->PP != 0))
                     if(pokeMove->moveID == moveID)
                         return TRUE;
-    } 
+    }
     return FALSE;
   }
 }

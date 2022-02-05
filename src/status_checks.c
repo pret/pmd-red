@@ -6,8 +6,11 @@
 #include "constants/status.h"
 #include "code_80521D0.h"
 #include "dungeon_action.h"
+#include "dungeon_ai_attack.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_random.h"
+
+const s16 gConfusedAttackChance = 70;
 
 extern char *gPtrFrozenMessage;
 extern char *gPtrWrappedAroundMessage;
@@ -18,7 +21,6 @@ extern char *gPtrInfatuatedMessage;
 extern char gAvailablePokemonNames[];
 
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern void DecideAttack(struct DungeonEntity*);
 
 bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
 {

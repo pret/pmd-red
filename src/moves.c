@@ -99,7 +99,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
             ExpandPlaceholdersBuffer
                     (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->pp,maxPP);
+                    move->PP,maxPP);
             break;
 
         case 2:
@@ -107,7 +107,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
             ExpandPlaceholdersBuffer
                     (buffer,gUnknown_8109910,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->pp,maxPP);
+                    move->PP,maxPP);
             break;
 
         case 3:
@@ -115,7 +115,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
             ExpandPlaceholdersBuffer
                     (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->pp,maxPP);
+                    move->PP,maxPP);
             break;
 
         case 4:
@@ -123,7 +123,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
             ExpandPlaceholdersBuffer
                     (buffer,gUnknown_8109910,uVar2, move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->pp,maxPP);
+                    move->PP,maxPP);
             break;
         }
 }
@@ -133,7 +133,7 @@ void InitPokemonMove(struct PokemonMove *move, u16 moveID)
     move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
     move->sealed = FALSE;
     move->moveID = moveID;
-    move->pp = GetMoveMaxPP(move);
+    move->PP = GetMoveMaxPP(move);
     move->powerBoost = 0;
 }
 
@@ -146,7 +146,7 @@ void sub_8092AA8(struct PokemonMove *move, u16 moveID)
         move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
         move->sealed = FALSE;
         move->moveID = moveID;
-        move->pp = GetMoveMaxPP(move);
+        move->PP = GetMoveMaxPP(move);
         move->powerBoost = 0;
     }
 }
@@ -155,7 +155,7 @@ void InitZeroedPPPokemonMove(struct PokemonMove *move, u16 moveID)
 {
     move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
     move->moveID = moveID;
-    move->pp = 0;
+    move->PP = 0;
 }
 
 s16 GetMoveTargetingFlags(struct PokemonMove *move, u32 r1)

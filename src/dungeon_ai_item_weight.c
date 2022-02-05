@@ -85,11 +85,11 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             {
                 if (move->moveFlags & MOVE_FLAG_EXISTS)
                 {
-                    if (move->pp == 0)
+                    if (move->PP == 0)
                     {
                         itemWeight += 30;
                     }
-                    if (move->pp != GetMoveMaxPP(move2))
+                    if (move->PP != GetMoveMaxPP(move2))
                     {
                         itemWeight += 6;
                     }

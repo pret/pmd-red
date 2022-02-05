@@ -8,6 +8,7 @@
 #include "constants/targeting.h"
 #include "code_80521D0.h"
 #include "dungeon_action.h"
+#include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
@@ -27,7 +28,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void ResetAction(u16*);
-extern void DecideAttack(struct DungeonEntity*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(struct DungeonEntity *, u32);

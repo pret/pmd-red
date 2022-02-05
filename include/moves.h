@@ -3,6 +3,11 @@
 
 #include "constants/move.h"
 
+// 0x92A88
+void InitPokemonMove(struct PokemonMove *move, u16 moveID);
+// 0x92B90
+u8 GetMoveWeight(struct PokemonMove *move);
+// 0x92BF4
 u32 GetMoveMaxPP(struct PokemonMove *move);
 
 #endif

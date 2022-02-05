@@ -1209,7 +1209,7 @@ sub_80582EC:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058328
@@ -1684,7 +1684,7 @@ sub_805867C:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080586B8
@@ -2255,7 +2255,7 @@ SkyAttackMoveAction:
 	mov r8, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058B14
@@ -3847,7 +3847,7 @@ sub_805968C:
 	beq _080596B6
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080596EC
@@ -3972,7 +3972,7 @@ sub_8059790:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080597CC
@@ -4077,7 +4077,7 @@ _0805986C: .4byte gUnknown_80FD128
 _08059870:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080598A4
@@ -4548,7 +4548,7 @@ _08059BE2:
 	beq _08059C08
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08059C08
@@ -4573,7 +4573,7 @@ _08059C08:
 	adds r4, r1, r0
 	ldr r1, [r4]
 	adds r0, r5, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r1, r7, 0
 	adds r1, 0x5C
 	movs r2, 0
@@ -4912,7 +4912,7 @@ _08059E8A:
 	bne _08059F1A
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5002,7 +5002,7 @@ sub_8059F38:
 	mov r8, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08059FA0
@@ -5094,7 +5094,7 @@ _08059FFE:
 	bne _0805A090
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8374,7 +8374,7 @@ SkullBashMoveAction:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B8EC
@@ -12001,7 +12001,7 @@ _0805D928:
 	strb r5, [r1, 0x1]
 	bl GetLeaderEntity
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805D976
@@ -12327,7 +12327,7 @@ _0805DBF4: .4byte 0x00000673
 _0805DBF8:
 	mov r0, r10
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DC08
@@ -16024,7 +16024,7 @@ _0805F9A0:
 	bl sub_80073B8
 	bl GetLeaderEntity
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F9CC
@@ -30935,7 +30935,7 @@ _0806721C: .4byte gUnknown_80F8BE0
 _08067220:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067248
@@ -36863,7 +36863,7 @@ _0806A068:
 	beq _0806A0FA
 	mov r0, r8
 	mov r1, r9
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r1, r9
@@ -36954,7 +36954,7 @@ sub_806A120:
 	bne _0806A19C
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8092364

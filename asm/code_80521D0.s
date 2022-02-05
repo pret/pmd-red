@@ -2505,7 +2505,7 @@ _080537B0: .4byte gUnknown_80FCD28
 _080537B4:
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2831,7 +2831,7 @@ _08053A4C:
 	movs r4, 0
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053A7E
@@ -5857,7 +5857,7 @@ sub_8055640:
 	mov r9, r3
 	ldr r7, [sp, 0x44]
 	adds r1, r5, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -6114,7 +6114,7 @@ sub_8055864:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r1, r5, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6521,7 +6521,7 @@ _08055B74:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x30]
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6, 0x4]
@@ -7148,7 +7148,7 @@ _080560AE:
 	beq _080560CC
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _080560CC
@@ -7165,7 +7165,7 @@ _080560CC:
 	bl sub_80928C0
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056124
@@ -8038,7 +8038,7 @@ _080567EC:
 	beq _08056820
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _08056820
@@ -8740,7 +8740,7 @@ _08056D44:
 	bne _08056D86
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r2, r8
@@ -9186,8 +9186,8 @@ _080570A6:
 	bx r1
 	thumb_func_end sub_8057088
 
-	thumb_func_start sub_80570AC
-sub_80570AC:
+	thumb_func_start IsChargeMove
+IsChargeMove:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -9229,6 +9229,6 @@ _080570EA:
 	bx r1
 	.align 2, 0
 _080570F0: .4byte gChargeMovesToStatuses
-	thumb_func_end sub_80570AC
+	thumb_func_end IsChargeMove
 
 	.align 2, 0

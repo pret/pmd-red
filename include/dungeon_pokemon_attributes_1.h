@@ -12,7 +12,7 @@ bool8 HasIQSkill(struct DungeonEntity *pokemon, u8 IQSkill);
 
 void LoadIQSkills(struct DungeonEntity *pokemon);
 bool8 CanSeeTeammate(struct DungeonEntity * pokemon);
-u8 GetMoveType_2(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove);
+u8 GetMoveTypeForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove);
 
 // 0x71A44
 s32 CalculateMovePower(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove);

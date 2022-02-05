@@ -932,7 +932,7 @@ _080577C8: .4byte gUnknown_80FD14C
 _080577CC:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80570AC
+	bl IsChargeMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080577F8

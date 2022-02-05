@@ -44,7 +44,7 @@ struct PokemonMove
     u8 moveFlags;
     bool8 sealed;
     u16 moveID;
-    u8 pp;
+    u8 PP;
     u8 powerBoost; // How much the move is boosted by Ginsengs.
 };
 
