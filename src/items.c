@@ -704,13 +704,13 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
     u8* typestring;
     u32 result;
 
-    InitPokemonMove((struct PokemonMove *)buffer8, move);
+    InitPokemonMove(buffer8, move);
     sub_80078A4(a2, 4, 82, 200, 7);
     xxx_format_and_draw(4, 84, gPtrTypeText, a2, 0);
-    moves_data = GetMoveType((struct PokemonMove *)buffer8);
+    moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
     xxx_format_and_draw(64, 84, typestring, a2, 0);
-    result = GetMoveMaxPP((struct PokemonMove *)buffer8);
+    result = GetMoveMaxPP(buffer8);
     gUnknown_202DE30 = result;
     xxx_format_and_draw(128, 84, gPtrPPD0Text, a2, 0);
   }
