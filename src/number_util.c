@@ -65,25 +65,25 @@ void sub_80944BC(s16 moveID, u8 *arg2)
     s32 moveID_s32 = moveID;
     struct PokemonMove stack;
 
-    if (moveID_s32 <= 0x1F3) {
+    if (moveID_s32 < 0x1F4) {
         // Needed this cast/variable to match
         moveID_u16 = moveID_s32;
         sub_8092AA8(&stack, moveID_u16);
         sub_80928C0(gUnknown_202DE58, &stack, NULL);
         xxx_format_string(*gUnknown_811383C, arg2, arg2 + 200, 0);
     } else {
-        strncpy(arg2, gUnknown_8113080[moveID + 0xfffffe0C].unk4, 200);
+        strncpy(arg2, gUnknown_8113080[moveID - 0x1F4].unk4, 200);
     }
 }
 
 u8 sub_8094528(s16 moveID)
 {
-    if(moveID <= 0x1F3)
+    if(moveID < 0x1F4)
     {
         return 1;
     }
     else
     {
-        return gUnknown_8113080[moveID + 0xfffffe0C].unk0;
+        return gUnknown_8113080[moveID  - 0x1F4].unk0;
     }
 }
