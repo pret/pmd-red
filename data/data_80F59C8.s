@@ -6109,7 +6109,3 @@ gUnknown_81069BC: @ 81069BC
 	.global gUnknown_81069D4
 gUnknown_81069D4: @ 81069D4
 	.incbin "baserom.gba", 0x1069D4, 0x20
-
-	.global gChargeMovesToStatuses
-gChargeMovesToStatuses: @ 81069F4
-	.incbin "baserom.gba", 0x1069F4, 0x28

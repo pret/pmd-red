@@ -1209,7 +1209,7 @@ sub_80582EC:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058328
@@ -1684,7 +1684,7 @@ sub_805867C:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080586B8
@@ -2255,7 +2255,7 @@ SkyAttackMoveAction:
 	mov r8, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058B14
@@ -3847,7 +3847,7 @@ sub_805968C:
 	beq _080596B6
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080596EC
@@ -3972,7 +3972,7 @@ sub_8059790:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080597CC
@@ -4077,7 +4077,7 @@ _0805986C: .4byte gUnknown_80FD128
 _08059870:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080598A4
@@ -5002,7 +5002,7 @@ sub_8059F38:
 	mov r8, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08059FA0
@@ -8374,7 +8374,7 @@ SkullBashMoveAction:
 	adds r4, r2, 0
 	adds r6, r3, 0
 	adds r1, r4, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B8EC

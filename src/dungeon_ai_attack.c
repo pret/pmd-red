@@ -8,6 +8,7 @@
 #include "constants/status.h"
 #include "constants/tactic.h"
 #include "constants/type.h"
+#include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai.h"
 #include "dungeon_capabilities_1.h"
@@ -29,7 +30,6 @@ struct MoveTargetResults
     s32 moveWeight;
 };
 
-extern bool8 IsChargeMove(struct DungeonEntity*, struct PokemonMove*);
 extern void TargetTileInFront(struct DungeonEntity*);
 extern s32 FindMoveTarget(struct MoveTargetResults*, struct DungeonEntity*, struct PokemonMove*);
 extern bool8 IsMoveUsable(struct DungeonEntity*, s32, bool8);
@@ -63,7 +63,7 @@ void DecideAttack(struct DungeonEntity *pokemon)
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (pokemonData->moves[i].moveFlags & MOVE_FLAG_EXISTS &&
-                IsChargeMove(pokemon, &pokemonData->moves[i]) &&
+                MoveMatchesChargingStatus(pokemon, &pokemonData->moves[i]) &&
                 pokemonData->chargingStatusMoveIndex == i)
             {
                 s32 chosenMoveIndex;

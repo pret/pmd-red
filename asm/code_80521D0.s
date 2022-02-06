@@ -2831,7 +2831,7 @@ _08053A4C:
 	movs r4, 0
 	adds r0, r7, 0
 	mov r1, r8
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053A7E
@@ -6521,7 +6521,7 @@ _08055B74:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x30]
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6, 0x4]
@@ -7148,7 +7148,7 @@ _080560AE:
 	beq _080560CC
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080560CC
@@ -7165,7 +7165,7 @@ _080560CC:
 	bl sub_80928C0
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056124
@@ -8038,7 +8038,7 @@ _080567EC:
 	beq _08056820
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08056820
@@ -8740,7 +8740,7 @@ _08056D44:
 	bne _08056D86
 	adds r0, r5, 0
 	mov r1, r8
-	bl IsChargeMove
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r2, r8
@@ -9185,50 +9185,5 @@ _080570A6:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8057088
-
-	thumb_func_start IsChargeMove
-IsChargeMove:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	bne _080570C2
-	b _080570E8
-_080570BE:
-	movs r0, 0x1
-	b _080570EA
-_080570C2:
-	ldr r0, [r4, 0x70]
-	movs r3, 0
-	ldr r2, _080570F0
-	adds r4, r0, 0
-	adds r4, 0xC0
-_080570CC:
-	ldrh r1, [r2]
-	cmp r1, 0
-	beq _080570E8
-	ldrh r0, [r5, 0x2]
-	cmp r0, r1
-	bne _080570E0
-	ldrb r0, [r4]
-	ldrb r1, [r2, 0x2]
-	cmp r0, r1
-	beq _080570BE
-_080570E0:
-	adds r2, 0x4
-	adds r3, 0x1
-	cmp r3, 0x63
-	ble _080570CC
-_080570E8:
-	movs r0, 0
-_080570EA:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080570F0: .4byte gChargeMovesToStatuses
-	thumb_func_end IsChargeMove
 
 	.align 2, 0

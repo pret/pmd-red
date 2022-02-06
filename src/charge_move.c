@@ -1,8 +1,28 @@
 #include "global.h"
 #include "charge_move.h"
 
+#include "constants/move_id.h"
 #include "constants/status.h"
 #include "dungeon_util.h"
+
+struct MultiTurnChargeMove
+{
+    u16 moveID;
+    u8 chargingStatus;
+};
+
+const struct MultiTurnChargeMove gMultiTurnChargeMoves[10] = {
+    {MOVE_SOLARBEAM, CHARGING_STATUS_SOLARBEAM},
+    {MOVE_SKY_ATTACK, CHARGING_STATUS_SKY_ATTACK},
+    {MOVE_RAZOR_WIND, CHARGING_STATUS_RAZOR_WIND},
+    {MOVE_FOCUS_PUNCH, CHARGING_STATUS_FOCUS_PUNCH},
+    {MOVE_SKULL_BASH, CHARGING_STATUS_SKULL_BASH},
+    {MOVE_FLY, CHARGING_STATUS_FLY},
+    {MOVE_BOUNCE, CHARGING_STATUS_BOUNCE},
+    {MOVE_DIVE, CHARGING_STATUS_DIVE},
+    {MOVE_DIG, CHARGING_STATUS_DIG},
+    {MOVE_NONE, CHARGING_STATUS_NONE}
+};
 
 const u32 gMultiTurnChargingStatuses[10] = {
     CHARGING_STATUS_SOLARBEAM,
@@ -18,6 +38,32 @@ const u32 gMultiTurnChargingStatuses[10] = {
 };
 
 ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
+
+bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMove *move)
+{
+    if (!EntityExists(pokemon))
+    {
+        return FALSE;
+    }
+    else
+    {
+        struct DungeonEntityData *pokemonData = pokemon->entityData;
+        s32 i;
+        for (i = 0; i < 100; i++)
+        {
+            if (gMultiTurnChargeMoves[i].moveID == MOVE_NONE)
+            {
+                return FALSE;
+            }
+            if (move->moveID == gMultiTurnChargeMoves[i].moveID &&
+                pokemonData->chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
+            {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+}
 
 bool8 IsCharging(struct DungeonEntity *pokemon, bool8 checkCharge)
 {
