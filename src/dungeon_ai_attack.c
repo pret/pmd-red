@@ -18,6 +18,7 @@
 #include "dungeon_random_1.h"
 #include "moves.h"
 #include "status_checks.h"
+#include "targeting.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -30,7 +31,6 @@ struct MoveTargetResults
     s32 moveWeight;
 };
 
-extern void TargetTileInFront(struct DungeonEntity*);
 extern s32 FindMoveTarget(struct MoveTargetResults*, struct DungeonEntity*, struct PokemonMove*);
 extern bool8 IsMoveUsable(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);

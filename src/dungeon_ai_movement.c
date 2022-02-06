@@ -20,6 +20,7 @@
 #include "map.h"
 #include "pokemon.h"
 #include "status_checks.h"
+#include "targeting.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
@@ -35,7 +36,6 @@ extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 extern struct DungeonEntity *GetLeaderEntity();
-extern void TargetTileInFront(struct DungeonEntity *);
 
 u32 sub_8075818(struct DungeonEntity *entity)
 {

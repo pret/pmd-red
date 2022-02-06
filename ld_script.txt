@@ -207,6 +207,8 @@ SECTIONS {
         asm/code_8057144.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
+        src/targeting.o(.text);
+        asm/code_8069E0C.o(.text);
         src/code_806CD90.o(.text);
         asm/code_806CD90.o(.text);
         src/status_checks.o(.text);
