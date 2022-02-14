@@ -47,7 +47,6 @@ extern s16 gUnknown_810AC66; // 0x8
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
 
-extern void SetIQSkill(u8 *, u32);
 extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);

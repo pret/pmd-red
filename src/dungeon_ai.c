@@ -4,7 +4,6 @@
 #include "constants/ability.h"
 #include "constants/tactic.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_pokemon_attributes_1.h"
 #include "dungeon_util.h"
 
 extern void CheckRunAwayVisualFlag(struct DungeonEntity *, bool8 showRunAwayEffect);

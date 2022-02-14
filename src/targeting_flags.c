@@ -3,9 +3,8 @@
 
 #include "constants/move_id.h"
 #include "constants/type.h"
+#include "dungeon_pokemon_attributes.h"
 #include "moves.h"
-
-extern bool8 HasType(struct DungeonEntity *pokemon, u8 type);
 
 s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, u32 isAI)
 {

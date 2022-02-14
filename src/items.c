@@ -40,7 +40,6 @@ extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u32 GetMoveType(void*);
 extern u8* GetUnformattedTypeString(s16);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);

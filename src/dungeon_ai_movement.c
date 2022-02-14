@@ -12,7 +12,7 @@
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"

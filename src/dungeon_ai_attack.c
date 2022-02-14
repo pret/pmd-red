@@ -16,7 +16,6 @@
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_pokemon_attributes_1.h"
 #include "dungeon_random.h"
 #include "dungeon_random_1.h"
 #include "dungeon_util.h"

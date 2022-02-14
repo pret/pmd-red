@@ -2,6 +2,7 @@
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 #include "constants/move.h"
+#include "moves.h"
 
 extern u32 gUnknown_80FCF74;
 extern u32 gUnknown_80FCF80;
@@ -30,7 +31,6 @@ extern void sub_806F370(struct DungeonEntity *r0, struct DungeonEntity *r1, u32,
 
 extern u32 gUnknown_80FD018;
 extern s16 sub_8057600(void*, u32);
-extern u32 GetMoveType(void*);
 
 bool32 sub_8057824(struct DungeonEntity *param_1, struct DungeonEntity *param_2)
 {

@@ -4,7 +4,7 @@
 #include "constants/iq_skill.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 
 bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
