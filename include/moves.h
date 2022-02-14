@@ -9,5 +9,7 @@ void InitPokemonMove(struct PokemonMove *move, u16 moveID);
 u8 GetMoveWeight(struct PokemonMove *move);
 // 0x92BF4
 u32 GetMoveMaxPP(struct PokemonMove *move);
+// 0x92C54
+bool8 GetMoveDealsDirectDamage(struct PokemonMove *move);
 
 #endif

@@ -38,7 +38,7 @@ struct MapTile
     u8 unk8;
     /* 0x9 */ u8 roomIndex;
     // Bitwise flags for whether Pokémon can move to an adjacent tile. Bits correspond to directions in direction.h.
-    // Different sets of flags are used for Pokémon that can cross special terrain, corresponding to Cthe rossableTerrain enum.
+    // Different sets of flags are used for Pokémon that can cross special terrain, corresponding to the CrossableTerrain enum.
     /* 0xA */ u8 canMoveAdjacent[NUM_CROSSABLE_TERRAIN];
     u8 fillE[0x10 - 0xE];
     /* 0x10 */ struct DungeonEntity *pokemon; // Pokémon on the tile.
