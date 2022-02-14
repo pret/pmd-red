@@ -271,12 +271,12 @@ u8 GetMoveCriticalHitChance(struct PokemonMove *move)
     return gMovesData[move->moveID].criticalHitChance;
 }
 
-bool8 GetMoveCannotHitFrozen(struct PokemonMove *move)
+bool8 MoveCannotHitFrozen(struct PokemonMove *move)
 {
     return gMovesData[move->moveID].cannotHitFrozen;
 }
 
-bool8 GetMoveDealsDirectDamage(struct PokemonMove *move)
+bool8 MoveDealsDirectDamage(struct PokemonMove *move)
 {
     return gMovesData[move->moveID].dealsDirectDamage;
 }

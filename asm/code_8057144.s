@@ -392,7 +392,7 @@ IsMoveUsable_2:
 	cmp r1, 0x5
 	bne _08057414
 	adds r0, r4, 0
-	bl GetMoveDealsDirectDamage
+	bl MoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805743E
@@ -460,7 +460,7 @@ sub_805744C:
 	cmp r1, 0x5
 	bne _0805748E
 	adds r0, r4, 0
-	bl GetMoveDealsDirectDamage
+	bl MoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _080574B6

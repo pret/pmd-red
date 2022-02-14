@@ -10965,7 +10965,7 @@ CanUseWithStatusChecker_2:
 	cmp r0, 0x1
 	bne _0805CEE0
 	adds r0, r7, 0
-	bl GetMoveCannotHitFrozen
+	bl MoveCannotHitFrozen
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CEE0

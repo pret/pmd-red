@@ -348,7 +348,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     targetingFlags = GetMoveTargetingFlagsForPokemon(pokemon, move, TRUE);
     hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
     moveTargetResults->moveUsable = FALSE;
-    if ((pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !GetMoveDealsDirectDamage(move)) ||
+    if ((pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !MoveDealsDirectDamage(move)) ||
         (hasStatusChecker && !CanUseWithStatusChecker(pokemon, move)))
     {
         return 1;

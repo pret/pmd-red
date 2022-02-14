@@ -14,6 +14,6 @@ s32 GetMovePower(struct PokemonMove *move);
 // 0x92BF4
 u32 GetMoveMaxPP(struct PokemonMove *move);
 // 0x92C54
-bool8 GetMoveDealsDirectDamage(struct PokemonMove *move);
+bool8 MoveDealsDirectDamage(struct PokemonMove *move);
 
 #endif
