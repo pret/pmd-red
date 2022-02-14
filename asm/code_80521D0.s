@@ -2599,7 +2599,7 @@ _08053874:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r1, 0xF0
 	ands r1, r0
 	cmp r1, 0
@@ -2897,7 +2897,7 @@ _08053AE8:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	asrs r1, r0, 16
 	ldr r0, _08053C88
@@ -2958,7 +2958,7 @@ _08053B5C:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 12
@@ -3310,7 +3310,7 @@ _08053E4A:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0
@@ -7112,7 +7112,7 @@ _08056068:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r4, 0xF0
 	adds r1, r4, 0
 	ands r1, r0
@@ -7124,7 +7124,7 @@ _08056084:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0x80
@@ -8349,7 +8349,7 @@ _08056A66:
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	adds r2, r0, 0
 	lsls r2, 16
 	asrs r2, 16
@@ -8731,7 +8731,7 @@ _08056D44:
 	adds r0, r5, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	asrs r7, r0, 16
 	movs r0, 0xF

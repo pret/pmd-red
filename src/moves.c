@@ -158,9 +158,9 @@ void InitZeroedPPPokemonMove(struct PokemonMove *move, u16 moveID)
     move->PP = 0;
 }
 
-s16 GetMoveTargetingFlags(struct PokemonMove *move, u32 r1)
+s16 GetMoveTargetingFlags(struct PokemonMove *move, u32 isAI)
 {
-    return gMovesData[move->moveID].targetingFlags[r1];
+    return gMovesData[move->moveID].targetingFlags[isAI];
 }
 
 u8 GetMoveType(struct PokemonMove *move)

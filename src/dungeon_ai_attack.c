@@ -25,6 +25,7 @@
 #include "position_util.h"
 #include "status_checks.h"
 #include "targeting.h"
+#include "targeting_flags.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -38,7 +39,6 @@ extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
 extern bool8 IsMoveUsable(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
-extern s16 GetTargetingFlags(struct DungeonEntity*, struct PokemonMove*, bool8);
 extern bool8 CanUseWithStatusChecker(struct DungeonEntity*, struct PokemonMove*);
 extern bool8 CanAttackInFront(struct DungeonEntity*, s32);
 extern s32 WeightMoveIfUsable(s32, s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
@@ -346,7 +346,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     {
         gCanAttackInDirection[i] = FALSE;
     }
-    targetingFlags = GetTargetingFlags(pokemon, move, TRUE);
+    targetingFlags = GetMoveTargetingFlagsForPokemon(pokemon, move, TRUE);
     hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
     moveTargetResults->moveUsable = FALSE;
     if ((pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !GetMoveDealsDirectDamage(move)) ||
@@ -477,7 +477,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             }
         }
     }
-    else if (rangeTargetingFlags == TARGETING_FLAG_SELF_HEAL)
+    else if (rangeTargetingFlags == TARGETING_FLAG_TARGET_SELF)
     {
         numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, pokemon, move, hasStatusChecker);
     }
