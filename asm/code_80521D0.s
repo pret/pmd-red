@@ -2505,7 +2505,7 @@ _080537B0: .4byte gUnknown_80FCD28
 _080537B4:
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2599,7 +2599,7 @@ _08053874:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r1, 0xF0
 	ands r1, r0
 	cmp r1, 0
@@ -2831,7 +2831,7 @@ _08053A4C:
 	movs r4, 0
 	adds r0, r7, 0
 	mov r1, r8
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053A7E
@@ -2897,7 +2897,7 @@ _08053AE8:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	asrs r1, r0, 16
 	ldr r0, _08053C88
@@ -2958,7 +2958,7 @@ _08053B5C:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 12
@@ -3310,7 +3310,7 @@ _08053E4A:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0
@@ -5857,7 +5857,7 @@ sub_8055640:
 	mov r9, r3
 	ldr r7, [sp, 0x44]
 	adds r1, r5, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -6114,7 +6114,7 @@ sub_8055864:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r1, r5, 0
-	bl GetMoveType_2
+	bl GetMoveTypeForPokemon
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6521,7 +6521,7 @@ _08055B74:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x30]
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6, 0x4]
@@ -7112,7 +7112,7 @@ _08056068:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	movs r4, 0xF0
 	adds r1, r4, 0
 	ands r1, r0
@@ -7124,7 +7124,7 @@ _08056084:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0x80
@@ -7148,7 +7148,7 @@ _080560AE:
 	beq _080560CC
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080560CC
@@ -7165,7 +7165,7 @@ _080560CC:
 	bl sub_80928C0
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056124
@@ -8038,7 +8038,7 @@ _080567EC:
 	beq _08056820
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08056820
@@ -8349,7 +8349,7 @@ _08056A66:
 	mov r0, r10
 	ldr r1, [sp, 0x1C]
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	adds r2, r0, 0
 	lsls r2, 16
 	asrs r2, 16
@@ -8731,7 +8731,7 @@ _08056D44:
 	adds r0, r5, 0
 	mov r1, r8
 	movs r2, 0
-	bl GetTargetingFlags
+	bl GetMoveTargetingFlagsForPokemon
 	lsls r0, 16
 	asrs r7, r0, 16
 	movs r0, 0xF
@@ -8740,7 +8740,7 @@ _08056D44:
 	bne _08056D86
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r2, r8
@@ -9185,50 +9185,5 @@ _080570A6:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8057088
-
-	thumb_func_start sub_80570AC
-sub_80570AC:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	bne _080570C2
-	b _080570E8
-_080570BE:
-	movs r0, 0x1
-	b _080570EA
-_080570C2:
-	ldr r0, [r4, 0x70]
-	movs r3, 0
-	ldr r2, _080570F0
-	adds r4, r0, 0
-	adds r4, 0xC0
-_080570CC:
-	ldrh r1, [r2]
-	cmp r1, 0
-	beq _080570E8
-	ldrh r0, [r5, 0x2]
-	cmp r0, r1
-	bne _080570E0
-	ldrb r0, [r4]
-	ldrb r1, [r2, 0x2]
-	cmp r0, r1
-	beq _080570BE
-_080570E0:
-	adds r2, 0x4
-	adds r3, 0x1
-	cmp r3, 0x63
-	ble _080570CC
-_080570E8:
-	movs r0, 0
-_080570EA:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080570F0: .4byte gChargeMovesToStatuses
-	thumb_func_end sub_80570AC
 
 	.align 2, 0

@@ -2,7 +2,7 @@
 #include "dungeon_visibility.h"
 
 #include "constants/status.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
 

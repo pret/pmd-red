@@ -7,7 +7,7 @@
 #include "constants/targeting.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_1.h"
-#include "dungeon_ai_attack.h"
+#include "dungeon_ai_attack_1.h"
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities.h"
@@ -15,7 +15,7 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_random_1.h"
 #include "dungeon_util.h"
@@ -40,7 +40,7 @@ extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
 extern u32 gPotentialTargetWeights[NUM_DIRECTIONS];
-extern u32 gPotentialTargetDirections[NUM_DIRECTIONS];
+extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
 
@@ -101,7 +101,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                         pokemonData->action.actionUseIndex = selectedToolboxIndex;
                         pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
                         pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                        pokemonData->action.facingDir = gPotentialTargetDirections[targetIndex] & DIRECTION_MASK;
+                        pokemonData->action.facingDir = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
                 }
@@ -261,7 +261,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                                     pokemonData->action.actionUseIndex = selectedToolboxIndex;
                                     pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
                                     pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                                    pokemonData->action.facingDir = gPotentialTargetDirections[targetIndex] & DIRECTION_MASK;
+                                    pokemonData->action.facingDir = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }
                             }
@@ -421,7 +421,7 @@ void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targe
         u32 itemWeight;
         u32 *targetWeight;
         gTargetAhead[targetDirection] = TRUE;
-        gPotentialTargetDirections[gNumPotentialTargets] = targetDirection;
+        gPotentialItemTargetDirections[gNumPotentialTargets] = targetDirection;
         targetWeight = &gPotentialTargetWeights[gNumPotentialTargets];
         itemWeight = !ignoreRollChance ? EvaluateItem(targetPokemon, item, targetingFlags) : 100;
         *targetWeight = itemWeight;

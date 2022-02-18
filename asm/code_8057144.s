@@ -392,7 +392,7 @@ IsMoveUsable_2:
 	cmp r1, 0x5
 	bne _08057414
 	adds r0, r4, 0
-	bl GetMoveDealsDirectDamage
+	bl MoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805743E
@@ -460,7 +460,7 @@ sub_805744C:
 	cmp r1, 0x5
 	bne _0805748E
 	adds r0, r4, 0
-	bl GetMoveDealsDirectDamage
+	bl MoveDealsDirectDamage
 	lsls r0, 24
 	cmp r0, 0
 	beq _080574B6
@@ -932,7 +932,7 @@ _080577C8: .4byte gUnknown_80FD14C
 _080577CC:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080577F8

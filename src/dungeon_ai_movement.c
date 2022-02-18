@@ -8,10 +8,11 @@
 #include "constants/targeting.h"
 #include "code_80521D0.h"
 #include "dungeon_action.h"
+#include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
@@ -19,6 +20,7 @@
 #include "map.h"
 #include "pokemon.h"
 #include "status_checks.h"
+#include "targeting.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
@@ -27,7 +29,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void ResetAction(u16*);
-extern void DecideAttack(struct DungeonEntity*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(struct DungeonEntity *, u32);
@@ -35,7 +36,6 @@ extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 extern struct DungeonEntity *GetLeaderEntity();
-extern void TargetTileInFront(struct DungeonEntity *);
 
 u32 sub_8075818(struct DungeonEntity *entity)
 {

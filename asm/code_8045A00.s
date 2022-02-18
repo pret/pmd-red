@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start CanSee_2
 CanSee_2:
 	push {r4,r5,lr}
@@ -566,7 +566,7 @@ _08045DF4:
 _08045E08:
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045E40

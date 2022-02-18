@@ -3,7 +3,7 @@
 
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "dungeon_pokemon_attributes_1.h"
+#include "dungeon_pokemon_attributes.h"
 
 const u8 gTargetingData[3][2][2][2] = {
     {

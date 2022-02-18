@@ -105,7 +105,7 @@ _08073D80:
 _08073D98:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl ShouldAvoidEnemies_2
+	bl ShouldAvoidEnemiesAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073DC8

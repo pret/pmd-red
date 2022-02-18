@@ -153,7 +153,7 @@ _080702B0:
 	beq _08070312
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_80570AC
+	bl MoveMatchesChargingStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070312

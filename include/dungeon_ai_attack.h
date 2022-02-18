@@ -3,7 +3,16 @@
 
 #include "dungeon_entity.h"
 
-// 0x7C9F8
-bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange);
+struct MoveTargetResults
+{
+    bool8 moveUsable;
+    u8 targetDir;
+    s32 moveWeight;
+};
+
+// 0x7BB94
+void DecideAttack(struct DungeonEntity *pokemon);
+// 0x7C04C
+s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEntity *pokemon, struct PokemonMove *move);
 
 #endif

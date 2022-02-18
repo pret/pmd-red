@@ -846,7 +846,7 @@ gUnknown_202F32C = .; /* 202F32C */
 gUnknown_202F32D = .; /* 202F32D */
 	. += 0x3;
 
-gPotentialTargetDirections = .; /* 202F330 */
+gPotentialItemTargetDirections = .; /* 202F330 */
 	. += 0x20;
 
 gTargetAhead = .; /* 202F350 */
@@ -861,13 +861,13 @@ gUnknown_202F378 = .; /* 202F378 */
 gCanAttackInDirection = .; /* 202F380 */
 	. += 0x8;
 
-gUnknown_202F388 = .; /* 202F388 */
+gPotentialAttackTargetDirections = .; /* 202F388 */
 	. += 0x8;
 
 gPotentialTargetWeights_2 = .; /* 202F390 */
 	. += 0x20;
 
-gUnknown_202F3B0 = .; /* 202F3B0 */
+gPotentialTargets = .; /* 202F3B0 */
 	. += 0x20;
 
 gUnknown_202F3D0 = .; /* 202F3D0 */
