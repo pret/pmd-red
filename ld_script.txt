@@ -198,6 +198,7 @@ SECTIONS {
         asm/code_8046CE4.o(.text);
         src/code_8048480.o(.text);
         asm/code_8048480.o(.text);
+        src/code_8048DB8.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
         asm/code_8049590.o(.text);
@@ -228,6 +229,7 @@ SECTIONS {
         src/dungeon_pokemon_attributes.o(.text);
         asm/code_80718D8.o(.text);
         src/dungeon_ai_items.o(.text);
+        src/code_8073CF0.o(.text);
         asm/code_8073CF0.o(.text);
         src/dungeon_ai_movement.o(.text);
         asm/code_8075BA4.o(.text);
@@ -237,6 +239,7 @@ SECTIONS {
         asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);
         asm/code_807CD9C.o(.text);
+        src/code_8083288.o(.text);
         src/dungeon_range.o(.text);
         asm/code_808333C.o(.text);
         src/dungeon_random.o(.text);
@@ -275,6 +278,7 @@ SECTIONS {
         src/moves_1.o(.text);
         asm/code_8094148.o(.text);
         src/number_util.o(.text);
+        src/code_809447C.o(.text);
         asm/code_809447C.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
