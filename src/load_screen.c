@@ -77,7 +77,86 @@ extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 extern void SetBGPaletteBufferColorArray(s32, s32);
 extern void sub_8007E20(s32, s32, s32, u32, u32, s32, u32);
 
-#include "data/menus/load_screen.h"
+const struct UnkTextStruct2 gUnknown_80E75F8 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E7610 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x02, 0x00,
+   0x1A, 0x0B,
+   0x0B, 0x00,
+   NULL
+};
+
+const u8 gUnkData_80E7628[] = {0x20, 0x00, 0x00, 0x00};
+
+const struct UnkTextStruct2 gUnknown_80E762C = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x0F, 0x00,
+   0x13, 0x03,
+   0x03, 0x00,
+   NULL
+};
+
+const struct MenuItem gResumeQuicksaveMenuItems[3] =
+{
+    {"Resuming from quicksave.", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gResumeAdventureMenuItems[3] =
+{
+    {"Resuming saved adventure.", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gQuitWaitingRescueMenuItems[3] =
+{
+    {"Quit awaiting rescue?", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gDeleteSavePromptMenuItems[3] =
+{
+    {"Your saved data will be", 5},
+    {"deleted. Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gDeleteSaveConfirmMenuItems[3] =
+{
+    {"Are you sure you want to", 5},
+    {"delete all of your saved data?", 5},
+    {NULL, 3},
+};
+
+const struct UnkTextStruct2 gUnknown_80E7784 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x17, 0x00, 0x0F, 0x00,
+    0x05, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct MenuItem gLoadScreenYesNoMenu[3] =
+{
+    {"Yes", 1},
+    {"No", 2},
+    {NULL, 3},
+};
 
 ALIGNED(4) const char gTeamHeadingText[] = "Team:";
 ALIGNED(4) const char gNameHeadingText[] = "Name:";

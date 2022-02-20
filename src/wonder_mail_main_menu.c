@@ -24,7 +24,41 @@
 #define PASSWORD_INVALID 19
 #define PASSWORD_ENTRY_SCREEN 18
 
-#include "data/menus/wonder_mail_main_menu.h"
+extern const char Cancel_80E7D24[];
+extern const char Yes_80E7D2C[];
+
+const struct MenuItem gSelectWonderMailModeMainMenuItems[3] =
+{
+    {"Send", WONDER_MAIL_MODE_SEND},
+    {"Receive", WONDER_MAIL_MODE_RECEIVE},
+    {NULL, 0}
+};
+
+const struct MenuItem gSendWonderMailMainMenuItems[4] =
+{
+    {"Game Link cable", WONDER_MAIL_GAME_LINK},
+    {"Password", -1},
+    {"Cancel", 8},
+    {NULL, 0}
+
+};
+
+const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
+{
+    {"Game Link cable", WONDER_MAIL_GAME_LINK},
+    {"Password", WONDER_MAIL_PASSWORD},
+    {"Cancel", 8},
+    {NULL, 0}
+};
+
+const struct MenuItem gUnknown_80E78F8[3] =
+{
+    {"Yes", 6},
+    {"Cancel", 0},
+    {NULL, 0}
+};
+
+
 #include "data/wonder_mail_main_menu.h"
 
 const struct MenuItem WonderMailMainUnused[3] =

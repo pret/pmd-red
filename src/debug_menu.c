@@ -27,7 +27,25 @@ const struct UnkTextStruct2 gUnknown_80E7D58 =
     NULL
 };
 
-#include "data/menus/debug_menu.h"
+const struct MenuItem gDebugMenuItems[8] =
+{
+    {"Dungeons", MENU_DEBUG_MENU_DUNGEONS},
+    {"Field", MENU_DEBUG_MENU_FIELD},
+    {"Field Map", MENU_DEBUG_MENU_FIELD_MAP},
+    {"Field Script", MENU_DEBUG_MENU_FIELD_SCRIPT},
+    {"Debug Menu", MENU_DEBUG_MENU_DEBUG_MENU},
+    {"Storage", MENU_DEBUG_MENU_STORAGE},
+    {"h-open", MENU_DEBUG_MENU_H_OPEN},
+    {NULL, 10},
+};
+
+ALIGNED(4) static const char debug_menu_fill0[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill1[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill2[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill3[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill4[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill5[] = "pksdir0";
+ALIGNED(4) static const char debug_menu_fill6[] = "pksdir0";
 
 
 

@@ -69,7 +69,84 @@ const struct UnkTextStruct2 gUnknown_80DED60 =
         NULL
 };
 
-#include "data/menus/thank_you_wonder_mail.h"
+extern const u8 SendItem_Text[];
+extern const u8 DontSendItem_Text[];
+
+const struct MenuItem gUnknown_80DED78[3] =
+{
+    {"Confirm", 0xB},
+    {"Info", 0xC},
+    {NULL, 0x0},
+};
+
+// Unused
+const struct UnkTextStruct2 gUnknown_80DEDA0 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
+
+
+const struct MenuItem gThankYouMailMainMenuItems[4] =
+{
+    {"Send Thank-You Mail", 0x1},
+    {"Get Thank-You Mail", 0x2},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
+const struct MenuItem gUnknown_80DEE08[4] =
+{
+    {"Game Link cable", WONDER_MAIL_GAME_LINK},
+    {"Password", WONDER_MAIL_PASSWORD},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
+const struct MenuItem gUnknown_80DEE44[3] =
+{
+    {"Yes", 0x7},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
+const struct MenuItem gUnknown_80DEE60[3] =
+{
+    {"Yes", 0x7},
+    {"No", 0x8},
+    {NULL, 0x0},
+};
+
+const struct MenuItem gUnknown_80DEE7C[4] =
+{
+    {SendItem_Text, 0x9},
+    {DontSendItem_Text, 0xA},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
+ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
+ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
+
+const struct MenuItem gUnknown_80DEEBC[3] =
+{
+    {"Send w/o Item", 0xA},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
+const struct MenuItem gUnknown_80DEEE4[4] =
+{
+    {"Yes", 0x7},
+    {"No", 0x8},
+    {"Cancel", 0x0},
+    {NULL, 0x0},
+};
+
 #include "data/thank_you_wonder_mail.h"
 
 

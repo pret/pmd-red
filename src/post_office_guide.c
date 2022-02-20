@@ -38,24 +38,10 @@ struct unkStruct_203B330
 EWRAM_DATA struct unkStruct_203B330 *gUnknown_203B330;
 
 
-extern const char DeletingMailInfo_Text[];
 extern const char GetHelp_Text[];
 extern const char GoRescue_Text[];
 extern const char FriendRescueInfo_Text[];
 
-extern const char SendThankYouMail_Text[];
-extern const char ReceiveAOKMail_Text[];
-extern const char SendSOSMail_Text[];
-extern const char GettingHelp_Text[];
-extern const char GetThankYouMail_Text[];
-extern const char SendAOKMail_Text[];
-extern const char LeaveForRescue_Text[];
-extern const char ReceiveSOSMail_Text[];
-extern const char RescueProcedures_Text[];
-extern const char Exit_80EA0EC[];
-
-
-extern const char Cancel_80E0A78[];
 extern const char FriendRescue_80E0A80[];
 extern const char Delivery_Text[];
 extern const char BulletinBoard_Text[];
@@ -98,7 +84,57 @@ enum PostOfficeMenuActions
     SEND_THANK_YOU_MAIL
 };
 
-#include "data/menus/post_office_guide.h"
+const struct MenuItem gPostOfficeHelpStartMenu[] =
+{
+    {PostOffice_Text, POST_OFFICE},
+    {BulletinBoard_Text, BULLETIN_BOARD},
+    {Delivery_Text, DELIVERY},
+    {FriendRescue_80E0A80, FRIEND_RESCUE},
+    {"Cancel", CANCEL},
+    {NULL, EXIT}
+};
+
+ALIGNED(4) const char FriendRescue_80E0A80[] = _("{COLOR_1 YELLOW}Friend Rescue{END_COLOR_TEXT_1} ");
+ALIGNED(4) const char Delivery_Text[] = _("Delivery");
+ALIGNED(4) const char BulletinBoard_Text[] = _("Bulletin Board");
+ALIGNED(4) const char PostOffice_Text[] = _("Post Office");
+
+const struct MenuItem gPostOfficeHelpFriendRescueMenu[] =
+{
+    {FriendRescueInfo_Text, FRIEND_RESCUE_INFO},
+    {GoRescue_Text, GO_RESCUE},
+    {GetHelp_Text, GET_HELP_MENU},
+    {"Deleting Mail Info", DELETING_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
+ALIGNED(4) const char GetHelp_Text[] = _("{COLOR_1 YELLOW}Get help{END_COLOR_TEXT_1} ");
+ALIGNED(4) const char GoRescue_Text[] = _("{COLOR_1 YELLOW}Go rescue{END_COLOR_TEXT_1} ");
+ALIGNED(4) const char FriendRescueInfo_Text[] = _("Friend Rescue Info");
+
+
+const struct MenuItem gPostOfficeHelpGoRescueMenu[] =
+{
+    {"Rescue Procedures", RESCUE_PROCEDURES},
+    {"Receive SOS Mail", RECEIVE_SOS_MAIL},
+    {"Leave for Rescue", LEAVE_FOR_RESCUE},
+    {"Send A-OK Mail", SEND_AOK_MAIL},
+    {"Get Thank-You Mail", GET_THANK_YOU_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
+const struct MenuItem gPostOfficeHelpGetHelpMenu[] =
+{
+    {"Getting Help", GETTING_HELP},
+    {"Send SOS Mail", SEND_SOS_MAIL},
+    {"Receive A-OK Mail", RECEIVE_AOK_MAIL},
+    {"Send Thank-You Mail", SEND_THANK_YOU_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
 #include "data/pelipper_help_guide_dialogue.h"
 
 ALIGNED(4) const u8 wonder_mail_fill[] = _("pksdir0");
