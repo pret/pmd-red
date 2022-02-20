@@ -1,7 +1,6 @@
 #include "global.h"
 #include "number_util.h"
 
-
 s32 RoundUpFixedPoint(s32 fixedPointNumber)
 {
     if ((s16) fixedPointNumber == 0)
@@ -21,4 +20,3 @@ s32 RoundUpFixedPoint(s32 fixedPointNumber)
         return (s16) fixedPointNumber;
     }
 }
-

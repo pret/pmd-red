@@ -11,8 +11,6 @@
 #include "number_util.h"
 #include "status_checks_1.h"
 
-
-
 u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags)
 {
     struct DungeonEntityData *pokemonData = targetPokemon->entityData;

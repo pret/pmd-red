@@ -428,4 +428,3 @@ void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targe
         gNumPotentialTargets++;
     }
 }
-
