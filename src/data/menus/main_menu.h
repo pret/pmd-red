@@ -273,7 +273,11 @@ const struct MenuItem gUnknown_80E5DF0[] = {
     {0, 0xFFDD}
 };
 
+<<<<<<< HEAD
 static const u8 sUnknown_80E5E08[] = _("#C2Beware#R! This will delete it forever!");
+=======
+static const u8 sUnknown_80E5E08[] = _("{COLOR_1 RED}Beware{END_COLOR_TEXT_1}! This will delete it forever!");
+>>>>>>> ec2f746 (Revert "delete src/data/menus")
 static const u8 sUnknown_80E5E34[] = "This will delete your saved game data.";
 
 const struct MenuItem gUnknown_80E5E5C[] = {
