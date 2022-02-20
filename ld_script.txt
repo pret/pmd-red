@@ -207,6 +207,8 @@ SECTIONS {
         asm/code_8057144.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
+        src/status_checker.o(.text);
+        asm/code_805CEB8.o(.text);
         src/targeting.o(.text);
         asm/code_8069E0C.o(.text);
         src/code_806CD90.o(.text);
@@ -408,6 +410,8 @@ SECTIONS {
         data/data_80F4DB4.o(.rodata);
         src/dungeon_ai_attack.o(.rodata);
         data/data_80F4E2C.o(.rodata);
+        src/status_checker.o(.rodata);
+        data/data_80F5668.o(.rodata);
         src/dungeon_pokemon_attributes.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/charge_move.o(.rodata);

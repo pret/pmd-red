@@ -185,7 +185,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             }
             break;
         case ITEM_ID_QUICK_SEED:
-            if (targetPokemon->entityData->movementSpeed <= 3)
+            if (targetPokemon->entityData->movementSpeed < MAX_MOVEMENT_SPEED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {

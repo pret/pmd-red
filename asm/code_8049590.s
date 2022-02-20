@@ -3374,8 +3374,8 @@ _0804AF18: .4byte gDungeonGlobalData
 _0804AF1C: .4byte 0x000135cc
 	thumb_func_end sub_804AE84
 
-	thumb_func_start IsTileWater
-IsTileWater:
+	thumb_func_start IsTileGround
+IsTileGround:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0
@@ -3417,7 +3417,7 @@ _0804AF5E:
 _0804AF68: .4byte gDungeonWaterType
 _0804AF6C: .4byte gDungeonGlobalData
 _0804AF70: .4byte 0x00003a0e
-	thumb_func_end IsTileWater
+	thumb_func_end IsTileGround
 
 	thumb_func_start IsWaterTileset
 IsWaterTileset:

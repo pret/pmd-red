@@ -326,7 +326,7 @@ _0807C6E4:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl CanUseWithStatusChecker_2
+	bl CanUseOnTargetWithStatusChecker
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807C6B2

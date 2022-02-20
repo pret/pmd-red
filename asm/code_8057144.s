@@ -911,7 +911,7 @@ sub_8057788:
 	adds r0, r4, 0
 	bl GetMapEntityForDungeonEntity
 	adds r5, r0, 0
-	bl IsTileWater
+	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
 	beq _080577BA

@@ -2524,7 +2524,7 @@ sub_80414C0:
 	bne _080414DC
 	adds r0, r5, 0
 	bl GetMapEntityForDungeonEntity
-	bl IsTileWater
+	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
 	bne _080414F2
