@@ -142,7 +142,7 @@ _0806CF94: .4byte 0x000135cc
 sub_806CF98:
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	ldrh r0, [r0]
 	movs r5, 0x3
 	ands r5, r0
@@ -1123,7 +1123,7 @@ _0806D760:
 	cmp r0, 0
 	beq _0806D796
 	adds r0, r7, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	mov r8, r0
 	movs r0, 0x14
 	movs r1, 0x18

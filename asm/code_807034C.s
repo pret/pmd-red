@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_807034C
 sub_807034C:
 	push {r4,lr}
@@ -67,7 +67,7 @@ sub_80703A0:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -203,7 +203,7 @@ sub_807049C:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -309,7 +309,7 @@ sub_8070564:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -387,7 +387,7 @@ sub_80705F0:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -480,7 +480,7 @@ sub_80706A4:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]

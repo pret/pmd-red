@@ -448,7 +448,7 @@ bool8 CanTargetAdjacentPokemon(struct DungeonEntity *pokemon)
     s32 facingDir;
     for (facingDir = 0; facingDir < NUM_DIRECTIONS; facingDir++)
     {
-        struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
+        struct MapTile *mapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
         struct DungeonEntity *adjacentPokemon = mapTile->pokemon;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NONE &&
             CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)

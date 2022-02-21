@@ -189,7 +189,7 @@ _08071C08:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r0, [r0]
 	movs r2, 0x80
 	lsls r2, 1
@@ -2247,7 +2247,7 @@ _08072C0C:
 	movs r3, 0x6
 	ldrsh r2, [r7, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r1, r0, 0
 	ldr r0, _08072C80
 	bl sub_807034C

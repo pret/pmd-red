@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_8070E3C
 sub_8070E3C:
 	push {r4-r7,lr}
@@ -30,7 +30,7 @@ sub_8070E3C:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -89,7 +89,7 @@ _08070EDC:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	adds r1, r2, 0
 	adds r1, 0xA
@@ -133,7 +133,7 @@ sub_8070F14:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -147,7 +147,7 @@ sub_8070F14:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldr r1, _08070F74
 	movs r0, 0x7
@@ -195,7 +195,7 @@ sub_8070F80:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -254,7 +254,7 @@ _08071020:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	adds r1, r2, 0
 	adds r1, 0xA
@@ -304,7 +304,7 @@ sub_8071058:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r4, r0, 0
 	ldrh r1, [r4]
 	movs r0, 0x10
@@ -368,7 +368,7 @@ _08071100:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x6
 	ldrsh r1, [r5, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r4, r0, 0
 	adds r1, r4, 0
 	adds r1, 0xA
@@ -422,7 +422,7 @@ _08071152:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -481,7 +481,7 @@ _080711DC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	adds r1, r2, 0
 	adds r1, 0xA
@@ -537,7 +537,7 @@ CanMoveForward:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x10
@@ -661,7 +661,7 @@ _08071348:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r0, 0xA
 	adds r0, r6
 	ldr r2, _08071374
@@ -781,7 +781,7 @@ _08071432:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r0, 0xA
 	adds r0, r5
 	ldrb r0, [r0]

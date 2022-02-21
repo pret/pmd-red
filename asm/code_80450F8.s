@@ -792,7 +792,7 @@ sub_8045708:
 	ldrsh r0, [r1, r2]
 	movs r3, 0x2
 	ldrsh r1, [r1, r3]
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1

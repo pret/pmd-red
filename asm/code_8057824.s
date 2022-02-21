@@ -4061,7 +4061,7 @@ DiveMoveAction:
 	adds r5, r2, 0
 	mov r8, r3
 	movs r6, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
@@ -6328,7 +6328,7 @@ _0805A94C:
 	add r4, sp, 0x18
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldr r5, [r0, 0x10]
 	cmp r5, 0
 	beq _0805AA4C
@@ -9264,7 +9264,7 @@ TrapbustOrbAction:
 	movs r0, 0
 	str r0, [sp, 0x10]
 	adds r0, r1, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	adds r4, r0, 0
 	bl IsBossBattle
 	lsls r0, 24
@@ -9344,7 +9344,7 @@ _0805BFE0:
 _0805BFF0:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldr r4, [r0, 0x14]
 	cmp r4, 0
 	beq _0805C028
@@ -9770,7 +9770,7 @@ _0805C2DC:
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapEntity
+	bl GetMapTile_2
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3

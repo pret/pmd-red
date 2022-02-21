@@ -232,7 +232,7 @@ _080402FC:
 _08040302:
 	mov r0, r8
 	adds r1, r3, 0
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	mov r9, r0
 	ldrh r0, [r0]
 	movs r5, 0x3
@@ -553,7 +553,7 @@ _0804056C:
 	adds r1, r3, 0
 	adds r1, 0x1
 	mov r0, r8
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -567,7 +567,7 @@ _0804058A:
 	adds r1, r5, 0
 	subs r1, 0x1
 	mov r0, r8
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -583,7 +583,7 @@ _080405AA:
 	mov r0, r8
 	adds r0, 0x1
 	ldr r1, [sp]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -598,7 +598,7 @@ _080405CA:
 	ble _080405E8
 	subs r0, 0x1
 	ldr r1, [sp]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -2523,7 +2523,7 @@ sub_80414C0:
 	cmp r0, 0x9C
 	bne _080414DC
 	adds r0, r5, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
@@ -2533,7 +2533,7 @@ _080414DC:
 	cmp r0, 0x8
 	bne _080414F6
 	adds r0, r5, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1

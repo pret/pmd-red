@@ -3,6 +3,7 @@
 #include "code_80521D0.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "file_system.h"
 #include "play_time.h"
 
@@ -26,8 +27,6 @@ extern void sub_8040A84();
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
-extern struct MapTile *GetMapEntity(u32, u32);
-
 // Luminous Orb???
 void HandleLuminousOrbAction(struct DungeonEntity *param_1)
 {
@@ -41,7 +40,7 @@ void HandleLuminousOrbAction(struct DungeonEntity *param_1)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
-      mapTile = GetMapEntity(XCoord, YCoord);
+      mapTile = GetMapTile_2(XCoord, YCoord);
       mapTile->unk4 = mapTile->unk4 | 1;
     }
   }

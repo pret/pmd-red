@@ -157,7 +157,7 @@ _0808B6D2:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -241,7 +241,7 @@ _0808B77E:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -391,7 +391,7 @@ _0808B8F4:
 	movs r2, 0
 	ldrsh r0, [r7, r2]
 	asrs r1, 16
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1

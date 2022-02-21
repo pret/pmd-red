@@ -2668,7 +2668,7 @@ _080538DA:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldr r0, [r0, 0x10]
 	str r0, [sp, 0x38]
 	bl EntityExists
@@ -7995,7 +7995,7 @@ _08056780:
 	movs r2, 0
 	ldrsh r0, [r6, r2]
 	asrs r1, 16
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -8307,7 +8307,7 @@ _08056A0E:
 	ldrsh r0, [r7, r2]
 	movs r6, 0x2
 	ldrsh r1, [r7, r6]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r6, r0, 0
 	ldrh r1, [r6]
 	movs r0, 0x3

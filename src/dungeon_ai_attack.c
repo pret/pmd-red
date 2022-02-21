@@ -377,7 +377,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             {
                 // Double assignment to fix a regswap.
                 s16 rangeTargetingFlags = rangeTargetingFlags2 = targetingFlags & 0xF0;
-                struct MapTile *adjacentTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
+                struct MapTile *adjacentTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
                     pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
                 struct DungeonEntity *adjacentPokemon = adjacentTile->pokemon;
                 if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_POKEMON)
@@ -411,7 +411,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     {
         for (i = 0; i < NUM_DIRECTIONS; i++)
         {
-            struct MapTile *targetTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
+            struct MapTile *targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
                 pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
             if (CanAttackInFront(pokemon, i))
             {
@@ -425,7 +425,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
                         continue;
                     }
                 }
-                targetTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x * 2,
+                targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x * 2,
                     pokemon->posWorld.y + gAdjacentTileOffsets[i].y * 2);
                 targetPokemon = targetTile->pokemon;
                 if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_POKEMON)

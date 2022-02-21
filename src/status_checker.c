@@ -348,14 +348,14 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
             }
             break;
         case MOVE_DIVE:
-            if (IsTileGround(GetMapEntityForDungeonEntity(pokemon)))
+            if (IsTileGround(GetMapTileForDungeonEntity_2(pokemon)))
             {
                 return FALSE;
             }
             break;
         case MOVE_DIG:
         {
-            struct MapTile *tile = GetMapEntityForDungeonEntity(pokemon);
+            struct MapTile *tile = GetMapTileForDungeonEntity_2(pokemon);
             if (!IsTileGround(tile) || (tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != TILE_TYPE_FLOOR)
             {
                 return FALSE;
@@ -364,7 +364,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         }
         case MOVE_TRAP_BUSTER:
         {
-            struct DungeonEntity *mapObject = GetMapEntityForDungeonEntity(pokemon)->mapObject;
+            struct DungeonEntity *mapObject = GetMapTileForDungeonEntity_2(pokemon)->mapObject;
             if (mapObject == NULL || GetEntityType(mapObject) != ENTITY_TRAP)
             {
                 return FALSE;

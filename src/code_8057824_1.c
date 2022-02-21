@@ -3318,7 +3318,7 @@ void sub_808B1CC(u8 r0)
 	"\tldrsh r0, [r0, r2]\n"
 	"\tmovs r3, 0x2\n"
 	"\tldrsh r1, [r5, r3]\n"
-	"\tbl GetMapEntity\n"
+	"\tbl GetMapTile_2\n"
 	"\tldrh r2, [r0]\n"
 	"\tmovs r3, 0x80\n"
 	"\tlsls r3, 2\n"

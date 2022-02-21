@@ -909,7 +909,7 @@ sub_8057788:
 	movs r0, 0
 	mov r9, r0
 	adds r0, r4, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	adds r5, r0, 0
 	bl IsTileGround
 	lsls r0, 24

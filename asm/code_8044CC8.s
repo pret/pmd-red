@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_8044CC8
 sub_8044CC8:
 	push {lr}
@@ -33,7 +33,7 @@ _08044CEC:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldr r0, [r0, 0x14]
 	bl GetItemData
 	b _08044D34

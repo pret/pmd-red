@@ -584,7 +584,7 @@ _0807C8BE:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldr r5, [r0, 0x10]
 	cmp r5, 0
 	beq _0807C948

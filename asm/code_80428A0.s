@@ -2410,7 +2410,7 @@ _08043E6A:
 _08043E6E:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldr r4, [r0, 0x14]
 	adds r0, r4, 0
 	bl EntityExists

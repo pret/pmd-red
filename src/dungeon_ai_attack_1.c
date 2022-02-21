@@ -57,7 +57,7 @@ bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity 
                 break;
             }
             while (0); // Extra label needed to swap branch locations in ASM.
-            mapTile = GetMapTileAtPosition(currentPosX, currentPosY);
+            mapTile = GetMapTile_1(currentPosX, currentPosY);
             if (!(mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
             {
                 break;

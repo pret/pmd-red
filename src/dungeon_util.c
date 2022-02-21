@@ -14,8 +14,6 @@ const struct Position gAdjacentTileOffsets[] = {
     {-1, 1}
 };
 
-extern struct MapTile* GetMapEntity(s16, s16);
-
 bool8 EntityExists(struct DungeonEntity *entity)
 {
     if (!entity)
@@ -55,12 +53,12 @@ struct DungeonEntityData* sub_8045110(struct DungeonEntity *entity)
     return entity->entityData;
 }
 
-struct MapTile* GetMapTileForDungeonEntity(struct DungeonEntity *entity)
+struct MapTile* GetMapTileForDungeonEntity_1(struct DungeonEntity *entity)
 {
-    return GetMapTileAtPosition(entity->posWorld.x, entity->posWorld.y);
+    return GetMapTile_1(entity->posWorld.x, entity->posWorld.y);
 }
 
-struct MapTile* GetMapEntityForDungeonEntity(struct DungeonEntity *entity)
+struct MapTile* GetMapTileForDungeonEntity_2(struct DungeonEntity *entity)
 {
-    return GetMapEntity(entity->posWorld.x, entity->posWorld.y);
+    return GetMapTile_2(entity->posWorld.x, entity->posWorld.y);
 }

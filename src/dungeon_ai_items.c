@@ -158,7 +158,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
             else if (toolboxIndex == 0)
             {
                 // This seems unused. toolboxIndex can never be 0.
-                struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorld.x, pokemon->posWorld.y);
+                struct MapTile *mapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
                 struct DungeonEntity *mapObject = mapTile->mapObject;
                 if (mapObject != null)
                 {

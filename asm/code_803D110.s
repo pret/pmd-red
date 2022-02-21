@@ -4953,7 +4953,7 @@ sub_803F7BC:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrb r1, [r0, 0x9]
 	ldr r2, _0803F808
 	adds r0, r4, r2

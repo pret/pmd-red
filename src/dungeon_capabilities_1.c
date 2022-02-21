@@ -89,7 +89,7 @@ bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep)
 bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
 {
     u8 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
-    struct MapTile *currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
+    struct MapTile *currentMapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
         pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
     if (currentMapTile->tileType & TILE_TYPE_MAP_EDGE || currentMapTile->pokemon != NULL)
     {
@@ -118,7 +118,7 @@ bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
             }
         }
     }
-    currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x, pokemon->posWorld.y);
+    currentMapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
     if (!(currentMapTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks[facingDir & DIRECTION_MASK]))
     {
         return FALSE;
