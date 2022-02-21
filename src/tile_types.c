@@ -82,8 +82,6 @@ const u8 gDungeonWaterType[] = {
     DUNGEON_WATER_TYPE_NONE,
 };
 
-extern bool8 IsWaterTileset();
-
 bool8 IsTileGround(struct MapTile* tile)
 {
     bool8 isGround = FALSE;
@@ -100,4 +98,17 @@ bool8 IsTileGround(struct MapTile* tile)
         isGround = TRUE;
     }
     return isGround;
+}
+
+bool8 IsWaterTileset()
+{
+    if (gDungeonGlobalData->tileset == 0 ||
+        gDungeonGlobalData->tileset == 0x31 ||
+        gDungeonGlobalData->tileset == 0x20 ||
+        gDungeonGlobalData->tileset == 0x21 ||
+        gDungeonGlobalData->tileset == 0x36)
+    {
+        return TRUE;
+    }
+    return FALSE;
 }

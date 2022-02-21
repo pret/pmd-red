@@ -5,38 +5,6 @@
 
   	.text
   
-	thumb_func_start IsWaterTileset
-IsWaterTileset:
-	push {lr}
-	ldr r0, _0804AF9C
-	ldr r0, [r0]
-	ldr r1, _0804AFA0
-	adds r0, r1
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	beq _0804AF96
-	cmp r0, 0x31
-	beq _0804AF96
-	cmp r0, 0x20
-	beq _0804AF96
-	cmp r0, 0x21
-	beq _0804AF96
-	cmp r0, 0x36
-	bne _0804AFA4
-_0804AF96:
-	movs r0, 0x1
-	b _0804AFA6
-	.align 2, 0
-_0804AF9C: .4byte gDungeonGlobalData
-_0804AFA0: .4byte 0x00003a0e
-_0804AFA4:
-	movs r0, 0
-_0804AFA6:
-	pop {r1}
-	bx r1
-	thumb_func_end IsWaterTileset
-
 	thumb_func_start sub_804AFAC
 sub_804AFAC:
 	push {r4-r7,lr}
