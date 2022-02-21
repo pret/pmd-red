@@ -5,6 +5,7 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
+#include "dungeon_engine.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
@@ -93,7 +94,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_ROCK
 };
 
-extern bool8 IsBossBattle();
 extern u8 GetWeather(struct DungeonEntity*);
 extern bool8 HasQuarterHPOrLess(struct DungeonEntity*);
 extern bool8 IsTileGround(struct MapTile*);
