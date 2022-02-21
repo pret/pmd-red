@@ -95,7 +95,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_ROCK
 };
 
-extern bool8 HasQuarterHPOrLess(struct DungeonEntity*);
 extern bool8 IsTileGround(struct MapTile*);
 extern bool8 CanLayTrap(struct Position*);
 

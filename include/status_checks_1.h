@@ -7,5 +7,7 @@
 bool8 HasNegativeStatus(struct DungeonEntity *pokemon);
 // 0x70B28
 bool8 IsSleeping(struct DungeonEntity *pokemon);
+// 0x70B48
+bool8 HasQuarterHPOrLess(struct DungeonEntity* pokemon);
 
 #endif
