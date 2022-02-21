@@ -10,7 +10,8 @@
 #include "constants/type.h"
 #include "charge_move.h"
 #include "dungeon_action.h"
-#include "dungeon_ai.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_ai_targeting_1.h"
 #include "dungeon_ai_attack_1.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
@@ -37,9 +38,8 @@ extern s32 gPotentialTargetWeights_2[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
-extern bool8 IsMoveUsable(struct DungeonEntity*, s32, bool8);
+extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
-extern bool8 CanAttackInFront(struct DungeonEntity*, s32);
 extern s32 WeightMoveIfUsable(s32, s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern bool8 IsTargetInLineRange(struct DungeonEntity*, struct DungeonEntity*, s32);
 extern bool8 CanUseStatusMove(s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
@@ -182,7 +182,7 @@ void DecideAttack(struct DungeonEntity *pokemon)
         move = &pokemonData->moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
             willNotUnlinkMove[i] &&
-            IsMoveUsable(pokemon, i, hasPPChecker) &&
+            IsMoveUsable_1(pokemon, i, hasPPChecker) &&
             move->moveFlags & MOVE_FLAG_ENABLED)
         {
             moveTargetResults[i].moveUsable = TRUE;

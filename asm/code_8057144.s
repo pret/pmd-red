@@ -285,8 +285,8 @@ _08057340:
 	bx r1
 	thumb_func_end sub_8057308
 
-	thumb_func_start IsMoveUsable
-IsMoveUsable:
+	thumb_func_start IsMoveUsable_1
+IsMoveUsable_1:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -357,7 +357,7 @@ _080573C0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end IsMoveUsable
+	thumb_func_end IsMoveUsable_1
 
 	thumb_func_start IsMoveUsable_2
 IsMoveUsable_2:

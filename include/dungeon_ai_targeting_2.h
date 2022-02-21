@@ -1,5 +1,5 @@
-#ifndef GUARD_DUNGEON_AI_1_H
-#define GUARD_DUNGEON_AI_1_H
+#ifndef GUARD_DUNGEON_AI_TARGETING_2_H
+#define GUARD_DUNGEON_AI_TARGETING_2_H
 
 #include "dungeon_entity.h"
 

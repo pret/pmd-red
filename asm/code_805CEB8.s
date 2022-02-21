@@ -12715,7 +12715,7 @@ _0806376A:
 	bgt _08063788
 	mov r0, r8
 	movs r2, 0x1
-	bl IsMoveUsable
+	bl IsMoveUsable_1
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
