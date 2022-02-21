@@ -13,6 +13,7 @@
 #include "map.h"
 #include "number_util.h"
 #include "status_checks_1.h"
+#include "weather.h"
 
 // Array indices correspond to the current dungeon tileset.
 const u8 gDungeonCamouflageTypes[76] = {
@@ -94,7 +95,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_ROCK
 };
 
-extern u8 GetWeather(struct DungeonEntity*);
 extern bool8 HasQuarterHPOrLess(struct DungeonEntity*);
 extern bool8 IsTileGround(struct MapTile*);
 extern bool8 CanLayTrap(struct Position*);

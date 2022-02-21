@@ -239,6 +239,8 @@ SECTIONS {
         asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);
         asm/code_807CD9C.o(.text);
+        src/weather.o(.text);
+        asm/code_807E5AC.o(.text);
         src/dungeon_range.o(.text);
         asm/code_808333C.o(.text);
         src/dungeon_random.o(.text);
