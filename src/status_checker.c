@@ -14,6 +14,7 @@
 #include "number_util.h"
 #include "status_checks_1.h"
 #include "tile_types.h"
+#include "trap.h"
 #include "weather.h"
 
 // Array indices correspond to the current dungeon tileset.
@@ -95,8 +96,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_WATER,
     TYPE_ROCK
 };
-
-extern bool8 CanLayTrap(struct Position*);
 
 bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move)
 {
