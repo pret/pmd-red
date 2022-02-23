@@ -6,7 +6,7 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_attack_1.h"
+#include "dungeon_ai_attack_2.h"
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_targeting_2.h"
@@ -39,7 +39,7 @@ enum ItemTargetFlag
 extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
-extern u32 gPotentialTargetWeights[NUM_DIRECTIONS];
+extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];
 extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -95,7 +95,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                 FindStraightThrowableTargets(pokemon, 2, item, 1);
                 for (targetIndex = 0; targetIndex < gNumPotentialTargets; targetIndex++)
                 {
-                    if (RollPercentChance(gPotentialTargetWeights[targetIndex]))
+                    if (RollPercentChance(gPotentialItemTargetWeights[targetIndex]))
                     {
                         SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
                         pokemonData->action.actionUseIndex = selectedToolboxIndex;
@@ -229,7 +229,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                 s32 thrownAIFlag;
                 for (thrownAIFlag = ITEM_AI_FLAG_TARGET_ALLY; thrownAIFlag <= ITEM_AI_FLAG_TARGET_ENEMY; thrownAIFlag++)
                 {
-                    potentialTargetWeights = gPotentialTargetWeights;
+                    potentialTargetWeights = gPotentialItemTargetWeights;
                     if (GetItemAIFlag(item->itemIndex, thrownAIFlag))
                     {
                         u8 itemType = GetItemType(item->itemIndex);
@@ -422,7 +422,7 @@ void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targe
         u32 *targetWeight;
         gTargetAhead[targetDirection] = TRUE;
         gPotentialItemTargetDirections[gNumPotentialTargets] = targetDirection;
-        targetWeight = &gPotentialTargetWeights[gNumPotentialTargets];
+        targetWeight = &gPotentialItemTargetWeights[gNumPotentialTargets];
         itemWeight = !ignoreRollChance ? EvaluateItem(targetPokemon, item, targetingFlags) : 100;
         *targetWeight = itemWeight;
         gNumPotentialTargets++;

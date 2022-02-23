@@ -13,6 +13,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_targeting_1.h"
 #include "dungeon_ai_attack_1.h"
+#include "dungeon_ai_attack_2.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -34,13 +35,12 @@ const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gNumPotentialTargets;
-extern s32 gPotentialTargetWeights_2[NUM_DIRECTIONS];
+extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
 extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
-extern s32 WeightMoveIfUsable(s32, s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern bool8 IsTargetInLineRange(struct DungeonEntity*, struct DungeonEntity*, s32);
 extern bool8 CanUseStatusMove(s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
@@ -366,7 +366,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             {
                 gCanAttackInDirection[i] = TRUE;
                 gPotentialAttackTargetDirections[numPotentialTargets] = i;
-                gPotentialTargetWeights_2[numPotentialTargets] = 99;
+                gPotentialAttackTargetWeights[numPotentialTargets] = 99;
                 gPotentialTargets[numPotentialTargets] = NULL;
                 numPotentialTargets++;
             }
@@ -457,7 +457,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
                 {
                     gCanAttackInDirection[facingDir] = TRUE;
                     gPotentialAttackTargetDirections[numPotentialTargets] = facingDir;
-                    gPotentialTargetWeights_2[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForPokemon(pokemon, move));
+                    gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForPokemon(pokemon, move));
                     gPotentialTargets[numPotentialTargets] = target;
                     numPotentialTargets++;
                 }
@@ -492,27 +492,27 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         s32 i;
         for (i = 0; i < numPotentialTargets; i++)
         {
-            if (maxWeight < gPotentialTargetWeights_2[i])
+            if (maxWeight < gPotentialAttackTargetWeights[i])
             {
-                maxWeight = gPotentialTargetWeights_2[i];
+                maxWeight = gPotentialAttackTargetWeights[i];
             }
         }
         for (i = 0; i < numPotentialTargets; i++)
         {
-            if (maxWeight != gPotentialTargetWeights_2[i])
+            if (maxWeight != gPotentialAttackTargetWeights[i])
             {
-                gPotentialTargetWeights_2[i] = 0;
+                gPotentialAttackTargetWeights[i] = 0;
             }
         }
         moveWeight = maxWeight;
         for (i = 0; i < numPotentialTargets; i++)
         {
-            totalWeight += gPotentialTargetWeights_2[i];
+            totalWeight += gPotentialAttackTargetWeights[i];
         }
         weightCounter = DungeonRandomCapped(totalWeight);
         for (i = 0; i < numPotentialTargets; i++)
         {
-            weightCounter -= gPotentialTargetWeights_2[i];
+            weightCounter -= gPotentialAttackTargetWeights[i];
             if (weightCounter < 0)
             {
                 break;

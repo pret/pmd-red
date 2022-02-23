@@ -6,7 +6,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "moves.h"
 
-s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, u32 isAI)
+s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, bool32 isAI)
 {
     if (move->moveID == MOVE_CURSE && !isAI && !HasType(pokemon, TYPE_GHOST))
     {
