@@ -42,7 +42,6 @@ extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
 extern bool8 IsTargetInLineRange(struct DungeonEntity*, struct DungeonEntity*, s32);
-extern bool8 CanUseStatusMove(s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
 
 void DecideAttack(struct DungeonEntity *pokemon)

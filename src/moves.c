@@ -251,9 +251,9 @@ s32 GetMovePower(struct PokemonMove *move)
     return gMovesData[move->moveID].power;
 }
 
-u8 GetMoveAccuracy(struct PokemonMove *move, u32 r1)
+s32 GetMoveAccuracy(struct PokemonMove *move, u32 accuracyType)
 {
-    return gMovesData[move->moveID].accuracy[r1];
+    return gMovesData[move->moveID].accuracy[accuracyType];
 }
 
 u32 GetMoveMaxPP(struct PokemonMove *move)
