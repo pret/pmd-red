@@ -1,5 +1,6 @@
 #include "global.h"
 #include "text.h"
+#include "input.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "friend_rescue.h"
@@ -19,7 +20,6 @@ extern char gAvailablePokemonNames[0x50];
 extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 
 extern u8 sub_8039880(void);
-void ResetUnusedInputStruct(void);
 
 extern void sub_8035300(void);
 extern void sub_8035404(u32);

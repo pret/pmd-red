@@ -1,6 +1,8 @@
 #ifndef GUARD_FRIEND_RESCUE_H
 #define GUARD_FRIEND_RESCUE_H
 
+#include "item.h"
+
 struct WonderMailStruct_203B33C
 {
     // size: 0x568
@@ -42,5 +44,10 @@ struct WonderMailStruct_203B33C
     u8 filler546[0x564 - 0x546];
     s32 unk564;
 };
+
+u32 CreateFriendRescueMenu(void);
+u32 UpdateFriendRescueMenu(void);
+void CleanFriendRescueMenu(void);
+
 
 #endif

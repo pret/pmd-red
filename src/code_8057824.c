@@ -1,7 +1,6 @@
 #include "global.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
-#include "constants/move.h"
 #include "moves.h"
 
 extern u32 gUnknown_80FCF74;

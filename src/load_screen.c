@@ -45,54 +45,12 @@ EWRAM_DATA u32 gUnknown_203B3B8[12];
 
 extern struct unkStruct_203B484 *gUnknown_203B484;
 
-extern struct UnkTextStruct2 gUnknown_80E75F8;
-extern struct UnkTextStruct2 gUnknown_80E7610;
-extern struct UnkTextStruct2 gUnknown_80E762C;
-extern struct MenuItem gResumeQuicksaveMenuItems[];
-extern struct MenuItem gResumeAdventureMenuItems[];
-extern struct MenuItem gQuitWaitingRescueMenuItems[];
-extern struct MenuItem gDeleteSavePromptMenuItems[];
-extern struct MenuItem gDeleteSaveConfirmMenuItems[];
-extern struct UnkTextStruct2 gUnknown_80E7784;
-
-extern const char No_80E77B4[];
-extern const char Yes_80E77B8[];
-
-const struct MenuItem gLoadScreenYesNoMenu[3] =
-{
-    {Yes_80E77B8, 1},
-    {No_80E77B4, 2},
-    {NULL, 3},
-};
-
-ALIGNED(4) const char No_80E77B4[] = "No";
-ALIGNED(4) const char Yes_80E77B8[] = "Yes";
-
-ALIGNED(4) const char gTeamHeadingText[] = "Team:";
-ALIGNED(4) const char gNameHeadingText[] = "Name:";
-ALIGNED(4) const char gLocationHeadingText[] = "Location:";
-ALIGNED(4) const char gPlayTimeHeadingText[] = "Play time:";
-ALIGNED(4) const char gAdventuresHeadingText[] = "Adventures:";
-ALIGNED(4) const char gHelperHeadingText[] = "Helper:";
-ALIGNED(4) const char gNoTeamNamePlaceholder[] = _("？？？？");
-ALIGNED(4) const char gUnknown_80E7804[] = "%s ";
-ALIGNED(4) const char gNoNamePlaceholder[] = "???";
-ALIGNED(4) const char gQuicksaveDataDeletedText[] = "Quicksave data deleted.";
-ALIGNED(4) const char gLocationUnknownText[] = "Location unknown.";
-ALIGNED(4) const char gPlayTimePlaceholder[] = "%d:%02d:%02d ";
-ALIGNED(4) const char gNumAdventurePlaceholder[] = "%d";
-ALIGNED(4) const char gHelperInfoPlaceholder[] = "%s (%s)";
-ALIGNED(4) const char gNoHelperText[] = "-----";
-ALIGNED(4) const char gClmkpatFileName[] = "clmkpat"; // clmkpat
-ALIGNED(4) const char load_screen_fill[] = "pksdir0";
-
-
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_8035CF4(u32 *, u32, u32);
-extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_8095240(u32);
@@ -119,6 +77,104 @@ extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 extern void SetBGPaletteBufferColorArray(s32, s32);
 extern void sub_8007E20(s32, s32, s32, u32, u32, s32, u32);
 
+const struct UnkTextStruct2 gUnknown_80E75F8 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E7610 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x02, 0x00,
+   0x1A, 0x0B,
+   0x0B, 0x00,
+   NULL
+};
+
+const u8 gUnkData_80E7628[] = {0x20, 0x00, 0x00, 0x00};
+
+const struct UnkTextStruct2 gUnknown_80E762C = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03, 0x00, 0x00, 0x00,
+   0x02, 0x00, 0x0F, 0x00,
+   0x13, 0x03,
+   0x03, 0x00,
+   NULL
+};
+
+const struct MenuItem gResumeQuicksaveMenuItems[3] =
+{
+    {"Resuming from quicksave.", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gResumeAdventureMenuItems[3] =
+{
+    {"Resuming saved adventure.", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gQuitWaitingRescueMenuItems[3] =
+{
+    {"Quit awaiting rescue?", 5},
+    {"Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gDeleteSavePromptMenuItems[3] =
+{
+    {"Your saved data will be", 5},
+    {"deleted. Is that OK?", 5},
+    {NULL, 3},
+};
+
+const struct MenuItem gDeleteSaveConfirmMenuItems[3] =
+{
+    {"Are you sure you want to", 5},
+    {"delete all of your saved data?", 5},
+    {NULL, 3},
+};
+
+const struct UnkTextStruct2 gUnknown_80E7784 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x17, 0x00, 0x0F, 0x00,
+    0x05, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct MenuItem gLoadScreenYesNoMenu[3] =
+{
+    {"Yes", 1},
+    {"No", 2},
+    {NULL, 3},
+};
+
+ALIGNED(4) const char gTeamHeadingText[] = "Team:";
+ALIGNED(4) const char gNameHeadingText[] = "Name:";
+ALIGNED(4) const char gLocationHeadingText[] = "Location:";
+ALIGNED(4) const char gPlayTimeHeadingText[] = "Play time:";
+ALIGNED(4) const char gAdventuresHeadingText[] = "Adventures:";
+ALIGNED(4) const char gHelperHeadingText[] = "Helper:";
+ALIGNED(4) const char gNoTeamNamePlaceholder[] = _("？？？？");
+ALIGNED(4) const char gUnknown_80E7804[] = "%s ";
+ALIGNED(4) const char gNoNamePlaceholder[] = "???";
+ALIGNED(4) const char gQuicksaveDataDeletedText[] = "Quicksave data deleted.";
+ALIGNED(4) const char gLocationUnknownText[] = "Location unknown.";
+ALIGNED(4) const char gPlayTimePlaceholder[] = "%d:%02d:%02d ";
+ALIGNED(4) const char gNumAdventurePlaceholder[] = "%d";
+ALIGNED(4) const char gHelperInfoPlaceholder[] = "%s (%s)";
+ALIGNED(4) const char gNoHelperText[] = "-----";
+ALIGNED(4) const char gClmkpatFileName[] = "clmkpat"; // clmkpat
+ALIGNED(4) const char load_screen_fill[] = "pksdir0";
 
 void CreateLoadScreen(u32 currMenu)
 {

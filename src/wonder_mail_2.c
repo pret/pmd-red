@@ -119,14 +119,6 @@ extern void sub_802BB28(void);
 extern void sub_8013E54(void);
 extern s32 sub_8012A64(u32 *, u32);
 
-extern struct UnkTextStruct2 gUnknown_80DFBEC;
-
-extern struct UnkTextStruct2 gUnknown_80DFBD0;
-
-extern struct UnkTextStruct2 gUnknown_80DFC34;
-
-extern struct UnkTextStruct2 gUnknown_80DFC18;
-
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
@@ -135,8 +127,6 @@ extern void sub_80920D8(u8 *buffer);
 extern void sub_8097790(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern u8 gUnknown_80DFC4C[];
-extern u8 gUnknown_80DFC50[];
 extern u32 sub_802F298(void);
 extern void sub_802F2C0(void);
 extern u8 sub_8099394(u8 *);
@@ -158,15 +148,11 @@ extern u8 sub_80023E4(u32);
 extern void nullsub_131(void);
 extern void sub_802ABF8(void);
 
-extern u8 gUnknown_80DFC04[];
-extern u8 gUnknown_80DFBE8[];
-extern struct UnkTextStruct2 gUnknown_80DFC74;
-extern struct UnkTextStruct2 gUnknown_80DFC5C;
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
+extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
@@ -182,9 +168,8 @@ extern void sub_8012D34(struct UnkTextStruct2 *, u32);
 extern s32 CountEmptyMailSlots(void);
 extern void sub_8013848(u32 *, s32, u32, u32);
 
-ALIGNED(4) const char gUnknown_80DF9F0[] = "????";
+ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 
-// NOTE: had to be pre-proc'd to match
 ALIGNED(4) const char gUnknown_80DF9F8[] = _(
 	" Oh{COMMA} hello!\n"
 	"Your rescue mission went well{COMMA} didn{APOSTROPHE}t it?\n"
@@ -209,7 +194,102 @@ ALIGNED(4) const char gUnknown_80DFB14[] = _(
 
 ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
 
+const struct UnkTextStruct2 gUnknown_80DFBD0 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
 
+const u8 gUnknown_80DFBE8[] = { 0x01, 0x00, 0x0C, 0x00 };
+
+const struct UnkTextStruct2 gUnknown_80DFBEC =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x06, 0x00, 0x00, 0x00,
+        0x02, 0x00, 0x02, 0x00,
+        0x18, 0x0E,
+        0x0E, 0x00,
+        gUnknown_80DFBE8
+};
+
+ALIGNED(4) const u8 gUnknown_80DFC04[] = "News List";
+ALIGNED(4) static const char wonder_mail_2_fill1[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80DFC18 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
+
+const u8 gUnkData_80DFC30[] = { 0x01, 0x00, 0x16, 0x00 };
+
+const struct UnkTextStruct2 gUnknown_80DFC34 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x06, 0x00, 0x00, 0x00,
+        0x02, 0x00, 0x02, 0x00,
+        0x1A, 0x10,
+        0x10, 0x00,
+        gUnkData_80DFC30
+};
+
+ALIGNED(4) const u8 gUnknown_80DFC4C[] = "She";
+ALIGNED(4) const u8 gUnknown_80DFC50[] = "He";
+ALIGNED(4) static const char wonder_mail_2_fill2[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80DFC5C =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFC74 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x06, 0x00, 0x00, 0x00,
+        0x02, 0x00, 0x02, 0x00,
+        0x18, 0x0E,
+        0x0E, 0x00,
+        NULL
+};
+
+ALIGNED(4) const u8 gMailboxText[] = "Mailbox";
+ALIGNED(4) static const char wonder_mail_2_fill3[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80DFC9C =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFCB4 =
+{
+        0x00, 0x00, 0x00, 0x00,
+        0x06, 0x00, 0x00, 0x00,
+        0x02, 0x00, 0x02, 0x00,
+        0x18, 0x0E,
+        0x0E, 0x00,
+        NULL
+};
+
+ALIGNED(4) const u8 gBulletinBoardText[] = "Bulletin Board";
+ALIGNED(4) static const char wonder_mail_2_fill4[] = "pksdir0";
 
 u32 sub_802B2D4(void)
 {
@@ -291,7 +371,7 @@ void sub_802B3E0(void)
         }
         else {
             // Copy "????" to buffer
-            strcpy(teamNameBuffer,gUnknown_80DF9F0);
+            strcpy(teamNameBuffer,gRescueTeamNamePlaceholder);
         }
         // Print and expand placeholders?
         ExpandPlaceholdersBuffer(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);

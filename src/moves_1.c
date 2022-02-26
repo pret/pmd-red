@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_8092334.h"
+#include "moves.h"
 #include "pokemon.h"
-#include "constants/move_id.h"
 
 void SavePokemonMove(struct unkStruct_8094924 *r0, struct PokemonMove *move)
 {

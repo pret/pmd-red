@@ -23,4 +23,8 @@ struct RescuePasswordMenu
     u32 unk210;
 };
 
+void CreateRescuePasswordMenu(u32 currMenu);
+s32 UpdateRescuePasswordMenu(void);
+void CleanRescuePasswordMenu(void);
+
 #endif

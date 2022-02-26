@@ -1,7 +1,8 @@
 #include "global.h"
 #include "pokemon.h"
-#include "item.h"
 #include "file_system.h"
+#include "item.h"
+#include "moves.h"
 #include "subStruct_203B240.h"
 #include "constants/colors.h"
 #include "constants/move_id.h"
@@ -38,7 +39,6 @@ extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct 
 extern u8* sub_8092B18(s16);
 extern u8* sub_808E07C(u8* a1, u16* a2);
 extern u8* sub_8092B54(s32);
-extern void InitZeroedPPPokemonMove(struct PokemonMove*, u16);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {

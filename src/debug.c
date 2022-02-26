@@ -19,7 +19,7 @@ ALIGNED(4) const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line =
 
 ALIGNED(4) const char debug_fill14[] = "pksdir0";
 ALIGNED(4) const char gDebugPrintPrefix[] = "  Print  ";
-ALIGNED(4) const char debug_fill13[] = "pksdir0";
+ALIGNED(4) static const char debug_fill13[] = "pksdir0";
 
 ALIGNED(4) const char Performance_Text[] = "Performance";
 ALIGNED(4) const char MemoryCard_Text[] = "Memory Card";
@@ -34,23 +34,23 @@ ALIGNED(4) const char Ground_Text[] = "Ground";
 
 
 ALIGNED(4) const char gNotMountText[] = "not mount log system";
-ALIGNED(4) const char debug_fill9[] = "pksdir0";
-ALIGNED(4) const char debug_fill10[] = "pksdir0";
-ALIGNED(4) const char debug_fill11[] = "pksdir0";
-ALIGNED(4) const char debug_fill12[] = "pksdir0";
+ALIGNED(4) static const char debug_fill9[] = "pksdir0";
+ALIGNED(4) static const char debug_fill10[] = "pksdir0";
+ALIGNED(4) static const char debug_fill11[] = "pksdir0";
+ALIGNED(4) static const char debug_fill12[] = "pksdir0";
 
 ALIGNED(4) const char gFatalText[] = "!!!!! Fatal !!!!!\n";
 ALIGNED(4) const char gFatalErrorBufferPlaceholder[] = "%s\n";
 
-ALIGNED(4) const char debug_fill0[] = "pksdir0";
-ALIGNED(4) const char debug_fill1[] = "pksdir0";
-ALIGNED(4) const char debug_fill2[] = "pksdir0";
-ALIGNED(4) const char debug_fill3[] = "pksdir0";
-ALIGNED(4) const char debug_fill4[] = "pksdir0";
-ALIGNED(4) const char debug_fill5[] = "pksdir0";
-ALIGNED(4) const char debug_fill6[] = "pksdir0";
-ALIGNED(4) const char debug_fill7[] = "pksdir0";
-ALIGNED(4) const char debug_fill8[] = "pksdir0";
+ALIGNED(4) static const char debug_fill0[] = "pksdir0";
+ALIGNED(4) static const char debug_fill1[] = "pksdir0";
+ALIGNED(4) static const char debug_fill2[] = "pksdir0";
+ALIGNED(4) static const char debug_fill3[] = "pksdir0";
+ALIGNED(4) static const char debug_fill4[] = "pksdir0";
+ALIGNED(4) static const char debug_fill5[] = "pksdir0";
+ALIGNED(4) static const char debug_fill6[] = "pksdir0";
+ALIGNED(4) static const char debug_fill7[] = "pksdir0";
+ALIGNED(4) static const char debug_fill8[] = "pksdir0";
 
 void NDS_DebugInit(void)
 {

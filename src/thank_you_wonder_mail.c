@@ -69,28 +69,15 @@ const struct UnkTextStruct2 gUnknown_80DED60 =
         NULL
 };
 
-extern const u8 Confirm_80DED98[];
-extern const u8 Info_80DED90[];
-extern const u8 SendThankYou_Text[];
-extern const u8 GetThankYou_Text[];
-extern const u8 Cancel_80DEDD8[];
-extern const u8 GameLinkCable_Text[];
-extern const u8 Password_Text[];
-extern const u8 Yes_80DEE5C[];
-extern const u8 No_80DEE78[];
 extern const u8 SendItem_Text[];
 extern const u8 DontSendItem_Text[];
-extern const u8 SendWOItem_Text[];
 
 const struct MenuItem gUnknown_80DED78[3] =
 {
-    {Confirm_80DED98, 0xB},
-    {Info_80DED90, 0xC},
+    {"Confirm", 0xB},
+    {"Info", 0xC},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 Info_80DED90[] = "Info";
-ALIGNED(4) const u8 Confirm_80DED98[] = "Confirm";
 
 // Unused
 const struct UnkTextStruct2 gUnknown_80DEDA0 =
@@ -106,251 +93,61 @@ const struct UnkTextStruct2 gUnknown_80DEDA0 =
 
 const struct MenuItem gThankYouMailMainMenuItems[4] =
 {
-    {SendThankYou_Text, 0x1},
-    {GetThankYou_Text, 0x2},
-    {Cancel_80DEDD8, 0x0},
+    {"Send Thank-You Mail", 0x1},
+    {"Get Thank-You Mail", 0x2},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 Cancel_80DEDD8[] = "Cancel";
-ALIGNED(4) const u8 GetThankYou_Text[] = "Get Thank-You Mail";
-ALIGNED(4) const u8 SendThankYou_Text[] = "Send Thank-You Mail";
 
 const struct MenuItem gUnknown_80DEE08[4] =
 {
-    {GameLinkCable_Text, WONDER_MAIL_GAME_LINK},
-    {Password_Text, WONDER_MAIL_PASSWORD},
-    {Cancel_80DEDD8, 0x0},
+    {"Game Link cable", WONDER_MAIL_GAME_LINK},
+    {"Password", WONDER_MAIL_PASSWORD},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 Password_Text[] = "Password";
-ALIGNED(4) const u8 GameLinkCable_Text[] = "Game Link cable";
 
 const struct MenuItem gUnknown_80DEE44[3] =
 {
-    {Yes_80DEE5C, 0x7},
-    {Cancel_80DEDD8, 0x0},
+    {"Yes", 0x7},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 Yes_80DEE5C[] = "Yes";
-
 
 const struct MenuItem gUnknown_80DEE60[3] =
 {
-    {Yes_80DEE5C, 0x7},
-    {No_80DEE78, 0x8},
+    {"Yes", 0x7},
+    {"No", 0x8},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 No_80DEE78[] = "No";
 
 const struct MenuItem gUnknown_80DEE7C[4] =
 {
     {SendItem_Text, 0x9},
     {DontSendItem_Text, 0xA},
-    {Cancel_80DEDD8, 0x0},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-ALIGNED(4) const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
-ALIGNED(4) const u8 SendItem_Text[] = "Send Item";
+ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
+ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const struct MenuItem gUnknown_80DEEBC[3] =
 {
-    {SendWOItem_Text, 0xA},
-    {Cancel_80DEDD8, 0x0},
+    {"Send w/o Item", 0xA},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
-
-ALIGNED(4) const u8 SendWOItem_Text[] = "Send w/o Item";
 
 const struct MenuItem gUnknown_80DEEE4[4] =
 {
-    {Yes_80DEE5C, 0x7},
-    {No_80DEE78, 0x8},
-    {Cancel_80DEDD8, 0x0},
+    {"Yes", 0x7},
+    {"No", 0x8},
+    {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-ALIGNED(4) const char gUnknown_80DEF04[] =  _(" ...Oh?\n"
-                                              "Something{APOSTROPHE}s gone wrong.");
-
-ALIGNED(4) const char gUnknown_80DEF28[] = " ...Oh? The number of linked\n"
-                                           "GBA systems is incorrect.\n"
-                                           "Please try again from the start.";
-
-ALIGNED(4) const u8 gUnknown_80DEF80[]=
-	 " ...Oh? It looks like your\n"
-	 "friend chose a different mode.\n"
-	 "Please try again from the start.";
-
-ALIGNED(4) const u8 gUnknown_80DEFDC[]=
-	 " ...Oh? It looks like your\n"
-	 "storage space is full. Please clear some\n"
-	 "space and try again from the start.";
-
-ALIGNED(4) const u8 gUnknown_80DF044[]= _(
-	 " ...Oh?\n"
-	 "I think you{APOSTROPHE}ve received this mail before.\n"
-	 "You can{APOSTROPHE}t get the same mail twice.");
-
-ALIGNED(4) const u8 gUnknown_80DF0A0[]= _(
-	 " ...Oh?\n"
-	 "I don{APOSTROPHE}t think you{APOSTROPHE}re eligible to receive\n"
-	 "this mail.");
-
-ALIGNED(4) const u8 gUnknown_80DF0E0[]=
-	 " ...Oh?\n"
-	 "There is no room to receive new mail.\n"
-	 "Please delete some mail and try again.";
-
-ALIGNED(4) const u8 gUnknown_80DF138[]= _(
-	 " ...Oh? Your friend didn{APOSTROPHE}t\n"
-	 "follow through on their side.\n"
-	 "Please try again from the start.");
-
-ALIGNED(4) const u8 gUnknown_80DF194[]= _(
-	" Your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
-	"has been sent.");
-
-ALIGNED(4) const u8 gUnknown_80DF1C0[]=
-	" ...Oh?\n"
-	"This password appears to be wrong.\n"
-	"Would you like to try again?";
-
-ALIGNED(4) const u8 gUnknown_80DF208[]= _(
-	" ...Oh? This password doesn{APOSTROPHE}t\n"
-	"appear to be for a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
-
-ALIGNED(4) const u8 gUnknown_80DF250[]= _(
-	": This is the counter for\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-	": Oh{COMMA} hi{COMMA} {COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}.\n"
-	"I{APOSTROPHE}ve been waiting for you. You wanted me\n"
-	"to process a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?{EXTRA_MSG}"
-	": Let me get on it right away.");
-
-ALIGNED(4) const u8 gUnknown_80DF304[]= _(
-	" Is it OK to send this\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
-
-ALIGNED(4) const u8 gUnknown_80DF330[]= _(
-	" Please choose the\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} that you want to\n"
-	"send to your friend.");
-
-ALIGNED(4) const u8 gUnknown_80DF380[]= _(
-	" OK. Please enter the\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.");
-
-ALIGNED(4) const u8 gUnknown_80DF3B4[]= _(
-	" Please give this password\n"
-	"to the friend that rescued your team.{EXTRA_MSG}"
-	" I also must save your\n"
-	"adventure.");
-
-ALIGNED(4) const u8 gUnknown_80DF418[]= _(
-	" OK{COMMA} here is your\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.");
-
-ALIGNED(4) const u8 gUnknown_80DF44C[]=
-	" I need to save your\n"
-	"adventure.";
-
-ALIGNED(4) const u8 gUnknown_80DF46C[]= _(
-	" There we go.\n"
-	"I{APOSTROPHE}m all done.{EXTRA_MSG}"
-	" Doesn{APOSTROPHE}t it feel great to\n"
-	"be appreciated for doing something good?\n"
-	"Please keep up your rescue work!");
-
-ALIGNED(4) const u8 gUnknown_80DF4F4[]= _(
-	" A {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} has\n"
-	"arrived from your friend for your rescue\n"
-	"mission.");
-
-ALIGNED(4) const u8 gUnknown_80DF544[]= _(
-	 "{CENTER_ALIGN}Communicating...\n"
-	 "{CENTER_ALIGN}Please wait with the power on.\n"
-	 "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
-
-ALIGNED(4) const u8 gUnknown_80DF594[]= _(
-	" There. I{APOSTROPHE}ve sent your\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\n"
-	"I need to save your adventure.");
-
-ALIGNED(4) const u8 gUnknown_80DF5E4[]= _(
-	" Please connect the GBA\n"
-	"systems with a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}.\n"
-	"Is your friend also ready?");
-
-ALIGNED(4) const u8 gUnknown_80DF63C[]= _(
-	" There{COMMA} all done.\n"
-	"{COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}{COMMA} I hope your friend\n"
-	"appreciates your sense of gratitude.");
-
-ALIGNED(4) const u8 gUnknown_80DF694[]= _(
-	" The item you{APOSTROPHE}ve chosen\n"
-	"here can{APOSTROPHE}t be exchanged later.\n"
-	"Are you certain this item is OK?");
-
-ALIGNED(4) const u8 gUnknown_80DF6F0[]= _(
-	" I{APOSTROPHE}ve saved your adventure. ");
-
-ALIGNED(4) const u8 gUnknown_80DF710[]= _(
-	" OK{COMMA} please choose\n"
-	"the item to be sent.");
-
-ALIGNED(4) const u8 gUnknown_80DF73C[]=
-	" ...Oh?\n"
-	"Your storage space is empty.\n"
-	"What would you like to do?";
-
-ALIGNED(4) const u8 gUnknown_80DF77C[]= _(
-	" Would you like to choose\n"
-	"a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} from storage and\n"
-	"send it with your mail?");
-
-ALIGNED(4) const u8 gUnknown_80DF7D4[]= _(
-	" ...Oh?\n"
-	"You{APOSTROPHE}ve already attached a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
-	"to this mail.{EXTRA_MSG}"
-	" I{APOSTROPHE}m sorry{COMMA} but once an item\n"
-	"has been attached to mail{COMMA} it can{APOSTROPHE}t be\n"
-	"exchanged.");
-
-ALIGNED(4) const u8 gUnknown_80DF870[]=
-	" Would you like to send it\n"
-	"again with the item you chose before?";
-
-ALIGNED(4) const u8 gUnknown_80DF8B4[]= _(
-	" ...Oh?\n"
-	"You don{APOSTROPHE}t seem to have a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
-
-ALIGNED(4) const u8 gUnknown_80DF8EC[]= _(
-	" Hello.\n"
-	"I handle {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\n"
-	"How may I serve you?");
-
-ALIGNED(4) const u8 gUnknown_80DF928[]=
-	" May I help you with\n"
-	"anything else?";
-
-ALIGNED(4) const u8 gUnknown_80DF94C[] =
-	" Please come see me\n"
-	"anytime.";
-
-ALIGNED(4) const u8 gUnknown_80DF96C[] = _(
-	" How would you like to send\n"
-	"your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
-
-ALIGNED(4) const u8 gUnknown_80DF9A4[]= _(
-	" How would you like to\n"
-	"receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?");
-
-ALIGNED(4) const u8 thank_you_fill[] = "pksdir0";
+#include "data/thank_you_wonder_mail.h"
 
 
 extern s32 sub_80953D4(u32);
