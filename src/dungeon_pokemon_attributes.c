@@ -95,7 +95,7 @@ bool8 HasAbility(struct DungeonEntity *pokemon, u8 ability)
     else
     {
         struct DungeonEntityData *pokemonData = pokemon->entityData;
-        if (pokemonData->ability1 == ability || pokemonData->ability2 == ability)
+        if (pokemonData->abilities[0] == ability || pokemonData->abilities[1] == ability)
         {
             return TRUE;
         }

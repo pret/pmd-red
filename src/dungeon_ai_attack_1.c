@@ -9,6 +9,7 @@
 #include "dungeon_random.h"
 #include "moves.h"
 #include "position_util.h"
+#include "status_checker.h"
 #include "status_checks_1.h"
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
@@ -17,7 +18,6 @@ extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
 extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
-extern bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*);
 
 s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
 {

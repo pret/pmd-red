@@ -18,7 +18,7 @@ s32 GetMoveAccuracy(struct PokemonMove *move, u32 accuracyType);
 u32 GetMoveMaxPP(struct PokemonMove *move);
 u8 GetMoveUnk12(struct PokemonMove *move);
 u8 GetMoveCriticalHitChance(struct PokemonMove *move);
-u8 GetMoveCannotHitFrozen(struct PokemonMove *move);
+u8 MoveCannotHitFrozen(struct PokemonMove *move);
 u8 MoveDealsDirectDamage(struct PokemonMove *move);
 u32 GetMoveRangeType(struct PokemonMove *move);
 void sub_8092C84(u8 *buffer, u16 moveID);
