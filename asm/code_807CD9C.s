@@ -12482,12 +12482,4 @@ sub_8083260:
 	bx r0
 	thumb_func_end sub_8083260
 
-	thumb_func_start sub_8083288
-sub_8083288:
-	push {lr}
-	bl sub_8082FE0
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8083288
-
 	.align 2, 0

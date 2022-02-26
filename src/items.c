@@ -5,7 +5,9 @@
 #include "team_inventory.h"
 #include "random.h"
 #include "pokemon.h"
+#include "random.h"
 #include "subStruct_203B240.h"
+#include "team_inventory.h"
 
 #include <stddef.h>
 
@@ -25,7 +27,7 @@ extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
 extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
-extern u32 gUnknown_810AF50[];
+extern const char *gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u8 gInvalidItemIDs[0x10];
@@ -1232,7 +1234,7 @@ void SaveItemSlot(struct unkStruct_8094924 *a1, struct ItemSlot *slot)
   SaveIntegerBits(a1, &slot->itemIndex, 8);
 }
 
-u32 sub_8091E50(u8 index)
+const char *sub_8091E50(u8 index)
 {
   return gUnknown_810AF50[index];
 }

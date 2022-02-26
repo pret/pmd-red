@@ -5,30 +5,6 @@
 
   	.text
 
-	thumb_func_start sub_8073CF0
-sub_8073CF0:
-	push {lr}
-	bl sub_8067110
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8073CF0
-
-	thumb_func_start sub_8073CFC
-sub_8073CFC:
-	push {lr}
-	bl sub_80671A0
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8073CFC
-
-	thumb_func_start sub_8073D08
-sub_8073D08:
-	push {lr}
-	bl sub_8073D14
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8073D08
-
 	thumb_func_start sub_8073D14
 sub_8073D14:
 	push {r4-r7,lr}
