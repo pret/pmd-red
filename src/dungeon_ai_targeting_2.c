@@ -1,5 +1,5 @@
 #include "global.h"
-#include "dungeon_ai_1.h"
+#include "dungeon_ai_targeting_2.h"
 
 #include "constants/status.h"
 #include "constants/targeting.h"

@@ -5,7 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "charge_move.h"
-#include "dungeon_ai.h"
+#include "dungeon_ai_targeting_1.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
@@ -15,7 +15,7 @@
 #include "dungeon_util.h"
 #include "map.h"
 
-const u8 gDirectionBitMasks[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
 static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)
 {
@@ -89,7 +89,7 @@ bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep)
 bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
 {
     u8 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
-    struct MapTile *currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
+    struct MapTile *currentMapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
         pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
     if (currentMapTile->tileType & TILE_TYPE_MAP_EDGE || currentMapTile->pokemon != NULL)
     {
@@ -118,8 +118,8 @@ bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
             }
         }
     }
-    currentMapTile = GetMapTileAtPosition(pokemon->posWorld.x, pokemon->posWorld.y);
-    if (!(currentMapTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks[facingDir & DIRECTION_MASK]))
+    currentMapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+    if (!(currentMapTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_1[facingDir & DIRECTION_MASK]))
     {
         return FALSE;
     }

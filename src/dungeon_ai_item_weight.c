@@ -3,7 +3,7 @@
 
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "dungeon_ai_1.h"
+#include "dungeon_ai_targeting_2.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
@@ -185,7 +185,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
             }
             break;
         case ITEM_ID_QUICK_SEED:
-            if (targetPokemon->entityData->movementSpeed <= 3)
+            if (targetPokemon->entityData->movementSpeed < MAX_MOVEMENT_SPEED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -448,7 +448,7 @@ bool8 CanTargetAdjacentPokemon(struct DungeonEntity *pokemon)
     s32 facingDir;
     for (facingDir = 0; facingDir < NUM_DIRECTIONS; facingDir++)
     {
-        struct MapTile *mapTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
+        struct MapTile *mapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
         struct DungeonEntity *adjacentPokemon = mapTile->pokemon;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NONE &&
             CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)

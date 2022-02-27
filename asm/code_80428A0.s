@@ -2410,7 +2410,7 @@ _08043E6A:
 _08043E6E:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapEntity
+	bl GetMapTile_2
 	ldr r4, [r0, 0x14]
 	adds r0, r4, 0
 	bl EntityExists
@@ -2827,30 +2827,5 @@ _080441B0: .4byte 0x00000644
 _080441B4: .4byte gTeamInventory_203B460
 _080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
-
-	thumb_func_start IsBossBattle
-IsBossBattle:
-	push {lr}
-	ldr r0, _080441D8
-	ldr r0, [r0]
-	ldr r1, _080441DC
-	adds r0, r1
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	beq _080441E0
-	cmp r0, 0x31
-	bgt _080441E0
-	movs r0, 0x1
-	b _080441E2
-	.align 2, 0
-_080441D8: .4byte gDungeonGlobalData
-_080441DC: .4byte 0x00003a14
-_080441E0:
-	movs r0, 0
-_080441E2:
-	pop {r1}
-	bx r1
-	thumb_func_end IsBossBattle
 
 	.align 2, 0

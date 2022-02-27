@@ -426,7 +426,7 @@ _08045CEE:
 _08045CF6:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	movs r3, 0x80
@@ -542,7 +542,7 @@ sub_8045DB4:
 	ldrsh r0, [r1, r2]
 	movs r3, 0x2
 	ldrsh r1, [r1, r3]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldr r4, [r0, 0x14]
 	cmp r4, 0
 	bne _08045DE8
@@ -958,7 +958,7 @@ _08046110:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl GetMapEntity
+	bl GetMapTile_2
 	str r4, [r0, 0x14]
 	ldrh r1, [r0]
 	movs r0, 0x20
@@ -1044,7 +1044,7 @@ sub_80461C8:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x2
 	ldrsh r1, [r2, r3]
-	bl GetMapEntity
+	bl GetMapTile_2
 	adds r6, r0, 0
 	ldr r5, [r6, 0x14]
 	cmp r5, 0
@@ -1187,7 +1187,7 @@ _080462E4:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r0, [r0]
 	movs r1, 0x3
 	ands r1, r0
@@ -1492,7 +1492,7 @@ sub_804652C:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x6
 	ldrsh r1, [r5, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r4, r0, 0
 	ldr r0, [r4, 0x14]
 	movs r3, 0
@@ -1559,7 +1559,7 @@ _080465A8:
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	asrs r1, 16
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r4, r0, 0
 	ldrh r1, [r4]
 	movs r6, 0x3
@@ -1630,7 +1630,7 @@ _08046644:
 	ldrsh r0, [r0, r3]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r0, [r0]
 	movs r1, 0x3
 	ands r1, r0
@@ -1999,7 +1999,7 @@ _08046904:
 	lsls r0, r4, 16
 	asrs r0, 16
 	asrs r1, r4, 16
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3

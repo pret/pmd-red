@@ -1,76 +1,175 @@
 #include "global.h"
 #include "dungeon_ai_attack_1.h"
 
-#include "constants/iq_skill.h"
-#include "dungeon_global_data.h"
-#include "dungeon_map_access.h"
+#include "constants/direction.h"
+#include "constants/targeting.h"
+#include "constants/type.h"
+#include "dungeon_ai_targeting_2.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_util.h"
+#include "dungeon_random.h"
+#include "moves.h"
+#include "position_util.h"
+#include "status_checks_1.h"
 
-bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
+extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
+extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
+extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
+extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
+
+extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
+extern bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*);
+
+s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
 {
-    s32 posDiffX = pokemon->posWorld.x - targetPokemon->posWorld.x;
-    s32 effectiveMaxRange;
-    if (posDiffX < 0)
+    s32 facingDir;
+    s32 targetingFlags2 = (s16) targetingFlags;
+    bool8 hasStatusChecker2 = hasStatusChecker;
+    struct DungeonEntityData *userData = user->entityData;
+    if ((user->posWorld.x == target->posWorld.x && user->posWorld.y == target->posWorld.y) ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_ROOM ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_FLOOR ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_SELF)
     {
-        posDiffX = -posDiffX;
-    }
-    effectiveMaxRange = pokemon->posWorld.y - targetPokemon->posWorld.y;
-    if (effectiveMaxRange < 0)
-    {
-        effectiveMaxRange = -effectiveMaxRange;
-    }
-    if (effectiveMaxRange < posDiffX)
-    {
-        effectiveMaxRange = posDiffX;
-    }
-    if (effectiveMaxRange > maxRange)
-    {
-        effectiveMaxRange = maxRange;
-    }
-    if (!HasIQSkill(pokemon, IQ_SKILL_COURSE_CHECKER))
-    {
-        // BUG: effectiveMaxRange is already capped at maxRange, so this condition always evaluates to TRUE.
-        // The AI also has range checks elsewhere, so this doesn't become an issue in most cases.
-        // If the AI has the Long Toss or Pierce statuses and Course Checker is disabled,
-        // this incorrect check causes the AI to throw items at targets further than 10 tiles away.
-        if (effectiveMaxRange <= maxRange)
-        {
-            return TRUE;
-        }
+        facingDir = userData->action.facingDir;
     }
     else
     {
-        s32 currentPosX = pokemon->posWorld.x;
-        s32 currentPosY = pokemon->posWorld.y;
-        s32 adjacentTileOffsetX = gAdjacentTileOffsets[facingDir].x;
-        s32 adjacentTileOffsetY = gAdjacentTileOffsets[facingDir].y;
-        s32 i;
-        for (i = 0; i <= effectiveMaxRange; i++)
+        facingDir = CalculateFacingDir(&user->posWorld, &target->posWorld);
+    }
+    if (!gCanAttackInDirection[facingDir] &&
+        CanUseStatusMove(targetingFlags2, user, target, move, hasStatusChecker2))
+    {
+        gCanAttackInDirection[facingDir] = TRUE;
+        do { gPotentialAttackTargetDirections[numPotentialTargets] = facingDir; } while (0);
+        gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(user, targetingFlags2, target, GetMoveTypeForPokemon(user, move));
+        gPotentialTargets[numPotentialTargets] = target;
+        numPotentialTargets++;
+    }
+    return numPotentialTargets;
+}
+
+bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
+{
+    struct DungeonEntityData *targetData;
+    s32 targetingFlags2 = (s16) targetingFlags;
+    bool8 hasStatusChecker2 = hasStatusChecker;
+    bool8 hasTarget = FALSE;
+    u32 categoryTargetingFlags = targetingFlags2 & 0xF;
+    u32 *categoryTargetingFlags2 = &categoryTargetingFlags; // Fixes a regswap.
+    if (*categoryTargetingFlags2 == TARGETING_FLAG_TARGET_OTHER)
+    {
+        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {
-            struct MapTile *mapTile;
-            currentPosX += adjacentTileOffsetX;
-            currentPosY += adjacentTileOffsetY;
-            if (currentPosX <= 0 || currentPosY <= 0 ||
-                currentPosX >= DUNGEON_MAX_SIZE_X - 1 || currentPosY >= DUNGEON_MAX_SIZE_Y - 1)
+            hasTarget = TRUE;
+        }
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_HEAL_TEAM)
+    {
+        goto checkCanTarget;
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_LONG_RANGE)
+    {
+        targetData = target->entityData;
+        goto checkThirdParty;
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_ATTACK_ALL)
+    {
+        targetData = target->entityData;
+        if (user == target)
+        {
+            goto returnFalse;
+        }
+        checkThirdParty:
+        hasTarget = TRUE;
+        if (targetData->shopkeeperMode == SHOPKEEPER_FRIENDLY ||
+            targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
+            targetData->clientType == CLIENT_TYPE_CLIENT)
+        {
+            returnFalse:
+            return FALSE;
+        }
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_BOOST_TEAM)
+    {
+        if (user == target)
+        {
+            goto returnFalse;
+        }
+        checkCanTarget:
+        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CANNOT_ATTACK)
+        {
+            hasTarget = TRUE;
+        }
+    }
+    else if ((u16) (categoryTargetingFlags - 3) <= 1) // categoryTargetingFlags == TARGETING_FLAG_ITEM
+    {
+        hasTarget = TRUE;
+    }
+
+    if (hasTarget)
+    {
+        if (hasStatusChecker2)
+        {
+            if (!CanUseOnTargetWithStatusChecker(user, target, move))
             {
-                break;
+                goto returnFalse;
             }
-            while (0); // Extra label needed to swap branch locations in ASM.
-            mapTile = GetMapTileAtPosition(currentPosX, currentPosY);
-            if (!(mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+            if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
             {
-                break;
+                goto rollMoveUseChance;
             }
-            if (mapTile->pokemon == targetPokemon)
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_HP)
             {
-                return TRUE;
+                if (!HasQuarterHPOrLess(target))
+                {
+                    if (*categoryTargetingFlags2);
+                    goto returnFalse;
+                }
             }
-            if (mapTile->pokemon != NULL)
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_STATUS)
             {
-                break;
+                if (!HasNegativeStatus(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_DREAM_EATER)
+            {
+                if (!IsSleeping(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
+            {
+                targetData = target->entityData;
+                if ((targetData->type1 != TYPE_GHOST && targetData->type2 != TYPE_GHOST) || targetData->exposedStatus)
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_ALL)
+            {
+                if (!HasNegativeStatus(target) && !HasQuarterHPOrLess(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+        }
+        else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
+        {
+            s32 useChance;
+            rollMoveUseChance:
+            useChance = GetMoveAccuracy(move, ACCURACY_TYPE_USE_CHANCE);
+            if (DungeonRandomCapped(100) >= useChance)
+            {
+                goto returnFalse;
             }
         }
     }
-    return FALSE;
+    return hasTarget;
 }

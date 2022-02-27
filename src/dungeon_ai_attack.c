@@ -10,8 +10,10 @@
 #include "constants/type.h"
 #include "charge_move.h"
 #include "dungeon_action.h"
-#include "dungeon_ai.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_ai_targeting_1.h"
 #include "dungeon_ai_attack_1.h"
+#include "dungeon_ai_attack_2.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -22,6 +24,7 @@
 #include "dungeon_visibility.h"
 #include "moves.h"
 #include "position_util.h"
+#include "status_checker.h"
 #include "status_checks.h"
 #include "targeting.h"
 #include "targeting_flags.h"
@@ -32,17 +35,13 @@ const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gNumPotentialTargets;
-extern s32 gPotentialTargetWeights_2[NUM_DIRECTIONS];
+extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
-extern bool8 IsMoveUsable(struct DungeonEntity*, s32, bool8);
+extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
-extern bool8 CanUseWithStatusChecker(struct DungeonEntity*, struct PokemonMove*);
-extern bool8 CanAttackInFront(struct DungeonEntity*, s32);
-extern s32 WeightMoveIfUsable(s32, s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern bool8 IsTargetInLineRange(struct DungeonEntity*, struct DungeonEntity*, s32);
-extern bool8 CanUseStatusMove(s32, struct DungeonEntity*, struct DungeonEntity*, struct PokemonMove*, bool8);
 extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
 
 void DecideAttack(struct DungeonEntity *pokemon)
@@ -182,7 +181,7 @@ void DecideAttack(struct DungeonEntity *pokemon)
         move = &pokemonData->moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
             willNotUnlinkMove[i] &&
-            IsMoveUsable(pokemon, i, hasPPChecker) &&
+            IsMoveUsable_1(pokemon, i, hasPPChecker) &&
             move->moveFlags & MOVE_FLAG_ENABLED)
         {
             moveTargetResults[i].moveUsable = TRUE;
@@ -349,7 +348,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
     moveTargetResults->moveUsable = FALSE;
     if ((pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !MoveDealsDirectDamage(move)) ||
-        (hasStatusChecker && !CanUseWithStatusChecker(pokemon, move)))
+        (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;
     }
@@ -366,7 +365,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             {
                 gCanAttackInDirection[i] = TRUE;
                 gPotentialAttackTargetDirections[numPotentialTargets] = i;
-                gPotentialTargetWeights_2[numPotentialTargets] = 99;
+                gPotentialAttackTargetWeights[numPotentialTargets] = 99;
                 gPotentialTargets[numPotentialTargets] = NULL;
                 numPotentialTargets++;
             }
@@ -377,7 +376,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             {
                 // Double assignment to fix a regswap.
                 s16 rangeTargetingFlags = rangeTargetingFlags2 = targetingFlags & 0xF0;
-                struct MapTile *adjacentTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
+                struct MapTile *adjacentTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
                     pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
                 struct DungeonEntity *adjacentPokemon = adjacentTile->pokemon;
                 if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_POKEMON)
@@ -411,7 +410,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     {
         for (i = 0; i < NUM_DIRECTIONS; i++)
         {
-            struct MapTile *targetTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
+            struct MapTile *targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
                 pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
             if (CanAttackInFront(pokemon, i))
             {
@@ -425,7 +424,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
                         continue;
                     }
                 }
-                targetTile = GetMapTileAtPosition(pokemon->posWorld.x + gAdjacentTileOffsets[i].x * 2,
+                targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x * 2,
                     pokemon->posWorld.y + gAdjacentTileOffsets[i].y * 2);
                 targetPokemon = targetTile->pokemon;
                 if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_POKEMON)
@@ -457,7 +456,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
                 {
                     gCanAttackInDirection[facingDir] = TRUE;
                     gPotentialAttackTargetDirections[numPotentialTargets] = facingDir;
-                    gPotentialTargetWeights_2[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForPokemon(pokemon, move));
+                    gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForPokemon(pokemon, move));
                     gPotentialTargets[numPotentialTargets] = target;
                     numPotentialTargets++;
                 }
@@ -492,27 +491,27 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         s32 i;
         for (i = 0; i < numPotentialTargets; i++)
         {
-            if (maxWeight < gPotentialTargetWeights_2[i])
+            if (maxWeight < gPotentialAttackTargetWeights[i])
             {
-                maxWeight = gPotentialTargetWeights_2[i];
+                maxWeight = gPotentialAttackTargetWeights[i];
             }
         }
         for (i = 0; i < numPotentialTargets; i++)
         {
-            if (maxWeight != gPotentialTargetWeights_2[i])
+            if (maxWeight != gPotentialAttackTargetWeights[i])
             {
-                gPotentialTargetWeights_2[i] = 0;
+                gPotentialAttackTargetWeights[i] = 0;
             }
         }
         moveWeight = maxWeight;
         for (i = 0; i < numPotentialTargets; i++)
         {
-            totalWeight += gPotentialTargetWeights_2[i];
+            totalWeight += gPotentialAttackTargetWeights[i];
         }
         weightCounter = DungeonRandomCapped(totalWeight);
         for (i = 0; i < numPotentialTargets; i++)
         {
-            weightCounter -= gPotentialTargetWeights_2[i];
+            weightCounter -= gPotentialAttackTargetWeights[i];
             if (weightCounter < 0)
             {
                 break;

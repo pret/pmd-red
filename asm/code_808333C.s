@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start InSameRoom_3
 InSameRoom_3:
 	push {r4-r6,lr}
@@ -14,7 +14,7 @@ InSameRoom_3:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrb r2, [r0, 0x9]
 	cmp r2, 0xFF
 	beq _08083394
@@ -107,7 +107,7 @@ sub_80833E8:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r1, r0, 0
 	ldr r0, _08083438
 	ldr r3, [r0]
@@ -253,7 +253,7 @@ _080834F8:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -292,7 +292,7 @@ _0808353E:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -618,7 +618,7 @@ _0808379C:
 	ldr r2, _0808380C
 	add r2, sp
 	str r3, [r2]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r2, r0, 0
 	ldr r0, _08083810
 	ldr r1, _0808380C
@@ -730,7 +730,7 @@ _0808386A:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp]
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r7, 0x80

@@ -71,7 +71,7 @@ struct DungeonGlobalData
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
     u8 fillE279[0xE8C0 - 0xE279];
-    /* 0xE8C0 */ struct MapTile* mapEntityPointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
+    /* 0xE8C0 */ struct MapTile* mapTilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fill104C0[0x104C4 - 0x104C0];
     /* 0x104C4 */ struct MapRoom roomData[MAX_ROOM_COUNT];
     u8 fill10764[0x10844 - 0x10764];

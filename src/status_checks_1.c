@@ -53,3 +53,19 @@ bool8 IsSleeping(struct DungeonEntity *pokemon)
     }
     return TRUE;
 }
+
+bool8 HasQuarterHPOrLess(struct DungeonEntity* pokemon)
+{
+    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct DungeonEntityData *pokemonData2 = pokemon->entityData;
+    s32 maxHP = pokemonData->maxHP;
+    if (maxHP < 0)
+    {
+        maxHP += 3;
+    }
+    if (pokemonData2->HP <= maxHP >> 2)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}

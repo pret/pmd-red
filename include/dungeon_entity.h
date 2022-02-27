@@ -6,6 +6,9 @@
 #include "item.h"
 #include "position.h"
 
+#define MAX_STAT_STAGE 20
+#define MAX_MOVEMENT_SPEED 4
+#define MAX_STOCKPILE_COUNT 3
 #define NUM_SPEED_TURN_COUNTERS 5
 
 struct DungeonActionContainer

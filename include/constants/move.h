@@ -11,6 +11,18 @@ enum MoveFlags
     MOVE_FLAG_DISABLED = 1 << 5 // Disabled by an effect like Taunt.
 };
 
+enum AccuracyType
+{
+    // Accuracy used for all moves.
+    ACCURACY_TYPE_GLOBAL,
+    // Multiplied with the global accuracy for offensive moves (i.e., not status moves).
+    ACCURACY_TYPE_OFFENSIVE,
+    // Used by the AI to determine how often to use Spikes.
+    // Values exist for all other moves, though they seem to be unused.
+    ACCURACY_TYPE_USE_CHANCE,
+    NUM_ACCURACY_TYPES
+};
+
 struct MoveData
 {
     u8 *namePointer;
@@ -22,10 +34,8 @@ struct MoveData
     // The AI consider certain moves to have different range than they actually do.
     /* 0xC */ u8 maxPP;
     /* 0xD */ u8 weight;
-    /* 0xE */ u8 accuracy[2];
-    // Used by the AI to determine how often to use Spikes.
-    // Values exist for all other moves, though they seem to be unused.
-    /* 0x10 */ u8 useChance;
+    // There are multiple accuracy values. These are define with the AccuracyType enum.
+    /* 0xE */ u8 accuracy[NUM_ACCURACY_TYPES];
     /* 0x11 */ u8 hitCount; // Maximum number of times the move will hit. Used for multi-hit moves like Fury Attack.
     u8 unk12;
     /* 0x13 */ u8 criticalHitChance;

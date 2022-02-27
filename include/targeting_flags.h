@@ -5,6 +5,6 @@
 #include "dungeon_entity.h"
 
 // 0x7CD64
-s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, u32 isAI);
+s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, bool32 isAI);
 
 #endif

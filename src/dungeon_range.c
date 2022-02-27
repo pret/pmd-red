@@ -14,7 +14,7 @@ bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
     {
         visibility = 2;
     }
-    tile1 = GetMapTileAtPosition(pos1->x, pos1->y);
+    tile1 = GetMapTile_1(pos1->x, pos1->y);
     pos1RoomIndex = tile1->roomIndex;
     if (pos1RoomIndex == CORRIDOR_ROOM_INDEX)
     {

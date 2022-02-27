@@ -285,8 +285,8 @@ _08057340:
 	bx r1
 	thumb_func_end sub_8057308
 
-	thumb_func_start IsMoveUsable
-IsMoveUsable:
+	thumb_func_start IsMoveUsable_1
+IsMoveUsable_1:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -357,7 +357,7 @@ _080573C0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end IsMoveUsable
+	thumb_func_end IsMoveUsable_1
 
 	thumb_func_start IsMoveUsable_2
 IsMoveUsable_2:
@@ -909,9 +909,9 @@ sub_8057788:
 	movs r0, 0
 	mov r9, r0
 	adds r0, r4, 0
-	bl GetMapEntityForDungeonEntity
+	bl GetMapTileForDungeonEntity_2
 	adds r5, r0, 0
-	bl IsTileWater
+	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
 	beq _080577BA

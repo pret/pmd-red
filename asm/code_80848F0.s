@@ -218,7 +218,7 @@ _080853EE:
 	lsls r0, r4, 16
 	asrs r0, 16
 	asrs r1, r4, 16
-	bl GetMapTileAtPosition
+	bl GetMapTile_1
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_807034C

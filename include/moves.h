@@ -14,7 +14,7 @@ u8 GetMoveType(struct PokemonMove *move);
 u8 GetMoveWeight(struct PokemonMove *move);
 u8 GetMoveHitCount(struct PokemonMove *move);
 s32 GetMovePower(struct PokemonMove *move);
-u8 GetMoveAccuracy(struct PokemonMove *move, u32 r1);
+s32 GetMoveAccuracy(struct PokemonMove *move, u32 accuracyType);
 u32 GetMoveMaxPP(struct PokemonMove *move);
 u8 GetMoveUnk12(struct PokemonMove *move);
 u8 GetMoveCriticalHitChance(struct PokemonMove *move);

@@ -3,6 +3,7 @@
 #include "constants/friend_area.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "dungeon_map_access.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "friend_area.h"
@@ -138,7 +139,6 @@ extern void sub_8049ED4();
 extern void sub_8040A84();
 extern void sub_8086A54(struct DungeonEntity *);
 
-extern struct MapTile *GetMapEntity(u32, u32);
 extern void sub_806BFC0(struct DungeonEntityData *, u32);
 
 void sub_808BBA8(struct DungeonEntity *param_1)
@@ -207,7 +207,7 @@ void sub_808BCE4(void)
 {
   struct MapTile *puVar1;
 
-  puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
+  puVar1 = GetMapTile_2(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
   puVar1->tileType &= ~(TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
   puVar1->tileType |= TILE_TYPE_MAP_EDGE;
   puVar1->tileType &= ~TILE_TYPE_STAIRS;
@@ -221,7 +221,7 @@ void sub_808BD38(void)
 {
   struct MapTile *puVar1;
 
-  puVar1 = GetMapEntity(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
+  puVar1 = GetMapTile_2(gDungeonGlobalData->unkE23C, gDungeonGlobalData->unkE23E);
   puVar1->tileType &= ~(TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
   puVar1->tileType |= TILE_TYPE_FLOOR;
   puVar1->tileType &= ~TILE_TYPE_MAP_EDGE;
