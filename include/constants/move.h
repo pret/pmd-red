@@ -37,7 +37,6 @@ struct MoveData
     u8 *namePointer;
     /* 0x4 */ s16 power;
     u8 type;
-    u8 fill7;
     // Determines the range of moves.
     /* 0x8 */ u16 targetingFlags[2]; // 0 for player and 1 for AI
     // The AI consider certain moves to have different range than they actually do.

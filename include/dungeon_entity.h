@@ -28,7 +28,6 @@ struct DungeonActionContainer
     u8 fill3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ u8 actionUseIndex;
-    u8 fill5[0x8 - 0x5];
     // Position of the Pokémon the last time it threw an item.
     /* 0x8 */ struct Position lastItemThrowPosition;
     u8 unkC;
@@ -49,7 +48,6 @@ struct DungeonEntityData
     /* 0x8 */ u8 shopkeeperMode;
     /* 0x9 */ u8 level;
     /* 0xA */ u8 partyIndex; // Leader is 0, partner is 1, etc.
-    u8 fillB;
     /* 0xC */ s16 IQ;
     /* 0xE */ s16 HP;
     /* 0x10 */ s16 maxHP;
@@ -70,7 +68,6 @@ struct DungeonEntityData
     /* 0x24 */ s16 accuracyStages[2];
     // // When a Fire-type move is used on a Pokémon with Flash Fire, this value increases the power of the Pokémon's Fire-type moves.
     /* 0x28 */ s16 flashFireBoost;
-    u8 fill2A[0x2C - 0x2A];
     // These start at 0x1000, and are halved by certain moves like Screech to lower the corresponding stat.
     // Index 0 is Attack. Index 1 is Special Attack.
     /* 0x2C */ s32 attackMultipliers[2];
@@ -80,7 +77,6 @@ struct DungeonEntityData
     /* 0x3E */ u8 hiddenPowerType;
     u8 fill3F;
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
-    u8 fill41[0x44 - 0x41];
     /* 0x44 */ struct DungeonActionContainer action;
     u8 fill55[0x58 - 0x55];
     // Position of the target that the Pokémon wants throw an item at.
@@ -99,7 +95,6 @@ struct DungeonEntityData
     /* 0x7A */ bool8 hasTarget;
     /* 0x7B */ bool8 turnAround;
     /* 0x7C */ u16 targetPokemonSpawnIndex;
-    u8 fill7E[0x80 - 0x7E];
     /* 0x80 */ u32 targetPokemon;
     u8 fill84[0x88 - 0x84];
     /* 0x88 */ struct Position targetMovePosition;
@@ -177,7 +172,6 @@ struct DungeonEntityData
     /* 0xFD */ u8 perishSongTimer; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
     u8 fillFE[0x100 - 0xFE];
     /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
-    u8 fill101[0x104 - 0x101];
     /* 0x104 */ s32 movementSpeed;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
@@ -188,10 +182,8 @@ struct DungeonEntityData
     // When true, an AI Pokémon will move in a random direction every turn.
     // Unclear where this is set in-game; it is not set by statuses (e.g., confusion) or mission clients.
     /* 0x114 */ bool8 moveRandomly;
-    u8 fill115[0x118 - 0x115];
     /* 0x118 */ struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
-    u8 fill139[0x13C - 0x139];
     /* 0x13C */ u32 belly;
     /* 0x140 */ u32 maxBelly;
     /* 0x144 */ bool8 movingIntoTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
@@ -210,7 +202,6 @@ struct DungeonEntityData
     u8 unk15F;
     u8 fill160[0x169 - 0x160];
     u8 turnsSinceWarpScarfActivation;
-    u8 fill16A[0x16C - 0x16A];
     /* 0x16C */ struct Position targetPosition;
     /* 0x170 */ struct Position posPixel;
     u32 unk174;
@@ -219,7 +210,6 @@ struct DungeonEntityData
     /* 0x184 */ struct Position previousTargetMovePosition1;
     /* 0x188 */ struct Position32 previousTargetMovePosition2;
     /* 0x190 */ u8 lastMoveDirection; // The last direction that the Pokémon moved in.
-    u8 fill191[0x194 - 0x191];
     // Number of tiles that the Pokémon moved last, multiplied by 0x100.
     /* 0x194 */ struct Position32 lastMoveIncrement;
     /* 0x19C */ u8 walkAnimationCounter; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
@@ -229,9 +219,7 @@ struct DungeonEntityData
     /* 0x1F6 */ bool8 notMoving;
     u8 fill1F7[0x1FA - 0x1F7];
     /* 0x1FA */ u8 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
-    u8 fill1FB;
     /* 0x1FC */ u16 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
-    u8 fill1FE[0x200 - 0x1FE];
     /* 0x200 */ u32 statusSprites;
     u32 unk204;
 };
@@ -282,7 +270,6 @@ struct DungeonEntity
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 facingDir;
     /* 0x6D */ u8 facingDir2; // Duplicate of 0x6C?
-    u8 fill6D[0x70 - 0x6E];
     /* 0x70 */ struct DungeonEntityData *entityData;
 };
 
