@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_MOVE_H
 #define GUARD_CONSTANTS_MOVE_H
 
+#define STRUGGLE_MOVE_INDEX 4
+
 enum MoveFlags
 {
     MOVE_FLAG_EXISTS = 1 << 0,
@@ -9,6 +11,13 @@ enum MoveFlags
     MOVE_FLAG_SET = 1 << 3, // This move can be triggered by pressing L+A instead of having to go to the move menu.
     MOVE_FLAG_LAST_USED = 1 << 4, // The most recent move used by the Pokémon.
     MOVE_FLAG_DISABLED = 1 << 5 // Disabled by an effect like Taunt.
+};
+
+enum MoveFlags2
+{
+    MOVE_FLAG_SEALED = 1 << 0,
+    MOVE_FLAG_TEMPORARY = 1 << 3, // Used for moves copied by Mimic.
+    MOVE_FLAG_REPLACE = 1 << 5 // Used for moves copied by Sketch.
 };
 
 enum AccuracyType
@@ -52,7 +61,7 @@ struct MoveData
 struct PokemonMove
 {
     u8 moveFlags;
-    bool8 sealed;
+    u8 moveFlags2;
     u16 moveID;
     u8 PP;
     u8 powerBoost; // How much the move is boosted by Ginsengs.

@@ -13,6 +13,7 @@
 #include "map.h"
 #include "moves.h"
 #include "number_util.h"
+#include "status_checker_1.h"
 #include "status_checks_1.h"
 #include "tile_types.h"
 #include "trap.h"
@@ -98,7 +99,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_ROCK
 };
 
-extern bool8 HasLastUsedMove(struct PokemonMove *moves);
 extern bool8 HasDisabledMove(struct PokemonMove *moves);
 extern bool8 LastMoveOutOfPP(struct PokemonMove *moves);
 

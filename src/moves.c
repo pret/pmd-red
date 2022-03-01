@@ -51,7 +51,7 @@ u8 sub_809287C(struct PokemonMove *move)
 {
     if((move->moveFlags & MOVE_FLAG_DISABLED) != 0)
         return 0x32;
-    else if((move->sealed & 1) == 0)
+    else if((move->moveFlags2 & MOVE_FLAG_SEALED) == 0)
         return 0x34;
     else
         return 0x32;
@@ -130,7 +130,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
 void InitPokemonMove(struct PokemonMove *move, u16 moveID)
 {
     move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
-    move->sealed = FALSE;
+    move->moveFlags2 = 0;
     move->moveID = moveID;
     move->PP = GetMoveMaxPP(move);
     move->powerBoost = 0;
@@ -143,7 +143,7 @@ void sub_8092AA8(struct PokemonMove *move, u16 moveID)
     else
     {
         move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
-        move->sealed = FALSE;
+        move->moveFlags2 = 0;
         move->moveID = moveID;
         move->PP = GetMoveMaxPP(move);
         move->powerBoost = 0;
