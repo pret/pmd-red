@@ -8,5 +8,7 @@
 bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move);
 // 0x5CEB8
 bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move);
+// 0x5D810
+bool8 HasDisabledMove(struct PokemonMove *moves);
 
 #endif
