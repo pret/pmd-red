@@ -3,7 +3,7 @@
 
 #define STRUGGLE_MOVE_INDEX 4
 
-enum MoveFlags
+enum MoveFlag
 {
     MOVE_FLAG_EXISTS = 1 << 0,
     MOVE_FLAG_LINKED = 1 << 1, // This move is linked with the previous move in the Pokémon's moveset.
@@ -13,7 +13,7 @@ enum MoveFlags
     MOVE_FLAG_DISABLED = 1 << 5 // Disabled by an effect like Taunt.
 };
 
-enum MoveFlags2
+enum MoveFlag2
 {
     MOVE_FLAG_SEALED = 1 << 0,
     MOVE_FLAG_TEMPORARY = 1 << 3, // Used for moves copied by Mimic.

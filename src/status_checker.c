@@ -13,7 +13,6 @@
 #include "map.h"
 #include "moves.h"
 #include "number_util.h"
-#include "status_checker_1.h"
 #include "status_checks_1.h"
 #include "tile_types.h"
 #include "trap.h"
@@ -98,8 +97,6 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_WATER,
     TYPE_ROCK
 };
-
-extern bool8 LastMoveOutOfPP(struct PokemonMove *moves);
 
 bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move)
 {
@@ -639,7 +636,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_SPITE:
-            if (LastMoveOutOfPP(targetData->moves))
+            if (LastUsedMoveOutOfPP(targetData->moves))
             {
                 return FALSE;
             }
@@ -914,6 +911,38 @@ bool8 HasDisabledMove(struct PokemonMove *moves)
         }
     }
     if (moves[STRUGGLE_MOVE_INDEX].moveFlags & MOVE_FLAG_DISABLED)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 LastUsedMoveOutOfPP(struct PokemonMove *moves)
+{
+    s32 i;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i].moveFlags & MOVE_FLAG_EXISTS &&
+            moves[i].moveFlags & MOVE_FLAG_LAST_USED &&
+            moves[i].PP == 0)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 HasLastUsedMove(struct PokemonMove *moves)
+{
+    s32 i;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags & MOVE_FLAG_LAST_USED)
+        {
+            return TRUE;
+        }
+    }
+    if (moves[STRUGGLE_MOVE_INDEX].moveFlags & MOVE_FLAG_LAST_USED)
     {
         return TRUE;
     }
