@@ -8,6 +8,7 @@
 #include "friend_rescue.h"
 #include "sub_8095228.h"
 #include "item.h"
+#include "code_8094F88.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern u8 *gUnknown_203B484;
@@ -488,7 +489,7 @@ void sub_8033DBC(void)
                         sub_80951FC(&temp.unk0);
                         temp2 = sub_8095228(sub_809539C(1, temp.unk10));
                         temp2->unk0 = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, 0x5C);
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:

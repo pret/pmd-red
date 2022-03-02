@@ -1,33 +1,18 @@
 #include "global.h"
+#include "pokemon.h"
+#include "code_8094F88.h"
 #include "memory.h"
 
-struct unkStruct_203B480
-{
-    //size of 48
-    u8 unk0;
-    u8 fill1[0x22 - 1];
-    u8 unk22;
-    u8 fill23[0x2D - 0x23];
-    u8 unk2D;
-};
-
-struct unkStruct_203B48C
-{
-    s32 unk0;
-    s32 unk4[0x20];
-};
-
 extern struct unkStruct_203B480 gUnknown_2038C88;
-extern u8 gUnknown_2039288;
-extern u32 gUnknown_20392E8;
-extern struct unkStruct_203B48C gUnknown_20393C0;
-extern u8 *gUnknown_203B484;
-extern u32 *gUnknown_203B488;
-
-
 extern struct unkStruct_203B480 *gUnknown_203B480;
+extern struct unkStruct_203B484 gUnknown_2039288;
+extern struct unkStruct_203B484 *gUnknown_203B484;
+extern struct unkStruct_203B48C gUnknown_20393C0;
+extern struct unkStruct_203B48C *gUnknown_203B48C;
+extern u32 *gUnknown_203B488;
+extern u32 gUnknown_20392E8;
 
-extern struct unkStruct_203B48C *gUnknown_203B48C; // def a pointer
+
 
 
 void sub_80950BC(void)
@@ -43,7 +28,7 @@ struct unkStruct_203B480 *sub_80950F8(void)
     return &gUnknown_2038C88;
 }
 
-u8 *sub_8095100(void)
+struct unkStruct_203B484 *sub_8095100(void)
 {
     return &gUnknown_2039288;
 }

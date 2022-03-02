@@ -299,8 +299,11 @@ SECTIONS {
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         asm/code_8095014.o(.text);
+        src/code_8095824.o(.text);
         src/code_80958E8.o(.text);
         asm/code_80958E8.o(.text);
+        src/code_80972F4.o(.text);
+        asm/code_8097318.o(.text);
         src/code_809747C.o(.text);
         asm/code_809747C.o(.text);
         src/code_809747C_1.o(.text);

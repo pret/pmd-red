@@ -34,21 +34,21 @@ struct unkPokeSubStruct_C
 struct PokemonStruct
 {
     // size: 0x58
-    u16 unk0; // recruited??
-    u8 unk2;
-    u8 unkHasNextStage;  // set to a random value?
-    struct unkPokeSubStruct_4 unk4;
+    /* 0x0 */ u16 unk0; // recruited??
+    /* 0x1 */ u8 unk2;
+    /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
+    /* 0x4 */ struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
-    struct unkPokeSubStruct_C unkC[2];
+    /* 0xC */ struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ struct Offense offense;
-    u32 unk1C;
-    u32 IQSkills;
-    u8 unk24;
-    u8 fill25[3];
-    struct HeldItem heldItem;
-    struct PokemonMove moves[MAX_MON_MOVES];
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 IQSkills;
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 fill25[3];
+    /* 0x28 */ struct HeldItem heldItem;
+    /* 0x2C */ struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
 };
 

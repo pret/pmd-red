@@ -9,16 +9,9 @@
 #include "pokemon.h"
 #include "save.h"
 #include "code_800D090.h"
+#include "code_8094F88.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
-
-struct unkStruct_203B484
-{
-    u8 fill0[0xC];
-    /* 0xC */ s16 speciesIndex;
-    u8 fillE[0x50 - 0xE];
-    /* 0x50 */ u8 helperName[10];
-};
 
 struct LoadScreen
 {
@@ -373,9 +366,9 @@ void DrawLoadScreenText(void)
   if (iVar2 == 0xf1207){
        // NOTE: very hacky match here but needed var here to match
        temp2 =  gUnknown_203B484;
-       if(temp2->speciesIndex != SPECIES_NONE) {
-            sub_808D930(speciesHelper,temp2->speciesIndex);
-            sub_80922B4(nameHelper,temp2->helperName,POKEMON_NAME_LENGTH);
+       if(temp2->unk4.speciesNum != SPECIES_NONE) {
+            sub_808D930(speciesHelper,temp2->unk4.speciesNum);
+            sub_80922B4(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
             sprintf_2(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else
