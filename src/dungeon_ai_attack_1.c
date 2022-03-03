@@ -2,9 +2,11 @@
 #include "dungeon_ai_attack_1.h"
 
 #include "constants/direction.h"
+#include "constants/iq_skill.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "dungeon_ai_targeting_2.h"
+#include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "moves.h"
@@ -17,7 +19,7 @@ extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
-extern s32 WeightMove(struct DungeonEntity*, s32, struct DungeonEntity*, u8);
+extern s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *target, u8 moveType);
 
 s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
 {
@@ -172,4 +174,42 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
         }
     }
     return hasTarget;
+}
+
+s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEntity *target, u32 moveType)
+{
+#ifndef NONMATCHING
+    register struct DungeonEntityData *targetData asm("r4");
+#else
+    struct DungeonEntityData *targetData;
+#endif
+    s32 targetingFlags2 = (s16) targetingFlags;
+    u8 moveType2 = moveType;
+    u8 weight = 1;
+    struct DungeonEntityData *targetData2;
+    targetData2 = targetData = target->entityData;
+    if (!targetData->isEnemy || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
+    {
+        return 1;
+    }
+    else if (HasIQSkill(user, IQ_SKILL_EXP_GO_GETTER))
+    {
+        // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
+        // This causes Exp. Go-Getter to prioritizes Pokémon worth less experience
+        // instead of Pokémon worth more experience.
+        weight = gDungeonGlobalData->expYieldRankings[targetData->entityID];
+    }
+    else if (HasIQSkill(user, IQ_SKILL_EFFICIENCY_EXPERT))
+    {
+        weight = -12 - targetData2->HP;
+        if (weight == 0)
+        {
+            weight = 1;
+        }
+    }
+    else if (HasIQSkill(user, IQ_SKILL_WEAK_TYPE_PICKER))
+    {
+       weight = WeightWeakTypePicker(user, target, moveType2) + 1;
+    }
+    return weight;
 }

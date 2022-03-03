@@ -241,7 +241,7 @@ SECTIONS {
         src/dungeon_ai_attack.o(.text);
         asm/code_807C4A0.o(.text);
         src/dungeon_ai_attack_1.o(.text);
-        asm/code_807C7AC.o(.text);
+        asm/code_807C854.o(.text);
         src/dungeon_ai_attack_2.o(.text);
         asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);
