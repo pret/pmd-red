@@ -662,7 +662,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             break;
         case MOVE_FORESIGHT:
         case MOVE_ODOR_SLEUTH:
-            if (targetData->type1 == TYPE_GHOST || targetData->type2 == TYPE_GHOST)
+            if (targetData->types[0] == TYPE_GHOST || targetData->types[1] == TYPE_GHOST)
             {
                 if (!targetData->exposedStatus)
                 {

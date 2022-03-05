@@ -81,8 +81,7 @@ struct DungeonEntityData
     u8 fill55[0x58 - 0x55];
     // Position of the target that the Pokémon wants throw an item at.
     /* 0x58 */ struct Position itemTargetPosition;
-    /* 0x5C */ u8 type1;
-    /* 0x5D */ u8 type2;
+    /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ struct ItemSlot heldItem;
     u8 fill64[0x68 - 0x64];

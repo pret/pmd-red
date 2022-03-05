@@ -13,13 +13,12 @@
 #include "position_util.h"
 #include "status_checker.h"
 #include "status_checks_1.h"
+#include "type_effectiveness.h"
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
-
-extern s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *target, u8 moveType);
 
 s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
 {
@@ -147,7 +146,7 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
             else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
             {
                 targetData = target->entityData;
-                if ((targetData->type1 != TYPE_GHOST && targetData->type2 != TYPE_GHOST) || targetData->exposedStatus)
+                if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposedStatus)
                 {
                     if (*categoryTargetingFlags2); // Flips the conditional.
                     goto returnFalse;

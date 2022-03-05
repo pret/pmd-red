@@ -110,11 +110,11 @@ bool8 HasType(struct DungeonEntity *pokemon, u8 type)
     {
         return FALSE;
     }
-    if (pokemonData->type1 == type)
+    if (pokemonData->types[0] == type)
     {
         return TRUE;
     }
-    if (pokemonData->type2 == type)
+    if (pokemonData->types[1] == type)
     {
         return TRUE;
     }
