@@ -7,13 +7,14 @@
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
+#include "constants/targeting.h"
 #include "constants/type.h"
 #include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_targeting_1.h"
+#include "dungeon_ai_targeting_2.h"
 #include "dungeon_ai_attack_1.h"
-#include "dungeon_ai_attack_2.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -26,8 +27,10 @@
 #include "position_util.h"
 #include "status_checker.h"
 #include "status_checks.h"
+#include "status_checks_1.h"
 #include "targeting.h"
 #include "targeting_flags.h"
+#include "type_effectiveness.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -41,7 +44,6 @@ extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
 extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
-extern bool8 IsTargetInLineRange(struct DungeonEntity*, struct DungeonEntity*, s32);
 
 void DecideAttack(struct DungeonEntity *pokemon)
 {
@@ -521,4 +523,261 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         moveTargetResults->moveWeight = 8;
     }
     return moveWeight;
+}
+
+bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *target, s32 range)
+{
+    s32 posDiffX = user->posWorld.x - target->posWorld.x;
+    s32 posDiffY, maxPosDiff;
+    s32 direction;
+    if (posDiffX < 0)
+    {
+        posDiffX = -posDiffX;
+    }
+    posDiffY = user->posWorld.y - target->posWorld.y;
+    if (posDiffY < 0)
+    {
+        posDiffY = -posDiffY;
+    }
+    maxPosDiff = posDiffY;
+    if (posDiffY < posDiffX)
+    {
+        maxPosDiff = posDiffX;
+    }
+    if (maxPosDiff > RANGED_ATTACK_RANGE || maxPosDiff > range)
+    {
+        return FALSE;
+    }
+    direction = -1;
+    if (posDiffX == posDiffY)
+    {
+        if (user->posWorld.x < target->posWorld.x &&
+            (user->posWorld.y < target->posWorld.y || user->posWorld.y > target->posWorld.y))
+        {
+            returnTrue:
+            return TRUE;
+        }
+        if (user->posWorld.x > target->posWorld.x); // Fixes register loading order.
+        direction = DIRECTION_SOUTHWEST;
+        if (user->posWorld.x <= target->posWorld.x || user->posWorld.y <= target->posWorld.y)
+        {
+            goto checkDirectionSet;
+        }
+        goto returnTrue;
+    }
+    else if (user->posWorld.x == target->posWorld.x && user->posWorld.y < target->posWorld.y)
+    {
+        return TRUE;
+    }
+    else if (user->posWorld.x < target->posWorld.x && user->posWorld.y == target->posWorld.y)
+    {
+        return TRUE;
+    }
+    else if (user->posWorld.x == target->posWorld.x && user->posWorld.y > target->posWorld.y)
+    {
+        return TRUE;
+    }
+    else if (user->posWorld.x > target->posWorld.x && user->posWorld.y == target->posWorld.y)
+    {
+        direction = DIRECTION_WEST;
+    }
+    checkDirectionSet:
+    if (direction < 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
+{
+    s32 facingDir;
+    s32 targetingFlags2 = (s16) targetingFlags;
+    bool8 hasStatusChecker2 = hasStatusChecker;
+    struct DungeonEntityData *userData = user->entityData;
+    if ((user->posWorld.x == target->posWorld.x && user->posWorld.y == target->posWorld.y) ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_ROOM ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_FLOOR ||
+        (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_SELF)
+    {
+        facingDir = userData->action.facingDir;
+    }
+    else
+    {
+        facingDir = CalculateFacingDir(&user->posWorld, &target->posWorld);
+    }
+    if (!gCanAttackInDirection[facingDir] &&
+        CanUseStatusMove(targetingFlags2, user, target, move, hasStatusChecker2))
+    {
+        gCanAttackInDirection[facingDir] = TRUE;
+        do { gPotentialAttackTargetDirections[numPotentialTargets] = facingDir; } while (0);
+        gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(user, targetingFlags2, target, GetMoveTypeForPokemon(user, move));
+        gPotentialTargets[numPotentialTargets] = target;
+        numPotentialTargets++;
+    }
+    return numPotentialTargets;
+}
+
+bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
+{
+    struct DungeonEntityData *targetData;
+    s32 targetingFlags2 = (s16) targetingFlags;
+    bool8 hasStatusChecker2 = hasStatusChecker;
+    bool8 hasTarget = FALSE;
+    u32 categoryTargetingFlags = targetingFlags2 & 0xF;
+    u32 *categoryTargetingFlags2 = &categoryTargetingFlags; // Fixes a regswap.
+    if (*categoryTargetingFlags2 == TARGETING_FLAG_TARGET_OTHER)
+    {
+        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+        {
+            hasTarget = TRUE;
+        }
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_HEAL_TEAM)
+    {
+        goto checkCanTarget;
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_LONG_RANGE)
+    {
+        targetData = target->entityData;
+        goto checkThirdParty;
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_ATTACK_ALL)
+    {
+        targetData = target->entityData;
+        if (user == target)
+        {
+            goto returnFalse;
+        }
+        checkThirdParty:
+        hasTarget = TRUE;
+        if (targetData->shopkeeperMode == SHOPKEEPER_FRIENDLY ||
+            targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
+            targetData->clientType == CLIENT_TYPE_CLIENT)
+        {
+            returnFalse:
+            return FALSE;
+        }
+    }
+    else if (categoryTargetingFlags == TARGETING_FLAG_BOOST_TEAM)
+    {
+        if (user == target)
+        {
+            goto returnFalse;
+        }
+        checkCanTarget:
+        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CANNOT_ATTACK)
+        {
+            hasTarget = TRUE;
+        }
+    }
+    else if ((u16) (categoryTargetingFlags - 3) <= 1) // categoryTargetingFlags == TARGETING_FLAG_ITEM
+    {
+        hasTarget = TRUE;
+    }
+
+    if (hasTarget)
+    {
+        if (hasStatusChecker2)
+        {
+            if (!CanUseOnTargetWithStatusChecker(user, target, move))
+            {
+                goto returnFalse;
+            }
+            if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
+            {
+                goto rollMoveUseChance;
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_HP)
+            {
+                if (!HasQuarterHPOrLess(target))
+                {
+                    if (*categoryTargetingFlags2);
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_STATUS)
+            {
+                if (!HasNegativeStatus(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_DREAM_EATER)
+            {
+                if (!IsSleeping(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
+            {
+                targetData = target->entityData;
+                if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposedStatus)
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_ALL)
+            {
+                if (!HasNegativeStatus(target) && !HasQuarterHPOrLess(target))
+                {
+                    if (*categoryTargetingFlags2); // Flips the conditional.
+                    goto returnFalse;
+                }
+            }
+        }
+        else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
+        {
+            s32 useChance;
+            rollMoveUseChance:
+            useChance = GetMoveAccuracy(move, ACCURACY_TYPE_USE_CHANCE);
+            if (DungeonRandomCapped(100) >= useChance)
+            {
+                goto returnFalse;
+            }
+        }
+    }
+    return hasTarget;
+}
+
+s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEntity *target, u32 moveType)
+{
+#ifndef NONMATCHING
+    register struct DungeonEntityData *targetData asm("r4");
+#else
+    struct DungeonEntityData *targetData;
+#endif
+    s32 targetingFlags2 = (s16) targetingFlags;
+    u8 moveType2 = moveType;
+    u8 weight = 1;
+    struct DungeonEntityData *targetData2;
+    targetData2 = targetData = target->entityData;
+    if (!targetData->isEnemy || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
+    {
+        return 1;
+    }
+    else if (HasIQSkill(user, IQ_SKILL_EXP_GO_GETTER))
+    {
+        // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
+        // This causes Exp. Go-Getter to prioritizes Pokémon worth less experience
+        // instead of Pokémon worth more experience.
+        weight = gDungeonGlobalData->expYieldRankings[targetData->entityID];
+    }
+    else if (HasIQSkill(user, IQ_SKILL_EFFICIENCY_EXPERT))
+    {
+        weight = -12 - targetData2->HP;
+        if (weight == 0)
+        {
+            weight = 1;
+        }
+    }
+    else if (HasIQSkill(user, IQ_SKILL_WEAK_TYPE_PICKER))
+    {
+       weight = WeightWeakTypePicker(user, target, moveType2) + 1;
+    }
+    return weight;
 }
