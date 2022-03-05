@@ -7,14 +7,11 @@
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
+#include "status.h"
 #include "type_chart.h"
 #include "weather.h"
 
-#define FLASH_FIRE_STATUS_NONE 0
-
 u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
-
-extern u8 GetFlashFireStatus(struct DungeonEntity *pokemon);
 
 s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *target, u8 moveType)
 {
@@ -79,8 +76,7 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
         if (weight == 0)
         {
             // BUG: If the Pokémon's first type resists the move, the second type is ignored.
-            // This can cause type effectiveness to be calculated incorrectly
-            // if the first type resists the move and the second type is weak to the move.
+            // This calculates type effectiveness incorrectly if the first type resists the move and the second type is weak to the move.
             // For example, a Fire-type move is considered not very effective against a Rock/Bug-type like Anorith.
             return 2;
         }
