@@ -20,8 +20,8 @@ struct Offense {
 };
 
 struct unkPokeSubStruct_4 {
-    u8 unk4;
-    u8 unk5;
+    u8 dungeonIndex;
+    u8 dungeonFloor;
     u16 fill6;
 };
 

@@ -54,7 +54,7 @@ extern bool8 sub_8013938(void *);
 extern void sub_8013660(void *);
 extern void PlayMenuSoundEffect(u32);
 extern u32 GetKeyPress(void *);
-extern u8 sub_8097710(u8);
+extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();
 extern s16 sub_8097880();
@@ -225,7 +225,7 @@ void DisplayAdventureLog(void)
   do {
     uVar6 = gAdventureLog->currPage * gAdventureLog->unk1C + counter;
     temp = uVar6; // Having another var in middle gets close (does a u8 cast)
-    if(sub_8097710(temp) != 0){
+    if(sub_8097710(temp)){
         switch(temp) {
             case 0xc:
                 gUnknown_202DE30 = sub_80978B8();

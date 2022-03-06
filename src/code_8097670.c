@@ -1,10 +1,5 @@
 #include "global.h"
-
-struct unkDungeonStruct
-{
-    u8 index;
-    u8 floor;
-};
+#include "pokemon.h"
 
 struct unkStruct_203B494
 {
@@ -13,12 +8,12 @@ struct unkStruct_203B494
     s32 numAdventures;
     s32 unk8;
     s32 unkC;
-    struct unkDungeonStruct dungeonLocation;
+    struct unkPokeSubStruct_4 dungeonLocation;
     s16 unk14;
     s16 unk16;
     s16 unk18;
     u32 unk1C[0xE];
-    u8 fill54[0x8C - 0x54];
+    u32 unk54[0xE];
     u32 unk8C[0xD];
     s32 unkC0;
 };
@@ -26,6 +21,7 @@ struct unkStruct_203B494
 extern struct unkStruct_203B494 *gUnknown_203B494;
 extern struct unkStruct_203B494 gUnknown_2039778;
 extern const u8 *gAdventureLogText[];
+s16 GetBaseSpeciesNoUnown(s16 index);
 
 void sub_8097670(void)
 {
@@ -37,13 +33,13 @@ struct unkStruct_203B494 *sub_8097680(void)
     return &gUnknown_2039778;
 }
 
-void SetDungeonLocationInfo(struct unkDungeonStruct *r0)
+void SetDungeonLocationInfo(struct unkPokeSubStruct_4 *r0)
 {
-    gUnknown_203B494->dungeonLocation.index = r0->index;
-    gUnknown_203B494->dungeonLocation.floor = r0->floor;
+    gUnknown_203B494->dungeonLocation.dungeonIndex = r0->dungeonIndex;
+    gUnknown_203B494->dungeonLocation.dungeonFloor = r0->dungeonFloor;
 }
 
-struct unkDungeonStruct *GetDungeonLocationInfo(void)
+struct unkPokeSubStruct_4 *GetDungeonLocationInfo(void)
 {
     return &gUnknown_203B494->dungeonLocation;
 }
@@ -76,12 +72,12 @@ void sub_80976F8(u8 r0)
     gUnknown_203B494->unk0 |= (1 << r0);
 }
 
-u8 sub_8097710(u8 r0)
+bool8 sub_8097710(u8 r0)
 {
     if(gUnknown_203B494->unk0 & (1 << r0))
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 const u8 *GetAdventureLogLine(u8 index)
@@ -186,4 +182,37 @@ void sub_8097890(void)
 s16 sub_80978B8(void)
 {
     return gUnknown_203B494->unkC0;
+}
+
+void sub_80978C8(s16 pokeIndex)
+{
+  s32 iVar2;
+  struct unkStruct_203B494 *preload;
+  s32 baseSpecies;
+
+  baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
+  preload = gUnknown_203B494;
+  iVar2 = baseSpecies;
+  if (baseSpecies < 0) {
+    iVar2 = baseSpecies + 0x1f;
+  }
+  preload->unk54[iVar2 >> 5] |=  1 << (baseSpecies + (iVar2 >> 5) * -0x20);
+}
+
+bool8 sub_8097900(s16 pokeIndex)
+{
+  s32 iVar2;
+  struct unkStruct_203B494 *preload;
+  s32 baseSpecies;
+
+  baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
+  preload = gUnknown_203B494;
+  iVar2 = baseSpecies;
+  if (baseSpecies < 0) {
+    iVar2 = baseSpecies + 0x1f;
+  }
+  if(preload->unk1C[iVar2 >> 5] & (1 << (baseSpecies + (iVar2 >> 5) * -0x20)))
+    return TRUE;
+  else
+    return FALSE;
 }

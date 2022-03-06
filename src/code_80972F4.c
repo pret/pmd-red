@@ -61,8 +61,8 @@ bool8 sub_8096F50(struct WonderMail *r0)
     for(index = 0; index < 0x10; index++)
     {
         temp  = &gUnknown_203B490->unk230[index];
-        if(temp->unk0.unk4 == r0->dungeon)
-            if(temp->unk0.unk5 == r0->floor)
+        if(temp->unk0.dungeonIndex == r0->dungeon)
+            if(temp->unk0.dungeonFloor == r0->floor)
                 if(temp->unk4 == r0->unk8)
                     if(temp->unk8 == temp2)
                         return TRUE;

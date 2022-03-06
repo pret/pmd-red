@@ -79,7 +79,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->unk18->unk4.unk4 == 0x44 || gUnknown_203B2BC->unk18->unk4.unk4 == 0x45)
+    if (gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x44 || gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x45)
         return TRUE;
     else
         return FALSE;
@@ -270,7 +270,7 @@ u32 sub_8027D9C(struct PokemonStruct *r0)
     if(r0->unk2 == 0)
     {
         var1 = 0;
-        if(r0->unk4.unk4 == 0x41)
+        if(r0->unk4.dungeonIndex == 0x41)
             var1 = 1;
             if(var1 != 0)
             {
@@ -291,7 +291,7 @@ u32 sub_8027DCC(struct PokemonStruct *r0)
             if(r0->unk2 == 0)
             {
                 var1 = 0;
-                if(r0->unk4.unk4 == 0x41)
+                if(r0->unk4.dungeonIndex == 0x41)
                     var1 = 1;
                 if(var1 != 0)
                 {
