@@ -7,9 +7,7 @@
 #define DUNGEON_WATER_TYPE_LAVA 1
 #define DUNGEON_WATER_TYPE_WATER 2
 
-// 0x4AF20
 bool8 IsTileGround(struct MapTile* tile);
-// 0x4AF74
 bool8 IsWaterTileset();
 
 #endif

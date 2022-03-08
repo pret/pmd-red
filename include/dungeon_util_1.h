@@ -3,7 +3,6 @@
 
 #include "dungeon_entity.h"
 
-// 0x85A50
 bool8 IsMovingClient(struct DungeonEntity *entity);
 
 #endif

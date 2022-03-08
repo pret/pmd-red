@@ -5,7 +5,6 @@
 
 extern const s16 gConfusedAttackChance;
 
-// 0x7001C
 bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon);
 
 #endif

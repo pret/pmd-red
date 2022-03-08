@@ -7,7 +7,6 @@
 #define FLASH_FIRE_STATUS_MAXED 1
 #define FLASH_FIRE_STATUS_NOT_MAXED 2
 
-// 0x7723C
 u8 GetFlashFireStatus(struct DungeonEntity *pokemon);
 
 #endif

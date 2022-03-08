@@ -3,7 +3,6 @@
 
 #include "position.h"
 
-// 0x4AF74
 bool8 CanLayTrap(struct Position *pos);
 
 #endif

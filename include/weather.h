@@ -3,7 +3,6 @@
 
 #include "dungeon_entity.h"
 
-// 0x7E580
 u8 GetWeather(struct DungeonEntity* pokemon);
 
 #endif
