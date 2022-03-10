@@ -209,7 +209,7 @@ SECTIONS {
         src/charge_move.o(.text);
         asm/code_8057144.o(.text);
         src/move_util.o(.text);
-        asm/code_80573CC.o(.text);
+        asm/code_805744C.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         src/status_checker.o(.text);

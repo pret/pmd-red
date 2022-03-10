@@ -4,78 +4,7 @@
   	.syntax unified
 
   	.text
-
-	thumb_func_start IsMoveUsable
-IsMoveUsable:
-	push {r4-r6,lr}
-	adds r4, r1, 0
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r6, [r0, 0x70]
-	ldrh r1, [r4, 0x2]
-	ldr r0, _08057430
-	cmp r1, r0
-	beq _08057442
-	ldrb r1, [r4]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	bne _0805743E
-	ldrb r1, [r4, 0x1]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0805743E
-	cmp r2, 0
-	beq _08057442
-	ldrb r0, [r4, 0x4]
-	cmp r0, 0
-	beq _0805743E
-	adds r0, r6, 0
-	adds r0, 0xBC
-	ldrb r1, [r0]
-	adds r5, r0, 0
-	cmp r1, 0x5
-	bne _08057414
-	adds r0, r4, 0
-	bl MoveDealsDirectDamage
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805743E
-_08057414:
-	ldrb r0, [r5]
-	cmp r0, 0x6
-	bne _08057442
-	ldrh r1, [r4, 0x2]
-	movs r0, 0xB0
-	lsls r0, 1
-	cmp r1, r0
-	bne _08057434
-	movs r1, 0x9C
-	lsls r1, 1
-	adds r0, r6, r1
-	ldrb r1, [r0]
-	b _08057436
-	.align 2, 0
-_08057430: .4byte 0x00000163
-_08057434:
-	ldrb r1, [r4]
-_08057436:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	bne _08057442
-_0805743E:
-	movs r0, 0
-	b _08057444
-_08057442:
-	movs r0, 0x1
-_08057444:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end IsMoveUsable
-
+  
 	thumb_func_start sub_805744C
 sub_805744C:
 	push {r4-r6,lr}
