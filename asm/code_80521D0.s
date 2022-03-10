@@ -785,7 +785,7 @@ _080529D4:
 	ldr r0, _080529E4
 	ldr r1, _080529E8
 	ldr r2, _080529EC
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _08052A28
 	.align 2, 0
 _080529E4: .4byte gUnknown_202E5D8
@@ -795,7 +795,7 @@ _080529F0:
 	ldr r0, _080529FC
 	ldr r1, _08052A00
 	ldr r2, _08052A04
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _08052A28
 	.align 2, 0
 _080529FC: .4byte gUnknown_202E5D8

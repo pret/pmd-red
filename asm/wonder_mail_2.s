@@ -139,7 +139,7 @@ _0802BFE8:
 	adds r1, r0, 0
 	mov r0, r8
 	mov r2, r9
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x38]
 	movs r0, 0

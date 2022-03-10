@@ -8,6 +8,7 @@
 #include "input.h"
 #include "text.h"
 #include "rescue_team_info.h"
+#include "code_800D090.h"
 
 struct unkStruct_203B258
 {
@@ -64,15 +65,14 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 void LoadTeamRankBadge(u32, u32, u32);
-extern void ExpandPlaceholdersBuffer(u8 *, u32 *, ...);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;
 
-extern u32 gUnknown_80DBF3C;
-extern u32 gUnknown_80DBF4C;
+extern char *gUnknown_80DBF3C;
+extern char *gUnknown_80DBF4C;
 
 struct TeamBadgeData
 {
@@ -305,8 +305,8 @@ void sub_801D894(void)
 
   // Stored on stack
   u32 *preload_string;
-  u32 *r5; // R5
-  u8 buffer [96]; // sp +4
+  char *r5; // R5
+  char buffer [96]; // sp +4
 
   if (gUnknown_203B250->currFriendAreaLocation == NONE) {
     location = sub_8098FB4();
@@ -327,11 +327,11 @@ void sub_801D894(void)
   LoadTeamRankBadge(2, 8, 6);
 
 // Have to load before TeamRank funcs
-  r5 = &gUnknown_80DBF3C; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
+  r5 = (char*) &gUnknown_80DBF3C; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
   rank = GetRescueTeamRank();
-  ExpandPlaceholdersBuffer(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
+  sprintf_2(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
   xxx_call_draw_string(32, 4, buffer, 2, 0);
-  ExpandPlaceholdersBuffer(buffer, &gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
+  sprintf_2(buffer, (char*) &gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
   xxx_call_draw_string(32, 18, buffer, 2, 0);
   sub_80073E0(2);
 }

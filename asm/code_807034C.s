@@ -858,7 +858,7 @@ sub_8070968:
 	ldr r0, _0807098C
 	ldr r3, [r0]
 	adds r0, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _080709BA
 	.align 2, 0
 _08070988: .4byte gUnknown_8106FA4

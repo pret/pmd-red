@@ -241,7 +241,7 @@ _0801AB90:
 	ldr r1, _0801AC08
 	adds r0, r5, 0
 	add r2, sp, 0x4
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r4, _0801AC0C
 	ldr r0, [r4]
 	adds r0, 0x54

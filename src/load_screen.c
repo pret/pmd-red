@@ -8,6 +8,7 @@
 #include "text.h"
 #include "pokemon.h"
 #include "save.h"
+#include "code_800D090.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
 
@@ -59,7 +60,6 @@ extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
-extern void ExpandPlaceholdersBuffer(u8 *buffer, const u8 *text, ...);
 extern u8 *GetDungeonLocationInfo(void);
 extern u32 GetNumAdventures(void);
 extern void xxx_call_draw_string(u32 x, u32 y, const u8 *, u32, u32);
@@ -179,7 +179,7 @@ ALIGNED(4) const char load_screen_fill[] = "pksdir0";
 void CreateLoadScreen(u32 currMenu)
 {
   int iVar8;
-  
+
   if (gLoadScreen == NULL) {
     gLoadScreen = MemoryAlloc(sizeof(struct LoadScreen),8);
     MemoryFill8((u8 *)gLoadScreen,0,sizeof(struct LoadScreen));
@@ -230,7 +230,7 @@ u32 UpdateLoadScreenMenu(void)
 {
   u32 nextMenu;
   u32 menuAction;
-  
+
   nextMenu = MENU_NO_SCREEN_CHANGE;
   menuAction = 4;
   sub_8012FD8(&gLoadScreen->unk54);
@@ -311,7 +311,7 @@ void DrawLoadScreenText(void)
     r2 = DrawLoadScreenTextSub(teamNameBuffer);
   }
 
-  ExpandPlaceholdersBuffer(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
+  sprintf_2(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
   xxx_call_draw_string(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
@@ -320,7 +320,7 @@ void DrawLoadScreenText(void)
         sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else
         sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
-  ExpandPlaceholdersBuffer(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
+  sprintf_2(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
   xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
@@ -328,7 +328,7 @@ void DrawLoadScreenText(void)
     if (iVar2 == 0xf1207)
         PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
     else
-        ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+        sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
   }
   else {
     switch(sub_8011C1C())
@@ -337,12 +337,12 @@ void DrawLoadScreenText(void)
             switch(sub_8001658(0,24))
             {
                 default:
-                    ExpandPlaceholdersBuffer(auStack356,gUnknown_80E7804,sub_8098FB4());
+                    sprintf_2(auStack356,gUnknown_80E7804,sub_8098FB4());
                     xxx_format_string(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:
-                    ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                    sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
                     break;
             }
             break;
@@ -350,10 +350,10 @@ void DrawLoadScreenText(void)
             if (iVar2 == 0xf1207)
                 PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
             else
-                ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
             break;
         default:
-            ExpandPlaceholdersBuffer(gLoadScreen->formattedLocation,gLocationUnknownText); // Location unknown
+            sprintf_2(gLoadScreen->formattedLocation,gLocationUnknownText); // Location unknown
             break;
     }
   }
@@ -361,12 +361,12 @@ void DrawLoadScreenText(void)
 
   // Draw Play Time
   DeconstructPlayTime(gPlayTimeRef,&hours,&minutes,&seconds);
-  ExpandPlaceholdersBuffer(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
+  sprintf_2(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
   xxx_call_draw_string(64,36,gLoadScreen->formattedPlayTime,0,0);
 
-  // Draw Adventures Info 
+  // Draw Adventures Info
   numAdventures = GetNumAdventures();
-  ExpandPlaceholdersBuffer(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
+  sprintf_2(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
   xxx_call_draw_string(64,48,gLoadScreen->formattedAdventures,0,0);
 
   // Draw Helper Info
@@ -376,14 +376,14 @@ void DrawLoadScreenText(void)
        if(temp2->speciesIndex != SPECIES_NONE) {
             sub_808D930(speciesHelper,temp2->speciesIndex);
             sub_80922B4(nameHelper,temp2->helperName,POKEMON_NAME_LENGTH);
-            ExpandPlaceholdersBuffer(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
+            sprintf_2(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else
             goto print_helper_placeholder;
   }
   else {
     print_helper_placeholder:
-        ExpandPlaceholdersBuffer(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
+        sprintf_2(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
   }
   xxx_call_draw_string(64,60,gLoadScreen->formattedHelperInfo,0,0);
 
@@ -399,7 +399,7 @@ void sub_80397B4(void)
   int iVar3;
   int iVar4;
   s32 other_arg;
-  
+
   clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
 
   for(iVar3 = 0; iVar3 < 64; iVar3++)
@@ -426,7 +426,7 @@ bool8 IsQuickSave(void)
 {
   int iVar1;
   bool8 isQuicksave;
-  
+
   iVar1 = sub_8011FA8();
   isQuicksave = FALSE;
   if (sub_8095324(1) != 0 || sub_8095324(7) != 0)

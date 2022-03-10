@@ -1160,7 +1160,7 @@ sub_801F700:
 	movs r7, 0
 	ldrsh r3, [r0, r7]
 	adds r0, r5, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r6]
 	adds r0, r4
 	ldr r3, [r0]
@@ -4920,7 +4920,7 @@ _08021574:
 	mov r0, r10
 	ldr r1, _08021598
 	add r2, sp, 0x8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	mov r3, r8
 	ldr r0, [r3]
 	adds r0, 0x40
@@ -4968,7 +4968,7 @@ _080215D8:
 	adds r2, r0, 0
 	mov r0, r10
 	ldr r1, _08021608
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, 0x40
@@ -5519,7 +5519,7 @@ _08021A16:
 	add r0, sp, 0x4
 	ldr r1, _08021A58
 	adds r2, r7, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	mov r1, r8
 	ldr r0, [r1]
 	ldr r3, [r0, 0x74]
@@ -9021,7 +9021,7 @@ _08023628:
 	ldr r1, _080236A0
 	adds r2, r7, 0
 	adds r3, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r6, _0802368C
 	ldr r0, [r6]
 	movs r1, 0xE4
@@ -10170,7 +10170,7 @@ _08023F02:
 	ldr r1, _08023F80
 	adds r2, r6, 0
 	mov r3, r9
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	mov r1, r8
 	ldr r0, [r1]
 	movs r2, 0xD6
@@ -10874,7 +10874,7 @@ sub_80243E8:
 	ldr r1, _08024454
 	mov r0, sp
 	adds r2, r5, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	adds r0, r4, 0
 	add sp, 0x3C
 	pop {r4,r5}

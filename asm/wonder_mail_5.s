@@ -56,7 +56,7 @@ _08031B2C:
 	ldr r1, _08031B8C
 	ldrb r2, [r5, 0x5]
 	add r0, sp, 0x4
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	str r6, [sp]
@@ -71,7 +71,7 @@ _08031B2C:
 	adds r2, r0, 0
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	str r6, [sp]
@@ -136,7 +136,7 @@ _08031BC2:
 	ldrb r2, [r4, 0x5]
 	ldr r0, [sp, 0xD8]
 	ldr r1, _08031C2C
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	mov r0, r8
@@ -167,7 +167,7 @@ _08031C30:
 	adds r0, r5, 0
 	ldr r1, _08031C54
 	mov r2, r9
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	mov r1, r8
@@ -194,7 +194,7 @@ _08031C70:
 	adds r0, r5, 0
 	ldr r1, _08031C98
 _08031C7E:
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	mov r2, r8
@@ -214,7 +214,7 @@ _08031C9C:
 	adds r2, r0, 0
 	adds r0, r5, 0
 	ldr r1, _08031CD0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, [r7]
 	ldr r3, [r0, 0x10]
 	mov r2, r8

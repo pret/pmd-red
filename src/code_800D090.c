@@ -4,7 +4,6 @@
 #include "config.h"
 #include "global.h"
 
-
 extern void SoundBiasReset(void);
 extern void SoundBiasSet(void);
 
@@ -70,7 +69,7 @@ void sub_800D098(void)
     while(REG_KEYINPUT != KEYS_MASK){} // All buttons
 }
 
-void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...)
+void sprintf_2(char *buffer, const char *text, ...)
 {
     va_list vArgv;
     va_start(vArgv, text);

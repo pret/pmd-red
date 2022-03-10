@@ -6,6 +6,7 @@
 #include "item.h"
 #include "kecleon_items.h"
 #include "team_inventory.h"
+#include "code_800D090.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u8 gUnknown_80DB8E4[];
@@ -31,7 +32,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(void *, u32);
-extern void ExpandPlaceholdersBuffer(u8 *, u8 *, ...);
 extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
 extern void sub_801AE84(void);
 extern void sub_8012D08(void *, u32);
@@ -475,7 +475,7 @@ void sub_801A0D8(void)
   // Needed for the shifts..
   u32 index_shift;
   u32 numItems_shift;
-  
+
   sub_8008C54(gUnknown_203B214->unk34);
   sub_80073B8(gUnknown_203B214->unk34);
   xxx_call_draw_string(gUnknown_203B214->unk1E * 8 + 10,0,gUnknown_80DB8E4,
@@ -505,7 +505,7 @@ void sub_801A0D8(void)
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B214->unk34,0);
       }
       else {
-        ExpandPlaceholdersBuffer(auStack112,gUnknown_80DB8EC,auStack204);
+        sprintf_2(auStack112,gUnknown_80DB8EC,auStack204);
         y = sub_8013800(gUnknown_203B214,iVar4);
         xxx_call_draw_string(8,y,auStack112,gUnknown_203B214->unk34,0);
       }
@@ -701,7 +701,7 @@ void sub_801A4A4(void)
   // Needed for the shifts..
   u32 index_shift;
   u32 numItems_shift;
-  
+
   sub_8008C54(gUnknown_203B21C->unk34);
   sub_80073B8(gUnknown_203B21C->unk34);
   xxx_call_draw_string(gUnknown_203B21C->unk1E * 8 + 10,0,gUnknown_80DB92C,
@@ -731,7 +731,7 @@ void sub_801A4A4(void)
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B21C->unk34,0);
       }
       else {
-        ExpandPlaceholdersBuffer(auStack112,gUnknown_80DB934,auStack204);
+        sprintf_2(auStack112,gUnknown_80DB934,auStack204);
         y = sub_8013800(gUnknown_203B21C,iVar4);
         xxx_call_draw_string(8,y,auStack112,gUnknown_203B21C->unk34,0);
       }
@@ -741,7 +741,7 @@ void sub_801A4A4(void)
 
 u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 param_4)
 {
-  
+
   if (GetNumberOfFilledInventorySlots() == 0) {
       return 0;
   }
@@ -781,7 +781,7 @@ u32 sub_801A6E8(u8 param_1)
 {
   s32 iVar5;
   struct ItemSlot local_10;
-  
+
   if (param_1 == '\0') {
     sub_8013660(&gUnknown_203B224->unk54);
     return 0;

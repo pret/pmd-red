@@ -8,6 +8,7 @@
 #include "random.h"
 #include "subStruct_203B240.h"
 #include "team_inventory.h"
+#include "code_800D090.h"
 
 #include <stddef.h>
 
@@ -37,7 +38,6 @@ EWRAM_DATA struct Item *gItemParametersData;
 
 extern u8 GetItemType(u8);
 extern u32 GetItemUnkThrow(u8, u32);
-extern void ExpandPlaceholdersBuffer(u8 *, const u8 *, ...);
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
@@ -326,35 +326,35 @@ void sub_8090E14(u8* ext_buffer, struct ItemSlot* slot, struct unkStruct_8090F58
   if (GetItemType(slot->itemIndex) == ITEM_TYPE_THROWABLE) {
     // I feel like these labels might actually be there...
     if (unk8) {
-      ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
+      sprintf_2(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
     }
     else {
-      ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
+      sprintf_2(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
     }
   }
   else if (GetItemType(slot->itemIndex) == ITEM_TYPE_ROCK) {
     if (unk8) {
-      ExpandPlaceholdersBuffer(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
+      sprintf_2(buffer, gUnknown_8109770, gItemParametersData[slot->itemIndex].namePointer, slot->numItems);
     }
     else {
-      ExpandPlaceholdersBuffer(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
+      sprintf_2(buffer, gUnknown_8109778, gItemParametersData[slot->itemIndex].namePointer);
     }
   }
   else if (slot->itemIndex == ITEM_ID_POKE) {
-    ExpandPlaceholdersBuffer(buffer, gUnknown_810977C, GetMoneyValue(slot));
+    sprintf_2(buffer, gUnknown_810977C, GetMoneyValue(slot));
   }
   else {
     strncpy(buffer, gItemParametersData[slot->itemIndex].namePointer, 80);
   }
 
   if (slot->itemFlags & ITEM_FLAG_STICKY) {
-    ExpandPlaceholdersBuffer(ext_buffer, gUnknown_8109784, buffer);
+    sprintf_2(ext_buffer, gUnknown_8109784, buffer);
     strncpy(buffer, ext_buffer, 80);
   }
 
   if (a3) {
     if (a3->unk4 && (slot->itemFlags & ITEM_FLAG_SET)) {
-      ExpandPlaceholdersBuffer(ext_buffer, gUnknown_810978C, buffer);
+      sprintf_2(ext_buffer, gUnknown_810978C, buffer);
       strncpy(buffer, ext_buffer, 80);
     }
     if ((*(u32*)a3 == 1) || (*(u32*)a3 == 3)) {
@@ -408,11 +408,11 @@ void sub_8090F58(void* a1, u8 *a2, struct ItemSlot *slot, struct unkStruct_8090F
 
   if (a4->unk6) {
     sub_8090FEC(value, buffer, 1);
-    ExpandPlaceholdersBuffer(a1, gUnknown_8109794, a2, a4->unk6, buffer);
+    sprintf_2(a1, gUnknown_8109794, a2, a4->unk6, buffer);
   }
   else {
     sub_8090FEC(value, buffer, 0);
-    ExpandPlaceholdersBuffer(a1, gUnknown_81097A4, a2, buffer);
+    sprintf_2(a1, gUnknown_81097A4, a2, buffer);
   }
 }
 

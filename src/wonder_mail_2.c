@@ -10,6 +10,7 @@
 #include "sub_8095228.h"
 #include "gUnknown_203B46C.h"
 #include "wonder_mail.h"
+#include "code_800D090.h"
 
 struct unkStruct_203B2C8
 {
@@ -139,7 +140,6 @@ extern void sub_802B5B8(void);
 extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
-void ExpandPlaceholdersBuffer(u8 *buffer, const char *text, ...);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_803C37C(u8 *, u32, u8 *);
 extern u32 sub_803C200(u8 *, u32);
@@ -374,7 +374,7 @@ void sub_802B3E0(void)
             strcpy(teamNameBuffer,gRescueTeamNamePlaceholder);
         }
         // Print and expand placeholders?
-        ExpandPlaceholdersBuffer(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
+        sprintf_2(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelipper face
         sub_80141B4(gUnknown_203B2C8->teamName, 0, &gUnknown_203B2C8->faceFile, 0x10d);
         break;
