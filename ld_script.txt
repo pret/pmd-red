@@ -208,6 +208,8 @@ SECTIONS {
         asm/code_80521D0.o(.text);
         src/charge_move.o(.text);
         asm/code_8057144.o(.text);
+        src/move_util.o(.text);
+        asm/code_80573CC.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         src/status_checker.o(.text);

@@ -23,6 +23,7 @@
 #include "dungeon_random_1.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "move_util.h"
 #include "moves.h"
 #include "position_util.h"
 #include "status_checker.h"
@@ -42,7 +43,6 @@ extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
 
-extern bool8 IsMoveUsable_1(struct DungeonEntity*, s32, bool8);
 extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
 
 void DecideAttack(struct DungeonEntity *pokemon)
@@ -182,7 +182,7 @@ void DecideAttack(struct DungeonEntity *pokemon)
         move = &pokemonData->moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
             willNotUnlinkMove[i] &&
-            IsMoveUsable_1(pokemon, i, hasPPChecker) &&
+            IsMoveIndexUsable(pokemon, i, hasPPChecker) &&
             move->moveFlags & MOVE_FLAG_ENABLED)
         {
             moveTargetResults[i].moveUsable = TRUE;

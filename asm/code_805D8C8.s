@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_805D8C8
 sub_805D8C8:
 	push {r4-r7,lr}
@@ -10308,7 +10308,7 @@ _08062C24:
 	mov r0, r10
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 	add r1, sp, 0x4
 	movs r2, 0
 	lsls r0, 24
@@ -11542,7 +11542,7 @@ _08063606:
 	ldr r0, [sp, 0x14]
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 	add r1, sp, 0x4
 	movs r2, 0
 	lsls r0, 24
@@ -11719,7 +11719,7 @@ _0806376A:
 	bgt _08063788
 	mov r0, r8
 	movs r2, 0x1
-	bl IsMoveUsable_1
+	bl IsMoveIndexUsable
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0

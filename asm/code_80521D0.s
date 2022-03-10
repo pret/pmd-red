@@ -7204,7 +7204,7 @@ _08056136:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 _08056142:
 	lsls r0, 24
 	lsrs r4, r0, 24

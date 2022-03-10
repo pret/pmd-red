@@ -3173,7 +3173,7 @@ _080733DE:
 	mov r0, r8
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073440
@@ -3384,7 +3384,7 @@ _0807357A:
 	adds r1, r5, 0
 	movs r2, 0x1
 	str r3, [sp, 0x14]
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 	lsls r0, 24
 	ldr r3, [sp, 0x14]
 	cmp r0, 0
