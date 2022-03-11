@@ -240,10 +240,12 @@ SECTIONS {
         src/dungeon_ai_items.o(.text);
         src/code_8073CF0.o(.text);
         asm/code_8073CF0.o(.text);
-        src/dungeon_ai_movement.o(.text);
+        src/dungeon_ai.o(.text);
         asm/code_8075BA4.o(.text);
         src/status.o(.text);
         asm/code_8077274.o(.text);
+        src/dungeon_ai_movement.o(.text);
+        asm/code_807AEBC.o(.text);
         src/dungeon_ai_attack.o(.text);
         asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);

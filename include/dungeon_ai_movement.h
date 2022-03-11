@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-void DecideAction(struct DungeonEntity *pokemon);
+void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
 
 #endif
