@@ -5,6 +5,13 @@
 #include "dungeon_entity.h"
 #include "pokemon.h"
 
+void ResetAction(struct DungeonActionContainer *actionPointer)
+{
+    actionPointer->action = DUNGEON_ACTION_NONE;
+    actionPointer->actionUseIndex = 0;
+    actionPointer->unkC = 0;
+}
+
 void SetAction(struct DungeonActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;

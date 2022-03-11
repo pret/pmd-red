@@ -28,7 +28,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 
 extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern void ResetAction(u16*);
 extern void MoveIfPossible(struct DungeonEntity*, bool8);
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(struct DungeonEntity *, u32);
@@ -206,7 +205,7 @@ void DecideAction(struct DungeonEntity *pokemon)
                         }
                     }
                 }
-                ResetAction(&pokemonData->action.action);
+                ResetAction(&pokemonData->action);
                 if (pokemonData->clientType == CLIENT_TYPE_CLIENT)
                 {
                     SetWalkAction(&pokemonData->action, pokemonData->entityID);

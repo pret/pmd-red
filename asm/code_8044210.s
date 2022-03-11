@@ -1316,14 +1316,4 @@ sub_8044C50:
 _08044C84: .4byte 0x0000ffff
 	thumb_func_end sub_8044C50
 
-	thumb_func_start ResetAction
-ResetAction:
-	movs r2, 0
-	movs r1, 0
-	strh r1, [r0]
-	strb r2, [r0, 0x4]
-	strb r2, [r0, 0xC]
-	bx lr
-	thumb_func_end ResetAction
-
 	.align 2, 0

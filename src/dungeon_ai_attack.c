@@ -760,7 +760,7 @@ s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEnt
     else if (HasIQSkill(user, IQ_SKILL_EXP_GO_GETTER))
     {
         // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
-        // This causes Exp. Go-Getter to prioritizes Pokémon worth less experience
+        // This causes Exp. Go-Getter to prioritize Pokémon worth less experience
         // instead of Pokémon worth more experience.
         weight = gDungeonGlobalData->expYieldRankings[targetData->entityID];
     }
