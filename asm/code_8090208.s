@@ -676,7 +676,7 @@ _080907DA:
 	bne _0809080C
 	ldr r1, _08090808
 	adds r0, r7, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	movs r0, 0
 	b _0809080E
 	.align 2, 0

@@ -4,6 +4,7 @@
 #include "text.h"
 #include "team_inventory.h"
 #include "constants/move.h"
+#include "code_800D090.h"
 
 struct unkStruct_203B2B8
 {
@@ -52,7 +53,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void sub_80922B4(u8 *, const u8 *, u32);
-extern void ExpandPlaceholdersBuffer(u8 *buffer, const u8 *text, ...);
 extern void sub_808D930(u8 *, s16);
 extern s32 sub_8008ED0(u8 *);
 extern void xxx_call_draw_string(s32 x, s32 y, u8 *, u32, u32);
@@ -333,7 +333,7 @@ void sub_8026E08(u32 r0)
     sub_80073B8(r0);
     sub_80922B4(gAvailablePokemonNames, gUnknown_203B2B8->unk18->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, gUnknown_203B2B8->unk18->speciesNum);
-    ExpandPlaceholdersBuffer(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
+    sprintf_2(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
     xxx_call_draw_string(((gUnknown_80DD370.unk0c << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);

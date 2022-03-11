@@ -6,7 +6,7 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_attack_2.h"
+#include "dungeon_ai_attack.h"
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_targeting_2.h"
@@ -28,7 +28,6 @@
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
 #define HELD_ITEM_TOOLBOX_INDEX 0x81
-#define RANGED_ATTACK_RANGE 10
 
 enum ItemTargetFlag
 {

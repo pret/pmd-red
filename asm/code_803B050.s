@@ -3,7 +3,7 @@
 
 	.syntax unified
 
-	.text	
+	.text
 
         thumb_func_start sub_803B050
 sub_803B050:
@@ -1059,7 +1059,7 @@ _0803B818:
 	add r0, sp, 0x4
 	adds r2, r6, 0
 _0803B84C:
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 _0803B850:
 	ldr r1, [r7, 0x48]
 	ldr r3, [r7]
@@ -1096,7 +1096,7 @@ _0803B86C:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	adds r2, r6, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r1, [r7, 0x48]
 	ldr r3, [r7]
 	movs r0, 0
@@ -1160,7 +1160,7 @@ _0803B916:
 	ldr r1, _0803B938
 	add r0, sp, 0x4
 	adds r2, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _0803B944
 	.align 2, 0
 _0803B938: .4byte gUnknown_80E8884
@@ -1299,7 +1299,7 @@ _0803BA4C:
 	ldr r1, _0803BA68
 	add r0, sp, 0x4
 	adds r2, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _0803BACC
 	.align 2, 0
 _0803BA64: .4byte gUnknown_202DE58
@@ -1313,7 +1313,7 @@ _0803BA6C:
 	ldr r1, _0803BA88
 	add r0, sp, 0x4
 	adds r2, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _0803BACC
 	.align 2, 0
 _0803BA84: .4byte gUnknown_202DE58
@@ -1347,7 +1347,7 @@ _0803BAA0:
 	add r0, sp, 0x4
 	adds r2, r4, 0
 	adds r3, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 _0803BACC:
 	ldr r3, [r7]
 	movs r0, 0
@@ -1408,7 +1408,7 @@ _0803BB10:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r6, 0
 	str r6, [sp]
@@ -1454,7 +1454,7 @@ _0803BB74:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r4, 0
 	str r4, [sp]
@@ -1472,7 +1472,7 @@ _0803BB74:
 	ldr r1, [r5]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	str r4, [sp]
 	b _0803BD32
@@ -1508,7 +1508,7 @@ _0803BBF0:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r6, 0
 	str r6, [sp]
@@ -1554,7 +1554,7 @@ _0803BC58:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r6, 0
 	str r6, [sp]
@@ -1600,7 +1600,7 @@ _0803BCC0:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r6, 0
 	str r6, [sp]
@@ -1621,7 +1621,7 @@ _0803BD1A:
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	mov r2, r8
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	str r6, [sp]
 _0803BD32:
@@ -1677,7 +1677,7 @@ _0803BD88:
 	adds r0, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	mov r1, r8
 	str r1, [sp]
@@ -1783,7 +1783,7 @@ _0803BE80:
 _0803BE94:
 	add r0, sp, 0x4
 	adds r2, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r0, 0
 	str r0, [sp]
@@ -1823,7 +1823,7 @@ _0803BEC8:
 	ldr r1, _0803BF00
 	add r0, sp, 0x4
 	adds r2, r4, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _0803BF0C
 	.align 2, 0
 _0803BEF8: .4byte gSpecialMissionText
@@ -1940,7 +1940,7 @@ _0803BFD0:
 	add r0, sp, 0x4
 	adds r2, r4, 0
 _0803BFEE:
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r3, [r7]
 	movs r0, 0
 	str r0, [sp]

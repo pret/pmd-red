@@ -3,9 +3,8 @@
 
 #include "dungeon_entity.h"
 
-// 0x44C94
+void ResetAction(struct DungeonActionContainer *actionPointer);
 void SetAction(struct DungeonActionContainer *actionPointer, u16 action);
-// 0x44CA0
 void SetWalkAction(struct DungeonActionContainer *actionPointer, s16 species);
 
 #endif

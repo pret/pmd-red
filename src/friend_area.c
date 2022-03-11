@@ -2,6 +2,7 @@
 #include "constants/friend_area.h"
 #include "friend_area.h"
 #include "pokemon.h"
+#include "code_800D090.h"
 
 bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
 EWRAM_DATA bool8 *gFriendAreas;
@@ -14,7 +15,6 @@ extern const char *gFriendAreaNames[];
 extern const char gUnknown_81098A4;
 extern const char gUnknown_81098AC;
 
-extern void ExpandPlaceholdersBuffer(u8 *buffer, const char *r2, ...);
 extern void sub_8090FEC(u32, u8 *r1, u32);
 
 const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
@@ -599,7 +599,7 @@ u32 GetFriendAreaPrice(u8 index)
 void sub_8092558(u8 *buffer, u8 index)
 {
     // colors the friend area name green and prints to buffer?
-    ExpandPlaceholdersBuffer(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
+    sprintf_2(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
 void sub_8092578(u8 *buffer, u8 index, u8 r2)
@@ -609,7 +609,7 @@ void sub_8092578(u8 *buffer, u8 index, u8 r2)
     if(r2)
     {
         sub_8090FEC(gFriendAreaSettings[index].price, priceBuffer, 1);
-        ExpandPlaceholdersBuffer(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
+        sprintf_2(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
     }
     else
     {

@@ -829,7 +829,7 @@ _08030608:
 	add r0, sp, 0x8
 	ldr r1, _08030664
 	adds r2, r5, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	mov r5, r8
 	ldr r0, [r5]
 	ldr r3, [r0, 0x64]

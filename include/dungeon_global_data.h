@@ -53,7 +53,6 @@ struct DungeonGlobalData
     /* 0x3A0E */ s16 tileset;
     u8 fill3A10[0x3A14 - 0x3A10];
     /* 0x3A14 */ s16 bossBattleIndex;
-    u8 fill3A16[0x3A18 - 0x3A16];
     /* 0x3A18 */ struct MapTile mapTiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fillE218[0xE23C - 0xE218];
     s16 unkE23C;

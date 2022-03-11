@@ -347,18 +347,3 @@ gUnknown_8106F54: @ 8106F54
 gUnknown_8106F64: @ 8106F64
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0xC0, 0x00, 0x00
-
-	.global gTypeEffectivenessMultipliers
-gTypeEffectivenessMultipliers: @ 8106F6C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-
-	.global gUnknown_8106F7C
-gUnknown_8106F7C: @ 8106F7C
-	.incbin "baserom.gba", 0x106F7C, 0x28
-
-	.global gUnknown_8106FA4
-gUnknown_8106FA4: @ 8106FA4
-        .string "{COLOR_2}%c%s{END_COLOR_TEXT_2}\0"

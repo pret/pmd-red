@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_TYPE_H
 #define GUARD_CONSTANTS_TYPE_H
 
+#define NUM_TYPES 18
+
 #define TYPE_NONE 0x0
 #define TYPE_NORMAL 0x1
 #define TYPE_FIRE 0x2

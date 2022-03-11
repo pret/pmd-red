@@ -785,7 +785,7 @@ _080529D4:
 	ldr r0, _080529E4
 	ldr r1, _080529E8
 	ldr r2, _080529EC
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _08052A28
 	.align 2, 0
 _080529E4: .4byte gUnknown_202E5D8
@@ -795,7 +795,7 @@ _080529F0:
 	ldr r0, _080529FC
 	ldr r1, _08052A00
 	ldr r2, _08052A04
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	b _08052A28
 	.align 2, 0
 _080529FC: .4byte gUnknown_202E5D8
@@ -2451,7 +2451,7 @@ _08053734:
 	ldrb r1, [r1]
 	strb r1, [r0]
 	ldr r0, [sp, 0x18]
-	bl GetMoveTargetsUser
+	bl MoveTargetsUser
 	lsls r0, 24
 	cmp r0, 0
 	beq _080537B4
@@ -2856,7 +2856,7 @@ _08053A86:
 	cmp r0, 0x5
 	bne _08053AE8
 	ldr r0, [sp, 0x18]
-	bl GetMoveAffectedByMagicCoat
+	bl MoveAffectedByMagicCoat
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053B5C
@@ -7204,7 +7204,7 @@ _08056136:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	movs r2, 0x1
-	bl IsMoveUsable_2
+	bl IsMoveUsable
 _08056142:
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -7222,7 +7222,7 @@ _08056156:
 	cmp r0, 0x1
 	bne _080561A0
 	ldrh r0, [r7, 0x2]
-	bl GetMoveAffectedByMuzzled
+	bl MoveAffectedByMuzzled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080561A0

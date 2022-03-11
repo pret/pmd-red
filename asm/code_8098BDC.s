@@ -3,7 +3,7 @@
 
 	.syntax unified
 
-	.text	
+	.text
 
 	thumb_func_start sub_8098FCC
 sub_8098FCC:
@@ -4305,7 +4305,7 @@ _0809B0E4:
 	lsls r2, 4
 	ldr r3, _0809B13C
 	adds r2, r3
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 _0809B0F6:
 	adds r0, r4, 0
 	bl sub_809AE3C
@@ -4602,7 +4602,7 @@ _0809B318:
 	lsls r2, 4
 	ldr r3, _0809B3D8
 	adds r2, r3
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 _0809B32A:
 	ldr r0, _0809B3DC
 	mov r8, r0
@@ -4614,7 +4614,7 @@ _0809B32A:
 	ldr r1, _0809B3E0
 	adds r0, r4, 0
 	adds r2, r7, 0
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	adds r7, r4, 0
 _0809B344:
 	adds r0, r6, 0
@@ -7670,7 +7670,7 @@ sub_809CBBC:
 	adds r0, r3
 	ldr r3, [r0]
 	mov r0, sp
-	bl ExpandPlaceholdersBuffer
+	bl sprintf_2
 	ldr r0, _0809CC14
 	ldr r0, [r0]
 	movs r1, 0x98

@@ -3,7 +3,6 @@
 
 #include "dungeon_entity.h"
 
-// 0x69DCC
 void TargetTileInFront(struct DungeonEntity *pokemon);
 
 #endif

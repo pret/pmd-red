@@ -4,7 +4,6 @@
 #include "constants/move.h"
 #include "dungeon_entity.h"
 
-// 0x7CD64
 s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, bool32 isAI);
 
 #endif

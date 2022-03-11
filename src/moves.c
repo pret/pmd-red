@@ -3,6 +3,7 @@
 
 #include "file_system.h"
 #include "moves.h"
+#include "code_800D090.h"
 
 struct MoveDataFile
 {
@@ -37,7 +38,6 @@ extern u8 gUnknown_810992C[];
 
 extern void sub_8093F10(struct PokemonMove *, struct PokemonMove *);
 extern void sub_80928C0(u8 *, struct PokemonMove *, struct unkStruct_80928C0 *);
-extern void ExpandPlaceholdersBuffer(u8 *, u8 *, ...);
 
 void LoadWazaParameters(void)
 {
@@ -51,7 +51,7 @@ u8 sub_809287C(struct PokemonMove *move)
 {
     if((move->moveFlags & MOVE_FLAG_DISABLED) != 0)
         return 0x32;
-    else if((move->sealed & 1) == 0)
+    else if((move->moveFlags2 & MOVE_FLAG_SEALED) == 0)
         return 0x34;
     else
         return 0x32;
@@ -76,7 +76,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
   }
 
   if (move->powerBoost != 0)
-      ExpandPlaceholdersBuffer(localBuffer,gUnknown_81098DC,move->powerBoost); // %+d
+      sprintf_2(localBuffer,gUnknown_81098DC,move->powerBoost); // %+d
   else
       localBuffer[0] = '\0';
 
@@ -88,14 +88,14 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
   }
   switch(param_3->unk0) {
         case 0:
-            ExpandPlaceholdersBuffer
+            sprintf_2
                     (buffer,gUnknown_81098E0,uVar2,
                     gMovesData[move->moveID].namePointer,localBuffer);
             break;
 
         case 1:
             maxPP = GetMoveMaxPP(move);
-            ExpandPlaceholdersBuffer
+            sprintf_2
                     (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
                     move->PP,maxPP);
@@ -103,7 +103,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
 
         case 2:
             maxPP = GetMoveMaxPP(move);
-            ExpandPlaceholdersBuffer
+            sprintf_2
                     (buffer,gUnknown_8109910,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
                     move->PP,maxPP);
@@ -111,7 +111,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
 
         case 3:
             maxPP = GetMoveMaxPP(move);
-            ExpandPlaceholdersBuffer
+            sprintf_2
                     (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
                     move->PP,maxPP);
@@ -119,7 +119,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
 
         case 4:
             maxPP = GetMoveMaxPP(move);
-            ExpandPlaceholdersBuffer
+            sprintf_2
                     (buffer,gUnknown_8109910,uVar2, move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
                     gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
                     move->PP,maxPP);
@@ -130,7 +130,7 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
 void InitPokemonMove(struct PokemonMove *move, u16 moveID)
 {
     move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
-    move->sealed = FALSE;
+    move->moveFlags2 = 0;
     move->moveID = moveID;
     move->PP = GetMoveMaxPP(move);
     move->powerBoost = 0;
@@ -143,7 +143,7 @@ void sub_8092AA8(struct PokemonMove *move, u16 moveID)
     else
     {
         move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
-        move->sealed = FALSE;
+        move->moveFlags2 = 0;
         move->moveID = moveID;
         move->PP = GetMoveMaxPP(move);
         move->powerBoost = 0;
@@ -297,17 +297,17 @@ u8 *GetMoveUseText(u16 moveID)
     return gMovesData[moveID].useText;
 }
 
-u8 GetMoveAffectedByMagicCoat(u16 moveID)
+bool8 MoveAffectedByMagicCoat(u16 moveID)
 {
     return gMovesData[moveID].affectedByMagicCoat;
 }
 
-u8 GetMoveTargetsUser(u16 moveID)
+bool8 MoveTargetsUser(u16 moveID)
 {
     return gMovesData[moveID].targetsUser;
 }
 
-u8 GetMoveAffectedByMuzzled(u16 moveID)
+bool8 MoveAffectedByMuzzled(u16 moveID)
 {
     return gMovesData[moveID].affectedByMuzzled;
 }
@@ -331,5 +331,5 @@ bool8 IsBlockedBySoundproof(struct PokemonMove *move)
 
 void sub_8092D54(u8 *buffer, struct PokemonMove *move)
 {
-    ExpandPlaceholdersBuffer(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeType(move)]);
+    sprintf_2(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeType(move)]);
 }
