@@ -7,7 +7,6 @@
 #include "constants/targeting.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
-#include "dungeon_ai_attack_1.h"
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_targeting_2.h"

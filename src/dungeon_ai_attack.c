@@ -14,7 +14,6 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_targeting_1.h"
 #include "dungeon_ai_targeting_2.h"
-#include "dungeon_ai_attack_1.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -42,8 +41,6 @@ extern s32 gNumPotentialTargets;
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
-
-extern bool8 TargetRegularAttack(struct DungeonEntity*, u32*, bool8);
 
 void DecideAttack(struct DungeonEntity *pokemon)
 {
@@ -780,4 +777,148 @@ s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEnt
        weight = WeightWeakTypePicker(user, target, moveType2) + 1;
     }
     return weight;
+}
+
+bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 checkPetrified)
+{
+    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    s32 numPotentialTargets = 0;
+    s32 facingDir = pokemonData->action.facingDir;
+    s32 faceTurnLimit = pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER ? 1 : 8;
+    s32 i;
+    s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
+    s32 potentialAttackTargetWeights[NUM_DIRECTIONS];
+    bool8 hasTargetingIQ = HasIQSkill(pokemon, IQ_SKILL_EXP_GO_GETTER) || HasIQSkill(pokemon, IQ_SKILL_EFFICIENCY_EXPERT);
+    bool8 hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
+    for (i = 0; i < faceTurnLimit; i++, facingDir++)
+    {
+        struct DungeonEntity *target;
+        facingDir &= DIRECTION_MASK;
+        target = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
+            pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y)->pokemon;
+        if (target != NULL &&
+            GetEntityType(target) == ENTITY_POKEMON &&
+            CanAttackInFront(pokemon, facingDir) &&
+            CanTarget(pokemon, target, FALSE, checkPetrified) == TARGET_CAPABILITY_CAN_TARGET &&
+            (!hasStatusChecker || target->entityData->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN))
+        {
+            potentialAttackTargetDirections[numPotentialTargets] = facingDir;
+            potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);
+            if (!hasTargetingIQ)
+            {
+                *targetDir = facingDir;
+                return TRUE;
+            }
+            numPotentialTargets++;
+        }
+    }
+    if (numPotentialTargets == 0)
+    {
+        return FALSE;
+    }
+    else
+    {
+        s32 totalWeight = 0;
+        s32 maxWeight = 0;
+        s32 weightCounter;
+        s32 i;
+        for (i = 0; i < numPotentialTargets; i++)
+        {
+            if (maxWeight < potentialAttackTargetWeights[i])
+            {
+                maxWeight = potentialAttackTargetWeights[i];
+            }
+        }
+        for (i = 0; i < numPotentialTargets; i++)
+        {
+            if (maxWeight != potentialAttackTargetWeights[i])
+            {
+                potentialAttackTargetWeights[i] = 0;
+            }
+        }
+        for (i = 0; i < numPotentialTargets; i++)
+        {
+            totalWeight += potentialAttackTargetWeights[i];
+        }
+        weightCounter = DungeonRandomCapped(totalWeight);
+        for (i = 0; i < numPotentialTargets; i++)
+        {
+            weightCounter -= potentialAttackTargetWeights[i];
+            if (weightCounter < 0)
+            {
+                break;
+            }
+        }
+        *targetDir = potentialAttackTargetDirections[i];
+        return TRUE;
+    }
+
+}
+
+bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
+{
+    s32 posDiffX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 effectiveMaxRange;
+    if (posDiffX < 0)
+    {
+        posDiffX = -posDiffX;
+    }
+    effectiveMaxRange = pokemon->posWorld.y - targetPokemon->posWorld.y;
+    if (effectiveMaxRange < 0)
+    {
+        effectiveMaxRange = -effectiveMaxRange;
+    }
+    if (effectiveMaxRange < posDiffX)
+    {
+        effectiveMaxRange = posDiffX;
+    }
+    if (effectiveMaxRange > maxRange)
+    {
+        effectiveMaxRange = maxRange;
+    }
+    if (!HasIQSkill(pokemon, IQ_SKILL_COURSE_CHECKER))
+    {
+        // BUG: effectiveMaxRange is already capped at maxRange, so this condition always evaluates to TRUE.
+        // The AI also has range checks elsewhere, so this doesn't become an issue in most cases.
+        // If the AI has the Long Toss or Pierce statuses and Course Checker is disabled,
+        // this incorrect check causes the AI to throw items at targets further than 10 tiles away.
+        if (effectiveMaxRange <= maxRange)
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        s32 currentPosX = pokemon->posWorld.x;
+        s32 currentPosY = pokemon->posWorld.y;
+        s32 adjacentTileOffsetX = gAdjacentTileOffsets[facingDir].x;
+        s32 adjacentTileOffsetY = gAdjacentTileOffsets[facingDir].y;
+        s32 i;
+        for (i = 0; i <= effectiveMaxRange; i++)
+        {
+            struct MapTile *mapTile;
+            currentPosX += adjacentTileOffsetX;
+            currentPosY += adjacentTileOffsetY;
+            if (currentPosX <= 0 || currentPosY <= 0 ||
+                currentPosX >= DUNGEON_MAX_SIZE_X - 1 || currentPosY >= DUNGEON_MAX_SIZE_Y - 1)
+            {
+                break;
+            }
+            while (0); // Extra label needed to swap branch locations in ASM.
+            mapTile = GetMapTile_1(currentPosX, currentPosY);
+            if (!(mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+            {
+                break;
+            }
+            if (mapTile->pokemon == targetPokemon)
+            {
+                return TRUE;
+            }
+            if (mapTile->pokemon != NULL)
+            {
+                break;
+            }
+        }
+    }
+    return FALSE;
 }
