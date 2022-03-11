@@ -23,9 +23,9 @@ bool8 MoveDealsDirectDamage(struct PokemonMove *move);
 u32 GetMoveRangeType(struct PokemonMove *move);
 void sub_8092C84(u8 *buffer, u16 moveID);
 u8 *GetMoveUseText(u16 moveID);
-bool8 GetMoveAffectedByMagicCoat(u16 moveID);
-bool8 GetMoveTargetsUser(u16 moveID);
-bool8 GetMoveAffectedByMuzzled(u16 moveID);
+bool8 MoveAffectedByMagicCoat(u16 moveID);
+bool8 MoveTargetsUser(u16 moveID);
+bool8 MoveAffectedByMuzzled(u16 moveID);
 bool8 IsBlockedBySoundproof(struct PokemonMove *move);
 bool8 DoesMoveCharge(u16 move);
 

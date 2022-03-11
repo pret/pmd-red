@@ -2451,7 +2451,7 @@ _08053734:
 	ldrb r1, [r1]
 	strb r1, [r0]
 	ldr r0, [sp, 0x18]
-	bl GetMoveTargetsUser
+	bl MoveTargetsUser
 	lsls r0, 24
 	cmp r0, 0
 	beq _080537B4
@@ -2856,7 +2856,7 @@ _08053A86:
 	cmp r0, 0x5
 	bne _08053AE8
 	ldr r0, [sp, 0x18]
-	bl GetMoveAffectedByMagicCoat
+	bl MoveAffectedByMagicCoat
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053B5C
@@ -7222,7 +7222,7 @@ _08056156:
 	cmp r0, 0x1
 	bne _080561A0
 	ldrh r0, [r7, 0x2]
-	bl GetMoveAffectedByMuzzled
+	bl MoveAffectedByMuzzled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080561A0

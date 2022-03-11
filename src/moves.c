@@ -297,17 +297,17 @@ u8 *GetMoveUseText(u16 moveID)
     return gMovesData[moveID].useText;
 }
 
-bool8 GetMoveAffectedByMagicCoat(u16 moveID)
+bool8 MoveAffectedByMagicCoat(u16 moveID)
 {
     return gMovesData[moveID].affectedByMagicCoat;
 }
 
-bool8 GetMoveTargetsUser(u16 moveID)
+bool8 MoveTargetsUser(u16 moveID)
 {
     return gMovesData[moveID].targetsUser;
 }
 
-bool8 GetMoveAffectedByMuzzled(u16 moveID)
+bool8 MoveAffectedByMuzzled(u16 moveID)
 {
     return gMovesData[moveID].affectedByMuzzled;
 }
