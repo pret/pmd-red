@@ -71,8 +71,8 @@ extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;
 
-extern char *gUnknown_80DBF3C;
-extern char *gUnknown_80DBF4C;
+extern char gUnknown_80DBF3C[];
+extern char gUnknown_80DBF4C[];
 
 struct TeamBadgeData
 {
@@ -327,11 +327,11 @@ void sub_801D894(void)
   LoadTeamRankBadge(2, 8, 6);
 
 // Have to load before TeamRank funcs
-  r5 = (char*) &gUnknown_80DBF3C; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
+  r5 = gUnknown_80DBF3C; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
   rank = GetRescueTeamRank();
   sprintf_2(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
   xxx_call_draw_string(32, 4, buffer, 2, 0);
-  sprintf_2(buffer, (char*) &gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
+  sprintf_2(buffer, gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
   xxx_call_draw_string(32, 18, buffer, 2, 0);
   sub_80073E0(2);
 }
