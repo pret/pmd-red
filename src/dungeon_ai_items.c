@@ -323,23 +323,23 @@ void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, s
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
             CanSee(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {
-            s32 posDiffX;
-            s32 maxPosDiff;
-            posDiffX = targetPokemon->posWorld.x - pokemon->posWorld.x;
-            if (posDiffX < 0)
+            s32 distanceX;
+            s32 distance;
+            distanceX = targetPokemon->posWorld.x - pokemon->posWorld.x;
+            if (distanceX < 0)
             {
-                posDiffX = -posDiffX;
+                distanceX = -distanceX;
             }
-            maxPosDiff = targetPokemon->posWorld.y - pokemon->posWorld.y;
-            if (maxPosDiff < 0)
+            distance = targetPokemon->posWorld.y - pokemon->posWorld.y;
+            if (distance < 0)
             {
-                maxPosDiff = -maxPosDiff;
+                distance = -distance;
             }
-            if (maxPosDiff < posDiffX)
+            if (distance < distanceX)
             {
-                maxPosDiff = posDiffX;
+                distance = distanceX;
             }
-            if (maxPosDiff <= 10)
+            if (distance <= 10)
             {
                 struct Position *newPotentialTarget;
                 if (!ignoreRollChance)
@@ -361,22 +361,22 @@ void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, s
 
 void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, struct ItemSlot *item, s32 targetingFlags, bool8 ignoreRollChance)
 {
-    s32 posDiffX = pokemon->posWorld.x - targetPokemon->posWorld.x;
-    s32 posDiffY;
+    s32 distanceX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 distanceY;
     s32 targetDirection;
-    posDiffX = posDiffX < 0 ? -posDiffX : posDiffX;
-    posDiffY = pokemon->posWorld.y - targetPokemon->posWorld.y;
-    posDiffY = posDiffY < 0 ? -posDiffY : posDiffY;
+    distanceX = distanceX < 0 ? -distanceX : distanceX;
+    distanceY = pokemon->posWorld.y - targetPokemon->posWorld.y;
+    distanceY = distanceY < 0 ? -distanceY : distanceY;
     if (pokemon->entityData->itemStatus == ITEM_STATUS_NONE)
     {
-        s32 maxPosDiff = posDiffY < posDiffX ? posDiffX : posDiffY;
-        if (maxPosDiff > RANGED_ATTACK_RANGE)
+        s32 distance = distanceY < distanceX ? distanceX : distanceY;
+        if (distance > RANGED_ATTACK_RANGE)
         {
             return;
         }
     }
     targetDirection = -1;
-    if (posDiffX == posDiffY)
+    if (distanceX == distanceY)
     {
         if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y < targetPokemon->posWorld.y)
         {

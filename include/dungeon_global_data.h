@@ -74,7 +74,7 @@ struct DungeonGlobalData
     u8 fill104C0[0x104C4 - 0x104C0];
     /* 0x104C4 */ struct MapRoom roomData[MAX_ROOM_COUNT];
     u8 fill10764[0x10844 - 0x10764];
-    /* 0x10844 */ u16 numRoomExits[MAX_ROOM_COUNT];
+    /* 0x10844 */ s16 numRoomExits[MAX_ROOM_COUNT];
     u8 fill10874[0x10884 - 0x10874];
     /* 0x10884 */ struct Position roomExits[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
     u8 fill11444[0x1356C - 0x11484];

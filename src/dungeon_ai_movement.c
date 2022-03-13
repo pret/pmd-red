@@ -7,10 +7,10 @@
 #include "dungeon_action.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_ai_movement_1.h"
 #include "dungeon_ai_targeting_1.h"
 #include "number_util.h"
 
-extern bool8 AvoidEnemies(struct DungeonEntity *pokemon);
 extern bool8 CanTakeItem(struct DungeonEntity *pokemon);
 extern bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
