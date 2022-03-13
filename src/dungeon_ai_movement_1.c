@@ -2,6 +2,7 @@
 #include "dungeon_ai_movement_1.h"
 
 #include "constants/targeting.h"
+#include "dungeon_ai_targeting.h"
 #include "dungeon_ai_targeting_2.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -12,7 +13,6 @@
 
 #define INFINITY 999999
 
-extern bool8 CanMoveForward(struct DungeonEntity *pokemon, s32 facingDir, bool8 *pokemonInFront);
 extern bool8 Explore(struct DungeonEntity *pokemon);
 
 bool8 AvoidEnemies(struct DungeonEntity *pokemon)

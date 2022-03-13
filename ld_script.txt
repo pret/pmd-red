@@ -230,7 +230,7 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.text);
         asm/code_8070E3C.o(.text);
         src/dungeon_ai_targeting.o(.text);
-        asm/code_8071214.o(.text);
+        asm/code_807138C.o(.text);
         src/dungeon_ai_targeting_1.o(.text);
         asm/code_8071518.o(.text);
         src/dungeon_ai_targeting_2.o(.text);
@@ -451,7 +451,6 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.rodata);
         data/data_8106FB5.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
-        data/data_8106FDD.o(.rodata);
         src/dungeon_ai_targeting_2.o(.rodata);
         data/data_8107010.o(.rodata);
         src/friend_area.o(.rodata);

@@ -1,8 +1,8 @@
 #include "global.h"
 
-extern u8 gDungeonWaterType[];
+#include "tile_types.h"
 
-bool8 sub_8097F40(u32 r0)
+bool8 IsWaterDungeon(u32 r0)
 {
-    return gDungeonWaterType[r0] == 2;
+    return gDungeonWaterType[r0] == DUNGEON_WATER_TYPE_WATER;
 }
