@@ -144,6 +144,7 @@ SECTIONS {
         asm/wonder_mail_4.o(.text);
         src/post_office_guide.o(.text);
         asm/wonder_mail_5.o(.text);
+        asm/code_8031D70.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
@@ -277,9 +278,9 @@ SECTIONS {
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
-        asm/code_809017C.o(.text);
-        src/code_8090208.o(.text);
-        asm/code_8090208.o(.text);
+        asm/dungeon.o(.text);
+        src/dungeon_2.o(.text);
+        asm/dungeon_2.o(.text);
         src/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);

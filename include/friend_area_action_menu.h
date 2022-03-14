@@ -12,7 +12,7 @@ struct unkStruct_203B2BC
     struct HeldItem itemToGive;
     struct HeldItem unk14;
     struct PokemonStruct *unk18;
-    u32 unk1C;
+    u8 unk1C;
     u32 unk20;
     u16 unk24;
     struct PokemonMove unk28[8];

@@ -15,7 +15,7 @@ struct unkStruct_203B210
     u32 unkC;
     s32 itemSellPrice;
     u32 unk14;
-    u32 unk18;
+    s32 unk18;
     struct ItemSlot unk1C;
     u8 unk20;
     u8 unk21;

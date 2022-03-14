@@ -586,7 +586,7 @@ bool8 sub_809124C(u8 itemIndex, u8 param_3)
   return AddItemToInventory(&temp);
 }
 
-bool8 sub_8091274(struct HeldItem* slot)
+bool8 AddHeldItemToInventory(struct HeldItem* slot)
 {
   struct ItemSlot temp;
 
@@ -1083,7 +1083,7 @@ struct HeldItem* xxx_get_unk250_at_8091A90(u8 index) {
     return &gTeamInventory_203B460->unk250[index];
 }
 
-void xxx_fill_inv_unk250_gaps_8091AA8(u8 index) {
+void xxx_fill_inv_unk250_gaps_8091AA8(void) {
   s32 slot_checking = 0;
   s32 last_filled = 0;
 

@@ -166,7 +166,7 @@ extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32
 extern u32 sub_8012A64(struct UnkInputStruct**, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8031A84();
-extern void sub_8031AE8();
+extern void DisplayMissionObjectives();
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
@@ -535,7 +535,7 @@ u32 sub_80319F8(void)
 void sub_8031A2C(void)
 {
     sub_8031A84();
-    sub_8031AE8();
+    DisplayMissionObjectives();
 }
 
 void sub_8031A3C(void)

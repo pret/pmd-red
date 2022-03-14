@@ -470,7 +470,7 @@ _0801794C:
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	add r0, sp, 0x4
-	bl sub_8091274
+	bl AddHeldItemToInventory
 	movs r0, 0x1D
 	bl UpdateKangaskhanStorageState
 	b _080179A2
@@ -638,7 +638,7 @@ _08017AB0:
 	ldrh r2, [r3]
 	subs r2, r1
 	strh r2, [r3]
-	bl sub_8091274
+	bl AddHeldItemToInventory
 _08017ACE:
 	adds r5, 0x1
 	cmp r5, 0xEF

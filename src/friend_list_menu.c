@@ -222,7 +222,7 @@ void sub_8026C14(void)
         ShiftItemsDownFrom(gUnknown_203B2B8->unkC);
         FillInventoryGaps();
         if (gUnknown_203B2B8->unk14.itemIndex != '\0') {
-          sub_8091274(&gUnknown_203B2B8->unk14);
+          AddHeldItemToInventory(&gUnknown_203B2B8->unk14);
           nextState = 0x10;
         }
         HeldItemToSlot(&slot,&gUnknown_203B2B8->unk10);
@@ -342,7 +342,7 @@ void sub_8026E08(u32 r0)
 u32 sub_8026E88(struct PokemonStruct *r0)
 {
     u8 iVar3;
-    if(r0->unk2 == 0)
+    if(r0->isLeader == 0)
     {
         iVar3 = (r0->unk4.dungeonIndex == 0x41);
         if(iVar3 != 0)
@@ -359,7 +359,7 @@ u32 sub_8026EB8(struct PokemonStruct *r0)
     u8 iVar3;
     if(sub_808D3BC() != r0)
         if(sub_808D3F8() != r0)
-            if(r0->unk2 == 0)
+            if(r0->isLeader == 0)
             {
                 iVar3 = (r0->unk4.dungeonIndex == 0x41);
                 if(iVar3 != 0)
@@ -414,7 +414,7 @@ void sub_8026FA4(void)
     {
         case 1:
             PlaySound(0x14d);
-            sub_8091274(&gUnknown_203B2B8->unk14);
+            AddHeldItemToInventory(&gUnknown_203B2B8->unk14);
             FillInventoryGaps();
             gUnknown_203B2B8->unk14.itemIndex = 0;
             gUnknown_203B2B8->unk14.numItems = 0;

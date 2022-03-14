@@ -99,11 +99,214 @@ extern void sub_8013984(u8 *);
 extern void sub_801A064(void);
 extern void sub_801A0D8(void);
 extern void AddMenuCursorSprite(void *);
-extern s32 xxx_count_inv_unk230();
 extern u8 sub_801A37C(void);
 extern u16 gUnknown_203B228;
 extern u16 gUnknown_203B22A;
 extern struct UnkTextStruct2 gUnknown_80DB95C;
+
+extern void sub_801A010(void);
+extern void sub_801A3DC(void);
+extern void sub_801AD34(u32);
+extern void PlaySound(u16 songIndex);
+
+extern void xxx_init_inv_unk250_at_8091A74(u8 index);
+extern void xxx_fill_inv_unk250_gaps_8091AA8(void);
+
+u32 sub_8019D8C(void);
+
+void sub_8019730(void)
+{
+  s32 local_8;
+
+  if (sub_80144A4(&local_8) != 0) {
+    return;
+  }
+  if (local_8 != 1) {
+    gUnknown_203B210->unk28 = local_8;
+  }
+  switch(local_8) {
+    case 2:
+        if (sub_8019D8C() == 0) {
+            UpdateKecleonStoreState(5);
+        }
+        else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+            UpdateKecleonStoreState(0xA);
+        }
+        else {
+            UpdateKecleonStoreState(0xF);
+        }
+        break;
+    case 3:
+        if (GetNumberOfFilledInventorySlots() == 0) {
+            UpdateKecleonStoreState(9);
+        }
+        else if (gUnknown_203B210->unk14 == 0) {
+            UpdateKecleonStoreState(8);
+        }
+        else if (gTeamInventory_203B460->teamMoney < 99999) {
+            UpdateKecleonStoreState(0x17);
+        }
+        else
+            UpdateKecleonStoreState(7);
+        break;
+    case 4:
+        if (GetNumberOfFilledInventorySlots() == 0)
+            UpdateKecleonStoreState(9);
+        else if (gUnknown_203B210->unk14 == 0)
+            UpdateKecleonStoreState(8);
+        else if (gUnknown_203B210->unk18 + gTeamInventory_203B460->teamMoney > 99999) {
+            UpdateKecleonStoreState(7);
+        }
+        else
+            UpdateKecleonStoreState(0x1f);
+        break;
+    case 7:
+        UpdateKecleonStoreState(2);
+        break;
+    case 1:
+        UpdateKecleonStoreState(3);
+        break;
+  }
+}
+
+void sub_8019850(void)
+{
+  s32 local_c;
+
+  if (sub_80144A4(&local_c) == 0) {
+      switch(local_c)
+      {
+          case 5:
+            AddToTeamMoney(-gUnknown_203B210->itemSellPrice);
+            if (gUnknown_203B210->unk4 != '\0') {
+                AddHeldItemToInventory(xxx_get_inv_unk230_at_809185C(gUnknown_203B210->unk20));
+                xxx_init_unk230_substruct(gUnknown_203B210->unk20);
+                xxx_fill_unk230_gaps();
+            }
+            else {
+                AddHeldItemToInventory(xxx_get_unk250_at_8091A90(gUnknown_203B210->unk21));
+                xxx_init_inv_unk250_at_8091A74(gUnknown_203B210->unk21);
+                xxx_fill_inv_unk250_gaps_8091AA8();
+            }
+            PlaySound(0x14c);
+            UpdateKecleonStoreState(0x11);
+            break;
+        case 6:
+        case 1:
+            UpdateKecleonStoreState(0x10);
+            break;
+      }
+  }
+}
+
+void sub_80198E8(void)
+{
+  s32 local_c;
+
+  if (sub_80144A4(&local_c) == 0) {
+      switch(local_c)
+      {
+          case 5:
+            AddToTeamMoney(gUnknown_203B210->itemSellPrice);
+            ShiftItemsDownFrom(gUnknown_203B210->unk24);
+            PlaySound(0x14c);
+            UpdateKecleonStoreState(0x19);
+            break;
+        case 6:
+        case 1:
+            UpdateKecleonStoreState(0x18);
+            break;
+      }
+  }
+}
+
+void sub_8019944(void)
+{
+  s32 slotIndex;
+  s32 local_10;
+  struct ItemSlot *itemSlot;
+
+  if (sub_80144A4(&local_10) == 0) {
+    switch(local_10)
+    {
+        case 5:
+            for(slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++)
+            {
+                itemSlot = &gTeamInventory_203B460->teamItems[slotIndex];
+                if ((itemSlot->itemFlags & ITEM_FLAG_EXISTS) && CanSellItem(itemSlot->itemIndex)) {
+                    ClearItemSlotAt(slotIndex);
+                }
+            }
+            FillInventoryGaps();
+            AddToTeamMoney(gUnknown_203B210->unk18);
+            PlaySound(0x14c);
+            UpdateKecleonStoreState(0x20);
+            break;
+        case 1:
+        case 6:
+            UpdateKecleonStoreState(1);
+            break;
+    }
+  }
+}
+
+void sub_80199CC(void)
+{
+  u32 uVar2;
+  struct HeldItem *puVar3;
+
+  if (gUnknown_203B210->unk4 != '\0') {
+    uVar2 = sub_8019EDC(1);
+  }
+  else {
+    uVar2 = sub_801A2A8(1);
+  }
+
+  switch(uVar2)
+  {
+    case 3:
+        if (gUnknown_203B210->unk4) {
+            gUnknown_203B210->unk20 = sub_8019FB0();
+            puVar3 = xxx_get_inv_unk230_at_809185C(gUnknown_203B210->unk20);
+        }
+        else {
+            gUnknown_203B210->unk21 = sub_801A37C();
+            puVar3 = xxx_get_unk250_at_8091A90(gUnknown_203B210->unk21);
+        }
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->itemIndex,0);
+        gUnknown_203B210->unk1C.numItems =puVar3->numItems;
+        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
+        UpdateKecleonStoreState(0x14);
+        break;
+    case 4:
+        if (gUnknown_203B210->unk4) {
+            gUnknown_203B210->unk20 = sub_8019FB0();
+            puVar3 = xxx_get_inv_unk230_at_809185C(gUnknown_203B210->unk20);
+        }
+        else {
+            gUnknown_203B210->unk21 = sub_801A37C();
+            puVar3 = xxx_get_unk250_at_8091A90(gUnknown_203B210->unk21);
+        }
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->itemIndex,0);
+        gUnknown_203B210->unk1C.numItems = puVar3->numItems;
+        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
+        UpdateKecleonStoreState(0x15);
+        break;
+    case 2:
+        if (gUnknown_203B210->unk4) {
+            sub_801A010();
+        }
+        else {
+            sub_801A3DC();
+        }
+        UpdateKecleonStoreState(1);
+        break;
+    case 1:
+        sub_801AD34(0);
+        DrawTeamMoneyBox(1);
+        break;
+  }
+}
 
 void sub_8019B08(void)
 {
@@ -253,15 +456,15 @@ u32 sub_8019D8C(void)
 void sub_8019DAC(void)
 {
   s32 iVar3;
-  struct ItemSlot *pbVar4;
+  struct ItemSlot *itemSlot;
   s32 iVar5;
 
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < INVENTORY_SIZE; iVar5++){
-    pbVar4 = &gTeamInventory_203B460->teamItems[iVar5];
-    if (((pbVar4->itemFlags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(pbVar4->itemIndex))) {
-      iVar3 = GetStackSellPrice(pbVar4);
+    itemSlot = &gTeamInventory_203B460->teamItems[iVar5];
+    if (((itemSlot->itemFlags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(itemSlot->itemIndex))) {
+      iVar3 = GetStackSellPrice(itemSlot);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
     }

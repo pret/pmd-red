@@ -40,7 +40,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     temp  = &gUnknown_203B484->unk4;
     memset(temp, 0, sizeof(struct PokemonStruct));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
-    RestoreIntegerBits(&backup, &temp->unk2, 1);
+    RestoreIntegerBits(&backup, &temp->isLeader, 1);
     RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
     xxx_restore_poke_sub_4_8090314(&backup, &temp->unk4);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
@@ -82,7 +82,7 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
     temp  = &gUnknown_203B484->unk4;
     SaveIntegerBits(&backup, &temp->unk0, 2);
-    SaveIntegerBits(&backup, &temp->unk2, 1);
+    SaveIntegerBits(&backup, &temp->isLeader, 1);
     SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
     xxx_save_poke_sub_4_80902F4(&backup, &temp->unk4);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);

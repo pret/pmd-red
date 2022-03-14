@@ -26,7 +26,7 @@ sub_8094558:
 	adds r1, r6, 0
 	adds r1, 0x18
 	adds r0, r4, 0
-	bl sub_8090208
+	bl PrintYellowDungeonNametoBuffer
 	ldr r0, _080945D4
 	ldr r2, [r0]
 	str r5, [sp]

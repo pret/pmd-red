@@ -529,7 +529,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     a1->IQSkills = pokemon->IQSkills;
     sub_808E6F4(&a1->unk54);
     a1->unk4 = pokemon->unk4;
-    a1->unk2 = pokemon->unk2;
+    a1->isLeader = pokemon->isLeader;
     a1->unkA = a3;
     a1->speciesNum = pokemon->speciesNum;
     a1->unk50 = pokemon->unk24;
@@ -582,7 +582,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     pokemon->IQ = a2->IQ;
     pokemon->IQSkills = a2->IQSkills;
     pokemon->unk4 = a2->unk4;
-    pokemon->unk2 = a2->unk2;
+    pokemon->isLeader = a2->isLeader;
     pokemon->speciesNum = a2->speciesNum;
     pokemon->unk24 = a2->unk50;
     pokemon->pokeHP = a2->unk12;

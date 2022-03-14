@@ -685,7 +685,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
             if (pokemon->unk0 & 2) {
                 buffer[count++] = i;
             }
-            if (pokemon->unk2) {
+            if (pokemon->isLeader) {
                 data_s16 = i;
             }
         }
@@ -745,7 +745,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     }
     RestoreIntegerBits(&backup, &data_s16, 16);
     if ((u16)data_s16 < NUM_SPECIES) {
-        gRecruitedPokemonRef->pokemon[data_s16].unk2 = 1;
+        gRecruitedPokemonRef->pokemon[data_s16].isLeader = 1;
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -776,7 +776,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
 {
   memset(pokemon, 0, sizeof(struct PokemonStruct));
   pokemon->unk0 = 0;
-  pokemon->unk2 = 0;
+  pokemon->isLeader = 0;
   RestoreIntegerBits(a1, &pokemon->unkHasNextStage, 7);
   if (pokemon->unkHasNextStage) {
       pokemon->unk0 |= 1;
@@ -814,7 +814,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
-    SaveIntegerBits(&backup, pokemon2->unk2 ? &data_u8_neg1 : &data_u8_zero, 1);
+    SaveIntegerBits(&backup, pokemon2->isLeader ? &data_u8_neg1 : &data_u8_zero, 1);
     SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
     xxx_save_poke_sub_4_80902F4(&backup, &pokemon2->unk4);
@@ -858,10 +858,10 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
 
     RestoreIntegerBits(&backup, &unk2, 1);
     if (unk2 & 1) {
-        pokemon2->unk2 = TRUE;
+        pokemon2->isLeader = TRUE;
     }
     else {
-        pokemon2->unk2 = FALSE;
+        pokemon2->isLeader = FALSE;
     }
     RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 

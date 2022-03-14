@@ -135,7 +135,7 @@ _08030074:
 	str r1, [sp, 0x14]
 	ldr r0, _080300BC
 	add r1, sp, 0x14
-	bl sub_8090208
+	bl PrintYellowDungeonNametoBuffer
 	ldr r2, _080300C0
 	ldr r3, [r5]
 	ldr r1, [r3, 0x4]

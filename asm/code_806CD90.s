@@ -2225,7 +2225,7 @@ _0806E040:
 	ldr r1, _0806E0C0
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_809033C
+	bl GetDungeonUnk1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E066

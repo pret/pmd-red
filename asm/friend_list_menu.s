@@ -1032,7 +1032,7 @@ _08025B28:
 	beq _08025B40
 	adds r0, r1, 0
 	adds r0, 0x18
-	bl sub_8091274
+	bl AddHeldItemToInventory
 _08025B40:
 	bl FillInventoryGaps
 	ldr r0, [r4]
@@ -1259,7 +1259,7 @@ _08025CF8:
 	beq _08025D24
 	adds r0, r1, 0
 	adds r0, 0x18
-	bl sub_8091274
+	bl AddHeldItemToInventory
 	movs r6, 0x9
 _08025D24:
 	add r4, sp, 0x10
@@ -2858,7 +2858,7 @@ _08026A10:
 	beq _08026A28
 	adds r0, r1, 0
 	adds r0, 0x14
-	bl sub_8091274
+	bl AddHeldItemToInventory
 _08026A28:
 	bl FillInventoryGaps
 	ldr r0, [r4]

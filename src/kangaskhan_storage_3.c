@@ -159,7 +159,7 @@ void sub_80186F8(void)
                             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | (0x80 << 1);
                         }
                         gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] -= item.temp.norm.numItems;
-                        sub_8091274((struct HeldItem *)&item);
+                        AddHeldItemToInventory((struct HeldItem *)&item);
                     }
                 }
                 FillInventoryGaps();
@@ -218,7 +218,7 @@ void sub_8018854(void)
             itemsCast = (gUnknown_203B20C->unk8.numItems << 8);
             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
 
-            sub_8091274((struct HeldItem *)&item);
+            AddHeldItemToInventory((struct HeldItem *)&item);
             if(sub_801CF14(1) == 0)
                 if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 {
@@ -319,7 +319,7 @@ void sub_80189C8(void)
                 itemsCast = (gUnknown_203B20C->unk8.numItems << 8);
                 item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
 
-                sub_8091274((struct HeldItem *)&item);
+                AddHeldItemToInventory((struct HeldItem *)&item);
                 if(sub_801CF14(1) == 0)
                     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                     {

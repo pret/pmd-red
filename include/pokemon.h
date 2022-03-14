@@ -22,7 +22,6 @@ struct Offense {
 struct unkPokeSubStruct_4 {
     u8 dungeonIndex;
     u8 dungeonFloor;
-    u16 fill6;
 };
 
 struct unkPokeSubStruct_C
@@ -35,7 +34,7 @@ struct PokemonStruct
 {
     // size: 0x58
     /* 0x0 */ u16 unk0; // recruited??
-    /* 0x1 */ u8 unk2;
+    /* 0x1 */ bool8 isLeader;
     /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
     /* 0x4 */ struct unkPokeSubStruct_4 unk4;
     /* 0x8 */ s16 speciesNum; // species #
@@ -76,7 +75,7 @@ struct PokemonStruct2
 {
     // size 0x68
     u16 unk0;  // corresponds to unk0 inPokemonStruct
-    u8 unk2;   // unk2
+    bool8 isLeader;   // unk2
     u8 unkHasNextStage;   // unk3
     struct unkPokeSubStruct_4 unk4;  // unk4
     u16 IQ;    // IQ (other offset)

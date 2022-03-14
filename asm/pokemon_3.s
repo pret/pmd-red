@@ -1252,7 +1252,7 @@ _0808FDB0:
 	mov r1, r10
 	adds r1, 0x1C
 	adds r0, r4, 0
-	bl sub_8090208
+	bl PrintYellowDungeonNametoBuffer
 	ldr r0, _0808FF0C
 	ldr r2, [r0]
 	str r5, [sp]
