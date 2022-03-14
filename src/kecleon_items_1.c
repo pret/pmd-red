@@ -118,34 +118,26 @@ void sub_8019730(void)
 {
   s32 local_8;
 
-  if (sub_80144A4(&local_8) != 0) {
+  if (sub_80144A4(&local_8) != 0)
     return;
-  }
-  if (local_8 != 1) {
+  if (local_8 != 1)
     gUnknown_203B210->unk28 = local_8;
-  }
   switch(local_8) {
     case 2:
-        if (sub_8019D8C() == 0) {
+        if (sub_8019D8C() == 0)
             UpdateKecleonStoreState(5);
-        }
-        else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+        else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
             UpdateKecleonStoreState(0xA);
-        }
-        else {
+        else
             UpdateKecleonStoreState(0xF);
-        }
         break;
     case 3:
-        if (GetNumberOfFilledInventorySlots() == 0) {
+        if (GetNumberOfFilledInventorySlots() == 0)
             UpdateKecleonStoreState(9);
-        }
-        else if (gUnknown_203B210->unk14 == 0) {
+        else if (gUnknown_203B210->unk14 == 0)
             UpdateKecleonStoreState(8);
-        }
-        else if (gTeamInventory_203B460->teamMoney < 99999) {
+        else if (gTeamInventory_203B460->teamMoney < 99999)
             UpdateKecleonStoreState(0x17);
-        }
         else
             UpdateKecleonStoreState(7);
         break;
@@ -154,9 +146,8 @@ void sub_8019730(void)
             UpdateKecleonStoreState(9);
         else if (gUnknown_203B210->unk14 == 0)
             UpdateKecleonStoreState(8);
-        else if (gUnknown_203B210->unk18 + gTeamInventory_203B460->teamMoney > 99999) {
+        else if (gUnknown_203B210->unk18 + gTeamInventory_203B460->teamMoney > 99999)
             UpdateKecleonStoreState(7);
-        }
         else
             UpdateKecleonStoreState(0x1f);
         break;
@@ -293,12 +284,10 @@ void sub_80199CC(void)
         UpdateKecleonStoreState(0x15);
         break;
     case 2:
-        if (gUnknown_203B210->unk4) {
+        if (gUnknown_203B210->unk4)
             sub_801A010();
-        }
-        else {
+        else
             sub_801A3DC();
-        }
         UpdateKecleonStoreState(1);
         break;
     case 1:
@@ -354,15 +343,12 @@ void sub_8019BBC(void)
   }
   switch(menuAction){
       case 2:
-        if (gTeamInventory_203B460->teamMoney == 0) {
+        if (gTeamInventory_203B460->teamMoney == 0)
             UpdateKecleonStoreState(0x6);
-        }
-        else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney) {
+        else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney)
             UpdateKecleonStoreState(0xC);
-        }
-        else {
+        else
             UpdateKecleonStoreState(0x16);
-        }
         break;
     case 7:
         UpdateKecleonStoreState(0x15);
@@ -385,15 +371,12 @@ void sub_8019C78(void)
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (!CanSellItem(gUnknown_203B210->unk1C.itemIndex)) {
+        if (!CanSellItem(gUnknown_203B210->unk1C.itemIndex))
             UpdateKecleonStoreState(0xd);
-        }
-        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > 99999) {
+        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > 99999)
             UpdateKecleonStoreState(0xe);
-        }
-        else {
+        else
             UpdateKecleonStoreState(0x1e);
-        }
         break;
     case 7:
         sub_8099690(0);
