@@ -5,19 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80AD8A0
-sub_80AD8A0:
-	lsls r0, 16
-	ldr r1, _080AD8B0
-	asrs r0, 13
-	ldr r1, [r1]
-	adds r1, r0
-	adds r0, r1, 0
-	bx lr
-	.align 2, 0
-_080AD8B0: .4byte gUnknown_203B4B8
-	thumb_func_end sub_80AD8A0
-
 	thumb_func_start sub_80AD8B4
 sub_80AD8B4:
 	push {r4,lr}

@@ -31,3 +31,9 @@ void GroundLink_Select(s16 r0)
 {
     gUnknown_203B4B8.unk0 = sub_80A77D0(r0, &gUnknown_8118798)->unk8;
 }
+
+u32 sub_80AD8A0(s16 r0)
+{
+    u32 a = r0;
+    return gUnknown_203B4B8.unk0 + a * 8;
+}
