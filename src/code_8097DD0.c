@@ -9,7 +9,7 @@ struct unkStruct_203B494
     s32 numAdventures;
     s32 unk8;
     s32 unkC;
-    struct unkPokeSubStruct_4 dungeonLocation;
+    struct DungeonLocation dungeonLocation;
     s16 unk14;
     s16 unk16;
     s16 unk18;
@@ -21,8 +21,8 @@ struct unkStruct_203B494
 
 extern struct unkStruct_203B494 *gUnknown_203B494;
 
-extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
-extern void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 void ReadExclusivePokemon(struct unkStruct_8094924 *r0);
 void ReadGameOptions(struct unkStruct_8094924 *param_1);
 void ReadPlayTime(struct unkStruct_8094924 *r0);
@@ -46,7 +46,7 @@ void sub_8097C18(struct unkStruct_8094924 *r0)
     SaveIntegerBits(r0, gUnknown_203B494->unk1C, 0xE0 << 1);
     SaveIntegerBits(r0, gUnknown_203B494->unk54, 0xE0 << 1);
     SaveIntegerBits(r0, gUnknown_203B494->unk8C, 0xD0 << 1);
-    xxx_save_poke_sub_4_80902F4(r0, &gUnknown_203B494->dungeonLocation);
+    SaveDungeonLocation(r0, &gUnknown_203B494->dungeonLocation);
 }
 
 void sub_8097CC0(struct unkStruct_8094924 *r0)
@@ -62,7 +62,7 @@ void sub_8097CC0(struct unkStruct_8094924 *r0)
     RestoreIntegerBits(r0, gUnknown_203B494->unk1C, 0xE0 << 1);
     RestoreIntegerBits(r0, gUnknown_203B494->unk54, 0xE0 << 1);
     RestoreIntegerBits(r0, gUnknown_203B494->unk8C, 0xD0 << 1);
-    xxx_restore_poke_sub_4_8090314(r0, &gUnknown_203B494->dungeonLocation);
+    RestoreDungeonLocation(r0, &gUnknown_203B494->dungeonLocation);
 }
 
 u32 sub_8097D60(u8 *r0, u32 size)

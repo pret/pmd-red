@@ -213,7 +213,7 @@ sub_80842F0:
 _08084320:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r4, r0, 0
 	ldrb r0, [r4]
 	cmp r0, 0x6
@@ -300,7 +300,7 @@ sub_80843BC:
 _080843C6:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r3, r0, 0
 	ldrb r0, [r3]
 	cmp r0, 0x6
@@ -353,7 +353,7 @@ sub_8084424:
 _08084428:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r1, r0, 0
 	ldrb r0, [r1]
 	cmp r0, 0x8
@@ -760,7 +760,7 @@ sub_8084778:
 _08084784:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r1, r0, 0
 	ldrb r0, [r1]
 	cmp r0, 0x6

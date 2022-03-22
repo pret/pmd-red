@@ -1098,7 +1098,7 @@ _0802C7B4:
 	adds r0, r5
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r4, r0, 0
 	ldr r0, [r6]
 	ldr r1, [r0, 0x3C]
@@ -1459,7 +1459,7 @@ _0802CA7C: .4byte gUnknown_203B2F0
 _0802CA80:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xC]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	ldr r1, [r4]
 	adds r1, 0x10
 	bl sub_803B35C
@@ -1482,7 +1482,7 @@ sub_802CAA4:
 	ldr r5, _0802CAC8
 	ldr r0, [r5]
 	ldrb r0, [r0, 0xC]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r4, r0, 0
 	ldr r2, [r5]
 	ldr r0, [r2]
@@ -1759,7 +1759,7 @@ _0802CCD8:
 	ldr r0, _0802CCF0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xC]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	movs r1, 0x6
 	b _0802CD06
 	.align 2, 0
@@ -1771,7 +1771,7 @@ _0802CCF4:
 	ldr r0, _0802CD14
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xC]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	movs r1, 0x5
 _0802CD06:
 	strb r1, [r0]

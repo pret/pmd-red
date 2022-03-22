@@ -8,7 +8,7 @@ struct unkStruct_203B494
     s32 numAdventures;
     s32 unk8;
     s32 unkC;
-    struct unkPokeSubStruct_4 dungeonLocation;
+    struct DungeonLocation dungeonLocation;
     s16 unk14;
     s16 unk16;
     s16 unk18;
@@ -33,13 +33,13 @@ struct unkStruct_203B494 *sub_8097680(void)
     return &gUnknown_2039778;
 }
 
-void SetDungeonLocationInfo(struct unkPokeSubStruct_4 *r0)
+void SetDungeonLocationInfo(struct DungeonLocation *r0)
 {
     gUnknown_203B494->dungeonLocation.dungeonIndex = r0->dungeonIndex;
     gUnknown_203B494->dungeonLocation.dungeonFloor = r0->dungeonFloor;
 }
 
-struct unkPokeSubStruct_4 *GetDungeonLocationInfo(void)
+struct DungeonLocation *GetDungeonLocationInfo(void)
 {
     return &gUnknown_203B494->dungeonLocation;
 }

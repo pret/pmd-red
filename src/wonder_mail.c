@@ -46,11 +46,11 @@ extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
-extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_80951BC(u8 *r0);
+extern void sub_80951BC(struct unkStruct_8095228 *r0);
 extern void sub_8013114(u32 *r0, s32 *r1);
 extern void sub_8023C60();
 extern u32 sub_8023A94(u32);
@@ -1171,7 +1171,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->unk4) == 0)
+            if(sub_80A2824(return_var->dungeon) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -1459,7 +1459,7 @@ void sub_80293F4(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp.unk0))
+                switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp))
                 {
                     case 17:
                         sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->faceFile, 0xC);
@@ -1475,8 +1475,8 @@ void sub_80293F4(void)
                         break;
                     case 22:
                         sub_8095274(temp.unk10);
-                        temp.unk0 = 2; // Some sort of Ack?
-                        sub_80951BC(&temp.unk0);
+                        temp.mailType = 2;
+                        sub_80951BC(&temp);
                         sub_80141B4(gWonderMailAOKMailReceivedText, 0, &gUnknown_203B2C0->faceFile, 0x101);
                         sub_8028B04(35);
                         break;

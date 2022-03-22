@@ -2,8 +2,8 @@
 #include "pokemon.h"
 #include "wonder_mail.h"
 
-extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
-extern void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void sub_80015C0(u32, u32);
 
 struct unkStruct_8097270
@@ -11,7 +11,7 @@ struct unkStruct_8097270
     u8 unk0;
     u8 unk1;
     u8 unk2;
-    struct unkPokeSubStruct_4 unk4;
+    struct DungeonLocation unk4;
     u32 unk8;
     u16 unkC;
     u16 unkE;
@@ -24,7 +24,7 @@ struct unkStruct_8097270
 struct subStruct_203B490
 {
     // size: 0xC
-    struct unkPokeSubStruct_4 unk0;
+    struct DungeonLocation unk0;
     u32 unk4;
     u32 unk8;
 };
@@ -109,7 +109,7 @@ u32 sub_8096FA0(u8 *r0, u32 size)
     {
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
-        xxx_restore_poke_sub_4_8090314(&backup, &gUnknown_203B490->unk230[index].unk0);
+        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].unk0);
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -153,7 +153,7 @@ u32 sub_80970D8(u8 *r0, u32 size)
     {
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
-        xxx_save_poke_sub_4_80902F4(&backup, &gUnknown_203B490->unk230[index].unk0);
+        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].unk0);
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -171,7 +171,7 @@ void sub_80971EC(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b)
     RestoreIntegerBits(a, &b->unk12, 8);
     RestoreIntegerBits(a, &b->unk13, 6);
     RestoreIntegerBits(a, &b->unk8, 0x18);
-    xxx_restore_poke_sub_4_8090314(a, &b->unk4);
+    RestoreDungeonLocation(a, &b->unk4);
 }
 
 void sub_8097270(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b)
@@ -186,7 +186,7 @@ void sub_8097270(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b)
     SaveIntegerBits(a, &b->unk12, 8);
     SaveIntegerBits(a, &b->unk13, 6);
     SaveIntegerBits(a, &b->unk8, 0x18);
-    xxx_save_poke_sub_4_80902F4(a, &b->unk4);
+    SaveDungeonLocation(a, &b->unk4);
 }
 
 void sub_80972F4(void)

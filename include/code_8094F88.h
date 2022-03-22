@@ -4,7 +4,7 @@
 struct unkStruct_203B480
 {
     u8 unk0;
-    struct unkPokeSubStruct_4 unk4;
+    struct DungeonLocation unk4;
     u32 unk8;
     u32 unkC;
     u32 unk10;

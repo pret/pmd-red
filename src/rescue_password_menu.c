@@ -66,7 +66,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = sub_8095228(0x1F);
             MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_8095228));
-            temp->unk0 = 2;
+            temp->mailType = 2;
             temp->unk20.itemIndex = ITEM_ID_NOTHING;
             sub_8031D70(0x1F, 0);
             break;

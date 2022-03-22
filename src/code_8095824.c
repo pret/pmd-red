@@ -6,8 +6,8 @@ extern struct unkStruct_203B484 *gUnknown_203B484;
 extern struct unkStruct_203B480 *gUnknown_203B480;
 extern struct unkStruct_203B48C *gUnknown_203B48C;
 
-extern void xxx_save_poke_sub_4_80902F4(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
-extern void xxx_restore_poke_sub_4_8090314(struct unkStruct_8094924*, struct unkPokeSubStruct_4*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
 extern void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet);
@@ -42,7 +42,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     RestoreIntegerBits(&backup, &temp->unk0, 2);
     RestoreIntegerBits(&backup, &temp->isLeader, 1);
     RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
-    xxx_restore_poke_sub_4_8090314(&backup, &temp->unk4);
+    RestoreDungeonLocation(&backup, &temp->unk4);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[0]);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[1]);
@@ -84,7 +84,7 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &temp->unk0, 2);
     SaveIntegerBits(&backup, &temp->isLeader, 1);
     SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
-    xxx_save_poke_sub_4_80902F4(&backup, &temp->unk4);
+    SaveDungeonLocation(&backup, &temp->unk4);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[0]);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[1]);
@@ -115,7 +115,7 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     u8 temp;
 
     RestoreIntegerBits(a, &b->unk0, 4);
-    xxx_restore_poke_sub_4_8090314(a, &b->unk4);
+    RestoreDungeonLocation(a, &b->unk4);
     RestoreIntegerBits(a, &b->unk8, 0x18);
     RestoreIntegerBits(a, &b->unkC, 0x9);
     RestoreIntegerBits(a, &b->unk10, 0x20);
@@ -140,7 +140,7 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     zero = 0;
 
     SaveIntegerBits(a, &b->unk0, 4);
-    xxx_save_poke_sub_4_80902F4(a, &b->unk4);
+    SaveDungeonLocation(a, &b->unk4);
     SaveIntegerBits(a, &b->unk8, 0x18);
     SaveIntegerBits(a, &b->unkC, 0x9);
     SaveIntegerBits(a, &b->unk10, 0x20);

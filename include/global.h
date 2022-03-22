@@ -32,4 +32,9 @@
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+struct DungeonLocation {
+    u8 dungeonIndex;
+    u8 dungeonFloor;
+};
+
 #endif // GUARD_GLOBAL_H

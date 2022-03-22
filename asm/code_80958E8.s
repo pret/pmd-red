@@ -2019,7 +2019,7 @@ sub_80969D0:
 _080969DA:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r1, r0, 0
 	ldrb r0, [r1, 0x4]
 	cmp r0, r6
@@ -2054,7 +2054,7 @@ sub_8096A08:
 _08096A14:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x4]
 	cmp r0, r5
@@ -2139,8 +2139,8 @@ _08096AAE:
 	bx r1
 	thumb_func_end sub_8096A78
 
-	thumb_func_start sub_8096AB4
-sub_8096AB4:
+	thumb_func_start GetJobSlotInfo
+GetJobSlotInfo:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08096AC8
@@ -2153,7 +2153,7 @@ sub_8096AB4:
 	bx lr
 	.align 2, 0
 _08096AC8: .4byte gUnknown_203B490
-	thumb_func_end sub_8096AB4
+	thumb_func_end GetJobSlotInfo
 
 	thumb_func_start IsJobSlotEmpty
 IsJobSlotEmpty:
@@ -2191,7 +2191,7 @@ sub_8096AF8:
 	lsrs r0, 24
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r3, r0, 0
 	movs r1, 0
 	strb r1, [r5]
@@ -2275,7 +2275,7 @@ sub_8096B98:
 _08096BA0:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r1, r0, 0
 	ldrb r0, [r1]
 	cmp r0, 0x6
