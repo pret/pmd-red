@@ -16,9 +16,8 @@ struct unkStruct_203B2FC
     s16 unkE;
     u8 unk10;
     u8 fill11[0x30 - 0x11];
-    u8 unk30;
-    u8 fill31[3];
-    struct WonderMail *unk34;
+    u8 jobSlot;
+    struct WonderMail *jobInfo;
     struct OpenedFile *faceFile;
     u8 *faceData;
     u16 unk40;
@@ -76,16 +75,16 @@ extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
 void sub_802DE44(void);
 void sub_802DE60(void);
-struct WonderMail *sub_8096AB4(u8);
+struct WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
 extern void sub_803C21C(struct WonderMail *, u32 *);
 
-u32 sub_802DB28(u8 param_1, u8 param_2)
+u32 sub_802DB28(u8 jobSlot, u8 param_2)
 {
   char local_18 [8];
   
-  sub_8096AF8(local_18,param_1,param_2);
+  sub_8096AF8(local_18,jobSlot,param_2);
   if (local_18[0] == '\0') {
       return 0;
   }
@@ -93,11 +92,11 @@ u32 sub_802DB28(u8 param_1, u8 param_2)
     ResetUnusedInputStruct();
     sub_800641C(0,1,1);
     gUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC),8);
-    gUnknown_203B2FC->unk30 = param_1;
-    gUnknown_203B2FC->unk34 = sub_8096AB4(param_1);
+    gUnknown_203B2FC->jobSlot = jobSlot;
+    gUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlot);
     sub_8096EEC();
-    sub_803C21C(gUnknown_203B2FC->unk34,&gUnknown_203B2FC->unk8);
-    gUnknown_203B2FC->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B2FC->unk34->clientSpecies);
+    sub_803C21C(gUnknown_203B2FC->jobInfo,&gUnknown_203B2FC->unk8);
+    gUnknown_203B2FC->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B2FC->jobInfo->clientSpecies);
     gUnknown_203B2FC->faceData = NULL;
     gUnknown_203B2FC->unk44 = 0;
     gUnknown_203B2FC->unk45 = 0;
@@ -117,7 +116,7 @@ u32 sub_802DBD4(void)
     switch(gUnknown_203B2FC->state)
     {
         case 7:
-            gUnknown_203B2FC->unk34->mailType = 7;
+            gUnknown_203B2FC->jobInfo->mailType = 7;
             return 3;
         case 6:
             sub_802DE44();
@@ -173,16 +172,16 @@ void sub_802DC9C(void)
   
   switch(gUnknown_203B2FC->state) {
       case 0:
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8,gUnknown_203B2FC->unk34->clientSpecies);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8,gUnknown_203B2FC->unk34->clientSpecies);
-        speciesText = GetMonSpecies(gUnknown_203B2FC->unk34->clientSpecies);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8,gUnknown_203B2FC->jobInfo->clientSpecies);
+        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8,gUnknown_203B2FC->jobInfo->clientSpecies);
+        speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->clientSpecies);
         strcpy(gUnknown_202E1C8 + 0xfffffdd0,speciesText);
-        speciesText = GetMonSpecies(gUnknown_203B2FC->unk34->targetSpecies);
+        speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->targetSpecies);
         strcpy(gUnknown_202E1C8 + 0xfffffe20,speciesText);
-        UnlockExclusivePokemon(gUnknown_203B2FC->unk34->clientSpecies);
-        sub_8090DC4(gUnknown_202DE58,gUnknown_203B2FC->unk34->targetItem,0);
+        UnlockExclusivePokemon(gUnknown_203B2FC->jobInfo->clientSpecies);
+        sub_8090DC4(gUnknown_202DE58,gUnknown_203B2FC->jobInfo->targetItem,0);
         gUnknown_203B2FC->fallbackState = 6;
-        switch(gUnknown_203B2FC->unk34->missionType) {
+        switch(gUnknown_203B2FC->jobInfo->missionType) {
             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
                 sub_802DC28(5);
                 break;
@@ -191,11 +190,11 @@ void sub_802DC9C(void)
                 break;
             case WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET:
                 sub_802DC28(2);
-                UnlockExclusivePokemon(gUnknown_203B2FC->unk34->targetSpecies);
+                UnlockExclusivePokemon(gUnknown_203B2FC->jobInfo->targetSpecies);
                 break;
             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:
                 sub_802DC28(3);
-                UnlockExclusivePokemon(gUnknown_203B2FC->unk34->targetSpecies);
+                UnlockExclusivePokemon(gUnknown_203B2FC->jobInfo->targetSpecies);
                 break;
             default:
             case WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT:
@@ -216,7 +215,7 @@ void sub_802DC9C(void)
         sub_80141B4(gWonderMailClientItemDelivered1,0,&gUnknown_203B2FC->faceFile,0x10d);
         break;
       case 4:
-        index = FindItemInInventory(gUnknown_203B2FC->unk34->targetItem);
+        index = FindItemInInventory(gUnknown_203B2FC->jobInfo->targetItem);
         if (index != -1) {
           ShiftItemsDownFrom(index);
           FillInventoryGaps();

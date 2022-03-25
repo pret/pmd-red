@@ -19,12 +19,6 @@ struct Offense {
     u8 def[2];
 };
 
-struct unkPokeSubStruct_4 {
-    u8 unk4;
-    u8 unk5;
-    u16 fill6;
-};
-
 struct unkPokeSubStruct_C
 {
     u8 unk0;
@@ -34,21 +28,21 @@ struct unkPokeSubStruct_C
 struct PokemonStruct
 {
     // size: 0x58
-    u16 unk0; // recruited??
-    u8 unk2;
-    u8 unkHasNextStage;  // set to a random value?
-    struct unkPokeSubStruct_4 unk4;
+    /* 0x0 */ u16 unk0; // recruited??
+    /* 0x1 */ bool8 isLeader;
+    /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
+    /* 0x4 */ struct DungeonLocation unk4;
     /* 0x8 */ s16 speciesNum; // species #
-    struct unkPokeSubStruct_C unkC[2];
+    /* 0xC */ struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
     /* 0x16 */ u16 pokeHP; // HP
     /* 0x18 */ struct Offense offense;
-    u32 unk1C;
-    u32 IQSkills;
-    u8 unk24;
-    u8 fill25[3];
-    struct HeldItem heldItem;
-    struct PokemonMove moves[MAX_MON_MOVES];
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 IQSkills;
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 fill25[3];
+    /* 0x28 */ struct HeldItem heldItem;
+    /* 0x2C */ struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
 };
 
@@ -76,9 +70,9 @@ struct PokemonStruct2
 {
     // size 0x68
     u16 unk0;  // corresponds to unk0 inPokemonStruct
-    u8 unk2;   // unk2
+    bool8 isLeader;   // unk2
     u8 unkHasNextStage;   // unk3
-    struct unkPokeSubStruct_4 unk4;  // unk4
+    struct DungeonLocation unk4;  // unk4
     u16 IQ;    // IQ (other offset)
     u16 unkA;
     u16 unkC;

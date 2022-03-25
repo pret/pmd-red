@@ -662,7 +662,7 @@ sub_802DAA8:
 	ldr r4, _0802DAD0
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
-	bl sub_8096AB4
+	bl GetJobSlotInfo
 	adds r1, r0, 0
 	ldr r4, [r4]
 	ldrb r0, [r4, 0x9]

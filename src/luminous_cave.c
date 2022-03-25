@@ -97,7 +97,6 @@ extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
 void xxx_call_fade_out_bgm(u16 speed);
 void sub_801199C(u16 songIndex);
-void ClearItemSlotAt(u32 index);
 void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed);
 void sub_80977D0(void);
 void PlaySound(u32);

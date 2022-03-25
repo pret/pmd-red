@@ -251,7 +251,7 @@ extern void sub_801CB5C(u32);
 extern void sub_801CCD8(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
-extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
 extern u8 sub_809539C(u32, u32);
 
 
@@ -829,7 +829,7 @@ void HandleThankYouMailPasswordMenu(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp.unk0))
+        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp))
         {
             case 0x11:
                 // Wrong password
@@ -851,7 +851,7 @@ void HandleThankYouMailPasswordMenu(void)
                 uVar1 = sub_809539C(4,temp.unk10);
                 puVar5 = sub_8095228(uVar1);
                 *puVar5 = temp;
-                puVar5->unk0 = 6;
+                puVar5->mailType = 6;
                 gUnknown_203B2C4->unk430 = temp.unk10;
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_SUCCESS);
                 break;
@@ -1423,7 +1423,7 @@ void UpdateThankYouMailText(void)
         else
             gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
         gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
-        gUnknown_203B2C4->unk53C.teamRankPtsReward = sub_803C200(&puVar4->unk4, 0); // unk560
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = sub_803C200(&puVar4->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C

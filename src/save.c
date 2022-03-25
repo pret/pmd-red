@@ -171,7 +171,7 @@ extern void sub_800135C(void);
 extern u32 GetGameOptions(void);
 extern void InitializeGameOptions(u8 r0);
 extern u8 *sub_80950F8(void);
-extern void sub_80958E4(u8 *a, u32 b);
+extern void sub_80958E4(u32 *a, u32 b);
 extern u32 sub_80958F8(void);
 extern void sub_8095900(void);
 extern void sub_80972F4(void);
@@ -529,7 +529,7 @@ u32 sub_80121E0(u32 r0)
 
     string = sub_8011C4C();
     strncpy(r4->unk4, string, ARRAY_COUNT(r4->unk4));
-    sub_80958E4((u8 *)r4 + 32, 0);
+    sub_80958E4(&r4->unk20, 0);
     temp3 = WriteSaveSector(&temp, (u8 *)r4, sizeof(struct unk_struct));
     MemoryFree(r4);
     return temp3;

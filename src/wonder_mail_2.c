@@ -386,8 +386,8 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
         iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-        sub_803C37C(&iVar3->unk4, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = sub_803C200(&iVar3->unk4, 0);
+        sub_803C37C(&iVar3->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = sub_803C200(&iVar3->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = 0;
         gUnknown_203B2C8->unk114.itemRewards[2] = 0;
         gUnknown_203B2C8->unk114.numItems = 10;
@@ -447,7 +447,7 @@ void sub_802B5B8(void)
   if (sub_80144A4(&temp) == 0) {
     uVar2 = sub_8011C34();
     puVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-    puVar3->unk0 = 4;
+    puVar3->mailType = 4;
     puVar3->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);

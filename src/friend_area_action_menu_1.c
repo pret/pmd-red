@@ -43,10 +43,128 @@ extern u32 sub_801F194(void);
 
 u32 sub_8027E18(struct PokemonStruct *);
 u8 sub_8027E4C(struct PokemonStruct *r0);
+
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
+
+extern u32 sub_8023A94(u32);
+extern bool8 sub_808D750(s16 index_);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern void sub_808ED00();
+extern s16 sub_8023B44(void);
+extern void sub_8023C60(void);
+
+void sub_80277FC(void)
+{
+  struct PokemonStruct *iVar4;
+
+  switch(sub_8023A94(1)) {
+      case 0:
+      case 1:
+        break;
+      case 3:
+        gUnknown_203B2BC->targetPoke = sub_8023B44();
+        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        gUnknown_203B2BC->unk18 = iVar4;
+        gUnknown_203B2BC->unk1C = iVar4->isLeader;
+        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        SetFriendAreaActionMenuState(3);
+        break;
+      case 4:
+        gUnknown_203B2BC->targetPoke = sub_8023B44();
+        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        gUnknown_203B2BC->unk18 = iVar4;
+        gUnknown_203B2BC->unk1C = iVar4->isLeader;
+        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        SetFriendAreaActionMenuState(4);
+        break;
+      case 2:
+        sub_8023C60();
+        SetFriendAreaActionMenuState(0x11);
+        break;
+  }
+}
+
+void sub_80278B4(void)
+{
+  struct PokemonStruct *playerStruct;
+  struct PokemonStruct *puVar3;
+  struct PokemonStruct *iVar4;
+  int local_c;
+
+  local_c = 0;
+  sub_8023A94(0);
+  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == '\0') && (sub_8013114(&gUnknown_203B2BC->unk7C,&local_c), local_c != 1)) {
+    gUnknown_203B2BC->unk70 = local_c;
+  }
+  switch(local_c) {
+      case 6:
+        if (sub_808D750(gUnknown_203B2BC->targetPoke) != '\0') {
+#ifdef NONMATCHING
+            puVar3 = &gRecruiedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+#else
+        register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2BC->targetPoke]);
+        struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
+        size_t addr = offset + (size_t)p;
+        puVar3 = (struct PokemonStruct*)addr;
+#endif
+          puVar3->unk0 |= 2;
+          nullsub_104();
+        }
+        sub_808ED00();
+        SetFriendAreaActionMenuState(2);
+        break;
+      case 7:
+        gUnknown_203B2BC->unk18->unk0 &= 0xfffd;
+        nullsub_104();
+        sub_808ED00();
+        SetFriendAreaActionMenuState(2);
+        break;
+      case 8:
+        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        playerStruct = GetPlayerPokemonStruct();
+        if (!iVar4->isLeader) {
+          playerStruct->isLeader = FALSE;
+          iVar4->isLeader = TRUE;
+          nullsub_104();
+        }
+        sub_808ED00();
+        SetFriendAreaActionMenuState(2);
+        break;
+      case 9:
+        SetFriendAreaActionMenuState(8);
+        break;
+      case 0xc:
+        SetFriendAreaActionMenuState(0xe);
+        break;
+      case 10:
+        SetFriendAreaActionMenuState(10);
+        break;
+      case 0xb:
+        PlaySound(0x14d);
+        if (gUnknown_203B2BC->unk14.itemIndex != ITEM_ID_NOTHING) {
+          AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
+        }
+        FillInventoryGaps();
+        gUnknown_203B2BC->unk14.itemIndex = 0;
+        gUnknown_203B2BC->unk14.numItems = 0;
+        GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        nullsub_104();
+        SetFriendAreaActionMenuState(2);
+        break;
+      case 4:
+        SetFriendAreaActionMenuState(4);
+        break;
+      case 5:
+        SetFriendAreaActionMenuState(5);
+        break;
+      case 1:
+        SetFriendAreaActionMenuState(2);
+        break;
+  }
+}
 
 void sub_8027A40(void)
 {
@@ -79,7 +197,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->unk18->unk4.unk4 == 0x44 || gUnknown_203B2BC->unk18->unk4.unk4 == 0x45)
+    if (gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x44 || gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x45)
         return TRUE;
     else
         return FALSE;
@@ -171,7 +289,7 @@ void sub_8027BD8(void)
         ShiftItemsDownFrom(gUnknown_203B2BC->itemIndex);
         FillInventoryGaps();
         if (gUnknown_203B2BC->unk14.itemIndex != 0) {
-            sub_8091274(&gUnknown_203B2BC->unk14);
+            AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
         }
         GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->itemToGive);
         sub_801A928();
@@ -267,10 +385,10 @@ void sub_8027D40(u32 r0, struct HeldItem *heldItem)
 u32 sub_8027D9C(struct PokemonStruct *r0)
 {
     u32 var1;
-    if(r0->unk2 == 0)
+    if(r0->isLeader == 0)
     {
         var1 = 0;
-        if(r0->unk4.unk4 == 0x41)
+        if(r0->unk4.dungeonIndex == 0x41)
             var1 = 1;
             if(var1 != 0)
             {
@@ -288,10 +406,10 @@ u32 sub_8027DCC(struct PokemonStruct *r0)
     u32 var1;
     if(sub_808D3BC() != r0)
         if(sub_808D3F8() != r0)
-            if(r0->unk2 == 0)
+            if(r0->isLeader == 0)
             {
                 var1 = 0;
-                if(r0->unk4.unk4 == 0x41)
+                if(r0->unk4.dungeonIndex == 0x41)
                     var1 = 1;
                 if(var1 != 0)
                 {
@@ -345,7 +463,7 @@ void sub_8027EB8(void)
     {
         case 1:
             PlaySound(0x14d);
-            sub_8091274(&gUnknown_203B2BC->unk14);
+            AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
             FillInventoryGaps();
             gUnknown_203B2BC->unk14.itemIndex = 0;
             gUnknown_203B2BC->unk14.numItems = 0;

@@ -54,7 +54,7 @@ extern bool8 sub_8013938(void *);
 extern void sub_8013660(void *);
 extern void PlayMenuSoundEffect(u32);
 extern u32 GetKeyPress(void *);
-extern u8 sub_8097710(u8);
+extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();
 extern s16 sub_8097880();
@@ -202,30 +202,31 @@ void sub_8032084(void)
 }
 #endif
 
-// Uses 1 too many regs
+// Mostly matches except around the switch
 #ifdef NONMATCHING
 void DisplayAdventureLog(void)
 {
   s32 counter;
-  s32 iVar5;
-  u32 uVar6;
+  s32 r4; // r4
+  s32 r6; // r6
   u8 temp;
   
   sub_8008C54(gAdventureLog->unk34);
   sub_80073B8(gAdventureLog->unk34);
-  iVar5 = gAdventureLog->currPage * 8;
-  iVar5 += 10;
+  r4 = gAdventureLog->currPage * 8;
+  r6 = r4;
+  r6 += 10;
   // Draw Header
-  xxx_call_draw_string(iVar5, 0, gAdventureLogHeaderText, gAdventureLog->unk34, 0);
-  iVar5 += 4;
-  iVar5 += gAdventureLog->unk9E * 8;
+  xxx_call_draw_string(r6, 0, gAdventureLogHeaderText, gAdventureLog->unk34, 0);
+  r4 += 4;
+  r6 = r4 + gAdventureLog->unk9E * 8;
   // Draw Page #
-  sub_8012BC4(iVar5, 0, gAdventureLog->currPage + 1, 1, 7, gAdventureLog->unk34);
-  counter = 0;
-  do {
-    uVar6 = gAdventureLog->currPage * gAdventureLog->unk1C + counter;
-    temp = uVar6; // Having another var in middle gets close (does a u8 cast)
-    if(sub_8097710(temp) != 0){
+  sub_8012BC4(r6, 0, gAdventureLog->currPage + 1, 1, 7, gAdventureLog->unk34);
+
+  for(counter = 0; counter < gAdventureLog->unk1A; counter++)
+  {
+    temp = gAdventureLog->currPage * gAdventureLog->unk1C + counter;
+    if(sub_8097710(temp)){
         switch(temp) {
             case 0xc:
                 gUnknown_202DE30 = sub_80978B8();
@@ -248,16 +249,15 @@ void DisplayAdventureLog(void)
             default:
                 break;
         }
-        xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(uVar6), gAdventureLog->unk34, 0);
+        xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
     }
     else
     {
         // Draw the ?????????? across the row
         xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), gUnknown_80E2030, gAdventureLog->unk34, 0);
     }
-    counter++;
-  } while(counter < gAdventureLog->unk1A);
-    sub_80073E0(gAdventureLog->unk34);
+   }
+   sub_80073E0(gAdventureLog->unk34);
 }
 #else
 NAKED

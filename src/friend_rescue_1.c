@@ -8,6 +8,7 @@
 #include "friend_rescue.h"
 #include "sub_8095228.h"
 #include "item.h"
+#include "code_8094F88.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern u8 *gUnknown_203B484;
@@ -81,10 +82,10 @@ extern void sub_8023DA4(void);
 extern void sub_8035D1C(void);
 extern u16 sub_8023B44(void);
 
-extern u32 sub_8039068(u32, u8 *r1, u8 *r0);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
 extern void sub_8095274(u32);
-extern void sub_80951BC(u8 *r0);
-extern void sub_80951FC(u8 *r0);
+extern void sub_80951BC(struct unkStruct_8095228 *r0);
+extern void sub_80951FC(struct unkStruct_8095228 *r0);
 extern u8 sub_809539C(u32, u32);
 extern u8 sub_800D588(void);
 extern u32 sub_8095324(u32);
@@ -454,7 +455,7 @@ void sub_8033DBC(void)
                     default:
                         break;
                 }
-                switch(sub_8039068(input_var, gUnknown_203B33C->passwordBuffer, &temp.unk0))
+                switch(sub_8039068(input_var, gUnknown_203B33C->passwordBuffer, &temp))
                 {
                     case 17:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
@@ -470,8 +471,8 @@ void sub_8033DBC(void)
                         break;
                     case 22:
                         sub_8095274(temp.unk10);
-                        temp.unk0 = 2; // Some sort of Ack?
-                        sub_80951BC(&temp.unk0);
+                        temp.mailType = 2;
+                        sub_80951BC(&temp);
                         sub_80141B4(gUnknown_80E4928, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x16);
                         break;
@@ -484,11 +485,11 @@ void sub_8033DBC(void)
                         SetFriendRescueMenuState(8);
                         break;
                     case 23:
-                        temp.unk0 = 5; // Some sort of Ack?
-                        sub_80951FC(&temp.unk0);
+                        temp.mailType = 5;
+                        sub_80951FC(&temp);
                         temp2 = sub_8095228(sub_809539C(1, temp.unk10));
-                        temp2->unk0 = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, 0x5C);
+                        temp2->mailType = 7;
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:
@@ -1339,7 +1340,7 @@ void sub_8034D74(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x20, gUnknown_203B33C->passwordBuffer, &temp.unk0))
+                switch(sub_8039068(0x20, gUnknown_203B33C->passwordBuffer, &temp))
                 {
                     case 17:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
@@ -1356,7 +1357,7 @@ void sub_8034D74(void)
                     case 24:
                         temp2 = sub_8095228(sub_809539C(4, temp.unk10));
                         *temp2 = temp;
-                        temp2->unk0 = 6; // Some sort of Ack?
+                        temp2->mailType = 6;
                         gUnknown_203B33C->unk420 = temp.unk10;
                         SetFriendRescueMenuState(0x6D);
                         break;

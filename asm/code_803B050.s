@@ -949,7 +949,7 @@ _0803B75C: .4byte gMedichamMission
 _0803B760:
 	ldr r1, [r7, 0x8]
 	add r0, sp, 0x4
-	bl sub_8090208
+	bl PrintYellowDungeonNametoBuffer
 	b _0803B850
 _0803B76A:
 	ldr r4, _0803B780

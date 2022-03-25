@@ -104,15 +104,17 @@ bool8 IsGummiItem(u8);
 void xxx_init_unk230_substruct(u8);
 bool8 xxx_insert_unk230_80919FC(u8);
 struct HeldItem *xxx_get_inv_unk230_at_809185C(u8);
+void xxx_fill_unk230_gaps();
 struct HeldItem* xxx_get_unk250_at_8091A90(u8);
 s32 xxx_count_inv_unk230();
 u32 xxx_count_non_empty_inv_unk250_8091A48();
 void sub_8091BB4(u8);
 void sub_8090F58(void*, u8 *, struct ItemSlot *, struct unkStruct_8090F58*);
 void ShiftItemsDownFrom(s32 start);
+void ClearItemSlotAt(u32 index);
 void MoveToStorage(struct ItemSlot* slot);
 void FillInventoryGaps();
-bool8 sub_8091274(struct HeldItem* slot);
+bool8 AddHeldItemToInventory(struct HeldItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
 s32 FindItemInInventory(u8 itemIndex);
 

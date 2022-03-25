@@ -85,7 +85,7 @@ extern u8 sub_8096C08(u8 *);
 extern void sub_802C750(void);
 extern void sub_802D1A0(u32);
 extern void sub_8012EA4(u8 *, u32);
-extern void* sub_8096AB4(u8);
+extern struct WonderMail* GetJobSlotInfo(u8);
 extern void sub_803B35C(void *, u32*);
 extern void sub_802DE84(u32 *);
 extern void sub_802D73C(void);
@@ -321,7 +321,7 @@ void sub_802D2A8(void)
     sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
     break;
   case 0xf:
-    sub_803B35C(sub_8096AB4(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
+    sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
     gUnknown_203B2F8->unk14 = 3;
     sub_802DE84(&gUnknown_203B2F8->unk14);
     break;
