@@ -62,7 +62,14 @@ extern s16 sub_8097838();
 extern s16 sub_8097870();
 extern s32 sub_80977B8();
 extern s32 sub_80977F8();
-extern void xxx_call_draw_string(s32, u32, u8 *, u32, u32);
+extern void xxx_call_draw_string(s32, u32, const u8 *, u32, u32);
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
+extern void xxx_format_and_draw(u32, u32, const char *, u32, u32);
+const u8 *GetAdventureLogLine(u8 index);
+extern s32 sub_8013800(void *, s32);
 extern u32 gUnknown_202DE30;
 
 u32 CreateAdventureLogScreen(u32 param_1)
@@ -202,14 +209,13 @@ void sub_8032084(void)
 }
 #endif
 
-// Mostly matches except around the switch
-#ifdef NONMATCHING
 void DisplayAdventureLog(void)
 {
   s32 counter;
   s32 r4; // r4
   s32 r6; // r6
   u8 temp;
+  s32 v1, v2, v3, v4, v5, v6;
   
   sub_8008C54(gAdventureLog->unk34);
   sub_80073B8(gAdventureLog->unk34);
@@ -229,27 +235,38 @@ void DisplayAdventureLog(void)
     if(sub_8097710(temp)){
         switch(temp) {
             case 0xc:
-                gUnknown_202DE30 = sub_80978B8();
+                v1 = sub_80978B8();
+                gUnknown_202DE30 = (s16)v1;
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 7:
-                gUnknown_202DE30 = sub_8097880();
+                v2 = sub_8097880();
+                gUnknown_202DE30 = (s16)v2;
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 0xb:
-                gUnknown_202DE30 = sub_8097838();
+                v3 = sub_8097838();
+                gUnknown_202DE30 = (s16)v3;
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 8:
-                gUnknown_202DE30 = sub_80977B8();
+                v4 = sub_80977B8();
+                gUnknown_202DE30 = v4;
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 9:
-                gUnknown_202DE30 = sub_80977F8();
+                v5 = sub_80977F8();
+                gUnknown_202DE30 = v5;
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 10:
-                gUnknown_202DE30 = sub_8097870();
-                break;
+                v6 = sub_8097870();
+                gUnknown_202DE30 = (s16)v6;
+                // fallthrough
             default:
+                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
         }
-        xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
     }
     else
     {
@@ -259,171 +276,3 @@ void DisplayAdventureLog(void)
    }
    sub_80073E0(gAdventureLog->unk34);
 }
-#else
-NAKED
-void DisplayAdventureLog(void)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tsub sp, 0x8\n"
-	"\tldr r5, _08032158\n"
-	"\tldr r0, [r5]\n"
-	"\tldr r0, [r0, 0x34]\n"
-	"\tbl sub_8008C54\n"
-	"\tldr r0, [r5]\n"
-	"\tldr r0, [r0, 0x34]\n"
-	"\tbl sub_80073B8\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r1, 0x1E\n"
-	"\tldrsh r4, [r0, r1]\n"
-	"\tlsls r4, 3\n"
-	"\tadds r6, r4, 0\n"
-	"\tadds r6, 0xA\n"
-	"\tldr r2, _0803215C\n"
-	"\tldr r3, [r0, 0x34]\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [sp]\n"
-	"\tadds r0, r6, 0\n"
-	"\tmovs r1, 0\n"
-	"\tbl xxx_call_draw_string\n"
-	"\tadds r4, 0x4\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0x9E\n"
-	"\tldrb r0, [r0]\n"
-	"\tlsls r0, 3\n"
-	"\tadds r6, r4, r0\n"
-	"\tmovs r0, 0x1E\n"
-	"\tldrsh r2, [r1, r0]\n"
-	"\tadds r2, 0x1\n"
-	"\tmovs r0, 0x7\n"
-	"\tstr r0, [sp]\n"
-	"\tldr r0, [r1, 0x34]\n"
-	"\tstr r0, [sp, 0x4]\n"
-	"\tadds r0, r6, 0\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r3, 0x1\n"
-	"\tbl sub_8012BC4\n"
-	"\tmovs r7, 0\n"
-	"\tldr r0, [r5]\n"
-	"\tb _0803223A\n"
-	"\t.align 2, 0\n"
-"_08032158: .4byte gAdventureLog\n"
-"_0803215C: .4byte gAdventureLogHeaderText\n"
-"_08032160:\n"
-	"\tldr r5, _08032194\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r2, 0x1E\n"
-	"\tldrsh r1, [r0, r2]\n"
-	"\tmovs r2, 0x1C\n"
-	"\tldrsh r0, [r0, r2]\n"
-	"\tmuls r0, r1\n"
-	"\tadds r0, r7\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl sub_8097710\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r4, r0, 24\n"
-	"\tcmp r4, 0\n"
-	"\tbeq _0803221C\n"
-	"\tsubs r0, r6, 0x7\n"
-	"\tcmp r0, 0x5\n"
-	"\tbhi _080321EC\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, _08032198\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tmov pc, r0\n"
-	"\t.align 2, 0\n"
-"_08032194: .4byte gAdventureLog\n"
-"_08032198: .4byte _0803219C\n"
-	"\t.align 2, 0\n"
-"_0803219C:\n"
-	"\t.4byte _080321BA\n"
-	"\t.4byte _080321C6\n"
-	"\t.4byte _080321D4\n"
-	"\t.4byte _080321E0\n"
-	"\t.4byte _080321C0\n"
-	"\t.4byte _080321B4\n"
-"_080321B4:\n"
-	"\tbl sub_80978B8\n"
-	"\tb _080321E4\n"
-"_080321BA:\n"
-	"\tbl sub_8097880\n"
-	"\tb _080321E4\n"
-"_080321C0:\n"
-	"\tbl sub_8097838\n"
-	"\tb _080321E4\n"
-"_080321C6:\n"
-	"\tbl sub_80977B8\n"
-	"\tldr r1, _080321D0\n"
-	"\tb _080321EA\n"
-	"\t.align 2, 0\n"
-"_080321D0: .4byte gUnknown_202DE30\n"
-"_080321D4:\n"
-	"\tbl sub_80977F8\n"
-	"\tldr r1, _080321DC\n"
-	"\tb _080321EA\n"
-	"\t.align 2, 0\n"
-"_080321DC: .4byte gUnknown_202DE30\n"
-"_080321E0:\n"
-	"\tbl sub_8097870\n"
-"_080321E4:\n"
-	"\tldr r1, _08032214\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-"_080321EA:\n"
-	"\tstr r0, [r1]\n"
-"_080321EC:\n"
-	"\tldr r4, _08032218\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r1, r7, 0\n"
-	"\tbl sub_8013800\n"
-	"\tadds r5, r0, 0\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl GetAdventureLogLine\n"
-	"\tadds r2, r0, 0\n"
-	"\tldr r0, [r4]\n"
-	"\tldr r3, [r0, 0x34]\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [sp]\n"
-	"\tmovs r0, 0x8\n"
-	"\tadds r1, r5, 0\n"
-	"\tbl xxx_format_and_draw\n"
-	"\tb _08032234\n"
-	"\t.align 2, 0\n"
-"_08032214: .4byte gUnknown_202DE30\n"
-"_08032218: .4byte gAdventureLog\n"
-"_0803221C:\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r1, r7, 0\n"
-	"\tbl sub_8013800\n"
-	"\tadds r1, r0, 0\n"
-	"\tldr r2, _08032254\n"
-	"\tldr r0, [r5]\n"
-	"\tldr r3, [r0, 0x34]\n"
-	"\tstr r4, [sp]\n"
-	"\tmovs r0, 0x8\n"
-	"\tbl xxx_call_draw_string\n"
-"_08032234:\n"
-	"\tadds r7, 0x1\n"
-	"\tldr r0, _08032258\n"
-	"\tldr r0, [r0]\n"
-"_0803223A:\n"
-	"\tmovs r1, 0x1A\n"
-	"\tldrsh r0, [r0, r1]\n"
-	"\tcmp r7, r0\n"
-	"\tblt _08032160\n"
-	"\tldr r0, _08032258\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r0, [r0, 0x34]\n"
-	"\tbl sub_80073E0\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08032254: .4byte gUnknown_80E2030\n"
-"_08032258: .4byte gAdventureLog");
-}
-#endif

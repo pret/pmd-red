@@ -208,128 +208,119 @@ void sub_802D2A8(void)
 {
   
   switch(gUnknown_203B2F8->state) {
-  case 0:
-    if (sub_80968B0(gUnknown_203B2F8->unkC) != 0) {
-        sub_802D1A0(3);
-    }
-    else
-    {
-      if (sub_8096F50(gUnknown_203B2F8->unkC) != 0) {
-        sub_802D1A0(4);
-      }
-      else
-      {
-        if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->unk10) != 0)) {
-          if (sub_802DAA8() != 0) {
-              sub_802D1A0(9);
-          }
-          else {
-              sub_802D1A0(5);
-          }
+      case 0:
+        if (sub_80968B0(gUnknown_203B2F8->unkC) != 0) {
+            sub_802D1A0(3);
         }
-        else {
-          if (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS) {
+        else if (sub_8096F50(gUnknown_203B2F8->unkC) != 0) {
+            sub_802D1A0(4);
+        }
+        else if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->unk10) != 0)) {
+            if (sub_802DAA8() != 0) {
+                sub_802D1A0(9);
+            }
+            else {
+                sub_802D1A0(5);
+            }
+        }
+        else if (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS) {
             if (sub_802DADC() != 0) {
                 sub_802D1A0(10);
             }
             else {
-               sub_802D1A0(6);
+                sub_802D1A0(6);
             }
-          }
-          else
-          {
-              sub_802D1A0(8);
-          }
         }
-      }
-    }
-    break;
-  case 1:
-    sub_802D73C();
-    sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
-    break;
-  case 3:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
-    break;
-  case 4:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFED0,0,0,0x101);
-    break;
-  case 5:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
-    break;
-  case 6:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
-    break;
-  case 7:
-    gUnknown_203B2F8->unk4 = 0xc;
-    sub_80141B4(gUnknown_80E0010,0,0,0x101);
-    break;
-  case 8:
-    gUnknown_203B2F8->unk8 = 1;
-    sub_8096A78(gUnknown_203B2F8->unkC);
-    sub_8096C80();
-    sub_8096D24();
-    if (gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) {
-      MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
-      MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
-    }
-    switch(gUnknown_203B2F8->unkC->wonderMail.dungeon)
-    {
-        // NOTE: subtract 1 from each of the case as the input??
-        case DUNGEON_ODDITY_CAVE: // 0x2B
-            sub_8097418(0x2A, 1);
-            break;
-        case DUNGEON_REMAINS_ISLAND:
-            sub_8097418(0x2B, 1);
-            break;
-        case DUNGEON_MARVELOUS_SEA:
-            sub_8097418(0x2C, 1);
-            break;
-        case DUNGEON_FANTASY_STRAIT: // 0x2E
-            sub_8097418(0x2D, 1);
-            break;
-    }
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80E0074,0,0,0x101);
-    break;
-  case 9:
-    sub_802D690();
-    sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
-    break;
-  case 10:
-    gUnknown_203B2F8->unk4 = 0xb;
-    sub_80141B4(gUnknown_80E0108,0,0,0x101);
-    break;
-  case 0xb:
-    sub_802C4C8(0,0,4);
-    break;
-  case 0xc:
-    sub_802C640(1);
-    break;
-  case 0xd:
-    sub_802C750();
-    sub_8012D60(gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
-                gUnknown_203B2F8->unk6C,2);
-    break;
-  case 0xe:
-    sub_802C750();
-    sub_8012EA4(gUnknown_203B2F8->unk78,0);
-    sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
-    break;
-  case 0xf:
-    sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
-    gUnknown_203B2F8->unk14 = 3;
-    sub_802DE84(&gUnknown_203B2F8->unk14);
-    break;
-  case 0x10:
-    sub_803B35C(gUnknown_203B2F8->unkC,&gUnknown_203B2F8->unk14);
-    gUnknown_203B2F8->unk14 = 3;
-    gUnknown_203B2F8->unk58 = 0;
-    gUnknown_203B2F8->unk64 = gUnknown_203B2F8->unkC->unk18;
-    sub_802DE84(&gUnknown_203B2F8->unk14);
+        else
+            sub_802D1A0(8);
+        break;
+      case 1:
+        sub_802D73C();
+        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        break;
+      case 3:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
+        break;
+      case 4:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFED0,0,0,0x101);
+        break;
+      case 5:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
+        break;
+      case 6:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
+        break;
+      case 7:
+        gUnknown_203B2F8->unk4 = 0xc;
+        sub_80141B4(gUnknown_80E0010,0,0,0x101);
+        break;
+      case 8:
+        gUnknown_203B2F8->unk8 = 1;
+        sub_8096A78(gUnknown_203B2F8->unkC);
+        sub_8096C80();
+        sub_8096D24();
+        if (gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) {
+          MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
+          MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
+        }
+        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon)
+        {
+            // NOTE: subtract 1 from each of the case as the input??
+            case DUNGEON_ODDITY_CAVE: // 0x2B
+                sub_8097418(0x2A, 1);
+                break;
+            case DUNGEON_REMAINS_ISLAND:
+                sub_8097418(0x2B, 1);
+                break;
+            case DUNGEON_MARVELOUS_SEA:
+                sub_8097418(0x2C, 1);
+                break;
+            case DUNGEON_FANTASY_STRAIT: // 0x2E
+                sub_8097418(0x2D, 1);
+                break;
+        }
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80E0074,0,0,0x101);
+        break;
+      case 9:
+        sub_802D690();
+        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        break;
+      case 10:
+        gUnknown_203B2F8->unk4 = 0xb;
+        sub_80141B4(gUnknown_80E0108,0,0,0x101);
+        break;
+      case 0xb:
+        sub_802C4C8(0,0,4);
+        break;
+      case 0xc:
+        sub_802C640(1);
+        break;
+      case 0xd:
+        sub_802C750();
+        sub_8012D60(gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
+                    gUnknown_203B2F8->unk6C,2);
+        break;
+      case 0xe:
+        sub_802C750();
+        sub_8012EA4(gUnknown_203B2F8->unk78,0);
+        sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
+        break;
+      case 0xf:
+        sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
+        gUnknown_203B2F8->unk14 = 3;
+        sub_802DE84(&gUnknown_203B2F8->unk14);
+        break;
+      case 0x10:
+        sub_803B35C(gUnknown_203B2F8->unkC,&gUnknown_203B2F8->unk14);
+        gUnknown_203B2F8->unk14 = 3;
+        gUnknown_203B2F8->unk58 = 0;
+        gUnknown_203B2F8->unk64 = gUnknown_203B2F8->unkC->unk18;
+        sub_802DE84(&gUnknown_203B2F8->unk14);
+        break;
   }
 }
