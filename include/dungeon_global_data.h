@@ -14,6 +14,13 @@
 
 extern struct DungeonGlobalData *gDungeonGlobalData;
 
+struct DungeonGlobalData_sub
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+};
+
 struct DungeonGlobalData
 {
     u8 unk0;
@@ -31,7 +38,9 @@ struct DungeonGlobalData
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
-    u8 fill17A[0x645 - 0x17A];
+    u8 fill17A[0x17C - 0x17A];
+    struct DungeonGlobalData_sub unk17C[0x100];
+    /* 0x57C */ u8 fill57C[0x645 - 0x57c];
     /* 0x645 */ u8 floorNumber;
     u8 fill646[0x65C - 0x646];
     u8 unk65C;
@@ -61,15 +70,15 @@ struct DungeonGlobalData
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265;
     /* 0xE266 */ u8 weatherDamageTimer; // Timer for applying sandstorm/hail damage periodically.
-    u8 fillE266[0xE26B - 0xE267];
+    u8 unkE267[0xE26B - 0xE267];
     u8 unkE26B;
     u8 weatherTurnsLeft;
-    u8 fillE26D[0xE270 - 0xE26D];
-    /* 0xE270 */ u8 startingWeather; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
-    u8 fillE271[0xE277 - 0xE271];
+    u8 fillE26D[0xE26F - 0xE26D];
+    /* 0xE26F */ u8 unkE26F[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
-    u8 fillE279[0xE8C0 - 0xE279];
+    /* 0xE279 */ u8 unkE279;
+    u8 fillE27A[0xE8C0 - 0xE27A];
     /* 0xE8C0 */ struct MapTile* mapTilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fill104C0[0x104C4 - 0x104C0];
     /* 0x104C4 */ struct MapRoom roomData[MAX_ROOM_COUNT];
@@ -101,6 +110,8 @@ struct DungeonGlobalData
     /* 0x18210 */ bool8 displayCrossEyed; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     u8 fill18211[0x18217 - 0x18211];
     u8 unk18217;
+    u8 fill18218[0x1C578 - 0x18218];
+    u8 unk1C578;
 };
 
 #endif

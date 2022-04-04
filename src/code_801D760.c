@@ -15,7 +15,13 @@ struct unkStruct_203B258
     // size: 0xA0
     u8 fill0[0x14];
     u32 unk14;
-    u8 fill18[0x34 - 0x18];
+    u16 unk18;
+    u16 unk1A;
+    u16 unk1C;
+    u16 unk1E;
+    u16 unk20;
+    u16 unk22;
+    u8 unk24[0x34 - 0x24];
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -24,6 +30,7 @@ struct unkStruct_203B258
 
 extern struct unkStruct_203B258 *gUnknown_203B258;
 extern struct UnkTextStruct2 gUnknown_80DBF88;
+extern struct UnkTextStruct2 gUnknown_80DBF70;
 
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_8013878(void *, s32);
@@ -32,6 +39,8 @@ extern u32 GetKeyPress(void *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_801DB54();
 extern void sub_801DBD4();
+extern void sub_8013984(void *);
+extern void AddMenuCursorSprite(void *);
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
@@ -401,5 +410,35 @@ u32 sub_801DA78(void)
             else {
                 return 0;
             }
+    }
+}
+
+s16 sub_801DAC0(void)
+{
+    return (gUnknown_203B258->unk1E * gUnknown_203B258->unk1C) + gUnknown_203B258->unk18;
+}
+
+void sub_801DADC(u32 r0)
+{
+    u8 r0_u8;
+    r0_u8 = r0;
+
+    gUnknown_203B258->unk22 = 0xE5;
+    sub_8013984(gUnknown_203B258);
+    sub_801DB54();
+    sub_801DBD4();
+    if(r0_u8)
+        AddMenuCursorSprite(gUnknown_203B258);
+}
+
+void sub_801DB0C(void)
+{
+    if(gUnknown_203B258 != NULL)
+    {
+        gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF70;
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B258->unk3C, 1, 1);
+        MemoryFree(gUnknown_203B258);
+        gUnknown_203B258 = NULL;
     }
 }
