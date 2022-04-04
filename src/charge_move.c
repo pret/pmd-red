@@ -3,7 +3,9 @@
 
 #include "constants/move_id.h"
 #include "constants/status.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "moves.h"
 
 struct MultiTurnChargeMove
 {
@@ -38,6 +40,26 @@ const u32 gMultiTurnChargingStatuses[10] = {
 };
 
 ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
+
+u32 sub_8057070(struct PokemonMove *move)
+{
+    u32 hitCount;
+    hitCount = GetMoveHitCount(move);
+    if(hitCount == 0)
+        return DungeonRandomRange(2, 6);
+    else
+        return hitCount;
+}
+
+bool8 MoveCausesPaused(struct PokemonMove *move)
+{
+    if(move->moveID == MOVE_FRENZY_PLANT) return TRUE;
+    if(move->moveID == MOVE_HYDRO_CANNON) return TRUE;
+    if(move->moveID == MOVE_HYPER_BEAM) return TRUE;
+    if(move->moveID == MOVE_BLAST_BURN) return TRUE;
+
+    return FALSE;
+}
 
 bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMove *move)
 {

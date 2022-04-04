@@ -18,6 +18,12 @@
 #include "trap.h"
 #include "weather.h"
 
+extern void sub_807F43C(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8078F50(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8077E4C(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8079570(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_80795C4(struct DungeonEntity *, struct DungeonEntity *);
+
 // Array indices correspond to the current dungeon tileset.
 const u8 gDungeonCamouflageTypes[76] = {
     TYPE_WATER,
@@ -97,6 +103,36 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_WATER,
     TYPE_ROCK
 };
+
+bool8 sub_805C45C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_807F43C(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_805C468(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_8078F50(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_805C474(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_8077E4C(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_805C480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_8079570(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_805C48C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_80795C4(pokemon, target);
+    return TRUE;
+}
 
 bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move)
 {

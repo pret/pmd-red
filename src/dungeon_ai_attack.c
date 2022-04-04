@@ -19,7 +19,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_random_1.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "move_util.h"

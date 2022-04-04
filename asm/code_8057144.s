@@ -248,41 +248,4 @@ _08057302:
 	bx r1
 	thumb_func_end sub_805727C
 
-	thumb_func_start sub_8057308
-sub_8057308:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805731C
-	movs r0, 0
-	b _08057340
-_0805731C:
-	cmp r4, 0
-	bne _08057324
-	movs r0, 0x1
-	b _08057340
-_08057324:
-	adds r0, r5, 0
-	movs r1, 0x26
-	bl HasAbility
-	lsls r0, 24
-	cmp r0, 0
-	bne _08057336
-	adds r0, r4, 0
-	b _08057338
-_08057336:
-	lsls r0, r4, 1
-_08057338:
-	bl RollPercentChance_2
-	lsls r0, 24
-	lsrs r0, 24
-_08057340:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057308
-
 	.align 2, 0

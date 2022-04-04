@@ -2467,7 +2467,7 @@ sub_8058C48:
 	movs r1, 0xC0
 	lsls r1, 1
 	movs r0, 0x80
-	bl sub_808411C
+	bl DungeonRandomRange
 	adds r3, r0, 0
 	ldr r0, [r4, 0x70]
 	ldrb r0, [r0, 0x9]
@@ -9927,50 +9927,5 @@ _0805C450:
 	.align 2, 0
 _0805C458: .4byte gUnknown_80FF678
 	thumb_func_end sub_805C3F8
-
-	thumb_func_start sub_805C45C
-sub_805C45C:
-	push {lr}
-	bl sub_807F43C
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C45C
-
-	thumb_func_start sub_805C468
-sub_805C468:
-	push {lr}
-	bl sub_8078F50
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C468
-
-	thumb_func_start sub_805C474
-sub_805C474:
-	push {lr}
-	bl sub_8077E4C
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C474
-
-	thumb_func_start sub_805C480
-sub_805C480:
-	push {lr}
-	bl sub_8079570
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C480
-
-	thumb_func_start sub_805C48C
-sub_805C48C:
-	push {lr}
-	bl sub_80795C4
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C48C
 
 	.align 2, 0

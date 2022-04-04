@@ -2004,7 +2004,7 @@ _0807F64E:
 _0807F654:
 	ldr r0, [r4]
 	ldr r1, [r4, 0x8]
-	bl sub_808411C
+	bl DungeonRandomRange
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _0807F6A0
@@ -2014,7 +2014,7 @@ _0807F654:
 	str r1, [r6]
 	ldr r0, [r4, 0x4]
 	ldr r1, [r4, 0xC]
-	bl sub_808411C
+	bl DungeonRandomRange
 	lsls r0, 16
 	ldrh r1, [r6]
 	orrs r1, r0
