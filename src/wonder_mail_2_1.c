@@ -51,12 +51,86 @@ extern struct unkStruct_203B2E8* gUnknown_203B2E0;
 
 u16 gUnknown_203B2EC;
 
-extern struct UnkTextStruct2 gUnknown_80DFCE4;
-extern struct UnkTextStruct2 gUnknown_80DFCFC;
-extern struct UnkTextStruct2 gUnknown_80DFD40;
-extern struct UnkTextStruct2 gUnknown_80DFD58;
-extern struct UnkTextStruct2 gUnknown_80DFD28;
-extern u8 gUnknown_80DFD14[];
+const struct UnkTextStruct2 gUnknown_80DFCE4 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFCFC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x18, 0x0E,
+    0x0E, 0x00,
+    NULL
+};
+
+const u8 gUnknown_80DFD14[] = "Job List";
+static const u8 wonder_mail_fill[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80DFD28 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFD40 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x04, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x06, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFD58 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x04, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const u8 gUnknown_80DFD70[] = "Take Job";
+const u8 gUnknown_80DFD7C[] = "Suspend";
+static const u8 wonder_mail_fill0[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80DFD8C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFDA4 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x18, 0x0e,
+    0x0e, 0x00,
+    NULL
+};
+
+const u8 gUnknown_80DFDBC[] = "RESCUE EVENT";
+static const u8 wonder_mail_fill1[] = "pksdir0";
+
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
@@ -67,7 +141,7 @@ extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
-extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
+extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_803B6D4(u32 *);
 

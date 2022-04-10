@@ -43,42 +43,67 @@ struct unkStruct_203B300
 };
 
 extern struct unkStruct_203B300 *gUnknown_203B300;
+extern u8 gUnknown_202E5D8[];
+extern u8 gUnknown_202E1C8[];
+extern u8 gUnknown_202DE58[];
+
+const struct UnkTextStruct2 gUnknown_80E016C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
 extern struct UnkTextStruct2 gUnknown_80E0248;
 extern struct UnkTextStruct2 gUnknown_80E0264;
-extern struct UnkTextStruct2 gUnknown_80E016C;
+
+ALIGNED(4) const u8 gWonderMailClientThanksForRescuingMe[] = " Thank you for rescuing me!";
+
+ALIGNED(4) const u8 gWonderMailClientThanksForRescuingThem[] = _(
+	" Thank you for rescuing\n"
+	"{COLOR_1 CYAN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gWonderMailClientEscorted[] = _(
+	" Thank you for escorting me\n"
+	"to {COLOR_1 CYAN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}! ");
+
+ALIGNED(4) const u8 gWonderMailClientItemDelivered1[] = _(
+	" Thank you for delivering\n"
+	"the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gWonderMailClientItemDelivered2[] = _(
+	" Thank you for getting me\n"
+	"the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}!");
+
+static const u8 wonder_mail_802DF88_fill[] = "pksdir0";
+
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueDescription(u32 *);
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8012A64(void *, u32);
-void sub_802DF6C(void);
-void sub_802DF88(void);
-void sub_802DF14(void);
-void sub_801317C(void);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
 extern void sub_802DC28(u32);
 extern u32 sub_802F298(void);
-extern u8 gUnknown_202E5D8[];
-extern u8 gUnknown_202E1C8[];
-extern u8 gUnknown_202DE58[];
-
-extern u8 gWonderMailClientThanksForRescuingMe[];
-extern u8 gWonderMailClientThanksForRescuingThem[];
-extern u8 gWonderMailClientEscorted[];
-extern u8 gWonderMailClientItemDelivered1[];
-extern u8 gWonderMailClientItemDelivered2[];
 extern void sub_802F204(u32 *, u32);
-extern void sub_80141B4(u8 *r0, u32, struct OpenedFile **r1, u32);
+extern void sub_80141B4(const u8 *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
-void sub_802DE44(void);
-void sub_802DE60(void);
 struct WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
 extern void sub_803C21C(struct WonderMail *, u32 *);
+
+void sub_802DE44(void);
+void sub_802DE60(void);
+void sub_802DF6C(void);
+void sub_802DF88(void);
+void sub_802DF14(void);
+void sub_801317C(void);
 
 u32 sub_802DB28(u8 jobSlot, u8 param_2)
 {

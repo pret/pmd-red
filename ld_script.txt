@@ -413,6 +413,9 @@ SECTIONS {
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);
+        src/wonder_mail_2_1.o(.rodata);
+        src/wonder_mail_3.o(.rodata);
+        src/wonder_mail_802DF88.o(.rodata);
         data/data_80DED44.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);

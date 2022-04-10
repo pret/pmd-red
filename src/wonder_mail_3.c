@@ -45,9 +45,103 @@ struct unkStruct_203B2F8
     u32 unk1E4;
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
-extern struct UnkTextStruct2 gUnknown_80DFE04;
-extern struct UnkTextStruct2 gUnknown_80DFE1C;
-extern struct UnkTextStruct2 gUnknown_80DFDD4;
+
+const struct UnkTextStruct2 gUnknown_80DFDD4 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+// Unused
+const struct UnkTextStruct2 gUnknown_80DFDEC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x03, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFE04 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x06, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80DFE1C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+// Unused
+const struct UnkTextStruct2 gUnknown_80DFE34 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+ALIGNED(4) const u8 gUnknown_80DFE4C[] = _(
+	"Are you sure you want to replace the\n"
+	"old  {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} with the new one?");
+
+ALIGNED(4) const u8 gUnknown_80DFE9C[] = _(
+	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"received.");
+
+ALIGNED(4) const u8 gUnknown_80DFED0[] = _(
+	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"received.\n"
+	"You may not receive the same one again.");
+
+ALIGNED(4) const u8 gUnknown_80DFF2C[] = _(
+	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Please receive it after completing any\n"
+	"rescue mission in progress.");
+
+ALIGNED(4) const u8 gUnknown_80DFFA4[] = 
+	"The rescue team has quicksaved in\n"
+	"a dungeon with a mission in progress.\n"
+	"Please complete the mission first.";
+
+ALIGNED(4) const u8 gUnknown_80E0010[] =
+	"The rescue team has quicksaved in\n"
+	"a dungeon with a mission in progress.\n"
+	"Mail cannot be deleted now.";
+
+ALIGNED(4) const u8 gUnknown_80E0074[] = _(
+	"Received the {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gUnknown_80E0094[] = _(
+	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Is it OK to replace the old {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}\n"
+	"with the new one?");
+
+ALIGNED(4) const u8 gUnknown_80E0108[] = _(
+	"Your {COLOR_1 LIGHT_BLUE_2}Job List{END_COLOR_TEXT_1} is full.\n"
+	"Please select and delete unwanted mail.");
+
+ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
+ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
+static const u8 wonder_mail_3_fill[] = "pksdir0";
+
+
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
@@ -66,15 +160,6 @@ extern void sub_802DA84();
 extern void sub_802D1B8();
 extern void sub_802D2A8();
 
-extern u8 gUnknown_80E0010[];
-extern u8 gUnknown_80DFFA4[];
-extern u8 gUnknown_80DFF2C[];
-extern u8 gUnknown_80DFED0[];
-extern u8 gUnknown_80DFE9C[];
-extern u8 gUnknown_80DFE4C[];
-extern u8 gUnknown_80E0108[];
-extern u8 gUnknown_80E0094[];
-extern u8 gUnknown_80E0074[];
 
 extern u8 sub_80968B0(void *);
 extern u8 sub_8096F50(void *);
@@ -95,7 +180,7 @@ extern void sub_8097418(u32, u32);
 extern void sub_802D690(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void sub_80141B4(u8 *, u32, u32, u32);
+extern void sub_80141B4(const u8 *, u32, u32, u32);
 extern void sub_8012D60(u8 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern u8 *sub_8096DE8(void);
 extern void sub_8096A78(struct unkSubStruct_203B2F8 *);
