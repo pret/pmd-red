@@ -5012,15 +5012,36 @@ gUnknown_8102810: @ 8102810
 
 	.global gUnknown_8102840
 gUnknown_8102840: @ 8102840
-	.incbin "baserom.gba", 0x102840, 0x2C
+        .4byte 0x0d000000
+        .4byte 0x000001ab
+        .4byte gUnknown_810284C
+
+	.global gUnknown_810284C
+        gUnknown_810284C:
+        .string " I am $m2!#W\n"
+        .string "The warder of ice!\0"
 
 	.global gUnknown_810286C
 gUnknown_810286C: @ 810286C
-	.incbin "baserom.gba", 0x10286C, 0x4C
+@ replacing .incbin "baserom.gba", 0x0010286c, 0x4c
+        .4byte 0x0d000000
+        .4byte 0x00000090
+        .4byte gUnknown_8102878
+
+	.global gUnknown_8102878
+        gUnknown_8102878:
+        .string " Those that enter the forest\n"
+        .string "I shall destroy with all my might!\0"
 
 	.global gUnknown_81028B8
 gUnknown_81028B8: @ 81028B8
-	.incbin "baserom.gba", 0x1028B8, 0x1C
+        .4byte 0x0d000000
+        .4byte 0x00000090
+        .4byte gUnknown_81028C4
+
+	.global gUnknown_81028C4
+        gUnknown_81028C4:
+        .string " Let us begin!\0\0"
 
 	.global gUnknown_81028D4
 gUnknown_81028D4: @ 81028D4
@@ -5040,7 +5061,15 @@ gUnknown_8102984: @ 8102984
 
 	.global gUnknown_81029B4
 gUnknown_81029B4: @ 81029B4
-	.incbin "baserom.gba", 0x1029B4, 0x64
+@ replacing .incbin "baserom.gba", 0x001029b4, 0x64
+        .4byte 0x0d000000
+        .4byte 0x00000090
+        .4byte gUnknown_81029C0
+
+	.global gUnknown_81029C0
+        gUnknown_81029C0:
+        .string " Your arrival in this frozen\n"
+        .string "forest means only one thing...#P You mean to challenge me!\0"
 
 	.global gUnknown_8102A18
 gUnknown_8102A18: @ 8102A18
@@ -5064,7 +5093,15 @@ gUnknown_8102B10: @ 8102B10
 
 	.global gUnknown_8102B1C
 gUnknown_8102B1C: @ 8102B1C
-	.incbin "baserom.gba", 0x102B1C, 0x38
+@ replacing .incbin "baserom.gba", 0x00102b1c, 0x38
+        .4byte 0x02040000
+        .4byte 0x000001aa
+        .4byte gUnknown_8102B28
+
+	.global gUnknown_8102B28
+        gUnknown_8102B28:
+        .string " Let~27s see...#W\n"
+        .string "...I wonder where we are?\0"
 
 	.global gUnknown_8102B54
 gUnknown_8102B54: @ 8102B54
@@ -5088,7 +5125,14 @@ gUnknown_8102C54: @ 8102C54
 
 	.global gUnknown_8102C98
 gUnknown_8102C98: @ 8102C98
-	.incbin "baserom.gba", 0x102C98, 0x18
+@ replacing .incbin "baserom.gba", 0x00102c98, 0x18
+        .4byte 0x0e030000
+        .4byte 0x00000006
+        .4byte gUnknown_8102CA4
+
+	.global gUnknown_8102CA4
+        gUnknown_8102CA4:
+        .string " Urrrrgh...\0"
 
 	.global gUnknown_8102CB0
 gUnknown_8102CB0: @ 8102CB0
@@ -5116,11 +5160,26 @@ gUnknown_8102DFC: @ 8102DFC
 
 	.global gUnknown_8102E2C
 gUnknown_8102E2C: @ 8102E2C
-	.incbin "baserom.gba", 0x102E2C, 0x28
+@ replacing .incbin "baserom.gba", 0x00102e2c, 0x28
+        .4byte 0x020c0000
+        .4byte 0x000001aa
+        .4byte gUnknown_8102E38
+
+	.global gUnknown_8102E38
+        gUnknown_8102E38:
+        .string " $m0!\n"
+        .string "We~27ve got to hurry!\0"
 
 	.global gUnknown_8102E54
 gUnknown_8102E54: @ 8102E54
-	.incbin "baserom.gba", 0x102E54, 0x1C
+@ replacing .incbin "baserom.gba", 0x00102e54, 0x1c
+        .4byte 0x0e030000
+        .4byte 0x00000006
+        .4byte gUnknown_8102E60
+
+	.global gUnknown_8102E60
+        gUnknown_8102E60:
+        .string " ...Be careful!\0"
 
 	.global gUnknown_8102E70
 gUnknown_8102E70: @ 8102E70
@@ -5132,7 +5191,14 @@ gUnknown_8102EBC: @ 8102EBC
 
 	.global gUnknown_8102EE0
 gUnknown_8102EE0: @ 8102EE0
-	.incbin "baserom.gba", 0x102EE0, 0x18
+@ replacing .incbin "baserom.gba", 0x00102ee0, 0x18
+        .4byte 0x0f000000
+        .4byte 0x00000041
+        .4byte gUnknown_8102EEC
+
+	.global gUnknown_8102EEC
+        gUnknown_8102EEC:
+        .string " Stay back!\0"
 
 	.global gUnknown_8102EF8
 gUnknown_8102EF8: @ 8102EF8
@@ -5152,11 +5218,25 @@ gUnknown_8102F84: @ 8102F84
 
 	.global gUnknown_8102FAC
 gUnknown_8102FAC: @ 8102FAC
-	.incbin "baserom.gba", 0x102FAC, 0x18
+@ replacing .incbin "baserom.gba", 0x00102fac, 0x18
+        .4byte 0x0f010000
+        .4byte 0x00000041
+        .4byte gUnknown_8102FB8
+
+	.global gUnknown_8102FB8
+        gUnknown_8102FB8:
+        .string " Wraaaaaah!\0"
 
 	.global gUnknown_8102FC4
 gUnknown_8102FC4: @ 8102FC4
-	.incbin "baserom.gba", 0x102FC4, 0x14
+        @ replacing .incbin "baserom.gba", 0x00102fc4, 0x14
+        .4byte 0x020c0000
+        .4byte 0x000001aa
+        .4byte gUnknown_8102FD0
+
+	.global gUnknown_8102FD0
+        gUnknown_8102FD0:
+        .string " A-$m3!\0"
 
 	.global gUnknown_8102FD8
 gUnknown_8102FD8: @ 8102FD8
@@ -5164,7 +5244,7 @@ gUnknown_8102FD8: @ 8102FD8
 
 	.global gUnknown_8103054
 gUnknown_8103054: @ 8103054
-	.incbin "baserom.gba", 0x103054, 0x84
+        .incbin "baserom.gba", 0x00103054, 0x84
 
 	.global gUnknown_81030D8
 gUnknown_81030D8: @ 81030D8
@@ -5184,15 +5264,23 @@ gUnknown_8103188: @ 8103188
 
 	.global gUnknown_8103228
 gUnknown_8103228: @ 8103228
-	.incbin "baserom.gba", 0x103228, 0xE8
+        .incbin "baserom.gba", 0x00103228, 0xe8
 
 	.global gUnknown_8103310
 gUnknown_8103310: @ 8103310
-	.incbin "baserom.gba", 0x103310, 0x30
+@ replacing .incbin "baserom.gba", 0x00103310, 0x30
+        .4byte 0x00000005
+        .4byte 0x00000000
+        .4byte gUnknown_810331C
+
+	.global gUnknown_810331C 
+        gUnknown_810331C:
+        .string "Grgaaaaaaaah!\n"
+        .string "                     \0"
 
 	.global gUnknown_8103340
 gUnknown_8103340: @ 8103340
-	.incbin "baserom.gba", 0x103340, 0x60
+        .incbin "baserom.gba", 0x00103340, 0x60
 
 	.global gUnknown_81033A0
 gUnknown_81033A0: @ 81033A0
@@ -5204,7 +5292,16 @@ gUnknown_81033AC: @ 81033AC
 
 	.global gUnknown_810343C
 gUnknown_810343C: @ 810343C
-	.incbin "baserom.gba", 0x10343C, 0x40
+@ replacing .incbin "baserom.gba", 0x0010343c, 0x40
+        .4byte 0x0d000000
+        .4byte 0x0000019b
+        .4byte gUnknown_8103448
+
+	.global gUnknown_8103448
+        gUnknown_8103448:
+        .string " Those that disturb my\n"
+        .string "sleep...#W\n"
+        .string "Shall be crushed!\0"
 
 	.global gUnknown_810347C
 gUnknown_810347C: @ 810347C
@@ -5212,7 +5309,16 @@ gUnknown_810347C: @ 810347C
 
 	.global gUnknown_8103488
 gUnknown_8103488: @ 8103488
-	.incbin "baserom.gba", 0x103488, 0x78
+        @ replacing .incbin "baserom.gba", 0x00103488, 0x78
+        .4byte 0x00000004
+        .4byte 0x00000000
+        .4byte gUnknown_8103494
+
+	.global gUnknown_8103494
+        gUnknown_8103494:
+        .string "#+This appears to be the deepest level.#P"
+        .string "#+It~27s impossible to go any farther.#W\n"
+        .string "#+It~27s time to go back.\0"
 
 	.global gUnknown_8103500
 gUnknown_8103500: @ 8103500
@@ -5228,7 +5334,16 @@ gUnknown_8103578: @ 8103578
 
 	.global gUnknown_81035D4
 gUnknown_81035D4: @ 81035D4
-	.incbin "baserom.gba", 0x1035D4, 0x44
+        @ replacing .incbin "baserom.gba", 0x001035d4, 0x44
+        .4byte 0x0d800000
+        .4byte 0x0000019c
+        .4byte gUnknown_81035E0
+
+	.global gUnknown_81035E0
+        gUnknown_81035E0:
+        .string " Indeed I am.#W\n"
+        .string "The sky is my domain.#P Depart at once!\0"
+        .align 2,0
 
 	.global gUnknown_8103618
 gUnknown_8103618: @ 8103618
@@ -5236,7 +5351,15 @@ gUnknown_8103618: @ 8103618
 
 	.global gUnknown_810367C
 gUnknown_810367C: @ 810367C
-	.incbin "baserom.gba", 0x10367C, 0x14
+@ replacing .incbin "baserom.gba", 0x0010367c, 0x14
+        .4byte 0x0d800000
+        .4byte 0x0000019c
+        .4byte gUnknown_8103688
+
+	.global gUnknown_8103688
+        gUnknown_8103688:
+        .string " Never!\0"
+        .align 2,0
 
 	.global gUnknown_8103690
 gUnknown_8103690: @ 8103690
@@ -5248,7 +5371,16 @@ gUnknown_81036C8: @ 81036C8
 
 	.global gUnknown_81037A0
 gUnknown_81037A0: @ 81037A0
-	.incbin "baserom.gba", 0x1037A0, 0x34
+@ replacing .incbin "baserom.gba", 0x001037a0, 0x34
+        .4byte 0x0d000000
+        .4byte 0x0000019c
+        .4byte gUnknown_81037AC
+
+	.global gUnknown_81037AC
+        gUnknown_81037AC:
+        .string " And the opposite shall also\n"
+        .string "hold true!\0"
+        .align 2,0
 
 	.global gUnknown_81037D4
 gUnknown_81037D4: @ 81037D4
@@ -5264,7 +5396,16 @@ gUnknown_8103844: @ 8103844
 
 	.global gUnknown_8103874
 gUnknown_8103874: @ 8103874
-	.incbin "baserom.gba", 0x103874, 0x34
+@ replacing .incbin "baserom.gba", 0x00103874, 0x34
+        .4byte 0x0d000000
+        .4byte 0x0000019c
+        .4byte gUnknown_8103880
+
+	.global gUnknown_8103880
+        gUnknown_8103880:
+        .string " This is no place for the\n"
+        .string "likes of you!\0"
+        .align 2,0
 
 	.global gUnknown_81038A8
 gUnknown_81038A8: @ 81038A8

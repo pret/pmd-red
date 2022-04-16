@@ -68,7 +68,7 @@ struct DungeonGlobalData
     s16 unkE23E;
     u8 fillE240[0xE264 - 0xE240];
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
-    u8 unkE265;
+    u8 unkE265; // Uses the weather constants in weather.h
     /* 0xE266 */ u8 weatherDamageTimer; // Timer for applying sandstorm/hail damage periodically.
     u8 unkE267[0xE26B - 0xE267];
     u8 unkE26B;

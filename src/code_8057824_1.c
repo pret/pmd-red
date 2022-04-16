@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/direction.h"
+#include "constants/weather.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
 #include "dungeon_util.h"
@@ -996,7 +997,7 @@ void ArticunoPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_810272C);
   sub_803E708(10,0x46);
   PlaySoundEffect(0); // snow flurry
-  gDungeonGlobalData->unkE265 = 7;
+  gDungeonGlobalData->unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
@@ -1031,7 +1032,7 @@ void ArticunoReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeaderEntity();
   ArticunoEntity = sub_8085680(0xd);
-  gDungeonGlobalData->unkE265 = 7;
+  gDungeonGlobalData->unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gUnknown_81028D4);
@@ -1058,7 +1059,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_80866C4(&gUnknown_8102A9C);
   }
   else {
-    gDungeonGlobalData->unkE265 = 7;
+    gDungeonGlobalData->unkE265 = WEATHER_SNOW;
     sub_807EAA0(0,1);
     ArticunoScreenFlash();
     sub_8086738();
@@ -2421,7 +2422,7 @@ void RaikouPreFightDialogue(void)
   DisplayDungeonDialogue(&gUnknown_8104450);
   RaikouScreenFlash();
   DisplayDungeonDialogue(&gUnknown_81044B4);
-  gDungeonGlobalData->unkE265 = 4;
+  gDungeonGlobalData->unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
   DisplayDungeonDialogue(&gUnknown_8104510);
@@ -2443,7 +2444,7 @@ void RaikouPreFightDialogue1(void)
 
   LeaderEntity = xxx_call_GetLeaderEntity();
   RaikouEntity = sub_8085680(0x13);
-  gDungeonGlobalData->unkE265 = 4;
+  gDungeonGlobalData->unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(&gUnknown_81045F8);
@@ -2467,7 +2468,7 @@ void RaikouPreFightDialogue2(void)
     sub_80866C4(&gUnknown_8104778);
   }
   else {
-    gDungeonGlobalData->unkE265 = 4;
+    gDungeonGlobalData->unkE265 = WEATHER_RAIN;
     sub_807EAA0(0,1);
     DisplayDungeonDialogue(&gUnknown_81046CC);
     RaikouScreenFlash();
