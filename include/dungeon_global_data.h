@@ -88,7 +88,14 @@ struct DungeonGlobalData
     /* 0x10884 */ struct Position roomExits[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
     u8 fill11444[0x1356C - 0x11484];
     u8 unk1356C;
-    u8 fill1356D[0x1357C - 0x1356D];
+    u8 fill1356D[0x13570 - 0x1356D];
+    /* 0x13570 */ u8 unk13570;
+    u8 fill13571[0x13574 - 0x13571];
+    /* 0x13574 */ u16 unk13574;
+    /* 0x13576 */ u16 unk13576;
+    /* 0x13578 */ u8 unk13578;
+    /* 0x13579 */ u8 unk13579;
+    u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ struct DungeonEntity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ struct DungeonEntity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ struct DungeonEntity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon

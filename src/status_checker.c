@@ -1,18 +1,21 @@
 #include "global.h"
 #include "status_checker.h"
 
+#include "code_80521D0.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "dungeon_engine.h"
 #include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "map.h"
 #include "moves.h"
 #include "number_util.h"
+#include "pokemon.h"
 #include "status_checks_1.h"
 #include "tile_types.h"
 #include "trap.h"
@@ -23,6 +26,40 @@ extern void sub_8078F50(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8077E4C(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8079570(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_80795C4(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_807DC68(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8077BB4(struct DungeonEntity *, struct DungeonEntity *, u8);
+extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
+
+extern u32 sub_803D73C(u32);
+extern void sub_8045C28(struct ItemSlot *, u8 , u8 *);
+extern void sub_80464C8(struct DungeonEntity *, struct Position *, struct ItemSlot *);
+extern void sub_8068FE0(struct DungeonEntity *, u32, struct DungeonEntity *r2);
+extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, const char []);
+extern void sub_806F370(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
+extern void sub_807FC3C(struct Position *, u32, u32);
+extern void sub_8042A64(struct Position *);
+extern void sub_8040A84(void);
+extern void sub_8049ED4(void);
+extern void sub_80498A8(s32, s32);
+extern void sub_806CF60();
+extern void sub_8042A54(struct Position *);
+extern void sub_8049BB0(s32, s32);
+extern s16 sub_8057600(void*, u32);
+
+extern u8 *gUnknown_80FF678[];
+extern u8 *gUnknown_80FD0B8[];
+extern u8 *gUnknown_80FD0B4[];
+extern u8 *gUnknown_80FD454[];
+extern s16 gUnknown_80F4FC6;
+
+struct Position_Alt
+{
+    union PositionAlt
+    {
+        struct Position norm;
+        u32 full_bits;
+    } temp;
+};
 
 // Array indices correspond to the current dungeon tileset.
 const u8 gDungeonCamouflageTypes[76] = {
@@ -103,6 +140,126 @@ const u8 gDungeonCamouflageTypes[76] = {
     TYPE_WATER,
     TYPE_ROCK
 };
+
+bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_80522F4(pokemon, target, *gUnknown_80FD454);
+    return FALSE;
+}
+
+bool8 sub_805C1F8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_8077BB4(pokemon, target, 1);
+    return TRUE;
+}
+
+bool8 sub_805C208(struct DungeonEntity *param_1,struct DungeonEntity *param_2,struct PokemonMove *param_3,u32 param_4)
+{
+  u32 uVar3;
+  u8 local_24;
+
+  local_24 = 0;
+  uVar3 = GetSizeOrbDmg(param_2->entityData->transformSpecies);
+  sub_806F370(param_1,param_2,uVar3,1,&local_24,GetMoveType(param_3),sub_8057600(param_3,param_4),0,1,0);
+
+  local_24 = local_24 == 0;
+  return local_24;
+}
+
+bool8 sub_805C288(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_8078A58(pokemon, target, gUnknown_80F4FC6, 0);
+    return TRUE;
+}
+
+bool8 sub_805C2A0(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    sub_807DC68(pokemon, target);
+    return TRUE;
+}
+
+bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target)
+{
+  struct MapTile *tileToFill;
+  struct DungeonEntityData *iVar5;
+  int y;
+  bool8 didWork; // TODO better name for this... signifies that orb worked
+  int x;
+  u16 cast_x;
+  u32 cast_y;
+  struct Position_Alt tileCoords;
+
+  didWork = FALSE;
+  iVar5 = target->entityData;
+  if (IsBossBattle()) {
+    SendMessage(pokemon,*gUnknown_80FD0B8);
+    return FALSE;
+  }
+  else
+  {
+    // Calcuate the coordinates of the tile in front of the user
+    cast_x = target->posWorld.x + gAdjacentTileOffsets[iVar5->action.facingDir].x;
+    tileCoords.temp.full_bits = (tileCoords.temp.full_bits & 0xffff0000) | cast_x;
+
+    cast_y = ((u16)(target->posWorld.y + gAdjacentTileOffsets[iVar5->action.facingDir].y)) << 0x10;
+    tileCoords.temp.full_bits = (tileCoords.temp.full_bits & 0x0000ffff) | cast_y;
+
+    sub_8042A54((struct Position *)&tileCoords);
+    tileToFill = GetMapTile_2(tileCoords.temp.norm.x,tileCoords.temp.norm.y);
+    if ((tileToFill->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) == TILE_TYPE_LIQUID) {
+      tileToFill->tileType = (tileToFill->tileType & ~(TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) | TILE_TYPE_FLOOR;
+
+      for(y = -1; y < 2; y++)
+        for(x = -1; x < 2; x++)
+          sub_80498A8(tileCoords.temp.norm.x + x, tileCoords.temp.norm.y + y);
+      didWork = TRUE;
+      sub_806CF60();
+    }
+
+    for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
+      for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
+          sub_8049BB0(x,y);
+
+    if (didWork) {
+        sub_8042A64((struct Position *)&tileCoords);
+        sub_80522F4(pokemon,target,*gUnknown_80FD0B4);
+    }
+    else {
+        sub_80522F4(pokemon,target,*gUnknown_80FD0B8);
+    }
+    sub_8040A84();
+    sub_8049ED4();
+    return didWork;
+  }
+}
+
+bool8 sub_805C3DC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    u32 var;
+    var = (target->entityData->isEnemy ? 2 : 1);
+    sub_807FC3C(&target->posWorld, 0x14, var);
+    return TRUE;
+}
+
+bool8 sub_805C3F8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+{
+    struct ItemSlot stack;
+    struct Position posStruct = target->posWorld;
+
+    if(target->entityData->clientType != CLIENT_TYPE_NONE)
+    {
+        sub_80522F4(pokemon, target, *gUnknown_80FF678);
+        return FALSE;
+    }
+    else
+    {
+        target->visible = FALSE;
+        sub_8045C28(&stack, sub_803D73C(0), 0);
+        sub_80464C8(pokemon, &posStruct, &stack);
+        sub_8068FE0(target, 0x218, pokemon);
+        return TRUE;
+    }
+}
 
 bool8 sub_805C45C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {

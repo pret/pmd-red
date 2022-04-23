@@ -204,7 +204,7 @@ u8 GetUnk1B(s16 index);
 bool8 GetIsMoving(s16 index);
 u8 GetUnk1D(s16 index);
 u16 GetLowKickDmg(s16 index);
-u16 GetSizeOrbDmg(s16 index);
+u32 GetSizeOrbDmg(s16 index);
 u8 GetFriendArea(s16 index);
 u16 GetBaseHP(s16 index);
 bool8 IsToolboxEnabled(s16 index);

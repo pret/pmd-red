@@ -2737,39 +2737,4 @@ _0807FC34: .4byte 0x000001ff
 _0807FC38: .4byte 0x000181ea
 	thumb_func_end sub_807FA9C
 
-	thumb_func_start sub_807FC3C
-sub_807FC3C:
-	push {r4-r7,lr}
-	ldr r6, _0807FC70
-	ldr r4, [r6]
-	ldrh r5, [r0]
-	ldr r7, _0807FC74
-	adds r3, r4, r7
-	strh r5, [r3]
-	ldrh r3, [r0, 0x2]
-	ldr r5, _0807FC78
-	adds r0, r4, r5
-	strh r3, [r0]
-	adds r7, 0x4
-	adds r4, r7
-	strb r1, [r4]
-	ldr r0, [r6]
-	ldr r1, _0807FC7C
-	adds r0, r1
-	strb r2, [r0]
-	ldr r0, [r6]
-	subs r5, 0x6
-	adds r0, r5
-	movs r1, 0x1
-	strb r1, [r0]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807FC70: .4byte gDungeonGlobalData
-_0807FC74: .4byte 0x00013574
-_0807FC78: .4byte 0x00013576
-_0807FC7C: .4byte 0x00013579
-	thumb_func_end sub_807FC3C
-
 	.align 2, 0
