@@ -193,6 +193,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
 void PeekPokemonItem(s16 index_, struct HeldItem* item);
 void GivePokemonItem(s16 index_, struct HeldItem* item);
 bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
+bool8 CanMonLearnMove(u16 moveID, s16 _species);
 
 u8 *GetCategoryString(s16 index);
 u8 GetPokemonSize(s16 index);

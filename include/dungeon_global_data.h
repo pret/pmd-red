@@ -30,7 +30,8 @@ struct DungeonGlobalData
     u8 unk4;
     u8 fill5[0x7 - 0x5];
     u8 unk7;
-    u8 fill8[0xF - 0x8];
+    u8 unk8;
+    u8 fill9[0xF - 0x9];
     /* 0xF */ bool8 inputAllowed; // Whether the game is currently accepting input. Set to false while action animations play.
     u8 fill10;
     u8 unk11;
@@ -53,7 +54,9 @@ struct DungeonGlobalData
     u8 fill66C[0x671 - 0x66C];
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
-    u8 fill673[0x363C - 0x673];
+    u8 fill673[0x68A - 0x673];
+    /* 0x68A */ u8 unk68A;
+    u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
     u8 fill37E3[0x37FC - 0x37D9];
     /* 0x37FC */ bool8 decoyActive;

@@ -117,6 +117,7 @@ void FillInventoryGaps();
 bool8 AddHeldItemToInventory(struct HeldItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
 s32 FindItemInInventory(u8 itemIndex);
+bool8 IsHMItem(u8 id);
 
 
 void RestoreHeldItem(struct unkStruct_8094924*, struct HeldItem*);
