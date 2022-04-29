@@ -24,11 +24,45 @@ struct unkStruct_203B240
     u32 unk90;
 };
 
+struct unkStruct_203B244
+{
+    // size: 0x554
+    u32 unk0;
+    u8 fill4[0x4B4 - 0x4];
+    u32 unk4B4;
+    u8 fill4B8[0x4CC - 0x4B8];
+    u16 unk4CC;
+    u16 unk4CE;
+    u16 unk4D0;
+    u16 unk4D2;
+    u8 fill4D4[0x4E8 - 0x4D4];
+    u32 unk4E8;
+    struct UnkTextStruct2 * unk4EC;
+    struct UnkTextStruct2 unk4F0[4];
+    u8 unk550[4];
+};
+
+extern const struct UnkTextStruct2 gUnknown_80DBE54;
+
+extern struct unkStruct_203B244 *gUnknown_203B244;
 extern struct unkStruct_203B240 *gUnknown_203B240;
+extern u32 gUnknown_203B248;
+extern u16 gUnknown_203B24C;
+extern u16 gUnknown_203B24E;
+
 extern char gUnknown_80DBE2C[]; // {ARG_MOVE_ITEM_0}
 extern char gUnknown_80DBE30[]; // {ARG_POKEMON_0}
 extern u8 gUnknown_202DE58[0x58];
 extern u8 gAvailablePokemonNames[0x58];
+
+extern bool8 sub_801CF14(u32);
+extern void sub_8012D08(struct UnkTextStruct2 *, u32);
+extern void sub_8013818(u32 *, u32, u32, u32);
+extern u32 sub_801CE58(void);
+extern void sub_8013984(void *);
+extern void sub_801CC38(void);
+extern void sub_801CCD8(void);
+extern void sub_801CF94(void);
 
 
 extern void ResetSprites(u32);
@@ -202,5 +236,40 @@ void sub_801C848(void)
         PlayMenuSoundEffect(1);
         sub_801C6D0(2);
         break;
+  }
+}
+
+bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, u32 param_4)
+{
+  if (sub_801CF14(param_1)) {
+      return FALSE;
+  }
+  else
+  {
+    if (gUnknown_203B244 == NULL) {
+      gUnknown_203B244 = MemoryAlloc(sizeof(struct unkStruct_203B244), 8);
+    }
+    gUnknown_203B244->unk0 = param_1;
+    sub_801CF94();
+    gUnknown_203B244->unk4E8 = param_2;
+    gUnknown_203B244->unk4EC = &gUnknown_203B244->unk4F0[param_2];
+    sub_8006518(gUnknown_203B244->unk4F0);
+    gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8] = gUnknown_80DBE54;
+    gUnknown_203B244->unk4EC->unk14 = gUnknown_203B244->unk550;
+    if (param_3 != NULL) {
+        gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8].unk08 = *param_3;
+    }
+    sub_8012D08(gUnknown_203B244->unk4EC, param_4);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B244->unk4F0,1,1);
+    sub_8013818(&gUnknown_203B244->unk4B4, sub_801CE58(), param_4, param_2);
+    if (gUnknown_203B248 == gUnknown_203B244->unk0) {
+      gUnknown_203B244->unk4CC = gUnknown_203B24C;
+      gUnknown_203B244->unk4D2 = gUnknown_203B24E;
+      sub_8013984(&gUnknown_203B244->unk4B4);
+    }
+    sub_801CC38();
+    sub_801CCD8();
+    return TRUE;
   }
 }
