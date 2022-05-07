@@ -4650,8 +4650,8 @@ gPtrProtectSavedItMessage: @ 810075C
 
 @ Start of Boss Fight Dialogues?
 
-	.global gUnknown_8100768
-gUnknown_8100768: @ 8100768
+	.global gSkarmoryPreFightDialogue_1
+gSkarmoryPreFightDialogue_1: @ 8100768
 	.byte 0x00, 0x00, 0x0C, 0x02, 0xAA, 0x01, 0x00, 0x00
 	.4byte gUnknown_8100774
 
@@ -4661,8 +4661,8 @@ gUnknown_8100774: @ 8100774
 	.string "{ARG_POKEMON_2}{APOSTROPHE}s over there!\0"
 	.align 2, 0
 
-	.global gUnknown_8100798
-gUnknown_8100798: @ 8100798
+	.global gSkarmoryPreFightDialogue_2
+gSkarmoryPreFightDialogue_2: @ 8100798
 	.byte 0x00, 0x00, 0x04, 0x02, 0xAA, 0x01, 0x07, 0x00
 	.4byte gUnknown_81007E8
 	.byte 0x00, 0x00, 0x04, 0x02, 0xAA, 0x01, 0x00, 0x00
@@ -4680,8 +4680,8 @@ gUnknown_81007E8: @ 81007E8
 	.string "We{APOSTROPHE}re here to rescue you!\0"
 	.align 2, 0
 
-	.global gUnknown_8100820
-gUnknown_8100820: @ 8100820
+	.global gSkarmoryPreFightDialogue_3
+gSkarmoryPreFightDialogue_3: @ 8100820
 	.byte 0x00, 0x00, 0x01, 0x0D, 0x32, 0x00, 0x00, 0x00
 	.4byte gUnknown_810082C
 
@@ -4691,16 +4691,16 @@ gUnknown_810082C: @ 810082C
 	.string "I{APOSTROPHE}m scared.\0"
 	.align 2, 0
 
-	.global gUnknown_8100844
-gUnknown_8100844: @ 8100844
+	.global gSkarmoryPreFightDialogue_4
+gSkarmoryPreFightDialogue_4: @ 8100844
 	.incbin "baserom.gba", 0x100844, 0x3C
 
-	.global gUnknown_8100880
-gUnknown_8100880: @ 8100880
+	.global gSkarmoryPreFightDialogue_5
+gSkarmoryPreFightDialogue_5: @ 8100880
 	.incbin "baserom.gba", 0x100880, 0xA8
 
-	.global gUnknown_8100928
-gUnknown_8100928: @ 8100928
+	.global gSkarmoryPreFightDialogue_6
+gSkarmoryPreFightDialogue_6: @ 8100928
 	.byte 0x00, 0x00, 0x00, 0x0D, 0xFC, 0x00, 0x00, 0x00
 	.4byte gUnknown_8100934
 
@@ -4716,22 +4716,22 @@ gUnknown_8100934: @ 8100934
 	.string "underground!\0"
 	.align 2, 0
 
-	.global gUnknown_8100A04
-gUnknown_8100A04: @ 8100A04
+	.global gSkarmoryPreFightDialogue_7
+gSkarmoryPreFightDialogue_7: @ 8100A04
 	.incbin "baserom.gba", 0x100A04, 0x17C
 
-	.global gUnknown_8100B80
-gUnknown_8100B80: @ 8100B80
+	.global gSkarmoryPreFightDialogue_8
+gSkarmoryPreFightDialogue_8: @ 8100B80
 	.incbin "baserom.gba", 0x100B80, 0x40
 
-	.global gUnknown_8100BC0
-gUnknown_8100BC0: @ 8100BC0
+	.global gSkarmoryPreFightDialogue_9
+gSkarmoryPreFightDialogue_9: @ 8100BC0
 	.incbin "baserom.gba", 0x100BC0, 0xD0
 
 @ Skarmory Re-Fight?
 
-	.global gUnknown_8100C90
-gUnknown_8100C90: @ 8100C90
+	.global gSkarmoryReFightDialogue_1
+gSkarmoryReFightDialogue_1: @ 8100C90
         .byte 0x00, 0x00, 0x00, 0x0D
         .byte 0xFC, 0x00, 0x00, 0x00
         .4byte _08100C9C
@@ -4742,64 +4742,64 @@ gUnknown_8100C90: @ 8100C90
         .asciz "Persistent pests!\0"
         .align 2,0
 
-	.global gUnknown_8100CBC
-gUnknown_8100CBC: @ 8100CBC
+	.global gSkarmoryReFightDialogue_2
+gSkarmoryReFightDialogue_2: @ 8100CBC
 	.incbin "baserom.gba", 0x100CBC, 0x20
 
-	.global gUnknown_8100CDC
-gUnknown_8100CDC: @ 8100CDC
+	.global gSkarmoryReFightDialogue_3
+gSkarmoryReFightDialogue_3: @ 8100CDC
 	.incbin "baserom.gba", 0x100CDC, 0x60
 
 	.global gUnknown_8100D3C
 gUnknown_8100D3C: @ 8100D3C
 	.incbin "baserom.gba", 0x100D3C, 0x74
 
-	.global gUnknown_8100DB0
-gUnknown_8100DB0: @ 8100DB0
+	.global gTeamMeaniesPreFightDialogue_1
+gTeamMeaniesPreFightDialogue_1: @ 8100DB0
 	.incbin "baserom.gba", 0x100DB0, 0xB4
 
-	.global gUnknown_8100E64
-gUnknown_8100E64: @ 8100E64
+	.global gTeamMeaniesPreFightDialogue_2
+gTeamMeaniesPreFightDialogue_2: @ 8100E64
 	.incbin "baserom.gba", 0x100E64, 0x24
 
-	.global gUnknown_8100E88
-gUnknown_8100E88: @ 8100E88
+	.global gTeamMeaniesPreFightDialogue_3
+gTeamMeaniesPreFightDialogue_3: @ 8100E88
 	.incbin "baserom.gba", 0x100E88, 0x8C
 
-	.global gUnknown_8100F14
-gUnknown_8100F14: @ 8100F14
+	.global gTeamMeaniesPreFightDialogue_4
+gTeamMeaniesPreFightDialogue_4: @ 8100F14
 	.incbin "baserom.gba", 0x100F14, 0xF0
 
-	.global gUnknown_8101004
-gUnknown_8101004: @ 8101004
+	.global gTeamMeaniesPreFightDialogue_5
+gTeamMeaniesPreFightDialogue_5: @ 8101004
 	.incbin "baserom.gba", 0x101004, 0x4C
 
-	.global gUnknown_8101050
-gUnknown_8101050: @ 8101050
+	.global gTeamMeaniesPreFightDialogue_6
+gTeamMeaniesPreFightDialogue_6: @ 8101050
 	.incbin "baserom.gba", 0x101050, 0x80
 
-	.global gUnknown_81010D0
-gUnknown_81010D0: @ 81010D0
+	.global gTeamMeaniesPreFightDialogue_7
+gTeamMeaniesPreFightDialogue_7: @ 81010D0
 	.incbin "baserom.gba", 0x1010D0, 0x94
 
-	.global gUnknown_8101164
-gUnknown_8101164: @ 8101164
+	.global gTeamMeaniesReFightDialogue_1
+gTeamMeaniesReFightDialogue_1: @ 8101164
 	.incbin "baserom.gba", 0x101164, 0xDC
 
-	.global gUnknown_8101240
-gUnknown_8101240: @ 8101240
+	.global gTeamMeaniesReFightDialogue_2
+gTeamMeaniesReFightDialogue_2: @ 8101240
 	.incbin "baserom.gba", 0x101240, 0xD0
 
-	.global gUnknown_8101310
-gUnknown_8101310: @ 8101310
+	.global gTeamMeaniesReFightDialogue_3
+gTeamMeaniesReFightDialogue_3: @ 8101310
 	.incbin "baserom.gba", 0x101310, 0x6C
 
-	.global gUnknown_810137C
-gUnknown_810137C: @ 810137C
+	.global gTeamMeaniesReFightDialogue_4
+gTeamMeaniesReFightDialogue_4: @ 810137C
 	.incbin "baserom.gba", 0x10137C, 0x8C
 
-	.global gUnknown_8101408
-gUnknown_8101408: @ 8101408
+	.global gTeamMeaniesReFightDialogue_5
+gTeamMeaniesReFightDialogue_5: @ 8101408
 	.incbin "baserom.gba", 0x101408, 0x38
 
 	.global gUnknown_8101440
@@ -5167,7 +5167,7 @@ MagmaCavernMidDialogue_14: @ 8102E2C
 
 	.global gUnknown_8102E38
         gUnknown_8102E38:
-        .string " $m0!\n"
+        .string " {ARG_POKEMON_0}!\n"
         .string "We{APOSTROPHE}ve got to hurry!\0"
 
 	.global MagmaCavernMidDialogue_15

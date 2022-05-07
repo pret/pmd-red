@@ -35,18 +35,18 @@ extern void sub_8086A54(struct DungeonEntity *);
 extern void PlaySoundEffect(u32);
 extern void sub_808563C(void *);
 
-extern u8 gUnknown_8100768;
-extern u8 gUnknown_8100798;
-extern u8 gUnknown_8100820;
-extern u8 gUnknown_8100844;
-extern u8 gUnknown_8100880;
-extern u8 gUnknown_8100928;
-extern u8 gUnknown_8100A04;
-extern u8 gUnknown_8100B80;
-extern u8 gUnknown_8100BC0;
-extern u8 gUnknown_8100C90;
-extern u8 gUnknown_8100CBC;
-extern u8 gUnknown_8100CDC;
+extern u8 gSkarmoryPreFightDialogue_1;
+extern u8 gSkarmoryPreFightDialogue_2;
+extern u8 gSkarmoryPreFightDialogue_3;
+extern u8 gSkarmoryPreFightDialogue_4;
+extern u8 gSkarmoryPreFightDialogue_5;
+extern u8 gSkarmoryPreFightDialogue_6;
+extern u8 gSkarmoryPreFightDialogue_7;
+extern u8 gSkarmoryPreFightDialogue_8;
+extern u8 gSkarmoryPreFightDialogue_9;
+extern u8 gSkarmoryReFightDialogue_1;
+extern u8 gSkarmoryReFightDialogue_2;
+extern u8 gSkarmoryReFightDialogue_3;
 extern u8 gUnknown_8100D3C;
 
 void sub_8086A3C(struct DungeonEntity *param_1)
@@ -177,33 +177,33 @@ void SkarmoryPreFightDialogue(void)
   sub_80862BC(PartnerEntity);
   sub_803E708(0x20,0x46);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100768);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_1);
   ShiftCameraToPosition(&local_1c,0x40);
   sub_803E708(0x40,0x46);
   ShiftCameraToPosition(&local_20,0x30);
-  DisplayDungeonDialogue(&gUnknown_8100798);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_2);
   sub_803E708(10,0x46);
   DiglettEntity->entityData->unk15D = 1;
   ShiftCameraToPosition(&local_1c,0x30);
-  DisplayDungeonDialogue(&gUnknown_8100820); // Diglett: ...I...\nI'm scared.
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&local_20,0x20);
   sub_803E708(0x20,0x46);
   sub_8086E74(SkarmoryEntity);
-  DisplayDungeonDialogue(&gUnknown_8100844); // Skarmory: You!\nWhat do you think you're doing here?!
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100880);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_5);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100928);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_6);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100A04);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_7);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  DisplayDungeonDialogue(&gUnknown_8100B80);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_8);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(&gUnknown_8100BC0);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_9);
   sub_80869E4(PartnerEntity,4,2,4);
   sub_80869E4(LeaderEntity,4,1,4);
   sub_803E708(10,0x46);
@@ -225,12 +225,12 @@ void SkarmoryReFightDialogue(void)
   sub_803E708(10,0x46);
   sub_8086E74(SkarmoryEntity);
   ShiftCameraToPosition(&local_14,0x10);
-  DisplayDungeonDialogue(&gUnknown_8100C90);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_1);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100CBC);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_2);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  DisplayDungeonDialogue(&gUnknown_8100CDC);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_3);
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
   sub_8083E88(0xb);

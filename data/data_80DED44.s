@@ -218,17 +218,17 @@ gUnknown_80E0484: @ 80E0484
 gUnknown_80E04B4: @ 80E04B4
         .string " As your reward{COMMA} you can\n"
         .string "now go to the Friend Area\n"
-        .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}!\0"
+        .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80E04F4
 gUnknown_80E04F4: @ 80E04F4
         .string "{CENTER_ALIGN}...Oh{COMMA} wait{COMMA} sorry.{EXTRA_MSG}"
         .string "{CENTER_ALIGN}You already have the \n"
-        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA} Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
         .string "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
         .string "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
-        .string "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}$m0{END_COLOR_TEXT_1}{COMMA}\n"
+        .string "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
         .string "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.\0"
         .align 2, 0
 
@@ -236,14 +236,14 @@ gUnknown_80E04F4: @ 80E04F4
 gUnknown_80E05C0: @ 80E05C0
         .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
         .string "{CENTER_ALIGN}to the Friend Area\n"
-        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E05FC
 gUnknown_80E05FC: @ 80E05FC
         .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
         .string "{CENTER_ALIGN}to the Friend Area\n"
-        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0640

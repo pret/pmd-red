@@ -113,13 +113,13 @@ TeamMeaniesPreFightDialogue:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087048: .4byte gUnknown_8100DB0
-_0808704C: .4byte gUnknown_8100E64
-_08087050: .4byte gUnknown_8100E88
-_08087054: .4byte gUnknown_8100F14
-_08087058: .4byte gUnknown_8101004
-_0808705C: .4byte gUnknown_8101050
-_08087060: .4byte gUnknown_81010D0
+_08087048: .4byte gTeamMeaniesPreFightDialogue_1
+_0808704C: .4byte gTeamMeaniesPreFightDialogue_2
+_08087050: .4byte gTeamMeaniesPreFightDialogue_3
+_08087054: .4byte gTeamMeaniesPreFightDialogue_4
+_08087058: .4byte gTeamMeaniesPreFightDialogue_5
+_0808705C: .4byte gTeamMeaniesPreFightDialogue_6
+_08087060: .4byte gTeamMeaniesPreFightDialogue_7
 	thumb_func_end TeamMeaniesPreFightDialogue
 
 	thumb_func_start TeamMeaniesReFightDialogue
@@ -191,12 +191,12 @@ TeamMeaniesReFightDialogue:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087118: .4byte gUnknown_8101164
-_0808711C: .4byte gUnknown_8100E64
-_08087120: .4byte gUnknown_8101240
-_08087124: .4byte gUnknown_8101310
-_08087128: .4byte gUnknown_810137C
-_0808712C: .4byte gUnknown_8101408
+_08087118: .4byte gTeamMeaniesReFightDialogue_1
+_0808711C: .4byte gTeamMeaniesPreFightDialogue_2
+_08087120: .4byte gTeamMeaniesReFightDialogue_2
+_08087124: .4byte gTeamMeaniesReFightDialogue_3
+_08087128: .4byte gTeamMeaniesReFightDialogue_4
+_0808712C: .4byte gTeamMeaniesReFightDialogue_5
 	thumb_func_end TeamMeaniesReFightDialogue
 
 	thumb_func_start sub_8087130
@@ -513,7 +513,7 @@ ZapdosPreFightDialogue:
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x3
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	bl sub_8083F14
 	movs r0, 0xED
 	lsls r0, 1
@@ -660,21 +660,21 @@ _0808752A:
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x3
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875B4
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x1
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875B8
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x2
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875BC
 	bl DisplayDungeonDialogue
 	movs r0, 0xA

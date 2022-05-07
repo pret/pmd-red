@@ -341,10 +341,10 @@ void ArticunoScreenFlash(void);
 void sub_8088484(struct DungeonEntity *param_1);
 void sub_8088574(void);
 
-void sub_8087D30(struct DungeonEntity * param_1);
-void sub_8087D80(s32 r0, s32 r1);
-void sub_8087DE8(s32 r0, s32 r1);
-void sub_8087EB0(void);
+void MoltresDropInEffect(struct DungeonEntity * param_1);
+void MoltresScreenFlash1(s32 r0, s32 r1);
+void MoltresScreenFlash2(s32 r0, s32 r1);
+void MoltresScreenFlash3(void);
 void sub_808654C(void);
 
 extern void sub_8086598();
@@ -353,10 +353,10 @@ extern void sub_80865E8();
 
 extern void sub_8086500(void);
 extern void sub_8086690(void);
-void sub_8087F24(void);
+void MoltresScreenDarken(void);
 extern void sub_808663C(void);
 void sub_8087704(struct DungeonEntity *param_1);
-void sub_808775C(int param_1);
+void ZapdosScreenFlash(int param_1);
 
 extern u32 gZapdosReFightDialogue_1;
 extern u32 gUnknown_81015A0;
@@ -382,9 +382,9 @@ void ZapdosReFightDialogue(void)
   sub_8087704(ZapdosEntity);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gZapdosReFightDialogue_2);
-  sub_808775C(1);
+  ZapdosScreenFlash(1);
   DisplayDungeonDialogue(&gZapdosReFightDialogue_3);
-  sub_808775C(2);
+  ZapdosScreenFlash(2);
   DisplayDungeonDialogue(&gZapdosReFightDialogue_4);
   SetupBossFightHP(ZapdosEntity,300,0xb);
   ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
@@ -402,16 +402,16 @@ void ZapdosPostStoryPreFightDialogue(void)
     sub_80866C4(&gZapdosPostStoryPreFightDialogue_6);
   }
   else {
-    sub_808775C(1);
+    ZapdosScreenFlash(1);
     PlaySoundEffect(0x1da);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_1);
     sub_8087704(ZapdosEntity);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_2);
-    sub_808775C(1);
+    ZapdosScreenFlash(1);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_3);
-    sub_808775C(2);
+    ZapdosScreenFlash(2);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_4);
-    sub_808775C(2);
+    ZapdosScreenFlash(2);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
     SetupBossFightHP(ZapdosEntity,300,0xb);
@@ -436,10 +436,10 @@ void sub_8087704(struct DungeonEntity *param_1)
   sub_803E708(0x1e,0x46);
 }
 
-void sub_808775C(int param_1)
+void ZapdosScreenFlash(s32 param_1)
 {
-  int iVar1;
-  int iVar2;
+  s32 iVar1;
+  s32 iVar2;
 
   PlaySoundEffect(0x1f6);
   if (2 < param_1) {
@@ -536,7 +536,7 @@ void MoltresPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeaderEntity();
   PartnerEntity = GetPartnerEntity();
   MoltresEntity = GetEntityFromClientType(9);
-  sub_8087D80(0xc,5);
+  MoltresScreenFlash1(0xc,5);
   sub_8086500();
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_1);
@@ -547,8 +547,8 @@ void MoltresPreFightDialogue(void)
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_2);
   sub_803E708(10,0x46);
-  sub_8087D80(0xc,5);
-  sub_8087DE8(9,5);
+  MoltresScreenFlash1(0xc,5);
+  MoltresScreenFlash2(9,5);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_3);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
@@ -564,7 +564,7 @@ void MoltresPreFightDialogue(void)
   sub_8085930(DIRECTION_NORTH);
   PlaySoundEffect(0x2f2);
   sub_8083F14();
-  sub_8087F24();
+  MoltresScreenDarken();
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_6);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_7);
@@ -574,22 +574,22 @@ void MoltresPreFightDialogue(void)
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_8);
   sub_803E708(10,0x46);
-  sub_8087EB0();
+  MoltresScreenFlash3();
   PlaySoundEffect(0x1da);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_9);
   sub_803E708(10,0x46);
-  sub_8087D80(9,5);
-  sub_8087DE8(0xb,5);
+  MoltresScreenFlash1(9,5);
+  MoltresScreenFlash2(0xb,5);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_10);
   sub_803E708(10,0x46);
-  sub_8087D80(0xc,5);
-  sub_8087DE8(9,5);
-  sub_8087D30(MoltresEntity);
+  MoltresScreenFlash1(0xc,5);
+  MoltresScreenFlash2(9,5);
+  MoltresDropInEffect(MoltresEntity);
   sub_808663C();
-  sub_8087EB0();
+  MoltresScreenFlash3();
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_11);
   sub_803E708(10,0x46);
-  sub_8087DE8(0xb,6);
+  MoltresScreenFlash2(0xb,6);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_12);
   sub_803E708(10,0x46);
   SetupBossFightHP(MoltresEntity,400,0xb);
@@ -606,7 +606,7 @@ void MoltresReFightDialogue(void)
   LeaderEntity = xxx_call_GetLeaderEntity();
   PartnerEntity = GetPartnerEntity();
   MoltresEntity = GetEntityFromClientType(9);
-  sub_8087D80(10,5);
+  MoltresScreenFlash1(10,5);
   sub_8086500();
   sub_803E708(10,0x46);
   SpriteLookAroundEffect(PartnerEntity);
@@ -620,17 +620,17 @@ void MoltresReFightDialogue(void)
   sub_80869E4(PartnerEntity,4,2,6);
   sub_80869E4(LeaderEntity,4,2,6);
   sub_8086690();
-  sub_8087F24();
+  MoltresScreenDarken();
   sub_803E708(10,0x46);
   sub_8085930(DIRECTION_NORTHWEST);
   sub_803E708(4,0x46);
   sub_8085930(DIRECTION_NORTH);
-  sub_8087D30(MoltresEntity);
+  MoltresDropInEffect(MoltresEntity);
   sub_808663C();
-  sub_8087EB0();
+  MoltresScreenFlash3();
   DisplayDungeonDialogue(&gMoltresReFightDialogue_3);
   sub_803E708(10,0x46);
-  sub_8087DE8(0xb,6);
+  MoltresScreenFlash2(0xb,6);
   DisplayDungeonDialogue(&gMoltresReFightDialogue_4);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresReFightDialogue_5);
@@ -646,7 +646,7 @@ void MoltresPostStoryPreFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeaderEntity();
   MoltresEntity = GetEntityFromClientType(9);
-  sub_8087D80(0xc,5);
+  MoltresScreenFlash1(0xc,5);
   sub_808654C();
   if (sub_8086AE4(SPECIES_MOLTRES)) {
     sub_8085930(DIRECTION_NORTHWEST);
@@ -663,14 +663,14 @@ void MoltresPostStoryPreFightDialogue(void)
     sub_8085930(DIRECTION_NORTHWEST);
     sub_803E708(4,0x46);
     sub_8085930(DIRECTION_NORTH);
-    sub_8087D30(MoltresEntity);
+    MoltresDropInEffect(MoltresEntity);
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_2);
-    sub_8087D80(0xc,5);
-    sub_8087DE8(9,5);
+    MoltresScreenFlash1(0xc,5);
+    MoltresScreenFlash2(9,5);
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_3);
-    sub_8087EB0();
+    MoltresScreenFlash3();
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_4);
-    sub_8087DE8(0xb,6);
+    MoltresScreenFlash2(0xb,6);
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
     SetupBossFightHP(MoltresEntity,400,0xb);
@@ -678,7 +678,7 @@ void MoltresPostStoryPreFightDialogue(void)
   }
 }
 
-void sub_8087D30(struct DungeonEntity * param_1)
+void MoltresDropInEffect(struct DungeonEntity * param_1)
 {
   s32 iVar1;
 
@@ -686,7 +686,6 @@ void sub_8087D30(struct DungeonEntity * param_1)
   param_1->entityData->unk15E = 0;
   param_1->entityData->unk174 = 0xc800;
   PlaySoundEffect(0x1f8);
-  iVar1 = 200;
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
     param_1->entityData->unk174 = iVar1 * 256;
@@ -695,7 +694,7 @@ void sub_8087D30(struct DungeonEntity * param_1)
 }
 
 NAKED
-void sub_8087D80(s32 r0, s32 r1)
+void MoltresScreenFlash1(s32 r0, s32 r1)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tsub sp, 0x8\n"
@@ -751,7 +750,7 @@ void sub_8087D80(s32 r0, s32 r1)
 }
 
 NAKED
-void sub_8087DE8(s32 r0, s32 r1)
+void MoltresScreenFlash2(s32 r0, s32 r1)
 {
 	asm_unified("\tpush {r4-r6,lr}\n"
 	"\tsub sp, 0x8\n"
@@ -848,7 +847,7 @@ void sub_8087DE8(s32 r0, s32 r1)
 "_08087EAC: .4byte 0x0000ffff");
 }
 
-void sub_8087EB0(void)
+void MoltresScreenFlash3(void)
 {
   int iVar1;
 
@@ -870,7 +869,7 @@ void sub_8087EB0(void)
   sub_8085EB0();
 }
 
-void sub_8087F24(void)
+void MoltresScreenDarken(void)
 {
   s32 iVar1;
 
