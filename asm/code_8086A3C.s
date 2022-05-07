@@ -108,7 +108,7 @@ TeamMeaniesPreFightDialogue:
 	adds r4, 0xC
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -186,7 +186,7 @@ TeamMeaniesReFightDialogue:
 	adds r4, 0xC
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -219,13 +219,13 @@ sub_8087144:
 	push {r6,r7}
 	sub sp, 0xF0
 	movs r0, 0x5
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r7, r0, 0
 	movs r0, 0x6
-	bl sub_8085680
+	bl GetEntityFromClientType
 	mov r8, r0
 	movs r0, 0x7
-	bl sub_8085680
+	bl GetEntityFromClientType
 	mov r9, r0
 	ldr r1, _080871E0
 	mov r0, sp
@@ -324,7 +324,7 @@ sub_8087230:
 	bl xxx_call_GetLeaderEntity
 	adds r6, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r5, r0, 0
 	movs r0, 0x72
 	bl sub_8083E88
@@ -370,7 +370,7 @@ sub_808729C:
 	bl xxx_call_GetLeaderEntity
 	adds r5, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r4, r0, 0
 	bl sub_80854D4
 	movs r0, 0x4
@@ -471,7 +471,7 @@ ZapdosPreFightDialogue:
 	bl GetPartnerEntity
 	adds r6, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	str r0, [sp, 0x68]
 	bl sub_8086448
 	movs r0, 0xA
@@ -687,7 +687,7 @@ _0808752A:
 	bl SetupBossFightHP
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	add sp, 0x70
 	pop {r3-r5}
 	mov r8, r3

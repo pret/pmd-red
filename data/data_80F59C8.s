@@ -4846,183 +4846,183 @@ gUnknown_810178C: @ 810178C
 gUnknown_81017B4: @ 81017B4
 	.incbin "baserom.gba", 0x1017B4, 0x30
 
-	.global gUnknown_81017E4
-gUnknown_81017E4: @ 81017E4
+	.global gZapdosReFightDialogue_1
+gZapdosReFightDialogue_1: @ 81017E4
 	.incbin "baserom.gba", 0x1017E4, 0xB4
 
-	.global gUnknown_8101898
-gUnknown_8101898: @ 8101898
+	.global gZapdosReFightDialogue_2
+gZapdosReFightDialogue_2: @ 8101898
 	.incbin "baserom.gba", 0x101898, 0x54
 
-	.global gUnknown_81018EC
-gUnknown_81018EC: @ 81018EC
+	.global gZapdosReFightDialogue_3
+gZapdosReFightDialogue_3: @ 81018EC
 	.incbin "baserom.gba", 0x1018EC, 0x2C
 
-	.global gUnknown_8101918
-gUnknown_8101918: @ 8101918
+	.global gZapdosReFightDialogue_4
+gZapdosReFightDialogue_4: @ 8101918
 	.incbin "baserom.gba", 0x101918, 0x24
 
-	.global gUnknown_810193C
-gUnknown_810193C: @ 810193C
+	.global gZapdosPostStoryPreFightDialogue_1
+gZapdosPostStoryPreFightDialogue_1: @ 810193C
 	.incbin "baserom.gba", 0x10193C, 0x34
 
-	.global gUnknown_8101970
-gUnknown_8101970: @ 8101970
+	.global gZapdosPostStoryPreFightDialogue_2
+gZapdosPostStoryPreFightDialogue_2: @ 8101970
 	.incbin "baserom.gba", 0x101970, 0x24
 
-	.global gUnknown_8101994
-gUnknown_8101994: @ 8101994
+	.global gZapdosPostStoryPreFightDialogue_3
+gZapdosPostStoryPreFightDialogue_3: @ 8101994
 	.incbin "baserom.gba", 0x101994, 0x50
 
-	.global gUnknown_81019E4
-gUnknown_81019E4: @ 81019E4
+	.global gZapdosPostStoryPreFightDialogue_4
+gZapdosPostStoryPreFightDialogue_4: @ 81019E4
 	.incbin "baserom.gba", 0x1019E4, 0x20
 
-	.global gUnknown_8101A04
-gUnknown_8101A04: @ 8101A04
+	.global gZapdosPostStoryPreFightDialogue_5
+gZapdosPostStoryPreFightDialogue_5: @ 8101A04
 	.incbin "baserom.gba", 0x101A04, 0x34
 
-	.global gUnknown_8101A38
-gUnknown_8101A38: @ 8101A38
+	.global gZapdosPostStoryPreFightDialogue_6
+gZapdosPostStoryPreFightDialogue_6: @ 8101A38
 	.incbin "baserom.gba", 0x101A38, 0x64
 
-	.global gUnknown_8101A9C
-gUnknown_8101A9C: @ 8101A9C
+	.global gMoltresPreFightDialogue_1
+gMoltresPreFightDialogue_1: @ 8101A9C
 	.incbin "baserom.gba", 0x101A9C, 0x38
 
-	.global gUnknown_8101AD4
-gUnknown_8101AD4: @ 8101AD4
+	.global gMoltresPreFightDialogue_2
+gMoltresPreFightDialogue_2: @ 8101AD4
 	.incbin "baserom.gba", 0x101AD4, 0x15C
 
-	.global gUnknown_8101C30
-gUnknown_8101C30: @ 8101C30
+	.global gMoltresPreFightDialogue_3
+gMoltresPreFightDialogue_3: @ 8101C30
 	.incbin "baserom.gba", 0x101C30, 0x8C
 
-	.global gUnknown_8101CBC
-gUnknown_8101CBC: @ 8101CBC
+	.global gMoltresPreFightDialogue_4
+gMoltresPreFightDialogue_4: @ 8101CBC
 	.incbin "baserom.gba", 0x101CBC, 0xD0
 
-	.global gUnknown_8101D8C
-gUnknown_8101D8C: @ 8101D8C
+	.global gMoltresPreFightDialogue_5
+gMoltresPreFightDialogue_5: @ 8101D8C
 	.incbin "baserom.gba", 0x101D8C, 0x14
 
-	.global gUnknown_8101DA0
-gUnknown_8101DA0: @ 8101DA0
+	.global gMoltresPreFightDialogue_6
+gMoltresPreFightDialogue_6: @ 8101DA0
 	.incbin "baserom.gba", 0x101DA0, 0x7C
 
-	.global gUnknown_8101E1C
-gUnknown_8101E1C: @ 8101E1C
+	.global gMoltresPreFightDialogue_7
+gMoltresPreFightDialogue_7: @ 8101E1C
 	.incbin "baserom.gba", 0x101E1C, 0x90
 
-	.global gUnknown_8101EAC
-gUnknown_8101EAC: @ 8101EAC
+	.global gMoltresPreFightDialogue_8
+gMoltresPreFightDialogue_8: @ 8101EAC
 	.incbin "baserom.gba", 0x101EAC, 0x1C4
 
-	.global gUnknown_8102070
-gUnknown_8102070: @ 8102070
+	.global gMoltresPreFightDialogue_9
+gMoltresPreFightDialogue_9: @ 8102070
 	.incbin "baserom.gba", 0x102070, 0x34
 
-	.global gUnknown_81020A4
-gUnknown_81020A4: @ 81020A4
+	.global gMoltresPreFightDialogue_10
+gMoltresPreFightDialogue_10: @ 81020A4
 	.incbin "baserom.gba", 0x1020A4, 0x30
 
-	.global gUnknown_81020D4
-gUnknown_81020D4: @ 81020D4
+	.global gMoltresPreFightDialogue_11
+gMoltresPreFightDialogue_11: @ 81020D4
 	.incbin "baserom.gba", 0x1020D4, 0x34
 
-	.global gUnknown_8102108
-gUnknown_8102108: @ 8102108
+	.global gMoltresPreFightDialogue_12
+gMoltresPreFightDialogue_12: @ 8102108
 	.incbin "baserom.gba", 0x102108, 0x50
 
-	.global gUnknown_8102158
-gUnknown_8102158: @ 8102158
+	.global gMoltresReFightDialogue_1
+gMoltresReFightDialogue_1: @ 8102158
 	.incbin "baserom.gba", 0x102158, 0x38
 
-	.global gUnknown_8102190
-gUnknown_8102190: @ 8102190
+	.global gMoltresReFightDialogue_2
+gMoltresReFightDialogue_2: @ 8102190
 	.incbin "baserom.gba", 0x102190, 0x70
 
-	.global gUnknown_8102200
-gUnknown_8102200: @ 8102200
+	.global gMoltresReFightDialogue_3
+gMoltresReFightDialogue_3: @ 8102200
 	.incbin "baserom.gba", 0x102200, 0x54
 
-	.global gUnknown_8102254
-gUnknown_8102254: @ 8102254
+	.global gMoltresReFightDialogue_4
+gMoltresReFightDialogue_4: @ 8102254
 	.incbin "baserom.gba", 0x102254, 0xA4
 
-	.global gUnknown_81022F8
-gUnknown_81022F8: @ 81022F8
+	.global gMoltresReFightDialogue_5
+gMoltresReFightDialogue_5: @ 81022F8
 	.incbin "baserom.gba", 0x1022F8, 0x34
 
-	.global gUnknown_810232C
-gUnknown_810232C: @ 810232C
+	.global gMoltresPostStoryPreFightDialogue_1
+gMoltresPostStoryPreFightDialogue_1: @ 810232C
 	.incbin "baserom.gba", 0x10232C, 0x6C
 
-	.global gUnknown_8102398
-gUnknown_8102398: @ 8102398
+	.global gMoltresPostStoryPreFightDialogue_2
+gMoltresPostStoryPreFightDialogue_2: @ 8102398
 	.incbin "baserom.gba", 0x102398, 0x2C
 
-	.global gUnknown_81023C4
-gUnknown_81023C4: @ 81023C4
+	.global gMoltresPostStoryPreFightDialogue_3
+gMoltresPostStoryPreFightDialogue_3: @ 81023C4
 	.incbin "baserom.gba", 0x1023C4, 0x3C
 
-	.global gUnknown_8102400
-gUnknown_8102400: @ 8102400
+	.global gMoltresPostStoryPreFightDialogue_4
+gMoltresPostStoryPreFightDialogue_4: @ 8102400
 	.incbin "baserom.gba", 0x102400, 0x54
 
-	.global gUnknown_8102454
-gUnknown_8102454: @ 8102454
+	.global gMoltresPostStoryPreFightDialogue_5
+gMoltresPostStoryPreFightDialogue_5: @ 8102454
 	.incbin "baserom.gba", 0x102454, 0x24
 
-	.global gUnknown_8102478
-gUnknown_8102478: @ 8102478
+	.global gArticunoPreFightDialogue_1
+gArticunoPreFightDialogue_1: @ 8102478
 	.incbin "baserom.gba", 0x102478, 0x13C
 
-	.global gUnknown_81025B4
-gUnknown_81025B4: @ 81025B4
+	.global gArticunoPreFightDialogue_2
+gArticunoPreFightDialogue_2: @ 81025B4
 	.incbin "baserom.gba", 0x1025B4, 0x20
 
-	.global gUnknown_81025D4
-gUnknown_81025D4: @ 81025D4
+	.global gArticunoPreFightDialogue_3
+gArticunoPreFightDialogue_3: @ 81025D4
 	.incbin "baserom.gba", 0x1025D4, 0x3C
 
-	.global gUnknown_8102610
-gUnknown_8102610: @ 8102610
+	.global gArticunoPreFightDialogue_4
+gArticunoPreFightDialogue_4: @ 8102610
 	.incbin "baserom.gba", 0x102610, 0xB4
 
-	.global gUnknown_81026C4
-gUnknown_81026C4: @ 81026C4
+	.global gArticunoPreFightDialogue_5
+gArticunoPreFightDialogue_5: @ 81026C4
 	.incbin "baserom.gba", 0x1026C4, 0x48
 
-	.global gUnknown_810270C
-gUnknown_810270C: @ 810270C
+	.global gArticunoPreFightDialogue_6
+gArticunoPreFightDialogue_6: @ 810270C
 	.incbin "baserom.gba", 0x10270C, 0x20
 
-	.global gUnknown_810272C
-gUnknown_810272C: @ 810272C
+	.global gArticunoPreFightDialogue_7
+gArticunoPreFightDialogue_7: @ 810272C
 	.incbin "baserom.gba", 0x10272C, 0x90
 
-	.global gUnknown_81027BC
-gUnknown_81027BC: @ 81027BC
+	.global gArticunoPreFightDialogue_8
+gArticunoPreFightDialogue_8: @ 81027BC
 	.incbin "baserom.gba", 0x1027BC, 0x54
 
-	.global gUnknown_8102810
-gUnknown_8102810: @ 8102810
+	.global gArticunoPreFightDialogue_9
+gArticunoPreFightDialogue_9: @ 8102810
 	.incbin "baserom.gba", 0x102810, 0x30
 
-	.global gUnknown_8102840
-gUnknown_8102840: @ 8102840
+	.global gArticunoPreFightDialogue_10
+gArticunoPreFightDialogue_10: @ 8102840
         .4byte 0x0d000000
         .4byte 0x000001ab
         .4byte gUnknown_810284C
 
 	.global gUnknown_810284C
         gUnknown_810284C:
-        .string " I am $m2!#W\n"
+        .string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
         .string "The warder of ice!\0"
 
-	.global gUnknown_810286C
-gUnknown_810286C: @ 810286C
+	.global gArticunoPreFightDialogue_11
+gArticunoPreFightDialogue_11: @ 810286C
 @ replacing .incbin "baserom.gba", 0x0010286c, 0x4c
         .4byte 0x0d000000
         .4byte 0x00000090
@@ -5033,8 +5033,8 @@ gUnknown_810286C: @ 810286C
         .string " Those that enter the forest\n"
         .string "I shall destroy with all my might!\0"
 
-	.global gUnknown_81028B8
-gUnknown_81028B8: @ 81028B8
+	.global gArticunoPreFightDialogue_12
+gArticunoPreFightDialogue_12: @ 81028B8
         .4byte 0x0d000000
         .4byte 0x00000090
         .4byte gUnknown_81028C4
@@ -5043,24 +5043,24 @@ gUnknown_81028B8: @ 81028B8
         gUnknown_81028C4:
         .string " Let us begin!\0\0"
 
-	.global gUnknown_81028D4
-gUnknown_81028D4: @ 81028D4
+	.global gArticunoReFightDialogue_1
+gArticunoReFightDialogue_1: @ 81028D4
 	.incbin "baserom.gba", 0x1028D4, 0x44
 
-	.global gUnknown_8102918
-gUnknown_8102918: @ 8102918
+	.global gArticunoReFightDialogue_2
+gArticunoReFightDialogue_2: @ 8102918
 	.incbin "baserom.gba", 0x102918, 0x30
 
-	.global gUnknown_8102948
-gUnknown_8102948: @ 8102948
+	.global gArticunoReFightDialogue_3
+gArticunoReFightDialogue_3: @ 8102948
 	.incbin "baserom.gba", 0x102948, 0x3C
 
-	.global gUnknown_8102984
-gUnknown_8102984: @ 8102984
+	.global gArticunoPostStoryPreFightDialogue_1
+gArticunoPostStoryPreFightDialogue_1: @ 8102984
 	.incbin "baserom.gba", 0x102984, 0x30
 
-	.global gUnknown_81029B4
-gUnknown_81029B4: @ 81029B4
+	.global gArticunoPostStoryPreFightDialogue_2
+gArticunoPostStoryPreFightDialogue_2: @ 81029B4
 @ replacing .incbin "baserom.gba", 0x001029b4, 0x64
         .4byte 0x0d000000
         .4byte 0x00000090
@@ -5069,18 +5069,18 @@ gUnknown_81029B4: @ 81029B4
 	.global gUnknown_81029C0
         gUnknown_81029C0:
         .string " Your arrival in this frozen\n"
-        .string "forest means only one thing...#P You mean to challenge me!\0"
+        .string "forest means only one thing...{EXTRA_MSG} You mean to challenge me!\0"
 
-	.global gUnknown_8102A18
-gUnknown_8102A18: @ 8102A18
+	.global gArticunoPostStoryPreFightDialogue_3
+gArticunoPostStoryPreFightDialogue_3: @ 8102A18
 	.incbin "baserom.gba", 0x102A18, 0xC
 
-	.global gUnknown_8102A24
-gUnknown_8102A24: @ 8102A24
+	.global gArticunoPostStoryPreFightDialogue_4
+gArticunoPostStoryPreFightDialogue_4: @ 8102A24
 	.incbin "baserom.gba", 0x102A24, 0x50
 
-	.global gUnknown_8102A74
-gUnknown_8102A74: @ 8102A74
+	.global gArticunoPostStoryPreFightDialogue_5
+gArticunoPostStoryPreFightDialogue_5: @ 8102A74
 	.incbin "baserom.gba", 0x102A74, 0x28
 
 	.global gUnknown_8102A9C
@@ -5091,8 +5091,8 @@ gUnknown_8102A9C: @ 8102A9C
 gUnknown_8102B10: @ 8102B10
 	.incbin "baserom.gba", 0x102B10, 0xC
 
-	.global gUnknown_8102B1C
-gUnknown_8102B1C: @ 8102B1C
+	.global MagmaCavernMidDialogue_1
+MagmaCavernMidDialogue_1: @ 8102B1C
 @ replacing .incbin "baserom.gba", 0x00102b1c, 0x38
         .4byte 0x02040000
         .4byte 0x000001aa
@@ -5100,31 +5100,31 @@ gUnknown_8102B1C: @ 8102B1C
 
 	.global gUnknown_8102B28
         gUnknown_8102B28:
-        .string " Let~27s see...#W\n"
+        .string " Let{APOSTROPHE}s see...{WAIT_PRESS}\n"
         .string "...I wonder where we are?\0"
 
-	.global gUnknown_8102B54
-gUnknown_8102B54: @ 8102B54
+	.global MagmaCavernMidDialogue_2
+MagmaCavernMidDialogue_2: @ 8102B54
 	.incbin "baserom.gba", 0x102B54, 0x70
 
-	.global gUnknown_8102BC4
-gUnknown_8102BC4: @ 8102BC4
+	.global MagmaCavernMidDialogue_3
+MagmaCavernMidDialogue_3: @ 8102BC4
 	.incbin "baserom.gba", 0x102BC4, 0x20
 
-	.global gUnknown_8102BE4
-gUnknown_8102BE4: @ 8102BE4
+	.global MagmaCavernMidDialogue_4
+MagmaCavernMidDialogue_4: @ 8102BE4
 	.incbin "baserom.gba", 0x102BE4, 0x4C
 
-	.global gUnknown_8102C30
-gUnknown_8102C30: @ 8102C30
+	.global MagmaCavernMidDialogue_5
+MagmaCavernMidDialogue_5: @ 8102C30
 	.incbin "baserom.gba", 0x102C30, 0x24
 
-	.global gUnknown_8102C54
-gUnknown_8102C54: @ 8102C54
+	.global MagmaCavernMidDialogue_6
+MagmaCavernMidDialogue_6: @ 8102C54
 	.incbin "baserom.gba", 0x102C54, 0x44
 
-	.global gUnknown_8102C98
-gUnknown_8102C98: @ 8102C98
+	.global MagmaCavernMidDialogue_7
+MagmaCavernMidDialogue_7: @ 8102C98
 @ replacing .incbin "baserom.gba", 0x00102c98, 0x18
         .4byte 0x0e030000
         .4byte 0x00000006
@@ -5134,32 +5134,32 @@ gUnknown_8102C98: @ 8102C98
         gUnknown_8102CA4:
         .string " Urrrrgh...\0"
 
-	.global gUnknown_8102CB0
-gUnknown_8102CB0: @ 8102CB0
+	.global MagmaCavernMidDialogue_8
+MagmaCavernMidDialogue_8: @ 8102CB0
 	.incbin "baserom.gba", 0x102CB0, 0x48
 
-	.global gUnknown_8102CF8
-gUnknown_8102CF8: @ 8102CF8
+	.global MagmaCavernMidDialogue_9
+MagmaCavernMidDialogue_9: @ 8102CF8
 	.incbin "baserom.gba", 0x102CF8, 0x3C
 
-	.global gUnknown_8102D34
-gUnknown_8102D34: @ 8102D34
+	.global MagmaCavernMidDialogue_10
+MagmaCavernMidDialogue_10: @ 8102D34
 	.incbin "baserom.gba", 0x102D34, 0x18
 
-	.global gUnknown_8102D4C
-gUnknown_8102D4C: @ 8102D4C
+	.global MagmaCavernMidDialogue_11
+MagmaCavernMidDialogue_11: @ 8102D4C
 	.incbin "baserom.gba", 0x102D4C, 0x30
 
-	.global gUnknown_8102D7C
-gUnknown_8102D7C: @ 8102D7C
+	.global MagmaCavernMidDialogue_12
+MagmaCavernMidDialogue_12: @ 8102D7C
 	.incbin "baserom.gba", 0x102D7C, 0x80
 
-	.global gUnknown_8102DFC
-gUnknown_8102DFC: @ 8102DFC
+	.global MagmaCavernMidDialogue_13
+MagmaCavernMidDialogue_13: @ 8102DFC
 	.incbin "baserom.gba", 0x102DFC, 0x30
 
-	.global gUnknown_8102E2C
-gUnknown_8102E2C: @ 8102E2C
+	.global MagmaCavernMidDialogue_14
+MagmaCavernMidDialogue_14: @ 8102E2C
 @ replacing .incbin "baserom.gba", 0x00102e2c, 0x28
         .4byte 0x020c0000
         .4byte 0x000001aa
@@ -5168,10 +5168,10 @@ gUnknown_8102E2C: @ 8102E2C
 	.global gUnknown_8102E38
         gUnknown_8102E38:
         .string " $m0!\n"
-        .string "We~27ve got to hurry!\0"
+        .string "We{APOSTROPHE}ve got to hurry!\0"
 
-	.global gUnknown_8102E54
-gUnknown_8102E54: @ 8102E54
+	.global MagmaCavernMidDialogue_15
+MagmaCavernMidDialogue_15: @ 8102E54
 @ replacing .incbin "baserom.gba", 0x00102e54, 0x1c
         .4byte 0x0e030000
         .4byte 0x00000006
@@ -5181,16 +5181,16 @@ gUnknown_8102E54: @ 8102E54
         gUnknown_8102E60:
         .string " ...Be careful!\0"
 
-	.global gUnknown_8102E70
-gUnknown_8102E70: @ 8102E70
+	.global GroudonPreFightDialogue_1
+GroudonPreFightDialogue_1: @ 8102E70
 	.incbin "baserom.gba", 0x102E70, 0x4C
 
-	.global gUnknown_8102EBC
-gUnknown_8102EBC: @ 8102EBC
+	.global GroudonPreFightDialogue_2
+GroudonPreFightDialogue_2: @ 8102EBC
 	.incbin "baserom.gba", 0x102EBC, 0x24
 
-	.global gUnknown_8102EE0
-gUnknown_8102EE0: @ 8102EE0
+	.global GroudonPreFightDialogue_3
+GroudonPreFightDialogue_3: @ 8102EE0
 @ replacing .incbin "baserom.gba", 0x00102ee0, 0x18
         .4byte 0x0f000000
         .4byte 0x00000041
@@ -5200,24 +5200,24 @@ gUnknown_8102EE0: @ 8102EE0
         gUnknown_8102EEC:
         .string " Stay back!\0"
 
-	.global gUnknown_8102EF8
-gUnknown_8102EF8: @ 8102EF8
+	.global GroudonPreFightDialogue_4
+GroudonPreFightDialogue_4: @ 8102EF8
 	.incbin "baserom.gba", 0x102EF8, 0x38
 
-	.global gUnknown_8102F30
-gUnknown_8102F30: @ 8102F30
+	.global GroudonPreFightDialogue_5
+GroudonPreFightDialogue_5: @ 8102F30
 	.incbin "baserom.gba", 0x102F30, 0x34
 
-	.global gUnknown_8102F64
-gUnknown_8102F64: @ 8102F64
+	.global GroudonPreFightDialogue_6
+GroudonPreFightDialogue_6: @ 8102F64
 	.incbin "baserom.gba", 0x102F64, 0x20
 
-	.global gUnknown_8102F84
-gUnknown_8102F84: @ 8102F84
+	.global GroudonPreFightDialogue_7
+GroudonPreFightDialogue_7: @ 8102F84
 	.incbin "baserom.gba", 0x102F84, 0x28
 
-	.global gUnknown_8102FAC
-gUnknown_8102FAC: @ 8102FAC
+	.global GroudonPreFightDialogue_8
+GroudonPreFightDialogue_8: @ 8102FAC
 @ replacing .incbin "baserom.gba", 0x00102fac, 0x18
         .4byte 0x0f010000
         .4byte 0x00000041
@@ -5227,8 +5227,8 @@ gUnknown_8102FAC: @ 8102FAC
         gUnknown_8102FB8:
         .string " Wraaaaaah!\0"
 
-	.global gUnknown_8102FC4
-gUnknown_8102FC4: @ 8102FC4
+	.global GroudonPreFightDialogue_9
+GroudonPreFightDialogue_9: @ 8102FC4
         @ replacing .incbin "baserom.gba", 0x00102fc4, 0x14
         .4byte 0x020c0000
         .4byte 0x000001aa
@@ -5238,36 +5238,36 @@ gUnknown_8102FC4: @ 8102FC4
         gUnknown_8102FD0:
         .string " A-$m3!\0"
 
-	.global gUnknown_8102FD8
-gUnknown_8102FD8: @ 8102FD8
+	.global GroudonPreFightDialogue_10
+GroudonPreFightDialogue_10: @ 8102FD8
 	.incbin "baserom.gba", 0x102FD8, 0x7C
 
-	.global gUnknown_8103054
-gUnknown_8103054: @ 8103054
+	.global GroudonPreFightDialogue_11
+GroudonPreFightDialogue_11: @ 8103054
         .incbin "baserom.gba", 0x00103054, 0x84
 
-	.global gUnknown_81030D8
-gUnknown_81030D8: @ 81030D8
+	.global GroudonPreFightDialogue_12
+GroudonPreFightDialogue_12: @ 81030D8
 	.incbin "baserom.gba", 0x1030D8, 0x38
 
-	.global gUnknown_8103110
-gUnknown_8103110: @ 8103110
+	.global GroudonPreFightDialogue_13
+GroudonPreFightDialogue_13: @ 8103110
 	.incbin "baserom.gba", 0x103110, 0x30
 
-	.global gUnknown_8103140
-gUnknown_8103140: @ 8103140
+	.global GroudonPreFightDialogue_14
+GroudonPreFightDialogue_14: @ 8103140
 	.incbin "baserom.gba", 0x103140, 0x48
 
-	.global gUnknown_8103188
-gUnknown_8103188: @ 8103188
+	.global gGroudonReFightDialogue_1
+gGroudonReFightDialogue_1: @ 8103188
 	.incbin "baserom.gba", 0x103188, 0xA0
 
-	.global gUnknown_8103228
-gUnknown_8103228: @ 8103228
+	.global gGroudonReFightDialogue_2
+gGroudonReFightDialogue_2: @ 8103228
         .incbin "baserom.gba", 0x00103228, 0xe8
 
-	.global gUnknown_8103310
-gUnknown_8103310: @ 8103310
+	.global gGroudonReFightDialogue_3
+gGroudonReFightDialogue_3: @ 8103310
 @ replacing .incbin "baserom.gba", 0x00103310, 0x30
         .4byte 0x00000005
         .4byte 0x00000000
@@ -5278,20 +5278,20 @@ gUnknown_8103310: @ 8103310
         .string "Grgaaaaaaaah!\n"
         .string "                     \0"
 
-	.global gUnknown_8103340
-gUnknown_8103340: @ 8103340
+	.global gGroudonReFightDialogue_4
+gGroudonReFightDialogue_4: @ 8103340
         .incbin "baserom.gba", 0x00103340, 0x60
 
-	.global gUnknown_81033A0
-gUnknown_81033A0: @ 81033A0
+	.global gGroudonPostStoryPreFightDialogue_1
+gGroudonPostStoryPreFightDialogue_1: @ 81033A0
 	.incbin "baserom.gba", 0x1033A0, 0xC
 
-	.global gUnknown_81033AC
-gUnknown_81033AC: @ 81033AC
+	.global gGroudonPostStoryPreFightDialogue_2
+gGroudonPostStoryPreFightDialogue_2: @ 81033AC
 	.incbin "baserom.gba", 0x1033AC, 0x90
 
-	.global gUnknown_810343C
-gUnknown_810343C: @ 810343C
+	.global gGroudonPostStoryPreFightDialogue_3
+gGroudonPostStoryPreFightDialogue_3: @ 810343C
 @ replacing .incbin "baserom.gba", 0x0010343c, 0x40
         .4byte 0x0d000000
         .4byte 0x0000019b
@@ -5300,11 +5300,11 @@ gUnknown_810343C: @ 810343C
 	.global gUnknown_8103448
         gUnknown_8103448:
         .string " Those that disturb my\n"
-        .string "sleep...#W\n"
+        .string "sleep...{WAIT_PRESS}\n"
         .string "Shall be crushed!\0"
 
-	.global gUnknown_810347C
-gUnknown_810347C: @ 810347C
+	.global gGroudonPostStoryPreFightDialogue_4
+gGroudonPostStoryPreFightDialogue_4: @ 810347C
 	.incbin "baserom.gba", 0x10347C, 0xC
 
 	.global gUnknown_8103488
@@ -5316,24 +5316,24 @@ gUnknown_8103488: @ 8103488
 
 	.global gUnknown_8103494
         gUnknown_8103494:
-        .string "#+This appears to be the deepest level.#P"
-        .string "#+It~27s impossible to go any farther.#W\n"
-        .string "#+It~27s time to go back.\0"
+        .string "{CENTER_ALIGN}This appears to be the deepest level.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go any farther.{WAIT_PRESS}\n"
+        .string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 
-	.global gUnknown_8103500
-gUnknown_8103500: @ 8103500
+	.global gRayquazaPreFightDialogue_1
+gRayquazaPreFightDialogue_1: @ 8103500
 	.incbin "baserom.gba", 0x103500, 0x2C
 
-	.global gUnknown_810352C
-gUnknown_810352C: @ 810352C
+	.global gRayquazaPreFightDialogue_2
+gRayquazaPreFightDialogue_2: @ 810352C
 	.incbin "baserom.gba", 0x10352C, 0x4C
 
-	.global gUnknown_8103578
-gUnknown_8103578: @ 8103578
+	.global gRayquazaPreFightDialogue_3
+gRayquazaPreFightDialogue_3: @ 8103578
 	.incbin "baserom.gba", 0x103578, 0x5C
 
-	.global gUnknown_81035D4
-gUnknown_81035D4: @ 81035D4
+	.global gRayquazaPreFightDialogue_4
+gRayquazaPreFightDialogue_4: @ 81035D4
         @ replacing .incbin "baserom.gba", 0x001035d4, 0x44
         .4byte 0x0d800000
         .4byte 0x0000019c
@@ -5341,16 +5341,16 @@ gUnknown_81035D4: @ 81035D4
 
 	.global gUnknown_81035E0
         gUnknown_81035E0:
-        .string " Indeed I am.#W\n"
-        .string "The sky is my domain.#P Depart at once!\0"
+        .string " Indeed I am.{WAIT_PRESS}\n"
+        .string "The sky is my domain.{EXTRA_MSG} Depart at once!\0"
         .align 2,0
 
-	.global gUnknown_8103618
-gUnknown_8103618: @ 8103618
+	.global gRayquazaPreFightDialogue_5
+gRayquazaPreFightDialogue_5: @ 8103618
 	.incbin "baserom.gba", 0x103618, 0x64
 
-	.global gUnknown_810367C
-gUnknown_810367C: @ 810367C
+	.global gRayquazaPreFightDialogue_6
+gRayquazaPreFightDialogue_6: @ 810367C
 @ replacing .incbin "baserom.gba", 0x0010367c, 0x14
         .4byte 0x0d800000
         .4byte 0x0000019c
@@ -5361,16 +5361,16 @@ gUnknown_810367C: @ 810367C
         .string " Never!\0"
         .align 2,0
 
-	.global gUnknown_8103690
-gUnknown_8103690: @ 8103690
+	.global gRayquazaPreFightDialogue_7
+gRayquazaPreFightDialogue_7: @ 8103690
 	.incbin "baserom.gba", 0x103690, 0x38
 
-	.global gUnknown_81036C8
-gUnknown_81036C8: @ 81036C8
+	.global gRayquazaPreFightDialogue_8
+gRayquazaPreFightDialogue_8: @ 81036C8
 	.incbin "baserom.gba", 0x1036C8, 0xD8
 
-	.global gUnknown_81037A0
-gUnknown_81037A0: @ 81037A0
+	.global gRayquazaPreFightDialogue_9
+gRayquazaPreFightDialogue_9: @ 81037A0
 @ replacing .incbin "baserom.gba", 0x001037a0, 0x34
         .4byte 0x0d000000
         .4byte 0x0000019c
@@ -5382,20 +5382,20 @@ gUnknown_81037A0: @ 81037A0
         .string "hold true!\0"
         .align 2,0
 
-	.global gUnknown_81037D4
-gUnknown_81037D4: @ 81037D4
+	.global gRayquazaPreFightDialogue_10
+gRayquazaPreFightDialogue_10: @ 81037D4
 	.incbin "baserom.gba", 0x1037D4, 0x4C
 
-	.global gUnknown_8103820
-gUnknown_8103820: @ 8103820
+	.global gRayquazaPreFightDialogue_11
+gRayquazaPreFightDialogue_11: @ 8103820
 	.incbin "baserom.gba", 0x103820, 0x24
 
-	.global gUnknown_8103844
-gUnknown_8103844: @ 8103844
+	.global gRayquazaReFightDialogue_1
+gRayquazaReFightDialogue_1: @ 8103844
 	.incbin "baserom.gba", 0x103844, 0x30
 
-	.global gUnknown_8103874
-gUnknown_8103874: @ 8103874
+	.global gRayquazaReFightDialogue_2
+gRayquazaReFightDialogue_2: @ 8103874
 @ replacing .incbin "baserom.gba", 0x00103874, 0x34
         .4byte 0x0d000000
         .4byte 0x0000019c
@@ -5407,36 +5407,36 @@ gUnknown_8103874: @ 8103874
         .string "likes of you!\0"
         .align 2,0
 
-	.global gUnknown_81038A8
-gUnknown_81038A8: @ 81038A8
+	.global gRayquazaReFightDialogue_3
+gRayquazaReFightDialogue_3: @ 81038A8
 	.incbin "baserom.gba", 0x1038A8, 0x50
 
-	.global gUnknown_81038F8
-gUnknown_81038F8: @ 81038F8
+	.global gRayquazaReFightDialogue_4
+gRayquazaReFightDialogue_4: @ 81038F8
 	.incbin "baserom.gba", 0x1038F8, 0xC
 
-	.global gUnknown_8103904
-gUnknown_8103904: @ 8103904
+	.global gRayquazaPostStoryPreFightDialogue_1
+gRayquazaPostStoryPreFightDialogue_1: @ 8103904
 	.incbin "baserom.gba", 0x103904, 0x34
 
-	.global gUnknown_8103938
-gUnknown_8103938: @ 8103938
+	.global gRayquazaPostStoryPreFightDialogue_2
+gRayquazaPostStoryPreFightDialogue_2: @ 8103938
 	.incbin "baserom.gba", 0x103938, 0x16C
 
-	.global gUnknown_8103AA4
-gUnknown_8103AA4: @ 8103AA4
+	.global gRayquazaPostStoryPreFightDialogue_3
+gRayquazaPostStoryPreFightDialogue_3: @ 8103AA4
 	.incbin "baserom.gba", 0x103AA4, 0x40
 
-	.global gUnknown_8103AE4
-gUnknown_8103AE4: @ 8103AE4
+	.global gRayquazaPostStoryPreFightDialogue_4
+gRayquazaPostStoryPreFightDialogue_4: @ 8103AE4
 	.incbin "baserom.gba", 0x103AE4, 0x4C
 
-	.global gUnknown_8103B30
-gUnknown_8103B30: @ 8103B30
+	.global gRayquazaPostStoryPreFightDialogue_5
+gRayquazaPostStoryPreFightDialogue_5: @ 8103B30
 	.incbin "baserom.gba", 0x103B30, 0x28
 
-	.global gUnknown_8103B58
-gUnknown_8103B58: @ 8103B58
+	.global gRayquazaPostStoryPreFightDialogue_6
+gRayquazaPostStoryPreFightDialogue_6: @ 8103B58
 	.incbin "baserom.gba", 0x103B58, 0x80
 
 	.global gUnknown_8103BD8
@@ -5496,292 +5496,292 @@ gUnknown_8103E40: @ 8103E40
 	.string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 	.align 2, 0
 
-	.global gUnknown_8103EA4
-gUnknown_8103EA4: @ 8103EA4
+	.global gMewtwoPreFightDialogue_1
+gMewtwoPreFightDialogue_1: @ 8103EA4
 	.incbin "baserom.gba", 0x103EA4, 0x68
 
-	.global gUnknown_8103F0C
-gUnknown_8103F0C: @ 8103F0C
+	.global gMewtwoPreFightDialogue_2
+gMewtwoPreFightDialogue_2: @ 8103F0C
 	.incbin "baserom.gba", 0x103F0C, 0x40
 
-	.global gUnknown_8103F4C
-gUnknown_8103F4C: @ 8103F4C
+	.global gMewtwoPreFightDialogue_3
+gMewtwoPreFightDialogue_3: @ 8103F4C
 	.incbin "baserom.gba", 0x103F4C, 0x80
 
-	.global gUnknown_8103FCC
-gUnknown_8103FCC: @ 8103FCC
+	.global gMewtwoPreFightDialogue_4
+gMewtwoPreFightDialogue_4: @ 8103FCC
 	.incbin "baserom.gba", 0x103FCC, 0x3C
 
-	.global gUnknown_8104008
-gUnknown_8104008: @ 8104008
+	.global gMewtwoPreFightDialogue_5
+gMewtwoPreFightDialogue_5: @ 8104008
 	.incbin "baserom.gba", 0x104008, 0x3C
 
-	.global gUnknown_8104044
-gUnknown_8104044: @ 8104044
+	.global gMewtwoReFightDialogue_1
+gMewtwoReFightDialogue_1: @ 8104044
 	.incbin "baserom.gba", 0x104044, 0xC
 
-	.global gUnknown_8104050
-gUnknown_8104050: @ 8104050
+	.global gMewtwoReFightDialogue_2
+gMewtwoReFightDialogue_2: @ 8104050
 	.incbin "baserom.gba", 0x104050, 0x7C
 
-	.global gUnknown_81040CC
-gUnknown_81040CC: @ 81040CC
+	.global gMewtwoReFightDialogue_3
+gMewtwoReFightDialogue_3: @ 81040CC
 	.incbin "baserom.gba", 0x1040CC, 0x48
 
-	.global gUnknown_8104114
-gUnknown_8104114: @ 8104114
+	.global gMewtwoReFightDialogue_4
+gMewtwoReFightDialogue_4: @ 8104114
 	.incbin "baserom.gba", 0x104114, 0x30
 
-	.global gUnknown_8104144
-gUnknown_8104144: @ 8104144
+	.global gMewtwoReFightDialogue_5
+gMewtwoReFightDialogue_5: @ 8104144
 	.incbin "baserom.gba", 0x104144, 0xC
 
-	.global gUnknown_8104150
-gUnknown_8104150: @ 8104150
+	.global gEnteiPreFightDialogue_1
+gEnteiPreFightDialogue_1: @ 8104150
 	.incbin "baserom.gba", 0x104150, 0x5C
 
-	.global gUnknown_81041AC
-gUnknown_81041AC: @ 81041AC
+	.global gEnteiPreFightDialogue_2
+gEnteiPreFightDialogue_2: @ 81041AC
 	.incbin "baserom.gba", 0x1041AC, 0x4C
 
-	.global gUnknown_81041F8
-gUnknown_81041F8: @ 81041F8
+	.global gEnteiPreFightDialogue_3
+gEnteiPreFightDialogue_3: @ 81041F8
 	.incbin "baserom.gba", 0x1041F8, 0x48
 
-	.global gUnknown_8104240
-gUnknown_8104240: @ 8104240
+	.global gEnteiReFightDialogue_1
+gEnteiReFightDialogue_1: @ 8104240
 	.incbin "baserom.gba", 0x104240, 0x6C
 
-	.global gUnknown_81042AC
-gUnknown_81042AC: @ 81042AC
+	.global gEnteiReFightDialogue_2
+gEnteiReFightDialogue_2: @ 81042AC
 	.incbin "baserom.gba", 0x1042AC, 0xC
 
-	.global gUnknown_81042B8
-gUnknown_81042B8: @ 81042B8
+	.global gEnteiReFightDialogue_3
+gEnteiReFightDialogue_3: @ 81042B8
 	.incbin "baserom.gba", 0x1042B8, 0x58
 
-	.global gUnknown_8104310
-gUnknown_8104310: @ 8104310
+	.global gEnteiPostStoryPreFightDialogue_1
+gEnteiPostStoryPreFightDialogue_1: @ 8104310
 	.incbin "baserom.gba", 0x104310, 0x8C
 
-	.global gUnknown_810439C
-gUnknown_810439C: @ 810439C
+	.global gEnteiPostStoryPreFightDialogue_2
+gEnteiPostStoryPreFightDialogue_2: @ 810439C
 	.incbin "baserom.gba", 0x10439C, 0x24
 
-	.global gUnknown_81043C0
-gUnknown_81043C0: @ 81043C0
+	.global gEnteiPostStoryPreFightDialogue_3
+gEnteiPostStoryPreFightDialogue_3: @ 81043C0
 	.incbin "baserom.gba", 0x1043C0, 0x1C
 
-	.global gUnknown_81043DC
-gUnknown_81043DC: @ 81043DC
+	.global gEnteiPostStoryPreFightDialogue_4
+gEnteiPostStoryPreFightDialogue_4: @ 81043DC
 	.incbin "baserom.gba", 0x1043DC, 0x74
 
-	.global gUnknown_8104450
-gUnknown_8104450: @ 8104450
+	.global gRaikouPreFightDialogue_1
+gRaikouPreFightDialogue_1: @ 8104450
 	.incbin "baserom.gba", 0x104450, 0x64
 
-	.global gUnknown_81044B4
-gUnknown_81044B4: @ 81044B4
+	.global gRaikouPreFightDialogue_2
+gRaikouPreFightDialogue_2: @ 81044B4
 	.incbin "baserom.gba", 0x1044B4, 0x5C
 
-	.global gUnknown_8104510
-gUnknown_8104510: @ 8104510
+	.global gRaikouPreFightDialogue_3
+gRaikouPreFightDialogue_3: @ 8104510
 	.incbin "baserom.gba", 0x104510, 0x2C
 
-	.global gUnknown_810453C
-gUnknown_810453C: @ 810453C
+	.global gRaikouPreFightDialogue_4
+gRaikouPreFightDialogue_4: @ 810453C
 	.incbin "baserom.gba", 0x10453C, 0x34
 
-	.global gUnknown_8104570
-gUnknown_8104570: @ 8104570
+	.global gRaikouPreFightDialogue_5
+gRaikouPreFightDialogue_5: @ 8104570
 	.incbin "baserom.gba", 0x104570, 0x40
 
-	.global gUnknown_81045B0
-gUnknown_81045B0: @ 81045B0
+	.global gRaikouPreFightDialogue_6
+gRaikouPreFightDialogue_6: @ 81045B0
 	.incbin "baserom.gba", 0x1045B0, 0x48
 
-	.global gUnknown_81045F8
-gUnknown_81045F8: @ 81045F8
+	.global gRaikouReFightDialogue_1
+gRaikouReFightDialogue_1: @ 81045F8
 	.incbin "baserom.gba", 0x1045F8, 0x7C
 
-	.global gUnknown_8104674
-gUnknown_8104674: @ 8104674
+	.global gRaikouReFightDialogue_2
+gRaikouReFightDialogue_2: @ 8104674
 	.incbin "baserom.gba", 0x104674, 0x2C
 
-	.global gUnknown_81046A0
-gUnknown_81046A0: @ 81046A0
+	.global gRaikouReFightDialogue_3
+gRaikouReFightDialogue_3: @ 81046A0
 	.incbin "baserom.gba", 0x1046A0, 0x2C
 
-	.global gUnknown_81046CC
-gUnknown_81046CC: @ 81046CC
+	.global gRaikouPostStoryPreFightDialogue_1
+gRaikouPostStoryPreFightDialogue_1: @ 81046CC
 	.incbin "baserom.gba", 0x1046CC, 0x78
 
-	.global gUnknown_8104744
-gUnknown_8104744: @ 8104744
+	.global gRaikouPostStoryPreFightDialogue_2
+gRaikouPostStoryPreFightDialogue_2: @ 8104744
 	.incbin "baserom.gba", 0x104744, 0x28
 
-	.global gUnknown_810476C
-gUnknown_810476C: @ 810476C
+	.global gRaikouPostStoryPreFightDialogue_3
+gRaikouPostStoryPreFightDialogue_3: @ 810476C
 	.incbin "baserom.gba", 0x10476C, 0xC
 
-	.global gUnknown_8104778
-gUnknown_8104778: @ 8104778
+	.global gRaikouPostStoryPreFightDialogue_4
+gRaikouPostStoryPreFightDialogue_4: @ 8104778
 	.incbin "baserom.gba", 0x104778, 0xC
 
-	.global gUnknown_8104784
-gUnknown_8104784: @ 8104784
+	.global gSuicunePreFightDialogue_1
+gSuicunePreFightDialogue_1: @ 8104784
 	.incbin "baserom.gba", 0x104784, 0xC
 
-	.global gUnknown_8104790
-gUnknown_8104790: @ 8104790
+	.global gSuicunePreFightDialogue_2
+gSuicunePreFightDialogue_2: @ 8104790
 	.incbin "baserom.gba", 0x104790, 0x20
 
-	.global gUnknown_81047B0
-gUnknown_81047B0: @ 81047B0
+	.global gSuicunePreFightDialogue_3
+gSuicunePreFightDialogue_3: @ 81047B0
 	.incbin "baserom.gba", 0x1047B0, 0x9C
 
-	.global gUnknown_810484C
-gUnknown_810484C: @ 810484C
+	.global gSuicunePreFightDialogue_4
+gSuicunePreFightDialogue_4: @ 810484C
 	.incbin "baserom.gba", 0x10484C, 0x3C
 
-	.global gUnknown_8104888
-gUnknown_8104888: @ 8104888
+	.global gSuicunePreFightDialogue_5
+gSuicunePreFightDialogue_5: @ 8104888
 	.incbin "baserom.gba", 0x104888, 0x40
 
-	.global gUnknown_81048C8
-gUnknown_81048C8: @ 81048C8
+	.global gSuicunePreFightDialogue_6
+gSuicunePreFightDialogue_6: @ 81048C8
 	.incbin "baserom.gba", 0x1048C8, 0x4C
 
-	.global gUnknown_8104914
-gUnknown_8104914: @ 8104914
+	.global gSuicunePreFightDialogue_7
+gSuicunePreFightDialogue_7: @ 8104914
 	.incbin "baserom.gba", 0x104914, 0x1C
 
-	.global gUnknown_8104930
-gUnknown_8104930: @ 8104930
+	.global gSuicuneReFightDialogue_1
+gSuicuneReFightDialogue_1: @ 8104930
 	.incbin "baserom.gba", 0x104930, 0x50
 
-	.global gUnknown_8104980
-gUnknown_8104980: @ 8104980
+	.global gSuicuneReFightDialogue_2
+gSuicuneReFightDialogue_2: @ 8104980
 	.incbin "baserom.gba", 0x104980, 0x18
 
-	.global gUnknown_8104998
-gUnknown_8104998: @ 8104998
+	.global gSuicuneReFightDialogue_3
+gSuicuneReFightDialogue_3: @ 8104998
 	.incbin "baserom.gba", 0x104998, 0x3C
 
-	.global gUnknown_81049D4
-gUnknown_81049D4: @ 81049D4
+	.global gSuicunePostStoryPreFightDialogue_1
+gSuicunePostStoryPreFightDialogue_1: @ 81049D4
 	.incbin "baserom.gba", 0x1049D4, 0xAC
 
-	.global gUnknown_8104A80
-gUnknown_8104A80: @ 8104A80
+	.global gSuicunePostStoryPreFightDialogue_2
+gSuicunePostStoryPreFightDialogue_2: @ 8104A80
 	.incbin "baserom.gba", 0x104A80, 0x1C
 
-	.global gUnknown_8104A9C
-gUnknown_8104A9C: @ 8104A9C
+	.global gSuicunePostStoryPreFightDialogue_3
+gSuicunePostStoryPreFightDialogue_3: @ 8104A9C
 	.incbin "baserom.gba", 0x104A9C, 0x2C
 
-	.global gUnknown_8104AC8
-gUnknown_8104AC8: @ 8104AC8
+	.global gSuicunePostStoryPreFightDialogue_4
+gSuicunePostStoryPreFightDialogue_4: @ 8104AC8
 	.incbin "baserom.gba", 0x104AC8, 0xC
 
-	.global gUnknown_8104AD4
-gUnknown_8104AD4: @ 8104AD4
+	.global gHoOhPreFightDialogue_1
+gHoOhPreFightDialogue_1: @ 8104AD4
 	.incbin "baserom.gba", 0x104AD4, 0x118
 
-	.global gUnknown_8104BEC
-gUnknown_8104BEC: @ 8104BEC
+	.global gHoOhPreFightDialogue_2
+gHoOhPreFightDialogue_2: @ 8104BEC
 	.incbin "baserom.gba", 0x104BEC, 0x24
 
-	.global gUnknown_8104C10
-gUnknown_8104C10: @ 8104C10
+	.global gHoOhPreFightDialogue_3
+gHoOhPreFightDialogue_3: @ 8104C10
 	.incbin "baserom.gba", 0x104C10, 0x44
 
-	.global gUnknown_8104C54
-gUnknown_8104C54: @ 8104C54
+	.global gHoOhPreFightDialogue_4
+gHoOhPreFightDialogue_4: @ 8104C54
 	.incbin "baserom.gba", 0x104C54, 0x60
 
-	.global gUnknown_8104CB4
-gUnknown_8104CB4: @ 8104CB4
+	.global gHoOhPreFightDialogue_5
+gHoOhPreFightDialogue_5: @ 8104CB4
 	.incbin "baserom.gba", 0x104CB4, 0x2C
 
-	.global gUnknown_8104CE0
-gUnknown_8104CE0: @ 8104CE0
+	.global gHoOhPreFightDialogue_6
+gHoOhPreFightDialogue_6: @ 8104CE0
 	.incbin "baserom.gba", 0x104CE0, 0xC
 
-	.global gUnknown_8104CEC
-gUnknown_8104CEC: @ 8104CEC
+	.global HoOhReFightDialogue_1
+HoOhReFightDialogue_1: @ 8104CEC
 	.incbin "baserom.gba", 0x104CEC, 0x74
 
-	.global gUnknown_8104D60
-gUnknown_8104D60: @ 8104D60
+	.global HoOhReFightDialogue_2
+HoOhReFightDialogue_2: @ 8104D60
 	.incbin "baserom.gba", 0x104D60, 0x7C
 
-	.global gUnknown_8104DDC
-gUnknown_8104DDC: @ 8104DDC
+	.global HoOhReFightDialogue_3
+HoOhReFightDialogue_3: @ 8104DDC
 	.incbin "baserom.gba", 0x104DDC, 0x30
 
-	.global gUnknown_8104E0C
-gUnknown_8104E0C: @ 8104E0C
+	.global HoOhReFightDialogue_4
+HoOhReFightDialogue_4: @ 8104E0C
 	.incbin "baserom.gba", 0x104E0C, 0x48
 
-	.global gUnknown_8104E54
-gUnknown_8104E54: @ 8104E54
+	.global HoOhReFightDialogue_5
+HoOhReFightDialogue_5: @ 8104E54
 	.incbin "baserom.gba", 0x104E54, 0xC
 
-	.global gUnknown_8104E60
-gUnknown_8104E60: @ 8104E60
+	.global gLatiosPreFightDialogue_1
+gLatiosPreFightDialogue_1: @ 8104E60
 	.incbin "baserom.gba", 0x104E60, 0x9C
 
-	.global gUnknown_8104EFC
-gUnknown_8104EFC: @ 8104EFC
+	.global gLatiosPreFightDialogue_2
+gLatiosPreFightDialogue_2: @ 8104EFC
 	.incbin "baserom.gba", 0x104EFC, 0x34
 
-	.global gUnknown_8104F30
-gUnknown_8104F30: @ 8104F30
+	.global gLatiosPreFightDialogue_3
+gLatiosPreFightDialogue_3: @ 8104F30
 	.incbin "baserom.gba", 0x104F30, 0x34
 
-	.global gUnknown_8104F64
-gUnknown_8104F64: @ 8104F64
+	.global gLatiosReFightDialogue_1
+gLatiosReFightDialogue_1: @ 8104F64
 	.incbin "baserom.gba", 0x104F64, 0x64
 
 	.global gUnknown_8104FC8
 gUnknown_8104FC8: @ 8104FC8
 	.incbin "baserom.gba", 0x104FC8, 0xC
 
-	.global gUnknown_8104FD4
-gUnknown_8104FD4: @ 8104FD4
+	.global gRegirockPreFightDialogue_1
+gRegirockPreFightDialogue_1: @ 8104FD4
 	.incbin "baserom.gba", 0x104FD4, 0x54
 
-	.global gUnknown_8105028
-gUnknown_8105028: @ 8105028
+	.global gRegicePreFightDialogue_1
+gRegicePreFightDialogue_1: @ 8105028
 	.incbin "baserom.gba", 0x105028, 0xC
 
-	.global gUnknown_8105034
-gUnknown_8105034: @ 8105034
+	.global gRegisteelPreFightDialogue_1
+gRegisteelPreFightDialogue_1: @ 8105034
 	.incbin "baserom.gba", 0x105034, 0xC
 
-	.global gUnknown_8105040
-gUnknown_8105040: @ 8105040
+	.global gRegirockPostFightDialogue_1
+gRegirockPostFightDialogue_1: @ 8105040
 	.incbin "baserom.gba", 0x105040, 0x74
 
-	.global gUnknown_81050B4
-gUnknown_81050B4: @ 81050B4
+	.global gRegirockPostFightDialogue_2
+gRegirockPostFightDialogue_2: @ 81050B4
 	.incbin "baserom.gba", 0x1050B4, 0x58
 
-	.global gUnknown_810510C
-gUnknown_810510C: @ 810510C
+	.global gRegicePostFightDialogue_1
+gRegicePostFightDialogue_1: @ 810510C
 	.incbin "baserom.gba", 0x10510C, 0x70
 
-	.global gUnknown_810517C
-gUnknown_810517C: @ 810517C
+	.global gRegicePostFightDialogue_2
+gRegicePostFightDialogue_2: @ 810517C
 	.incbin "baserom.gba", 0x10517C, 0x54
 
-	.global gUnknown_81051D0
-gUnknown_81051D0: @ 81051D0
+	.global gRegisteelPostFightDialogue_1
+gRegisteelPostFightDialogue_1: @ 81051D0
 	.incbin "baserom.gba", 0x1051D0, 0x74
 
-	.global gUnknown_8105244
-gUnknown_8105244: @ 8105244
+	.global gRegisteelPostFightDialogue_2
+gRegisteelPostFightDialogue_2: @ 8105244
 	.incbin "baserom.gba", 0x105244, 0xD8
 
 	.global gUnknown_810531C
@@ -5800,20 +5800,20 @@ gUnknown_81053A8: @ 81053A8
 gUnknown_8105434: @ 8105434
 	.incbin "baserom.gba", 0x105434, 0x4
 
-	.global gUnknown_8105438
-gUnknown_8105438: @ 8105438
+	.global gJirachiPreFightDialogue_1
+gJirachiPreFightDialogue_1: @ 8105438
 	.incbin "baserom.gba", 0x105438, 0x68
 
-	.global gUnknown_81054A0
-gUnknown_81054A0: @ 81054A0
+	.global gJirachiPreFightDialogue_2
+gJirachiPreFightDialogue_2: @ 81054A0
 	.incbin "baserom.gba", 0x1054A0, 0x44
 
-	.global gUnknown_81054E4
-gUnknown_81054E4: @ 81054E4
+	.global gJirachiPreFightDialogue_3
+gJirachiPreFightDialogue_3: @ 81054E4
 	.incbin "baserom.gba", 0x1054E4, 0x28
 
-	.global gUnknown_810550C
-gUnknown_810550C: @ 810550C
+	.global gJirachiPreFightDialogue_4
+gJirachiPreFightDialogue_4: @ 810550C
 	.incbin "baserom.gba", 0x10550C, 0x40
 
 	.global gUnknown_810554C
@@ -5912,104 +5912,104 @@ gUnknown_8105D80: @ 8105D80
 gUnknown_8105D9C: @ 8105D9C
 	.incbin "baserom.gba", 0x105D9C, 0x78
 
-	.global gUnknown_8105E14
-gUnknown_8105E14: @ 8105E14
+	.global gJirachiReFightDialogue_1
+gJirachiReFightDialogue_1: @ 8105E14
 	.incbin "baserom.gba", 0x105E14, 0x74
 
 @ Lugia Fight Dialogue
 
-	.global gUnknown_8105E88
-gUnknown_8105E88: @ 8105E88
+	.global gLugiaPreFightDialogue_1
+gLugiaPreFightDialogue_1: @ 8105E88
 	.incbin "baserom.gba", 0x105E88, 0x70
 
-	.global gUnknown_8105EF8
-gUnknown_8105EF8: @ 8105EF8
+	.global gLugiaPreFightDialogue_2
+gLugiaPreFightDialogue_2: @ 8105EF8
 	.incbin "baserom.gba", 0x105EF8, 0x40
 
-	.global gUnknown_8105F38
-gUnknown_8105F38: @ 8105F38
+	.global gLugiaPreFightDialogue_3
+gLugiaPreFightDialogue_3: @ 8105F38
 	.incbin "baserom.gba", 0x105F38, 0x3C
 
-	.global gUnknown_8105F74
-gUnknown_8105F74: @ 8105F74
+	.global gLugiaPreFightDialogue_4
+gLugiaPreFightDialogue_4: @ 8105F74
 	.incbin "baserom.gba", 0x105F74, 0x2C
 
-	.global gUnknown_8105FA0
-gUnknown_8105FA0: @ 8105FA0
+	.global gLugiaPreFightDialogue_5
+gLugiaPreFightDialogue_5: @ 8105FA0
 	.incbin "baserom.gba", 0x105FA0, 0x38
 
-	.global gUnknown_8105FD8
-gUnknown_8105FD8: @ 8105FD8
+	.global gLugiaPreFightDialogue_6
+gLugiaPreFightDialogue_6: @ 8105FD8
 	.incbin "baserom.gba", 0x105FD8, 0x4C
 
-	.global gUnknown_8106024
-gUnknown_8106024: @ 8106024
+	.global gLugiaPreFightDialogue_7
+gLugiaPreFightDialogue_7: @ 8106024
 	.incbin "baserom.gba", 0x106024, 0x44
+
+	.global gLugiaPreFightDialogue_8
+gLugiaPreFightDialogue_8: @ 8106068
+	.incbin "baserom.gba", 0x106068, 0xC
 
 @ Kyogre Fight Dialogue
 
-	.global gUnknown_8106068
-gUnknown_8106068: @ 8106068
-	.incbin "baserom.gba", 0x106068, 0xC
-
-	.global gUnknown_8106074
-gUnknown_8106074: @ 8106074
+	.global gKyogrePreFightDialogue_1
+gKyogrePreFightDialogue_1: @ 8106074
 	.incbin "baserom.gba", 0x106074, 0x48
 
-	.global gUnknown_81060BC
-gUnknown_81060BC: @ 81060BC
+	.global gKyogrePreFightDialogue_2
+gKyogrePreFightDialogue_2: @ 81060BC
 	.incbin "baserom.gba", 0x1060BC, 0x48
 
-	.global gUnknown_8106104
-gUnknown_8106104: @ 8106104
+	.global gKyogrePreFightDialogue_3
+gKyogrePreFightDialogue_3: @ 8106104
 	.incbin "baserom.gba", 0x106104, 0x3C
 
-	.global gUnknown_8106140
-gUnknown_8106140: @ 8106140
+	.global gKyogrePreFightDialogue_4
+gKyogrePreFightDialogue_4: @ 8106140
 	.incbin "baserom.gba", 0x106140, 0xD4
 
-	.global gUnknown_8106214
-gUnknown_8106214: @ 8106214
+	.global gKyogrePreFightDialogue_5
+gKyogrePreFightDialogue_5: @ 8106214
 	.incbin "baserom.gba", 0x106214, 0x30
 
-	.global gUnknown_8106244
-gUnknown_8106244: @ 8106244
+	.global gKyogrePreFightDialogue_6
+gKyogrePreFightDialogue_6: @ 8106244
 	.incbin "baserom.gba", 0x106244, 0x38
 
-	.global gUnknown_810627C
-gUnknown_810627C: @ 810627C
+	.global gKyogrePreFightDialogue_7
+gKyogrePreFightDialogue_7: @ 810627C
 	.incbin "baserom.gba", 0x10627C, 0x2C
 
-	.global gUnknown_81062A8
-gUnknown_81062A8: @ 81062A8
+	.global gKyogrePreFightDialogue_8
+gKyogrePreFightDialogue_8: @ 81062A8
 	.incbin "baserom.gba", 0x1062A8, 0xC
 
-	.global gUnknown_81062B4
-gUnknown_81062B4: @ 81062B4
+	.global gDeoxysPreFightDialogue_1
+gDeoxysPreFightDialogue_1: @ 81062B4
 	.incbin "baserom.gba", 0x1062B4, 0x34
 
-	.global gUnknown_81062E8
-gUnknown_81062E8: @ 81062E8
+	.global gDeoxysPreFightDialogue_2
+gDeoxysPreFightDialogue_2: @ 81062E8
 	.incbin "baserom.gba", 0x1062E8, 0x80
 
-	.global gUnknown_8106368
-gUnknown_8106368: @ 8106368
+	.global gDeoxysPreFightDialogue_3
+gDeoxysPreFightDialogue_3: @ 8106368
 	.incbin "baserom.gba", 0x106368, 0x28
 
-	.global gUnknown_8106390
-gUnknown_8106390: @ 8106390
+	.global gDeoxysPreFightDialogue_4
+gDeoxysPreFightDialogue_4: @ 8106390
 	.incbin "baserom.gba", 0x106390, 0x34
 
-	.global gUnknown_81063C4
-gUnknown_81063C4: @ 81063C4
+	.global gDeoxysPreFightDialogue_5
+gDeoxysPreFightDialogue_5: @ 81063C4
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gUnknown_8103E40
 
 @ Dialogue for Purity Forest
 
-	.global gUnknown_81063D0
-gUnknown_81063D0: @ 81063D0
+	.global gCelebiJoinDialogue_1
+gCelebiJoinDialogue_1: @ 81063D0
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestSomeoneThereText
@@ -6020,8 +6020,8 @@ gPurityForestSomeoneThereText: @ 81063DC
 	.string "{CENTER_ALIGN}There{APOSTROPHE}s someone there.\0"
 	.align 2, 0
 
-	.global gUnknown_8106400
-gUnknown_8106400: @ 8106400
+	.global gCelebiJoinDialogue_2
+gCelebiJoinDialogue_2: @ 8106400
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiIntroText
@@ -6032,8 +6032,8 @@ gPurityForestCelebiIntroText: @ 810640C
 	.string "{CENTER_ALIGN}The Time Travel Pokémon {ARG_POKEMON_2}!\0"
 	.align 2, 0
 
-	.global gUnknown_810643C
-gUnknown_810643C: @ 810643C
+	.global gCelebiJoinDialogue_3
+gCelebiJoinDialogue_3: @ 810643C
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiWantsToJoinText
@@ -6043,8 +6043,8 @@ gPurityForestCelebiWantsToJoinText: @ 8106448
 	.string "{CENTER_ALIGN}{ARG_POKEMON_2} wants to join the team.\0"
 	.align 2, 0
 
-	.global gUnknown_8106468
-gUnknown_8106468: @ 8106468
+	.global gCelebiJoinDialogue_4
+gCelebiJoinDialogue_4: @ 8106468
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiJoinedText
@@ -6054,8 +6054,8 @@ gPurityForestCelebiJoinedText: @ 8106474
 	.string "{CENTER_ALIGN}{ARG_POKEMON_2} joined the team! \0"
 	.align 2, 0
 
-	.global gUnknown_810648C
-gUnknown_810648C: @ 810648C
+	.global gCelebiJoinDialogue_5
+gCelebiJoinDialogue_5: @ 810648C
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiVeryHappyText
@@ -6066,8 +6066,8 @@ gPurityForestCelebiVeryHappyText: @ 8106498
 	.string "{CENTER_ALIGN}be very happy!\0"
 	.align 2, 0
 
-	.global gUnknown_81064BC
-gUnknown_81064BC: @ 81064BC
+	.global gCelebiJoinDialogue_6
+gCelebiJoinDialogue_6: @ 81064BC
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiDelightedToJoinText
@@ -6078,8 +6078,8 @@ gPurityForestCelebiDelightedToJoinText: @ 81064C8
 	.string "{CENTER_ALIGN}joined the rescue team!\0"
 	.align 2, 0
 
-	.global gUnknown_8106500
-gUnknown_8106500: @ 8106500
+	.global gCelebiJoinDialogue_7
+gCelebiJoinDialogue_7: @ 8106500
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestTurnedDownOfferText
@@ -6090,8 +6090,8 @@ gPurityForestTurnedDownOfferText: @ 810650C
 	.string "{CENTER_ALIGN}the offer to join.\0"
 	.align 2, 0
 
-	.global gUnknown_8106534
-gUnknown_8106534: @ 8106534
+	.global gCelebiJoinDialogue_8
+gCelebiJoinDialogue_8: @ 8106534
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiDisappointedText
@@ -6101,8 +6101,8 @@ gPurityForestCelebiDisappointedText: @ 8106540
 	.string "{CENTER_ALIGN}Celebi is very disappointed.\0"
 	.align 2, 0
 
-	.global gUnknown_8106560
-gUnknown_8106560: @ 8106560
+	.global gCelebiJoinDialogue_9
+gCelebiJoinDialogue_9: @ 8106560
 	.byte 0x04, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00
 	.4byte gPurityForestCelebiLeftDejectedlyText
@@ -6171,8 +6171,8 @@ gPurityForestRefuseCelebiReconsiderText: @ 8106630
 	.string "Reconsider.\0"
 	.align 2, 0
 
-	.global gUnknown_810663C
-gUnknown_810663C: @ 810663C
+	.global gCelebiJoinDialogue_10
+gCelebiJoinDialogue_10: @ 810663C
 	.incbin "baserom.gba", 0x10663C, 0x20
 
 	.global gUnknown_810665C
@@ -6199,36 +6199,36 @@ gUnknown_810671C: @ 810671C
 gUnknown_8106720: @ 8106720
 	.incbin "baserom.gba", 0x106720, 0x58
 
-	.global gUnknown_8106778
-gUnknown_8106778: @ 8106778
+	.global gMedichamRescueDialogue_1
+gMedichamRescueDialogue_1: @ 8106778
 	.incbin "baserom.gba", 0x106778, 0x44
 
-	.global gUnknown_81067BC
-gUnknown_81067BC: @ 81067BC
+	.global gMedichamRescueDialogue_2
+gMedichamRescueDialogue_2: @ 81067BC
 	.incbin "baserom.gba", 0x1067BC, 0x24
 
-	.global gUnknown_81067E0
-gUnknown_81067E0: @ 81067E0
+	.global gMedichamRescueDialogue_3
+gMedichamRescueDialogue_3: @ 81067E0
 	.incbin "baserom.gba", 0x1067E0, 0x54
 
-	.global gUnknown_8106834
-gUnknown_8106834: @ 8106834
+	.global gMedichamRescueDialogue_4
+gMedichamRescueDialogue_4: @ 8106834
 	.incbin "baserom.gba", 0x106834, 0x58
 
-	.global gUnknown_810688C
-gUnknown_810688C: @ 810688C
+	.global gSmeargleRescueDialogue_1
+gSmeargleRescueDialogue_1: @ 810688C
 	.incbin "baserom.gba", 0x10688C, 0x44
 
-	.global gUnknown_81068D0
-gUnknown_81068D0: @ 81068D0
+	.global gSmeargleRescueDialogue_2
+gSmeargleRescueDialogue_2: @ 81068D0
 	.incbin "baserom.gba", 0x1068D0, 0x48
 
-	.global gUnknown_8106918
-gUnknown_8106918: @ 8106918
+	.global gSmeargleRescueDialogue_3
+gSmeargleRescueDialogue_3: @ 8106918
 	.incbin "baserom.gba", 0x106918, 0x1C
 
-	.global gUnknown_8106934
-gUnknown_8106934: @ 8106934
+	.global gSmeargleRescueDialogue_4
+gSmeargleRescueDialogue_4: @ 8106934
 	.incbin "baserom.gba", 0x106934, 0x48
 
 	.global gUnknown_810697C

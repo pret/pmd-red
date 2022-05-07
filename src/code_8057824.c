@@ -148,7 +148,7 @@ bool32 sub_8057974(struct DungeonEntity *pokemon, struct DungeonEntity *target, 
   return local_24;
 }
 
-bool8 sub_8057A0C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 PainSplitMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
   s32 newHP;
   struct DungeonEntityData *iVar2;

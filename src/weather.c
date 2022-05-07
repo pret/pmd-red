@@ -41,7 +41,7 @@ void sub_807E5E4(u8 weather)
   gDungeonGlobalData->unkE279 = 0;
   for(index = 0; index < 8; index++) {
     gDungeonGlobalData->unkE267[index] = 0;
-    gDungeonGlobalData->unkE26F[index] = 0;
+    gDungeonGlobalData->startingWeather[index] = 0;
   }
   preload = &gDungeonGlobalData->weatherDamageTimer;
   index = 0;

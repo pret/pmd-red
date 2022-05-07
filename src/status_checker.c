@@ -183,13 +183,13 @@ bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target
   struct MapTile *tileToFill;
   struct DungeonEntityData *iVar5;
   int y;
-  bool8 didWork; // TODO better name for this... signifies that orb worked
+  bool8 filledInTile;
   int x;
   u16 cast_x;
   u32 cast_y;
   struct Position_Alt tileCoords;
 
-  didWork = FALSE;
+  filledInTile = FALSE;
   iVar5 = target->entityData;
   if (IsBossBattle()) {
     SendMessage(pokemon,*gUnknown_80FD0B8);
@@ -197,7 +197,7 @@ bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target
   }
   else
   {
-    // Calcuate the coordinates of the tile in front of the user
+    // Calculate the coordinates of the tile in front of the user
     cast_x = target->posWorld.x + gAdjacentTileOffsets[iVar5->action.facingDir].x;
     tileCoords.temp.full_bits = (tileCoords.temp.full_bits & 0xffff0000) | cast_x;
 
@@ -212,7 +212,7 @@ bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target
       for(y = -1; y < 2; y++)
         for(x = -1; x < 2; x++)
           sub_80498A8(tileCoords.temp.norm.x + x, tileCoords.temp.norm.y + y);
-      didWork = TRUE;
+      filledInTile = TRUE;
       sub_806CF60();
     }
 
@@ -220,7 +220,7 @@ bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target
       for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
           sub_8049BB0(x,y);
 
-    if (didWork) {
+    if (filledInTile) {
         sub_8042A64((struct Position *)&tileCoords);
         sub_80522F4(pokemon,target,*gUnknown_80FD0B4);
     }
@@ -229,7 +229,7 @@ bool8 FillInOrbAction(struct DungeonEntity *pokemon,struct DungeonEntity *target
     }
     sub_8040A84();
     sub_8049ED4();
-    return didWork;
+    return filledInTile;
   }
 }
 

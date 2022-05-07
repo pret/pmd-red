@@ -6,68 +6,69 @@
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_util_1.h"
 #include "friend_area.h"
 #include "map.h"
 #include "pokemon.h"
 
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
-extern struct DungeonEntity *sub_8085680(u32);
+extern struct DungeonEntity *GetEntityFromClientType(u32);
 extern char gUnknown_202E038[0x50];
 extern u32 gUnknown_202EDC8;
 
-extern u32 gUnknown_81062A8;
-extern u32 gUnknown_8106074;
-extern u32 gUnknown_81060BC;
-extern u32 gUnknown_8106104;
-extern u32 gUnknown_8106140;
-extern u32 gUnknown_8106214;
-extern u32 gUnknown_8106244;
-extern u32 gUnknown_810627C;
+extern u32 gKyogrePreFightDialogue_8;
+extern u32 gKyogrePreFightDialogue_1;
+extern u32 gKyogrePreFightDialogue_2;
+extern u32 gKyogrePreFightDialogue_3;
+extern u32 gKyogrePreFightDialogue_4;
+extern u32 gKyogrePreFightDialogue_5;
+extern u32 gKyogrePreFightDialogue_6;
+extern u32 gKyogrePreFightDialogue_7;
 extern u32 gUnknown_810697C;
 extern u64 gUnknown_8107544[];
-extern u32 gUnknown_8106778;
-extern u32 gUnknown_81067BC;
-extern u32 gUnknown_81067E0;
-extern u32 gUnknown_8106834;
-extern u32 gUnknown_810688C;
-extern u32 gUnknown_81068D0;
-extern u32 gUnknown_8106918;
-extern u32 gUnknown_8106934;
+extern u32 gMedichamRescueDialogue_1;
+extern u32 gMedichamRescueDialogue_2;
+extern u32 gMedichamRescueDialogue_3;
+extern u32 gMedichamRescueDialogue_4;
+extern u32 gSmeargleRescueDialogue_1;
+extern u32 gSmeargleRescueDialogue_2;
+extern u32 gSmeargleRescueDialogue_3;
+extern u32 gSmeargleRescueDialogue_4;
 extern u32 gUnknown_8106720;
 
-extern u32 gUnknown_810663C;
-extern u32 gUnknown_81063D0;
-extern u32 gUnknown_8106400;
-extern u32 gUnknown_810643C;
-extern u32 gUnknown_8106468;
-extern u32 gUnknown_810648C;
-extern u32 gUnknown_81064BC;
-extern u32 gUnknown_8106500;
-extern u32 gUnknown_8106534;
-extern u32 gUnknown_8106560;
+extern u32 gCelebiJoinDialogue_10;
+extern u32 gCelebiJoinDialogue_1;
+extern u32 gCelebiJoinDialogue_2;
+extern u32 gCelebiJoinDialogue_3;
+extern u32 gCelebiJoinDialogue_4;
+extern u32 gCelebiJoinDialogue_5;
+extern u32 gCelebiJoinDialogue_6;
+extern u32 gCelebiJoinDialogue_7;
+extern u32 gCelebiJoinDialogue_8;
+extern u32 gCelebiJoinDialogue_9;
 extern u32 *gPtrPurityForestAllowCelebiToJoinText;
 extern u32 gPurityForestAllowCelebiToJoinPrompt;
 extern u32 *gPtrPurityForestRefuseCelebiConfirmText;
 extern u32 gPurityForestRefuseCelebiConfirmPrompt;
-extern u32 gUnknown_81062B4;
-extern u32 gUnknown_81062E8;
-extern u32 gUnknown_8106368;
-extern u32 gUnknown_8106390;
-extern u32 gUnknown_81063C4;
-extern u32 gUnknown_8106068;
-extern u32 gUnknown_8105E88;
-extern u32 gUnknown_8105EF8;
-extern u32 gUnknown_8105F38;
-extern u32 gUnknown_8105F74;
-extern u32 gUnknown_8105FA0;
-extern u32 gUnknown_8105FD8;
-extern u32 gUnknown_8106024;
+extern u32 gDeoxysPreFightDialogue_1;
+extern u32 gDeoxysPreFightDialogue_2;
+extern u32 gDeoxysPreFightDialogue_3;
+extern u32 gDeoxysPreFightDialogue_4;
+extern u32 gDeoxysPreFightDialogue_5;
+extern u32 gLugiaPreFightDialogue_8;
+extern u32 gLugiaPreFightDialogue_1;
+extern u32 gLugiaPreFightDialogue_2;
+extern u32 gLugiaPreFightDialogue_3;
+extern u32 gLugiaPreFightDialogue_4;
+extern u32 gLugiaPreFightDialogue_5;
+extern u32 gLugiaPreFightDialogue_6;
+extern u32 gLugiaPreFightDialogue_7;
 
 extern u32 gUnknown_81058C4;
 extern u32 gUnknown_81058A8;
 extern u8 sub_800E9A8(u32);
 extern void sub_800DC14(u32);
-extern void sub_808BAA4();
+extern void JirachiWishGrantFlash();
 
 extern void sub_8086A3C(struct DungeonEntity *r0);
 extern void sub_8083E88(u32);
@@ -105,16 +106,15 @@ extern void sub_80861D4(struct DungeonEntity *, u32, u32);
 extern void sub_806FDF4(struct DungeonEntity *, struct DungeonEntity *, struct DungeonEntity **);
 extern u32 sub_80861F8(u32, struct DungeonEntity *, u32);
 extern void sub_8083ED8(u32);
-extern u32 sub_803F994();
-extern s32 sub_803F9B0();
+extern s32 GetCameraXPos();
+extern s32 GetCameraYPos();
 extern void sub_803F878(u32, s32);
 extern void SetupBossFightHP(struct DungeonEntity *, u32, u32);
-extern void sub_8085C54(u32, u32, u32, u32, u32);
+extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void sub_803E9D0(void);
 extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0();
 extern void sub_808563C(void *);
-extern void sub_80858AC(u32 *, u32);
 
 void SetupDeoxysFightHP(struct DungeonEntity *r0);
 void sub_808C550(void);
@@ -126,8 +126,8 @@ void sub_808C360(void);
 void KyogreScreenFlash();
 
 void sub_808C0CC();
-void sub_808BFA0();
-void sub_808C02C();
+void LugiaScreenFlash();
+void LugiaScreenFlash2();
 extern void sub_80861B8(struct DungeonEntity *, u32, u32);
 
 void nullsub_99();
@@ -200,7 +200,7 @@ void JirachiWishGrantDialogue(struct DungeonEntity *param_1)
     sub_800DC14(uVar2);
   }
   sub_803E708(10,0x46);
-  sub_808BAA4();
+  JirachiWishGrantFlash();
 }
 
 void sub_808BCE4(void)
@@ -272,7 +272,7 @@ void sub_808BDEC(void)
   struct DungeonEntity * LugiaEntity;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  LugiaEntity = sub_8085680(0x1b);
+  LugiaEntity = GetEntityFromClientType(0x1b);
   sub_8083F14();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -303,89 +303,89 @@ void LugiaPreFightDialogue(void)
   struct DungeonEntity * LugiaEntity;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  LugiaEntity = sub_8085680(0x1b);
+  LugiaEntity = GetEntityFromClientType(0x1b);
   if (HasRecruitedMon(SPECIES_LUGIA)) {
     sub_8086448();
-    sub_80866C4(&gUnknown_8106068);
+    sub_80866C4(&gLugiaPreFightDialogue_8);
   }
   else {
     sub_8083F14();
     sub_8086448();
-    DisplayDungeonDialogue(&gUnknown_8105E88);
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_1);
     sub_8083EA8(0x23,0x3c);
     sub_808C0CC();
-    DisplayDungeonDialogue(&gUnknown_8105EF8);
-    sub_808BFA0();
-    DisplayDungeonDialogue(&gUnknown_8105F38);
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_2);
+    LugiaScreenFlash();
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_3);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gUnknown_8105F74);
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_4);
     PlaySoundEffect(0x1f8);
     sub_80861D4(LugiaEntity,0xd,0);
     sub_803E708(0x2b,0x46);
     sub_80861B8(LugiaEntity,0,0);
-    DisplayDungeonDialogue(&gUnknown_8105FA0);
-    sub_808BFA0();
-    DisplayDungeonDialogue(&gUnknown_8105FD8);
-    sub_808C02C();
-    sub_8085C54(0xffffff06,0xffffff06,0xffffff06,1,0);
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_5);
+    LugiaScreenFlash();
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_6);
+    LugiaScreenFlash2();
+    SetDungeonBGColorRGB(0xffffff06,0xffffff06,0xffffff06,1,0);
     sub_8083F14();
     sub_80861D4(LugiaEntity,7,0);
-    DisplayDungeonDialogue(&gUnknown_8106024);
-    sub_808BFA0();
+    DisplayDungeonDialogue(&gLugiaPreFightDialogue_7);
+    LugiaScreenFlash();
     SetupBossFightHP(LugiaEntity,800,0x20);
     sub_8083E88(0x23);
-    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
+    ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
   }
 }
 
-void sub_808BFA0(void)
+void LugiaScreenFlash(void)
 {
   s32 iVar1;
 
   PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
-    sub_8085C54(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
-    sub_8085C54(0,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
-    sub_8085C54(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
 }
 
-void sub_808C02C(void)
+void LugiaScreenFlash2(void)
 {
   s32 iVar1;
 
   PlaySoundEffect(0x1f6);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
-    sub_8085C54(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
     sub_803E46C(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
-    sub_8085C54(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
     sub_803E46C(0x46);
   }
 
   sub_803E708(4,0x46);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
-    sub_8085C54(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
     sub_803E46C(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
-    sub_8085C54(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
     sub_803E46C(0x46);
   }
 
@@ -396,11 +396,11 @@ void sub_808C02C(void)
 void sub_808C0CC(void)
 {
   gUnknown_202EDC8 = 0x1f;
-  sub_8085C54(0,0,0,1,1);
+  SetDungeonBGColorRGB(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
   gDungeonGlobalData->unk7 = 0;
-  sub_808BFA0();
+  LugiaScreenFlash();
 }
 
 void sub_808C10C(void)
@@ -412,7 +412,7 @@ void sub_808C10C(void)
   s32 iVar2;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  KyogreEntity = sub_8085680(0x1c);
+  KyogreEntity = GetEntityFromClientType(0x1c);
   sub_8083F14();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -424,8 +424,8 @@ void sub_808C10C(void)
     SetFacingDirection(KyogreEntity, DIRECTION_SOUTH);
   }
   sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
-  uVar3 = sub_803F994();
-  iVar2 = sub_803F9B0();
+  uVar3 = GetCameraXPos();
+  iVar2 = GetCameraYPos();
   sub_803F878(uVar3,iVar2 + -0x1000);
   CopySpeciesNametoBuffer(gUnknown_202E038,SPECIES_KYOGRE);
   // TODO: gUnknown_202E088 doesn't match but gUnknown_202E038 + 0x50 does
@@ -446,45 +446,45 @@ void KyogrePreFightDialogue(void)
   struct DungeonEntity *KyogreEntity;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  KyogreEntity = sub_8085680(0x1c);
+  KyogreEntity = GetEntityFromClientType(0x1c);
   sub_8083F14();
   if (HasRecruitedMon(SPECIES_KYOGRE)) {
     sub_8083EA8(0x23,0x3c);
     SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gUnknown_81062A8);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_8);
     sub_803E708(10,0x46);
     gDungeonGlobalData->unk2 = 1;
   }
   else {
-    DisplayDungeonDialogue(&gUnknown_8106074);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_1);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gUnknown_81060BC);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_2);
     sub_803E708(10,0x46);
     nullsub_99();
     sub_803E708(10,0x46);
     // Gwwwwwooooooooh
-    DisplayDungeonDialogue(&gUnknown_8106104);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_3);
     sub_803E708(10,0x46);
     sub_8083EA8(0x23,0x3c);
     sub_808C360();
     // My duels against {ARG_POKEMON_3} (Groudon) left us both exhausted
-    DisplayDungeonDialogue(&gUnknown_8106140);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_4);
     KyogreScreenFlash();
     // I am {ARG_POKEMON_2} (Kyogre)!
     // The lord of the sea!
-    DisplayDungeonDialogue(&gUnknown_8106214);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_5);
     KyogreScreenFlash();
     // Witness the destructive force of my waves!
-    DisplayDungeonDialogue(&gUnknown_8106244);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_6);
     KyogreScreenFlash();
     // Marvel at my awesome
     // power!
-    DisplayDungeonDialogue(&gUnknown_810627C);
+    DisplayDungeonDialogue(&gKyogrePreFightDialogue_7);
     sub_803E708(10,0x46);
     SetupBossFightHP(KyogreEntity,600,0xb);
     sub_8083E88(0x23);
-    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
+    ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
   }
 }
 
@@ -498,17 +498,17 @@ void KyogreScreenFlash(void)
 
   PlaySoundEffect(0x1f8);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
-    sub_8085C54(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
-    sub_8085C54(0,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
-    sub_8085C54(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
@@ -518,7 +518,7 @@ void KyogreScreenFlash(void)
 void sub_808C360(void)
 {
   gUnknown_202EDC8 = 0x1f;
-  sub_8085C54(0,0,0,1,1);
+  SetDungeonBGColorRGB(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
   gDungeonGlobalData->unk7 = 0;
@@ -562,20 +562,20 @@ void DeoxysPreFightDialogue(void)
   if (HasRecruitedMon(SPECIES_DEOXYS_NORMAL)) {
     // There appears to be no one here.
     // It's impossible to go any further
-    sub_80866C4(&gUnknown_81063C4);
+    sub_80866C4(&gDeoxysPreFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&gUnknown_81062B4);
+    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_1);
     sub_8083EA8(0x1a,0x3c);
     sub_808C550();
-    DisplayDungeonDialogue(&gUnknown_81062E8);
+    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_2);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gUnknown_8106368);
+    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_3);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gUnknown_8106390);
+    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_4);
     sub_803E708(10,0x46);
     sub_808563C(SetupDeoxysFightHP);
-    sub_80858AC(&LeaderEntity->posPixel.x,0x10);
+    ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
   }
 }
 
@@ -585,17 +585,17 @@ void DeoxysScreenFlash(void)
 
   PlaySoundEffect(0x2c1);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
-    sub_8085C54(iVar1,0,0,1,1);
+    SetDungeonBGColorRGB(iVar1,0,0,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
-    sub_8085C54(iVar1,iVar1,0,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
-    sub_8085C54(iVar1,0,0,1,1);
+    SetDungeonBGColorRGB(iVar1,0,0,1,1);
     sub_803E46C(0x46);
   }
   sub_803E708(10,0x46);
@@ -605,7 +605,7 @@ void DeoxysScreenFlash(void)
 void sub_808C550(void)
 {
   gUnknown_202EDC8 = 0x1f;
-  sub_8085C54(0,0,0,1,1);
+  SetDungeonBGColorRGB(0,0,0,1,1);
   sub_803E9D0();
   sub_803E46C(0x46);
   gDungeonGlobalData->unk7 = 0;
@@ -636,14 +636,14 @@ void sub_808C5C0(void)
   s32 iVar2;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  CelebiEntity = sub_8085680(0x1e);
+  CelebiEntity = GetEntityFromClientType(0x1e);
   sub_8083E88(0x7f);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(CelebiEntity, DIRECTION_SOUTH);
   sub_8085860(LeaderEntity->posWorld.x,LeaderEntity->posWorld.y);
-  uVar3 = sub_803F994();
-  iVar2 = sub_803F9B0();
+  uVar3 = GetCameraXPos();
+  iVar2 = GetCameraYPos();
   sub_803F878(uVar3,iVar2 + 0xfffff000);
   CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_CELEBI);
 }
@@ -662,14 +662,14 @@ void CelebiJoinDialogue(void)
   struct DungeonEntity *CelebiEntity;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  CelebiEntity = sub_8085680(0x1e);
+  CelebiEntity = GetEntityFromClientType(0x1e);
   if ((HasRecruitedMon(SPECIES_CELEBI)) || (sub_806FD18(CelebiEntity) == '\0'))
   {
     sub_8068FE0(local_1c,0x21c,0);
     SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
     // .........
-    DisplayDungeonDialogue(&gUnknown_810663C);
+    DisplayDungeonDialogue(&gCelebiJoinDialogue_10);
   }
   else
   {
@@ -678,14 +678,14 @@ void CelebiJoinDialogue(void)
     sub_80862BC(LeaderEntity);
     sub_803E708(10,0x46);
     // Oh? There's someone there.
-    DisplayDungeonDialogue(&gUnknown_81063D0);
+    DisplayDungeonDialogue(&gCelebiJoinDialogue_1);
     sub_803E708(10,0x46);
     sub_8086598();
     sub_8086598();
     sub_8086598();
     sub_8086598();
     // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
-    DisplayDungeonDialogue(&gUnknown_8106400);
+    DisplayDungeonDialogue(&gCelebiJoinDialogue_2);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
     sub_803E708(0x14,0x46);
@@ -693,7 +693,7 @@ void CelebiJoinDialogue(void)
     sub_803E708(4,0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
-    DisplayDungeonDialogue(&gUnknown_810643C);
+    DisplayDungeonDialogue(&gCelebiJoinDialogue_3);
     sub_803E708(10,0x46);
     state = 0;
     do {
@@ -721,11 +721,11 @@ void CelebiJoinDialogue(void)
                 sub_803E708(0x1a,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1c,0x46);
-                DisplayDungeonDialogue(&gUnknown_8106468);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_4);
                 sub_803E708(10,0x46);
                 sub_806FDF4(LeaderEntity,CelebiEntity,&CelebiEntity);
                 sub_8083E88(0x7f);
-                DisplayDungeonDialogue(&gUnknown_810648C);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_5);
                 sub_803E708(10,0x46);
                 PlaySoundEffect(0x1c7);
                 sub_80861D4(CelebiEntity,0xd,0);
@@ -734,7 +734,7 @@ void CelebiJoinDialogue(void)
                 sub_803E708(0x1a,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1b,0x46);
-                DisplayDungeonDialogue(&gUnknown_81064BC);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_6);
                 sub_803E708(10,0x46);
                 state = 2;
             }
@@ -754,15 +754,15 @@ void CelebiJoinDialogue(void)
             else
             {
                 sub_803E708(10,0x46);
-                DisplayDungeonDialogue(&gUnknown_8106500);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_7);
                 sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0x18,0x46);
                 sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0xe,0x46);
-                DisplayDungeonDialogue(&gUnknown_8106534);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_8);
                 sub_803E708(10,0x46);
                 sub_808C8E0(CelebiEntity);
-                DisplayDungeonDialogue(&gUnknown_8106560);
+                DisplayDungeonDialogue(&gCelebiJoinDialogue_9);
                 sub_803E708(10,0x46);
                 state = 2;
             }
@@ -786,7 +786,7 @@ void CelebiJoinDialogue(void)
 	"\tbl xxx_call_GetLeaderEntity\n"
 	"\tadds r7, r0, 0\n"
 	"\tmovs r0, 0x1E\n"
-	"\tbl sub_8085680\n"
+	"\tbl GetEntityFromClientType\n"
 	"\tstr r0, [sp]\n"
 	"\tmovs r0, 0x8A\n"
 	"\tlsls r0, 1\n"
@@ -814,7 +814,7 @@ void CelebiJoinDialogue(void)
 	"\tbl DisplayDungeonDialogue\n"
 	"\tb _0808C8AC\n"
 	"\t.align 2, 0\n"
-"_0808C67C: .4byte gUnknown_810663C\n"
+"_0808C67C: .4byte gCelebiJoinDialogue_10\n"
 "_0808C680:\n"
 	"\tadds r0, r7, 0\n"
 	"\tbl SpriteLookAroundEffect\n"
@@ -876,10 +876,10 @@ void CelebiJoinDialogue(void)
 "_0808C718:\n"
 	"\tb _0808C8A6\n"
 	"\t.align 2, 0\n"
-"_0808C71C: .4byte gUnknown_81063D0\n"
-"_0808C720: .4byte gUnknown_8106400\n"
+"_0808C71C: .4byte gCelebiJoinDialogue_1\n"
+"_0808C720: .4byte gCelebiJoinDialogue_2\n"
 "_0808C724: .4byte 0x000001c7\n"
-"_0808C728: .4byte gUnknown_810643C\n"
+"_0808C728: .4byte gCelebiJoinDialogue_3\n"
 "_0808C72C: .4byte 0x000001d5\n"
 "_0808C730:\n"
 	"\tldr r5, _0808C75C\n"
@@ -973,9 +973,9 @@ void CelebiJoinDialogue(void)
 	"\tldr r0, _0808C820\n"
 	"\tb _0808C898\n"
 	"\t.align 2, 0\n"
-"_0808C818: .4byte gUnknown_8106468\n"
-"_0808C81C: .4byte gUnknown_810648C\n"
-"_0808C820: .4byte gUnknown_81064BC\n"
+"_0808C818: .4byte gCelebiJoinDialogue_4\n"
+"_0808C81C: .4byte gCelebiJoinDialogue_5\n"
+"_0808C820: .4byte gCelebiJoinDialogue_6\n"
 "_0808C824:\n"
 	"movs r0, 0x1\n"
 	"b _0808C8A6\n"
@@ -1053,9 +1053,9 @@ void CelebiJoinDialogue(void)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_0808C8D0: .4byte gUnknown_8106500\n"
-"_0808C8D4: .4byte gUnknown_8106534\n"
-"_0808C8D8: .4byte gUnknown_8106560\n"
+"_0808C8D0: .4byte gCelebiJoinDialogue_7\n"
+"_0808C8D4: .4byte gCelebiJoinDialogue_8\n"
+"_0808C8D8: .4byte gCelebiJoinDialogue_9\n"
 "_0808C8DC: .4byte gDungeonGlobalData");
 }
 #endif
@@ -1123,7 +1123,7 @@ void sub_808C9C4(void)
     struct DungeonEntity *MedichamEntity;
 
     LeaderEntity = xxx_call_GetLeaderEntity();
-    MedichamEntity = sub_8085680(7);
+    MedichamEntity = GetEntityFromClientType(7);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
@@ -1139,16 +1139,16 @@ void MedichamRescueDialogue(void)
     struct DungeonEntity *MedichamEntity;
     s32 counter;
 
-    MedichamEntity = sub_8085680(7);
+    MedichamEntity = GetEntityFromClientType(7);
     SpriteLookAroundEffect(MedichamEntity);
     sub_803E708(0xA, 0x46);
     // Oh my I can't seem to find a way out...
-    DisplayDungeonDialogue(&gUnknown_8106778);
+    DisplayDungeonDialogue(&gMedichamRescueDialogue_1);
     sub_803E708(0xA, 0x46);
     sub_80869E4(MedichamEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // What am I to do...?
-    DisplayDungeonDialogue(&gUnknown_81067BC);
+    DisplayDungeonDialogue(&gMedichamRescueDialogue_2);
     sub_803E708(0xA, 0x46);
     sub_8086448();
     sub_8086598();
@@ -1156,7 +1156,7 @@ void MedichamRescueDialogue(void)
     sub_80862BC(MedichamEntity);
     sub_803E708(0x20, 0x46);
     sub_80869E4(MedichamEntity, 4, 2, 0);
-    DisplayDungeonDialogue(&gUnknown_81067E0);
+    DisplayDungeonDialogue(&gMedichamRescueDialogue_3);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(MedichamEntity, 0xA, DIRECTION_SOUTH);
@@ -1170,7 +1170,7 @@ void MedichamRescueDialogue(void)
     // I am so lucky
     //
     // There appears to be no one here
-    DisplayDungeonDialogue(&gUnknown_8106834);
+    DisplayDungeonDialogue(&gMedichamRescueDialogue_4);
     sub_803E708(0xA, 0x46);
     sub_806CDD4(MedichamEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
@@ -1192,7 +1192,7 @@ void sub_808CB5C(void)
     struct DungeonEntity *MedichamEntity;
 
     LeaderEntity = xxx_call_GetLeaderEntity();
-    MedichamEntity = sub_8085680(7);
+    MedichamEntity = GetEntityFromClientType(7);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
@@ -1211,7 +1211,7 @@ void sub_808CBB0(void)
     struct DungeonEntity *SmeargleEntity;
 
     LeaderEntity = xxx_call_GetLeaderEntity();
-    SmeargleEntity = sub_8085680(0x1F);
+    SmeargleEntity = GetEntityFromClientType(0x1F);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
@@ -1227,19 +1227,19 @@ void SmeargleRescueDialogue(void)
     struct DungeonEntity *SmeargleEntity;
     s32 counter;
 
-    SmeargleEntity = sub_8085680(0x1F);
+    SmeargleEntity = GetEntityFromClientType(0x1F);
     SpriteLookAroundEffect(SmeargleEntity);
     sub_803E708(0xA, 0x46);
     // Ohhh...
     // I've lost my bearings
-    DisplayDungeonDialogue(&gUnknown_810688C);
+    DisplayDungeonDialogue(&gSmeargleRescueDialogue_1);
     sub_803E708(0xA, 0x46);
     sub_80869E4(SmeargleEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // I can't get out...
     // I'm hungry...
     // I'm in trouble
-    DisplayDungeonDialogue(&gUnknown_81068D0);
+    DisplayDungeonDialogue(&gSmeargleRescueDialogue_2);
     sub_803E708(0xA, 0x46);
     sub_8086448();
     sub_8086598();
@@ -1248,7 +1248,7 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0x20, 0x46);
     sub_80869E4(SmeargleEntity, 4, 2, 0);
     // Oh! You are?
-    DisplayDungeonDialogue(&gUnknown_8106918);
+    DisplayDungeonDialogue(&gSmeargleRescueDialogue_3);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(SmeargleEntity, 0xA, DIRECTION_SOUTH);
@@ -1260,7 +1260,7 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0x14, 0x46);
     // Did you maybe come to rescue me?
     // Am I glad to see you
-    DisplayDungeonDialogue(&gUnknown_8106934);
+    DisplayDungeonDialogue(&gSmeargleRescueDialogue_4);
     sub_803E708(0xA, 0x46);
     sub_806CDD4(SmeargleEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
@@ -1283,7 +1283,7 @@ void sub_808CD44(void)
     struct DungeonEntity *SmeargleEntity;
 
     LeaderEntity = xxx_call_GetLeaderEntity();
-    SmeargleEntity = sub_8085680(0x1F);
+    SmeargleEntity = GetEntityFromClientType(0x1F);
     sub_8083E88(0x72);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);

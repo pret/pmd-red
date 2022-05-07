@@ -5178,8 +5178,8 @@ _0803F984:
 	bx r0
 	thumb_func_end sub_803F878
 
-	thumb_func_start sub_803F994
-sub_803F994:
+	thumb_func_start GetCameraXPos
+GetCameraXPos:
 	ldr r0, _0803F9A8
 	ldr r0, [r0]
 	ldr r1, _0803F9AC
@@ -5192,10 +5192,10 @@ sub_803F994:
 	.align 2, 0
 _0803F9A8: .4byte gDungeonGlobalData
 _0803F9AC: .4byte 0x000181e8
-	thumb_func_end sub_803F994
+	thumb_func_end GetCameraXPos
 
-	thumb_func_start sub_803F9B0
-sub_803F9B0:
+	thumb_func_start GetCameraYPos
+GetCameraYPos:
 	ldr r0, _0803F9C4
 	ldr r0, [r0]
 	ldr r1, _0803F9C8
@@ -5208,7 +5208,7 @@ sub_803F9B0:
 	.align 2, 0
 _0803F9C4: .4byte gDungeonGlobalData
 _0803F9C8: .4byte 0x000181e8
-	thumb_func_end sub_803F9B0
+	thumb_func_end GetCameraYPos
 
 	thumb_func_start sub_803F9CC
 sub_803F9CC:

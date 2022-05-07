@@ -6,13 +6,16 @@
 #include "dungeon_util.h"
 #include "random.h"
 
+extern const u8 gUnknown_8107358[25];
+
 extern void sub_806CE68(struct DungeonEntity *, s32);
 
-extern s32 sub_803F994(void);
-extern s32 sub_803F9B0(void);
+extern s32 GetCameraXPos(void);
+extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
 extern void sub_803F878(s32, s32);
 extern void sub_803E46C(u32);
+extern void sub_803E708(u32, u32);
 
 void sub_8085860(s32 x, s32 y)
 {
@@ -27,28 +30,28 @@ void sub_8085890(s32 x, s32 y)
     sub_803F878(x, y);
 }
 
-void sub_80858AC(s32 *param_1, s32 param_2)
+void ShiftCameraToPosition(struct Position32 *posStruct, s32 cameraSteps)
 {
-  s32 iVar1;
-  s32 iVar2;
-  s32 iVar3;
-  s32 iVar4;
+  s32 XPos;
+  s32 YPos;
+  s32 XIncrement;
+  s32 YIncrement;
 
-  iVar1 = sub_803F994();
-  iVar2 = sub_803F9B0();
-  iVar3 = (param_1[0] - iVar1) / param_2;
-  iVar4 = (param_1[1] - iVar2) / param_2;
+  XPos = GetCameraXPos();
+  YPos = GetCameraYPos();
+  XIncrement = (posStruct->x - XPos) / cameraSteps;
+  YIncrement = (posStruct->y - YPos) / cameraSteps;
   sub_803F4A0(0);
-  if (0 < param_2) {
+  if (0 < cameraSteps) {
     do {
-      iVar1 += iVar3;
-      iVar2 += iVar4;
-      sub_803F878(iVar1,iVar2);
+      XPos += XIncrement;
+      YPos += YIncrement;
+      sub_803F878(XPos,YPos);
       sub_803E46C(0x46);
-      param_2--;
-    } while (param_2 != 0);
+      cameraSteps--;
+    } while (cameraSteps != 0);
   }
-  sub_803F878(param_1[0],param_1[1]);
+  sub_803F878(posStruct->x,posStruct->y);
   sub_803E46C(0x46);
 }
 
@@ -167,4 +170,19 @@ bool8 IsMovingClient(struct DungeonEntity *pokemon)
         default:
             return FALSE;
     }
+}
+
+void sub_8085B0C(struct DungeonEntity *pokemon)
+{
+  s32 index;
+  u8 local_28 [25];
+
+  index = 0;
+
+  memcpy(local_28, gUnknown_8107358, 25);
+  while (local_28[index] != 0) {
+    SetFacingDirection(pokemon, local_28[index]);
+    sub_803E708(6,0x46);
+    index++;
+  }
 }

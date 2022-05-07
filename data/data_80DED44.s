@@ -223,13 +223,13 @@ gUnknown_80E04B4: @ 80E04B4
 
 	.global gUnknown_80E04F4
 gUnknown_80E04F4: @ 80E04F4
-        .string "#+...Oh~2c wait~2c sorry.#P"
-        .string "#+You already have the \n"
-        .string "#+#C4$h Friend Area#R.#P"
-        .string "#+I~27m sorry that my reward is\n"
-        .string "#+something you already have.#P"
-        .string "#+In its place~2c #CN$m0#R~2c\n"
-        .string "#+you can have #CG1~2c000#R {POKE}.\0"
+        .string "{CENTER_ALIGN}...Oh{COMMA} wait{COMMA} sorry.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}You already have the \n"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
+        .string "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}$m0{END_COLOR_TEXT_1}{COMMA}\n"
+        .string "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.\0"
         .align 2, 0
 
 	.global gUnknown_80E05C0

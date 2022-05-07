@@ -77,7 +77,7 @@ struct DungeonGlobalData
     u8 unkE26B;
     u8 weatherTurnsLeft;
     u8 fillE26D[0xE26F - 0xE26D];
-    /* 0xE26F */ u8 unkE26F[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
+    /* 0xE26F */ u8 startingWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
     /* 0xE279 */ u8 unkE279;
