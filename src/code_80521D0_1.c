@@ -146,14 +146,14 @@ void sub_808BBA8(struct DungeonEntity *param_1)
   sub_806BFC0(param_1->entityData,0);
 }
 
-void sub_808BBB8(struct DungeonEntity *param_1)
+void JirachiDropInEffect(struct DungeonEntity *jirachiEntity)
 {
   s32 iVar1;
   s32 iVar2;
 
-  sub_80861F8(0x1b,param_1,0);
-  sub_8086A54(param_1);
-  sub_80861B8(param_1,0xe,0);
+  sub_80861F8(0x1b,jirachiEntity,0);
+  sub_8086A54(jirachiEntity);
+  sub_80861B8(jirachiEntity,0xe,0);
   iVar1 = 0xa000;
   iVar2 = 0x200;
   PlaySoundEffect(0x1f8);
@@ -163,37 +163,37 @@ void sub_808BBB8(struct DungeonEntity *param_1)
       iVar2 = 0x100;
     }
     if (iVar1 < 0) break;
-    param_1->entityData->unk174 = iVar1;
+    jirachiEntity->entityData->unk174 = iVar1;
     sub_803E46C(0x46);
   }
- param_1->entityData->unk174 = 0;
+ jirachiEntity->entityData->unk174 = 0;
 }
 
-void sub_808BC20(struct DungeonEntity * param_1)
+void JirachiSpinEffect(struct DungeonEntity * jirachiEntity)
 {
   s32 uVar1;
 
   PlaySoundEffect(0x298);
-  for(uVar1 = 0; uVar1 < 0x19; uVar1++){
-    SetFacingDirection(param_1,uVar1 & DIRECTION_MASK);
+  for(uVar1 = 0; uVar1 < 25; uVar1++){
+    SetFacingDirection(jirachiEntity, uVar1 & DIRECTION_MASK);
     sub_803E708(3,0x46);
   }
-  param_1->entityData->unk15E = 1;
+  jirachiEntity->entityData->unk15E = 1;
   PlaySoundEffect(0x27f);
-  sub_80861F8(99,param_1,1);
+  sub_80861F8(99,jirachiEntity,1);
 }
 
-void JirachiWishGrantDialogue(struct DungeonEntity *param_1)
+void JirachiWishGrantDialogue(struct DungeonEntity *jirachiEntity)
 {
   u32 uVar2;
 
-  param_1->entityData->unk15D = 1;
+  jirachiEntity->entityData->unk15D = 1;
   // Nnnnnnnnnn!
   DisplayDungeonDialogue(&gUnknown_81058A8);
   PlaySoundEffect(0x375);
-  sub_80861F8(0x67,param_1,1);
+  sub_80861F8(0x67,jirachiEntity,1);
   PlaySoundEffect(0x2a8);
-  uVar2 = sub_80861F8(0x68,param_1,0);
+  uVar2 = sub_80861F8(0x68,jirachiEntity,0);
   // Taaaaaaaah!
   DisplayDungeonDialogue(&gUnknown_81058C4);
   if (sub_800E9A8(uVar2) != 0) {

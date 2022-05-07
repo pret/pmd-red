@@ -230,7 +230,7 @@ extern void sub_8083ED8(u32);
 extern void sub_803E708(u32, u32);
 extern void DisplayDungeonDialogue(u32 *r0);
 extern void sub_8083E88(u32);
-extern void sub_808BC20(struct DungeonEntity *);
+extern void JirachiSpinEffect(struct DungeonEntity *);
 
 extern void sub_80862BC(struct DungeonEntity *);
 extern void sub_8086448();
@@ -282,7 +282,7 @@ extern void sub_807EAA0(u32, u32);
 
 extern void sub_808563C(void *);
 extern void sub_808BCE4(void);
-extern void sub_808BBB8(struct DungeonEntity *param_1);
+extern void JirachiDropInEffect(struct DungeonEntity *param_1);
 extern u8 sub_8098100(u32);
 extern void sub_8086794();
 
@@ -3520,7 +3520,7 @@ void JirachiPreFightDialogue(void)
   sub_80861F8(0x37,JirachiEntity,1);
   sub_80855E4(sub_80862BC);
   sub_803E708(0x3c,70);
-  sub_808BBB8(JirachiEntity);
+  JirachiDropInEffect(JirachiEntity);
   sub_803E708(0x5a,70);
   DisplayDungeonDialogue(&gJirachiPreFightDialogue_3);
   sub_803E708(10,70);
@@ -3552,7 +3552,7 @@ void sub_808B50C(void)
   // I'm sleepy so I'm going back to sleep.
   DisplayDungeonDialogue(&gUnknown_8105558);
   sub_803E708(10,70);
-  sub_808BC20(JirachiEntity);
+  JirachiSpinEffect(JirachiEntity);
   DisplayDungeonDialogue(&gUnknown_81055F4);
   sub_803E708(10,70);
   gDungeonGlobalData->unk2 = 1;

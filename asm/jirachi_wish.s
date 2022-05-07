@@ -468,7 +468,7 @@ _0808B9F8:
 	ldr r0, _0808BA70
 	bl DisplayDungeonDialogue
 	adds r0, r6, 0
-	bl sub_808BC20
+	bl JirachiSpinEffect
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
