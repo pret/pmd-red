@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8085B0C
-sub_8085B0C:
-	push {r4,r5,lr}
-	sub sp, 0x1C
-	adds r5, r0, 0
-	ldr r1, _08085B48
-	mov r0, sp
-	movs r2, 0x19
-	bl memcpy
-	mov r0, sp
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08085B3E
-	mov r4, sp
-_08085B26:
-	ldrb r1, [r4]
-	adds r0, r5, 0
-	bl SetFacingDirection
-	movs r0, 0x6
-	movs r1, 0x46
-	bl sub_803E708
-	adds r4, 0x1
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _08085B26
-_08085B3E:
-	add sp, 0x1C
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08085B48: .4byte gUnknown_8107358
-	thumb_func_end sub_8085B0C
-
 	thumb_func_start sub_8085B4C
 sub_8085B4C:
 	push {r4-r6,lr}
@@ -180,8 +146,8 @@ _08085C4C: .4byte gAdjacentTileOffsets
 _08085C50: .4byte gUnknown_202F3D8
 	thumb_func_end sub_8085B80
 
-	thumb_func_start sub_8085C54
-sub_8085C54:
+	thumb_func_start SetDungeonBGColorRGB
+SetDungeonBGColorRGB:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -482,7 +448,7 @@ _08085E88: .4byte 0xffff0000
 _08085E8C: .4byte gUnknown_202EE8C
 _08085E90: .4byte gUnknown_202ECA4
 _08085E94: .4byte 0x000181e4
-	thumb_func_end sub_8085C54
+	thumb_func_end SetDungeonBGColorRGB
 
 	thumb_func_start sub_8085E98
 sub_8085E98:

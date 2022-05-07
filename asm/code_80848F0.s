@@ -309,7 +309,7 @@ _080854C0:
 	cmp r5, 0x3
 	ble _08085490
 	movs r0, 0x2
-	bl sub_8085680
+	bl GetEntityFromClientType
 _080854CC:
 	pop {r4,r5}
 	pop {r1}
@@ -550,8 +550,8 @@ _08085678: .4byte gDungeonGlobalData
 _0808567C: .4byte 0x0001358c
 	thumb_func_end sub_808563C
 
-	thumb_func_start sub_8085680
-sub_8085680:
+	thumb_func_start GetEntityFromClientType
+GetEntityFromClientType:
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -588,7 +588,7 @@ _080856C0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085680
+	thumb_func_end GetEntityFromClientType
 
 	thumb_func_start sub_80856C8
 sub_80856C8:

@@ -30,18 +30,18 @@ extern void sub_80897F0();
 extern void sub_8089878();
 extern void sub_80898E4();
 extern void MewtwoPreFightDialogue();
-extern void MewtwoPreFightDialogue1();
+extern void MewtwoReFightDialogue();
 extern void EnteiPreFightDialogue();
-extern void EnteiPreFightDialogue1();
-extern void EnteiPreFightDialogue2();
+extern void EnteiReFightDialogue();
+extern void EnteiPostStoryPreFightDialogue();
 extern void RaikouPreFightDialogue();
-extern void RaikouPreFightDialogue1();
-extern void RaikouPreFightDialogue2();
+extern void RaikouReFightDialogue();
+extern void RaikouPostStoryPreFightDialogue();
 extern void SuicunePreFightDialogue();
-extern void SuicunePreFightDialogue1();
-extern void SuicunePreFightDialogue2();
+extern void SuicuneReFightDialogue();
+extern void SuicunePostStoryPreFightDialogue();
 extern void HoOhPreFightDialogue();
-extern void HoOhPreFightDialogue1();
+extern void HoOhReFightDialogue();
 extern void LatiosPreFightDialogue();
 extern void LatiosReFightDialogue();
 extern void sub_808AC3C();
@@ -49,7 +49,7 @@ extern void RegirockPreFightDialogue();
 extern void RegicePreFightDialogue();
 extern void RegisteelPreFightDialogue();
 extern void JirachiPreFightDialogue();
-extern void JirachiPreFightDialogue1();
+extern void JirachiReFightDialogue();
 extern void LugiaPreFightDialogue();
 extern void KyogrePreFightDialogue();
 extern void DeoxysPreFightDialogue();
@@ -418,40 +418,40 @@ void DisplayPreFightDialogue(void)
         MewtwoPreFightDialogue();
         break;
       case 0x1f:
-        MewtwoPreFightDialogue1();
+        MewtwoReFightDialogue();
         break;
       case 0x20:
         EnteiPreFightDialogue();
         break;
       case 0x21:
-        EnteiPreFightDialogue1();
+        EnteiReFightDialogue();
         break;
       case 0x22:
-        EnteiPreFightDialogue2();
+        EnteiPostStoryPreFightDialogue();
         break;
       case 0x23:
         RaikouPreFightDialogue();
         break;
       case 0x24:
-        RaikouPreFightDialogue1();
+        RaikouReFightDialogue();
         break;
       case 0x25:
-        RaikouPreFightDialogue2();
+        RaikouPostStoryPreFightDialogue();
         break;
       case 0x26:
         SuicunePreFightDialogue();
         break;
       case 0x27:
-        SuicunePreFightDialogue1();
+        SuicuneReFightDialogue();
         break;
       case 0x28:
-        SuicunePreFightDialogue2();
+        SuicunePostStoryPreFightDialogue();
         break;
       case 0x29:
         HoOhPreFightDialogue();
         break;
       case 0x2a:
-        HoOhPreFightDialogue1();
+        HoOhReFightDialogue();
         break;
       case 0x2b:
         LatiosPreFightDialogue();
@@ -475,7 +475,7 @@ void DisplayPreFightDialogue(void)
         JirachiPreFightDialogue();
         break;
       case 0x32:
-        JirachiPreFightDialogue1();
+        JirachiReFightDialogue();
         break;
       case 0x33:
         LugiaPreFightDialogue();

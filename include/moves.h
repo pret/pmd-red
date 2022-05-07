@@ -12,7 +12,7 @@ void InitZeroedPPPokemonMove(struct PokemonMove *move, u16 moveID);
 s16 GetMoveTargetingFlags(struct PokemonMove *move, u32 isAI);
 u8 GetMoveType(struct PokemonMove *move);
 u8 GetMoveWeight(struct PokemonMove *move);
-u8 GetMoveHitCount(struct PokemonMove *move);
+u32 GetMoveHitCount(struct PokemonMove *move);
 s32 GetMovePower(struct PokemonMove *move);
 s32 GetMoveAccuracy(struct PokemonMove *move, u32 accuracyType);
 u32 GetMoveMaxPP(struct PokemonMove *move);

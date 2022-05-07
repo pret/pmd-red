@@ -505,7 +505,7 @@ _0805DCCC:
 	movs r1, 0x14
 	bl SetAction
 	mov r0, r10
-	bl sub_8045B60
+	bl GetTeamMemberEntityIndex
 	mov r1, r8
 	adds r1, 0x48
 	strb r0, [r1]
@@ -11139,7 +11139,7 @@ _080632BC:
 	beq _080632DE
 _080632CC:
 	mov r0, r8
-	bl sub_8045B60
+	bl GetTeamMemberEntityIndex
 	adds r2, r0, 0
 	adds r0, r7, 0
 	adds r1, r6, 0
@@ -11202,7 +11202,7 @@ _0806334A:
 	cmp r0, 0
 	beq _08063384
 	mov r0, r8
-	bl sub_8045B60
+	bl GetTeamMemberEntityIndex
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_80637A4

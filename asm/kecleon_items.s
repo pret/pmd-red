@@ -1026,29 +1026,4 @@ _080196FA:
 	bx r0
 	thumb_func_end sub_8019660
 
-	thumb_func_start sub_8019700
-sub_8019700:
-	ldr r0, _08019724
-	ldr r1, [r0]
-	movs r3, 0
-	ldr r0, _08019728
-	ldr r0, [r0]
-	str r0, [r1, 0x34]
-	movs r0, 0x5
-	str r0, [r1, 0x38]
-	movs r2, 0x1
-	ldr r0, _0801972C
-	ldr r0, [r0]
-	str r0, [r1, 0x3C]
-	movs r0, 0x6
-	str r0, [r1, 0x40]
-	str r3, [r1, 0x44]
-	str r2, [r1, 0x48]
-	bx lr
-	.align 2, 0
-_08019724: .4byte gUnknown_203B210
-_08019728: .4byte gUnknown_80D4920
-_0801972C: .4byte gUnknown_80D4928
-	thumb_func_end sub_8019700
-
         .align 2,0

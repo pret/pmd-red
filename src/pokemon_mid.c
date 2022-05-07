@@ -373,7 +373,7 @@ u16 GetLowKickDmg(s16 index)
     return gMonsterParameters[index].lowkick_dmg;
 }
 
-u16 GetSizeOrbDmg(s16 index)
+u32 GetSizeOrbDmg(s16 index)
 {
     return gMonsterParameters[index].sizeorb_dmg;
 }

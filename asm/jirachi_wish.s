@@ -14,7 +14,7 @@ JirachiWish:
 	push {r5-r7}
 	sub sp, 0x78
 	movs r0, 0x1A
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r6, r0, 0
 	ldr r0, _0808B82C
 	ldr r1, _0808B830
@@ -468,7 +468,7 @@ _0808B9F8:
 	ldr r0, _0808BA70
 	bl DisplayDungeonDialogue
 	adds r0, r6, 0
-	bl sub_808BC20
+	bl JirachiSpinEffect
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
@@ -507,8 +507,8 @@ _0808BA70: .4byte gUnknown_81058E0
 _0808BA74: .4byte gUnknown_810593C
 	thumb_func_end JirachiWish
 
-	thumb_func_start JirachiPreFightDialogue1
-JirachiPreFightDialogue1:
+	thumb_func_start JirachiReFightDialogue
+JirachiReFightDialogue:
 	push {lr}
 	ldr r0, _0808BA94
 	bl HasRecruitedMon
@@ -521,16 +521,16 @@ JirachiPreFightDialogue1:
 	b _0808BAA0
 	.align 2, 0
 _0808BA94: .4byte 0x0000019d
-_0808BA98: .4byte gUnknown_8105E14
+_0808BA98: .4byte gJirachiReFightDialogue_1
 _0808BA9C:
 	bl JirachiPreFightDialogue
 _0808BAA0:
 	pop {r0}
 	bx r0
-	thumb_func_end JirachiPreFightDialogue1
+	thumb_func_end JirachiReFightDialogue
 
-	thumb_func_start sub_808BAA4
-sub_808BAA4:
+	thumb_func_start JirachiWishGrantFlash
+JirachiWishGrantFlash:
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _0808BB34
@@ -546,7 +546,7 @@ _0808BAB8:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8085C54
+	bl SetDungeonBGColorRGB
 	movs r0, 0x46
 	bl sub_803E46C
 	subs r4, 0xA
@@ -563,7 +563,7 @@ _0808BADE:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8085C54
+	bl SetDungeonBGColorRGB
 	movs r0, 0x46
 	bl sub_803E46C
 	subs r4, 0xA
@@ -580,7 +580,7 @@ _0808BB04:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8085C54
+	bl SetDungeonBGColorRGB
 	movs r0, 0x46
 	bl sub_803E46C
 	subs r4, 0xA
@@ -597,7 +597,7 @@ _0808BB04:
 	.align 2, 0
 _0808BB34: .4byte 0x000002c1
 _0808BB38: .4byte gUnknown_202EDC8
-	thumb_func_end sub_808BAA4
+	thumb_func_end JirachiWishGrantFlash
 
 	thumb_func_start sub_808BB3C
 sub_808BB3C:

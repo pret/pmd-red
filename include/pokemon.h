@@ -193,6 +193,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
 void PeekPokemonItem(s16 index_, struct HeldItem* item);
 void GivePokemonItem(s16 index_, struct HeldItem* item);
 bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
+bool8 CanMonLearnMove(u16 moveID, s16 _species);
 
 u8 *GetCategoryString(s16 index);
 u8 GetPokemonSize(s16 index);
@@ -204,7 +205,7 @@ u8 GetUnk1B(s16 index);
 bool8 GetIsMoving(s16 index);
 u8 GetUnk1D(s16 index);
 u16 GetLowKickDmg(s16 index);
-u16 GetSizeOrbDmg(s16 index);
+u32 GetSizeOrbDmg(s16 index);
 u8 GetFriendArea(s16 index);
 u16 GetBaseHP(s16 index);
 bool8 IsToolboxEnabled(s16 index);

@@ -1,141 +1,5 @@
         .section .rodata
 
-	.global gUnknown_80DFCE4
-gUnknown_80DFCE4: @ 80DFCE4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFCFC
-gUnknown_80DFCFC: @ 80DFCFC
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x18, 0x00, 0x0e, 0x00
-        .byte 0x0e, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFD14
-gUnknown_80DFD14: @ 80DFD14
-        .string "Job List\0"
-        .align 2,0
-        .string "pksdir0\0"
-
-	.global gUnknown_80DFD28
-gUnknown_80DFD28: @ 80DFD28
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFD40
-gUnknown_80DFD40: @ 80DFD40
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x15, 0x00, 0x06, 0x00
-        .byte 0x07, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFD58
-gUnknown_80DFD58: @ 80DFD58
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x15, 0x00, 0x0f, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFD70
-gUnknown_80DFD70: @ 80DFD70
-        .string "Take Job\0"
-        .align 2,0
-
-	.global gUnknown_80DFD7C
-gUnknown_80DFD7C: @ 80DFD7C
-        .string "Suspend\0"
-        .string "pksdir0\0"
-
-	.global gUnknown_80DFD8C
-gUnknown_80DFD8C: @ 80DFD8C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFDA4
-gUnknown_80DFDA4: @ 80DFDA4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x18, 0x00, 0x0e, 0x00
-        .byte 0x0e, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFDBC
-gUnknown_80DFDBC: @ 80DFDBC
-	.string "RESCUE EVENT\0"
-        .align 2,0
-        .string "pksdir0\0"
-
-	.global gUnknown_80DFDD4
-gUnknown_80DFDD4: @ 80DFDD4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x03, 0x00
-        .byte 0x07, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFE04
-gUnknown_80DFE04: @ 80DFE04
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x15, 0x00, 0x06, 0x00
-        .byte 0x07, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DFE1C
-gUnknown_80DFE1C: @ 80DFE1C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x15, 0x00, 0x0f, 0x00
-        .byte 0x07, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x15, 0x00, 0x0f, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	#include "text/wonder_mail_3.inc"
-
-	.global gUnknown_80E016C
-gUnknown_80E016C: @ 80E016C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	#include "text/wonder_mail_complete.inc"
 
 	.global gUnknown_80E0248
 gUnknown_80E0248: @ 80E0248
@@ -145,6 +9,9 @@ gUnknown_80E0248: @ 80E0248
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
+
+        .global UnkData_80E0260
+        UnkData_80E0260:
         .byte 0x01, 0x00, 0x12, 0x00
 
 	.global gUnknown_80E0264
@@ -154,9 +21,9 @@ gUnknown_80E0264: @ 80E0264
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x1a, 0x00, 0x10, 0x00
         .byte 0x10, 0x00, 0x00, 0x00
-        .byte 0x60, 0x02, 0x0e, 0x08
-        .byte 0x70, 0x6b, 0x73, 0x64
-        .byte 0x69, 0x72, 0x30, 0x00
+        .4byte UnkData_80E0260
+
+        .string "pksdir0\0"
 
 	.global gUnknown_80E0284
 gUnknown_80E0284: @ 80E0284
@@ -351,32 +218,32 @@ gUnknown_80E0484: @ 80E0484
 gUnknown_80E04B4: @ 80E04B4
         .string " As your reward{COMMA} you can\n"
         .string "now go to the Friend Area\n"
-        .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}!\0"
+        .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}!\0"
         .align 2,0
 
 	.global gUnknown_80E04F4
 gUnknown_80E04F4: @ 80E04F4
-    .string "#+...Oh~2c wait~2c sorry.#P"
-    .string "#+You already have the \n"
-    .string "#+#C4$h Friend Area#R.#P"
-    .string "#+I~27m sorry that my reward is\n"
-    .string "#+something you already have.#P"
-    .string "#+In its place~2c #CN$m0#R~2c\n"
-    .string "#+you can have #CG1~2c000#R {POKE}.\0"
-    .align 2, 0
+        .string "{CENTER_ALIGN}...Oh{COMMA} wait{COMMA} sorry.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}You already have the \n"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA} Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
+        .string "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
+        .string "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
+        .string "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.\0"
+        .align 2, 0
 
 	.global gUnknown_80E05C0
 gUnknown_80E05C0: @ 80E05C0
         .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
         .string "{CENTER_ALIGN}to the Friend Area\n"
-        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E05FC
 gUnknown_80E05FC: @ 80E05FC
         .string "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
         .string "{CENTER_ALIGN}to the Friend Area\n"
-        .string "{CENTER_ALIGN}{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+        .string "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E0640

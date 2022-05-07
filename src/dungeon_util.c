@@ -43,14 +43,14 @@ struct ItemSlot* GetItemData(struct DungeonEntity *entity)
     return (struct ItemSlot *)entity->entityData;
 }
 
-struct DungeonEntityData* sub_804510C(struct DungeonEntity *entity)
+struct DungeonEntityData* GetTrapData_1(struct DungeonEntity *entity)
 {
     return entity->entityData;
 }
 
-struct DungeonEntityData* sub_8045110(struct DungeonEntity *entity)
+struct ItemSlot* GetItemData_1(struct DungeonEntity *entity)
 {
-    return entity->entityData;
+    return (struct ItemSlot*)entity->entityData;
 }
 
 struct MapTile* GetMapTileForDungeonEntity_1(struct DungeonEntity *entity)

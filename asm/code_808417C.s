@@ -15,7 +15,7 @@ sub_808417C:
 	ldrsh r0, [r1, r2]
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
-	bl sub_808411C
+	bl DungeonRandomRange
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl EntityExists

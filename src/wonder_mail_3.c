@@ -45,9 +45,103 @@ struct unkStruct_203B2F8
     u32 unk1E4;
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
-extern struct UnkTextStruct2 gUnknown_80DFE04;
-extern struct UnkTextStruct2 gUnknown_80DFE1C;
-extern struct UnkTextStruct2 gUnknown_80DFDD4;
+
+const struct UnkTextStruct2 gUnknown_80DFDD4 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+// Unused
+const struct UnkTextStruct2 gUnknown_80DFDEC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x03, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DFE04 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x06, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80DFE1C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+// Unused
+const struct UnkTextStruct2 gUnknown_80DFE34 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+ALIGNED(4) const u8 gUnknown_80DFE4C[] = _(
+	"Are you sure you want to replace the\n"
+	"old  {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} with the new one?");
+
+ALIGNED(4) const u8 gUnknown_80DFE9C[] = _(
+	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"received.");
+
+ALIGNED(4) const u8 gUnknown_80DFED0[] = _(
+	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"received.\n"
+	"You may not receive the same one again.");
+
+ALIGNED(4) const u8 gUnknown_80DFF2C[] = _(
+	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Please receive it after completing any\n"
+	"rescue mission in progress.");
+
+ALIGNED(4) const u8 gUnknown_80DFFA4[] = 
+	"The rescue team has quicksaved in\n"
+	"a dungeon with a mission in progress.\n"
+	"Please complete the mission first.";
+
+ALIGNED(4) const u8 gUnknown_80E0010[] =
+	"The rescue team has quicksaved in\n"
+	"a dungeon with a mission in progress.\n"
+	"Mail cannot be deleted now.";
+
+ALIGNED(4) const u8 gUnknown_80E0074[] = _(
+	"Received the {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gUnknown_80E0094[] = _(
+	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Is it OK to replace the old {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}\n"
+	"with the new one?");
+
+ALIGNED(4) const u8 gUnknown_80E0108[] = _(
+	"Your {COLOR_1 LIGHT_BLUE_2}Job List{END_COLOR_TEXT_1} is full.\n"
+	"Please select and delete unwanted mail.");
+
+ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
+ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
+static const u8 wonder_mail_3_fill[] = "pksdir0";
+
+
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
@@ -66,15 +160,6 @@ extern void sub_802DA84();
 extern void sub_802D1B8();
 extern void sub_802D2A8();
 
-extern u8 gUnknown_80E0010[];
-extern u8 gUnknown_80DFFA4[];
-extern u8 gUnknown_80DFF2C[];
-extern u8 gUnknown_80DFED0[];
-extern u8 gUnknown_80DFE9C[];
-extern u8 gUnknown_80DFE4C[];
-extern u8 gUnknown_80E0108[];
-extern u8 gUnknown_80E0094[];
-extern u8 gUnknown_80E0074[];
 
 extern u8 sub_80968B0(void *);
 extern u8 sub_8096F50(void *);
@@ -95,7 +180,7 @@ extern void sub_8097418(u32, u32);
 extern void sub_802D690(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void sub_80141B4(u8 *, u32, u32, u32);
+extern void sub_80141B4(const u8 *, u32, u32, u32);
 extern void sub_8012D60(u8 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern u8 *sub_8096DE8(void);
 extern void sub_8096A78(struct unkSubStruct_203B2F8 *);
@@ -208,128 +293,119 @@ void sub_802D2A8(void)
 {
   
   switch(gUnknown_203B2F8->state) {
-  case 0:
-    if (sub_80968B0(gUnknown_203B2F8->unkC) != 0) {
-        sub_802D1A0(3);
-    }
-    else
-    {
-      if (sub_8096F50(gUnknown_203B2F8->unkC) != 0) {
-        sub_802D1A0(4);
-      }
-      else
-      {
-        if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->unk10) != 0)) {
-          if (sub_802DAA8() != 0) {
-              sub_802D1A0(9);
-          }
-          else {
-              sub_802D1A0(5);
-          }
+      case 0:
+        if (sub_80968B0(gUnknown_203B2F8->unkC) != 0) {
+            sub_802D1A0(3);
         }
-        else {
-          if (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS) {
+        else if (sub_8096F50(gUnknown_203B2F8->unkC) != 0) {
+            sub_802D1A0(4);
+        }
+        else if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->unk10) != 0)) {
+            if (sub_802DAA8() != 0) {
+                sub_802D1A0(9);
+            }
+            else {
+                sub_802D1A0(5);
+            }
+        }
+        else if (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS) {
             if (sub_802DADC() != 0) {
                 sub_802D1A0(10);
             }
             else {
-               sub_802D1A0(6);
+                sub_802D1A0(6);
             }
-          }
-          else
-          {
-              sub_802D1A0(8);
-          }
         }
-      }
-    }
-    break;
-  case 1:
-    sub_802D73C();
-    sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
-    break;
-  case 3:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
-    break;
-  case 4:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFED0,0,0,0x101);
-    break;
-  case 5:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
-    break;
-  case 6:
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
-    break;
-  case 7:
-    gUnknown_203B2F8->unk4 = 0xc;
-    sub_80141B4(gUnknown_80E0010,0,0,0x101);
-    break;
-  case 8:
-    gUnknown_203B2F8->unk8 = 1;
-    sub_8096A78(gUnknown_203B2F8->unkC);
-    sub_8096C80();
-    sub_8096D24();
-    if (gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) {
-      MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
-      MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
-    }
-    switch(gUnknown_203B2F8->unkC->wonderMail.dungeon)
-    {
-        // NOTE: subtract 1 from each of the case as the input??
-        case DUNGEON_ODDITY_CAVE: // 0x2B
-            sub_8097418(0x2A, 1);
-            break;
-        case DUNGEON_REMAINS_ISLAND:
-            sub_8097418(0x2B, 1);
-            break;
-        case DUNGEON_MARVELOUS_SEA:
-            sub_8097418(0x2C, 1);
-            break;
-        case DUNGEON_FANTASY_STRAIT: // 0x2E
-            sub_8097418(0x2D, 1);
-            break;
-    }
-    gUnknown_203B2F8->unk4 = 2;
-    sub_80141B4(gUnknown_80E0074,0,0,0x101);
-    break;
-  case 9:
-    sub_802D690();
-    sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
-    break;
-  case 10:
-    gUnknown_203B2F8->unk4 = 0xb;
-    sub_80141B4(gUnknown_80E0108,0,0,0x101);
-    break;
-  case 0xb:
-    sub_802C4C8(0,0,4);
-    break;
-  case 0xc:
-    sub_802C640(1);
-    break;
-  case 0xd:
-    sub_802C750();
-    sub_8012D60(gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
-                gUnknown_203B2F8->unk6C,2);
-    break;
-  case 0xe:
-    sub_802C750();
-    sub_8012EA4(gUnknown_203B2F8->unk78,0);
-    sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
-    break;
-  case 0xf:
-    sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
-    gUnknown_203B2F8->unk14 = 3;
-    sub_802DE84(&gUnknown_203B2F8->unk14);
-    break;
-  case 0x10:
-    sub_803B35C(gUnknown_203B2F8->unkC,&gUnknown_203B2F8->unk14);
-    gUnknown_203B2F8->unk14 = 3;
-    gUnknown_203B2F8->unk58 = 0;
-    gUnknown_203B2F8->unk64 = gUnknown_203B2F8->unkC->unk18;
-    sub_802DE84(&gUnknown_203B2F8->unk14);
+        else
+            sub_802D1A0(8);
+        break;
+      case 1:
+        sub_802D73C();
+        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        break;
+      case 3:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
+        break;
+      case 4:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFED0,0,0,0x101);
+        break;
+      case 5:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
+        break;
+      case 6:
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
+        break;
+      case 7:
+        gUnknown_203B2F8->unk4 = 0xc;
+        sub_80141B4(gUnknown_80E0010,0,0,0x101);
+        break;
+      case 8:
+        gUnknown_203B2F8->unk8 = 1;
+        sub_8096A78(gUnknown_203B2F8->unkC);
+        sub_8096C80();
+        sub_8096D24();
+        if (gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) {
+          MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
+          MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
+        }
+        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon)
+        {
+            // NOTE: subtract 1 from each of the case as the input??
+            case DUNGEON_ODDITY_CAVE: // 0x2B
+                sub_8097418(0x2A, 1);
+                break;
+            case DUNGEON_REMAINS_ISLAND:
+                sub_8097418(0x2B, 1);
+                break;
+            case DUNGEON_MARVELOUS_SEA:
+                sub_8097418(0x2C, 1);
+                break;
+            case DUNGEON_FANTASY_STRAIT: // 0x2E
+                sub_8097418(0x2D, 1);
+                break;
+        }
+        gUnknown_203B2F8->unk4 = 2;
+        sub_80141B4(gUnknown_80E0074,0,0,0x101);
+        break;
+      case 9:
+        sub_802D690();
+        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        break;
+      case 10:
+        gUnknown_203B2F8->unk4 = 0xb;
+        sub_80141B4(gUnknown_80E0108,0,0,0x101);
+        break;
+      case 0xb:
+        sub_802C4C8(0,0,4);
+        break;
+      case 0xc:
+        sub_802C640(1);
+        break;
+      case 0xd:
+        sub_802C750();
+        sub_8012D60(gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
+                    gUnknown_203B2F8->unk6C,2);
+        break;
+      case 0xe:
+        sub_802C750();
+        sub_8012EA4(gUnknown_203B2F8->unk78,0);
+        sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
+        break;
+      case 0xf:
+        sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
+        gUnknown_203B2F8->unk14 = 3;
+        sub_802DE84(&gUnknown_203B2F8->unk14);
+        break;
+      case 0x10:
+        sub_803B35C(gUnknown_203B2F8->unkC,&gUnknown_203B2F8->unk14);
+        gUnknown_203B2F8->unk14 = 3;
+        gUnknown_203B2F8->unk58 = 0;
+        gUnknown_203B2F8->unk64 = gUnknown_203B2F8->unkC->unk18;
+        sub_802DE84(&gUnknown_203B2F8->unk14);
+        break;
   }
 }

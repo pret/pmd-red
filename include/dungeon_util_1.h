@@ -4,5 +4,6 @@
 #include "dungeon_entity.h"
 
 bool8 IsMovingClient(struct DungeonEntity *entity);
+void ShiftCameraToPosition(struct Position32 *posStruct, s32 cameraSteps);
 
 #endif

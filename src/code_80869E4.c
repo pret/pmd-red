@@ -22,7 +22,7 @@ void sub_80869E4(struct DungeonEntity *r0, u32, u8, s8);
 extern void sub_80859F0(u32);
 extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
-extern void sub_8085C54(u32, u32, u32, u32, u32);
+extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 void SpriteLookAroundEffect(struct DungeonEntity *r0);
@@ -36,8 +36,8 @@ extern u32 gUnknown_202EDC8;
 extern void sub_8085EB0(void);
 extern void sub_803E748(void);
 extern void sub_80855E4(void *);
-extern u32 sub_803F994(void);
-extern u32 sub_803F9B0(void);
+extern s32 GetCameraXPos(void);
+extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
 extern void sub_8086384(struct DungeonEntity *r0);
 extern void sub_8085930(u32);
@@ -156,8 +156,8 @@ void sub_8086448(void)
 
     for(iVar1 = 0; iVar1 < 0x38; iVar1++)
     {
-        retVar = sub_803F994();
-        retVar2 = sub_803F9B0();
+        retVar = GetCameraXPos();
+        retVar2 = GetCameraYPos();
         retVar2 += (0x80 << 1);
         sub_803F878(retVar, retVar2);
         sub_80855E4(sub_8086410);
@@ -201,9 +201,9 @@ void sub_8086500(void)
 
     for(iVar1 = 0; iVar1 < 0x48; iVar1++)
     {
-        retVar = sub_803F994();
+        retVar = GetCameraXPos();
         retVar += (0x80 << 1);
-        retVar2 = sub_803F9B0();
+        retVar2 = GetCameraYPos();
         sub_803F878(retVar, retVar2);
         sub_80855E4(sub_8086434);
         sub_803E46C(0x46);
@@ -221,9 +221,9 @@ void sub_808654C(void)
 
     for(iVar1 = 0; iVar1 < 0x78; iVar1++)
     {
-        retVar = sub_803F994();
+        retVar = GetCameraXPos();
         retVar += (0x80 << 1);
-        retVar2 = sub_803F9B0();
+        retVar2 = GetCameraYPos();
         sub_803F878(retVar, retVar2);
         sub_80855E4(sub_8086434);
         sub_803E46C(0x46);
@@ -241,8 +241,8 @@ void sub_8086598(void)
 
     for(iVar1 = 0; iVar1 < 0x18; iVar1++)
     {
-        retVar = sub_803F994();
-        retVar2 = sub_803F9B0();
+        retVar = GetCameraXPos();
+        retVar2 = GetCameraYPos();
         sub_803F878(retVar, retVar2 + (0xffffff00));
         sub_80855E4(sub_8086410);
         sub_803E46C(0x46);
@@ -260,8 +260,8 @@ void sub_80865E8(void)
 
     for(iVar1 = 0; iVar1 < 0xC; iVar1++)
     {
-        retVar = sub_803F994();
-        retVar2 = sub_803F9B0();
+        retVar = GetCameraXPos();
+        retVar2 = GetCameraYPos();
         sub_803F878(retVar, retVar2 + (0x80 << 2));
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
@@ -280,8 +280,8 @@ void sub_808663C(void)
 
     for(iVar1 = 0; iVar1 < 0x10; iVar1++)
     {
-        retVar = sub_803F994();
-        retVar2 = sub_803F9B0();
+        retVar = GetCameraXPos();
+        retVar2 = GetCameraYPos();
         sub_803F878(retVar, retVar2 + (0x80 << 2));
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
@@ -323,7 +323,7 @@ void sub_80866FC(void)
 
     for(iVar1 = 0; iVar1 >= -0xFA; iVar1 -= 0xA)
     {
-        sub_8085C54(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
         sub_803E46C(0x46);
     }
 }
@@ -339,7 +339,7 @@ void sub_8086738(void)
 
     for(iVar1 = 0; iVar1 < 0xFA; iVar1 += 0xA)
     {
-        sub_8085C54(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
         sub_803E46C(0x46);
     }
 }
@@ -350,7 +350,7 @@ void sub_8086764(void)
 
     for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 5)
     {
-        sub_8085C54(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
         sub_803E46C(0x46);
     }
     sub_8085EB0();
@@ -364,7 +364,7 @@ void sub_8086794(void)
 
     for(iVar1 = 0; iVar1 < 0xC8; iVar1++)
     {
-        sub_8085C54(0, 0, 0, 1, 0);
+        SetDungeonBGColorRGB(0, 0, 0, 1, 0);
         sub_803E9D0();
         sub_803E46C(0x46);
         if((iVar1 & 3) == 0)
