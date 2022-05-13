@@ -19,11 +19,54 @@ extern void sub_802E7D0(void);
 extern void sub_802E0A0(void);
 extern void sub_802E1AC(void);
 
-extern struct UnkTextStruct2 gUnknown_80E0284;
-extern struct UnkTextStruct2 gUnknown_80E029C;
-extern struct UnkTextStruct2 gUnknown_80E02B4;
-extern struct UnkTextStruct2 gUnknown_80E02CC;
+const struct UnkTextStruct2 gUnknown_80E0284 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
 
+const struct UnkTextStruct2 gUnknown_80E029C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x03, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E02B4 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x04, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x06, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E02CC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x04, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0f, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const u8 gMailboxCheckMail[] = "Check Mail";
+const u8 gMailboxJobList[] = "Job List";
+const u8 gMailboxPKMNNews[] = "PKMN News";
+const u8 gMailActionStore[] = "Store";
+const u8 gMailActionRead[] = "Read";
+const u8 gMailAccepted[] = "Accepted";
+const u8 gUnknown_80E0324[] = "/";
+static const u8 mailbox_fill[] = "pksdir0";
 
 extern struct unkStruct_203B304 *gUnknown_203B304;
 extern void sub_802E088(u32);

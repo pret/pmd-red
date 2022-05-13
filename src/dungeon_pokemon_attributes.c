@@ -257,3 +257,26 @@ bool8 sub_8071A8C(struct DungeonEntity *pokemon)
     }
     return FALSE;
 }
+
+bool8 SetVisualFlags(struct DungeonEntityData *entityData, u16 param_2, bool8 param_3)
+{ 
+  if ((entityData->visualFlags & param_2)) {
+    entityData->previousVisualFlags = param_2 | entityData->previousVisualFlags;
+  }
+  else {
+    entityData->previousVisualFlags = entityData->previousVisualFlags & ~param_2;     
+  }
+
+  if (param_3) {
+    entityData->visualFlags = param_2 | entityData->visualFlags;
+  }
+  else {
+    entityData->visualFlags = entityData->visualFlags & ~param_2;
+  }
+  if ( ((entityData->previousVisualFlags & param_2) == 0) && ((entityData->visualFlags & param_2)) ) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}

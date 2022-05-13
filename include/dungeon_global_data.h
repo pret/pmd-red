@@ -41,13 +41,14 @@ struct DungeonGlobalData
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
     u8 fill17A[0x17C - 0x17A];
     struct DungeonGlobalData_sub unk17C[0x100];
-    /* 0x57C */ u8 fill57C[0x645 - 0x57c];
+    /* 0x57C */ u8 fill57C[0x644 - 0x57c];
+    /* 0x644 */ u8 unk644;
     /* 0x645 */ u8 floorNumber;
     u8 fill646[0x65C - 0x646];
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
-    /* 0x660 */ u8 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
-    u8 fill661[0x666 - 0x661];
+    /* 0x660 */ u16 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
+    u8 fill662[0x666 - 0x662];
     /* 0x666 */ u16 turnsLeft; // Turns remaining before getting swept out of the dungeon.
     u8 fill668[0x66A - 0x668];
     u16 unk66A;
