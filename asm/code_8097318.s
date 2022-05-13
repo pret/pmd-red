@@ -5,29 +5,6 @@
 
 	.text
 
-        thumb_func_start sub_8097318
-sub_8097318:
-	push {lr}
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xD
-	bne _08097326
-	movs r0, 0
-	b _08097338
-_08097326:
-	lsls r2, r0, 16
-	lsrs r2, 16
-	movs r0, 0
-	movs r1, 0x2B
-	bl sub_8001784
-	cmp r0, 0
-	beq _08097338
-	movs r0, 0x1
-_08097338:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8097318
-
 	thumb_func_start sub_809733C
 sub_809733C:
 	push {r4-r6,lr}
