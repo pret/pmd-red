@@ -2,9 +2,10 @@
 
         .string "pksdir0\0"
         .string "pksdir0\0"
+
 	.global gUnknown_8107010
 gUnknown_8107010: @ 8107010
-	.incbin "baserom.gba", 0x107010, 0x8
+        .byte 0, 1, 1, 2, 1, 1, 0, 0
 
 	.global gUnknown_8107018
 gUnknown_8107018: @ 8107018
