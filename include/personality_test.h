@@ -23,7 +23,7 @@ struct PersonalityQuestion
   const u8 (*effects);
 };
 
-struct PersonalityStruct_203B400
+struct PersonalityTestTracker
 {
     /* 0x0 */ s32 FrameCounter;
     /* 0x4 */ u32 unk4;
