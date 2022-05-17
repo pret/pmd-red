@@ -216,8 +216,8 @@ gUnknown_8107798: @ 8107798
         .string "pksdir0\0"
         .align 2,0
 
-	.global gUnknown_81077A8
-gUnknown_81077A8: @ 81077A8
+	.global gDungeonFloorCount
+gDungeonFloorCount: @ 81077A8
 	.incbin "baserom.gba", 0x1077A8, 0x40
 
 	.global gUnknown_81077E8

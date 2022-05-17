@@ -3934,7 +3934,7 @@ _0809FAD4:
 	negs r4, r4
 _0809FAD8:
 	adds r0, r1, 0
-	bl sub_8090298
+	bl GetDungeonFloorCount
 	ldr r2, _0809FAF4
 	add r1, sp, 0x8
 	movs r3, 0x2

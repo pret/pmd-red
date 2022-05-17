@@ -559,7 +559,7 @@ _0803D500:
 	ldr r4, _0803D658
 	adds r2, r4
 	ldrb r0, [r2]
-	bl sub_8090298
+	bl GetDungeonFloorCount
 	ldr r1, [r6]
 	ldr r7, _0803D66C
 	adds r1, r7

@@ -14,9 +14,10 @@ struct RescuePasswordMenu
     // size: 0x214
     u32 currMenu;
     u32 state;
-    u8 fill8[0x148 - 8];
+    u32 unk8;
+    u8 fillC[0x148 - 0xC];
     struct UnkTextStruct2 unk148[4];
-    u8 fill1A8[0x208 - 0x1A8];
+    struct UnkTextStruct2 unk1A8[4];
 
     struct unkSprite unk208;
 
