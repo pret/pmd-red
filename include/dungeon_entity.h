@@ -220,7 +220,7 @@ struct DungeonEntityData
     /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
     /* 0x1FC */ u16 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
     /* 0x200 */ u32 statusSprites;
-    u32 unk204;
+    u8 unk204;
 };
 
 // Used for Pokémon, items, and traps.
