@@ -3,7 +3,6 @@
 
 #include "constants/targeting.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_ai_targeting_2.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"

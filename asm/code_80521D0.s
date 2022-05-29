@@ -4259,7 +4259,7 @@ _08054968:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057A0C
+	bl PainSplitMoveAction
 	bl _080554BA
 _08054978:
 	adds r0, r7, 0
@@ -5694,7 +5694,7 @@ _080554E6:
 	b _08055530
 _08055510:
 	mov r0, r8
-	bl sub_8057088
+	bl MoveCausesPaused
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055530
@@ -9148,42 +9148,5 @@ _08057060:
 	.align 2, 0
 _0805706C: .4byte gUnknown_203B438
 	thumb_func_end sub_8056F80
-
-	thumb_func_start sub_8057070
-sub_8057070:
-	push {lr}
-	bl GetMoveHitCount
-	cmp r0, 0
-	bne _08057082
-	movs r0, 0x2
-	movs r1, 0x6
-	bl sub_808411C
-_08057082:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057070
-
-	thumb_func_start sub_8057088
-sub_8057088:
-	push {lr}
-	ldrh r1, [r0, 0x2]
-	cmp r1, 0xEE
-	beq _080570A4
-	cmp r1, 0xEF
-	beq _080570A4
-	cmp r1, 0xF2
-	beq _080570A4
-	movs r0, 0x88
-	lsls r0, 1
-	cmp r1, r0
-	beq _080570A4
-	movs r0, 0
-	b _080570A6
-_080570A4:
-	movs r0, 0x1
-_080570A6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057088
 
 	.align 2, 0

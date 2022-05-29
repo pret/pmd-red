@@ -8,7 +8,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_ai_movement_1.h"
-#include "dungeon_ai_targeting_1.h"
+#include "dungeon_ai_targeting.h"
 #include "number_util.h"
 
 extern bool8 CanTakeItem(struct DungeonEntity *pokemon);

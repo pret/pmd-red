@@ -9,10 +9,16 @@
 #include "code_800D090.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
+extern u16 gUnknown_203B218;
+extern u16 gUnknown_203B220;
+extern u16 gUnknown_203B228;
+extern u16 gUnknown_203B22A;
 extern u8 gUnknown_80DB8E4[];
 extern u8 gUnknown_80DB8EC[];
 extern u8 gUnknown_80DB92C[];
 extern u8 gUnknown_80DB934[];
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
 
 extern s32 sub_80144A4(s32 *);
 void UpdateKecleonStoreState(u32);
@@ -90,9 +96,8 @@ extern struct UnkTextStruct2 gUnknown_80DB8CC;
 extern struct UnkTextStruct2 gUnknown_80DB8B4;
 extern struct UnkTextStruct2 gUnknown_80DB8FC;
 extern struct UnkTextStruct2 gUnknown_80DB944;
+extern struct UnkTextStruct2 gUnknown_80DB95C;
 extern const struct UnkTextStruct2 gUnknown_80DB914;
-extern u16 gUnknown_203B218;
-extern u16 gUnknown_203B220;
 extern void sub_801A430(void);
 extern void sub_801A4A4(void);
 extern void sub_8013984(u8 *);
@@ -100,9 +105,6 @@ extern void sub_801A064(void);
 extern void sub_801A0D8(void);
 extern void AddMenuCursorSprite(void *);
 extern u8 sub_801A37C(void);
-extern u16 gUnknown_203B228;
-extern u16 gUnknown_203B22A;
-extern struct UnkTextStruct2 gUnknown_80DB95C;
 
 extern void sub_801A010(void);
 extern void sub_801A3DC(void);
@@ -113,6 +115,23 @@ extern void xxx_init_inv_unk250_at_8091A74(u8 index);
 extern void xxx_fill_inv_unk250_gaps_8091AA8(void);
 
 u32 sub_8019D8C(void);
+
+void sub_8019700(void)
+{
+    u32 menuAction;
+    struct unkStruct_203B210 *preload;
+    u8 *nullText;
+
+    preload = gUnknown_203B210;
+    nullText = NULL;
+    preload->unk34[0].text = *gUnknown_80D4920;
+    preload->unk34[0].menuAction = 5;
+    menuAction = 1;
+    preload->unk34[1].text = *gUnknown_80D4928;
+    preload->unk34[1].menuAction = 6;
+    preload->unk34[2].text = nullText;
+    preload->unk34[2].menuAction = menuAction;
+}
 
 void sub_8019730(void)
 {

@@ -108,18 +108,18 @@ TeamMeaniesPreFightDialogue:
 	adds r4, 0xC
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087048: .4byte gUnknown_8100DB0
-_0808704C: .4byte gUnknown_8100E64
-_08087050: .4byte gUnknown_8100E88
-_08087054: .4byte gUnknown_8100F14
-_08087058: .4byte gUnknown_8101004
-_0808705C: .4byte gUnknown_8101050
-_08087060: .4byte gUnknown_81010D0
+_08087048: .4byte gTeamMeaniesPreFightDialogue_1
+_0808704C: .4byte gTeamMeaniesPreFightDialogue_2
+_08087050: .4byte gTeamMeaniesPreFightDialogue_3
+_08087054: .4byte gTeamMeaniesPreFightDialogue_4
+_08087058: .4byte gTeamMeaniesPreFightDialogue_5
+_0808705C: .4byte gTeamMeaniesPreFightDialogue_6
+_08087060: .4byte gTeamMeaniesPreFightDialogue_7
 	thumb_func_end TeamMeaniesPreFightDialogue
 
 	thumb_func_start TeamMeaniesReFightDialogue
@@ -186,17 +186,17 @@ TeamMeaniesReFightDialogue:
 	adds r4, 0xC
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087118: .4byte gUnknown_8101164
-_0808711C: .4byte gUnknown_8100E64
-_08087120: .4byte gUnknown_8101240
-_08087124: .4byte gUnknown_8101310
-_08087128: .4byte gUnknown_810137C
-_0808712C: .4byte gUnknown_8101408
+_08087118: .4byte gTeamMeaniesReFightDialogue_1
+_0808711C: .4byte gTeamMeaniesPreFightDialogue_2
+_08087120: .4byte gTeamMeaniesReFightDialogue_2
+_08087124: .4byte gTeamMeaniesReFightDialogue_3
+_08087128: .4byte gTeamMeaniesReFightDialogue_4
+_0808712C: .4byte gTeamMeaniesReFightDialogue_5
 	thumb_func_end TeamMeaniesReFightDialogue
 
 	thumb_func_start sub_8087130
@@ -219,13 +219,13 @@ sub_8087144:
 	push {r6,r7}
 	sub sp, 0xF0
 	movs r0, 0x5
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r7, r0, 0
 	movs r0, 0x6
-	bl sub_8085680
+	bl GetEntityFromClientType
 	mov r8, r0
 	movs r0, 0x7
-	bl sub_8085680
+	bl GetEntityFromClientType
 	mov r9, r0
 	ldr r1, _080871E0
 	mov r0, sp
@@ -324,7 +324,7 @@ sub_8087230:
 	bl xxx_call_GetLeaderEntity
 	adds r6, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r5, r0, 0
 	movs r0, 0x72
 	bl sub_8083E88
@@ -370,7 +370,7 @@ sub_808729C:
 	bl xxx_call_GetLeaderEntity
 	adds r5, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	adds r4, r0, 0
 	bl sub_80854D4
 	movs r0, 0x4
@@ -471,7 +471,7 @@ ZapdosPreFightDialogue:
 	bl GetPartnerEntity
 	adds r6, r0, 0
 	movs r0, 0x8
-	bl sub_8085680
+	bl GetEntityFromClientType
 	str r0, [sp, 0x68]
 	bl sub_8086448
 	movs r0, 0xA
@@ -513,7 +513,7 @@ ZapdosPreFightDialogue:
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x3
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	bl sub_8083F14
 	movs r0, 0xED
 	lsls r0, 1
@@ -660,21 +660,21 @@ _0808752A:
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x3
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875B4
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x1
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875B8
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
 	movs r1, 0x46
 	bl sub_803E708
 	movs r0, 0x2
-	bl sub_808775C
+	bl ZapdosScreenFlash
 	ldr r0, _080875BC
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
@@ -687,7 +687,7 @@ _0808752A:
 	bl SetupBossFightHP
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80858AC
+	bl ShiftCameraToPosition
 	add sp, 0x70
 	pop {r3-r5}
 	mov r8, r3

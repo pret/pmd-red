@@ -1676,7 +1676,7 @@ gUnknown_80D7A44:
     .global gUnknown_80D7C94
 gUnknown_80D7C94:
     .string " Sssnore...\n"
-    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
+    .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...?\n"
     .string "I can{APOSTROPHE}t get that Friend Area...{EXTRA_MSG}"
     .string " Zzz... Zzz...\n"
     .string "Sorry...\0"
@@ -1685,7 +1685,7 @@ gUnknown_80D7C94:
     .global gUnknown_80D7CE8
 gUnknown_80D7CE8:
     .string " Zzz... Hunh...?\n"
-    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...?\n"
+    .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...?\n"
     .string "I don{APOSTROPHE}t know... I{APOSTROPHE}ll check...{EXTRA_MSG}"
     .string " Sssnore...\n"
     .string "I{APOSTROPHE}ll have it for sale...\n"
@@ -1696,14 +1696,14 @@ gUnknown_80D7CE8:
 gUnknown_80D7D64:
     .string " Sssnore...\n"
     .string "You can already go...\n"
-    .string "Friend Area {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
+    .string "Friend Area {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7DA0
 gUnknown_80D7DA0:
     .string " Dwee... Kwoo...\n"
     .string "{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s Friend Area...\n"
-    .string "Zzz... {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
+    .string "Zzz... {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7DE0
@@ -1748,10 +1748,10 @@ gUnknown_80D7ED0:
     .global gUnknown_80D7F10
 gUnknown_80D7F10:
     .string " Grats... Zzz...{WAIT_PRESS}\n"
-    .string "You can go to {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+    .string "You can go to {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...{EXTRA_MSG}"
     .string " Dwee... Sssnore...\n"
     .string "Make friends with Pokémon in...\n"
-    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}...\0"
+    .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...\0"
     .align 2, 0
 
     .global gUnknown_80D7F7C
@@ -1767,7 +1767,7 @@ gUnknown_80D7F7C:
 
     .global gUnknown_80D8000
 gUnknown_80D8000:
-    .string " Kwoo? {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string " Kwoo? {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
     .string "That{APOSTROPHE}s {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
@@ -1836,14 +1836,14 @@ gUnknown_80D8104:
 
     .global gUnknown_80D8420
 gUnknown_80D8420:
-    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
     .string "I can{APOSTROPHE}t get that Friend Area for you.{WAIT_PRESS}\n"
     .string "I{APOSTROPHE}m really sorry.\0"
     .align 2, 0
 
     .global gUnknown_80D8468
 gUnknown_80D8468:
-    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
     .string "I don{APOSTROPHE}t know much about it at all.{WAIT_PRESS}\n"
     .string "I{APOSTROPHE}ll check up on it.{EXTRA_MSG}"
     .string " I{APOSTROPHE}ll add it to the Friend\n"
@@ -1853,13 +1853,13 @@ gUnknown_80D8468:
     .global gUnknown_80D84F8
 gUnknown_80D84F8:
     .string " You can already go to the\n"
-    .string "Friend Area {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+    .string "Friend Area {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D8528
 gUnknown_80D8528:
     .string " {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s Friend Area\n"
-    .string "is {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+    .string "is {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D8550
@@ -1903,10 +1903,10 @@ gUnknown_80D8644:
     .global gUnknown_80D8674
 gUnknown_80D8674:
     .string " Congratulations!{WAIT_PRESS}\n"
-    .string "You can go to {COLOR_1 GREEN}$h{END_COLOR_TEXT_1} now!{EXTRA_MSG}"
+    .string "You can go to {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1} now!{EXTRA_MSG}"
     .string " You can recruit\n"
     .string "Pokémon that live in the Friend Area\n"
-    .string "{COLOR_1 GREEN}$h{END_COLOR_TEXT_1}.\0"
+    .string "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
     .global gUnknown_80D86E4
@@ -1918,7 +1918,7 @@ gUnknown_80D86E4:
 
     .global gUnknown_80D8738
 gUnknown_80D8738:
-    .string " {COLOR_1 GREEN}$h{END_COLOR_TEXT_1}?\n"
+    .string " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
     .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that OK?\0"
     .align 2, 0

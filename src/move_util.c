@@ -1,9 +1,25 @@
 #include "global.h"
 #include "move_util.h"
 
+#include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "moves.h"
+#include "dungeon_util.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
+
+bool8 sub_8057308(struct DungeonEntity *pokemon, s32 chance)
+{
+    if(!EntityExists(pokemon))
+        return FALSE;
+    if(chance == 0)
+        return TRUE;
+    if(HasAbility(pokemon, ABILITY_SERENE_GRACE))
+        return RollPercentChance_2(chance * 2);
+    else
+        return RollPercentChance_2(chance);
+}
 
 bool8 IsMoveIndexUsable(struct DungeonEntity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {

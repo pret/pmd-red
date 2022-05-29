@@ -175,11 +175,10 @@ void sub_8017C7C(void)
         sub_8099690(0);
         if(!IsNotMoneyOrUsedTMItem(gUnknown_203B208->unkC.itemIndex))
             UpdateKangaskhanStorageState(9);
+        else if(!sub_801ADA0(gUnknown_203B208->unk10))
+            UpdateKangaskhanStorageState(0xA);
         else
-            if(!sub_801ADA0(gUnknown_203B208->unk10))
-                UpdateKangaskhanStorageState(0xA);
-            else
-                UpdateKangaskhanStorageState(0x11);
+            UpdateKangaskhanStorageState(0x11);
         break;
       case 6:
         sub_8099690(0);
@@ -209,13 +208,10 @@ void sub_8017D24(void)
             sub_801CBB8();
             UpdateKangaskhanStorageState(6);
         }
+        else if(IsThrowableItem(gUnknown_203B208->unkC.itemIndex))
+            UpdateKangaskhanStorageState(0x18);
         else
-        {
-            if(IsThrowableItem(gUnknown_203B208->unkC.itemIndex))
-                UpdateKangaskhanStorageState(0x18);
-            else
-                UpdateKangaskhanStorageState(0x1B);
-        }
+            UpdateKangaskhanStorageState(0x1B);
         break;
       case 6:
         UpdateKangaskhanStorageState(0x1A);

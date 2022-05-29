@@ -7237,7 +7237,7 @@ _0807ACB4:
 	ldr r1, _0807AD78
 	movs r4, 0
 	ldrsh r1, [r1, r4]
-	bl sub_808411C
+	bl DungeonRandomRange
 	adds r7, r0, 0
 	cmp r7, r8
 	blt _0807ACCC

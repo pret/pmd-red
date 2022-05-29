@@ -240,7 +240,7 @@ u8 GetMoveWeight(struct PokemonMove *move)
     return gMovesData[move->moveID].weight;
 }
 
-u8 GetMoveHitCount(struct PokemonMove *move)
+u32 GetMoveHitCount(struct PokemonMove *move)
 {
     return gMovesData[move->moveID].hitCount;
 }

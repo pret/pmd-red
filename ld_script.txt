@@ -126,6 +126,8 @@ SECTIONS {
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
         asm/wonder_mail_2.o(.text);
+        src/wonder_mail_2_1.o(.text);
+        asm/wonder_mail_802C860.o(.text);
         src/wonder_mail_3.o(.text);
         asm/wonder_mail_3.o(.text);
         src/wonder_mail_802DF88.o(.text);
@@ -193,6 +195,7 @@ SECTIONS {
         src/dungeon_util.o(.text);
         asm/code_80450F8.o(.text);
         src/dungeon_visibility.o(.text);
+        src/code_8045A00.o(.text);
         asm/code_8045A00.o(.text);
         src/dungeon_items.o(.text);
         asm/code_8046CE4.o(.text);
@@ -230,11 +233,6 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.text);
         asm/code_8070E3C.o(.text);
         src/dungeon_ai_targeting.o(.text);
-        asm/code_807138C.o(.text);
-        src/dungeon_ai_targeting_1.o(.text);
-        asm/code_8071518.o(.text);
-        src/dungeon_ai_targeting_2.o(.text);
-        asm/code_807167C.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
         asm/code_80718D8.o(.text);
         src/dungeon_ai_items.o(.text);
@@ -254,14 +252,13 @@ SECTIONS {
         asm/code_807CD9C.o(.text);
         src/weather.o(.text);
         asm/code_807E5AC.o(.text);
+        src/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
         src/code_8083288.o(.text);
         src/dungeon_range.o(.text);
         asm/code_808333C.o(.text);
         src/dungeon_random.o(.text);
-        asm/code_808411C.o(.text);
-        src/dungeon_random_1.o(.text);
         asm/code_808417C.o(.text);
         src/code_80848F0.o(.text);
         asm/code_80848F0.o(.text);
@@ -417,6 +414,9 @@ SECTIONS {
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);
+        src/wonder_mail_2_1.o(.rodata);
+        src/wonder_mail_3.o(.rodata);
+        src/wonder_mail_802DF88.o(.rodata);
         data/data_80DED44.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);
@@ -453,7 +453,6 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.rodata);
         data/data_8106FB5.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
-        src/dungeon_ai_targeting_2.o(.rodata);
         data/data_8107010.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);

@@ -13,5 +13,6 @@ u8 GetEntityRoomIndex(struct DungeonEntity *entity);
 struct DungeonEntityData *GetTrapData(struct DungeonEntity *entity);
 struct ItemSlot *GetItemData(struct DungeonEntity *entity);
 struct MapTile *GetMapTileForDungeonEntity_2(struct DungeonEntity *entity);
+struct ItemSlot *GetItemData_1(struct DungeonEntity *entity);
 
 #endif
