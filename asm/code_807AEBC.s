@@ -531,7 +531,7 @@ _0807B2B4:
 	strh r1, [r2]
 _0807B2C0:
 	mov r0, r8
-	bl Explore
+	bl Wander
 _0807B2C6:
 	movs r0, 0x1
 	add sp, 0xC

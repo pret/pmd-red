@@ -4,5 +4,6 @@
 #include "dungeon_entity.h"
 
 bool8 AvoidEnemies(struct DungeonEntity *pokemon);
+bool8 Wander(struct DungeonEntity *pokemon);
 
 #endif
