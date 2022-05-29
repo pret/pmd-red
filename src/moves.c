@@ -260,7 +260,7 @@ u32 GetMoveMaxPP(struct PokemonMove *move)
     return gMovesData[move->moveID].maxPP;
 }
 
-u8 GetMoveUnk12(struct PokemonMove *move)
+u32 GetMoveUnk12(struct PokemonMove *move)
 {
     return gMovesData[move->moveID].unk12;
 }

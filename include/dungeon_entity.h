@@ -101,7 +101,7 @@ struct DungeonEntityData
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactic;
-    u8 fill95[0xA4 - 0x95];
+    u8 fill9C[0xA4 - 0x95];
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
@@ -160,7 +160,7 @@ struct DungeonEntityData
     u8 fillF3;
     /* 0xF4 */ bool8 grudgeStatus;
     /* 0xF5 */ bool8 exposedStatus;
-    u8 fillF6;
+    /* 0xF6 */ bool8 isColorChanged;
     /* 0xF7 */ bool8 isBoss;
     u8 fillF8[0xFA - 0xF8];
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
@@ -194,7 +194,9 @@ struct DungeonEntityData
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 fill153[0x15C - 0x153];
+    u8 fill153[0x15A - 0x153];
+    u8 unk15A;
+    u8 unk15B;
     u8 unk15C;
     u8 unk15D;
     u8 unk15E;

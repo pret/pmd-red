@@ -31,11 +31,14 @@ struct DungeonGlobalData
     u8 fill5[0x7 - 0x5];
     u8 unk7;
     u8 unk8;
-    u8 fill9[0xF - 0x9];
+    u8 fill9[0xC - 0x9];
+    u8 unkC;
+    u8 unkD[0xF - 0xD];
     /* 0xF */ bool8 inputAllowed; // Whether the game is currently accepting input. Set to false while action animations play.
     u8 fill10;
     u8 unk11;
-    u8 fill12[0x16D - 0x12];
+    s16 unk12;
+    u8 fill14[0x16D - 0x14];
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
@@ -55,7 +58,9 @@ struct DungeonGlobalData
     u8 fill66C[0x671 - 0x66C];
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
-    u8 fill673[0x68A - 0x673];
+    u8 fill673[0x675 - 0x673];
+    u8 unk675;
+    u8 unk676[0x68A - 0x676];
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
@@ -81,7 +86,7 @@ struct DungeonGlobalData
     /* 0xE26F */ u8 startingWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
-    /* 0xE279 */ u8 unkE279;
+    /* 0xE279 */ u8 negateWeatherEffects; // Air Lock and Cloud Nine toggle this to disable weather effects
     u8 fillE27A[0xE8C0 - 0xE27A];
     /* 0xE8C0 */ struct MapTile* mapTilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fill104C0[0x104C4 - 0x104C0];
