@@ -212,7 +212,7 @@ void sub_80485B0(struct DungeonEntity *param_1, struct DungeonEntity * param_2)
   register struct PokemonMove *movePtr2 asm("r5"); // r5
   u8 cVar8;
   s32 movePowerBoost;
-  s32 moveUnk12;
+  s32 maxPowerBoost;
 
   isMoveBoosted = FALSE;
   cVar8 = 1;
@@ -226,10 +226,10 @@ void sub_80485B0(struct DungeonEntity *param_1, struct DungeonEntity * param_2)
         {
             if(GetMovePower(movePtr2) == 0) continue;
             movePowerBoost = movePtr1->powerBoost;
-            moveUnk12 = GetMoveUnk12(movePtr2);
+            maxPowerBoost = GetMoveMaxPowerBoost(movePtr2);
             movePtr1->powerBoost += cVar8;
-            if(movePtr1->powerBoost >= moveUnk12)
-                movePtr1->powerBoost = moveUnk12;
+            if(movePtr1->powerBoost >= maxPowerBoost)
+                movePtr1->powerBoost = maxPowerBoost;
             if(movePowerBoost != movePtr1->powerBoost)
                 isMoveBoosted = TRUE;
         }
