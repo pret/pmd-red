@@ -101,7 +101,7 @@ struct DungeonEntityData
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactic;
-    u8 fill9C[0xA4 - 0x95];
+    u8 fill95[0xA4 - 0x95];
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.

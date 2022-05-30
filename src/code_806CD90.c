@@ -105,7 +105,7 @@ u8 sub_806CEBC(struct DungeonEntity *param_1)
   sleepStatus = iVar2->sleepStatus;
 
   if ((sleepStatus == SLEEP_STATUS_SLEEP) || (sleepStatus == SLEEP_STATUS_NAPPING) || (sleepStatus == SLEEP_STATUS_NIGHTMARE)) {
-    if ((iVar3->transformSpecies != 0xb9) || (iVar3->sleepStatusTurnsLeft != 0x7f)) {
+    if ((iVar3->transformSpecies != SPECIES_SUDOWOODO) || (iVar3->sleepStatusTurnsLeft != 0x7f)) {
       return 5;
     }
     else

@@ -2,6 +2,7 @@
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/type.h"
+#include "constants/weather.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
@@ -79,13 +80,13 @@ void TriggerWeatherAbilities(void)
       uVar4 = gDungeonGlobalData->allPokemon[iVar5];
       if (EntityExists(uVar4)) {
         if (HasAbility(uVar4, ABILITY_DRIZZLE)) {
-            gDungeonGlobalData->startingWeather[4] = 1;
+            gDungeonGlobalData->startingWeather[WEATHER_RAIN] = 1;
         }
         else if (HasAbility(uVar4, ABILITY_SAND_STREAM)) {
-            gDungeonGlobalData->startingWeather[2] = 1;
+            gDungeonGlobalData->startingWeather[WEATHER_SANDSTORM] = 1;
         }
         else if (HasAbility(uVar4, ABILITY_DROUGHT)) {
-            gDungeonGlobalData->startingWeather[1] = 1;
+            gDungeonGlobalData->startingWeather[WEATHER_SUNNY] = 1;
         }
         if ((HasAbility(uVar4, ABILITY_AIR_LOCK)) || (HasAbility(uVar4, ABILITY_CLOUD_NINE))) {
             gDungeonGlobalData->negateWeatherEffects = TRUE;
