@@ -1059,36 +1059,51 @@ gUnknown_80F89D8: @ 80F89D8
 gUnknown_80F89F4: @ 80F89F4
         .4byte NothingHappened_80F89DC
 
+        .global BlownAway_80F89F8
+        BlownAway_80F89F8:
         .string "{ARG_POKEMON_0} was blown away!\0"
         .align 2,0
 
 	.global gUnknown_80F8A0C
 gUnknown_80F8A0C: @ 80F8A0C
-        .byte 0xF8, 0x89, 0x0F, 0x08
+        .4byte BlownAway_80F89F8
+
+        .global NoSetMove_80F8A10
+        NoSetMove_80F8A10:
         .string "No move has been set.\0"
         .align 2,0
 
 	.global gUnknown_80F8A28
 gUnknown_80F8A28: @ 80F8A28
-        .byte 0x10, 0x8A, 0x0F, 0x08
+        .4byte NoSetMove_80F8A10
+
+        .global SetMoveCantUse_80F8A2C
+        SetMoveCantUse_80F8A2C:
         .string "The set move can{APOSTROPHE}t be used.\0"
         .align 2,0
 
 	.global gUnknown_80F8A4C
 gUnknown_80F8A4C: @ 80F8A4C
-        .byte 0x2C, 0x8A, 0x0F, 0x08
+        .4byte SetMoveCantUse_80F8A2C
+
+        .global BeingConstricted_80F8A50
+        BeingConstricted_80F8A50:
         .string "You{APOSTROPHE}re being constricted!\0"
         .align 2,0
 
 	.global gUnknown_80F8A6C
 gUnknown_80F8A6C: @ 80F8A6C
-        .byte 0x50, 0x8A, 0x0F, 0x08
+        .4byte BeingConstricted_80F8A50
+    
+        .global CantMove_80F8A70
+        CantMove_80F8A70:
         .string "You can{APOSTROPHE}t move!\0"
         .align 2,0
 
 	.global gUnknown_80F8A84
 gUnknown_80F8A84: @ 80F8A84
-        .byte 0x70, 0x8A, 0x0F, 0x08
+        .4byte CantMove_80F8A70
+
         .string "You can{APOSTROPHE}t move while you{APOSTROPHE}re rooted!\0"
         .align 2,0
 

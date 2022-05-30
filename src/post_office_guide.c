@@ -47,15 +47,6 @@ extern const char FriendRescue_80E0A80[];
 extern const char Delivery_Text[];
 extern const char BulletinBoard_Text[];
 extern const char PostOffice_Text[];
-extern u8 gUnknown_80E1F30[];
-extern u8 gUnknown_80E1F3C[];
-extern u8 gUnknown_80E1F60[];
-extern u8 gUnknown_80E1F70[];
-extern u8 gUnknown_202DE58[];
-extern u8 gUnknown_80E1F80[];
-extern u8 gUnknown_80E1F40[];
-extern u8 gUnknown_80E1F54[];
-extern u8 gUnknown_80E1F94[];
 
 enum PostOfficeStates
 {
@@ -171,6 +162,20 @@ const struct UnkTextStruct2 gUnknown_80E1F18 =
     gUnkData_80E1F14
 };
 
+ALIGNED(4) const u8 gUnknown_80E1F30[] = "Objectives";
+ALIGNED(4) const u8 gUnknown_80E1F3C[] = "%dF";
+ALIGNED(4) const u8 gUnknown_80E1F40[] = _("  Rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gUnknown_80E1F54[] = "Just go!";
+ALIGNED(4) const u8 gUnknown_80E1F60[] = _("  Bring {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gUnknown_80E1F70[] = _("  Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gUnknown_80E1F80[] = _("  Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gUnknown_80E1F94[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 post_office_fill[] = "pksdir0";
+
+extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gAvailablePokemonNames[];
+
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
 extern u32 sub_8012A64(struct UnkInputStruct**, u32);
@@ -190,8 +195,6 @@ extern void sub_803B6B0(u32, u32, u32, u32);
 extern s16 sub_80A2688(u8 r0);
 extern u8 sub_80992E0(s16 *, s16 *);
 
-extern u8 gUnknown_202E5D8[];
-extern u8 gAvailablePokemonNames[];
 extern void sub_8031A2C(void);
 extern void sub_801317C(void *);
 

@@ -144,6 +144,9 @@ SECTIONS {
         asm/makuhita_dojo.o(.text);
         src/wonder_mail_4.o(.text);
         asm/wonder_mail_4.o(.text);
+        src/wonder_mail_5.o(.text);
+        asm/wonder_mail_5.o(.text);
+        src/wonder_mail_4_1.o(.text);
         src/post_office_guide.o(.text);
         asm/code_8031D70.o(.text);
         src/adventure_log.o(.text);
@@ -218,6 +221,7 @@ SECTIONS {
         src/status_checker.o(.text);
         asm/code_805D8C8.o(.text);
         src/targeting.o(.text);
+        src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);
         src/code_806CD90.o(.text);
         asm/code_806CD90.o(.text);
@@ -233,8 +237,6 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.text);
         asm/code_8070E3C.o(.text);
         src/dungeon_ai_targeting.o(.text);
-        asm/code_8071214.o(.text);
-        src/dungeon_ai_targeting_1.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
         asm/code_80718D8.o(.text);
         src/dungeon_ai_items.o(.text);
@@ -257,6 +259,7 @@ SECTIONS {
         src/dungeon_range.o(.text);
         asm/code_808333C.o(.text);
         src/dungeon_random.o(.text);
+        src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
         src/code_80848F0.o(.text);
         asm/code_80848F0.o(.text);
@@ -415,6 +418,8 @@ SECTIONS {
         src/wonder_mail_2_1.o(.rodata);
         src/wonder_mail_3.o(.rodata);
         src/wonder_mail_802DF88.o(.rodata);
+        src/mailbox.o(.rodata);
+        src/pelipper_board.o(.rodata);
         data/data_80DED44.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);
@@ -449,8 +454,6 @@ SECTIONS {
         src/dungeon_capabilities_1.o(.rodata);
         data/data_8106FB5.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
-        data/data_8106FDD.o(.rodata);
-        src/dungeon_ai_targeting_1.o(.rodata);
         data/data_8107010.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);

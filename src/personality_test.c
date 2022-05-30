@@ -11,7 +11,27 @@
 #include "text.h"
 #include "menu.h"
 
-EWRAM_DATA struct PersonalityStruct_203B400 *gUnknown_203B400;
+enum
+{
+    PERSONALITY_GENERATE_NEW_QUESTION,
+    PERSONALITY_ASK_QUESTION,
+    PERSONALITY_UPDATE_TOTALS,
+    PERSONALITY_PLAYER_GENDER,
+    PERSONALITY_REVEAL,
+    PERSONALITY_STARTER_REVEAL,
+    PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_1,
+    PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_2,
+    PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_3,
+    PERSONALITY_PARTNER_SELECTION,
+    PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_1,
+    PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2,
+    PERSONALITY_PARTNER_NICKNAME,
+    PERSONALITY_END_INTRO,
+    PERSONALITY_ADVANCE_TO_TEST_END,
+    PERSONALITY_TEST_END,
+};
+
+EWRAM_DATA struct PersonalityTestTracker *gPersonalityTestTracker;
 EWRAM_DATA struct PersonalityStruct_203B404 *gUnknown_203B404;
 
 
@@ -393,8 +413,8 @@ const char personality_test_fill[] = "pksdir0";
 
 u8 CreateTestTracker(void)
 {
-  gUnknown_203B400 = MemoryAlloc(sizeof(struct PersonalityStruct_203B400),8);
-  sub_801317C(&gUnknown_203B400->unkb4);
+  gPersonalityTestTracker = MemoryAlloc(sizeof(struct PersonalityTestTracker),8);
+  sub_801317C(&gPersonalityTestTracker->unkb4);
   InitializeTestStats();
   sub_8099690(1);
   return 1;
@@ -404,19 +424,19 @@ void InitializeTestStats(void)
 {
   s32 counter;
 
-  sub_8001024(&gUnknown_203B400->unk4);
-  gUnknown_203B400->FrameCounter = 0;
-  gUnknown_203B400->TestState = 0;
-  gUnknown_203B400->QuestionCounter = 0;
+  sub_8001024(&gPersonalityTestTracker->unk4);
+  gPersonalityTestTracker->FrameCounter = 0;
+  gPersonalityTestTracker->TestState = 0;
+  gPersonalityTestTracker->QuestionCounter = 0;
   for(counter = 0; counter < NUM_PERSONALITIES; counter++){
-    gUnknown_203B400->NatureTotals[counter] = 0;
+    gPersonalityTestTracker->NatureTotals[counter] = 0;
   }
-  gUnknown_203B400->currQuestionIndex = 0;
+  gPersonalityTestTracker->currQuestionIndex = 0;
   for(counter = 0; counter < NUM_QUIZ_QUESTIONS; counter++){
-    gUnknown_203B400->QuestionTracker[counter] = 0;
+    gPersonalityTestTracker->QuestionTracker[counter] = 0;
   }
-  gUnknown_203B400->playerNature = 0;
-  gUnknown_203B400->playerGender = 0;
+  gPersonalityTestTracker->playerNature = 0;
+  gPersonalityTestTracker->playerGender = 0;
 }
 
 u8 HandleTestTrackerState(void)
@@ -425,60 +445,60 @@ u8 HandleTestTrackerState(void)
 
   s32 iVar1;
 
-  gUnknown_203B400->FrameCounter++;
-  switch(gUnknown_203B400->TestState)
+  gPersonalityTestTracker->FrameCounter++;
+  switch(gPersonalityTestTracker->TestState)
   {
-    case 0:
+    case PERSONALITY_GENERATE_NEW_QUESTION:
         GenerateNewQuestionOrGender();
         break;
-    case 1:
+    case PERSONALITY_ASK_QUESTION:
         CallPromptNewQuestion();
         break;
-    case 2:
+    case PERSONALITY_UPDATE_TOTALS:
         UpdateNatureTotals();
         break;
-    case 3:
+    case PERSONALITY_PLAYER_GENDER:
         SetPlayerGender();
         break;
-    case 4:
+    case PERSONALITY_REVEAL:
         RevealPersonality();
         break;
-    case 5:
+    case PERSONALITY_STARTER_REVEAL:
         RevealStarter();
         break;
-    case 6:
+    case PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_1:
         AdvanceToPickPartnerPrompt();
         break;
-    case 7:
+    case PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_2:
         PromptPickPartner();
         break;
-    case 8:
+    case PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_3:
         AdvanceToPartnerSelection();
         break;
-    case 9:
+    case PERSONALITY_PARTNER_SELECTION:
         CallCreatePartnerSelectionMenu();
         break;
-    case 10:
+    case PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_1:
         PromptForPartnerNickname();
         break;
-    case 11:
+    case PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2:
         AdvanceToPartnerNickhameScreen();
         break;
-    case 12:
+    case PERSONALITY_PARTNER_NICKNAME:
         NicknamePartner();
         break;
-    case 13:
+    case PERSONALITY_END_INTRO:
         PrintEndIntroText();
         break;
-    case 14:
+    case PERSONALITY_ADVANCE_TO_TEST_END:
         AdvanceToTestEnd();
         break;
-    case 15:
-        iVar1 = Random() * gUnknown_203B400->FrameCounter;
+    case PERSONALITY_TEST_END:
+        iVar1 = Random() * gPersonalityTestTracker->FrameCounter;
         sub_8094D28(Random());
 
         for(counter = 0; counter < NUM_PERSONALITIES; counter++){
-            iVar1 *= (gUnknown_203B400->NatureTotals[counter] + counter + 3);
+            iVar1 *= (gPersonalityTestTracker->NatureTotals[counter] + counter + 3);
         }
 
         iVar1 += sub_8094E4C();
@@ -495,9 +515,9 @@ u8 HandleTestTrackerState(void)
 
 void DeleteTestTracker(void)
 {
-  sub_8001044(&gUnknown_203B400->unk4);
-  MemoryFree(gUnknown_203B400);
-  gUnknown_203B400 = NULL;
+  sub_8001044(&gPersonalityTestTracker->unk4);
+  MemoryFree(gPersonalityTestTracker);
+  gPersonalityTestTracker = NULL;
 }
 
 void GenerateNewQuestionOrGender(void)
@@ -506,36 +526,36 @@ void GenerateNewQuestionOrGender(void)
   int counter;
   int newQuestion;
 
-  gUnknown_203B400->QuestionCounter++;
-  if (gUnknown_203B400->QuestionCounter > MAX_ASKED_QUESTIONS) {
+  gPersonalityTestTracker->QuestionCounter++;
+  if (gPersonalityTestTracker->QuestionCounter > MAX_ASKED_QUESTIONS) {
       // We've asked enough questions
         sub_8014248(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
-        gUnknown_203B400->TestState = 3;
+        gPersonalityTestTracker->TestState = PERSONALITY_PLAYER_GENDER;
   }
   else
   {
     do {
         // Generate new question number and make sure we haven't done it
         newQuestion = RandomCapped(NUM_QUIZ_QUESTIONS);
-        gUnknown_203B400->currQuestionIndex = newQuestion;
-    } while (gUnknown_203B400->QuestionTracker[newQuestion] == 1);
+        gPersonalityTestTracker->currQuestionIndex = newQuestion;
+    } while (gPersonalityTestTracker->QuestionTracker[newQuestion] == 1);
 
     // Found one so let's get the category
-    category = gNatureQuestionTable[gUnknown_203B400->currQuestionIndex];
+    category = gNatureQuestionTable[gPersonalityTestTracker->currQuestionIndex];
 
     // Mark all of the questions in the category as used
     for(counter = 0; counter < NUM_QUIZ_QUESTIONS; counter++){
       if (gNatureQuestionTable[counter] == category)
-        gUnknown_203B400->QuestionTracker[counter] = 1;
+        gPersonalityTestTracker->QuestionTracker[counter] = 1;
     }
-    gUnknown_203B400->TestState = 1;
+    gPersonalityTestTracker->TestState = PERSONALITY_ASK_QUESTION;
   }
 }
 
 void CallPromptNewQuestion(void)
 {
     PromptNewQuestion();
-    gUnknown_203B400->TestState = 2;
+    gPersonalityTestTracker->TestState = PERSONALITY_UPDATE_TOTALS;
 }
 
 void UpdateNatureTotals()
@@ -550,20 +570,20 @@ void UpdateNatureTotals()
         if (answerIndex == BRAVE_2B_TRIGGER)
         {
             // Set question to BRAVE_2B and ask the question..
-            gUnknown_203B400->currQuestionIndex = NUM_QUIZ_QUESTIONS;
-            gUnknown_203B400->TestState = 1;
+            gPersonalityTestTracker->currQuestionIndex = NUM_QUIZ_QUESTIONS;
+            gPersonalityTestTracker->TestState = PERSONALITY_ASK_QUESTION;
         }
         else
         {
-            pointArray = gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->effects;
+            pointArray = gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->effects;
             // Skip until we get to the one for our answer
             // Each Answer has 16 bytes. 13 are currently used with 3 remaining
             pointArray += (NUM_PERSONALITIES + 3) * answerIndex;
             for (natureIndex = 0; natureIndex < NUM_PERSONALITIES; natureIndex++)
             {
-                gUnknown_203B400->NatureTotals[natureIndex] += pointArray[natureIndex];
+                gPersonalityTestTracker->NatureTotals[natureIndex] += pointArray[natureIndex];
             }
-            gUnknown_203B400->TestState = 0;
+            gPersonalityTestTracker->TestState = PERSONALITY_GENERATE_NEW_QUESTION;
         }
     }
 }
@@ -575,16 +595,16 @@ void SetPlayerGender(void)
 
     if (sub_80144A4(&gender) == 0) {
         if (gender == MALE) {
-            gUnknown_203B400->playerGender = MALE;
+            gPersonalityTestTracker->playerGender = MALE;
             gUnknown_203B46C->playerGender = MALE;
         }
         else
         {
-            gUnknown_203B400->playerGender = FEMALE;
+            gPersonalityTestTracker->playerGender = FEMALE;
             gUnknown_203B46C->playerGender = FEMALE;
         }
         sub_8099690(0);
-        gUnknown_203B400->TestState = 4;
+        gPersonalityTestTracker->TestState = PERSONALITY_REVEAL;
     }
 }
 
@@ -593,8 +613,8 @@ void RevealPersonality(void)
   s32 currentNature;
   s32 counter;
 
-  gUnknown_203B400->playerNature = RandomCapped(NUM_PERSONALITIES);
-  currentNature = gUnknown_203B400->playerNature;
+  gPersonalityTestTracker->playerNature = RandomCapped(NUM_PERSONALITIES);
+  currentNature = gPersonalityTestTracker->playerNature;
 
   for(counter = 0; counter < NUM_PERSONALITIES - 1; counter++){
     currentNature++;
@@ -604,13 +624,13 @@ void RevealPersonality(void)
       currentNature = HARDY;
     }
 
-    if (gUnknown_203B400->NatureTotals[currentNature] > gUnknown_203B400->NatureTotals[gUnknown_203B400->playerNature]) {
-      gUnknown_203B400->playerNature = currentNature;
+    if (gPersonalityTestTracker->NatureTotals[currentNature] > gPersonalityTestTracker->NatureTotals[gPersonalityTestTracker->playerNature]) {
+      gPersonalityTestTracker->playerNature = currentNature;
     }
   }
-  gUnknown_203B400->StarterID = gStarters[gUnknown_203B400->playerNature][gUnknown_203B400->playerGender];
+  gPersonalityTestTracker->StarterID = gStarters[gPersonalityTestTracker->playerNature][gPersonalityTestTracker->playerGender];
   PrintPersonalityTypeDescription();
-  gUnknown_203B400->TestState = 5;
+  gPersonalityTestTracker->TestState = PERSONALITY_STARTER_REVEAL;
 }
 
 void RevealStarter(void)
@@ -620,7 +640,7 @@ void RevealStarter(void)
   if (sub_80144A4(&temp) == 0) {
     sub_80141B4(gStarterReveal,0,0,0x101);
     PersonalityTest_DisplayStarterSprite();
-    gUnknown_203B400->TestState = 6;
+    gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_1;
   }
 }
 
@@ -629,14 +649,14 @@ void AdvanceToPickPartnerPrompt(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    gUnknown_203B400->TestState = 7;
+    gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_2;
   }
 }
 
 void PromptPickPartner(void)
 {
     sub_80141B4(gPartnerPrompt, 0, 0, 0x301);
-    gUnknown_203B400->TestState = 8;
+    gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_3;
 }
 
 void AdvanceToPartnerSelection(void)
@@ -644,14 +664,14 @@ void AdvanceToPartnerSelection(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    gUnknown_203B400->TestState = 9;
+    gPersonalityTestTracker->TestState = PERSONALITY_PARTNER_SELECTION;
   }
 }
 
 void CallCreatePartnerSelectionMenu(void)
 {
-    CreatePartnerSelectionMenu(gUnknown_203B400->StarterID);
-    gUnknown_203B400->TestState = 10;
+    CreatePartnerSelectionMenu(gPersonalityTestTracker->StarterID);
+    gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_1;
 }
 
 void PromptForPartnerNickname(void)
@@ -663,9 +683,9 @@ void PromptForPartnerNickname(void)
   {
       if(selectedPartner != 0xfffe) {
         sub_803CE6C();
-        gUnknown_203B400->PartnerID = selectedPartner;
+        gPersonalityTestTracker->PartnerID = selectedPartner;
         sub_80141B4(gPartnerNickPrompt, 0, 0, 0x301);
-        gUnknown_203B400->TestState = 11;
+        gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2;
       }
   }
 }
@@ -675,15 +695,15 @@ void AdvanceToPartnerNickhameScreen(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    gUnknown_203B400->TestState = 12;
+    gPersonalityTestTracker->TestState = PERSONALITY_PARTNER_NICKNAME;
   }
 }
 
 void NicknamePartner(void)
 {
-  CopyStringtoBuffer(gUnknown_203B400->PartnerNick, GetMonSpecies(gUnknown_203B400->PartnerID));
-  sub_801602C(3, gUnknown_203B400->PartnerNick);
-  gUnknown_203B400->TestState = 13;
+  CopyStringtoBuffer(gPersonalityTestTracker->PartnerNick, GetMonSpecies(gPersonalityTestTracker->PartnerID));
+  sub_801602C(3, gPersonalityTestTracker->PartnerNick);
+  gPersonalityTestTracker->TestState = PERSONALITY_END_INTRO;
 }
 
 void PrintEndIntroText(void)
@@ -691,7 +711,7 @@ void PrintEndIntroText(void)
   if (sub_8016080() != 0) {
     sub_80160D8();
     sub_80141B4(gEndIntroText, 0, 0, 0x301);
-    gUnknown_203B400->TestState = 14;
+    gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_TEST_END;
   }
 }
 
@@ -700,22 +720,22 @@ void AdvanceToTestEnd(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    gUnknown_203B400->TestState = 15;
+    gPersonalityTestTracker->TestState = PERSONALITY_TEST_END;
   }
 }
 
 void PromptNewQuestion(void)
 {
-  sub_8014248(gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->question,
+  sub_8014248(gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->question,
               0, 0,
-              (struct MenuItem *)gPersonalityQuestionPointerTable[gUnknown_203B400->currQuestionIndex]->answers,
+              (struct MenuItem *)gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->answers,
               0, 3, 0, 0, 0x101);
 }
 
 void PrintPersonalityTypeDescription(void)
 {
-  CopySpeciesNametoBuffer(gAvailablePokemonNames, gUnknown_203B400->StarterID);
-  sub_80141B4(gPersonalityTypeDescriptionTable[gUnknown_203B400->playerNature],0,
+  CopySpeciesNametoBuffer(gAvailablePokemonNames, gPersonalityTestTracker->StarterID);
+  sub_80141B4(gPersonalityTypeDescriptionTable[gPersonalityTestTracker->playerNature],0,
               0,0x101);
 }
 
@@ -728,7 +748,7 @@ void PersonalityTest_DisplayStarterSprite(void)
   u32 faceIndex;
   struct UnkTextStruct2 stackArray[4];
 
-  starterID = gUnknown_203B400->StarterID;
+  starterID = gPersonalityTestTracker->StarterID;
   sub_8006518(stackArray);
   stackArray[1] = gUnknown_80F4244;
   ResetUnusedInputStruct();

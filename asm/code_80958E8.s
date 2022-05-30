@@ -262,7 +262,7 @@ _08095D1C:
 	add r0, r9
 	ldrb r7, [r0]
 	adds r0, r7, 0
-	bl sub_8090298
+	bl GetDungeonFloorCount
 	str r0, [sp, 0x58]
 	lsrs r0, 31
 	ldr r2, [sp, 0x58]

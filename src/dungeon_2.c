@@ -8,7 +8,7 @@
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
 extern const char gUnknown_8108F2C[];
-extern u8 gUnknown_81077A8[];
+extern u8 gDungeonFloorCount[];
 extern u8 gUnknown_81077E8[];
 
 void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2)
@@ -43,14 +43,14 @@ void CopyDungeonName1toBuffer(u8 *buffer, struct DungeonLocation *dungeonLocatio
     strncpy(buffer, gDungeonNames[dungeonLocation->dungeonIndex].name1, 0x50);
 }
 
-u8 sub_8090298(u8 dungeon)
+s32 GetDungeonFloorCount(u8 dungeon)
 {
     if ((u8)(dungeon - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE)
         return 4;
     else if(dungeon > DUNGEON_PURITY_FOREST)
         return 1;
     else
-        return gUnknown_81077A8[dungeon];
+        return gDungeonFloorCount[dungeon];
 }
 
 u8 sub_80902C8(u8 dungeon)

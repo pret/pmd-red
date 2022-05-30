@@ -594,7 +594,7 @@ _08077718:
 	ldr r1, _0807775C
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xBD
@@ -699,7 +699,7 @@ _080777EC:
 	ldr r1, _08077848
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	mov r1, r8
 	adds r1, 0xAD
@@ -837,7 +837,7 @@ sub_8077910:
 	ldr r1, _08077964
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r4, r0, 0x1
 _08077940:
 	ldr r6, [r5, 0x70]
@@ -987,7 +987,7 @@ _08077A5A:
 	adds r0, r5, 0
 	ldr r1, _08077A7C
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	strb r0, [r4]
 	b _08077A86
@@ -1116,7 +1116,7 @@ _08077B58:
 	ldr r1, _08077B90
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xBD
@@ -1181,7 +1181,7 @@ sub_8077BB4:
 	ldr r1, _08077C20
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xBD
@@ -1675,7 +1675,7 @@ _08077FE2:
 	ldr r1, _08078018
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xD9
@@ -1845,7 +1845,7 @@ _08078134:
 	ldr r1, _08078174
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xD9
@@ -2058,7 +2058,7 @@ sub_80782CC:
 	ldr r1, _08078324
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xDD
@@ -2117,7 +2117,7 @@ sub_8078348:
 	ldr r1, _080783A0
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xDD
@@ -2276,7 +2276,7 @@ _080784A8:
 	ldr r1, _08078588
 	adds r0, r7, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	ldr r1, [sp, 0x1C]
 	strb r0, [r1]
@@ -2427,7 +2427,7 @@ _080785F6:
 	ldr r1, _08078634
 	adds r0, r6, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xCB
@@ -2537,7 +2537,7 @@ _080786C8:
 	ldr r1, _08078744
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xCB
@@ -2616,7 +2616,7 @@ sub_8078758:
 	ldr r1, _080787C0
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xBD
@@ -2740,7 +2740,7 @@ _08078884:
 	ldr r1, _080788C4
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xE5
@@ -2805,7 +2805,7 @@ sub_80788E8:
 	ldr r1, _08078944
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	strb r0, [r4]
 	ldr r0, _08078948
@@ -2918,7 +2918,7 @@ _080789F0:
 	ldr r1, _08078A30
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xBD
@@ -3363,7 +3363,7 @@ sub_8078D8C:
 	ldr r1, _08078DF4
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xED
@@ -3498,7 +3498,7 @@ _08078ED4:
 	ldr r1, _08078F44
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xE5
@@ -3575,7 +3575,7 @@ _08078F78:
 	ldr r1, _08078FB8
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xE5
@@ -3812,7 +3812,7 @@ BlindTarget:
 	ldr r1, _080791B4
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xE9
@@ -3889,7 +3889,7 @@ sub_80791D8:
 	ldr r1, _08079250
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r7, 0
 	adds r1, 0xE9
@@ -3945,7 +3945,7 @@ RestoreVisionTarget:
 	ldr r1, _080792D4
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xE9
@@ -4486,7 +4486,7 @@ _080796C6:
 	ldr r1, _08079718
 	adds r0, r7, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r2, r5, 0
 	adds r2, 0xC1
@@ -4501,7 +4501,7 @@ _080796E4:
 	ldr r1, _0807971C
 	adds r0, r7, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC1
@@ -4637,7 +4637,7 @@ _080797E8:
 	ldr r1, _0807982C
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xC5
@@ -4689,7 +4689,7 @@ sub_8079834:
 	ldr r1, _0807988C
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -4748,7 +4748,7 @@ sub_80798B0:
 	ldr r1, _08079908
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -4807,7 +4807,7 @@ sub_807992C:
 	ldr r1, _08079984
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -4866,7 +4866,7 @@ sub_80799A8:
 	ldr r1, _08079A00
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -4925,7 +4925,7 @@ sub_8079A24:
 	ldr r1, _08079A7C
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -4984,7 +4984,7 @@ sub_8079AA0:
 	ldr r1, _08079AF8
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5041,7 +5041,7 @@ sub_8079B1C:
 	ldr r1, _08079B70
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5107,7 +5107,7 @@ sub_8079BA8:
 	ldr r1, _08079C00
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5166,7 +5166,7 @@ sub_8079C24:
 	ldr r1, _08079C7C
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5225,7 +5225,7 @@ sub_8079CA0:
 	ldr r1, _08079CF8
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5299,7 +5299,7 @@ _08079D50:
 	ldr r1, _08079D94
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r6, 0
 	adds r1, 0xC5
@@ -5358,7 +5358,7 @@ sub_8079DB8:
 	ldr r1, _08079E10
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r0, 0x1
 	adds r1, r5, 0
 	adds r1, 0xC5
@@ -5900,7 +5900,7 @@ _0807A228:
 	ldr r1, _0807A250
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r2, 0x1
 	adds r0, r6, 0

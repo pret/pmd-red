@@ -111,7 +111,7 @@ extern void sub_801BE30(void);
 extern void sub_801BEC8(void);
 extern void sub_801B760(void);
 extern void sub_801B874(void);
-extern u32 sub_8001784(u32, u32, u32);
+extern u32 sub_8001784(u32, u32, u16);
 extern void sub_800199C(u32, u32, u32, u32);
 extern void PlaySound(u32);
 extern s32 sub_808D544(u32);

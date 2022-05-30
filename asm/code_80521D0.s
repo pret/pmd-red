@@ -6770,7 +6770,7 @@ _08055D54:
 	ldr r1, _08055DD8
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]
@@ -6925,7 +6925,7 @@ _08055EC0:
 	ldr r1, _08055F88
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r0, r4, 0
 	adds r1, r4, 0

@@ -494,7 +494,7 @@ string generate_move_data_text(Json data) {
             << read_json_int(data_entry["accuracyOffensive"], 1)
             << read_json_int(data_entry["accuracyUseChance"], 1)
             << read_json_int(data_entry["hitCount"], 1)
-            << read_json_int(data_entry["unk12"], 1)
+            << read_json_int(data_entry["maxPowerBoost"], 1)
             << read_json_int(data_entry["criticalHitChance"], 1)
             << read_json_bool(data_entry["affectedByMagicCoat"])
             << read_json_bool(data_entry["targetsUser"])

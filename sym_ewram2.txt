@@ -524,7 +524,7 @@ gUnknown_203B3F8 = .; /* 203B3F8 */
 gUnknown_203B3FC = .; /* 203B3FC */
 	. += 0x4;
 
-gUnknown_203B400 = .; /* 203B400 */
+gPersonalityTestTracker = .; /* 203B400 */
 	. += 0x4;
 
 gUnknown_203B404 = .; /* 203B404 */

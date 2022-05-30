@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808417C
-sub_808417C:
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	lsls r2, 24
-	lsrs r6, r2, 24
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	movs r2, 0x2
-	ldrsh r1, [r1, r2]
-	bl DungeonRandomRange
-	adds r4, r0, 0
-	adds r0, r5, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _080841DC
-	adds r0, r5, 0
-	bl GetEntityType
-	cmp r0, 0x1
-	bne _080841DC
-	cmp r6, 0
-	beq _080841DC
-	adds r0, r5, 0
-	movs r1, 0x12
-	bl HasIQSkill
-	lsls r0, 24
-	cmp r0, 0
-	beq _080841C4
-	cmp r4, 0x7F
-	beq _080841C4
-	lsrs r0, r4, 31
-	adds r0, r4, r0
-	asrs r4, r0, 1
-_080841C4:
-	adds r0, r5, 0
-	movs r1, 0x14
-	bl HasAbility
-	lsls r0, 24
-	cmp r0, 0
-	beq _080841DC
-	cmp r4, 0x7F
-	beq _080841DC
-	cmp r4, 0x4
-	ble _080841DC
-	movs r4, 0x5
-_080841DC:
-	cmp r4, 0
-	bgt _080841E2
-	movs r4, 0x1
-_080841E2:
-	adds r0, r4, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808417C
-
 	thumb_func_start sub_80841EC
 sub_80841EC:
 	push {r4-r6,lr}

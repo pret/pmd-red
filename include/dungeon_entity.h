@@ -160,7 +160,7 @@ struct DungeonEntityData
     u8 fillF3;
     /* 0xF4 */ bool8 grudgeStatus;
     /* 0xF5 */ bool8 exposedStatus;
-    u8 fillF6;
+    /* 0xF6 */ bool8 isColorChanged;
     /* 0xF7 */ bool8 isBoss;
     u8 fillF8[0xFA - 0xF8];
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
@@ -194,7 +194,9 @@ struct DungeonEntityData
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 fill153[0x15C - 0x153];
+    u8 fill153[0x15A - 0x153];
+    u8 unk15A;
+    u8 unk15B;
     u8 unk15C;
     u8 unk15D;
     u8 unk15E;
@@ -220,7 +222,7 @@ struct DungeonEntityData
     /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
     /* 0x1FC */ u16 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
     /* 0x200 */ u32 statusSprites;
-    u32 unk204;
+    u8 unk204;
 };
 
 // Used for Pokémon, items, and traps.

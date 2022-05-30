@@ -38,7 +38,7 @@ void sub_807E5E4(u8 weather)
 
   gDungeonGlobalData->unkE265 = weather;
   gDungeonGlobalData->weather = gDungeonGlobalData->unkE265;
-  gDungeonGlobalData->unkE279 = 0;
+  gDungeonGlobalData->negateWeatherEffects = FALSE;
   for(index = 0; index < 8; index++) {
     gDungeonGlobalData->unkE267[index] = 0;
     gDungeonGlobalData->startingWeather[index] = 0;

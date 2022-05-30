@@ -31,7 +31,7 @@ struct unkStruct_203B490
 
 
 extern bool8 sub_809095C(u8);
-extern s32 sub_8090298(u8);
+extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(u8 *);
 extern s16 GetBaseSpecies(s16);
 extern bool8 IsInvalidItemReward(u8);
@@ -119,7 +119,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
 
         if(sub_809095C(data->dungeon))
             return FALSE;
-        if(data->floor >= sub_8090298(data->dungeon))
+        if(data->floor >= GetDungeonFloorCount(data->dungeon))
             return FALSE;
         if(sub_809017C(&(data->dungeon)))
             return FALSE;
