@@ -43,9 +43,10 @@ const u8 *sub_80974A0(s16 r0)
 
 const u8 *GetCurrentMissionText(s16 r0)
 {
-    if(r0 <= 0x1E)
+    if(r0 < 0x1F)
     {
-        return (r0)[gStoryMissionText].text;
+        struct MissionText *mt = &gStoryMissionText[r0];
+        return mt->text;
     }
     else
     {
