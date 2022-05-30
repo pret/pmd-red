@@ -602,11 +602,11 @@ _080ADDE2:
 	movs r4, 0x1
 _080ADDE8:
 	adds r0, r5, 0
-	bl sub_8090298
+	bl GetDungeonFloorCount
 	cmp r4, r0
 	blt _080ADDFA
 	adds r0, r5, 0
-	bl sub_8090298
+	bl GetDungeonFloorCount
 	subs r4, r0, 0x1
 _080ADDFA:
 	ldr r2, [r6, 0x4]

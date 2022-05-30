@@ -485,7 +485,7 @@ sub_807EA30:
 	ldr r1, _0807EA5C
 	movs r0, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	ldr r1, _0807EA60
 	ldr r1, [r1]
 	ldr r2, _0807EA64
@@ -505,7 +505,7 @@ _0807EA6C:
 	ldr r1, _0807EA90
 	movs r0, 0
 	movs r2, 0
-	bl sub_808417C
+	bl CalculateStatusTurns
 	ldr r1, _0807EA94
 	ldr r1, [r1]
 	ldr r2, _0807EA98

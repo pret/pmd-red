@@ -866,7 +866,7 @@ sub_8080388:
 	ldr r1, _080803B0
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0

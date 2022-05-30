@@ -31,30 +31,36 @@ struct DungeonGlobalData
     u8 fill5[0x7 - 0x5];
     u8 unk7;
     u8 unk8;
-    u8 fill9[0xF - 0x9];
+    u8 fill9[0xC - 0x9];
+    u8 unkC;
+    u8 unkD[0xF - 0xD];
     /* 0xF */ bool8 inputAllowed; // Whether the game is currently accepting input. Set to false while action animations play.
     u8 fill10;
     u8 unk11;
-    u8 fill12[0x16D - 0x12];
+    s16 unk12;
+    u8 fill14[0x16D - 0x14];
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
     u8 fill17A[0x17C - 0x17A];
     struct DungeonGlobalData_sub unk17C[0x100];
-    /* 0x57C */ u8 fill57C[0x645 - 0x57c];
+    /* 0x57C */ u8 fill57C[0x644 - 0x57c];
+    /* 0x644 */ u8 unk644;
     /* 0x645 */ u8 floorNumber;
     u8 fill646[0x65C - 0x646];
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
-    /* 0x660 */ u8 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
-    u8 fill661[0x666 - 0x661];
+    /* 0x660 */ u16 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
+    u8 fill662[0x666 - 0x662];
     /* 0x666 */ u16 turnsLeft; // Turns remaining before getting swept out of the dungeon.
     u8 fill668[0x66A - 0x668];
     u16 unk66A;
     u8 fill66C[0x671 - 0x66C];
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
-    u8 fill673[0x68A - 0x673];
+    u8 fill673[0x675 - 0x673];
+    u8 unk675;
+    u8 unk676[0x68A - 0x676];
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
@@ -80,7 +86,7 @@ struct DungeonGlobalData
     /* 0xE26F */ u8 startingWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
     /* 0xE277 */ u8 mudSportTurnsLeft;
     /* 0xE278 */ u8 waterSportTurnsLeft;
-    /* 0xE279 */ u8 unkE279;
+    /* 0xE279 */ u8 negateWeatherEffects; // Air Lock and Cloud Nine toggle this to disable weather effects
     u8 fillE27A[0xE8C0 - 0xE27A];
     /* 0xE8C0 */ struct MapTile* mapTilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fill104C0[0x104C4 - 0x104C0];

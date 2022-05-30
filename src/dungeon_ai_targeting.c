@@ -20,7 +20,6 @@
 #include "map.h"
 #include "tile_types.h"
 
-extern bool8 SetVisualFlags(struct DungeonEntityData *, u32, bool8);
 extern void ShowVisualFlags(struct DungeonEntity *r0);
 
 const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
@@ -275,7 +274,6 @@ void CheckRunAwayVisualFlag(struct DungeonEntity *pokemon, bool8 showRunAwayEffe
   bool8 cVar1;
   struct DungeonEntityData *iVar2;
   struct DungeonEntityData *iVar3;
-
   iVar2 = pokemon->entityData;
   iVar3 = iVar2;
 

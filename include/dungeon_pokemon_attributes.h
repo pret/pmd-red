@@ -13,5 +13,6 @@ bool8 CanSeeTeammate(struct DungeonEntity * pokemon);
 u8 GetMoveTypeForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove);
 s32 CalculateMovePower(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove);
 bool8 ToolboxEnabled(struct DungeonEntityData *pokemon);
+bool8 SetVisualFlags(struct DungeonEntityData *entityData, u16 newFlag, bool8 param_3);
 
 #endif

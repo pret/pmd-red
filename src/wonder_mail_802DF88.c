@@ -56,8 +56,6 @@ const struct UnkTextStruct2 gUnknown_80E016C =
     0x00, 0x00,
     NULL
 };
-extern struct UnkTextStruct2 gUnknown_80E0248;
-extern struct UnkTextStruct2 gUnknown_80E0264;
 
 ALIGNED(4) const u8 gWonderMailClientThanksForRescuingMe[] = " Thank you for rescuing me!";
 
@@ -78,6 +76,30 @@ ALIGNED(4) const u8 gWonderMailClientItemDelivered2[] = _(
 	"the {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}!");
 
 static const u8 wonder_mail_802DF88_fill[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80E0248 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const u8 UnkData_80E0260[] = {0x01, 0x00, 0x12, 0x00};
+
+const struct UnkTextStruct2 gUnknown_80E0264 = 
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x1A, 0x10,
+    0x10, 0x00,
+    UnkData_80E0260
+};
+
+static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

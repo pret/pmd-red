@@ -729,7 +729,7 @@ sub_80908D8:
 	ldrb r0, [r0]
 	b _0809090A
 	.align 2, 0
-_08090900: .4byte gUnknown_81077A8
+_08090900: .4byte gDungeonFloorCount
 _08090904: .4byte gUnknown_8108084
 _08090908:
 	movs r0, 0x1
@@ -768,7 +768,7 @@ sub_8090910:
 	b _08090956
 	.align 2, 0
 _0809094C: .4byte 0x0000270f
-_08090950: .4byte gUnknown_81077A8
+_08090950: .4byte gDungeonFloorCount
 _08090954:
 	movs r0, 0x46
 _08090956:

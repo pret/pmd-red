@@ -2,19 +2,25 @@
 #include "memory.h"
 #include "input.h"
 #include "item.h"
+#include "menu.h"
+#include "pokemon.h"
+#include "save.h"
 #include "sub_8095228.h"
 #include "text.h"
 #include "main_menu.h"
 #include "rescue_password_menu.h"
+#include "code_8094F88.h"
+#include "wonder_mail.h"
 
 extern u8 gUnknown_202EC50[];
 extern u32 gUnknown_202EC4C;
+extern struct unkStruct_203B484 *gUnknown_203B484;
+extern struct UnkTextStruct2 gUnknown_80E71E4;
 
 EWRAM_DATA u8 gUnknown_203B368;
 EWRAM_DATA u32 gUnknown_203B36C;
 EWRAM_DATA struct RescuePasswordMenu *gRescuePasswordMenu;
 
-extern struct UnkTextStruct2 gUnknown_80E71E4;
 extern s32 sub_8035D74(void);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_8031D70(u32, u32);
@@ -22,6 +28,56 @@ extern u32 ConvertMenutoRescuePasswordState(u32);
 extern void sub_8039174(void);
 extern void sub_80155F0(void);
 extern void sub_8031E10(void);
+extern void sub_8038F98(void);
+
+
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
+
+extern void sub_80951BC(struct unkStruct_8095228 *r0);
+extern void sub_80951FC(struct unkStruct_8095228 *r0);
+extern u8 sub_8012FD8(u32 *r0);
+extern void sub_8013114(u32 *, s32 *);
+extern u32 sub_80154F0(void);
+extern u8 sub_809539C(u32, u32);
+extern void sub_8095274(u32);
+extern u32 sub_8031DCC(void);
+extern void sub_80391F8(void);
+extern void sub_8031E00();
+extern void sub_8038DC0(u32);
+extern struct MainMenu *GetMainMenu(void);
+
+
+extern void sub_8039174(void);
+extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
+extern void sub_8035CF4(u32 *r0, u32, u32);
+bool8 IsInvalidItemReward(u8);
+bool8 sub_80952F0(u32, u32);
+bool8 sub_8095298(u32);
+bool8 sub_803D204(u8 *, struct unkStruct_8095228 *);
+extern s32 GetDungeonFloorCount(u8);
+extern s32 sub_8095190(void);
+
+extern struct UnkTextStruct2 gUnknown_80E71FC;
+extern struct UnkTextStruct2 gUnknown_80E7278;
+extern struct UnkTextStruct2 gUnknown_80E72EC;
+extern struct UnkTextStruct2 gUnknown_80E7344;
+extern struct UnkTextStruct2 gUnknown_80E73AC;
+extern struct UnkTextStruct2 gUnknown_80E7408;
+extern struct UnkTextStruct2 gUnknown_80E7468;
+extern struct UnkTextStruct2 gUnknown_80E74C8;
+extern struct UnkTextStruct2 gUnknown_80E752C;
+extern struct UnkTextStruct2 gUnknown_80E7588;
+
+extern struct MenuItem gUnknown_80E7214[];
+extern struct MenuItem gUnknown_80E7290[];
+extern struct MenuItem gUnknown_80E7304[];
+extern struct MenuItem gUnknown_80E735C[];
+extern struct MenuItem gUnknown_80E73C4[];
+extern struct MenuItem gUnknown_80E7420[];
+extern struct MenuItem gUnknown_80E7480[];
+extern struct MenuItem gUnknown_80E74E0[];
+extern struct MenuItem gUnknown_80E7544[];
+extern struct MenuItem gUnknown_80E75A0[];
 
 void CreateRescuePasswordMenu(u32 currMenu)
 {
@@ -90,4 +146,361 @@ void CleanRescuePasswordMenu(void)
     MemoryFree(gRescuePasswordMenu);
     gRescuePasswordMenu = NULL;
   }
+}
+
+static inline s32 UpdateRescuePasswordMenu_sub(s32 otherMenu)
+{
+    u32 iVar1;
+    s32 nextMenu;
+
+    iVar1 = sub_8031DCC();
+    nextMenu = otherMenu;
+    if (iVar1 != 0)
+        return nextMenu;
+    else
+        return MENU_NO_SCREEN_CHANGE;
+}
+
+s32 UpdateRescuePasswordMenu(void)
+{
+  struct unkStruct_8095228 *puVar5;
+  struct unkStruct_8095228 *puVar6;
+  u32 iVar7;
+  struct MainMenu *iVar9;
+  s32 nextMenu;
+  struct unkStruct_8095228 local_44;
+  u32 local_14;
+  u32 subtract;
+
+  local_14 = 0xb;
+  nextMenu = MENU_NO_SCREEN_CHANGE;
+  switch(gRescuePasswordMenu->state) {
+    case 0:
+    case 2:
+    case 4:
+        nextMenu = UpdateRescuePasswordMenu_sub(MENU_FRIEND_RESCUE);
+        break;
+    case 1:
+    case 3:
+    case 5:
+        iVar7 = sub_80154F0();
+        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_8095228));
+        switch(iVar7)
+        {
+            case 1:
+                sub_8031E00();
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                break;
+            case 0:
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                break;
+            case 2:
+                nextMenu = MENU_FRIEND_RESCUE;
+                break;
+            case 3:
+                switch(sub_8039068(gRescuePasswordMenu->currMenu, gUnknown_202EC50, &local_44)) {
+                    case 0x11:
+                        nextMenu = 0x11;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0xd:
+                        nextMenu = 0xD;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0x12:
+                        nextMenu = 0x12;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 7:
+                        nextMenu = 7;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0x16:
+                        sub_8095274(local_44.unk10);
+                        sub_8038F98();
+                        gRescuePasswordMenu->state = 9;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        local_44.mailType = 2;
+                        sub_80951BC(&local_44);
+                        break;
+                    case 0x13:
+                        nextMenu = 0x13;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 9:
+                        nextMenu = 0x9;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0x17:
+                        sub_8038F98();
+                        gRescuePasswordMenu->state = 9;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        local_44.mailType = 5;
+                        sub_80951FC(&local_44);
+                        puVar5 = sub_8095228(sub_809539C(1, local_44.unk10));
+                        puVar5->mailType = 7;
+                        MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+                        break;
+                    default:
+                        break;
+                    case 0x14:
+                        nextMenu = 0x14;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0xb:
+                        nextMenu = 0xb;
+                        sub_8038DC0(nextMenu);
+                        gRescuePasswordMenu->state = 8;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        break;
+                    case 0x18:
+                        sub_8038F98();
+                        gRescuePasswordMenu->state = 9;
+                        nextMenu = MENU_NO_SCREEN_CHANGE;
+                        puVar6 = sub_8095228(sub_809539C(4, local_44.unk10));
+                        *puVar6 = local_44;
+                        puVar6->mailType = 6;
+                        iVar9 = GetMainMenu();
+                        iVar9->unk3A = 1;
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        break;
+    case 6:
+        nextMenu =  UpdateRescuePasswordMenu_sub(MENU_WONDER_MAIL);
+        break;
+    case 7:
+        switch(sub_80154F0())
+        {
+            case 3:
+                nextMenu = 0x15;
+                sub_8038DC0(nextMenu);
+                gRescuePasswordMenu->state = 8;
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                break;
+            case 0:
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                break;
+            case 1:
+                sub_8031E00();
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                break;
+            default:
+                break;
+            case 2:
+                nextMenu = MENU_WONDER_MAIL;
+                break;
+        }
+        break;
+    case 8:
+        if (sub_8012FD8(&gRescuePasswordMenu->unk8) == '\0') {
+            sub_8013114(&gRescuePasswordMenu->unk8, &local_14);
+        }
+        switch(local_14)
+        {
+            default:
+            case 0xD:
+                break;
+            case 0xA:
+            case 0xC:
+                sub_8039174();
+                ResetUnusedInputStruct();
+                sub_800641C(0,1,1);
+                sub_80151C0(4,gUnknown_202EC50);
+                gRescuePasswordMenu->state = 8;
+                subtract = gRescuePasswordMenu->currMenu - 0x21;
+                nextMenu = MENU_FRIEND_RESCUE;
+                if (1 < subtract) break;
+                nextMenu = MENU_WONDER_MAIL;
+                break;
+            case 11:
+                gRescuePasswordMenu->state = 8;
+                nextMenu = MENU_NO_SCREEN_CHANGE;
+                sub_80391F8();
+                break;
+        }
+        break;
+    case 9:
+        if (sub_8012FD8(&gRescuePasswordMenu->unk8) == '\0') {
+            sub_8013114(&gRescuePasswordMenu->unk8, &local_14);
+        }
+        switch(local_14)
+        {
+            default:
+            case 0xD:
+                break;
+            case 0xA:
+            case 0xC:
+                sub_8039174();
+                ResetUnusedInputStruct();
+                sub_800641C(0,1,1);
+                sub_80151C0(4,gUnknown_202EC50);
+                gRescuePasswordMenu->state = ConvertMenutoRescuePasswordState(gRescuePasswordMenu->currMenu);
+                subtract = gRescuePasswordMenu->currMenu - 0x21;
+                nextMenu = 0x2a;
+                if (subtract < 2) {
+                    nextMenu = 0x2b;
+                }
+                break;
+            case 0xB:
+                 gRescuePasswordMenu->state = 9;
+                 nextMenu = MENU_NO_SCREEN_CHANGE;
+                 sub_80391F8();
+                 break;
+        }
+    }
+    return nextMenu;
+}
+
+void sub_8038DC0(u32 param_1)
+{
+  sub_8006518(gRescuePasswordMenu->unk1A8);
+  ResetUnusedInputStruct();
+  sub_800641C(0,1,1);
+  sub_80155F0();
+  switch(param_1) {
+    case 0x11:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,0,0xd,0);
+        break;
+    case 0x12:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,0,0xd,0);
+        break;
+    case 7:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,0,0xd,0);
+        break;
+    case 0xd:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,0,0xd,0);
+        break;
+    case 0x13:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,0,0xd,0);
+        break;
+    case 9:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,0,0xd,0);
+        break;
+    case 0x14:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,0,0xd,0);
+        break;
+    case 0xb:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,0,0xd,0);
+        break;
+    case 0x15:
+        SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,0,0xd,0);
+        break;
+    default:
+        break;
+  }
+  sub_8035CF4(&gRescuePasswordMenu->unk8,0,1);
+}
+
+void sub_8038F98(void)
+{
+  sub_8006518(gRescuePasswordMenu->unk1A8);
+  ResetUnusedInputStruct();
+  sub_800641C(0,1,1);
+  sub_80155F0();
+  SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,0,0xd,0);
+  sub_8035CF4(&gRescuePasswordMenu->unk8,0,1);
+}
+
+u32 ConvertMenutoRescuePasswordState(u32 unused)
+{
+  u32 uVar1;
+
+  uVar1 = 0xb;
+  switch(gRescuePasswordMenu->currMenu) {
+    case 0x1b:
+        uVar1 = 0;
+        break;
+    case 0x1f:
+        uVar1 = 4;
+        break;
+    case 0x1d:
+        uVar1 = 2;
+        break;
+    case MENU_DISPLAY_RESCUE_PASSWORD:
+        uVar1 = 6;
+        break;
+    case 0x1c:
+        uVar1 = 1;
+        break;
+    case 0x20:
+        uVar1 = 5;
+        break;
+    case 0x1e:
+        uVar1 = 3;
+        break;
+    case MENU_RESCUE_PASSWORD_ENTRY:
+        uVar1 = 7;
+        break;
+  }
+  return uVar1;
+}
+
+u32 sub_8039068(u32 param_1, u8 *param_2,struct unkStruct_8095228 *param_3)
+{
+  if ( (!sub_803D204(param_2,param_3)) || (7 < param_3->mailType) ||
+       (param_3->floor >= GetDungeonFloorCount(param_3->dungeon)) ||
+       (param_3->clientSpecies == SPECIES_NONE) || (SPECIES_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
+       (IsInvalidItemReward(param_3->unk20.itemIndex))) {
+        return 0x11;
+  }
+  else
+  switch(param_1)
+  {
+    case 0x1C:
+        if (param_3->mailType != WONDER_MAIL_TYPE_SOS) {
+            return 0x12;
+        }
+        else if ( (sub_80952F0(2, param_3->unk10)) || (sub_80952F0(4, param_3->unk10)) || (sub_80952F0(6, param_3->unk10)) || (sub_8095298(param_3->unk10))) {
+            return 0x7;
+        }
+        else if (sub_8095190() == -1) {
+            return 0xd;
+        }
+        else {
+            return 0x16;
+        }
+        break;
+    case 0x1E:
+        if (param_3->mailType != WONDER_MAIL_TYPE_AOK) {
+            return 0x13;
+        }
+        else if (!sub_80952F0(1, param_3->unk10)) {
+            return 0x9;
+        }
+        else {
+            return 0x17;
+        }
+        break;
+    case 0x20:
+        if (param_3->mailType != WONDER_MAIL_TYPE_THANK_YOU) {
+            return 0x14;
+        }
+        else if ((!sub_80952F0(4, param_3->unk10)) || (param_3->unk28 != sub_8011C34())) {
+            return 0xb;
+        }
+        else {
+            return 0x18;
+        }
+        break;
+    default:
+        return -1;
+    }
 }
