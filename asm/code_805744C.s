@@ -376,7 +376,7 @@ sub_80576D0:
 	ldr r1, _080576F4
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r2, 0x1
 	adds r0, r5, 0
@@ -398,7 +398,7 @@ sub_80576F8:
 	ldr r1, _0805771C
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -420,7 +420,7 @@ sub_8057720:
 	ldr r1, _08057744
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_808417C
+	bl CalculateStatusTurns
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0

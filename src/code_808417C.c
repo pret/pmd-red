@@ -6,21 +6,21 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 
-s32 sub_808417C(struct DungeonEntity *param_1, s16 *param_2, u8 param_3)
+s32 CalculateStatusTurns(struct DungeonEntity *target, s16 *turnRange, bool8 factorCurerSkills)
 {
-  s32 iVar2;
+  s32 numTurns;
   
-  iVar2 = DungeonRandomRange(param_2[0],param_2[1]);
-  if (EntityExists(param_1) && (GetEntityType(param_1) == ENTITY_POKEMON) && (param_3 != 0)) {
-    if (HasIQSkill(param_1, IQ_SKILL_SELF_CURER) && (iVar2 != 0x7f)) {
-      iVar2 /= 2;
+  numTurns = DungeonRandomRange(turnRange[0],turnRange[1]);
+  if (EntityExists(target) && (GetEntityType(target) == ENTITY_POKEMON) && (factorCurerSkills)) {
+    if (HasIQSkill(target, IQ_SKILL_SELF_CURER) && (numTurns != 0x7f)) {
+      numTurns /= 2;
     }
-    if (HasAbility(param_1, ABILITY_NATURAL_CURE) && (iVar2 != 0x7f) && (4 < iVar2)) {
-      iVar2 = 5;
+    if (HasAbility(target, ABILITY_NATURAL_CURE) && (numTurns != 0x7f) && (4 < numTurns)) {
+      numTurns = 5;
     }
   }
-  if (iVar2 < 1) {
-    iVar2 = 1;
+  if (numTurns < 1) {
+    numTurns = 1;
   }
-  return iVar2;
+  return numTurns;
 }
