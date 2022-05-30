@@ -274,21 +274,18 @@ bool8 Wander(struct DungeonEntity *pokemon)
                     pokemonData->targetMovePosition.y = pokemon->posWorld.y + gAdjacentTileOffsets[targetFacingDir].y;
                     return TRUE;
                 }
-                do {
-                    for (i = 0; i < 10; i++)
+                for (i = 0; i < 10; i++)
+                {
+                    targetFacingDir = DungeonRandomCapped(numRoomExits);
+                    if (pokemon->posWorld.x != roomExits[targetFacingDir].x ||
+                        pokemon->posWorld.y != roomExits[targetFacingDir].y)
                     {
-                        targetFacingDir = DungeonRandomCapped(numRoomExits);
-                        if (pokemon->posWorld.x != roomExits[targetFacingDir].x ||
-                            pokemon->posWorld.y != roomExits[targetFacingDir].y)
-                        {
-                            pokemonData->movementAction = MOVEMENT_ACTION_EXIT_ROOM;
-                            pokemonData->targetMovePosition.x = roomExits[targetFacingDir].x;
-                            pokemonData->targetMovePosition.y = roomExits[targetFacingDir].y;
-                            goto a;
-                            return TRUE;
-                        }
+                        pokemonData->movementAction = MOVEMENT_ACTION_EXIT_ROOM;
+                        pokemonData->targetMovePosition.x = roomExits[targetFacingDir].x;
+                        pokemonData->targetMovePosition.y = roomExits[targetFacingDir].y;
+                        return TRUE;
                     }
-                } while (0);
+                }
                 // If the AI randomly picks the exit it's standing on 10 times,
                 // it gives up and exits the way it came.
                 // This occurs normally for one-exit rooms, but can happen rarely for multi-exit rooms.
@@ -310,7 +307,6 @@ bool8 Wander(struct DungeonEntity *pokemon)
                         pokemonData->movementAction = MOVEMENT_ACTION_WANDER_CORRIDOR;
                         pokemonData->targetMovePosition.x = forwardX;
                         pokemonData->targetMovePosition.y = forwardY;
-                        a:
                         return TRUE;
                     }
                 }
