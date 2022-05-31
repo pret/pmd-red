@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_ai_targeting_1.h"
 
 #include "constants/ability.h"
 #include "constants/dungeon.h"
@@ -21,12 +20,11 @@
 #include "map.h"
 #include "tile_types.h"
 
-extern u8 gDungeonWaterType[];
-
 extern void ShowVisualFlags(struct DungeonEntity *r0);
 
 const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+
 const u8 gTargetingData[3][2][2][2] = {
     {
         {
@@ -107,42 +105,74 @@ bool8 CanAttackInFront(struct DungeonEntity *pokemon, s32 direction)
     return FALSE;
 }
 
-bool8 CanMoveForward(struct DungeonEntity *entityPokemon, s32 direction, u8 *param_3)
+bool8 CanMoveForward(struct DungeonEntity *pokemon, s32 direction, bool8 *pokemonInFront)
 {
-  u8 crossableTerrain;
-  u32 var;
-  struct MapTile *puVar3;
-  struct MapTile * iVar4;
-  
-  crossableTerrain = GetCrossableTerrain(entityPokemon->entityData->entityID);
-  *param_3 = 0;
-  puVar3 = GetMapTile_1 (entityPokemon->posWorld.x + gAdjacentTileOffsets[direction].x,
-                         entityPokemon->posWorld.y + gAdjacentTileOffsets[direction].y);
-  if(!(puVar3->tileType & TILE_TYPE_MAP_EDGE))
-  {
-       if(
-        ((!(puVar3->tileType & TILE_TYPE_MONSTER_HOUSE)) || gDungeonGlobalData->monsterHouseActive || (!HasIQSkill(entityPokemon,IQ_SKILL_HOUSE_AVOIDER))) &&
-        ((puVar3->mapObject == NULL) || (!HasIQSkill(entityPokemon,IQ_SKILL_TRAP_AVOIDER)) || (GetEntityType(puVar3->mapObject) != 2) || ((!puVar3->mapObject->visible) && (entityPokemon->entityData->eyesightStatus != EYESIGHT_STATUS_EYEDROPS))) &&
-        (((puVar3->tileType & 3) != 2) || (gDungeonWaterType[gDungeonGlobalData->tileset] != DUNGEON_WATER_TYPE_LAVA) || (!HasIQSkill(entityPokemon,IQ_SKILL_LAVA_EVADER))) ) {
-            if (!IsFixedDungeon()) {
-                if (entityPokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE || (HasItem(entityPokemon, ITEM_ID_MOBILE_SCARF))) {
-                    crossableTerrain = CROSSABLE_TERRAIN_WALL;
-                }
-                else if (HasIQSkill(entityPokemon,IQ_SKILL_ALL_TERRAIN_HIKER) ||
-                       ((HasIQSkill(entityPokemon,IQ_SKILL_SUPER_MOBILE) && (var = direction & 1, crossableTerrain = CROSSABLE_TERRAIN_WALL,  var != 0)))) {
-                            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
-                        }
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
+    struct MapTile *frontTile, *currentTile;
+    *pokemonInFront = FALSE;
+    frontTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[direction].x,
+        pokemon->posWorld.y + gAdjacentTileOffsets[direction].y);
+    if (frontTile->tileType & TILE_TYPE_MAP_EDGE)
+    {
+        return FALSE;
+    }
+    if (frontTile->tileType & TILE_TYPE_MONSTER_HOUSE &&
+        !gDungeonGlobalData->monsterHouseActive &&
+        HasIQSkill(pokemon, IQ_SKILL_HOUSE_AVOIDER))
+    {
+        return FALSE;
+    }
+    if (frontTile->mapObject != NULL &&
+        HasIQSkill(pokemon, IQ_SKILL_TRAP_AVOIDER) &&
+        GetEntityType(frontTile->mapObject) == ENTITY_TRAP &&
+        (frontTile->mapObject->visible || pokemon->entityData->eyesightStatus == EYESIGHT_STATUS_EYEDROPS))
+    {
+        return FALSE;
+    }
+    if ((frontTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) == TILE_TYPE_LIQUID &&
+        gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA &&
+        HasIQSkill(pokemon, IQ_SKILL_LAVA_EVADER))
+    {
+        return FALSE;
+    }
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE ||
+            HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            // BUG: If the Pokémon is a Ghost type that can normally move through walls,
+            // All-Terrain Hiker/Super Mobile may make the AI think it can't move through walls.
+            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            if ((direction & 1) != 0)
+            {
+                crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
-            iVar4 = GetMapTile_1(entityPokemon->posWorld.x,entityPokemon->posWorld.y);
-            if (iVar4->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_3[direction & DIRECTION_MASK]) {
-                if (puVar3->pokemon == NULL) {
-                    return TRUE;
-                }
-                *param_3 = 1;
+            else
+            {
+                crossableTerrain = CROSSABLE_TERRAIN_WALL;
             }
         }
-  }
-  return FALSE;
+    }
+    currentTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+    if (currentTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_3[direction & DIRECTION_MASK])
+    {
+        if (frontTile->pokemon == NULL)
+        {
+            return TRUE;
+        }
+        else
+        {
+            *pokemonInFront = TRUE;
+        }
+    }
+    return FALSE;
 }
 
 bool8 IsAtJunction(struct DungeonEntity *pokemon)
@@ -174,7 +204,7 @@ bool8 IsAtJunction(struct DungeonEntity *pokemon)
         iVar7->mobileTurnTimer = 0;
   }
   else {
-    if ((gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA) 
+    if ((gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA)
        && (crossableTerrain == CROSSABLE_TERRAIN_LIQUID)
        && (HasIQSkill(pokemon, IQ_SKILL_LAVA_EVADER))) {
       crossableTerrain = CROSSABLE_TERRAIN_REGULAR;
@@ -244,7 +274,6 @@ void CheckRunAwayVisualFlag(struct DungeonEntity *pokemon, bool8 showRunAwayEffe
   bool8 cVar1;
   struct DungeonEntityData *iVar2;
   struct DungeonEntityData *iVar3;
-  
   iVar2 = pokemon->entityData;
   iVar3 = iVar2;
 
@@ -363,4 +392,3 @@ error:
   }
   goto error;
 }
-

@@ -719,7 +719,7 @@ _080ADEFC:
 	bge _080ADF52
 _080ADF04:
 	mov r0, r8
-	bl sub_8097F40
+	bl IsWaterDungeon
 	lsls r0, 24
 	movs r7, 0
 	cmp r0, 0

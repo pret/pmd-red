@@ -12,7 +12,7 @@
 #include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_ai_targeting_1.h"
+#include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
@@ -250,6 +250,8 @@ void DecideAttack(struct DungeonEntity *pokemon)
             {
                 if (maxWeight != moveTargetResults[i].moveWeight)
                 {
+                    // Only the move(s) with the highest weight can be used, instead of a weighted random.
+                    // This has the side effect of making the AI use a STAB ranged move consistently when at a distance.
                     moveTargetResults[i].moveWeight = 0;
                 }
                 total += moveTargetResults[i].moveWeight;
@@ -522,29 +524,29 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
 
 bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *target, s32 range)
 {
-    s32 posDiffX = user->posWorld.x - target->posWorld.x;
-    s32 posDiffY, maxPosDiff;
+    s32 distanceX = user->posWorld.x - target->posWorld.x;
+    s32 distanceY, distance;
     s32 direction;
-    if (posDiffX < 0)
+    if (distanceX < 0)
     {
-        posDiffX = -posDiffX;
+        distanceX = -distanceX;
     }
-    posDiffY = user->posWorld.y - target->posWorld.y;
-    if (posDiffY < 0)
+    distanceY = user->posWorld.y - target->posWorld.y;
+    if (distanceY < 0)
     {
-        posDiffY = -posDiffY;
+        distanceY = -distanceY;
     }
-    maxPosDiff = posDiffY;
-    if (posDiffY < posDiffX)
+    distance = distanceY;
+    if (distanceY < distanceX)
     {
-        maxPosDiff = posDiffX;
+        distance = distanceX;
     }
-    if (maxPosDiff > RANGED_ATTACK_RANGE || maxPosDiff > range)
+    if (distance > RANGED_ATTACK_RANGE || distance > range)
     {
         return FALSE;
     }
     direction = -1;
-    if (posDiffX == posDiffY)
+    if (distanceX == distanceY)
     {
         if (user->posWorld.x < target->posWorld.x &&
             (user->posWorld.y < target->posWorld.y || user->posWorld.y > target->posWorld.y))
@@ -855,20 +857,20 @@ bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 c
 
 bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
 {
-    s32 posDiffX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 distanceX = pokemon->posWorld.x - targetPokemon->posWorld.x;
     s32 effectiveMaxRange;
-    if (posDiffX < 0)
+    if (distanceX < 0)
     {
-        posDiffX = -posDiffX;
+        distanceX = -distanceX;
     }
     effectiveMaxRange = pokemon->posWorld.y - targetPokemon->posWorld.y;
     if (effectiveMaxRange < 0)
     {
         effectiveMaxRange = -effectiveMaxRange;
     }
-    if (effectiveMaxRange < posDiffX)
+    if (effectiveMaxRange < distanceX)
     {
-        effectiveMaxRange = posDiffX;
+        effectiveMaxRange = distanceX;
     }
     if (effectiveMaxRange > maxRange)
     {

@@ -7,6 +7,8 @@
 #define DUNGEON_WATER_TYPE_LAVA 1
 #define DUNGEON_WATER_TYPE_WATER 2
 
+extern const u8 gDungeonWaterType[];
+
 bool8 IsTileGround(struct MapTile* tile);
 bool8 IsWaterTileset();
 

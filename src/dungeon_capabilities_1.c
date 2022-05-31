@@ -5,7 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "charge_move.h"
-#include "dungeon_ai_targeting_1.h"
+#include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
