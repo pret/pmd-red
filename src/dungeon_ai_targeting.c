@@ -177,42 +177,61 @@ bool8 CanMoveForward(struct DungeonEntity *pokemon, s32 direction, bool8 *pokemo
 
 bool8 IsAtJunction(struct DungeonEntity *pokemon)
 {
-  char cVar2;
-  u32 crossableTerrain;
-  struct MapTile *mapTile;
-  struct DungeonEntityData *iVar7;
-
-  crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
-  if (!IsFixedDungeon()) {
-    if ((pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE) || (HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-        crossableTerrain = CROSSABLE_TERRAIN_WALL;
+    u32 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE || HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
     }
-    else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
-        crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
-    }
-    else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
-        crossableTerrain = CROSSABLE_TERRAIN_WALL;
-    }
-  }
-  if (crossableTerrain == CROSSABLE_TERRAIN_WALL) {
-    iVar7 = pokemon->entityData;
-    iVar7->mobileTurnTimer += DungeonRandomCapped(100);
-    if (iVar7->mobileTurnTimer < 200) {
-        return FALSE;
+    if (crossableTerrain == CROSSABLE_TERRAIN_WALL)
+    {
+        struct DungeonEntityData *pokemonData = pokemon->entityData;
+        pokemonData->mobileTurnTimer += DungeonRandomCapped(100);
+        if (pokemonData->mobileTurnTimer < 200)
+        {
+            return FALSE;
+        }
+        else
+        {
+            pokemonData->mobileTurnTimer = 0;
+        }
     }
     else
-        iVar7->mobileTurnTimer = 0;
-  }
-  else {
-    if ((gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA)
-       && (crossableTerrain == CROSSABLE_TERRAIN_LIQUID)
-       && (HasIQSkill(pokemon, IQ_SKILL_LAVA_EVADER))) {
-      crossableTerrain = CROSSABLE_TERRAIN_REGULAR;
+    {
+        struct MapTile *mapTile;
+        char canMoveAdjacent;
+        if (gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA
+           && crossableTerrain == CROSSABLE_TERRAIN_LIQUID
+           && HasIQSkill(pokemon, IQ_SKILL_LAVA_EVADER))
+        {
+            crossableTerrain = CROSSABLE_TERRAIN_REGULAR;
+        }
+        mapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+        canMoveAdjacent = mapTile->canMoveAdjacent[crossableTerrain];
+        /*
+        Check for configurations of open tiles that are considered junctions; i.e., shaped like a 'T' or '+'.
+        X=Wall, O=Open
+
+        0x54  0x51  0x45  0x15  0x55
+        XOX   XOX   XXX   XOX   XOX
+        OOO   OOX   OOO   XOO   OOO
+        XXX   XOX   XOX   XOX   XOX
+        */
+        if (canMoveAdjacent != 0x54 && canMoveAdjacent != 0x51 && canMoveAdjacent != 0x45 && canMoveAdjacent != 0x15 && canMoveAdjacent != 0x55)
+        {
+            return FALSE;
+        }
     }
-    mapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-    cVar2 = mapTile->canMoveAdjacent[crossableTerrain];
-    if ((cVar2 != 0x54) && (cVar2 != 0x51) && (cVar2 != 0x45) && (cVar2 != 0x15) && (cVar2 != 0x55)) return FALSE;
-  }
     return TRUE;
 }
 
