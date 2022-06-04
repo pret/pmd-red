@@ -141,9 +141,9 @@ extern void sub_8086A54(struct DungeonEntity *);
 
 extern void sub_806BFC0(struct DungeonEntityData *, u32);
 
-void sub_808BBA8(struct DungeonEntity *param_1)
+void sub_808BBA8(struct DungeonEntity *jirachiEntity)
 {
-  sub_806BFC0(param_1->entityData,0);
+  sub_806BFC0(jirachiEntity->entityData,0);
 }
 
 void JirachiDropInEffect(struct DungeonEntity *jirachiEntity)

@@ -1,16 +1,22 @@
 #include "global.h"
 #include "constants/direction.h"
+#include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "dungeon_map_access.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "friend_area.h"
 #include "item.h"
 #include "pokemon.h"
+#include "position_util.h"
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
 extern u8 gAvailablePokemonNames[0x58];
+extern u8 gUnknown_202DE58[];
 
 extern s16 gUnknown_80F57CA;
 extern s16 gUnknown_80F57D2;
@@ -219,6 +225,29 @@ extern u32 gZapdosPostStoryPreFightDialogue_3;
 extern u32 gZapdosPostStoryPreFightDialogue_4;
 extern u32 gZapdosPostStoryPreFightDialogue_5;
 extern u32 gZapdosPostStoryPreFightDialogue_6;
+extern u32 gUnknown_8105668;
+extern u32 gUnknown_8105674;
+extern u32 gUnknown_81056B8;
+extern u32 gUnknown_81056DC;
+extern u32 gUnknown_810579C;
+extern u32 gUnknown_8105974;
+extern u32 gUnknown_810581C;
+
+extern u32 gUnknown_8105BF4;
+extern u32 gUnknown_8105D2C;
+extern u32 gUnknown_8105D80;
+extern u32 gUnknown_8105D9C;
+extern u32 gUnknown_81058E0;
+extern u32 gUnknown_810593C;
+extern u32 gUnknown_8105A08;
+extern u32 gUnknown_8105AD4;
+extern u32 gUnknown_8105B20;
+extern u32 gUnknown_8105B68;
+extern u32 gUnknown_8105BA8;
+extern u8 *gUnknown_8105798[];
+extern u32 gJirachiReFightDialogue_1;
+
+extern u8 gUnknown_81074FC[];
 
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
 extern struct DungeonEntity *GetEntityFromClientType(u32);
@@ -231,6 +260,7 @@ extern void sub_803E708(u32, u32);
 extern void DisplayDungeonDialogue(u32 *r0);
 extern void sub_8083E88(u32);
 extern void JirachiSpinEffect(struct DungeonEntity *);
+extern void JirachiWishGrantDialogue(struct DungeonEntity *jirachiEntity);
 
 extern void sub_80862BC(struct DungeonEntity *);
 extern void sub_8086448();
@@ -251,7 +281,7 @@ extern void SetFacingDirection(struct DungeonEntity *, u32);
 extern void sub_8049ED4();
 extern void sub_8085860(s32 r0, u32 r1);
 extern void sub_806CE68(struct DungeonEntity *, u32);
-
+extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 extern void sub_8052D44(u8 *, struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8097FD0(u32);
 extern void SetMessageArgument(u8 *, struct DungeonEntity *, u32);
@@ -363,7 +393,14 @@ extern u32 gUnknown_81015A0;
 extern u32 gZapdosReFightDialogue_2;
 extern u32 gZapdosReFightDialogue_3;
 extern u32 gZapdosReFightDialogue_4;
-
+extern s32 sub_8052C68(u32, u8 *, u32 *, u32);
+extern void sub_80861A8(void);
+extern void sub_8045C28(struct ItemSlot *, u8 , u8 *);
+extern void sub_808BD38(void);
+extern u8 JirachiFriendAreaSearch(void);
+extern void sub_808BB3C(s16 *);
+extern void sub_8046860(struct DungeonEntity *, s32 *, struct ItemSlot *, u32);
+extern u32 sub_803D73C(u32);
 
 void ZapdosReFightDialogue(void)
 {
@@ -1909,7 +1946,7 @@ void sub_8089620(struct DungeonEntity *param_1)
   PlaySoundEffect(0x1f8);
   while( 1 ) {
     iVar2 = iVar2 - iVar1;
-    iVar1 = iVar1 -= 0x18;
+    iVar1 -= 0x18;
     if (iVar1 < 0x14) {
       iVar1 = 0x14;
     }
@@ -3556,4 +3593,281 @@ void sub_808B50C(void)
   DisplayDungeonDialogue(&gUnknown_81055F4);
   sub_803E708(10,70);
   gDungeonGlobalData->unk2 = 1;
+}
+
+void JirachiWish(void)
+{
+  u8 friendArea;
+  struct DungeonEntity *JirachiEntity;
+  struct Position *LeaderPos;
+  struct DungeonEntity *LeaderEntity;
+  s32 wishChoice;
+  s32 iVar4;
+  u32 uVar6;
+  s32 iVar9;
+  struct ItemSlot auStack152 [9];
+  struct ItemSlot auStack116 [9];
+  struct ItemSlot auStack80 [9];
+  s32 local_2c;
+  s32 local_28;
+  s32 local_24;
+  s32 temp;
+  s32 temp2;
+  s32 temp3;
+
+  JirachiEntity = GetEntityFromClientType(0x1a);
+  CopySpeciesNametoBuffer(gUnknown_202E038,0x19d); // SPECIES_JIRACHI
+  sub_80855E4(sub_808BBA8);
+  sub_808BBA8(JirachiEntity);
+  sub_8041888(0);
+  JirachiEntity->entityData->unk15C = 1;
+  JirachiEntity->entityData->unk15E = 0;
+  sub_80861B8(JirachiEntity,0xe,0);
+  sub_80855E4(sub_80861A8);
+  gDungeonGlobalData->unk1356C = 1;
+  sub_8083ED8(0x1e);
+  sub_803E708(0x1e,0x46);
+  DisplayDungeonDialogue(&gUnknown_8105668);
+  sub_803E708(10,0x46);
+  PlaySoundEffect(0x1a7);
+  sub_803E708(0x96,0x46);
+  sub_80862BC(JirachiEntity);
+  DisplayDungeonDialogue(&gUnknown_8105674);
+  sub_8083E88(0x79);
+  sub_803E708(10,0x46);
+  sub_80856E0(JirachiEntity,0);
+  PlaySoundEffect(0x16a);
+  DisplayDungeonDialogue(&gUnknown_81056B8);
+  sub_803E708(10,0x46);
+  SpriteLookAroundEffect(JirachiEntity);
+  DisplayDungeonDialogue(&gUnknown_81056DC);
+  sub_803E708(10,0x46);
+  while( 1 ) {
+    while (1) {
+#ifndef NONMATCHING
+        register s32 r0 asm("r0");
+        asm("mov\t%0, #0":"=r"(r0));
+#else
+        s32 r0 = 0;
+#endif
+        wishChoice = sub_8052C68(r0,*gUnknown_8105798,&gUnknown_810579C,0x705);
+        if (wishChoice >= 1) break;
+    }
+    sub_803E708(10,0x46);
+    if (wishChoice == 1) {
+      s32 r8;
+      // Lots of Money
+      DisplayDungeonDialogue(&gUnknown_810581C);
+      sub_803E708(10,0x46);
+      JirachiWishGrantDialogue(JirachiEntity);
+
+      for(iVar4 = 0; iVar4 < 6; iVar4 = r8)
+      {
+        r8 = iVar4 + 1;
+        for(iVar9 = 0; iVar9 < 9; iVar9++)
+        {
+          sub_8045C28(&auStack152[iVar9], 0x69, 0);
+        }
+        temp = (u16)(((((u16)JirachiEntity->posWorld.x + DungeonRandomCapped(3)) - 1) << 16) >> 16);
+        local_2c &= 0xffff0000;
+        local_2c |= temp;
+
+        temp = ((u16)JirachiEntity->posWorld.y + DungeonRandomCapped(3) + -1) * 0x10000;
+        local_2c &= 0xffff;
+        local_2c |= temp;
+        if ((GetMapTile_2((s16)local_2c, local_2c >> 16)->tileType & 3) != 0) {
+          PlaySoundEffect(0x14c);
+          sub_808BB3C((s16 *)&local_2c);
+          sub_8046860(JirachiEntity,&local_2c,auStack152,9);
+        }
+      }
+      JirachiEntity->entityData->unk15D  = 0;
+    }
+    if (wishChoice == 2) {
+      // Lots of Items
+      DisplayDungeonDialogue(&gUnknown_8105974);
+      sub_803E708(10,0x46);
+      JirachiWishGrantDialogue(JirachiEntity);
+
+      for(iVar4 = 0; iVar4 < 6; iVar4++)
+      {
+#ifndef NONMATCHING
+        asm("":::"sl");
+#endif
+        for(iVar9 = 0; iVar9 < 9; iVar9++)
+        {
+          sub_8045C28(&auStack116[iVar9], sub_803D73C(0),0);
+        }
+        temp2 = (u16)(((((u16)JirachiEntity->posWorld.x + DungeonRandomCapped(3)) - 1) << 16) >> 16);
+        local_28 &= 0xffff0000;
+        local_28 |= temp2;
+
+        temp2 = ((u16)JirachiEntity->posWorld.y + DungeonRandomCapped(3) + -1) * 0x10000;
+        local_28 &= 0xffff;
+        local_28 |= temp2;
+        if ((GetMapTile_2((s16)local_28, local_28 >> 16)->tileType & 3) != 0) {
+          PlaySoundEffect(400);
+          sub_808BB3C((s16 *)&local_28);
+          sub_8046860(JirachiEntity,&local_28,auStack116,9);
+        }
+      }
+      JirachiEntity->entityData->unk15D = 0;
+    }
+
+    if (wishChoice == 3)
+    {
+        // A Friend Area
+        friendArea = JirachiFriendAreaSearch();
+        if (friendArea == NUM_FRIEND_AREAS)
+        {
+            // You want a friend area? But you already have many friend areas...
+            DisplayDungeonDialogue(&gUnknown_8105A08);
+            sub_803E708(10,0x46);
+            continue;
+        }
+        else
+        {
+        // You want a friend area? As you wish..
+          DisplayDungeonDialogue(&gUnknown_8105AD4);
+          sub_803E708(10,0x46);
+          JirachiWishGrantDialogue(JirachiEntity);
+          JirachiEntity->entityData->unk15D  = 0;
+          DisplayDungeonDialogue(&gUnknown_8105B20);
+          UnlockFriendArea(friendArea);
+          PlaySoundEffect(0xd4);
+          LeaderEntity = GetLeaderEntity();
+          SetMessageArgument(gAvailablePokemonNames,LeaderEntity,0);
+          sub_8092578(gUnknown_202DE58,friendArea,0);
+          // Obtained the friend area!
+          DisplayDungeonDialogue(&gUnknown_8105B68);
+        }
+    }
+    if (wishChoice == 4) {
+        // More Strength..
+        DisplayDungeonDialogue(&gUnknown_8105BA8);
+        sub_803E708(10,0x46);
+        JirachiWishGrantDialogue(JirachiEntity);
+
+        for(iVar4 = 0; iVar4 < 5; iVar4++)
+        {
+
+          for(iVar9 = 0; iVar9 < 4; iVar9++)
+          {
+            sub_8045C28(&auStack80[iVar9],gUnknown_81074FC[DungeonRandomCapped(8)],0);
+          }
+          temp3 = (u16)(((((u16)JirachiEntity->posWorld.x + DungeonRandomCapped(3)) - 1) << 16) >> 16);
+          local_24 &= 0xffff0000;
+          local_24 |= temp3;
+
+          temp3 = ((u16)JirachiEntity->posWorld.y + DungeonRandomCapped(3) + -1) * 0x10000;
+          local_24 &= 0xffff;
+          local_24 |= temp3;
+          if ((GetMapTile_2((s16)local_24, local_24 >> 16)->tileType & 3) != 0) {
+            PlaySoundEffect(400);
+            sub_808BB3C((s16 *)&local_24);
+            sub_8046860(JirachiEntity,&local_24,auStack80,4);
+          }
+        }
+        JirachiEntity->entityData->unk15D  = 0;
+        DisplayDungeonDialogue(&gUnknown_8105BF4);
+        sub_803E708(10,0x46);
+    }
+    if (wishChoice == 5) {
+        // Something Good...
+        DisplayDungeonDialogue(&gUnknown_8105D2C);
+        sub_803E708(10,0x46);
+        JirachiWishGrantDialogue(JirachiEntity);
+        JirachiEntity->entityData->unk15D  = 0;
+        DisplayDungeonDialogue(&gUnknown_8105D80);
+        sub_803E708(10,0x46);
+        LeaderPos = &GetLeaderEntity()->posWorld;
+        uVar6 = CalculateFacingDir(&JirachiEntity->posWorld,LeaderPos);
+        SetFacingDirection(JirachiEntity,uVar6);
+        sub_803E708(10,0x46);
+        DisplayDungeonDialogue(&gUnknown_8105D9C);
+        sub_803E708(10,0x46);
+        gDungeonGlobalData->unk674 = 1;
+    }
+    break;
+  }
+
+  DisplayDungeonDialogue(&gUnknown_81058E0);
+  JirachiSpinEffect(JirachiEntity);
+  sub_803E708(10,0x46);
+  DisplayDungeonDialogue(&gUnknown_810593C);
+  sub_803E708(10,0x46);
+  sub_808BD38();
+}
+
+void JirachiReFightDialogue(void)
+{
+    if(HasRecruitedMon(SPECIES_JIRACHI))
+    {
+        sub_8086448();
+        sub_80866C4(&gJirachiReFightDialogue_1);
+    }
+    else
+    {
+        JirachiPreFightDialogue();
+    }
+}
+
+void JirachiWishGrantFlash(void)
+{
+  s32 iVar1;
+  
+  PlaySoundEffect(0x2c1);
+  gUnknown_202EDC8 = 0x1f;
+
+  for(iVar1 = 0xFA; iVar1 > 0x95; iVar1 -= 10)
+  {
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+
+  for(iVar1 = 0xFA; iVar1 > 0xC7; iVar1 -= 10)
+  {
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+
+  for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 10)
+  {
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    sub_803E46C(0x46);
+  }
+  sub_803E708(10,0x46);
+  sub_8085EB0();
+}
+
+void sub_808BB3C(s16 *param_1)
+{
+  register s32 iVar1 asm("r0");
+  s32 uVar2;
+  u32 local_8;
+  
+  iVar1 = param_1[0] * 0x1800 + 0xc00;
+  if (iVar1 < 0) {
+    iVar1 += 0xff;
+  }
+
+  iVar1 <<= 8;
+  iVar1 = (u16)(iVar1 >> 16);
+
+  uVar2 = (local_8 & 0xffff0000) | iVar1;
+  local_8 = uVar2;
+
+  iVar1 = param_1[1] * 0x1800 + 0x1000;
+  if (iVar1 < 0) {
+    iVar1 += 0xff;
+  }
+
+  iVar1 <<= 8;
+  iVar1 = (u16)(iVar1 >> 0x10);
+  iVar1 <<= 0x10;
+
+  local_8 = (iVar1) | (uVar2 & 0x0000ffff);
+  sub_8085EC8(100,0,0,&local_8,0);
 }

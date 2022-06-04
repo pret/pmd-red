@@ -58,7 +58,8 @@ struct DungeonGlobalData
     u8 fill66C[0x671 - 0x66C];
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
-    u8 fill673[0x675 - 0x673];
+    u8 fill673[0x674 - 0x673];
+    u8 unk674;
     u8 unk675;
     u8 unk676[0x68A - 0x676];
     /* 0x68A */ u8 unk68A;

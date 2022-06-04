@@ -274,7 +274,6 @@ SECTIONS {
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
         src/code_8057824_1.o(.text);
-        asm/jirachi_wish.o(.text);
         src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
