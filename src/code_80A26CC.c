@@ -1,18 +1,5 @@
 #include "global.h"
-
-struct unkStruct_80A2608
-{
-    /* 0x0 */ s16 unk0;
-    /* 0x2 */ u16 padding;
-    /* 0x4 */ u32 padding2;
-    /* 0x8 */ u16 padding3;
-    /* 0xA */ u16 padding4;
-    /* 0xC */ u8 unkC;
-    /* 0xD */ u8 padding5;
-    /* 0xE */ s16 unkE;
-    /* 0x10 */ u8 unk10;
-    /* 0x11 */ u8 unk11;
-};
+#include "code_80A26CC.h"
 
 extern u8 sub_80023E4(u32);
 extern u8 sub_80973F4(s16);
