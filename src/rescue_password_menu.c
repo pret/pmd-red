@@ -12,7 +12,7 @@
 #include "code_8094F88.h"
 #include "wonder_mail.h"
 
-extern u8 gUnknown_202EC50[];
+extern u8 gRescuePasswordBuffer[];
 extern u32 gUnknown_202EC4C;
 extern struct unkStruct_203B484 *gUnknown_203B484;
 extern struct UnkTextStruct2 gUnknown_80E71E4;
@@ -28,10 +28,10 @@ extern u32 ConvertMenutoRescuePasswordState(u32);
 extern void sub_8039174(void);
 extern void sub_80155F0(void);
 extern void sub_8031E10(void);
-extern void sub_8038F98(void);
+extern void DisplayPasswordAcceptScreen(void);
 
 
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
+extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_8095228 *r0);
 
 extern void sub_80951BC(struct unkStruct_8095228 *r0);
 extern void sub_80951FC(struct unkStruct_8095228 *r0);
@@ -43,7 +43,7 @@ extern void sub_8095274(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_80391F8(void);
 extern void sub_8031E00();
-extern void sub_8038DC0(u32);
+extern void DisplayRescuePasswordError(u32);
 extern struct MainMenu *GetMainMenu(void);
 
 
@@ -99,7 +99,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
     if ((gUnknown_203B368 != 0) || (gUnknown_203B36C != currMenu)) {
         for(counter = 0; counter < 0x36; counter++)
         {
-            gUnknown_202EC50[counter] = 0;
+            gRescuePasswordBuffer[counter] = 0;
         }
         gUnknown_203B368 = 0;
     }
@@ -117,7 +117,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
         case 0x1C:
         case 0x1E:
         case 0x20:
-            sub_80151C0(4, gUnknown_202EC50);
+            sub_80151C0(4, gRescuePasswordBuffer);
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = sub_8095228(0x1F);
@@ -127,7 +127,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             sub_8031D70(0x1F, 0);
             break;
         case MENU_RESCUE_PASSWORD_ENTRY:
-            sub_80151C0(4, gUnknown_202EC50);
+            sub_80151C0(4, gRescuePasswordBuffer);
             break;
     }
 
@@ -198,53 +198,53 @@ s32 UpdateRescuePasswordMenu(void)
                 nextMenu = MENU_FRIEND_RESCUE;
                 break;
             case 3:
-                switch(sub_8039068(gRescuePasswordMenu->currMenu, gUnknown_202EC50, &local_44)) {
-                    case 0x11:
-                        nextMenu = 0x11;
-                        sub_8038DC0(nextMenu);
+                switch(sub_8039068(gRescuePasswordMenu->currMenu, gRescuePasswordBuffer, &local_44)) {
+                    case PASSWORD_ENTRY_INCORRECT_PASSWORD:
+                        nextMenu = PASSWORD_ENTRY_INCORRECT_PASSWORD;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
                     case 0xd:
                         nextMenu = 0xD;
-                        sub_8038DC0(nextMenu);
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0x12:
-                        nextMenu = 0x12;
-                        sub_8038DC0(nextMenu);
+                    case PASSWORD_ENTRY_NOT_SOS_MAIL:
+                        nextMenu = PASSWORD_ENTRY_NOT_SOS_MAIL;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 7:
-                        nextMenu = 7;
-                        sub_8038DC0(nextMenu);
+                    case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
+                        nextMenu = PASSWORD_ENTRY_DUPLICATE_SOS_MAIL;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0x16:
+                    case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
                         sub_8095274(local_44.unk10);
-                        sub_8038F98();
+                        DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         local_44.mailType = 2;
                         sub_80951BC(&local_44);
                         break;
-                    case 0x13:
-                        nextMenu = 0x13;
-                        sub_8038DC0(nextMenu);
+                    case PASSWORD_ENTRY_NOT_AOK_MAIL:
+                        nextMenu = PASSWORD_ENTRY_NOT_AOK_MAIL;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 9:
-                        nextMenu = 0x9;
-                        sub_8038DC0(nextMenu);
+                    case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
+                        nextMenu = PASSWORD_ENTRY_DUPLICATE_AOK_MAIL;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0x17:
-                        sub_8038F98();
+                    case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
+                        DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         local_44.mailType = 5;
@@ -253,22 +253,20 @@ s32 UpdateRescuePasswordMenu(void)
                         puVar5->mailType = 7;
                         MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         break;
-                    default:
-                        break;
-                    case 0x14:
-                        nextMenu = 0x14;
-                        sub_8038DC0(nextMenu);
+                    case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
+                        nextMenu = PASSWORD_ENTRY_NOT_THANK_YOU_MAIL;
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
                     case 0xb:
                         nextMenu = 0xb;
-                        sub_8038DC0(nextMenu);
+                        DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0x18:
-                        sub_8038F98();
+                    case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
+                        DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         puVar6 = sub_8095228(sub_809539C(4, local_44.unk10));
@@ -291,7 +289,7 @@ s32 UpdateRescuePasswordMenu(void)
         {
             case 3:
                 nextMenu = 0x15;
-                sub_8038DC0(nextMenu);
+                DisplayRescuePasswordError(nextMenu);
                 gRescuePasswordMenu->state = 8;
                 nextMenu = MENU_NO_SCREEN_CHANGE;
                 break;
@@ -323,7 +321,7 @@ s32 UpdateRescuePasswordMenu(void)
                 sub_8039174();
                 ResetUnusedInputStruct();
                 sub_800641C(0,1,1);
-                sub_80151C0(4,gUnknown_202EC50);
+                sub_80151C0(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = 8;
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
                 nextMenu = MENU_FRIEND_RESCUE;
@@ -351,7 +349,7 @@ s32 UpdateRescuePasswordMenu(void)
                 sub_8039174();
                 ResetUnusedInputStruct();
                 sub_800641C(0,1,1);
-                sub_80151C0(4,gUnknown_202EC50);
+                sub_80151C0(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = ConvertMenutoRescuePasswordState(gRescuePasswordMenu->currMenu);
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
                 nextMenu = 0x2a;
@@ -369,35 +367,35 @@ s32 UpdateRescuePasswordMenu(void)
     return nextMenu;
 }
 
-void sub_8038DC0(u32 param_1)
+void DisplayRescuePasswordError(u32 passwordError)
 {
   sub_8006518(gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   sub_80155F0();
-  switch(param_1) {
-    case 0x11:
+  switch(passwordError) {
+    case PASSWORD_ENTRY_INCORRECT_PASSWORD:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,0,0xd,0);
         break;
-    case 0x12:
+    case PASSWORD_ENTRY_NOT_SOS_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,0,0xd,0);
         break;
-    case 7:
+    case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,0,0xd,0);
         break;
     case 0xd:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,0,0xd,0);
         break;
-    case 0x13:
+    case PASSWORD_ENTRY_NOT_AOK_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,0,0xd,0);
         break;
-    case 9:
+    case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,0,0xd,0);
         break;
-    case 0x14:
+    case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,0,0xd,0);
         break;
-    case 0xb:
+    case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,0,0xd,0);
         break;
     case 0x15:
@@ -409,7 +407,7 @@ void sub_8038DC0(u32 param_1)
   sub_8035CF4(&gRescuePasswordMenu->unk8,0,1);
 }
 
-void sub_8038F98(void)
+void DisplayPasswordAcceptScreen(void)
 {
   sub_8006518(gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
@@ -453,51 +451,51 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
   return uVar1;
 }
 
-u32 sub_8039068(u32 param_1, u8 *param_2,struct unkStruct_8095228 *param_3)
+u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *param_3)
 {
-  if ( (!sub_803D204(param_2,param_3)) || (7 < param_3->mailType) ||
+  if ( (!sub_803D204(passwordBuffer, param_3)) || (7 < param_3->mailType) ||
        (param_3->floor >= GetDungeonFloorCount(param_3->dungeon)) ||
        (param_3->clientSpecies == SPECIES_NONE) || (SPECIES_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->unk20.itemIndex))) {
-        return 0x11;
+        return PASSWORD_ENTRY_INCORRECT_PASSWORD;
   }
   else
-  switch(param_1)
+  switch(mailMode)
   {
-    case 0x1C:
+    case PASSWORD_ENTRY_SOS_MAIL_MODE:
         if (param_3->mailType != WONDER_MAIL_TYPE_SOS) {
-            return 0x12;
+            return PASSWORD_ENTRY_NOT_SOS_MAIL;
         }
         else if ( (sub_80952F0(2, param_3->unk10)) || (sub_80952F0(4, param_3->unk10)) || (sub_80952F0(6, param_3->unk10)) || (sub_8095298(param_3->unk10))) {
-            return 0x7;
+            return PASSWORD_ENTRY_DUPLICATE_SOS_MAIL;
         }
         else if (sub_8095190() == -1) {
             return 0xd;
         }
         else {
-            return 0x16;
+            return PASSWORD_ENTRY_SOS_MAIL_SUCCESS;
         }
         break;
-    case 0x1E:
+    case PASSWORD_ENTRY_AOK_MAIL_MODE:
         if (param_3->mailType != WONDER_MAIL_TYPE_AOK) {
-            return 0x13;
+            return PASSWORD_ENTRY_NOT_AOK_MAIL;
         }
         else if (!sub_80952F0(1, param_3->unk10)) {
-            return 0x9;
+            return PASSWORD_ENTRY_DUPLICATE_AOK_MAIL;
         }
         else {
-            return 0x17;
+            return PASSWORD_ENTRY_AOK_MAIL_SUCCESS;
         }
         break;
-    case 0x20:
+    case PASSWORD_ENTRY_THANK_YOU_MAIL_MODE:
         if (param_3->mailType != WONDER_MAIL_TYPE_THANK_YOU) {
-            return 0x14;
+            return PASSWORD_ENTRY_NOT_THANK_YOU_MAIL;
         }
         else if ((!sub_80952F0(4, param_3->unk10)) || (param_3->unk28 != sub_8011C34())) {
-            return 0xb;
+            return PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL;
         }
         else {
-            return 0x18;
+            return PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS;
         }
         break;
     default:

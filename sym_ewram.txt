@@ -537,7 +537,7 @@ gUnknown_202EC48 = .; /* 202EC48 */
 gUnknown_202EC4C = .; /* 202EC4C */
 	. += 0x4;
 
-gUnknown_202EC50 = .; /* 202EC50 */
+gRescuePasswordBuffer = .; /* 202EC50 */
 	. += 0x38;
 
 gDungeonNameBannerPalette = .; /* 202EC88 */
