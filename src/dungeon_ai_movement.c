@@ -5,13 +5,15 @@
 #include "constants/dungeon_action.h"
 #include "constants/tactic.h"
 #include "dungeon_action.h"
-#include "dungeon_pokemon_attributes.h"
-#include "dungeon_random.h"
 #include "dungeon_ai_movement_1.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_capabilities_1.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
+#include "dungeon_util.h"
+#include "map.h"
 #include "number_util.h"
 
-extern bool8 CanTakeItem(struct DungeonEntity *pokemon);
 extern bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
 
@@ -71,4 +73,40 @@ void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect)
             DecideMovement(pokemon, showRunAwayEffect);
         }
     }
+}
+
+bool8 CanTakeItem(struct DungeonEntity *pokemon)
+{
+    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct MapTile *mapTile;
+    struct DungeonEntity *mapObject;
+    if (!EntityExists(pokemon) || CannotUseItems(pokemon))
+    {
+        return FALSE;
+    }
+    mapTile = GetMapTileForDungeonEntity_2(pokemon);
+    mapObject = mapTile->mapObject;
+    if (mapObject == NULL)
+    {
+        return FALSE;
+    }
+    switch (GetEntityType(mapObject))
+    {
+        case ENTITY_NONE:
+        case ENTITY_POKEMON:
+        case ENTITY_TRAP:
+        case ENTITY_UNK_4:
+        case ENTITY_UNK_5:
+            break;
+        case ENTITY_ITEM:
+            if (!pokemonData->isLeader &&
+                !(pokemonData->heldItem.itemFlags & ITEM_FLAG_EXISTS) &&
+                ((mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) || !pokemonData->isEnemy) &&
+                !(GetItemData(mapObject)->itemFlags & ITEM_FLAG_FOR_SALE))
+            {
+                return TRUE;
+            }
+            break;
+    }
+    return FALSE;
 }

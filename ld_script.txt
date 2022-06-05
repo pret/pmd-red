@@ -247,7 +247,7 @@ SECTIONS {
         src/status.o(.text);
         asm/code_8077274.o(.text);
         src/dungeon_ai_movement.o(.text);
-        asm/code_807AEBC.o(.text);
+        asm/code_807AF58.o(.text);
         src/dungeon_ai_movement_1.o(.text);
         asm/code_807BB78.o(.text);
         src/dungeon_ai_attack.o(.text);

@@ -279,7 +279,9 @@ enum EntityType
     ENTITY_NONE,
     ENTITY_POKEMON,
     ENTITY_TRAP,
-    ENTITY_ITEM
+    ENTITY_ITEM,
+    ENTITY_UNK_4,
+    ENTITY_UNK_5,
 };
 
 enum MovementFlag
