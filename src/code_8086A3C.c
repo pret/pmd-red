@@ -28,8 +28,8 @@ extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
 extern void sub_8083E88(u32);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
-extern void sub_80862BC(struct DungeonEntity *);
-extern void sub_8086E74(struct DungeonEntity *);
+extern void SpriteShockEffect(struct DungeonEntity *);
+extern void SkarmoryEntry(struct DungeonEntity *);
 extern void SpriteLookAroundEffect(struct DungeonEntity *);
 extern void sub_8086A54(struct DungeonEntity *);
 extern void PlaySoundEffect(u32);
@@ -174,7 +174,7 @@ void SkarmoryPreFightDialogue(void)
 
   sub_8086448();
   sub_803E708(10,0x46);
-  sub_80862BC(PartnerEntity);
+  SpriteShockEffect(PartnerEntity);
   sub_803E708(0x20,0x46);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_1);
@@ -189,7 +189,7 @@ void SkarmoryPreFightDialogue(void)
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&local_20,0x20);
   sub_803E708(0x20,0x46);
-  sub_8086E74(SkarmoryEntity);
+  SkarmoryEntry(SkarmoryEntity);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_5);
@@ -223,7 +223,7 @@ void SkarmoryReFightDialogue(void)
   local_14.y = SkarmoryEntity->posPixel.y + 0x2000;
   sub_8086448();
   sub_803E708(10,0x46);
-  sub_8086E74(SkarmoryEntity);
+  SkarmoryEntry(SkarmoryEntity);
   ShiftCameraToPosition(&local_14,0x10);
   DisplayDungeonDialogue(&gSkarmoryReFightDialogue_1);
   sub_803E708(10,0x46);
@@ -245,10 +245,10 @@ void sub_8086E40(void)
   gDungeonGlobalData->unk2 = 1;
 }
 
-void sub_8086E74(struct DungeonEntity * param_1)
+void SkarmoryEntry(struct DungeonEntity * skarmoryEntity)
 {
-  sub_806CDD4(param_1,0xf,0);
-  sub_8086A54(param_1);
+  sub_806CDD4(skarmoryEntity,0xf,0);
+  sub_8086A54(skarmoryEntity);
   PlaySoundEffect(0x1f8);
   sub_803E708(0x44,0x46);
 }
