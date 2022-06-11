@@ -902,87 +902,34 @@ void sub_800C3F8(u16 songIndex, u16 speed)
     }
 }
 
-#ifdef NONMATCHING
-u8 sub_800C5D0(u16 param_1)
+bool8 sub_800C5D0(u16 songIndex)
 {
   u32 uVar3;
   struct unkStruct_3000FD8 *preload;
+  register u32 songIndex_u32 asm("r4");
+  register u32 songIndex_u32_2 asm("r5");
+
+  songIndex_u32 = songIndex;
+  songIndex_u32_2 = songIndex_u32;
   
 
-  if (sub_800CACC(param_1) != '\0') {
-    if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == param_1)) {
-      return 1;
+  if (sub_800CACC(songIndex_u32)) {
+    if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex_u32)) {
+      return TRUE;
     }
   }
   else
   {
-    // NOTE: regswap of r5 for r4 here... but is functionally matching
-    if (sub_800CAAC(param_1) != '\0') {
-      uVar3 = GetMusicPlayerIndex(param_1);
+    if (sub_800CAAC(songIndex_u32)) {
+      uVar3 = GetMusicPlayerIndex(songIndex_u32);
       preload = &gUnknown_3000FD8[uVar3];
-      if ((1 < uVar3) && (preload->songIndex == param_1)) {
-        return 1;
+      if ((1 < uVar3) && (preload->songIndex == songIndex_u32_2)) {
+        return TRUE;
       }
     }
   }
-  return 0;
+  return FALSE;
 }
-#else
-NAKED
-u8 sub_800C5D0(u16 param_1)
-{
-	asm_unified("\tpush {r4,r5,lr}\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r4, r0, 16\n"
-	"\tadds r5, r4, 0\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CACC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C600\n"
-	"\tldr r0, _0800C5F8\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C630\n"
-	"\tldr r0, _0800C5FC\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, r4\n"
-	"\tbne _0800C630\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0800C632\n"
-	"\t.align 2, 0\n"
-"_0800C5F8: .4byte gUnknown_202D690\n"
-"_0800C5FC: .4byte gUnknown_202D68E\n"
-"_0800C600:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CAAC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C630\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl GetMusicPlayerIndex\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tlsls r2, r0, 3\n"
-	"\tldr r1, _0800C62C\n"
-	"\tadds r2, r1\n"
-	"\tcmp r0, 0x1\n"
-	"\tbls _0800C630\n"
-	"\tldrh r0, [r2, 0x2]\n"
-	"\tcmp r0, r5\n"
-	"\tbne _0800C630\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0800C632\n"
-	"\t.align 2, 0\n"
-"_0800C62C: .4byte gUnknown_3000FD8\n"
-"_0800C630:\n"
-	"\tmovs r0, 0\n"
-"_0800C632:\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-}
-#endif
 
 void SoundVSync(void)
 {

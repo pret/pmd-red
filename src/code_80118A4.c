@@ -15,7 +15,7 @@ extern u8 sub_80023E4(u8);
 extern void sub_800C3F8(u16 r0, u16 r1);
 extern void sub_801199C(u16 r0);
 extern void sub_800C298(u16 r0);
-extern u8 sub_800C5D0(u16 r0);
+extern bool8 sub_800C5D0(u16 r0);
 
 struct UnkSaveStruct1
 {
@@ -240,7 +240,7 @@ void sub_80119AC(u16 songIndex, u16 r1)
     sub_800C3F8(songIndex, r1);
 }
 
-u8 sub_80119C0(u16 songIndex)
+bool8 sub_80119C0(u16 songIndex)
 {
     return sub_800C5D0(songIndex);
 }
