@@ -5,6 +5,12 @@
 #include "text.h"
 #include "menu.h"
 
+struct unkStruct_802C39C
+{
+    /* 0x0 */ u32 local_6c[15];
+    /* 0x3C */ u8 local_29[12];
+    /* 0x48 */ u32 local_24[4];
+};
 
 struct unkStruct_203B2E8
 {
@@ -143,7 +149,7 @@ extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
-extern void sub_803B6D4(u32 *);
+extern void sub_803B6D4(void *);
 
 extern void sub_8013984(u32 *);
 extern void sub_802C6DC(void);
@@ -356,8 +362,7 @@ void sub_802C750(void)
   int iVar2;
   s32 r4;
   s32 r5;
-  u32 auStack104 [18];
-  u32 uStack32[4];
+  struct unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B2E8->unk3C);
   sub_80073B8(gUnknown_203B2E8->unk3C);
@@ -374,10 +379,10 @@ void sub_802C750(void)
     do
     {
         uVar1 = GetJobSlotInfo(gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + iVar2]);
-        auStack104[0] = gUnknown_203B2E8->unk3C;
-        uStack32[0] = sub_8013800(&gUnknown_203B2E8->unk8,iVar2);
-        sub_803B35C(uVar1,auStack104);
-        sub_803B6D4(auStack104);
+        local.local_6c[0] = gUnknown_203B2E8->unk3C;
+        local.local_24[0] = sub_8013800(&gUnknown_203B2E8->unk8,iVar2);
+        sub_803B35C(uVar1,local.local_6c);
+        sub_803B6D4(&local);
         iVar2++;
     } while( iVar2 < gUnknown_203B2E8->unk22);
   sub_80073E0(gUnknown_203B2E8->unk3C);
