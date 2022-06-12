@@ -58,7 +58,7 @@ struct unkStruct_3000FD8
 };
 
 extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
-extern struct unkStruct_3000FD8 gUnknown_3000FE8[4];
+extern struct unkStruct_3000FD8 gUnknown_3000FE8[8];
 
 extern u8 gUnknown_202D7FE;
 extern u16 gBldCnt;
@@ -595,7 +595,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
   if (param_2 > 256)
     param_2 = 256;
 
-  if (sub_800CACC(SongIndex)) 
+  if (IsFanfare(SongIndex)) 
   {
     if (GetMusicPlayerIndex(SongIndex) == 1) {
       interrupt_flag = DisableInterrupts();
@@ -668,7 +668,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
   }
   else
   {
-    if (!sub_800CAAC(SongIndex))
+    if (!IsSoundEffect(SongIndex))
       return;
     msVar = GetMusicPlayerIndex(SongIndex);
     preload = &gUnknown_3000FD8[msVar]; // need to load this before comparison to match
@@ -706,7 +706,7 @@ void sub_800C214(u16 songIndex, u16 volume)
     volume = 256;
   }
 
-  if ((!sub_800CACC(songIndex)) && (sub_800CAAC(songIndex))) {
+  if ((!IsFanfare(songIndex)) && (IsSoundEffect(songIndex))) {
     msVar = GetMusicPlayerIndex(songIndex);
     info = gMPlayTable[msVar].info;
     preload = &gUnknown_3000FD8[msVar];
@@ -750,7 +750,7 @@ void sub_800C298(u16 songIndex)
             EnableInterrupts();
         }
     }
-    else if (sub_800CAAC(songIndex))
+    else if (IsSoundEffect(songIndex))
     {
         uVar2 = GetMusicPlayerIndex(songIndex);
         puVar6 = gMPlayTable[uVar2].info;
@@ -785,7 +785,7 @@ void sub_800C298(u16 songIndex)
             EnableInterrupts();
         }
     }
-    else if (sub_800CACC(songIndex))
+    else if (IsFanfare(songIndex))
     {
         cVar4 = DisableInterrupts();
         if (gUnknown_202D690 != 0) {
@@ -848,7 +848,7 @@ void sub_800C3F8(u16 songIndex, u16 speed)
         }
     }
     else {
-        if (sub_800CAAC(songIndex)) {
+        if (IsSoundEffect(songIndex)) {
             uVar8 = GetMusicPlayerIndex(songIndex);
             preload = &gUnknown_3000FD8[uVar8];
             puVar5 = gMPlayTable[uVar8].info;
@@ -884,7 +884,7 @@ void sub_800C3F8(u16 songIndex, u16 speed)
                 EnableInterrupts();
             }
         }
-        else if (sub_800CACC(songIndex)) {
+        else if (IsFanfare(songIndex)) {
             cVar4 = DisableInterrupts();
             if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex)) {
                 if (sub_800CAF0(1) != '\0') {
@@ -913,14 +913,14 @@ bool8 sub_800C5D0(u16 songIndex)
   songIndex_u32_2 = songIndex_u32;
   
 
-  if (sub_800CACC(songIndex_u32)) {
+  if (IsFanfare(songIndex_u32)) {
     if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex_u32)) {
       return TRUE;
     }
   }
   else
   {
-    if (sub_800CAAC(songIndex_u32)) {
+    if (IsSoundEffect(songIndex_u32)) {
       uVar3 = GetMusicPlayerIndex(songIndex_u32);
       preload = &gUnknown_3000FD8[uVar3];
       if ((1 < uVar3) && (preload->songIndex == songIndex_u32_2)) {

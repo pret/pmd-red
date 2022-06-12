@@ -107,14 +107,14 @@ u8 sub_800CA38(u32 songIndex)
             return 1;
         }
     }
-    if(sub_800CACC(songIndex))
+    if(IsFanfare(songIndex))
     {
         if(GetMusicPlayerIndex(songIndex) == 1)
         {
             return 1;
         }
     }
-    else if(sub_800CAAC(songIndex))
+    else if(IsSoundEffect(songIndex))
     {
         if(GetMusicPlayerIndex(songIndex) > 1)
         {
@@ -137,7 +137,7 @@ bool8 IsBGSong(u32 songIndex)
     return FALSE;
 }
 
-bool8 sub_800CAAC(u32 songIndex)
+bool8 IsSoundEffect(u32 songIndex)
 {
     if(songIndex - 300 <= 639)
     {
@@ -146,7 +146,7 @@ bool8 sub_800CAAC(u32 songIndex)
     return FALSE;
 }
 
-bool8 sub_800CACC(u32 songIndex)
+bool8 IsFanfare(u32 songIndex)
 {
     if(songIndex - 200 <= 19)
     {
