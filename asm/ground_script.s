@@ -7349,7 +7349,7 @@ _080A1730:
 	bl sub_80A2740
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80969D0
+	bl CountJobsinDungeon
 	movs r1, 0
 	cmp r0, 0
 	ble _080A1750

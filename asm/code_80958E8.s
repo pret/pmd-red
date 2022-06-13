@@ -2009,8 +2009,8 @@ _080969C2:
 	bx r1
 	thumb_func_end GetNumAcceptedJobs
 
-	thumb_func_start sub_80969D0
-sub_80969D0:
+	thumb_func_start CountJobsinDungeon
+CountJobsinDungeon:
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2041,7 +2041,7 @@ _080969FA:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80969D0
+	thumb_func_end CountJobsinDungeon
 
 	thumb_func_start sub_8096A08
 sub_8096A08:

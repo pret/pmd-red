@@ -379,7 +379,7 @@ _0802FCA8:
 	cmp r5, 0
 	bne _0802FCCA
 	mov r0, r9
-	bl sub_80969D0
+	bl CountJobsinDungeon
 	cmp r0, 0
 	ble _0802FCCA
 	ldr r0, [r4]

@@ -28,7 +28,7 @@ extern u8 *sub_8096574(u32);
 extern void sub_803B35C(u8 *, u32 *);
 extern u8 gBulletinBoardText[];
 extern u8 sub_80968B0(u8 *);
-extern void sub_803B6D4(void *);
+extern void CreateRescueTitle(void *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 extern void sub_8012BC4(s32, s32, s32, s32 ,s32 ,s32);
 
@@ -77,11 +77,20 @@ extern struct unkStruct_203B2E0 *gUnknown_203B2E0;
 
 struct unkStruct_802C39C
 {
-    /* 0x0 */ u32 local_6c[15];
-    /* 0x3C */ u8 local_29[12];
-    /* 0x48 */ u32 local_24[4];
+    /* 0x0 */ u32 unk0[2];
+    /* 0x8 */ struct DungeonLocation *unk8;
+    /* 0xC */ u8 *unkC;
+    /* 0x10 */ s16 unk10;
+    /* 0x12 */ s16 unk12;
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 fill15[0x1B];
+    /* 0x34 */ u8 fill34[2];
+    /* 0x36 */ u8 fill36[0x3C - 0x36];
+    /* 0x3C */ u8 unk3C[0xC];
+    /* 0x48 */ u8 fill48[4];
+    /* 0x4C */ u32 unk4C;
+    /* 0x50 */ u32 unk50[3];
 };
-
 
 extern struct UnkTextStruct2 gUnknown_80DFCB4;
 extern struct UnkTextStruct2 gUnknown_80DFC9C;
@@ -91,7 +100,7 @@ extern u16 gUnknown_203B2E4;
 extern u8 *sub_8095FE8(u8);
 extern u8 sub_80968B0(u8 *);
 extern void sub_803B35C(u8 *, u32 *);
-extern void sub_803B6D4(void *);
+extern void CreateRescueTitle(void *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
@@ -113,8 +122,8 @@ void CreateMailMenu(void)
   if (iVar5 < gUnknown_203B2D8->unk1E) {
     do {
       pcVar2 = sub_8095FE8(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + iVar5]);
-      local.local_6c[0] = gUnknown_203B2D8->unk38;
-      local.local_24[0] = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
+      local.unk0[0] = gUnknown_203B2D8->unk38;
+      local.unk4C = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
       if (*pcVar2 == 1) {
         y = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
         sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
@@ -123,11 +132,11 @@ void CreateMailMenu(void)
         xxx_call_draw_string(0x15,y,buffer,gUnknown_203B2D8->unk38,0);
       }
       else {
-       sub_803B35C(pcVar2,local.local_6c);
+       sub_803B35C(pcVar2,local.unk0);
         if (sub_80968B0(pcVar2) != 0) {
-          local.local_29[7] = 2;
+          local.unk3C[11] = 2;
         }
-        sub_803B6D4(&local);
+        CreateRescueTitle(&local);
       }
       iVar5++;
     } while (iVar5 < gUnknown_203B2D8->unk1E);
@@ -325,19 +334,19 @@ void sub_802C39C(void)
   u32 uVar1;
   u8 *uVar3;
   s32 iVar4;
-  s32 iVar5;
+  s32 x;
   s32 iVar6;
   struct unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B2E0->unk3C);
   sub_80073B8(gUnknown_203B2E0->unk3C);
   iVar4 = gUnknown_203B2E0->unk26 * 8;
-  iVar5 = iVar4;
-  iVar5 += 10;
-  xxx_call_draw_string(iVar5,0,gBulletinBoardText,gUnknown_203B2E0->unk3C,0);
+  x = iVar4;
+  x += 10;
+  xxx_call_draw_string(x,0,gBulletinBoardText,gUnknown_203B2E0->unk3C,0);
   iVar4 += 4;
-  iVar5 = iVar4 + gUnknown_203B2E0->unkA4[2] * 8;
-  sub_8012BC4(iVar5,0,gUnknown_203B2E0->unk26 + 1,2,7,gUnknown_203B2E0->unk3C);
+  x = iVar4 + gUnknown_203B2E0->unkA4[2] * 8;
+  sub_8012BC4(x,0,gUnknown_203B2E0->unk26 + 1,2,7,gUnknown_203B2E0->unk3C);
 
   iVar6 = 0;
   if(iVar6 < gUnknown_203B2E0->unk22)
@@ -345,13 +354,13 @@ void sub_802C39C(void)
     {
         uVar1 = (gUnknown_203B2E0->unk0[gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24 + iVar6]);
         uVar3 = sub_8096574(uVar1);
-        local.local_6c[0] = gUnknown_203B2E0->unk3C;
-        local.local_24[0] = sub_8013800(&gUnknown_203B2E0->unk8,iVar6);
-        sub_803B35C(uVar3,local.local_6c);
+        local.unk0[0] = gUnknown_203B2E0->unk3C;
+        local.unk4C = sub_8013800(&gUnknown_203B2E0->unk8,iVar6);
+        sub_803B35C(uVar3,local.unk0);
         if (sub_80968B0(sub_8096574(uVar1)) != '\0') {
-            local.local_29[7] = 2;
+            local.unk3C[11] = 2;
         }
-        sub_803B6D4(&local);
+        CreateRescueTitle(&local);
         iVar6++;
     } while (iVar6 < gUnknown_203B2E0->unk22);
   sub_80073E0(gUnknown_203B2E0->unk3C);

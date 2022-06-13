@@ -1172,7 +1172,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->dungeon) == 0)
+            if(sub_80A2824(return_var->dungeon.dungeonIndex) == 0)
             {
                 sub_8028B04(0x1C);
             }

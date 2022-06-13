@@ -44,8 +44,8 @@ struct unkStruct_203B310
 {
     // size: 0x84
     /* 0x0 */ u32 state;
-    u32 unk4;
-    u8 unk8;
+    /* 0x4 */ u32 nextState;
+    /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
     /* 0x9 */ u8 currTeamRank; // team rank
     u8 unkA;
     u8 unkB;
@@ -354,7 +354,7 @@ void sub_802F1E8(void)
 
 
 
-u32 sub_802F204(struct unkStruct_802F204 *r0, u8 r1)
+u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 r1)
 {
     struct unkStruct_203B310 *preload;
 
@@ -363,7 +363,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, u8 r1)
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
-    gUnknown_203B310->unk8 = r1;
+    gUnknown_203B310->displayClientDialogueSprite = r1;
 
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
@@ -459,9 +459,9 @@ void HandleMissionReward(void)
         }
         else {
             gUnknown_202DE30 = moneyReward;
-            if (gUnknown_203B310->unk8 != '\0') {
+            if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceFile,0x10d);
-                gUnknown_203B310->unk4 = 1;
+                gUnknown_203B310->nextState = 1;
             }
             else {
                 sub_802F2E8(1);
@@ -477,7 +477,7 @@ void HandleMissionReward(void)
         else {
             sub_80141B4(gUnknown_80E0484,0,0,0x101);
         }
-        gUnknown_203B310->unk4 = 2;
+        gUnknown_203B310->nextState = 2;
         break;
     case 2:
         if (gUnknown_203B310->unk10->friendAreaReward == '\0') {
@@ -486,9 +486,9 @@ void HandleMissionReward(void)
         }
         else {
             sub_8092578(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,0);
-            if (gUnknown_203B310->unk8 != '\0') {
+            if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceFile,0x10d);
-                gUnknown_203B310->unk4 = 3;
+                gUnknown_203B310->nextState = 3;
             }
             else {
                 sub_802F2E8(3);
@@ -516,7 +516,7 @@ void HandleMissionReward(void)
                 sub_80141B4(gUnknown_80E05FC,0,0,0x101);
             }
         }
-        gUnknown_203B310->unk4 = 4;
+        gUnknown_203B310->nextState = 4;
         break;
     case 4:
         uVar7 = gUnknown_203B310->unk10->itemRewards[0];
@@ -542,9 +542,9 @@ void HandleMissionReward(void)
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
                 sub_8090E14(gUnknown_202DEA8,(struct ItemSlot *)&local_14,&local_20);
-                if (gUnknown_203B310->unk8 != '\0') {
+                if (gUnknown_203B310->displayClientDialogueSprite) {
                     sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
-                    gUnknown_203B310->unk4 = 5;
+                    gUnknown_203B310->nextState = 5;
                 }
                 else
                 {
@@ -594,11 +594,11 @@ void HandleMissionReward(void)
             PlaySound(0xcb);
             if (gUnknown_203B310->currTeamRank != GetRescueTeamRank()) {
                 // Rank up time
-                gUnknown_203B310->unk4 = 8;
+                gUnknown_203B310->nextState = 8;
             }
             else {
                 // No rank up.. close out
-                gUnknown_203B310->unk4 = 9;
+                gUnknown_203B310->nextState = 9;
             }
             gUnknown_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
             sub_80141B4(gUnknown_80E0670,0,0,0x101);
@@ -607,7 +607,7 @@ void HandleMissionReward(void)
     case 8:
         // Rank up
         PlaySound(0xc9);
-        gUnknown_203B310->unk4 = 9;
+        gUnknown_203B310->nextState = 9;
         rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
         strcpy(gUnknown_202E038,rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
@@ -639,7 +639,7 @@ void sub_802F718(void)
     s32 temp;
 
     if (sub_80144A4(&temp) == 0) {
-        sub_802F2E8(gUnknown_203B310->unk4);
+        sub_802F2E8(gUnknown_203B310->nextState);
     }
 }
 

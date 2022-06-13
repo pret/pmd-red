@@ -141,8 +141,8 @@ extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern void sub_803C37C(u8 *, u32, u8 *);
-extern u32 sub_803C200(u8 *, u32);
+extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
+extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern u8 sub_80023E4(u32);
 extern void nullsub_131(void);
@@ -387,7 +387,7 @@ void sub_802B3E0(void)
         sub_8097790();
         iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
         sub_803C37C(&iVar3->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = sub_803C200(&iVar3->dungeon, 0);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&iVar3->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = 0;
         gUnknown_203B2C8->unk114.itemRewards[2] = 0;
         gUnknown_203B2C8->unk114.numItems = 10;

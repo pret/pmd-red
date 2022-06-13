@@ -237,7 +237,7 @@ extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
 extern u8 sub_809539C(u32, u32);
 extern u8 sub_800D588(void);
-extern u32 sub_803C200(u8 *, u32);
+extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
@@ -1420,7 +1420,7 @@ void UpdateThankYouMailText(void)
         else
             gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
         gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
-        gUnknown_203B2C4->unk53C.teamRankPtsReward = sub_803C200(&puVar4->dungeon, 0); // unk560
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&puVar4->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C
