@@ -4,6 +4,7 @@
 #include "bg.h"
 #include "music.h"
 #include "input.h"
+#include "constants/bg_music.h"
 
 extern bool8 EnableInterrupts(void);
 extern bool8 DisableInterrupts(void);
@@ -33,7 +34,7 @@ extern u32 gUnknown_203B0A4;
 extern u16 gBGMusicPlayerState;
 extern u16 gCurrentBGSong;
 extern u16 gUnknown_202D68C;
-extern u16 gUnknown_202D68E;
+extern u16 gCurrentFanfareSong;
 extern u16 gUnknown_202D690;
 extern u16 gUnknown_202D692;
 extern u8 gUnknown_202D694;
@@ -407,12 +408,12 @@ void InitMusic(void)
     gBGMusicPlayerState = 0;
     gCurrentBGSong = 999;
     gUnknown_202D68C = 999;
-    gUnknown_202D68E = 997;
+    gCurrentFanfareSong = 997;
     gUnknown_202D690 = 0;
     gUnknown_202D692 = 0;
     gUnknown_202D694 = 0;
 
-    for(counter = 0, preload = &gUnknown_3000FD8[0]; counter < 8; counter++, preload++)
+    for(counter = INDEX_BGM, preload = &gUnknown_3000FD8[0]; counter < INDEX_SE6 + 1; counter++, preload++)
     {
         preload->unk0 = 0;
         preload->songIndex = 997;
@@ -443,7 +444,7 @@ void StartNewBGM(u16 songIndex)
         if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
     }
-    if(GetMusicPlayerIndex(songIndex))
+    if(GetMusicPlayerIndex(songIndex) != INDEX_BGM)
     {
         nullsub_20(songIndex);
         return;
@@ -454,22 +455,22 @@ void StartNewBGM(u16 songIndex)
 
     if(gUnknown_202D690 == 0)
     {
-        gBGMusicPlayerState = 1;
+        gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
         m4aSongNumStart(songIndex);
     }
     if(interrupt_flag)
         EnableInterrupts();
 }
 
-void FadeInNewBGM(u16 SongIndex, u16 speed)
+void FadeInNewBGM(u16 songIndex, u16 speed)
 {
     bool8 interrupt_flag;
 
-    if(!IsBGSong(SongIndex))
+    if(!IsBGSong(songIndex))
         return;
-    if(SongIndex == 999)
+    if(songIndex == 999)
         return;
-    if(SongIndex == gCurrentBGSong)
+    if(songIndex == gCurrentBGSong)
     {
         if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
@@ -489,32 +490,32 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
     }
 
     interrupt_flag = DisableInterrupts();
-    gCurrentBGSong = SongIndex;
+    gCurrentBGSong = songIndex;
     gUnknown_202D694 = 1;
 
     if(gUnknown_202D690 == 0)
     {
-        gBGMusicPlayerState = 1;
-        m4aSongNumStart(SongIndex);
+        gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
+        m4aSongNumStart(songIndex);
         m4aMPlayImmInit(&gMPlayInfo_BGM);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0);
-        m4aSongNumStop(SongIndex);
+        m4aSongNumStop(songIndex);
         m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
     }
     if(interrupt_flag)
         EnableInterrupts();
 }
 
-void sub_800BF48(u16 SongIndex)
+void sub_800BF48(u16 songIndex)
 {
     u16 preload  = gCurrentBGSong;
     if(preload == 999)
     {
-        StartNewBGM(SongIndex);
+        StartNewBGM(songIndex);
         gUnknown_202D68C = preload;
         return;
     }
-    gUnknown_202D68C = SongIndex;
+    gUnknown_202D68C = songIndex;
 }
 
 void sub_800BF80(void)
@@ -583,23 +584,23 @@ u16 GetCurrentBGSong(void)
     return gCurrentBGSong;
 }
 
-void sub_800C074(u16 SongIndex, u16 param_2)
+void sub_800C074(u16 songIndex, u16 param_2)
 {
   bool8 interrupt_flag;
   bool8 interrupt_flag2;
-  u16 msVar;
+  u16 playerIndex;
   struct unkStruct_3000FD8 *preload;
 
-  if (SongIndex == 997)
+  if (songIndex == 997)
     return;
   if (param_2 > 256)
     param_2 = 256;
 
-  if (IsFanfare(SongIndex)) 
+  if (IsFanfare(songIndex)) 
   {
-    if (GetMusicPlayerIndex(SongIndex) == 1) {
+    if (GetMusicPlayerIndex(songIndex) == INDEX_FANFARE) {
       interrupt_flag = DisableInterrupts();
-      gUnknown_202D68E = SongIndex;
+      gCurrentFanfareSong = songIndex;
       if(gUnknown_202D690 == 0)
       {
         if (gCurrentBGSong != 999) 
@@ -617,14 +618,14 @@ void sub_800C074(u16 SongIndex, u16 param_2)
             {
                 gUnknown_202D690 = 3;
                 m4aMPlayStop(&gMPlayInfo_BGM);
-                m4aSongNumStart(gUnknown_202D68E);
+                m4aSongNumStart(gCurrentFanfareSong);
             }
         }
         else
         {
             gUnknown_202D690 = 3;
             m4aMPlayStop(&gMPlayInfo_BGM);
-            m4aSongNumStart(gUnknown_202D68E);
+            m4aSongNumStart(gCurrentFanfareSong);
         }
       }
       else
@@ -632,27 +633,27 @@ void sub_800C074(u16 SongIndex, u16 param_2)
         if (1 < (u16)(gUnknown_202D690 - 1)) 
         {
             m4aMPlayStop(&gMPlayInfo_BGM);
-            m4aSongNumStart(gUnknown_202D68E);
+            m4aSongNumStart(gCurrentFanfareSong);
             gUnknown_202D690 = 3;
         }
       }
       switch(gCurrentBGSong)
       {
-        case 26: // 0x1A
-        case 27: // 0x1B
-        case 28: // 0x1C
-        case 29: // 0x1D
-        case 30: // 0x1E
-        case 31: // 0x1F
-        case 34: // 0x22
-        case 35: // 0x23
-        case 37: // 0x25
-        case 38: // 0x26
-        case 117: // 0x75
-        case 118: // 0x76
-        case 119: // 0x77
-        case 122: // 0x7A
-        case 127: // 0x7F
+        case MUS_RAYQUAZAS_DOMAIN:
+        case MUS_FRIEND_AREA_STRATOS_LOOKOUT:
+        case MUS_FRIEND_AREA_RAINBOW_PEAK:
+        case MUS_DREAM_EATER:
+        case MUS_FRIEND_AREA_DEEPSEA_CURRENT:
+        case MUS_FRIEND_AREA_SEAFLOOR_CAVE:
+        case MUS_FRIEND_AREA_VOLCANIC_PIT:
+        case MUS_FRIEND_AREA_CRYPTIC_CAVE:
+        case MUS_THE_OTHER_SIDE:
+        case MUS_THE_MOUNTAIN_OF_FIRE:
+        case MUS_FRIEND_AREA_LEGENDARY_ISLAND:
+        case MUS_FRIEND_AREA_SOUTHERN_ISLAND:
+        case MUS_FRIEND_AREA_ENCLOSED_ISLAND:
+        case MUS_FRIEND_AREA_FINAL_ISLAND:
+        case MUS_FRIEND_AREA_HEALING_FOREST:
             gUnknown_202D694 = 1;
             break;
         default:
@@ -663,23 +664,23 @@ void sub_800C074(u16 SongIndex, u16 param_2)
     }
     else
     {
-        nullsub_20(SongIndex);
+        nullsub_20(songIndex);
     }
   }
   else
   {
-    if (!IsSoundEffect(SongIndex))
+    if (!IsSoundEffect(songIndex))
       return;
-    msVar = GetMusicPlayerIndex(SongIndex);
-    preload = &gUnknown_3000FD8[msVar]; // need to load this before comparison to match
-    if (msVar <= 1)
-        nullsub_20(SongIndex);
+    playerIndex = GetMusicPlayerIndex(songIndex);
+    preload = &gUnknown_3000FD8[playerIndex]; // need to load this before comparison to match
+    if (playerIndex < INDEX_SE1)
+        nullsub_20(songIndex);
     else
     {
       interrupt_flag2 = DisableInterrupts();
-      m4aSongNumStart(SongIndex);
+      m4aSongNumStart(songIndex);
       preload->unk0 = 1;
-      preload->songIndex = SongIndex;
+      preload->songIndex = songIndex;
       if(param_2 == 256)
       {
         preload->unk6 = 0;
@@ -695,10 +696,10 @@ void sub_800C074(u16 SongIndex, u16 param_2)
   }
 }
 
-void sub_800C214(u16 songIndex, u16 volume)
+void SetSoundEffectVolume(u16 songIndex, u16 volume)
 {
   bool8 interrupt_flag;
-  u16 msVar;
+  u16 playerIndex;
   struct MusicPlayerInfo *info;
   struct unkStruct_3000FD8 *preload;
 
@@ -707,10 +708,10 @@ void sub_800C214(u16 songIndex, u16 volume)
   }
 
   if ((!IsFanfare(songIndex)) && (IsSoundEffect(songIndex))) {
-    msVar = GetMusicPlayerIndex(songIndex);
-    info = gMPlayTable[msVar].info;
-    preload = &gUnknown_3000FD8[msVar];
-    if (msVar > 1) {
+    playerIndex = GetMusicPlayerIndex(songIndex);
+    info = gMPlayTable[playerIndex].info;
+    preload = &gUnknown_3000FD8[playerIndex];
+    if (playerIndex >= INDEX_SE1) {
       interrupt_flag = DisableInterrupts();
       if (preload->songIndex == songIndex) {
         m4aMPlayVolumeControl(info, 0xf, volume);
@@ -729,8 +730,8 @@ void sub_800C298(u16 songIndex)
     char cVar3;
     char cVar4;
 
-    u32 uVar2;
-    int iVar4;
+    u32 playerIndex;
+    s32 playerIndex2;
     struct MusicPlayerInfo *puVar6;
     struct unkStruct_3000FD8 *preload;
     struct unkStruct_3000FD8 *puVar3;
@@ -738,9 +739,9 @@ void sub_800C298(u16 songIndex)
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
 
-        for(iVar4 = 2, puVar3 = &gUnknown_3000FE8[0]; iVar4 < 7; iVar4++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, puVar3 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, puVar3++)
         {
-            m4aMPlayStop(gMPlayTable[iVar4].info);
+            m4aMPlayStop(gMPlayTable[playerIndex2].info);
             puVar3->unk0 = 0;
             puVar3->songIndex = 997;
             puVar3->unk4 = 0;
@@ -752,10 +753,10 @@ void sub_800C298(u16 songIndex)
     }
     else if (IsSoundEffect(songIndex))
     {
-        uVar2 = GetMusicPlayerIndex(songIndex);
-        puVar6 = gMPlayTable[uVar2].info;
-        preload = &gUnknown_3000FD8[uVar2];
-        if (uVar2 < 2) {
+        playerIndex = GetMusicPlayerIndex(songIndex);
+        puVar6 = gMPlayTable[playerIndex].info;
+        preload = &gUnknown_3000FD8[playerIndex];
+        if (playerIndex < INDEX_SE1) {
             nullsub_21(songIndex);
         }
         else {
@@ -776,9 +777,9 @@ void sub_800C298(u16 songIndex)
     {
         cVar3 = DisableInterrupts();
         if (gUnknown_202D690 != 0) {
-            if (gUnknown_202D68E != 997) {
-                gUnknown_202D68E = 997;
-                m4aMPlayStop(&gUnknown_2000970);
+            if (gCurrentFanfareSong != 997) {
+                gCurrentFanfareSong = 997;
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
         if (cVar3 != '\0') {
@@ -789,9 +790,9 @@ void sub_800C298(u16 songIndex)
     {
         cVar4 = DisableInterrupts();
         if (gUnknown_202D690 != 0) {
-            if (gUnknown_202D68E == songIndex) {
-                gUnknown_202D68E = 997;
-                m4aMPlayStop(&gUnknown_2000970);
+            if (gCurrentFanfareSong == songIndex) {
+                gCurrentFanfareSong = 997;
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
         if (cVar4 != '\0') {
@@ -807,11 +808,11 @@ void sub_800C3F8(u16 songIndex, u16 speed)
     char cVar3;
     char cVar4;
     u32 comparison;
-    s32 uVar6;
-    u32 uVar8;
+    s32 playerIndex2;
+    u32 playerIndex;
     struct unkStruct_3000FD8 *preload;
     struct unkStruct_3000FD8 *puVar3;
-    struct MusicPlayerInfo *puVar5;
+    struct MusicPlayerInfo *playerInfo;
 
     comparison = 0x80 << 17; // 16777216
     if((speed * 65536) > comparison)
@@ -828,14 +829,14 @@ void sub_800C3F8(u16 songIndex, u16 speed)
 
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
-        for(uVar6 = 2, puVar3 = &gUnknown_3000FE8[0]; uVar6 < 7; uVar6++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, puVar3 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, puVar3++)
         {
             if (puVar3->songIndex != 997) {
-                if (sub_800CAF0(uVar6) != '\0') {
-                    m4aMPlayFadeOut(gMPlayTable[uVar6].info,speed);
+                if (IsMusicPlayerPlaying(playerIndex2)) {
+                    m4aMPlayFadeOut(gMPlayTable[playerIndex2].info,speed);
                 }
                 else {
-                    m4aMPlayStop(gMPlayTable[uVar6].info);
+                    m4aMPlayStop(gMPlayTable[playerIndex2].info);
                     puVar3->unk0 = 0;
                     puVar3->songIndex = 997;
                     puVar3->unk4 = 0;
@@ -847,57 +848,55 @@ void sub_800C3F8(u16 songIndex, u16 speed)
             EnableInterrupts();
         }
     }
-    else {
-        if (IsSoundEffect(songIndex)) {
-            uVar8 = GetMusicPlayerIndex(songIndex);
-            preload = &gUnknown_3000FD8[uVar8];
-            puVar5 = gMPlayTable[uVar8].info;
-            cVar2 = DisableInterrupts();
-            if (preload->songIndex != 997) {
-                if (sub_800CAF0(uVar8) != '\0') {
-                    m4aMPlayFadeOut(puVar5,speed);
-                }
-                else {
-                    m4aMPlayStop(puVar5);
-                    preload->unk0 = 0;
-                    preload->songIndex = 997;
-                    preload->unk4 = 0;
-                    preload->unk6 = 0;
-                }
+    else if (IsSoundEffect(songIndex)) {
+        playerIndex = GetMusicPlayerIndex(songIndex);
+        preload = &gUnknown_3000FD8[playerIndex];
+        playerInfo = gMPlayTable[playerIndex].info;
+        cVar2 = DisableInterrupts();
+        if (preload->songIndex != 997) {
+            if (IsMusicPlayerPlaying(playerIndex)) {
+                m4aMPlayFadeOut(playerInfo,speed);
             }
-            if (cVar2 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(playerInfo);
+                preload->unk0 = 0;
+                preload->songIndex = 997;
+                preload->unk4 = 0;
+                preload->unk6 = 0;
             }
         }
-        else if (songIndex == 998) {
-            cVar3 = DisableInterrupts();
-            if ((gUnknown_202D690 != 0) && (gUnknown_202D68E != 997)) {
-                if (sub_800CAF0(1) != '\0') {
-                    m4aMPlayFadeOut(&gUnknown_2000970,speed);
-                }
-                else {
-                    m4aMPlayStop(&gUnknown_2000970);
-                    gUnknown_202D68E = 997;
-                }
+        if (cVar2 != '\0') {
+            EnableInterrupts();
+        }
+    }
+    else if (songIndex == 998) {
+        cVar3 = DisableInterrupts();
+        if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong != 997)) {
+            if (IsMusicPlayerPlaying(INDEX_FANFARE)) {
+                m4aMPlayFadeOut(&gMPlayInfo_Fanfare,speed);
             }
-            if (cVar3 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
+                gCurrentFanfareSong = 997;
             }
         }
-        else if (IsFanfare(songIndex)) {
-            cVar4 = DisableInterrupts();
-            if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex)) {
-                if (sub_800CAF0(1) != '\0') {
-                    m4aMPlayFadeOut(&gUnknown_2000970,speed);
-                }
-                else {
-                    m4aMPlayStop(&gUnknown_2000970);
-                    gUnknown_202D68E = 997;
-                }
+        if (cVar3 != '\0') {
+            EnableInterrupts();
+        }
+    }
+    else if (IsFanfare(songIndex)) {
+        cVar4 = DisableInterrupts();
+        if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong == songIndex)) {
+            if (IsMusicPlayerPlaying(INDEX_FANFARE)) {
+                m4aMPlayFadeOut(&gMPlayInfo_Fanfare,speed);
             }
-            if (cVar4 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
+                gCurrentFanfareSong = 997;
             }
+        }
+        if (cVar4 != '\0') {
+            EnableInterrupts();
         }
     }
 }
@@ -911,10 +910,9 @@ bool8 sub_800C5D0(u16 songIndex)
 
   songIndex_u32 = songIndex;
   songIndex_u32_2 = songIndex_u32;
-  
 
   if (IsFanfare(songIndex_u32)) {
-    if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex_u32)) {
+    if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong == songIndex_u32)) {
       return TRUE;
     }
   }
@@ -923,7 +921,7 @@ bool8 sub_800C5D0(u16 songIndex)
     if (IsSoundEffect(songIndex_u32)) {
       uVar3 = GetMusicPlayerIndex(songIndex_u32);
       preload = &gUnknown_3000FD8[uVar3];
-      if ((1 < uVar3) && (preload->songIndex == songIndex_u32_2)) {
+      if ((INDEX_SE1 <= uVar3) && (preload->songIndex == songIndex_u32_2)) {
         return TRUE;
       }
     }

@@ -54,7 +54,7 @@ _0800C6A0:
 	strh r0, [r2]
 	b _0800C8A2
 	.align 2, 0
-_0800C6B4: .4byte gUnknown_202D68E
+_0800C6B4: .4byte gCurrentFanfareSong
 _0800C6B8: .4byte 0x000003e5
 _0800C6BC:
 	ldrh r0, [r3]
@@ -66,7 +66,7 @@ _0800C6C0:
 	cmp r1, r0
 	beq _0800C6D8
 	movs r0, 0
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C6D8
@@ -86,7 +86,7 @@ _0800C6E4:
 	.align 2, 0
 _0800C6F0: .4byte gCurrentBGSong
 _0800C6F4: .4byte 0x000003e7
-_0800C6F8: .4byte gUnknown_202D68E
+_0800C6F8: .4byte gCurrentFanfareSong
 _0800C6FC: .4byte 0x000003e5
 _0800C700:
 	ldr r0, _0800C724
@@ -95,7 +95,7 @@ _0800C700:
 	cmp r1, r0
 	beq _0800C718
 	movs r0, 0x1
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800C718
@@ -108,7 +108,7 @@ _0800C718:
 	strh r0, [r1]
 	b _0800C8A2
 	.align 2, 0
-_0800C724: .4byte gUnknown_202D68E
+_0800C724: .4byte gCurrentFanfareSong
 _0800C728: .4byte 0x000003e5
 _0800C72C: .4byte gUnknown_202D692
 _0800C730:
@@ -118,7 +118,7 @@ _0800C730:
 	cmp r1, r0
 	beq _0800C754
 	movs r0, 0x1
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C748
@@ -126,7 +126,7 @@ _0800C730:
 _0800C748:
 	b _0800C75A
 	.align 2, 0
-_0800C74C: .4byte gUnknown_202D68E
+_0800C74C: .4byte gCurrentFanfareSong
 _0800C750: .4byte 0x000003e5
 _0800C754:
 	ldr r0, _0800C76C
@@ -141,7 +141,7 @@ _0800C75A:
 	strh r0, [r1]
 	b _0800C8A2
 	.align 2, 0
-_0800C76C: .4byte gUnknown_2000970
+_0800C76C: .4byte gMPlayInfo_Fanfare
 _0800C770: .4byte gUnknown_202D692
 _0800C774:
 	ldr r3, _0800C794
@@ -187,7 +187,7 @@ _0800C7BE:
 _0800C7CC: .4byte gBGMusicPlayerState
 _0800C7D0: .4byte gMPlayInfo_BGM
 _0800C7D4: .4byte gUnknown_202D690
-_0800C7D8: .4byte gUnknown_202D68E
+_0800C7D8: .4byte gCurrentFanfareSong
 _0800C7DC: .4byte 0x000003e5
 _0800C7E0:
 	ldr r5, _0800C810
@@ -206,7 +206,7 @@ _0800C7E0:
 	cmp r1, r0
 	beq _0800C80A
 	movs r0, 0
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C8A2
@@ -225,7 +225,7 @@ _0800C81C:
 	cmp r1, r0
 	beq _0800C83C
 	movs r0, 0
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800C8A2
@@ -253,7 +253,7 @@ _0800C85C: .4byte gCurrentBGSong
 _0800C860: .4byte 0x000003e7
 _0800C864:
 	movs r0, 0
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -309,7 +309,7 @@ _0800C8D0:
 	beq _0800C8E4
 	lsls r0, r5, 16
 	lsrs r0, 16
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C926
@@ -322,7 +322,7 @@ _0800C8EC: .4byte 0x000003e7
 _0800C8F0:
 	lsls r0, r5, 16
 	lsrs r0, 16
-	bl sub_800CAF0
+	bl IsMusicPlayerPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

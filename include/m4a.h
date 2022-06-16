@@ -22,6 +22,12 @@ void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16
 void m4aSoundVSync(void);
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM; // BGM??
-extern struct MusicPlayerInfo gUnknown_2000970;
+extern struct MusicPlayerInfo gMPlayInfo_Fanfare;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_SE3;
+extern struct MusicPlayerInfo gMPlayInfo_SE4;
+extern struct MusicPlayerInfo gMPlayInfo_SE5;
+extern struct MusicPlayerInfo gMPlayInfo_SE6;
 
 #endif //GUARD_M4A_H

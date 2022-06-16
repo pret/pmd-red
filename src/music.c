@@ -10,7 +10,6 @@ extern void sub_809C730();
 extern bool8 DisableInterrupts();
 extern bool8 EnableInterrupts();
 
-extern void sub_800C3F8(u16, u16);
 extern void Random();
 extern void sub_800BA5C();
 extern void xxx_update_bg_sound_input();
@@ -48,11 +47,11 @@ void StopBGMusicVSync(void)
                 {
                     gUnknown_202D694 = 0;
                 }
-                else if(gBGMusicPlayerState == 1)
+                else if(gBGMusicPlayerState == BG_PLAYER_STATE_PLAYING)
                 {
                     gUnknown_202D694 = 1;
                 }
-                gBGMusicPlayerState = 4;
+                gBGMusicPlayerState = BG_PLAYER_STATE_STOPPED;
             }
         }
     }
@@ -72,9 +71,9 @@ void StartBGMusicVSync(void)
     {
         if(gCurrentBGSong != 999)
         {
-            if(gBGMusicPlayerState == 4)
+            if(gBGMusicPlayerState == BG_PLAYER_STATE_STOPPED)
             {
-                gBGMusicPlayerState = 1;
+                gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
                 if(gUnknown_202D694 != 0)
                 {
                     m4aSongNumStart(gCurrentBGSong);
@@ -98,30 +97,30 @@ void nullsub_179(void)
 }
 
 // Unused
-u8 sub_800CA38(u32 songIndex)
+bool8 IsValidSong(u32 songIndex)
 {
     if(IsBGSong(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) == 0)
+        if(GetMusicPlayerIndex(songIndex) == INDEX_BGM)
         {
-            return 1;
+            return TRUE;
         }
     }
     if(IsFanfare(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) == 1)
+        if(GetMusicPlayerIndex(songIndex) == INDEX_FANFARE)
         {
-            return 1;
+            return TRUE;
         }
     }
     else if(IsSoundEffect(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) > 1)
+        if(GetMusicPlayerIndex(songIndex) >= INDEX_SE1)
         {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void nullsub_19(void)
@@ -160,14 +159,14 @@ u16 GetMusicPlayerIndex(u16 songIndex)
     return gSongTable[songIndex].ms;
 }
 
-bool8 sub_800CAF0(u16 songIndex)
+bool8 IsMusicPlayerPlaying(u16 playerIndex)
 {
     // Had to cast this.. m4a_internal header has this as u32
-    if((u16)gMPlayTable[songIndex].info->status == 0)
+    if((u16)gMPlayTable[playerIndex].info->status == 0)
     {
-        return 0;
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
 void nullsub_20(u16 songIndex)
