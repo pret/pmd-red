@@ -96,7 +96,7 @@ extern void UpdateLuminousCaveDialogue(void);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
 void xxx_call_fade_out_bgm(u16 speed);
-void sub_801199C(u16 songIndex);
+void xxx_call_stop_fanfare_se(u16 songIndex);
 void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed);
 void sub_80977D0(void);
 void PlaySound(u32);
@@ -397,7 +397,7 @@ void UpdateLuminousCaveDialogue(void)
             ClearItemSlotAt(gUnknown_203B2B0->evoItem2_InvIndex);
         }
         FillInventoryGaps();
-        sub_801199C(0x1ff);
+        xxx_call_stop_fanfare_se(0x1ff);
         PlaySound(0xd2);
         if (gUnknown_203B2B0->pokeRenamed) {
                 BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);

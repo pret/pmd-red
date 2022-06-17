@@ -1232,7 +1232,7 @@ _08083CF2:
 	ldr r0, _08083D04
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 _08083CFC:
 	pop {r0}
 	bx r0
@@ -1248,7 +1248,7 @@ sub_8083D08:
 	lsls r0, 1
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D08
@@ -1259,7 +1259,7 @@ sub_8083D1C:
 	ldr r0, _08083D2C
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1272,7 +1272,7 @@ sub_8083D30:
 	ldr r0, _08083D40
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1286,7 +1286,7 @@ sub_8083D44:
 	lsls r0, 1
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D44
@@ -1297,7 +1297,7 @@ sub_8083D58:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xC8
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D58
@@ -1308,7 +1308,7 @@ sub_8083D68:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xCF
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D68
@@ -1319,7 +1319,7 @@ sub_8083D78:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xD3
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D78
@@ -1330,7 +1330,7 @@ sub_8083D88:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xCC
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083D88
@@ -1409,7 +1409,7 @@ sub_8083E28:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xCF
-	bl sub_800C074
+	bl PlayFanfareSE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083E28
@@ -1425,7 +1425,7 @@ PlaySoundEffect:
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r2, 0
-	bl sub_800C074
+	bl PlayFanfareSE
 _08083E4E:
 	pop {r0}
 	bx r0
@@ -1442,7 +1442,7 @@ sub_8083E58:
 	cmp r1, r0
 	beq _08083E6A
 	adds r0, r1, 0
-	bl sub_800C298
+	bl StopFanfareSE
 _08083E6A:
 	pop {r0}
 	bx r0
@@ -1450,17 +1450,17 @@ _08083E6A:
 _08083E70: .4byte 0x000003e5
 	thumb_func_end sub_8083E58
 
-	thumb_func_start sub_8083E74
-sub_8083E74:
+	thumb_func_start IsFanfareSEPlaying_2
+IsFanfareSEPlaying_2:
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_800C5D0
+	bl IsFanfareSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083E74
+	thumb_func_end IsFanfareSEPlaying_2
 
 	thumb_func_start sub_8083E88
 sub_8083E88:
@@ -1511,7 +1511,7 @@ sub_8083ED8:
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	ldr r0, _08083F00
 	ldr r1, [r0]
 	ldr r2, _08083F04
@@ -1538,7 +1538,7 @@ _08083F10: .4byte 0x0001ceda
 sub_8083F14:
 	push {lr}
 	bl sub_8083F34
-	bl sub_8011924
+	bl xxx_call_stop_bgm
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8083F14
@@ -1716,7 +1716,7 @@ _0808406C:
 	ldr r0, _0808407C
 	cmp r1, r0
 	bne _08084080
-	bl sub_800BF80
+	bl StopBGM
 	movs r0, 0
 	b _08084082
 	.align 2, 0

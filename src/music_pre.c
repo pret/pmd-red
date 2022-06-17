@@ -50,7 +50,8 @@ extern s16 gUnknown_203B0AE;
 extern s16 gUnknown_203B0B0;
 extern s16 gUnknown_203B0B2;
 
-struct unkStruct_3000FD8
+// PMD keeps it's own copy of music players for some reason
+struct PMDMusicPlayer
 {
     u16 unk0;
     u16 songIndex;
@@ -58,8 +59,8 @@ struct unkStruct_3000FD8
     u8 unk6;
 };
 
-extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
-extern struct unkStruct_3000FD8 gUnknown_3000FE8[8];
+extern struct PMDMusicPlayer gUnknown_3000FD8[8];
+extern struct PMDMusicPlayer gUnknown_3000FE8[8];
 
 extern u8 gUnknown_202D7FE;
 extern u16 gBldCnt;
@@ -80,7 +81,7 @@ enum
 extern void SoundVSync();
 extern void BlinkSavingIcon();
 
-void sub_800BF80(void);
+void StopBGM(void);
 void xxx_update_bg_sound_input(void);
 
 void UnusedIntrFunc(void)
@@ -394,9 +395,9 @@ void UpdateBGControlRegisters(void)
 
 void InitMusic(void)
 {
-    s32 counter;
+    s32 playerIndex;
 
-    struct unkStruct_3000FD8 *preload;
+    struct PMDMusicPlayer *musicPlayer;
 
     DmaStop(0);
     DmaStop(1);
@@ -413,23 +414,22 @@ void InitMusic(void)
     gUnknown_202D692 = 0;
     gUnknown_202D694 = 0;
 
-    for(counter = INDEX_BGM, preload = &gUnknown_3000FD8[0]; counter < INDEX_SE6 + 1; counter++, preload++)
+    for(playerIndex = INDEX_BGM, musicPlayer = &gUnknown_3000FD8[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++)
     {
-        preload->unk0 = 0;
-        preload->songIndex = 997;
-        preload->unk4 = 0;
-        preload->unk6 = 0;
+        musicPlayer->unk0 = 0;
+        musicPlayer->songIndex = 997;
+        musicPlayer->unk4 = 0;
+        musicPlayer->unk6 = 0;
     }
     nullsub_19();
 }
 
-void sub_800BDDC(void)
+void StopAllMusic(void)
 {
-    sub_800BF80();
-    sub_800C298(998);
-    sub_800C298(997);
+    StopBGM();
+    StopFanfareSE(998);
+    StopFanfareSE(997);
 }
-
 
 void StartNewBGM(u16 songIndex)
 {
@@ -518,7 +518,7 @@ void sub_800BF48(u16 songIndex)
     gUnknown_202D68C = songIndex;
 }
 
-void sub_800BF80(void)
+void StopBGM(void)
 {
     bool8 interrupt_flag = DisableInterrupts();
     if(gUnknown_202D690 == 0)
@@ -584,12 +584,12 @@ u16 GetCurrentBGSong(void)
     return gCurrentBGSong;
 }
 
-void sub_800C074(u16 songIndex, u16 param_2)
+void PlayFanfareSE(u16 songIndex, u16 param_2)
 {
   bool8 interrupt_flag;
   bool8 interrupt_flag2;
   u16 playerIndex;
-  struct unkStruct_3000FD8 *preload;
+  struct PMDMusicPlayer *musicPlayer;
 
   if (songIndex == 997)
     return;
@@ -672,24 +672,24 @@ void sub_800C074(u16 songIndex, u16 param_2)
     if (!IsSoundEffect(songIndex))
       return;
     playerIndex = GetMusicPlayerIndex(songIndex);
-    preload = &gUnknown_3000FD8[playerIndex]; // need to load this before comparison to match
+    musicPlayer = &gUnknown_3000FD8[playerIndex]; // need to load this before comparison to match
     if (playerIndex < INDEX_SE1)
         nullsub_20(songIndex);
     else
     {
       interrupt_flag2 = DisableInterrupts();
       m4aSongNumStart(songIndex);
-      preload->unk0 = 1;
-      preload->songIndex = songIndex;
+      musicPlayer->unk0 = 1;
+      musicPlayer->songIndex = songIndex;
       if(param_2 == 256)
       {
-        preload->unk6 = 0;
+        musicPlayer->unk6 = 0;
       }
       else
       {
-        preload->unk6 = 1;
+        musicPlayer->unk6 = 1;
       }
-      preload->unk4 = param_2;
+      musicPlayer->unk4 = param_2;
       if (interrupt_flag2)
         EnableInterrupts();
     }
@@ -701,7 +701,7 @@ void SetSoundEffectVolume(u16 songIndex, u16 volume)
   bool8 interrupt_flag;
   u16 playerIndex;
   struct MusicPlayerInfo *info;
-  struct unkStruct_3000FD8 *preload;
+  struct PMDMusicPlayer *musicPlayer;
 
   if (256 < volume) {
     volume = 256;
@@ -710,10 +710,10 @@ void SetSoundEffectVolume(u16 songIndex, u16 volume)
   if ((!IsFanfare(songIndex)) && (IsSoundEffect(songIndex))) {
     playerIndex = GetMusicPlayerIndex(songIndex);
     info = gMPlayTable[playerIndex].info;
-    preload = &gUnknown_3000FD8[playerIndex];
+    musicPlayer = &gUnknown_3000FD8[playerIndex];
     if (playerIndex >= INDEX_SE1) {
       interrupt_flag = DisableInterrupts();
-      if (preload->songIndex == songIndex) {
+      if (musicPlayer->songIndex == songIndex) {
         m4aMPlayVolumeControl(info, 0xf, volume);
       }
       if (interrupt_flag)
@@ -722,7 +722,7 @@ void SetSoundEffectVolume(u16 songIndex, u16 volume)
   }
 }
 
-void sub_800C298(u16 songIndex)
+void StopFanfareSE(u16 songIndex)
 {
     // Each section needs a var for interrupts..
     char cVar1;
@@ -732,20 +732,20 @@ void sub_800C298(u16 songIndex)
 
     u32 playerIndex;
     s32 playerIndex2;
-    struct MusicPlayerInfo *puVar6;
-    struct unkStruct_3000FD8 *preload;
-    struct unkStruct_3000FD8 *puVar3;
+    struct MusicPlayerInfo *info;
+    struct PMDMusicPlayer *musicPlayer;
+    struct PMDMusicPlayer *musicPlayer1;
 
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
 
-        for(playerIndex2 = INDEX_SE1, puVar3 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
             m4aMPlayStop(gMPlayTable[playerIndex2].info);
-            puVar3->unk0 = 0;
-            puVar3->songIndex = 997;
-            puVar3->unk4 = 0;
-            puVar3->unk6 = 0;
+            musicPlayer1->unk0 = 0;
+            musicPlayer1->songIndex = 997;
+            musicPlayer1->unk4 = 0;
+            musicPlayer1->unk6 = 0;
         }
         if (cVar1 != '\0') {
             EnableInterrupts();
@@ -754,19 +754,19 @@ void sub_800C298(u16 songIndex)
     else if (IsSoundEffect(songIndex))
     {
         playerIndex = GetMusicPlayerIndex(songIndex);
-        puVar6 = gMPlayTable[playerIndex].info;
-        preload = &gUnknown_3000FD8[playerIndex];
+        info = gMPlayTable[playerIndex].info;
+        musicPlayer = &gUnknown_3000FD8[playerIndex];
         if (playerIndex < INDEX_SE1) {
             nullsub_21(songIndex);
         }
         else {
             cVar2 = DisableInterrupts();
-            if (preload->songIndex == songIndex) {
-                m4aMPlayStop(puVar6);
-                preload->unk0 = 0;
-                preload->songIndex = 997;
-                preload->unk4 = 0;
-                preload->unk6 = 0;
+            if (musicPlayer->songIndex == songIndex) {
+                m4aMPlayStop(info);
+                musicPlayer->unk0 = 0;
+                musicPlayer->songIndex = 997;
+                musicPlayer->unk4 = 0;
+                musicPlayer->unk6 = 0;
             }
             if (cVar2 != '\0') {
                 EnableInterrupts();
@@ -801,7 +801,7 @@ void sub_800C298(u16 songIndex)
     }
 }
 
-void sub_800C3F8(u16 songIndex, u16 speed)
+void FadeOutFanfareSE(u16 songIndex, u16 speed)
 {
     char cVar1;
     char cVar2;
@@ -810,8 +810,8 @@ void sub_800C3F8(u16 songIndex, u16 speed)
     u32 comparison;
     s32 playerIndex2;
     u32 playerIndex;
-    struct unkStruct_3000FD8 *preload;
-    struct unkStruct_3000FD8 *puVar3;
+    struct PMDMusicPlayer *musicPlayer;
+    struct PMDMusicPlayer *musicPlayer1;
     struct MusicPlayerInfo *playerInfo;
 
     comparison = 0x80 << 17; // 16777216
@@ -829,18 +829,18 @@ void sub_800C3F8(u16 songIndex, u16 speed)
 
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
-        for(playerIndex2 = INDEX_SE1, puVar3 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
-            if (puVar3->songIndex != 997) {
+            if (musicPlayer1->songIndex != 997) {
                 if (IsMusicPlayerPlaying(playerIndex2)) {
                     m4aMPlayFadeOut(gMPlayTable[playerIndex2].info,speed);
                 }
                 else {
                     m4aMPlayStop(gMPlayTable[playerIndex2].info);
-                    puVar3->unk0 = 0;
-                    puVar3->songIndex = 997;
-                    puVar3->unk4 = 0;
-                    puVar3->unk6 = 0;
+                    musicPlayer1->unk0 = 0;
+                    musicPlayer1->songIndex = 997;
+                    musicPlayer1->unk4 = 0;
+                    musicPlayer1->unk6 = 0;
                 }
             }
         }
@@ -850,19 +850,19 @@ void sub_800C3F8(u16 songIndex, u16 speed)
     }
     else if (IsSoundEffect(songIndex)) {
         playerIndex = GetMusicPlayerIndex(songIndex);
-        preload = &gUnknown_3000FD8[playerIndex];
+        musicPlayer = &gUnknown_3000FD8[playerIndex];
         playerInfo = gMPlayTable[playerIndex].info;
         cVar2 = DisableInterrupts();
-        if (preload->songIndex != 997) {
+        if (musicPlayer->songIndex != 997) {
             if (IsMusicPlayerPlaying(playerIndex)) {
                 m4aMPlayFadeOut(playerInfo,speed);
             }
             else {
                 m4aMPlayStop(playerInfo);
-                preload->unk0 = 0;
-                preload->songIndex = 997;
-                preload->unk4 = 0;
-                preload->unk6 = 0;
+                musicPlayer->unk0 = 0;
+                musicPlayer->songIndex = 997;
+                musicPlayer->unk4 = 0;
+                musicPlayer->unk6 = 0;
             }
         }
         if (cVar2 != '\0') {
@@ -901,10 +901,10 @@ void sub_800C3F8(u16 songIndex, u16 speed)
     }
 }
 
-bool8 sub_800C5D0(u16 songIndex)
+bool8 IsFanfareSEPlaying(u16 songIndex)
 {
-  u32 uVar3;
-  struct unkStruct_3000FD8 *preload;
+  u32 playerIndex;
+  struct PMDMusicPlayer *musicPlayer;
   register u32 songIndex_u32 asm("r4");
   register u32 songIndex_u32_2 asm("r5");
 
@@ -919,9 +919,9 @@ bool8 sub_800C5D0(u16 songIndex)
   else
   {
     if (IsSoundEffect(songIndex_u32)) {
-      uVar3 = GetMusicPlayerIndex(songIndex_u32);
-      preload = &gUnknown_3000FD8[uVar3];
-      if ((INDEX_SE1 <= uVar3) && (preload->songIndex == songIndex_u32_2)) {
+      playerIndex = GetMusicPlayerIndex(songIndex_u32);
+      musicPlayer = &gUnknown_3000FD8[playerIndex];
+      if ((INDEX_SE1 <= playerIndex) && (musicPlayer->songIndex == songIndex_u32_2)) {
         return TRUE;
       }
     }

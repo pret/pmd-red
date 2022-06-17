@@ -426,7 +426,7 @@ sub_80993F0:
 	mov r10, r0
 	bl sub_801180C
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	ldr r1, _0809948C
 	ldr r2, _08099490
 	adds r0, r2, 0
@@ -661,7 +661,7 @@ _08099604:
 _08099620: .4byte gUnknown_203B46C
 _08099624:
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	bl sub_80A4AC4
 	bl sub_8099768
 	bl nullsub_103

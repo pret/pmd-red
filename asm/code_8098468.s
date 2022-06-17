@@ -94,7 +94,7 @@ _08098504:
 	cmp r0, 0
 	bne _08098522
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 _08098522:
 	ldr r1, _080985B4
 	ldr r2, _080985B8
@@ -490,7 +490,7 @@ _080988E4:
 	movs r0, 0x1E
 	bl sub_8098F44
 	movs r0, 0x1E
-	bl sub_80118C4
+	bl FadeOutAllMusic
 _080988F8:
 	bl GroundMap_Action
 	bl nullsub_124
@@ -572,7 +572,7 @@ _080989E8: .4byte gUnknown_20398A8
 _080989EC: .4byte gUnknown_20398B9
 _080989F0:
 	movs r0, 0x1E
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	movs r0, 0xF
 	b _08098BD2
 _080989FA:
@@ -779,7 +779,7 @@ _08098BC0:
 	movs r2, 0x1
 	bl sub_80018D8
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	movs r0, 0xE
 _08098BD2:
 	add sp, 0x8

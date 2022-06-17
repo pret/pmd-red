@@ -9,13 +9,10 @@
 #include "config.h"
 
 
-void sub_8011924(void);
+void xxx_call_stop_bgm(void);
 
 extern u8 sub_80023E4(u8);
-extern void sub_800C3F8(u16 r0, u16 r1);
-extern void sub_801199C(u16 r0);
-extern void sub_800C298(u16 r0);
-extern bool8 sub_800C5D0(u16 r0);
+extern void xxx_call_stop_fanfare_se(u16 r0);
 
 struct UnkSaveStruct1
 {
@@ -118,19 +115,19 @@ void sub_80117C4(void)
 // Some sound effect
 void sub_80117D0(void)
 {
-    sub_800C074(302, 256);
+    PlayFanfareSE(302, 256);
 }
 
 // Some sound effect
 void sub_80117E4(void)
 {
-    sub_800C074(303, 256);
+    PlayFanfareSE(303, 256);
 }
 
 // Some sound effect
 void sub_80117F8(void)
 {
-    sub_800C074(301, 256);
+    PlayFanfareSE(301, 256);
 }
 
 void sub_801180C(void)
@@ -170,18 +167,18 @@ void sub_8011860(void)
     }
 }
 
-void sub_80118A4(void)
+void StopAllMusic_1(void)
 {
-    sub_8011924();
-    sub_801199C(0x3e6);
-    sub_801199C(0x3e5);
+    xxx_call_stop_bgm();
+    xxx_call_stop_fanfare_se(998);
+    xxx_call_stop_fanfare_se(997);
 }
 
-void sub_80118C4(u16 r0)
+void FadeOutAllMusic(u16 speed)
 {
-    FadeOutBGM(r0);
-    sub_800C3F8(0x3e6, r0);
-    sub_800C3F8(0x3e5, r0);
+    FadeOutBGM(speed);
+    FadeOutFanfareSE(998, speed);
+    FadeOutFanfareSE(997, speed);
 }
 
 void xxx_call_start_new_bgm(u16 songIndex)
@@ -199,9 +196,9 @@ void sub_8011914(u16 songIndex)
     sub_800BF48(songIndex);
 }
 
-void sub_8011924()
+void xxx_call_stop_bgm()
 {
-    sub_800BF80();
+    StopBGM();
 }
 
 void xxx_call_fade_out_bgm(u16 speed)
@@ -222,34 +219,34 @@ u32 IsEqualtoBGTrack(u16 songIndex)
 
 void sub_8011974(u16 songIndex, u16 r1)
 {
-    sub_800C074(songIndex, r1);
+    PlayFanfareSE(songIndex, r1);
 }
 
 void PlaySound(u16 songIndex)
 {
-    sub_800C074(songIndex, 256);
+    PlayFanfareSE(songIndex, 256);
 }
 
-void sub_801199C(u16 songIndex)
+void xxx_call_stop_fanfare_se(u16 songIndex)
 {
-    sub_800C298(songIndex);
+    StopFanfareSE(songIndex);
 }
 
 void sub_80119AC(u16 songIndex, u16 r1)
 {
-    sub_800C3F8(songIndex, r1);
+    FadeOutFanfareSE(songIndex, r1);
 }
 
-bool8 sub_80119C0(u16 songIndex)
+bool8 IsFanfareSEPlaying_1(u16 songIndex)
 {
-    return sub_800C5D0(songIndex);
+    return IsFanfareSEPlaying(songIndex);
 }
 
 void PlayMenuSoundEffect(u32 r0)
 {
     if(gUnknown_202DE20 > 0)
         return;
-    sub_800C074(gUnknown_80D4144[r0], 256);
+    PlayFanfareSE(gUnknown_80D4144[r0], 256);
     gUnknown_202DE20 = 4;
 }
 
@@ -258,7 +255,7 @@ void sub_8011A04(void)
     if(gUnknown_202DE22 > 0)
         return;
     gUnknown_202DE22 = 3;
-    sub_800C074(305, 256);
+    PlayFanfareSE(305, 256);
 }
 
 void sub_8011A2C(u32 r0)

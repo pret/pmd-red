@@ -452,7 +452,7 @@ sub_80009D0:
 	mov r10, r0
 	bl sub_801180C
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	cmp r7, 0x7
 	bne _08000A30
 	cmp r4, 0x2
@@ -1161,7 +1161,7 @@ _08000FB8:
 	adds r0, r4, 0
 	adds r0, 0x80
 	bl SetDungeonLocationInfo
-	bl sub_8011924
+	bl xxx_call_stop_bgm
 	movs r1, 0
 	ldrsh r0, [r7, r1]
 	cmp r0, r6

@@ -3200,7 +3200,7 @@ _0805F1F8:
 	ldr r0, _0805F20C
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_800C074
+	bl PlayFanfareSE
 	b _0805F240
 	.align 2, 0
 _0805F208: .4byte gDungeonGlobalData

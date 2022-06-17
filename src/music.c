@@ -4,7 +4,7 @@
 #include "music.h"
 
 extern u8 sub_80023E4(u32);
-extern void sub_80118C4(u16);
+extern void FadeOutAllMusic(u16);
 extern void sub_809C730();
 
 extern bool8 DisableInterrupts();
@@ -32,8 +32,8 @@ void StopBGMusicVSync(void)
     bool8 interrupt_flag;
     u16 temp;
 
-    sub_800C3F8(0x3e5, 0x10);
-    sub_800C3F8(0x3e6, 0x10);
+    FadeOutFanfareSE(0x3e5, 0x10);
+    FadeOutFanfareSE(0x3e6, 0x10);
 
     interrupt_flag = DisableInterrupts();
     if(gUnknown_202D690 == 0)

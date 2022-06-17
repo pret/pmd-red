@@ -72,7 +72,7 @@ extern const char *sub_80A2B18(s16);
 extern u8 sub_8001CC4(u8, u8, u8);
 extern void xxx_inv_unk250_random_8091980(u32);
 extern u8 sub_80023E4(u32);
-extern void sub_80118C4(u16);
+extern void FadeOutAllMusic(u16);
 extern u8 sub_809C730();
 extern s16 sub_80A2750(s16);
 extern u8 sub_8001D44(u32, u32, s32);
@@ -209,7 +209,7 @@ bool8 sub_8098D80(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            sub_80118C4(r0);
+            FadeOutAllMusic(r0);
         }
         return TRUE;
     }
@@ -226,7 +226,7 @@ bool8 sub_8098DCC(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            sub_80118C4(r0);
+            FadeOutAllMusic(r0);
         }
         return TRUE;
     }

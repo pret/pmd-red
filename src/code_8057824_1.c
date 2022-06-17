@@ -334,7 +334,7 @@ extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
 extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct DungeonEntity *);
-extern u8 sub_8083E74(u32);
+extern bool8 IsFanfareSEPlaying_2(u32);
 extern void sub_8083F14();
 extern void sub_80861D4(struct DungeonEntity *, u32, u32);
 extern void sub_806FDF4(struct DungeonEntity *, struct DungeonEntity *, struct DungeonEntity **);
@@ -4546,7 +4546,7 @@ void CelebiJoinDialogue(void)
             {
                 sub_8083F14();
                 PlaySoundEffect(0xcc);
-                while (sub_8083E74(0xcc) != 0) {
+                while (IsFanfareSEPlaying_2(0xcc) != 0) {
                     sub_803E46C(0x46);
                 }
                 sub_8083E88(0x7f);
@@ -4746,7 +4746,7 @@ void CelebiJoinDialogue(void)
 	"\tbl sub_803E46C\n"
 "_0808C76E:\n"
 	"\tmovs r0, 0xCC\n"
-	"\tbl sub_8083E74\n"
+	"\tbl IsFanfareSEPlaying_2\n"
 	"\tlsls r0, 24\n"
 	"\tcmp r0, 0\n"
 	"\tbne _0808C768\n"

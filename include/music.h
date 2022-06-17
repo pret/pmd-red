@@ -14,16 +14,17 @@ void StartNewBGM(u16 songIndex);
 void FadeInNewBGM(u16 SongIndex, u16 speed);
 u16 GetCurrentBGSong(void);
 void sub_800BF48(u16 SongIndex);
-void sub_800BF80(void);
+void StopBGM(void); // stops all BGM, fanfares and SE's
 void FadeOutBGM(u16 speed);
-void sub_800C074(u16 SongIndex, u16 param_2);
-void sub_800C298(u16 songIndex);
-void sub_800C3F8(u16 songIndex, u16 speed);
+void PlayFanfareSE(u16 SongIndex, u16 param_2);
+void StopFanfareSE(u16 songIndex);
+void FadeOutFanfareSE(u16 songIndex, u16 speed);
+bool8 IsFanfareSEPlaying(u16 songIndex);
 
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);
 
-enum GetMusicPlayerIndex
+enum MusicPlayerIndex
 {
     INDEX_BGM,
     INDEX_FANFARE,
