@@ -23,7 +23,7 @@ extern u16 gBGMusicPlayerState;
 
 extern u16 gCurrentBGSong;
 extern u16 gUnknown_202D690;
-extern u8 gUnknown_202D694;
+extern u8 gRestartBGM;
 extern u32 gUnknown_203B0B8;
 extern u16 gRawKeyInput;
 
@@ -45,11 +45,11 @@ void StopBGMusicVSync(void)
             {
                 if(gBGMusicPlayerState == 2)
                 {
-                    gUnknown_202D694 = 0;
+                    gRestartBGM = FALSE;
                 }
                 else if(gBGMusicPlayerState == BG_PLAYER_STATE_PLAYING)
                 {
-                    gUnknown_202D694 = 1;
+                    gRestartBGM = TRUE;
                 }
                 gBGMusicPlayerState = BG_PLAYER_STATE_STOPPED;
             }
@@ -74,7 +74,7 @@ void StartBGMusicVSync(void)
             if(gBGMusicPlayerState == BG_PLAYER_STATE_STOPPED)
             {
                 gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
-                if(gUnknown_202D694 != 0)
+                if(gRestartBGM)
                 {
                     m4aSongNumStart(gCurrentBGSong);
                 }

@@ -163,7 +163,7 @@ _0800C774:
 _0800C794: .4byte gCurrentBGSong
 _0800C798: .4byte 0x000003e7
 _0800C79C: .4byte gBGMusicPlayerState
-_0800C7A0: .4byte gUnknown_202D694
+_0800C7A0: .4byte gRestartBGM
 _0800C7A4:
 	ldr r0, _0800C7B0
 	movs r1, 0x4

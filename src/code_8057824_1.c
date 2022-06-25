@@ -3721,7 +3721,7 @@ void JirachiWish(void)
   s32 temp3;
 
   JirachiEntity = GetEntityFromClientType(0x1a);
-  CopySpeciesNametoBuffer(gUnknown_202E038,0x19d); // SPECIES_JIRACHI
+  CopySpeciesNametoBuffer(gUnknown_202E038, SPECIES_JIRACHI);
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(JirachiEntity);
   sub_8041888(0);

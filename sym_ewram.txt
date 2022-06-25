@@ -329,7 +329,7 @@ gUnknown_202D690 = .; /* 202D690 */
 gUnknown_202D692 = .; /* 202D692 */
 	. += 0x2;
 
-gUnknown_202D694 = .; /* 202D694 */
+gRestartBGM = .; /* 202D694 */
 	. += 0x4;
 
 gBG0Control = .; /* 202D698 */

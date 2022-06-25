@@ -37,7 +37,7 @@ extern u16 gUnknown_202D68C;
 extern u16 gCurrentFanfareSong;
 extern u16 gUnknown_202D690;
 extern u16 gUnknown_202D692;
-extern u8 gUnknown_202D694;
+extern bool8 gRestartBGM;
 extern u8 gUnknown_203B099;
 extern u8 gUnknown_203B09B;
 extern u32 gUnknown_203B09C;
@@ -412,7 +412,7 @@ void InitMusic(void)
     gCurrentFanfareSong = 997;
     gUnknown_202D690 = 0;
     gUnknown_202D692 = 0;
-    gUnknown_202D694 = 0;
+    gRestartBGM = FALSE;
 
     for(playerIndex = INDEX_BGM, musicPlayer = &gUnknown_3000FD8[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++)
     {
@@ -451,7 +451,7 @@ void StartNewBGM(u16 songIndex)
     }
     interrupt_flag = DisableInterrupts();
     gCurrentBGSong = songIndex;
-    gUnknown_202D694 = 1;
+    gRestartBGM = TRUE;
 
     if(gUnknown_202D690 == 0)
     {
@@ -491,7 +491,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
 
     interrupt_flag = DisableInterrupts();
     gCurrentBGSong = songIndex;
-    gUnknown_202D694 = 1;
+    gRestartBGM = TRUE;
 
     if(gUnknown_202D690 == 0)
     {
@@ -609,7 +609,7 @@ void PlayFanfareSE(u16 songIndex, u16 param_2)
             {
                 gUnknown_202D690 = 1;
                 gUnknown_202D692 = 16;
-                gUnknown_202D694 = 0;
+                gRestartBGM = FALSE;
                 m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, 1);
             }
             else if (gBGMusicPlayerState == 3)
@@ -654,7 +654,7 @@ void PlayFanfareSE(u16 songIndex, u16 param_2)
         case MUS_FRIEND_AREA_ENCLOSED_ISLAND:
         case MUS_FRIEND_AREA_FINAL_ISLAND:
         case MUS_FRIEND_AREA_HEALING_FOREST:
-            gUnknown_202D694 = 1;
+            gRestartBGM = TRUE;
             break;
         default:
             break;
