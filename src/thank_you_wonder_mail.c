@@ -8,6 +8,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "input.h"
+#include "rescue_password_menu.h"
 #include "text.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
@@ -236,7 +237,7 @@ extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
 extern u8 sub_809539C(u32, u32);
 extern u8 sub_800D588(void);
-extern u32 sub_803C200(u8 *, u32);
+extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
@@ -829,25 +830,21 @@ void HandleThankYouMailPasswordMenu(void)
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(0x20,gUnknown_203B2C4->passwordBuffer,&temp))
+        switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,gUnknown_203B2C4->passwordBuffer,&temp))
         {
-            case 0x11:
-                // Wrong password
+            case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                 sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, &gUnknown_203B2C4->faceFile, 0xc);
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_WRONG);
                 break;
-            case 0x14:
-                // Incorrect password
+            case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
                 sub_80141B4(gUnknown_80DF208, 0, &gUnknown_203B2C4->faceFile, 0x10d);
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
-            case 0xB:
-                // Not eligible to receive
+            case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
                 sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
-            case 0x18:
-                // I think this is when password works successfully
+            case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
                 uVar1 = sub_809539C(4,temp.unk10);
                 puVar5 = sub_8095228(uVar1);
                 *puVar5 = temp;
@@ -1423,7 +1420,7 @@ void UpdateThankYouMailText(void)
         else
             gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
         gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
-        gUnknown_203B2C4->unk53C.teamRankPtsReward = sub_803C200(&puVar4->dungeon, 0); // unk560
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&puVar4->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C

@@ -736,7 +736,7 @@ _0802D034:
 	ldr r0, [r4, 0x14]
 	str r0, [sp, 0x54]
 	add r0, sp, 0x8
-	bl sub_803B6D4
+	bl CreateRescueTitle
 	adds r5, 0x1
 _0802D076:
 	ldr r0, [r6]

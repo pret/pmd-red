@@ -884,8 +884,8 @@ sub_803B6B0:
 _0803B6D0: .4byte gUnknown_80E8B94
 	thumb_func_end sub_803B6B0
 
-	thumb_func_start sub_803B6D4
-sub_803B6D4:
+	thumb_func_start CreateRescueTitle
+CreateRescueTitle:
 	push {r4-r7,lr}
 	sub sp, 0x144
 	adds r7, r0, 0
@@ -1204,7 +1204,7 @@ _0803B968:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803B6D4
+	thumb_func_end CreateRescueTitle
 
 	thumb_func_start CreateRescueDescription
 CreateRescueDescription:

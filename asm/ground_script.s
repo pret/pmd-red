@@ -768,7 +768,7 @@ _0809DF24:
 	str r0, [r1]
 	add r0, sp, 0x4
 	ldrh r0, [r0, 0x2]
-	bl sub_80119C0
+	bl IsFanfareSEPlaying_1
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809DF42
@@ -4176,7 +4176,7 @@ _0809FCCE:
 	.align 2, 0
 _0809FCE4: .4byte gUnknown_2039D98
 _0809FCE8:
-	bl sub_80118A4
+	bl StopAllMusic_1
 	bl _0809EAE0
 _0809FCF0:
 	add r0, sp, 0x8
@@ -4190,7 +4190,7 @@ _0809FCF0:
 _0809FD00:
 	movs r0, 0x1E
 _0809FD02:
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	bl _0809EAE0
 _0809FD0A:
 	add r0, sp, 0x8
@@ -4266,7 +4266,7 @@ _0809FD90:
 	.align 2, 0
 _0809FD9C: .4byte 0x000003e7
 _0809FDA0:
-	bl sub_8011924
+	bl xxx_call_stop_bgm
 	bl _0809EAE0
 _0809FDA8:
 	add r0, sp, 0x8
@@ -4294,7 +4294,7 @@ _0809FDD4:
 	ldr r0, [sp, 0xC]
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_801199C
+	bl xxx_call_stop_fanfare_se
 	bl _0809EAE0
 _0809FDE2:
 	ldr r0, [sp, 0xC]
@@ -7349,7 +7349,7 @@ _080A1730:
 	bl sub_80A2740
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80969D0
+	bl CountJobsinDungeon
 	movs r1, 0
 	cmp r0, 0
 	ble _080A1750
@@ -8734,7 +8734,7 @@ _080A229E:
 	bl sub_8098F00
 	lsls r0, r5, 16
 	lsrs r0, 16
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	b _080A236A
 _080A22AE:
 	bl GetCurrentBGSong

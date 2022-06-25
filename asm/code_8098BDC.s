@@ -5,137 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8098FCC
-sub_8098FCC:
-	push {r4,lr}
-	movs r0, 0
-	movs r1, 0x13
-	bl sub_8001658
-	lsls r0, 16
-	asrs r1, r0, 16
-	adds r2, r1, 0
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0809909E
-	cmp r1, 0x51
-	bne _08098FF6
-	movs r0, 0
-	movs r1, 0x14
-	bl sub_8001658
-	lsls r0, 16
-	asrs r0, 16
-	b _08098FF8
-_08098FF6:
-	adds r0, r2, 0
-_08098FF8:
-	bl sub_80A2608
-	adds r4, r0, 0
-	ldr r0, _0809900C
-	ldr r0, [r0]
-	cmp r0, 0x9
-	bne _08099010
-	movs r1, 0x2
-	ldrsh r0, [r4, r1]
-	b _080990B2
-	.align 2, 0
-_0809900C: .4byte gUnknown_20398B4
-_08099010:
-	ldrh r0, [r4, 0x4]
-	subs r0, 0xB2
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x17
-	bhi _080990AE
-	lsls r0, 2
-	ldr r1, _08099028
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08099028: .4byte _0809902C
-	.align 2, 0
-_0809902C:
-	.4byte _0809908C
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990A2
-	.4byte _080990AE
-	.4byte _080990A2
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990A2
-	.4byte _080990AE
-	.4byte _080990AE
-	.4byte _080990A2
-_0809908C:
-	movs r2, 0x1
-	negs r2, r2
-	movs r0, 0x3
-	movs r1, 0x2
-	bl sub_8001D44
-	lsls r0, 24
-	cmp r0, 0
-	beq _080990AE
-_0809909E:
-	movs r0, 0xC
-	b _080990B2
-_080990A2:
-	movs r0, 0x5
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809909E
-_080990AE:
-	movs r1, 0x4
-	ldrsh r0, [r4, r1]
-_080990B2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8098FCC
-
-	thumb_func_start sub_80990B8
-sub_80990B8:
-	push {lr}
-	movs r0, 0xB
-	bl sub_8098FCC
-	lsls r0, 16
-	asrs r2, r0, 16
-	movs r0, 0x1
-	negs r0, r0
-	cmp r2, r0
-	bne _080990D2
-	bl sub_8098FB4
-	b _080990E4
-_080990D2:
-	ldr r1, _080990E8
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r1
-	movs r1, 0x2
-	ldrsh r0, [r0, r1]
-	bl sub_80A2B18
-_080990E4:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080990E8: .4byte gUnknown_811BAF4
-	thumb_func_end sub_80990B8
-
 	thumb_func_start sub_80990EC
 sub_80990EC:
 	push {r4-r7,lr}
@@ -557,7 +426,7 @@ sub_80993F0:
 	mov r10, r0
 	bl sub_801180C
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	ldr r1, _0809948C
 	ldr r2, _08099490
 	adds r0, r2, 0
@@ -792,7 +661,7 @@ _08099604:
 _08099620: .4byte gUnknown_203B46C
 _08099624:
 	movs r0, 0x10
-	bl sub_80118C4
+	bl FadeOutAllMusic
 	bl sub_80A4AC4
 	bl sub_8099768
 	bl nullsub_103
@@ -8229,127 +8098,5 @@ _0809CFDA:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_809CDC8
-
-	thumb_func_start sub_809CFE8
-sub_809CFE8:
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	adds r2, r1, 0
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D014
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D004
-	movs r0, 0x3
-	b _0809D052
-_0809D004:
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D010
-	movs r0, 0x5
-	b _0809D052
-_0809D010:
-	movs r0, 0x4
-	b _0809D052
-_0809D014:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D038
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D028
-	movs r0, 0x1
-	b _0809D052
-_0809D028:
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D034
-	movs r0, 0x7
-	b _0809D052
-_0809D034:
-	movs r0, 0
-	b _0809D052
-_0809D038:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0809D044
-	movs r0, 0x2
-	b _0809D052
-_0809D044:
-	movs r0, 0x20
-	ands r2, r0
-	cmp r2, 0
-	bne _0809D050
-	subs r0, 0x21
-	b _0809D052
-_0809D050:
-	movs r0, 0x6
-_0809D052:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809CFE8
-
-	thumb_func_start sub_809D058
-sub_809D058:
-	push {lr}
-	ldr r1, [r0, 0x4]
-	cmp r1, 0x3F
-	bgt _0809D076
-	ldr r0, [r0]
-	cmp r0, 0x67
-	bgt _0809D06A
-	movs r0, 0x5
-	b _0809D0A6
-_0809D06A:
-	cmp r0, 0x88
-	ble _0809D072
-	movs r0, 0x3
-	b _0809D0A6
-_0809D072:
-	movs r0, 0x4
-	b _0809D0A6
-_0809D076:
-	cmp r1, 0x60
-	ble _0809D090
-	ldr r0, [r0]
-	cmp r0, 0x67
-	bgt _0809D084
-	movs r0, 0x7
-	b _0809D0A6
-_0809D084:
-	cmp r0, 0x88
-	ble _0809D08C
-	movs r0, 0x1
-	b _0809D0A6
-_0809D08C:
-	movs r0, 0
-	b _0809D0A6
-_0809D090:
-	ldr r0, [r0]
-	cmp r0, 0x67
-	bgt _0809D09A
-	movs r0, 0x6
-	b _0809D0A6
-_0809D09A:
-	cmp r0, 0x88
-	bgt _0809D0A4
-	movs r0, 0x1
-	negs r0, r0
-	b _0809D0A6
-_0809D0A4:
-	movs r0, 0x2
-_0809D0A6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809D058
 
         .align 2,0

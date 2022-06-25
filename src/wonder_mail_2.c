@@ -141,8 +141,8 @@ extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern void sub_803C37C(u8 *, u32, u8 *);
-extern u32 sub_803C200(u8 *, u32);
+extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
+extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern u8 sub_80023E4(u32);
 extern void nullsub_131(void);
@@ -387,7 +387,7 @@ void sub_802B3E0(void)
         sub_8097790();
         iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
         sub_803C37C(&iVar3->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = sub_803C200(&iVar3->dungeon, 0);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&iVar3->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = 0;
         gUnknown_203B2C8->unk114.itemRewards[2] = 0;
         gUnknown_203B2C8->unk114.numItems = 10;
@@ -643,7 +643,7 @@ void sub_802B880(void)
 void sub_802B8D4(void)
 {
     s32 iVar2;
-    s32 retvar;
+    s32 y;
     s32 new_index;
     u8 mailIndex;
 
@@ -654,12 +654,12 @@ void sub_802B8D4(void)
     sub_8012BC4(((gUnknown_80DFBE8[2] << 3) + 4), 0, gUnknown_203B2CC->unk56 + 1, 2, 7, gUnknown_203B2CC->unk6C);
     for(iVar2 = 0; iVar2 < gUnknown_203B2CC->unk52; iVar2++)
     {
-        retvar = sub_8013800(&gUnknown_203B2CC->unk38, iVar2);
+        y = sub_8013800(&gUnknown_203B2CC->unk38, iVar2);
         new_index =  (gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + iVar2;
         mailIndex = gUnknown_203B2CC->receivedNewsletters[new_index];
-        sub_803B6B0(0xA, retvar, 6, gUnknown_203B2CC->unk6C);
+        sub_803B6B0(0xA, y, 6, gUnknown_203B2CC->unk6C);
         sub_802BC7C();
-        xxx_format_and_draw(0x15, retvar, GetPokemonMailHeadline(mailIndex), gUnknown_203B2CC->unk6C, 0);
+        xxx_format_and_draw(0x15, y, GetPokemonMailHeadline(mailIndex), gUnknown_203B2CC->unk6C, 0);
     }
     sub_80073E0(gUnknown_203B2CC->unk6C);
 }
@@ -952,4 +952,64 @@ void sub_802BEDC(void)
         MemoryFree(gUnknown_203B2D8);
         gUnknown_203B2D8 = NULL;
     }
+}
+
+NAKED
+void sub_802BF30(void)
+{
+    asm_unified(
+	"\tpush {r4,lr}\n"
+	"\tldr r4, _0802BF9C\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xA0\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r1, 0x1\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xA1\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xA2\n"
+	"\tmovs r1, 0xC\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xA3\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r1, 0x1E\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tmovs r1, 0x18\n"
+	"\tbl sub_8009614\n"
+	"\tadds r0, 0x2\n"
+	"\tlsls r0, 16\n"
+	"\tldr r2, [r4]\n"
+	"\tldr r3, [r2, 0x38]\n"
+	"\tlsls r1, r3, 1\n"
+	"\tadds r1, r3\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r2, r1\n"
+	"\tadds r1, 0x4E\n"
+	"\tasrs r3, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r1, [r2, 0x38]\n"
+	"\tlsls r0, r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tlsls r0, 3\n"
+	"\tadds r2, r0\n"
+	"\tadds r3, 0x2\n"
+	"\tadds r2, 0x50\n"
+	"\tstrh r3, [r2]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x40\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0802BF9C: .4byte gUnknown_203B2D8"
+    );
 }

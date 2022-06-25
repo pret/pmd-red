@@ -125,7 +125,7 @@ SECTIONS {
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
-        asm/wonder_mail_2.o(.text);
+        src/wonder_mail_2_mid.o(.text);
         src/wonder_mail_2_1.o(.text);
         asm/wonder_mail_802C860.o(.text);
         src/wonder_mail_3.o(.text);
@@ -274,8 +274,6 @@ SECTIONS {
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
         src/code_8057824_1.o(.text);
-        asm/jirachi_wish.o(.text);
-        src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
         src/pokemon_mid.o(.text);

@@ -4,6 +4,7 @@
 #include "bg.h"
 #include "music.h"
 #include "input.h"
+#include "constants/bg_music.h"
 
 extern bool8 EnableInterrupts(void);
 extern bool8 DisableInterrupts(void);
@@ -33,10 +34,10 @@ extern u32 gUnknown_203B0A4;
 extern u16 gBGMusicPlayerState;
 extern u16 gCurrentBGSong;
 extern u16 gUnknown_202D68C;
-extern u16 gUnknown_202D68E;
+extern u16 gCurrentFanfareSong;
 extern u16 gUnknown_202D690;
 extern u16 gUnknown_202D692;
-extern u8 gUnknown_202D694;
+extern bool8 gRestartBGM;
 extern u8 gUnknown_203B099;
 extern u8 gUnknown_203B09B;
 extern u32 gUnknown_203B09C;
@@ -49,7 +50,8 @@ extern s16 gUnknown_203B0AE;
 extern s16 gUnknown_203B0B0;
 extern s16 gUnknown_203B0B2;
 
-struct unkStruct_3000FD8
+// PMD keeps it's own copy of music players for some reason
+struct PMDMusicPlayer
 {
     u16 unk0;
     u16 songIndex;
@@ -57,8 +59,8 @@ struct unkStruct_3000FD8
     u8 unk6;
 };
 
-extern struct unkStruct_3000FD8 gUnknown_3000FD8[8];
-extern struct unkStruct_3000FD8 gUnknown_3000FE8[4];
+extern struct PMDMusicPlayer gUnknown_3000FD8[8];
+extern struct PMDMusicPlayer gUnknown_3000FE8[8];
 
 extern u8 gUnknown_202D7FE;
 extern u16 gBldCnt;
@@ -79,7 +81,7 @@ enum
 extern void SoundVSync();
 extern void BlinkSavingIcon();
 
-void sub_800BF80(void);
+void StopBGM(void);
 void xxx_update_bg_sound_input(void);
 
 void UnusedIntrFunc(void)
@@ -393,9 +395,9 @@ void UpdateBGControlRegisters(void)
 
 void InitMusic(void)
 {
-    s32 counter;
+    s32 playerIndex;
 
-    struct unkStruct_3000FD8 *preload;
+    struct PMDMusicPlayer *musicPlayer;
 
     DmaStop(0);
     DmaStop(1);
@@ -407,28 +409,27 @@ void InitMusic(void)
     gBGMusicPlayerState = 0;
     gCurrentBGSong = 999;
     gUnknown_202D68C = 999;
-    gUnknown_202D68E = 997;
+    gCurrentFanfareSong = 997;
     gUnknown_202D690 = 0;
     gUnknown_202D692 = 0;
-    gUnknown_202D694 = 0;
+    gRestartBGM = FALSE;
 
-    for(counter = 0, preload = &gUnknown_3000FD8[0]; counter < 8; counter++, preload++)
+    for(playerIndex = INDEX_BGM, musicPlayer = &gUnknown_3000FD8[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++)
     {
-        preload->unk0 = 0;
-        preload->songIndex = 997;
-        preload->unk4 = 0;
-        preload->unk6 = 0;
+        musicPlayer->unk0 = 0;
+        musicPlayer->songIndex = 997;
+        musicPlayer->unk4 = 0;
+        musicPlayer->unk6 = 0;
     }
     nullsub_19();
 }
 
-void sub_800BDDC(void)
+void StopAllMusic(void)
 {
-    sub_800BF80();
-    sub_800C298(998);
-    sub_800C298(997);
+    StopBGM();
+    StopFanfareSE(998);
+    StopFanfareSE(997);
 }
-
 
 void StartNewBGM(u16 songIndex)
 {
@@ -443,33 +444,33 @@ void StartNewBGM(u16 songIndex)
         if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
     }
-    if(GetMusicPlayerIndex(songIndex))
+    if(GetMusicPlayerIndex(songIndex) != INDEX_BGM)
     {
         nullsub_20(songIndex);
         return;
     }
     interrupt_flag = DisableInterrupts();
     gCurrentBGSong = songIndex;
-    gUnknown_202D694 = 1;
+    gRestartBGM = TRUE;
 
     if(gUnknown_202D690 == 0)
     {
-        gBGMusicPlayerState = 1;
+        gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
         m4aSongNumStart(songIndex);
     }
     if(interrupt_flag)
         EnableInterrupts();
 }
 
-void FadeInNewBGM(u16 SongIndex, u16 speed)
+void FadeInNewBGM(u16 songIndex, u16 speed)
 {
     bool8 interrupt_flag;
 
-    if(!IsBGSong(SongIndex))
+    if(!IsBGSong(songIndex))
         return;
-    if(SongIndex == 999)
+    if(songIndex == 999)
         return;
-    if(SongIndex == gCurrentBGSong)
+    if(songIndex == gCurrentBGSong)
     {
         if((u16)(gBGMusicPlayerState - 1) <= 1)
             return;
@@ -489,35 +490,35 @@ void FadeInNewBGM(u16 SongIndex, u16 speed)
     }
 
     interrupt_flag = DisableInterrupts();
-    gCurrentBGSong = SongIndex;
-    gUnknown_202D694 = 1;
+    gCurrentBGSong = songIndex;
+    gRestartBGM = TRUE;
 
     if(gUnknown_202D690 == 0)
     {
-        gBGMusicPlayerState = 1;
-        m4aSongNumStart(SongIndex);
+        gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
+        m4aSongNumStart(songIndex);
         m4aMPlayImmInit(&gMPlayInfo_BGM);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0);
-        m4aSongNumStop(SongIndex);
+        m4aSongNumStop(songIndex);
         m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
     }
     if(interrupt_flag)
         EnableInterrupts();
 }
 
-void sub_800BF48(u16 SongIndex)
+void sub_800BF48(u16 songIndex)
 {
     u16 preload  = gCurrentBGSong;
     if(preload == 999)
     {
-        StartNewBGM(SongIndex);
+        StartNewBGM(songIndex);
         gUnknown_202D68C = preload;
         return;
     }
-    gUnknown_202D68C = SongIndex;
+    gUnknown_202D68C = songIndex;
 }
 
-void sub_800BF80(void)
+void StopBGM(void)
 {
     bool8 interrupt_flag = DisableInterrupts();
     if(gUnknown_202D690 == 0)
@@ -583,23 +584,23 @@ u16 GetCurrentBGSong(void)
     return gCurrentBGSong;
 }
 
-void sub_800C074(u16 SongIndex, u16 param_2)
+void PlayFanfareSE(u16 songIndex, u16 param_2)
 {
   bool8 interrupt_flag;
   bool8 interrupt_flag2;
-  u16 msVar;
-  struct unkStruct_3000FD8 *preload;
+  u16 playerIndex;
+  struct PMDMusicPlayer *musicPlayer;
 
-  if (SongIndex == 997)
+  if (songIndex == 997)
     return;
   if (param_2 > 256)
     param_2 = 256;
 
-  if (sub_800CACC(SongIndex)) 
+  if (IsFanfare(songIndex)) 
   {
-    if (GetMusicPlayerIndex(SongIndex) == 1) {
+    if (GetMusicPlayerIndex(songIndex) == INDEX_FANFARE) {
       interrupt_flag = DisableInterrupts();
-      gUnknown_202D68E = SongIndex;
+      gCurrentFanfareSong = songIndex;
       if(gUnknown_202D690 == 0)
       {
         if (gCurrentBGSong != 999) 
@@ -608,7 +609,7 @@ void sub_800C074(u16 SongIndex, u16 param_2)
             {
                 gUnknown_202D690 = 1;
                 gUnknown_202D692 = 16;
-                gUnknown_202D694 = 0;
+                gRestartBGM = FALSE;
                 m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, 1);
             }
             else if (gBGMusicPlayerState == 3)
@@ -617,14 +618,14 @@ void sub_800C074(u16 SongIndex, u16 param_2)
             {
                 gUnknown_202D690 = 3;
                 m4aMPlayStop(&gMPlayInfo_BGM);
-                m4aSongNumStart(gUnknown_202D68E);
+                m4aSongNumStart(gCurrentFanfareSong);
             }
         }
         else
         {
             gUnknown_202D690 = 3;
             m4aMPlayStop(&gMPlayInfo_BGM);
-            m4aSongNumStart(gUnknown_202D68E);
+            m4aSongNumStart(gCurrentFanfareSong);
         }
       }
       else
@@ -632,28 +633,28 @@ void sub_800C074(u16 SongIndex, u16 param_2)
         if (1 < (u16)(gUnknown_202D690 - 1)) 
         {
             m4aMPlayStop(&gMPlayInfo_BGM);
-            m4aSongNumStart(gUnknown_202D68E);
+            m4aSongNumStart(gCurrentFanfareSong);
             gUnknown_202D690 = 3;
         }
       }
       switch(gCurrentBGSong)
       {
-        case 26: // 0x1A
-        case 27: // 0x1B
-        case 28: // 0x1C
-        case 29: // 0x1D
-        case 30: // 0x1E
-        case 31: // 0x1F
-        case 34: // 0x22
-        case 35: // 0x23
-        case 37: // 0x25
-        case 38: // 0x26
-        case 117: // 0x75
-        case 118: // 0x76
-        case 119: // 0x77
-        case 122: // 0x7A
-        case 127: // 0x7F
-            gUnknown_202D694 = 1;
+        case MUS_RAYQUAZAS_DOMAIN:
+        case MUS_FRIEND_AREA_STRATOS_LOOKOUT:
+        case MUS_FRIEND_AREA_RAINBOW_PEAK:
+        case MUS_DREAM_EATER:
+        case MUS_FRIEND_AREA_DEEPSEA_CURRENT:
+        case MUS_FRIEND_AREA_SEAFLOOR_CAVE:
+        case MUS_FRIEND_AREA_VOLCANIC_PIT:
+        case MUS_FRIEND_AREA_CRYPTIC_CAVE:
+        case MUS_THE_OTHER_SIDE:
+        case MUS_THE_MOUNTAIN_OF_FIRE:
+        case MUS_FRIEND_AREA_LEGENDARY_ISLAND:
+        case MUS_FRIEND_AREA_SOUTHERN_ISLAND:
+        case MUS_FRIEND_AREA_ENCLOSED_ISLAND:
+        case MUS_FRIEND_AREA_FINAL_ISLAND:
+        case MUS_FRIEND_AREA_HEALING_FOREST:
+            gRestartBGM = TRUE;
             break;
         default:
             break;
@@ -663,56 +664,56 @@ void sub_800C074(u16 SongIndex, u16 param_2)
     }
     else
     {
-        nullsub_20(SongIndex);
+        nullsub_20(songIndex);
     }
   }
   else
   {
-    if (!sub_800CAAC(SongIndex))
+    if (!IsSoundEffect(songIndex))
       return;
-    msVar = GetMusicPlayerIndex(SongIndex);
-    preload = &gUnknown_3000FD8[msVar]; // need to load this before comparison to match
-    if (msVar <= 1)
-        nullsub_20(SongIndex);
+    playerIndex = GetMusicPlayerIndex(songIndex);
+    musicPlayer = &gUnknown_3000FD8[playerIndex]; // need to load this before comparison to match
+    if (playerIndex < INDEX_SE1)
+        nullsub_20(songIndex);
     else
     {
       interrupt_flag2 = DisableInterrupts();
-      m4aSongNumStart(SongIndex);
-      preload->unk0 = 1;
-      preload->songIndex = SongIndex;
+      m4aSongNumStart(songIndex);
+      musicPlayer->unk0 = 1;
+      musicPlayer->songIndex = songIndex;
       if(param_2 == 256)
       {
-        preload->unk6 = 0;
+        musicPlayer->unk6 = 0;
       }
       else
       {
-        preload->unk6 = 1;
+        musicPlayer->unk6 = 1;
       }
-      preload->unk4 = param_2;
+      musicPlayer->unk4 = param_2;
       if (interrupt_flag2)
         EnableInterrupts();
     }
   }
 }
 
-void sub_800C214(u16 songIndex, u16 volume)
+void SetSoundEffectVolume(u16 songIndex, u16 volume)
 {
   bool8 interrupt_flag;
-  u16 msVar;
+  u16 playerIndex;
   struct MusicPlayerInfo *info;
-  struct unkStruct_3000FD8 *preload;
+  struct PMDMusicPlayer *musicPlayer;
 
   if (256 < volume) {
     volume = 256;
   }
 
-  if ((!sub_800CACC(songIndex)) && (sub_800CAAC(songIndex))) {
-    msVar = GetMusicPlayerIndex(songIndex);
-    info = gMPlayTable[msVar].info;
-    preload = &gUnknown_3000FD8[msVar];
-    if (msVar > 1) {
+  if ((!IsFanfare(songIndex)) && (IsSoundEffect(songIndex))) {
+    playerIndex = GetMusicPlayerIndex(songIndex);
+    info = gMPlayTable[playerIndex].info;
+    musicPlayer = &gUnknown_3000FD8[playerIndex];
+    if (playerIndex >= INDEX_SE1) {
       interrupt_flag = DisableInterrupts();
-      if (preload->songIndex == songIndex) {
+      if (musicPlayer->songIndex == songIndex) {
         m4aMPlayVolumeControl(info, 0xf, volume);
       }
       if (interrupt_flag)
@@ -721,7 +722,7 @@ void sub_800C214(u16 songIndex, u16 volume)
   }
 }
 
-void sub_800C298(u16 songIndex)
+void StopFanfareSE(u16 songIndex)
 {
     // Each section needs a var for interrupts..
     char cVar1;
@@ -729,43 +730,43 @@ void sub_800C298(u16 songIndex)
     char cVar3;
     char cVar4;
 
-    u32 uVar2;
-    int iVar4;
-    struct MusicPlayerInfo *puVar6;
-    struct unkStruct_3000FD8 *preload;
-    struct unkStruct_3000FD8 *puVar3;
+    u32 playerIndex;
+    s32 playerIndex2;
+    struct MusicPlayerInfo *info;
+    struct PMDMusicPlayer *musicPlayer;
+    struct PMDMusicPlayer *musicPlayer1;
 
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
 
-        for(iVar4 = 2, puVar3 = &gUnknown_3000FE8[0]; iVar4 < 7; iVar4++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
-            m4aMPlayStop(gMPlayTable[iVar4].info);
-            puVar3->unk0 = 0;
-            puVar3->songIndex = 997;
-            puVar3->unk4 = 0;
-            puVar3->unk6 = 0;
+            m4aMPlayStop(gMPlayTable[playerIndex2].info);
+            musicPlayer1->unk0 = 0;
+            musicPlayer1->songIndex = 997;
+            musicPlayer1->unk4 = 0;
+            musicPlayer1->unk6 = 0;
         }
         if (cVar1 != '\0') {
             EnableInterrupts();
         }
     }
-    else if (sub_800CAAC(songIndex))
+    else if (IsSoundEffect(songIndex))
     {
-        uVar2 = GetMusicPlayerIndex(songIndex);
-        puVar6 = gMPlayTable[uVar2].info;
-        preload = &gUnknown_3000FD8[uVar2];
-        if (uVar2 < 2) {
+        playerIndex = GetMusicPlayerIndex(songIndex);
+        info = gMPlayTable[playerIndex].info;
+        musicPlayer = &gUnknown_3000FD8[playerIndex];
+        if (playerIndex < INDEX_SE1) {
             nullsub_21(songIndex);
         }
         else {
             cVar2 = DisableInterrupts();
-            if (preload->songIndex == songIndex) {
-                m4aMPlayStop(puVar6);
-                preload->unk0 = 0;
-                preload->songIndex = 997;
-                preload->unk4 = 0;
-                preload->unk6 = 0;
+            if (musicPlayer->songIndex == songIndex) {
+                m4aMPlayStop(info);
+                musicPlayer->unk0 = 0;
+                musicPlayer->songIndex = 997;
+                musicPlayer->unk4 = 0;
+                musicPlayer->unk6 = 0;
             }
             if (cVar2 != '\0') {
                 EnableInterrupts();
@@ -776,22 +777,22 @@ void sub_800C298(u16 songIndex)
     {
         cVar3 = DisableInterrupts();
         if (gUnknown_202D690 != 0) {
-            if (gUnknown_202D68E != 997) {
-                gUnknown_202D68E = 997;
-                m4aMPlayStop(&gUnknown_2000970);
+            if (gCurrentFanfareSong != 997) {
+                gCurrentFanfareSong = 997;
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
         if (cVar3 != '\0') {
             EnableInterrupts();
         }
     }
-    else if (sub_800CACC(songIndex))
+    else if (IsFanfare(songIndex))
     {
         cVar4 = DisableInterrupts();
         if (gUnknown_202D690 != 0) {
-            if (gUnknown_202D68E == songIndex) {
-                gUnknown_202D68E = 997;
-                m4aMPlayStop(&gUnknown_2000970);
+            if (gCurrentFanfareSong == songIndex) {
+                gCurrentFanfareSong = 997;
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
         if (cVar4 != '\0') {
@@ -800,18 +801,18 @@ void sub_800C298(u16 songIndex)
     }
 }
 
-void sub_800C3F8(u16 songIndex, u16 speed)
+void FadeOutFanfareSE(u16 songIndex, u16 speed)
 {
     char cVar1;
     char cVar2;
     char cVar3;
     char cVar4;
     u32 comparison;
-    s32 uVar6;
-    u32 uVar8;
-    struct unkStruct_3000FD8 *preload;
-    struct unkStruct_3000FD8 *puVar3;
-    struct MusicPlayerInfo *puVar5;
+    s32 playerIndex2;
+    u32 playerIndex;
+    struct PMDMusicPlayer *musicPlayer;
+    struct PMDMusicPlayer *musicPlayer1;
+    struct MusicPlayerInfo *playerInfo;
 
     comparison = 0x80 << 17; // 16777216
     if((speed * 65536) > comparison)
@@ -828,18 +829,18 @@ void sub_800C3F8(u16 songIndex, u16 speed)
 
     if (songIndex == 997) {
         cVar1 = DisableInterrupts();
-        for(uVar6 = 2, puVar3 = &gUnknown_3000FE8[0]; uVar6 < 7; uVar6++, puVar3++)
+        for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
-            if (puVar3->songIndex != 997) {
-                if (sub_800CAF0(uVar6) != '\0') {
-                    m4aMPlayFadeOut(gMPlayTable[uVar6].info,speed);
+            if (musicPlayer1->songIndex != 997) {
+                if (IsMusicPlayerPlaying(playerIndex2)) {
+                    m4aMPlayFadeOut(gMPlayTable[playerIndex2].info,speed);
                 }
                 else {
-                    m4aMPlayStop(gMPlayTable[uVar6].info);
-                    puVar3->unk0 = 0;
-                    puVar3->songIndex = 997;
-                    puVar3->unk4 = 0;
-                    puVar3->unk6 = 0;
+                    m4aMPlayStop(gMPlayTable[playerIndex2].info);
+                    musicPlayer1->unk0 = 0;
+                    musicPlayer1->songIndex = 997;
+                    musicPlayer1->unk4 = 0;
+                    musicPlayer1->unk6 = 0;
                 }
             }
         }
@@ -847,142 +848,86 @@ void sub_800C3F8(u16 songIndex, u16 speed)
             EnableInterrupts();
         }
     }
-    else {
-        if (sub_800CAAC(songIndex)) {
-            uVar8 = GetMusicPlayerIndex(songIndex);
-            preload = &gUnknown_3000FD8[uVar8];
-            puVar5 = gMPlayTable[uVar8].info;
-            cVar2 = DisableInterrupts();
-            if (preload->songIndex != 997) {
-                if (sub_800CAF0(uVar8) != '\0') {
-                    m4aMPlayFadeOut(puVar5,speed);
-                }
-                else {
-                    m4aMPlayStop(puVar5);
-                    preload->unk0 = 0;
-                    preload->songIndex = 997;
-                    preload->unk4 = 0;
-                    preload->unk6 = 0;
-                }
+    else if (IsSoundEffect(songIndex)) {
+        playerIndex = GetMusicPlayerIndex(songIndex);
+        musicPlayer = &gUnknown_3000FD8[playerIndex];
+        playerInfo = gMPlayTable[playerIndex].info;
+        cVar2 = DisableInterrupts();
+        if (musicPlayer->songIndex != 997) {
+            if (IsMusicPlayerPlaying(playerIndex)) {
+                m4aMPlayFadeOut(playerInfo,speed);
             }
-            if (cVar2 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(playerInfo);
+                musicPlayer->unk0 = 0;
+                musicPlayer->songIndex = 997;
+                musicPlayer->unk4 = 0;
+                musicPlayer->unk6 = 0;
             }
         }
-        else if (songIndex == 998) {
-            cVar3 = DisableInterrupts();
-            if ((gUnknown_202D690 != 0) && (gUnknown_202D68E != 997)) {
-                if (sub_800CAF0(1) != '\0') {
-                    m4aMPlayFadeOut(&gUnknown_2000970,speed);
-                }
-                else {
-                    m4aMPlayStop(&gUnknown_2000970);
-                    gUnknown_202D68E = 997;
-                }
+        if (cVar2 != '\0') {
+            EnableInterrupts();
+        }
+    }
+    else if (songIndex == 998) {
+        cVar3 = DisableInterrupts();
+        if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong != 997)) {
+            if (IsMusicPlayerPlaying(INDEX_FANFARE)) {
+                m4aMPlayFadeOut(&gMPlayInfo_Fanfare,speed);
             }
-            if (cVar3 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
+                gCurrentFanfareSong = 997;
             }
         }
-        else if (sub_800CACC(songIndex)) {
-            cVar4 = DisableInterrupts();
-            if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == songIndex)) {
-                if (sub_800CAF0(1) != '\0') {
-                    m4aMPlayFadeOut(&gUnknown_2000970,speed);
-                }
-                else {
-                    m4aMPlayStop(&gUnknown_2000970);
-                    gUnknown_202D68E = 997;
-                }
+        if (cVar3 != '\0') {
+            EnableInterrupts();
+        }
+    }
+    else if (IsFanfare(songIndex)) {
+        cVar4 = DisableInterrupts();
+        if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong == songIndex)) {
+            if (IsMusicPlayerPlaying(INDEX_FANFARE)) {
+                m4aMPlayFadeOut(&gMPlayInfo_Fanfare,speed);
             }
-            if (cVar4 != '\0') {
-                EnableInterrupts();
+            else {
+                m4aMPlayStop(&gMPlayInfo_Fanfare);
+                gCurrentFanfareSong = 997;
             }
+        }
+        if (cVar4 != '\0') {
+            EnableInterrupts();
         }
     }
 }
 
-#ifdef NONMATCHING
-u8 sub_800C5D0(u16 param_1)
+bool8 IsFanfareSEPlaying(u16 songIndex)
 {
-  u32 uVar3;
-  struct unkStruct_3000FD8 *preload;
-  
+  u32 playerIndex;
+  struct PMDMusicPlayer *musicPlayer;
+  register u32 songIndex_u32 asm("r4");
+  register u32 songIndex_u32_2 asm("r5");
 
-  if (sub_800CACC(param_1) != '\0') {
-    if ((gUnknown_202D690 != 0) && (gUnknown_202D68E == param_1)) {
-      return 1;
+  songIndex_u32 = songIndex;
+  songIndex_u32_2 = songIndex_u32;
+
+  if (IsFanfare(songIndex_u32)) {
+    if ((gUnknown_202D690 != 0) && (gCurrentFanfareSong == songIndex_u32)) {
+      return TRUE;
     }
   }
   else
   {
-    // NOTE: regswap of r5 for r4 here... but is functionally matching
-    if (sub_800CAAC(param_1) != '\0') {
-      uVar3 = GetMusicPlayerIndex(param_1);
-      preload = &gUnknown_3000FD8[uVar3];
-      if ((1 < uVar3) && (preload->songIndex == param_1)) {
-        return 1;
+    if (IsSoundEffect(songIndex_u32)) {
+      playerIndex = GetMusicPlayerIndex(songIndex_u32);
+      musicPlayer = &gUnknown_3000FD8[playerIndex];
+      if ((INDEX_SE1 <= playerIndex) && (musicPlayer->songIndex == songIndex_u32_2)) {
+        return TRUE;
       }
     }
   }
-  return 0;
+  return FALSE;
 }
-#else
-NAKED
-u8 sub_800C5D0(u16 param_1)
-{
-	asm_unified("\tpush {r4,r5,lr}\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r4, r0, 16\n"
-	"\tadds r5, r4, 0\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CACC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C600\n"
-	"\tldr r0, _0800C5F8\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C630\n"
-	"\tldr r0, _0800C5FC\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, r4\n"
-	"\tbne _0800C630\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0800C632\n"
-	"\t.align 2, 0\n"
-"_0800C5F8: .4byte gUnknown_202D690\n"
-"_0800C5FC: .4byte gUnknown_202D68E\n"
-"_0800C600:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_800CAAC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800C630\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl GetMusicPlayerIndex\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tlsls r2, r0, 3\n"
-	"\tldr r1, _0800C62C\n"
-	"\tadds r2, r1\n"
-	"\tcmp r0, 0x1\n"
-	"\tbls _0800C630\n"
-	"\tldrh r0, [r2, 0x2]\n"
-	"\tcmp r0, r5\n"
-	"\tbne _0800C630\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0800C632\n"
-	"\t.align 2, 0\n"
-"_0800C62C: .4byte gUnknown_3000FD8\n"
-"_0800C630:\n"
-	"\tmovs r0, 0\n"
-"_0800C632:\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-}
-#endif
 
 void SoundVSync(void)
 {

@@ -1,38 +1,53 @@
 gMPlayTrack_BGM = .; /* 2000000 */
         . += 0x3C0;
 
-gMPlayTrack_Unknown1 = .; /* 20003C0 */
+gMPlayTrack_Fanfare = .; /* 20003C0 */
         . += 0x1E0;
 
-gMPlayTrack_Unknown2 = .; /* 20005A0 */
+gMPlayTrack_SE1 = .; /* 20005A0 */
         . += 0x50;
 
-gMPlayTrack_Unknown3 = .; /* 20005F0 */
+gMPlayTrack_SE2 = .; /* 20005F0 */
         . += 0x50;
 
-gMPlayTrack_Unknown4 = .; /* 2000640 */
+gMPlayTrack_SE3 = .; /* 2000640 */
         . += 0xA0;
 
-gMPlayTrack_Unknown5 = .; /* 20006E0 */
+gMPlayTrack_SE4 = .; /* 20006E0 */
         . += 0xA0;
 
-gMPlayTrack_Unknown6 = .; /* 2000780 */
+gMPlayTrack_SE5 = .; /* 2000780 */
         . += 0xA0;
 
-gMPlayTrack_Unknown7 = .; /* 2000820 */
+gMPlayTrack_SE6 = .; /* 2000820 */
         . += 0x50;
 
-gUnknown_2000870 = .; /* 2000870 */
-        . += 0x80;
+gMPlayInfo_SE4 = .; /* 2000870 */
+        . += 0x40;
+
+gMPlayInfo_SE5 = .; /* 20008B0 */
+        . += 0x40;
 
 gMPlayInfo_BGM = .; /* 20008F0 */
-	. += 0x80;
+	. += 0x40;
 
-gUnknown_2000970 = .; /* 2000970 */
-	. += 0xC0;
+gMPlayInfo_SE6 = .; /* 2000930 */
+	. += 0x40;
+
+gMPlayInfo_Fanfare = .; /* 2000970 */
+	. += 0x40;
+
+gMPlayInfo_SE1 = .; /* 20009B0 */
+	. += 0x40;
+
+gMPlayInfo_SE3 = .; /* 20009F0 */
+	. += 0x40;
 
 gMPlayMemAccArea = .; /* 2000A30 */
-	. += 0x50;
+	. += 0x10;
+
+gMPlayInfo_SE2 = .; /* 2000A40 */
+	. += 0x40;
 
 gUnknown_2000A80 = .; /* 2000A80 */
 	. += 0x8;
@@ -305,7 +320,7 @@ gCurrentBGSong = .; /* 202D68A */
 gUnknown_202D68C = .; /* 202D68C */
 	. += 0x2;
 
-gUnknown_202D68E = .; /* 202D68E */
+gCurrentFanfareSong = .; /* 202D68E */
 	. += 0x2;
 
 gUnknown_202D690 = .; /* 202D690 */
@@ -314,7 +329,7 @@ gUnknown_202D690 = .; /* 202D690 */
 gUnknown_202D692 = .; /* 202D692 */
 	. += 0x2;
 
-gUnknown_202D694 = .; /* 202D694 */
+gRestartBGM = .; /* 202D694 */
 	. += 0x4;
 
 gBG0Control = .; /* 202D698 */
@@ -537,7 +552,7 @@ gUnknown_202EC48 = .; /* 202EC48 */
 gUnknown_202EC4C = .; /* 202EC4C */
 	. += 0x4;
 
-gUnknown_202EC50 = .; /* 202EC50 */
+gRescuePasswordBuffer = .; /* 202EC50 */
 	. += 0x38;
 
 gDungeonNameBannerPalette = .; /* 202EC88 */

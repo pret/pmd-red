@@ -4,13 +4,12 @@
 #include "music.h"
 
 extern u8 sub_80023E4(u32);
-extern void sub_80118C4(u16);
+extern void FadeOutAllMusic(u16);
 extern void sub_809C730();
 
 extern bool8 DisableInterrupts();
 extern bool8 EnableInterrupts();
 
-extern void sub_800C3F8(u16, u16);
 extern void Random();
 extern void sub_800BA5C();
 extern void xxx_update_bg_sound_input();
@@ -24,7 +23,7 @@ extern u16 gBGMusicPlayerState;
 
 extern u16 gCurrentBGSong;
 extern u16 gUnknown_202D690;
-extern u8 gUnknown_202D694;
+extern u8 gRestartBGM;
 extern u32 gUnknown_203B0B8;
 extern u16 gRawKeyInput;
 
@@ -33,8 +32,8 @@ void StopBGMusicVSync(void)
     bool8 interrupt_flag;
     u16 temp;
 
-    sub_800C3F8(0x3e5, 0x10);
-    sub_800C3F8(0x3e6, 0x10);
+    FadeOutFanfareSE(0x3e5, 0x10);
+    FadeOutFanfareSE(0x3e6, 0x10);
 
     interrupt_flag = DisableInterrupts();
     if(gUnknown_202D690 == 0)
@@ -46,13 +45,13 @@ void StopBGMusicVSync(void)
             {
                 if(gBGMusicPlayerState == 2)
                 {
-                    gUnknown_202D694 = 0;
+                    gRestartBGM = FALSE;
                 }
-                else if(gBGMusicPlayerState == 1)
+                else if(gBGMusicPlayerState == BG_PLAYER_STATE_PLAYING)
                 {
-                    gUnknown_202D694 = 1;
+                    gRestartBGM = TRUE;
                 }
-                gBGMusicPlayerState = 4;
+                gBGMusicPlayerState = BG_PLAYER_STATE_STOPPED;
             }
         }
     }
@@ -72,10 +71,10 @@ void StartBGMusicVSync(void)
     {
         if(gCurrentBGSong != 999)
         {
-            if(gBGMusicPlayerState == 4)
+            if(gBGMusicPlayerState == BG_PLAYER_STATE_STOPPED)
             {
-                gBGMusicPlayerState = 1;
-                if(gUnknown_202D694 != 0)
+                gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
+                if(gRestartBGM)
                 {
                     m4aSongNumStart(gCurrentBGSong);
                 }
@@ -98,30 +97,30 @@ void nullsub_179(void)
 }
 
 // Unused
-u8 sub_800CA38(u32 songIndex)
+bool8 IsValidSong(u32 songIndex)
 {
     if(IsBGSong(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) == 0)
+        if(GetMusicPlayerIndex(songIndex) == INDEX_BGM)
         {
-            return 1;
+            return TRUE;
         }
     }
-    if(sub_800CACC(songIndex))
+    if(IsFanfare(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) == 1)
+        if(GetMusicPlayerIndex(songIndex) == INDEX_FANFARE)
         {
-            return 1;
+            return TRUE;
         }
     }
-    else if(sub_800CAAC(songIndex))
+    else if(IsSoundEffect(songIndex))
     {
-        if(GetMusicPlayerIndex(songIndex) > 1)
+        if(GetMusicPlayerIndex(songIndex) >= INDEX_SE1)
         {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void nullsub_19(void)
@@ -137,7 +136,7 @@ bool8 IsBGSong(u32 songIndex)
     return FALSE;
 }
 
-bool8 sub_800CAAC(u32 songIndex)
+bool8 IsSoundEffect(u32 songIndex)
 {
     if(songIndex - 300 <= 639)
     {
@@ -146,7 +145,7 @@ bool8 sub_800CAAC(u32 songIndex)
     return FALSE;
 }
 
-bool8 sub_800CACC(u32 songIndex)
+bool8 IsFanfare(u32 songIndex)
 {
     if(songIndex - 200 <= 19)
     {
@@ -160,14 +159,14 @@ u16 GetMusicPlayerIndex(u16 songIndex)
     return gSongTable[songIndex].ms;
 }
 
-bool8 sub_800CAF0(u16 songIndex)
+bool8 IsMusicPlayerPlaying(u16 playerIndex)
 {
     // Had to cast this.. m4a_internal header has this as u32
-    if((u16)gMPlayTable[songIndex].info->status == 0)
+    if((u16)gMPlayTable[playerIndex].info->status == 0)
     {
-        return 0;
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
 void nullsub_20(u16 songIndex)

@@ -521,7 +521,7 @@ ZapdosPreFightDialogue:
 	ldr r0, _08087478
 	bl DisplayDungeonDialogue
 	ldr r0, [sp, 0x68]
-	bl sub_8087704
+	bl ZapdosDropInEffect
 	movs r0, 0x9
 	bl sub_8083E88
 	adds r0, r6, 0

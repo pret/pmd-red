@@ -5,6 +5,21 @@
 #include "text.h"
 #include "menu.h"
 
+struct unkStruct_802C39C
+{
+    /* 0x0 */ u32 unk0[2];
+    /* 0x8 */ struct DungeonLocation *unk8;
+    /* 0xC */ u8 *unkC;
+    /* 0x10 */ s16 unk10;
+    /* 0x12 */ s16 unk12;
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 fill15[0x1B];
+    /* 0x36 */ u8 fill36[0x3C - 0x36];
+    /* 0x3C */ u8 unk3C[0xC];
+    /* 0x48 */ u8 fill48[4];
+    /* 0x4C */ u32 unk4C;
+    /* 0x50 */ u32 unk50[3];
+};
 
 struct unkStruct_203B2E8
 {
@@ -143,7 +158,7 @@ extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
-extern void sub_803B6D4(u32 *);
+extern void CreateRescueTitle(void *);
 
 extern void sub_8013984(u32 *);
 extern void sub_802C6DC(void);
@@ -356,8 +371,7 @@ void sub_802C750(void)
   int iVar2;
   s32 r4;
   s32 r5;
-  u32 auStack104 [18];
-  u32 uStack32[4];
+  struct unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B2E8->unk3C);
   sub_80073B8(gUnknown_203B2E8->unk3C);
@@ -374,10 +388,10 @@ void sub_802C750(void)
     do
     {
         uVar1 = GetJobSlotInfo(gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + iVar2]);
-        auStack104[0] = gUnknown_203B2E8->unk3C;
-        uStack32[0] = sub_8013800(&gUnknown_203B2E8->unk8,iVar2);
-        sub_803B35C(uVar1,auStack104);
-        sub_803B6D4(auStack104);
+        local.unk0[0] = gUnknown_203B2E8->unk3C;
+        local.unk4C = sub_8013800(&gUnknown_203B2E8->unk8,iVar2);
+        sub_803B35C(uVar1,local.unk0);
+        CreateRescueTitle(&local);
         iVar2++;
     } while( iVar2 < gUnknown_203B2E8->unk22);
   sub_80073E0(gUnknown_203B2E8->unk3C);

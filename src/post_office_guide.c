@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "input.h"
+#include "constants/mailbox.h"
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
@@ -185,7 +186,7 @@ extern void DisplayMissionObjectives();
 extern u8 *GetCurrentMissionText(s16 r0);
 extern u8 *sub_80975DC(u32 r0);
 extern u8 sub_8099360(u8 *);
-extern u8 sub_8099394(u8 *);
+extern u8 sub_8099394(volatile u8 *);
 extern struct WonderMail *GetJobSlotInfo(u8);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void sub_80073B8(u32);
@@ -208,7 +209,7 @@ extern void ReturntoGoRescueMenu();
 extern void HandlePostOfficeHelpGetHelpMenuSelection();
 extern void ReturnToGetHelpMenu();
 extern s32 sub_80144A4(s32 *);
-extern s32 sub_80969D0(u8);
+extern s32 CountJobsinDungeon(u8);
 extern void sub_8012D08(struct UnkTextStruct2 *, s32);
 
 
@@ -582,7 +583,7 @@ void sub_8031A84(void)
   sub_8006518(gUnknown_203B330->unk18);
   gUnknown_203B330->unk18[gUnknown_203B330->unk10] = gUnknown_80E1F18;
   if (gUnknown_203B330->unkC == 2) {
-    iVar1 = sub_80969D0(gUnknown_203B330->dungeonIndex);
+    iVar1 = CountJobsinDungeon(gUnknown_203B330->dungeonIndex);
     if (iVar1 == 0) {
       iVar1 = 1;
     }
@@ -599,7 +600,7 @@ void DisplayMissionObjectives(void)
     struct unkStruct_8095228 *iVar8;
     struct WonderMail *jobInfo;
     u8 auStack248 [100];
-    u8 local_94 [4];
+    volatile u8 local_94;
     u8 auStack144 [100];
     short auStack44;
     short local_2a;
@@ -611,18 +612,18 @@ void DisplayMissionObjectives(void)
     switch(gUnknown_203B330->unkC)
     {
         case 1:
-            sub_8099394(local_94);
-            iVar8 = sub_8095228(local_94[0]);
+            sub_8099394(&local_94);
+            iVar8 = sub_8095228(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
-            sprintf_2(auStack248,gUnknown_80E1F3C,iVar8->floor);
+            sprintf_2(auStack248,gUnknown_80E1F3C,iVar8->dungeon.dungeonFloor);
             xxx_call_draw_string(0x15,16,auStack248,gUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
             sprintf_2(auStack248,gUnknown_80E1F40,GetMonSpecies(iVar8->clientSpecies));
             xxx_call_draw_string(0x28,16,auStack248,gUnknown_203B330->unk10,0);
             break;
         case 2:
-            if (sub_80969D0(gUnknown_203B330->dungeonIndex) == 0) {
+            if (CountJobsinDungeon(gUnknown_203B330->dungeonIndex) == 0) {
                 // Just go!
                  xxx_call_draw_string(10,16,gUnknown_80E1F54,gUnknown_203B330->unk10,0);
             }
@@ -631,7 +632,7 @@ void DisplayMissionObjectives(void)
                 yCoord = 16;
 
                 // 8 Job Slots... check each of them
-                for(jobSlotIdx = 0; jobSlotIdx < 8; jobSlotIdx++)
+                for(jobSlotIdx = 0; jobSlotIdx < MAX_ACCEPTED_JOBS; jobSlotIdx++)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
                     if ((((jobInfo->dungeon == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
