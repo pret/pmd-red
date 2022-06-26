@@ -4261,7 +4261,7 @@ _0809FD82:
 	bl _0809EAE0
 _0809FD90:
 	adds r0, r1, 0
-	bl sub_8011914
+	bl xxx_call_queue_bgm
 	bl _0809EAE0
 	.align 2, 0
 _0809FD9C: .4byte 0x000003e7
@@ -8781,7 +8781,7 @@ _080A2304:
 	ldr r5, _080A231C
 	cmp r0, r5
 	beq _080A236A
-	bl sub_8011914
+	bl xxx_call_queue_bgm
 _080A2312:
 	strh r5, [r4]
 	b _080A1EBE

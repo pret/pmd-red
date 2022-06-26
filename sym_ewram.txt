@@ -317,13 +317,13 @@ gBGMusicPlayerState = .; /* 202D688 */
 gCurrentBGSong = .; /* 202D68A */
 	. += 0x2;
 
-gUnknown_202D68C = .; /* 202D68C */
+gQueuedBGSong = .; /* 202D68C */
 	. += 0x2;
 
 gCurrentFanfareSong = .; /* 202D68E */
 	. += 0x2;
 
-gUnknown_202D690 = .; /* 202D690 */
+gFanfareMusicPlayerState = .; /* 202D690 */
 	. += 0x2;
 
 gUnknown_202D692 = .; /* 202D692 */

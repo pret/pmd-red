@@ -191,9 +191,9 @@ void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed)
     FadeInNewBGM(songIndex, speed);
 }
 
-void sub_8011914(u16 songIndex)
+void xxx_call_queue_bgm(u16 songIndex)
 {
-    sub_800BF48(songIndex);
+    QueueBGM(songIndex);
 }
 
 void xxx_call_stop_bgm()
