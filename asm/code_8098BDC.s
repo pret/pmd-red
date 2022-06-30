@@ -7611,7 +7611,7 @@ _0809CC5E:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xCB
-	bl sub_8011974
+	bl xxx_call_play_fanfare_se
 _0809CC80:
 	movs r0, 0x1
 _0809CC82:

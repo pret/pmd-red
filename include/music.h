@@ -24,6 +24,18 @@ bool8 IsFanfareSEPlaying(u16 songIndex);
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);
 
+#define NUM_FANFARES 19
+#define FANFARE_START_INDEX 200
+
+#define NUM_SOUND_EFFECTS 639
+#define SOUND_EFFECTS_START_INDEX 300
+
+#define STOP_SOUND_EFFECT 997
+#define STOP_FANFARE 998
+#define STOP_BGM 999
+
+#define MAX_VOLUME 256
+
 enum MusicPlayerIndex
 {
     INDEX_BGM,

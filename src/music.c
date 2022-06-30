@@ -410,9 +410,9 @@ void InitMusic(void)
     m4aSoundInit();
 
     gBGMusicPlayerState = 0;
-    gCurrentBGSong = 999;
-    gQueuedBGSong = 999;
-    gCurrentFanfareSong = 997;
+    gCurrentBGSong = STOP_BGM;
+    gQueuedBGSong = STOP_BGM;
+    gCurrentFanfareSong = STOP_SOUND_EFFECT;
     gFanfareMusicPlayerState = 0;
     gUnknown_202D692 = 0;
     gRestartBGM = FALSE;
@@ -420,7 +420,7 @@ void InitMusic(void)
     for(playerIndex = INDEX_BGM, musicPlayer = &gUnknown_3000FD8[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++)
     {
         musicPlayer->unk0 = 0;
-        musicPlayer->songIndex = 997;
+        musicPlayer->songIndex = STOP_SOUND_EFFECT;
         musicPlayer->volume = 0;
         musicPlayer->unk6 = FALSE;
     }
@@ -430,8 +430,8 @@ void InitMusic(void)
 void StopAllMusic(void)
 {
     StopBGM();
-    StopFanfareSE(998);
-    StopFanfareSE(997);
+    StopFanfareSE(STOP_FANFARE);
+    StopFanfareSE(STOP_SOUND_EFFECT);
 }
 
 void StartNewBGM(u16 songIndex)
@@ -440,7 +440,7 @@ void StartNewBGM(u16 songIndex)
 
     if(!IsBGSong(songIndex))
         return;
-    if(songIndex == 999)
+    if(songIndex == STOP_BGM)
         return;
     if(songIndex == gCurrentBGSong)
     {
@@ -471,7 +471,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
 
     if(!IsBGSong(songIndex))
         return;
-    if(songIndex == 999)
+    if(songIndex == STOP_BGM)
         return;
     if(songIndex == gCurrentBGSong)
     {
@@ -511,10 +511,10 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
 
 void QueueBGM(u16 songIndex)
 {
-    if(gCurrentBGSong == 999)
+    if(gCurrentBGSong == STOP_BGM)
     {
         StartNewBGM(songIndex);
-        gQueuedBGSong = 999;
+        gQueuedBGSong = STOP_BGM;
     }
     else
         gQueuedBGSong = songIndex;
@@ -525,26 +525,22 @@ void StopBGM(void)
     bool8 interrupt_flag = DisableInterrupts();
     if(gFanfareMusicPlayerState == 0)
     {
-        if(gCurrentBGSong != 999)
+        if(gCurrentBGSong != STOP_BGM)
         {
             m4aMPlayStop(&gMPlayInfo_BGM);
         }
     }
-    gCurrentBGSong = 999;
-    gQueuedBGSong = 999;
+    gCurrentBGSong = STOP_BGM;
+    gQueuedBGSong = STOP_BGM;
     if(interrupt_flag)
         EnableInterrupts();
 }
 
 void FadeOutBGM(u16 speed)
 {
-
-    u32 comparison;
     bool8 interrupt_flag;
 
-    // TODO clean this comparison up
-    comparison = 0x80 << 17; // 16777216
-    if((speed * 65536) > comparison)
+    if(speed > ((0x80 << 17) / 65536))
     {
         speed = 16;
     }
@@ -558,7 +554,7 @@ void FadeOutBGM(u16 speed)
     interrupt_flag = DisableInterrupts();
     if(gFanfareMusicPlayerState == 0)
     {
-        if(gCurrentBGSong != 999)
+        if(gCurrentBGSong != STOP_BGM)
         {
             if(gBGMusicPlayerState == 2)
             {
@@ -567,16 +563,16 @@ void FadeOutBGM(u16 speed)
             }
             else
             {
-                gCurrentBGSong = 999;
+                gCurrentBGSong = STOP_BGM;
                 m4aMPlayStop(&gMPlayInfo_BGM);
             }
         }
     }
     else
     {
-        gCurrentBGSong = 999;
+        gCurrentBGSong = STOP_BGM;
     }
-    gQueuedBGSong = 999;
+    gQueuedBGSong = STOP_BGM;
     if(interrupt_flag)
         EnableInterrupts();
 }
@@ -593,10 +589,10 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
   u16 playerIndex;
   struct PMDMusicPlayer *musicPlayer;
 
-  if (songIndex == 997)
+  if (songIndex == STOP_SOUND_EFFECT)
     return;
-  if (volume > 256)
-    volume = 256;
+  if (volume > MAX_VOLUME)
+    volume = MAX_VOLUME;
 
   if (IsFanfare(songIndex)) 
   {
@@ -605,7 +601,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
       gCurrentFanfareSong = songIndex;
       if(gFanfareMusicPlayerState == 0)
       {
-        if (gCurrentBGSong != 999) 
+        if (gCurrentBGSong != STOP_BGM) 
         {
             if ((u16)(gBGMusicPlayerState - 1) < 2)
             {
@@ -683,7 +679,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
       m4aSongNumStart(songIndex);
       musicPlayer->unk0 = 1;
       musicPlayer->songIndex = songIndex;
-      if(volume == 256)
+      if(volume == MAX_VOLUME)
       {
         musicPlayer->unk6 = FALSE;
       }
@@ -705,8 +701,8 @@ void SetSoundEffectVolume(u16 songIndex, u16 volume)
   struct MusicPlayerInfo *info;
   struct PMDMusicPlayer *musicPlayer;
 
-  if (256 < volume) {
-    volume = 256;
+  if (MAX_VOLUME < volume) {
+    volume = MAX_VOLUME;
   }
 
   if ((!IsFanfare(songIndex)) && (IsSoundEffect(songIndex))) {
@@ -738,14 +734,14 @@ void StopFanfareSE(u16 songIndex)
     struct PMDMusicPlayer *musicPlayer;
     struct PMDMusicPlayer *musicPlayer1;
 
-    if (songIndex == 997) {
+    if (songIndex == STOP_SOUND_EFFECT) {
         cVar1 = DisableInterrupts();
 
         for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
             m4aMPlayStop(gMPlayTable[playerIndex2].info);
             musicPlayer1->unk0 = 0;
-            musicPlayer1->songIndex = 997;
+            musicPlayer1->songIndex = STOP_SOUND_EFFECT;
             musicPlayer1->volume = 0;
             musicPlayer1->unk6 = FALSE;
         }
@@ -766,7 +762,7 @@ void StopFanfareSE(u16 songIndex)
             if (musicPlayer->songIndex == songIndex) {
                 m4aMPlayStop(info);
                 musicPlayer->unk0 = 0;
-                musicPlayer->songIndex = 997;
+                musicPlayer->songIndex = STOP_SOUND_EFFECT;
                 musicPlayer->volume = 0;
                 musicPlayer->unk6 = FALSE;
             }
@@ -775,12 +771,12 @@ void StopFanfareSE(u16 songIndex)
             }
         }
     }
-    else if (songIndex == 998)
+    else if (songIndex == STOP_FANFARE)
     {
         cVar3 = DisableInterrupts();
         if (gFanfareMusicPlayerState != 0) {
-            if (gCurrentFanfareSong != 997) {
-                gCurrentFanfareSong = 997;
+            if (gCurrentFanfareSong != STOP_SOUND_EFFECT) {
+                gCurrentFanfareSong = STOP_SOUND_EFFECT;
                 m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
@@ -793,7 +789,7 @@ void StopFanfareSE(u16 songIndex)
         cVar4 = DisableInterrupts();
         if (gFanfareMusicPlayerState != 0) {
             if (gCurrentFanfareSong == songIndex) {
-                gCurrentFanfareSong = 997;
+                gCurrentFanfareSong = STOP_SOUND_EFFECT;
                 m4aMPlayStop(&gMPlayInfo_Fanfare);
             }
         }
@@ -829,18 +825,18 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
         }
     }
 
-    if (songIndex == 997) {
+    if (songIndex == STOP_SOUND_EFFECT) {
         cVar1 = DisableInterrupts();
         for(playerIndex2 = INDEX_SE1, musicPlayer1 = &gUnknown_3000FE8[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++)
         {
-            if (musicPlayer1->songIndex != 997) {
+            if (musicPlayer1->songIndex != STOP_SOUND_EFFECT) {
                 if (IsMusicPlayerPlaying(playerIndex2)) {
                     m4aMPlayFadeOut(gMPlayTable[playerIndex2].info,speed);
                 }
                 else {
                     m4aMPlayStop(gMPlayTable[playerIndex2].info);
                     musicPlayer1->unk0 = 0;
-                    musicPlayer1->songIndex = 997;
+                    musicPlayer1->songIndex = STOP_SOUND_EFFECT;
                     musicPlayer1->volume = 0;
                     musicPlayer1->unk6 = FALSE;
                 }
@@ -855,14 +851,14 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
         musicPlayer = &gUnknown_3000FD8[playerIndex];
         playerInfo = gMPlayTable[playerIndex].info;
         cVar2 = DisableInterrupts();
-        if (musicPlayer->songIndex != 997) {
+        if (musicPlayer->songIndex != STOP_SOUND_EFFECT) {
             if (IsMusicPlayerPlaying(playerIndex)) {
                 m4aMPlayFadeOut(playerInfo,speed);
             }
             else {
                 m4aMPlayStop(playerInfo);
                 musicPlayer->unk0 = 0;
-                musicPlayer->songIndex = 997;
+                musicPlayer->songIndex = STOP_SOUND_EFFECT;
                 musicPlayer->volume = 0;
                 musicPlayer->unk6 = FALSE;
             }
@@ -871,15 +867,15 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
             EnableInterrupts();
         }
     }
-    else if (songIndex == 998) {
+    else if (songIndex == STOP_FANFARE) {
         cVar3 = DisableInterrupts();
-        if ((gFanfareMusicPlayerState != 0) && (gCurrentFanfareSong != 997)) {
+        if ((gFanfareMusicPlayerState != 0) && (gCurrentFanfareSong != STOP_SOUND_EFFECT)) {
             if (IsMusicPlayerPlaying(INDEX_FANFARE)) {
                 m4aMPlayFadeOut(&gMPlayInfo_Fanfare,speed);
             }
             else {
                 m4aMPlayStop(&gMPlayInfo_Fanfare);
-                gCurrentFanfareSong = 997;
+                gCurrentFanfareSong = STOP_SOUND_EFFECT;
             }
         }
         if (cVar3 != '\0') {
@@ -894,7 +890,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
             }
             else {
                 m4aMPlayStop(&gMPlayInfo_Fanfare);
-                gCurrentFanfareSong = 997;
+                gCurrentFanfareSong = STOP_SOUND_EFFECT;
             }
         }
         if (cVar4 != '\0') {
@@ -962,7 +958,7 @@ void UpdateSound(void)
                 {
                     gUnknown_202D692--;
                 }
-                else if (gCurrentFanfareSong == 997) 
+                else if (gCurrentFanfareSong == STOP_SOUND_EFFECT) 
                 {
                     gFanfareMusicPlayerState = 4;
                     gUnknown_202D692 = 32;
@@ -974,9 +970,9 @@ void UpdateSound(void)
                 }
                 break;
             case 2:
-                if ((gCurrentBGSong != 999) && (IsMusicPlayerPlaying(INDEX_BGM)))
+                if ((gCurrentBGSong != STOP_BGM) && (IsMusicPlayerPlaying(INDEX_BGM)))
                     break;
-                if (gCurrentFanfareSong == 997)
+                if (gCurrentFanfareSong == STOP_SOUND_EFFECT)
                 {
                     gFanfareMusicPlayerState = 4;
                     gUnknown_202D692 = 32;
@@ -988,7 +984,7 @@ void UpdateSound(void)
                 }
                 break;
             case 3:
-                if ((gCurrentFanfareSong != 997) && (!IsMusicPlayerPlaying(INDEX_FANFARE))) // INDEX_FANFARE
+                if ((gCurrentFanfareSong != STOP_SOUND_EFFECT) && (!IsMusicPlayerPlaying(INDEX_FANFARE))) // INDEX_FANFARE
                     break;
                 else {
                     gFanfareMusicPlayerState = 4;
@@ -996,7 +992,7 @@ void UpdateSound(void)
                 }
                 break;
             case 4:
-                if (gCurrentFanfareSong != 997) 
+                if (gCurrentFanfareSong != STOP_SOUND_EFFECT) 
                 {
                     if (IsMusicPlayerPlaying(INDEX_FANFARE)) break; // INDEX_FANFARE
                 }
@@ -1008,7 +1004,7 @@ void UpdateSound(void)
                     gUnknown_202D692--;
                     break;
                 }
-                else if (gCurrentBGSong != 999) 
+                else if (gCurrentBGSong != STOP_BGM) 
                 {
                     gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
                     if (gRestartBGM)
@@ -1022,7 +1018,7 @@ void UpdateSound(void)
                     m4aMPlayStop(&gMPlayInfo_BGM);
                 }
                 gFanfareMusicPlayerState = 0;
-                gCurrentFanfareSong = 997;
+                gCurrentFanfareSong = STOP_SOUND_EFFECT;
                 break;
         }
     }
@@ -1032,21 +1028,21 @@ void UpdateSound(void)
         {
 
             case BG_PLAYER_STATE_PLAYING:
-                if ((gCurrentBGSong == 999) || IsMusicPlayerPlaying(INDEX_BGM)) // INDEX_BGM
+                if ((gCurrentBGSong == STOP_BGM) || IsMusicPlayerPlaying(INDEX_BGM)) // INDEX_BGM
                 {
                     gBGMusicPlayerState = 2;
                 }
                 break;
             case 2:
             case 3:
-                if (gCurrentBGSong != 999) 
+                if (gCurrentBGSong != STOP_BGM) 
                 {
                     if (IsMusicPlayerPlaying(INDEX_BGM)) break; // INDEX_BGM
                 }
                 else
                     m4aMPlayStop(&gMPlayInfo_BGM);
                 gBGMusicPlayerState = 0;
-                gCurrentBGSong = 999;
+                gCurrentBGSong = STOP_BGM;
                 break;
             case BG_PLAYER_STATE_STOPPED: // can also be other constants
                 break;
@@ -1060,30 +1056,31 @@ void UpdateSound(void)
             register u16 r2 asm("r2") = gQueuedBGSong, r1 = r2;
 #else
             u16 r2, r1;
+            r2 = gQueuedBGSong, r1 = r2;
 #endif
-            if (r1 != 999) 
+            if (r1 != STOP_BGM) 
             {
                 gBGMusicPlayerState = BG_PLAYER_STATE_PLAYING;
                 gCurrentBGSong = r2;
                 m4aSongNumStart(r1);
-                gQueuedBGSong = 999;
+                gQueuedBGSong = STOP_BGM;
             }
             else 
             {
                 gBGMusicPlayerState = 0;
-                gCurrentBGSong = 999;
+                gCurrentBGSong = STOP_BGM;
             }
         }
     }
 
-    for(musicPlayerIndex = 2,  musicPlayer = &gUnknown_3000FE8[0]; musicPlayerIndex < 7; musicPlayerIndex++, musicPlayer++)
+    for(musicPlayerIndex = INDEX_SE1,  musicPlayer = &gUnknown_3000FE8[0]; musicPlayerIndex < INDEX_SE6; musicPlayerIndex++, musicPlayer++)
     {
-        if (musicPlayer->songIndex != 997) 
+        if (musicPlayer->songIndex != STOP_SOUND_EFFECT) 
         {
             switch(musicPlayer->unk0)
             {
                     case 1:
-                        if ((musicPlayer->songIndex == 999) || (IsMusicPlayerPlaying(musicPlayerIndex))) 
+                        if ((musicPlayer->songIndex == STOP_BGM) || (IsMusicPlayerPlaying(musicPlayerIndex))) 
                         {
                             musicPlayer->unk0 = 2;
                         }
@@ -1100,7 +1097,7 @@ void UpdateSound(void)
                         else 
                         {
                             musicPlayer->unk0 = 0;
-                            musicPlayer->songIndex = 997;
+                            musicPlayer->songIndex = STOP_SOUND_EFFECT;
                             musicPlayer->volume = 0;
                             musicPlayer->unk6 = FALSE;
                         }
@@ -1118,13 +1115,13 @@ void StopBGMusicVSync(void)
     bool8 interrupt_flag;
     u16 temp;
 
-    FadeOutFanfareSE(0x3e5, 0x10);
-    FadeOutFanfareSE(0x3e6, 0x10);
+    FadeOutFanfareSE(STOP_SOUND_EFFECT, 0x10);
+    FadeOutFanfareSE(STOP_FANFARE, 0x10);
 
     interrupt_flag = DisableInterrupts();
     if(gFanfareMusicPlayerState == 0)
     {
-        if(gCurrentBGSong != 999)
+        if(gCurrentBGSong != STOP_BGM)
         {
             temp = gBGMusicPlayerState - 1;
             if(temp <= 1)
@@ -1155,7 +1152,7 @@ void StartBGMusicVSync(void)
     m4aSoundVSyncOn();
     if(gFanfareMusicPlayerState == 0)
     {
-        if(gCurrentBGSong != 999)
+        if(gCurrentBGSong != STOP_BGM)
         {
             if(gBGMusicPlayerState == BG_PLAYER_STATE_STOPPED)
             {
@@ -1224,7 +1221,7 @@ bool8 IsBGSong(u32 songIndex)
 
 bool8 IsSoundEffect(u32 songIndex)
 {
-    if(songIndex - 300 <= 639)
+    if(songIndex - SOUND_EFFECTS_START_INDEX <= NUM_SOUND_EFFECTS)
     {
         return TRUE;
     }
@@ -1233,7 +1230,7 @@ bool8 IsSoundEffect(u32 songIndex)
 
 bool8 IsFanfare(u32 songIndex)
 {
-    if(songIndex - 200 <= 19)
+    if(songIndex - FANFARE_START_INDEX <= NUM_FANFARES)
     {
         return TRUE;
     }

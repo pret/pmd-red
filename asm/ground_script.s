@@ -4288,7 +4288,7 @@ _0809FDC2:
 	lsrs r0, 16
 	movs r1, 0x80
 	lsls r1, 1
-	bl sub_8011974
+	bl xxx_call_play_fanfare_se
 	bl _0809EAE0
 _0809FDD4:
 	ldr r0, [sp, 0xC]
@@ -4312,7 +4312,7 @@ _0809FDF8:
 	movs r1, 0x1E
 _0809FDFA:
 	adds r0, r2, 0
-	bl sub_80119AC
+	bl xxx_call_fade_out_fanfare_se
 	bl _0809EAE0
 _0809FE04:
 	mov r1, r9
