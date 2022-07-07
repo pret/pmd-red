@@ -40,7 +40,7 @@ extern u16 gCurrentBGSong;
 extern u16 gQueuedBGSong;
 extern u16 gCurrentFanfareSong;
 extern u16 gFanfareMusicPlayerState;
-extern u16 gUnknown_202D692;
+extern u16 gMusicTransitionCounter;
 extern bool8 gRestartBGM;
 extern u8 gUnknown_203B099;
 extern u8 gUnknown_203B09B;
@@ -414,7 +414,7 @@ void InitMusic(void)
     gQueuedBGSong = STOP_BGM;
     gCurrentFanfareSong = STOP_SOUND_EFFECT;
     gFanfareMusicPlayerState = 0;
-    gUnknown_202D692 = 0;
+    gMusicTransitionCounter = 0;
     gRestartBGM = FALSE;
 
     for(playerIndex = INDEX_BGM, musicPlayer = &gUnknown_3000FD8[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++)
@@ -606,7 +606,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
             if ((u16)(gBGMusicPlayerState - 1) < 2)
             {
                 gFanfareMusicPlayerState = 1;
-                gUnknown_202D692 = 16;
+                gMusicTransitionCounter = 16;
                 gRestartBGM = FALSE;
                 m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, 1);
             }
@@ -954,14 +954,14 @@ void UpdateSound(void)
         switch(gFanfareMusicPlayerState)
         {
             case 1:
-                if (gUnknown_202D692 != 0) 
+                if (gMusicTransitionCounter != 0) 
                 {
-                    gUnknown_202D692--;
+                    gMusicTransitionCounter--;
                 }
                 else if (gCurrentFanfareSong == STOP_SOUND_EFFECT) 
                 {
                     gFanfareMusicPlayerState = 4;
-                    gUnknown_202D692 = 32;
+                    gMusicTransitionCounter = 32;
                 }
                 else
                 {
@@ -975,7 +975,7 @@ void UpdateSound(void)
                 if (gCurrentFanfareSong == STOP_SOUND_EFFECT)
                 {
                     gFanfareMusicPlayerState = 4;
-                    gUnknown_202D692 = 32;
+                    gMusicTransitionCounter = 32;
                 }
                 else
                 {
@@ -988,7 +988,7 @@ void UpdateSound(void)
                     break;
                 else {
                     gFanfareMusicPlayerState = 4;
-                    gUnknown_202D692 = 32;
+                    gMusicTransitionCounter = 32;
                 }
                 break;
             case 4:
@@ -999,9 +999,9 @@ void UpdateSound(void)
                 else
                     m4aMPlayStop(&gMPlayInfo_Fanfare);
 
-                if (gUnknown_202D692 != 0) 
+                if (gMusicTransitionCounter != 0) 
                 {
-                    gUnknown_202D692--;
+                    gMusicTransitionCounter--;
                     break;
                 }
                 else if (gCurrentBGSong != STOP_BGM) 
