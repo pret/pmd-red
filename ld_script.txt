@@ -142,7 +142,7 @@ SECTIONS {
         asm/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
         asm/wonder_mail_5.o(.text);
-        src/wonder_mail_4_1.o(.text);
+        src/wonder_mail_6.o(.text);
         src/post_office_guide.o(.text);
         asm/code_8031D70.o(.text);
         src/adventure_log.o(.text);

@@ -34,7 +34,7 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-extern void sub_8077274(struct DungeonEntity *, struct DungeonEntity *);
+extern void UpdateFlashFireBoost(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
 extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];
@@ -55,7 +55,7 @@ void sub_807360C(struct DungeonEntity *pokemon)
             if(entity->entityData->unk152 != 0)
             {
                entity->entityData->unk152 = 0;
-               sub_8077274(entity, entity);
+               UpdateFlashFireBoost(entity, entity);
             }
         }
     }

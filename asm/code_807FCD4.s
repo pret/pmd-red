@@ -1425,7 +1425,7 @@ sub_80807C0:
 	beq _08080870
 	mov r0, r8
 	movs r2, 0x1
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08080870
