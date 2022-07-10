@@ -22,6 +22,7 @@
 #include "item.h"
 #include "position.h"
 #include "position_util.h"
+#include "status.h"
 #include "team_inventory.h"
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
@@ -33,8 +34,6 @@ enum ItemTargetFlag
     ITEM_TARGET_OTHER = 1 << 0,
     ITEM_TARGET_ALLY = 1 << 1
 };
-
-extern void UpdateFlashFireBoost(struct DungeonEntity *, struct DungeonEntity *);
 
 extern s32 gNumPotentialTargets;
 extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];

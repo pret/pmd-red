@@ -79,7 +79,94 @@ extern void sub_801BF98(void);
 extern u32 sub_801BF48(void);
 extern void sub_802453C(void);
 extern u32 sub_80244E4(void);
+extern bool8 sub_808D750(s16 index_);
+extern void sub_808ED00(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 
+void sub_80268CC(void)
+{
+  struct PokemonStruct *playerPokemon;
+  struct PokemonStruct *pokeStruct;
+  struct PokemonStruct *iVar4;
+  s32 choice;
+  
+  choice = 0;
+  if ((sub_8012FD8(&gUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&gUnknown_203B2B8->unk7C,&choice), choice != 1)) {
+    gUnknown_203B2B8->unk70 = choice;
+  }
+  switch(choice) {
+    case 6:
+        if (sub_808D750(gUnknown_203B2B8->pokeSpecies)) {
+
+#ifdef NONMATCHING
+            puVar3 = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
+#else
+            register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2B8->pokeSpecies]);
+            struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
+            size_t addr = offset + (size_t)p;
+            pokeStruct = (struct PokemonStruct*)addr;
+#endif
+
+            pokeStruct->unk0 |= 2;
+            nullsub_104();
+        }
+        sub_808ED00();
+        sub_8026074(5);
+        break;
+    case 7:
+        gUnknown_203B2B8->unk18->unk0 &= 0xfffd;
+        nullsub_104();
+        sub_808ED00();
+        sub_8026074(6);
+        break;
+    case 8:
+        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
+        playerPokemon = GetPlayerPokemonStruct();
+
+        if (!iVar4->isLeader) {
+            playerPokemon->isLeader = FALSE;
+            iVar4->isLeader = TRUE;
+            nullsub_104();
+        }
+        sub_808ED00();
+        sub_8026074(7);
+        break;
+    case 9:
+        sub_8026074(0xc);
+        break;
+    case 0xd:
+        sub_8026074(0x16);
+        break;
+    case 10:
+        sub_8026074(0xe);
+        break;
+    case 0xb:
+        sub_8026074(0x12);
+        break;
+    case 0xc:
+        PlaySound(0x14d);
+        if (gUnknown_203B2B8->unk14.itemIndex != ITEM_ID_NOTHING) {
+            AddHeldItemToInventory(&gUnknown_203B2B8->unk14);
+        }
+        FillInventoryGaps();
+        gUnknown_203B2B8->unk14.itemIndex = ITEM_ID_NOTHING;
+        gUnknown_203B2B8->unk14.numItems = 0;
+        GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->unk14);
+        nullsub_104();
+        sub_8026074(0x11);
+        break;
+    case 4:
+        sub_8026074(3);
+        break;
+    case 5:
+        sub_8026074(4);
+        break;
+    case 1:
+        sub_8026074(0x19);
+        break;
+
+  }
+}
 
 void sub_8026A78(void)
 {
@@ -221,7 +308,7 @@ void sub_8026C14(void)
         PlaySound(0x14d);
         ShiftItemsDownFrom(gUnknown_203B2B8->unkC);
         FillInventoryGaps();
-        if (gUnknown_203B2B8->unk14.itemIndex != '\0') {
+        if (gUnknown_203B2B8->unk14.itemIndex != ITEM_ID_NOTHING) {
           AddHeldItemToInventory(&gUnknown_203B2B8->unk14);
           nextState = 0x10;
         }
@@ -306,14 +393,14 @@ void sub_8026D88(void)
     }
 }
 
-void sub_8026DAC(u32 r0, struct HeldItem *r1)
+void sub_8026DAC(u32 r0, struct HeldItem *item)
 {
     struct ItemSlot slot;
     struct unkStruct_8090F58 temp;
 
     sub_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&slot, r1);
+    HeldItemToSlot(&slot, item);
     temp.unk0 = 0;
     temp.unk4 = 0;
     temp.unk8 = 1;
@@ -359,7 +446,7 @@ u32 sub_8026EB8(struct PokemonStruct *r0)
     u8 iVar3;
     if(sub_808D3BC() != r0)
         if(sub_808D3F8() != r0)
-            if(r0->isLeader == 0)
+            if(!r0->isLeader)
             {
                 iVar3 = (r0->unk4.dungeonIndex == 0x41);
                 if(iVar3 != 0)

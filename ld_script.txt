@@ -113,6 +113,7 @@ SECTIONS {
         src/gulpin_shop_1.o(.text);
         asm/code_801EE10.o(.text);
         src/luminous_cave.o(.text);
+        src/friend_list_menu_1.o(.text);
         asm/friend_list_menu.o(.text);
         src/friend_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
