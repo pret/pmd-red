@@ -528,8 +528,8 @@ void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     iVar3 = target->entityData;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (iVar3->volatileStatus != 4) {
-      iVar3->volatileStatus = 4;
+    if (iVar3->volatileStatus != VOLATILE_STATUS_COWERING) {
+      iVar3->volatileStatus = VOLATILE_STATUS_COWERING;
       iVar3->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4ECC,1) + 1;
       sub_8041BF8(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB940);
