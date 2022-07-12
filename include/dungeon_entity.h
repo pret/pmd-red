@@ -163,7 +163,7 @@ struct DungeonEntityData
     /* 0xF6 */ bool8 isColorChanged;
     /* 0xF7 */ bool8 isBoss;
     /* 0xF8 */ u8 unkF8;
-    /* 0xF8 */ u8 unkF9;
+    /* 0xF9 */ u8 unkF9;
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
     u8 unkFB;
     // Set to true if the player makes a teammate use their held item.
