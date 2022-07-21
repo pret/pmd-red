@@ -903,8 +903,13 @@ bool8 IsFanfareSEPlaying(u16 songIndex)
 {
   u32 playerIndex;
   struct PMDMusicPlayer *musicPlayer;
+#ifndef NONMATCHING
   register u32 songIndex_u32 asm("r4");
   register u32 songIndex_u32_2 asm("r5");
+#else
+  u32 songIndex_u32;
+  u32 songIndex_u32_2;
+#endif
 
   songIndex_u32 = songIndex;
   songIndex_u32_2 = songIndex_u32;
