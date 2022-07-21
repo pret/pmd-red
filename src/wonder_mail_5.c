@@ -5,6 +5,7 @@
 
 struct unkStruct_203B324
 {
+    // size: 0x78
     u8 fill0[0xC];
     u8 unkC;
     u32 unk10;
@@ -26,7 +27,7 @@ void sub_8030E48(void);
 
 bool8 sub_8030D40(u8 param_1, s32 param_2)
 { 
-  gUnknown_203B324 = MemoryAlloc(0x78,8);
+  gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
   gUnknown_203B324->unkC = param_1;
   sub_801317C(gUnknown_203B324);
   gUnknown_203B324->unk10 = param_2;

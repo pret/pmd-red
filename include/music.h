@@ -11,18 +11,30 @@ bool8 IsFanfare(u32 songIndex);
 u16 GetMusicPlayerIndex(u16 songIndex);
 bool8 IsMusicPlayerPlaying(u16 songIndex);
 void StartNewBGM(u16 songIndex);
-void FadeInNewBGM(u16 SongIndex, u16 speed);
+void FadeInNewBGM(u16 songIndex, u16 speed);
 u16 GetCurrentBGSong(void);
-void sub_800BF48(u16 SongIndex);
+void QueueBGM(u16 songIndex);
 void StopBGM(void); // stops all BGM, fanfares and SE's
 void FadeOutBGM(u16 speed);
-void PlayFanfareSE(u16 SongIndex, u16 param_2);
+void PlayFanfareSE(u16 songIndex, u16 volume);
 void StopFanfareSE(u16 songIndex);
 void FadeOutFanfareSE(u16 songIndex, u16 speed);
 bool8 IsFanfareSEPlaying(u16 songIndex);
 
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);
+
+#define NUM_FANFARES 19
+#define FANFARE_START_INDEX 200
+
+#define NUM_SOUND_EFFECTS 639
+#define SOUND_EFFECTS_START_INDEX 300
+
+#define STOP_SOUND_EFFECT 997
+#define STOP_FANFARE 998
+#define STOP_BGM 999
+
+#define MAX_VOLUME 256
 
 enum MusicPlayerIndex
 {
@@ -36,11 +48,18 @@ enum MusicPlayerIndex
     INDEX_SE6,
 };
 
+// TODO: continue to doc the rest of BG/Fanfare Player States
 enum BG_Player_State
 {
     BG_PLAYER_STATE_INITIALIZE = 0,
     BG_PLAYER_STATE_PLAYING = 1,
     BG_PLAYER_STATE_STOPPED = 4,
+};
+
+enum Fanfare_Player_State
+{
+    FANFARE_PLAYER_STATE_INITIALIZE = 0,
+    FANFARE_PLAYER_STATE_PLAYING = 3,
 };
 
 #endif //GUARD_MUSIC_H

@@ -115,19 +115,19 @@ void sub_80117C4(void)
 // Some sound effect
 void sub_80117D0(void)
 {
-    PlayFanfareSE(302, 256);
+    PlayFanfareSE(302, MAX_VOLUME);
 }
 
 // Some sound effect
 void sub_80117E4(void)
 {
-    PlayFanfareSE(303, 256);
+    PlayFanfareSE(303, MAX_VOLUME);
 }
 
 // Some sound effect
 void sub_80117F8(void)
 {
-    PlayFanfareSE(301, 256);
+    PlayFanfareSE(301, MAX_VOLUME);
 }
 
 void sub_801180C(void)
@@ -170,15 +170,15 @@ void sub_8011860(void)
 void StopAllMusic_1(void)
 {
     xxx_call_stop_bgm();
-    xxx_call_stop_fanfare_se(998);
-    xxx_call_stop_fanfare_se(997);
+    xxx_call_stop_fanfare_se(STOP_FANFARE);
+    xxx_call_stop_fanfare_se(STOP_SOUND_EFFECT);
 }
 
 void FadeOutAllMusic(u16 speed)
 {
     FadeOutBGM(speed);
-    FadeOutFanfareSE(998, speed);
-    FadeOutFanfareSE(997, speed);
+    FadeOutFanfareSE(STOP_FANFARE, speed);
+    FadeOutFanfareSE(STOP_SOUND_EFFECT, speed);
 }
 
 void xxx_call_start_new_bgm(u16 songIndex)
@@ -191,9 +191,9 @@ void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed)
     FadeInNewBGM(songIndex, speed);
 }
 
-void sub_8011914(u16 songIndex)
+void xxx_call_queue_bgm(u16 songIndex)
 {
-    sub_800BF48(songIndex);
+    QueueBGM(songIndex);
 }
 
 void xxx_call_stop_bgm()
@@ -208,23 +208,23 @@ void xxx_call_fade_out_bgm(u16 speed)
 
 u32 IsEqualtoBGTrack(u16 songIndex)
 {
-    u32 temp;
-    temp = GetCurrentBGSong();
+    u32 currBGSong;
+    currBGSong = GetCurrentBGSong();
 
-    if(songIndex == 999)
-        return temp != 999;
+    if(songIndex == STOP_BGM)
+        return currBGSong != STOP_BGM;
 
-    return temp == songIndex;
+    return currBGSong == songIndex;
 }
 
-void sub_8011974(u16 songIndex, u16 r1)
+void xxx_call_play_fanfare_se(u16 songIndex, u16 volume)
 {
-    PlayFanfareSE(songIndex, r1);
+    PlayFanfareSE(songIndex, volume);
 }
 
 void PlaySound(u16 songIndex)
 {
-    PlayFanfareSE(songIndex, 256);
+    PlayFanfareSE(songIndex, MAX_VOLUME);
 }
 
 void xxx_call_stop_fanfare_se(u16 songIndex)
@@ -232,9 +232,9 @@ void xxx_call_stop_fanfare_se(u16 songIndex)
     StopFanfareSE(songIndex);
 }
 
-void sub_80119AC(u16 songIndex, u16 r1)
+void xxx_call_fade_out_fanfare_se(u16 songIndex, u16 speed)
 {
-    FadeOutFanfareSE(songIndex, r1);
+    FadeOutFanfareSE(songIndex, speed);
 }
 
 bool8 IsFanfareSEPlaying_1(u16 songIndex)
@@ -246,7 +246,7 @@ void PlayMenuSoundEffect(u32 r0)
 {
     if(gUnknown_202DE20 > 0)
         return;
-    PlayFanfareSE(gUnknown_80D4144[r0], 256);
+    PlayFanfareSE(gUnknown_80D4144[r0], MAX_VOLUME);
     gUnknown_202DE20 = 4;
 }
 
@@ -255,7 +255,7 @@ void sub_8011A04(void)
     if(gUnknown_202DE22 > 0)
         return;
     gUnknown_202DE22 = 3;
-    PlayFanfareSE(305, 256);
+    PlayFanfareSE(305, MAX_VOLUME);
 }
 
 void sub_8011A2C(u32 r0)

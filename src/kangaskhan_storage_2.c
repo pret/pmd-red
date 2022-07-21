@@ -1,3 +1,4 @@
+#include "constants/item.h"
 #include "global.h"
 #include "input.h"
 #include "memory.h"
@@ -55,7 +56,6 @@ extern void sub_80073E0(u32);
 extern void sub_8012EA4(u32 *, u32);
 extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
 
-
 extern void sub_801A9E0();
 extern void sub_801841C();
 extern void sub_801CCD8();
@@ -68,6 +68,12 @@ extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801A8D0(u32);
+extern u32 sub_801CFE0(u8);
+extern void sub_801CF94(void);
+extern void sub_801AE84(void);
+extern s32 sub_801AED0(s32);
+extern u8 sub_801CF14(u32);
+extern u8 sub_801CF50(u32);
 
 extern struct UnkTextStruct2 gUnknown_80DB7B8;
 extern struct UnkTextStruct2 gUnknown_80DB7E8;
@@ -75,6 +81,210 @@ extern struct UnkTextStruct2 gUnknown_80DB7D0;
 extern struct UnkTextStruct2 gUnknown_80DB800;
 extern struct UnkTextStruct2 gUnknown_80DB818;
 extern u8 gUnknown_80DB830[];
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
+
+struct HeldItem_Alt {
+  union tempHeld
+  {
+      struct HeldItem norm;
+      u32 full_bits;
+  } temp;
+};
+
+void sub_80177F8(void)
+{
+    struct unkStruct_203B208 *preload;
+    u8 *nullText;
+    u32 defaultAction;
+
+    preload = gUnknown_203B208;
+    nullText = NULL;
+    preload->unk24[0].text = *gUnknown_80D4920;
+    preload->unk24[0].menuAction = 4;
+    defaultAction = 1;
+    preload->unk24[1].text = *gUnknown_80D4928;
+    preload->unk24[1].menuAction = 5;
+    preload->unk24[2].text = nullText;
+    preload->unk24[2].menuAction = defaultAction;
+}
+
+void sub_8017828(void)
+{
+  s32 local_8;
+
+  if (sub_80144A4(&local_8) == 0) {
+    if (local_8 != 1) {
+      gUnknown_203B208->unk18 = local_8;
+    }
+    switch(local_8)
+    {
+        case 2:
+            if (GetNumberOfFilledInventorySlots() == 0) {
+                UpdateKangaskhanStorageState(5);
+            }
+            else {
+                if (sub_801CF50(0) != 0) {
+                    UpdateKangaskhanStorageState(8);
+                }
+                else {
+                    UpdateKangaskhanStorageState(0xb);
+                }
+            }
+            break;
+        case 3:
+            if (sub_801CF14(1) != 0) {
+                UpdateKangaskhanStorageState(7);
+            }
+            else
+            {
+                if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+                    UpdateKangaskhanStorageState(6);
+                }
+                else {
+                    UpdateKangaskhanStorageState(0x14);
+                }
+            }
+            break;
+        case 6:
+            UpdateKangaskhanStorageState(2);
+            break;
+        case 1:
+            UpdateKangaskhanStorageState(3);
+            break;
+    }
+  }
+}
+
+void sub_80178D0(void)
+{
+  s32 local_18;
+  
+  if (sub_80144A4(&local_18) == 0) {
+    switch(local_18)
+    {
+      case 4:
+        MoveToStorage(&gUnknown_203B208->unkC);
+        ShiftItemsDownFrom(gUnknown_203B208->unk10);
+        FillInventoryGaps();
+        UpdateKangaskhanStorageState(0x13);
+        break;
+      case 1:
+      case 5:
+        UpdateKangaskhanStorageState(0xe);
+        break;
+    }
+  }
+}
+
+void sub_8017928(void)
+{
+  int local_c;
+  u32 itemindex;
+  u32 numItems;
+  struct HeldItem_Alt local_8;
+  
+  if (sub_80144A4(&local_c) == 0) {
+    switch(local_c)
+    {
+        case 4:
+
+            gTeamInventory_203B460->teamStorage[gUnknown_203B208->unkC.itemIndex] -= gUnknown_203B208->unkC.numItems;
+
+            itemindex = gUnknown_203B208->unkC.itemIndex;
+            local_8.temp.full_bits = (local_8.temp.full_bits & 0xffffff00) | itemindex;
+
+            numItems = gUnknown_203B208->unkC.numItems << 8;
+            local_8.temp.full_bits = (local_8.temp.full_bits & 0xffff00ff) | numItems;
+
+            AddHeldItemToInventory((struct HeldItem *)&local_8);
+            UpdateKangaskhanStorageState(0x1d);
+            break;
+        case 1:
+        case 5:
+            UpdateKangaskhanStorageState(0x17);
+            break;
+    }
+  }
+}
+
+void sub_80179A8(void)
+{
+  s32 iVar1;
+  s32 local_18;
+  
+  if (sub_80144A4(&local_18) == 0) {
+    switch(local_18)
+    {
+      case 4:
+      for(iVar1 = 0; iVar1 < INVENTORY_SIZE; iVar1++)
+      {
+        if (sub_801AED0(iVar1) != 0) {
+          MoveToStorage(&gTeamInventory_203B460->teamItems[iVar1]);
+          gTeamInventory_203B460->teamItems[iVar1].itemIndex = 0;
+          gTeamInventory_203B460->teamItems[iVar1].itemFlags = 0;
+        }
+      }
+      FillInventoryGaps();
+      sub_801AE84();
+      UpdateKangaskhanStorageState(0x13);
+      break;
+
+      case 1:
+      case 5:
+        UpdateKangaskhanStorageState(0xe);
+        break;
+    }
+  }
+}
+
+void sub_8017A1C(void)
+{
+  u8 iVar2_u8;
+  u32 uVar4;
+  s32 itemID;
+  int local_18;
+  u16 cast;
+  struct HeldItem_Alt local_14;
+  
+  if (sub_80144A4(&local_18) == 0) {
+
+    switch(local_18)
+    {
+        case 4:
+            for(itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++)
+            {
+                iVar2_u8 = itemID;
+                if (sub_801CFE0(itemID) != 0) {
+                    local_14.temp.full_bits = (local_14.temp.full_bits & 0xffffff00) | iVar2_u8;
+                    if (IsThrowableItem(local_14.temp.norm.itemIndex)) {
+                        uVar4 = gTeamInventory_203B460->teamStorage[local_14.temp.norm.itemIndex];
+                        if (uVar4 > 99) {
+                            local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | 0x6300;
+                        }
+                        else {
+                            cast = uVar4 << 8;
+                            local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | cast;
+                        }
+                    }
+                    else {
+                        local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | 0x100;
+                    }
+                    gTeamInventory_203B460->teamStorage[local_14.temp.norm.itemIndex] -= local_14.temp.norm.numItems;
+                    AddHeldItemToInventory((struct HeldItem *)&local_14);
+                }
+            }
+            FillInventoryGaps();
+            sub_801CF94();
+            UpdateKangaskhanStorageState(0x1d);
+            break;
+        case 1:
+        case 5:
+            UpdateKangaskhanStorageState(0x17);
+            break;
+    }
+  }
+}
 
 void sub_8017AF8(void)
 {
