@@ -9,6 +9,7 @@
 #include "subStruct_203B240.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
+#include "text_util.h"
 
 #include <stddef.h>
 
@@ -42,9 +43,8 @@ extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u8* GetUnformattedTypeString(s16);
 extern void sub_80073E0(u32);
-extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void xxx_sort_inv_unk230_80918EC();
 bool8 xxx_insert_unk250_8091C1C(u8);
@@ -701,7 +701,7 @@ u32 sub_80913E0(struct ItemSlot* slot, u32 a2, struct subStruct_203B240 ** a3)
     struct PokemonMove *buffer8 = (struct PokemonMove*) (buffer88 + 0x50);  // field in struct
     u16 move = GetItemMove(slot->itemIndex);
     u8 moves_data;
-    u8* typestring;
+    const u8* typestring;
     u32 result;
 
     InitPokemonMove(buffer8, move);

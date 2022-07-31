@@ -100,7 +100,7 @@ void sub_8016B00(void)
   s32 auStack8;
   
   if (sub_80144A4(&auStack8) == 0) {
-    UpdateFelicityBankState(gUnknown_203B204->unk8);
+    UpdateFelicityBankState(gUnknown_203B204->fallbackState);
   }
 }
 
@@ -109,7 +109,7 @@ void sub_8016B24(void)
   s32 auStack8;
   
   if (sub_80144A4(&auStack8) == 4) {
-    UpdateFelicityBankState(gUnknown_203B204->unk8);
+    UpdateFelicityBankState(gUnknown_203B204->fallbackState);
   }
 }
 

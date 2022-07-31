@@ -5,21 +5,20 @@
 #include "music.h"
 #include "input.h"
 #include "constants/bg_music.h"
+#include "random.h"
 
 extern bool8 EnableInterrupts(void);
 extern bool8 DisableInterrupts(void);
-extern void SoundBiasReset();
-extern void SoundBiasSet();
 extern void AckInterrupt(u16);
 extern void nullsub_25(void);
+
 void nullsub_18(void);
 void UpdateSound(void);
 void nullsub_21(u16);
-
-extern void Random();
-extern void sub_800BA5C();
+void sub_800BA5C();
 void xxx_update_bg_sound_input();
-
+void SoundVSync();
+void BlinkSavingIcon();
 
 typedef void (*IntrCallback)(void);
 extern IntrCallback gIntrCallbacks[];
@@ -83,9 +82,6 @@ enum
     BG3,
     NUM_BGS
 };
-
-void SoundVSync();
-extern void BlinkSavingIcon();
 
 void UnusedIntrFunc(void)
 {

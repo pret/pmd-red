@@ -75,7 +75,7 @@ bool8 sub_8030F58(u32 wonderMailMode)
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailMode = wonderMailMode;
-  iVar3 = GetDialogueSpriteDataPtr(0x130);
+  iVar3 = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
   gUnknown_203B328->faceFile = iVar3;
   gUnknown_203B328->faceData = iVar3->data;
   gUnknown_203B328->unk114 = 0;
@@ -102,7 +102,7 @@ bool8 sub_8030F58(u32 wonderMailMode)
     gUnknown_203B328->state = 0;
     sub_80306A8(wonderMailMode,0,0,8);
   }
-  return 1;
+  return TRUE;
 }
 
 s32 sub_8031050(void)

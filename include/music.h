@@ -20,6 +20,8 @@ void PlayFanfareSE(u16 songIndex, u16 volume);
 void StopFanfareSE(u16 songIndex);
 void FadeOutFanfareSE(u16 songIndex, u16 speed);
 bool8 IsFanfareSEPlaying(u16 songIndex);
+void SoundBiasReset(void);
+void SoundBiasSet(void);
 
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);

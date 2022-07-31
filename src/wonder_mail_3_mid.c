@@ -445,7 +445,7 @@ void HandleMissionReward(void)
   const char *rankString;
   u8 uVar7;
   struct unkStruct_8090F58 local_20;
-  struct ItemSlot_Alt local_14;
+  struct ItemSlot_Alt item;
   u32 numItems;
   u32 index_cast;
   u32 index_cast2;
@@ -526,22 +526,22 @@ void HandleMissionReward(void)
 
                 // Cast ItemIndex
                 index_cast = uVar7 << 16;
-                local_14.temp.full_bits = (local_14.temp.full_bits & 0xff00ffff) | index_cast;
+                item.temp.full_bits = (item.temp.full_bits & 0xff00ffff) | index_cast;
 
-                index_cast2 = local_14.temp.full_bits >> 16;
+                index_cast2 = item.temp.full_bits >> 16;
                 if (IsThrowableItem(index_cast2)) {
                     // Cast number items
                     numItems = (gUnknown_203B310->unk10->numItems << 8);
-                    local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | numItems;
+                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | numItems;
                 }
                 else {
-                    local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | 0;
+                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0;
                 }
-                local_14.temp.full_bits = (local_14.temp.full_bits & 0xffffff00) | ITEM_FLAG_EXISTS;
+                item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | ITEM_FLAG_EXISTS;
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gUnknown_202DEA8,(struct ItemSlot *)&local_14,&local_20);
+                sub_8090E14(gUnknown_202DEA8,(struct ItemSlot *)&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
                     gUnknown_203B310->nextState = 5;
