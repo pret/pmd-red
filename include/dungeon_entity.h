@@ -170,7 +170,8 @@ struct DungeonEntityData
     // This is done by going to the teammate's held item in the toolbox and selecting "Use".
     /* 0xFC */ bool8 useHeldItem;
     /* 0xFD */ u8 perishSongTimer; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
-    u8 fillFE[0x100 - 0xFE];
+    u8 unkFE;
+    u8 unkFF;
     /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     /* 0x104 */ s32 movementSpeed;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
@@ -195,7 +196,9 @@ struct DungeonEntityData
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 fill153[0x15A - 0x153];
+    u8 fill153[0x158 - 0x153];
+    u8 unk158;
+    u8 unk159;
     u8 unk15A;
     u8 unk15B;
     u8 unk15C;

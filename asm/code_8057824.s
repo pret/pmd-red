@@ -2446,7 +2446,7 @@ _08058F7E:
 	.align 2, 0
 _08058FB0: .4byte gDungeonGlobalData
 _08058FB4: .4byte 0x00003a0e
-_08058FB8: .4byte gUnknown_80F5D10
+_08058FB8: .4byte gNaturePowerMoveTable
 	thumb_func_end sub_8058F58
 
 	thumb_func_start sub_8058FBC

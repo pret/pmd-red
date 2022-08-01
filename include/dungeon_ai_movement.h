@@ -4,5 +4,6 @@
 #include "dungeon_entity.h"
 
 void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
+bool8 CanTakeItem(struct DungeonEntity *pokemon);
 
 #endif

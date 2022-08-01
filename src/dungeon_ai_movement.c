@@ -15,7 +15,6 @@
 #include "number_util.h"
 #include "map.h"
 
-extern bool8 CanTakeItem(struct DungeonEntity *pokemon);
 extern bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
 
@@ -97,9 +96,9 @@ bool8 CanTakeItem(struct DungeonEntity *pokemon)
         case 5:
             break;
         case ENTITY_ITEM:
-            if ((((!entityData->isLeader) && !(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS)) &&
-                (((mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) || (!entityData->isEnemy)))) &&
-            (item = GetItemData(mapEntity), (item->itemFlags & ITEM_FLAG_FOR_SALE) == 0)) {
+            if ((!entityData->isLeader && !(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS) &&
+                ((mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) || !entityData->isEnemy)) &&
+            (item = GetItemData(mapEntity), !(item->itemFlags & ITEM_FLAG_FOR_SALE))) {
                 return TRUE;
             }
       }
