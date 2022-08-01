@@ -5,11 +5,15 @@
 #include "constants/dungeon_action.h"
 #include "constants/tactic.h"
 #include "dungeon_action.h"
+#include "dungeon_capabilities_1.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_ai_movement_1.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_util.h"
+#include "item.h"
 #include "number_util.h"
+#include "map.h"
 
 extern bool8 CanTakeItem(struct DungeonEntity *pokemon);
 extern bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
@@ -71,4 +75,35 @@ void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect)
             DecideMovement(pokemon, showRunAwayEffect);
         }
     }
+}
+
+bool8 CanTakeItem(struct DungeonEntity *pokemon)
+{
+  struct MapTile *mapTile;
+  struct ItemSlot *item;
+  struct DungeonEntity *mapEntity;
+  struct DungeonEntityData *entityData;
+
+  entityData = pokemon->entityData;
+  if (EntityExists(pokemon) && !CannotUseItems(pokemon)) {
+    mapTile = GetMapTileForDungeonEntity_2(pokemon);
+    mapEntity = mapTile->mapObject;
+    if (mapEntity != NULL) {
+      switch(GetEntityType(mapEntity)) {
+        case ENTITY_NONE:
+        case ENTITY_POKEMON:
+        case ENTITY_TRAP:
+        case 4:
+        case 5:
+            break;
+        case ENTITY_ITEM:
+            if ((((!entityData->isLeader) && !(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS)) &&
+                (((mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) || (!entityData->isEnemy)))) &&
+            (item = GetItemData(mapEntity), (item->itemFlags & ITEM_FLAG_FOR_SALE) == 0)) {
+                return TRUE;
+            }
+      }
+    }
+  }
+  return FALSE;
 }
