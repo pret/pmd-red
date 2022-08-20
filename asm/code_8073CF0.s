@@ -1880,7 +1880,7 @@ _08074C48:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_807A124
+	bl SendSleepEndMessage
 _08074C6E:
 	adds r0, r7, 0
 	bl EntityExists
@@ -1909,7 +1909,7 @@ _08074C88:
 	bne _08074CAA
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A290
+	bl SendNonVolatileEndMessage
 _08074CAA:
 	adds r0, r7, 0
 	bl EntityExists
@@ -1967,7 +1967,7 @@ _08074D00:
 	bne _08074D22
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A400
+	bl SendVolatileEndMessage
 _08074D22:
 	adds r0, r7, 0
 	bl EntityExists
@@ -1996,7 +1996,7 @@ _08074D3C:
 	bne _08074D5E
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A4C8
+	bl SendProtectionEndMessage
 _08074D5E:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2026,7 +2026,7 @@ _08074D78:
 	adds r0, r7, 0
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_807A5D0
+	bl SendWaitingEndMessage
 _08074D9C:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2055,7 +2055,7 @@ _08074DB6:
 	bne _08074DD8
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A6C8
+	bl SendLinkedEndMessage
 _08074DD8:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2084,7 +2084,7 @@ _08074DF2:
 	bne _08074E14
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A734
+	bl SendMoveEndMessage
 _08074E14:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2113,7 +2113,7 @@ _08074E2E:
 	bne _08074E50
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A7C8
+	bl SendTransformEndMessage
 _08074E50:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2142,7 +2142,7 @@ _08074E6A:
 	bne _08074E8C
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A888
+	bl SendEyesightEndMessage
 _08074E8C:
 	adds r0, r7, 0
 	bl EntityExists
@@ -2169,7 +2169,7 @@ _08074E9A:
 	bne _08074EC6
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_807A924
+	bl SendMuzzledEndMessage
 _08074EC6:
 	adds r0, r7, 0
 	bl EntityExists

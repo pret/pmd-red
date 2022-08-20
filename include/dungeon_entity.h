@@ -101,7 +101,9 @@ struct DungeonEntityData
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactic;
-    u8 fill95[0xA4 - 0x95];
+    u8 fill95[0x9C - 0x95];
+    /* 0x9C */ u32 unk9C;
+    u8 fillA0[0xA4 - 0xA0];
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
@@ -135,7 +137,8 @@ struct DungeonEntityData
     /* 0xCC */ u8 cursedDamageTimer;
     u8 fillCD[0xD0 - 0xCD];
     /* 0xD0 */ u8 linkedStatus;
-    u8 fillD1[0xD9 - 0xD1];
+    u8 fillD1[0xD8 - 0xD1];
+    /* 0xD8 */ u8 unkD8;
     /* 0xD9 */ u8 linkedStatusTurnsLeft;
     /* 0xDA */ u8 linkedStatusDamageTimer;
     u8 fillDB;
@@ -270,7 +273,9 @@ struct DungeonEntity
     /* 0x50 */ u16 spriteBaseForDirection;
     u8 fill52[0x54 - 0x52];
     /* 0x54 */ u16 spriteGlobalIndex;
-    u8 fill56[0x6A - 0x56];
+    u8 fill56[0x64 - 0x56];
+    u32 unk64;
+    u8 fill68[2];
     /* 0x6A */ u8 unk6A;
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 facingDir;

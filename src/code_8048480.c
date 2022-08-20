@@ -40,7 +40,7 @@ extern void sub_8076D10(struct DungeonEntity *pokemon, struct DungeonEntity *r1)
 extern void LevelDownTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
-extern void sub_807A290(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
+extern void SendNonVolatileEndMessage(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, const char[]);
 extern void RestoreVisionTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void sub_8077910(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32);
@@ -110,7 +110,7 @@ void sub_804841C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_8048428(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if(target->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
@@ -119,7 +119,7 @@ void sub_8048428(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_8048450(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if((u8)(target->entityData->nonVolatileStatus - 2) <= 1)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
@@ -164,7 +164,7 @@ void sub_80484DC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_80484E8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if(target->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
     {
         SetMessageArgument(gAvailablePokemonNames, target, 0);

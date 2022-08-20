@@ -7542,7 +7542,7 @@ _08056400:
 	bl SendImmobilizeEndMessage
 	adds r0, r5, 0
 	adds r1, r5, 0
-	bl sub_807A6C8
+	bl SendLinkedEndMessage
 _08056418:
 	ldr r0, _08056464
 	ldrb r0, [r0]

@@ -2,6 +2,7 @@
 #include "constants/status.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "code_8077274_1.h"
 #include "moves.h"
 #include "status_checks_1.h"
 #include "weather.h"
@@ -42,7 +43,6 @@ extern void sub_80768DC(struct DungeonEntity *, struct DungeonEntity *, u32, u32
 extern void sub_80772C0(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32, u32);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, const char[]);
-extern void sub_8079F20(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32);
 extern void sub_8077434(struct DungeonEntity *r0, struct DungeonEntity *r1, u32 , u32, u32);
 extern s32 sub_80556BC(struct DungeonEntity *, struct DungeonEntity *, u8, u32, u32, u32);
 extern u8 sub_805727C(struct DungeonEntity *, struct DungeonEntity *, s16);

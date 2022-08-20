@@ -1133,7 +1133,7 @@ _080585EC:
 	bl sub_80522F4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_807A4C8
+	bl SendProtectionEndMessage
 	movs r6, 0x1
 _08058602:
 	movs r3, 0x80
@@ -1414,7 +1414,7 @@ sub_80587E8:
 	lsrs r4, r1, 31
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_807A290
+	bl SendNonVolatileEndMessage
 	b _0805882E
 _0805881A:
 	movs r3, 0x80
