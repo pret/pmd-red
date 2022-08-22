@@ -103,7 +103,7 @@ struct DungeonEntityData
     /* 0x94 */ u8 tactic;
     u8 fill95[0x9C - 0x95];
     /* 0x9C */ u32 unk9C;
-    u8 fillA0[0xA4 - 0xA0];
+    /* 0xA0 */ u32 unkA0;
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
@@ -151,8 +151,8 @@ struct DungeonEntityData
     /* 0xE5 */ u8 transformStatusTurnsLeft;
     u8 fillE6[0xE8 - 0xE6];
     /* 0xE8 */ u8 eyesightStatus;
-    u8 fillE9;
-    /* 0xEA */ u8 eyesightStatusTurnsLeft;
+    /* 0xE9 */ u8 eyesightStatusTurnsLeft;
+    /* 0xEA */ u8 unkEA;
     u8 fillEB;
     /* 0xEC */ bool8 muzzledStatus;
     /* 0xED */ u8 muzzledTurnsLeft;
@@ -195,7 +195,9 @@ struct DungeonEntityData
     u8 fill146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
-    u8 fill149[0x14E - 0x149];
+    /* 0x149 */ u8 unk149;
+    /* 0x14A */ u8 unk14A;
+    u8 fill14B[0x14E - 0x14B];
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;

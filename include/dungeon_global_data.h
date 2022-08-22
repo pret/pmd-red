@@ -61,7 +61,8 @@ struct DungeonGlobalData
     u8 fill673[0x674 - 0x673];
     u8 unk674;
     u8 unk675;
-    u8 unk676[0x68A - 0x676];
+    /* 0x676 */ bool8 itemHoldersIdentified;
+    u8 unk677[0x68A - 0x677];
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];

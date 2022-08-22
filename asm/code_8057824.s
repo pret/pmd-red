@@ -111,7 +111,7 @@ sub_8057E50:
 	bl sub_807A9D8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8079CA0
+	bl MirrorMoveStatusTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -1925,7 +1925,7 @@ _08058BDC: .4byte gUnknown_8106A4C
 sub_8058BE0:
 	push {lr}
 	adds r1, r0, 0
-	bl sub_8079C24
+	bl EndureStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2595,7 +2595,7 @@ _080590C4: .4byte gUnknown_80F4DE8
 	thumb_func_start sub_80590C8
 sub_80590C8:
 	push {lr}
-	bl sub_80798B0
+	bl MistStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2736,7 +2736,7 @@ _080591D4: .4byte gUnknown_80F4DEA
 	thumb_func_start sub_80591D8
 sub_80591D8:
 	push {lr}
-	bl sub_8079834
+	bl SafeguardStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4145,7 +4145,7 @@ _08059C7C: .4byte gUnknown_80FE36C
 	thumb_func_start sub_8059C80
 sub_8059C80:
 	push {lr}
-	bl sub_8079D1C
+	bl Conversion2StatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5146,7 +5146,7 @@ _0805A3F8: .4byte gUnknown_8106A4C
 	thumb_func_start sub_805A3FC
 sub_805A3FC:
 	push {lr}
-	bl sub_807992C
+	bl WishStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -6089,7 +6089,7 @@ _0805AB44: .4byte gUnknown_80FC5CC
 	thumb_func_start sub_805AB48
 sub_805AB48:
 	push {lr}
-	bl sub_8079A24
+	bl LightScreenStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -7106,7 +7106,7 @@ _0805B2E0: .4byte gUnknown_80F4F94
 	thumb_func_start sub_805B2E4
 sub_805B2E4:
 	push {lr}
-	bl sub_80799A8
+	bl MagicCoatStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -7115,7 +7115,7 @@ sub_805B2E4:
 	thumb_func_start sub_805B2F0
 sub_805B2F0:
 	push {lr}
-	bl sub_8079B1C
+	bl ProtectStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -7220,7 +7220,7 @@ _0805B39E:
 	thumb_func_start sub_805B3A8
 sub_805B3A8:
 	push {lr}
-	bl sub_8079BA8
+	bl MirrorCoatStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -7797,7 +7797,7 @@ _0805B7F8: .4byte gUnknown_80FDCA0
 	thumb_func_start sub_805B7FC
 sub_805B7FC:
 	push {lr}
-	bl sub_8079AA0
+	bl ReflectStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -8518,7 +8518,7 @@ _0805BD52:
 	thumb_func_start sub_805BD64
 sub_805BD64:
 	push {lr}
-	bl sub_8078D8C
+	bl MuzzleTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -9095,7 +9095,7 @@ _0805C1AC: .4byte 0x0000270f
 	thumb_func_start sub_805C1B0
 sub_805C1B0:
 	push {lr}
-	bl sub_80790C8
+	bl IdentityItemHolders
 	movs r0, 0x1
 	pop {r1}
 	bx r1

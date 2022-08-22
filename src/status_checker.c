@@ -2,6 +2,7 @@
 #include "status_checker.h"
 
 #include "code_80521D0.h"
+#include "code_8077274_1.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -24,8 +25,6 @@
 extern void sub_807F43C(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8078F50(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8077E4C(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8079570(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_80795C4(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807DC68(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8077BB4(struct DungeonEntity *, struct DungeonEntity *, u8);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
@@ -281,13 +280,13 @@ bool8 sub_805C474(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 bool8 sub_805C480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8079570(pokemon, target);
+    LongTossStatusTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805C48C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_80795C4(pokemon, target);
+    PierceStatusTarget(pokemon, target);
     return TRUE;
 }
 

@@ -464,7 +464,7 @@ _08057778: .4byte gUnknown_80F502A
 	thumb_func_start sub_805777C
 sub_805777C:
 	push {lr}
-	bl sub_8079DB8
+	bl VitalThrowStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1

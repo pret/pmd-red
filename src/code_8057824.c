@@ -12,7 +12,7 @@ extern u8 gAvailablePokemonNames[];
 
 extern s16 gUnknown_80F4DB6;
 extern u16 gUnknown_80F4F42;
-extern u32 gUnknown_80FAC88;
+extern u8 *gUnknown_80FAC88;
 extern u8 *gUnknown_80FD018[];
 extern u8 *gUnknown_80FCFBC[];
 extern u8 *gUnknown_80FCFE4[];
@@ -49,7 +49,6 @@ extern u8 sub_805727C(struct DungeonEntity *, struct DungeonEntity *, s16);
 extern u32 sub_8055640(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void sub_80779F0(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern void sub_8078968(struct DungeonEntity *r0, struct DungeonEntity *r1);
-extern void sub_8079618(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32, u32);
 
 extern void sub_8077AE4(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32);
 extern void sub_8077084(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32, u32);
@@ -122,10 +121,10 @@ bool32 sub_8057948(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return TRUE;
 }
 
-bool32 sub_8057954(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32 param_3)
+bool32 sub_8057954(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move)
 {
   // {ARG_POKEMON_0} is enraged
-  sub_8079618(pokemon,target,0xc,param_3,gUnknown_80FAC88);
+  sub_8079618(pokemon,target,0xc,move,gUnknown_80FAC88);
   return TRUE;
 }
 
