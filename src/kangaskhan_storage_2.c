@@ -111,13 +111,13 @@ void sub_80177F8(void)
 
 void sub_8017828(void)
 {
-  s32 local_8;
+  s32 menuAction;
 
-  if (sub_80144A4(&local_8) == 0) {
-    if (local_8 != 1) {
-      gUnknown_203B208->unk18 = local_8;
+  if (sub_80144A4(&menuAction) == 0) {
+    if (menuAction != 1) {
+      gUnknown_203B208->unk18 = menuAction;
     }
-    switch(local_8)
+    switch(menuAction)
     {
         case 2:
             if (GetNumberOfFilledInventorySlots() == 0) {
@@ -158,10 +158,10 @@ void sub_8017828(void)
 
 void sub_80178D0(void)
 {
-  s32 local_18;
+  s32 menuAction;
   
-  if (sub_80144A4(&local_18) == 0) {
-    switch(local_18)
+  if (sub_80144A4(&menuAction) == 0) {
+    switch(menuAction)
     {
       case 4:
         MoveToStorage(&gUnknown_203B208->unkC);
@@ -179,25 +179,25 @@ void sub_80178D0(void)
 
 void sub_8017928(void)
 {
-  int local_c;
+  int menuAction;
   u32 itemindex;
   u32 numItems;
-  struct HeldItem_Alt local_8;
+  struct HeldItem_Alt item;
   
-  if (sub_80144A4(&local_c) == 0) {
-    switch(local_c)
+  if (sub_80144A4(&menuAction) == 0) {
+    switch(menuAction)
     {
         case 4:
 
             gTeamInventory_203B460->teamStorage[gUnknown_203B208->unkC.itemIndex] -= gUnknown_203B208->unkC.numItems;
 
             itemindex = gUnknown_203B208->unkC.itemIndex;
-            local_8.temp.full_bits = (local_8.temp.full_bits & 0xffffff00) | itemindex;
+            item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemindex;
 
             numItems = gUnknown_203B208->unkC.numItems << 8;
-            local_8.temp.full_bits = (local_8.temp.full_bits & 0xffff00ff) | numItems;
+            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | numItems;
 
-            AddHeldItemToInventory((struct HeldItem *)&local_8);
+            AddHeldItemToInventory((struct HeldItem *)&item);
             UpdateKangaskhanStorageState(0x1d);
             break;
         case 1:
@@ -211,10 +211,10 @@ void sub_8017928(void)
 void sub_80179A8(void)
 {
   s32 iVar1;
-  s32 local_18;
+  s32 menuAction;
   
-  if (sub_80144A4(&local_18) == 0) {
-    switch(local_18)
+  if (sub_80144A4(&menuAction) == 0) {
+    switch(menuAction)
     {
       case 4:
       for(iVar1 = 0; iVar1 < INVENTORY_SIZE; iVar1++)
@@ -240,38 +240,38 @@ void sub_80179A8(void)
 
 void sub_8017A1C(void)
 {
-  u8 iVar2_u8;
-  u32 uVar4;
+  u8 itemID_u8;
+  u32 numItems_cast;
   s32 itemID;
-  int local_18;
+  int menuAction;
   u16 cast;
-  struct HeldItem_Alt local_14;
+  struct HeldItem_Alt item;
   
-  if (sub_80144A4(&local_18) == 0) {
+  if (sub_80144A4(&menuAction) == 0) {
 
-    switch(local_18)
+    switch(menuAction)
     {
         case 4:
             for(itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++)
             {
-                iVar2_u8 = itemID;
+                itemID_u8 = itemID;
                 if (sub_801CFE0(itemID) != 0) {
-                    local_14.temp.full_bits = (local_14.temp.full_bits & 0xffffff00) | iVar2_u8;
-                    if (IsThrowableItem(local_14.temp.norm.itemIndex)) {
-                        uVar4 = gTeamInventory_203B460->teamStorage[local_14.temp.norm.itemIndex];
-                        if (uVar4 > 99) {
-                            local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | 0x6300;
+                    item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemID_u8;
+                    if (IsThrowableItem(item.temp.norm.itemIndex)) {
+                        numItems_cast = gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex];
+                        if (numItems_cast > 99) {
+                            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0x6300;
                         }
                         else {
-                            cast = uVar4 << 8;
-                            local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | cast;
+                            cast = numItems_cast << 8;
+                            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | cast;
                         }
                     }
                     else {
-                        local_14.temp.full_bits = (local_14.temp.full_bits & 0xffff00ff) | 0x100;
+                        item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0x100;
                     }
-                    gTeamInventory_203B460->teamStorage[local_14.temp.norm.itemIndex] -= local_14.temp.norm.numItems;
-                    AddHeldItemToInventory((struct HeldItem *)&local_14);
+                    gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] -= item.temp.norm.numItems;
+                    AddHeldItemToInventory((struct HeldItem *)&item);
                 }
             }
             FillInventoryGaps();

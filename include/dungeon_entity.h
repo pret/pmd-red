@@ -101,7 +101,9 @@ struct DungeonEntityData
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactic;
-    u8 fill95[0xA4 - 0x95];
+    u8 fill95[0x9C - 0x95];
+    /* 0x9C */ u32 unk9C;
+    /* 0xA0 */ u32 unkA0;
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
@@ -135,7 +137,8 @@ struct DungeonEntityData
     /* 0xCC */ u8 cursedDamageTimer;
     u8 fillCD[0xD0 - 0xCD];
     /* 0xD0 */ u8 linkedStatus;
-    u8 fillD1[0xD9 - 0xD1];
+    u8 fillD1[0xD8 - 0xD1];
+    /* 0xD8 */ u8 unkD8;
     /* 0xD9 */ u8 linkedStatusTurnsLeft;
     /* 0xDA */ u8 linkedStatusDamageTimer;
     u8 fillDB;
@@ -148,8 +151,8 @@ struct DungeonEntityData
     /* 0xE5 */ u8 transformStatusTurnsLeft;
     u8 fillE6[0xE8 - 0xE6];
     /* 0xE8 */ u8 eyesightStatus;
-    u8 fillE9;
-    /* 0xEA */ u8 eyesightStatusTurnsLeft;
+    /* 0xE9 */ u8 eyesightStatusTurnsLeft;
+    /* 0xEA */ u8 unkEA;
     u8 fillEB;
     /* 0xEC */ bool8 muzzledStatus;
     /* 0xED */ u8 muzzledTurnsLeft;
@@ -170,7 +173,8 @@ struct DungeonEntityData
     // This is done by going to the teammate's held item in the toolbox and selecting "Use".
     /* 0xFC */ bool8 useHeldItem;
     /* 0xFD */ u8 perishSongTimer; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
-    u8 fillFE[0x100 - 0xFE];
+    u8 unkFE;
+    u8 unkFF;
     /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     /* 0x104 */ s32 movementSpeed;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
@@ -191,11 +195,15 @@ struct DungeonEntityData
     u8 fill146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
-    u8 fill149[0x14E - 0x149];
+    /* 0x149 */ u8 unk149;
+    /* 0x14A */ u8 unk14A;
+    u8 fill14B[0x14E - 0x14B];
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 fill153[0x15A - 0x153];
+    u8 fill153[0x158 - 0x153];
+    u8 unk158;
+    u8 unk159;
     u8 unk15A;
     u8 unk15B;
     u8 unk15C;
@@ -267,7 +275,9 @@ struct DungeonEntity
     /* 0x50 */ u16 spriteBaseForDirection;
     u8 fill52[0x54 - 0x52];
     /* 0x54 */ u16 spriteGlobalIndex;
-    u8 fill56[0x6A - 0x56];
+    u8 fill56[0x64 - 0x56];
+    u32 unk64;
+    u8 fill68[2];
     /* 0x6A */ u8 unk6A;
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 facingDir;

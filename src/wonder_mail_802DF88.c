@@ -127,13 +127,13 @@ void sub_802DF88(void);
 void sub_802DF14(void);
 void sub_801317C(void);
 
-u32 sub_802DB28(u8 jobSlot, u8 param_2)
+bool8 sub_802DB28(u8 jobSlot, u8 param_2)
 {
   char local_18 [8];
   
   sub_8096AF8(local_18,jobSlot,param_2);
   if (local_18[0] == '\0') {
-      return 0;
+      return FALSE;
   }
   else {
     ResetUnusedInputStruct();
@@ -154,7 +154,7 @@ u32 sub_802DB28(u8 jobSlot, u8 param_2)
       gUnknown_203B2FC->faceData = gUnknown_203B2FC->faceFile->data;
     }
     sub_802DC28(0);
-    return 1;
+    return TRUE;
   }
 }
 

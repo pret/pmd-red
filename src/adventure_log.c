@@ -11,16 +11,12 @@ struct AdventureLog
     /* 0x1A */ s16 unk1A;
     /* 0x1C */ s16 unk1C;
     /* 0x1E */ s16 currPage;
-    u16 unk20;
+    s16 unk20;
     u8 fill22[0x34 - 0x22];
     u32 unk34;
     struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[3];
-    u8 fill84[0x9C - 0x84];
-    u8 unk9C;
-    /* 0x9D */ u8 currPage_u8;
-    u8 unk9E;
-    u8 unk9F;
+    struct UnkTextStruct2 unk3C[4];
+    u8 unk9C[4];
 };
 
 extern struct AdventureLog *gAdventureLog;
@@ -79,7 +75,7 @@ u32 CreateAdventureLogScreen(u32 param_1)
   gAdventureLog->unk38 = &gAdventureLog->unk3C[param_1];
   sub_8006518(gAdventureLog->unk3C);
   gAdventureLog->unk3C[gAdventureLog->unk34] = gUnknown_80E2008;
-  gAdventureLog->unk38->unk14 = &gAdventureLog->unk9C;
+  gAdventureLog->unk38->unk14 = gAdventureLog->unk9C;
 
   ResetUnusedInputStruct();
   sub_800641C(gAdventureLog->unk3C,1,1);
@@ -134,10 +130,10 @@ void sub_8032084(void)
 {
   u32 sVar2;
   
-  gAdventureLog->unk9C = gAdventureLog->unk20;
-  gAdventureLog->currPage_u8 = gAdventureLog->currPage;
-  gAdventureLog->unk9E = 0xb;
-  gAdventureLog->unk9F = 0;
+  gAdventureLog->unk9C[0] = gAdventureLog->unk20;
+  gAdventureLog->unk9C[1]= gAdventureLog->currPage;
+  gAdventureLog->unk9C[2]= 0xb;
+  gAdventureLog->unk9C[3]= 0;
   // So a sign extend..
   sVar2 = sub_80095E4(gAdventureLog->unk1A,0xc) + 2 << 0x10;
   // TODO needs asr r3, r0, r16
@@ -225,7 +221,7 @@ void DisplayAdventureLog(void)
   // Draw Header
   xxx_call_draw_string(r6, 0, gAdventureLogHeaderText, gAdventureLog->unk34, 0);
   r4 += 4;
-  r6 = r4 + gAdventureLog->unk9E * 8;
+  r6 = r4 + gAdventureLog->unk9C[2] * 8;
   // Draw Page #
   sub_8012BC4(r6, 0, gAdventureLog->currPage + 1, 1, 7, gAdventureLog->unk34);
 

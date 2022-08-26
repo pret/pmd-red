@@ -7,6 +7,7 @@
 #include "dungeon_random.h"
 #include "number_util.h"
 #include "moves.h"
+#include "code_8077274_1.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 gAvailablePokemonNames[0x58];
@@ -40,18 +41,11 @@ extern void sub_8076D10(struct DungeonEntity *pokemon, struct DungeonEntity *r1)
 extern void LevelDownTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
-extern void sub_807A290(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, const char[]);
-extern void RestoreVisionTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void sub_8077910(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32);
-extern void sub_80791D8(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
-extern void BlindTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *r1, s16, s16, u32);
-extern void sub_80792F8(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32);
-extern void sub_8079F20(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u8);
 extern void sub_806F370(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
-extern void SendImmobilizeEndMessage(struct DungeonEntity*, struct DungeonEntity*);
 extern s32 sub_8042520(struct DungeonEntity *);
 struct DungeonEntity *sub_80696FC(struct DungeonEntity *);
 extern void sub_80943A0(void*, s32);
@@ -79,7 +73,7 @@ void sub_804839C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_80483C4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_80792F8(pokemon, target, 999);
+    RestorePPTarget(pokemon, target, 999);
 }
 
 void sub_80483D4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -94,7 +88,7 @@ void sub_80483F4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_8048400(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_80791D8(pokemon, target);
+    CrossEyeVisionTarget(pokemon, target);
 }
 
 void sub_804840C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -110,7 +104,7 @@ void sub_804841C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_8048428(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if(target->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
@@ -119,7 +113,7 @@ void sub_8048428(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_8048450(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if((u8)(target->entityData->nonVolatileStatus - 2) <= 1)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
@@ -164,7 +158,7 @@ void sub_80484DC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 void sub_80484E8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     if(target->entityData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
-        sub_807A290(pokemon, target);
+        SendNonVolatileEndMessage(pokemon, target);
     else
     {
         SetMessageArgument(gAvailablePokemonNames, target, 0);

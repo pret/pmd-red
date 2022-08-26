@@ -9,6 +9,7 @@
 #include "memory.h"
 #include "gUnknown_203B46C.h"
 #include "text.h"
+#include "text_util.h"
 #include "menu.h"
 
 enum
@@ -46,7 +47,6 @@ extern void sub_8014248(const char *text, u32, u32, const struct MenuItem *r0, u
 
 extern u32 sub_80144A4(s32 *);
 
-extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_801602C(u32, char *r0);
 
 extern u32 sub_8016080(void);

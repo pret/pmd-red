@@ -618,3 +618,14 @@ bool8 Wander(struct DungeonEntity *pokemon)
 "_0807BB74: .4byte gAdjacentTileOffsets");
 }
 #endif
+
+void sub_807BB78(struct DungeonEntity *pokemon)
+{
+    struct DungeonEntityData *entityData;
+
+    entityData = pokemon->entityData;
+    entityData->movementAction = 0;
+    entityData->targetMovePosition = pokemon->posWorld;
+    entityData->targetPokemon = 0;
+    entityData->targetPokemonSpawnIndex = 0;
+}

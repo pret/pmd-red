@@ -10,7 +10,7 @@ struct unkStruct_203B204
     // size: 0x108
     u32 unk0;
     s32 currState;
-    u32 unk8;
+    u32 fallbackState;
     u32 chosenAmount;
     u32 unk10;
     struct MenuItem unk14[8];

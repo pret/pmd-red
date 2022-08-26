@@ -13,13 +13,12 @@
 struct unkStruct_203B258
 {
     // size: 0xA0
-    u8 fill0[0x14];
-    u32 unk14;
+    u8 fill0[0x18];
     u16 unk18;
     u16 unk1A;
-    u16 unk1C;
-    u16 unk1E;
-    u16 unk20;
+    s16 unk1C;
+    s16 unk1E;
+    s16 unk20;
     u16 unk22;
     u8 unk24[0x34 - 0x24];
     u32 unk34;
