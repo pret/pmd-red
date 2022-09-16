@@ -210,7 +210,7 @@ _0803010C:
 	.align 2, 0
 _08030138: .4byte gPlayerName
 _0803013C: .4byte gUnknown_203B318
-_08030140: .4byte gUnknown_80E0778
+_08030140: .4byte gMakuhitaDojoBonslyDoll
 _08030144: .4byte 0x00000101
 _08030148:
 	ldr r3, [r5]
@@ -305,7 +305,7 @@ _080301D6:
 	bx r0
 	.align 2, 0
 _080301F8: .4byte gUnknown_203B318
-_080301FC: .4byte gUnknown_80E07D8
+_080301FC: .4byte gMakuhitaDojoGoTrain
 _08030200: .4byte gUnknown_80D4970
 _08030204: .4byte gUnknown_80D4934
 	thumb_func_end sub_80301B0
@@ -865,44 +865,5 @@ _0803065C: .4byte gUnknown_80E081C
 _08030660: .4byte gUnknown_80E0824
 _08030664: .4byte gUnknown_80E0828
 	thumb_func_end sub_803053C
-
-	thumb_func_start sub_8030668
-sub_8030668:
-	push {r4-r6,lr}
-	movs r6, 0
-	movs r5, 0
-_0803066E:
-	lsls r0, r5, 16
-	asrs r4, r0, 16
-	adds r0, r4, 0
-	bl sub_8097504
-	lsls r0, 24
-	cmp r0, 0
-	beq _08030690
-	adds r0, r4, 0
-	bl sub_80A26CC
-	ldr r1, _080306A0
-	ldr r1, [r1]
-	lsls r2, r6, 1
-	adds r1, r2
-	strh r0, [r1]
-	adds r6, 0x1
-_08030690:
-	adds r5, 0x1
-	cmp r5, 0x16
-	ble _0803066E
-	adds r0, r6, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080306A0: .4byte gUnknown_203B31C
-	thumb_func_end sub_8030668
-
-	thumb_func_start sub_80306A4
-sub_80306A4:
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_80306A4
 
         .align 2,0

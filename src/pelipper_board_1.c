@@ -29,7 +29,7 @@ struct unkStruct_203B308
 extern struct unkStruct_203B308 *gUnknown_203B308;
 
 extern u8 gPelipperBoard_Accepted[];
-extern u8 gUnknown_80E03B8[];
+extern u8 gPelipperStatusSlash[];
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
@@ -212,7 +212,7 @@ void CreatePelipperAcceptedStatusBox(u32 r0)
     sub_80073B8(r0);
     xxx_call_draw_string(3, 0, gPelipperBoard_Accepted, r0, 0);
     sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
-    xxx_call_draw_string(0x16, 0xD, gUnknown_80E03B8, r0, 0); // "/"
+    xxx_call_draw_string(0x16, 0xD, gPelipperStatusSlash, r0, 0); // "/"
     sub_8012BC4(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
     sub_80073E0(r0);
 }

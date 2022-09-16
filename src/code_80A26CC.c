@@ -8,6 +8,35 @@ s16 sub_80A26B8(s16);
 extern s16 gUnknown_8116F9A[];
 extern s16 gUnknown_8116F24[];
 extern struct unkStruct_80A2608 gUnknown_81168A8[];
+extern u8 sub_8098F88(void);
+extern void sub_8001658(u32, u32);
+
+u32 sub_80A25AC(u16 param_1)
+{
+  if (sub_8098F88() != 0) {
+      return param_1;
+  }
+  else
+  {
+    if (param_1 == 0x32) {
+        return 0x32;
+    }
+    else if (sub_80023E4(0xc) == 0) {
+        return 999;
+    }
+    else if (sub_80023E4(0xd) != 0) {
+        return 0x13;
+    }
+    else if (param_1 != 1) {
+        return param_1;
+    }
+    else
+    {
+        sub_8001658(0,0x28);
+        return 1;
+    }
+  }
+}
 
 struct unkStruct_80A2608 *sub_80A2608(s16 r0)
 {
@@ -120,7 +149,7 @@ u8 sub_80A2728(s16 r0)
     return temp->unkC;
 }
 
-u8 sub_80A2740(s16 r0)
+u8 sub_80A2740(s32 r0)
 {
     struct unkStruct_80A2608 *temp;
     temp = sub_80A2608(r0);

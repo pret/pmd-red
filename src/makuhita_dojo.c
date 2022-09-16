@@ -29,7 +29,25 @@ struct unkStruct_203B318
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern struct unkStruct_203B318 *gUnknown_203B318;
-extern struct UnkTextStruct2 gUnknown_80E0760;
+
+ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
+ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
+ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
+static const u8 makuhita_dojo_fill[] = "pksdir0";
+const struct UnkTextStruct2 gUnknown_80E0760 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+ALIGNED(4) const u8 gMakuhitaDojoBonslyDoll[] = _(
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!\n"
+        "{CENTER_ALIGN}It has been placed outside your\n"
+        "{CENTER_ALIGN}rescue team base.");
+
+const u8 gMakuhitaDojoGoTrain[] = "Go Train";
 
 extern void sub_8030208();
 extern void sub_8030258();

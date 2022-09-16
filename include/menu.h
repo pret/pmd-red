@@ -3,7 +3,7 @@
 
 struct MenuItem
 {
-    const char *text;
+    const u8 *text;
     u32 menuAction; // action??
 };
 
