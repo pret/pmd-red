@@ -59,8 +59,8 @@ u32 sub_8075818(struct DungeonEntity *entity)
             {
                 case ENTITY_NONE:
                 case ENTITY_POKEMON:
-                case 4:
-                case 5:
+                case ENTITY_UNK_4:
+                case ENTITY_UNK_5:
                     break;
                 case ENTITY_TRAP:
                     trapData = (u8*) GetTrapData(subEntity);
