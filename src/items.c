@@ -12,6 +12,9 @@
 
 #include <stddef.h>
 
+#define GREEN_KECLEON_SHOP_SIZE 8
+#define PURPLE_KECLEON_SHOP_SIZE 8
+
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
@@ -46,8 +49,8 @@ extern u8* GetUnformattedTypeString(s16);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
-extern void xxx_sort_inv_unk230_80918EC();
-bool8 xxx_insert_unk250_8091C1C(u8);
+extern void SortGreenKecleonShopInventory();
+bool8 AddPurpleKecleonShopItem(u8);
 
 void LoadItemParameters(void)
 {
@@ -1014,7 +1017,7 @@ void xxx_fill_unk230_gaps()
   }
 }
 
-void xxx_sort_inv_unk230_80918EC() {
+void SortGreenKecleonShopInventory() {
   s32 i;
 
   for (i = 0; i < 7; i++) {
@@ -1031,24 +1034,24 @@ void xxx_sort_inv_unk230_80918EC() {
   }
 }
 
-void xxx_inv_unk250_random_8091980(u8 a1) {
+void ChooseKecleonShopInventory(u8 a1) {
   u32 data[4];
   s32 i;
 
   memcpy(data, gUnknown_81097E8, 4 * sizeof(u32));
-  for (i = 0; i < 8; i++) {
+  for (i = 0; i < GREEN_KECLEON_SHOP_SIZE; i++) {
     xxx_init_unk230_substruct(i);
   }
-  for (i = 0; i < 8; i++) {
+  for (i = 0; i < GREEN_KECLEON_SHOP_SIZE; i++) {
     s32 rand_1 = RandomCapped(9999);
     s32 rand_2 = RandomCapped(9999);
-    xxx_insert_unk230_80919FC(sub_8091E94(data[a1], rand_1, rand_2));
+    AddGreenKecleonShopItem(sub_8091E94(data[a1], rand_1, rand_2));
   }
-  xxx_sort_inv_unk230_80918EC();
-  sub_8091BB4(a1);
+  SortGreenKecleonShopInventory();
+  ChoosePurpleKecleonShopInventory(a1);
 }
 
-bool8 xxx_insert_unk230_80919FC(u8 itemIndex) {
+bool8 AddGreenKecleonShopItem(u8 itemIndex) {
   struct HeldItem held;
   s32 i;
 
@@ -1113,7 +1116,7 @@ void xxx_fill_inv_unk250_gaps_8091AA8(void) {
   }
 }
 
-void xxx_sort_inv_unk250_8091B20() {
+void SortPurpleKecleonShopInventory() {
   s32 i;
 
   for (i = 0; i < 3; i++) {
@@ -1130,23 +1133,23 @@ void xxx_sort_inv_unk250_8091B20() {
   }
 }
 
-void sub_8091BB4(u8 index) {
+void ChoosePurpleKecleonShopInventory(u8 index) {
   u32 data[4];
   s32 i;
 
   memcpy(data, gUnknown_81097F8, 4 * sizeof(u32));
-  for (i = 0; i < 4; i++) {
+  for (i = 0; i < PURPLE_KECLEON_SHOP_SIZE; i++) {
     xxx_init_inv_unk250_at_8091A74(i);
   }
-  for (i = 0; i < 4; i++) {
+  for (i = 0; i < PURPLE_KECLEON_SHOP_SIZE; i++) {
     s32 rand_1 = RandomCapped(9999);
     s32 rand_2 = RandomCapped(9999);
-    xxx_insert_unk250_8091C1C(sub_8091E94(data[index], rand_1, rand_2));
+    AddPurpleKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
   }
-  xxx_sort_inv_unk250_8091B20();
+  SortPurpleKecleonShopInventory();
 }
 
-bool8 xxx_insert_unk250_8091C1C(u8 itemIndex) {
+bool8 AddPurpleKecleonShopItem(u8 itemIndex) {
   struct HeldItem held;
   s32 i;
 
