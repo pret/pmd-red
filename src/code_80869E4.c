@@ -18,14 +18,14 @@ EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
-void sub_80869E4(struct DungeonEntity *r0, u32, u8, s8);
+void sub_80869E4(struct DungeonEntity *entity, u32, u8, s8);
 extern void sub_80859F0(u32);
 extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
-void SpriteLookAroundEffect(struct DungeonEntity *r0);
+void SpriteLookAroundEffect(struct DungeonEntity *entity);
 extern void DisplayDungeonDialogue(u32);
 void sub_8086494();
 
@@ -39,7 +39,7 @@ extern void sub_80855E4(void *);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
-extern void sub_8086384(struct DungeonEntity *r0);
+extern void sub_8086384(struct DungeonEntity *entity);
 extern void sub_8085930(u32);
 extern void sub_804539C(struct DungeonEntity *, u32, u32);
 extern void sub_806CE68(struct DungeonEntity *, u32);
@@ -50,100 +50,100 @@ extern void sub_8086A3C(struct DungeonEntity *);
 extern void PlaySoundEffect(u32);
 extern void sub_80861F8(u32, struct DungeonEntity *, u32);
 
-void sub_80862BC(struct DungeonEntity *r0)
+void SpriteShockEffect(struct DungeonEntity *entity)
 {
     PlaySoundEffect(0xE8 << 1);
-    sub_80861F8(0x143, r0, 0);
+    sub_80861F8(0x143, entity, 0);
 }
 
-void sub_80862DC(struct DungeonEntity *r0)
+void sub_80862DC(struct DungeonEntity *entity)
 {
     u32 array[2];
-    array[0] = r0->posPixel.x;
-    array[1] = r0->posPixel.y + (0xE0 << 6);
+    array[0] = entity->posPixel.x;
+    array[1] = entity->posPixel.y + (0xE0 << 6);
 
-    sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, DIRECTION_NORTH);
-    sub_8086A54(r0);
+    sub_804535C(entity, array);
+    sub_806CDD4(entity, 0, DIRECTION_NORTH);
+    sub_8086A54(entity);
 }
 
-void sub_8086310(struct DungeonEntity *r0)
+void sub_8086310(struct DungeonEntity *entity)
 {
     u32 array[2];
-    array[0] = r0->posPixel.x;
-    array[1] = r0->posPixel.y + (0x90 << 8);
+    array[0] = entity->posPixel.x;
+    array[1] = entity->posPixel.y + (0x90 << 8);
 
-    sub_804535C(r0, array);
-    sub_806CE68(r0, DIRECTION_SOUTH);
-    sub_8086A3C(r0);
-    r0->visible = 0;
+    sub_804535C(entity, array);
+    sub_806CE68(entity, DIRECTION_SOUTH);
+    sub_8086A3C(entity);
+    entity->visible = 0;
 }
 
-void sub_8086348(struct DungeonEntity *r0)
+void sub_8086348(struct DungeonEntity *entity)
 {
     u32 array[2];
-    array[0] = r0->posPixel.x + (0xF0 << 7);
-    array[1] = r0->posPixel.y + 0xffffe000;
+    array[0] = entity->posPixel.x + (0xF0 << 7);
+    array[1] = entity->posPixel.y + 0xffffe000;
 
-    sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, DIRECTION_WEST);
-    sub_8086A54(r0);
+    sub_804535C(entity, array);
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
+    sub_8086A54(entity);
 }
 
-void sub_8086384(struct DungeonEntity *r0)
+void sub_8086384(struct DungeonEntity *entity)
 {
     u32 array[2];
-    array[0] = r0->posPixel.x + (0xF0 << 7);
-    array[1] = r0->posPixel.y;
+    array[0] = entity->posPixel.x + (0xF0 << 7);
+    array[1] = entity->posPixel.y;
 
-    sub_804535C(r0, array);
-    sub_806CDD4(r0, 0, DIRECTION_WEST);
-    sub_8086A54(r0);
+    sub_804535C(entity, array);
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
+    sub_8086A54(entity);
 }
 
-void sub_80863B8(struct DungeonEntity *r0)
+void sub_80863B8(struct DungeonEntity *entity)
 {
-    sub_806CDD4(r0, 0, DIRECTION_NORTH);
+    sub_806CDD4(entity, 0, DIRECTION_NORTH);
 }
 
-void sub_80863C8(struct DungeonEntity *r0)
+void sub_80863C8(struct DungeonEntity *entity)
 {
-    sub_806CDD4(r0, 0, DIRECTION_SOUTH);
+    sub_806CDD4(entity, 0, DIRECTION_SOUTH);
 }
 
-void sub_80863D8(struct DungeonEntity *r0)
+void sub_80863D8(struct DungeonEntity *entity)
 {
-    sub_806CDD4(r0, 0, DIRECTION_WEST);
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
 }
 
-void sub_80863E8(struct DungeonEntity *r0)
+void sub_80863E8(struct DungeonEntity *entity)
 {
-    sub_806CDD4(r0, 6, DIRECTION_NORTH);
+    sub_806CDD4(entity, 6, DIRECTION_NORTH);
 }
 
-void sub_80863F8(struct DungeonEntity *r0)
+void sub_80863F8(struct DungeonEntity *entity)
 {
-    sub_806CE68(r0, DIRECTION_NORTH);
+    sub_806CE68(entity, DIRECTION_NORTH);
 }
 
-void sub_8086404(struct DungeonEntity *r0)
+void sub_8086404(struct DungeonEntity *entity)
 {
-    sub_806CE68(r0, DIRECTION_WEST);
+    sub_806CE68(entity, DIRECTION_WEST);
 }
 
-void sub_8086410(struct DungeonEntity *r0)
+void sub_8086410(struct DungeonEntity *entity)
 {
-    sub_804539C(r0, 0, 0xffffff00);
+    sub_804539C(entity, 0, 0xffffff00);
 }
 
-void sub_8086424(struct DungeonEntity *r0)
+void sub_8086424(struct DungeonEntity *entity)
 {
-    sub_804539C(r0, 0, 0x80 << 1);
+    sub_804539C(entity, 0, 0x80 << 1);
 }
 
-void sub_8086434(struct DungeonEntity *r0)
+void sub_8086434(struct DungeonEntity *entity)
 {
-    sub_804539C(r0, 0xffffff00, 0);
+    sub_804539C(entity, 0xffffff00, 0);
 }
 
 void sub_8086448(void)
@@ -306,12 +306,12 @@ void sub_8086690(void)
 }
 
 
-void sub_80866C4(u32 r0)
+void sub_80866C4(u32 entity)
 {
 
     SpriteLookAroundEffect(xxx_call_GetLeaderEntity());
     sub_803E708(0xA, 0x46);
-    DisplayDungeonDialogue(r0);
+    DisplayDungeonDialogue(entity);
     sub_803E708(0xA, 0x46);
     sub_8086494();
     gDungeonGlobalData->unk2 = 1;
@@ -395,21 +395,21 @@ void sub_808680C(void)
         PlaySoundEffect(0x1F9);
 }
 
-void sub_808682C(u8 r0)
+void sub_808682C(u8 entity)
 {
     gUnknown_202F3D0.unk0 = 0;
 }
 
-void sub_8086838(u8 r0, u8 r1, u8 r2)
+void sub_8086838(u8 entity, u8 r1, u8 r2)
 {
-    gUnknown_202F3D0.unk1 = r0;
+    gUnknown_202F3D0.unk1 = entity;
     gUnknown_202F3D0.unk2 = r1;
     gUnknown_202F3D0.unk3 = r2;
 }
 
-void sub_8086848(u8 r0, u8 r1)
+void sub_8086848(u8 entity, u8 r1)
 {
-    gUnknown_202F3D0.unk4 = r0;
+    gUnknown_202F3D0.unk4 = entity;
     gUnknown_202F3D0.unk5 = r1;
 }
 
@@ -446,16 +446,16 @@ void sub_8086854(void)
     }
 }
 
-void sub_80868F4(struct DungeonEntity *r0)
+void sub_80868F4(struct DungeonEntity *entity)
 {
-    r0->entityData->unk15C = 1;
-    r0->entityData->unk15D = 1;
+    entity->entityData->unk15C = 1;
+    entity->entityData->unk15D = 1;
 }
 
-void sub_8086910(struct DungeonEntity *r0)
+void sub_8086910(struct DungeonEntity *entity)
 {
-    r0->entityData->unk15C = 0;
-    r0->entityData->unk15D = 0;
+    entity->entityData->unk15C = 0;
+    entity->entityData->unk15D = 0;
 }
 
 void sub_808692C(void)
@@ -473,26 +473,26 @@ void sub_808692C(void)
     sub_803E708(0x4, 0x46);
 }
 
-void SpriteLookAroundEffect(struct DungeonEntity *r0)
+void SpriteLookAroundEffect(struct DungeonEntity *entity)
 {
     s8 r4;
     s8 r3;
 
-    r4 = sub_8002984(r0->entityData->action.facingDir, 4);
+    r4 = sub_8002984(entity->entityData->action.facingDir, 4);
 
-    sub_80869E4(r0, 4, 2, r4);
+    sub_80869E4(entity, 4, 2, r4);
 
     sub_803E708(0xF, 0x46);
 
     r4 = sub_8002984(r4, 5);
 
-    sub_80869E4(r0, 4, 1, r4);
+    sub_80869E4(entity, 4, 1, r4);
 
     sub_803E708(0xF, 0x46);
 
     r3 = sub_8002984(r4, 4);
 
-    sub_80869E4(r0, 4, 2, r3);
+    sub_80869E4(entity, 4, 2, r3);
 
     sub_803E708(0xF, 0x46);
 }

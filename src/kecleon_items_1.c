@@ -19,6 +19,14 @@ extern u8 gUnknown_80DB92C[];
 extern u8 gUnknown_80DB934[];
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
+extern u8 gUnknown_80DB9A8[];
+extern u8 gUnknown_80DB9B0[];
+extern u8 gTeamToolboxA[];
+extern u8 gTeamToolboxB[];
+extern u8 gUnknown_80DB9A0[];
+extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_80DB994[];
+
 
 extern s32 sub_80144A4(s32 *);
 void UpdateKecleonStoreState(u32);
@@ -39,13 +47,18 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(void *, u32);
 extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
+extern void sub_8012BC4(s32, s32, s32, s32, s32, s32);
+extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern s32 sub_801AED0(s32);
+void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_801AE84(void);
 extern void sub_8012D08(void *, u32);
 extern void sub_801A998(void);
 extern void sub_801A9E0(void);
-extern void sub_801AEF8(void);
-extern bool8 sub_801ADA0(u32);
-extern u32 sub_801AEA8(void);
+extern void Kecleon_SortItems(void);
+extern bool8 sub_801ADA0(s32);
+extern s32 sub_801AEA8(void);
+s32 sub_801AE24(u32);
 
 
 extern struct unkStruct_203B224 *gUnknown_203B224;
@@ -1045,7 +1058,7 @@ u32 sub_801A6E8(u8 param_1)
     case 3:
         if (gUnknown_203B224->unk0 != 2) {
             PlayMenuSoundEffect(5);
-            sub_801AEF8();
+            Kecleon_SortItems();
             sub_801A9E0();
         }
         // NOTE: fallthrough needed here
@@ -1109,4 +1122,253 @@ void sub_801A998(void)
     gUnknown_203B224->unkF0[3] = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B224->unk90, 1, 1);
+}
+
+void sub_801A9E0(void)
+{
+    s32 teamItemIndex;
+    s32 r7;
+    s32 x;
+    char buffer1 [0x50]; // sp 0x4
+    struct unkStruct_8090F58 stack; // sp 0x54
+    struct unkStruct_8090F58 stack1; // sp 0x60
+    struct unkStruct_8090F58 stack2; // sp 0x6C
+    struct unkStruct_8090F58 stack3; // sp 0x78
+    // NOTE: this var is unused but makes sure we get correct stack size
+    // This is also why we need special build flag for this file
+    u8 local_6c[0x44]; // sp 0x78 ?? (why is this at same location..)
+    struct ItemSlot item; // sp 0xC8
+
+    sub_8008C54(gUnknown_203B224->unk88);
+    sub_80073B8(gUnknown_203B224->unk88);
+    x = gUnknown_203B224->unk72 * 8 + 10;
+    if (gUnknown_203B224->unk72 == 0) {
+        xxx_call_draw_string(x,0,gTeamToolboxA,gUnknown_203B224->unk88,0);
+    }
+    else {
+        xxx_call_draw_string(x,0,gTeamToolboxB,gUnknown_203B224->unk88,0);
+    }
+    for(r7 = 0; r7 < gUnknown_203B224->unk6E; r7++)
+    {
+        teamItemIndex = (gUnknown_203B224->unk72 * gUnknown_203B224->unk70) + r7;
+        item = gTeamInventory_203B460->teamItems[teamItemIndex];
+        switch(gUnknown_203B224->unk0) {
+            case 0:
+                sub_8090E14(buffer1,&item,0);
+                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                break;
+            case 1:
+            case 2:
+                stack.unk0 = 0;
+                stack.unk4 = 0;
+                stack.unk8 = 1;
+                item.itemFlags = 1;
+                sub_8090E14(buffer1,&item, &stack);
+                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                break;
+            case 3:
+                stack1.unk0 = 0;
+                stack1.unk4 = 0;
+                stack1.unk8 = 1;
+                item.itemFlags = 1;
+                sub_8090E14(buffer1,&item,&stack1);
+                if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != '\0'){
+                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                }
+                else
+                {
+                    strncpy(gUnknown_202DE58,buffer1,0x50);
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);  
+                }
+                break;
+            case 4:
+                if (CanSellItem(item.itemIndex)) {
+                    stack2.unk0 = 3;
+                    stack2.unk4 = 0;
+                    stack2.unk6 = 0x58;
+                    stack2.unk8 = 1;
+                    item.itemFlags = 3;
+                    sub_8090E14(buffer1,&item, &stack2);
+                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > 99999){
+                        // very dumb but this matches...
+                        sprintf_2((char *)&stack3,gUnknown_80DB9A0,buffer1);
+                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);
+                    }
+                    else
+                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);;
+                }
+                else {
+                    sub_8090E14(buffer1,&item, 0);
+                    strncpy(gUnknown_202DE58,buffer1,0x50);
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                }
+                break;
+            case 5:
+                stack3.unk0 = 0;
+                stack3.unk4 = 0;
+                stack3.unk8 = 1;
+                item.itemFlags = 1;
+                sub_8090E14(buffer1,&item,&stack3);
+                if (IsGummiItem(item.itemIndex)) {
+                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                }
+                else
+                {
+                    strncpy(gUnknown_202DE58,buffer1,0x50);
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                }
+                break;
+        }
+        if ((sub_801AED0(teamItemIndex) & 1) != 0) {
+            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unk0c - 2) * 8,10);
+        }
+    }
+    sub_80073E0(gUnknown_203B224->unk88);
+}
+
+
+void sub_801AD34(u32 param_1)
+{ 
+  sub_8008C54(param_1);
+  sub_80073B8(param_1);
+  xxx_call_draw_string(6,0,gUnknown_80DB9A8,param_1,0);
+  sub_8012BC4(0x12,0xd,GetNumberOfFilledInventorySlots(),2,7,param_1);
+  xxx_call_draw_string(0x16,0xd,gUnknown_80DB9B0,param_1,0);
+  sub_8012BC4(0x2b,0xd,INVENTORY_SIZE,2,7,param_1);
+  sub_80073E0(param_1);
+}
+
+bool8 sub_801ADA0(s32 param_1)
+{
+  u16 uVar2;
+  u32 uVar2_32;
+
+  u16 uVar3;
+  u32 uVar3_32;
+  s32 sum1;
+  s32 sum2;
+  struct ItemSlot item;
+ 
+  item = gTeamInventory_203B460->teamItems[param_1];
+  if (!IsNotMoneyOrUsedTMItem(item.itemIndex)) {
+      return FALSE;
+  }
+  else
+  {
+    if (IsThrowableItem(item.itemIndex)) {
+      uVar3_32 = sub_801AE24(item.itemIndex);
+      sum1 = gTeamInventory_203B460->teamStorage[item.itemIndex];
+      uVar3 = uVar3_32;
+      sum1 += uVar3;
+      sum1 += (item.numItems);
+      if (sum1 > 999)
+        return FALSE;
+    }
+    else {
+      uVar2_32 = sub_801AE24(item.itemIndex);
+      sum2 = gTeamInventory_203B460->teamStorage[item.itemIndex];
+      uVar2 = uVar2_32;
+      sum2 +=  uVar2;
+      if (sum2 > 998)
+        return FALSE;
+    }
+  }
+  return 1;
+}
+
+s32 sub_801AE24(u32 itemIndex)
+{
+  struct ItemSlot uVar3;
+  u16 uVar4;
+  s32 invIndex;
+
+  uVar4 = 0;
+  for (invIndex = 0; invIndex < GetNumberOfFilledInventorySlots(); invIndex++) {
+    if (gUnknown_203B224->unk4[invIndex] != 0) {
+      uVar3 = gTeamInventory_203B460->teamItems[invIndex];
+      if (uVar3.itemIndex == itemIndex) {
+        if (IsThrowableItem(uVar3.itemIndex)) {
+            uVar4 += uVar3.numItems;
+        }
+        else {
+            uVar4++;
+        }
+      }
+    }
+  }
+  return uVar4;
+}
+
+void sub_801AE84(void)
+{
+  s32 iVar1;
+
+  for(iVar1 = 0; iVar1 < INVENTORY_SIZE; iVar1++)
+  {
+    gUnknown_203B224->unk4[iVar1] = 0;
+  }
+}
+
+s32 sub_801AEA8(void)
+{
+  s32 index;
+  s32 iVar3;
+
+  iVar3 = 0;
+  for(index = 0; index < 0x14; index++)
+  {
+    if (gUnknown_203B224->unk4[index] != 0) {
+      iVar3++;
+    }
+  }
+  return iVar3;
+}
+
+s32 sub_801AED0(s32 index)
+{
+    return gUnknown_203B224->unk4[index];
+}
+
+void sub_801AEE4(s32 index, s32 value)
+{
+    gUnknown_203B224->unk4[index] = value ;
+}
+
+void Kecleon_SortItems(void)
+{
+  struct ItemSlot *puVar1;
+  u32 *puVar2;
+  u32 *base;
+  int orderL;
+  int orderR;
+  u32 puVar4;
+  struct ItemSlot uVar5;
+  int itemR;
+  int itemL;
+
+  for (itemL = 0; itemL < GetNumberOfFilledInventorySlots() - 1; itemL++) {
+    for (itemR = itemL + 1; itemR < GetNumberOfFilledInventorySlots(); itemR++) {
+      orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].itemIndex);
+      orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].itemIndex);
+      if ((orderL > orderR) || ((orderL == orderR) &&
+        (gTeamInventory_203B460->teamItems[itemL].numItems < gTeamInventory_203B460->teamItems[itemR].numItems))) {
+
+        uVar5 = gTeamInventory_203B460->teamItems[itemL];
+        puVar1 = &gTeamInventory_203B460->teamItems[itemR];
+        gTeamInventory_203B460->teamItems[itemL] = *puVar1;
+        *puVar1 = uVar5;
+
+        base = gUnknown_203B224->unk4;
+        puVar4 = gUnknown_203B224->unk4[itemL];
+        puVar2 = &base[itemR];
+        base[itemL] = *puVar2;
+        *puVar2 = puVar4;
+      }
+    }
+  }
+}
+
+struct unkStruct_203B224 * sub_801AF98(void)
+{
+    return gUnknown_203B224;
 }

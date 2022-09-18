@@ -3,6 +3,8 @@
 
 #include "dungeon_entity.h"
 
+bool8 HasSafeguardStatus(struct DungeonEntity * param_1, struct DungeonEntity * param_2, bool8 displayMessage);
+bool8 sub_80717A4(struct DungeonEntity *pokemon, u16 moveID);
 bool8 HasAbility(struct DungeonEntity *pokemon, u8 ability);
 bool8 HasType(struct DungeonEntity *pokemon, u8 type);
 bool8 CanSeeInvisible(struct DungeonEntity *pokemon);

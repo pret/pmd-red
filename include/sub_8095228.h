@@ -7,8 +7,7 @@ struct unkStruct_8095228
     /* 0x1 */ u8 missionType; // mission type
     /* 0x2 */ u8 unk2;
     /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 dungeon; // dungeon
-    /* 0x5 */ u8 floor; // floor
+    /* 0x4 */ struct DungeonLocation dungeon; // dungeon
     /* 0x8 */ u32 unk8;
     /* 0xC */ s16 clientSpecies; // client pokemon
     /* 0xE */ s16 targetSpecies; // target

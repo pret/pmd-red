@@ -2,6 +2,7 @@
 #include "play_time.h"
 #include "input.h"
 #include "debug.h"
+#include "code_80A26CC.h"
 
 extern u32 gUnknown_20398A8;
 extern u32 gUnknown_20398AC;
@@ -20,6 +21,15 @@ extern const char gUnknown_8115F80;
 extern const char gUnknown_8115FA4;
 extern const char gUnknown_8115FC8;
 extern const char gUnknown_8115FE8;
+
+struct unkStruct_811BAF4
+{
+    u16 unk0;
+    s16 unk2;
+    u8 fill4[8];
+};
+
+extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
@@ -61,11 +71,11 @@ extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
 extern u8 sub_8001CC4(u8, u8, u8);
 extern void ChooseKecleonShopInventory(u32);
-
 extern u8 sub_80023E4(u32);
-extern void sub_80118C4(u16);
+extern void FadeOutAllMusic(u16);
 extern u8 sub_809C730();
 extern s16 sub_80A2750(s16);
+extern u8 sub_8001D44(u32, u32, s32);
 
 void sub_8098BDC(void)
 {
@@ -199,7 +209,7 @@ bool8 sub_8098D80(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            sub_80118C4(r0);
+            FadeOutAllMusic(r0);
         }
         return TRUE;
     }
@@ -216,7 +226,7 @@ bool8 sub_8098DCC(u32 r0)
         sub_809C730();
         if(sub_80023E4(0xD) == 0)
         {
-            sub_80118C4(r0);
+            FadeOutAllMusic(r0);
         }
         return TRUE;
     }
@@ -318,4 +328,55 @@ s16 sub_8098FA0(void)
 const char  *sub_8098FB4(void)
 {
     return sub_80A2B18(sub_8001658(0, 0x11));
+}
+
+
+s32 sub_8098FCC(u32 unused)
+{
+  s32 iVar4;
+  s32 iVar5;
+  s32 iVar6;
+  struct unkStruct_80A2608 *iVar3;
+
+  iVar5 = (s16)sub_8001658(0,0x13);
+  iVar6 = iVar5;
+  if (iVar5 == -1) return 0xC;
+
+  if (iVar5 == 0x51)
+    iVar4 = (s16)sub_8001658(0,0x14);
+  else
+    iVar4 = iVar6;
+
+  iVar3 = sub_80A2608(iVar4);
+  if (gUnknown_20398B4 == 9) {
+    return iVar3->unk2;
+  }
+  switch((s16)(iVar3->unk4 - 0xb2)) {
+    case 0:
+        if (sub_8001D44(3,2,-1) != 0) return 0xc;
+        break;
+    case 0xf:
+    case 0x11:
+    case 0x14:
+    case 0x17:
+        if (sub_80023E4(5) == 0) return 0xC;
+        break;
+    default:
+        break;
+  }
+    return iVar3->unk4;
+}
+
+const char *sub_80990B8(void)
+{
+    s16 index;
+    index = sub_8098FCC(0xB);
+    if(index != -1)
+    {
+        return sub_80A2B18(gUnknown_811BAF4[index].unk2);
+    }
+    else
+    {
+        return sub_8098FB4();
+    }
 }

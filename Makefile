@@ -111,6 +111,9 @@ $(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
+$(C_BUILDDIR)/kecleon_items_1.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm 
+
+
 #### Main Rules ####
 
 

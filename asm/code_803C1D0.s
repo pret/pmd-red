@@ -37,8 +37,8 @@ sub_803C1F0:
 _0803C1FC: .4byte gUnknown_80E8BF8
 	thumb_func_end sub_803C1F0
 
-	thumb_func_start sub_803C200
-sub_803C200:
+	thumb_func_start GetDungeonTeamRankPts
+GetDungeonTeamRankPts:
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -51,7 +51,7 @@ sub_803C200:
 	bx r1
 	.align 2, 0
 _0803C218: .4byte gUnknown_80E80A0
-	thumb_func_end sub_803C200
+	thumb_func_end GetDungeonTeamRankPts
 
 	thumb_func_start sub_803C21C
 sub_803C21C:
@@ -225,7 +225,7 @@ _0803C35A:
 	strh r0, [r4, 0x14]
 	ldrb r1, [r6, 0x1]
 	adds r0, r5, 0
-	bl sub_803C200
+	bl GetDungeonTeamRankPts
 	str r0, [r4, 0x24]
 	pop {r3}
 	mov r8, r3

@@ -9,6 +9,7 @@
 #include "sub_8095228.h"
 #include "item.h"
 #include "code_8094F88.h"
+#include "rescue_password_menu.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern u8 *gUnknown_203B484;
@@ -447,44 +448,44 @@ void sub_8033DBC(void)
                 switch(gUnknown_203B33C->unk528)
                 {
                     case 3:
-                        input_var = 0x1C;
+                        input_var = PASSWORD_ENTRY_SOS_MAIL_MODE;
                         break;
                     case 0x12:
-                        input_var = 0x1E;
+                        input_var = PASSWORD_ENTRY_AOK_MAIL_MODE;
                         break;
                     default:
                         break;
                 }
                 switch(sub_8039068(input_var, gUnknown_203B33C->passwordBuffer, &temp))
                 {
-                    case 17:
+                    case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x1B);
                         break;
-                    case 18:
+                    case PASSWORD_ENTRY_NOT_SOS_MAIL:
                         sub_80141B4(gUnknown_80E48E8, 0, 0, 0x101);
                         SetFriendRescueMenuState(8);
                         break;
-                    case 7:
+                    case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
                         sub_80141B4(gUnknown_80E460C, 0, 0, 0x101);
                         SetFriendRescueMenuState(8);
                         break;
-                    case 22:
+                    case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
                         sub_8095274(temp.unk10);
                         temp.mailType = 2;
                         sub_80951BC(&temp);
                         sub_80141B4(gUnknown_80E4928, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x16);
                         break;
-                    case 19:
+                    case PASSWORD_ENTRY_NOT_AOK_MAIL:
                         sub_80141B4(gUnknown_80E4964, 0, 0, 0x101);
                         SetFriendRescueMenuState(8);
                         break;
-                    case 9:
+                    case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
                         sub_80141B4(gUnknown_80E499C, 0, 0, 0x101);
                         SetFriendRescueMenuState(8);
                         break;
-                    case 23:
+                    case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
                         temp.mailType = 5;
                         sub_80951FC(&temp);
                         temp2 = sub_8095228(sub_809539C(1, temp.unk10));
@@ -1340,21 +1341,21 @@ void sub_8034D74(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x20, gUnknown_203B33C->passwordBuffer, &temp))
+                switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE, gUnknown_203B33C->passwordBuffer, &temp))
                 {
-                    case 17:
+                    case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x74);
                         break;
-                    case 20:
+                    case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
                         sub_80141B4(gUnknown_80E49C4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x6B);
                         break;
-                    case 11:
+                    case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
                         sub_80141B4(gUnknown_80E4704, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x6B);
                         break;
-                    case 24:
+                    case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
                         temp2 = sub_8095228(sub_809539C(4, temp.unk10));
                         *temp2 = temp;
                         temp2->mailType = 6;

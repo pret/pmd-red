@@ -1453,7 +1453,7 @@ _08033512:
 	strb r1, [r0]
 	adds r0, r2, 0x4
 	movs r1, 0
-	bl sub_803C200
+	bl GetDungeonTeamRankPts
 	ldr r1, [r4]
 	movs r3, 0xAC
 	lsls r3, 3

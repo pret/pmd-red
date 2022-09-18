@@ -167,7 +167,7 @@ sub_8075CFC:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08075DAA
@@ -633,7 +633,7 @@ sub_8076090:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	mov r2, r9
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807613A
@@ -715,7 +715,7 @@ sub_807614C:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r7, 0
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08076206
@@ -814,7 +814,7 @@ _08076238:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r10
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807624A
@@ -1045,7 +1045,7 @@ _0807641A:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r10
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807642C
@@ -1279,7 +1279,7 @@ _08076602:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r10
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076614
@@ -1510,7 +1510,7 @@ _080767CE:
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080768C8
@@ -1641,7 +1641,7 @@ sub_80768DC:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080769BE
@@ -1748,7 +1748,7 @@ sub_80769CC:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08076A9A
@@ -1933,7 +1933,7 @@ _08076B60:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0
@@ -2150,7 +2150,7 @@ sub_8076D10:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	movs r2, 0x1
-	bl sub_80716E8
+	bl HasSafeguardStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08076E0E

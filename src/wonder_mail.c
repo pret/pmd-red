@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "text.h"
 #include "team_inventory.h"
+#include "rescue_password_menu.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -1171,7 +1172,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->dungeon) == 0)
+            if(sub_80A2824(return_var->dungeon.dungeonIndex) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -1459,21 +1460,21 @@ void sub_80293F4(void)
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(0x1C, (gUnknown_203B2C0->passwordBuffer), &temp))
+                switch(sub_8039068(PASSWORD_ENTRY_SOS_MAIL_MODE, (gUnknown_203B2C0->passwordBuffer), &temp))
                 {
-                    case 17:
+                    case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->faceFile, 0xC);
                         sub_8028B04(40);
                         break;
-                    case 18:
+                    case PASSWORD_ENTRY_NOT_SOS_MAIL:
                         sub_80141B4(gWonderMailSOSPasswordIncorrectText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
                         sub_8028B04(7);
                         break;
-                    case 7:
+                    case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
                         sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
                         sub_8028B04(7);
                         break;
-                    case 22:
+                    case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
                         sub_8095274(temp.unk10);
                         temp.mailType = 2;
                         sub_80951BC(&temp);

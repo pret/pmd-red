@@ -72,8 +72,6 @@ SECTIONS {
         src/file_system.o(.text);
         src/main.o(.text);
         asm/code_800B5F0.o(.text);
-        src/music_pre.o(.text);
-        asm/music.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);
         src/cpu.o(.text);
@@ -100,8 +98,6 @@ SECTIONS {
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
-        asm/kecleon_items_1.o(.text);
-        src/kecleon_items_2.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
         asm/code_801B3C0.o(.text);
@@ -117,6 +113,7 @@ SECTIONS {
         src/gulpin_shop_1.o(.text);
         asm/code_801EE10.o(.text);
         src/luminous_cave.o(.text);
+        src/friend_list_menu_1.o(.text);
         asm/friend_list_menu.o(.text);
         src/friend_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
@@ -125,7 +122,7 @@ SECTIONS {
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
-        asm/wonder_mail_2.o(.text);
+        src/wonder_mail_2_mid.o(.text);
         src/wonder_mail_2_1.o(.text);
         asm/wonder_mail_802C860.o(.text);
         src/wonder_mail_3.o(.text);
@@ -146,7 +143,7 @@ SECTIONS {
         asm/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
         asm/wonder_mail_5.o(.text);
-        src/wonder_mail_4_1.o(.text);
+        src/wonder_mail_6.o(.text);
         src/post_office_guide.o(.text);
         asm/code_8031D70.o(.text);
         src/adventure_log.o(.text);
@@ -274,8 +271,6 @@ SECTIONS {
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
         src/code_8057824_1.o(.text);
-        asm/jirachi_wish.o(.text);
-        src/code_80521D0_1.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
         src/pokemon_mid.o(.text);

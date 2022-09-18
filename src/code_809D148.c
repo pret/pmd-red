@@ -33,6 +33,67 @@ extern struct unkStruct_20399E8 gUnknown_20399E8;
 
 void sub_809D0BC(void);
 
+s32 sub_809CFE8(u16 param_1)
+{
+  if ((param_1 & 0x40) != 0) {
+    if ((param_1 & 0x10) != 0)
+        return 3;
+    else if ((param_1 & 0x20) != 0)
+        return 5;
+    else
+        return 4;
+  }
+  else if ((param_1 & 0x80) != 0) {
+    if ((param_1 & 0x10) != 0)
+        return 1;
+    else if ((param_1 & 0x20) != 0)
+        return 7;
+    else
+        return 0;
+  }
+  else if ((param_1 & 0x10) != 0)
+    return 2;
+  else if ((param_1 & 0x20) != 0)
+    return 6;
+  else
+    return -1;
+}
+
+// Unused
+s32 sub_809D058(s32 *param_1)
+{
+  if (param_1[1] < 0x40) {
+    if (param_1[0]  < 0x68) {
+        return 5;
+    }
+    else if (param_1[0]  > 0x88) {
+        return 3;
+    }
+    else {
+        return 4;
+    }
+  }
+  else if (param_1[1] > 0x60) {
+    if (param_1[0]  < 0x68) {
+        return 7;
+    }
+    else if (param_1[0]  > 0x88) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+  }
+  else if (param_1[0]  < 0x68) {
+        return 6;
+  }
+  else if (param_1[0]  > 0x88) {
+       return 2;
+  }
+  else {
+       return -1;
+  }
+}
 
 void sub_809D0AC(void)
 {

@@ -32,20 +32,20 @@ extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern u8 *gUnknown_80FDCA4[];
 extern u8 *gUnknown_80FE3E8[];
 
-bool8 sub_8048D50(struct DungeonEntity * param_1,struct ItemSlot *param_2)
+bool8 sub_8048D50(struct DungeonEntity * param_1,struct ItemSlot *item)
 {
   struct DungeonEntityData *iVar2;
 
   iVar2 = param_1->entityData;
   
-  if ((param_2->itemFlags & ITEM_FLAG_STICKY) != 0) {
-    sub_8045BF8(gUnknown_202DE58,param_2);
+  if ((item->itemFlags & ITEM_FLAG_STICKY) != 0) {
+    sub_8045BF8(gUnknown_202DE58, item);
     SendMessage(param_1,*gUnknown_80FE3E8);
     return FALSE;
   }
   else
   {
-    if ((iVar2->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(param_2->itemIndex))) {
+    if ((iVar2->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(item->itemIndex))) {
         SetMessageArgument(gAvailablePokemonNames,param_1,0);
         SendMessage(param_1,*gUnknown_80FDCA4);
         return FALSE;
@@ -54,11 +54,11 @@ bool8 sub_8048D50(struct DungeonEntity * param_1,struct ItemSlot *param_2)
   return TRUE;
 }
 
-void sub_8048DB8(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u8 r2)
+void sub_8048DB8(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 r2)
 {
     u8 temp;
     if(r2 != 0)
-        sub_806F370(pokemon, r1, gUnknown_80F4FAC, 1, &temp, 0, 0x217, 0, 0, 0);
+        sub_806F370(pokemon, target, gUnknown_80F4FAC, 1, &temp, 0, 0x217, 0, 0, 0);
     else
         sub_8051E7C(pokemon);
 }
