@@ -187,7 +187,7 @@ bool8 sub_8098D1C(s16 r0, u32 r1, u32 r2)
     temp = r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
-        Log(NULL, &gUnknown_8115F5C, temp, r2);
+        Log(0, &gUnknown_8115F5C, temp, r2);
         gUnknown_20398A8 = 1;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r2;
@@ -238,7 +238,7 @@ bool8 sub_8098E18(s16 r0, u32 r1)
     s32 r2 = r0, r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
-        Log(NULL, &gUnknown_8115F80, r2, r1);
+        Log(0, &gUnknown_8115F80, r2, r1);
         if(gUnknown_203B49D != 0)
         {
             gUnknown_20398A8 = 7;
@@ -271,7 +271,7 @@ u32 sub_8098EB0(u32 r0)
     {
         if(gUnknown_203B49D != 0)
         {
-            Log(NULL, &gUnknown_8115FA4, r0);
+            Log(0, &gUnknown_8115FA4, r0);
             gUnknown_20398A8 = 7;
             gUnknown_20398AC = 1;
             gUnknown_20398B0 = r0;
@@ -286,7 +286,7 @@ u32 sub_8098F00(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
-        Log(NULL, &gUnknown_8115FC8, r0);
+        Log(0, &gUnknown_8115FC8, r0);
         gUnknown_20398A8 = 9;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -300,7 +300,7 @@ u32 sub_8098F44(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
-        Log(NULL, &gUnknown_8115FE8, r0);
+        Log(0, &gUnknown_8115FE8, r0);
         gUnknown_20398A8 = 10;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;

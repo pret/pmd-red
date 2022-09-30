@@ -28,7 +28,7 @@ extern void sub_8040A84();
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
 // Luminous Orb???
-void HandleLuminousOrbAction(struct DungeonEntity *param_1)
+void HandleLuminousOrbAction(struct DungeonEntity *pokemon)
 {
   struct MapTile *mapTile;
   int XCoord;
@@ -47,7 +47,7 @@ void HandleLuminousOrbAction(struct DungeonEntity *param_1)
   sub_803F580(0);
   sub_8049ED4();
   sub_8040A84();
-  SendMessage(param_1, gUnknown_80FD040);
+  SendMessage(pokemon, gUnknown_80FD040);
 }
 
 void sub_8040094(u8 r0)
