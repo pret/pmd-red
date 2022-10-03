@@ -14,6 +14,60 @@
 extern bool8 sub_8044B28(void);
 extern void sub_80429C8(struct DungeonEntity *r0);
 extern u16 gNaturePowerMoveTable[];
+bool8 sub_805755C(struct DungeonEntity* pokemon,u16 param_2);
+
+u32 sub_8057144(struct DungeonEntity * pokemon)
+{
+  struct PokemonMove **ppbVar3;
+  s32 entityIndex;
+  struct PokemonMove *move1;
+  struct PokemonMove *move2;
+  s32 index;
+  struct DungeonEntity *entity;
+  s32 counter;
+  struct PokemonMove *moveStack [80];
+  struct PokemonMove **local_20;
+  register s32 counter_1 asm("r0");
+  register struct PokemonMove** move_1 asm("r1");
+
+  counter = 0;
+
+  for(entityIndex = 0; entityIndex < DUNGEON_MAX_POKEMON; entityIndex++)
+  {
+    entity = gDungeonGlobalData->allPokemon[entityIndex];
+    if (EntityExists(entity)) {
+      move1 = move2 = &entity->entityData->moves[0];
+      
+      // NOTE: reg flip here 
+       // add  r2, r0, r1 -> add     r2, r1, r0
+#ifdef NONMATCHING
+      ppbVar3 = &moveStack[counter]; 
+#else
+      counter_1 = counter;
+      move_1 = moveStack;
+      ppbVar3 = (move_1 + counter_1);
+#endif
+
+      for(index = 0; index < MAX_MON_MOVES; move1++, move2++, index++)
+      {
+        if ((move1->moveFlags & MOVE_FLAG_EXISTS)) {
+          local_20 = ppbVar3;
+          if (!sub_805755C(pokemon, move1->moveID) && (move1->moveID != MOVE_SKETCH) && (counter < 80)) {
+            *local_20 = move2;
+            ppbVar3++;
+            counter++;
+          }
+        }
+      }
+    }
+  }
+  if (counter == 0) {
+    return MOVE_REGULAR_ATTACK; // MOVE_REGULAR_ATTACK
+  }
+  else {
+    return moveStack[DungeonRandomCapped(counter)]->moveID;
+  }
+}
 
 bool8 sub_80571F0(struct DungeonEntity * pokemon, struct PokemonMove *move)
 {
@@ -177,4 +231,28 @@ bool8 IsMoveUsable(struct DungeonEntity *pokemon, struct PokemonMove *move, bool
         }
     }
     return TRUE;
+}
+
+bool8 sub_805744C(struct DungeonEntity * pokemon, struct PokemonMove *move, bool8 param_3)
+{
+  struct DungeonEntityData *entityData;
+  
+  entityData = pokemon->entityData;
+  if (move->moveID != MOVE_REGULAR_ATTACK) {
+    if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
+        return FALSE;
+    }
+    if (param_3 != 0) {
+      if ((entityData->volatileStatus == VOLATILE_STATUS_TAUNTED) && (!MoveDealsDirectDamage(move))) return FALSE;
+      if (entityData->volatileStatus == VOLATILE_STATUS_ENCORE) {
+        if (move->moveID == MOVE_STRUGGLE) {
+          if((entityData->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
+        }
+        else {
+          if((move->moveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
+        }
+      }
+    }
+  }
+  return TRUE;
 }
