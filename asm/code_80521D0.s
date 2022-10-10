@@ -5558,7 +5558,7 @@ _080553F8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B0D0
+	bl HandleColorChange
 	b _080554BA
 _08055406:
 	adds r0, r7, 0

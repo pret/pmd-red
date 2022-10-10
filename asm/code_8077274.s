@@ -590,8 +590,8 @@ _080780DC: .4byte gDungeonGlobalData
 _080780E0: .4byte 0x000135cc
 	thumb_func_end sub_8078084
 
-	thumb_func_start sub_80780E4
-sub_80780E4:
+	thumb_func_start DestinyBondStatusTarget
+DestinyBondStatusTarget:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -704,7 +704,7 @@ _080781C4:
 _080781D0: .4byte gDungeonGlobalData
 _080781D4: .4byte 0x000135cc
 _080781D8: .4byte gUnknown_80FBB4C
-	thumb_func_end sub_80780E4
+	thumb_func_end DestinyBondStatusTarget
 
 	thumb_func_start sub_80781DC
 sub_80781DC:
