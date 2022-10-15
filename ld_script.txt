@@ -311,8 +311,6 @@ SECTIONS {
         src/code_80972F4.o(.text);
         asm/code_8097318.o(.text);
         src/code_809747C.o(.text);
-        asm/code_809747C.o(.text);
-        src/code_809747C_1.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
@@ -330,8 +328,6 @@ SECTIONS {
         src/ground_script.o(.text);
         asm/ground_script.o(.text);
         src/code_80A26CC.o(.text);
-        asm/code_80A26CC.o(.text);
-        src/code_80A26CC_1.o(.text);
         asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
         asm/ground_map.o(.text);

@@ -508,7 +508,7 @@ _08030362:
 	adds r3, r5, 0
 	bl sub_8013818
 	bl sub_80304C8
-	bl sub_803053C
+	bl DrawDojoCourseList
 	movs r0, 0x1
 _0803039A:
 	pop {r3}
@@ -567,7 +567,7 @@ _080303F2:
 	b _08030410
 _08030406:
 	bl sub_80304C8
-	bl sub_803053C
+	bl DrawDojoCourseList
 	movs r0, 0x1
 _08030410:
 	pop {r4}
@@ -617,7 +617,7 @@ sub_8030444:
 	adds r0, 0x30
 	bl sub_8013984
 	bl sub_80304C8
-	bl sub_803053C
+	bl DrawDojoCourseList
 	cmp r4, 0
 	beq _08030476
 	ldr r0, [r5]
@@ -725,145 +725,5 @@ sub_80304C8:
 	.align 2, 0
 _08030538: .4byte gUnknown_203B31C
 	thumb_func_end sub_80304C8
-
-	thumb_func_start sub_803053C
-sub_803053C:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x108
-	ldr r4, _08030658
-	ldr r0, [r4]
-	ldr r0, [r0, 0x64]
-	bl sub_8008C54
-	ldr r0, [r4]
-	ldr r0, [r0, 0x64]
-	bl sub_80073B8
-	ldr r2, _0803065C
-	ldr r0, [r4]
-	ldr r3, [r0, 0x64]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0xA
-	movs r1, 0
-	bl xxx_call_draw_string
-	ldr r3, [r4]
-	adds r0, r3, 0
-	adds r0, 0xCE
-	ldrb r0, [r0]
-	lsls r0, 3
-	adds r0, 0x4
-	adds r1, r3, 0
-	adds r1, 0x4E
-	movs r5, 0
-	ldrsh r2, [r1, r5]
-	adds r2, 0x1
-	movs r1, 0x7
-	str r1, [sp]
-	ldr r1, [r3, 0x64]
-	str r1, [sp, 0x4]
-	movs r1, 0
-	movs r3, 0x2
-	bl sub_8012BC4
-	movs r0, 0
-	mov r9, r0
-	ldr r0, [r4]
-	adds r0, 0x4A
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r9, r0
-	bge _0803063E
-	mov r8, r4
-_080305A2:
-	mov r3, r8
-	ldr r1, [r3]
-	adds r0, r1, 0
-	adds r0, 0x4E
-	movs r5, 0
-	ldrsh r2, [r0, r5]
-	subs r0, 0x2
-	movs r3, 0
-	ldrsh r0, [r0, r3]
-	muls r0, r2
-	add r0, r9
-	lsls r0, 1
-	adds r1, r0
-	movs r5, 0
-	ldrsh r4, [r1, r5]
-	adds r0, r4, 0
-	bl sub_80A2740
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r4, 0
-	bl sub_80A2668
-	adds r4, r0, 0
-	lsls r4, 16
-	asrs r4, 16
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x30
-	mov r1, r9
-	bl sub_8013800
-	adds r6, r0, 0
-	movs r5, 0x7
-	adds r0, r4, 0
-	bl sub_809758C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08030608
-	mov r3, r8
-	ldr r0, [r3]
-	ldr r3, [r0, 0x64]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x8
-	adds r1, r6, 0
-	ldr r2, _08030660
-	bl xxx_call_draw_string
-	movs r5, 0x4
-_08030608:
-	adds r0, r7, 0
-	bl GetDungeonName1
-	adds r3, r0, 0
-	add r0, sp, 0x8
-	ldr r1, _08030664
-	adds r2, r5, 0
-	bl sprintf_2
-	mov r5, r8
-	ldr r0, [r5]
-	ldr r3, [r0, 0x64]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x10
-	adds r1, r6, 0
-	add r2, sp, 0x8
-	bl xxx_call_draw_string
-	movs r0, 0x1
-	add r9, r0
-	ldr r0, [r5]
-	adds r0, 0x4A
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r9, r0
-	blt _080305A2
-_0803063E:
-	ldr r0, _08030658
-	ldr r0, [r0]
-	ldr r0, [r0, 0x64]
-	bl sub_80073E0
-	add sp, 0x108
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08030658: .4byte gUnknown_203B31C
-_0803065C: .4byte gUnknown_80E081C
-_08030660: .4byte gUnknown_80E0824
-_08030664: .4byte gUnknown_80E0828
-	thumb_func_end sub_803053C
 
         .align 2,0

@@ -7214,7 +7214,7 @@ _080A1792:
 _080A1794:
 	lsls r4, r5, 16
 	asrs r0, r4, 16
-	bl sub_809758C
+	bl IsMazeCompleted
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A17B6

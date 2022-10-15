@@ -7,7 +7,7 @@
 #include "rescue_team_info.h"
 #include "team_inventory.h"
 
-extern u8 sub_809761C(void);
+extern bool8 HasCompletedAllMazes(void);
 extern u8 sub_80973F4(u32);
 extern u8 _FlagJudge(u32, u32, u32);
 extern u32 sub_8001658(u32, s32);
@@ -562,7 +562,7 @@ u8 sub_80023E4(u32 param_1)
     case 0x1c:
         return GetRescueTeamRank() == LUCARIO_RANK;
     case 0x1d:
-        return sub_809761C();
+        return HasCompletedAllMazes();
     default:
         return 0;
   }
