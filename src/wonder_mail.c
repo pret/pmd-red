@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "item.h"
+#include "input.h"
 #include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "memory.h"
@@ -33,7 +34,6 @@ extern u32 sub_8095324(u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
-extern void ResetUnusedInputStruct();
 extern void sub_803084C();
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC();
@@ -69,7 +69,6 @@ extern s32 sub_8001658(u32, u32);
 extern u8 sub_8099B94();
 extern void sub_8099A5C(u32, u32, u32*);
 extern void sub_8099AFC(u32, u32, u32*);
-extern void ResetUnusedInputStruct();
 extern void sub_8099690(u32);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);

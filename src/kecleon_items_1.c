@@ -67,12 +67,7 @@ struct unkStruct_203B214
 {;
     // size: 0xA0
     u8 fill0[0x18];
-    // NOTE: has to be packed here so it doesn't take 4 bytes..
-    union __attribute__ ((__packed__)) temp2
-    {
-        u16 unk18;
-        u8 unk18_u8;
-    } temp;
+    u16 unk18;
     s16 unk1A;
     s16 unk1C;
     s16 unk1E;
@@ -521,7 +516,7 @@ u32 sub_8019E40(u32 r0)
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B214->unk3C, 1, 1);
         sub_8013818(gUnknown_203B214, xxx_count_inv_unk230(), 0xA, r0);
-        gUnknown_203B214->temp.unk18 = gUnknown_203B218;
+        gUnknown_203B214->unk18 = gUnknown_203B218;
         sub_8013984((u8 *)gUnknown_203B214);
         sub_801A064();
         sub_801A0D8();
@@ -586,7 +581,7 @@ u32 sub_8019EDC(u8 r0)
 
 u8 sub_8019FB0(void)
 {
-    return (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + gUnknown_203B214->temp.unk18_u8;
+    return (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + (u8)gUnknown_203B214->unk18;
 }
 
 void sub_8019FCC(u32 r0)
@@ -609,7 +604,7 @@ void sub_801A010(void)
 {
     if(gUnknown_203B214 != NULL)
     {
-        gUnknown_203B218 = gUnknown_203B214->temp.unk18;
+        gUnknown_203B218 = gUnknown_203B214->unk18;
         gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8B4;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B214->unk3C, 1, 1);
@@ -748,7 +743,7 @@ u32 sub_801A20C(u32 r0)
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
         sub_8013818(gUnknown_203B21C, xxx_count_non_empty_inv_unk250_8091A48(), 0xA, r0);
-        gUnknown_203B21C->temp.unk18 = gUnknown_203B220;
+        gUnknown_203B21C->unk18 = gUnknown_203B220;
         sub_8013984((u8 *)gUnknown_203B21C);
         sub_801A430();
         sub_801A4A4();
@@ -813,7 +808,7 @@ u32 sub_801A2A8(u8 r0)
 
 u8 sub_801A37C(void)
 {
-    return (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + gUnknown_203B21C->temp.unk18_u8;
+    return (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + gUnknown_203B21C->unk18;
 }
 
 void sub_801A398(u32 r0)
@@ -836,7 +831,7 @@ void sub_801A3DC(void)
 {
     if(gUnknown_203B21C != NULL)
     {
-        gUnknown_203B220 = gUnknown_203B21C->temp.unk18;
+        gUnknown_203B220 = gUnknown_203B21C->unk18;
         gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB8FC;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B21C->unk3C, 1, 1);

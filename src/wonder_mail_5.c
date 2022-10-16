@@ -35,7 +35,7 @@ bool8 sub_8030D40(u8 param_1, s32 param_2)
   sub_8006518(gUnknown_203B324->unk18);
   gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E091C;
   sub_8030DD4();
-  return 1;
+  return TRUE;
 }
 
 u8 sub_8030DA0(void)

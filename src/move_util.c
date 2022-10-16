@@ -8,6 +8,82 @@
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_global_data.h"
+
+
+extern bool8 sub_8044B28(void);
+extern void sub_80429C8(struct DungeonEntity *r0);
+extern u16 gNaturePowerMoveTable[];
+
+bool8 sub_80571F0(struct DungeonEntity * pokemon, struct PokemonMove *move)
+{
+    u16 moveID;
+    s32 tileset;
+    struct DungeonEntityData *entityData;
+
+    entityData = pokemon->entityData;
+
+    if (entityData->unkFF == 1) {
+        moveID = move->moveID;
+        if ((moveID == MOVE_SKY_UPPERCUT) || (moveID == MOVE_TWISTER) || (moveID == MOVE_GUST) || (moveID == MOVE_THUNDER))
+            return FALSE;
+        else
+            return TRUE;
+    }
+    else if (entityData->unkFF == 2) {
+        if (entityData->chargingStatus == CHARGING_STATUS_DIVE) {
+            if (move->moveID == MOVE_WHIRLPOOL || move->moveID == MOVE_SURF) return FALSE;
+        }
+        else if (entityData->chargingStatus == CHARGING_STATUS_DIG) {
+            moveID = move->moveID;
+            if (moveID == MOVE_EARTHQUAKE || moveID == MOVE_MAGNITUDE) return FALSE;
+            if (moveID == MOVE_NATURE_POWER) {
+                tileset = gDungeonGlobalData->tileset;
+                if (tileset < 0) {
+                    tileset = 0;
+                }
+                if (0x4a < tileset) {
+                    tileset = 0x4a;
+                }
+                if (gNaturePowerMoveTable[tileset << 2] == MOVE_EARTHQUAKE) return FALSE;
+            }
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_805727C(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 chance)
+{
+    bool8 uVar2;
+    if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) && 
+        (target->entityData->unk158 != 0) &&
+        (target->entityData->HP != 0)) {
+        if (chance != 0) {
+            if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
+                uVar2 = RollPercentChance_2(chance * 2);
+            }
+            else
+            {
+                uVar2 = RollPercentChance_2(chance);
+            }
+        }
+        else
+        {
+            uVar2 = TRUE;
+        }
+        if ((uVar2 != 0) && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
+        {
+            sub_80429C8(target);
+end:
+            return FALSE;
+        }
+        else
+            return uVar2;
+    }
+
+    goto end;
+}
 
 bool8 sub_8057308(struct DungeonEntity *pokemon, s32 chance)
 {

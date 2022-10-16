@@ -212,10 +212,10 @@ bool8 sub_802C4A4(void)
   return TRUE;
 }
 
-u32 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
+bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
 {
   if (HasNoAcceptedJobs()) {
-      return 0;
+      return FALSE;
   }
   else
   {
@@ -238,7 +238,7 @@ u32 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
     sub_802C750();
-    return 1;
+    return TRUE;
   }
 }
 
@@ -418,16 +418,16 @@ bool8 HasNoAcceptedJobs(void)
     for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         if(!IsJobSlotEmpty(index))
-            return 0;
+            return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
-u32 sub_802C860(u32 r0)
+bool8 sub_802C860(u32 r0)
 {
     if(HasNoAcceptedJobs())
     {
-        return 0;
+        return FALSE;
     }
     else
     {
@@ -435,7 +435,7 @@ u32 sub_802C860(u32 r0)
         gUnknown_203B2F0->unk68 = 0;
         gUnknown_203B2F0->unk0 = r0;
         sub_802C910(0);
-        return 1;
+        return TRUE;
     }
 }
 

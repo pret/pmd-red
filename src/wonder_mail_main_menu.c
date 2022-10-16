@@ -271,12 +271,12 @@ void HandleWonderMailMainScreen(void)
   if (sub_80144A4(&menuAction) == 0) {
     gUnknown_203B3E8->unk24C = 10;
     switch(menuAction) {
-        case 3:
+        case WONDER_MAIL_GAME_LINK:
         case 4:
             gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_GAME_LINK;
             SetWonderMailMainMenuState(GAME_LINK_CABLE_MENU);
             break;
-        case 5:
+        case WONDER_MAIL_PASSWORD:
             gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_PASSWORD;
             SetWonderMailMainMenuState(PROMPT_PASSWORD_ENTRY);
             break;

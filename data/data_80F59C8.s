@@ -6,8 +6,8 @@
 gUnknown_80F59C8: @ 80F59C8
 	.incbin "baserom.gba", 0xF59C8, 0x348
 
-	.global gUnknown_80F5D10
-gUnknown_80F5D10: @ 80F5D10
+	.global gNaturePowerMoveTable
+gNaturePowerMoveTable: @ 80F5D10
 	.incbin "baserom.gba", 0xF5D10, 0x260
 
 	.global gUnknown_80F5F70

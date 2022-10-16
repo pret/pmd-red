@@ -281,22 +281,22 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
   sprintf_2(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
-void sub_808D9DC(u8 *buffer, u8 *param_2, s32 colorNum)
+void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum)
 {
   u8 nameBuffer [20];
 
-  sub_80922B4(nameBuffer, param_2 + 0x58, POKEMON_NAME_LENGTH);
+  sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
   sprintf_2(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
-void sub_808DA0C(u8 *buffer, u8 *param_2)
+void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2)
 {
   u8 nameBuffer [20];
 
-  sub_80922B4(nameBuffer, param_2 + 0x58, POKEMON_NAME_LENGTH);
+  sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
   sprintf_2(buffer,gUnknown_8107638,nameBuffer); // %s
 }
 

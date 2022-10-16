@@ -3,9 +3,7 @@
 #include "gba/gba.h"
 #include "config.h"
 #include "global.h"
-
-extern void SoundBiasReset(void);
-extern void SoundBiasSet(void);
+#include "music.h"
 
 extern u32 gUnknown_202DB60[2];
 extern u16 gUnknown_202DB30[2][8];

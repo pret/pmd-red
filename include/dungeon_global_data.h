@@ -61,7 +61,8 @@ struct DungeonGlobalData
     u8 fill673[0x674 - 0x673];
     u8 unk674;
     u8 unk675;
-    u8 unk676[0x68A - 0x676];
+    /* 0x676 */ bool8 itemHoldersIdentified;
+    u8 unk677[0x68A - 0x677];
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
@@ -110,7 +111,11 @@ struct DungeonGlobalData
     /* 0x1358C */ struct DungeonEntity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ struct DungeonEntity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.
-    u8 fill13624[0x181E8 - 0x13624];
+    u8 fill13624[0x17B30 - 0x13624];
+    /* 0x17B30 */ u32 unk17B30;
+    /* 0x17B34 */ u8 fillunk1734[0x17B3C - 0x17B34];
+    /* 0x17B30 */ u32 unk17B3C;
+    u8 fill17B40[0x181E8 - 0x17B40];
     /* 0x181E8 */ struct Position posScreenWorld;
     /* 0x181EC */ struct Position prevPosScreenWorld;
     /* 0x181F0 */ struct Position posScreenPixel;

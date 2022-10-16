@@ -1232,7 +1232,7 @@ _0806D9D4:
 	bne _0806D9E6
 	mov r0, r9
 	adds r1, r7, 0
-	bl sub_807A7C8
+	bl SendTransformEndMessage
 _0806D9E6:
 	mov r0, r8
 	cmp r0, 0
@@ -1692,7 +1692,7 @@ _0806DD62:
 	mov r0, r9
 	adds r1, r7, 0
 	movs r2, 0x3
-	bl sub_807A5D0
+	bl SendWaitingEndMessage
 	b _0806DDA2
 	.align 2, 0
 _0806DD80: .4byte gDungeonGlobalData
@@ -1706,7 +1706,7 @@ _0806DD94:
 	mov r0, r9
 	adds r1, r7, 0
 	movs r2, 0x2
-	bl sub_807A5D0
+	bl SendWaitingEndMessage
 _0806DDA2:
 	adds r0, r7, 0
 	bl sub_8078084
@@ -1854,7 +1854,7 @@ _0806DEC8:
 	mov r0, r9
 	adds r1, r7, 0
 	movs r2, 0x3
-	bl sub_807A5D0
+	bl SendWaitingEndMessage
 	b _0806DEF2
 	.align 2, 0
 _0806DED4: .4byte gTeamInventory_203B460
@@ -1867,7 +1867,7 @@ _0806DEE4:
 	mov r0, r9
 	adds r1, r7, 0
 	movs r2, 0x2
-	bl sub_807A5D0
+	bl SendWaitingEndMessage
 _0806DEF2:
 	adds r0, r7, 0
 	bl sub_8078084

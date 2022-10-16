@@ -11,6 +11,7 @@
 #include "pokemon.h"
 #include "weather.h"
 #include "gUnknown_203B46C.h"
+#include "text_util.h"
 
 extern struct UnkSaveStruct1 *gUnknown_203B46C;
 
@@ -30,7 +31,6 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-extern u8* GetUnformattedTypeString(s16);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, const char r2[]);
 extern void sub_8042900(struct DungeonEntity *r0);

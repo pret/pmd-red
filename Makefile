@@ -156,6 +156,7 @@ tools: $(TOOLDIRS)
 
 include dungeon_pokemon.mk
 include dungeon_floor.mk
+include dungeon_trap.mk
 include data_pokemon.mk
 include data_item.mk
 include data_move.mk
@@ -181,6 +182,7 @@ tidy:
 	$(RM) -f $(POKEMON_SPECIES)
 	$(RM) -f $(DUNGEON_FLOOR)
 	$(RM) -f $(DUNGEON_POKEMON)
+	$(RM) -f $(DUNGEON_TRAP)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	@$(MAKE) clean -C libagbsyscall
 
@@ -201,7 +203,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
 	@$(call scaninc,$(INCLUDE_PATHS))
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor data_pokemon data_item data_move
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor dungeon_trap data_pokemon data_item data_move
 	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(DATA_ASM_BUILDDIR)/$*.i.s
 	@$(PREPROC) $(DATA_ASM_BUILDDIR)/$*.i.s charmap.txt > $(DATA_ASM_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(DATA_ASM_BUILDDIR)/$*.s

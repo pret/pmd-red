@@ -130,20 +130,20 @@ void sub_80186F8(void)
 {
     struct HeldItem_Alt item;
     u16 cast;
-    s32 iVar6;
-    u8 iVar6_32;
+    s32 itemID;
+    u8 itemID_u8;
 
     switch(sub_801CA08(1))
     {
         case 3:
             if(sub_801CFB8() != 0)
             {
-                for(iVar6 = 0; iVar6 < NUMBER_OF_ITEM_IDS; iVar6++)
+                for(itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++)
                 {
-                    iVar6_32 = iVar6; // dumb cast needed to match
-                    if(sub_801CFE0(iVar6) != 0)
+                    itemID_u8 = itemID; // dumb cast needed to match
+                    if(sub_801CFE0(itemID) != 0)
                     {
-                        item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | iVar6_32;
+                        item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemID_u8;
                         if(IsThrowableItem(item.temp.norm.itemIndex))
                             if(gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] > 0x63)
                             {
@@ -244,17 +244,17 @@ void sub_8018854(void)
 
 void sub_8018904(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    temp = 0;
+    menuAction = 0;
 
     sub_801A6E8(0);
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
-        sub_8013114(&gUnknown_203B20C->unk70, &temp);
-        if(temp != 1) gUnknown_203B20C->unk18 = temp;
+        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+        if(menuAction != 1) gUnknown_203B20C->unk18 = menuAction;
     }
-    switch(temp)
+    switch(menuAction)
     {
         case 2:
             if(IsNotMoneyOrUsedTMItem(gUnknown_203B20C->unk8.itemIndex))
@@ -290,19 +290,19 @@ void sub_8018904(void)
 void sub_80189C8(void)
 {
     struct HeldItem_Alt item;
-    s32 temp;
+    s32 menuAction;
     u32 itemsCast;
     u32 indexCast;
 
-    temp = 0;
+    menuAction = 0;
 
     sub_801CA08(0);
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
-        sub_8013114(&gUnknown_203B20C->unk70, &temp);
-        if(temp != 1) gUnknown_203B20C->unk1C = temp;
+        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+        if(menuAction != 1) gUnknown_203B20C->unk1C = menuAction;
     }
-    switch(temp)
+    switch(menuAction)
     {
         case 3:
             if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)

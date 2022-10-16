@@ -7184,7 +7184,7 @@ _080560CC:
 	.align 2, 0
 _08056108: .4byte gDungeonGlobalData
 _0805610C: .4byte 0x00003a0e
-_08056110: .4byte gUnknown_80F5D10
+_08056110: .4byte gNaturePowerMoveTable
 _08056114: .4byte gUnknown_80FECE0
 _08056118: .4byte gAvailablePokemonNames
 _0805611C: .4byte gUnknown_202DE58
@@ -7542,7 +7542,7 @@ _08056400:
 	bl SendImmobilizeEndMessage
 	adds r0, r5, 0
 	adds r1, r5, 0
-	bl sub_807A6C8
+	bl SendLinkedEndMessage
 _08056418:
 	ldr r0, _08056464
 	ldrb r0, [r0]
