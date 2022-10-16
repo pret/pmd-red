@@ -13,7 +13,7 @@
 #include <stddef.h>
 
 #define GREEN_KECLEON_SHOP_SIZE 8
-#define PURPLE_KECLEON_SHOP_SIZE 8
+#define PURPLE_KECLEON_SHOP_SIZE 4
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;

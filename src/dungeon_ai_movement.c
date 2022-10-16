@@ -3,19 +3,31 @@
 
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
+#include "constants/status.h"
+#include "constants/targeting.h"
 #include "constants/tactic.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement_1.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities_1.h"
+#include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_visibility.h"
 #include "map.h"
 #include "number_util.h"
+#include "position_util.h"
 
-extern bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
+#define INFINITY 999
+#define CHECK_VISIBILITY_DISTANCE 5
+#define CORRIDOR_VISIBILITY 2
+
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
+extern bool8 TargetLeader(struct DungeonEntity *pokemon);
+extern bool8 CanCrossWalls(struct DungeonEntity *pokemon);
+extern struct DungeonEntity *GetLeaderEntityIfVisible(struct DungeonEntity *pokemon);
 
 void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect)
 {
@@ -111,466 +123,220 @@ bool8 CanTakeItem(struct DungeonEntity *pokemon)
     return FALSE;
 }
 
-NAKED
 bool8 ChooseTargetPosition(struct DungeonEntity *pokemon)
 {
-    asm_unified("push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"sub sp, 0xC\n"
-"mov r8, r0\n"
-"ldr r7, [r0, 0x70]\n"
-"bl TargetLeader\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807AF74\n"
-"b _0807B12C\n"
-"_0807AF74:\n"
-"ldr r0, _0807AF8C\n"
-"ldr r1, [r0]\n"
-"ldr r2, _0807AF90\n"
-"adds r0, r1, r2\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807AF98\n"
-"ldr r3, _0807AF94\n"
-"adds r6, r1, r3\n"
-"movs r4, 0x14\n"
-"mov r10, r4\n"
-"b _0807AFB4\n"
-".align 2, 0\n"
-"_0807AF8C: .4byte gDungeonGlobalData\n"
-"_0807AF90: .4byte 0x000037fc\n"
-"_0807AF94: .4byte 0x000135cc\n"
-"_0807AF98:\n"
-"ldrb r0, [r7, 0x6]\n"
-"cmp r0, 0\n"
-"beq _0807AFAC\n"
-"ldr r0, _0807AFA8\n"
-"adds r6, r1, r0\n"
-"movs r1, 0x4\n"
-"mov r10, r1\n"
-"b _0807AFB4\n"
-".align 2, 0\n"
-"_0807AFA8: .4byte 0x0001357c\n"
-"_0807AFAC:\n"
-"ldr r2, _0807B01C\n"
-"adds r6, r1, r2\n"
-"movs r3, 0x10\n"
-"mov r10, r3\n"
-"_0807AFB4:\n"
-"mov r0, r8\n"
-"bl CanCrossWalls\n"
-"lsls r0, 24\n"
-"lsrs r0, 24\n"
-"str r0, [sp, 0x4]\n"
-"movs r4, 0x1\n"
-"negs r4, r4\n"
-"str r4, [sp]\n"
-"ldr r0, _0807B020\n"
-"mov r9, r0\n"
-"movs r5, 0\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x78\n"
-"str r1, [sp, 0x8]\n"
-"cmp r5, r10\n"
-"bge _0807B09E\n"
-"_0807AFD6:\n"
-"lsls r0, r5, 2\n"
-"adds r0, r6\n"
-"ldr r4, [r0]\n"
-"adds r0, r4, 0\n"
-"bl EntityExists\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B098\n"
-"ldr r0, [r4, 0x70]\n"
-"adds r1, r0, 0\n"
-"adds r1, 0xA4\n"
-"ldrb r1, [r1]\n"
-"adds r2, r0, 0\n"
-"cmp r1, 0\n"
-"bne _0807B098\n"
-"ldr r0, _0807B024\n"
-"ldr r0, [r0]\n"
-"ldr r3, _0807B028\n"
-"adds r0, r3\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807B02C\n"
-"mov r0, r8\n"
-"adds r1, r4, 0\n"
-"movs r2, 0\n"
-"movs r3, 0x1\n"
-"bl CanTarget\n"
-"lsls r0, 24\n"
-"lsrs r0, 24\n"
-"cmp r0, 0x1\n"
-"bne _0807B098\n"
-"ldr r2, [r4, 0x70]\n"
-"b _0807B03C\n"
-".align 2, 0\n"
-"_0807B01C: .4byte 0x0001358c\n"
-"_0807B020: .4byte 0x000003e7\n"
-"_0807B024: .4byte gDungeonGlobalData\n"
-"_0807B028: .4byte 0x000037fc\n"
-"_0807B02C:\n"
-"ldrb r0, [r7, 0x6]\n"
-"cmp r0, 0\n"
-"bne _0807B03C\n"
-"adds r0, r2, 0\n"
-"adds r0, 0xB0\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0x6\n"
-"beq _0807B098\n"
-"_0807B03C:\n"
-"ldrb r0, [r2, 0x8]\n"
-"cmp r0, 0x1\n"
-"beq _0807B098\n"
-"ldr r0, [sp, 0x4]\n"
-"cmp r0, 0\n"
-"beq _0807B074\n"
-"mov r2, r8\n"
-"movs r3, 0x4\n"
-"ldrsh r1, [r2, r3]\n"
-"movs r2, 0x4\n"
-"ldrsh r0, [r4, r2]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807B05A\n"
-"negs r1, r1\n"
-"_0807B05A:\n"
-"cmp r1, 0x5\n"
-"bgt _0807B074\n"
-"mov r3, r8\n"
-"movs r0, 0x6\n"
-"ldrsh r1, [r3, r0]\n"
-"movs r2, 0x6\n"
-"ldrsh r0, [r4, r2]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807B070\n"
-"negs r1, r1\n"
-"_0807B070:\n"
-"cmp r1, 0x5\n"
-"ble _0807B082\n"
-"_0807B074:\n"
-"mov r0, r8\n"
-"adds r1, r4, 0\n"
-"bl CanSee_2\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B098\n"
-"_0807B082:\n"
-"adds r1, r4, 0x4\n"
-"mov r0, r8\n"
-"adds r0, 0x4\n"
-"bl GetDistance\n"
-"cmp r9, r0\n"
-"ble _0807B098\n"
-"mov r9, r0\n"
-"str r5, [sp]\n"
-"cmp r0, 0x1\n"
-"ble _0807B09E\n"
-"_0807B098:\n"
-"adds r5, 0x1\n"
-"cmp r5, r10\n"
-"blt _0807AFD6\n"
-"_0807B09E:\n"
-"ldr r3, [sp]\n"
-"cmp r3, 0\n"
-"blt _0807B12C\n"
-"movs r2, 0\n"
-"movs r5, 0x1\n"
-"ldr r4, [sp, 0x8]\n"
-"strb r5, [r4]\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x88\n"
-"lsls r0, r3, 2\n"
-"adds r4, r0, r6\n"
-"ldr r0, [r4]\n"
-"ldr r0, [r0, 0x4]\n"
-"str r0, [r1]\n"
-"subs r1, 0x8\n"
-"ldr r0, [r4]\n"
-"str r0, [r1]\n"
-"ldrh r1, [r0, 0x26]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x7C\n"
-"strh r1, [r0]\n"
-"subs r0, 0x2\n"
-"strb r5, [r0]\n"
-"movs r1, 0x8A\n"
-"lsls r1, 1\n"
-"adds r0, r7, r1\n"
-"str r2, [r0]\n"
-"mov r0, r8\n"
-"movs r1, 0x8\n"
-"bl HasTactic\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0807B0E4\n"
-"b _0807B2C6\n"
-"_0807B0E4:\n"
-"mov r0, r8\n"
-"bl CanSeeTeammate\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B0F2\n"
-"b _0807B2C6\n"
-"_0807B0F2:\n"
-"mov r2, r8\n"
-"movs r3, 0x4\n"
-"ldrsh r1, [r2, r3]\n"
-"ldr r2, [r4]\n"
-"movs r4, 0x4\n"
-"ldrsh r0, [r2, r4]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807B106\n"
-"negs r1, r1\n"
-"_0807B106:\n"
-"cmp r1, 0x1\n"
-"ble _0807B10C\n"
-"b _0807B2C6\n"
-"_0807B10C:\n"
-"mov r0, r8\n"
-"movs r3, 0x6\n"
-"ldrsh r1, [r0, r3]\n"
-"movs r4, 0x6\n"
-"ldrsh r0, [r2, r4]\n"
-"subs r0, r1, r0\n"
-"cmp r0, 0\n"
-"bge _0807B11E\n"
-"negs r0, r0\n"
-"_0807B11E:\n"
-"cmp r0, 0x1\n"
-"ble _0807B124\n"
-"b _0807B2C6\n"
-"_0807B124:\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x7B\n"
-"strb r5, [r0]\n"
-"b _0807B2C6\n"
-"_0807B12C:\n"
-"mov r0, r8\n"
-"movs r1, 0x1\n"
-"bl HasTactic\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0807B17C\n"
-"ldrb r5, [r7, 0x6]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x78\n"
-"str r0, [sp, 0x8]\n"
-"cmp r5, 0\n"
-"bne _0807B222\n"
-"mov r0, r8\n"
-"bl GetLeaderEntityIfVisible\n"
-"adds r4, r0, 0\n"
-"bl EntityExists\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B222\n"
-"movs r0, 0x1\n"
-"ldr r1, [sp, 0x8]\n"
-"strb r0, [r1]\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x88\n"
-"ldr r0, [r4, 0x4]\n"
-"str r0, [r1]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x80\n"
-"str r4, [r0]\n"
-"ldrh r1, [r4, 0x26]\n"
-"subs r0, 0x4\n"
-"strh r1, [r0]\n"
-"movs r2, 0x8A\n"
-"lsls r2, 1\n"
-"adds r0, r7, r2\n"
-"str r5, [r0]\n"
-"b _0807B2C6\n"
-"_0807B17C:\n"
-"ldrb r0, [r7, 0x7]\n"
-"adds r3, r7, 0\n"
-"adds r3, 0x78\n"
-"str r3, [sp, 0x8]\n"
-"cmp r0, 0\n"
-"beq _0807B222\n"
-"ldr r4, _0807B1BC\n"
-"ldr r0, [r4]\n"
-"ldr r1, _0807B1C0\n"
-"adds r0, r1\n"
-"ldrb r0, [r0]\n"
-"mov r2, r8\n"
-"movs r3, 0x4\n"
-"ldrsh r0, [r2, r3]\n"
-"movs r3, 0x6\n"
-"ldrsh r1, [r2, r3]\n"
-"bl GetMapTile_1\n"
-"ldrb r1, [r0, 0x9]\n"
-"cmp r1, 0xFF\n"
-"bne _0807B1C4\n"
-"mov r4, r8\n"
-"movs r0, 0x4\n"
-"ldrsh r1, [r4, r0]\n"
-"subs r2, r1, 0x2\n"
-"mov r10, r2\n"
-"movs r3, 0x6\n"
-"ldrsh r0, [r4, r3]\n"
-"subs r2, r0, 0x2\n"
-"adds r6, r1, 0x2\n"
-"adds r0, 0x2\n"
-"b _0807B1EC\n"
-".align 2, 0\n"
-"_0807B1BC: .4byte gDungeonGlobalData\n"
-"_0807B1C0: .4byte 0x00018209\n"
-"_0807B1C4:\n"
-"lsls r0, r1, 3\n"
-"subs r0, r1\n"
-"lsls r0, 2\n"
-"ldr r1, _0807B26C\n"
-"adds r0, r1\n"
-"ldr r1, [r4]\n"
-"adds r1, r0\n"
-"movs r2, 0x2\n"
-"ldrsh r0, [r1, r2]\n"
-"subs r0, 0x1\n"
-"mov r10, r0\n"
-"movs r3, 0x4\n"
-"ldrsh r0, [r1, r3]\n"
-"subs r2, r0, 0x1\n"
-"movs r4, 0x6\n"
-"ldrsh r0, [r1, r4]\n"
-"adds r6, r0, 0x1\n"
-"movs r3, 0x8\n"
-"ldrsh r0, [r1, r3]\n"
-"adds r0, 0x1\n"
-"_0807B1EC:\n"
-"mov r9, r0\n"
-"adds r5, r2, 0\n"
-"adds r4, r7, 0\n"
-"adds r4, 0x78\n"
-"str r4, [sp, 0x8]\n"
-"cmp r5, r9\n"
-"bgt _0807B222\n"
-"_0807B1FA:\n"
-"mov r4, r10\n"
-"cmp r4, r6\n"
-"bgt _0807B21C\n"
-"_0807B200:\n"
-"adds r0, r4, 0\n"
-"adds r1, r5, 0\n"
-"bl GetMapTile_2\n"
-"ldr r0, [r0, 0x14]\n"
-"cmp r0, 0\n"
-"beq _0807B216\n"
-"bl GetEntityType\n"
-"cmp r0, 0x3\n"
-"beq _0807B270\n"
-"_0807B216:\n"
-"adds r4, 0x1\n"
-"cmp r4, r6\n"
-"ble _0807B200\n"
-"_0807B21C:\n"
-"adds r5, 0x1\n"
-"cmp r5, r9\n"
-"ble _0807B1FA\n"
-"_0807B222:\n"
-"ldr r1, [sp, 0x8]\n"
-"ldrb r0, [r1]\n"
-"subs r0, 0x1\n"
-"lsls r0, 24\n"
-"lsrs r0, 24\n"
-"cmp r0, 0x1\n"
-"bhi _0807B2C0\n"
-"adds r3, r7, 0\n"
-"adds r3, 0x80\n"
-"ldr r1, [r3]\n"
-"cmp r1, 0\n"
-"beq _0807B2C0\n"
-"adds r2, r7, 0\n"
-"adds r2, 0x7C\n"
-"ldrh r0, [r1, 0x26]\n"
-"ldrh r4, [r2]\n"
-"cmp r0, r4\n"
-"bne _0807B2B4\n"
-"ldr r1, [r1, 0x70]\n"
-"mov r9, r1\n"
-"movs r5, 0\n"
-"mov r4, r9\n"
-"adds r4, 0x68\n"
-"_0807B250:\n"
-"lsls r6, r5, 2\n"
-"mov r0, r8\n"
-"adds r1, r4, 0\n"
-"bl InSameRoom\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0807B294\n"
-"adds r4, 0x4\n"
-"adds r5, 0x1\n"
-"cmp r5, 0x3\n"
-"ble _0807B250\n"
-"b _0807B2C0\n"
-".align 2, 0\n"
-"_0807B26C: .4byte 0x000104c4\n"
-"_0807B270:\n"
-"movs r1, 0\n"
-"movs r0, 0x7\n"
-"ldr r2, [sp, 0x8]\n"
-"strb r0, [r2]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x88\n"
-"strh r4, [r0]\n"
-"adds r0, 0x2\n"
-"strh r5, [r0]\n"
-"subs r0, 0xA\n"
-"str r1, [r0]\n"
-"subs r0, 0x4\n"
-"strh r1, [r0]\n"
-"movs r3, 0x8A\n"
-"lsls r3, 1\n"
-"adds r0, r7, r3\n"
-"str r1, [r0]\n"
-"b _0807B2C6\n"
-"_0807B294:\n"
-"movs r2, 0\n"
-"movs r0, 0x2\n"
-"ldr r4, [sp, 0x8]\n"
-"strb r0, [r4]\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x88\n"
-"mov r0, r9\n"
-"adds r0, 0x68\n"
-"adds r0, r6\n"
-"ldr r0, [r0]\n"
-"str r0, [r1]\n"
-"movs r1, 0x8A\n"
-"lsls r1, 1\n"
-"adds r0, r7, r1\n"
-"str r2, [r0]\n"
-"b _0807B2C6\n"
-"_0807B2B4:\n"
-"movs r1, 0\n"
-"movs r0, 0x6\n"
-"ldr r4, [sp, 0x8]\n"
-"strb r0, [r4]\n"
-"str r1, [r3]\n"
-"strh r1, [r2]\n"
-"_0807B2C0:\n"
-"mov r0, r8\n"
-"bl Wander\n"
-"_0807B2C6:\n"
-"movs r0, 0x1\n"
-"add sp, 0xC\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r1}\n"
-"bx r1");
+    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    if (!TargetLeader(pokemon))
+    {
+        struct DungeonEntity **possibleTargets;
+        s32 maxPossibleTargets;
+        s32 targetIndex;
+        bool8 canCrossWalls;
+        s32 targetDistance;
+        s32 i;
+        if (gDungeonGlobalData->decoyActive)
+        {
+            possibleTargets = gDungeonGlobalData->allPokemon;
+            maxPossibleTargets = DUNGEON_MAX_POKEMON;
+        }
+        else if (pokemonData->isEnemy)
+        {
+            possibleTargets = gDungeonGlobalData->teamPokemon;
+            maxPossibleTargets = MAX_TEAM_MEMBERS;
+        }
+        else
+        {
+            possibleTargets = gDungeonGlobalData->wildPokemon;
+            maxPossibleTargets = DUNGEON_MAX_WILD_POKEMON;
+        }
+        canCrossWalls = CanCrossWalls(pokemon);
+        targetIndex = -1;
+        targetDistance = INFINITY;
+        for (i = 0; i < maxPossibleTargets; i++)
+        {
+            struct DungeonEntity *target = possibleTargets[i];
+            if (EntityExists(target) && target->entityData->clientType == CLIENT_TYPE_NONE)
+            {
+                if (gDungeonGlobalData->decoyActive)
+                {
+                    if (CanTarget(pokemon, target, FALSE, TRUE) != TARGET_CAPABILITY_CAN_TARGET)
+                    {
+                        continue;
+                    }
+                }
+                else if (!pokemonData->isEnemy && target->entityData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
+                {
+                    continue;
+                }
+                if (target->entityData->shopkeeperMode != SHOPKEEPER_FRIENDLY)
+                {
+                    s32 currentDistance;
+                    if (canCrossWalls)
+                    {
+                        s32 distance = pokemon->posWorld.x - target->posWorld.x;
+                        if (distance < 0)
+                        {
+                            distance = -distance;
+                        }
+                        if (distance > CHECK_VISIBILITY_DISTANCE)
+                        {
+                            goto checkCanSee;
+                        }
+                        distance = pokemon->posWorld.y - target->posWorld.y;
+                        if (distance < 0)
+                        {
+                            distance = -distance;
+                        }
+                        if (distance > CHECK_VISIBILITY_DISTANCE)
+                        {
+                            goto checkCanSee;
+                        }
+                    }
+                    else
+                    {
+                        checkCanSee:
+                        if (!CanSee_2(pokemon, target))
+                        {
+                            continue;
+                        }
+                    }
+                    currentDistance = GetDistance(&pokemon->posWorld, &target->posWorld);
+                    if (targetDistance > currentDistance)
+                    {
+                        targetDistance = currentDistance;
+                        targetIndex = i;
+                        if (targetDistance < 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (targetIndex > -1)
+        {
+            pokemonData->movementAction = MOVEMENT_ACTION_FOLLOW;
+            pokemonData->targetMovePosition = possibleTargets[targetIndex]->posWorld;
+            pokemonData->targetPokemon = possibleTargets[targetIndex];
+            pokemonData->targetPokemonSpawnIndex = pokemonData->targetPokemon->spawnIndex;
+            pokemonData->hasTarget = TRUE;
+            pokemonData->moveRandomly = FALSE;
+            if (HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon))
+            {
+                s32 distanceX = pokemon->posWorld.x - possibleTargets[targetIndex]->posWorld.x;
+                if (distanceX < 0)
+                {
+                    distanceX = -distanceX;
+                }
+                if (distanceX < 2)
+                {
+                    s32 distanceY = pokemon->posWorld.y - possibleTargets[targetIndex]->posWorld.y;
+                    if (distanceY < 0)
+                    {
+                        distanceY = -distanceY;
+                    }
+                    if (distanceY < 2)
+                    {
+                        pokemonData->turnAround = TRUE;
+                    }
+                }
+            }
+            return TRUE;
+        }
+    }
+    if (!HasTactic(pokemon, TACTIC_GO_THE_OTHER_WAY))
+    {
+        do
+        {
+            if (!pokemonData->isEnemy)
+            {
+                struct DungeonEntity *leader = GetLeaderEntityIfVisible(pokemon);
+                if (EntityExists(leader))
+                {
+                    pokemonData->movementAction = MOVEMENT_ACTION_FOLLOW;
+                    pokemonData->targetMovePosition = leader->posWorld;
+                    pokemonData->targetPokemon = leader;
+                    pokemonData->targetPokemonSpawnIndex = leader->spawnIndex;
+                    pokemonData->moveRandomly = FALSE;
+                    return TRUE;
+                }
+            }
+        } while (0);
+    }
+    else if (pokemonData->isLeader)
+    {
+        // This item targeting code is never reached because the leader is never AI-controlled.
+        u8 roomIndex;
+        s32 minX, minY, maxX, maxY, x, y, maxY2;
+        if (gDungeonGlobalData->visibility) {
+            // Dead code.
+            u8 a = -a;
+        }
+        roomIndex = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y)->roomIndex;
+        if (roomIndex == CORRIDOR_ROOM_INDEX)
+        {
+            do
+            {
+                minX = pokemon->posWorld.x - CORRIDOR_VISIBILITY;
+                minY = pokemon->posWorld.y - CORRIDOR_VISIBILITY;
+                maxX = pokemon->posWorld.x + CORRIDOR_VISIBILITY;
+                maxY = pokemon->posWorld.y + CORRIDOR_VISIBILITY;
+            } while (0);
+        }
+        else
+        {
+            struct MapRoom *room = &gDungeonGlobalData->roomData[roomIndex];
+            minX = room->startX - 1;
+            minY = room->startY - 1;
+            maxX = room->endX + 1;
+            maxY = room->endY + 1;
+        }
+        maxY2 = maxY;
+        for (y = minY; y <= maxY2; y++)
+        {
+            for (x = minX; x <= maxX; x++)
+            {
+                struct DungeonEntity *mapObject = GetMapTile_2(x, y)->mapObject;
+                if (mapObject && GetEntityType(mapObject) == ENTITY_ITEM)
+                {
+                    pokemonData->movementAction = MOVEMENT_ACTION_TAKE_ITEM;
+                    pokemonData->targetMovePosition.x = x;
+                    pokemonData->targetMovePosition.y = y;
+                    pokemonData->targetPokemon = NULL;
+                    pokemonData->targetPokemonSpawnIndex = 0;
+                    pokemonData->moveRandomly = FALSE;
+                    return TRUE;
+                }
+            }
+        }
+    }
+    if ((u8) (pokemonData->movementAction - 1) <= 1)
+    {
+        if (pokemonData->targetPokemon)
+        {
+            if (pokemonData->targetPokemon->spawnIndex == pokemonData->targetPokemonSpawnIndex)
+            {
+                struct DungeonEntityData *targetData = pokemonData->targetPokemon->entityData;
+                s32 i;
+                for (i = 0; i < NUM_PREVIOUS_POSITIONS; i++)
+                {
+                    if (InSameRoom(pokemon, &targetData->previousPositions[i]))
+                    {
+                        pokemonData->movementAction = MOVEMENT_ACTION_WANDER;
+                        pokemonData->targetMovePosition = targetData->previousPositions[i];
+                        pokemonData->moveRandomly = FALSE;
+                        return TRUE;
+                    }
+                }
+            }
+            else
+            {
+                pokemonData->movementAction = MOVEMENT_ACTION_FACE_RANDOM_DIRECTION;
+                pokemonData->targetPokemon = NULL;
+                pokemonData->targetPokemonSpawnIndex = 0;
+            }
+        }
+    }
+    Wander(pokemon);
+    return TRUE;
 }

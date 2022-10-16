@@ -13,6 +13,7 @@
 #define MAX_MOVEMENT_SPEED 4
 #define MAX_STOCKPILE_COUNT 3
 #define NUM_SPEED_TURN_COUNTERS 5
+#define NUM_PREVIOUS_POSITIONS 4
 
 #define STAT_STAGE_ATTACK 0
 #define STAT_STAGE_SPECIAL_ATTACK 1
@@ -85,16 +86,13 @@ struct DungeonEntityData
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ struct ItemSlot heldItem;
     u8 fill64[0x68 - 0x64];
-    /* 0x68 */ struct Position previousPosition1;
-    /* 0x6C */ struct Position previousPosition2;
-    /* 0x70 */ struct Position previousPosition3;
-    /* 0x74 */ struct Position previousPosition4;
+    /* 0x68 */ struct Position previousPositions[NUM_PREVIOUS_POSITIONS];
     /* 0x78 */ u8 movementAction;
     /* 0x79 */ bool8 notAdjacentToTarget;
     /* 0x7A */ bool8 hasTarget;
     /* 0x7B */ bool8 turnAround;
     /* 0x7C */ u16 targetPokemonSpawnIndex;
-    /* 0x80 */ u32 targetPokemon;
+    /* 0x80 */ struct DungeonEntity *targetPokemon;
     u8 fill84[0x88 - 0x84];
     /* 0x88 */ struct Position targetMovePosition;
     // Bitwise flags corresponding to selected IQ skills.
@@ -179,9 +177,9 @@ struct DungeonEntityData
     /* 0x10D */ u8 slowTurnsLeft[NUM_SPEED_TURN_COUNTERS];
     /* 0x112 */ u8 stockpileCount;
     u8 fill113;
-    // When true, an AI Pokémon will move in a random direction every turn.
+    // When non-zero, an AI Pokémon will move in a random direction every turn.
     // Unclear where this is set in-game; it is not set by statuses (e.g., confusion) or mission clients.
-    /* 0x114 */ bool8 moveRandomly;
+    /* 0x114 */ u32 moveRandomly;
     /* 0x118 */ struct PokemonMove moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
     /* 0x13C */ u32 belly;
