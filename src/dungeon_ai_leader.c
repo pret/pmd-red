@@ -4,10 +4,9 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_leader.h"
 #include "dungeon_visibility.h"
 #include "pokemon_3.h"
-
-extern struct DungeonEntity* GetLeaderEntity();
 
 bool8 TargetLeader(struct DungeonEntity *pokemon)
 {

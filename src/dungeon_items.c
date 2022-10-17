@@ -2,8 +2,9 @@
 #include "dungeon_items.h"
 
 #include "dungeon_capabilities.h"
-#include "dungeon_random.h"
 #include "dungeon_global_data.h"
+#include "dungeon_leader.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "team_inventory.h"
 #include "pokemon.h"
@@ -18,7 +19,6 @@ extern u8 *gUnknown_8105434[];
 
 extern u8 sub_8046D70(void);
 extern s32 sub_8052B8C(u32, u8 *, u32);
-extern struct DungeonEntity *GetLeaderEntity(void);
 extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_803E708(u32, u32);
@@ -103,7 +103,7 @@ void MusicBoxCreation(void)
   struct DungeonEntity *entity;
 
   s32 indexes[3];
-  
+
   createMusicBox = FALSE;
   do {
     musicBoxOnce = FALSE;

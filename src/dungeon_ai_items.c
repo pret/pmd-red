@@ -280,7 +280,7 @@ void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFla
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct DungeonEntity* targetPokemon = gDungeonGlobalData->allPokemon[i];
+        struct DungeonEntity *targetPokemon = gDungeonGlobalData->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
@@ -317,7 +317,7 @@ void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, s
     gNumPotentialTargets = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct DungeonEntity* targetPokemon = gDungeonGlobalData->allPokemon[i];
+        struct DungeonEntity *targetPokemon = gDungeonGlobalData->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
             CanSee(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {

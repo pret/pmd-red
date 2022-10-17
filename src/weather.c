@@ -11,7 +11,7 @@ extern void TriggerWeatherAbilities(void);
 extern void sub_807EAA0(u32, u32);
 void sub_807E5E4(u8);
 
-u8 GetWeather(struct DungeonEntity* pokemon)
+u8 GetWeather(struct DungeonEntity *pokemon)
 {
     if (pokemon != NULL && HasItem(pokemon, ITEM_ID_WEATHER_BAND))
     {
