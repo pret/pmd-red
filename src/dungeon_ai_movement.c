@@ -13,6 +13,7 @@
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
+#include "dungeon_movement_1.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -26,7 +27,6 @@
 #define CORRIDOR_VISIBILITY 2
 
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
-extern bool8 CanCrossWalls(struct DungeonEntity *pokemon);
 extern struct DungeonEntity *GetLeaderEntityIfVisible(struct DungeonEntity *pokemon);
 
 void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect)
