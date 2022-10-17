@@ -10,7 +10,7 @@ extern u32 gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
 extern u32 gTacticsDescriptions[];
 extern u8 *gTactics[];
-extern u8 gTacticsTargetLeader[];
+extern bool8 gTacticsTargetLeader[];
 
 extern s16 gReqTacticLvls[];
 extern s32 gReqIQSkillPts[];
@@ -481,9 +481,9 @@ u32 GetTacticsDescription(u8 r0)
     return gTacticsDescriptions[r0];
 }
 
-u8 TacticsTargetLeader(u8 r0)
+bool8 TacticsTargetLeader(u8 tactic)
 {
-    return gTacticsTargetLeader[r0];
+    return gTacticsTargetLeader[tactic];
 }
 
 void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel)

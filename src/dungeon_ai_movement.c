@@ -7,6 +7,7 @@
 #include "constants/targeting.h"
 #include "constants/tactic.h"
 #include "dungeon_action.h"
+#include "dungeon_ai_leader.h"
 #include "dungeon_ai_movement_1.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities_1.h"
@@ -25,7 +26,6 @@
 #define CORRIDOR_VISIBILITY 2
 
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
-extern bool8 TargetLeader(struct DungeonEntity *pokemon);
 extern bool8 CanCrossWalls(struct DungeonEntity *pokemon);
 extern struct DungeonEntity *GetLeaderEntityIfVisible(struct DungeonEntity *pokemon);
 
