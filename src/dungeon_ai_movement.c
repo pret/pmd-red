@@ -27,7 +27,6 @@
 #define CORRIDOR_VISIBILITY 2
 
 extern void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
-extern struct DungeonEntity *GetLeaderEntityIfVisible(struct DungeonEntity *pokemon);
 
 void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect)
 {

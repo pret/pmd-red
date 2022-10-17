@@ -4,5 +4,6 @@
 #include "dungeon_entity.h"
 
 bool8 TargetLeader(struct DungeonEntity *pokemon);
+struct DungeonEntity* GetLeaderEntityIfVisible(struct DungeonEntity *pokemon);
 
 #endif

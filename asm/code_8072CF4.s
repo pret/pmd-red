@@ -5,47 +5,6 @@
 
   	.text
   
-	thumb_func_start GetLeaderEntityIfVisible
-GetLeaderEntityIfVisible:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, [r5, 0x70]
-	ldrb r0, [r0, 0x6]
-	cmp r0, 0
-	bne _08072CEC
-	bl GetLeaderEntity
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _08072CEC
-	ldr r0, [r4, 0x70]
-	adds r0, 0xC8
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	beq _08072CEC
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0
-	movs r3, 0
-	bl CanTarget
-	lsls r0, 24
-	cmp r0, 0
-	bne _08072CEC
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl CanSee_2
-	lsls r0, 24
-	cmp r0, 0
-	beq _08072CEC
-	adds r0, r4, 0
-	b _08072CEE
-_08072CEC:
-	movs r0, 0
-_08072CEE:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetLeaderEntityIfVisible
-
 	thumb_func_start sub_8072CF4
 sub_8072CF4:
 	push {r4-r7,lr}
