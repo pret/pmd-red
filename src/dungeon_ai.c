@@ -15,6 +15,7 @@
 #include "dungeon_ai_movement.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
+#include "dungeon_leader.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -41,7 +42,6 @@ extern void sub_807AB38(struct DungeonEntity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
-extern struct DungeonEntity *GetLeaderEntity();
 extern u8 sub_8075CFC(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern void sub_8041AF4(struct DungeonEntity *);
 extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, u8 *);
@@ -70,8 +70,8 @@ u32 sub_8075818(struct DungeonEntity *entity)
             {
                 case ENTITY_NONE:
                 case ENTITY_POKEMON:
-                case 4:
-                case 5:
+                case ENTITY_UNK_4:
+                case ENTITY_UNK_5:
                     break;
                 case ENTITY_TRAP:
                     trapData = (u8*) GetTrapData(subEntity);
@@ -300,7 +300,7 @@ u8 sub_8075BF4(struct DungeonEntity * pokemon, s32 sleepTurns)
 {
   struct DungeonEntityData *entityData;
   u32 uVar4;
-  
+
   uVar4 = 0;
   if (!EntityExists(pokemon)){
     return uVar4;
@@ -331,7 +331,7 @@ void sub_8075C58(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
 {
   u8 sleepStatus;
   u8 cVar2;
-  
+
 
   if (sub_8075CFC(pokemon,target,1,param_4) == '\0') {
     sleepStatus = target->entityData->sleepStatus;

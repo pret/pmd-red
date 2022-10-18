@@ -171,7 +171,7 @@ bool8 IsSleeping(struct DungeonEntity *pokemon)
     return TRUE;
 }
 
-bool8 HasQuarterHPOrLess(struct DungeonEntity* pokemon)
+bool8 HasQuarterHPOrLess(struct DungeonEntity *pokemon)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
     struct DungeonEntityData *pokemonData2 = pokemon->entityData;
