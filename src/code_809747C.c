@@ -76,7 +76,12 @@ void nullsub_208(void)
 bool8 sub_8097504(s16 mazeIndex)
 {
     s32 mazeIndex_s32;
+
+#ifndef NONMATCHING
     register s32 mazeIndex_s32_1 asm("r1");
+#else
+    s32 mazeIndex_s32_1;    
+#endif
     s32 uVar3;
 
     mazeIndex_s32 = mazeIndex;

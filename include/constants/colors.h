@@ -8,5 +8,6 @@
 #define COLOR_GREEN 4
 #define COLOR_CYAN 5
 #define COLOR_YELLOW 6
+#define COLOR_WHITE_2 7
 
 #endif //GUARD_CONSTANTS_COLORS_H

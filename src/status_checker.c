@@ -769,8 +769,6 @@ bool8 sub_805B968(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     return flag;
 }
 
-
-// NOTE: Either Excavate or Rock Smash (90% sure it's Rock Smash)
 bool8 RockSmashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     bool8 uVar3;

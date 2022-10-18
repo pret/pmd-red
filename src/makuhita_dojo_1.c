@@ -65,7 +65,7 @@ void DrawDojoCourseList(void)
       sVar3 = sub_80A2668(iVar6);
 
       y = sub_8013800(&gUnknown_203B31C->unk30, index);
-      color = 7; // COLOR_WHITE again?
+      color = COLOR_WHITE_2; // COLOR_WHITE again?
       if (IsMazeCompleted(sVar3)) {
         xxx_call_draw_string(8,y,gUnknown_80E0824,gUnknown_203B31C->unk64,0); // Draw Star symbol
         color = COLOR_GREEN;

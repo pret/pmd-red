@@ -216,7 +216,7 @@ struct DungeonEntityData
     /* 0x170 */ struct Position posPixel;
     u32 unk174;
     u8 fill178[0x17A - 0x178];
-    u16 mimicMoveIDs[5]; // All moves that Mimic has copied (not sure on size...)
+    /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
     /* 0x184 */ struct Position previousTargetMovePosition1;
     /* 0x188 */ struct Position32 previousTargetMovePosition2;
