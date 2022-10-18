@@ -313,9 +313,7 @@ extern void sub_8086A3C(struct DungeonEntity *r0);
 extern void sub_8083E88(u32);
 extern void sub_80854D4(void);
 extern void sub_80855E4(void *);
-extern void sub_8085930(u32);
 extern void sub_8068FE0(struct DungeonEntity *, u32, u32);
-extern void sub_8085860(s32 r0, u32 r1);
 extern void sub_8083EA8(u32, u32);
 
 extern void sub_803E708(u32, u32);
@@ -329,14 +327,13 @@ extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
 extern void sub_806CE68(struct DungeonEntity *, u32);
 extern void sub_804539C(struct DungeonEntity *, u32, u32);
 extern void sub_8042B0C(struct DungeonEntity *);
-extern void SetFacingDirection(struct DungeonEntity *, u32);
 extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
 extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct DungeonEntity *);
 extern bool8 IsFanfareSEPlaying_2(u32);
 extern void sub_8083F14();
-extern void sub_80861D4(struct DungeonEntity *, u32, u32);
+extern void sub_80861D4(struct DungeonEntity *, u32, s32 direction);
 extern void sub_806FDF4(struct DungeonEntity *, struct DungeonEntity *, struct DungeonEntity **);
 extern u32 sub_80861F8(u32, struct DungeonEntity *, u32);
 extern void sub_8083ED8(u32);
@@ -376,7 +373,6 @@ extern void sub_806BFC0(struct DungeonEntityData *, u32);
 
 
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
-extern struct DungeonEntity *GetEntityFromClientType(u32);
 extern void sub_808BBA8(struct DungeonEntity * );
 extern void sub_80855E4(void *);
 extern void sub_8041888(u32);
@@ -459,7 +455,6 @@ extern u8 sub_8086AE4(u32);
 
 extern void sub_8072008(struct DungeonEntity *, struct DungeonEntity *, s16, u32, u32);
 extern struct DungeonEntity *GetPartnerEntity();
-extern void sub_80856E0(struct DungeonEntity *, u32);
 extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
 extern void sub_804539C(struct DungeonEntity *, u32, u32);
 extern void sub_806CDD4(struct DungeonEntity *, u32, u32);
@@ -467,7 +462,6 @@ extern void sub_8085374();
 
 extern void sub_8086848(u32 ,u32);
 extern void sub_80856C8(struct DungeonEntity *, s32, s32);
-extern void sub_80861D4(struct DungeonEntity *, u32, u32);
 extern void sub_8086738();
 extern void sub_8086A54(struct DungeonEntity *);
 extern void sub_8086764();
@@ -712,7 +706,7 @@ void MoltresPreFightDialogue(void)
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_7);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1cf);
-  sub_80856E0(PartnerEntity,4);
+  sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_8);
   sub_803E708(10,0x46);
@@ -1735,7 +1729,7 @@ void MagmaCavernMidDialogue(void)
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
   PlaySoundEffect(0x1c7);
-  sub_80856E0(PartnerEntity,4);
+  sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   // Hey! {ARG_POKEMON_0}!
   // Over there!
   DisplayDungeonDialogue(&MagmaCavernMidDialogue_5);
@@ -1961,7 +1955,7 @@ void RayquazaPreFightDialogue(void)
   DisplayDungeonDialogue(&gRayquazaPreFightDialogue_1);
   RayquazaScreenFlash();
   DisplayDungeonDialogue(&gRayquazaPreFightDialogue_2);
-  sub_80856E0(PartnerEntity,4);
+  sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   SpriteLookAroundEffect(PartnerEntity);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
@@ -3740,7 +3734,7 @@ void JirachiWish(void)
   DisplayDungeonDialogue(&gUnknown_8105674);
   sub_8083E88(0x79);
   sub_803E708(10,0x46);
-  sub_80856E0(JirachiEntity,0);
+  sub_80856E0(JirachiEntity, DIRECTION_SOUTH);
   PlaySoundEffect(0x16a);
   DisplayDungeonDialogue(&gUnknown_81056B8);
   sub_803E708(10,0x46);

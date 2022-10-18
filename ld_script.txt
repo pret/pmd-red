@@ -46,6 +46,8 @@ SECTIONS {
         asm/code_2.o(.text);
         src/code.o(.text);
         asm/event_flag.o(.text);
+        src/event_flag_1.o(.text);
+        asm/event_flag_1.o(.text);
         src/event_flag.o(.text);
         asm/code_8002774.o(.text);
         src/memory.o(.text);
@@ -62,6 +64,8 @@ SECTIONS {
         src/sprite.o(.text);
         asm/sprite.o(.text);
         asm/code_800558C.o(.text);
+        src/code_800558C_1.o(.text);
+        asm/code_8005838.o(.text);
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
@@ -139,6 +143,7 @@ SECTIONS {
         src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo.o(.text);
         asm/makuhita_dojo.o(.text);
+        src/makuhita_dojo_1.o(.text);
         src/wonder_mail_4.o(.text);
         asm/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
@@ -210,7 +215,6 @@ SECTIONS {
         src/code_80521D0.o(.text);
         asm/code_80521D0.o(.text);
         src/charge_move.o(.text);
-        asm/code_8057144.o(.text);
         src/move_util.o(.text);
         asm/code_805744C.o(.text);
         src/code_8057824.o(.text);
@@ -313,8 +317,6 @@ SECTIONS {
         src/code_80972F4.o(.text);
         asm/code_8097318.o(.text);
         src/code_809747C.o(.text);
-        asm/code_809747C.o(.text);
-        src/code_809747C_1.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
@@ -329,15 +331,15 @@ SECTIONS {
         asm/code_8098BDC.o(.text);
         src/code_809D148.o(.text);
         asm/code_809D148.o(.text);
+        src/ground_script.o(.text);
         asm/ground_script.o(.text);
         src/code_80A26CC.o(.text);
-        asm/code_80A26CC.o(.text);
-        src/code_80A26CC_1.o(.text);
         asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
         asm/ground_map.o(.text);
         src/ground_map_1.o(.text);
         asm/ground_map_1.o(.text);
+        src/ground_map_2.o(.text);
         asm/ground_sprite.o(.text);
         src/code_80A7714.o(.text);
         asm/ground_lives.o(.text);
@@ -426,7 +428,10 @@ SECTIONS {
         src/wonder_mail_802DF88.o(.rodata);
         src/mailbox.o(.rodata);
         src/pelipper_board.o(.rodata);
+        src/wonder_mail_3_mid.o(.rodata);
+        src/makuhita_dojo.o(.rodata);
         data/data_80DED44.o(.rodata);
+        src/wonder_mail_6.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);
         src/adventure_log.o(.rodata);

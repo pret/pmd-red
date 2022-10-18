@@ -5383,7 +5383,7 @@ _0805529A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B9E8
+	bl RockSmashMoveAction
 	b _080554BA
 _080552A8:
 	adds r0, r7, 0
@@ -5558,7 +5558,7 @@ _080553F8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B0D0
+	bl HandleColorChange
 	b _080554BA
 _08055406:
 	adds r0, r7, 0
@@ -5586,14 +5586,14 @@ _08055430:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B740
+	bl RecycleMoveAction
 	b _080554BA
 _0805543E:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD64
+	bl SilenceOrbAction
 	b _080554BA
 _0805544C:
 	adds r0, r7, 0

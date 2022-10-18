@@ -1,0 +1,124 @@
+{
+    "tables": [
+        {
+            "name": "pokemon_found_out522",
+            "pokemon": [
+                {
+                    "species": "SPECIES_FURRET",
+                    "level": 14,
+                    "probability": 5000
+                },
+                {
+                    "species": "SPECIES_AZURILL",
+                    "level": 11,
+                    "probability": 5000
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out523",
+            "pokemon": [
+                {
+                    "species": "SPECIES_FURRET",
+                    "level": 14,
+                    "probability": 3333
+                },
+                {
+                    "species": "SPECIES_AZURILL",
+                    "level": 11,
+                    "probability": 3334
+                },
+                {
+                    "species": "SPECIES_NOSEPASS",
+                    "level": 16,
+                    "probability": 3333
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out524",
+            "pokemon": [
+                {
+                    "species": "SPECIES_FURRET",
+                    "level": 14,
+                    "probability": 2500
+                },
+                {
+                    "species": "SPECIES_PINECO",
+                    "level": 18,
+                    "probability": 2500
+                },
+                {
+                    "species": "SPECIES_AZURILL",
+                    "level": 11,
+                    "probability": 2500
+                },
+                {
+                    "species": "SPECIES_NOSEPASS",
+                    "level": 16,
+                    "probability": 2500
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out525",
+            "pokemon": [
+                {
+                    "species": "SPECIES_FURRET",
+                    "level": 14,
+                    "probability": 3333
+                },
+                {
+                    "species": "SPECIES_PINECO",
+                    "level": 18,
+                    "probability": 3334
+                },
+                {
+                    "species": "SPECIES_NOSEPASS",
+                    "level": 16,
+                    "probability": 3333
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        }
+    ]
+}

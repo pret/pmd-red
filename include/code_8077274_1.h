@@ -47,7 +47,7 @@ void SendEyesightEndMessage(struct DungeonEntity * pokemon,struct DungeonEntity 
 void SendMuzzledEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * target);
 void sub_807A96C(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 void sub_807A9B0(struct DungeonEntity * pokemon);
-void sub_807A9D8(struct DungeonEntity *pokemon, struct DungeonEntity *target);
+void SendThawedMessage(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 void sub_807AA30(void);
 
 #endif // !GUARD_CODE_8077274_1_H

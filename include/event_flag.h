@@ -7,7 +7,6 @@ struct UnkEventStruct
     /* 0x4 */ u32 *unk4;
 };
 
-
 bool8 sub_80026CC(s16 r0);
 void sub_80026E8(s16 r0);
 bool8 sub_8002700(void *r0);

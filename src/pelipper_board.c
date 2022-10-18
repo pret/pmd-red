@@ -67,6 +67,12 @@ const struct UnkTextStruct2 gUnknown_80E0378 =
     NULL
 };
 
+const u8 gPelipperBoard_BulletinBoard[] = "Bulletin Board";
+const u8 gPelipperBoard_JobList[] = "Job List";
+const u8 gPelipperBoard_Accepted[] = "Accepted";
+const u8 gPelipperStatusSlash[] = "/";
+static const u8 gPelipperfill[] = "pksdir0";
+
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802ECB4(void);
 extern void nullsub_134(void);

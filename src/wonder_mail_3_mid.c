@@ -96,9 +96,6 @@ struct unkStruct_203B314
 };
 
 extern struct unkStruct_203B314 *gUnknown_203B314;
-extern struct UnkTextStruct2 gUnknown_80E072C;
-extern struct UnkTextStruct2 gUnknown_80E0714;
-extern struct UnkTextStruct2 gUnknown_80E06FC;
 
 extern u8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
@@ -146,24 +143,124 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_802F300(void);
 extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
-extern void sub_80141B4(u8 *, u32, struct OpenedFile **, u32);
+extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
 
-extern struct UnkTextStruct2 gUnknown_80E03C4;
-extern struct UnkTextStruct2 gUnknown_80E03F4;
-extern struct UnkTextStruct2 gUnknown_80E041C;
-extern u8 gUnknown_80E0434[];
-extern u8 gUnknown_80E045C[];
-extern u8 gUnknown_80E0484[];
-extern u8 gUnknown_80E04F4[];
-extern u8 gUnknown_80E06A8[];
-extern u8 gUnknown_80E0670[];
-extern u8 gUnknown_80E05FC[];
-extern u8 gUnknown_80E04B4[];
-extern u8 gUnknown_80E05C0[];
-extern u8 gUnknown_80E0640[];
+const struct UnkTextStruct2 gUnknown_80E03C4 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E03DC = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x03, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E03F4 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x06, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const u8 gUnknown_80E040C[] = "Send";
+static const u8 wonder_mail_fill[] = "pksdir0";
+const struct UnkTextStruct2 gUnknown_80E041C = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+ALIGNED(4) const u8 gUnknown_80E0434[] = _(
+        " Here{APOSTROPHE}s your reward!\n"
+        "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}!");
+
+ALIGNED(4) const u8 gUnknown_80E045C[] = _(
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
+        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+
+ALIGNED(4) const u8 gUnknown_80E0484[] = _(
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
+        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+
+ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
+        " As your reward{COMMA} you can\n"
+        "now go to the Friend Area\n"
+        "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
+        "{CENTER_ALIGN}...Oh{COMMA} wait{COMMA} sorry.{EXTRA_MSG}"
+        "{CENTER_ALIGN}You already have the \n"
+        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA} Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+        "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
+        "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
+        "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
+        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.");
+
+ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
+        "{CENTER_ALIGN}to the Friend Area\n"
+        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E05FC[] = _(
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
+        "{CENTER_ALIGN}to the Friend Area\n"
+        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E0640[] = _(
+        " Here{APOSTROPHE}s your reward!\n"
+        "The promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gUnknown_80E0670[] = _(
+        "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1}\n"
+        "{CENTER_ALIGN}gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.");
+
+ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
+        "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
+        "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
+        "{CENTER_ALIGN}from the {ARG_POKEMON_2}\n"
+        "{CENTER_ALIGN}to the {ARG_POKEMON_3}!");
+
+static const u8 wonder_mail_fill2[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80E06FC = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E0714 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x0E, 0x0E,
+    0x0E, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E072C = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x10, 0x10,
+    0x10, 0x00,
+    NULL
+};
 
 extern u8 gUnknown_202E038[];
 extern u8 gUnknown_202E088[];
@@ -172,8 +269,7 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_202DE30;
-extern const char gUnknown_80E040C[];
-extern const char *gUnknown_80D4970[];
+extern const u8 *gUnknown_80D4970[];
 
 
 
@@ -279,7 +375,7 @@ void sub_802F088(void)
 void sub_802F108(void)
 {
     struct unkStruct_203B30C *preload;
-    const char *blankText;
+    const u8 *blankText;
     s32 action_1;
 
     preload = gUnknown_203B30C;
@@ -442,7 +538,7 @@ void sub_802F300(void)
 void HandleMissionReward(void)
 {
   int moneyReward;
-  const char *rankString;
+  const u8 *rankString;
   u8 uVar7;
   struct unkStruct_8090F58 local_20;
   struct ItemSlot_Alt item;

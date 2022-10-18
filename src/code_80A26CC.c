@@ -5,9 +5,40 @@ extern u8 sub_80023E4(u32);
 extern u8 sub_80973F4(s16);
 extern u8 sub_8097384(s16);
 s16 sub_80A26B8(s16);
+extern struct unkStruct_80A2608 gUnknown_81168A8[];
+extern u8 sub_8098F88(void);
+extern u32 sub_8001658(u32, u32);
+
 extern s16 gUnknown_8116F9A[];
 extern s16 gUnknown_8116F24[];
-extern struct unkStruct_80A2608 gUnknown_81168A8[];
+extern const u8 *gUnknown_8117000[];
+
+u32 sub_80A25AC(u16 param_1)
+{
+  if (sub_8098F88() != 0) {
+      return param_1;
+  }
+  else
+  {
+    if (param_1 == 0x32) {
+        return 0x32;
+    }
+    else if (sub_80023E4(0xc) == 0) {
+        return 999;
+    }
+    else if (sub_80023E4(0xd) != 0) {
+        return 0x13;
+    }
+    else if (param_1 != 1) {
+        return param_1;
+    }
+    else
+    {
+        sub_8001658(0,0x28);
+        return 1;
+    }
+  }
+}
 
 struct unkStruct_80A2608 *sub_80A2608(s16 r0)
 {
@@ -120,7 +151,7 @@ u8 sub_80A2728(s16 r0)
     return temp->unkC;
 }
 
-u8 sub_80A2740(s16 r0)
+u8 sub_80A2740(s32 r0)
 {
     struct unkStruct_80A2608 *temp;
     temp = sub_80A2608(r0);
@@ -259,3 +290,155 @@ u32 sub_80A28F0(u8 r0)
     }
     return 0;
 }
+
+s32 sub_80A293C(u8 *param_1)
+{
+  u8 *pcVar2;
+  struct unkStruct_80A2608 * iVar3;
+  s32 index;
+  s32 counter;
+  u8 local_68 [0x40];
+  u8 zero;
+
+  counter = 0;
+  zero = 0;
+
+  pcVar2 = &local_68[0x3e];
+  do {
+    *pcVar2 = zero;
+    pcVar2--;
+  } while ((int)pcVar2 >= (int)local_68);
+
+
+    for(index = 0; index < 0x2E; index++)
+    {
+      iVar3 = sub_80A2620(index);
+      if ((iVar3->unk11 != 0) &&
+         (sub_8097384(index) != 0)) {
+        local_68[iVar3->unkC] = 1;
+      }
+    }
+
+  for(index = 0; index < 0x3F; index++)
+  {
+    if (local_68[index] != 0) {
+      param_1[counter] = index;
+      counter++;
+    }
+  }
+  return counter;
+}
+
+s32 sub_80A29B0(u8 *param_1)
+{
+  u8 *pcVar2;
+  struct unkStruct_80A2608 * iVar3;
+  s32 index;
+  s32 counter;
+  u8 *local1;
+  u8 *local2;
+  u8 *local3;
+  u8 *local4;
+  u8 local_68 [0x40];
+  u8 zero;
+
+  counter = 0;
+  local1 = &local_68[0x2B];
+  local2 = &local_68[0x2C];
+  local3 = &local_68[0x2D];
+  local4 = &local_68[0x2E];
+  zero = 0;
+
+  pcVar2 = &local_68[0x3e];
+  do {
+    *pcVar2 = zero;
+    pcVar2 = pcVar2 + -1;
+  } while ((int)pcVar2 >= (int)local_68);
+
+
+  if (sub_80023E4(1) != 0) {
+    for(index = 0; index < 0x2E; index++)
+    {
+      iVar3 = sub_80A2620(index);
+      if ((iVar3->unk11 != 0) &&
+         (sub_80973F4(index) != 0)) {
+        local_68[iVar3->unkC] = 1;
+      }
+    }
+  }
+  *local1 = 0;
+  *local2 = 0;
+  *local3 = 0;
+  *local4 = 0;
+
+  for(index = 0; index < 0x3F; index++)
+  {
+    if (local_68[index] != 0) {
+      param_1[counter] = index;
+      counter++;
+    }
+  }
+  return counter;
+}
+
+s32 sub_80A2A5C(u8 *param_1)
+{
+  u8 *pcVar2;
+  struct unkStruct_80A2608 *iVar3;
+  s32 index;
+  s32 counter;
+  u8 local_58 [0x40];
+  u8 zero;
+
+  counter = 0;
+  zero = 0;
+  
+  pcVar2 = &local_58[0x3E];
+  do {
+    *pcVar2 = zero;
+    pcVar2--;
+  } while ((s32)pcVar2 >= (s32)local_58);
+
+  if (sub_80023E4(1) != 0) {
+    for(index = 0; index < 0x2E; index++)
+    {
+      iVar3 = sub_80A2620(index);
+      if ((iVar3->unk11 != 0) && ((sub_8097384(index) != 0) || (sub_80973F4(index) != 0)))
+      {
+        local_58[iVar3->unkC] = 1;
+      }
+    }
+  }
+  else {
+    for(index = 0; index < 0x2E; index++)
+    {
+      iVar3 = sub_80A2620(index);
+      if ((iVar3->unk11 != 0) && (sub_8097384(index) != 0)) 
+      {
+        local_58[iVar3->unkC] = 1;
+      }
+    }
+  }
+  for(index = 0; index < 0x3F; index++)
+  {
+    if (local_58[index] != 0) {
+      param_1[counter] = index;
+      counter++;
+    }
+  }
+  return counter;
+}
+
+// Returns Location string for the pause menu
+const u8 *sub_80A2B18(s16 param_1)
+{
+    s32 param_1_s32 = param_1;
+    const u8 **preload = gUnknown_8117000;
+    return preload[param_1_s32];
+}
+
+const u8 *sub_80A2B28(u16 r0)
+{
+    return sub_80A2B18(sub_8001658(0, 17));
+}
+
