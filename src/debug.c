@@ -199,7 +199,7 @@ void UnusedHang(void)
     Hang();
 }
 
-void Log(u8 *buffer, const char *text, ...)
+void Log(u8 num, const char *text, ...)
 {
     va_list vArgv;
     va_start(vArgv, text);

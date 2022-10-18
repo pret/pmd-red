@@ -1647,7 +1647,7 @@ void sub_807A9B0(struct DungeonEntity * pokemon)
   DungeonEntityUpdateStatusSprites(pokemon);
 }
 
-void sub_807A9D8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+void SendThawedMessage(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
   struct DungeonEntityData *iVar2;
   
@@ -1658,7 +1658,7 @@ void sub_807A9D8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
       iVar2->immobilizeStatusTurnsLeft = 0;
       iVar2->immobilizeStatusDamageTimer = 0;
       SetMessageArgument(gAvailablePokemonNames,target,0);
-      sub_80522F4(pokemon,target,*gUnknown_80FA8BC);
+      sub_80522F4(pokemon,target,*gUnknown_80FA8BC); // $m0 thawed out!
       DungeonEntityUpdateStatusSprites(target);
     }
   }

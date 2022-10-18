@@ -31,18 +31,57 @@ struct unkStruct_203B328
 extern struct unkStruct_203B328 *gUnknown_203B328;
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
-extern u8 gUnknown_80E0A0C[];
-extern u8 gUnknown_80E09D8[];
+const struct MenuItem gUnknown_80E0948[] = 
+{
+    {"Yes", 0x2},
+    {"No", 0x3},
+    {NULL, 0x1}
+};
 
-extern struct UnkTextStruct2 gUnknown_80E0990;
-extern struct UnkTextStruct2 gUnknown_80E09A8;
-extern struct MenuItem gUnknown_80E0968;
-extern struct UnkTextStruct2 gUnknown_80E09C0;
-extern struct MenuItem gUnknown_80E0948;
+const struct MenuItem gUnknown_80E0968[] = 
+{
+    {"Delete", 0x4},
+    {"Info", 0x5},
+    {NULL, 0x1}
+};
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
+const struct UnkTextStruct2 gUnknown_80E0990 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E09A8 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x13, 0x00, 0x0B, 0x00,
+    0x08, 0x03,
+    0x03, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E09C0 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x11, 0x00, 0x0F, 0x00,
+    0x07, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+ALIGNED(4) const u8 gUnknown_80E09D8[] = _(
+        " ...Uh{COMMA} no?\n"
+        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
+        " ...Uh{COMMA} no?\n"
+        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
+const u8 wonder_mail_6_fill[] = "pksdir0";
+
+extern void sub_8012CAC(struct UnkTextStruct2 *, const struct MenuItem *);
 extern void sub_80306A8(s32, u32, u32, u32);
-extern void sub_80141B4(char *r0, u32, struct OpenedFile **r1, u32);
+extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8031300(void);
 extern void sub_803136C(void);
 extern void sub_80313D8(u32);
@@ -59,7 +98,7 @@ extern void sub_8030810(u32);
 extern void sub_803092C(void);
 extern void sub_8030D40(u8, u32);
 extern void sub_8012EA4(u32 *, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32, u32, u32);
+extern void sub_8012D60(u32 *, const struct MenuItem *, u32, u32, u32, u32);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_8095240(u8);
@@ -160,12 +199,12 @@ void sub_80310FC(void)
             gUnknown_203B328->unkA8[1] = gUnknown_80E09A8;
             gUnknown_203B328->unkA8[2] = gUnknown_80E0990;
             gUnknown_203B328->unkA8[3] = gUnknown_80E0990;
-            sub_8012CAC(&gUnknown_203B328->unkA8[1], &gUnknown_80E0968);
+            sub_8012CAC(&gUnknown_203B328->unkA8[1], gUnknown_80E0968);
             break;
         case 2:
         case 3:
             gUnknown_203B328->unkA8[2] = gUnknown_80E09C0;
-            sub_8012CAC(&gUnknown_203B328->unkA8[2], &gUnknown_80E0948);
+            sub_8012CAC(&gUnknown_203B328->unkA8[2], gUnknown_80E0948);
             break;
         case 4:
             gUnknown_203B328->unkA8[0] = gUnknown_80E0990;
@@ -193,13 +232,13 @@ void sub_8031258(void)
             break;
         case 1:
             sub_803092C();
-            sub_8012D60(&gUnknown_203B328->unk8, &gUnknown_80E0968, 0, 0, 4, 1);
+            sub_8012D60(&gUnknown_203B328->unk8, gUnknown_80E0968, 0, 0, 4, 1);
             break;
         case 2:
         case 3:
             sub_803092C();
             sub_8012EA4(&gUnknown_203B328->unk8, 0);
-            sub_8012D60(&gUnknown_203B328->unk58, &gUnknown_80E0948, 0, 0, 3, 2);
+            sub_8012D60(&gUnknown_203B328->unk58, gUnknown_80E0948, 0, 0, 3, 2);
             break;
         case 4:
             sub_8030D40(gUnknown_203B328->unk4, 3);

@@ -9,7 +9,7 @@ extern u8 sub_80023E4(u32);
 extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 
-extern const char *gRescueTeamRanks[];
+extern const u8 *gRescueTeamRanks[];
 extern s32 gRescueRankMaxPoints[7];
 extern u8 gTeamNamePlaceholder[0x8]; // Pokemon
 
@@ -98,7 +98,7 @@ u8 GetRescueTeamRank(void)
   return LUCARIO_RANK;
 }
 
-const char *GetTeamRankString(u8 index)
+const u8 *GetTeamRankString(u8 index)
 {
     return gRescueTeamRanks[index];
 }

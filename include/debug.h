@@ -10,7 +10,7 @@ struct DebugLocation
     char *func;
 };
 
-void Log(u8 *buffer, const char *text, ...);
+void Log(u8 num, const char *text, ...);
 void NDS_DebugInit(void);
 void nullsub_25(void);
 void nullsub_26(void);

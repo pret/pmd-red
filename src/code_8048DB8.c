@@ -6,12 +6,12 @@
 
 extern void sub_803E708(u32, u32);
 extern void sub_80421C0(struct DungeonEntity *r0, u16 r1);
-extern void sub_8078B5C(struct DungeonEntity *, u32, u32, u32, u32);
-extern void sub_80763F8(struct DungeonEntity *, u32, u32);
-extern void sub_80769CC(struct DungeonEntity *, u32);
-extern void sub_8076210(struct DungeonEntity *, u32, u32, u32);
-extern void sub_8077780(struct DungeonEntity *, u32, u32);
-extern void sub_8076E20(struct DungeonEntity *, u32, u32, u32, u32, u32);
+extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
+extern void sub_80763F8(struct DungeonEntity *, struct DungeonEntity *, u32);
+extern void sub_80769CC(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8076210(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
+extern void sub_8077780(struct DungeonEntity *, struct DungeonEntity *, u32);
+extern void sub_8076E20(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -32,22 +32,22 @@ extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern u8 *gUnknown_80FDCA4[];
 extern u8 *gUnknown_80FE3E8[];
 
-bool8 sub_8048D50(struct DungeonEntity * param_1,struct ItemSlot *item)
+bool8 sub_8048D50(struct DungeonEntity * pokemon, struct ItemSlot *item)
 {
   struct DungeonEntityData *iVar2;
 
-  iVar2 = param_1->entityData;
+  iVar2 = pokemon->entityData;
   
   if ((item->itemFlags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gUnknown_202DE58, item);
-    SendMessage(param_1,*gUnknown_80FE3E8);
+    SendMessage(pokemon,*gUnknown_80FE3E8);
     return FALSE;
   }
   else
   {
     if ((iVar2->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(item->itemIndex))) {
-        SetMessageArgument(gAvailablePokemonNames,param_1,0);
-        SendMessage(param_1,*gUnknown_80FDCA4);
+        SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+        SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
     }
   }
@@ -63,26 +63,26 @@ void sub_8048DB8(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8
         sub_8051E7C(pokemon);
 }
 
-void sub_8048E04(struct DungeonEntity *pokemon, u32 r1)
+void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 {
-    sub_8078B5C(pokemon, r1, 0x1E, 0, 1);
+    sub_8078B5C(pokemon, target, 0x1E, 0, 1);
     switch(DungeonRandomCapped(5))
     {
         case 0:
-            sub_80763F8(pokemon, r1, 1);
+            sub_80763F8(pokemon, target, 1);
             break;
         case 1:
-            sub_80769CC(pokemon, r1);
+            sub_80769CC(pokemon, target);
             break;
         case 2:
-            sub_8076210(pokemon, r1, 1, 1);
+            sub_8076210(pokemon, target, 1, 1);
             break;
         case 3:
-            sub_8077780(pokemon, r1, 1);
+            sub_8077780(pokemon, target, 1);
             break;
         case 4:
-            sub_8076E20(pokemon, r1, gUnknown_8106A4C, 3, 1, 1);
-            sub_8076E20(pokemon, r1, gUnknown_8106A50, 3, 1, 1);
+            sub_8076E20(pokemon, target, gUnknown_8106A4C, 3, 1, 1);
+            sub_8076E20(pokemon, target, gUnknown_8106A50, 3, 1, 1);
             break;
     } 
 }

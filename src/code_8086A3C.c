@@ -8,7 +8,6 @@
 extern void LoadIQSkills(struct DungeonEntity *);
 extern struct DungeonEntity *GetPartnerEntity();
 extern struct DungeonEntity *xxx_call_GetLeaderEntity(void);
-extern struct DungeonEntity *GetEntityFromClientType(u32);
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
 extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
@@ -17,9 +16,7 @@ extern u8 gUnknown_202E038[];
 extern void sub_8083E88(u32);
 extern void sub_8085374();
 extern void sub_80854D4();
-extern void sub_8085930(u32);
 extern void sub_80855E4(void *);
-extern void sub_8085860(s32 r0, u32 r1);
 extern void sub_8068FE0(struct DungeonEntity *, u32, u32);
 extern void sub_8097FA8(u32);
 extern void DisplayDungeonDialogue(u8 *);

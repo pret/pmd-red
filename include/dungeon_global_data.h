@@ -50,12 +50,14 @@ struct DungeonGlobalData
     u8 fill646[0x65C - 0x646];
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
-    /* 0x660 */ u16 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
+    /* 0x660 */ s16 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.
     u8 fill662[0x666 - 0x662];
     /* 0x666 */ u16 turnsLeft; // Turns remaining before getting swept out of the dungeon.
     u8 fill668[0x66A - 0x668];
     u16 unk66A;
-    u8 fill66C[0x671 - 0x66C];
+    u8 fill66C[0x66E - 0x66C];
+    /* 0x66E */ u8 unk66E;
+    u8 fill66F[0x671 - 0x66F];
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
     u8 fill673[0x674 - 0x673];
