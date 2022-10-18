@@ -1,0 +1,39 @@
+{
+    "tables": [
+        {
+            "name": "pokemon_found_out448",
+            "pokemon": [
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_SHUPPET",
+                    "level": 28,
+                    "probability": 10000
+                },
+                {
+                    "species": "SPECIES_REGIROCK",
+                    "level": 5,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_REGICE",
+                    "level": 17,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_REGISTEEL",
+                    "level": 20,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,829 @@
+{
+    "tables": [
+        {
+            "name": "pokemon_found_out526",
+            "pokemon": [
+                {
+                    "species": "SPECIES_WEEDLE",
+                    "level": 8,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_PIDGEY",
+                    "level": 1,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_RATTATA",
+                    "level": 3,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_NIDORAN_F",
+                    "level": 4,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_NIDORAN_M",
+                    "level": 12,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_CLEFAIRY",
+                    "level": 8,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_ZUBAT",
+                    "level": 17,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out527",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ODDISH",
+                    "level": 7,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_PARAS",
+                    "level": 11,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_POLIWAG",
+                    "level": 10,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_GRAVELER",
+                    "level": 22,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_PONYTA",
+                    "level": 30,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out528",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ODDISH",
+                    "level": 7,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_PARAS",
+                    "level": 11,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_POLIWAG",
+                    "level": 10,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_GRAVELER",
+                    "level": 22,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_PONYTA",
+                    "level": 30,
+                    "probability": 1112
+                },
+                {
+                    "species": "SPECIES_DODUO",
+                    "level": 14,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_SEEL",
+                    "level": 18,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_GRIMER",
+                    "level": 20,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_SHELLDER",
+                    "level": 25,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out529",
+            "pokemon": [
+                {
+                    "species": "SPECIES_GASTLY",
+                    "level": 15,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_HYPNO",
+                    "level": 15,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_VOLTORB",
+                    "level": 3,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_EXEGGCUTE",
+                    "level": 1,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_HITMONLEE",
+                    "level": 22,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_LICKITUNG",
+                    "level": 36,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out530",
+            "pokemon": [
+                {
+                    "species": "SPECIES_TANGELA",
+                    "level": 14,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_MR_MIME",
+                    "level": 15,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_ELECTABUZZ",
+                    "level": 12,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_MAGMAR",
+                    "level": 21,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_PINSIR",
+                    "level": 6,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_SENTRET",
+                    "level": 6,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_LEDYBA",
+                    "level": 7,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out531",
+            "pokemon": [
+                {
+                    "species": "SPECIES_FLAAFFY",
+                    "level": 30,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_MARILL",
+                    "level": 8,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_HOPPIP",
+                    "level": 8,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SKIPLOOM",
+                    "level": 13,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_AIPOM",
+                    "level": 15,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_WOOPER",
+                    "level": 32,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_MURKROW",
+                    "level": 14,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_MISDREAVUS",
+                    "level": 25,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out532",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ODDISH",
+                    "level": 7,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_PARAS",
+                    "level": 25,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_POLIWAG",
+                    "level": 10,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_GRAVELER",
+                    "level": 22,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_PONYTA",
+                    "level": 30,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out533",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ODDISH",
+                    "level": 7,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_PARAS",
+                    "level": 25,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_POLIWAG",
+                    "level": 10,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_GRAVELER",
+                    "level": 22,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_PONYTA",
+                    "level": 30,
+                    "probability": 1112
+                },
+                {
+                    "species": "SPECIES_DODUO",
+                    "level": 14,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_SEEL",
+                    "level": 18,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_GRIMER",
+                    "level": 20,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_SHELLDER",
+                    "level": 25,
+                    "probability": 1111
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out534",
+            "pokemon": [
+                {
+                    "species": "SPECIES_PINECO",
+                    "level": 18,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_DUNSPARCE",
+                    "level": 13,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_QWILFISH",
+                    "level": 30,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_SHUCKLE",
+                    "level": 15,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_HERACROSS",
+                    "level": 14,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_TEDDIURSA",
+                    "level": 10,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out535",
+            "pokemon": [
+                {
+                    "species": "SPECIES_SWINUB",
+                    "level": 8,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_DELIBIRD",
+                    "level": 26,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_PHANPY",
+                    "level": 14,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_STANTLER",
+                    "level": 12,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_TYROGUE",
+                    "level": 6,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_SMOOCHUM",
+                    "level": 15,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_ELEKID",
+                    "level": 4,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out536",
+            "pokemon": [
+                {
+                    "species": "SPECIES_MAGBY",
+                    "level": 17,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_LARVITAR",
+                    "level": 28,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_POOCHYENA",
+                    "level": 3,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_WURMPLE",
+                    "level": 1,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_CASCOON",
+                    "level": 8,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_SEEDOT",
+                    "level": 16,
+                    "probability": 1428
+                },
+                {
+                    "species": "SPECIES_TAILLOW",
+                    "level": 25,
+                    "probability": 1429
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out537",
+            "pokemon": [
+                {
+                    "species": "SPECIES_SURSKIT",
+                    "level": 24,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SHROOMISH",
+                    "level": 9,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SLAKOTH",
+                    "level": 8,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_NINCADA",
+                    "level": 14,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_WHISMUR",
+                    "level": 1,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_MAKUHITA",
+                    "level": 25,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_AZURILL",
+                    "level": 27,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_NOSEPASS",
+                    "level": 16,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out538",
+            "pokemon": [
+                {
+                    "species": "SPECIES_SABLEYE",
+                    "level": 30,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_MAWILE",
+                    "level": 20,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_ARON",
+                    "level": 6,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_MEDITITE",
+                    "level": 6,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_ELECTRIKE",
+                    "level": 12,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out539",
+            "pokemon": [
+                {
+                    "species": "SPECIES_MANECTRIC",
+                    "level": 10,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_PLUSLE",
+                    "level": 3,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_MINUN",
+                    "level": 3,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_VOLBEAT",
+                    "level": 28,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_ILLIMISE",
+                    "level": 15,
+                    "probability": 2000
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out540",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ROSELIA",
+                    "level": 16,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_NUMEL",
+                    "level": 14,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_TORKOAL",
+                    "level": 15,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SPOINK",
+                    "level": 20,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SPINDA",
+                    "level": 2,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_TRAPINCH",
+                    "level": 11,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_CACNEA",
+                    "level": 13,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_SWABLU",
+                    "level": 18,
+                    "probability": 1250
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out541",
+            "pokemon": [
+                {
+                    "species": "SPECIES_ZANGOOSE",
+                    "level": 18,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_SEVIPER",
+                    "level": 19,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_LUNATONE",
+                    "level": 24,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_SOLROCK",
+                    "level": 24,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_BALTOY",
+                    "level": 5,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_CLAYDOL",
+                    "level": 26,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        },
+        {
+            "name": "pokemon_found_out542",
+            "pokemon": [
+                {
+                    "species": "SPECIES_KECLEON",
+                    "level": 90,
+                    "probability": 0
+                },
+                {
+                    "species": "SPECIES_SHUPPET",
+                    "level": 28,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_BANETTE",
+                    "level": 30,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_DUSKULL",
+                    "level": 27,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_TROPIUS",
+                    "level": 25,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_CHIMECHO",
+                    "level": 22,
+                    "probability": 1666
+                },
+                {
+                    "species": "SPECIES_ABSOL",
+                    "level": 45,
+                    "probability": 1667
+                },
+                {
+                    "species": "SPECIES_DECOY",
+                    "level": 1,
+                    "probability": 0
+                }
+            ]
+        }
+    ]
+}
