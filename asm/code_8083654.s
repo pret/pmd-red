@@ -5,15 +5,6 @@
 
   	.text
   
-	thumb_func_start sub_8083654
-sub_8083654:
-	push {lr}
-	bl GetLeaderEntity
-	ldr r0, [r0, 0x70]
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8083654
-
 	thumb_func_start sub_8083660
 sub_8083660:
 	push {r4-r7,lr}

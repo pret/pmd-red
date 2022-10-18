@@ -35,7 +35,7 @@ struct DungeonGlobalData
     u8 unkC;
     u8 unkD[0xF - 0xD];
     /* 0xF */ bool8 inputAllowed; // Whether the game is currently accepting input. Set to false while action animations play.
-    u8 fill10;
+    u8 unk10;
     u8 unk11;
     s16 unk12;
     u8 fill14[0x16D - 0x14];
@@ -47,7 +47,9 @@ struct DungeonGlobalData
     /* 0x57C */ u8 fill57C[0x644 - 0x57c];
     /* 0x644 */ u8 unk644;
     /* 0x645 */ u8 floorNumber;
-    u8 fill646[0x65C - 0x646];
+    u8 fill646[0x654 - 0x646];
+    u8 unk654;
+    u8 fill655[0x65C - 0x655];
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
     /* 0x660 */ s16 speedTurnCounter; // Handles turn order when Pokémon have different movement speeds.

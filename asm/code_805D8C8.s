@@ -2907,7 +2907,7 @@ sub_805EFB4:
 	mov r8, r0
 	lsls r1, 24
 	lsrs r7, r1, 24
-	bl sub_8083654
+	bl GetLeaderEntityData
 	adds r6, r0, 0
 	cmp r7, 0
 	beq _0805EFE2
@@ -3146,7 +3146,7 @@ _0805F19C: .4byte gUnknown_80F9BB0
 	thumb_func_start sub_805F1A0
 sub_805F1A0:
 	push {lr}
-	bl sub_8083654
+	bl GetLeaderEntityData
 	adds r0, 0x44
 	pop {r1}
 	bx r1
@@ -3155,7 +3155,7 @@ sub_805F1A0:
 	thumb_func_start sub_805F1AC
 sub_805F1AC:
 	push {lr}
-	bl sub_8083654
+	bl GetLeaderEntityData
 	adds r0, 0x44
 	ldrh r0, [r0]
 	pop {r1}
@@ -3638,7 +3638,7 @@ _0805F5B0:
 	movs r2, 0x1
 	movs r3, 0x1
 	bl sub_804A728
-	bl sub_8083654
+	bl GetLeaderEntityData
 	adds r0, 0x48
 	strb r7, [r0]
 	movs r0, 0
@@ -3726,7 +3726,7 @@ _0805F65C:
 	cmp r0, 0
 	beq _0805F64E
 _0805F676:
-	bl sub_8083654
+	bl GetLeaderEntityData
 	adds r0, 0x48
 	strb r7, [r0]
 	cmp r4, r7
@@ -7991,7 +7991,7 @@ _08061994:
 	subs r0, 0x1
 	cmp r0, r9
 	bge _08061994
-	bl sub_8083654
+	bl GetLeaderEntityData
 	ldrb r1, [r0, 0x9]
 	add r0, sp, 0x4
 	bl GetAvailTacticsforLvl
