@@ -145,6 +145,38 @@ extern void sub_808CBB0(void);
 extern void sub_808CD44(void);
 extern void sub_8097FF8(void);
 
+extern u8 sub_8098100(u8);
+extern void sub_8097FA8(void);
+extern void sub_807E5E4(u32);
+
+void sub_8084854(u8 *param_1)
+{
+  if (gDungeonGlobalData->unk678 != 0) {
+       gDungeonGlobalData->unk3A0D = param_1[5];
+  }
+  else
+  {
+    if (sub_8098100(param_1[4]) != 0) {
+        gDungeonGlobalData->unk3A0D = param_1[5];
+    }
+    else
+    {
+      if (sub_8098100(param_1[2]) != 0) {
+        gDungeonGlobalData->unk3A0D = param_1[3];
+      }
+      else
+      {
+        gDungeonGlobalData->unk3A0D = param_1[1];
+        if (param_1[2] != 0x40) {
+          sub_8097FA8();
+        }
+      }
+    }
+  }
+  gDungeonGlobalData->unk675 = 1;
+  sub_807E5E4(0);
+}
+
 u32 sub_80848EC(void)
 {
     return 1;

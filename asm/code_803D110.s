@@ -391,7 +391,7 @@ _0803D3C0:
 	bl xxx_init_struct_8094924_restore_809485C
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_80971EC
+	bl RestoreWonderMail
 	adds r0, r4, 0
 	bl nullsub_102
 	movs r0, 0x1
@@ -440,7 +440,7 @@ _0803D436:
 	bl xxx_init_struct_8094924_save_809486C
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8097270
+	bl SaveWonderMail
 	adds r0, r4, 0
 	bl nullsub_102
 	movs r2, 0x1

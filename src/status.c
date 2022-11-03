@@ -1,9 +1,11 @@
 #include "global.h"
 #include "status.h"
-#include "constants/status.h"
 #include "constants/ability.h"
+#include "constants/status.h"
+#include "constants/type.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_items.h"
@@ -56,24 +58,52 @@ extern u8 *gUnknown_80FD500[];
 extern s16 gUnknown_80F4ECC[];
 extern u8 *gUnknown_80FB960[];
 extern u8 *gUnknown_80FB940[];
+extern u8 *gUnknown_80FB204[];
+extern u8 *gUnknown_80FB240[];
+extern u8 *gUnknown_80FB1E0[];
+extern u8 *gUnknown_80FB1C4[];
+extern u8 *gUnknown_80FB21C[];
+extern u8 *gUnknown_80FAEA0[];
+extern u8 *gUnknown_80FAEF0[];
+extern u8 *gUnknown_80FAF3C[];
+extern u8 *gUnknown_80FAEC8[];
+extern u8 *gUnknown_80FAF1C[];
+extern u8 *gUnknown_80FAFAC[];
+extern u8 *gUnknown_80FAFD0[];
+extern u8 *gPtrCantLeechSeedSelfMessage[];
+extern u8 *gPtrCantLeechSeedMonMessage[];
+extern u8 *gUnknown_80FAA8C[];
+extern u8 *gUnknown_80FAE58[];
+extern u8 *gUnknown_80FAE7C[];
+extern s16 gUnknown_80F4EB0[];
 
+extern s32 gUnknown_202DE30[10];
+
+extern u8 sub_8043D10(void);
+extern void nullsub_75(struct DungeonEntity *);
+extern void nullsub_76(struct DungeonEntity *);
+extern void nullsub_77(struct DungeonEntity *);
+extern void nullsub_78(struct DungeonEntity *);
+extern void sub_803F580(u32);
+extern void sub_8040A84(void);
+extern void sub_8041CA8(struct DungeonEntity *);
+extern void sub_8041C94(struct DungeonEntity *);
+extern u8 sub_8045888(struct DungeonEntity *r0);
+extern void sub_803ED30(s32, struct DungeonEntity *r0, u8, s32);
 extern void sub_8041BF8(struct DungeonEntity *);
 extern void sub_8041BE8(struct DungeonEntity *);
 extern void sub_8041CCC(struct DungeonEntity *);
 extern void sub_8041CB8(struct DungeonEntity *r0);
 extern void sub_8041C1C(struct DungeonEntity *r0);
 extern s32 GetMovementSpeed(struct DungeonEntity *);
-
 extern void sub_8042060(struct DungeonEntity *, s32);
 extern bool8 sub_8071728(struct DungeonEntity * param_1, struct DungeonEntity * param_2, u8 param_3);
 extern void sub_8041FB4(struct DungeonEntity *r0, u32 r1);
 extern void sub_8041FD8(struct DungeonEntity *r0, u32 r1);
 extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, u8 *);
 extern s32 sub_8009DA4(s32, s32);
-
 extern void sub_804201C(struct DungeonEntity *r0, u32 r1);
 extern void sub_8041FFC(struct DungeonEntity *r0, u32 r1);
-
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void SetMessageArgument_2(char[], struct DungeonEntityData*, u32);
 extern void sub_8041C58(struct DungeonEntity *r0);
@@ -523,14 +553,14 @@ void sub_8077AE4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
 
 void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
 {
-  struct DungeonEntityData *iVar3;
+  struct DungeonEntityData *entityData;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
-    iVar3 = target->entityData;
+    entityData = target->entityData;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (iVar3->volatileStatus != VOLATILE_STATUS_COWERING) {
-      iVar3->volatileStatus = VOLATILE_STATUS_COWERING;
-      iVar3->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4ECC,1) + 1;
+    if (entityData->volatileStatus != VOLATILE_STATUS_COWERING) {
+      entityData->volatileStatus = VOLATILE_STATUS_COWERING;
+      entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4ECC,1) + 1;
       sub_8041BF8(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB940);
     }
@@ -540,3 +570,226 @@ void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
     DungeonEntityUpdateStatusSprites(target);
   }
 }
+
+void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *target, s32 param_3, s32 param_4, u32 displayMessage)
+{
+    struct DungeonEntityData *entityData;
+    s32 HP;
+    s32 maxHP;
+    s32 r8;
+    u8 displayMessage_u8;
+
+    displayMessage_u8 = displayMessage;
+
+    if (!EntityExists(target)) {
+        return;
+    }
+
+    entityData = target->entityData;
+    maxHP = entityData->maxHP;
+    HP = entityData->HP;
+    if (((entityData->HP == entityData->maxHP) && (0 < param_4)) || (param_3 == 0)) {
+        entityData->maxHP += param_4;
+        entityData->HP += param_4;
+        if (entityData->maxHP > 999) {
+            entityData->maxHP = 999;
+        }
+        if (entityData->HP > entityData->maxHP) {
+            entityData->HP = entityData->maxHP;
+        }
+        if (entityData->HP == entityData->maxHP) {
+            HP = entityData->HP;
+        }
+        sub_8041C94(target);
+    }
+    else {
+        entityData->HP += param_3;
+        if (entityData->HP > entityData->maxHP) {
+            entityData->HP = entityData->maxHP;
+        }
+        sub_8041CA8(target);
+    }
+    maxHP = entityData->maxHP - maxHP;
+    HP = entityData->HP - HP;
+    DungeonEntityUpdateStatusSprites(target);
+    gUnknown_202DE30[0] = HP;
+    gUnknown_202DE30[1] = maxHP;
+    SetMessageArgument(gAvailablePokemonNames,target,0);
+    if ((HP == 0) && (maxHP == 0)) {
+        if (displayMessage_u8)
+            sub_80522F4(pokemon,target,*gUnknown_80FB204); // $m0's HP remained unchanged
+    }
+    else if ((param_4 == 0) && (HP == 0)) 
+    {
+        if (displayMessage_u8)
+            sub_80522F4(pokemon,target,*gUnknown_80FB21C); // $m0 has full HP
+    }
+    else
+    {
+        r8 = 0;
+        if (maxHP != 0) {
+            if (sub_8045888(target) != 0) {
+                r8 = maxHP;
+            }
+            sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by $d1
+        }
+        if (HP != 0) {
+            if (sub_8045888(target) != 0) {
+                r8 = HP;
+            }
+            if (param_3 != 0) {
+                if (entityData->maxHP == entityData->HP) {
+                    sub_80522F4(pokemon,target,*gUnknown_80FB1E0); // $m0 was fully healed
+                }
+                else {
+                    sub_80522F4(pokemon,target,*gUnknown_80FB1C4); // $m0 recovered $d0 HP
+                }
+            }
+        }
+        if (r8)
+            sub_803ED30(r8,target,1,-1);
+    }
+}
+
+void HandleScannerOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target)
+{
+  if (EntityExists(target)) {
+    if (target->entityData->scanningStatus) {
+        sub_80522F4(pokemon,target,*gUnknown_80FAEF0); // Item locations are already known
+    }
+    else
+    {
+        target->entityData->scanningStatus = TRUE;
+        nullsub_75(target);
+        SetMessageArgument(gAvailablePokemonNames, target, 0);
+        sub_80522F4(pokemon,target,*gUnknown_80FAEA0); // Item locations became evident
+        sub_803F580(0);
+        sub_8040A84();
+        DungeonEntityUpdateStatusSprites(target);
+    }
+  }
+}
+
+void HandleStairsOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target)
+{
+  if (EntityExists(target)) {
+    if(sub_8043D10())
+    {
+        sub_80522F4(pokemon,target,*gUnknown_80FAF3C);
+    }
+    else
+    {
+        if (target->entityData->stairSpotterStatus) {
+            sub_80522F4(pokemon,target,*gUnknown_80FAF1C);
+        }
+        else
+        {
+            target->entityData->stairSpotterStatus = TRUE;
+            nullsub_76(target);
+            SetMessageArgument(gAvailablePokemonNames,target,0);
+            sub_80522F4(pokemon,target,*gUnknown_80FAEC8);
+            sub_803F580(0);
+            sub_8040A84();
+            DungeonEntityUpdateStatusSprites(target);
+        }
+    }
+  }
+}
+
+void HandleRadarOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target)
+{
+  if (EntityExists(target)) {
+    if (target->entityData->radarStatus != 0) {
+        sub_80522F4(pokemon,target,*gUnknown_80FAFD0);
+    }
+    else
+    {
+        target->entityData->radarStatus = TRUE;
+        nullsub_77(target);
+        SetMessageArgument(gAvailablePokemonNames,target,0);
+        sub_80522F4(pokemon,target,*gUnknown_80FAFAC);
+        sub_803F580(0);
+        sub_8040A84();
+        DungeonEntityUpdateStatusSprites(target);
+    }
+  }
+}
+
+void HandleLeechSeed(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+{
+  struct DungeonEntityData *entityData;
+  struct DungeonEntityData *entityData2;
+  s32 index;
+
+  if ((EntityExists(target)) && (GetEntityType(pokemon) == ENTITY_POKEMON)) {
+    entityData = target->entityData;
+    if (pokemon == target) {
+      pokemon = target;
+      if (displayMessage)
+        sub_80522F4(pokemon,target,*gPtrCantLeechSeedSelfMessage);
+    }
+    else {
+      if (HasSafeguardStatus(pokemon,target,displayMessage)) {
+        return;
+      }
+      SetMessageArgument(gAvailablePokemonNames,target,0);
+      if (HasType(target, TYPE_GRASS)) {
+        if (displayMessage)
+            sub_80522F4(pokemon,target,*gPtrCantLeechSeedMonMessage);
+      }
+      else
+        {
+            switch(entityData->linkedStatus)
+            {
+                case LINKED_STATUS_DESTINY_BOND:
+                    sub_80522F4(pokemon,target,*gUnknown_80FAA8C);
+                default:
+                    entityData->linkedStatus = LINKED_STATUS_LEECH_SEED;
+                    entityData->linkedStatusTurnsLeft = CalculateStatusTurns(target, gUnknown_80F4EB0, TRUE) + 1;
+                    entityData->linkedStatusDamageTimer = 0;
+                    nullsub_78(target);
+                    entityData->unkD8 = 0xff;
+                    break;
+                case LINKED_STATUS_LEECH_SEED:
+                    sub_80522F4(pokemon,target,*gUnknown_80FAE7C);
+                    return;
+            }
+            for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+            {
+                if (pokemon == gDungeonGlobalData->allPokemon[index]) {
+                    entityData->unkD8 = index;
+                    entityData2 = pokemon->entityData;
+                    entityData->unkD4 = entityData2->unk98;
+                }
+            }
+            sub_80522F4(pokemon,target,*gUnknown_80FAE58);
+            DungeonEntityUpdateStatusSprites(target);
+        }
+      }
+    }
+  }
+
+void sub_8078084(struct DungeonEntity * pokemon)
+{
+    struct DungeonEntityData *entityData;
+    struct DungeonEntityData *entityData2;
+    struct DungeonEntity *target;
+    s32 index;
+
+    entityData = pokemon->entityData;
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        target = gDungeonGlobalData->allPokemon[index];
+        if (EntityExists(target)) {
+            entityData2 = target->entityData;
+            if((u8)(entityData2->linkedStatus - 1) <= 1)
+            {
+                if(entityData2->unkD4 == entityData->unk98)
+                {
+                    entityData2->linkedStatus = LINKED_STATUS_NONE;
+                    DungeonEntityUpdateStatusSprites(target);
+                }
+            }
+        }
+    }
+  }

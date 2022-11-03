@@ -2,6 +2,7 @@
 #define GUARD_WONDER_MAIL_H
 
 #include "file_system.h"
+#include "global.h"
 #include "text.h"
 #include "item.h"
 #include "pokemon.h"
@@ -29,8 +30,7 @@ struct WonderMail
     /* 0x1 */ u8 missionType; // mission type
     /* 0x2 */ u8 unk2;
     /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 dungeon; // dungeon
-    /* 0x5 */ u8 floor; // floor
+    /* 0x4 */ struct DungeonLocation dungeon;
     /* 0x8 */ u32 unk8;
     /* 0xC */ s16 clientSpecies; // client pokemon
     /* 0xE */ s16 targetSpecies; // target

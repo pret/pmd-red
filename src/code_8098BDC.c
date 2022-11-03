@@ -24,9 +24,11 @@ extern const char gUnknown_8115FE8;
 
 struct unkStruct_811BAF4
 {
-    u16 unk0;
+    s16 unk0;
     s16 unk2;
-    u8 fill4[8];
+    s16 unk4;
+    s16 unk6;
+    u8 *text;
 };
 
 extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];

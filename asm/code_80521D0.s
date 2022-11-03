@@ -4609,7 +4609,7 @@ _08054C88:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD70
+	bl ScannerOrbAction
 	bl _080554BA
 _08054C98:
 	adds r0, r7, 0
@@ -4793,7 +4793,7 @@ _08054DFE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B5F4
+	bl LeechSeedMoveAction
 	b _080554BA
 _08054E0C:
 	adds r0, r7, 0
@@ -4821,7 +4821,7 @@ _08054E36:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD7C
+	bl RadarOrbAction
 	b _080554BA
 _08054E44:
 	adds r0, r7, 0
@@ -4982,7 +4982,7 @@ _08054F78:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C474
+	bl StairsOrbAction
 	b _080554BA
 _08054F86:
 	adds r0, r7, 0

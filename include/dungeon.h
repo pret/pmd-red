@@ -28,5 +28,8 @@ struct Dungeon
 extern struct Dungeon gDungeons[];
 extern struct DungeonName gDungeonNames[];
 const u8 *GetDungeonName1(u8 dungeon);
+u32 sub_80908D8(struct DungeonLocation *dungeon);
+u8 sub_8090910(struct DungeonLocation *dungeon, u32 param_2);
+bool8 sub_809095C(u8 dungeon);
 
 #endif //GUARD_DUNGEON_H

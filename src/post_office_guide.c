@@ -635,11 +635,11 @@ void DisplayMissionObjectives(void)
                 for(jobSlotIdx = 0; jobSlotIdx < MAX_ACCEPTED_JOBS; jobSlotIdx++)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
-                    if ((((jobInfo->dungeon == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
+                    if ((((jobInfo->dungeon.dungeonIndex == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
                         ) && (jobInfo->mailType != 5)) && (jobInfo->mailType != 7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
-                            sprintf_2(auStack144,gUnknown_80E1F3C,jobInfo->floor);
+                            sprintf_2(auStack144,gUnknown_80E1F3C,jobInfo->dungeon.dungeonFloor);
                             xxx_call_draw_string(21,yCoord,auStack144,gUnknown_203B330->unk10,0);
                         }
                         switch(jobInfo->missionType)

@@ -19,5 +19,10 @@ void sub_8077910(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
 void sub_80779F0(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 param_3, bool8 displayMessage);
 void sub_8077AE4(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage);
 void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage);
+void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *target, s32 param_3, s32 param_4, u32 displayMessage);
+void HandleScannerOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target);
+void HandleStairsOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target);
+void HandleRadarOrb(struct DungeonEntity* pokemon, struct DungeonEntity* target);
+void HandleLeechSeed(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage);
 
 #endif

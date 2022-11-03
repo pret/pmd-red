@@ -13,6 +13,23 @@ extern s16 gUnknown_8116F9A[];
 extern s16 gUnknown_8116F24[];
 extern const u8 *gUnknown_8117000[];
 
+extern void sub_809AC18(s32, s32);
+extern void sub_809ABB4(s32, s32);
+
+void sub_80A2584(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809ABB4(iVar1, iVar2);
+}
+
+void sub_80A2598(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809AC18(iVar1, iVar2);
+}
+
 u32 sub_80A25AC(u16 param_1)
 {
   if (sub_8098F88() != 0) {

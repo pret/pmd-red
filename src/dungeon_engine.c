@@ -46,7 +46,7 @@ void RunDungeon(u8 param_1)
     if (!sub_8044B28()) {
       cVar2 = xxx_dungeon_80442D0(param_1);
       if (!sub_8044B28()) {
-        if (cVar2 != '\0') {
+        if (cVar2 != 0) {
           sub_807E378();
           if (sub_8044B28()) {
             return;
@@ -59,7 +59,7 @@ void RunDungeon(u8 param_1)
             if (!sub_8044B28()) {
               sub_8044AB4();
               gDungeonGlobalData->speedTurnCounter++;
-              if ( (s16)gDungeonGlobalData->speedTurnCounter == 0x18) {
+              if (gDungeonGlobalData->speedTurnCounter == 24) {
                  gDungeonGlobalData->speedTurnCounter = 0;
               }
             }
