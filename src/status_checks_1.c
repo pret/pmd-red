@@ -105,7 +105,7 @@ bool8 sub_80706A4(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-u32 GetMovementSpeed(struct DungeonEntity *pokemon)
+s32 GetMovementSpeed(struct DungeonEntity *pokemon)
 {
   s32 index;
   s32 speed;

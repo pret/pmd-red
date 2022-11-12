@@ -3,6 +3,7 @@
 
 #include "constants/ability.h"
 #include "constants/dungeon_action.h"
+#include "dungeon_ai.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_leader.h"
@@ -10,6 +11,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
 #include "item.h"
+#include "status_checks_1.h"
 
 extern u8 *gUnknown_80F91EC[];
 extern u8 *gUnknown_80F7C50[];
@@ -31,6 +33,73 @@ extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
 extern void sub_807EAA0(u32, u32);
 extern void UseAttack(u32);
+
+extern void sub_8071B48(void);
+extern void TriggerWeatherAbilities(void);
+extern void sub_8074094(struct DungeonEntity *);
+extern void sub_8071DA4(struct DungeonEntity *);
+extern u8 sub_8072CF4(struct DungeonEntity *);
+extern void TickStatusHeal(struct DungeonEntity *);
+
+void sub_8044820(void)
+{
+  s32 movSpeed;
+  struct DungeonEntityData *entityData;
+  struct DungeonEntityData *entityData2;
+  struct DungeonEntity * entity;
+  struct DungeonEntity * entity2;
+  s32 index;
+  
+  for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
+    entity = gDungeonGlobalData->wildPokemon[index];
+    if (EntityExists(entity)) {
+      if (sub_8044B28()) break;
+      entityData = entity->entityData;
+      gDungeonGlobalData->unkB8 = entity;
+      TriggerWeatherAbilities();
+      if ((entityData->flags & MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED) == 0) {
+        if ((u16)(entityData->flags & MOVEMENT_FLAG_UNK_14) != 0) {
+            entityData->flags &= ~(MOVEMENT_FLAG_UNK_14);
+        }
+        else
+        {
+          entityData->movingIntoTarget = FALSE;
+          movSpeed = GetMovementSpeed(entity);
+          if (gSpeedTurns[movSpeed][gDungeonGlobalData->speedTurnCounter] != 0) {
+            if (!entityData->attacking) {
+              entityData->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED);
+              entityData->recalculateFollow = FALSE;
+              TickStatusHeal(entity);
+              if (EntityExists(entity)) {
+                sub_8071DA4(entity);
+                DecideAction(entity, 0);
+                if (sub_8044B28()) break;
+                sub_8072CF4(entity);
+                sub_8086AC0();
+                sub_8043ED0(0);
+                if (sub_8044B28()) break;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  if (sub_8044B28() == 0) {
+    for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
+    {
+      entity2 = gDungeonGlobalData->wildPokemon[index];
+      if ((EntityExists(entity2)) && (entityData2 = entity2->entityData, entityData2->movingIntoTarget))
+      {
+        sub_8074094(entity2);
+        if (EntityExists(entity2)) {
+          sub_8071DA4(entity2);
+          entityData2->movingIntoTarget = FALSE;
+        }
+      }
+    }
+  }
+}
 
 void CheckElectricAbilities(void)
 {
@@ -65,14 +134,14 @@ void CheckElectricAbilities(void)
                 isNotEnemy = TRUE;
             }
 
-            if (HasAbility(entity, ABILITY_LIGHTNINGROD)) { // ABILITY_LIGHTNINGROD
+            if (HasAbility(entity, ABILITY_LIGHTNINGROD)) {
                 gDungeonGlobalData->lightningRodPokemon = entity;
                 gDungeonGlobalData->unk17B38 = entityData2->unk98;
             }
-            if (HasAbility(entity, ABILITY_MINUS)) { // ABILITY_MINUS
+            if (HasAbility(entity, ABILITY_MINUS)) {
                 gDungeonGlobalData->hasMinus[isNotEnemy] = TRUE;
             }  
-            if (HasAbility(entity, ABILITY_PLUS)) { // ABILITY_PLUS
+            if (HasAbility(entity, ABILITY_PLUS)) {
                 gDungeonGlobalData->hasPlus[isNotEnemy] = TRUE;
             }
         }

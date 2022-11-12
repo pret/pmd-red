@@ -170,7 +170,6 @@ extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1,
 extern void DungeonEntityUpdateStatusSprites(struct DungeonEntity *);
 extern void sub_8042A74(struct DungeonEntity *r0);
 extern void sub_8076CB4(u32);
-extern s32 GetMovementSpeed(struct DungeonEntity *);
 extern void sub_807EC28(u32);
 extern s32 sub_8069F54(struct DungeonEntity *param_1, s16 param_2);
 extern u32 sub_80687D0(s16);

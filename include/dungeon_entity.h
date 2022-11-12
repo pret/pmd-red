@@ -166,7 +166,7 @@ struct DungeonEntityData
     /* 0xF5 */ bool8 exposedStatus;
     /* 0xF6 */ bool8 isColorChanged;
     /* 0xF7 */ bool8 isBoss;
-    /* 0xF8 */ u8 unkF8;
+    /* 0xF8 */ bool8 movementSpeedChanged; // Toggled when pokemon is movement speed is sped up
     /* 0xF9 */ u8 unkF9;
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
     u8 unkFB;
@@ -301,6 +301,7 @@ enum MovementFlag
 {
     MOVEMENT_FLAG_SWAPPED_PLACES = 1 << 5,
     MOVEMENT_FLAG_MOVING = 1 << 9,
+    MOVEMENT_FLAG_UNK_14 = 1 << 14,
     MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED = 1 << 15 // Set if the Pokémon is petrified and the leader cures them by swapping places.
 };
 

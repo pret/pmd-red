@@ -13,6 +13,7 @@
 #include "code_808417C.h"
 #include "code_8077274_1.h"
 #include "map.h"
+#include "status_checks_1.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -148,7 +149,6 @@ extern void sub_8041BE8(struct DungeonEntity *);
 extern void sub_8041CCC(struct DungeonEntity *);
 extern void sub_8041CB8(struct DungeonEntity *r0);
 extern void sub_8041C1C(struct DungeonEntity *r0);
-extern s32 GetMovementSpeed(struct DungeonEntity *);
 extern void sub_8042060(struct DungeonEntity *, s32);
 extern bool8 sub_8071728(struct DungeonEntity * param_1, struct DungeonEntity * param_2, u8 param_3);
 extern void sub_8041FB4(struct DungeonEntity *r0, u32 r1);
@@ -439,7 +439,7 @@ void sub_8077780(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
       SetMessageArgument(gAvailablePokemonNames,target,0);
       if (entityData->nonVolatileStatus != NON_VOLATILE_STATUS_PARALYZED) {
         entityData->nonVolatileStatus = NON_VOLATILE_STATUS_PARALYZED;
-        entityData->nonVolatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E50,1) + 1;
+        entityData->nonVolatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E50,TRUE) + 1;
         entityData->nonVolatileStatusDamageTimer = 0;
         entityData->fillAF = 0;
         bVar6 = FALSE;
@@ -485,7 +485,7 @@ void sub_8077910(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
     return;
   }
   if (turns == 0) {
-    turns = CalculateStatusTurns(target,gUnknown_80F4E40,0) + 1;
+    turns = CalculateStatusTurns(target,gUnknown_80F4E40,FALSE) + 1;
   }
   entityData = target->entityData;
   SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -511,7 +511,7 @@ void sub_8077910(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
     {
         sub_8041CB8(target);
         sub_80522F4(pokemon,target,gUnknown_80FA124[movSpeed_1]);
-        entityData->unkF8 = 1;
+        entityData->movementSpeedChanged = TRUE;
         entityData->attacking = FALSE;
     }
   }
@@ -545,7 +545,7 @@ void sub_80779F0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
         for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
         {
             if (entityData->slowTurnsLeft[index]== 0) {
-                entityData->slowTurnsLeft[index] = CalculateStatusTurns(target,gUnknown_80F4E48,1) + 1;
+                entityData->slowTurnsLeft[index] = CalculateStatusTurns(target,gUnknown_80F4E48,TRUE) + 1;
                 break;
             }
         }
@@ -593,7 +593,7 @@ void sub_8077AE4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
       entityData = target->entityData;
       if (entityData->volatileStatus != VOLATILE_STATUS_CONFUSED) {
         entityData->volatileStatus = VOLATILE_STATUS_CONFUSED;
-        entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E4C,1) + 1;
+        entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E4C,TRUE) + 1;
         sub_80522F4(pokemon,target,*gUnknown_80FB25C);
       }
       else {
@@ -613,7 +613,7 @@ void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
     SetMessageArgument(gAvailablePokemonNames,target,0);
     if (entityData->volatileStatus != VOLATILE_STATUS_COWERING) {
       entityData->volatileStatus = VOLATILE_STATUS_COWERING;
-      entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4ECC,1) + 1;
+      entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4ECC,TRUE) + 1;
       sub_8041BF8(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB940);
     }
@@ -1130,7 +1130,7 @@ void sub_80787E4(struct DungeonEntity * pokemon, struct DungeonEntity * target)
   if ((EntityExists(target))) {
     entityData = target->entityData;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityData->stockpileCount < 3) {
+    if (entityData->stockpileCount < MAX_STOCKPILE_COUNT) {
       entityData->stockpileCount++;
       sub_804178C(1);
       sub_8041D5C(target);
@@ -1178,7 +1178,7 @@ void PerishSongTarget(struct DungeonEntity * pokemon, struct DungeonEntity * tar
     entityData = target->entityData;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     if (entityData->perishSongTimer == 0) {
-      entityData->perishSongTimer = CalculateStatusTurns(target,gUnknown_80F4EEC,0) + 1;
+      entityData->perishSongTimer = CalculateStatusTurns(target,gUnknown_80F4EEC,FALSE) + 1;
       sub_80522F4(pokemon,target,*gUnknown_80FBB04);
     }
     else {
