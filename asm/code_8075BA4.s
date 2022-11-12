@@ -1777,8 +1777,8 @@ _08076B3A:
 _08076B44: .4byte gUnknown_80FB6C0
 	thumb_func_end sub_8076AA4
 
-	thumb_func_start sub_8076B48
-sub_8076B48:
+	thumb_func_start WrapTarget
+WrapTarget:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1946,7 +1946,7 @@ _08076C9E:
 _08076CA8: .4byte gAvailablePokemonNames
 _08076CAC: .4byte gUnknown_80FB6FC
 _08076CB0: .4byte gUnknown_80FB718
-	thumb_func_end sub_8076B48
+	thumb_func_end WrapTarget
 
 	thumb_func_start sub_8076CB4
 sub_8076CB4:

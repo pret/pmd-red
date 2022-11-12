@@ -5,7 +5,7 @@
 
 extern bool8 sub_8044B28(void);
 extern bool8 xxx_dungeon_80442D0(u8);
-extern void sub_8044994(void);
+extern void CheckElectricAbilities(void);
 extern void sub_807E378(void);
 extern void sub_8044574(void);
 extern void sub_8044820(void);
@@ -42,7 +42,7 @@ void RunDungeon(u8 param_1)
   bool8 cVar2;
   
   if (!sub_8044B28()) {
-    sub_8044994();
+    CheckElectricAbilities();
     if (!sub_8044B28()) {
       cVar2 = xxx_dungeon_80442D0(param_1);
       if (!sub_8044B28()) {

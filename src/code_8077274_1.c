@@ -1410,7 +1410,7 @@ void SendWaitingEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity 
             if (waitingStatus != WAITING_STATUS_SNATCH) {
                 SendMessage(target,*gUnknown_80FA7DC);
             }
-            gDungeonGlobalData->unk17B30 = 0;
+            gDungeonGlobalData->snatchPokemon = NULL;
             gDungeonGlobalData->unk17B3C = 0;
             break;
         case WAITING_STATUS_DECOY:

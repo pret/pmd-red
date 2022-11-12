@@ -77,8 +77,8 @@ bool8 sub_80717A4(struct DungeonEntity *pokemon, u16 moveID)
 
     for(iVar3 = 0, pokeMove = entityData->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
     {
-      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS) != 0) && (entityData->isLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED) != 0)))
-            if((sub_805744C(pokemon, pokeMove2, 1) != '\0') && (pokeMove->PP != 0))
+      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityData->isLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED))))
+            if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))
                     if(pokeMove->moveID == moveID)
                         return TRUE;
     }

@@ -73,14 +73,14 @@ _08057E0C:
 _08057E18: .4byte gUnknown_80FD370
 	thumb_func_end sub_8057D9C
 
-	thumb_func_start sub_8057E1C
-sub_8057E1C:
+	thumb_func_start FocusEnergyMoveAction
+FocusEnergyMoveAction:
 	push {lr}
-	bl sub_8078348
+	bl FocusEnergyStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057E1C
+	thumb_func_end FocusEnergyMoveAction
 
 	thumb_func_start sub_8057E28
 sub_8057E28:
@@ -94,7 +94,7 @@ sub_8057E28:
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_807824C
+	bl WhifferStatusTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -1731,7 +1731,7 @@ sub_8058A54:
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80781DC
+	bl SureShotStatusTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -3908,7 +3908,7 @@ sub_8059AA8:
 	thumb_func_start sub_8059AB8
 sub_8059AB8:
 	push {lr}
-	bl sub_8078758
+	bl TauntStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5338,7 +5338,7 @@ _0805A558: .4byte gUnknown_80FC770
 	thumb_func_start sub_805A55C
 sub_805A55C:
 	push {lr}
-	bl sub_8078594
+	bl CurseStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -6029,7 +6029,7 @@ _0805AACC: .4byte 0x00003a08
 sub_805AAD0:
 	push {lr}
 	adds r1, r0, 0
-	bl sub_80782CC
+	bl FixedDamageStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -6663,77 +6663,5 @@ _0805AF9C:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_805AF30
-
-	thumb_func_start sub_805AFA4
-sub_805AFA4:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r8, r2
-	adds r6, r3, 0
-	bl SendThawedMessage
-	ldr r3, [r4, 0x70]
-	movs r0, 0x10
-	ldrsh r2, [r3, r0]
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0805AFC6
-	adds r0, r2, 0x3
-_0805AFC6:
-	movs r7, 0xE
-	ldrsh r1, [r3, r7]
-	asrs r0, 2
-	cmp r1, r0
-	bgt _0805AFD4
-	movs r2, 0
-	b _0805AFFA
-_0805AFD4:
-	movs r0, 0xE
-	ldrsh r1, [r3, r0]
-	lsrs r0, r2, 31
-	adds r0, r2, r0
-	asrs r0, 1
-	cmp r1, r0
-	bgt _0805AFE6
-	movs r2, 0x1
-	b _0805AFFA
-_0805AFE6:
-	lsls r0, r2, 1
-	adds r0, r2
-	cmp r0, 0
-	bge _0805AFF0
-	adds r0, 0x3
-_0805AFF0:
-	asrs r0, 2
-	movs r2, 0x3
-	cmp r1, r0
-	bgt _0805AFFA
-	movs r2, 0x2
-_0805AFFA:
-	ldr r1, _0805B024
-	lsls r0, r2, 2
-	adds r0, r1
-	ldr r3, [r0]
-	str r6, [sp]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	mov r2, r8
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805B024: .4byte gUnknown_80F51C4
-	thumb_func_end sub_805AFA4
 
 	.align 2, 0

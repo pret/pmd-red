@@ -32,6 +32,10 @@ struct DungeonActionContainer
     // Position of the Pokémon the last time it threw an item.
     /* 0x8 */ struct Position lastItemThrowPosition;
     u8 unkC;
+    u8 fillD[3];
+    u8 fill10[4];
+    // Position of the target that the Pokémon wants throw an item at.
+    /* 0x14 */ struct Position itemTargetPosition;
 };
 
 struct DungeonEntityData
@@ -79,9 +83,6 @@ struct DungeonEntityData
     u8 fill3F;
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ struct DungeonActionContainer action;
-    u8 fill55[0x58 - 0x55];
-    // Position of the target that the Pokémon wants throw an item at.
-    /* 0x58 */ struct Position itemTargetPosition;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ struct ItemSlot heldItem;

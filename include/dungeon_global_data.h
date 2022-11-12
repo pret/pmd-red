@@ -72,7 +72,9 @@ struct DungeonGlobalData
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
-    u8 fill37E3[0x37FC - 0x37D9];
+    u8 fill37E3[0x37F8 - 0x37D9];
+    /* 0x37F8 */ bool8 hasPlus[2]; // Index 0: Enemy , Index 1: Team
+    /* 0x37FA */ bool8 hasMinus[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
     u8 fill37FD[0x3A0D - 0x37FD];
     /* 0x3A0D */ u8 unk3A0D;
@@ -117,10 +119,12 @@ struct DungeonGlobalData
     /* 0x1358C */ struct DungeonEntity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ struct DungeonEntity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ struct DungeonEntity *clientPokemon[2]; // Not sure how large this array is.
-    u8 fill13624[0x17B30 - 0x13624];
-    /* 0x17B30 */ u32 unk17B30;
-    /* 0x17B34 */ u8 fillunk1734[0x17B3C - 0x17B34];
-    /* 0x17B30 */ u32 unk17B3C;
+    u8 fill13624[0x17B2C - 0x13624];
+    /* 0x17B2C */ struct DungeonEntity *lightningRodPokemon;
+    /* 0x17B30 */ struct DungeonEntity *snatchPokemon;
+    /* 0x17B34 */ u8 fillunk1734[0x17B38 - 0x17B34];
+    /* 0x17B38 */ u32 unk17B38;
+    /* 0x17B3C */ u32 unk17B3C;
     u8 fill17B40[0x181E8 - 0x17B40];
     /* 0x181E8 */ struct Position posScreenWorld;
     /* 0x181EC */ struct Position prevPosScreenWorld;

@@ -3832,7 +3832,7 @@ _0805459E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057E1C
+	bl FocusEnergyMoveAction
 	bl _080554BA
 _080545AE:
 	movs r3, 0x80
@@ -5278,7 +5278,7 @@ _080551C8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B208
+	bl PerishSongMoveAction
 	b _080554BA
 _080551D6:
 	adds r0, r7, 0

@@ -201,27 +201,27 @@ void sub_80485B0(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 {
   bool8 isMoveBoosted;
   s32 moveIndex;
-  struct DungeonEntityData *iVar5;
+  struct DungeonEntityData *entityData;
   register struct PokemonMove *movePtr1 asm("r4"); // r4
   register struct PokemonMove *movePtr2 asm("r5"); // r5
-  u8 cVar8;
+  u8 moveBoost;
   s32 movePowerBoost;
   s32 maxPowerBoost;
 
   isMoveBoosted = FALSE;
-  cVar8 = 1;
-  iVar5 = target->entityData;
+  moveBoost = 1;
+  entityData = target->entityData;
   if (DungeonRandomCapped(100) < gUnknown_80F4F46)
-    cVar8 = 3;
-  if (iVar5->isLeader) {
-    for(moveIndex = 0, movePtr1 = &iVar5->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
+    moveBoost = 3;
+  if (entityData->isLeader) {
+    for(moveIndex = 0, movePtr1 = &entityData->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
     {
         if((movePtr1->moveFlags & MOVE_FLAG_EXISTS) && (movePtr1->moveFlags & MOVE_FLAG_SET))
         {
             if(GetMovePower(movePtr2) == 0) continue;
             movePowerBoost = movePtr1->powerBoost;
             maxPowerBoost = GetMoveMaxPowerBoost(movePtr2);
-            movePtr1->powerBoost += cVar8;
+            movePtr1->powerBoost += moveBoost;
             if(movePtr1->powerBoost >= maxPowerBoost)
                 movePtr1->powerBoost = maxPowerBoost;
             if(movePowerBoost != movePtr1->powerBoost)
@@ -231,7 +231,7 @@ void sub_80485B0(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 
     if (isMoveBoosted) {
       sub_80522F4(pokemon,target,*gUnknown_80FE454);
-      if (cVar8 != 1) {
+      if (moveBoost != 1) {
         sub_803E708(10,0x40);
         sub_80522F4(pokemon,target,*gUnknown_80FE434);
      }
@@ -251,7 +251,7 @@ void sub_804869C(struct DungeonEntity *pokemon, struct DungeonEntity * target, u
   struct DungeonEntity *entity;
   u8 auStack28 [4];
   
-  if (param_3 != '\0') {
+  if (param_3 != 0) {
     entityData = target->entityData;
     entityData_1 = entityData;
     if (gDungeonGlobalData->unk675 != 0) {

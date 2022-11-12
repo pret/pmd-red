@@ -161,7 +161,7 @@ void sub_803A504(u32 newState)
 
 void sub_803A51C(void)
 {
-    s32 iVar4;
+    s32 index;
 
     sub_8006518(gUnknown_203B3F0->unkD8);
     switch(gUnknown_203B3F0->state)
@@ -173,9 +173,9 @@ void sub_803A51C(void)
             gUnknown_203B3F0->unkD8[2] = gUnknown_80E7E4C;
             break;
         default:
-            for(iVar4 = 0; iVar4 < 4; iVar4++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B3F0->unkD8[iVar4] = gUnknown_80E7E34;
+                gUnknown_203B3F0->unkD8[index] = gUnknown_80E7E34;
             }
             break;
     }
@@ -185,7 +185,7 @@ void sub_803A51C(void)
 
 void sub_803A5A0(void)
 {
-  struct ItemSlot auStack8;
+  struct ItemSlot item;
 
   switch(gUnknown_203B3F0->state) {
     case 0:
@@ -212,8 +212,8 @@ void sub_803A5A0(void)
         sub_803A690();
         break;
     case 4:
-        xxx_init_itemslot_8090A8C(&auStack8,gUnknown_203B3F0->itemIndex,0);
-        sub_801B3C0(&auStack8);
+        xxx_init_itemslot_8090A8C(&item,gUnknown_203B3F0->itemIndex,0);
+        sub_801B3C0(&item);
         break;
     case 5:
         break;

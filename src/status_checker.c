@@ -74,7 +74,7 @@ extern u8 sub_804AD34(s32 *);
 extern u8 sub_8057308(struct DungeonEntity *, u32);
 extern void sub_8076F80(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 extern void sub_8077084(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void sub_8078678(struct DungeonEntity *, struct DungeonEntity *);
+extern void SnatchStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_806F324(struct DungeonEntity *, s32, u32, u32);
 extern void sub_8077160(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern bool8 sub_805755C(struct DungeonEntity* pokemon,u16 moveID);
@@ -83,8 +83,8 @@ extern void DestinyBondStatusTarget(struct DungeonEntity *, struct DungeonEntity
 extern void sub_8076E20(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 extern void sub_80783C4(struct DungeonEntity *, struct DungeonEntity *, u32);
 extern bool8 sub_807FCD4(struct Position *, u32, u8);
-extern void sub_80788E8(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076B48(struct DungeonEntity *, struct DungeonEntity *);
+extern void PerishSongTarget(struct DungeonEntity *, struct DungeonEntity *);
+extern void WrapTarget(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_80768DC(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 extern void sub_807CD9C(struct DungeonEntity *, struct DungeonEntity *, u8 facingDir);
 
@@ -238,6 +238,48 @@ extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
 extern void sub_80763F8(struct DungeonEntity *, struct DungeonEntity *, u32);
 
+extern u32 gUnknown_80F51C4[];
+
+bool8 sub_805AFA4(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, u32 param_4)
+{
+  s32 r0;
+  s32 r2;
+  s32 r1;
+  bool8 flag;
+
+#ifndef NONMATCHING
+  register struct DungeonEntityData *entityData asm("r3");
+#else
+  struct DungeonEntityData *entityData;
+#endif
+  
+  SendThawedMessage(pokemon, target);
+  entityData = pokemon->entityData;
+  r2 = entityData->maxHP;
+  r0 = r2;
+  if (r2 < 0) {
+    r0 = r2 + 3;
+  }
+  if (entityData->HP <= r0 >> 2) {
+    r2 = 0;
+  }
+  else if (r1 = entityData->HP, r1 <= r2 / 2) {
+      r2 = 1;
+  }
+  else
+  {
+    r0 = r2 * 3;
+    if (r0 < 0) {
+        r0 = r0 + 3;
+    }
+    if (r0 >>= 2, r2 = 3, r1 <= r0) {
+        r2 = 2;
+    }
+  }
+  flag =  sub_8055640(pokemon,target,move,gUnknown_80F51C4[r2],param_4) ? TRUE : FALSE;
+  return flag;
+}
+
 bool8 sub_805B028(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move)
 { 
     sub_8077780(pokemon,target, 1);
@@ -301,13 +343,13 @@ bool8 HandleColorChange(struct DungeonEntity * pokemon, struct DungeonEntity * t
     }
 }
 
-bool8 sub_805B164(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move,s32 param_4)
+bool8 sub_805B164(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     sub_8077084(pokemon,target,gUnknown_8106A50, 2);
     return TRUE;
 }
 
-bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move,s32 param_4)
+bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     s32 uVar4;
     bool8 uVar5;
@@ -332,15 +374,15 @@ bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     return uVar5;
 }
 
-bool8 sub_805B208(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 PerishSongMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_80788E8(pokemon, target);
+    PerishSongTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805B214(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_8076B48(pokemon, target);
+    WrapTarget(pokemon, target);
     return TRUE;
 }
 
@@ -643,7 +685,7 @@ bool8 sub_805B668(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool8 sub_805B734(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8078678(pokemon, target);
+    SnatchStatusTarget(pokemon, target);
     return TRUE;
 }
 
