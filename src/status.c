@@ -118,8 +118,8 @@ extern s32 gUnknown_202DE30[10];
 extern void sub_8041D84(struct DungeonEntity *);
 extern void sub_804178C(u32);
 extern void sub_8041D5C(struct DungeonEntity *);
-extern void sub_8077084(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void sub_8077160(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
+extern void RaiseAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
+extern void RaiseDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern void sub_8041D48(struct DungeonEntity *);
 extern u8 sub_806CEBC(struct DungeonEntity *);
 extern void sub_8041D38(struct DungeonEntity * pokemon);
@@ -385,7 +385,7 @@ void sub_80775DC(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 }
 
-void sub_80776C0(struct DungeonEntity * pokemon,struct DungeonEntity * target, bool8 displayMessage)
+void CringeStatusTarget(struct DungeonEntity * pokemon,struct DungeonEntity * target, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
   
@@ -416,7 +416,7 @@ void sub_80776C0(struct DungeonEntity * pokemon,struct DungeonEntity * target, b
   }
 }
 
-void sub_8077780(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void ParalyzeStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
 {
   struct MapTile *mapTile;
   register struct DungeonEntityData *entityData;
@@ -464,7 +464,7 @@ void sub_8077780(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
               sub_80522F4(pokemon,target,*gUnknown_80FF01C);
             }
             if (sub_807167C(target,mapPokemonEntity) == 1) {
-              sub_8077780(pokemon, mapPokemonEntity, displayMessage);
+              ParalyzeStatusTarget(pokemon, mapPokemonEntity, displayMessage);
             }
           }
         }
@@ -564,7 +564,7 @@ void sub_80779F0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void sub_8077AE4(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void ConfuseStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
   
@@ -604,7 +604,7 @@ void sub_8077AE4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 }
 
-void sub_8077BB4(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void CowerStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
   
@@ -1060,8 +1060,8 @@ void CurseStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity * tar
     }
     else {
       uVar1 = gUnknown_8106A4C;
-      sub_8077084(pokemon,pokemon,uVar1,1);
-      sub_8077160(pokemon,pokemon,uVar1,1);
+      RaiseAttackStageTarget(pokemon,pokemon,uVar1,1);
+      RaiseDefenseStageTarget(pokemon,pokemon,uVar1,1);
       sub_80779F0(pokemon,pokemon,1,1);
     }
     DungeonEntityUpdateStatusSprites(target);
@@ -1123,7 +1123,7 @@ void TauntStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * ta
   }
 }
 
-void sub_80787E4(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void HandleStockpile(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
   struct DungeonEntityData *entityData;
   
@@ -1144,7 +1144,7 @@ void sub_80787E4(struct DungeonEntity * pokemon, struct DungeonEntity * target)
   }
 }
 
-void sub_807885C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void InvisibleStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
   struct DungeonEntityData * targetEntityData;
   struct DungeonEntityData * targetEntityData_1;

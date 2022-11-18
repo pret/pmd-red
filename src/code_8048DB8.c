@@ -3,15 +3,15 @@
 #include "code_80521D0.h"
 #include "dungeon_random.h"
 #include "item.h"
+#include "status.h"
 
 extern void sub_803E708(u32, u32);
 extern void sub_80421C0(struct DungeonEntity *r0, u16 r1);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
-extern void sub_80763F8(struct DungeonEntity *, struct DungeonEntity *, u32);
+extern void PoisonedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32);
 extern void sub_80769CC(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076210(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void sub_8077780(struct DungeonEntity *, struct DungeonEntity *, u32);
-extern void sub_8076E20(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
+extern void BurnedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
+extern void LowerAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -69,20 +69,20 @@ void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
     switch(DungeonRandomCapped(5))
     {
         case 0:
-            sub_80763F8(pokemon, target, 1);
+            PoisonedStatusTarget(pokemon, target, TRUE);
             break;
         case 1:
             sub_80769CC(pokemon, target);
             break;
         case 2:
-            sub_8076210(pokemon, target, 1, 1);
+            BurnedStatusTarget(pokemon, target, 1, TRUE);
             break;
         case 3:
-            sub_8077780(pokemon, target, 1);
+            ParalyzeStatusTarget(pokemon, target, TRUE);
             break;
         case 4:
-            sub_8076E20(pokemon, target, gUnknown_8106A4C, 3, 1, 1);
-            sub_8076E20(pokemon, target, gUnknown_8106A50, 3, 1, 1);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 3, 1, 1);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A50, 3, 1, 1);
             break;
     } 
 }

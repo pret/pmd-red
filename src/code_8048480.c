@@ -8,6 +8,7 @@
 #include "number_util.h"
 #include "moves.h"
 #include "code_8077274_1.h"
+#include "status.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 gAvailablePokemonNames[0x58];
@@ -34,16 +35,13 @@ extern u8 *gUnknown_80F9740[];
 extern u8 *gUnknown_80F9760[];
 
 extern void sub_807D148(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u32 r3);
-extern void sub_8075FCC(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
-extern void sub_8077AE4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
+extern void SleeplessStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void sub_8072008(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u8 r3, u32);
-extern void sub_8076D10(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
+extern void PetrifiedStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void LevelDownTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
 extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, const char[]);
-extern void sub_8077910(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32);
-extern void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *r1, s16, s16, u32);
 extern void sub_806F370(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
 extern s32 sub_8042520(struct DungeonEntity *);
@@ -126,12 +124,12 @@ void sub_8048480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_8048490(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8075FCC(pokemon, target);
+    SleeplessStatusTarget(pokemon, target);
 }
 
 void sub_804849C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077AE4(pokemon, target, 1);
+    ConfuseStatusTarget(pokemon, target, TRUE);
 }
 
 void sub_80484A8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -141,7 +139,7 @@ void sub_80484A8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_80484BC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8076D10(pokemon, target);
+    PetrifiedStatusTarget(pokemon, target);
 }
 
 void sub_80484C8(struct DungeonEntity *pokemon, struct DungeonEntity *target)

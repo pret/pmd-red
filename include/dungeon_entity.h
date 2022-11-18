@@ -116,7 +116,8 @@ struct DungeonEntityData
     /* 0xAE */ u8 nonVolatileStatusDamageTimer;
     u8 fillAF;
     /* 0xB0 */ u8 immobilizeStatus;
-    u8 fillB1[0xB8 - 0xB1];
+    u8 fillB1[0xB4 - 0xB1];
+    /* 0xB4 */ s32 unkB4;
     /* 0xB8 */ u8 immobilizeStatusTurnsLeft;
     /* 0xB9 */ u8 immobilizeStatusDamageTimer;
     u8 fillBA[0xBC - 0xBA];
@@ -211,7 +212,10 @@ struct DungeonEntityData
     u8 unk15D;
     u8 unk15E;
     u8 unk15F;
-    u8 fill160[0x169 - 0x160];
+    u8 fill160[0x164 - 0x160];
+    /* 0x164 */ u8 unk164;
+    /* 0x165 */ u8 unk165;
+    u8 fill166[0x169 - 0x166];
     u8 turnsSinceWarpScarfActivation;
     /* 0x16C */ struct Position targetPosition;
     /* 0x170 */ struct Position posPixel;
@@ -246,7 +250,7 @@ struct DungeonEntity
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
     /* 0xC */ struct Position32 posPixel;
     /* 0x14 */ struct Position32 prevPosPixel;
-    u8 fill1C[0x20 - 0x1C];
+    s32 unk1C;
     /* 0x20 */ bool8 visible; // Turned off when a Pokémon faints.
     u8 fill21[0x25 - 0x21];
     /* 0x25 */ u8 roomIndex;

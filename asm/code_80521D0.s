@@ -5073,14 +5073,14 @@ _0805502E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C480
+	bl LongtossOrbAction
 	b _080554BA
 _0805503C:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C48C
+	bl PierceOrbAction
 	b _080554BA
 _0805504A:
 	adds r0, r7, 0
@@ -5115,7 +5115,7 @@ _08055082:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C1F8
+	bl ShockerOrbAction
 	b _080554BA
 _08055090:
 	adds r0, r7, 0
@@ -5138,7 +5138,7 @@ _080550B0:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B2F0
+	bl ProtectMoveAction
 	b _080554BA
 _080550BE:
 	adds r0, r7, 0
@@ -5229,7 +5229,7 @@ _08055166:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805991C
+	bl StockpileMoveAction
 	b _080554BA
 _08055174:
 	adds r0, r7, 0
@@ -5607,7 +5607,7 @@ _0805545A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C1B0
+	bl IdentifyOrbAction
 	b _080554BA
 _08055468:
 	adds r0, r7, 0
@@ -5808,7 +5808,7 @@ _080555D6:
 	adds r0, r7, 0
 	adds r1, r7, 0
 	movs r3, 0x2
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 _08055604:
 	add sp, 0x48
 	pop {r3-r5}
@@ -6777,7 +6777,7 @@ _08055D54:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_8076090
+	bl PausedStatusTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -6869,7 +6869,7 @@ _08055E48:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08055E66:
 	ldrh r1, [r5]
 	movs r0, 0x10
@@ -6883,7 +6883,7 @@ _08055E66:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08055E84:
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -6897,7 +6897,7 @@ _08055E84:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08055EA2:
 	ldrh r1, [r5]
 	movs r0, 0x40
@@ -6911,7 +6911,7 @@ _08055EA2:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08055EC0:
 	ldrh r1, [r5]
 	movs r0, 0x80
@@ -6946,7 +6946,7 @@ _08055EEA:
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_8076210
+	bl BurnedStatusTarget
 _08055F0C:
 	ldrh r1, [r5]
 	movs r0, 0x80
@@ -6961,7 +6961,7 @@ _08055F0C:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_807614C
+	bl InfatuateStatusTarget
 _08055F2C:
 	adds r5, r6, r7
 	ldrh r1, [r5]
@@ -7557,7 +7557,7 @@ _08056418:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0

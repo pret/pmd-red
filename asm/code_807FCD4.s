@@ -653,7 +653,7 @@ _080801F2:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	b _08080240
 	.align 2, 0
 _08080208: .4byte gUnknown_8106A50
@@ -668,7 +668,7 @@ _0808020C:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	b _08080240
 	.align 2, 0
 _08080228: .4byte gUnknown_8106A4C
@@ -681,7 +681,7 @@ _0808022C:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _08080240:
 	add sp, 0x8
 	pop {r4,r5}
@@ -837,7 +837,7 @@ sub_8080364:
 	cmp r1, 0
 	beq _08080370
 	movs r2, 0x1
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _08080370:
 	pop {r0}
 	bx r0
@@ -899,7 +899,7 @@ sub_80803C8:
 	cmp r1, 0
 	beq _080803D4
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _080803D4:
 	pop {r0}
 	bx r0

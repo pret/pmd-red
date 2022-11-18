@@ -36,7 +36,7 @@ void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, const char 
 extern void sub_8042900(struct DungeonEntity *r0);
 extern void sub_8042968(struct DungeonEntity *r0);
 extern void sub_806ABAC(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076090(struct DungeonEntity *, struct DungeonEntity *,u32,u32,u32);
+extern void PausedStatusTarget(struct DungeonEntity *, struct DungeonEntity *,u32,u32,u32);
 void sub_8041BBC(struct DungeonEntity *r0);
 extern u8 sub_8045888(struct DungeonEntity *);
 extern void sub_806A2BC(struct DungeonEntity *, u8);
@@ -69,15 +69,15 @@ void sub_8069E0C(struct DungeonEntity *pokemon)
 void TriggerWeatherAbilities(void)
 {
   struct DungeonEntity *entity;
-  s32 iVar5;
+  s32 index;
 
   if (gDungeonGlobalData->unkC != 0) {
     gDungeonGlobalData->unkC = 0;
     gDungeonGlobalData->negateWeatherEffects = FALSE;
 
-    for(iVar5 = 0; iVar5 < DUNGEON_MAX_POKEMON; iVar5++)
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeonGlobalData->allPokemon[iVar5];
+      entity = gDungeonGlobalData->allPokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
             gDungeonGlobalData->startingWeather[WEATHER_RAIN] = 1;
@@ -225,20 +225,20 @@ void sub_806A120(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
 void sub_806A1B0(struct DungeonEntity *pokemon)
 { 
   if ((EntityExists(pokemon)) && (HasAbility(pokemon, ABILITY_TRUANT))) {
-    sub_8076090(pokemon,pokemon,0,1,0);
+    PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
 }
 
 void sub_806A1E8(struct DungeonEntity *pokemon)
 {
   bool8 bVar3;
-  struct DungeonEntityData *iVar1;
+  struct DungeonEntityData *entityData;
   
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
     if (GetEntityType(pokemon) == ENTITY_POKEMON) {
-      iVar1 = pokemon->entityData;
-      bVar3 = (!iVar1->isEnemy);
+      entityData = pokemon->entityData;
+      bVar3 = (!entityData->isEnemy);
     }
     if (gUnknown_203B46C->unk1 == '\0') {
       bVar3 = FALSE;

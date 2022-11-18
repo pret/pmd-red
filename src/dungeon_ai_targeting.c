@@ -384,23 +384,23 @@ static inline bool8 JoinLocationCannotUseItems_1(struct DungeonEntityData *pokem
 
 u8 sub_807167C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-  bool8 bVar1;
-  struct DungeonEntityData * iVar3;
-  struct DungeonEntityData * iVar4;
+  bool8 cannotUseItems;
+  struct DungeonEntityData * targetEntityData;
+  struct DungeonEntityData * pokemonEntityData;
 
-  iVar4 = pokemon->entityData;
-  iVar3 = target->entityData;
-  if (iVar4->clientType != CLIENT_TYPE_CLIENT) {
-    bVar1 = JoinLocationCannotUseItems_1(iVar4);
-    if (!bVar1 && (iVar4->shopkeeperMode == SHOPKEEPER_NONE) && (iVar3->clientType != CLIENT_TYPE_CLIENT)) {
-      bVar1 = JoinLocationCannotUseItems_1(iVar3);
-      if (bVar1 || (iVar3->shopkeeperMode != SHOPKEEPER_NONE)) {
+  pokemonEntityData = pokemon->entityData;
+  targetEntityData = target->entityData;
+  if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
+    cannotUseItems = JoinLocationCannotUseItems_1(pokemonEntityData);
+    if (!cannotUseItems && (pokemonEntityData->shopkeeperMode == SHOPKEEPER_NONE) && (targetEntityData->clientType != CLIENT_TYPE_CLIENT)) {
+      cannotUseItems = JoinLocationCannotUseItems_1(targetEntityData);
+      if (cannotUseItems || (targetEntityData->shopkeeperMode != SHOPKEEPER_NONE)) {
 error:
           return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
       }
       else
       {
-        if ((iVar4->isEnemy) != (iVar3->isEnemy)) {
+        if ((pokemonEntityData->isEnemy) != (targetEntityData->isEnemy)) {
           return TARGET_CAPABILITY_CAN_TARGET;
         }
         else {

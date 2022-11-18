@@ -77,7 +77,8 @@ struct DungeonGlobalData
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x363C - 0x68B];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
-    u8 fill37E3[0x37F8 - 0x37D9];
+    u8 fill37E3[0x37F4 - 0x37D9];
+    /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 hasPlus[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 hasMinus[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;

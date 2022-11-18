@@ -321,7 +321,7 @@ void sub_8078F50(struct DungeonEntity * pokemon, struct DungeonEntity * target)
   }
 }
 
-void sub_8078FDC(struct DungeonEntity * pokemon, struct DungeonEntity * target, s16 param_3)
+void ExposeStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s16 param_3)
 {
   struct DungeonEntityData *entityData;
   s32 param_3_s16;

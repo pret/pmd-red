@@ -305,13 +305,13 @@ sub_8057FCC:
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x1
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	ldr r0, _08057FF0
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -366,7 +366,7 @@ _08058048:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8076210
+	bl BurnedStatusTarget
 _08058054:
 	movs r0, 0x1
 	pop {r4-r6}
@@ -553,7 +553,7 @@ sub_805816C:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _080581BE:
 	mov r0, r8
 	add sp, 0x4
@@ -604,7 +604,7 @@ sub_80581D0:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _08058222:
 	mov r0, r8
 	add sp, 0x4
@@ -631,7 +631,7 @@ sub_8058234:
 _08058246:
 	adds r0, r3, 0
 	adds r1, r4, 0
-	bl sub_8078FDC
+	bl ExposeStatusTarget
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -692,7 +692,7 @@ sub_80582AC:
 	ldr r2, _080582C0
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -704,7 +704,7 @@ _080582C0: .4byte gUnknown_8106A4C
 sub_80582C4:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -716,7 +716,7 @@ sub_80582D4:
 	ldr r2, _080582E8
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -878,7 +878,7 @@ sub_80583D8:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _0805841C:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -917,7 +917,7 @@ sub_8058430:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _0805846A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -955,7 +955,7 @@ sub_8058478:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _080584B2:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -1444,7 +1444,7 @@ sub_8058838:
 	str r3, [sp]
 	str r3, [sp, 0x4]
 	movs r3, 0x3
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -1469,14 +1469,14 @@ sub_8058858:
 	adds r0, r6, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r3}
@@ -1610,24 +1610,24 @@ sub_8058930:
 	adds r1, r7, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	ldr r0, _080589D0
 	ldr r4, [r0]
 	adds r0, r7, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	adds r0, r7, 0
 	adds r1, r7, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	adds r0, r7, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	adds r6, 0xFB
 	ldrb r0, [r6]
 	cmp r0, 0
@@ -1749,13 +1749,13 @@ sub_8058A7C:
 	ldr r2, [r0]
 	adds r0, r4, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	ldr r0, _08058AA8
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -1806,7 +1806,7 @@ SkyAttackMoveAction:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _08058B04:
 	adds r0, r4, 0
 	bl sub_8079764
@@ -1864,7 +1864,7 @@ sub_8058B3C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80767B0
+	bl FrozenStatusTarget
 _08058B76:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -1904,7 +1904,7 @@ sub_8058B84:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -1969,7 +1969,7 @@ sub_8058C00:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _08058C3A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -2057,7 +2057,7 @@ sub_8058C98:
 	adds r1, r5, 0
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _08058CDE:
 	adds r0, r6, 0
 	add sp, 0x8
@@ -2096,7 +2096,7 @@ sub_8058CEC:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r3, 0x2
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 _08058D28:
 	adds r0, r6, 0
 	add sp, 0x8
@@ -2110,7 +2110,7 @@ _08058D34: .4byte gUnknown_8106A50
 	thumb_func_start sub_8058D38
 sub_8058D38:
 	push {lr}
-	bl sub_8075FCC
+	bl SleeplessStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2476,7 +2476,7 @@ sub_8058FBC:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08058FF6:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -2530,7 +2530,7 @@ sub_8059004:
 sub_8059050:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2581,7 +2581,7 @@ sub_8059080:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _080590BA:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -2722,7 +2722,7 @@ sub_8059190:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _080591CA:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3062,7 +3062,7 @@ sub_8059424:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _0805945E:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3210,7 +3210,7 @@ sub_8059540:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _0805957A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3227,7 +3227,7 @@ sub_8059588:
 	ldr r2, _0805959C
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3263,7 +3263,7 @@ sub_80595A0:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _080595DC:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3684,14 +3684,14 @@ _08059914: .4byte gUnknown_80F4E00
 _08059918: .4byte gUnknown_8106A4C
 	thumb_func_end sub_80598CC
 
-	thumb_func_start sub_805991C
-sub_805991C:
+	thumb_func_start StockpileMoveAction
+StockpileMoveAction:
 	push {lr}
-	bl sub_80787E4
+	bl HandleStockpile
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805991C
+	thumb_func_end StockpileMoveAction
 
 	thumb_func_start sub_8059928
 sub_8059928:
@@ -3732,7 +3732,7 @@ _08059948:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _08059978:
 	adds r0, r6, 0
 	add sp, 0x4
@@ -3781,7 +3781,7 @@ _080599A8:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _080599D6:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3899,7 +3899,7 @@ _08059A90:
 sub_8059AA8:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4027,7 +4027,7 @@ sub_8059B94:
 	ldr r2, _08059BA8
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4172,13 +4172,13 @@ _08059CA8:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	ldr r0, _08059CD4
 	ldr r2, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r6, 0x1
 _08059CC6:
 	adds r0, r6, 0
@@ -4196,7 +4196,7 @@ sub_8059CD8:
 	ldr r2, _08059CEC
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4242,7 +4242,7 @@ sub_8059D00:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059D3A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4257,7 +4257,7 @@ _08059D44: .4byte gUnknown_80F4DE2
 sub_8059D48:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4288,7 +4288,7 @@ sub_8059D58:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059D8E:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4310,7 +4310,7 @@ sub_8059D98:
 sub_8059DA4:
 	push {lr}
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4320,7 +4320,7 @@ sub_8059DA4:
 sub_8059DB4:
 	push {lr}
 	movs r2, 0x1
-	bl sub_80765E0
+	bl BadlyPoisonedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4353,7 +4353,7 @@ sub_8059DC4:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80765E0
+	bl BadlyPoisonedStatusTarget
 _08059DFE:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4391,7 +4391,7 @@ sub_8059E0C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08059E46:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4553,7 +4553,7 @@ sub_8059F38:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059F90:
 	adds r0, r4, 0
 	bl sub_8079764
@@ -4730,7 +4730,7 @@ _0805A0EA:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	b _0805A114
 	.align 2, 0
 _0805A0F8: .4byte gUnknown_80F4DFC
@@ -4739,13 +4739,13 @@ _0805A0FC:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 	b _0805A114
 _0805A10A:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80767B0
+	bl FrozenStatusTarget
 _0805A114:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4971,7 +4971,7 @@ sub_805A2B0:
 	ldr r2, _0805A2C4
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4988,7 +4988,7 @@ sub_805A2C8:
 	movs r3, 0x1
 	str r3, [sp]
 	str r3, [sp, 0x4]
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -5134,7 +5134,7 @@ sub_805A3DC:
 	movs r3, 0x1
 	str r3, [sp]
 	str r3, [sp, 0x4]
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -5179,7 +5179,7 @@ sub_805A408:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _0805A442:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -5273,7 +5273,7 @@ sub_805A4D4:
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8075E74
+	bl NappingStatusTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -5285,7 +5285,7 @@ _0805A4F8: .4byte gUnknown_80F4E94
 	thumb_func_start sub_805A4FC
 sub_805A4FC:
 	push {lr}
-	bl sub_8076AA4
+	bl IngrainedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5393,14 +5393,14 @@ sub_805A588:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	adds r0, r6, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _0805A5D8:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -5441,7 +5441,7 @@ sub_805A5E8:
 	adds r1, r5, 0
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -5521,7 +5521,7 @@ sub_805A688:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _0805A6BE:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -6055,7 +6055,7 @@ sub_805AAE0:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r3, 0x63
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	mov r0, sp
 	movs r1, 0x1
 	bl sub_80943A0
@@ -6160,7 +6160,7 @@ _0805ABE0:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 	b _0805AC86
 _0805ABEC:
 	ldr r1, _0805AC04
@@ -6192,7 +6192,7 @@ _0805AC16:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC30: .4byte gUnknown_8106A4C
@@ -6206,7 +6206,7 @@ _0805AC34:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC4C: .4byte gUnknown_8106A4C
@@ -6224,19 +6224,19 @@ _0805AC64:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	b _0805AC86
 _0805AC70:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 	b _0805AC86
 _0805AC7C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _0805AC86:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -6272,7 +6272,7 @@ sub_805AC90:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _0805ACCA:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -6293,12 +6293,12 @@ sub_805ACD8:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	adds r0, r5, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r4-r6}
 	pop {r1}
@@ -6323,7 +6323,7 @@ sub_805AD04:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8076090
+	bl PausedStatusTarget
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4,r5}
@@ -6343,7 +6343,7 @@ sub_805AD34:
 	str r3, [sp]
 	str r3, [sp, 0x4]
 	movs r3, 0x2
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -6536,7 +6536,7 @@ sub_805AE74:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _0805AEB8:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -6586,7 +6586,7 @@ sub_805AECC:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _0805AF1E:
 	mov r0, r8
 	add sp, 0x4

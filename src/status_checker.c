@@ -33,9 +33,7 @@
 extern void sub_807F43C(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8078F50(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807DC68(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8077BB4(struct DungeonEntity *, struct DungeonEntity *, u8);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
-extern void sub_807885C(struct DungeonEntity *, struct DungeonEntity *);
 extern u32 sub_803D73C(u32);
 extern void sub_8045C28(struct ItemSlot *, u8 , u8 *);
 extern void sub_80464C8(struct DungeonEntity *, struct Position *, struct ItemSlot *);
@@ -57,7 +55,7 @@ extern void sub_807FE04(u32 *, u32);
 extern void sub_807DB74(struct DungeonEntity *);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void HandleLuminousOrbAction(struct DungeonEntity *pokemon);
-extern void sub_8076D10(struct DungeonEntity *, struct DungeonEntity *);
+extern void PetrifiedStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807D510(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807DA14(struct DungeonEntity *, struct DungeonEntity *, s32);
 extern s16 sub_803D970(u32);
@@ -72,20 +70,17 @@ extern void sub_807D3CC(struct DungeonEntity *, struct DungeonEntity *);
 extern u8 sub_8069D18(s32 *);
 extern u8 sub_804AD34(s32 *);
 extern u8 sub_8057308(struct DungeonEntity *, u32);
-extern void sub_8076F80(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
-extern void sub_8077084(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void SnatchStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
+extern void LowerDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
+extern void RaiseAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern void sub_806F324(struct DungeonEntity *, s32, u32, u32);
-extern void sub_8077160(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
+extern void RaiseDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern bool8 sub_805755C(struct DungeonEntity* pokemon,u16 moveID);
-extern void sub_807614C(struct DungeonEntity *, struct DungeonEntity *, u32);
-extern void DestinyBondStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076E20(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
+extern void InfatuateStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32);
+extern void LowerAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 extern void sub_80783C4(struct DungeonEntity *, struct DungeonEntity *, u32);
 extern bool8 sub_807FCD4(struct Position *, u32, u8);
-extern void PerishSongTarget(struct DungeonEntity *, struct DungeonEntity *);
 extern void WrapTarget(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_80768DC(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
+extern void SqueezedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 extern void sub_807CD9C(struct DungeonEntity *, struct DungeonEntity *, u8 facingDir);
 
 
@@ -236,7 +231,7 @@ const u8 gDungeonCamouflageTypes[76] = {
 
 extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
-extern void sub_80763F8(struct DungeonEntity *, struct DungeonEntity *, u32);
+extern void PoisonedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32);
 
 extern u32 gUnknown_80F51C4[];
 
@@ -282,7 +277,7 @@ bool8 sub_805AFA4(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool8 sub_805B028(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move)
 { 
-    sub_8077780(pokemon,target, 1);
+    ParalyzeStatusTarget(pokemon,target, TRUE);
     return TRUE;
 }
 
@@ -307,7 +302,7 @@ bool8 sub_805B074(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar5 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4DC6) != 0) {
-            sub_80763F8(pokemon,target,0);
+            PoisonedStatusTarget(pokemon,target,FALSE);
         }
     }
     return uVar5;
@@ -345,7 +340,7 @@ bool8 HandleColorChange(struct DungeonEntity * pokemon, struct DungeonEntity * t
 
 bool8 sub_805B164(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
-    sub_8077084(pokemon,target,gUnknown_8106A50, 2);
+    RaiseAttackStageTarget(pokemon,target,gUnknown_8106A50, 2);
     return TRUE;
 }
 
@@ -368,7 +363,7 @@ bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar5 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4E08) != 0) {
-            sub_80768DC(pokemon,target,uVar4,0);
+            SqueezedStatusTarget(pokemon,target,uVar4,0);
         }
     }
     return uVar5;
@@ -439,7 +434,7 @@ bool8 sub_805B2E4(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
     return TRUE;
 }
 
-bool8 sub_805B2F0(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 ProtectMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     ProtectStatusTarget(pokemon, target);
     return TRUE;
@@ -447,7 +442,7 @@ bool8 sub_805B2F0(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B2FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_8077160(pokemon,target,gUnknown_8106A4C,1);
+    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1);
     return TRUE;
 }
 
@@ -465,7 +460,7 @@ bool8 sub_805B324(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar3 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4DD8) != 0) {
-            sub_8076E20(pokemon,target,gUnknown_8106A50,1,1,0);
+            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,0);
         }
     }
     return uVar3;
@@ -491,8 +486,8 @@ bool8 sub_805B3A8(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 bool8 sub_805B3B4(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     u32 uVar1 = gUnknown_8106A50;
-    sub_8077084(pokemon,target,uVar1,1);
-    sub_8077160(pokemon,target,uVar1,1);
+    RaiseAttackStageTarget(pokemon,target,uVar1,1);
+    RaiseDefenseStageTarget(pokemon,target,uVar1,1);
     return TRUE;
 }
 
@@ -504,17 +499,17 @@ bool8 sub_805B3E0(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B3FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4, s32 param_5)
 {
-    struct DungeonEntityData *iVar2;
+    struct DungeonEntityData *entityData;
     bool8 uVar4;
 
     uVar4 = FALSE;
     if (sub_8055640(pokemon,target,move,0x100,param_5) != 0) {
         uVar4 = TRUE;
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
-            iVar2 = pokemon->entityData;
-            sub_8077084(pokemon,pokemon,param_4,1);
-            if (iVar2->unkFB == 0) {
-                iVar2->unkFB = 1;
+            entityData = pokemon->entityData;
+            RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
+            if (entityData->unkFB == 0) {
+                entityData->unkFB = 1;
             }
         }
     }
@@ -523,7 +518,7 @@ bool8 sub_805B3FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B454(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_807614C(pokemon, target, 1);
+    InfatuateStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -747,7 +742,7 @@ bool8 sub_805B808(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool8 sub_805B884( struct DungeonEntity * pokemon, struct DungeonEntity * target)
 { 
-    sub_8077084(pokemon, target, gUnknown_8106A4C, 1);
+    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
     sub_8077910(pokemon, target, 0, TRUE);
     return TRUE;
 }
@@ -776,7 +771,7 @@ bool8 sub_805B910(struct DungeonEntity * pokemon, struct DungeonEntity * target,
         flag = TRUE;
         if(sub_805727C(pokemon, target, gUnknown_80F4DDC))
         {
-            sub_8076F80(pokemon, target, gUnknown_8106A50, 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, 0);
         }
     }
     return flag;
@@ -1082,7 +1077,7 @@ bool8 LuminousOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * t
 
 bool8 sub_805BEAC(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8076D10(pokemon, target);
+    PetrifiedStatusTarget(pokemon, target);
     return TRUE;
 }
 
@@ -1206,7 +1201,7 @@ bool8 sub_805C080(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 
 bool8 sub_805C128(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_807885C(pokemon, pokemon);
+    InvisibleStatusTarget(pokemon, pokemon);
     return TRUE;
 }
 
@@ -1220,7 +1215,7 @@ bool8 sub_805C138(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     return local_20;
 }
 
-bool8 sub_805C1B0(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 IdentifyOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     IdentityItemHolders(pokemon, target);
     return TRUE;
@@ -1240,9 +1235,9 @@ bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return FALSE;
 }
 
-bool8 sub_805C1F8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 ShockerOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077BB4(pokemon, target, 1);
+    CowerStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -1372,13 +1367,13 @@ bool8 StairsOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *targe
     return TRUE;
 }
 
-bool8 sub_805C480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 LongtossOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     LongTossStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805C48C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 PierceOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     PierceStatusTarget(pokemon, target);
     return TRUE;
