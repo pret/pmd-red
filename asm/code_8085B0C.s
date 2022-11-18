@@ -438,7 +438,7 @@ _08085E5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08085E70: .4byte gUnknown_202EE88
+_08085E70: .4byte gDungeonPaletteFile
 _08085E74: .4byte 0xffffff00
 _08085E78: .4byte 0xffff00ff
 _08085E7C: .4byte 0xff00ffff

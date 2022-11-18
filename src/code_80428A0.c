@@ -4,7 +4,7 @@
 
 extern void sub_804151C(struct DungeonEntity *r0, u32 r1, u8 r2);
 extern void sub_803E708(u32 r0, u32 r1);
-extern void sub_80416A4(struct DungeonEntity *r0, u32 r1, u32 r2);
+extern void sub_80416A4(struct Position *r0, u32 r1, u32 r2);
 extern void sub_80421C0(struct DungeonEntity *r0, u16 r1);
 extern u8 sub_8042768(struct DungeonEntity *pokemon);
 extern void sub_804178C(u32);
@@ -109,13 +109,13 @@ void sub_80429E8(struct DungeonEntity *r0)
     sub_804151C(r0, 0x11d, 1);
 }
 
-void sub_80429FC(struct DungeonEntity *r0)
+void sub_80429FC(struct Position *r0)
 {
     sub_80416A4(r0, 0xCF << 1, 1);
     sub_80421C0(NULL, 0xD4);
 }
 
-void sub_8042A14(struct DungeonEntity *r0)
+void sub_8042A14(struct Position *r0)
 {
     sub_80416A4(r0, 0x36, 1);
 }
@@ -125,7 +125,7 @@ void sub_8042A24(struct DungeonEntity *r0)
     sub_804151C(r0, 0x15, 1);
 }
 
-void sub_8042A34(struct DungeonEntity *r0)
+void sub_8042A34(struct Position *r0)
 {
     sub_80416A4(r0, 0x9F << 1, 0);
 }
@@ -135,12 +135,12 @@ void sub_8042A44(struct DungeonEntity *r0)
     sub_804151C(r0, 0xDA << 1, 1);
 }
 
-void sub_8042A54(struct DungeonEntity *r0)
+void sub_8042A54(struct Position *r0)
 {
     sub_80416A4(r0, 0x37, 1);
 }
 
-void sub_8042A64(struct DungeonEntity *r0)
+void sub_8042A64(struct Position *r0)
 {
     sub_80416A4(r0, 0x29, 1);
 }

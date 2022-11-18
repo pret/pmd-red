@@ -85,7 +85,8 @@ struct DungeonGlobalData
     u8 fill37FD[0x3A0D - 0x37FD];
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
-    u8 fill3A10[0x3A14 - 0x3A10];
+    /* 0x3A10 */ u16 unk3A10;
+    u8 fill3A10[0x3A14 - 0x3A12];
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A18 */ struct MapTile mapTiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fillE218[0xE23C - 0xE218];
@@ -111,7 +112,11 @@ struct DungeonGlobalData
     /* 0x10844 */ s16 numRoomExits[MAX_ROOM_COUNT];
     u8 fill10874[0x10884 - 0x10874];
     /* 0x10884 */ struct Position roomExits[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
-    u8 fill11444[0x1356C - 0x11484];
+    u8 fill11444[0x11884 - 0x11484];
+    u8 unk11884[0x1194];
+    u8 fill12A18[0x12C24 - 0x12A18];
+    u8 unk12C24[0x930];
+    u8 fill13554[0x1356C - 0x13554];
     u8 unk1356C;
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;

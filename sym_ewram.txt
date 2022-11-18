@@ -657,7 +657,7 @@ gUnknown_202EE70 = .; /* 202EE70 */
 gUnknown_202EE76 = .; /* 202EE76 */
 	. += 0x12;
 
-gUnknown_202EE88 = .; /* 202EE88 */
+gDungeonPaletteFile = .; /* 202EE88 */
 	. += 0x4;
 
 gUnknown_202EE8C = .; /* 202EE8C */

@@ -1268,7 +1268,7 @@ _08043544:
 _08043594:
 	bl sub_804AAD4
 	bl sub_8049B8C
-	bl sub_804966C
+	bl LoadDungeonTilesetAssets
 	cmp r6, 0
 	bne _080435D0
 	bl sub_806B168

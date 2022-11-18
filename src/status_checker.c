@@ -66,8 +66,8 @@ extern bool8 sub_805727C(struct DungeonEntity * pokemon, struct DungeonEntity * 
 extern u32 sub_8055640(struct DungeonEntity *, struct DungeonEntity *, struct PokemonMove *, u32, u32);
 extern void sub_806A6E8(struct DungeonEntity *);
 extern void sub_807D3CC(struct DungeonEntity *, struct DungeonEntity *);
-extern u8 sub_8069D18(s32 *);
-extern u8 sub_804AD34(s32 *);
+extern u8 sub_8069D18(struct Position *);
+extern u8 sub_804AD34(struct Position *);
 extern u8 sub_8057308(struct DungeonEntity *, u32);
 
 
@@ -808,7 +808,7 @@ bool8 sub_805B968(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 bool8 RockSmashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     bool8 uVar3;
-    s32 auStack20;
+    struct Position pos;
 
 #ifdef NONMATCHING
     struct DungeonEntity *temp;
@@ -822,10 +822,10 @@ bool8 RockSmashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
     temp1 = target;
 
     uVar3 = 0;
-    if (sub_8069D18(&auStack20) != 0) {
+    if (sub_8069D18(&pos) != 0) {
         sub_80522F4(temp,temp1,*gUnknown_80FD430); // Can't use that diagonally!
     }
-    else if (uVar3 = (sub_804AD34(&auStack20)), uVar3 != 0) {
+    else if (uVar3 = (sub_804AD34(&pos)), uVar3 != 0) {
         sub_80522F4(temp,temp1,*gUnknown_80FD3F0); // It dug the wall in front!
     }
     else {

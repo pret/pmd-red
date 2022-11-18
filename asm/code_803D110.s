@@ -3128,7 +3128,7 @@ _0803E96A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803E9A4: .4byte gUnknown_202EE88
+_0803E9A4: .4byte gDungeonPaletteFile
 _0803E9A8: .4byte gUnknown_80F62AC
 _0803E9AC: .4byte gUnknown_202EDC8
 _0803E9B0: .4byte gDungeonGlobalData
@@ -3269,7 +3269,7 @@ _0803EA92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803EACC: .4byte gUnknown_202EE88
+_0803EACC: .4byte gDungeonPaletteFile
 _0803EAD0: .4byte gUnknown_80F62AC
 _0803EAD4: .4byte gUnknown_202EDC8
 _0803EAD8: .4byte gDungeonGlobalData
