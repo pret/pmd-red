@@ -123,6 +123,8 @@ extern u8 *gUnknown_80FC248[];
 extern u8 *gUnknown_80FC09C[];
 extern u8 *gUnknown_80FC13C[];
 extern u8 *gUnknown_80FC270[];
+extern u8 *gUnknown_80FC138[];
+extern u8 *gUnknown_80FC21C[];
 
 extern bool8 sub_8071728(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage);
 extern void sub_8041F28(struct DungeonEntity *, s32);
@@ -394,16 +396,16 @@ void DecideAction(struct DungeonEntity *pokemon, u32 unused)
     }
 }
 
-void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
+void sub_8075BA4(struct DungeonEntity *param_1, u8 param_2)
 {
-  struct DungeonEntityData * iVar2 = param_1->entityData;
+  struct DungeonEntityData * entityData = param_1->entityData;
 
-  if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
-      iVar2->action.facingDir = (iVar2->action.facingDir + 4) & DIRECTION_MASK;
+  if ((param_2 != 0) && (entityData->volatileStatus == VOLATILE_STATUS_COWERING)) {
+      entityData->action.facingDir = (entityData->action.facingDir + 4) & DIRECTION_MASK;
       TargetTileInFront(param_1);
   }
-  else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
-      iVar2->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+  else if (entityData->volatileStatus == VOLATILE_STATUS_CONFUSED) {
+      entityData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
       TargetTileInFront(param_1);
   }
 }
@@ -1035,7 +1037,7 @@ void SqueezedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
     SetMessageArgument(gAvailablePokemonNames,target,0);
     if (entityData->immobilizeStatus != IMMOBILIZE_STATUS_SQUEEZED) {
       entityData->immobilizeStatus = IMMOBILIZE_STATUS_SQUEEZED;
-      entityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E58,1) + 1;
+      entityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
       entityData->immobilizeStatusDamageTimer = 0;
       entityData->unkB4 = param_3_s32;
       nullsub_71(target);
@@ -1049,7 +1051,7 @@ void SqueezedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 }
 
-void sub_80769CC(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void ImmobilizedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
   struct DungeonEntityData *entityData;
   
@@ -1367,9 +1369,6 @@ void RaiseAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity
     }
     DungeonEntityUpdateStatusSprites(target);
 }
-
-extern u8 *gUnknown_80FC138[];
-extern u8 *gUnknown_80FC21C[];
 
 void RaiseDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 index, s32 increment)
 {

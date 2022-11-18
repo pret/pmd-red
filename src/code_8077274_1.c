@@ -5,6 +5,7 @@
 #include "constants/type.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_ai.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
@@ -169,7 +170,6 @@ extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
 extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, const char[]);
 extern void DungeonEntityUpdateStatusSprites(struct DungeonEntity *);
 extern void sub_8042A74(struct DungeonEntity *r0);
-extern void sub_8076CB4(u32);
 extern void sub_807EC28(u32);
 extern s32 sub_8069F54(struct DungeonEntity *param_1, s16 param_2);
 extern u32 sub_80687D0(s16);
@@ -177,7 +177,6 @@ extern void sub_806A898(struct DungeonEntity *, u32, u32);
 extern void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *r1, s16, s16, u32);
 extern void sub_806CE68(struct DungeonEntity *, s32);
 extern void sub_806F324(struct DungeonEntity *, s16, u32, u32);
-extern void sub_8075C58(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 extern void sub_806BFC0(struct DungeonEntityData *, u32);
 extern void sub_80420C8(struct DungeonEntity *r0);
 extern void nullsub_68(struct DungeonEntity *);
@@ -1024,33 +1023,33 @@ void VitalThrowStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity
 void sub_8079E34(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 param_3)
 {
   bool8 statChanged;
-  struct DungeonEntityData *iVar3;
+  struct DungeonEntityData *entityData;
   s32 index;
   
   statChanged = FALSE;
   if (EntityExists(target)) {
-    iVar3 = target->entityData;
+    entityData = target->entityData;
 
     for(index = 0; index < 2; index++)
     {
-      if (iVar3->attackStages[index] != DEFAULT_STAT_STAGE) {
-        iVar3->attackStages[index] = DEFAULT_STAT_STAGE;
+      if (entityData->attackStages[index] != DEFAULT_STAT_STAGE) {
+        entityData->attackStages[index] = DEFAULT_STAT_STAGE;
         statChanged = TRUE;
       }
-      if (iVar3->defenseStages[index] != DEFAULT_STAT_STAGE) {
-        iVar3->defenseStages[index] = DEFAULT_STAT_STAGE;
+      if (entityData->defenseStages[index] != DEFAULT_STAT_STAGE) {
+        entityData->defenseStages[index] = DEFAULT_STAT_STAGE;
         statChanged = TRUE;
       }
-      if (iVar3->accuracyStages[index] != DEFAULT_STAT_STAGE) {
-        iVar3->accuracyStages[index] = DEFAULT_STAT_STAGE;
+      if (entityData->accuracyStages[index] != DEFAULT_STAT_STAGE) {
+        entityData->accuracyStages[index] = DEFAULT_STAT_STAGE;
         statChanged = TRUE;
       }
-      if (iVar3->attackMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
-        iVar3->attackMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
+      if (entityData->attackMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
+        entityData->attackMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
         statChanged = TRUE;
       }
-      if (iVar3->defenseMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
-        iVar3->defenseMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
+      if (entityData->defenseMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
+        entityData->defenseMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
         statChanged = TRUE;
       }
     }
@@ -1170,9 +1169,9 @@ void sub_807A0CC(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 void SendSleepEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 param_3, bool8 param_4)
 {
   struct DungeonEntityData *entityData;
-  bool8 bVar4;
+  bool8 isAsleep;
   
-  bVar4 = FALSE;
+  isAsleep = FALSE;
   if (!EntityExists(target)) {
     return;
   }
@@ -1183,30 +1182,30 @@ void SendSleepEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * 
         case 6:
             break;
         case SLEEP_STATUS_SLEEP:
-            bVar4 = TRUE;
+            isAsleep = TRUE;
             sub_80522F4(pokemon,target,*gUnknown_80FA6E8);
             break;
         case SLEEP_STATUS_SLEEPLESS:
             sub_80522F4(pokemon,target,*gUnknown_80FA708);
             break;
         case SLEEP_STATUS_NIGHTMARE:
-            bVar4 = TRUE;
+            isAsleep = TRUE;
             sub_80522F4(pokemon,target,*gUnknown_80FA70C);
             if (param_4) {
                 sub_806F324(target,gUnknown_80F4F78,8,0x20f);
             }
             break;
         case SLEEP_STATUS_NAPPING:
-            bVar4 = TRUE;
+            isAsleep = TRUE;
             sub_80522F4(pokemon,target,*gUnknown_80FA710);
-            HealTargetHP(pokemon,target,gUnknown_80F4F7A,0,0);
+            HealTargetHP(pokemon,target,gUnknown_80F4F7A, 0, FALSE);
             entityData->sleepStatus = 0;
             sub_8079F20(pokemon,target,1,1);
             break;
         case SLEEP_STATUS_YAWNING:
             if (param_3) {
                 entityData->sleepStatus = SLEEP_STATUS_NONE;
-                sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4F2C, TRUE) + 1, 1);
+                sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4F2C, TRUE) + 1, TRUE);
                 return;
             }
             sub_80522F4(pokemon,target,*gUnknown_80FA734);
@@ -1214,7 +1213,7 @@ void SendSleepEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * 
   }
   entityData->sleepStatus = SLEEP_STATUS_NONE;
   DungeonEntityUpdateStatusSprites(target);
-  if (bVar4) {
+  if (isAsleep) {
     sub_806CE68(target,8);
   }
 }
@@ -1250,10 +1249,10 @@ void SendNonVolatileEndMessage(struct DungeonEntity * pokemon, struct DungeonEnt
 
 void SendImmobilizeEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 {
-  bool8 bVar1;
+  bool8 isFrozen;
   struct DungeonEntityData *entityData;
   
-  bVar1 = FALSE;
+  isFrozen = FALSE;
   if (!EntityExists(target)) {
     return;
   }
@@ -1265,7 +1264,7 @@ void SendImmobilizeEndMessage(struct DungeonEntity * pokemon, struct DungeonEnti
         break;
     case IMMOBILIZE_STATUS_FROZEN:
         sub_80522F4(pokemon,target,*gUnknown_80FA8BC);
-        bVar1 = TRUE;
+        isFrozen = TRUE;
         break;
     case IMMOBILIZE_STATUS_SQUEEZED:
         sub_80522F4(pokemon,target,*gUnknown_80FA820);
@@ -1285,7 +1284,7 @@ void SendImmobilizeEndMessage(struct DungeonEntity * pokemon, struct DungeonEnti
   }
   entityData->immobilizeStatus = IMMOBILIZE_STATUS_NONE;
   DungeonEntityUpdateStatusSprites(target);
-  if (bVar1) {
+  if (isFrozen) {
     sub_8042A74(target);
   }
 }
@@ -1648,14 +1647,14 @@ void sub_807A9B0(struct DungeonEntity * pokemon)
 
 void SendThawedMessage(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-  struct DungeonEntityData *iVar2;
+  struct DungeonEntityData *entityData;
   
   if (EntityExists(target)) {
-    iVar2 = target->entityData;
-    if (iVar2->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN) {
-      iVar2->immobilizeStatus = IMMOBILIZE_STATUS_NONE;
-      iVar2->immobilizeStatusTurnsLeft = 0;
-      iVar2->immobilizeStatusDamageTimer = 0;
+    entityData = target->entityData;
+    if (entityData->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN) {
+      entityData->immobilizeStatus = IMMOBILIZE_STATUS_NONE;
+      entityData->immobilizeStatusTurnsLeft = 0;
+      entityData->immobilizeStatusDamageTimer = 0;
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA8BC); // $m0 thawed out!
       DungeonEntityUpdateStatusSprites(target);

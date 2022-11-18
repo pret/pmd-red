@@ -887,7 +887,7 @@ sub_80803B4:
 	beq _080803C2
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 _080803C2:
 	pop {r0}
 	bx r0

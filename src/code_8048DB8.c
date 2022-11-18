@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/status.h"
 #include "code_80521D0.h"
+#include "dungeon_ai.h"
 #include "dungeon_random.h"
 #include "item.h"
 #include "status.h"
@@ -8,10 +9,6 @@
 extern void sub_803E708(u32, u32);
 extern void sub_80421C0(struct DungeonEntity *r0, u16 r1);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
-extern void PoisonedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32);
-extern void sub_80769CC(struct DungeonEntity *, struct DungeonEntity *);
-extern void BurnedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void LowerAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -34,9 +31,9 @@ extern u8 *gUnknown_80FE3E8[];
 
 bool8 sub_8048D50(struct DungeonEntity * pokemon, struct ItemSlot *item)
 {
-  struct DungeonEntityData *iVar2;
+  struct DungeonEntityData *entityData;
 
-  iVar2 = pokemon->entityData;
+  entityData = pokemon->entityData;
   
   if ((item->itemFlags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gUnknown_202DE58, item);
@@ -45,7 +42,7 @@ bool8 sub_8048D50(struct DungeonEntity * pokemon, struct ItemSlot *item)
   }
   else
   {
-    if ((iVar2->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(item->itemIndex))) {
+    if ((entityData->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(item->itemIndex))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
         SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
@@ -72,7 +69,7 @@ void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
             PoisonedStatusTarget(pokemon, target, TRUE);
             break;
         case 1:
-            sub_80769CC(pokemon, target);
+            ImmobilizedStatusTarget(pokemon, target);
             break;
         case 2:
             BurnedStatusTarget(pokemon, target, 1, TRUE);
@@ -81,8 +78,8 @@ void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
             ParalyzeStatusTarget(pokemon, target, TRUE);
             break;
         case 4:
-            LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 3, 1, 1);
-            LowerAttackStageTarget(pokemon, target, gUnknown_8106A50, 3, 1, 1);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 3, 1, TRUE);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A50, 3, 1, TRUE);
             break;
     } 
 }

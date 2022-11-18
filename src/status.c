@@ -208,7 +208,7 @@ void UpdateFlashFireBoost(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 }
 
-void sub_80772C0(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32 statStage, s32 param_4, bool8 displayMessage)
+void ChangeAttackMultiplierTarget(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32 statStage, s32 param_4, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
   s32 oldMulti;
@@ -273,7 +273,7 @@ void sub_80772C0(struct DungeonEntity *pokemon, struct DungeonEntity *target, u3
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void sub_8077434(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32 statStage, s32 param_4, bool8 displayMessage)
+void ChangeDefenseMultiplierTarget(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32 statStage, s32 param_4, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
   s32 oldMulti;
@@ -324,7 +324,7 @@ void sub_8077434(struct DungeonEntity *pokemon, struct DungeonEntity *target, u3
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void sub_8077540(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 statStage)
+void RaiseAccuracyStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 statStage)
 {
   struct DungeonEntityData *entityData;
 
@@ -349,7 +349,7 @@ void sub_8077540(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 }
 
-void sub_80775DC(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 statStage, bool8 displayMessage)
+void LowerAccuracyStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 statStage, bool8 displayMessage)
 {
   struct DungeonEntityData *entityData;
 
@@ -474,7 +474,7 @@ void ParalyzeStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 }
 
-void sub_8077910(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns, bool8 displayMessage)
+void RaiseMovementSpeedTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns, bool8 displayMessage)
 {
   s32 movSpeed;
   s32 index;
@@ -518,7 +518,7 @@ void sub_8077910(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void sub_80779F0(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 param_3, bool8 displayMessage)
+void LowerMovementSpeedTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 levels, bool8 displayMessage)
 {
   s32 movSpeed;
   s32 counter;
@@ -540,7 +540,7 @@ void sub_80779F0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
         sub_80522F4(pokemon,target,*gUnknown_80FC2D8);
   }
   else {
-    for(counter = 0; counter < param_3; counter++)
+    for(counter = 0; counter < levels; counter++)
     {
         for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
         {
@@ -624,7 +624,7 @@ void CowerStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * ta
   }
 }
 
-void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *target, s32 param_3, s32 param_4, u32 displayMessage)
+void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *target, s32 param_3, s32 param_4, bool32 displayMessage)
 {
     struct DungeonEntityData *entityData;
     s32 HP;
@@ -1030,7 +1030,7 @@ void sub_80783C4(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
 
 void CurseStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 {
-  u32 uVar1;
+  u32 statStage;
   s32 HP;
   struct DungeonEntityData * pokemonEntityData;
   struct DungeonEntityData * targetEntityData;
@@ -1059,10 +1059,10 @@ void CurseStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity * tar
       sub_80522F4(pokemon,target,*gUnknown_80FB004);
     }
     else {
-      uVar1 = gUnknown_8106A4C;
-      RaiseAttackStageTarget(pokemon,pokemon,uVar1,1);
-      RaiseDefenseStageTarget(pokemon,pokemon,uVar1,1);
-      sub_80779F0(pokemon,pokemon,1,1);
+      statStage = gUnknown_8106A4C;
+      RaiseAttackStageTarget(pokemon,pokemon,statStage,1);
+      RaiseDefenseStageTarget(pokemon,pokemon,statStage,1);
+      LowerMovementSpeedTarget(pokemon,pokemon,1,TRUE);
     }
     DungeonEntityUpdateStatusSprites(target);
   }

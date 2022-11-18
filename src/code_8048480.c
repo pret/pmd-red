@@ -3,11 +3,13 @@
 #include "constants/status.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_ai.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "number_util.h"
 #include "moves.h"
 #include "code_8077274_1.h"
+#include "position.h"
 #include "status.h"
 
 extern u8 *gUnknown_80F89F4[];
@@ -34,10 +36,8 @@ extern u8 *gPtrSelfHealPreventedHungerMessage[];
 extern u8 *gUnknown_80F9740[];
 extern u8 *gUnknown_80F9760[];
 
-extern void sub_807D148(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u32 r3);
-extern void SleeplessStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
+extern void sub_807D148(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, struct Position *r3);
 extern void sub_8072008(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u8 r3, u32);
-extern void PetrifiedStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void LevelDownTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
@@ -61,12 +61,12 @@ void sub_8048364(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8
 
 void sub_8048374(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, 1);
+    HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, TRUE);
 }
 
 void sub_804839C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, 1);
+    HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, TRUE);
 }
 
 void sub_80483C4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -76,7 +76,7 @@ void sub_80483C4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_80483D4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, 1);
+    HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, TRUE);
 }
 
 void sub_80483F4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -84,14 +84,14 @@ void sub_80483F4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     BlindTarget(pokemon, target);
 }
 
-void sub_8048400(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+void XEyeSeedAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     CrossEyeVisionTarget(pokemon, target);
 }
 
 void sub_804840C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077910(pokemon, target, 0, 1);
+    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
 }
 
 void sub_804841C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -119,7 +119,7 @@ void sub_8048450(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_8048480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_807D148(pokemon, target, 0, 0);
+    sub_807D148(pokemon, target, 0, NULL);
 }
 
 void sub_8048490(struct DungeonEntity *pokemon, struct DungeonEntity *target)

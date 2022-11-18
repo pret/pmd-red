@@ -4525,7 +4525,7 @@ _08054BC8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B7FC
+	bl ReflectMoveAction
 	bl _080554BA
 _08054BD8:
 	adds r0, r7, 0
@@ -4723,7 +4723,7 @@ _08054D72:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B2E4
+	bl MagicCoatMoveAction
 	b _080554BA
 _08054D80:
 	adds r0, r7, 0
@@ -5010,7 +5010,7 @@ _08054FB0:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805777C
+	bl VitalThrowMoveAction
 	b _080554BA
 _08054FBE:
 	adds r0, r7, 0
@@ -5271,7 +5271,7 @@ _080551BA:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B3A8
+	bl MirrorCoatMoveAction
 	b _080554BA
 _080551C8:
 	adds r0, r7, 0
@@ -5292,7 +5292,7 @@ _080551E4:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B37C
+	bl DestinyBondMoveAction
 	b _080554BA
 _080551F2:
 	adds r0, r7, 0
@@ -6829,7 +6829,7 @@ _08055DEC:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E10:
 	ldrh r1, [r5]
 	movs r0, 0x2
@@ -6842,7 +6842,7 @@ _08055E10:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E2C:
 	ldrh r1, [r5]
 	movs r0, 0x4
@@ -6855,7 +6855,7 @@ _08055E2C:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E48:
 	ldrh r1, [r5]
 	movs r0, 0x8

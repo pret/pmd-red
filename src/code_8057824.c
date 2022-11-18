@@ -3,6 +3,7 @@
 #include "constants/weather.h"
 #include "charge_move.h"
 #include "dungeon_global_data.h"
+#include "dungeon_ai.h"
 #include "dungeon_entity.h"
 #include "dungeon_util.h"
 #include "code_8077274_1.h"
@@ -55,20 +56,14 @@ struct unkStruct_80928C0
 
 void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
 
-extern void SqueezedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, const char[]);
 extern s32 sub_80556BC(struct DungeonEntity *, struct DungeonEntity *, u8, struct PokemonMove *, u32, u32);
 extern u8 sub_805727C(struct DungeonEntity *, struct DungeonEntity *, s16);
 extern void sub_8078968(struct DungeonEntity *r0, struct DungeonEntity *r1);
-extern void RaiseAttackStageTarget(struct DungeonEntity *pokemon, struct DungeonEntity *target, u32, u32);
-extern void LowerDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 extern void sub_806F370(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern u32 sub_8055640(struct DungeonEntity *, struct DungeonEntity *, struct PokemonMove *, u32, u32);
-extern void NightmareStatusTarget(struct DungeonEntity *, struct DungeonEntity *, s32);
-extern void YawnedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, s32);
-extern void sub_8075C58(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 u8 sub_8057620(u32 param_1);
 extern s16 sub_8094828(u16, u8);
 
@@ -121,9 +116,9 @@ void sub_8057588(struct DungeonEntity * pokemon, u8 param_2)
     }
 }
 
-s16 sub_8057600(struct PokemonMove *param_1, s32 param_2)
+s16 sub_8057600(struct PokemonMove *move, s32 param_2)
 {
-    return sub_8094828(param_1->moveID, sub_8057620(param_2));
+    return sub_8094828(move->moveID, sub_8057620(param_2));
 }
 
 u8 sub_8057620(u32 param_1)
@@ -142,7 +137,7 @@ bool8 sub_8057634(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
     if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
         uVar3 = TRUE;
         if (sub_805727C(pokemon, target, gUnknown_80F4DB4) != 0) {
-            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, FALSE);
         }
     }
     return uVar3;
@@ -170,7 +165,7 @@ bool8 sub_80576D0(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 
 bool8 sub_80576F8(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 {
-    sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), 1);
+    sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
     return TRUE;
 }
 
@@ -182,11 +177,11 @@ bool8 sub_8057720(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 
 bool8 sub_8057748(struct DungeonEntity * pokemon,struct DungeonEntity * target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F502A[GetWeather(pokemon)], 0, 1);
+    HealTargetHP(pokemon, target, gUnknown_80F502A[GetWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
-bool8 sub_805777C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+bool8 VitalThrowMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
     VitalThrowStatusTarget(pokemon, target);
     return TRUE;
@@ -218,14 +213,14 @@ bool8 sub_8057788(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 bool32 sub_8057824(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     // Lower evasion?
-  sub_80775DC(pokemon,target,gUnknown_8106A50,1);
+  LowerAccuracyStageTarget(pokemon,target,gUnknown_8106A50,TRUE);
   return TRUE;
 }
 
 bool32 sub_805783C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     // Lower attack?
-  sub_80772C0(pokemon,target,gUnknown_8106A4C,0x80,1);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x80,TRUE);
   return TRUE;
 }
 
@@ -263,7 +258,7 @@ bool32 sub_80578FC(struct DungeonEntity *pokemon, struct DungeonEntity *target, 
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
     uVar3 = TRUE;
     if (sub_805727C(pokemon,target, gUnknown_80F4DB6) != 0) {
-      sub_80779F0(pokemon, target, 1, 0);
+      LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
   }
   return uVar3;
@@ -393,13 +388,13 @@ bool8 TormentMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *tar
 
 bool8 sub_8057BB4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_80779F0(pokemon, target, 1, 1);
+    LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
     return TRUE;
 }
 
 bool8 sub_8057BC4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    ConfuseStatusTarget(pokemon, target, 1);
+    ConfuseStatusTarget(pokemon, target, TRUE);
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2);
     return TRUE;
 }
@@ -413,7 +408,7 @@ bool8 sub_8057BEC(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
       uVar3 = TRUE;
       if (sub_805727C(pokemon,target,gUnknown_80F4E0A) != 0) {
-        CringeStatusTarget(pokemon,target,0);
+        CringeStatusTarget(pokemon,target,FALSE);
       }
     }
   }
@@ -425,7 +420,7 @@ bool8 sub_8057BEC(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
 
 bool8 sub_8057C68(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077434(pokemon, target, gUnknown_8106A4C, 0x40, 1);
+    ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x40, 1);
     return TRUE;
 }
 
@@ -437,7 +432,7 @@ bool8 sub_8057C88(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
     uVar3 = TRUE;
     if (sub_805727C(pokemon,target,gUnknown_80F4DF6) != 0) {
-      CringeStatusTarget(pokemon,target,0);
+      CringeStatusTarget(pokemon,target,FALSE);
     }
   }
   return uVar3;
@@ -472,7 +467,7 @@ bool8 sub_8057D20(struct DungeonEntity * pokemon, struct DungeonEntity * target,
   if (sub_8055640(pokemon,target,move,uVar3,param_4) != 0) {
     uVar4 = TRUE;
     if (sub_805727C(pokemon,target,gUnknown_80F4E08) != 0) {
-      SqueezedStatusTarget(pokemon,target,0x3b,0);
+      SqueezedStatusTarget(pokemon,target,0x3b,FALSE);
     }
   }
   return uVar4;

@@ -7,7 +7,7 @@
 bool8 sub_805B668(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
 bool8 sub_805B734(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 RecycleMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target);
-bool8 sub_805B7FC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
+bool8 ReflectMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
 bool8 sub_805B808(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
 bool8 sub_805B884(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 SkullBashMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);

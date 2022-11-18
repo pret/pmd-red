@@ -201,7 +201,7 @@ sub_8057ED0:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x80
-	bl sub_80772C0
+	bl ChangeAttackMultiplierTarget
 _08057F12:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -232,14 +232,14 @@ sub_8057F24:
 	str r4, [sp]
 	adds r0, r6, 0
 	movs r3, 0x40
-	bl sub_80772C0
+	bl ChangeAttackMultiplierTarget
 	ldr r0, _08057F78
 	ldr r2, [r0]
 	str r4, [sp]
 	adds r0, r6, 0
 	mov r1, r8
 	movs r3, 0x40
-	bl sub_80772C0
+	bl ChangeAttackMultiplierTarget
 	movs r0, 0xAA
 	lsls r0, 1
 	adds r5, r0
@@ -287,7 +287,7 @@ sub_8057F7C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 _08057FBA:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -645,7 +645,7 @@ sub_805825C:
 	push {lr}
 	ldr r2, _0805826C
 	ldr r2, [r2]
-	bl sub_8077540
+	bl RaiseAccuracyStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -1096,7 +1096,7 @@ sub_8058580:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 _080585BC:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -1190,7 +1190,7 @@ sub_8058638:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 _08058670:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -1491,7 +1491,7 @@ _08058898: .4byte gUnknown_8106A4C
 	thumb_func_start sub_805889C
 sub_805889C:
 	push {lr}
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -1603,7 +1603,7 @@ sub_8058930:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8077910
+	bl RaiseMovementSpeedTarget
 	ldr r0, _080589CC
 	ldr r5, [r0]
 	adds r0, r7, 0
@@ -1681,7 +1681,7 @@ sub_8058A08:
 	push {lr}
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8077910
+	bl RaiseMovementSpeedTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -1936,7 +1936,7 @@ sub_8058BF0:
 	push {lr}
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3175,7 +3175,7 @@ sub_8059528:
 	ldr r2, _0805953C
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3672,7 +3672,7 @@ sub_80598CC:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 _0805990A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3824,7 +3824,7 @@ sub_8059A18:
 	push {lr}
 	ldr r2, _08059A28
 	ldr r2, [r2]
-	bl sub_8077540
+	bl RaiseAccuracyStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4300,7 +4300,7 @@ _08059D8E:
 	thumb_func_start sub_8059D98
 sub_8059D98:
 	push {lr}
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4944,7 +4944,7 @@ sub_805A258:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 _0805A292:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -6180,7 +6180,7 @@ _0805AC08:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 	b _0805AC86
 _0805AC16:
 	ldr r0, _0805AC30
@@ -6216,7 +6216,7 @@ _0805AC50:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC60: .4byte gUnknown_8106A4C
