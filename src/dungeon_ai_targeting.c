@@ -22,12 +22,12 @@
 
 extern void ShowVisualFlags(struct DungeonEntity *r0);
 
-const u8 gUnknown_8106FB5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gUnknown_8106FBD[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gUnknown_8106FC5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gUnknown_8106FCD[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_4[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_6[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_7[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
 const u8 gTargetingData[3][2][2][2] = {
     {
@@ -100,7 +100,7 @@ bool8 sub_8070F3C(struct DungeonEntity * pokemon, struct Position *pos, s32 dire
 
     tile = GetMapTile_1(pos->x, pos->y);
 
-    if (((tile->canMoveAdjacent[terrain] & gUnknown_8106FB5[direction & DIRECTION_MASK]))) {
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_2[direction & DIRECTION_MASK]))) {
       return TRUE;
     }
   }
@@ -118,7 +118,7 @@ bool8 sub_8070F14(struct DungeonEntity * pokemon, s32 direction)
 
     tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
 
-    if (((tile->canMoveAdjacent[0] & gUnknown_8106FBD[direction & DIRECTION_MASK]))) {
+    if (((tile->canMoveAdjacent[0] & gDirectionBitMasks_3[direction & DIRECTION_MASK]))) {
       return TRUE;
     }
   }
@@ -163,7 +163,7 @@ bool8 sub_8070F80(struct DungeonEntity * pokemon, s32 direction)
 
     tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
 
-    if (((tile->canMoveAdjacent[terrain] & gUnknown_8106FC5[direction & DIRECTION_MASK]))) {
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_4[direction & DIRECTION_MASK]))) {
       return TRUE;
     }
   }
@@ -208,7 +208,7 @@ bool8 sub_8071058(struct DungeonEntity * pokemon, s32 direction)
     }
     tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
 
-    if (((tile->canMoveAdjacent[terrain] & gUnknown_8106FCD[direction & DIRECTION_MASK]))) {
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_5[direction & DIRECTION_MASK]))) {
       return TRUE;
     }
   }
@@ -254,7 +254,7 @@ bool8 CanAttackInFront(struct DungeonEntity *pokemon, s32 direction)
             }
         }
         tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-        if (tile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_2[direction & DIRECTION_MASK])
+        if (tile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_6[direction & DIRECTION_MASK])
         {
             return TRUE;
         }
@@ -318,7 +318,7 @@ bool8 CanMoveForward(struct DungeonEntity *pokemon, s32 direction, bool8 *pokemo
         }
     }
     currentTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-    if (currentTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_3[direction & DIRECTION_MASK])
+    if (currentTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_7[direction & DIRECTION_MASK])
     {
         if (frontTile->pokemon == NULL)
         {
