@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8092334.h"
 #include "pokemon.h"
+#include "exclusive_pokemon.h"
 
 struct unkStruct_203B494
 {
@@ -23,10 +24,8 @@ extern struct unkStruct_203B494 *gUnknown_203B494;
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
-void ReadExclusivePokemon(struct unkStruct_8094924 *r0);
 void ReadGameOptions(struct unkStruct_8094924 *param_1);
 void ReadPlayTime(struct unkStruct_8094924 *r0);
-void WriteExclusivePokemon(struct unkStruct_8094924 *r0);
 void WriteGameOptions(struct unkStruct_8094924 *param_1);
 void WritePlayTime(struct unkStruct_8094924 *r0);
 
@@ -87,4 +86,14 @@ u32 sub_8097D98(u8 *r0, u32 size)
     ReadExclusivePokemon(&backup);
     nullsub_102(&backup);
     return backup.unk8;
+}
+
+bool8 sub_8097DD0(s32 *param_1, s32 *param_2)
+{
+  if ((param_1[0] == param_2[0]) && (param_1[1] == param_2[1])) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
 }
