@@ -181,6 +181,7 @@ SECTIONS {
         asm/debug_menu_2.o(.text);
         src/debug_menu_1.o(.text);
         asm/code_803B050.o(.text);
+        src/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         asm/code_803C1D0.o(.text);
@@ -326,7 +327,7 @@ SECTIONS {
         src/exclusive_pokemon_1.o(.text);
         src/position_util.o(.text);
         asm/code_8098468.o(.text);
-        src/code_8098BDC.o(.text);
+        src/ground_main.o(.text);
         asm/code_8098BDC.o(.text);
         src/code_809D148.o(.text);
         asm/code_809D148.o(.text);

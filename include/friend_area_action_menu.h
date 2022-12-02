@@ -10,11 +10,11 @@ struct unkStruct_203B2BC
     u16 unkA;
     u32 itemIndex;
     struct HeldItem itemToGive;
-    struct HeldItem unk14;
+    struct HeldItem item2;
     struct PokemonStruct *unk18;
     u8 unk1C;
     u32 unk20;
-    u16 unk24;
+    u16 moveID;
     struct PokemonMove unk28[8];
     u32 unk68;
     u32 unk6C;

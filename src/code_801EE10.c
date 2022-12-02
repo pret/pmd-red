@@ -42,8 +42,8 @@ extern struct UnkTextStruct2 gUnknown_80DC9B0;
 extern struct UnkTextStruct2 gUnknown_80DC9C8;
 
 extern void sub_8013818(void *, u32, u32, u32);
-extern u8 sub_80023E4(u32);
-extern void sub_808FF20(u32 *, struct PokemonStruct *, u8);
+extern bool8 sub_80023E4(u32);
+extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
 extern s32 GetKeyPress(void *);
 extern bool8 sub_8013938(void *);
@@ -153,5 +153,5 @@ void sub_8024604(void)
   sub_8013818(gUnknown_203B2AC,3,1,gUnknown_203B2AC->unkE0);
   iVar3 = &gUnknown_203B2AC->unk4C;
   pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->unk48];
-  sub_808FF20(iVar3,pokeStruct,sub_80023E4(7));
+  sub_808FF20(iVar3,pokeStruct, sub_80023E4(7));
 }

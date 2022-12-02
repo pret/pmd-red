@@ -1,7 +1,7 @@
 struct GroundScript_ExecutePP_3
 {
     // size: 0xC
-    u32 unk0;
+    u8 *scriptPointer;
     s16 scriptType;
     s16 unk6;
     u8 unk8;
@@ -12,8 +12,8 @@ struct GroundScript_ExecutePP_1_sub
     // size: 0x60
     /* 0x0 */ s16 scriptType;
     /* 0x2 */ s16 unk2;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
+    /* 0x4 */ u8 *scriptPointer1;
+    /* 0x8 */ u8 *scriptPointer2;
     /* 0xC */ u16 unkC;
     /* 0xE */ u8 unkE;
     /* 0xF */ u8 fillF;
@@ -38,8 +38,9 @@ struct GroundScript_ExecutePP_1
     u32 unk4;
     u32 fill8;
     u32 unkC;
-    u32 fill10;
-    u8 fill18[0x24 - 0x14];
+    u16 unk10;
+    u8 unk12;
+    u8 fill18[0x24 - 0x13];
     struct GroundScript_ExecutePP_1_sub unk24;
     struct GroundScript_ExecutePP_1_sub unk84;
     u16 unkE4;

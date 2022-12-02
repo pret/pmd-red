@@ -144,7 +144,7 @@ extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern void nullsub_131(void);
 extern void sub_802ABF8(void);
 
@@ -365,7 +365,7 @@ void sub_802B3E0(void)
 
   switch(gUnknown_203B2C8->currState) {
       case 0:
-        if (sub_80023E4(0) != '\0') {
+        if (sub_80023E4(0)) {
             // Copy Team Name to buffer
             sub_80920D8(teamNameBuffer);
         }

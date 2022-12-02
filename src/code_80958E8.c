@@ -18,7 +18,7 @@ extern u8 sub_803C1D0(struct DungeonLocation *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
-extern u8 sub_803C0DC(s16);
+extern bool8 sub_803C0DC(s16);
 extern void sub_8096040(u8);
 extern void sub_80965B8(u8);
 extern void sub_8096C3C(u8);
@@ -109,14 +109,14 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
         if(data->clientSpecies != GetBaseSpecies(data->clientSpecies))
             return FALSE;
-        if(sub_803C0DC(data->clientSpecies) == 0)
+        if(!sub_803C0DC(data->clientSpecies))
             return FALSE;
 
         if(data->targetSpecies > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
         if(data->targetSpecies != GetBaseSpecies(data->targetSpecies))
             return FALSE;
-        if(sub_803C0DC(data->targetSpecies) == 0)
+        if(!sub_803C0DC(data->targetSpecies))
             return FALSE;
 
         // Item Delivery/Finding

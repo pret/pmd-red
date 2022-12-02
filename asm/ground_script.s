@@ -937,7 +937,7 @@ _0809E390:
 	movs r3, 0x2
 	ldrsh r2, [r1, r3]
 	movs r1, 0
-	bl sub_8098D1C
+	bl GroundMainGroundRequest
 _0809E3BA:
 	ldr r1, [r4]
 	adds r0, r7, 0
@@ -2175,7 +2175,7 @@ _0809EF26:
 	ldrsh r2, [r0, r1]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8098D1C
+	bl GroundMainGroundRequest
 	b _0809EAE0
 	.align 2, 0
 _0809EF38: .4byte gUnknown_81165D4
@@ -2210,7 +2210,7 @@ _0809EF70:
 	movs r2, 0x2
 	ldrsh r1, [r0, r2]
 	adds r0, r4, 0
-	bl sub_8098E18
+	bl GroundMainRescueRequest
 	mov r0, r9
 	movs r1, 0x1
 	bl sub_80A2460
@@ -3072,7 +3072,7 @@ _0809F68E:
 _0809F6C6:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8098E18
+	bl GroundMainRescueRequest
 	bl _0809EAE0
 	.align 2, 0
 _0809F6D4: .4byte gUnknown_8116684
@@ -3083,7 +3083,7 @@ _0809F6DC:
 	movs r1, 0x1
 	negs r1, r1
 	adds r0, r4, 0
-	bl sub_8098E18
+	bl GroundMainRescueRequest
 	bl _0809EAE0
 _0809F6EA:
 	mov r1, r9
@@ -8339,7 +8339,7 @@ _080A2298:
 	bl sub_8011C28
 _080A229E:
 	adds r0, r5, 0
-	bl sub_8098F00
+	bl GroundMainGameEndRequest
 	lsls r0, r5, 16
 	lsrs r0, 16
 	bl FadeOutAllMusic
