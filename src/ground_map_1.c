@@ -26,7 +26,7 @@ extern void GroundMap_GetStationScript(struct GroundScript_ExecutePP_3 *, s16, u
 
 bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, struct GroundScript_ExecutePP_3 *param_3, struct DebugLocation *unused);
 extern u8 sub_809D678(void *);
-extern void sub_809D710(u32,struct GroundScript_ExecutePP_3 *, s32);
+extern void sub_809D710(u8 *, struct GroundScript_ExecutePP_3 *, s32);
 extern u8 sub_809D968(void *, s32);
 
 void sub_80A4BE8(struct GroundScript_ExecutePP_3 *script, s16 r1)
@@ -34,17 +34,17 @@ void sub_80A4BE8(struct GroundScript_ExecutePP_3 *script, s16 r1)
     GroundMap_GetStationScript(script, r1, 0, 0);
 }
 
-void GroundMap_ExecuteEvent(s16 param_1, u32 param_2)
+void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
 {
   struct GroundScript_ExecutePP_3 script;
-  s32 iVar1;
+  s32 index_s32;
   u8 iVar2;
 
-  iVar1 = param_1;
+  index_s32 = scriptIndex;
   iVar2 = param_2;
   
-  Log(0,gUnknown_8117594,iVar1,iVar2); // "GroundMap ExecuteEvent %3d %d
-  sub_809D710(0,&script,iVar1);
+  Log(0,gUnknown_8117594,index_s32,iVar2); // "GroundMap ExecuteEvent %3d %d
+  sub_809D710(NULL, &script, index_s32);
   if (iVar2 != 0) {
     script.scriptType = 5;
   }

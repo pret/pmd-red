@@ -22,14 +22,96 @@ extern void sub_809D568(void *);
 extern u8 sub_80AC378(void);
 extern u8 sub_80AD290(void);
 extern u8 sub_80A8B74(void);
-extern void sub_809D6E4(struct GroundScript_ExecutePP_1 *, struct GroundScript_ExecutePP_3 *, s32);
+extern void sub_809D6E4(struct GroundScript_ExecutePP_1 *, struct GroundScript_ExecutePP_3 *, s32 index);
 extern u8 sub_809A750(void);
-extern u32 sub_80A2460(struct GroundScript_ExecutePP_1 *param_1, u32);
+extern u8 *sub_80A2460(struct GroundScript_ExecutePP_1 *param_1, u32);
 void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
+
+struct FunctionScript
+{
+    u32 unk0;
+    u8 *funcName;
+    u8 *script;
+};
+
+extern struct FunctionScript gFunctionScriptTable[];
+
+
+// NOTE: shift of index and load of gFunctionScriptTable is flipped
+#ifdef NONMATCHING
+void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 index)
+{
+    script->scriptPointer = gFunctionScriptTable[index].script;
+    script->scriptType = 2;
+    if (param_1 != NULL) {
+        script->unk6 = param_1->unk10;
+        script->unk8 = param_1->unk12;
+    }
+    else {
+        script->unk6 = -1;
+        script->unk8 = -1;
+    }
+}
+#else
+NAKED void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 index)
+{
+    asm_unified(
+        "\tpush {r4,lr}\n"
+	"\tadds r4, r0, 0\n"
+	"\tadds r3, r1, 0\n"
+	"\tlsls r2, 16\n"
+	"\tasrs r2, 16\n"
+	"\tldr r1, _0809D73C\n"
+	"\tlsls r0, r2, 1\n"
+	"\tadds r0, r2\n"
+	"\tlsls r0, 2\n"
+	"\tadds r1, 0x8\n"
+	"\tadds r0, r1\n"
+	"\tldr r0, [r0]\n"
+	"\tstr r0, [r3]\n"
+	"\tmovs r0, 0x2\n"
+	"\tstrh r0, [r3, 0x4]\n"
+	"\tcmp r4, 0\n"
+	"\tbeq _0809D740\n"
+	"\tldrh r0, [r4, 0x10]\n"
+	"\tstrh r0, [r3, 0x6]\n"
+	"\tldrb r0, [r4, 0x12]\n"
+	"\tb _0809D746\n"
+	"\t.align 2, 0\n"
+"_0809D73C: .4byte gFunctionScriptTable\n"
+"_0809D740:\n"
+	"\tldr r0, _0809D750\n"
+	"\tstrh r0, [r3, 0x6]\n"
+	"\tmovs r0, 0xFF\n"
+"_0809D746:\n"
+	"\tstrb r0, [r3, 0x8]\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0809D750: .4byte 0x0000ffff");
+}
+#endif
+
+bool8 sub_809D754(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
+{
+  sub_809D568(&param_1->unk24);
+  sub_809D568(&param_1->unk84);
+  return TRUE;
+}
+
+bool8 sub_809D770(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
+{
+  
+  sub_809D568(&param_1->unk24);
+  sub_809D568(&param_1->unk84);
+  param_1->unk24.unk2 = 4;
+  return TRUE;
+}
 
 bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, struct GroundScript_ExecutePP_3 *param_3, struct DebugLocation *unused)
 {
-  if ((param_3 == NULL) || (param_3->unk0 == 0)) {
+  if ((param_3 == NULL) || (param_3->scriptPointer == NULL)) {
     return FALSE;
   }
   switch(param_3->scriptType) {
@@ -77,8 +159,8 @@ _0809D84A:
   param_1->unk24.unk2 = 3;
   param_1->unk24.unkC = param_3->unk6;
   param_1->unk24.unkE = param_3->unk8;
-  param_1->unk24.unk4 = param_3->unk0;
-  param_1->unk24.unk8 = param_3->unk0;
+  param_1->unk24.scriptPointer1 = param_3->scriptPointer;
+  param_1->unk24.scriptPointer2 = param_3->scriptPointer;
   param_1->unk24.unk10 = 0;
   param_1->unk24.unk14 = 0;
 
@@ -88,11 +170,11 @@ _0809D84A:
   return TRUE;
 }
 
-bool8 sub_809D8C0(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, s16 param_3, struct DebugLocation *debug)
+bool8 sub_809D8C0(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, s16 index, struct DebugLocation *debug)
 {
   struct GroundScript_ExecutePP_3 auStack28;
   
-  sub_809D6E4(param_1,&auStack28,param_3);
+  sub_809D6E4(param_1,&auStack28,index);
   return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
@@ -103,7 +185,7 @@ u8 sub_809D8EC(struct GroundScript_ExecutePP_1 *param_1, s16 param_2)
   param_2_s32 = param_2;
   
   if ((param_2 == 0) && (sub_809A750() == 0)) {
-    param_1->unk24.unk4 = sub_80A2460(param_1,0);
+    param_1->unk24.scriptPointer1 = sub_80A2460(param_1, 0);
     return 0;
   }
   else {
