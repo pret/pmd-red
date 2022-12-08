@@ -17,7 +17,7 @@ struct Offense {
 
     u8 att[2];
     u8 def[2];
-};
+}; 
 
 struct unkPokeSubStruct_C
 {
@@ -206,7 +206,7 @@ u8 GetWalkableTiles(s16 index);
 u8 GetUnk1B(s16 index);
 bool8 GetIsMoving(s16 index);
 u8 GetUnk1D(s16 index);
-u16 GetLowKickDmg(s16 index);
+u32 GetLowKickDmg(s16 index);
 u32 GetSizeOrbDmg(s16 index);
 u8 GetFriendArea(s16 index);
 u16 GetBaseHP(s16 index);

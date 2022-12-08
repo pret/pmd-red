@@ -708,7 +708,7 @@ void sub_8079618(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8
       else if ((u8)(newStatus - 9) < 2) {
         entityData->unkFF = 2;
       }
-      if (newStatus == 1) {
+      if (newStatus == CHARGING_STATUS_BIDE) {
         entityData->chargingStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E9C, FALSE) + 1;
         entityData->unkA0 = 0;
       }

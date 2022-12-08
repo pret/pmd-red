@@ -368,7 +368,7 @@ u8 GetUnk1D(s16 index)
     return gMonsterParameters[index].unk1D;
 }
 
-u16 GetLowKickDmg(s16 index)
+u32 GetLowKickDmg(s16 index)
 {
     return gMonsterParameters[index].lowkick_dmg;
 }

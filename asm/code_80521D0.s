@@ -4651,7 +4651,7 @@ _08054CE2:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805834C
+	bl BideMoveAction
 	b _080554BA
 _08054CF0:
 	adds r0, r7, 0
@@ -4709,7 +4709,7 @@ _08054D56:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80582EC
+	bl RazorWindMoveAction
 	b _080554BA
 _08054D64:
 	adds r0, r7, 0
@@ -5572,7 +5572,7 @@ _08055414:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058DBC
+	bl PsychUpMoveAction
 	b _080554BA
 _08055422:
 	adds r0, r7, 0

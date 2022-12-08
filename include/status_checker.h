@@ -38,7 +38,7 @@ bool8 sub_805C080(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 sub_805C128(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 sub_805C138(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
 bool8 IdentifyOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target);
-u32 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
+bool8 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
 bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 ShockerOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 bool8 sub_805C208(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4);

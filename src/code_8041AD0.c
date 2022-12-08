@@ -585,7 +585,7 @@ void sub_80420C8(struct DungeonEntity *pokemon)
     sub_8041550(pokemon, 0x15, 1, 3, 2, 0);
 }
 
-void nullsub_92(void)
+void nullsub_92(struct DungeonEntity *pokemon)
 {
 }
 

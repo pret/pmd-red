@@ -1225,12 +1225,12 @@ bool8 IdentifyOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *tar
     return TRUE;
 }
 
-u32 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+bool8 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
 {
-    u32 uVar1;
+    bool8 flag;
 
-    uVar1 = sub_8055864(pokemon, target, move, gUnknown_80F4F80, param_4);
-    return ((-uVar1 | uVar1) >> 0x1f);
+    flag = sub_8055864(pokemon, target, move, gUnknown_80F4F80, param_4) != 0 ? TRUE : FALSE;
+    return flag;
 }
 
 bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
