@@ -19,10 +19,28 @@
 #include "tile_types.h"
 #include "weather.h"
 
+typedef bool8 (*MoveCallback)(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
+struct NaturePowerMove
+{
+    s16 moveID;
+    u16 unk2;
+    MoveCallback move;
+};
+
+struct NaturePowerMove gNaturePowerMoveTable[10];
+
+
 extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 
+extern u8 *gUnknown_80FC888[];
+extern u8 *gUnknown_80FC8C0[];
+extern s16 gUnknown_80F4DEA;
+extern u8 *gUnknown_80FEB88[];
+extern s16 gUnknown_80F4DE8;
+extern u8 *gUnknown_80FAD6C[];
+extern s16 gUnknown_80F4DE4;
 extern u8 *gUnknown_80FBD58[];
 extern u32 gUnknown_80F51B4[];
 extern s16 gUnknown_80F4DC0;
@@ -97,6 +115,9 @@ struct unkStruct_80928C0
 
 void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
 
+extern void sub_806ABAC(struct DungeonEntity *, struct DungeonEntity *);
+extern u8 sub_806F4A4(struct DungeonEntity *, u32);
+extern void sub_807DF38(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct Position *pos, u32, u8 moveType, s16);
 extern void nullsub_92(struct DungeonEntity *);
 extern u32 sub_8055864(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *param_3, s32 param_4, s32 param_5);
 void sub_8079E34(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 param_3);
@@ -110,7 +131,7 @@ extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern u32 sub_8055640(struct DungeonEntity *, struct DungeonEntity *, struct PokemonMove *, u32, u32);
 u8 sub_8057620(u32 param_1);
 extern s16 sub_8094828(u16, u8);
-extern u8 sub_8057308(struct DungeonEntity *, u32);
+extern bool8 sub_8057308(struct DungeonEntity *, u32);
 extern void sub_806F324(struct DungeonEntity *, s32, u32, u32);
 
 extern s16 gUnknown_80F4DB4;
@@ -177,30 +198,30 @@ u8 sub_8057620(u32 param_1)
 
 bool8 sub_8057634(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
 {
-    bool8 uVar3;
+    bool8 flag;
 
-    uVar3 = FALSE;
+    flag = FALSE;
     if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
-        uVar3 = TRUE;
+        flag = TRUE;
         if (sub_805727C(pokemon, target, gUnknown_80F4DB4)) {
             LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, FALSE);
         }
     }
-    return uVar3;
+    return flag;
 }
 
 bool8 sub_805768C(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
 {
-    bool8 iVar1;
+    bool8 flag;
 
-    iVar1 = FALSE;  
+    flag = FALSE;  
     gUnknown_202F21C++;
 
     if (sub_8055640(pokemon, target, move, gUnknown_8106A54[gUnknown_202F21C], param_4) == 0)
         gUnknown_202F220 = 1;
     else
-        iVar1 = TRUE;
-    return iVar1;
+        flag = TRUE;
+    return flag;
 }
 
 bool8 sub_80576D0(struct DungeonEntity * pokemon, struct DungeonEntity *target)
@@ -236,9 +257,9 @@ bool8 VitalThrowMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity 
 bool8 sub_8057788(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     struct MapTile *tile;
-    bool8 uVar3;
+    bool8 flag;
 
-    uVar3 = FALSE;
+    flag = FALSE;
     tile = GetMapTileForDungeonEntity_2(pokemon);
     if ((!IsTileGround(tile)) || ((tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != 1)) {
         sub_80522F4(pokemon,target,*gUnknown_80FD14C); // It can only be used on land!
@@ -251,9 +272,9 @@ bool8 sub_8057788(struct DungeonEntity * pokemon, struct DungeonEntity * target,
         else {
             sub_8079618(pokemon,pokemon,10,move,*gUnknown_80FAD4C); // $m0 burrowed underground!
         }
-        uVar3 = TRUE;
+        flag = TRUE;
     }
-    return uVar3;
+    return flag;
 }
 
 bool32 sub_8057824(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -290,24 +311,24 @@ bool32 sub_80578A4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
   return TRUE;
 }
 
-bool32 sub_80578EC(struct DungeonEntity *r0, struct DungeonEntity *r1)
+bool32 sub_80578EC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8079F20(r0, r1, 1, 0);
+    sub_8079F20(pokemon, target, 1, 0);
     return TRUE;
 }
 
 bool32 sub_80578FC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove * move, u32 param_4)
 {
-  bool32 uVar3;
+  bool32 flag;
 
-  uVar3 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
-    uVar3 = TRUE;
+    flag = TRUE;
     if (sub_805727C(pokemon,target, gUnknown_80F4DB6)) {
       LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
   }
-  return uVar3;
+  return flag;
 }
 
 bool32 sub_8057948(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -447,12 +468,12 @@ bool8 sub_8057BC4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 bool8 sub_8057BEC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove * move, u32 param_4)
 {
-  bool8 uVar3;
+  bool8 flag;
 
-  uVar3 = FALSE;
+  flag = FALSE;
   if (IsSleeping(pokemon)) {
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-      uVar3 = TRUE;
+      flag = TRUE;
       if (sub_805727C(pokemon,target,gUnknown_80F4E0A)) {
         CringeStatusTarget(pokemon,target,FALSE);
       }
@@ -461,7 +482,7 @@ bool8 sub_8057BEC(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   else {
     sub_80522F4(pokemon,target,*gUnknown_80FC734);
   }
-  return uVar3;
+  return flag;
 }
 
 bool8 sub_8057C68(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -472,16 +493,16 @@ bool8 sub_8057C68(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 bool8 sub_8057C88(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove * move, u32 param_4)
 {
-  u8 uVar3;
+  bool8 flag;
 
-  uVar3 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
-    uVar3 = TRUE;
+    flag = TRUE;
     if (sub_805727C(pokemon,target,gUnknown_80F4DF6)) {
       CringeStatusTarget(pokemon,target,FALSE);
     }
   }
-  return uVar3;
+  return flag;
 }
 
 s32 sub_8057CD0(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
@@ -501,31 +522,31 @@ s32 sub_8057CD0(struct DungeonEntity * pokemon, struct DungeonEntity * target, s
 bool8 sub_8057D20(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
 {
   u32 uVar3;
-  bool8 uVar4;
+  bool8 flag;
   u8 chargeStatus;
 
-  uVar4 = FALSE;
+  flag = FALSE;
   chargeStatus = target->entityData->chargingStatus;
   uVar3 = 0x100;
   if (chargeStatus == CHARGING_STATUS_DIVE) {
     uVar3 = 0x200;
   }
   if (sub_8055640(pokemon,target,move,uVar3,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if (sub_805727C(pokemon,target,gUnknown_80F4E08)) {
       SqueezedStatusTarget(pokemon,target,0x3b,FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
-bool8 sub_8057D7C(struct DungeonEntity * param_1, struct DungeonEntity * param_2)
+bool8 sub_8057D7C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-  LowerDefenseStageTarget(param_1, param_2, gUnknown_8106A50, 2, 1, TRUE);
+  LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 2, 1, TRUE);
   return TRUE;
 }
 
-NAKED bool8 sub_8057D9C(struct DungeonEntity * param_1, struct DungeonEntity * param_2)
+NAKED bool8 sub_8057D9C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
         asm_unified(
 	"\tpush {r4-r7,lr}\n"
@@ -616,33 +637,33 @@ bool8 sub_8057E50(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 bool8 sub_8057E6C(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
   struct DungeonEntityData *entityData;
-  bool32 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   entityData = pokemon->entityData;
   SendThawedMessage(pokemon,target);
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
-    if (sub_8057308(pokemon, 0) != 0) {
+    flag = TRUE;
+    if (sub_8057308(pokemon, 0)) {
       entityData->unk155 = 1;
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8057ED0(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4E04))
     {
         ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x80, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8057F24(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -659,17 +680,17 @@ bool8 sub_8057F24(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 bool8 sub_8057F7C(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4E02))
     {
         LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8057FCC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -753,46 +774,46 @@ bool8 GrudgeMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity * tar
 
 bool8 sub_805815C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_80797A0(pokemon, target, 0x4);
+    sub_80797A0(pokemon, target, PROTECTION_STATUS_COUNTER);
     return TRUE;
 }
 
 bool8 sub_805816C(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   SendThawedMessage(pokemon, target);
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DB8))
     {
         BurnedStatusTarget(pokemon, target, 0, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_80581D0(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   SendThawedMessage(pokemon, target);
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DBA))
     {
         BurnedStatusTarget(pokemon, target, 0, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8058234(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
     u16 uVar1;
-    uVar1 = (move->moveID == 0x13B) ? 0x7A : 0x51;
+    uVar1 = (move->moveID == MOVE_FORESIGHT) ? 0x7A : 0x51;
     ExposeStatusTarget(pokemon, target, uVar1);
     return TRUE;
 }
@@ -872,47 +893,47 @@ bool8 sub_805836C(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
 
 bool8 sub_80583D8(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DC2))
     {
         LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8058430(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DEE))
     {
         CringeStatusTarget(pokemon, target, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_8058478(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DE6))
     {
         ParalyzeStatusTarget(pokemon, target, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_80584C0(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
@@ -950,17 +971,17 @@ bool8 sub_8058548(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
 
 bool8 sub_8058580(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4DD4))
     {
         LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_80585CC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
@@ -968,7 +989,7 @@ bool8 sub_80585CC(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   bool8 flag;
   
   flag = FALSE;
-  if ((target->entityData->protectionStatus == '\x01') || (target->entityData->protectionStatus == '\x03')) {
+  if ((target->entityData->protectionStatus == PROTECTION_STATUS_REFLECT) || (target->entityData->protectionStatus == PROTECTION_STATUS_LIGHT_SCREEN)) {
     sub_80522F4(pokemon,target,*gUnknown_80FD104);
     SendProtectionEndMessage(pokemon,target);
     flag = TRUE;
@@ -980,17 +1001,17 @@ bool8 sub_80585CC(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
 
 bool8 sub_8058638(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-  bool8 uVar4;
+  bool8 flag;
   
-  uVar4 = FALSE;
+  flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
-    uVar4 = TRUE;
+    flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
         LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
   }
-  return uVar4;
+  return flag;
 }
 
 bool8 sub_805867C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
@@ -1416,4 +1437,244 @@ bool8 PsychUpMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * t
     iVar4->unkFB  = 1;
   }
   return TRUE;
+}
+
+bool8 sub_8058E5C(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  int iVar2;
+  int iVar3;
+  bool8 flag;
+  
+  flag = FALSE;
+  if ((sub_8055640(pokemon, target, move, 0x80 << 1, param_4) != 0) && (EntityExists(pokemon))) {
+    iVar2 = pokemon->entityData->maxHP;
+    if (iVar2 < 0) {
+      iVar2 = iVar2 + 7;
+    }
+    iVar3 = iVar2 >> 3;
+    if (iVar3 == 0) {
+      iVar3 = 1;
+    }
+    flag = TRUE;
+    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && sub_8057308(pokemon, 0)) {
+      sub_806F370(pokemon,pokemon,iVar3,0,0,0,0x1fd,0x14,1,0);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8058EE0(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    HealTargetHP(pokemon, target, target->entityData->maxHP / 2, 0, TRUE);
+    return TRUE;
+}
+
+bool32 sub_8058F04(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  bool32 flag;
+  struct DungeonEntityData *entityData;
+  s32 iVar3;
+  
+  entityData = target->entityData;
+  iVar3 = 1;
+  gDungeonGlobalData->unk18200 = 0xc;
+  gDungeonGlobalData->unk18204 = 0;
+  if (entityData->chargingStatus == CHARGING_STATUS_DIG) {
+    iVar3 = 2;
+  }
+  flag = sub_8055640(pokemon,target,move,iVar3 << 8,param_4);
+  if (flag != 0) {
+    flag = TRUE;
+  }
+  return flag;
+}
+
+bool8 sub_8058F58(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  bool8 flag;
+  s32 tileset;
+  struct PokemonMove natureMove;
+  
+  tileset = gDungeonGlobalData->tileset;
+  if (tileset < 0) {
+    tileset = 0;
+  }
+  if (0x4a < tileset) {
+    tileset = 0x4a;
+  }
+  InitPokemonMove(&natureMove, gNaturePowerMoveTable[tileset].moveID);
+  flag = gNaturePowerMoveTable[tileset].move(pokemon,target,&natureMove,param_4);
+  return flag;
+}
+
+bool8 sub_8058FBC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DE4))
+    {
+        ParalyzeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059004(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    sub_807DF38(pokemon, target, &target->posWorld, 1, GetMoveType(move), sub_8057600(move, param_4));
+    return TRUE;
+}
+
+bool8 sub_8059050(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    ParalyzeStatusTarget(pokemon, target, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059060(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    sub_8079618(pokemon, target, CHARGING_STATUS_CHARGE, move, *gUnknown_80FAD6C);
+    return TRUE;
+}
+
+bool8 sub_8059080(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DE8))
+    {
+        ParalyzeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_80590C8(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    MistStatusTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_80590D4(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  u8 moveType;
+  bool8 uVar5;
+  bool8 flag;
+  
+  flag = FALSE;
+  moveType = GetMoveType(move);
+
+  uVar5 = sub_806F4A4(target, moveType) != 0 ? TRUE : FALSE;
+
+  if (HasAbility(target, 0x37)) {
+    uVar5 = FALSE;
+  }
+  if (!uVar5) {
+    sub_80522F4(pokemon,target,*gUnknown_80FEB88);
+  }
+  else {
+    sub_806F370(pokemon,target,9999,1,&flag,GetMoveType(move),sub_8057600(move,param_4),0,1,1);
+    flag = flag == 0;
+  }
+  return flag;
+}
+
+bool8 sub_8059190(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DEA))
+    {
+        CringeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_80591D8(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+{
+    SafeguardStatusTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_80591E4(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  bool8 hasLiquidOoze;
+  s32 iVar3;
+  s32 iVar4;
+  bool8 flag;
+  struct DungeonEntityData *entityData;
+  
+  flag = FALSE;
+  hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
+  iVar3 = sub_8055640(pokemon,target,move,0x100,param_4);
+  if (iVar3 != 0) {
+    iVar4 = iVar3 / 2;
+    if (iVar4 < 1) {
+      iVar4 = 1;
+    }
+    if (EntityExists(pokemon)) {
+      entityData = pokemon->entityData;
+      flag = TRUE;
+      if (entityData->unkFB == 0) {
+        entityData->unkFB = 1;
+      }
+      if (sub_8057308(pokemon,0)) {
+        if (hasLiquidOoze) {
+            sub_806F324(pokemon,iVar4,0xd,0x1fa);
+        }
+        else {
+            HealTargetHP(pokemon,pokemon,iVar4,0,1);
+        }
+      }
+    }
+  }
+  return flag;
+}
+
+bool8 SkillSwapMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+{
+  u8 ability_1;
+  u8 ability_2;
+  bool8 flag;
+  u8 *puVar5;
+  u8 *puVar6;
+  struct DungeonEntityData * targetEntityData;
+  struct DungeonEntityData * pokeEntityData;
+  
+  pokeEntityData = pokemon->entityData;
+  targetEntityData = target->entityData;
+  if ((HasAbility(target, ABILITY_WONDER_GUARD)) || (HasAbility(pokemon, ABILITY_WONDER_GUARD))) {
+    sub_80522F4(pokemon,target,*gUnknown_80FC8C0);
+    flag = FALSE;
+  }
+  else
+  {
+    puVar5 = &targetEntityData->abilities[0];
+    ability_1 = *puVar5;
+    puVar6 = &targetEntityData->abilities[1];
+    ability_2 = *puVar6;
+    *puVar5 = pokeEntityData->abilities[0];
+    *puVar6 = pokeEntityData ->abilities[1];
+    pokeEntityData->abilities[0] = ability_1;
+    pokeEntityData->abilities[1] = ability_2;
+    gDungeonGlobalData->unkC = 1;
+    sub_80522F4(pokemon,target,*gUnknown_80FC888);
+    if (pokeEntityData->unkFB == 0) {
+      pokeEntityData->unkFB = 1;
+    }
+    sub_806ABAC(pokemon,pokemon);
+    sub_806ABAC(pokemon,target);
+    flag = TRUE;
+  }
+  return flag;
 }

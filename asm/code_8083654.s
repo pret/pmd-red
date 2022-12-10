@@ -1086,8 +1086,8 @@ _08083E4E:
 _08083E54: .4byte 0x000003e5
 	thumb_func_end PlaySoundEffect
 
-	thumb_func_start sub_8083E58
-sub_8083E58:
+	thumb_func_start StopSoundEffect
+StopSoundEffect:
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1101,7 +1101,7 @@ _08083E6A:
 	bx r0
 	.align 2, 0
 _08083E70: .4byte 0x000003e5
-	thumb_func_end sub_8083E58
+	thumb_func_end StopSoundEffect
 
 	thumb_func_start IsFanfareSEPlaying_2
 IsFanfareSEPlaying_2:

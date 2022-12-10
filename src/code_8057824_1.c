@@ -411,7 +411,7 @@ extern void sub_803E46C(u32);
 extern void sub_80866C4(u32 *);
 extern void sub_808692C();
 
-extern void sub_8083E58(u32);
+extern void StopSoundEffect(u32);
 extern void sub_80868F4();
 extern void sub_8086910();
 extern u32 sub_8085EC8(u32, u32, u32, u32 *, u32);
@@ -1713,7 +1713,7 @@ void MagmaCavernMidDialogue(void)
   // Qu-quake!
   DisplayDungeonDialogue(&MagmaCavernMidDialogue_3);
   sub_803E708(0x78,0x46);
-  sub_8083E58(0x1c5);
+  StopSoundEffect(0x1c5);
   sub_808682C();
   sub_80855E4(sub_8086910);
   sub_803E708(0x14,0x46);
@@ -2894,7 +2894,7 @@ void HoOhPreFightDialogue(void)
   PlaySoundEffect(0x1c5);
   sub_803E708(0xfa,70);
   HoOhDropInEffect(HoOhEntity);
-  sub_8083E58(0x1c5);
+  StopSoundEffect(0x1c5);
   sub_808682C();
   sub_80855E4(sub_8086910);
   sub_8085930(DIRECTION_NORTH);

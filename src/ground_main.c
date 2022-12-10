@@ -333,7 +333,7 @@ const char  *sub_8098FB4(void)
 }
 
 
-s32 sub_8098FCC(u32 unused)
+s16 sub_8098FCC(u32 unused)
 {
   s32 iVar4;
   s32 iVar5;
