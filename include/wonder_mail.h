@@ -2,7 +2,6 @@
 #define GUARD_WONDER_MAIL_H
 
 #include "file_system.h"
-#include "global.h"
 #include "text.h"
 #include "item.h"
 #include "pokemon.h"
