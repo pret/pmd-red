@@ -2691,7 +2691,7 @@ _0803E5A2:
 	adds r0, r1
 	movs r1, 0
 	strb r1, [r0]
-	bl sub_8083F58
+	bl UpdateDungeonMusic
 	bl sub_8011860
 	bl sub_8040B60
 	movs r0, 0

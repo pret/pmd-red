@@ -573,7 +573,7 @@ sub_80426C8:
 	cmp r4, 0x3
 	bne _080426D8
 	movs r0, 0
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 _080426D8:
 	cmp r5, 0x4
 	beq _080426F0

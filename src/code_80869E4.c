@@ -149,17 +149,17 @@ void sub_8086434(struct DungeonEntity *entity)
 void sub_8086448(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_80862DC);
 
     for(iVar1 = 0; iVar1 < 0x38; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar2 = GetCameraYPos();
-        retVar2 += (0x80 << 1);
-        sub_803F878(retVar, retVar2);
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        YPos += (0x80 << 1);
+        sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086410);
         sub_803E46C(0x46);
     }
@@ -194,17 +194,17 @@ void sub_8086494(void)
 void sub_8086500(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_8086348);
 
     for(iVar1 = 0; iVar1 < 0x48; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar += (0x80 << 1);
-        retVar2 = GetCameraYPos();
-        sub_803F878(retVar, retVar2);
+        XPos = GetCameraXPos();
+        XPos += (0x80 << 1);
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086434);
         sub_803E46C(0x46);
     }
@@ -214,17 +214,17 @@ void sub_8086500(void)
 void sub_808654C(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_8086384);
 
     for(iVar1 = 0; iVar1 < 0x78; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar += (0x80 << 1);
-        retVar2 = GetCameraYPos();
-        sub_803F878(retVar, retVar2);
+        XPos = GetCameraXPos();
+        XPos += (0x80 << 1);
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086434);
         sub_803E46C(0x46);
     }
@@ -234,16 +234,16 @@ void sub_808654C(void)
 void sub_8086598(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_80863B8);
 
     for(iVar1 = 0; iVar1 < 0x18; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar2 = GetCameraYPos();
-        sub_803F878(retVar, retVar2 + (0xffffff00));
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos + (0xffffff00));
         sub_80855E4(sub_8086410);
         sub_803E46C(0x46);
     }
@@ -253,16 +253,16 @@ void sub_8086598(void)
 void sub_80865E8(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_80863E8);
 
     for(iVar1 = 0; iVar1 < 0xC; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar2 = GetCameraYPos();
-        sub_803F878(retVar, retVar2 + (0x80 << 2));
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos + (0x80 << 2));
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
         sub_803E46C(0x46);
@@ -273,16 +273,16 @@ void sub_80865E8(void)
 void sub_808663C(void)
 {
     s32 iVar1;
-    u32 retVar;
-    u32 retVar2;
+    u32 XPos;
+    u32 YPos;
 
     sub_80855E4(sub_80863E8);
 
     for(iVar1 = 0; iVar1 < 0x10; iVar1++)
     {
-        retVar = GetCameraXPos();
-        retVar2 = GetCameraYPos();
-        sub_803F878(retVar, retVar2 + (0x80 << 2));
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos + (0x80 << 2));
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
         sub_803E46C(0x46);

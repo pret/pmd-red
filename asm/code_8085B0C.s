@@ -745,7 +745,7 @@ sub_8086124:
 sub_8086130:
 	push {lr}
 	movs r0, 0x3C
-	bl sub_8083ED8
+	bl DungeonFadeOutBGM
 	movs r0, 0x3C
 	movs r1, 0x46
 	bl sub_803E708

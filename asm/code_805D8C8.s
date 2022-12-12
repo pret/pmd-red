@@ -19743,7 +19743,7 @@ _0806780C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067834
-	bl sub_8044210
+	bl IsDungeonMaze
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806782C
@@ -23059,7 +23059,7 @@ _08069228:
 	adds r1, r4, 0
 	bl xxx_pokemon2_to_pokemonstruct_index_808DF2C
 _0806926E:
-	bl sub_8044210
+	bl IsDungeonMaze
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -23258,7 +23258,7 @@ _080693CC:
 	adds r1, r4, 0
 	bl xxx_pokemon2_to_pokemonstruct_index_808DF2C
 _0806940E:
-	bl sub_8044210
+	bl IsDungeonMaze
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0

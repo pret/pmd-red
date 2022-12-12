@@ -1,7 +1,9 @@
 #include "global.h"
+#include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_music.h"
 #include "pokemon.h"
 #include "dungeon_util_1.h"
 
@@ -13,7 +15,6 @@ extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
 extern u8 HasRecruitedMon(u32);
 extern u8 gUnknown_202E038[];
-extern void sub_8083E88(u32);
 extern void sub_8085374();
 extern void sub_80854D4();
 extern void sub_80855E4(void *);
@@ -22,14 +23,12 @@ extern void sub_8097FA8(u32);
 extern void DisplayDungeonDialogue(u8 *);
 extern void sub_806CDD4(struct DungeonEntity *, u32, u32);
 extern void sub_80869E4(struct DungeonEntity *, u32, u32, u32);
-extern void sub_8083E88(u32);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void SpriteShockEffect(struct DungeonEntity *);
 extern void SkarmoryEntry(struct DungeonEntity *);
 extern void SpriteLookAroundEffect(struct DungeonEntity *);
 extern void sub_8086A54(struct DungeonEntity *);
-extern void PlaySoundEffect(u32);
 extern void sub_808563C(void *);
 
 extern u8 gSkarmoryPreFightDialogue_1;
@@ -46,43 +45,43 @@ extern u8 gSkarmoryReFightDialogue_2;
 extern u8 gSkarmoryReFightDialogue_3;
 extern u8 gUnknown_8100D3C;
 
-void sub_8086A3C(struct DungeonEntity *param_1)
+void sub_8086A3C(struct DungeonEntity *pokemon)
 {
-    param_1->entityData->unk15C = 1;
-    param_1->entityData->unk15E = 1;
+    pokemon->entityData->unk15C = 1;
+    pokemon->entityData->unk15E = 1;
 }
 
-void sub_8086A54(struct DungeonEntity *param_1)
+void sub_8086A54(struct DungeonEntity *pokemon)
 {
-    param_1->entityData->unk15C = 1;
-    param_1->entityData->unk15E = 0;
+    pokemon->entityData->unk15C = 1;
+    pokemon->entityData->unk15E = 0;
 }
 
-void SetupBossFightHP(struct DungeonEntity *param_1, s32 newHP, u16 param_3)
+void SetupBossFightHP(struct DungeonEntity *pokemon, s32 newHP, u16 param_3)
 {
 
   // NOTE: needed two of these to match.. very dumb
-  struct DungeonEntityData *iVar1;
-  struct DungeonEntityData *iVar2;
+  struct DungeonEntityData *entityData;
+  struct DungeonEntityData *enityData_1;
 
-  iVar1 = param_1->entityData;
-  iVar2 = param_1->entityData;
+  entityData = pokemon->entityData;
+  enityData_1 = pokemon->entityData;
 
-  iVar1->isBoss = TRUE;
+  entityData->isBoss = TRUE;
 
   // BUG: Source of the Reviver Seed Boss Glitch
   //
   // Video to demonstration:
   // https://www.youtube.com/watch?v=rHu7EehrZ68
-  iVar1->originalHP = iVar1->maxHP;
+  entityData->originalHP = entityData->maxHP;
   if (newHP != 0) {
-    iVar1->maxHP = newHP;
-    iVar1->HP = newHP;
+    entityData->maxHP = newHP;
+    entityData->HP = newHP;
   }
 
   gDungeonGlobalData->unk66A = param_3;
-  SetDefaultIQSkills(iVar2->IQSkillsSelected,iVar2->isBoss);
-  LoadIQSkills(param_1);
+  SetDefaultIQSkills(enityData_1->IQSkillsSelected, enityData_1->isBoss);
+  LoadIQSkills(pokemon);
 }
 
 void sub_8086AC0(void)
@@ -111,7 +110,7 @@ void sub_8086B14(void)
   LeaderEntity = xxx_call_GetLeaderEntity();
   DiglettEntity = GetEntityFromClientType(4);
   SkarmoryEntity = GetEntityFromClientType(3);
-  sub_8083E88(0x72);
+  DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -155,19 +154,19 @@ void SkarmoryPreFightDialogue(void)
   struct DungeonEntity * DiglettEntity;
   struct DungeonEntity * SkarmoryEntity;
 
-  struct Position32 local_1c;
-  struct Position32 local_20;
+  struct Position32 pos1;
+  struct Position32 pos2;
 
   LeaderEntity = xxx_call_GetLeaderEntity(); // Player
   PartnerEntity = GetPartnerEntity(); // Partner
   DiglettEntity = GetEntityFromClientType(4); // Diglett
   SkarmoryEntity = GetEntityFromClientType(3); // Skarmory
 
-  local_1c.x = DiglettEntity->posPixel.x;
-  local_1c.y = DiglettEntity->posPixel.y + 0x3000;
+  pos1.x = DiglettEntity->posPixel.x;
+  pos1.y = DiglettEntity->posPixel.y + 0x3000;
 
-  local_20.x = SkarmoryEntity->posPixel.x;
-  local_20.y = SkarmoryEntity->posPixel.y + 0x2000;
+  pos2.x = SkarmoryEntity->posPixel.x;
+  pos2.y = SkarmoryEntity->posPixel.y + 0x2000;
 
   sub_8086448();
   sub_803E708(10,0x46);
@@ -175,16 +174,16 @@ void SkarmoryPreFightDialogue(void)
   sub_803E708(0x20,0x46);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_1);
-  ShiftCameraToPosition(&local_1c,0x40);
+  ShiftCameraToPosition(&pos1,0x40);
   sub_803E708(0x40,0x46);
-  ShiftCameraToPosition(&local_20,0x30);
+  ShiftCameraToPosition(&pos2,0x30);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_2);
   sub_803E708(10,0x46);
   DiglettEntity->entityData->unk15D = 1;
-  ShiftCameraToPosition(&local_1c,0x30);
+  ShiftCameraToPosition(&pos1,0x30);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
   sub_803E708(10,0x46);
-  ShiftCameraToPosition(&local_20,0x20);
+  ShiftCameraToPosition(&pos2,0x20);
   sub_803E708(0x20,0x46);
   SkarmoryEntry(SkarmoryEntity);
   DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
@@ -204,7 +203,7 @@ void SkarmoryPreFightDialogue(void)
   sub_80869E4(PartnerEntity,4,2,4);
   sub_80869E4(LeaderEntity,4,1,4);
   sub_803E708(10,0x46);
-  sub_8083E88(0xb);
+  DungeonStartNewBGM(MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
 }
 
@@ -212,16 +211,16 @@ void SkarmoryReFightDialogue(void)
 {
   struct DungeonEntity * LeaderEntity;
   struct DungeonEntity * SkarmoryEntity;
-  struct Position32 local_14;
+  struct Position32 pos;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
   SkarmoryEntity = GetEntityFromClientType(3);
-  local_14.x = SkarmoryEntity->posPixel.x;
-  local_14.y = SkarmoryEntity->posPixel.y + 0x2000;
+  pos.x = SkarmoryEntity->posPixel.x;
+  pos.y = SkarmoryEntity->posPixel.y + 0x2000;
   sub_8086448();
   sub_803E708(10,0x46);
   SkarmoryEntry(SkarmoryEntity);
-  ShiftCameraToPosition(&local_14,0x10);
+  ShiftCameraToPosition(&pos,0x10);
   DisplayDungeonDialogue(&gSkarmoryReFightDialogue_1);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gSkarmoryReFightDialogue_2);
@@ -230,7 +229,7 @@ void SkarmoryReFightDialogue(void)
   DisplayDungeonDialogue(&gSkarmoryReFightDialogue_3);
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&LeaderEntity->posPixel,0x10);
-  sub_8083E88(0xb);
+  DungeonStartNewBGM(MUS_BOSS_BATTLE);
 }
 
 void sub_8086E40(void)
@@ -255,7 +254,7 @@ void sub_8086E9C(void)
   struct DungeonEntity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeaderEntity();
-  sub_8083E88(0x72);
+  DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);

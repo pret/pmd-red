@@ -49,9 +49,9 @@ bool8 IsFixedDungeon()
     return FALSE;
 }
 
-bool8 sub_8044210(void)
+bool8 IsDungeonMaze(void)
 {
-    if( (u8)(gDungeonGlobalData->unk644 - 0x4B) < 0x17)
+    if( (u8)(gDungeonGlobalData->dungeonLocation.dungeonIndex - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE)
         return TRUE;
     else
         return FALSE;

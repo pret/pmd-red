@@ -695,7 +695,7 @@ _0804300C:
 	ldr r3, _08043134
 	adds r0, r3
 	strb r1, [r0]
-	bl sub_8083F34
+	bl StopDungeonBGM
 	bl sub_803D4AC
 	bl sub_804513C
 	bl sub_8043CD8
@@ -1231,7 +1231,7 @@ _0804351C:
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	bl sub_80847D4
 _08043544:
 	bl sub_8049840
@@ -1597,7 +1597,7 @@ _0804384A:
 	cmp r0, 0x1B
 	bne _08043896
 	movs r0, 0x3C
-	bl sub_8083ED8
+	bl DungeonFadeOutBGM
 _08043896:
 	movs r0, 0x4
 	movs r1, 0x4F

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_global_data.h"
+#include "dungeon_music.h"
 
 extern void SkarmoryPreFightDialogue();
 extern void SkarmoryReFightDialogue();
@@ -86,7 +87,6 @@ extern void sub_808C1A4(u32,u8,u8);
 extern void sub_808C414(u32,u8,u8);
 extern void nullsub_100(u32,u8,u8);
 extern void sub_808C948(struct DungeonEntity *,u8);
-extern void sub_8083E88(u32);
 
 extern void sub_808AFB0(u8);
 extern void sub_808B030(u8);
@@ -654,7 +654,7 @@ void sub_8084E00(struct DungeonEntity *param_1,char param_2,char param_3)
             break;
     }
     if ((param_3 == '\0') && (gDungeonGlobalData->unk2 != '\0')) {
-      sub_8083E88(999);
+      DungeonStartNewBGM(999);
     }
   }
 }

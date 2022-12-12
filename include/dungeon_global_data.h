@@ -21,6 +21,38 @@ struct DungeonGlobalData_sub
     u8 unk2;
 };
 
+struct unkDungeonGlobal_unk1CE98_sub
+{
+    /* 0x0 */ u8 buffer1[0xA];
+    /* 0xA */ u8 buffer2[0xA];
+    /* 0x14 */ s16 unk14;
+    /* 0x16 */ u8 fill16[0x2];;
+    /* 0x18 */ struct DungeonLocation dungeonLocation;
+    /* 0x1C */ struct ItemSlot heldItem;
+    /* 0x20 */ u32 expPoints;
+    /* 0x24 */ s16 maxHP;
+    /* 0x26 */ u8 attack;
+    /* 0x27 */ u8 specialAttack;
+    /* 0x28 */ u8 defense;
+    /* 0x29 */ u8 specialDefense;
+    /* 0x2A */ u8 level;
+    /* 0x2B */ u8 attBoost;
+    /* 0x2C */ u8 spAttBoost;
+    /* 0x2D */ u8 defBoost;
+    /* 0x2E */ u8 spDefBoost;
+    u8 unk4; // speedBoost?
+};
+
+struct DungeonMusicPlayer
+{
+    u32 state;
+    u32 fadeOutSpeed;
+    u16 fadeInSpeed;
+    u16 songIndex;
+    u16 pastSongIndex;
+    u16 queuedSongIndex;
+};
+
 struct DungeonGlobalData
 {
     u8 unk0;
@@ -49,9 +81,8 @@ struct DungeonGlobalData
     u8 fill17A[0x17C - 0x17A];
     struct DungeonGlobalData_sub unk17C[0x100];
     /* 0x57C */ u8 fill57C[0x644 - 0x57c];
-    /* 0x644 */ u8 unk644;
-    /* 0x645 */ u8 floorNumber;
-    u8 fill646[0x654 - 0x646];
+    /* 0x644 */ struct DungeonLocation dungeonLocation;
+    u8 fill646[0x654 - 0x648];
     u8 unk654;
     u8 fill655[0x65C - 0x655];
     u8 unk65C;
@@ -64,7 +95,8 @@ struct DungeonGlobalData
     u8 unk66C;
     u8 unk66D;
     /* 0x66E */ u8 unk66E;
-    u8 fill66F[0x671 - 0x66F];
+    u8 unk66F;
+    u8 unk670;
     /* 0x671 */ bool8 monsterHouseActive;
     /* 0x672 */ u8 unk672;
     u8 unk673;
@@ -75,7 +107,9 @@ struct DungeonGlobalData
     u8 unk678;
     u8 unk679[0x68A - 0x679];
     /* 0x68A */ u8 unk68A;
-    u8 fill68B[0x363C - 0x68B];
+    u8 fill68B[0x699 - 0x68B];
+    u8 unk699;   
+    u8 fill69A[0x363C - 0x69A];
     /* 0x363C */ u8 expYieldRankings[NUM_SPECIES];
     u8 fill37E3[0x37F4 - 0x37D9];
     /* 0x37F4 */ s32 unk37F4;
@@ -155,6 +189,10 @@ struct DungeonGlobalData
     u8 unk18217;
     u8 fill18218[0x1C578 - 0x18218];
     u8 unk1C578;
+    u8 fill1C579[0x1CE98 - 0x1C579];
+    /* 0x1CE98 */ struct unkDungeonGlobal_unk1CE98_sub unk1CE98;
+    u32 unk1CEC8;
+    /* 0x1CECC */ struct DungeonMusicPlayer musPlayer;
 };
 
 #endif

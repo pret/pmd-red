@@ -86,7 +86,7 @@ _0808427C:
 _08084290:
 	movs r0, 0x36
 	bl sub_803E668
-	bl sub_8083F58
+	bl UpdateDungeonMusic
 	ldrh r1, [r4, 0xA]
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
