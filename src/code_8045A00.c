@@ -57,18 +57,18 @@ s32 GetTeamMemberEntityIndex(struct DungeonEntity *pokemon)
   return -1;
 }
 
-void SetMessageArgument(char *buffer, struct DungeonEntity *pokemon, u32 param_3)
+void SetMessageArgument(char *buffer, struct DungeonEntity *entity, u32 param_3)
 {
-  switch(GetEntityType(pokemon))
+  switch(GetEntityType(entity))
   {
     case ENTITY_POKEMON:
-        SetMessageArgument_2(buffer, pokemon->entityData, param_3);
+        SetMessageArgument_2(buffer, entity->entityData, param_3);
         break;
     case ENTITY_ITEM:
-        sub_8045BF8(buffer, GetItemData_1(pokemon));
+        sub_8045BF8(buffer, GetItemData_1(entity));
         break;
     case ENTITY_TRAP:
-        GetTrapName(buffer, *((u8 *)GetTrapData_1(pokemon)));
+        GetTrapName(buffer, *((u8 *)GetTrapData_1(entity)));
         break;
     default:
         strcpy(buffer, *gUnknown_80FE6F4);

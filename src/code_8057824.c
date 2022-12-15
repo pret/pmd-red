@@ -224,7 +224,7 @@ bool8 sub_805768C(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
     return flag;
 }
 
-bool8 sub_80576D0(struct DungeonEntity * pokemon, struct DungeonEntity *target)
+bool8 YawnMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 {
     YawnedStatusTarget(pokemon, target, CalculateStatusTurns(target,gUnknown_80F4F28,TRUE) + 1);
     return TRUE;
@@ -236,7 +236,7 @@ bool8 sub_80576F8(struct DungeonEntity * pokemon, struct DungeonEntity *target)
     return TRUE;
 }
 
-bool8 sub_8057720(struct DungeonEntity * pokemon, struct DungeonEntity *target)
+bool8 NightmareMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 {
     NightmareStatusTarget(pokemon, target, CalculateStatusTurns(target,gUnknown_80F4E78,TRUE));
     return TRUE;
@@ -254,7 +254,7 @@ bool8 VitalThrowMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity 
     return TRUE;
 }
 
-bool8 sub_8057788(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
+bool8 DigMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     struct MapTile *tile;
     bool8 flag;
@@ -279,14 +279,12 @@ bool8 sub_8057788(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool32 sub_8057824(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    // Lower evasion?
   LowerAccuracyStageTarget(pokemon,target,gUnknown_8106A50,TRUE);
   return TRUE;
 }
 
 bool32 sub_805783C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    // Lower attack?
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x80,TRUE);
   return TRUE;
 }
@@ -466,7 +464,7 @@ bool8 sub_8057BC4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return TRUE;
 }
 
-bool8 sub_8057BEC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove * move, u32 param_4)
+bool8 SnoreMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove * move, u32 param_4)
 {
   bool8 flag;
 
@@ -519,7 +517,7 @@ s32 sub_8057CD0(struct DungeonEntity * pokemon, struct DungeonEntity * target, s
   return iVar2;
 }
 
-bool8 sub_8057D20(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
+bool8 WhirlpoolMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
 {
   u32 uVar3;
   bool8 flag;
@@ -621,7 +619,7 @@ bool8 FocusEnergyMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity
     return TRUE;
 }
 
-bool8 sub_8057E28(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 SmokescreenMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     WhifferStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4EDC, TRUE));
     return TRUE;
@@ -1286,7 +1284,7 @@ bool8 sub_8058B84(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   return flag;
 }
 
-bool8 sub_8058BE0(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+bool8 EndureMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
     EndureStatusTarget(pokemon, pokemon);
     return TRUE;
@@ -1489,7 +1487,7 @@ bool32 sub_8058F04(struct DungeonEntity *pokemon, struct DungeonEntity *target, 
   return flag;
 }
 
-bool8 sub_8058F58(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+bool8 NaturePowerMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
 {
   bool8 flag;
   s32 tileset;
@@ -1555,7 +1553,7 @@ bool8 sub_8059080(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   return flag;
 }
 
-bool8 sub_80590C8(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+bool8 MistMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
     MistStatusTarget(pokemon, target);
     return TRUE;
@@ -1572,7 +1570,7 @@ bool8 sub_80590D4(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
 
   uVar5 = sub_806F4A4(target, moveType) != 0 ? TRUE : FALSE;
 
-  if (HasAbility(target, 0x37)) {
+  if (HasAbility(target, ABILITY_LEVITATE)) {
     uVar5 = FALSE;
   }
   if (!uVar5) {
@@ -1600,7 +1598,7 @@ bool8 sub_8059190(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   return flag;
 }
 
-bool8 sub_80591D8(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+bool8 SafeguardMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
     SafeguardStatusTarget(pokemon, target);
     return TRUE;

@@ -3882,7 +3882,7 @@ _0805460A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057D20
+	bl WhirlpoolMoveAction
 	bl _080554BA
 _0805461A:
 	adds r0, r7, 0
@@ -4161,7 +4161,7 @@ _08054888:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80576D0
+	bl YawnMoveAction
 	bl _080554BA
 _08054898:
 	adds r0, r7, 0
@@ -4539,14 +4539,14 @@ _08054BE8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80591D8
+	bl SafeguardMoveAction
 	bl _080554BA
 _08054BF8:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80590C8
+	bl MistMoveAction
 	bl _080554BA
 _08054C08:
 	adds r0, r7, 0
@@ -4730,7 +4730,7 @@ _08054D80:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057720
+	bl NightmareMoveAction
 	b _080554BA
 _08054D8E:
 	adds r0, r7, 0
@@ -5038,7 +5038,7 @@ _08054FE8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057788
+	bl DigMoveAction
 	b _080554BA
 _08054FF6:
 	adds r0, r7, 0
@@ -5215,7 +5215,7 @@ _0805514A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057E28
+	bl SmokescreenMoveAction
 	b _080554BA
 _08055158:
 	adds r0, r7, 0
@@ -5334,7 +5334,7 @@ _08055238:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058BE0
+	bl EndureMoveAction
 	b _080554BA
 _08055246:
 	adds r0, r7, 0
@@ -5488,7 +5488,7 @@ _0805536C:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058F58
+	bl NaturePowerMoveAction
 	b _080554BA
 _0805537A:
 	adds r0, r7, 0
@@ -5579,7 +5579,7 @@ _08055422:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057BEC
+	bl SnoreMoveAction
 	b _080554BA
 _08055430:
 	adds r0, r7, 0
