@@ -17,7 +17,7 @@ struct Offense {
 
     u8 att[2];
     u8 def[2];
-};
+}; 
 
 struct unkPokeSubStruct_C
 {
@@ -31,7 +31,7 @@ struct PokemonStruct
     /* 0x0 */ u16 unk0; // recruited??
     /* 0x1 */ bool8 isLeader;
     /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
-    /* 0x4 */ struct DungeonLocation unk4;
+    /* 0x4 */ struct DungeonLocation dungeonLocation;
     /* 0x8 */ s16 speciesNum; // species #
     /* 0xC */ struct unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
@@ -69,27 +69,27 @@ struct unkStruct_8094184
 struct PokemonStruct2
 {
     // size 0x68
-    u16 unk0;  // corresponds to unk0 inPokemonStruct
-    bool8 isLeader;   // unk2
-    u8 unkHasNextStage;   // unk3
-    struct DungeonLocation unk4;  // unk4
-    u16 IQ;    // IQ (other offset)
-    u16 unkA;
-    u16 unkC;
-    s16 speciesNum;  // speciesNum (other offset)
-    u16 unk10;  // pokeHP
-    u16 unk12;  // pokeHP
-    struct Offense offense;  // offense (other offset)
-    u32 unk18;  // unk1C
-    struct unkStruct_8094184 moves;
-    /* 40 */ struct ItemSlot itemSlot;  // heldItem
-    u32 unk44;  // some struct
-    u32 unk48;  // some struct (same type as 44)
-    u32 IQSkills;  // unk20
-    u8 unk50;   // unk24
-    u8 fill51[3];
-    struct unkStruct_808E6F4 unk54;
-    u8 name[POKEMON_NAME_LENGTH];  // name (other offset)
+    /* 0x0 */ u16 unk0;  // corresponds to unk0 inPokemonStruct
+    /* 0x2 */ bool8 isLeader;   // unk2
+    /* 0x3 */ u8 unkHasNextStage;   // unk3
+    /* 0x4 */ struct DungeonLocation dungeonLocation;  // unk4
+    /* 0x8 */ u16 IQ;    // IQ (other offset)
+    /* 0xA */ u16 unkA;
+    /* 0xC */ u16 unkC;
+    /* 0xE */ s16 speciesNum;  // speciesNum (other offset)
+    /* 0x10 */ u16 unk10;  // pokeHP
+    /* 0x12 */ u16 unk12;  // pokeHP
+    /* 0x14 */ struct Offense offense;  // offense (other offset)
+    /* 0x18 */ u32 unk18;  // unk1C
+    /* 0x1C */ struct unkStruct_8094184 moves;
+    /* 0x40 */ struct ItemSlot itemSlot;  // heldItem
+    /* 0x44 */ u32 unk44;  // some struct
+    /* 0x48 */ u32 unk48;  // some struct (same type as 44)
+    /* 0x4C */ u32 IQSkills;  // unk20
+    /* 0x50 */ u8 unk50;   // unk24
+    /* 0x51 */ u8 fill51[3];
+    /* 0x54 */ struct unkStruct_808E6F4 unk54;
+    /* 0x58 */ u8 name[POKEMON_NAME_LENGTH];  // name (other offset)
 };
 
 struct unkStruct_203B45C
@@ -206,7 +206,7 @@ u8 GetWalkableTiles(s16 index);
 u8 GetUnk1B(s16 index);
 bool8 GetIsMoving(s16 index);
 u8 GetUnk1D(s16 index);
-u16 GetLowKickDmg(s16 index);
+u32 GetLowKickDmg(s16 index);
 u32 GetSizeOrbDmg(s16 index);
 u8 GetFriendArea(s16 index);
 u16 GetBaseHP(s16 index);

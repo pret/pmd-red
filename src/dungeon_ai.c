@@ -5,17 +5,23 @@
 #include "constants/dungeon_action.h"
 #include "constants/direction.h"
 #include "constants/iq_skill.h"
+#include "constants/item.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
+#include "constants/type.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
+#include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities_1.h"
 #include "dungeon_global_data.h"
+#include "dungeon_items.h"
 #include "dungeon_leader.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -25,27 +31,18 @@
 #include "pokemon.h"
 #include "status_checks.h"
 #include "targeting.h"
+#include "tile_types.h"
 
 extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
-extern u8 *gUnknown_80FB380[];
-extern u8 *gUnknown_80FB384[];
-extern u8 *gUnknown_80FB338[];
-extern u8 *gUnknown_80FB318[];
-extern u8 *gUnknown_80FB35C[];
 
-extern void DungeonEntityUpdateStatusSprites(struct DungeonEntity *);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(struct DungeonEntity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
-extern u8 sub_8075CFC(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void sub_8041AF4(struct DungeonEntity *);
-extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, u8 *);
-extern void sub_806CE68(struct DungeonEntity *, s32);
 
 u32 sub_8075818(struct DungeonEntity *entity)
 {
@@ -162,7 +159,7 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
     }
 }
 
-void DecideAction(struct DungeonEntity *pokemon)
+void DecideAction(struct DungeonEntity *pokemon, u32 unused)
 {
     struct DungeonEntityData *pokemonData = pokemon->entityData;
     if (pokemonData->flags & MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED)
@@ -280,80 +277,4 @@ void DecideAction(struct DungeonEntity *pokemon)
             }
         }
     }
-}
-
-void sub_8075BA4(struct DungeonEntity *param_1,char param_2)
-{
-  struct DungeonEntityData * iVar2 = param_1->entityData;
-
-  if ((param_2 != '\0') && (iVar2->volatileStatus == VOLATILE_STATUS_COWERING)) {
-      iVar2->action.facingDir = (iVar2->action.facingDir + 4) & DIRECTION_MASK;
-      TargetTileInFront(param_1);
-  }
-  else if (iVar2->volatileStatus == VOLATILE_STATUS_CONFUSED) {
-      iVar2->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-      TargetTileInFront(param_1);
-  }
-}
-
-u8 sub_8075BF4(struct DungeonEntity * pokemon, s32 sleepTurns)
-{
-  struct DungeonEntityData *entityData;
-  u32 uVar4;
-
-  uVar4 = 0;
-  if (!EntityExists(pokemon)){
-    return uVar4;
-  }
-  else
-  {
-    entityData = pokemon->entityData;
-
-    if(entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE && entityData->sleepStatus != SLEEP_STATUS_SLEEP)
-    {
-        entityData->sleepStatus = SLEEP_STATUS_SLEEP;
-        if ((sleepTurns != 0x7f) && HasAbility(pokemon, ABILITY_EARLY_BIRD) &&
-            (sleepTurns = sleepTurns / 2, sleepTurns < 1)) {
-            sleepTurns = 1;
-        }
-        entityData->sleepStatusTurnsLeft = sleepTurns;
-    }
-    else if(entityData->sleepStatus == SLEEP_STATUS_SLEEP)
-        uVar4 = 1;
-    else if(entityData->sleepStatus == SLEEP_STATUS_NIGHTMARE)
-        uVar4 = 2;
-    DungeonEntityUpdateStatusSprites(pokemon);
-  }
-  return uVar4;
-}
-
-void sub_8075C58(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 param_3, u8 param_4)
-{
-  u8 sleepStatus;
-  u8 cVar2;
-
-
-  if (sub_8075CFC(pokemon,target,1,param_4) == '\0') {
-    sleepStatus = target->entityData->sleepStatus;
-    if (sleepStatus == SLEEP_STATUS_SLEEPLESS) {
-      if (param_4)
-        sub_80522F4(pokemon,target,*gUnknown_80FB380);
-    }
-    else if (sleepStatus == SLEEP_STATUS_NAPPING) {
-      if (param_4)
-        sub_80522F4(pokemon,target,*gUnknown_80FB384);
-    }
-    else {
-      sub_8041AF4(target);
-      cVar2 = sub_8075BF4(target,param_3);
-      sub_806CE68(target,8);
-
-      if (cVar2 == 1)
-        sub_80522F4(pokemon,target,*gUnknown_80FB338);
-      else if (cVar2 == 2)
-        sub_80522F4(pokemon,target,*gUnknown_80FB35C);
-      else
-        sub_80522F4(pokemon,target,*gUnknown_80FB318);
-    }
-  }
 }

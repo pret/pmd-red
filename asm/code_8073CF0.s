@@ -978,7 +978,7 @@ _080744D8:
 	adds r1, r5, 0
 	movs r2, 0x7F
 	movs r3, 0
-	bl sub_8077910
+	bl RaiseMovementSpeedTarget
 _0807450C:
 	mov r0, r8
 	adds r0, 0xA8

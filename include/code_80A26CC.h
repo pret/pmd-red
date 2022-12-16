@@ -6,7 +6,7 @@ struct unkStruct_80A2608
     /* 0x6 */ u16 unk6;
     /* 0x8 */ u16 unk8;
     /* 0xA */ u16 unkA;
-    /* 0xC */ u8 unkC;
+    /* 0xC */ u8 dungeonIndex;
     /* 0xD */ u8 unkD;
     /* 0xE */ s16 unkE;
     /* 0x10 */ u8 unk10;

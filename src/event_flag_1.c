@@ -254,7 +254,7 @@ void sub_8001D88(void)
         sub_80018D8(0,0x28,2);
       }
       else {
-        if ((sub_8001D08(4,0,0)) && (sub_8001D44(3,0xf,3) != 0)) {
+        if ((sub_8001D08(4,0,0)) && (sub_8001D44(3,0xf,3))) {
           ScenarioCalc(4,0x1d,1);
         }
       }
@@ -299,7 +299,7 @@ void sub_8001D88(void)
           ScenarioCalc(9,0x2e,1);
         }
       }
-      if (sub_8001CC4(9,0x30,0) == 0) {
+      if (!sub_8001CC4(9,0x30,0)) {
         if ((sub_8001D08(5,0x22,0)) && HasRecruitedMon(SPECIES_ARTICUNO) && HasRecruitedMon(SPECIES_ZAPDOS) && HasRecruitedMon(SPECIES_MOLTRES)) {
           ScenarioCalc(5,0x22,1);
         }
@@ -314,12 +314,12 @@ void sub_8001D88(void)
           sub_80973A8(0x29,1);
         }
       }
-      if (sub_8001CC4(5,0x22,0) == 0) {
+      if (!sub_8001CC4(5,0x22,0)) {
         if (sub_8001D08(10,0,0)) {
           ScenarioCalc(10,0x31,1);
           sub_809733C(0x1b,1);
         }
-        if ((sub_8001D08(0xc,0,0)) && (sub_8001CC4(0xb,0x34,0) == 0)) {
+        if ((sub_8001D08(0xc,0,0)) && (!sub_8001CC4(0xb,0x34,0))) {
           ScenarioCalc(0xc,0x35,1);
         }
       }
@@ -333,9 +333,9 @@ void sub_8001D88(void)
   }
 }
 
-u32 _FlagCalc(s32 param_1, s32 param_2, u32 param_3)
+u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
 { 
-  switch(param_3) {
+  switch(operation) {
     case 0:
         return param_2;
     case 1:
@@ -361,13 +361,13 @@ u32 _FlagCalc(s32 param_1, s32 param_2, u32 param_3)
     case 0xb:
         return OtherRandomCapped(param_2);
     default:
-        FatalError(&gUnknown_80B7318,gUnknown_80B7324, param_3); // event flag expansion error %d
+        FatalError(&gUnknown_80B7318,gUnknown_80B7324, operation); // event flag expansion error %d
   }
 }
 
-u8 _FlagJudge(u32 param_1, u32 param_2, u32 param_3)
+u8 _FlagJudge(u32 param_1, u32 param_2, u32 operation)
 {
-  switch(param_3) {
+  switch(operation) {
       case 0:
         return 1;
       case 1:
@@ -391,16 +391,16 @@ u8 _FlagJudge(u32 param_1, u32 param_2, u32 param_3)
       case 10:
         return (int)param_1 >> (param_2) & 1;
       default:
-        FatalError(&gUnknown_80B7350,gUnknown_80B735C, param_3); // event flag rule error %d
+        FatalError(&gUnknown_80B7350,gUnknown_80B735C, operation); // event flag rule error %d
   }
 }
 
-u32 FlagCalc(u32 r0, u32 r1, u32 r2)
+u32 FlagCalc(u32 r0, u32 r1, u32 operation)
 {
-    return _FlagCalc(r0, r1, r2);
+    return _FlagCalc(r0, r1, operation);
 }
 
-void sub_800226C(u32 param_1, s16 param_2, s32 param_3, u32 param_4)
+void sub_800226C(u32 param_1, s16 param_2, s32 param_3, u32 operation)
 {
   u32 uVar1;
   u32 uVar3;
@@ -408,12 +408,12 @@ void sub_800226C(u32 param_1, s16 param_2, s32 param_3, u32 param_4)
   s32 param_2_s32 = param_2;
 
   
-  uVar1 = sub_8001658(param_1,param_2_s32  );
-  uVar3 = _FlagCalc(uVar1,param_3,param_4);
+  uVar1 = sub_8001658(param_1,param_2_s32);
+  uVar3 = _FlagCalc(uVar1,param_3,operation);
   sub_80018D8(param_1,param_2_s32,uVar3);
 }
 
-void sub_80022A0(u32 param_1, s16 param_2, s16 param_3, u32 param_4)
+void sub_80022A0(u32 param_1, s16 param_2, s16 param_3, u32 operation)
 {
   u32 uVar1;
   u32 uVar2;
@@ -425,24 +425,24 @@ void sub_80022A0(u32 param_1, s16 param_2, s16 param_3, u32 param_4)
   
   uVar1 = sub_8001658(param_1,param_2_s32);
   uVar2 = sub_8001658(param_1,param_3_s32);
-  uVar3 = _FlagCalc(uVar1,uVar2,param_4);
+  uVar3 = _FlagCalc(uVar1,uVar2,operation);
   sub_80018D8(param_1,param_2_s32,uVar3);
 }
 
-u8 FlagJudge(u32 r0, u32 r1, u32 r2)
+u8 FlagJudge(u32 r0, u32 r1, u32 operation)
 {
-    return _FlagJudge(r0, r1, r2);
+    return _FlagJudge(r0, r1, operation);
 }
 
-u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 param_4)
+u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
 {
   u32 uVar1;
   
   uVar1 = sub_8001658(param_1, param_2);
-  return _FlagJudge(uVar1,param_3,param_4);
+  return _FlagJudge(uVar1,param_3,operation);
 }
 
-u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 param_4)
+u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
 {
   u32 uVar1;
   u32 uVar2;
@@ -452,7 +452,7 @@ u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 param_4)
   
   uVar1 = sub_8001658(param_1,param_2_s32);
   uVar2 = sub_8001658(param_1,param_3_s32);
-  return _FlagJudge(uVar1,uVar2,param_4);
+  return _FlagJudge(uVar1,uVar2,operation);
 }
 
 s32 sub_8002354(u32 param_1)
@@ -500,7 +500,7 @@ u8 *sub_80023C4(u32 param_1)
   }
 }
 
-u8 sub_80023E4(u32 param_1)
+bool8 sub_80023E4(u32 param_1)
 {
   switch(param_1) {
     case 0:
@@ -564,6 +564,6 @@ u8 sub_80023E4(u32 param_1)
     case 0x1d:
         return HasCompletedAllMazes();
     default:
-        return 0;
+        return FALSE;
   }
 }

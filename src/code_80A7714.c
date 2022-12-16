@@ -48,7 +48,7 @@ void sub_80A7784(void)
     }
 }
 
-u8 sub_80A77A0(s16 r0, u32 r1)
+u8 sub_80A77A0(s16 r0)
 {
     s32 temp;
     s32 temp2;

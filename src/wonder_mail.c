@@ -779,9 +779,9 @@ void sub_8028348(void)
 }
 
 
-void sub_8028B04(u32 r0)
+void sub_8028B04(u32 state)
 {
-    gUnknown_203B2C0->state = r0;
+    gUnknown_203B2C0->state = state;
     nullsub_130();
     sub_8028348();
 }

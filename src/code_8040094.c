@@ -4,6 +4,7 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
+#include "dungeon_music.h"
 #include "file_system.h"
 #include "play_time.h"
 
@@ -18,7 +19,6 @@ extern void sub_80060EC(void);
 extern void sub_800CB20(void);
 extern void LoadBufferedInputs(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_8083F58(void);
 extern void sub_8011860(void);
 
 extern void sub_803F580(u32);
@@ -59,7 +59,7 @@ void sub_8040094(u8 r0)
     sub_800CB20();
     LoadBufferedInputs();
     xxx_call_update_bg_sound_input();
-    sub_8083F58();
+    UpdateDungeonMusic();
     sub_8011860();
 }
 

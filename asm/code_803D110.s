@@ -391,7 +391,7 @@ _0803D3C0:
 	bl xxx_init_struct_8094924_restore_809485C
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_80971EC
+	bl RestoreWonderMail
 	adds r0, r4, 0
 	bl nullsub_102
 	movs r0, 0x1
@@ -440,7 +440,7 @@ _0803D436:
 	bl xxx_init_struct_8094924_save_809486C
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8097270
+	bl SaveWonderMail
 	adds r0, r4, 0
 	bl nullsub_102
 	movs r2, 0x1
@@ -2691,7 +2691,7 @@ _0803E5A2:
 	adds r0, r1
 	movs r1, 0
 	strb r1, [r0]
-	bl sub_8083F58
+	bl UpdateDungeonMusic
 	bl sub_8011860
 	bl sub_8040B60
 	movs r0, 0
@@ -3128,7 +3128,7 @@ _0803E96A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803E9A4: .4byte gUnknown_202EE88
+_0803E9A4: .4byte gDungeonPaletteFile
 _0803E9A8: .4byte gUnknown_80F62AC
 _0803E9AC: .4byte gUnknown_202EDC8
 _0803E9B0: .4byte gDungeonGlobalData
@@ -3269,7 +3269,7 @@ _0803EA92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803EACC: .4byte gUnknown_202EE88
+_0803EACC: .4byte gDungeonPaletteFile
 _0803EAD0: .4byte gUnknown_80F62AC
 _0803EAD4: .4byte gUnknown_202EDC8
 _0803EAD8: .4byte gDungeonGlobalData

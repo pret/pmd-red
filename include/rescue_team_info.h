@@ -17,7 +17,7 @@ struct RescueTeamData
 {
     u8 teamName[TEAM_NAME_LENGTH];
     s32 teamRankPts;
-    u8 unk10;
+    bool8 isTeamRenamed;
 };
 
 extern struct RescueTeamData *gRescueTeamInfoRef;
@@ -34,7 +34,7 @@ void SetTeamRankPoints(s32 newPts);
 void AddToTeamRankPts(s32 newPts);
 u8 GetRescueTeamRank(void);
 const u8 *GetTeamRankString(u8 index);
-u8 sub_80921B8(void);
+u8 GetIsTeamRenamed(void);
 u32 SaveRescueTeamInfo(u8 *param_1,u32 param_2);
 u32 ReadRescueTeamInfo(u8 *param_1, u32 param_2);
 

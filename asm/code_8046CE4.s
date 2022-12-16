@@ -1652,7 +1652,7 @@ _0804802E:
 _08048038:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8048400
+	bl XEyeSeedAction
 	b _080482B4
 _08048042:
 	adds r0, r4, 0

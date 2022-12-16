@@ -25,3 +25,8 @@ struct DungeonEntity* GetLeaderEntity()
     }
     return leader;
 }
+
+struct DungeonEntityData* GetLeaderEntityData(void)
+{
+    return GetLeaderEntity()->entityData;
+}

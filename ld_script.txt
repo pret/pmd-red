@@ -116,6 +116,7 @@ SECTIONS {
         asm/gulpin_shop.o(.text);
         src/gulpin_shop_1.o(.text);
         asm/code_801EE10.o(.text);
+        src/code_801EE10.o(.text);
         src/luminous_cave.o(.text);
         src/friend_list_menu_1.o(.text);
         asm/friend_list_menu.o(.text);
@@ -174,13 +175,13 @@ SECTIONS {
         src/wonder_mail_main_menu.o(.text);
         src/ds_menus.o(.text);
         src/debug_menu.o(.text);
-        asm/debug_menu.o(.text);
         src/debug_menu_mid.o(.text);
         asm/debug_menu_1.o(.text);
         src/debug_menu_2.o(.text);
         asm/debug_menu_2.o(.text);
         src/debug_menu_1.o(.text);
         asm/code_803B050.o(.text);
+        src/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         asm/code_803C1D0.o(.text);
@@ -219,7 +220,8 @@ SECTIONS {
         asm/code_805744C.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
-        src/status_checker.o(.text);
+        src/status_actions.o(.text);
+        src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
         src/targeting.o(.text);
         src/code_8069E0C.o(.text);
@@ -238,7 +240,6 @@ SECTIONS {
         src/dungeon_capabilities.o(.text);
         asm/code_8070BC0.o(.text);
         src/dungeon_capabilities_1.o(.text);
-        asm/code_8070E3C.o(.text);
         src/dungeon_ai_targeting.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
         asm/code_80718D8.o(.text);
@@ -248,7 +249,7 @@ SECTIONS {
         src/code_8073CF0.o(.text);
         asm/code_8073CF0.o(.text);
         src/dungeon_ai.o(.text);
-        asm/code_8075BA4.o(.text);
+        src/move_effects_target.o(.text);
         src/status.o(.text);
         asm/code_8077274.o(.text);
         src/code_8077274_1.o(.text);
@@ -270,6 +271,8 @@ SECTIONS {
         asm/code_808333C.o(.text);
         src/dungeon_leader.o(.text);
         asm/code_8083654.o(.text);
+        src/dungeon_music.o(.text);
+        asm/dungeon_music.o(.text);
         src/dungeon_random.o(.text);
         src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
@@ -292,6 +295,7 @@ SECTIONS {
         asm/dungeon.o(.text);
         src/dungeon_2.o(.text);
         asm/dungeon_2.o(.text);
+        src/dungeon_2_1.o(.text);
         src/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
@@ -327,7 +331,7 @@ SECTIONS {
         src/exclusive_pokemon_1.o(.text);
         src/position_util.o(.text);
         asm/code_8098468.o(.text);
-        src/code_8098BDC.o(.text);
+        src/ground_main.o(.text);
         asm/code_8098BDC.o(.text);
         src/code_809D148.o(.text);
         asm/code_809D148.o(.text);
@@ -456,7 +460,7 @@ SECTIONS {
         data/data_80F4E2C.o(.rodata);
         src/type_chart.o(.rodata);
         data/data_80F54B4.o(.rodata);
-        src/status_checker.o(.rodata);
+        src/move_checks.o(.rodata);
         data/data_80F5668.o(.rodata);
         src/dungeon_pokemon_attributes.o(.rodata);
         data/data_80F59C8.o(.rodata);
@@ -465,7 +469,6 @@ SECTIONS {
         src/type_effectiveness.o(.data);
         data/data_8106F7C.o(.rodata);
         src/dungeon_capabilities_1.o(.rodata);
-        data/data_8106FB5.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
         data/data_8107010.o(.rodata);
         src/friend_area.o(.rodata);

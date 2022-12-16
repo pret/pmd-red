@@ -11,7 +11,7 @@
 
 void xxx_call_stop_bgm(void);
 
-extern u8 sub_80023E4(u8);
+extern bool8 sub_80023E4(u8);
 extern void xxx_call_stop_fanfare_se(u16 r0);
 
 struct UnkSaveStruct1
@@ -87,15 +87,15 @@ void sub_801169C(void)
 
 void sub_8011760(void)
 {
-    if(sub_80023E4(0xD) != 0)
+    if(sub_80023E4(0xD))
         StartNewBGM(MUS_WORLD_CALAMITY);
-    else if(sub_80023E4(0xC) != 0)
+    else if(sub_80023E4(0xC))
         StartNewBGM(MUS_POKEMON_SQUARE);
 }
 
 void sub_801178C(void)
 {
-    if(sub_80023E4(0xD) != 0)
+    if(sub_80023E4(0xD))
         StartNewBGM(MUS_WORLD_CALAMITY);
     else
         StartNewBGM(MUS_POKEMON_SQUARE);
@@ -103,7 +103,7 @@ void sub_801178C(void)
 
 void sub_80117AC(void)
 {
-    if(sub_80023E4(0xD) == 0)
+    if(!sub_80023E4(0xD))
         FadeOutBGM(0x1E);
 }
 

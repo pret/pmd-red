@@ -2,42 +2,21 @@
 #include "pokemon.h"
 #include "wonder_mail.h"
 
-extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
-extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
-extern void sub_80015C0(u32, u32);
-extern u32 sub_8001784(u32, u32, u16);
-
-struct unkStruct_8097270
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    struct DungeonLocation unk4;
-    u32 unk8;
-    u16 unkC;
-    u16 unkE;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-};
-
 struct subStruct_203B490
 {
     // size: 0xC
-    struct DungeonLocation unk0;
+    struct DungeonLocation dungeon;
     u32 unk4;
     u32 unk8;
 };
  
-
 struct unkStruct_203B490
 {
     // size: 0x330?
 
-    struct unkStruct_8097270 unk0[4];
-    struct unkStruct_8097270 unk50[8];
-    struct unkStruct_8097270 unkF0[8];
+    struct WonderMail unk0[4];
+    struct WonderMail unk50[8];
+    struct WonderMail unkF0[8];
     u8 unk190[0x28];
     u8 unk1B8[0x78];
     struct subStruct_203B490 unk230[16];
@@ -46,9 +25,15 @@ struct unkStruct_203B490
 };
 extern struct unkStruct_203B490 *gUnknown_203B490;
 
-void sub_8097270(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b);
-void sub_80971EC(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b);
+void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
+void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
 extern s32 sub_8096EB0(void);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void sub_80015C0(u32, u32);
+extern u32 sub_8001784(u32, u32, u16);
+extern void sub_809674C();
+extern void sub_800199C(u32, s32, u32, s32);
 
 bool8 sub_8096F50(struct WonderMail *r0)
 {
@@ -62,8 +47,8 @@ bool8 sub_8096F50(struct WonderMail *r0)
     for(index = 0; index < 0x10; index++)
     {
         temp  = &gUnknown_203B490->unk230[index];
-        if(temp->unk0.dungeonIndex == r0->dungeon)
-            if(temp->unk0.dungeonFloor == r0->floor)
+        if(temp->dungeon.dungeonIndex == r0->dungeon.dungeonIndex)
+            if(temp->dungeon.dungeonFloor == r0->dungeon.dungeonFloor)
                 if(temp->unk4 == r0->unk8)
                     if(temp->unk8 == temp2)
                         return TRUE;
@@ -80,15 +65,15 @@ u32 sub_8096FA0(u8 *r0, u32 size)
     xxx_init_struct_8094924_restore_809485C(&backup, r0, size);
     for(index = 0; index < 4; index++)
     {
-        sub_80971EC(&backup, &gUnknown_203B490->unk0[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->unk0[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        sub_80971EC(&backup, &gUnknown_203B490->unk50[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->unk50[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        sub_80971EC(&backup, &gUnknown_203B490->unkF0[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->unkF0[index]);
     }
     for(index = 0; index < 0x38; index++)
     {
@@ -110,7 +95,7 @@ u32 sub_8096FA0(u8 *r0, u32 size)
     {
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
-        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].unk0);
+        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -125,15 +110,15 @@ u32 sub_80970D8(u8 *r0, u32 size)
     xxx_init_struct_8094924_save_809486C(&backup, r0, size);
     for(index = 0; index < 4; index++)
     {
-        sub_8097270(&backup, &gUnknown_203B490->unk0[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->unk0[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        sub_8097270(&backup, &gUnknown_203B490->unk50[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->unk50[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        sub_8097270(&backup, &gUnknown_203B490->unkF0[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->unkF0[index]);
     }
     for(index = 0; index < 0x38; index++)
     {
@@ -154,40 +139,40 @@ u32 sub_80970D8(u8 *r0, u32 size)
     {
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
-        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].unk0);
+        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
     }
     nullsub_102(&backup);
     return backup.unk8;
 }
 
-void sub_80971EC(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b)
+void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
 {
-    RestoreIntegerBits(a, &b->unk0, 4);
-    RestoreIntegerBits(a, &b->unk1, 3);
+    RestoreIntegerBits(a, &b->mailType, 4);
+    RestoreIntegerBits(a, &b->missionType, 3);
     RestoreIntegerBits(a, &b->unk2, 4);
-    RestoreIntegerBits(a, &b->unkC, 9);
-    RestoreIntegerBits(a, &b->unkE, 9);
-    RestoreIntegerBits(a, &b->unk10, 8);
-    RestoreIntegerBits(a, &b->unk11, 4);
-    RestoreIntegerBits(a, &b->unk12, 8);
-    RestoreIntegerBits(a, &b->unk13, 6);
+    RestoreIntegerBits(a, &b->clientSpecies, 9);
+    RestoreIntegerBits(a, &b->targetSpecies, 9);
+    RestoreIntegerBits(a, &b->targetItem, 8);
+    RestoreIntegerBits(a, &b->rewardType, 4);
+    RestoreIntegerBits(a, &b->itemReward, 8);
+    RestoreIntegerBits(a, &b->friendAreaReward, 6);
     RestoreIntegerBits(a, &b->unk8, 0x18);
-    RestoreDungeonLocation(a, &b->unk4);
+    RestoreDungeonLocation(a, &b->dungeon);
 }
 
-void sub_8097270(struct unkStruct_8094924 *a, struct unkStruct_8097270 *b)
+void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
 {
-    SaveIntegerBits(a, &b->unk0, 4);
-    SaveIntegerBits(a, &b->unk1, 3);
+    SaveIntegerBits(a, &b->mailType, 4);
+    SaveIntegerBits(a, &b->missionType, 3);
     SaveIntegerBits(a, &b->unk2, 4);
-    SaveIntegerBits(a, &b->unkC, 9);
-    SaveIntegerBits(a, &b->unkE, 9);
-    SaveIntegerBits(a, &b->unk10, 8);
-    SaveIntegerBits(a, &b->unk11, 4);
-    SaveIntegerBits(a, &b->unk12, 8);
-    SaveIntegerBits(a, &b->unk13, 6);
+    SaveIntegerBits(a, &b->clientSpecies, 9);
+    SaveIntegerBits(a, &b->targetSpecies, 9);
+    SaveIntegerBits(a, &b->targetItem, 8);
+    SaveIntegerBits(a, &b->rewardType, 4);
+    SaveIntegerBits(a, &b->itemReward, 8);
+    SaveIntegerBits(a, &b->friendAreaReward, 6);
     SaveIntegerBits(a, &b->unk8, 0x18);
-    SaveDungeonLocation(a, &b->unk4);
+    SaveDungeonLocation(a, &b->dungeon);
 }
 
 void sub_80972F4(void)
@@ -214,6 +199,46 @@ s32 sub_8097318(s16 param_1)
     iVar1 = sub_8001784(0,0x2b,param_1_s32);
     if (iVar1 != 0) {
       iVar1 = 1;
+    }
+  }
+  return iVar1;
+}
+
+void sub_809733C(short param_1,u32 param_2)
+{
+  s32 uVar2;
+  u8 param_2_u8;
+  u16 uVar2_u16;
+  
+  uVar2 = param_1;
+  param_2_u8 = param_2;
+
+  if (uVar2 != 0xd) {
+    uVar2_u16 = uVar2;
+    if ((((sub_8001784(0,0x2c,uVar2_u16) == 0) && (sub_800199C(0,0x2b,uVar2_u16,param_2_u8), param_2_u8 != '\0')))){
+        switch(uVar2)
+        {
+            case 0xE:
+            case 0xF:
+            case 0x1C:
+                sub_809674C();
+                break;
+        }
+      }
+    }
+}
+
+bool32 sub_8097384(s16 param_1)
+{
+  bool32 iVar1;
+  
+  if (param_1 == 0xd) {
+    iVar1 = FALSE;
+  }
+  else {
+    iVar1 = sub_8001784(0,0x2c,param_1 & 0xffff);
+    if (iVar1 != 0) {
+      iVar1 = TRUE;
     }
   }
   return iVar1;

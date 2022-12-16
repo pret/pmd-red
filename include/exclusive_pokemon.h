@@ -1,6 +1,9 @@
 #ifndef GUARD_EXCLUSIVE_POKEMON_H
 #define GUARD_EXCLUSIVE_POKEMON_H
 
+#include "code_8092334.h"
+
+
 #define NUM_EXCLUSIVE_POKEMON 12
 
 struct ExclusivePokemon
@@ -36,6 +39,9 @@ extern struct ExclusivePokemonData *gUnknown_203B498;
 void LoadExclusivePokemon(void);
 struct ExclusivePokemonData *GetExclusivePokemon(void);
 void InitializeExclusivePokemon(void);
+bool8 IsExclusivePokemonUnlocked(s16 pokeID);
 void UnlockExclusivePokemon(s16 pokeID);
+void WriteExclusivePokemon(struct unkStruct_8094924 *r0);
+void ReadExclusivePokemon(struct unkStruct_8094924 *r0);
 
 #endif // GUARD_EXCLUSIVE_POKEMON_H

@@ -21,40 +21,40 @@ extern const char gAvoidCaptureText[];
 extern u8 sub_80A270C();
 extern void sub_80015C0(u8, u8);
 extern u8 sub_80A2728(s16);
-extern u8 sub_8001D08(u32, u32 ,s32);
+extern bool8 sub_8001D08(u32, u32 ,s32);
 extern u32 sub_8001784(u32, u32, u16);
 extern void sub_800199C(u32, u32, u32, u32);
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 
-const u8 *sub_809747C(s16 r0)
+const u8 *sub_809747C(s16 index)
 {
-    if(r0 == 0xD)
+    if(index == 0xD)
     {
         return gDummyScenarioText;
     }
     else
     {
-        return GetDungeonName1(sub_80A270C(r0));
+        return GetDungeonName1(sub_80A270C(index));
     }
 }
 
-const u8 *sub_80974A0(s16 r0)
+const u8 *sub_80974A0(s16 index)
 {
-    if(r0 == 0xD)
+    if(index == 0xD)
     {
         return gDummyScenarioText;
     }
     else
     {
-        return GetDungeonName1(sub_80A270C(r0));
+        return GetDungeonName1(sub_80A270C(index));
     }
 }
 
-const u8 *GetCurrentMissionText(s16 r0)
+const u8 *GetCurrentMissionText(s16 index)
 {
-    if(r0 < 0x1F)
+    if(index < 0x1F)
     {
-        struct MissionText *mt = &gStoryMissionText[r0];
+        struct MissionText *mt = &gStoryMissionText[index];
         return mt->text;
     }
     else
@@ -124,7 +124,7 @@ bool8 sub_8097504(s16 mazeIndex)
         uVar3 = 6;
     }
 
-    if (sub_80023E4(uVar3) == 0) {
+    if (!sub_80023E4(uVar3)) {
         return FALSE;
     }
     else {
@@ -150,9 +150,9 @@ void sub_80975A8(s16 param_1,u8 param_2)
     sub_800199C(0,0x2e,param_1_u16,param_2);
 }
 
-const u8 *sub_80975C4(s16 r0)
+const u8 *sub_80975C4(s16 index)
 {
-    return GetDungeonName1(sub_80A2728(r0));
+    return GetDungeonName1(sub_80A2728(index));
 }
 
 const char *sub_80975DC(u32 r0)
@@ -160,7 +160,7 @@ const char *sub_80975DC(u32 r0)
     // TODO: slight hack but matches
     r0 <<= 16;
     if((0xffe90000 + r0) >> 16 < 2)
-        if(sub_8001D08(0x3, 0xE, -1) != 0)
+        if(sub_8001D08(0x3, 0xE, -1))
             return gMeetNinetalesText;
         else
             return gAvoidCaptureText;
@@ -170,24 +170,24 @@ const char *sub_80975DC(u32 r0)
 
 bool8 HasCompletedAllMazes(void)
 {
-    s32 iVar2;
-    for(iVar2 = 0; iVar2 < 17; iVar2++)
+    s32 index;
+    for(index = 0; index < 17; index++)
     {
-        if(!(bool8)IsMazeCompleted(iVar2))
+        if(!(bool8)IsMazeCompleted(index))
             return FALSE;
     }
     return TRUE;
 }
 
-u32 sub_8097640(void)
+bool8 sub_8097640(void)
 {
     if(sub_8001784(0, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
     {
         sub_800199C(0, 0x2E, 0x1F, 1);
-        return 1;
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }

@@ -79,7 +79,7 @@ TeamMeaniesPreFightDialogue:
 	bl sub_803E708
 	bl sub_8087144
 	movs r0, 0xA
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	ldr r0, _08087050
 	bl DisplayDungeonDialogue
 	movs r0, 0xA
@@ -253,7 +253,7 @@ sub_8087144:
 	mov r0, r9
 	str r0, [r4, 0x8]
 	movs r0, 0xA
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	adds r0, r7, 0
 	bl sub_8086A54
 	mov r0, r8
@@ -327,7 +327,7 @@ sub_8087230:
 	bl GetEntityFromClientType
 	adds r5, r0, 0
 	movs r0, 0x72
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	bl sub_8085374
 	bl sub_80854D4
 	movs r0, 0x4
@@ -514,7 +514,7 @@ ZapdosPreFightDialogue:
 	bl sub_803E708
 	movs r0, 0x3
 	bl ZapdosScreenFlash
-	bl sub_8083F14
+	bl DungeonStopBGM
 	movs r0, 0xED
 	lsls r0, 1
 	bl PlaySoundEffect
@@ -523,7 +523,7 @@ ZapdosPreFightDialogue:
 	ldr r0, [sp, 0x68]
 	bl ZapdosDropInEffect
 	movs r0, 0x9
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	adds r0, r6, 0
 	movs r1, 0x6
 	movs r2, 0x4

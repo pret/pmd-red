@@ -16,6 +16,7 @@ enum TileType
     TILE_TYPE_MAP_EDGE = 1 << 4,
     TILE_TYPE_SHOP = 1 << 5,
     TILE_TYPE_MONSTER_HOUSE = 1 << 6,
+    TILE_TYPE_UNK_8 = 1 << 8,
     TILE_TYPE_STAIRS = 1 << 9
 };
 

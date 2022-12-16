@@ -6,40 +6,19 @@
 #include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "constants/wonder_mail.h"
-
-struct subStruct_203B490
-{
-    // size: 0xC
-    u8 unk0;
-    u8 unk1;
-    u32 unk4;
-    u32 unk8;
-};
- 
-
-struct unkStruct_203B490
-{
-    // size: 0x330?
-
-    u8 fill0[0x190];
-    u8 unk190[0x28];
-    u8 unk1B8[0x78];
-    struct subStruct_203B490 unk230[16];
-    u8 unk2F0[0x38];
-    u8 unk328;
-};
+#include "dungeon.h"
+#include "code_80958E8.h"
 
 
-extern bool8 sub_809095C(u8);
 extern s32 GetDungeonFloorCount(u8);
-extern bool8 sub_809017C(u8 *);
+extern bool8 sub_809017C(struct DungeonLocation *);
 extern s16 GetBaseSpecies(s16);
 extern bool8 IsInvalidItemReward(u8);
-extern u8 sub_803C1D0(u8 *, u8);
+extern u8 sub_803C1D0(struct DungeonLocation *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
-extern u8 sub_803C0DC(s16);
+extern bool8 sub_803C0DC(s16);
 extern void sub_8096040(u8);
 extern void sub_80965B8(u8);
 extern void sub_8096C3C(u8);
@@ -82,7 +61,7 @@ void sub_8095900(void)
     MemoryClear8(gUnknown_203B490->unk1B8, sizeof(gUnknown_203B490->unk1B8));
     for(iVar2 = 0; iVar2 < 16; iVar2++)
     {
-        gUnknown_203B490->unk230[iVar2].unk0 = 99;
+        gUnknown_203B490->unk230[iVar2].dungeon = 99;
         gUnknown_203B490->unk230[iVar2].unk1 = 1;
         gUnknown_203B490->unk230[iVar2].unk4 = 0;
         gUnknown_203B490->unk230[iVar2].unk8 = 0;
@@ -111,17 +90,17 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         return FALSE;
     else
     {
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemCount(data->dungeon) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemCount(data->dungeon.dungeonIndex) == 0)
             return FALSE;
 
         if(data->unk2 > 9)
             return FALSE;
 
-        if(sub_809095C(data->dungeon))
+        if(sub_809095C(data->dungeon.dungeonIndex))
             return FALSE;
-        if(data->floor >= GetDungeonFloorCount(data->dungeon))
+        if(data->dungeon.dungeonFloor >= GetDungeonFloorCount(data->dungeon.dungeonIndex))
             return FALSE;
-        if(sub_809017C(&(data->dungeon)))
+        if(sub_809017C(&data->dungeon))
             return FALSE;
 
         if(data->clientSpecies == SPECIES_NONE)
@@ -130,14 +109,14 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
         if(data->clientSpecies != GetBaseSpecies(data->clientSpecies))
             return FALSE;
-        if(sub_803C0DC(data->clientSpecies) == 0)
+        if(!sub_803C0DC(data->clientSpecies))
             return FALSE;
 
         if(data->targetSpecies > SPECIES_RAYQUAZA_CUTSCENE)
             return FALSE;
         if(data->targetSpecies != GetBaseSpecies(data->targetSpecies))
             return FALSE;
-        if(sub_803C0DC(data->targetSpecies) == 0)
+        if(!sub_803C0DC(data->targetSpecies))
             return FALSE;
 
         // Item Delivery/Finding
@@ -153,7 +132,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
 
         // Item finding
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon, data->targetItem) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon.dungeonIndex, data->targetItem) == 0)
             return FALSE;
 
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
@@ -170,7 +149,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         {
             if(GetFriendAreaUnlockCondition(data->friendAreaReward) != UNLOCK_WONDER_MAIL)
                 return FALSE;
-            if(sub_803C1D0(&(data->dungeon), data->missionType) == 0)
+            if(sub_803C1D0(&data->dungeon, data->missionType) == 0)
                 return FALSE;
         }
         return TRUE;

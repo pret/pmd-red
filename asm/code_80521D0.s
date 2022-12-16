@@ -3832,7 +3832,7 @@ _0805459E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057E1C
+	bl FocusEnergyMoveAction
 	bl _080554BA
 _080545AE:
 	movs r3, 0x80
@@ -3882,7 +3882,7 @@ _0805460A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057D20
+	bl WhirlpoolMoveAction
 	bl _080554BA
 _0805461A:
 	adds r0, r7, 0
@@ -4161,7 +4161,7 @@ _08054888:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80576D0
+	bl YawnMoveAction
 	bl _080554BA
 _08054898:
 	adds r0, r7, 0
@@ -4525,7 +4525,7 @@ _08054BC8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B7FC
+	bl ReflectMoveAction
 	bl _080554BA
 _08054BD8:
 	adds r0, r7, 0
@@ -4539,14 +4539,14 @@ _08054BE8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80591D8
+	bl SafeguardMoveAction
 	bl _080554BA
 _08054BF8:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80590C8
+	bl MistMoveAction
 	bl _080554BA
 _08054C08:
 	adds r0, r7, 0
@@ -4609,7 +4609,7 @@ _08054C88:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD70
+	bl ScannerOrbAction
 	bl _080554BA
 _08054C98:
 	adds r0, r7, 0
@@ -4651,7 +4651,7 @@ _08054CE2:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805834C
+	bl BideMoveAction
 	b _080554BA
 _08054CF0:
 	adds r0, r7, 0
@@ -4709,7 +4709,7 @@ _08054D56:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80582EC
+	bl RazorWindMoveAction
 	b _080554BA
 _08054D64:
 	adds r0, r7, 0
@@ -4723,14 +4723,14 @@ _08054D72:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B2E4
+	bl MagicCoatMoveAction
 	b _080554BA
 _08054D80:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057720
+	bl NightmareMoveAction
 	b _080554BA
 _08054D8E:
 	adds r0, r7, 0
@@ -4793,7 +4793,7 @@ _08054DFE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B5F4
+	bl LeechSeedMoveAction
 	b _080554BA
 _08054E0C:
 	adds r0, r7, 0
@@ -4821,7 +4821,7 @@ _08054E36:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BD7C
+	bl RadarOrbAction
 	b _080554BA
 _08054E44:
 	adds r0, r7, 0
@@ -4982,7 +4982,7 @@ _08054F78:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C474
+	bl StairsOrbAction
 	b _080554BA
 _08054F86:
 	adds r0, r7, 0
@@ -5010,7 +5010,7 @@ _08054FB0:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805777C
+	bl VitalThrowMoveAction
 	b _080554BA
 _08054FBE:
 	adds r0, r7, 0
@@ -5038,7 +5038,7 @@ _08054FE8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057788
+	bl DigMoveAction
 	b _080554BA
 _08054FF6:
 	adds r0, r7, 0
@@ -5073,14 +5073,14 @@ _0805502E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C480
+	bl LongtossOrbAction
 	b _080554BA
 _0805503C:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C48C
+	bl PierceOrbAction
 	b _080554BA
 _0805504A:
 	adds r0, r7, 0
@@ -5115,7 +5115,7 @@ _08055082:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C1F8
+	bl ShockerOrbAction
 	b _080554BA
 _08055090:
 	adds r0, r7, 0
@@ -5138,7 +5138,7 @@ _080550B0:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B2F0
+	bl ProtectMoveAction
 	b _080554BA
 _080550BE:
 	adds r0, r7, 0
@@ -5215,7 +5215,7 @@ _0805514A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057E28
+	bl SmokescreenMoveAction
 	b _080554BA
 _08055158:
 	adds r0, r7, 0
@@ -5229,7 +5229,7 @@ _08055166:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805991C
+	bl StockpileMoveAction
 	b _080554BA
 _08055174:
 	adds r0, r7, 0
@@ -5271,14 +5271,14 @@ _080551BA:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B3A8
+	bl MirrorCoatMoveAction
 	b _080554BA
 _080551C8:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B208
+	bl PerishSongMoveAction
 	b _080554BA
 _080551D6:
 	adds r0, r7, 0
@@ -5292,7 +5292,7 @@ _080551E4:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B37C
+	bl DestinyBondMoveAction
 	b _080554BA
 _080551F2:
 	adds r0, r7, 0
@@ -5334,7 +5334,7 @@ _08055238:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058BE0
+	bl EndureMoveAction
 	b _080554BA
 _08055246:
 	adds r0, r7, 0
@@ -5488,7 +5488,7 @@ _0805536C:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058F58
+	bl NaturePowerMoveAction
 	b _080554BA
 _0805537A:
 	adds r0, r7, 0
@@ -5572,14 +5572,14 @@ _08055414:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8058DBC
+	bl PsychUpMoveAction
 	b _080554BA
 _08055422:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057BEC
+	bl SnoreMoveAction
 	b _080554BA
 _08055430:
 	adds r0, r7, 0
@@ -5607,7 +5607,7 @@ _0805545A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C1B0
+	bl IdentifyOrbAction
 	b _080554BA
 _08055468:
 	adds r0, r7, 0
@@ -5808,7 +5808,7 @@ _080555D6:
 	adds r0, r7, 0
 	adds r1, r7, 0
 	movs r3, 0x2
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 _08055604:
 	add sp, 0x48
 	pop {r3-r5}
@@ -6777,7 +6777,7 @@ _08055D54:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_8076090
+	bl PausedStatusTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -6829,7 +6829,7 @@ _08055DEC:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E10:
 	ldrh r1, [r5]
 	movs r0, 0x2
@@ -6842,7 +6842,7 @@ _08055E10:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E2C:
 	ldrh r1, [r5]
 	movs r0, 0x4
@@ -6855,7 +6855,7 @@ _08055E2C:
 	bl SendMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 _08055E48:
 	ldrh r1, [r5]
 	movs r0, 0x8
@@ -6869,7 +6869,7 @@ _08055E48:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08055E66:
 	ldrh r1, [r5]
 	movs r0, 0x10
@@ -6883,7 +6883,7 @@ _08055E66:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08055E84:
 	ldrh r1, [r5]
 	movs r0, 0x20
@@ -6897,7 +6897,7 @@ _08055E84:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08055EA2:
 	ldrh r1, [r5]
 	movs r0, 0x40
@@ -6911,7 +6911,7 @@ _08055EA2:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08055EC0:
 	ldrh r1, [r5]
 	movs r0, 0x80
@@ -6946,7 +6946,7 @@ _08055EEA:
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_8076210
+	bl BurnedStatusTarget
 _08055F0C:
 	ldrh r1, [r5]
 	movs r0, 0x80
@@ -6961,7 +6961,7 @@ _08055F0C:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_807614C
+	bl InfatuateStatusTarget
 _08055F2C:
 	adds r5, r6, r7
 	ldrh r1, [r5]
@@ -7557,7 +7557,7 @@ _08056418:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0

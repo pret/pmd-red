@@ -5,2918 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8057D9C
-sub_8057D9C:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r6, r0, 0
-	adds r4, r1, 0
-	ldr r0, [r4, 0x70]
-	movs r5, 0
-	ldr r1, _08057DF8
-	mov r8, r1
-	movs r1, 0x8C
-	lsls r1, 1
-	adds r2, r0, r1
-	movs r0, 0x1
-	mov r12, r0
-	movs r7, 0x10
-	movs r3, 0x3
-_08057DBC:
-	ldrb r1, [r2]
-	mov r0, r12
-	ands r0, r1
-	cmp r0, 0
-	beq _08057DD4
-	adds r0, r7, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08057DD4
-	movs r0, 0
-	strb r0, [r2, 0x4]
-	movs r5, 0x1
-_08057DD4:
-	adds r2, 0x8
-	subs r3, 0x1
-	cmp r3, 0
-	bge _08057DBC
-	mov r0, r8
-	adds r1, r4, 0
-	movs r2, 0
-	bl SetMessageArgument
-	cmp r5, 0
-	beq _08057E00
-	ldr r0, _08057DFC
-	ldr r2, [r0]
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl sub_80522F4
-	b _08057E0C
-	.align 2, 0
-_08057DF8: .4byte gUnknown_202DFE8
-_08057DFC: .4byte gUnknown_80FD350
-_08057E00:
-	ldr r0, _08057E18
-	ldr r2, [r0]
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl sub_80522F4
-_08057E0C:
-	adds r0, r5, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057E18: .4byte gUnknown_80FD370
-	thumb_func_end sub_8057D9C
-
-	thumb_func_start sub_8057E1C
-sub_8057E1C:
-	push {lr}
-	bl sub_8078348
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057E1C
-
-	thumb_func_start sub_8057E28
-sub_8057E28:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	ldr r1, _08057E4C
-	adds r0, r4, 0
-	movs r2, 0x1
-	bl CalculateStatusTurns
-	adds r2, r0, 0
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_807824C
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057E4C: .4byte gUnknown_80F4EDC
-	thumb_func_end sub_8057E28
-
-	thumb_func_start sub_8057E50
-sub_8057E50:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl SendThawedMessage
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl MirrorMoveStatusTarget
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057E50
-
-	thumb_func_start sub_8057E6C
-sub_8057E6C:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	adds r7, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	adds r4, r3, 0
-	movs r0, 0
-	mov r8, r0
-	ldr r1, [r7, 0x70]
-	mov r9, r1
-	adds r0, r7, 0
-	adds r1, r5, 0
-	bl SendThawedMessage
-	movs r3, 0x80
-	lsls r3, 1
-	str r4, [sp]
-	adds r0, r7, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08057EBC
-	movs r0, 0x1
-	mov r8, r0
-	adds r0, r7, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _08057EBC
-	ldr r0, _08057ECC
-	add r0, r9
-	mov r1, r8
-	strb r1, [r0]
-_08057EBC:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057ECC: .4byte 0x00000155
-	thumb_func_end sub_8057E6C
-
-	thumb_func_start sub_8057ED0
-sub_8057ED0:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08057F12
-	movs r7, 0x1
-	ldr r0, _08057F1C
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08057F12
-	ldr r0, _08057F20
-	ldr r2, [r0]
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r3, 0x80
-	bl sub_80772C0
-_08057F12:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057F1C: .4byte gUnknown_80F4E04
-_08057F20: .4byte gUnknown_8106A4C
-	thumb_func_end sub_8057ED0
-
-	thumb_func_start sub_8057F24
-sub_8057F24:
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x4
-	adds r6, r0, 0
-	mov r8, r1
-	ldr r5, [r6, 0x70]
-	movs r0, 0x1
-	mov r9, r0
-	movs r4, 0x1
-	strh r4, [r5, 0xE]
-	ldr r0, _08057F74
-	ldr r2, [r0]
-	str r4, [sp]
-	adds r0, r6, 0
-	movs r3, 0x40
-	bl sub_80772C0
-	ldr r0, _08057F78
-	ldr r2, [r0]
-	str r4, [sp]
-	adds r0, r6, 0
-	mov r1, r8
-	movs r3, 0x40
-	bl sub_80772C0
-	movs r0, 0xAA
-	lsls r0, 1
-	adds r5, r0
-	mov r0, r9
-	strb r0, [r5]
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057F74: .4byte gUnknown_8106A4C
-_08057F78: .4byte gUnknown_8106A50
-	thumb_func_end sub_8057F24
-
-	thumb_func_start sub_8057F7C
-sub_8057F7C:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08057FBA
-	movs r7, 0x1
-	ldr r0, _08057FC4
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08057FBA
-	ldr r0, _08057FC8
-	ldr r2, [r0]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r3, 0
-	bl sub_80775DC
-_08057FBA:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057FC4: .4byte gUnknown_80F4E02
-_08057FC8: .4byte gUnknown_8106A4C
-	thumb_func_end sub_8057F7C
-
-	thumb_func_start sub_8057FCC
-sub_8057FCC:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	movs r2, 0x1
-	bl sub_8077AE4
-	ldr r0, _08057FF0
-	ldr r2, [r0]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r3, 0x1
-	bl sub_8077084
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08057FF0: .4byte gUnknown_8106A50
-	thumb_func_end sub_8057FCC
-
-	thumb_func_start sub_8057FF4
-sub_8057FF4:
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	adds r0, r4, 0
-	bl GetFlashFireStatus
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0
-	beq _08058048
-	ldr r0, [r4, 0x70]
-	movs r2, 0xA9
-	lsls r2, 1
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08058054
-	movs r0, 0x1
-	strb r0, [r1]
-	ldr r0, _0805802C
-	adds r1, r4, 0
-	movs r2, 0
-	bl SetMessageArgument
-	cmp r6, 0x1
-	bne _08058034
-	ldr r0, _08058030
-	b _08058036
-	.align 2, 0
-_0805802C: .4byte gUnknown_202DFE8
-_08058030: .4byte gUnknown_80FAE00
-_08058034:
-	ldr r0, _08058044
-_08058036:
-	ldr r2, [r0]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80522F4
-	b _08058054
-	.align 2, 0
-_08058044: .4byte gUnknown_80FADD8
-_08058048:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0
-	movs r3, 0x1
-	bl sub_8076210
-_08058054:
-	movs r0, 0x1
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8057FF4
-
-	thumb_func_start sub_805805C
-sub_805805C:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	mov r10, r0
-	mov r9, r1
-	adds r5, r2, 0
-	mov r8, r3
-	ldr r1, [r0, 0x70]
-	movs r6, 0x1
-	movs r2, 0
-	ldr r4, _08058098
-	movs r3, 0
-	ldrsh r0, [r4, r3]
-	cmp r0, 0
-	blt _080580B0
-	movs r7, 0xC
-	ldrsh r3, [r1, r7]
-	adds r1, r4, 0
-	ldr r4, _0805809C
-_08058088:
-	movs r7, 0
-	ldrsh r0, [r1, r7]
-	cmp r3, r0
-	bge _080580A0
-	movs r0, 0x2
-	ldrsh r6, [r1, r0]
-	b _080580B0
-	.align 2, 0
-_08058098: .4byte gUnknown_80F55BC
-_0805809C: .4byte 0x000003e6
-_080580A0:
-	adds r1, 0x4
-	adds r2, 0x1
-	cmp r2, r4
-	bgt _080580B0
-	movs r7, 0
-	ldrsh r0, [r1, r7]
-	cmp r0, 0
-	bge _08058088
-_080580B0:
-	adds r0, r5, 0
-	bl GetMoveType
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	mov r1, r8
-	bl sub_8057600
-	lsls r0, 16
-	asrs r0, 16
-	add r1, sp, 0x18
-	str r1, [sp]
-	str r4, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r1, 0
-	str r1, [sp, 0xC]
-	movs r0, 0x1
-	str r0, [sp, 0x10]
-	str r1, [sp, 0x14]
-	mov r0, r10
-	mov r1, r9
-	adds r2, r6, 0
-	movs r3, 0x1
-	bl sub_806F370
-	add r1, sp, 0x18
-	movs r2, 0
-	adds r0, r1, 0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080580F4
-	movs r2, 0x1
-_080580F4:
-	strb r2, [r1]
-	add r0, sp, 0x18
-	ldrb r0, [r0]
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805805C
-
-	thumb_func_start GrudgeMoveAction
-GrudgeMoveAction:
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	adds r5, r1, 0
-	movs r7, 0
-	ldr r4, [r5, 0x70]
-	ldr r0, _08058134
-	movs r2, 0
-	bl SetMessageArgument
-	adds r4, 0xF4
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _0805813C
-	ldr r0, _08058138
-	ldr r2, [r0]
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80522F4
-	b _0805814E
-	.align 2, 0
-_08058134: .4byte gUnknown_202DFE8
-_08058138: .4byte gUnknown_80FD2B4
-_0805813C:
-	movs r0, 0x1
-	strb r0, [r4]
-	movs r7, 0x1
-	ldr r0, _08058158
-	ldr r2, [r0]
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80522F4
-_0805814E:
-	adds r0, r7, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058158: .4byte gUnknown_80FD294
-	thumb_func_end GrudgeMoveAction
-
-	thumb_func_start sub_805815C
-sub_805815C:
-	push {lr}
-	movs r2, 0x4
-	bl sub_80797A0
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805815C
-
-	thumb_func_start sub_805816C
-sub_805816C:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r6, r0, 0
-	adds r7, r1, 0
-	adds r5, r2, 0
-	adds r4, r3, 0
-	movs r0, 0
-	mov r8, r0
-	adds r0, r6, 0
-	bl SendThawedMessage
-	movs r3, 0x80
-	lsls r3, 1
-	str r4, [sp]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	adds r2, r5, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080581BE
-	movs r1, 0x1
-	mov r8, r1
-	ldr r0, _080581CC
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080581BE
-	adds r0, r6, 0
-	adds r1, r7, 0
-	movs r2, 0
-	movs r3, 0
-	bl sub_8076210
-_080581BE:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080581CC: .4byte gUnknown_80F4DB8
-	thumb_func_end sub_805816C
-
-	thumb_func_start sub_80581D0
-sub_80581D0:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r6, r0, 0
-	adds r7, r1, 0
-	adds r5, r2, 0
-	adds r4, r3, 0
-	movs r0, 0
-	mov r8, r0
-	adds r0, r6, 0
-	bl SendThawedMessage
-	movs r3, 0x80
-	lsls r3, 1
-	str r4, [sp]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	adds r2, r5, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058222
-	movs r1, 0x1
-	mov r8, r1
-	ldr r0, _08058230
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058222
-	adds r0, r6, 0
-	adds r1, r7, 0
-	movs r2, 0
-	movs r3, 0
-	bl sub_8076210
-_08058222:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058230: .4byte gUnknown_80F4DBA
-	thumb_func_end sub_80581D0
-
-	thumb_func_start sub_8058234
-sub_8058234:
-	push {r4,lr}
-	adds r3, r0, 0
-	adds r4, r1, 0
-	ldrh r1, [r2, 0x2]
-	ldr r0, _08058258
-	movs r2, 0x51
-	cmp r1, r0
-	bne _08058246
-	movs r2, 0x7A
-_08058246:
-	adds r0, r3, 0
-	adds r1, r4, 0
-	bl sub_8078FDC
-	movs r0, 0x1
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058258: .4byte 0x0000013b
-	thumb_func_end sub_8058234
-
-	thumb_func_start sub_805825C
-sub_805825C:
-	push {lr}
-	ldr r2, _0805826C
-	ldr r2, [r2]
-	bl sub_8077540
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805826C: .4byte gUnknown_8106A50
-	thumb_func_end sub_805825C
-
-	thumb_func_start sub_8058270
-sub_8058270:
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r5, r2, 0
-	adds r2, r3, 0
-	movs r3, 0x1
-	ldr r0, [r1, 0x70]
-	adds r0, 0xC0
-	ldrb r0, [r0]
-	subs r0, 0x7
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _0805828E
-	movs r3, 0x2
-_0805828E:
-	lsls r3, 8
-	str r2, [sp]
-	adds r0, r4, 0
-	adds r2, r5, 0
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058270
-
-	thumb_func_start sub_80582AC
-sub_80582AC:
-	push {lr}
-	ldr r2, _080582C0
-	ldr r2, [r2]
-	movs r3, 0x1
-	bl sub_8077160
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080582C0: .4byte gUnknown_8106A4C
-	thumb_func_end sub_80582AC
-
-	thumb_func_start sub_80582C4
-sub_80582C4:
-	push {lr}
-	movs r2, 0x1
-	bl sub_8077780
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80582C4
-
-	thumb_func_start sub_80582D4
-sub_80582D4:
-	push {lr}
-	ldr r2, _080582E8
-	ldr r2, [r2]
-	movs r3, 0x1
-	bl sub_8077084
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080582E8: .4byte gUnknown_8106A4C
-	thumb_func_end sub_80582D4
-
-	thumb_func_start sub_80582EC
-sub_80582EC:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r7, r1, 0
-	adds r4, r2, 0
-	adds r6, r3, 0
-	adds r1, r4, 0
-	bl MoveMatchesChargingStatus
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058328
-	ldr r0, _08058324
-	ldr r3, [r0]
-	str r6, [sp]
-	adds r0, r5, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	bl sub_8055640
-	negs r1, r0
-	orrs r1, r0
-	lsrs r4, r1, 31
-	adds r0, r5, 0
-	bl sub_8079764
-	b _0805833C
-	.align 2, 0
-_08058324: .4byte gUnknown_80F4F50
-_08058328:
-	ldr r0, _08058348
-	ldr r0, [r0]
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	movs r2, 0x4
-	adds r3, r4, 0
-	bl sub_8079618
-	movs r4, 0x1
-_0805833C:
-	adds r0, r4, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058348: .4byte gUnknown_80FAC54
-	thumb_func_end sub_80582EC
-
-	thumb_func_start sub_805834C
-sub_805834C:
-	push {lr}
-	sub sp, 0x4
-	adds r3, r2, 0
-	ldr r2, _08058368
-	ldr r2, [r2]
-	str r2, [sp]
-	movs r2, 0x1
-	bl sub_8079618
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058368: .4byte gUnknown_80FAC74
-	thumb_func_end sub_805834C
-
-	thumb_func_start sub_805836C
-sub_805836C:
-	push {r4-r7,lr}
-	sub sp, 0x1C
-	adds r6, r0, 0
-	adds r7, r1, 0
-	movs r5, 0
-	add r0, sp, 0x18
-	strb r5, [r0]
-	ldr r0, [r6, 0x70]
-	adds r0, 0xA0
-	ldr r0, [r0]
-	lsls r4, r0, 1
-	ldr r0, _080583D0
-	cmp r4, r0
-	ble _0805838A
-	adds r4, r0, 0
-_0805838A:
-	adds r0, r2, 0
-	bl GetMoveType
-	lsls r0, 24
-	lsrs r0, 24
-	add r1, sp, 0x18
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	ldr r0, _080583D4
-	str r0, [sp, 0x8]
-	str r5, [sp, 0xC]
-	movs r0, 0x1
-	str r0, [sp, 0x10]
-	str r5, [sp, 0x14]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	movs r3, 0x1
-	bl sub_806F370
-	add r1, sp, 0x18
-	movs r2, 0
-	adds r0, r1, 0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080583C0
-	movs r2, 0x1
-_080583C0:
-	strb r2, [r1]
-	add r0, sp, 0x18
-	ldrb r0, [r0]
-	add sp, 0x1C
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080583D0: .4byte 0x000003e7
-_080583D4: .4byte 0x000001ff
-	thumb_func_end sub_805836C
-
-	thumb_func_start sub_80583D8
-sub_80583D8:
-	push {r4-r7,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _0805841C
-	movs r7, 0x1
-	ldr r0, _08058428
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805841C
-	ldr r0, _0805842C
-	ldr r2, [r0]
-	str r7, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r3, 0x1
-	bl sub_8076F80
-_0805841C:
-	adds r0, r7, 0
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058428: .4byte gUnknown_80F4DC2
-_0805842C: .4byte gUnknown_8106A50
-	thumb_func_end sub_80583D8
-
-	thumb_func_start sub_8058430
-sub_8058430:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _0805846A
-	movs r7, 0x1
-	ldr r0, _08058474
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805846A
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_80776C0
-_0805846A:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058474: .4byte gUnknown_80F4DEE
-	thumb_func_end sub_8058430
-
-	thumb_func_start sub_8058478
-sub_8058478:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080584B2
-	movs r7, 0x1
-	ldr r0, _080584BC
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080584B2
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_8077780
-_080584B2:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080584BC: .4byte gUnknown_80F4DE6
-	thumb_func_end sub_8058478
-
-	thumb_func_start sub_80584C0
-sub_80584C0:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	mov r9, r0
-	mov r10, r1
-	adds r6, r2, 0
-	mov r8, r3
-	movs r7, 0
-	add r0, sp, 0x18
-	strb r7, [r0]
-	mov r0, r9
-	ldr r2, [r0, 0x70]
-	ldr r0, [r1, 0x70]
-	movs r3, 0xE
-	ldrsh r1, [r0, r3]
-	movs r3, 0xE
-	ldrsh r0, [r2, r3]
-	subs r5, r1, r0
-	cmp r5, 0
-	bge _080584F0
-	movs r5, 0
-_080584F0:
-	adds r0, r6, 0
-	bl GetMoveType
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r6, 0
-	mov r1, r8
-	bl sub_8057600
-	lsls r0, 16
-	asrs r0, 16
-	add r1, sp, 0x18
-	str r1, [sp]
-	str r4, [sp, 0x4]
-	str r0, [sp, 0x8]
-	str r7, [sp, 0xC]
-	movs r0, 0x1
-	str r0, [sp, 0x10]
-	str r7, [sp, 0x14]
-	mov r0, r9
-	mov r1, r10
-	adds r2, r5, 0
-	movs r3, 0
-	bl sub_806F370
-	add r1, sp, 0x18
-	movs r2, 0
-	adds r0, r1, 0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08058532
-	movs r2, 0x1
-_08058532:
-	strb r2, [r1]
-	add r0, sp, 0x18
-	ldrb r0, [r0]
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80584C0
-
-	thumb_func_start sub_8058548
-sub_8058548:
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	movs r5, 0x80
-	lsls r5, 1
-	ldr r0, [r4, 0x70]
-	adds r0, 0xAC
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08058560
-	ldr r0, _0805857C
-	ldr r5, [r0]
-_08058560:
-	str r3, [sp]
-	adds r0, r4, 0
-	adds r3, r5, 0
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805857C: .4byte gUnknown_80F4F6C
-	thumb_func_end sub_8058548
-
-	thumb_func_start sub_8058580
-sub_8058580:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080585BC
-	movs r7, 0x1
-	ldr r0, _080585C8
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080585BC
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0x1
-	movs r3, 0
-	bl sub_80779F0
-_080585BC:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080585C8: .4byte gUnknown_80F4DD4
-	thumb_func_end sub_8058580
-
-	thumb_func_start sub_80585CC
-sub_80585CC:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r4, r1, 0
-	mov r8, r2
-	adds r7, r3, 0
-	movs r6, 0
-	ldr r0, [r4, 0x70]
-	adds r0, 0xC4
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _080585EC
-	cmp r0, 0x3
-	bne _08058602
-_080585EC:
-	ldr r0, _08058620
-	ldr r2, [r0]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80522F4
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl SendProtectionEndMessage
-	movs r6, 0x1
-_08058602:
-	movs r3, 0x80
-	lsls r3, 1
-	str r7, [sp]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	mov r2, r8
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058624
-	movs r0, 0x1
-	orrs r0, r6
-	lsls r0, 24
-	b _08058626
-	.align 2, 0
-_08058620: .4byte gUnknown_80FD104
-_08058624:
-	lsls r0, r6, 24
-_08058626:
-	lsrs r0, 24
-	adds r6, r0, 0
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80585CC
-
-	thumb_func_start sub_8058638
-sub_8058638:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058670
-	movs r7, 0x1
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058670
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0x1
-	movs r3, 0
-	bl sub_80779F0
-_08058670:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058638
-
-	thumb_func_start sub_805867C
-sub_805867C:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r7, r1, 0
-	adds r4, r2, 0
-	adds r6, r3, 0
-	adds r1, r4, 0
-	bl MoveMatchesChargingStatus
-	lsls r0, 24
-	cmp r0, 0
-	beq _080586B8
-	ldr r0, _080586B4
-	ldr r3, [r0]
-	str r6, [sp]
-	adds r0, r5, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	bl sub_8055640
-	negs r1, r0
-	orrs r1, r0
-	lsrs r4, r1, 31
-	adds r0, r5, 0
-	bl sub_8079764
-	b _080586CC
-	.align 2, 0
-_080586B4: .4byte gUnknown_80F4F54
-_080586B8:
-	ldr r0, _080586D8
-	ldr r0, [r0]
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	movs r2, 0x5
-	adds r3, r4, 0
-	bl sub_8079618
-	movs r4, 0x1
-_080586CC:
-	adds r0, r4, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080586D8: .4byte gUnknown_80FACA4
-	thumb_func_end sub_805867C
-
-	thumb_func_start sub_80586DC
-sub_80586DC:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r7, r0, 0
-	adds r4, r1, 0
-	adds r6, r2, 0
-	adds r5, r3, 0
-	adds r0, r4, 0
-	movs r1, 0x3A
-	bl HasAbility
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	movs r3, 0x80
-	lsls r3, 1
-	str r5, [sp]
-	adds r0, r7, 0
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl sub_8055640
-	adds r4, r0, 0
-	negs r0, r4
-	orrs r0, r4
-	lsrs r5, r0, 31
-	cmp r5, 0
-	beq _08058762
-	adds r0, r7, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058762
-	lsrs r0, r4, 31
-	adds r0, r4, r0
-	asrs r2, r0, 1
-	ldr r0, [r7, 0x70]
-	movs r5, 0x1
-	cmp r2, 0
-	bgt _08058734
-	movs r2, 0x1
-_08058734:
-	adds r1, r0, 0
-	adds r1, 0xFB
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08058740
-	strb r5, [r1]
-_08058740:
-	mov r0, r8
-	cmp r0, 0
-	beq _08058756
-	movs r3, 0xFD
-	lsls r3, 1
-	adds r0, r7, 0
-	adds r1, r2, 0
-	movs r2, 0xD
-	bl sub_806F324
-	b _08058762
-_08058756:
-	str r5, [sp]
-	adds r0, r7, 0
-	adds r1, r7, 0
-	movs r3, 0
-	bl HealTargetHP
-_08058762:
-	adds r0, r5, 0
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80586DC
-
-	thumb_func_start sub_8058770
-sub_8058770:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r6, r1, 0
-	mov r12, r2
-	adds r5, r3, 0
-	ldr r2, [r4, 0x70]
-	movs r0, 0x10
-	ldrsh r3, [r2, r0]
-	adds r0, r3, 0
-	cmp r3, 0
-	bge _0805878A
-	adds r0, r3, 0x3
-_0805878A:
-	movs r7, 0xE
-	ldrsh r1, [r2, r7]
-	asrs r0, 2
-	cmp r1, r0
-	bgt _08058798
-	movs r3, 0
-	b _080587BE
-_08058798:
-	movs r0, 0xE
-	ldrsh r1, [r2, r0]
-	lsrs r0, r3, 31
-	adds r0, r3, r0
-	asrs r0, 1
-	cmp r1, r0
-	bgt _080587AA
-	movs r3, 0x1
-	b _080587BE
-_080587AA:
-	lsls r0, r3, 1
-	adds r0, r3
-	cmp r0, 0
-	bge _080587B4
-	adds r0, 0x3
-_080587B4:
-	asrs r0, 2
-	movs r3, 0x3
-	cmp r1, r0
-	bgt _080587BE
-	movs r3, 0x2
-_080587BE:
-	ldr r1, _080587E4
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r3, [r0]
-	str r5, [sp]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	mov r2, r12
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080587E4: .4byte gUnknown_80F51A4
-	thumb_func_end sub_8058770
-
-	thumb_func_start sub_80587E8
-sub_80587E8:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	adds r5, r1, 0
-	adds r1, r3, 0
-	ldr r0, [r5, 0x70]
-	adds r0, 0xAC
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bne _0805881A
-	movs r3, 0x80
-	lsls r3, 2
-	str r1, [sp]
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_8055640
-	negs r1, r0
-	orrs r1, r0
-	lsrs r4, r1, 31
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl SendNonVolatileEndMessage
-	b _0805882E
-_0805881A:
-	movs r3, 0x80
-	lsls r3, 1
-	str r1, [sp]
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_8055640
-	negs r1, r0
-	orrs r1, r0
-	lsrs r4, r1, 31
-_0805882E:
-	adds r0, r4, 0
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80587E8
-
-	thumb_func_start sub_8058838
-sub_8058838:
-	push {lr}
-	sub sp, 0x8
-	ldr r2, _08058854
-	ldr r2, [r2]
-	movs r3, 0x1
-	str r3, [sp]
-	str r3, [sp, 0x4]
-	movs r3, 0x3
-	bl sub_8076F80
-	movs r0, 0x1
-	add sp, 0x8
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058854: .4byte gUnknown_8106A50
-	thumb_func_end sub_8058838
-
-	thumb_func_start sub_8058858
-sub_8058858:
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	sub sp, 0x8
-	adds r6, r0, 0
-	mov r8, r1
-	ldr r0, _08058898
-	ldr r5, [r0]
-	movs r4, 0x1
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	adds r0, r6, 0
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl sub_8076E20
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	adds r0, r6, 0
-	mov r1, r8
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl sub_8076F80
-	movs r0, 0x1
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058898: .4byte gUnknown_8106A4C
-	thumb_func_end sub_8058858
-
-	thumb_func_start sub_805889C
-sub_805889C:
-	push {lr}
-	bl sub_80769CC
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805889C
-
-	thumb_func_start sub_80588A8
-sub_80588A8:
-	push {lr}
-	movs r2, 0x1
-	bl sub_8079E34
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80588A8
-
-	thumb_func_start sub_80588B8
-sub_80588B8:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	movs r6, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080588E4
-	movs r6, 0x1
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _080588E4
-	ldr r0, _080588F0
-	strb r6, [r0]
-_080588E4:
-	adds r0, r6, 0
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080588F0: .4byte gUnknown_202F219
-	thumb_func_end sub_80588B8
-
-	thumb_func_start sub_80588F4
-sub_80588F4:
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	sub sp, 0x4
-	adds r6, r0, 0
-	adds r5, r1, 0
-	mov r8, r2
-	adds r4, r3, 0
-	ldr r0, [r5, 0x70]
-	movs r1, 0x4
-	ldrsh r0, [r0, r1]
-	bl GetLowKickDmg
-	adds r3, r0, 0
-	str r4, [sp]
-	adds r0, r6, 0
-	adds r1, r5, 0
-	mov r2, r8
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80588F4
-
-	thumb_func_start sub_8058930
-sub_8058930:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r7, r0, 0
-	movs r0, 0
-	mov r8, r0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r0, r7, 0
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080589B8
-	movs r2, 0x1
-	mov r8, r2
-	ldr r0, _080589C8
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	adds r0, r7, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _080589B8
-	ldr r6, [r7, 0x70]
-	adds r0, r7, 0
-	adds r1, r7, 0
-	movs r2, 0
-	movs r3, 0x1
-	bl sub_8077910
-	ldr r0, _080589CC
-	ldr r5, [r0]
-	adds r0, r7, 0
-	adds r1, r7, 0
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl sub_8077084
-	ldr r0, _080589D0
-	ldr r4, [r0]
-	adds r0, r7, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	movs r3, 0x1
-	bl sub_8077084
-	adds r0, r7, 0
-	adds r1, r7, 0
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl sub_8077160
-	adds r0, r7, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	movs r3, 0x1
-	bl sub_8077160
-	adds r6, 0xFB
-	ldrb r0, [r6]
-	cmp r0, 0
-	bne _080589B8
-	mov r0, r8
-	strb r0, [r6]
-_080589B8:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080589C8: .4byte gUnknown_80F4DD6
-_080589CC: .4byte gUnknown_8106A4C
-_080589D0: .4byte gUnknown_8106A50
-	thumb_func_end sub_8058930
-
-	thumb_func_start sub_80589D4
-sub_80589D4:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	ldr r4, _08058A04
-	bl GetWeather
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r4
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	movs r0, 0x1
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r3, 0
-	bl HealTargetHP
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058A04: .4byte gUnknown_80F500A
-	thumb_func_end sub_80589D4
-
-	thumb_func_start sub_8058A08
-sub_8058A08:
-	push {lr}
-	movs r2, 0
-	movs r3, 0x1
-	bl sub_8077910
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058A08
-
-	thumb_func_start sub_8058A18
-sub_8058A18:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	movs r6, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058A44
-	movs r6, 0x1
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058A44
-	ldr r0, _08058A50
-	strb r6, [r0]
-_08058A44:
-	adds r0, r6, 0
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058A50: .4byte gUnknown_202F21A
-	thumb_func_end sub_8058A18
-
-	thumb_func_start sub_8058A54
-sub_8058A54:
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	ldr r1, _08058A78
-	adds r0, r4, 0
-	movs r2, 0
-	bl CalculateStatusTurns
-	adds r2, r0, 0
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80781DC
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058A78: .4byte gUnknown_80F4EB8
-	thumb_func_end sub_8058A54
-
-	thumb_func_start sub_8058A7C
-sub_8058A7C:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r0, _08058AA4
-	ldr r2, [r0]
-	adds r0, r4, 0
-	movs r3, 0x1
-	bl sub_8077160
-	ldr r0, _08058AA8
-	ldr r2, [r0]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r3, 0x1
-	bl sub_8077160
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058AA4: .4byte gUnknown_8106A4C
-_08058AA8: .4byte gUnknown_8106A50
-	thumb_func_end sub_8058A7C
-
-	thumb_func_start SkyAttackMoveAction
-SkyAttackMoveAction:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r6, r1, 0
-	adds r5, r2, 0
-	adds r7, r3, 0
-	movs r0, 0
-	mov r8, r0
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl MoveMatchesChargingStatus
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058B14
-	ldr r0, _08058B0C
-	ldr r3, [r0]
-	str r7, [sp]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	adds r2, r5, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058B04
-	movs r1, 0x1
-	mov r8, r1
-	ldr r0, _08058B10
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058B04
-	adds r0, r4, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_80776C0
-_08058B04:
-	adds r0, r4, 0
-	bl sub_8079764
-	b _08058B2A
-	.align 2, 0
-_08058B0C: .4byte gUnknown_80F4F4C
-_08058B10: .4byte gUnknown_80F4DF4
-_08058B14:
-	ldr r0, _08058B38
-	ldr r0, [r0]
-	str r0, [sp]
-	adds r0, r4, 0
-	adds r1, r4, 0
-	movs r2, 0x3
-	adds r3, r5, 0
-	bl sub_8079618
-	movs r0, 0x1
-	mov r8, r0
-_08058B2A:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058B38: .4byte gUnknown_80FACC4
-	thumb_func_end SkyAttackMoveAction
-
-	thumb_func_start sub_8058B3C
-sub_8058B3C:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058B76
-	movs r7, 0x1
-	ldr r0, _08058B80
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058B76
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_80767B0
-_08058B76:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058B80: .4byte gUnknown_80F4DBC
-	thumb_func_end sub_8058B3C
-
-	thumb_func_start sub_8058B84
-sub_8058B84:
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	movs r6, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058BCC
-	movs r6, 0x1
-	ldr r0, _08058BD8
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058BCC
-	ldr r4, [r5, 0x70]
-	ldr r0, _08058BDC
-	ldr r2, [r0]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	movs r3, 0x1
-	bl sub_8077084
-	adds r4, 0xFB
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _08058BCC
-	strb r6, [r4]
-_08058BCC:
-	adds r0, r6, 0
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058BD8: .4byte gUnknown_80F4DD0
-_08058BDC: .4byte gUnknown_8106A4C
-	thumb_func_end sub_8058B84
-
-	thumb_func_start sub_8058BE0
-sub_8058BE0:
-	push {lr}
-	adds r1, r0, 0
-	bl EndureStatusTarget
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058BE0
-
-	thumb_func_start sub_8058BF0
-sub_8058BF0:
-	push {lr}
-	movs r2, 0x1
-	movs r3, 0x1
-	bl sub_80779F0
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058BF0
-
-	thumb_func_start sub_8058C00
-sub_8058C00:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058C3A
-	movs r7, 0x1
-	ldr r0, _08058C44
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058C3A
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_8077AE4
-_08058C3A:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058C44: .4byte gUnknown_80F4DF8
-	thumb_func_end sub_8058C00
-
-	thumb_func_start sub_8058C48
-sub_8058C48:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r6, r1, 0
-	adds r7, r2, 0
-	adds r5, r3, 0
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0x80
-	bl DungeonRandomRange
-	adds r3, r0, 0
-	ldr r0, [r4, 0x70]
-	ldrb r0, [r0, 0x9]
-	muls r0, r3
-	cmp r0, 0
-	bge _08058C6C
-	adds r0, 0xFF
-_08058C6C:
-	asrs r3, r0, 8
-	cmp r3, 0
-	bge _08058C74
-	movs r3, 0x1
-_08058C74:
-	cmp r3, 0xC7
-	ble _08058C7A
-	movs r3, 0xC7
-_08058C7A:
-	str r5, [sp]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	adds r2, r7, 0
-	bl sub_8055864
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058C48
-
-	thumb_func_start sub_8058C98
-sub_8058C98:
-	push {r4-r7,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r7, r3, 0
-	ldr r0, [sp, 0x1C]
-	movs r6, 0
-	movs r3, 0x80
-	lsls r3, 1
-	str r0, [sp]
-	adds r0, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058CDE
-	movs r6, 0x1
-	ldr r0, _08058CE8
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058CDE
-	str r6, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r7, 0
-	movs r3, 0x1
-	bl sub_8076F80
-_08058CDE:
-	adds r0, r6, 0
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058CE8: .4byte gUnknown_80F4DC0
-	thumb_func_end sub_8058C98
-
-	thumb_func_start sub_8058CEC
-sub_8058CEC:
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	movs r6, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058D28
-	movs r6, 0x1
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058D28
-	ldr r0, _08058D34
-	ldr r2, [r0]
-	movs r0, 0
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	movs r3, 0x2
-	bl sub_8076E20
-_08058D28:
-	adds r0, r6, 0
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058D34: .4byte gUnknown_8106A50
-	thumb_func_end sub_8058CEC
-
-	thumb_func_start sub_8058D38
-sub_8058D38:
-	push {lr}
-	bl sub_8075FCC
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058D38
-
-	thumb_func_start sub_8058D44
-sub_8058D44:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r6, r1, 0
-	mov r12, r2
-	adds r5, r3, 0
-	ldr r2, [r4, 0x70]
-	movs r0, 0x10
-	ldrsh r3, [r2, r0]
-	adds r0, r3, 0
-	cmp r3, 0
-	bge _08058D5E
-	adds r0, r3, 0x3
-_08058D5E:
-	movs r7, 0xE
-	ldrsh r1, [r2, r7]
-	asrs r0, 2
-	cmp r1, r0
-	bgt _08058D6C
-	movs r3, 0
-	b _08058D92
-_08058D6C:
-	movs r0, 0xE
-	ldrsh r1, [r2, r0]
-	lsrs r0, r3, 31
-	adds r0, r3, r0
-	asrs r0, 1
-	cmp r1, r0
-	bgt _08058D7E
-	movs r3, 0x1
-	b _08058D92
-_08058D7E:
-	lsls r0, r3, 1
-	adds r0, r3
-	cmp r0, 0
-	bge _08058D88
-	adds r0, 0x3
-_08058D88:
-	asrs r0, 2
-	movs r3, 0x3
-	cmp r1, r0
-	bgt _08058D92
-	movs r3, 0x2
-_08058D92:
-	ldr r1, _08058DB8
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r3, [r0]
-	str r5, [sp]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	mov r2, r12
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058DB8: .4byte gUnknown_80F51B4
-	thumb_func_end sub_8058D44
-
-	thumb_func_start sub_8058DBC
-sub_8058DBC:
-	push {r4-r7,lr}
-	adds r7, r0, 0
-	adds r6, r1, 0
-	ldr r5, [r7, 0x70]
-	ldr r4, [r6, 0x70]
-	adds r0, r6, 0
-	bl nullsub_92
-	movs r3, 0
-_08058DCE:
-	lsls r2, r3, 1
-	adds r1, r5, 0
-	adds r1, 0x1C
-	adds r1, r2
-	adds r0, r4, 0
-	adds r0, 0x1C
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1]
-	adds r1, r5, 0
-	adds r1, 0x20
-	adds r1, r2
-	adds r0, r4, 0
-	adds r0, 0x20
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1]
-	adds r1, r5, 0
-	adds r1, 0x24
-	adds r1, r2
-	adds r0, r4, 0
-	adds r0, 0x24
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1]
-	lsls r2, r3, 2
-	adds r1, r5, 0
-	adds r1, 0x2C
-	adds r1, r2
-	adds r0, r4, 0
-	adds r0, 0x2C
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r1]
-	adds r1, r5, 0
-	adds r1, 0x34
-	adds r1, r2
-	adds r0, r4, 0
-	adds r0, 0x34
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r1]
-	adds r3, 0x1
-	cmp r3, 0x1
-	ble _08058DCE
-	ldr r0, _08058E54
-	adds r1, r6, 0
-	movs r2, 0
-	bl SetMessageArgument
-	ldr r0, _08058E58
-	ldr r2, [r0]
-	adds r0, r7, 0
-	adds r1, r6, 0
-	bl sub_80522F4
-	adds r1, r5, 0
-	adds r1, 0xFB
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08058E4C
-	movs r0, 0x1
-	strb r0, [r1]
-_08058E4C:
-	movs r0, 0x1
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058E54: .4byte gAvailablePokemonNames
-_08058E58: .4byte gUnknown_80FBD58
-	thumb_func_end sub_8058DBC
-
-	thumb_func_start sub_8058E5C
-sub_8058E5C:
-	push {r4-r7,lr}
-	sub sp, 0x18
-	adds r5, r0, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058ED0
-	adds r0, r5, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058ED0
-	ldr r0, [r5, 0x70]
-	movs r1, 0x10
-	ldrsh r2, [r0, r1]
-	cmp r2, 0
-	bge _08058E8C
-	adds r2, 0x7
-_08058E8C:
-	asrs r6, r2, 3
-	cmp r6, 0
-	bne _08058E94
-	movs r6, 0x1
-_08058E94:
-	movs r7, 0x1
-	adds r0, r5, 0
-	movs r1, 0x7
-	bl HasAbility
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _08058ED0
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058ED0
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	ldr r0, _08058EDC
-	str r0, [sp, 0x8]
-	movs r0, 0x14
-	str r0, [sp, 0xC]
-	str r7, [sp, 0x10]
-	str r4, [sp, 0x14]
-	adds r0, r5, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	movs r3, 0
-	bl sub_806F370
-_08058ED0:
-	adds r0, r7, 0
-	add sp, 0x18
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058EDC: .4byte 0x000001fd
-	thumb_func_end sub_8058E5C
-
-	thumb_func_start sub_8058EE0
-sub_8058EE0:
-	push {lr}
-	sub sp, 0x4
-	ldr r2, [r1, 0x70]
-	movs r3, 0x10
-	ldrsh r2, [r2, r3]
-	lsrs r3, r2, 31
-	adds r2, r3
-	asrs r2, 1
-	movs r3, 0x1
-	str r3, [sp]
-	movs r3, 0
-	bl HealTargetHP
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8058EE0
-
-	thumb_func_start sub_8058F04
-sub_8058F04:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r7, r0, 0
-	adds r4, r1, 0
-	mov r12, r2
-	adds r5, r3, 0
-	ldr r3, [r4, 0x70]
-	movs r6, 0x1
-	ldr r0, _08058F50
-	ldr r1, [r0]
-	movs r0, 0xC1
-	lsls r0, 9
-	adds r2, r1, r0
-	movs r0, 0xC
-	str r0, [r2]
-	ldr r0, _08058F54
-	adds r1, r0
-	movs r0, 0
-	str r0, [r1]
-	adds r3, 0xC0
-	ldrb r0, [r3]
-	cmp r0, 0xA
-	bne _08058F34
-	movs r6, 0x2
-_08058F34:
-	lsls r3, r6, 8
-	str r5, [sp]
-	adds r0, r7, 0
-	adds r1, r4, 0
-	mov r2, r12
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058F48
-	movs r0, 0x1
-_08058F48:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058F50: .4byte gDungeonGlobalData
-_08058F54: .4byte 0x00018204
-	thumb_func_end sub_8058F04
-
-	thumb_func_start sub_8058F58
-sub_8058F58:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	adds r6, r0, 0
-	adds r7, r1, 0
-	mov r8, r3
-	ldr r0, _08058FB0
-	ldr r0, [r0]
-	ldr r1, _08058FB4
-	adds r0, r1
-	movs r1, 0
-	ldrsh r5, [r0, r1]
-	cmp r5, 0
-	bge _08058F78
-	movs r5, 0
-_08058F78:
-	cmp r5, 0x4A
-	ble _08058F7E
-	movs r5, 0x4A
-_08058F7E:
-	ldr r4, _08058FB8
-	lsls r5, 3
-	adds r0, r5, r4
-	ldrh r1, [r0]
-	mov r0, sp
-	bl InitPokemonMove
-	adds r4, 0x4
-	adds r5, r4
-	ldr r4, [r5]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	mov r2, sp
-	mov r3, r8
-	bl _call_via_r4
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08058FB0: .4byte gDungeonGlobalData
-_08058FB4: .4byte 0x00003a0e
-_08058FB8: .4byte gNaturePowerMoveTable
-	thumb_func_end sub_8058F58
-
-	thumb_func_start sub_8058FBC
-sub_8058FBC:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _08058FF6
-	movs r7, 0x1
-	ldr r0, _08059000
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058FF6
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_8077780
-_08058FF6:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08059000: .4byte gUnknown_80F4DE4
-	thumb_func_end sub_8058FBC
-
-	thumb_func_start sub_8059004
-sub_8059004:
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x8
-	mov r9, r0
-	mov r8, r1
-	adds r5, r2, 0
-	adds r6, r3, 0
-	adds r0, r5, 0
-	bl GetMoveType
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_8057600
-	lsls r0, 16
-	asrs r0, 16
-	mov r2, r8
-	adds r2, 0x4
-	str r4, [sp]
-	str r0, [sp, 0x4]
-	mov r0, r9
-	mov r1, r8
-	movs r3, 0x1
-	bl sub_807DF38
-	movs r0, 0x1
-	add sp, 0x8
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8059004
-
-	thumb_func_start sub_8059050
-sub_8059050:
-	push {lr}
-	movs r2, 0x1
-	bl sub_8077780
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8059050
-
-	thumb_func_start sub_8059060
-sub_8059060:
-	push {lr}
-	sub sp, 0x4
-	adds r3, r2, 0
-	ldr r2, _0805907C
-	ldr r2, [r2]
-	str r2, [sp]
-	movs r2, 0xB
-	bl sub_8079618
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805907C: .4byte gUnknown_80FAD6C
-	thumb_func_end sub_8059060
-
-	thumb_func_start sub_8059080
-sub_8059080:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080590BA
-	movs r7, 0x1
-	ldr r0, _080590C4
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080590BA
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_8077780
-_080590BA:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080590C4: .4byte gUnknown_80F4DE8
-	thumb_func_end sub_8059080
-
-	thumb_func_start sub_80590C8
-sub_80590C8:
-	push {lr}
-	bl MistStatusTarget
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80590C8
-
-	thumb_func_start sub_80590D4
-sub_80590D4:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x1C
-	mov r8, r0
-	adds r6, r1, 0
-	adds r5, r2, 0
-	adds r7, r3, 0
-	movs r0, 0
-	mov r9, r0
-	add r0, sp, 0x18
-	mov r1, r9
-	strb r1, [r0]
-	adds r0, r5, 0
-	bl GetMoveType
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r6, 0
-	bl sub_806F4A4
-	lsls r0, 24
-	lsrs r0, 24
-	negs r1, r0
-	orrs r1, r0
-	lsrs r4, r1, 31
-	adds r0, r6, 0
-	movs r1, 0x37
-	bl HasAbility
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805911C
-	movs r4, 0
-_0805911C:
-	cmp r4, 0
-	bne _08059134
-	ldr r0, _08059130
-	ldr r2, [r0]
-	mov r0, r8
-	adds r1, r6, 0
-	bl sub_80522F4
-	b _0805917A
-	.align 2, 0
-_08059130: .4byte gUnknown_80FEB88
-_08059134:
-	adds r0, r5, 0
-	bl GetMoveType
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	adds r1, r7, 0
-	bl sub_8057600
-	lsls r0, 16
-	asrs r0, 16
-	ldr r2, _0805918C
-	add r1, sp, 0x18
-	str r1, [sp]
-	str r4, [sp, 0x4]
-	str r0, [sp, 0x8]
-	mov r0, r9
-	str r0, [sp, 0xC]
-	movs r0, 0x1
-	str r0, [sp, 0x10]
-	str r0, [sp, 0x14]
-	mov r0, r8
-	adds r1, r6, 0
-	movs r3, 0x1
-	bl sub_806F370
-	add r1, sp, 0x18
-	movs r2, 0
-	adds r0, r1, 0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08059178
-	movs r2, 0x1
-_08059178:
-	strb r2, [r1]
-_0805917A:
-	add r0, sp, 0x18
-	ldrb r0, [r0]
-	add sp, 0x1C
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805918C: .4byte 0x0000270f
-	thumb_func_end sub_80590D4
-
-	thumb_func_start sub_8059190
-sub_8059190:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r7, 0
-	movs r4, 0x80
-	lsls r4, 1
-	str r3, [sp]
-	adds r3, r4, 0
-	bl sub_8055640
-	cmp r0, 0
-	beq _080591CA
-	movs r7, 0x1
-	ldr r0, _080591D4
-	movs r1, 0
-	ldrsh r2, [r0, r1]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_805727C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080591CA
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0
-	bl sub_80776C0
-_080591CA:
-	adds r0, r7, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080591D4: .4byte gUnknown_80F4DEA
-	thumb_func_end sub_8059190
-
-	thumb_func_start sub_80591D8
-sub_80591D8:
-	push {lr}
-	bl SafeguardStatusTarget
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80591D8
-
-	thumb_func_start sub_80591E4
-sub_80591E4:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	adds r7, r0, 0
-	adds r4, r1, 0
-	adds r6, r2, 0
-	adds r5, r3, 0
-	movs r0, 0
-	mov r8, r0
-	adds r0, r4, 0
-	movs r1, 0x3A
-	bl HasAbility
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	movs r3, 0x80
-	lsls r3, 1
-	str r5, [sp]
-	adds r0, r7, 0
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl sub_8055640
-	adds r1, r0, 0
-	cmp r1, 0
-	beq _0805927E
-	lsrs r0, r1, 31
-	adds r0, r1, r0
-	asrs r4, r0, 1
-	cmp r4, 0
-	bgt _0805922A
-	movs r4, 0x1
-_0805922A:
-	adds r0, r7, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805927E
-	ldr r0, [r7, 0x70]
-	movs r1, 0x1
-	mov r8, r1
-	adds r1, r0, 0
-	adds r1, 0xFB
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _0805924A
-	mov r0, r8
-	strb r0, [r1]
-_0805924A:
-	adds r0, r7, 0
-	movs r1, 0
-	bl sub_8057308
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805927E
-	mov r1, r9
-	cmp r1, 0
-	beq _0805926E
-	movs r3, 0xFD
-	lsls r3, 1
-	adds r0, r7, 0
-	adds r1, r4, 0
-	movs r2, 0xD
-	bl sub_806F324
-	b _0805927E
-_0805926E:
-	mov r0, r8
-	str r0, [sp]
-	adds r0, r7, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	movs r3, 0
-	bl HealTargetHP
-_0805927E:
-	mov r0, r8
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80591E4
-
-	thumb_func_start SkillSwapMoveAction
-SkillSwapMoveAction:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	adds r6, r1, 0
-	ldr r7, [r4, 0x70]
-	ldr r5, [r6, 0x70]
-	adds r0, r6, 0
-	movs r1, 0x35
-	bl HasAbility
-	lsls r0, 24
-	cmp r0, 0
-	bne _080592BA
-	adds r0, r4, 0
-	movs r1, 0x35
-	bl HasAbility
-	lsls r0, 24
-	cmp r0, 0
-	beq _080592D0
-_080592BA:
-	ldr r0, _080592CC
-	ldr r2, [r0]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80522F4
-	movs r0, 0
-	b _0805932E
-	.align 2, 0
-_080592CC: .4byte gUnknown_80FC8C0
-_080592D0:
-	movs r0, 0x5E
-	adds r0, r5
-	mov r12, r0
-	ldrb r3, [r0]
-	mov r8, r3
-	adds r1, r5, 0
-	adds r1, 0x5F
-	ldrb r2, [r1]
-	adds r5, r7, 0
-	adds r5, 0x5E
-	ldrb r0, [r5]
-	mov r3, r12
-	strb r0, [r3]
-	movs r0, 0x5F
-	adds r0, r7
-	mov r12, r0
-	ldrb r0, [r0]
-	strb r0, [r1]
-	mov r3, r8
-	strb r3, [r5]
-	mov r0, r12
-	strb r2, [r0]
-	ldr r0, _08059338
-	ldr r0, [r0]
-	movs r5, 0x1
-	strb r5, [r0, 0xC]
-	ldr r0, _0805933C
-	ldr r2, [r0]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80522F4
-	adds r1, r7, 0
-	adds r1, 0xFB
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _0805931C
-	strb r5, [r1]
-_0805931C:
-	adds r0, r4, 0
-	adds r1, r4, 0
-	bl sub_806ABAC
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_806ABAC
-	movs r0, 0x1
-_0805932E:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08059338: .4byte gDungeonGlobalData
-_0805933C: .4byte gUnknown_80FC888
-	thumb_func_end SkillSwapMoveAction
-
 	thumb_func_start SketchMoveAction
 SketchMoveAction:
 	push {r4-r7,lr}
@@ -3062,7 +150,7 @@ sub_8059424:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _0805945E:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3175,7 +263,7 @@ sub_8059528:
 	ldr r2, _0805953C
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3210,7 +298,7 @@ sub_8059540:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _0805957A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3227,7 +315,7 @@ sub_8059588:
 	ldr r2, _0805959C
 	ldr r2, [r2]
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3263,7 +351,7 @@ sub_80595A0:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _080595DC:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3672,7 +760,7 @@ sub_80598CC:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 _0805990A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3684,14 +772,14 @@ _08059914: .4byte gUnknown_80F4E00
 _08059918: .4byte gUnknown_8106A4C
 	thumb_func_end sub_80598CC
 
-	thumb_func_start sub_805991C
-sub_805991C:
+	thumb_func_start StockpileMoveAction
+StockpileMoveAction:
 	push {lr}
-	bl sub_80787E4
+	bl HandleStockpile
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805991C
+	thumb_func_end StockpileMoveAction
 
 	thumb_func_start sub_8059928
 sub_8059928:
@@ -3732,7 +820,7 @@ _08059948:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _08059978:
 	adds r0, r6, 0
 	add sp, 0x4
@@ -3781,7 +869,7 @@ _080599A8:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _080599D6:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -3824,7 +912,7 @@ sub_8059A18:
 	push {lr}
 	ldr r2, _08059A28
 	ldr r2, [r2]
-	bl sub_8077540
+	bl RaiseAccuracyStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3899,7 +987,7 @@ _08059A90:
 sub_8059AA8:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3908,7 +996,7 @@ sub_8059AA8:
 	thumb_func_start sub_8059AB8
 sub_8059AB8:
 	push {lr}
-	bl sub_8078758
+	bl TauntStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4027,7 +1115,7 @@ sub_8059B94:
 	ldr r2, _08059BA8
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4172,13 +1260,13 @@ _08059CA8:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	ldr r0, _08059CD4
 	ldr r2, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	movs r6, 0x1
 _08059CC6:
 	adds r0, r6, 0
@@ -4196,7 +1284,7 @@ sub_8059CD8:
 	ldr r2, _08059CEC
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4242,7 +1330,7 @@ sub_8059D00:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059D3A:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4257,7 +1345,7 @@ _08059D44: .4byte gUnknown_80F4DE2
 sub_8059D48:
 	push {lr}
 	movs r2, 0x1
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4288,7 +1376,7 @@ sub_8059D58:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059D8E:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4300,7 +1388,7 @@ _08059D8E:
 	thumb_func_start sub_8059D98
 sub_8059D98:
 	push {lr}
-	bl sub_80769CC
+	bl ImmobilizedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4310,7 +1398,7 @@ sub_8059D98:
 sub_8059DA4:
 	push {lr}
 	movs r2, 0x1
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4320,7 +1408,7 @@ sub_8059DA4:
 sub_8059DB4:
 	push {lr}
 	movs r2, 0x1
-	bl sub_80765E0
+	bl BadlyPoisonedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4353,7 +1441,7 @@ sub_8059DC4:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80765E0
+	bl BadlyPoisonedStatusTarget
 _08059DFE:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4391,7 +1479,7 @@ sub_8059E0C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 _08059E46:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4553,7 +1641,7 @@ sub_8059F38:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _08059F90:
 	adds r0, r4, 0
 	bl sub_8079764
@@ -4730,7 +1818,7 @@ _0805A0EA:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 	b _0805A114
 	.align 2, 0
 _0805A0F8: .4byte gUnknown_80F4DFC
@@ -4739,13 +1827,13 @@ _0805A0FC:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 	b _0805A114
 _0805A10A:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80767B0
+	bl FrozenStatusTarget
 _0805A114:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4944,7 +2032,7 @@ sub_805A258:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 _0805A292:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -4971,7 +2059,7 @@ sub_805A2B0:
 	ldr r2, _0805A2C4
 	ldr r2, [r2]
 	movs r3, 0x2
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4988,7 +2076,7 @@ sub_805A2C8:
 	movs r3, 0x1
 	str r3, [sp]
 	str r3, [sp, 0x4]
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -5134,7 +2222,7 @@ sub_805A3DC:
 	movs r3, 0x1
 	str r3, [sp]
 	str r3, [sp, 0x4]
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -5179,7 +2267,7 @@ sub_805A408:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 _0805A442:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -5273,7 +2361,7 @@ sub_805A4D4:
 	adds r2, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8075E74
+	bl NappingStatusTarget
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -5285,7 +2373,7 @@ _0805A4F8: .4byte gUnknown_80F4E94
 	thumb_func_start sub_805A4FC
 sub_805A4FC:
 	push {lr}
-	bl sub_8076AA4
+	bl IngrainedStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5338,7 +2426,7 @@ _0805A558: .4byte gUnknown_80FC770
 	thumb_func_start sub_805A55C
 sub_805A55C:
 	push {lr}
-	bl sub_8078594
+	bl CurseStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5393,14 +2481,14 @@ sub_805A588:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	adds r0, r6, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _0805A5D8:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -5441,7 +2529,7 @@ sub_805A5E8:
 	adds r1, r5, 0
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	adds r4, 0xFB
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -5521,7 +2609,7 @@ sub_805A688:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _0805A6BE:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -6029,7 +3117,7 @@ _0805AACC: .4byte 0x00003a08
 sub_805AAD0:
 	push {lr}
 	adds r1, r0, 0
-	bl sub_80782CC
+	bl FixedDamageStatusTarget
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -6055,7 +3143,7 @@ sub_805AAE0:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r3, 0x63
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	mov r0, sp
 	movs r1, 0x1
 	bl sub_80943A0
@@ -6160,7 +3248,7 @@ _0805ABE0:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80763F8
+	bl PoisonedStatusTarget
 	b _0805AC86
 _0805ABEC:
 	ldr r1, _0805AC04
@@ -6180,7 +3268,7 @@ _0805AC08:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_80779F0
+	bl LowerMovementSpeedTarget
 	b _0805AC86
 _0805AC16:
 	ldr r0, _0805AC30
@@ -6192,7 +3280,7 @@ _0805AC16:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC30: .4byte gUnknown_8106A4C
@@ -6206,7 +3294,7 @@ _0805AC34:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC4C: .4byte gUnknown_8106A4C
@@ -6216,7 +3304,7 @@ _0805AC50:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_80775DC
+	bl LowerAccuracyStageTarget
 	b _0805AC86
 	.align 2, 0
 _0805AC60: .4byte gUnknown_8106A4C
@@ -6224,19 +3312,19 @@ _0805AC64:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 	b _0805AC86
 _0805AC70:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80776C0
+	bl CringeStatusTarget
 	b _0805AC86
 _0805AC7C:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077780
+	bl ParalyzeStatusTarget
 _0805AC86:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -6272,7 +3360,7 @@ sub_805AC90:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8077AE4
+	bl ConfuseStatusTarget
 _0805ACCA:
 	adds r0, r7, 0
 	add sp, 0x4
@@ -6293,12 +3381,12 @@ sub_805ACD8:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 	adds r0, r5, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_8077160
+	bl RaiseDefenseStageTarget
 	movs r0, 0x1
 	pop {r4-r6}
 	pop {r1}
@@ -6323,7 +3411,7 @@ sub_805AD04:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8076090
+	bl PausedStatusTarget
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4,r5}
@@ -6343,7 +3431,7 @@ sub_805AD34:
 	str r3, [sp]
 	str r3, [sp, 0x4]
 	movs r3, 0x2
-	bl sub_8076E20
+	bl LowerAttackStageTarget
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r1}
@@ -6536,7 +3624,7 @@ sub_805AE74:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl sub_8076F80
+	bl LowerDefenseStageTarget
 _0805AEB8:
 	adds r0, r7, 0
 	add sp, 0x8
@@ -6586,7 +3674,7 @@ sub_805AECC:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 _0805AF1E:
 	mov r0, r8
 	add sp, 0x4
@@ -6663,77 +3751,5 @@ _0805AF9C:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_805AF30
-
-	thumb_func_start sub_805AFA4
-sub_805AFA4:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r8, r2
-	adds r6, r3, 0
-	bl SendThawedMessage
-	ldr r3, [r4, 0x70]
-	movs r0, 0x10
-	ldrsh r2, [r3, r0]
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0805AFC6
-	adds r0, r2, 0x3
-_0805AFC6:
-	movs r7, 0xE
-	ldrsh r1, [r3, r7]
-	asrs r0, 2
-	cmp r1, r0
-	bgt _0805AFD4
-	movs r2, 0
-	b _0805AFFA
-_0805AFD4:
-	movs r0, 0xE
-	ldrsh r1, [r3, r0]
-	lsrs r0, r2, 31
-	adds r0, r2, r0
-	asrs r0, 1
-	cmp r1, r0
-	bgt _0805AFE6
-	movs r2, 0x1
-	b _0805AFFA
-_0805AFE6:
-	lsls r0, r2, 1
-	adds r0, r2
-	cmp r0, 0
-	bge _0805AFF0
-	adds r0, 0x3
-_0805AFF0:
-	asrs r0, 2
-	movs r2, 0x3
-	cmp r1, r0
-	bgt _0805AFFA
-	movs r2, 0x2
-_0805AFFA:
-	ldr r1, _0805B024
-	lsls r0, r2, 2
-	adds r0, r1
-	ldr r3, [r0]
-	str r6, [sp]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	mov r2, r8
-	bl sub_8055640
-	adds r1, r0, 0
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805B024: .4byte gUnknown_80F51C4
-	thumb_func_end sub_805AFA4
 
 	.align 2, 0

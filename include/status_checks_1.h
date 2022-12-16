@@ -3,6 +3,7 @@
 
 #include "dungeon_entity.h"
 
+s32 GetMovementSpeed(struct DungeonEntity *pokemon);
 bool8 HasNegativeStatus(struct DungeonEntity *pokemon);
 bool8 IsSleeping(struct DungeonEntity *pokemon);
 bool8 HasQuarterHPOrLess(struct DungeonEntity *pokemon);

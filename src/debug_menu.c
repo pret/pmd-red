@@ -1,9 +1,14 @@
 #include "global.h"
+#include "constants/friend_area.h"
 #include "debug_menu.h"
+#include "friend_area.h"
 #include "input.h"
 #include "main_menu.h"
 #include "menu.h"
 #include "memory.h"
+#include "pokemon.h"
+#include "save.h"
+#include "text_util.h"
 
 extern struct DebugMenu *gUnknown_203B3EC;
 
@@ -58,6 +63,8 @@ extern void sub_803A3A0(void);
 extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_8035CF4(struct DebugMenu *, u32, u32);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
+extern void sub_808D1DC(u8 *);
+extern void sub_808CFD0(u8 *, s32, u8 *, u32, u32 *, u16 *);
 
 void CreateDebugMenu(void)
 {
@@ -147,4 +154,45 @@ void SetDebugMenuItems(void)
 void sub_803A3A0(void)
 {
     sub_8035CC0(gUnknown_203B3EC->unk140, 0);
+}
+
+void sub_803A3BC(void)
+{
+  s32 speciesIndex;
+  u8 sp_0x8 [88];
+  u16 r7 [4]; // r7
+  u8 buffer [20]; // r6
+  u32 sp_0x7C;
+  s32 sp_0x80;
+
+#ifndef NONMATCHING
+  register s32 index asm("r5");
+  register u32 r9 asm("r9");
+#else
+  s32 index;
+  u32 r9;
+#endif
+
+  index = 1;
+  do {
+    UnlockFriendArea(index);
+    index++;
+  } while (index < NUM_FRIEND_AREAS);
+
+  index = 0;
+  do {
+    r9 = 0;
+    sp_0x7C = 0x1006;
+    index = index + 1;
+    speciesIndex = index * 0x10000 >> 0x10; // dumb way to force s16
+    memset(r7,0,8);
+    r7[0] = 0x27;
+    CopySpeciesNametoBuffer(buffer, speciesIndex);
+    CopyStringtoBuffer(buffer, buffer);
+    buffer[0] = 0x40;
+    sub_808CFD0(sp_0x8,speciesIndex,buffer,0x43,&sp_0x7C,r7);
+    sub_808D1DC(sp_0x8);
+  } while (index < 300);
+  sp_0x80 = r9;
+  WriteSavetoPak(&sp_0x80,1);
 }

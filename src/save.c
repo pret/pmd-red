@@ -451,7 +451,7 @@ bool8 IsSaveCorrupted(void)
     return isCorrupted;
 }
 
-u32 WriteSavetoPak(s32 *param_1,u32 param_2)
+u32 WriteSavetoPak(s32 *param_1, u32 param_2)
 {
   struct UnkStruct_sub_8011DAC *iVar1;
   char *__src;

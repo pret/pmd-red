@@ -281,7 +281,7 @@ u8 GetItemPalette(u8 itemIndex)
     return gItemParametersData[itemIndex].palette;
 }
 
-u8 GetItemCategory(u8 itemIndex)
+u32 GetItemCategory(u8 itemIndex)
 {
     return gItemParametersData[itemIndex].category;
 }

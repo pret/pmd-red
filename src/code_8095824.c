@@ -42,7 +42,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     RestoreIntegerBits(&backup, &temp->unk0, 2);
     RestoreIntegerBits(&backup, &temp->isLeader, 1);
     RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
-    RestoreDungeonLocation(&backup, &temp->unk4);
+    RestoreDungeonLocation(&backup, &temp->dungeonLocation);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[0]);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[1]);
@@ -84,7 +84,7 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &temp->unk0, 2);
     SaveIntegerBits(&backup, &temp->isLeader, 1);
     SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
-    SaveDungeonLocation(&backup, &temp->unk4);
+    SaveDungeonLocation(&backup, &temp->dungeonLocation);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[0]);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[1]);
