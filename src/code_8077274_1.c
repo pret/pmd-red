@@ -5,7 +5,6 @@
 #include "constants/type.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
-#include "dungeon_ai.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
@@ -14,6 +13,7 @@
 #include "code_8077274_1.h"
 #include "code_808417C.h"
 #include "moves.h"
+#include "move_effects_target.h"
 #include "pokemon.h"
 #include "status_checks_1.h"
 

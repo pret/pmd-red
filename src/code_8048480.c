@@ -3,7 +3,7 @@
 #include "constants/status.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
-#include "dungeon_ai.h"
+#include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "number_util.h"

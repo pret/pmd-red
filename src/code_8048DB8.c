@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/status.h"
 #include "code_80521D0.h"
-#include "dungeon_ai.h"
+#include "move_effects_target.h"
 #include "dungeon_random.h"
 #include "item.h"
 #include "status.h"
