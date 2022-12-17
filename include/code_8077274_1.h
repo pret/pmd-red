@@ -16,7 +16,7 @@ void sub_8079490(struct DungeonEntity * pokemon,struct DungeonEntity * target, s
 void sub_8079500(struct DungeonEntity * pokemon,struct DungeonEntity * target, s32 param_3);
 void LongTossStatusTarget(struct DungeonEntity * pokemon,struct DungeonEntity * target);
 void PierceStatusTarget(struct DungeonEntity * pokemon,struct DungeonEntity * target);
-void sub_8079618(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 newStatus, struct PokemonMove *move, u8 *message);
+void SetChargeStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 newStatus, struct PokemonMove *move, u8 *message);
 void sub_8079764(struct DungeonEntity * pokemon);
 void sub_80797A0(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 newStatus);
 void SafeguardStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target);
@@ -31,7 +31,6 @@ void EndureStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
 void MirrorMoveStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target);
 void Conversion2StatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target);
 void VitalThrowStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target);
-void sub_8079618(struct DungeonEntity * pokemon, struct DungeonEntity *target, u8 newStatus, struct PokemonMove *move, u8 *message);
 void sub_8079F20(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 param_3, u8 param_4);
 void sub_807A0CC(struct DungeonEntity * pokemon, struct DungeonEntity * target);
 void SendSleepEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 param_3, bool8 param_4);
@@ -46,7 +45,7 @@ void SendTransformEndMessage(struct DungeonEntity * pokemon, struct DungeonEntit
 void SendEyesightEndMessage(struct DungeonEntity * pokemon,struct DungeonEntity * target);
 void SendMuzzledEndMessage(struct DungeonEntity * pokemon, struct DungeonEntity * target);
 void sub_807A96C(struct DungeonEntity *pokemon, struct DungeonEntity *target);
-void sub_807A9B0(struct DungeonEntity * pokemon);
+void WakeUpPokemon(struct DungeonEntity * pokemon);
 void SendThawedMessage(struct DungeonEntity *pokemon, struct DungeonEntity *target);
 void sub_807AA30(void);
 

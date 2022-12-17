@@ -229,9 +229,9 @@ SECTIONS {
         src/code_806CD90.o(.text);
         asm/code_806CD90.o(.text);
         src/type_effectiveness.o(.text);
+        src/code_806E8B0.o(.text);
         asm/code_806E8B0.o(.text);
         src/status_checks.o(.text);
-        asm/code_80701A4.o(.text);
         src/dungeon_movement.o(.text);
         asm/code_807034C.o(.text);
         src/dungeon_movement_1.o(.text);

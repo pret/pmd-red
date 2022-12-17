@@ -772,7 +772,7 @@ _0806D62A:
 	cmp r0, 0x7F
 	bne _0806D63A
 	adds r0, r7, 0
-	bl sub_807A9B0
+	bl WakeUpPokemon
 _0806D63A:
 	adds r0, r7, 0
 	movs r1, 0x23

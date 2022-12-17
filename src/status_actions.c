@@ -682,7 +682,7 @@ bool8 SkullBashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
         sub_8079764(pokemon);
     }
     else {
-        sub_8079618(pokemon,target,6,move,*gUnknown_80FAFF0);
+        SetChargeStatusTarget(pokemon,target,CHARGING_STATUS_SKULL_BASH,move,*gUnknown_80FAFF0);
         flag = TRUE;
     }
     return flag;

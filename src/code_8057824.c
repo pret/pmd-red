@@ -270,7 +270,7 @@ bool8 DigMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * targe
             sub_8079764(pokemon);
         }
         else {
-            sub_8079618(pokemon,pokemon,10,move,*gUnknown_80FAD4C); // $m0 burrowed underground!
+            SetChargeStatusTarget(pokemon,pokemon,CHARGING_STATUS_DIG,move,*gUnknown_80FAD4C); // $m0 burrowed underground!
         }
         flag = TRUE;
     }
@@ -335,10 +335,10 @@ bool32 sub_8057948(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return TRUE;
 }
 
-bool32 sub_8057954(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move)
+bool32 RageMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move)
 {
   // {ARG_POKEMON_0} is enraged
-  sub_8079618(pokemon,target,0xc,move,gUnknown_80FAC88);
+  SetChargeStatusTarget(pokemon,target,CHARGING_STATUS_RAGE,move,gUnknown_80FAC88);
   return TRUE;
 }
 
@@ -861,7 +861,7 @@ bool8 RazorWindMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
     sub_8079764(pokemon);
   }
   else {
-    sub_8079618(pokemon,pokemon,CHARGING_STATUS_RAZOR_WIND,move,*gUnknown_80FAC54);
+    SetChargeStatusTarget(pokemon,pokemon,CHARGING_STATUS_RAZOR_WIND,move,*gUnknown_80FAC54);
     flag = TRUE;
   }
   return flag;
@@ -869,7 +869,7 @@ bool8 RazorWindMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
 
 bool8 BideMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-   sub_8079618(pokemon, target, CHARGING_STATUS_BIDE, move, *gUnknown_80FAC74);
+   SetChargeStatusTarget(pokemon, target, CHARGING_STATUS_BIDE, move, *gUnknown_80FAC74);
    return TRUE; 
 }
 
@@ -1012,7 +1012,7 @@ bool8 sub_8058638(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
   return flag;
 }
 
-bool8 sub_805867C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
+bool8 FocusPunchMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove * move, u32 param_4)
 {
   bool8 flag;
   
@@ -1021,7 +1021,7 @@ bool8 sub_805867C(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     sub_8079764(pokemon);
   }
   else {
-    sub_8079618(pokemon,pokemon,CHARGING_STATUS_FOCUS_PUNCH,move,*gUnknown_80FACA4);
+    SetChargeStatusTarget(pokemon,pokemon,CHARGING_STATUS_FOCUS_PUNCH,move,*gUnknown_80FACA4);
     flag = TRUE;
   }
   return flag;
@@ -1244,7 +1244,7 @@ bool8 SkyAttackMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *t
         sub_8079764(pokemon);
     }
     else {
-       sub_8079618(pokemon, pokemon, CHARGING_STATUS_SKY_ATTACK, move, *gUnknown_80FACC4);
+       SetChargeStatusTarget(pokemon, pokemon, CHARGING_STATUS_SKY_ATTACK, move, *gUnknown_80FACC4);
        flag = TRUE;
     }
     return flag;
@@ -1532,9 +1532,9 @@ bool8 sub_8059050(struct DungeonEntity *pokemon, struct DungeonEntity *target, s
     return TRUE;
 }
 
-bool8 sub_8059060(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
+bool8 ChargeMoveAction(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, u32 param_4)
 {
-    sub_8079618(pokemon, target, CHARGING_STATUS_CHARGE, move, *gUnknown_80FAD6C);
+    SetChargeStatusTarget(pokemon, target, CHARGING_STATUS_CHARGE, move, *gUnknown_80FAD6C);
     return TRUE;
 }
 
