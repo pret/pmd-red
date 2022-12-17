@@ -14,16 +14,16 @@ extern u32 gUnknown_202DE58;
 extern struct UnkTextStruct2 gUnknown_80E6174;
 
 // Trade Items Menu Link Error Messages
-extern u32 gTradeItemsCommunicationError;
-extern u32 gUnknown_80E639C;
-extern u32 gUnknown_80E63F8;
-extern u32 gUnknown_80E6448;
-extern u32 gUnknown_80E64AC;
-extern u32 gTradeItemsHowManyText;
+extern u8 gTradeItemsCommunicationError[];
+extern u8 gUnknown_80E639C[];
+extern u8 gUnknown_80E63F8[];
+extern u8 gUnknown_80E6448[];
+extern u8 gUnknown_80E64AC[];
+extern u8 gTradeItemsHowManyText[];
 extern struct MenuItem gUnknown_80E60A0;
 extern struct MenuItem gUnknown_80E60D4;
 extern u8 gUnknown_80E61A4[];
-extern u32 gUnknown_80E61C0;
+extern u8 gUnknown_80E61C0[];
 extern struct UnkTextStruct2 gUnknown_80E60EC;
 extern struct MenuItem gUnknown_80E6104;
 extern struct MenuItem gUnknown_80E6154;
@@ -32,9 +32,9 @@ extern u8 gUnknown_80E61E4[];
 extern u8 gUnknown_80E6214[];
 extern struct MenuItem gUnknown_80E618C;
 extern u8 gUnknown_80E6268[];
-extern u32 gUnknown_80E62C4;
-extern u32 gUnknown_80E6358;
-extern u32 gUnknown_80E6314;
+extern u8 gUnknown_80E62C4[];
+extern u8 gUnknown_80E6358[];
+extern u8 gUnknown_80E6314[];
 
 extern void sub_8013AA0(u32 *);
 
@@ -54,13 +54,13 @@ extern void sub_801B450();
 extern void sub_801CB5C(u32);
 extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_8013BBC(u32 *);
-extern void sub_80141B4(u32 *, u32, u32, u32);
+extern void sub_80141B4(u8 *, u32, u32, u32);
 
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(u32, u32, u32 *, u32, u32);
+extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);
@@ -562,7 +562,7 @@ void nullsub_52(void)
 
 void sub_8036B28(void)
 {
-  int iVar3;
+  int linkStatus;
   s32 local_10;
   u32 load_2;
   struct TradeSubStruct *temp;
@@ -573,18 +573,18 @@ void sub_8036B28(void)
   s32 r3;
 
   switch(gTradeItemsMenu->currMenu) {
-    case 0:
-        if (sub_801CF14(0) != '\0') {
+    case TRADE_ITEMS_MAIN_MENU:
+        if (sub_801CF14(0) != 0) {
             sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
             sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
-    case 1:
-        sub_80141B4(&gUnknown_80E61C0,0,0,0x101);
+    case TRADE_ITEMS_SEND_ITEM:
+        sub_80141B4(gUnknown_80E61C0,0,0,0x101);
         break;
-    case 2:
+    case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == 0) {
             ResetUnusedInputStruct();
             sub_800641C(0,1,1);
@@ -592,30 +592,30 @@ void sub_8036B28(void)
             sub_801C8C4(0,1,&local_10,9);
         }
         break;
-    case 3:
+    case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8006518(gTradeItemsMenu->unk184);
         SetMenuItems(&gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
                     &gUnknown_80E6104,1,0,0);
         sub_801CCD8();
         sub_8035CF4(&gTradeItemsMenu->unk44,3,1);
         break;
-    case 4:
+    case TRADE_ITEMS_SEND_ITEM_NUMBER:
         sub_8036F74();
         break;
-    case 6:
+    case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
         sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.itemIndex,0);
         sub_8014248(gUnknown_80E61E4,0,5, &gUnknown_80E6154,0,4,0,0,0x101);
         break;
-    case 7:
+    case TRADE_ITEMS_RECEIVE_ITEM:
         sub_8014248(gUnknown_80E6214,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
         sub_8014248(gUnknown_80E6268,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
         break;
-    case 9:
+    case TRADE_ITEMS_IN_COMMUNICATION:
         nullsub_23(0);
-        sub_80141B4(&gUnknown_80E62C4,0,0,0);
+        sub_80141B4(gUnknown_80E62C4,0,0,0);
         break;
     case 10:
         gTradeItemsMenu->linkStatus = 0;
@@ -637,9 +637,9 @@ void sub_8036B28(void)
         temp3->numItems = r3;
 
         sub_8011830();
-        iVar3 = sub_8037B28(gTradeItemsMenu->itemMode);
-        gTradeItemsMenu->linkStatus = iVar3;
-        if(iVar3 == 0){
+        linkStatus = sub_8037B28(gTradeItemsMenu->itemMode);
+        gTradeItemsMenu->linkStatus = linkStatus;
+        if(linkStatus == 0){
             switch(gTradeItemsMenu->itemMode){
                 // Fallthrough needed on each case
                 case TRADE_ITEMS_SEND_ITEM_MODE:
@@ -663,20 +663,18 @@ void sub_8036B28(void)
     case 0xe:
         if (gTradeItemsMenu->unk24C.numItems == 0) {
             gUnknown_202DE30 = gTradeItemsMenu->unk244.numItems;
-            // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk244.itemIdx.itemIndex,0);
+            sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.itemIndex,0);
         }
         else {
             gUnknown_202DE30 = gTradeItemsMenu->unk24C.numItems;
-            // Cast is needed
-            sub_8090DC4(&gUnknown_202DE58,(u8)gTradeItemsMenu->unk24C.itemIdx.itemIndex,0);
+            sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.itemIndex,0);
         }
-        sub_80141B4(&gUnknown_80E6314,0,0,0x101);
+        sub_80141B4(gUnknown_80E6314,0,0,0x101);
         break;
     case 0xd:
         gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
         sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.itemIndex,0);
-        sub_80141B4(&gUnknown_80E6358,0,0,0x101);
+        sub_80141B4(gUnknown_80E6358,0,0,0x101);
         break;
     case 0xB:
     case 0xC:
@@ -695,28 +693,28 @@ void PrintTradeItemsLinkError(u32 errorNum)
     case 0:
         break;
     case 1:
-        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 3:
-        sub_80141B4(&gUnknown_80E639C, 0, 0, 0x101);
+        sub_80141B4(gUnknown_80E639C, 0, 0, 0x101);
         break;
     case 2:
-        sub_80141B4(&gUnknown_80E63F8, 0, 0, 0x101);
+        sub_80141B4(gUnknown_80E63F8, 0, 0, 0x101);
         break;
     case 4:
-        sub_80141B4(&gUnknown_80E6448, 0, 0, 0x101);
+        sub_80141B4(gUnknown_80E6448, 0, 0, 0x101);
         break;
     case 5:
-        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 0xe:
-        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 0xf:
-        sub_80141B4(&gUnknown_80E64AC, 0, 0, 0x101);
+        sub_80141B4(gUnknown_80E64AC, 0, 0, 0x101);
         break;
     default:
-        sub_80141B4(&gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
         break;
   }
 }
@@ -745,7 +743,7 @@ void sub_8036F30(void)
   sub_8008C54(uVar1);
   sub_80073B8(uVar1);
   // Draw "How many?"
-  xxx_call_draw_string(2, 0, &gTradeItemsHowManyText, uVar1, 0);
+  xxx_call_draw_string(2, 0, gTradeItemsHowManyText, uVar1, 0);
   sub_8013C68(&gTradeItemsMenu->numItemsToSend);
   sub_80073E0(uVar1);
 }
