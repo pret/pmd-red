@@ -5,6 +5,7 @@
 #include "trade_items_menu.h"
 #include "memory.h"
 #include "save.h"
+#include "menu.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
@@ -19,18 +20,18 @@ extern u32 gUnknown_80E63F8;
 extern u32 gUnknown_80E6448;
 extern u32 gUnknown_80E64AC;
 extern u32 gTradeItemsHowManyText;
-extern u32 gUnknown_80E60A0;
-extern u32 gUnknown_80E60D4;
-extern u32 gUnknown_80E61A4;
+extern struct MenuItem gUnknown_80E60A0;
+extern struct MenuItem gUnknown_80E60D4;
+extern u8 gUnknown_80E61A4[];
 extern u32 gUnknown_80E61C0;
-extern u32 gUnknown_80E60EC;
-extern u32 gUnknown_80E6104;
-extern u32 gUnknown_80E6154;
-extern u32 gUnknown_80E61E4;
+extern struct UnkTextStruct2 gUnknown_80E60EC;
+extern struct MenuItem gUnknown_80E6104;
+extern struct MenuItem gUnknown_80E6154;
+extern u8 gUnknown_80E61E4[];
 
-extern u32 gUnknown_80E6214;
-extern u32 gUnknown_80E618C;
-extern u32 gUnknown_80E6268;
+extern u8 gUnknown_80E6214[];
+extern struct MenuItem gUnknown_80E618C;
+extern u8 gUnknown_80E6268[];
 extern u32 gUnknown_80E62C4;
 extern u32 gUnknown_80E6358;
 extern u32 gUnknown_80E6314;
@@ -63,7 +64,16 @@ extern void xxx_call_draw_string(u32, u32, u32 *, u32, u32);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);
+extern s32 sub_8037B28(u32);
+extern void sub_8011830(void);
+extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
+extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
+extern void nullsub_23(u32);
+extern void xxx_call_start_bg_music(void);
+extern s32 sub_80381F4(u32, void *, void *);
+extern s32 sub_8037D64(u32, void *, void *);
 
+void sub_8036F74(void);
 void sub_8036F30();
 void TradeItem_AddItem();
 void SetTradeItemMenu(u32);
@@ -549,7 +559,7 @@ void nullsub_52(void)
 {
 }
 
-#ifdef NONMATCHING
+
 void sub_8036B28(void)
 {
   int iVar3;
@@ -557,14 +567,18 @@ void sub_8036B28(void)
   u32 load_2;
   struct TradeSubStruct *temp;
   struct TradeSubStruct *temp2;
+  struct TradeSubStruct *temp3;
+  struct TradeSubStruct *temp4;
+  s32 r2;
+  s32 r3;
 
   switch(gTradeItemsMenu->currMenu) {
     case 0:
         if (sub_801CF14(0) != '\0') {
-            sub_8014248(&gUnknown_80E61A4,0,1,&gUnknown_80E60D4,0,4,0,0,0x101);
+            sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
-            sub_8014248(&gUnknown_80E61A4,0,1,&gUnknown_80E60A0,0,4,0,0,0x101);
+            sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
     case 1:
@@ -591,13 +605,13 @@ void sub_8036B28(void)
     case 6:
         gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
         sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.itemIndex,0);
-        sub_8014248(&gUnknown_80E61E4,0,5, &gUnknown_80E6154,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E61E4,0,5, &gUnknown_80E6154,0,4,0,0,0x101);
         break;
     case 7:
-        sub_8014248(&gUnknown_80E6214,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E6214,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
-        sub_8014248(&gUnknown_80E6268,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E6268,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 9:
         nullsub_23(0);
@@ -605,37 +619,40 @@ void sub_8036B28(void)
         break;
     case 10:
         gTradeItemsMenu->linkStatus = 0;
-    // TODO
-    // Regs mess up here
-    // Needs a mov r2, 0
-    // and     mov r3, 0
 
-        temp = &gTradeItemsMenu->unk244;
-        temp->itemIdx.itemIndex_u32 = 0;
-        temp->numItems = 0;
+#ifndef NONMATCHING
+        asm("mov\t%0, #0":"=r"(r2));
+        asm("mov\t%0, #0":"=r"(r3));
+#else
+        r2 = 0;
+        r3 = 0;
+#endif
 
-        temp = &gTradeItemsMenu->unk24C;
-        temp->itemIdx.itemIndex_u32 = 0;
-        temp->numItems = 0;
-    // Regs are fixed back up after
+        temp4 = &gTradeItemsMenu->unk244;
+        temp4->itemIdx.itemIndex_u32 = r2;
+        temp4->numItems = r3;
+
+        temp3 = &gTradeItemsMenu->unk24C;
+        temp3->itemIdx.itemIndex_u32 = r2;
+        temp3->numItems = r3;
 
         sub_8011830();
         iVar3 = sub_8037B28(gTradeItemsMenu->itemMode);
         gTradeItemsMenu->linkStatus = iVar3;
         if(iVar3 == 0){
-        switch(gTradeItemsMenu->itemMode){
-            // Fallthrough needed on each case
-            case TRADE_ITEMS_SEND_ITEM_MODE:
-                temp = &gTradeItemsMenu->unk244;
-                temp2 = &gTradeItemsMenu->sentItem;
-                load_2 = temp2->numItems;
-                temp->itemIdx.itemIndex_u32 = temp2->itemIdx.itemIndex_u32;
-                temp->numItems = load_2;
-            case TRADE_ITEMS_RECEIVE_ITEM_MODE:
-                gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
-            default:
-                break;
-        }
+            switch(gTradeItemsMenu->itemMode){
+                // Fallthrough needed on each case
+                case TRADE_ITEMS_SEND_ITEM_MODE:
+                    temp = &gTradeItemsMenu->unk244;
+                    temp2 = &gTradeItemsMenu->sentItem;
+                    load_2 = temp2->numItems;
+                    temp->itemIdx.itemIndex_u32 = temp2->itemIdx.itemIndex_u32;
+                    temp->numItems = load_2;
+                case TRADE_ITEMS_RECEIVE_ITEM_MODE:
+                    gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
+                default:
+                    break;
+            }
         }
         // Needed this check for code generation
         if(gTradeItemsMenu->linkStatus == 0 && gTradeItemsMenu->itemMode <= 1){
@@ -671,348 +688,6 @@ void sub_8036B28(void)
         break;
   }
 }
-#else
-NAKED
-void sub_8036B28(void)
-{
-	asm_unified("\tpush {r4,r5,lr}\n"
-	"\tsub sp, 0x18\n"
-	"\tldr r1, _08036B44\n"
-	"\tldr r0, [r1]\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r5, r1, 0\n"
-	"\tcmp r0, 0x12\n"
-	"\tbls _08036B3A\n"
-	"\tb _08036DFA\n"
-"_08036B3A:\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, _08036B48\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tmov pc, r0\n"
-	"\t.align 2, 0\n"
-"_08036B44: .4byte gTradeItemsMenu\n"
-"_08036B48: .4byte _08036B4C\n"
-	"\t.align 2, 0\n"
-"_08036B4C:\n"
-	"\t.4byte _08036B98\n"
-	"\t.4byte _08036BDC\n"
-	"\t.4byte _08036BE4\n"
-	"\t.4byte _08036C14\n"
-	"\t.4byte _08036C58\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036C5E\n"
-	"\t.4byte _08036C90\n"
-	"\t.4byte _08036C98\n"
-	"\t.4byte _08036CC0\n"
-	"\t.4byte _08036CD8\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036DD8\n"
-	"\t.4byte _08036D70\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036DFA\n"
-	"\t.4byte _08036DFA\n"
-"_08036B98:\n"
-	"\tmovs r0, 0\n"
-	"\tbl sub_801CF14\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r2, r0, 24\n"
-	"\tcmp r2, 0\n"
-	"\tbeq _08036BB8\n"
-	"\tldr r0, _08036BB0\n"
-	"\tldr r3, _08036BB4\n"
-	"\tmovs r2, 0\n"
-	"\tb _08036BBC\n"
-	"\t.align 2, 0\n"
-"_08036BB0: .4byte gUnknown_80E61A4\n"
-"_08036BB4: .4byte gUnknown_80E60D4\n"
-"_08036BB8:\n"
-	"\tldr r0, _08036BD4\n"
-	"\tldr r3, _08036BD8\n"
-"_08036BBC:\n"
-	"\tstr r2, [sp]\n"
-	"\tmovs r1, 0x4\n"
-	"\tstr r1, [sp, 0x4]\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tstr r2, [sp, 0xC]\n"
-	"\tadds r1, 0xFD\n"
-	"\tstr r1, [sp, 0x10]\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_8014248\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036BD4: .4byte gUnknown_80E61A4\n"
-"_08036BD8: .4byte gUnknown_80E60A0\n"
-"_08036BDC:\n"
-	"\tldr r0, _08036BE0\n"
-	"\tb _08036DBA\n"
-	"\t.align 2, 0\n"
-"_08036BE0: .4byte gUnknown_80E61C0\n"
-"_08036BE4:\n"
-	"\tbl sub_801D008\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08036BEE\n"
-	"\tb _08036DFA\n"
-"_08036BEE:\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tldr r0, _08036C10\n"
-	"\tstr r0, [sp, 0x14]\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r1, 0x1\n"
-	"\tadd r2, sp, 0x14\n"
-	"\tmovs r3, 0x9\n"
-	"\tbl sub_801C8C4\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036C10: .4byte 0x00020003\n"
-"_08036C14:\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r4, 0xC2\n"
-	"\tlsls r4, 1\n"
-	"\tadds r0, r4\n"
-	"\tbl sub_8006518\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0x44\n"
-	"\tadds r1, r4\n"
-	"\tldr r3, _08036C50\n"
-	"\tldr r2, _08036C54\n"
-	"\tstr r2, [sp]\n"
-	"\tmovs r2, 0x1\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tmovs r2, 0\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tstr r2, [sp, 0xC]\n"
-	"\tmovs r2, 0x3\n"
-	"\tbl SetMenuItems\n"
-	"\tbl sub_801CCD8\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0x44\n"
-	"\tmovs r1, 0x3\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_8035CF4\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036C50: .4byte gUnknown_80E60EC\n"
-"_08036C54: .4byte gUnknown_80E6104\n"
-"_08036C58:\n"
-	"\tbl sub_8036F74\n"
-	"\tb _08036DFA\n"
-"_08036C5E:\n"
-	"\tldr r2, _08036C7C\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r0, [r1, 0x14]\n"
-	"\tstr r0, [r2]\n"
-	"\tldr r0, _08036C80\n"
-	"\tldr r2, _08036C84\n"
-	"\tadds r1, r2\n"
-	"\tldrb r1, [r1]\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8090DC4\n"
-	"\tldr r0, _08036C88\n"
-	"\tldr r3, _08036C8C\n"
-	"\tb _08036C9C\n"
-	"\t.align 2, 0\n"
-"_08036C7C: .4byte gUnknown_202DE30\n"
-"_08036C80: .4byte gUnknown_202DE58\n"
-"_08036C84: .4byte 0x0000025e\n"
-"_08036C88: .4byte gUnknown_80E61E4\n"
-"_08036C8C: .4byte gUnknown_80E6154\n"
-"_08036C90:\n"
-	"\tldr r0, _08036C94\n"
-	"\tb _08036C9A\n"
-	"\t.align 2, 0\n"
-"_08036C94: .4byte gUnknown_80E6214\n"
-"_08036C98:\n"
-	"\tldr r0, _08036CB8\n"
-"_08036C9A:\n"
-	"\tldr r3, _08036CBC\n"
-"_08036C9C:\n"
-	"\tmovs r2, 0\n"
-	"\tstr r2, [sp]\n"
-	"\tmovs r1, 0x4\n"
-	"\tstr r1, [sp, 0x4]\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tstr r2, [sp, 0xC]\n"
-	"\tadds r1, 0xFD\n"
-	"\tstr r1, [sp, 0x10]\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0x5\n"
-	"\tbl sub_8014248\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036CB8: .4byte gUnknown_80E6268\n"
-"_08036CBC: .4byte gUnknown_80E618C\n"
-"_08036CC0:\n"
-	"\tmovs r0, 0\n"
-	"\tbl nullsub_23\n"
-	"\tldr r0, _08036CD4\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0\n"
-	"\tbl sub_80141B4\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036CD4: .4byte gUnknown_80E62C4\n"
-"_08036CD8:\n"
-	"\tldr r4, _08036D18\n"
-	"\tldr r1, [r4]\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [r1, 0xC]\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0\n"
-	"\tmovs r5, 0x91\n"
-	"\tlsls r5, 2\n"
-	"\tadds r0, r1, r5\n"
-	"\tstr r2, [r0]\n"
-	"\tstr r3, [r0, 0x4]\n"
-	"\tmovs r0, 0x93\n"
-	"\tlsls r0, 2\n"
-	"\tadds r1, r0\n"
-	"\tstr r2, [r1]\n"
-	"\tstr r3, [r1, 0x4]\n"
-	"\tbl sub_8011830\n"
-	"\tldr r0, [r4]\n"
-	"\tldr r0, [r0, 0x8]\n"
-	"\tbl sub_8037B28\n"
-	"\tldr r4, [r4]\n"
-	"\tstr r0, [r4, 0xC]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08036D44\n"
-	"\tldr r0, [r4, 0x8]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08036D1C\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _08036D2C\n"
-	"\tb _08036D44\n"
-	"\t.align 2, 0\n"
-"_08036D18: .4byte gTradeItemsMenu\n"
-"_08036D1C:\n"
-	"\tadds r2, r4, r5\n"
-	"\tmovs r1, 0x95\n"
-	"\tlsls r1, 2\n"
-	"\tadds r0, r4, r1\n"
-	"\tldr r1, [r0, 0x4]\n"
-	"\tldr r0, [r0]\n"
-	"\tstr r0, [r2]\n"
-	"\tstr r1, [r2, 0x4]\n"
-"_08036D2C:\n"
-	"\tldr r4, _08036D6C\n"
-	"\tldr r2, [r4]\n"
-	"\tldr r0, [r2, 0x8]\n"
-	"\tmovs r3, 0x91\n"
-	"\tlsls r3, 2\n"
-	"\tadds r1, r2, r3\n"
-	"\tadds r3, 0x8\n"
-	"\tadds r2, r3\n"
-	"\tbl sub_8037D64\n"
-	"\tldr r1, [r4]\n"
-	"\tstr r0, [r1, 0xC]\n"
-"_08036D44:\n"
-	"\tldr r4, _08036D6C\n"
-	"\tldr r2, [r4]\n"
-	"\tldr r0, [r2, 0xC]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08036D66\n"
-	"\tldr r0, [r2, 0x8]\n"
-	"\tcmp r0, 0x1\n"
-	"\tbhi _08036D66\n"
-	"\tmovs r3, 0x91\n"
-	"\tlsls r3, 2\n"
-	"\tadds r1, r2, r3\n"
-	"\tadds r3, 0x8\n"
-	"\tadds r2, r3\n"
-	"\tbl sub_80381F4\n"
-	"\tldr r1, [r4]\n"
-	"\tstr r0, [r1, 0xC]\n"
-"_08036D66:\n"
-	"\tbl xxx_call_start_bg_music\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036D6C: .4byte gTradeItemsMenu\n"
-"_08036D70:\n"
-	"\tldr r2, [r5]\n"
-	"\tmovs r1, 0x94\n"
-	"\tlsls r1, 2\n"
-	"\tadds r0, r2, r1\n"
-	"\tldr r1, [r0]\n"
-	"\tcmp r1, 0\n"
-	"\tbne _08036DA4\n"
-	"\tldr r1, _08036D9C\n"
-	"\tmovs r3, 0x92\n"
-	"\tlsls r3, 2\n"
-	"\tadds r0, r2, r3\n"
-	"\tldr r0, [r0]\n"
-	"\tstr r0, [r1]\n"
-	"\tldr r0, _08036DA0\n"
-	"\tsubs r3, 0x4\n"
-	"\tadds r1, r2, r3\n"
-	"\tldrb r1, [r1]\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8090DC4\n"
-	"\tb _08036DB8\n"
-	"\t.align 2, 0\n"
-"_08036D9C: .4byte gUnknown_202DE30\n"
-"_08036DA0: .4byte gUnknown_202DE58\n"
-"_08036DA4:\n"
-	"\tldr r0, _08036DC8\n"
-	"\tstr r1, [r0]\n"
-	"\tldr r0, _08036DCC\n"
-	"\tmovs r3, 0x93\n"
-	"\tlsls r3, 2\n"
-	"\tadds r1, r2, r3\n"
-	"\tldrb r1, [r1]\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8090DC4\n"
-"_08036DB8:\n"
-	"\tldr r0, _08036DD0\n"
-"_08036DBA:\n"
-	"\tldr r3, _08036DD4\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80141B4\n"
-	"\tb _08036DFA\n"
-	"\t.align 2, 0\n"
-"_08036DC8: .4byte gUnknown_202DE30\n"
-"_08036DCC: .4byte gUnknown_202DE58\n"
-"_08036DD0: .4byte gUnknown_80E6314\n"
-"_08036DD4: .4byte 0x00000101\n"
-"_08036DD8:\n"
-	"\tldr r2, _08036E04\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r0, [r1, 0x14]\n"
-	"\tstr r0, [r2]\n"
-	"\tldr r0, _08036E08\n"
-	"\tldr r2, _08036E0C\n"
-	"\tadds r1, r2\n"
-	"\tldrb r1, [r1]\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8090DC4\n"
-	"\tldr r0, _08036E10\n"
-	"\tldr r3, _08036E14\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80141B4\n"
-"_08036DFA:\n"
-	"\tadd sp, 0x18\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08036E04: .4byte gUnknown_202DE30\n"
-"_08036E08: .4byte gUnknown_202DE58\n"
-"_08036E0C: .4byte 0x0000025e\n"
-"_08036E10: .4byte gUnknown_80E6358\n"
-"_08036E14: .4byte 0x00000101");
-}
-#endif
 
 void PrintTradeItemsLinkError(u32 errorNum)
 {
