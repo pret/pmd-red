@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
@@ -466,37 +467,37 @@ void ReturnToThankYouMainFromError(void)
 void PrintThankYouMailLinkError(u32 errorCode)
 {
   switch(errorCode) {
-    case WONDER_MAIL_INCORRECT_NUM_SYSTEMS:
+    case COMMS_INCORRECT_NUM_SYSTEMS:
         sub_80141B4(gUnknown_80DEF28, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_DIFFERENT_MODES:
+    case COMMS_DIFFERENT_MODES:
         sub_80141B4(gUnknown_80DEF80, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NO_ROOM_STORAGE:
+    case COMMS_NO_ROOM_STORAGE:
         sub_80141B4(gUnknown_80DEFDC, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_DUPLICATE_MAIL:
+    case COMMS_DUPLICATE_MAIL:
         sub_80141B4(gUnknown_80DF044, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_ELIGIBLE_1:
+    case COMMS_NOT_ELIGIBLE_1:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_ELIGIBLE_2:
+    case COMMS_NOT_ELIGIBLE_2:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NO_ROOM_MAIL:
+    case COMMS_NO_ROOM_MAIL:
         sub_80141B4(gUnknown_80DF0E0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 1:
-    case WONDER_MAIL_NO_RESPONSE:
+    case COMMS_NO_RESPONSE:
     case 5:
     case 14:
         sub_80141B4(gUnknown_80DEF04, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_READY:
+    case COMMS_NOT_READY:
         sub_80141B4(gUnknown_80DF138, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_GOOD:
+    case COMMS_GOOD:
     default:
         break;
   }
@@ -510,7 +511,7 @@ void DisplayThankYouMailCommsOutcome(void)
     return;
   }
   MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemSlot));
-  gUnknown_203B2C4->unk41C.itemIndex = 0;
+  gUnknown_203B2C4->unk41C.itemIndex = ITEM_ID_NOTHING;
   gUnknown_203B2C4->unk41C.numItems = 1;
   gUnknown_203B2C4->unk41C.itemFlags = 0;
   if (gUnknown_203B2C4->linkError == 0) {
@@ -678,7 +679,7 @@ void sub_802A230(void)
 void sub_802A28C(void)
 {
 
-  gUnknown_203B2C4->unk41C.itemIndex = 0;
+  gUnknown_203B2C4->unk41C.itemIndex = ITEM_ID_NOTHING;
   gUnknown_203B2C4->unk41C.numItems = 1;
   gUnknown_203B2C4->unk41C.itemFlags = 0;
 
@@ -960,7 +961,7 @@ void HandleConfirmItemtoSendMenu(void)
         {
             case 7:
                 return_var = sub_8095228(gUnknown_203B2C4->unk218);
-                if(gUnknown_203B2C4->unk41C.itemIndex != 0)
+                if(gUnknown_203B2C4->unk41C.itemIndex != ITEM_ID_NOTHING)
                 {
                     return_var->unk20 = gUnknown_203B2C4->unk41C;
                 }
@@ -1149,7 +1150,7 @@ void HandleMailCommunicationMenu(void)
                 {
                     case WONDER_MAIL_MODE_SEND:
                         return_var = sub_8095228(sub_80953D4(5));
-                        if(return_var->unk20.itemIndex != 0)
+                        if(return_var->unk20.itemIndex != ITEM_ID_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1269,7 +1270,7 @@ void nullsub_131(void)
 
 void UpdateThankYouMailText(void)
 {
-  char cVar1;
+  u8 itemIndex;
   char *monName;
   u8 auStack180 [80];
   u8 auStack100 [80];
@@ -1325,11 +1326,11 @@ void UpdateThankYouMailText(void)
         sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
-        gUnknown_203B2C4->linkError = 0;
+        gUnknown_203B2C4->linkError = COMMS_GOOD;
         sub_8011830();
         linkStatus = sub_8037B28(gUnknown_203B2C4->unk40);
         gUnknown_203B2C4->linkError = linkStatus;
-        if (linkStatus == 0)
+        if (linkStatus == COMMS_GOOD)
         {
             switch(gUnknown_203B2C4->unk40)
             {
@@ -1344,7 +1345,7 @@ void UpdateThankYouMailText(void)
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
             }
-            if (gUnknown_203B2C4->linkError == 0){
+            if (gUnknown_203B2C4->linkError == COMMS_GOOD){
                 switch(gUnknown_203B2C4->unk40){
                     case 6:
                     case 7:
@@ -1414,11 +1415,11 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
         puVar4 = sub_8095228(uVar2);
-        cVar1 = puVar4->unk20.itemIndex;
-        if (cVar1 != '\0')
-            gUnknown_203B2C4->unk53C.itemRewards[0] = cVar1; // unk558
+        itemIndex = puVar4->unk20.itemIndex;
+        if (itemIndex != ITEM_ID_NOTHING)
+            gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else
-            gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
+            gUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_ID_NOTHING; // unk558
         gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
         gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&puVar4->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559

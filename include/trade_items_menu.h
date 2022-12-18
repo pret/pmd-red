@@ -18,7 +18,7 @@ struct TradeItemsMenu
 {
     // size: 0x3A0
     u32 currMenu;
-    u32 unk4;
+    u32 fallbackState;
     u32 itemMode;
     u32 linkStatus;
     u32 unk10;
@@ -50,7 +50,6 @@ struct TradeItemsMenu
 
     u8 fill25F[0x3A0 - 0x260];
 };
-
 
 s32 UpdateTradeItemsMenu(void);
 s32 CreateTradeItemsMenu(void);

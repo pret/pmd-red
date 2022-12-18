@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
@@ -791,40 +792,40 @@ void sub_8028B1C(u32 errorCode)
 {
     switch(errorCode)
     {
-        case WONDER_MAIL_GOOD:
+        case COMMS_GOOD:
             break;
         case 1:
-        case WONDER_MAIL_NO_RESPONSE:
+        case COMMS_NO_RESPONSE:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_INCORRECT_NUM_SYSTEMS:
+        case COMMS_INCORRECT_NUM_SYSTEMS:
             sub_80141B4(gWonderMailNumGBAsText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_DIFFERENT_MODES:
+        case COMMS_DIFFERENT_MODES:
             sub_80141B4(gWonderMailWrongModeText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 5:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_NO_ROOM_STORAGE:
+        case COMMS_NO_ROOM_STORAGE:
             sub_80141B4(gWonderMailStorageFullText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_DUPLICATE_MAIL:
+        case COMMS_DUPLICATE_MAIL:
             sub_80141B4(gWonderMailDuplicateText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_NOT_ELIGIBLE_1:
+        case COMMS_NOT_ELIGIBLE_1:
             sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_NOT_ELIGIBLE_2:
+        case COMMS_NOT_ELIGIBLE_2:
             sub_80141B4(gWonderMailNotEligibleReceiveText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_NO_ROOM_MAIL:
+        case COMMS_NO_ROOM_MAIL:
             sub_80141B4(gWonderMailNoRoomText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         case 14:
             sub_80141B4(gWonderMailErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
-        case WONDER_MAIL_NOT_READY:
+        case COMMS_NOT_READY:
             sub_80141B4(gWonderMailFriendErrorText, 0, &gUnknown_203B2C0->faceFile, 0x10d);
             break;
         default:
