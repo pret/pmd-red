@@ -147,6 +147,7 @@ extern u8 *gUnknown_80FEB08[];
 extern u8 gUnknown_202DE58[];
 extern s16 gUnknown_80F4E08;
 extern u8 gDungeonCamouflageTypes[76];
+extern u32 gUnknown_202F228;
 
 struct Position_Alt
 {
@@ -162,6 +163,16 @@ extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
 
 extern u32 gUnknown_80F51C4[];
+
+typedef bool8 (*MoveCallback)(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4);
+
+struct NaturePowerMove
+{
+    s16 moveID;
+    u16 unk2;
+    MoveCallback move;
+};
+struct NaturePowerMove gUnknown_80F59C8[10];
 
 bool8 sub_805AFA4(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, u32 param_4)
 {
@@ -505,7 +516,7 @@ bool8 sub_805B53C(struct DungeonEntity * pokemon, struct DungeonEntity * target,
         for(r1 = &gUnknown_80F55EC[index]; (999 > index) && (*r1 >= 0); r1 = r1 + 2, index++)
             {
                 if ((IQ < *r1)){
-                    r5 = (int)r1[1];
+                    r5 = r1[1];
                     goto _0805B598;
                 }
             }
@@ -525,45 +536,17 @@ bool8 LeechSeedMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
     return TRUE;
 }
 
-NAKED
 bool8 sub_805B618(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5,r6}\n"
-	"\tsub sp, 0x8\n"
-	"\tadds r6, r0, 0\n"
-	"\tmov r8, r1\n"
-	"\tmov r9, r3\n"
-	"\tldr r0, _0805B660\n"
-	"\tldr r4, [r0]\n"
-	"\tldr r5, _0805B664\n"
-	"\tlsls r4, 3\n"
-	"\tadds r0, r4, r5\n"
-	"\tldrh r1, [r0]\n"
-	"\tmov r0, sp\n"
-	"\tbl InitPokemonMove\n"
-	"\tadds r5, 0x4\n"
-	"\tadds r4, r5\n"
-	"\tldr r4, [r4]\n"
-	"\tadds r0, r6, 0\n"
-	"\tmov r1, r8\n"
-	"\tmov r2, sp\n"
-	"\tmov r3, r9\n"
-	"\tbl _call_via_r4\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0805B660: .4byte gUnknown_202F228\n"
-"_0805B664: .4byte gUnknown_80F59C8");
+  bool8 flag;
+  struct PokemonMove natureMove;
+  u32 index;
+
+  index = gUnknown_202F228;
+  
+  InitPokemonMove(&natureMove, gUnknown_80F59C8[index].moveID);
+  flag = gUnknown_80F59C8[index].move(pokemon, target, &natureMove, param_4);
+  return flag;
 }
 
 bool8 sub_805B668(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
