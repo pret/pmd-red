@@ -199,7 +199,9 @@ struct DungeonEntityData
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
     /* 0x14A */ u8 unk14A;
-    u8 fill14B[0x14E - 0x14B];
+    /* 0x14B */ u8 unk14B;
+    /* 0x14C */ u8 unk14C;
+    /* 0x14D */ u8 unk14D;
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
