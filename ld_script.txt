@@ -440,6 +440,7 @@ SECTIONS {
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
         src/main_menu.o(.rodata);
+        src/trade_items_menu.o(.rodata);
         data/data_80E59A8.o(.rodata);
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);

@@ -12,30 +12,71 @@ extern struct TradeItemsMenu *gTradeItemsMenu;
 
 extern u32 gUnknown_202DE30;
 extern u32 gUnknown_202DE58;
-extern struct UnkTextStruct2 gUnknown_80E6174;
 
-// Trade Items Menu Link Error Messages
-extern u8 gTradeItemsCommunicationError[];
-extern u8 gUnknown_80E639C[];
-extern u8 gUnknown_80E63F8[];
-extern u8 gUnknown_80E6448[];
-extern u8 gUnknown_80E64AC[];
-extern u8 gTradeItemsHowManyText[];
-extern struct MenuItem gUnknown_80E60A0;
-extern struct MenuItem gUnknown_80E60D4;
-extern u8 gUnknown_80E61A4[];
-extern u8 gUnknown_80E61C0[];
-extern struct UnkTextStruct2 gUnknown_80E60EC;
-extern struct MenuItem gUnknown_80E6104;
-extern struct MenuItem gUnknown_80E6154;
-extern u8 gUnknown_80E61E4[];
+const struct MenuItem gUnknown_80E60A0[3] = {
+    {"Send item", 1},
+    {"Receive item", 2},
+    {NULL, 0},
+};
 
-extern u8 gUnknown_80E6214[];
-extern struct MenuItem gUnknown_80E618C;
-extern u8 gUnknown_80E6268[];
-extern u8 gUnknown_80E62C4[];
-extern u8 gUnknown_80E6358[];
-extern u8 gUnknown_80E6314[];
+const struct MenuItem gUnknown_80E60D4[3] = {
+    {"Send item", -1},
+    {"Receive item", 2},
+    {NULL, 0},
+};
+
+const struct UnkTextStruct2 gUnknown_80E60EC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x04, 0x00,
+    0x06, 0x05,
+    0x05, 0x00,
+    NULL
+};
+
+const struct MenuItem gUnknown_80E6104[4] = {
+    {"Confirm", 3},
+    {"Info", 4},
+    {"Cancel", 7},
+    {NULL, 0},
+};
+
+static const struct UnkTextStruct2 unused =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x16, 0x00, 0x09, 0x00,
+    0x05, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+
+const struct MenuItem gUnknown_80E6154[3] = {
+    {"Yes", 5},
+    {"No", 6},
+    {NULL, 0},
+};
+
+const struct UnkTextStruct2 gUnknown_80E6174 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x15, 0x00, 0x0D, 0x00,
+    0x06, 0x04,
+    0x04, 0x00,
+    NULL
+};
+
+
+const struct MenuItem gUnknown_80E618C[3] = {
+    {"Yes", 5},
+    {"Cancel", 0},
+    {NULL, 0},
+};
+
+#include "data/trade_items.h"
 
 extern void sub_8013AA0(u32 *);
 
@@ -55,13 +96,13 @@ extern void sub_801B450();
 extern void sub_801CB5C(u32);
 extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_8013BBC(u32 *);
-extern void sub_80141B4(u8 *, u32, u32, u32);
+extern void sub_80141B4(const u8 *, u32, u32, u32);
 
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
+extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);
@@ -574,10 +615,10 @@ void sub_8036B28(void)
   switch(gTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
         if (sub_801CF14(0) != 0) {
-            sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60D4,0,4,0,0,0x101);
+            sub_8014248(gUnknown_80E61A4,0,1,gUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
-            sub_8014248(gUnknown_80E61A4,0,1,&gUnknown_80E60A0,0,4,0,0,0x101);
+            sub_8014248(gUnknown_80E61A4,0,1,gUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
     case TRADE_ITEMS_SEND_ITEM:
@@ -594,7 +635,7 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8006518(gTradeItemsMenu->unk184);
         SetMenuItems(&gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
-                    &gUnknown_80E6104,1,0,0);
+                    gUnknown_80E6104,1,0,0);
         sub_801CCD8();
         sub_8035CF4(&gTradeItemsMenu->unk44,3,1);
         break;
@@ -604,13 +645,13 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gUnknown_202DE30 = gTradeItemsMenu->numItemsToSend;
         sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.itemIndex,0);
-        sub_8014248(gUnknown_80E61E4,0,5, &gUnknown_80E6154,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E61E4,0,5, gUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
-        sub_8014248(gUnknown_80E6214,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E6214,0,5,gUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
-        sub_8014248(gUnknown_80E6268,0,5,&gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(gUnknown_80E6268,0,5,gUnknown_80E618C,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_IN_COMMUNICATION:
         nullsub_23(0);
