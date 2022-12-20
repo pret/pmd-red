@@ -146,7 +146,6 @@ SECTIONS {
         asm/makuhita_dojo.o(.text);
         src/makuhita_dojo_1.o(.text);
         src/wonder_mail_4.o(.text);
-        asm/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
         asm/wonder_mail_5.o(.text);
         src/wonder_mail_6.o(.text);

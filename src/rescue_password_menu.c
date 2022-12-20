@@ -453,7 +453,7 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
 
 u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *param_3)
 {
-  if ( (!sub_803D204(passwordBuffer, param_3)) || (7 < param_3->mailType) ||
+  if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->dungeon.dungeonFloor >= GetDungeonFloorCount(param_3->dungeon.dungeonIndex)) ||
        (param_3->clientSpecies == SPECIES_NONE) || (SPECIES_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->unk20.itemIndex))) {

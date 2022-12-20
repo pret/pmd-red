@@ -4,13 +4,16 @@
 #include "memory.h"
 #include "item.h"
 #include "sub_8095228.h"
+#include "pokemon.h"
+#include "code_8094F88.h"
+#include "constants/wonder_mail.h"
 
 struct unkStruct_203B320
 {
     // size: 0xC4
     u8 unk0[4];
     u8 fill4[0x20 - 4];
-    u32 wonderMailMode;
+    u32 wonderMailType;
     u32 unk24;
     u8 fill28[0x3C - 0x28];
     s16 unk3C;
@@ -29,6 +32,7 @@ extern struct unkStruct_203B320 *gUnknown_203B320;
 extern struct UnkTextStruct2 gUnknown_80E083C;
 extern struct UnkTextStruct2 gUnknown_80E0854;
 extern u8 *gUnknown_80E086C[];
+extern struct unkStruct_203B480 *gUnknown_203B480;
 
 struct unkStruct_802C39C
 {
@@ -46,7 +50,7 @@ struct unkStruct_802C39C
     /* 0x50 */ u32 unk50[3];
 };
 
-extern u8 sub_8030C20(u32);
+extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);
 extern void sub_80308A0(void);
 extern void sub_803092C(void);
@@ -67,12 +71,12 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(void *);
 
-u32 sub_80306A8(u32 wonderMailMode, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)
+u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)
 {
-    if(sub_8030C20(wonderMailMode))
+    if(HasNoWonderMailType(wonderMailType))
         return 0;
     gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), 0x8);
-    gUnknown_203B320->wonderMailMode = wonderMailMode;
+    gUnknown_203B320->wonderMailType = wonderMailType;
     gUnknown_203B320->unk58 = r1;
 
     gUnknown_203B320->unk5C = &gUnknown_203B320->unk60[gUnknown_203B320->unk58];
@@ -246,7 +250,7 @@ void sub_803092C(void)
   r4 = gUnknown_203B320->unk42 * 8;
   r5 = r4;
   r5 += 10;
-  xxx_call_draw_string(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailMode],gUnknown_203B320->unk58,0);
+  xxx_call_draw_string(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->unk58,0);
   r4 += 4; 
   r5 = r4 + gUnknown_203B320->unkC0[2] * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->unk42 + 1,1,7,gUnknown_203B320->unk58);
@@ -290,4 +294,169 @@ void sub_803092C(void)
     } while (r6 < gUnknown_203B320->unk3E);
   }
   sub_80073E0(gUnknown_203B320->unk58);
+}
+
+s32 sub_8030A74(void)
+{
+  s32 index;
+  s32 count = 0;
+  switch(gUnknown_203B320->wonderMailType) {
+    case 0:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType != 0) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 6:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 6) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 1:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 1) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 2:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 2) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 4:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 4) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 3:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 3) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+    case 5:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 5) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+
+    case 7:
+        for (index = 0; index < 0x20; index++)
+        {
+            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            if (p->mailType == 7) {
+                gUnknown_203B320->unk0[count] = index;
+                count++;
+            }
+        }
+        break;
+  }
+  return count;
+}
+
+bool8 HasNoWonderMailType(u32 wonderMailType)
+{
+  s32 index;
+  
+  switch(wonderMailType) {
+    case 0:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType != 0) {
+                return FALSE;
+            }
+        }
+        break;
+    case 6:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 6) {
+                return FALSE;
+            }
+        }
+        break;
+    case 1:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 1) {
+                return FALSE;
+            }
+        }
+        break;
+    case 2:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 2) {
+                return FALSE;
+            }
+        }
+        break;
+    case 4:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 4) {
+                return FALSE;
+            }
+        }
+        break;
+    case 3:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 3) {
+                return FALSE;
+            }
+        }
+        break;
+
+    case 5:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 5) {
+                return FALSE;
+            }
+        }
+        break;
+
+    case 7:
+        for (index = 0; index < 0x20; index++)
+        {
+            if (gUnknown_203B480[index].mailType == 7) {
+                return FALSE;
+            }
+        }
+        break;
+  }
+  return TRUE;
 }

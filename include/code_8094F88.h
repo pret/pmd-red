@@ -1,9 +1,11 @@
 #ifndef GUARD_CODE_8094F88_H
-#define GUARD_CODE_8094F88_H 
+#define GUARD_CODE_8094F88_H
+
+#include "global.h"
 
 struct unkStruct_203B480
 {
-    u8 unk0;
+    u8 mailType;
     struct DungeonLocation unk4;
     u32 unk8;
     u32 unkC;

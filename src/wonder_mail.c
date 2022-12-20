@@ -20,7 +20,7 @@ extern void sub_8011C28(u32);
 extern void sub_8095240(u8);
 
 extern void sub_809927C(u8);
-extern u8 sub_8030C20(u32);
+extern bool8 HasNoWonderMailType(u32);
 extern u32 sub_8031050();
 extern void sub_80310B4();
 extern u32 sub_8095350();
@@ -942,7 +942,7 @@ void sub_8028D4C()
     switch(gUnknown_203B2C0->unk538)
     {
         case 5:
-            if(sub_8030C20(2) != 0)
+            if(HasNoWonderMailType(2))
             {
                 sub_8028B04(12);
             }
@@ -952,7 +952,7 @@ void sub_8028D4C()
             }
             break;
         case 6:
-            if(sub_8030C20(4) != 0)
+            if(HasNoWonderMailType(4))
             {
                 sub_8028B04(14);
             }
@@ -962,7 +962,7 @@ void sub_8028D4C()
             }
             break;
         case 7:
-            if(sub_8030C20(0) != 0)
+            if(HasNoWonderMailType(0))
             {
                 sub_8028B04(16);
             }

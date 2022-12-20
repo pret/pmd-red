@@ -119,31 +119,4 @@ struct WonderMailStruct_203B2C4
 
 void sub_8028B04(u32 r0);
 
-enum WonderMailMode {
-    WONDER_MAIL_MODE_SEND = 1,
-    WONDER_MAIL_MODE_RECEIVE = 2,
-};
-
-enum WonderMailMethod {
-    WONDER_MAIL_GAME_LINK = 3,
-    WONDER_MAIL_PASSWORD = 5, 
-};
-
-enum WonderMailTypes {
-    WONDER_MAIL_TYPE_SOS = 1,
-    WONDER_MAIL_TYPE_AOK = 4,
-    WONDER_MAIL_TYPE_THANK_YOU = 5,
-    WONDER_MAIL_TYPE_WONDER = 5,
-    // TODO: document 7
-};
-
-enum WonderMailMissionTypes
-{
-    WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT = 0,
-    WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET = 1,
-    WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT = 2,
-    WONDER_MAIL_MISSION_TYPE_FIND_ITEM = 3,
-    WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM = 4,
-};
-
 #endif

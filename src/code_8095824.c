@@ -114,7 +114,7 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
 {
     u8 temp;
 
-    RestoreIntegerBits(a, &b->unk0, 4);
+    RestoreIntegerBits(a, &b->mailType, 4);
     RestoreDungeonLocation(a, &b->unk4);
     RestoreIntegerBits(a, &b->unk8, 0x18);
     RestoreIntegerBits(a, &b->unkC, 0x9);
@@ -139,7 +139,7 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     neg1 = -1;
     zero = 0;
 
-    SaveIntegerBits(a, &b->unk0, 4);
+    SaveIntegerBits(a, &b->mailType, 4);
     SaveDungeonLocation(a, &b->unk4);
     SaveIntegerBits(a, &b->unk8, 0x18);
     SaveIntegerBits(a, &b->unkC, 0x9);
