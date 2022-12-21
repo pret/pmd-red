@@ -102,7 +102,6 @@ bool8 sub_809D754(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation
 
 bool8 sub_809D770(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
 {
-  
   sub_809D568(&param_1->unk24);
   sub_809D568(&param_1->unk84);
   param_1->unk24.unk2 = 4;
@@ -197,7 +196,7 @@ u8 sub_809D8EC(struct GroundScript_ExecutePP_1 *param_1, s16 param_2)
 }
 
 
-u8 sub_809D92C(struct GroundScript_ExecutePP_1 *r0)
+u8 GroundScript_Cancel(struct GroundScript_ExecutePP_1 *r0)
 {
     return sub_809D770(r0, &gUnknown_81165C8);
 }

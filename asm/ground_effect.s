@@ -964,7 +964,7 @@ _080AD2A0:
 	beq _080AD2B6
 	adds r0, r4, 0
 	adds r0, 0x38
-	bl sub_809D92C
+	bl GroundScript_Cancel
 	orrs r5, r0
 	lsls r0, r5, 24
 	lsrs r5, r0, 24

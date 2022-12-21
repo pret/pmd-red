@@ -16,11 +16,13 @@ extern u16 gUnknown_20398BE;
 extern u8 gUnknown_203B49D;
 extern u8 gUnknown_203B49C;
 
-extern const char gUnknown_8115F5C;
-extern const char gUnknown_8115F80;
-extern const char gUnknown_8115FA4;
-extern const char gUnknown_8115FC8;
-extern const char gUnknown_8115FE8;
+const char gUnknown_8115F5C[] = "GroundMain ground request %3d %3d";
+const char gUnknown_8115F80[] = "GroundMain recue request %3d %3d";
+const char gUnknown_8115FA4[] = "GroundMain user rescue request %3d";
+const char gUnknown_8115FC8[] = "GroundMain game end request %3d";
+const char gUnknown_8115FE8[] = "GroundMain game cancel request %3d";
+static const char unused_text[] = "pksdir0";
+static const char unused_text1[] = "pksdir0";
 
 struct unkStruct_811BAF4
 {
@@ -189,7 +191,7 @@ bool8 GroundMainGroundRequest(s16 r0, u32 r1, u32 r2)
     temp = r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, &gUnknown_8115F5C, temp, r2);
+        Log(0, gUnknown_8115F5C, temp, r2);
         gUnknown_20398A8 = 1;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r2;
@@ -240,7 +242,7 @@ bool8 GroundMainRescueRequest(s16 r0, u32 r1)
     s32 r2 = r0, r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, &gUnknown_8115F80, r2, r1);
+        Log(0, gUnknown_8115F80, r2, r1);
         if(gUnknown_203B49D != 0)
         {
             gUnknown_20398A8 = 7;
@@ -273,7 +275,7 @@ u32 GroundMainUserRescueRequest(u32 r0)
     {
         if(gUnknown_203B49D != 0)
         {
-            Log(0, &gUnknown_8115FA4, r0);
+            Log(0, gUnknown_8115FA4, r0);
             gUnknown_20398A8 = 7;
             gUnknown_20398AC = 1;
             gUnknown_20398B0 = r0;
@@ -288,7 +290,7 @@ u32 GroundMainGameEndRequest(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, &gUnknown_8115FC8, r0);
+        Log(0, gUnknown_8115FC8, r0);
         gUnknown_20398A8 = 9;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -302,7 +304,7 @@ u32 GroundMainGameCancelRequest(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, &gUnknown_8115FE8, r0);
+        Log(0, gUnknown_8115FE8, r0);
         gUnknown_20398A8 = 10;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;

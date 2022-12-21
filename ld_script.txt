@@ -480,6 +480,8 @@ SECTIONS {
         data/data_810AE24.o(.rodata);
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);
+        src/ground_main.o(.rodata);
+        data/data_8115F5C.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         data/cutscenes.o(.rodata);
         data/cutscenes_1.o(.rodata);
