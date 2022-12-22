@@ -6,5 +6,8 @@
 void MoveIfPossible(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
 bool8 CanTakeItem(struct DungeonEntity *pokemon);
 bool8 ChooseTargetPosition(struct DungeonEntity *pokemon);
+void DecideMovement(struct DungeonEntity *pokemon, bool8 showRunAwayEffect);
+bool8 AvoidEnemies(struct DungeonEntity *pokemon);
+bool8 Wander(struct DungeonEntity *pokemon);
 
 #endif
