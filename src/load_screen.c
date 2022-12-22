@@ -51,7 +51,7 @@ extern void sub_8095240(u32);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
 extern u8 *GetDungeonLocationInfo(void);
 extern u32 GetNumAdventures(void);
@@ -295,7 +295,7 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(8,60,gHelperHeadingText,0,0); // Helper:
 
   // Draw Team Name
-  if (sub_80023E4(0) != '\0') {
+  if (sub_80023E4(0)) {
     sub_80920D8(teamNameBuffer);
     r2 = teamNameBuffer;
   }
@@ -406,7 +406,7 @@ void sub_80397B4(void)
   // Draw the 12 legendary icons
   for(iVar3 = 0; iVar3 < 12; iVar3++)
   {
-    if (sub_80023E4(gUnknown_203B3B8[iVar3]) != 0) {
+    if (sub_80023E4(gUnknown_203B3B8[iVar3])) {
       sub_8007E20(0,iVar4,other_arg,0x10,0x10,*(int *)(clmkFile->data) + iVar3 * 0x80,
                   gUnknown_203B388[iVar3]);
       iVar4 += 16;

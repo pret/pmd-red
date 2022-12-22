@@ -181,7 +181,7 @@ void sub_8027274(void)
         sub_8023B7C(1);
         break;
     case 3:
-        sub_8027D40(3,&gUnknown_203B2BC->unk14);
+        sub_8027D40(3,&gUnknown_203B2BC->item2);
         sub_8023DA4();
         sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk70,2);
         break;

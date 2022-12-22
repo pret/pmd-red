@@ -123,7 +123,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                     pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
                     pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                     pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
-                    pokemonData->itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
+                    pokemonData->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                 }
             }
             else
@@ -242,7 +242,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                                 pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
                                 pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
                                 pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
-                                pokemonData->itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
+                                pokemonData->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                                 return;
                             }
                         }

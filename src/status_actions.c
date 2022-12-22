@@ -1,5 +1,5 @@
 #include "global.h"
-#include "status_checker.h"
+#include "status_actions.h"
 
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
@@ -32,11 +32,8 @@
 
 extern void sub_807F43C(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8078F50(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8077E4C(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807DC68(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8077BB4(struct DungeonEntity *, struct DungeonEntity *, u8);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
-extern void sub_807885C(struct DungeonEntity *, struct DungeonEntity *);
 extern u32 sub_803D73C(u32);
 extern void sub_8045C28(struct ItemSlot *, u8 , u8 *);
 extern void sub_80464C8(struct DungeonEntity *, struct Position *, struct ItemSlot *);
@@ -58,39 +55,39 @@ extern void sub_807FE04(u32 *, u32);
 extern void sub_807DB74(struct DungeonEntity *);
 extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
 extern void HandleLuminousOrbAction(struct DungeonEntity *pokemon);
-extern void sub_8076D10(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807D510(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_807DA14(struct DungeonEntity *, struct DungeonEntity *, s32);
 extern s16 sub_803D970(u32);
 extern u8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(struct DungeonEntity *, s32);
-extern void sub_8077DDC(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8077ED0(struct DungeonEntity *, struct DungeonEntity *);
 extern void sub_8075C58(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 extern void sub_807E254(struct DungeonEntity *, struct DungeonEntity *, u32);
 extern bool8 sub_805727C(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 chance);
 extern u32 sub_8055640(struct DungeonEntity *, struct DungeonEntity *, struct PokemonMove *, u32, u32);
 extern void sub_806A6E8(struct DungeonEntity *);
 extern void sub_807D3CC(struct DungeonEntity *, struct DungeonEntity *);
-extern u8 sub_8069D18(s32 *);
-extern u8 sub_804AD34(s32 *);
+extern u8 sub_8069D18(struct Position *);
+extern u8 sub_804AD34(struct Position *);
 extern u8 sub_8057308(struct DungeonEntity *, u32);
-extern void sub_8076F80(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
-extern void sub_8077084(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
-extern void sub_8078678(struct DungeonEntity *, struct DungeonEntity *);
-extern void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *r1, s32, s16, u32);
+
+
+// TODO include dungeon_ai.h when SqueezedStatusTarget is figured out
+extern void LowerDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, s32, s32, u8, bool8);
+extern void RaiseAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
+extern void PoisonedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, bool8);
+extern void RaiseDefenseStageTarget(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
+extern void InfatuateStatusTarget(struct DungeonEntity *, struct DungeonEntity *, bool8);
+extern void LowerAttackStageTarget(struct DungeonEntity *, struct DungeonEntity *, s32, s32, u8, bool8);
+extern void PetrifiedStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
+extern void WrapTarget(struct DungeonEntity *, struct DungeonEntity *);
+
+// TODO having matching issues when this isn't s32.. 
+extern void SqueezedStatusTarget(struct DungeonEntity *, struct DungeonEntity *, s32, bool32);
+
 extern void sub_806F324(struct DungeonEntity *, s32, u32, u32);
-extern void sub_8077F40(struct DungeonEntity *, struct DungeonEntity *, u32);
-extern void sub_8077160(struct DungeonEntity *, struct DungeonEntity *, u32, u32);
 extern bool8 sub_805755C(struct DungeonEntity* pokemon,u16 moveID);
-extern void sub_807614C(struct DungeonEntity *, struct DungeonEntity *, u32);
-extern void DestinyBondStatusTarget(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076E20(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32, u32);
 extern void sub_80783C4(struct DungeonEntity *, struct DungeonEntity *, u32);
 extern bool8 sub_807FCD4(struct Position *, u32, u8);
-extern void sub_80788E8(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_8076B48(struct DungeonEntity *, struct DungeonEntity *);
-extern void sub_80768DC(struct DungeonEntity *, struct DungeonEntity *, s32, s32);
 extern void sub_807CD9C(struct DungeonEntity *, struct DungeonEntity *, u8 facingDir);
 
 
@@ -149,6 +146,7 @@ extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
 extern u8 gUnknown_202DE58[];
 extern s16 gUnknown_80F4E08;
+extern u8 gDungeonCamouflageTypes[76];
 
 struct Position_Alt
 {
@@ -159,93 +157,55 @@ struct Position_Alt
     } temp;
 };
 
-// Array indices correspond to the current dungeon tileset.
-const u8 gDungeonCamouflageTypes[76] = {
-    TYPE_WATER,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_GRASS,
-    TYPE_ICE,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_ICE,
-    TYPE_ICE,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GROUND,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_ICE,
-    TYPE_ROCK,
-    TYPE_WATER,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_WATER,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_WATER,
-    TYPE_WATER,
-    TYPE_ROCK
-};
 
 extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
-extern void sub_80763F8(struct DungeonEntity *, struct DungeonEntity *, u32);
+
+extern u32 gUnknown_80F51C4[];
+
+bool8 sub_805AFA4(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, u32 param_4)
+{
+  s32 r0;
+  s32 r2;
+  s32 r1;
+  bool8 flag;
+
+#ifndef NONMATCHING
+  register struct DungeonEntityData *entityData asm("r3");
+#else
+  struct DungeonEntityData *entityData;
+#endif
+  
+  SendThawedMessage(pokemon, target);
+  entityData = pokemon->entityData;
+  r2 = entityData->maxHP;
+  r0 = r2;
+  if (r2 < 0) {
+    r0 = r2 + 3;
+  }
+  if (entityData->HP <= r0 >> 2) {
+    r2 = 0;
+  }
+  else if (r1 = entityData->HP, r1 <= r2 / 2) {
+      r2 = 1;
+  }
+  else
+  {
+    r0 = r2 * 3;
+    if (r0 < 0) {
+        r0 = r0 + 3;
+    }
+    if (r0 >>= 2, r2 = 3, r1 <= r0) {
+        r2 = 2;
+    }
+  }
+  flag =  sub_8055640(pokemon,target,move,gUnknown_80F51C4[r2],param_4) ? TRUE : FALSE;
+  return flag;
+}
 
 bool8 sub_805B028(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move)
 { 
-    sub_8077780(pokemon,target, 1);
+    ParalyzeStatusTarget(pokemon,target, TRUE);
     return TRUE;
 }
 
@@ -270,7 +230,7 @@ bool8 sub_805B074(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar5 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4DC6) != 0) {
-            sub_80763F8(pokemon,target,0);
+            PoisonedStatusTarget(pokemon,target,FALSE);
         }
     }
     return uVar5;
@@ -306,13 +266,13 @@ bool8 HandleColorChange(struct DungeonEntity * pokemon, struct DungeonEntity * t
     }
 }
 
-bool8 sub_805B164(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move,s32 param_4)
+bool8 sub_805B164(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
-    sub_8077084(pokemon,target,gUnknown_8106A50, 2);
+    RaiseAttackStageTarget(pokemon,target,gUnknown_8106A50, 2);
     return TRUE;
 }
 
-bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move,s32 param_4)
+bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     s32 uVar4;
     bool8 uVar5;
@@ -331,78 +291,76 @@ bool8 sub_805B17C(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar5 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4E08) != 0) {
-            sub_80768DC(pokemon,target,uVar4,0);
+            SqueezedStatusTarget(pokemon,target,uVar4,0);
         }
     }
     return uVar5;
 }
 
-bool8 sub_805B208(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 PerishSongMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_80788E8(pokemon, target);
+    PerishSongTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805B214(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_8076B48(pokemon, target);
+    WrapTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 TrapperOrbAction(struct DungeonEntity * param_1,struct DungeonEntity * param_2)
+bool8 TrapperOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
     bool8 trapLaid;
     u8 uVar2;
     bool8 isEnemy;
     
     trapLaid = FALSE;
-    isEnemy = param_1->entityData->isEnemy;
+    isEnemy = pokemon->entityData->isEnemy;
     uVar2 = 1;
     
     if (isEnemy) {
         uVar2 = 2;
     }
-    if (sub_807FCD4(&param_1->posWorld,0x13,uVar2) != 0) {
+    if (sub_807FCD4(&pokemon->posWorld,0x13,uVar2) != 0) {
         trapLaid = TRUE;
     }
     else
     {
-        sub_80522F4(param_1,param_2,*gUnknown_80FC5A8); // A trap can't be laid here!
+        sub_80522F4(pokemon,target,*gUnknown_80FC5A8); // A trap can't be laid here!
     }
     sub_8049ED4();
     return trapLaid;
 }
 
-s32 sub_805B264(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
+bool8 sub_805B264(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
-    u32 uVar2;
     s32 r3;
-    s32 r6;
+    bool8 r6;
     s32 iVar5;
     struct DungeonEntityData *entityData;
 
     entityData = target->entityData;  
     r3 = gUnknown_202F224;
-    r6 = 0;
+    r6 = FALSE;
 
     gDungeonGlobalData->unk18200 = gUnknown_8106A8C[r3];
     gDungeonGlobalData->unk18204 = 0;
     iVar5 = gUnknown_80F4F94[r3];
-    if (entityData->chargingStatus == 0xA) {
-        iVar5 = iVar5 << 1;
+    if (entityData->chargingStatus == CHARGING_STATUS_DIG) {
+        iVar5 *= 2;
     }
-    uVar2 = sub_8055864(pokemon,target,move,iVar5,param_4);
-    r6 =  -((int)(-uVar2 | uVar2) >> 0x1f);
+    r6 = sub_8055864(pokemon,target,move,iVar5,param_4) ? TRUE : FALSE;
     return r6;
 }
 
-bool8 sub_805B2E4(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 MagicCoatMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     MagicCoatStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805B2F0(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 ProtectMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     ProtectStatusTarget(pokemon, target);
     return TRUE;
@@ -410,7 +368,7 @@ bool8 sub_805B2F0(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B2FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
-    sub_8077160(pokemon,target,gUnknown_8106A4C,1);
+    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1);
     return TRUE;
 }
 
@@ -428,13 +386,13 @@ bool8 sub_805B324(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
     if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
         uVar3 = TRUE;
         if (sub_805727C(pokemon,target,gUnknown_80F4DD8) != 0) {
-            sub_8076E20(pokemon,target,gUnknown_8106A50,1,1,0);
+            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,0);
         }
     }
     return uVar3;
 }
 
-bool8 sub_805B37C(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 DestinyBondMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     DestinyBondStatusTarget(pokemon, target);
     return TRUE;
@@ -445,7 +403,7 @@ bool8 sub_805B388(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
     return (sub_8055640(pokemon,target,move,0x100,param_4)) ? TRUE : FALSE;
 }
 
-bool8 sub_805B3A8(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
+bool8 MirrorCoatMoveAction(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     MirrorCoatStatusTarget(pokemon, target);
     return TRUE;
@@ -454,8 +412,8 @@ bool8 sub_805B3A8(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 bool8 sub_805B3B4(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4)
 { 
     u32 uVar1 = gUnknown_8106A50;
-    sub_8077084(pokemon,target,uVar1,1);
-    sub_8077160(pokemon,target,uVar1,1);
+    RaiseAttackStageTarget(pokemon,target,uVar1,1);
+    RaiseDefenseStageTarget(pokemon,target,uVar1,1);
     return TRUE;
 }
 
@@ -467,17 +425,17 @@ bool8 sub_805B3E0(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B3FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,struct PokemonMove *move, s32 param_4, s32 param_5)
 {
-    struct DungeonEntityData *iVar2;
+    struct DungeonEntityData *entityData;
     bool8 uVar4;
 
     uVar4 = FALSE;
     if (sub_8055640(pokemon,target,move,0x100,param_5) != 0) {
         uVar4 = TRUE;
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
-            iVar2 = pokemon->entityData;
-            sub_8077084(pokemon,pokemon,param_4,1);
-            if (iVar2->unkFB == 0) {
-                iVar2->unkFB = 1;
+            entityData = pokemon->entityData;
+            RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
+            if (entityData->unkFB == 0) {
+                entityData->unkFB = 1;
             }
         }
     }
@@ -486,7 +444,7 @@ bool8 sub_805B3FC(struct DungeonEntity * pokemon,struct DungeonEntity * target,s
 
 bool8 sub_805B454(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_807614C(pokemon, target, 1);
+    InfatuateStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -558,9 +516,9 @@ _0805B598:
     return local_24;
 }
 
-bool8 sub_805B5F4(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+bool8 LeechSeedMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8077F40(pokemon, target, 1);
+    HandleLeechSeed(pokemon, target, TRUE);
     if (pokemon->entityData->unkFB == 0) {
         pokemon->entityData->unkFB = 1;
     }
@@ -634,7 +592,7 @@ bool8 sub_805B668(struct DungeonEntity * pokemon, struct DungeonEntity * target,
             sub_806F324(pokemon,iVar4,0xd,0x1fa);
           }
           else {
-            HealTargetHP(pokemon,pokemon,iVar4,0,1);
+            HealTargetHP(pokemon,pokemon,iVar4,0,TRUE);
           }
         }
       }
@@ -648,7 +606,7 @@ bool8 sub_805B668(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool8 sub_805B734(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8078678(pokemon, target);
+    SnatchStatusTarget(pokemon, target);
     return TRUE;
 }
 
@@ -692,7 +650,7 @@ bool8 RecycleMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * t
   return isTMRecycled;
 }
 
-bool8 sub_805B7FC(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
+bool8 ReflectMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     ReflectStatusTarget(pokemon, target);
     return TRUE;
@@ -710,8 +668,8 @@ bool8 sub_805B808(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 
 bool8 sub_805B884( struct DungeonEntity * pokemon, struct DungeonEntity * target)
 { 
-    sub_8077084(pokemon, target, gUnknown_8106A4C, 1);
-    sub_8077910(pokemon, target, 0, TRUE);
+    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
+    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
 }
 
@@ -739,7 +697,7 @@ bool8 sub_805B910(struct DungeonEntity * pokemon, struct DungeonEntity * target,
         flag = TRUE;
         if(sub_805727C(pokemon, target, gUnknown_80F4DDC))
         {
-            sub_8076F80(pokemon, target, gUnknown_8106A50, 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, 0);
         }
     }
     return flag;
@@ -772,7 +730,7 @@ bool8 sub_805B968(struct DungeonEntity * pokemon, struct DungeonEntity * target,
 bool8 RockSmashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove *move, s32 param_4)
 {
     bool8 uVar3;
-    s32 auStack20;
+    struct Position pos;
 
 #ifdef NONMATCHING
     struct DungeonEntity *temp;
@@ -786,10 +744,10 @@ bool8 RockSmashMoveAction(struct DungeonEntity * pokemon, struct DungeonEntity *
     temp1 = target;
 
     uVar3 = 0;
-    if (sub_8069D18(&auStack20) != 0) {
+    if (sub_8069D18(&pos) != 0) {
         sub_80522F4(temp,temp1,*gUnknown_80FD430); // Can't use that diagonally!
     }
-    else if (uVar3 = (sub_804AD34(&auStack20)), uVar3 != 0) {
+    else if (uVar3 = (sub_804AD34(&pos)), uVar3 != 0) {
         sub_80522F4(temp,temp1,*gUnknown_80FD3F0); // It dug the wall in front!
     }
     else {
@@ -932,7 +890,7 @@ bool8 CleanseOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * ta
 
 bool8 sub_805BC70(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), 1);
+    sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
     return TRUE;
 }
 
@@ -975,15 +933,15 @@ bool8 SilenceOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * ta
     return TRUE;
 }
 
-bool8 sub_805BD70(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+bool8 ScannerOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8077DDC(pokemon, target);
+    HandleScannerOrb(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805BD7C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+bool8 RadarOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8077ED0(pokemon, target);
+    HandleRadarOrb(pokemon, target);
     return TRUE;
 }
 
@@ -1033,7 +991,7 @@ bool8 TransferOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity * ta
 
 bool8 sub_805BE90(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-  sub_80779F0(pokemon, target, 1, TRUE);
+  LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
   return TRUE;
 }
 
@@ -1045,7 +1003,7 @@ bool8 LuminousOrbAction(struct DungeonEntity * pokemon, struct DungeonEntity * t
 
 bool8 sub_805BEAC(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_8076D10(pokemon, target);
+    PetrifiedStatusTarget(pokemon, target);
     return TRUE;
 }
 
@@ -1136,11 +1094,11 @@ bool8 TrapbustOrbAction(struct DungeonEntity * pokemon,struct DungeonEntity * ta
     return foundTrap;
 }
 
-bool8 sub_805C080(struct DungeonEntity * pokemon, struct DungeonEntity *param_2)
+bool8 sub_805C080(struct DungeonEntity * pokemon, struct DungeonEntity *target)
 {
     struct DungeonEntity **possibleTargets;
     s32 numPossibleTargets;
-    struct DungeonEntity *target;
+    struct DungeonEntity *targetEntity;
     bool8 foundTarget;
     s32 index;
 
@@ -1154,22 +1112,22 @@ bool8 sub_805C080(struct DungeonEntity * pokemon, struct DungeonEntity *param_2)
         numPossibleTargets = MAX_TEAM_MEMBERS;
     }
     for(index = 0; index < numPossibleTargets; index++){
-        target = possibleTargets[index];
-        if (((EntityExists(target)) && (pokemon != target)) &&
-            (CanTarget(pokemon,target,1,FALSE) == 0)) {
-            sub_807D148(pokemon,target,2,&pokemon->posWorld);
+        targetEntity = possibleTargets[index];
+        if (((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
+            (CanTarget(pokemon,targetEntity,1,FALSE) == 0)) {
+            sub_807D148(pokemon,targetEntity,2,&pokemon->posWorld);
             foundTarget = TRUE;
         }
     }
     if (!foundTarget) {
-        sub_80522F4(pokemon,param_2,*gUnknown_81004F0);
+        sub_80522F4(pokemon,target,*gUnknown_81004F0);
     }
     return foundTarget;
 }
 
 bool8 sub_805C128(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-    sub_807885C(pokemon, pokemon);
+    InvisibleStatusTarget(pokemon, pokemon);
     return TRUE;
 }
 
@@ -1183,18 +1141,18 @@ bool8 sub_805C138(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     return local_20;
 }
 
-bool8 sub_805C1B0(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 IdentifyOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     IdentityItemHolders(pokemon, target);
     return TRUE;
 }
 
-u32 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
+bool8 sub_805C1BC(struct DungeonEntity *pokemon, struct DungeonEntity *target, struct PokemonMove *move, s32 param_4)
 {
-    u32 uVar1;
+    bool8 flag;
 
-    uVar1 = sub_8055864(pokemon, target, move, gUnknown_80F4F80, param_4);
-    return ((-uVar1 | uVar1) >> 0x1f);
+    flag = sub_8055864(pokemon, target, move, gUnknown_80F4F80, param_4) != 0 ? TRUE : FALSE;
+    return flag;
 }
 
 bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -1203,9 +1161,9 @@ bool8 sub_805C1E4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return FALSE;
 }
 
-bool8 sub_805C1F8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 ShockerOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077BB4(pokemon, target, 1);
+    CowerStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -1329,871 +1287,20 @@ bool8 sub_805C468(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     return TRUE;
 }
 
-bool8 sub_805C474(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 StairsOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077E4C(pokemon, target);
+    HandleStairsOrb(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805C480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 LongtossOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     LongTossStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805C48C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+bool8 PierceOrbAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     PierceStatusTarget(pokemon, target);
     return TRUE;
-}
-
-bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move)
-{
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    switch (move->moveID)
-    {
-        case MOVE_HAIL:
-            if (GetWeather(pokemon) == WEATHER_HAIL)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_RAGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_RAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_COUNTER:
-        case MOVE_PURSUIT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_COUNTER)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MIRROR_MOVE:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIRROR_MOVE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_HOWL:
-        case MOVE_MEDITATE:
-        case MOVE_SHARPEN:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_BELLY_DRUM:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE || RoundUpFixedPoint(pokemonData->belly) <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ACID_ARMOR:
-        case MOVE_BARRIER:
-        case MOVE_DEFENSE_CURL:
-        case MOVE_HARDEN:
-        case MOVE_IRON_DEFENSE:
-        case MOVE_WITHDRAW:
-            if (pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_BIDE:
-        case MOVE_REVENGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_AGILITY:
-        {
-            u32 r1;
-#ifndef NONMATCHING
-            asm("":"=r"(r1));
-#else
-            r1 = 0;
-#endif
-            if (pokemon->entityData->movementSpeed >= MAX_MOVEMENT_SPEED)
-            {
-                r1 = !r1;
-                return FALSE;
-            }
-            break;
-        }
-        case MOVE_LOCK_ON:
-        case MOVE_MIND_READER:
-            if (pokemonData->moveStatus == MOVE_STATUS_SURE_SHOT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_COSMIC_POWER:
-            if (pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE && pokemonData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ENDURE:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_ENDURE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CHARGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_CHARGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MIST:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIST)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_LIGHT_SCREEN:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_LIGHT_SCREEN)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MINIMIZE:
-            if (pokemonData->accuracyStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_INGRAIN:
-            if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_INGRAIN || pokemonData->maxHP / 2 < pokemonData->HP)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SWALLOW:
-            if (pokemonData->maxHP <= pokemonData->HP || pokemonData->stockpileCount == 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SPIT_UP:
-            if (pokemonData->stockpileCount == 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DOOM_DESIRE:
-        case MOVE_FUTURE_SIGHT:
-            if (pokemonData->moveStatus == MOVE_STATUS_SET_DAMAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_BULK_UP:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE && pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CAMOUFLAGE:
-            if (HasType(pokemon, gDungeonCamouflageTypes[gDungeonGlobalData->tileset]))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TAIL_GLOW:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DESTINY_BOND:
-            if (pokemonData->linkedStatus == LINKED_STATUS_DESTINY_BOND)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MIRROR_COAT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIRROR_COAT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_REFLECT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_REFLECT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DRAGON_DANCE:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE && pokemon->entityData->movementSpeed >= MAX_MOVEMENT_SPEED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MAGIC_COAT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MAGIC_COAT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DETECT:
-        case MOVE_PROTECT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_PROTECT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_RAIN_DANCE:
-            if (GetWeather(pokemon) == WEATHER_RAIN)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SANDSTORM:
-            if (GetWeather(pokemon) == WEATHER_SANDSTORM)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SUNNY_DAY:
-            if (GetWeather(pokemon) == WEATHER_SUNNY)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SAFEGUARD:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_SAFEGUARD)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_INVISIFY:
-            if (pokemonData->transformStatus == TRANSFORM_STATUS_INVISIBLE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_FOCUS_ENERGY:
-            if (pokemonData->moveStatus == MOVE_STATUS_FOCUS_ENERGY)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TAKEAWAY:
-            if (pokemonData->heldItem.itemFlags & ITEM_FLAG_EXISTS)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_REST:
-            if (!HasQuarterHPOrLess(pokemon) && !HasNegativeStatus(pokemon))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DIVE:
-            if (IsTileGround(GetMapTileForDungeonEntity_2(pokemon)))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DIG:
-        {
-            struct MapTile *tile = GetMapTileForDungeonEntity_2(pokemon);
-            if (!IsTileGround(tile) || (tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != TILE_TYPE_FLOOR)
-            {
-                return FALSE;
-            }
-            break;
-        }
-        case MOVE_TRAP_BUSTER:
-        {
-            struct DungeonEntity *mapObject = GetMapTileForDungeonEntity_2(pokemon)->mapObject;
-            if (mapObject == NULL || GetEntityType(mapObject) != ENTITY_TRAP)
-            {
-                return FALSE;
-            }
-            break;
-        }
-        case MOVE_MUD_SPORT:
-            if (gDungeonGlobalData->mudSportTurnsLeft > 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_WATER_SPORT:
-            if (gDungeonGlobalData->waterSportTurnsLeft > 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_GRUDGE:
-            if (pokemonData->grudgeStatus)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DECOY_MAKER:
-        case MOVE_FOLLOW_ME:
-        case MOVE_SUBSTITUTE:
-            if (gDungeonGlobalData->decoyActive)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_STOCKPILE:
-            if (pokemonData->stockpileCount >= MAX_STOCKPILE_COUNT)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CLEANSE:
-            if (pokemonData->heldItem.itemFlags & ITEM_FLAG_EXISTS &&
-                !(pokemonData->heldItem.itemFlags & ITEM_FLAG_STICKY))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DOUBLE_TEAM:
-            if (pokemonData->accuracyStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_GROWTH:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SWORDS_DANCE:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_WISH:
-            if (pokemonData->isEnemy || pokemonData->protectionStatus == PROTECTION_STATUS_WISH)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TRANSFORM:
-            if (pokemonData->transformStatus == TRANSFORM_STATUS_TRANSFORMED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SPIKES:
-            if (!CanLayTrap(&pokemon->posWorld))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CALM_MIND:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
-            {
-                break;
-            }
-        case MOVE_AMNESIA:
-            if (pokemonData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] >= MAX_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SNATCH:
-            if (pokemonData->waitingStatus == WAITING_STATUS_SNATCH)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_BEAT_UP:
-        case MOVE_BLOWBACK:
-        case MOVE_HURL:
-        case MOVE_MEMENTO:
-        case MOVE_ROAR:
-        case MOVE_STAY_AWAY:
-        case MOVE_SWITCHER:
-        case MOVE_TELEPORT:
-        case MOVE_VITAL_THROW:
-        case MOVE_WARP:
-        case MOVE_WHIRLWIND:
-            if (IsBossBattle())
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CONVERSION_2:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_CONVERSION_2)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_HELPING_HAND:
-            if (pokemonData->isEnemy)
-            {
-                s32 i;
-                for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++)
-                {
-                    struct DungeonEntity *target = gDungeonGlobalData->wildPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSee(pokemon, target))
-                    {
-                        if (target->entityData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
-                        {
-                            continue;
-                        }
-                        if (target->entityData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
-                        {
-                            break;
-                        }
-                    }
-                }
-                if (i == DUNGEON_MAX_WILD_POKEMON)
-                {
-                    return FALSE;
-                }
-                break;
-            }
-            else
-            {
-                s32 i;
-                for (i = 0; i < MAX_TEAM_MEMBERS; i++)
-                {
-                    struct DungeonEntity *target = gDungeonGlobalData->teamPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSee(pokemon, target))
-                    {
-                        if (target->entityData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
-                        {
-                            continue;
-                        }
-                        if (target->entityData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
-                        {
-                            break;
-                        }
-                    }
-                }
-                if (i == MAX_TEAM_MEMBERS)
-                {
-                    return FALSE;
-                }
-                break;
-            }
-    }
-    return TRUE;
-}
-
-bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move)
-{
-    struct DungeonEntityData *userData = user->entityData;
-    struct DungeonEntityData *targetData = target->entityData;
-    s32 i;
-    if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN && MoveCannotHitFrozen(move))
-    {
-        return FALSE;
-    }
-    switch (move->moveID)
-    {
-        case MOVE_GRASSWHISTLE:
-        case MOVE_HYPNOSIS:
-        case MOVE_LOVELY_KISS:
-        case MOVE_SING:
-        case MOVE_SLEEP_POWDER:
-        case MOVE_SPORE:
-            if (IsSleeping(target))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_YAWN:
-            if (targetData->sleepStatus == SLEEP_STATUS_YAWNING)
-            {
-                return FALSE;
-            }
-            if (IsSleeping(target))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_NIGHTMARE:
-            if (targetData->sleepStatus == SLEEP_STATUS_NIGHTMARE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SWEET_SCENT:
-            if (targetData->accuracyStages[STAT_STAGE_EVASION] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CHARM:
-            if (targetData->attackMultipliers[STAT_STAGE_ATTACK] < STAT_MULTIPLIER_THRESHOLD)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ENCORE:
-            if (targetData->volatileStatus == VOLATILE_STATUS_ENCORE)
-            {
-                return FALSE;
-            }
-            if (!HasLastUsedMove(targetData->moves))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SUPER_FANG:
-            if (targetData->HP <= 1)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_PAIN_SPLIT:
-            if (targetData->HP <= userData->HP)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TORMENT:
-            if (HasDisabledMove(targetData->moves) || !HasLastUsedMove(targetData->moves))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_COTTON_SPORE:
-        case MOVE_SCARY_FACE:
-        case MOVE_STRING_SHOT:
-            if (target->entityData->movementSpeed <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SCREECH:
-            if (targetData->defenseMultipliers[STAT_STAGE_DEFENSE] < STAT_MULTIPLIER_THRESHOLD)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_FAKE_TEARS:
-            if (targetData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SPITE:
-            if (LastUsedMoveOutOfPP(targetData->moves))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_SMOKESCREEN:
-            if (targetData->moveStatus == MOVE_STATUS_WHIFFER)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MEMENTO:
-            if (targetData->attackMultipliers[STAT_STAGE_ATTACK] < STAT_MULTIPLIER_THRESHOLD &&
-                targetData->attackMultipliers[STAT_STAGE_SPECIAL_ATTACK] < STAT_MULTIPLIER_THRESHOLD)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_WILL_O_WISP:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_FORESIGHT:
-        case MOVE_ODOR_SLEUTH:
-            if (targetData->types[0] == TYPE_GHOST || targetData->types[1] == TYPE_GHOST)
-            {
-                if (!targetData->exposedStatus)
-                {
-                    break;
-                }
-            }
-            if (targetData->accuracyStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_DISABLE:
-        case MOVE_GLARE:
-        case MOVE_STUN_SPORE:
-        case MOVE_THUNDER_WAVE:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ENDEAVOR:
-            if (targetData->HP - userData->HP <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_LEER:
-        case MOVE_TAIL_WHIP:
-            if (targetData->defenseStages[STAT_STAGE_DEFENSE] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_METAL_SOUND:
-            if (targetData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TICKLE:
-            if (targetData->attackStages[STAT_STAGE_ATTACK] <= 0 &&
-                targetData->defenseStages[STAT_STAGE_DEFENSE] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_BLOCK:
-        case MOVE_MEAN_LOOK:
-        case MOVE_SPIDER_WEB:
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_IMMOBILIZED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_HAZE:
-        {
-            for (i = 0; i < 2; i++)
-            {
-                if (targetData->attackStages[i] < DEFAULT_STAT_STAGE) break;
-                if (targetData->defenseStages[i] < DEFAULT_STAT_STAGE) break;
-                if (targetData->accuracyStages[i] < DEFAULT_STAT_STAGE ||
-                    targetData->attackMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
-                    targetData->defenseMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
-                {
-                    break;
-                }
-            }
-            if (i == 2)
-            {
-                return FALSE;
-            }
-            break;
-        }
-        case MOVE_UPROAR:
-            if (targetData->sleepStatus == SLEEP_STATUS_SLEEPLESS)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_PSYCH_UP:
-        {
-            for (i = 0; i < 2; i++)
-            {
-                if (userData->attackStages[i] < targetData->attackStages[i]) break;
-                if (userData->defenseStages[i] < targetData->defenseStages[i] ||
-                    userData->accuracyStages[i] < targetData->accuracyStages[i] ||
-                    userData->attackMultipliers[i] < targetData->attackMultipliers[i] ||
-                    userData->defenseMultipliers[i] < targetData->defenseMultipliers[i])
-                {
-                    break;
-                }
-            }
-            if (i == 2)
-            {
-                return FALSE;
-            }
-            break;
-        }
-        case MOVE_FLASH:
-        case MOVE_KINESIS:
-        case MOVE_SAND_ATTACK:
-            if (targetData->accuracyStages[STAT_STAGE_ACCURACY] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TAUNT:
-            if (targetData->volatileStatus == VOLATILE_STATUS_TAUNTED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TRICK:
-            if (!(userData->heldItem.itemFlags & ITEM_FLAG_EXISTS) ||
-                !(targetData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_KNOCK_OFF:
-            if (!(targetData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_FEATHERDANCE:
-        case MOVE_GROWL:
-            if (targetData->attackStages[STAT_STAGE_ATTACK] <= 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ROLE_PLAY:
-            if (userData->abilities[0] == targetData->abilities[0] &&
-                userData->abilities[1] == targetData->abilities[1])
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CURSE:
-            if (HasType(user, TYPE_GHOST))
-            {
-                if (targetData->waitingStatus == WAITING_STATUS_CURSED)
-                {
-                    return FALSE;
-                }
-            }
-            else
-            {
-                if (userData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE &&
-                    userData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
-                {
-                    return FALSE;
-                }
-            }
-            break;
-        case MOVE_IMPRISON:
-        case MOVE_OBSERVER:
-            if (targetData->volatileStatus == VOLATILE_STATUS_PAUSED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_FALSE_SWIPE:
-            if (targetData->HP <= 1)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_LEECH_SEED:
-            if (targetData->linkedStatus == LINKED_STATUS_LEECH_SEED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_PERISH_SONG:
-            if (targetData->perishSongTimer != 0)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_MIMIC:
-        case MOVE_SKETCH:
-            if (!HasLastUsedMove(targetData->moves))
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_ATTRACT:
-            if (targetData->volatileStatus == VOLATILE_STATUS_INFATUATED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_WRAP:
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE)
-            {
-                return FALSE;
-            }
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_BY_FOE)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_TOXIC:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BADLY_POISONED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_POISON_GAS:
-        case MOVE_POISONPOWDER:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_POISONED)
-            {
-                return FALSE;
-            }
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BADLY_POISONED)
-            {
-                return FALSE;
-            }
-            break;
-        case MOVE_CONFUSE_RAY:
-        case MOVE_FLATTER:
-        case MOVE_SUPERSONIC:
-        case MOVE_SWAGGER:
-        case MOVE_SWEET_KISS:
-        case MOVE_TEETER_DANCE:
-        case MOVE_TOTTER:
-            if (targetData->volatileStatus == VOLATILE_STATUS_CONFUSED)
-            {
-                return FALSE;
-            }
-            break;
-    }
-    return TRUE;
-}
-
-bool8 HasDisabledMove(struct PokemonMove *moves)
-{
-    s32 i;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags & MOVE_FLAG_DISABLED)
-        {
-            return TRUE;
-        }
-    }
-    if (moves[STRUGGLE_MOVE_INDEX].moveFlags & MOVE_FLAG_DISABLED)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-bool8 LastUsedMoveOutOfPP(struct PokemonMove *moves)
-{
-    s32 i;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i].moveFlags & MOVE_FLAG_EXISTS &&
-            moves[i].moveFlags & MOVE_FLAG_LAST_USED &&
-            moves[i].PP == 0)
-        {
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
-
-bool8 HasLastUsedMove(struct PokemonMove *moves)
-{
-    s32 i;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags & MOVE_FLAG_LAST_USED)
-        {
-            return TRUE;
-        }
-    }
-    if (moves[STRUGGLE_MOVE_INDEX].moveFlags & MOVE_FLAG_LAST_USED)
-    {
-        return TRUE;
-    }
-    return FALSE;
 }

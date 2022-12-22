@@ -15,7 +15,7 @@ void sub_8045BF8(u8 *, struct ItemSlot *);
 
 void sub_8045ACC(void)
 {
-  struct DungeonEntity *uVar2;
+  struct DungeonEntity *entity;
   s32 index;
   s32 pokeCount;
   
@@ -23,18 +23,18 @@ void sub_8045ACC(void)
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    uVar2 = gDungeonGlobalData->teamPokemon[index];
-    if (EntityExists(uVar2)) {
-      gDungeonGlobalData->allPokemon[pokeCount] = uVar2;
+    entity = gDungeonGlobalData->teamPokemon[index];
+    if (EntityExists(entity)) {
+      gDungeonGlobalData->allPokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
 
   for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
   {
-    uVar2 = gDungeonGlobalData->wildPokemon[index];
-    if (EntityExists(uVar2)) {
-      gDungeonGlobalData->allPokemon[pokeCount] = uVar2;
+    entity = gDungeonGlobalData->wildPokemon[index];
+    if (EntityExists(entity)) {
+      gDungeonGlobalData->allPokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
@@ -43,15 +43,15 @@ void sub_8045ACC(void)
   }
 }
 
-s32 GetTeamMemberEntityIndex(struct DungeonEntity *entity)
+s32 GetTeamMemberEntityIndex(struct DungeonEntity *pokemon)
 {
-  struct DungeonEntity *uVar2;
+  struct DungeonEntity *entity;
   s32 index;
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    uVar2 = gDungeonGlobalData->teamPokemon[index];
-    if (entity == uVar2)
+    entity = gDungeonGlobalData->teamPokemon[index];
+    if (pokemon == entity)
       return index;
   }
   return -1;

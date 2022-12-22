@@ -32,6 +32,10 @@ struct DungeonActionContainer
     // Position of the Pokémon the last time it threw an item.
     /* 0x8 */ struct Position lastItemThrowPosition;
     u8 unkC;
+    u8 fillD[3];
+    u8 fill10[4];
+    // Position of the target that the Pokémon wants throw an item at.
+    /* 0x14 */ struct Position itemTargetPosition;
 };
 
 struct DungeonEntityData
@@ -79,9 +83,6 @@ struct DungeonEntityData
     u8 fill3F;
     /* 0x40 */ u8 joinLocation; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ struct DungeonActionContainer action;
-    u8 fill55[0x58 - 0x55];
-    // Position of the target that the Pokémon wants throw an item at.
-    /* 0x58 */ struct Position itemTargetPosition;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ struct ItemSlot heldItem;
@@ -99,7 +100,8 @@ struct DungeonEntityData
     /* 0x8C */ u8 IQSkillsSelected[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillsEnabled[4];
     /* 0x94 */ u8 tactic;
-    u8 fill95[0x9C - 0x95];
+    u8 fill95[0x98 - 0x95];
+    /* 0x98 */ u32 unk98;
     /* 0x9C */ u32 unk9C;
     /* 0xA0 */ u32 unkA0;
     /* 0xA4 */ u8 clientType;
@@ -114,7 +116,8 @@ struct DungeonEntityData
     /* 0xAE */ u8 nonVolatileStatusDamageTimer;
     u8 fillAF;
     /* 0xB0 */ u8 immobilizeStatus;
-    u8 fillB1[0xB8 - 0xB1];
+    u8 fillB1[0xB4 - 0xB1];
+    /* 0xB4 */ s32 unkB4;
     /* 0xB8 */ u8 immobilizeStatusTurnsLeft;
     /* 0xB9 */ u8 immobilizeStatusDamageTimer;
     u8 fillBA[0xBC - 0xBA];
@@ -135,7 +138,8 @@ struct DungeonEntityData
     /* 0xCC */ u8 cursedDamageTimer;
     u8 fillCD[0xD0 - 0xCD];
     /* 0xD0 */ u8 linkedStatus;
-    u8 fillD1[0xD8 - 0xD1];
+    u8 fillD1[0xD4 - 0xD1];
+    /* 0xD4 */ u32 unkD4;
     /* 0xD8 */ u8 unkD8;
     /* 0xD9 */ u8 linkedStatusTurnsLeft;
     /* 0xDA */ u8 linkedStatusDamageTimer;
@@ -163,7 +167,7 @@ struct DungeonEntityData
     /* 0xF5 */ bool8 exposedStatus;
     /* 0xF6 */ bool8 isColorChanged;
     /* 0xF7 */ bool8 isBoss;
-    /* 0xF8 */ u8 unkF8;
+    /* 0xF8 */ bool8 movementSpeedChanged; // Toggled when pokemon is movement speed is sped up
     /* 0xF9 */ u8 unkF9;
     /* 0xFA */ u8 terrifiedTurnsLeft; // Doubles as a bool for whether the Pokémon is terrified.
     u8 unkFB;
@@ -199,7 +203,10 @@ struct DungeonEntityData
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 fill153[0x158 - 0x153];
+    u8 unk153;
+    u8 unk154;
+    u8 unk155;
+    u8 fill158[0x158 - 0x156];
     u8 unk158;
     u8 unk159;
     u8 unk15A;
@@ -208,7 +215,10 @@ struct DungeonEntityData
     u8 unk15D;
     u8 unk15E;
     u8 unk15F;
-    u8 fill160[0x169 - 0x160];
+    u8 fill160[0x164 - 0x160];
+    /* 0x164 */ u8 unk164;
+    /* 0x165 */ u8 unk165;
+    u8 fill166[0x169 - 0x166];
     u8 turnsSinceWarpScarfActivation;
     /* 0x16C */ struct Position targetPosition;
     /* 0x170 */ struct Position posPixel;
@@ -243,7 +253,7 @@ struct DungeonEntity
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
     /* 0xC */ struct Position32 posPixel;
     /* 0x14 */ struct Position32 prevPosPixel;
-    u8 fill1C[0x20 - 0x1C];
+    s32 unk1C;
     /* 0x20 */ bool8 visible; // Turned off when a Pokémon faints.
     u8 fill21[0x25 - 0x21];
     /* 0x25 */ u8 roomIndex;
@@ -298,6 +308,7 @@ enum MovementFlag
 {
     MOVEMENT_FLAG_SWAPPED_PLACES = 1 << 5,
     MOVEMENT_FLAG_MOVING = 1 << 9,
+    MOVEMENT_FLAG_UNK_14 = 1 << 14,
     MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED = 1 << 15 // Set if the Pokémon is petrified and the leader cures them by swapping places.
 };
 

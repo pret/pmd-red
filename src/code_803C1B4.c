@@ -1,11 +1,10 @@
 #include "global.h"
+#include "dungeon.h"
 
-extern s32 sub_80908D8(u32);
-
-s32 sub_803C1B4(s32 r0, u8 r1)
+u32 sub_803C1B4(struct DungeonLocation *dungeon, u8 r1)
 {
     s32 temp;
-    temp = sub_80908D8(r0);
+    temp = sub_80908D8(dungeon);
     if(r1 == 2)
     {
         temp += 2;

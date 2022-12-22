@@ -5,7 +5,7 @@
 extern struct RescueTeamData *gRescueTeamInfoRef;
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo;
 
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 
@@ -27,7 +27,7 @@ void InitializeRescueTeamInfo(void)
 {
     BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, TEAM_NAME_LENGTH);
     gRescueTeamInfoRef->teamRankPts = 0;
-    gRescueTeamInfoRef->unk10 = 0;
+    gRescueTeamInfoRef->isTeamRenamed = FALSE;
 }
 
 void sub_80920B8(u8 *buffer)
@@ -104,9 +104,9 @@ const u8 *GetTeamRankString(u8 index)
 }
 
 // Unused
-u8 sub_80921B8(void)
+bool8 GetIsTeamRenamed(void)
 {
-    return gRescueTeamInfoRef->unk10;
+    return gRescueTeamInfoRef->isTeamRenamed;
 }
 
 u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
@@ -123,9 +123,9 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     xxx_init_struct_8094924_save_809486C(&auStack36, param_1, size);
     SaveIntegerBits(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
     SaveIntegerBits(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
-    gRescueTeamInfoRef->unk10 = sub_80023E4(0);
+    gRescueTeamInfoRef->isTeamRenamed = sub_80023E4(0);
 
-    if (gRescueTeamInfoRef->unk10 != 0)
+    if (gRescueTeamInfoRef->isTeamRenamed)
     {
         puVar2 = &neg1;
     }
@@ -147,7 +147,7 @@ u32 ReadRescueTeamInfo(u8 *param_1, u32 size)
   RestoreIntegerBits(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
   RestoreIntegerBits(&auStack32, &gRescueTeamInfoRef->teamRankPts, 0x20);
   RestoreIntegerBits(&auStack32, byteArray, 1);
-  gRescueTeamInfoRef->unk10 = byteArray[0] & 1;
+  gRescueTeamInfoRef->isTeamRenamed = byteArray[0] & 1;
   nullsub_102(&auStack32);
   return auStack32.unk8;
 }

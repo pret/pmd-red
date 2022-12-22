@@ -515,7 +515,7 @@ _0807D1A4:
 	bl sub_80522F4
 	mov r0, r8
 	adds r1, r5, 0
-	bl sub_8076D10
+	bl PetrifiedStatusTarget
 	b _0807D3A8
 	.align 2, 0
 _0807D1D0: .4byte gDungeonGlobalData
@@ -708,7 +708,7 @@ _0807D35C:
 	bne _0807D36A
 	mov r0, r8
 	adds r1, r5, 0
-	bl sub_8076D10
+	bl PetrifiedStatusTarget
 _0807D36A:
 	mov r1, r10
 	ldrb r0, [r1, 0x7]

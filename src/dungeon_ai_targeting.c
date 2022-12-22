@@ -24,6 +24,10 @@ extern void ShowVisualFlags(struct DungeonEntity *r0);
 
 const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_4[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_6[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+const u8 gDirectionBitMasks_7[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
 const u8 gTargetingData[3][2][2][2] = {
     {
@@ -57,6 +61,159 @@ const u8 gTargetingData[3][2][2][2] = {
         }
     }
 };
+
+bool8 sub_8070F3C(struct DungeonEntity * pokemon, struct Position *pos, s32 direction)
+{
+  u8 terrain;
+  struct MapTile *tile;
+  
+  terrain = GetCrossableTerrain(pokemon->entityData->entityID);
+
+  tile = GetMapTile_1(pos->x + gAdjacentTileOffsets[direction].x, pos->y + gAdjacentTileOffsets[direction].y);
+  if ((!(tile->tileType & TILE_TYPE_MAP_EDGE)) &&
+     (((tile->pokemon == NULL || (GetEntityType(tile->pokemon) == ENTITY_POKEMON))))) {
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE ||
+            HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            terrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
+            // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
+            terrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            if ((direction & 1) != 0)
+            {
+                terrain = CROSSABLE_TERRAIN_CREVICE;
+            }
+            else
+            {
+                terrain = CROSSABLE_TERRAIN_WALL;
+            }
+        }
+    }
+
+    tile = GetMapTile_1(pos->x, pos->y);
+
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_2[direction & DIRECTION_MASK]))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+bool8 sub_8070F14(struct DungeonEntity * pokemon, s32 direction)
+{
+  struct MapTile *tile;
+  
+
+  tile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[direction].x, pokemon->posWorld.y + gAdjacentTileOffsets[direction].y);
+  if ((!(tile->tileType & TILE_TYPE_MAP_EDGE)) &&
+     (((tile->pokemon == NULL)))) {
+
+    tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+
+    if (((tile->canMoveAdjacent[0] & gDirectionBitMasks_3[direction & DIRECTION_MASK]))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+bool8 sub_8070F80(struct DungeonEntity * pokemon, s32 direction)
+{
+  u8 terrain;
+  struct MapTile *tile;
+  
+  terrain = GetCrossableTerrain(pokemon->entityData->entityID);
+
+  tile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[direction].x, pokemon->posWorld.y + gAdjacentTileOffsets[direction].y);
+  if ((!(tile->tileType & TILE_TYPE_MAP_EDGE)) &&
+     (((tile->pokemon == NULL || (GetEntityType(tile->pokemon) == ENTITY_POKEMON))))) {
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE ||
+            HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            terrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
+            // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
+            terrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            if ((direction & 1) != 0)
+            {
+                terrain = CROSSABLE_TERRAIN_CREVICE;
+            }
+            else
+            {
+                terrain = CROSSABLE_TERRAIN_WALL;
+            }
+        }
+    }
+
+    tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_4[direction & DIRECTION_MASK]))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+bool8 sub_8071058(struct DungeonEntity * pokemon, s32 direction)
+{
+  u8 terrain;
+  struct MapTile *tile;
+  
+  terrain = GetCrossableTerrain(pokemon->entityData->entityID);
+
+  tile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[direction].x, pokemon->posWorld.y + gAdjacentTileOffsets[direction].y);
+  if ((!(tile->tileType & TILE_TYPE_MAP_EDGE)) &&
+     (((tile->pokemon == NULL || (GetEntityType(tile->pokemon) == ENTITY_POKEMON)) ||
+      (!tile->pokemon->entityData->isEnemy)))) {
+    if (!IsFixedDungeon())
+    {
+        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE ||
+            HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        {
+            terrain = CROSSABLE_TERRAIN_WALL;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        {
+            // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
+            // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
+            terrain = CROSSABLE_TERRAIN_CREVICE;
+        }
+        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        {
+            if ((direction & 1) != 0)
+            {
+                terrain = CROSSABLE_TERRAIN_CREVICE;
+            }
+            else
+            {
+                terrain = CROSSABLE_TERRAIN_WALL;
+            }
+        }
+    }
+    tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
+
+    if (((tile->canMoveAdjacent[terrain] & gDirectionBitMasks_5[direction & DIRECTION_MASK]))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
 
 bool8 CanAttackInFront(struct DungeonEntity *pokemon, s32 direction)
 {
@@ -97,7 +254,7 @@ bool8 CanAttackInFront(struct DungeonEntity *pokemon, s32 direction)
             }
         }
         tile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-        if (tile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_2[direction & DIRECTION_MASK])
+        if (tile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_6[direction & DIRECTION_MASK])
         {
             return TRUE;
         }
@@ -161,7 +318,7 @@ bool8 CanMoveForward(struct DungeonEntity *pokemon, s32 direction, bool8 *pokemo
         }
     }
     currentTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-    if (currentTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_3[direction & DIRECTION_MASK])
+    if (currentTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_7[direction & DIRECTION_MASK])
     {
         if (frontTile->pokemon == NULL)
         {
@@ -384,23 +541,23 @@ static inline bool8 JoinLocationCannotUseItems_1(struct DungeonEntityData *pokem
 
 u8 sub_807167C(struct DungeonEntity * pokemon, struct DungeonEntity * target)
 {
-  bool8 bVar1;
-  struct DungeonEntityData * iVar3;
-  struct DungeonEntityData * iVar4;
+  bool8 cannotUseItems;
+  struct DungeonEntityData * targetEntityData;
+  struct DungeonEntityData * pokemonEntityData;
 
-  iVar4 = pokemon->entityData;
-  iVar3 = target->entityData;
-  if (iVar4->clientType != CLIENT_TYPE_CLIENT) {
-    bVar1 = JoinLocationCannotUseItems_1(iVar4);
-    if (!bVar1 && (iVar4->shopkeeperMode == SHOPKEEPER_NONE) && (iVar3->clientType != CLIENT_TYPE_CLIENT)) {
-      bVar1 = JoinLocationCannotUseItems_1(iVar3);
-      if (bVar1 || (iVar3->shopkeeperMode != SHOPKEEPER_NONE)) {
+  pokemonEntityData = pokemon->entityData;
+  targetEntityData = target->entityData;
+  if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
+    cannotUseItems = JoinLocationCannotUseItems_1(pokemonEntityData);
+    if (!cannotUseItems && (pokemonEntityData->shopkeeperMode == SHOPKEEPER_NONE) && (targetEntityData->clientType != CLIENT_TYPE_CLIENT)) {
+      cannotUseItems = JoinLocationCannotUseItems_1(targetEntityData);
+      if (cannotUseItems || (targetEntityData->shopkeeperMode != SHOPKEEPER_NONE)) {
 error:
           return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
       }
       else
       {
-        if ((iVar4->isEnemy) != (iVar3->isEnemy)) {
+        if ((pokemonEntityData->isEnemy) != (targetEntityData->isEnemy)) {
           return TARGET_CAPABILITY_CAN_TARGET;
         }
         else {

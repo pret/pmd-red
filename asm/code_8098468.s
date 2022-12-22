@@ -488,7 +488,7 @@ _080988E4:
 	movs r1, 0
 	bl GroundMap_ExecuteEvent
 	movs r0, 0x1E
-	bl sub_8098F44
+	bl GroundMainGameCancelRequest
 	movs r0, 0x1E
 	bl FadeOutAllMusic
 _080988F8:

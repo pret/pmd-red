@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_809733C
-sub_809733C:
-	push {r4-r6,lr}
-	lsls r0, 16
-	asrs r4, r0, 16
-	lsls r1, 24
-	lsrs r6, r1, 24
-	cmp r4, 0xD
-	beq _0809737C
-	lsls r0, r4, 16
-	lsrs r5, r0, 16
-	movs r0, 0
-	movs r1, 0x2C
-	adds r2, r5, 0
-	bl sub_8001784
-	cmp r0, 0
-	bne _0809737C
-	movs r0, 0
-	movs r1, 0x2B
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl sub_800199C
-	cmp r6, 0
-	beq _0809737C
-	cmp r4, 0xE
-	blt _0809737C
-	cmp r4, 0xF
-	ble _08097378
-	cmp r4, 0x1C
-	bne _0809737C
-_08097378:
-	bl sub_809674C
-_0809737C:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_809733C
-
-	thumb_func_start sub_8097384
-sub_8097384:
-	push {lr}
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xD
-	bne _08097392
-	movs r0, 0
-	b _080973A4
-_08097392:
-	lsls r2, r0, 16
-	lsrs r2, 16
-	movs r0, 0
-	movs r1, 0x2C
-	bl sub_8001784
-	cmp r0, 0
-	beq _080973A4
-	movs r0, 0x1
-_080973A4:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8097384
-
 	thumb_func_start sub_80973A8
 sub_80973A8:
 	push {r4-r6,lr}

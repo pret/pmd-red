@@ -5,98 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8042A84
-sub_8042A84:
-	push {r4-r7,lr}
-	adds r4, r1, 0
-	adds r7, r2, 0
-	lsls r0, 16
-	asrs r5, r0, 16
-	movs r6, 0x80
-	lsls r6, 2
-	adds r0, r4, 0
-	bl sub_8042768
-	lsls r0, 24
-	cmp r0, 0
-	beq _08042AF8
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_804151C
-	adds r0, r7, 0
-	movs r1, 0x42
-	bl sub_803E708
-	adds r5, r4, 0
-	adds r5, 0x20
-_08042AB4:
-	ldr r1, [r4, 0x1C]
-	ldr r0, _08042B00
-	cmp r1, r0
-	bgt _08042AF0
-	movs r0, 0x42
-	bl sub_803E46C
-	ldr r1, [r4, 0x1C]
-	adds r1, r6
-	str r1, [r4, 0x1C]
-	movs r0, 0x80
-	lsls r0, 1
-	adds r6, r0
-	ldr r0, [r4, 0x10]
-	subs r0, r1
-	cmp r0, 0
-	bge _08042AD8
-	adds r0, 0xFF
-_08042AD8:
-	asrs r1, r0, 8
-	ldr r0, _08042B04
-	ldr r0, [r0]
-	ldr r2, _08042B08
-	adds r0, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	subs r1, r0
-	movs r0, 0x8
-	negs r0, r0
-	cmp r1, r0
-	bge _08042AB4
-_08042AF0:
-	movs r0, 0
-	strb r0, [r5]
-	bl sub_804178C
-_08042AF8:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08042B00: .4byte 0x0000c7ff
-_08042B04: .4byte gDungeonGlobalData
-_08042B08: .4byte 0x000181f2
-	thumb_func_end sub_8042A84
-
-	thumb_func_start sub_8042B0C
-sub_8042B0C:
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x9F
-	lsls r0, 1
-	movs r2, 0x5
-	bl sub_8042A84
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8042B0C
-
-	thumb_func_start sub_8042B20
-sub_8042B20:
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0xDE
-	lsls r0, 1
-	movs r2, 0xE
-	bl sub_8042A84
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8042B20
-
 	thumb_func_start sub_8042B34
 sub_8042B34:
 	push {r4-r7,lr}
@@ -787,7 +695,7 @@ _0804300C:
 	ldr r3, _08043134
 	adds r0, r3
 	strb r1, [r0]
-	bl sub_8083F34
+	bl StopDungeonBGM
 	bl sub_803D4AC
 	bl sub_804513C
 	bl sub_8043CD8
@@ -1323,7 +1231,7 @@ _0804351C:
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_8083E88
+	bl DungeonStartNewBGM
 	bl sub_80847D4
 _08043544:
 	bl sub_8049840
@@ -1360,7 +1268,7 @@ _08043544:
 _08043594:
 	bl sub_804AAD4
 	bl sub_8049B8C
-	bl sub_804966C
+	bl LoadDungeonTilesetAssets
 	cmp r6, 0
 	bne _080435D0
 	bl sub_806B168
@@ -1689,7 +1597,7 @@ _0804384A:
 	cmp r0, 0x1B
 	bne _08043896
 	movs r0, 0x3C
-	bl sub_8083ED8
+	bl DungeonFadeOutBGM
 _08043896:
 	movs r0, 0x4
 	movs r1, 0x4F

@@ -299,16 +299,16 @@ void sub_803136C(void)
   }
 }
 
-#ifdef NONMATCHING
 void sub_80313D8(u32 param_1)
 {
   s32 iVar2;
   s32 local_10;
+  struct unkStruct_203B480 *unused;
   
   local_10 = 0;
   sub_8030768(0);
   sub_8012FD8(&gUnknown_203B328->unk8);
-  if (sub_8012FD8(&gUnknown_203B328->unk58) == '\0') {
+  if (sub_8012FD8(&gUnknown_203B328->unk58) == 0) {
     sub_8013114(&gUnknown_203B328->unk58,&local_10);
   }
 
@@ -327,13 +327,15 @@ void sub_80313D8(u32 param_1)
             case 3:
                 for(iVar2 = 0; iVar2 < 0x20; iVar2++)
                 {
+                    unused = &gUnknown_203B480[iVar2];
                     gUnknown_203B480[iVar2].unk0 = 0;
+                    unused = &gUnknown_203B480[iVar2];
                     gUnknown_203B480[iVar2].unk22 = 0;
                 }
                 break;
         }
         if ((gUnknown_203B328->wonderMailMode == 2) || (gUnknown_203B328->wonderMailMode == 4)) {
-            if (sub_8030C20(gUnknown_203B328->wonderMailMode) != '\0') {
+            if (sub_8030C20(gUnknown_203B328->wonderMailMode) != 0) {
                 sub_80310E4(5);
             }
             else {
@@ -341,113 +343,8 @@ void sub_80313D8(u32 param_1)
             }
         }
         break;
-
   }
 }
-#else
-NAKED
-void sub_80313D8(u32 param_1)
-{
-    asm_unified(
-	"\tpush {r4,r5,lr}\n"
-	"\tsub sp, 0x4\n"
-	"\tadds r5, r0, 0\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [sp]\n"
-	"\tbl sub_8030768\n"
-	"\tldr r4, _08031418\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, 0x8\n"
-	"\tbl sub_8012FD8\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, 0x58\n"
-	"\tbl sub_8012FD8\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08031408\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, 0x58\n"
-	"\tmov r1, sp\n"
-	"\tbl sub_8013114\n"
-"_08031408:\n"
-	"\tldr r0, [sp]\n"
-	"\tcmp r0, 0x2\n"
-	"\tbeq _08031428\n"
-	"\tcmp r0, 0x2\n"
-	"\tbgt _0803141C\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _08031420\n"
-	"\tb _0803148E\n"
-	"\t.align 2, 0\n"
-"_08031418: .4byte gUnknown_203B328\n"
-"_0803141C:\n"
-	"\tcmp r0, 0x3\n"
-	"\tbne _0803148E\n"
-"_08031420:\n"
-	"\tmovs r0, 0\n"
-	"\tbl sub_80310E4\n"
-	"\tb _0803148E\n"
-"_08031428:\n"
-	"\tcmp r5, 0x2\n"
-	"\tbeq _08031432\n"
-	"\tcmp r5, 0x3\n"
-	"\tbeq _0803143C\n"
-	"\tb _0803145A\n"
-"_08031432:\n"
-	"\tldr r0, [r4]\n"
-	"\tldrb r0, [r0, 0x4]\n"
-	"\tbl sub_8095240\n"
-	"\tb _0803145A\n"
-"_0803143C:\n"
-	"\tldr r4, _08031480\n"
-	"\tmovs r3, 0\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0x1F\n"
-"_08031444:\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, r1\n"
-	"\tstrb r3, [r0]\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, r1\n"
-	"\tadds r0, 0x22\n"
-	"\tstrb r3, [r0]\n"
-	"\tadds r1, 0x30\n"
-	"\tsubs r2, 0x1\n"
-	"\tcmp r2, 0\n"
-	"\tbge _08031444\n"
-"_0803145A:\n"
-	"\tldr r0, _08031484\n"
-	"\tldr r0, [r0]\n"
-	"\tmovs r1, 0x8C\n"
-	"\tlsls r1, 1\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tcmp r0, 0x2\n"
-	"\tbeq _0803146E\n"
-	"\tcmp r0, 0x4\n"
-	"\tbne _0803148E\n"
-"_0803146E:\n"
-	"\tbl sub_8030C20\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08031488\n"
-	"\tmovs r0, 0x5\n"
-	"\tbl sub_80310E4\n"
-	"\tb _0803148E\n"
-	"\t.align 2, 0\n"
-"_08031480: .4byte gUnknown_203B480\n"
-"_08031484: .4byte gUnknown_203B328\n"
-"_08031488:\n"
-	"\tmovs r0, 0\n"
-	"\tbl sub_80310E4\n"
-"_0803148E:\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0"
-    );
-}
-#endif
 
 void sub_8031498(void)
 {

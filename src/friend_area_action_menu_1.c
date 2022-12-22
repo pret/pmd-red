@@ -28,7 +28,7 @@ extern u32 sub_801A6E8(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
 extern void sub_808D31C(struct PokemonStruct *);
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern u32 sub_801F890(void);
@@ -58,7 +58,7 @@ extern void sub_8023C60(void);
 
 void sub_80277FC(void)
 {
-  struct PokemonStruct *iVar4;
+  struct PokemonStruct *pokeStruct;
 
   switch(sub_8023A94(1)) {
       case 0:
@@ -66,18 +66,18 @@ void sub_80277FC(void)
         break;
       case 3:
         gUnknown_203B2BC->targetPoke = sub_8023B44();
-        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->unk18 = iVar4;
-        gUnknown_203B2BC->unk1C = iVar4->isLeader;
-        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        gUnknown_203B2BC->unk18 = pokeStruct;
+        gUnknown_203B2BC->unk1C = pokeStruct->isLeader;
+        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(3);
         break;
       case 4:
         gUnknown_203B2BC->targetPoke = sub_8023B44();
-        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->unk18 = iVar4;
-        gUnknown_203B2BC->unk1C = iVar4->isLeader;
-        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        gUnknown_203B2BC->unk18 = pokeStruct;
+        gUnknown_203B2BC->unk1C = pokeStruct->isLeader;
+        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(4);
         break;
       case 2:
@@ -90,27 +90,27 @@ void sub_80277FC(void)
 void sub_80278B4(void)
 {
   struct PokemonStruct *playerStruct;
-  struct PokemonStruct *puVar3;
-  struct PokemonStruct *iVar4;
+  struct PokemonStruct *pokeStruct1;
+  struct PokemonStruct *pokeStruct2;
   int local_c;
 
   local_c = 0;
   sub_8023A94(0);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == '\0') && (sub_8013114(&gUnknown_203B2BC->unk7C,&local_c), local_c != 1)) {
+  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&local_c), local_c != 1)) {
     gUnknown_203B2BC->unk70 = local_c;
   }
   switch(local_c) {
       case 6:
-        if (sub_808D750(gUnknown_203B2BC->targetPoke) != '\0') {
+        if (sub_808D750(gUnknown_203B2BC->targetPoke)) {
 #ifdef NONMATCHING
-            puVar3 = &gRecruiedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+            pokeStruct1 = &gRecruiedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
 #else
         register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2BC->targetPoke]);
         struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
         size_t addr = offset + (size_t)p;
-        puVar3 = (struct PokemonStruct*)addr;
+        pokeStruct1 = (struct PokemonStruct*)addr;
 #endif
-          puVar3->unk0 |= 2;
+          pokeStruct1->unk0 |= 2;
           nullsub_104();
         }
         sub_808ED00();
@@ -123,11 +123,11 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(2);
         break;
       case 8:
-        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        pokeStruct2 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
         playerStruct = GetPlayerPokemonStruct();
-        if (!iVar4->isLeader) {
+        if (!pokeStruct2->isLeader) {
           playerStruct->isLeader = FALSE;
-          iVar4->isLeader = TRUE;
+          pokeStruct2->isLeader = TRUE;
           nullsub_104();
         }
         sub_808ED00();
@@ -144,13 +144,13 @@ void sub_80278B4(void)
         break;
       case 0xb:
         PlaySound(0x14d);
-        if (gUnknown_203B2BC->unk14.itemIndex != ITEM_ID_NOTHING) {
-          AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
+        if (gUnknown_203B2BC->item2.itemIndex != ITEM_ID_NOTHING) {
+          AddHeldItemToInventory(&gUnknown_203B2BC->item2);
         }
         FillInventoryGaps();
-        gUnknown_203B2BC->unk14.itemIndex = 0;
-        gUnknown_203B2BC->unk14.numItems = 0;
-        GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->unk14);
+        gUnknown_203B2BC->item2.itemIndex = ITEM_ID_NOTHING;
+        gUnknown_203B2BC->item2.numItems = 0;
+        GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         nullsub_104();
         SetFriendAreaActionMenuState(2);
         break;
@@ -197,7 +197,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x44 || gUnknown_203B2BC->unk18->unk4.dungeonIndex == 0x45)
+    if (gUnknown_203B2BC->unk18->dungeonLocation.dungeonIndex == 0x44 || gUnknown_203B2BC->unk18->dungeonLocation.dungeonIndex == 0x45)
         return TRUE;
     else
         return FALSE;
@@ -288,8 +288,8 @@ void sub_8027BD8(void)
         PlaySound(0x14d);
         ShiftItemsDownFrom(gUnknown_203B2BC->itemIndex);
         FillInventoryGaps();
-        if (gUnknown_203B2BC->unk14.itemIndex != 0) {
-            AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
+        if (gUnknown_203B2BC->item2.itemIndex != ITEM_ID_NOTHING) {
+            AddHeldItemToInventory(&gUnknown_203B2BC->item2);
         }
         GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->itemToGive);
         sub_801A928();
@@ -327,7 +327,7 @@ void sub_8027CA0(void)
         case 3:
         case 4:
             gUnknown_203B2BC->unk20 = sub_801F194();
-            gUnknown_203B2BC->unk24 = gUnknown_203B2BC->unk28[gUnknown_203B2BC->unk20].moveID;
+            gUnknown_203B2BC->moveID = gUnknown_203B2BC->unk28[gUnknown_203B2BC->unk20].moveID;
             SetFriendAreaActionMenuState(0x10);
             break;
         case 2:
@@ -382,79 +382,79 @@ void sub_8027D40(u32 r0, struct HeldItem *heldItem)
     sub_80073E0(r0);
 }
 
-u32 sub_8027D9C(struct PokemonStruct *r0)
+bool8 sub_8027D9C(struct PokemonStruct *pokeStruct)
 {
     u32 var1;
-    if(r0->isLeader == 0)
+    if(!pokeStruct->isLeader)
     {
         var1 = 0;
-        if(r0->unk4.dungeonIndex == 0x41)
+        if(pokeStruct->dungeonLocation.dungeonIndex == 0x41)
             var1 = 1;
-            if(var1 != 0)
-            {
-                if(sub_80023E4(8) == 0)
-                    return 0;
-            }
+        if(var1 != 0)
+        {
+            if(!sub_80023E4(8))
+                return FALSE;
+        }
     }
     else
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }
 
-u32 sub_8027DCC(struct PokemonStruct *r0)
+bool8 sub_8027DCC(struct PokemonStruct *pokeStruct)
 {
     u32 var1;
-    if(sub_808D3BC() != r0)
-        if(sub_808D3F8() != r0)
-            if(r0->isLeader == 0)
+    if(sub_808D3BC() != pokeStruct)
+        if(sub_808D3F8() != pokeStruct)
+            if(!pokeStruct->isLeader)
             {
                 var1 = 0;
-                if(r0->unk4.dungeonIndex == 0x41)
+                if(pokeStruct->dungeonLocation.dungeonIndex == 0x41)
                     var1 = 1;
                 if(var1 != 0)
                 {
-                    if(sub_80023E4(8) != 0)
+                    if(sub_80023E4(8))
                         goto check;
                 }
                 else
                 {
                     check:
-                    if(sub_8027E18(r0) != 3)
-                        return 1;
+                    if(sub_8027E18(pokeStruct) != 3)
+                        return TRUE;
                 }
             }
-    return 0;
+    return FALSE;
 }
 
-u32 sub_8027E18(struct PokemonStruct *r0)
+u32 sub_8027E18(struct PokemonStruct *pokeStruct)
 {
-    if(r0->heldItem.itemIndex == 0)
+    if(pokeStruct->heldItem.itemIndex == ITEM_ID_NOTHING)
         return 0;
     else if(GetNumberOfFilledInventorySlots() < INVENTORY_SIZE)
         return 1;
-    else if(sub_8027E4C(r0))
+    else if(sub_8027E4C(pokeStruct))
         return 2;
     else
         return 3;
 }
 
-u8 sub_8027E4C(struct PokemonStruct *r0)
+bool8 sub_8027E4C(struct PokemonStruct *pokeStruct)
 {
-    if(!IsNotMoneyOrUsedTMItem(r0->heldItem.itemIndex))
-        return 0;
+    if(!IsNotMoneyOrUsedTMItem(pokeStruct->heldItem.itemIndex))
+        return FALSE;
     else
     {
-        if(IsThrowableItem(r0->heldItem.itemIndex))
+        if(IsThrowableItem(pokeStruct->heldItem.itemIndex))
         {
-            if(gTeamInventory_203B460->teamStorage[r0->heldItem.itemIndex] + r0->heldItem.numItems > 0x3e7)
-                return 0;
+            if(gTeamInventory_203B460->teamStorage[pokeStruct->heldItem.itemIndex] + pokeStruct->heldItem.numItems > 0x3e7)
+                return FALSE;
         }
-        else if(gTeamInventory_203B460->teamStorage[r0->heldItem.itemIndex] > 0x3e6)
+        else if(gTeamInventory_203B460->teamStorage[pokeStruct->heldItem.itemIndex] > 0x3e6)
         {
-            return 0;
+            return FALSE;
         }
     }
-    return 1;
+    return TRUE;
 }
 
 void sub_8027EB8(void)
@@ -463,22 +463,22 @@ void sub_8027EB8(void)
     {
         case 1:
             PlaySound(0x14d);
-            AddHeldItemToInventory(&gUnknown_203B2BC->unk14);
+            AddHeldItemToInventory(&gUnknown_203B2BC->item2);
             FillInventoryGaps();
-            gUnknown_203B2BC->unk14.itemIndex = 0;
-            gUnknown_203B2BC->unk14.numItems = 0;
-            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->unk14);
+            gUnknown_203B2BC->item2.itemIndex = ITEM_ID_NOTHING;
+            gUnknown_203B2BC->item2.numItems = 0;
+            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->item2);
             SetFriendAreaActionMenuState(6);
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(gUnknown_203B2BC->unk14.itemIndex))
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->unk14.itemIndex] += gUnknown_203B2BC->unk14.numItems;
+            if(IsThrowableItem(gUnknown_203B2BC->item2.itemIndex))
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->item2.itemIndex] += gUnknown_203B2BC->item2.numItems;
             else
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->unk14.itemIndex] += 1;
-            gUnknown_203B2BC->unk14.itemIndex = 0;
-            gUnknown_203B2BC->unk14.numItems = 0;
-            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->unk14);
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->item2.itemIndex] += 1;
+            gUnknown_203B2BC->item2.itemIndex = ITEM_ID_NOTHING;
+            gUnknown_203B2BC->item2.numItems = 0;
+            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->item2);
             SetFriendAreaActionMenuState(7);
             break;
         case 0:

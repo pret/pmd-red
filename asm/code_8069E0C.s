@@ -416,7 +416,7 @@ _0806A608:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8076210
+	bl BurnedStatusTarget
 	b _0806A6D2
 	.align 2, 0
 _0806A640: .4byte gDungeonWaterType

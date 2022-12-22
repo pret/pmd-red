@@ -1,18 +1,13 @@
 #include "global.h"
 #include "memory.h"
 #include "debug.h"
+#include "ground_script.h"
 
-struct unkStruct_3001B6C
-{
-    // size: 0x110
-    u8 fill0[0xE4];
-    u16 unkE4;
-};
+extern struct GroundScript_ExecutePP_1 *gUnknown_3001B6C;
 
-extern struct unkStruct_3001B6C *gUnknown_3001B6C;
-extern u8 gUnknown_811736C[];
 extern struct DebugLocation gUnknown_8117538[];
 
+extern u8 gUnknown_811736C[];
 extern u8 *gUnknown_3001B70;
 
 extern void sub_809D600(void *, u8 *, u32, u32, u32);

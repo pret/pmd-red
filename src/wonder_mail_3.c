@@ -6,45 +6,7 @@
 #include "menu.h"
 #include "constants/dungeon.h"
 #include "wonder_mail.h"
-
-struct unkSubStruct_203B2F8
-{
-    struct WonderMail wonderMail;
-    u8 *unk14;
-    u8 *unk18;
-};
-
-struct unkStruct_203B2F8
-{
-    // size: 0x208
-    s32 state; // state
-    u32 unk4;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    struct unkSubStruct_203B2F8 *unkC;
-    u8 unk10;
-    u8 fill11[0x14 - 0x11];
-    u32 unk14;
-    u8 fill18[0x58 - 0x18];
-    u8 unk58;
-    u8 fill59[0x64 - 0x59];
-    u8 *unk64;
-    u32 unk68;
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
-    u8 unk78[0xC8 - 0x78];
-    u8 unkC8[4];
-    u8 fillCC[0x118 - 0xCC];
-    struct MenuItem unk118[8];
-    struct MenuItem unk158[8];
-    u16 unk198[8];
-    struct UnkTextStruct2 unk1A8[4];
-    u32 unk1E4;
-};
-extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
+#include "wonder_mail_3.h"
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -141,7 +103,6 @@ ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
 ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
 static const u8 wonder_mail_3_fill[] = "pksdir0";
 
-
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
@@ -185,7 +146,50 @@ extern void sub_8012D60(u8 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern u8 *sub_8096DE8(void);
 extern void sub_8096A78(struct unkSubStruct_203B2F8 *);
 extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
+struct unkStruct_803B344 *sub_803B344(u8);
+extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
+extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+extern void CreateRescueTitle(void *);
+extern s32 sub_8013800(void *, u32);
+extern void sub_803B35C(void *, u32*);
+extern u8 gUnknown_80DFDBC[];
 
+
+void sub_802CFD0(void)
+{
+  struct unkStruct_802C39C local;    
+  struct unkStruct_803B344 *iVar1;
+  s32 r5;
+  s32 r4;
+  
+  sub_8008C54(gUnknown_203B2F4->unk34);
+  sub_80073B8(gUnknown_203B2F4->unk34);
+  r5 = r4 = gUnknown_203B2F4->unk1E * 8 + 10;
+  xxx_call_draw_string(r5,0,gUnknown_80DFDBC,gUnknown_203B2F4->unk34,0); // RESCUE EVENT
+  r4 -= 6;
+  r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
+  sub_8012BC4(r5,0,gUnknown_203B2F4->unk1E + 1,2,7,gUnknown_203B2F4->unk34);
+
+  r5 = 0;
+  
+  if(r5 < gUnknown_203B2F4->unk1A)
+  {
+    while(r5 < gUnknown_203B2F4->unk1A) {
+        iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
+        local.unk0[0] = gUnknown_203B2F4->unk34;
+        local.unk4C = sub_8013800(gUnknown_203B2F4,r5);
+        sub_803B35C(iVar1,local.unk0);
+        local.unk3C[11] = 1;
+        local.unk50[0] = iVar1->unk14;
+        CreateRescueTitle(&local);
+        r5++;
+    }
+  }
+  sub_80073E0(gUnknown_203B2F4->unk34);
+}
 
 u32 sub_802D098(struct unkSubStruct_203B2F8 *param_1)
 {
@@ -324,23 +328,23 @@ void sub_802D2A8(void)
         sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case 3:
-        gUnknown_203B2F8->unk4 = 2;
+        gUnknown_203B2F8->fallbackState = 2;
         sub_80141B4(gUnknown_80DFE9C,0,0,0x101);
         break;
       case 4:
-        gUnknown_203B2F8->unk4 = 2;
+        gUnknown_203B2F8->fallbackState = 2;
         sub_80141B4(gUnknown_80DFED0,0,0,0x101);
         break;
       case 5:
-        gUnknown_203B2F8->unk4 = 2;
+        gUnknown_203B2F8->fallbackState = 2;
         sub_80141B4(gUnknown_80DFF2C,0,0,0x101);
         break;
       case 6:
-        gUnknown_203B2F8->unk4 = 2;
+        gUnknown_203B2F8->fallbackState = 2;
         sub_80141B4(gUnknown_80DFFA4,0,0,0x101);
         break;
       case 7:
-        gUnknown_203B2F8->unk4 = 0xc;
+        gUnknown_203B2F8->fallbackState = 0xc;
         sub_80141B4(gUnknown_80E0010,0,0,0x101);
         break;
       case 8:
@@ -352,7 +356,7 @@ void sub_802D2A8(void)
           MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
           MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
         }
-        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon)
+        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon.dungeonIndex)
         {
             // NOTE: subtract 1 from each of the case as the input??
             case DUNGEON_ODDITY_CAVE: // 0x2B
@@ -368,7 +372,7 @@ void sub_802D2A8(void)
                 sub_8097418(0x2D, 1);
                 break;
         }
-        gUnknown_203B2F8->unk4 = 2;
+        gUnknown_203B2F8->fallbackState = 2;
         sub_80141B4(gUnknown_80E0074,0,0,0x101);
         break;
       case 9:
@@ -376,7 +380,7 @@ void sub_802D2A8(void)
         sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case 10:
-        gUnknown_203B2F8->unk4 = 0xb;
+        gUnknown_203B2F8->fallbackState = 0xb;
         sub_80141B4(gUnknown_80E0108,0,0,0x101);
         break;
       case 0xb:

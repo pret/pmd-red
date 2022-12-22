@@ -139,7 +139,7 @@ _0806D100:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	movs r3, 0x1
-	bl sub_8077084
+	bl RaiseAttackStageTarget
 _0806D118:
 	adds r0, r6, 0
 	bl EntityExists

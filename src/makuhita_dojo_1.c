@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/colors.h"
+#include "constants/dungeon.h"
 #include "code_800D090.h"
 #include "dungeon.h"
 #include "text.h"
@@ -7,7 +8,7 @@
 struct unkStruct_203B31C
 {
     // Size: 0xD0
-    s16 unk0[0x17];
+    s16 unk0[NUM_DUNGEON_MAZE];
     u32 unk30;
     u8 fill34[0x48 - 0x34];
     s16 unk48;
@@ -85,7 +86,7 @@ s32 sub_8030668(void)
   
   counter = 0;
 
-  for(index = 0; index < 0x17; index++)
+  for(index = 0; index < NUM_DUNGEON_MAZE; index++)
   {
     if (sub_8097504(index)) {
       gUnknown_203B31C->unk0[counter] = sub_80A26CC(index);

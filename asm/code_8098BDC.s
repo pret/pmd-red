@@ -6485,7 +6485,7 @@ sub_809C39C:
 	movs r2, 0x1
 	negs r2, r2
 	movs r1, 0
-	bl sub_8098D1C
+	bl GroundMainGroundRequest
 _0809C3CC:
 	bl sub_801D1E0
 	pop {r0}
@@ -6515,7 +6515,7 @@ sub_809C3D8:
 	movs r2, 0x1
 	negs r2, r2
 	movs r1, 0
-	bl sub_8098D1C
+	bl GroundMainGroundRequest
 _0809C408:
 	bl sub_801D1E0
 	pop {r0}
@@ -6545,7 +6545,7 @@ sub_809C414:
 	movs r2, 0x1
 	negs r2, r2
 	movs r1, 0
-	bl sub_8098D1C
+	bl GroundMainGroundRequest
 	b _0809C458
 	.align 2, 0
 _0809C444: .4byte gUnknown_3001B64

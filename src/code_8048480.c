@@ -3,11 +3,14 @@
 #include "constants/status.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "number_util.h"
 #include "moves.h"
 #include "code_8077274_1.h"
+#include "position.h"
+#include "status.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 gAvailablePokemonNames[0x58];
@@ -33,17 +36,12 @@ extern u8 *gPtrSelfHealPreventedHungerMessage[];
 extern u8 *gUnknown_80F9740[];
 extern u8 *gUnknown_80F9760[];
 
-extern void sub_807D148(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u32 r3);
-extern void sub_8075FCC(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
-extern void sub_8077AE4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
+extern void sub_807D148(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, struct Position *r3);
 extern void sub_8072008(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2, u8 r3, u32);
-extern void sub_8076D10(struct DungeonEntity *pokemon, struct DungeonEntity *r1);
 extern void LevelDownTarget(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32 r2);
 extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct DungeonEntity *r1, u32);
 extern void sub_80522F4(struct DungeonEntity *pokemon, struct DungeonEntity *r1, const char[]);
-extern void sub_8077910(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32);
-extern void HealTargetHP(struct DungeonEntity *pokemon, struct DungeonEntity *r1, s16, s16, u32);
 extern void sub_806F370(struct DungeonEntity *pokemon, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_8078A58(struct DungeonEntity *, struct DungeonEntity *, s16, u32);
 extern s32 sub_8042520(struct DungeonEntity *);
@@ -63,12 +61,12 @@ void sub_8048364(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8
 
 void sub_8048374(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, 1);
+    HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, TRUE);
 }
 
 void sub_804839C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, 1);
+    HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, TRUE);
 }
 
 void sub_80483C4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -78,7 +76,7 @@ void sub_80483C4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_80483D4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, 1);
+    HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, TRUE);
 }
 
 void sub_80483F4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -86,14 +84,14 @@ void sub_80483F4(struct DungeonEntity *pokemon, struct DungeonEntity *target)
     BlindTarget(pokemon, target);
 }
 
-void sub_8048400(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+void XEyeSeedAction(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
     CrossEyeVisionTarget(pokemon, target);
 }
 
 void sub_804840C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077910(pokemon, target, 0, 1);
+    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
 }
 
 void sub_804841C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -121,17 +119,17 @@ void sub_8048450(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_8048480(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_807D148(pokemon, target, 0, 0);
+    sub_807D148(pokemon, target, 0, NULL);
 }
 
 void sub_8048490(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8075FCC(pokemon, target);
+    SleeplessStatusTarget(pokemon, target);
 }
 
 void sub_804849C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8077AE4(pokemon, target, 1);
+    ConfuseStatusTarget(pokemon, target, TRUE);
 }
 
 void sub_80484A8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -141,7 +139,7 @@ void sub_80484A8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 
 void sub_80484BC(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 {
-    sub_8076D10(pokemon, target);
+    PetrifiedStatusTarget(pokemon, target);
 }
 
 void sub_80484C8(struct DungeonEntity *pokemon, struct DungeonEntity *target)
@@ -201,27 +199,27 @@ void sub_80485B0(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 {
   bool8 isMoveBoosted;
   s32 moveIndex;
-  struct DungeonEntityData *iVar5;
+  struct DungeonEntityData *entityData;
   register struct PokemonMove *movePtr1 asm("r4"); // r4
   register struct PokemonMove *movePtr2 asm("r5"); // r5
-  u8 cVar8;
+  u8 moveBoost;
   s32 movePowerBoost;
   s32 maxPowerBoost;
 
   isMoveBoosted = FALSE;
-  cVar8 = 1;
-  iVar5 = target->entityData;
+  moveBoost = 1;
+  entityData = target->entityData;
   if (DungeonRandomCapped(100) < gUnknown_80F4F46)
-    cVar8 = 3;
-  if (iVar5->isLeader) {
-    for(moveIndex = 0, movePtr1 = &iVar5->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
+    moveBoost = 3;
+  if (entityData->isLeader) {
+    for(moveIndex = 0, movePtr1 = &entityData->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
     {
         if((movePtr1->moveFlags & MOVE_FLAG_EXISTS) && (movePtr1->moveFlags & MOVE_FLAG_SET))
         {
             if(GetMovePower(movePtr2) == 0) continue;
             movePowerBoost = movePtr1->powerBoost;
             maxPowerBoost = GetMoveMaxPowerBoost(movePtr2);
-            movePtr1->powerBoost += cVar8;
+            movePtr1->powerBoost += moveBoost;
             if(movePtr1->powerBoost >= maxPowerBoost)
                 movePtr1->powerBoost = maxPowerBoost;
             if(movePowerBoost != movePtr1->powerBoost)
@@ -231,7 +229,7 @@ void sub_80485B0(struct DungeonEntity *pokemon, struct DungeonEntity * target)
 
     if (isMoveBoosted) {
       sub_80522F4(pokemon,target,*gUnknown_80FE454);
-      if (cVar8 != 1) {
+      if (moveBoost != 1) {
         sub_803E708(10,0x40);
         sub_80522F4(pokemon,target,*gUnknown_80FE434);
      }
@@ -251,7 +249,7 @@ void sub_804869C(struct DungeonEntity *pokemon, struct DungeonEntity * target, u
   struct DungeonEntity *entity;
   u8 auStack28 [4];
   
-  if (param_3 != '\0') {
+  if (param_3 != 0) {
     entityData = target->entityData;
     entityData_1 = entityData;
     if (gDungeonGlobalData->unk675 != 0) {

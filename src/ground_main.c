@@ -24,9 +24,11 @@ extern const char gUnknown_8115FE8;
 
 struct unkStruct_811BAF4
 {
-    u16 unk0;
+    s16 unk0;
     s16 unk2;
-    u8 fill4[8];
+    s16 unk4;
+    s16 unk6;
+    u8 *text;
 };
 
 extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
@@ -69,9 +71,9 @@ extern void sub_809674C();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
-extern u8 sub_8001CC4(u8, u8, u8);
+extern bool8 sub_8001CC4(u8, u8, u8);
 extern void ChooseKecleonShopInventory(u32);
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern void FadeOutAllMusic(u16);
 extern u8 sub_809C730();
 extern s16 sub_80A2750(s16);
@@ -159,15 +161,15 @@ void sub_8098C58(void)
 void sub_8098CC8(void)
 {
     u32 temp;
-    if(sub_8001CC4(0x3, 0xB, 0) != 0)
+    if(sub_8001CC4(0x3, 0xB, 0))
     {
         temp = 0;
     }
-    else if(sub_8001CC4(0x3, 0xF, 0) != 0)
+    else if(sub_8001CC4(0x3, 0xF, 0))
     {
         temp = 1;
     }
-    else if(sub_8001CC4(0x3, 0x12, 0) != 0)
+    else if(sub_8001CC4(0x3, 0x12, 0))
     {
         temp = 2;
     }
@@ -181,7 +183,7 @@ void sub_8098CC8(void)
     ClearAllItems_8091FB4();
 }
 
-bool8 sub_8098D1C(s16 r0, u32 r1, u32 r2)
+bool8 GroundMainGroundRequest(s16 r0, u32 r1, u32 r2)
 {
     s32 temp;
     temp = r0; // force a asr shift
@@ -199,41 +201,41 @@ bool8 sub_8098D1C(s16 r0, u32 r1, u32 r2)
     return FALSE;
 }
 
-bool8 sub_8098D80(u32 r0)
+bool8 sub_8098D80(u32 speed)
 {
     if(gUnknown_20398A8 == 0)
     {
         gUnknown_20398A8 = 3;
         gUnknown_20398AC = 1;
-        gUnknown_20398B0 = r0;
+        gUnknown_20398B0 = speed;
         sub_809C730();
-        if(sub_80023E4(0xD) == 0)
+        if(!sub_80023E4(0xD))
         {
-            FadeOutAllMusic(r0);
+            FadeOutAllMusic(speed);
         }
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8098DCC(u32 r0)
+bool8 sub_8098DCC(u32 speed)
 {
     if(gUnknown_20398A8 == 0)
     {
         gUnknown_20398A8 = 4;
         gUnknown_20398AC = 1;
-        gUnknown_20398B0 = r0;
+        gUnknown_20398B0 = speed;
         sub_809C730();
-        if(sub_80023E4(0xD) == 0)
+        if(!sub_80023E4(0xD))
         {
-            FadeOutAllMusic(r0);
+            FadeOutAllMusic(speed);
         }
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8098E18(s16 r0, u32 r1)
+bool8 GroundMainRescueRequest(s16 r0, u32 r1)
 {
     s32 r2 = r0, r5 = r2;
     if(gUnknown_20398A8 == 0)
@@ -265,7 +267,7 @@ bool8 sub_8098E18(s16 r0, u32 r1)
 }
 
 // Unused
-u32 sub_8098EB0(u32 r0)
+u32 GroundMainUserRescueRequest(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
@@ -282,7 +284,7 @@ u32 sub_8098EB0(u32 r0)
     return 0;
 }
 
-u32 sub_8098F00(u32 r0)
+u32 GroundMainGameEndRequest(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
@@ -296,7 +298,7 @@ u32 sub_8098F00(u32 r0)
     return 0;
 }
 
-u32 sub_8098F44(u32 r0)
+u32 GroundMainGameCancelRequest(u32 r0)
 {
     if(gUnknown_20398A8 == 0)
     {
@@ -331,7 +333,7 @@ const char  *sub_8098FB4(void)
 }
 
 
-s32 sub_8098FCC(u32 unused)
+s16 sub_8098FCC(u32 unused)
 {
   s32 iVar4;
   s32 iVar5;
@@ -359,7 +361,7 @@ s32 sub_8098FCC(u32 unused)
     case 0x11:
     case 0x14:
     case 0x17:
-        if (sub_80023E4(5) == 0) return 0xC;
+        if (!sub_80023E4(5)) return 0xC;
         break;
     default:
         break;

@@ -5,28 +5,6 @@
 
 	.text
 
-        thumb_func_start sub_8097DD0
-sub_8097DD0:
-	push {lr}
-	adds r2, r0, 0
-	adds r3, r1, 0
-	ldr r1, [r2]
-	ldr r0, [r3]
-	cmp r1, r0
-	bne _08097DEA
-	ldr r1, [r2, 0x4]
-	ldr r0, [r3, 0x4]
-	cmp r1, r0
-	bne _08097DEA
-	movs r0, 0x1
-	b _08097DEC
-_08097DEA:
-	movs r0, 0
-_08097DEC:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8097DD0
-
 	thumb_func_start sub_8097DF0
 sub_8097DF0:
 	push {r4-r7,lr}

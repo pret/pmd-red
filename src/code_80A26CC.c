@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80A26CC.h"
 
-extern u8 sub_80023E4(u32);
+extern bool8 sub_80023E4(u32);
 extern u8 sub_80973F4(s16);
 extern u8 sub_8097384(s16);
 s16 sub_80A26B8(s16);
@@ -13,6 +13,23 @@ extern s16 gUnknown_8116F9A[];
 extern s16 gUnknown_8116F24[];
 extern const u8 *gUnknown_8117000[];
 
+extern void sub_809AC18(s32, s32);
+extern void sub_809ABB4(s32, s32);
+
+void sub_80A2584(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809ABB4(iVar1, iVar2);
+}
+
+void sub_80A2598(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809AC18(iVar1, iVar2);
+}
+
 u32 sub_80A25AC(u16 param_1)
 {
   if (sub_8098F88() != 0) {
@@ -23,10 +40,10 @@ u32 sub_80A25AC(u16 param_1)
     if (param_1 == 0x32) {
         return 0x32;
     }
-    else if (sub_80023E4(0xc) == 0) {
+    else if (!sub_80023E4(0xc)) {
         return 999;
     }
-    else if (sub_80023E4(0xd) != 0) {
+    else if (sub_80023E4(0xd)) {
         return 0x13;
     }
     else if (param_1 != 1) {
@@ -40,27 +57,27 @@ u32 sub_80A25AC(u16 param_1)
   }
 }
 
-struct unkStruct_80A2608 *sub_80A2608(s16 r0)
+struct unkStruct_80A2608 *sub_80A2608(s16 index)
 {
-    return &gUnknown_81168A8[r0];
+    return &gUnknown_81168A8[index];
 }
 
-struct unkStruct_80A2608 *sub_80A2620(s16 r0)
+struct unkStruct_80A2608 *sub_80A2620(s16 index)
 {
     u32 temp;
-    temp = sub_80A26B8(r0);
+    temp = sub_80A26B8(index);
     return &gUnknown_81168A8[temp];
 }
 
-s16 sub_80A2644(u32 r0)
+s16 sub_80A2644(u32 index)
 {
-    return gUnknown_8116F24[r0];
+    return gUnknown_8116F24[index];
 }
 
-s16 sub_80A2654(s16 r0)
+s16 sub_80A2654(s16 index)
 {
     struct unkStruct_80A2608 *temp;
-    temp = sub_80A2608(r0);
+    temp = sub_80A2608(index);
     return temp->unkE;
 }
 
@@ -111,7 +128,7 @@ s16 sub_80A26CC(s16 r0)
 }
 
 
-s32 sub_80A26D8(u8 r0)
+s32 sub_80A26D8(u8 index)
 {
     s32 counter;
     s32 counter2;
@@ -124,7 +141,7 @@ s32 sub_80A26D8(u8 r0)
         temp = sub_80A2608(counter2);
         if(temp->unk11 != 0)
         {
-            if(temp->unkC == r0)
+            if(temp->dungeonIndex == index)
             {
                 return counter2;
             }
@@ -133,29 +150,29 @@ s32 sub_80A26D8(u8 r0)
     return -1;
 }
 
-u8 sub_80A270C(s16 r0)
+u8 sub_80A270C(s16 index)
 {
     struct unkStruct_80A2608 *temp;
-    s32 temp_number;
+    s32 index_s32;
 
-    temp_number = r0; // forcing a shift before addressing
-    temp = sub_80A2608(gUnknown_8116F9A[temp_number]);
-    return temp->unkC;
+    index_s32 = index; // forcing a shift before addressing
+    temp = sub_80A2608(gUnknown_8116F9A[index_s32]);
+    return temp->dungeonIndex;
 }
 
-u8 sub_80A2728(s16 r0)
+u8 sub_80A2728(s16 index)
 {
     struct unkStruct_80A2608 *temp;
-    s16 temp_number = (0xDC >> 2) + r0;
+    s16 temp_number = (0xDC >> 2) + index;
     temp = sub_80A2608(temp_number);
-    return temp->unkC;
+    return temp->dungeonIndex;
 }
 
-u8 sub_80A2740(s32 r0)
+u8 sub_80A2740(s32 index)
 {
     struct unkStruct_80A2608 *temp;
-    temp = sub_80A2608(r0);
-    return temp->unkC;
+    temp = sub_80A2608(index);
+    return temp->dungeonIndex;
 }
 
 s16 sub_80A2750(s16 r0)
@@ -182,16 +199,16 @@ s16 sub_80A2750(s16 r0)
     temp = sub_80A2608(temp_2);
     if(temp->unkE == -1)
         return 1;
-    if(sub_80023E4(5) != 0)
+    if(sub_80023E4(5))
         return 1;
     if(sub_80973F4(temp->unkE) == 0)
         return 1;
-    if(sub_80023E4(1) == 0)
+    if(!sub_80023E4(1))
         return 1;
     return 2;
 }
 
-u8 sub_80A27CC(s16 r0)
+bool8 sub_80A27CC(s16 r0)
 {
     s32 temp;
     s32 temp2;
@@ -203,38 +220,38 @@ u8 sub_80A27CC(s16 r0)
 
     return_var = sub_80A2620(r0);
     if(return_var->unk0 == -1)
-        return 0;
-    if(sub_80023E4(5) != 0)
-        return 0;
+        return FALSE;
+    if(sub_80023E4(5))
+        return FALSE;
     if(sub_8097384(r0) != 0)
-        return 1;
-    if(sub_80023E4(1) == 0)
-        return 0;
+        return TRUE;
+    if(!sub_80023E4(1))
+        return FALSE;
     if(sub_80973F4(temp) == 0)
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }
 
-u8 sub_80A2824(u8 r0)
+bool8 sub_80A2824(u8 index)
 {
     s32 counter;
     struct unkStruct_80A2608 *temp;
 
-    if(sub_80023E4(5) != 0)
-        return 0;
-    if(sub_80023E4(1) != 0)
+    if(sub_80023E4(5))
+        return FALSE;
+    if(sub_80023E4(1))
     {
         for(counter = 0; counter <= 0x2D; counter++)
         {
             temp = sub_80A2620(counter);
             if(temp->unk11 != 0)
             {
-                if(temp->unkC == r0)
+                if(temp->dungeonIndex == index)
                 {
                     if(sub_8097384(counter) != 0)
-                        return 1;
+                        return TRUE;
                     if(sub_80973F4(counter) != 0)
-                        return 1;
+                        return TRUE;
                 }
             }
         }
@@ -245,16 +262,16 @@ u8 sub_80A2824(u8 r0)
         {
             temp = sub_80A2620(counter);
             if(temp->unk11 != 0)
-                if(temp->unkC == r0)
+                if(temp->dungeonIndex == index)
                     if(sub_8097384(counter) != 0)
-                        return 1;
+                        return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 
 }
 
-u32 sub_80A28B4(s16 r0)
+bool8 sub_80A28B4(s16 r0)
 {
     struct unkStruct_80A2608 *temp;
 
@@ -262,14 +279,14 @@ u32 sub_80A28B4(s16 r0)
     if(temp->unk0 != -1)
     {
         if(sub_8097384(r0) == 0 && sub_80973F4(r0) == 0)
-            return 0;
+            return FALSE;
         else
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-u32 sub_80A28F0(u8 r0)
+bool8 sub_80A28F0(u8 index)
 {
     s32 counter;
     struct unkStruct_80A2608 *temp;
@@ -279,16 +296,16 @@ u32 sub_80A28F0(u8 r0)
         temp = sub_80A2620(counter);
         if(temp->unk11 != 0)
         {
-            if(temp->unkC == r0)
+            if(temp->dungeonIndex == index)
             {
                 if(sub_8097384(counter) != 0)
-                    return 1;
+                    return TRUE;
                 if(sub_80973F4(counter) != 0)
-                    return 1;
+                    return TRUE;
             }
         }
     }
-    return 0;
+    return FALSE;
 }
 
 s32 sub_80A293C(u8 *param_1)
@@ -315,7 +332,7 @@ s32 sub_80A293C(u8 *param_1)
       iVar3 = sub_80A2620(index);
       if ((iVar3->unk11 != 0) &&
          (sub_8097384(index) != 0)) {
-        local_68[iVar3->unkC] = 1;
+        local_68[iVar3->dungeonIndex] = 1;
       }
     }
 
@@ -356,13 +373,13 @@ s32 sub_80A29B0(u8 *param_1)
   } while ((int)pcVar2 >= (int)local_68);
 
 
-  if (sub_80023E4(1) != 0) {
+  if (sub_80023E4(1)) {
     for(index = 0; index < 0x2E; index++)
     {
       iVar3 = sub_80A2620(index);
       if ((iVar3->unk11 != 0) &&
          (sub_80973F4(index) != 0)) {
-        local_68[iVar3->unkC] = 1;
+        local_68[iVar3->dungeonIndex] = 1;
       }
     }
   }
@@ -399,13 +416,13 @@ s32 sub_80A2A5C(u8 *param_1)
     pcVar2--;
   } while ((s32)pcVar2 >= (s32)local_58);
 
-  if (sub_80023E4(1) != 0) {
+  if (sub_80023E4(1)) {
     for(index = 0; index < 0x2E; index++)
     {
       iVar3 = sub_80A2620(index);
       if ((iVar3->unk11 != 0) && ((sub_8097384(index) != 0) || (sub_80973F4(index) != 0)))
       {
-        local_58[iVar3->unkC] = 1;
+        local_58[iVar3->dungeonIndex] = 1;
       }
     }
   }
@@ -415,7 +432,7 @@ s32 sub_80A2A5C(u8 *param_1)
       iVar3 = sub_80A2620(index);
       if ((iVar3->unk11 != 0) && (sub_8097384(index) != 0)) 
       {
-        local_58[iVar3->unkC] = 1;
+        local_58[iVar3->dungeonIndex] = 1;
       }
     }
   }

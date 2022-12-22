@@ -755,7 +755,7 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
 {
   SaveIntegerBits(a1, &pokemon->unkHasNextStage, 7);
   SaveIntegerBits(a1, &pokemon->speciesNum, 9);
-  SaveDungeonLocation(a1, &pokemon->unk4);
+  SaveDungeonLocation(a1, &pokemon->dungeonLocation);
   xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[0]);
   xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[1]);
   SaveIntegerBits(a1, &pokemon->IQ, 10);
@@ -782,7 +782,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
       pokemon->unk0 |= 1;
   }
   RestoreIntegerBits(a1, &pokemon->speciesNum, 9);
-  RestoreDungeonLocation(a1, &pokemon->unk4);
+  RestoreDungeonLocation(a1, &pokemon->dungeonLocation);
   xxx_restore_poke_sub_c_808F410(a1, &pokemon->unkC[0]);
   xxx_restore_poke_sub_c_808F410(a1, &pokemon->unkC[1]);
   RestoreIntegerBits(a1, &pokemon->IQ, 10);
@@ -817,7 +817,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, pokemon2->isLeader ? &data_u8_neg1 : &data_u8_zero, 1);
     SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
-    SaveDungeonLocation(&backup, &pokemon2->unk4);
+    SaveDungeonLocation(&backup, &pokemon2->dungeonLocation);
     SaveIntegerBits(&backup, &pokemon2->IQ, 10);
     SaveIntegerBits(&backup, &pokemon2->unkA, 16);
     SaveIntegerBits(&backup, &pokemon2->unkC, 16);
@@ -865,7 +865,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     }
     RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
-    RestoreDungeonLocation(&backup, &pokemon2->unk4);
+    RestoreDungeonLocation(&backup, &pokemon2->dungeonLocation);
     RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
     RestoreIntegerBits(&backup, &pokemon2->unkA, 16);
     RestoreIntegerBits(&backup, &pokemon2->unkC, 16);
