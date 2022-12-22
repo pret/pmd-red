@@ -37,11 +37,10 @@ struct FunctionScript
 extern struct FunctionScript gFunctionScriptTable[];
 
 
-// NOTE: shift of index and load of gFunctionScriptTable is flipped
-#ifdef NONMATCHING
 void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 index)
 {
-    script->scriptPointer = gFunctionScriptTable[index].script;
+    s32 index_s32 = index;
+    script->scriptPointer = gFunctionScriptTable[index_s32].script;
     script->scriptType = 2;
     if (param_1 != NULL) {
         script->unk6 = param_1->unk10;
@@ -52,46 +51,6 @@ void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_E
         script->unk8 = -1;
     }
 }
-#else
-NAKED void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 index)
-{
-    asm_unified(
-        "\tpush {r4,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r3, r1, 0\n"
-	"\tlsls r2, 16\n"
-	"\tasrs r2, 16\n"
-	"\tldr r1, _0809D73C\n"
-	"\tlsls r0, r2, 1\n"
-	"\tadds r0, r2\n"
-	"\tlsls r0, 2\n"
-	"\tadds r1, 0x8\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tstr r0, [r3]\n"
-	"\tmovs r0, 0x2\n"
-	"\tstrh r0, [r3, 0x4]\n"
-	"\tcmp r4, 0\n"
-	"\tbeq _0809D740\n"
-	"\tldrh r0, [r4, 0x10]\n"
-	"\tstrh r0, [r3, 0x6]\n"
-	"\tldrb r0, [r4, 0x12]\n"
-	"\tb _0809D746\n"
-	"\t.align 2, 0\n"
-"_0809D73C: .4byte gFunctionScriptTable\n"
-"_0809D740:\n"
-	"\tldr r0, _0809D750\n"
-	"\tstrh r0, [r3, 0x6]\n"
-	"\tmovs r0, 0xFF\n"
-"_0809D746:\n"
-	"\tstrb r0, [r3, 0x8]\n"
-	"\tpop {r4}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0809D750: .4byte 0x0000ffff");
-}
-#endif
 
 bool8 sub_809D754(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
 {
