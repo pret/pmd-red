@@ -20,7 +20,7 @@ extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove
 
 void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
-s32 sub_8095324(u8);
+s32 CountMailType(u8);
 
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern s32 sub_8094E4C(void);
@@ -97,87 +97,87 @@ void sub_80952C4(void)
 
 bool8 sub_80952F0(u8 mailType, u32 param_2)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if ((piVar1->mailType == mailType) && (piVar1->unk10 == param_2)) return TRUE;
+    if ((ptr->mailType == mailType) && (ptr->unk10 == param_2)) return TRUE;
   }
   return FALSE;
 }
 
-s32 sub_8095324(u8 mailType)
+s32 CountMailType(u8 mailType)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   s32 total = 0;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if (piVar1->mailType == mailType) total++;
+    if (ptr->mailType == mailType) total++;
   }
   return total;
 }
 
 u32 sub_8095350(void)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   u32 total = 0;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if (piVar1->mailType != 0) total++;
+    if (ptr->mailType != 0) total++;
   }
   return total;
 }
 
 s32 sub_8095374(void)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   s32 retvar = -1;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if (piVar1->mailType == 1) retvar = index;
+    if (ptr->mailType == 1) retvar = index;
   }
   return retvar;
 }
 
 s32 sub_809539C(u8 mailType, u32 param_2)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if ((piVar1->mailType == mailType) && (piVar1->unk10 == param_2)) return index;
+    if ((ptr->mailType == mailType) && (ptr->unk10 == param_2)) return index;
   }
   return -1;
 }
 
-s32 sub_80953D4(u8 param_1)
+s32 sub_80953D4(u8 mailType)
 {
-  struct unkStruct_203B480 *piVar1;
+  struct unkStruct_203B480 *ptr;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if (piVar1->mailType == param_1) return index;
+    if (ptr->mailType == mailType) return index;
   }
   return -1;
 }
 
 s32 sub_8095400(u32 param_1)
 {
-  u32 *piVar1;
+  u32 *ptr;
   s32 index;
   
-  for(index = 0, piVar1 = &gUnknown_203B480[0].unk10; index < 0x20; piVar1 += 0xC, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0].unk10; index < 0x20; ptr += 0xC, index++)
   {  
-    if (*piVar1 == param_1) return index;
+    if (*ptr == param_1) return index;
   }
   return -1;
 }
@@ -225,7 +225,7 @@ void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
 
 u32 sub_80954B4(void)
 {
-    if(sub_8095324(3) != 0)
+    if(CountMailType(3) != 0)
         return 1;
     else
         return 0;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "save.h"
 #include "memory.h"
 #include "text.h"
@@ -174,7 +175,7 @@ void HandleInvalidPasswordMenu(void);
 
 bool8 sub_8039880(void)
 {
-  return (sub_8095324(1) != 0 || sub_8095324(7) != 0 || sub_8011C1C() == 2);
+  return (CountMailType(WONDER_MAIL_TYPE_SOS) != 0 || CountMailType(WONDER_MAIL_TYPE_OKD) != 0 || sub_8011C1C() == 2);
 }
 
 bool8 CreateWonderMailMenu(void)

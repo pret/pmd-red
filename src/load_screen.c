@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "input.h"
 #include "main_menu.h"
 #include "play_time.h"
@@ -315,7 +316,7 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
-  if ((sub_8095324(1) != 0) || (sub_8095324(7) != 0)) {
+  if ((CountMailType(WONDER_MAIL_TYPE_SOS) != 0) || (CountMailType(WONDER_MAIL_TYPE_OKD) != 0)) {
     if (iVar2 == 0xf1207)
         PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
     else
@@ -420,7 +421,7 @@ bool8 IsQuickSave(void)
 
   iVar1 = sub_8011FA8();
   isQuicksave = FALSE;
-  if (sub_8095324(1) != 0 || sub_8095324(7) != 0)
+  if (CountMailType(WONDER_MAIL_TYPE_SOS) != 0 || CountMailType(WONDER_MAIL_TYPE_OKD) != 0)
   {
       if (iVar1 == 0xf1207)
         isQuicksave  = TRUE;

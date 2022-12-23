@@ -13,6 +13,7 @@
 #include "rescue_password_menu.h"
 #include "save.h"
 #include "trade_items_menu.h"
+#include "constants/wonder_mail.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -77,7 +78,7 @@ extern void CleanSaveMenu(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern u8 sub_803D0D8();
-extern s32 sub_8095324(u32);
+extern s32 CountMailType(u32);
 extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 
@@ -992,8 +993,8 @@ void sub_803623C(void)
 void SetMainMenuItems(void)
 { 
   if (sub_8011C34() != -1) {
-    if (sub_8095324(1) == 0) {
-      if (sub_8095324(7) != 0) {
+    if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0) {
+      if (CountMailType(WONDER_MAIL_TYPE_OKD) != 0) {
         if (sub_803D0D8() != 0) {
             // Revive Team
             // Delete Save Data

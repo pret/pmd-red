@@ -15,7 +15,6 @@
 #include "code_800D090.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
-struct unkStruct_203B480 * sub_8095228(u8 index);
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
@@ -1203,7 +1202,7 @@ void HandleThankYouMailPelipperMainMenu(void)
             case 1:
                 gUnknown_203B2C4->unk40 = 6;
                 gUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
-                if(sub_8095324(5) == 0)
+                if(CountMailType(5) == 0)
                 {
                     SetThankYouMailMenuState(NO_THANK_YOU_MAIL);
                 }

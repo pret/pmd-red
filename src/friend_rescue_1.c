@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "text.h"
 #include "pokemon.h"
 #include "save.h"
@@ -42,7 +43,6 @@ extern u8 gUnknown_80E31FC[];
 
 extern u32 sub_80154F0();
 extern void sub_80155F0();
-struct unkStruct_203B480 *sub_8095228(u8);
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 
@@ -201,7 +201,7 @@ void sub_8033A2C(void)
             case 0x11:
                 gUnknown_203B33C->unk40 = 2;
                 gUnknown_203B33C->unk528 = 0x11;
-                if(sub_8095324(1) != 0)
+                if(CountMailType(WONDER_MAIL_TYPE_SOS) != 0)
                     SetFriendRescueMenuState(0x31);
                 else
                     SetFriendRescueMenuState(0x22);
@@ -217,7 +217,7 @@ void sub_8033A2C(void)
             case 4:
                 gUnknown_203B33C->unk40 = 4;
                 gUnknown_203B33C->unk528 = 4;
-                if(sub_8095324(4) != 0)
+                if(CountMailType(WONDER_MAIL_TYPE_AOK) != 0)
                     SetFriendRescueMenuState(0x1C);
                 else
                     SetFriendRescueMenuState(0x22);
@@ -225,7 +225,7 @@ void sub_8033A2C(void)
             case 0x12:
                 gUnknown_203B33C->unk40 = 5;
                 gUnknown_203B33C->unk528 = 0x12;
-                if(sub_8095324(5) != 0)
+                if(CountMailType(5) != 0)
                     SetFriendRescueMenuState(0x3D);
                 else
                     SetFriendRescueMenuState(0xE);
@@ -233,7 +233,7 @@ void sub_8033A2C(void)
             case 0x13:
                 gUnknown_203B33C->unk40 = 6;
                 gUnknown_203B33C->unk528 = 0x13;
-                if(sub_8095324(5) == 0)
+                if(CountMailType(5) == 0)
                     SetFriendRescueMenuState(0x51);
                 else
                     SetFriendRescueMenuState(0x5B);
@@ -485,8 +485,7 @@ void sub_8033DBC(void)
                         sub_80951FC(&temp);
                         temp2 = sub_8095228(sub_809539C(1, temp.unk10));
                         temp2->mailType = 7;
-                        //MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, 0x5C);
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:

@@ -854,7 +854,7 @@ void sub_8028BF0(void)
             }
             break;
         case 1:
-            if(sub_8095324(2) != 0)
+            if(CountMailType(2) != 0)
             {
                 sub_8028B04(30);
             }
@@ -866,7 +866,7 @@ void sub_8028BF0(void)
         case 2:
             gUnknown_203B2C0->unk40 = 4;
             gUnknown_203B2C0->unk538 = 2;
-            if(sub_8095324(4) != 0)
+            if(CountMailType(WONDER_MAIL_TYPE_AOK) != 0)
             {
                 sub_8028B04(41);
             }
