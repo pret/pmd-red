@@ -27,7 +27,13 @@ extern struct unkStruct_203B2AC *gUnknown_203B2AC;
 
 struct unkStruct_3001B60
 {
-    u8 fill0[0x1A];
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u8 fill14[0x18 - 0x14];
+    s16 unk18;
     s16 unk1A[2];
     u8 fill1C[0x370 - 0x1E];
     s16 unk370;
@@ -51,12 +57,160 @@ extern void sub_802452C(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(void *);
 void sub_80922B4(u8 *buffer, u8 *string, s32 size);
+bool8 ComparePokemonNames(s16 a1, s16 a2);
 
 void sub_8024588(void);
 void sub_80245D0(void);
 void sub_8024604(void);
 
 extern u8 gUnknown_80DC9A4[];
+
+void CompareInternalNo(s32 param_1, s32 param_2);
+void CompareAlphabetNo(s32 param_1,s32 param_2);
+void CompareNames(s32 param_1,s32 param_2);
+
+bool8 sub_8024184(struct PokemonStruct *pokemon, u8 area)
+{
+    if(area == GetFriendArea(pokemon->speciesNum))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80241A8(void)
+{
+  switch(gUnknown_3001B60->unk4)
+  {
+    case 2:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            CompareAlphabetNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            CompareAlphabetNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+    case 3:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            CompareNames(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            CompareNames(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+    case 1:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            CompareInternalNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            CompareInternalNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+  }
+}
+
+
+void CompareInternalNo(s32 param_1, s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        if (GetInternalNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum) > GetInternalNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
+
+void CompareAlphabetNo(s32 param_1,s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        if (GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum, 0) > GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum, 0)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
+
+void CompareNames(s32 param_1,s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        r5 = r4 - 1;
+        if (ComparePokemonNames(*r5, *r4)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
 
 struct PokemonStruct *sub_80243E8(void)
 {
