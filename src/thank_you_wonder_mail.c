@@ -257,9 +257,9 @@ u32 CreateThankYouMailPelipper(void)
 {
   char *monName;
   struct OpenedFile *faceFile;
-  s32 uVar2;
+  s32 index;
   int counter;
-  struct unkStruct_203B480 *temp;
+  struct unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -286,17 +286,17 @@ u32 CreateThankYouMailPelipper(void)
   gUnknown_203B2C4->wonderMailMethod = WONDER_MAIL_GAME_LINK;
   gUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
 
-  uVar2 = sub_80953D4(6);
-  if (uVar2 != -1) {
-    temp = sub_8095228(uVar2);
-    gUnknown_203B2C4->unk41C = temp->unk20;
-    gUnknown_203B2C4->unk218 = uVar2;
-    gUnknown_203B2C4->unk430 = temp->unk10;
+  index = sub_80953D4(6);
+  if (index != -1) {
+    mail = sub_8095228(index);
+    gUnknown_203B2C4->unk41C = mail->unk20;
+    gUnknown_203B2C4->mailIndex = index;
+    gUnknown_203B2C4->unk430 = mail->unk10;
     SetThankYouMailMenuState(5);
   }
   else {
     gUnknown_203B2C4->unk41C = gUnknown_80DED44;
-    gUnknown_203B2C4->unk218 = -1;
+    gUnknown_203B2C4->mailIndex = -1;
     SetThankYouMailMenuState(THANK_YOU_MAIL_MAIN_MENU);
   }
   gUnknown_203B2C4->fallbackState = 0x2b;
@@ -591,16 +591,16 @@ void sub_802A0C8(void)
         SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
         break;
     case 3:
-        gUnknown_203B2C4->unk218 = sub_80307EC();
+        gUnknown_203B2C4->mailIndex = sub_80307EC();
         SetThankYouMailMenuState(0x11);
         break;
     case 4:
         gUnknown_203B2C4->fallbackState = 0x10;
-        gUnknown_203B2C4->unk218 = sub_80307EC();
+        gUnknown_203B2C4->mailIndex = sub_80307EC();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
   }
@@ -636,7 +636,7 @@ void sub_802A174(void)
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
       case 0:
@@ -950,16 +950,16 @@ void sub_802A75C(void)
 void HandleConfirmItemtoSendMenu(void)
 {
     s32 temp;
-    struct unkStruct_203B480 *return_var;
+    struct unkStruct_203B480 *mail;
     if(sub_80144A4(&temp) == 0)
     {
         switch(temp)
         {
             case 7:
-                return_var = sub_8095228(gUnknown_203B2C4->unk218);
+                mail = sub_8095228(gUnknown_203B2C4->mailIndex);
                 if(gUnknown_203B2C4->unk41C.itemIndex != ITEM_ID_NOTHING)
                 {
-                    return_var->unk20 = gUnknown_203B2C4->unk41C;
+                    mail->unk20 = gUnknown_203B2C4->unk41C;
                 }
                 gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.itemIndex]--;
                 SetThankYouMailMenuState(0x29);
@@ -1133,7 +1133,7 @@ void sub_802A9FC(void)
 void HandleMailCommunicationMenu(void)
 {
     s32 temp;
-    struct unkStruct_203B480 *return_var;
+    struct unkStruct_203B480 *mail;
     if(sub_80144A4(&temp) == 0)
     {
         switch(temp)
@@ -1145,8 +1145,8 @@ void HandleMailCommunicationMenu(void)
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
-                        return_var = sub_8095228(sub_80953D4(5));
-                        if(return_var->unk20.itemIndex != ITEM_ID_NOTHING)
+                        mail = sub_8095228(sub_80953D4(5));
+                        if(mail->unk20.itemIndex != ITEM_ID_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1274,7 +1274,7 @@ void UpdateThankYouMailText(void)
   struct PokemonStruct *pokeStruct;
   struct PokemonStruct *pokeStruct2;
   s32 linkStatus;
-  struct unkStruct_203B480 *puVar4;
+  struct unkStruct_203B480 *mail;
 
   switch(gUnknown_203B2C4->state) {
     case 5:
@@ -1332,7 +1332,7 @@ void UpdateThankYouMailText(void)
             {
                 case 6:
                     MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
-                    gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->unk218);
+                    gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->mailIndex);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
@@ -1372,7 +1372,7 @@ void UpdateThankYouMailText(void)
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8031D70(gUnknown_203B2C4->unk218,0);
+        sub_8031D70(gUnknown_203B2C4->mailIndex,0);
         break;
     case 0x1b:
         // Please give this password to the friend that rescued your team. I also must save your adventure
@@ -1410,14 +1410,14 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
-        puVar4 = sub_8095228(uVar2);
-        itemIndex = puVar4->unk20.itemIndex;
+        mail = sub_8095228(uVar2);
+        itemIndex = mail->unk20.itemIndex;
         if (itemIndex != ITEM_ID_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else
             gUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_ID_NOTHING; // unk558
         gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
-        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&puVar4->dungeon, 0); // unk560
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C

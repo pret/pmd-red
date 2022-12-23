@@ -171,7 +171,7 @@ void sub_80339C8(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        gUnknown_203B33C->unk538 = -1;
+        gUnknown_203B33C->speciesNum = -1;
         switch(temp)
         {
             case 0:
@@ -565,7 +565,7 @@ void sub_8033FE4(void)
             SetFriendRescueMenuState(0x1E);
             break;
         case 4:
-            gUnknown_203B33C->unk4 = 0x1D;
+            gUnknown_203B33C->fallbackState = 0x1D;
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
@@ -591,7 +591,7 @@ void sub_8034074(void)
             SetFriendRescueMenuState(0x20);
             break;
         case 10:
-            gUnknown_203B33C->unk4 = 0x7E;
+            gUnknown_203B33C->fallbackState = 0x7E;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -617,13 +617,13 @@ void sub_8034130(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
             sub_803092C();
-            if(gUnknown_203B33C->unk4 == 0x7E)
+            if(gUnknown_203B33C->fallbackState == 0x7E)
             {
                 sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x1E);
             }
             else
-                SetFriendRescueMenuState(gUnknown_203B33C->unk4);
+                SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
         default:
             break;
@@ -638,22 +638,22 @@ void sub_803418C(void)
             sub_8023C60();
             SetFriendRescueMenuState(1);
             sub_8035D1C();
-            gUnknown_203B33C->unk538 = -1;
+            gUnknown_203B33C->speciesNum = -1;
             break;
         case 3:
-            gUnknown_203B33C->unk538 = sub_8023B44();
+            gUnknown_203B33C->speciesNum = sub_8023B44();
             if(gUnknown_203B33C->unk524 == 0xE)
                 SetFriendRescueMenuState(9);
             else
                 SetFriendRescueMenuState(0x27);
             break;
         case 4:
-            gUnknown_203B33C->unk4 = 0x26;
-            gUnknown_203B33C->unk538 = sub_8023B44();
+            gUnknown_203B33C->fallbackState = 0x26;
+            gUnknown_203B33C->speciesNum = sub_8023B44();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
-            sub_8024458(gUnknown_203B33C->unk538, 0);
+            sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
     }
@@ -674,11 +674,11 @@ void sub_8034254(void)
             SetFriendRescueMenuState(0x29);
             break;
         case 10:
-            gUnknown_203B33C->unk4 = 0x7E;
+            gUnknown_203B33C->fallbackState = 0x7E;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
-            sub_8024458(gUnknown_203B33C->unk538, 0);
+            sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
         case 5:
@@ -703,13 +703,13 @@ void sub_8034310(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
             sub_8023B7C(1);
-            if(gUnknown_203B33C->unk4 == 0x7E)
+            if(gUnknown_203B33C->fallbackState == 0x7E)
             {
                 sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x27);
             }
             else
-                SetFriendRescueMenuState(gUnknown_203B33C->unk4);
+                SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
         default:
             break;
@@ -843,7 +843,7 @@ void sub_8034500(void)
             SetFriendRescueMenuState(0x33);
             break;
         case 4:
-            gUnknown_203B33C->unk4 = 0x32;
+            gUnknown_203B33C->fallbackState = 0x32;
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
@@ -869,7 +869,7 @@ void sub_8034590(void)
             SetFriendRescueMenuState(0x35);
             break;
         case 10:
-            gUnknown_203B33C->unk4 = 0x7E;
+            gUnknown_203B33C->fallbackState = 0x7E;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -895,13 +895,13 @@ void sub_803464C(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
             sub_803092C();
-            if(gUnknown_203B33C->unk4 == 0x7E)
+            if(gUnknown_203B33C->fallbackState == 0x7E)
             {
                 sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x33);
             }
             else
-                SetFriendRescueMenuState(gUnknown_203B33C->unk4);
+                SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
         default:
             break;
@@ -1168,7 +1168,7 @@ void sub_80349E0(void)
             SetFriendRescueMenuState(0x5D);
             break;
         case 4:
-            gUnknown_203B33C->unk4 = 0x5C;
+            gUnknown_203B33C->fallbackState = 0x5C;
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
@@ -1194,7 +1194,7 @@ void sub_8034A70(void)
             SetFriendRescueMenuState(0x5A);
             break;
         case 10:
-            gUnknown_203B33C->unk4 = 0x7E;
+            gUnknown_203B33C->fallbackState = 0x7E;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1220,13 +1220,13 @@ void sub_8034B2C(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
             sub_803092C();
-            if(gUnknown_203B33C->unk4 == 0x7E)
+            if(gUnknown_203B33C->fallbackState == 0x7E)
             {
                 sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x5D);
             }
             else
-                SetFriendRescueMenuState(gUnknown_203B33C->unk4);
+                SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
         default:
             break;
@@ -1249,7 +1249,7 @@ void sub_8034B88(void)
             SetFriendRescueMenuState(0x60);
             break;
         case 4:
-            gUnknown_203B33C->unk4 = 0x5F;
+            gUnknown_203B33C->fallbackState = 0x5F;
             gUnknown_203B33C->unk41C.itemIndex = sub_801CB24();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
@@ -1270,13 +1270,13 @@ void sub_8034C38(void)
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
             sub_801CB5C(1);
-            if(gUnknown_203B33C->unk4 == 0x7E)
+            if(gUnknown_203B33C->fallbackState == 0x7E)
             {
                 sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x60);
             }
             else
-                SetFriendRescueMenuState(gUnknown_203B33C->unk4);
+                SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
         default:
         case 1:
@@ -1299,7 +1299,7 @@ void sub_8034C98(void)
             SetFriendRescueMenuState(0x58);
             break;
         case 10:
-            gUnknown_203B33C->unk4 = 0x7E;
+            gUnknown_203B33C->fallbackState = 0x7E;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1639,7 +1639,7 @@ void sub_80351E0(void)
 void sub_8035210(void)
 {
     s32 temp;
-    struct unkStruct_203B480 *temp2;
+    struct unkStruct_203B480 *mail;
 
     if(sub_80144A4(&temp) == 0)
     {
@@ -1652,8 +1652,8 @@ void sub_8035210(void)
             case 0xD:
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
-                    temp2 = sub_8095228(sub_80953D4(5));
-                    if(temp2->unk20.itemIndex != ITEM_ID_NOTHING)
+                    mail = sub_8095228(sub_80953D4(5));
+                    if(mail->unk20.itemIndex != ITEM_ID_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else
                         SetFriendRescueMenuState(0x55);

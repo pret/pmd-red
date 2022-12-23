@@ -299,7 +299,7 @@ void sub_803136C(void)
   }
 }
 
-void sub_80313D8(u32 param_1)
+void sub_80313D8(u32 state)
 {
   s32 iVar2;
   s32 local_10;
@@ -319,7 +319,7 @@ void sub_80313D8(u32 param_1)
         sub_80310E4(0);
         break;
     case 2:
-        switch(param_1)
+        switch(state)
         {
             case 2:
                 sub_8095240(gUnknown_203B328->unk4);

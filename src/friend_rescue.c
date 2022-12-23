@@ -124,14 +124,14 @@ u32 CreateFriendRescueMenu(void)
   MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(struct WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
-  gUnknown_203B33C->unk538 = -1;
+  gUnknown_203B33C->speciesNum = -1;
   CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
   monName = GetMonSpecies(SPECIES_PELIPPER);
   strcpy(gAvailablePokemonNames,monName);
   for(counter = 0; counter < 0x36; counter++){
     gUnknown_203B33C->passwordBuffer[counter] = 0;
   }
-  gUnknown_203B33C->unk4 = 0x7E;
+  gUnknown_203B33C->fallbackState = 0x7E;
   gUnknown_203B33C->unk52C = sub_8039880();
   gUnknown_203B33C->unk52D = gUnknown_203B33C->unk52C;
   SetFriendRescueMenuState(0);

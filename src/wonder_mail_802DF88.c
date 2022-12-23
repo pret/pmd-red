@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "exclusive_pokemon.h"
 #include "input.h"
 #include "item.h"
@@ -307,11 +308,11 @@ bool8 sub_802DAA8(void)
   
   mail = GetJobSlotInfo(gUnknown_203B2F8->unk10);
   if (gUnknown_203B2F8->unk9 == 0) {
-    return 1;
+    return TRUE;
   }
   else {
-    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)) return 0;
-    return 1;
+    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)) return FALSE;
+    return TRUE;
   }
 }
 
@@ -323,7 +324,7 @@ bool8 sub_802DADC(void)
   
   if (gUnknown_203B2F8->unk9 == 0) {
 _0802DAE8:
-    return 1;
+    return TRUE;
   }
   else {
     for( mail = &gUnknown_203B490->unkF0[0], counter = 0; counter < 8; mail++, counter++)
@@ -332,7 +333,7 @@ _0802DAE8:
       if (((mailType == 0) || (mailType == WONDER_MAIL_TYPE_THANK_YOU)) ||
          ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->unkA != mail->dungeon.dungeonIndex)))) goto _0802DAE8;
     }
-    return 0;
+    return FALSE;
   }
 }
 
@@ -374,7 +375,7 @@ u32 sub_802DBD4(void)
     switch(gUnknown_203B2FC->state)
     {
         case 7:
-            gUnknown_203B2FC->jobInfo->mailType = 7;
+            gUnknown_203B2FC->jobInfo->mailType = WONDER_MAIL_TYPE_OKD;
             return 3;
         case 6:
             sub_802DE44();

@@ -212,13 +212,13 @@ void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
 {
   u32 uVar1;
   struct DungeonLocation temp;
-  struct unkStruct_203B480 *iVar2;
+  struct unkStruct_203B480 *mail;
   
-  iVar2 = gUnknown_203B480;
-  iVar2 += index;
+  mail = gUnknown_203B480;
+  mail += index;
 
-  temp = iVar2->dungeon;
-  uVar1 = iVar2->unk8;
+  temp = mail->dungeon;
+  uVar1 = mail->unk8;
   param_1->unk0 = temp;
   param_1->unk4 = uVar1;
 }

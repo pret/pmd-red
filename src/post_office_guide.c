@@ -597,7 +597,7 @@ void DisplayMissionObjectives(void)
 {
     s32 yCoord;
     s32 jobSlotIdx;
-    struct unkStruct_203B480 *iVar8;
+    struct unkStruct_203B480 *mail;
     struct WonderMail *jobInfo;
     u8 auStack248 [100];
     volatile u8 local_94;
@@ -613,13 +613,13 @@ void DisplayMissionObjectives(void)
     {
         case 1:
             sub_8099394(&local_94);
-            iVar8 = sub_8095228(local_94);
+            mail = sub_8095228(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
-            sprintf_2(auStack248,gUnknown_80E1F3C,iVar8->dungeon.dungeonFloor);
+            sprintf_2(auStack248,gUnknown_80E1F3C,mail->dungeon.dungeonFloor);
             xxx_call_draw_string(0x15,16,auStack248,gUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
-            sprintf_2(auStack248,gUnknown_80E1F40,GetMonSpecies(iVar8->clientSpecies));
+            sprintf_2(auStack248,gUnknown_80E1F40,GetMonSpecies(mail->clientSpecies));
             xxx_call_draw_string(0x28,16,auStack248,gUnknown_203B330->unk10,0);
             break;
         case 2:

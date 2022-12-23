@@ -154,7 +154,6 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(void *);
 extern s32 sub_8013800(void *, u32);
-extern void sub_803B35C(void *, u32*);
 extern u8 gUnknown_80DFDBC[];
 
 

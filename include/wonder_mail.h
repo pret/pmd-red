@@ -40,6 +40,12 @@ struct WonderMail
 };
 
 
+struct WonderMailStruct_203B2C0_sub
+{
+    struct unkStruct_203B480 mail;
+    struct PokemonStruct pokemon;
+};
+
 struct WonderMailStruct_203B2C0
 {
     // size: 0x548
@@ -51,13 +57,10 @@ struct WonderMailStruct_203B2C0
     u32 linkError;
     u8 unk48[0x30];
     u8 unk78[0x30];
-    struct unkStruct_203B480 unkA8;
-    struct PokemonStruct unkD8;
-    u8 unk130;
-    u8 fill131[0x168 - 0x131];
-    u16 unk168;
-    u8 fill16A[0x218 - 0x16A];
-    u8 unk218;
+    struct WonderMailStruct_203B2C0_sub unkA8;
+    struct WonderMailStruct_203B2C0_sub unk130;
+    u8 fill16A[0x218 - 0x1B8];
+    u8 mailIndex;
     u32 unk21C;
     u8 padding[0x7C];
     u32 unk29C;
@@ -79,7 +82,7 @@ struct WonderMailStruct_203B2C0
     s32 unk538; // A7 << 3
     u32 unk53C;
     u32 unk540; // A8 << 4
-    s16 unk544;
+    s16 speciesNum;
 
 };
 
@@ -95,7 +98,7 @@ struct WonderMailStruct_203B2C4
     u8 filler48[0x1B8 - 0x48];
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
-    s8 unk218;
+    s8 mailIndex;
     u32 unk21C;
     u8 filler220[0x30C - 0x220];
     u32 unk30C;

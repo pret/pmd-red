@@ -238,7 +238,7 @@ void sub_80308A0(void)
 
 void sub_803092C(void)
 {
-  struct unkStruct_203B480 *pbVar2;
+  struct unkStruct_203B480 *mail;
   s32 r4;
   s32 r5;
   s32 r6;
@@ -257,24 +257,24 @@ void sub_803092C(void)
   r6 = 0;
   if (r6 < gUnknown_203B320->unk3E) {
     do {
-      pbVar2 = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + r6]);
+      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + r6]);
       local.unk0[0] = gUnknown_203B320->unk58;
       local.unk4C = sub_8013800(&gUnknown_203B320->unk24,r6);
       local.unk3C[8] = 7;
       local.unk3C[10] = 0;
       local.unk3C[12] = 0;
 
-      local.unk8 = &pbVar2->dungeon;
-      local.unkC = pbVar2->playerName;
+      local.unk8 = &mail->dungeon;
+      local.unkC = mail->playerName;
 
-      local.unk10 = (pbVar2->clientSpecies);
-      local.unk12 = (pbVar2->clientSpecies);
+      local.unk10 = (mail->clientSpecies);
+      local.unk12 = (mail->clientSpecies);
       local.unk14 = 0;
       local.fill15[0x19] = 5;
 
-      switch(pbVar2->mailType)
+      switch(mail->mailType)
       {
-        case 4:
+        case WONDER_MAIL_TYPE_AOK:
             local.unk3C[11] = 3;
             break;
         case 5:
@@ -310,11 +310,11 @@ s32 sub_8030A74(void)
             }
         }
         break;
-    case 6:
+    case WONDER_MAIL_TYPE_COMPLETED:
         for (index = 0; index < 0x20; index++)
         {
             struct unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 6) {
+            if (p->mailType == WONDER_MAIL_TYPE_COMPLETED) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -340,11 +340,11 @@ s32 sub_8030A74(void)
             }
         }
         break;
-    case 4:
+    case WONDER_MAIL_TYPE_AOK:
         for (index = 0; index < 0x20; index++)
         {
             struct unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 4) {
+            if (p->mailType == WONDER_MAIL_TYPE_AOK) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -371,11 +371,11 @@ s32 sub_8030A74(void)
         }
         break;
 
-    case 7:
+    case WONDER_MAIL_TYPE_OKD:
         for (index = 0; index < 0x20; index++)
         {
             struct unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 7) {
+            if (p->mailType == WONDER_MAIL_TYPE_OKD) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -398,10 +398,10 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
             }
         }
         break;
-    case 6:
+    case WONDER_MAIL_TYPE_COMPLETED:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 6) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_COMPLETED) {
                 return FALSE;
             }
         }
@@ -422,10 +422,10 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
             }
         }
         break;
-    case 4:
+    case WONDER_MAIL_TYPE_AOK:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 4) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_AOK) {
                 return FALSE;
             }
         }
@@ -448,10 +448,10 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
         }
         break;
 
-    case 7:
+    case WONDER_MAIL_TYPE_OKD:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 7) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_OKD) {
                 return FALSE;
             }
         }

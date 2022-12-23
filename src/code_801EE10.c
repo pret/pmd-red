@@ -13,7 +13,7 @@ struct unkStruct_203B2AC
     u8 unk22[0x34 - 0x22];
     u32 unk34[3];
     u8 unk40[0x48 - 0x40];
-    s16 unk48;
+    s16 speciesNum;
     u32 unk4C;
     u8 unk50[0xB0 - 0x50];
     u32 unkB0;
@@ -223,11 +223,11 @@ struct PokemonStruct *sub_80243E8(void)
     return pokeStruct;
 }
 
-bool8 sub_8024458(s16 param_1, s32 param_2)
+bool8 sub_8024458(s16 speciesNum, s32 param_2)
 {
-  s32 param_1_s32 = param_1;
+  s32 speciesNum_s32 = speciesNum;
   gUnknown_203B2AC = MemoryAlloc(sizeof(struct unkStruct_203B2AC), 8);
-  gUnknown_203B2AC->unk48 = param_1_s32;
+  gUnknown_203B2AC->speciesNum = speciesNum_s32;
   gUnknown_203B2AC->unkE0 = param_2;
   gUnknown_203B2AC->unkE4 = &gUnknown_203B2AC->unkE8[param_2];
   sub_8006518(gUnknown_203B2AC->unkE8);
@@ -306,6 +306,6 @@ void sub_8024604(void)
   gUnknown_203B2AC->unk34[2] = 5;
   sub_8013818(gUnknown_203B2AC,3,1,gUnknown_203B2AC->unkE0);
   iVar3 = &gUnknown_203B2AC->unk4C;
-  pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->unk48];
+  pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->speciesNum];
   sub_808FF20(iVar3,pokeStruct, sub_80023E4(7));
 }

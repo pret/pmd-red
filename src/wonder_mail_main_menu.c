@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/wonder_mail.h"
+#include "constants/communication_error_codes.h"
 #include "save.h"
 #include "memory.h"
 #include "text.h"
@@ -180,7 +181,7 @@ bool8 sub_8039880(void)
 
 bool8 CreateWonderMailMenu(void)
 {
-  int iVar2;
+  s32 index;
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -188,8 +189,8 @@ bool8 CreateWonderMailMenu(void)
   gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), 8);
   MemoryFill8((u8 *)gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
 
-  for(iVar2 = 0; iVar2 < PASSWORD_BUFFER_SIZE; iVar2++){
-    gUnknown_203B3E8->PasswordEntryBuffer[iVar2] = 0;
+  for(index = 0; index < PASSWORD_BUFFER_SIZE; index++){
+    gUnknown_203B3E8->PasswordEntryBuffer[index] = 0;
   }
 
   gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_GAME_LINK;
@@ -364,21 +365,21 @@ void PrintWonderMailMainMenuError(u32 status)
 {
     switch(status)
     {
-        case 0:
+        case COMMS_GOOD:
             break;
         case 1:
             // "Communication Error"
             sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
-        case 3:
+        case COMMS_INCORRECT_NUM_SYSTEMS:
             // Incorrect number of GBA Systems
             sub_80141B4(gUnknown_80E7938, 0, 0, 0x101);
             break;
-        case 2:
+        case COMMS_NO_RESPONSE:
             // No response from friend. Redo from start
             sub_80141B4(gUnknown_80E7994, 0, 0, 0x101);
             break;
-        case 4:
+        case COMMS_DIFFERENT_MODES:
             // Sender and receiver in different modes
             sub_80141B4(gUnknown_80E79E4, 0, 0, 0x101);
             break;
@@ -390,7 +391,7 @@ void PrintWonderMailMainMenuError(u32 status)
             // "Communication Error"
             sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
             break;
-        case 15: // "No response from your friend. Make sure sender and receiver are ready"
+        case COMMS_NOT_READY: // "No response from your friend. Make sure sender and receiver are ready"
             sub_80141B4(gUnknown_80E7A48, 0, 0, 0x101);
             break;
         case 6:
