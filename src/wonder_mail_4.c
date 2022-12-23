@@ -3,7 +3,6 @@
 #include "input.h"
 #include "memory.h"
 #include "item.h"
-#include "sub_8095228.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
@@ -239,7 +238,7 @@ void sub_80308A0(void)
 
 void sub_803092C(void)
 {
-  struct unkStruct_8095228 *pbVar2;
+  struct unkStruct_203B480 *pbVar2;
   s32 r4;
   s32 r5;
   s32 r6;
@@ -266,7 +265,7 @@ void sub_803092C(void)
       local.unk3C[12] = 0;
 
       local.unk8 = &pbVar2->dungeon;
-      local.unkC = pbVar2->padding2;
+      local.unkC = pbVar2->playerName;
 
       local.unk10 = (pbVar2->clientSpecies);
       local.unk12 = (pbVar2->clientSpecies);

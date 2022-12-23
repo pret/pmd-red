@@ -330,7 +330,7 @@ void sub_80313D8(u32 param_1)
                     unused = &gUnknown_203B480[iVar2];
                     gUnknown_203B480[iVar2].mailType = 0;
                     unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].unk22 = 0;
+                    gUnknown_203B480[iVar2].unk20.itemIndex = 0;
                 }
                 break;
         }

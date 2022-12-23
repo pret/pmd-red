@@ -16,7 +16,7 @@ struct unkStruct_802C39C
 {
     /* 0x0 */ u32 unk0[2];
     /* 0x8 */ struct DungeonLocation *unk8;
-    /* 0xC */ u8 *unkC;
+    /* 0xC */ u8 *playerName;
     /* 0x10 */ s16 unk10;
     /* 0x12 */ s16 unk12;
     /* 0x14 */ u8 unk14;

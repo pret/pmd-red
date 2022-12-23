@@ -7,10 +7,10 @@
 #include "text.h"
 #include "menu.h"
 #include "save.h"
-#include "sub_8095228.h"
 #include "gUnknown_203B46C.h"
 #include "wonder_mail.h"
 #include "code_800D090.h"
+#include "code_8094F88.h"
 
 struct unkStruct_203B2C8
 {
@@ -359,7 +359,7 @@ void nullsub_132(void)
 
 void sub_802B3E0(void)
 {
-  struct unkStruct_8095228 *iVar3;
+  struct unkStruct_203B480 *iVar3;
   char *monName;
   char teamNameBuffer[40];
 
@@ -441,7 +441,7 @@ void sub_802B57C(void)
 void sub_802B5B8(void)
 {
   u32 uVar2;
-  struct unkStruct_8095228 *puVar3;
+  struct unkStruct_203B480 *puVar3;
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {

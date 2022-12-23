@@ -5,7 +5,7 @@
 #include "text.h"
 #include "item.h"
 #include "pokemon.h"
-#include "sub_8095228.h"
+#include "code_8094F88.h"
 
 #include "constants/wonder_mail.h"
 
@@ -51,7 +51,7 @@ struct WonderMailStruct_203B2C0
     u32 linkError;
     u8 unk48[0x30];
     u8 unk78[0x30];
-    struct unkStruct_8095228 unkA8;
+    struct unkStruct_203B480 unkA8;
     struct PokemonStruct unkD8;
     u8 unk130;
     u8 fill131[0x168 - 0x131];
@@ -93,8 +93,8 @@ struct WonderMailStruct_203B2C4
     u32 unk40;
     /* 0x44 */ u32 linkError; // another link status
     u8 filler48[0x1B8 - 0x48];
-    struct unkStruct_8095228 unk1B8;
-    struct unkStruct_8095228 unk1E8;
+    struct unkStruct_203B480 unk1B8;
+    struct unkStruct_203B480 unk1E8;
     s8 unk218;
     u32 unk21C;
     u8 filler220[0x30C - 0x220];

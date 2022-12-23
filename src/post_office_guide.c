@@ -6,8 +6,8 @@
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
-#include "sub_8095228.h"
 #include "wonder_mail.h"
+#include "code_8094F88.h"
 
 struct PostOfficeHelper
 {
@@ -597,7 +597,7 @@ void DisplayMissionObjectives(void)
 {
     s32 yCoord;
     s32 jobSlotIdx;
-    struct unkStruct_8095228 *iVar8;
+    struct unkStruct_203B480 *iVar8;
     struct WonderMail *jobInfo;
     u8 auStack248 [100];
     volatile u8 local_94;

@@ -4,7 +4,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "item.h"
-#include "sub_8095228.h"
+#include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "menu.h"
@@ -15,6 +15,7 @@
 #include "code_800D090.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
+struct unkStruct_203B480 * sub_8095228(u8 index);
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
@@ -153,13 +154,11 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 #include "data/thank_you_wonder_mail.h"
 
 
-extern s32 sub_80953D4(u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
-extern u32 sub_8095324(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
 extern void sub_8095240(u8);
@@ -236,7 +235,6 @@ extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
-extern u8 sub_809539C(u32, u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
@@ -253,8 +251,7 @@ extern void sub_801CB5C(u32);
 extern void sub_801CCD8(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
-extern u8 sub_809539C(u32, u32);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 
 
 u32 CreateThankYouMailPelipper(void)
@@ -263,7 +260,7 @@ u32 CreateThankYouMailPelipper(void)
   struct OpenedFile *faceFile;
   s32 uVar2;
   int counter;
-  struct unkStruct_8095228 *temp;
+  struct unkStruct_203B480 *temp;
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -822,12 +819,12 @@ void AdvanceToThankYouPasswordProcessing(void)
 void HandleThankYouMailPasswordMenu(void)
 {
   u8 uVar1;
-  struct unkStruct_8095228 *puVar5;
+  struct unkStruct_203B480 *puVar5;
   u32 return_var;
-  struct unkStruct_8095228 temp;
+  struct unkStruct_203B480 temp;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
   switch(return_var)
   {
     case 3:
@@ -954,7 +951,7 @@ void sub_802A75C(void)
 void HandleConfirmItemtoSendMenu(void)
 {
     s32 temp;
-    struct unkStruct_8095228 *return_var;
+    struct unkStruct_203B480 *return_var;
     if(sub_80144A4(&temp) == 0)
     {
         switch(temp)
@@ -1137,7 +1134,7 @@ void sub_802A9FC(void)
 void HandleMailCommunicationMenu(void)
 {
     s32 temp;
-    struct unkStruct_8095228 *return_var;
+    struct unkStruct_203B480 *return_var;
     if(sub_80144A4(&temp) == 0)
     {
         switch(temp)
@@ -1278,7 +1275,7 @@ void UpdateThankYouMailText(void)
   struct PokemonStruct *pokeStruct;
   struct PokemonStruct *pokeStruct2;
   s32 linkStatus;
-  struct unkStruct_8095228 *puVar4;
+  struct unkStruct_203B480 *puVar4;
 
   switch(gUnknown_203B2C4->state) {
     case 5:
@@ -1335,13 +1332,13 @@ void UpdateThankYouMailText(void)
             switch(gUnknown_203B2C4->unk40)
             {
                 case 6:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_8095228));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
                     gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->unk218);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_8095228));
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_8095228));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_203B480));
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
             }

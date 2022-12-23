@@ -5,7 +5,6 @@
 #include "file_system.h"
 #include "item.h"
 #include "input.h"
-#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "menu.h"
@@ -25,13 +24,11 @@ extern u32 sub_8031050();
 extern void sub_80310B4();
 extern u32 sub_8095350();
 extern u8 sub_80A2824(u8);
-extern u8 sub_809539C(u32, u32);
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
 extern s32 sub_8095190(void);
-extern u32 sub_8095324(u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
@@ -48,11 +45,11 @@ extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_80951BC(struct unkStruct_8095228 *r0);
+extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern void sub_8013114(u32 *r0, s32 *r1);
 extern void sub_8023C60();
 extern u32 sub_8023A94(u32);
@@ -1162,7 +1159,7 @@ void sub_8028FC0()
 void sub_8028FDC(void)
 {
     s32 temp;
-    struct unkStruct_8095228 *return_var;
+    struct unkStruct_203B480 *return_var;
 
     if(sub_80144A4(&temp) != 0)
     {
@@ -1453,10 +1450,10 @@ void sub_80293D8(void)
 void sub_80293F4(void)
 {
     u32 return_var;
-    struct unkStruct_8095228 temp;
+    struct unkStruct_203B480 temp;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
     switch(return_var)
     {
         case 3:

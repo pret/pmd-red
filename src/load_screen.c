@@ -47,7 +47,6 @@ extern void sub_8035CF4(u32 *, u32, u32);
 extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
-extern void sub_8095240(u32);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
@@ -58,7 +57,6 @@ extern u32 GetNumAdventures(void);
 extern void xxx_call_draw_string(u32 x, u32 y, const u8 *, u32, u32);
 extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
 extern void sub_80922B4(u8 *, const u8 *, u32);
-extern s32 sub_8095324(u32);
 extern u32 sub_8001658(u32, u32);
 extern void sub_80073E0(u32);
 

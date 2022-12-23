@@ -6,9 +6,9 @@
 #include "input.h"
 #include "team_inventory.h"
 #include "friend_rescue.h"
-#include "sub_8095228.h"
 #include "item.h"
 #include "code_8094F88.h"
+#include "menu.h"
 #include "rescue_password_menu.h"
 
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -17,7 +17,6 @@ extern u8 *gUnknown_203B484;
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern u8 sub_809539C(u32, u32);
 extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
@@ -26,7 +25,6 @@ extern char gAvailablePokemonNames[0x50];
 
 extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 
-extern u8 sub_80953D4(u32);
 extern u8 sub_801CF14(u32);
 
 extern u8 gUnknown_80E48A8[];
@@ -44,7 +42,7 @@ extern u8 gUnknown_80E31FC[];
 
 extern u32 sub_80154F0();
 extern void sub_80155F0();
-struct unkStruct_8095228 *sub_8095228(u8);
+struct unkStruct_203B480 *sub_8095228(u8);
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 
@@ -83,13 +81,10 @@ extern void sub_8023DA4(void);
 extern void sub_8035D1C(void);
 extern u16 sub_8023B44(void);
 
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
-extern void sub_80951BC(struct unkStruct_8095228 *r0);
-extern void sub_80951FC(struct unkStruct_8095228 *r0);
-extern u8 sub_809539C(u32, u32);
+extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern u8 sub_800D588(void);
-extern u32 sub_8095324(u32);
 extern s32 sub_8095190(void);
 
 extern u8 gUnknown_80E44A4[];
@@ -436,11 +431,11 @@ void sub_8033DBC(void)
 {
     u32 return_var;
     u32 input_var;
-    struct unkStruct_8095228 temp;
-    struct unkStruct_8095228 *temp2;
+    struct unkStruct_203B480 temp;
+    struct unkStruct_203B480 *temp2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -490,7 +485,8 @@ void sub_8033DBC(void)
                         sub_80951FC(&temp);
                         temp2 = sub_8095228(sub_809539C(1, temp.unk10));
                         temp2->mailType = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+                        //MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, 0x5C);
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:
@@ -1333,11 +1329,11 @@ void sub_8034D54(void)
 void sub_8034D74(void)
 {
     u32 return_var;
-    struct unkStruct_8095228 temp;
-    struct unkStruct_8095228 *temp2;
+    struct unkStruct_203B480 temp;
+    struct unkStruct_203B480 *temp2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -1448,7 +1444,7 @@ void sub_8034F58(void)
 void sub_8034F88(void)
 {
     s32 temp;
-    struct unkStruct_8095228 *temp2;
+    struct unkStruct_203B480 *temp2;
 
     if(sub_80144A4(&temp) == 0)
     {
@@ -1644,7 +1640,7 @@ void sub_80351E0(void)
 void sub_8035210(void)
 {
     s32 temp;
-    struct unkStruct_8095228 *temp2;
+    struct unkStruct_203B480 *temp2;
 
     if(sub_80144A4(&temp) == 0)
     {

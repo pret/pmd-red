@@ -3,12 +3,12 @@
 #include "item.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
-#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
 #include "code_80958E8.h"
-
+#include "pokemon.h"
+#include "code_8094F88.h"
 
 extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(struct DungeonLocation *);

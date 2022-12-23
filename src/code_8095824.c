@@ -1,5 +1,10 @@
 #include "global.h"
+#include "dungeon.h"
+#include "memory.h"
 #include "pokemon.h"
+#include "random.h"
+#include "save.h"
+#include "text_util.h"
 #include "code_8094F88.h"
 
 extern struct unkStruct_203B484 *gUnknown_203B484;
@@ -15,7 +20,208 @@ extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove
 
 void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
-extern u32 sub_8095324(u32);
+s32 sub_8095324(u8);
+
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern s32 sub_8094E4C(void);
+extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
+extern void sub_8094D28(s32);
+
+struct unkStruct_809542C
+{
+    struct DungeonLocation unk0;
+    u32 unk4;
+};
+
+bool8 sub_80951FC(struct unkStruct_203B480 *param_1)
+{
+  bool8 bVar1 = gUnknown_203B480[1].mailType != 0;
+  gUnknown_203B480[1] = *param_1;
+  return bVar1;
+}
+
+struct unkStruct_203B480 * sub_8095228(u8 index)
+{
+  struct unkStruct_203B480 *ptr;
+
+  ptr = &gUnknown_203B480[index];
+  return ptr;
+}
+
+void sub_8095240(u8 index)
+{
+  struct unkStruct_203B480 *unused;
+
+  MemoryFill8((u8*)&gUnknown_203B480[index],0,sizeof(struct unkStruct_203B480));
+  unused = &gUnknown_203B480[index];
+  gUnknown_203B480[index].mailType = 0;
+  unused = &gUnknown_203B480[index];
+  gUnknown_203B480[index].unk20.itemIndex = 0;
+}
+
+void sub_8095274(u32 param_1)
+{
+  s32 iVar2;
+  s32 iVar3;
+  
+  gUnknown_203B48C->unk4[gUnknown_203B48C->unk0] = param_1;
+  iVar2 = gUnknown_203B48C->unk0;
+  iVar3 = 0;
+  if (iVar2 < 0x1f) {
+    iVar3 = iVar2 + 1;
+  }
+  gUnknown_203B48C->unk0 = iVar3;
+}
+
+bool8 sub_8095298(s32 param_1)
+{
+  s32 index;
+  
+  for(index = 0; index < 0x20; index++)
+  {
+    if(gUnknown_203B48C->unk4[index] == param_1) return TRUE;
+  }
+  return FALSE;
+}
+
+void sub_80952C4(void)
+{
+  s32 index;
+  
+  gUnknown_203B48C->unk0 = 0;
+  for(index = 0; index < 0x20; index++)
+  {
+    gUnknown_203B48C->unk4[index] = -1;
+  }
+}
+
+bool8 sub_80952F0(u8 mailType, u32 param_2)
+{
+  struct unkStruct_203B480 *piVar1;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if ((piVar1->mailType == mailType) && (piVar1->unk10 == param_2)) return TRUE;
+  }
+  return FALSE;
+}
+
+s32 sub_8095324(u8 mailType)
+{
+  struct unkStruct_203B480 *piVar1;
+  s32 total = 0;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if (piVar1->mailType == mailType) total++;
+  }
+  return total;
+}
+
+u32 sub_8095350(void)
+{
+  struct unkStruct_203B480 *piVar1;
+  u32 total = 0;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if (piVar1->mailType != 0) total++;
+  }
+  return total;
+}
+
+s32 sub_8095374(void)
+{
+  struct unkStruct_203B480 *piVar1;
+  s32 retvar = -1;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if (piVar1->mailType == 1) retvar = index;
+  }
+  return retvar;
+}
+
+s32 sub_809539C(u8 mailType, u32 param_2)
+{
+  struct unkStruct_203B480 *piVar1;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if ((piVar1->mailType == mailType) && (piVar1->unk10 == param_2)) return index;
+  }
+  return -1;
+}
+
+s32 sub_80953D4(u8 param_1)
+{
+  struct unkStruct_203B480 *piVar1;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0]; index < 0x20; piVar1++, index++)
+  {  
+    if (piVar1->mailType == param_1) return index;
+  }
+  return -1;
+}
+
+s32 sub_8095400(u32 param_1)
+{
+  u32 *piVar1;
+  s32 index;
+  
+  for(index = 0, piVar1 = &gUnknown_203B480[0].unk10; index < 0x20; piVar1 += 0xC, index++)
+  {  
+    if (*piVar1 == param_1) return index;
+  }
+  return -1;
+}
+
+void sub_809542C(struct unkStruct_809542C *param_1)
+{
+  u32 uVar4;
+
+#ifndef NONMATCHING
+  register struct unkStruct_203B480 *preload asm("r2");
+#else
+  struct unkStruct_203B480 *preload;
+#endif
+
+  u8 buffer [20];
+  
+  gUnknown_203B480->mailType = 1;
+  preload = gUnknown_203B480;
+  uVar4 = param_1->unk4;
+  preload->dungeon = param_1->unk0;
+  preload->unk8 = uVar4;
+  sub_8094D28(Random());
+  gUnknown_203B480->unk10 = sub_8094E4C();
+  gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
+  PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
+  CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
+  gUnknown_203B480->unk24 = sub_8011C34();
+  gUnknown_203B480->unk2C = GetUnk3(gUnknown_203B480->dungeon.dungeonIndex);
+}
+
+void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
+{
+  u32 uVar1;
+  struct DungeonLocation temp;
+  struct unkStruct_203B480 *iVar2;
+  
+  iVar2 = gUnknown_203B480;
+  iVar2 += index;
+
+  temp = iVar2->dungeon;
+  uVar1 = iVar2->unk8;
+  param_1->unk0 = temp;
+  param_1->unk4 = uVar1;
+}
 
 u32 sub_80954B4(void)
 {
@@ -115,14 +321,14 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     u8 temp;
 
     RestoreIntegerBits(a, &b->mailType, 4);
-    RestoreDungeonLocation(a, &b->unk4);
+    RestoreDungeonLocation(a, &b->dungeon);
     RestoreIntegerBits(a, &b->unk8, 0x18);
-    RestoreIntegerBits(a, &b->unkC, 0x9);
+    RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10, 0x20);
-    RestoreIntegerBits(a, &b->unk14, 0x50);
-    RestoreIntegerBits(a, &b->unk20, 0x8);
-    RestoreIntegerBits(a, &b->unk21, 0x8);
-    RestoreIntegerBits(a, &b->unk22, 0x8);
+    RestoreIntegerBits(a, &b->playerName, 0x50);
+    RestoreIntegerBits(a, &b->unk20.itemFlags, 0x8);
+    RestoreIntegerBits(a, &b->unk20.numItems, 0x8);
+    RestoreIntegerBits(a, &b->unk20.itemIndex, 0x8);
     RestoreIntegerBits(a, &b->unk24, 0x20);
     RestoreIntegerBits(a, &b->unk28, 0x20);
     RestoreIntegerBits(a, &b->unk2C, 0x8);
@@ -140,14 +346,14 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     zero = 0;
 
     SaveIntegerBits(a, &b->mailType, 4);
-    SaveDungeonLocation(a, &b->unk4);
+    SaveDungeonLocation(a, &b->dungeon);
     SaveIntegerBits(a, &b->unk8, 0x18);
-    SaveIntegerBits(a, &b->unkC, 0x9);
+    SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10, 0x20);
-    SaveIntegerBits(a, &b->unk14, 0x50);
-    SaveIntegerBits(a, &b->unk20, 0x8);
-    SaveIntegerBits(a, &b->unk21, 0x8);
-    SaveIntegerBits(a, &b->unk22, 0x8);
+    SaveIntegerBits(a, &b->playerName, 0x50);
+    SaveIntegerBits(a, &b->unk20.itemFlags, 0x8);
+    SaveIntegerBits(a, &b->unk20.numItems, 0x8);
+    SaveIntegerBits(a, &b->unk20.itemIndex, 0x8);
     SaveIntegerBits(a, &b->unk24, 0x20);
     SaveIntegerBits(a, &b->unk28, 0x20);
     SaveIntegerBits(a, &b->unk2C, 0x8);

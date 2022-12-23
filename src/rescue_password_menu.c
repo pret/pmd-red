@@ -5,7 +5,6 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "save.h"
-#include "sub_8095228.h"
 #include "text.h"
 #include "main_menu.h"
 #include "rescue_password_menu.h"
@@ -31,14 +30,14 @@ extern void sub_8031E10(void);
 extern void DisplayPasswordAcceptScreen(void);
 
 
-extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_8095228 *r0);
+extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
 
-extern void sub_80951BC(struct unkStruct_8095228 *r0);
-extern void sub_80951FC(struct unkStruct_8095228 *r0);
+extern void sub_80951BC(struct unkStruct_203B480 *r0);
+extern bool8 sub_80951FC(struct unkStruct_203B480 *r0);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_80154F0(void);
-extern u8 sub_809539C(u32, u32);
+extern s32 sub_809539C(u8, u32);
 extern void sub_8095274(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_80391F8(void);
@@ -47,13 +46,12 @@ extern void DisplayRescuePasswordError(u32);
 extern struct MainMenu *GetMainMenu(void);
 
 
-extern void sub_8039174(void);
 extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8035CF4(u32 *r0, u32, u32);
 bool8 IsInvalidItemReward(u8);
-bool8 sub_80952F0(u32, u32);
-bool8 sub_8095298(u32);
-bool8 sub_803D204(u8 *, struct unkStruct_8095228 *);
+bool8 sub_80952F0(u8, u32);
+bool8 sub_8095298(s32);
+bool8 sub_803D204(u8 *, struct unkStruct_203B480 *);
 extern s32 GetDungeonFloorCount(u8);
 extern s32 sub_8095190(void);
 
@@ -81,7 +79,7 @@ extern struct MenuItem gUnknown_80E75A0[];
 
 void CreateRescuePasswordMenu(u32 currMenu)
 {
-    struct unkStruct_8095228 *temp;
+    struct unkStruct_203B480 *temp;
     s32 counter;
 
     if(gRescuePasswordMenu == NULL)
@@ -121,7 +119,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = sub_8095228(0x1F);
-            MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_8095228));
+            MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_203B480));
             temp->mailType = 2;
             temp->unk20.itemIndex = ITEM_ID_NOTHING;
             sub_8031D70(0x1F, 0);
@@ -163,12 +161,12 @@ static inline s32 UpdateRescuePasswordMenu_sub(s32 otherMenu)
 
 s32 UpdateRescuePasswordMenu(void)
 {
-  struct unkStruct_8095228 *puVar5;
-  struct unkStruct_8095228 *puVar6;
+  struct unkStruct_203B480 *puVar5;
+  struct unkStruct_203B480 *puVar6;
   u32 iVar7;
   struct MainMenu *iVar9;
   s32 nextMenu;
-  struct unkStruct_8095228 local_44;
+  struct unkStruct_203B480 local_44;
   u32 local_14;
   u32 subtract;
 
@@ -184,7 +182,7 @@ s32 UpdateRescuePasswordMenu(void)
     case 3:
     case 5:
         iVar7 = sub_80154F0();
-        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_8095228));
+        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_203B480));
         switch(iVar7)
         {
             case 1:
@@ -451,7 +449,7 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
   return uVar1;
 }
 
-u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *param_3)
+u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *param_3)
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->dungeon.dungeonFloor >= GetDungeonFloorCount(param_3->dungeon.dungeonIndex)) ||
