@@ -1,5 +1,5 @@
-#ifndef GUARD_GUNKNOWN_203B46C_H
-#define GUARD_GUNKNOWN_203B46C_H
+#ifndef GUARD_GAME_OPTIONS_H
+#define GUARD_GAME_OPTIONS_H
 
 struct GameOptions
 {
