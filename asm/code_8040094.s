@@ -635,9 +635,9 @@ _08040606:
 	adds r0, 0x80
 	b _0804062C
 	.align 2, 0
-_08040618: .4byte gUnknown_203B46C
+_08040618: .4byte gGameOptions
 _0804061C:
-	bl sub_8094C68
+	bl DoesNotHaveShadedMap
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1146,7 +1146,7 @@ _08040A24: .4byte 0x00000215
 _08040A28: .4byte 0x00000fff
 _08040A2C: .4byte 0x0000fffe
 _08040A30: .4byte 0x0000fffd
-_08040A34: .4byte gUnknown_203B46C
+_08040A34: .4byte gGameOptions
 _08040A38: .4byte 0x000001ff
 _08040A3C:
 	movs r1, 0
@@ -1237,7 +1237,7 @@ sub_8040ABC:
 	movs r0, 0
 	b _08040AEC
 	.align 2, 0
-_08040AD8: .4byte gUnknown_203B46C
+_08040AD8: .4byte gGameOptions
 _08040ADC:
 	cmp r1, 0
 	beq _08040AE8

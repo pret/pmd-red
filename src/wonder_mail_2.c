@@ -8,7 +8,7 @@
 #include "text.h"
 #include "menu.h"
 #include "save.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "wonder_mail.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
@@ -93,7 +93,7 @@ struct unkStruct_203B2D8
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptions;
 
 
 extern s32 GetNumPKMNNews(void);
@@ -824,7 +824,7 @@ void sub_802BC08(void)
 void sub_802BC7C(void)
 {
     PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
-    if(gUnknown_203B46C->playerGender == FEMALE)
+    if(gGameOptions->playerGender == FEMALE)
     {
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC4C); // She
     }

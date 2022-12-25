@@ -10,10 +10,10 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "weather.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "text_util.h"
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptions;
 
 struct unkStruct_80F520C
 {
@@ -240,7 +240,7 @@ void sub_806A1E8(struct DungeonEntity *pokemon)
       entityData = pokemon->entityData;
       bVar3 = (!entityData->isEnemy);
     }
-    if (gUnknown_203B46C->unk1 == '\0') {
+    if (gGameOptions->FarOffPals == '\0') {
       bVar3 = FALSE;
     }
     if (bVar3 && (sub_8045888(pokemon) == '\0')) {

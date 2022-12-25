@@ -8,11 +8,13 @@
 #include "save.h"
 #include "team_inventory.h"
 #include "exclusive_pokemon.h"
+#include "game_options.h"
 
 
 EWRAM_DATA u32 gUnknown_203B17C;
 EWRAM_DATA char *gUnknown_203B180;
 EWRAM_DATA struct UnkStruct_203B184 *gUnknown_203B184;
+extern struct GameOptions *gGameOptions;
 
 struct unk_struct
 {
@@ -74,7 +76,6 @@ EWRAM_DATA struct QuickSaveWrite *gQuickSaveWrite;
 
 extern s32 gUnknown_202DE28;
 extern bool8 *gFriendAreas;
-extern u32 gUnknown_203B46C;
 extern u8 *gUnknown_203B480;
 extern u8 *gUnknown_203B484;
 extern u32 *gUnknown_203B488;
@@ -168,8 +169,6 @@ extern u32 sub_8097D60(u8 *, u32);
 extern u32 sub_8097D98(void* a, s32 b);
 extern void sub_80993E4();
 extern void sub_800135C(void);
-extern u32 GetGameOptions(void);
-extern void InitializeGameOptions(u8 r0);
 extern u8 *sub_80950F8(void);
 extern void sub_80958E4(u32 *a, u32 b);
 extern u32 sub_80958F8(void);
@@ -603,7 +602,7 @@ void InitializePlayerData(void)
     sub_8095118();
     sub_8095900();
     sub_80974E8();
-    InitializeGameOptions(1);
+    InitializeGameOptions(TRUE);
     InitializeExclusivePokemon();
 }
 
@@ -630,7 +629,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = r0->unk20;
        gUnknown_203B498 = r0->ExclusivePokemon;
        gFriendAreas     = r0->BoughtFriendAreas;
-       gUnknown_203B46C = r0->gameOptions;
+       gGameOptions = r0->gameOptions;
        gPlayTimeRef     = r0->playTime;
        return;
     }
@@ -645,7 +644,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = sub_8097680();
        gUnknown_203B498 = GetExclusivePokemon();
        gFriendAreas     = GetBoughtFriendAreas();
-       gUnknown_203B46C = GetGameOptions();
+       gGameOptions = GetGameOptions();
        gPlayTimeRef     = GetPlayTime();
 
 }

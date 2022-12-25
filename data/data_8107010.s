@@ -491,8 +491,8 @@ gUnknown_8109930: @ 8109930
         .string "pksdir0\0"
         .align 2,0
 
-	.global gUnknown_8109954
-gUnknown_8109954: @ 8109954
+	.global gWindowBGColors
+gWindowBGColors: @ 8109954
         .byte 0x20, 0x48, 0x68, 0x00
         .byte 0x80, 0x38, 0x20, 0x00
         .byte 0x28, 0x80, 0x48, 0x00

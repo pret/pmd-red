@@ -7437,7 +7437,7 @@ sub_8010960:
 _080109EC: .4byte gUnknown_203B0E8
 _080109F0: .4byte 0x000052d8
 _080109F4: .4byte 0x000052da
-_080109F8: .4byte gUnknown_203B46C
+_080109F8: .4byte gGameOptions
 _080109FC: .4byte gPlayTimeRef
 	thumb_func_end sub_8010960
 

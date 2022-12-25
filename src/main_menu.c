@@ -62,7 +62,7 @@ EWRAM_DATA struct unkStruct_203B34C *gUnknown_203B34C;
 EWRAM_DATA u32 gUnknown_203B350;
 EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
 
-extern void sub_8094C14(void);
+extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
 extern void CreateWonderMailMenu(void);
@@ -429,7 +429,7 @@ void SetUpMenu(void)
   if (gMainMenu->currMenu != gMainMenu->nextMenu) {
     switch(gMainMenu->nextMenu) {
         case MENU_MAIN_SCREEN:
-            sub_8094C14();
+            SetWindowBGColor();
             sub_8099690(0);
             DrawMainMenu();
             break;

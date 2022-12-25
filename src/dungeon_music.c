@@ -28,7 +28,7 @@ extern void sub_80709C8(u8 *buffer, struct DungeonEntityData *entityData);
 void FadeOutAllMusic(u16);
 void xxx_call_stop_bgm(void);
 
-void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntity * enity)
+void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntity * entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
@@ -46,7 +46,7 @@ void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntit
   if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_POKEMON)) {
     targetEntityData = target->entityData;
   }
-  entityData = enity->entityData;
+  entityData = entity->entityData;
   if (targetEntityData != NULL) {
     sub_80709C8(buffer, targetEntityData);
     CopyStringtoBuffer(temp->buffer1, buffer);
@@ -188,7 +188,7 @@ void sub_8083D88(void)
     PlayFanfareSE(0xCC, 0x100);
 }
 
-void sub_8083D98(void)
+void PlayDungeonFailBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
   gDungeonGlobalData->unk66F = 0;
@@ -197,7 +197,7 @@ void sub_8083D98(void)
   gDungeonGlobalData->unk66A = 999;
 }
 
-void sub_8083DE0(void)
+void PlayDungeonCompleteBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
   gDungeonGlobalData->unk66F = 0;

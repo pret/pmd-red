@@ -1076,7 +1076,7 @@ _0806D858:
 	lsrs r4, r1, 31
 	b _0806D8B6
 	.align 2, 0
-_0806D8B0: .4byte gUnknown_203B46C
+_0806D8B0: .4byte gGameOptions
 _0806D8B4:
 	movs r4, 0
 _0806D8B6:

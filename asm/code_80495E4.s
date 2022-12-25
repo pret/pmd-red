@@ -2146,7 +2146,7 @@ _0804A8AC:
 	adds r0, r3, r1
 	b _0804A8DC
 	.align 2, 0
-_0804A8C0: .4byte gUnknown_203B46C
+_0804A8C0: .4byte gGameOptions
 _0804A8C4: .4byte 0x00012b80
 _0804A8C8:
 	ldr r4, _0804A8D4
@@ -2299,7 +2299,7 @@ _0804A9D6:
 	adds r0, r3, r1
 	b _0804AA08
 	.align 2, 0
-_0804A9EC: .4byte gUnknown_203B46C
+_0804A9EC: .4byte gGameOptions
 _0804A9F0: .4byte 0x00012b80
 _0804A9F4:
 	ldr r4, _0804AA00

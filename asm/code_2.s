@@ -154,7 +154,7 @@ QuickSave:
 	adds r1, r2, 0
 	strh r1, [r0]
 	bl sub_8099648
-	bl sub_8094C14
+	bl SetWindowBGColor
 	movs r0, 0
 	bl sub_8099690
 	bl sub_8099744
@@ -335,7 +335,7 @@ sub_80008C0:
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_8099648
-	bl sub_8094C14
+	bl SetWindowBGColor
 	movs r0, 0
 	bl sub_8099690
 	bl sub_8099744
@@ -1132,7 +1132,7 @@ _08000F78:
 	adds r0, r4, 0
 	bl xxx_dungeon_8001340
 	bl sub_8099648
-	bl sub_8094C14
+	bl SetWindowBGColor
 	movs r0, 0
 	bl sub_8099690
 	b _08000F96

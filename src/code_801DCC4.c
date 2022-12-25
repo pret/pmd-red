@@ -1,7 +1,7 @@
 #include "global.h"
 #include "memory.h"
 #include "menu.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "text.h"
 
 struct unkStruct_203B25C
@@ -9,7 +9,7 @@ struct unkStruct_203B25C
     // size: 0x11C
     u32 state;
     u32 chosenHintIndex;
-    struct UnkSaveStruct1 unk8;
+    struct GameOptions newOptions;
     u32 unk18;
     const char *unk1C;
     u8 fill20[0x6C - 0x20];
@@ -29,7 +29,7 @@ extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
 extern void sub_8012D60(const char **, struct MenuItem *, u32, u16 *, u32, u32);
-extern u32 sub_801E198(struct UnkSaveStruct1 *);
+extern u32 sub_801E198(struct GameOptions *);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
@@ -43,14 +43,13 @@ extern void sub_801E54C(void);
 extern u32 HandleHintDisplayScreenInput(void);
 extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
-extern bool8 GameOptionsNotChange(struct UnkSaveStruct1 *);
 extern void sub_801E2C4(void);
 extern s32 sub_80144A4(s32 *);
-extern void sub_8094C14(void);
+extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptions;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
 extern const struct UnkTextStruct2 gUnknown_80DBFCC;
 extern const struct UnkTextStruct2 gUnknown_80DBFB0;
@@ -365,8 +364,8 @@ void sub_801DED0(void)
         break;
     case 6:
         // Load our current options?
-        gUnknown_203B25C->unk8 = *gUnknown_203B46C;
-        sub_801E198(&gUnknown_203B25C->unk8);
+        gUnknown_203B25C->newOptions = *gGameOptions;
+        sub_801E198(&gUnknown_203B25C->newOptions);
         break;
     case 7:
         CreateChangeSettingsConfirmMenu();
@@ -485,7 +484,7 @@ void sub_801E0FC(void)
     case 3:
         sub_801E2C4();
         // Check to see if the options changed?
-        if (GameOptionsNotChange(&gUnknown_203B25C->unk8)) {
+        if (GameOptionsNotChange(&gUnknown_203B25C->newOptions)) {
             sub_801DD6C(1);
         }
         else {
@@ -508,8 +507,8 @@ void HandleChangeSettingsMenu(void)
     {
         case MENU_OPTION_YES:
             // Save our option changes??
-            *gUnknown_203B46C = gUnknown_203B25C->unk8;
-            sub_8094C14();
+            *gGameOptions = gUnknown_203B25C->newOptions;
+            SetWindowBGColor();
             sub_8099690(0);
             sub_801DD6C(1);
             break;

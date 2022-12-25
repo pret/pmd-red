@@ -11,7 +11,7 @@
 #include "music.h"
 #include "play_time.h"
 #include "save.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "text.h"
 #include "exclusive_pokemon.h"
 #include "pokemon.h"
@@ -22,12 +22,11 @@ extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_8097670(void);
 extern void LoadGameOptions(void);
-extern void sub_8094C14(void);
+extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
 extern void sub_80950BC(void);
 extern void sub_80958E8(void);
 extern void sub_800CD64(u32, u32);
-extern void InitializeGameOptions(u32);
 extern void SetWindowTitle(char *);
 extern void sub_800DAAC(void);
 extern void SetSavingIconCoords(u32);
@@ -65,7 +64,7 @@ extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
 extern struct OpenedFile *gTitlePaletteFile;
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptions;
 
 extern char gPMDBuildVersion[];
 
@@ -87,7 +86,7 @@ void GameLoop(void)
     sub_8097670();
     InitializePlayTime();
     LoadGameOptions();
-    sub_8094C14();
+    SetWindowBGColor();
     LoadExclusivePokemon();
     LoadFriendAreas();
     LoadItemParameters();
@@ -97,7 +96,7 @@ void GameLoop(void)
     sub_80958E8();
     sub_800CD64(0x8000, 0);
     sub_8012284();
-    InitializeGameOptions(1);
+    InitializeGameOptions(TRUE);
     SetWindowTitle(gPMDBuildVersion);
     sub_800DAAC();
     SetSavingIconCoords(0);
@@ -201,7 +200,7 @@ void xxx_update_stuff(u32 r0)
 {
     xxx_draw_string_80144C4();
     sub_8005838(0, 0);
-    nullsub_8(gUnknown_203B46C->unkA);
+    nullsub_8(gGameOptions->unkA);
     sub_8005180();
     sub_80060EC();
     sub_8011860();
