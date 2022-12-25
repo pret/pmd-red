@@ -16,14 +16,14 @@ extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 extern void ResetSprites(u8 r0);
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 
 void sub_8012A18()
 {
     sub_8011860();
     xxx_draw_string_80144C4();
-    nullsub_8(gGameOptions->unkA);
+    nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();
     sub_800CB20();

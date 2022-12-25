@@ -2308,7 +2308,7 @@ _08074FD0:
 	movs r0, 0x2
 	b _08074FEC
 	.align 2, 0
-_08074FE0: .4byte gGameOptions
+_08074FE0: .4byte gGameOptionsRef
 _08074FE4: .4byte gUnknown_202F378
 _08074FE8:
 	ldr r1, _08075048
@@ -2383,7 +2383,7 @@ sub_8075050:
 	movs r0, 0x2
 	b _0807507C
 	.align 2, 0
-_08075070: .4byte gGameOptions
+_08075070: .4byte gGameOptionsRef
 _08075074: .4byte gUnknown_202F378
 _08075078:
 	ldr r1, _080750D0
@@ -2611,7 +2611,7 @@ UseAttack:
 	b _08075248
 	.align 2, 0
 _08075238: .4byte gUnknown_202F32D
-_0807523C: .4byte gGameOptions
+_0807523C: .4byte gGameOptionsRef
 _08075240: .4byte gUnknown_202F378
 _08075244:
 	ldr r1, _080752D0

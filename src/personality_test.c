@@ -73,7 +73,7 @@ extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
 extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 extern const char gStarterReveal[];
 
@@ -596,12 +596,12 @@ void SetPlayerGender(void)
     if (sub_80144A4(&gender) == 0) {
         if (gender == MALE) {
             gPersonalityTestTracker->playerGender = MALE;
-            gGameOptions->playerGender = MALE;
+            gGameOptionsRef->playerGender = MALE;
         }
         else
         {
             gPersonalityTestTracker->playerGender = FEMALE;
-            gGameOptions->playerGender = FEMALE;
+            gGameOptionsRef->playerGender = FEMALE;
         }
         sub_8099690(0);
         gPersonalityTestTracker->TestState = PERSONALITY_REVEAL;

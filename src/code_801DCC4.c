@@ -49,7 +49,7 @@ extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
 extern const struct UnkTextStruct2 gUnknown_80DBFCC;
 extern const struct UnkTextStruct2 gUnknown_80DBFB0;
@@ -364,7 +364,7 @@ void sub_801DED0(void)
         break;
     case 6:
         // Load our current options?
-        gUnknown_203B25C->newOptions = *gGameOptions;
+        gUnknown_203B25C->newOptions = *gGameOptionsRef;
         sub_801E198(&gUnknown_203B25C->newOptions);
         break;
     case 7:
@@ -507,7 +507,7 @@ void HandleChangeSettingsMenu(void)
     {
         case MENU_OPTION_YES:
             // Save our option changes??
-            *gGameOptions = gUnknown_203B25C->newOptions;
+            *gGameOptionsRef = gUnknown_203B25C->newOptions;
             SetWindowBGColor();
             sub_8099690(0);
             sub_801DD6C(1);

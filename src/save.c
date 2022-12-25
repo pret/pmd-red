@@ -14,7 +14,7 @@
 EWRAM_DATA u32 gUnknown_203B17C;
 EWRAM_DATA char *gUnknown_203B180;
 EWRAM_DATA struct UnkStruct_203B184 *gUnknown_203B184;
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 struct unk_struct
 {
@@ -629,7 +629,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = r0->unk20;
        gUnknown_203B498 = r0->ExclusivePokemon;
        gFriendAreas     = r0->BoughtFriendAreas;
-       gGameOptions = r0->gameOptions;
+       gGameOptionsRef = r0->gameOptions;
        gPlayTimeRef     = r0->playTime;
        return;
     }
@@ -644,7 +644,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gUnknown_203B494 = sub_8097680();
        gUnknown_203B498 = GetExclusivePokemon();
        gFriendAreas     = GetBoughtFriendAreas();
-       gGameOptions = GetGameOptions();
+       gGameOptionsRef = GetGameOptions();
        gPlayTimeRef     = GetPlayTime();
 
 }

@@ -13,7 +13,7 @@
 #include "game_options.h"
 #include "text_util.h"
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 struct unkStruct_80F520C
 {
@@ -240,7 +240,7 @@ void sub_806A1E8(struct DungeonEntity *pokemon)
       entityData = pokemon->entityData;
       bVar3 = (!entityData->isEnemy);
     }
-    if (gGameOptions->FarOffPals == '\0') {
+    if (gGameOptionsRef->FarOffPals == '\0') {
       bVar3 = FALSE;
     }
     if (bVar3 && (sub_8045888(pokemon) == '\0')) {

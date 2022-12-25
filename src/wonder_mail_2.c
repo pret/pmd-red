@@ -93,7 +93,7 @@ struct unkStruct_203B2D8
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 
 extern s32 GetNumPKMNNews(void);
@@ -824,7 +824,7 @@ void sub_802BC08(void)
 void sub_802BC7C(void)
 {
     PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
-    if(gGameOptions->playerGender == FEMALE)
+    if(gGameOptionsRef->playerGender == FEMALE)
     {
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC4C); // She
     }

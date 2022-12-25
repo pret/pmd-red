@@ -64,7 +64,7 @@ extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
 extern struct OpenedFile *gTitlePaletteFile;
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 extern char gPMDBuildVersion[];
 
@@ -200,7 +200,7 @@ void xxx_update_stuff(u32 r0)
 {
     xxx_draw_string_80144C4();
     sub_8005838(0, 0);
-    nullsub_8(gGameOptions->unkA);
+    nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();
     sub_8011860();

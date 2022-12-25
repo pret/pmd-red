@@ -14,7 +14,7 @@ void xxx_call_stop_bgm(void);
 extern bool8 sub_80023E4(u8);
 extern void xxx_call_stop_fanfare_se(u16 r0);
 
-extern struct GameOptions *gGameOptions;
+extern struct GameOptions *gGameOptionsRef;
 
 struct UnkBgStruct
 {
@@ -62,7 +62,7 @@ void sub_801169C(void)
     return_var = sub_80111C4();
     sub_8004AF0(return_var, &(gUnknown_203B0E4->unk4c4c), 0xB0, 0x10, (gUnknown_203B0E4->unk4dcc), 0);
     sub_8005838(0, 0);
-    nullsub_8(gGameOptions->unkA);
+    nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
