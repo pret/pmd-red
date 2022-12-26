@@ -558,12 +558,8 @@ u8 GetPokemonNewsIndex(void)
     return gUnknown_203B2CC->receivedNewsletters[(gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + gUnknown_203B2CC->unk50];
 }
 
-void sub_802B7D0(u32 r0)
+void sub_802B7D0(u8 r0)
 {
-    u8 temp;
-
-    temp = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2CC->unk74, 0, 0);
 
@@ -572,7 +568,7 @@ void sub_802B7D0(u32 r0)
     sub_802B880();
     sub_802B8D4();
 
-    if(temp != 0)
+    if(r0 != 0)
     {
         AddMenuCursorSprite(&gUnknown_203B2CC->unk38);
     }
@@ -922,12 +918,8 @@ u8 sub_802BE74(void) {
   return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + gUnknown_203B2D8->unk1C];
 }
 
-void sub_802BE94(u32 r0)
+void sub_802BE94(u8 r0)
 {
-    u8 temp;
-
-    temp = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2D8->unk40, 0, 0);
 
@@ -936,7 +928,7 @@ void sub_802BE94(u32 r0)
     sub_802BF30();
     CreateMailMenu();
 
-    if(temp != 0)
+    if(r0 != 0)
     {
         AddMenuCursorSprite(&gUnknown_203B2D8->unk4);
     }

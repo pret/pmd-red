@@ -28,7 +28,7 @@ extern struct unkStruct_203B2AC *gUnknown_203B2AC;
 struct unkStruct_3001B60
 {
     u32 unk0;
-    u32 unk4;
+    u32 sortMethod;
     u32 unk8;
     u32 unkC;
     u32 unk10;
@@ -65,9 +65,9 @@ void sub_8024604(void);
 
 extern u8 gUnknown_80DC9A4[];
 
-void CompareInternalNo(s32 param_1, s32 param_2);
-void CompareAlphabetNo(s32 param_1,s32 param_2);
-void CompareNames(s32 param_1,s32 param_2);
+void SortbyInternalNo(s32 param_1, s32 param_2);
+void SortbyAlphabetNo(s32 param_1,s32 param_2);
+void SortbyName(s32 param_1,s32 param_2);
 
 bool8 sub_8024184(struct PokemonStruct *pokemon, u8 area)
 {
@@ -79,37 +79,37 @@ bool8 sub_8024184(struct PokemonStruct *pokemon, u8 area)
 
 void sub_80241A8(void)
 {
-  switch(gUnknown_3001B60->unk4)
+  switch(gUnknown_3001B60->sortMethod)
   {
     case 2:
         if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
-            CompareAlphabetNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+            SortbyAlphabetNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
         }
         if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
-            CompareAlphabetNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+            SortbyAlphabetNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
         }
         break;
     case 3:
         if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
-            CompareNames(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+            SortbyName(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
         }
         if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
-            CompareNames(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+            SortbyName(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
         }
         break;
     case 1:
         if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
-            CompareInternalNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+            SortbyInternalNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
         }
         if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
-            CompareInternalNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+            SortbyInternalNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
         }
         break;
   }
 }
 
 
-void CompareInternalNo(s32 param_1, s32 param_2)
+void SortbyInternalNo(s32 param_1, s32 param_2)
 {
   s16 *r4;
   s32 iVar4;
@@ -143,7 +143,7 @@ void CompareInternalNo(s32 param_1, s32 param_2)
   }
 }
 
-void CompareAlphabetNo(s32 param_1,s32 param_2)
+void SortbyAlphabetNo(s32 param_1,s32 param_2)
 {
   s16 *r4;
   s32 iVar4;
@@ -177,7 +177,7 @@ void CompareAlphabetNo(s32 param_1,s32 param_2)
   }
 }
 
-void CompareNames(s32 param_1,s32 param_2)
+void SortbyName(s32 param_1,s32 param_2)
 {
   s16 *r4;
   s32 iVar4;

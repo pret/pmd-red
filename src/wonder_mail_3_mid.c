@@ -834,18 +834,14 @@ s16 sub_802F90C(void)
     return gUnknown_203B314->unk0[(gUnknown_203B314->unkDA * gUnknown_203B314->unkD8) + gUnknown_203B314->unkD4];
 }
 
-void sub_802F938(u32 r0)
+void sub_802F938(u8 r0)
 {
-    u8 r0_u8;
-
-    r0_u8 = r0;
-
     gUnknown_203B314->unkDE = sub_802FBF4();
     sub_8013984(&gUnknown_203B314->unkBC);
     sub_802F9C0();
     sub_802FA50();
 
-    if(r0_u8 != 0)
+    if(r0 != 0)
         AddMenuCursorSprite(&gUnknown_203B314->unkBC);
 }
 

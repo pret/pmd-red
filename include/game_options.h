@@ -5,13 +5,13 @@ struct GameOptions
 {
     // TODO: find where Controls/Touch Screen are in this structure in PMD Blue
 
-    /* 0x0 */ u8 dungeonSpeed; // 0 - Slow, 1 - Fast
-    /* 0x1 */ u8 FarOffPals; // 0 - Self, 1 - Lock
-    /* 0x2 */ bool8 damageTurn; // 0 - No, 1 - Yes
-    /* 0x3 */ bool8 gridEnable; // 0 - Off, 1 - on
-    /* 0x4 */ u8 mapOption; // 0 - Off, 1 - Clear, 2 - Shade
+    /* 0x0 */ u8 dungeonSpeed;
+    /* 0x1 */ u8 FarOffPals;
+    /* 0x2 */ bool8 damageTurn;
+    /* 0x3 */ bool8 gridEnable;
+    /* 0x4 */ u8 mapOption;
     /* 0x5 */ u8 fill5[3];
-    /* 0x8 */ u8 windowColor; // 0 - Blue, 1 - Red, 2 - Green
+    /* 0x8 */ u8 windowColor; 
     /* 0x9 */ u8 unk9; // maybe Controls?
     /* 0xA */ u8 unkA; // maybe Touch Screen?
     /* 0xB */ u8 playerGender;

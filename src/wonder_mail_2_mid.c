@@ -240,19 +240,15 @@ u8 sub_802C26C(void)
     return gUnknown_203B2E0->unk0[(gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24) + gUnknown_203B2E0->unk20];
 }
 
-void sub_802C28C(u32 r0)
+void sub_802C28C(u8 r0)
 {
-    u8 r0_u8;
-
-    r0_u8 = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
     gUnknown_203B2E0->unk2A = sub_802C474();
     sub_8013984(&gUnknown_203B2E0->unk8);
     sub_802C328();
     sub_802C39C();
-    if(r0_u8)
+    if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E0->unk8);
 }
 

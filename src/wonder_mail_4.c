@@ -134,18 +134,14 @@ u8 sub_80307EC(void)
     return gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + gUnknown_203B320->unk3C];
 }
 
-void sub_8030810(u32 r0)
+void sub_8030810(u8 r0)
 {
-    u8 r0_u8;
-
-    r0_u8 = r0; // cast needed..
-
     gUnknown_203B320->unk46 = sub_8030A74();
     sub_8013984(&gUnknown_203B320->unk24);
 
     sub_80308A0();
     sub_803092C();
-    if(r0_u8 != 0)
+    if(r0 != 0)
         AddMenuCursorSprite(&gUnknown_203B320->unk24);
 }
 

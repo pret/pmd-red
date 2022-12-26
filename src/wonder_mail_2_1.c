@@ -278,17 +278,15 @@ u8 sub_802C620(void)
     return gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + gUnknown_203B2E8->unk20];
 }
 
-void sub_802C640(u32 r0)
+void sub_802C640(u8 r0)
 {
-    u8 r0_u8;
-    r0_u8 = r0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
     gUnknown_203B2E8->unk2A = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
     sub_802C750();
-    if(r0_u8)
+    if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E8->unk8);
 }
 
