@@ -13,9 +13,6 @@
 
 #include <stddef.h>
 
-#define GREEN_KECLEON_SHOP_SIZE 8
-#define PURPLE_KECLEON_SHOP_SIZE 4
-
 extern struct TeamInventory *gTeamInventory_203B460;
 extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
@@ -78,9 +75,9 @@ void InitializeMoneyItems(void)
     gTeamInventory_203B460->teamStorage[i] = 0;
   }
 
-  for(i = 0; i < 8; i++)
+  for(i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
   {
-    xxx_init_unk230_substruct(i);
+    InitKecleonItemShopItem(i);
   }
   gTeamInventory_203B460->teamMoney = 0;
   gTeamInventory_203B460->teamSavings = 0;
@@ -957,98 +954,96 @@ void MoveToStorage(struct ItemSlot* slot)
   }
 }
 
-s32 xxx_count_inv_unk230()
+s32 CountKecleonItemShopItems(void)
 {
   s32 i;
   s32 counter = 0;
-  for (i = 0; i < 8; i++) {
-    if (gTeamInventory_203B460->unk230[i].itemIndex) {
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+    if (gTeamInventory_203B460->kecleonItemShopItems[i].itemIndex) {
       counter++;
     }
   }
   return counter;
 }
 
-void xxx_init_unk230_substruct(u8 i)
+void InitKecleonItemShopItem(u8 index)
 {
   struct HeldItem* unk230;
 
-  unk230 = &gTeamInventory_203B460->unk230[i];
-  unk230->itemIndex = 0;
+  unk230 = &gTeamInventory_203B460->kecleonItemShopItems[index];
+  unk230->itemIndex = ITEM_ID_NOTHING;
   unk230->numItems = 0;
 }
 
-struct HeldItem* xxx_get_inv_unk230_at_809185C(u8 i)
+struct HeldItem* GetKecleonItemShopItem(u8 i)
 {
-  return &gTeamInventory_203B460->unk230[i];
+  return &gTeamInventory_203B460->kecleonItemShopItems[i];
 }
 
-void xxx_fill_unk230_gaps()
+void FillKecleonItemShopGaps(void)
 {
-  // fill unk230 gaps
-  // basically the same as FillInventoryGaps
   s32 slot_checking = 0;
   s32 last_filled = 0;
 
   do {
-    while (slot_checking < 8) {
-      if (gTeamInventory_203B460->unk230[slot_checking].itemIndex) {
+    while (slot_checking < MAX_KECLEON_ITEM_SHOP_ITEMS) {
+      if (gTeamInventory_203B460->kecleonItemShopItems[slot_checking].itemIndex) {
         break;
       }
       // find next empty slot
       slot_checking++;
     }
 
-    if (slot_checking == 8) {
+    if (slot_checking == MAX_KECLEON_ITEM_SHOP_ITEMS) {
       break;
     }
 
     if (slot_checking > last_filled) {
       // shift it down
-      gTeamInventory_203B460->unk230[last_filled] = gTeamInventory_203B460->unk230[slot_checking];
+      gTeamInventory_203B460->kecleonItemShopItems[last_filled] = gTeamInventory_203B460->kecleonItemShopItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
   } while (1);
 
   // clear out the rest of the slots
-  for (; last_filled < 8; last_filled++) {
-    xxx_init_unk230_substruct(last_filled);
+  for (; last_filled < MAX_KECLEON_ITEM_SHOP_ITEMS; last_filled++) {
+    InitKecleonItemShopItem(last_filled);
   }
 }
 
-void SortGreenKecleonShopInventory() {
+void SortGreenKecleonShopInventory(void) {
   s32 i;
 
-  for (i = 0; i < 7; i++) {
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS - 1; i++) {
     s32 j;
-    for (j = i + 1; j < 8; j++) {
-      s32 order_i = GetItemOrder(gTeamInventory_203B460->unk230[i].itemIndex);
-      s32 order_j = GetItemOrder(gTeamInventory_203B460->unk230[j].itemIndex);
-      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk230[i].numItems < gTeamInventory_203B460->unk230[j].numItems)) {
-        struct HeldItem str_i = gTeamInventory_203B460->unk230[i];
-        gTeamInventory_203B460->unk230[i] = gTeamInventory_203B460->unk230[j];
-        gTeamInventory_203B460->unk230[j] = str_i;
+    for (j = i + 1; j < MAX_KECLEON_ITEM_SHOP_ITEMS; j++) {
+      s32 order_i = GetItemOrder(gTeamInventory_203B460->kecleonItemShopItems[i].itemIndex);
+      s32 order_j = GetItemOrder(gTeamInventory_203B460->kecleonItemShopItems[j].itemIndex);
+      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->kecleonItemShopItems[i].numItems < gTeamInventory_203B460->kecleonItemShopItems[j].numItems)) {
+        struct HeldItem str_i = gTeamInventory_203B460->kecleonItemShopItems[i];
+        gTeamInventory_203B460->kecleonItemShopItems[i] = gTeamInventory_203B460->kecleonItemShopItems[j];
+        gTeamInventory_203B460->kecleonItemShopItems[j] = str_i;
       }
     }
   }
 }
 
-void ChooseKecleonShopInventory(u8 a1) {
+void ChooseKecleonShopInventory(u8 index) {
   u32 data[4];
   s32 i;
 
   memcpy(data, gUnknown_81097E8, 4 * sizeof(u32));
-  for (i = 0; i < GREEN_KECLEON_SHOP_SIZE; i++) {
-    xxx_init_unk230_substruct(i);
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+    InitKecleonItemShopItem(i);
   }
-  for (i = 0; i < GREEN_KECLEON_SHOP_SIZE; i++) {
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
     s32 rand_1 = RandomCapped(9999);
     s32 rand_2 = RandomCapped(9999);
-    AddGreenKecleonShopItem(sub_8091E94(data[a1], rand_1, rand_2));
+    AddGreenKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
   }
   SortGreenKecleonShopInventory();
-  ChoosePurpleKecleonShopInventory(a1);
+  ChoosePurpleKecleonShopInventory(index);
 }
 
 bool8 AddGreenKecleonShopItem(u8 itemIndex) {
@@ -1056,92 +1051,92 @@ bool8 AddGreenKecleonShopItem(u8 itemIndex) {
   s32 i;
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
-  for (i = 0; i < 8; i++) {
-    if (!gTeamInventory_203B460->unk230[i].itemIndex) {
-      gTeamInventory_203B460->unk230[i] = held;
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+    if (!gTeamInventory_203B460->kecleonItemShopItems[i].itemIndex) {
+      gTeamInventory_203B460->kecleonItemShopItems[i] = held;
       return FALSE;
     }
   }
   return TRUE;
 }
 
-u32 xxx_count_non_empty_inv_unk250_8091A48() {
+u32 CountKecleonWareShopItems(void) {
   s32 i;
   u32 count = 0;
-  for (i = 0; i < 4; i++) {
-    if (gTeamInventory_203B460->unk250[i].itemIndex) {
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+    if (gTeamInventory_203B460->kecleonWareShopItems[i].itemIndex) {
       count++;
     }
   }
   return count;
 }
 
-void xxx_init_inv_unk250_at_8091A74(u8 index) {
-  struct HeldItem* unk250 = &gTeamInventory_203B460->unk250[index];
-  unk250->itemIndex = 0;
+void InitKecleonWareShopItem(u8 index) {
+  struct HeldItem* unk250 = &gTeamInventory_203B460->kecleonWareShopItems[index];
+  unk250->itemIndex = ITEM_ID_NOTHING;
   unk250->numItems = 0;
 }
 
-struct HeldItem* xxx_get_unk250_at_8091A90(u8 index) {
-    return &gTeamInventory_203B460->unk250[index];
+struct HeldItem* GetKecleonWareShopItem(u8 index) {
+    return &gTeamInventory_203B460->kecleonWareShopItems[index];
 }
 
-void xxx_fill_inv_unk250_gaps_8091AA8(void) {
+void FillKecleonWareShopGaps(void) {
   s32 slot_checking = 0;
   s32 last_filled = 0;
 
   do {
-    while (slot_checking < 4) {
-      if (gTeamInventory_203B460->unk250[slot_checking].itemIndex != ITEM_ID_NOTHING) {
+    while (slot_checking < MAX_KECLEON_WARE_SHOP_ITEMS) {
+      if (gTeamInventory_203B460->kecleonWareShopItems[slot_checking].itemIndex != ITEM_ID_NOTHING) {
         break;
       }
       slot_checking++;
     }
 
-    if (slot_checking == 4) {
+    if (slot_checking == MAX_KECLEON_WARE_SHOP_ITEMS) {
       break;
     }
 
     if (slot_checking > last_filled) {
       // shift it down
-      gTeamInventory_203B460->unk250[last_filled] = gTeamInventory_203B460->unk250[slot_checking];
+      gTeamInventory_203B460->kecleonWareShopItems[last_filled] = gTeamInventory_203B460->kecleonWareShopItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
   } while (1);
 
   // clear out the rest of the slots
-  for (; last_filled < 4; last_filled++) {
-    xxx_init_inv_unk250_at_8091A74(last_filled);
+  for (; last_filled < MAX_KECLEON_WARE_SHOP_ITEMS; last_filled++) {
+    InitKecleonWareShopItem(last_filled);
   }
 }
 
-void SortPurpleKecleonShopInventory() {
+void SortPurpleKecleonShopInventory(void) {
   s32 i;
 
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS - 1; i++) {
     s32 j;
-    for (j = i + 1; j < 4; j++) {
-      s32 order_i = GetItemOrder(gTeamInventory_203B460->unk250[i].itemIndex);
-      s32 order_j = GetItemOrder(gTeamInventory_203B460->unk250[j].itemIndex);
-      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->unk250[i].numItems < gTeamInventory_203B460->unk250[j].numItems)) {
-        struct HeldItem str_i = gTeamInventory_203B460->unk250[i];
-        gTeamInventory_203B460->unk250[i] = gTeamInventory_203B460->unk250[j];
-        gTeamInventory_203B460->unk250[j] = str_i;
+    for (j = i + 1; j < MAX_KECLEON_WARE_SHOP_ITEMS; j++) {
+      s32 order_i = GetItemOrder(gTeamInventory_203B460->kecleonWareShopItems[i].itemIndex);
+      s32 order_j = GetItemOrder(gTeamInventory_203B460->kecleonWareShopItems[j].itemIndex);
+      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->kecleonWareShopItems[i].numItems < gTeamInventory_203B460->kecleonWareShopItems[j].numItems)) {
+        struct HeldItem str_i = gTeamInventory_203B460->kecleonWareShopItems[i];
+        gTeamInventory_203B460->kecleonWareShopItems[i] = gTeamInventory_203B460->kecleonWareShopItems[j];
+        gTeamInventory_203B460->kecleonWareShopItems[j] = str_i;
       }
     }
   }
 }
 
 void ChoosePurpleKecleonShopInventory(u8 index) {
-  u32 data[4];
+  u32 data[MAX_KECLEON_WARE_SHOP_ITEMS];
   s32 i;
 
   memcpy(data, gUnknown_81097F8, 4 * sizeof(u32));
-  for (i = 0; i < PURPLE_KECLEON_SHOP_SIZE; i++) {
-    xxx_init_inv_unk250_at_8091A74(i);
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+    InitKecleonWareShopItem(i);
   }
-  for (i = 0; i < PURPLE_KECLEON_SHOP_SIZE; i++) {
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
     s32 rand_1 = RandomCapped(9999);
     s32 rand_2 = RandomCapped(9999);
     AddPurpleKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
@@ -1154,9 +1149,9 @@ bool8 AddPurpleKecleonShopItem(u8 itemIndex) {
   s32 i;
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
-  for (i = 0; i < 4; i++) {
-    if (!gTeamInventory_203B460->unk250[i].itemIndex) {
-      gTeamInventory_203B460->unk250[i] = held;
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+    if (!gTeamInventory_203B460->kecleonWareShopItems[i].itemIndex) {
+      gTeamInventory_203B460->kecleonWareShopItems[i] = held;
       return FALSE;
     }
   }
@@ -1175,11 +1170,11 @@ s32 SaveTeamInventory(u8* unk0, u32 size)
   for (i = 0; i < STORAGE_SIZE; i++) {
     SaveIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
-  for (i = 0; i < 8; i++) {
-    SaveHeldItem(&unk, &gTeamInventory_203B460->unk230[i]);
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+    SaveHeldItem(&unk, &gTeamInventory_203B460->kecleonItemShopItems[i]);
   }
-  for (i = 0; i < 4; i++) {
-    SaveHeldItem(&unk, &gTeamInventory_203B460->unk250[i]);
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+    SaveHeldItem(&unk, &gTeamInventory_203B460->kecleonWareShopItems[i]);
   }
   SaveIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
   SaveIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
@@ -1199,11 +1194,11 @@ s32 RestoreTeamInventory(u8 *unk0, u32 size)
   for (i = 0; i < STORAGE_SIZE; i++) {
     RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
   }
-  for (i = 0; i < 8; i++) {
-    RestoreHeldItem(&unk, &gTeamInventory_203B460->unk230[i]);
+  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+    RestoreHeldItem(&unk, &gTeamInventory_203B460->kecleonItemShopItems[i]);
   }
-  for (i = 0; i < 4; i++) {
-    RestoreHeldItem(&unk, &gTeamInventory_203B460->unk250[i]);
+  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+    RestoreHeldItem(&unk, &gTeamInventory_203B460->kecleonWareShopItems[i]);
   }
   RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
   RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
