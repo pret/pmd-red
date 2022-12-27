@@ -85,7 +85,7 @@ extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern u8 sub_800D588(void);
-extern s32 sub_8095190(void);
+extern s32 FindOpenMailSlot(void);
 
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
@@ -209,7 +209,7 @@ void sub_8033A2C(void)
             case 3:
                 gUnknown_203B33C->unk40 = 3;
                 gUnknown_203B33C->unk528 = 3;
-                if(sub_8095190() == -1)
+                if(FindOpenMailSlot() == -1)
                     SetFriendRescueMenuState(0xF);
                 else
                     SetFriendRescueMenuState(0xE);

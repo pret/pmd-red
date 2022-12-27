@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "memory.h"
@@ -55,9 +56,9 @@ void sub_8095118(void)
 
     // NOTE: we use a temp variable here to force the match
     unused = &gUnknown_203B480[iVar1];
-    gUnknown_203B480[iVar1].mailType = 0;
+    gUnknown_203B480[iVar1].mailType = WONDER_MAIL_TYPE_NONE;
     unused = &gUnknown_203B480[iVar1];
-    gUnknown_203B480[iVar1].unk20.itemIndex = 0;
+    gUnknown_203B480[iVar1].unk20.itemIndex = ITEM_ID_NOTHING;
     unused = &gUnknown_203B480[iVar1];
     gUnknown_203B480[iVar1].unk2D = 0;
   }
@@ -75,12 +76,12 @@ void nullsub_207(void)
 {
 }
 
-s32 sub_8095190(void)
+s32 FindOpenMailSlot(void)
 {
-  int index;
+  s32 index;
   
   for(index = 2; index < 0x20; index++){
-    if(gUnknown_203B480[index].mailType == 0)
+    if(gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_NONE)
         return index;
   }
   return -1;

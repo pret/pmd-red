@@ -10,8 +10,7 @@
 struct unkStruct_203B320
 {
     // size: 0xC4
-    u8 unk0[4];
-    u8 fill4[0x20 - 4];
+    u8 unk0[0x20];
     u32 wonderMailType;
     u32 unk24;
     u8 fill28[0x3C - 0x28];
@@ -273,7 +272,7 @@ void sub_803092C(void)
         case WONDER_MAIL_TYPE_AOK:
             local.unk3C[11] = 3;
             break;
-        case 5:
+        case WONDER_MAIL_TYPE_THANK_YOU:
             local.unk3C[11] = 4;
             break;
         case 1:
@@ -296,11 +295,11 @@ s32 sub_8030A74(void)
   s32 index;
   s32 count = 0;
   switch(gUnknown_203B320->wonderMailType) {
-    case 0:
+    case WONDER_MAIL_TYPE_NONE:
         for (index = 0; index < 0x20; index++)
         {
             struct unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType != 0) {
+            if (p->mailType != WONDER_MAIL_TYPE_NONE) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -356,11 +355,11 @@ s32 sub_8030A74(void)
             }
         }
         break;
-    case 5:
+    case WONDER_MAIL_TYPE_THANK_YOU:
         for (index = 0; index < 0x20; index++)
         {
             struct unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 5) {
+            if (p->mailType == WONDER_MAIL_TYPE_THANK_YOU) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -386,10 +385,10 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
   s32 index;
   
   switch(wonderMailType) {
-    case 0:
+    case WONDER_MAIL_TYPE_NONE:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType != 0) {
+            if (gUnknown_203B480[index].mailType != WONDER_MAIL_TYPE_NONE) {
                 return FALSE;
             }
         }
@@ -435,10 +434,10 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
         }
         break;
 
-    case 5:
+    case WONDER_MAIL_TYPE_THANK_YOU:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 5) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_THANK_YOU) {
                 return FALSE;
             }
         }

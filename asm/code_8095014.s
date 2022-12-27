@@ -9,7 +9,7 @@
 sub_80951BC:
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8095190
+	bl FindOpenMailSlot
 	adds r2, r0, 0
 	movs r0, 0x1
 	negs r0, r0

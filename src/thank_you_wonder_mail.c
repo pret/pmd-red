@@ -1145,7 +1145,7 @@ void HandleMailCommunicationMenu(void)
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
-                        mail = sub_8095228(sub_80953D4(5));
+                        mail = sub_8095228(sub_80953D4(WONDER_MAIL_TYPE_THANK_YOU));
                         if(mail->unk20.itemIndex != ITEM_ID_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);

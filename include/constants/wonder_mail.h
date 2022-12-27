@@ -27,6 +27,7 @@ enum WonderMailMethod {
 };
 
 enum WonderMailTypes {
+    WONDER_MAIL_TYPE_NONE = 0,
     WONDER_MAIL_TYPE_SOS = 1,
     //WONDER_MAIL_TYPE_SOS = 2, // SOS MAIL is 1 and 2?
     WONDER_MAIL_TYPE_AOK = 4,

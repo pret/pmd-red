@@ -663,16 +663,16 @@ void sub_802B8D4(void)
 
 s32 GetNumPKMNNews(void)
 {
-    s32 iVar2;
+    s32 index;
     s32 newsCount;
 
     newsCount = 0;
 
-    for(iVar2 = 0; iVar2 < NUM_POKEMON_NEWS; iVar2++)
+    for(index = 0; index < NUM_POKEMON_NEWS; index++)
     {
-        if(CheckPKMNNewsSlot(iVar2))
+        if(CheckPKMNNewsSlot(index))
         {
-            gUnknown_203B2CC->receivedNewsletters[newsCount] = iVar2;
+            gUnknown_203B2CC->receivedNewsletters[newsCount] = index;
             newsCount++;
         }
     }
@@ -681,11 +681,11 @@ s32 GetNumPKMNNews(void)
 
 bool8 HasNoPKMNNews(void)
 {
-    s32 iVar2;
+    s32 index;
 
-    for(iVar2 = 0; iVar2 < NUM_POKEMON_NEWS; iVar2++)
+    for(index = 0; index < NUM_POKEMON_NEWS; index++)
     {
-        if(CheckPKMNNewsSlot(iVar2))
+        if(CheckPKMNNewsSlot(index))
         {
             return FALSE;
         }

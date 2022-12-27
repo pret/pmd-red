@@ -343,7 +343,7 @@ void sub_8039B58(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    if (gUnknown_203B3E8->wonderMailStatus == 0) {
+    if (gUnknown_203B3E8->wonderMailStatus == COMMS_GOOD) {
       switch(gUnknown_203B3E8->unk24C){
         case 9:
             SetWonderMailMainMenuState(WONDER_MAIL_SENT);
@@ -533,7 +533,7 @@ void nullsub_54(void)
 
 void WonderMailMainMenuCallback(void)
 {
-  int iVar2;
+  int linkStatus;
   struct unkStruct_803B344 *temp;
 
   switch(gUnknown_203B3E8->state) {
@@ -601,11 +601,11 @@ void WonderMailMainMenuCallback(void)
         sub_80141B4(gUnknown_80E7C48,0,0,0);
         break;
     case 9:
-        gUnknown_203B3E8->wonderMailStatus = 0;
+        gUnknown_203B3E8->wonderMailStatus = COMMS_GOOD;
         sub_8011830();
-        iVar2 = sub_8037B28(gUnknown_203B3E8->unk24C);
-        gUnknown_203B3E8->wonderMailStatus = iVar2;
-        if (iVar2 == 0) {
+        linkStatus = sub_8037B28(gUnknown_203B3E8->unk24C);
+        gUnknown_203B3E8->wonderMailStatus = linkStatus;
+        if (linkStatus == COMMS_GOOD) {
             switch(gUnknown_203B3E8->unk24C)
             {
                 case 9:
@@ -624,14 +624,14 @@ void WonderMailMainMenuCallback(void)
                     gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
                     break;
             }
-            if (gUnknown_203B3E8->wonderMailStatus == 0)
+            if (gUnknown_203B3E8->wonderMailStatus == COMMS_GOOD)
             {
                 switch(gUnknown_203B3E8->unk24C)
                 {
                     case 9:
                     case 10:
                         gUnknown_203B3E8->wonderMailStatus = sub_80381F4(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
-                        if (sub_800D588() != '\0') {
+                        if (sub_800D588() != 0) {
                             gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->unk308;
                         }
                         else {

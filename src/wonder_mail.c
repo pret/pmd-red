@@ -28,7 +28,7 @@ extern u8 sub_80A2824(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
-extern s32 sub_8095190(void);
+extern s32 FindOpenMailSlot(void);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
@@ -844,7 +844,7 @@ void sub_8028BF0(void)
         case 0:
             gUnknown_203B2C0->unk40 = 3;
             gUnknown_203B2C0->unk538 = 0;
-            if(sub_8095190() != -1)
+            if(FindOpenMailSlot() != -1)
             {
                 sub_8028B04(8);
             }
@@ -949,7 +949,7 @@ void sub_8028D4C()
             }
             break;
         case 6:
-            if(HasNoWonderMailType(4))
+            if(HasNoWonderMailType(WONDER_MAIL_TYPE_AOK))
             {
                 sub_8028B04(14);
             }
@@ -959,7 +959,7 @@ void sub_8028D4C()
             }
             break;
         case 7:
-            if(HasNoWonderMailType(0))
+            if(HasNoWonderMailType(WONDER_MAIL_TYPE_NONE))
             {
                 sub_8028B04(16);
             }
