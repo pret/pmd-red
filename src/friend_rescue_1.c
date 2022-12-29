@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/wonder_mail.h"
+#include "constants/communication_error_codes.h"
 #include "text.h"
 #include "pokemon.h"
 #include "save.h"
@@ -117,42 +118,42 @@ void PrintFriendRescueError(u32 status)
 {
     switch(status)
     {
-        case 0:
+        case COMMS_GOOD:
             break;
-        case 3:
+        case COMMS_INCORRECT_NUM_SYSTEMS:
             sub_80141B4(gUnknown_80E44A4, 0, 0, 0x101);
             break;
-        case 2:
+        case COMMS_NO_RESPONSE:
             sub_80141B4(gUnknown_80E4500, 0, 0, 0x101);
             break;
-        case 4:
+        case COMMS_DIFFERENT_MODES:
             sub_80141B4(gUnknown_80E4550, 0, 0, 0x101);
             break;
-        case 6:
+        case COMMS_NO_ROOM_STORAGE:
             sub_80141B4(gUnknown_80E45B4, 0, 0, 0x101);
             break;
-        case 7:
+        case COMMS_DUPLICATE_MAIL:
             sub_80141B4(gUnknown_80E460C, 0, 0, 0x101);
             break;
-        case 8:
+        case COMMS_MAIL_SENT_ALREADY:
             sub_80141B4(gUnknown_80E4650, 0, 0, 0x101);
             break;
-        case 9:
+        case COMMS_NOT_ELIGIBLE_1:
             sub_80141B4(gUnknown_80E468C, 0, 0, 0x101);
             break;
-        case 10:
+        case COMMS_FRIEND_NOT_ELIGIBLE:
             sub_80141B4(gUnknown_80E46C8, 0, 0, 0x101);
             break;
-        case 11:
+        case COMMS_NOT_ELIGIBLE_2:
             sub_80141B4(gUnknown_80E4704, 0, 0, 0x101);
             break;
-        case 12:
+        case COMMS_FRIEND_NOT_ELIGIBLE_2:
             sub_80141B4(gUnknown_80E4744, 0, 0, 0x101);
             break;
         case 16:
             sub_80141B4(gUnknown_80E4788, 0, 0, 0x101);
             break;
-        case 13:
+        case COMMS_NO_ROOM_MAIL:
             sub_80141B4(gUnknown_80E47D8, 0, 0, 0x101);
             break;
         case 1:
@@ -160,7 +161,7 @@ void PrintFriendRescueError(u32 status)
         case 14:
             sub_80141B4(gUnknown_80E4480, 0, 0, 0x101);
             break;
-        case 15:
+        case COMMS_NOT_READY:
             sub_80141B4(gUnknown_80E482C, 0, 0, 0x101);
             break;
     }
@@ -345,7 +346,7 @@ void sub_8033CAC(void)
     u32 test_var;
     if(sub_80144A4(&temp) == 0)
     {
-        if(gUnknown_203B33C->status == 0)
+        if(gUnknown_203B33C->status == COMMS_GOOD)
         {
             switch(gUnknown_203B33C->unk528)
             {
@@ -430,28 +431,28 @@ void sub_8033D94(void)
 void sub_8033DBC(void)
 {
     u32 return_var;
-    u32 input_var;
-    struct unkStruct_203B480 temp;
-    struct unkStruct_203B480 *temp2;
+    u32 mailMode;
+    struct unkStruct_203B480 mail;
+    struct unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
     switch(return_var)
     {
         case 3:
-                input_var = 0xffdc;
+                mailMode = 0xffdc;
                 switch(gUnknown_203B33C->unk528)
                 {
                     case 3:
-                        input_var = PASSWORD_ENTRY_SOS_MAIL_MODE;
+                        mailMode = PASSWORD_ENTRY_SOS_MAIL_MODE;
                         break;
                     case 0x12:
-                        input_var = PASSWORD_ENTRY_AOK_MAIL_MODE;
+                        mailMode = PASSWORD_ENTRY_AOK_MAIL_MODE;
                         break;
                     default:
                         break;
                 }
-                switch(sub_8039068(input_var, gUnknown_203B33C->passwordBuffer, &temp))
+                switch(sub_8039068(mailMode, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
@@ -466,9 +467,9 @@ void sub_8033DBC(void)
                         SetFriendRescueMenuState(8);
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
-                        sub_8095274(temp.unk10);
-                        temp.mailType = 2;
-                        sub_80951BC(&temp);
+                        sub_8095274(mail.unk10);
+                        mail.mailType = 2;
+                        sub_80951BC(&mail);
                         sub_80141B4(gUnknown_80E4928, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x16);
                         break;
@@ -481,10 +482,10 @@ void sub_8033DBC(void)
                         SetFriendRescueMenuState(8);
                         break;
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
-                        temp.mailType = 5;
-                        sub_80951FC(&temp);
-                        temp2 = sub_8095228(sub_809539C(1, temp.unk10));
-                        temp2->mailType = 7;
+                        mail.mailType = 5;
+                        sub_80951FC(&mail);
+                        mail2 = sub_8095228(sub_809539C(1, mail.unk10));
+                        mail2->mailType = 7;
                         MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
@@ -1056,7 +1057,7 @@ void sub_8034848(void)
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.itemFlags = 0;
 
-        if(gUnknown_203B33C->status == 0)
+        if(gUnknown_203B33C->status == COMMS_GOOD)
         {
             switch(gUnknown_203B33C->unk40)
             {
@@ -1086,7 +1087,7 @@ void sub_80348C4(void)
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.itemFlags = 0;
 
-        if(gUnknown_203B33C->status == 0)
+        if(gUnknown_203B33C->status == COMMS_GOOD)
         {
             switch(gUnknown_203B33C->unk40)
             {
@@ -1328,15 +1329,15 @@ void sub_8034D54(void)
 void sub_8034D74(void)
 {
     u32 return_var;
-    struct unkStruct_203B480 temp;
-    struct unkStruct_203B480 *temp2;
+    struct unkStruct_203B480 mail;
+    struct unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
     switch(return_var)
     {
         case 3:
-                switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE, gUnknown_203B33C->passwordBuffer, &temp))
+                switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
@@ -1351,10 +1352,10 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(0x6B);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                        temp2 = sub_8095228(sub_809539C(4, temp.unk10));
-                        *temp2 = temp;
-                        temp2->mailType = 6;
-                        gUnknown_203B33C->unk420 = temp.unk10;
+                        mail2 = sub_8095228(sub_809539C(4, mail.unk10));
+                        *mail2 = mail;
+                        mail2->mailType = 6;
+                        gUnknown_203B33C->unk420 = mail.unk10;
                         SetFriendRescueMenuState(0x6D);
                         break;
                     case 7:

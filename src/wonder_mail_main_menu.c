@@ -394,14 +394,14 @@ void PrintWonderMailMainMenuError(u32 status)
         case COMMS_NOT_READY: // "No response from your friend. Make sure sender and receiver are ready"
             sub_80141B4(gUnknown_80E7A48, 0, 0, 0x101);
             break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
+        case COMMS_NO_ROOM_STORAGE:
+        case COMMS_DUPLICATE_MAIL:
+        case COMMS_MAIL_SENT_ALREADY:
+        case COMMS_NOT_ELIGIBLE_1:
+        case COMMS_FRIEND_NOT_ELIGIBLE:
+        case COMMS_NOT_ELIGIBLE_2:
+        case COMMS_FRIEND_NOT_ELIGIBLE_2:
+        case COMMS_NO_ROOM_MAIL:
         default:
             // "Communication Error"
             sub_80141B4(gUnknown_80E7914, 0, 0, 0x101);
