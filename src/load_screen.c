@@ -388,27 +388,27 @@ void DrawLoadScreenText(void)
 void sub_80397B4(void)
 {
   struct OpenedFile *clmkFile;
-  int iVar3;
-  int iVar4;
-  s32 other_arg;
+  int index;
+  int x;
+  s32 y;
 
   clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
 
-  for(iVar3 = 0; iVar3 < 64; iVar3++)
+  for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(iVar3 + 176,*(int *)((clmkFile->data) + 4) + iVar3 * 4);
+    SetBGPaletteBufferColorArray(index + 176,*(int *)((clmkFile->data) + 4) + index * 4);
   }
 
-  iVar4 = 8;
-  other_arg = 0x49;
+  x = 8;
+  y = 0x49;
 
   // Draw the 12 legendary icons
-  for(iVar3 = 0; iVar3 < 12; iVar3++)
+  for(index = 0; index < 12; index++)
   {
-    if (sub_80023E4(gUnknown_203B3B8[iVar3])) {
-      sub_8007E20(0,iVar4,other_arg,0x10,0x10,*(int *)(clmkFile->data) + iVar3 * 0x80,
-                  gUnknown_203B388[iVar3]);
-      iVar4 += 16;
+    if (sub_80023E4(gUnknown_203B3B8[index])) {
+      sub_8007E20(0,x,y,0x10,0x10,*(int *)(clmkFile->data) + index * 0x80,
+                  gUnknown_203B388[index]);
+      x += 16;
     }
   }
   CloseFile(clmkFile);

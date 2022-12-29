@@ -5733,7 +5733,7 @@ _0809BD84:
 	bl sub_8001658
 	cmp r0, 0
 	bne _0809BDB2
-	bl sub_80247B4
+	bl HasEvolutionCompleted
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BDB2
