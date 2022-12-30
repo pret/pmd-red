@@ -424,6 +424,8 @@ SECTIONS {
         src/debug.o(.rodata);
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/friend_area_action_menu.o(.rodata);
+        src/friend_area_action_menu_1.o(.rodata);
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);

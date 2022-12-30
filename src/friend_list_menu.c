@@ -99,7 +99,7 @@ void sub_80268CC(void)
         if (sub_808D750(gUnknown_203B2B8->pokeSpecies)) {
 
 #ifdef NONMATCHING
-            puVar3 = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
+            pokeStruct = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
 #else
             register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2B8->pokeSpecies]);
             struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;

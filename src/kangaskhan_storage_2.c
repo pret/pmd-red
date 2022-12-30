@@ -210,19 +210,19 @@ void sub_8017928(void)
 
 void sub_80179A8(void)
 {
-  s32 iVar1;
+  s32 index;
   s32 menuAction;
   
   if (sub_80144A4(&menuAction) == 0) {
     switch(menuAction)
     {
       case 4:
-      for(iVar1 = 0; iVar1 < INVENTORY_SIZE; iVar1++)
+      for(index = 0; index < INVENTORY_SIZE; index++)
       {
-        if (sub_801AED0(iVar1) != 0) {
-          MoveToStorage(&gTeamInventory_203B460->teamItems[iVar1]);
-          gTeamInventory_203B460->teamItems[iVar1].itemIndex = 0;
-          gTeamInventory_203B460->teamItems[iVar1].itemFlags = 0;
+        if (sub_801AED0(index) != 0) {
+          MoveToStorage(&gTeamInventory_203B460->teamItems[index]);
+          gTeamInventory_203B460->teamItems[index].itemIndex = 0;
+          gTeamInventory_203B460->teamItems[index].itemFlags = 0;
         }
       }
       FillInventoryGaps();
@@ -542,7 +542,7 @@ void sub_8017F10(u32 newState)
 
 void sub_8017F28(void)
 {
-    s32 iVar2;
+    s32 index;
 
     sub_8006518(gUnknown_203B20C->unkF0);
 
@@ -579,9 +579,9 @@ void sub_8017F28(void)
             break;
         default:
         case 0:
-            for(iVar2 = 0; iVar2 < 4; iVar2++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B20C->unkF0[iVar2] = gUnknown_80DB7B8;
+                gUnknown_203B20C->unkF0[index] = gUnknown_80DB7B8;
             }
             break;
     }

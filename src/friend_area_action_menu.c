@@ -13,10 +13,6 @@ extern struct UnkTextStruct2 gUnknown_80DD74C;
 extern struct UnkTextStruct2 gUnknown_80DD704;
 extern struct UnkTextStruct2 gUnknown_80DD6EC;
 extern struct UnkTextStruct2 gUnknown_80DD71C;
-extern const char gUnknown_80DD764[];
-extern const char gUnknown_80DD7FC[];
-extern const char gUnknown_80DD8A0[];
-extern const char gUnknown_80DD8D0[];
 
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
@@ -57,6 +53,27 @@ extern void sub_8027CA0();
 extern void sub_8027D00();
 extern void CreateFriendActionMenu();
 extern void sub_80276A8();
+
+ALIGNED(4) const u8 gFriendAreaActionSayFarewellPrompt[] = _(
+         "You have chosen to say farewell\n"
+         "to this Pokémon.{EXTRA_MSG}"
+         "The Pokémon will leave its Friend Area.\n"
+         "It will no longer be available for\n"
+         "adventures. Is that OK?");
+
+ALIGNED(4) const u8 gFriendAreaActionSayFarewellConfirm[] = _(
+         "If you say farewell to this\n"
+         "Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
+         "You will never be able to get another one\n"
+         "like it to join your team.\n"
+         "Will you release it anyway?");
+
+ALIGNED(4) const u8 gUnknown_80DD8A0[] = _(
+         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+         "{CENTER_ALIGN}returned to the Toolbox.");
+
+ALIGNED(4) const u8 gUnknown_80DD8D0[] = _(
+         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n{CENTER_ALIGN}sent to storage.");
 
 
 u32 sub_8027074(void)
@@ -139,7 +156,7 @@ void SetFriendAreaActionMenuState(u32 newState)
 
 void sub_802719C(void)
 {
-    s32 iVar3;
+    s32 index;
 
     sub_8006518(gUnknown_203B2BC->unk180);
     switch(gUnknown_203B2BC->state)
@@ -156,9 +173,9 @@ void sub_802719C(void)
             sub_8012CAC(&gUnknown_203B2BC->unk180[2], gUnknown_203B2BC->menuItems);
             break;
         default:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2BC->unk180[iVar3] = gUnknown_80DD6EC;
+                gUnknown_203B2BC->unk180[index] = gUnknown_80DD6EC;
             }
             break;
     }
@@ -214,19 +231,11 @@ void sub_8027274(void)
         break;
     case 8:
         sub_8027794();
-        // You have chosen to say farewell to this Pokemon.
-        // The pokemon will leave its friend area.
-        // It will no longer be available for adventures.
-        // Is that OK?
-        sub_8014248(gUnknown_80DD764,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+        sub_8014248(gFriendAreaActionSayFarewellPrompt,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 9:
         sub_8027794();
-        // If you say farewell to this Pokemon, it will be gone forever.
-        // You will never be able to get another one
-        // like it to join your team.
-        // Will you release it anyway?
-        sub_8014248(gUnknown_80DD7FC,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+        sub_8014248(gFriendAreaActionSayFarewellConfirm,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 0x10:
         sub_8093560(gUnknown_203B2BC->unk20,gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk68);
