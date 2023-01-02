@@ -414,11 +414,11 @@ void PrintFriendRescueError(u32 status)
 
 void sub_80339C8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
         gUnknown_203B33C->speciesNum = -1;
-        switch(temp)
+        switch(menuAction)
         {
             case 0:
                 SetFriendRescueMenuState(3);
@@ -438,11 +438,11 @@ void sub_80339C8(void)
 
 void sub_8033A2C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
         gUnknown_203B33C->unk40 = 8;
-        switch(temp)
+        switch(menuAction)
         {
             case 0x11:
                 gUnknown_203B33C->unk40 = 2;
@@ -498,10 +498,10 @@ void sub_8033A2C(void)
 
 void sub_8033B8C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
                 case 0xB:
                 case 0xC:
@@ -549,10 +549,10 @@ void sub_8033B8C(void)
 
 void sub_8033C54(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 switch(gUnknown_203B33C->unk528)
@@ -753,10 +753,10 @@ void sub_8033DBC(void)
 
 void sub_8033F64(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 switch(gUnknown_203B33C->unk528)
@@ -824,13 +824,13 @@ void sub_8033FE4(void)
 
 void sub_8034074(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    temp = -1;
+    menuAction = -1;
     sub_8030768(0);
     if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    switch(menuAction)
     {
         case 9:
             sub_803084C();
@@ -907,13 +907,13 @@ void sub_803418C(void)
 
 void sub_8034254(void)
 {
-    s32 temp;
-    temp = -1;
+    s32 menuAction;
+    menuAction = -1;
 
     sub_8023A94(0);
     if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    switch(menuAction)
     {
         case 9:
             sub_8023C60();
@@ -964,10 +964,10 @@ void sub_8034310(void)
 
 void sub_8034378(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x10:
                 if(gUnknown_203B33C->unk524 == 0xE)
@@ -986,10 +986,10 @@ void sub_8034378(void)
 
 void sub_80343C4(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 SetFriendRescueMenuState(0x5);
@@ -1008,10 +1008,10 @@ void sub_80343C4(void)
 
 void sub_8034404(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0xF:
                 if(sub_8024108(3))
@@ -1102,13 +1102,13 @@ void sub_8034500(void)
 
 void sub_8034590(void)
 {
-    s32 temp;
-    temp = -1;
+    s32 menuAction;
+    menuAction = -1;
 
     sub_8030768(0);
     if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    switch(menuAction)
     {
         case 9:
             sub_803084C();
@@ -1156,10 +1156,10 @@ void sub_803464C(void)
 
 void sub_80346A8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 SetFriendRescueMenuState(0xE);
@@ -1225,10 +1225,10 @@ void sub_803473C(void)
 
 void sub_803477C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 SetFriendRescueMenuState(0xE);
@@ -1385,10 +1385,10 @@ void sub_8034970(void)
 
 void sub_80349B0(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 SetFriendRescueMenuState(0x52);
@@ -1427,13 +1427,13 @@ void sub_80349E0(void)
 
 void sub_8034A70(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    temp = -1;
+    menuAction = -1;
     sub_8030768(0);
     if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    switch(menuAction)
     {
         case 9:
             sub_803084C();
@@ -1532,13 +1532,13 @@ void sub_8034C38(void)
 
 void sub_8034C98(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    temp = -1;
+    menuAction = -1;
     sub_801CA08(0);
     if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    switch(menuAction)
     {
         case 9:
             sub_801CBB8();
@@ -1688,12 +1688,12 @@ void sub_8034F58(void)
 
 void sub_8034F88(void)
 {
-    s32 temp;
+    s32 menuAction;
     struct unkStruct_203B480 *mail;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 mail = sub_8095228(gUnknown_203B33C->unk218);
@@ -1753,11 +1753,11 @@ void sub_8035038(void)
 
 void sub_8035094(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x16:
                 // Dumb cast to get unsigned switch
@@ -1788,11 +1788,11 @@ void sub_8035094(void)
 
 void sub_80350F4(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x15:
                 if(sub_801CF14(0) != 0)
@@ -1829,11 +1829,11 @@ void sub_80350F4(void)
 
 void sub_803517C(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 // Dumb cast to get unsigned switch
@@ -1864,11 +1864,11 @@ void sub_803517C(void)
 
 void sub_80351E0(void)
 {
-    s32 temp;
+    s32 menuAction;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 6:
                 SetFriendRescueMenuState(0x72);
@@ -1884,13 +1884,13 @@ void sub_80351E0(void)
 
 void sub_8035210(void)
 {
-    s32 temp;
+    s32 menuAction;
     struct unkStruct_203B480 *mail;
 
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
         // NOTE: this is why unk524 can't be changed to u32..
-        gUnknown_203B33C->unk524 = temp;
+        gUnknown_203B33C->unk524 = menuAction;
         switch(gUnknown_203B33C->unk524)
         {
             case 0xB:
@@ -1953,10 +1953,10 @@ void sub_80352A4(void)
 
 void sub_8035300(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) != 0)
         return;
-    switch(temp)
+    switch(menuAction)
     {
         case 0x19:
             SetFriendRescueMenuState(1);
@@ -1969,7 +1969,7 @@ void sub_8035300(void)
             break;
         case 0x1A:
         case 0x1D:
-            gUnknown_203B33C->unk564 = temp;
+            gUnknown_203B33C->unk564 = menuAction;
             SetFriendRescueMenuState(0x79);
             break;
     }
@@ -1977,10 +1977,10 @@ void sub_8035300(void)
 
 void sub_8035374(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) != 0)
         return;
-    switch(temp)
+    switch(menuAction)
     {
         case 0x19:
             SetFriendRescueMenuState(0x78);
@@ -1990,7 +1990,7 @@ void sub_8035374(void)
         case 0x20:
         case 0x21:
         case 0x22:
-            gUnknown_203B33C->unk564 = temp;
+            gUnknown_203B33C->unk564 = menuAction;
             SetFriendRescueMenuState(0x7B);
             break;
     }
@@ -1998,10 +1998,10 @@ void sub_8035374(void)
 
 void sub_80353BC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) != 0)
         return;
-    switch(temp)
+    switch(menuAction)
     {
         case 0x19:
             SetFriendRescueMenuState(0x78);
@@ -2010,7 +2010,7 @@ void sub_80353BC(void)
         case 0x24:
         case 0x25:
         case 0x26:
-            gUnknown_203B33C->unk564 = temp;
+            gUnknown_203B33C->unk564 = menuAction;
             SetFriendRescueMenuState(0x7D);
             break;
     }

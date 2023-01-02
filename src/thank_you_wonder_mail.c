@@ -510,7 +510,7 @@ void DisplayThankYouMailCommsOutcome(void)
   gUnknown_203B2C4->unk41C.itemIndex = ITEM_ID_NOTHING;
   gUnknown_203B2C4->unk41C.numItems = 1;
   gUnknown_203B2C4->unk41C.itemFlags = 0;
-  if (gUnknown_203B2C4->linkError == 0) {
+  if (gUnknown_203B2C4->linkError == COMMS_GOOD) {
       switch(gUnknown_203B2C4->unk40)
         {
             case 6:
@@ -546,7 +546,6 @@ void sub_802A050(void)
 {
     switch(sub_8031DCC())
     {
-
         case 3:
         case 2:
             sub_8031E10();
@@ -564,10 +563,10 @@ void sub_802A050(void)
 
 void sub_802A090(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
                 SetThankYouMailMenuState(SELECT_THANK_YOU_MAIL_COMMS);
@@ -818,16 +817,16 @@ void AdvanceToThankYouPasswordProcessing(void)
 void HandleThankYouMailPasswordMenu(void)
 {
   u8 uVar1;
-  struct unkStruct_203B480 *puVar5;
+  struct unkStruct_203B480 *mail;
   u32 return_var;
-  struct unkStruct_203B480 temp;
+  struct unkStruct_203B480 mail1;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_203B480));
+  MemoryFill8((u8 *)&mail1, 0, sizeof(struct unkStruct_203B480));
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,gUnknown_203B2C4->passwordBuffer,&temp))
+        switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,gUnknown_203B2C4->passwordBuffer,&mail1))
         {
             case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                 sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, &gUnknown_203B2C4->faceFile, 0xc);
@@ -842,11 +841,11 @@ void HandleThankYouMailPasswordMenu(void)
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                uVar1 = sub_809539C(4,temp.unk10);
-                puVar5 = sub_8095228(uVar1);
-                *puVar5 = temp;
-                puVar5->mailType = 6;
-                gUnknown_203B2C4->unk430 = temp.unk10;
+                uVar1 = sub_809539C(4,mail1.unk10);
+                mail = sub_8095228(uVar1);
+                *mail = mail1;
+                mail->mailType = 6;
+                gUnknown_203B2C4->unk430 = mail1.unk10;
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_SUCCESS);
                 break;
             default:
@@ -928,10 +927,10 @@ void sub_802A740(void)
 
 void sub_802A75C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
                 // NOTE: if statement is needed to match
@@ -949,11 +948,11 @@ void sub_802A75C(void)
 
 void HandleConfirmItemtoSendMenu(void)
 {
-    s32 temp;
+    s32 menuAction;
     struct unkStruct_203B480 *mail;
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
                 mail = sub_8095228(gUnknown_203B2C4->mailIndex);
@@ -1018,10 +1017,10 @@ void sub_802A8A0(void)
 
 void sub_802A8BC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0xA:
                 switch(gUnknown_203B2C4->wonderMailMethod)
@@ -1044,10 +1043,10 @@ void sub_802A8BC(void)
 
 void sub_802A910(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 9:
                 if(sub_801CF14(0) != 0)
@@ -1089,10 +1088,10 @@ void sub_802A98C(void)
 
 void sub_802A9A8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x7:
                 switch(gUnknown_203B2C4->wonderMailMethod)
@@ -1115,10 +1114,10 @@ void sub_802A9A8(void)
 
 void sub_802A9FC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x7:
                 SetThankYouMailMenuState(PROMPT_THANK_YOU_PASSWORD);
@@ -1132,16 +1131,16 @@ void sub_802A9FC(void)
 
 void HandleMailCommunicationMenu(void)
 {
-    s32 temp;
+    s32 menuAction;
     struct unkStruct_203B480 *mail;
-    if(sub_80144A4(&temp) == 0)
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case WONDER_MAIL_GAME_LINK:
             case 4:
             case WONDER_MAIL_PASSWORD:
-                gUnknown_203B2C4->wonderMailMethod = temp;
+                gUnknown_203B2C4->wonderMailMethod = menuAction;
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
@@ -1194,10 +1193,10 @@ void sub_802AAC8(void)
 
 void HandleThankYouMailPelipperMainMenu(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 1:
                 gUnknown_203B2C4->unk40 = 6;
@@ -1268,8 +1267,8 @@ void UpdateThankYouMailText(void)
 {
   u8 itemIndex;
   char *monName;
-  u8 auStack180 [80];
-  u8 auStack100 [80];
+  u8 buffer1 [80];
+  u8 buffer2 [80];
   u8 uVar2;
   struct PokemonStruct *pokeStruct;
   struct PokemonStruct *pokeStruct2;
@@ -1279,8 +1278,8 @@ void UpdateThankYouMailText(void)
   switch(gUnknown_203B2C4->state) {
     case 5:
         pokeStruct = GetPlayerPokemonStruct();
-        sub_80922B4(auStack180,pokeStruct->name, POKEMON_NAME_LENGTH);
-        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF250,auStack180);
+        sub_80922B4(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
+        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case 0xe:
@@ -1438,8 +1437,8 @@ void UpdateThankYouMailText(void)
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
         pokeStruct2 = GetPlayerPokemonStruct();
-        sub_80922B4(auStack100, pokeStruct2->name, POKEMON_NAME_LENGTH);
-        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,auStack100);
+        sub_80922B4(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
+        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case CONFIRM_ITEM_TO_SEND:

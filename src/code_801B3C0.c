@@ -253,7 +253,7 @@ void sub_801B590(void)
 
 u32 sub_801B60C(u32 r0, u8 itemIndex, u8 numItems)
 {
-    gUnknown_203B234 = MemoryAlloc(0x154, 8);
+    gUnknown_203B234 = MemoryAlloc(sizeof(struct unkStruct_203B234), 8);
     gUnknown_203B234->unkC8 = 0;
     gUnknown_203B234->unk0 = r0;
     gUnknown_203B234->unk10.itemIndex = itemIndex;

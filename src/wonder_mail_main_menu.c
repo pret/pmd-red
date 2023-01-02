@@ -115,7 +115,7 @@ struct unkStruct_203B3E8
     u8 *unk48C;
     s32 wonderMailMethod;
     u32 wonderMailMode;
-    u8 unk498;
+    bool8 wonderMailAccepted;
 };
 
 EWRAM_DATA struct unkStruct_203B3E8 *gUnknown_203B3E8;
@@ -195,7 +195,7 @@ bool8 CreateWonderMailMenu(void)
 
   gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_GAME_LINK;
   gUnknown_203B3E8->wonderMailMode = WONDER_MAIL_MODE_RECEIVE;
-  gUnknown_203B3E8->unk498 = 1;
+  gUnknown_203B3E8->wonderMailAccepted = TRUE;
   gUnknown_203B3E8->wonderMailMethod = WONDER_MAIL_PASSWORD; // ??? Why?
   SetWonderMailMainMenuState(PROMPT_PASSWORD_ENTRY); // -> Display "Enter Wonder Mail Password"
   return 1;
@@ -431,7 +431,7 @@ void HandlePasswordEntryScreen(void)
         // Copy the decoded data to another buffer?
         gUnknown_203B3E8->unk3C0.unk0 = gUnknown_203B3E8->UNK38.decodedMail;
 
-        gUnknown_203B3E8->unk498 = 1;
+        gUnknown_203B3E8->wonderMailAccepted = TRUE;
         SetWonderMailMainMenuState(PASSWORD_SUCCESS);
       }
       break;
@@ -456,9 +456,9 @@ void AdvanceToPasswordEntryScreen(void)
 void HandlePasswordSuccess(void)
 {
   if (sub_802D0E0() == 3) {
-    gUnknown_203B3E8->unk498 = sub_802D178();
+    gUnknown_203B3E8->wonderMailAccepted = sub_802D178();
     sub_802D184();
-    if (gUnknown_203B3E8->unk498 != 0) {
+    if (gUnknown_203B3E8->wonderMailAccepted) {
         SetWonderMailMainMenuState(PREPARE_SAVE);
     }
     else {
@@ -566,7 +566,7 @@ void WonderMailMainMenuCallback(void)
         sub_802D098(&gUnknown_203B3E8->unk474);
         break;
     case PREPARE_SAVE:
-        if(gUnknown_203B3E8->unk498 != 0)
+        if(gUnknown_203B3E8->wonderMailAccepted)
         {
             switch(gUnknown_203B3E8->wonderMailMethod)
             {
@@ -585,7 +585,7 @@ void WonderMailMainMenuCallback(void)
         sub_80141B4(gUnknown_80E7B68,0,0,0x101);
         break;
     case WONDER_MAIL_ADDED:
-        if (gUnknown_203B3E8->unk498 != '\0') {
+        if (gUnknown_203B3E8->wonderMailAccepted) {
             sub_80141B4(gUnknown_80E7B88,0,0,0x101);
         }
         else {
