@@ -55,8 +55,8 @@ struct WonderMailStruct_203B2C0
     u8 unk3E;
     u32 unk40;
     u32 linkError;
-    u8 unk48[0x30];
-    u8 unk78[0x30];
+    struct unkStruct_203B480 unk48;
+    struct unkStruct_203B480 unk78;
     struct WonderMailStruct_203B2C0_sub unkA8;
     struct WonderMailStruct_203B2C0_sub unk130;
     u8 fill16A[0x218 - 0x1B8];

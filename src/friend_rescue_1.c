@@ -1,17 +1,18 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
 #include "constants/communication_error_codes.h"
+#include "constants/species.h"
+#include "constants/wonder_mail.h"
 #include "text.h"
-#include "pokemon.h"
-#include "save.h"
-#include "memory.h"
 #include "input.h"
-#include "team_inventory.h"
-#include "friend_rescue.h"
 #include "item.h"
-#include "code_8094F88.h"
+#include "team_inventory.h"
+#include "pokemon.h"
+#include "friend_rescue.h"
+#include "memory.h"
+#include "save.h"
 #include "menu.h"
 #include "rescue_password_menu.h"
+
 
 extern struct TeamInventory *gTeamInventory_203B460;
 extern u8 *gUnknown_203B484;
@@ -30,7 +31,6 @@ extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 extern u8 sub_801CF14(u32);
 
 extern u8 gUnknown_80E48A8[];
-extern struct MenuItem gUnknown_80E2440[];
 extern u8 gUnknown_80E49C4[];
 extern u8 gUnknown_80E4704[];
 extern u8 gUnknown_80E48E8[];
@@ -38,7 +38,6 @@ extern u8 gUnknown_80E4928[];
 extern u8 gUnknown_80E4964[];
 extern u8 gUnknown_80E499C[];
 extern u8 gUnknown_80E460C[];
-extern struct MenuItem gUnknown_80E2290[];
 extern u8 gUnknown_80E31FC[];
 
 
@@ -46,13 +45,14 @@ extern u32 sub_80154F0();
 extern void sub_80155F0();
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
+extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801CB5C(u32);
-extern void sub_8035CC0(u32 *, u32);
+extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801B3C0(struct ItemSlot *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
@@ -87,6 +87,7 @@ extern void sub_8095274(u32);
 extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern u8 sub_800D588(void);
 extern s32 FindOpenMailSlot(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
@@ -102,10 +103,254 @@ extern u8 gUnknown_80E4788[];
 extern u8 gUnknown_80E47D8[];
 extern u8 gUnknown_80E4480[];
 extern u8 gUnknown_80E482C[];
+extern u8 gUnknown_80E25F4[];
+extern u8 gUnknown_80E2D7C[];
+extern u8 gUnknown_80E2E20[];
+extern u8 gUnknown_80E319C[];
+extern u8 gUnknown_80E311C[];
+extern u8 gUnknown_80E32C4[];
+extern u8 gUnknown_80E4314[];
+extern u8 gUnknown_80E41DC[];
+extern u8 gUnknown_80E2FEC[];
+extern u8 gUnknown_80E2898[];
+extern u8 gUnknown_80E2B54[];
+extern u8 gUnknown_80E29D0[];
+extern u8 gUnknown_80E3220[];
+extern u8 gUnknown_80E2A0C[];
+extern u8 gUnknown_80E2610[];
+extern u8 gUnknown_80E2640[];
+extern u8 gUnknown_80E2680[];
+extern u8 gUnknown_80E26B0[];
+extern u8 gUnknown_80E26F0[];
+extern u8 gUnknown_80E2728[];
+extern u8 gUnknown_80E3690[];
+extern u8 gUnknown_80E3818[];
+extern u8 gUnknown_80E3998[];
+extern u8 gUnknown_80E3B1C[];
+extern u8 gUnknown_80E367C[];
+extern u8 gUnknown_80E3BF8[];
+extern u8 gUnknown_80E3DE4[];
+extern u8 gUnknown_80E4014[];
+extern u8 gUnknown_80E3E98[];
+extern u8 gUnknown_80E4130[];
+extern u8 gUnknown_80E2E54[];
+extern u8 gUnknown_80E2EB4[];
+extern u8 gUnknown_80E2DD0[];
+extern u8 gUnknown_80E2FA0[];
+extern u8 gUnknown_80E2F14[];
+extern u8 gUnknown_80E2F44[];
+extern u8 gUnknown_80E30A4[];
+extern u8 gUnknown_80E2F78[];
+extern u8 gUnknown_80E360C[];
+extern u8 gUnknown_80E3644[];
+extern u8 gUnknown_80E35E8[];
+extern u8 gUnknown_80E35AC[];
+extern u8 gUnknown_80E355C[];
+extern u8 gUnknown_80E352C[];
+extern u8 gUnknown_80E34F0[];
+extern u8 gUnknown_80E34B0[];
+extern u8 gUnknown_80E3430[];
+extern u8 gUnknown_80E33D8[];
+extern u8 gUnknown_80E339C[];
+extern u8 gUnknown_80E3378[];
+extern u8 gUnknown_80E331C[];
+extern u8 gUnknown_80E3288[];
+extern u8 gUnknown_80E3248[];
+extern u8 gUnknown_80E31FC[];
+extern u8 gUnknown_80E276C[];
+extern u8 gUnknown_80E27A4[];
+extern u8 gUnknown_80E2CD4[];
+extern u8 gUnknown_80E3030[];
+extern u8 gUnknown_80E3078[];
+extern u8 gUnknown_80E31D8[];
+extern u8 gUnknown_80E2CE8[];
+extern u8 gUnknown_80E2B90[];
+extern u8 gUnknown_80E2AE4[];
+extern u8 gUnknown_80E2A80[];
+extern u8 gUnknown_80E2AA8[];
+extern u8 gUnknown_80E2D60[];
+extern u8 gUnknown_80E2BE0[];
+extern u8 gUnknown_80E2C48[];
+extern u8 gUnknown_80E29A0[];
+extern u8 gUnknown_80E2A5C[];
+extern u8 gUnknown_80E2904[];
+extern u8 gUnknown_80E2C94[];
+extern u8 gUnknown_80E2D30[];
+extern u8 gUnknown_80E296C[];
+extern u8 gUnknown_80E314C[];
+extern u8 gUnknown_80E2A1C[];
+extern u8 gUnknown_80E2840[];
+extern u8 gUnknown_80E2874[];
+extern u8 gUnknown_80E317C[];
+extern u8 gUnknown_80E28D8[];
+extern u8 gUnknown_80E2814[];
+extern u8 gUnknown_80E30D0[];
 
+extern struct MenuItem gUnknown_80E20B8;
+extern struct MenuItem gUnknown_80E2108;
+extern struct MenuItem gUnknown_80E20E0;
+extern struct MenuItem gUnknown_80E2068;
+extern struct MenuItem gUnknown_80E24F8;
+extern struct MenuItem gUnknown_80E2554;
+extern struct MenuItem gUnknown_80E22F0;
+extern struct MenuItem gUnknown_80E236C;
+extern struct MenuItem gUnknown_80E2440;
+extern struct MenuItem gUnknown_80E2470;
+extern struct MenuItem gUnknown_80E24B0;
+extern struct MenuItem gUnknown_80E2130;
+extern struct MenuItem gUnknown_80E2190;
+extern struct MenuItem gUnknown_80E21B8;
+extern struct MenuItem gUnknown_80E2268;
+extern struct MenuItem gUnknown_80E2218;
+extern struct MenuItem gUnknown_80E2240;
+extern struct MenuItem gUnknown_80E2290;
+extern struct MenuItem gUnknown_80E22D0;
+extern struct MenuItem gUnknown_80E234C;
+extern struct MenuItem gUnknown_80E24D8;
+extern struct MenuItem gUnknown_80E2458;
+extern struct MenuItem gUnknown_80E2408;
+extern struct MenuItem gUnknown_80E23A8;
+extern struct MenuItem gUnknown_80E22B4;
+
+extern struct UnkTextStruct2 gUnknown_80E231C;
+extern struct UnkTextStruct2 gUnknown_80E23F0;
+extern struct UnkTextStruct2 gUnknown_80E2334;
+
+extern struct MenuItem gUnknown_80E25B4;
 
 extern void nullsub_40();
 extern void sub_8032828();
+
+extern u8 sub_800D588(void);
+extern void sub_8011830(void);
+extern u32 sub_8030894(void);
+extern void sub_8031D70(u32, u32);
+extern u32 sub_8023CE8(void);
+extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
+extern void sub_80306A8(u32, u32, u32, u32);
+extern void sub_8023868(u32, u32, u32, u32);
+extern u32 sub_801D008(void);
+extern void sub_8023DA4(void);
+extern void sub_8023C60(void);
+extern void sub_8035CF4(u32 *, u32, u32);
+extern s32 sub_8037B28(u32);
+extern void sub_803092C(void);
+extern void sub_801CCD8(void);
+extern void sub_80151C0(u32, u8 *);
+extern void sub_801C8C4(u32, u32, s32 * , u32);
+extern void xxx_call_start_bg_music(void);
+extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
+extern void sub_802F204(struct unkStruct_802F204 *, u32);
+extern void nullsub_23(u32);
+extern s32 sub_8037D64(u32, void *, void *);
+extern s32 sub_80381F4(u32, void *, void *);
+void sprintf_2(char *buffer, const char *text, ...);
+
+extern void SetFriendRescueMenuState(u32);
+extern s32 sub_80144A4(s32 *);
+extern void sub_802F2C0();
+extern void sub_8095240(u8);
+extern u32 sub_802F298();
+
+extern char gUnknown_202E5D8[0x50];
+extern char gAvailablePokemonNames[0x50];
+
+extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
+
+extern u8 sub_8039880(void);
+
+extern void sub_8035300(void);
+extern void sub_8035404(u32);
+extern void nullsub_41(void);
+extern void nullsub_42(void);
+extern void nullsub_43(void);
+extern void nullsub_44(void);
+extern void nullsub_45(void);
+extern void nullsub_46(void);
+extern void nullsub_47(void);
+extern void nullsub_48(void);
+extern void nullsub_49(void);
+extern void nullsub_50(void);
+extern void nullsub_51(void);
+extern void sub_8035374(void);
+extern void sub_80353BC(void);
+extern void sub_8033A2C(void);
+extern void sub_803477C(void);
+extern void sub_80347AC(void);
+extern void sub_80347C8(void);
+extern void sub_80347E4(void);
+extern void sub_8034804(void);
+extern void sub_80344C0(void);
+extern void sub_8034478(void);
+extern void sub_80344A0(void);
+extern void sub_803418C(void);
+extern void sub_8034254(void);
+extern void sub_8034310(void);
+extern void sub_8034378(void);
+extern void sub_80343C4(void);
+extern void sub_8034404(void);
+extern void sub_8034500(void);
+extern void sub_8034590(void);
+extern void sub_803464C(void);
+extern void sub_80346A8(void);
+extern void sub_80346D8(void);
+extern void sub_8034700(void);
+extern void sub_8034720(void);
+extern void sub_803473C(void);
+extern void sub_8033FB4(void);
+extern void sub_8034074(void);
+extern void sub_8034130(void);
+extern void sub_8033FE4(void);
+extern void sub_8033D74(void);
+extern void sub_8033D94(void);
+extern void sub_8033DBC(void);
+extern void sub_8033F64(void);
+extern void sub_8033C54(void);
+extern void sub_8033CAC(void);
+extern void sub_8033D48(void);
+extern void sub_8035424(void);
+extern void sub_8034970(void);
+extern void sub_80351E0(void);
+extern void sub_8034D74(void);
+extern void sub_8034EF0(void);
+extern void sub_8034F38(void);
+extern void sub_80352A4(void);
+extern void sub_8034EC8(void);
+extern void sub_8033B8C(void);
+extern void sub_80339C8(void);
+extern void sub_80348C4(void);
+extern void sub_803482C(void);
+extern void sub_80349B0(void);
+extern void sub_8034A70(void);
+extern void sub_8034B2C(void);
+extern void sub_80349E0(void);
+extern void sub_8034B88(void);
+extern void sub_8034C98(void);
+extern void sub_8034C38(void);
+extern void sub_8034D54(void);
+extern void sub_8034F18(void);
+extern void sub_8034F58(void);
+extern void sub_8034F88(void);
+extern void sub_8035018(void);
+extern void sub_8035038(void);
+extern void sub_8035094(void);
+extern void sub_80350F4(void);
+extern void sub_803517C(void);
+extern void sub_8035210(void);
+extern void sub_8035430(void);
+extern void sub_8034848(void);
+
+extern void sub_803084C(void);
+extern void sub_8031E10(void);
+extern void sub_8023C60(void);
+extern void sub_80155F0(void);
+extern void sub_801CBB8(void);
+extern void sub_802F2C0(void);
+extern void sub_8030DE4(void);
+extern void sub_802453C(void);
+extern void sub_801B450(void);
+
 
 void SetFriendRescueMenuState(u32 newState)
 {
@@ -343,7 +588,7 @@ void nullsub_41(void)
 void sub_8033CAC(void)
 {
     s32 temp;
-    u32 test_var;
+    u32 speciesNum;
     if(sub_80144A4(&temp) == 0)
     {
         if(gUnknown_203B33C->status == COMMS_GOOD)
@@ -358,10 +603,10 @@ void sub_8033CAC(void)
                     break;
                 case 0x12:
                     if(sub_800D588() != 0)
-                        test_var = gUnknown_203B33C->unk168;
+                        speciesNum = gUnknown_203B33C->unk130.pokemon.speciesNum;
                     else
-                        test_var = gUnknown_203B33C->unkE0;
-                    if(test_var != 0)
+                        speciesNum = gUnknown_203B33C->unkA8.pokemon.speciesNum;
+                    if(speciesNum != SPECIES_NONE)
                         SetFriendRescueMenuState(0x3F);
                     else
                         SetFriendRescueMenuState(0x40);
@@ -455,7 +700,7 @@ void sub_8033DBC(void)
                 switch(sub_8039068(mailMode, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                        sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
+                        sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2290, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x1B);
                         break;
                     case PASSWORD_ENTRY_NOT_SOS_MAIL:
@@ -601,7 +846,7 @@ void sub_8034074(void)
             break;
         case 5:
         case 8:
-            sub_8035CC0(&gUnknown_203B33C->unk35C, 2);
+            sub_8035CC0(gUnknown_203B33C->unk35C, 2);
             sub_8030810(0x1);
             SetFriendRescueMenuState(0x1D);
             break;
@@ -684,7 +929,7 @@ void sub_8034254(void)
             break;
         case 5:
         case 8:
-            sub_8035CC0(&gUnknown_203B33C->unk35C, 3);
+            sub_8035CC0(gUnknown_203B33C->unk35C, 3);
             sub_8023DA4();
             SetFriendRescueMenuState(0x26);
             break;
@@ -879,7 +1124,7 @@ void sub_8034590(void)
             break;
         case 5:
         case 8:
-            sub_8035CC0(&gUnknown_203B33C->unk35C, 2);
+            sub_8035CC0(gUnknown_203B33C->unk35C, 2);
             sub_8030810(0x1);
             SetFriendRescueMenuState(0x32);
             break;
@@ -1052,7 +1297,7 @@ void sub_8034848(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
+        MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , sizeof(struct ItemSlot));
         gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.itemFlags = 0;
@@ -1082,7 +1327,7 @@ void sub_80348C4(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
+        MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , sizeof(struct ItemSlot));
         gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
         gUnknown_203B33C->unk41C.numItems = 1;
         gUnknown_203B33C->unk41C.itemFlags = 0;
@@ -1204,7 +1449,7 @@ void sub_8034A70(void)
             break;
         case 5:
         case 8:
-            sub_8035CC0(&gUnknown_203B33C->unk35C, 2);
+            sub_8035CC0(gUnknown_203B33C->unk35C, 2);
             sub_8030810(0x1);
             SetFriendRescueMenuState(0x5C);
             break;
@@ -1309,7 +1554,7 @@ void sub_8034C98(void)
             break;
         case 5:
         case 8:
-            sub_8035CC0(&gUnknown_203B33C->unk35C, 3);
+            sub_8035CC0(gUnknown_203B33C->unk35C, 3);
             sub_801CB5C(0x1);
             SetFriendRescueMenuState(0x5F);
             break;
@@ -1340,7 +1585,7 @@ void sub_8034D74(void)
                 switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                        sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
+                        sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2440, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x74);
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
@@ -1444,16 +1689,16 @@ void sub_8034F58(void)
 void sub_8034F88(void)
 {
     s32 temp;
-    struct unkStruct_203B480 *temp2;
+    struct unkStruct_203B480 *mail;
 
     if(sub_80144A4(&temp) == 0)
     {
         switch(temp)
         {
             case 6:
-                temp2 = sub_8095228(gUnknown_203B33C->unk218);
+                mail = sub_8095228(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->unk41C.itemIndex != ITEM_ID_NOTHING)
-                    temp2->unk20 = gUnknown_203B33C->unk41C;
+                    mail->unk20 = gUnknown_203B33C->unk41C;
                 gTeamInventory_203B460->teamStorage[gUnknown_203B33C->unk41C.itemIndex]--;
                 SetFriendRescueMenuState(0x75);
                 break;

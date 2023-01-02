@@ -584,18 +584,18 @@ void sub_8028348(void)
             sub_80141B4(gUnknown_80DE01C, 0 , 0, 0);
             break;
         case 6:
-            gUnknown_203B2C0->linkError = 0;
+            gUnknown_203B2C0->linkError = COMMS_GOOD;
             sub_8011830();
             linkError = sub_8037B28(gUnknown_203B2C0->unk40);
             gUnknown_203B2C0->linkError = linkError;
-            if(linkError == 0)
+            if(linkError == COMMS_GOOD)
             {
                 switch(gUnknown_203B2C0->unk40)
                 {
                     case 3:
-                        MemoryFill8(gUnknown_203B2C0->unk48, 0, 0x30);
-                        MemoryFill8(gUnknown_203B2C0->unk78, 0, 0x30);
-                        gUnknown_203B2C0->linkError = sub_8037D64(gUnknown_203B2C0->unk40, gUnknown_203B2C0->unk48, gUnknown_203B2C0->unk78);
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk48, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk78, 0, sizeof(struct unkStruct_203B480));
+                        gUnknown_203B2C0->linkError = sub_8037D64(gUnknown_203B2C0->unk40, &gUnknown_203B2C0->unk48, &gUnknown_203B2C0->unk78);
                         break;
                     case 4:
                         MemoryFill8((u8 *)&gUnknown_203B2C0->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
@@ -610,12 +610,12 @@ void sub_8028348(void)
                         gUnknown_203B2C0->linkError = sub_8037D64(gUnknown_203B2C0->unk40, &gUnknown_203B2C0->unkA8, &gUnknown_203B2C0->unk130);
                         break;
                 }
-                if(gUnknown_203B2C0->linkError == 0)
+                if(gUnknown_203B2C0->linkError == COMMS_GOOD)
                 {   
                     switch(gUnknown_203B2C0->unk40)
                     {
                         case 3:
-                            gUnknown_203B2C0->linkError = sub_80381F4(3, gUnknown_203B2C0->unk48, gUnknown_203B2C0->unk78);
+                            gUnknown_203B2C0->linkError = sub_80381F4(3, &gUnknown_203B2C0->unk48, &gUnknown_203B2C0->unk78);
                             break;
                         case 4:
                             gUnknown_203B2C0->linkError = sub_80381F4(4, &gUnknown_203B2C0->unkA8, &gUnknown_203B2C0->unk130);
@@ -1362,7 +1362,7 @@ void sub_80292EC(void)
     {
         return;
     }
-    if(gUnknown_203B2C0->linkError == 0)
+    if(gUnknown_203B2C0->linkError == COMMS_GOOD)
     {
         switch(gUnknown_203B2C0->unk538)
         {

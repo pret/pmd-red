@@ -83,7 +83,7 @@ extern void sub_801BEEC(s16);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4(void);
 
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
+extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
 extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
 extern void sub_8093560(u32, struct PokemonMove *, u32 *);
 extern void sub_801F808(u32 *);

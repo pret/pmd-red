@@ -33,6 +33,16 @@ enum MainMenuScreens
     MENU_NO_SCREEN_CHANGE = 0xffdc
 };
 
+struct unkStruct_8035D94
+{
+    
+    union {
+        u8 itemIndex_u8;
+        u32 itemIndex_u32;
+    } itemIndex;
+    u32 numItems;
+};
+
 struct MainMenuSub
 {
     u8 unk2C;
@@ -47,8 +57,7 @@ struct MainMenu
     /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
     /* 0x2C */ struct MainMenuSub sub;
-    u8 unk30;
-    u32 unk34;
+    /* 0x30 */ struct unkStruct_8035D94 unk30;
     s16 unk38;
     u8 unk3A;
     u8 unk3B;
@@ -63,5 +72,7 @@ void SetUpMenu(void);
 s32 UpdateMenu(void);
 void CleanUpMenu(void);
 bool8 sub_80363E0(void);
+struct unkStruct_8035D94 *sub_8035D94(void);
+void sub_8035DA0(void);
 
 #endif // GUARD_MAIN_MENU_H

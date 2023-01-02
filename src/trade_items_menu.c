@@ -2,6 +2,7 @@
 #include "constants/communication_error_codes.h"
 #include "input.h"
 #include "item.h"
+#include "main_menu.h"
 #include "team_inventory.h"
 #include "trade_items_menu.h"
 #include "memory.h"
@@ -81,7 +82,6 @@ const struct MenuItem gUnknown_80E618C[3] = {
 extern void sub_8013AA0(u32 *);
 
 extern void sub_8035C1C();
-extern void sub_8035DA0();
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
