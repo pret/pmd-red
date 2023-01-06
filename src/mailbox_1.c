@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "input.h"
 #include "mailbox.h"
+#include "wonder_mail.h"
 
 extern struct unkStruct_203B304 *gUnknown_203B304;
 
@@ -24,16 +25,16 @@ extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern u8 *sub_8095FE8(u8);
+extern struct WonderMail *GetMailboxSlotInfo(u8);
 extern u8 HasNoMailinMailbox(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_802BDEC(u32);
-extern void sub_8096A78(void);
+extern void sub_8096A78(struct WonderMail *);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void sub_8096040(u8);
-extern void sub_8096DF8(u8);
+extern void ResetMailboxSlot(u8);
+extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
 extern void PlayMenuSoundEffect(u32);
 extern void PlaySound(u32);
@@ -83,21 +84,21 @@ void HandleMailboxMenu(void)
 
 void sub_802E578(void)
 {
-    u8 *return_var;
+    struct WonderMail *return_var;
 
     switch(sub_802BDEC(1))
     {
 
         case 3:
-            gUnknown_203B304->unk8 = sub_802BE74();
+            gUnknown_203B304->mailboxIndex = sub_802BE74();
             SetMailboxState(6);
             break;
         case 4:
-            gUnknown_203B304->unk8 = sub_802BE74();
-            return_var = sub_8095FE8(gUnknown_203B304->unk8);
-            if(return_var[0] == 1)
+            gUnknown_203B304->mailboxIndex = sub_802BE74();
+            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            if(return_var->mailType == 1)
             {
-                gUnknown_203B304->mailIndex = return_var[5];
+                gUnknown_203B304->mailIndex = return_var->dungeon.dungeonFloor;
                 gUnknown_203B304->fallbackState = 5;
                 SetMailboxState(0xB);
             }
@@ -117,7 +118,7 @@ void sub_802E578(void)
 void HandleMailActionMenu(void)
 {
     s32 menuAction = 0;
-    u8 *return_var;
+    struct WonderMail *return_var;
 
 
     sub_802BDEC(0);
@@ -134,11 +135,10 @@ void HandleMailActionMenu(void)
             break;
         case 5:
             PlaySound(0x133);
-            sub_8095FE8(gUnknown_203B304->unk8);
-            sub_8096A78();
+            sub_8096A78(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex));
             sub_8096C80();
             sub_8096D24();
-            sub_8096040(gUnknown_203B304->unk8);
+            ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
             sub_8096078();
             if(HasNoMailinMailbox())
             {
@@ -153,9 +153,9 @@ void HandleMailActionMenu(void)
             break;
         case 6:
             PlaySound(0x133);
-            return_var = sub_8095FE8(gUnknown_203B304->unk8);
-            sub_8096DF8(return_var[5]);
-            sub_8096040(gUnknown_203B304->unk8);
+            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            ReceivePKMNNews(return_var->dungeon.dungeonFloor);
+            ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
             sub_8096078();
             if(HasNoMailinMailbox())
             {
@@ -167,8 +167,8 @@ void HandleMailActionMenu(void)
             break;
         case 7:
             PlayMenuSoundEffect(0);
-            return_var = sub_8095FE8(gUnknown_203B304->unk8);
-            gUnknown_203B304->mailIndex = return_var[5];
+            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            gUnknown_203B304->mailIndex = return_var->dungeon.dungeonFloor;
             gUnknown_203B304->fallbackState = 5;
             SetMailboxState(0xB);
             break;

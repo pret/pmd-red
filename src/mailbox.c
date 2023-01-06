@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "input.h"
 #include "mailbox.h"
+#include "wonder_mail.h"
 
 
 extern void HandleMailboxMenu(void);
@@ -79,8 +80,8 @@ extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern u32 sub_8095FE8(u32);
-extern void sub_803B35C(u32, u32 *);
+extern struct WonderMail * GetMailboxSlotInfo(u32);
+extern void sub_803B35C(struct WonderMail *, u32 *);
 extern void sub_802DE84(u32 *);
 extern void sub_802C860(u32);
 extern void sub_802B640(u32, u32, u32);
@@ -204,7 +205,7 @@ void sub_802E1AC(void)
             sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, 0, gUnknown_203B304->unk68, 2);
             break;
         case 7:
-            sub_803B35C(sub_8095FE8(gUnknown_203B304->unk8), &gUnknown_203B304->unkC);
+            sub_803B35C(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex), &gUnknown_203B304->unkC);
             gUnknown_203B304->unkC = 3;
             gUnknown_203B304->unk50 = 0;
             sub_802DE84(&gUnknown_203B304->unkC);

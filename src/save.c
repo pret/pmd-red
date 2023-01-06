@@ -172,7 +172,7 @@ extern void sub_800135C(void);
 extern u8 *sub_80950F8(void);
 extern void sub_80958E4(u32 *a, u32 b);
 extern u32 sub_80958F8(void);
-extern void sub_8095900(void);
+extern void InitializeMailJobsNews(void);
 extern void sub_80972F4(void);
 extern u32 sub_8097680(void);
 extern u32 *GetDungeonLocationInfo(void);
@@ -600,7 +600,7 @@ void InitializePlayerData(void)
     InitializeRescueTeamInfo();
     sub_80972F4();
     sub_8095118();
-    sub_8095900();
+    InitializeMailJobsNews();
     sub_80974E8();
     InitializeGameOptions(TRUE);
     InitializeExclusivePokemon();

@@ -80,7 +80,7 @@ ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 struct unkStruct_803B344
 {
     // size: 0xB4
-    struct WonderMail unk0;
+    struct WonderMail mail;
     u8* unk14;
     u8* unk18;
     u8 fill1C[0x3C - 0x1C];
@@ -149,7 +149,7 @@ extern struct unkStruct_803B344 *sub_803B344(u8);
 extern s32 sub_8037B28(u32);
 
 extern u32 sub_802D0E0();
-extern u8 sub_802D178();
+extern bool8 GetWonderMailAccepted();
 extern void sub_802D184();
 
 extern s32 sub_80154F0();
@@ -429,7 +429,7 @@ void HandlePasswordEntryScreen(void)
       else {
         // Successful password
         // Copy the decoded data to another buffer?
-        gUnknown_203B3E8->unk3C0.unk0 = gUnknown_203B3E8->UNK38.decodedMail;
+        gUnknown_203B3E8->unk3C0.mail = gUnknown_203B3E8->UNK38.decodedMail;
 
         gUnknown_203B3E8->wonderMailAccepted = TRUE;
         SetWonderMailMainMenuState(PASSWORD_SUCCESS);
@@ -456,7 +456,7 @@ void AdvanceToPasswordEntryScreen(void)
 void HandlePasswordSuccess(void)
 {
   if (sub_802D0E0() == 3) {
-    gUnknown_203B3E8->wonderMailAccepted = sub_802D178();
+    gUnknown_203B3E8->wonderMailAccepted = GetWonderMailAccepted();
     sub_802D184();
     if (gUnknown_203B3E8->wonderMailAccepted) {
         SetWonderMailMainMenuState(PREPARE_SAVE);
@@ -552,7 +552,7 @@ void WonderMailMainMenuCallback(void)
         sub_8014248(gUnknown_80E7B14,0,3,gReceiveWonderMailMainMenuItems,0,4,0,0,0x101);
         break;
     case PASSWORD_SUCCESS:
-        gUnknown_203B3E8->unk474 = gUnknown_203B3E8->unk3C0.unk0;
+        gUnknown_203B3E8->unk474 = gUnknown_203B3E8->unk3C0.mail;
         if(gUnknown_203B3E8->unk474.unk2 == 4)
         {
             gUnknown_203B3E8->unk488 = &gUnknown_203B3E8->unk3C0.unk14;
@@ -615,7 +615,7 @@ void WonderMailMainMenuCallback(void)
                         MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk14,temp->unk14,0x28);
                         MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk3C,temp->unk18,0x78);
                     }
-                    gUnknown_203B3E8->unk254.unk0 = temp->unk0;
+                    gUnknown_203B3E8->unk254.mail = temp->mail;
                     gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
                     break;
                 case 10:

@@ -146,7 +146,7 @@ CreateMailActionMenu:
 	ldr r4, _0802E3F0
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
-	bl sub_8095FE8
+	bl GetMailboxSlotInfo
 	adds r7, r0, 0
 	ldrb r0, [r7]
 	cmp r0, 0x1

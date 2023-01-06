@@ -1,33 +1,11 @@
 #include "global.h"
 #include "pokemon.h"
 #include "wonder_mail.h"
-
-struct subStruct_203B490
-{
-    // size: 0xC
-    struct DungeonLocation dungeon;
-    u32 unk4;
-    u32 unk8;
-};
- 
-struct unkStruct_203B490
-{
-    // size: 0x330?
-
-    struct WonderMail unk0[4];
-    struct WonderMail unk50[8];
-    struct WonderMail unkF0[8];
-    u8 unk190[0x28];
-    u8 unk1B8[0x78];
-    struct subStruct_203B490 unk230[16];
-    u8 unk2F0[0x38];
-    u8 unk328;
-};
-extern struct unkStruct_203B490 *gUnknown_203B490;
+#include "code_80958E8.h"
 
 void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
 void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
-extern s32 sub_8096EB0(void);
+extern s32 sub_8096EB0(struct WonderMail *);
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void sub_80015C0(u32, u32);
@@ -35,21 +13,21 @@ extern u32 sub_8001784(u32, u32, u16);
 extern void sub_809674C();
 extern void sub_800199C(u32, s32, u32, s32);
 
-bool8 sub_8096F50(struct WonderMail *r0)
+bool8 sub_8096F50(struct WonderMail *mail)
 {
     s32 index;
     s32 temp2;
     struct subStruct_203B490 *temp;
 
-    temp2 = sub_8096EB0();
+    temp2 = sub_8096EB0(mail);
 
 
     for(index = 0; index < 0x10; index++)
     {
         temp  = &gUnknown_203B490->unk230[index];
-        if(temp->dungeon.dungeonIndex == r0->dungeon.dungeonIndex)
-            if(temp->dungeon.dungeonFloor == r0->dungeon.dungeonFloor)
-                if(temp->unk4 == r0->unk8)
+        if(temp->dungeon.dungeonIndex == mail->dungeon.dungeonIndex)
+            if(temp->dungeon.dungeonFloor == mail->dungeon.dungeonFloor)
+                if(temp->unk4 == mail->unk8)
                     if(temp->unk8 == temp2)
                         return TRUE;
     }
@@ -65,29 +43,29 @@ u32 sub_8096FA0(u8 *r0, u32 size)
     xxx_init_struct_8094924_restore_809485C(&backup, r0, size);
     for(index = 0; index < 4; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->unk0[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->unk50[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->pelliperBoardJobs[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->unkF0[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
     }
     for(index = 0; index < 0x38; index++)
     {
         RestoreIntegerBits(&backup, &temp, 1);
         if(temp & 1)
-            gUnknown_203B490->unk2F0[index] = 1;
+            gUnknown_203B490->PKMNNewsReceived[index] = TRUE;
         else
-            gUnknown_203B490->unk2F0[index] = 0;
+            gUnknown_203B490->PKMNNewsReceived[index] = FALSE;
     }
     RestoreIntegerBits(&backup, &temp, 1);
     if(temp & 1)
-        gUnknown_203B490->unk328 = 1;
+        gUnknown_203B490->unk328 = TRUE;
     else
-        gUnknown_203B490->unk328 = 0;
+        gUnknown_203B490->unk328 = FALSE;
     
     RestoreIntegerBits(&backup, gUnknown_203B490->unk190, 0x140);
     RestoreIntegerBits(&backup, gUnknown_203B490->unk1B8, 0x3C0);
@@ -110,25 +88,25 @@ u32 sub_80970D8(u8 *r0, u32 size)
     xxx_init_struct_8094924_save_809486C(&backup, r0, size);
     for(index = 0; index < 4; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->unk0[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->unk50[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->pelliperBoardJobs[index]);
     }
     for(index = 0; index < 8; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->unkF0[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
     }
     for(index = 0; index < 0x38; index++)
     {
-        if(gUnknown_203B490->unk2F0[index] != 0)
+        if(gUnknown_203B490->PKMNNewsReceived[index] != 0)
             temp = -1;
         else
             temp = 0;
         SaveIntegerBits(&backup, &temp, 1);
     }
-    if(gUnknown_203B490->unk328 != 0)
+    if(gUnknown_203B490->unk328)
         temp = -1;
     else
         temp = 0;

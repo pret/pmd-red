@@ -6,13 +6,14 @@
 #include "menu.h"
 #include "text.h"
 #include "team_inventory.h"
+#include "wonder_mail.h"
 
 struct unkStruct_203B308
 {
     // size: 0xB6 << 1
     u32 state;
     u32 unk4;
-    u8 unk8;
+    u8 jobIndex;
     u8 fill9[0xC - 9];
     u32 unkC;
     u8 fill10[0x50 - 0x10];
@@ -39,12 +40,12 @@ extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern u8 *sub_8096574(u8);
+extern struct WonderMail *GetPelliperBoardSlotInfo(u8);
 extern u8 sub_802C4A4(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void sub_8096A78(u8 *);
-extern void sub_80965B8(u8);
+extern void sub_8096A78(struct WonderMail*);
+extern void ResetPelliperBoardSlot(u8);
 extern void sub_80965F4(void);
 extern void sub_802C2D4(void);
 extern u8 sub_8012FD8(u32 *);
@@ -94,11 +95,11 @@ void sub_802ED4C(void)
     switch(sub_802C1E4(1))
     {
         case 3:
-            gUnknown_203B308->unk8 = sub_802C26C();
+            gUnknown_203B308->jobIndex = sub_802C26C();
             SetPelipperBoardState(6);
             break;
         case 4:
-            gUnknown_203B308->unk8 = sub_802C26C();
+            gUnknown_203B308->jobIndex = sub_802C26C();
             SetPelipperBoardState(7);
             break;
         case 2:
@@ -113,7 +114,7 @@ void sub_802ED4C(void)
 
 void sub_802EDBC(void)
 {
-    u8 *return_var;
+    struct WonderMail *mail;
     s32 menuAction = 0;
 
     sub_802C1E4(0);
@@ -126,32 +127,32 @@ void sub_802EDBC(void)
     {
         case 4:
             PlaySound(0x133);
-            return_var = sub_8096574(gUnknown_203B308->unk8);
-            switch(*return_var)
+            mail = GetPelliperBoardSlotInfo(gUnknown_203B308->jobIndex);
+            switch(mail->mailType)
             {
                 case 2:
                     gUnknown_203B308->unk4 = 1;
-                    sub_80965B8(gUnknown_203B308->unk8);
+                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);
                     break;
                 case 3:
                     gUnknown_203B308->unk4 = 2;
-                    sub_80965B8(gUnknown_203B308->unk8);
+                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);
                     break;
                 case 4:
                     gUnknown_203B308->unk4 = 3;
-                    sub_80965B8(gUnknown_203B308->unk8);
+                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);
                     break;
                 default:
-                    sub_8096A78(return_var);
+                    sub_8096A78(mail);
                     sub_8096C80();
                     sub_8096D24();
                     if(sub_802C4A4())

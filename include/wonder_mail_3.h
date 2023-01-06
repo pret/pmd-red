@@ -32,7 +32,7 @@ struct unkStruct_802C39C
 struct unkStruct_803B344
 {
     // size: 0xB4
-    struct WonderMail unk0;
+    struct WonderMail mail;
     u8* unk14;
     u8* unk18;
     u8 fill1C[0x3C - 0x1C];
@@ -51,12 +51,12 @@ struct unkStruct_203B2F8
     // size: 0x208
     s32 state; // state
     s32 fallbackState;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
+    u8 wonderMailAccepted;
+    bool8 unk9;
+    u8 dungeonIndex;
     u8 unkB;
     struct unkSubStruct_203B2F8 *unkC;
-    u8 unk10;
+    u8 jobSlotIndex;
     u8 fill11[0x14 - 0x11];
     u32 unk14;
     u8 fill18[0x58 - 0x18];
