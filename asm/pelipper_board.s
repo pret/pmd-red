@@ -136,7 +136,7 @@ sub_802EC10:
 	str r0, [r1]
 	ldrb r0, [r2, 0x8]
 	bl GetPelliperBoardSlotInfo
-	bl sub_80968B0
+	bl IsMailinJobSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802EC40

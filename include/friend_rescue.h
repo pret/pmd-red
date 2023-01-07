@@ -4,26 +4,7 @@
 #include "code_8094F88.h"
 #include "item.h"
 #include "pokemon.h"
-
-struct WonderMailStruct_203B2C0_sub
-{
-    struct unkStruct_203B480 mail;
-    struct PokemonStruct pokemon;
-};
-
-struct unkStruct_802F204
-{
-    /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH]; // client name?
-    /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
-    /* 0x14 */ s16 unk14; // poke species (client??)
-    /* 0x16 */ u8 unk16;
-    /* 0x18 */ s32 moneyReward;
-    /* 0x1C */ u8 itemRewards[3]; // MAX_ITEM_REWARDS
-    /* 0x1F */ u8 numItems;
-    /* 0x20 */ u8 friendAreaReward;
-    u8 fill21[0x24 - 0x21];
-    /* 0x24 */ u32 teamRankPtsReward;
-};
+#include "wonder_mail.h"
 
 struct WonderMailStruct_203B33C
 {

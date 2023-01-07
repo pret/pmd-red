@@ -27,12 +27,12 @@ extern bool8 ValidateWonderMail(struct WonderMail *);
 extern struct unkStruct_203B490 *gUnknown_203B490;
 extern struct unkStruct_203B490 gUnknown_2039448;
 
-void sub_80958E8()
+void LoadMailInfo(void)
 {
     gUnknown_203B490 = &gUnknown_2039448;
 }
 
-struct unkStruct_203B490 *sub_80958F8(void)
+struct unkStruct_203B490 *GetMailInfo(void)
 {
     return &gUnknown_2039448;
 }

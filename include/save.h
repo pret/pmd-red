@@ -7,6 +7,7 @@
 #include "rescue_team_info.h"
 #include "pokemon.h"
 #include "item.h"
+#include "code_80958E8.h"
 
 enum
 {
@@ -27,20 +28,20 @@ struct UnkStruct_sub_8011DAC {
     // size: 0x57D4
     u8 fill000[0x4];
     u8 unk004[0x400];
-    u8 unk404[0x10]; // has "POKE_DUNGEON__05"
-    u32 unk414;
+    u8 gameInternalName[0x10]; // has "POKE_DUNGEON__05"
+    u32 checksum;
     u32 unk418;
     u32 unk41C;
     u32 RngState;
     u32 savedRecruitedPokemon;
     u32 unk428;
     u8 fill42C[0x4];
-    u32 unk430;
+    u32 savedTeamInventory;
     u32 savedRescueTeamInfo;
     u32 savedFriendAreas;
     u32 unk43C;
     u32 unk440;
-    u32 unk444;
+    u32 savedMailInfo;
     u8 unk448[0x538C];
 };
 
@@ -52,7 +53,7 @@ struct UnkStruct_203B184 {
     /* 0xC */ u8 *unkC;
     /* 0x10 */ u32 *unk10;
     /* 0x14 */ u32 *unk14;
-    /* 0x18 */ u32 unk18;
+    /* 0x18 */ struct unkStruct_203B490 *mailInfo;
     /* 0x1C */ struct RescueTeamData *RescueTeamInfo;
     /* 0x20 */ u32 unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
@@ -75,7 +76,7 @@ u32 sub_8011C1C(void);
 void sub_8011C28(u32 in);
 s32 sub_8011C34(void);
 void sub_8011C40(s32 in);
-char *sub_8011C4C(void);
+char *GetGameInternalName(void);
 void sub_8011CA8(u32 *out, s32 size);
 u32 ReadSaveFromPak(u32 *a);
 u32 WriteSavetoPak(s32 *param_1, u32 param_2);

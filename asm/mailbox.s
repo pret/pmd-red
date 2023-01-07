@@ -182,7 +182,7 @@ _0802E3FC:
 	movs r0, 0x5
 	str r0, [r1]
 	adds r0, r7, 0
-	bl sub_80968B0
+	bl IsMailinJobSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802E422

@@ -613,8 +613,8 @@ _0809650E:
 	bx r1
 	thumb_func_end sub_80964E4
 
-	thumb_func_start sub_8096514
-sub_8096514:
+	thumb_func_start CountFilledPelipperBoardSlots
+CountFilledPelipperBoardSlots:
 	push {r4,r5,lr}
 	movs r5, 0
 	movs r4, 0
@@ -634,7 +634,7 @@ _0809652A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096514
+	thumb_func_end CountFilledPelipperBoardSlots
 
 	thumb_func_start sub_8096538
 sub_8096538:

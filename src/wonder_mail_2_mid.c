@@ -28,7 +28,7 @@ extern s32 sub_8013800(u32 *, s32);
 extern struct WonderMail *GetPelliperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
-extern u8 sub_80968B0(struct WonderMail *);
+extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern void CreateRescueTitle(void *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 extern void sub_8012BC4(s32, s32, s32, s32 ,s32 ,s32);
@@ -132,7 +132,7 @@ void CreateMailMenu(void)
       }
       else {
        sub_803B35C(mail,local.unk0);
-        if (sub_80968B0(mail) != 0) {
+        if (IsMailinJobSlot(mail)) {
           local.unk3C[11] = 2;
         }
         CreateRescueTitle(&local);
@@ -352,7 +352,7 @@ void sub_802C39C(void)
         local.unk0[0] = gUnknown_203B2E0->unk3C;
         local.unk4C = sub_8013800(&gUnknown_203B2E0->unk8,iVar6);
         sub_803B35C(mail,local.unk0);
-        if (sub_80968B0(GetPelliperBoardSlotInfo(uVar1)) != '\0') {
+        if (IsMailinJobSlot(GetPelliperBoardSlotInfo(uVar1))) {
             local.unk3C[11] = 2;
         }
         CreateRescueTitle(&local);

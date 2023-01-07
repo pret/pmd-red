@@ -1,8 +1,8 @@
 #include "global.h"
 #include "constants/dungeon.h"
+#include "constants/species.h"
 #include "constants/wonder_mail.h"
 #include "item.h"
-#include "wonder_mail.h"
 #include "code_80958E8.h"
 #include "team_inventory.h"
 #include "random.h"
@@ -23,12 +23,12 @@ extern void ResetJobSlot(u8);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80965F4();
-extern void sub_8096698();
+extern void SortPelipperJobs();
 extern struct WonderMail *GetPelliperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
 extern u8 sub_8095B28(struct WonderMail *);
 
-void sub_8096698(void)
+void SortPelipperJobs(void)
 {
     s32 index1;
     s32 index2;
@@ -39,7 +39,7 @@ void sub_8096698(void)
     {
         for(index2 = index1 + 1; index2 < 8; index2++)
         {
-            if(gUnknown_203B490->pelliperBoardJobs[index2].mailType != 0)
+            if(gUnknown_203B490->pelliperBoardJobs[index2].mailType != WONDER_MAIL_TYPE_NONE)
             {
                 if((gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonIndex > gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonIndex) ||
                 ((gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonIndex == gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonIndex) && (gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonFloor > gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonFloor)))
@@ -53,7 +53,7 @@ void sub_8096698(void)
     }
 }
 
-void sub_809674C(void)
+void GeneratePelipperJobs(void)
 {
   s32 range;
   struct WonderMail *mail;
@@ -62,7 +62,7 @@ void sub_809674C(void)
   range = RandomRange(4,8);
   for(index = 0; index < 8; index++)
   {
-    gUnknown_203B490->pelliperBoardJobs[index].mailType = 0;
+    gUnknown_203B490->pelliperBoardJobs[index].mailType = WONDER_MAIL_TYPE_NONE;
   }
   
   index = 0;
@@ -122,10 +122,10 @@ void sub_809674C(void)
     gUnknown_203B490->pelliperBoardJobs[index].rewardType = RandomRange(MONEY, BLANK_4);
   }
   sub_80965F4();
-  sub_8096698();
+  SortPelipperJobs();
 }
 
-bool8 sub_80968B0(struct WonderMail *mail)
+bool8 IsMailinJobSlot(struct WonderMail *mail)
 {
   struct WonderMail *jobSlot;
   s32 index;
@@ -279,7 +279,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
   jobSlot = GetJobSlotInfo(slotIndex);
   param_1->unk0 = FALSE;
   param_1->clientSpecies = jobSlot->clientSpecies;
-  param_1->targetSpecies = 0;
+  param_1->targetSpecies = SPECIES_NONE;
   if (jobSlot->dungeon.dungeonIndex == dungeon) {
     switch(jobSlot->missionType) {
         case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:

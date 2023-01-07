@@ -1121,7 +1121,7 @@ _08000F5E:
 	.align 2, 0
 _08000F64: .4byte 0x000f1209
 _08000F68:
-	bl sub_809674C
+	bl GeneratePelipperJobs
 	bl sub_80961B4
 	bl sub_808ED00
 	adds r7, r4, 0

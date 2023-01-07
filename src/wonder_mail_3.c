@@ -122,7 +122,7 @@ extern void sub_802D1B8();
 extern void sub_802D2A8();
 
 
-extern u8 sub_80968B0(struct WonderMail *);
+extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern u8 sub_8096F50(struct WonderMail *);
 extern u8 sub_802DAA8(void);
 extern u8 sub_802DADC(void);
@@ -297,7 +297,7 @@ void sub_802D2A8(void)
   
   switch(gUnknown_203B2F8->state) {
       case 0:
-        if (sub_80968B0(&gUnknown_203B2F8->unkC->wonderMail) != 0) {
+        if (IsMailinJobSlot(&gUnknown_203B2F8->unkC->wonderMail)) {
             sub_802D1A0(3);
         }
         else if (sub_8096F50(&gUnknown_203B2F8->unkC->wonderMail) != 0) {

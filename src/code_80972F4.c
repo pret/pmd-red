@@ -10,7 +10,7 @@ extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocatio
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void sub_80015C0(u32, u32);
 extern u32 sub_8001784(u32, u32, u16);
-extern void sub_809674C();
+extern void GeneratePelipperJobs(void);
 extern void sub_800199C(u32, s32, u32, s32);
 
 bool8 sub_8096F50(struct WonderMail *mail)
@@ -34,7 +34,7 @@ bool8 sub_8096F50(struct WonderMail *mail)
     return FALSE;
 }
 
-u32 sub_8096FA0(u8 *r0, u32 size)
+u32 RestoreMailInfo(u8 *r0, u32 size)
 {
     s32 index;
     struct unkStruct_8094924 backup;
@@ -79,7 +79,7 @@ u32 sub_8096FA0(u8 *r0, u32 size)
     return backup.unk8;
 }
 
-u32 sub_80970D8(u8 *r0, u32 size)
+u32 SaveMailInfo(u8 *r0, u32 size)
 {
     s32 index;
     struct unkStruct_8094924 backup;
@@ -199,7 +199,7 @@ void sub_809733C(short param_1,u32 param_2)
             case 0xE:
             case 0xF:
             case 0x1C:
-                sub_809674C();
+                GeneratePelipperJobs();
                 break;
         }
       }

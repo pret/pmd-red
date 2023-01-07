@@ -69,7 +69,7 @@ extern void sub_80015C0(u8, u8);
 extern void sub_80018D8(u8, u8, u32);
 extern void sub_800199C(u8, u8, u8, s32);
 extern void sub_8098CC8();
-extern void sub_809674C();
+extern void GeneratePelipperJobs();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
@@ -180,7 +180,7 @@ void sub_8098CC8(void)
         temp = 3;
     }
     ChooseKecleonShopInventory(temp);
-    sub_809674C();
+    GeneratePelipperJobs();
     sub_80961B4();
     ClearAllItems_8091FB4();
 }
