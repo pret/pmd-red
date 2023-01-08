@@ -1,7 +1,11 @@
 #include "global.h"
+#include "constants/iq_skill.h"
 #include "memory.h"
+#include "pokemon.h"
+#include "team_inventory.h"
 #include "text.h"
 #include "input.h"
+#include "item.h"
 
 struct unkStruct_3001B5C
 {
@@ -47,6 +51,207 @@ extern void PlayMenuSoundEffect(u32);
 extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
 extern void AddMenuCursorSprite(void *);
+
+struct unkStruct_203B294
+{   
+    // size: 0x1A8
+    /* 0x0 */ u32 state;
+    /* 0x4 */ u32 fallbackState;
+    u8 unk8[NUM_IQ_SKILLS];
+    u8 unk20[NUM_IQ_SKILLS];
+    u32 unk38;
+    u32 unk3C;
+    u32 unk40;
+    struct unkStruct_80915F4 unk44;
+    /* 0x48 */ struct PokemonStruct *pokeStruct;
+    u32 unk4C;
+    struct ItemSlot unk50;
+    u32 unk54;
+    u8 fill58[0xA4 - 0x58];
+    u32 unkA4;
+    u8 fillA8[0xF4 - 0xA8];
+    u32 unkF4;
+    u32 unkF8;
+    u16 unkFC;
+};
+
+struct unkStruct_203B294 *gUnknown_203B294;
+
+extern u8 gUnknown_80DC5EC[];
+extern u8 gUnknown_202DE58[];
+extern void sub_8022924(s32);
+extern s32 sub_80144A4(s32 *);
+extern u32 sub_801B00C(void);
+extern void sub_801B048(void);
+extern u32 sub_801B410(void);
+extern void sub_801B450(void);
+
+extern u8 sub_8012FD8(u32 *);
+extern void sub_8013114(u32 *, s32 *);
+extern u32 sub_801A6E8(u32);
+extern void sub_8099690(u32);
+extern void sub_801A928(void);
+s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4);
+extern u32 sub_801A8AC(void);
+
+void sub_8022E78(void)
+{ 
+  switch(sub_801A6E8(1))
+  {
+      case 3:
+        gUnknown_203B294->unk4C = sub_801A8AC();
+        gUnknown_203B294->unk50 = gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C];
+        sub_8022924(2);
+        break;
+      case 4:
+        gUnknown_203B294->unk4C = sub_801A8AC();
+        gUnknown_203B294->unk50 = gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C];
+        sub_8099690(0);
+        sub_8022924(4);
+        break;
+      case 2:
+        sub_8022924(0x16);
+        break;
+  }
+}
+
+void sub_8022EF4(void)
+{
+  s32 menuAction;
+  s32 r5;
+  
+  menuAction = 0;
+  sub_801A6E8(0);
+  if (sub_8012FD8(&gUnknown_203B294->unk54) == 0) {
+    sub_8013114(&gUnknown_203B294->unk54,&menuAction);
+    if(menuAction != 1) gUnknown_203B294->unkF4 = menuAction;
+  }
+
+  switch(menuAction)
+  {
+      case 1:
+        sub_8022924(1);
+        break;
+      case 2:
+      case 3:
+        break;
+      case 5:
+        gUnknown_203B294->unk38 = GetNumAvailableIQSkills(gUnknown_203B294->unk8, gUnknown_203B294->pokeStruct->IQ);
+        GetGummiItemStatBoost(gUnknown_203B294->pokeStruct, gUnknown_203B294->unk50.itemIndex, 0, &gUnknown_203B294->unk44);
+        gUnknown_203B294->unk3C = GetNumAvailableIQSkills(gUnknown_203B294->unk20, gUnknown_203B294->pokeStruct->IQ);
+        gUnknown_203B294->unk40 = 1;
+        r5 = gUnknown_203B294->unk44.unk0;
+
+        sub_8090E14(gUnknown_202DE58, &gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C], NULL);
+        
+        if(r5 != -1)
+            ShiftItemsDownFrom(gUnknown_203B294->unk4C);
+
+        sub_8099690(0);
+        gUnknown_203B294->fallbackState = 0xA;
+
+        switch(r5 + 1)
+        {
+            case 1:
+                sub_8022924(6);
+                break;
+            case 2:
+                sub_8022924(7);
+                break;
+            case 3:
+                sub_8022924(8);
+                break;
+            case 4:
+                sub_8022924(9);
+                break;
+            default:
+            case 0:
+                gUnknown_203B294->fallbackState = 0x16;
+                sub_8022924(5);
+                break;
+        }
+        break;
+      case 6:
+        sub_8022924(0x15);
+        break;
+      case 4:
+        sub_8022924(3);
+        break;
+      case 7:
+        sub_8099690(0);
+        sub_8022924(4);
+        break;
+  }
+}
+
+void sub_8023068(void)
+{
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_801A6E8(0);
+  sub_8012FD8(&gUnknown_203B294->unk54);
+  if (sub_8012FD8(&gUnknown_203B294->unkA4) == 0) {
+    sub_8013114(&gUnknown_203B294->unkA4,&menuAction);
+  }
+
+  switch(menuAction)
+  {      
+      case 1:
+      case 3:
+            sub_8022924(1);
+            break;
+      case 2:
+        ShiftItemsDownFrom(gUnknown_203B294->unk4C);
+        if (GetNumberOfFilledInventorySlots() == 0) {
+            sub_8099690(0);
+            sub_801A928();
+            sub_8022924(0x14);
+        }
+        else {
+            sub_8022924(1);
+        }
+        break;
+  }
+}
+
+void sub_80230E8(void)
+{
+    switch(sub_801B410())
+    {
+        case 2:
+        case 3:
+            sub_801B450();
+            sub_8022924(1);
+        case 1:
+        case 0:
+            break;
+    }
+}
+
+void sub_8023104(void)
+{
+    switch(sub_801B00C())
+    {
+        case 2:
+        case 3:
+            sub_801B048();
+            sub_8022924(1);
+        case 1:
+        case 0:
+            break;
+    }
+}
+
+void sub_8023120(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_8022924(gUnknown_203B294->fallbackState);
+    }
+}
 
 bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4)
 {

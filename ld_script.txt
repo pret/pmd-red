@@ -82,6 +82,8 @@ SECTIONS {
         src/flash.o(.text);
         src/code_800D090.o(.text);
         asm/code_800D090.o(.text);
+        src/code_800DAC0.o(.text);
+        asm/code_800DAC0.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);
         src/save.o(.text);

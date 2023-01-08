@@ -82,17 +82,17 @@ extern u32 *gUnknown_203B488;
 extern u32 *gUnknown_203B48C;
 extern u32 gUnknown_203B494;
 
-ALIGNED(4) const char PokeDungeon_Text[] = _("POKE_DUNGEON__05");
+ALIGNED(4) const char sGameInternalVersion[] = _("POKE_DUNGEON__05");
 
-ALIGNED(4) const char fill_save0[] = _("pksdir0");
-ALIGNED(4) const char fill_save1[] = _("pksdir0");
-ALIGNED(4) const char fill_save2[] = _("pksdir0");
-ALIGNED(4) const char fill_save3[] = _("pksdir0");
+ALIGNED(4) static const char fill_save0[] = _("pksdir0");
+ALIGNED(4) static const char fill_save1[] = _("pksdir0");
+ALIGNED(4) static const char fill_save2[] = _("pksdir0");
+ALIGNED(4) static const char fill_save3[] = _("pksdir0");
 
 ALIGNED(4) const char gSaveCorrupted[] = _("{CENTER_ALIGN}The game data is corrupted.\n"
                                             "{CENTER_ALIGN}Your data will be erased.");
 
-ALIGNED(4) const char fill_save4[] = _("pksdir0");
+ALIGNED(4) static const char fill_save4[] = _("pksdir0");
 
 ALIGNED(4) const char gSavingAdventure[] = _("{CENTER_ALIGN}Saving your adventure...\n"
                                             "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");
@@ -109,7 +109,7 @@ ALIGNED(4) const char gSaveNotWritten[] = _("{CENTER_ALIGN}The data could not be
 
 ALIGNED(4) const char gSaveFailed[] = _("{CENTER_ALIGN}Save failed.");
 
-ALIGNED(4) const char fill_save5[] = _("pksdir0");
+ALIGNED(4) static const char fill_save5[] = _("pksdir0");
 
 ALIGNED(4) const char gUnknown_80D44C8[] = _("{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
                                              "{CENTER_ALIGN}so your game cannot be resumed\n"
@@ -118,7 +118,7 @@ ALIGNED(4) const char gUnknown_80D44C8[] = _("{CENTER_ALIGN}Your data was not pr
                                              "{CENTER_ALIGN}Before shutting down{COMMA} save in your\n"
                                              "{CENTER_ALIGN}team base{COMMA} or quicksave in a dungeon.");
 
-ALIGNED(4) const char fill_save6[] = _("pksdir0");
+ALIGNED(4) static const char fill_save6[] = _("pksdir0");
 
 ALIGNED(4) const char gUnknown_80D45AC[] = _("{CENTER_ALIGN}Quicksaving your adventure...\n"
                                              "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");
@@ -139,7 +139,7 @@ ALIGNED(4) const char gSaveNotWritten2[] = _("{CENTER_ALIGN}The data could not b
                                              "{CENTER_ALIGN}and reinsert the DS Card.");
 
 ALIGNED(4) const char gSaveFailed2[] = _("{CENTER_ALIGN}Save failed.");
-ALIGNED(4) const char fill_save7[] = _("pksdir0");
+ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 
 
 extern bool8 sub_800DAB0(u16, u8*, s32);

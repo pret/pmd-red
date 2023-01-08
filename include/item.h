@@ -38,7 +38,7 @@ struct HeldItem {
 
 struct unkStruct_80915F4
 {
-    u16 unk0;
+    s16 unk0;
     u16 unk2;
 };
 
