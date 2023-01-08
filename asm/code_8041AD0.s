@@ -237,7 +237,7 @@ _080423E2:
 	.align 2, 0
 _08042428: .4byte 0xffff0000
 _0804242C: .4byte 0x0000ffff
-_08042430: .4byte gDungeonGlobalData
+_08042430: .4byte gDungeon
 _08042434: .4byte 0x000181f2
 _08042438: .4byte 0x000003e7
 _0804243C:
@@ -334,7 +334,7 @@ _080424A6:
 	.align 2, 0
 _080424EC: .4byte 0xffff0000
 _080424F0: .4byte 0x0000ffff
-_080424F4: .4byte gDungeonGlobalData
+_080424F4: .4byte gDungeon
 _080424F8: .4byte 0x000181f2
 _080424FC: .4byte 0x000003e7
 _08042500:
@@ -508,7 +508,7 @@ _080425CC:
 	.align 2, 0
 _0804264C: .4byte 0xffff0000
 _08042650: .4byte 0x0000ffff
-_08042654: .4byte gDungeonGlobalData
+_08042654: .4byte gDungeon
 _08042658: .4byte 0x000181f2
 _0804265C: .4byte 0x00000165
 _08042660: .4byte gAdjacentTileOffsets
@@ -560,7 +560,7 @@ _080426AC:
 	bx r0
 	.align 2, 0
 _080426B8: .4byte 0x000003e5
-_080426BC: .4byte gDungeonGlobalData
+_080426BC: .4byte gDungeon
 _080426C0: .4byte 0x00000644
 _080426C4: .4byte 0x00000155
 	thumb_func_end sub_804267C
@@ -675,7 +675,7 @@ _08042778:
 	movs r0, 0x1
 	b _080427A6
 	.align 2, 0
-_08042794: .4byte gDungeonGlobalData
+_08042794: .4byte gDungeon
 _08042798: .4byte 0x0001820a
 _0804279C:
 	adds r0, r1, 0
@@ -733,7 +733,7 @@ _080427FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042808: .4byte gDungeonGlobalData
+_08042808: .4byte gDungeon
 _0804280C: .4byte 0x000135cc
 _08042810: .4byte gAvailablePokemonNames
 _08042814: .4byte gPtrFeralFoundItemMessage
@@ -753,7 +753,7 @@ sub_8042818:
 	ldr r4, [r0]
 	cmp r4, 0
 	bne _08042836
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 _08042836:
 	ldr r1, _0804287C
@@ -775,7 +775,7 @@ _0804284A:
 	blt _08042896
 	cmp r7, 0
 	beq _08042888
-	bl IsBossBattle
+	bl IsBossFight
 	lsls r0, 24
 	cmp r0, 0
 	bne _08042888
@@ -785,7 +785,7 @@ _0804284A:
 	bl sub_804151C
 	b _08042896
 	.align 2, 0
-_08042874: .4byte gDungeonGlobalData
+_08042874: .4byte gDungeon
 _08042878: .4byte 0x000181f8
 _0804287C: .4byte gUnknown_80F682C
 _08042880: .4byte 0x000003e5

@@ -339,7 +339,7 @@ u32 ReadSaveFromPak(u32 *a)
         if (gUnknown_203B184 == NULL) {
             sub_8011C28(r5->unk41C);
             sub_8011C40(r5->unk418);
-            SetRngState(r5->RngState);
+            SetRNGSeed(r5->RngState);
         }
         else {
             gUnknown_203B184->unk054 = r5->unk41C;
@@ -464,7 +464,7 @@ u32 WriteSavetoPak(s32 *param_1, u32 param_2)
   if (gUnknown_203B184 == NULL) {
     iVar1->unk41C = param_2;
     iVar1->unk418 = sub_8011C34();
-    iVar1->RngState = GetRngState();
+    iVar1->RngState = GetRNGSeed();
   }
   else {
     iVar1->unk41C = gUnknown_203B184->unk054;
@@ -726,7 +726,7 @@ void PrepareSavePakWrite(s16 PokemonID)
   gSavePakWrite->pokeID = id_s32;
   gSavePakWrite->faceFile = NULL;
   gSavePakWrite->faceData = NULL;
-  if (PokemonID != SPECIES_NONE) {
+  if (PokemonID != MONSTER_NONE) {
     file = GetDialogueSpriteDataPtr(PokemonID);
     gSavePakWrite->faceFile = file;
     gSavePakWrite->faceData = file->data;

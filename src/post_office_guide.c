@@ -191,7 +191,7 @@ extern struct WonderMail *GetJobSlotInfo(u8);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void sprintf_2(char *buffer, const char *text, ...);
+extern void sprintfStatic(char *buffer, const char *text, ...);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s16 sub_80A2688(u8 r0);
 extern u8 sub_80992E0(s16 *, s16 *);
@@ -223,12 +223,12 @@ u32 CreateHelperPelipperMenu(s16 speciesID)
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gPostOfficeHelper = MemoryAlloc(sizeof(struct PostOfficeHelper), 8);
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, speciesID);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, speciesID);
   monName = GetMonSpecies(speciesID);
   strcpy(gAvailablePokemonNames, monName);
   gPostOfficeHelper->faceFile = NULL;
   gPostOfficeHelper->faceData = NULL;
-  if (speciesID != SPECIES_NONE) {
+  if (speciesID != MONSTER_NONE) {
     faceFile = GetDialogueSpriteDataPtr(species_32);
     gPostOfficeHelper->faceFile = faceFile;
     gPostOfficeHelper->unk14 = 0;
@@ -616,10 +616,10 @@ void DisplayMissionObjectives(void)
             iVar8 = sub_8095228(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
-            sprintf_2(auStack248,gUnknown_80E1F3C,iVar8->dungeon.dungeonFloor);
+            sprintfStatic(auStack248,gUnknown_80E1F3C,iVar8->dungeon.floor);
             xxx_call_draw_string(0x15,16,auStack248,gUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
-            sprintf_2(auStack248,gUnknown_80E1F40,GetMonSpecies(iVar8->clientSpecies));
+            sprintfStatic(auStack248,gUnknown_80E1F40,GetMonSpecies(iVar8->clientSpecies));
             xxx_call_draw_string(0x28,16,auStack248,gUnknown_203B330->unk10,0);
             break;
         case 2:
@@ -635,11 +635,11 @@ void DisplayMissionObjectives(void)
                 for(jobSlotIdx = 0; jobSlotIdx < MAX_ACCEPTED_JOBS; jobSlotIdx++)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
-                    if ((((jobInfo->dungeon.dungeonIndex == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
+                    if ((((jobInfo->dungeon.id == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
                         ) && (jobInfo->mailType != 5)) && (jobInfo->mailType != 7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
-                            sprintf_2(auStack144,gUnknown_80E1F3C,jobInfo->dungeon.dungeonFloor);
+                            sprintfStatic(auStack144,gUnknown_80E1F3C,jobInfo->dungeon.floor);
                             xxx_call_draw_string(21,yCoord,auStack144,gUnknown_203B330->unk10,0);
                         }
                         switch(jobInfo->missionType)
@@ -647,23 +647,23 @@ void DisplayMissionObjectives(void)
                             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
                                 // Bring #C4%s#R
                                 sub_8090DC4(gUnknown_202DE58,jobInfo->targetItem,0);
-                                sprintf_2(auStack144,gUnknown_80E1F60,gUnknown_202DE58);
+                                sprintfStatic(auStack144,gUnknown_80E1F60,gUnknown_202DE58);
                                 xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
                                 // Find #C4%s#R
                                 sub_8090DC4(gUnknown_202DE58,jobInfo->targetItem,0);
-                                sprintf_2(auStack144,gUnknown_80E1F70,gUnknown_202DE58);
+                                sprintfStatic(auStack144,gUnknown_80E1F70,gUnknown_202DE58);
                                 xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:
                                 // Escort to #C6$s#R
-                                sprintf_2(auStack144,gUnknown_80E1F80,GetMonSpecies(jobInfo->targetSpecies));
+                                sprintfStatic(auStack144,gUnknown_80E1F80,GetMonSpecies(jobInfo->targetSpecies));
                                 xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
                                 break;
                             default:
                                 // Rescue #C6%s#R
-                                sprintf_2(auStack144,gUnknown_80E1F40,GetMonSpecies(jobInfo->targetSpecies));
+                                sprintfStatic(auStack144,gUnknown_80E1F40,GetMonSpecies(jobInfo->targetSpecies));
                                 xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
                                 break;
                         }

@@ -216,7 +216,7 @@ sub_8048950:
 	mov r10, r0
 	mov r8, r1
 	ldrb r0, [r1, 0x2]
-	bl GetItemMove
+	bl GetItemMoveID
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
@@ -294,7 +294,7 @@ _080489F6:
 	movs r0, 0x1
 	b _08048A06
 	.align 2, 0
-_080489FC: .4byte gDungeonGlobalData
+_080489FC: .4byte gDungeon
 _08048A00: .4byte 0x0001357c
 _08048A04:
 	movs r0, 0
@@ -381,7 +381,7 @@ _08048A90:
 	ldr r0, _08048AAC
 	b _08048A80
 	.align 2, 0
-_08048AA4: .4byte gDungeonGlobalData
+_08048AA4: .4byte gDungeon
 _08048AA8: .4byte 0x0000065c
 _08048AAC: .4byte gUnknown_80F9BD8
 _08048AB0:
@@ -447,7 +447,7 @@ _08048B20:
 	movs r0, 0x1
 	b _08048B36
 	.align 2, 0
-_08048B24: .4byte gDungeonGlobalData
+_08048B24: .4byte gDungeon
 _08048B28: .4byte 0x0001357c
 _08048B2C: .4byte gRecruitedPokemonRef
 _08048B30: .4byte 0x00008df8
@@ -494,7 +494,7 @@ _08048B4A:
 	b _08048B8E
 	.align 2, 0
 _08048B84: .4byte 0x00000157
-_08048B88: .4byte gDungeonGlobalData
+_08048B88: .4byte gDungeon
 _08048B8C:
 	movs r0, 0
 _08048B8E:
@@ -580,7 +580,7 @@ _08048C24:
 	movs r0, 0x1
 	b _08048C32
 	.align 2, 0
-_08048C28: .4byte gDungeonGlobalData
+_08048C28: .4byte gDungeon
 _08048C2C: .4byte 0x0001357c
 _08048C30:
 	movs r0, 0
@@ -671,7 +671,7 @@ _08048CD0:
 	bl sub_8063B54
 _08048CE2:
 	adds r0, r6, 0
-	bl ResetAction
+	bl ClearMonsterActionFields
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r4, 0
@@ -704,7 +704,7 @@ _08048CE2:
 	bl sub_8044DF0
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl SetAction
+	bl SetMonsterActionFields
 	b _08048D3E
 	.align 2, 0
 _08048D34: .4byte gUnknown_80FECA0

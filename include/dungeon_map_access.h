@@ -5,10 +5,10 @@
 
 struct unkStruct_202F190
 {
-    struct MapTile* unk0[6];
+    struct Tile* unk0[6];
 };
 
-struct MapTile* GetMapTile_1(s32 x, s32 y);
-struct MapTile* GetMapTile_2(s32 x, s32 y);
+struct Tile* GetTile(s32 x, s32 y);
+struct Tile* GetTileSafe(s32 x, s32 y);
 
 #endif

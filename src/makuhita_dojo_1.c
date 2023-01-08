@@ -71,7 +71,7 @@ void DrawDojoCourseList(void)
         xxx_call_draw_string(8,y,gUnknown_80E0824,gUnknown_203B31C->unk64,0); // Draw Star symbol
         color = COLOR_GREEN;
       }
-      sprintf_2(buffer,gUnknown_80E0828,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
+      sprintfStatic(buffer,gUnknown_80E0828,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
       xxx_call_draw_string(0x10,y,buffer,gUnknown_203B31C->unk64,0);
       index++;
     } while (index < gUnknown_203B31C->unk4A);

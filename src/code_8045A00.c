@@ -7,15 +7,15 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern struct DungeonEntityData* GetTrapData_1(struct DungeonEntity *entity);
-extern void SetMessageArgument_2(u8 *, struct DungeonEntityData *, u32);
+extern struct EntityInfo* GetTrapData_1(struct Entity *entity);
+extern void SetMessageArgument_2(u8 *, struct EntityInfo *, u32);
 extern void GetTrapName(u8 *, u8);
 
-void sub_8045BF8(u8 *, struct ItemSlot *);
+void sub_8045BF8(u8 *, struct Item *);
 
 void sub_8045ACC(void)
 {
-  struct DungeonEntity *entity;
+  struct Entity *entity;
   s32 index;
   s32 pokeCount;
   
@@ -23,46 +23,46 @@ void sub_8045ACC(void)
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    entity = gDungeonGlobalData->teamPokemon[index];
+    entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      gDungeonGlobalData->allPokemon[pokeCount] = entity;
+      gDungeon->allPokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
 
   for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
   {
-    entity = gDungeonGlobalData->wildPokemon[index];
+    entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
-      gDungeonGlobalData->allPokemon[pokeCount] = entity;
+      gDungeon->allPokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
   for (; pokeCount < DUNGEON_MAX_POKEMON; pokeCount++) {
-    gDungeonGlobalData->allPokemon[pokeCount] = NULL;
+    gDungeon->allPokemon[pokeCount] = NULL;
   }
 }
 
-s32 GetTeamMemberEntityIndex(struct DungeonEntity *pokemon)
+s32 GetTeamMemberEntityIndex(struct Entity *pokemon)
 {
-  struct DungeonEntity *entity;
+  struct Entity *entity;
   s32 index;
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    entity = gDungeonGlobalData->teamPokemon[index];
+    entity = gDungeon->teamPokemon[index];
     if (pokemon == entity)
       return index;
   }
   return -1;
 }
 
-void SetMessageArgument(char *buffer, struct DungeonEntity *entity, u32 param_3)
+void SetMessageArgument(char *buffer, struct Entity *entity, u32 param_3)
 {
   switch(GetEntityType(entity))
   {
-    case ENTITY_POKEMON:
-        SetMessageArgument_2(buffer, entity->entityData, param_3);
+    case ENTITY_MONSTER:
+        SetMessageArgument_2(buffer, entity->info, param_3);
         break;
     case ENTITY_ITEM:
         sub_8045BF8(buffer, GetItemData_1(entity));
@@ -76,17 +76,17 @@ void SetMessageArgument(char *buffer, struct DungeonEntity *entity, u32 param_3)
   }
 }
 
-void sub_8045BF8(u8 *buffer, struct ItemSlot *item)
+void sub_8045BF8(u8 *buffer, struct Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F699C);
 }
 
-void sub_8045C08(u8 *buffer, struct ItemSlot *item)
+void sub_8045C08(u8 *buffer, struct Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F69A8);
 }
 
-void sub_8045C18(u8 *buffer, struct ItemSlot *item)
+void sub_8045C18(u8 *buffer, struct Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F6990);
 }

@@ -18,7 +18,7 @@ sub_8083660:
 	lsls r1, 5
 	add r1, sp
 	str r0, [r1]
-	bl GetLeaderEntity
+	bl GetLeader
 	ldr r2, _080836D8
 	add r2, sp
 	str r0, [r2]
@@ -29,10 +29,10 @@ sub_8083660:
 	str r0, [r1]
 _0808368A:
 	movs r0, 0x38
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r0, 0x20
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r2, _080836E0
 	add r2, sp
 	str r0, [r2]
@@ -178,7 +178,7 @@ _0808379C:
 	ldr r2, _0808380C
 	add r2, sp
 	str r3, [r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r2, r0, 0
 	ldr r0, _08083810
 	ldr r1, _0808380C
@@ -210,7 +210,7 @@ _080837E6:
 	cmp r7, 0
 	beq _08083820
 	adds r0, r7, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r0, 2
 	mov r2, sp
 	adds r1, r2, r0
@@ -290,7 +290,7 @@ _0808386A:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r7, 0x80
@@ -441,7 +441,7 @@ _08083960:
 	b _080839D0
 	.align 2, 0
 _080839A0: .4byte gUnknown_80F4CC4
-_080839A4: .4byte gDungeonGlobalData
+_080839A4: .4byte gDungeon
 _080839A8: .4byte 0x000037fc
 _080839AC: .4byte 0x000135cc
 _080839B0:

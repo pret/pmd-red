@@ -71,7 +71,7 @@ extern void sub_80878F4(u32,u8);
 extern void sub_8088088(u32,u8);
 extern void sub_8088818(u32,u8);
 extern void sub_80893B4(u32,u8);
-extern void sub_8089788(struct DungeonEntity *,u32,u8);
+extern void sub_8089788(struct Entity *,u32,u8);
 extern void sub_8089A00(u32,u8);
 extern void sub_8089CFC(u32,u8);
 extern void sub_8089FF0(u32,u8);
@@ -86,7 +86,7 @@ extern void sub_808BE70(u32,u8,u8);
 extern void sub_808C1A4(u32,u8,u8);
 extern void sub_808C414(u32,u8,u8);
 extern void nullsub_100(u32,u8,u8);
-extern void sub_808C948(struct DungeonEntity *,u8);
+extern void sub_808C948(struct Entity *,u8);
 
 extern void sub_808AFB0(u8);
 extern void sub_808B030(u8);
@@ -151,29 +151,29 @@ extern void sub_807E5E4(u32);
 
 void sub_8084854(u8 *param_1)
 {
-  if (gDungeonGlobalData->unk678 != 0) {
-       gDungeonGlobalData->unk3A0D = param_1[5];
+  if (gDungeon->unk678 != 0) {
+       gDungeon->unk3A0D = param_1[5];
   }
   else
   {
     if (sub_8098100(param_1[4]) != 0) {
-        gDungeonGlobalData->unk3A0D = param_1[5];
+        gDungeon->unk3A0D = param_1[5];
     }
     else
     {
       if (sub_8098100(param_1[2]) != 0) {
-        gDungeonGlobalData->unk3A0D = param_1[3];
+        gDungeon->unk3A0D = param_1[3];
       }
       else
       {
-        gDungeonGlobalData->unk3A0D = param_1[1];
+        gDungeon->unk3A0D = param_1[1];
         if (param_1[2] != 0x40) {
           sub_8097FA8();
         }
       }
     }
   }
-  gDungeonGlobalData->unk675 = 1;
+  gDungeon->unk675 = 1;
   sub_807E5E4(0);
 }
 
@@ -184,11 +184,11 @@ u32 sub_80848EC(void)
 
 void sub_80848F0(void)
 {
-  gDungeonGlobalData->unk1356C = 1;
-  switch(gDungeonGlobalData->unk3A0D) {
+  gDungeon->unk1356C = 1;
+  switch(gDungeon->unk3A0D) {
     case 0:
     case 0x3c:
-        gDungeonGlobalData->unk1356C = 0;
+        gDungeon->unk1356C = 0;
         break;
     case 1:
     case 2:
@@ -358,7 +358,7 @@ void sub_80848F0(void)
 void DisplayPreFightDialogue(void)
 {
 
-  switch(gDungeonGlobalData->unk3A0D) {
+  switch(gDungeon->unk3A0D) {
       case 0:
         break;
       case 1:
@@ -541,110 +541,110 @@ void DisplayPreFightDialogue(void)
   }
   sub_8085764();
   sub_80857B8();
-  gDungeonGlobalData->unk1356C = 0;
+  gDungeon->unk1356C = 0;
   sub_8097FF8();
 }
 
-void sub_8084E00(struct DungeonEntity *param_1,char param_2,char param_3)
+void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
 {
 
   if (param_2 != '\0') {
-    switch(gDungeonGlobalData->unk3A0D) {
+    switch(gDungeon->unk3A0D) {
         case 0:
             break;
         case 1:
         case 2:
-            sub_8086BDC(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8086BDC(param_2,gDungeon->unk3A0D);
             break;
         case 4:
         case 5:
-            sub_8086F54(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8086F54(param_2,gDungeon->unk3A0D);
             break;
         case 7:
         case 8:
         case 9:
-            sub_8087334(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8087334(param_2,gDungeon->unk3A0D);
             break;
         case 10:
         case 0xb:
         case 0xc:
-            sub_80878F4(param_2,gDungeonGlobalData->unk3A0D);
+            sub_80878F4(param_2,gDungeon->unk3A0D);
             break;
         case 0xd:
         case 0xe:
         case 0xf:
-            sub_8088088(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8088088(param_2,gDungeon->unk3A0D);
             break;
         case 0x12:
         case 0x13:
         case 0x14:
-            sub_8088818(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8088818(param_2,gDungeon->unk3A0D);
             break;
         case 0x17:
         case 0x18:
         case 0x19:
-            sub_80893B4(param_2,gDungeonGlobalData->unk3A0D);
+            sub_80893B4(param_2,gDungeon->unk3A0D);
             break;
         case 0x1a:
         case 0x1b:
-            sub_8089788(param_1,param_2,gDungeonGlobalData->unk3A0D);
+            sub_8089788(param_1,param_2,gDungeon->unk3A0D);
             break;
         case 0x1d:
         case 0x1e:
         case 0x1f:
-            sub_8089A00(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8089A00(param_2,gDungeon->unk3A0D);
             break;
         case 0x20:
         case 0x21:
         case 0x22:
-            sub_8089CFC(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8089CFC(param_2,gDungeon->unk3A0D);
             break;
         case 0x23:
         case 0x24:
         case 0x25:
-            sub_8089FF0(param_2,gDungeonGlobalData->unk3A0D);
+            sub_8089FF0(param_2,gDungeon->unk3A0D);
             break;
         case 0x26:
         case 0x27:
         case 0x28:
-            sub_808A36C(param_2,gDungeonGlobalData->unk3A0D);
+            sub_808A36C(param_2,gDungeon->unk3A0D);
             break;
         case 0x29:
         case 0x2a:
-            sub_808A6E8(param_2,gDungeonGlobalData->unk3A0D);
+            sub_808A6E8(param_2,gDungeon->unk3A0D);
             break;
         case 0x2b:
         case 0x2c:
         case 0x2d:
-            sub_808AAF0(param_2,gDungeonGlobalData->unk3A0D);
+            sub_808AAF0(param_2,gDungeon->unk3A0D);
             break;
         case 0x2e:
-            sub_808AE54(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
+            sub_808AE54(param_2,gDungeon->unk3A0D,&param_1->pos.x);
             break;
         case 0x2f:
-            sub_808AEC8(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
+            sub_808AEC8(param_2,gDungeon->unk3A0D,&param_1->pos.x);
             break;
         case 0x30:
-            sub_808AF3C(param_2,gDungeonGlobalData->unk3A0D,&param_1->posWorld.x);
+            sub_808AF3C(param_2,gDungeon->unk3A0D,&param_1->pos.x);
             break;
         case 0x31:
         case 0x32:
-            sub_808B3E4(param_2,gDungeonGlobalData->unk3A0D,param_3);
+            sub_808B3E4(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x33:
-            sub_808BE70(param_2,gDungeonGlobalData->unk3A0D,param_3);
+            sub_808BE70(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x34:
-            sub_808C1A4(param_2,gDungeonGlobalData->unk3A0D,param_3);
+            sub_808C1A4(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x35:
-            sub_808C414(param_2,gDungeonGlobalData->unk3A0D,param_3);
+            sub_808C414(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x36:
-            nullsub_100(param_2,gDungeonGlobalData->unk3A0D,param_3);
+            nullsub_100(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x37:
-            sub_808C948(param_1,gDungeonGlobalData->unk3A0D);
+            sub_808C948(param_1,gDungeon->unk3A0D);
             break;
         case 0x38:
         case 0x39:
@@ -653,7 +653,7 @@ void sub_8084E00(struct DungeonEntity *param_1,char param_2,char param_3)
         case 0x3C:
             break;
     }
-    if ((param_3 == '\0') && (gDungeonGlobalData->unk2 != '\0')) {
+    if ((param_3 == '\0') && (gDungeon->unk2 != '\0')) {
       DungeonStartNewBGM(999);
     }
   }
@@ -661,7 +661,7 @@ void sub_8084E00(struct DungeonEntity *param_1,char param_2,char param_3)
 
 void sub_8085140(void)
 {
-    switch(gDungeonGlobalData->unk3A0D) {
+    switch(gDungeon->unk3A0D) {
         // NOTE: shortcut way to generate all cases from 0 - 0x3C properly
         default:
         case 0:
@@ -669,13 +669,13 @@ void sub_8085140(void)
         case 0x3C:
             break;
         case 0x2e:
-            sub_808AFB0(gDungeonGlobalData->unk3A0D);
+            sub_808AFB0(gDungeon->unk3A0D);
             break;
         case 0x2f:
-            sub_808B030(gDungeonGlobalData->unk3A0D);
+            sub_808B030(gDungeon->unk3A0D);
             break;
         case 0x30:
-            sub_808B0B0(gDungeonGlobalData->unk3A0D);
+            sub_808B0B0(gDungeon->unk3A0D);
             break;
   }
 }

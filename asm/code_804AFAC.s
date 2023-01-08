@@ -166,7 +166,7 @@ _0804B09C:
 _0804B0E4:
 	b _0804B2F6
 	.align 2, 0
-_0804B0E8: .4byte gDungeonGlobalData
+_0804B0E8: .4byte gDungeon
 _0804B0EC: .4byte 0x0001c574
 _0804B0F0: .4byte gUnknown_80F6DCC
 _0804B0F4: .4byte gDungeonFileArchive
@@ -206,7 +206,7 @@ _0804B16A:
 	beq _0804B17E
 	movs r0, 0x2
 	movs r1, 0x9
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r0, 0x2
 	movs r1, 0x8
@@ -214,12 +214,12 @@ _0804B16A:
 _0804B17E:
 	movs r0, 0x2
 	movs r1, 0x5
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r0, 0x2
 	movs r1, 0x4
 _0804B18C:
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	cmp r5, 0x6
 	bgt _0804B19A
@@ -269,7 +269,7 @@ _0804B1C0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804B1EC: .4byte gDungeonGlobalData
+_0804B1EC: .4byte gDungeon
 _0804B1F0: .4byte 0x00003a08
 _0804B1F4: .4byte 0x00003a0c
 _0804B1F8: .4byte gUnknown_202F1D0
@@ -290,7 +290,7 @@ _0804B200:
 	.4byte _0804B250
 _0804B230:
 	movs r0, 0x2
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0x2
 	ldr r1, _0804B24C
 	movs r0, 0x1
@@ -304,7 +304,7 @@ _0804B230:
 _0804B24C: .4byte gUnknown_202F1AE
 _0804B250:
 	movs r0, 0x2
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0x2
 	ldr r1, _0804B270
 	movs r0, 0x2
@@ -332,7 +332,7 @@ _0804B280:
 	adds r0, r1
 	b _0804B2BC
 	.align 2, 0
-_0804B290: .4byte gDungeonGlobalData
+_0804B290: .4byte gDungeon
 _0804B294: .4byte 0x00003a08
 _0804B298:
 	mov r0, r8
@@ -358,7 +358,7 @@ _0804B2BC:
 	strb r1, [r0]
 	b _0804B2F6
 	.align 2, 0
-_0804B2C4: .4byte gDungeonGlobalData
+_0804B2C4: .4byte gDungeon
 _0804B2C8: .4byte 0x00003a08
 _0804B2CC:
 	mov r0, r8
@@ -405,7 +405,7 @@ _0804B318:
 _0804B31C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r0, [r1]
 	movs r2, 0x3
@@ -478,7 +478,7 @@ _0804B398:
 	bl sub_80506F0
 _0804B3AA:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	movs r4, 0
 	mov r3, r8
 	ldrb r3, [r3, 0x19]
@@ -604,7 +604,7 @@ _0804B498:
 _0804B4B4: .4byte gUnknown_202F1A9
 _0804B4B8: .4byte gUnknown_202F1D8
 _0804B4BC: .4byte 0x0000ffff
-_0804B4C0: .4byte gDungeonGlobalData
+_0804B4C0: .4byte gDungeon
 _0804B4C4: .4byte 0x00003a08
 _0804B4C8: .4byte 0x0000e218
 _0804B4CC: .4byte 0x0000e21a
@@ -646,7 +646,7 @@ _0804B504:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804B524: .4byte gDungeonGlobalData
+_0804B524: .4byte gDungeon
 _0804B528: .4byte 0x00003a0a
 _0804B52C: .4byte gUnknown_202F1A8
 _0804B530: .4byte 0x00013568
@@ -679,7 +679,7 @@ _0804B55A:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0xC]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	ldr r6, _0804B630
@@ -701,7 +701,7 @@ _0804B55A:
 	subs r0, r5, 0x1
 	adds r1, r4, 0
 	str r2, [sp, 0x8]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r7, 0
 	ands r0, r1
@@ -717,7 +717,7 @@ _0804B5A4:
 	adds r0, r5, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -733,7 +733,7 @@ _0804B5C4:
 	adds r1, r4, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -750,7 +750,7 @@ _0804B5E4:
 	adds r1, r6, 0
 	str r2, [sp, 0x8]
 	str r3, [sp, 0xC]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -1145,21 +1145,21 @@ _0804B8B4:
 	subs r5, 0x3
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r8, r0
 	movs r0, 0x4
 	adds r1, r5, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	mov r2, r8
 	subs r4, r2
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	add r4, r10
 	subs r5, r6
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r5, _0804B9E4
 	add r5, sp
 	ldr r3, [r5]
@@ -1196,7 +1196,7 @@ _0804B962:
 	ldr r2, _0804B9F0
 	add r2, sp
 	str r3, [r2]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -1205,7 +1205,7 @@ _0804B962:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldr r1, _0804B9D0
 	add r1, sp
 	ldrb r1, [r1]
@@ -1279,12 +1279,12 @@ _0804B9F4:
 	subs r4, r3
 	subs r4, 0x3
 	adds r1, r0, r1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	adds r4, r6, r4
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	strh r5, [r7]
 	adds r0, r5, 0x1
@@ -1294,7 +1294,7 @@ _0804B9F4:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, _0804BBF8
 	adds r2, r3, 0
@@ -1304,7 +1304,7 @@ _0804B9F4:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BA72:
@@ -1756,21 +1756,21 @@ _0804BDD8:
 	subs r5, 0x3
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r8, r0
 	movs r0, 0x4
 	adds r1, r5, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	mov r0, r8
 	subs r4, r0
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	add r4, r9
 	subs r5, r6
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r2, _0804BEF0
 	add r2, sp
 	ldr r1, [r2]
@@ -1805,7 +1805,7 @@ _0804BE84:
 	ldr r2, _0804BEFC
 	add r2, sp
 	str r3, [r2]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -1814,7 +1814,7 @@ _0804BE84:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldr r1, _0804BEE0
 	add r1, sp
 	ldrb r1, [r1]
@@ -1887,12 +1887,12 @@ _0804BF00:
 	subs r4, r3
 	subs r4, 0x3
 	adds r1, r0, r1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	add r4, r8
 	mov r0, r8
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	strh r5, [r7]
 	adds r0, r5, 0x1
@@ -1902,7 +1902,7 @@ _0804BF00:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r6, _0804C090
 	adds r2, r6, 0
@@ -1912,7 +1912,7 @@ _0804BF00:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BF88:
@@ -2542,7 +2542,7 @@ _0804C498:
 	movs r2, 0
 	ldrsh r0, [r3, r2]
 	mov r1, r10
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	ldr r5, [sp, 0x8]
@@ -2563,7 +2563,7 @@ _0804C4C2:
 _0804C4CE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x1
@@ -2882,7 +2882,7 @@ _0804C736:
 	bl sub_804C918
 	b _0804C782
 	.align 2, 0
-_0804C73C: .4byte gDungeonGlobalData
+_0804C73C: .4byte gDungeon
 _0804C740: .4byte 0x00013568
 _0804C744:
 	cmp r7, 0x31
@@ -3012,10 +3012,10 @@ _0804C836:
 	cmp r7, 0x3F
 	bgt _0804C864
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r6, r0, 0
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r8, r0
 	mov r0, r8
 	muls r0, r5
@@ -3164,7 +3164,7 @@ _0804C95C:
 _0804C972:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -3173,7 +3173,7 @@ _0804C972:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	strb r1, [r0, 0x9]
 	adds r4, 0x1
@@ -3308,21 +3308,21 @@ _0804CA3C:
 	subs r5, 0x3
 	movs r0, 0xA
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r8, r0
 	movs r0, 0x10
 	adds r1, r5, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	mov r0, r8
 	subs r4, r0
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	add r4, r10
 	subs r5, r6
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r2, _0804CBD4
 	add r2, sp
 	ldr r1, [r2]
@@ -3373,7 +3373,7 @@ _0804CB0C:
 	lsls r2, 5
 	add r2, sp
 	str r3, [r2]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -3382,7 +3382,7 @@ _0804CB0C:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xE5
 	lsls r1, 5
 	add r1, sp
@@ -3489,10 +3489,10 @@ _0804CC06:
 	b _0804D006
 _0804CC0E:
 	ldr r0, [sp, 0x4]
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r9, r0
 	ldr r0, [sp, 0x8]
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r10, r0
 	lsls r0, 5
 	mov r2, r9
@@ -3528,16 +3528,16 @@ _0804CC52:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r7, r0, 0
 	movs r3, 0x2
 	ldrsh r0, [r4, r3]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r0, 1
 	mov r8, r0
 	ldr r1, [sp, 0x8]
@@ -3588,7 +3588,7 @@ _0804CCC0:
 	bge _0804CC84
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r5, [r0, 0x9]
 	ldr r1, _0804CCE0
 	mov r3, r8
@@ -3607,7 +3607,7 @@ _0804CCE4:
 _0804CCF0:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	cmp r5, r0
 	beq _0804CCE4
@@ -3628,7 +3628,7 @@ _0804CD0C:
 _0804CD18:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -3637,7 +3637,7 @@ _0804CD18:
 	beq _0804CD0C
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3692,7 +3692,7 @@ _0804CD72:
 	adds r0, r7, r0
 	adds r1, r6, r1
 	str r2, [sp, 0x1C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -3713,7 +3713,7 @@ _0804CDA2:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	adds r1, r6, r1
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3722,7 +3722,7 @@ _0804CDA2:
 	b _0804CFFC
 _0804CDC8:
 	movs r0, 0x3
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r0, 0x3
 	str r0, [sp, 0x10]
 	b _0804CFD4
@@ -3731,7 +3731,7 @@ _0804CDD4: .4byte gAdjacentTileOffsets
 _0804CDD8:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x10
 	ands r0, r1
@@ -3744,7 +3744,7 @@ _0804CDEC:
 	adds r4, r7, 0x1
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r10
 	ands r0, r1
@@ -3754,7 +3754,7 @@ _0804CDEC:
 	adds r5, r6, 0x1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r0, [r0]
 	mov r4, r10
 	ands r4, r0
@@ -3762,7 +3762,7 @@ _0804CDEC:
 	bne _0804CE32
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r0, [r0]
 	mov r1, r10
 	ands r0, r1
@@ -3774,7 +3774,7 @@ _0804CDEC:
 _0804CE32:
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -3784,7 +3784,7 @@ _0804CE32:
 	subs r4, r6, 0x1
 	mov r0, r9
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3792,7 +3792,7 @@ _0804CE32:
 	bne _0804CE70
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3804,7 +3804,7 @@ _0804CE70:
 	subs r4, r7, 0x1
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -3815,7 +3815,7 @@ _0804CE70:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x1C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -3824,7 +3824,7 @@ _0804CE70:
 	bne _0804CEB6
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -3836,7 +3836,7 @@ _0804CE70:
 _0804CEB6:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -3847,7 +3847,7 @@ _0804CEB6:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x1C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -3856,7 +3856,7 @@ _0804CEB6:
 	bne _0804CEFA
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x1C]
 	adds r0, r2, 0
@@ -3871,7 +3871,7 @@ _0804CEFA:
 	beq _0804CF16
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, _0804D018
 	adds r2, r3, 0
@@ -3898,7 +3898,7 @@ _0804CF16:
 	adds r0, r7, r0
 	adds r1, r6, r1
 	str r2, [sp, 0x1C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r5, 0x3
 	adds r0, r5, 0
@@ -3919,7 +3919,7 @@ _0804CF16:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	adds r1, r6, r1
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3931,11 +3931,11 @@ _0804CF16:
 	cmp r0, 0
 	bne _0804CFC0
 	movs r0, 0x3
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r0, 0x3
 	str r0, [sp, 0x10]
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r8, r4
 	cmp r0, 0x31
 	bgt _0804CF96
@@ -3985,7 +3985,7 @@ _0804CFD4:
 	bgt _0804CFFC
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r3, 0x3
 	mov r10, r3
@@ -4196,7 +4196,7 @@ sub_804D154:
 	mov r8, r2
 	adds r4, r3, 0
 	movs r0, 0x3
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r3, r0, 0
 	cmp r4, 0
 	bge _0804D17E
@@ -4239,10 +4239,10 @@ _0804D1AC:
 	movs r6, 0x3F
 _0804D1B0:
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r1, sp
 	adds r2, r1, r4
 	ldrb r3, [r2]
@@ -4357,7 +4357,7 @@ _0804D282:
 	movs r0, 0x64
 	str r1, [sp, 0x108]
 	str r2, [sp, 0x10C]
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, [sp, 0x108]
 	ldr r2, [sp, 0x10C]
 	cmp r0, 0x3B
@@ -4474,11 +4474,11 @@ _0804D352:
 _0804D35A:
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	movs r0, 0x4
 	mov r1, r8
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r1, 0x1
 	adds r0, r6, 0
@@ -4512,12 +4512,12 @@ _0804D394:
 	adds r5, r0, 0
 _0804D3A4:
 	subs r0, r4, r6
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	add r4, r9
 	mov r1, r8
 	subs r0, r1, r5
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r2, [sp, 0x18]
 	adds r0, r2
 	mov r8, r0
@@ -4544,7 +4544,7 @@ _0804D3E0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x34]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -4553,7 +4553,7 @@ _0804D3E0:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, sp
 	ldrb r1, [r1, 0x10]
 	strb r1, [r0, 0x9]
@@ -4568,7 +4568,7 @@ _0804D40C:
 _0804D412:
 	movs r5, 0x1
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	movs r1, 0
 	cmp r0, 0x4F
 	bgt _0804D422
@@ -4593,7 +4593,7 @@ _0804D43A:
 	cmp r4, 0
 	beq _0804D44E
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x31
 	ble _0804D466
 	movs r4, 0
@@ -4663,14 +4663,14 @@ _0804D4BA:
 	adds r1, r5, r4
 	subs r1, r3
 	str r2, [sp, 0x30]
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	ldr r1, [sp, 0x18]
 	adds r0, r1, r6
 	add r1, r8
 	ldr r2, [sp, 0x30]
 	subs r1, r2
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	strh r5, [r7]
 	adds r0, r5, 0x1
@@ -4680,7 +4680,7 @@ _0804D4BA:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, _0804D530
 	adds r2, r3, 0
@@ -4690,7 +4690,7 @@ _0804D4BA:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xFE
 	strb r1, [r0, 0x9]
 _0804D508:
@@ -4801,10 +4801,10 @@ sub_804D5B0:
 	adds r5, r2, 0
 	adds r6, r3, 0
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r8, r0
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	str r0, [sp]
 	str r6, [sp, 0x4]
 	mov r0, r9
@@ -4838,7 +4838,7 @@ sub_804D5F0:
 	ldrb r0, [r0, 0x5]
 	str r0, [sp, 0xC]
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	movs r1, 0
 	mov r10, r1
@@ -4857,10 +4857,10 @@ _0804D620:
 	mov r8, r0
 _0804D630:
 	movs r0, 0x8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r4, 0x3
 	bgt _0804D644
 	adds r5, r0, 0
@@ -5065,7 +5065,7 @@ _0804D796:
 _0804D79C:
 	movs r0, 0x4
 	str r3, [sp, 0x1C]
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	movs r2, 0
 	mov r10, r2
@@ -5398,7 +5398,7 @@ _0804D9E0:
 	movs r3, 0x4
 	ldrsh r1, [r4, r3]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r9, r0
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
@@ -5406,7 +5406,7 @@ _0804D9E0:
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	b _0804DA1A
 	.align 2, 0
@@ -5433,7 +5433,7 @@ _0804DA1A:
 	movs r3, 0x4
 	ldrsh r1, [r6, r3]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r2, r0, 0
 	b _0804DA44
 _0804DA40:
@@ -5481,7 +5481,7 @@ _0804DA74:
 	movs r2, 0x24
 	ldrsh r1, [r5, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r2, r0, 0
 	b _0804DAA0
 _0804DA9C:
@@ -5530,7 +5530,7 @@ _0804DAD4:
 	movs r2, 0x6
 	ldrsh r1, [r7, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r3, r0, 0
 	b _0804DAFE
 _0804DAFA:
@@ -5578,7 +5578,7 @@ _0804DB2E:
 	movs r3, 0x6
 	ldrsh r1, [r1, r3]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r3, r0, 0
 	b _0804DB5C
 _0804DB56:
@@ -5665,7 +5665,7 @@ _0804DBDA:
 	b _0804E018
 _0804DBEC:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r2, r10
 	adds r2, 0x1
 	str r2, [sp, 0x3C]
@@ -5710,7 +5710,7 @@ _0804DC34:
 	b _0804E00C
 _0804DC3C:
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x1
 	bne _0804DC48
 	b _0804DD50
@@ -5798,7 +5798,7 @@ _0804DCCA:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r8, r0
 	ldr r5, [sp, 0x28]
@@ -5815,7 +5815,7 @@ _0804DCF0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -5928,7 +5928,7 @@ _0804DDB4:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	ldr r5, [sp, 0x2C]
@@ -5945,7 +5945,7 @@ _0804DDE0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -6059,7 +6059,7 @@ _0804DEAC:
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
 	ldr r0, [sp, 0x30]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r8, r0
 	ldr r5, [sp, 0x30]
@@ -6076,7 +6076,7 @@ _0804DED0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -6177,7 +6177,7 @@ _0804DF88:
 	ldrsh r0, [r4, r1]
 	adds r1, r6, 0
 	str r3, [sp, 0x54]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r10, r0
 	ldr r5, [sp, 0x34]
@@ -6195,7 +6195,7 @@ _0804DFB6:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -6347,7 +6347,7 @@ _0804E0BE:
 	b _0804E302
 _0804E0C6:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x3B
 	bgt _0804E0D2
 	b _0804E302
@@ -6397,7 +6397,7 @@ _0804E11A:
 	str r1, [sp, 0x30]
 _0804E120:
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	str r0, [sp, 0x1C]
 	cmp r0, 0x1
 	beq _0804E14A
@@ -6514,7 +6514,7 @@ _0804E1EA:
 	mov r1, r8
 	str r2, [sp, 0x38]
 	str r3, [sp, 0x3C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6554,7 +6554,7 @@ _0804E22E:
 	mov r2, r9
 	adds r1, r2, r5
 	str r3, [sp, 0x3C]
-	bl GetMapTile_1
+	bl GetTile
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -6596,7 +6596,7 @@ _0804E278:
 	ldrsh r1, [r1, r3]
 	adds r0, r7, r0
 	add r1, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6617,7 +6617,7 @@ _0804E2AA:
 	bne _0804E2F0
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r4, _0804E2CC
 	adds r1, r4, 0
@@ -6715,7 +6715,7 @@ _0804E352:
 _0804E360:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6723,7 +6723,7 @@ _0804E360:
 	beq _0804E390
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E38C
 	adds r1, r3, 0
@@ -6765,7 +6765,7 @@ _0804E3B2:
 _0804E3BC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6773,7 +6773,7 @@ _0804E3BC:
 	beq _0804E3EC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E3E8
 	adds r1, r3, 0
@@ -6821,7 +6821,7 @@ _0804E416:
 _0804E420:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6829,7 +6829,7 @@ _0804E420:
 	beq _0804E450
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E44C
 	adds r1, r3, 0
@@ -6875,7 +6875,7 @@ _0804E478:
 _0804E482:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6883,7 +6883,7 @@ _0804E482:
 	beq _0804E4B0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E4AC
 	adds r1, r3, 0
@@ -6922,7 +6922,7 @@ _0804E4D0:
 	bgt _0804E57E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6930,7 +6930,7 @@ _0804E4D0:
 	beq _0804E508
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E504
 	adds r1, r3, 0
@@ -6971,7 +6971,7 @@ _0804E52C:
 	bgt _0804E57E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -6979,7 +6979,7 @@ _0804E52C:
 	beq _0804E564
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E560
 	adds r1, r3, 0
@@ -7121,7 +7121,7 @@ _0804E63C:
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	str r0, [sp, 0x24]
 	movs r3, 0x2
 	ldrsh r0, [r4, r3]
@@ -7129,7 +7129,7 @@ _0804E63C:
 	movs r5, 0x6
 	ldrsh r1, [r4, r5]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	ldr r0, [sp, 0x20]
 	cmp r0, 0
@@ -7153,7 +7153,7 @@ _0804E63C:
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r3, 0x2
 	ldrsh r0, [r4, r3]
@@ -7161,7 +7161,7 @@ _0804E63C:
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	b _0804E6AC
 	.align 2, 0
 _0804E6A4: .4byte 0xfffffe20
@@ -7217,7 +7217,7 @@ _0804E6DC:
 	movs r4, 0x24
 	ldrsh r1, [r6, r4]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r1, 0x22
 	ldrsh r0, [r6, r1]
@@ -7225,7 +7225,7 @@ _0804E6DC:
 	movs r2, 0x26
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	b _0804E728
 _0804E724:
 	movs r3, 0x20
@@ -7276,14 +7276,14 @@ _0804E758:
 	movs r2, 0x4
 	ldrsh r1, [r7, r2]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
 	adds r0, 0x1
 	movs r4, 0x6
 	ldrsh r1, [r7, r4]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r3, r0, 0
 	b _0804E79E
 _0804E79A:
@@ -7335,7 +7335,7 @@ _0804E7C8:
 	movs r4, 0x4
 	ldrsh r1, [r2, r4]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r1, r8
 	movs r2, 0x2
 	ldrsh r0, [r1, r2]
@@ -7343,7 +7343,7 @@ _0804E7C8:
 	movs r3, 0x6
 	ldrsh r1, [r1, r3]
 	subs r1, 0x1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r3, r0, 0
 	b _0804E818
 _0804E812:
@@ -7379,7 +7379,7 @@ _0804E848:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, _0804E99C
 	adds r2, r3, 0
@@ -7494,7 +7494,7 @@ _0804E908:
 _0804E926:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	ldr r3, _0804E99C
 	adds r1, r3, 0
@@ -7609,7 +7609,7 @@ _0804E9F2:
 _0804E9F8:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -7620,7 +7620,7 @@ _0804E9F8:
 _0804EA0E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFF
 	bne _0804EAF4
@@ -7628,7 +7628,7 @@ _0804EA0E:
 	ble _0804EA4E
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7653,7 +7653,7 @@ _0804EA4E:
 	ble _0804EA82
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7680,7 +7680,7 @@ _0804EA82:
 	bgt _0804EABA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7707,7 +7707,7 @@ _0804EABA:
 	bgt _0804EB0E
 	mov r0, r10
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7734,13 +7734,13 @@ _0804EAF0: .4byte 0x0000fffc
 _0804EAF4:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFE
 	bne _0804EB0E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804EB0E:
@@ -7786,7 +7786,7 @@ _0804EB4A:
 _0804EB4E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -7794,7 +7794,7 @@ _0804EB4E:
 	beq _0804EBA2
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r3, [r0, 0x9]
 	cmp r3, 0x1F
 	bhi _0804EBA2
@@ -7835,7 +7835,7 @@ _0804EBA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804EBB4: .4byte gDungeonGlobalData
+_0804EBB4: .4byte gDungeon
 _0804EBB8: .4byte 0x00010882
 _0804EBBC: .4byte 0x00010844
 _0804EBC0: .4byte 0x00010884
@@ -7881,7 +7881,7 @@ _0804EC06:
 	b _0804EED4
 _0804EC0C:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r4, r0
 	bgt _0804EC18
 	b _0804EED4
@@ -7901,10 +7901,10 @@ _0804EC20:
 	movs r5, 0xC7
 _0804EC30:
 	movs r0, 0xF
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r0, 0xF
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r4, 1
 	mov r1, sp
 	adds r2, r1, r4
@@ -7922,10 +7922,10 @@ _0804EC30:
 	movs r5, 0xC7
 _0804EC5C:
 	movs r0, 0xF
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r0, 0xF
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r4, 1
 	adds r4, r6, r4
 	movs r1, 0
@@ -8099,7 +8099,7 @@ _0804ED98:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x50]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x20
 	orrs r1, r2
@@ -8185,7 +8185,7 @@ _0804EE18:
 _0804EE38:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x10
 	orrs r1, r2
@@ -8228,7 +8228,7 @@ _0804EE6C:
 	strh r4, [r0, 0x2]
 	b _0804EED4
 	.align 2, 0
-_0804EE90: .4byte gDungeonGlobalData
+_0804EE90: .4byte gDungeon
 _0804EE94: .4byte gUnknown_202F1D8
 _0804EE98: .4byte 0x0000ffff
 _0804EE9C: .4byte gUnknown_202F1AB
@@ -8282,7 +8282,7 @@ sub_804EEE4:
 	b _0804F0C0
 _0804EF04:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r4, r0
 	bgt _0804EF10
 	b _0804F0C0
@@ -8378,10 +8378,10 @@ _0804EFA0:
 	movs r5, 0x3F
 _0804EFB0:
 	adds r0, r6, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r3, sp
 	adds r2, r3, r4
 	ldrb r3, [r2]
@@ -8466,14 +8466,14 @@ _0804F046:
 _0804F05A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r1, [r0, 0x9]
 	ldr r2, [sp, 0x104]
 	ldr r3, _0804F0A0
@@ -8493,7 +8493,7 @@ _0804F086:
 	blt _0804F046
 	b _0804F0C0
 	.align 2, 0
-_0804F094: .4byte gDungeonGlobalData
+_0804F094: .4byte gDungeon
 _0804F098: .4byte gUnknown_202F1AA
 _0804F09C: .4byte gUnknown_202F1AB
 _0804F0A0: .4byte 0x00003a0c
@@ -8544,7 +8544,7 @@ sub_804F0D0:
 	b _0804F266
 _0804F0EE:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r4, r0
 	bgt _0804F0FA
 	b _0804F266
@@ -8641,10 +8641,10 @@ _0804F18E:
 	mov r8, r7
 _0804F1A0:
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r1, sp
 	adds r2, r1, r4
 	ldrb r3, [r2]
@@ -8722,7 +8722,7 @@ _0804F1DE:
 	bl sub_804F278
 	b _0804F266
 	.align 2, 0
-_0804F244: .4byte gDungeonGlobalData
+_0804F244: .4byte gDungeon
 _0804F248: .4byte 0x00003a16
 _0804F24C:
 	movs r0, 0x1
@@ -8772,7 +8772,7 @@ sub_804F278:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	mov r9, r0
 	movs r5, 0
@@ -8786,7 +8786,7 @@ _0804F2B4:
 	ldrsh r1, [r4, r2]
 	subs r1, 0x1
 	adds r0, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -8827,7 +8827,7 @@ _0804F306:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -8867,7 +8867,7 @@ _0804F354:
 	movs r0, 0x6
 	ldrsh r1, [r4, r0]
 	adds r0, r6, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -8909,7 +8909,7 @@ _0804F3A4:
 	ldrsh r0, [r4, r1]
 	subs r0, 0x1
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -8960,7 +8960,7 @@ _0804F3F2:
 _0804F40A:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -8971,7 +8971,7 @@ _0804F40A:
 	beq _0804F438
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x2
@@ -8982,7 +8982,7 @@ _0804F434: .4byte 0x0000fffc
 _0804F438:
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ands r1, r7
 _0804F444:
@@ -9052,12 +9052,12 @@ sub_804F494:
 	mov r10, r0
 _0804F4BA:
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r6, r0, 0
 	movs r7, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9109,7 +9109,7 @@ _0804F50A:
 	ldr r3, [sp, 0x2C]
 	cmp r3, r1
 	ble _0804F534
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r10
 	ands r0, r1
@@ -9140,7 +9140,7 @@ _0804F550:
 _0804F55A:
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9150,7 +9150,7 @@ _0804F55A:
 _0804F570:
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9160,7 +9160,7 @@ _0804F570:
 _0804F586:
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9170,7 +9170,7 @@ _0804F586:
 _0804F59C:
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9220,7 +9220,7 @@ _0804F5E2:
 _0804F5F0:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x20
 	orrs r1, r2
@@ -9265,7 +9265,7 @@ _0804F634:
 _0804F63C:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -9273,7 +9273,7 @@ _0804F63C:
 	bne _0804F660
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0xFF
 	bne _0804F660
@@ -9322,7 +9322,7 @@ sub_804F694:
 	sub sp, 0x8
 	adds r7, r0, 0
 	movs r0, 0x6
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	subs r0, 0x1
 	cmp r0, 0x4
 	bls _0804F6B0
@@ -9354,7 +9354,7 @@ _0804F6DE:
 	adds r0, r7, 0
 	bl sub_804F5D8
 	movs r0, 0x2
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0
 	beq _0804F78E
 	movs r5, 0
@@ -9400,7 +9400,7 @@ _0804F730:
 _0804F73C:
 	mov r0, r8
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9425,7 +9425,7 @@ _0804F75E:
 _0804F76C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -9482,7 +9482,7 @@ _0804F7C8:
 _0804F7D4:
 	adds r0, r4, 0
 	mov r1, r8
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9507,7 +9507,7 @@ _0804F7F6:
 _0804F804:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -9568,7 +9568,7 @@ _0804F864:
 	mov r10, r0
 	adds r0, r5, 0
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r1, [sp]
@@ -9576,12 +9576,12 @@ _0804F864:
 	mov r9, r1
 	mov r0, r9
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r2, [sp]
@@ -9589,118 +9589,118 @@ _0804F864:
 	mov r8, r2
 	mov r0, r8
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r6, [sp, 0x4]
 	subs r6, 0x1
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r4, [sp, 0x4]
 	adds r4, 0x1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x4
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	movs r2, 0x40
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x2
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x10
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0, 0x4]
 	orrs r4, r1
 	strh r4, [r0, 0x4]
@@ -9728,7 +9728,7 @@ _0804F9EC:
 _0804F9FC:
 	adds r0, r2, 0x2
 	subs r1, r3, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	movs r5, 0x2
 	ldrsh r0, [r7, r5]
@@ -9736,7 +9736,7 @@ _0804F9FC:
 	movs r2, 0x6
 	ldrsh r1, [r7, r2]
 	subs r1, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r10, r0
 	movs r3, 0
 	ldrsh r0, [r7, r3]
@@ -9744,7 +9744,7 @@ _0804F9FC:
 	movs r5, 0x4
 	ldrsh r1, [r7, r5]
 	subs r1, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r9, r0
 	movs r1, 0x2
 	ldrsh r0, [r7, r1]
@@ -9752,7 +9752,7 @@ _0804F9FC:
 	movs r2, 0x6
 	ldrsh r1, [r7, r2]
 	subs r1, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	ldr r1, _0804FA94
 	ldr r0, [r1]
@@ -9789,7 +9789,7 @@ _0804FA6C:
 _0804FA76:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9841,14 +9841,14 @@ _0804FAD4:
 	movs r5, 0
 	ldrsh r1, [r7, r5]
 	subs r0, r1
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r1, 0x6
 	ldrsh r0, [r7, r1]
 	movs r2, 0x2
 	ldrsh r1, [r7, r2]
 	subs r0, r1
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r2, r0, 0
 	adds r0, r4, r2
 	movs r5, 0x1
@@ -9861,7 +9861,7 @@ _0804FAD4:
 	movs r4, 0x2
 	ldrsh r1, [r7, r4]
 	adds r1, r2
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 _0804FB14:
@@ -9917,28 +9917,28 @@ _0804FB54:
 	ble _0804FBAE
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 _0804FBAE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0
 	bl sub_804F5C4
 	b _0804FBD2
@@ -9979,7 +9979,7 @@ _0804FBF4:
 _0804FBFA:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -10059,7 +10059,7 @@ _0804FC86:
 _0804FC8A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -10067,7 +10067,7 @@ _0804FC8A:
 	bne _0804FCAE
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ands r1, r7
 	mov r2, r8
@@ -10102,7 +10102,7 @@ _0804FCD4:
 _0804FCD8:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x10
 	ands r0, r1
@@ -10110,7 +10110,7 @@ _0804FCD8:
 	beq _0804FCF8
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ands r1, r7
 	strh r1, [r0]
@@ -10160,7 +10160,7 @@ _0804FD3A:
 _0804FD3E:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	bl sub_804FD10
 	subs r3, r7, 0x1
 	cmp r6, 0
@@ -10298,7 +10298,7 @@ _0804FE20:
 _0804FE24:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x10
 	orrs r1, r2
@@ -10372,7 +10372,7 @@ _0804FE96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804FEB4: .4byte gDungeonGlobalData
+_0804FEB4: .4byte gDungeon
 _0804FEB8: .4byte 0x0000e21c
 _0804FEBC: .4byte 0x0000ffff
 _0804FEC0: .4byte 0x0000e21e
@@ -10390,10 +10390,10 @@ sub_804FED0:
 	b _0804FEFA
 _0804FEDA:
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r4, 2
 	adds r4, r7
 	ldr r2, [r4]
@@ -10458,7 +10458,7 @@ _0804FF4C:
 _0804FF56:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -10507,13 +10507,13 @@ _0804FFAA:
 	mov r0, r8
 	cmp r0, 0
 	beq _08050038
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r0, 2
 	mov r1, sp
 	adds r4, r1, r0
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r5, r0, 0
 	ldrh r1, [r5, 0x4]
 	movs r0, 0x1
@@ -10544,7 +10544,7 @@ _08050002:
 _08050004:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -10582,7 +10582,7 @@ _0805003E:
 _0805004A:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -10631,7 +10631,7 @@ _08050092:
 	beq _080500FA
 	subs r0, r4, 0x2
 	adds r1, r4, 0x2
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	cmp r4, 0
 	bgt _080500BC
@@ -10641,7 +10641,7 @@ _080500BC:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _080500FA
@@ -10652,7 +10652,7 @@ _080500BC:
 _080500D8:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x2
 	orrs r1, r2
@@ -10681,7 +10681,7 @@ _08050100:
 _0805010C:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -10708,7 +10708,7 @@ _08050128:
 	beq _0805018E
 	subs r0, r4, 0x2
 	adds r1, r4, 0x2
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	cmp r4, 0
 	ble _0805018E
@@ -10716,7 +10716,7 @@ _08050128:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _0805018E
@@ -10727,7 +10727,7 @@ _08050128:
 _0805016C:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x2
 	orrs r1, r2
@@ -10762,7 +10762,7 @@ _080501A0:
 _080501AC:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -10800,7 +10800,7 @@ _080501E4:
 	bl __divsi3
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	cmp r4, 0x5
 	bgt _08050208
@@ -10817,7 +10817,7 @@ _08050214:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _08050294
@@ -10830,7 +10830,7 @@ _08050230:
 	b _08050254
 	.align 2, 0
 _08050234: .4byte 0xffffe3fc
-_08050238: .4byte gDungeonGlobalData
+_08050238: .4byte gDungeon
 _0805023C: .4byte 0x0000e21c
 _08050240: .4byte 0x0000e21e
 _08050244: .4byte 0x0000fffd
@@ -10839,10 +10839,10 @@ _0805024C: .4byte 0x00003a0c
 _08050250: .4byte gUnknown_80F4DA0
 _08050254:
 	ldrb r1, [r7, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0
 	beq _0805026C
 	ldrh r0, [r4, 0x4]
@@ -10886,7 +10886,7 @@ _0805029A:
 _080502A6:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -10933,7 +10933,7 @@ _080502F0:
 	mov r2, r10
 	ldrb r1, [r2, 0x10]
 	lsrs r0, r1, 1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	cmp r4, 0
 	ble _08050356
@@ -10945,7 +10945,7 @@ _08050318:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r4, 0
 	ble _08050356
@@ -10956,7 +10956,7 @@ _08050318:
 _08050334:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x4
 	orrs r1, r2
@@ -11000,7 +11000,7 @@ _08050378:
 _08050384:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -11055,7 +11055,7 @@ _080503E2:
 	cmp r2, 0
 	beq _08050410
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r0, 2
 	mov r1, sp
 	adds r2, r1, r0
@@ -11078,7 +11078,7 @@ _08050410:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050424: .4byte gDungeonGlobalData
+_08050424: .4byte gDungeon
 _08050428: .4byte 0x0000065c
 _0805042C: .4byte 0x0000e218
 _08050430: .4byte 0x0000e21a
@@ -11107,7 +11107,7 @@ sub_8050438:
 	cmp r1, 0
 	ble _08050478
 	lsrs r0, r1, 1
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r7, r0, 0
 	cmp r7, 0
 	bgt _0805047A
@@ -11115,7 +11115,7 @@ sub_8050438:
 	b _0805047A
 	.align 2, 0
 _08050470: .4byte 0xffffe3f8
-_08050474: .4byte gDungeonGlobalData
+_08050474: .4byte gDungeon
 _08050478:
 	adds r7, r1, 0
 _0805047A:
@@ -11133,7 +11133,7 @@ _08050480:
 _0805048E:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r3, [r1]
 	movs r2, 0x3
@@ -11210,7 +11210,7 @@ _0805051C:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r7, 0
 	ble _0805055E
@@ -11221,7 +11221,7 @@ _0805051C:
 _0805053C:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x8
 	orrs r1, r2
@@ -11284,7 +11284,7 @@ _080505A2:
 _080505B0:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrh r2, [r1]
 	movs r0, 0x3
@@ -11346,7 +11346,7 @@ _08050608:
 	bl __divsi3
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r7, r0, 0
 	cmp r7, 0
 	bne _0805063E
@@ -11365,7 +11365,7 @@ _0805064E:
 	mov r1, r8
 	bl sub_804FED0
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	cmp r7, 0
 	ble _0805068C
@@ -11376,7 +11376,7 @@ _0805064E:
 _0805066A:
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x8
 	orrs r1, r2
@@ -11404,7 +11404,7 @@ _0805068C:
 	.align 2, 0
 _080506A0: .4byte 0x0000e218
 _080506A4: .4byte 0x0000e21a
-_080506A8: .4byte gDungeonGlobalData
+_080506A8: .4byte gDungeon
 _080506AC: .4byte 0x00003a08
 _080506B0: .4byte gUnknown_80F4DA4
 _080506B4: .4byte 0x00001c04
@@ -11460,7 +11460,7 @@ sub_80506F0:
 _08050708:
 	ldr r4, _08050738
 	movs r0, 0x8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	lsls r0, 2
 	adds r0, r4
 	ldr r4, [r0]
@@ -11469,7 +11469,7 @@ _08050708:
 	b _08050A7C
 _0805071C:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x31
 	bgt _0805073C
 	movs r0, 0x1
@@ -11490,12 +11490,12 @@ _0805073C:
 	str r1, [sp, 0x70]
 _08050746:
 	movs r0, 0x32
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r0, 0xA
 	str r0, [sp, 0x78]
 	movs r0, 0x2
 	movs r1, 0x36
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r9, r0
 	movs r2, 0
 	str r2, [sp, 0x6C]
@@ -11503,7 +11503,7 @@ _08050746:
 	str r4, [sp, 0x98]
 _08050762:
 	movs r0, 0x6
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r0, 0x2
 	str r0, [sp, 0x68]
 	cmp r0, 0
@@ -11514,7 +11514,7 @@ _08050772:
 	cmp r0, 0x37
 	bhi _080507B8
 	mov r1, r10
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -11544,7 +11544,7 @@ _080507A8:
 	bne _080507B8
 	mov r0, r9
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	bl sub_80506BC
 _080507B8:
 	ldr r2, [sp, 0x68]
@@ -11570,11 +11570,11 @@ _080507DA:
 	str r1, [sp, 0x7C]
 _080507DE:
 	movs r0, 0x7
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	subs r0, 0x3
 	str r0, [sp, 0x84]
 	movs r0, 0x7
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	subs r1, r0, 0x3
 	ldr r6, [sp, 0x84]
 	add r6, r9
@@ -11592,7 +11592,7 @@ _080507DE:
 	mov r8, r0
 	adds r0, r4, 0
 	mov r1, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -11602,7 +11602,7 @@ _080507DE:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x9C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11612,7 +11612,7 @@ _080507DE:
 	subs r7, r5, 0x1
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11621,7 +11621,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r6, 0
 	mov r1, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11630,7 +11630,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11640,7 +11640,7 @@ _080507DE:
 	subs r4, r6, 0x1
 	adds r0, r4, 0
 	mov r1, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11649,7 +11649,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11658,7 +11658,7 @@ _080507DE:
 	beq _080508B2
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	ldr r2, [sp, 0x9C]
 	adds r0, r2, 0
@@ -11685,7 +11685,7 @@ _080508CC:
 	cmp r1, 0
 	bne _080508DA
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	bl sub_80506BC
 _080508DA:
 	ldr r1, [sp, 0x7C]
@@ -11731,7 +11731,7 @@ _0805091A:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	str r3, [sp, 0xA0]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r2, 0x3
 	mov r8, r2
@@ -11745,7 +11745,7 @@ _0805093A:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r3, [sp, 0xA0]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11759,7 +11759,7 @@ _08050952:
 	adds r1, r2, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11773,7 +11773,7 @@ _08050970:
 	adds r1, r3, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11787,7 +11787,7 @@ _0805098C:
 	adds r1, r2, 0
 	str r2, [sp, 0x9C]
 	str r3, [sp, 0xA0]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11801,7 +11801,7 @@ _080509A8:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	str r2, [sp, 0x9C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11813,7 +11813,7 @@ _080509C2:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp, 0x9C]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11824,7 +11824,7 @@ _080509C2:
 _080509DA:
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	mov r0, r8
 	ands r0, r1
@@ -11853,7 +11853,7 @@ _08050A0A:
 	bne _08050A1A
 	ldr r0, [sp, 0x90]
 	ldr r1, [sp, 0x94]
-	bl GetMapTile_2
+	bl GetTileSafe
 	bl sub_80506BC
 _08050A1A:
 	adds r5, 0x1
@@ -11891,7 +11891,7 @@ _08050A4E:
 	b _08050A6C
 _08050A54:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	movs r2, 0x1
 	str r2, [sp, 0x6C]
 	cmp r0, 0x31
@@ -11934,11 +11934,11 @@ _08050A98:
 	bgt _08050AC2
 	movs r0, 0
 	movs r1, 0x38
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r9, r0
 	movs r0, 0
 	movs r1, 0x20
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r8, r0
 	mov r0, r9
 	subs r0, 0x1
@@ -11987,11 +11987,11 @@ _08050AEE:
 	movs r5, 0x4F
 _08050AFE:
 	movs r0, 0x8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r7, r4, 0x1
 	movs r0, 0x8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r2, r0, 0x1
 	lsls r0, r4, 2
 	adds r0, r4
@@ -12057,7 +12057,7 @@ _08050B7C:
 	subs r0, r7, 0x5
 	adds r1, r6, 0
 	str r2, [sp, 0x9C]
-	bl GetMapTile_2
+	bl GetTileSafe
 	bl sub_80506BC
 	ldr r2, [sp, 0x9C]
 _08050B92:
@@ -12090,7 +12090,7 @@ _08050BB8:
 _08050BC0:
 	mov r0, r9
 	mov r1, r10
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r3, [r2]
 	movs r0, 0x3
@@ -12184,7 +12184,7 @@ _08050C5C:
 _08050C68:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	movs r3, 0x3
@@ -12542,7 +12542,7 @@ _08050F00:
 _08050F08:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r1, [r4]
 	movs r0, 0x87
@@ -12568,7 +12568,7 @@ _08050F36:
 	.align 2, 0
 _08050F3C: .4byte 0xfffff8ec
 _08050F40: .4byte 0x00007fff
-_08050F44: .4byte gDungeonGlobalData
+_08050F44: .4byte gDungeon
 _08050F48: .4byte 0x0000e21c
 _08050F4C: .4byte 0x0000e21e
 _08050F50: .4byte gUnknown_202F1D4
@@ -12689,11 +12689,11 @@ _08051020:
 	beq _0805108C
 	adds r0, r3, 0
 	adds r1, r4, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r6, r0, 0
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	movs r1, 0x1
 	adds r0, r6, 0
@@ -12727,11 +12727,11 @@ _08051062:
 	adds r5, r0, 0
 _08051072:
 	subs r0, r4, r6
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r2, r9
 	adds r4, r0, r2
 	subs r0, r7, r5
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	mov r3, r10
 	adds r7, r0, r3
 	adds r3, r4, r6
@@ -12781,7 +12781,7 @@ _080510D6:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x38]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -12790,7 +12790,7 @@ _080510D6:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r1, sp
 	ldrb r1, [r1, 0x10]
 	strb r1, [r0, 0x9]
@@ -12858,7 +12858,7 @@ _08051162:
 	adds r1, r5, r4
 	subs r1, r3
 	str r2, [sp, 0x34]
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r5, r0, 0
 	ldr r2, [sp, 0x34]
 	mov r1, r10
@@ -12866,7 +12866,7 @@ _08051162:
 	adds r1, r7
 	mov r2, r8
 	subs r1, r2
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r4, r0, 0
 	strh r5, [r6]
 	adds r0, r5, 0x1
@@ -12876,7 +12876,7 @@ _08051162:
 	strh r0, [r6, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r3, _080511EC
 	adds r2, r3, 0
@@ -12886,7 +12886,7 @@ _08051162:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 	ldr r4, [sp, 0x14]
@@ -13070,7 +13070,7 @@ _080512EE:
 	lsrs r4, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	movs r1, 0x1
 	str r1, [sp]
 	adds r1, r4, 0
@@ -13118,7 +13118,7 @@ _08051338:
 _08051350:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x10
@@ -13134,7 +13134,7 @@ _08051350:
 	orrs r1, r0
 	b _0805139E
 	.align 2, 0
-_08051374: .4byte gDungeonGlobalData
+_08051374: .4byte gDungeon
 _08051378: .4byte 0x00013568
 _0805137C: .4byte 0x0000e260
 _08051380: .4byte 0x0000e262
@@ -13167,7 +13167,7 @@ _080513B8:
 _080513BC:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x10
 	orrs r1, r2
@@ -13195,7 +13195,7 @@ _080513EC:
 _080513F0:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -13224,7 +13224,7 @@ _08051416:
 	bx r0
 	.align 2, 0
 _0805142C: .4byte 0x0000fffc
-_08051430: .4byte gDungeonGlobalData
+_08051430: .4byte gDungeon
 _08051434: .4byte 0x00003a0e
 	thumb_func_end sub_8051288
 
@@ -13330,7 +13330,7 @@ _080514EE:
 	lsrs r5, 24
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r6, r0, 0
 	ldr r1, [sp, 0x4]
 	ldr r2, _080515D0
@@ -13419,7 +13419,7 @@ _08051598:
 	blt _080514C4
 	b _08051640
 	.align 2, 0
-_080515AC: .4byte gDungeonGlobalData
+_080515AC: .4byte gDungeon
 _080515B0: .4byte gUnknown_202F1DC
 _080515B4: .4byte 0x00013568
 _080515B8: .4byte gUnknown_202F1E1
@@ -13454,7 +13454,7 @@ _080515F6:
 	lsrs r4, 24
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r5, r0, 0
 	ldrb r6, [r5, 0x9]
 	movs r0, 0x1
@@ -13512,7 +13512,7 @@ sub_8051654:
 	subs r1, r0
 	subs r1, 0x2
 	movs r0, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r8, r0
 	cmp r0, 0x2
 	bgt _0805167C
@@ -13524,7 +13524,7 @@ _0805167C:
 	subs r1, r0
 	subs r1, 0x2
 	movs r0, 0x3
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r9, r0
 	cmp r0, 0x2
 	bgt _08051694
@@ -13533,7 +13533,7 @@ _0805167C:
 _08051694:
 	movs r0, 0x2
 	movs r1, 0x4
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	mov r10, r0
 	movs r5, 0
 	cmp r5, r10
@@ -13546,7 +13546,7 @@ _08051694:
 	adds r6, r4, 0
 _080516B0:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x31
 	bgt _080516F4
 	ldr r4, [r6, 0x4]
@@ -13561,7 +13561,7 @@ _080516CA:
 	ldr r0, [r5]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -13594,7 +13594,7 @@ _0805170A:
 	ldr r0, [r5, 0x8]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -13625,7 +13625,7 @@ _08051734:
 	adds r6, r3, 0
 _08051748:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0x31
 	bgt _0805178C
 	ldr r4, [r6]
@@ -13640,7 +13640,7 @@ _08051762:
 	ldr r1, [r5, 0x4]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -13673,7 +13673,7 @@ _080517A2:
 	ldr r1, [r5, 0xC]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -13713,7 +13713,7 @@ _080517EC:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x20
@@ -13777,7 +13777,7 @@ _08051864:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r6, r0, 0
 	ldrh r1, [r6]
 	movs r0, 0x20
@@ -13807,7 +13807,7 @@ _08051864:
 	movs r0, 0
 	ldrsh r4, [r2, r0]
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r3, [sp, 0x10]
 	cmp r4, r0
 	ble _080518BA
@@ -13853,7 +13853,7 @@ sub_80518F0:
 _080518F8:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r4, r0, 0
 	bl sub_804FD10
 	cmp r5, 0
@@ -13867,7 +13867,7 @@ _0805190E:
 _08051914:
 	adds r0, r5, 0
 	movs r1, 0x1E
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r4, r0, 0
 	bl sub_804FD10
 	cmp r5, 0
@@ -14021,7 +14021,7 @@ sub_8051A24:
 	mov r8, r3
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r7, r0, 0
 	lsls r4, 16
 	lsls r5, 16
@@ -14180,7 +14180,7 @@ _08051BF0:
 	movs r2, 0
 	b _08051D42
 	.align 2, 0
-_08051BFC: .4byte gDungeonGlobalData
+_08051BFC: .4byte gDungeon
 _08051C00: .4byte 0x00000684
 _08051C04: .4byte 0x00000686
 _08051C08: .4byte 0x0000fffc
@@ -14214,7 +14214,7 @@ _08051C20:
 	b _08051E1A
 	.align 2, 0
 _08051C44: .4byte 0x0000fffc
-_08051C48: .4byte gDungeonGlobalData
+_08051C48: .4byte gDungeon
 _08051C4C: .4byte 0x0000e218
 _08051C50: .4byte 0x0000e21a
 _08051C54:
@@ -14275,7 +14275,7 @@ _08051C94:
 	.align 2, 0
 _08051CC0: .4byte 0x0000fffc
 _08051CC4: .4byte 0x0000fffd
-_08051CC8: .4byte gDungeonGlobalData
+_08051CC8: .4byte gDungeon
 _08051CCC: .4byte 0x0000e21c
 _08051CD0: .4byte 0x0000e21e
 _08051CD4:
@@ -14394,7 +14394,7 @@ _08051DA4:
 	strb r1, [r0]
 	b _08051DDC
 	.align 2, 0
-_08051DB0: .4byte gDungeonGlobalData
+_08051DB0: .4byte gDungeon
 _08051DB4: .4byte 0x0000068b
 _08051DB8:
 	ldr r2, [r5, 0x4]
@@ -14457,7 +14457,7 @@ _08051E1A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08051E2C: .4byte gDungeonGlobalData
+_08051E2C: .4byte gDungeon
 _08051E30: .4byte 0x0000e220
 _08051E34: .4byte 0x0000e222
 _08051E38: .4byte 0x0000fffc
@@ -14474,7 +14474,7 @@ _08051E42:
 _08051E46:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrb r0, [r2, 0xE]
 	cmp r0, 0xF
@@ -14514,7 +14514,7 @@ sub_8051E7C:
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
 	subs r1, 0x1
-	bl GetMapTile_2
+	bl GetTileSafe
 	str r0, [sp, 0x8]
 	ldrh r1, [r0]
 	movs r0, 0x80
@@ -14547,7 +14547,7 @@ _08051EC8:
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, r9
-	bl GetEntityRoomIndex
+	bl GetEntityRoom
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0xC]
@@ -14558,7 +14558,7 @@ _08051EC8:
 	subs r6, 0x15
 	b _08051FE0
 	.align 2, 0
-_08051EF0: .4byte gDungeonGlobalData
+_08051EF0: .4byte gDungeon
 _08051EF4: .4byte 0x00003a09
 _08051EF8:
 	mov r2, r9
@@ -14614,7 +14614,7 @@ _08051F10:
 	bge _08051FCA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r4, r0, 0
 	ldrh r0, [r4]
 	movs r3, 0x80
@@ -14791,7 +14791,7 @@ _0805207A:
 	bl sub_803E708
 	b _080520F6
 	.align 2, 0
-_080520C0: .4byte gDungeonGlobalData
+_080520C0: .4byte gDungeon
 _080520C4: .4byte 0x0000e250
 _080520C8: .4byte 0x0000e254
 _080520CC: .4byte 0x0000e258
@@ -14954,7 +14954,7 @@ _080521DE:
 	.align 2, 0
 _08052200: .4byte gUnknown_202F1E8
 _08052204: .4byte gUnknown_203B434
-_08052208: .4byte gDungeonGlobalData
+_08052208: .4byte gDungeon
 _0805220C: .4byte 0x0001c054
 	thumb_func_end sub_80521D0
 
@@ -15015,7 +15015,7 @@ _08052278:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052280: .4byte gDungeonGlobalData
+_08052280: .4byte gDungeon
 _08052284: .4byte 0x0001bdd4
 _08052288: .4byte gUnknown_80F7AE8
 _0805228C: .4byte 0x0001c05f

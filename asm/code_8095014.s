@@ -400,7 +400,7 @@ sub_809542C:
 	ldr r0, [r0]
 	str r0, [r2, 0x4]
 	str r1, [r2, 0x8]
-	bl Random
+	bl Rand32Bit
 	bl sub_8094D28
 	bl sub_8094E4C
 	ldr r1, [r4]

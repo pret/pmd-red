@@ -20,84 +20,84 @@ extern char *gPtrPausedMessage;
 extern char *gPtrInfatuatedMessage;
 extern char gAvailablePokemonNames[];
 
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
+extern void SetMessageArgument(char[], struct Entity*, u32);
 
-bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
+bool8 HasStatusAffectingActions(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-    SetAction(&pokemonData->action, DUNGEON_ACTION_WAIT);
-    switch (pokemonData->sleepStatus)
+    SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+    switch (pokemonInfo->sleep)
     {
-        case SLEEP_STATUS_NIGHTMARE:
-        case SLEEP_STATUS_SLEEP:
-        case SLEEP_STATUS_NAPPING:
+        case STATUS_NIGHTMARE:
+        case STATUS_SLEEP:
+        case STATUS_NAPPING:
             return TRUE;
     }
-    switch (pokemonData->immobilizeStatus)
+    switch (pokemonInfo->immobilizeStatus)
     {
-        case IMMOBILIZE_STATUS_FROZEN:
+        case STATUS_FROZEN:
             SendMessage(pokemon, gPtrFrozenMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE:
+        case STATUS_WRAP:
             SendMessage(pokemon, gPtrWrappedAroundMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_WRAPPED_BY_FOE:
+        case STATUS_WRAPPED:
             SendMessage(pokemon, gPtrWrappedByMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_PETRIFIED:
+        case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonData->volatileStatus)
+    switch (pokemonInfo->volatileStatus)
     {
-        case VOLATILE_STATUS_PAUSED:
+        case STATUS_PAUSED:
             SendMessage(pokemon, gPtrPausedMessage);
             return TRUE;
-        case VOLATILE_STATUS_INFATUATED:
+        case STATUS_INFATUATED:
             SendMessage(pokemon, gPtrInfatuatedMessage);
             return TRUE;
     }
-    if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
+    if (pokemonInfo->chargingStatus == STATUS_BIDE)
     {
         SendMessage(pokemon, gPtrBideMessage);
         return TRUE;
     }
-    if (pokemonData->waitingStatus == WAITING_STATUS_DECOY)
+    if (pokemonInfo->waitingStatus == STATUS_DECOY)
     {
-        SetWalkAction(&pokemonData->action, pokemonData->entityID);
-        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-        pokemonData->targetPosition.x = pokemon->posWorld.x;
-        pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
+        SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+        pokemonInfo->targetPos.x = pokemon->pos.x;
+        pokemonInfo->targetPos.y = pokemon->pos.y - 1;
         return TRUE;
     }
-    if (pokemonData->shopkeeperMode == SHOPKEEPER_FRIENDLY)
+    if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
     {
         return TRUE;
     }
-    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
+    if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
     {
-        if (!CanMoveInDirection(pokemon, pokemonData->action.facingDir))
+        if (!CanMoveInDirection(pokemon, pokemonInfo->action.direction))
         {
-            if (DungeonRandomCapped(2) != 0)
+            if (DungeonRandInt(2) != 0)
             {
-                pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-                pokemonData->action.facingDir = pokemonData->action.facingDir & DIRECTION_MASK;
+                pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+                pokemonInfo->action.direction = pokemonInfo->action.direction & DIRECTION_MASK;
                 goto walk;
             }
         }
         else
         {
             walk:
-            SetWalkAction(&pokemonData->action, pokemonData->entityID);
+            SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
             return TRUE;
         }
         DecideAttack(pokemon);
         return TRUE;
     }
-    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_CROSS_EYED)
+    if (pokemonInfo->eyesightStatus == STATUS_CROSS_EYED)
     {
-        SetWalkAction(&pokemonData->action, pokemonData->entityID);
-        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+        SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
         return TRUE;
     }
     return FALSE;

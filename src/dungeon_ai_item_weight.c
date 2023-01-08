@@ -11,32 +11,32 @@
 #include "number_util.h"
 #include "status_checks_1.h"
 
-u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32 itemTargetFlags)
+u32 EvaluateItem(struct Entity *targetPokemon, struct Item *item, u32 itemTargetFlags)
 {
-    struct DungeonEntityData *pokemonData = targetPokemon->entityData;
+    struct EntityInfo *pokemonInfo = targetPokemon->info;
     s32 itemWeight = 0;
     bool8 targetOther = itemTargetFlags & 1;
     u16 targetAlly = (itemTargetFlags >> 1) & 1;
     s32 i;
-    struct PokemonMove *move;
-    struct PokemonMove *move2;
-    switch (item->itemIndex)
+    struct Move *move;
+    struct Move *move2;
+    switch (item->id)
     {
-        case ITEM_ID_STICK:
-        case ITEM_ID_IRON_THORN:
-        case ITEM_ID_SILVER_SPIKE:
-        case ITEM_ID_GOLD_FANG:
-        case ITEM_ID_CACNEA_SPIKE:
-        case ITEM_ID_CORSOLA_TWIG:
-        case ITEM_ID_GRAVELEROCK:
-        case ITEM_ID_GEO_PEBBLE:
+        case ITEM_STICK:
+        case ITEM_IRON_THORN:
+        case ITEM_SILVER_SPIKE:
+        case ITEM_GOLD_FANG:
+        case ITEM_CACNEA_SPIKE:
+        case ITEM_CORSOLA_TWIG:
+        case ITEM_GRAVELEROCK:
+        case ITEM_GEO_PEBBLE:
             if (targetOther)
             {
                 itemWeight = 70;
             }
             break;
-        case ITEM_ID_DIET_RIBBON:
-            if (targetOther && RoundUpFixedPoint(pokemonData->belly) > 0)
+        case ITEM_DIET_RIBBON:
+            if (targetOther && RoundUpFixedPoint(pokemonInfo->belly) > 0)
             {
                 return 50;
             }
@@ -45,8 +45,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_WHIFF_SPECS:
-        case ITEM_ID_NO_AIM_SCOPE:
+        case ITEM_WHIFF_SPECS:
+        case ITEM_NO_AIM_SCOPE:
             if (targetOther)
             {
                 return 50;
@@ -56,9 +56,9 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_ORAN_BERRY:
-        case ITEM_ID_SITRUS_BERRY:
-            if (pokemonData->HP < pokemonData->maxHP && pokemonData->HP <= pokemonData->maxHP / 4)
+        case ITEM_ORAN_BERRY:
+        case ITEM_SITRUS_BERRY:
+            if (pokemonInfo->HP < pokemonInfo->maxHPStat && pokemonInfo->HP <= pokemonInfo->maxHPStat / 4)
             {
                 if (!targetOther)
                 {
@@ -77,9 +77,9 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 }
             }
             break;
-        case ITEM_ID_MAX_ELIXIR:
+        case ITEM_MAX_ELIXIR:
             itemWeight = 0;
-            move = pokemonData->moves;
+            move = pokemonInfo->moves;
             move2 = move;
             for (i = 0; i < MAX_MON_MOVES; move++, move2++, i++)
             {
@@ -89,7 +89,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                     {
                         itemWeight += 30;
                     }
-                    if (move->PP != GetMoveMaxPP(move2))
+                    if (move->PP != GetMoveBasePP(move2))
                     {
                         itemWeight += 6;
                     }
@@ -100,7 +100,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 99;
             }
             break;
-        case ITEM_ID_HEAL_SEED:
+        case ITEM_HEAL_SEED:
             if (HasNegativeStatus(targetPokemon))
             {
                 itemWeight = 80;
@@ -110,8 +110,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_PROTEIN:
-            if (pokemonData->attack > 249)
+        case ITEM_PROTEIN:
+            if (pokemonInfo->atk > 249)
             {
                 itemWeight = 0;
             }
@@ -120,8 +120,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 100;
             }
             break;
-        case ITEM_ID_CALCIUM:
-            if (pokemonData->specialAttack > 249)
+        case ITEM_CALCIUM:
+            if (pokemonInfo->spAtk > 249)
             {
                 itemWeight = 0;
             }
@@ -130,8 +130,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 100;
             }
             break;
-        case ITEM_ID_IRON:
-            if (pokemonData->defense > 249)
+        case ITEM_IRON:
+            if (pokemonInfo->def > 249)
             {
                 itemWeight = 0;
             }
@@ -140,8 +140,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 100;
             }
             break;
-        case ITEM_ID_ZINC:
-            if (pokemonData->specialDefense > 249)
+        case ITEM_ZINC:
+            if (pokemonInfo->spDef > 249)
             {
                 itemWeight = 0;
             }
@@ -150,7 +150,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 100;
             }
             break;
-        case ITEM_ID_LIFE_SEED:
+        case ITEM_LIFE_SEED:
             if (!targetOther)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
@@ -167,8 +167,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_EYEDROP_SEED:
-            if (!CanSeeInvisible(targetPokemon))
+        case ITEM_EYEDROP_SEED:
+            if (!CanSeeInvisibleMonsters(targetPokemon))
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -184,8 +184,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_QUICK_SEED:
-            if (targetPokemon->entityData->movementSpeed < MAX_MOVEMENT_SPEED)
+        case ITEM_QUICK_SEED:
+            if (targetPokemon->info->speedStage < MAX_SPEED_STAGE)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -201,8 +201,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_ALLURE_SEED:
-            if (pokemonData->eyesightStatus != EYESIGHT_STATUS_CROSS_EYED)
+        case ITEM_ALLURE_SEED:
+            if (pokemonInfo->eyesightStatus != STATUS_CROSS_EYED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -218,8 +218,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_CHERI_BERRY:
-            if (pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_PARALYZED)
+        case ITEM_CHERI_BERRY:
+            if (pokemonInfo->nonVolatileStatus != STATUS_PARALYSIS)
             {
                 return 0;
             }
@@ -232,8 +232,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 30;
             }
             break;
-        case ITEM_ID_TOTTER_SEED:
-            if (pokemonData->volatileStatus != VOLATILE_STATUS_CONFUSED)
+        case ITEM_TOTTER_SEED:
+            if (pokemonInfo->volatileStatus != STATUS_CONFUSED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -249,9 +249,9 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_PECHA_BERRY:
-            if (pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_POISONED &&
-                pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_BADLY_POISONED)
+        case ITEM_PECHA_BERRY:
+            if (pokemonInfo->nonVolatileStatus != STATUS_POISONED &&
+                pokemonInfo->nonVolatileStatus != STATUS_BADLY_POISONED)
             {
                 return 0;
             }
@@ -264,8 +264,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 50;
             }
             break;
-        case ITEM_ID_BLINKER_SEED:
-            if (pokemonData->eyesightStatus != EYESIGHT_STATUS_BLINKER)
+        case ITEM_BLINKER_SEED:
+            if (pokemonInfo->eyesightStatus != STATUS_BLINKER)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -281,7 +281,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_WARP_SEED:
+        case ITEM_WARP_SEED:
             if (!targetAlly)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
@@ -293,7 +293,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                     itemWeight = 5;
                 }
             }
-            else if (pokemonData->HP < pokemonData->maxHP && pokemonData->HP < 20)
+            else if (pokemonInfo->HP < pokemonInfo->maxHPStat && pokemonInfo->HP < 20)
             {
                 if (!targetOther)
                 {
@@ -312,13 +312,13 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 }
             }
             break;
-        case ITEM_ID_PATSY_BAND:
+        case ITEM_PATSY_BAND:
             itemWeight = 40;
             break;
-        case ITEM_ID_SLEEP_SEED:
-            if (pokemonData->sleepStatus != SLEEP_STATUS_SLEEP &&
-                pokemonData->sleepStatus != SLEEP_STATUS_NAPPING &&
-                pokemonData->sleepStatus != SLEEP_STATUS_NIGHTMARE)
+        case ITEM_SLEEP_SEED:
+            if (pokemonInfo->sleep != STATUS_SLEEP &&
+                pokemonInfo->sleep != STATUS_NAPPING &&
+                pokemonInfo->sleep != STATUS_NIGHTMARE)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -334,8 +334,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_CHESTO_BERRY:
-            if (pokemonData->sleepStatus != SLEEP_STATUS_SLEEPLESS)
+        case ITEM_CHESTO_BERRY:
+            if (pokemonInfo->sleep != STATUS_SLEEPLESS)
             {
                 itemWeight = 5;
             }
@@ -344,8 +344,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 return 0;
             }
             break;
-        case ITEM_ID_JOY_SEED:
-            if (pokemonData->level < 99)
+        case ITEM_JOY_SEED:
+            if (pokemonInfo->level < 99)
             {
                 itemWeight = 80;
             }
@@ -354,11 +354,11 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_GINSENG:
+        case ITEM_GINSENG:
             itemWeight = 80;
             break;
-        case ITEM_ID_RAWST_BERRY:
-            if (pokemonData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
+        case ITEM_RAWST_BERRY:
+            if (pokemonInfo->nonVolatileStatus == STATUS_BURN)
             {
                 return 50;
             }
@@ -367,8 +367,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_HUNGER_SEED:
-            if (RoundUpFixedPoint(pokemonData->belly) > 0)
+        case ITEM_HUNGER_SEED:
+            if (RoundUpFixedPoint(pokemonInfo->belly) > 0)
             {
                 return 50;
             }
@@ -377,8 +377,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_DOOM_SEED:
-            if (pokemonData->level > 1)
+        case ITEM_DOOM_SEED:
+            if (pokemonInfo->level > 1)
             {
                 itemWeight = 80;
             }
@@ -387,8 +387,8 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_STUN_SEED:
-            if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
+        case ITEM_STUN_SEED:
+            if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
             {
                 return 0;
             }
@@ -401,7 +401,7 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 5;
             }
             break;
-        case ITEM_ID_BLAST_SEED:
+        case ITEM_BLAST_SEED:
             if (CanTargetAdjacentPokemon(targetPokemon))
             {
                 itemWeight = 80;
@@ -411,10 +411,10 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 30;
             }
             break;
-        case ITEM_ID_APPLE:
-        case ITEM_ID_BIG_APPLE:
-        case ITEM_ID_HUGE_APPLE:
-            if (RoundUpFixedPoint(pokemonData->belly) < 10)
+        case ITEM_APPLE:
+        case ITEM_BIG_APPLE:
+        case ITEM_HUGE_APPLE:
+            if (RoundUpFixedPoint(pokemonInfo->belly) < 10)
             {
                 return 100;
             }
@@ -423,11 +423,11 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
                 itemWeight = 0;
             }
             break;
-        case ITEM_ID_GRIMY_FOOD:
+        case ITEM_GRIMY_FOOD:
             itemWeight = 30;
             break;
-        case ITEM_ID_ROLLCALL_ORB:
-            move = pokemonData->moves; // Fixes a regswap.
+        case ITEM_ROLLCALL_ORB:
+            move = pokemonInfo->moves; // Fixes a regswap.
             if (targetOther)
             {
                 itemWeight = 0;
@@ -443,14 +443,14 @@ u32 EvaluateItem(struct DungeonEntity *targetPokemon, struct ItemSlot *item, u32
     return itemWeight;
 }
 
-bool8 CanTargetAdjacentPokemon(struct DungeonEntity *pokemon)
+bool8 CanTargetAdjacentPokemon(struct Entity *pokemon)
 {
-    s32 facingDir;
-    for (facingDir = 0; facingDir < NUM_DIRECTIONS; facingDir++)
+    s32 direction;
+    for (direction = 0; direction < NUM_DIRECTIONS; direction++)
     {
-        struct MapTile *mapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x, pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
-        struct DungeonEntity *adjacentPokemon = mapTile->pokemon;
-        if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NONE &&
+        struct Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
+        struct Entity *adjacentPokemon = mapTile->monster;
+        if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NOTHING &&
             CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {
             return TRUE;

@@ -33,7 +33,7 @@ _08044CEC:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
-	bl GetMapTile_1
+	bl GetTile
 	ldr r0, [r0, 0x14]
 	bl GetItemData
 	b _08044D34
@@ -68,7 +68,7 @@ _08044D34:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044D38: .4byte gDungeonGlobalData
+_08044D38: .4byte gDungeon
 _08044D3C: .4byte 0x0001357c
 	thumb_func_end sub_8044CC8
 
@@ -145,7 +145,7 @@ sub_8044DA4:
 	ldr r0, [r2]
 	bx lr
 	.align 2, 0
-_08044DC0: .4byte gDungeonGlobalData
+_08044DC0: .4byte gDungeon
 _08044DC4: .4byte 0x0001357c
 	thumb_func_end sub_8044DA4
 
@@ -157,7 +157,7 @@ sub_8044DC8:
 	cmp r0, 0xE9
 	beq _08044DE8
 	ldr r4, _08044DE4
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -220,7 +220,7 @@ sub_8044E24:
 	cmp r0, 0
 	bne _08044EBA
 	ldrb r0, [r5, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -327,7 +327,7 @@ _08044F18:
 	lsls r0, r5, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
-	bl GetItemCategory
+	bl GetItemActionType
 	lsls r0, 3
 	adds r4, 0x4
 	adds r0, r4

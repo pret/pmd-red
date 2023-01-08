@@ -83,10 +83,10 @@ struct unkStruct_203B214
 extern struct unkStruct_203B214 *gUnknown_203B214;
 extern struct unkStruct_203B214 *gUnknown_203B21C;
 
-struct ItemSlot_Alt
+struct Item_Alt
 {
     union temp {
-        struct ItemSlot norm;
+        struct Item norm;
         u32 full_bits;
     } temp;
 };
@@ -242,7 +242,7 @@ void sub_8019944(void)
 {
   s32 slotIndex;
   s32 local_10;
-  struct ItemSlot *itemSlot;
+  struct Item *itemSlot;
 
   if (sub_80144A4(&local_10) == 0) {
     switch(local_10)
@@ -251,7 +251,7 @@ void sub_8019944(void)
             for(slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++)
             {
                 itemSlot = &gTeamInventory_203B460->teamItems[slotIndex];
-                if ((itemSlot->itemFlags & ITEM_FLAG_EXISTS) && CanSellItem(itemSlot->itemIndex)) {
+                if ((itemSlot->flags & ITEM_FLAG_EXISTS) && CanSellItem(itemSlot->id)) {
                     ClearItemSlotAt(slotIndex);
                 }
             }
@@ -271,7 +271,7 @@ void sub_8019944(void)
 void sub_80199CC(void)
 {
   u32 uVar2;
-  struct HeldItem *puVar3;
+  struct BulkItem *puVar3;
 
   if (gUnknown_203B210->unk4 != '\0') {
     uVar2 = sub_8019EDC(1);
@@ -291,8 +291,8 @@ void sub_80199CC(void)
             gUnknown_203B210->unk21 = sub_801A37C();
             puVar3 = xxx_get_unk250_at_8091A90(gUnknown_203B210->unk21);
         }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->itemIndex,0);
-        gUnknown_203B210->unk1C.numItems =puVar3->numItems;
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->id,0);
+        gUnknown_203B210->unk1C.quantity =puVar3->quantity;
         gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x14);
         break;
@@ -305,8 +305,8 @@ void sub_80199CC(void)
             gUnknown_203B210->unk21 = sub_801A37C();
             puVar3 = xxx_get_unk250_at_8091A90(gUnknown_203B210->unk21);
         }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->itemIndex,0);
-        gUnknown_203B210->unk1C.numItems = puVar3->numItems;
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,puVar3->id,0);
+        gUnknown_203B210->unk1C.quantity = puVar3->quantity;
         gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
         UpdateKecleonStoreState(0x15);
         break;
@@ -398,7 +398,7 @@ void sub_8019C78(void)
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (!CanSellItem(gUnknown_203B210->unk1C.itemIndex))
+        if (!CanSellItem(gUnknown_203B210->unk1C.id))
             UpdateKecleonStoreState(0xd);
         else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > 99999)
             UpdateKecleonStoreState(0xe);
@@ -466,14 +466,14 @@ u32 sub_8019D8C(void)
 void sub_8019DAC(void)
 {
   s32 iVar3;
-  struct ItemSlot *itemSlot;
+  struct Item *itemSlot;
   s32 iVar5;
 
   gUnknown_203B210->unk14 = 0;
   gUnknown_203B210->unk18 = 0;
   for(iVar5 = 0; iVar5 < INVENTORY_SIZE; iVar5++){
     itemSlot = &gTeamInventory_203B460->teamItems[iVar5];
-    if (((itemSlot->itemFlags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(itemSlot->itemIndex))) {
+    if (((itemSlot->flags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(itemSlot->id))) {
       iVar3 = GetStackSellPrice(itemSlot);
       gUnknown_203B210->unk18 += iVar3;
       gUnknown_203B210->unk14++;
@@ -526,8 +526,8 @@ u32 sub_8019E40(u32 r0)
 
 u32 sub_8019EDC(u8 r0)
 {
-    struct ItemSlot_Alt slot;
-    struct HeldItem *return_var;
+    struct Item_Alt slot;
+    struct BulkItem *return_var;
     u32 r2;
     u32 r3;
 
@@ -547,12 +547,12 @@ u32 sub_8019EDC(u8 r0)
                 return_var = xxx_get_inv_unk230_at_809185C(sub_8019FB0());
 
                 // NOTE: needs seperate vars to match
-                r2 = return_var->itemIndex << 16;
+                r2 = return_var->id << 16;
                 slot.temp.full_bits =  (slot.temp.full_bits & 0xff00ffff) | r2;
-                r3 = return_var->numItems << 8;
+                r3 = return_var->quantity << 8;
                 slot.temp.full_bits =  (slot.temp.full_bits & 0xffff00ff) | r3;
 
-                if(GetStackBuyPrice((struct ItemSlot *)&slot) > gTeamInventory_203B460->teamMoney)
+                if(GetStackBuyPrice((struct Item *)&slot) > gTeamInventory_203B460->teamMoney)
                 {
                     PlayMenuSoundEffect(2);
                 }
@@ -675,19 +675,19 @@ void sub_801A064(void)
 
 void sub_801A0D8(void)
 {
-  struct HeldItem *heldItem;
+  struct BulkItem *heldItem;
   s32 iVar2;
   s32 y;
   s32 iVar4;
   u8 auStack204 [80];
   struct unkStruct_8090F58 local_7c;
   u8 auStack112 [80];
-  struct ItemSlot_Alt slot;
+  struct Item_Alt slot;
   u8 temp_calc;
 
   // Needed for the shifts..
   u32 index_shift;
-  u32 numItems_shift;
+  u32 quantity_shift;
 
   sub_8008C54(gUnknown_203B214->unk34);
   sub_80073B8(gUnknown_203B214->unk34);
@@ -699,26 +699,26 @@ void sub_801A0D8(void)
       temp_calc = (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + iVar4;
       heldItem = xxx_get_inv_unk230_at_809185C(temp_calc);
 
-      index_shift = heldItem->itemIndex << 16;
+      index_shift = heldItem->id << 16;
       slot.temp.full_bits = (slot.temp.full_bits & 0xff00ffff) | index_shift;
 
-      numItems_shift = heldItem->numItems << 8;
-      slot.temp.full_bits = (slot.temp.full_bits & 0xffff00ff) | numItems_shift;
+      quantity_shift = heldItem->quantity << 8;
+      slot.temp.full_bits = (slot.temp.full_bits & 0xffff00ff) | quantity_shift;
 
-      slot.temp.full_bits = (slot.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_FOR_SALE);
+      slot.temp.full_bits = (slot.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
 
       local_7c.unk0 = 1;
       local_7c.unk4 = 0;
       local_7c.unk6 = 0x58;
       local_7c.unk8 = 1;
-      sub_8090E14(auStack204,(struct ItemSlot *)&slot,&local_7c);
-      iVar2 = GetStackBuyPrice((struct ItemSlot *)&slot);
+      sub_8090E14(auStack204,(struct Item *)&slot,&local_7c);
+      iVar2 = GetStackBuyPrice((struct Item *)&slot);
       if (iVar2 <= gTeamInventory_203B460->teamMoney) {
         y = sub_8013800(gUnknown_203B214,iVar4);
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B214->unk34,0);
       }
       else {
-        sprintf_2(auStack112,gUnknown_80DB8EC,auStack204);
+        sprintfStatic(auStack112,gUnknown_80DB8EC,auStack204);
         y = sub_8013800(gUnknown_203B214,iVar4);
         xxx_call_draw_string(8,y,auStack112,gUnknown_203B214->unk34,0);
       }
@@ -753,8 +753,8 @@ u32 sub_801A20C(u32 r0)
 
 u32 sub_801A2A8(u8 r0)
 {
-    struct ItemSlot_Alt slot;
-    struct HeldItem *return_var;
+    struct Item_Alt slot;
+    struct BulkItem *return_var;
     u32 r2;
     u32 r3;
 
@@ -774,12 +774,12 @@ u32 sub_801A2A8(u8 r0)
                 return_var = xxx_get_unk250_at_8091A90(sub_801A37C());
 
                 // NOTE: needs seperate vars to match
-                r2 = return_var->itemIndex << 16;
+                r2 = return_var->id << 16;
                 slot.temp.full_bits =  (slot.temp.full_bits & 0xff00ffff) | r2;
-                r3 = return_var->numItems << 8;
+                r3 = return_var->quantity << 8;
                 slot.temp.full_bits =  (slot.temp.full_bits & 0xffff00ff) | r3;
 
-                if(GetStackBuyPrice((struct ItemSlot *)&slot) > gTeamInventory_203B460->teamMoney)
+                if(GetStackBuyPrice((struct Item *)&slot) > gTeamInventory_203B460->teamMoney)
                 {
                     PlayMenuSoundEffect(2);
                 }
@@ -901,19 +901,19 @@ void sub_801A430(void)
 
 void sub_801A4A4(void)
 {
-  struct HeldItem *heldItem;
+  struct BulkItem *heldItem;
   s32 iVar2;
   s32 y;
   s32 iVar4;
   u8 auStack204 [80];
   struct unkStruct_8090F58 local_7c;
   u8 auStack112 [80];
-  struct ItemSlot_Alt slot;
+  struct Item_Alt slot;
   u8 temp_calc;
 
   // Needed for the shifts..
   u32 index_shift;
-  u32 numItems_shift;
+  u32 quantity_shift;
 
   sub_8008C54(gUnknown_203B21C->unk34);
   sub_80073B8(gUnknown_203B21C->unk34);
@@ -925,26 +925,26 @@ void sub_801A4A4(void)
       temp_calc = (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + iVar4;
       heldItem = xxx_get_unk250_at_8091A90(temp_calc);
 
-      index_shift = heldItem->itemIndex << 16;
+      index_shift = heldItem->id << 16;
       slot.temp.full_bits = (slot.temp.full_bits & 0xff00ffff) | index_shift;
 
-      numItems_shift = heldItem->numItems << 8;
-      slot.temp.full_bits = (slot.temp.full_bits & 0xffff00ff) | numItems_shift;
+      quantity_shift = heldItem->quantity << 8;
+      slot.temp.full_bits = (slot.temp.full_bits & 0xffff00ff) | quantity_shift;
 
-      slot.temp.full_bits = (slot.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_FOR_SALE);
+      slot.temp.full_bits = (slot.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
 
       local_7c.unk0 = 1;
       local_7c.unk4 = 0;
       local_7c.unk6 = 0x58;
       local_7c.unk8 = 1;
-      sub_8090E14(auStack204,(struct ItemSlot *)&slot,&local_7c);
-      iVar2 = GetStackBuyPrice((struct ItemSlot *)&slot);
+      sub_8090E14(auStack204,(struct Item *)&slot,&local_7c);
+      iVar2 = GetStackBuyPrice((struct Item *)&slot);
       if (iVar2 <= gTeamInventory_203B460->teamMoney) {
         y = sub_8013800(gUnknown_203B21C,iVar4);
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B21C->unk34,0);
       }
       else {
-        sprintf_2(auStack112,gUnknown_80DB934,auStack204);
+        sprintfStatic(auStack112,gUnknown_80DB934,auStack204);
         y = sub_8013800(gUnknown_203B21C,iVar4);
         xxx_call_draw_string(8,y,auStack112,gUnknown_203B21C->unk34,0);
       }
@@ -993,7 +993,7 @@ u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 p
 u32 sub_801A6E8(u8 param_1)
 {
   s32 iVar5;
-  struct ItemSlot local_10;
+  struct Item local_10;
 
   if (param_1 == '\0') {
     sub_8013660(&gUnknown_203B224->unk54);
@@ -1021,7 +1021,7 @@ u32 sub_801A6E8(u8 param_1)
                 break;
             case 4:
                 local_10 = gTeamInventory_203B460->teamItems[sub_801A8AC()];
-                if (CanSellItem(local_10.itemIndex) && (GetStackSellPrice(&local_10) + gTeamInventory_203B460->teamMoney < 100000))
+                if (CanSellItem(local_10.id) && (GetStackSellPrice(&local_10) + gTeamInventory_203B460->teamMoney < 100000))
                     PlayMenuSoundEffect(0);
                 else
                     PlayMenuSoundEffect(2);
@@ -1132,7 +1132,7 @@ void sub_801A9E0(void)
     // NOTE: this var is unused but makes sure we get correct stack size
     // This is also why we need special build flag for this file
     u8 local_6c[0x44]; // sp 0x78 ?? (why is this at same location..)
-    struct ItemSlot item; // sp 0xC8
+    struct Item item; // sp 0xC8
 
     sub_8008C54(gUnknown_203B224->unk88);
     sub_80073B8(gUnknown_203B224->unk88);
@@ -1157,7 +1157,7 @@ void sub_801A9E0(void)
                 stack.unk0 = 0;
                 stack.unk4 = 0;
                 stack.unk8 = 1;
-                item.itemFlags = 1;
+                item.flags = 1;
                 sub_8090E14(buffer1,&item, &stack);
                 xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
                 break;
@@ -1165,7 +1165,7 @@ void sub_801A9E0(void)
                 stack1.unk0 = 0;
                 stack1.unk4 = 0;
                 stack1.unk8 = 1;
-                item.itemFlags = 1;
+                item.flags = 1;
                 sub_8090E14(buffer1,&item,&stack1);
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != '\0'){
                     xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
@@ -1177,16 +1177,16 @@ void sub_801A9E0(void)
                 }
                 break;
             case 4:
-                if (CanSellItem(item.itemIndex)) {
+                if (CanSellItem(item.id)) {
                     stack2.unk0 = 3;
                     stack2.unk4 = 0;
                     stack2.unk6 = 0x58;
                     stack2.unk8 = 1;
-                    item.itemFlags = 3;
+                    item.flags = 3;
                     sub_8090E14(buffer1,&item, &stack2);
                     if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > 99999){
                         // very dumb but this matches...
-                        sprintf_2((char *)&stack3,gUnknown_80DB9A0,buffer1);
+                        sprintfStatic((char *)&stack3,gUnknown_80DB9A0,buffer1);
                         xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);
                     }
                     else
@@ -1202,9 +1202,9 @@ void sub_801A9E0(void)
                 stack3.unk0 = 0;
                 stack3.unk4 = 0;
                 stack3.unk8 = 1;
-                item.itemFlags = 1;
+                item.flags = 1;
                 sub_8090E14(buffer1,&item,&stack3);
-                if (IsGummiItem(item.itemIndex)) {
+                if (IsGummiItem(item.id)) {
                     xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
                 }
                 else
@@ -1242,26 +1242,26 @@ bool8 sub_801ADA0(s32 param_1)
   u32 uVar3_32;
   s32 sum1;
   s32 sum2;
-  struct ItemSlot item;
+  struct Item item;
  
   item = gTeamInventory_203B460->teamItems[param_1];
-  if (!IsNotMoneyOrUsedTMItem(item.itemIndex)) {
+  if (!IsNotMoneyOrUsedTMItem(item.id)) {
       return FALSE;
   }
   else
   {
-    if (IsThrowableItem(item.itemIndex)) {
-      uVar3_32 = sub_801AE24(item.itemIndex);
-      sum1 = gTeamInventory_203B460->teamStorage[item.itemIndex];
+    if (IsThrowableItem(item.id)) {
+      uVar3_32 = sub_801AE24(item.id);
+      sum1 = gTeamInventory_203B460->teamStorage[item.id];
       uVar3 = uVar3_32;
       sum1 += uVar3;
-      sum1 += (item.numItems);
+      sum1 += (item.quantity);
       if (sum1 > 999)
         return FALSE;
     }
     else {
-      uVar2_32 = sub_801AE24(item.itemIndex);
-      sum2 = gTeamInventory_203B460->teamStorage[item.itemIndex];
+      uVar2_32 = sub_801AE24(item.id);
+      sum2 = gTeamInventory_203B460->teamStorage[item.id];
       uVar2 = uVar2_32;
       sum2 +=  uVar2;
       if (sum2 > 998)
@@ -1271,9 +1271,9 @@ bool8 sub_801ADA0(s32 param_1)
   return 1;
 }
 
-s32 sub_801AE24(u32 itemIndex)
+s32 sub_801AE24(u32 id)
 {
-  struct ItemSlot uVar3;
+  struct Item uVar3;
   u16 uVar4;
   s32 invIndex;
 
@@ -1281,9 +1281,9 @@ s32 sub_801AE24(u32 itemIndex)
   for (invIndex = 0; invIndex < GetNumberOfFilledInventorySlots(); invIndex++) {
     if (gUnknown_203B224->unk4[invIndex] != 0) {
       uVar3 = gTeamInventory_203B460->teamItems[invIndex];
-      if (uVar3.itemIndex == itemIndex) {
-        if (IsThrowableItem(uVar3.itemIndex)) {
-            uVar4 += uVar3.numItems;
+      if (uVar3.id == id) {
+        if (IsThrowableItem(uVar3.id)) {
+            uVar4 += uVar3.quantity;
         }
         else {
             uVar4++;
@@ -1331,22 +1331,22 @@ void sub_801AEE4(s32 index, s32 value)
 
 void Kecleon_SortItems(void)
 {
-  struct ItemSlot *puVar1;
+  struct Item *puVar1;
   u32 *puVar2;
   u32 *base;
   int orderL;
   int orderR;
   u32 puVar4;
-  struct ItemSlot uVar5;
+  struct Item uVar5;
   int itemR;
   int itemL;
 
   for (itemL = 0; itemL < GetNumberOfFilledInventorySlots() - 1; itemL++) {
     for (itemR = itemL + 1; itemR < GetNumberOfFilledInventorySlots(); itemR++) {
-      orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].itemIndex);
-      orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].itemIndex);
+      orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].id);
+      orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].id);
       if ((orderL > orderR) || ((orderL == orderR) &&
-        (gTeamInventory_203B460->teamItems[itemL].numItems < gTeamInventory_203B460->teamItems[itemR].numItems))) {
+        (gTeamInventory_203B460->teamItems[itemL].quantity < gTeamInventory_203B460->teamItems[itemR].quantity))) {
 
         uVar5 = gTeamInventory_203B460->teamItems[itemL];
         puVar1 = &gTeamInventory_203B460->teamItems[itemR];

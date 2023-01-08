@@ -3,8 +3,8 @@
 
 #include "dungeon_entity.h"
 
-void ResetAction(struct DungeonActionContainer *actionPointer);
-void SetAction(struct DungeonActionContainer *actionPointer, u16 action);
-void SetWalkAction(struct DungeonActionContainer *actionPointer, s16 species);
+void ClearMonsterActionFields(struct DungeonActionContainer *actionPointer);
+void SetMonsterActionFields(struct DungeonActionContainer *actionPointer, u16 action);
+void SetActionPassTurnOrWalk(struct DungeonActionContainer *actionPointer, s16 species);
 
 #endif

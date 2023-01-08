@@ -2522,7 +2522,7 @@ sub_8093E90:
 	adds r3, r5, 0
 	bl xxx_format_and_draw
 	adds r0, r6, 0
-	bl GetMovePower
+	bl GetMoveBasePower
 	ldr r1, _08093F0C
 	str r0, [r1]
 	add sp, 0x4

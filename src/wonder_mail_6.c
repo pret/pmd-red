@@ -114,7 +114,7 @@ bool8 sub_8030F58(u32 wonderMailMode)
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailMode = wonderMailMode;
-  iVar3 = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
+  iVar3 = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B328->faceFile = iVar3;
   gUnknown_203B328->faceData = iVar3->data;
   gUnknown_203B328->unk114 = 0;

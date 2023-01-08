@@ -3455,7 +3455,7 @@ _0809AB80:
 	adds r0, r4, r0
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	ldr r0, _0809ABAC
 	adds r4, r0
 	ldr r1, _0809ABB0
@@ -3506,7 +3506,7 @@ _0809ABE8:
 	movs r0, 0x2
 	ldrsh r1, [r6, r0]
 	adds r0, r5, 0
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	ldr r0, _0809AC14
 	adds r4, r0
 	adds r0, r4, 0
@@ -3555,7 +3555,7 @@ _0809AC4C:
 	adds r0, r4, r0
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	ldr r0, _0809AC78
 	adds r4, r0
 	movs r3, 0
@@ -4174,7 +4174,7 @@ _0809B0E4:
 	lsls r2, 4
 	ldr r3, _0809B13C
 	adds r2, r3
-	bl sprintf_2
+	bl sprintfStatic
 _0809B0F6:
 	adds r0, r4, 0
 	bl sub_809AE3C
@@ -4471,7 +4471,7 @@ _0809B318:
 	lsls r2, 4
 	ldr r3, _0809B3D8
 	adds r2, r3
-	bl sprintf_2
+	bl sprintfStatic
 _0809B32A:
 	ldr r0, _0809B3DC
 	mov r8, r0
@@ -4483,7 +4483,7 @@ _0809B32A:
 	ldr r1, _0809B3E0
 	adds r0, r4, 0
 	adds r2, r7, 0
-	bl sprintf_2
+	bl sprintfStatic
 	adds r7, r4, 0
 _0809B344:
 	adds r0, r6, 0
@@ -7539,7 +7539,7 @@ sub_809CBBC:
 	adds r0, r3
 	ldr r3, [r0]
 	mov r0, sp
-	bl sprintf_2
+	bl sprintfStatic
 	ldr r0, _0809CC14
 	ldr r0, [r0]
 	movs r1, 0x98

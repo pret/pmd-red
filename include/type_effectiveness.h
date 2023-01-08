@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *target, u8 moveType);
+s32 WeightWeakTypePicker(struct Entity *user, struct Entity *target, u8 moveType);
 
 #endif

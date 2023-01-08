@@ -271,7 +271,7 @@ _08078B86:
 	bne _08078BB8
 	adds r0, r6, 0
 	movs r1, 0x1B
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08078BB8

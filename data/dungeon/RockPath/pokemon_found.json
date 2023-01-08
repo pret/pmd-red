@@ -4,37 +4,37 @@
             "name": "pokemon_found_out521",
             "pokemon": [
                 {
-                    "species": "SPECIES_PIDGEOT",
+                    "species": "MONSTER_PIDGEOT",
                     "level": 16,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_NIDORINA",
+                    "species": "MONSTER_NIDORINA",
                     "level": 15,
                     "probability": 1429
                 },
                 {
-                    "species": "SPECIES_NIDORINO",
+                    "species": "MONSTER_NIDORINO",
                     "level": 15,
                     "probability": 1428
                 },
                 {
-                    "species": "SPECIES_ZUBAT",
+                    "species": "MONSTER_ZUBAT",
                     "level": 17,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_NUMEL",
+                    "species": "MONSTER_NUMEL",
                     "level": 14,
                     "probability": 1429
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }

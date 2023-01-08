@@ -264,10 +264,10 @@ u32 sub_8027F88(void)
   gUnknown_203B2C0->unk53C = 0;
   gUnknown_203B2C0->unk218 = -1;
   gUnknown_203B2C0->unk544 = -1;
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-  monName = GetMonSpecies(SPECIES_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gAvailablePokemonNames, monName);
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B2C0->faceFile = faceFile;
   gUnknown_203B2C0->faceData = faceFile->data;
   gUnknown_203B2C0->unk42C = 0;
@@ -1052,7 +1052,7 @@ void sub_8028E84()
     }
     sub_8028B04(24);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
 }
 
 void sub_8028EAC()
@@ -1116,7 +1116,7 @@ void sub_8028F30()
     }
     sub_8028B04(22);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
 }
 
 void sub_8028F58()
@@ -1171,7 +1171,7 @@ void sub_8028FDC(void)
     {
         case 8:
             return_var = sub_8095228(gUnknown_203B2C0->unk218);
-            if(sub_80A2824(return_var->dungeon.dungeonIndex) == 0)
+            if(sub_80A2824(return_var->dungeon.id) == 0)
             {
                 sub_8028B04(0x1C);
             }
@@ -1412,7 +1412,7 @@ void sub_8029374(void)
     }
     sub_8028B04(0x24);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
 }
 
 void sub_802939C(void)
@@ -1847,7 +1847,7 @@ void sub_8029AB0(void)
     }
     sub_8028B04(0x38);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
 }
 
 void sub_8029AD8(void)

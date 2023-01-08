@@ -54,7 +54,7 @@ extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801CB5C(u32);
 extern void sub_8035CC0(u32 *, u32);
-extern void sub_801B3C0(struct ItemSlot *);
+extern void sub_801B3C0(struct Item *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 extern void sub_8035CF4(u32 *, u32, u32);
@@ -415,7 +415,7 @@ void sub_8033D74(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x17);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -812,7 +812,7 @@ void sub_80344A0(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x2C);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -950,7 +950,7 @@ void sub_8034700(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x38);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1024,7 +1024,7 @@ void sub_80347E4(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x41);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1057,9 +1057,9 @@ void sub_8034848(void)
     if(sub_80144A4(&temp) == 0)
     {
         MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
-        gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
-        gUnknown_203B33C->unk41C.numItems = 1;
-        gUnknown_203B33C->unk41C.itemFlags = 0;
+        gUnknown_203B33C->unk41C.id = ITEM_NOTHING;
+        gUnknown_203B33C->unk41C.quantity = 1;
+        gUnknown_203B33C->unk41C.flags = 0;
 
         if(gUnknown_203B33C->status == 0)
         {
@@ -1087,9 +1087,9 @@ void sub_80348C4(void)
     if(sub_80144A4(&temp) == 0)
     {
         MemoryFill8((u8 *)&gUnknown_203B33C->unk41C, 0 , 4);
-        gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
-        gUnknown_203B33C->unk41C.numItems = 1;
-        gUnknown_203B33C->unk41C.itemFlags = 0;
+        gUnknown_203B33C->unk41C.id = ITEM_NOTHING;
+        gUnknown_203B33C->unk41C.quantity = 1;
+        gUnknown_203B33C->unk41C.flags = 0;
 
         if(gUnknown_203B33C->status == 0)
         {
@@ -1240,9 +1240,9 @@ void sub_8034B2C(void)
 
 void sub_8034B88(void)
 {
-    gUnknown_203B33C->unk41C.itemIndex = ITEM_ID_NOTHING;
-    gUnknown_203B33C->unk41C.numItems = 1;
-    gUnknown_203B33C->unk41C.itemFlags = 0;
+    gUnknown_203B33C->unk41C.id = ITEM_NOTHING;
+    gUnknown_203B33C->unk41C.quantity = 1;
+    gUnknown_203B33C->unk41C.flags = 0;
     switch(sub_801CA08(1))
     {
         case 2:
@@ -1250,12 +1250,12 @@ void sub_8034B88(void)
             SetFriendRescueMenuState(1);
             break;
         case 3:
-            gUnknown_203B33C->unk41C.itemIndex = sub_801CB24();
+            gUnknown_203B33C->unk41C.id = sub_801CB24();
             SetFriendRescueMenuState(0x60);
             break;
         case 4:
             gUnknown_203B33C->unk4 = 0x5F;
-            gUnknown_203B33C->unk41C.itemIndex = sub_801CB24();
+            gUnknown_203B33C->unk41C.id = sub_801CB24();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             sub_800641C(0, 1, 1);
@@ -1326,7 +1326,7 @@ void sub_8034D54(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x65);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1412,7 +1412,7 @@ void sub_8034F18(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x65);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1423,7 +1423,7 @@ void sub_8034F38(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x71);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1456,9 +1456,9 @@ void sub_8034F88(void)
         {
             case 6:
                 temp2 = sub_8095228(gUnknown_203B33C->unk218);
-                if(gUnknown_203B33C->unk41C.itemIndex != ITEM_ID_NOTHING)
+                if(gUnknown_203B33C->unk41C.id != ITEM_NOTHING)
                     temp2->unk20 = gUnknown_203B33C->unk41C;
-                gTeamInventory_203B460->teamStorage[gUnknown_203B33C->unk41C.itemIndex]--;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B33C->unk41C.id]--;
                 SetFriendRescueMenuState(0x75);
                 break;
             case 7:
@@ -1478,7 +1478,7 @@ void sub_8035018(void)
     if(sub_80144A4(&temp) == 0)
     {
         SetFriendRescueMenuState(0x76);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1658,7 +1658,7 @@ void sub_8035210(void)
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
                     temp2 = sub_8095228(sub_80953D4(5));
-                    if(temp2->unk20.itemIndex != ITEM_ID_NOTHING)
+                    if(temp2->unk20.id != ITEM_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else
                         SetFriendRescueMenuState(0x55);
@@ -1701,8 +1701,8 @@ void sub_80352A4(void)
 
   if ( sub_802F298() == 3) {
     sub_802F2C0();
-    CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-    monName = GetMonSpecies(SPECIES_PELIPPER);
+    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+    monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
     uVar1 = sub_809539C(6, gUnknown_203B33C->unk420);
     sub_8095240(uVar1);

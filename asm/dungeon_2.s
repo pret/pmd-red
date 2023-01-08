@@ -170,7 +170,7 @@ _0809048E:
 	beq _0809054E
 	ldr r0, _080904B0
 	adds r1, r2, 0
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	cmp r5, 0x3
 	ble _080904D2
 	mov r0, r8
@@ -197,7 +197,7 @@ _080904BA:
 	mov r8, r1
 _080904D2:
 	ldr r0, [sp, 0xE0]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -222,7 +222,7 @@ _080904E4:
 	beq _08090510
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0
@@ -572,7 +572,7 @@ _080907DA:
 	bne _0809080C
 	ldr r1, _08090808
 	adds r0, r7, 0
-	bl sprintf_2
+	bl sprintfStatic
 	movs r0, 0
 	b _0809080E
 	.align 2, 0

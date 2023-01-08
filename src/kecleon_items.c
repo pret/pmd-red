@@ -45,39 +45,39 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
       case 0:
         gUnknown_203B210->unk4 = TRUE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
-        monName = GetMonSpecies( SPECIES_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+        monName = GetMonSpecies( MONSTER_KECLEON);
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 1:
         gUnknown_203B210->unk4 = TRUE;
         gUnknown_203B210->unkE4 = NULL;
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
-        monName = GetMonSpecies( SPECIES_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+        monName = GetMonSpecies( MONSTER_KECLEON);
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 2:
         gUnknown_203B210->unk4 = FALSE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
-        monName = GetMonSpecies( SPECIES_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+        monName = GetMonSpecies( MONSTER_KECLEON);
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 3:
         gUnknown_203B210->unk4 = FALSE;
         gUnknown_203B210->unkE4 = NULL;
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KECLEON);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KECLEON);
-        monName = GetMonSpecies( SPECIES_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+        monName = GetMonSpecies( MONSTER_KECLEON);
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       default:
         break;
   }
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_KECLEON);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
   gUnknown_203B210->faceFile = faceFile;
   gUnknown_203B210->unkD8 = faceFile->data;
   gUnknown_203B210->unkE0 = 0;

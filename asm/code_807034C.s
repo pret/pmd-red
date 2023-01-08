@@ -67,7 +67,7 @@ sub_80703A0:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -89,7 +89,7 @@ sub_80703A0:
 	ands r0, r1
 	cmp r0, 0
 	bne _08070456
-	bl IsFixedDungeon
+	bl IsCurrentFixedRoomBossFight
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070400
@@ -100,7 +100,7 @@ sub_80703A0:
 	beq _0807044E
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807044E
@@ -115,7 +115,7 @@ _08070400:
 	ands r5, r0
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070422
@@ -123,7 +123,7 @@ _08070400:
 _08070422:
 	adds r0, r6, 0
 	movs r1, 0xD
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070432

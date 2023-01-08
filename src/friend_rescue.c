@@ -125,8 +125,8 @@ u32 CreateFriendRescueMenu(void)
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->unk538 = -1;
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-  monName = GetMonSpecies(SPECIES_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gAvailablePokemonNames,monName);
   for(counter = 0; counter < 0x36; counter++){
     gUnknown_203B33C->passwordBuffer[counter] = 0;

@@ -1267,9 +1267,9 @@ void sub_800CB20(void)
     gUnknown_203B0B8++;
     if((gRawKeyInput & (A_BUTTON | SELECT_BUTTON)) != 0)
     {
-        Random();
+        Rand32Bit();
     }
-    Random();
+    Rand32Bit();
 }
 
 // Unused

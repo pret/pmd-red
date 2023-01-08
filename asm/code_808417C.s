@@ -68,7 +68,7 @@ sub_80841EC:
 	bl sub_8083DE0
 	b _0808427C
 	.align 2, 0
-_0808426C: .4byte gDungeonGlobalData
+_0808426C: .4byte gDungeon
 _08084270: .4byte 0x0001ceac
 _08084274: .4byte 0x00000225
 _08084278:
@@ -102,7 +102,7 @@ _08084290:
 	b _08084290
 	.align 2, 0
 _080842B8: .4byte gUnknown_80FE6E8
-_080842BC: .4byte gDungeonGlobalData
+_080842BC: .4byte gDungeon
 _080842C0: .4byte 0x0001ce98
 _080842C4:
 	bl sub_8094D14
@@ -191,7 +191,7 @@ _08084320:
 	strb r7, [r2, 0x9]
 	b _080843A8
 	.align 2, 0
-_0808436C: .4byte gDungeonGlobalData
+_0808436C: .4byte gDungeon
 _08084370: .4byte 0x00000677
 _08084374: .4byte 0x0000068a
 _08084378: .4byte 0x0000ffff
@@ -285,7 +285,7 @@ _0808440C:
 	bx r0
 	.align 2, 0
 _08084418: .4byte 0x0000ffff
-_0808441C: .4byte gDungeonGlobalData
+_0808441C: .4byte gDungeon
 _08084420: .4byte 0x00000644
 	thumb_func_end sub_80843BC
 
@@ -318,7 +318,7 @@ sub_8084448:
 	adds r5, r0, 0
 	ldr r7, [r5, 0x70]
 	ldr r4, _0808447C
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -402,7 +402,7 @@ _080844F0:
 	bl PrintFieldMessage
 	b _080845D4
 	.align 2, 0
-_080844FC: .4byte gDungeonGlobalData
+_080844FC: .4byte gDungeon
 _08084500: .4byte 0x0000068a
 _08084504: .4byte gUnknown_80FA32C
 _08084508: .4byte gUnknown_202DE58
@@ -481,7 +481,7 @@ _08084582:
 _080845B0: .4byte gUnknown_80FA2F0
 _080845B4: .4byte gUnknown_80FA260
 _080845B8: .4byte gUnknown_80FA36C
-_080845BC: .4byte gDungeonGlobalData
+_080845BC: .4byte gDungeon
 _080845C0: .4byte gUnknown_80FA394
 _080845C4:
 	ldr r0, _080845DC
@@ -512,7 +512,7 @@ sub_80845E0:
 	movs r1, 0
 	mov r9, r1
 	ldr r4, _08084620
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -563,7 +563,7 @@ _0808465A:
 	movs r0, 0x1
 	b _0808466A
 	.align 2, 0
-_08084660: .4byte gDungeonGlobalData
+_08084660: .4byte gDungeon
 _08084664: .4byte 0x0001357c
 _08084668:
 	movs r0, 0
@@ -599,7 +599,7 @@ _080846A0: .4byte gUnknown_80FA54C
 _080846A4:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl CanSee
+	bl CanSeeTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _080846C4
@@ -670,7 +670,7 @@ _08084716:
 	b _08084768
 	.align 2, 0
 _08084744: .4byte gUnknown_80FA4D4
-_08084748: .4byte gDungeonGlobalData
+_08084748: .4byte gDungeon
 _0808474C: .4byte 0x00000644
 _08084750: .4byte gUnknown_80FA4D8
 _08084754: .4byte gUnknown_80FA394
@@ -722,12 +722,12 @@ _08084784:
 	movs r0, 0xE
 	ldrsh r1, [r1, r0]
 	ldr r0, _080847B8
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	b _080847CE
 	.align 2, 0
 _080847B8: .4byte gUnknown_202E088
 _080847BC: .4byte gUnknown_8107224
-_080847C0: .4byte gDungeonGlobalData
+_080847C0: .4byte gDungeon
 _080847C4: .4byte 0x00000644
 _080847C8:
 	adds r4, 0x1
@@ -780,7 +780,7 @@ _08084810:
 	bl sub_8084854
 	b _08084846
 	.align 2, 0
-_08084820: .4byte gDungeonGlobalData
+_08084820: .4byte gDungeon
 _08084824: .4byte 0x00003a0d
 _08084828: .4byte 0x0001356c
 _0808482C: .4byte gUnknown_8107234

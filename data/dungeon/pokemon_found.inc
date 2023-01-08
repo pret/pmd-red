@@ -1,6 +1,6 @@
 @ Start of Pokemon Found (0x84b6064)
 
-#include "constants/species.h"
+#include "constants/monster.h"
 
 #include "TinyWoods/pokemon_found.inc"
 #include "ThunderwaveCave/pokemon_found.inc"

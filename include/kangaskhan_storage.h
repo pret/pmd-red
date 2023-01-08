@@ -11,9 +11,9 @@ struct unkStruct_203B208
     u32 unk0;
     u32 currState;
     u32 unk8;
-    struct ItemSlot unkC;
+    struct Item unkC;
     u32 unk10;
-    u8 itemIndex; // another itemIndex?
+    u8 id; // another id?
     u8 fill15[0x3];
     u32 unk18;
     u32 unk1C;
@@ -43,9 +43,9 @@ struct unkStruct_203B20C
 {
     u32 state;
     u8 unk4[4];
-    struct ItemSlot unk8;
+    struct Item unk8;
     u32 unkC;
-    u8 itemIndex;
+    u8 id;
     u32 unk14;
     u32 unk18;
     u32 unk1C;

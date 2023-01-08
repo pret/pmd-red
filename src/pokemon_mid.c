@@ -8,7 +8,7 @@
 #include "constants/move_id.h"
 #include "code_800D090.h"
 
-extern struct gPokemon *gMonsterParameters;
+extern struct MonsterDataEntry *gMonsterParameters;
 extern const char gUnknown_8107600[];
 extern const char gUnknown_8107608[];
 extern const char gUnownLetters[];
@@ -49,7 +49,7 @@ struct unkStruct_8107654 {
 
 extern u8 gUnknown_8107645[12];
 extern struct unkStruct_8107654 gUnknown_8107654[6];
-extern struct gPokemon *gMonsterParameters;
+extern struct MonsterDataEntry *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 
@@ -59,10 +59,10 @@ bool8 sub_808D6E8()
     s32 i;
     s32 count = 0;
     s32 size_count = 0;
-    for (i = 0; i < NUM_SPECIES; i++) {
+    for (i = 0; i < NUM_MONSTERS; i++) {
         struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
         if ((1 & pokemon->unk0) && ((pokemon->unk0 >> 1) % 2)) {
-            size_count += GetPokemonSize(pokemon->speciesNum);
+            size_count += GetBodySize(pokemon->speciesNum);
             count++;
         }
     }
@@ -107,7 +107,7 @@ bool8 sub_808D750(s16 index_) {
 "\tbeq _0808D798\n"
 "\tmovs r2, 0x8\n"
 "\tldrsh r0, [r1, r2]\n"
-"\tbl GetPokemonSize\n"
+"\tbl GetBodySize\n"
 "\tlsls r0, 24\n"
 "\tlsrs r0, 24\n"
 "\tadds r5, r0\n"
@@ -128,7 +128,7 @@ bool8 sub_808D750(s16 index_) {
 "\tadds r1, r0, r1\n"
 "\tmovs r2, 0x8\n"
 "\tldrsh r0, [r1, r2]\n"
-"\tbl GetPokemonSize\n"
+"\tbl GetBodySize\n"
 "\tlsls r0, 24\n"
 "\tlsrs r0, 24\n"
 "\tadds r5, r0\n"
@@ -160,7 +160,7 @@ bool8 sub_808D750(s16 index_) {
 //         register struct PokemonStruct* pokemon = &i[gRecruitedPokemonRef->pokemon];
 //         register u16 unk0 = pokemon->unk0;
 //         if ((unk0 & 1) && ((pokemon->unk0 >> 1) & 1)) {
-//             size_count += GetPokemonSize(pokemon->speciesNum);
+//             size_count += GetBodySize(pokemon->speciesNum);
 //             count++;
 //         }
 //     }
@@ -170,7 +170,7 @@ bool8 sub_808D750(s16 index_) {
 
 //         pokemon = &gRecruitedPokemonRef->pokemon[index];
 
-//         size_count += GetPokemonSize(pokemon->speciesNum);
+//         size_count += GetBodySize(pokemon->speciesNum);
 //         if (size_count < 7) {
 //             return TRUE;
 //         }
@@ -179,18 +179,18 @@ bool8 sub_808D750(s16 index_) {
 // }
 
 
-void PeekPokemonItem(s16 index_, struct HeldItem* item) {
+void PeekPokemonItem(s16 index_, struct BulkItem* item) {
     s32 index = index_;
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
-    item->itemIndex = pokemon->heldItem.itemIndex;
-    item->numItems = pokemon->heldItem.numItems;
+    item->id = pokemon->heldItem.id;
+    item->quantity = pokemon->heldItem.quantity;
 }
 
-void GivePokemonItem(s16 index_, struct HeldItem* item) {
+void GivePokemonItem(s16 index_, struct BulkItem* item) {
     s32 index = index_;
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
-    pokemon->heldItem.itemIndex = item->itemIndex;
-    pokemon->heldItem.numItems = item->numItems;
+    pokemon->heldItem.id = item->id;
+    pokemon->heldItem.quantity = item->quantity;
 }
 
 bool8 IsPokemonRenamed(struct PokemonStruct* pokemon) {
@@ -231,21 +231,21 @@ bool8 ComparePokemonNames(s16 a1, s16 a2) {
     return FALSE;
 }
 
-void CopySpeciesNametoBuffer(u8 * buffer, s16 index)
+void CopyMonsterNametoBuffer(u8 * buffer, s16 index)
 {
     strncpy(buffer, gMonsterParameters[index].species, 0x14);
 }
 
-void CopyYellowSpeciesNametoBuffer(u8 *buffer, s16 index)
+void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintf_2(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {COLOR_2 YELLOW}%s{END_COLOR_TEXT_2}
+    sprintfStatic(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {COLOR_2 YELLOW}%s{END_COLOR_TEXT_2}
 }
 
-void CopyCyanSpeciesNametoBuffer(u8 *buffer, s16 index)
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintf_2(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {COLOR_2 CYAN}%s{END_COLOR_TEXT_2}
+    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {COLOR_2 CYAN}%s{END_COLOR_TEXT_2}
 }
 
 void sub_808D930(u8 *buffer, s16 index)
@@ -254,14 +254,14 @@ void sub_808D930(u8 *buffer, s16 index)
   s32 unownIndex;
   const char *preload;
 
-  if (GetBaseSpecies(index) == SPECIES_UNOWN) {
+  if (GetBaseSpecies(index) == MONSTER_UNOWN) {
     preload = gUnknown_8107630; // %s%c
-    unownString = GetMonSpecies(SPECIES_UNOWN);
+    unownString = GetMonSpecies(MONSTER_UNOWN);
     unownIndex = GetUnownIndex(index);
-    sprintf_2(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!?
+    sprintfStatic(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!?
   }
   else {
-    sprintf_2(buffer,gUnknown_8107638, gMonsterParameters[index].species); // %s
+    sprintfStatic(buffer,gUnknown_8107638, gMonsterParameters[index].species); // %s
   }
 }
 
@@ -278,7 +278,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
-  sprintf_2(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
+  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum)
@@ -289,7 +289,7 @@ void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum)
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
-  sprintf_2(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
+  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
 void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2)
@@ -297,7 +297,7 @@ void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2)
   u8 nameBuffer [20];
 
   sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
-  sprintf_2(buffer,gUnknown_8107638,nameBuffer); // %s
+  sprintfStatic(buffer,gUnknown_8107638,nameBuffer); // %s
 }
 
 void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon)
@@ -333,59 +333,59 @@ u8 *GetCategoryString(s16 index)
     return gMonsterParameters[index].category;
 }
 
-u8 GetPokemonSize(s16 index)
+u8 GetBodySize(s16 index)
 {
-    return gMonsterParameters[index].size;
+    return gMonsterParameters[index].bodySize;
 }
 
 u8 GetShadowSize(s16 index)
 {
-    return gMonsterParameters[index].shadow_size;
+    return gMonsterParameters[index].shadowSize;
 }
 
-s32 GetMoveSpeed(s16 index)
+s32 GetMovementSpeed(s16 index)
 {
-    return gMonsterParameters[index].move_speed;
+    return gMonsterParameters[index].movementSpeed;
 }
 
-u8 GetWalkableTiles(s16 index)
+u8 GetMovementType(s16 index)
 {
-    return gMonsterParameters[index].walkable_tiles;
+    return gMonsterParameters[index].movementType;
 }
 
-u8 GetUnk1B(s16 index)
+u8 GetRegenSpeed(s16 index)
 {
-    return ((u8)(gMonsterParameters[index].unk1B) << 25) >> 24;
+    return ((u8)(gMonsterParameters[index].regenSpeed) << 25) >> 24;
 }
 
-bool8 GetIsMoving(s16 index)
+bool8 CanMove(s16 index)
 {
-    return gMonsterParameters[index].isMoving;
+    return gMonsterParameters[index].canMove;
 }
 
-u8 GetUnk1D(s16 index)
+u8 GetChanceAsleep(s16 index)
 {
-    return gMonsterParameters[index].unk1D;
+    return gMonsterParameters[index].chanceAsleep;
 }
 
-u32 GetLowKickDmg(s16 index)
+u32 GetWeight(s16 index)
 {
-    return gMonsterParameters[index].lowkick_dmg;
+    return gMonsterParameters[index].weight;
 }
 
-u32 GetSizeOrbDmg(s16 index)
+u32 GetSize(s16 index)
 {
-    return gMonsterParameters[index].sizeorb_dmg;
+    return gMonsterParameters[index].size;
 }
 
 u8 GetFriendArea(s16 index)
 {
-    return gMonsterParameters[index].friend_area;
+    return gMonsterParameters[index].friendArea;
 }
 
 u16 GetBaseHP(s16 index)
 {
-    return gMonsterParameters[index].base_hp;
+    return gMonsterParameters[index].baseHP;
 }
 
 bool8 IsToolboxEnabled(s16 index)
@@ -400,17 +400,17 @@ u8 GetUnk12(s16 index)
 
 s16 GetPokemonEvolveFrom(s16 index)
 {
-    return gMonsterParameters[index].pre.evolve_from;
+    return gMonsterParameters[index].preEvolution.evolveFrom;
 }
 
-u16 GetPokemonAttSpatt(s16 index, u32 r1)
+u16 GetBaseOffensiveStat(s16 index, u32 r1)
 {
-    return gMonsterParameters[index].base_att_spatt[r1];
+    return gMonsterParameters[index].baseAtkSpAtk[r1];
 }
 
-u16 GetPokemonDefSpdef(s16 index, u32 r1)
+u16 GetBaseDefensiveStat(s16 index, u32 r1)
 {
-    return gMonsterParameters[index].base_def_spdef[r1];
+    return gMonsterParameters[index].baseDefSpDef[r1];
 }
 
 u8 GetPokemonType(s32 index, u32 typeIndex)
@@ -429,9 +429,9 @@ s16 GetDexInternalNo(s16 index, u32 r1)
     return gMonsterParameters[index].dexInternal[r1];
 }
 
-s16 GetBaseRecruit(s16 index)
+s16 GetRecruitRate(s16 index)
 {
-    return gMonsterParameters[index].base_recruit;
+    return gMonsterParameters[index].recruitRate;
 }
 
 s16 GetAlphabetParentNo(s16 index, s32 r1)
@@ -447,18 +447,18 @@ s16 GetInternalNo(s16 index)
 
 s32 CalculateEXPGain(s16 index, s32 level)
 {
-    s32 baseEXP = gMonsterParameters[index].base_exp;
-    return baseEXP + (baseEXP * (level - 1)) / 10;
+    s32 expYield = gMonsterParameters[index].expYield;
+    return expYield + (expYield * (level - 1)) / 10;
 }
 
 s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1)
 {
-    struct EvolveStruct1 temp2;
-    struct EvolveNeeds temp1;
-    temp1 = gMonsterParameters[index].need;
-    temp2 = gMonsterParameters[index].pre;
-    r1->conditions = temp2;
-    r1->needs = temp1;
+    struct PreEvolution temp2;
+    struct EvolutionRequirements temp1;
+    temp1 = gMonsterParameters[index].evolutionRequirements;
+    temp2 = gMonsterParameters[index].preEvolution;
+    r1->preEvolution = temp2;
+    r1->evolutionRequirements = temp1;
     // The return value is not used anywhere, but necessary for the function to match.
     return index;
 }
@@ -474,7 +474,7 @@ u8 GetPokemonOverworldPalette(s16 index, u32 r1)
     }
     else
     {
-        return gMonsterParameters[temp].overworld_palette;
+        return gMonsterParameters[temp].overworldPalette;
     }
 }
 
@@ -483,7 +483,7 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     // Looks like this loads the dialogue sprite for the pokemon
 
     char buffer[0xC];
-    if(gMonsterParameters[index].dialogue_sprites == 0)
+    if(gMonsterParameters[index].dialogueSprites == 0)
     {
         return NULL;
     }
@@ -496,7 +496,7 @@ struct OpenedFile *GetDialogueSpriteDataPtr(s16 index)
     // Looks like this loads the dialogue sprite for the pokemon
 
     char buffer[0xC];
-    if(gMonsterParameters[index].dialogue_sprites == 0)
+    if(gMonsterParameters[index].dialogueSprites == 0)
     {
         return NULL;
     }
@@ -507,7 +507,7 @@ struct OpenedFile *GetDialogueSpriteDataPtr(s16 index)
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
 {
     // checking to see if dialogue sprite is available??
-    return (gMonsterParameters[index].dialogue_sprites >> r1) & 1;
+    return (gMonsterParameters[index].dialogueSprites >> r1) & 1;
 }
 
 void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
@@ -518,8 +518,8 @@ void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
 void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct PokemonStruct *pokemon, s32 a3)
 {
     s32 i;
-    struct HeldItem* held;
-    struct ItemSlot* slot;
+    struct BulkItem* held;
+    struct Item* slot;
     u32 somestruct_80943A0;
     u32 somestruct2_80943A0;
 
@@ -529,7 +529,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     a1->IQSkills = pokemon->IQSkills;
     sub_808E6F4(&a1->unk54);
     a1->dungeonLocation = pokemon->dungeonLocation;
-    a1->isLeader = pokemon->isLeader;
+    a1->isTeamLeader = pokemon->isTeamLeader;
     a1->unkA = a3;
     a1->speciesNum = pokemon->speciesNum;
     a1->unk50 = pokemon->unk24;
@@ -551,13 +551,13 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     held = &pokemon->heldItem;
     slot = &a1->itemSlot;
 
-    if ((u32)(-held->itemIndex | held->itemIndex) >> 31) {
+    if ((u32)(-held->id | held->id) >> 31) {
         HeldItemToSlot(slot, held);
     }
     else {
-        slot->itemIndex = 0;
-        slot->numItems = 0;
-        slot->itemFlags = 0;
+        slot->id = 0;
+        slot->quantity = 0;
+        slot->flags = 0;
     }
   sub_80943A0(&somestruct_80943A0, 100);
   a1->unk44 = somestruct_80943A0;
@@ -570,7 +570,7 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(struct PokemonMove*, struct unkStruct_8094184*);
+extern void sub_8093FA8(struct Move*, struct unkStruct_8094184*);
 
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
@@ -582,7 +582,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     pokemon->IQ = a2->IQ;
     pokemon->IQSkills = a2->IQSkills;
     pokemon->dungeonLocation = a2->dungeonLocation;
-    pokemon->isLeader = a2->isLeader;
+    pokemon->isTeamLeader = a2->isTeamLeader;
     pokemon->speciesNum = a2->speciesNum;
     pokemon->unk24 = a2->unk50;
     pokemon->pokeHP = a2->unk12;
@@ -599,11 +599,11 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
         pokemon->name[i] = a2->name[i];
     }
 
-    if (a2->itemSlot.itemFlags & ITEM_FLAG_EXISTS) {
+    if (a2->itemSlot.flags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
-        pokemon->heldItem.itemIndex = 0;
+        pokemon->heldItem.id = 0;
     }
 }
 
@@ -611,11 +611,11 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
 {
     // transfer item from unk to pokemon at index
     struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
-    if (a2->itemSlot.itemFlags & ITEM_FLAG_EXISTS) {
+    if (a2->itemSlot.flags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
-        pokemon->heldItem.itemIndex = 0;
+        pokemon->heldItem.id = 0;
     }
 }
 
@@ -679,9 +679,9 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
   _species = (s16)species;
   count = 0;
 
-  if (species == SPECIES_DECOY) return 0;
-  if (species == SPECIES_NONE) return 0;
-  if (species == SPECIES_MUNCHLAX) return 0;
+  if (species == MONSTER_DECOY) return 0;
+  if (species == MONSTER_NONE) return 0;
+  if (species == MONSTER_MUNCHLAX) return 0;
   // get stream
   stream = sub_8092B18(_species);
 
@@ -722,9 +722,9 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   s32 species = _species;  // r4
   u8* ptr;
 
-  if (species == SPECIES_DECOY) return 0;
-  if (species == SPECIES_NONE) return 0;
-  if (species == SPECIES_MUNCHLAX) return 0;
+  if (species == MONSTER_DECOY) return 0;
+  if (species == MONSTER_NONE) return 0;
+  if (species == MONSTER_MUNCHLAX) return 0;
   if (moveID == MOVE_STRUGGLE) return 0;
 
   ptr = sub_8092B18(species);
@@ -756,9 +756,9 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 
   count = 0;
   a1->count = 0;
-  if (pokemon->speciesNum == SPECIES_DECOY) return 0;
-  if (pokemon->speciesNum == SPECIES_NONE) return 0;
-  if (pokemon->speciesNum == SPECIES_MUNCHLAX) return 0;
+  if (pokemon->speciesNum == MONSTER_DECOY) return 0;
+  if (pokemon->speciesNum == MONSTER_NONE) return 0;
+  if (pokemon->speciesNum == MONSTER_MUNCHLAX) return 0;
 
   sequence_length = GetEvolutionSequence(pokemon, evolve_sequence);
   for (i = 0; i < sequence_length; i++) {
@@ -775,7 +775,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
         break;
       }
 
-      if (count < NUM_SPECIES) {
+      if (count < NUM_MONSTERS) {
         s32 j;
         bool8 cond = 1;
 
@@ -785,7 +785,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
         if ((result == MOVE_VOLT_TACKLE) && (pokemon->IQ < gVoltTackleIQReq)) cond = 0;
 
         for (j = 0; j < MAX_MON_MOVES; j++) {
-          if ((pokemon->moves[j].moveFlags & MOVE_FLAG_EXISTS) && pokemon->moves[j].moveID == result) {
+          if ((pokemon->moves[j].moveFlags & MOVE_FLAG_EXISTS) && pokemon->moves[j].id == result) {
             cond = 0;
           }
         }
@@ -880,15 +880,15 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   register s16* a2 asm("r6");
   i = 1;
   a2 = _a2;
-  for (i = 1; i <= SPECIES_RAYQUAZA_CUTSCENE; i++) {
+  for (i = 1; i <= MONSTER_RAYQUAZA_CUTSCENE; i++) {
     register s32 current asm("r8") = (s16)i;
     if (species != GetPokemonEvolveFrom(i)) {
       continue;
     }
-    if (!a3 && (GetPokemonSize(species) != GetPokemonSize(i))) {
+    if (!a3 && (GetBodySize(species) != GetBodySize(i))) {
       continue;
     }
-    if (!a4 && ((s16)i == SPECIES_SHEDINJA)) {
+    if (!a4 && ((s16)i == MONSTER_SHEDINJA)) {
       continue;
     }
     *a2++ = current;
@@ -897,7 +897,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
-void sub_808E490(struct PokemonMove* a1, s16 species)
+void sub_808E490(struct Move* a1, s16 species)
 {
     u16 buffer[0x10]; // of moveIDs
     s32 i;

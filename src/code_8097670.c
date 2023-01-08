@@ -35,8 +35,8 @@ struct unkStruct_203B494 *sub_8097680(void)
 
 void SetDungeonLocationInfo(struct DungeonLocation *r0)
 {
-    gUnknown_203B494->dungeonLocation.dungeonIndex = r0->dungeonIndex;
-    gUnknown_203B494->dungeonLocation.dungeonFloor = r0->dungeonFloor;
+    gUnknown_203B494->dungeonLocation.id = r0->id;
+    gUnknown_203B494->dungeonLocation.floor = r0->floor;
 }
 
 struct DungeonLocation *GetDungeonLocationInfo(void)

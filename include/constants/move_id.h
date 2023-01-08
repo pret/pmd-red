@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_MOVE_ID_H
 #define GUARD_CONSTANTS_MOVE_ID_H
 
-#define MOVE_NONE 0x0
+#define MOVE_NOTHING 0x0
 #define MOVE_IRON_TAIL 0x1
 #define MOVE_ICE_BALL 0x2
 #define MOVE_YAWN 0x3

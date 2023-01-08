@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-bool8 CanCrossWalls(struct DungeonEntity *pokemon);
+bool8 CanCrossWalls(struct Entity *pokemon);
 
 #endif

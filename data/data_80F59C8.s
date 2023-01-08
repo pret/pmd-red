@@ -284,122 +284,122 @@ gUnknown_80F6624: @ 80F6624
 
 	.global gStatusSpriteMasks_SleepStatus
 gStatusSpriteMasks_SleepStatus: @ 80F669C
-    .4byte 0                       @ SLEEP_STATUS_NONE
-    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_SLEEP
-    .4byte STATUS_SPRITE_SLEEPLESS @ SLEEP_STATUS_SLEEPLESS
-    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_NIGHTMARE
-    .4byte 0                       @ SLEEP_STATUS_YAWNING
-    .4byte STATUS_SPRITE_SLEEP     @ SLEEP_STATUS_NAPPING
+    .4byte 0                       @ STATUS_NONE
+    .4byte STATUS_SPRITE_SLEEP     @ STATUS_SLEEP
+    .4byte STATUS_SPRITE_SLEEPLESS @ STATUS_SLEEPLESS
+    .4byte STATUS_SPRITE_SLEEP     @ STATUS_NIGHTMARE
+    .4byte 0                       @ STATUS_YAWNING
+    .4byte STATUS_SPRITE_SLEEP     @ STATUS_NAPPING
 
 	.global gStatusSpriteMasks_NonVolatileStatus
 gStatusSpriteMasks_NonVolatileStatus: @ 80F66B4
-    .4byte 0                            @ NON_VOLATILE_STATUS_NONE
-    .4byte STATUS_SPRITE_BURNED         @ NON_VOLATILE_STATUS_BURNED
-    .4byte STATUS_SPRITE_POISONED       @ NON_VOLATILE_STATUS_POISONED
-    .4byte STATUS_SPRITE_BADLY_POISONED @ NON_VOLATILE_STATUS_BADLY_POISONED
-    .4byte 0                            @ NON_VOLATILE_STATUS_PARALYZED
+    .4byte 0                            @ STATUS_NONE
+    .4byte STATUS_SPRITE_BURNED         @ STATUS_BURN
+    .4byte STATUS_SPRITE_POISONED       @ STATUS_POISONED
+    .4byte STATUS_SPRITE_BADLY_POISONED @ STATUS_BADLY_POISONED
+    .4byte 0                            @ STATUS_PARALYSIS
 
 	.global gStatusSpriteMasks_ImmobilizeStatus
 gStatusSpriteMasks_ImmobilizeStatus: @ 80F66C8
-    .4byte 0                    @ IMMOBILIZE_STATUS_NONE
-    .4byte STATUS_SPRITE_FROZEN @ IMMOBILIZE_STATUS_FROZEN
-    .4byte 0                    @ IMMOBILIZE_STATUS_IMMOBILIZED
-    .4byte 0                    @ IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE
-    .4byte 0                    @ IMMOBILIZE_STATUS_WRAPPED_BY_FOE
-    .4byte 0                    @ IMMOBILIZE_STATUS_INGRAIN
-    .4byte 0                    @ IMMOBILIZE_STATUS_PETRIFIED
-    .4byte 0                    @ IMMOBILIZE_STATUS_SQUEEZED
+    .4byte 0                    @ STATUS_NONE
+    .4byte STATUS_SPRITE_FROZEN @ STATUS_FROZEN
+    .4byte 0                    @ STATUS_SHADOW_HOLD
+    .4byte 0                    @ STATUS_WRAP
+    .4byte 0                    @ STATUS_WRAPPED
+    .4byte 0                    @ STATUS_INGRAIN
+    .4byte 0                    @ STATUS_PETRIFIED
+    .4byte 0                    @ STATUS_CONSTRICTION
 
 	.global gStatusSpriteMasks_VolatileStatus
 gStatusSpriteMasks_VolatileStatus: @ 80F66E8
-    .4byte 0                      @ VOLATILE_STATUS_NONE
-    .4byte 0                      @ VOLATILE_STATUS_CRINGING
-    .4byte STATUS_SPRITE_CONFUSED @ VOLATILE_STATUS_CONFUSED
-    .4byte 0                      @ VOLATILE_STATUS_PAUSED
-    .4byte STATUS_SPRITE_COWERING @ VOLATILE_STATUS_COWERING
-    .4byte STATUS_SPRITE_TAUNTED  @ VOLATILE_STATUS_TAUNTED
-    .4byte STATUS_SPRITE_ENCORE   @ VOLATILE_STATUS_ENCORE
-    .4byte 0                      @ VOLATILE_STATUS_INFATUATED
+    .4byte 0                      @ STATUS_NONE
+    .4byte 0                      @ STATUS_CRINGE
+    .4byte STATUS_SPRITE_CONFUSED @ STATUS_CONFUSED
+    .4byte 0                      @ STATUS_PAUSED
+    .4byte STATUS_SPRITE_COWERING @ STATUS_COWERING
+    .4byte STATUS_SPRITE_TAUNTED  @ STATUS_TAUNTED
+    .4byte STATUS_SPRITE_ENCORE   @ STATUS_ENCORE
+    .4byte 0                      @ STATUS_INFATUATED
 
 	.global gStatusSpriteMasks_ChargingStatus
 gStatusSpriteMasks_ChargingStatus: @ 80F6708
-    .4byte 0 @ CHARGING_STATUS_NONE
-    .4byte 0 @ CHARGING_STATUS_BIDE
-    .4byte 0 @ CHARGING_STATUS_SOLARBEAM
-    .4byte 0 @ CHARGING_STATUS_SKY_ATTACK
-    .4byte 0 @ CHARGING_STATUS_RAZOR_WIND
-    .4byte 0 @ CHARGING_STATUS_FOCUS_PUNCH
-    .4byte 0 @ CHARGING_STATUS_SKULL_BASH
-    .4byte 0 @ CHARGING_STATUS_FLY
-    .4byte 0 @ CHARGING_STATUS_BOUNCE
-    .4byte 0 @ CHARGING_STATUS_DIVE
-    .4byte 0 @ CHARGING_STATUS_DIG
-    .4byte 0 @ CHARGING_STATUS_CHARGE
-    .4byte 0 @ CHARGING_STATUS_RAGE
+    .4byte 0 @ STATUS_NONE
+    .4byte 0 @ STATUS_BIDE
+    .4byte 0 @ STATUS_SOLARBEAM
+    .4byte 0 @ STATUS_SKY_ATTACK
+    .4byte 0 @ STATUS_RAZOR_WIND
+    .4byte 0 @ STATUS_FOCUS_PUNCH
+    .4byte 0 @ STATUS_SKULL_BASH
+    .4byte 0 @ STATUS_FLYING
+    .4byte 0 @ STATUS_BOUNCING
+    .4byte 0 @ STATUS_DIVING
+    .4byte 0 @ STATUS_DIGGING
+    .4byte 0 @ STATUS_CHARGING
+    .4byte 0 @ STATUS_ENRAGED
 
 	.global gStatusSpriteMasks_ProtectionStatus
 gStatusSpriteMasks_ProtectionStatus: @ 80F673C
-    .4byte 0                           @ PROTECTION_STATUS_NONE
-    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_REFLECT
-    .4byte STATUS_SPRITE_SHIELD_RED    @ PROTECTION_STATUS_SAFEGUARD
-    .4byte STATUS_SPRITE_SHIELD_YELLOW @ PROTECTION_STATUS_LIGHT_SCREEN
-    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_COUNTER
-    .4byte STATUS_SPRITE_SHIELD_YELLOW @ PROTECTION_STATUS_MAGIC_COAT
-    .4byte 0                           @ PROTECTION_STATUS_WISH
-    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_PROTECT
-    .4byte STATUS_SPRITE_SHIELD_RED    @ PROTECTION_STATUS_MIRROR_COAT
-    .4byte STATUS_SPRITE_ENDURE        @ PROTECTION_STATUS_ENDURE
-    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_MINI_COUNTER
-    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_MIRROR_MOVE
-    .4byte 0                           @ PROTECTION_STATUS_CONVERSION_2
-    .4byte STATUS_SPRITE_SHIELD_GREEN  @ PROTECTION_STATUS_VITAL_THROW
-    .4byte STATUS_SPRITE_SHIELD_BLUE   @ PROTECTION_STATUS_MIST
+    .4byte 0                           @ STATUS_NONE
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_REFLECT
+    .4byte STATUS_SPRITE_SHIELD_RED    @ STATUS_SAFEGUARD
+    .4byte STATUS_SPRITE_SHIELD_YELLOW @ STATUS_LIGHT_SCREEN
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_COUNTER
+    .4byte STATUS_SPRITE_SHIELD_YELLOW @ STATUS_MAGIC_COAT
+    .4byte 0                           @ STATUS_WISH
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ STATUS_PROTECT
+    .4byte STATUS_SPRITE_SHIELD_RED    @ STATUS_MIRROR_COAT
+    .4byte STATUS_SPRITE_ENDURE        @ STATUS_ENDURING
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_MINI_COUNTER
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ STATUS_MIRROR_MOVE
+    .4byte 0                           @ STATUS_CONVERSION2
+    .4byte STATUS_SPRITE_SHIELD_GREEN  @ STATUS_VITAL_THROW
+    .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_MIST
 
 	.global gStatusSpriteMasks_WaitingStatus
 gStatusSpriteMasks_WaitingStatus: @ 80F6778
-    .4byte 0                    @ WAITING_STATUS_NONE
-    .4byte STATUS_SPRITE_CURSED @ WAITING_STATUS_CURSED
-    .4byte 0                    @ WAITING_STATUS_DECOY
-    .4byte STATUS_SPRITE_SNATCH @ WAITING_STATUS_SNATCH
+    .4byte 0                    @ STATUS_NONE
+    .4byte STATUS_SPRITE_CURSED @ STATUS_CURSED
+    .4byte 0                    @ STATUS_DECOY
+    .4byte STATUS_SPRITE_SNATCH @ STATUS_SNATCH
 
 	.global gStatusSpriteMasks_LinkedStatus
 gStatusSpriteMasks_LinkedStatus: @ 80F6788
-    .4byte 0 @ LINKED_STATUS_NONE
-    .4byte 0 @ LINKED_STATUS_LEECH_SEED
-    .4byte 0 @ LINKED_STATUS_DESTINY_BOND
+    .4byte 0 @ STATUS_NONE
+    .4byte 0 @ STATUS_LEECH_SEED
+    .4byte 0 @ STATUS_DESTINY_BOND
 
 	.global gStatusSpriteMasks_MoveStatus
 gStatusSpriteMasks_MoveStatus: @ 80F6794
-    .4byte 0                          @ MOVE_STATUS_NONE
-    .4byte STATUS_SPRITE_SURE_SHOT    @ MOVE_STATUS_SURE_SHOT
-    .4byte STATUS_SPRITE_WHIFFER      @ MOVE_STATUS_WHIFFER
-    .4byte STATUS_SPRITE_SET_DAMAGE   @ MOVE_STATUS_SET_DAMAGE
-    .4byte STATUS_SPRITE_FOCUS_ENERGY @ MOVE_STATUS_FOCUS_ENERGY
+    .4byte 0                          @ STATUS_NONE
+    .4byte STATUS_SPRITE_SURE_SHOT    @ STATUS_SURE_SHOT
+    .4byte STATUS_SPRITE_WHIFFER      @ STATUS_WHIFFER
+    .4byte STATUS_SPRITE_SET_DAMAGE   @ STATUS_SET_DAMAGE
+    .4byte STATUS_SPRITE_FOCUS_ENERGY @ STATUS_FOCUS_ENERGY
 
 	.global gStatusSpriteMasks_ItemStatus
 gStatusSpriteMasks_ItemStatus: @ 80F67A8
-    .4byte 0 @ ITEM_STATUS_NONE
-    .4byte 0 @ ITEM_STATUS_LONG_TOSS
-    .4byte 0 @ ITEM_STATUS_PIERCE
+    .4byte 0 @ STATUS_NONE
+    .4byte 0 @ STATUS_LONG_TOSS
+    .4byte 0 @ STATUS_PIERCE
 
 	.global gStatusSpriteMasks_TransformStatus
 gStatusSpriteMasks_TransformStatus: @ 80F67B4
-    .4byte 0 @ TRANSFORM_STATUS_NONE
-    .4byte 0 @ TRANSFORM_STATUS_INVISIBLE
-    .4byte 0 @ TRANSFORM_STATUS_TRANSFORMED
-    .4byte 0 @ TRANSFORM_STATUS_MOBILE
+    .4byte 0 @ STATUS_NONE
+    .4byte 0 @ STATUS_INVISIBLE
+    .4byte 0 @ STATUS_TRANSFORMED
+    .4byte 0 @ STATUS_MOBILE
 
 	.global gStatusSpriteMasks_EyesightStatus
 gStatusSpriteMasks_EyesightStatus: @ 80F67C4
-    .4byte 0                        @ EYESIGHT_STATUS_NONE
-    .4byte STATUS_SPRITE_BLINKER    @ EYESIGHT_STATUS_BLINKER
-    .4byte STATUS_SPRITE_CROSS_EYED @ EYESIGHT_STATUS_CROSS_EYED
-    .4byte STATUS_SPRITE_EYEDROPS   @ EYESIGHT_STATUS_EYEDROPS
+    .4byte 0                        @ STATUS_NONE
+    .4byte STATUS_SPRITE_BLINKER    @ STATUS_BLINKER
+    .4byte STATUS_SPRITE_CROSS_EYED @ STATUS_CROSS_EYED
+    .4byte STATUS_SPRITE_EYEDROPS   @ STATUS_EYEDROPS
 
 	.global gStatusSpriteMasks_MuzzledStatus
 gStatusSpriteMasks_MuzzledStatus: @ 80F67D4
-    .4byte 0                     @ MUZZLED_STATUS_NONE
-    .4byte STATUS_SPRITE_MUZZLED @ MUZZLED_STATUS_MUZZLED
+    .4byte 0                     @ STATUS_NONE
+    .4byte STATUS_SPRITE_MUZZLED @ STATUS_MUZZLED
 
 	.global gUnknown_80F67DC
 gUnknown_80F67DC: @ 80F67DC

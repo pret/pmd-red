@@ -18,7 +18,7 @@ sub_80701A4:
 	adds r0, r6, 0
 	adds r0, 0x44
 	movs r1, 0x1
-	bl SetAction
+	bl SetMonsterActionFields
 	adds r0, r6, 0
 	adds r0, 0xA8
 	ldrb r0, [r0]
@@ -165,7 +165,7 @@ _080702B0:
 	adds r0, r6, 0
 	adds r0, 0x44
 	movs r1, 0x14
-	bl SetAction
+	bl SetMonsterActionFields
 	adds r3, r5, 0
 	adds r7, r6, 0
 	adds r7, 0x50

@@ -125,53 +125,53 @@ extern u8 *gUnknown_80FC270[];
 extern u8 *gUnknown_80FC138[];
 extern u8 *gUnknown_80FC21C[];
 
-extern bool8 sub_8071728(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage);
-extern void sub_8041F28(struct DungeonEntity *, s32);
-extern void sub_8041F4C(struct DungeonEntity *, s32);
-extern void sub_8041F70(struct DungeonEntity *, s32);
-extern void sub_8041F94(struct DungeonEntity *, s32);
-extern void sub_8041C08(struct DungeonEntity *);
+extern bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 displayMessage);
+extern void sub_8041F28(struct Entity *, s32);
+extern void sub_8041F4C(struct Entity *, s32);
+extern void sub_8041F70(struct Entity *, s32);
+extern void sub_8041F94(struct Entity *, s32);
+extern void sub_8041C08(struct Entity *);
 extern void sub_8076CB4(s32);
-extern void sub_8041F08(struct DungeonEntity *);
-extern void sub_8041C7C(struct DungeonEntity *);
-extern void sub_8041C6C(struct DungeonEntity *);
-extern void sub_806CE94(struct DungeonEntity *, u32);
-extern void sub_8041C34(struct DungeonEntity *);
-extern void sub_8041EF8(struct DungeonEntity *);
-extern void sub_8041EE8(struct DungeonEntity *);
-extern void sub_8041EC8(struct DungeonEntity *);
-extern void sub_8041ED8(struct DungeonEntity *);
-extern void DungeonEntityUpdateStatusSprites(struct DungeonEntity *);
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern void SetMessageArgument_2(char[], struct DungeonEntityData*, u32);
-extern void sub_8041AF4(struct DungeonEntity *);
-extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, u8 *);
-extern void sub_806CE68(struct DungeonEntity *, s32);
-extern void nullsub_91(struct DungeonEntity *);
-extern void nullsub_90(struct DungeonEntity *);
-extern void nullsub_72(struct DungeonEntity *);
-extern void nullsub_71(struct DungeonEntity *);
-extern void nullsub_70(struct DungeonEntity *);
-extern void nullsub_69(struct DungeonEntity *, struct DungeonEntity *);
+extern void sub_8041F08(struct Entity *);
+extern void sub_8041C7C(struct Entity *);
+extern void sub_8041C6C(struct Entity *);
+extern void sub_806CE94(struct Entity *, u32);
+extern void sub_8041C34(struct Entity *);
+extern void sub_8041EF8(struct Entity *);
+extern void sub_8041EE8(struct Entity *);
+extern void sub_8041EC8(struct Entity *);
+extern void sub_8041ED8(struct Entity *);
+extern void DungeonEntityUpdateStatusSprites(struct Entity *);
+extern void SetMessageArgument(char[], struct Entity*, u32);
+extern void SetMessageArgument_2(char[], struct EntityInfo*, u32);
+extern void sub_8041AF4(struct Entity *);
+extern void sub_80522F4(struct Entity *r1, struct Entity *r2, u8 *);
+extern void sub_806CE68(struct Entity *, s32);
+extern void nullsub_91(struct Entity *);
+extern void nullsub_90(struct Entity *);
+extern void nullsub_72(struct Entity *);
+extern void nullsub_71(struct Entity *);
+extern void nullsub_70(struct Entity *);
+extern void nullsub_69(struct Entity *, struct Entity *);
 
 
-void sub_8075BA4(struct DungeonEntity *param_1, u8 param_2)
+void sub_8075BA4(struct Entity *param_1, u8 param_2)
 {
-  struct DungeonEntityData * entityData = param_1->entityData;
+  struct EntityInfo * entityData = param_1->info;
 
-  if ((param_2 != 0) && (entityData->volatileStatus == VOLATILE_STATUS_COWERING)) {
-      entityData->action.facingDir = (entityData->action.facingDir + 4) & DIRECTION_MASK;
+  if ((param_2 != 0) && (entityData->volatileStatus == STATUS_COWERING)) {
+      entityData->action.direction = (entityData->action.direction + 4) & DIRECTION_MASK;
       TargetTileInFront(param_1);
   }
-  else if (entityData->volatileStatus == VOLATILE_STATUS_CONFUSED) {
-      entityData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+  else if (entityData->volatileStatus == STATUS_CONFUSED) {
+      entityData->action.direction = DungeonRandInt(NUM_DIRECTIONS);
       TargetTileInFront(param_1);
   }
 }
 
-u8 sub_8075BF4(struct DungeonEntity * pokemon, s32 sleepTurns)
+u8 sub_8075BF4(struct Entity * pokemon, s32 sleepTurns)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   u32 uVar4;
 
   uVar4 = 0;
@@ -180,39 +180,39 @@ u8 sub_8075BF4(struct DungeonEntity * pokemon, s32 sleepTurns)
   }
   else
   {
-    entityData = pokemon->entityData;
+    entityData = pokemon->info;
 
-    if(entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE && entityData->sleepStatus != SLEEP_STATUS_SLEEP)
+    if(entityData->sleep != STATUS_NIGHTMARE && entityData->sleep != STATUS_SLEEP)
     {
-        entityData->sleepStatus = SLEEP_STATUS_SLEEP;
+        entityData->sleep = STATUS_SLEEP;
         if ((sleepTurns != 0x7f) && HasAbility(pokemon, ABILITY_EARLY_BIRD) &&
             (sleepTurns = sleepTurns / 2, sleepTurns < 1)) {
             sleepTurns = 1;
         }
-        entityData->sleepStatusTurnsLeft = sleepTurns;
+        entityData->sleepTurns = sleepTurns;
     }
-    else if(entityData->sleepStatus == SLEEP_STATUS_SLEEP)
+    else if(entityData->sleep == STATUS_SLEEP)
         uVar4 = 1;
-    else if(entityData->sleepStatus == SLEEP_STATUS_NIGHTMARE)
+    else if(entityData->sleep == STATUS_NIGHTMARE)
         uVar4 = 2;
     DungeonEntityUpdateStatusSprites(pokemon);
   }
   return uVar4;
 }
 
-void sub_8075C58(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns, u8 displayMessage)
+void sub_8075C58(struct Entity * pokemon, struct Entity * target, s32 turns, u8 displayMessage)
 {
-  u8 sleepStatus;
+  u8 sleep;
   u8 cVar2;
 
 
   if (!CannotSleep(pokemon,target,1,displayMessage)) {
-    sleepStatus = target->entityData->sleepStatus;
-    if (sleepStatus == SLEEP_STATUS_SLEEPLESS) {
+    sleep = target->info->sleep;
+    if (sleep == STATUS_SLEEPLESS) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FB380);
     }
-    else if (sleepStatus == SLEEP_STATUS_NAPPING) {
+    else if (sleep == STATUS_NAPPING) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FB384);
     }
@@ -231,14 +231,14 @@ void sub_8075C58(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 }
 
-bool8 CannotSleep(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 param_3, bool8 displayMessage)
+bool8 CannotSleep(struct Entity * pokemon, struct Entity * target, u8 param_3, bool8 displayMessage)
 {  
     if ((!EntityExists(target)) ||
         ((SetMessageArgument(gAvailablePokemonNames,target,0), param_3 != 0 &&
         (HasSafeguardStatus(pokemon,target,displayMessage))))) {
         return TRUE;
     }
-    else if (HasIQSkill(target, IQ_SKILL_NONSLEEPER)) {
+    else if (IQSkillIsEnabled(target, IQ_NONSLEEPER)) {
         if (displayMessage) {
             sub_80522F4(pokemon,target,*gUnknown_80FCD54);
         }
@@ -256,7 +256,7 @@ bool8 CannotSleep(struct DungeonEntity * pokemon, struct DungeonEntity * target,
         }
         return TRUE;
     }
-    else if (HasItem(target, ITEM_ID_INSOMNISCOPE)) {
+    else if (HasHeldItem(target, ITEM_INSOMNISCOPE)) {
         if (displayMessage) {
             sub_80522F4(pokemon,target,*gUnknown_80FD548);
         }
@@ -265,27 +265,27 @@ bool8 CannotSleep(struct DungeonEntity * pokemon, struct DungeonEntity * target,
     return FALSE;
 }
 
-void NightmareStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns)
+void NightmareStatusTarget(struct Entity * pokemon, struct Entity * target, s32 turns)
 {
   bool8 hasNightmare;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
   hasNightmare = FALSE;
   if (!CannotSleep(pokemon, target, 1, TRUE)) {
-    entityData = target->entityData;
-    if (entityData->sleepStatus != SLEEP_STATUS_SLEEPLESS) {
+    entityData = target->info;
+    if (entityData->sleep != STATUS_SLEEPLESS) {
       sub_8041EC8(target);
-      if (entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE) {
-        entityData->sleepStatusTurnsLeft = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityData->sleepStatusTurnsLeft >>= 1, entityData->sleepStatusTurnsLeft == 0)) {
-          entityData->sleepStatusTurnsLeft = 1;
+      if (entityData->sleep != STATUS_NIGHTMARE) {
+        entityData->sleepTurns = turns;
+        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityData->sleepTurns >>= 1, entityData->sleepTurns == 0)) {
+          entityData->sleepTurns = 1;
         }
       }
       else
       {
         hasNightmare = TRUE;
       }
-      entityData->sleepStatus = SLEEP_STATUS_NIGHTMARE;
+      entityData->sleep = STATUS_NIGHTMARE;
       sub_806CE68(target,8);
       if (hasNightmare) {
           sub_80522F4(pokemon,target,*gUnknown_80FB3CC);
@@ -302,27 +302,27 @@ void NightmareStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
   }
 }
 
-void NappingStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns)
+void NappingStatusTarget(struct Entity * pokemon, struct Entity * target, s32 turns)
 {
   bool8 isSleeping;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
   isSleeping = FALSE;
   if (!CannotSleep(pokemon, target, 0, TRUE)) {
-    entityData = target->entityData;
-    if (entityData->sleepStatus != SLEEP_STATUS_SLEEPLESS) {
+    entityData = target->info;
+    if (entityData->sleep != STATUS_SLEEPLESS) {
       sub_8041ED8(target);
-      if (entityData->sleepStatus == SLEEP_STATUS_NONE || entityData->sleepStatus == SLEEP_STATUS_YAWNING) {
-        entityData->sleepStatusTurnsLeft = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityData->sleepStatusTurnsLeft >>= 1, entityData->sleepStatusTurnsLeft == 0)) {
-          entityData->sleepStatusTurnsLeft = 1;
+      if (entityData->sleep == STATUS_NONE || entityData->sleep == STATUS_YAWNING) {
+        entityData->sleepTurns = turns;
+        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityData->sleepTurns >>= 1, entityData->sleepTurns == 0)) {
+          entityData->sleepTurns = 1;
         }
       }
       else
       {
         isSleeping = TRUE;
       }
-      entityData->sleepStatus = SLEEP_STATUS_NAPPING;
+      entityData->sleep = STATUS_NAPPING;
       sub_806CE68(target, 8);
       if (isSleeping) {
           sub_80522F4(pokemon,target,*gUnknown_80FB360);
@@ -339,29 +339,29 @@ void NappingStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * 
   }
 }
 
-void YawnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 turns)
+void YawnedStatusTarget(struct Entity * pokemon, struct Entity * target, s32 turns)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
   if (CannotSleep(pokemon,target,1,TRUE)) {
     return;
   }
-  entityData = target->entityData;
-  if (entityData->sleepStatus == SLEEP_STATUS_NONE) {
-    entityData->sleepStatus = SLEEP_STATUS_YAWNING;
-    entityData->sleepStatusTurnsLeft = turns;
+  entityData = target->info;
+  if (entityData->sleep == STATUS_NONE) {
+    entityData->sleep = STATUS_YAWNING;
+    entityData->sleepTurns = turns;
     nullsub_91(target);
     sub_806CE68(target, 8);
     sub_80522F4(pokemon,target,*gUnknown_80FB3E0);
   }
-  else if (((entityData->sleepStatus == SLEEP_STATUS_SLEEP) || (entityData->sleepStatus == SLEEP_STATUS_NIGHTMARE)) || (entityData->sleepStatus == SLEEP_STATUS_NAPPING)) {
+  else if (((entityData->sleep == STATUS_SLEEP) || (entityData->sleep == STATUS_NIGHTMARE)) || (entityData->sleep == STATUS_NAPPING)) {
     sub_80522F4(pokemon,target,*gUnknown_80FB418);
   }
-  else if (entityData->sleepStatus == SLEEP_STATUS_SLEEPLESS) {
+  else if (entityData->sleep == STATUS_SLEEPLESS) {
     sub_80522F4(pokemon,target,*gUnknown_80FB3F8);
   }
   else {
-    if (entityData->sleepStatus == SLEEP_STATUS_YAWNING)
+    if (entityData->sleep == STATUS_YAWNING)
         sub_80522F4(pokemon,target,*gUnknown_80FB414);
     else
         sub_80522F4(pokemon,target,*gUnknown_80FB3E0);
@@ -369,9 +369,9 @@ void YawnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void SleeplessStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void SleeplessStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   bool8 isAsleep;
   
   isAsleep = FALSE;
@@ -379,16 +379,16 @@ void SleeplessStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
     return;
   }
 
-  entityData = target->entityData;
-  if ((entityData->sleepStatus == SLEEP_STATUS_SLEEP) || (entityData->sleepStatus == SLEEP_STATUS_NAPPING) || (entityData->sleepStatus == SLEEP_STATUS_NIGHTMARE)) {
+  entityData = target->info;
+  if ((entityData->sleep == STATUS_SLEEP) || (entityData->sleep == STATUS_NAPPING) || (entityData->sleep == STATUS_NIGHTMARE)) {
     isAsleep = TRUE;
   }
   SetMessageArgument(gAvailablePokemonNames, target, 0);
 
-  if (entityData->sleepStatus != SLEEP_STATUS_SLEEPLESS)
+  if (entityData->sleep != STATUS_SLEEPLESS)
   {
-    entityData->sleepStatus = SLEEP_STATUS_SLEEPLESS;
-    entityData->sleepStatusTurnsLeft = CalculateStatusTurns(target, gUnknown_80F4E7C, FALSE) + 1;
+    entityData->sleep = STATUS_SLEEPLESS;
+    entityData->sleepTurns = CalculateStatusTurns(target, gUnknown_80F4E7C, FALSE) + 1;
     entityData->unk165 = 0xFF;
     entityData->unk164 = 0xFF;
     sub_8041EE8(target);
@@ -404,21 +404,21 @@ void SleeplessStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void PausedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 param_3, s32 turns, bool8 displayMessage)
+void PausedStatusTarget(struct Entity * pokemon, struct Entity * target, u8 param_3, s32 turns, bool8 displayMessage)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
   if (!EntityExists(target)) {
     return;
   }
-  entityData = target->entityData;
+  entityData = target->info;
   if ((param_3 != 0) && (HasSafeguardStatus(pokemon,target,displayMessage))) {
     return;
   }
   SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
-  if (entityData->volatileStatus != VOLATILE_STATUS_PAUSED) {
-    entityData->volatileStatus = VOLATILE_STATUS_PAUSED;
-    entityData->volatileStatusTurnsLeft = turns + 1;
+  if (entityData->volatileStatus != STATUS_PAUSED) {
+    entityData->volatileStatus = STATUS_PAUSED;
+    entityData->volatileStatusTurns = turns + 1;
     nullsub_72(target);
     if (turns == 1) {
         sub_80522F4(pokemon,target,*gUnknown_80FB480);
@@ -439,13 +439,13 @@ void PausedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
   DungeonEntityUpdateStatusSprites(target);
 }
 
-void InfatuateStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void InfatuateStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
 
   if (EntityExists(target)) {
-    entityData = target->entityData;
+    entityData = target->info;
     if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
       if (HasAbility(target,ABILITY_OBLIVIOUS)) {
         SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -456,9 +456,9 @@ void InfatuateStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
       else
       {
         SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
-        if (entityData->volatileStatus != VOLATILE_STATUS_INFATUATED) {
-          entityData->volatileStatus = VOLATILE_STATUS_INFATUATED;
-          entityData->volatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
+        if (entityData->volatileStatus != STATUS_INFATUATED) {
+          entityData->volatileStatus = STATUS_INFATUATED;
+          entityData->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
           sub_8041EF8(target);
           sub_80522F4(pokemon,target,*gUnknown_80FB50C);
         }
@@ -471,14 +471,14 @@ void InfatuateStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
   }
 }
 
-void BurnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 param_3, bool8 displayMessage)
+void BurnedStatusTarget(struct Entity * pokemon, struct Entity * target, u8 param_3, bool8 displayMessage)
 {
   bool8 isNotBurned;
   bool8 hasSynchronized;
-  struct DungeonEntityData *entityData;
-  struct MapTile *tile_1;
-  struct MapTile *tile_2;
-  struct DungeonEntity *entity;
+  struct EntityInfo *entityData;
+  struct Tile *tile_1;
+  struct Tile *tile_2;
+  struct Entity *entity;
   s32 index;
   
   if (!EntityExists(target)) {
@@ -486,7 +486,7 @@ void BurnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
     if (HasAbility(target, ABILITY_WATER_VEIL)) {
       if (displayMessage)
@@ -494,25 +494,25 @@ void BurnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
     }
     else
     {
-      if (HasType(target, TYPE_FIRE)) {
+      if (MonsterIsType(target, TYPE_FIRE)) {
         if (displayMessage)
             sub_80522F4(pokemon,target,*gUnknown_80FCE84);
       }
       else
       {
-        tile_1 = GetMapTileForDungeonEntity_2(target);
-        if (((tile_1->tileType & (TILE_TYPE_LIQUID | TILE_TYPE_FLOOR)) == TILE_TYPE_LIQUID) &&
-           (gDungeonWaterType[gDungeonGlobalData->tileset] != DUNGEON_WATER_TYPE_LAVA)) {
+        tile_1 = GetTileAtEntitySafe(target);
+        if (((tile_1->terrainType & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
+           (gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
                     sub_80522F4(pokemon,target,*gUnknown_80FEBBC);
            }
         else
         {
             isNotBurned = TRUE;
-            if (entityData->nonVolatileStatus != NON_VOLATILE_STATUS_BURNED) {
-                entityData->nonVolatileStatus = NON_VOLATILE_STATUS_BURNED;
-                entityData->nonVolatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E30,TRUE) + 1;
-                entityData->nonVolatileStatusDamageTimer = 0;
+            if (entityData->nonVolatileStatus != STATUS_BURN) {
+                entityData->nonVolatileStatus = STATUS_BURN;
+                entityData->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E30,TRUE) + 1;
+                entityData->nonVolatileStatusDamageCountdown = 0;
                 entityData->fillAF = 0;
                 isNotBurned = FALSE;
                 if (param_3 != 0) {
@@ -537,11 +537,11 @@ void BurnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
 
             for(index = 0; index < NUM_DIRECTIONS; index++)
             {
-                tile_2 = GetMapTile_1(target->posWorld.x +
+                tile_2 = GetTile(target->pos.x +
                                     gAdjacentTileOffsets[index].x,
-                                    target->posWorld.y + gAdjacentTileOffsets[index].y);
-                entity = tile_2->pokemon;
-                if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_POKEMON)) {
+                                    target->pos.y + gAdjacentTileOffsets[index].y);
+                entity = tile_2->monster;
+                if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                     if (!hasSynchronized) {
                         hasSynchronized = TRUE;
                         SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
@@ -559,13 +559,13 @@ void BurnedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
   }
 }
 
-void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void PoisonedStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
   bool8 isNotPoisoned;
   bool8 hasSynchronized;
-  struct DungeonEntityData *entityData;
-  struct MapTile *tile;
-  struct DungeonEntity *entity;
+  struct EntityInfo *entityData;
+  struct Tile *tile;
+  struct Entity *entity;
   s32 index;
   
   if (!EntityExists(target)) {
@@ -573,9 +573,9 @@ void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
-    if (HasItem(target, ITEM_ID_PECHA_SCARF)) {
+    if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FD524);
     }
@@ -587,7 +587,7 @@ void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
       }
       else
       {
-        if(HasType(target, TYPE_POISON) || HasType(target, TYPE_STEEL)){
+        if(MonsterIsType(target, TYPE_POISON) || MonsterIsType(target, TYPE_STEEL)){
             if (displayMessage)
                 sub_80522F4(pokemon,target,*gUnknown_80FCEDC);
         }
@@ -595,13 +595,13 @@ void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
         {
             isNotPoisoned = TRUE;
 
-            if(entityData->nonVolatileStatus != NON_VOLATILE_STATUS_BADLY_POISONED)
+            if(entityData->nonVolatileStatus != STATUS_BADLY_POISONED)
             {
-                if(entityData->nonVolatileStatus != NON_VOLATILE_STATUS_POISONED)
+                if(entityData->nonVolatileStatus != STATUS_POISONED)
                 {
-                    entityData->nonVolatileStatus = NON_VOLATILE_STATUS_POISONED;
-                    entityData->nonVolatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E34,TRUE) + 1;
-                    entityData->nonVolatileStatusDamageTimer = 0;
+                    entityData->nonVolatileStatus = STATUS_POISONED;
+                    entityData->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E34,TRUE) + 1;
+                    entityData->nonVolatileStatusDamageCountdown = 0;
                     entityData->fillAF = 0;
                     isNotPoisoned = FALSE;
                     sub_8041C6C(target);
@@ -624,11 +624,11 @@ void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
 
                 for(index = 0; index < NUM_DIRECTIONS; index++)
                 {
-                    tile = GetMapTile_1(target->posWorld.x +
+                    tile = GetTile(target->pos.x +
                                         gAdjacentTileOffsets[index].x,
-                                        target->posWorld.y + gAdjacentTileOffsets[index].y);
-                    entity = tile->pokemon;
-                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_POKEMON)) {
+                                        target->pos.y + gAdjacentTileOffsets[index].y);
+                    entity = tile->monster;
+                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
@@ -648,13 +648,13 @@ void PoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 }
 
-void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void BadlyPoisonedStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
   bool8 isNotBadlyPoisoned;
   bool8 hasSynchronized;
-  struct DungeonEntityData *entityData;
-  struct MapTile *tile;
-  struct DungeonEntity *entity;
+  struct EntityInfo *entityData;
+  struct Tile *tile;
+  struct Entity *entity;
   s32 index;
   
   if (!EntityExists(target)) {
@@ -662,9 +662,9 @@ void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEnt
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
-    if (HasItem(target, ITEM_ID_PECHA_SCARF)) {
+    if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FD524);
     }
@@ -676,7 +676,7 @@ void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEnt
       }
       else
       {
-        if(HasType(target, TYPE_POISON) || HasType(target, TYPE_STEEL)){
+        if(MonsterIsType(target, TYPE_POISON) || MonsterIsType(target, TYPE_STEEL)){
             if (displayMessage)
                 sub_80522F4(pokemon,target,*gUnknown_80FCEDC);
         }
@@ -684,11 +684,11 @@ void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEnt
         {
             isNotBadlyPoisoned = TRUE;
 
-            if(entityData->nonVolatileStatus != NON_VOLATILE_STATUS_BADLY_POISONED)
+            if(entityData->nonVolatileStatus != STATUS_BADLY_POISONED)
             {
-                    entityData->nonVolatileStatus = NON_VOLATILE_STATUS_BADLY_POISONED;
-                    entityData->nonVolatileStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E38,TRUE) + 1;
-                    entityData->nonVolatileStatusDamageTimer = 0;
+                    entityData->nonVolatileStatus = STATUS_BADLY_POISONED;
+                    entityData->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E38,TRUE) + 1;
+                    entityData->nonVolatileStatusDamageCountdown = 0;
                     entityData->fillAF = 0;
                     isNotBadlyPoisoned = FALSE;
                     sub_8041C7C(target);
@@ -706,11 +706,11 @@ void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEnt
 
                 for(index = 0; index < NUM_DIRECTIONS; index++)
                 {
-                    tile = GetMapTile_1(target->posWorld.x +
+                    tile = GetTile(target->pos.x +
                                         gAdjacentTileOffsets[index].x,
-                                        target->posWorld.y + gAdjacentTileOffsets[index].y);
-                    entity = tile->pokemon;
-                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_POKEMON)) {
+                                        target->pos.y + gAdjacentTileOffsets[index].y);
+                    entity = tile->monster;
+                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gAvailablePokemonNames,entityData,0);
@@ -730,34 +730,34 @@ void BadlyPoisonedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEnt
   }
 }
 
-void FrozenStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+void FrozenStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
-  struct DungeonEntityData *entityData;
-  struct MapTile *tile;
+  struct EntityInfo *entityData;
+  struct Tile *tile;
   
   if (!EntityExists(target)) {
     return;
   }
 
   SetMessageArgument(gAvailablePokemonNames, target, 0);
-  entityData = target->entityData;
+  entityData = target->info;
 
-  if ((entityData->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
+  if ((entityData->immobilizeStatus != STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
     if (HasAbility(target, ABILITY_MAGMA_ARMOR)) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FCDE0);
     }
     else
     {
-      if (HasType(target, TYPE_ICE)) {
+      if (MonsterIsType(target, TYPE_ICE)) {
         if (displayMessage)
             sub_80522F4(pokemon,target,*gUnknown_80FCE00);
       }
       else
       {
-        tile = GetMapTileForDungeonEntity_2(target);
-        if (((tile->tileType & (TILE_TYPE_LIQUID | TILE_TYPE_FLOOR)) == TILE_TYPE_LIQUID) &&
-           (gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA)) {
+        tile = GetTileAtEntitySafe(target);
+        if (((tile->terrainType & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
+           (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
                     sub_80522F4(pokemon,target,*gUnknown_80FCE34);
            }
@@ -767,9 +767,9 @@ void FrozenStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
                 sub_8076CB4(entityData->unk9C);
             }
             sub_8041F08(target);
-            entityData->immobilizeStatus = IMMOBILIZE_STATUS_FROZEN;
-            entityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E2C,TRUE) + 1;
-            entityData->immobilizeStatusDamageTimer = 0;
+            entityData->immobilizeStatus = STATUS_FROZEN;
+            entityData->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E2C,TRUE) + 1;
+            entityData->immobilizeStatusDamageCountdown = 0;
             sub_80522F4(pokemon,target,*gUnknown_80FB610);
             DungeonEntityUpdateStatusSprites(target);
         }
@@ -778,26 +778,26 @@ void FrozenStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
   }
 }
 
-void SqueezedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s16 param_3, bool32 displayMessage)
+void SqueezedStatusTarget(struct Entity * pokemon, struct Entity * target, s16 param_3, bool32 displayMessage)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   s32 param_3_s32 = param_3;
   bool8 displayMessage_u8 = displayMessage;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
-    entityData = target->entityData;
+    entityData = target->info;
     if ((u8)(entityData->immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityData->unk9C);
     }
-    else if (entityData->immobilizeStatus == IMMOBILIZE_STATUS_INGRAIN) {
+    else if (entityData->immobilizeStatus == STATUS_INGRAIN) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA844);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityData->immobilizeStatus != IMMOBILIZE_STATUS_SQUEEZED) {
-      entityData->immobilizeStatus = IMMOBILIZE_STATUS_SQUEEZED;
-      entityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
-      entityData->immobilizeStatusDamageTimer = 0;
+    if (entityData->immobilizeStatus != STATUS_CONSTRICTION) {
+      entityData->immobilizeStatus = STATUS_CONSTRICTION;
+      entityData->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
+      entityData->immobilizeStatusDamageCountdown = 0;
       entityData->unkB4 = param_3_s32;
       nullsub_71(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB628);
@@ -810,24 +810,24 @@ void SqueezedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity *
   }
 }
 
-void ImmobilizedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void ImmobilizedStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
-    entityData = target->entityData;
+    entityData = target->info;
     if ((u8)(entityData->immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityData->unk9C);
     }
-    else if (entityData->immobilizeStatus == IMMOBILIZE_STATUS_INGRAIN) {
+    else if (entityData->immobilizeStatus == STATUS_INGRAIN) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA844);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityData->immobilizeStatus != IMMOBILIZE_STATUS_IMMOBILIZED) {
-      entityData->immobilizeStatus = IMMOBILIZE_STATUS_IMMOBILIZED;
-      entityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E54,TRUE) + 1;
-      entityData->immobilizeStatusDamageTimer = 0;
+    if (entityData->immobilizeStatus != STATUS_SHADOW_HOLD) {
+      entityData->immobilizeStatus = STATUS_SHADOW_HOLD;
+      entityData->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E54,TRUE) + 1;
+      entityData->immobilizeStatusDamageCountdown = 0;
       nullsub_70(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB668);
       sub_806CE94(target,8);
@@ -839,22 +839,22 @@ void ImmobilizedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntit
   }
 }
 
-void IngrainedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void IngrainedStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
-  struct DungeonEntityData *entityData;
-  struct DungeonEntityData *entityData2;
+  struct EntityInfo *entityData;
+  struct EntityInfo *entityData2;
   
   if (EntityExists(target)) {
-    entityData = target->entityData;
+    entityData = target->info;
     entityData2 = entityData;
     if ((u8)(entityData->immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityData->unk9C);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityData2->immobilizeStatus != IMMOBILIZE_STATUS_INGRAIN) {
-      entityData2->immobilizeStatus = IMMOBILIZE_STATUS_INGRAIN;
-      entityData2->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
-      entityData2->immobilizeStatusDamageTimer = 0;
+    if (entityData2->immobilizeStatus != STATUS_INGRAIN) {
+      entityData2->immobilizeStatus = STATUS_INGRAIN;
+      entityData2->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
+      entityData2->immobilizeStatusDamageCountdown = 0;
       nullsub_90(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB6A4);
     }
@@ -865,12 +865,12 @@ void IngrainedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
   }
 }
 
-void WrapTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void WrapTarget(struct Entity * pokemon, struct Entity * target)
 {
-  struct DungeonEntityData * targetEntityData;
+  struct EntityInfo * targetEntityData;
   s32 *piVar3;
   s32 *iVar5;
-  struct DungeonEntityData * pokemonEntityData;
+  struct EntityInfo * pokemonEntityData;
   
   if (!EntityExists(target)) {
     return;
@@ -879,20 +879,20 @@ void WrapTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
   if (HasSafeguardStatus(pokemon, target, TRUE)) {
     return;
   }
-  pokemonEntityData = pokemon->entityData;
-  targetEntityData = target->entityData;
+  pokemonEntityData = pokemon->info;
+  targetEntityData = target->info;
   if ((u8)(pokemonEntityData->immobilizeStatus - 3U) > 1) {
-    if ((targetEntityData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE))
+    if ((targetEntityData->immobilizeStatus != STATUS_WRAP))
     {
-        if(targetEntityData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_BY_FOE) {
-            pokemonEntityData->immobilizeStatus = IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE;
-            pokemonEntityData->immobilizeStatusTurnsLeft = 0x7f;
-            pokemonEntityData->immobilizeStatusDamageTimer = 0;
-            targetEntityData->immobilizeStatus = IMMOBILIZE_STATUS_WRAPPED_BY_FOE;
-            targetEntityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target, gUnknown_80F4E5C, TRUE) + 1;
-            targetEntityData->immobilizeStatusDamageTimer = 0;
+        if(targetEntityData->immobilizeStatus != STATUS_WRAPPED) {
+            pokemonEntityData->immobilizeStatus = STATUS_WRAP;
+            pokemonEntityData->immobilizeStatusTurns = 0x7f;
+            pokemonEntityData->immobilizeStatusDamageCountdown = 0;
+            targetEntityData->immobilizeStatus = STATUS_WRAPPED;
+            targetEntityData->immobilizeStatusTurns = CalculateStatusTurns(target, gUnknown_80F4E5C, TRUE) + 1;
+            targetEntityData->immobilizeStatusDamageCountdown = 0;
             iVar5 = &pokemonEntityData->unk9C;
-            piVar3 = &gDungeonGlobalData->unk37F4;
+            piVar3 = &gDungeon->unk37F4;
             *iVar5 = *piVar3;
             targetEntityData->unk9C  = *piVar3;
             *piVar3 +=1;
@@ -904,19 +904,19 @@ void WrapTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
         }
     }
   }
-  if (pokemonEntityData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE) {
+  if (pokemonEntityData->immobilizeStatus == STATUS_WRAP) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB6FC);
   }
-  if (targetEntityData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE) {
+  if (targetEntityData->immobilizeStatus == STATUS_WRAP) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB6FC);
   }
-  if (pokemonEntityData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_BY_FOE) {
+  if (pokemonEntityData->immobilizeStatus == STATUS_WRAPPED) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB718);
   }
-  if (targetEntityData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_BY_FOE) {
+  if (targetEntityData->immobilizeStatus == STATUS_WRAPPED) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB718);
   }
@@ -926,18 +926,18 @@ _08076C98:
 
 void sub_8076CB4(s32 param_1)
 {
-  struct DungeonEntity *entity;
-  struct DungeonEntityData *entityData;
+  struct Entity *entity;
+  struct EntityInfo *entityData;
   s32 index;
 
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-    entity = gDungeonGlobalData->allPokemon[index];
+    entity = gDungeon->allPokemon[index];
     if (EntityExists(entity)) {
-      entityData = entity->entityData;
+      entityData = entity->info;
       if (entityData->unk9C == param_1) {
         if ((u8)(entityData->immobilizeStatus - 3U) < 2) {
-          entityData->immobilizeStatus = IMMOBILIZE_STATUS_NONE;
+          entityData->immobilizeStatus = STATUS_NONE;
         }
         entityData->unk9C = 0;
       }
@@ -946,46 +946,46 @@ void sub_8076CB4(s32 param_1)
   }
 }
 
-void PetrifiedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target)
+void PetrifiedStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
-  struct DungeonEntityData * targetEntityData;
-  struct DungeonEntityData * entityData;
-  struct DungeonEntity * entity;
+  struct EntityInfo * targetEntityData;
+  struct EntityInfo * entityData;
+  struct Entity * entity;
   s32 index;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     sub_8041C08(target);
-    targetEntityData = target->entityData;
+    targetEntityData = target->info;
     if ((u8)(targetEntityData->immobilizeStatus - 3U) < 2) {
       sub_8076CB4(targetEntityData->unk9C);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (targetEntityData->immobilizeStatus != IMMOBILIZE_STATUS_PETRIFIED) {
-      targetEntityData->immobilizeStatus = IMMOBILIZE_STATUS_PETRIFIED;
-      if (targetEntityData->isLeader) {
-        targetEntityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4EBC,TRUE) + 1;
+    if (targetEntityData->immobilizeStatus != STATUS_PETRIFIED) {
+      targetEntityData->immobilizeStatus = STATUS_PETRIFIED;
+      if (targetEntityData->isTeamLeader) {
+        targetEntityData->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EBC,TRUE) + 1;
       }
       else {
-        targetEntityData->immobilizeStatusTurnsLeft = CalculateStatusTurns(target,gUnknown_80F4EC0,TRUE) + 1;
+        targetEntityData->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EC0,TRUE) + 1;
       }
-      targetEntityData->immobilizeStatusDamageTimer = 0;
+      targetEntityData->immobilizeStatusDamageCountdown = 0;
       sub_80522F4(pokemon,target,*gUnknown_80FB7BC);
 
     }
     else {
       sub_80522F4(pokemon,target,*gUnknown_80FB7DC);
     }
-    if (targetEntityData->isEnemy) {
+    if (targetEntityData->isNotTeamMember) {
       for(index = 0; index < MAX_TEAM_MEMBERS; index++)
       {
-        entity = gDungeonGlobalData->teamPokemon[index];
+        entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-          entityData = entity->entityData;
-          if ((entityData->movementAction == MOVEMENT_ACTION_FOLLOW) && (entityData->targetPokemon == target)) {
-            entityData->movementAction = MOVEMENT_ACTION_FACE_RANDOM_DIRECTION;
-            entityData->targetPokemon = NULL;
-            entityData->targetPokemonSpawnIndex = 0;
-            entityData->hasTarget = FALSE;
+          entityData = entity->info;
+          if ((entityData->aiObjective == AI_CHASE_TARGET) && (entityData->aiTarget == target)) {
+            entityData->aiObjective = AI_STAND_STILL;
+            entityData->aiTarget = NULL;
+            entityData->aiTargetSpawnGenID = 0;
+            entityData->aiTargetingEnemy = FALSE;
           }
         }
       }
@@ -994,15 +994,15 @@ void PetrifiedStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity 
   }
 }
 
-void LowerAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
+void LowerAttackStageTarget(struct Entity * pokemon, struct Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   s32 attackStage = decrement;
   
   if (!EntityExists(target)) {
     return;
   }
-  if (index != STAT_STAGE_ATTACK) {
+  if (index != STAT_STAGE_ATK) {
     strcpy(gUnknown_202DE58,*gUnknown_80FC0C8);
   }
   else {
@@ -1012,19 +1012,19 @@ void LowerAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity
     if (sub_8071728(pokemon,target,displayMessage)) {
       return;
     }
-    if (HasItem(target, ITEM_ID_TWIST_BAND)) {
+    if (HasHeldItem(target, ITEM_TWIST_BAND)) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FD550);
     }
     else {
-      if ((!HasAbility(target, ABILITY_HYPER_CUTTER)) || (index != STAT_STAGE_ATTACK)) goto _08076EE4;
+      if ((!HasAbility(target, ABILITY_HYPER_CUTTER)) || (index != STAT_STAGE_ATK)) goto _08076EE4;
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FCA60);
     }
   }
   else {
 _08076EE4:
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F28(target,index);
     if (decrement == 1) {
@@ -1033,13 +1033,13 @@ _08076EE4:
     else {
       strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
     }
-    attackStage = entityData->attackStages[index];
+    attackStage = entityData->offensiveStages[index];
     attackStage -= decrement;
     if (attackStage < 0) {
       attackStage = 0;
     }
-    if (entityData->attackStages[index] != attackStage) {
-      entityData->attackStages[index] = attackStage;
+    if (entityData->offensiveStages[index] != attackStage) {
+      entityData->offensiveStages[index] = attackStage;
       sub_80522F4(pokemon,target,*gUnknown_80FC15C);
     }
     else {
@@ -1049,22 +1049,22 @@ _08076EE4:
   }
 }
 
-void LowerDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
+void LowerDefenseStageTarget(struct Entity * pokemon, struct Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
 {
-    struct DungeonEntityData *entityData;
+    struct EntityInfo *entityData;
     s32 defenseStage = decrement;
     
     if (!EntityExists(target)) {
         return;
     }
-    if (index != STAT_STAGE_DEFENSE) {
+    if (index != STAT_STAGE_DEF) {
         strcpy(gUnknown_202DE58,*gUnknown_80FC0AC);
     }
     else {
         strcpy(gUnknown_202DE58,*gUnknown_80FC09C);
     }
     if (!param_5 || !sub_8071728(pokemon,target,displayMessage)) {
-        entityData = target->entityData;
+        entityData = target->info;
         SetMessageArgument(gAvailablePokemonNames,target,0);
         sub_8041F4C(target,index);
         if (decrement == 1) {
@@ -1073,13 +1073,13 @@ void LowerDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntit
         else {
             strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
         }
-        defenseStage = entityData->defenseStages[index];
+        defenseStage = entityData->defensiveStages[index];
         defenseStage = defenseStage - decrement;
         if (defenseStage < 0) {
             defenseStage = 0;
         }
-        if (entityData->defenseStages[index] != defenseStage) {
-            entityData->defenseStages[index] = defenseStage;
+        if (entityData->defensiveStages[index] != defenseStage) {
+            entityData->defensiveStages[index] = defenseStage;
             sub_80522F4(pokemon,target,*gUnknown_80FC158);
         }
         else {
@@ -1089,18 +1089,18 @@ void LowerDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntit
   }
 }
 
-void RaiseAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 index, s32 increment)
+void RaiseAttackStageTarget(struct Entity * pokemon, struct Entity * target, s32 index, s32 increment)
 {
-    struct DungeonEntityData *entityData;
+    struct EntityInfo *entityData;
     s32 attackStage = increment;
     
     if (!EntityExists(target)) {
         return;
     }
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F70(target,index);
-    if (index != STAT_STAGE_ATTACK) {
+    if (index != STAT_STAGE_ATK) {
         strcpy(gUnknown_202DE58,*gUnknown_80FC0C8);
     }
     else {
@@ -1114,13 +1114,13 @@ void RaiseAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity
         strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
     }
 
-    attackStage = entityData->attackStages[index];
+    attackStage = entityData->offensiveStages[index];
     attackStage = attackStage + increment;
     if (attackStage >= MAX_STAT_STAGE) {
         attackStage = MAX_STAT_STAGE;
     }
-    if (entityData->attackStages[index] != attackStage) {
-        entityData->attackStages[index] = attackStage;
+    if (entityData->offensiveStages[index] != attackStage) {
+        entityData->offensiveStages[index] = attackStage;
         sub_80522F4(pokemon,target,*gUnknown_80FC13C);
     }
     else {
@@ -1129,18 +1129,18 @@ void RaiseAttackStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity
     DungeonEntityUpdateStatusSprites(target);
 }
 
-void RaiseDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 index, s32 increment)
+void RaiseDefenseStageTarget(struct Entity * pokemon, struct Entity * target, s32 index, s32 increment)
 {
-    struct DungeonEntityData *entityData;
+    struct EntityInfo *entityData;
     s32 defenseStage = increment;
     
     if (!EntityExists(target)) {
         return;
     }
-    entityData = target->entityData;
+    entityData = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F94(target,index);
-    if (index != STAT_STAGE_DEFENSE) {
+    if (index != STAT_STAGE_DEF) {
         strcpy(gUnknown_202DE58,*gUnknown_80FC0AC);
     }
     else {
@@ -1154,13 +1154,13 @@ void RaiseDefenseStageTarget(struct DungeonEntity * pokemon, struct DungeonEntit
         strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
     }
 
-    defenseStage = entityData->defenseStages[index];
+    defenseStage = entityData->defensiveStages[index];
     defenseStage = defenseStage + increment;
     if (defenseStage >= MAX_STAT_STAGE) {
         defenseStage = MAX_STAT_STAGE;
     }
-    if (entityData->defenseStages[index] != defenseStage) {
-        entityData->defenseStages[index] = defenseStage;
+    if (entityData->defensiveStages[index] != defenseStage) {
+        entityData->defensiveStages[index] = defenseStage;
         sub_80522F4(pokemon,target,*gUnknown_80FC138);
     }
     else {

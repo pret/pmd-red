@@ -356,7 +356,7 @@ void sub_802D2A8(void)
           MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->unkC->unk14,0x28);
           MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->unkC->unk18,0x78);
         }
-        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon.dungeonIndex)
+        switch(gUnknown_203B2F8->unkC->wonderMail.dungeon.id)
         {
             // NOTE: subtract 1 from each of the case as the input??
             case DUNGEON_ODDITY_CAVE: // 0x2B

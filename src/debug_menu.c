@@ -187,7 +187,7 @@ void sub_803A3BC(void)
     speciesIndex = index * 0x10000 >> 0x10; // dumb way to force s16
     memset(r7,0,8);
     r7[0] = 0x27;
-    CopySpeciesNametoBuffer(buffer, speciesIndex);
+    CopyMonsterNametoBuffer(buffer, speciesIndex);
     CopyStringtoBuffer(buffer, buffer);
     buffer[0] = 0x40;
     sub_808CFD0(sp_0x8,speciesIndex,buffer,0x43,&sp_0x7C,r7);

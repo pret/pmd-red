@@ -11,10 +11,10 @@ extern void sub_8017F10(u32);
 
 extern u8 sub_801CF14(u32);
 
-struct HeldItem_Alt {
+struct BulkItem_Alt {
   union tempHeld
   {
-      struct HeldItem norm;
+      struct BulkItem norm;
       u32 full_bits;
   } temp;
 };
@@ -91,8 +91,8 @@ void sub_8018620(void)
                     if(sub_801AED0(iVar6) != 0)
                     {
                         MoveToStorage(&gTeamInventory_203B460->teamItems[iVar6]);
-                        gTeamInventory_203B460->teamItems[iVar6].itemIndex = 0;
-                        gTeamInventory_203B460->teamItems[iVar6].itemFlags = 0;
+                        gTeamInventory_203B460->teamItems[iVar6].id = 0;
+                        gTeamInventory_203B460->teamItems[iVar6].flags = 0;
                     }
                 }
                 FillInventoryGaps();
@@ -128,7 +128,7 @@ void sub_8018620(void)
 
 void sub_80186F8(void)
 {
-    struct HeldItem_Alt item;
+    struct BulkItem_Alt item;
     u16 cast;
     s32 itemID;
     u8 itemID_u8;
@@ -144,22 +144,22 @@ void sub_80186F8(void)
                     if(sub_801CFE0(itemID) != 0)
                     {
                         item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemID_u8;
-                        if(IsThrowableItem(item.temp.norm.itemIndex))
-                            if(gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] > 0x63)
+                        if(IsThrowableItem(item.temp.norm.id))
+                            if(gTeamInventory_203B460->teamStorage[item.temp.norm.id] > 0x63)
                             {
                                 item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | (0xC6 << 7);
                             }
                             else
                             {
-                                cast = gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] << 8;
+                                cast = gTeamInventory_203B460->teamStorage[item.temp.norm.id] << 8;
                                 item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | cast;
                             }
                         else
                         {
                             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | (0x80 << 1);
                         }
-                        gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] -= item.temp.norm.numItems;
-                        AddHeldItemToInventory((struct HeldItem *)&item);
+                        gTeamInventory_203B460->teamStorage[item.temp.norm.id] -= item.temp.norm.quantity;
+                        AddHeldItemToInventory((struct BulkItem *)&item);
                     }
                 }
                 FillInventoryGaps();
@@ -174,16 +174,16 @@ void sub_80186F8(void)
             }
             else
             {
-                gUnknown_203B20C->itemIndex = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->itemIndex, 0);
-                gUnknown_203B20C->unk8.numItems = 1;
+                gUnknown_203B20C->id = sub_801CB24();
+                xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->id, 0);
+                gUnknown_203B20C->unk8.quantity = 1;
                 sub_8017F10(0xD);
             }
             break;
         case 4:
-            gUnknown_203B20C->itemIndex = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->itemIndex, 0);
-            gUnknown_203B20C->unk8.numItems = 1;
+            gUnknown_203B20C->id = sub_801CB24();
+            xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->id, 0);
+            gUnknown_203B20C->unk8.quantity = 1;
             sub_8017F10(0xE);
             break;
         case 2:
@@ -198,7 +198,7 @@ void sub_80186F8(void)
 
 void sub_8018854(void)
 {
-    struct HeldItem_Alt item;
+    struct BulkItem_Alt item;
     u32 itemsCast;
     u32 indexCast;
 
@@ -208,17 +208,17 @@ void sub_8018854(void)
     switch(sub_8013BBC(&gUnknown_203B20C->unkC0))
     {
         case 3:
-            gUnknown_203B20C->unk8.numItems = gUnknown_203B20C->unkC0;
+            gUnknown_203B20C->unk8.quantity = gUnknown_203B20C->unkC0;
 
-            gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex] -= gUnknown_203B20C->unk8.numItems;
+            gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
 
-            indexCast = gUnknown_203B20C->unk8.itemIndex;
+            indexCast = gUnknown_203B20C->unk8.id;
             item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | indexCast;
 
-            itemsCast = (gUnknown_203B20C->unk8.numItems << 8);
+            itemsCast = (gUnknown_203B20C->unk8.quantity << 8);
             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
 
-            AddHeldItemToInventory((struct HeldItem *)&item);
+            AddHeldItemToInventory((struct BulkItem *)&item);
             if(sub_801CF14(1) == 0)
                 if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 {
@@ -257,7 +257,7 @@ void sub_8018904(void)
     switch(menuAction)
     {
         case 2:
-            if(IsNotMoneyOrUsedTMItem(gUnknown_203B20C->unk8.itemIndex))
+            if(IsNotMoneyOrUsedTMItem(gUnknown_203B20C->unk8.id))
                 if(sub_801ADA0(gUnknown_203B20C->unkC) == 0)
             error:
                     sub_8012EA4(&gUnknown_203B20C->unk70, 1);
@@ -289,7 +289,7 @@ void sub_8018904(void)
 
 void sub_80189C8(void)
 {
-    struct HeldItem_Alt item;
+    struct BulkItem_Alt item;
     s32 menuAction;
     u32 itemsCast;
     u32 indexCast;
@@ -307,19 +307,19 @@ void sub_80189C8(void)
         case 3:
             if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 sub_8012EA4(&gUnknown_203B20C->unk70, 1);
-            else if(IsThrowableItem(gUnknown_203B20C->unk8.itemIndex))
+            else if(IsThrowableItem(gUnknown_203B20C->unk8.id))
                 sub_8017F10(0xC);
             else
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex] -= gUnknown_203B20C->unk8.numItems;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
 
-                indexCast = gUnknown_203B20C->unk8.itemIndex;
+                indexCast = gUnknown_203B20C->unk8.id;
                 item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | indexCast;
 
-                itemsCast = (gUnknown_203B20C->unk8.numItems << 8);
+                itemsCast = (gUnknown_203B20C->unk8.quantity << 8);
                 item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
 
-                AddHeldItemToInventory((struct HeldItem *)&item);
+                AddHeldItemToInventory((struct BulkItem *)&item);
                 if(sub_801CF14(1) == 0)
                     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                     {

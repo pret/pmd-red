@@ -9,7 +9,7 @@ struct unkStruct_203B26C
     u32 unk8;
     s16 speciesNum; // species of chosen Pokemon
     u8 unkE;
-    struct PokemonMove * unk10;
+    struct Move * unk10;
     u32 unk14;
     u32 unk18;
     u16 unk1C;

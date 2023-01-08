@@ -18,7 +18,7 @@ sub_807CD9C:
 	adds r4, r2, 0
 	movs r0, 0xA
 	str r0, [sp, 0x24]
-	bl IsFixedDungeon
+	bl IsCurrentFixedRoomBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CDC4
@@ -167,7 +167,7 @@ _0807CED8:
 	ldrsh r0, [r7, r1]
 	ldr r1, [sp, 0x18]
 	asrs r1, 16
-	bl GetMapTile_1
+	bl GetTile
 	adds r5, r0, 0
 	ldr r0, [r5, 0x10]
 	cmp r0, 0
@@ -333,7 +333,7 @@ _0807D050: .4byte gUnknown_80F4F90
 _0807D054: .4byte 0x00000219
 _0807D058: .4byte 0x00000163
 _0807D05C: .4byte 0x0000021a
-_0807D060: .4byte gDungeonGlobalData
+_0807D060: .4byte gDungeon
 _0807D064: .4byte 0x00003a08
 	thumb_func_end sub_807CD9C
 
@@ -483,7 +483,7 @@ sub_807D148:
 _0807D180: .4byte gAvailablePokemonNames
 _0807D184: .4byte gUnknown_80FCAE8
 _0807D188:
-	bl IsFixedDungeon
+	bl IsCurrentFixedRoomBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D1A4
@@ -518,7 +518,7 @@ _0807D1A4:
 	bl PetrifiedStatusTarget
 	b _0807D3A8
 	.align 2, 0
-_0807D1D0: .4byte gDungeonGlobalData
+_0807D1D0: .4byte gDungeon
 _0807D1D4: .4byte 0x0000e21c
 _0807D1D8: .4byte gUnknown_80FC9A0
 _0807D1DC:
@@ -618,7 +618,7 @@ _0807D288:
 	str r3, [sp, 0x8]
 	b _0807D2CE
 	.align 2, 0
-_0807D2A8: .4byte gDungeonGlobalData
+_0807D2A8: .4byte gDungeon
 _0807D2AC: .4byte 0x0000e21c
 _0807D2B0:
 	mov r0, sp
@@ -751,7 +751,7 @@ _0807D3A8:
 _0807D3B8: .4byte gUnknown_202EDCC
 _0807D3BC: .4byte 0xfffffc00
 _0807D3C0: .4byte gUnknown_80FCB14
-_0807D3C4: .4byte gDungeonGlobalData
+_0807D3C4: .4byte gDungeon
 _0807D3C8: .4byte 0x00003a08
 	thumb_func_end sub_807D148
 
@@ -774,7 +774,7 @@ sub_807D3CC:
 _0807D3E8:
 	mov r0, r8
 	str r2, [sp]
-	bl GetEntityRoomIndex
+	bl GetEntityRoom
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r2, [sp]
@@ -822,7 +822,7 @@ _0807D438:
 	ble _0807D408
 	b _0807D4A8
 	.align 2, 0
-_0807D448: .4byte gDungeonGlobalData
+_0807D448: .4byte gDungeon
 _0807D44C: .4byte 0x00018209
 _0807D450:
 	lsls r0, r1, 3
@@ -902,7 +902,7 @@ _0807D4DC: .4byte gUnknown_80FD320
 	thumb_func_start sub_807D4E0
 sub_807D4E0:
 	push {r4,lr}
-	bl GetMapTile_1
+	bl GetTile
 	ldr r4, [r0, 0x14]
 	cmp r4, 0
 	beq _0807D506
@@ -990,7 +990,7 @@ _0807D580:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x6
 	ldrsh r1, [r5, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r2, 0x3
 	adds r0, r2, 0
@@ -1092,7 +1092,7 @@ _0807D634:
 _0807D650: .4byte 0x00000d08
 _0807D654: .4byte 0x00000b58
 _0807D658: .4byte 0x00000d0c
-_0807D65C: .4byte gDungeonGlobalData
+_0807D65C: .4byte gDungeon
 _0807D660: .4byte 0x00003804
 _0807D664: .4byte 0x00003904
 _0807D668: .4byte 0x0001361c
@@ -1190,7 +1190,7 @@ _0807D6DA:
 	lsls r0, r6, 16
 	asrs r0, 16
 	asrs r1, r6, 16
-	bl GetMapTile_1
+	bl GetTile
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r3, 0x3
@@ -1514,7 +1514,7 @@ _0807D9B8: .4byte 0x00000bbc
 _0807D9BC: .4byte 0x00000d0c
 _0807D9C0: .4byte 0x00000c24
 _0807D9C4: .4byte 0x00000d08
-_0807D9C8: .4byte gDungeonGlobalData
+_0807D9C8: .4byte gDungeon
 _0807D9CC: .4byte 0x00018210
 _0807D9D0: .4byte 0x00000d14
 _0807D9D4: .4byte 0x00000d1c
@@ -1575,7 +1575,7 @@ sub_807DA14:
 _0807DA48: .4byte gAvailablePokemonNames
 _0807DA4C: .4byte gUnknown_80FCB98
 _0807DA50:
-	bl IsFixedDungeon
+	bl IsCurrentFixedRoomBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DA6C
@@ -1631,7 +1631,7 @@ _0807DA8C:
 	bgt _0807DB00
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	cmp r0, 0
@@ -1709,7 +1709,7 @@ _0807DB5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807DB6C: .4byte gDungeonGlobalData
+_0807DB6C: .4byte gDungeon
 _0807DB70: .4byte 0x00003a08
 	thumb_func_end sub_807DA14
 
@@ -1722,7 +1722,7 @@ sub_807DB74:
 	adds r7, r0, 0
 	movs r0, 0
 	mov r8, r0
-	bl IsFixedDungeon
+	bl IsCurrentFixedRoomBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DB94
@@ -1752,7 +1752,7 @@ _0807DBB6:
 _0807DBB8:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -1830,7 +1830,7 @@ _0807DC54:
 	bx r0
 	.align 2, 0
 _0807DC60: .4byte gUnknown_80FD060
-_0807DC64: .4byte gDungeonGlobalData
+_0807DC64: .4byte gDungeon
 	thumb_func_end sub_807DB74
 
 	thumb_func_start sub_807DC68
@@ -1851,7 +1851,7 @@ sub_807DC68:
 	ldr r0, _0807DC90
 	b _0807DCB8
 	.align 2, 0
-_0807DC88: .4byte gDungeonGlobalData
+_0807DC88: .4byte gDungeon
 _0807DC8C: .4byte 0x00003a08
 _0807DC90: .4byte gUnknown_80FD3C8
 _0807DC94:
@@ -1866,7 +1866,7 @@ _0807DC94:
 _0807DCA4: .4byte 0x00003a0b
 _0807DCA8: .4byte gUnknown_80FD3CC
 _0807DCAC:
-	bl IsBossBattle
+	bl IsBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DCC8
@@ -1892,7 +1892,7 @@ _0807DCD8:
 	movs r6, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	ldr r3, _0807DD6C
@@ -1967,7 +1967,7 @@ _0807DD5C:
 _0807DD68: .4byte 0x0000fffc
 _0807DD6C: .4byte 0x0000fbff
 _0807DD70: .4byte 0x0000fff7
-_0807DD74: .4byte gDungeonGlobalData
+_0807DD74: .4byte gDungeon
 _0807DD78:
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -2015,7 +2015,7 @@ _0807DDC8:
 _0807DDCA:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r3, 0x80
@@ -2062,7 +2062,7 @@ _0807DE1A:
 	beq _0807DE30
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
@@ -2095,7 +2095,7 @@ _0807DE46:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r1, [r0, 0x9]
 	adds r0, r4, 0
 	adds r0, 0x25
@@ -2174,7 +2174,7 @@ _0807DF0E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807DF1C: .4byte gDungeonGlobalData
+_0807DF1C: .4byte gDungeon
 _0807DF20: .4byte 0x0000e21c
 _0807DF24: .4byte 0x0000fffc
 _0807DF28: .4byte 0x00003a0c
@@ -2240,12 +2240,12 @@ _0807DF8E:
 	bl SetMessageArgument
 	b _0807DFC2
 	.align 2, 0
-_0807DFA8: .4byte gDungeonGlobalData
+_0807DFA8: .4byte gDungeon
 _0807DFAC: .4byte 0x000135cc
 _0807DFB0: .4byte gAvailablePokemonNames
 _0807DFB4:
 	mov r0, r10
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -2323,7 +2323,7 @@ _0807E014:
 	bgt _0807E112
 	cmp r1, 0x1F
 	bgt _0807E112
-	bl GetMapTile_2
+	bl GetTileSafe
 	mov r8, r0
 	ldr r0, [sp, 0x18]
 	movs r2, 0
@@ -2522,7 +2522,7 @@ sub_807E1A0:
 	asrs r4, r5, 1
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E202
@@ -2540,7 +2540,7 @@ _0807E210:
 	ldr r4, [sp, 0x40]
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E226
@@ -2700,14 +2700,14 @@ _0807E366:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E370: .4byte gDungeonGlobalData
+_0807E370: .4byte gDungeon
 _0807E374: .4byte 0x00003a08
 	thumb_func_end sub_807E254
 
 	thumb_func_start sub_807E378
 sub_807E378:
 	push {r4-r7,lr}
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2785,7 +2785,7 @@ _0807E3EE:
 	strb r1, [r0]
 	b _0807E564
 	.align 2, 0
-_0807E41C: .4byte gDungeonGlobalData
+_0807E41C: .4byte gDungeon
 _0807E420: .4byte 0x00000666
 _0807E424: .4byte 0x0000067a
 _0807E428: .4byte gUnknown_80F9C4C

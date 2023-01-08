@@ -17,7 +17,7 @@ struct unkStruct_802F204
     /* 0x16 */ u8 unk16;
     /* 0x18 */ s32 moneyReward;
     /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
-    /* 0x1F */ u8 numItems;
+    /* 0x1F */ u8 quantity;
     /* 0x20 */ u8 friendAreaReward;
     u8 fill21[0x24 - 0x21];
     /* 0x24 */ u32 teamRankPtsReward;
@@ -102,7 +102,7 @@ struct WonderMailStruct_203B2C4
     u8 filler310[0x35C - 0x310];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct ItemSlot unk41C;
+    struct Item unk41C;
     /* 0x420 */ struct OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;

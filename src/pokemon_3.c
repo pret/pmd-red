@@ -51,10 +51,10 @@ extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void SavePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
+extern void SavePokemonMoves(struct unkStruct_8094924*, struct Move*);
 void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-void RestorePokemonMoves(struct unkStruct_8094924*, struct PokemonMove*);
+void RestorePokemonMoves(struct unkStruct_8094924*, struct Move*);
 
 extern void sub_8094184(struct unkStruct_8094924*, void*);
 extern void sub_809449C(struct unkStruct_8094924*, void*);
@@ -69,17 +69,17 @@ bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
     u32 shifted = a1 << 16;
 
     if (((shifted - 0x320000) >> 16) > 1) {
-        u8 shadow_size = GetShadowSize(a1);
+        u8 shadowSize = GetShadowSize(a1);
         u32 unk2, unk6;
         struct unkStruct_202F3E8* arg0;
 
         unk2 = a2[0] + a3[8];
         unk6 = a2[1] + a3[9];
-        unk2 += gUnknown_81076C4[shadow_size];
+        unk2 += gUnknown_81076C4[shadowSize];
         unk6 -= 4;
         unk2 &= 0x1ff;
 
-        arg0 = &gUnknown_202F3E8[shadow_size];
+        arg0 = &gUnknown_202F3E8[shadowSize];
         arg0->unk2 = (arg0->unk2 & 0xfe00) | unk2;
         unk6 &= 0xfff;
         unk6 <<= 4;
@@ -94,9 +94,9 @@ void sub_808E6F4(struct unkStruct_808E6F4* a1)
 {
   s32 i;
 
-  a1->unk0 = gUnknown_810AC90[RandomCapped(10)];
+  a1->unk0 = gUnknown_810AC90[RandInt(10)];
   for (i = 0; i < 100; i++) {
-    a1->unk2 = RandomCapped(18);
+    a1->unk2 = RandInt(18);
     if ( a1->unk2 )
       break;
   }
@@ -109,7 +109,7 @@ bool8 HasRecruitedMon(s16 species_) {
     s32 i = 0;
     struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
 
-    for (i = 0; i < NUM_SPECIES; i++) {
+    for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->unk0 & 1)) {
             if(pokemon->speciesNum == species)
                 return TRUE;
@@ -120,160 +120,160 @@ bool8 HasRecruitedMon(s16 species_) {
 }
 
 s32 GetBaseSpecies(s16 index) {
-    if (index == SPECIES_CASTFORM_SNOWY)
-        return SPECIES_CASTFORM;
-    if (index == SPECIES_CASTFORM_SUNNY)
-        return SPECIES_CASTFORM;
-    if (index == SPECIES_CASTFORM_RAINY)
-        return SPECIES_CASTFORM;
-    if(index == SPECIES_UNOWN_B)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_C)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_D)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_E)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_F)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_G)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_H)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_I)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_J)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_K)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_L)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_M)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_N)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_O)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_P)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_Q)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_R)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_S)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_T)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_U)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_V)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_W)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_X)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_Y)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_Z)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_EMARK)
-        return SPECIES_UNOWN;
-    if(index == SPECIES_UNOWN_QMARK)
-        return SPECIES_UNOWN;
-    if (index == SPECIES_DEOXYS_ATTACK)
-        return SPECIES_DEOXYS_NORMAL;
-    if (index == SPECIES_DEOXYS_DEFENSE)
-        return SPECIES_DEOXYS_NORMAL;
-    if (index == SPECIES_DEOXYS_SPEED)
-        return SPECIES_DEOXYS_NORMAL;
-    if (index == SPECIES_RAYQUAZA_CUTSCENE)
-        return SPECIES_RAYQUAZA;
+    if (index == MONSTER_CASTFORM_SNOWY)
+        return MONSTER_CASTFORM;
+    if (index == MONSTER_CASTFORM_SUNNY)
+        return MONSTER_CASTFORM;
+    if (index == MONSTER_CASTFORM_RAINY)
+        return MONSTER_CASTFORM;
+    if(index == MONSTER_UNOWN_B)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_C)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_D)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_E)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_F)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_G)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_H)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_I)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_J)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_K)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_L)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_M)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_N)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_O)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_P)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_Q)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_R)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_S)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_T)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_U)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_V)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_W)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_X)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_Y)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_Z)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_EMARK)
+        return MONSTER_UNOWN;
+    if(index == MONSTER_UNOWN_QMARK)
+        return MONSTER_UNOWN;
+    if (index == MONSTER_DEOXYS_ATTACK)
+        return MONSTER_DEOXYS_NORMAL;
+    if (index == MONSTER_DEOXYS_DEFENSE)
+        return MONSTER_DEOXYS_NORMAL;
+    if (index == MONSTER_DEOXYS_SPEED)
+        return MONSTER_DEOXYS_NORMAL;
+    if (index == MONSTER_RAYQUAZA_CUTSCENE)
+        return MONSTER_RAYQUAZA;
 
     return index;
 }
 
 s32 GetBaseSpeciesNoUnown(s16 index) {
     register s32 a1_ asm("r2") = index;
-    if (index == SPECIES_CASTFORM_SNOWY) {
-        return SPECIES_CASTFORM;
+    if (index == MONSTER_CASTFORM_SNOWY) {
+        return MONSTER_CASTFORM;
     }
-    if (index == SPECIES_CASTFORM_SUNNY) {
-        return SPECIES_CASTFORM;
+    if (index == MONSTER_CASTFORM_SUNNY) {
+        return MONSTER_CASTFORM;
     }
-    if (index == SPECIES_CASTFORM_RAINY) {
-        return SPECIES_CASTFORM;
+    if (index == MONSTER_CASTFORM_RAINY) {
+        return MONSTER_CASTFORM;
     }
-    if (index == SPECIES_DEOXYS_ATTACK) {
-        return SPECIES_DEOXYS_NORMAL;
+    if (index == MONSTER_DEOXYS_ATTACK) {
+        return MONSTER_DEOXYS_NORMAL;
     }
-    if (index == SPECIES_DEOXYS_DEFENSE) {
-        return SPECIES_DEOXYS_NORMAL;
+    if (index == MONSTER_DEOXYS_DEFENSE) {
+        return MONSTER_DEOXYS_NORMAL;
     }
-    if (index == SPECIES_DEOXYS_SPEED) {
-        return SPECIES_DEOXYS_NORMAL;
+    if (index == MONSTER_DEOXYS_SPEED) {
+        return MONSTER_DEOXYS_NORMAL;
     }
     // these last 2 use r2 instead of just r0
-    if (a1_ == SPECIES_RAYQUAZA_CUTSCENE) {
-        return SPECIES_RAYQUAZA;
+    if (a1_ == MONSTER_RAYQUAZA_CUTSCENE) {
+        return MONSTER_RAYQUAZA;
     }
     return a1_;
 }
 
 s32 GetUnownIndex(s16 index)
 {
-    if(index == SPECIES_UNOWN_B)
+    if(index == MONSTER_UNOWN_B)
         return 1;
-    if(index == SPECIES_UNOWN_C)
+    if(index == MONSTER_UNOWN_C)
         return 2;
-    if(index == SPECIES_UNOWN_D)
+    if(index == MONSTER_UNOWN_D)
         return 3;
-    if(index == SPECIES_UNOWN_E)
+    if(index == MONSTER_UNOWN_E)
         return 4;
-    if(index == SPECIES_UNOWN_F)
+    if(index == MONSTER_UNOWN_F)
         return 5;
-    if(index == SPECIES_UNOWN_G)
+    if(index == MONSTER_UNOWN_G)
         return 6;
-    if(index == SPECIES_UNOWN_H)
+    if(index == MONSTER_UNOWN_H)
         return 7;
-    if(index == SPECIES_UNOWN_I)
+    if(index == MONSTER_UNOWN_I)
         return 8;
-    if(index == SPECIES_UNOWN_J)
+    if(index == MONSTER_UNOWN_J)
         return 9;
-    if(index == SPECIES_UNOWN_K)
+    if(index == MONSTER_UNOWN_K)
         return 10;
-    if(index == SPECIES_UNOWN_L)
+    if(index == MONSTER_UNOWN_L)
         return 11;
-    if(index == SPECIES_UNOWN_M)
+    if(index == MONSTER_UNOWN_M)
         return 12;
-    if(index == SPECIES_UNOWN_N)
+    if(index == MONSTER_UNOWN_N)
         return 13;
-    if(index == SPECIES_UNOWN_O)
+    if(index == MONSTER_UNOWN_O)
         return 14;
-    if(index == SPECIES_UNOWN_P)
+    if(index == MONSTER_UNOWN_P)
         return 15;
-    if(index == SPECIES_UNOWN_Q)
+    if(index == MONSTER_UNOWN_Q)
         return 16;
-    if(index == SPECIES_UNOWN_R)
+    if(index == MONSTER_UNOWN_R)
         return 17;
-    if(index == SPECIES_UNOWN_S)
+    if(index == MONSTER_UNOWN_S)
         return 18;
-    if(index == SPECIES_UNOWN_T)
+    if(index == MONSTER_UNOWN_T)
         return 19;
-    if(index == SPECIES_UNOWN_U)
+    if(index == MONSTER_UNOWN_U)
         return 20;
-    if(index == SPECIES_UNOWN_V)
+    if(index == MONSTER_UNOWN_V)
         return 21;
-    if(index == SPECIES_UNOWN_W)
+    if(index == MONSTER_UNOWN_W)
         return 22;
-    if(index == SPECIES_UNOWN_X)
+    if(index == MONSTER_UNOWN_X)
         return 23;
-    if(index == SPECIES_UNOWN_Y)
+    if(index == MONSTER_UNOWN_Y)
         return 24;
-    if(index == SPECIES_UNOWN_Z)
+    if(index == MONSTER_UNOWN_Z)
         return 25;
-    if(index == SPECIES_UNOWN_EMARK)
+    if(index == MONSTER_UNOWN_EMARK)
         return 26;
-    if(index == SPECIES_UNOWN_QMARK)
+    if(index == MONSTER_UNOWN_QMARK)
         return 27;
     return 0;
 }
@@ -531,7 +531,7 @@ void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel)
 
 bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex)
 {
-    if(IQSkillIndex == IQ_SKILL_NONE)
+    if(IQSkillIndex == IQ_NONE)
     {
         return FALSE;
     }
@@ -549,7 +549,7 @@ s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ)
 
   availIQSkills = 0;
 
-  for(counter_1 = IQ_SKILL_TYPE_ADVANTAGE_MASTER; counter_1 < NUM_IQ_SKILLS; counter_1++) {
+  for(counter_1 = IQ_TYPE_ADVANTAGE_MASTER; counter_1 < NUM_IQ_SKILLS; counter_1++) {
     iqSkill_u8 = counter_1; // force this cast to be in a reg
     if (HasIQForSkill(pokeIQ, iqSkill_u8)) {
       iqSkillBuffer[availIQSkills] = iqSkill_u8;
@@ -558,7 +558,7 @@ s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ)
   }
 
   for (counter_2 = availIQSkills; counter_2 < NUM_IQ_SKILLS; counter_2++) {
-    iqSkillBuffer[counter_2] = IQ_SKILL_NONE;
+    iqSkillBuffer[counter_2] = IQ_NONE;
   }
   return availIQSkills;
 }
@@ -609,21 +609,21 @@ void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer)
   param_1[0] = 0;
   param_1[1] = 0;
   param_1[2] = 0;
-  SetIQSkill(param_1, IQ_SKILL_ITEM_CATCHER);
-  SetIQSkill(param_1, IQ_SKILL_COURSE_CHECKER);
-  SetIQSkill(param_1, IQ_SKILL_ITEM_MASTER);
+  SetIQSkill(param_1, IQ_ITEM_CATCHER);
+  SetIQSkill(param_1, IQ_COURSE_CHECKER);
+  SetIQSkill(param_1, IQ_ITEM_MASTER);
 
   // Flag is usually enabled for Boss fights.
   if (enableSelfCurer) {
-    SetIQSkill(param_1, IQ_SKILL_SELF_CURER);
+    SetIQSkill(param_1, IQ_SELF_CURER);
   }
 }
 
-bool8 IsIQSkillSet(u8 *IQSkillsEnabled, u32 IQSkill)
+bool8 IsIQSkillSet(u8 *IQSkillFlags, u32 IQSkill)
 {
-  if (!(IQSkillsEnabled[0] & IQSkill) &&
-      !(IQSkillsEnabled[1] & IQSkill >> 8) &&
-      !(IQSkillsEnabled[2] & IQSkill >> 16))
+  if (!(IQSkillFlags[0] & IQSkill) &&
+      !(IQSkillFlags[1] & IQSkill >> 8) &&
+      !(IQSkillFlags[2] & IQSkill >> 16))
   {
     return FALSE;
   }
@@ -672,7 +672,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     data_s16 = 1;
     data_s16 = -data_s16;
     count = 0;
-    for (i = 0; i < NUM_SPECIES; i++) {
+    for (i = 0; i < NUM_MONSTERS; i++) {
 #ifdef NONMATCHING
         struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
 #else
@@ -685,7 +685,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
             if (pokemon->unk0 & 2) {
                 buffer[count++] = i;
             }
-            if (pokemon->isLeader) {
+            if (pokemon->isTeamLeader) {
                 data_s16 = i;
             }
         }
@@ -722,7 +722,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     s32 i;
 
     xxx_init_struct_8094924_restore_809485C(&backup, a1, a2);
-    for (i = 0; i < NUM_SPECIES; i++) {
+    for (i = 0; i < NUM_MONSTERS; i++) {
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->pokemon[i]);
     }
 
@@ -739,13 +739,13 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 
     for (i = 0; i < 6; i++) {
         RestoreIntegerBits(&backup, &data_s16, 16);
-        if ((u16)data_s16 < NUM_SPECIES) {
+        if ((u16)data_s16 < NUM_MONSTERS) {
             gRecruitedPokemonRef->pokemon[data_s16].unk0 |= 2;
         }
     }
     RestoreIntegerBits(&backup, &data_s16, 16);
-    if ((u16)data_s16 < NUM_SPECIES) {
-        gRecruitedPokemonRef->pokemon[data_s16].isLeader = 1;
+    if ((u16)data_s16 < NUM_MONSTERS) {
+        gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = 1;
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -776,7 +776,7 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
 {
   memset(pokemon, 0, sizeof(struct PokemonStruct));
   pokemon->unk0 = 0;
-  pokemon->isLeader = 0;
+  pokemon->isTeamLeader = 0;
   RestoreIntegerBits(a1, &pokemon->unkHasNextStage, 7);
   if (pokemon->unkHasNextStage) {
       pokemon->unk0 |= 1;
@@ -814,7 +814,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
-    SaveIntegerBits(&backup, pokemon2->isLeader ? &data_u8_neg1 : &data_u8_zero, 1);
+    SaveIntegerBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
     SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 
     SaveDungeonLocation(&backup, &pokemon2->dungeonLocation);
@@ -858,10 +858,10 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
 
     RestoreIntegerBits(&backup, &unk2, 1);
     if (unk2 & 1) {
-        pokemon2->isLeader = TRUE;
+        pokemon2->isTeamLeader = TRUE;
     }
     else {
-        pokemon2->isLeader = FALSE;
+        pokemon2->isTeamLeader = FALSE;
     }
     RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
 

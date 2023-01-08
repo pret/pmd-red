@@ -17,12 +17,12 @@ struct unkStruct_203B2B4
     u8 unkD;
     s16 unkE;
     u32 unk10;
-    struct HeldItem unk14;
+    struct BulkItem unk14;
     u32 unk18;
     /* 0x1C */ struct PokemonStruct *pokeStruct;
     u32 unk20;
     u32 unk24;
-    /* 0x28 */ struct PokemonMove moves[8];
+    /* 0x28 */ struct Move moves[8];
     u32 unk68;
     u32 unk6C;
     u32 unk70;
@@ -69,7 +69,7 @@ extern void sub_8025518(void);
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_8025728(void);
 extern void sub_802591C(void);
-extern u32 sub_801B3C0(struct ItemSlot *param_1);
+extern u32 sub_801B3C0(struct Item *param_1);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
 extern void sub_801A5D8(u32,u32, u32, u32);
@@ -83,9 +83,9 @@ extern void sub_801BEEC(s16);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4(void);
 
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
-extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
-extern void sub_8093560(u32, struct PokemonMove *, u32 *);
+extern void sub_809401C(struct Move *, struct Move *); // TODO convert arg 0 to PokemonMove struct *
+extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
+extern void sub_8093560(u32, struct Move *, u32 *);
 extern void sub_801F808(u32 *);
 u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8025E68(u32 , u32 *);
@@ -214,7 +214,7 @@ void sub_802544C(void)
 void sub_8025518(void)
 {
   u32 uVar3;
-  struct ItemSlot item;
+  struct Item item;
 
   switch(gUnknown_203B2B4->state)
   {

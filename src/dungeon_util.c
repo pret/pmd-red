@@ -14,51 +14,51 @@ const struct Position gAdjacentTileOffsets[] = {
     {-1, 1}
 };
 
-bool8 EntityExists(struct DungeonEntity *entity)
+bool8 EntityExists(struct Entity *entity)
 {
     if (!entity)
     {
         return FALSE;
     }
-    return entity->entityType != ENTITY_NONE;
+    return entity->type != ENTITY_NOTHING;
 }
 
-u32 GetEntityType(struct DungeonEntity *entity)
+u32 GetEntityType(struct Entity *entity)
 {
-    return entity->entityType;
+    return entity->type;
 }
 
-u8 GetEntityRoomIndex(struct DungeonEntity *entity)
+u8 GetEntityRoom(struct Entity *entity)
 {
-    return entity->roomIndex;
+    return entity->room;
 }
 
-struct DungeonEntityData* GetTrapData(struct DungeonEntity *entity)
+struct EntityInfo* GetTrapData(struct Entity *entity)
 {
-    return entity->entityData;
+    return entity->info;
 }
 
-struct ItemSlot* GetItemData(struct DungeonEntity *entity)
+struct Item* GetItemData(struct Entity *entity)
 {
-    return (struct ItemSlot *)entity->entityData;
+    return (struct Item *)entity->info;
 }
 
-struct DungeonEntityData* GetTrapData_1(struct DungeonEntity *entity)
+struct EntityInfo* GetTrapData_1(struct Entity *entity)
 {
-    return entity->entityData;
+    return entity->info;
 }
 
-struct ItemSlot* GetItemData_1(struct DungeonEntity *entity)
+struct Item* GetItemData_1(struct Entity *entity)
 {
-    return (struct ItemSlot*)entity->entityData;
+    return (struct Item*)entity->info;
 }
 
-struct MapTile* GetMapTileForDungeonEntity_1(struct DungeonEntity *entity)
+struct Tile* GetTileAtEntity(struct Entity *entity)
 {
-    return GetMapTile_1(entity->posWorld.x, entity->posWorld.y);
+    return GetTile(entity->pos.x, entity->pos.y);
 }
 
-struct MapTile* GetMapTileForDungeonEntity_2(struct DungeonEntity *entity)
+struct Tile* GetTileAtEntitySafe(struct Entity *entity)
 {
-    return GetMapTile_2(entity->posWorld.x, entity->posWorld.y);
+    return GetTileSafe(entity->pos.x, entity->pos.y);
 }

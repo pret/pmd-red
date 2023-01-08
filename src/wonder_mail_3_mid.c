@@ -63,10 +63,10 @@ struct unkStruct_203B310
 extern struct unkStruct_203B310 *gUnknown_203B310;
 
 // TODO: port to ItemSlot
-struct ItemSlot_Alt
+struct Item_Alt
 {
     union temp {
-        struct ItemSlot norm;
+        struct Item norm;
         u32 full_bits;
     } temp;
 };
@@ -541,8 +541,8 @@ void HandleMissionReward(void)
   const u8 *rankString;
   u8 uVar7;
   struct unkStruct_8090F58 local_20;
-  struct ItemSlot_Alt item;
-  u32 numItems;
+  struct Item_Alt item;
+  u32 quantity;
   u32 index_cast;
   u32 index_cast2;
   
@@ -627,8 +627,8 @@ void HandleMissionReward(void)
                 index_cast2 = item.temp.full_bits >> 16;
                 if (IsThrowableItem(index_cast2)) {
                     // Cast number items
-                    numItems = (gUnknown_203B310->unk10->numItems << 8);
-                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | numItems;
+                    quantity = (gUnknown_203B310->unk10->quantity << 8);
+                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | quantity;
                 }
                 else {
                     item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0;
@@ -637,7 +637,7 @@ void HandleMissionReward(void)
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gUnknown_202DEA8,(struct ItemSlot *)&item,&local_20);
+                sub_8090E14(gUnknown_202DEA8,(struct Item *)&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
                     gUnknown_203B310->nextState = 5;
@@ -663,10 +663,10 @@ void HandleMissionReward(void)
         }
         else {
             if ((gUnknown_203B310->itemRewardIndex == 0) && (gUnknown_203B310->unk10->moneyReward == 0)) {
-                sub_801B60C(0,gUnknown_203B310->unk10->itemRewards[0],gUnknown_203B310->unk10->numItems);
+                sub_801B60C(0,gUnknown_203B310->unk10->itemRewards[0],gUnknown_203B310->unk10->quantity);
             }
             else {
-                sub_801B60C(1,gUnknown_203B310->unk10->itemRewards[gUnknown_203B310->itemRewardIndex],gUnknown_203B310->unk10->numItems);
+                sub_801B60C(1,gUnknown_203B310->unk10->itemRewards[gUnknown_203B310->itemRewardIndex],gUnknown_203B310->unk10->quantity);
             }
         }
         break;

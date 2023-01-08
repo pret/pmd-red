@@ -14,13 +14,13 @@ struct unkStruct_203B2B8
     u8 unk8;
     /* 0xA */ s16 pokeSpecies;
     u32 unkC;
-    /* 0x10 */ struct HeldItem item1;
-    /* 0x14 */ struct HeldItem item2;
+    /* 0x10 */ struct BulkItem item1;
+    /* 0x14 */ struct BulkItem item2;
     struct PokemonStruct *unk18;
     u8 fill1C[0x4];
     u32 unk20;
     /* 0x24 */ u16 moveID;
-    struct PokemonMove unk28[4];
+    struct Move unk28[4];
     u8 fill48[0x70 - 0x48];
     u32 unk70;
     u32 unk74;
@@ -123,9 +123,9 @@ void sub_80268CC(void)
         iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
         playerPokemon = GetPlayerPokemonStruct();
 
-        if (!iVar4->isLeader) {
-            playerPokemon->isLeader = FALSE;
-            iVar4->isLeader = TRUE;
+        if (!iVar4->isTeamLeader) {
+            playerPokemon->isTeamLeader = FALSE;
+            iVar4->isTeamLeader = TRUE;
             nullsub_104();
         }
         sub_808ED00();
@@ -145,12 +145,12 @@ void sub_80268CC(void)
         break;
     case 0xc:
         PlaySound(0x14d);
-        if (gUnknown_203B2B8->item2.itemIndex != ITEM_ID_NOTHING) {
+        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
             AddHeldItemToInventory(&gUnknown_203B2B8->item2);
         }
         FillInventoryGaps();
-        gUnknown_203B2B8->item2.itemIndex = ITEM_ID_NOTHING;
-        gUnknown_203B2B8->item2.numItems = 0;
+        gUnknown_203B2B8->item2.id = ITEM_NOTHING;
+        gUnknown_203B2B8->item2.quantity = 0;
         GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item2);
         nullsub_104();
         sub_8026074(0x11);
@@ -200,7 +200,7 @@ void sub_8026A94(void)
 
 
 static inline bool8 sub_8026AB0_sub(void) {
-    if (gUnknown_203B2B8->unk18->dungeonLocation.dungeonIndex == 0x44 || gUnknown_203B2B8->unk18->dungeonLocation.dungeonIndex == 0x45)
+    if (gUnknown_203B2B8->unk18->dungeonLocation.id == 0x44 || gUnknown_203B2B8->unk18->dungeonLocation.id == 0x45)
         return TRUE;
     else
         return FALSE;
@@ -268,14 +268,14 @@ void sub_8026B64(void)
     {
         case 3:
             gUnknown_203B2B8->unkC = sub_801A8AC();
-            gUnknown_203B2B8->item1.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].itemIndex;
-            gUnknown_203B2B8->item1.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].numItems;
+            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].quantity;
             sub_8026074(0x14);
             break;
         case 4:
             gUnknown_203B2B8->unkC = sub_801A8AC();
-            gUnknown_203B2B8->item1.itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].itemIndex;
-            gUnknown_203B2B8->item1.numItems = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].numItems;
+            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].quantity;
             sub_8099690(0);
             sub_8026074(0x15);
             break;
@@ -294,7 +294,7 @@ void sub_8026C14(void)
   u32 nextState;
   struct unkStruct_8090F58 temp;
   int menuAction;
-  struct ItemSlot slot;
+  struct Item slot;
 
   menuAction = 0;
   sub_801A6E8(0);
@@ -308,7 +308,7 @@ void sub_8026C14(void)
         PlaySound(0x14d);
         ShiftItemsDownFrom(gUnknown_203B2B8->unkC);
         FillInventoryGaps();
-        if (gUnknown_203B2B8->item2.itemIndex != ITEM_ID_NOTHING) {
+        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
           AddHeldItemToInventory(&gUnknown_203B2B8->item2);
           nextState = 0x10;
         }
@@ -316,7 +316,7 @@ void sub_8026C14(void)
         temp.unk0 = 0;
         temp.unk4 = 0;
         temp.unk8 = 1;
-        slot.itemFlags = ITEM_FLAG_EXISTS;
+        slot.flags = ITEM_FLAG_EXISTS;
         sub_8090E14(gUnknown_202DEA8,&slot,&temp);
         GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item1);
         sub_801A928();
@@ -359,7 +359,7 @@ void sub_8026D0C(void)
         case 3:
         case 4:
             gUnknown_203B2B8->unk20 = sub_801F194();
-            gUnknown_203B2B8->moveID = gUnknown_203B2B8->unk28[gUnknown_203B2B8->unk20].moveID;
+            gUnknown_203B2B8->moveID = gUnknown_203B2B8->unk28[gUnknown_203B2B8->unk20].id;
             sub_8026074(0x18);
             break;
         case 2:
@@ -393,9 +393,9 @@ void sub_8026D88(void)
     }
 }
 
-void sub_8026DAC(u32 r0, struct HeldItem *item)
+void sub_8026DAC(u32 r0, struct BulkItem *item)
 {
-    struct ItemSlot slot;
+    struct Item slot;
     struct unkStruct_8090F58 temp;
 
     sub_8008C54(r0);
@@ -404,7 +404,7 @@ void sub_8026DAC(u32 r0, struct HeldItem *item)
     temp.unk0 = 0;
     temp.unk4 = 0;
     temp.unk8 = 1;
-    slot.itemFlags = ITEM_FLAG_EXISTS;
+    slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &slot, &temp);
     xxx_format_and_draw(4, 3, gPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
@@ -420,7 +420,7 @@ void sub_8026E08(u32 r0)
     sub_80073B8(r0);
     sub_80922B4(gAvailablePokemonNames, gUnknown_203B2B8->unk18->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, gUnknown_203B2B8->unk18->speciesNum);
-    sprintf_2(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
+    sprintfStatic(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
     xxx_call_draw_string(((gUnknown_80DD370.unk0c << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
@@ -429,9 +429,9 @@ void sub_8026E08(u32 r0)
 u32 sub_8026E88(struct PokemonStruct *r0)
 {
     u8 iVar3;
-    if(r0->isLeader == 0)
+    if(r0->isTeamLeader == 0)
     {
-        iVar3 = (r0->dungeonLocation.dungeonIndex == 0x41);
+        iVar3 = (r0->dungeonLocation.id == 0x41);
         if(iVar3 != 0)
             if(!sub_80023E4(0x8))
                 return 0;
@@ -446,9 +446,9 @@ u32 sub_8026EB8(struct PokemonStruct *r0)
     u8 iVar3;
     if(sub_808D3BC() != r0)
         if(sub_808D3F8() != r0)
-            if(!r0->isLeader)
+            if(!r0->isTeamLeader)
             {
-                iVar3 = (r0->dungeonLocation.dungeonIndex == 0x41);
+                iVar3 = (r0->dungeonLocation.id == 0x41);
                 if(iVar3 != 0)
                 {
                     if(sub_80023E4(0x8))
@@ -465,7 +465,7 @@ u32 sub_8026EB8(struct PokemonStruct *r0)
 
 u32 sub_8026F04(struct PokemonStruct *r0)
 {
-    if(r0->heldItem.itemIndex == 0)
+    if(r0->heldItem.id == 0)
         return 0;
     else if(GetNumberOfFilledInventorySlots() < INVENTORY_SIZE)
         return 1;
@@ -477,16 +477,16 @@ u32 sub_8026F04(struct PokemonStruct *r0)
 
 bool8 sub_8026F38(struct PokemonStruct *r0)
 {
-    if(IsNotMoneyOrUsedTMItem(r0->heldItem.itemIndex))
+    if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
     {
-        if(IsThrowableItem(r0->heldItem.itemIndex))
+        if(IsThrowableItem(r0->heldItem.id))
         {
-            if((gTeamInventory_203B460->teamStorage[r0->heldItem.itemIndex] + r0->heldItem.numItems) > 999)
+            if((gTeamInventory_203B460->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
                 return FALSE;
         }
         else
         {
-            if(gTeamInventory_203B460->teamStorage[r0->heldItem.itemIndex] > 998)
+            if(gTeamInventory_203B460->teamStorage[r0->heldItem.id] > 998)
                 return FALSE;
         }
     }
@@ -503,24 +503,24 @@ void sub_8026FA4(void)
             PlaySound(0x14d);
             AddHeldItemToInventory(&gUnknown_203B2B8->item2);
             FillInventoryGaps();
-            gUnknown_203B2B8->item2.itemIndex = 0;
-            gUnknown_203B2B8->item2.numItems = 0;
+            gUnknown_203B2B8->item2.id = 0;
+            gUnknown_203B2B8->item2.quantity = 0;
             GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
             sub_8026074(0xA);
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(gUnknown_203B2B8->item2.itemIndex))
+            if(IsThrowableItem(gUnknown_203B2B8->item2.id))
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.itemIndex] += gUnknown_203B2B8->item2.numItems;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
             }
             else
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.itemIndex] += 1;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += 1;
             }
 
-            gUnknown_203B2B8->item2.itemIndex = 0;
-            gUnknown_203B2B8->item2.numItems = 0;
+            gUnknown_203B2B8->item2.id = 0;
+            gUnknown_203B2B8->item2.quantity = 0;
             GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
             sub_8026074(0xB);
             break;

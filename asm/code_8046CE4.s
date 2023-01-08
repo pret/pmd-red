@@ -97,7 +97,7 @@ sub_8047190:
 	bne _08047214
 	mov r0, r9
 	movs r1, 0x2A
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -139,7 +139,7 @@ _08047228:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	adds r1, r2
-	bl GetMapTile_1
+	bl GetTile
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x3
@@ -171,7 +171,7 @@ _0804727A:
 	ldrsh r1, [r1, r3]
 	adds r1, r2
 	str r2, [sp, 0x234]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -215,7 +215,7 @@ _080472E0:
 	b _0804744C
 	.align 2, 0
 _080472E8: .4byte 0xfffffdc0
-_080472EC: .4byte gDungeonGlobalData
+_080472EC: .4byte gDungeon
 _080472F0: .4byte 0x00018210
 _080472F4: .4byte 0x0001c05e
 _080472F8: .4byte gAdjacentTileOffsets
@@ -292,7 +292,7 @@ _0804737A:
 	ldrsh r0, [r7, r4]
 	movs r2, 0x6
 	ldrsh r1, [r7, r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r5, r0, 0
 	ldrh r1, [r5]
 	movs r0, 0x3
@@ -319,7 +319,7 @@ _080473A2:
 	bne _080473CE
 	ldr r0, [r5, 0x10]
 	movs r1, 0x26
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -444,7 +444,7 @@ _080474A6:
 	b _08047524
 	.align 2, 0
 _080474B8: .4byte 0x00000195
-_080474BC: .4byte gDungeonGlobalData
+_080474BC: .4byte gDungeon
 _080474C0: .4byte 0x0001c05e
 _080474C4: .4byte gAvailablePokemonNames
 _080474C8: .4byte gUnknown_202DE58
@@ -638,7 +638,7 @@ sub_80475C4:
 	bne _0804765E
 	ldr r0, [sp, 0x10]
 	movs r1, 0x2A
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -848,7 +848,7 @@ _080477D0:
 	ldrsh r0, [r3, r1]
 	movs r2, 0x2
 	ldrsh r1, [r3, r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r4, r0, 0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0
@@ -863,7 +863,7 @@ _080477FA:
 	bne _08047834
 	ldr r0, [r4, 0x10]
 	movs r1, 0x26
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -892,7 +892,7 @@ _08047834:
 	ands r6, r0
 	b _0804786E
 	.align 2, 0
-_08047848: .4byte gDungeonGlobalData
+_08047848: .4byte gDungeon
 _0804784C: .4byte 0x00018210
 _08047850: .4byte 0x0001c05e
 _08047854: .4byte 0x00000195
@@ -1020,7 +1020,7 @@ _0804794C:
 	b _080479B0
 _08047950:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _08047980
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -1035,7 +1035,7 @@ _08047964:
 	bne _08047994
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047984
@@ -1046,7 +1046,7 @@ _08047980: .4byte gUnknown_80F4FA2
 _08047984:
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047994
@@ -1058,7 +1058,7 @@ _08047994:
 	bne _080479AE
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080479AE
@@ -1101,18 +1101,18 @@ sub_80479B8:
 	cmp r0, 0
 	beq _08047A20
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047A3C
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	beq _08047A3C
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1124,14 +1124,14 @@ sub_80479B8:
 	b _08047A3C
 _08047A20:
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	beq _08047A3C
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1247,7 +1247,7 @@ _08047B30:
 	bl sub_804245C
 _08047B38:
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1261,13 +1261,13 @@ _08047B38:
 	bl sub_8078B5C
 _08047B56:
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
 	beq _08047B72
 	ldrb r0, [r7, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xA

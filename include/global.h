@@ -6,7 +6,7 @@
 #include "gba/gba.h"
 
 #include "constants/global.h"
-#include "constants/species.h"
+#include "constants/monster.h"
 
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__)
@@ -31,10 +31,5 @@
 #define NAKED __attribute__((naked))
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
-
-struct DungeonLocation {
-    u8 dungeonIndex;
-    u8 dungeonFloor;
-};
 
 #endif // GUARD_GLOBAL_H

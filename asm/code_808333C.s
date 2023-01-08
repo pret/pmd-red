@@ -66,7 +66,7 @@ sub_8083568:
 	movs r0, 0x1
 	b _080835FA
 	.align 2, 0
-_080835E0: .4byte gDungeonGlobalData
+_080835E0: .4byte gDungeon
 _080835E4: .4byte 0x000181f0
 _080835E8: .4byte 0x000181f2
 _080835EC: .4byte gUnknown_202ED28

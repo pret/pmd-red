@@ -24,7 +24,7 @@ struct unkStruct_203B2B0
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
-    struct ItemSlot unk1C;
+    struct Item unk1C;
     u32 state;
     u32 fallbackState;
     u32 unk28;
@@ -106,7 +106,7 @@ void sub_8024D48(void);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
-extern void sub_801B3C0(struct ItemSlot *);
+extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
@@ -169,7 +169,7 @@ u32 sub_802465C(void)
   gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
   gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
   gUnknown_203B2B0->unk0 = 0;
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_GULPIN);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
   gUnknown_203B2B0->unk104 = faceFile;
   gUnknown_203B2B0->unk108 = faceFile->data;
   gUnknown_203B2B0->unk110 = 0;
@@ -814,16 +814,16 @@ void sub_8025254(void)
         gUnknown_203B2B0->unk4 = 0;
     else
     {
-        gUnknown_203B2B0->unk4 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].itemIndex;
+        gUnknown_203B2B0->unk4 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
         gUnknown_203B2B0->unk5 = 0;
     else
     {
-        gUnknown_203B2B0->unk5 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].itemIndex;
+        gUnknown_203B2B0->unk5 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
-    gUnknown_203B2B0->unk6 = RandomCapped(0xFF);
+    gUnknown_203B2B0->unk6 = RandInt(0xFF);
     sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->unk4, 1);
 }
 
@@ -835,7 +835,7 @@ bool8 LuminousCave_HasOnly1Member(void)
 
     preload = &gRecruitedPokemonRef->pokemon[0];
     r3 = 0;
-    for(iVar3 = 0; iVar3 < NUM_SPECIES; iVar3++, preload++)
+    for(iVar3 = 0; iVar3 < NUM_MONSTERS; iVar3++, preload++)
     {
         if((preload->unk0 >> 1) & 1)
             r3++;

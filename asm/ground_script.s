@@ -4130,12 +4130,12 @@ _0809FFBA:
 	add r0, sp, 0x8
 	movs r5, 0x2
 	ldrsh r0, [r0, r5]
-	bl OtherRandomCapped
+	bl OtherRandInt
 	lsls r0, 8
 	add r4, sp, 0xD4
 	str r0, [r4]
 	ldr r0, [sp, 0xC]
-	bl OtherRandomCapped
+	bl OtherRandInt
 	lsls r0, 8
 	str r0, [r4, 0x4]
 	mov r0, r9
@@ -4185,14 +4185,14 @@ _080A0010:
 	ldr r0, [r5]
 	ldr r1, [r4]
 	subs r0, r1
-	bl OtherRandomCapped
+	bl OtherRandInt
 	ldr r1, [r4]
 	adds r1, r0
 	str r1, [r6]
 	ldr r0, [r5, 0x4]
 	ldr r1, [r4, 0x4]
 	subs r0, r1
-	bl OtherRandomCapped
+	bl OtherRandInt
 	ldr r1, [r4, 0x4]
 	adds r1, r0
 	str r1, [r6, 0x4]
@@ -4452,7 +4452,7 @@ _080A0250:
 	str r0, [r5, 0x30]
 	add r0, sp, 0x8
 	ldrb r0, [r0, 0x1]
-	bl OtherRandomCapped
+	bl OtherRandInt
 	b _080A05EA
 _080A0282:
 	ldr r0, [sp, 0xC]
@@ -4584,7 +4584,7 @@ _080A0370:
 	ldr r2, [r2, 0xC]
 	bl _call_via_r2
 	adds r0, r4, 0
-	bl OtherRandomCapped
+	bl OtherRandInt
 	add r1, sp, 0x8
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
@@ -4595,7 +4595,7 @@ _080A0370:
 	adds r1, r0
 	str r1, [r3, 0x3C]
 	adds r0, r5, 0
-	bl OtherRandomCapped
+	bl OtherRandInt
 	ldr r1, [sp, 0xC]
 	subs r0, r1
 	lsls r0, 8
@@ -4705,7 +4705,7 @@ _080A0462:
 	adds r1, r5, 0
 	bl sub_80AD8B4
 	adds r0, r4, 0
-	bl OtherRandomCapped
+	bl OtherRandInt
 	add r1, sp, 0x8
 	movs r3, 0x2
 	ldrsh r1, [r1, r3]
@@ -4716,7 +4716,7 @@ _080A0462:
 	adds r1, r0
 	str r1, [r5, 0x3C]
 	adds r0, r4, 0
-	bl OtherRandomCapped
+	bl OtherRandInt
 	add r1, sp, 0x8
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
@@ -5987,7 +5987,7 @@ _080A0EFA:
 	add r0, sp, 0x8
 	movs r3, 0x2
 	ldrsh r0, [r0, r3]
-	bl OtherRandomCapped
+	bl OtherRandInt
 	adds r1, r0, 0
 	b _080A1098
 _080A0F08:
@@ -6459,7 +6459,7 @@ _080A12B4:
 	ldrsh r1, [r0, r3]
 	ldr r0, [sp, 0xC]
 	subs r0, r1
-	bl OtherRandomCapped
+	bl OtherRandInt
 	add r1, sp, 0x8
 	ldrh r1, [r1, 0x2]
 	adds r1, r0
@@ -6853,7 +6853,7 @@ _080A164C:
 	negs r1, r1
 	cmp r0, r1
 	bne _080A1660
-	bl Random
+	bl Rand32Bit
 	bl sub_8011C40
 _080A1660:
 	movs r0, 0x1
@@ -7092,7 +7092,7 @@ _080A184C:
 	bl sub_80A8BFC
 	lsls r0, 16
 	asrs r0, 16
-	bl GetIsMoving
+	bl CanMove
 	b _080A171E
 _080A185E:
 	lsls r0, r5, 16
@@ -7593,12 +7593,12 @@ _080A1C80: .4byte gUnknown_81167E4
 _080A1C84:
 	movs r0, 0xD1
 	lsls r0, 1
-	bl RandomCapped
+	bl RandInt
 	adds r0, 0x1
 	lsls r0, 16
 	asrs r5, r0, 16
 	movs r0, 0x20
-	bl RandomCapped
+	bl RandInt
 	adds r4, r0, 0
 	movs r7, 0xD2
 	lsls r7, 1
@@ -7623,7 +7623,7 @@ _080A1CBC:
 	cmp r4, r6
 	blt _080A1CCC
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	adds r4, r0, 0
 	movs r7, 0xD2
 	lsls r7, 1
@@ -7972,7 +7972,7 @@ _080A1FA2:
 _080A1FB2:
 	movs r0, 0x80
 	lsls r0, 1
-	bl OtherRandomCapped
+	bl OtherRandInt
 	cmp r0, 0
 	bne _080A1FCC
 	movs r0, 0

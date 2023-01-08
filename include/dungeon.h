@@ -1,13 +1,15 @@
 #ifndef GUARD_DUNGEON_H
 #define GUARD_DUNGEON_H
 
+#include "dungeon_global_data.h"
+
 struct DungeonName
 {
     const u8 *name1;
     const u8 *name2;
 };
 
-struct Dungeon
+struct DungeonDataEntry
 {
     u8 stairDirection;
     u8 unk1;
@@ -25,7 +27,7 @@ struct Dungeon
     s16 unkE;
 };
 
-extern struct Dungeon gDungeons[];
+extern struct DungeonDataEntry gDungeons[];
 extern struct DungeonName gDungeonNames[];
 const u8 *GetDungeonName1(u8 dungeon);
 u32 sub_80908D8(struct DungeonLocation *dungeon);

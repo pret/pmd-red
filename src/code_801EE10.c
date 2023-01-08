@@ -65,7 +65,7 @@ struct PokemonStruct *sub_80243E8(void)
     struct PokemonStruct *pokeStruct =  &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[gUnknown_3001B60->unk376 * gUnknown_3001B60->unk374 + gUnknown_3001B60->unk370]];
 
     sub_80922B4(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
-    sprintf_2(buffer, gUnknown_80DC9A4,nameBuffer); // %s
+    sprintfStatic(buffer, gUnknown_80DC9A4,nameBuffer); // %s
     return pokeStruct;
 }
 

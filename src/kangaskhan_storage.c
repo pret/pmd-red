@@ -45,9 +45,9 @@ u32 DisplayKangaskhanDialogueSprite(s32 param_1)
   gUnknown_203B208->unk1C = 0;
   gUnknown_203B208->unk20 = 0;
   gUnknown_203B208->unk0 = param_1;
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_KANGASKHAN);
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_KANGASKHAN);
-  monName = GetMonSpecies(SPECIES_KANGASKHAN);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KANGASKHAN);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KANGASKHAN);
+  monName = GetMonSpecies(MONSTER_KANGASKHAN);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
   if (gUnknown_203B208->unk0 == 1) {
     gUnknown_203B208->unkE8 = 0;
@@ -55,7 +55,7 @@ u32 DisplayKangaskhanDialogueSprite(s32 param_1)
   else {
     gUnknown_203B208->unkE8 = &gUnknown_203B208->faceFile;
   }
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_KANGASKHAN);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_KANGASKHAN);
   gUnknown_203B208->faceFile = faceFile;
   gUnknown_203B208->faceData = faceFile->data;
   gUnknown_203B208->unkE4 = 0;

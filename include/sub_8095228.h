@@ -1,6 +1,8 @@
 #ifndef GUARD_SUB_8095228_H
 #define GUARD_SUB_8095228_H
 
+#include "dungeon_global_data.h"
+
 struct unkStruct_8095228
 {
     /* 0x0 */ u8 mailType; // mail type
@@ -13,7 +15,7 @@ struct unkStruct_8095228
     /* 0xE */ s16 targetSpecies; // target
     u32 unk10; // TODO: verify that this is just a union of the 4 bytes in Wonder Mail
     u8 padding2[0x20 - 0x14];
-    struct ItemSlot unk20;
+    struct Item unk20;
     u8 padding3[0x28 - 0x24];
     u32 unk28;
     s8 unk2C;

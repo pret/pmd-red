@@ -11,21 +11,21 @@ extern void TriggerWeatherAbilities(void);
 extern void sub_807EAA0(u32, u32);
 void sub_807E5E4(u8);
 
-u8 GetWeather(struct DungeonEntity *pokemon)
+u8 GetApparentWeather(struct Entity *pokemon)
 {
-    if (pokemon != NULL && HasItem(pokemon, ITEM_ID_WEATHER_BAND))
+    if (pokemon != NULL && HasHeldItem(pokemon, ITEM_WEATHER_BAND))
     {
         return WEATHER_CLEAR;
     }
-    return gDungeonGlobalData->weather;
+    return gDungeon->weather;
 }
 
 void sub_807E5AC(void)
 {
     u8 weather;
-    weather = gDungeonGlobalData->unk1C578;
+    weather = gDungeon->unk1C578;
     if(weather == WEATHER_RANDOM)
-        weather = DungeonRandomCapped(WEATHER_RANDOM);
+        weather = DungeonRandInt(WEATHER_RANDOM);
     sub_807E5E4(weather);
     TriggerWeatherAbilities();
     sub_807EAA0(0, 1);
@@ -36,22 +36,22 @@ void sub_807E5E4(u8 weather)
   int index;
   u8 *preload;
 
-  gDungeonGlobalData->unkE265 = weather;
-  gDungeonGlobalData->weather = gDungeonGlobalData->unkE265;
-  gDungeonGlobalData->negateWeatherEffects = FALSE;
+  gDungeon->unkE265 = weather;
+  gDungeon->weather = gDungeon->unkE265;
+  gDungeon->nullifyWeather = FALSE;
   for(index = 0; index < 8; index++) {
-    gDungeonGlobalData->unkE267[index] = 0;
-    gDungeonGlobalData->startingWeather[index] = 0;
+    gDungeon->unkE267[index] = 0;
+    gDungeon->naturalWeather[index] = 0;
   }
-  preload = &gDungeonGlobalData->weatherDamageTimer;
+  preload = &gDungeon->weatherDamageCounter;
   index = 0;
   *preload = 9;
-  gDungeonGlobalData->mudSportTurnsLeft = 0;
-  gDungeonGlobalData->waterSportTurnsLeft = 0;
+  gDungeon->mudSportTurns = 0;
+  gDungeon->waterSportTurns = 0;
   for(index = 0; index < 0x100; index++)
   {
-    gDungeonGlobalData->unk17C[index].unk0 = index;
-    gDungeonGlobalData->unk17C[index].unk1 = index;
-    gDungeonGlobalData->unk17C[index].unk2 = index;
+    gDungeon->unk17C[index].unk0 = index;
+    gDungeon->unk17C[index].unk1 = index;
+    gDungeon->unk17C[index].unk2 = index;
   }
 }

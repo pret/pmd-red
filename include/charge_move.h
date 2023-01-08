@@ -3,8 +3,8 @@
 
 #include "dungeon_entity.h"
 
-bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMove *move);
+bool8 MoveMatchesChargingStatus(struct Entity *pokemon, struct Move *move);
 // checkCharge = Check for the move named Charge.
-bool8 IsCharging(struct DungeonEntity *pokemon, bool8 checkCharge);
+bool8 IsCharging(struct Entity *pokemon, bool8 checkCharge);
 
 #endif

@@ -10,8 +10,8 @@ extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocatio
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet);
-extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet);
+extern void SavePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet);
+extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet);
 
 void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
@@ -40,7 +40,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     temp  = &gUnknown_203B484->unk4;
     memset(temp, 0, sizeof(struct PokemonStruct));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
-    RestoreIntegerBits(&backup, &temp->isLeader, 1);
+    RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
     RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
     RestoreDungeonLocation(&backup, &temp->dungeonLocation);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
@@ -82,7 +82,7 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
     temp  = &gUnknown_203B484->unk4;
     SaveIntegerBits(&backup, &temp->unk0, 2);
-    SaveIntegerBits(&backup, &temp->isLeader, 1);
+    SaveIntegerBits(&backup, &temp->isTeamLeader, 1);
     SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
     SaveDungeonLocation(&backup, &temp->dungeonLocation);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);

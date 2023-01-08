@@ -3,22 +3,22 @@
 		"name": "FrostyGrotto_1F_4F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_RHYHORN",
+				"species": "MONSTER_RHYHORN",
 				"level": 16,
 				"probability": 5000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_METANG",
+				"species": "MONSTER_METANG",
 				"level": 17,
 				"probability": 5000
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -27,17 +27,17 @@
 		"name": "FrostyGrotto_5F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_ARTICUNO",
+				"species": "MONSTER_ARTICUNO",
 				"level": 33,
 				"probability": 10000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}

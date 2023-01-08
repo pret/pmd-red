@@ -24,7 +24,7 @@ sub_807AB38:
 _0807AB54:
 	adds r0, r2, 0
 	str r2, [sp, 0x1A4]
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -86,7 +86,7 @@ _0807ABC6:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x1A4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	ldr r2, [sp, 0x1A4]
@@ -121,7 +121,7 @@ _0807AC00:
 	ble _0807ABAE
 	b _0807ACB4
 	.align 2, 0
-_0807AC10: .4byte gDungeonGlobalData
+_0807AC10: .4byte gDungeon
 _0807AC14: .4byte 0x00000671
 _0807AC18: .4byte 0x00003a0c
 _0807AC1C: .4byte 0x000104c4
@@ -176,7 +176,7 @@ _0807AC72:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x1A4]
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	ldr r2, [sp, 0x1A4]
@@ -214,7 +214,7 @@ _0807ACB4:
 	ldr r1, _0807AD78
 	movs r4, 0
 	ldrsh r1, [r1, r4]
-	bl DungeonRandomRange
+	bl DungeonRandRange
 	adds r7, r0, 0
 	cmp r7, r8
 	blt _0807ACCC
@@ -226,7 +226,7 @@ _0807ACCC:
 	mov r10, r6
 _0807ACD4:
 	mov r0, r8
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r2, r0, 0
 	movs r3, 0
 	cmp r3, r8

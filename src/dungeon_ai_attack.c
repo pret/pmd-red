@@ -38,14 +38,14 @@ extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gNumPotentialTargets;
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
-extern struct DungeonEntity *gPotentialTargets[NUM_DIRECTIONS];
+extern struct Entity *gPotentialTargets[NUM_DIRECTIONS];
 
-void DecideAttack(struct DungeonEntity *pokemon)
+void DecideAttack(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     s32 i;
-    s32 chargeStatus = CHARGING_STATUS_CHARGE;
-    struct MoveTargetResults moveTargetResults[MAX_MON_MOVES + 1];
+    s32 chargeStatus = STATUS_CHARGING;
+    struct AIPossibleMove aiPossibleMove[MAX_MON_MOVES + 1];
     bool8 willNotUnlinkMove[MAX_MON_MOVES];
     s32 randomWeight;
     bool8 hasPPChecker;
@@ -57,34 +57,34 @@ void DecideAttack(struct DungeonEntity *pokemon)
     bool8 canTargetRegularAttack;
     s32 maxWeight;
     if (CannotAttack(pokemon, FALSE) ||
-        ShouldAvoidEnemiesAndShowEffect(pokemon, TRUE) ||
+        ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
         HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
-        (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED && RollPercentChance(gConfusedAttackChance)))
+        (pokemonInfo->volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
     {
         return;
     }
-    if (pokemonData->chargingStatus != CHARGING_STATUS_NONE)
+    if (pokemonInfo->chargingStatus != STATUS_NONE)
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (pokemonData->moves[i].moveFlags & MOVE_FLAG_EXISTS &&
-                MoveMatchesChargingStatus(pokemon, &pokemonData->moves[i]) &&
-                pokemonData->chargingStatusMoveIndex == i)
+            if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS &&
+                MoveMatchesChargingStatus(pokemon, &pokemonInfo->moves[i]) &&
+                pokemonInfo->chargingStatusMoveIndex == i)
             {
                 s32 chosenMoveIndex;
-                SetAction(&pokemonData->action, DUNGEON_ACTION_USE_MOVE_AI);
+                SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
                 chosenMoveIndex = i;
-                if (i > 0 && pokemonData->moves[i].moveFlags & MOVE_FLAG_LINKED)
+                if (i > 0 && pokemonInfo->moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
                 {
                     while (--chosenMoveIndex > 0)
                     {
-                        if (!(pokemonData->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_LINKED))
+                        if (!(pokemonInfo->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                         {
                             break;
                         }
                     }
                 }
-                pokemonData->action.actionUseIndex = chosenMoveIndex;
+                pokemonInfo->action.actionUseIndex = chosenMoveIndex;
                 TargetTileInFront(pokemon);
                 return;
             }
@@ -94,10 +94,10 @@ void DecideAttack(struct DungeonEntity *pokemon)
     numUsableMoves = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct PokemonMove *move = &pokemonData->moves[i];
-        if (pokemonData->moves[i].moveFlags & MOVE_FLAG_EXISTS)
+        struct Move *move = &pokemonInfo->moves[i];
+        if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS)
         {
-            if (pokemonData->moves[i].moveFlags & MOVE_FLAG_ENABLED)
+            if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
             {
                 numUsableMoves++;
             }
@@ -106,19 +106,19 @@ void DecideAttack(struct DungeonEntity *pokemon)
     }
     if (total == 0)
     {
-        struct PokemonMove struggle;
+        struct Move struggle;
         InitPokemonMove(&struggle, MOVE_STRUGGLE);
-        FindMoveTarget(&moveTargetResults[0], pokemon, &struggle);
-        if (moveTargetResults[0].moveUsable)
+        AIConsiderMove(&aiPossibleMove[0], pokemon, &struggle);
+        if (aiPossibleMove[0].canBeUsed)
         {
-            SetAction(&pokemonData->action, DUNGEON_ACTION_STRUGGLE);
-            pokemonData->action.facingDir = moveTargetResults[0].targetDir & DIRECTION_MASK;
+            SetMonsterActionFields(&pokemonInfo->action, ACTION_STRUGGLE);
+            pokemonInfo->action.direction = aiPossibleMove[0].direction & DIRECTION_MASK;
             TargetTileInFront(pokemon);
         }
         return;
     }
-    hasWeakTypePicker = HasIQSkill(pokemon, IQ_SKILL_WEAK_TYPE_PICKER);
-    hasPPChecker = HasIQSkill(pokemon, IQ_SKILL_PP_CHECKER) != FALSE;
+    hasWeakTypePicker = IQSkillIsEnabled(pokemon, IQ_WEAK_TYPE_PICKER);
+    hasPPChecker = IQSkillIsEnabled(pokemon, IQ_PP_CHECKER) != FALSE;
     total = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -133,12 +133,12 @@ void DecideAttack(struct DungeonEntity *pokemon)
         // This requires a separate check from the 0-PP check used for unlinked moves.
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            struct PokemonMove *move = &pokemonData->moves[i];
+            struct Move *move = &pokemonInfo->moves[i];
             if (!(move->moveFlags & MOVE_FLAG_EXISTS))
             {
                 break;
             }
-            if (i != 0 && !(move->moveFlags & MOVE_FLAG_LINKED))
+            if (i != 0 && !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
             {
                 if (linkedMoveStartIndex + 1 < i && minPP <= 1 && linkedMoveStartIndex + 1 <= i)
                 {
@@ -172,61 +172,61 @@ void DecideAttack(struct DungeonEntity *pokemon)
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct PokemonMove *move;
-        moveTargetResults[i].moveUsable = FALSE;
-        move = &pokemonData->moves[i];
+        struct Move *move;
+        aiPossibleMove[i].canBeUsed = FALSE;
+        move = &pokemonInfo->moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
             willNotUnlinkMove[i] &&
-            IsMoveIndexUsable(pokemon, i, hasPPChecker) &&
-            move->moveFlags & MOVE_FLAG_ENABLED)
+            CanAIUseMove(pokemon, i, hasPPChecker) &&
+            move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
         {
-            moveTargetResults[i].moveUsable = TRUE;
-            if (pokemonData->chargingStatus == chargeStatus)
+            aiPossibleMove[i].canBeUsed = TRUE;
+            if (pokemonInfo->chargingStatus == chargeStatus)
             {
-                if (move->moveID == MOVE_CHARGE)
+                if (move->id == MOVE_CHARGE)
                 {
-                    moveTargetResults[i].moveWeight = 0;
+                    aiPossibleMove[i].weight = 0;
                     continue;
                 }
-                else if (GetMoveTypeForPokemon(pokemon, move) == TYPE_ELECTRIC)
+                else if (GetMoveTypeForMonster(pokemon, move) == TYPE_ELECTRIC)
                 {
-                    moveTargetResults[i].moveWeight = GetMoveWeight(move);
+                    aiPossibleMove[i].weight = GetMoveAIWeight(move);
                 }
                 else
                 {
-                    moveTargetResults[i].moveWeight = 1;
+                    aiPossibleMove[i].weight = 1;
                 }
             }
             else if (hasWeakTypePicker)
             {
-                struct MoveTargetResults *results = &moveTargetResults[i];
-                results->moveWeight = FindMoveTarget(results, pokemon, move);
+                struct AIPossibleMove *results = &aiPossibleMove[i];
+                results->weight = AIConsiderMove(results, pokemon, move);
             }
             else
             {
-                moveTargetResults[i].moveWeight = GetMoveWeight(move);
+                aiPossibleMove[i].weight = GetMoveAIWeight(move);
             }
-            total += moveTargetResults[i].moveWeight;
+            total += aiPossibleMove[i].weight;
         }
     }
-    moveTargetResults[REGULAR_ATTACK_INDEX].moveWeight = 0;
-    if (!HasIQSkill(pokemon, IQ_SKILL_EXCLUSIVE_MOVE_USER) && pokemonData->chargingStatus != chargeStatus)
+    aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 0;
+    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->chargingStatus != chargeStatus)
     {
-        moveTargetResults[REGULAR_ATTACK_INDEX].moveUsable = TRUE;
-        if (pokemonData->chargingStatus == chargeStatus)
+        aiPossibleMove[REGULAR_ATTACK_INDEX].canBeUsed = TRUE;
+        if (pokemonInfo->chargingStatus == chargeStatus)
         {
             // Never reached? Charge already skips the regular attack in the outer block.
-            moveTargetResults[REGULAR_ATTACK_INDEX].moveWeight = 1;
+            aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 1;
         }
         else if (hasWeakTypePicker)
         {
-            moveTargetResults[REGULAR_ATTACK_INDEX].moveWeight = 2;
+            aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 2;
         }
         else
         {
-            moveTargetResults[REGULAR_ATTACK_INDEX].moveWeight = gRegularAttackWeights[numUsableMoves];
+            aiPossibleMove[REGULAR_ATTACK_INDEX].weight = gRegularAttackWeights[numUsableMoves];
         }
-        total += moveTargetResults[REGULAR_ATTACK_INDEX].moveWeight;
+        total += aiPossibleMove[REGULAR_ATTACK_INDEX].weight;
     }
     if (hasWeakTypePicker)
     {
@@ -235,26 +235,26 @@ void DecideAttack(struct DungeonEntity *pokemon)
         total = 0;
         for (i = 0; i < MAX_MON_MOVES + 1; i++)
         {
-            if (!moveTargetResults[i].moveUsable)
+            if (!aiPossibleMove[i].canBeUsed)
             {
-                moveTargetResults[i].moveWeight = 0;
+                aiPossibleMove[i].weight = 0;
             }
-            else if (maxWeight < moveTargetResults[i].moveWeight)
+            else if (maxWeight < aiPossibleMove[i].weight)
             {
-                maxWeight = moveTargetResults[i].moveWeight;
+                maxWeight = aiPossibleMove[i].weight;
             }
         }
         for (i = 0; i < MAX_MON_MOVES + 1; i++)
         {
-            if (moveTargetResults[i].moveUsable)
+            if (aiPossibleMove[i].canBeUsed)
             {
-                if (maxWeight != moveTargetResults[i].moveWeight)
+                if (maxWeight != aiPossibleMove[i].weight)
                 {
                     // Only the move(s) with the highest weight can be used, instead of a weighted random.
                     // This has the side effect of making the AI use a STAB ranged move consistently when at a distance.
-                    moveTargetResults[i].moveWeight = 0;
+                    aiPossibleMove[i].weight = 0;
                 }
-                total += moveTargetResults[i].moveWeight;
+                total += aiPossibleMove[i].weight;
             }
         }
     }
@@ -262,9 +262,9 @@ void DecideAttack(struct DungeonEntity *pokemon)
     {
         return;
     }
-    randomWeight = DungeonRandomCapped(total);
+    randomWeight = DungeonRandInt(total);
     weightCounter = 0;
-    if (!HasIQSkill(pokemon, IQ_SKILL_EXCLUSIVE_MOVE_USER))
+    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER))
     {
         canTargetRegularAttack = TargetRegularAttack(pokemon, &regularAttackTargetDir, TRUE);
     }
@@ -275,40 +275,40 @@ void DecideAttack(struct DungeonEntity *pokemon)
     }
     for (i = 0; i <= REGULAR_ATTACK_INDEX; i++)
     {
-        if (moveTargetResults[i].moveUsable && moveTargetResults[i].moveWeight != 0)
+        if (aiPossibleMove[i].canBeUsed && aiPossibleMove[i].weight != 0)
         {
-            weightCounter += moveTargetResults[i].moveWeight;
+            weightCounter += aiPossibleMove[i].weight;
             if (weightCounter >= randomWeight)
             {
                 if (i == REGULAR_ATTACK_INDEX)
                 {
                     if (canTargetRegularAttack)
                     {
-                        SetAction(&pokemonData->action, DUNGEON_ACTION_REGULAR_ATTACK);
-                        pokemonData->action.facingDir = regularAttackTargetDir & DIRECTION_MASK;
+                        SetMonsterActionFields(&pokemonInfo->action, ACTION_REGULAR_ATTACK);
+                        pokemonInfo->action.direction = regularAttackTargetDir & DIRECTION_MASK;
                         TargetTileInFront(pokemon);
                     }
                 }
                 else
                 {
-                    FindMoveTarget(&moveTargetResults[i], pokemon, &pokemonData->moves[i]);
-                    if (moveTargetResults[i].moveUsable)
+                    AIConsiderMove(&aiPossibleMove[i], pokemon, &pokemonInfo->moves[i]);
+                    if (aiPossibleMove[i].canBeUsed)
                     {
                         s32 chosenMoveIndex;
-                        SetAction(&pokemonData->action, DUNGEON_ACTION_USE_MOVE_AI);
+                        SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
                         chosenMoveIndex = i;
-                        if (i > 0 && pokemonData->moves[i].moveFlags & MOVE_FLAG_LINKED)
+                        if (i > 0 && pokemonInfo->moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
                         {
                             while (--chosenMoveIndex > 0)
                             {
-                                if (!(pokemonData->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_LINKED))
+                                if (!(pokemonInfo->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                                 {
                                     break;
                                 }
                             }
                         }
-                        pokemonData->action.facingDir = moveTargetResults[i].targetDir & DIRECTION_MASK;
-                        pokemonData->action.actionUseIndex = chosenMoveIndex;
+                        pokemonInfo->action.direction = aiPossibleMove[i].direction & DIRECTION_MASK;
+                        pokemonInfo->action.actionUseIndex = chosenMoveIndex;
                         TargetTileInFront(pokemon);
                     }
                     else
@@ -322,17 +322,17 @@ void DecideAttack(struct DungeonEntity *pokemon)
     }
     if (canTargetRegularAttack)
     {
-        SetAction(&pokemonData->action, DUNGEON_ACTION_REGULAR_ATTACK);
-        pokemonData->action.facingDir = regularAttackTargetDir & DIRECTION_MASK;
+        SetMonsterActionFields(&pokemonInfo->action, ACTION_REGULAR_ATTACK);
+        pokemonInfo->action.direction = regularAttackTargetDir & DIRECTION_MASK;
         TargetTileInFront(pokemon);
     }
 }
 
-s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEntity *pokemon, struct PokemonMove *move)
+s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon, struct Move *move)
 {
     s32 targetingFlags;
     s32 moveWeight = 1;
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
     s32 i;
     bool8 hasStatusChecker;
@@ -342,10 +342,10 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     {
         gCanAttackInDirection[i] = FALSE;
     }
-    targetingFlags = GetMoveTargetingFlagsForPokemon(pokemon, move, TRUE);
-    hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
-    moveTargetResults->moveUsable = FALSE;
-    if ((pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !MoveDealsDirectDamage(move)) ||
+    targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
+    hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
+    aiPossibleMove->canBeUsed = FALSE;
+    if ((pokemonInfo->volatileStatus == STATUS_TAUNTED && !MovesIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;
@@ -355,10 +355,10 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         rangeTargetingFlags == TARGETING_FLAG_TARGET_FRONTAL_CONE ||
         rangeTargetingFlags == TARGETING_FLAG_TARGET_AROUND)
     {
-        if (pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
+        if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
         {
-            u8 facingDir = pokemonData->action.facingDir;
-            i = facingDir; // Fixes a regswap.
+            u8 direction = pokemonInfo->action.direction;
+            i = direction; // Fixes a regswap.
             if (!gCanAttackInDirection[i])
             {
                 gCanAttackInDirection[i] = TRUE;
@@ -374,20 +374,20 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
             {
                 // Double assignment to fix a regswap.
                 s16 rangeTargetingFlags = rangeTargetingFlags2 = targetingFlags & 0xF0;
-                struct MapTile *adjacentTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
-                    pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
-                struct DungeonEntity *adjacentPokemon = adjacentTile->pokemon;
-                if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_POKEMON)
+                struct Tile *adjacentTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
+                    pokemon->pos.y + gAdjacentTileOffsets[i].y);
+                struct Entity *adjacentPokemon = adjacentTile->monster;
+                if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_MONSTER)
                 {
                     if (rangeTargetingFlags != TARGETING_FLAG_TARGET_FRONTAL_CONE &&
                         rangeTargetingFlags != TARGETING_FLAG_TARGET_AROUND)
                     {
-                        if (!CanAttackInFront(pokemon, i))
+                        if (!CanAttackInDirection(pokemon, i))
                         {
                             continue;
                         }
                     }
-                    numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, adjacentPokemon, move, hasStatusChecker);
+                    numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, adjacentPokemon, move, hasStatusChecker);
                 }
             }
         }
@@ -397,10 +397,10 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct DungeonEntity *target = gDungeonGlobalData->allPokemon[i];
-            if (EntityExists(target) && CanSee(pokemon, target))
+            struct Entity *target = gDungeon->allPokemon[i];
+            if (EntityExists(target) && CanSeeTarget(pokemon, target))
             {
-                numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
+                numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
             }
         }
     }
@@ -408,26 +408,26 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
     {
         for (i = 0; i < NUM_DIRECTIONS; i++)
         {
-            struct MapTile *targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x,
-                pokemon->posWorld.y + gAdjacentTileOffsets[i].y);
-            if (CanAttackInFront(pokemon, i))
+            struct Tile *targetTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
+                pokemon->pos.y + gAdjacentTileOffsets[i].y);
+            if (CanAttackInDirection(pokemon, i))
             {
-                struct DungeonEntity *targetPokemon = targetTile->pokemon;
-                if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_POKEMON)
+                struct Entity *targetPokemon = targetTile->monster;
+                if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_MONSTER)
                 {
                     s32 prevNumPotentialTargets = numPotentialTargets;
-                    numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, targetPokemon, move, hasStatusChecker);
+                    numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, targetPokemon, move, hasStatusChecker);
                     if (prevNumPotentialTargets != numPotentialTargets)
                     {
                         continue;
                     }
                 }
-                targetTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[i].x * 2,
-                    pokemon->posWorld.y + gAdjacentTileOffsets[i].y * 2);
-                targetPokemon = targetTile->pokemon;
-                if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_POKEMON)
+                targetTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x * 2,
+                    pokemon->pos.y + gAdjacentTileOffsets[i].y * 2);
+                targetPokemon = targetTile->monster;
+                if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_MONSTER)
                 {
-                    numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, targetPokemon, move, hasStatusChecker);
+                    numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, targetPokemon, move, hasStatusChecker);
                 }
             }
         }
@@ -442,19 +442,19 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         }
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct DungeonEntity *target = gDungeonGlobalData->allPokemon[i];
+            struct Entity *target = gDungeon->allPokemon[i];
             if (EntityExists(target) && pokemon != target)
             {
-                s32 facingDir = CalculateFacingDir(&pokemon->posWorld, &target->posWorld);
-                if (!gCanAttackInDirection[facingDir] &&
-                    CanSee(pokemon, target) &&
+                s32 direction = GetDirectionTowardsPosition(&pokemon->pos, &target->pos);
+                if (!gCanAttackInDirection[direction] &&
+                    CanSeeTarget(pokemon, target) &&
                     IsTargetInLineRange(pokemon, target, maxRange) &&
-                    CanUseStatusMove(targetingFlags, pokemon, target, move, hasStatusChecker) &&
-                    IsTargetStraightAhead(pokemon, target, facingDir, maxRange))
+                    IsAITargetEligible(targetingFlags, pokemon, target, move, hasStatusChecker) &&
+                    IsTargetInRange(pokemon, target, direction, maxRange))
                 {
-                    gCanAttackInDirection[facingDir] = TRUE;
-                    gPotentialAttackTargetDirections[numPotentialTargets] = facingDir;
-                    gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForPokemon(pokemon, move));
+                    gCanAttackInDirection[direction] = TRUE;
+                    gPotentialAttackTargetDirections[numPotentialTargets] = direction;
+                    gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, targetingFlags, target, GetMoveTypeForMonster(pokemon, move));
                     gPotentialTargets[numPotentialTargets] = target;
                     numPotentialTargets++;
                 }
@@ -466,20 +466,20 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct DungeonEntity *target = gDungeonGlobalData->allPokemon[i];
+            struct Entity *target = gDungeon->allPokemon[i];
             if (EntityExists(target))
             {
-                numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
+                numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
             }
         }
     }
     else if (rangeTargetingFlags == TARGETING_FLAG_TARGET_SELF)
     {
-        numPotentialTargets = WeightMoveIfUsable(numPotentialTargets, targetingFlags, pokemon, pokemon, move, hasStatusChecker);
+        numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, pokemon, move, hasStatusChecker);
     }
     if (numPotentialTargets == 0)
     {
-        moveTargetResults->moveUsable = FALSE;
+        aiPossibleMove->canBeUsed = FALSE;
     }
     else
     {
@@ -506,7 +506,7 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
         {
             totalWeight += gPotentialAttackTargetWeights[i];
         }
-        weightCounter = DungeonRandomCapped(totalWeight);
+        weightCounter = DungeonRandInt(totalWeight);
         for (i = 0; i < numPotentialTargets; i++)
         {
             weightCounter -= gPotentialAttackTargetWeights[i];
@@ -515,23 +515,23 @@ s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEn
                 break;
             }
         }
-        moveTargetResults->moveUsable = TRUE;
-        moveTargetResults->targetDir = gPotentialAttackTargetDirections[i];
-        moveTargetResults->moveWeight = 8;
+        aiPossibleMove->canBeUsed = TRUE;
+        aiPossibleMove->direction = gPotentialAttackTargetDirections[i];
+        aiPossibleMove->weight = 8;
     }
     return moveWeight;
 }
 
-bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *target, s32 range)
+bool8 IsTargetInLineRange(struct Entity *user, struct Entity *target, s32 range)
 {
-    s32 distanceX = user->posWorld.x - target->posWorld.x;
+    s32 distanceX = user->pos.x - target->pos.x;
     s32 distanceY, distance;
     s32 direction;
     if (distanceX < 0)
     {
         distanceX = -distanceX;
     }
-    distanceY = user->posWorld.y - target->posWorld.y;
+    distanceY = user->pos.y - target->pos.y;
     if (distanceY < 0)
     {
         distanceY = -distanceY;
@@ -548,33 +548,33 @@ bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *targ
     direction = -1;
     if (distanceX == distanceY)
     {
-        if (user->posWorld.x < target->posWorld.x &&
-            (user->posWorld.y < target->posWorld.y || user->posWorld.y > target->posWorld.y))
+        if (user->pos.x < target->pos.x &&
+            (user->pos.y < target->pos.y || user->pos.y > target->pos.y))
         {
             returnTrue:
             return TRUE;
         }
-        if (user->posWorld.x > target->posWorld.x); // Fixes register loading order.
+        if (user->pos.x > target->pos.x); // Fixes register loading order.
         direction = DIRECTION_SOUTHWEST;
-        if (user->posWorld.x <= target->posWorld.x || user->posWorld.y <= target->posWorld.y)
+        if (user->pos.x <= target->pos.x || user->pos.y <= target->pos.y)
         {
             goto checkDirectionSet;
         }
         goto returnTrue;
     }
-    else if (user->posWorld.x == target->posWorld.x && user->posWorld.y < target->posWorld.y)
+    else if (user->pos.x == target->pos.x && user->pos.y < target->pos.y)
     {
         return TRUE;
     }
-    else if (user->posWorld.x < target->posWorld.x && user->posWorld.y == target->posWorld.y)
+    else if (user->pos.x < target->pos.x && user->pos.y == target->pos.y)
     {
         return TRUE;
     }
-    else if (user->posWorld.x == target->posWorld.x && user->posWorld.y > target->posWorld.y)
+    else if (user->pos.x == target->pos.x && user->pos.y > target->pos.y)
     {
         return TRUE;
     }
-    else if (user->posWorld.x > target->posWorld.x && user->posWorld.y == target->posWorld.y)
+    else if (user->pos.x > target->pos.x && user->pos.y == target->pos.y)
     {
         direction = DIRECTION_WEST;
     }
@@ -586,38 +586,38 @@ bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *targ
     return TRUE;
 }
 
-s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
+s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, bool32 hasStatusChecker)
 {
-    s32 facingDir;
+    s32 direction;
     s32 targetingFlags2 = (s16) targetingFlags;
     bool8 hasStatusChecker2 = hasStatusChecker;
-    struct DungeonEntityData *userData = user->entityData;
-    if ((user->posWorld.x == target->posWorld.x && user->posWorld.y == target->posWorld.y) ||
+    struct EntityInfo *userData = user->info;
+    if ((user->pos.x == target->pos.x && user->pos.y == target->pos.y) ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_ROOM ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_FLOOR ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_SELF)
     {
-        facingDir = userData->action.facingDir;
+        direction = userData->action.direction;
     }
     else
     {
-        facingDir = CalculateFacingDir(&user->posWorld, &target->posWorld);
+        direction = GetDirectionTowardsPosition(&user->pos, &target->pos);
     }
-    if (!gCanAttackInDirection[facingDir] &&
-        CanUseStatusMove(targetingFlags2, user, target, move, hasStatusChecker2))
+    if (!gCanAttackInDirection[direction] &&
+        IsAITargetEligible(targetingFlags2, user, target, move, hasStatusChecker2))
     {
-        gCanAttackInDirection[facingDir] = TRUE;
-        do { gPotentialAttackTargetDirections[numPotentialTargets] = facingDir; } while (0);
-        gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(user, targetingFlags2, target, GetMoveTypeForPokemon(user, move));
+        gCanAttackInDirection[direction] = TRUE;
+        do { gPotentialAttackTargetDirections[numPotentialTargets] = direction; } while (0);
+        gPotentialAttackTargetWeights[numPotentialTargets] = WeightMove(user, targetingFlags2, target, GetMoveTypeForMonster(user, move));
         gPotentialTargets[numPotentialTargets] = target;
         numPotentialTargets++;
     }
     return numPotentialTargets;
 }
 
-bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker)
+bool8 IsAITargetEligible(s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, bool32 hasStatusChecker)
 {
-    struct DungeonEntityData *targetData;
+    struct EntityInfo *targetData;
     s32 targetingFlags2 = (s16) targetingFlags;
     bool8 hasStatusChecker2 = hasStatusChecker;
     bool8 hasTarget = FALSE;
@@ -636,19 +636,19 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
     }
     else if (categoryTargetingFlags == TARGETING_FLAG_LONG_RANGE)
     {
-        targetData = target->entityData;
+        targetData = target->info;
         goto checkThirdParty;
     }
     else if (categoryTargetingFlags == TARGETING_FLAG_ATTACK_ALL)
     {
-        targetData = target->entityData;
+        targetData = target->info;
         if (user == target)
         {
             goto returnFalse;
         }
         checkThirdParty:
         hasTarget = TRUE;
-        if (targetData->shopkeeperMode == SHOPKEEPER_FRIENDLY ||
+        if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
             targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
             targetData->clientType == CLIENT_TYPE_CLIENT)
         {
@@ -687,7 +687,7 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
             }
             else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_HP)
             {
-                if (!HasQuarterHPOrLess(target))
+                if (!HasLowHealth(target))
                 {
                     if (*categoryTargetingFlags2);
                     goto returnFalse;
@@ -711,8 +711,8 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
             }
             else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
             {
-                targetData = target->entityData;
-                if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposedStatus)
+                targetData = target->info;
+                if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposed)
                 {
                     if (*categoryTargetingFlags2); // Flips the conditional.
                     goto returnFalse;
@@ -720,7 +720,7 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
             }
             else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_ALL)
             {
-                if (!HasNegativeStatus(target) && !HasQuarterHPOrLess(target))
+                if (!HasNegativeStatus(target) && !HasLowHealth(target))
                 {
                     if (*categoryTargetingFlags2); // Flips the conditional.
                     goto returnFalse;
@@ -731,8 +731,8 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
         {
             s32 useChance;
             rollMoveUseChance:
-            useChance = GetMoveAccuracy(move, ACCURACY_TYPE_USE_CHANCE);
-            if (DungeonRandomCapped(100) >= useChance)
+            useChance = GetMoveAccuracyOrAIChance(move, ACCURACY_AI_CONDITION_RANDOM_CHANCE);
+            if (DungeonRandInt(100) >= useChance)
             {
                 goto returnFalse;
             }
@@ -741,30 +741,30 @@ bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct Du
     return hasTarget;
 }
 
-s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEntity *target, u32 moveType)
+s32 WeightMove(struct Entity *user, s32 targetingFlags, struct Entity *target, u32 moveType)
 {
 #ifndef NONMATCHING
-    register struct DungeonEntityData *targetData asm("r4");
+    register struct EntityInfo *targetData asm("r4");
 #else
-    struct DungeonEntityData *targetData;
+    struct EntityInfo *targetData;
 #endif
     s32 targetingFlags2 = (s16) targetingFlags;
     u8 moveType2 = moveType;
     u8 weight = 1;
-    struct DungeonEntityData *targetData2;
-    targetData2 = targetData = target->entityData;
-    if (!targetData->isEnemy || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
+    struct EntityInfo *targetData2;
+    targetData2 = targetData = target->info;
+    if (!targetData->isNotTeamMember || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
     {
         return 1;
     }
-    else if (HasIQSkill(user, IQ_SKILL_EXP_GO_GETTER))
+    else if (IQSkillIsEnabled(user, IQ_EXP_GO_GETTER))
     {
         // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
         // This causes Exp. Go-Getter to prioritize Pokémon worth less experience
         // instead of Pokémon worth more experience.
-        weight = gDungeonGlobalData->expYieldRankings[targetData->entityID];
+        weight = gDungeon->expYieldRankings[targetData->id];
     }
-    else if (HasIQSkill(user, IQ_SKILL_EFFICIENCY_EXPERT))
+    else if (IQSkillIsEnabled(user, IQ_EFFICIENCY_EXPERT))
     {
         weight = -12 - targetData2->HP;
         if (weight == 0)
@@ -772,41 +772,41 @@ s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEnt
             weight = 1;
         }
     }
-    else if (HasIQSkill(user, IQ_SKILL_WEAK_TYPE_PICKER))
+    else if (IQSkillIsEnabled(user, IQ_WEAK_TYPE_PICKER))
     {
        weight = WeightWeakTypePicker(user, target, moveType2) + 1;
     }
     return weight;
 }
 
-bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 checkPetrified)
+bool8 TargetRegularAttack(struct Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
-    s32 facingDir = pokemonData->action.facingDir;
-    s32 faceTurnLimit = pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER ? 1 : 8;
+    s32 direction = pokemonInfo->action.direction;
+    s32 faceTurnLimit = pokemonInfo->eyesightStatus == STATUS_BLINKER ? 1 : 8;
     s32 i;
     s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
     s32 potentialAttackTargetWeights[NUM_DIRECTIONS];
-    bool8 hasTargetingIQ = HasIQSkill(pokemon, IQ_SKILL_EXP_GO_GETTER) || HasIQSkill(pokemon, IQ_SKILL_EFFICIENCY_EXPERT);
-    bool8 hasStatusChecker = HasIQSkill(pokemon, IQ_SKILL_STATUS_CHECKER);
-    for (i = 0; i < faceTurnLimit; i++, facingDir++)
+    bool8 hasTargetingIQ = IQSkillIsEnabled(pokemon, IQ_EXP_GO_GETTER) || IQSkillIsEnabled(pokemon, IQ_EFFICIENCY_EXPERT);
+    bool8 hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
+    for (i = 0; i < faceTurnLimit; i++, direction++)
     {
-        struct DungeonEntity *target;
-        facingDir &= DIRECTION_MASK;
-        target = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
-            pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y)->pokemon;
+        struct Entity *target;
+        direction &= DIRECTION_MASK;
+        target = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
+            pokemon->pos.y + gAdjacentTileOffsets[direction].y)->monster;
         if (target != NULL &&
-            GetEntityType(target) == ENTITY_POKEMON &&
-            CanAttackInFront(pokemon, facingDir) &&
+            GetEntityType(target) == ENTITY_MONSTER &&
+            CanAttackInDirection(pokemon, direction) &&
             CanTarget(pokemon, target, FALSE, checkPetrified) == TARGET_CAPABILITY_CAN_TARGET &&
-            (!hasStatusChecker || target->entityData->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN))
+            (!hasStatusChecker || target->info->immobilizeStatus != STATUS_FROZEN))
         {
-            potentialAttackTargetDirections[numPotentialTargets] = facingDir;
+            potentialAttackTargetDirections[numPotentialTargets] = direction;
             potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);
             if (!hasTargetingIQ)
             {
-                *targetDir = facingDir;
+                *targetDir = direction;
                 return TRUE;
             }
             numPotentialTargets++;
@@ -840,7 +840,7 @@ bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 c
         {
             totalWeight += potentialAttackTargetWeights[i];
         }
-        weightCounter = DungeonRandomCapped(totalWeight);
+        weightCounter = DungeonRandInt(totalWeight);
         for (i = 0; i < numPotentialTargets; i++)
         {
             weightCounter -= potentialAttackTargetWeights[i];
@@ -855,15 +855,15 @@ bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 c
 
 }
 
-bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange)
+bool8 IsTargetInRange(struct Entity *pokemon, struct Entity *targetPokemon, s32 direction, s32 maxRange)
 {
-    s32 distanceX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 distanceX = pokemon->pos.x - targetPokemon->pos.x;
     s32 effectiveMaxRange;
     if (distanceX < 0)
     {
         distanceX = -distanceX;
     }
-    effectiveMaxRange = pokemon->posWorld.y - targetPokemon->posWorld.y;
+    effectiveMaxRange = pokemon->pos.y - targetPokemon->pos.y;
     if (effectiveMaxRange < 0)
     {
         effectiveMaxRange = -effectiveMaxRange;
@@ -876,7 +876,7 @@ bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity 
     {
         effectiveMaxRange = maxRange;
     }
-    if (!HasIQSkill(pokemon, IQ_SKILL_COURSE_CHECKER))
+    if (!IQSkillIsEnabled(pokemon, IQ_COURSE_CHECKER))
     {
         // BUG: effectiveMaxRange is already capped at maxRange, so this condition always evaluates to TRUE.
         // The AI also has range checks elsewhere, so this doesn't become an issue in most cases.
@@ -889,14 +889,14 @@ bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity 
     }
     else
     {
-        s32 currentPosX = pokemon->posWorld.x;
-        s32 currentPosY = pokemon->posWorld.y;
-        s32 adjacentTileOffsetX = gAdjacentTileOffsets[facingDir].x;
-        s32 adjacentTileOffsetY = gAdjacentTileOffsets[facingDir].y;
+        s32 currentPosX = pokemon->pos.x;
+        s32 currentPosY = pokemon->pos.y;
+        s32 adjacentTileOffsetX = gAdjacentTileOffsets[direction].x;
+        s32 adjacentTileOffsetY = gAdjacentTileOffsets[direction].y;
         s32 i;
         for (i = 0; i <= effectiveMaxRange; i++)
         {
-            struct MapTile *mapTile;
+            struct Tile *mapTile;
             currentPosX += adjacentTileOffsetX;
             currentPosY += adjacentTileOffsetY;
             if (currentPosX <= 0 || currentPosY <= 0 ||
@@ -905,16 +905,16 @@ bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity 
                 break;
             }
             while (0); // Extra label needed to swap branch locations in ASM.
-            mapTile = GetMapTile_1(currentPosX, currentPosY);
-            if (!(mapTile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+            mapTile = GetTile(currentPosX, currentPosY);
+            if (!(mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
             {
                 break;
             }
-            if (mapTile->pokemon == targetPokemon)
+            if (mapTile->monster == targetPokemon)
             {
                 return TRUE;
             }
-            if (mapTile->pokemon != NULL)
+            if (mapTile->monster != NULL)
             {
                 break;
             }

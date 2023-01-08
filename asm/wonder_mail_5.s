@@ -114,7 +114,7 @@ _08030EE8:
 	ldr r1, _08030F54
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sprintf_2
+	bl sprintfStatic
 	ldr r0, [r5]
 	ldr r3, [r0, 0x10]
 	mov r0, r8

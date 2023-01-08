@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-bool8 HasItem(struct DungeonEntity *pokemon, u8 itemIndex);
+bool8 HasHeldItem(struct Entity *pokemon, u8 id);
 
 #endif

@@ -4,11 +4,11 @@
 #include "item.h"
 
 
-s16 sub_8094828(u16 r0, u8 itemIndex)
+s16 sub_8094828(u16 r0, u8 id)
 {
-    if(itemIndex != 0)
+    if(id != 0)
     {
-        if(GetItemType(itemIndex) == ITEM_TYPE_ORB)
+        if(GetItemCategory(id) == CATEGORY_ORBS)
             return 0x223;
         else
             return 0x224;

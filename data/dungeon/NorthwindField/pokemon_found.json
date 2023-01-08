@@ -4,27 +4,27 @@
             "name": "pokemon_found_out395",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWAG",
+                    "species": "MONSTER_POLIWAG",
                     "level": 50,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_JYNX",
+                    "species": "MONSTER_JYNX",
                     "level": 32,
                     "probability": 3334
                 },
                 {
-                    "species": "SPECIES_VOLBEAT",
+                    "species": "MONSTER_VOLBEAT",
                     "level": 28,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -34,32 +34,32 @@
             "name": "pokemon_found_out396",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWAG",
+                    "species": "MONSTER_POLIWAG",
                     "level": 50,
                     "probability": 2667
                 },
                 {
-                    "species": "SPECIES_JYNX",
+                    "species": "MONSTER_JYNX",
                     "level": 32,
                     "probability": 2666
                 },
                 {
-                    "species": "SPECIES_AZUMARILL",
+                    "species": "MONSTER_AZUMARILL",
                     "level": 24,
                     "probability": 2000
                 },
                 {
-                    "species": "SPECIES_VOLBEAT",
+                    "species": "MONSTER_VOLBEAT",
                     "level": 28,
                     "probability": 2667
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -69,32 +69,32 @@
             "name": "pokemon_found_out397",
             "pokemon": [
                 {
-                    "species": "SPECIES_JYNX",
+                    "species": "MONSTER_JYNX",
                     "level": 32,
                     "probability": 2667
                 },
                 {
-                    "species": "SPECIES_AZUMARILL",
+                    "species": "MONSTER_AZUMARILL",
                     "level": 24,
                     "probability": 2000
                 },
                 {
-                    "species": "SPECIES_VOLBEAT",
+                    "species": "MONSTER_VOLBEAT",
                     "level": 28,
                     "probability": 2666
                 },
                 {
-                    "species": "SPECIES_CRAWDAUNT",
+                    "species": "MONSTER_CRAWDAUNT",
                     "level": 30,
                     "probability": 2667
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -104,22 +104,22 @@
             "name": "pokemon_found_out398",
             "pokemon": [
                 {
-                    "species": "SPECIES_AZUMARILL",
+                    "species": "MONSTER_AZUMARILL",
                     "level": 24,
                     "probability": 4286
                 },
                 {
-                    "species": "SPECIES_CRAWDAUNT",
+                    "species": "MONSTER_CRAWDAUNT",
                     "level": 30,
                     "probability": 5714
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -129,22 +129,22 @@
             "name": "pokemon_found_out399",
             "pokemon": [
                 {
-                    "species": "SPECIES_DELCATTY",
+                    "species": "MONSTER_DELCATTY",
                     "level": 25,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_CRAWDAUNT",
+                    "species": "MONSTER_CRAWDAUNT",
                     "level": 30,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -154,32 +154,32 @@
             "name": "pokemon_found_out400",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWHIRL",
+                    "species": "MONSTER_POLIWHIRL",
                     "level": 28,
                     "probability": 3200
                 },
                 {
-                    "species": "SPECIES_VAPOREON",
+                    "species": "MONSTER_VAPOREON",
                     "level": 22,
                     "probability": 400
                 },
                 {
-                    "species": "SPECIES_DELCATTY",
+                    "species": "MONSTER_DELCATTY",
                     "level": 25,
                     "probability": 3200
                 },
                 {
-                    "species": "SPECIES_CRAWDAUNT",
+                    "species": "MONSTER_CRAWDAUNT",
                     "level": 30,
                     "probability": 3200
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -189,22 +189,22 @@
             "name": "pokemon_found_out401",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWHIRL",
+                    "species": "MONSTER_POLIWHIRL",
                     "level": 28,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_DELCATTY",
+                    "species": "MONSTER_DELCATTY",
                     "level": 25,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -214,22 +214,22 @@
             "name": "pokemon_found_out402",
             "pokemon": [
                 {
-                    "species": "SPECIES_MUK",
+                    "species": "MONSTER_MUK",
                     "level": 36,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_DELIBIRD",
+                    "species": "MONSTER_DELIBIRD",
                     "level": 26,
                     "probability": 6667
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -239,27 +239,27 @@
             "name": "pokemon_found_out403",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWRATH",
+                    "species": "MONSTER_POLIWRATH",
                     "level": 30,
                     "probability": 4000
                 },
                 {
-                    "species": "SPECIES_MUK",
+                    "species": "MONSTER_MUK",
                     "level": 36,
                     "probability": 2000
                 },
                 {
-                    "species": "SPECIES_DELIBIRD",
+                    "species": "MONSTER_DELIBIRD",
                     "level": 26,
                     "probability": 4000
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -269,32 +269,32 @@
             "name": "pokemon_found_out404",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWRATH",
+                    "species": "MONSTER_POLIWRATH",
                     "level": 30,
                     "probability": 3810
                 },
                 {
-                    "species": "SPECIES_MUK",
+                    "species": "MONSTER_MUK",
                     "level": 36,
                     "probability": 1904
                 },
                 {
-                    "species": "SPECIES_VAPOREON",
+                    "species": "MONSTER_VAPOREON",
                     "level": 22,
                     "probability": 476
                 },
                 {
-                    "species": "SPECIES_DELIBIRD",
+                    "species": "MONSTER_DELIBIRD",
                     "level": 26,
                     "probability": 3810
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -304,32 +304,32 @@
             "name": "pokemon_found_out405",
             "pokemon": [
                 {
-                    "species": "SPECIES_GOLDUCK",
+                    "species": "MONSTER_GOLDUCK",
                     "level": 24,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_POLIWRATH",
+                    "species": "MONSTER_POLIWRATH",
                     "level": 30,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_MUK",
+                    "species": "MONSTER_MUK",
                     "level": 36,
                     "probability": 1429
                 },
                 {
-                    "species": "SPECIES_DELIBIRD",
+                    "species": "MONSTER_DELIBIRD",
                     "level": 26,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -339,32 +339,32 @@
             "name": "pokemon_found_out406",
             "pokemon": [
                 {
-                    "species": "SPECIES_GOLDUCK",
+                    "species": "MONSTER_GOLDUCK",
                     "level": 24,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_MUK",
+                    "species": "MONSTER_MUK",
                     "level": 36,
                     "probability": 1429
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_DELIBIRD",
+                    "species": "MONSTER_DELIBIRD",
                     "level": 26,
                     "probability": 2857
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -374,22 +374,22 @@
             "name": "pokemon_found_out407",
             "pokemon": [
                 {
-                    "species": "SPECIES_GOLDUCK",
+                    "species": "MONSTER_GOLDUCK",
                     "level": 24,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 5000
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -399,42 +399,42 @@
             "name": "pokemon_found_out408",
             "pokemon": [
                 {
-                    "species": "SPECIES_WARTORTLE",
+                    "species": "MONSTER_WARTORTLE",
                     "level": 30,
                     "probability": 2424
                 },
                 {
-                    "species": "SPECIES_GOLDUCK",
+                    "species": "MONSTER_GOLDUCK",
                     "level": 24,
                     "probability": 2424
                 },
                 {
-                    "species": "SPECIES_VAPOREON",
+                    "species": "MONSTER_VAPOREON",
                     "level": 22,
                     "probability": 304
                 },
                 {
-                    "species": "SPECIES_CROCONAW",
+                    "species": "MONSTER_CROCONAW",
                     "level": 28,
                     "probability": 2424
                 },
                 {
-                    "species": "SPECIES_FERALIGATR",
+                    "species": "MONSTER_FERALIGATR",
                     "level": 60,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 2424
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -444,42 +444,42 @@
             "name": "pokemon_found_out409",
             "pokemon": [
                 {
-                    "species": "SPECIES_WARTORTLE",
+                    "species": "MONSTER_WARTORTLE",
                     "level": 30,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_GOLDUCK",
+                    "species": "MONSTER_GOLDUCK",
                     "level": 24,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_CROCONAW",
+                    "species": "MONSTER_CROCONAW",
                     "level": 28,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_FERALIGATR",
+                    "species": "MONSTER_FERALIGATR",
                     "level": 60,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_ABSOL",
+                    "species": "MONSTER_ABSOL",
                     "level": 45,
                     "probability": 588
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -489,37 +489,37 @@
             "name": "pokemon_found_out410",
             "pokemon": [
                 {
-                    "species": "SPECIES_WARTORTLE",
+                    "species": "MONSTER_WARTORTLE",
                     "level": 30,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_CROCONAW",
+                    "species": "MONSTER_CROCONAW",
                     "level": 28,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_FERALIGATR",
+                    "species": "MONSTER_FERALIGATR",
                     "level": 60,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_ABSOL",
+                    "species": "MONSTER_ABSOL",
                     "level": 45,
                     "probability": 769
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -529,37 +529,37 @@
             "name": "pokemon_found_out411",
             "pokemon": [
                 {
-                    "species": "SPECIES_CROCONAW",
+                    "species": "MONSTER_CROCONAW",
                     "level": 28,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_FERALIGATR",
+                    "species": "MONSTER_FERALIGATR",
                     "level": 60,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_POLITOED",
+                    "species": "MONSTER_POLITOED",
                     "level": 28,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_SUICUNE",
+                    "species": "MONSTER_SUICUNE",
                     "level": 45,
                     "probability": 10000
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_ABSOL",
+                    "species": "MONSTER_ABSOL",
                     "level": 45,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }

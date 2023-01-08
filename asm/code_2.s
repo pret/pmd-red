@@ -26,7 +26,7 @@ LoadTitleScreen:
 	bl MemoryAlloc
 	adds r7, r0, 0
 	movs r0, 0x3
-	bl RandomCapped
+	bl RandInt
 	adds r4, r0, 0
 	lsls r4, 2
 	adds r5, r4
@@ -1262,7 +1262,7 @@ sub_8001064:
 	movs r0, 0x4
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	mov r0, sp
 	adds r1, r4, 0
 	bl CopyStringtoBuffer
@@ -1293,7 +1293,7 @@ _080010AE:
 	movs r0, 0x6
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	mov r0, sp
 	adds r1, r4, 0
 	bl CopyStringtoBuffer
@@ -1495,7 +1495,7 @@ sub_8001248:
 	movs r5, 0
 _0800124E:
 	movs r0, 0x64
-	bl RandomCapped
+	bl RandInt
 	cmp r0, 0x31
 	bgt _08001266
 	lsls r0, r4, 2

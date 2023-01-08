@@ -6,11 +6,11 @@
 #include "dungeon_pokemon_attributes.h"
 #include "moves.h"
 
-s16 GetMoveTargetingFlagsForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *move, bool32 isAI)
+s16 GetMoveTargetAndRangeForPokemon(struct Entity *pokemon, struct Move *move, bool32 isAI)
 {
-    if (move->moveID == MOVE_CURSE && !isAI && !HasType(pokemon, TYPE_GHOST))
+    if (move->id == MOVE_CURSE && !isAI && !MonsterIsType(pokemon, TYPE_GHOST))
     {
         return TARGETING_FLAG_BOOST_SELF | TARGETING_FLAG_TARGET_SELF;
     }
-    return GetMoveTargetingFlags(move, isAI);
+    return GetMoveTargetAndRange(move, isAI);
 }

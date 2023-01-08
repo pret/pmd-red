@@ -24,29 +24,29 @@ extern u8 gUnknown_810AC68; // 0x8
 extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
 
-extern void sub_80709C8(u8 *buffer, struct DungeonEntityData *entityData);
+extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityData);
 void FadeOutAllMusic(u16);
 void xxx_call_stop_bgm(void);
 
-void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntity * enity)
+void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * enity)
 {
   u8 *defPtr;
   u8 *attackPtr;
   u8 *spDefPtr;
-  struct DungeonEntityData * entityData;
-  struct DungeonEntityData * targetEntityData;
+  struct EntityInfo * entityData;
+  struct EntityInfo * targetEntityData;
   u8 *spAttPtr;
   u8 buffer [0x14];
   struct unkDungeonGlobal_unk1CE98_sub *temp;
-  u8 *itemIndex;
+  u8 *id;
   s32 param_0_s32 = param_0;
 
-  temp = &gDungeonGlobalData->unk1CE98;
+  temp = &gDungeon->unk1CE98;
   targetEntityData = NULL;
-  if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_POKEMON)) {
-    targetEntityData = target->entityData;
+  if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
+    targetEntityData = target->info;
   }
-  entityData = enity->entityData;
+  entityData = enity->info;
   if (targetEntityData != NULL) {
     sub_80709C8(buffer, targetEntityData);
     CopyStringtoBuffer(temp->buffer1, buffer);
@@ -58,14 +58,14 @@ void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntit
   CopyStringtoBuffer(temp->buffer2, buffer);
   temp->unk14 = param_0_s32;
   temp->heldItem = entityData->heldItem;
-  temp->expPoints = entityData->expPoints;
+  temp->exp = entityData->exp;
   temp->level = entityData->level;
-  temp->maxHP = entityData->maxHP;
-  temp->attack = entityData->attack;
-  temp->specialAttack = entityData->specialAttack;
-  temp->defense = entityData->defense;
-  temp->specialDefense = entityData->specialDefense;
-  temp->dungeonLocation = gDungeonGlobalData->dungeonLocation;
+  temp->maxHPStat = entityData->maxHPStat;
+  temp->atk = entityData->atk;
+  temp->spAtk = entityData->spAtk;
+  temp->def = entityData->def;
+  temp->spDef = entityData->spDef;
+  temp->dungeonLocation = gDungeon->dungeonLocation;
   attackPtr = &temp->attBoost;
   *attackPtr = 0;
   spAttPtr = &temp->spAttBoost;
@@ -74,24 +74,24 @@ void sub_8083AB0(s16 param_0, struct DungeonEntity * target, struct DungeonEntit
   *defPtr = 0;
   spDefPtr = &temp->spDefBoost;
   *spDefPtr = 0;
-  if ((entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS) && !(entityData->heldItem.itemFlags & ITEM_FLAG_STICKY)) {
-    itemIndex = &entityData->heldItem.itemIndex;
-    if (*itemIndex == ITEM_ID_POWER_BAND) {
+  if ((entityData->heldItem.flags & ITEM_FLAG_EXISTS) && !(entityData->heldItem.flags & ITEM_FLAG_STICKY)) {
+    id = &entityData->heldItem.id;
+    if (*id == ITEM_POWER_BAND) {
       *attackPtr += gUnknown_810AC60;
     }
-    if (*itemIndex == ITEM_ID_MUNCH_BELT) {
+    if (*id == ITEM_MUNCH_BELT) {
       *attackPtr += gUnknown_810AC68;
     }
-    if (*itemIndex == ITEM_ID_SPECIAL_BAND) {
+    if (*id == ITEM_SPECIAL_BAND) {
       *spAttPtr += gUnknown_810AC62;
     }
-    if (*itemIndex == ITEM_ID_MUNCH_BELT) {
+    if (*id == ITEM_MUNCH_BELT) {
       *spAttPtr += gUnknown_810AC68;
     }
-    if (*itemIndex == ITEM_ID_DEF_SCARF) {
+    if (*id == ITEM_DEF_SCARF) {
       *defPtr += gUnknown_810AC64;
     }
-    if (*itemIndex == ITEM_ID_ZINC_BAND) {
+    if (*id == ITEM_ZINC_BAND) {
       *spDefPtr += gUnknown_810AC66;
     }
   }
@@ -101,7 +101,7 @@ bool8 sub_8083C24(void)
 {
   struct unkDungeonGlobal_unk1CE98_sub *temp;
 
-  temp = &gDungeonGlobalData->unk1CE98;
+  temp = &gDungeon->unk1CE98;
 
   if (temp->unk14 < 0x226) {
     return TRUE;
@@ -115,7 +115,7 @@ bool8 sub_8083C50(void)
 {
   struct unkDungeonGlobal_unk1CE98_sub *temp;
 
-  temp = &gDungeonGlobalData->unk1CE98;
+  temp = &gDungeon->unk1CE98;
 
   if ((temp->unk14 == 0x227) || (temp->unk14 == 0x22A) || (temp->unk14 == 0x228)) {
     return TRUE;
@@ -129,10 +129,10 @@ bool8 sub_8083C88(u8 param_1)
 {
   struct unkDungeonGlobal_unk1CE98_sub *temp;
 
-  temp = &gDungeonGlobalData->unk1CE98;
+  temp = &gDungeon->unk1CE98;
 
-  if (((GetUnk9(gDungeonGlobalData->dungeonLocation.dungeonIndex) == 0) && 
-      ((gDungeonGlobalData->unk65C != 0) || (param_1 != 0))) ||
+  if (((GetUnk9(gDungeon->dungeonLocation.id) == 0) && 
+      ((gDungeon->unk65C != 0) || (param_1 != 0))) ||
      (temp->unk14 != 0x227)) {
     return TRUE;
   }
@@ -191,19 +191,19 @@ void sub_8083D88(void)
 void sub_8083D98(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
-  gDungeonGlobalData->unk66F = 0;
-  gDungeonGlobalData->unk672 = 0;
-  gDungeonGlobalData->unk699 = 0;
-  gDungeonGlobalData->unk66A = 999;
+  gDungeon->unk66F = 0;
+  gDungeon->unk672 = 0;
+  gDungeon->unk699 = 0;
+  gDungeon->unk66A = 999;
 }
 
 void sub_8083DE0(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
-  gDungeonGlobalData->unk66F = 0;
-  gDungeonGlobalData->unk672 = 0;
-  gDungeonGlobalData->unk699 = 0;
-  gDungeonGlobalData->unk66A = 999;
+  gDungeon->unk66F = 0;
+  gDungeon->unk672 = 0;
+  gDungeon->unk699 = 0;
+  gDungeon->unk66A = 999;
 }
 
 void sub_8083E28(void)
@@ -232,22 +232,22 @@ bool8 IsFanfareSEPlaying_2(u16 songIndex)
 
 void DungeonStartNewBGM(u16 songIndex)
 {
-  gDungeonGlobalData->musPlayer.queuedSongIndex = songIndex;
-  gDungeonGlobalData->musPlayer.fadeInSpeed = 0;
+  gDungeon->musPlayer.queuedSongIndex = songIndex;
+  gDungeon->musPlayer.fadeInSpeed = 0;
 }
 
 void DungeonFadeInNewBGM(u16 songIndex, u32 fadeInSpeed)
 {
-  gDungeonGlobalData->musPlayer.queuedSongIndex = 0x80 << 8 | songIndex;
-  gDungeonGlobalData->musPlayer.fadeInSpeed = fadeInSpeed;
+  gDungeon->musPlayer.queuedSongIndex = 0x80 << 8 | songIndex;
+  gDungeon->musPlayer.fadeInSpeed = fadeInSpeed;
 }
 
 void DungeonFadeOutBGM(u16 speed)
 {
   FadeOutAllMusic(speed);
-  gDungeonGlobalData->musPlayer.songIndex = 999;
-  gDungeonGlobalData->musPlayer.pastSongIndex = 999;
-  gDungeonGlobalData->musPlayer.queuedSongIndex = 999;
+  gDungeon->musPlayer.songIndex = 999;
+  gDungeon->musPlayer.pastSongIndex = 999;
+  gDungeon->musPlayer.queuedSongIndex = 999;
 }
 
 void DungeonStopBGM(void)
@@ -263,7 +263,7 @@ u16 DungeonGetCurrentBGSong(void)
 
 void StopDungeonBGM(void)
 {
-  struct DungeonMusicPlayer *temp = &gDungeonGlobalData->musPlayer;
+  struct DungeonMusicPlayer *temp = &gDungeon->musPlayer;
   temp->state = 0;
   temp->fadeOutSpeed = 0;
   temp->songIndex = 999;
@@ -283,18 +283,18 @@ void UpdateDungeonMusic(void)
   s32 songIndex1;
   struct DungeonMusicPlayer *musPlayer;
   
-  musPlayer = &gDungeonGlobalData->musPlayer;
+  musPlayer = &gDungeon->musPlayer;
 
-  uVar3 = &gDungeonGlobalData->unk66A;
+  uVar3 = &gDungeon->unk66A;
   songIndex1 = *uVar3;
   if (songIndex1 == 999) {
-    if (gDungeonGlobalData->unk66F != 0) {
+    if (gDungeon->unk66F != 0) {
         songIndex1 = MUS_STOP_THIEF;
     }
-    else if (gDungeonGlobalData->unk672 != 0) {
+    else if (gDungeon->unk672 != 0) {
         songIndex1 = MUS_MONSTER_HOUSE;
       }
-    else if (gDungeonGlobalData->unk699 != 0) {
+    else if (gDungeon->unk699 != 0) {
         songIndex1 = MUS_KECLEON_SHOP;
     }
     else {

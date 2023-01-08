@@ -297,19 +297,19 @@ const u8 unknownPersonality[] =
 const s16 gStarters[NUM_PERSONALITIES][2] =
 {
     //          MALE / FEMALE
-    [HARDY]  =  {SPECIES_CHARMANDER, SPECIES_PIKACHU},
-    [DOCILE] =  {SPECIES_BULBASAUR, SPECIES_CHIKORITA},
-    [BRAVE]  =  {SPECIES_MACHOP, SPECIES_CHARMANDER},
-    [JOLLY]  =  {SPECIES_SQUIRTLE, SPECIES_TOTODILE},
-    [IMPISH] =  {SPECIES_PIKACHU, SPECIES_CUBONE},
-    [NAIVE]  =  {SPECIES_TOTODILE, SPECIES_EEVEE},
-    [TIMID]  =  {SPECIES_CYNDAQUIL, SPECIES_MUDKIP},
-    [HASTY]  =  {SPECIES_TORCHIC, SPECIES_SKITTY},
-    [SASSY]  =  {SPECIES_TREECKO, SPECIES_TORCHIC},
-    [CALM]   =  {SPECIES_MUDKIP, SPECIES_BULBASAUR},
-    [RELAXED] = {SPECIES_PSYDUCK, SPECIES_SQUIRTLE},
-    [LONELY]  = {SPECIES_CUBONE, SPECIES_PSYDUCK},
-    [QUIRKY]  = {SPECIES_MEOWTH, SPECIES_TREECKO}
+    [HARDY]  =  {MONSTER_CHARMANDER, MONSTER_PIKACHU},
+    [DOCILE] =  {MONSTER_BULBASAUR, MONSTER_CHIKORITA},
+    [BRAVE]  =  {MONSTER_MACHOP, MONSTER_CHARMANDER},
+    [JOLLY]  =  {MONSTER_SQUIRTLE, MONSTER_TOTODILE},
+    [IMPISH] =  {MONSTER_PIKACHU, MONSTER_CUBONE},
+    [NAIVE]  =  {MONSTER_TOTODILE, MONSTER_EEVEE},
+    [TIMID]  =  {MONSTER_CYNDAQUIL, MONSTER_MUDKIP},
+    [HASTY]  =  {MONSTER_TORCHIC, MONSTER_SKITTY},
+    [SASSY]  =  {MONSTER_TREECKO, MONSTER_TORCHIC},
+    [CALM]   =  {MONSTER_MUDKIP, MONSTER_BULBASAUR},
+    [RELAXED] = {MONSTER_PSYDUCK, MONSTER_SQUIRTLE},
+    [LONELY]  = {MONSTER_CUBONE, MONSTER_PSYDUCK},
+    [QUIRKY]  = {MONSTER_MEOWTH, MONSTER_TREECKO}
 };
 
 
@@ -366,16 +366,16 @@ const char filler[] = "pksdir0"; // CHUNSOFT inserted for aligning data
 
 const s16 gPartners[NUM_PARTNERS] =
 {
-    SPECIES_CHARMANDER,
-    SPECIES_BULBASAUR,
-    SPECIES_SQUIRTLE,
-    SPECIES_PIKACHU,
-    SPECIES_CHIKORITA,
-    SPECIES_TOTODILE,
-    SPECIES_CYNDAQUIL,
-    SPECIES_TORCHIC,
-    SPECIES_TREECKO,
-    SPECIES_MUDKIP
+    MONSTER_CHARMANDER,
+    MONSTER_BULBASAUR,
+    MONSTER_SQUIRTLE,
+    MONSTER_PIKACHU,
+    MONSTER_CHIKORITA,
+    MONSTER_TOTODILE,
+    MONSTER_CYNDAQUIL,
+    MONSTER_TORCHIC,
+    MONSTER_TREECKO,
+    MONSTER_MUDKIP
 };
 
 const struct UnkTextStruct2 gUnknown_80F4278 =
@@ -494,8 +494,8 @@ u8 HandleTestTrackerState(void)
         AdvanceToTestEnd();
         break;
     case PERSONALITY_TEST_END:
-        iVar1 = Random() * gPersonalityTestTracker->FrameCounter;
-        sub_8094D28(Random());
+        iVar1 = Rand32Bit() * gPersonalityTestTracker->FrameCounter;
+        sub_8094D28(Rand32Bit());
 
         for(counter = 0; counter < NUM_PERSONALITIES; counter++){
             iVar1 *= (gPersonalityTestTracker->NatureTotals[counter] + counter + 3);
@@ -536,7 +536,7 @@ void GenerateNewQuestionOrGender(void)
   {
     do {
         // Generate new question number and make sure we haven't done it
-        newQuestion = RandomCapped(NUM_QUIZ_QUESTIONS);
+        newQuestion = RandInt(NUM_QUIZ_QUESTIONS);
         gPersonalityTestTracker->currQuestionIndex = newQuestion;
     } while (gPersonalityTestTracker->QuestionTracker[newQuestion] == 1);
 
@@ -613,7 +613,7 @@ void RevealPersonality(void)
   s32 currentNature;
   s32 counter;
 
-  gPersonalityTestTracker->playerNature = RandomCapped(NUM_PERSONALITIES);
+  gPersonalityTestTracker->playerNature = RandInt(NUM_PERSONALITIES);
   currentNature = gPersonalityTestTracker->playerNature;
 
   for(counter = 0; counter < NUM_PERSONALITIES - 1; counter++){
@@ -734,7 +734,7 @@ void PromptNewQuestion(void)
 
 void PrintPersonalityTypeDescription(void)
 {
-  CopySpeciesNametoBuffer(gAvailablePokemonNames, gPersonalityTestTracker->StarterID);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames, gPersonalityTestTracker->StarterID);
   sub_80141B4(gPersonalityTypeDescriptionTable[gPersonalityTestTracker->playerNature],0,
               0,0x101);
 }

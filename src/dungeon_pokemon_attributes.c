@@ -22,13 +22,13 @@ extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_80FC31C;
 extern u32 gUnknown_80FCEFC;
 extern u32 gUnknown_80FC2FC;
-extern bool8 sub_805744C(struct DungeonEntity *, struct PokemonMove *, u32);
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-extern void sub_80522F4(struct DungeonEntity *r1, struct DungeonEntity *r2, u32);
+extern bool8 sub_805744C(struct Entity *, struct Move *, u32);
+extern void SetMessageArgument(char[], struct Entity*, u32);
+extern void sub_80522F4(struct Entity *r1, struct Entity *r2, u32);
 
-bool8 HasSafeguardStatus(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+bool8 HasSafeguardStatus(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
-  if (target->entityData->protectionStatus == PROTECTION_STATUS_SAFEGUARD) {
+  if (target->info->protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,gUnknown_80FC2FC);
@@ -38,9 +38,9 @@ bool8 HasSafeguardStatus(struct DungeonEntity * pokemon, struct DungeonEntity * 
   return FALSE;
 }
 
-bool8 sub_8071728(struct DungeonEntity * pokemon, struct DungeonEntity * target, bool8 displayMessage)
+bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
-  if (target->entityData->protectionStatus == PROTECTION_STATUS_MIST) {
+  if (target->info->protectionStatus == STATUS_MIST) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames, target, 0);
       sub_80522F4(pokemon, target, gUnknown_80FC31C);
@@ -59,34 +59,34 @@ bool8 sub_8071728(struct DungeonEntity * pokemon, struct DungeonEntity * target,
   return FALSE;
 }
 
-bool8 sub_80717A4(struct DungeonEntity *pokemon, u16 moveID)
+bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
 {
-  struct DungeonEntityData * entityData;
+  struct EntityInfo * entityData;
   s32 iVar3;
 
-  entityData = pokemon->entityData;
-  if ((entityData->sleepStatus != SLEEP_STATUS_SLEEP) && (entityData->sleepStatus != SLEEP_STATUS_NAPPING) && (entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE)) {
+  entityData = pokemon->info;
+  if ((entityData->sleep != STATUS_SLEEP) && (entityData->sleep != STATUS_NAPPING) && (entityData->sleep != STATUS_NIGHTMARE)) {
       return FALSE;
   }
   else
   {
     // Pin this register to match
-    register struct PokemonMove *pokeMove asm("r4");
+    register struct Move *pokeMove asm("r4");
 
-    struct PokemonMove *pokeMove2; // some reason uses another pointer to same struct
+    struct Move *pokeMove2; // some reason uses another pointer to same struct
 
     for(iVar3 = 0, pokeMove = entityData->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
     {
-      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityData->isLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED))))
+      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityData->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
             if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))
-                    if(pokeMove->moveID == moveID)
+                    if(pokeMove->id == moveID)
                         return TRUE;
     }
     return FALSE;
   }
 }
 
-bool8 HasAbility(struct DungeonEntity *pokemon, u8 ability)
+bool8 HasAbility(struct Entity *pokemon, u8 ability)
 {
     if (!EntityExists(pokemon))
     {
@@ -94,8 +94,8 @@ bool8 HasAbility(struct DungeonEntity *pokemon, u8 ability)
     }
     else
     {
-        struct DungeonEntityData *pokemonData = pokemon->entityData;
-        if (pokemonData->abilities[0] == ability || pokemonData->abilities[1] == ability)
+        struct EntityInfo *pokemonInfo = pokemon->info;
+        if (pokemonInfo->abilities[0] == ability || pokemonInfo->abilities[1] == ability)
         {
             return TRUE;
         }
@@ -103,30 +103,30 @@ bool8 HasAbility(struct DungeonEntity *pokemon, u8 ability)
     }
 }
 
-bool8 HasType(struct DungeonEntity *pokemon, u8 type)
+bool8 MonsterIsType(struct Entity *pokemon, u8 type)
 {
-    struct DungeonEntityData *pokemonData = pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
     if (type == TYPE_NONE)
     {
         return FALSE;
     }
-    if (pokemonData->types[0] == type)
+    if (pokemonInfo->types[0] == type)
     {
         return TRUE;
     }
-    if (pokemonData->types[1] == type)
+    if (pokemonInfo->types[1] == type)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 CanSeeInvisible(struct DungeonEntity *pokemon)
+bool8 CanSeeInvisibleMonsters(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (pokemonData->eyesightStatus != EYESIGHT_STATUS_EYEDROPS)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if (pokemonInfo->eyesightStatus != STATUS_EYEDROPS)
     {
-        if (!HasItem(pokemon, ITEM_ID_GOGGLE_SPECS))
+        if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
             return FALSE;
         else
             return TRUE;
@@ -135,74 +135,74 @@ bool8 CanSeeInvisible(struct DungeonEntity *pokemon)
         return TRUE;
 }
 
-bool8 HasTactic(struct DungeonEntity *pokemon, u8 tactic)
+bool8 HasTactic(struct Entity *pokemon, u8 tactic)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (pokemonData->isLeader)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if (pokemonInfo->isTeamLeader)
     {
         bool8 isGoTheOtherWay = tactic == TACTIC_GO_THE_OTHER_WAY;
         return isGoTheOtherWay;
     }
-    return pokemonData->tactic == tactic;
+    return pokemonInfo->tactic == tactic;
 }
 
-bool8 HasIQSkill(struct DungeonEntity *pokemon, u8 IQSkill)
+bool8 IQSkillIsEnabled(struct Entity *pokemon, u8 IQSkill)
 {
-    return IsIQSkillSet(pokemon->entityData->IQSkillsEnabled, 1 << IQSkill);
+    return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill);
 }
 
-bool8 HasIQSkillPair(struct DungeonEntity *pokemon, u8 IQSkill1, u8 IQSkill2)
+bool8 IQSkillPairIsEnabled(struct Entity *pokemon, u8 IQSkill1, u8 IQSkill2)
 {
-    return IsIQSkillSet(pokemon->entityData->IQSkillsEnabled, 1 << IQSkill1 | 1 << IQSkill2);
+    return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill1 | 1 << IQSkill2);
 }
 
-void LoadIQSkills(struct DungeonEntity *pokemon)
+void LoadIQSkills(struct Entity *pokemon)
 {
   u8 *iVar2;
   s32 IQSkill;
-  struct DungeonEntityData *pokemonData;
+  struct EntityInfo *pokemonInfo;
 
-  pokemonData = pokemon->entityData;
-  if (pokemonData->isEnemy) {
-    iVar2 = pokemonData->IQSkillsEnabled;
-    SetIQSkill(iVar2, IQ_SKILL_STATUS_CHECKER);
-    SetIQSkill(iVar2, IQ_SKILL_PP_CHECKER);
-    SetIQSkill(iVar2, IQ_SKILL_ITEM_CATCHER);
-    if (pokemonData->isBoss)
-      SetIQSkill(iVar2, IQ_SKILL_SELF_CURER);
-    if (pokemonData->level >= *gItemMasterMinWildLevel)
-      SetIQSkill(iVar2, IQ_SKILL_ITEM_MASTER);
-    pokemonData->tactic = TACTIC_GO_AFTER_FOES;
+  pokemonInfo = pokemon->info;
+  if (pokemonInfo->isNotTeamMember) {
+    iVar2 = pokemonInfo->IQSkillFlags;
+    SetIQSkill(iVar2, IQ_STATUS_CHECKER);
+    SetIQSkill(iVar2, IQ_PP_CHECKER);
+    SetIQSkill(iVar2, IQ_ITEM_CATCHER);
+    if (pokemonInfo->bossFlag)
+      SetIQSkill(iVar2, IQ_SELF_CURER);
+    if (pokemonInfo->level >= *gItemMasterMinWildLevel)
+      SetIQSkill(iVar2, IQ_ITEM_MASTER);
+    pokemonInfo->tactic = TACTIC_GO_AFTER_FOES;
   }
   else {
-    pokemonData->IQSkillsEnabled[0] = 0;
-    pokemonData->IQSkillsEnabled[1] = 0;
-    pokemonData->IQSkillsEnabled[2] = 0;
-    for(IQSkill = IQ_SKILL_TYPE_ADVANTAGE_MASTER; IQSkill < NUM_IQ_SKILLS; IQSkill++)
+    pokemonInfo->IQSkillFlags[0] = 0;
+    pokemonInfo->IQSkillFlags[1] = 0;
+    pokemonInfo->IQSkillFlags[2] = 0;
+    for(IQSkill = IQ_TYPE_ADVANTAGE_MASTER; IQSkill < NUM_IQ_SKILLS; IQSkill++)
     {
-      if (HasIQForSkill(pokemonData->IQ,IQSkill) &&
-            IsIQSkillSet(pokemonData->IQSkillsSelected, 1 << IQSkill))
+      if (HasIQForSkill(pokemonInfo->IQ,IQSkill) &&
+            IsIQSkillSet(pokemonInfo->IQSkillMenuFlags, 1 << IQSkill))
         {
-            SetIQSkill(pokemonData->IQSkillsEnabled,IQSkill);
+            SetIQSkill(pokemonInfo->IQSkillFlags,IQSkill);
       }
     }
   }
 }
 
-bool8 CanSeeTeammate(struct DungeonEntity * pokemon)
+bool8 CanSeeTeammate(struct Entity * pokemon)
 {
-  struct DungeonEntity *teamMember;
+  struct Entity *teamMember;
   s32 memberIdx;
 
-  if (pokemon->entityData->isEnemy) {
+  if (pokemon->info->isNotTeamMember) {
       return FALSE;
   }
   else
   {
     for(memberIdx = 0; memberIdx < MAX_TEAM_MEMBERS; memberIdx++)
     {
-      teamMember = gDungeonGlobalData->teamPokemon[memberIdx];
-      if (EntityExists(pokemon) && (pokemon != teamMember) && (CanSee(pokemon,teamMember)))
+      teamMember = gDungeon->teamPokemon[memberIdx];
+      if (EntityExists(pokemon) && (pokemon != teamMember) && (CanSeeTarget(pokemon,teamMember)))
       {
         return TRUE;
       }
@@ -211,54 +211,54 @@ bool8 CanSeeTeammate(struct DungeonEntity * pokemon)
   }
 }
 
-u8 GetMoveTypeForPokemon(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove)
+u8 GetMoveTypeForMonster(struct Entity *pokemon, struct Move *pokeMove)
 {
-    if (pokeMove->moveID == MOVE_HIDDEN_POWER)
-        return pokemon->entityData->hiddenPowerType;
+    if (pokeMove->id == MOVE_HIDDEN_POWER)
+        return pokemon->info->hiddenPowerType;
     else
         return GetMoveType(pokeMove);
 }
 
-s32 CalculateMovePower(struct DungeonEntity *pokemon, struct PokemonMove *pokeMove)
+s32 GetMovePower(struct Entity *pokemon, struct Move *pokeMove)
 {
-    if(pokeMove->moveID == MOVE_HIDDEN_POWER)
-        return (pokemon->entityData->hiddenPowerPower + pokeMove->powerBoost);
+    if(pokeMove->id == MOVE_HIDDEN_POWER)
+        return (pokemon->info->hiddenPowerBasePower + pokeMove->ginseng);
     else
-        return (GetMovePower(pokeMove) + pokeMove->powerBoost);
+        return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
 
-bool8 ToolboxEnabled(struct DungeonEntityData *pokemon)
+bool8 ToolboxEnabled(struct EntityInfo *pokemon)
 {
-    if(!IsToolboxEnabled(pokemon->entityID))
+    if(!IsToolboxEnabled(pokemon->id))
         return FALSE;
     return TRUE;
 }
 
-static inline bool8 sub_8071A8C_sub(struct DungeonEntityData *pokemonData)
+static inline bool8 sub_8071A8C_sub(struct EntityInfo *pokemonInfo)
 {
-    if(pokemonData->joinLocation == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
-        pokemonData->joinLocation == DUNGEON_RESCUE_TEAM_BASE)
+    if(pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
+        pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 sub_8071A8C(struct DungeonEntity *pokemon)
+bool8 sub_8071A8C(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData;
+    struct EntityInfo *pokemonInfo;
     if(EntityExists(pokemon))
     {
-        pokemonData = pokemon->entityData;
-        if(pokemonData->clientType != CLIENT_TYPE_CLIENT)
+        pokemonInfo = pokemon->info;
+        if(pokemonInfo->clientType != CLIENT_TYPE_CLIENT)
         {
-            if(!sub_8071A8C_sub(pokemonData))
+            if(!sub_8071A8C_sub(pokemonInfo))
                 return TRUE;
         }
     }
     return FALSE;
 }
 
-bool8 SetVisualFlags(struct DungeonEntityData *entityData, u16 newFlag, bool8 param_3)
+bool8 SetVisualFlags(struct EntityInfo *entityData, u16 newFlag, bool8 param_3)
 { 
   if ((entityData->visualFlags & newFlag)) {
     entityData->previousVisualFlags = newFlag | entityData->previousVisualFlags;

@@ -36,43 +36,43 @@ extern void UseAttack(u32);
 
 extern void sub_8071B48(void);
 extern void TriggerWeatherAbilities(void);
-extern void sub_8074094(struct DungeonEntity *);
-extern void sub_8071DA4(struct DungeonEntity *);
-extern u8 sub_8072CF4(struct DungeonEntity *);
-extern void TickStatusHeal(struct DungeonEntity *);
+extern void sub_8074094(struct Entity *);
+extern void sub_8071DA4(struct Entity *);
+extern u8 sub_8072CF4(struct Entity *);
+extern void TickStatusHeal(struct Entity *);
 
 void sub_8044820(void)
 {
   s32 movSpeed;
-  struct DungeonEntityData *entityData;
-  struct DungeonEntityData *entityData2;
-  struct DungeonEntity * entity;
-  struct DungeonEntity * entity2;
+  struct EntityInfo *entityData;
+  struct EntityInfo *entityData2;
+  struct Entity * entity;
+  struct Entity * entity2;
   s32 index;
   
   for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
-    entity = gDungeonGlobalData->wildPokemon[index];
+    entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
       if (sub_8044B28()) break;
-      entityData = entity->entityData;
-      gDungeonGlobalData->unkB8 = entity;
+      entityData = entity->info;
+      gDungeon->unkB8 = entity;
       TriggerWeatherAbilities();
-      if ((entityData->flags & MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED) == 0) {
+      if ((entityData->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) == 0) {
         if ((u16)(entityData->flags & MOVEMENT_FLAG_UNK_14) != 0) {
             entityData->flags &= ~(MOVEMENT_FLAG_UNK_14);
         }
         else
         {
-          entityData->movingIntoTarget = FALSE;
-          movSpeed = GetMovementSpeed(entity);
-          if (gSpeedTurns[movSpeed][gDungeonGlobalData->speedTurnCounter] != 0) {
+          entityData->aiNextToTarget = FALSE;
+          movSpeed = GetSpeedStatus(entity);
+          if (gSpeedTurns[movSpeed][gDungeon->fractionalTurn] != 0) {
             if (!entityData->attacking) {
-              entityData->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED);
+              entityData->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
               entityData->recalculateFollow = FALSE;
               TickStatusHeal(entity);
               if (EntityExists(entity)) {
                 sub_8071DA4(entity);
-                DecideAction(entity, 0);
+                RunMonsterAI(entity, 0);
                 if (sub_8044B28()) break;
                 sub_8072CF4(entity);
                 sub_8086AC0();
@@ -88,45 +88,45 @@ void sub_8044820(void)
   if (sub_8044B28() == 0) {
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
-      entity2 = gDungeonGlobalData->wildPokemon[index];
-      if ((EntityExists(entity2)) && (entityData2 = entity2->entityData, entityData2->movingIntoTarget))
+      entity2 = gDungeon->wildPokemon[index];
+      if ((EntityExists(entity2)) && (entityData2 = entity2->info, entityData2->aiNextToTarget))
       {
         sub_8074094(entity2);
         if (EntityExists(entity2)) {
           sub_8071DA4(entity2);
-          entityData2->movingIntoTarget = FALSE;
+          entityData2->aiNextToTarget = FALSE;
         }
       }
     }
   }
 }
 
-void CheckElectricAbilities(void)
+void TrySpawnMonsterAndActivatePlusMinus(void)
 {
-  struct DungeonEntityData * entityData;
-  struct DungeonEntityData * entityData2;
-  struct DungeonEntity *entity;
+  struct EntityInfo * entityData;
+  struct EntityInfo * entityData2;
+  struct Entity *entity;
   u32 isNotEnemy;
   s32 index;
   
-  if (gSpeedTurns[1][gDungeonGlobalData->speedTurnCounter] != 0) {
+  if (gSpeedTurns[1][gDungeon->fractionalTurn] != 0) {
     sub_8071B48();
-    gDungeonGlobalData->hasPlus[0] = FALSE;
-    gDungeonGlobalData->hasPlus[1] = FALSE;
-    gDungeonGlobalData->hasMinus[0] = FALSE;
-    gDungeonGlobalData->hasMinus[1] = FALSE;
-    gDungeonGlobalData->lightningRodPokemon = NULL;
-    gDungeonGlobalData->unk17B38 = 2;
+    gDungeon->plusIsActive[0] = FALSE;
+    gDungeon->plusIsActive[1] = FALSE;
+    gDungeon->minusIsActive[0] = FALSE;
+    gDungeon->minusIsActive[1] = FALSE;
+    gDungeon->lightningRodPokemon = NULL;
+    gDungeon->unk17B38 = 2;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeonGlobalData->allPokemon[index];
+        entity = gDungeon->allPokemon[index];
         if (EntityExists(entity)) {
-            entityData = entity->entityData;
+            entityData = entity->info;
             entityData2 = entityData;
             entityData->attacking = FALSE;
 
-            if(entityData->isEnemy)
+            if(entityData->isNotTeamMember)
             {
                 isNotEnemy = FALSE;
             }
@@ -135,14 +135,14 @@ void CheckElectricAbilities(void)
             }
 
             if (HasAbility(entity, ABILITY_LIGHTNINGROD)) {
-                gDungeonGlobalData->lightningRodPokemon = entity;
-                gDungeonGlobalData->unk17B38 = entityData2->unk98;
+                gDungeon->lightningRodPokemon = entity;
+                gDungeon->unk17B38 = entityData2->unk98;
             }
             if (HasAbility(entity, ABILITY_MINUS)) {
-                gDungeonGlobalData->hasMinus[isNotEnemy] = TRUE;
+                gDungeon->minusIsActive[isNotEnemy] = TRUE;
             }  
             if (HasAbility(entity, ABILITY_PLUS)) {
-                gDungeonGlobalData->hasPlus[isNotEnemy] = TRUE;
+                gDungeon->plusIsActive[isNotEnemy] = TRUE;
             }
         }
     }
@@ -154,9 +154,9 @@ void sub_8044AB4(void)
 {
   s32 index;
   
-  if (gSpeedTurns[1][gDungeonGlobalData->speedTurnCounter + 1] != 0) {
+  if (gSpeedTurns[1][gDungeon->fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-      if (EntityExists(gDungeonGlobalData->allPokemon[index])) {
+      if (EntityExists(gDungeon->allPokemon[index])) {
         UseAttack(0);
         break;
       }
@@ -169,18 +169,18 @@ void sub_8044AB4(void)
 
 bool8 sub_8044B28(void)
 {
-    if (gDungeonGlobalData->unk4 == 0) {
-        if (GetLeaderEntity() == NULL) {
-            gDungeonGlobalData->unk654 = 1;
+    if (gDungeon->unk4 == 0) {
+        if (GetLeader() == NULL) {
+            gDungeon->unk654 = 1;
         }
-        else if (gDungeonGlobalData->unk2 == 1) {
-            gDungeonGlobalData->unk654 = 2;
+        else if (gDungeon->unk2 == 1) {
+            gDungeon->unk654 = 2;
         }
-        else if (gDungeonGlobalData->unk2 != 2) {
+        else if (gDungeon->unk2 != 2) {
             return FALSE;
         }
         else {
-            gDungeonGlobalData->unk654 = 2;
+            gDungeon->unk654 = 2;
         }
     }
     return TRUE;
@@ -188,7 +188,7 @@ bool8 sub_8044B28(void)
  
 bool8 sub_8044B84(void)
 {
-    if(gDungeonGlobalData->unk10 != 0)
+    if(gDungeon->unk10 != 0)
     {
         return TRUE;
     }
@@ -197,7 +197,7 @@ bool8 sub_8044B84(void)
     }
 }
 
-u8 *sub_8044BA8(u16 param_1, u8 itemIndex)
+u8 *sub_8044BA8(u16 param_1, u8 id)
 {
   u32 uVar3;
   u32 uVar4;
@@ -211,7 +211,7 @@ u8 *sub_8044BA8(u16 param_1, u8 itemIndex)
       uVar4 = 1;
     }
     if ((u8)(uVar4) == 0) {
-        return gActions[GetItemCategory(itemIndex)].useText;
+        return gActions[GetItemActionType(id)].useText;
     }
     else
     {
@@ -222,9 +222,9 @@ u8 *sub_8044BA8(u16 param_1, u8 itemIndex)
 
 void sub_8044C10(u8 param_1)
 {
-    struct DungeonEntityData * entityData = GetLeaderEntityData();
+    struct EntityInfo * entityData = GetLeaderMonster();
 
-    entityData->action.action = DUNGEON_ACTION_NONE;
+    entityData->action.action = ACTION_NOTHING;
 
     if(param_1)
     {
@@ -237,7 +237,7 @@ void sub_8044C10(u8 param_1)
 
 void sub_8044C50(u16 action)
 {
-    struct DungeonEntityData * entityData = GetLeaderEntityData();
+    struct EntityInfo * entityData = GetLeaderMonster();
 
     entityData->action.action = action;
     entityData->action.actionUseIndex = 0;
@@ -246,29 +246,29 @@ void sub_8044C50(u16 action)
     entityData->action.itemTargetPosition.y = -1;
 }
 
-void ResetAction(struct DungeonActionContainer *actionPointer)
+void ClearMonsterActionFields(struct DungeonActionContainer *actionPointer)
 {
-    actionPointer->action = DUNGEON_ACTION_NONE;
+    actionPointer->action = ACTION_NOTHING;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetAction(struct DungeonActionContainer *actionPointer, u16 action)
+void SetMonsterActionFields(struct DungeonActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetWalkAction(struct DungeonActionContainer *actionPointer, s16 species)
+void SetActionPassTurnOrWalk(struct DungeonActionContainer *actionPointer, s16 species)
 {
-    if (GetIsMoving(species))
+    if (CanMove(species))
     {
-        actionPointer->action = DUNGEON_ACTION_WALK;
+        actionPointer->action = ACTION_WALK;
     }
     else
     {
-        actionPointer->action = DUNGEON_ACTION_WAIT;
+        actionPointer->action = ACTION_PASS_TURN;
     }
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;

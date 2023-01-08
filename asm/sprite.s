@@ -1052,7 +1052,7 @@ _08005524:
 _08005542:
 	ldr r0, [r4, 0x28]
 	str r0, [r4, 0x2C]
-	bl Random
+	bl Rand32Bit
 	movs r1, 0x1
 	ands r0, r1
 	strh r0, [r4, 0x4]

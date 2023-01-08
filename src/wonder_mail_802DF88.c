@@ -233,7 +233,7 @@ void sub_802D940(void)
   switch(menuAction)
   {
     case 2:
-        if ((gUnknown_203B2F8->unk9 != 0) && (((mail = &gUnknown_203B490->unkF0[gUnknown_203B2F8->unk10]), mail->mailType > 5) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)))
+        if ((gUnknown_203B2F8->unk9 != 0) && (((mail = &gUnknown_203B490->unkF0[gUnknown_203B2F8->unk10]), mail->mailType > 5) && (gUnknown_203B2F8->unkA == mail->dungeon.id)))
         {
             sub_802D1A0(0x7);
         }
@@ -310,7 +310,7 @@ bool8 sub_802DAA8(void)
     return 1;
   }
   else {
-    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)) return 0;
+    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->unkA == mail->dungeon.id)) return 0;
     return 1;
   }
 }
@@ -330,7 +330,7 @@ _0802DAE8:
     {
       mailType = mail->mailType;
       if (((mailType == 0) || (mailType == WONDER_MAIL_TYPE_THANK_YOU)) ||
-         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->unkA != mail->dungeon.dungeonIndex)))) goto _0802DAE8;
+         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->unkA != mail->dungeon.id)))) goto _0802DAE8;
     }
     return 0;
   }
@@ -430,8 +430,8 @@ void sub_802DC9C(void)
   
   switch(gUnknown_203B2FC->state) {
       case 0:
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8,gUnknown_203B2FC->jobInfo->clientSpecies);
-        CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8,gUnknown_203B2FC->jobInfo->clientSpecies);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,gUnknown_203B2FC->jobInfo->clientSpecies);
+        CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,gUnknown_203B2FC->jobInfo->clientSpecies);
         speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->clientSpecies);
         strcpy(gUnknown_202E1C8 + 0xfffffdd0,speciesText);
         speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->targetSpecies);

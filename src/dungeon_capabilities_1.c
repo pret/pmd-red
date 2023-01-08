@@ -17,27 +17,27 @@
 
 const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
-static inline bool8 JoinLocationCannotUseItems(struct DungeonEntityData *pokemonData)
+static inline bool8 JoinLocationCannotUseItems(struct EntityInfo *pokemonInfo)
 {
-    if (pokemonData->joinLocation == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonData->joinLocation == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 CannotUseItems(struct DungeonEntity *pokemon)
+bool8 CannotUseItems(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (pokemonData->clientType == CLIENT_TYPE_CLIENT
-        || JoinLocationCannotUseItems(pokemonData)
-        || (!pokemonData->isLeader && ShouldAvoidEnemies(pokemon))
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
+        || JoinLocationCannotUseItems(pokemonInfo)
+        || (!pokemonInfo->isTeamLeader && ShouldMonsterRunAway(pokemon))
         || CannotMove(pokemon, FALSE)
-        || CannotAct(pokemon))
+        || HasStatusThatPreventsActing(pokemon))
     {
         return TRUE;
     }
@@ -48,66 +48,66 @@ bool8 CannotUseItems(struct DungeonEntity *pokemon)
     return FALSE;
 }
 
-bool8 CannotAct(struct DungeonEntity *pokemon)
+bool8 HasStatusThatPreventsActing(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if ((pokemonData->sleepStatus != SLEEP_STATUS_SLEEPLESS
-        && pokemonData->sleepStatus != SLEEP_STATUS_NONE)
-        || pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN
-        || pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if ((pokemonInfo->sleep != STATUS_SLEEPLESS
+        && pokemonInfo->sleep != STATUS_NONE)
+        || pokemonInfo->immobilizeStatus == STATUS_FROZEN
+        || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
     {
         return TRUE;
     }
-    if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
+    if (pokemonInfo->chargingStatus == STATUS_BIDE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep)
+bool8 CannotAttack(struct Entity *pokemon, bool8 skipSleep)
 {
-  struct DungeonEntityData *pokemonData = pokemon->entityData;
+  struct EntityInfo *pokemonInfo = pokemon->info;
   if ((skipSleep ||
-      pokemonData->sleepStatus == SLEEP_STATUS_SLEEPLESS ||
-      pokemonData->sleepStatus == SLEEP_STATUS_YAWNING ||
-      pokemonData->sleepStatus == SLEEP_STATUS_NONE) &&
-      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_FROZEN &&
-      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE &&
-      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_WRAPPED_BY_FOE &&
-      pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_PETRIFIED &&
-      pokemonData->volatileStatus != VOLATILE_STATUS_CRINGING &&
-      pokemonData->volatileStatus != VOLATILE_STATUS_PAUSED &&
-      pokemonData->volatileStatus != VOLATILE_STATUS_INFATUATED &&
-      pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_PARALYZED &&
-      !ShouldAvoidEnemies(pokemon)) {
+      pokemonInfo->sleep == STATUS_SLEEPLESS ||
+      pokemonInfo->sleep == STATUS_YAWNING ||
+      pokemonInfo->sleep == STATUS_NONE) &&
+      pokemonInfo->immobilizeStatus != STATUS_FROZEN &&
+      pokemonInfo->immobilizeStatus != STATUS_WRAP &&
+      pokemonInfo->immobilizeStatus != STATUS_WRAPPED &&
+      pokemonInfo->immobilizeStatus != STATUS_PETRIFIED &&
+      pokemonInfo->volatileStatus != STATUS_CRINGE &&
+      pokemonInfo->volatileStatus != STATUS_PAUSED &&
+      pokemonInfo->volatileStatus != STATUS_INFATUATED &&
+      pokemonInfo->nonVolatileStatus != STATUS_PARALYSIS &&
+      !ShouldMonsterRunAway(pokemon)) {
       return FALSE;
   }
   return TRUE;
 }
 
-bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
+bool8 CanMoveInDirection(struct Entity *pokemon, u32 direction)
 {
-    u8 crossableTerrain = GetCrossableTerrain(pokemon->entityData->entityID);
-    struct MapTile *currentMapTile = GetMapTile_1(pokemon->posWorld.x + gAdjacentTileOffsets[facingDir].x,
-        pokemon->posWorld.y + gAdjacentTileOffsets[facingDir].y);
-    if (currentMapTile->tileType & TILE_TYPE_MAP_EDGE || currentMapTile->pokemon != NULL)
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
+    struct Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
+        pokemon->pos.y + gAdjacentTileOffsets[direction].y);
+    if (currentMapTile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL || currentMapTile->monster != NULL)
     {
         return FALSE;
     }
-    if (!IsFixedDungeon())
+    if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->entityData->transformStatus == TRANSFORM_STATUS_MOBILE || HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+        if (pokemon->info->transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER))
+        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE))
+        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
-            if (facingDir & 1)
+            if (direction & 1)
             {
                 // Super Mobile can't break walls diagonally.
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
@@ -118,8 +118,8 @@ bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir)
             }
         }
     }
-    currentMapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-    if (!(currentMapTile->canMoveAdjacent[crossableTerrain] & gDirectionBitMasks_1[facingDir & DIRECTION_MASK]))
+    currentMapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
+    if (!(currentMapTile->walkableNeighborFlags[crossableTerrain] & gDirectionBitMasks_1[direction & DIRECTION_MASK]))
     {
         return FALSE;
     }

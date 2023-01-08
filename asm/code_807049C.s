@@ -14,7 +14,7 @@ sub_8070564:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r5, r0, 0
 	movs r1, 0
 	ldrsh r0, [r4, r1]

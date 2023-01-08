@@ -14,54 +14,54 @@ struct MultiTurnChargeMove
 };
 
 const struct MultiTurnChargeMove gMultiTurnChargeMoves[10] = {
-    {MOVE_SOLARBEAM, CHARGING_STATUS_SOLARBEAM},
-    {MOVE_SKY_ATTACK, CHARGING_STATUS_SKY_ATTACK},
-    {MOVE_RAZOR_WIND, CHARGING_STATUS_RAZOR_WIND},
-    {MOVE_FOCUS_PUNCH, CHARGING_STATUS_FOCUS_PUNCH},
-    {MOVE_SKULL_BASH, CHARGING_STATUS_SKULL_BASH},
-    {MOVE_FLY, CHARGING_STATUS_FLY},
-    {MOVE_BOUNCE, CHARGING_STATUS_BOUNCE},
-    {MOVE_DIVE, CHARGING_STATUS_DIVE},
-    {MOVE_DIG, CHARGING_STATUS_DIG},
-    {MOVE_NONE, CHARGING_STATUS_NONE}
+    {MOVE_SOLARBEAM, STATUS_SOLARBEAM},
+    {MOVE_SKY_ATTACK, STATUS_SKY_ATTACK},
+    {MOVE_RAZOR_WIND, STATUS_RAZOR_WIND},
+    {MOVE_FOCUS_PUNCH, STATUS_FOCUS_PUNCH},
+    {MOVE_SKULL_BASH, STATUS_SKULL_BASH},
+    {MOVE_FLY, STATUS_FLYING},
+    {MOVE_BOUNCE, STATUS_BOUNCING},
+    {MOVE_DIVE, STATUS_DIVING},
+    {MOVE_DIG, STATUS_DIGGING},
+    {MOVE_NOTHING, STATUS_NONE}
 };
 
 const u32 gMultiTurnChargingStatuses[10] = {
-    CHARGING_STATUS_SOLARBEAM,
-    CHARGING_STATUS_SKY_ATTACK,
-    CHARGING_STATUS_RAZOR_WIND,
-    CHARGING_STATUS_FOCUS_PUNCH,
-    CHARGING_STATUS_SKULL_BASH,
-    CHARGING_STATUS_FLY,
-    CHARGING_STATUS_BOUNCE,
-    CHARGING_STATUS_DIVE,
-    CHARGING_STATUS_DIG,
-    CHARGING_STATUS_NONE
+    STATUS_SOLARBEAM,
+    STATUS_SKY_ATTACK,
+    STATUS_RAZOR_WIND,
+    STATUS_FOCUS_PUNCH,
+    STATUS_SKULL_BASH,
+    STATUS_FLYING,
+    STATUS_BOUNCING,
+    STATUS_DIVING,
+    STATUS_DIGGING,
+    STATUS_NONE
 };
 
 ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
 
-u32 sub_8057070(struct PokemonMove *move)
+u32 sub_8057070(struct Move *move)
 {
-    u32 hitCount;
-    hitCount = GetMoveHitCount(move);
-    if(hitCount == 0)
-        return DungeonRandomRange(2, 6);
+    u32 numberOfChainedHits;
+    numberOfChainedHits = GetMoveNumberOfChainedHits(move);
+    if(numberOfChainedHits == 0)
+        return DungeonRandRange(2, 6);
     else
-        return hitCount;
+        return numberOfChainedHits;
 }
 
-bool8 MoveCausesPaused(struct PokemonMove *move)
+bool8 MoveCausesPaused(struct Move *move)
 {
-    if(move->moveID == MOVE_FRENZY_PLANT) return TRUE;
-    if(move->moveID == MOVE_HYDRO_CANNON) return TRUE;
-    if(move->moveID == MOVE_HYPER_BEAM) return TRUE;
-    if(move->moveID == MOVE_BLAST_BURN) return TRUE;
+    if(move->id == MOVE_FRENZY_PLANT) return TRUE;
+    if(move->id == MOVE_HYDRO_CANNON) return TRUE;
+    if(move->id == MOVE_HYPER_BEAM) return TRUE;
+    if(move->id == MOVE_BLAST_BURN) return TRUE;
 
     return FALSE;
 }
 
-bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMove *move)
+bool8 MoveMatchesChargingStatus(struct Entity *pokemon, struct Move *move)
 {
     if (!EntityExists(pokemon))
     {
@@ -69,16 +69,16 @@ bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMov
     }
     else
     {
-        struct DungeonEntityData *pokemonData = pokemon->entityData;
+        struct EntityInfo *pokemonInfo = pokemon->info;
         s32 i;
         for (i = 0; i < 100; i++)
         {
-            if (gMultiTurnChargeMoves[i].moveID == MOVE_NONE)
+            if (gMultiTurnChargeMoves[i].moveID == MOVE_NOTHING)
             {
                 return FALSE;
             }
-            if (move->moveID == gMultiTurnChargeMoves[i].moveID &&
-                pokemonData->chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
+            if (move->id == gMultiTurnChargeMoves[i].moveID &&
+                pokemonInfo->chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
             {
                 return TRUE;
             }
@@ -87,7 +87,7 @@ bool8 MoveMatchesChargingStatus(struct DungeonEntity *pokemon, struct PokemonMov
     }
 }
 
-bool8 IsCharging(struct DungeonEntity *pokemon, bool8 checkCharge)
+bool8 IsCharging(struct Entity *pokemon, bool8 checkCharge)
 {
     if (!EntityExists(pokemon))
     {
@@ -95,21 +95,21 @@ bool8 IsCharging(struct DungeonEntity *pokemon, bool8 checkCharge)
     }
     else
     {
-        struct DungeonEntityData *pokemonData = pokemon->entityData;
+        struct EntityInfo *pokemonInfo = pokemon->info;
         int i = 0;
-        u8 *chargingStatusPointer = &pokemonData->chargingStatus;
+        u8 *chargingStatusPointer = &pokemonInfo->chargingStatus;
         u8 *chargingStatusPointer2;
-        u8 chargeStatus = CHARGING_STATUS_CHARGE;
+        u8 chargeStatus = STATUS_CHARGING;
         for (; i < 100; i++)
         {
             u8 currentStatus = gMultiTurnChargingStatuses[i];
             u8 chargingStatus;
-            if (currentStatus == CHARGING_STATUS_NONE)
+            if (currentStatus == STATUS_NONE)
             {
                 return FALSE;
             }
             chargingStatus = *chargingStatusPointer;
-            chargingStatusPointer2 = &pokemonData->chargingStatus;
+            chargingStatusPointer2 = &pokemonInfo->chargingStatus;
             if (chargingStatus == currentStatus)
             {
                 return TRUE;

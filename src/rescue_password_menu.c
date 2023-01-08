@@ -123,7 +123,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             temp = sub_8095228(0x1F);
             MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_8095228));
             temp->mailType = 2;
-            temp->unk20.itemIndex = ITEM_ID_NOTHING;
+            temp->unk20.id = ITEM_NOTHING;
             sub_8031D70(0x1F, 0);
             break;
         case MENU_RESCUE_PASSWORD_ENTRY:
@@ -454,9 +454,9 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
 u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *param_3)
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (7 < param_3->mailType) ||
-       (param_3->dungeon.dungeonFloor >= GetDungeonFloorCount(param_3->dungeon.dungeonIndex)) ||
-       (param_3->clientSpecies == SPECIES_NONE) || (SPECIES_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
-       (IsInvalidItemReward(param_3->unk20.itemIndex))) {
+       (param_3->dungeon.floor >= GetDungeonFloorCount(param_3->dungeon.id)) ||
+       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
+       (IsInvalidItemReward(param_3->unk20.id))) {
         return PASSWORD_ENTRY_INCORRECT_PASSWORD;
   }
   else

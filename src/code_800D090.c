@@ -67,7 +67,7 @@ void sub_800D098(void)
     while(REG_KEYINPUT != KEYS_MASK){} // All buttons
 }
 
-void sprintf_2(char *buffer, const char *text, ...)
+void sprintfStatic(char *buffer, const char *text, ...)
 {
     va_list vArgv;
     va_start(vArgv, text);

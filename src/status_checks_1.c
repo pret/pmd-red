@@ -18,7 +18,7 @@
 #include "pokemon.h"
 #include "weather.h"
 
-extern void sub_80429B4(struct DungeonEntity *r0);
+extern void sub_80429B4(struct Entity *r0);
 
 extern u8 *gUnknown_80FEE80[];
 extern u8 *gUnknown_80F8974[];
@@ -27,25 +27,25 @@ extern u8 *gUnknown_80F8968[];
 extern u8 *gUnknown_80F8988[];
 extern u8 gUnknown_8106FA4[];
 
-bool8 sub_80705F0(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos)
 {
   s32 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityData = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     ((tile->pokemon == NULL) || ((GetEntityType(tile->pokemon) == ENTITY_POKEMON)))) {
-    if (IsFixedDungeon() || (entityData->transformStatus != TRANSFORM_STATUS_MOBILE && !HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-      crossableTerrain = GetCrossableTerrain(entityData->entityID);
-      tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
-      if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER)))) {
+    if (IsCurrentFixedRoomBossFight() || (entityData->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+      crossableTerrain = GetCrossableTerrain(entityData->id);
+      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
       }
-      if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
+      if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
         crossableTerrain = CROSSABLE_TERRAIN_WALL;
       }
 
@@ -65,33 +65,33 @@ bool8 sub_80705F0(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-bool8 sub_80706A4(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos)
 {
   s32 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityData;
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityData = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     ((tile->pokemon == NULL) || ((GetEntityType(tile->pokemon) == ENTITY_POKEMON) && (tile->pokemon->entityData == entityData)))) {
-    if (IsFixedDungeon() || (entityData->transformStatus != TRANSFORM_STATUS_MOBILE && !HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-      crossableTerrain = GetCrossableTerrain(entityData->entityID);
-      tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
-      if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (tile->monster->info == entityData)))) {
+    if (IsCurrentFixedRoomBossFight() || (entityData->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+      crossableTerrain = GetCrossableTerrain(entityData->id);
+      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
       }
-      if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
+      if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
         crossableTerrain = CROSSABLE_TERRAIN_WALL;
       }
         switch(crossableTerrain)
         {
             case CROSSABLE_TERRAIN_LIQUID:
-                if(tileFlags == TILE_TYPE_LIQUID) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
             case CROSSABLE_TERRAIN_REGULAR:
-                if(tileFlags == TILE_TYPE_FLOOR) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
                 break;
             case CROSSABLE_TERRAIN_WALL:
             default:
@@ -105,51 +105,51 @@ bool8 sub_80706A4(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-s32 GetMovementSpeed(struct DungeonEntity *pokemon)
+s32 GetSpeedStatus(struct Entity *pokemon)
 {
   s32 index;
   s32 speed;
-  struct DungeonEntityData * entityData;
+  struct EntityInfo * entityData;
   
-  entityData = pokemon->entityData;
+  entityData = pokemon->info;
   speed = 0;
 
   for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
   {
-    if (entityData->speedUpTurnsLeft[index + NUM_SPEED_TURN_COUNTERS] != 0) {
+    if (entityData->speedUpCounters[index + NUM_SPEED_TURN_COUNTERS] != 0) {
       speed--;
     }
-    if (entityData->speedUpTurnsLeft[index] != 0) {
+    if (entityData->speedUpCounters[index] != 0) {
       speed++;
     }
   }
 
-  if (entityData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED) {
+  if (entityData->nonVolatileStatus == STATUS_PARALYSIS) {
     speed--;
   }
 
-  speed += GetMoveSpeed(entityData->entityID);
-  if ((HasType(pokemon, TYPE_ICE)) && (GetWeather(pokemon) == WEATHER_SNOW)) {
+  speed += GetMovementSpeed(entityData->id);
+  if ((MonsterIsType(pokemon, TYPE_ICE)) && (GetApparentWeather(pokemon) == WEATHER_SNOW)) {
     speed++;
   }
-  if (entityData->transformSpecies == SPECIES_DEOXYS_SPEED) {
+  if (entityData->apparentID == MONSTER_DEOXYS_SPEED) {
     speed++;
   }
-  if ((entityData->entityID == SPECIES_KECLEON) && entityData->isEnemy &&
-     gDungeonGlobalData->unk66E) {
+  if ((entityData->id == MONSTER_KECLEON) && entityData->isNotTeamMember &&
+     gDungeon->unk66E) {
     speed++;
   }
   if (speed < 0) {
     speed = 0;
   }
-  if (MAX_MOVEMENT_SPEED < speed) {
-    speed = MAX_MOVEMENT_SPEED;
+  if (MAX_SPEED_STAGE < speed) {
+    speed = MAX_SPEED_STAGE;
   }
-  entityData->movementSpeed = speed;
+  entityData->speedStage = speed;
   return speed;
 }
 
-u8 sub_8070828(struct DungeonEntity *pokemon, bool8 displayMessage)
+u8 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
 {
     bool8 flag;
 
@@ -158,13 +158,13 @@ u8 sub_8070828(struct DungeonEntity *pokemon, bool8 displayMessage)
         return 0;
     }
     else {
-        if ((HasAbility(pokemon, ABILITY_SWIFT_SWIM)) && (GetWeather(pokemon) == WEATHER_RAIN)) {
+        if ((HasAbility(pokemon, ABILITY_SWIFT_SWIM)) && (GetApparentWeather(pokemon) == WEATHER_RAIN)) {
             flag = TRUE;
         }
-        if ((HasAbility(pokemon, ABILITY_CHLOROPHYLL)) && (GetWeather(pokemon) == WEATHER_SUNNY)) {
+        if ((HasAbility(pokemon, ABILITY_CHLOROPHYLL)) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
             flag = TRUE;
         }
-        if (displayMessage && SetVisualFlags(pokemon->entityData, 0x40, flag)) {
+        if (displayMessage && SetVisualFlags(pokemon->info, 0x40, flag)) {
             sub_80429B4(pokemon);
             SendMessage(pokemon, *gUnknown_80FEE80);
         }
@@ -177,102 +177,102 @@ u8 sub_8070828(struct DungeonEntity *pokemon, bool8 displayMessage)
     }
 }
 
-void SetMessageArgument_2(u8 *buffer, struct DungeonEntityData *param_2, s32 colorNum)
+void SetMessageArgument_2(u8 *buffer, struct EntityInfo *param_2, s32 colorNum)
 {
-    if (((gDungeonGlobalData->displayBlinker ||
-        gDungeonGlobalData->displayCrossEyed) ||
-        (param_2->transformStatus == TRANSFORM_STATUS_INVISIBLE)) &&
-        (param_2->isEnemy))
+    if (((gDungeon->blinded ||
+        gDungeon->hallucinating) ||
+        (param_2->transformStatus == STATUS_INVISIBLE)) &&
+        (param_2->isNotTeamMember))
     {
         strcpy(buffer, *gUnknown_80F8988);
     }
     else
     {
-        if (param_2->waitingStatus == WAITING_STATUS_DECOY) {
+        if (param_2->waitingStatus == STATUS_DECOY) {
             strcpy(buffer, *gUnknown_80F8968);
         }
         else
         {
-            if (param_2->isEnemy) {
-                if ((param_2->joinLocation == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
-                    CopyYellowSpeciesNametoBuffer(buffer, param_2->transformSpecies);
+            if (param_2->isNotTeamMember) {
+                if ((param_2->joinedAt == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
+                    CopyYellowMonsterNametoBuffer(buffer, param_2->apparentID);
                 }
                 else
-                CopyCyanSpeciesNametoBuffer(buffer, param_2->transformSpecies);
+                CopyCyanMonsterNametoBuffer(buffer, param_2->apparentID);
             }
             else
             {
-                sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[param_2->partyIndex],colorNum);
+                sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[param_2->teamIndex],colorNum);
             }
         }
     }
 }
 
-void sub_8070968(u8 *buffer, struct DungeonEntityData *entityData, s32 colorNum)
+void sub_8070968(u8 *buffer, struct EntityInfo *entityData, s32 colorNum)
 {
-    if (entityData->waitingStatus == WAITING_STATUS_DECOY) {
-        sprintf_2(buffer, gUnknown_8106FA4, colorNum + 0x30, *gUnknown_80F8974);
+    if (entityData->waitingStatus == STATUS_DECOY) {
+        sprintfStatic(buffer, gUnknown_8106FA4, colorNum + 0x30, *gUnknown_80F8974);
     }
-    else if (entityData->isEnemy) {
-        CopyCyanSpeciesNametoBuffer(buffer, entityData->transformSpecies);
+    else if (entityData->isNotTeamMember) {
+        CopyCyanMonsterNametoBuffer(buffer, entityData->apparentID);
     }
     else {
-        sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[entityData->partyIndex], colorNum);
+        sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[entityData->teamIndex], colorNum);
     }
 }
 
-void sub_80709C8(u8 *buffer, struct DungeonEntityData *entityData)
+void sub_80709C8(u8 *buffer, struct EntityInfo *entityData)
 {
-    if (((gDungeonGlobalData->displayBlinker ||
-          gDungeonGlobalData->displayCrossEyed) ||
-          (entityData->transformStatus == TRANSFORM_STATUS_INVISIBLE)) &&
-          (entityData->isEnemy))
+    if (((gDungeon->blinded ||
+          gDungeon->hallucinating) ||
+          (entityData->transformStatus == STATUS_INVISIBLE)) &&
+          (entityData->isNotTeamMember))
     {
             strcpy(buffer, *gUnknown_80F8994);
     }
     else
     {
-        if (entityData->waitingStatus == WAITING_STATUS_DECOY) {
+        if (entityData->waitingStatus == STATUS_DECOY) {
             strcpy(buffer, *gUnknown_80F8974);
         }
         else
         {
-            if (entityData->isEnemy) {
-                CopySpeciesNametoBuffer(buffer, entityData->transformSpecies);
+            if (entityData->isNotTeamMember) {
+                CopyMonsterNametoBuffer(buffer, entityData->apparentID);
             }
             else
             {
-                sub_808DA0C(buffer, &gRecruitedPokemonRef->pokemon2[entityData->partyIndex]);
+                sub_808DA0C(buffer, &gRecruitedPokemonRef->pokemon2[entityData->teamIndex]);
             }
         }
     }
 }
 
-bool8 HasNegativeStatus(struct DungeonEntity *pokemon)
+bool8 HasNegativeStatus(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     s32 i;
-    if (pokemonData->sleepStatus == SLEEP_STATUS_SLEEP ||
-        pokemonData->sleepStatus == SLEEP_STATUS_NIGHTMARE ||
-        pokemonData->sleepStatus == SLEEP_STATUS_YAWNING ||
-        pokemonData->nonVolatileStatus != NON_VOLATILE_STATUS_NONE ||
-        (pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_INGRAIN && pokemonData->immobilizeStatus != IMMOBILIZE_STATUS_NONE) ||
-        pokemonData->volatileStatus != VOLATILE_STATUS_NONE ||
-        pokemonData->waitingStatus == WAITING_STATUS_CURSED ||
-        pokemonData->waitingStatus == WAITING_STATUS_DECOY ||
-        pokemonData->linkedStatus == LINKED_STATUS_LEECH_SEED ||
-        pokemonData->moveStatus == MOVE_STATUS_WHIFFER ||
-        pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER ||
-        pokemonData->eyesightStatus == EYESIGHT_STATUS_CROSS_EYED ||
-        pokemonData->muzzledStatus == MUZZLED_STATUS_MUZZLED ||
-        pokemonData->exposedStatus ||
-        pokemonData->perishSongTimer != 0)
+    if (pokemonInfo->sleep == STATUS_SLEEP ||
+        pokemonInfo->sleep == STATUS_NIGHTMARE ||
+        pokemonInfo->sleep == STATUS_YAWNING ||
+        pokemonInfo->nonVolatileStatus != STATUS_NONE ||
+        (pokemonInfo->immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilizeStatus != STATUS_NONE) ||
+        pokemonInfo->volatileStatus != STATUS_NONE ||
+        pokemonInfo->waitingStatus == STATUS_CURSED ||
+        pokemonInfo->waitingStatus == STATUS_DECOY ||
+        pokemonInfo->linkedStatus == STATUS_LEECH_SEED ||
+        pokemonInfo->moveStatus == STATUS_WHIFFER ||
+        pokemonInfo->eyesightStatus == STATUS_BLINKER ||
+        pokemonInfo->eyesightStatus == STATUS_CROSS_EYED ||
+        pokemonInfo->muzzled == TRUE ||
+        pokemonInfo->exposed ||
+        pokemonInfo->perishSongTurns != 0)
     {
         return TRUE;
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct PokemonMove *moves = pokemonData->moves;
+        struct Move *moves = pokemonInfo->moves;
         if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags2 & MOVE_FLAG_SEALED)
         {
             return TRUE;
@@ -280,7 +280,7 @@ bool8 HasNegativeStatus(struct DungeonEntity *pokemon)
     }
     for (i = 0; i < NUM_SPEED_TURN_COUNTERS; i++)
     {
-        if (pokemonData->slowTurnsLeft[i] != 0)
+        if (pokemonInfo->speedDownCounters[i] != 0)
         {
             return TRUE;
         }
@@ -288,27 +288,27 @@ bool8 HasNegativeStatus(struct DungeonEntity *pokemon)
     return FALSE;
 }
 
-bool8 IsSleeping(struct DungeonEntity *pokemon)
+bool8 IsSleeping(struct Entity *pokemon)
 {
-    if (pokemon->entityData->sleepStatus != SLEEP_STATUS_SLEEP &&
-        pokemon->entityData->sleepStatus != SLEEP_STATUS_NAPPING &&
-        pokemon->entityData->sleepStatus != SLEEP_STATUS_NIGHTMARE)
+    if (pokemon->info->sleep != STATUS_SLEEP &&
+        pokemon->info->sleep != STATUS_NAPPING &&
+        pokemon->info->sleep != STATUS_NIGHTMARE)
     {
         return FALSE;
     }
     return TRUE;
 }
 
-bool8 HasQuarterHPOrLess(struct DungeonEntity *pokemon)
+bool8 HasLowHealth(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    struct DungeonEntityData *pokemonData2 = pokemon->entityData;
-    s32 maxHP = pokemonData->maxHP;
-    if (maxHP < 0)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    struct EntityInfo *pokemonInfo2 = pokemon->info;
+    s32 maxHPStat = pokemonInfo->maxHPStat;
+    if (maxHPStat < 0)
     {
-        maxHP += 3;
+        maxHPStat += 3;
     }
-    if (pokemonData2->HP <= maxHP >> 2)
+    if (pokemonInfo2->HP <= maxHPStat >> 2)
     {
         return TRUE;
     }

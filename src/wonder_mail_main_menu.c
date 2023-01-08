@@ -472,7 +472,7 @@ void HandlePrepareSaveScreen(void)
   if(sub_80144A4(&iVar2) == 0)
   {
       SetWonderMailMainMenuState(SAVE_ADVENTURE);
-      PrepareSavePakWrite(SPECIES_NONE); // "Saving Adventure.."
+      PrepareSavePakWrite(MONSTER_NONE); // "Saving Adventure.."
   }
 }
 

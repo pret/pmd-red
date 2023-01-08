@@ -21,22 +21,22 @@ extern const char gUnknown_80DD8D0[];
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32 *, u32, u32);
-extern void sub_8027D40(u32, struct HeldItem *);
+extern void sub_8027D40(u32, struct BulkItem *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8093560(u32, struct PokemonMove *, u32 *);
+extern void sub_8093560(u32, struct Move *, u32 *);
 extern void sub_801F808(u32 *);
 extern void sub_8027794();
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
-extern void sub_801B3C0(struct ItemSlot *);
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
-extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
+extern void sub_801B3C0(struct Item *);
+extern void sub_809401C(struct Move *, struct Move *);
+extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void SetFriendAreaActionMenuState(u32);
@@ -168,7 +168,7 @@ void sub_802719C(void)
 
 void sub_8027274(void)
 {
-  struct ItemSlot slot;
+  struct Item slot;
 
   switch(gUnknown_203B2BC->state) {
     case 0:

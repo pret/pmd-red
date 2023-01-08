@@ -10923,10 +10923,10 @@ DataRootTable:
 .byte 0x00, 0x00, 0x00, 0x00
 
 @ Address 0x357b98
-#include "pokemon/species_data.inc"
+#include "monster/monster_data.inc"
 
 @ Address 0x35f2d8
-#include "pokemon/species_names.s"
+#include "monster/monster_names.s"
 
 .string "SIRO"
 .byte 0x38, 0x33, 0x37, 0x08, 0x00, 0x00, 0x00, 0x00

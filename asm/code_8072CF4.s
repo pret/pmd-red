@@ -50,7 +50,7 @@ sub_8072CF4:
 	b _08072D64
 	.align 2, 0
 _08072D4C: .4byte gUnknown_203B434
-_08072D50: .4byte gDungeonGlobalData
+_08072D50: .4byte gDungeon
 _08072D54: .4byte gUnknown_80F58F4
 _08072D58:
 	adds r0, r2, 0x1
@@ -339,7 +339,7 @@ _08072FE8:
 	bl sub_8074FB0
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073038
@@ -350,7 +350,7 @@ _08072FE8:
 	beq _08073038
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073038
@@ -380,7 +380,7 @@ _08073046:
 	ldr r0, _08073070
 	b _080731A2
 	.align 2, 0
-_08073064: .4byte gDungeonGlobalData
+_08073064: .4byte gDungeon
 _08073068: .4byte 0x00000644
 _0807306C: .4byte 0x000037fe
 _08073070: .4byte gUnknown_80FA5B4
@@ -397,7 +397,7 @@ _08073074:
 	strb r0, [r1]
 	b _080731B8
 	.align 2, 0
-_0807308C: .4byte gDungeonGlobalData
+_0807308C: .4byte gDungeon
 _08073090: .4byte gUnknown_202F32C
 _08073094:
 	adds r0, r4, 0
@@ -453,7 +453,7 @@ _080730E0:
 	str r0, [r2]
 	b _080731B8
 	.align 2, 0
-_080730FC: .4byte gDungeonGlobalData
+_080730FC: .4byte gDungeon
 _08073100: .4byte 0x0001357c
 _08073104:
 	adds r0, r4, 0
@@ -746,7 +746,7 @@ _08073332:
 	strb r0, [r4]
 	b _08073472
 	.align 2, 0
-_0807335C: .4byte gDungeonGlobalData
+_0807335C: .4byte gDungeon
 _08073360: .4byte 0x000135cc
 _08073364:
 	adds r0, r7, 0
@@ -762,7 +762,7 @@ _0807336E:
 	b _08073472
 _08073378:
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r3, r0, 0
 	movs r4, 0
 _08073382:
@@ -820,7 +820,7 @@ _080733DE:
 	mov r0, r8
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl IsMoveUsable
+	bl CanMonsterUseMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073440
@@ -951,7 +951,7 @@ _080734CC:
 	strb r0, [r4]
 	b _080735DA
 	.align 2, 0
-_080734E8: .4byte gDungeonGlobalData
+_080734E8: .4byte gDungeon
 _080734EC: .4byte 0x000135cc
 _080734F0: .4byte 0x00000165
 _080734F4:
@@ -1031,7 +1031,7 @@ _0807357A:
 	adds r1, r5, 0
 	movs r2, 0x1
 	str r3, [sp, 0x14]
-	bl IsMoveUsable
+	bl CanMonsterUseMove
 	lsls r0, 24
 	ldr r3, [sp, 0x14]
 	cmp r0, 0

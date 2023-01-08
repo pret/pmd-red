@@ -19,7 +19,7 @@ struct unkStruct_203B230
 {
     // size: 0x94
     s32 state;
-    struct ItemSlot unk4;
+    struct Item unk4;
     s32 unk8;
     s32 unkC;
     struct subStruct_203B240 *unk10[2];
@@ -41,9 +41,9 @@ struct unkStruct_203B234
     u32 unk8;
     u8 unkC;
     u8 fillD[0x10 - 0xD];
-    struct ItemSlot unk10;
+    struct Item unk10;
     struct unkStruct_8090F58 unk14;
-    struct ItemSlot unk20;
+    struct Item unk20;
     u32 unk24;
     u32 unk28;
     u8 fill2C[0x78 - 0x2C];
@@ -88,7 +88,7 @@ extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern u32 sub_8012A64(u32 *, u32);
-extern s32 sub_80913E0(struct ItemSlot *, u32, struct subStruct_203B240 **);
+extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
 extern void sub_8012EA4(u32 *, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
@@ -121,7 +121,7 @@ void sub_801B590();
 void sub_801B480();
 
 
-u32 sub_801B3C0(struct ItemSlot *param_1)
+u32 sub_801B3C0(struct Item *param_1)
 {
   ResetSprites(1);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);
@@ -251,23 +251,23 @@ void sub_801B590(void)
   }
 }
 
-u32 sub_801B60C(u32 r0, u8 itemIndex, u8 numItems)
+u32 sub_801B60C(u32 r0, u8 id, u8 quantity)
 {
     gUnknown_203B234 = MemoryAlloc(0x154, 8);
     gUnknown_203B234->unkC8 = 0;
     gUnknown_203B234->unk0 = r0;
-    gUnknown_203B234->unk10.itemIndex = itemIndex;
-    if(IsThrowableItem(gUnknown_203B234->unk10.itemIndex))
+    gUnknown_203B234->unk10.id = id;
+    if(IsThrowableItem(gUnknown_203B234->unk10.id))
     {
-        gUnknown_203B234->unk10.numItems = numItems;
-        gUnknown_203B234->unkC = numItems;
+        gUnknown_203B234->unk10.quantity = quantity;
+        gUnknown_203B234->unkC = quantity;
     }
     else
     {
-        gUnknown_203B234->unk10.numItems = 0;
+        gUnknown_203B234->unk10.quantity = 0;
         gUnknown_203B234->unkC = 1;
     }
-    gUnknown_203B234->unk10.itemFlags = ITEM_FLAG_EXISTS;
+    gUnknown_203B234->unk10.flags = ITEM_FLAG_EXISTS;
     gUnknown_203B234->unk14.unk0 = 0;
     gUnknown_203B234->unk14.unk4 = 0;
     gUnknown_203B234->unk14.unk8 = 1;
@@ -374,7 +374,7 @@ void sub_801B874(void)
     switch(gUnknown_203B234->state) 
     {
         case 0:
-            if (gUnknown_203B234->unk10.itemIndex == ITEM_ID_WEAVILE_FIG) {
+            if (gUnknown_203B234->unk10.id == ITEM_WEAVILE_FIG) {
                 gUnknown_203B234->unk8 = 0x10;
                 if(sub_8001784(0,0x47,1) != 0)
                 {
@@ -387,7 +387,7 @@ void sub_801B874(void)
                     sub_801B748(3);
                 }
             }
-            else if (gUnknown_203B234->unk10.itemIndex == ITEM_ID_MIME_JR_FIG)
+            else if (gUnknown_203B234->unk10.id == ITEM_MIME_JR_FIG)
             {
                 gUnknown_203B234->unk8 = 0x10;
                 if(sub_8001784(0, 0x47, 0) != 0)
@@ -405,16 +405,16 @@ void sub_801B874(void)
             {
                 if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 {
-                    if(IsNotMoneyOrUsedTMItem(gUnknown_203B234->unk10.itemIndex))
+                    if(IsNotMoneyOrUsedTMItem(gUnknown_203B234->unk10.id))
                     {
-                        if((gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.itemIndex] + gUnknown_203B234->unkC) > 0x3e7)
+                        if((gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
                         {
     store:
                             gUnknown_203B234->unk8 = 6;
                         }
                         else
                         {
-                            gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.itemIndex] += gUnknown_203B234->unkC;
+                            gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
                             PlaySound(0xCB);
                             gUnknown_203B234->unk8 = 5;
                         }

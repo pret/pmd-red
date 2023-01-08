@@ -7,19 +7,19 @@
 
 bool8 CanLayTrap(struct Position *pos)
 {
-    struct MapTile *tile = GetMapTile_2(pos->x, pos->y);
-    if (tile->tileType & TILE_TYPE_STAIRS ||
-        tile->roomIndex == CORRIDOR_ROOM_INDEX ||
-        tile->tileType & TILE_TYPE_ROOM_EXIT)
+    struct Tile *tile = GetTileSafe(pos->x, pos->y);
+    if (tile->terrainType & TERRAIN_TYPE_STAIRS ||
+        tile->room == CORRIDOR_ROOM ||
+        tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
     {
         return FALSE;
     }
-    if (tile->tileType & TILE_TYPE_SHOP)
+    if (tile->terrainType & TERRAIN_TYPE_SHOP)
     {
         return FALSE;
     }
-    if ((tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != TILE_TYPE_FLOOR ||
-        (tile->mapObject != NULL && GetEntityType(tile->mapObject) != ENTITY_TRAP))
+    if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL ||
+        (tile->object != NULL && GetEntityType(tile->object) != ENTITY_TRAP))
     {
         return FALSE;
     }
