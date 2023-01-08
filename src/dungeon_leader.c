@@ -26,7 +26,7 @@ struct Entity* GetLeader()
     return leader;
 }
 
-struct EntityInfo* GetLeaderMonster(void)
+struct EntityInfo* GetLeaderInfo(void)
 {
     return GetLeader()->info;
 }

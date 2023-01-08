@@ -44,7 +44,7 @@ s32 GetDirectionTowardsPosition(struct Position *originPos, struct Position *tar
     return direction;
 }
 
-s32 GetChebyshevDistance(struct Position *pos1, struct Position *pos2)
+s32 GetDistance(struct Position *pos1, struct Position *pos2)
 {
     s32 distanceX = pos1->x - pos2->x;
     s32 distance;

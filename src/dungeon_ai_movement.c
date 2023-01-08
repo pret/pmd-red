@@ -201,7 +201,7 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
                             continue;
                         }
                     }
-                    currentDistance = GetChebyshevDistance(&pokemon->pos, &target->pos);
+                    currentDistance = GetDistance(&pokemon->pos, &target->pos);
                     if (targetDistance > currentDistance)
                     {
                         targetDistance = currentDistance;
@@ -394,7 +394,7 @@ void DecideMovement(struct Entity *pokemon, bool8 showRunAwayEffect)
 "beq _0807B37C\n"
 "adds r0, r6, 0\n"
 "adds r1, r4, 0\n"
-"bl GetChebyshevDistance\n"
+"bl GetDistance\n"
 "cmp r0, 0x2\n"
 "bne _0807B354\n"
 "_0807B348:\n"
@@ -781,7 +781,7 @@ bool8 AvoidEnemies(struct Entity *pokemon)
             {
                 continue;
             }
-            distance = GetChebyshevDistance(&pokemon->pos, &target->pos);
+            distance = GetDistance(&pokemon->pos, &target->pos);
             if (closestTargetDistance > distance)
             {
                 closestTargetDistance = distance;

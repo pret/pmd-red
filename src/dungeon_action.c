@@ -222,7 +222,7 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
 
 void sub_8044C10(u8 param_1)
 {
-    struct EntityInfo * entityData = GetLeaderMonster();
+    struct EntityInfo * entityData = GetLeaderInfo();
 
     entityData->action.action = ACTION_NOTHING;
 
@@ -237,7 +237,7 @@ void sub_8044C10(u8 param_1)
 
 void sub_8044C50(u16 action)
 {
-    struct EntityInfo * entityData = GetLeaderMonster();
+    struct EntityInfo * entityData = GetLeaderInfo();
 
     entityData->action.action = action;
     entityData->action.actionUseIndex = 0;
