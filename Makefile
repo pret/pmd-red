@@ -12,17 +12,27 @@ else
 HOSTCXX := $(CXX)
 endif
 
-ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-include $(TOOLCHAIN)/base_tools
-else
+# don't use dkP's base_tools anymore
+# because the redefinition of $(CC) conflicts
+# with when we want to use $(CC) to preprocess files
+# thus, manually create the variables for the bin
+# files, or use arm-none-eabi binaries on the system
+# if dkP is not installed on this system
+
+ifneq (,$(TOOLCHAIN))
+ifneq ($(wildcard $(TOOLCHAIN)/bin),)
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
-PREFIX := arm-none-eabi-
-OBJCOPY   := $(PREFIX)objcopy
-export CC 	 := $(PREFIX)gcc
-export AS        := $(PREFIX)as
 endif
-export CPP       := $(CC) -E
-export LD        := $(PREFIX)ld
+endif
+
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+OBJDUMP := $(PREFIX)objdump
+AS := $(PREFIX)as
+CC := $(PREFIX)gcc
+AS := $(PREFIX)as
+LD := $(PREFIX)ld
+CPP := $(CC) -E
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
