@@ -121,7 +121,11 @@ void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,str
   u8 type;
   u8 ability;
   const char *__src;
+#ifndef NONMATCHING
   register s32 abilityCounter asm("r1"); // r1
+#else
+  s32 abilityCounter;
+#endif
   int randomIndex;
   int abilityIndex;
   struct DungeonEntityData *iVar6; // r7
