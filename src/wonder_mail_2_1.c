@@ -170,7 +170,7 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
 extern void sub_8012D34(struct UnkTextStruct2 *, u32);
-extern bool8 IsPelliperBoardSlotEmpty(u8);
+extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void sub_802C910(u32);
 extern void sub_802CC00(void);
 extern void sub_802CC70(void);
@@ -192,7 +192,7 @@ s32 sub_802C474(void)
   s32 counter = 0;
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-      if(!IsPelliperBoardSlotEmpty(index))
+      if(!IsPelipperBoardSlotEmpty(index))
       {
           gUnknown_203B2E0->unk0[counter] = index;
           counter++;
@@ -206,7 +206,7 @@ bool8 sub_802C4A4(void)
   s32 index;
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-      if(!IsPelliperBoardSlotEmpty(index))
+      if(!IsPelipperBoardSlotEmpty(index))
         return FALSE;
   }
   return TRUE;

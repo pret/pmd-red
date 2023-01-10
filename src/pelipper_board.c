@@ -90,7 +90,7 @@ extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
 extern void sub_802C39C(void);
 extern void CreatePelipperAcceptedStatusBox(u32);
-extern struct WonderMail *GetPelliperBoardSlotInfo(u32);
+extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern void sub_802DE84(u32 *);
 extern void sub_802C860(u32);
@@ -211,7 +211,7 @@ void sub_802EA58(void)
             sub_8012D60(&gUnknown_203B308->unk6C, gUnknown_203B308->unkBC, 0, 0, gUnknown_203B308->unk68, 2);
             break;
         case 7:
-            sub_803B35C(GetPelliperBoardSlotInfo(gUnknown_203B308->jobIndex), &gUnknown_203B308->unkC);
+            sub_803B35C(GetPelipperBoardSlotInfo(gUnknown_203B308->jobIndex), &gUnknown_203B308->unkC);
             gUnknown_203B308->unkC = 3;
             gUnknown_203B308->unk50 = 0;
             sub_802DE84(&gUnknown_203B308->unkC);

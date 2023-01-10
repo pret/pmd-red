@@ -135,7 +135,7 @@ sub_802EC10:
 	movs r0, 0x4
 	str r0, [r1]
 	ldrb r0, [r2, 0x8]
-	bl GetPelliperBoardSlotInfo
+	bl GetPelipperBoardSlotInfo
 	bl IsMailinJobSlot
 	lsls r0, 24
 	cmp r0, 0

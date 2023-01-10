@@ -13,7 +13,7 @@ struct unkStruct_203B490
 {
     // size: 0x330?
     /* 0x0 */ struct WonderMail mailboxSlots[4];
-    /* 0x50 */ struct WonderMail pelliperBoardJobs[8];
+    /* 0x50 */ struct WonderMail pelipperBoardJobs[8];
     /* 0xF0 */ struct WonderMail jobSlots[8];
     u8 unk190[0x28];
     u8 unk1B8[0x78];

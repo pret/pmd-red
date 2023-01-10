@@ -621,7 +621,7 @@ CountFilledPelipperBoardSlots:
 _0809651A:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl IsPelliperBoardSlotEmpty
+	bl IsPelipperBoardSlotEmpty
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809652A
@@ -672,8 +672,8 @@ _0809656E:
 	bx r1
 	thumb_func_end sub_8096538
 
-	thumb_func_start GetPelliperBoardSlotInfo
-GetPelliperBoardSlotInfo:
+	thumb_func_start GetPelipperBoardSlotInfo
+GetPelipperBoardSlotInfo:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08096588
@@ -686,10 +686,10 @@ GetPelliperBoardSlotInfo:
 	bx lr
 	.align 2, 0
 _08096588: .4byte gUnknown_203B490
-	thumb_func_end GetPelliperBoardSlotInfo
+	thumb_func_end GetPelipperBoardSlotInfo
 
-	thumb_func_start IsPelliperBoardSlotEmpty
-IsPelliperBoardSlotEmpty:
+	thumb_func_start IsPelipperBoardSlotEmpty
+IsPelipperBoardSlotEmpty:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -712,10 +712,10 @@ _080965B0:
 _080965B2:
 	pop {r1}
 	bx r1
-	thumb_func_end IsPelliperBoardSlotEmpty
+	thumb_func_end IsPelipperBoardSlotEmpty
 
-	thumb_func_start ResetPelliperBoardSlot
-ResetPelliperBoardSlot:
+	thumb_func_start ResetPelipperBoardSlot
+ResetPelipperBoardSlot:
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -746,7 +746,7 @@ ResetPelliperBoardSlot:
 	bx r0
 	.align 2, 0
 _080965F0: .4byte gUnknown_203B490
-	thumb_func_end ResetPelliperBoardSlot
+	thumb_func_end ResetPelipperBoardSlot
 
 	thumb_func_start sub_80965F4
 sub_80965F4:

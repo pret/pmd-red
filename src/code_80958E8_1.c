@@ -24,7 +24,7 @@ extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80965F4();
 extern void SortPelipperJobs();
-extern struct WonderMail *GetPelliperBoardSlotInfo(u8);
+extern struct WonderMail *GetPelipperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
 extern u8 sub_8095B28(struct WonderMail *);
 
@@ -39,14 +39,14 @@ void SortPelipperJobs(void)
     {
         for(index2 = index1 + 1; index2 < 8; index2++)
         {
-            if(gUnknown_203B490->pelliperBoardJobs[index2].mailType != WONDER_MAIL_TYPE_NONE)
+            if(gUnknown_203B490->pelipperBoardJobs[index2].mailType != WONDER_MAIL_TYPE_NONE)
             {
-                if((gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonIndex > gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonIndex) ||
-                ((gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonIndex == gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonIndex) && (gUnknown_203B490->pelliperBoardJobs[index1].dungeon.dungeonFloor > gUnknown_203B490->pelliperBoardJobs[index2].dungeon.dungeonFloor)))
+                if((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.dungeonIndex > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.dungeonIndex) ||
+                ((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.dungeonIndex == gUnknown_203B490->pelipperBoardJobs[index2].dungeon.dungeonIndex) && (gUnknown_203B490->pelipperBoardJobs[index1].dungeon.dungeonFloor > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.dungeonFloor)))
                 {
-                    mail = gUnknown_203B490->pelliperBoardJobs[index1];
-                    gUnknown_203B490->pelliperBoardJobs[index1] = gUnknown_203B490->pelliperBoardJobs[index2]; 
-                    gUnknown_203B490->pelliperBoardJobs[index2] = mail;
+                    mail = gUnknown_203B490->pelipperBoardJobs[index1];
+                    gUnknown_203B490->pelipperBoardJobs[index1] = gUnknown_203B490->pelipperBoardJobs[index2]; 
+                    gUnknown_203B490->pelipperBoardJobs[index2] = mail;
                 }
             }
         }   
@@ -62,12 +62,12 @@ void GeneratePelipperJobs(void)
   range = RandomRange(4,8);
   for(index = 0; index < 8; index++)
   {
-    gUnknown_203B490->pelliperBoardJobs[index].mailType = WONDER_MAIL_TYPE_NONE;
+    gUnknown_203B490->pelipperBoardJobs[index].mailType = WONDER_MAIL_TYPE_NONE;
   }
   
   index = 0;
   if (sub_8097318(0xe) != 0) {
-    mail = GetPelliperBoardSlotInfo(0);
+    mail = GetPelipperBoardSlotInfo(0);
     mail->mailType = 2;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 1;
@@ -85,7 +85,7 @@ void GeneratePelipperJobs(void)
 
 
   if (sub_8097318(0xf) != 0) {
-    mail = GetPelliperBoardSlotInfo(index);
+    mail = GetPelipperBoardSlotInfo(index);
     mail->mailType = 3;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 2;
@@ -102,7 +102,7 @@ void GeneratePelipperJobs(void)
   }
 
   if (sub_8097318(0x1c) != 0) {
-    mail = GetPelliperBoardSlotInfo(index);
+    mail = GetPelipperBoardSlotInfo(index);
     mail->mailType = 4;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 3;
@@ -118,8 +118,8 @@ void GeneratePelipperJobs(void)
     index++;
   }
   for (; index <= range; index++) {
-    if (sub_8095B28(&gUnknown_203B490->pelliperBoardJobs[index]) == 0) break;
-    gUnknown_203B490->pelliperBoardJobs[index].rewardType = RandomRange(MONEY, BLANK_4);
+    if (sub_8095B28(&gUnknown_203B490->pelipperBoardJobs[index]) == 0) break;
+    gUnknown_203B490->pelipperBoardJobs[index].rewardType = RandomRange(MONEY, BLANK_4);
   }
   sub_80965F4();
   SortPelipperJobs();

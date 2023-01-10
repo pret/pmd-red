@@ -79,11 +79,16 @@ bool8 sub_807049C(struct DungeonEntity *pokemon, struct Position *pos)
 bool8 sub_8070564(struct DungeonEntity *pokemon, struct Position *pos)
 {
   u8 crossableTerrain;
-  register s32 crossableTerrain2 asm("r3");
   struct MapTile *tile;
   u16 tileFlags;
-  register s32 tileFlags_0 asm("r0");
   struct DungeonEntityData *entityData;
+#ifndef NONMATCHING
+  register s32 tileFlags_0 asm("r0");
+  register s32 crossableTerrain2 asm("r3");
+#else
+  s32 tileFlags_0;
+  s32 crossableTerrain2;
+#endif
   
   entityData = pokemon->entityData;
   tile = GetMapTile_1(pos->x, pos->y);

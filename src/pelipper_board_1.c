@@ -40,12 +40,12 @@ extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern struct WonderMail *GetPelliperBoardSlotInfo(u8);
+extern struct WonderMail *GetPelipperBoardSlotInfo(u8);
 extern u8 sub_802C4A4(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_8096A78(struct WonderMail*);
-extern void ResetPelliperBoardSlot(u8);
+extern void ResetPelipperBoardSlot(u8);
 extern void sub_80965F4(void);
 extern void sub_802C2D4(void);
 extern u8 sub_8012FD8(u32 *);
@@ -127,26 +127,26 @@ void sub_802EDBC(void)
     {
         case 4:
             PlaySound(0x133);
-            mail = GetPelliperBoardSlotInfo(gUnknown_203B308->jobIndex);
+            mail = GetPelipperBoardSlotInfo(gUnknown_203B308->jobIndex);
             switch(mail->mailType)
             {
                 case 2:
                     gUnknown_203B308->unk4 = 1;
-                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
+                    ResetPelipperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);
                     break;
                 case 3:
                     gUnknown_203B308->unk4 = 2;
-                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
+                    ResetPelipperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);
                     break;
                 case 4:
                     gUnknown_203B308->unk4 = 3;
-                    ResetPelliperBoardSlot(gUnknown_203B308->jobIndex);
+                    ResetPelipperBoardSlot(gUnknown_203B308->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(3);

@@ -20,7 +20,7 @@ extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
 extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
-extern void ResetPelliperBoardSlot(u8);
+extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(struct WonderMail *);
 
@@ -46,7 +46,7 @@ void InitializeMailJobsNews(void)
     }
     for(index = 0; index < 8; index++)
     {
-        ResetPelliperBoardSlot(index);
+        ResetPelipperBoardSlot(index);
     }
     for(index = 0; index < 8; index++)
     {

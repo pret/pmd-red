@@ -47,7 +47,7 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
     }
     for(index = 0; index < 8; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->pelliperBoardJobs[index]);
+        RestoreWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
     for(index = 0; index < 8; index++)
     {
@@ -92,7 +92,7 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     }
     for(index = 0; index < 8; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->pelliperBoardJobs[index]);
+        SaveWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
     for(index = 0; index < 8; index++)
     {
