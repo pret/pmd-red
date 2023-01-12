@@ -333,3 +333,30 @@ void sub_8092D54(u8 *buffer, struct PokemonMove *move)
 {
     sprintf_2(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeType(move)]);
 }
+
+
+// really close
+// int sub_8092D80(struct PokemonMove *movePtr, int index)
+// {
+//   register struct PokemonMove *currentMove asm("r1");
+//   int i; // r5
+
+//   i = 0;
+//   currentMove = &movePtr[index];
+//   do
+//   {
+//     unsigned int flags; // r2
+
+//     ++currentMove;
+//     if (++index == 4)
+//       break;
+    
+//     flags = currentMove->moveFlags;
+//     if ((1 & flags) == 0)
+//       break;
+//     if ((1 & (flags >> 1)) == 0)
+//       return index;
+//   }
+//   while (++i <= 3);
+//   return 0;
+// }

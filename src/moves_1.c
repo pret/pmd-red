@@ -1,100 +1,108 @@
 #include "global.h"
 #include "code_8092334.h"
+#include "memory.h"
 #include "moves.h"
 #include "pokemon.h"
 
-void SavePokemonMove(struct unkStruct_8094924 *r0, struct PokemonMove *move)
-{
-    SaveIntegerBits(r0, &move->moveFlags, 4);
-    SaveIntegerBits(r0, &move->moveID, 9);
-    SaveIntegerBits(r0, &move->PP, 7);
-}
+u8 sub_8093468(int param_1, void* src_struct);
+u8 sub_8093400(int param_1, struct PokemonMove* src_struct);
+u8 sub_80933D8(int param_1, void* src_struct);
+bool8 DoesMoveCharge(u16 move);
+void sub_809371C(struct PokemonMove*);
 
-void RestorePokemonMove(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+int sub_80932E0(int index, struct PokemonMove* struct_ptr)
 {
-    RestoreIntegerBits(r0, &move->moveFlags, 4);
-    RestoreIntegerBits(r0, &move->moveID, 9);
-    RestoreIntegerBits(r0, &move->PP, 7);
-}
-
-void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet)
-{
-    s32 iVar4;
-    for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
-    {
-        SavePokemonMove(r0, &moveSet[iVar4]);
+    if ((struct_ptr[index].moveFlags & 8) != 0) {
+        return 1;
     }
+    return 0;
 }
 
-void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet)
+int sub_80932FC(int index, struct PokemonMove* struct_ptr)
 {
-    s32 iVar4;
-    for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
-    {
-        RestorePokemonMove(r0, &moveSet[iVar4]);
+    if ((struct_ptr[index].moveFlags & 4) != 0) {
+        return 1;
     }
+    return 0;
 }
 
-void sub_8094148(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+int sub_8093318(int param_1, void* src_struct)
 {
-    SaveIntegerBits(r0, &move->moveFlags, 4);
-    SaveIntegerBits(r0, &move->moveFlags2, 1);
-    SaveIntegerBits(r0, &move->moveID, 9);
-    SaveIntegerBits(r0, &move->PP, 7);
-    SaveIntegerBits(r0, &move->powerBoost, 7);
+    struct PokemonMove dest_struct[8];
+    MemoryCopy8((void*)dest_struct, src_struct, 64);
+    return sub_8093400(param_1, (struct PokemonMove*)dest_struct);
 }
 
-void sub_8094184(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
+int sub_809333C(int param_1, void* src_struct)
 {
-    s32 r4;
+    u8 dest_struct[64];
+    MemoryCopy8(dest_struct, src_struct, 64);
+    return sub_8093468(param_1, dest_struct);
+}
 
-    for(r4 = 0; r4 < MAX_MON_MOVES; r4++)
-    {
-        sub_8094148(r0, &r1->moves[r4]);
+int sub_8093360(int param_1, void* src_struct)
+{
+    u8 dest_struct[64];
+    MemoryCopy8(dest_struct, src_struct, 64);
+    return sub_80933D8(param_1, dest_struct);
+}
+
+int sub_8093384(int index, struct PokemonMove* struct_ptr)
+{
+    if ((struct_ptr[index].moveFlags & 8) != 0) {
+        return 0;
     }
-    SaveIntegerBits(r0, &r1->unk20, 8);
+    return 1;
 }
 
-void sub_80941B0(struct unkStruct_8094924 *r0, struct PokemonMove *move)
-{
-    memset(move, 0, sizeof(struct PokemonMove));
-    RestoreIntegerBits(r0, &move->moveFlags, 4);
-    RestoreIntegerBits(r0, &move->moveFlags2, 1);
-    RestoreIntegerBits(r0, &move->moveID, 9);
-    RestoreIntegerBits(r0, &move->PP, 7);
-    RestoreIntegerBits(r0, &move->powerBoost, 7);
-}
+int sub_80933A0(int unused, struct PokemonMove* moves) {
+    int i;
+    int counter;
 
-void sub_80941FC(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
-{
-    s32 iVar4;
-    for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
-    {
-        sub_80941B0(r0, &r1->moves[iVar4]);
+    counter = 0;
+    for (i = 0; i < 8; i++) {
+        if ((moves[i].moveFlags & 1) && !(moves[i].moveFlags & 2)) {
+            counter++;
+        }
     }
-    r1->unk20 = 0;
-    RestoreIntegerBits(r0, &r1->unk20, 8);
+    if (counter > 1) {
+        return 1;
+    }
+    return 0;
 }
 
-bool8 DoesMoveCharge(u16 move)
+u8 sub_80933D8(int param_1, void* src_struct)
 {
-    if(move == MOVE_SOLARBEAM)
-        return TRUE;
-    if(move == MOVE_SKY_ATTACK)
-        return TRUE;
-    if(move == MOVE_RAZOR_WIND)
-        return TRUE;
-    if(move == MOVE_FOCUS_PUNCH)
-        return TRUE;
-    if(move == MOVE_SKULL_BASH)
-        return TRUE;
-    if(move == MOVE_FLY)
-        return TRUE;
-    if(move == MOVE_BOUNCE)
-        return TRUE;
-    if(move == MOVE_DIVE)
-        return TRUE;
-    if(move == MOVE_DIG)
-        return TRUE;
-    return FALSE;
+  int result; // r0
+
+  if (!sub_8093400(param_1, src_struct)) {
+    result = sub_8093468(param_1, src_struct);
+  }
+  else {
+    result = 1;
+  }
+  return result;
+}
+
+u8 sub_8093400(int index, struct PokemonMove* moves) {
+    int i;
+    const struct PokemonMove *move = &moves[index];
+    if (DoesMoveCharge(move->moveID)) {
+        return 0;
+    }
+    
+    for (i = index + 1; i < 8; i++) {
+        if (!(moves[i].moveFlags & 1)) {
+            return 0;
+        }
+        if (DoesMoveCharge(moves[i].moveID)) {
+            return 0;
+        }
+        if (!(moves[i].moveFlags & 2)) {
+            moves[i].moveFlags |= 2;
+            sub_809371C(moves);
+            return 1;
+        }
+    }
+    return 0;
 }

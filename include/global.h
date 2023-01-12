@@ -35,6 +35,7 @@
 struct DungeonLocation {
     u8 dungeonIndex;
     u8 dungeonFloor;
+    s16 unk3;  // this has to be there because it would not be padded enough for some array
 };
 
 #endif // GUARD_GLOBAL_H
