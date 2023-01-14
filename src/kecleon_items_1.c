@@ -119,7 +119,7 @@ extern void sub_801A3DC(void);
 extern void sub_801AD34(u32);
 extern void PlaySound(u16 songIndex);
 
-u32 CountKecleonShopItems(void);
+u32 CountKecleonItems(void);
 
 void sub_8019700(void)
 {
@@ -148,7 +148,7 @@ void sub_8019730(void)
     gUnknown_203B210->unk28 = menuAction;
   switch(menuAction) {
     case 2:
-        if (CountKecleonShopItems() == 0)
+        if (CountKecleonItems() == 0)
             UpdateKecleonStoreState(5);
         else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
             UpdateKecleonStoreState(0xA);
@@ -194,14 +194,14 @@ void sub_8019850(void)
           case 5:
             AddToTeamMoney(-gUnknown_203B210->itemSellPrice);
             if (gUnknown_203B210->isKecleonItemShop) {
-                AddHeldItemToInventory(GetKecleonItemShopItem(gUnknown_203B210->itemShopItemIndex));
-                InitKecleonItemShopItem(gUnknown_203B210->itemShopItemIndex);
-                FillKecleonItemShopGaps();
+                AddHeldItemToInventory(GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex));
+                InitKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+                FillKecleonShopGaps();
             }
             else {
-                AddHeldItemToInventory(GetKecleonWareShopItem(gUnknown_203B210->wareShopItemIndex));
-                InitKecleonWareShopItem(gUnknown_203B210->wareShopItemIndex);
-                FillKecleonWareShopGaps();
+                AddHeldItemToInventory(GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex));
+                InitKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+                FillKecleonWareGaps();
             }
             PlaySound(0x14c);
             UpdateKecleonStoreState(0x11);
@@ -282,11 +282,11 @@ void sub_80199CC(void)
     case 3:
         if (gUnknown_203B210->isKecleonItemShop) {
             gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-            item = GetKecleonItemShopItem(gUnknown_203B210->itemShopItemIndex);
+            item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
         }
         else {
             gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-            item = GetKecleonWareShopItem(gUnknown_203B210->wareShopItemIndex);
+            item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
         }
         xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,item->itemIndex,0);
         gUnknown_203B210->unk1C.numItems =item->numItems;
@@ -296,11 +296,11 @@ void sub_80199CC(void)
     case 4:
         if (gUnknown_203B210->isKecleonItemShop) {
             gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-            item = GetKecleonItemShopItem(gUnknown_203B210->itemShopItemIndex);
+            item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
         }
         else {
             gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-            item = GetKecleonWareShopItem(gUnknown_203B210->wareShopItemIndex);
+            item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
         }
         xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,item->itemIndex,0);
         gUnknown_203B210->unk1C.numItems = item->numItems;
@@ -452,12 +452,12 @@ void sub_8019D68(void)
     }
 }
 
-u32 CountKecleonShopItems(void)
+u32 CountKecleonItems(void)
 {
     if(gUnknown_203B210->isKecleonItemShop)
-        return CountKecleonItemShopItems();
+        return CountKecleonShopItems();
     else
-        return CountKecleonWareShopItems();
+        return CountKecleonWareItems();
 }
 
 void sub_8019DAC(void)
@@ -498,7 +498,7 @@ void sub_8019E04(s32 param_1)
 
 u32 sub_8019E40(u32 r0)
 {
-    if(CountKecleonItemShopItems() == 0)
+    if(CountKecleonShopItems() == 0)
     {
         return 0;
     }
@@ -512,7 +512,7 @@ u32 sub_8019E40(u32 r0)
         gUnknown_203B214->unk38->unk14 = gUnknown_203B214->unk9C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B214->unk3C, 1, 1);
-        sub_8013818(gUnknown_203B214, CountKecleonItemShopItems(), 0xA, r0);
+        sub_8013818(gUnknown_203B214, CountKecleonShopItems(), 0xA, r0);
         gUnknown_203B214->unk18 = gUnknown_203B218;
         sub_8013984((u8 *)gUnknown_203B214);
         sub_801A064();
@@ -541,7 +541,7 @@ u32 sub_8019EDC(u8 r0)
                 PlayMenuSoundEffect(1);
                 return 2;
             case 1:
-                item = GetKecleonItemShopItem(sub_8019FB0());
+                item = GetKecleonShopItem(sub_8019FB0());
 
                 // NOTE: needs seperate vars to match
                 itemIndex = item->itemIndex << 16;
@@ -585,7 +585,7 @@ void sub_8019FCC(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B214->unk3C, 0, 0);
-    gUnknown_203B214->shopItemCount = CountKecleonItemShopItems();
+    gUnknown_203B214->shopItemCount = CountKecleonShopItems();
     sub_8013984((u8 *)gUnknown_203B214);
     sub_801A064();
     sub_801A0D8();
@@ -690,7 +690,7 @@ void sub_801A0D8(void)
   for(index = 0; index < gUnknown_203B214->unk1A; index++)
     {
       temp_calc = (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + index;
-      heldItem = GetKecleonItemShopItem(temp_calc);
+      heldItem = GetKecleonShopItem(temp_calc);
 
       index_shift = heldItem->itemIndex << 16;
       slot.temp.full_bits = (slot.temp.full_bits & 0xff00ffff) | index_shift;
@@ -721,7 +721,7 @@ void sub_801A0D8(void)
 
 u32 sub_801A20C(u32 r0)
 {
-    if(CountKecleonWareShopItems() == 0)
+    if(CountKecleonWareItems() == 0)
     {
         return 0;
     }
@@ -735,7 +735,7 @@ u32 sub_801A20C(u32 r0)
         gUnknown_203B21C->unk38->unk14 = gUnknown_203B21C->unk9C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
-        sub_8013818(gUnknown_203B21C, CountKecleonWareShopItems(), 0xA, r0);
+        sub_8013818(gUnknown_203B21C, CountKecleonWareItems(), 0xA, r0);
         gUnknown_203B21C->unk18 = gUnknown_203B220;
         sub_8013984((u8 *)gUnknown_203B21C);
         sub_801A430();
@@ -764,7 +764,7 @@ u32 sub_801A2A8(u8 r0)
                 PlayMenuSoundEffect(1);
                 return 2;
             case 1:
-                item = GetKecleonWareShopItem(sub_801A37C());
+                item = GetKecleonWareItem(sub_801A37C());
 
                 // NOTE: needs seperate vars to match
                 itemIndex = item->itemIndex << 16;
@@ -808,7 +808,7 @@ void sub_801A398(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B21C->unk3C, 0, 0);
-    gUnknown_203B21C->shopItemCount = CountKecleonWareShopItems();
+    gUnknown_203B21C->shopItemCount = CountKecleonWareItems();
     sub_8013984((u8 *)gUnknown_203B21C);
     sub_801A430();
     sub_801A4A4();
@@ -912,7 +912,7 @@ void sub_801A4A4(void)
   for(index = 0; index < gUnknown_203B21C->unk1A; index++)
     {
       temp_calc = (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + index;
-      heldItem = GetKecleonWareShopItem(temp_calc);
+      heldItem = GetKecleonWareItem(temp_calc);
 
       index_shift = heldItem->itemIndex << 16;
       slot.temp.full_bits = (slot.temp.full_bits & 0xff00ffff) | index_shift;
