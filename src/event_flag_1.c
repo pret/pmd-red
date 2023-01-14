@@ -265,7 +265,7 @@ void sub_8001D88(void)
     }
     if (auStack8 > 0x11) {
       sub_80973A8(0x25,1);
-      if (((FindItemInInventory(ITEM_ID_DIVE) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_ID_DIVE] != 0)) ||
+      if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_HM_DIVE] != 0)) ||
          (sub_8001D44(5,0x21,3) != 0)) {
         sub_80973A8(0x22,1);
       }
@@ -291,7 +291,7 @@ void sub_8001D88(void)
       if (sub_8001D08(5,0,0)) {
         ScenarioCalc(5,0x21,1);
       }
-      if ((FindItemInInventory(ITEM_ID_SURF) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_ID_SURF] != 0)) {
+      if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_HM_SURF] != 0)) {
         if (sub_8001D08(7,0,0)) {
           ScenarioCalc(7,0x26,1);
         }
@@ -300,7 +300,7 @@ void sub_8001D88(void)
         }
       }
       if (!sub_8001CC4(9,0x30,0)) {
-        if ((sub_8001D08(5,0x22,0)) && HasRecruitedMon(SPECIES_ARTICUNO) && HasRecruitedMon(SPECIES_ZAPDOS) && HasRecruitedMon(SPECIES_MOLTRES)) {
+        if ((sub_8001D08(5,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
           ScenarioCalc(5,0x22,1);
         }
         if (((sub_8001D08(0xb,0,0)) && (sub_8001D44(5,0x21,3) != 0)) &&
@@ -323,10 +323,10 @@ void sub_8001D88(void)
           ScenarioCalc(0xc,0x35,1);
         }
       }
-      if ((sub_8001D08(6,0,0)) && (HasRecruitedMon(SPECIES_LUGIA))) {
+      if ((sub_8001D08(6,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
         ScenarioCalc(6,0x24,1);
       }
-      if ((sub_8001D08(8,0,0)) && (HasRecruitedMon(SPECIES_HO_OH))) {
+      if ((sub_8001D08(8,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
         ScenarioCalc(8,0x2c,1);
       }
     }
@@ -359,7 +359,7 @@ u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
     case 10:
         return param_1 & ~(1 << param_2);
     case 0xb:
-        return OtherRandomCapped(param_2);
+        return OtherRandInt(param_2);
     default:
         FatalError(&gUnknown_80B7318,gUnknown_80B7324, operation); // event flag expansion error %d
   }

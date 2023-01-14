@@ -2,10 +2,10 @@
 #define GUARD_RANDOM_H
 
 void SeedRng(u8 *seed);
-s32 Random(void);
-s32 RandomCapped(s32 cap);
-s32 RandomRange(s32 a, s32 b);
-s32 GetRngState(void);
-void SetRngState(s32 state);
+s32 Rand32Bit(void);
+s32 RandInt(s32 cap);
+s32 RandRange(s32 a, s32 b);
+s32 GetRNGSeed(void);
+void SetRNGSeed(s32 state);
 
 #endif // GUARD_RANDOM_H

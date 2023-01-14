@@ -2344,7 +2344,7 @@ sub_80A7428:
 	movs r1, 0
 	bl GetFileDataPtr
 	adds r0, r4, 0
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080A7488

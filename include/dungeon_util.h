@@ -7,12 +7,12 @@
 
 extern const struct Position gAdjacentTileOffsets[NUM_DIRECTIONS];
 
-bool8 EntityExists(struct DungeonEntity *pokemon);
-u32 GetEntityType(struct DungeonEntity *entity);
-u8 GetEntityRoomIndex(struct DungeonEntity *entity);
-struct DungeonEntityData *GetTrapData(struct DungeonEntity *entity);
-struct ItemSlot *GetItemData(struct DungeonEntity *entity);
-struct MapTile *GetMapTileForDungeonEntity_2(struct DungeonEntity *entity);
-struct ItemSlot *GetItemData_1(struct DungeonEntity *entity);
+bool8 EntityExists(struct Entity *pokemon);
+u32 GetEntityType(struct Entity *entity);
+u8 GetEntityRoom(struct Entity *entity);
+struct EntityInfo *GetTrapData(struct Entity *entity);
+struct Item *GetItemData(struct Entity *entity);
+struct Tile *GetTileAtEntitySafe(struct Entity *entity);
+struct Item *GetItemData_1(struct Entity *entity);
 
 #endif

@@ -220,7 +220,7 @@ _0803C35A:
 	movs r0, 0xC
 	ldrsh r1, [r6, r0]
 	adds r0, r4, 0
-	bl CopyYellowSpeciesNametoBuffer
+	bl CopyYellowMonsterNametoBuffer
 	ldrh r0, [r6, 0xC]
 	strh r0, [r4, 0x14]
 	ldrb r1, [r6, 0x1]
@@ -330,7 +330,7 @@ _0803C41A:
 _0803C42C: .4byte gUnknown_80E9920
 _0803C430:
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 2
 	add r0, sp
 	ldr r4, [r0]
@@ -391,7 +391,7 @@ _0803C496:
 	cmp r6, 0
 	beq _0803C4E0
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 2
 	add r0, sp
 	ldr r4, [r0]
@@ -399,7 +399,7 @@ _0803C496:
 	adds r0, r4
 	lsls r0, 2
 	adds r5, r0, r5
-	bl Random
+	bl Rand32Bit
 	movs r1, 0x10
 	ands r1, r0
 	cmp r1, 0
@@ -470,13 +470,13 @@ _0803C52A:
 	cmp r6, 0
 	beq _0803C570
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 2
 	add r0, sp
 	ldr r4, [r0]
 	lsls r0, r4, 2
 	adds r5, r0, r5
-	bl Random
+	bl Rand32Bit
 	movs r1, 0x10
 	ands r1, r0
 	cmp r1, 0
@@ -557,7 +557,7 @@ _0803C5D2:
 _0803C5D8: .4byte gUnknown_80E8180
 _0803C5DC:
 	adds r0, r7, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 2
 	add r0, sp
 	ldr r4, [r0]
@@ -631,7 +631,7 @@ _0803C664: .4byte gUnknown_80E81D4
 _0803C668: .4byte 0x00000181
 _0803C66C:
 	adds r0, r7, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 2
 	add r0, sp
 	ldr r5, [r0]

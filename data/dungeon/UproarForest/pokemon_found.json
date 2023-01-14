@@ -4,27 +4,27 @@
             "name": "pokemon_found_out475",
             "pokemon": [
                 {
-                    "species": "SPECIES_VENONAT",
+                    "species": "MONSTER_VENONAT",
                     "level": 17,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_AIPOM",
+                    "species": "MONSTER_AIPOM",
                     "level": 15,
                     "probability": 3334
                 },
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -34,32 +34,32 @@
             "name": "pokemon_found_out476",
             "pokemon": [
                 {
-                    "species": "SPECIES_VENONAT",
+                    "species": "MONSTER_VENONAT",
                     "level": 17,
                     "probability": 2500
                 },
                 {
-                    "species": "SPECIES_AIPOM",
+                    "species": "MONSTER_AIPOM",
                     "level": 15,
                     "probability": 2500
                 },
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 2500
                 },
                 {
-                    "species": "SPECIES_ROSELIA",
+                    "species": "MONSTER_ROSELIA",
                     "level": 16,
                     "probability": 2500
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -69,37 +69,37 @@
             "name": "pokemon_found_out477",
             "pokemon": [
                 {
-                    "species": "SPECIES_VENONAT",
+                    "species": "MONSTER_VENONAT",
                     "level": 17,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_AIPOM",
+                    "species": "MONSTER_AIPOM",
                     "level": 15,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_NUZLEAF",
+                    "species": "MONSTER_NUZLEAF",
                     "level": 10,
                     "probability": 588
                 },
                 {
-                    "species": "SPECIES_ROSELIA",
+                    "species": "MONSTER_ROSELIA",
                     "level": 16,
                     "probability": 2353
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -109,32 +109,32 @@
             "name": "pokemon_found_out478",
             "pokemon": [
                 {
-                    "species": "SPECIES_AIPOM",
+                    "species": "MONSTER_AIPOM",
                     "level": 15,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_NUZLEAF",
+                    "species": "MONSTER_NUZLEAF",
                     "level": 10,
                     "probability": 769
                 },
                 {
-                    "species": "SPECIES_ROSELIA",
+                    "species": "MONSTER_ROSELIA",
                     "level": 16,
                     "probability": 3077
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -144,27 +144,27 @@
             "name": "pokemon_found_out479",
             "pokemon": [
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 4444
                 },
                 {
-                    "species": "SPECIES_NUZLEAF",
+                    "species": "MONSTER_NUZLEAF",
                     "level": 10,
                     "probability": 1112
                 },
                 {
-                    "species": "SPECIES_ROSELIA",
+                    "species": "MONSTER_ROSELIA",
                     "level": 16,
                     "probability": 4444
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -174,27 +174,27 @@
             "name": "pokemon_found_out480",
             "pokemon": [
                 {
-                    "species": "SPECIES_MANKEY",
+                    "species": "MONSTER_MANKEY",
                     "level": 11,
                     "probability": 4444
                 },
                 {
-                    "species": "SPECIES_SEEDOT",
+                    "species": "MONSTER_SEEDOT",
                     "level": 16,
                     "probability": 4445
                 },
                 {
-                    "species": "SPECIES_NUZLEAF",
+                    "species": "MONSTER_NUZLEAF",
                     "level": 10,
                     "probability": 1111
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }

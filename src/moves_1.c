@@ -3,21 +3,21 @@
 #include "moves.h"
 #include "pokemon.h"
 
-void SavePokemonMove(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+void SavePokemonMove(struct unkStruct_8094924 *r0, struct Move *move)
 {
     SaveIntegerBits(r0, &move->moveFlags, 4);
-    SaveIntegerBits(r0, &move->moveID, 9);
+    SaveIntegerBits(r0, &move->id, 9);
     SaveIntegerBits(r0, &move->PP, 7);
 }
 
-void RestorePokemonMove(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+void RestorePokemonMove(struct unkStruct_8094924 *r0, struct Move *move)
 {
     RestoreIntegerBits(r0, &move->moveFlags, 4);
-    RestoreIntegerBits(r0, &move->moveID, 9);
+    RestoreIntegerBits(r0, &move->id, 9);
     RestoreIntegerBits(r0, &move->PP, 7);
 }
 
-void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet)
+void SavePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
 {
     s32 iVar4;
     for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
@@ -26,7 +26,7 @@ void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet)
     }
 }
 
-void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet)
+void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
 {
     s32 iVar4;
     for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
@@ -35,13 +35,13 @@ void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveS
     }
 }
 
-void sub_8094148(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+void sub_8094148(struct unkStruct_8094924 *r0, struct Move *move)
 {
     SaveIntegerBits(r0, &move->moveFlags, 4);
     SaveIntegerBits(r0, &move->moveFlags2, 1);
-    SaveIntegerBits(r0, &move->moveID, 9);
+    SaveIntegerBits(r0, &move->id, 9);
     SaveIntegerBits(r0, &move->PP, 7);
-    SaveIntegerBits(r0, &move->powerBoost, 7);
+    SaveIntegerBits(r0, &move->ginseng, 7);
 }
 
 void sub_8094184(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
@@ -55,14 +55,14 @@ void sub_8094184(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
     SaveIntegerBits(r0, &r1->unk20, 8);
 }
 
-void sub_80941B0(struct unkStruct_8094924 *r0, struct PokemonMove *move)
+void sub_80941B0(struct unkStruct_8094924 *r0, struct Move *move)
 {
-    memset(move, 0, sizeof(struct PokemonMove));
+    memset(move, 0, sizeof(struct Move));
     RestoreIntegerBits(r0, &move->moveFlags, 4);
     RestoreIntegerBits(r0, &move->moveFlags2, 1);
-    RestoreIntegerBits(r0, &move->moveID, 9);
+    RestoreIntegerBits(r0, &move->id, 9);
     RestoreIntegerBits(r0, &move->PP, 7);
-    RestoreIntegerBits(r0, &move->powerBoost, 7);
+    RestoreIntegerBits(r0, &move->ginseng, 7);
 }
 
 void sub_80941FC(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)

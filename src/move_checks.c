@@ -102,32 +102,32 @@ const u8 gDungeonCamouflageTypes[76] = {
 };
 
 
-bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct PokemonMove *move)
+bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    switch (move->moveID)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    switch (move->id)
     {
         case MOVE_HAIL:
-            if (GetWeather(pokemon) == WEATHER_HAIL)
+            if (GetApparentWeather(pokemon) == WEATHER_HAIL)
             {
                 return FALSE;
             }
             break;
         case MOVE_RAGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_RAGE)
+            if (pokemonInfo->chargingStatus == STATUS_ENRAGED)
             {
                 return FALSE;
             }
             break;
         case MOVE_COUNTER:
         case MOVE_PURSUIT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_COUNTER)
+            if (pokemonInfo->protectionStatus == STATUS_COUNTER)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIRROR_MOVE:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIRROR_MOVE)
+            if (pokemonInfo->protectionStatus == STATUS_MIRROR_MOVE)
             {
                 return FALSE;
             }
@@ -135,13 +135,13 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         case MOVE_HOWL:
         case MOVE_MEDITATE:
         case MOVE_SHARPEN:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_BELLY_DRUM:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE || RoundUpFixedPoint(pokemonData->belly) <= 0)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE || RoundUpFixedPoint(pokemonInfo->belly) <= 0)
             {
                 return FALSE;
             }
@@ -152,14 +152,14 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         case MOVE_HARDEN:
         case MOVE_IRON_DEFENSE:
         case MOVE_WITHDRAW:
-            if (pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_BIDE:
         case MOVE_REVENGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
+            if (pokemonInfo->chargingStatus == STATUS_BIDE)
             {
                 return FALSE;
             }
@@ -172,7 +172,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
 #else
             r1 = 0;
 #endif
-            if (pokemon->entityData->movementSpeed >= MAX_MOVEMENT_SPEED)
+            if (pokemon->info->speedStage >= MAX_SPEED_STAGE)
             {
                 r1 = !r1;
                 return FALSE;
@@ -181,185 +181,185 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         }
         case MOVE_LOCK_ON:
         case MOVE_MIND_READER:
-            if (pokemonData->moveStatus == MOVE_STATUS_SURE_SHOT)
+            if (pokemonInfo->moveStatus == STATUS_SURE_SHOT)
             {
                 return FALSE;
             }
             break;
         case MOVE_COSMIC_POWER:
-            if (pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE && pokemonData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_ENDURE:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_ENDURE)
+            if (pokemonInfo->protectionStatus == STATUS_ENDURING)
             {
                 return FALSE;
             }
             break;
         case MOVE_CHARGE:
-            if (pokemonData->chargingStatus == CHARGING_STATUS_CHARGE)
+            if (pokemonInfo->chargingStatus == STATUS_CHARGING)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIST:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIST)
+            if (pokemonInfo->protectionStatus == STATUS_MIST)
             {
                 return FALSE;
             }
             break;
         case MOVE_LIGHT_SCREEN:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_LIGHT_SCREEN)
+            if (pokemonInfo->protectionStatus == STATUS_LIGHT_SCREEN)
             {
                 return FALSE;
             }
             break;
         case MOVE_MINIMIZE:
-            if (pokemonData->accuracyStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_INGRAIN:
-            if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_INGRAIN || pokemonData->maxHP / 2 < pokemonData->HP)
+            if (pokemonInfo->immobilizeStatus == STATUS_INGRAIN || pokemonInfo->maxHPStat / 2 < pokemonInfo->HP)
             {
                 return FALSE;
             }
             break;
         case MOVE_SWALLOW:
-            if (pokemonData->maxHP <= pokemonData->HP || pokemonData->stockpileCount == 0)
+            if (pokemonInfo->maxHPStat <= pokemonInfo->HP || pokemonInfo->stockpileStage == 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_SPIT_UP:
-            if (pokemonData->stockpileCount == 0)
+            if (pokemonInfo->stockpileStage == 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_DOOM_DESIRE:
         case MOVE_FUTURE_SIGHT:
-            if (pokemonData->moveStatus == MOVE_STATUS_SET_DAMAGE)
+            if (pokemonInfo->moveStatus == STATUS_SET_DAMAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_BULK_UP:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE && pokemonData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_CAMOUFLAGE:
-            if (HasType(pokemon, gDungeonCamouflageTypes[gDungeonGlobalData->tileset]))
+            if (MonsterIsType(pokemon, gDungeonCamouflageTypes[gDungeon->tileset]))
             {
                 return FALSE;
             }
             break;
         case MOVE_TAIL_GLOW:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_DESTINY_BOND:
-            if (pokemonData->linkedStatus == LINKED_STATUS_DESTINY_BOND)
+            if (pokemonInfo->linkedStatus == STATUS_DESTINY_BOND)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIRROR_COAT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MIRROR_COAT)
+            if (pokemonInfo->protectionStatus == STATUS_MIRROR_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_REFLECT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_REFLECT)
+            if (pokemonInfo->protectionStatus == STATUS_REFLECT)
             {
                 return FALSE;
             }
             break;
         case MOVE_DRAGON_DANCE:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE && pokemon->entityData->movementSpeed >= MAX_MOVEMENT_SPEED)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && pokemon->info->speedStage >= MAX_SPEED_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_MAGIC_COAT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_MAGIC_COAT)
+            if (pokemonInfo->protectionStatus == STATUS_MAGIC_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_DETECT:
         case MOVE_PROTECT:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_PROTECT)
+            if (pokemonInfo->protectionStatus == STATUS_PROTECT)
             {
                 return FALSE;
             }
             break;
         case MOVE_RAIN_DANCE:
-            if (GetWeather(pokemon) == WEATHER_RAIN)
+            if (GetApparentWeather(pokemon) == WEATHER_RAIN)
             {
                 return FALSE;
             }
             break;
         case MOVE_SANDSTORM:
-            if (GetWeather(pokemon) == WEATHER_SANDSTORM)
+            if (GetApparentWeather(pokemon) == WEATHER_SANDSTORM)
             {
                 return FALSE;
             }
             break;
         case MOVE_SUNNY_DAY:
-            if (GetWeather(pokemon) == WEATHER_SUNNY)
+            if (GetApparentWeather(pokemon) == WEATHER_SUNNY)
             {
                 return FALSE;
             }
             break;
         case MOVE_SAFEGUARD:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_SAFEGUARD)
+            if (pokemonInfo->protectionStatus == STATUS_SAFEGUARD)
             {
                 return FALSE;
             }
             break;
         case MOVE_INVISIFY:
-            if (pokemonData->transformStatus == TRANSFORM_STATUS_INVISIBLE)
+            if (pokemonInfo->transformStatus == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
             break;
         case MOVE_FOCUS_ENERGY:
-            if (pokemonData->moveStatus == MOVE_STATUS_FOCUS_ENERGY)
+            if (pokemonInfo->moveStatus == STATUS_FOCUS_ENERGY)
             {
                 return FALSE;
             }
             break;
         case MOVE_TAKEAWAY:
-            if (pokemonData->heldItem.itemFlags & ITEM_FLAG_EXISTS)
+            if (pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS)
             {
                 return FALSE;
             }
             break;
         case MOVE_REST:
-            if (!HasQuarterHPOrLess(pokemon) && !HasNegativeStatus(pokemon))
+            if (!HasLowHealth(pokemon) && !HasNegativeStatus(pokemon))
             {
                 return FALSE;
             }
             break;
         case MOVE_DIVE:
-            if (IsTileGround(GetMapTileForDungeonEntity_2(pokemon)))
+            if (IsTileGround(GetTileAtEntitySafe(pokemon)))
             {
                 return FALSE;
             }
             break;
         case MOVE_DIG:
         {
-            struct MapTile *tile = GetMapTileForDungeonEntity_2(pokemon);
-            if (!IsTileGround(tile) || (tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != TILE_TYPE_FLOOR)
+            struct Tile *tile = GetTileAtEntitySafe(pokemon);
+            if (!IsTileGround(tile) || (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
             {
                 return FALSE;
             }
@@ -367,27 +367,27 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         }
         case MOVE_TRAP_BUSTER:
         {
-            struct DungeonEntity *mapObject = GetMapTileForDungeonEntity_2(pokemon)->mapObject;
-            if (mapObject == NULL || GetEntityType(mapObject) != ENTITY_TRAP)
+            struct Entity *object = GetTileAtEntitySafe(pokemon)->object;
+            if (object == NULL || GetEntityType(object) != ENTITY_TRAP)
             {
                 return FALSE;
             }
             break;
         }
         case MOVE_MUD_SPORT:
-            if (gDungeonGlobalData->mudSportTurnsLeft > 0)
+            if (gDungeon->mudSportTurns > 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_WATER_SPORT:
-            if (gDungeonGlobalData->waterSportTurnsLeft > 0)
+            if (gDungeon->waterSportTurns > 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_GRUDGE:
-            if (pokemonData->grudgeStatus)
+            if (pokemonInfo->grudge)
             {
                 return FALSE;
             }
@@ -395,73 +395,73 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         case MOVE_DECOY_MAKER:
         case MOVE_FOLLOW_ME:
         case MOVE_SUBSTITUTE:
-            if (gDungeonGlobalData->decoyActive)
+            if (gDungeon->decoyActive)
             {
                 return FALSE;
             }
             break;
         case MOVE_STOCKPILE:
-            if (pokemonData->stockpileCount >= MAX_STOCKPILE_COUNT)
+            if (pokemonInfo->stockpileStage >= MAX_STOCKPILE_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_CLEANSE:
-            if (pokemonData->heldItem.itemFlags & ITEM_FLAG_EXISTS &&
-                !(pokemonData->heldItem.itemFlags & ITEM_FLAG_STICKY))
+            if (pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS &&
+                !(pokemonInfo->heldItem.flags & ITEM_FLAG_STICKY))
             {
                 return FALSE;
             }
             break;
         case MOVE_DOUBLE_TEAM:
-            if (pokemonData->accuracyStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_GROWTH:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_SWORDS_DANCE:
-            if (pokemonData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_WISH:
-            if (pokemonData->isEnemy || pokemonData->protectionStatus == PROTECTION_STATUS_WISH)
+            if (pokemonInfo->isNotTeamMember || pokemonInfo->protectionStatus == STATUS_WISH)
             {
                 return FALSE;
             }
             break;
         case MOVE_TRANSFORM:
-            if (pokemonData->transformStatus == TRANSFORM_STATUS_TRANSFORMED)
+            if (pokemonInfo->transformStatus == STATUS_TRANSFORMED)
             {
                 return FALSE;
             }
             break;
         case MOVE_SPIKES:
-            if (!CanLayTrap(&pokemon->posWorld))
+            if (!CanLayTrap(&pokemon->pos))
             {
                 return FALSE;
             }
             break;
         case MOVE_CALM_MIND:
-            if (pokemonData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
             {
                 break;
             }
         case MOVE_AMNESIA:
-            if (pokemonData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_SNATCH:
-            if (pokemonData->waitingStatus == WAITING_STATUS_SNATCH)
+            if (pokemonInfo->waitingStatus == STATUS_SNATCH)
             {
                 return FALSE;
             }
@@ -477,31 +477,31 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
         case MOVE_VITAL_THROW:
         case MOVE_WARP:
         case MOVE_WHIRLWIND:
-            if (IsBossBattle())
+            if (IsBossFight())
             {
                 return FALSE;
             }
             break;
         case MOVE_CONVERSION_2:
-            if (pokemonData->protectionStatus == PROTECTION_STATUS_CONVERSION_2)
+            if (pokemonInfo->protectionStatus == STATUS_CONVERSION2)
             {
                 return FALSE;
             }
             break;
         case MOVE_HELPING_HAND:
-            if (pokemonData->isEnemy)
+            if (pokemonInfo->isNotTeamMember)
             {
                 s32 i;
                 for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++)
                 {
-                    struct DungeonEntity *target = gDungeonGlobalData->wildPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSee(pokemon, target))
+                    struct Entity *target = gDungeon->wildPokemon[i];
+                    if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (target->entityData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
+                        if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (target->entityData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
+                        if (target->info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -518,14 +518,14 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
                 s32 i;
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++)
                 {
-                    struct DungeonEntity *target = gDungeonGlobalData->teamPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSee(pokemon, target))
+                    struct Entity *target = gDungeon->teamPokemon[i];
+                    if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (target->entityData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE)
+                        if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (target->entityData->attackStages[STAT_STAGE_SPECIAL_ATTACK] < MAX_STAT_STAGE)
+                        if (target->info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -541,16 +541,16 @@ bool8 CanUseOnSelfWithStatusChecker(struct DungeonEntity *pokemon, struct Pokemo
     return TRUE;
 }
 
-bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move)
+bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target, struct Move *move)
 {
-    struct DungeonEntityData *userData = user->entityData;
-    struct DungeonEntityData *targetData = target->entityData;
+    struct EntityInfo *userData = user->info;
+    struct EntityInfo *targetData = target->info;
     s32 i;
-    if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_FROZEN && MoveCannotHitFrozen(move))
+    if (targetData->immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
     {
         return FALSE;
     }
-    switch (move->moveID)
+    switch (move->id)
     {
         case MOVE_GRASSWHISTLE:
         case MOVE_HYPNOSIS:
@@ -564,7 +564,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_YAWN:
-            if (targetData->sleepStatus == SLEEP_STATUS_YAWNING)
+            if (targetData->sleep == STATUS_YAWNING)
             {
                 return FALSE;
             }
@@ -574,25 +574,25 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_NIGHTMARE:
-            if (targetData->sleepStatus == SLEEP_STATUS_NIGHTMARE)
+            if (targetData->sleep == STATUS_NIGHTMARE)
             {
                 return FALSE;
             }
             break;
         case MOVE_SWEET_SCENT:
-            if (targetData->accuracyStages[STAT_STAGE_EVASION] <= 0)
+            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_CHARM:
-            if (targetData->attackMultipliers[STAT_STAGE_ATTACK] < STAT_MULTIPLIER_THRESHOLD)
+            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD)
             {
                 return FALSE;
             }
             break;
         case MOVE_ENCORE:
-            if (targetData->volatileStatus == VOLATILE_STATUS_ENCORE)
+            if (targetData->volatileStatus == STATUS_ENCORE)
             {
                 return FALSE;
             }
@@ -622,19 +622,19 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_COTTON_SPORE:
         case MOVE_SCARY_FACE:
         case MOVE_STRING_SHOT:
-            if (target->entityData->movementSpeed <= 0)
+            if (target->info->speedStage <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_SCREECH:
-            if (targetData->defenseMultipliers[STAT_STAGE_DEFENSE] < STAT_MULTIPLIER_THRESHOLD)
+            if (targetData->defensiveMultipliers[STAT_STAGE_DEF] < STAT_MULTIPLIER_THRESHOLD)
             {
                 return FALSE;
             }
             break;
         case MOVE_FAKE_TEARS:
-            if (targetData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] <= 0)
+            if (targetData->defensiveStages[STAT_STAGE_SP_DEF] <= 0)
             {
                 return FALSE;
             }
@@ -646,20 +646,20 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_SMOKESCREEN:
-            if (targetData->moveStatus == MOVE_STATUS_WHIFFER)
+            if (targetData->moveStatus == STATUS_WHIFFER)
             {
                 return FALSE;
             }
             break;
         case MOVE_MEMENTO:
-            if (targetData->attackMultipliers[STAT_STAGE_ATTACK] < STAT_MULTIPLIER_THRESHOLD &&
-                targetData->attackMultipliers[STAT_STAGE_SPECIAL_ATTACK] < STAT_MULTIPLIER_THRESHOLD)
+            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD &&
+                targetData->offensiveMultipliers[STAT_STAGE_SP_ATK] < STAT_MULTIPLIER_THRESHOLD)
             {
                 return FALSE;
             }
             break;
         case MOVE_WILL_O_WISP:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BURNED)
+            if (targetData->nonVolatileStatus == STATUS_BURN)
             {
                 return FALSE;
             }
@@ -668,12 +668,12 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_ODOR_SLEUTH:
             if (targetData->types[0] == TYPE_GHOST || targetData->types[1] == TYPE_GHOST)
             {
-                if (!targetData->exposedStatus)
+                if (!targetData->exposed)
                 {
                     break;
                 }
             }
-            if (targetData->accuracyStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
+            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -682,7 +682,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_GLARE:
         case MOVE_STUN_SPORE:
         case MOVE_THUNDER_WAVE:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED)
+            if (targetData->nonVolatileStatus == STATUS_PARALYSIS)
             {
                 return FALSE;
             }
@@ -695,20 +695,20 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             break;
         case MOVE_LEER:
         case MOVE_TAIL_WHIP:
-            if (targetData->defenseStages[STAT_STAGE_DEFENSE] <= 0)
+            if (targetData->defensiveStages[STAT_STAGE_DEF] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_METAL_SOUND:
-            if (targetData->defenseStages[STAT_STAGE_SPECIAL_DEFENSE] <= 0)
+            if (targetData->defensiveStages[STAT_STAGE_SP_DEF] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_TICKLE:
-            if (targetData->attackStages[STAT_STAGE_ATTACK] <= 0 &&
-                targetData->defenseStages[STAT_STAGE_DEFENSE] <= 0)
+            if (targetData->offensiveStages[STAT_STAGE_ATK] <= 0 &&
+                targetData->defensiveStages[STAT_STAGE_DEF] <= 0)
             {
                 return FALSE;
             }
@@ -716,7 +716,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_BLOCK:
         case MOVE_MEAN_LOOK:
         case MOVE_SPIDER_WEB:
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_IMMOBILIZED)
+            if (targetData->immobilizeStatus == STATUS_SHADOW_HOLD)
             {
                 return FALSE;
             }
@@ -725,11 +725,11 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         {
             for (i = 0; i < 2; i++)
             {
-                if (targetData->attackStages[i] < DEFAULT_STAT_STAGE) break;
-                if (targetData->defenseStages[i] < DEFAULT_STAT_STAGE) break;
-                if (targetData->accuracyStages[i] < DEFAULT_STAT_STAGE ||
-                    targetData->attackMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
-                    targetData->defenseMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
+                if (targetData->offensiveStages[i] < DEFAULT_STAT_STAGE) break;
+                if (targetData->defensiveStages[i] < DEFAULT_STAT_STAGE) break;
+                if (targetData->hitChanceStages[i] < DEFAULT_STAT_STAGE ||
+                    targetData->offensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
+                    targetData->defensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
                 {
                     break;
                 }
@@ -741,7 +741,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             break;
         }
         case MOVE_UPROAR:
-            if (targetData->sleepStatus == SLEEP_STATUS_SLEEPLESS)
+            if (targetData->sleep == STATUS_SLEEPLESS)
             {
                 return FALSE;
             }
@@ -750,11 +750,11 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         {
             for (i = 0; i < 2; i++)
             {
-                if (userData->attackStages[i] < targetData->attackStages[i]) break;
-                if (userData->defenseStages[i] < targetData->defenseStages[i] ||
-                    userData->accuracyStages[i] < targetData->accuracyStages[i] ||
-                    userData->attackMultipliers[i] < targetData->attackMultipliers[i] ||
-                    userData->defenseMultipliers[i] < targetData->defenseMultipliers[i])
+                if (userData->offensiveStages[i] < targetData->offensiveStages[i]) break;
+                if (userData->defensiveStages[i] < targetData->defensiveStages[i] ||
+                    userData->hitChanceStages[i] < targetData->hitChanceStages[i] ||
+                    userData->offensiveMultipliers[i] < targetData->offensiveMultipliers[i] ||
+                    userData->defensiveMultipliers[i] < targetData->defensiveMultipliers[i])
                 {
                     break;
                 }
@@ -768,33 +768,33 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_FLASH:
         case MOVE_KINESIS:
         case MOVE_SAND_ATTACK:
-            if (targetData->accuracyStages[STAT_STAGE_ACCURACY] <= 0)
+            if (targetData->hitChanceStages[STAT_STAGE_ACCURACY] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_TAUNT:
-            if (targetData->volatileStatus == VOLATILE_STATUS_TAUNTED)
+            if (targetData->volatileStatus == STATUS_TAUNTED)
             {
                 return FALSE;
             }
             break;
         case MOVE_TRICK:
-            if (!(userData->heldItem.itemFlags & ITEM_FLAG_EXISTS) ||
-                !(targetData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
+            if (!(userData->heldItem.flags & ITEM_FLAG_EXISTS) ||
+                !(targetData->heldItem.flags & ITEM_FLAG_EXISTS))
             {
                 return FALSE;
             }
             break;
         case MOVE_KNOCK_OFF:
-            if (!(targetData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
+            if (!(targetData->heldItem.flags & ITEM_FLAG_EXISTS))
             {
                 return FALSE;
             }
             break;
         case MOVE_FEATHERDANCE:
         case MOVE_GROWL:
-            if (targetData->attackStages[STAT_STAGE_ATTACK] <= 0)
+            if (targetData->offensiveStages[STAT_STAGE_ATK] <= 0)
             {
                 return FALSE;
             }
@@ -807,17 +807,17 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_CURSE:
-            if (HasType(user, TYPE_GHOST))
+            if (MonsterIsType(user, TYPE_GHOST))
             {
-                if (targetData->waitingStatus == WAITING_STATUS_CURSED)
+                if (targetData->waitingStatus == STATUS_CURSED)
                 {
                     return FALSE;
                 }
             }
             else
             {
-                if (userData->attackStages[STAT_STAGE_ATTACK] >= MAX_STAT_STAGE &&
-                    userData->defenseStages[STAT_STAGE_DEFENSE] >= MAX_STAT_STAGE)
+                if (userData->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE &&
+                    userData->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
                 {
                     return FALSE;
                 }
@@ -825,7 +825,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             break;
         case MOVE_IMPRISON:
         case MOVE_OBSERVER:
-            if (targetData->volatileStatus == VOLATILE_STATUS_PAUSED)
+            if (targetData->volatileStatus == STATUS_PAUSED)
             {
                 return FALSE;
             }
@@ -837,13 +837,13 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_LEECH_SEED:
-            if (targetData->linkedStatus == LINKED_STATUS_LEECH_SEED)
+            if (targetData->linkedStatus == STATUS_LEECH_SEED)
             {
                 return FALSE;
             }
             break;
         case MOVE_PERISH_SONG:
-            if (targetData->perishSongTimer != 0)
+            if (targetData->perishSongTurns != 0)
             {
                 return FALSE;
             }
@@ -856,34 +856,34 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
             }
             break;
         case MOVE_ATTRACT:
-            if (targetData->volatileStatus == VOLATILE_STATUS_INFATUATED)
+            if (targetData->volatileStatus == STATUS_INFATUATED)
             {
                 return FALSE;
             }
             break;
         case MOVE_WRAP:
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE)
+            if (targetData->immobilizeStatus == STATUS_WRAP)
             {
                 return FALSE;
             }
-            if (targetData->immobilizeStatus == IMMOBILIZE_STATUS_WRAPPED_BY_FOE)
+            if (targetData->immobilizeStatus == STATUS_WRAPPED)
             {
                 return FALSE;
             }
             break;
         case MOVE_TOXIC:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BADLY_POISONED)
+            if (targetData->nonVolatileStatus == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }
             break;
         case MOVE_POISON_GAS:
         case MOVE_POISONPOWDER:
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_POISONED)
+            if (targetData->nonVolatileStatus == STATUS_POISONED)
             {
                 return FALSE;
             }
-            if (targetData->nonVolatileStatus == NON_VOLATILE_STATUS_BADLY_POISONED)
+            if (targetData->nonVolatileStatus == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }
@@ -895,7 +895,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
         case MOVE_SWEET_KISS:
         case MOVE_TEETER_DANCE:
         case MOVE_TOTTER:
-            if (targetData->volatileStatus == VOLATILE_STATUS_CONFUSED)
+            if (targetData->volatileStatus == STATUS_CONFUSED)
             {
                 return FALSE;
             }
@@ -904,7 +904,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct DungeonEntity *user, struct Dungeon
     return TRUE;
 }
 
-bool8 HasDisabledMove(struct PokemonMove *moves)
+bool8 HasDisabledMove(struct Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -921,7 +921,7 @@ bool8 HasDisabledMove(struct PokemonMove *moves)
     return FALSE;
 }
 
-bool8 LastUsedMoveOutOfPP(struct PokemonMove *moves)
+bool8 LastUsedMoveOutOfPP(struct Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -936,7 +936,7 @@ bool8 LastUsedMoveOutOfPP(struct PokemonMove *moves)
     return FALSE;
 }
 
-bool8 HasLastUsedMove(struct PokemonMove *moves)
+bool8 HasLastUsedMove(struct Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)

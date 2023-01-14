@@ -24,7 +24,7 @@ struct unkStruct_203B2B0
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
-    struct ItemSlot chosenItem;
+    struct Item chosenItem;
     u32 state;
     u32 fallbackState;
     u32 unk28;
@@ -106,7 +106,7 @@ void sub_8024D48(void);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
-extern void sub_801B3C0(struct ItemSlot *);
+extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
@@ -180,7 +180,7 @@ u32 sub_802465C(void)
   gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
   gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
   gUnknown_203B2B0->evolutionComplete = FALSE;
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_GULPIN);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
   gUnknown_203B2B0->unk104 = faceFile;
   gUnknown_203B2B0->unk108 = faceFile->data;
   gUnknown_203B2B0->unk110 = 0;
@@ -825,16 +825,16 @@ void sub_8025254(void)
         gUnknown_203B2B0->evoItem1_itemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].itemIndex;
+        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
         gUnknown_203B2B0->evoItem2_ItemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].itemIndex;
+        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
-    gUnknown_203B2B0->unk6 = RandomCapped(0xFF);
+    gUnknown_203B2B0->unk6 = RandInt(0xFF);
     sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->evoItem1_itemIndex, 1);
 }
 
@@ -846,7 +846,7 @@ bool8 LuminousCave_HasOnly1Member(void)
 
     preload = &gRecruitedPokemonRef->pokemon[0];
     memberCount = 0;
-    for(index = 0; index < NUM_SPECIES; index++, preload++)
+    for(index = 0; index < NUM_MONSTERS; index++, preload++)
     {
         if((preload->unk0 >> 1) & 1)
             memberCount++;

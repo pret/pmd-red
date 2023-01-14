@@ -24,165 +24,165 @@ extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80F95EC[];
 extern char *gPtrMoveInterruptedMessage[];
 
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
+extern void SetMessageArgument(char[], struct Entity*, u32);
 
-bool8 HasStatusAffectingActions(struct DungeonEntity *pokemon)
+bool8 HasStatusAffectingActions(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-    SetAction(&pokemonData->action, DUNGEON_ACTION_WAIT);
-    switch (pokemonData->sleepStatus)
+    SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+    switch (pokemonInfo->sleep)
     {
-        case SLEEP_STATUS_NIGHTMARE:
-        case SLEEP_STATUS_SLEEP:
-        case SLEEP_STATUS_NAPPING:
+        case STATUS_NIGHTMARE:
+        case STATUS_SLEEP:
+        case STATUS_NAPPING:
             return TRUE;
     }
-    switch (pokemonData->immobilizeStatus)
+    switch (pokemonInfo->immobilizeStatus)
     {
-        case IMMOBILIZE_STATUS_FROZEN:
+        case STATUS_FROZEN:
             SendMessage(pokemon, *gPtrFrozenMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE:
+        case STATUS_WRAP:
             SendMessage(pokemon, *gPtrWrappedAroundMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_WRAPPED_BY_FOE:
+        case STATUS_WRAPPED:
             SendMessage(pokemon, *gPtrWrappedByMessage);
             return TRUE;
-        case IMMOBILIZE_STATUS_PETRIFIED:
+        case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonData->volatileStatus)
+    switch (pokemonInfo->volatileStatus)
     {
-        case VOLATILE_STATUS_PAUSED:
+        case STATUS_PAUSED:
             SendMessage(pokemon, *gPtrPausedMessage);
             return TRUE;
-        case VOLATILE_STATUS_INFATUATED:
+        case STATUS_INFATUATED:
             SendMessage(pokemon, *gPtrInfatuatedMessage);
             return TRUE;
     }
-    if (pokemonData->chargingStatus == CHARGING_STATUS_BIDE)
+    if (pokemonInfo->chargingStatus == STATUS_BIDE)
     {
         SendMessage(pokemon, *gPtrBideMessage);
         return TRUE;
     }
-    if (pokemonData->waitingStatus == WAITING_STATUS_DECOY)
+    if (pokemonInfo->waitingStatus == STATUS_DECOY)
     {
-        SetWalkAction(&pokemonData->action, pokemonData->entityID);
-        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-        pokemonData->targetPosition.x = pokemon->posWorld.x;
-        pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
+        SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+        pokemonInfo->targetPos.x = pokemon->pos.x;
+        pokemonInfo->targetPos.y = pokemon->pos.y - 1;
         return TRUE;
     }
-    if (pokemonData->shopkeeperMode == SHOPKEEPER_FRIENDLY)
+    if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
     {
         return TRUE;
     }
-    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_BLINKER)
+    if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
     {
-        if (!CanMoveInDirection(pokemon, pokemonData->action.facingDir))
+        if (!CanMoveInDirection(pokemon, pokemonInfo->action.direction))
         {
-            if (DungeonRandomCapped(2) != 0)
+            if (DungeonRandInt(2) != 0)
             {
-                pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-                pokemonData->action.facingDir = pokemonData->action.facingDir & DIRECTION_MASK;
+                pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+                pokemonInfo->action.direction = pokemonInfo->action.direction & DIRECTION_MASK;
                 goto walk;
             }
         }
         else
         {
             walk:
-            SetWalkAction(&pokemonData->action, pokemonData->entityID);
+            SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
             return TRUE;
         }
         DecideAttack(pokemon);
         return TRUE;
     }
-    if (pokemonData->eyesightStatus == EYESIGHT_STATUS_CROSS_EYED)
+    if (pokemonInfo->eyesightStatus == STATUS_CROSS_EYED)
     {
-        SetWalkAction(&pokemonData->action, pokemonData->entityID);
-        pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
+        SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_80701A4(struct DungeonEntity *pokemon)
+bool8 sub_80701A4(struct Entity *pokemon)
 {
   bool8 flag;
-  struct PokemonMove *move;
-  struct PokemonMove *move2;
+  struct Move *move;
+  struct Move *move2;
   s32 index;
   s32 index_1;
-  struct DungeonEntityData * entityData;
+  struct EntityInfo * pokemonInfo;
   u8 *r7;
   
-  entityData = pokemon->entityData;
+  pokemonInfo = pokemon->info;
   flag = FALSE;
   SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-  SetAction(&entityData->action, DUNGEON_ACTION_WAIT);
-  switch(entityData->sleepStatus)
+  SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+  switch(pokemonInfo->sleep)
   {
-      case SLEEP_STATUS_SLEEP:
-      case SLEEP_STATUS_NIGHTMARE:
-      case SLEEP_STATUS_NAPPING:
+      case STATUS_SLEEP:
+      case STATUS_NIGHTMARE:
+      case STATUS_NAPPING:
           SendMessage(pokemon,*gUnknown_80F95EC);
           return TRUE;
   }
 
-  switch(entityData->immobilizeStatus)
+  switch(pokemonInfo->immobilizeStatus)
   {
-    case IMMOBILIZE_STATUS_FROZEN:
+    case STATUS_FROZEN:
         SendMessage(pokemon,*gPtrFrozenMessage);
         return TRUE;
-    case IMMOBILIZE_STATUS_WRAPPED_AROUND_FOE:
+    case STATUS_WRAP:
         SendMessage(pokemon,*gPtrWrappedAroundMessage);
         return TRUE;
-    case IMMOBILIZE_STATUS_WRAPPED_BY_FOE:
+    case STATUS_WRAPPED:
         SendMessage(pokemon,*gPtrWrappedByMessage);
         return TRUE;
-    case IMMOBILIZE_STATUS_PETRIFIED:
+    case STATUS_PETRIFIED:
         return TRUE;
   }
 
-  switch(entityData->volatileStatus) {
-    case VOLATILE_STATUS_CONFUSED:
+  switch(pokemonInfo->volatileStatus) {
+    case STATUS_CONFUSED:
         flag = TRUE;
         goto _0807026C;
-    case VOLATILE_STATUS_PAUSED:
+    case STATUS_PAUSED:
         SendMessage(pokemon,*gPtrPausedMessage);
         return TRUE;
-    case VOLATILE_STATUS_INFATUATED:
+    case STATUS_INFATUATED:
         SendMessage(pokemon,*gPtrInfatuatedMessage);
         return TRUE;
     default:
-    case VOLATILE_STATUS_NONE:
-    case VOLATILE_STATUS_CRINGING:
+    case STATUS_NONE:
+    case STATUS_CRINGE:
     case 8:
     _0807026C:
-        if (entityData->chargingStatus == CHARGING_STATUS_BIDE) {
+        if (pokemonInfo->chargingStatus == STATUS_BIDE) {
              SendMessage(pokemon,*gPtrBideMessage);
              return TRUE;
         }
-        else if (((entityData->chargingStatus != CHARGING_STATUS_NONE) && (entityData->chargingStatus != CHARGING_STATUS_CHARGE)) && (entityData->chargingStatus != CHARGING_STATUS_RAGE)) {
+        else if (((pokemonInfo->chargingStatus != STATUS_NONE) && (pokemonInfo->chargingStatus != STATUS_CHARGING)) && (pokemonInfo->chargingStatus != STATUS_ENRAGED)) {
             if (flag) {
                 SendMessage(pokemon,*gPtrMoveInterruptedMessage);
             }
             else {
-                for(index = 0, move = entityData->moves; index < MAX_MON_MOVES; move++, index++) {
+                for(index = 0, move = pokemonInfo->moves; index < MAX_MON_MOVES; move++, index++) {
                     if ((move->moveFlags & MOVE_FLAG_EXISTS) &&
                     (MoveMatchesChargingStatus(pokemon,move)) &&
-                    (entityData->chargingStatusMoveIndex == index)) {
-                        SetAction(&entityData->action, DUNGEON_ACTION_USE_MOVE_LEADER);
+                    (pokemonInfo->chargingStatusMoveIndex == index)) {
+                        SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_PLAYER);
                         index_1 = index;
-                        r7 = &entityData->action.unkC;
-                        if((index > 0) && (move->moveFlags & MOVE_FLAG_LINKED))
+                        r7 = &pokemonInfo->action.unkC;
+                        if((index > 0) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                         {   
                             do {
-                                move2 = &entityData->moves[index_1 + 1];
+                                move2 = &pokemonInfo->moves[index_1 + 1];
                                 move2--, index_1--;
                                 if(index_1 <= 0) break;
-                                if(!(entityData->moves[index_1].moveFlags & MOVE_FLAG_LINKED))
+                                if(!(pokemonInfo->moves[index_1].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                                 {
                                     break;
                                 }

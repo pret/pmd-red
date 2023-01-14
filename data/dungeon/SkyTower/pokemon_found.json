@@ -3,37 +3,37 @@
 		"name": "SkyTower_1F_5F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_FORRETRESS",
+                            "species": "MONSTER_FORRETRESS",
                             "level": 23,
                             "probability": 2581
                         },
                         {
-                            "species": "SPECIES_MASQUERAIN",
+                            "species": "MONSTER_MASQUERAIN",
                             "level": 27,
                             "probability": 1290
                         },
                         {
-                            "species": "SPECIES_SHEDINJA",
+                            "species": "MONSTER_SHEDINJA",
                             "level": 5,
                             "probability": 968
                         },
                         {
-                            "species": "SPECIES_LUNATONE",
+                            "species": "MONSTER_LUNATONE",
                             "level": 24,
                             "probability": 2580
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_SHUPPET",
+                            "species": "MONSTER_SHUPPET",
                             "level": 28,
                             "probability": 2581
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -42,32 +42,32 @@
 		"name": "SkyTower_6F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_FORRETRESS",
+                            "species": "MONSTER_FORRETRESS",
                             "level": 23,
                             "probability": 2857
                         },
                         {
-                            "species": "SPECIES_MASQUERAIN",
+                            "species": "MONSTER_MASQUERAIN",
                             "level": 27,
                             "probability": 1429
                         },
                         {
-                            "species": "SPECIES_LUNATONE",
+                            "species": "MONSTER_LUNATONE",
                             "level": 24,
                             "probability": 2857
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_SHUPPET",
+                            "species": "MONSTER_SHUPPET",
                             "level": 28,
                             "probability": 2857
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -76,27 +76,27 @@
 		"name": "SkyTower_7F_8F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_MASQUERAIN",
+                            "species": "MONSTER_MASQUERAIN",
                             "level": 27,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_LUNATONE",
+                            "species": "MONSTER_LUNATONE",
                             "level": 24,
                             "probability": 4000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSKULL",
+                            "species": "MONSTER_DUSKULL",
                             "level": 27,
                             "probability": 4000
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -105,27 +105,27 @@
 		"name": "SkyTower_9F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_KOFFING",
+                            "species": "MONSTER_KOFFING",
                             "level": 24,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_LUNATONE",
+                            "species": "MONSTER_LUNATONE",
                             "level": 24,
                             "probability": 3334
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSKULL",
+                            "species": "MONSTER_DUSKULL",
                             "level": 27,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -134,32 +134,32 @@
 		"name": "SkyTower_10F_11F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_KOFFING",
+                            "species": "MONSTER_KOFFING",
                             "level": 24,
                             "probability": 2581
                         },
                         {
-                            "species": "SPECIES_LEDIAN",
+                            "species": "MONSTER_LEDIAN",
                             "level": 24,
                             "probability": 2258
                         },
                         {
-                            "species": "SPECIES_LUNATONE",
+                            "species": "MONSTER_LUNATONE",
                             "level": 24,
                             "probability": 2580
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSKULL",
+                            "species": "MONSTER_DUSKULL",
                             "level": 27,
                             "probability": 2581
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -168,37 +168,37 @@
 		"name": "SkyTower_12F_14F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_KOFFING",
+                            "species": "MONSTER_KOFFING",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_LEDIAN",
+                            "species": "MONSTER_LEDIAN",
                             "level": 24,
                             "probability": 1795
                         },
                         {
-                            "species": "SPECIES_ALTARIA",
+                            "species": "MONSTER_ALTARIA",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_SOLROCK",
+                            "species": "MONSTER_SOLROCK",
                             "level": 24,
                             "probability": 2052
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSKULL",
+                            "species": "MONSTER_DUSKULL",
                             "level": 27,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -207,37 +207,37 @@
 		"name": "SkyTower_15F_16F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_KOFFING",
+                            "species": "MONSTER_KOFFING",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_LEDIAN",
+                            "species": "MONSTER_LEDIAN",
                             "level": 24,
                             "probability": 1795
                         },
                         {
-                            "species": "SPECIES_SCIZOR",
+                            "species": "MONSTER_SCIZOR",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_ALTARIA",
+                            "species": "MONSTER_ALTARIA",
                             "level": 24,
                             "probability": 2052
                         },
                         {
-                            "species": "SPECIES_SOLROCK",
+                            "species": "MONSTER_SOLROCK",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -246,37 +246,37 @@
 		"name": "SkyTower_17F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_LEDIAN",
+                            "species": "MONSTER_LEDIAN",
                             "level": 24,
                             "probability": 1795
                         },
                         {
-                            "species": "SPECIES_SCIZOR",
+                            "species": "MONSTER_SCIZOR",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_ALTARIA",
+                            "species": "MONSTER_ALTARIA",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_SOLROCK",
+                            "species": "MONSTER_SOLROCK",
                             "level": 24,
                             "probability": 2052
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSCLOPS",
+                            "species": "MONSTER_DUSCLOPS",
                             "level": 24,
                             "probability": 2051
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -285,32 +285,32 @@
 		"name": "SkyTower_18F_19F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_SCIZOR",
+                            "species": "MONSTER_SCIZOR",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_ALTARIA",
+                            "species": "MONSTER_ALTARIA",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_SOLROCK",
+                            "species": "MONSTER_SOLROCK",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSCLOPS",
+                            "species": "MONSTER_DUSCLOPS",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -319,32 +319,32 @@
 		"name": "SkyTower_20F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_VENOMOTH",
+                            "species": "MONSTER_VENOMOTH",
                             "level": 18,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_SCIZOR",
+                            "species": "MONSTER_SCIZOR",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_SOLROCK",
+                            "species": "MONSTER_SOLROCK",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSCLOPS",
+                            "species": "MONSTER_DUSCLOPS",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -353,37 +353,37 @@
 		"name": "SkyTower_21F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_VENOMOTH",
+                            "species": "MONSTER_VENOMOTH",
                             "level": 18,
                             "probability": 2222
                         },
                         {
-                            "species": "SPECIES_AERODACTYL",
+                            "species": "MONSTER_AERODACTYL",
                             "level": 25,
                             "probability": 2222
                         },
                         {
-                            "species": "SPECIES_SCIZOR",
+                            "species": "MONSTER_SCIZOR",
                             "level": 24,
                             "probability": 2223
                         },
                         {
-                            "species": "SPECIES_FLYGON",
+                            "species": "MONSTER_FLYGON",
                             "level": 27,
                             "probability": 1111
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSCLOPS",
+                            "species": "MONSTER_DUSCLOPS",
                             "level": 24,
                             "probability": 2222
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -392,37 +392,37 @@
 		"name": "SkyTower_22F_23F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_VENOMOTH",
+                            "species": "MONSTER_VENOMOTH",
                             "level": 18,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_AERODACTYL",
+                            "species": "MONSTER_AERODACTYL",
                             "level": 25,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_FLYGON",
+                            "species": "MONSTER_FLYGON",
                             "level": 27,
                             "probability": 1250
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DUSCLOPS",
+                            "species": "MONSTER_DUSCLOPS",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_TROPIUS",
+                            "species": "MONSTER_TROPIUS",
                             "level": 27,
                             "probability": 1250
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -431,32 +431,32 @@
 		"name": "SkyTower_24F_25F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_VENOMOTH",
+                            "species": "MONSTER_VENOMOTH",
                             "level": 18,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_AERODACTYL",
+                            "species": "MONSTER_AERODACTYL",
                             "level": 25,
                             "probability": 3334
                         },
                         {
-                            "species": "SPECIES_FLYGON",
+                            "species": "MONSTER_FLYGON",
                             "level": 27,
                             "probability": 1666
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_TROPIUS",
+                            "species": "MONSTER_TROPIUS",
                             "level": 27,
                             "probability": 1667
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }

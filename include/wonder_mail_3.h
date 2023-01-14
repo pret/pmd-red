@@ -53,7 +53,7 @@ struct unkStruct_203B2F8
     s32 fallbackState;
     u8 wonderMailAccepted;
     bool8 unk9;
-    u8 dungeonIndex;
+    u8 dungeonID;
     u8 unkB;
     struct unkSubStruct_203B2F8 *unkC;
     u8 jobSlotIndex;

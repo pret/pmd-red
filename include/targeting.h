@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-void TargetTileInFront(struct DungeonEntity *pokemon);
+void TargetTileInFront(struct Entity *pokemon);
 
 #endif

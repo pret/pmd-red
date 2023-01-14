@@ -37,36 +37,36 @@ extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
 
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
+extern void SetMessageArgument(char[], struct Entity*, u32);
 extern u8 sub_8044B28(void);
-extern void sub_807AB38(struct DungeonEntity *, u32);
+extern void sub_807AB38(struct Entity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 
-u32 sub_8075818(struct DungeonEntity *entity)
+u32 sub_8075818(struct Entity *entity)
 {
-    struct MapTile *tile;
-    struct DungeonEntityData *entityData;
-    struct DungeonEntity *subEntity;
-    struct ItemSlot *item;
+    struct Tile *tile;
+    struct EntityInfo *entityInfo;
+    struct Entity *subEntity;
+    struct Item *item;
     u8 *trapData; // TODO: turn into struct when more research is done..
     u8 r1;
 
-    entityData = entity->entityData;
+    entityInfo = entity->info;
     if(EntityExists(entity))
     {
-        tile = GetMapTileForDungeonEntity_2(entity);
-        if(HasIQSkill(entity, IQ_SKILL_SUPER_MOBILE))
-            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+        tile = GetTileAtEntitySafe(entity);
+        if(IQSkillIsEnabled(entity, IQ_SUPER_MOBILE))
+            if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
                 return 1;
-        subEntity = tile->mapObject;
+        subEntity = tile->object;
         if(subEntity != NULL)
         {
             switch(GetEntityType(subEntity))
             {
-                case ENTITY_NONE:
-                case ENTITY_POKEMON:
+                case ENTITY_NOTHING:
+                case ENTITY_MONSTER:
                 case ENTITY_UNK_4:
                 case ENTITY_UNK_5:
                     break;
@@ -75,21 +75,21 @@ u32 sub_8075818(struct DungeonEntity *entity)
                     r1 = 0;
                     if(trapData[1] == 0)
                     {
-                        if(!subEntity->visible || entityData->isEnemy)
+                        if(!subEntity->isVisible || entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
                     else if(trapData[1] == 1)
                     {
-                        if(!entityData->isEnemy)
+                        if(!entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
                     else if(trapData[1] == 2)
                     {
-                        if(!entityData->isEnemy)
+                        if(!entityInfo->isNotTeamMember)
                             r1 = 1;
                     }
 flag_check:
@@ -98,18 +98,18 @@ flag_check:
                     else
                         goto error;
                 case ENTITY_ITEM:
-                    if(!entityData->isLeader)
+                    if(!entityInfo->isTeamLeader)
                     {
-                        if(!(entityData->heldItem.itemFlags & ITEM_FLAG_EXISTS))
+                        if(!(entityInfo->heldItem.flags & ITEM_FLAG_EXISTS))
                         {
-                            if(!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+                            if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
                             {
-                                if(entityData->isEnemy)
+                                if(entityInfo->isNotTeamMember)
                                     break;
                                 else
                                 {
                                     item = GetItemData(subEntity);
-                                    if(!(item->itemFlags & ITEM_FLAG_FOR_SALE))
+                                    if(!(item->flags & ITEM_FLAG_IN_SHOP))
                                     {
                                         return 1;
                                     }
@@ -118,7 +118,7 @@ flag_check:
                             else
                             {
                                 item = GetItemData(subEntity);
-                                if(!(item->itemFlags & ITEM_FLAG_FOR_SALE))
+                                if(!(item->flags & ITEM_FLAG_IN_SHOP))
                                 {
 error:
                                     return 1;
@@ -133,24 +133,24 @@ error:
     return 0;
 }
 
-void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
+void sub_8075900(struct Entity *pokemon, u8 r1)
 {
     if(EntityExists(pokemon))
     {
-        if(!pokemon->entityData->isEnemy)
+        if(!pokemon->info->isNotTeamMember)
         {
             if(!sub_8044B28())
             {
-                if(!gDungeonGlobalData->monsterHouseActive)
+                if(!gDungeon->monsterHouseTriggered)
                 {
-                    if((GetMapTileForDungeonEntity_2(pokemon)->tileType & TILE_TYPE_MONSTER_HOUSE))
+                    if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
-                        SendMessage(GetLeaderEntity(), gPtrItsaMonsterHouseMessage);
-                        gDungeonGlobalData->unk672 = 1;
+                        SendMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
+                        gDungeon->unk672 = 1;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
-                        if(sub_803F428(&pokemon->posWorld.x) != 0)
+                        if(sub_803F428(&pokemon->pos.x) != 0)
                             sub_803E708(0x78, 0x39);
                     }
                 }
@@ -159,87 +159,87 @@ void sub_8075900(struct DungeonEntity *pokemon, u8 r1)
     }
 }
 
-void DecideAction(struct DungeonEntity *pokemon, u32 unused)
+void RunMonsterAI(struct Entity *pokemon, u32 unused)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (pokemonData->flags & MOVEMENT_FLAG_SWAPPED_PLACES_PETRIFIED)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
-        if (pokemonData->immobilizeStatus == IMMOBILIZE_STATUS_PETRIFIED)
+        if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
         {
             SendImmobilizeEndMessage(pokemon, pokemon);
         }
     }
     else
     {
-        pokemonData->targetingDecoy = TARGETING_DECOY_NONE;
-        if (pokemonData->clientType == CLIENT_TYPE_NONE || IsMovingClient(pokemon))
+        pokemonInfo->targetingDecoy = TARGETING_DECOY_NONE;
+        if (pokemonInfo->clientType == CLIENT_TYPE_NONE || IsMovingClient(pokemon))
         {
-            if (pokemonData->clientType != CLIENT_TYPE_CLIENT && pokemonData->useHeldItem)
+            if (pokemonInfo->clientType != CLIENT_TYPE_CLIENT && pokemonInfo->useHeldItem)
             {
                 if (CannotUseItems(pokemon))
                 {
-                    pokemonData->useHeldItem = FALSE;
+                    pokemonInfo->useHeldItem = FALSE;
                     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
                     SendMessage(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }
                 DecideUseItem(pokemon);
-                if (pokemonData->action.action != DUNGEON_ACTION_NONE)
+                if (pokemonInfo->action.action != ACTION_NOTHING)
                 {
                     return;
                 }
             }
             if (!HasStatusAffectingActions(pokemon))
             {
-                if (gDungeonGlobalData->decoyActive)
+                if (gDungeon->decoyActive)
                 {
                     s32 i;
-                    struct DungeonEntity *target;
+                    struct Entity *target;
                     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
-                        target = gDungeonGlobalData->allPokemon[i];
+                        target = gDungeon->allPokemon[i];
                         if (EntityExists(target) &&
-                            target->entityData->waitingStatus == WAITING_STATUS_DECOY &&
-                            CanSee(pokemon, target))
+                            target->info->waitingStatus == STATUS_DECOY &&
+                            CanSeeTarget(pokemon, target))
                         {
-                            bool8 enemyDecoy = target->entityData->enemyDecoy;
+                            bool8 enemyDecoy = target->info->enemyDecoy;
                             u8 targetingDecoy = TARGETING_DECOY_TEAM;
                             if (enemyDecoy)
                             {
                                 targetingDecoy = TARGETING_DECOY_WILD;
                             }
-                            pokemonData->targetingDecoy = targetingDecoy;
+                            pokemonInfo->targetingDecoy = targetingDecoy;
                             break;
                         }
                     }
                 }
-                ResetAction(&pokemonData->action);
-                if (pokemonData->clientType == CLIENT_TYPE_CLIENT)
+                ClearMonsterActionFields(&pokemonInfo->action);
+                if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT)
                 {
-                    SetWalkAction(&pokemonData->action, pokemonData->entityID);
-                    pokemonData->action.facingDir = DungeonRandomCapped(NUM_DIRECTIONS);
-                    pokemonData->targetPosition.x = pokemon->posWorld.x;
-                    pokemonData->targetPosition.y = pokemon->posWorld.y - 1;
+                    SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+                    pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+                    pokemonInfo->targetPos.x = pokemon->pos.x;
+                    pokemonInfo->targetPos.y = pokemon->pos.y - 1;
                 }
                 else
                 {
                     DecideUseItem(pokemon);
-                    if (pokemonData->action.action == DUNGEON_ACTION_NONE)
+                    if (pokemonInfo->action.action == ACTION_NOTHING)
                     {
-                        if (!HasIQSkill(pokemon, IQ_SKILL_DEDICATED_TRAVELER))
+                        if (!IQSkillIsEnabled(pokemon, IQ_DEDICATED_TRAVELER))
                         {
                             DecideAttack(pokemon);
-                            if (pokemonData->action.action != DUNGEON_ACTION_NONE)
+                            if (pokemonInfo->action.action != ACTION_NOTHING)
                             {
                                 return;
                             }
-                            if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus == STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
                             else
                             {
-                                if (!GetIsMoving(pokemonData->entityID))
+                                if (!CanMove(pokemonInfo->id))
                                 {
                                     return;
                                 }
@@ -248,28 +248,28 @@ void DecideAction(struct DungeonEntity *pokemon, u32 unused)
                         }
                         else
                         {
-                            if (pokemonData->volatileStatus == VOLATILE_STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus == STATUS_CONFUSED)
                             {
-                                SetWalkAction(&pokemonData->action, pokemonData->entityID);
+                                SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
                             else
                             {
-                                if (GetIsMoving(pokemonData->entityID))
+                                if (CanMove(pokemonInfo->id))
                                 {
                                     MoveIfPossible(pokemon, TRUE);
                                 }
-                                if (pokemonData->action.action > DUNGEON_ACTION_WAIT)
+                                if (pokemonInfo->action.action > ACTION_PASS_TURN)
                                 {
                                     return;
                                 }
                                 DecideAttack(pokemon);
-                                if (pokemonData->action.action <= DUNGEON_ACTION_WAIT)
+                                if (pokemonInfo->action.action <= ACTION_PASS_TURN)
                                 {
                                     return;
                                 }
-                                pokemonData->notAdjacentToTarget = FALSE;
-                                pokemonData->movingIntoTarget = FALSE;
-                                pokemonData->waiting = FALSE;
+                                pokemonInfo->aiNotNextToTarget = FALSE;
+                                pokemonInfo->aiNextToTarget = FALSE;
+                                pokemonInfo->waiting = FALSE;
                             }
                         }
                     }

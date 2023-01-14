@@ -48,7 +48,7 @@ _08071B7C:
 	ldr r0, _08071BA8
 	b _08071BAE
 	.align 2, 0
-_08071B94: .4byte gDungeonGlobalData
+_08071B94: .4byte gDungeon
 _08071B98: .4byte 0x00000664
 _08071B9C: .4byte 0x000037fd
 _08071BA0: .4byte 0x00000662
@@ -117,7 +117,7 @@ _08071C08:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r0, [r0]
 	movs r2, 0x80
 	lsls r2, 1
@@ -154,7 +154,7 @@ _08071C6C: .4byte 0x00017b40
 _08071C70: .4byte gAvailablePokemonNames
 _08071C74: .4byte 0x0001358c
 _08071C78: .4byte 0x0000066e
-_08071C7C: .4byte gDungeonGlobalData
+_08071C7C: .4byte gDungeon
 _08071C80: .4byte 0x00003a0c
 _08071C84: .4byte gUnknown_80F4DA6
 _08071C88:
@@ -217,7 +217,7 @@ _08071CDC:
 	strh r4, [r0, 0x8]
 	strb r1, [r0, 0x2]
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	ldr r0, _08071D24
 	ldr r0, [r0]
@@ -232,7 +232,7 @@ _08071CDC:
 	movs r0, 0x1
 	b _08071D2E
 	.align 2, 0
-_08071D24: .4byte gDungeonGlobalData
+_08071D24: .4byte gDungeon
 _08071D28: .4byte 0x00000644
 _08071D2C:
 	movs r0, 0
@@ -301,7 +301,7 @@ _08071D94:
 	.align 2, 0
 _08071D98: .4byte 0x0098967e
 _08071D9C: .4byte 0x0098967f
-_08071DA0: .4byte gDungeonGlobalData
+_08071DA0: .4byte gDungeon
 	thumb_func_end sub_8071D4C
 
 	thumb_func_start sub_8071DA4
@@ -391,7 +391,7 @@ _08071E32:
 	strb r2, [r1]
 	b _08071FCA
 	.align 2, 0
-_08071E44: .4byte gDungeonGlobalData
+_08071E44: .4byte gDungeon
 _08071E48: .4byte 0x000135cc
 _08071E4C:
 	movs r1, 0xFE
@@ -464,7 +464,7 @@ _08071EB6:
 	cmp r7, 0
 	beq _08071F38
 	adds r0, r7, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r1, 0
 	b _08071F02
@@ -856,7 +856,7 @@ _080721EC:
 	bl sub_806A3D4
 	b _0807220A
 	.align 2, 0
-_080721F8: .4byte gDungeonGlobalData
+_080721F8: .4byte gDungeon
 _080721FC: .4byte 0x0000065c
 _08072200:
 	ldr r0, _08072308
@@ -980,7 +980,7 @@ _080722E2:
 	movs r2, 0x1
 	bl PrintFieldMessage
 _080722F4:
-	bl GetLeaderEntity
+	bl GetLeader
 	movs r1, 0
 	bl sub_806A2BC
 	add sp, 0x190
@@ -1610,7 +1610,7 @@ _080727A8:
 	cmp r7, 0
 	beq _08072810
 	adds r0, r7, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	movs r2, 0
 	lsls r0, 1
 	mov r1, sp
@@ -2020,7 +2020,7 @@ _08072AEA:
 	cmp r5, 0x4
 	bne _08072AF6
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	b _08072AFA
 _08072AF6:
 	adds r0, r5, 0
@@ -2075,7 +2075,7 @@ _08072B44:
 	cmp r3, 0
 	bge _08072B32
 	adds r0, r4, 0
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r3, r0, 0
 	adds r4, r5, 0
 	adds r4, 0x38
@@ -2117,7 +2117,7 @@ sub_8072B78:
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	adds r0, r5, 0
 	bl sub_80687D0
 	adds r4, r0, 0
@@ -2175,7 +2175,7 @@ _08072C0C:
 	movs r3, 0x6
 	ldrsh r2, [r7, r3]
 	adds r1, r2
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldr r0, _08072C80
 	bl sub_807034C

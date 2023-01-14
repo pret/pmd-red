@@ -218,7 +218,7 @@ _080853EE:
 	lsls r0, r4, 16
 	asrs r0, 16
 	asrs r1, r4, 16
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_807034C
@@ -241,7 +241,7 @@ _080853EE:
 	bl sub_806B7F8
 	b _0808546E
 	.align 2, 0
-_08085444: .4byte gDungeonGlobalData
+_08085444: .4byte gDungeon
 _08085448: .4byte 0x0001357c
 _0808544C: .4byte 0x0000065c
 _08085450: .4byte gUnknown_80F4598
@@ -269,13 +269,13 @@ _0808546E:
 _0808547C: .4byte gUnknown_80F4598
 	thumb_func_end sub_8085374
 
-	thumb_func_start xxx_call_GetLeaderEntity
-xxx_call_GetLeaderEntity:
+	thumb_func_start xxx_call_GetLeader
+xxx_call_GetLeader:
 	push {lr}
-	bl GetLeaderEntity
+	bl GetLeader
 	pop {r1}
 	bx r1
-	thumb_func_end xxx_call_GetLeaderEntity
+	thumb_func_end xxx_call_GetLeader
 
 	thumb_func_start GetPartnerEntity
 GetPartnerEntity:
@@ -302,7 +302,7 @@ _08085490:
 	adds r0, r4, 0
 	b _080854CC
 	.align 2, 0
-_080854B8: .4byte gDungeonGlobalData
+_080854B8: .4byte gDungeon
 _080854BC: .4byte 0x0001357c
 _080854C0:
 	adds r5, 0x1
@@ -461,7 +461,7 @@ _080855C4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080855D8: .4byte gDungeonGlobalData
+_080855D8: .4byte gDungeon
 _080855DC: .4byte 0x0001357c
 _080855E0: .4byte 0x0000e220
 	thumb_func_end sub_80854D4

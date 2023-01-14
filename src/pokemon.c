@@ -5,7 +5,7 @@
 
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_81075F4;
-EWRAM_DATA struct gPokemon *gMonsterParameters;
+EWRAM_DATA struct MonsterDataEntry *gMonsterParameters;
 EWRAM_DATA struct OpenedFile *gMonsterParametersFile;
 EWRAM_DATA struct unkStruct_203B45C gRecruitedPokemon;
 extern struct unkStruct_203B45C *gRecruitedPokemonRef;
@@ -16,7 +16,7 @@ void LoadMonsterParameters(void)
 {
     gRecruitedPokemonRef = &gRecruitedPokemon;
     gMonsterParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_81075F4, &gSystemFileArchive);
-    gMonsterParameters = (struct gPokemon *)gMonsterParametersFile->data;
+    gMonsterParameters = (struct MonsterDataEntry *)gMonsterParametersFile->data;
     gLevelCurrentPokeId = 0;
 }
 
@@ -29,7 +29,7 @@ void InitializeRecruitedPokemon(void)
 {
   s32 iVar3;
   
-  for(iVar3 = 0; iVar3 < NUM_SPECIES; iVar3++)
+  for(iVar3 = 0; iVar3 < NUM_MONSTERS; iVar3++)
   {
     gRecruitedPokemonRef->pokemon[iVar3].unk0 = 0;
   }
@@ -66,17 +66,17 @@ void InitializeRecruitedPokemon(void)
 //     }
 //     pokemon.unkHasNextStage = 1;
 //     pokemon.pokeHP = GetBaseHP(species);
-//     pokemon.offense.att[0] = GetPokemonAttSpatt(species, 0);
-//     pokemon.offense.att[1] = GetPokemonAttSpatt(species, 1);
-//     pokemon.offense.def[0] = GetPokemonDefSpdef(species, 0);
-//     pokemon.offense.def[1] = GetPokemonDefSpdef(species, 1);
+//     pokemon.offense.att[0] = GetBaseOffensiveStat(species, 0);
+//     pokemon.offense.att[1] = GetBaseOffensiveStat(species, 1);
+//     pokemon.offense.def[0] = GetBaseDefensiveStat(species, 0);
+//     pokemon.offense.def[1] = GetBaseDefensiveStat(species, 1);
 //     pokemon.IQ = 1;
 //     pokemon.unkC[0].unk0 = 0;
 //     pokemon.unkC[1].unk0 = 0;
 //     SetDefaultIQSkills((u8*)&pokemon.IQSkills, 0);
 //     pokemon.speciesNum = species;
-//     pokemon.heldItem.itemIndex = 0;
-//     pokemon.heldItem.numItems = 0;
+//     pokemon.heldItem.id = 0;
+//     pokemon.heldItem.quantity = 0;
 //     pokemon.unk1C = 0;
 //     pokemon.unk24 = 0;
 //     pokemon.unk4.unk5 = 0;
@@ -84,7 +84,7 @@ void InitializeRecruitedPokemon(void)
 
 //     // mostly incorrect below this:
 //     if (!a3) {
-//         CopySpeciesNametoBuffer(name_buffer, species);
+//         CopyMonsterNametoBuffer(name_buffer, species);
 //         BoundedCopyStringtoBuffer(pokemon.name, name_buffer, 10);
 //     }
 //     else {

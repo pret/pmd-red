@@ -13,12 +13,12 @@
 
 u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
 
-s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *target, u8 moveType)
+s32 WeightWeakTypePicker(struct Entity *user, struct Entity *target, u8 moveType)
 {
     s32 weight = 1;
     bool8 checkExposed = FALSE;
-    struct DungeonEntityData *userData;
-    struct DungeonEntityData *targetData;
+    struct EntityInfo *userData;
+    struct EntityInfo *targetData;
     u8 *targetTypes;
     u8 *targetType;
     u32 moveTypeOffset;
@@ -30,8 +30,8 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
     {
         checkExposed = TRUE;
     }
-    userData = user->entityData;
-    targetData = target->entityData;
+    userData = user->info;
+    targetData = target->info;
     if (moveType == TYPE_FIRE && GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)
     {
         return 0;
@@ -56,10 +56,10 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
         s32 effectiveness;
         u32 typeEffectivenessMultipliers[NUM_EFFECTIVENESS];
         memcpy(typeEffectivenessMultipliers, gTypeEffectivenessMultipliers, NUM_EFFECTIVENESS * sizeof(u32));
-        if (checkExposed && *targetType == TYPE_GHOST && !targetData->exposedStatus)
+        if (checkExposed && *targetType == TYPE_GHOST && !targetData->exposed)
         {
             effectiveness = 0;
-            gDungeonGlobalData->pokemonExposed = TRUE;
+            gDungeon->pokemonExposed = TRUE;
         }
         else
         {
@@ -88,48 +88,48 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
     }
     if (moveType == TYPE_WATER && HasAbility(user, ABILITY_TORRENT))
     {
-        s32 maxHP = userData->maxHP;
-        if (maxHP < 0)
+        s32 maxHPStat = userData->maxHPStat;
+        if (maxHPStat < 0)
         {
-            maxHP += 3;
+            maxHPStat += 3;
         }
-        if (maxHP >> 2 >= userData->HP)
+        if (maxHPStat >> 2 >= userData->HP)
         {
             weight *= 2;
         }
     }
     if (moveType == TYPE_GRASS && HasAbility(user, ABILITY_OVERGROW))
     {
-        s32 maxHP = userData->maxHP;
-        if (maxHP < 0)
+        s32 maxHPStat = userData->maxHPStat;
+        if (maxHPStat < 0)
         {
-            maxHP += 3;
+            maxHPStat += 3;
         }
-        if (maxHP >> 2 >= userData->HP)
+        if (maxHPStat >> 2 >= userData->HP)
         {
             weight *= 2;
         }
     }
     if (moveType == TYPE_BUG && HasAbility(user, ABILITY_SWARM))
     {
-        s32 maxHP = userData->maxHP;
-        if (maxHP < 0)
+        s32 maxHPStat = userData->maxHPStat;
+        if (maxHPStat < 0)
         {
-            maxHP += 3;
+            maxHPStat += 3;
         }
-        if (maxHP >> 2 >= userData->HP)
+        if (maxHPStat >> 2 >= userData->HP)
         {
             weight *= 2;
         }
     }
     if (moveType == TYPE_FIRE && HasAbility(user, ABILITY_BLAZE))
     {
-        s32 maxHP = userData->maxHP;
-        if (maxHP < 0)
+        s32 maxHPStat = userData->maxHPStat;
+        if (maxHPStat < 0)
         {
-            maxHP += 3;
+            maxHPStat += 3;
         }
-        if (maxHP >> 2 >= userData->HP)
+        if (maxHPStat >> 2 >= userData->HP)
         {
             weight *= 2;
         }
@@ -138,12 +138,12 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
     {
         return 2;
     }
-    if (HasType(user, moveType))
+    if (MonsterIsType(user, moveType))
     {
         weight *= 2;
     }
     targetTypes = targetData->types;
-    if (GetWeather(user) == WEATHER_SUNNY)
+    if (GetApparentWeather(user) == WEATHER_SUNNY)
     {
         if (moveType == TYPE_FIRE)
         {
@@ -154,15 +154,15 @@ s32 WeightWeakTypePicker(struct DungeonEntity *user, struct DungeonEntity *targe
             return 2;
         }
     }
-    if (gDungeonGlobalData->mudSportTurnsLeft != 0 && moveType == TYPE_ELECTRIC)
+    if (gDungeon->mudSportTurns != 0 && moveType == TYPE_ELECTRIC)
     {
         return 2;
     }
-    if (gDungeonGlobalData->waterSportTurnsLeft != 0 && moveType == TYPE_FIRE)
+    if (gDungeon->waterSportTurns != 0 && moveType == TYPE_FIRE)
     {
         return 2;
     }
-    if (moveType == TYPE_ELECTRIC && userData->chargingStatus == CHARGING_STATUS_CHARGE)
+    if (moveType == TYPE_ELECTRIC && userData->chargingStatus == STATUS_CHARGING)
     {
         weight *= 2;
     }

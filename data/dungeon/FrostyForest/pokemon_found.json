@@ -2,22 +2,22 @@
 	"tables": [{
 		"name": "FrostyForest_1F_2F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_FURRET",
+				"species": "MONSTER_FURRET",
 				"level": 14,
 				"probability": 6250
 			},
 			{
-				"species": "SPECIES_AZURILL",
+				"species": "MONSTER_AZURILL",
 				"level": 11,
 				"probability": 3750
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -27,27 +27,27 @@
 		"name": "FrostyForest_3F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_FURRET",
+				"species": "MONSTER_FURRET",
 				"level": 14,
 				"probability": 4167
 			},
 			{
-				"species": "SPECIES_AZURILL",
+				"species": "MONSTER_AZURILL",
 				"level": 11,
 				"probability": 2500
 			},
                         {
-				"species": "SPECIES_NOSEPASS",
+				"species": "MONSTER_NOSEPASS",
 				"level": 13,
 				"probability": 3333
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -57,32 +57,32 @@
 		"name": "FrostyForest_4F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_DITTO",
+				"species": "MONSTER_DITTO",
 				"level": 25,
 				"probability": 1429
 			},
                         {
-				"species": "SPECIES_FURRET",
+				"species": "MONSTER_FURRET",
 				"level": 14,
 				"probability": 3571
 			},
 			{
-				"species": "SPECIES_PILOSWINE",
+				"species": "MONSTER_PILOSWINE",
 				"level": 14,
 				"probability": 2143
 			},
                         {
-				"species": "SPECIES_NOSEPASS",
+				"species": "MONSTER_NOSEPASS",
 				"level": 13,
 				"probability": 2857
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -91,27 +91,27 @@
 		"name": "FrostyForest_5F_6F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_DITTO",
+				"species": "MONSTER_DITTO",
 				"level": 25,
 				"probability": 2222
 			},
 			{
-				"species": "SPECIES_PILOSWINE",
+				"species": "MONSTER_PILOSWINE",
 				"level": 14,
 				"probability": 3334
 			},
                         {
-				"species": "SPECIES_NOSEPASS",
+				"species": "MONSTER_NOSEPASS",
 				"level": 13,
 				"probability": 4444
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -120,27 +120,27 @@
 		"name": "FrostyForest_7F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_DITTO",
+				"species": "MONSTER_DITTO",
 				"level": 25,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_MIGHTYENA",
+				"species": "MONSTER_MIGHTYENA",
 				"level": 17,
 				"probability": 4000
 			},
                         {
-				"species": "SPECIES_LAIRON",
+				"species": "MONSTER_LAIRON",
 				"level": 17,
 				"probability": 4000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -149,32 +149,32 @@
 		"name": "FrostyForest_8F_9F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_DITTO",
+				"species": "MONSTER_DITTO",
 				"level": 25,
 				"probability": 1600
 			},
 			{
-				"species": "SPECIES_MIGHTYENA",
+				"species": "MONSTER_MIGHTYENA",
 				"level": 17,
 				"probability": 3200
 			},
                         {
-				"species": "SPECIES_LAIRON",
+				"species": "MONSTER_LAIRON",
 				"level": 17,
 				"probability": 3200
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_SNORUNT",
+				"species": "MONSTER_SNORUNT",
 				"level": 20,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}

@@ -3,10 +3,10 @@
 
 #include "dungeon_entity.h"
 
-bool8 CanSee(struct DungeonEntity *entity, struct DungeonEntity *targetEntity);
-bool8 CanSee_2(struct DungeonEntity *entity, struct DungeonEntity *targetEntity);
-bool8 sub_8045A70(struct DungeonEntity *entity, struct DungeonEntity *targetEntity);
-bool8 sub_8045AAC(struct DungeonEntity *entity, struct Position *pos);
-bool8 InSameRoom(struct DungeonEntity *entity, struct Position *pos);
+bool8 CanSeeTarget(struct Entity *entity, struct Entity *targetEntity);
+bool8 CanTargetEntity(struct Entity *entity, struct Entity *targetEntity);
+bool8 sub_8045A70(struct Entity *entity, struct Entity *targetEntity);
+bool8 sub_8045AAC(struct Entity *entity, struct Position *pos);
+bool8 CanTargetPosition(struct Entity *entity, struct Position *pos);
 
 #endif

@@ -86,7 +86,7 @@ _080401B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080401EC: .4byte gDungeonGlobalData
+_080401EC: .4byte gDungeon
 _080401F0: .4byte 0x0001822c
 _080401F4: .4byte 0x0001ba2c
 _080401F8: .4byte gUnknown_203B410
@@ -232,7 +232,7 @@ _080402FC:
 _08040302:
 	mov r0, r8
 	adds r1, r3, 0
-	bl GetMapTile_1
+	bl GetTile
 	mov r9, r0
 	ldrh r0, [r0]
 	movs r5, 0x3
@@ -267,7 +267,7 @@ _08040302:
 	str r3, [sp, 0x18]
 	b _0804039C
 	.align 2, 0
-_0804034C: .4byte gDungeonGlobalData
+_0804034C: .4byte gDungeon
 _08040350: .4byte gUnknown_202EE04
 _08040354: .4byte gUnknown_202EE01
 _08040358: .4byte 0x00018210
@@ -297,7 +297,7 @@ _08040378:
 	str r0, [sp, 0x18]
 	b _0804039C
 	.align 2, 0
-_08040390: .4byte gDungeonGlobalData
+_08040390: .4byte gDungeon
 _08040394: .4byte 0x00018211
 _08040398:
 	movs r2, 0
@@ -351,7 +351,7 @@ _080403F6:
 	movs r0, 0x1
 	b _0804040A
 	.align 2, 0
-_080403FC: .4byte gDungeonGlobalData
+_080403FC: .4byte gDungeon
 _08040400: .4byte 0x0001356c
 _08040404: .4byte gUnknown_202EE00
 _08040408:
@@ -392,7 +392,7 @@ _08040426:
 	b _0804045A
 	.align 2, 0
 _0804044C: .4byte gUnknown_203B410
-_08040450: .4byte gDungeonGlobalData
+_08040450: .4byte gDungeon
 _08040454: .4byte 0x00018214
 _08040458:
 	movs r6, 0xA
@@ -553,7 +553,7 @@ _0804056C:
 	adds r1, r3, 0
 	adds r1, 0x1
 	mov r0, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -567,7 +567,7 @@ _0804058A:
 	adds r1, r5, 0
 	subs r1, 0x1
 	mov r0, r8
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -583,7 +583,7 @@ _080405AA:
 	mov r0, r8
 	adds r0, 0x1
 	ldr r1, [sp]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -598,7 +598,7 @@ _080405CA:
 	ble _080405E8
 	subs r0, 0x1
 	ldr r1, [sp]
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -889,7 +889,7 @@ _08040800:
 	blt _080407C8
 	b _08040868
 	.align 2, 0
-_08040814: .4byte gDungeonGlobalData
+_08040814: .4byte gDungeon
 _08040818: .4byte 0x0001bdd0
 _0804081C: .4byte 0x0001bdd1
 _08040820: .4byte 0x0001bdcc
@@ -1130,7 +1130,7 @@ _080408D2:
 	bl nullsub_11
 	b _08040A6A
 	.align 2, 0
-_080409F4: .4byte gDungeonGlobalData
+_080409F4: .4byte gDungeon
 _080409F8: .4byte 0x00018214
 _080409FC: .4byte gUnknown_203B410
 _08040A00: .4byte gUnknown_202EE02
@@ -1217,7 +1217,7 @@ _08040A98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08040AB4: .4byte gDungeonGlobalData
+_08040AB4: .4byte gDungeon
 _08040AB8: .4byte 0x0001bdd1
 	thumb_func_end sub_8040A84
 
@@ -1354,7 +1354,7 @@ _08040B9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08040BA4: .4byte gDungeonGlobalData
+_08040BA4: .4byte gDungeon
 _08040BA8: .4byte 0x0001bdd2
 _08040BAC: .4byte 0x0001ba2c
 	thumb_func_end sub_8040B60
@@ -1375,7 +1375,7 @@ sub_8040BB0:
 	mov r8, r0
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1387,7 +1387,7 @@ sub_8040BB0:
 	mov r9, r5
 	ldrh r4, [r7, 0x2]
 	adds r0, r6, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1446,7 +1446,7 @@ sub_8040C4C:
 	adds r4, r1, 0
 	adds r6, r2, 0
 	ldrh r5, [r4, 0x2]
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1466,7 +1466,7 @@ sub_8040C4C:
 	ldrsh r5, [r6, r0]
 	ldrh r4, [r4, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1619,7 +1619,7 @@ sub_8040DA0:
 	mov r1, r8
 	ldrh r4, [r1, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1657,7 +1657,7 @@ _08040E0E:
 	ldr r6, [r0]
 	b _08040E26
 	.align 2, 0
-_08040E1C: .4byte gDungeonGlobalData
+_08040E1C: .4byte gDungeon
 _08040E20: .4byte 0x000181f8
 _08040E24:
 	adds r6, r7, 0
@@ -1707,7 +1707,7 @@ _08040E6E:
 	cmp r1, r0
 	bne _08040ED0
 	movs r0, 0x7
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _08040EB8
 	str r0, [r1]
 	ldr r1, _08040EBC
@@ -1736,7 +1736,7 @@ _08040E6E:
 	b _08040EF0
 	.align 2, 0
 _08040EB8: .4byte gUnknown_202F224
-_08040EBC: .4byte gDungeonGlobalData
+_08040EBC: .4byte gDungeon
 _08040EC0: .4byte 0x00018204
 _08040EC4: .4byte gUnknown_8106A8C
 _08040EC8: .4byte gUnknown_202DE30
@@ -1764,7 +1764,7 @@ _08040EF0:
 	mov r0, r8
 	ldrh r4, [r0, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1817,7 +1817,7 @@ _08040F52:
 	bge _08040F52
 	b _08041026
 	.align 2, 0
-_08040F70: .4byte gDungeonGlobalData
+_08040F70: .4byte gDungeon
 _08040F74: .4byte 0x00018204
 _08040F78: .4byte 0x000003e5
 _08040F7C:
@@ -1933,7 +1933,7 @@ sub_8041038:
 	mov r9, r0
 	ldrh r4, [r2, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1954,7 +1954,7 @@ sub_8041038:
 	mov r0, r8
 	ldrh r4, [r0, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2031,7 +2031,7 @@ sub_8041108:
 	adds r5, r3, 0
 	ldrh r4, [r2, 0x2]
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2088,7 +2088,7 @@ sub_8041168:
 _0804118A:
 	ldrh r4, [r7, 0x2]
 	mov r0, r8
-	bl GetWeather
+	bl GetApparentWeather
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2490,7 +2490,7 @@ _0804148E:
 	cmp r0, 0x97
 	bne _080414A4
 	adds r0, r4, 0
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2523,7 +2523,7 @@ sub_80414C0:
 	cmp r0, 0x9C
 	bne _080414DC
 	adds r0, r5, 0
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	bl IsTileGround
 	lsls r0, 24
 	cmp r0, 0
@@ -2533,7 +2533,7 @@ _080414DC:
 	cmp r0, 0x8
 	bne _080414F6
 	adds r0, r5, 0
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	ldrh r1, [r0]
 	movs r0, 0x3
 	ands r0, r1
@@ -2741,7 +2741,7 @@ _08041644:
 	movs r5, 0
 	b _0804167C
 	.align 2, 0
-_0804166C: .4byte gDungeonGlobalData
+_0804166C: .4byte gDungeon
 _08041670: .4byte 0x000181f2
 _08041674:
 	movs r0, 0x42

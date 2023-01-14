@@ -599,7 +599,7 @@ u32 GetFriendAreaPrice(u8 index)
 void sub_8092558(u8 *buffer, u8 index)
 {
     // colors the friend area name green and prints to buffer?
-    sprintf_2(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
+    sprintfStatic(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
 void sub_8092578(u8 *buffer, u8 index, u8 r2)
@@ -609,7 +609,7 @@ void sub_8092578(u8 *buffer, u8 index, u8 r2)
     if(r2)
     {
         sub_8090FEC(gFriendAreaSettings[index].price, priceBuffer, 1);
-        sprintf_2(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
+        sprintfStatic(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
     }
     else
     {

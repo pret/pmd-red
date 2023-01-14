@@ -127,7 +127,7 @@ void CreateMailMenu(void)
         y = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
         sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
         PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
-        sprintf_2(buffer, GetPokemonMailHeadline(mail->dungeon.dungeonFloor), gAvailablePokemonNames);
+        sprintfStatic(buffer, GetPokemonMailHeadline(mail->dungeon.floor), gAvailablePokemonNames);
         xxx_call_draw_string(0x15,y,buffer,gUnknown_203B2D8->unk38,0);
       }
       else {

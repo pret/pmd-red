@@ -6,10 +6,10 @@
 
 struct TeamInventory
 {
-    struct ItemSlot teamItems[INVENTORY_SIZE];
+    struct Item teamItems[INVENTORY_SIZE];
     u16 teamStorage[NUMBER_OF_ITEM_IDS];
-    struct HeldItem kecleonShopItems[MAX_KECLEON_ITEM_SHOP_ITEMS];
-    struct HeldItem kecleonWareItems[MAX_KECLEON_WARE_SHOP_ITEMS];
+    struct BulkItem kecleonShopItems[MAX_KECLEON_ITEM_SHOP_ITEMS];
+    struct BulkItem kecleonWareItems[MAX_KECLEON_WARE_SHOP_ITEMS];
     /* 0x260 */ s32 teamMoney;
     /* 0x264 */ u32 teamSavings;
 };

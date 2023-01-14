@@ -4,27 +4,27 @@
             "name": "pokemon_found_out161",
             "pokemon": [
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DEOXYS_ATTACK",
+                    "species": "MONSTER_DEOXYS_ATTACK",
                     "level": 35,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_DEOXYS_DEFENSE",
+                    "species": "MONSTER_DEOXYS_DEFENSE",
                     "level": 35,
                     "probability": 3334
                 },
                 {
-                    "species": "SPECIES_DEOXYS_SPEED",
+                    "species": "MONSTER_DEOXYS_SPEED",
                     "level": 35,
                     "probability": 3333
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }
@@ -34,32 +34,32 @@
             "name": "pokemon_found_out162",
             "pokemon": [
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DEOXYS_NORMAL",
+                    "species": "MONSTER_DEOXYS_NORMAL",
                     "level": 35,
                     "probability": 10000
                 },
                 {
-                    "species": "SPECIES_DEOXYS_ATTACK",
+                    "species": "MONSTER_DEOXYS_ATTACK",
                     "level": 35,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DEOXYS_DEFENSE",
+                    "species": "MONSTER_DEOXYS_DEFENSE",
                     "level": 35,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DEOXYS_SPEED",
+                    "species": "MONSTER_DEOXYS_SPEED",
                     "level": 35,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }

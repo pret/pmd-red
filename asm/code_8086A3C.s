@@ -54,14 +54,14 @@ _08086FA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086FB0: .4byte gDungeonGlobalData
+_08086FB0: .4byte gDungeon
 _08086FB4: .4byte 0x0001358c
 	thumb_func_end sub_8086F54
 
 	thumb_func_start TeamMeaniesPreFightDialogue
 TeamMeaniesPreFightDialogue:
 	push {r4,lr}
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r4, r0, 0
 	bl sub_8086448
 	movs r0, 0xA
@@ -125,7 +125,7 @@ _08087060: .4byte gTeamMeaniesPreFightDialogue_7
 	thumb_func_start TeamMeaniesReFightDialogue
 TeamMeaniesReFightDialogue:
 	push {r4,r5,lr}
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r4, r0, 0
 	bl GetPartnerEntity
 	adds r5, r0, 0
@@ -321,7 +321,7 @@ _0808722C: .4byte 0x0000015f
 	thumb_func_start sub_8087230
 sub_8087230:
 	push {r4-r6,lr}
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r6, r0, 0
 	movs r0, 0x8
 	bl GetEntityFromClientType
@@ -350,11 +350,11 @@ sub_8087230:
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x91
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -367,7 +367,7 @@ _08087298: .4byte gUnknown_202E038
 sub_808729C:
 	push {r4-r6,lr}
 	sub sp, 0x4
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r5, r0, 0
 	movs r0, 0x8
 	bl GetEntityFromClientType
@@ -417,11 +417,11 @@ _08087300:
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0x91
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -455,7 +455,7 @@ _0808735A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087360: .4byte gDungeonGlobalData
+_08087360: .4byte gDungeon
 	thumb_func_end sub_8087334
 
 	thumb_func_start ZapdosPreFightDialogue
@@ -466,7 +466,7 @@ ZapdosPreFightDialogue:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x70
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	mov r9, r0
 	bl GetPartnerEntity
 	adds r6, r0, 0

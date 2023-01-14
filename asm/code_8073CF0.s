@@ -15,7 +15,7 @@ sub_8073D14:
 	sub sp, 0xB0
 	adds r6, r0, 0
 	ldr r4, [r6, 0x70]
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	ldr r5, [r0, 0x14]
 	cmp r5, 0
 	bne _08073D30
@@ -81,7 +81,7 @@ _08073D80:
 _08073D98:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl ShouldAvoidEnemiesAndShowEffect
+	bl ShouldMonsterRunAwayAndShowEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073DC8
@@ -104,7 +104,7 @@ _08073DC8:
 	cmp r0, 0
 	bne _08073E24
 	ldrb r0, [r5, 0x2]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -171,7 +171,7 @@ _08073E48:
 	mov r8, r0
 	b _08073E80
 	.align 2, 0
-_08073E64: .4byte gDungeonGlobalData
+_08073E64: .4byte gDungeon
 _08073E68: .4byte 0x0000065b
 _08073E6C: .4byte gTeamInventory_203B460
 _08073E70:
@@ -487,7 +487,7 @@ _080740C8:
 	bl sub_807E8F0
 	adds r0, r5, 0
 	movs r1, 0x16
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074170
@@ -504,7 +504,7 @@ _080740C8:
 	strb r0, [r4]
 _08074102:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r2, _08074350
 	ldrb r1, [r4]
 	lsls r1, 1
@@ -565,7 +565,7 @@ _0807417A:
 	movs r4, 0xA
 	adds r0, r5, 0
 	movs r1, 0x17
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074190
@@ -573,7 +573,7 @@ _0807417A:
 _08074190:
 	adds r0, r5, 0
 	movs r1, 0x1F
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741A0
@@ -581,7 +581,7 @@ _08074190:
 _080741A0:
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741B0
@@ -589,7 +589,7 @@ _080741A0:
 _080741B0:
 	adds r0, r5, 0
 	movs r1, 0x1B
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741C0
@@ -597,7 +597,7 @@ _080741B0:
 _080741C0:
 	adds r0, r5, 0
 	movs r1, 0xA
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741D0
@@ -605,7 +605,7 @@ _080741C0:
 _080741D0:
 	adds r0, r5, 0
 	movs r1, 0x2B
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080741E0
@@ -786,7 +786,7 @@ _08074320:
 	.align 2, 0
 _0807434C: .4byte 0x00000169
 _08074350: .4byte gWarpScarfActivationChances
-_08074354: .4byte gDungeonGlobalData
+_08074354: .4byte gDungeon
 _08074358: .4byte 0x0000199a
 _0807435C: .4byte gUnknown_80F54F4
 _08074360: .4byte 0x00000153
@@ -842,14 +842,14 @@ _080743CA:
 	cmp r0, 0
 	bne _08074480
 	adds r0, r5, 0
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
 	bne _0807441C
 	adds r0, r5, 0
 	movs r1, 0x6
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074466
@@ -863,33 +863,33 @@ _080743CA:
 	bl sub_806F324
 	b _08074466
 	.align 2, 0
-_08074408: .4byte gDungeonGlobalData
+_08074408: .4byte gDungeon
 _0807440C: .4byte 0x00000679
 _08074410: .4byte 0x00000153
 _08074414: .4byte 0x0000e266
 _08074418: .4byte gUnknown_80F4F8E
 _0807441C:
 	adds r0, r5, 0
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _08074466
 	adds r0, r5, 0
 	movs r1, 0x9
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074466
 	adds r0, r5, 0
 	movs r1, 0xD
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074466
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074466
@@ -916,7 +916,7 @@ _08074474:
 	b _08074B2E
 _08074480:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x21
@@ -1456,7 +1456,7 @@ _080748D4: .4byte gUnknown_80F4F3C
 _080748D8: .4byte gUnknown_80F4FB2
 _080748DC: .4byte gUnknown_80F4F3E
 _080748E0: .4byte gUnknown_80F4FB4
-_080748E4: .4byte gDungeonGlobalData
+_080748E4: .4byte gDungeon
 _080748E8: .4byte 0x000135cc
 _080748EC: .4byte gUnknown_80F4F40
 _080748F0:
@@ -1643,7 +1643,7 @@ _08074A46:
 	cmp r0, 0
 	bne _08074AD4
 	adds r0, r5, 0
-	bl CannotAct
+	bl HasStatusThatPreventsActing
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -1778,7 +1778,7 @@ _08074B7A:
 	bne _08074BAE
 	movs r2, 0x2
 	ldrsh r0, [r6, r2]
-	bl GetUnk1B
+	bl GetRegenSpeed
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08074BAE:
@@ -1786,7 +1786,7 @@ _08074BAE:
 	beq _08074C48
 	adds r0, r7, 0
 	movs r1, 0xA
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074BC8
@@ -1812,7 +1812,7 @@ _08074BDA:
 	cmp r0, 0
 	beq _08074BFE
 	adds r0, r7, 0
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -2253,7 +2253,7 @@ _08074F5C:
 	adds r0, r2
 	ldr r4, [r0]
 	adds r0, r7, 0
-	bl GetMovementSpeed
+	bl CalcSpeedStage
 	adds r5, r0, 0
 	cmp r4, r5
 	beq _08074F96
@@ -2664,14 +2664,14 @@ _0807524E:
 	cmp r0, 0
 	beq _080752B2
 	adds r0, r5, 0
-	bl CannotAct
+	bl HasStatusThatPreventsActing
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807534C
 _080752B2:
 	adds r0, r5, 0x4
 	adds r1, r6, 0
-	bl CalculateFacingDir
+	bl GetDirectionTowardsPosition
 	adds r1, r0, 0
 	adds r0, r4, 0
 	adds r0, 0x46
@@ -2683,7 +2683,7 @@ _080752B2:
 	b _0807534C
 	.align 2, 0
 _080752D0: .4byte gUnknown_202F378
-_080752D4: .4byte gDungeonGlobalData
+_080752D4: .4byte gDungeon
 _080752D8: .4byte 0x000135cc
 _080752DC: .4byte 0x00000147
 _080752E0:
@@ -2776,7 +2776,7 @@ _08075384:
 	movs r5, 0
 	b _0807549E
 	.align 2, 0
-_08075390: .4byte gDungeonGlobalData
+_08075390: .4byte gDungeon
 _08075394: .4byte 0x0000066c
 _08075398:
 	movs r0, 0x7
@@ -2846,7 +2846,7 @@ _080753A6:
 	strh r2, [r6]
 	b _08075492
 	.align 2, 0
-_08075420: .4byte gDungeonGlobalData
+_08075420: .4byte gDungeon
 _08075424: .4byte 0x000135cc
 _08075428:
 	movs r0, 0
@@ -2965,7 +2965,7 @@ _08075506:
 	b _08075600
 	.align 2, 0
 _08075510: .4byte gUnknown_202F378
-_08075514: .4byte gDungeonGlobalData
+_08075514: .4byte gDungeon
 _08075518: .4byte 0x000135cc
 _0807551C:
 	ldr r2, [r4, 0x70]
@@ -3110,7 +3110,7 @@ _08075632:
 	str r3, [r0]
 	b _0807566A
 	.align 2, 0
-_08075650: .4byte gDungeonGlobalData
+_08075650: .4byte gDungeon
 _08075654: .4byte 0x00003a08
 _08075658: .4byte gUnknown_202F32D
 _0807565C: .4byte 0x000135cc
@@ -3132,7 +3132,7 @@ _0807566C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807567C: .4byte gDungeonGlobalData
+_0807567C: .4byte gDungeon
 	thumb_func_end UseAttack
 
 	thumb_func_start sub_8075680
@@ -3173,7 +3173,7 @@ _08075684:
 	bne _080756EE
 	adds r0, r5, 0x4
 	adds r1, r4, 0
-	bl CalculateFacingDir
+	bl GetDirectionTowardsPosition
 	adds r4, r0, 0
 	movs r1, 0x7
 	ands r0, r1
@@ -3196,7 +3196,7 @@ _080756EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080756FC: .4byte gDungeonGlobalData
+_080756FC: .4byte gDungeon
 _08075700: .4byte 0x000135cc
 	thumb_func_end sub_8075680
 
@@ -3218,11 +3218,11 @@ sub_8075708:
 	cmp r0, 0
 	beq _0807580C
 	adds r0, r4, 0
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075752
@@ -3233,7 +3233,7 @@ sub_8075708:
 	beq _08075752
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08075752
@@ -3271,7 +3271,7 @@ _08075788:
 	mov r9, r0
 	adds r0, r4, 0
 	movs r1, 0x13
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080757BA

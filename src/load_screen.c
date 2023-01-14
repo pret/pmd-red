@@ -303,7 +303,7 @@ void DrawLoadScreenText(void)
     r2 = DrawLoadScreenTextSub(teamNameBuffer);
   }
 
-  sprintf_2(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
+  sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
   xxx_call_draw_string(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
@@ -312,7 +312,7 @@ void DrawLoadScreenText(void)
         sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else
         sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
-  sprintf_2(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
+  sprintfStatic(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
   xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
@@ -320,7 +320,7 @@ void DrawLoadScreenText(void)
     if (iVar2 == 0xf1207)
         PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
     else
-        sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+        sprintfStatic(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
   }
   else {
     switch(sub_8011C1C())
@@ -329,12 +329,12 @@ void DrawLoadScreenText(void)
             switch(sub_8001658(0,24))
             {
                 default:
-                    sprintf_2(auStack356,gUnknown_80E7804,sub_8098FB4());
+                    sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
                     xxx_format_string(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:
-                    sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                    sprintfStatic(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
                     break;
             }
             break;
@@ -342,10 +342,10 @@ void DrawLoadScreenText(void)
             if (iVar2 == 0xf1207)
                 PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
             else
-                sprintf_2(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
+                sprintfStatic(gLoadScreen->formattedLocation,gQuicksaveDataDeletedText); // Quicksave data deleted
             break;
         default:
-            sprintf_2(gLoadScreen->formattedLocation,gLocationUnknownText); // Location unknown
+            sprintfStatic(gLoadScreen->formattedLocation,gLocationUnknownText); // Location unknown
             break;
     }
   }
@@ -353,29 +353,29 @@ void DrawLoadScreenText(void)
 
   // Draw Play Time
   DeconstructPlayTime(gPlayTimeRef,&hours,&minutes,&seconds);
-  sprintf_2(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
+  sprintfStatic(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
   xxx_call_draw_string(64,36,gLoadScreen->formattedPlayTime,0,0);
 
   // Draw Adventures Info
   numAdventures = GetNumAdventures();
-  sprintf_2(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
+  sprintfStatic(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
   xxx_call_draw_string(64,48,gLoadScreen->formattedAdventures,0,0);
 
   // Draw Helper Info
   if (iVar2 == 0xf1207){
        // NOTE: very hacky match here but needed var here to match
        temp2 =  gUnknown_203B484;
-       if(temp2->unk4.speciesNum != SPECIES_NONE) {
+       if(temp2->unk4.speciesNum != MONSTER_NONE) {
             sub_808D930(speciesHelper,temp2->unk4.speciesNum);
             sub_80922B4(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
-            sprintf_2(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
+            sprintfStatic(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else
             goto print_helper_placeholder;
   }
   else {
     print_helper_placeholder:
-        sprintf_2(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
+        sprintfStatic(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
   }
   xxx_call_draw_string(64,60,gLoadScreen->formattedHelperInfo,0,0);
 

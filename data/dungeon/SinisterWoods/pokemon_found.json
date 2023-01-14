@@ -3,27 +3,27 @@
 		"name": "SinisterWoods_1F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_ODDISH",
+				"species": "MONSTER_ODDISH",
 				"level": 7,
 				"probability": 1579
 			},
 			{
-				"species": "SPECIES_SUDOWOODO",
+				"species": "MONSTER_SUDOWOODO",
 				"level": 7,
 				"probability": 4210
 			},
 			{
-				"species": "SPECIES_SWINUB",
+				"species": "MONSTER_SWINUB",
 				"level": 8,
 				"probability": 4211
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -32,32 +32,32 @@
 		"name": "SinisterWoods_2F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_ODDISH",
+				"species": "MONSTER_ODDISH",
 				"level": 7,
 				"probability": 1364
 			},
 			{
-				"species": "SPECIES_SUDOWOODO",
+				"species": "MONSTER_SUDOWOODO",
 				"level": 7,
 				"probability": 3636
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 1364
 			},
 			{
-				"species": "SPECIES_SWINUB",
+				"species": "MONSTER_SWINUB",
 				"level": 8,
 				"probability": 3636
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -66,37 +66,37 @@
 		"name": "SinisterWoods_3F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_ODDISH",
+				"species": "MONSTER_ODDISH",
 				"level": 7,
 				"probability": 1000
 			},
 			{
-				"species": "SPECIES_SENTRET",
+				"species": "MONSTER_SENTRET",
 				"level": 6,
 				"probability": 2667
 			},
 			{
-				"species": "SPECIES_SUDOWOODO",
+				"species": "MONSTER_SUDOWOODO",
 				"level": 7,
 				"probability": 2666
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 1000
 			},
 			{
-				"species": "SPECIES_SWINUB",
+				"species": "MONSTER_SWINUB",
 				"level": 8,
 				"probability": 2667
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -105,42 +105,42 @@
 		"name": "SinisterWoods_4F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_ODDISH",
+				"species": "MONSTER_ODDISH",
 				"level": 7,
 				"probability": 937
 			},
 			{
-				"species": "SPECIES_SENTRET",
+				"species": "MONSTER_SENTRET",
 				"level": 6,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_SUDOWOODO",
+				"species": "MONSTER_SUDOWOODO",
 				"level": 7,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 938
 			},
 			{
-				"species": "SPECIES_SILCOON",
+				"species": "MONSTER_SILCOON",
 				"level": 8,
 				"probability": 1562
 			},
 			{
-				"species": "SPECIES_CASCOON",
+				"species": "MONSTER_CASCOON",
 				"level": 8,
 				"probability": 1563
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -149,32 +149,32 @@
 		"name": "SinisterWoods_5F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_SENTRET",
+				"species": "MONSTER_SENTRET",
 				"level": 6,
 				"probability": 3810
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 1428
 			},
 			{
-				"species": "SPECIES_SILCOON",
+				"species": "MONSTER_SILCOON",
 				"level": 8,
 				"probability": 2381
 			},
 			{
-				"species": "SPECIES_CASCOON",
+				"species": "MONSTER_CASCOON",
 				"level": 8,
 				"probability": 2381
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -183,37 +183,37 @@
 		"name": "SinisterWoods_6F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_SENTRET",
+				"species": "MONSTER_SENTRET",
 				"level": 6,
 				"probability": 2759
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 1034
 			},
 			{
-				"species": "SPECIES_SILCOON",
+				"species": "MONSTER_SILCOON",
 				"level": 8,
 				"probability": 1724
 			},
 			{
-				"species": "SPECIES_CASCOON",
+				"species": "MONSTER_CASCOON",
 				"level": 8,
 				"probability": 1724
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 2759
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -222,32 +222,32 @@
 		"name": "SinisterWoods_7F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_LEDYBA",
+				"species": "MONSTER_LEDYBA",
 				"level": 7,
 				"probability": 2400
 			},
 			{
-				"species": "SPECIES_SUNFLORA",
+				"species": "MONSTER_SUNFLORA",
 				"level": 8,
 				"probability": 1200
 			},
 			{
-				"species": "SPECIES_LINOONE",
+				"species": "MONSTER_LINOONE",
 				"level": 8,
 				"probability": 3200
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 3200
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -256,37 +256,37 @@
 		"name": "SinisterWoods_8F_9F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_SCYTHER",
+				"species": "MONSTER_SCYTHER",
 				"level": 10,
 				"probability": 2286
 			},
 			{
-				"species": "SPECIES_LEDYBA",
+				"species": "MONSTER_LEDYBA",
 				"level": 7,
 				"probability": 1714
 			},
 			{
-				"species": "SPECIES_WOOPER",
+				"species": "MONSTER_WOOPER",
 				"level": 10,
 				"probability": 1429
 			},
 			{
-				"species": "SPECIES_LINOONE",
+				"species": "MONSTER_LINOONE",
 				"level": 8,
 				"probability": 2285
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 2286
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -295,47 +295,47 @@
 		"name": "SinisterWoods_10F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_EXEGGUTOR",
+				"species": "MONSTER_EXEGGUTOR",
 				"level": 8,
 				"probability": 1569
 			},
 			{
-				"species": "SPECIES_SCYTHER",
+				"species": "MONSTER_SCYTHER",
 				"level": 10,
 				"probability": 1568
 			},
 			{
-				"species": "SPECIES_HOOTHOOT",
+				"species": "MONSTER_HOOTHOOT",
 				"level": 6,
 				"probability": 1569
 			},
 			{
-				"species": "SPECIES_LEDYBA",
+				"species": "MONSTER_LEDYBA",
 				"level": 7,
 				"probability": 1176
 			},
 			{
-				"species": "SPECIES_WOOPER",
+				"species": "MONSTER_WOOPER",
 				"level": 10,
 				"probability": 981
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 1568
 			},
 			{
-				"species": "SPECIES_SLAKOTH",
+				"species": "MONSTER_SLAKOTH",
 				"level": 8,
 				"probability": 1569
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -344,37 +344,37 @@
 		"name": "SinisterWoods_11F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_EXEGGUTOR",
+				"species": "MONSTER_EXEGGUTOR",
 				"level": 8,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_SCYTHER",
+				"species": "MONSTER_SCYTHER",
 				"level": 10,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_HOOTHOOT",
+				"species": "MONSTER_HOOTHOOT",
 				"level": 6,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_SLAKOTH",
+				"species": "MONSTER_SLAKOTH",
 				"level": 8,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -383,32 +383,32 @@
 		"name": "SinisterWoods_12F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_EXEGGUTOR",
+				"species": "MONSTER_EXEGGUTOR",
 				"level": 8,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_HOOTHOOT",
+				"species": "MONSTER_HOOTHOOT",
 				"level": 6,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_SHROOMISH",
+				"species": "MONSTER_SHROOMISH",
 				"level": 9,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_SLAKOTH",
+				"species": "MONSTER_SLAKOTH",
 				"level": 8,
 				"probability": 2500
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -417,27 +417,27 @@
 		"name": "SinisterWoods_13F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_EKANS",
+				"species": "MONSTER_EKANS",
 				"level": 15,
 				"probability": 3333
 			},
 			{
-				"species": "SPECIES_GENGAR",
+				"species": "MONSTER_GENGAR",
 				"level": 15,
 				"probability": 3334
 			},
 			{
-				"species": "SPECIES_MEDICHAM",
+				"species": "MONSTER_MEDICHAM",
 				"level": 12,
 				"probability": 3333
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}

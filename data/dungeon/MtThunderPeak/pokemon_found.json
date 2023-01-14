@@ -2,37 +2,37 @@
 	"tables": [{
 		"name": "MtThunderPeak_1F_2F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_GROWLITHE",
+				"species": "MONSTER_GROWLITHE",
 				"level": 10,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_ELECTABUZZ",
+				"species": "MONSTER_ELECTABUZZ",
 				"level": 12,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_AMPHAROS",
+				"species": "MONSTER_AMPHAROS",
 				"level": 12,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_GLIGAR",
+				"species": "MONSTER_GLIGAR",
 				"level": 12,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_MANECTRIC",
+				"species": "MONSTER_MANECTRIC",
 				"level": 9,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -40,17 +40,17 @@
 	}, {
 		"name": "MtThunderPeak_3F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_ZAPDOS",
+				"species": "MONSTER_ZAPDOS",
 				"level": 25,
 				"probability": 10000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}

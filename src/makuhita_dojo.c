@@ -91,11 +91,11 @@ u32 CreateMakuhitaShop(u32 param_1)
   else {
     gUnknown_203B318->unk68 = &gUnknown_203B318->faceFile;
   }
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8,SPECIES_MAKUHITA);
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8,SPECIES_MAKUHITA);
-  monName = GetMonSpecies(SPECIES_MAKUHITA);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_MAKUHITA);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_MAKUHITA);
+  monName = GetMonSpecies(MONSTER_MAKUHITA);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_MAKUHITA);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
   gUnknown_203B318->faceFile = faceFile;
   gUnknown_203B318->faceData = faceFile->data;
   gUnknown_203B318->unk64 = 0;

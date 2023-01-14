@@ -26,7 +26,7 @@ _08095B48:
 	movs r0, 0x5
 	strb r0, [r4]
 	movs r0, 0x8
-	bl RandomCapped
+	bl RandInt
 	ldr r1, _08095BC8
 	adds r0, r1
 	ldrb r0, [r0]
@@ -42,7 +42,7 @@ _08095B48:
 _08095B6C:
 	movs r0, 0
 	strb r0, [r4, 0x2]
-	bl Random
+	bl Rand32Bit
 	ldr r1, _08095BCC
 	ands r1, r0
 	str r1, [r4, 0x8]
@@ -72,13 +72,13 @@ _08095B9E:
 	cmp r7, 0
 	beq _08095BD4
 	adds r0, r7, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 1
 	add r0, sp
 	ldrh r0, [r0]
 	strh r0, [r4, 0xC]
 	adds r0, r7, 0
-	bl RandomCapped
+	bl RandInt
 	lsls r0, 1
 	add r0, sp
 	ldrh r0, [r0]
@@ -152,7 +152,7 @@ _08095C28:
 _08095C4E:
 	cmp r0, 0x4
 	bgt _08095CCA
-	bl Random
+	bl Rand32Bit
 	adds r1, r0, 0
 	movs r0, 0xE0
 	lsls r0, 3
@@ -165,7 +165,7 @@ _08095C4E:
 	bgt _08095CB4
 	b _08095CAA
 _08095C6C:
-	bl Random
+	bl Rand32Bit
 	adds r1, r0, 0
 	movs r0, 0x70
 	ands r1, r0
@@ -183,7 +183,7 @@ _08095C88:
 	bl sub_803C45C
 	b _08095CCA
 _08095C90:
-	bl Random
+	bl Rand32Bit
 	movs r1, 0xC0
 	lsls r1, 6
 	ands r1, r0
@@ -251,7 +251,7 @@ sub_8095CE0:
 	str r2, [sp, 0x4C]
 _08095D0C:
 	ldr r0, [sp, 0x4C]
-	bl RandomCapped
+	bl RandInt
 	mov r9, r0
 	str r0, [sp, 0x48]
 	mov r1, sp
@@ -270,7 +270,7 @@ _08095D1C:
 	asrs r0, 1
 	str r0, [sp, 0x54]
 	adds r1, r2, 0
-	bl RandomRange
+	bl RandRange
 	adds r4, r0, 0
 	str r4, [sp, 0x50]
 _08095D3E:
@@ -528,7 +528,7 @@ _08095F08: .4byte gUnknown_203B490
 _08095F0C: .4byte 0x00000101
 _08095F10:
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	add r0, sp
 	ldrb r0, [r0]
 _08095F1A:
@@ -581,7 +581,7 @@ _08095F6A:
 	cmp r6, 0
 	beq _08095F80
 	adds r0, r6, 0
-	bl RandomCapped
+	bl RandInt
 	add r0, sp
 	ldrb r0, [r0]
 	b _08095F82

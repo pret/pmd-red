@@ -23,7 +23,7 @@ sub_8070BC0:
 	cmp r0, 0x3
 	beq _08070C56
 	adds r0, r4, 0
-	bl ShouldAvoidEnemies
+	bl ShouldMonsterRunAway
 	lsls r0, 24
 	cmp r0, 0
 	bne _08070C56

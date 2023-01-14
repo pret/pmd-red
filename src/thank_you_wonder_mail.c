@@ -43,7 +43,7 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 #define PROCESS_THANK_YOU_PASSWORD 0x27
 #define THANK_YOU_PASSWORD_WRONG 0x28
 
-const struct ItemSlot gUnknown_80DED44 =
+const struct Item gUnknown_80DED44 =
 {
     1, 0, 0
 };
@@ -242,7 +242,7 @@ extern void sub_803092C(void);
 extern void sub_8035CF4(u32 *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
-extern void sub_801B3C0(struct ItemSlot *);
+extern void sub_801B3C0(struct Item *);
 extern u8 sub_801CB24(void);
 extern void sub_801B450(void);
 extern u32 sub_801B410(void);
@@ -266,10 +266,10 @@ u32 CreateThankYouMailPelipper(void)
   gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
   MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
 
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-  monName = GetMonSpecies(SPECIES_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gAvailablePokemonNames, monName);
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
   gUnknown_203B2C4->faceFile = faceFile;
   gUnknown_203B2C4->faceData = faceFile->data;
@@ -506,10 +506,10 @@ void DisplayThankYouMailCommsOutcome(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct ItemSlot));
-  gUnknown_203B2C4->unk41C.itemIndex = ITEM_ID_NOTHING;
-  gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.itemFlags = 0;
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct Item));
+  gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
+  gUnknown_203B2C4->unk41C.quantity = 1;
+  gUnknown_203B2C4->unk41C.flags = 0;
   if (gUnknown_203B2C4->linkError == COMMS_GOOD) {
       switch(gUnknown_203B2C4->unk40)
         {
@@ -674,9 +674,9 @@ void sub_802A230(void)
 void sub_802A28C(void)
 {
 
-  gUnknown_203B2C4->unk41C.itemIndex = ITEM_ID_NOTHING;
-  gUnknown_203B2C4->unk41C.numItems = 1;
-  gUnknown_203B2C4->unk41C.itemFlags = 0;
+  gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
+  gUnknown_203B2C4->unk41C.quantity = 1;
+  gUnknown_203B2C4->unk41C.flags = 0;
 
   switch(sub_801CA08(1))
   {
@@ -685,12 +685,12 @@ void sub_802A28C(void)
         SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
         break;
     case 3:
-        gUnknown_203B2C4->unk41C.itemIndex = sub_801CB24();
+        gUnknown_203B2C4->unk41C.id = sub_801CB24();
         SetThankYouMailMenuState(0x14);
         break;
     case 4:
         gUnknown_203B2C4->fallbackState = 0x13;
-        gUnknown_203B2C4->unk41C.itemIndex = sub_801CB24();
+        gUnknown_203B2C4->unk41C.id = sub_801CB24();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
@@ -792,7 +792,7 @@ void sub_802A4AC(void)
     {
         SetThankYouMailMenuState(0x18);
         sub_8011C28(1);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -901,7 +901,7 @@ void sub_802A6F0(void)
   if (sub_80144A4(&temp) == 0) {
     SetThankYouMailMenuState(0x18);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
   }
 }
 
@@ -912,7 +912,7 @@ void sub_802A718(void)
   if (sub_80144A4(&temp) == 0) {
     SetThankYouMailMenuState(0x25);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
   }
 }
 
@@ -956,11 +956,11 @@ void HandleConfirmItemtoSendMenu(void)
         {
             case 7:
                 mail = sub_8095228(gUnknown_203B2C4->mailIndex);
-                if(gUnknown_203B2C4->unk41C.itemIndex != ITEM_ID_NOTHING)
+                if(gUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
                     mail->unk20 = gUnknown_203B2C4->unk41C;
                 }
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.itemIndex]--;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
                 break;
             case 8:
@@ -980,7 +980,7 @@ void sub_802A828(void)
     {
         SetThankYouMailMenuState(0x2A);
         sub_8011C28(1);
-        PrepareSavePakWrite(SPECIES_NONE);
+        PrepareSavePakWrite(MONSTER_NONE);
     }
 }
 
@@ -1145,7 +1145,7 @@ void HandleMailCommunicationMenu(void)
                 {
                     case WONDER_MAIL_MODE_SEND:
                         mail = sub_8095228(sub_80953D4(WONDER_MAIL_TYPE_THANK_YOU));
-                        if(mail->unk20.itemIndex != ITEM_ID_NOTHING)
+                        if(mail->unk20.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1248,8 +1248,8 @@ void sub_802AB98(void)
     {
         case 3:
             sub_802F2C0();
-            CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-            monName = GetMonSpecies(SPECIES_PELIPPER);
+            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+            monName = GetMonSpecies(MONSTER_PELIPPER);
             strcpy(gAvailablePokemonNames, monName);
             sub_8095240(sub_809539C(6, gUnknown_203B2C4->unk430));
             SetThankYouMailMenuState(0x24);
@@ -1279,7 +1279,7 @@ void UpdateThankYouMailText(void)
     case 5:
         pokeStruct = GetPlayerPokemonStruct();
         sub_80922B4(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
-        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
+        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case 0xe:
@@ -1403,19 +1403,19 @@ void UpdateThankYouMailText(void)
         }
         break;
     case 0x22:
-        monName = GetMonSpecies(SPECIES_PELIPPER);
+        monName = GetMonSpecies(MONSTER_PELIPPER);
         strcpy(gUnknown_203B2C4->unk53C.clientName,monName); // 0x53C
-        gUnknown_203B2C4->unk53C.unk14 = SPECIES_PELIPPER; // 0x550
+        gUnknown_203B2C4->unk53C.unk14 = MONSTER_PELIPPER; // 0x550
         gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
         mail = sub_8095228(uVar2);
-        itemIndex = mail->unk20.itemIndex;
-        if (itemIndex != ITEM_ID_NOTHING)
+        itemIndex = mail->unk20.id;
+        if (itemIndex != ITEM_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else
-            gUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_ID_NOTHING; // unk558
-        gUnknown_203B2C4->unk53C.numItems = 1; // unk55B
+            gUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_NOTHING; // unk558
+        gUnknown_203B2C4->unk53C.quantity = 1; // unk55B
         gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
@@ -1438,7 +1438,7 @@ void UpdateThankYouMailText(void)
     case THANK_YOU_MAIL_COMMS_CLEANUP:
         pokeStruct2 = GetPlayerPokemonStruct();
         sub_80922B4(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
-        sprintf_2(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
+        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case CONFIRM_ITEM_TO_SEND:

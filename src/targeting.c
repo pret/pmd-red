@@ -3,9 +3,9 @@
 
 #include "dungeon_util.h"
 
-void TargetTileInFront(struct DungeonEntity *pokemon)
+void TargetTileInFront(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    pokemonData->targetPosition.x = pokemon->posWorld.x + gAdjacentTileOffsets[pokemonData->action.facingDir].x;
-    pokemonData->targetPosition.y = pokemon->posWorld.y + gAdjacentTileOffsets[pokemonData->action.facingDir].y;
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    pokemonInfo->targetPos.x = pokemon->pos.x + gAdjacentTileOffsets[pokemonInfo->action.direction].x;
+    pokemonInfo->targetPos.y = pokemon->pos.y + gAdjacentTileOffsets[pokemonInfo->action.direction].y;
 }

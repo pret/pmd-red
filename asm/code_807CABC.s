@@ -108,7 +108,7 @@ _0807CB80:
 	stm r0!, {r2-r4}
 	ldm r1!, {r2-r4}
 	stm r0!, {r2-r4}
-	bl IsBossBattle
+	bl IsBossFight
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CBAC
@@ -126,7 +126,7 @@ _0807CBAC:
 	add r4, sp, 0x20
 	lsls r5, 8
 	lsrs r0, r5, 24
-	bl GetItemMove
+	bl GetItemMoveID
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -151,7 +151,7 @@ _0807CBAC:
 	adds r2, r7, r3
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl FindMoveTarget
+	bl AIConsiderMove
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807CC08
@@ -301,7 +301,7 @@ _0807CD18:
 	bl sub_8075900
 	b _0807CD44
 	.align 2, 0
-_0807CD30: .4byte gDungeonGlobalData
+_0807CD30: .4byte gDungeon
 _0807CD34: .4byte 0x00003a08
 _0807CD38:
 	cmp r4, 0

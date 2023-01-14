@@ -4,9 +4,9 @@
 #include "dungeon_entity.h"
 #include "position.h"
 
-void DecideUseItem(struct DungeonEntity *pokemon);
-void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFlag, struct ItemSlot *item, bool8 ignoreRollChance);
-void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, struct Position potentialTargets[], bool8 ignoreRollChance);
-void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, struct ItemSlot *item, s32 targetingFlags, bool8 ignoreRollChance);
+void DecideUseItem(struct Entity *pokemon);
+void FindStraightThrowableTargets(struct Entity *pokemon, s32 thrownAIFlag, struct Item *item, bool8 ignoreRollChance);
+void FindRockItemTargets(struct Entity *pokemon, struct Item *item, struct Position potentialTargets[], bool8 ignoreRollChance);
+void TargetThrownItem(struct Entity *pokemon, struct Entity *targetPokemon, struct Item *item, s32 targetingFlags, bool8 ignoreRollChance);
 
 #endif

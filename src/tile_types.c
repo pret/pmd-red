@@ -87,31 +87,31 @@ const u8 gDungeonWaterType[] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-extern u32 sub_806CF98(struct DungeonEntity *);
+extern u32 sub_806CF98(struct Entity *);
 void sub_8042A14(struct Position *);
 extern void sub_8049ED4(void);
 
 bool8 sub_804ACE4(struct Position *pos)
 {
-  struct MapTile *tile;
-  struct DungeonEntity *entity;
+  struct Tile *tile;
+  struct Entity *entity;
   
-  tile = GetMapTile_1(pos->x,pos->y);
-  entity = tile->mapObject;
+  tile = GetTile(pos->x,pos->y);
+  entity = tile->object;
   if ((entity != NULL) && (GetEntityType(entity) == ENTITY_ITEM)) {
     return TRUE;
   }
   return FALSE;
 }
 
-struct DungeonEntity *sub_804AD0C(struct Position *pos)
+struct Entity *sub_804AD0C(struct Position *pos)
 {
-  struct MapTile *tile;
-  struct DungeonEntity *entity;
+  struct Tile *tile;
+  struct Entity *entity;
   
-  tile = GetMapTile_1(pos->x,pos->y);
-  entity = tile->pokemon;
-  if ((entity != NULL) && (entity->entityType == ENTITY_POKEMON)) {
+  tile = GetTile(pos->x,pos->y);
+  entity = tile->monster;
+  if ((entity != NULL) && (entity->type == ENTITY_MONSTER)) {
     return entity;
   }
   return NULL;
@@ -119,19 +119,19 @@ struct DungeonEntity *sub_804AD0C(struct Position *pos)
 
 bool8 sub_804AD34(struct Position *pos)
 {
-  struct MapTile *tile;
+  struct Tile *tile;
   s32 x;
-  struct DungeonEntity * entity;
+  struct Entity * entity;
   s32 y;
   bool8 iVar8;
   s32 index;
   
   iVar8 = 0;
-  tile = GetMapTile_2(pos->x,pos->y);
-  if (!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
-    if(!(tile->tileType & (TILE_TYPE_UNK_8 | TILE_TYPE_MAP_EDGE))){
+  tile = GetTileSafe(pos->x,pos->y);
+  if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+    if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))){
     iVar8 = 1;
-    tile->tileType = (tile->tileType & ~(TILE_TYPE_LIQUID | TILE_TYPE_FLOOR)) | TILE_TYPE_FLOOR;
+    tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
 
     for(y = -1; y < 2; y++)
     {
@@ -146,7 +146,7 @@ bool8 sub_804AD34(struct Position *pos)
   if (iVar8 != 0) {
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeonGlobalData->allPokemon[index];
+      entity = gDungeon->allPokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }
@@ -159,18 +159,18 @@ bool8 sub_804AD34(struct Position *pos)
 
 bool8 sub_804AE08(struct Position *pos)
 {
-  struct MapTile *tile;
+  struct Tile *tile;
   s32 x;
   s32 y;
   bool8 uVar6;
   
   uVar6 = FALSE;
-  tile = GetMapTile_2(pos->x,pos->y);
+  tile = GetTileSafe(pos->x,pos->y);
 
-  if (!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
-    if(!(tile->tileType & (TILE_TYPE_UNK_8 | TILE_TYPE_MAP_EDGE))) {
+  if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+    if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))) {
         uVar6 = TRUE;
-        tile->tileType = (tile->tileType & ~(TILE_TYPE_LIQUID | TILE_TYPE_FLOOR)) | TILE_TYPE_FLOOR;
+        tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
         tile->unk4 = tile->unk4 | 0x10;
 
         for(y = -1; y < 2; y++)
@@ -186,13 +186,13 @@ bool8 sub_804AE08(struct Position *pos)
 
 void sub_804AE84(struct Position *pos)
 {
-  struct MapTile *tile;
+  struct Tile *tile;
   s32 x;
-  struct DungeonEntity * entity;
+  struct Entity * entity;
   s32 index;
   s32 y;
   
-  tile = GetMapTile_2(pos->x,pos->y);
+  tile = GetTileSafe(pos->x,pos->y);
   if ((tile->unk4 & 0x10) != 0) {
     tile->unk4 = tile->unk4 & 0xffef;
 
@@ -207,7 +207,7 @@ void sub_804AE84(struct Position *pos)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeonGlobalData->allPokemon[index];
+      entity = gDungeon->allPokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }
@@ -217,18 +217,18 @@ void sub_804AE84(struct Position *pos)
   }
 }
 
-bool8 IsTileGround(struct MapTile* tile)
+bool8 IsTileGround(struct Tile* tile)
 {
     bool8 isGround = FALSE;
     if (IsWaterTileset())
     {
-        if (!(tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)))
+        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
         {
             isGround = TRUE;
         }
     }
-    else if ((tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) != TILE_TYPE_LIQUID ||
-        gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA)
+    else if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY ||
+        gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)
     {
         isGround = TRUE;
     }
@@ -237,11 +237,11 @@ bool8 IsTileGround(struct MapTile* tile)
 
 bool8 IsWaterTileset()
 {
-    if (gDungeonGlobalData->tileset == 0 ||
-        gDungeonGlobalData->tileset == 0x31 ||
-        gDungeonGlobalData->tileset == 0x20 ||
-        gDungeonGlobalData->tileset == 0x21 ||
-        gDungeonGlobalData->tileset == 0x36)
+    if (gDungeon->tileset == 0 ||
+        gDungeon->tileset == 0x31 ||
+        gDungeon->tileset == 0x20 ||
+        gDungeon->tileset == 0x21 ||
+        gDungeon->tileset == 0x36)
     {
         return TRUE;
     }

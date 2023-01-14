@@ -9,14 +9,14 @@
 
 extern struct unkStruct_203B26C *gUnknown_203B26C;
 extern void UpdateGulpinShopState(u32);
-extern void sub_8093CF8(struct PokemonMove *, u32);
+extern void sub_8093CF8(struct Move *, u32);
 extern void sub_801F214(void);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
-extern u8 sub_80934B0(u32, struct PokemonMove *);
+extern u8 sub_80934B0(u32, struct Move *);
 extern void PlaySound(u32);
 extern void sub_801EF38(u32);
 

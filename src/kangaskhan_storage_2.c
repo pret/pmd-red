@@ -62,7 +62,7 @@ extern void sub_801CCD8();
 extern void sub_80184D4();
 extern void sub_8018280();
 extern void sub_8013AA0(u32 *);
-extern void sub_801B3C0(struct ItemSlot *);
+extern void sub_801B3C0(struct Item *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
@@ -84,10 +84,10 @@ extern u8 gUnknown_80DB830[];
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 
-struct HeldItem_Alt {
+struct BulkItem_Alt {
   union tempHeld
   {
-      struct HeldItem norm;
+      struct BulkItem norm;
       u32 full_bits;
   } temp;
 };
@@ -181,23 +181,23 @@ void sub_8017928(void)
 {
   int menuAction;
   u32 itemindex;
-  u32 numItems;
-  struct HeldItem_Alt item;
+  u32 quantity;
+  struct BulkItem_Alt item;
   
   if (sub_80144A4(&menuAction) == 0) {
     switch(menuAction)
     {
         case 4:
 
-            gTeamInventory_203B460->teamStorage[gUnknown_203B208->unkC.itemIndex] -= gUnknown_203B208->unkC.numItems;
+            gTeamInventory_203B460->teamStorage[gUnknown_203B208->unkC.id] -= gUnknown_203B208->unkC.quantity;
 
-            itemindex = gUnknown_203B208->unkC.itemIndex;
+            itemindex = gUnknown_203B208->unkC.id;
             item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemindex;
 
-            numItems = gUnknown_203B208->unkC.numItems << 8;
-            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | numItems;
+            quantity = gUnknown_203B208->unkC.quantity << 8;
+            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | quantity;
 
-            AddHeldItemToInventory((struct HeldItem *)&item);
+            AddHeldItemToInventory((struct BulkItem *)&item);
             UpdateKangaskhanStorageState(0x1d);
             break;
         case 1:
@@ -221,8 +221,8 @@ void sub_80179A8(void)
       {
         if (sub_801AED0(index) != 0) {
           MoveToStorage(&gTeamInventory_203B460->teamItems[index]);
-          gTeamInventory_203B460->teamItems[index].itemIndex = 0;
-          gTeamInventory_203B460->teamItems[index].itemFlags = 0;
+          gTeamInventory_203B460->teamItems[index].id = 0;
+          gTeamInventory_203B460->teamItems[index].flags = 0;
         }
       }
       FillInventoryGaps();
@@ -241,11 +241,11 @@ void sub_80179A8(void)
 void sub_8017A1C(void)
 {
   u8 itemID_u8;
-  u32 numItems_cast;
+  u32 quantity_cast;
   s32 itemID;
   int menuAction;
   u16 cast;
-  struct HeldItem_Alt item;
+  struct BulkItem_Alt item;
   
   if (sub_80144A4(&menuAction) == 0) {
 
@@ -257,21 +257,21 @@ void sub_8017A1C(void)
                 itemID_u8 = itemID;
                 if (sub_801CFE0(itemID) != 0) {
                     item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemID_u8;
-                    if (IsThrowableItem(item.temp.norm.itemIndex)) {
-                        numItems_cast = gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex];
-                        if (numItems_cast > 99) {
+                    if (IsThrowableItem(item.temp.norm.id)) {
+                        quantity_cast = gTeamInventory_203B460->teamStorage[item.temp.norm.id];
+                        if (quantity_cast > 99) {
                             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0x6300;
                         }
                         else {
-                            cast = numItems_cast << 8;
+                            cast = quantity_cast << 8;
                             item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | cast;
                         }
                     }
                     else {
                         item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0x100;
                     }
-                    gTeamInventory_203B460->teamStorage[item.temp.norm.itemIndex] -= item.temp.norm.numItems;
-                    AddHeldItemToInventory((struct HeldItem *)&item);
+                    gTeamInventory_203B460->teamStorage[item.temp.norm.id] -= item.temp.norm.quantity;
+                    AddHeldItemToInventory((struct BulkItem *)&item);
                 }
             }
             FillInventoryGaps();
@@ -325,16 +325,16 @@ void sub_8017B88(void)
             }
             else
             {
-                gUnknown_203B208->itemIndex = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
-                gUnknown_203B208->unkC.numItems = 1;
+                gUnknown_203B208->id = sub_801CB24();
+                xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->id, 0);
+                gUnknown_203B208->unkC.quantity = 1;
                 UpdateKangaskhanStorageState(0x19);
             }
             break;
         case 4:
-            gUnknown_203B208->itemIndex = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->itemIndex, 0);
-            gUnknown_203B208->unkC.numItems = 1;
+            gUnknown_203B208->id = sub_801CB24();
+            xxx_init_itemslot_8090A8C(&gUnknown_203B208->unkC, gUnknown_203B208->id, 0);
+            gUnknown_203B208->unkC.quantity = 1;
             UpdateKangaskhanStorageState(0x1A);
             break;
         case 2:
@@ -357,7 +357,7 @@ void sub_8017C28(void)
             sub_8017598();
             break;
         case 3:
-            gUnknown_203B208->unkC.numItems = gUnknown_203B208->unkA8;
+            gUnknown_203B208->unkC.quantity = gUnknown_203B208->unkA8;
             UpdateKangaskhanStorageState(0x1B);
             break;
         case 2:
@@ -383,7 +383,7 @@ void sub_8017C7C(void)
     {
       case 2:
         sub_8099690(0);
-        if(!IsNotMoneyOrUsedTMItem(gUnknown_203B208->unkC.itemIndex))
+        if(!IsNotMoneyOrUsedTMItem(gUnknown_203B208->unkC.id))
             UpdateKangaskhanStorageState(9);
         else if(!sub_801ADA0(gUnknown_203B208->unk10))
             UpdateKangaskhanStorageState(0xA);
@@ -418,7 +418,7 @@ void sub_8017D24(void)
             sub_801CBB8();
             UpdateKangaskhanStorageState(6);
         }
-        else if(IsThrowableItem(gUnknown_203B208->unkC.itemIndex))
+        else if(IsThrowableItem(gUnknown_203B208->unkC.id))
             UpdateKangaskhanStorageState(0x18);
         else
             UpdateKangaskhanStorageState(0x1B);
@@ -622,10 +622,10 @@ void sub_8018100(void)
         case 12:
             gUnknown_203B20C->unkD0 = 2;
             gUnknown_203B20C->unkC8 = 1;
-            if(gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex] > 99)
+            if(gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] > 99)
                 gUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.itemIndex];
+                gUnknown_203B20C->unkCC = gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id];
             gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
             gUnknown_203B20C->unkD4 = 1;
             gUnknown_203B20C->unkD8 = &gUnknown_203B20C->unkF0[1];

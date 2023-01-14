@@ -41,43 +41,43 @@ extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern struct TeamInventory *gTeamInventory_203B460;
 
-void sub_807360C(struct DungeonEntity *pokemon)
+void sub_807360C(struct Entity *pokemon)
 {
     s32 iVar2;
-    struct DungeonEntity *entity;
+    struct Entity *entity;
 
     for(iVar2 = 0; iVar2 < DUNGEON_MAX_POKEMON; iVar2++)
     {
-        entity = gDungeonGlobalData->allPokemon[iVar2];
+        entity = gDungeon->allPokemon[iVar2];
         if(EntityExists(entity))
         {
-            if(entity->entityData->unk152 != 0)
+            if(entity->info->unk152 != 0)
             {
-               entity->entityData->unk152 = 0;
+               entity->info->unk152 = 0;
                UpdateFlashFireBoost(entity, entity);
             }
         }
     }
 }
 
-void DecideUseItem(struct DungeonEntity *pokemon)
+void DecideUseItem(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
+    struct EntityInfo *pokemonInfo = pokemon->info;
     void *null;
-    struct ItemSlot *item;
+    struct Item *item;
     s32 toolboxIndex;
     u8 selectedToolboxIndex;
     u32 *potentialTargetWeights;
     if (CannotUseItems(pokemon))
     {
-        pokemonData->useHeldItem = FALSE;
+        pokemonInfo->useHeldItem = FALSE;
         return;
     }
     null = NULL;
-    if (pokemonData->useHeldItem)
+    if (pokemonInfo->useHeldItem)
     {
-        item = &pokemonData->heldItem;
-        if ((item->itemFlags & ITEM_FLAG_EXISTS) == 0)
+        item = &pokemonInfo->heldItem;
+        if ((item->flags & ITEM_FLAG_EXISTS) == 0)
         {
             return;
         }
@@ -85,84 +85,84 @@ void DecideUseItem(struct DungeonEntity *pokemon)
         {
             u8 itemType;
             selectedToolboxIndex = HELD_ITEM_TOOLBOX_INDEX;
-            itemType = GetItemType(item->itemIndex);
-            if (itemType == ITEM_TYPE_THROWABLE)
+            itemType = GetItemCategory(item->id);
+            if (itemType == CATEGORY_THROWN_LINE)
             {
                 s32 targetIndex;
                 FindStraightThrowableTargets(pokemon, 2, item, 1);
                 for (targetIndex = 0; targetIndex < gNumPotentialTargets; targetIndex++)
                 {
-                    if (RollPercentChance(gPotentialItemTargetWeights[targetIndex]))
+                    if (DungeonRandOutcome(gPotentialItemTargetWeights[targetIndex]))
                     {
-                        SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
-                        pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                        pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                        pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                        pokemonData->action.facingDir = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
+                        SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
+                        pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                        pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                        pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                        pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
                 }
                 if (targetIndex == gNumPotentialTargets)
                 {
-                    SetAction(&pokemonData->action, DUNGEON_ACTION_HAVE_SECOND_THOUGHTS);
+                    SetMonsterActionFields(&pokemonInfo->action, ACTION_SECOND_THOUGHTS);
                 }
             }
-            else if (itemType == ITEM_TYPE_ROCK)
+            else if (itemType == CATEGORY_THROWN_ARC)
             {
                 struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                 FindRockItemTargets(pokemon, item, potentialTargetPositions, TRUE);
                 if (gNumPotentialTargets == 0)
                 {
-                    SetAction(&pokemonData->action, DUNGEON_ACTION_HAVE_SECOND_THOUGHTS);
+                    SetMonsterActionFields(&pokemonInfo->action, ACTION_SECOND_THOUGHTS);
                 }
                 else
                 {
-                    u32 chosenTargetIndex = DungeonRandomCapped(gNumPotentialTargets);
-                    SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
-                    pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                    pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
-                    pokemonData->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
+                    u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
+                    SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
+                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                    pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
+                    pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                 }
             }
             else
             {
                 u8 itemTypeCompare = itemType - 2;
-                if (itemTypeCompare < ITEM_TYPE_HOLD_ITEM - 2)
+                if (itemTypeCompare < CATEGORY_HELD_ITEMS - 2)
                 {
-                    SetAction(&pokemonData->action, DUNGEON_ACTION_CONSUME_ITEM_AI);
-                    pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
+                    SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
+                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
                 }
                 else
                 {
-                    SetAction(&pokemonData->action, DUNGEON_ACTION_HAVE_SECOND_THOUGHTS);
+                    SetMonsterActionFields(&pokemonInfo->action, ACTION_SECOND_THOUGHTS);
                 }
             }
         }
     }
-    else if (HasIQSkill(pokemon, IQ_SKILL_ITEM_MASTER))
+    else if (IQSkillIsEnabled(pokemon, IQ_ITEM_MASTER))
     {
         for (toolboxIndex = 1; toolboxIndex < INVENTORY_SIZE + 2; toolboxIndex++)
         {
             if (toolboxIndex == 1)
             {
-                item = &pokemonData->heldItem;
+                item = &pokemonInfo->heldItem;
                 selectedToolboxIndex = HELD_ITEM_TOOLBOX_INDEX;
             }
             else if (toolboxIndex == 0)
             {
                 // This seems unused. toolboxIndex can never be 0.
-                struct MapTile *mapTile = GetMapTile_1(pokemon->posWorld.x, pokemon->posWorld.y);
-                struct DungeonEntity *mapObject = mapTile->mapObject;
-                if (mapObject != null)
+                struct Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
+                struct Entity *object = mapTile->object;
+                if (object != null)
                 {
-                    u32 mapObjectType = GetEntityType(mapObject);
-                    if (mapObjectType == ENTITY_ITEM)
+                    u32 objectType = GetEntityType(object);
+                    if (objectType == ENTITY_ITEM)
                     {
-                        item = GetItemData(mapTile->mapObject);
+                        item = GetItemData(mapTile->object);
                         selectedToolboxIndex = GROUND_ITEM_TOOLBOX_INDEX;
                     }
                     else
@@ -175,7 +175,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                     continue;
                 }
             }
-            else if (pokemonData->isLeader)
+            else if (pokemonInfo->isTeamLeader)
             {
                 item = &gTeamInventory_203B460->teamItems[toolboxIndex - 2];
                 selectedToolboxIndex = toolboxIndex - 1;
@@ -184,29 +184,29 @@ void DecideUseItem(struct DungeonEntity *pokemon)
             {
                 return;
             }
-            if (((item->itemFlags & ITEM_FLAG_EXISTS) != 0) && ((item->itemFlags & ITEM_FLAG_FOR_SALE) == 0))
+            if (((item->flags & ITEM_FLAG_EXISTS) != 0) && ((item->flags & ITEM_FLAG_IN_SHOP) == 0))
             {
-                if ((item->itemFlags & ITEM_FLAG_STICKY) == 0)
+                if ((item->flags & ITEM_FLAG_STICKY) == 0)
                 {
-                    if (GetItemAIFlag(item->itemIndex, ITEM_AI_FLAG_TARGET_SELF))
+                    if (GetItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
                     {
                         u32 itemWeight = EvaluateItem(pokemon, item, ITEM_TARGET_ALLY);
                         if (itemWeight != 0)
                         {
-                            u8 itemType = GetItemType(item->itemIndex);
-                            if ((!((itemType == ITEM_TYPE_ORB) && (!pokemonData->isEnemy))) && RollPercentChance(itemWeight))
+                            u8 itemType = GetItemCategory(item->id);
+                            if ((!((itemType == CATEGORY_ORBS) && (!pokemonInfo->isNotTeamMember))) && DungeonRandOutcome(itemWeight))
                             {
-                                if (itemType == ITEM_TYPE_ORB)
+                                if (itemType == CATEGORY_ORBS)
                                 {
-                                    SetAction(&pokemonData->action, DUNGEON_ACTION_USE_ORB);
+                                    SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_ORB);
                                 }
                                 else
                                 {
-                                    SetAction(&pokemonData->action, DUNGEON_ACTION_CONSUME_ITEM_AI);
+                                    SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
                                 }
-                                pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                                pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
+                                pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                                pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
                                 return;
                             }
                         }
@@ -221,28 +221,28 @@ void DecideUseItem(struct DungeonEntity *pokemon)
             {
                 continue;
             }
-            if (ToolboxEnabled(pokemonData))
+            if (ToolboxEnabled(pokemonInfo))
             {
                 s32 thrownAIFlag;
                 for (thrownAIFlag = ITEM_AI_FLAG_TARGET_ALLY; thrownAIFlag <= ITEM_AI_FLAG_TARGET_ENEMY; thrownAIFlag++)
                 {
                     potentialTargetWeights = gPotentialItemTargetWeights;
-                    if (GetItemAIFlag(item->itemIndex, thrownAIFlag))
+                    if (GetItemAIFlag(item->id, thrownAIFlag))
                     {
-                        u8 itemType = GetItemType(item->itemIndex);
-                        if (itemType == ITEM_TYPE_ROCK)
+                        u8 itemType = GetItemCategory(item->id);
+                        if (itemType == CATEGORY_THROWN_ARC)
                         {
                             struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                             FindRockItemTargets(pokemon, item, potentialTargetPositions, FALSE);
                             if (gNumPotentialTargets != 0)
                             {
-                                u32 chosenTargetIndex = DungeonRandomCapped(gNumPotentialTargets);
-                                SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
-                                pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                                pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                                pokemonData->action.facingDir = CalculateFacingDir(&pokemon->posWorld, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
-                                pokemonData->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
+                                u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
+                                SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
+                                pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                                pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                                pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
+                                pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                                 return;
                             }
                         }
@@ -252,13 +252,13 @@ void DecideUseItem(struct DungeonEntity *pokemon)
                             FindStraightThrowableTargets(pokemon, thrownAIFlag, item, FALSE);
                             for (targetIndex = 0; targetIndex < gNumPotentialTargets; targetIndex++)
                             {
-                                if (RollPercentChance(potentialTargetWeights[targetIndex]))
+                                if (DungeonRandOutcome(potentialTargetWeights[targetIndex]))
                                 {
-                                    SetAction(&pokemonData->action, DUNGEON_ACTION_THROW_ITEM_AI);
-                                    pokemonData->action.actionUseIndex = selectedToolboxIndex;
-                                    pokemonData->action.lastItemThrowPosition.x = pokemon->posWorld.x;
-                                    pokemonData->action.lastItemThrowPosition.y = pokemon->posWorld.y;
-                                    pokemonData->action.facingDir = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
+                                    SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
+                                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
+                                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
+                                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                                    pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }
                             }
@@ -270,7 +270,7 @@ void DecideUseItem(struct DungeonEntity *pokemon)
     }
 }
 
-void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFlag, struct ItemSlot *item, bool8 ignoreRollChance)
+void FindStraightThrowableTargets(struct Entity *pokemon, s32 thrownAIFlag, struct Item *item, bool8 ignoreRollChance)
 {
     s32 i;
     gNumPotentialTargets = 0;
@@ -280,7 +280,7 @@ void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFla
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct DungeonEntity *targetPokemon = gDungeonGlobalData->allPokemon[i];
+        struct Entity *targetPokemon = gDungeon->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
@@ -303,7 +303,7 @@ void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFla
             {
                 continue;
             }
-            if (CanSee(pokemon, targetPokemon))
+            if (CanSeeTarget(pokemon, targetPokemon))
             {
                 TargetThrownItem(pokemon, targetPokemon, item, targetingFlags, ignoreRollChance);
             }
@@ -311,24 +311,24 @@ void FindStraightThrowableTargets(struct DungeonEntity *pokemon, s32 thrownAIFla
     }
 }
 
-void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, struct Position potentialTargets[], bool8 ignoreRollChance)
+void FindRockItemTargets(struct Entity *pokemon, struct Item *item, struct Position potentialTargets[], bool8 ignoreRollChance)
 {
     s32 i;
     gNumPotentialTargets = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct DungeonEntity *targetPokemon = gDungeonGlobalData->allPokemon[i];
+        struct Entity *targetPokemon = gDungeon->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
-            CanSee(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+            CanSeeTarget(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {
             s32 distanceX;
             s32 distance;
-            distanceX = targetPokemon->posWorld.x - pokemon->posWorld.x;
+            distanceX = targetPokemon->pos.x - pokemon->pos.x;
             if (distanceX < 0)
             {
                 distanceX = -distanceX;
             }
-            distance = targetPokemon->posWorld.y - pokemon->posWorld.y;
+            distance = targetPokemon->pos.y - pokemon->pos.y;
             if (distance < 0)
             {
                 distance = -distance;
@@ -343,29 +343,29 @@ void FindRockItemTargets(struct DungeonEntity *pokemon, struct ItemSlot *item, s
                 if (!ignoreRollChance)
                 {
                     u32 itemWeight = EvaluateItem(targetPokemon, item, ITEM_TARGET_OTHER);
-                    if (!RollPercentChance(itemWeight))
+                    if (!DungeonRandOutcome(itemWeight))
                     {
                         continue;
                     }
                 }
                 newPotentialTarget = &potentialTargets[gNumPotentialTargets];
-                newPotentialTarget->x = targetPokemon->posWorld.x;
-                newPotentialTarget->y = targetPokemon->posWorld.y;
+                newPotentialTarget->x = targetPokemon->pos.x;
+                newPotentialTarget->y = targetPokemon->pos.y;
                 gNumPotentialTargets++;
             }
         }
     }
 }
 
-void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, struct ItemSlot *item, s32 targetingFlags, bool8 ignoreRollChance)
+void TargetThrownItem(struct Entity *pokemon, struct Entity *targetPokemon, struct Item *item, s32 targetingFlags, bool8 ignoreRollChance)
 {
-    s32 distanceX = pokemon->posWorld.x - targetPokemon->posWorld.x;
+    s32 distanceX = pokemon->pos.x - targetPokemon->pos.x;
     s32 distanceY;
     s32 targetDirection;
     distanceX = distanceX < 0 ? -distanceX : distanceX;
-    distanceY = pokemon->posWorld.y - targetPokemon->posWorld.y;
+    distanceY = pokemon->pos.y - targetPokemon->pos.y;
     distanceY = distanceY < 0 ? -distanceY : distanceY;
-    if (pokemon->entityData->itemStatus == ITEM_STATUS_NONE)
+    if (pokemon->info->itemStatus == STATUS_NONE)
     {
         s32 distance = distanceY < distanceX ? distanceX : distanceY;
         if (distance > RANGED_ATTACK_RANGE)
@@ -376,15 +376,15 @@ void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targe
     targetDirection = -1;
     if (distanceX == distanceY)
     {
-        if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y < targetPokemon->posWorld.y)
+        if (pokemon->pos.x < targetPokemon->pos.x && pokemon->pos.y < targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_SOUTHEAST;
         }
-        else if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        else if (pokemon->pos.x < targetPokemon->pos.x && pokemon->pos.y > targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_NORTHEAST;
         }
-        else if (pokemon->posWorld.x > targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        else if (pokemon->pos.x > targetPokemon->pos.x && pokemon->pos.y > targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_NORTHWEST;
         }
@@ -395,25 +395,25 @@ void TargetThrownItem(struct DungeonEntity *pokemon, struct DungeonEntity *targe
     }
     else
     {
-        if (pokemon->posWorld.x == targetPokemon->posWorld.x && pokemon->posWorld.y < targetPokemon->posWorld.y)
+        if (pokemon->pos.x == targetPokemon->pos.x && pokemon->pos.y < targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_SOUTH;
         }
-        else if (pokemon->posWorld.x < targetPokemon->posWorld.x && pokemon->posWorld.y == targetPokemon->posWorld.y)
+        else if (pokemon->pos.x < targetPokemon->pos.x && pokemon->pos.y == targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_EAST;
         }
-        else if (pokemon->posWorld.x == targetPokemon->posWorld.x && pokemon->posWorld.y > targetPokemon->posWorld.y)
+        else if (pokemon->pos.x == targetPokemon->pos.x && pokemon->pos.y > targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_NORTH;
         }
-        else if (pokemon->posWorld.x > targetPokemon->posWorld.x && pokemon->posWorld.y == targetPokemon->posWorld.y)
+        else if (pokemon->pos.x > targetPokemon->pos.x && pokemon->pos.y == targetPokemon->pos.y)
         {
             targetDirection = DIRECTION_WEST;
         }
     }
 
-    if (targetDirection > -1 && !gTargetAhead[targetDirection] && IsTargetStraightAhead(pokemon, targetPokemon, targetDirection, RANGED_ATTACK_RANGE))
+    if (targetDirection > -1 && !gTargetAhead[targetDirection] && IsTargetInRange(pokemon, targetPokemon, targetDirection, RANGED_ATTACK_RANGE))
     {
         u32 itemWeight;
         u32 *targetWeight;

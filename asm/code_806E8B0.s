@@ -287,14 +287,14 @@ _0806ED0E:
 	asrs r0, 8
 	str r0, [sp, 0xC]
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	str r0, [sp, 0x84]
 	ldr r0, [sp, 0x80]
 	cmp r0, 0
 	bne _0806EDC8
 	ldr r0, [sp, 0x70]
 	movs r1, 0x13
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED4A
@@ -315,7 +315,7 @@ _0806ED0E:
 _0806ED4A:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x2B
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED74
@@ -339,7 +339,7 @@ _0806ED74:
 	beq _0806EE4A
 	mov r0, r9
 	movs r1, 0x1E
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE4A
@@ -358,7 +358,7 @@ _0806ED74:
 	adds r0, r6
 	b _0806EE48
 	.align 2, 0
-_0806EDA4: .4byte gDungeonGlobalData
+_0806EDA4: .4byte gDungeon
 _0806EDA8: .4byte 0x000001a1
 _0806EDAC: .4byte 0x000001a3
 _0806EDB0: .4byte gUnknown_80F504C
@@ -373,7 +373,7 @@ _0806EDC8:
 	beq _0806EDF6
 	mov r0, r9
 	movs r1, 0x22
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EDF6
@@ -393,7 +393,7 @@ _0806EDC8:
 _0806EDF6:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x21
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE20
@@ -414,7 +414,7 @@ _0806EDF6:
 _0806EE20:
 	ldr r0, [sp, 0x70]
 	movs r1, 0x2B
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EE4A
@@ -521,7 +521,7 @@ _0806EE7C:
 _0806EEF8: .4byte gUnknown_810AC66
 _0806EEFC: .4byte 0x00000163
 _0806EF00: .4byte gUnknown_810AC62
-_0806EF04: .4byte gDungeonGlobalData
+_0806EF04: .4byte gDungeon
 _0806EF08: .4byte 0x00000161
 _0806EF0C: .4byte gUnknown_810AC68
 _0806EF10: .4byte 0x000003e6
@@ -698,7 +698,7 @@ _0806F036:
 	bl sub_80522F4
 	b _0806F0BC
 	.align 2, 0
-_0806F098: .4byte gDungeonGlobalData
+_0806F098: .4byte gDungeon
 _0806F09C: .4byte 0x00000ccc
 _0806F0A0: .4byte gUnknown_8106F24
 _0806F0A4: .4byte gUnknown_8106F04
@@ -791,13 +791,13 @@ _0806F140:
 	.align 2, 0
 _0806F15C: .4byte gUnknown_80FADD8
 _0806F160: .4byte gUnknown_8106F1C
-_0806F164: .4byte gDungeonGlobalData
+_0806F164: .4byte gDungeon
 _0806F168: .4byte 0x00000167
 _0806F16C: .4byte 0x000003e7
 _0806F170:
 	ldr r0, [sp, 0x70]
 	movs r1, 0xC
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F194
@@ -815,7 +815,7 @@ _0806F170:
 _0806F194:
 	mov r0, r9
 	movs r1, 0xD
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F1B6
@@ -834,7 +834,7 @@ _0806F1B6:
 	beq _0806F1DA
 	ldr r0, [sp, 0x70]
 	movs r1, 0x1
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F1DA
@@ -849,7 +849,7 @@ _0806F1B6:
 	strb r0, [r1]
 _0806F1DA:
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, r4
 	bge _0806F1F4
 	ldr r2, _0806F2B8
@@ -895,7 +895,7 @@ _0806F1F4:
 	str r0, [r1]
 	movs r0, 0x80
 	lsls r0, 7
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	movs r6, 0
 	str r6, [sp, 0x58]
 	movs r1, 0xE0
@@ -940,7 +940,7 @@ _0806F294:
 	bx r0
 	.align 2, 0
 _0806F2A4: .4byte gUnknown_80F4DAE
-_0806F2A8: .4byte gDungeonGlobalData
+_0806F2A8: .4byte gDungeon
 _0806F2AC: .4byte 0x00000165
 _0806F2B0: .4byte gUnknown_80F4DB0
 _0806F2B4: .4byte 0x00000169
@@ -1216,7 +1216,7 @@ sub_806F4A4:
 	lsrs r4, r1, 24
 	ldr r5, [r0, 0x70]
 	movs r1, 0xE
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F4CE
@@ -1388,7 +1388,7 @@ sub_806F500:
 	strb r2, [r0]
 	bx lr
 	.align 2, 0
-_0806F5F4: .4byte gDungeonGlobalData
+_0806F5F4: .4byte gDungeon
 _0806F5F8: .4byte 0x00000161
 _0806F5FC: .4byte 0x00000163
 _0806F600: .4byte 0x00000165
@@ -1431,7 +1431,7 @@ _0806F652:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F658: .4byte gDungeonGlobalData
+_0806F658: .4byte gDungeon
 _0806F65C: .4byte 0x000181e8
 	thumb_func_end sub_806F63C
 
@@ -1452,7 +1452,7 @@ sub_806F660:
 	mov r9, r1
 	movs r2, 0x4
 	ldrsh r0, [r4, r2]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0806F6C0
@@ -1484,7 +1484,7 @@ sub_806F660:
 	bne _0806F702
 	b _0806F8FC
 	.align 2, 0
-_0806F6C0: .4byte gDungeonGlobalData
+_0806F6C0: .4byte gDungeon
 _0806F6C4: .4byte 0x00003a14
 _0806F6C8: .4byte 0x0000065c
 _0806F6CC:
@@ -1628,7 +1628,7 @@ _0806F7C2:
 _0806F7CE:
 	mov r0, r8
 	adds r1, r6, 0
-	bl CanSee
+	bl CanSeeTarget
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F7DE
@@ -1637,11 +1637,11 @@ _0806F7DE:
 	bl sub_806F910
 	movs r0, 0xFA
 	lsls r0, 2
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r7, r0, 0
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl GetBaseRecruit
+	bl GetRecruitRate
 	lsls r0, 16
 	asrs r4, r0, 16
 	ldr r0, _0806F844
@@ -1651,7 +1651,7 @@ _0806F7DE:
 _0806F800:
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806F816
@@ -1677,7 +1677,7 @@ _0806F816:
 	b _0806F856
 	.align 2, 0
 _0806F834: .4byte 0x00000644
-_0806F838: .4byte gDungeonGlobalData
+_0806F838: .4byte gDungeon
 _0806F83C: .4byte 0x0000065d
 _0806F840: .4byte 0x0000010d
 _0806F844: .4byte 0xfffffc19
@@ -1769,7 +1769,7 @@ _0806F8E2:
 	movs r0, 0x1
 	b _0806F8FE
 	.align 2, 0
-_0806F8EC: .4byte gDungeonGlobalData
+_0806F8EC: .4byte gDungeon
 _0806F8F0: .4byte 0x0001357c
 _0806F8F4:
 	adds r0, r6, 0
@@ -1818,7 +1818,7 @@ _0806F91C:
 	ldr r0, [r4, 0x70]
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r0, r4, 0
@@ -1876,7 +1876,7 @@ _0806F9A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F9AC: .4byte gDungeonGlobalData
+_0806F9AC: .4byte gDungeon
 _0806F9B0: .4byte 0x0001357c
 _0806F9B4: .4byte 0x00000167
 _0806F9B8: .4byte gUnknown_202EE70
@@ -1949,7 +1949,7 @@ _0806FA3C:
 	movs r0, 0
 	b _0806FA52
 	.align 2, 0
-_0806FA40: .4byte gDungeonGlobalData
+_0806FA40: .4byte gDungeon
 _0806FA44: .4byte 0x00000199
 _0806FA48: .4byte 0x000001a1
 _0806FA4C: .4byte 0x000001a3
@@ -1976,7 +1976,7 @@ sub_806FA5C:
 	adds r0, r5, 0x4
 	mov r1, r8
 	adds r1, 0x4
-	bl CalculateFacingDir
+	bl GetDirectionTowardsPosition
 	adds r4, r0, 0
 	movs r0, 0
 	mov r10, r0
@@ -1999,7 +1999,7 @@ sub_806FA5C:
 	ldr r0, _0806FAD4
 	movs r3, 0
 	ldrsh r1, [r6, r3]
-	bl CopyCyanSpeciesNametoBuffer
+	bl CopyCyanMonsterNametoBuffer
 	ldr r0, _0806FAD8
 	ldr r1, [r0]
 	movs r0, 0
@@ -2195,7 +2195,7 @@ _0806FBC4:
 _0806FC40: .4byte gRecruitedPokemonRef
 _0806FC44: .4byte 0x00008df8
 _0806FC48: .4byte 0x0000ffff
-_0806FC4C: .4byte gDungeonGlobalData
+_0806FC4C: .4byte gDungeon
 _0806FC50: .4byte 0x00000644
 _0806FC54: .4byte gUnknown_80FA058
 _0806FC58:
@@ -2238,7 +2238,7 @@ _0806FC94:
 	mov r0, r10
 	cmp r0, 0
 	beq _0806FCD8
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -2282,7 +2282,7 @@ _0806FD04: .4byte gAvailablePokemonNames
 _0806FD08: .4byte gUnknown_80FA0F0
 _0806FD0C: .4byte gUnknown_202E628
 _0806FD10: .4byte gUnknown_80FA120
-_0806FD14: .4byte gDungeonGlobalData
+_0806FD14: .4byte gDungeon
 	thumb_func_end sub_806FA5C
 
 	thumb_func_start sub_806FD18
@@ -2293,7 +2293,7 @@ sub_806FD18:
 	negs r6, r6
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0x2
@@ -2395,7 +2395,7 @@ _0806FDDA:
 	movs r0, 0x1
 	b _0806FDEE
 	.align 2, 0
-_0806FDE4: .4byte gDungeonGlobalData
+_0806FDE4: .4byte gDungeon
 _0806FDE8: .4byte 0x0001357c
 _0806FDEC:
 	movs r0, 0
@@ -2595,7 +2595,7 @@ _0806FF34:
 _0806FF74: .4byte gRecruitedPokemonRef
 _0806FF78: .4byte 0x00008df8
 _0806FF7C: .4byte 0x0000ffff
-_0806FF80: .4byte gDungeonGlobalData
+_0806FF80: .4byte gDungeon
 _0806FF84: .4byte 0x00000644
 _0806FF88:
 	ldr r0, _0806FF9C
@@ -2624,7 +2624,7 @@ _0806FFB8:
 	mov r4, r9
 	cmp r4, 0
 	beq _0806FFE6
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	adds r1, r0, 0
 	ldr r0, _0807000C
 	movs r2, 0

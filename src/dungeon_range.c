@@ -7,18 +7,18 @@
 
 extern bool8 IsTargetTwoTilesAway(struct Position *, struct Position *);
 
-bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
+bool8 IsPositionActuallyInSight(struct Position *pos1, struct Position *pos2)
 {
-    u8 pos1RoomIndex;
-    u8 visibility = gDungeonGlobalData->visibility;
-    struct MapTile *tile1;
+    u8 pos1Room;
+    u8 visibility = gDungeon->visibilityRange;
+    struct Tile *tile1;
     if (visibility == 0)
     {
         visibility = 2;
     }
-    tile1 = GetMapTile_1(pos1->x, pos1->y);
-    pos1RoomIndex = tile1->roomIndex;
-    if (pos1RoomIndex == CORRIDOR_ROOM_INDEX)
+    tile1 = GetTile(pos1->x, pos1->y);
+    pos1Room = tile1->room;
+    if (pos1Room == CORRIDOR_ROOM)
     {
         s32 xDiff = pos1->x - pos2->x;
         s32 yDiff;
@@ -39,9 +39,9 @@ bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
     }
     else
     {
-        struct MapRoom *pos1Room = &gDungeonGlobalData->roomData[pos1RoomIndex];
-        if (pos1Room->startX - 1 > pos2->x || pos1Room->startY - 1 > pos2->y ||
-            pos1Room->endX + 1 <= pos2->x || pos1Room->endY + 1 <= pos2->y)
+        struct RoomData *pos1RoomData = &gDungeon->roomData[pos1Room];
+        if (pos1RoomData->bottomRightCornerX - 1 > pos2->x || pos1RoomData->bottomRightCornerY - 1 > pos2->y ||
+            pos1RoomData->topLeftCornerX + 1 <= pos2->x || pos1RoomData->topLeftCornerY + 1 <= pos2->y)
         {
             return FALSE;
         }
@@ -49,10 +49,10 @@ bool8 InSameRoom_2(struct Position *pos1, struct Position *pos2)
     }
 }
 
-bool8 InSameRoom_3(struct Position *pos1, struct Position *pos2)
+bool8 IsPositionInSight(struct Position *pos1, struct Position *pos2)
 {
-  struct MapTile *iVar2;
-  u8 pos1RoomIndex;
+  struct Tile *iVar2;
+  u8 pos1Room;
   s32 xDiff;
   s32 yDiff;
   s32 x1;
@@ -60,12 +60,12 @@ bool8 InSameRoom_3(struct Position *pos1, struct Position *pos2)
   s32 y1;
   s32 y2;
 
-  iVar2 = GetMapTile_1(pos1->x,pos1->y);
-  pos1RoomIndex = iVar2->roomIndex;
-  if (pos1RoomIndex != CORRIDOR_ROOM_INDEX) {
-        struct MapRoom *pos1Room = &gDungeonGlobalData->roomData[pos1RoomIndex];
-        if (pos1Room->startX - 1 > pos2->x || pos1Room->startY - 1 > pos2->y ||
-            pos1Room->endX + 1 <= pos2->x || pos1Room->endY + 1 <= pos2->y)
+  iVar2 = GetTile(pos1->x,pos1->y);
+  pos1Room = iVar2->room;
+  if (pos1Room != CORRIDOR_ROOM) {
+        struct RoomData *pos1RoomData = &gDungeon->roomData[pos1Room];
+        if (pos1RoomData->bottomRightCornerX - 1 > pos2->x || pos1RoomData->bottomRightCornerY - 1 > pos2->y ||
+            pos1RoomData->topLeftCornerX + 1 <= pos2->x || pos1RoomData->topLeftCornerY + 1 <= pos2->y)
         {
             goto _08083394;
         }
@@ -101,36 +101,36 @@ returnFalse:
 
 void sub_80833E8(struct Position *param_1, s32 *param_2)
 {
-  struct MapTile *tile;
-  struct MapRoom *room;
+  struct Tile *tile;
+  struct RoomData *mapRoom;
   u32 visibility;
-  u32 roomIndex;
+  u32 room;
   
-  tile = GetMapTile_1(param_1->x, param_1->y);
-  visibility = gDungeonGlobalData->visibility;
+  tile = GetTile(param_1->x, param_1->y);
+  visibility = gDungeon->visibilityRange;
   if (visibility == 0) {
     visibility = 2;
   }
-  roomIndex = tile->roomIndex;
-  if (roomIndex == CORRIDOR_ROOM_INDEX) {
+  room = tile->room;
+  if (room == CORRIDOR_ROOM) {
     param_2[0] = param_1->x - visibility;
     param_2[2] = param_1->x + visibility + 1;
     param_2[1] = param_1->y - visibility;
     param_2[3] = param_1->y + visibility + 1;
   }
   else {
-    room = &gDungeonGlobalData->roomData[roomIndex];
-    param_2[0] = room->startX - 1;
-    param_2[2] = room->endX + 2;
-    param_2[1] = room->startY - 1;
-    param_2[3] = room->endY + 2;
+    mapRoom = &gDungeon->roomData[room];
+    param_2[0] = mapRoom->bottomRightCornerX - 1;
+    param_2[2] = mapRoom->topLeftCornerX + 2;
+    param_2[1] = mapRoom->bottomRightCornerY - 1;
+    param_2[3] = mapRoom->topLeftCornerY + 2;
   }
 }
 
 bool8 IsTargetTwoTilesAway(struct Position *pos1, struct Position *pos2)
 {
     s32 counter;
-    struct MapTile *tile;
+    struct Tile *tile;
     s32 diff;
     s32 yCoord;
     s32 xCoord;
@@ -179,8 +179,8 @@ bool8 IsTargetTwoTilesAway(struct Position *pos1, struct Position *pos2)
             if (yCoord > pos2->y) {
                 yCoord = yCoord -1;
             }
-            tile = GetMapTile_1(xCoord,yCoord);
-            if ((tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) == 0) return FALSE;
+            tile = GetTile(xCoord,yCoord);
+            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0) return FALSE;
         }
 
         xCoord_1 = pos2->x;
@@ -200,8 +200,8 @@ bool8 IsTargetTwoTilesAway(struct Position *pos1, struct Position *pos2)
             if (yCoord_1 > pos1->y) {
                 yCoord_1 = yCoord_1 - 1;
             }
-            tile = GetMapTile_1(xCoord_1, yCoord_1);
-            if ((tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID)) == 0) return FALSE;
+            tile = GetTile(xCoord_1, yCoord_1);
+            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0) return FALSE;
         }
         return TRUE;
     }

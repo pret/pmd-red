@@ -31,76 +31,76 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
-void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, const char r2[]);
-extern void sub_8042900(struct DungeonEntity *r0);
-extern void sub_8042968(struct DungeonEntity *r0);
-extern void sub_806ABAC(struct DungeonEntity *, struct DungeonEntity *);
-extern void PausedStatusTarget(struct DungeonEntity *, struct DungeonEntity *,u32,u32,u32);
-void sub_8041BBC(struct DungeonEntity *r0);
-extern u8 sub_8045888(struct DungeonEntity *);
-extern void sub_806A2BC(struct DungeonEntity *, u8);
+extern void SetMessageArgument(char[], struct Entity*, u32);
+void sub_80522F4(struct Entity *r0, struct Entity *r1, const char r2[]);
+extern void sub_8042900(struct Entity *r0);
+extern void sub_8042968(struct Entity *r0);
+extern void sub_806ABAC(struct Entity *, struct Entity *);
+extern void PausedStatusTarget(struct Entity *, struct Entity *,u32,u32,u32);
+void sub_8041BBC(struct Entity *r0);
+extern u8 sub_8045888(struct Entity *);
+extern void sub_806A2BC(struct Entity *, u8);
 extern void sub_804178C(u32);
-extern void sub_803F508(struct DungeonEntity *);
+extern void sub_803F508(struct Entity *);
 extern void sub_804AC20(struct Position *);
 extern u8 sub_8092364(u8);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32 r0, u32 r1);
 
-void sub_8069E0C(struct DungeonEntity *pokemon)
+void sub_8069E0C(struct Entity *pokemon)
 {
   s32 index;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
 
-  entityData = pokemon->entityData;
+  entityInfo = pokemon->info;
   if (HasAbility(pokemon, ABILITY_FORECAST)) {
-    entityData->types[0] = gUnknown_80F520C[GetWeather(pokemon)].unk0;
-    entityData->types[1] = TYPE_NONE;
+    entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
+    entityInfo->types[1] = TYPE_NONE;
   }
   else {
     for(index = 0; index < 2; index++)
-      entityData->types[index] = GetPokemonType(entityData->entityID, index);
+      entityInfo->types[index] = GetPokemonType(entityInfo->id, index);
   }
   for(index = 0; index < 2; index++)
-    entityData->abilities[index] = GetPokemonAbility(entityData->entityID, index);
-  gDungeonGlobalData->unkC = 1;
+    entityInfo->abilities[index] = GetPokemonAbility(entityInfo->id, index);
+  gDungeon->unkC = 1;
 }
 
 void TriggerWeatherAbilities(void)
 {
-  struct DungeonEntity *entity;
+  struct Entity *entity;
   s32 index;
 
-  if (gDungeonGlobalData->unkC != 0) {
-    gDungeonGlobalData->unkC = 0;
-    gDungeonGlobalData->negateWeatherEffects = FALSE;
+  if (gDungeon->unkC != 0) {
+    gDungeon->unkC = 0;
+    gDungeon->nullifyWeather = FALSE;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeonGlobalData->allPokemon[index];
+      entity = gDungeon->allPokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
-            gDungeonGlobalData->startingWeather[WEATHER_RAIN] = 1;
+            gDungeon->naturalWeather[WEATHER_RAIN] = 1;
         }
         else if (HasAbility(entity, ABILITY_SAND_STREAM)) {
-            gDungeonGlobalData->startingWeather[WEATHER_SANDSTORM] = 1;
+            gDungeon->naturalWeather[WEATHER_SANDSTORM] = 1;
         }
         else if (HasAbility(entity, ABILITY_DROUGHT)) {
-            gDungeonGlobalData->startingWeather[WEATHER_SUNNY] = 1;
+            gDungeon->naturalWeather[WEATHER_SUNNY] = 1;
         }
         if ((HasAbility(entity, ABILITY_AIR_LOCK)) || (HasAbility(entity, ABILITY_CLOUD_NINE))) {
-            gDungeonGlobalData->negateWeatherEffects = TRUE;
+            gDungeon->nullifyWeather = TRUE;
         }
       }
     }
   }
 }
 
-s32 sub_8069F54(struct DungeonEntity *pokemon, s16 param_2)
+s32 sub_8069F54(struct Entity *pokemon, s16 param_2)
 {
   if ((((param_2 * 0x10000) + 0xfe880000U) >> 0x10) < 4) {
     if (HasAbility(pokemon, ABILITY_FORECAST)) {
-        return gUnknown_80F520C[GetWeather(pokemon)].unk2;
+        return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
     }
     else {
         return 0x178;
@@ -109,14 +109,14 @@ s32 sub_8069F54(struct DungeonEntity *pokemon, s16 param_2)
   return param_2;
 }
 
-static inline u8 sub_8069F9C_sub(struct DungeonEntity *pokemon)
+static inline u8 sub_8069F9C_sub(struct Entity *pokemon)
 {
     u32 weather;
-    weather = GetWeather(pokemon);
+    weather = GetApparentWeather(pokemon);
     return gUnknown_80F51E4[weather];
 }
 
-void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,struct PokemonMove *move)
+void sub_8069F9C(struct Entity *pokemon,struct Entity * target,struct Move *move)
 {
   u8 type;
   u8 ability;
@@ -128,9 +128,9 @@ void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,str
 #endif
   int randomIndex;
   int abilityIndex;
-  struct DungeonEntityData *iVar6; // r7
-  struct DungeonEntityData *iVar7; // r2
-  struct DungeonEntityData *iVar8;
+  struct EntityInfo *iVar6; // r7
+  struct EntityInfo *iVar7; // r2
+  struct EntityInfo *iVar8;
   u8 local_20 [4];
 
   if (!EntityExists(pokemon)) {
@@ -143,9 +143,9 @@ void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,str
     return;
   }
 
-  iVar7 = pokemon->entityData;
+  iVar7 = pokemon->info;
   iVar8 = iVar7;
-  iVar6 = target->entityData;
+  iVar6 = target->info;
   abilityIndex = -1;
   if (iVar6->abilities[0] == ABILITY_TRACE) {
     abilityIndex = 0;
@@ -156,12 +156,12 @@ void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,str
   if (-1 < abilityIndex) {
     abilityCounter = 0;
     ability = iVar7->abilities[0];
-    if (ability != ABILITY_NONE) {
+    if (ability != ABILITY_UNKNOWN) {
       local_20[0] = ability;
       abilityCounter = 1;
     }
     ability = iVar8->abilities[1];
-    if (ability != ABILITY_NONE) {
+    if (ability != ABILITY_UNKNOWN) {
       local_20[abilityCounter] = ability;
       abilityCounter++;
     }
@@ -170,11 +170,11 @@ void sub_8069F9C(struct DungeonEntity *pokemon,struct DungeonEntity * target,str
         randomIndex = 0;
       }
       else {
-        randomIndex = DungeonRandomCapped(abilityCounter);
+        randomIndex = DungeonRandInt(abilityCounter);
         if (randomIndex < 0) goto _0806A068;
       }
       iVar6->abilities[abilityIndex] = local_20[randomIndex];
-      gDungeonGlobalData->unkC = 1;
+      gDungeon->unkC = 1;
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FCC7C);
       sub_8042900(target);
@@ -185,11 +185,11 @@ _0806A068:
   if (iVar6->unk15A != 0) {
     iVar6->unk15A = 0;
     if (HasAbility(target, ABILITY_COLOR_CHANGE)) {
-      type = GetMoveTypeForPokemon(pokemon,move);
-      if (move->moveID == MOVE_WEATHER_BALL) {
+      type = GetMoveTypeForMonster(pokemon,move);
+      if (move->id == MOVE_WEATHER_BALL) {
         type = sub_8069F9C_sub(pokemon);
       }
-      if ((type != TYPE_NONE) && (!HasType(target,type))) {
+      if ((type != TYPE_NONE) && (!MonsterIsType(target,type))) {
         iVar6->types[0] = type;
         iVar6->types[1] = TYPE_NONE;
         iVar6->isColorChanged = TRUE;
@@ -203,20 +203,20 @@ _0806A068:
   }
 }
 
-void sub_806A120(struct DungeonEntity * pokemon, struct DungeonEntity * target, struct PokemonMove* move)
+void sub_806A120(struct Entity * pokemon, struct Entity * target, struct Move* move)
 {
   u32 uVar2_u32;
   u8 moveType;
   const char *typeString;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityData = target->entityData, entityData->protectionStatus == 0xC)) {
-    moveType = GetMoveTypeForPokemon(pokemon, move);
+     && (entityInfo = target->info, entityInfo->protectionStatus == 0xC)) {
+    moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
-      entityData->types[0] = uVar2_u32;
-      entityData->types[1] = 0;
+      entityInfo->types[0] = uVar2_u32;
+      entityInfo->types[1] = 0;
       sub_8041BBC(target);
       SetMessageArgument(gAvailablePokemonNames,target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
@@ -226,23 +226,23 @@ void sub_806A120(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 }
 
-void sub_806A1B0(struct DungeonEntity *pokemon)
+void sub_806A1B0(struct Entity *pokemon)
 { 
   if ((EntityExists(pokemon)) && (HasAbility(pokemon, ABILITY_TRUANT))) {
     PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
 }
 
-void sub_806A1E8(struct DungeonEntity *pokemon)
+void sub_806A1E8(struct Entity *pokemon)
 {
   bool8 bVar3;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
   
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
-    if (GetEntityType(pokemon) == ENTITY_POKEMON) {
-      entityData = pokemon->entityData;
-      bVar3 = (!entityData->isEnemy);
+    if (GetEntityType(pokemon) == ENTITY_MONSTER) {
+      entityInfo = pokemon->info;
+      bVar3 = (!entityInfo->isNotTeamMember);
     }
     if (gGameOptionsRef->FarOffPals == '\0') {
       bVar3 = FALSE;
@@ -253,44 +253,44 @@ void sub_806A1E8(struct DungeonEntity *pokemon)
   }
 }
 
-void sub_806A240(struct DungeonEntity *pokemon, struct DungeonEntity *target)
+void sub_806A240(struct Entity *pokemon, struct Entity *target)
 {
-  bool8 isEnemy;
-  struct DungeonEntityData *entityData;
+  bool8 isNotTeamMember;
+  struct EntityInfo *entityInfo;
   
-  isEnemy = FALSE;
+  isNotTeamMember = FALSE;
   if (EntityExists(pokemon)){
-    if (GetEntityType(pokemon) == ENTITY_POKEMON) {
-        entityData = pokemon->entityData;
-        isEnemy = (!entityData->isEnemy);
+    if (GetEntityType(pokemon) == ENTITY_MONSTER) {
+        entityInfo = pokemon->info;
+        isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isEnemy && (sub_8045888(pokemon) == '\0')) {
+    if (isNotTeamMember && (sub_8045888(pokemon) == '\0')) {
         sub_806A2BC(pokemon,1);
         return;
     }
-    else if (GetEntityType(target) == ENTITY_POKEMON) {
-        entityData = target->entityData;
-        isEnemy = (!entityData->isEnemy);
+    else if (GetEntityType(target) == ENTITY_MONSTER) {
+        entityInfo = target->info;
+        isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isEnemy && (sub_8045888(target) == '\0')) {
+    if (isNotTeamMember && (sub_8045888(target) == '\0')) {
         sub_806A2BC(target,1);
     }
   }
 }
 
-void sub_806A2BC(struct DungeonEntity *pokemon, u8 param_2)
+void sub_806A2BC(struct Entity *pokemon, u8 param_2)
 {
-  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_POKEMON) && (gDungeonGlobalData->leader != pokemon)) {
+  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->cameraTarget != pokemon)) {
     if (param_2 != '\0') {
       sub_804178C(1);
-      while (gDungeonGlobalData->unk12 < 0x3c) {
+      while (gDungeon->unk12 < 0x3c) {
         sub_803E46C(0x34);
       }
     }
     sub_803E708(4,0x44);
     sub_803F508(pokemon);
-    sub_804AC20(&pokemon->posWorld);
-    gDungeonGlobalData->unk12 = 0;
+    sub_804AC20(&pokemon->pos);
+    gDungeon->unk12 = 0;
   }
 }
 

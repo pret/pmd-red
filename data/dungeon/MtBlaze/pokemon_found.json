@@ -2,32 +2,32 @@
 	"tables": [{
 		"name": "MtBlaze_1F_3F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_PIDGEOT",
+				"species": "MONSTER_PIDGEOT",
 				"level": 16,
 				"probability": 2857
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 1429
 			},
 			{
-				"species": "SPECIES_MAGBY",
+				"species": "MONSTER_MAGBY",
 				"level": 17,
 				"probability": 2857
 			},
 			{
-				"species": "SPECIES_NUMEL",
+				"species": "MONSTER_NUMEL",
 				"level": 14,
 				"probability": 2857
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -37,27 +37,27 @@
 		"name": "MtBlaze_4F_Pokemon",
 		"pokemon": [
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_MAGBY",
+				"species": "MONSTER_MAGBY",
 				"level": 17,
 				"probability": 4000
 			},
 			{
-				"species": "SPECIES_NUMEL",
+				"species": "MONSTER_NUMEL",
 				"level": 14,
 				"probability": 4000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -66,32 +66,32 @@
 	}, {
 		"name": "MtBlaze_5F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_SHUCKLE",
+				"species": "MONSTER_SHUCKLE",
 				"level": 15,
 				"probability": 1304
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 1739
 			},
 			{
-				"species": "SPECIES_MAGBY",
+				"species": "MONSTER_MAGBY",
 				"level": 17,
 				"probability": 3479
 			},
 			{
-				"species": "SPECIES_NUMEL",
+				"species": "MONSTER_NUMEL",
 				"level": 14,
 				"probability": 3478
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -99,27 +99,27 @@
 	}, {
 		"name": "MtBlaze_6F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_SHUCKLE",
+				"species": "MONSTER_SHUCKLE",
 				"level": 15,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 2667
 			},
 			{
-				"species": "SPECIES_NUMEL",
+				"species": "MONSTER_NUMEL",
 				"level": 14,
 				"probability": 5333
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -127,27 +127,27 @@
 	}, {
 		"name": "MtBlaze_7F_Pokemon",
 		"pokemon": [{
-				"species": "SPECIES_SHUCKLE",
+				"species": "MONSTER_SHUCKLE",
 				"level": 15,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 2667
 			},
 			{
-				"species": "SPECIES_TORKOAL",
+				"species": "MONSTER_TORKOAL",
 				"level": 15,
 				"probability": 5333
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -156,32 +156,32 @@
 		"name": "MtBlaze_8F_9F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_RAPIDASH",
+				"species": "MONSTER_RAPIDASH",
 				"level": 10,
 				"probability": 3478
 			},
                         {
-				"species": "SPECIES_SHUCKLE",
+				"species": "MONSTER_SHUCKLE",
 				"level": 15,
 				"probability": 1305
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 1739
 			},
 			{
-				"species": "SPECIES_TORKOAL",
+				"species": "MONSTER_TORKOAL",
 				"level": 15,
 				"probability": 3478
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}
@@ -190,27 +190,27 @@
 		"name": "MtBlaze_10F_12F_Pokemon",
 		"pokemon": [
                         {
-				"species": "SPECIES_RAPIDASH",
+				"species": "MONSTER_RAPIDASH",
 				"level": 10,
 				"probability": 4000
 			},
 			{
-				"species": "SPECIES_SLUGMA",
+				"species": "MONSTER_SLUGMA",
 				"level": 16,
 				"probability": 2000
 			},
 			{
-				"species": "SPECIES_TORKOAL",
+				"species": "MONSTER_TORKOAL",
 				"level": 15,
 				"probability": 4000
 			},
 			{
-				"species": "SPECIES_KECLEON",
+				"species": "MONSTER_KECLEON",
 				"level": 90,
 				"probability": 0
 			},
 			{
-				"species": "SPECIES_DECOY",
+				"species": "MONSTER_DECOY",
 				"level": 1,
 				"probability": 0
 			}

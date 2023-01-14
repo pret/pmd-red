@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_TACTIC_H
 #define GUARD_CONSTANTS_TACTIC_H
 
-enum Tactic
+enum TacticID
 {
     TACTIC_LETS_GO_TOGETHER = 0x0,
     TACTIC_GO_THE_OTHER_WAY = 0x1,

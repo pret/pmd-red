@@ -3,9 +3,9 @@
 
 #include "dungeon_entity.h"
 
-bool8 CannotUseItems(struct DungeonEntity *pokemon);
-bool8 CannotAct(struct DungeonEntity *pokemon);
-bool8 CannotAttack(struct DungeonEntity *pokemon, bool8 skipSleep);
-bool8 CanMoveInDirection(struct DungeonEntity *pokemon, u32 facingDir);
+bool8 CannotUseItems(struct Entity *pokemon);
+bool8 HasStatusThatPreventsActing(struct Entity *pokemon);
+bool8 CannotAttack(struct Entity *pokemon, bool8 skipSleep);
+bool8 CanMoveInDirection(struct Entity *pokemon, u32 direction);
 
 #endif

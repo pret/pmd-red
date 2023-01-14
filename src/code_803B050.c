@@ -31,7 +31,7 @@ bool8 sub_803C110(s16 index)
           if (*psVar6 == species_s32) return FALSE;
           psVar5++;
           psVar6++;
-        } while (*psVar5 != SPECIES_NONE);
+        } while (*psVar5 != MONSTER_NONE);
       }
       pokeStruct = GetPlayerPokemonStruct();
       if ((pokeStruct->speciesNum == species_s32) ||

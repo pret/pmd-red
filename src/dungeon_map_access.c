@@ -30,24 +30,24 @@ extern u8 sub_8043CE4(u32);
 extern void sub_8004AA4(u8 *, struct OpenedFile *, u32);
 extern int sprintf(char *, const char *, ...);
 
-struct MapTile* GetMapTile_1(s32 x, s32 y)
+struct Tile* GetTile(s32 x, s32 y)
 {
     if (x >= 0 && y >= 0 && x < DUNGEON_MAX_SIZE_X && y < DUNGEON_MAX_SIZE_Y)
     {
-        return gDungeonGlobalData->mapTilePointers[y][x];
+        return gDungeon->tilePointers[y][x];
     }
-    return (struct MapTile*) gUnknown_203B430->unk0;
+    return (struct Tile*) gUnknown_203B430->unk0;
 }
 
-struct MapTile* GetMapTile_2(s32 x, s32 y)
+struct Tile* GetTileSafe(s32 x, s32 y)
 {
     if (x < 0 || y < 0 || x >= DUNGEON_MAX_SIZE_X || y >= DUNGEON_MAX_SIZE_Y)
     {
-        struct MapTile* tile = (struct MapTile*) gUnknown_202F190.unk0;
+        struct Tile* tile = (struct Tile*) gUnknown_202F190.unk0;
         gUnknown_202F190 = *gUnknown_203B430;
         return tile;
     }
-    return gDungeonGlobalData->mapTilePointers[y][x];
+    return gDungeon->tilePointers[y][x];
 }
 
 void sub_80495E4(void)
@@ -59,12 +59,12 @@ void sub_80495E4(void)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
-      gDungeonGlobalData->mapTilePointers[YCoord][XCoord] = &gDungeonGlobalData->mapTiles[YCoord][XCoord];
+      gDungeon->tilePointers[YCoord][XCoord] = &gDungeon->tiles[YCoord][XCoord];
     }
   }
-  gDungeonGlobalData->tileset = 0;
-  gDungeonGlobalData->unk3A10 = 0;
-  gDungeonGlobalData->unk13570 = 0;
+  gDungeon->tileset = 0;
+  gDungeon->unk3A10 = 0;
+  gDungeon->unk13570 = 0;
 }
 
 void LoadDungeonTilesetAssets(void)
@@ -73,48 +73,48 @@ void LoadDungeonTilesetAssets(void)
   struct OpenedFile *file_1;
   u8 fileName [12];
   
-  sprintf(fileName,gUnknown_80F6A04,gUnknown_8108EC0[gDungeonGlobalData->tileset]); // b%02dfon
+  sprintf(fileName,gUnknown_80F6A04,gUnknown_8108EC0[gDungeon->tileset]); // b%02dfon
   file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   DecompressATGlobalFile((u32 *)0x06008000,0,file);
   CloseFile(file);
 
-  sprintf(fileName,gUnknown_80F6A10,gDungeonGlobalData->tileset); // b%02dpal
+  sprintf(fileName,gUnknown_80F6A10,gDungeon->tileset); // b%02dpal
   gDungeonPaletteFile = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
 
-  sprintf(fileName,gUnknown_80F6A1C,gUnknown_8108EC0[gDungeonGlobalData->tileset]); // b%02dcel
+  sprintf(fileName,gUnknown_80F6A1C,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcel
   file_1 = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-  DecompressATFile(gDungeonGlobalData->unk11884,0x1194,file_1);
+  DecompressATFile(gDungeon->unk11884,0x1194,file_1);
   CloseFile(file_1);
 
-  if (gDungeonGlobalData->tileset < 0x40) {
-    sprintf(fileName,gUnknown_80F6A28,gUnknown_8108EC0[gDungeonGlobalData->tileset]); // b%02dcex
+  if (gDungeon->tileset < 0x40) {
+    sprintf(fileName,gUnknown_80F6A28,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcex
     file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-    DecompressATFile(gDungeonGlobalData->unk12C24,0x930,file);
+    DecompressATFile(gDungeon->unk12C24,0x930,file);
     CloseFile(file);
   }
   else {
-    sprintf(fileName,gUnknown_80F6A34,gDungeonGlobalData->tileset); // b%02demap0
+    sprintf(fileName,gUnknown_80F6A34,gDungeon->tileset); // b%02demap0
     file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-    DecompressATFile(gDungeonGlobalData->unk12C24,0x240,file);
+    DecompressATFile(gDungeon->unk12C24,0x240,file);
     CloseFile(file);
   }
-  sprintf(fileName,gUnknown_80F6A40,gDungeonGlobalData->tileset); // b%02dcanm
+  sprintf(fileName,gUnknown_80F6A40,gDungeon->tileset); // b%02dcanm
   gUnknown_202F18C = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   sub_8004AA4(gUnknown_202EE8C,gUnknown_202F18C,0x20);
   gWalkableTileToCrossableTerrain[0] = CROSSABLE_TERRAIN_REGULAR;
   gWalkableTileToCrossableTerrain[1] = CROSSABLE_TERRAIN_LIQUID;
-  gWalkableTileToCrossableTerrain[WALKABLE_TILE_CHASM] = CROSSABLE_TERRAIN_CREVICE;
-  gWalkableTileToCrossableTerrain[WALKABLE_TILE_WALL] = CROSSABLE_TERRAIN_WALL;
+  gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_CHASM] = CROSSABLE_TERRAIN_CREVICE;
+  gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_WALL] = CROSSABLE_TERRAIN_WALL;
 
-  if(gDungeonWaterType[gDungeonGlobalData->tileset] == DUNGEON_WATER_TYPE_LAVA)
+  if(gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)
   {
-    gWalkableTileToCrossableTerrain[WALKABLE_TILE_LAVA] = CROSSABLE_TERRAIN_LIQUID;
-    gWalkableTileToCrossableTerrain[WALKABLE_TILE_WATER] = CROSSABLE_TERRAIN_REGULAR;
+    gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_LAVA] = CROSSABLE_TERRAIN_LIQUID;
+    gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_WATER] = CROSSABLE_TERRAIN_REGULAR;
   }
   else
   {
-    gWalkableTileToCrossableTerrain[WALKABLE_TILE_LAVA]  = CROSSABLE_TERRAIN_REGULAR;
-    gWalkableTileToCrossableTerrain[WALKABLE_TILE_WATER]  = CROSSABLE_TERRAIN_LIQUID;
+    gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_LAVA]  = CROSSABLE_TERRAIN_REGULAR;
+    gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_WATER]  = CROSSABLE_TERRAIN_LIQUID;
   }
 }
 
@@ -126,7 +126,7 @@ void sub_8049820(void)
 
 void sub_8049840(void)
 {
-  if (sub_8043CE4(gDungeonGlobalData->tileset) != 0) {
+  if (sub_8043CE4(gDungeon->tileset) != 0) {
     gUnknown_203B430 = &gUnknown_80F69EC;
   }
   else {

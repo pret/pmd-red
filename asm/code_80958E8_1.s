@@ -211,7 +211,7 @@ sub_80961D8:
 	bl CountFilledMailboxSlots
 	adds r6, r0, 0
 	movs r1, 0x4
-	bl RandomRange
+	bl RandRange
 	mov r8, r0
 	cmp r6, 0x3
 	bgt _08096202
@@ -394,7 +394,7 @@ _08096340:
 _0809636C:
 	movs r0, 0x5
 	movs r1, 0xA
-	bl RandomRange
+	bl RandRange
 	strb r0, [r4, 0x11]
 	lsls r0, 24
 	lsrs r0, 24
@@ -503,7 +503,7 @@ _08096418:
 	strb r0, [r5, 0x4]
 	movs r0, 0x3
 	strb r0, [r5, 0x5]
-	bl Random
+	bl Rand32Bit
 	ldr r1, _08096484
 	ands r1, r0
 	str r1, [r5, 0x8]

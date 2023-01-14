@@ -65,7 +65,7 @@ struct unkStruct_203B294
     struct unkStruct_80915F4 unk44;
     /* 0x48 */ struct PokemonStruct *pokeStruct;
     u32 unk4C;
-    struct ItemSlot unk50;
+    struct Item unk50;
     u32 unk54;
     u8 fill58[0xA4 - 0x58];
     u32 unkA4;
@@ -138,7 +138,7 @@ void sub_8022EF4(void)
         break;
       case 5:
         gUnknown_203B294->unk38 = GetNumAvailableIQSkills(gUnknown_203B294->unk8, gUnknown_203B294->pokeStruct->IQ);
-        GetGummiItemStatBoost(gUnknown_203B294->pokeStruct, gUnknown_203B294->unk50.itemIndex, 0, &gUnknown_203B294->unk44);
+        GetGummiItemStatBoost(gUnknown_203B294->pokeStruct, gUnknown_203B294->unk50.id, 0, &gUnknown_203B294->unk44);
         gUnknown_203B294->unk3C = GetNumAvailableIQSkills(gUnknown_203B294->unk20, gUnknown_203B294->pokeStruct->IQ);
         gUnknown_203B294->unk40 = 1;
         r5 = gUnknown_203B294->unk44.unk0;

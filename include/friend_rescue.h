@@ -30,7 +30,7 @@ struct WonderMailStruct_203B33C
     u8 padding8[0x4C];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct ItemSlot unk41C;
+    struct Item unk41C;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
     u8 unk424[0x100];
     s32 unk524;

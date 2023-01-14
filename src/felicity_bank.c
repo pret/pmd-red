@@ -33,9 +33,9 @@ u32 CreateFelicityBank(s32 param_1)
   gUnknown_203B204 = MemoryAlloc(sizeof(struct unkStruct_203B204),8);
   gUnknown_203B204->unk10 = 0;
   gUnknown_203B204->unk0 = param_1;
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PERSIAN);
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E1C8, SPECIES_PERSIAN);
-  monName = GetMonSpecies(SPECIES_PERSIAN);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_PERSIAN);
+  monName = GetMonSpecies(MONSTER_PERSIAN);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
   if (gUnknown_203B204->unk0 == 1) {
     gUnknown_203B204->unkA4 = NULL;
@@ -43,7 +43,7 @@ u32 CreateFelicityBank(s32 param_1)
   else {
     gUnknown_203B204->unkA4 = &gUnknown_203B204->faceFile;
   }
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_PERSIAN);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
   gUnknown_203B204->faceFile = faceFile;
   gUnknown_203B204->faceData = faceFile->data;
   gUnknown_203B204->unkA0 = 0;

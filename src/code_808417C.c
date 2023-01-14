@@ -6,13 +6,13 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 
-s32 CalculateStatusTurns(struct DungeonEntity *target, s16 *turnRange, bool8 factorCurerSkills)
+s32 CalculateStatusTurns(struct Entity *target, s16 *turnRange, bool8 factorCurerSkills)
 {
   s32 numTurns;
   
-  numTurns = DungeonRandomRange(turnRange[0],turnRange[1]);
-  if (EntityExists(target) && (GetEntityType(target) == ENTITY_POKEMON) && (factorCurerSkills)) {
-    if (HasIQSkill(target, IQ_SKILL_SELF_CURER) && (numTurns != 0x7f)) {
+  numTurns = DungeonRandRange(turnRange[0],turnRange[1]);
+  if (EntityExists(target) && (GetEntityType(target) == ENTITY_MONSTER) && (factorCurerSkills)) {
+    if (IQSkillIsEnabled(target, IQ_SELF_CURER) && (numTurns != 0x7f)) {
       numTurns /= 2;
     }
     if (HasAbility(target, ABILITY_NATURAL_CURE) && (numTurns != 0x7f) && (4 < numTurns)) {

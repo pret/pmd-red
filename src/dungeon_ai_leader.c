@@ -8,24 +8,24 @@
 #include "dungeon_visibility.h"
 #include "pokemon_3.h"
 
-bool8 TargetLeader(struct DungeonEntity *pokemon)
+bool8 TargetLeader(struct Entity *pokemon)
 {
-    if (pokemon->entityData->isEnemy)
+    if (pokemon->info->isNotTeamMember)
     {
         return FALSE;
     }
-    return TacticsTargetLeader(pokemon->entityData->tactic);
+    return TacticsTargetLeader(pokemon->info->tactic);
 }
 
-struct DungeonEntity* GetLeaderEntityIfVisible(struct DungeonEntity *pokemon)
+struct Entity* GetLeaderIfVisible(struct Entity *pokemon)
 {
-    if (!pokemon->entityData->isEnemy)
+    if (!pokemon->info->isNotTeamMember)
     {
-        struct DungeonEntity *leader = GetLeaderEntity();
+        struct Entity *leader = GetLeader();
         if (leader &&
-            leader->entityData->waitingStatus != WAITING_STATUS_DECOY &&
+            leader->info->waitingStatus != STATUS_DECOY &&
             CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&
-            CanSee_2(pokemon, leader))
+            CanTargetEntity(pokemon, leader))
         {
             return leader;
         }

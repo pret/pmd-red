@@ -1195,7 +1195,7 @@ _0808FDB0:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r0, r6, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	ldr r1, _0808FEF4
 	mov r2, r10
 	movs r3, 0
@@ -1283,7 +1283,7 @@ _0808FDB0:
 	mov r3, r10
 	movs r1, 0
 	ldrsh r0, [r3, r1]
-	bl GetPokemonSize
+	bl GetBodySize
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4

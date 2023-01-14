@@ -13,7 +13,7 @@ sub_8044574:
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x44
-	bl GetLeaderEntity
+	bl GetLeader
 	mov r10, r0
 	movs r7, 0
 	mov r0, sp
@@ -54,7 +54,7 @@ _08044592:
 	adds r0, r6, r2
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl GetMovementSpeed
+	bl CalcSpeedStage
 	mov r3, r9
 	ldr r1, [r3]
 	movs r2, 0xCC
@@ -99,7 +99,7 @@ _08044592:
 	strh r0, [r6]
 	b _080446A4
 	.align 2, 0
-_08044634: .4byte gDungeonGlobalData
+_08044634: .4byte gDungeon
 _08044638: .4byte 0x0001357c
 _0804463C: .4byte gSpeedTurns
 _08044640: .4byte 0x0000bfff
@@ -127,7 +127,7 @@ _0804466E:
 	bgt _080446A4
 	adds r0, r5, 0
 	movs r1, 0
-	bl DecideAction
+	bl RunMonsterAI
 	bl sub_8044B28
 	lsls r0, 24
 	cmp r0, 0
@@ -202,7 +202,7 @@ _080446D4:
 	strb r1, [r2]
 	b _08044760
 	.align 2, 0
-_08044710: .4byte gDungeonGlobalData
+_08044710: .4byte gDungeon
 _08044714: .4byte 0x0001357c
 _08044718:
 	mov r2, r10
@@ -266,7 +266,7 @@ _0804476A:
 	strb r6, [r0]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl DecideAction
+	bl RunMonsterAI
 	adds r0, r4, 0
 	bl sub_8072CF4
 	bl sub_8086AC0
@@ -332,7 +332,7 @@ _08044802:
 	bx r0
 	.align 2, 0
 _08044814: .4byte 0x00000145
-_08044818: .4byte gDungeonGlobalData
+_08044818: .4byte gDungeon
 _0804481C: .4byte 0x0001357c
 	thumb_func_end sub_8044574
 

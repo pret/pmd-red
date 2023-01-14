@@ -302,8 +302,8 @@ u32 sub_802B2D4(void)
   gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
   MemoryFill8((u8 *)gUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   gUnknown_203B2C8->unk1 = -1;
-  CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B2C8->faceFile = faceFile;
   gUnknown_203B2C8->faceData  = faceFile->data;
   gUnknown_203B2C8->unk10 = 0;
@@ -375,14 +375,14 @@ void sub_802B3E0(void)
             strcpy(teamNameBuffer,gRescueTeamNamePlaceholder);
         }
         // Print and expand placeholders?
-        sprintf_2(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
+        sprintfStatic(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelipper face
         sub_80141B4(gUnknown_203B2C8->teamName, 0, &gUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 1:
-        monName = GetMonSpecies(SPECIES_PELIPPER);
+        monName = GetMonSpecies(MONSTER_PELIPPER);
         strcpy(gUnknown_203B2C8->unk114.clientName, monName);
-        gUnknown_203B2C8->unk114.unk14 = SPECIES_PELIPPER;
+        gUnknown_203B2C8->unk114.unk14 = MONSTER_PELIPPER;
         gUnknown_203B2C8->unk114.unk16 = 2;
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
@@ -391,7 +391,7 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = 0;
         gUnknown_203B2C8->unk114.itemRewards[2] = 0;
-        gUnknown_203B2C8->unk114.numItems = 10;
+        gUnknown_203B2C8->unk114.quantity = 10;
         gUnknown_203B2C8->unk114.friendAreaReward = 0;
         sub_802F204(&gUnknown_203B2C8->unk114, 0);
         break;
@@ -432,8 +432,8 @@ void sub_802B57C(void)
 
   if (sub_802F298() == 3) {
     sub_802F2C0();
-    CopyYellowSpeciesNametoBuffer(gUnknown_202E5D8, SPECIES_PELIPPER);
-    monName = GetMonSpecies(SPECIES_PELIPPER);
+    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+    monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
     sub_802B548(2);
   }
@@ -452,7 +452,7 @@ void sub_802B5B8(void)
     mail->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);
-    PrepareSavePakWrite(SPECIES_NONE);
+    PrepareSavePakWrite(MONSTER_NONE);
   }
 }
 

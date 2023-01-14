@@ -7,7 +7,7 @@
 
 struct MoveDataFile
 {
-    struct MoveData *moveData;
+    struct MoveDataEntry *moveData;
     u8 *unk4; // unsure of this struct's structure yet
 };
 
@@ -22,7 +22,7 @@ struct unkStruct_80928C0
 extern struct unkStruct_80928C0 gUnknown_81098C4;
 extern struct FileArchive gSystemFileArchive;
 extern struct OpenedFile *gWazaParametersFile;
-extern struct MoveData *gMovesData;
+extern struct MoveDataEntry *gMovesData;
 extern u8 *gMovesRelated_2038C6C;
 
 extern u8 gUnknown_81098D0[];
@@ -36,8 +36,8 @@ extern u8 gUnknown_81098EC[];
 extern u8 *gRangeNames[];
 extern u8 gUnknown_810992C[];
 
-extern void sub_8093F10(struct PokemonMove *, struct PokemonMove *);
-extern void sub_80928C0(u8 *, struct PokemonMove *, struct unkStruct_80928C0 *);
+extern void sub_8093F10(struct Move *, struct Move *);
+extern void sub_80928C0(u8 *, struct Move *, struct unkStruct_80928C0 *);
 
 void LoadWazaParameters(void)
 {
@@ -47,7 +47,7 @@ void LoadWazaParameters(void)
     gMovesRelated_2038C6C = ((struct MoveDataFile *)(gWazaParametersFile->data))->unk4;
 }
 
-u8 sub_809287C(struct PokemonMove *move)
+u8 sub_809287C(struct Move *move)
 {
     if((move->moveFlags & MOVE_FLAG_DISABLED) != 0)
         return 0x32;
@@ -57,17 +57,17 @@ u8 sub_809287C(struct PokemonMove *move)
         return 0x32;
 }
 
-void sub_80928A0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *r2)
+void sub_80928A0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *r2)
 {
-    struct PokemonMove stack;
+    struct Move stack;
     sub_8093F10(&stack, move);
     sub_80928C0(buffer, &stack, r2);
 }
 
-void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3)
+void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3)
 {
   u32 uVar2;
-  u32 maxPP;
+  u32 basePP;
   u8 localBuffer[12];
 
   uVar2 = sub_809287C(move);
@@ -75,96 +75,96 @@ void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 
     param_3 = &gUnknown_81098C4;
   }
 
-  if (move->powerBoost != 0)
-      sprintf_2(localBuffer,gUnknown_81098DC,move->powerBoost); // %+d
+  if (move->ginseng != 0)
+      sprintfStatic(localBuffer,gUnknown_81098DC,move->ginseng); // %+d
   else
       localBuffer[0] = '\0';
 
   if (param_3->unk8 != 0) {
         uVar2 = 2;
   }
-  if (param_3->unk9 != 0 && DoesMoveCharge(move->moveID)) {
+  if (param_3->unk9 != 0 && DoesMoveCharge(move->id)) {
         uVar2 = 2;
   }
   switch(param_3->unk0) {
         case 0:
-            sprintf_2
+            sprintfStatic
                     (buffer,gUnknown_81098E0,uVar2,
-                    gMovesData[move->moveID].namePointer,localBuffer);
+                    gMovesData[move->id].name,localBuffer);
             break;
 
         case 1:
-            maxPP = GetMoveMaxPP(move);
-            sprintf_2
+            basePP = GetMoveBasePP(move);
+            sprintfStatic
                     (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
-                    gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->PP,maxPP);
+                    gMovesData[move->id].name,localBuffer,param_3->unk4,
+                    move->PP,basePP);
             break;
 
         case 2:
-            maxPP = GetMoveMaxPP(move);
-            sprintf_2
+            basePP = GetMoveBasePP(move);
+            sprintfStatic
                     (buffer,gUnknown_8109910,uVar2,move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
-                    gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->PP,maxPP);
+                    gMovesData[move->id].name,localBuffer,param_3->unk4,
+                    move->PP,basePP);
             break;
 
         case 3:
-            maxPP = GetMoveMaxPP(move);
-            sprintf_2
-                    (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
-                    gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->PP,maxPP);
+            basePP = GetMoveBasePP(move);
+            sprintfStatic
+                    (buffer,gUnknown_81098EC,uVar2,move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? gUnknown_8109928 : gUnknown_810990C,
+                    gMovesData[move->id].name,localBuffer,param_3->unk4,
+                    move->PP,basePP);
             break;
 
         case 4:
-            maxPP = GetMoveMaxPP(move);
-            sprintf_2
-                    (buffer,gUnknown_8109910,uVar2, move->moveFlags & MOVE_FLAG_ENABLED ? gUnknown_8109928 : gUnknown_810990C,
-                    gMovesData[move->moveID].namePointer,localBuffer,param_3->unk4,
-                    move->PP,maxPP);
+            basePP = GetMoveBasePP(move);
+            sprintfStatic
+                    (buffer,gUnknown_8109910,uVar2, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? gUnknown_8109928 : gUnknown_810990C,
+                    gMovesData[move->id].name,localBuffer,param_3->unk4,
+                    move->PP,basePP);
             break;
         }
 }
 
-void InitPokemonMove(struct PokemonMove *move, u16 moveID)
+void InitPokemonMove(struct Move *move, u16 moveID)
 {
-    move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
+    move->moveFlags = MOVE_FLAG_ENABLED_FOR_AI | MOVE_FLAG_EXISTS;
     move->moveFlags2 = 0;
-    move->moveID = moveID;
-    move->PP = GetMoveMaxPP(move);
-    move->powerBoost = 0;
+    move->id = moveID;
+    move->PP = GetMoveBasePP(move);
+    move->ginseng = 0;
 }
 
-void sub_8092AA8(struct PokemonMove *move, u16 moveID)
+void sub_8092AA8(struct Move *move, u16 moveID)
 {
     if(moveID == 0)
         move->moveFlags = 0;
     else
     {
-        move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
+        move->moveFlags = MOVE_FLAG_ENABLED_FOR_AI | MOVE_FLAG_EXISTS;
         move->moveFlags2 = 0;
-        move->moveID = moveID;
-        move->PP = GetMoveMaxPP(move);
-        move->powerBoost = 0;
+        move->id = moveID;
+        move->PP = GetMoveBasePP(move);
+        move->ginseng = 0;
     }
 }
 
-void InitZeroedPPPokemonMove(struct PokemonMove *move, u16 moveID)
+void InitZeroedPPPokemonMove(struct Move *move, u16 moveID)
 {
-    move->moveFlags = MOVE_FLAG_ENABLED | MOVE_FLAG_EXISTS;
-    move->moveID = moveID;
+    move->moveFlags = MOVE_FLAG_ENABLED_FOR_AI | MOVE_FLAG_EXISTS;
+    move->id = moveID;
     move->PP = 0;
 }
 
-s16 GetMoveTargetingFlags(struct PokemonMove *move, bool32 isAI)
+s16 GetMoveTargetAndRange(struct Move *move, bool32 isAI)
 {
-    return gMovesData[move->moveID].targetingFlags[isAI];
+    return gMovesData[move->id].targetingFlags[isAI];
 }
 
-u8 GetMoveType(struct PokemonMove *move)
+u8 GetMoveType(struct Move *move)
 {
-    return gMovesData[move->moveID].type;
+    return gMovesData[move->id].type;
 }
 
 NAKED
@@ -235,59 +235,59 @@ void sub_8092B54(s16 species)
 "_08092B8C: .4byte gUnknown_810992B");
 }
 
-u8 GetMoveWeight(struct PokemonMove *move)
+u8 GetMoveAIWeight(struct Move *move)
 {
-    return gMovesData[move->moveID].weight;
+    return gMovesData[move->id].aiWeight;
 }
 
-u32 GetMoveHitCount(struct PokemonMove *move)
+u32 GetMoveNumberOfChainedHits(struct Move *move)
 {
-    return gMovesData[move->moveID].hitCount;
+    return gMovesData[move->id].numberOfChainedHits;
 }
 
-s32 GetMovePower(struct PokemonMove *move)
+s32 GetMoveBasePower(struct Move *move)
 {
-    return gMovesData[move->moveID].power;
+    return gMovesData[move->id].basePower;
 }
 
-s32 GetMoveAccuracy(struct PokemonMove *move, u32 accuracyType)
+s32 GetMoveAccuracyOrAIChance(struct Move *move, u32 accuracyType)
 {
-    return gMovesData[move->moveID].accuracy[accuracyType];
+    return gMovesData[move->id].accuracy[accuracyType];
 }
 
-u32 GetMoveMaxPP(struct PokemonMove *move)
+u32 GetMoveBasePP(struct Move *move)
 {
-    return gMovesData[move->moveID].maxPP;
+    return gMovesData[move->id].basePP;
 }
 
-u32 GetMoveMaxPowerBoost(struct PokemonMove *move)
+u32 GetMoveMaxUpgradeLevel(struct Move *move)
 {
-    return gMovesData[move->moveID].unk12;
+    return gMovesData[move->id].maxUpgradeLevel;
 }
 
-u8 GetMoveCriticalHitChance(struct PokemonMove *move)
+u8 GetMoveCritChance(struct Move *move)
 {
-    return gMovesData[move->moveID].criticalHitChance;
+    return gMovesData[move->id].critChance;
 }
 
-bool8 MoveCannotHitFrozen(struct PokemonMove *move)
+bool8 MoveCannotHitFrozen(struct Move *move)
 {
-    return gMovesData[move->moveID].cannotHitFrozen;
+    return gMovesData[move->id].cannotHitFrozen;
 }
 
-bool8 MoveDealsDirectDamage(struct PokemonMove *move)
+bool8 MovesIgnoresTaunted(struct Move *move)
 {
-    return gMovesData[move->moveID].dealsDirectDamage;
+    return gMovesData[move->id].ignoresTaunted;
 }
 
-u32 GetMoveRangeType(struct PokemonMove *move)
+u32 GetMoveRangeID(struct Move *move)
 {
-    return gMovesData[move->moveID].rangeType;
+    return gMovesData[move->id].rangeID;
 }
 
 void sub_8092C84(u8 *buffer, u16 moveID)
 {
-    struct PokemonMove stack;
+    struct Move stack;
     InitPokemonMove(&stack, moveID);
     sub_80928C0(buffer, &stack, NULL);
 }
@@ -297,39 +297,39 @@ u8 *GetMoveUseText(u16 moveID)
     return gMovesData[moveID].useText;
 }
 
-bool8 MoveAffectedByMagicCoat(u16 moveID)
+bool8 IsReflectedByMagicCoat(u16 moveID)
 {
     return gMovesData[moveID].affectedByMagicCoat;
 }
 
-bool8 MoveTargetsUser(u16 moveID)
+bool8 CanBeSnatched(u16 moveID)
 {
-    return gMovesData[moveID].targetsUser;
+    return gMovesData[moveID].isSnatchable;
 }
 
-bool8 MoveAffectedByMuzzled(u16 moveID)
+bool8 FailsWhileMuzzled(u16 moveID)
 {
-    return gMovesData[moveID].affectedByMuzzled;
+    return gMovesData[moveID].usesMouth;
 }
 
-bool8 IsBlockedBySoundproof(struct PokemonMove *move)
+bool8 IsSoundMove(struct Move *move)
 {
-    if(move->moveID == MOVE_GROWL)  return TRUE;
-    if(move->moveID == MOVE_ROAR)  return TRUE;
-    if(move->moveID == MOVE_METAL_SOUND)  return TRUE;
-    if(move->moveID == MOVE_SING)  return TRUE;
-    if(move->moveID == MOVE_GRASSWHISTLE)  return TRUE;
-    if(move->moveID == MOVE_SUPERSONIC)  return TRUE;
-    if(move->moveID == MOVE_PERISH_SONG)  return TRUE;
-    if(move->moveID == MOVE_SCREECH)  return TRUE;
-    if(move->moveID == MOVE_HYPER_VOICE)  return TRUE;
-    if(move->moveID == MOVE_SNORE)  return TRUE;
-    if(move->moveID == MOVE_HEAL_BELL)  return TRUE;
+    if(move->id == MOVE_GROWL)  return TRUE;
+    if(move->id == MOVE_ROAR)  return TRUE;
+    if(move->id == MOVE_METAL_SOUND)  return TRUE;
+    if(move->id == MOVE_SING)  return TRUE;
+    if(move->id == MOVE_GRASSWHISTLE)  return TRUE;
+    if(move->id == MOVE_SUPERSONIC)  return TRUE;
+    if(move->id == MOVE_PERISH_SONG)  return TRUE;
+    if(move->id == MOVE_SCREECH)  return TRUE;
+    if(move->id == MOVE_HYPER_VOICE)  return TRUE;
+    if(move->id == MOVE_SNORE)  return TRUE;
+    if(move->id == MOVE_HEAL_BELL)  return TRUE;
 
     return FALSE;
 }
 
-void sub_8092D54(u8 *buffer, struct PokemonMove *move)
+void sub_8092D54(u8 *buffer, struct Move *move)
 {
-    sprintf_2(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeType(move)]);
+    sprintfStatic(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeID(move)]);
 }

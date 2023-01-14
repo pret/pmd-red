@@ -13,7 +13,7 @@ struct unkStruct_203B480
     /* 0xE */ s16 targetSpecies;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u8 playerName[0x20 - 0x14];;
-    struct ItemSlot unk20;
+    struct Item unk20;
     u32 unk24;
     u32 unk28;
     s8 unk2C;

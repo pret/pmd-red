@@ -9,12 +9,12 @@ extern u8 *gUnknown_80FEE04[];
 extern u8 *gUnknown_80FEE2C[];
 extern u8 *gUnknown_80FEE54[];
 
-void sub_8042940(struct DungeonEntity *r0);
-void sub_80428B0(struct DungeonEntity *r0);
-void sub_80428C4(struct DungeonEntity *r0);
-void sub_80522F4(struct DungeonEntity *r0, struct DungeonEntity *r1, const char r2[]);
+void sub_8042940(struct Entity *r0);
+void sub_80428B0(struct Entity *r0);
+void sub_80428C4(struct Entity *r0);
+void sub_80522F4(struct Entity *r0, struct Entity *r1, const char r2[]);
 
-void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, u8 param_3, s32 *param_4, s32 *param_5, s32 param_6)
+void sub_806E8B0(struct Entity * pokemon, struct Entity * target, u8 param_3, s32 *param_4, s32 *param_5, s32 param_6)
 {
   bool8 hasNegStatus_pokemon;
   bool8 visFlags_pokemon_1;
@@ -23,8 +23,8 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   bool8 visFlags_target;
   s32 iVar3;
   bool32 isNotEnemy;
-  struct DungeonEntityData * entityData;
-  struct DungeonEntityData * entityData_1;
+  struct EntityInfo * entityInfo;
+  struct EntityInfo * entityInfo_1;
   s32 r7;
   s32 r8;
   s32 r10;
@@ -39,9 +39,9 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   
 
   if (HasAbility(pokemon, ABILITY_GUTS)) {
-    entityData = pokemon->entityData;
+    entityInfo = pokemon->info;
     hasNegStatus_pokemon = HasNegativeStatus(pokemon);
-    visFlags_pokemon_1 = SetVisualFlags(entityData,1,hasNegStatus_pokemon);
+    visFlags_pokemon_1 = SetVisualFlags(entityInfo,1,hasNegStatus_pokemon);
     if (hasNegStatus_pokemon) {
       r7 = 2;
     }
@@ -52,12 +52,12 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 
   if ((HasAbility(pokemon, ABILITY_HUGE_POWER)) || (HasAbility(pokemon, ABILITY_PURE_POWER))) {
-    entityData_1 = pokemon->entityData;
+    entityInfo_1 = pokemon->info;
     iVar3 = 0;
     if ((param_6 < 0x21) && (!r10)) {
       iVar3 = 1;
     }
-    visFlags_pokemon_2 = SetVisualFlags(entityData_1,0x100,iVar3);
+    visFlags_pokemon_2 = SetVisualFlags(entityInfo_1,0x100,iVar3);
     if (iVar3 != 0) {
       r7 *= 3;
       r8 <<= 1;
@@ -73,7 +73,7 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
     r8 <<= 1;
   }
 
-  if(pokemon->entityData->isEnemy)
+  if(pokemon->info->isNotTeamMember)
   {
       isNotEnemy = FALSE;
   }
@@ -82,13 +82,13 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
       isNotEnemy = TRUE;
   }
 
-  if ((HasAbility(pokemon, ABILITY_PLUS)) && (r10 == 1) && gDungeonGlobalData->hasMinus[isNotEnemy]) {
+  if ((HasAbility(pokemon, ABILITY_PLUS)) && (r10 == 1) && gDungeon->minusIsActive[isNotEnemy]) {
     r7 *= 15;
     r8 *= 10;
   }
 
   // ABILITY_MINUS
-  if ((HasAbility(pokemon, ABILITY_MINUS)) && (r10 == 1) && gDungeonGlobalData->hasPlus[isNotEnemy]) {
+  if ((HasAbility(pokemon, ABILITY_MINUS)) && (r10 == 1) && gDungeon->plusIsActive[isNotEnemy]) {
     r7 *= 15;
     r8 *= 10;
   }
@@ -99,9 +99,9 @@ void sub_806E8B0(struct DungeonEntity * pokemon, struct DungeonEntity * target, 
   }
 
   if ((HasAbility(target, ABILITY_MARVEL_SCALE)) && (!r10)) {
-    entityData = target->entityData;
+    entityInfo = target->info;
     hasNegStatus_target = HasNegativeStatus(target);
-    visFlags_target = SetVisualFlags(entityData, 8, hasNegStatus_target);
+    visFlags_target = SetVisualFlags(entityInfo, 8, hasNegStatus_target);
     if (hasNegStatus_target) {
       sp_0x4 *= 3;
       sp_0x8 <<= 1;

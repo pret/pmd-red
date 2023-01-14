@@ -257,7 +257,7 @@ _08023628:
 	ldr r1, _080236A0
 	adds r2, r7, 0
 	adds r3, r4, 0
-	bl sprintf_2
+	bl sprintfStatic
 	ldr r6, _0802368C
 	ldr r0, [r6]
 	movs r1, 0xE4
@@ -1406,7 +1406,7 @@ _08023F02:
 	ldr r1, _08023F80
 	adds r2, r6, 0
 	mov r3, r9
-	bl sprintf_2
+	bl sprintfStatic
 	mov r1, r8
 	ldr r0, [r1]
 	movs r2, 0xD6

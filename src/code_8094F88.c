@@ -58,7 +58,7 @@ void sub_8095118(void)
     unused = &gUnknown_203B480[iVar1];
     gUnknown_203B480[iVar1].mailType = WONDER_MAIL_TYPE_NONE;
     unused = &gUnknown_203B480[iVar1];
-    gUnknown_203B480[iVar1].unk20.itemIndex = ITEM_ID_NOTHING;
+    gUnknown_203B480[iVar1].unk20.id = ITEM_NOTHING;
     unused = &gUnknown_203B480[iVar1];
     gUnknown_203B480[iVar1].unk2D = 0;
   }

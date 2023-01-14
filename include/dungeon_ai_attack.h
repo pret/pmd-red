@@ -5,20 +5,20 @@
 
 #define RANGED_ATTACK_RANGE 10
 
-struct MoveTargetResults
+struct AIPossibleMove
 {
-    bool8 moveUsable;
-    u8 targetDir;
-    s32 moveWeight;
+    bool8 canBeUsed;
+    u8 direction;
+    s32 weight;
 };
 
-void DecideAttack(struct DungeonEntity *pokemon);
-s32 FindMoveTarget(struct MoveTargetResults *moveTargetResults, struct DungeonEntity *pokemon, struct PokemonMove *move);
-bool8 IsTargetInLineRange(struct DungeonEntity *user, struct DungeonEntity *target, s32 range);
-s32 WeightMoveIfUsable(s32 numPotentialTargets, s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, u32 hasStatusChecker);
-bool8 CanUseStatusMove(s32 targetingFlags, struct DungeonEntity *user, struct DungeonEntity *target, struct PokemonMove *move, bool32 hasStatusChecker);
-s32 WeightMove(struct DungeonEntity *user, s32 targetingFlags, struct DungeonEntity *target, u32 moveType);
-bool8 TargetRegularAttack(struct DungeonEntity *pokemon, u32 *targetDir, bool8 checkPetrified);
-bool8 IsTargetStraightAhead(struct DungeonEntity *pokemon, struct DungeonEntity *targetPokemon, s32 facingDir, s32 maxRange);
+void DecideAttack(struct Entity *pokemon);
+s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon, struct Move *move);
+bool8 IsTargetInLineRange(struct Entity *user, struct Entity *target, s32 range);
+s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, u32 hasStatusChecker);
+bool8 IsAITargetEligible(s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, bool32 hasStatusChecker);
+s32 WeightMove(struct Entity *user, s32 targetingFlags, struct Entity *target, u32 moveType);
+bool8 TargetRegularAttack(struct Entity *pokemon, u32 *targetDir, bool8 checkPetrified);
+bool8 IsTargetInRange(struct Entity *pokemon, struct Entity *targetPokemon, s32 direction, s32 maxRange);
 
 #endif

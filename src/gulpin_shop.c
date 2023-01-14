@@ -21,7 +21,7 @@ extern void sub_801EA28();
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_801EBC4();
 
-u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct PokemonMove *param_3)
+u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct Move *param_3)
 {
   struct OpenedFile *faceFile;
   s32 species_32;
@@ -32,7 +32,7 @@ u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct PokemonMove *
   gUnknown_203B26C->unk0 = param_1;
   gUnknown_203B26C->speciesNum = species_32;
   gUnknown_203B26C->unk10 = param_3;
-  gUnknown_203B26C->unk1C = param_3[4].moveID;
+  gUnknown_203B26C->unk1C = param_3[4].id;
 
   if (param_1 == 0) {
    gUnknown_203B26C->unk128 = &gUnknown_203B26C->faceFile;
@@ -40,7 +40,7 @@ u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct PokemonMove *
   else {
     gUnknown_203B26C->unk128 = NULL;
   }
-  faceFile = GetDialogueSpriteDataPtr(SPECIES_GULPIN);
+  faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
   gUnknown_203B26C->faceFile = faceFile;
   gUnknown_203B26C->faceData = faceFile->data;
 

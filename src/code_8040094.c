@@ -28,19 +28,19 @@ extern void sub_8040A84();
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
 // Luminous Orb???
-void HandleLuminousOrbAction(struct DungeonEntity *pokemon)
+void HandleLuminousOrbAction(struct Entity *pokemon)
 {
-  struct MapTile *mapTile;
+  struct Tile *mapTile;
   int XCoord;
   int YCoord;
 
-  gDungeonGlobalData->unk1820B = 1;
+  gDungeon->unk1820B = 1;
 
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
-      mapTile = GetMapTile_2(XCoord, YCoord);
+      mapTile = GetTileSafe(XCoord, YCoord);
       mapTile->unk4 = mapTile->unk4 | 1;
     }
   }
@@ -52,7 +52,7 @@ void HandleLuminousOrbAction(struct DungeonEntity *pokemon)
 
 void sub_8040094(u8 r0)
 {
-    gDungeonGlobalData->unk18217 = r0;
+    gDungeon->unk18217 = r0;
     sub_803F7BC();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
@@ -66,15 +66,15 @@ void sub_8040094(u8 r0)
 void sub_80400D4(void)
 {
     s32 temp;
-    temp = gDungeonGlobalData->unk18200;
+    temp = gDungeon->unk18200;
     if(temp == 0)
         return;
     if(temp > 0x1E)
         temp = 0x1F;
-    gDungeonGlobalData->unk181FC = gUnknown_80F6568[temp];
-    gDungeonGlobalData->unk18200--;
-    if(gDungeonGlobalData->unk18200 == 0)
-        gDungeonGlobalData->unk18200 = gDungeonGlobalData->unk18204;
+    gDungeon->unk181FC = gUnknown_80F6568[temp];
+    gDungeon->unk18200--;
+    if(gDungeon->unk18200 == 0)
+        gDungeon->unk18200 = gDungeon->unk18204;
 }
 
 void sub_8040124(void)

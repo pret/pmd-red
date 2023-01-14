@@ -7,8 +7,8 @@
 #include "status.h"
 
 extern void sub_803E708(u32, u32);
-extern void sub_80421C0(struct DungeonEntity *r0, u16 r1);
-extern void sub_8078B5C(struct DungeonEntity *, struct DungeonEntity *, u32, u32, u32);
+extern void sub_80421C0(struct Entity *r0, u16 r1);
+extern void sub_8078B5C(struct Entity *, struct Entity *, u32, u32, u32);
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -21,28 +21,28 @@ extern u8 *gPtrSteelPartCrumbledMessage[];
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4FAC;
-extern void sub_806F370(struct DungeonEntity *r0, struct DungeonEntity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_8051E7C(struct DungeonEntity *pokemon);
-extern void sub_8045BF8(u8 *, struct ItemSlot *);
-extern void SetMessageArgument(char[], struct DungeonEntity*, u32);
+extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
+extern void sub_8051E7C(struct Entity *pokemon);
+extern void sub_8045BF8(u8 *, struct Item *);
+extern void SetMessageArgument(char[], struct Entity*, u32);
 
 extern u8 *gUnknown_80FDCA4[];
 extern u8 *gUnknown_80FE3E8[];
 
-bool8 sub_8048D50(struct DungeonEntity * pokemon, struct ItemSlot *item)
+bool8 sub_8048D50(struct Entity * pokemon, struct Item *item)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
 
-  entityData = pokemon->entityData;
+  entityInfo = pokemon->info;
   
-  if ((item->itemFlags & ITEM_FLAG_STICKY) != 0) {
+  if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gUnknown_202DE58, item);
     SendMessage(pokemon,*gUnknown_80FE3E8);
     return FALSE;
   }
   else
   {
-    if ((entityData->muzzledStatus == MUZZLED_STATUS_MUZZLED) && (IsEdibleItem(item->itemIndex))) {
+    if ((entityInfo->muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
         SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
@@ -51,7 +51,7 @@ bool8 sub_8048D50(struct DungeonEntity * pokemon, struct ItemSlot *item)
   return TRUE;
 }
 
-void sub_8048DB8(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 r2)
+void sub_8048DB8(struct Entity *pokemon, struct Entity *target, u8 r2)
 {
     u8 temp;
     if(r2 != 0)
@@ -60,10 +60,10 @@ void sub_8048DB8(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8
         sub_8051E7C(pokemon);
 }
 
-void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
+void sub_8048E04(struct Entity *pokemon, struct Entity * target)
 {
     sub_8078B5C(pokemon, target, 0x1E, 0, 1);
-    switch(DungeonRandomCapped(5))
+    switch(DungeonRandInt(5))
     {
         case 0:
             PoisonedStatusTarget(pokemon, target, TRUE);
@@ -84,27 +84,27 @@ void sub_8048E04(struct DungeonEntity *pokemon, struct DungeonEntity * target)
     } 
 }
 
-void sub_8048EB0(struct DungeonEntity *pokemon)
+void sub_8048EB0(struct Entity *pokemon)
 {
     SendMessage(pokemon, *gPtrIcePartCrumbledMessage);
 }
 
-void sub_8048EC4(struct DungeonEntity *pokemon)
+void sub_8048EC4(struct Entity *pokemon)
 {
     SendMessage(pokemon, *gPtrRockPartCrumbledMessage);
 }
 
-void sub_8048ED8(struct DungeonEntity *pokemon)
+void sub_8048ED8(struct Entity *pokemon)
 {
     SendMessage(pokemon, *gPtrSteelPartCrumbledMessage);
 }
 
-void sub_8048EEC(struct DungeonEntity *pokemon)
+void sub_8048EEC(struct Entity *pokemon)
 {
     SendMessage(pokemon, *gPtrWishStoneCrumbledMessage);
 }
 
-void sub_8048F00(struct DungeonEntity *pokemon)
+void sub_8048F00(struct Entity *pokemon)
 {
     sub_80421C0(pokemon, 0xD6);
     SendMessage(pokemon, *gPtrMusicBoxPlayedCrumbledMessage);

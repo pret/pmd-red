@@ -14,8 +14,8 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 
 u32 sub_80908D8(struct DungeonLocation *dungeon)
 {
-  if ((dungeon->dungeonIndex < DUNGEON_OUT_ON_RESCUE) && (dungeon->dungeonFloor < gDungeonFloorCount[dungeon->dungeonIndex])) {
-   return gUnknown_8108084[dungeon->dungeonIndex][dungeon->dungeonFloor];
+  if ((dungeon->id < DUNGEON_OUT_ON_RESCUE) && (dungeon->floor < gDungeonFloorCount[dungeon->id])) {
+   return gUnknown_8108084[dungeon->id][dungeon->floor];
   }
   else {
     return 1;
@@ -27,9 +27,9 @@ u8 sub_8090910(struct DungeonLocation *dungeon, u32 param_2)
   u32 rand1;
   u32 rand2;
   
-  rand1 = RandomCapped(9999);
-  rand2 = RandomCapped(9999);
-  if ((dungeon->dungeonIndex < DUNGEON_OUT_ON_RESCUE) && (dungeon->dungeonFloor < gDungeonFloorCount[dungeon->dungeonIndex])) {
+  rand1 = RandInt(9999);
+  rand2 = RandInt(9999);
+  if ((dungeon->id < DUNGEON_OUT_ON_RESCUE) && (dungeon->floor < gDungeonFloorCount[dungeon->id])) {
     return sub_8091E94(param_2, rand1, rand2);
   }
   else {

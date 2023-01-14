@@ -22,7 +22,7 @@ struct unkStruct_80928C0
     u8 unk9;
 };
 
-void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
+void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_string(const char *, u8 *, void *, u32);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
@@ -41,7 +41,7 @@ void sub_80944BC(s16 moveID, u8 *arg2)
 {
     u16 moveID_u16;
     s32 moveID_s32 = moveID;
-    struct PokemonMove stack;
+    struct Move stack;
 
     if (moveID_s32 < 0x1F4) {
         // Needed this cast/variable to match

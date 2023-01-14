@@ -15,8 +15,8 @@ extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocatio
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void SavePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet);
-extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct PokemonMove *moveSet);
+extern void SavePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet);
+extern void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet);
 
 void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
@@ -56,7 +56,7 @@ void sub_8095240(u8 index)
   unused = &gUnknown_203B480[index];
   gUnknown_203B480[index].mailType = 0;
   unused = &gUnknown_203B480[index];
-  gUnknown_203B480[index].unk20.itemIndex = 0;
+  gUnknown_203B480[index].unk20.id = 0;
 }
 
 void sub_8095274(u32 param_1)
@@ -199,13 +199,13 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   uVar4 = param_1->unk4;
   preload->dungeon = param_1->unk0;
   preload->unk8 = uVar4;
-  sub_8094D28(Random());
+  sub_8094D28(Rand32Bit());
   gUnknown_203B480->unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->unk2C = GetUnk3(gUnknown_203B480->dungeon.dungeonIndex);
+  gUnknown_203B480->unk2C = GetUnk3(gUnknown_203B480->dungeon.id);
 }
 
 void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
@@ -246,7 +246,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     temp  = &gUnknown_203B484->unk4;
     memset(temp, 0, sizeof(struct PokemonStruct));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
-    RestoreIntegerBits(&backup, &temp->isLeader, 1);
+    RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
     RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
     RestoreDungeonLocation(&backup, &temp->dungeonLocation);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
@@ -288,7 +288,7 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
     temp  = &gUnknown_203B484->unk4;
     SaveIntegerBits(&backup, &temp->unk0, 2);
-    SaveIntegerBits(&backup, &temp->isLeader, 1);
+    SaveIntegerBits(&backup, &temp->isTeamLeader, 1);
     SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
     SaveDungeonLocation(&backup, &temp->dungeonLocation);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);
@@ -326,9 +326,9 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
-    RestoreIntegerBits(a, &b->unk20.itemFlags, 0x8);
-    RestoreIntegerBits(a, &b->unk20.numItems, 0x8);
-    RestoreIntegerBits(a, &b->unk20.itemIndex, 0x8);
+    RestoreIntegerBits(a, &b->unk20.flags, 0x8);
+    RestoreIntegerBits(a, &b->unk20.quantity, 0x8);
+    RestoreIntegerBits(a, &b->unk20.id, 0x8);
     RestoreIntegerBits(a, &b->unk24, 0x20);
     RestoreIntegerBits(a, &b->unk28, 0x20);
     RestoreIntegerBits(a, &b->unk2C, 0x8);
@@ -351,9 +351,9 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);
-    SaveIntegerBits(a, &b->unk20.itemFlags, 0x8);
-    SaveIntegerBits(a, &b->unk20.numItems, 0x8);
-    SaveIntegerBits(a, &b->unk20.itemIndex, 0x8);
+    SaveIntegerBits(a, &b->unk20.flags, 0x8);
+    SaveIntegerBits(a, &b->unk20.quantity, 0x8);
+    SaveIntegerBits(a, &b->unk20.id, 0x8);
     SaveIntegerBits(a, &b->unk24, 0x20);
     SaveIntegerBits(a, &b->unk28, 0x20);
     SaveIntegerBits(a, &b->unk2C, 0x8);

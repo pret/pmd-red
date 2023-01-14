@@ -354,7 +354,7 @@ _080029F4:
 	cmp r0, 0
 	beq _08002A18
 	movs r0, 0x2
-	bl OtherRandomCapped
+	bl OtherRandInt
 	adds r1, r4, 0x7
 	lsls r0, 1
 	adds r1, r0
@@ -369,7 +369,7 @@ _08002A10:
 	b _08002A64
 _08002A18:
 	movs r0, 0x3
-	bl OtherRandomCapped
+	bl OtherRandInt
 	adds r1, r4, 0x6
 	lsls r0, 1
 	adds r1, r0
@@ -384,7 +384,7 @@ _08002A2C:
 	b _08002A64
 _08002A34:
 	movs r0, 0x3
-	bl OtherRandomCapped
+	bl OtherRandInt
 	adds r1, r4, 0x7
 	adds r1, r0
 	adds r0, r1, 0
@@ -398,7 +398,7 @@ _08002A46:
 	b _08002A64
 _08002A4E:
 	movs r0, 0x8
-	bl OtherRandomCapped
+	bl OtherRandInt
 	movs r2, 0x2
 	negs r2, r2
 	adds r1, r2, 0
@@ -406,7 +406,7 @@ _08002A4E:
 	b _08002A64
 _08002A5E:
 	movs r0, 0x8
-	bl OtherRandomCapped
+	bl OtherRandInt
 _08002A64:
 	lsls r0, 24
 	asrs r4, r0, 24

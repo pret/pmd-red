@@ -755,7 +755,7 @@ struct unkStruct_8035D94 *sub_8035D94(void)
 
 void sub_8035DA0(void)
 {
-    gMainMenu->unk30.itemIndex.itemIndex_u8 = ITEM_ID_NOTHING;
+    gMainMenu->unk30.itemIndex.itemIndex_u8 = ITEM_NOTHING;
     gMainMenu->unk30.numItems = 0;
 }
 

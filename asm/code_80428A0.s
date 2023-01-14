@@ -18,7 +18,7 @@ sub_8042B34:
 	adds r6, r2, 0
 	movs r0, 0
 	mov r8, r0
-	bl xxx_call_GetLeaderEntity
+	bl xxx_call_GetLeader
 	mov r10, r0
 	ldr r7, _08042CB0
 	movs r0, 0xCC
@@ -85,7 +85,7 @@ _08042BCC:
 	asrs r0, 8
 	strh r0, [r1, 0xE]
 	movs r0, 0x2
-	bl RandomCapped
+	bl RandInt
 	ldr r1, [r7]
 	lsls r4, r5, 2
 	adds r3, r1, 0
@@ -104,7 +104,7 @@ _08042BCC:
 	adds r1, r0
 	str r1, [r3]
 	movs r0, 0xF0
-	bl RandomCapped
+	bl RandInt
 	ldr r1, [r7]
 	adds r1, r4
 	adds r0, 0x98
@@ -112,7 +112,7 @@ _08042BCC:
 	strh r0, [r1]
 	lsls r0, r5, 1
 	adds r0, 0x8
-	bl RandomCapped
+	bl RandInt
 	ldr r1, [r7]
 	adds r2, r1, r4
 	adds r3, r0, 0
@@ -294,7 +294,7 @@ _08042D56:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042D74: .4byte gDungeonGlobalData
+_08042D74: .4byte gDungeon
 _08042D78: .4byte 0x000181f0
 	thumb_func_end sub_8042CC0
 
@@ -373,7 +373,7 @@ _08042DE4:
 	str r0, [r4, 0x8]
 	b _08042E14
 	.align 2, 0
-_08042E04: .4byte gDungeonGlobalData
+_08042E04: .4byte gDungeon
 _08042E08: .4byte 0x000005c4
 _08042E0C:
 	adds r3, 0x10
@@ -408,7 +408,7 @@ _08042E24:
 	movs r0, 0x1
 	b _08042E56
 	.align 2, 0
-_08042E44: .4byte gDungeonGlobalData
+_08042E44: .4byte gDungeon
 _08042E48: .4byte 0x000005c4
 _08042E4C:
 	adds r4, 0x10
@@ -452,7 +452,7 @@ _08042E82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042E90: .4byte gDungeonGlobalData
+_08042E90: .4byte gDungeon
 _08042E94: .4byte 0x000005c4
 	thumb_func_end sub_8042E5C
 
@@ -479,7 +479,7 @@ _08042EA6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042EC0: .4byte gDungeonGlobalData
+_08042EC0: .4byte gDungeon
 _08042EC4: .4byte 0x000005c4
 	thumb_func_end sub_8042E98
 
@@ -563,7 +563,7 @@ _08042F4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042F5C: .4byte gDungeonGlobalData
+_08042F5C: .4byte gDungeon
 _08042F60: .4byte 0x000005c4
 _08042F64: .4byte 0xffff0000
 _08042F68: .4byte 0x0000ffff
@@ -768,7 +768,7 @@ _080430D8:
 	.align 2, 0
 _0804310C: .4byte gUnknown_203B40C
 _08043110: .4byte gUnknown_203B41C
-_08043114: .4byte gDungeonGlobalData
+_08043114: .4byte gDungeon
 _08043118: .4byte 0x0001cedb
 _0804311C: .4byte gUnknown_203B410
 _08043120: .4byte 0x0000064c
@@ -815,11 +815,11 @@ _0804315E:
 	b _080431AC
 	.align 2, 0
 _0804318C: .4byte 0x00000644
-_08043190: .4byte gDungeonGlobalData
+_08043190: .4byte gDungeon
 _08043194: .4byte 0x00000674
 _08043198: .4byte 0x0000067c
 _0804319C:
-	bl Random
+	bl Rand32Bit
 	ldr r2, [r4]
 	ldr r1, _08043208
 	adds r2, r1
@@ -872,7 +872,7 @@ _080431DC:
 	.align 2, 0
 _08043208: .4byte 0x0000067c
 _0804320C: .4byte 0x00ffffff
-_08043210: .4byte gDungeonGlobalData
+_08043210: .4byte gDungeon
 _08043214: .4byte 0x00000644
 _08043218: .4byte gUnknown_202DE30
 _0804321C: .4byte 0x0000067b
@@ -946,7 +946,7 @@ _0804326A:
 	b _080432F4
 	.align 2, 0
 _080432B4: .4byte gUnknown_80FEC7C
-_080432B8: .4byte gDungeonGlobalData
+_080432B8: .4byte gDungeon
 _080432BC: .4byte 0x00000644
 _080432C0: .4byte gUnknown_202DE30
 _080432C4: .4byte gUnknown_81002B8
@@ -958,7 +958,7 @@ _080432CC: .4byte 0x00000226
 _080432D0:
 	ldr r4, _080432E4
 _080432D2:
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -1007,7 +1007,7 @@ _08043318:
 	movs r0, 0xA
 	strh r0, [r1]
 	ldr r0, [r2]
-	bl SetDungeonRNG
+	bl InitDungeonRNG
 _08043346:
 	ldr r0, [r4]
 	ldr r1, _080434C4
@@ -1020,7 +1020,7 @@ _08043346:
 	adds r0, r2
 	strb r6, [r0]
 	movs r0, 0x4
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, [r4]
 	ldr r3, _080434CC
 	adds r1, r3
@@ -1191,8 +1191,8 @@ _080434A6:
 	b _0804351C
 	.align 2, 0
 _080434B8: .4byte gPtrFinalChanceMessage
-_080434BC: .4byte gLeaderPokemon
-_080434C0: .4byte gDungeonGlobalData
+_080434BC: .4byte gLeaderPointer
+_080434C0: .4byte gDungeon
 _080434C4: .4byte 0x000037ec
 _080434C8: .4byte 0x000037fc
 _080434CC: .4byte 0x000037fd
@@ -1277,7 +1277,7 @@ _08043594:
 	b _080435D4
 	.align 2, 0
 _080435B4: .4byte gDungeonMusic
-_080435B8: .4byte gDungeonGlobalData
+_080435B8: .4byte gDungeon
 _080435BC: .4byte 0x00003a10
 _080435C0: .4byte gUnknown_202EDC8
 _080435C4: .4byte 0x00000644
@@ -1326,7 +1326,7 @@ _080435D4:
 	bl sub_804AAAC
 	b _08043648
 	.align 2, 0
-_0804362C: .4byte gDungeonGlobalData
+_0804362C: .4byte gDungeon
 _08043630: .4byte 0x00017b2c
 _08043634: .4byte 0x00017b38
 _08043638: .4byte 0x00017b3c
@@ -1373,7 +1373,7 @@ _08043690:
 	b _080436AC
 	.align 2, 0
 _080436A0: .4byte gUnknown_203B40C
-_080436A4: .4byte gDungeonGlobalData
+_080436A4: .4byte gDungeon
 _080436A8:
 	bl sub_803E7C8
 _080436AC:
@@ -1437,12 +1437,12 @@ _08043728:
 	strb r0, [r1, 0x5]
 	b _0804374C
 	.align 2, 0
-_08043730: .4byte gDungeonGlobalData
+_08043730: .4byte gDungeon
 _08043734: .4byte 0x0000066c
 _08043738: .4byte 0x0000066d
-_0804373C: .4byte gLeaderPokemon
+_0804373C: .4byte gLeaderPointer
 _08043740:
-	bl GetLeaderEntity
+	bl GetLeader
 	bl sub_803F4A0
 	bl sub_8040A84
 _0804374C:
@@ -1455,7 +1455,7 @@ _0804374C:
 	bne _0804377C
 	bl sub_807E5AC
 	movs r0, 0
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804377C
@@ -1463,7 +1463,7 @@ _0804374C:
 	bl sub_807E7FC
 	b _0804377C
 	.align 2, 0
-_08043774: .4byte gDungeonGlobalData
+_08043774: .4byte gDungeon
 _08043778:
 	bl TriggerWeatherAbilities
 _0804377C:
@@ -1473,7 +1473,7 @@ _0804377C:
 	b _080437A2
 _08043784:
 	bl sub_80427AC
-	bl GetLeaderEntity
+	bl GetLeader
 	ldr r2, _08043960
 	ldr r1, [r2]
 	ldr r3, _08043964
@@ -1504,14 +1504,14 @@ _080437A2:
 	strb r4, [r0]
 _080437C8:
 	adds r0, r4, 0
-	bl RunDungeon
+	bl RunFractionalTurn
 	movs r4, 0
 	bl sub_8044B28
 	lsls r0, 24
 	cmp r0, 0
 	beq _080437C8
 _080437DA:
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -1553,7 +1553,7 @@ _08043822:
 	bne _08043830
 	bl sub_806AA70
 _08043830:
-	bl GetLeaderEntity
+	bl GetLeader
 	bl EntityExists
 	lsls r0, 24
 	cmp r0, 0
@@ -1651,7 +1651,7 @@ _080438AC:
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
 	beq _08043926
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	ldr r0, _0804398C
 	ldr r1, [r0]
@@ -1691,7 +1691,7 @@ _0804394C:
 	bl sub_8080B30
 	b _080439A6
 	.align 2, 0
-_08043960: .4byte gDungeonGlobalData
+_08043960: .4byte gDungeon
 _08043964: .4byte 0x00003a08
 _08043968: .4byte 0x00000654
 _0804396C: .4byte 0x00018218
@@ -1729,7 +1729,7 @@ _080439C4:
 	bl sub_804700C
 	b _08043AF4
 	.align 2, 0
-_080439CC: .4byte gDungeonGlobalData
+_080439CC: .4byte gDungeon
 _080439D0: .4byte 0x00000654
 _080439D4:
 	ldrb r0, [r1, 0x11]
@@ -1739,7 +1739,7 @@ _080439D4:
 _080439DC:
 	cmp r0, 0x2
 	bne _08043A00
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r2, r0, 0
 	ldr r0, _080439F8
 	movs r1, 0
@@ -1754,7 +1754,7 @@ _080439FC: .4byte 0x0000066e
 _08043A00:
 	cmp r0, 0x3
 	bne _08043A24
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r2, r0, 0
 	ldr r0, _08043A1C
 	movs r1, 0
@@ -1787,7 +1787,7 @@ _08043A2A:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _08043A74
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r2, r0, 0
 	movs r0, 0x8A
 	lsls r0, 2
@@ -1847,7 +1847,7 @@ _08043ABA:
 	bl sub_8097FF8
 	b _080432FC
 	.align 2, 0
-_08043ACC: .4byte gDungeonGlobalData
+_08043ACC: .4byte gDungeon
 _08043AD0: .4byte 0x0000066e
 _08043AD4: .4byte 0x00000645
 _08043AD8: .4byte 0x0001cec8
@@ -1855,7 +1855,7 @@ _08043ADC: .4byte 0x00000644
 _08043AE0: .4byte 0x0000060b
 _08043AE4:
 	ldr r4, _08043B80
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
@@ -1927,7 +1927,7 @@ _08043B38:
 	.align 2, 0
 _08043B80: .4byte 0x00000227
 _08043B84: .4byte gUnknown_203B40C
-_08043B88: .4byte gDungeonGlobalData
+_08043B88: .4byte gDungeon
 _08043B8C: .4byte 0x0000fffe
 _08043B90: .4byte 0x00000644
 _08043B94: .4byte 0x0000067c
@@ -1956,7 +1956,7 @@ _08043BA4:
 	strh r0, [r3]
 	b _08043BE6
 	.align 2, 0
-_08043BC8: .4byte gDungeonGlobalData
+_08043BC8: .4byte gDungeon
 _08043BCC:
 	cmp r0, 0
 	bne _08043BDC
@@ -1979,7 +1979,7 @@ _08043BE6:
 	strb r0, [r4]
 	b _08043C32
 	.align 2, 0
-_08043BF4: .4byte gDungeonGlobalData
+_08043BF4: .4byte gDungeon
 _08043BF8: .4byte 0x00000674
 _08043BFC:
 	ldr r0, _08043C20
@@ -2082,7 +2082,7 @@ _08043CAC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08043CD0: .4byte gDungeonGlobalData
+_08043CD0: .4byte gDungeon
 _08043CD4: .4byte gUnknown_203B41C
 	thumb_func_end xxx_dungeon_8042F6C
 
@@ -2145,9 +2145,9 @@ sub_8043D10:
 	movs r0, 0x2
 	b _08043D4C
 	.align 2, 0
-_08043D38: .4byte gDungeonGlobalData
+_08043D38: .4byte gDungeon
 _08043D3C:
-	bl IsBossBattle
+	bl IsBossFight
 	lsls r0, 24
 	cmp r0, 0
 	bne _08043D4A
@@ -2210,7 +2210,7 @@ _08043DA0:
 	movs r0, 0x1
 	b _08043DAE
 	.align 2, 0
-_08043DA4: .4byte gDungeonGlobalData
+_08043DA4: .4byte gDungeon
 _08043DA8: .4byte 0x0001358c
 _08043DAC:
 	movs r0, 0
@@ -2299,7 +2299,7 @@ _08043E46:
 	cmp r0, 0
 	beq _08043E58
 	adds r0, r5, 0
-	bl GetMoveMaxPP
+	bl GetMoveBasePP
 	strb r0, [r4, 0x4]
 _08043E58:
 	adds r4, 0x8
@@ -2318,7 +2318,7 @@ _08043E6A:
 _08043E6E:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMapTile_2
+	bl GetTileSafe
 	ldr r4, [r0, 0x14]
 	adds r0, r4, 0
 	bl EntityExists
@@ -2354,7 +2354,7 @@ _08043EA0:
 	bx r0
 	.align 2, 0
 _08043EC0: .4byte 0x00000207
-_08043EC4: .4byte gDungeonGlobalData
+_08043EC4: .4byte gDungeon
 _08043EC8: .4byte 0x0001357c
 _08043ECC: .4byte 0x00000676
 	thumb_func_end sub_8043D60
@@ -2379,7 +2379,7 @@ _08043EEA:
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x1
 	bne _08043F40
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2403,7 +2403,7 @@ _08043F20:
 	ldr r1, _08043F3C
 	b _08043FAC
 	.align 2, 0
-_08043F2C: .4byte gDungeonGlobalData
+_08043F2C: .4byte gDungeon
 _08043F30: .4byte gAvailablePokemonNames
 _08043F34: .4byte 0x000005f4
 _08043F38: .4byte gUnknown_80F89B4
@@ -2411,7 +2411,7 @@ _08043F3C: .4byte 0x0000021f
 _08043F40:
 	cmp r0, 0x2
 	bne _08043F74
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2433,7 +2433,7 @@ _08043F70: .4byte gUnknown_80F89D4
 _08043F74:
 	cmp r0, 0x3
 	bne _08043FB6
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r4, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2730,7 +2730,7 @@ _080441A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080441AC: .4byte gDungeonGlobalData
+_080441AC: .4byte gDungeon
 _080441B0: .4byte 0x00000644
 _080441B4: .4byte gTeamInventory_203B460
 _080441B8: .4byte gRecruitedPokemonRef

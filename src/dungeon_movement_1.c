@@ -17,52 +17,52 @@
 #include "pokemon.h"
 #include "weather.h"
 
-bool8 CanCrossWalls(struct DungeonEntity *pokemon)
+bool8 CanCrossWalls(struct Entity *pokemon)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    struct DungeonEntityData *pokemonData2 = pokemonData;
-    if (pokemonData2->transformStatus == TRANSFORM_STATUS_MOBILE)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    struct EntityInfo *pokemonInfo2 = pokemonInfo;
+    if (pokemonInfo2->transformStatus == STATUS_MOBILE)
     {
         return TRUE;
     }
-    if (HasItem(pokemon, ITEM_ID_MOBILE_SCARF))
+    if (HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
     {
         return TRUE;
     }
-    if (GetCrossableTerrain(pokemonData2->entityID) == CROSSABLE_TERRAIN_WALL)
+    if (GetCrossableTerrain(pokemonInfo2->id) == CROSSABLE_TERRAIN_WALL)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_807049C(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_807049C(struct Entity *pokemon, struct Position *pos)
 {
   s32 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityInfo = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     (tile->pokemon == NULL || (GetEntityType(tile->pokemon) == ENTITY_POKEMON))) {
-    if (IsFixedDungeon() || (entityData->transformStatus != TRANSFORM_STATUS_MOBILE && !HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-      crossableTerrain = GetCrossableTerrain(entityData->entityID);
-      tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
-      if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
+    if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+      crossableTerrain = GetCrossableTerrain(entityInfo->id);
+      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
       }
-      if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
+      if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
         crossableTerrain = CROSSABLE_TERRAIN_WALL;
       }
         switch(crossableTerrain)
         {
             case CROSSABLE_TERRAIN_LIQUID:
-                if(tileFlags == TILE_TYPE_LIQUID) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
             case CROSSABLE_TERRAIN_REGULAR:
-                if(tileFlags == TILE_TYPE_FLOOR) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
                 break;
             case CROSSABLE_TERRAIN_WALL:
             default:
@@ -76,12 +76,12 @@ bool8 sub_807049C(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-bool8 sub_8070564(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_8070564(struct Entity *pokemon, struct Position *pos)
 {
   u8 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
 #ifndef NONMATCHING
   register s32 tileFlags_0 asm("r0");
   register s32 crossableTerrain2 asm("r3");
@@ -90,13 +90,13 @@ bool8 sub_8070564(struct DungeonEntity *pokemon, struct Position *pos)
   s32 crossableTerrain2;
 #endif
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityInfo = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     (tile->pokemon == NULL || (GetEntityType(tile->pokemon) == ENTITY_POKEMON))) {
-        crossableTerrain2 = crossableTerrain = GetCrossableTerrain(entityData->entityID);
-        tileFlags_0 = tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
+        crossableTerrain2 = crossableTerrain = GetCrossableTerrain(entityInfo->id);
+        tileFlags_0 = tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
         switch(crossableTerrain)
         {
             case CROSSABLE_TERRAIN_WALL: // 3
@@ -107,38 +107,38 @@ bool8 sub_8070564(struct DungeonEntity *pokemon, struct Position *pos)
                     return FALSE;
                 break;
             case CROSSABLE_TERRAIN_REGULAR: // 0
-                if(tileFlags == TILE_TYPE_FLOOR)
+                if(tileFlags == TERRAIN_TYPE_NORMAL)
             default:
                     return FALSE;
                 break;
             case CROSSABLE_TERRAIN_LIQUID: // 1
-                if(tileFlags == TILE_TYPE_LIQUID) return FALSE;
-                if (tileFlags_0 == TILE_TYPE_FLOOR) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
+                if (tileFlags_0 == TERRAIN_TYPE_NORMAL) return FALSE;
                 return TRUE;
         }
     }
    return TRUE;
 }
 
-bool8 sub_80705F0(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos)
 {
   s32 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityInfo = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     ((tile->pokemon == NULL) || ((GetEntityType(tile->pokemon) == ENTITY_POKEMON)))) {
-    if (IsFixedDungeon() || (entityData->transformStatus != TRANSFORM_STATUS_MOBILE && !HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-      crossableTerrain = GetCrossableTerrain(entityData->entityID);
-      tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
-      if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER)))) {
+    if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+      crossableTerrain = GetCrossableTerrain(entityInfo->id);
+      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
       }
-      if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
+      if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
         crossableTerrain = CROSSABLE_TERRAIN_WALL;
       }
 
@@ -158,33 +158,33 @@ bool8 sub_80705F0(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-bool8 sub_80706A4(struct DungeonEntity *pokemon, struct Position *pos)
+bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos)
 {
   s32 crossableTerrain;
-  struct MapTile *tile;
+  struct Tile *tile;
   u16 tileFlags;
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->entityData;
-  tile = GetMapTile_1(pos->x, pos->y);
+  entityInfo = pokemon->info;
+  tile = GetTile(pos->x, pos->y);
   if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->tileType & TILE_TYPE_MAP_EDGE) == 0)) &&
-     ((tile->pokemon == NULL) || ((GetEntityType(tile->pokemon) == ENTITY_POKEMON) && (tile->pokemon->entityData == entityData)))) {
-    if (IsFixedDungeon() || (entityData->transformStatus != TRANSFORM_STATUS_MOBILE && !HasItem(pokemon, ITEM_ID_MOBILE_SCARF))) {
-      crossableTerrain = GetCrossableTerrain(entityData->entityID);
-      tileFlags = tile->tileType & (TILE_TYPE_FLOOR | TILE_TYPE_LIQUID);
-      if (HasIQSkill(pokemon, IQ_SKILL_ALL_TERRAIN_HIKER)) {
+      (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
+     ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (tile->monster->info == entityInfo)))) {
+    if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+      crossableTerrain = GetCrossableTerrain(entityInfo->id);
+      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
       }
-      if (HasIQSkill(pokemon, IQ_SKILL_SUPER_MOBILE)) {
+      if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
         crossableTerrain = CROSSABLE_TERRAIN_WALL;
       }
         switch(crossableTerrain)
         {
             case CROSSABLE_TERRAIN_LIQUID:
-                if(tileFlags == TILE_TYPE_LIQUID) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
             case CROSSABLE_TERRAIN_REGULAR:
-                if(tileFlags == TILE_TYPE_FLOOR) return FALSE;
+                if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
                 break;
             case CROSSABLE_TERRAIN_WALL:
             default:
@@ -198,46 +198,46 @@ bool8 sub_80706A4(struct DungeonEntity *pokemon, struct Position *pos)
    return TRUE;
 }
 
-s32 GetMovementSpeed(struct DungeonEntity *pokemon)
+s32 CalcSpeedStage(struct Entity *pokemon)
 {
   s32 index;
   s32 speed;
-  struct DungeonEntityData * entityData;
+  struct EntityInfo * entityInfo;
   
-  entityData = pokemon->entityData;
+  entityInfo = pokemon->info;
   speed = 0;
 
-  for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
+  for(index = 0; index < NUM_SPEED_COUNTERS; index++)
   {
-    if (entityData->speedUpTurnsLeft[index + NUM_SPEED_TURN_COUNTERS] != 0) {
+    if (entityInfo->speedUpCounters[index + NUM_SPEED_COUNTERS] != 0) {
       speed--;
     }
-    if (entityData->speedUpTurnsLeft[index] != 0) {
+    if (entityInfo->speedUpCounters[index] != 0) {
       speed++;
     }
   }
 
-  if (entityData->nonVolatileStatus == NON_VOLATILE_STATUS_PARALYZED) {
+  if (entityInfo->nonVolatileStatus == STATUS_PARALYSIS) {
     speed--;
   }
 
-  speed += GetMoveSpeed(entityData->entityID);
-  if ((HasType(pokemon, TYPE_ICE)) && (GetWeather(pokemon) == WEATHER_SNOW)) {
+  speed += GetMovementSpeed(entityInfo->id);
+  if ((MonsterIsType(pokemon, TYPE_ICE)) && (GetApparentWeather(pokemon) == WEATHER_SNOW)) {
     speed++;
   }
-  if (entityData->transformSpecies == SPECIES_DEOXYS_SPEED) {
+  if (entityInfo->apparentID == MONSTER_DEOXYS_SPEED) {
     speed++;
   }
-  if ((entityData->entityID == SPECIES_KECLEON) && entityData->isEnemy &&
-     gDungeonGlobalData->unk66E) {
+  if ((entityInfo->id == MONSTER_KECLEON) && entityInfo->isNotTeamMember &&
+     gDungeon->unk66E) {
     speed++;
   }
   if (speed < 0) {
     speed = 0;
   }
-  if (MAX_MOVEMENT_SPEED < speed) {
-    speed = MAX_MOVEMENT_SPEED;
+  if (MAX_SPEED_STAGE < speed) {
+    speed = MAX_SPEED_STAGE;
   }
-  entityData->movementSpeed = speed;
+  entityInfo->speedStage = speed;
   return speed;
 }

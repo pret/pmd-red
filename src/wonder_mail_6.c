@@ -114,7 +114,7 @@ bool8 sub_8030F58(u32 wonderMailType)
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailType = wonderMailType;
-  iVar3 = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
+  iVar3 = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B328->faceFile = iVar3;
   gUnknown_203B328->faceData = iVar3->data;
   gUnknown_203B328->unk114 = 0;
@@ -330,7 +330,7 @@ void sub_80313D8(u32 state)
                     unused = &gUnknown_203B480[iVar2];
                     gUnknown_203B480[iVar2].mailType = 0;
                     unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].unk20.itemIndex = 0;
+                    gUnknown_203B480[iVar2].unk20.id = 0;
                 }
                 break;
         }

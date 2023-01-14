@@ -3,7 +3,7 @@
 
 #define NUM_DUNGEON_MAZE (NUM_DUNGEONS - DUNGEON_NORMAL_MAZE_2)
 
-enum DungeonIndex
+enum DungeonID
 {
     DUNGEON_TINY_WOODS = 0,
     DUNGEON_THUNDERWAVE_CAVE = 1,

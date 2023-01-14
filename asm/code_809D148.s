@@ -192,12 +192,12 @@ _0809D3A8:
 	negs r4, r4
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl OtherRandomRange
+	bl OtherRandRange
 	lsls r0, 10
 	str r0, [r5, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl OtherRandomRange
+	bl OtherRandRange
 	lsls r0, 10
 	b _0809D402
 _0809D3D2:
@@ -212,14 +212,14 @@ _0809D3D2:
 	negs r4, r4
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl OtherRandomRange
+	bl OtherRandRange
 	ldr r1, [r5, 0x28]
 	muls r0, r1
 	lsls r0, 8
 	str r0, [r5, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl OtherRandomRange
+	bl OtherRandRange
 	ldr r1, [r5, 0x28]
 	muls r0, r1
 	lsls r0, 8

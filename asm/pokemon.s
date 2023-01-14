@@ -45,22 +45,22 @@ _0808CEA4:
 	strh r0, [r1, 0x16]
 	adds r0, r7, 0
 	movs r1, 0
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	mov r1, sp
 	strb r0, [r1, 0x18]
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	mov r1, sp
 	strb r0, [r1, 0x19]
 	adds r0, r7, 0
 	movs r1, 0
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	mov r1, sp
 	strb r0, [r1, 0x1A]
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	mov r1, sp
 	strb r0, [r1, 0x1B]
 	mov r0, sp
@@ -90,7 +90,7 @@ _0808CEA4:
 	add r4, sp, 0x58
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	add r0, sp, 0x4C
 	adds r1, r4, 0
 	movs r2, 0xA
@@ -207,19 +207,19 @@ sub_808CFD0:
 	strh r0, [r7, 0x16]
 	mov r0, r9
 	movs r1, 0
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	strb r0, [r7, 0x18]
 	mov r0, r9
 	movs r1, 0x1
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	strb r0, [r7, 0x19]
 	mov r0, r9
 	movs r1, 0
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	strb r0, [r7, 0x1A]
 	mov r0, r9
 	movs r1, 0x1
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	strb r0, [r7, 0x1B]
 	mov r1, r9
 	strh r1, [r7, 0x8]
@@ -282,7 +282,7 @@ _0808D09A:
 	bne _0808D0B4
 	mov r0, sp
 	mov r1, r9
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	mov r0, r8
 	mov r1, sp
 	movs r2, 0xA
@@ -326,22 +326,22 @@ sub_808D0D8:
 	movs r2, 0x8
 	ldrsh r0, [r7, r2]
 	movs r1, 0
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	strb r0, [r7, 0x18]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
 	movs r1, 0x1
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	strb r0, [r7, 0x19]
 	movs r2, 0x8
 	ldrsh r0, [r7, r2]
 	movs r1, 0
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	strb r0, [r7, 0x1A]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
 	movs r1, 0x1
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	strb r0, [r7, 0x1B]
 	str r6, [r7, 0x1C]
 	adds r0, r7, 0

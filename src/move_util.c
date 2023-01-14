@@ -12,31 +12,31 @@
 
 
 extern bool8 sub_8044B28(void);
-extern void sub_80429C8(struct DungeonEntity *r0);
+extern void sub_80429C8(struct Entity *r0);
 extern u16 gNaturePowerMoveTable[];
-bool8 sub_805755C(struct DungeonEntity* pokemon,u16 param_2);
+bool8 sub_805755C(struct Entity* pokemon,u16 param_2);
 
-u32 sub_8057144(struct DungeonEntity * pokemon)
+u32 sub_8057144(struct Entity * pokemon)
 {
-  struct PokemonMove **ppbVar3;
+  struct Move **ppbVar3;
   s32 entityIndex;
-  struct PokemonMove *move1;
-  struct PokemonMove *move2;
+  struct Move *move1;
+  struct Move *move2;
   s32 index;
-  struct DungeonEntity *entity;
+  struct Entity *entity;
   s32 counter;
-  struct PokemonMove *moveStack [80];
-  struct PokemonMove **local_20;
+  struct Move *moveStack [80];
+  struct Move **local_20;
   register s32 counter_1 asm("r0");
-  register struct PokemonMove** move_1 asm("r1");
+  register struct Move** move_1 asm("r1");
 
   counter = 0;
 
   for(entityIndex = 0; entityIndex < DUNGEON_MAX_POKEMON; entityIndex++)
   {
-    entity = gDungeonGlobalData->allPokemon[entityIndex];
+    entity = gDungeon->allPokemon[entityIndex];
     if (EntityExists(entity)) {
-      move1 = move2 = &entity->entityData->moves[0];
+      move1 = move2 = &entity->info->moves[0];
       
       // NOTE: reg flip here 
        // add  r2, r0, r1 -> add     r2, r1, r0
@@ -52,7 +52,7 @@ u32 sub_8057144(struct DungeonEntity * pokemon)
       {
         if ((move1->moveFlags & MOVE_FLAG_EXISTS)) {
           local_20 = ppbVar3;
-          if (!sub_805755C(pokemon, move1->moveID) && (move1->moveID != MOVE_SKETCH) && (counter < 80)) {
+          if (!sub_805755C(pokemon, move1->id) && (move1->id != MOVE_SKETCH) && (counter < 80)) {
             *local_20 = move2;
             ppbVar3++;
             counter++;
@@ -65,34 +65,34 @@ u32 sub_8057144(struct DungeonEntity * pokemon)
     return MOVE_REGULAR_ATTACK; // MOVE_REGULAR_ATTACK
   }
   else {
-    return moveStack[DungeonRandomCapped(counter)]->moveID;
+    return moveStack[DungeonRandInt(counter)]->id;
   }
 }
 
-bool8 sub_80571F0(struct DungeonEntity * pokemon, struct PokemonMove *move)
+bool8 sub_80571F0(struct Entity * pokemon, struct Move *move)
 {
     u16 moveID;
     s32 tileset;
-    struct DungeonEntityData *entityData;
+    struct EntityInfo *entityInfo;
 
-    entityData = pokemon->entityData;
+    entityInfo = pokemon->info;
 
-    if (entityData->unkFF == 1) {
-        moveID = move->moveID;
+    if (entityInfo->unkFF == 1) {
+        moveID = move->id;
         if ((moveID == MOVE_SKY_UPPERCUT) || (moveID == MOVE_TWISTER) || (moveID == MOVE_GUST) || (moveID == MOVE_THUNDER))
             return FALSE;
         else
             return TRUE;
     }
-    else if (entityData->unkFF == 2) {
-        if (entityData->chargingStatus == CHARGING_STATUS_DIVE) {
-            if (move->moveID == MOVE_WHIRLPOOL || move->moveID == MOVE_SURF) return FALSE;
+    else if (entityInfo->unkFF == 2) {
+        if (entityInfo->chargingStatus == STATUS_DIVING) {
+            if (move->id == MOVE_WHIRLPOOL || move->id == MOVE_SURF) return FALSE;
         }
-        else if (entityData->chargingStatus == CHARGING_STATUS_DIG) {
-            moveID = move->moveID;
+        else if (entityInfo->chargingStatus == STATUS_DIGGING) {
+            moveID = move->id;
             if (moveID == MOVE_EARTHQUAKE || moveID == MOVE_MAGNITUDE) return FALSE;
             if (moveID == MOVE_NATURE_POWER) {
-                tileset = gDungeonGlobalData->tileset;
+                tileset = gDungeon->tileset;
                 if (tileset < 0) {
                     tileset = 0;
                 }
@@ -107,19 +107,19 @@ bool8 sub_80571F0(struct DungeonEntity * pokemon, struct PokemonMove *move)
     return FALSE;
 }
 
-bool8 sub_805727C(struct DungeonEntity * pokemon, struct DungeonEntity * target, s32 chance)
+bool8 sub_805727C(struct Entity * pokemon, struct Entity * target, s32 chance)
 {
     bool8 uVar2;
     if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) && 
-        (target->entityData->unk158 != 0) &&
-        (target->entityData->HP != 0)) {
+        (target->info->unk158 != 0) &&
+        (target->info->HP != 0)) {
         if (chance != 0) {
             if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
-                uVar2 = RollPercentChance_2(chance * 2);
+                uVar2 = DungeonRandOutcome_2(chance * 2);
             }
             else
             {
-                uVar2 = RollPercentChance_2(chance);
+                uVar2 = DungeonRandOutcome_2(chance);
             }
         }
         else
@@ -139,28 +139,28 @@ end:
     goto end;
 }
 
-bool8 sub_8057308(struct DungeonEntity *pokemon, s32 chance)
+bool8 sub_8057308(struct Entity *pokemon, s32 chance)
 {
     if(!EntityExists(pokemon))
         return FALSE;
     if(chance == 0)
         return TRUE;
     if(HasAbility(pokemon, ABILITY_SERENE_GRACE))
-        return RollPercentChance_2(chance * 2);
+        return DungeonRandOutcome_2(chance * 2);
     else
-        return RollPercentChance_2(chance);
+        return DungeonRandOutcome_2(chance);
 }
 
-bool8 IsMoveIndexUsable(struct DungeonEntity *pokemon, s32 moveIndex, bool8 hasPPChecker)
+bool8 CanAIUseMove(struct Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    struct PokemonMove *move = &pokemonData->moves[moveIndex];
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    struct Move *move = &pokemonInfo->moves[moveIndex];
     s32 i;
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
     {
         return FALSE;
     }
-    if (move->moveFlags & MOVE_FLAG_LINKED)
+    if (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
     {
         return FALSE;
     }
@@ -182,22 +182,22 @@ bool8 IsMoveIndexUsable(struct DungeonEntity *pokemon, s32 moveIndex, bool8 hasP
     {
         return FALSE;
     }
-    if (IsMoveUsable(pokemon, move, hasPPChecker))
+    if (CanMonsterUseMove(pokemon, move, hasPPChecker))
     {
         goto returnTrue;
     }
     move++;
-    if ((u32) move >= (u32) &pokemonData->struggleMoveFlags || !(move->moveFlags & MOVE_FLAG_LINKED))
+    if ((u32) move >= (u32) &pokemonInfo->struggleMoveFlags || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
     {
         return FALSE;
     }
     goto incMoveIndex;
 }
 
-bool8 IsMoveUsable(struct DungeonEntity *pokemon, struct PokemonMove *move, bool8 hasPPChecker)
+bool8 CanMonsterUseMove(struct Entity *pokemon, struct Move *move, bool8 hasPPChecker)
 {
-    struct DungeonEntityData *pokemonData = pokemon->entityData;
-    if (move->moveID == MOVE_REGULAR_ATTACK)
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    if (move->id == MOVE_REGULAR_ATTACK)
     {
         return TRUE;
     }
@@ -211,15 +211,15 @@ bool8 IsMoveUsable(struct DungeonEntity *pokemon, struct PokemonMove *move, bool
         {
             return FALSE;
         }
-        if (pokemonData->volatileStatus == VOLATILE_STATUS_TAUNTED && !MoveDealsDirectDamage(move))
+        if (pokemonInfo->volatileStatus == STATUS_TAUNTED && !MovesIgnoresTaunted(move))
         {
             return FALSE;
         }
-        if (pokemonData->volatileStatus == VOLATILE_STATUS_ENCORE)
+        if (pokemonInfo->volatileStatus == STATUS_ENCORE)
         {
-            if (move->moveID == MOVE_STRUGGLE)
+            if (move->id == MOVE_STRUGGLE)
             {
-                if (!(pokemonData->struggleMoveFlags & MOVE_FLAG_LAST_USED))
+                if (!(pokemonInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED))
                 {
                     return FALSE;
                 }
@@ -233,20 +233,20 @@ bool8 IsMoveUsable(struct DungeonEntity *pokemon, struct PokemonMove *move, bool
     return TRUE;
 }
 
-bool8 sub_805744C(struct DungeonEntity * pokemon, struct PokemonMove *move, bool8 param_3)
+bool8 sub_805744C(struct Entity * pokemon, struct Move *move, bool8 param_3)
 {
-  struct DungeonEntityData *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->entityData;
-  if (move->moveID != MOVE_REGULAR_ATTACK) {
+  entityInfo = pokemon->info;
+  if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityData->volatileStatus == VOLATILE_STATUS_TAUNTED) && (!MoveDealsDirectDamage(move))) return FALSE;
-      if (entityData->volatileStatus == VOLATILE_STATUS_ENCORE) {
-        if (move->moveID == MOVE_STRUGGLE) {
-          if((entityData->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
+      if ((entityInfo->volatileStatus == STATUS_TAUNTED) && (!MovesIgnoresTaunted(move))) return FALSE;
+      if (entityInfo->volatileStatus == STATUS_ENCORE) {
+        if (move->id == MOVE_STRUGGLE) {
+          if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }
         else {
           if((move->moveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;

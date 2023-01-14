@@ -1051,7 +1051,7 @@ _080A7FF4:
 	b _080A8094
 _080A7FFC:
 	movs r0, 0xF
-	bl RandomCapped
+	bl RandInt
 	ldr r1, _080A8010
 	lsls r0, 1
 	adds r0, r1
@@ -1558,7 +1558,7 @@ _080A834A:
 	cmp r0, 0xF
 	bhi _080A83E4
 	movs r0, 0x12
-	bl OtherRandomCapped
+	bl OtherRandInt
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r1, r5, r2
@@ -3103,7 +3103,7 @@ _080A8F30:
 	ldrsh r1, [r0, r2]
 _080A8F34:
 	adds r0, r4, 0
-	bl CopySpeciesNametoBuffer
+	bl CopyMonsterNametoBuffer
 	b _080A8F44
 _080A8F3C:
 	ldr r1, _080A8F4C

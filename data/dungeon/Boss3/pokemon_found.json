@@ -4,22 +4,22 @@
             "name": "pokemon_found_out206",
             "pokemon": [
                 {
-                    "species": "SPECIES_POLIWAG",
+                    "species": "MONSTER_POLIWAG",
                     "level": 10,
                     "probability": 7273
                 },
                 {
-                    "species": "SPECIES_CASTFORM",
+                    "species": "MONSTER_CASTFORM",
                     "level": 10,
                     "probability": 2727
                 },
                 {
-                    "species": "SPECIES_KECLEON",
+                    "species": "MONSTER_KECLEON",
                     "level": 90,
                     "probability": 0
                 },
                 {
-                    "species": "SPECIES_DECOY",
+                    "species": "MONSTER_DECOY",
                     "level": 1,
                     "probability": 0
                 }

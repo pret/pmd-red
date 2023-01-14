@@ -3,32 +3,32 @@
 		"name": "MagmaCavern_1F_3F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_RATICATE",
+                            "species": "MONSTER_RATICATE",
                             "level": 19,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_SANDSHREW",
+                            "species": "MONSTER_SANDSHREW",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_NIDOQUEEN",
+                            "species": "MONSTER_NIDOQUEEN",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_NIDOKING",
+                            "species": "MONSTER_NIDOKING",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -37,27 +37,27 @@
 		"name": "MagmaCavern_4F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_SANDSHREW",
+                            "species": "MONSTER_SANDSHREW",
                             "level": 20,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_NIDOQUEEN",
+                            "species": "MONSTER_NIDOQUEEN",
                             "level": 20,
                             "probability": 3334
                         },
                         {
-                            "species": "SPECIES_NIDOKING",
+                            "species": "MONSTER_NIDOKING",
                             "level": 21,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -66,32 +66,32 @@
 		"name": "MagmaCavern_5F_6F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_SANDSHREW",
+                            "species": "MONSTER_SANDSHREW",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_NIDOQUEEN",
+                            "species": "MONSTER_NIDOQUEEN",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_NIDOKING",
+                            "species": "MONSTER_NIDOKING",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_GRAVELER",
+                            "species": "MONSTER_GRAVELER",
                             "level": 22,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -100,22 +100,22 @@
 		"name": "MagmaCavern_7F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_GRAVELER",
+                            "species": "MONSTER_GRAVELER",
                             "level": 22,
                             "probability": 5000
                         },
                         {
-                            "species": "SPECIES_MAGMAR",
+                            "species": "MONSTER_MAGMAR",
                             "level": 21,
                             "probability": 5000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -124,32 +124,32 @@
 		"name": "MagmaCavern_8F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_GRAVELER",
+                            "species": "MONSTER_GRAVELER",
                             "level": 22,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_MAGMAR",
+                            "species": "MONSTER_MAGMAR",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_MAWILE",
+                            "species": "MONSTER_MAWILE",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -158,37 +158,37 @@
 		"name": "MagmaCavern_9F_10F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_GRAVELER",
+                            "species": "MONSTER_GRAVELER",
                             "level": 22,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_MAGMAR",
+                            "species": "MONSTER_MAGMAR",
                             "level": 21,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_MAGCARGO",
+                            "species": "MONSTER_MAGCARGO",
                             "level": 21,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_MAWILE",
+                            "species": "MONSTER_MAWILE",
                             "level": 20,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -197,32 +197,32 @@
 		"name": "MagmaCavern_11F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_MAGMAR",
+                            "species": "MONSTER_MAGMAR",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_MAGCARGO",
+                            "species": "MONSTER_MAGCARGO",
                             "level": 21,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_MAWILE",
+                            "species": "MONSTER_MAWILE",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -231,27 +231,27 @@
 		"name": "MagmaCavern_12F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_MAGCARGO",
+                            "species": "MONSTER_MAGCARGO",
                             "level": 21,
                             "probability": 3334
                         },
                         {
-                            "species": "SPECIES_MAWILE",
+                            "species": "MONSTER_MAWILE",
                             "level": 20,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -260,22 +260,22 @@
 		"name": "MagmaCavern_13F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 5000
                         },
                         {
-                            "species": "SPECIES_MAGCARGO",
+                            "species": "MONSTER_MAGCARGO",
                             "level": 21,
                             "probability": 5000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -284,27 +284,27 @@
 		"name": "MagmaCavern_14F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ARBOK",
+                            "species": "MONSTER_ARBOK",
                             "level": 21,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_RHYDON",
+                            "species": "MONSTER_RHYDON",
                             "level": 23,
                             "probability": 3334
                         },
                         {
-                            "species": "SPECIES_MAGCARGO",
+                            "species": "MONSTER_MAGCARGO",
                             "level": 21,
                             "probability": 3333
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -313,32 +313,32 @@
 		"name": "MagmaCavern_15F_20F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_SANDSLASH",
+                            "species": "MONSTER_SANDSLASH",
                             "level": 24,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_GOLEM",
+                            "species": "MONSTER_GOLEM",
                             "level": 15,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_GRIMER",
+                            "species": "MONSTER_GRIMER",
                             "level": 20,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_RHYDON",
+                            "species": "MONSTER_RHYDON",
                             "level": 23,
                             "probability": 2500
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -347,22 +347,22 @@
 		"name": "MagmaCavern_21F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_GRIMER",
+                            "species": "MONSTER_GRIMER",
                             "level": 20,
                             "probability": 8000
                         },
                         {
-                            "species": "SPECIES_ONIX",
+                            "species": "MONSTER_ONIX",
                             "level": 30,
                             "probability": 2000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }
@@ -371,17 +371,17 @@
 		"name": "MagmaCavern_22F_23F_Pokemon",
 		"pokemon": [
                         {
-                            "species": "SPECIES_ONIX",
+                            "species": "MONSTER_ONIX",
                             "level": 30,
                             "probability": 10000
                         },
                         {
-                            "species": "SPECIES_KECLEON",
+                            "species": "MONSTER_KECLEON",
                             "level": 90,
                             "probability": 0
                         },
                         {
-                            "species": "SPECIES_DECOY",
+                            "species": "MONSTER_DECOY",
                             "level": 1,
                             "probability": 0
                         }

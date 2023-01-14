@@ -7,10 +7,10 @@
 struct TradeSubStruct
 {
     union ItemIdx {
-        u8 itemIndex; // item id?
-        u32 itemIndex_u32;
+        u8 id; // item id?
+        u32 id_u32;
     } itemIdx;
-    u32 numItems; // number of items?
+    u32 quantity; // number of items?
 };
 
 
@@ -22,7 +22,7 @@ struct TradeItemsMenu
     u32 itemMode;
     u32 linkStatus;
     u32 unk10;
-    u32 numItemsToSend; // item #
+    u32 quantityToSend; // item #
     u32 unk18;
     u32 unk1C;
     u32 unk20;
@@ -46,7 +46,7 @@ struct TradeItemsMenu
 
     /* 0x254 */ struct TradeSubStruct sentItem;
 
-    /* 0x25C */ struct ItemSlot itemToSend;
+    /* 0x25C */ struct Item itemToSend;
 
     u8 fill25F[0x3A0 - 0x260];
 };

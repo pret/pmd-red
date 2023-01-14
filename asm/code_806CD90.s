@@ -71,7 +71,7 @@ _0806D088:
 	ldr r0, [sp, 0x44]
 	mov r9, r0
 	adds r0, r5, 0
-	bl CannotAct
+	bl HasStatusThatPreventsActing
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A2
@@ -332,7 +332,7 @@ _0806D26C:
 	beq _0806D2C2
 	adds r0, r6, 0
 	movs r1, 0xA
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D2C2
@@ -343,7 +343,7 @@ _0806D26C:
 	cmp r0, 0
 	bne _0806D2C2
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3C4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -364,7 +364,7 @@ _0806D2C2:
 	cmp r0, 0
 	beq _0806D2EE
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3C8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -386,12 +386,12 @@ _0806D2EE:
 	beq _0806D328
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D328
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3CC
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -414,7 +414,7 @@ _0806D328:
 	cmp r7, 0
 	beq _0806D358
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3D0
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -435,7 +435,7 @@ _0806D358:
 	cmp r0, 0
 	beq _0806D384
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3D4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -458,14 +458,14 @@ _0806D384:
 	cmp r7, 0
 	beq _0806D3FA
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D3D8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
 	cmp r0, r1
 	bge _0806D3FA
 	movs r0, 0x3
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	cmp r0, 0
 	bgt _0806D3DC
 	movs r3, 0xBC
@@ -509,7 +509,7 @@ _0806D3FA:
 	cmp r0, 0
 	beq _0806D428
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D4D4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -533,7 +533,7 @@ _0806D428:
 	cmp r7, 0
 	beq _0806D45A
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D4D8
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -555,7 +555,7 @@ _0806D45A:
 	cmp r0, 0
 	beq _0806D48A
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	ldr r1, _0806D4DC
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -609,7 +609,7 @@ _0806D48A:
 _0806D4D4: .4byte gUnknown_80F4E1C
 _0806D4D8: .4byte gUnknown_80F4E1E
 _0806D4DC: .4byte gUnknown_80F4E20
-_0806D4E0: .4byte gDungeonGlobalData
+_0806D4E0: .4byte gDungeon
 _0806D4E4: .4byte 0x000135cc
 _0806D4E8:
 	ldr r0, [r4, 0x70]
@@ -928,7 +928,7 @@ _0806D760:
 	cmp r0, 0
 	beq _0806D796
 	adds r0, r7, 0
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	mov r8, r0
 	movs r0, 0x14
 	movs r1, 0x18
@@ -1068,7 +1068,7 @@ _0806D858:
 	bne _0806D8B6
 	adds r0, r7, 0
 	mov r1, r9
-	bl CanSee
+	bl CanSeeTarget
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -1096,7 +1096,7 @@ _0806D8C8:
 	adds r0, r7, 0x4
 	mov r1, r9
 	adds r1, 0x4
-	bl CalculateFacingDir
+	bl GetDirectionTowardsPosition
 	movs r1, 0x7
 	ands r0, r1
 	adds r4, 0x46
@@ -1194,7 +1194,7 @@ _0806D978:
 _0806D98E:
 	adds r0, r7, 0
 	movs r1, 0x10
-	bl HasItem
+	bl HasHeldItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D9B2
@@ -1377,7 +1377,7 @@ _0806DB00:
 	.align 2, 0
 _0806DB04: .4byte gRecruitedPokemonRef
 _0806DB08: .4byte 0x00008df8
-_0806DB0C: .4byte gDungeonGlobalData
+_0806DB0C: .4byte gDungeon
 _0806DB10: .4byte 0x0000065c
 _0806DB14: .4byte gUnknown_80F9CEC
 _0806DB18:
@@ -1429,7 +1429,7 @@ _0806DB4C:
 	lsls r1, r3, 2
 	b _0806DB82
 	.align 2, 0
-_0806DB70: .4byte gDungeonGlobalData
+_0806DB70: .4byte gDungeon
 _0806DB74: .4byte 0x0000065d
 _0806DB78: .4byte gUnknown_80F9D8C
 _0806DB7C:
@@ -1541,7 +1541,7 @@ _0806DC48:
 	b _0806DEE4
 	.align 2, 0
 _0806DC4C: .4byte gUnknown_80F9D28
-_0806DC50: .4byte gDungeonGlobalData
+_0806DC50: .4byte gDungeon
 _0806DC54: .4byte 0x00000679
 _0806DC58: .4byte 0x00000676
 _0806DC5C:
@@ -1587,7 +1587,7 @@ _0806DC86:
 	beq _0806DCDE
 	adds r0, r7, 0
 	mov r1, r8
-	bl CanSee
+	bl CanSeeTarget
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DCDE
@@ -1695,7 +1695,7 @@ _0806DD62:
 	bl SendWaitingEndMessage
 	b _0806DDA2
 	.align 2, 0
-_0806DD80: .4byte gDungeonGlobalData
+_0806DD80: .4byte gDungeon
 _0806DD84: .4byte 0x0001357c
 _0806DD88: .4byte 0x00000221
 _0806DD8C: .4byte 0x00000679
@@ -1724,7 +1724,7 @@ _0806DDA2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	ldr r4, _0806DDF0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -1746,7 +1746,7 @@ _0806DDF8:
 _0806DDFC:
 	adds r0, r7, 0
 	movs r1, 0x16
-	bl HasIQSkill
+	bl IQSkillIsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DE0C
@@ -1858,7 +1858,7 @@ _0806DEC8:
 	b _0806DEF2
 	.align 2, 0
 _0806DED4: .4byte gTeamInventory_203B460
-_0806DED8: .4byte gDungeonGlobalData
+_0806DED8: .4byte gDungeon
 _0806DEDC: .4byte 0x00000679
 _0806DEE0: .4byte 0x00000676
 _0806DEE4:
@@ -1885,7 +1885,7 @@ _0806DEF2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	ldr r0, _0806DF40
 	adds r1, r7, 0
 	movs r2, 0
@@ -2019,7 +2019,7 @@ _0806E020:
 	mov r10, r3
 	b _0806E066
 	.align 2, 0
-_0806E02C: .4byte gDungeonGlobalData
+_0806E02C: .4byte gDungeon
 _0806E030: .4byte 0x0000066a
 _0806E034: .4byte 0x000003e7
 _0806E038: .4byte 0x0000014b
@@ -2084,7 +2084,7 @@ _0806E08A:
 	adds r0, r7, 0
 	b _0806E0DC
 	.align 2, 0
-_0806E0BC: .4byte gDungeonGlobalData
+_0806E0BC: .4byte gDungeon
 _0806E0C0: .4byte 0x00000644
 _0806E0C4: .4byte 0x00000149
 _0806E0C8: .4byte 0x000001f5
@@ -2210,7 +2210,7 @@ _0806E17E:
 	strb r0, [r1]
 	b _0806E1CA
 	.align 2, 0
-_0806E1AC: .4byte gDungeonGlobalData
+_0806E1AC: .4byte gDungeon
 _0806E1B0: .4byte 0x00000179
 _0806E1B4:
 	ldr r2, _0806E4E4
@@ -2578,7 +2578,7 @@ _0806E486:
 	bne _0806E4B8
 	mov r0, r8
 	adds r1, r7, 0
-	bl HasType
+	bl MonsterIsType
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E4B8
@@ -2595,7 +2595,7 @@ _0806E486:
 	bl sub_800A34C
 _0806E4B8:
 	mov r0, r8
-	bl GetWeather
+	bl GetApparentWeather
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -2615,7 +2615,7 @@ _0806E4B8:
 	b _0806E53E
 	.align 2, 0
 _0806E4E4: .4byte gTypeEffectivenessChart
-_0806E4E8: .4byte gDungeonGlobalData
+_0806E4E8: .4byte gDungeon
 _0806E4EC: .4byte gUnknown_8106F54
 _0806E4F0: .4byte gUnknown_80F54B4
 _0806E4F4: .4byte gUnknown_8106EFC
@@ -2660,7 +2660,7 @@ _0806E53E:
 	bl sub_800A34C
 	b _0806E586
 	.align 2, 0
-_0806E560: .4byte gDungeonGlobalData
+_0806E560: .4byte gDungeon
 _0806E564: .4byte gUnknown_8106F1C
 _0806E568: .4byte 0x0000016b
 _0806E56C:
@@ -2762,7 +2762,7 @@ _0806E61A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806E62C: .4byte gDungeonGlobalData
+_0806E62C: .4byte gDungeon
 _0806E630: .4byte 0x0000016b
 _0806E634: .4byte gUnknown_8106F14
 _0806E638: .4byte gUnknown_8106F64

@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-bool8 CannotMove(struct DungeonEntity *pokemon, bool8 checkBlinker);
+bool8 CannotMove(struct Entity *pokemon, bool8 checkBlinker);
 
 #endif

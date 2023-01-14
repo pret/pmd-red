@@ -65,7 +65,7 @@ gUnknown_203B074 = .; /* 203B074 */
 gUnknown_203B078 = .; /* 203B078 */
 	. += 0x4;
 
-gRngState = .; /* 203B07C */
+gPRNGSequenceNum = .; /* 203B07C */
 	. += 0x4;
 
 gUnknown_203B080 = .; /* 203B080 */
@@ -545,7 +545,7 @@ gUnknown_203B410 = .; /* 203B410 */
 gUnknown_203B414 = .; /* 203B414 */
 	. += 0x4;
 
-gDungeonGlobalData = .; /* 203B418 */
+gDungeon = .; /* 203B418 */
 	. += 0x4;
 
 gUnknown_203B41C = .; /* 203B41C */
@@ -575,7 +575,7 @@ gNumPotentialTargets = .; /* 203B440 */
 gUnknown_203B444 = .; /* 203B444 */
 	. += 0xC;
 
-gLeaderPokemon = .; /* 203B450 */
+gLeaderPointer = .; /* 203B450 */
 	. += 0x4;
 
 gDungeonRngState = .; /* 203B454 */

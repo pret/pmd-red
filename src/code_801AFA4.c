@@ -26,12 +26,12 @@ extern u8 gUnknown_202E1C8[0x50];
 extern u8 gAvailablePokemonNames[0x50];
 extern u8 gUnknown_202E218[0x50];
 
-extern void InitZeroedPPPokemonMove(struct PokemonMove*, u16);
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
+extern void InitZeroedPPPokemonMove(struct Move*, u16);
+extern void sub_809401C(struct Move *, struct Move *);
 extern bool8 IsHMItem(u8);
 extern void DisplayGulpinDialogueSprite(u32, u32, void *);
 extern void sub_801B178(void);
-extern void sub_8094060(void *, struct PokemonMove *);
+extern void sub_8094060(void *, struct Move *);
 extern void PlaySound(u32);
 extern void sub_80141B4(u32 *, u32, u32 ,u32);
 extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
@@ -48,9 +48,9 @@ struct unkStruct_203B22C
     // size: 0xa4
     /* 0x0 */ s32 state;
     /* 0x4 */ u32 teamItemIndex;
-    /* 0x8 */ u8 itemIndex; // item index
+    /* 0x8 */ u8 id; // item index
     /* 0xA */ u16 moveID; // item move??
-    /* 0xC */ struct PokemonMove moves[MAX_MON_MOVES * 2];
+    /* 0xC */ struct Move moves[MAX_MON_MOVES * 2];
     /* 0x4C */ s32 monsAbleToLearnMove; // number of party members able to learn move
     /* 0x50 */ s16 unk50[MAX_TEAM_MEMBERS]; // species IDs of each member able to learn move
     /* 0x58 */ s16 chosenPokemon; // species of pokemon that will learn move
@@ -64,8 +64,8 @@ u32 sub_801AFA4(u32 index)
 {
     gUnknown_203B22C = MemoryAlloc(sizeof(struct unkStruct_203B22C), 8);
     gUnknown_203B22C->teamItemIndex = index;
-    gUnknown_203B22C->itemIndex = gTeamInventory_203B460->teamItems[index].itemIndex;
-    gUnknown_203B22C->moveID = GetItemMove(gUnknown_203B22C->itemIndex);
+    gUnknown_203B22C->id = gTeamInventory_203B460->teamItems[index].id;
+    gUnknown_203B22C->moveID = GetItemMoveID(gUnknown_203B22C->id);
     sub_8092C84(gUnknown_202E1C8, gUnknown_203B22C->moveID);
     sub_8099690(0);
     if(GetNumMonsAbleToLearnItemMove() == 0)
@@ -134,10 +134,10 @@ void sub_801B080(void)
             break;
         case 2:
             sub_8094060(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
-            if(!IsHMItem(gUnknown_203B22C->itemIndex))
+            if(!IsHMItem(gUnknown_203B22C->id))
             {
-                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].numItems = gUnknown_203B22C->itemIndex - 0x7D;
-                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].itemIndex = ITEM_ID_USED_TM;
+                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].quantity = gUnknown_203B22C->id - 0x7D;
+                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
             }
             PlaySound(0x9C << 1);
             // {CENTER_ALIGN}CM{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned
@@ -175,7 +175,7 @@ void sub_801B200(void)
 {
     s32 temp;
     s32 moveIndex;
-    struct PokemonMove *pokeMove;
+    struct Move *pokeMove;
 
     if(sub_80144A4(&temp) == 0)
     {
@@ -264,16 +264,16 @@ s32 GetNumMonsAbleToLearnItemMove(void)
 }
 
 // Unused
-bool8 sub_801B374(u8 itemIndex)
+bool8 sub_801B374(u8 id)
 {
   u16 moveID;
   struct PokemonStruct *puVar4;
   s32 iVar5;
 
   puVar4 = &gRecruitedPokemonRef->pokemon[0];
-  moveID = GetItemMove(itemIndex);
+  moveID = GetItemMoveID(id);
 
-  for(iVar5 = 0; iVar5 < NUM_SPECIES; iVar5++, puVar4++)
+  for(iVar5 = 0; iVar5 < NUM_MONSTERS; iVar5++, puVar4++)
   {
       if((puVar4->unk0 >> 1 & 1) != 0)
         if(CanMonLearnMove(moveID, puVar4->speciesNum))

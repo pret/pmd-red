@@ -1160,7 +1160,7 @@ sub_801F700:
 	movs r7, 0
 	ldrsh r3, [r0, r7]
 	adds r0, r5, 0
-	bl sprintf_2
+	bl sprintfStatic
 	ldr r0, [r6]
 	adds r0, r4
 	ldr r3, [r0]
@@ -1715,11 +1715,11 @@ sub_801FB50:
 	ldr r0, _0801FBC4
 	ldr r4, _0801FBC8
 	adds r1, r4, 0
-	bl CopyYellowSpeciesNametoBuffer
+	bl CopyYellowMonsterNametoBuffer
 	ldr r5, _0801FBCC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl CopyYellowSpeciesNametoBuffer
+	bl CopyYellowMonsterNametoBuffer
 	adds r0, r4, 0
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -4920,7 +4920,7 @@ _08021574:
 	mov r0, r10
 	ldr r1, _08021598
 	add r2, sp, 0x8
-	bl sprintf_2
+	bl sprintfStatic
 	mov r3, r8
 	ldr r0, [r3]
 	adds r0, 0x40
@@ -4968,7 +4968,7 @@ _080215D8:
 	adds r2, r0, 0
 	mov r0, r10
 	ldr r1, _08021608
-	bl sprintf_2
+	bl sprintfStatic
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, 0x40
@@ -5519,7 +5519,7 @@ _08021A16:
 	add r0, sp, 0x4
 	ldr r1, _08021A58
 	adds r2, r7, 0
-	bl sprintf_2
+	bl sprintfStatic
 	mov r1, r8
 	ldr r0, [r1]
 	ldr r3, [r0, 0x74]
@@ -5742,11 +5742,11 @@ CreateWigglytuffShop:
 	str r4, [r0]
 	ldr r0, _08021BFC
 	movs r1, 0x28
-	bl CopyYellowSpeciesNametoBuffer
+	bl CopyYellowMonsterNametoBuffer
 	ldr r4, _08021C00
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl CopyYellowSpeciesNametoBuffer
+	bl CopyYellowMonsterNametoBuffer
 	movs r0, 0x28
 	bl GetMonSpecies
 	adds r1, r0, 0
@@ -7941,7 +7941,7 @@ _08022D80:
 	adds r0, r2, 0
 	adds r0, 0x52
 	ldrb r0, [r0]
-	bl GetItemType
+	bl GetItemCategory
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5

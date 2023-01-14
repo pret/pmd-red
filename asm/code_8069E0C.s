@@ -39,7 +39,7 @@ _0806A33E:
 	str r0, [r1]
 	b _0806A38A
 	.align 2, 0
-_0806A378: .4byte gDungeonGlobalData
+_0806A378: .4byte gDungeon
 _0806A37C: .4byte 0x000135cc
 _0806A380: .4byte 0x00017b30
 _0806A384:
@@ -77,7 +77,7 @@ _0806A3A0:
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl GetMoveMaxPP
+	bl GetMoveBasePP
 	strb r0, [r4, 0x4]
 _0806A3C2:
 	adds r4, 0x8
@@ -187,7 +187,7 @@ _0806A488:
 	movs r2, 0x6
 	ldrsh r1, [r6, r2]
 	adds r1, r7
-	bl GetMapTile_2
+	bl GetTileSafe
 	adds r4, r0, 0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0
@@ -366,7 +366,7 @@ sub_806A5B8:
 	b _0806A6D2
 _0806A5CE:
 	adds r0, r6, 0
-	bl GetMapTileForDungeonEntity_2
+	bl GetTileAtEntitySafe
 	ldrh r0, [r0]
 	movs r1, 0x3
 	ands r1, r0
@@ -395,7 +395,7 @@ _0806A5CE:
 _0806A608:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
-	bl GetWalkableTiles
+	bl GetMovementType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -420,7 +420,7 @@ _0806A608:
 	b _0806A6D2
 	.align 2, 0
 _0806A640: .4byte gDungeonWaterType
-_0806A644: .4byte gDungeonGlobalData
+_0806A644: .4byte gDungeon
 _0806A648: .4byte 0x00003a0e
 _0806A64C: .4byte 0x00000113
 _0806A650:
@@ -553,10 +553,10 @@ _0806A744:
 	cmp r0, 0
 	beq _0806A776
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	b _0806A776
 	.align 2, 0
-_0806A75C: .4byte gDungeonGlobalData
+_0806A75C: .4byte gDungeon
 _0806A760: .4byte 0x00000676
 _0806A764:
 	cmp r1, 0x11
@@ -627,7 +627,7 @@ _0806A7D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A7E0: .4byte gDungeonGlobalData
+_0806A7E0: .4byte gDungeon
 _0806A7E4: .4byte 0x0001357c
 	thumb_func_end sub_806A7A0
 
@@ -763,14 +763,14 @@ _0806A8C8:
 	cmp r0, 0
 	beq _0806A8EE
 	adds r0, r4, 0
-	bl CannotAct
+	bl HasStatusThatPreventsActing
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806A90E
 _0806A8EE:
 	adds r0, r4, 0x4
 	adds r1, r6, 0
-	bl CalculateFacingDir
+	bl GetDirectionTowardsPosition
 	adds r2, r0, 0
 	movs r1, 0x7
 	ands r0, r1
@@ -836,7 +836,7 @@ _0806A95C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A96C: .4byte gDungeonGlobalData
+_0806A96C: .4byte gDungeon
 _0806A970: .4byte 0x000135cc
 	thumb_func_end sub_806A914
 
@@ -870,7 +870,7 @@ _0806A99E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A9AC: .4byte gDungeonGlobalData
+_0806A9AC: .4byte gDungeon
 _0806A9B0: .4byte 0x000135cc
 	thumb_func_end sub_806A974
 
@@ -963,7 +963,7 @@ _0806AA56:
 	movs r0, 0
 	b _0806AA6A
 	.align 2, 0
-_0806AA5C: .4byte gDungeonGlobalData
+_0806AA5C: .4byte gDungeon
 _0806AA60: .4byte 0x000037fd
 _0806AA64: .4byte 0x000037ff
 _0806AA68:
@@ -1009,7 +1009,7 @@ _0806AA7C:
 	bl sub_8042B20
 	b _0806AB0A
 	.align 2, 0
-_0806AAB4: .4byte gDungeonGlobalData
+_0806AAB4: .4byte gDungeon
 _0806AAB8: .4byte 0x0001357c
 _0806AABC:
 	adds r0, r4, 0
@@ -1134,7 +1134,7 @@ _0806AB92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806ABA4: .4byte gDungeonGlobalData
+_0806ABA4: .4byte gDungeon
 _0806ABA8: .4byte 0x000135cc
 	thumb_func_end sub_806AB2C
 
@@ -1456,7 +1456,7 @@ _0806AE06:
 	b _0806AE94
 	.align 2, 0
 _0806AE1C: .4byte 0xfffffdfc
-_0806AE20: .4byte gDungeonGlobalData
+_0806AE20: .4byte gDungeon
 _0806AE24: .4byte 0x00002f3c
 _0806AE28: .4byte 0x000001a7
 _0806AE2C: .4byte 0x0000363c
@@ -1544,7 +1544,7 @@ _0806AEB2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806AECC: .4byte gDungeonGlobalData
+_0806AECC: .4byte gDungeon
 _0806AED0: .4byte 0x0000363c
 _0806AED4: .4byte 0x000001a7
 	thumb_func_end sub_806AD3C
@@ -1573,7 +1573,7 @@ sub_806AED8:
 	movs r3, 0
 	b _0806AF7A
 	.align 2, 0
-_0806AF04: .4byte gDungeonGlobalData
+_0806AF04: .4byte gDungeon
 _0806AF08: .4byte 0x00002f3c
 _0806AF0C:
 	lsls r0, r2, 16
@@ -1902,7 +1902,7 @@ sub_806B168:
 	adds r1, r4
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	str r0, [sp, 0x2C]
 	movs r3, 0
@@ -2101,7 +2101,7 @@ _0806B2D2:
 	ldrsh r1, [r1, r4]
 	adds r1, r6, r1
 	str r3, [sp, 0x38]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrb r0, [r1, 0x9]
 	ldr r3, [sp, 0x38]
@@ -2125,7 +2125,7 @@ _0806B2D2:
 	mov r3, r10
 	b _0806B3A8
 	.align 2, 0
-_0806B324: .4byte gDungeonGlobalData
+_0806B324: .4byte gDungeon
 _0806B328: .4byte 0x0000e218
 _0806B32C: .4byte 0x0000e21a
 _0806B330: .4byte gRecruitedPokemonRef
@@ -2168,7 +2168,7 @@ _0806B366:
 	movs r3, 0
 	ldrsh r1, [r1, r3]
 	adds r1, r6, r1
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	mov r4, r8
 	movs r2, 0xE
@@ -2202,7 +2202,7 @@ _0806B3A8:
 	bl sub_806B8CC
 	b _0806B3E8
 	.align 2, 0
-_0806B3CC: .4byte gDungeonGlobalData
+_0806B3CC: .4byte gDungeon
 _0806B3D0: .4byte gUnknown_80F4598
 _0806B3D4: .4byte 0x0000e218
 _0806B3D8: .4byte 0x0000e21a
@@ -2286,7 +2286,7 @@ _0806B460:
 	movs r0, 0
 	mov r2, r9
 	str r0, [r2]
-	bl GetLeaderEntity
+	bl GetLeader
 	adds r5, r0, 0
 	bl EntityExists
 	lsls r0, 24
@@ -2297,7 +2297,7 @@ _0806B460:
 	ldrh r4, [r5, 0x4]
 	b _0806B4AE
 	.align 2, 0
-_0806B480: .4byte gLeaderPokemon
+_0806B480: .4byte gLeaderPointer
 _0806B484: .4byte gRecruitedPokemonRef
 _0806B488: .4byte 0x000055aa
 _0806B48C: .4byte 0x00008df8
@@ -2324,7 +2324,7 @@ _0806B4AE:
 	asrs r0, r5, 16
 	asrs r4, 16
 	adds r1, r4, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrb r0, [r0, 0x9]
 	str r0, [sp, 0x20]
 	movs r2, 0
@@ -2387,7 +2387,7 @@ _0806B51C:
 	mov r5, r10
 	adds r1, r5
 	str r2, [sp, 0x2C]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	ldrb r0, [r1, 0x9]
 	ldr r2, [sp, 0x2C]
@@ -2412,7 +2412,7 @@ _0806B51C:
 	adds r2, r5
 	b _0806B642
 	.align 2, 0
-_0806B560: .4byte gDungeonGlobalData
+_0806B560: .4byte gDungeon
 _0806B564: .4byte 0x0000e218
 _0806B568: .4byte 0x0000e21a
 _0806B56C: .4byte 0x000055aa
@@ -2453,7 +2453,7 @@ _0806B5A8:
 	mov r5, r10
 	adds r1, r5
 	str r2, [sp, 0x2C]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	movs r3, 0xE
 	ldrsh r0, [r6, r3]
@@ -2503,7 +2503,7 @@ _0806B606:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x2
 	ldrsh r1, [r5, r3]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	movs r3, 0xE
 	ldrsh r0, [r6, r3]
@@ -2577,7 +2577,7 @@ _0806B67C:
 	str r0, [r1]
 	b _0806B6BE
 	.align 2, 0
-_0806B6AC: .4byte gDungeonGlobalData
+_0806B6AC: .4byte gDungeon
 _0806B6B0: .4byte 0x0001357c
 _0806B6B4: .4byte gUnknown_202EE0C
 _0806B6B8:
@@ -2625,7 +2625,7 @@ sub_806B6C4:
 	adds r0, r2
 	b _0806B71A
 	.align 2, 0
-_0806B708: .4byte gDungeonGlobalData
+_0806B708: .4byte gDungeon
 _0806B70C: .4byte 0x000037ff
 _0806B710:
 	ldr r0, _0806B77C
@@ -2636,10 +2636,10 @@ _0806B710:
 _0806B71A:
 	strb r1, [r0]
 	movs r0, 0x38
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r5, r0, 0
 	movs r0, 0x20
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r7, r0, 0
 	movs r0, 0
 _0806B72E:
@@ -2661,7 +2661,7 @@ _0806B740:
 _0806B748:
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl GetMapTile_1
+	bl GetTile
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x8
 	ands r0, r1
@@ -2685,7 +2685,7 @@ _0806B748:
 	movs r6, 0x1
 	b _0806B794
 	.align 2, 0
-_0806B77C: .4byte gDungeonGlobalData
+_0806B77C: .4byte gDungeon
 _0806B780: .4byte 0x000037ff
 _0806B784:
 	movs r0, 0
@@ -2745,7 +2745,7 @@ _0806B7E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806B7F4: .4byte gDungeonGlobalData
+_0806B7F4: .4byte gDungeon
 	thumb_func_end sub_806B6C4
 
 	thumb_func_start sub_806B7F8
@@ -2763,7 +2763,7 @@ sub_806B7F8:
 	ldrsh r0, [r6, r1]
 	movs r2, 0xE
 	ldrsh r1, [r6, r2]
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	movs r3, 0
 	ldrsh r0, [r6, r3]
@@ -2823,11 +2823,11 @@ _0806B838:
 	cmp r0, 0
 	bne _0806B8B6
 	movs r0, 0x64
-	bl DungeonRandomCapped
+	bl DungeonRandInt
 	adds r4, r0, 0
 	movs r1, 0
 	ldrsh r0, [r6, r1]
-	bl GetUnk1D
+	bl GetChanceAsleep
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r4
@@ -2903,13 +2903,13 @@ _0806B906:
 	ldrsh r4, [r0, r3]
 	b _0806B932
 	.align 2, 0
-_0806B92C: .4byte gDungeonGlobalData
+_0806B92C: .4byte gDungeon
 _0806B930:
 	adds r4, r1, 0
 _0806B932:
 	mov r0, r9
 	mov r1, r10
-	bl GetMapTile_1
+	bl GetTile
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_807034C
@@ -3124,7 +3124,7 @@ _0806BA72:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806BB24
-	bl IsBossBattle
+	bl IsBossFight
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806BB24
@@ -3184,8 +3184,8 @@ _0806BB50: .4byte gUnknown_202F32C
 _0806BB54: .4byte 0xffff0000
 _0806BB58: .4byte 0x0000ffff
 _0806BB5C: .4byte gUnknown_202EE0C
-_0806BB60: .4byte gLeaderPokemon
-_0806BB64: .4byte gDungeonGlobalData
+_0806BB60: .4byte gLeaderPointer
+_0806BB64: .4byte gDungeon
 _0806BB68: .4byte 0x00000644
 	thumb_func_end sub_806B8CC
 
@@ -3301,7 +3301,7 @@ _0806BC14:
 	adds r0, r7, 0
 	bl sub_80429E8
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -3394,7 +3394,7 @@ sub_806BC68:
 	strb r3, [r6, 0x8]
 	b _0806BD24
 	.align 2, 0
-_0806BD0C: .4byte gDungeonGlobalData
+_0806BD0C: .4byte gDungeon
 _0806BD10: .4byte 0x0000ffff
 _0806BD14: .4byte 0x0000fffe
 _0806BD18: .4byte 0x0000066e
@@ -3459,7 +3459,7 @@ _0806BD5E:
 	strb r0, [r6, 0x9]
 	b _0806BDA6
 	.align 2, 0
-_0806BD94: .4byte gDungeonGlobalData
+_0806BD94: .4byte gDungeon
 _0806BD98: .4byte 0x000037fd
 _0806BD9C: .4byte 0x000037ff
 _0806BDA0: .4byte 0x000037f0
@@ -3663,7 +3663,7 @@ _0806BE12:
 	adds r0, r6, r1
 	strb r7, [r0]
 	mov r0, r8
-	bl GetMovementSpeed
+	bl CalcSpeedStage
 	movs r2, 0xAB
 	lsls r2, 1
 	adds r1, r6, r2
@@ -3725,7 +3725,7 @@ _0806BF70:
 	bx r0
 	.align 2, 0
 _0806BFB4: .4byte 0x00000145
-_0806BFB8: .4byte gDungeonGlobalData
+_0806BFB8: .4byte gDungeon
 _0806BFBC: .4byte 0x00018208
 	thumb_func_end sub_806BC68
 
@@ -3932,7 +3932,7 @@ _0806C11E:
 	cmp r1, 0
 	beq _0806C170
 	movs r0, 0
-	bl GetWeather
+	bl GetApparentWeather
 	ldr r1, _0806C16C
 	lsls r0, 24
 	lsrs r0, 22
@@ -3999,7 +3999,7 @@ _0806C188:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806C1D0: .4byte gDungeonGlobalData
+_0806C1D0: .4byte gDungeon
 _0806C1D4: .4byte 0x00000113
 	thumb_func_end sub_806BFC0
 
@@ -4071,7 +4071,7 @@ _0806C244:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806C258: .4byte gDungeonGlobalData
+_0806C258: .4byte gDungeon
 _0806C25C: .4byte 0x0001357c
 _0806C260: .4byte 0x00000119
 	thumb_func_end sub_806C1D8
@@ -4217,7 +4217,7 @@ _0806C358:
 	strb r7, [r1, 0x2]
 	b _0806C3B8
 	.align 2, 0
-_0806C370: .4byte gDungeonGlobalData
+_0806C370: .4byte gDungeon
 _0806C374: .4byte 0x0000057c
 _0806C378:
 	adds r1, 0x8
@@ -4313,7 +4313,7 @@ _0806C416:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806C424: .4byte gDungeonGlobalData
+_0806C424: .4byte gDungeon
 _0806C428: .4byte 0x0000057c
 	thumb_func_end sub_806C3C0
 
@@ -4327,7 +4327,7 @@ sub_806C42C:
 	str r1, [r0, 0x40]
 	bx lr
 	.align 2, 0
-_0806C43C: .4byte gDungeonGlobalData
+_0806C43C: .4byte gDungeon
 _0806C440: .4byte 0x0000057c
 	thumb_func_end sub_806C42C
 
@@ -4380,7 +4380,7 @@ sub_806C488:
 	asrs r6, r0, 16
 	adds r0, r6, 0
 	mov r1, r8
-	bl GetPokemonAttSpatt
+	bl GetBaseOffensiveStat
 	adds r5, r0, 0
 	movs r4, 0x2
 	cmp r4, r7
@@ -4421,7 +4421,7 @@ sub_806C4D4:
 	asrs r6, r0, 16
 	adds r0, r6, 0
 	mov r1, r8
-	bl GetPokemonDefSpdef
+	bl GetBaseDefensiveStat
 	adds r5, r0, 0
 	movs r4, 0x2
 	cmp r4, r7
@@ -4471,7 +4471,7 @@ sub_806C51C:
 	str r3, [sp, 0x38]
 	b _0806C554
 	.align 2, 0
-_0806C544: .4byte gDungeonGlobalData
+_0806C544: .4byte gDungeon
 _0806C548: .4byte 0x000181f8
 _0806C54C:
 	ldr r4, _0806C5AC
@@ -4662,7 +4662,7 @@ _0806C6A8:
 	ldr r0, [sp, 0x38]
 	cmp r0, 0
 	bne _0806C6D6
-	bl Random
+	bl Rand32Bit
 	movs r4, 0x3
 	ands r4, r0
 	adds r5, r6, 0
@@ -4684,7 +4684,7 @@ _0806C6D6:
 	ldr r0, _0806C774
 	bl sub_80687D0
 	adds r5, r0, 0
-	bl Random
+	bl Rand32Bit
 	movs r1, 0x3
 	ands r1, r0
 	adds r4, r6, 0
@@ -4725,7 +4725,7 @@ _0806C714:
 	mov r7, r8
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl GetWalkableTiles
+	bl GetMovementType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -4758,7 +4758,7 @@ _0806C76A:
 	b _0806C7E2
 	.align 2, 0
 _0806C774: .4byte 0x000001a5
-_0806C778: .4byte gDungeonGlobalData
+_0806C778: .4byte gDungeon
 _0806C77C: .4byte 0x0001356c
 _0806C780: .4byte 0x0000015f
 _0806C784:
@@ -4898,7 +4898,7 @@ _0806C870:
 	str r0, [sp, 0x34]
 	b _0806C8D8
 	.align 2, 0
-_0806C88C: .4byte gDungeonGlobalData
+_0806C88C: .4byte gDungeon
 _0806C890: .4byte 0x000181f0
 _0806C894: .4byte 0x000181f2
 _0806C898:
@@ -5033,7 +5033,7 @@ _0806C958:
 	.align 2, 0
 _0806C998: .4byte 0xffff0000
 _0806C99C: .4byte 0x0000ffff
-_0806C9A0: .4byte gDungeonGlobalData
+_0806C9A0: .4byte gDungeon
 _0806C9A4: .4byte 0x00018208
 _0806C9A8: .4byte 0x0000c7ff
 _0806C9AC:
@@ -5137,7 +5137,7 @@ _0806CA58:
 _0806CA5C: .4byte 0xfffff400
 _0806CA60: .4byte 0x0000f3ff
 _0806CA64: .4byte 0x0000ffff
-_0806CA68: .4byte gDungeonGlobalData
+_0806CA68: .4byte gDungeon
 _0806CA6C: .4byte 0x00018208
 _0806CA70: .4byte 0xfffffe5f
 _0806CA74: .4byte 0x0001820f
@@ -5338,7 +5338,7 @@ _0806CBDE:
 	bx r0
 	.align 2, 0
 _0806CBF0: .4byte gUnknown_202EDCC
-_0806CBF4: .4byte gDungeonGlobalData
+_0806CBF4: .4byte gDungeon
 _0806CBF8: .4byte 0x000181f0
 _0806CBFC: .4byte 0x000181f2
 _0806CC00: .4byte 0x0000010f
@@ -5394,7 +5394,7 @@ _0806CC5C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806CC68: .4byte gDungeonGlobalData
+_0806CC68: .4byte gDungeon
 _0806CC6C: .4byte 0x000135cc
 	thumb_func_end sub_806CC10
 
@@ -5430,7 +5430,7 @@ _0806CCA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806CCAC: .4byte gDungeonGlobalData
+_0806CCAC: .4byte gDungeon
 _0806CCB0: .4byte 0x000135cc
 	thumb_func_end sub_806CC70
 
@@ -5489,7 +5489,7 @@ _0806CCDC:
 	beq _0806CD4C
 	cmp r6, 0
 	bne _0806CD4C
-	bl Random
+	bl Rand32Bit
 	movs r4, 0x3
 	ands r4, r0
 	adds r0, r5, 0
@@ -5505,14 +5505,14 @@ _0806CCDC:
 	bl sub_80053AC
 	b _0806CD76
 	.align 2, 0
-_0806CD40: .4byte gDungeonGlobalData
+_0806CD40: .4byte gDungeon
 _0806CD44: .4byte 0x00018210
 _0806CD48: .4byte 0x000181f8
 _0806CD4C:
 	ldr r0, _0806CD8C
 	bl sub_80687D0
 	adds r4, r0, 0
-	bl Random
+	bl Rand32Bit
 	movs r1, 0x3
 	ands r1, r0
 	adds r0, r5, 0

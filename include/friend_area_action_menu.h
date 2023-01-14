@@ -8,14 +8,14 @@ struct unkStruct_203B2BC
     u32 unk4;
     s16 targetPoke;
     u16 unkA;
-    u32 itemIndex;
-    struct HeldItem itemToGive;
-    struct HeldItem item2;
+    u32 id;
+    struct BulkItem itemToGive;
+    struct BulkItem item2;
     struct PokemonStruct *unk18;
     u8 unk1C;
     u32 unk20;
     u16 moveID;
-    struct PokemonMove unk28[8];
+    struct Move unk28[8];
     u32 unk68;
     u32 unk6C;
     u32 unk70;

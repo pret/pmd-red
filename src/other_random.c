@@ -9,12 +9,12 @@ static s32 OtherRandom16(void)
     return gOtherRngState;
 }
 
-s32 OtherRandomCapped(s32 cap)
+s32 OtherRandInt(s32 cap)
 {
     return (OtherRandom16() * cap) >> 16;
 }
 
-s32 OtherRandomRange(s32 a, s32 b)
+s32 OtherRandRange(s32 a, s32 b)
 {
-    return OtherRandomCapped(b - a) + a;
+    return OtherRandInt(b - a) + a;
 }

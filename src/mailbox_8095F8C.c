@@ -62,7 +62,7 @@ void ResetMailbox(void)
 void ResetMailboxSlot(u8 index)
 {
     gUnknown_203B490->mailboxSlots[index].mailType = WONDER_MAIL_TYPE_NONE;
-    gUnknown_203B490->mailboxSlots[index].dungeon.dungeonIndex = 99;
-    gUnknown_203B490->mailboxSlots[index].dungeon.dungeonFloor = 0;
+    gUnknown_203B490->mailboxSlots[index].dungeon.id = 99;
+    gUnknown_203B490->mailboxSlots[index].dungeon.floor = 0;
     gUnknown_203B490->mailboxSlots[index].rewardType = MONEY1;
 }
