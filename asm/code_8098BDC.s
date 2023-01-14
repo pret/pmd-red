@@ -658,7 +658,7 @@ _08099604:
 	bne _080995AE
 	b _08099454
 	.align 2, 0
-_08099620: .4byte gUnknown_203B46C
+_08099620: .4byte gGameOptionsRef
 _08099624:
 	movs r0, 0x10
 	bl FadeOutAllMusic
@@ -738,7 +738,7 @@ sub_8099690:
 	.align 2, 0
 _080996BC: .4byte gUnknown_8116028
 _080996C0: .4byte gSystemFileArchive
-_080996C4: .4byte gUnknown_203B46C
+_080996C4: .4byte gGameOptionsRef
 _080996C8: .4byte gUnknown_202D078
 _080996CC:
 	ldr r4, _080996D0
@@ -5733,7 +5733,7 @@ _0809BD84:
 	bl sub_8001658
 	cmp r0, 0
 	bne _0809BDB2
-	bl sub_80247B4
+	bl HasEvolutionCompleted
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BDB2
@@ -6907,7 +6907,7 @@ sub_809C6EC:
 	bl sub_809C6CC
 	b _0809C71E
 	.align 2, 0
-_0809C70C: .4byte gUnknown_203B46C
+_0809C70C: .4byte gGameOptionsRef
 _0809C710:
 	movs r0, 0x3
 	bl sub_809C6CC
@@ -7962,7 +7962,7 @@ _0809CECC:
 	bl sub_809C6CC
 	b _0809CEF6
 	.align 2, 0
-_0809CEEC: .4byte gUnknown_203B46C
+_0809CEEC: .4byte gGameOptionsRef
 _0809CEF0:
 	movs r0, 0x3
 	bl sub_809C6CC

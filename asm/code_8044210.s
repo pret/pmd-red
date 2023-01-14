@@ -54,7 +54,7 @@ _08044592:
 	adds r0, r6, r2
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl GetSpeedStatus
+	bl CalcSpeedStage
 	mov r3, r9
 	ldr r1, [r3]
 	movs r2, 0xCC

@@ -344,7 +344,7 @@ _0807E90E:
 	ldrb r0, [r7]
 	strb r0, [r1, 0x1]
 	adds r0, r5, 0
-	bl GetSpeedStatus
+	bl CalcSpeedStage
 	adds r0, r5, 0
 	movs r1, 0x25
 	bl HasAbility
@@ -1688,7 +1688,7 @@ _0807F3BC:
 	movs r0, 0
 	strb r0, [r4, 0x8]
 	adds r0, r5, 0
-	bl GetSpeedStatus
+	bl CalcSpeedStage
 	adds r4, 0x60
 	ldrb r1, [r4]
 	movs r0, 0x1

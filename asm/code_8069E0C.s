@@ -553,7 +553,7 @@ _0806A744:
 	cmp r0, 0
 	beq _0806A776
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	b _0806A776
 	.align 2, 0
 _0806A75C: .4byte gDungeon
@@ -3301,7 +3301,7 @@ _0806BC14:
 	adds r0, r7, 0
 	bl sub_80429E8
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -3663,7 +3663,7 @@ _0806BE12:
 	adds r0, r6, r1
 	strb r7, [r0]
 	mov r0, r8
-	bl GetSpeedStatus
+	bl CalcSpeedStage
 	movs r2, 0xAB
 	lsls r2, 1
 	adds r1, r6, r2

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "item.h"
 #include "pokemon.h"
 #include "text.h"
@@ -40,7 +41,7 @@ extern struct UnkTextStruct2 gUnknown_80DD370;
 extern u32 sub_8026F04(struct PokemonStruct *);
 extern void sub_8026074(u32);
 extern void PlaySound(u32);
-bool8 sub_8026F38(struct PokemonStruct *r0);
+bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0);
 extern bool8 sub_80023E4(u8);
 extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
@@ -99,7 +100,7 @@ void sub_80268CC(void)
         if (sub_808D750(gUnknown_203B2B8->pokeSpecies)) {
 
 #ifdef NONMATCHING
-            puVar3 = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
+            pokeStruct = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
 #else
             register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2B8->pokeSpecies]);
             struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
@@ -428,28 +429,28 @@ void sub_8026E08(u32 r0)
 
 u32 sub_8026E88(struct PokemonStruct *r0)
 {
-    u8 iVar3;
-    if(r0->isTeamLeader == 0)
+    bool8 flag;
+    if(!r0->isTeamLeader)
     {
-        iVar3 = (r0->dungeonLocation.id == 0x41);
-        if(iVar3 != 0)
+        flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
+        if(flag)
             if(!sub_80023E4(0x8))
-                return 0;
+                return FALSE;
     }
     else
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }
 
-u32 sub_8026EB8(struct PokemonStruct *r0)
+bool8 sub_8026EB8(struct PokemonStruct *r0)
 {
-    u8 iVar3;
+    bool8 flag;
     if(sub_808D3BC() != r0)
         if(sub_808D3F8() != r0)
             if(!r0->isTeamLeader)
             {
-                iVar3 = (r0->dungeonLocation.id == 0x41);
-                if(iVar3 != 0)
+                flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
+                if(flag)
                 {
                     if(sub_80023E4(0x8))
                         goto check;
@@ -457,9 +458,9 @@ u32 sub_8026EB8(struct PokemonStruct *r0)
                 else
                     check:
                     if(sub_8026F04(r0) != 3)
-                        return 1;
+                        return TRUE;
             }
-    return 0;
+    return FALSE;
 }
 
 
@@ -469,13 +470,13 @@ u32 sub_8026F04(struct PokemonStruct *r0)
         return 0;
     else if(GetNumberOfFilledInventorySlots() < INVENTORY_SIZE)
         return 1;
-    else if(sub_8026F38(r0))
+    else if(CanTakePokemonHeldItem(r0))
         return 2;
     else
         return 3;
 }
 
-bool8 sub_8026F38(struct PokemonStruct *r0)
+bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0)
 {
     if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
     {

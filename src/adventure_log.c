@@ -40,7 +40,7 @@ const struct UnkTextStruct2 gUnknown_80E2008 = {
 
 // Adventure Log Text
 const u8 gAdventureLogHeaderText[] = "Adventure Log";
-const u8 gUnknown_80E2030[] = "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "; // string of ???????
+const u8 gAdventureLogTextPlaceholder[] = "~95~95~95~95~95~95~95~95~95~95~95~95~95~95~95 "; // string of ???????
 const u8 fill_adven[] = "pksdir0";
 
 void sub_8032084();
@@ -267,7 +267,7 @@ void DisplayAdventureLog(void)
     else
     {
         // Draw the ?????????? across the row
-        xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), gUnknown_80E2030, gAdventureLog->unk34, 0);
+        xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), gAdventureLogTextPlaceholder, gAdventureLog->unk34, 0);
     }
    }
    sub_80073E0(gAdventureLog->unk34);

@@ -83,26 +83,26 @@ void sub_80856C8(struct Entity * pokemon, s32 x, s32 y)
 
 void sub_80856E0(struct Entity * pokemon, s32 direction)
 {
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     s32 counter;
 
-    entityData = pokemon->info;
+    entityInfo = pokemon->info;
     sub_80861D4(pokemon, 6, direction);
 
     for(counter = 0; counter < 5; counter++)
     {
-        entityData->unk174 += 0x200;
+        entityInfo->unk174 += 0x200;
         sub_803E46C(0x46);
     }
-    entityData->action.direction = direction & DIRECTION_MASK;
+    entityInfo->action.direction = direction & DIRECTION_MASK;
     sub_806CE68(pokemon, direction);
 
     for(counter = 0; counter < 5; counter++)
     {
-        entityData->unk174 -= 0x200;
+        entityInfo->unk174 -= 0x200;
         sub_803E46C(0x46);
     }
-    entityData->unk174 = 0;
+    entityInfo->unk174 = 0;
     sub_803E46C(0x46);
 }
 
@@ -125,7 +125,7 @@ void sub_8085764(void)
 void sub_80857B8(void)
 {
     u8 *direction;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     struct Entity *entity;
     int index;
 
@@ -133,14 +133,14 @@ void sub_80857B8(void)
     {
         entity = gDungeon->allPokemon[index];
         if (EntityExists(entity)) {
-            entityData = entity->info;
+            entityInfo = entity->info;
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
                 sub_804535C(entity, 0);
-                entityData->unk15C = 0;
-                entityData->unkFE = 99;
-                direction = &entityData->action.direction;
-                entityData->targetPos.x = gAdjacentTileOffsets[*direction].x + entity->pos.x;
-                entityData->targetPos.y = gAdjacentTileOffsets[*direction].y + entity->pos.y;
+                entityInfo->unk15C = 0;
+                entityInfo->unkFE = 99;
+                direction = &entityInfo->action.direction;
+                entityInfo->targetPos.x = gAdjacentTileOffsets[*direction].x + entity->pos.x;
+                entityInfo->targetPos.y = gAdjacentTileOffsets[*direction].y + entity->pos.y;
                 sub_806CE68(entity,*direction);
             }
         }

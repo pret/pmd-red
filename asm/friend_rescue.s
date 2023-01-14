@@ -155,11 +155,11 @@ _08032850:
 	.4byte _0803378C
 _08032A48:
 	movs r0, 0x1
-	bl sub_8095324
+	bl CountMailType
 	cmp r0, 0
 	bne _08032A9C
 	movs r0, 0x5
-	bl sub_8095324
+	bl CountMailType
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08032A9C
@@ -214,11 +214,11 @@ _08032AC8: .4byte gUnknown_80E25F4
 _08032ACC: .4byte gUnknown_80E20E0
 _08032AD0:
 	movs r0, 0x1
-	bl sub_8095324
+	bl CountMailType
 	cmp r0, 0
 	bne _08032B24
 	movs r0, 0x5
-	bl sub_8095324
+	bl CountMailType
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08032B24
@@ -292,7 +292,7 @@ _08032B78: .4byte gUnknown_80E25F4
 _08032B7C: .4byte gUnknown_80E2068
 _08032B80:
 	movs r0, 0x4
-	bl sub_8095324
+	bl CountMailType
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _08032B9C
@@ -323,12 +323,12 @@ _08032BBC: .4byte gUnknown_80E25F4
 _08032BC0: .4byte gUnknown_80E2190
 _08032BC4:
 	movs r0, 0x1
-	bl sub_8095324
+	bl CountMailType
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08032C0C
 	movs r0, 0x5
-	bl sub_8095324
+	bl CountMailType
 	cmp r0, 0
 	bne _08032BF4
 	ldr r0, _08032BEC
@@ -356,7 +356,7 @@ _08032C04: .4byte gUnknown_80E25F4
 _08032C08: .4byte gUnknown_80E2218
 _08032C0C:
 	movs r0, 0x5
-	bl sub_8095324
+	bl CountMailType
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _08032C28

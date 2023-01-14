@@ -137,7 +137,7 @@ void UpdateKangaskhanStorageState(u32 newState)
 
 void sub_8016E80(void)
 {
-    s32 iVar3;
+    s32 index;
 
     sub_8006518(gUnknown_203B208->unkEC);
     switch(gUnknown_203B208->currState)
@@ -164,8 +164,8 @@ void sub_8016E80(void)
             gUnknown_203B208->unkEC[2] = gUnknown_80DB760;
             break;
         default:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
-                gUnknown_203B208->unkEC[iVar3] = gUnknown_80DB748;
+            for(index = 0; index < 4; index++)
+                gUnknown_203B208->unkEC[index] = gUnknown_80DB748;
             break;
     }
     ResetUnusedInputStruct();

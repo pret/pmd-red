@@ -73,22 +73,22 @@ bool8 sub_80571F0(struct Entity * pokemon, struct Move *move)
 {
     u16 moveID;
     s32 tileset;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
-    entityData = pokemon->info;
+    entityInfo = pokemon->info;
 
-    if (entityData->unkFF == 1) {
+    if (entityInfo->unkFF == 1) {
         moveID = move->id;
         if ((moveID == MOVE_SKY_UPPERCUT) || (moveID == MOVE_TWISTER) || (moveID == MOVE_GUST) || (moveID == MOVE_THUNDER))
             return FALSE;
         else
             return TRUE;
     }
-    else if (entityData->unkFF == 2) {
-        if (entityData->chargingStatus == STATUS_DIVING) {
+    else if (entityInfo->unkFF == 2) {
+        if (entityInfo->chargingStatus == STATUS_DIVING) {
             if (move->id == MOVE_WHIRLPOOL || move->id == MOVE_SURF) return FALSE;
         }
-        else if (entityData->chargingStatus == STATUS_DIGGING) {
+        else if (entityInfo->chargingStatus == STATUS_DIGGING) {
             moveID = move->id;
             if (moveID == MOVE_EARTHQUAKE || moveID == MOVE_MAGNITUDE) return FALSE;
             if (moveID == MOVE_NATURE_POWER) {
@@ -235,18 +235,18 @@ bool8 CanMonsterUseMove(struct Entity *pokemon, struct Move *move, bool8 hasPPCh
 
 bool8 sub_805744C(struct Entity * pokemon, struct Move *move, bool8 param_3)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityData->volatileStatus == STATUS_TAUNTED) && (!MovesIgnoresTaunted(move))) return FALSE;
-      if (entityData->volatileStatus == STATUS_ENCORE) {
+      if ((entityInfo->volatileStatus == STATUS_TAUNTED) && (!MovesIgnoresTaunted(move))) return FALSE;
+      if (entityInfo->volatileStatus == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
-          if((entityData->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
+          if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }
         else {
           if((move->moveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;

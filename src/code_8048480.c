@@ -167,14 +167,14 @@ void sub_80484E8(struct Entity *pokemon, struct Entity *target)
 
 void sub_8048524(struct Entity *pokemon, struct Entity * target)
 {
-  struct EntityInfo *entityData;
-  struct EntityInfo *entityData_1;
+  struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo_1;
   u32 *belly;
   u32 newBelly;
 
-  entityData = target->info;
-  entityData_1 = entityData;
-  if (entityData->isTeamLeader)
+  entityInfo = target->info;
+  entityInfo_1 = entityInfo;
+  if (entityInfo->isTeamLeader)
     sub_8078A58(pokemon, target, 0, 5);
   else
   {
@@ -183,7 +183,7 @@ void sub_8048524(struct Entity *pokemon, struct Entity * target)
         sub_80522F4(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
     else
     {
-      belly = &entityData_1->belly;
+      belly = &entityInfo_1->belly;
       if (RoundUpFixedPoint(*belly) != 0) {
         sub_80943A0(&newBelly, 0);
         *belly = newBelly;
@@ -199,7 +199,7 @@ void sub_80485B0(struct Entity *pokemon, struct Entity * target)
 {
   bool8 isMoveBoosted;
   s32 moveIndex;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   register struct Move *movePtr1 asm("r4"); // r4
   register struct Move *movePtr2 asm("r5"); // r5
   u8 moveBoost;
@@ -208,11 +208,11 @@ void sub_80485B0(struct Entity *pokemon, struct Entity * target)
 
   isMoveBoosted = FALSE;
   moveBoost = 1;
-  entityData = target->info;
+  entityInfo = target->info;
   if (DungeonRandInt(100) < gUnknown_80F4F46)
     moveBoost = 3;
-  if (entityData->isTeamLeader) {
-    for(moveIndex = 0, movePtr1 = &entityData->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
+  if (entityInfo->isTeamLeader) {
+    for(moveIndex = 0, movePtr1 = &entityInfo->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
     {
         if((movePtr1->moveFlags & MOVE_FLAG_EXISTS) && (movePtr1->moveFlags & MOVE_FLAG_SET))
         {
@@ -244,14 +244,14 @@ void sub_80485B0(struct Entity *pokemon, struct Entity * target)
 void sub_804869C(struct Entity *pokemon, struct Entity * target, u8 param_3)
 {
   s32 uVar1;
-  struct EntityInfo *entityData;
-  struct EntityInfo *entityData_1;
+  struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo_1;
   struct Entity *entity;
   u8 auStack28 [4];
   
   if (param_3 != 0) {
-    entityData = target->info;
-    entityData_1 = entityData;
+    entityInfo = target->info;
+    entityInfo_1 = entityInfo;
     if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FA8;
         sub_80522F4(pokemon, target, *gUnknown_80FEAE8);
@@ -259,7 +259,7 @@ void sub_804869C(struct Entity *pokemon, struct Entity * target, u8 param_3)
     else {
         uVar1 = gUnknown_80F4FA4;
     }
-    if (entityData_1->immobilizeStatus == STATUS_FROZEN) {
+    if (entityInfo_1->immobilizeStatus == STATUS_FROZEN) {
       SendImmobilizeEndMessage(pokemon, target);
     }
     sub_806F370(pokemon, target, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
@@ -274,7 +274,7 @@ void sub_804869C(struct Entity *pokemon, struct Entity * target, u8 param_3)
     }
     else
     {
-      entityData = entity->info;
+      entityInfo = entity->info;
       if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FAA;
         sub_80522F4(pokemon, target, *gUnknown_80FEAE8);
@@ -282,7 +282,7 @@ void sub_804869C(struct Entity *pokemon, struct Entity * target, u8 param_3)
       else {
         uVar1 = gUnknown_80F4FA6;
       }
-      if (entityData->immobilizeStatus == STATUS_FROZEN) {
+      if (entityInfo->immobilizeStatus == STATUS_FROZEN) {
         SendImmobilizeEndMessage(pokemon, entity);
       }
       sub_806F370(pokemon, entity, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);

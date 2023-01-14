@@ -1,9 +1,10 @@
 #include "global.h"
+#include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
 #include "file_system.h"
 #include "item.h"
-#include "sub_8095228.h"
+#include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "menu.h"
@@ -152,13 +153,11 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 #include "data/thank_you_wonder_mail.h"
 
 
-extern s32 sub_80953D4(u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
-extern u32 sub_8095324(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
 extern void sub_8095240(u8);
@@ -235,7 +234,6 @@ extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
-extern u8 sub_809539C(u32, u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
@@ -252,17 +250,16 @@ extern void sub_801CB5C(u32);
 extern void sub_801CCD8(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_8095228 *r0);
-extern u8 sub_809539C(u32, u32);
+extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 
 
 u32 CreateThankYouMailPelipper(void)
 {
   char *monName;
   struct OpenedFile *faceFile;
-  s32 uVar2;
+  s32 index;
   int counter;
-  struct unkStruct_8095228 *temp;
+  struct unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -289,17 +286,17 @@ u32 CreateThankYouMailPelipper(void)
   gUnknown_203B2C4->wonderMailMethod = WONDER_MAIL_GAME_LINK;
   gUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
 
-  uVar2 = sub_80953D4(6);
-  if (uVar2 != -1) {
-    temp = sub_8095228(uVar2);
-    gUnknown_203B2C4->unk41C = temp->unk20;
-    gUnknown_203B2C4->unk218 = uVar2;
-    gUnknown_203B2C4->unk430 = temp->unk10;
+  index = sub_80953D4(6);
+  if (index != -1) {
+    mail = sub_8095228(index);
+    gUnknown_203B2C4->unk41C = mail->unk20;
+    gUnknown_203B2C4->mailIndex = index;
+    gUnknown_203B2C4->unk430 = mail->unk10;
     SetThankYouMailMenuState(5);
   }
   else {
     gUnknown_203B2C4->unk41C = gUnknown_80DED44;
-    gUnknown_203B2C4->unk218 = -1;
+    gUnknown_203B2C4->mailIndex = -1;
     SetThankYouMailMenuState(THANK_YOU_MAIL_MAIN_MENU);
   }
   gUnknown_203B2C4->fallbackState = 0x2b;
@@ -466,37 +463,37 @@ void ReturnToThankYouMainFromError(void)
 void PrintThankYouMailLinkError(u32 errorCode)
 {
   switch(errorCode) {
-    case WONDER_MAIL_INCORRECT_NUM_SYSTEMS:
+    case COMMS_INCORRECT_NUM_SYSTEMS:
         sub_80141B4(gUnknown_80DEF28, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_DIFFERENT_MODES:
+    case COMMS_DIFFERENT_MODES:
         sub_80141B4(gUnknown_80DEF80, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NO_ROOM_STORAGE:
+    case COMMS_NO_ROOM_STORAGE:
         sub_80141B4(gUnknown_80DEFDC, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_DUPLICATE_MAIL:
+    case COMMS_DUPLICATE_MAIL:
         sub_80141B4(gUnknown_80DF044, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_ELIGIBLE_1:
+    case COMMS_NOT_ELIGIBLE_1:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_ELIGIBLE_2:
+    case COMMS_NOT_ELIGIBLE_2:
         sub_80141B4(gUnknown_80DF0A0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NO_ROOM_MAIL:
+    case COMMS_NO_ROOM_MAIL:
         sub_80141B4(gUnknown_80DF0E0, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
     case 1:
-    case WONDER_MAIL_NO_RESPONSE:
+    case COMMS_NO_RESPONSE:
     case 5:
     case 14:
         sub_80141B4(gUnknown_80DEF04, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_NOT_READY:
+    case COMMS_NOT_READY:
         sub_80141B4(gUnknown_80DF138, 0, &gUnknown_203B2C4->faceFile, 0x10d);
         break;
-    case WONDER_MAIL_GOOD:
+    case COMMS_GOOD:
     default:
         break;
   }
@@ -510,10 +507,10 @@ void DisplayThankYouMailCommsOutcome(void)
     return;
   }
   MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct Item));
-  gUnknown_203B2C4->unk41C.id = 0;
+  gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
   gUnknown_203B2C4->unk41C.quantity = 1;
   gUnknown_203B2C4->unk41C.flags = 0;
-  if (gUnknown_203B2C4->linkError == 0) {
+  if (gUnknown_203B2C4->linkError == COMMS_GOOD) {
       switch(gUnknown_203B2C4->unk40)
         {
             case 6:
@@ -549,7 +546,6 @@ void sub_802A050(void)
 {
     switch(sub_8031DCC())
     {
-
         case 3:
         case 2:
             sub_8031E10();
@@ -567,10 +563,10 @@ void sub_802A050(void)
 
 void sub_802A090(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
                 SetThankYouMailMenuState(SELECT_THANK_YOU_MAIL_COMMS);
@@ -594,16 +590,16 @@ void sub_802A0C8(void)
         SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
         break;
     case 3:
-        gUnknown_203B2C4->unk218 = sub_80307EC();
+        gUnknown_203B2C4->mailIndex = sub_80307EC();
         SetThankYouMailMenuState(0x11);
         break;
     case 4:
         gUnknown_203B2C4->fallbackState = 0x10;
-        gUnknown_203B2C4->unk218 = sub_80307EC();
+        gUnknown_203B2C4->mailIndex = sub_80307EC();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
   }
@@ -639,7 +635,7 @@ void sub_802A174(void)
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8030D40(gUnknown_203B2C4->unk218,0);
+        sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
       case 0:
@@ -678,7 +674,7 @@ void sub_802A230(void)
 void sub_802A28C(void)
 {
 
-  gUnknown_203B2C4->unk41C.id = 0;
+  gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
   gUnknown_203B2C4->unk41C.quantity = 1;
   gUnknown_203B2C4->unk41C.flags = 0;
 
@@ -821,16 +817,16 @@ void AdvanceToThankYouPasswordProcessing(void)
 void HandleThankYouMailPasswordMenu(void)
 {
   u8 uVar1;
-  struct unkStruct_8095228 *puVar5;
+  struct unkStruct_203B480 *mail;
   u32 return_var;
-  struct unkStruct_8095228 temp;
+  struct unkStruct_203B480 mail1;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&temp, 0, sizeof(struct unkStruct_8095228));
+  MemoryFill8((u8 *)&mail1, 0, sizeof(struct unkStruct_203B480));
   switch(return_var)
   {
     case 3:
-        switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,gUnknown_203B2C4->passwordBuffer,&temp))
+        switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,gUnknown_203B2C4->passwordBuffer,&mail1))
         {
             case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                 sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, &gUnknown_203B2C4->faceFile, 0xc);
@@ -845,11 +841,11 @@ void HandleThankYouMailPasswordMenu(void)
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                uVar1 = sub_809539C(4,temp.unk10);
-                puVar5 = sub_8095228(uVar1);
-                *puVar5 = temp;
-                puVar5->mailType = 6;
-                gUnknown_203B2C4->unk430 = temp.unk10;
+                uVar1 = sub_809539C(4,mail1.unk10);
+                mail = sub_8095228(uVar1);
+                *mail = mail1;
+                mail->mailType = 6;
+                gUnknown_203B2C4->unk430 = mail1.unk10;
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_SUCCESS);
                 break;
             default:
@@ -931,10 +927,10 @@ void sub_802A740(void)
 
 void sub_802A75C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
                 // NOTE: if statement is needed to match
@@ -952,17 +948,17 @@ void sub_802A75C(void)
 
 void HandleConfirmItemtoSendMenu(void)
 {
-    s32 temp;
-    struct unkStruct_8095228 *return_var;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    struct unkStruct_203B480 *mail;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 7:
-                return_var = sub_8095228(gUnknown_203B2C4->unk218);
-                if(gUnknown_203B2C4->unk41C.id != 0)
+                mail = sub_8095228(gUnknown_203B2C4->mailIndex);
+                if(gUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
-                    return_var->unk20 = gUnknown_203B2C4->unk41C;
+                    mail->unk20 = gUnknown_203B2C4->unk41C;
                 }
                 gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
@@ -1021,10 +1017,10 @@ void sub_802A8A0(void)
 
 void sub_802A8BC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0xA:
                 switch(gUnknown_203B2C4->wonderMailMethod)
@@ -1047,10 +1043,10 @@ void sub_802A8BC(void)
 
 void sub_802A910(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 9:
                 if(sub_801CF14(0) != 0)
@@ -1092,10 +1088,10 @@ void sub_802A98C(void)
 
 void sub_802A9A8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x7:
                 switch(gUnknown_203B2C4->wonderMailMethod)
@@ -1118,10 +1114,10 @@ void sub_802A9A8(void)
 
 void sub_802A9FC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x7:
                 SetThankYouMailMenuState(PROMPT_THANK_YOU_PASSWORD);
@@ -1135,21 +1131,21 @@ void sub_802A9FC(void)
 
 void HandleMailCommunicationMenu(void)
 {
-    s32 temp;
-    struct unkStruct_8095228 *return_var;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    struct unkStruct_203B480 *mail;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case WONDER_MAIL_GAME_LINK:
             case 4:
             case WONDER_MAIL_PASSWORD:
-                gUnknown_203B2C4->wonderMailMethod = temp;
+                gUnknown_203B2C4->wonderMailMethod = menuAction;
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
-                        return_var = sub_8095228(sub_80953D4(5));
-                        if(return_var->unk20.id != 0)
+                        mail = sub_8095228(sub_80953D4(WONDER_MAIL_TYPE_THANK_YOU));
+                        if(mail->unk20.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1197,15 +1193,15 @@ void sub_802AAC8(void)
 
 void HandleThankYouMailPelipperMainMenu(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 1:
                 gUnknown_203B2C4->unk40 = 6;
                 gUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
-                if(sub_8095324(5) == 0)
+                if(CountMailType(5) == 0)
                 {
                     SetThankYouMailMenuState(NO_THANK_YOU_MAIL);
                 }
@@ -1269,21 +1265,21 @@ void nullsub_131(void)
 
 void UpdateThankYouMailText(void)
 {
-  char cVar1;
+  u8 itemIndex;
   char *monName;
-  u8 auStack180 [80];
-  u8 auStack100 [80];
+  u8 buffer1 [80];
+  u8 buffer2 [80];
   u8 uVar2;
   struct PokemonStruct *pokeStruct;
   struct PokemonStruct *pokeStruct2;
   s32 linkStatus;
-  struct unkStruct_8095228 *puVar4;
+  struct unkStruct_203B480 *mail;
 
   switch(gUnknown_203B2C4->state) {
     case 5:
         pokeStruct = GetPlayerPokemonStruct();
-        sub_80922B4(auStack180,pokeStruct->name, POKEMON_NAME_LENGTH);
-        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF250,auStack180);
+        sub_80922B4(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
+        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case 0xe:
@@ -1325,26 +1321,26 @@ void UpdateThankYouMailText(void)
         sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
-        gUnknown_203B2C4->linkError = 0;
+        gUnknown_203B2C4->linkError = COMMS_GOOD;
         sub_8011830();
         linkStatus = sub_8037B28(gUnknown_203B2C4->unk40);
         gUnknown_203B2C4->linkError = linkStatus;
-        if (linkStatus == 0)
+        if (linkStatus == COMMS_GOOD)
         {
             switch(gUnknown_203B2C4->unk40)
             {
                 case 6:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_8095228));
-                    gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->unk218);
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
+                    gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->mailIndex);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_8095228));
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_8095228));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_203B480));
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
             }
-            if (gUnknown_203B2C4->linkError == 0){
+            if (gUnknown_203B2C4->linkError == COMMS_GOOD){
                 switch(gUnknown_203B2C4->unk40){
                     case 6:
                     case 7:
@@ -1375,7 +1371,7 @@ void UpdateThankYouMailText(void)
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_8031D70(gUnknown_203B2C4->unk218,0);
+        sub_8031D70(gUnknown_203B2C4->mailIndex,0);
         break;
     case 0x1b:
         // Please give this password to the friend that rescued your team. I also must save your adventure
@@ -1413,14 +1409,14 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
-        puVar4 = sub_8095228(uVar2);
-        cVar1 = puVar4->unk20.id;
-        if (cVar1 != '\0')
-            gUnknown_203B2C4->unk53C.itemRewards[0] = cVar1; // unk558
+        mail = sub_8095228(uVar2);
+        itemIndex = mail->unk20.id;
+        if (itemIndex != ITEM_NOTHING)
+            gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else
-            gUnknown_203B2C4->unk53C.itemRewards[0] = 0; // unk558
+            gUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_NOTHING; // unk558
         gUnknown_203B2C4->unk53C.quantity = 1; // unk55B
-        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&puVar4->dungeon, 0); // unk560
+        gUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0); // unk560
         gUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         gUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         gUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C
@@ -1441,8 +1437,8 @@ void UpdateThankYouMailText(void)
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
         pokeStruct2 = GetPlayerPokemonStruct();
-        sub_80922B4(auStack100, pokeStruct2->name, POKEMON_NAME_LENGTH);
-        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,auStack100);
+        sub_80922B4(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
+        sprintfStatic(gUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
         sub_80141B4(gUnknown_203B2C4->formattedString,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;
     case CONFIRM_ITEM_TO_SEND:

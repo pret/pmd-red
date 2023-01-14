@@ -61,11 +61,11 @@ bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 display
 
 bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
 {
-  struct EntityInfo * entityData;
+  struct EntityInfo * entityInfo;
   s32 iVar3;
 
-  entityData = pokemon->info;
-  if ((entityData->sleep != STATUS_SLEEP) && (entityData->sleep != STATUS_NAPPING) && (entityData->sleep != STATUS_NIGHTMARE)) {
+  entityInfo = pokemon->info;
+  if ((entityInfo->sleep != STATUS_SLEEP) && (entityInfo->sleep != STATUS_NAPPING) && (entityInfo->sleep != STATUS_NIGHTMARE)) {
       return FALSE;
   }
   else
@@ -75,9 +75,9 @@ bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
 
     struct Move *pokeMove2; // some reason uses another pointer to same struct
 
-    for(iVar3 = 0, pokeMove = entityData->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
+    for(iVar3 = 0, pokeMove = entityInfo->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
     {
-      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityData->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
+      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityInfo->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
             if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))
                     if(pokeMove->id == moveID)
                         return TRUE;
@@ -258,22 +258,22 @@ bool8 sub_8071A8C(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 SetVisualFlags(struct EntityInfo *entityData, u16 newFlag, bool8 param_3)
+bool8 SetVisualFlags(struct EntityInfo *entityInfo, u16 newFlag, bool8 param_3)
 { 
-  if ((entityData->visualFlags & newFlag)) {
-    entityData->previousVisualFlags = newFlag | entityData->previousVisualFlags;
+  if ((entityInfo->visualFlags & newFlag)) {
+    entityInfo->previousVisualFlags = newFlag | entityInfo->previousVisualFlags;
   }
   else {
-    entityData->previousVisualFlags = entityData->previousVisualFlags & ~newFlag;
+    entityInfo->previousVisualFlags = entityInfo->previousVisualFlags & ~newFlag;
   }
 
   if (param_3) {
-    entityData->visualFlags = newFlag | entityData->visualFlags;
+    entityInfo->visualFlags = newFlag | entityInfo->visualFlags;
   }
   else {
-    entityData->visualFlags = entityData->visualFlags & ~newFlag;
+    entityInfo->visualFlags = entityInfo->visualFlags & ~newFlag;
   }
-  if ( ((entityData->previousVisualFlags & newFlag) == 0) && ((entityData->visualFlags & newFlag)) ) {
+  if ( ((entityInfo->previousVisualFlags & newFlag) == 0) && ((entityInfo->visualFlags & newFlag)) ) {
     return TRUE;
   }
   else {

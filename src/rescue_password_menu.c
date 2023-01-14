@@ -5,7 +5,6 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "save.h"
-#include "sub_8095228.h"
 #include "text.h"
 #include "main_menu.h"
 #include "rescue_password_menu.h"
@@ -31,14 +30,13 @@ extern void sub_8031E10(void);
 extern void DisplayPasswordAcceptScreen(void);
 
 
-extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_8095228 *r0);
+extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
 
-extern void sub_80951BC(struct unkStruct_8095228 *r0);
-extern void sub_80951FC(struct unkStruct_8095228 *r0);
+extern void sub_80951BC(struct unkStruct_203B480 *r0);
+extern bool8 sub_80951FC(struct unkStruct_203B480 *r0);
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_80154F0(void);
-extern u8 sub_809539C(u32, u32);
 extern void sub_8095274(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_80391F8(void);
@@ -47,15 +45,13 @@ extern void DisplayRescuePasswordError(u32);
 extern struct MainMenu *GetMainMenu(void);
 
 
-extern void sub_8039174(void);
 extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8035CF4(u32 *r0, u32, u32);
 bool8 IsInvalidItemReward(u8);
-bool8 sub_80952F0(u32, u32);
-bool8 sub_8095298(u32);
-bool8 sub_803D204(u8 *, struct unkStruct_8095228 *);
+bool8 sub_8095298(s32);
+bool8 sub_803D204(u8 *, struct unkStruct_203B480 *);
 extern s32 GetDungeonFloorCount(u8);
-extern s32 sub_8095190(void);
+extern s32 FindOpenMailSlot(void);
 
 extern struct UnkTextStruct2 gUnknown_80E71FC;
 extern struct UnkTextStruct2 gUnknown_80E7278;
@@ -81,7 +77,7 @@ extern struct MenuItem gUnknown_80E75A0[];
 
 void CreateRescuePasswordMenu(u32 currMenu)
 {
-    struct unkStruct_8095228 *temp;
+    struct unkStruct_203B480 *temp;
     s32 counter;
 
     if(gRescuePasswordMenu == NULL)
@@ -121,7 +117,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = sub_8095228(0x1F);
-            MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_8095228));
+            MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_203B480));
             temp->mailType = 2;
             temp->unk20.id = ITEM_NOTHING;
             sub_8031D70(0x1F, 0);
@@ -163,12 +159,12 @@ static inline s32 UpdateRescuePasswordMenu_sub(s32 otherMenu)
 
 s32 UpdateRescuePasswordMenu(void)
 {
-  struct unkStruct_8095228 *puVar5;
-  struct unkStruct_8095228 *puVar6;
+  struct unkStruct_203B480 *puVar5;
+  struct unkStruct_203B480 *puVar6;
   u32 iVar7;
   struct MainMenu *iVar9;
   s32 nextMenu;
-  struct unkStruct_8095228 local_44;
+  struct unkStruct_203B480 local_44;
   u32 local_14;
   u32 subtract;
 
@@ -184,7 +180,7 @@ s32 UpdateRescuePasswordMenu(void)
     case 3:
     case 5:
         iVar7 = sub_80154F0();
-        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_8095228));
+        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_203B480));
         switch(iVar7)
         {
             case 1:
@@ -205,8 +201,8 @@ s32 UpdateRescuePasswordMenu(void)
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0xd:
-                        nextMenu = 0xD;
+                    case PASSWORD_ENTRY_NO_SPACE:
+                        nextMenu = PASSWORD_ENTRY_NO_SPACE;
                         DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -250,7 +246,7 @@ s32 UpdateRescuePasswordMenu(void)
                         local_44.mailType = 5;
                         sub_80951FC(&local_44);
                         puVar5 = sub_8095228(sub_809539C(1, local_44.unk10));
-                        puVar5->mailType = 7;
+                        puVar5->mailType = WONDER_MAIL_TYPE_OKD;
                         MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
@@ -259,8 +255,8 @@ s32 UpdateRescuePasswordMenu(void)
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
-                    case 0xb:
-                        nextMenu = 0xb;
+                    case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
+                        nextMenu = PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL;
                         DisplayRescuePasswordError(nextMenu);
                         gRescuePasswordMenu->state = 8;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -288,7 +284,7 @@ s32 UpdateRescuePasswordMenu(void)
         switch(sub_80154F0())
         {
             case 3:
-                nextMenu = 0x15;
+                nextMenu = PASSWORD_ENTRY_NOT_WONDER_MAIL;
                 DisplayRescuePasswordError(nextMenu);
                 gRescuePasswordMenu->state = 8;
                 nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -383,7 +379,7 @@ void DisplayRescuePasswordError(u32 passwordError)
     case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,0,0xd,0);
         break;
-    case 0xd:
+    case PASSWORD_ENTRY_NO_SPACE:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,0,0xd,0);
         break;
     case PASSWORD_ENTRY_NOT_AOK_MAIL:
@@ -398,7 +394,7 @@ void DisplayRescuePasswordError(u32 passwordError)
     case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,0,0xd,0);
         break;
-    case 0x15:
+    case PASSWORD_ENTRY_NOT_WONDER_MAIL:
         SetMenuItems(&gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,0,0xd,0);
         break;
     default:
@@ -451,9 +447,9 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
   return uVar1;
 }
 
-u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *param_3)
+u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *param_3)
 {
-  if ( (!sub_803D204(passwordBuffer, param_3)) || (7 < param_3->mailType) ||
+  if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->dungeon.floor >= GetDungeonFloorCount(param_3->dungeon.id)) ||
        (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->unk20.id))) {
@@ -466,11 +462,11 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_8095228 *para
         if (param_3->mailType != WONDER_MAIL_TYPE_SOS) {
             return PASSWORD_ENTRY_NOT_SOS_MAIL;
         }
-        else if ( (sub_80952F0(2, param_3->unk10)) || (sub_80952F0(4, param_3->unk10)) || (sub_80952F0(6, param_3->unk10)) || (sub_8095298(param_3->unk10))) {
+        else if ( (sub_80952F0(2, param_3->unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_AOK, param_3->unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_COMPLETED, param_3->unk10)) || (sub_8095298(param_3->unk10))) {
             return PASSWORD_ENTRY_DUPLICATE_SOS_MAIL;
         }
-        else if (sub_8095190() == -1) {
-            return 0xd;
+        else if (FindOpenMailSlot() == -1) {
+            return PASSWORD_ENTRY_NO_SPACE;
         }
         else {
             return PASSWORD_ENTRY_SOS_MAIL_SUCCESS;

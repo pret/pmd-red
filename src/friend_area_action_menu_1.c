@@ -33,8 +33,7 @@ extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
-extern u8 gUnknown_80DD958[];
-extern void xxx_format_and_draw(u32, u32, u8 *, ...);
+extern void xxx_format_and_draw(u32, u32, const u8 *, ...);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -55,6 +54,20 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_808ED00();
 extern s16 sub_8023B44(void);
 extern void sub_8023C60(void);
+
+ALIGNED(4) const u8 gFriendActionStandby[] = "Stand By";
+ALIGNED(4) const u8 gFriendActionMakeLeader[] = "Make Leader";
+ALIGNED(4) const u8 gFriendActionJoinTeam[] = "Join Team";
+ALIGNED(4) const u8 gFriendActionSayFarewell[] = "Say Farewell";
+ALIGNED(4) const u8 gFriendActionGive[] = "Give";
+ALIGNED(4) const u8 gFriendActionTake[] = "Take";
+ALIGNED(4) const u8 gFriendActionSummary[] = "Summary";
+ALIGNED(4) const u8 gFriendActionMoves[] = "Moves";
+ALIGNED(4) const u8 gFriendActionCheckIQ[] = "Check IQ";
+
+ALIGNED(4) const u8 gUnknown_80DD958[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+static const u8 filler[] = "pksdir0";
+
 
 void sub_80277FC(void)
 {

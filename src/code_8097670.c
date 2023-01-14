@@ -46,7 +46,7 @@ struct DungeonLocation *GetDungeonLocationInfo(void)
 
 void sub_80976A8(void)
 {
-    s32 iVar2;
+    s32 index;
 
     gUnknown_203B494->unk0 = 0;
     gUnknown_203B494->unk14 = 0;
@@ -56,14 +56,14 @@ void sub_80976A8(void)
     gUnknown_203B494->unk8 = 0;
     gUnknown_203B494->unkC = 0;
 
-    for(iVar2 = 0; iVar2 < 0xE; iVar2++)
+    for(index = 0; index < 0xE; index++)
     {
-        gUnknown_203B494->unk1C[iVar2] = 0;
+        gUnknown_203B494->unk1C[index] = 0;
     }
 
-    for(iVar2 = 0; iVar2 < 0xD; iVar2++)
+    for(index = 0; index < 0xD; index++)
     {
-        gUnknown_203B494->unk8C[iVar2] = 0;
+        gUnknown_203B494->unk8C[index] = 0;
     }
 }
 

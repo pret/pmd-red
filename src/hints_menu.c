@@ -125,17 +125,14 @@ s32 GetChosenHintIndex(void)
     return (gUnknown_203B264->unk1E * gUnknown_203B264->unk1C) + gUnknown_203B264->unk18;
 }
 
-void CreateHintSelectionScreen(u32 r0)
+void CreateHintSelectionScreen(u8 r0)
 {
-    u8 bool8_r0;
-    bool8_r0 = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B264->unk3C, 0, 0);
     sub_8013984(gUnknown_203B264);
     sub_801E594();
     DrawHintSelectionMenu();
-    if(bool8_r0)
+    if(r0)
         AddMenuCursorSprite(gUnknown_203B264);
 }
 

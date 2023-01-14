@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/communication_error_codes.h"
 #include "input.h"
 #include "main_menu.h"
 #include "item.h"
@@ -11,8 +12,8 @@ struct unkStruct_203B35C
 {
     // size: 0x504
     u32 unk0;
-    u32 unk4; // link status?
-    u32 state; // state var?
+    u32 linkStatus;
+    u32 state;
     u8 fillC[0x1C - 0xC];
     u32 unk1C;
     u8 fill20[0x15C - 0x20];
@@ -52,15 +53,6 @@ extern struct UnkTextStruct2 gUnknown_80E6DDC;
 extern struct MenuItem gUnknown_80E6DF4[];
 extern struct UnkTextStruct2 gUnknown_80E6D54;
 extern struct MenuItem gUnknown_80E6D6C[];
-
-struct unkStruct_8035D94
-{
-    u8 unk0;
-    u8 fill[0x3];
-    u32 unk4;
-};
-
-extern struct unkStruct_8035D94 *sub_8035D94();
 
 extern void sub_8037400(void);
 extern void ResetSprites(u32);
@@ -275,7 +267,7 @@ u32 sub_80370F0(void)
         sub_80371B8();
         break;
       case 2:
-        if (((gUnknown_203B35C->unk0 < 2) && (gUnknown_203B35C->unk4 == 0)) && (sub_8037C10(0) == 0) ) {
+        if (((gUnknown_203B35C->unk0 < 2) && (gUnknown_203B35C->linkStatus == COMMS_GOOD)) && (sub_8037C10(0) == 0) ) {
           return 0x29; // TODO: what screen is this?
         }
         else {
@@ -296,14 +288,14 @@ u32 sub_80370F0(void)
 
 void sub_80371B8(void)
 {
-  struct unkStruct_8035D94 *pbVar2;
+  struct unkStruct_8035D94 *item;
   struct MenuItem *MenuItems;
   struct UnkTextStruct2 *puVar5;
   
   puVar5 = NULL;
   MenuItems = NULL;
   sub_8037400();
-  if ((gUnknown_203B35C->unk0 < 2) &&(gUnknown_203B35C->unk4 == 0)) {
+  if ((gUnknown_203B35C->unk0 < 2) &&(gUnknown_203B35C->linkStatus == COMMS_GOOD)) {
     if (sub_8037C10(0) != 0) {
       sub_80376CC();
       sub_8035CC0(gUnknown_203B35C->unk15C,0);
@@ -317,7 +309,7 @@ void sub_80371B8(void)
   else {
     sub_80376CC();
     sub_8035CC0(gUnknown_203B35C->unk15C, 0);
-    switch(gUnknown_203B35C->unk4) {
+    switch(gUnknown_203B35C->linkStatus) {
         case 0:
           puVar5 = &gUnknown_80E66BC;
           MenuItems = gUnknown_80E66D4;
@@ -372,11 +364,9 @@ void sub_80371B8(void)
     }
     SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
     sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
-    // TODO clean this if statement up...
-    if ((((gUnknown_203B35C->unk4 != 0) &&(gUnknown_203B35C->unk0 == 0)) &&
-        (pbVar2 = sub_8035D94(), pbVar2->unk0 != 0)) && (pbVar2->unk4 != 0)) {
-        // We received something..
-      gTeamInventory_203B460->teamStorage[pbVar2->unk0] += pbVar2->unk4;
+    if ((gUnknown_203B35C->linkStatus != COMMS_GOOD) && (gUnknown_203B35C->unk0 == 0) &&
+        (item = sub_8035D94(), item->itemIndex.itemIndex_u8 != ITEM_NOTHING) && (item->numItems != 0)) {
+            gTeamInventory_203B460->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;
     }
   }
 }

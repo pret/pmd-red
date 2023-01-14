@@ -47,13 +47,13 @@ extern void sub_803E708(u32, u32);
 u32 sub_8075818(struct Entity *entity)
 {
     struct Tile *tile;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     struct Entity *subEntity;
     struct Item *item;
     u8 *trapData; // TODO: turn into struct when more research is done..
     u8 r1;
 
-    entityData = entity->info;
+    entityInfo = entity->info;
     if(EntityExists(entity))
     {
         tile = GetTileAtEntitySafe(entity);
@@ -75,21 +75,21 @@ u32 sub_8075818(struct Entity *entity)
                     r1 = 0;
                     if(trapData[1] == 0)
                     {
-                        if(!subEntity->isVisible || entityData->isNotTeamMember)
+                        if(!subEntity->isVisible || entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
                     else if(trapData[1] == 1)
                     {
-                        if(!entityData->isNotTeamMember)
+                        if(!entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
                     else if(trapData[1] == 2)
                     {
-                        if(!entityData->isNotTeamMember)
+                        if(!entityInfo->isNotTeamMember)
                             r1 = 1;
                     }
 flag_check:
@@ -98,13 +98,13 @@ flag_check:
                     else
                         goto error;
                 case ENTITY_ITEM:
-                    if(!entityData->isTeamLeader)
+                    if(!entityInfo->isTeamLeader)
                     {
-                        if(!(entityData->heldItem.flags & ITEM_FLAG_EXISTS))
+                        if(!(entityInfo->heldItem.flags & ITEM_FLAG_EXISTS))
                         {
                             if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
                             {
-                                if(entityData->isNotTeamMember)
+                                if(entityInfo->isNotTeamMember)
                                     break;
                                 else
                                 {

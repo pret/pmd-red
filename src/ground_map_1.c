@@ -27,7 +27,7 @@ extern void GroundMap_GetStationScript(struct GroundScript_ExecutePP_3 *, s16, u
 bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, struct GroundScript_ExecutePP_3 *param_3, struct DebugLocation *unused);
 extern u8 sub_809D678(void *);
 extern void sub_809D710(u8 *, struct GroundScript_ExecutePP_3 *, s32);
-extern u8 sub_809D968(void *, s32);
+extern bool8 sub_809D968(void *, s32);
 
 void sub_80A4BE8(struct GroundScript_ExecutePP_3 *script, s16 r1)
 {
@@ -92,7 +92,7 @@ u8 sub_80A4D14(void)
   return sub_809D678(gUnknown_3001B6C);
 }
 
-u8 sub_80A4D2C(s16 param_1)
+bool8 sub_80A4D2C(s16 param_1)
 {
   s32 iVar1 = param_1;
   return sub_809D968(gUnknown_3001B6C,iVar1);

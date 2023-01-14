@@ -31,9 +31,9 @@ extern u8 *gUnknown_80FE3E8[];
 
 bool8 sub_8048D50(struct Entity * pokemon, struct Item *item)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gUnknown_202DE58, item);
@@ -42,7 +42,7 @@ bool8 sub_8048D50(struct Entity * pokemon, struct Item *item)
   }
   else
   {
-    if ((entityData->muzzled == TRUE) && (IsEdibleItem(item->id))) {
+    if ((entityInfo->muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
         SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;

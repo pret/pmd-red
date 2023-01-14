@@ -389,7 +389,7 @@ void sub_8046F84(s32 itemFlag)
 {
   struct Item *item;
   struct Entity *entity;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 index;
 
   for(index = 0; index < INVENTORY_SIZE; index++)
@@ -407,8 +407,8 @@ void sub_8046F84(s32 itemFlag)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      entityData = entity->info;
-      item = &entityData->heldItem;
+      entityInfo = entity->info;
+      item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
         item->id = 0;
         item->quantity = 0;
@@ -422,7 +422,7 @@ void sub_804700C(void)
 {
   struct Item *item;
   struct Entity *entity;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 index;
 
   for(index = 0; index < INVENTORY_SIZE; index++)
@@ -438,8 +438,8 @@ void sub_804700C(void)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      entityData = entity->info;
-      item = &entityData->heldItem;
+      entityInfo = entity->info;
+      item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS)) {
         xxx_init_itemslot_8090A8C(item, ITEM_PLAIN_SEED, 0);
       }
@@ -451,7 +451,7 @@ bool8 sub_8047084(s32 itemFlag)
 {
   struct Item *item;
   struct Entity *entity;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 index;
 
   // NEED THIS ORDERING TO MATCH
@@ -470,8 +470,8 @@ bool8 sub_8047084(s32 itemFlag)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      entityData = entity->info;
-      item = &entityData->heldItem;
+      entityInfo = entity->info;
+      item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
         return TRUE;
       }

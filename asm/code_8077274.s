@@ -112,7 +112,7 @@ _08078A38:
 	bl sub_80522F4
 _08078A44:
 	adds r0, r4, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 _08078A4A:
 	pop {r3}
 	mov r8, r3
@@ -230,7 +230,7 @@ _08078B38:
 	bl sub_80522F4
 _08078B44:
 	adds r0, r6, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 _08078B4A:
 	add sp, 0x14
 	pop {r3}
@@ -487,7 +487,7 @@ _08078D60:
 	bl sub_80522F4
 _08078D72:
 	adds r0, r6, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 _08078D78:
 	add sp, 0x28
 	pop {r3-r5}

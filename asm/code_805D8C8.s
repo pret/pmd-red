@@ -633,7 +633,7 @@ _0805DDC2:
 	.align 2, 0
 _0805DDC8: .4byte gRealInputs
 _0805DDCC: .4byte 0x00000707
-_0805DDD0: .4byte gUnknown_203B46C
+_0805DDD0: .4byte gGameOptionsRef
 _0805DDD4: .4byte gUnknown_202F22D
 _0805DDD8: .4byte gUnknown_202F22C
 _0805DDDC: .4byte gUnknown_202F22E
@@ -782,7 +782,7 @@ _0805DEDC:
 	b _0805DF3A
 	.align 2, 0
 _0805DEF8: .4byte gUnknown_202F22C
-_0805DEFC: .4byte gUnknown_203B46C
+_0805DEFC: .4byte gGameOptionsRef
 _0805DF00: .4byte gRealInputs
 _0805DF04: .4byte gUnknown_202F22D
 _0805DF08: .4byte 0x01000200
@@ -859,7 +859,7 @@ _0805DFA0: .4byte gUnknown_202EE00
 _0805DFA4: .4byte gRealInputs
 _0805DFA8: .4byte gDungeon
 _0805DFAC: .4byte 0x00018214
-_0805DFB0: .4byte gUnknown_203B46C
+_0805DFB0: .4byte gGameOptionsRef
 _0805DFB4: .4byte 0x0000066d
 _0805DFB8: .4byte gUnknown_202F22C
 _0805DFBC:
@@ -14595,7 +14595,7 @@ _08064DFE:
 	b _08064E40
 	.align 2, 0
 _08064E2C: .4byte gUnknown_202EE10
-_08064E30: .4byte gUnknown_203B46C
+_08064E30: .4byte gGameOptionsRef
 _08064E34: .4byte gUnknown_202F2E8
 _08064E38:
 	cmp r0, 0x1
@@ -14896,7 +14896,7 @@ _08065088:
 	bx r0
 	.align 2, 0
 _08065090: .4byte gUnknown_80FEBF8
-_08065094: .4byte gUnknown_203B46C
+_08065094: .4byte gGameOptionsRef
 _08065098: .4byte gUnknown_202F2E8
 	thumb_func_end sub_8065040
 
@@ -16681,7 +16681,7 @@ _08065F16:
 	movs r6, 0
 	b _08065F64
 	.align 2, 0
-_08065F28: .4byte gUnknown_203B46C
+_08065F28: .4byte gGameOptionsRef
 _08065F2C: .4byte gUnknown_202EE10
 _08065F30: .4byte gUnknown_2027370
 _08065F34: .4byte gUnknown_80FF774

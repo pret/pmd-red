@@ -7,11 +7,11 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_leader.h"
+#include "dungeon_movement_1.h"
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
 #include "item.h"
-#include "status_checks_1.h"
 
 extern u8 *gUnknown_80F91EC[];
 extern u8 *gUnknown_80F7C50[];
@@ -44,8 +44,8 @@ extern void TickStatusHeal(struct Entity *);
 void sub_8044820(void)
 {
   s32 movSpeed;
-  struct EntityInfo *entityData;
-  struct EntityInfo *entityData2;
+  struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo2;
   struct Entity * entity;
   struct Entity * entity2;
   s32 index;
@@ -54,21 +54,21 @@ void sub_8044820(void)
     entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
       if (sub_8044B28()) break;
-      entityData = entity->info;
+      entityInfo = entity->info;
       gDungeon->unkB8 = entity;
       TriggerWeatherAbilities();
-      if ((entityData->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) == 0) {
-        if ((u16)(entityData->flags & MOVEMENT_FLAG_UNK_14) != 0) {
-            entityData->flags &= ~(MOVEMENT_FLAG_UNK_14);
+      if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) == 0) {
+        if ((u16)(entityInfo->flags & MOVEMENT_FLAG_UNK_14) != 0) {
+            entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14);
         }
         else
         {
-          entityData->aiNextToTarget = FALSE;
-          movSpeed = GetSpeedStatus(entity);
+          entityInfo->aiNextToTarget = FALSE;
+          movSpeed = CalcSpeedStage(entity);
           if (gSpeedTurns[movSpeed][gDungeon->fractionalTurn] != 0) {
-            if (!entityData->attacking) {
-              entityData->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
-              entityData->recalculateFollow = FALSE;
+            if (!entityInfo->attacking) {
+              entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
+              entityInfo->recalculateFollow = FALSE;
               TickStatusHeal(entity);
               if (EntityExists(entity)) {
                 sub_8071DA4(entity);
@@ -89,12 +89,12 @@ void sub_8044820(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       entity2 = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity2)) && (entityData2 = entity2->info, entityData2->aiNextToTarget))
+      if ((EntityExists(entity2)) && (entityInfo2 = entity2->info, entityInfo2->aiNextToTarget))
       {
         sub_8074094(entity2);
         if (EntityExists(entity2)) {
           sub_8071DA4(entity2);
-          entityData2->aiNextToTarget = FALSE;
+          entityInfo2->aiNextToTarget = FALSE;
         }
       }
     }
@@ -103,8 +103,8 @@ void sub_8044820(void)
 
 void TrySpawnMonsterAndActivatePlusMinus(void)
 {
-  struct EntityInfo * entityData;
-  struct EntityInfo * entityData2;
+  struct EntityInfo * entityInfo;
+  struct EntityInfo * entityInfo2;
   struct Entity *entity;
   u32 isNotEnemy;
   s32 index;
@@ -122,11 +122,11 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
     {
         entity = gDungeon->allPokemon[index];
         if (EntityExists(entity)) {
-            entityData = entity->info;
-            entityData2 = entityData;
-            entityData->attacking = FALSE;
+            entityInfo = entity->info;
+            entityInfo2 = entityInfo;
+            entityInfo->attacking = FALSE;
 
-            if(entityData->isNotTeamMember)
+            if(entityInfo->isNotTeamMember)
             {
                 isNotEnemy = FALSE;
             }
@@ -136,7 +136,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
 
             if (HasAbility(entity, ABILITY_LIGHTNINGROD)) {
                 gDungeon->lightningRodPokemon = entity;
-                gDungeon->unk17B38 = entityData2->unk98;
+                gDungeon->unk17B38 = entityInfo2->unk98;
             }
             if (HasAbility(entity, ABILITY_MINUS)) {
                 gDungeon->minusIsActive[isNotEnemy] = TRUE;
@@ -222,28 +222,28 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
 
 void sub_8044C10(u8 param_1)
 {
-    struct EntityInfo * entityData = GetLeaderInfo();
+    struct EntityInfo * entityInfo = GetLeaderInfo();
 
-    entityData->action.action = ACTION_NOTHING;
+    entityInfo->action.action = ACTION_NOTHING;
 
     if(param_1)
     {
-        entityData->action.actionUseIndex = 0;
-        entityData->action.unkC = 0;
-        entityData->action.itemTargetPosition.x = -1;
-        entityData->action.itemTargetPosition.y = -1;
+        entityInfo->action.actionUseIndex = 0;
+        entityInfo->action.unkC = 0;
+        entityInfo->action.itemTargetPosition.x = -1;
+        entityInfo->action.itemTargetPosition.y = -1;
     }
 }
 
 void sub_8044C50(u16 action)
 {
-    struct EntityInfo * entityData = GetLeaderInfo();
+    struct EntityInfo * entityInfo = GetLeaderInfo();
 
-    entityData->action.action = action;
-    entityData->action.actionUseIndex = 0;
-    entityData->action.unkC = 0;
-    entityData->action.itemTargetPosition.x = -1;
-    entityData->action.itemTargetPosition.y = -1;
+    entityInfo->action.action = action;
+    entityInfo->action.actionUseIndex = 0;
+    entityInfo->action.unkC = 0;
+    entityInfo->action.itemTargetPosition.x = -1;
+    entityInfo->action.itemTargetPosition.y = -1;
 }
 
 void ClearMonsterActionFields(struct ActionContainer *actionPointer)

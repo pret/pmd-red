@@ -10,10 +10,10 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "weather.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "text_util.h"
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptionsRef;
 
 struct unkStruct_80F520C
 {
@@ -50,19 +50,19 @@ extern void sub_803E708(u32 r0, u32 r1);
 void sub_8069E0C(struct Entity *pokemon)
 {
   s32 index;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   if (HasAbility(pokemon, ABILITY_FORECAST)) {
-    entityData->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
-    entityData->types[1] = TYPE_NONE;
+    entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
+    entityInfo->types[1] = TYPE_NONE;
   }
   else {
     for(index = 0; index < 2; index++)
-      entityData->types[index] = GetPokemonType(entityData->id, index);
+      entityInfo->types[index] = GetPokemonType(entityInfo->id, index);
   }
   for(index = 0; index < 2; index++)
-    entityData->abilities[index] = GetPokemonAbility(entityData->id, index);
+    entityInfo->abilities[index] = GetPokemonAbility(entityInfo->id, index);
   gDungeon->unkC = 1;
 }
 
@@ -121,7 +121,11 @@ void sub_8069F9C(struct Entity *pokemon,struct Entity * target,struct Move *move
   u8 type;
   u8 ability;
   const char *__src;
+#ifndef NONMATCHING
   register s32 abilityCounter asm("r1"); // r1
+#else
+  s32 abilityCounter;
+#endif
   int randomIndex;
   int abilityIndex;
   struct EntityInfo *iVar6; // r7
@@ -204,15 +208,15 @@ void sub_806A120(struct Entity * pokemon, struct Entity * target, struct Move* m
   u32 uVar2_u32;
   u8 moveType;
   const char *typeString;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityData = target->info, entityData->protectionStatus == 0xC)) {
+     && (entityInfo = target->info, entityInfo->protectionStatus == 0xC)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
-      entityData->types[0] = uVar2_u32;
-      entityData->types[1] = 0;
+      entityInfo->types[0] = uVar2_u32;
+      entityInfo->types[1] = 0;
       sub_8041BBC(target);
       SetMessageArgument(gAvailablePokemonNames,target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
@@ -232,15 +236,15 @@ void sub_806A1B0(struct Entity *pokemon)
 void sub_806A1E8(struct Entity *pokemon)
 {
   bool8 bVar3;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
-      entityData = pokemon->info;
-      bVar3 = (!entityData->isNotTeamMember);
+      entityInfo = pokemon->info;
+      bVar3 = (!entityInfo->isNotTeamMember);
     }
-    if (gUnknown_203B46C->unk1 == '\0') {
+    if (gGameOptionsRef->FarOffPals == '\0') {
       bVar3 = FALSE;
     }
     if (bVar3 && (sub_8045888(pokemon) == '\0')) {
@@ -252,21 +256,21 @@ void sub_806A1E8(struct Entity *pokemon)
 void sub_806A240(struct Entity *pokemon, struct Entity *target)
 {
   bool8 isNotTeamMember;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
   isNotTeamMember = FALSE;
   if (EntityExists(pokemon)){
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
-        entityData = pokemon->info;
-        isNotTeamMember = (!entityData->isNotTeamMember);
+        entityInfo = pokemon->info;
+        isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (sub_8045888(pokemon) == '\0')) {
         sub_806A2BC(pokemon,1);
         return;
     }
     else if (GetEntityType(target) == ENTITY_MONSTER) {
-        entityData = target->info;
-        isNotTeamMember = (!entityData->isNotTeamMember);
+        entityInfo = target->info;
+        isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (sub_8045888(target) == '\0')) {
         sub_806A2BC(target,1);

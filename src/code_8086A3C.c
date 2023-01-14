@@ -61,22 +61,22 @@ void SetupBossFightHP(struct Entity *pokemon, s32 newHP, u16 param_3)
 {
 
   // NOTE: needed two of these to match.. very dumb
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   struct EntityInfo *enityData_1;
 
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   enityData_1 = pokemon->info;
 
-  entityData->bossFlag = TRUE;
+  entityInfo->bossFlag = TRUE;
 
   // BUG: Source of the Reviver Seed Boss Glitch
   //
   // Video to demonstration:
   // https://www.youtube.com/watch?v=rHu7EehrZ68
-  entityData->originalHP = entityData->maxHPStat;
+  entityInfo->originalHP = entityInfo->maxHPStat;
   if (newHP != 0) {
-    entityData->maxHPStat = newHP;
-    entityData->HP = newHP;
+    entityInfo->maxHPStat = newHP;
+    entityInfo->HP = newHP;
   }
 
   gDungeon->unk66A = param_3;

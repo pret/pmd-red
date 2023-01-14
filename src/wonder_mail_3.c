@@ -122,8 +122,8 @@ extern void sub_802D1B8();
 extern void sub_802D2A8();
 
 
-extern u8 sub_80968B0(void *);
-extern u8 sub_8096F50(void *);
+extern bool8 IsMailinJobSlot(struct WonderMail *);
+extern u8 sub_8096F50(struct WonderMail *);
 extern u8 sub_802DAA8(void);
 extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
@@ -154,7 +154,6 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(void *);
 extern s32 sub_8013800(void *, u32);
-extern void sub_803B35C(void *, u32*);
 extern u8 gUnknown_80DFDBC[];
 
 
@@ -198,10 +197,10 @@ u32 sub_802D098(struct unkSubStruct_203B2F8 *param_1)
   gUnknown_203B2F8->unk70 = 0;
   gUnknown_203B2F8->unk74 = 0;
   gUnknown_203B2F8->unkC  = param_1;
-  gUnknown_203B2F8->unk8 = 0;
-  gUnknown_203B2F8->unk9 = sub_8099328(&gUnknown_203B2F8->unkA);
+  gUnknown_203B2F8->wonderMailAccepted = FALSE;
+  gUnknown_203B2F8->unk9 = sub_8099328(&gUnknown_203B2F8->dungeonID);
   if (sub_8011C1C() != 2) {
-    gUnknown_203B2F8->unk9 = 0;
+    gUnknown_203B2F8->unk9 = FALSE;
   }
   sub_802D1A0(0);
   return 1;
@@ -241,9 +240,9 @@ u32 sub_802D0E0(void)
   return 0;
 }
 
-u8 sub_802D178(void)
+bool8 GetWonderMailAccepted(void)
 {
-    return gUnknown_203B2F8->unk8;
+    return gUnknown_203B2F8->wonderMailAccepted;
 }
 
 void sub_802D184(void)
@@ -298,13 +297,13 @@ void sub_802D2A8(void)
   
   switch(gUnknown_203B2F8->state) {
       case 0:
-        if (sub_80968B0(gUnknown_203B2F8->unkC) != 0) {
+        if (IsMailinJobSlot(&gUnknown_203B2F8->unkC->wonderMail)) {
             sub_802D1A0(3);
         }
-        else if (sub_8096F50(gUnknown_203B2F8->unkC) != 0) {
+        else if (sub_8096F50(&gUnknown_203B2F8->unkC->wonderMail) != 0) {
             sub_802D1A0(4);
         }
-        else if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->unk10) != 0)) {
+        else if ((gUnknown_203B2F8->unkC->wonderMail.unk2 == 4) && (sub_8096C08(&gUnknown_203B2F8->jobSlotIndex) != 0)) {
             if (sub_802DAA8() != 0) {
                 sub_802D1A0(9);
             }
@@ -348,7 +347,7 @@ void sub_802D2A8(void)
         sub_80141B4(gUnknown_80E0010,0,0,0x101);
         break;
       case 8:
-        gUnknown_203B2F8->unk8 = 1;
+        gUnknown_203B2F8->wonderMailAccepted = TRUE;
         sub_8096A78(gUnknown_203B2F8->unkC);
         sub_8096C80();
         sub_8096D24();
@@ -400,7 +399,7 @@ void sub_802D2A8(void)
         sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
         break;
       case 0xf:
-        sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->unk10),&gUnknown_203B2F8->unk14);
+        sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex),&gUnknown_203B2F8->unk14);
         gUnknown_203B2F8->unk14 = 3;
         sub_802DE84(&gUnknown_203B2F8->unk14);
         break;

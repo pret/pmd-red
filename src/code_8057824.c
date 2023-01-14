@@ -153,13 +153,13 @@ void sub_8057588(struct Entity * pokemon, u8 param_2)
     s32 index;
     s32 PPtoRemove;
     s32 PPCounter;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
     if (EntityExists(pokemon)) {
-        entityData = pokemon->info;
+        entityInfo = pokemon->info;
         for(index = 0; index < MAX_MON_MOVES; index++)
         {
-            move = &entityData->moves[index];
+            move = &entityInfo->moves[index];
             if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
                 PPtoRemove = 1;
                 if ((move->moveFlags2 & MOVE_FLAG_LAST_USED)) {
@@ -270,7 +270,7 @@ bool8 DigMoveAction(struct Entity * pokemon, struct Entity * target, struct Move
             sub_8079764(pokemon);
         }
         else {
-            sub_8079618(pokemon,pokemon,10,move,*gUnknown_80FAD4C); // $m0 burrowed underground!
+            SetChargeStatusTarget(pokemon,pokemon,STATUS_DIGGING,move,*gUnknown_80FAD4C); // $m0 burrowed underground!
         }
         flag = TRUE;
     }
@@ -335,10 +335,10 @@ bool32 sub_8057948(struct Entity *pokemon, struct Entity *target)
     return TRUE;
 }
 
-bool32 sub_8057954(struct Entity *pokemon, struct Entity *target, struct Move *move)
+bool32 RageMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move)
 {
   // {ARG_POKEMON_0} is enraged
-  sub_8079618(pokemon,target,0xc,move,gUnknown_80FAC88);
+  SetChargeStatusTarget(pokemon,target,STATUS_ENRAGED,move,gUnknown_80FAC88);
   return TRUE;
 }
 
@@ -399,15 +399,15 @@ bool8 TormentMoveAction(struct Entity *pokemon, struct Entity *target)
   struct Move *movePtr;
   s32 iVar4;
   struct Move struggleMove;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   bool8 isTormented;
   
-  entityData = target->info;
+  entityInfo = target->info;
   isTormented = FALSE;
 
   for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
   {
-    movePtr = &entityData->moves[iVar4];
+    movePtr = &entityInfo->moves[iVar4];
     if ((movePtr->moveFlags & MOVE_FLAG_EXISTS) != 0) {
       if ((movePtr->moveFlags & MOVE_FLAG_DISABLED) == 0) {
         if ((movePtr->moveFlags & MOVE_FLAG_LAST_USED) != 0) {
@@ -424,23 +424,23 @@ bool8 TormentMoveAction(struct Entity *pokemon, struct Entity *target)
     }
   };
 
-  if ((entityData->struggleMoveFlags & MOVE_FLAG_DISABLED) == 0) {
-    if ((entityData->struggleMoveFlags & MOVE_FLAG_LAST_USED) != 0) {
+  if ((entityInfo->struggleMoveFlags & MOVE_FLAG_DISABLED) == 0) {
+    if ((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) != 0) {
       InitPokemonMove(&struggleMove, MOVE_STRUGGLE);
-      entityData->struggleMoveFlags |= MOVE_FLAG_DISABLED;
+      entityInfo->struggleMoveFlags |= MOVE_FLAG_DISABLED;
       isTormented = TRUE;
       sub_80928C0(gUnknown_202DE58,&struggleMove,0);
       // $i0 was tormented
       sub_80522F4(pokemon,target,*gUnknown_80FCFBC);
     }
   }
-  else if ((entityData->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) {
-    entityData->struggleMoveFlags &= ~(MOVE_FLAG_DISABLED);
+  else if ((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) {
+    entityInfo->struggleMoveFlags &= ~(MOVE_FLAG_DISABLED);
   }
   if (isTormented)
   {
-    if(entityData->chargingStatus == STATUS_BIDE) {
-        entityData->chargingStatus = STATUS_NONE;
+    if(entityInfo->chargingStatus == STATUS_BIDE) {
+        entityInfo->chargingStatus = STATUS_NONE;
     }
   }
   else
@@ -634,16 +634,16 @@ bool8 sub_8057E50(struct Entity *pokemon, struct Entity *target)
 
 bool8 sub_8057E6C(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   bool8 flag;
   
   flag = FALSE;
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   SendThawedMessage(pokemon,target);
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
     flag = TRUE;
     if (sub_8057308(pokemon, 0)) {
-      entityData->unk155 = 1;
+      entityInfo->unk155 = 1;
     }
   }
   return flag;
@@ -666,13 +666,13 @@ bool8 sub_8057ED0(struct Entity *pokemon, struct Entity *target, struct Move *mo
 
 bool8 sub_8057F24(struct Entity *pokemon, struct Entity *target)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
-  entityData = pokemon->info;
-  entityData->HP = 1;
+  entityInfo = pokemon->info;
+  entityInfo->HP = 1;
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x40,TRUE);
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,0x40,TRUE);
-  entityData->unk154 = 1;
+  entityInfo->unk154 = 1;
   return TRUE;
 }
 
@@ -727,16 +727,16 @@ bool8 sub_805805C(struct Entity * pokemon,struct Entity * target,struct Move * m
   s32 index;
   s32 r6;
   bool8 local_24;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 IQ;
 
-  entityData = pokemon->info;
+  entityInfo = pokemon->info;
   
 
   r6 = 1;
   index = 0;
   if (0 <= gUnknown_80F55BC[0]) {
-    IQ = entityData->IQ;
+    IQ = entityInfo->IQ;
     for(psVar3 = &gUnknown_80F55BC[index]; (999 > index) && (*psVar3 >= 0); psVar3 = psVar3 + 2, index++)
         {
             if ((IQ < *psVar3)){
@@ -753,17 +753,17 @@ _080580B0:
 
 bool8 GrudgeMoveAction(struct Entity *pokemon, struct Entity * target)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   bool8 hasGrudge;
   
   hasGrudge = FALSE;
-  entityData = target->info;
+  entityInfo = target->info;
   SetMessageArgument(gUnknown_202DFE8,target,0);
-  if (entityData->grudge) {
+  if (entityInfo->grudge) {
     sub_80522F4(pokemon,target,*gUnknown_80FD2B4);
   }
   else {
-    entityData->grudge = TRUE;
+    entityInfo->grudge = TRUE;
     hasGrudge = TRUE;
     sub_80522F4(pokemon,target,*gUnknown_80FD294);
   }
@@ -861,7 +861,7 @@ bool8 RazorWindMoveAction(struct Entity * pokemon, struct Entity * target, struc
     sub_8079764(pokemon);
   }
   else {
-    sub_8079618(pokemon,pokemon,STATUS_RAZOR_WIND,move,*gUnknown_80FAC54);
+    SetChargeStatusTarget(pokemon,pokemon,STATUS_RAZOR_WIND,move,*gUnknown_80FAC54);
     flag = TRUE;
   }
   return flag;
@@ -869,7 +869,7 @@ bool8 RazorWindMoveAction(struct Entity * pokemon, struct Entity * target, struc
 
 bool8 BideMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-   sub_8079618(pokemon, target, STATUS_BIDE, move, *gUnknown_80FAC74);
+   SetChargeStatusTarget(pokemon, target, STATUS_BIDE, move, *gUnknown_80FAC74);
    return TRUE; 
 }
 
@@ -938,14 +938,14 @@ bool8 sub_80584C0(struct Entity *pokemon, struct Entity *target, struct Move *mo
 {
   s32 diffHP;
   bool8 local_24;
-  struct EntityInfo *entityData;
-  struct EntityInfo *entityData1;
+  struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo1;
 
 
   local_24 = 0;
-  entityData = pokemon->info;
-  entityData1 = target->info;
-  diffHP = entityData1->HP - entityData->HP;
+  entityInfo = pokemon->info;
+  entityInfo1 = target->info;
+  diffHP = entityInfo1->HP - entityInfo->HP;
   if (diffHP < 0) {
     diffHP = 0;
   }
@@ -1012,7 +1012,7 @@ bool8 sub_8058638(struct Entity *pokemon, struct Entity *target, struct Move *mo
   return flag;
 }
 
-bool8 sub_805867C(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
+bool8 FocusPunchMoveAction(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
 {
   bool8 flag;
   
@@ -1021,7 +1021,7 @@ bool8 sub_805867C(struct Entity * pokemon, struct Entity * target, struct Move *
     sub_8079764(pokemon);
   }
   else {
-    sub_8079618(pokemon,pokemon,STATUS_FOCUS_PUNCH,move,*gUnknown_80FACA4);
+    SetChargeStatusTarget(pokemon,pokemon,STATUS_FOCUS_PUNCH,move,*gUnknown_80FACA4);
     flag = TRUE;
   }
   return flag;
@@ -1033,20 +1033,20 @@ bool8 sub_80586DC(struct Entity * pokemon, struct Entity * target, struct Move *
   s32 uVar3;
   s32 newHP;
   bool8 flag;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
   hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
   uVar3 = sub_8055640(pokemon,target,move,0x100,param_4);
   flag = uVar3 != 0 ? TRUE : FALSE;
   if (flag && sub_8057308(pokemon, 0)) {
     newHP = uVar3 / 2;
-    entityData = pokemon->info;
+    entityInfo = pokemon->info;
     flag = TRUE;
     if (newHP < 1) {
       newHP = 1;
     }
-    if (!entityData->unkFB) {
-      entityData->unkFB = TRUE;
+    if (!entityInfo->unkFB) {
+      entityInfo->unkFB = TRUE;
     }
     if (hasLiquidOoze) {
         sub_806F324(pokemon, newHP, 0xd, 0x1fa);
@@ -1059,7 +1059,7 @@ bool8 sub_80586DC(struct Entity * pokemon, struct Entity * target, struct Move *
 }
 
 
-// NOTE: copy of sub_805AFA4  in status_checker.c except for different reg for entityData
+// NOTE: copy of sub_805AFA4  in status_checker.c except for different reg for entityInfo
 bool8 sub_8058770(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
 {
   s32 r0;
@@ -1068,21 +1068,21 @@ bool8 sub_8058770(struct Entity * pokemon, struct Entity * target, struct Move *
   bool8 flag;
 
 #ifndef NONMATCHING
-  register struct EntityInfo *entityData asm("r2");
+  register struct EntityInfo *entityInfo asm("r2");
 #else
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 #endif
  
-  entityData = pokemon->info;
-  r2 = entityData->maxHPStat;
+  entityInfo = pokemon->info;
+  r2 = entityInfo->maxHPStat;
   r0 = r2;
   if (r2 < 0) {
     r0 = r2 + 3;
   }
-  if (entityData->HP <= r0 >> 2) {
+  if (entityInfo->HP <= r0 >> 2) {
     r2 = 0;
   }
-  else if (r1 = entityData->HP, r1 <= r2 / 2) {
+  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
       r2 = 1;
   }
   else
@@ -1156,9 +1156,9 @@ bool8 sub_80588B8(struct Entity *pokemon, struct Entity *target, struct Move *mo
 bool8 sub_80588F4(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     bool8 flag;
-    struct EntityInfo *entityData = target->info;
+    struct EntityInfo *entityInfo = target->info;
     
-    flag = sub_8055640(pokemon, target, move, GetWeight(entityData->apparentID), param_4) != 0 ? TRUE: FALSE;
+    flag = sub_8055640(pokemon, target, move, GetWeight(entityInfo->apparentID), param_4) != 0 ? TRUE: FALSE;
     return flag;
 }
 
@@ -1166,7 +1166,7 @@ bool8 sub_80588F4(struct Entity *pokemon, struct Entity *target, struct Move *mo
 bool8 sub_8058930(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     bool8 flag = FALSE;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     s32 index1;
     s32 index2;
     if(sub_8055640(pokemon, target, move, 0x80 << 1, param_4) != 0)
@@ -1174,7 +1174,7 @@ bool8 sub_8058930(struct Entity *pokemon, struct Entity *target, struct Move *mo
         flag = TRUE;
         if(sub_8057308(pokemon, gUnknown_80F4DD6)) 
         {
-            entityData = pokemon->info;
+            entityInfo = pokemon->info;
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
             index1 = gUnknown_8106A4C;
             RaiseAttackStageTarget(pokemon, pokemon, index1, 1);
@@ -1182,9 +1182,9 @@ bool8 sub_8058930(struct Entity *pokemon, struct Entity *target, struct Move *mo
             RaiseAttackStageTarget(pokemon, pokemon, index2, 1);
             RaiseDefenseStageTarget(pokemon, pokemon, index1, 1);
             RaiseDefenseStageTarget(pokemon, pokemon, index2, 1);
-            if(entityData->unkFB == 0)
+            if(entityInfo->unkFB == 0)
             {
-                entityData->unkFB = 1;
+                entityInfo->unkFB = 1;
             }
         }
     }
@@ -1244,7 +1244,7 @@ bool8 SkyAttackMoveAction(struct Entity *pokemon, struct Entity *target, struct 
         sub_8079764(pokemon);
     }
     else {
-       sub_8079618(pokemon, pokemon, STATUS_SKY_ATTACK, move, *gUnknown_80FACC4);
+       SetChargeStatusTarget(pokemon, pokemon, STATUS_SKY_ATTACK, move, *gUnknown_80FACC4);
        flag = TRUE;
     }
     return flag;
@@ -1268,17 +1268,17 @@ bool8 sub_8058B3C(struct Entity *pokemon, struct Entity *target, struct Move *mo
 bool8 sub_8058B84(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
   bool8 flag;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
   flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, pokemon, gUnknown_80F4DD0))
     {
-        entityData = pokemon->info;
+        entityInfo = pokemon->info;
         RaiseAttackStageTarget(pokemon, pokemon, gUnknown_8106A4C, 1);
-        if(entityData->unkFB == 0)
-            entityData->unkFB = 1;
+        if(entityInfo->unkFB == 0)
+            entityInfo->unkFB = 1;
     }
   }
   return flag;
@@ -1379,21 +1379,21 @@ bool8 sub_8058D44(struct Entity * pokemon, struct Entity * target, struct Move *
   bool8 flag;
 
 #ifndef NONMATCHING
-  register struct EntityInfo *entityData asm("r2");
+  register struct EntityInfo *entityInfo asm("r2");
 #else
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 #endif
  
-  entityData = pokemon->info;
-  r2 = entityData->maxHPStat;
+  entityInfo = pokemon->info;
+  r2 = entityInfo->maxHPStat;
   r0 = r2;
   if (r2 < 0) {
     r0 = r2 + 3;
   }
-  if (entityData->HP <= r0 >> 2) {
+  if (entityInfo->HP <= r0 >> 2) {
     r2 = 0;
   }
-  else if (r1 = entityData->HP, r1 <= r2 / 2) {
+  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
       r2 = 1;
   }
   else
@@ -1425,7 +1425,7 @@ bool8 PsychUpMoveAction(struct Entity * pokemon, struct Entity * target, struct 
   {
     iVar4->offensiveStages[index] = iVar3->offensiveStages[index];
     iVar4->defensiveStages[index] = iVar3->defensiveStages[index];
-    iVar4->hitChancesStages[index] = iVar3->hitChancesStages[index];
+    iVar4->hitChanceStages[index] = iVar3->hitChanceStages[index];
     iVar4->offensiveMultipliers[index] = iVar3->offensiveMultipliers[index];
     iVar4->defensiveMultipliers[index] = iVar3->defensiveMultipliers[index];
   }
@@ -1470,14 +1470,14 @@ bool8 sub_8058EE0(struct Entity *pokemon, struct Entity *target, struct Move *mo
 bool32 sub_8058F04(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4)
 {
   bool32 flag;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 iVar3;
   
-  entityData = target->info;
+  entityInfo = target->info;
   iVar3 = 1;
   gDungeon->unk18200 = 0xc;
   gDungeon->unk18204 = 0;
-  if (entityData->chargingStatus == STATUS_DIGGING) {
+  if (entityInfo->chargingStatus == STATUS_DIGGING) {
     iVar3 = 2;
   }
   flag = sub_8055640(pokemon,target,move,iVar3 << 8,param_4);
@@ -1532,9 +1532,9 @@ bool8 sub_8059050(struct Entity *pokemon, struct Entity *target, struct Move *mo
     return TRUE;
 }
 
-bool8 sub_8059060(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+bool8 ChargeMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-    sub_8079618(pokemon, target, STATUS_CHARGING, move, *gUnknown_80FAD6C);
+    SetChargeStatusTarget(pokemon, target, STATUS_CHARGING, move, *gUnknown_80FAD6C);
     return TRUE;
 }
 
@@ -1610,7 +1610,7 @@ bool8 sub_80591E4(struct Entity *pokemon, struct Entity *target, struct Move *mo
   s32 iVar3;
   s32 iVar4;
   bool8 flag;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   
   flag = FALSE;
   hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
@@ -1621,10 +1621,10 @@ bool8 sub_80591E4(struct Entity *pokemon, struct Entity *target, struct Move *mo
       iVar4 = 1;
     }
     if (EntityExists(pokemon)) {
-      entityData = pokemon->info;
+      entityInfo = pokemon->info;
       flag = TRUE;
-      if (entityData->unkFB == 0) {
-        entityData->unkFB = 1;
+      if (entityInfo->unkFB == 0) {
+        entityInfo->unkFB = 1;
       }
       if (sub_8057308(pokemon,0)) {
         if (hasLiquidOoze) {
@@ -1646,20 +1646,20 @@ bool8 SkillSwapMoveAction(struct Entity *pokemon, struct Entity *target, struct 
   bool8 flag;
   u8 *puVar5;
   u8 *puVar6;
-  struct EntityInfo * targetEntityData;
+  struct EntityInfo * targetEntityInfo;
   struct EntityInfo * pokeEntityData;
   
   pokeEntityData = pokemon->info;
-  targetEntityData = target->info;
+  targetEntityInfo = target->info;
   if ((HasAbility(target, ABILITY_WONDER_GUARD)) || (HasAbility(pokemon, ABILITY_WONDER_GUARD))) {
     sub_80522F4(pokemon,target,*gUnknown_80FC8C0);
     flag = FALSE;
   }
   else
   {
-    puVar5 = &targetEntityData->abilities[0];
+    puVar5 = &targetEntityInfo->abilities[0];
     ability_1 = *puVar5;
-    puVar6 = &targetEntityData->abilities[1];
+    puVar6 = &targetEntityInfo->abilities[1];
     ability_2 = *puVar6;
     *puVar5 = pokeEntityData->abilities[0];
     *puVar6 = pokeEntityData ->abilities[1];

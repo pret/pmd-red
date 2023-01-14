@@ -19,7 +19,7 @@ struct unkStruct_203B230
 {
     // size: 0x94
     s32 state;
-    struct Item unk4;
+    struct Item item;
     s32 unk8;
     s32 unkC;
     struct subStruct_203B240 *unk10[2];
@@ -121,11 +121,11 @@ void sub_801B590();
 void sub_801B480();
 
 
-u32 sub_801B3C0(struct Item *param_1)
+u32 sub_801B3C0(struct Item *item)
 {
   ResetSprites(1);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);
-  gUnknown_203B230->unk4 = *param_1;
+  gUnknown_203B230->item = *item;
   sub_801317C(&gUnknown_203B230->unk88);
   gUnknown_203B230->unk24 = 0;
   sub_80140B4(gUnknown_203B230->unk28);
@@ -176,7 +176,7 @@ void sub_801B480(void)
     {
         case 0:
             sub_8008C54(gUnknown_203B230->unk24);
-            gUnknown_203B230->unkC = sub_80913E0(&gUnknown_203B230->unk4, gUnknown_203B230->unk24, gUnknown_203B230->unk10);
+            gUnknown_203B230->unkC = sub_80913E0(&gUnknown_203B230->item, gUnknown_203B230->unk24, gUnknown_203B230->unk10);
             gUnknown_203B230->unk20 = 0;
             break;
         case 1:
@@ -253,7 +253,7 @@ void sub_801B590(void)
 
 u32 sub_801B60C(u32 r0, u8 id, u8 quantity)
 {
-    gUnknown_203B234 = MemoryAlloc(0x154, 8);
+    gUnknown_203B234 = MemoryAlloc(sizeof(struct unkStruct_203B234), 8);
     gUnknown_203B234->unkC8 = 0;
     gUnknown_203B234->unk0 = r0;
     gUnknown_203B234->unk10.id = id;

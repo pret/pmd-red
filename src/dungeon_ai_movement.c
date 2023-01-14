@@ -1348,11 +1348,11 @@ bool8 Wander(struct Entity *pokemon)
 
 void sub_807BB78(struct Entity *pokemon)
 {
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
-    entityData = pokemon->info;
-    entityData->aiObjective = 0;
-    entityData->aiTargetPos = pokemon->pos;
-    entityData->aiTarget = 0;
-    entityData->aiTargetSpawnGenID = 0;
+    entityInfo = pokemon->info;
+    entityInfo->aiObjective = 0;
+    entityInfo->aiTargetPos = pokemon->pos;
+    entityInfo->aiTarget = 0;
+    entityInfo->aiTargetSpawnGenID = 0;
 }

@@ -2,15 +2,13 @@
 #include "text.h"
 #include "input.h"
 #include "item.h"
-#include "team_inventory.h"
-#include "friend_rescue.h"
 #include "pokemon.h"
+#include "friend_rescue.h"
 #include "memory.h"
 
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern u8 sub_809539C(u32, u32);
 extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
@@ -124,14 +122,14 @@ u32 CreateFriendRescueMenu(void)
   MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(struct WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
-  gUnknown_203B33C->unk538 = -1;
+  gUnknown_203B33C->speciesNum = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gAvailablePokemonNames,monName);
   for(counter = 0; counter < 0x36; counter++){
     gUnknown_203B33C->passwordBuffer[counter] = 0;
   }
-  gUnknown_203B33C->unk4 = 0x7E;
+  gUnknown_203B33C->fallbackState = 0x7E;
   gUnknown_203B33C->unk52C = sub_8039880();
   gUnknown_203B33C->unk52D = gUnknown_203B33C->unk52C;
   SetFriendRescueMenuState(0);

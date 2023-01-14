@@ -13,7 +13,7 @@ struct unkStruct_203B2AC
     u8 unk22[0x34 - 0x22];
     u32 unk34[3];
     u8 unk40[0x48 - 0x40];
-    s16 unk48;
+    s16 speciesNum;
     u32 unk4C;
     u8 unk50[0xB0 - 0x50];
     u32 unkB0;
@@ -27,7 +27,13 @@ extern struct unkStruct_203B2AC *gUnknown_203B2AC;
 
 struct unkStruct_3001B60
 {
-    u8 fill0[0x1A];
+    u32 unk0;
+    u32 sortMethod;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u8 fill14[0x18 - 0x14];
+    s16 unk18;
     s16 unk1A[2];
     u8 fill1C[0x370 - 0x1E];
     s16 unk370;
@@ -51,12 +57,160 @@ extern void sub_802452C(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(void *);
 void sub_80922B4(u8 *buffer, u8 *string, s32 size);
+bool8 ComparePokemonNames(s16 a1, s16 a2);
 
 void sub_8024588(void);
 void sub_80245D0(void);
 void sub_8024604(void);
 
 extern u8 gUnknown_80DC9A4[];
+
+void SortbyInternalNo(s32 param_1, s32 param_2);
+void SortbyAlphabetNo(s32 param_1,s32 param_2);
+void SortbyName(s32 param_1,s32 param_2);
+
+bool8 sub_8024184(struct PokemonStruct *pokemon, u8 area)
+{
+    if(area == GetFriendArea(pokemon->speciesNum))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80241A8(void)
+{
+  switch(gUnknown_3001B60->sortMethod)
+  {
+    case 2:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            SortbyAlphabetNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            SortbyAlphabetNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+    case 3:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            SortbyName(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            SortbyName(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+    case 1:
+        if (gUnknown_3001B60->unkC != gUnknown_3001B60->unk10) {
+            SortbyInternalNo(gUnknown_3001B60->unkC, gUnknown_3001B60->unk10);
+        }
+        if (gUnknown_3001B60->unk10 != gUnknown_3001B60->unk8) {
+            SortbyInternalNo(gUnknown_3001B60->unk10, gUnknown_3001B60->unk8);
+        }
+        break;
+  }
+}
+
+
+void SortbyInternalNo(s32 param_1, s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        if (GetInternalNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum) > GetInternalNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
+
+void SortbyAlphabetNo(s32 param_1,s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        if (GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum, 0) > GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum, 0)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
+
+void SortbyName(s32 param_1,s32 param_2)
+{
+  s16 *r4;
+  s32 iVar4;
+  s16 *r10;
+  s16 *r5;
+  s32 r6;
+  s32 r1;
+  s32 r7;
+  s32 r9;
+
+  r10 = &gUnknown_3001B60->unk18 + param_2;
+  r7 = param_1;
+  r1 = param_2 - 1;
+  if (r7 < r1) {
+    r9 = r1;
+    do {
+      r4 = r10;
+      r6 = r1;
+      iVar4 = r7 + 1;
+      for (; r6 > r7; r6--) {
+        r5 = r4 - 1;
+        if (ComparePokemonNames(*r5, *r4)) {
+          r1 = *r4;
+          *r4 = *r5;
+          *r5 = r1;
+        }
+        r4 = r5;
+      }
+      r7 = iVar4;
+      r1 = r9;
+    } while (iVar4 < r1);
+  }
+}
 
 struct PokemonStruct *sub_80243E8(void)
 {
@@ -69,11 +223,11 @@ struct PokemonStruct *sub_80243E8(void)
     return pokeStruct;
 }
 
-bool8 sub_8024458(s16 param_1, s32 param_2)
+bool8 sub_8024458(s16 speciesNum, s32 param_2)
 {
-  s32 param_1_s32 = param_1;
+  s32 speciesNum_s32 = speciesNum;
   gUnknown_203B2AC = MemoryAlloc(sizeof(struct unkStruct_203B2AC), 8);
-  gUnknown_203B2AC->unk48 = param_1_s32;
+  gUnknown_203B2AC->speciesNum = speciesNum_s32;
   gUnknown_203B2AC->unkE0 = param_2;
   gUnknown_203B2AC->unkE4 = &gUnknown_203B2AC->unkE8[param_2];
   sub_8006518(gUnknown_203B2AC->unkE8);
@@ -152,6 +306,6 @@ void sub_8024604(void)
   gUnknown_203B2AC->unk34[2] = 5;
   sub_8013818(gUnknown_203B2AC,3,1,gUnknown_203B2AC->unkE0);
   iVar3 = &gUnknown_203B2AC->unk4C;
-  pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->unk48];
+  pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->speciesNum];
   sub_808FF20(iVar3,pokeStruct, sub_80023E4(7));
 }

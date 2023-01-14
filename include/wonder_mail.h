@@ -5,7 +5,7 @@
 #include "text.h"
 #include "item.h"
 #include "pokemon.h"
-#include "sub_8095228.h"
+#include "code_8094F88.h"
 
 #include "constants/wonder_mail.h"
 
@@ -40,6 +40,12 @@ struct WonderMail
 };
 
 
+struct WonderMailStruct_203B2C0_sub
+{
+    struct unkStruct_203B480 mail;
+    struct PokemonStruct pokemon;
+};
+
 struct WonderMailStruct_203B2C0
 {
     // size: 0x548
@@ -49,15 +55,12 @@ struct WonderMailStruct_203B2C0
     u8 unk3E;
     u32 unk40;
     u32 linkError;
-    u8 unk48[0x30];
-    u8 unk78[0x30];
-    struct unkStruct_8095228 unkA8;
-    struct PokemonStruct unkD8;
-    u8 unk130;
-    u8 fill131[0x168 - 0x131];
-    u16 unk168;
-    u8 fill16A[0x218 - 0x16A];
-    u8 unk218;
+    struct unkStruct_203B480 unk48;
+    struct unkStruct_203B480 unk78;
+    struct WonderMailStruct_203B2C0_sub unkA8;
+    struct WonderMailStruct_203B2C0_sub unk130;
+    u8 fill16A[0x218 - 0x1B8];
+    u8 mailIndex;
     u32 unk21C;
     u8 padding[0x7C];
     u32 unk29C;
@@ -79,7 +82,7 @@ struct WonderMailStruct_203B2C0
     s32 unk538; // A7 << 3
     u32 unk53C;
     u32 unk540; // A8 << 4
-    s16 unk544;
+    s16 speciesNum;
 
 };
 
@@ -93,9 +96,9 @@ struct WonderMailStruct_203B2C4
     u32 unk40;
     /* 0x44 */ u32 linkError; // another link status
     u8 filler48[0x1B8 - 0x48];
-    struct unkStruct_8095228 unk1B8;
-    struct unkStruct_8095228 unk1E8;
-    s8 unk218;
+    struct unkStruct_203B480 unk1B8;
+    struct unkStruct_203B480 unk1E8;
+    s8 mailIndex;
     u32 unk21C;
     u8 filler220[0x30C - 0x220];
     u32 unk30C;
@@ -118,48 +121,5 @@ struct WonderMailStruct_203B2C4
 };
 
 void sub_8028B04(u32 r0);
-
-enum WonderMailMode {
-    WONDER_MAIL_MODE_SEND = 1,
-    WONDER_MAIL_MODE_RECEIVE = 2,
-};
-
-enum WonderMailMethod {
-    WONDER_MAIL_GAME_LINK = 3,
-    WONDER_MAIL_PASSWORD = 5, 
-};
-
-enum WonderMailTypes {
-    WONDER_MAIL_TYPE_SOS = 1,
-    WONDER_MAIL_TYPE_AOK = 4,
-    WONDER_MAIL_TYPE_THANK_YOU = 5,
-    WONDER_MAIL_TYPE_WONDER = 5,
-    // TODO: document 7
-};
-
-enum WonderMailMissionTypes
-{
-    WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT = 0,
-    WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET = 1,
-    WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT = 2,
-    WONDER_MAIL_MISSION_TYPE_FIND_ITEM = 3,
-    WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM = 4,
-};
-
-enum WonderMailErrorMode {
-    WONDER_MAIL_GOOD = 0,
-    // TODO: document 1
-    WONDER_MAIL_NO_RESPONSE = 2,
-    WONDER_MAIL_INCORRECT_NUM_SYSTEMS = 3,
-    WONDER_MAIL_DIFFERENT_MODES = 4,
-    // TODO: document 5
-    WONDER_MAIL_NO_ROOM_STORAGE = 6,
-    WONDER_MAIL_DUPLICATE_MAIL = 7,
-    WONDER_MAIL_NOT_ELIGIBLE_1 = 9,
-    WONDER_MAIL_NOT_ELIGIBLE_2 = 11,
-    WONDER_MAIL_NO_ROOM_MAIL = 13,
-    // TODO: document 14
-    WONDER_MAIL_NOT_READY = 15,
-};
 
 #endif

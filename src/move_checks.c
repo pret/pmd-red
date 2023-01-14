@@ -217,7 +217,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
             }
             break;
         case MOVE_MINIMIZE:
-            if (pokemonInfo->hitChancesStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -414,7 +414,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
             }
             break;
         case MOVE_DOUBLE_TEAM:
-            if (pokemonInfo->hitChancesStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -580,7 +580,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
             }
             break;
         case MOVE_SWEET_SCENT:
-            if (targetData->hitChancesStages[STAT_STAGE_EVASION] <= 0)
+            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= 0)
             {
                 return FALSE;
             }
@@ -673,7 +673,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
                     break;
                 }
             }
-            if (targetData->hitChancesStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
+            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -727,7 +727,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
             {
                 if (targetData->offensiveStages[i] < DEFAULT_STAT_STAGE) break;
                 if (targetData->defensiveStages[i] < DEFAULT_STAT_STAGE) break;
-                if (targetData->hitChancesStages[i] < DEFAULT_STAT_STAGE ||
+                if (targetData->hitChanceStages[i] < DEFAULT_STAT_STAGE ||
                     targetData->offensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
                     targetData->defensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
                 {
@@ -752,7 +752,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
             {
                 if (userData->offensiveStages[i] < targetData->offensiveStages[i]) break;
                 if (userData->defensiveStages[i] < targetData->defensiveStages[i] ||
-                    userData->hitChancesStages[i] < targetData->hitChancesStages[i] ||
+                    userData->hitChanceStages[i] < targetData->hitChanceStages[i] ||
                     userData->offensiveMultipliers[i] < targetData->offensiveMultipliers[i] ||
                     userData->defensiveMultipliers[i] < targetData->defensiveMultipliers[i])
                 {
@@ -768,7 +768,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
         case MOVE_FLASH:
         case MOVE_KINESIS:
         case MOVE_SAND_ATTACK:
-            if (targetData->hitChancesStages[STAT_STAGE_ACCURACY] <= 0)
+            if (targetData->hitChanceStages[STAT_STAGE_ACCURACY] <= 0)
             {
                 return FALSE;
             }

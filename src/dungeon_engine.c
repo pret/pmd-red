@@ -5,8 +5,8 @@
 #include "dungeon_global_data.h"
 #include "dungeon_ai.h"
 #include "dungeon_leader.h"
+#include "dungeon_movement_1.h"
 #include "dungeon_util.h"
-#include "status_checks_1.h"
 
 extern s16 gSpeedTurns[2][25];
 
@@ -92,7 +92,7 @@ void RunFractionalTurn(bool8 param_1)
 
 static bool8 xxx_dungeon_80442D0(bool8 param_1)
 {
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   struct Entity *entity;
   s32 movSpeed;
   
@@ -103,7 +103,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
   else
   {
     TriggerWeatherAbilities();
-    movSpeed = GetSpeedStatus(entity);
+    movSpeed = CalcSpeedStage(entity);
     if (gSpeedTurns[movSpeed][gDungeon->fractionalTurn] == 0) {
         return FALSE;
     }
@@ -146,9 +146,9 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
             sub_8086AC0();
             sub_8043ED0(0);
             if (sub_8044B28()) break;
-            entityData = entity->info;
-            if ((entityData->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) {
-                entity->info->flags = (entityData->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
+            entityInfo = entity->info;
+            if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) {
+                entity->info->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
             }
             if (sub_8044B28() ) break;
             sub_8044454();
@@ -173,7 +173,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
 static void sub_8044454(void)
 {
   struct Entity *entity;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 index;
   
   if (gDungeon->unkE) {
@@ -182,7 +182,7 @@ static void sub_8044454(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
-      if ((EntityExists(entity)) && (entityData = entity->info, (entityData->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityExists(entity)) && (entityInfo = entity->info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         TickStatusHeal(entity);
         if (EntityExists(entity)) {
@@ -191,7 +191,7 @@ static void sub_8044454(void)
           sub_8072CF4(entity);
           sub_8086AC0();
           sub_8043ED0(0);
-          entityData->flags = (entityData->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
+          entityInfo->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
         }
       }
     }
@@ -201,7 +201,7 @@ static void sub_8044454(void)
 void sub_80444F4(struct Entity *pokemon)
 {
   struct Entity *entity;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   s32 index;
   
   if (pokemon == GetLeader() && gDungeon->unkE) {
@@ -210,7 +210,7 @@ void sub_80444F4(struct Entity *pokemon)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
-      if ((EntityExists(entity)) && (pokemon != entity) && (entityData = entity->info, (entityData->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityExists(entity)) && (pokemon != entity) && (entityInfo = entity->info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         RunMonsterAI(entity, 0);
         sub_8072CF4(entity);

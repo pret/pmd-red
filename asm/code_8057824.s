@@ -498,7 +498,7 @@ _080596EC:
 	adds r1, r5, 0
 	movs r2, 0x2
 	adds r3, r6, 0
-	bl sub_8079618
+	bl SetChargeStatusTarget
 	movs r4, 0x1
 _08059700:
 	adds r0, r4, 0
@@ -611,7 +611,7 @@ _080597CC:
 	adds r1, r5, 0
 	movs r2, 0x7
 	adds r3, r4, 0
-	bl sub_8079618
+	bl SetChargeStatusTarget
 	movs r4, 0x1
 _080597E0:
 	adds r0, r4, 0
@@ -717,7 +717,7 @@ _080598A4:
 	adds r1, r4, 0
 	movs r2, 0x9
 	adds r3, r5, 0
-	bl sub_8079618
+	bl SetChargeStatusTarget
 	movs r6, 0x1
 _080598B8:
 	adds r0, r6, 0
@@ -1657,7 +1657,7 @@ _08059FA0:
 	adds r1, r4, 0
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl sub_8079618
+	bl SetChargeStatusTarget
 	movs r0, 0x1
 	mov r8, r0
 _08059FB6:

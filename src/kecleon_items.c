@@ -43,7 +43,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   switch(param_1)
   {
       case 0:
-        gUnknown_203B210->unk4 = TRUE;
+        gUnknown_203B210->isKecleonItemShop = TRUE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
         CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
@@ -51,7 +51,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 1:
-        gUnknown_203B210->unk4 = TRUE;
+        gUnknown_203B210->isKecleonItemShop = TRUE;
         gUnknown_203B210->unkE4 = NULL;
         CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
         CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
@@ -59,7 +59,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 2:
-        gUnknown_203B210->unk4 = FALSE;
+        gUnknown_203B210->isKecleonItemShop = FALSE;
         gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
         CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
         CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
@@ -67,7 +67,7 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
         strcpy(gUnknown_202E1C8 - 0x50, monName);
         break;
       case 3:
-        gUnknown_203B210->unk4 = FALSE;
+        gUnknown_203B210->isKecleonItemShop = FALSE;
         gUnknown_203B210->unkE4 = NULL;
         CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
         CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);

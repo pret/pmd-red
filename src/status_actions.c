@@ -147,6 +147,7 @@ extern u8 *gUnknown_80FEB08[];
 extern u8 gUnknown_202DE58[];
 extern s16 gUnknown_80F4E08;
 extern u8 gDungeonCamouflageTypes[76];
+extern u32 gUnknown_202F228;
 
 struct Position_Alt
 {
@@ -163,6 +164,16 @@ extern u8 *gUnknown_80FEFF4[];
 
 extern u32 gUnknown_80F51C4[];
 
+typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4);
+
+struct NaturePowerMove
+{
+    s16 moveID;
+    u16 unk2;
+    MoveCallback move;
+};
+struct NaturePowerMove gUnknown_80F59C8[10];
+
 bool8 sub_805AFA4(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
 {
   s32 r0;
@@ -171,22 +182,22 @@ bool8 sub_805AFA4(struct Entity * pokemon, struct Entity * target, struct Move *
   bool8 flag;
 
 #ifndef NONMATCHING
-  register struct EntityInfo *entityData asm("r3");
+  register struct EntityInfo *entityInfo asm("r3");
 #else
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 #endif
   
   SendThawedMessage(pokemon, target);
-  entityData = pokemon->info;
-  r2 = entityData->maxHPStat;
+  entityInfo = pokemon->info;
+  r2 = entityInfo->maxHPStat;
   r0 = r2;
   if (r2 < 0) {
     r0 = r2 + 3;
   }
-  if (entityData->HP <= r0 >> 2) {
+  if (entityInfo->HP <= r0 >> 2) {
     r2 = 0;
   }
-  else if (r1 = entityData->HP, r1 <= r2 / 2) {
+  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
       r2 = 1;
   }
   else
@@ -246,18 +257,18 @@ bool8 HandleColorChange(struct Entity * pokemon, struct Entity * target)
 {
     u8 newType;
     const char *typeString;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
-    entityData = target->info;
+    entityInfo = target->info;
     newType = gDungeonCamouflageTypes[gDungeon->tileset];
     if (HasAbility(target, ABILITY_FORECAST)) {
         sub_80522F4(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
         return FALSE;
     }
     else {
-        entityData->types[0] = newType;
-        entityData->types[1] = TYPE_NONE;
-        entityData->isColorChanged = TRUE;
+        entityInfo->types[0] = newType;
+        entityInfo->types[1] = TYPE_NONE;
+        entityInfo->isColorChanged = TRUE;
         SetMessageArgument(gUnknown_202DFE8,target,0);
         typeString = GetUnformattedTypeString(newType);
         strcpy(gUnknown_202DE58, typeString);
@@ -338,16 +349,16 @@ bool8 sub_805B264(struct Entity * pokemon, struct Entity * target, struct Move *
     s32 r3;
     bool8 r6;
     s32 iVar5;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
-    entityData = target->info;  
+    entityInfo = target->info;  
     r3 = gUnknown_202F224;
     r6 = FALSE;
 
     gDungeon->unk18200 = gUnknown_8106A8C[r3];
     gDungeon->unk18204 = 0;
     iVar5 = gUnknown_80F4F94[r3];
-    if (entityData->chargingStatus == STATUS_DIGGING) {
+    if (entityInfo->chargingStatus == STATUS_DIGGING) {
         iVar5 *= 2;
     }
     r6 = sub_8055864(pokemon,target,move,iVar5,param_4) ? TRUE : FALSE;
@@ -425,17 +436,17 @@ bool8 sub_805B3E0(struct Entity * pokemon,struct Entity * target,struct Move *mo
 
 bool8 sub_805B3FC(struct Entity * pokemon,struct Entity * target,struct Move *move, s32 param_4, s32 param_5)
 {
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     bool8 uVar4;
 
     uVar4 = FALSE;
     if (sub_8055640(pokemon,target,move,0x100,param_5) != 0) {
         uVar4 = TRUE;
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
-            entityData = pokemon->info;
+            entityInfo = pokemon->info;
             RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
-            if (entityData->unkFB == 0) {
-                entityData->unkFB = 1;
+            if (entityInfo->unkFB == 0) {
+                entityInfo->unkFB = 1;
             }
         }
     }
@@ -450,33 +461,33 @@ bool8 sub_805B454(struct Entity * pokemon, struct Entity * target)
 
 bool8 MimicMoveAction(struct Entity * pokemon, struct Entity * target)
 {
-    struct EntityInfo *entityData;
-    struct EntityInfo *targetEntityData;
+    struct EntityInfo *entityInfo;
+    struct EntityInfo *targetEntityInfo;
     struct Move *move;
     s32 moveCounter;
     s32 moveIndex;
     bool8 mimicSuccess;
 
     mimicSuccess = FALSE;
-    entityData = pokemon->info;
-    targetEntityData = target->info;
+    entityInfo = pokemon->info;
+    targetEntityInfo = target->info;
     moveCounter = 0;
 
     for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        move = &targetEntityData->moves[moveIndex];
+        move = &targetEntityInfo->moves[moveIndex];
         if (((move->moveFlags & MOVE_FLAG_EXISTS)) && !sub_805755C(pokemon,move->id)) {
             if ((move->id != MOVE_MIMIC) && (move->id != MOVE_ASSIST) && (move->id != MOVE_SKETCH) && (move->id != MOVE_MIRROR_MOVE) &&
                 (move->id != MOVE_ENCORE) && ((move->moveFlags & MOVE_FLAG_LAST_USED))) {
-                entityData->mimicMoveIDs[moveCounter] = move->id;
+                entityInfo->mimicMoveIDs[moveCounter] = move->id;
                 moveCounter++;
             }
         }
     }
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     if (moveCounter != 0) {
-        if (entityData->unkFB == 0) {
-            entityData->unkFB = 1;
+        if (entityInfo->unkFB == 0) {
+            entityInfo->unkFB = 1;
         }
         sub_80522F4(pokemon,target,*gUnknown_80FDCE4);
         mimicSuccess = TRUE;
@@ -494,18 +505,18 @@ bool8 sub_805B53C(struct Entity * pokemon, struct Entity * target, struct Move *
     s32 r5;
     s32 IQ;
     u8 local_24;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
 
     local_24 = 0;
-    entityData = pokemon->info;
+    entityInfo = pokemon->info;
     r5 = 1;
     index = 0;
     if (0 <= gUnknown_80F55EC[0]) {
-        IQ = entityData->IQ;
+        IQ = entityInfo->IQ;
         for(r1 = &gUnknown_80F55EC[index]; (999 > index) && (*r1 >= 0); r1 = r1 + 2, index++)
             {
                 if ((IQ < *r1)){
-                    r5 = (int)r1[1];
+                    r5 = r1[1];
                     goto _0805B598;
                 }
             }
@@ -525,45 +536,17 @@ bool8 LeechSeedMoveAction(struct Entity * pokemon, struct Entity * target)
     return TRUE;
 }
 
-NAKED
 bool8 sub_805B618(struct Entity * pokemon, struct Entity * target, struct Move *move, s32 param_4)
 {
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5,r6}\n"
-	"\tsub sp, 0x8\n"
-	"\tadds r6, r0, 0\n"
-	"\tmov r8, r1\n"
-	"\tmov r9, r3\n"
-	"\tldr r0, _0805B660\n"
-	"\tldr r4, [r0]\n"
-	"\tldr r5, _0805B664\n"
-	"\tlsls r4, 3\n"
-	"\tadds r0, r4, r5\n"
-	"\tldrh r1, [r0]\n"
-	"\tmov r0, sp\n"
-	"\tbl InitPokemonMove\n"
-	"\tadds r5, 0x4\n"
-	"\tadds r4, r5\n"
-	"\tldr r4, [r4]\n"
-	"\tadds r0, r6, 0\n"
-	"\tmov r1, r8\n"
-	"\tmov r2, sp\n"
-	"\tmov r3, r9\n"
-	"\tbl _call_via_r4\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0805B660: .4byte gUnknown_202F228\n"
-"_0805B664: .4byte gUnknown_80F59C8");
+  bool8 flag;
+  struct Move natureMove;
+  u32 index;
+
+  index = gUnknown_202F228;
+  
+  InitPokemonMove(&natureMove, gUnknown_80F59C8[index].moveID);
+  flag = gUnknown_80F59C8[index].move(pokemon, target, &natureMove, param_4);
+  return flag;
 }
 
 bool8 sub_805B668(struct Entity * pokemon, struct Entity * target, struct Move *move, s32 param_4)
@@ -614,12 +597,12 @@ bool8 RecycleMoveAction(struct Entity * pokemon, struct Entity * target)
 {
   struct Item *item;
   s32 index;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
   bool8 isTMRecycled;
   
-  entityData = target->info;
+  entityInfo = target->info;
   isTMRecycled = FALSE;
-  if (!entityData->isNotTeamMember) {
+  if (!entityInfo->isNotTeamMember) {
     for(index = 0; index < INVENTORY_SIZE; index++)
     {
 #ifdef NONMATCHING
@@ -636,8 +619,8 @@ bool8 RecycleMoveAction(struct Entity * pokemon, struct Entity * target)
                 isTMRecycled = TRUE;
             }
         }
-    if ((entityData->heldItem.flags & ITEM_FLAG_EXISTS) && (entityData->heldItem.id == ITEM_TM_USED_TM)) {
-      xxx_init_itemslot_8090A8C(&entityData->heldItem,entityData->heldItem.quantity + 0x7D,0);
+    if ((entityInfo->heldItem.flags & ITEM_FLAG_EXISTS) && (entityInfo->heldItem.id == ITEM_TM_USED_TM)) {
+      xxx_init_itemslot_8090A8C(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
       isTMRecycled = TRUE;
     }
   }
@@ -682,7 +665,7 @@ bool8 SkullBashMoveAction(struct Entity * pokemon, struct Entity * target, struc
         sub_8079764(pokemon);
     }
     else {
-        sub_8079618(pokemon,target,6,move,*gUnknown_80FAFF0);
+        SetChargeStatusTarget(pokemon,target,STATUS_SKULL_BASH,move,*gUnknown_80FAFF0);
         flag = TRUE;
     }
     return flag;
@@ -844,7 +827,7 @@ bool8 CleanseOrbAction(struct Entity * pokemon, struct Entity * target)
 {
     struct Item *item;
     struct Entity *entity;
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     s32 index;
     bool8 isItemCleaned;
 
@@ -854,9 +837,9 @@ bool8 CleanseOrbAction(struct Entity * pokemon, struct Entity * target)
     register u8 flag asm("r2");
 #endif
 
-    entityData = target->info;
+    entityInfo = target->info;
     isItemCleaned = FALSE;
-    if (!entityData->isNotTeamMember) {
+    if (!entityInfo->isNotTeamMember) {
         for(index = 0; index < INVENTORY_SIZE; index++){
             // WTF why does this work...
             UNUSED struct Item* current = &gTeamInventory_203B460->teamItems[index];
@@ -896,7 +879,7 @@ bool8 sub_805BC70(struct Entity * pokemon, struct Entity * target)
 
 bool8 sub_805BC98(struct Entity * pokemon, struct Entity * target, struct Move *move, s32 param_4)
 {
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     bool8 uVar3;
     s32 targetHP;
     s32 pokeHP;
@@ -905,13 +888,13 @@ bool8 sub_805BC98(struct Entity * pokemon, struct Entity * target, struct Move *
 
     local_28 = 0;
     local_27 = 0;
-    entityData = pokemon->info;
+    entityInfo = pokemon->info;
     targetHP = target->info->HP - 1;
     if (targetHP < 0) {
         targetHP = 0;
     }
     sub_806F370(pokemon,target,targetHP,0,&local_28,0,sub_8057600(move,param_4),0,0,0);
-    pokeHP = entityData->HP / 2;
+    pokeHP = entityInfo->HP / 2;
     if (pokeHP < 0) {
         pokeHP = 0;
     }
@@ -947,7 +930,7 @@ bool8 RadarOrbAction(struct Entity * pokemon, struct Entity * target)
 
 bool8 TransferOrbAction(struct Entity *pokemon, struct Entity * target)
 {
-    struct EntityInfo *entityData;
+    struct EntityInfo *entityInfo;
     s32 oldID; //r8
     s32 targetID; // r5
     s32 r6; // r6
@@ -955,11 +938,11 @@ bool8 TransferOrbAction(struct Entity *pokemon, struct Entity * target)
 
     didTransfer = FALSE;
     if (target->info->isNotTeamMember) {
-        entityData = target->info;
-        targetID = entityData->id;
-        oldID = entityData->id;
+        entityInfo = target->info;
+        targetID = entityInfo->id;
+        oldID = entityInfo->id;
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        if (entityData->clientType != 0) {
+        if (entityInfo->clientType != 0) {
             sub_80522F4(pokemon,target,*gUnknown_80FD450);
             return FALSE;
         }
@@ -971,7 +954,7 @@ bool8 TransferOrbAction(struct Entity *pokemon, struct Entity * target)
                     if (GetBodySize(oldID) == GetBodySize(targetID)) break;
                 }
             }
-            if ((r6 == 0x1e) || (entityData->id == targetID)) {
+            if ((r6 == 0x1e) || (entityInfo->id == targetID)) {
                 sub_80522F4(pokemon,target,*gUnknown_80FD450);
             }
             else {

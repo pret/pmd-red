@@ -772,7 +772,7 @@ _0806D62A:
 	cmp r0, 0x7F
 	bne _0806D63A
 	adds r0, r7, 0
-	bl sub_807A9B0
+	bl WakeUpPokemon
 _0806D63A:
 	adds r0, r7, 0
 	movs r1, 0x23
@@ -1076,7 +1076,7 @@ _0806D858:
 	lsrs r4, r1, 31
 	b _0806D8B6
 	.align 2, 0
-_0806D8B0: .4byte gUnknown_203B46C
+_0806D8B0: .4byte gGameOptionsRef
 _0806D8B4:
 	movs r4, 0
 _0806D8B6:
@@ -1724,7 +1724,7 @@ _0806DDA2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	ldr r4, _0806DDF0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -1885,7 +1885,7 @@ _0806DEF2:
 	adds r0, r7, 0
 	bl sub_806CCB4
 	adds r0, r7, 0
-	bl DungeonEntityUpdateStatusSprites
+	bl EntityUpdateStatusSprites
 	ldr r0, _0806DF40
 	adds r1, r7, 0
 	movs r2, 0

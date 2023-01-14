@@ -13,18 +13,18 @@
 struct unkStruct_203B2B0
 {
     // size: 0x174
-    u8 unk0;
+    bool8 evolutionComplete;
     u8 fill1[0x3];
-    u8 unk4;
-    u8 unk5;
+    u8 evoItem1_itemIndex;
+    u8 evoItem2_ItemIndex;
     u8 unk6;
-    u16 unk8;
+    u16 evolutionConditionStatus;
     /* 0xA */ s16 targetSpecies; // species # of the evolved pokemon (what we are evolving to)
     struct PokemonStruct *pokeStruct;
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
-    struct Item unk1C;
+    struct Item chosenItem;
     u32 state;
     u32 fallbackState;
     u32 unk28;
@@ -156,6 +156,17 @@ enum
     LUMINOUS_CAVE_CANT_EVOLVE_YET = 0x1D,
 };
 
+enum evolutionStatus
+{
+    EVOLUTION_GOOD = 1,
+    EVOLUTION_LACK_LEVEL = 1 << 1,
+    EVOLUTION_NO_MORE = 1 << 2,
+    EVOLUTION_LACK_ITEM = 1 << 3,
+    EVOLUTION_LACK_IQ = 1 << 4,
+    EVOLUTION_LACK_FRIEND_AREA = 1 << 5,
+    EVOLUTION_LACK_ROOM = 1 << 6,
+};
+
 u32 sub_802465C(void)
 {
   struct OpenedFile *faceFile;
@@ -168,7 +179,7 @@ u32 sub_802465C(void)
   gUnknown_203B2B0->unk30 = 0;
   gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
   gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
-  gUnknown_203B2B0->unk0 = 0;
+  gUnknown_203B2B0->evolutionComplete = FALSE;
   faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
   gUnknown_203B2B0->unk104 = faceFile;
   gUnknown_203B2B0->unk108 = faceFile->data;
@@ -226,9 +237,9 @@ u32 sub_80246F0(void)
   return 0;
 }
 
-u8 sub_80247B4(void)
+bool8 HasEvolutionCompleted(void)
 {
-    return gUnknown_203B2B0->unk0;
+    return gUnknown_203B2B0->evolutionComplete;
 }
 
 void CleanLuminousCave(void)
@@ -250,7 +261,7 @@ void UpdateLuminousCaveState(u32 newState)
 
 void sub_8024804(void)
 {
-  s32 iVar4;
+  s32 index;
 
   sub_8006518(gUnknown_203B2B0->unk114);
   switch(gUnknown_203B2B0->state) {
@@ -270,9 +281,9 @@ void sub_8024804(void)
     case LUMINOUS_CAVE_LACK_ITEM:
         break;
     default:
-        for(iVar4 = 0; iVar4 < 4; iVar4++)
+        for(index = 0; index < 4; index++)
         {
-            gUnknown_203B2B0->unk114[iVar4] = gUnknown_80DC9E8;
+            gUnknown_203B2B0->unk114[index] = gUnknown_80DC9E8;
         }
         break;
   }
@@ -342,7 +353,7 @@ void UpdateLuminousCaveDialogue(void)
         break;
     case 9:
     case 0xe:
-        sub_801B3C0(&gUnknown_203B2B0->unk1C);
+        sub_801B3C0(&gUnknown_203B2B0->chosenItem);
         break;
     case LUMINOUS_CAVE_LACK_WHAT_NEEDED:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_1;
@@ -355,19 +366,19 @@ void UpdateLuminousCaveDialogue(void)
     case LUMINOUS_CAVE_LET_US_BEGIN:
         sub_8025254();
 
-        if((gUnknown_203B2B0->unk8 & 1) != 0)
+        if((gUnknown_203B2B0->evolutionConditionStatus & EVOLUTION_GOOD))
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CHANGED_APPEARANCE;
-        else if(gUnknown_203B2B0->unk8 == 4)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_NO_MORE)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE;
-        else if(gUnknown_203B2B0->unk8 == 2)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_LEVEL)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_LEVEL;
-        else if(gUnknown_203B2B0->unk8 == 0x10)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_IQ)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_IQ;
-        else if(gUnknown_203B2B0->unk8 == 0x20)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_FRIEND_AREA)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_FRIEND_AREA;
-        else if(gUnknown_203B2B0->unk8 == 0x40)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_ROOM)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ROOM;
-        else if(gUnknown_203B2B0->unk8 == 8)
+        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_ITEM)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ITEM;
         else
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
@@ -385,7 +396,7 @@ void UpdateLuminousCaveDialogue(void)
         strcpy(gAvailablePokemonNames,monName);
         monName = GetMonSpecies(gUnknown_203B2B0->targetSpecies);
         strcpy(gAvailablePokemonNames + 0x50,monName);
-        gUnknown_203B2B0->unk0 = 1;
+        gUnknown_203B2B0->evolutionComplete = TRUE;
         sub_80977D0();
         sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->targetSpecies);
         nullsub_104();
@@ -478,7 +489,7 @@ void sub_8024D48(void)
     u8 *nullString;
     struct unkStruct_203B2B0 *preload;
     u32 defaultAction;
-    s32 iVar4;
+    s32 index;
     s32 loopMax;
 
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
@@ -497,11 +508,11 @@ void sub_8024D48(void)
     preload->unk34[3].text = nullString;
     preload->unk34[3].menuAction = defaultAction;
 
-    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk2C)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk2C)
                 return;
         }
     }
@@ -514,7 +525,7 @@ void sub_8024DBC(void)
     u8 *nullString;
     struct unkStruct_203B2B0 *preload;
     u32 defaultAction;
-    s32 iVar4;
+    s32 index;
     s32 loopMax;
 
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
@@ -533,11 +544,11 @@ void sub_8024DBC(void)
     preload->unk34[3].text = nullString;
     preload->unk34[3].menuAction = defaultAction;
 
-    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk2C)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk2C)
                 return;
         }
     }
@@ -550,7 +561,7 @@ void sub_8024E30(void)
     u8 *nullString;
     struct unkStruct_203B2B0 *preload;
     u32 defaultAction;
-    s32 iVar4;
+    s32 index;
     s32 loopMax;
 
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
@@ -567,11 +578,11 @@ void sub_8024E30(void)
     preload->unk34[2].text = nullString;
     preload->unk34[2].menuAction = defaultAction;
 
-    for(iVar4 = 0; iVar4 < loopMax; iVar4++)
+    for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B0->unk74[iVar4] == 0)
+        if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[iVar4].menuAction == gUnknown_203B2B0->unk30)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk30)
                 return;
         }
     }
@@ -660,11 +671,11 @@ void sub_8024FD4(void)
         case 3:
             gUnknown_203B2B0->evoItem1_InvIndex = sub_801A8AC();
             gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
-            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
+            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
             UpdateLuminousCaveState(8);
             break;
         case 4:
-            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(9);
             break;
@@ -683,14 +694,14 @@ void sub_8025058(void)
             if(gUnknown_203B2B0->evoItem1_InvIndex != sub_801A8AC())
             {
                 gUnknown_203B2B0->evoItem2_InvIndex = sub_801A8AC();
-                gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
+                gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
                 UpdateLuminousCaveState(0xD);
             }
             else
                 PlayMenuSoundEffect(2);
             break;
         case 4:
-            gUnknown_203B2B0->unk1C = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(0xE);
             break;
@@ -811,37 +822,37 @@ void LuminousCave_AdvancetoFallbackState(void)
 void sub_8025254(void)
 {
     if(gUnknown_203B2B0->evoItem1_InvIndex == INVENTORY_SIZE)
-        gUnknown_203B2B0->unk4 = 0;
+        gUnknown_203B2B0->evoItem1_itemIndex = 0;
     else
     {
-        gUnknown_203B2B0->unk4 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
+        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
-        gUnknown_203B2B0->unk5 = 0;
+        gUnknown_203B2B0->evoItem2_ItemIndex = 0;
     else
     {
-        gUnknown_203B2B0->unk5 = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
+        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
     gUnknown_203B2B0->unk6 = RandInt(0xFF);
-    sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->unk4, 1);
+    sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->evoItem1_itemIndex, 1);
 }
 
 bool8 LuminousCave_HasOnly1Member(void)
 {
-    s32 r3;
-    s32 iVar3; // loop index
+    s32 memberCount;
+    s32 index;
     struct PokemonStruct *preload;
 
     preload = &gRecruitedPokemonRef->pokemon[0];
-    r3 = 0;
-    for(iVar3 = 0; iVar3 < NUM_MONSTERS; iVar3++, preload++)
+    memberCount = 0;
+    for(index = 0; index < NUM_MONSTERS; index++, preload++)
     {
         if((preload->unk0 >> 1) & 1)
-            r3++;
+            memberCount++;
     }
 
-    if(r3 == 1)
+    if(memberCount == 1)
         return TRUE;
     else
         return FALSE;

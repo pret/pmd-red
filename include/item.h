@@ -38,7 +38,7 @@ struct BulkItem {
 
 struct unkStruct_80915F4
 {
-    u16 unk0;
+    s16 unk0;
     u16 unk2;
 };
 
@@ -101,18 +101,24 @@ u32 GetMoneyValue(struct Item* slot);
 u16 GetItemMoveID(u8 index);
 bool8 CanSellItem(u32 id);
 bool8 IsGummiItem(u8);
-void xxx_init_unk230_substruct(u8);
-bool8 AddGreenKecleonShopItem(u8);
-struct BulkItem *xxx_get_inv_unk230_at_809185C(u8);
-void xxx_fill_unk230_gaps();
-struct BulkItem* xxx_get_unk250_at_8091A90(u8);
-s32 xxx_count_inv_unk230();
-u32 xxx_count_non_empty_inv_unk250_8091A48();
-void ChoosePurpleKecleonShopInventory(u8);
 void sub_8090F58(void*, u8 *, struct Item *, struct unkStruct_8090F58*);
 void ShiftItemsDownFrom(s32 start);
 void ClearItemSlotAt(u32 index);
 void MoveToStorage(struct Item* slot);
+s32 CountKecleonShopItems(void);
+void InitKecleonShopItem(u8 index);
+struct BulkItem *GetKecleonShopItem(u8 index);
+void FillKecleonShopGaps(void);
+void SortKecleonShopInventory(void);
+void ChooseKecleonShopInventory(u8 index);
+bool8 AddKecleonShopItem(u8 itemIndex);
+u32 CountKecleonWareItems(void);
+void InitKecleonWareItem(u8 index);
+struct BulkItem* GetKecleonWareItem(u8 index);
+void FillKecleonWareGaps(void);
+void SortKecleonWareInventory(void);
+void ChooseKecleonWareInventory(u8 index);
+bool8 AddKecleonWareItem(u8 itemIndex);
 void FillInventoryGaps();
 bool8 AddHeldItemToInventory(struct BulkItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);

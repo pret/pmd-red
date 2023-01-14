@@ -542,22 +542,22 @@ static inline bool8 JoinLocationCannotUseItems_1(struct EntityInfo *pokemonInfo)
 u8 sub_807167C(struct Entity * pokemon, struct Entity * target)
 {
   bool8 cannotUseItems;
-  struct EntityInfo * targetEntityData;
+  struct EntityInfo * targetEntityInfo;
   struct EntityInfo * pokemonEntityData;
 
   pokemonEntityData = pokemon->info;
-  targetEntityData = target->info;
+  targetEntityInfo = target->info;
   if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
     cannotUseItems = JoinLocationCannotUseItems_1(pokemonEntityData);
-    if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityData->clientType != CLIENT_TYPE_CLIENT)) {
-      cannotUseItems = JoinLocationCannotUseItems_1(targetEntityData);
-      if (cannotUseItems || (targetEntityData->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
+    if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->clientType != CLIENT_TYPE_CLIENT)) {
+      cannotUseItems = JoinLocationCannotUseItems_1(targetEntityInfo);
+      if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:
           return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
       }
       else
       {
-        if ((pokemonEntityData->isNotTeamMember) != (targetEntityData->isNotTeamMember)) {
+        if ((pokemonEntityData->isNotTeamMember) != (targetEntityInfo->isNotTeamMember)) {
           return TARGET_CAPABILITY_CAN_TARGET;
         }
         else {

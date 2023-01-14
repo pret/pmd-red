@@ -7,7 +7,7 @@
 #include "input.h"
 #include "save.h"
 #include "memory.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "text.h"
 #include "text_util.h"
 #include "menu.h"
@@ -73,7 +73,7 @@ extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
 extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptionsRef;
 
 extern const char gStarterReveal[];
 
@@ -596,12 +596,12 @@ void SetPlayerGender(void)
     if (sub_80144A4(&gender) == 0) {
         if (gender == MALE) {
             gPersonalityTestTracker->playerGender = MALE;
-            gUnknown_203B46C->playerGender = MALE;
+            gGameOptionsRef->playerGender = MALE;
         }
         else
         {
             gPersonalityTestTracker->playerGender = FEMALE;
-            gUnknown_203B46C->playerGender = FEMALE;
+            gGameOptionsRef->playerGender = FEMALE;
         }
         sub_8099690(0);
         gPersonalityTestTracker->TestState = PERSONALITY_REVEAL;

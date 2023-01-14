@@ -15,6 +15,6 @@ bool8 CanSeeTeammate(struct Entity * pokemon);
 u8 GetMoveTypeForMonster(struct Entity *pokemon, struct Move *pokeMove);
 s32 GetMovePower(struct Entity *pokemon, struct Move *pokeMove);
 bool8 ToolboxEnabled(struct EntityInfo *pokemon);
-bool8 SetVisualFlags(struct EntityInfo *entityData, u16 newFlag, bool8 param_3);
+bool8 SetVisualFlags(struct EntityInfo *entityInfo, u16 newFlag, bool8 param_3);
 
 #endif

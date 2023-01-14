@@ -596,7 +596,7 @@ gRescueTeamInfoRef = .; /* 203B464 */
 gFriendAreas = .; /* 203B468 */
 	. += 0x4;
 
-gUnknown_203B46C = .; /* 203B46C */
+gGameOptionsRef = .; /* 203B46C */
 	. += 0x4;
 
 gUnknown_203B470 = .; /* 203B470 */

@@ -4,5 +4,6 @@
 #include "dungeon_entity.h"
 
 bool8 CanCrossWalls(struct Entity *pokemon);
+s32 CalcSpeedStage(struct Entity *pokemon);
 
 #endif

@@ -1,9 +1,12 @@
 #include "global.h"
 #include "constants/direction.h"
+#include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_util.h"
+#include "item.h"
 
 struct unkStruct_80420E8
 {
@@ -11,6 +14,20 @@ struct unkStruct_80420E8
     u32 unk4;
     u32 unk8;
 };
+
+extern u32 gStatusSpriteMasks_SleepStatus[];
+extern u32 gStatusSpriteMasks_NonVolatileStatus[];
+extern u32 gStatusSpriteMasks_ImmobilizeStatus[];
+extern u32 gStatusSpriteMasks_VolatileStatus[];
+extern u32 gStatusSpriteMasks_ChargingStatus[];
+extern u32 gStatusSpriteMasks_ProtectionStatus[];
+extern u32 gStatusSpriteMasks_WaitingStatus[];
+extern u32 gStatusSpriteMasks_LinkedStatus[];
+extern u32 gStatusSpriteMasks_MoveStatus[];
+extern u32 gStatusSpriteMasks_ItemStatus[];
+extern u32 gStatusSpriteMasks_TransformStatus[];
+extern u32 gStatusSpriteMasks_EyesightStatus[];
+extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
 
 extern void sub_803ED30(u8, struct Entity *pokemon, u8, u8);
@@ -25,7 +42,169 @@ extern void sub_8041550(struct Entity *pokemon, u32, u32, u32, u32, u32);
 
 
 void sub_80421C0(struct Entity *pokemon, u16 r1);
+void EntityUpdateStatusSprites(struct Entity *entity);
 
+
+extern s32 gUnknown_202EDC8;
+extern u8 gUnknown_203B40D;
+extern s16 gUnknown_2026E4E;
+
+extern u8 sub_800E9FC(u8);
+extern void sub_800DBBC(void);
+extern void sub_803EA10(void);
+extern void sub_8042E98(void);
+extern void sub_803E46C(u32);
+extern void sub_800EE5C(u32);
+extern u32 sub_800E890(u32 *);
+extern void sub_800EF64(void);
+
+u32 sub_8041764(u32 *param_1, u8 param_2)
+{
+    sub_800EE5C(*param_1);
+    sub_800EF64();
+    if(param_2)
+        sub_803E46C(0x42);
+    return sub_800E890(param_1);
+}
+
+void sub_804178C(u8 param_1)
+{
+  u32 temp;
+  s32 counter;
+  
+  counter = 0;
+  gDungeon->unk18204 = 0;
+  if (sub_800E9FC(param_1) != 0) {
+    while ((counter < 1000 && (sub_800E9FC(param_1) != 0))) {
+      sub_803E46C(0x4a);
+      counter++;
+    }
+    sub_803E46C(0x4a);
+    sub_803E46C(0x4a);
+  }
+  if ((counter == 1000) || (param_1 != 0)) {
+    sub_800DBBC();
+  }
+  if (gUnknown_202EDC8 < 0x1f) {
+    temp = gUnknown_203B40D;
+    gUnknown_203B40D = 1;
+    for(counter = 0; counter < 1000; counter++)
+    {
+      if (gUnknown_202EDC8 < 0x1f) {
+        gUnknown_202EDC8 += 4;
+        if (gUnknown_2026E4E != 0x808) {
+          gUnknown_2026E4E -= 0x101;
+        }
+      }
+      else {
+        gUnknown_202EDC8 = 0x1f;
+      }
+      sub_803EA10();
+      sub_803E46C(0x4a);
+      if(gUnknown_202EDC8 == 0x1f) break;
+    };
+    gUnknown_2026E4E = 0x808;
+    gUnknown_203B40D = temp;
+  }
+  sub_8042E98();
+}
+
+u32 EntityGetStatusSprites(struct Entity *entity)
+{
+    return entity->info->statusIcons;
+}
+
+void sub_8041888(u8 param_1)
+{
+    s32 index;
+    struct Entity *entity;
+    struct EntityInfo *entityInfo;
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        entity = gDungeon->allPokemon[index];
+        if(EntityExists(entity))
+        {
+            entityInfo = entity->info;
+            if(param_1)
+            {
+                entityInfo->unk14C = 1;
+            }
+            EntityUpdateStatusSprites(entity);
+        }
+    }
+}
+
+void EntityUpdateStatusSprites(struct Entity *entity)
+{
+  bool32 flag;
+  s32 HP;
+  struct EntityInfo *entityInfo;
+  u32 spriteStatus;
+  u8 temp;
+  
+  if (EntityExists(entity)) {
+    entityInfo = entity->info;
+    spriteStatus = 0;
+    flag = TRUE;
+
+    if (entityInfo->id == 0xb9) {
+      // NOTE: clean this up sometime
+      temp = entityInfo->sleepTurns; 
+      flag = 0x7f;
+      temp ^= flag;
+      flag = (temp) != 0;
+    }
+    if (flag) {
+      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep];
+    }
+    spriteStatus = spriteStatus | 
+            gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatileStatus] |
+            gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilizeStatus] |
+            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus] |
+            gStatusSpriteMasks_ChargingStatus[entityInfo->chargingStatus] |
+            gStatusSpriteMasks_ProtectionStatus[entityInfo->protectionStatus] |
+            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStatus] |
+            gStatusSpriteMasks_LinkedStatus[entityInfo->linkedStatus] |
+            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus] |
+            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus] |
+            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus] |
+            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus] |
+            gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled];
+
+    if (entityInfo->grudge) {
+      spriteStatus = spriteStatus | STATUS_SPRITE_GRUDGE;
+    }
+    if (entityInfo->exposed) {
+      spriteStatus = spriteStatus | STATUS_SPRITE_EXPOSED;
+    }
+    if (!entityInfo->isNotTeamMember) {
+      HP = entityInfo->maxHPStat;
+      if (HP < 0) {
+        HP += 3;
+      }
+      HP >>= 2;
+      if (HP > entityInfo->HP) {
+        spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
+      }
+    }
+    if ((gDungeon->itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
+      spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
+    }
+    if ( (entityInfo->offensiveStages[0] < DEFAULT_STAT_MULTIPLIER) || 
+        (entityInfo->offensiveStages[1] < DEFAULT_STAT_MULTIPLIER) ||
+        (entityInfo->defensiveStages[0] < DEFAULT_STAT_MULTIPLIER) ||
+        (entityInfo->defensiveStages[1] < DEFAULT_STAT_MULTIPLIER) ||
+        (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
+        (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
+        (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) || 
+        (entityInfo->defensiveStages[1] < DEFAULT_STAT_STAGE) ||
+        (entityInfo->hitChanceStages[0]) < DEFAULT_STAT_STAGE || 
+        (entityInfo->hitChanceStages[1] < DEFAULT_STAT_STAGE)) {
+        spriteStatus = spriteStatus | STATUS_SPRITE_STAT_DOWN;
+    }
+    entityInfo->statusIcons = spriteStatus;
+  }
+}
 
 void sub_8041AD0(struct Entity *pokemon)
 {

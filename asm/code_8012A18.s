@@ -3271,7 +3271,7 @@ _08014408:
 	ands r0, r4
 	cmp r0, 0
 	beq _08014418
-	bl sub_8094C14
+	bl SetWindowBGColor
 _08014418:
 	ldr r0, _08014460
 	movs r1, 0x1

@@ -6868,7 +6868,7 @@ _080A167A:
 	bl sub_80961D8
 	b _080A1804
 _080A1680:
-	bl sub_8096028
+	bl ResetMailbox
 	bl _080A236A
 _080A1688:
 	bl sub_80963FC

@@ -24,17 +24,17 @@ extern u8 gUnknown_810AC68; // 0x8
 extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
 
-extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityData);
+extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo);
 void FadeOutAllMusic(u16);
 void xxx_call_stop_bgm(void);
 
-void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * enity)
+void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
   u8 *spDefPtr;
-  struct EntityInfo * entityData;
-  struct EntityInfo * targetEntityData;
+  struct EntityInfo * entityInfo;
+  struct EntityInfo * targetEntityInfo;
   u8 *spAttPtr;
   u8 buffer [0x14];
   struct unkDungeonGlobal_unk1CE98_sub *temp;
@@ -42,29 +42,29 @@ void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * enity)
   s32 param_0_s32 = param_0;
 
   temp = &gDungeon->unk1CE98;
-  targetEntityData = NULL;
+  targetEntityInfo = NULL;
   if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
-    targetEntityData = target->info;
+    targetEntityInfo = target->info;
   }
-  entityData = enity->info;
-  if (targetEntityData != NULL) {
-    sub_80709C8(buffer, targetEntityData);
+  entityInfo = entity->info;
+  if (targetEntityInfo != NULL) {
+    sub_80709C8(buffer, targetEntityInfo);
     CopyStringtoBuffer(temp->buffer1, buffer);
   }
   else {
     CopyStringtoBuffer(temp->buffer1, *gUnknown_80FE6F4); // Someone
   }
-  sub_80709C8(buffer,entityData);
+  sub_80709C8(buffer,entityInfo);
   CopyStringtoBuffer(temp->buffer2, buffer);
   temp->unk14 = param_0_s32;
-  temp->heldItem = entityData->heldItem;
-  temp->exp = entityData->exp;
-  temp->level = entityData->level;
-  temp->maxHPStat = entityData->maxHPStat;
-  temp->atk = entityData->atk;
-  temp->spAtk = entityData->spAtk;
-  temp->def = entityData->def;
-  temp->spDef = entityData->spDef;
+  temp->heldItem = entityInfo->heldItem;
+  temp->exp = entityInfo->exp;
+  temp->level = entityInfo->level;
+  temp->maxHPStat = entityInfo->maxHPStat;
+  temp->atk = entityInfo->atk;
+  temp->spAtk = entityInfo->spAtk;
+  temp->def = entityInfo->def;
+  temp->spDef = entityInfo->spDef;
   temp->dungeonLocation = gDungeon->dungeonLocation;
   attackPtr = &temp->attBoost;
   *attackPtr = 0;
@@ -74,8 +74,8 @@ void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * enity)
   *defPtr = 0;
   spDefPtr = &temp->spDefBoost;
   *spDefPtr = 0;
-  if ((entityData->heldItem.flags & ITEM_FLAG_EXISTS) && !(entityData->heldItem.flags & ITEM_FLAG_STICKY)) {
-    id = &entityData->heldItem.id;
+  if ((entityInfo->heldItem.flags & ITEM_FLAG_EXISTS) && !(entityInfo->heldItem.flags & ITEM_FLAG_STICKY)) {
+    id = &entityInfo->heldItem.id;
     if (*id == ITEM_POWER_BAND) {
       *attackPtr += gUnknown_810AC60;
     }
@@ -188,7 +188,7 @@ void sub_8083D88(void)
     PlayFanfareSE(0xCC, 0x100);
 }
 
-void sub_8083D98(void)
+void PlayDungeonFailBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
   gDungeon->unk66F = 0;
@@ -197,7 +197,7 @@ void sub_8083D98(void)
   gDungeon->unk66A = 999;
 }
 
-void sub_8083DE0(void)
+void PlayDungeonCompleteBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
   gDungeon->unk66F = 0;

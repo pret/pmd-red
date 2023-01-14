@@ -170,7 +170,7 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
 extern void sub_8012D34(struct UnkTextStruct2 *, u32);
-extern bool8 sub_809658C(u8);
+extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void sub_802C910(u32);
 extern void sub_802CC00(void);
 extern void sub_802CC70(void);
@@ -192,7 +192,7 @@ s32 sub_802C474(void)
   s32 counter = 0;
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-      if(!sub_809658C(index))
+      if(!IsPelipperBoardSlotEmpty(index))
       {
           gUnknown_203B2E0->unk0[counter] = index;
           counter++;
@@ -206,7 +206,7 @@ bool8 sub_802C4A4(void)
   s32 index;
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-      if(!sub_809658C(index))
+      if(!IsPelipperBoardSlotEmpty(index))
         return FALSE;
   }
   return TRUE;
@@ -278,17 +278,15 @@ u8 sub_802C620(void)
     return gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + gUnknown_203B2E8->unk20];
 }
 
-void sub_802C640(u32 r0)
+void sub_802C640(u8 r0)
 {
-    u8 r0_u8;
-    r0_u8 = r0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
     gUnknown_203B2E8->unk2A = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
     sub_802C750();
-    if(r0_u8)
+    if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E8->unk8);
 }
 

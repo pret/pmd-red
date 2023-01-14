@@ -2,7 +2,6 @@
 #include "memory.h"
 #include "input.h"
 #include "item.h"
-#include "sub_8095228.h"
 #include "text.h"
 #include "rescue_password_menu.h"
 

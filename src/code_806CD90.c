@@ -126,13 +126,13 @@ void sub_806CEFC(struct Entity *param_1, u32 newDir)
 void sub_806CF18(struct Entity *param_1)
 {
   s32 iVar2;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 
   if (EntityExists(param_1)) {
-    entityData = param_1->info;
+    entityInfo = param_1->info;
     for (iVar2 = 0; iVar2 < 100; iVar2++) {
       sub_803E46C(0x21);
-      if (!sub_808DA44(entityData->apparentID, param_1->unk6B)) {
+      if (!sub_808DA44(entityInfo->apparentID, param_1->unk6B)) {
         break;
       }
     }
@@ -163,12 +163,12 @@ u32 sub_806CF98(struct Entity *param_1)
   struct Tile *mapTile;
   u32 uVar3;
   u16 terrainType;
-  struct EntityInfo *entityData;
+  struct EntityInfo *entityInfo;
 
   mapTile = GetTileAtEntitySafe(param_1);
   terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  entityData = param_1->info;
-  uVar3 = GetShadowSize(entityData->apparentID);
+  entityInfo = param_1->info;
+  uVar3 = GetShadowSize(entityInfo->apparentID);
   if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) {
     return 6;
   }
@@ -179,6 +179,6 @@ u32 sub_806CF98(struct Entity *param_1)
   }
   else if ((terrainType == TERRAIN_TYPE_SECONDARY) && (gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA))
     uVar3 = gUnknown_8106EEF[uVar3];
-  entityData->unk204 = uVar3;
+  entityInfo->unk204 = uVar3;
   return uVar3;
 }

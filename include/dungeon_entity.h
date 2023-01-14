@@ -70,7 +70,7 @@ struct EntityInfo
     // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x20 */ s16 defensiveStages[2];
     // Index 0 is accuracy. Index 1 is evasion.
-    /* 0x24 */ s16 hitChancesStages[2];
+    /* 0x24 */ s16 hitChanceStages[2];
     // // When a Fire-type move is used on a Pokémon with Flash Fire, this value increases the power of the Pokémon's Fire-type moves.
     /* 0x28 */ s16 flashFireBoost;
     // These start at 0x1000, and are halved by certain moves like Screech to lower the corresponding stat.
@@ -199,7 +199,9 @@ struct EntityInfo
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
     /* 0x14A */ u8 unk14A;
-    u8 fill14B[0x14E - 0x14B];
+    /* 0x14B */ u8 unk14B;
+    /* 0x14C */ u8 unk14C;
+    /* 0x14D */ u8 unk14D;
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
