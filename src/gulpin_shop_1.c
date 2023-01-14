@@ -16,7 +16,7 @@ extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
-extern u8 sub_80934B0(u32, struct PokemonMove *);
+extern u8 IsNextMoveLinked(u32, struct PokemonMove *);
 extern void PlaySound(u32);
 extern void sub_801EF38(u32);
 
@@ -36,7 +36,7 @@ void sub_801ED28(void)
             break;
         case 2:
             PlaySound(0x133);
-            gUnknown_203B26C->unkE = sub_80934B0(gUnknown_203B26C->unk20, gUnknown_203B26C->unk10);
+            gUnknown_203B26C->unkE = IsNextMoveLinked(gUnknown_203B26C->unk20, gUnknown_203B26C->unk10);
             UpdateGulpinShopState(4);
             break;
         case 3:

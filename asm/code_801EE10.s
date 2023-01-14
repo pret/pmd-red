@@ -357,7 +357,7 @@ _0801F0E4:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_80934DC
+	bl SetMove
 _0801F0FE:
 	lsls r0, 24
 	cmp r0, 0
@@ -3163,7 +3163,7 @@ CreateGulpinLinkMenu:
 	beq _0802079C
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80932E0
+	bl IsMoveSet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020788
@@ -3191,7 +3191,7 @@ _08020798: .4byte gGulpinSet
 _0802079C:
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80932FC
+	bl IsMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080207B4
@@ -4153,7 +4153,7 @@ _08020F44:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80934DC
+	bl SetMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020F68
@@ -4288,7 +4288,7 @@ _08021074:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80933A0
+	bl IsAnyMoveLinked
 	lsls r0, 24
 	cmp r0, 0
 	bne _08021098
@@ -4305,7 +4305,7 @@ _08021098:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80934B0
+	bl IsNextMoveLinked
 	ldr r1, [r4]
 	strb r0, [r1, 0x14]
 	movs r0, 0x22

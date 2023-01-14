@@ -10,17 +10,17 @@ u8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 void sub_809371C(struct PokemonMove*);
 
-int sub_80932E0(int index, struct PokemonMove* struct_ptr)
+int IsMoveSet(int index, struct PokemonMove* struct_ptr)
 {
-    if ((struct_ptr[index].moveFlags & 8) != 0) {
+    if ((struct_ptr[index].moveFlags & MOVE_FLAG_SET) != 0) {
         return 1;
     }
     return 0;
 }
 
-int sub_80932FC(int index, struct PokemonMove* struct_ptr)
+int IsMoveEnabled(int index, struct PokemonMove* struct_ptr)
 {
-    if ((struct_ptr[index].moveFlags & 4) != 0) {
+    if ((struct_ptr[index].moveFlags & MOVE_FLAG_ENABLED) != 0) {
         return 1;
     }
     return 0;
@@ -47,21 +47,22 @@ int sub_8093360(int param_1, void* src_struct)
     return sub_80933D8(param_1, dest_struct);
 }
 
-int sub_8093384(int index, struct PokemonMove* struct_ptr)
+// appears unused
+int IsMoveNotSet(int index, struct PokemonMove* struct_ptr)
 {
-    if ((struct_ptr[index].moveFlags & 8) != 0) {
+    if ((struct_ptr[index].moveFlags & MOVE_FLAG_SET) != 0) {
         return 0;
     }
     return 1;
 }
 
-int sub_80933A0(int unused, struct PokemonMove* moves) {
+int IsAnyMoveLinked(int unused, struct PokemonMove* moves) {
     int i;
     int counter;
 
     counter = 0;
     for (i = 0; i < 8; i++) {
-        if ((moves[i].moveFlags & 1) && !(moves[i].moveFlags & 2)) {
+        if ((moves[i].moveFlags & MOVE_FLAG_EXISTS) && !(moves[i].moveFlags & MOVE_FLAG_LINKED)) {
             counter++;
         }
     }
@@ -73,7 +74,7 @@ int sub_80933A0(int unused, struct PokemonMove* moves) {
 
 u8 sub_80933D8(int param_1, void* src_struct)
 {
-  int result; // r0
+  int result;
 
   if (!sub_8093400(param_1, src_struct)) {
     result = sub_8093468(param_1, src_struct);
@@ -92,14 +93,14 @@ u8 sub_8093400(int index, struct PokemonMove* moves) {
     }
     
     for (i = index + 1; i < 8; i++) {
-        if (!(moves[i].moveFlags & 1)) {
+        if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS)) {
             return 0;
         }
         if (DoesMoveCharge(moves[i].moveID)) {
             return 0;
         }
-        if (!(moves[i].moveFlags & 2)) {
-            moves[i].moveFlags |= 2;
+        if (!(moves[i].moveFlags & MOVE_FLAG_LINKED)) {
+            moves[i].moveFlags |= MOVE_FLAG_LINKED;
             sub_809371C(moves);
             return 1;
         }
@@ -149,37 +150,39 @@ u8 sub_8093468(int index, struct PokemonMove* moves)
 "	bx r1\n");
 }
 
-u8 sub_80934B0(int index, struct PokemonMove* moves) {
+u8 IsNextMoveLinked(int index, struct PokemonMove* moves) {
     struct PokemonMove* move;
     if (index + 1 >= 8) {
         return 0;
     }
     move = &moves[index + 1];
-    if (!(move->moveFlags & 1))
+    if (!(move->moveFlags & MOVE_FLAG_EXISTS))
         return 0;
-    if ((move->moveFlags & 2))
+    if ((move->moveFlags & MOVE_FLAG_LINKED))
         return 1;
     return 0;
 }
 
-int sub_80934DC(int index, struct PokemonMove* moves) {
+int SetMove(int index, struct PokemonMove* moves) {
     struct PokemonMove* move;
     u8 flags;
     int i;
 
     move = &moves[index];
-    if (moves[index].moveFlags & 8) {
-        flags = move->moveFlags & ~8;
+    if (moves[index].moveFlags & MOVE_FLAG_SET) {
+        flags = move->moveFlags & ~MOVE_FLAG_SET;
     }
     else {
+        // clear set flag from other moves
         for (i = 0; i < 4; i++) {
-            if (moves[i].moveFlags & 1) {
-                moves[i].moveFlags &= ~8;
+            if (moves[i].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[i].moveFlags &= ~MOVE_FLAG_SET;
             }
         }
-        flags = move->moveFlags | 8;
+        flags = move->moveFlags | MOVE_FLAG_SET;
     }
     move->moveFlags = flags;
     sub_809371C(moves);
     return 1;
 }
+

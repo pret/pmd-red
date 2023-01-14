@@ -223,7 +223,7 @@ sub_801EBC4:
 	str r0, [r1, 0x2C]
 	ldrh r0, [r1, 0x1E]
 	ldr r1, [r1, 0x10]
-	bl sub_80933A0
+	bl IsAnyMoveLinked
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801EBF6
