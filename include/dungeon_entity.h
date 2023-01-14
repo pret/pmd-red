@@ -12,7 +12,7 @@
 #define DEFAULT_STAT_MULTIPLIER 256
 #define MAX_SPEED_STAGE 4
 #define MAX_STOCKPILE_STAGE 3
-#define NUM_SPEED_TURN_COUNTERS 5
+#define NUM_SPEED_COUNTERS 5
 #define NUM_PREV_POS 4
 
 #define STAT_STAGE_ATK 0
@@ -22,7 +22,7 @@
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
 
-struct DungeonActionContainer
+struct ActionContainer
 {
     /* 0x0 */ u16 action;
     /* 0x2 */ u8 direction;
@@ -82,7 +82,7 @@ struct EntityInfo
     /* 0x3E */ u8 hiddenPowerType;
     u8 fill3F;
     /* 0x40 */ u8 joinedAt; // Uses the dungeon index in dungeon.h.
-    /* 0x44 */ struct DungeonActionContainer action;
+    /* 0x44 */ struct ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ struct Item heldItem;
@@ -181,8 +181,8 @@ struct EntityInfo
     /* 0x104 */ s32 speedStage;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
-    /* 0x108 */ u8 speedUpCounters[NUM_SPEED_TURN_COUNTERS];
-    /* 0x10D */ u8 speedDownCounters[NUM_SPEED_TURN_COUNTERS];
+    /* 0x108 */ u8 speedUpCounters[NUM_SPEED_COUNTERS];
+    /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
     u8 fill113;
     // When non-zero, an AI Pokémon will move in a random direction every turn.

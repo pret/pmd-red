@@ -1108,7 +1108,7 @@ void sub_8079F20(struct Entity * pokemon, struct Entity * target, u8 param_3, u8
     }
 
     moveSpeed = GetSpeedStatus(target);
-    for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
+    for(index = 0; index < NUM_SPEED_COUNTERS; index++)
     {
       entityData->speedDownCounters[index] = 0;
     }

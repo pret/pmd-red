@@ -114,9 +114,9 @@ s32 GetSpeedStatus(struct Entity *pokemon)
   entityData = pokemon->info;
   speed = 0;
 
-  for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
+  for(index = 0; index < NUM_SPEED_COUNTERS; index++)
   {
-    if (entityData->speedUpCounters[index + NUM_SPEED_TURN_COUNTERS] != 0) {
+    if (entityData->speedUpCounters[index + NUM_SPEED_COUNTERS] != 0) {
       speed--;
     }
     if (entityData->speedUpCounters[index] != 0) {
@@ -278,7 +278,7 @@ bool8 HasNegativeStatus(struct Entity *pokemon)
             return TRUE;
         }
     }
-    for (i = 0; i < NUM_SPEED_TURN_COUNTERS; i++)
+    for (i = 0; i < NUM_SPEED_COUNTERS; i++)
     {
         if (pokemonInfo->speedDownCounters[i] != 0)
         {

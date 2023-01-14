@@ -495,7 +495,7 @@ void RaiseMovementSpeedTarget(struct Entity * pokemon, struct Entity * target, s
         sub_80522F4(pokemon,target,*gUnknown_80FC2B8);
   }
   else {
-    for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
+    for(index = 0; index < NUM_SPEED_COUNTERS; index++)
     {
         if(entityData->speedUpCounters[index]  == 0)
         {
@@ -542,7 +542,7 @@ void LowerMovementSpeedTarget(struct Entity * pokemon, struct Entity * target, s
   else {
     for(counter = 0; counter < levels; counter++)
     {
-        for(index = 0; index < NUM_SPEED_TURN_COUNTERS; index++)
+        for(index = 0; index < NUM_SPEED_COUNTERS; index++)
         {
             if (entityData->speedDownCounters[index]== 0) {
                 entityData->speedDownCounters[index] = CalculateStatusTurns(target,gUnknown_80F4E48,TRUE) + 1;
@@ -975,7 +975,7 @@ void sub_80783C4(struct Entity * pokemon, struct Entity * target, u8 param_3)
   struct EntityInfo *entityData;
   struct Entity * entity;
   struct Entity * entity2;
-  struct DungeonActionContainer action;
+  struct ActionContainer action;
   s32 index;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {

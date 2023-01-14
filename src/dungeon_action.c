@@ -246,21 +246,21 @@ void sub_8044C50(u16 action)
     entityData->action.itemTargetPosition.y = -1;
 }
 
-void ClearMonsterActionFields(struct DungeonActionContainer *actionPointer)
+void ClearMonsterActionFields(struct ActionContainer *actionPointer)
 {
     actionPointer->action = ACTION_NOTHING;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetMonsterActionFields(struct DungeonActionContainer *actionPointer, u16 action)
+void SetMonsterActionFields(struct ActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetActionPassTurnOrWalk(struct DungeonActionContainer *actionPointer, s16 species)
+void SetActionPassTurnOrWalk(struct ActionContainer *actionPointer, s16 species)
 {
     if (CanMove(species))
     {
