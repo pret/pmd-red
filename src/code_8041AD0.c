@@ -190,10 +190,10 @@ void EntityUpdateStatusSprites(struct Entity *entity)
     if ((gDungeon->itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
-    if ( (entityInfo->offensiveStages[0] < DEFAULT_STAT_MULTIPLIER) || 
-        (entityInfo->offensiveStages[1] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveStages[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveStages[1] < DEFAULT_STAT_MULTIPLIER) ||
+    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) || 
+        (entityInfo->offensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
+        (entityInfo->defensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
+        (entityInfo->defensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
         (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
         (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) || 
