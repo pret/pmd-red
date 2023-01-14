@@ -467,7 +467,7 @@ _08019288: .4byte gUnknown_203B210
 _0801928C: .4byte gUnknown_202DE30
 _08019290: .4byte gKecleonShopDialogue
 _08019294:
-	bl sub_8019D8C
+	bl CountKecleonItems
 	cmp r0, 0
 	bne _080192C0
 	ldr r0, _080192AC

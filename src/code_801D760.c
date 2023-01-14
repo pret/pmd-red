@@ -417,16 +417,13 @@ s16 sub_801DAC0(void)
     return (gUnknown_203B258->unk1E * gUnknown_203B258->unk1C) + gUnknown_203B258->unk18;
 }
 
-void sub_801DADC(u32 r0)
+void sub_801DADC(u8 r0)
 {
-    u8 r0_u8;
-    r0_u8 = r0;
-
     gUnknown_203B258->unk22 = 0xE5;
     sub_8013984(gUnknown_203B258);
     sub_801DB54();
     sub_801DBD4();
-    if(r0_u8)
+    if(r0)
         AddMenuCursorSprite(gUnknown_203B258);
 }
 

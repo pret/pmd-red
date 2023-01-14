@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "exclusive_pokemon.h"
 #include "input.h"
 #include "item.h"
@@ -19,7 +20,7 @@ struct unkStruct_203B2FC
     s16 unkE;
     u8 unk10;
     u8 fill11[0x30 - 0x11];
-    u8 jobSlot;
+    u8 jobSlotIndex;
     struct WonderMail *jobInfo;
     struct OpenedFile *faceFile;
     u8 *faceData;
@@ -127,7 +128,7 @@ extern void sub_8013114(u8 *r0, s32 *r1);
 extern u32 sub_802C598(s32);
 extern void sub_802C688(void);
 extern void sub_8096C80(void);
-extern void sub_8096C3C(u8);
+extern void ResetJobSlot(u8);
 extern u8 sub_802C620(void);
 
 void sub_802DE44(void);
@@ -175,7 +176,7 @@ void sub_802D82C(void)
     }
     switch(menuAction) {
         case 3:
-            sub_8096C3C(gUnknown_203B2F8->unk10);
+            ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
             sub_8096C80();
             sub_802D1A0(8);
             break;
@@ -204,11 +205,11 @@ void sub_802D8CC(void)
     case 1:
         break;
     case 3:
-        gUnknown_203B2F8->unk10 = sub_802C620();
+        gUnknown_203B2F8->jobSlotIndex = sub_802C620();
         sub_802D1A0(0xd);
         break;
     case 4:
-        gUnknown_203B2F8->unk10 = sub_802C620();
+        gUnknown_203B2F8->jobSlotIndex = sub_802C620();
         gUnknown_203B2F8->fallbackState = 0xc;
         sub_802D1A0(0xf);
         break;
@@ -233,7 +234,7 @@ void sub_802D940(void)
   switch(menuAction)
   {
     case 2:
-        if ((gUnknown_203B2F8->unk9 != 0) && (((mail = &gUnknown_203B490->unkF0[gUnknown_203B2F8->unk10]), mail->mailType > 5) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)))
+        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > 5) && (gUnknown_203B2F8->dungeonIndex == mail->dungeon.dungeonIndex)))
         {
             sub_802D1A0(0x7);
         }
@@ -270,7 +271,7 @@ void sub_802D9F0(void)
         break;
     case 3:
         sub_802C688();
-        sub_8096C3C(gUnknown_203B2F8->unk10);
+        ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
         sub_8096C80();
         sub_802D1A0(8);
         break;
@@ -305,13 +306,13 @@ bool8 sub_802DAA8(void)
 {
   struct WonderMail *mail;
   
-  mail = GetJobSlotInfo(gUnknown_203B2F8->unk10);
-  if (gUnknown_203B2F8->unk9 == 0) {
-    return 1;
+  mail = GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex);
+  if (!gUnknown_203B2F8->unk9) {
+    return TRUE;
   }
   else {
-    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->unkA == mail->dungeon.dungeonIndex)) return 0;
-    return 1;
+    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->dungeonIndex == mail->dungeon.dungeonIndex)) return FALSE;
+    return TRUE;
   }
 }
 
@@ -321,28 +322,28 @@ bool8 sub_802DADC(void)
   struct WonderMail *mail;
   s32 counter;
   
-  if (gUnknown_203B2F8->unk9 == 0) {
+  if (!gUnknown_203B2F8->unk9) {
 _0802DAE8:
-    return 1;
+    return TRUE;
   }
   else {
-    for( mail = &gUnknown_203B490->unkF0[0], counter = 0; counter < 8; mail++, counter++)
+    for( mail = &gUnknown_203B490->jobSlots[0], counter = 0; counter < 8; mail++, counter++)
     {
       mailType = mail->mailType;
       if (((mailType == 0) || (mailType == WONDER_MAIL_TYPE_THANK_YOU)) ||
-         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->unkA != mail->dungeon.dungeonIndex)))) goto _0802DAE8;
+         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->dungeonIndex != mail->dungeon.dungeonIndex)))) goto _0802DAE8;
     }
-    return 0;
+    return FALSE;
   }
 }
 
 // TODO: merge above with wonder_mail_3.c
 
-bool8 sub_802DB28(u8 jobSlot, u8 param_2)
+bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
 {
   char local_18 [8];
   
-  sub_8096AF8(local_18,jobSlot,param_2);
+  sub_8096AF8(local_18,jobSlotIndex,dungeon);
   if (local_18[0] == '\0') {
       return FALSE;
   }
@@ -350,8 +351,8 @@ bool8 sub_802DB28(u8 jobSlot, u8 param_2)
     ResetUnusedInputStruct();
     sub_800641C(0,1,1);
     gUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC),8);
-    gUnknown_203B2FC->jobSlot = jobSlot;
-    gUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlot);
+    gUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
+    gUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlotIndex);
     sub_8096EEC();
     sub_803C21C(gUnknown_203B2FC->jobInfo,&gUnknown_203B2FC->unk8);
     gUnknown_203B2FC->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B2FC->jobInfo->clientSpecies);
@@ -374,7 +375,7 @@ u32 sub_802DBD4(void)
     switch(gUnknown_203B2FC->state)
     {
         case 7:
-            gUnknown_203B2FC->jobInfo->mailType = 7;
+            gUnknown_203B2FC->jobInfo->mailType = WONDER_MAIL_TYPE_OKD;
             return 3;
         case 6:
             sub_802DE44();
@@ -407,15 +408,15 @@ void sub_802DC28(u32 newState)
 
 void sub_802DC40(void)
 {
-    s32 iVar3;
+    s32 index;
     sub_8006518(gUnknown_203B2FC->unk48);
     switch(gUnknown_203B2FC->state)
     {
         case 0:
         case 7:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2FC->unk48[iVar3]  = gUnknown_80E016C;
+                gUnknown_203B2FC->unk48[index]  = gUnknown_80E016C;
             }
             break;
     }

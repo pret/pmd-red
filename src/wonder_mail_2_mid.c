@@ -5,6 +5,7 @@
 #include "memory.h"
 #include "text.h"
 #include "pokemon_mail.h"
+#include "wonder_mail.h"
 
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
@@ -24,10 +25,10 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 
 extern s32 sub_8013800(u32 *, s32);
-extern u8 *sub_8096574(u32);
-extern void sub_803B35C(u8 *, u32 *);
+extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
+extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
-extern u8 sub_80968B0(u8 *);
+extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern void CreateRescueTitle(void *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 extern void sub_8012BC4(s32, s32, s32, s32 ,s32 ,s32);
@@ -97,9 +98,7 @@ extern struct UnkTextStruct2 gUnknown_80DFC9C;
 
 extern u16 gUnknown_203B2E4;
 
-extern u8 *sub_8095FE8(u8);
-extern u8 sub_80968B0(u8 *);
-extern void sub_803B35C(u8 *, u32 *);
+extern struct WonderMail *GetMailboxSlotInfo(u8);
 extern void CreateRescueTitle(void *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
@@ -109,7 +108,7 @@ extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
 {
-  u8 *pcVar2;
+  struct WonderMail *mail;
   s32 y;
   s32 iVar5;
   struct unkStruct_802C39C local;
@@ -121,19 +120,19 @@ void CreateMailMenu(void)
   iVar5 = 0;
   if (iVar5 < gUnknown_203B2D8->unk1E) {
     do {
-      pcVar2 = sub_8095FE8(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + iVar5]);
+      mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + iVar5]);
       local.unk0[0] = gUnknown_203B2D8->unk38;
       local.unk4C = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
-      if (*pcVar2 == 1) {
+      if (mail->mailType == 1) {
         y = sub_8013800(&gUnknown_203B2D8->unk4, iVar5);
         sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
         PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
-        sprintf_2(buffer, GetPokemonMailHeadline(pcVar2[5]), gAvailablePokemonNames);
+        sprintf_2(buffer, GetPokemonMailHeadline(mail->dungeon.dungeonFloor), gAvailablePokemonNames);
         xxx_call_draw_string(0x15,y,buffer,gUnknown_203B2D8->unk38,0);
       }
       else {
-       sub_803B35C(pcVar2,local.unk0);
-        if (sub_80968B0(pcVar2) != 0) {
+       sub_803B35C(mail,local.unk0);
+        if (IsMailinJobSlot(mail)) {
           local.unk3C[11] = 2;
         }
         CreateRescueTitle(&local);
@@ -240,19 +239,15 @@ u8 sub_802C26C(void)
     return gUnknown_203B2E0->unk0[(gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24) + gUnknown_203B2E0->unk20];
 }
 
-void sub_802C28C(u32 r0)
+void sub_802C28C(u8 r0)
 {
-    u8 r0_u8;
-
-    r0_u8 = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
     gUnknown_203B2E0->unk2A = sub_802C474();
     sub_8013984(&gUnknown_203B2E0->unk8);
     sub_802C328();
     sub_802C39C();
-    if(r0_u8)
+    if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E0->unk8);
 }
 
@@ -332,7 +327,7 @@ void sub_802C328(void)
 void sub_802C39C(void)
 {
   u32 uVar1;
-  u8 *uVar3;
+  struct WonderMail *mail;
   s32 iVar4;
   s32 x;
   s32 iVar6;
@@ -353,11 +348,11 @@ void sub_802C39C(void)
     do 
     {
         uVar1 = (gUnknown_203B2E0->unk0[gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24 + iVar6]);
-        uVar3 = sub_8096574(uVar1);
+        mail = GetPelipperBoardSlotInfo(uVar1);
         local.unk0[0] = gUnknown_203B2E0->unk3C;
         local.unk4C = sub_8013800(&gUnknown_203B2E0->unk8,iVar6);
-        sub_803B35C(uVar3,local.unk0);
-        if (sub_80968B0(sub_8096574(uVar1)) != '\0') {
+        sub_803B35C(mail,local.unk0);
+        if (IsMailinJobSlot(GetPelipperBoardSlotInfo(uVar1))) {
             local.unk3C[11] = 2;
         }
         CreateRescueTitle(&local);

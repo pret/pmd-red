@@ -49,16 +49,16 @@ extern u8 sub_801CF50(u32);
 
 void sub_8018588(void)
 {
-    s32 temp;
-    temp = 0;
+    s32 menuAction;
+    menuAction = 0;
 
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
-        sub_8013114(&gUnknown_203B20C->unk70, &temp);
-        if(temp != 1) gUnknown_203B20C->unk14 = temp;
+        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+        if(menuAction != 1) gUnknown_203B20C->unk14 = menuAction;
     }
 
-    switch(temp)
+    switch(menuAction)
     {
         case 2:
             if((GetNumberOfFilledInventorySlots() != 0) && sub_801CF50(0) == 0)
@@ -80,19 +80,19 @@ void sub_8018588(void)
 
 void sub_8018620(void)
 {
-    s32 iVar6;
+    s32 index;
     switch(sub_801A6E8(1))
     {
         case 3:
             if(sub_801AEA8() != 0)
             {
-                for(iVar6 = 0; iVar6 < INVENTORY_SIZE; iVar6++)
+                for(index = 0; index < INVENTORY_SIZE; index++)
                 {
-                    if(sub_801AED0(iVar6) != 0)
+                    if(sub_801AED0(index) != 0)
                     {
-                        MoveToStorage(&gTeamInventory_203B460->teamItems[iVar6]);
-                        gTeamInventory_203B460->teamItems[iVar6].itemIndex = 0;
-                        gTeamInventory_203B460->teamItems[iVar6].itemFlags = 0;
+                        MoveToStorage(&gTeamInventory_203B460->teamItems[index]);
+                        gTeamInventory_203B460->teamItems[index].itemIndex = 0;
+                        gTeamInventory_203B460->teamItems[index].itemFlags = 0;
                     }
                 }
                 FillInventoryGaps();

@@ -371,7 +371,7 @@ _0802CD80:
 _0802CD88:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xC]
-	bl sub_8096C3C
+	bl ResetJobSlot
 	bl sub_8096C80
 	bl HasNoAcceptedJobs
 	lsls r0, 24

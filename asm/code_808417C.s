@@ -65,14 +65,14 @@ sub_80841EC:
 	ldr r0, _08084274
 	cmp r1, r0
 	ble _08084278
-	bl sub_8083DE0
+	bl PlayDungeonCompleteBGM
 	b _0808427C
 	.align 2, 0
 _0808426C: .4byte gDungeonGlobalData
 _08084270: .4byte 0x0001ceac
 _08084274: .4byte 0x00000225
 _08084278:
-	bl sub_8083D98
+	bl PlayDungeonFailBGM
 _0808427C:
 	ldr r0, _080842B8
 	ldr r1, [r0]

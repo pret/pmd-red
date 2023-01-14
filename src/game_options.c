@@ -1,11 +1,11 @@
 #include "global.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "code_8092334.h"
 
-struct unkStruct_8109954
+struct WindowBG
 {
     // size: 0x10
-    u32 unk0[4];
+    u32 hexBG[4];
 };
 
 struct unkStruct_8094CB0
@@ -14,54 +14,54 @@ struct unkStruct_8094CB0
     s16 unk2;
 };
 
-extern struct unkStruct_8109954 gUnknown_8109954;
+extern struct WindowBG gWindowBGColors;
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
-extern struct UnkSaveStruct1 gUnknown_2038C70;
-extern void sub_8094C14(void);
+extern struct GameOptions *gGameOptionsRef;
+extern struct GameOptions gGameOptions;
+extern void SetWindowBGColor(void);
 extern void sub_80099F0(u32);
 
 void LoadGameOptions(void)
 {
-    gUnknown_203B46C = &gUnknown_2038C70;
+    gGameOptionsRef = &gGameOptions;
 }
 
-struct UnkSaveStruct1 * GetGameOptions(void)
+struct GameOptions * GetGameOptions(void)
 {
-    return &gUnknown_2038C70;
+    return &gGameOptions;
 }
 
-void InitializeGameOptions(u8 r0)
+void InitializeGameOptions(bool8 initializeGender)
 {
-    gUnknown_203B46C->unk8 = 0;
-    if(r0 != 0)
+    gGameOptionsRef->windowColor = WINDOW_COLOR_BLUE;
+    if(initializeGender)
     {
-        gUnknown_203B46C->playerGender = 0;
+        gGameOptionsRef->playerGender = MALE;
     }
-    gUnknown_203B46C->unk9 = 0;
-    gUnknown_203B46C->unkA = 0;
-    gUnknown_203B46C->unk0 = 0; 
-    gUnknown_203B46C->unk1 = 1;
-    gUnknown_203B46C->unk2 = 1;
-    gUnknown_203B46C->unk3 = 1;
-    gUnknown_203B46C->unk4 = 1;
-    gUnknown_203B46C->unkC = 0;
-    sub_8094C14();
+    gGameOptionsRef->unk9 = 0;
+    gGameOptionsRef->unkA = 0;
+    gGameOptionsRef->dungeonSpeed = DUNGEON_SPEED_SLOW; 
+    gGameOptionsRef->FarOffPals = FAROFFPALS_LOCK;
+    gGameOptionsRef->damageTurn = TRUE;
+    gGameOptionsRef->gridEnable = TRUE;
+    gGameOptionsRef->mapOption = MAP_OPTION_CLEAR;
+    gGameOptionsRef->unkC = 0;
+    SetWindowBGColor();
 }
 
-bool32 GameOptionsNotChange(struct UnkSaveStruct1 *r0)
+bool8 GameOptionsNotChange(struct GameOptions *r0)
 {
     // NOTE: had to nest to match
-    if(gUnknown_203B46C->unk8 == r0->unk8)
-        if(gUnknown_203B46C->unk9 == r0->unk9)
-            if(gUnknown_203B46C->unkA == r0->unkA) 
-                if(gUnknown_203B46C->playerGender == r0->playerGender)
-                    if(gUnknown_203B46C->unk0 == r0->unk0)
-                        if(gUnknown_203B46C->unk1 == r0->unk1) 
-                            if(gUnknown_203B46C->unk2 == r0->unk2)
-                                if(gUnknown_203B46C->unk3 == r0->unk3)
-                                    if(gUnknown_203B46C->unk4 == r0->unk4)
-                                        if(gUnknown_203B46C->unkC == r0->unkC)
+    if(gGameOptionsRef->windowColor == r0->windowColor)
+        if(gGameOptionsRef->unk9 == r0->unk9)
+            if(gGameOptionsRef->unkA == r0->unkA) 
+                if(gGameOptionsRef->playerGender == r0->playerGender)
+                    if(gGameOptionsRef->dungeonSpeed == r0->dungeonSpeed)
+                        if(gGameOptionsRef->FarOffPals == r0->FarOffPals) 
+                            if(gGameOptionsRef->damageTurn == r0->damageTurn)
+                                if(gGameOptionsRef->gridEnable == r0->gridEnable)
+                                    if(gGameOptionsRef->mapOption == r0->mapOption)
+                                        if(gGameOptionsRef->unkC == r0->unkC)
                                             return TRUE;
     return FALSE;
 }
@@ -76,9 +76,9 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     neg_1 = -1;
     zero = 0;
 
-    SaveIntegerBits(param_1, &gUnknown_203B46C->unk8, 2);
+    SaveIntegerBits(param_1, &gGameOptionsRef->windowColor, 2);
 
-    if(gUnknown_203B46C->unk9 != 0)
+    if(gGameOptionsRef->unk9 != 0)
     {
         puVar2 = &neg_1;
     }
@@ -88,7 +88,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->unkA != 0)
+    if(gGameOptionsRef->unkA != 0)
     {
         puVar2 = &neg_1;
     }
@@ -98,7 +98,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->playerGender != 0)
+    if(gGameOptionsRef->playerGender != MALE)
     {
         puVar2 = &neg_1;
     }
@@ -108,7 +108,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->unk0 != 0)
+    if(gGameOptionsRef->dungeonSpeed != DUNGEON_SPEED_SLOW)
     {
         puVar2 = &neg_1;
     }
@@ -118,7 +118,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->unk1 != 0)
+    if(gGameOptionsRef->FarOffPals != FAROFFPALS_SELF)
     {
         puVar2 = &neg_1;
     }
@@ -128,7 +128,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->unk2 != 0)
+    if(gGameOptionsRef->damageTurn)
     {
         puVar2 = &neg_1;
     }
@@ -138,7 +138,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    if(gUnknown_203B46C->unk3 != 0)
+    if(gGameOptionsRef->gridEnable)
     {
         puVar2 = &neg_1;
     }
@@ -148,89 +148,89 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     }
     SaveIntegerBits(param_1, puVar2, 1);
 
-    SaveIntegerBits(param_1, &gUnknown_203B46C->unk4, 3);
-    SaveIntegerBits(param_1, &gUnknown_203B46C->unkC, 2);
+    SaveIntegerBits(param_1, &gGameOptionsRef->mapOption, NUM_GBA_MAP_OPTIONS);
+    SaveIntegerBits(param_1, &gGameOptionsRef->unkC, 2);
 }
 
 void ReadGameOptions(struct unkStruct_8094924 *param_1)
 {
     u8 byteArray[4];
     RestoreIntegerBits(param_1, byteArray, 2);
-    gUnknown_203B46C->unk8  = byteArray[0] & 3;
+    gGameOptionsRef->windowColor  = byteArray[0] & NUM_WINDOW_COLORS;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unk9  = byteArray[0] & 1;
+    gGameOptionsRef->unk9  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unkA  = byteArray[0] & 1;
+    gGameOptionsRef->unkA  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->playerGender  = byteArray[0] & 1;
+    gGameOptionsRef->playerGender  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unk0  = byteArray[0] & 1;
+    gGameOptionsRef->dungeonSpeed  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unk1  = byteArray[0] & 1;
+    gGameOptionsRef->FarOffPals  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unk2  = byteArray[0] & 1;
+    gGameOptionsRef->damageTurn  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 1);
-    gUnknown_203B46C->unk3  = byteArray[0] & 1;
+    gGameOptionsRef->gridEnable  = byteArray[0] & 1;
 
     RestoreIntegerBits(param_1, byteArray, 3);
-    gUnknown_203B46C->unk4  = byteArray[0] & 7;
+    gGameOptionsRef->mapOption  = byteArray[0] & NUM_DS_MAP_OPTIONS;
 
     RestoreIntegerBits(param_1, byteArray, 2);
-    gUnknown_203B46C->unkC  = byteArray[0] & 3;
+    gGameOptionsRef->unkC  = byteArray[0] & 3;
 
-    sub_8094C14();
+    SetWindowBGColor();
 }
 
-void sub_8094C14(void)
+void SetWindowBGColor(void)
 {
-    struct unkStruct_8109954 temp;
+    struct WindowBG temp;
 
-    temp = gUnknown_8109954;
+    temp = gWindowBGColors;
 
-    sub_80099F0(temp.unk0[gUnknown_203B46C->unk8 & 3]);
+    sub_80099F0(temp.hexBG[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);
 }
 
-u32 sub_8094C48(void)
+bool8 sub_8094C48(void)
 {
-    switch(gUnknown_203B46C->unk4)
+    switch(gGameOptionsRef->mapOption)
     {
         default:
-            return 1;
-        case 0:
-        case 3:
-            return 0;
+            return TRUE;
+        case TOP_TEAM_DATA_NO_BOTTOM:
+        case TOP_MESSAGE_LOG_NO_BOTTOM:
+            return FALSE;
     }
 }
 
-u32 sub_8094C68(void)
+bool8 DoesNotHaveShadedMap(void)
 {
-    switch(gUnknown_203B46C->unk4)
+    switch(gGameOptionsRef->mapOption)
     {
         default:
-            return 1;
-        case 2:
-        case 5:
-            return 0;
+            return TRUE;
+        case TOP_TEAM_DATA_SHADED_MAP_BOTTOM:
+        case TOP_MESSAGE_LOG_SHADED_MAP_BOTTOM:
+            return FALSE;
     }
 }
 
 void sub_8094C88(void)
 {
-    if(gUnknown_203B46C->unk4 < 3)
-        gUnknown_203B46C->unk4 = 1;
+    if(gGameOptionsRef->mapOption < 3)
+        gGameOptionsRef->mapOption = 1;
     else
         {
-            if((u8)(gUnknown_203B46C->unk4 - 3) > 2)
+            if((u8)(gGameOptionsRef->mapOption - 3) > 2)
                 return;
             else
-                gUnknown_203B46C->unk4 = 4;
+                gGameOptionsRef->mapOption = 4;
         }
 }
 
@@ -275,7 +275,7 @@ u32 sub_8094D10(void)
     return 0;
 }
 
-u32 sub_8094D14(void)
+u8 sub_8094D14(void)
 {
     return 0;
 }

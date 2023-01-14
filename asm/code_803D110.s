@@ -2131,7 +2131,7 @@ _0803E138: .4byte 0x0000017d
 	thumb_func_start sub_803E13C
 sub_803E13C:
 	push {r4,r5,lr}
-	bl sub_8094C14
+	bl SetWindowBGColor
 	ldr r0, _0803E170
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xB]
@@ -2156,7 +2156,7 @@ _0803E156:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803E170: .4byte gUnknown_203B46C
+_0803E170: .4byte gGameOptionsRef
 _0803E174: .4byte gUnknown_202D038
 	thumb_func_end sub_803E13C
 
@@ -2713,7 +2713,7 @@ _0803E630: .4byte 0x000181f0
 _0803E634: .4byte 0x000181f2
 _0803E638: .4byte 0x000181fc
 _0803E63C: .4byte gUnknown_202EDD0
-_0803E640: .4byte gUnknown_203B46C
+_0803E640: .4byte gGameOptionsRef
 _0803E644: .4byte 0x00018215
 _0803E648: .4byte 0x0001c06c
 _0803E64C: .4byte gUnknown_203B40D
@@ -2778,7 +2778,7 @@ sub_803E668:
 	bx r0
 	.align 2, 0
 _0803E6F0: .4byte gUnknown_202EDD4
-_0803E6F4: .4byte gUnknown_203B46C
+_0803E6F4: .4byte gGameOptionsRef
 _0803E6F8: .4byte gUnknown_202EDCC
 _0803E6FC: .4byte gPlayTimeRef
 _0803E700: .4byte gDungeonGlobalData
@@ -4467,7 +4467,7 @@ _0803F410: .4byte gDungeonGlobalData
 _0803F414: .4byte 0x000181e8
 _0803F418: .4byte 0x0000ffff
 _0803F41C: .4byte 0x00018228
-_0803F420: .4byte gUnknown_203B46C
+_0803F420: .4byte gGameOptionsRef
 _0803F424: .4byte gUnknown_202D06C
 	thumb_func_end sub_803F38C
 
@@ -5610,7 +5610,7 @@ _0803FCB0:
 	movs r0, 0
 	b _0803FD00
 	.align 2, 0
-_0803FCE4: .4byte gUnknown_203B46C
+_0803FCE4: .4byte gGameOptionsRef
 _0803FCE8: .4byte gUnknown_202D068
 _0803FCEC: .4byte gUnknown_202B038
 _0803FCF0: .4byte gDungeonGlobalData

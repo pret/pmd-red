@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "input.h"
 #include "main_menu.h"
 #include "play_time.h"
@@ -47,7 +48,6 @@ extern void sub_8035CF4(u32 *, u32, u32);
 extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
-extern void sub_8095240(u32);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
@@ -58,7 +58,6 @@ extern u32 GetNumAdventures(void);
 extern void xxx_call_draw_string(u32 x, u32 y, const u8 *, u32, u32);
 extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
 extern void sub_80922B4(u8 *, const u8 *, u32);
-extern s32 sub_8095324(u32);
 extern u32 sub_8001658(u32, u32);
 extern void sub_80073E0(u32);
 
@@ -317,7 +316,7 @@ void DrawLoadScreenText(void)
   xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
-  if ((sub_8095324(1) != 0) || (sub_8095324(7) != 0)) {
+  if ((CountMailType(WONDER_MAIL_TYPE_SOS) != 0) || (CountMailType(WONDER_MAIL_TYPE_OKD) != 0)) {
     if (iVar2 == 0xf1207)
         PrintDungeonLocationtoBuffer(gLoadScreen->formattedLocation,GetDungeonLocationInfo());
     else
@@ -389,27 +388,27 @@ void DrawLoadScreenText(void)
 void sub_80397B4(void)
 {
   struct OpenedFile *clmkFile;
-  int iVar3;
-  int iVar4;
-  s32 other_arg;
+  int index;
+  int x;
+  s32 y;
 
   clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
 
-  for(iVar3 = 0; iVar3 < 64; iVar3++)
+  for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(iVar3 + 176,*(int *)((clmkFile->data) + 4) + iVar3 * 4);
+    SetBGPaletteBufferColorArray(index + 176,*(int *)((clmkFile->data) + 4) + index * 4);
   }
 
-  iVar4 = 8;
-  other_arg = 0x49;
+  x = 8;
+  y = 0x49;
 
   // Draw the 12 legendary icons
-  for(iVar3 = 0; iVar3 < 12; iVar3++)
+  for(index = 0; index < 12; index++)
   {
-    if (sub_80023E4(gUnknown_203B3B8[iVar3])) {
-      sub_8007E20(0,iVar4,other_arg,0x10,0x10,*(int *)(clmkFile->data) + iVar3 * 0x80,
-                  gUnknown_203B388[iVar3]);
-      iVar4 += 16;
+    if (sub_80023E4(gUnknown_203B3B8[index])) {
+      sub_8007E20(0,x,y,0x10,0x10,*(int *)(clmkFile->data) + index * 0x80,
+                  gUnknown_203B388[index]);
+      x += 16;
     }
   }
   CloseFile(clmkFile);
@@ -422,7 +421,7 @@ bool8 IsQuickSave(void)
 
   iVar1 = sub_8011FA8();
   isQuicksave = FALSE;
-  if (sub_8095324(1) != 0 || sub_8095324(7) != 0)
+  if (CountMailType(WONDER_MAIL_TYPE_SOS) != 0 || CountMailType(WONDER_MAIL_TYPE_OKD) != 0)
   {
       if (iVar1 == 0xf1207)
         isQuicksave  = TRUE;

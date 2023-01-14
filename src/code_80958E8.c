@@ -3,12 +3,12 @@
 #include "item.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
-#include "sub_8095228.h"
 #include "wonder_mail.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
 #include "code_80958E8.h"
-
+#include "pokemon.h"
+#include "code_8094F88.h"
 
 extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(struct DungeonLocation *);
@@ -19,52 +19,52 @@ extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemCount(u8);
 extern bool8 sub_803C0DC(s16);
-extern void sub_8096040(u8);
-extern void sub_80965B8(u8);
-extern void sub_8096C3C(u8);
+extern void ResetMailboxSlot(u8);
+extern void ResetPelipperBoardSlot(u8);
+extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(struct WonderMail *);
 
 extern struct unkStruct_203B490 *gUnknown_203B490;
 extern struct unkStruct_203B490 gUnknown_2039448;
 
-void sub_80958E8()
+void LoadMailInfo(void)
 {
     gUnknown_203B490 = &gUnknown_2039448;
 }
 
-struct unkStruct_203B490 *sub_80958F8(void)
+struct unkStruct_203B490 *GetMailInfo(void)
 {
     return &gUnknown_2039448;
 }
 
-void sub_8095900(void)
+void InitializeMailJobsNews(void)
 {
-    s32 iVar2;
-    for(iVar2 = 0; iVar2 < 4; iVar2++)
+    s32 index;
+    for(index = 0; index < 4; index++)
     {
-        sub_8096040(iVar2);
+        ResetMailboxSlot(index);
     }
-    for(iVar2 = 0; iVar2 < 8; iVar2++)
+    for(index = 0; index < 8; index++)
     {
-        sub_80965B8(iVar2);
+        ResetPelipperBoardSlot(index);
     }
-    for(iVar2 = 0; iVar2 < 8; iVar2++)
+    for(index = 0; index < 8; index++)
     {
-        sub_8096C3C(iVar2);
+        ResetJobSlot(index);
     }
-    for(iVar2 = 0; iVar2 < 0x38; iVar2++)
+    for(index = 0; index < 56; index++)
     {
-        gUnknown_203B490->unk2F0[iVar2] = 0;
+        gUnknown_203B490->PKMNNewsReceived[index] = FALSE;
     }
-    gUnknown_203B490->unk328 = 0;
+    gUnknown_203B490->unk328 = FALSE;
     MemoryClear8(gUnknown_203B490->unk190, sizeof(gUnknown_203B490->unk190));
     MemoryClear8(gUnknown_203B490->unk1B8, sizeof(gUnknown_203B490->unk1B8));
-    for(iVar2 = 0; iVar2 < 16; iVar2++)
+    for(index = 0; index < 16; index++)
     {
-        gUnknown_203B490->unk230[iVar2].dungeon = 99;
-        gUnknown_203B490->unk230[iVar2].unk1 = 1;
-        gUnknown_203B490->unk230[iVar2].unk4 = 0;
-        gUnknown_203B490->unk230[iVar2].unk8 = 0;
+        gUnknown_203B490->unk230[index].dungeon.dungeonIndex = 99;
+        gUnknown_203B490->unk230[index].dungeon.dungeonFloor = 1;
+        gUnknown_203B490->unk230[index].unk4 = 0;
+        gUnknown_203B490->unk230[index].unk8 = 0;
     }
 }
 

@@ -7,7 +7,7 @@
 #include "menu.h"
 #include "code_8094F88.h"
 
-extern bool8 sub_8030C20(u32);
+extern bool8 HasNoWonderMailType(u32);
 
 struct unkStruct_203B328
 {
@@ -26,7 +26,7 @@ struct unkStruct_203B328
     /* 0x114 */ u8 unk114;
     /* 0x115 */ u8 unk115;
     /* 0x116 */ u8 unk116;
-    u32 wonderMailMode;
+    u32 wonderMailType;
 };
 extern struct unkStruct_203B328 *gUnknown_203B328;
 extern struct unkStruct_203B480 *gUnknown_203B480;
@@ -103,7 +103,7 @@ extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_8095240(u8);
 
-bool8 sub_8030F58(u32 wonderMailMode)
+bool8 sub_8030F58(u32 wonderMailType)
 {
   struct OpenedFile *iVar3;
   
@@ -113,7 +113,7 @@ bool8 sub_8030F58(u32 wonderMailMode)
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
-  gUnknown_203B328->wonderMailMode = wonderMailMode;
+  gUnknown_203B328->wonderMailType = wonderMailType;
   iVar3 = GetDialogueSpriteDataPtr(SPECIES_PELIPPER);
   gUnknown_203B328->faceFile = iVar3;
   gUnknown_203B328->faceData = iVar3->data;
@@ -123,8 +123,8 @@ bool8 sub_8030F58(u32 wonderMailMode)
   gUnknown_203B328->unk110 = 2;
   gUnknown_203B328->unk112 = 8;
 
-  if (sub_8030C20(wonderMailMode)) {
-    switch(wonderMailMode)
+  if (HasNoWonderMailType(wonderMailType)) {
+    switch(wonderMailType)
     {
         case 2:
             // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
@@ -139,7 +139,7 @@ bool8 sub_8030F58(u32 wonderMailMode)
   }
   else {
     gUnknown_203B328->state = 0;
-    sub_80306A8(wonderMailMode,0,0,8);
+    sub_80306A8(wonderMailType,0,0,8);
   }
   return TRUE;
 }
@@ -299,7 +299,7 @@ void sub_803136C(void)
   }
 }
 
-void sub_80313D8(u32 param_1)
+void sub_80313D8(u32 state)
 {
   s32 iVar2;
   s32 local_10;
@@ -319,7 +319,7 @@ void sub_80313D8(u32 param_1)
         sub_80310E4(0);
         break;
     case 2:
-        switch(param_1)
+        switch(state)
         {
             case 2:
                 sub_8095240(gUnknown_203B328->unk4);
@@ -328,14 +328,14 @@ void sub_80313D8(u32 param_1)
                 for(iVar2 = 0; iVar2 < 0x20; iVar2++)
                 {
                     unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].unk0 = 0;
+                    gUnknown_203B480[iVar2].mailType = 0;
                     unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].unk22 = 0;
+                    gUnknown_203B480[iVar2].unk20.itemIndex = 0;
                 }
                 break;
         }
-        if ((gUnknown_203B328->wonderMailMode == 2) || (gUnknown_203B328->wonderMailMode == 4)) {
-            if (sub_8030C20(gUnknown_203B328->wonderMailMode) != 0) {
+        if ((gUnknown_203B328->wonderMailType == 2) || (gUnknown_203B328->wonderMailType == 4)) {
+            if (HasNoWonderMailType(gUnknown_203B328->wonderMailType)) {
                 sub_80310E4(5);
             }
             else {

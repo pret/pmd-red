@@ -670,7 +670,7 @@ void PierceStatusTarget(struct DungeonEntity * pokemon, struct DungeonEntity * t
     DungeonEntityUpdateStatusSprites(target);
 }
 
-void sub_8079618(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 newStatus, struct PokemonMove *move, u8 *message)
+void SetChargeStatusTarget(struct DungeonEntity *pokemon, struct DungeonEntity *target, u8 newStatus, struct PokemonMove *move, u8 *message)
 {
   bool8 bVar2;
   struct PokemonMove *movePtr;
@@ -1634,7 +1634,7 @@ void sub_807A96C(struct DungeonEntity *pokemon, struct DungeonEntity *target)
 "_0807A9AC: .4byte 0x00007f01");
 }
 
-void sub_807A9B0(struct DungeonEntity * pokemon)
+void WakeUpPokemon(struct DungeonEntity * pokemon)
 {
   struct DungeonEntityData *entityData;
   
@@ -1715,7 +1715,7 @@ void sub_807AA30(void)
 
       if (forceWakeup) {
 _WakeUp:
-        sub_807A9B0(wildEntity);
+        WakeUpPokemon(wildEntity);
       }
     }
   }

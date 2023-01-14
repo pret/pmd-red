@@ -1653,7 +1653,7 @@ _08038110:
 	movs r0, 0x7
 	b _08038126
 _08038114:
-	bl sub_8095190
+	bl FindOpenMailSlot
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1

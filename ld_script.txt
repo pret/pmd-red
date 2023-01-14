@@ -82,6 +82,8 @@ SECTIONS {
         src/flash.o(.text);
         src/code_800D090.o(.text);
         asm/code_800D090.o(.text);
+        src/code_800DAC0.o(.text);
+        asm/code_800DAC0.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);
         src/save.o(.text);
@@ -116,6 +118,8 @@ SECTIONS {
         asm/gulpin_shop.o(.text);
         src/gulpin_shop_1.o(.text);
         asm/code_801EE10.o(.text);
+        src/code_8023144.o(.text);
+        asm/code_801EE10_1.o(.text);
         src/code_801EE10.o(.text);
         src/luminous_cave.o(.text);
         src/friend_list_menu_1.o(.text);
@@ -146,7 +150,6 @@ SECTIONS {
         asm/makuhita_dojo.o(.text);
         src/makuhita_dojo_1.o(.text);
         src/wonder_mail_4.o(.text);
-        asm/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
         asm/wonder_mail_5.o(.text);
         src/wonder_mail_6.o(.text);
@@ -229,13 +232,12 @@ SECTIONS {
         src/code_806CD90.o(.text);
         asm/code_806CD90.o(.text);
         src/type_effectiveness.o(.text);
+        src/code_806E8B0.o(.text);
         asm/code_806E8B0.o(.text);
         src/status_checks.o(.text);
-        asm/code_80701A4.o(.text);
         src/dungeon_movement.o(.text);
         asm/code_807034C.o(.text);
         src/dungeon_movement_1.o(.text);
-        asm/code_807049C.o(.text);
         src/status_checks_1.o(.text);
         src/dungeon_capabilities.o(.text);
         asm/code_8070BC0.o(.text);
@@ -318,6 +320,10 @@ SECTIONS {
         src/code_8095824.o(.text);
         src/code_80958E8.o(.text);
         asm/code_80958E8.o(.text);
+        src/mailbox_8095F8C.o(.text);
+        asm/code_80958E8_1.o(.text);
+        src/code_80958E8_1.o(.text);
+        asm/code_8096AF8.o(.text);
         src/code_80972F4.o(.text);
         asm/code_8097318.o(.text);
         src/code_809747C.o(.text);
@@ -424,6 +430,8 @@ SECTIONS {
         src/debug.o(.rodata);
         src/save.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/friend_area_action_menu.o(.rodata);
+        src/friend_area_action_menu_1.o(.rodata);
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);
@@ -441,6 +449,7 @@ SECTIONS {
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
         src/main_menu.o(.rodata);
+        src/trade_items_menu.o(.rodata);
         data/data_80E59A8.o(.rodata);
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);
@@ -480,6 +489,8 @@ SECTIONS {
         data/data_810AE24.o(.rodata);
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);
+        src/ground_main.o(.rodata);
+        data/data_8115F5C.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         data/cutscenes.o(.rodata);
         data/cutscenes_1.o(.rodata);

@@ -4,27 +4,8 @@
 #include "input.h"
 #include "memory.h"
 #include "text.h"
-
-struct unkStruct_203B318
-{
-    // size: 0xcc
-    u32 unk0;
-    u32 unk4;
-    s32 state;
-    u8 fillC[0x10 - 0xC];
-    s16 unk10;
-    u8 fill[0x58 - 0x12];
-    struct OpenedFile *faceFile;
-    u8 *faceData;
-    u16 unk60;
-    u16 unk62;
-    u8 unk64;
-    u8 unk65;
-    u8 unk66;
-    u8 unk67;
-    struct OpenedFile** unk68;
-    struct UnkTextStruct2 unk6C[4];
-};
+#include "menu.h"
+#include "makuhita_dojo.h"
 
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];

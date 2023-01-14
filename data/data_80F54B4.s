@@ -15,8 +15,9 @@ gWarpScarfActivationChances: @ 80F5594
 
 	.global gUnknown_80F55BC
 gUnknown_80F55BC: @ 80F55BC
-	.incbin "baserom.gba", 0xF55BC, 0x30
+        .2byte 50, 5, 100, 10, 200, 15, 300, 20, 400, 25, 500, 30, 600, 35, 700, 40, 800, 45, 1000, 45, 10000, 9999, -1, 1
 
 	.global gUnknown_80F55EC
 gUnknown_80F55EC: @ 80F55EC
-	.incbin "baserom.gba", 0xF55EC, 0x30
+        .2byte  0, 9999, 50, 45, 100, 40, 200, 35, 300, 30, 400, 25, 500, 20, 600, 15, 700, 10, 1000, 5, 10000, 1, -1, 1
+

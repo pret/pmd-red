@@ -9,18 +9,16 @@ struct unkStruct_203B210
 {
     // size: 0x148
     u32 unk0;
-    bool8 unk4;
+    bool8 isKecleonItemShop; // FALSE indicates it is Kecleon TM Shop
     u8 fill5[3];
     u32 currState;
-    u32 unkC;
+    u32 fallbackState;
     s32 itemSellPrice;
-    u32 unk14;
-    s32 unk18;
+    u32 numInventoryItemToSell;
+    s32 inventoryItemSellPrice;
     struct ItemSlot unk1C;
-    u8 unk20;
-    u8 unk21;
-    u8 unk22;
-    u8 unk23;
+    u8 itemShopItemIndex;
+    u8 wareShopItemIndex;
     u32 unk24;
     u32 unk28;
     u32 unk2C;

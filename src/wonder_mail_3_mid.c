@@ -12,7 +12,7 @@
 struct unkStruct_803B344
 {
     // size: 0xB4
-    struct WonderMail unk0;
+    struct WonderMail mail;
     u8* unk14;
     u8* unk18;
     u8 fill1C[0x3C - 0x1C];
@@ -119,7 +119,7 @@ extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
 extern s32 sub_80144A4(s32 *);
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
-extern void sub_803B35C(void *, u32 *);
+extern void sub_803B35C(struct WonderMail*, u32 *);
 extern void sub_802DE84(u32 *);
 extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802CDD4(u32);
@@ -364,7 +364,7 @@ void sub_802F088(void)
             break;
         case 3:
             temp = sub_803B344(gUnknown_203B30C->unk4);
-            sub_803B35C(temp, &gUnknown_203B30C->unk8);
+            sub_803B35C(&temp->mail, &gUnknown_203B30C->unk8);
             gUnknown_203B30C->unk8 = 3;
             gUnknown_203B30C->unk4C = 0;
             gUnknown_203B30C->unk58 = temp->unk18;
@@ -834,18 +834,14 @@ s16 sub_802F90C(void)
     return gUnknown_203B314->unk0[(gUnknown_203B314->unkDA * gUnknown_203B314->unkD8) + gUnknown_203B314->unkD4];
 }
 
-void sub_802F938(u32 r0)
+void sub_802F938(u8 r0)
 {
-    u8 r0_u8;
-
-    r0_u8 = r0;
-
     gUnknown_203B314->unkDE = sub_802FBF4();
     sub_8013984(&gUnknown_203B314->unkBC);
     sub_802F9C0();
     sub_802FA50();
 
-    if(r0_u8 != 0)
+    if(r0 != 0)
         AddMenuCursorSprite(&gUnknown_203B314->unkBC);
 }
 

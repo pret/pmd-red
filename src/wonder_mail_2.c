@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "file_system.h"
 #include "input.h"
 #include "pokemon.h"
@@ -7,10 +8,10 @@
 #include "text.h"
 #include "menu.h"
 #include "save.h"
-#include "sub_8095228.h"
-#include "gUnknown_203B46C.h"
+#include "game_options.h"
 #include "wonder_mail.h"
 #include "code_800D090.h"
+#include "code_8094F88.h"
 
 struct unkStruct_203B2C8
 {
@@ -92,7 +93,7 @@ struct unkStruct_203B2D8
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
 
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptionsRef;
 
 
 extern s32 GetNumPKMNNews(void);
@@ -359,7 +360,7 @@ void nullsub_132(void)
 
 void sub_802B3E0(void)
 {
-  struct unkStruct_8095228 *iVar3;
+  struct unkStruct_203B480 *mail;
   char *monName;
   char teamNameBuffer[40];
 
@@ -385,9 +386,9 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk114.unk16 = 2;
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
-        iVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-        sub_803C37C(&iVar3->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&iVar3->dungeon, 0);
+        mail = sub_8095228(gUnknown_203B2C8->unk1);
+        sub_803C37C(&mail->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = 0;
         gUnknown_203B2C8->unk114.itemRewards[2] = 0;
         gUnknown_203B2C8->unk114.numItems = 10;
@@ -441,14 +442,14 @@ void sub_802B57C(void)
 void sub_802B5B8(void)
 {
   u32 uVar2;
-  struct unkStruct_8095228 *puVar3;
+  struct unkStruct_203B480 *mail;
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
     uVar2 = sub_8011C34();
-    puVar3 = sub_8095228(gUnknown_203B2C8->unk1);
-    puVar3->mailType = 4;
-    puVar3->unk28 = uVar2;
+    mail = sub_8095228(gUnknown_203B2C8->unk1);
+    mail->mailType = WONDER_MAIL_TYPE_AOK;
+    mail->unk28 = uVar2;
     sub_802B548(3);
     sub_8011C28(1);
     PrepareSavePakWrite(SPECIES_NONE);
@@ -557,12 +558,8 @@ u8 GetPokemonNewsIndex(void)
     return gUnknown_203B2CC->receivedNewsletters[(gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + gUnknown_203B2CC->unk50];
 }
 
-void sub_802B7D0(u32 r0)
+void sub_802B7D0(u8 r0)
 {
-    u8 temp;
-
-    temp = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2CC->unk74, 0, 0);
 
@@ -571,7 +568,7 @@ void sub_802B7D0(u32 r0)
     sub_802B880();
     sub_802B8D4();
 
-    if(temp != 0)
+    if(r0 != 0)
     {
         AddMenuCursorSprite(&gUnknown_203B2CC->unk38);
     }
@@ -666,16 +663,16 @@ void sub_802B8D4(void)
 
 s32 GetNumPKMNNews(void)
 {
-    s32 iVar2;
+    s32 index;
     s32 newsCount;
 
     newsCount = 0;
 
-    for(iVar2 = 0; iVar2 < NUM_POKEMON_NEWS; iVar2++)
+    for(index = 0; index < NUM_POKEMON_NEWS; index++)
     {
-        if(CheckPKMNNewsSlot(iVar2))
+        if(CheckPKMNNewsSlot(index))
         {
-            gUnknown_203B2CC->receivedNewsletters[newsCount] = iVar2;
+            gUnknown_203B2CC->receivedNewsletters[newsCount] = index;
             newsCount++;
         }
     }
@@ -684,11 +681,11 @@ s32 GetNumPKMNNews(void)
 
 bool8 HasNoPKMNNews(void)
 {
-    s32 iVar2;
+    s32 index;
 
-    for(iVar2 = 0; iVar2 < NUM_POKEMON_NEWS; iVar2++)
+    for(index = 0; index < NUM_POKEMON_NEWS; index++)
     {
-        if(CheckPKMNNewsSlot(iVar2))
+        if(CheckPKMNNewsSlot(index))
         {
             return FALSE;
         }
@@ -823,7 +820,7 @@ void sub_802BC08(void)
 void sub_802BC7C(void)
 {
     PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
-    if(gUnknown_203B46C->playerGender == FEMALE)
+    if(gGameOptionsRef->playerGender == FEMALE)
     {
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC4C); // She
     }
@@ -921,12 +918,8 @@ u8 sub_802BE74(void) {
   return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + gUnknown_203B2D8->unk1C];
 }
 
-void sub_802BE94(u32 r0)
+void sub_802BE94(u8 r0)
 {
-    u8 temp;
-
-    temp = r0;
-
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2D8->unk40, 0, 0);
 
@@ -935,7 +928,7 @@ void sub_802BE94(u32 r0)
     sub_802BF30();
     CreateMailMenu();
 
-    if(temp != 0)
+    if(r0 != 0)
     {
         AddMenuCursorSprite(&gUnknown_203B2D8->unk4);
     }

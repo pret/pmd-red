@@ -6,6 +6,7 @@
 #include "adventure_log.h"
 #include "debug_menu.h"
 #include "ds_menus.h"
+#include "pokemon.h"
 #include "friend_rescue.h"
 #include "load_screen.h"
 #include "main_menu.h"
@@ -13,6 +14,7 @@
 #include "rescue_password_menu.h"
 #include "save.h"
 #include "trade_items_menu.h"
+#include "constants/wonder_mail.h"
 
 // NOTE: 0x13 and 0x14 
 // Communication Screen?
@@ -61,7 +63,7 @@ EWRAM_DATA struct unkStruct_203B34C *gUnknown_203B34C;
 EWRAM_DATA u32 gUnknown_203B350;
 EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
 
-extern void sub_8094C14(void);
+extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
 extern void CreateWonderMailMenu(void);
@@ -77,7 +79,6 @@ extern void CleanSaveMenu(void);
 extern u8 sub_8012FD8(u32 *);
 extern void sub_8013114(u32 *, s32 *);
 extern u8 sub_803D0D8();
-extern s32 sub_8095324(u32);
 extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 
@@ -87,7 +88,6 @@ s32 sub_8035DB4(u32);
 void sub_803623C(void);
 bool8 SetMainMenuText();
 void SetMainMenuItems();
-void sub_8035DA0(void);
 
 static const u8 sUnknown_80E5CE4[];
 static const u8 sUnknown_80E5CE8[];
@@ -428,7 +428,7 @@ void SetUpMenu(void)
   if (gMainMenu->currMenu != gMainMenu->nextMenu) {
     switch(gMainMenu->nextMenu) {
         case MENU_MAIN_SCREEN:
-            sub_8094C14();
+            SetWindowBGColor();
             sub_8099690(0);
             DrawMainMenu();
             break;
@@ -728,33 +728,35 @@ s32 sub_8035D74(void)
     return gMainMenu->unk3C;
 }
 
-
 // Unused
-NAKED
-void sub_8035D80(void *r0)
+void sub_8035D80(struct unkStruct_8035D94 *item)
 {
-    asm_unified(
-	"\tldr r1, _08035D90\n"
-	"\tldr r2, [r1]\n"
-	"\tldr r1, [r0, 0x4]\n"
-	"\tldr r0, [r0]\n"
-	"\tstr r0, [r2, 0x30]\n"
-	"\tstr r1, [r2, 0x34]\n"
-	"\tbx lr\n"
-	"\t.align 2, 0\n"
-"_08035D90: .4byte gMainMenu");
+
+#ifndef NONMATCHING
+    register u32 numItem asm("r1");
+#else
+    u32 numItem;
+#endif
+
+    u32 itemIndex;
+    struct MainMenu *preload;
+
+    preload = gMainMenu;
+    numItem = item->numItems;
+    itemIndex = item->itemIndex.itemIndex_u32;
+    preload->unk30.itemIndex.itemIndex_u32 = itemIndex;
+    preload->unk30.numItems = numItem;
 }
 
-u8 *sub_8035D94(void)
+struct unkStruct_8035D94 *sub_8035D94(void)
 {
     return &gMainMenu->unk30;
 }
 
-
 void sub_8035DA0(void)
 {
-    gMainMenu->unk30 = 0;
-    gMainMenu->unk34 = 0;
+    gMainMenu->unk30.itemIndex.itemIndex_u8 = ITEM_ID_NOTHING;
+    gMainMenu->unk30.numItems = 0;
 }
 
 s32 sub_8035DB4(u32 currMenu)
@@ -992,8 +994,8 @@ void sub_803623C(void)
 void SetMainMenuItems(void)
 { 
   if (sub_8011C34() != -1) {
-    if (sub_8095324(1) == 0) {
-      if (sub_8095324(7) != 0) {
+    if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0) {
+      if (CountMailType(WONDER_MAIL_TYPE_OKD) != 0) {
         if (sub_803D0D8() != 0) {
             // Revive Team
             // Delete Save Data

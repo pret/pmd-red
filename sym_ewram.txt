@@ -933,7 +933,7 @@ gMovesData = .; /* 2038C68 */
 gMovesRelated_2038C6C = .; /* 2038C6C */
 	. += 0x4;
 
-gUnknown_2038C70 = .; /* 2038C70 */
+gGameOptions = .; /* 2038C70 */
 	. += 0x10;
 
 gPlayTime = .; /* 2038C80 */

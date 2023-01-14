@@ -6,8 +6,8 @@
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
-#include "sub_8095228.h"
 #include "wonder_mail.h"
+#include "code_8094F88.h"
 
 struct PostOfficeHelper
 {
@@ -597,13 +597,13 @@ void DisplayMissionObjectives(void)
 {
     s32 yCoord;
     s32 jobSlotIdx;
-    struct unkStruct_8095228 *iVar8;
+    struct unkStruct_203B480 *mail;
     struct WonderMail *jobInfo;
-    u8 auStack248 [100];
+    u8 buffer [100];
     volatile u8 local_94;
-    u8 auStack144 [100];
-    short auStack44;
-    short local_2a;
+    u8 buffer1 [100];
+    s16 auStack44;
+    s16 missionIndex;
     u8 local_test;
 
     sub_80073B8(gUnknown_203B330->unk10);
@@ -613,14 +613,14 @@ void DisplayMissionObjectives(void)
     {
         case 1:
             sub_8099394(&local_94);
-            iVar8 = sub_8095228(local_94);
+            mail = sub_8095228(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
-            sprintf_2(auStack248,gUnknown_80E1F3C,iVar8->dungeon.dungeonFloor);
-            xxx_call_draw_string(0x15,16,auStack248,gUnknown_203B330->unk10,0);
+            sprintf_2(buffer,gUnknown_80E1F3C,mail->dungeon.dungeonFloor);
+            xxx_call_draw_string(0x15,16,buffer,gUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
-            sprintf_2(auStack248,gUnknown_80E1F40,GetMonSpecies(iVar8->clientSpecies));
-            xxx_call_draw_string(0x28,16,auStack248,gUnknown_203B330->unk10,0);
+            sprintf_2(buffer,gUnknown_80E1F40,GetMonSpecies(mail->clientSpecies));
+            xxx_call_draw_string(0x28,16,buffer,gUnknown_203B330->unk10,0);
             break;
         case 2:
             if (CountJobsinDungeon(gUnknown_203B330->dungeonIndex) == 0) {
@@ -639,32 +639,32 @@ void DisplayMissionObjectives(void)
                         ) && (jobInfo->mailType != 5)) && (jobInfo->mailType != 7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
-                            sprintf_2(auStack144,gUnknown_80E1F3C,jobInfo->dungeon.dungeonFloor);
-                            xxx_call_draw_string(21,yCoord,auStack144,gUnknown_203B330->unk10,0);
+                            sprintf_2(buffer1,gUnknown_80E1F3C,jobInfo->dungeon.dungeonFloor);
+                            xxx_call_draw_string(21,yCoord,buffer1,gUnknown_203B330->unk10,0);
                         }
                         switch(jobInfo->missionType)
                         {
                             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
                                 // Bring #C4%s#R
                                 sub_8090DC4(gUnknown_202DE58,jobInfo->targetItem,0);
-                                sprintf_2(auStack144,gUnknown_80E1F60,gUnknown_202DE58);
-                                xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
+                                sprintf_2(buffer1,gUnknown_80E1F60,gUnknown_202DE58);
+                                xxx_call_draw_string(40,yCoord,buffer1,gUnknown_203B330->unk10,0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
                                 // Find #C4%s#R
                                 sub_8090DC4(gUnknown_202DE58,jobInfo->targetItem,0);
-                                sprintf_2(auStack144,gUnknown_80E1F70,gUnknown_202DE58);
-                                xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
+                                sprintf_2(buffer1,gUnknown_80E1F70,gUnknown_202DE58);
+                                xxx_call_draw_string(40,yCoord,buffer1,gUnknown_203B330->unk10,0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:
                                 // Escort to #C6$s#R
-                                sprintf_2(auStack144,gUnknown_80E1F80,GetMonSpecies(jobInfo->targetSpecies));
-                                xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
+                                sprintf_2(buffer1,gUnknown_80E1F80,GetMonSpecies(jobInfo->targetSpecies));
+                                xxx_call_draw_string(40,yCoord,buffer1,gUnknown_203B330->unk10,0);
                                 break;
                             default:
                                 // Rescue #C6%s#R
-                                sprintf_2(auStack144,gUnknown_80E1F40,GetMonSpecies(jobInfo->targetSpecies));
-                                xxx_call_draw_string(40,yCoord,auStack144,gUnknown_203B330->unk10,0);
+                                sprintf_2(buffer1,gUnknown_80E1F40,GetMonSpecies(jobInfo->targetSpecies));
+                                xxx_call_draw_string(40,yCoord,buffer1,gUnknown_203B330->unk10,0);
                                 break;
                         }
                         yCoord = yCoord + 12;
@@ -675,8 +675,8 @@ void DisplayMissionObjectives(void)
         case 3:
         case 0:
         default:
-          if (sub_80992E0(&auStack44,&local_2a) != 0)
-            xxx_call_draw_string(10,16,GetCurrentMissionText(local_2a),gUnknown_203B330->unk10,0);
+          if (sub_80992E0(&auStack44,&missionIndex) != 0)
+            xxx_call_draw_string(10,16,GetCurrentMissionText(missionIndex),gUnknown_203B330->unk10,0);
           else if (sub_8099360(&local_test) != 0)
             xxx_call_draw_string(10,16,sub_80975DC(sub_80A2688(local_test)),gUnknown_203B330->unk10,0);
           else

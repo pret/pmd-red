@@ -7,21 +7,14 @@
 #include "bg.h"
 #include "input.h"
 #include "config.h"
-
+#include "game_options.h"
 
 void xxx_call_stop_bgm(void);
 
 extern bool8 sub_80023E4(u8);
 extern void xxx_call_stop_fanfare_se(u16 r0);
 
-struct UnkSaveStruct1
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ u8 unkA;
-};
-extern struct UnkSaveStruct1 *gUnknown_203B46C;
+extern struct GameOptions *gGameOptionsRef;
 
 struct UnkBgStruct
 {
@@ -69,7 +62,7 @@ void sub_801169C(void)
     return_var = sub_80111C4();
     sub_8004AF0(return_var, &(gUnknown_203B0E4->unk4c4c), 0xB0, 0x10, (gUnknown_203B0E4->unk4dcc), 0);
     sub_8005838(0, 0);
-    nullsub_8(gUnknown_203B46C->unkA);
+    nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
