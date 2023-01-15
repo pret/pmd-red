@@ -8,17 +8,16 @@
 struct unkStruct_802C39C
 {
     /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *unk8;
-    /* 0xC */ u8 *unkC;
-    /* 0x10 */ s16 unk10;
-    /* 0x12 */ s16 unk12;
+    /* 0x8 */ struct DungeonLocation *dungeon;
+    /* 0xC */ u8 *playerName;
+    /* 0x10 */ s16 clientSpecies;
+    /* 0x12 */ s16 targetSpecies;
     /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x1B];
-    /* 0x36 */ u8 fill36[0x3C - 0x36];
-    /* 0x3C */ u8 unk3C[0xC];
-    /* 0x48 */ u8 fill48[4];
-    /* 0x4C */ u32 unk4C;
-    /* 0x50 */ u32 unk50[3];
+    /* 0x15 */ u8 fill15[0x38 - 0x15];
+    /* 0x38 */ u8 unk38[0x48 - 0x38];
+    /* 0x48 */ u32 y;
+    /* 0x4C */ u8 *unk4C;
+    /* 0x50 */ u32 unk50[2];
 };
 
 struct unkStruct_203B2E8
@@ -365,8 +364,8 @@ void sub_802C6DC(void)
 
 void sub_802C750(void)
 {
-  struct WonderMail *uVar1;
-  int iVar2;
+  struct WonderMail *mail;
+  int index;
   s32 r4;
   s32 r5;
   struct unkStruct_802C39C local;
@@ -380,18 +379,18 @@ void sub_802C750(void)
   r4 += 4;
   r5 = r4 + gUnknown_203B2E8->unkA4[2] * 8;
   sub_8012BC4(r5,0,gUnknown_203B2E8->unk26 + 1,2,7,gUnknown_203B2E8->unk3C);
-  iVar2 = 0;
+  index = 0;
 
-  if(( iVar2 < gUnknown_203B2E8->unk22))
+  if(( index < gUnknown_203B2E8->unk22))
     do
     {
-        uVar1 = GetJobSlotInfo(gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + iVar2]);
+        mail = GetJobSlotInfo(gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
-        local.unk4C = sub_8013800(&gUnknown_203B2E8->unk8,iVar2);
-        sub_803B35C(uVar1,local.unk0);
+        local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
+        sub_803B35C(mail,local.unk0);
         CreateRescueTitle(&local);
-        iVar2++;
-    } while( iVar2 < gUnknown_203B2E8->unk22);
+        index++;
+    } while( index < gUnknown_203B2E8->unk22);
   sub_80073E0(gUnknown_203B2E8->unk3C);
 }
 

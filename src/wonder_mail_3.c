@@ -179,10 +179,10 @@ void sub_802CFD0(void)
     while(r5 < gUnknown_203B2F4->unk1A) {
         iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
         local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.unk4C = sub_8013800(gUnknown_203B2F4,r5);
+        local.y = sub_8013800(gUnknown_203B2F4,r5);
         sub_803B35C(iVar1,local.unk0);
-        local.unk3C[11] = 1;
-        local.unk50[0] = iVar1->unk14;
+        local.unk38[11] = 1;
+        local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
         r5++;
     }

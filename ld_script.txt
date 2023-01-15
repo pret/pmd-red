@@ -318,6 +318,7 @@ SECTIONS {
         src/code_8095824.o(.text);
         src/code_80958E8.o(.text);
         asm/code_80958E8.o(.text);
+        src/code_80958E8_mid.o(.text);
         src/mailbox_8095F8C.o(.text);
         asm/code_80958E8_1.o(.text);
         src/code_80958E8_1.o(.text);

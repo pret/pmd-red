@@ -35,17 +35,16 @@ extern struct unkStruct_203B480 *gUnknown_203B480;
 struct unkStruct_802C39C
 {
     /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *unk8;
-    /* 0xC */ u8 *unkC;
-    /* 0x10 */ s16 unk10;
-    /* 0x12 */ s16 unk12;
+    /* 0x8 */ struct DungeonLocation *dungeon;
+    /* 0xC */ u8 *playerName;
+    /* 0x10 */ s16 clientSpecies;
+    /* 0x12 */ s16 targetSpecies;
     /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x1B];
-    /* 0x34 */ u8 fill34[2];
-    /* 0x36 */ u8 fill36[0x3C - 0x36];
-    /* 0x3C */ u8 unk3C[0x10];
-    /* 0x4C */ u32 unk4C;
-    /* 0x50 */ u32 unk50[3];
+    /* 0x15 */ u8 fill15[0x38 - 0x15];
+    /* 0x38 */ u8 unk38[0x48 - 0x38];
+    /* 0x48 */ u32 y;
+    /* 0x4C */ u8 *unk4C;
+    /* 0x50 */ u8 *unk50[2];
 };
 
 extern bool8 HasNoWonderMailType(u32);
@@ -236,7 +235,7 @@ void sub_803092C(void)
   struct unkStruct_203B480 *mail;
   s32 r4;
   s32 r5;
-  s32 r6;
+  s32 index;
   struct unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B320->unk58);
@@ -249,43 +248,43 @@ void sub_803092C(void)
   r5 = r4 + gUnknown_203B320->unkC0[2] * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->unk42 + 1,1,7,gUnknown_203B320->unk58);
 
-  r6 = 0;
-  if (r6 < gUnknown_203B320->unk3E) {
+  index = 0;
+  if (index < gUnknown_203B320->unk3E) {
     do {
-      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + r6]);
+      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
-      local.unk4C = sub_8013800(&gUnknown_203B320->unk24,r6);
-      local.unk3C[8] = 7;
-      local.unk3C[10] = 0;
-      local.unk3C[12] = 0;
+      local.y = sub_8013800(&gUnknown_203B320->unk24,index);
+      local.unk38[8] = 7;
+      local.unk38[10] = 0;
+      local.unk38[12] = 0;
 
-      local.unk8 = &mail->dungeon;
-      local.unkC = mail->playerName;
+      local.dungeon = &mail->dungeon;
+      local.playerName = mail->playerName;
 
-      local.unk10 = (mail->clientSpecies);
-      local.unk12 = (mail->clientSpecies);
+      local.clientSpecies = (mail->clientSpecies);
+      local.targetSpecies = (mail->clientSpecies);
       local.unk14 = 0;
       local.fill15[0x19] = 5;
 
       switch(mail->mailType)
       {
         case WONDER_MAIL_TYPE_AOK:
-            local.unk3C[11] = 3;
+            local.unk38[11] = 3;
             break;
         case WONDER_MAIL_TYPE_THANK_YOU:
-            local.unk3C[11] = 4;
+            local.unk38[11] = 4;
             break;
         case 1:
         case 2:
-            local.unk3C[11]= 1;
+            local.unk38[11]= 1;
             break;
         default:
-            local.unk3C[11]= 0;
+            local.unk38[11]= 0;
             break;
       }
       CreateRescueTitle(&local);
-      r6++;
-    } while (r6 < gUnknown_203B320->unk3E);
+      index++;
+    } while (index < gUnknown_203B320->unk3E);
   }
   sub_80073E0(gUnknown_203B320->unk58);
 }
