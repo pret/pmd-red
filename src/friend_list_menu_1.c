@@ -7,6 +7,10 @@
 #include "pokemon.h"
 #include "moves.h"
 
+
+// there might be more overlap with unkStruct_203B2BC
+// I was working on the moves and put the data that seemed to correspond to that
+// into a separate struct
 struct unkStruct_203B2B4
 {
     // size: 0x178
@@ -20,15 +24,8 @@ struct unkStruct_203B2B4
     struct HeldItem unk14;
     u32 unk18;
     /* 0x1C */ struct PokemonStruct *pokeStruct;
-    u32 unk20;
-    u32 unk24;
-    /* 0x28 */ struct PokemonMove moves[8];
-    u32 unk68;
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
-    u32 unk78;
-    u8 fill7C[0xC8 - 0x7C]; 
+    struct unkMoveData moveData20;
+    u8 fill7C[0xC8 - 0x80]; 
     struct MenuItem unkC8[4];
     u8 fillE8[0x108 - 0xE8];
     s16 unk108[8];
@@ -85,8 +82,8 @@ extern void sub_8023DA4(void);
 
 extern void sub_809401C(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
 extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
-extern void sub_8093560(u32, struct PokemonMove *, u32 *);
-extern void sub_801F808(u32 *);
+extern void sub_8093560(u32, struct PokemonMove *, u16*);
+extern void sub_801F808(u16 *);
 u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8025E68(u32 , u32 *);
 
@@ -98,7 +95,7 @@ bool8 sub_80252F0(s32 param_1)
   }
   else {
     gUnknown_203B2B4 = MemoryAlloc(0x178,8);
-    gUnknown_203B2B4->unk70 = 0;
+    gUnknown_203B2B4->moveData20.unk70 = 0;
     gUnknown_203B2B4->unk0 = param_1;
     gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
     gUnknown_203B2B4->unkD = 0;
@@ -239,7 +236,7 @@ void sub_8025518(void)
         sub_8023DA4();
         PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B4->pokeStruct,7);
         PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B4->pokeStruct,6);
-        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->unk70,2);
+        sub_8012D60(&gUnknown_203B2B4->moveData20.unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->moveData20.unk70,2);
         break;
     case 4:
         sub_8024458(gUnknown_203B2B4->unkE,2);
@@ -255,7 +252,7 @@ void sub_8025518(void)
         break;
     case 0xd:
         sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->unk74,2);
+        sub_8012D60(&gUnknown_203B2B4->moveData20.unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->moveData20.unk74,2);
         break;
     case 0xe:
         HeldItemToSlot(&item, &gUnknown_203B2B4->unk14);
@@ -279,15 +276,15 @@ void sub_8025518(void)
         sub_80141B4(gUnknown_80DD270,0,0,0x101);
         break;
     case 0xf:
-        sub_809401C(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
-        sub_801EE10(3,gUnknown_203B2B4->unkE,gUnknown_203B2B4->moves,0,0,0);
+        sub_809401C(gUnknown_203B2B4->moveData20.moves,gUnknown_203B2B4->pokeStruct->moves);
+        sub_801EE10(3,gUnknown_203B2B4->unkE,gUnknown_203B2B4->moveData20.moves,0,0,0);
         break;
     case 0x10:
         sub_801F1B0(1,0);
         break;
     case 0x11:
-        sub_8093560(gUnknown_203B2B4->unk20,gUnknown_203B2B4->moves,&gUnknown_203B2B4->unk68);
-        sub_801F808(&gUnknown_203B2B4->unk68);
+        sub_8093560(gUnknown_203B2B4->moveData20.moveIndex,gUnknown_203B2B4->moveData20.moves, gUnknown_203B2B4->moveData20.moveIDs);
+        sub_801F808(gUnknown_203B2B4->moveData20.moveIDs);
         break;
     case 0x12:
         sub_801602C(2,gUnknown_203B2B4->pokeStruct->name);

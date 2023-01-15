@@ -1068,23 +1068,23 @@ gUnknown_80F89F4: @ 80F89F4
 gUnknown_80F8A0C: @ 80F8A0C
         .4byte BlownAway_80F89F8
 
-        .global NoSetMove_80F8A10
-        NoSetMove_80F8A10:
+        .global NoToggleSetMove_80F8A10
+        NoToggleSetMove_80F8A10:
         .string "No move has been set.\0"
         .align 2,0
 
 	.global gUnknown_80F8A28
 gUnknown_80F8A28: @ 80F8A28
-        .4byte NoSetMove_80F8A10
+        .4byte NoToggleSetMove_80F8A10
 
-        .global SetMoveCantUse_80F8A2C
-        SetMoveCantUse_80F8A2C:
+        .global ToggleSetMoveCantUse_80F8A2C
+        ToggleSetMoveCantUse_80F8A2C:
         .string "The set move can{APOSTROPHE}t be used.\0"
         .align 2,0
 
 	.global gUnknown_80F8A4C
 gUnknown_80F8A4C: @ 80F8A4C
-        .4byte SetMoveCantUse_80F8A2C
+        .4byte ToggleSetMoveCantUse_80F8A2C
 
         .global BeingConstricted_80F8A50
         BeingConstricted_80F8A50:

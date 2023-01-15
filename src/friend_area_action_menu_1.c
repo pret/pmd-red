@@ -96,8 +96,8 @@ void sub_80278B4(void)
 
   local_c = 0;
   sub_8023A94(0);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&local_c), local_c != 1)) {
-    gUnknown_203B2BC->unk70 = local_c;
+  if ((sub_8012FD8(&gUnknown_203B2BC->moveData20.unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->moveData20.unk7C,&local_c), local_c != 1)) {
+    gUnknown_203B2BC->moveData20.unk70 = local_c;
   }
   switch(local_c) {
       case 6:
@@ -279,8 +279,8 @@ void sub_8027BD8(void)
 
   menuAction = 0;
   sub_801A6E8(0);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
-    gUnknown_203B2BC->unk74 = menuAction;
+  if ((sub_8012FD8(&gUnknown_203B2BC->moveData20.unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->moveData20.unk7C,&menuAction), menuAction != 1)) {
+    gUnknown_203B2BC->moveData20.unk74 = menuAction;
   }
   switch(menuAction)
   {
@@ -326,8 +326,8 @@ void sub_8027CA0(void)
     {
         case 3:
         case 4:
-            gUnknown_203B2BC->unk20 = sub_801F194();
-            gUnknown_203B2BC->moveID = gUnknown_203B2BC->unk28[gUnknown_203B2BC->unk20].moveID;
+            gUnknown_203B2BC->moveData20.moveIndex = sub_801F194();
+            gUnknown_203B2BC->moveData20.moveID = gUnknown_203B2BC->moveData20.moves[gUnknown_203B2BC->moveData20.moveIndex].moveID;
             SetFriendAreaActionMenuState(0x10);
             break;
         case 2:

@@ -163,7 +163,7 @@ u8 IsNextMoveLinked(int index, struct PokemonMove* moves) {
     return 0;
 }
 
-int SetMove(int index, struct PokemonMove* moves) {
+int ToggleSetMove(int index, struct PokemonMove* moves) {
     struct PokemonMove* move;
     u8 flags;
     int i;
@@ -186,3 +186,39 @@ int SetMove(int index, struct PokemonMove* moves) {
     return 1;
 }
 
+void UnSetMove(int index, struct PokemonMove* moves) {
+    struct PokemonMove* move = &moves[index];
+    move->moveFlags &= ~MOVE_FLAG_SET;
+    sub_809371C(moves);
+}
+
+int ToggleMoveEnabled(int index, struct PokemonMove* moves) {
+    struct PokemonMove* move = &moves[index];
+    move->moveFlags ^= MOVE_FLAG_ENABLED;
+    sub_809371C(moves);
+    return 1;
+}
+
+int sub_8093560(int index, struct PokemonMove* moves, u16* dest) {
+    int i;
+    int counter;
+    struct PokemonMove* move;
+
+    counter = 1;
+    move = &moves[index];
+    dest[0] = move->moveID;
+    for (i = 1; i < 4; i++) {
+        dest[i] = 0;
+    }
+
+    for (index++, dest++; index < 8 && counter <= 3; index++) {
+        move = &moves[index];
+        if ((move->moveFlags & MOVE_FLAG_LINKED) == 0) {
+            return counter;
+        }
+
+        *dest++ = move->moveID;
+        counter++;
+    }
+    return counter;
+}

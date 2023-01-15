@@ -66,6 +66,21 @@ struct PokemonMove
     u8 powerBoost; // How much the move is boosted by Ginsengs.
 };
 
+// used in some friend area stuff
+struct unkMoveData {
+    u32 moveIndex;  // some sort of move index
+    u16 moveID;
+    struct PokemonMove moves[8];
+    u16 moveIDs[4];   // some list of move IDs
+
+    // offsets in respective parent structs
+    // todo: actual offset into this struct
+    u32 unk70;
+    s32 unk74;
+    u32 unk78;
+    u32 unk7C;
+};
+
 enum TargetingFlag
 {
     TARGETING_FLAG_TARGET_OTHER = 0x0,

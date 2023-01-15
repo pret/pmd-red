@@ -357,7 +357,7 @@ _0801F0E4:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl SetMove
+	bl ToggleSetMove
 _0801F0FE:
 	lsls r0, 24
 	cmp r0, 0
@@ -371,7 +371,7 @@ _0801F110:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093544
+	bl ToggleMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801F128
@@ -4153,7 +4153,7 @@ _08020F44:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl SetMove
+	bl ToggleSetMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020F68
@@ -4174,7 +4174,7 @@ _08020F70:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_809352C
+	bl UnSetMove
 	b _08021068
 	.align 2, 0
 _08020F84: .4byte 0x00000133
@@ -4184,7 +4184,7 @@ _08020F8C:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093544
+	bl ToggleMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020FB0

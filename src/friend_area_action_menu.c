@@ -27,8 +27,8 @@ extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8093560(u32, struct PokemonMove *, u32 *);
-extern void sub_801F808(u32 *);
+extern void sub_8093560(u32, struct PokemonMove *, u16*);
+extern void sub_801F808(u16*);
 extern void sub_8027794();
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
@@ -63,9 +63,9 @@ u32 sub_8027074(void)
 {
     ResetSprites(0);
     gUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
-    gUnknown_203B2BC->unk70 = 0;
-    gUnknown_203B2BC->unk74 = 0;
-    gUnknown_203B2BC->unk78 = 0;
+    gUnknown_203B2BC->moveData20.unk70 = 0;
+    gUnknown_203B2BC->moveData20.unk74 = 0;
+    gUnknown_203B2BC->moveData20.unk78 = 0;
     SetFriendAreaActionMenuState(0);
     return 1;
 }
@@ -183,7 +183,7 @@ void sub_8027274(void)
     case 3:
         sub_8027D40(3,&gUnknown_203B2BC->item2);
         sub_8023DA4();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk70,2);
+        sub_8012D60(&gUnknown_203B2BC->moveData20.unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->moveData20.unk70,2);
         break;
     case 4:
         sub_8024458(gUnknown_203B2BC->targetPoke,2);
@@ -199,15 +199,15 @@ void sub_8027274(void)
         break;
     case 0xc:
         sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk74,2);
+        sub_8012D60(&gUnknown_203B2BC->moveData20.unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->moveData20.unk74,2);
         break;
     case 0xd:
         HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        sub_809401C(gUnknown_203B2BC->unk28,gUnknown_203B2BC->unk18->moves);
-        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->unk28,0,0,0);
+        sub_809401C(gUnknown_203B2BC->moveData20.moves,gUnknown_203B2BC->unk18->moves);
+        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moveData20.moves,0,0,0);
         break;
     case 0xf:
         sub_801F1B0(1,0);
@@ -229,8 +229,8 @@ void sub_8027274(void)
         sub_8014248(gUnknown_80DD7FC,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 0x10:
-        sub_8093560(gUnknown_203B2BC->unk20,gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk68);
-        sub_801F808(&gUnknown_203B2BC->unk68);
+        sub_8093560(gUnknown_203B2BC->moveData20.moveIndex,gUnknown_203B2BC->moveData20.moves,gUnknown_203B2BC->moveData20.moveIDs);
+        sub_801F808(gUnknown_203B2BC->moveData20.moveIDs);
         break;
     case 6:
         gUnknown_203B2BC->unk4 = 2;
