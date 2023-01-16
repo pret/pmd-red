@@ -6,8 +6,6 @@
 #include "dungeon_range.h"
 #include "dungeon_util.h"
 
-extern bool8 IsPositionInSight(struct Position *pos1, struct Position *pos2);
-
 bool8 CanSeeTarget(struct Entity *entity, struct Entity *targetEntity)
 {
     if (!EntityExists(entity) || !EntityExists(targetEntity) || !targetEntity->isVisible)
