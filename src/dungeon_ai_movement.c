@@ -26,6 +26,20 @@
 #define CHECK_VISIBILITY_DISTANCE 5
 #define CORRIDOR_VISIBILITY 2
 
+#define TURN_LEFT_45 1
+#define TURN_RIGHT_45 2
+#define TURN_LEFT_90 3
+#define TURN_RIGHT_90 4
+#define TURN_LEFT_135 5
+
+struct CanMoveInDirectionInfo
+{
+    bool8 tryTurn;
+    bool8 canMoveInDirection;
+    bool8 pokemonInFront;
+    s32 direction;
+};
+
 extern bool8 IsTargetTwoTilesAway(struct Position *, struct Position *);
 
 const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
@@ -342,405 +356,149 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
     return TRUE;
 }
 
-NAKED
 void DecideMovement(struct Entity *pokemon, bool8 showRunAwayEffect)
 {
-    asm_unified("push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"sub sp, 0x3C\n"
-"mov r9, r0\n"
-"lsls r1, 24\n"
-"lsrs r7, r1, 24\n"
-"ldr r5, [r0, 0x70]\n"
-"movs r0, 0xB6\n"
-"lsls r0, 1\n"
-"adds r1, r5, r0\n"
-"adds r4, r5, 0\n"
-"adds r4, 0x88\n"
-"ldr r0, [r4]\n"
-"str r0, [r1]\n"
-"mov r2, r9\n"
-"ldr r1, [r2, 0x4]\n"
-"ldr r0, [r4]\n"
-"cmp r1, r0\n"
-"beq _0807B348\n"
-"mov r6, r9\n"
-"adds r6, 0x4\n"
-"adds r0, r6, 0\n"
-"adds r1, r4, 0\n"
-"bl GetDirectionTowardsPosition\n"
-"mov r8, r0\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x7A\n"
-"ldrb r1, [r0]\n"
-"mov r0, r9\n"
-"bl ShouldAvoidFirstHit\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B366\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x78\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0x1\n"
-"bne _0807B37C\n"
-"adds r0, r6, 0\n"
-"adds r1, r4, 0\n"
-"bl IsTargetTwoTilesAway\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B37C\n"
-"adds r0, r6, 0\n"
-"adds r1, r4, 0\n"
-"bl GetDistance\n"
-"cmp r0, 0x2\n"
-"bne _0807B354\n"
-"_0807B348:\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x44\n"
-"movs r1, 0x1\n"
-"bl SetMonsterActionFields\n"
-"b _0807B5CE\n"
-"_0807B354:\n"
-"cmp r0, 0x1\n"
-"bgt _0807B37C\n"
-"movs r3, 0x4\n"
-"add r8, r3\n"
-"movs r0, 0x7\n"
-"mov r1, r8\n"
-"ands r1, r0\n"
-"mov r8, r1\n"
-"b _0807B37C\n"
-"_0807B366:\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x7B\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807B37C\n"
-"movs r2, 0x4\n"
-"add r8, r2\n"
-"movs r0, 0x7\n"
-"mov r3, r8\n"
-"ands r3, r0\n"
-"mov r8, r3\n"
-"_0807B37C:\n"
-"add r4, sp, 0x30\n"
-"mov r0, r9\n"
-"mov r1, r8\n"
-"adds r2, r4, 0\n"
-"bl CanAIMonsterMoveInDirection\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807B3A8\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x44\n"
-"movs r2, 0x2\n"
-"ldrsh r1, [r5, r2]\n"
-"bl SetActionPassTurnOrWalk\n"
-"movs r0, 0x7\n"
-"mov r3, r8\n"
-"ands r3, r0\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x46\n"
-"strb r3, [r0]\n"
-"b _0807B5CE\n"
-"_0807B3A8:\n"
-"ldrb r0, [r4]\n"
-"cmp r0, 0\n"
-"beq _0807B444\n"
-"ldrb r0, [r5, 0x6]\n"
-"cmp r0, 0\n"
-"bne _0807B3E8\n"
-"ldr r1, _0807B3E0\n"
-"adds r0, r5, r1\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _0807B3E8\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x79\n"
-"movs r4, 0x1\n"
-"strb r4, [r0]\n"
-"movs r2, 0xA2\n"
-"lsls r2, 1\n"
-"adds r0, r5, r2\n"
-"strb r4, [r0]\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x44\n"
-"movs r1, 0x1\n"
-"bl SetMonsterActionFields\n"
-"ldr r3, _0807B3E4\n"
-"adds r0, r5, r3\n"
-"strb r4, [r0]\n"
-"b _0807B5CE\n"
-".align 2, 0\n"
-"_0807B3E0: .4byte 0x00000145\n"
-"_0807B3E4: .4byte 0x00000147\n"
-"_0807B3E8:\n"
-"mov r0, r9\n"
-"movs r2, 0x4\n"
-"ldrsh r1, [r0, r2]\n"
-"ldr r2, _0807B434\n"
-"mov r3, r8\n"
-"lsls r0, r3, 2\n"
-"adds r2, r0, r2\n"
-"movs r3, 0\n"
-"ldrsh r0, [r2, r3]\n"
-"adds r1, r0\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x88\n"
-"movs r3, 0\n"
-"ldrsh r0, [r0, r3]\n"
-"cmp r1, r0\n"
-"bne _0807B43C\n"
-"mov r1, r9\n"
-"movs r3, 0x6\n"
-"ldrsh r0, [r1, r3]\n"
-"movs r3, 0x2\n"
-"ldrsh r1, [r2, r3]\n"
-"adds r0, r1\n"
-"adds r1, r5, 0\n"
-"adds r1, 0x8A\n"
-"movs r2, 0\n"
-"ldrsh r1, [r1, r2]\n"
-"cmp r0, r1\n"
-"bne _0807B43C\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x44\n"
-"movs r1, 0x1\n"
-"bl SetMonsterActionFields\n"
-"ldr r3, _0807B438\n"
-"adds r1, r5, r3\n"
-"movs r0, 0x1\n"
-"strb r0, [r1]\n"
-"b _0807B5CE\n"
-".align 2, 0\n"
-"_0807B434: .4byte gAdjacentTileOffsets\n"
-"_0807B438: .4byte 0x00000147\n"
-"_0807B43C:\n"
-"adds r1, r5, 0\n"
-"adds r1, 0x79\n"
-"movs r0, 0x1\n"
-"strb r0, [r1]\n"
-"_0807B444:\n"
-"mov r3, sp\n"
-"mov r2, sp\n"
-"mov r1, sp\n"
-"add r0, sp, 0x28\n"
-"movs r4, 0x1\n"
-"strb r4, [r0]\n"
-"add r0, sp, 0x20\n"
-"strb r4, [r0]\n"
-"strb r4, [r1, 0x18]\n"
-"strb r4, [r2, 0x10]\n"
-"strb r4, [r3, 0x8]\n"
-"ldrb r6, [r5, 0x6]\n"
-"cmp r6, 0\n"
-"bne _0807B4C8\n"
-"mov r0, r8\n"
-"ands r0, r4\n"
-"cmp r0, 0\n"
-"beq _0807B4C8\n"
-"mov r1, r9\n"
-"movs r2, 0x4\n"
-"ldrsh r0, [r1, r2]\n"
-"adds r1, r5, 0\n"
-"adds r1, 0x88\n"
-"movs r3, 0\n"
-"ldrsh r1, [r1, r3]\n"
-"subs r2, r0, r1\n"
-"cmp r2, 0\n"
-"bge _0807B47E\n"
-"negs r2, r2\n"
-"_0807B47E:\n"
-"mov r0, r9\n"
-"movs r3, 0x6\n"
-"ldrsh r1, [r0, r3]\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x8A\n"
-"movs r3, 0\n"
-"ldrsh r0, [r0, r3]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807B494\n"
-"negs r1, r1\n"
-"_0807B494:\n"
-"cmp r2, 0x2\n"
-"bgt _0807B4C8\n"
-"cmp r1, 0x2\n"
-"bgt _0807B4C8\n"
-"cmp r2, r1\n"
-"beq _0807B4C8\n"
-"movs r3, 0x2\n"
-"mov r0, r8\n"
-"ands r3, r0\n"
-"cmp r3, 0\n"
-"beq _0807B4BA\n"
-"cmp r2, r1\n"
-"bge _0807B4B4\n"
-"mov r0, sp\n"
-"strb r6, [r0, 0x10]\n"
-"b _0807B4C8\n"
-"_0807B4B4:\n"
-"mov r0, sp\n"
-"strb r6, [r0, 0x8]\n"
-"b _0807B4C8\n"
-"_0807B4BA:\n"
-"cmp r2, r1\n"
-"bge _0807B4C4\n"
-"mov r0, sp\n"
-"strb r3, [r0, 0x8]\n"
-"b _0807B4C8\n"
-"_0807B4C4:\n"
-"mov r0, sp\n"
-"strb r3, [r0, 0x10]\n"
-"_0807B4C8:\n"
-"movs r1, 0x3\n"
-"mov r10, r1\n"
-"mov r0, r9\n"
-"adds r1, r7, 0\n"
-"bl ShouldMonsterRunAwayAndShowEffect\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0807B4E4\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x7B\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807B4E8\n"
-"_0807B4E4:\n"
-"movs r2, 0x5\n"
-"mov r10, r2\n"
-"_0807B4E8:\n"
-"movs r6, 0x1\n"
-"adds r3, r5, 0\n"
-"adds r3, 0x44\n"
-"str r3, [sp, 0x34]\n"
-"cmp r6, r10\n"
-"bge _0807B53C\n"
-"mov r3, sp\n"
-"mov r4, sp\n"
-"adds r4, 0xA\n"
-"add r7, sp, 0x8\n"
-"_0807B4FC:\n"
-"lsls r0, r6, 3\n"
-"add r2, sp, 0x4\n"
-"adds r2, r0\n"
-"ldr r1, _0807B598\n"
-"lsls r0, r6, 2\n"
-"adds r0, r1\n"
-"ldr r1, [r0]\n"
-"add r1, r8\n"
-"movs r0, 0x7\n"
-"ands r1, r0\n"
-"str r1, [r2]\n"
-"mov r0, r9\n"
-"adds r2, r4, 0\n"
-"str r3, [sp, 0x38]\n"
-"bl CanAIMonsterMoveInDirection\n"
-"strb r0, [r7, 0x1]\n"
-"lsls r0, 24\n"
-"ldr r3, [sp, 0x38]\n"
-"cmp r0, 0\n"
-"bne _0807B532\n"
-"ldrb r0, [r4]\n"
-"cmp r0, 0\n"
-"bne _0807B532\n"
-"movs r0, 0x1\n"
-"strb r0, [r3, 0x10]\n"
-"strb r0, [r3, 0x8]\n"
-"_0807B532:\n"
-"adds r4, 0x8\n"
-"adds r7, 0x8\n"
-"adds r6, 0x1\n"
-"cmp r6, r10\n"
-"blt _0807B4FC\n"
-"_0807B53C:\n"
-"movs r6, 0x1\n"
-"cmp r6, r10\n"
-"bge _0807B56E\n"
-"adds r3, r5, 0\n"
-"adds r3, 0x79\n"
-"add r1, sp, 0x8\n"
-"movs r4, 0x8\n"
-"movs r7, 0x1\n"
-"_0807B54C:\n"
-"adds r2, r4, 0\n"
-"ldrb r0, [r1, 0x1]\n"
-"cmp r0, 0\n"
-"beq _0807B55A\n"
-"ldrb r0, [r1]\n"
-"cmp r0, 0\n"
-"bne _0807B5A0\n"
-"_0807B55A:\n"
-"ldrb r0, [r1, 0x2]\n"
-"cmp r0, 0\n"
-"beq _0807B562\n"
-"strb r7, [r3]\n"
-"_0807B562:\n"
-"adds r1, 0x8\n"
-"adds r4, r2, 0\n"
-"adds r4, 0x8\n"
-"adds r6, 0x1\n"
-"cmp r6, r10\n"
-"blt _0807B54C\n"
-"_0807B56E:\n"
-"ldr r0, [sp, 0x34]\n"
-"movs r1, 0x1\n"
-"bl SetMonsterActionFields\n"
-"ldr r1, _0807B59C\n"
-"adds r0, r5, r1\n"
-"movs r1, 0\n"
-"movs r2, 0x1\n"
-"strb r2, [r0]\n"
-"ldrb r0, [r5, 0x7]\n"
-"cmp r0, 0\n"
-"beq _0807B5BC\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x79\n"
-"strb r1, [r0]\n"
-"movs r2, 0xA2\n"
-"lsls r2, 1\n"
-"adds r0, r5, r2\n"
-"strb r1, [r0]\n"
-"b _0807B5CE\n"
-".align 2, 0\n"
-"_0807B598: .4byte gFaceDirectionIncrements\n"
-"_0807B59C: .4byte 0x00000147\n"
-"_0807B5A0:\n"
-"movs r3, 0x2\n"
-"ldrsh r1, [r5, r3]\n"
-"ldr r0, [sp, 0x34]\n"
-"bl SetActionPassTurnOrWalk\n"
-"add r0, sp, 0x4\n"
-"adds r0, r4\n"
-"ldr r0, [r0]\n"
-"movs r1, 0x7\n"
-"ands r0, r1\n"
-"adds r1, r5, 0\n"
-"adds r1, 0x46\n"
-"strb r0, [r1]\n"
-"b _0807B5CE\n"
-"_0807B5BC:\n"
-"adds r0, r5, 0\n"
-"adds r0, 0x79\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807B5CE\n"
-"movs r1, 0xA2\n"
-"lsls r1, 1\n"
-"adds r0, r5, r1\n"
-"strb r2, [r0]\n"
-"_0807B5CE:\n"
-"add sp, 0x3C\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r0}\n"
-"bx r0");
+    struct EntityInfo *pokemonInfo = pokemon->info;
+    s32 direction;
+    s32 turnLimit;
+    s32 i;
+    struct CanMoveInDirectionInfo canMoveInDirectionInfo[6];
+    bool8 pokemonInFront;
+    pokemonInfo->targetPos = pokemonInfo->aiTargetPos;
+    if (pokemon->pos.x == pokemonInfo->aiTargetPos.x &&
+        pokemon->pos.y == pokemonInfo->aiTargetPos.y)
+    {
+        SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+        return;
+    }
+    direction = GetDirectionTowardsPosition(&pokemon->pos, &pokemonInfo->aiTargetPos);
+    if (ShouldAvoidFirstHit(pokemon, pokemonInfo->aiTargetingEnemy))
+    {
+        if (pokemonInfo->aiObjective == AI_CHASE_TARGET &&
+            IsTargetTwoTilesAway(&pokemon->pos, &pokemonInfo->aiTargetPos))
+        {
+            s32 distance = GetDistance(&pokemon->pos, &pokemonInfo->aiTargetPos);
+            if (distance == 2)
+            {
+                SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+                return;
+            }
+            else if (distance < 2)
+            {
+                direction += 4;
+                direction &= DIRECTION_MASK;
+            }
+        }
+    }
+    else if (pokemonInfo->aiTurningAround)
+    {
+        direction += 4;
+        direction &= DIRECTION_MASK;
+    }
+    if (CanAIMonsterMoveInDirection(pokemon, direction, &pokemonInFront))
+    {
+        SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        pokemonInfo->action.direction = direction & DIRECTION_MASK;
+        return;
+    }
+    else if (pokemonInFront)
+    {
+        if (!pokemonInfo->isNotTeamMember && !pokemonInfo->recalculateFollow)
+        {
+            pokemonInfo->aiNotNextToTarget = TRUE;
+            pokemonInfo->aiNextToTarget = TRUE;
+            SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+            pokemonInfo->waiting = TRUE;
+            return;
+        }
+        if (pokemon->pos.x + gAdjacentTileOffsets[direction].x == pokemonInfo->aiTargetPos.x &&
+            pokemon->pos.y + gAdjacentTileOffsets[direction].y == pokemonInfo->aiTargetPos.y)
+        {
+            SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+            pokemonInfo->waiting = TRUE;
+            return;
+        }
+        pokemonInfo->aiNotNextToTarget = TRUE;
+    }
+    canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = canMoveInDirectionInfo[TURN_LEFT_90].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_90].tryTurn = canMoveInDirectionInfo[TURN_LEFT_135].tryTurn = TRUE;
+    if (!pokemonInfo->isNotTeamMember && (direction & 1) != 0)
+    {
+        s32 targetDistanceX = pokemon->pos.x - pokemonInfo->aiTargetPos.x;
+        s32 targetDistanceY;
+        if (targetDistanceX < 0)
+        {
+            targetDistanceX = -targetDistanceX;
+        }
+        targetDistanceY = pokemon->pos.y - pokemonInfo->aiTargetPos.y;
+        if (targetDistanceY < 0)
+        {
+            targetDistanceY = -targetDistanceY;
+        }
+        if (targetDistanceX <= 2 && targetDistanceY <= 2 && targetDistanceX != targetDistanceY)
+        {
+            if ((direction & 2) != 0)
+            {
+                if (targetDistanceX < targetDistanceY)
+                {
+                    canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = FALSE;
+                }
+                else
+                {
+                    canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = FALSE;
+                }
+            }
+            else
+            {
+                if (targetDistanceX < targetDistanceY)
+                {
+                    canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = FALSE;
+                }
+                else
+                {
+                    canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = FALSE;
+                }
+            }
+        }
+    }
+    turnLimit = TURN_LEFT_90;
+    if (ShouldMonsterRunAwayAndShowEffect(pokemon, showRunAwayEffect) || pokemonInfo->aiTurningAround)
+    {
+        turnLimit = TURN_LEFT_135;
+    }
+    for (i = TURN_LEFT_45; i < turnLimit; i++)
+    {
+        canMoveInDirectionInfo[i].direction = (gFaceDirectionIncrements[i] + direction) & DIRECTION_MASK;
+        canMoveInDirectionInfo[i].canMoveInDirection = CanAIMonsterMoveInDirection(pokemon, canMoveInDirectionInfo[i].direction, &canMoveInDirectionInfo[i].pokemonInFront);
+        if (!canMoveInDirectionInfo[i].canMoveInDirection && !canMoveInDirectionInfo[i].pokemonInFront)
+        {
+            canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = TRUE;
+            canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = TRUE;
+        }
+    }
+    for (i = TURN_LEFT_45; i < turnLimit; i++)
+    {
+        if (canMoveInDirectionInfo[i].canMoveInDirection && canMoveInDirectionInfo[i].tryTurn)
+        {
+            SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+            pokemonInfo->action.direction = canMoveInDirectionInfo[i].direction & DIRECTION_MASK;
+            return;
+        }
+        if (canMoveInDirectionInfo[i].pokemonInFront)
+        {
+            pokemonInfo->aiNotNextToTarget = TRUE;
+        }
+    }
+    SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
+    pokemonInfo->waiting = TRUE;
+    if (pokemonInfo->isTeamLeader)
+    {
+        pokemonInfo->aiNotNextToTarget = FALSE;
+        pokemonInfo->aiNextToTarget = FALSE;
+    }
+    else if (pokemonInfo->aiNotNextToTarget)
+    {
+        pokemonInfo->aiNextToTarget = TRUE;
+    }
 }
 
 bool8 AvoidEnemies(struct Entity *pokemon)
