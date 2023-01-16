@@ -29,4 +29,6 @@ bool8 MoveAffectedByMuzzled(u16 moveID);
 bool8 IsBlockedBySoundproof(struct PokemonMove *move);
 bool8 DoesMoveCharge(u16 move);
 
+void sub_809371C(struct PokemonMove* move);
+
 #endif // GUARD_MOVES_H

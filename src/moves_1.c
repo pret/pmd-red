@@ -8,7 +8,16 @@ u8 sub_8093468(int param_1, struct PokemonMove* src_struct);
 u8 sub_8093400(int param_1, struct PokemonMove* src_struct);
 u8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
-void sub_809371C(struct PokemonMove*);
+
+// second arg should be some sort of struct pointer
+void sub_8093784(int, u8*);
+void sub_80937E0(int, u8*);
+void sub_8093974(int, u8*);
+void sub_8093A2C(int, u8*);
+
+void sub_80939D0(struct PokemonMove*, struct PokemonMove*);
+void sub_8093B40(struct PokemonMove*, struct PokemonMove*);
+
 
 int IsMoveSet(int index, struct PokemonMove* struct_ptr)
 {
@@ -222,3 +231,118 @@ int sub_8093560(int index, struct PokemonMove* moves, u16* dest) {
     }
     return counter;
 }
+
+int sub_80935B8(struct PokemonMove *moves, int index) {
+    int i;
+    int last_index;
+    int for_loop_any1;
+    int any_move_linked;
+    int pp;
+    int v1;
+    
+    pp = 99;
+    any_move_linked = 0;
+    for_loop_any1 = 0;
+
+    last_index = index;
+    while (last_index >= 0) {
+        struct PokemonMove *move = &moves[last_index];
+        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LINKED))) {
+            break;
+        }
+        
+        last_index--;
+    }
+
+    // this is so stupid but it works
+    for_loop_any1++;for_loop_any1--;
+
+    for (i = last_index + 1; i < 4; i++) {
+        struct PokemonMove *move = &moves[i];
+        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LINKED))) {
+            break;
+        }
+        
+        for_loop_any1 = 1;
+    }
+
+    if (!for_loop_any1) {
+        return 99;
+    }
+
+    v1 = 0;
+    while (--i >= last_index) {
+        struct PokemonMove* move = &moves[i];
+        if (!(move->moveFlags & MOVE_FLAG_EXISTS)) {
+            break;
+        }
+        if (pp > move->PP) {
+            pp = move->PP;
+        }
+        if (!move->PP) {
+            v1 = 1;
+        }
+        if (move->moveFlags2 & MOVE_FLAG_REPLACE) {
+            v1 = 1;
+        }
+    }
+
+    if (!v1) {
+        return pp;
+    }
+
+    for (i = last_index + 1; i < 4; i++) {
+        struct PokemonMove* move = &moves[i];
+        if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS)) {
+            break;
+        }
+        
+        if (move->moveFlags & MOVE_FLAG_LINKED) {
+            move->moveFlags &= ~MOVE_FLAG_LINKED;
+            any_move_linked = 1;
+        }
+        else {
+            break;
+        }
+    }
+
+    if (any_move_linked) {
+        return 0;
+    }
+    else {
+        return pp;
+    }
+}
+
+void sub_80936D8(int index) {
+    u8 someStruct[0x80];
+    sub_8093784(index, someStruct);
+    sub_80937E0(index, someStruct);
+}
+
+void sub_80936F4(int index) {
+    u8 someStruct[0x80 * 4];
+    sub_8093974(index, someStruct);
+    sub_8093A2C(index, someStruct);
+}
+
+void sub_809371C(struct PokemonMove* move) {
+    struct PokemonMove moves[64];
+
+    sub_80939D0(move, moves);
+    sub_8093B40(move, moves);
+}
+
+int sub_8093744(struct PokemonMove moves[4][4], int index) {
+    int i, j;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            if ((moves[i][j].moveFlags & 1) && (moves[i][j].moveFlags & 0x80)) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
