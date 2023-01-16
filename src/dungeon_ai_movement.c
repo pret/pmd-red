@@ -15,6 +15,7 @@
 #include "dungeon_movement_1.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_range.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "map.h"
@@ -39,8 +40,6 @@ struct CanMoveInDirectionInfo
     bool8 pokemonInFront;
     s32 direction;
 };
-
-extern bool8 IsTargetTwoTilesAway(struct Position *, struct Position *);
 
 const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
 

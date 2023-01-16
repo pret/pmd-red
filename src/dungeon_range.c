@@ -5,8 +5,6 @@
 #include "dungeon_map_access.h"
 #include "map.h"
 
-extern bool8 IsTargetTwoTilesAway(struct Position *, struct Position *);
-
 bool8 IsPositionActuallyInSight(struct Position *pos1, struct Position *pos2)
 {
     u8 pos1Room;
@@ -129,79 +127,103 @@ void sub_80833E8(struct Position *param_1, s32 *param_2)
 
 bool8 IsTargetTwoTilesAway(struct Position *pos1, struct Position *pos2)
 {
-    s32 counter;
+    s32 i;
     struct Tile *tile;
     s32 diff;
-    s32 yCoord;
-    s32 xCoord;
+    s32 x1;
+    s32 y1;
     s32 xDiff;
     s32 yDiff;
-    s32 yCoord_1;
-    s32 xCoord_1;
+    s32 x2;
+    s32 y2;
   
     diff = pos1->x - pos2->x;
-    if (diff < 0) {
+    if (diff < 0)
+    {
         diff = -diff;
     }
-    if (diff < 2) {
+    if (diff < 2)
+    {
         diff = pos1->y - pos2->y;
-        if (diff < 0) {
+        if (diff < 0)
+        {
             diff = -diff;
         }
-        if (1 >= diff) return TRUE;
+        if (diff < 2)
+        {
+            return TRUE;
+        }
     }
     xDiff = pos1->x - pos2->x;
-    if (xDiff < 0) {
-      xDiff = -xDiff;
+    if (xDiff < 0)
+    {
+        xDiff = -xDiff;
     }
     yDiff = pos1->y - pos2->y;
-    if (yDiff < 0) {
-      yDiff = -yDiff;
+    if (yDiff < 0)
+    {
+        yDiff = -yDiff;
     }
-    if (yDiff < xDiff) {
-      yDiff = xDiff;
+    if (yDiff < xDiff)
+    {
+        yDiff = xDiff;
     }
-    if (yDiff == 2) {
+    if (yDiff == 2)
+    {
+        x1 = pos1->x;
+        y1 = pos1->y;
 
-        xCoord = pos1->x;
-        yCoord = pos1->y;
-
-        for(counter = 0; counter < 2; counter++){
-            if (xCoord < pos2->x) {
-                xCoord = xCoord + 1;
+        for (i = 0; i < 2; i++)
+        {
+            if (x1 < pos2->x)
+            {
+                x1++;
             }
-            if (xCoord > pos2->x) {
-                xCoord = xCoord - 1;
+            if (x1 > pos2->x)
+            {
+                x1--;
             }
-            if (yCoord < pos2->y) {
-                yCoord = yCoord + 1;
+            if (y1 < pos2->y)
+            {
+                y1++;
             }
-            if (yCoord > pos2->y) {
-                yCoord = yCoord -1;
+            if (y1 > pos2->y)
+            {
+                y1--;
             }
-            tile = GetTile(xCoord,yCoord);
-            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0) return FALSE;
+            tile = GetTile(x1, y1);
+            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
+            {
+                return FALSE;
+            }
         }
 
-        xCoord_1 = pos2->x;
-        yCoord_1 = pos2->y;
+        x2 = pos2->x;
+        y2 = pos2->y;
 
-        for(counter = 0; counter < 2; counter++)
+        for (i = 0; i < 2; i++)
         {
-            if (xCoord_1 < pos1->x) {
-                xCoord_1 = xCoord_1 + 1;
+            if (x2 < pos1->x)
+            {
+                x2 = x2 + 1;
             }
-            if (xCoord_1 > pos1->x) {
-                xCoord_1 = xCoord_1 - 1;
+            if (x2 > pos1->x)
+            {
+                x2 = x2 - 1;
             }
-            if (yCoord_1 < pos1->y) {
-                yCoord_1 = yCoord_1 + 1;
+            if (y2 < pos1->y)
+            {
+                y2 = y2 + 1;
             }
-            if (yCoord_1 > pos1->y) {
-                yCoord_1 = yCoord_1 - 1;
+            if (y2 > pos1->y)
+            {
+                y2 = y2 - 1;
             }
-            tile = GetTile(xCoord_1, yCoord_1);
-            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0) return FALSE;
+            tile = GetTile(x2, y2);
+            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
+            {
+                return FALSE;
+            }
         }
         return TRUE;
     }
