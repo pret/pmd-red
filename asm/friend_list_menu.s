@@ -1565,7 +1565,7 @@ _080263E0:
 	adds r1, r2, 0
 	adds r1, 0x28
 	adds r2, 0x68
-	bl sub_8093560
+	bl GetLinkedSequence
 	ldr r0, [r4]
 	adds r0, 0x68
 	bl sub_801F808

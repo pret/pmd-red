@@ -27,7 +27,7 @@ extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8093560(u32, struct PokemonMove *, u16*);
+extern void GetLinkedSequence(u32, struct PokemonMove *, u16*);
 extern void sub_801F808(u16*);
 extern void sub_8027794();
 extern void sub_801A5D8(u32, u32, u32, u32);
@@ -229,7 +229,7 @@ void sub_8027274(void)
         sub_8014248(gUnknown_80DD7FC,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 0x10:
-        sub_8093560(gUnknown_203B2BC->moveData20.moveIndex,gUnknown_203B2BC->moveData20.moves,gUnknown_203B2BC->moveData20.moveIDs);
+        GetLinkedSequence(gUnknown_203B2BC->moveData20.moveIndex,gUnknown_203B2BC->moveData20.moves,gUnknown_203B2BC->moveData20.moveIDs);
         sub_801F808(gUnknown_203B2BC->moveData20.moveIDs);
         break;
     case 6:

@@ -10,8 +10,8 @@ u8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 
 // second arg should be some sort of struct pointer
-void sub_8093784(int, u8*);
-void sub_80937E0(int, u8*);
+void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
+void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
 void sub_8093974(int, u8*);
 void sub_8093A2C(int, u8*);
 
@@ -208,70 +208,70 @@ int ToggleMoveEnabled(int index, struct PokemonMove* moves) {
     return 1;
 }
 
-int sub_8093560(int index, struct PokemonMove* moves, u16* dest) {
+int GetLinkedSequence(int index, struct PokemonMove* moves, u16* sequenceMoveIDs) {
     int i;
-    int counter;
+    int linkedSequenceLength;
     struct PokemonMove* move;
 
-    counter = 1;
+    linkedSequenceLength = 1;
     move = &moves[index];
-    dest[0] = move->moveID;
+    sequenceMoveIDs[0] = move->moveID;
     for (i = 1; i < 4; i++) {
-        dest[i] = 0;
+        sequenceMoveIDs[i] = 0;
     }
 
-    for (index++, dest++; index < 8 && counter <= 3; index++) {
+    for (index++, sequenceMoveIDs++; index < 8 && linkedSequenceLength <= 3; index++) {
         move = &moves[index];
         if ((move->moveFlags & MOVE_FLAG_LINKED) == 0) {
-            return counter;
+            return linkedSequenceLength;
         }
 
-        *dest++ = move->moveID;
-        counter++;
+        *sequenceMoveIDs++ = move->moveID;
+        linkedSequenceLength++;
     }
-    return counter;
+    return linkedSequenceLength;
 }
 
 int sub_80935B8(struct PokemonMove *moves, int index) {
     int i;
-    int last_index;
-    int for_loop_any1;
+    int linkSequenceStart;
+    int isNonTrivialLinkSequence;
     int any_move_linked;
     int pp;
     int v1;
     
     pp = 99;
     any_move_linked = 0;
-    for_loop_any1 = 0;
+    isNonTrivialLinkSequence = 0;
 
-    last_index = index;
-    while (last_index >= 0) {
-        struct PokemonMove *move = &moves[last_index];
+    linkSequenceStart = index;
+    while (linkSequenceStart >= 0) {
+        struct PokemonMove *move = &moves[linkSequenceStart];
         if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LINKED))) {
             break;
         }
         
-        last_index--;
+        linkSequenceStart--;
     }
 
     // this is so stupid but it works
-    for_loop_any1++;for_loop_any1--;
+    isNonTrivialLinkSequence++;isNonTrivialLinkSequence--;
 
-    for (i = last_index + 1; i < 4; i++) {
+    for (i = linkSequenceStart + 1; i < 4; i++) {
         struct PokemonMove *move = &moves[i];
         if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LINKED))) {
             break;
         }
         
-        for_loop_any1 = 1;
+        isNonTrivialLinkSequence = 1;
     }
 
-    if (!for_loop_any1) {
+    if (!isNonTrivialLinkSequence) {
         return 99;
     }
 
     v1 = 0;
-    while (--i >= last_index) {
+    while (--i >= linkSequenceStart) {
         struct PokemonMove* move = &moves[i];
         if (!(move->moveFlags & MOVE_FLAG_EXISTS)) {
             break;
@@ -279,7 +279,7 @@ int sub_80935B8(struct PokemonMove *moves, int index) {
         if (pp > move->PP) {
             pp = move->PP;
         }
-        if (!move->PP) {
+        if (move->PP == 0) {
             v1 = 1;
         }
         if (move->moveFlags2 & MOVE_FLAG_REPLACE) {
@@ -291,7 +291,7 @@ int sub_80935B8(struct PokemonMove *moves, int index) {
         return pp;
     }
 
-    for (i = last_index + 1; i < 4; i++) {
+    for (i = linkSequenceStart + 1; i < 4; i++) {
         struct PokemonMove* move = &moves[i];
         if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS)) {
             break;
@@ -314,10 +314,10 @@ int sub_80935B8(struct PokemonMove *moves, int index) {
     }
 }
 
-void sub_80936D8(int index) {
-    u8 someStruct[0x80];
-    sub_8093784(index, someStruct);
-    sub_80937E0(index, someStruct);
+void sub_80936D8(struct PokemonMove* moves) {
+    struct PokemonMove someStruct[4][4];
+    sub_8093784(moves, someStruct);
+    sub_80937E0(moves, someStruct);
 }
 
 void sub_80936F4(int index) {
@@ -333,12 +333,12 @@ void sub_809371C(struct PokemonMove* move) {
     sub_8093B40(move, moves);
 }
 
-int sub_8093744(struct PokemonMove moves[4][4], int index) {
+int sub_8093744(struct PokemonMove moves[4][4]) {
     int i, j;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            if ((moves[i][j].moveFlags & 1) && (moves[i][j].moveFlags & 0x80)) {
+            if ((moves[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moves[i][j].moveFlags & MOVE_FLAG_UNK80)) {
                 return i;
             }
         }
@@ -346,3 +346,116 @@ int sub_8093744(struct PokemonMove moves[4][4], int index) {
     return -1;
 }
 
+void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
+    int i, j;
+    int k;
+    int moveSetIndex;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            moveSets[i][j].moveFlags = 0;
+        }
+    }
+
+    moveSetIndex = -1;
+    for (j = 0, k = 0; k < 4; j++, k++) {
+        if (k == 0 || !(moves[k].moveFlags & MOVE_FLAG_LINKED)) {
+            moveSetIndex++;
+            j = 0;
+        }
+        moveSets[moveSetIndex][j] = moves[k];
+        moveSets[moveSetIndex][j].moveFlags &= ~MOVE_FLAG_LINKED;
+    }
+}
+
+
+void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
+    int i, j;
+    int movesCopied;
+    
+    bool8 moveFlags8[4];
+    bool8 moveFlags4[4];
+
+    movesCopied = 0;
+    
+    for (i = 0; i < 4; i++) {
+        moveFlags8[i] = 0;
+        moveFlags4[i] = 0;
+
+        for (j = 0; j < 4; j++) {
+            u8 flag;
+            
+            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+                continue;
+            }
+
+            flag = MOVE_FLAG_SET;
+            flag &= moveSets[i][j].moveFlags;
+            if (flag) {
+                moveFlags8[i] = TRUE;
+            }
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+                moveFlags4[i] = TRUE;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = moveSets[i][j];
+
+                if (j == 0) {
+                    moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
+                }
+                else {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_LINKED;
+                }
+                
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_SET;
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_ENABLED;
+                if (moveFlags8[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_SET;
+                }
+                if (moveFlags4[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_ENABLED;
+                }
+
+                movesCopied++;
+                if (movesCopied == 4) {
+                    return;
+                }
+            }
+        }
+    }
+}
+
+// the next two functions are exactly the same
+int sub_80938F4(struct PokemonMove moveSets[8][8]) {
+    int i, j;
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if ((moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moveSets[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+                return i;
+            }
+        }
+    }
+    
+    return -1;
+}
+
+// I expect the intent was to check for a different flag in this one
+int sub_8093934(struct PokemonMove moveSets[8][8]) {
+    int i, j;
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if ((moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moveSets[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+                return i;
+            }
+        }
+    }
+    
+    return -1;
+}

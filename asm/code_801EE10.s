@@ -2776,7 +2776,7 @@ _08020460:
 	adds r1, r2, 0
 	adds r1, 0x24
 	adds r2, 0x64
-	bl sub_8093560
+	bl GetLinkedSequence
 _0802046E:
 	ldr r0, [r5]
 	adds r0, 0x64

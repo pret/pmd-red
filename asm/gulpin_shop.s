@@ -77,7 +77,7 @@ _0801EAB4:
 	ldr r0, [r2, 0x20]
 	ldr r1, [r2, 0x10]
 	adds r2, 0x14
-	bl sub_8093560
+	bl GetLinkedSequence
 	ldr r0, [r4]
 	adds r0, 0x14
 	bl sub_801F808

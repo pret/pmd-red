@@ -10,7 +10,8 @@ enum MoveFlag
     MOVE_FLAG_ENABLED = 1 << 2, // Enabled for the AI to use.
     MOVE_FLAG_SET = 1 << 3, // This move can be triggered by pressing L+A instead of having to go to the move menu.
     MOVE_FLAG_LAST_USED = 1 << 4, // The most recent move used by the Pokémon.
-    MOVE_FLAG_DISABLED = 1 << 5 // Disabled by an effect like Taunt.
+    MOVE_FLAG_DISABLED = 1 << 5, // Disabled by an effect like Taunt.
+    MOVE_FLAG_UNK80 = 1 << 7
 };
 
 enum MoveFlag2

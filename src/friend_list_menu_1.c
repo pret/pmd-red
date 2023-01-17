@@ -82,7 +82,7 @@ extern void sub_8023DA4(void);
 
 extern void sub_809401C(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
 extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
-extern void sub_8093560(u32, struct PokemonMove *, u16*);
+extern void GetLinkedSequence(u32, struct PokemonMove *, u16*);
 extern void sub_801F808(u16 *);
 u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8025E68(u32 , u32 *);
@@ -283,7 +283,7 @@ void sub_8025518(void)
         sub_801F1B0(1,0);
         break;
     case 0x11:
-        sub_8093560(gUnknown_203B2B4->moveData20.moveIndex,gUnknown_203B2B4->moveData20.moves, gUnknown_203B2B4->moveData20.moveIDs);
+        GetLinkedSequence(gUnknown_203B2B4->moveData20.moveIndex,gUnknown_203B2B4->moveData20.moves, gUnknown_203B2B4->moveData20.moveIDs);
         sub_801F808(gUnknown_203B2B4->moveData20.moveIDs);
         break;
     case 0x12:
