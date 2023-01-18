@@ -13,7 +13,15 @@ struct unkStruct_203B2BC
     struct HeldItem item2;
     struct PokemonStruct *unk18;
     u8 unk1C;
-    struct unkMoveData moveData20;
+    u32 moveIndex;  // some sort of move index
+    u16 moveID;
+    struct PokemonMove moves[8];
+    u16 moveIDs[4];   // some list of move IDs
+
+    u32 unk70;
+    s32 unk74;
+    u32 unk78;
+    u32 unk7C;
     u8 fill80[0xFD - 0x80];
     u32 unkFD;
     u8 fill101[0x11C - 0x104];

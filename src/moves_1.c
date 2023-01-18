@@ -12,11 +12,11 @@ bool8 DoesMoveCharge(u16 move);
 // second arg should be some sort of struct pointer
 void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
 void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
-void sub_8093974(int, u8*);
-void sub_8093A2C(int, u8*);
+void sub_8093974(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
+void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
 
-void sub_80939D0(struct PokemonMove*, struct PokemonMove*);
-void sub_8093B40(struct PokemonMove*, struct PokemonMove*);
+void sub_80939D0(struct PokemonMove*, struct PokemonMove[8][8]);
+void sub_8093B40(struct PokemonMove*, struct PokemonMove[8][8]);
 
 
 int IsMoveSet(int index, struct PokemonMove* struct_ptr)
@@ -320,17 +320,17 @@ void sub_80936D8(struct PokemonMove* moves) {
     sub_80937E0(moves, someStruct);
 }
 
-void sub_80936F4(int index) {
-    u8 someStruct[0x80 * 4];
-    sub_8093974(index, someStruct);
-    sub_8093A2C(index, someStruct);
+void sub_80936F4(struct PokemonMove* moves) {
+    struct PokemonMove moveSets[8][8];
+    sub_8093974(moves, moveSets);
+    sub_8093A2C(moves, moveSets);
 }
 
-void sub_809371C(struct PokemonMove* move) {
-    struct PokemonMove moves[64];
+void sub_809371C(struct PokemonMove* moves) {
+    struct PokemonMove moveSets[8][8];
 
-    sub_80939D0(move, moves);
-    sub_8093B40(move, moves);
+    sub_80939D0(moves, moveSets);
+    sub_8093B40(moves, moveSets);
 }
 
 int sub_8093744(struct PokemonMove moves[4][4]) {
@@ -446,6 +446,7 @@ int sub_80938F4(struct PokemonMove moveSets[8][8]) {
 }
 
 // I expect the intent was to check for a different flag in this one
+// or the argument is a struct type that does hold the moves as a field
 int sub_8093934(struct PokemonMove moveSets[8][8]) {
     int i, j;
 
@@ -458,4 +459,176 @@ int sub_8093934(struct PokemonMove moveSets[8][8]) {
     }
     
     return -1;
+}
+
+// again, the next two functions are exactly the same
+// they are also the same as sub_8093784 but for [8][8] moveSets instead of
+// [4][4] moveSets
+void sub_8093974(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+    int i, j;
+    int k;
+    int moveSetIndex;
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            moveSets[i][j].moveFlags = 0;
+        }
+    }
+    moveSetIndex = -1;
+    for (j = 0, k = 0; k < 8; j++, k++) {
+        struct PokemonMove* move = &moves[k];
+        if (k == 0 || !(move->moveFlags & 2)) {
+            moveSetIndex++;
+            j = 0;
+        }
+        moveSets[moveSetIndex][j] = *move;
+        moveSets[moveSetIndex][j].moveFlags &= ~2;
+    }
+}
+
+void sub_80939D0(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+    int i, j;
+    int k;
+    int moveSetIndex;
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            moveSets[i][j].moveFlags = 0;
+        }
+    }
+    moveSetIndex = -1;
+    for (j = 0, k = 0; k < 8; j++, k++) {
+        struct PokemonMove* move = &moves[k];
+        if (k == 0 || !(move->moveFlags & 2)) {
+            moveSetIndex++;
+            j = 0;
+        }
+        moveSets[moveSetIndex][j] = *move;
+        moveSets[moveSetIndex][j].moveFlags &= ~2;
+    }
+}
+
+// the next 2 functions are again exactly the same
+// these functions are the same as sub_80937E0 but for [8][8] moveSets
+// instead of [4][4] moveSets
+void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+    int i, j;
+    int movesCopied;
+    
+    bool8 moveFlags8[8];
+    bool8 moveFlags4[8];
+
+    movesCopied = 0;
+    
+    for (i = 0; i < 8; i++) {
+        moveFlags8[i] = 0;
+        moveFlags4[i] = 0;
+
+        for (j = 0; j < 8; j++) {
+            u8 flag;
+            
+            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+                continue;
+            }
+
+            flag = MOVE_FLAG_SET;
+            flag &= moveSets[i][j].moveFlags;
+            if (flag) {
+                moveFlags8[i] = TRUE;
+            }
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+                moveFlags4[i] = TRUE;
+            }
+        }
+    }
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = moveSets[i][j];
+
+                if (j == 0) {
+                    moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
+                }
+                else {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_LINKED;
+                }
+                
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_SET;
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_ENABLED;
+                if (moveFlags8[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_SET;
+                }
+                if (moveFlags4[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_ENABLED;
+                }
+
+                movesCopied++;
+                if (movesCopied == 8) {
+                    return;
+                }
+            }
+        }
+    }
+}
+
+void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+    int i, j;
+    int movesCopied;
+    
+    bool8 moveFlags8[8];
+    bool8 moveFlags4[8];
+
+    movesCopied = 0;
+    
+    for (i = 0; i < 8; i++) {
+        moveFlags8[i] = 0;
+        moveFlags4[i] = 0;
+
+        for (j = 0; j < 8; j++) {
+            u8 flag;
+            
+            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+                continue;
+            }
+
+            flag = MOVE_FLAG_SET;
+            flag &= moveSets[i][j].moveFlags;
+            if (flag) {
+                moveFlags8[i] = TRUE;
+            }
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+                moveFlags4[i] = TRUE;
+            }
+        }
+    }
+
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = moveSets[i][j];
+
+                if (j == 0) {
+                    moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
+                }
+                else {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_LINKED;
+                }
+                
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_SET;
+                moves[movesCopied].moveFlags &= ~MOVE_FLAG_ENABLED;
+                if (moveFlags8[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_SET;
+                }
+                if (moveFlags4[i] && (j == 0)) {
+                    moves[movesCopied].moveFlags |= MOVE_FLAG_ENABLED;
+                }
+
+                movesCopied++;
+                if (movesCopied == 8) {
+                    return;
+                }
+            }
+        }
+    }
 }
