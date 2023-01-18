@@ -305,7 +305,6 @@ SECTIONS {
         src/moves.o(.text);
         asm/moves_1.o(.text);
         src/moves_1.o(.text);
-        src/moves_2.o(.text);
         asm/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
