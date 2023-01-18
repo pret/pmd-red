@@ -36,7 +36,6 @@ extern u8 gUnknown_81098EC[];
 extern u8 *gRangeNames[];
 extern u8 gUnknown_810992C[];
 
-extern void sub_8093F10(struct PokemonMove *, struct PokemonMove *);
 extern void sub_80928C0(u8 *, struct PokemonMove *, struct unkStruct_80928C0 *);
 
 void LoadWazaParameters(void)
@@ -60,7 +59,7 @@ u8 sub_809287C(struct PokemonMove *move)
 void sub_80928A0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *r2)
 {
     struct PokemonMove stack;
-    sub_8093F10(&stack, move);
+    CopyAndResetMove(&stack, move);
     sub_80928C0(buffer, &stack, r2);
 }
 

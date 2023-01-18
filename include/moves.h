@@ -31,4 +31,7 @@ bool8 DoesMoveCharge(u16 move);
 
 void sub_809371C(struct PokemonMove* move);
 
+void sub_8092D54(u8 *buffer, struct PokemonMove *move);
+extern void CopyAndResetMove(struct PokemonMove *, struct PokemonMove *);
+
 #endif // GUARD_MOVES_H

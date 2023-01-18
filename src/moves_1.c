@@ -3,13 +3,19 @@
 #include "memory.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "subStruct_203B240.h"
+#include "code_809447C.h"
+#include "text_util.h"
+
+extern u8 gAvailablePokemonNames[];
+extern const char gUnknown_8109930[];
+extern struct MoveData *gMovesData;
 
 u8 sub_8093468(int param_1, struct PokemonMove* src_struct);
 u8 sub_8093400(int param_1, struct PokemonMove* src_struct);
 u8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 
-// second arg should be some sort of struct pointer
 void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
 void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
 void sub_8093974(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
@@ -17,6 +23,22 @@ void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
 
 void sub_80939D0(struct PokemonMove*, struct PokemonMove[8][8]);
 void sub_8093B40(struct PokemonMove*, struct PokemonMove[8][8]);
+
+int sub_8093DE8(int, struct PokemonMove*, int, struct subStruct_203B240**);
+
+extern void sub_80073B8(u32);
+void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
+extern void sub_8093E90(struct PokemonMove*, int);  // print something
+extern void sub_80073E0(u32);
+extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
+
+extern void sub_80078A4(u32, u32, u32, u32, u32);
+extern u8 sub_8092B00(struct PokemonMove*);
+extern u32 sub_8092BC0(struct PokemonMove*);
+extern u32 gUnknown_202DE30;
+extern u8* gPtrTypeText;     // "Type"
+extern u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
 
 int IsMoveSet(int index, struct PokemonMove* struct_ptr)
@@ -632,3 +654,234 @@ void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
         }
     }
 }
+
+
+// the next two are again the same
+void sub_8093C54(struct PokemonMove* moves, int index) {
+    int i;
+    int copiedMoves;
+    struct PokemonMove moveSet[8];
+    
+    moves[index].moveFlags = 0;
+    for (i = index + 1; i < 8; i++) {
+        struct PokemonMove* move = &moves[i];
+
+        // TODO: don't do this trickery
+        asm("");
+        if (!(move->moveFlags & 1)) {
+            break;
+        }
+        if (!(move->moveFlags & 2)) {
+            break;
+        }
+
+        move->moveFlags = 0;
+    }
+
+    copiedMoves = 0;
+    for (i = 0; i < 8; i++) {
+        if (moves[i].moveFlags & 1) {
+            moveSet[copiedMoves++] = moves[i];
+        }
+    }
+
+    while (copiedMoves < 8) {
+        moveSet[copiedMoves++].moveFlags = 0;
+    }
+
+    for (i = 0; i < 8; i++) {
+        moves[i] = moveSet[i];
+    }
+}
+
+void sub_8093CF8(struct PokemonMove* moves, int index) {
+    int i;
+    int copiedMoves;
+    struct PokemonMove moveSet[8];
+    
+    moves[index].moveFlags = 0;
+    for (i = index + 1; i < 8; i++) {
+        struct PokemonMove* move = &moves[i];
+        asm("");
+        if (!(move->moveFlags & 1)) {
+            break;
+        }
+        if (!(move->moveFlags & 2)) {
+            break;
+        }
+
+        move->moveFlags = 0;
+    }
+
+    copiedMoves = 0;
+    for (i = 0; i < 8; i++) {
+        if (moves[i].moveFlags & 1) {
+            moveSet[copiedMoves++] = moves[i];
+        }
+    }
+
+    while (copiedMoves < 8) {
+        moveSet[copiedMoves++].moveFlags = 0;
+    }
+
+    for (i = 0; i < 8; i++) {
+        moves[i] = moveSet[i];
+    }
+}
+
+int sub_8093D9C(int a1, u16 moveID, int a3, struct subStruct_203B240** a4) {
+    struct PokemonMove move;
+
+    InitPokemonMove(&move, moveID);
+    return sub_8093DE8(a1, &move, a3, a4);
+}
+
+int sub_8093DC4(int a1, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
+    struct PokemonMove newMove;
+
+    CopyAndResetMove(&newMove, move);
+    return sub_8093DE8(a1, &newMove, a3, a4);
+}
+
+int sub_8093DE8(int x, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
+    char* moveDescription;
+    int y;
+    char buffer[800];
+    
+    sub_80073B8(a3);
+    sub_80928C0(gAvailablePokemonNames, move, 0);
+    xxx_format_and_draw(8 * x + 16, 0, gUnknown_8109930, a3, 0);
+    y = 19;
+    moveDescription = gMovesData[move->moveID].descriptionPointer;
+    if (moveDescription[0] == '*')
+    {
+        y = 16;
+        ++moveDescription;
+    }
+    xxx_format_and_draw(4, y, moveDescription, a3, 0);
+    sub_8093E90(move, a3);
+    sub_80073E0(a3);
+    strcpy(buffer, gMovesData[move->moveID].descriptionPointer);
+    return sub_8097DF0(buffer, a4);
+}
+
+void sub_8093E90(struct PokemonMove* move, int y) {
+    u8 type;
+    s32 power;
+    const char* text;
+    
+    sub_80078A4(y, 4, 72, 200, 7);
+    sub_8092D54(gAvailablePokemonNames, move);
+    xxx_format_and_draw(4, 74, gUnknown_810CF00, y, 0);
+    xxx_format_and_draw(4, 86, gPtrTypeText, y, 0);
+    type = GetMoveType(move);
+    text = GetUnformattedTypeString(type);
+    xxx_format_and_draw(64, 86, text, y, 0);
+    power = GetMovePower(move);
+    gUnknown_202DE30 = power;
+}
+
+void CopyAndResetMove(struct PokemonMove* dest, struct PokemonMove* src) {
+    if (src->moveFlags & MOVE_FLAG_EXISTS) {
+        dest->moveFlags = src->moveFlags;
+        dest->moveFlags2 = 0;
+        dest->moveID = src->moveID;
+        dest->PP = gMovesData[src->moveID].maxPP;
+        dest->powerBoost = src->PP;  // this seems horribly bugged
+    }
+    else {
+        dest->moveFlags = 0;
+    }
+}
+
+void sub_8093F50(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        if (srcMoves[i].moveFlags & 1) {
+            destMoves[i].moveFlags = srcMoves[i].moveFlags;
+            destMoves[i].moveFlags2 = 0;
+            destMoves[i].moveID = srcMoves[i].moveID;
+            destMoves[i].PP = gMovesData[srcMoves[i].moveID].maxPP;
+            destMoves[i].powerBoost = srcMoves[i].PP;
+        }
+        else {
+            destMoves[i].moveFlags = 0;
+        }
+    }
+
+    // possibly destMoves is not just an array and this is the
+    // next struct field
+    // this index would be out of bounds after all
+    destMoves[4].moveFlags = 0;
+}
+
+void sub_8093FA8(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        destMoves[i].moveFlags = srcMoves[i].moveFlags;
+        destMoves[i].moveID = srcMoves[i].moveID;
+        destMoves[i].PP = srcMoves[i].powerBoost;
+    }
+}
+
+void sub_8093FC8(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
+    int movesCopied;
+
+    movesCopied = 0;
+    for (movesCopied = 0; movesCopied < 4; movesCopied++) {
+        if (!(srcMoves[movesCopied].moveFlags & MOVE_FLAG_EXISTS)) {
+            break;
+        }
+
+        destMoves[movesCopied] = srcMoves[movesCopied];
+        destMoves[movesCopied].moveFlags2 &= ~MOVE_FLAG2_UNK4;
+    }
+
+    while (movesCopied < 8) {
+        destMoves[movesCopied++].moveFlags = 0;
+    }
+}
+
+void sub_809401C(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
+    int movesCopied;
+
+    movesCopied = 0;
+    for (movesCopied = 0; movesCopied < 4; movesCopied++) {
+        if (!(srcMoves[movesCopied].moveFlags & MOVE_FLAG_EXISTS)) {
+            break;
+        }
+
+        destMoves[movesCopied] = srcMoves[movesCopied];
+    }
+
+    while (movesCopied < 8) {
+        destMoves[movesCopied++].moveFlags = 0;
+    }
+}
+
+void sub_8094060(struct PokemonMove* srcMoves, struct PokemonMove* destMoves) {
+    int i, j;
+
+    j = 0;
+    for (i = 0; i < 8; i++) {
+        struct PokemonMove* srcMove = &srcMoves[i];
+        struct PokemonMove* destMove;
+        if (!(srcMove->moveFlags & 1)) {
+            continue;
+        }
+        
+        if (j >= 4) {
+            break;
+        }
+        destMove = &destMoves[j];
+        *destMove = *srcMove;
+        j++;
+    }
+
+    while (j < 4) {
+        destMoves[j++].moveFlags = 0;
+    }
+}
+

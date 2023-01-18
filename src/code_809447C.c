@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_8092334.h"
+#include "code_809447C.h"
 #include "item.h"
 #include "moves.h"
 
@@ -13,14 +14,6 @@ extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_811383C[];
 extern struct unkStruct_8113080 gUnknown_8113080[];
-
-struct unkStruct_80928C0
-{
-    u32 unk0;
-    s32 unk4;
-    u8 unk8;
-    u8 unk9;
-};
 
 void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_string(const char *, u8 *, void *, u32);

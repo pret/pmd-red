@@ -17,6 +17,7 @@ enum MoveFlag
 enum MoveFlag2
 {
     MOVE_FLAG_SEALED = 1 << 0,
+    MOVE_FLAG2_UNK4 = 1 << 2,
     MOVE_FLAG_TEMPORARY = 1 << 3, // Used for moves copied by Mimic.
     MOVE_FLAG_REPLACE = 1 << 5 // Used for moves copied by Sketch.
 };
