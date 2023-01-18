@@ -35,7 +35,7 @@ extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
 extern void sub_801B3C0(struct ItemSlot *);
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
+extern void unk_CopyMoves4To8(struct PokemonMove *, struct PokemonMove *);
 extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
@@ -206,7 +206,7 @@ void sub_8027274(void)
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        sub_809401C(gUnknown_203B2BC->moves,gUnknown_203B2BC->unk18->moves);
+        unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->unk18->moves);
         sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,0,0);
         break;
     case 0xf:

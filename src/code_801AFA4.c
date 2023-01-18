@@ -27,7 +27,7 @@ extern u8 gAvailablePokemonNames[0x50];
 extern u8 gUnknown_202E218[0x50];
 
 extern void InitZeroedPPPokemonMove(struct PokemonMove*, u16);
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *);
+extern void unk_CopyMoves4To8(struct PokemonMove *, struct PokemonMove *);
 extern bool8 IsHMItem(u8);
 extern void DisplayGulpinDialogueSprite(u32, u32, void *);
 extern void sub_801B178(void);
@@ -189,7 +189,7 @@ void sub_801B200(void)
                 gUnknown_203B22C->chosenPokemon = gUnknown_203B22C->unk50[temp - 4];
                 gUnknown_203B22C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->chosenPokemon];
                 PrintPokeNameToBuffer(gUnknown_202E218, gUnknown_203B22C->pokeStruct);
-                sub_809401C(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
+                unk_CopyMoves4To8(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
                 for(moveIndex = 0; moveIndex < MAX_MON_MOVES * 2; moveIndex++)
                 {
                     pokeMove = &gUnknown_203B22C->moves[moveIndex];

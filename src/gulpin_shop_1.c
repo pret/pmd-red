@@ -9,7 +9,7 @@
 
 extern struct unkStruct_203B26C *gUnknown_203B26C;
 extern void UpdateGulpinShopState(u32);
-extern void sub_8093CF8(struct PokemonMove *, u32);
+extern void RemoveLinkSequenceFromMoves8(struct PokemonMove *, u32);
 extern void sub_801F214(void);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801F890(void);
@@ -67,7 +67,7 @@ void sub_801EDC0(void)
         {
             case 4:
                 sub_801F214();
-                sub_8093CF8(gUnknown_203B26C->unk10, gUnknown_203B26C->unk20);
+                RemoveLinkSequenceFromMoves8(gUnknown_203B26C->unk10, gUnknown_203B26C->unk20);
                 gUnknown_203B26C->state = 5;
                 break;
             case 1:

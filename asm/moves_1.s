@@ -341,9 +341,9 @@ sub_8092F80:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093784
+	bl unk_GetLinkedSequences4
 	mov r0, sp
-	bl sub_8093744
+	bl unk_FindMoveFlag2Unk80InLinkedSequences44
 	adds r3, r0, 0
 	cmp r3, 0x2
 	bhi _08092FCC
@@ -367,7 +367,7 @@ _08092FBA:
 _08092FCC:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80937E0
+	bl unk_LinkedSequencesToMoves4
 	movs r3, 0
 	movs r5, 0x80
 	movs r4, 0x7F
@@ -415,9 +415,9 @@ sub_8093008:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093974
+	bl unk_GetLinkedSequences8
 	mov r0, sp
-	bl sub_80938F4
+	bl unk_FindMoveFlag2Unk80InLinkedSequences88
 	adds r3, r0, 0
 	cmp r3, 0x6
 	bhi _08093056
@@ -441,7 +441,7 @@ _08093044:
 _08093056:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093A2C
+	bl unk_LinkedSequencesToMoves8
 	movs r3, 0
 	movs r5, 0x80
 	movs r4, 0x7F
@@ -493,9 +493,9 @@ sub_809309C:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80939D0
+	bl unk_GetLinkedSequences8_v2
 	mov r0, sp
-	bl sub_8093934
+	bl unk_FindMoveFlag2Unk80InLinkedSequences88_v2
 	adds r3, r0, 0
 	cmp r3, 0x6
 	bhi _080930EA
@@ -519,7 +519,7 @@ _080930D8:
 _080930EA:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093B40
+	bl unk_LinkedSequencesToMoves8_v2
 	movs r3, 0
 	movs r5, 0x80
 	movs r4, 0x7F
@@ -570,9 +570,9 @@ sub_8093130:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093784
+	bl unk_GetLinkedSequences4
 	mov r0, sp
-	bl sub_8093744
+	bl unk_FindMoveFlag2Unk80InLinkedSequences44
 	adds r1, r0, 0
 	subs r0, r1, 0x1
 	cmp r0, 0x2
@@ -596,7 +596,7 @@ _0809316A:
 _0809317C:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80937E0
+	bl unk_LinkedSequencesToMoves4
 	movs r1, 0
 	movs r5, 0x80
 	movs r4, 0x7F
@@ -644,9 +644,9 @@ sub_80931B8:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093974
+	bl unk_GetLinkedSequences8
 	mov r0, sp
-	bl sub_80938F4
+	bl unk_FindMoveFlag2Unk80InLinkedSequences88
 	adds r1, r0, 0
 	subs r0, r1, 0x1
 	cmp r0, 0x6
@@ -670,7 +670,7 @@ _080931F4:
 _08093206:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093A2C
+	bl unk_LinkedSequencesToMoves8
 	movs r1, 0
 	movs r5, 0x80
 	movs r4, 0x7F
@@ -722,9 +722,9 @@ sub_809324C:
 	strb r1, [r0]
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80939D0
+	bl unk_GetLinkedSequences8_v2
 	mov r0, sp
-	bl sub_8093934
+	bl unk_FindMoveFlag2Unk80InLinkedSequences88_v2
 	adds r1, r0, 0
 	subs r0, r1, 0x1
 	cmp r0, 0x6
@@ -748,7 +748,7 @@ _08093288:
 _0809329A:
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8093B40
+	bl unk_LinkedSequencesToMoves8_v2
 	movs r1, 0
 	movs r5, 0x80
 	movs r4, 0x7F

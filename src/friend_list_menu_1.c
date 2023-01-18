@@ -87,7 +87,7 @@ extern void sub_801BEEC(s16);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4(void);
 
-extern void sub_809401C(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
+extern void unk_CopyMoves4To8(struct PokemonMove *, struct PokemonMove *); // TODO convert arg 0 to PokemonMove struct *
 extern void sub_801EE10(u32, s16, struct PokemonMove *, u32, u32, u32);
 extern void GetLinkedSequence(u32, struct PokemonMove *, u16*);
 extern void sub_801F808(u16 *);
@@ -283,7 +283,7 @@ void sub_8025518(void)
         sub_80141B4(gUnknown_80DD270,0,0,0x101);
         break;
     case 0xf:
-        sub_809401C(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
+        unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
         sub_801EE10(3,gUnknown_203B2B4->unkE,gUnknown_203B2B4->moves,0,0,0);
         break;
     case 0x10:

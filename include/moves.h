@@ -29,7 +29,7 @@ bool8 MoveAffectedByMuzzled(u16 moveID);
 bool8 IsBlockedBySoundproof(struct PokemonMove *move);
 bool8 DoesMoveCharge(u16 move);
 
-void sub_809371C(struct PokemonMove* move);
+void unk_FixLinkedMovesSetEnabled8_v2(struct PokemonMove* move);
 
 void sub_8092D54(u8 *buffer, struct PokemonMove *move);
 extern void CopyAndResetMove(struct PokemonMove *, struct PokemonMove *);

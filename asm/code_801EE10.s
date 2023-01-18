@@ -319,7 +319,7 @@ _0801F074:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093400
+	bl TryLinkMovesAfter
 	movs r0, 0x6
 	bl PlayMenuSoundEffect
 	movs r7, 0x1
@@ -1506,7 +1506,7 @@ sub_801F9A4:
 	ldrh r1, [r3, 0x8]
 	ldr r2, [r3, 0x5C]
 	adds r3, 0x14
-	bl sub_8093D9C
+	bl unk_MoveIDPrintMoveDescription
 	ldr r1, [r5]
 	str r0, [r1, 0x10]
 	str r4, [r1, 0x24]
@@ -2727,7 +2727,7 @@ _080203F8:
 	adds r0, 0x24
 	ldr r1, [r1, 0x10]
 	adds r1, 0x2C
-	bl sub_809401C
+	bl unk_CopyMoves4To8
 	ldr r0, [r5]
 	movs r5, 0xC
 	ldrsh r1, [r0, r5]
@@ -3893,7 +3893,7 @@ _08020D14:
 	adds r0, 0x24
 	ldr r1, [r1, 0x10]
 	adds r1, 0x2C
-	bl sub_809401C
+	bl unk_CopyMoves4To8
 	movs r5, 0
 	adds r6, r4, 0
 	movs r4, 0x24
@@ -4249,7 +4249,7 @@ _0802101C:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093400
+	bl TryLinkMovesAfter
 	b _08021068
 	.align 2, 0
 _0802102C: .4byte 0x00000133
@@ -4365,7 +4365,7 @@ _08021108:
 	adds r0, r1, 0
 	adds r0, 0x24
 	ldr r1, [r1, 0x18]
-	bl sub_8093CF8
+	bl RemoveLinkSequenceFromMoves8
 	movs r0, 0x23
 	bl sub_801FDA8
 	b _0802112A

@@ -12,24 +12,24 @@ extern const char gUnknown_8109930[];
 extern struct MoveData *gMovesData;
 
 u8 sub_8093468(int param_1, struct PokemonMove* src_struct);
-u8 sub_8093400(int param_1, struct PokemonMove* src_struct);
+u8 TryLinkMovesAfter(int param_1, struct PokemonMove* src_struct);
 u8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 
-void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
-void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]);
-void sub_8093974(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
-void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]);
+void unk_GetLinkedSequences4(struct PokemonMove* moves, struct PokemonMove linkedSequences[4][4]);
+void unk_LinkedSequencesToMoves4(struct PokemonMove* moves, struct PokemonMove linkedSequences[4][4]);
+void unk_GetLinkedSequences8(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]);
+void unk_LinkedSequencesToMoves8(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]);
 
-void sub_80939D0(struct PokemonMove*, struct PokemonMove[8][8]);
-void sub_8093B40(struct PokemonMove*, struct PokemonMove[8][8]);
+void unk_GetLinkedSequences8_v2(struct PokemonMove*, struct PokemonMove[8][8]);
+void unk_LinkedSequencesToMoves8_v2(struct PokemonMove*, struct PokemonMove[8][8]);
 
-int sub_8093DE8(int, struct PokemonMove*, int, struct subStruct_203B240**);
+int unk_PrintMoveDescription(int, struct PokemonMove*, int, struct subStruct_203B240**);
 
 extern void sub_80073B8(u32);
 void sub_80928C0(u8 *buffer, struct PokemonMove *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern void sub_8093E90(struct PokemonMove*, int);  // print something
+extern void unk_MovePrintData(struct PokemonMove*, int);  // print something
 extern void sub_80073E0(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
@@ -61,7 +61,7 @@ int sub_8093318(int param_1, void* src_struct)
 {
     struct PokemonMove dest_struct[8];
     MemoryCopy8((void*)dest_struct, src_struct, 64);
-    return sub_8093400(param_1, dest_struct);
+    return TryLinkMovesAfter(param_1, dest_struct);
 }
 
 int sub_809333C(int param_1, void* src_struct)
@@ -107,7 +107,7 @@ u8 sub_80933D8(int param_1, void* src_struct)
 {
   int result;
 
-  if (!sub_8093400(param_1, src_struct)) {
+  if (!TryLinkMovesAfter(param_1, src_struct)) {
     result = sub_8093468(param_1, src_struct);
   }
   else {
@@ -116,7 +116,7 @@ u8 sub_80933D8(int param_1, void* src_struct)
   return result;
 }
 
-u8 sub_8093400(int index, struct PokemonMove* moves) {
+u8 TryLinkMovesAfter(int index, struct PokemonMove* moves) {
     int i;
     const struct PokemonMove *move = &moves[index];
     if (DoesMoveCharge(move->moveID)) {
@@ -132,13 +132,14 @@ u8 sub_8093400(int index, struct PokemonMove* moves) {
         }
         if (!(moves[i].moveFlags & MOVE_FLAG_LINKED)) {
             moves[i].moveFlags |= MOVE_FLAG_LINKED;
-            sub_809371C(moves);
+            unk_FixLinkedMovesSetEnabled8_v2(moves);
             return 1;
         }
     }
     return 0;
 }
 
+// unlinks move
 NAKED
 u8 sub_8093468(int index, struct PokemonMove* moves)
 {
@@ -174,7 +175,7 @@ u8 sub_8093468(int index, struct PokemonMove* moves)
 "	ble _08093480\n"
 "_080934A0:\n"
 "	adds r0, r6, 0\n"
-"	bl sub_809371C\n"
+"	bl unk_FixLinkedMovesSetEnabled8_v2\n"
 "	adds r0, r5, 0\n"
 "	pop {r4-r7}\n"
 "	pop {r1}\n"
@@ -213,20 +214,20 @@ int ToggleSetMove(int index, struct PokemonMove* moves) {
         flags = move->moveFlags | MOVE_FLAG_SET;
     }
     move->moveFlags = flags;
-    sub_809371C(moves);
+    unk_FixLinkedMovesSetEnabled8_v2(moves);
     return 1;
 }
 
 void UnSetMove(int index, struct PokemonMove* moves) {
     struct PokemonMove* move = &moves[index];
     move->moveFlags &= ~MOVE_FLAG_SET;
-    sub_809371C(moves);
+    unk_FixLinkedMovesSetEnabled8_v2(moves);
 }
 
 int ToggleMoveEnabled(int index, struct PokemonMove* moves) {
     struct PokemonMove* move = &moves[index];
     move->moveFlags ^= MOVE_FLAG_ENABLED;
-    sub_809371C(moves);
+    unk_FixLinkedMovesSetEnabled8_v2(moves);
     return 1;
 }
 
@@ -336,26 +337,30 @@ int sub_80935B8(struct PokemonMove *moves, int index) {
     }
 }
 
-void sub_80936D8(struct PokemonMove* moves) {
-    struct PokemonMove someStruct[4][4];
-    sub_8093784(moves, someStruct);
-    sub_80937E0(moves, someStruct);
+void unk_FixLinkedMovesSetEnabled4(struct PokemonMove* moves) {
+    struct PokemonMove linkedSequences[4][4];
+
+    // all that doing these in a row seems to do is
+    // fix the set/enabled flags by moving them to
+    // the first move of every linked sequence
+    unk_GetLinkedSequences4(moves, linkedSequences);
+    unk_LinkedSequencesToMoves4(moves, linkedSequences);
 }
 
-void sub_80936F4(struct PokemonMove* moves) {
-    struct PokemonMove moveSets[8][8];
-    sub_8093974(moves, moveSets);
-    sub_8093A2C(moves, moveSets);
+void unk_FixLinkedMovesSetEnabled8(struct PokemonMove* moves) {
+    struct PokemonMove linkedSequences[8][8];
+    unk_GetLinkedSequences8(moves, linkedSequences);
+    unk_LinkedSequencesToMoves8(moves, linkedSequences);
 }
 
-void sub_809371C(struct PokemonMove* moves) {
-    struct PokemonMove moveSets[8][8];
+void unk_FixLinkedMovesSetEnabled8_v2(struct PokemonMove* moves) {
+    struct PokemonMove linkedSequences[8][8];
 
-    sub_80939D0(moves, moveSets);
-    sub_8093B40(moves, moveSets);
+    unk_GetLinkedSequences8_v2(moves, linkedSequences);
+    unk_LinkedSequencesToMoves8_v2(moves, linkedSequences);
 }
 
-int sub_8093744(struct PokemonMove moves[4][4]) {
+int unk_FindMoveFlag2Unk80InLinkedSequences44(struct PokemonMove moves[4][4]) {
     int i, j;
 
     for (i = 0; i < 4; i++) {
@@ -368,14 +373,14 @@ int sub_8093744(struct PokemonMove moves[4][4]) {
     return -1;
 }
 
-void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
+void unk_GetLinkedSequences4(struct PokemonMove* moves, struct PokemonMove linkedSequences[4][4]) {
     int i, j;
     int k;
     int moveSetIndex;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            moveSets[i][j].moveFlags = 0;
+            linkedSequences[i][j].moveFlags = 0;
         }
     }
 
@@ -385,47 +390,48 @@ void sub_8093784(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
             moveSetIndex++;
             j = 0;
         }
-        moveSets[moveSetIndex][j] = moves[k];
-        moveSets[moveSetIndex][j].moveFlags &= ~MOVE_FLAG_LINKED;
+        linkedSequences[moveSetIndex][j] = moves[k];
+        linkedSequences[moveSetIndex][j].moveFlags &= ~MOVE_FLAG_LINKED;
     }
 }
 
 
-void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
+void unk_LinkedSequencesToMoves4(struct PokemonMove* moves, struct PokemonMove linkedSequences[4][4]) {
     int i, j;
     int movesCopied;
     
-    bool8 moveFlags8[4];
-    bool8 moveFlags4[4];
+    bool8 moves_set[4];
+    bool8 moves_enabled[4];
 
     movesCopied = 0;
     
+    // figure out which linked sequences contain set / enabled moves
     for (i = 0; i < 4; i++) {
-        moveFlags8[i] = 0;
-        moveFlags4[i] = 0;
+        moves_set[i] = 0;
+        moves_enabled[i] = 0;
 
         for (j = 0; j < 4; j++) {
             u8 flag;
             
-            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+            if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
                 continue;
             }
 
             flag = MOVE_FLAG_SET;
-            flag &= moveSets[i][j].moveFlags;
+            flag &= linkedSequences[i][j].moveFlags;
             if (flag) {
-                moveFlags8[i] = TRUE;
+                moves_set[i] = TRUE;
             }
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
-                moveFlags4[i] = TRUE;
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+                moves_enabled[i] = TRUE;
             }
         }
     }
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
-                moves[movesCopied] = moveSets[i][j];
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = linkedSequences[i][j];
 
                 if (j == 0) {
                     moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
@@ -436,10 +442,10 @@ void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
                 
                 moves[movesCopied].moveFlags &= ~MOVE_FLAG_SET;
                 moves[movesCopied].moveFlags &= ~MOVE_FLAG_ENABLED;
-                if (moveFlags8[i] && (j == 0)) {
+                if (moves_set[i] && (j == 0)) {
                     moves[movesCopied].moveFlags |= MOVE_FLAG_SET;
                 }
-                if (moveFlags4[i] && (j == 0)) {
+                if (moves_enabled[i] && (j == 0)) {
                     moves[movesCopied].moveFlags |= MOVE_FLAG_ENABLED;
                 }
 
@@ -453,12 +459,12 @@ void sub_80937E0(struct PokemonMove* moves, struct PokemonMove moveSets[4][4]) {
 }
 
 // the next two functions are exactly the same
-int sub_80938F4(struct PokemonMove moveSets[8][8]) {
+int unk_FindMoveFlag2Unk80InLinkedSequences88(struct PokemonMove linkedSequences[8][8]) {
     int i, j;
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if ((moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moveSets[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_UNK80)) {
                 return i;
             }
         }
@@ -469,12 +475,12 @@ int sub_80938F4(struct PokemonMove moveSets[8][8]) {
 
 // I expect the intent was to check for a different flag in this one
 // or the argument is a struct type that does hold the moves as a field
-int sub_8093934(struct PokemonMove moveSets[8][8]) {
+int unk_FindMoveFlag2Unk80InLinkedSequences88_v2(struct PokemonMove linkedSequences[8][8]) {
     int i, j;
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if ((moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moveSets[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_UNK80)) {
                 return i;
             }
         }
@@ -484,38 +490,43 @@ int sub_8093934(struct PokemonMove moveSets[8][8]) {
 }
 
 // again, the next two functions are exactly the same
-// they are also the same as sub_8093784 but for [8][8] moveSets instead of
-// [4][4] moveSets
-void sub_8093974(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+// they are also the same as unk_GetLinkedSequences4 but for [8][8] linkedSequences instead of
+// [4][4] linkedSequences
+
+// it seems to find all the _actually_ separate moves, and split them
+// out into link sequences in the destination linkedSequences
+void unk_GetLinkedSequences8(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]) {
     int i, j;
     int k;
     int moveSetIndex;
 
+    // clear out linkedSequences
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            moveSets[i][j].moveFlags = 0;
+            linkedSequences[i][j].moveFlags = 0;
         }
     }
+
     moveSetIndex = -1;
     for (j = 0, k = 0; k < 8; j++, k++) {
         struct PokemonMove* move = &moves[k];
-        if (k == 0 || !(move->moveFlags & 2)) {
+        if (k == 0 || !(move->moveFlags & MOVE_FLAG_LINKED)) {
             moveSetIndex++;
             j = 0;
         }
-        moveSets[moveSetIndex][j] = *move;
-        moveSets[moveSetIndex][j].moveFlags &= ~2;
+        linkedSequences[moveSetIndex][j] = *move;
+        linkedSequences[moveSetIndex][j].moveFlags &= ~MOVE_FLAG_LINKED;
     }
 }
 
-void sub_80939D0(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+void unk_GetLinkedSequences8_v2(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]) {
     int i, j;
     int k;
     int moveSetIndex;
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            moveSets[i][j].moveFlags = 0;
+            linkedSequences[i][j].moveFlags = 0;
         }
     }
     moveSetIndex = -1;
@@ -525,15 +536,15 @@ void sub_80939D0(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
             moveSetIndex++;
             j = 0;
         }
-        moveSets[moveSetIndex][j] = *move;
-        moveSets[moveSetIndex][j].moveFlags &= ~2;
+        linkedSequences[moveSetIndex][j] = *move;
+        linkedSequences[moveSetIndex][j].moveFlags &= ~MOVE_FLAG_LINKED;
     }
 }
 
 // the next 2 functions are again exactly the same
-// these functions are the same as sub_80937E0 but for [8][8] moveSets
-// instead of [4][4] moveSets
-void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+// these functions are the same as unk_LinkedSequencesToMoves4 but for [8][8] linkedSequences
+// instead of [4][4] linkedSequences
+void unk_LinkedSequencesToMoves8(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]) {
     int i, j;
     int movesCopied;
     
@@ -549,16 +560,16 @@ void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
         for (j = 0; j < 8; j++) {
             u8 flag;
             
-            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+            if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
                 continue;
             }
 
             flag = MOVE_FLAG_SET;
-            flag &= moveSets[i][j].moveFlags;
+            flag &= linkedSequences[i][j].moveFlags;
             if (flag) {
                 moveFlags8[i] = TRUE;
             }
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_ENABLED) {
                 moveFlags4[i] = TRUE;
             }
         }
@@ -566,8 +577,8 @@ void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
-                moves[movesCopied] = moveSets[i][j];
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = linkedSequences[i][j];
 
                 if (j == 0) {
                     moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
@@ -594,7 +605,7 @@ void sub_8093A2C(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
     }
 }
 
-void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
+void unk_LinkedSequencesToMoves8_v2(struct PokemonMove* moves, struct PokemonMove linkedSequences[8][8]) {
     int i, j;
     int movesCopied;
     
@@ -610,16 +621,16 @@ void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
         for (j = 0; j < 8; j++) {
             u8 flag;
             
-            if (!(moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
+            if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS)) {
                 continue;
             }
 
             flag = MOVE_FLAG_SET;
-            flag &= moveSets[i][j].moveFlags;
+            flag &= linkedSequences[i][j].moveFlags;
             if (flag) {
                 moveFlags8[i] = TRUE;
             }
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_ENABLED) {
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_ENABLED) {
                 moveFlags4[i] = TRUE;
             }
         }
@@ -627,8 +638,8 @@ void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if (moveSets[i][j].moveFlags & MOVE_FLAG_EXISTS) {
-                moves[movesCopied] = moveSets[i][j];
+            if (linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) {
+                moves[movesCopied] = linkedSequences[i][j];
 
                 if (j == 0) {
                     moves[movesCopied].moveFlags &= ~MOVE_FLAG_LINKED;
@@ -657,7 +668,7 @@ void sub_8093B40(struct PokemonMove* moves, struct PokemonMove moveSets[8][8]) {
 
 
 // the next two are again the same
-void sub_8093C54(struct PokemonMove* moves, int index) {
+void RemoveLinkSequenceFromMoves8_v2(struct PokemonMove* moves, int index) {
     int i;
     int copiedMoves;
     struct PokemonMove moveSet[8];
@@ -668,10 +679,10 @@ void sub_8093C54(struct PokemonMove* moves, int index) {
 
         // TODO: don't do this trickery
         asm("");
-        if (!(move->moveFlags & 1)) {
+        if (!(move->moveFlags & MOVE_FLAG_EXISTS)) {
             break;
         }
-        if (!(move->moveFlags & 2)) {
+        if (!(move->moveFlags & MOVE_FLAG_LINKED)) {
             break;
         }
 
@@ -680,7 +691,7 @@ void sub_8093C54(struct PokemonMove* moves, int index) {
 
     copiedMoves = 0;
     for (i = 0; i < 8; i++) {
-        if (moves[i].moveFlags & 1) {
+        if (moves[i].moveFlags & MOVE_FLAG_EXISTS) {
             moveSet[copiedMoves++] = moves[i];
         }
     }
@@ -694,56 +705,60 @@ void sub_8093C54(struct PokemonMove* moves, int index) {
     }
 }
 
-void sub_8093CF8(struct PokemonMove* moves, int index) {
+void RemoveLinkSequenceFromMoves8(struct PokemonMove* moves, int index) {
     int i;
     int copiedMoves;
     struct PokemonMove moveSet[8];
     
+    // remove link sequence (set flags to 0)
     moves[index].moveFlags = 0;
     for (i = index + 1; i < 8; i++) {
         struct PokemonMove* move = &moves[i];
         asm("");
-        if (!(move->moveFlags & 1)) {
+        if (!(move->moveFlags & MOVE_FLAG_EXISTS)) {
             break;
         }
-        if (!(move->moveFlags & 2)) {
+        if (!(move->moveFlags & MOVE_FLAG_LINKED)) {
             break;
         }
 
         move->moveFlags = 0;
     }
 
+    // copy over other moves
     copiedMoves = 0;
     for (i = 0; i < 8; i++) {
-        if (moves[i].moveFlags & 1) {
+        if (moves[i].moveFlags & MOVE_FLAG_EXISTS) {
             moveSet[copiedMoves++] = moves[i];
         }
     }
 
+    // fill with nonexistent moves
     while (copiedMoves < 8) {
         moveSet[copiedMoves++].moveFlags = 0;
     }
 
+    // copy back to original moves pointer
     for (i = 0; i < 8; i++) {
         moves[i] = moveSet[i];
     }
 }
 
-int sub_8093D9C(int a1, u16 moveID, int a3, struct subStruct_203B240** a4) {
+int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4) {
     struct PokemonMove move;
 
     InitPokemonMove(&move, moveID);
-    return sub_8093DE8(a1, &move, a3, a4);
+    return unk_PrintMoveDescription(a1, &move, a3, a4);
 }
 
-int sub_8093DC4(int a1, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
+int unk_MovePrintMoveDescription(int a1, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
     struct PokemonMove newMove;
 
     CopyAndResetMove(&newMove, move);
-    return sub_8093DE8(a1, &newMove, a3, a4);
+    return unk_PrintMoveDescription(a1, &newMove, a3, a4);
 }
 
-int sub_8093DE8(int x, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
+int unk_PrintMoveDescription(int x, struct PokemonMove* move, int a3, struct subStruct_203B240** a4) {
     char* moveDescription;
     int y;
     char buffer[800];
@@ -759,13 +774,13 @@ int sub_8093DE8(int x, struct PokemonMove* move, int a3, struct subStruct_203B24
         ++moveDescription;
     }
     xxx_format_and_draw(4, y, moveDescription, a3, 0);
-    sub_8093E90(move, a3);
+    unk_MovePrintData(move, a3);
     sub_80073E0(a3);
     strcpy(buffer, gMovesData[move->moveID].descriptionPointer);
     return sub_8097DF0(buffer, a4);
 }
 
-void sub_8093E90(struct PokemonMove* move, int y) {
+void unk_MovePrintData(struct PokemonMove* move, int y) {
     u8 type;
     s32 power;
     const char* text;
@@ -794,7 +809,7 @@ void CopyAndResetMove(struct PokemonMove* dest, struct PokemonMove* src) {
     }
 }
 
-void sub_8093F50(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
+void CopyAndResetMoves(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
     int i;
 
     for (i = 0; i < 4; i++) {
@@ -816,7 +831,7 @@ void sub_8093F50(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
     destMoves[4].moveFlags = 0;
 }
 
-void sub_8093FA8(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
+void CopyBareMoveData(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
     int i;
 
     for (i = 0; i < 4; i++) {
@@ -826,7 +841,7 @@ void sub_8093FA8(struct PokemonMove *destMoves, struct PokemonMove *srcMoves) {
     }
 }
 
-void sub_8093FC8(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
+void unk_CopyMoves4To8AndClearFlag2Unk4(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
     int movesCopied;
 
     movesCopied = 0;
@@ -844,7 +859,7 @@ void sub_8093FC8(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
     }
 }
 
-void sub_809401C(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
+void unk_CopyMoves4To8(struct PokemonMove* destMoves, struct PokemonMove* srcMoves) {
     int movesCopied;
 
     movesCopied = 0;
@@ -868,7 +883,7 @@ void sub_8094060(struct PokemonMove* srcMoves, struct PokemonMove* destMoves) {
     for (i = 0; i < 8; i++) {
         struct PokemonMove* srcMove = &srcMoves[i];
         struct PokemonMove* destMove;
-        if (!(srcMove->moveFlags & 1)) {
+        if (!(srcMove->moveFlags & MOVE_FLAG_EXISTS)) {
             continue;
         }
         

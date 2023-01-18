@@ -1605,7 +1605,7 @@ _080727A8:
 	lsls r1, 1
 	add r1, r8
 	adds r0, r4, 0
-	bl sub_8093FC8
+	bl unk_CopyMoves4To8AndClearFlag2Unk4
 	mov r10, r4
 	cmp r7, 0
 	beq _08072810
@@ -1811,7 +1811,7 @@ sub_8072938:
 	lsls r1, 1
 	add r1, r8
 	mov r0, sp
-	bl sub_8093FC8
+	bl unk_CopyMoves4To8AndClearFlag2Unk4
 	movs r3, 0
 	mov r4, sp
 	mov r2, sp
