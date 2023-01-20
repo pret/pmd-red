@@ -27,9 +27,7 @@ struct unkStruct_203B320
     u8 unkC0[4];
 };
 extern struct unkStruct_203B320 *gUnknown_203B320;
-extern struct UnkTextStruct2 gUnknown_80E083C;
-extern struct UnkTextStruct2 gUnknown_80E0854;
-extern u8 *gUnknown_80E086C[];
+
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
 struct unkStruct_802C39C
@@ -46,6 +44,57 @@ struct unkStruct_802C39C
     /* 0x4C */ u8 *unk4C;
     /* 0x50 */ u8 *unk50[2];
 };
+
+
+const struct UnkTextStruct2 gUnknown_80E083C = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E0854 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x18, 0x11,
+    0x11, 0x00,
+    NULL
+};
+
+extern const u8 SOSList[];
+extern const u8 RequestList[];
+extern const u8 SOSMail[];
+extern const u8 ToDoList[];
+extern const u8 AOKMail[];
+extern const u8 ThanksList[];
+extern const u8 CompletedJobs[];
+extern const u8 OkdRescue[];
+
+const u8 * const gUnknown_80E086C[] = 
+{
+    SOSList,
+    RequestList,
+    SOSMail,
+    ToDoList,
+    AOKMail,
+    ThanksList,
+    CompletedJobs,
+    OkdRescue
+};
+
+ALIGNED(4) const u8 OkdRescue[] = _("OK{APOSTROPHE}d Rescues");
+ALIGNED(4) const u8 CompletedJobs[] = "Completed Jobs";
+ALIGNED(4) const u8 ThanksList[] = "Thanks List";
+ALIGNED(4) const u8 AOKMail[] = "A-OK Mail";
+ALIGNED(4) const u8 ToDoList[] = "To-Do List";
+ALIGNED(4) const u8 SOSMail[] = "SOS Mail";
+ALIGNED(4) const u8 RequestList[] = "Request List";
+ALIGNED(4) const u8 SOSList[] = "SOS List";
+static const u8 wonder_mail_fill[] = "pksdir0";
+
 
 extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);

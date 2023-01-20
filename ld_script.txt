@@ -443,7 +443,9 @@ SECTIONS {
         src/pelipper_board.o(.rodata);
         src/wonder_mail_3_mid.o(.rodata);
         src/makuhita_dojo.o(.rodata);
-        data/data_80DED44.o(.rodata);
+        src/makuhita_dojo_1.o(.rodata);
+        src/wonder_mail_4.o(.rodata);
+        src/wonder_mail_5.o(.rodata);
         src/wonder_mail_6.o(.rodata);
         src/post_office_guide.o(.rodata);
         data/data_80E1F30.o(.rodata);

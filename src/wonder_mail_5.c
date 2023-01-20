@@ -14,9 +14,30 @@ struct unkStruct_203B324
 };
 extern struct unkStruct_203B324 *gUnknown_203B324;
 
+const struct UnkTextStruct2 gUnknown_80E0900 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
 
-extern const struct UnkTextStruct2 gUnknown_80E091C;
-extern const struct UnkTextStruct2 gUnknown_80E0900;
+const u8 DATA_80E0918[] = {0x01, 0x00, 0x12, 0x00};
+
+const struct UnkTextStruct2 gUnknown_80E091C = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x1A, 0x10,
+    0x10, 0x00,
+    DATA_80E0918
+};
+
+const u8 gUnknown_80E0934[] = "ID:";
+const u8 gUnknown_80E0938[] = "%-4d";
+static const u8 wonder_mail_fill[] = "pksdir0";
+
 extern void sub_8030DD4(void);
 extern void sub_801317C(void *);
 extern void PlayMenuSoundEffect(u32);
