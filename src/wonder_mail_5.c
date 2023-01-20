@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/wonder_mail.h"
 #include "memory.h"
 #include "text.h"
 #include "input.h"
@@ -6,6 +7,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "code_800D090.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B324
 {
@@ -19,32 +21,6 @@ struct unkStruct_203B324
 extern struct unkStruct_203B324 *gUnknown_203B324;
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
-
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *dungeon;
-    /* 0xC */ u8 *playerName;
-    /* 0x10 */ s16 clientSpecies;
-    /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x2E - 0x15];
-    u8 unk2E;
-    u8 fill2F[0x34 - 0x2F];
-    u8 unk34;
-    u8 fill35[0x38 - 0x35];
-    /* 0x38 */ u8 unk38[0x40 - 0x38];
-    u8 unk40;
-    u8 unk41;
-    u8 unk42;
-    u8 unk43;
-    u8 unk44;
-    u8 unk45;
-    u8 fill46[0x48 - 0x46];
-    /* 0x48 */ u32 y;
-    /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u8 *unk50[2];
-};
 
 const struct UnkTextStruct2 gUnknown_80E0900 = {
     0x00, 0x00, 0x00, 0x00,
@@ -162,13 +138,13 @@ void sub_8030E48(void)
   switch(mail->mailType)
   {
     case 2:
-    case 4:
+    case WONDER_MAIL_TYPE_AOK:
         stack.unk41 = 10;
         break;
     case 5:
-        stack.unk41 = 0xb;
+        stack.unk41 = 11;
         break;
-    case 0:
+    case WONDER_MAIL_TYPE_NONE:
     default:
         stack.unk41 = 9;
         break;

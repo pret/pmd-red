@@ -6,6 +6,7 @@
 #include "text.h"
 #include "pokemon_mail.h"
 #include "wonder_mail.h"
+#include "code_802C39C.h"
 
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
@@ -76,21 +77,6 @@ struct unkStruct_203B2E0
 };
 extern struct unkStruct_203B2E0 *gUnknown_203B2E0;
 
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *dungeon;
-    /* 0xC */ u8 *playerName;
-    /* 0x10 */ s16 clientSpecies;
-    /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x38 - 0x15];
-    /* 0x38 */ u8 unk38[0x48 - 0x38];
-    /* 0x48 */ u32 y;
-    /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u8 *unk50[2];
-};
-
 extern struct UnkTextStruct2 gUnknown_80DFCB4;
 extern struct UnkTextStruct2 gUnknown_80DFC9C;
 
@@ -131,7 +117,7 @@ void CreateMailMenu(void)
       else {
        sub_803B35C(mail,local.unk0);
         if (IsMailinJobSlot(mail)) {
-          local.unk38[11] = 2;
+          local.unk43 = 2;
         }
         CreateRescueTitle(&local);
       }
@@ -351,7 +337,7 @@ void sub_802C39C(void)
         local.y = sub_8013800(&gUnknown_203B2E0->unk8,index);
         sub_803B35C(mail,local.unk0);
         if (IsMailinJobSlot(GetPelipperBoardSlotInfo(slotIndex))) {
-            local.unk38[11] = 2;
+            local.unk43 = 2;
         }
         CreateRescueTitle(&local);
         index++;

@@ -12,21 +12,6 @@ struct unkStruct_203B2F4
 };
 extern struct unkStruct_203B2F4 *gUnknown_203B2F4;
 
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *dungeon;
-    /* 0xC */ u8 *playerName;
-    /* 0x10 */ s16 clientSpecies;
-    /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x38 - 0x15];
-    /* 0x38 */ u8 unk38[0x48 - 0x38];
-    /* 0x48 */ u32 y;
-    /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u8 *unk50[2];
-};
-
 struct unkStruct_803B344
 {
     // size: 0xB4

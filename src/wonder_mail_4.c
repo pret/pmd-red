@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B320
 {
@@ -29,22 +30,6 @@ struct unkStruct_203B320
 extern struct unkStruct_203B320 *gUnknown_203B320;
 
 extern struct unkStruct_203B480 *gUnknown_203B480;
-
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *dungeon;
-    /* 0xC */ u8 *playerName;
-    /* 0x10 */ s16 clientSpecies;
-    /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x38 - 0x15];
-    /* 0x38 */ u8 unk38[0x48 - 0x38];
-    /* 0x48 */ u32 y;
-    /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u8 *unk50[2];
-};
-
 
 const struct UnkTextStruct2 gUnknown_80E083C = {
     0x00, 0x00, 0x00, 0x00,
@@ -303,9 +288,9 @@ void sub_803092C(void)
       mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
       local.y = sub_8013800(&gUnknown_203B320->unk24,index);
-      local.unk38[8] = 7;
-      local.unk38[10] = 0;
-      local.unk38[12] = 0;
+      local.unk40 = 7;
+      local.unk42 = 0;
+      local.unk44 = 0;
 
       local.dungeon = &mail->dungeon;
       local.playerName = mail->playerName;
@@ -313,22 +298,22 @@ void sub_803092C(void)
       local.clientSpecies = (mail->clientSpecies);
       local.targetSpecies = (mail->clientSpecies);
       local.unk14 = 0;
-      local.fill15[0x19] = 5;
+      local.unk2E = 5;
 
       switch(mail->mailType)
       {
         case WONDER_MAIL_TYPE_AOK:
-            local.unk38[11] = 3;
+            local.unk43 = 3;
             break;
         case WONDER_MAIL_TYPE_THANK_YOU:
-            local.unk38[11] = 4;
+            local.unk43 = 4;
             break;
         case 1:
         case 2:
-            local.unk38[11]= 1;
+            local.unk43 = 1;
             break;
         default:
-            local.unk38[11]= 0;
+            local.unk43 = 0;
             break;
       }
       CreateRescueTitle(&local);

@@ -4,21 +4,7 @@
 #include "memory.h"
 #include "text.h"
 #include "menu.h"
-
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *dungeon;
-    /* 0xC */ u8 *playerName;
-    /* 0x10 */ s16 clientSpecies;
-    /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x38 - 0x15];
-    /* 0x38 */ u8 unk38[0x48 - 0x38];
-    /* 0x48 */ u32 y;
-    /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u32 unk50[2];
-};
+#include "code_802C39C.h"
 
 struct unkStruct_203B2E8
 {
