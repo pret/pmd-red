@@ -6,8 +6,11 @@
 #include "dungeon_global_data.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_items.h"
+#include "dungeon_map_access.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "item.h"
+#include "moves.h"
 #include "move_effects_target.h"
 #include "status.h"
 #include "status_actions.h"
@@ -40,7 +43,24 @@ extern u8 *gUnknown_80FD170[];
 extern u8 *gUnknown_80FCCE8[];
 extern u8 *gUnknown_80FD18C[];
 extern u8 *gUnknown_80FD57C[];
+extern s16 gUnknown_80F4F82;
+extern u8 *gUnknown_80FEBDC[];
 
+extern s16 sub_8057600(struct Move*, u32);
+extern void sub_806CDD4(struct Entity *, u32, u32);
+extern bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos);
+extern u8 sub_8044B28(void);
+extern u8 sub_803F428(struct Position *pos);
+extern void sub_804539C(struct Entity *, u32, u32);
+extern void sub_803E46C(u32);
+bool8 sub_80571F0(struct Entity * pokemon, struct Move *move);
+extern void sub_807EC28(u32);
+extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
+void sub_8075900(struct Entity *pokemon, u8 r1);
+extern void sub_804535C(struct Entity *, u32);
+extern void sub_804AC20(struct Position *);
+extern void sub_806A5B8(struct Entity *entity);
+extern void sub_80694C0(struct Entity *, s32, s32, u32);
 bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos);
 extern void sub_807D148(struct Entity *pokemon, struct Entity *target, u32 r2, struct Position *r3);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
@@ -467,4 +487,105 @@ void sub_805A7D4(struct Entity * pokemon, struct Entity * target, struct Item *i
   stackEntity.spawnGenID = 0;
   SetMessageArgument(gUnknown_202DE58,&stackEntity,0);
   sub_804652C(pokemon,&stackEntity,item,1,0);
+}
+
+bool8 sub_805A85C(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
+{
+  int r4;
+  int r2;
+  int r5;
+  struct Position *r9;
+  struct Position sp_0x18;
+  struct Move sp_0x1C;
+  struct Position32 sp_0x28;
+  struct Tile *tile;
+  struct Entity *entity;
+  s32 temp;
+  s32 temp2;
+  u8 check;
+
+  
+  sp_0x18 = target->pos;
+  sub_806CDD4(target,10,8);
+
+  for(r5 = 0; r5 < 0x28; r5++)
+  {
+    r4 = DungeonRandInt(3);
+    r2 = DungeonRandInt(3);
+    r4--;
+    r2--;
+    if ((r4 != 0) || (r2 != 0)) {
+      sp_0x18.x = target->pos.x + r4;
+      sp_0x18.y = target->pos.y + r2;
+      if (sub_80705F0(target,&sp_0x18) == 0) goto _0805A8C2;
+    }
+  }
+_0805A8C2:
+  if (r5 == 0x28) {
+    sub_80522F4(pokemon,target,*gUnknown_80FEBDC);
+    return FALSE;
+  }
+  temp = sp_0x18.x * 0x1800;
+  temp += (0xC00);
+  sp_0x28.x =  (temp - target->pixelPos.x) / 0xc;
+
+  temp2 = sp_0x18.y * 0x1800;
+  temp2 += (0x80 << 5);
+  sp_0x28.y = ((temp2 - target->pixelPos.y) / 0xc);
+
+
+  if (((check = sub_803F428(&target->pos), r9 = &target->pos, check != 0)) || (sub_803F428(&sp_0x18) != 0)) {
+    for(r5 = 0; r5 < 0xC; r5++)
+    {
+      sub_804539C(target,sp_0x28.x,sp_0x28.y);
+      sub_803E46C(0x2c);
+    }
+  }
+  tile = GetTileSafe(sp_0x18.x,sp_0x18.y);
+  entity = tile->monster;
+  if (entity != 0) {
+    if (GetEntityType(entity) == 1) {
+      InitPokemonMove(&sp_0x1C,0x163);
+      if (sub_80571F0(entity,&sp_0x1C) == 0) {
+        sub_806F370(pokemon,entity,gUnknown_80F4F82,0,0,0,sub_8057600(move, param_4),0,1,0);
+      }
+      if ((sub_8044B28() == 0) && (EntityExists(pokemon))) {
+        sub_806F370(pokemon,pokemon,gUnknown_80F4F82,0,0,0,0x1fe,0,0,0);
+        if ((sub_8044B28() == 0) && (EntityExists(pokemon))) goto _0805A9FE;
+      }
+    }
+    else {
+_0805A9FE:
+      if (EntityExists(target)) {
+        if ((sub_803F428(r9) != 0) || (sub_803F428(&sp_0x18) != 0)) {
+          for(r5 = 0; r5 < 0xC; r5++)
+          {
+            sub_804539C(target, -sp_0x28.x,-sp_0x28.y);
+            sub_803E46C(0x2c);
+          }
+        }
+        goto _0805AA5E;
+      }
+    }
+  }
+  else
+  {
+    sub_80694C0(target,sp_0x18.x,sp_0x18.y,0);
+_0805AA5E:
+    if (EntityExists(target)) {
+      register struct Position *pos asm("r1");
+      sub_804535C(target, 0);
+      pos = r9;
+      if (sub_80706A4(target, pos) != 0) {
+        sub_807D148(pokemon,target,0,0);
+      }
+      if (target->info->isTeamLeader) {
+        sub_804AC20(r9);
+        sub_807EC28(0);
+      }
+      sub_806A5B8(target);
+      sub_8075900(target,gDungeon->unk3A08);
+    }
+  }
+  return TRUE;
 }
