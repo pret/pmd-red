@@ -220,7 +220,7 @@ s32 UpdateRescuePasswordMenu(void)
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
-                        sub_8095274(local_44.unk10);
+                        sub_8095274(local_44.unk10.unk10);
                         DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -245,7 +245,7 @@ s32 UpdateRescuePasswordMenu(void)
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         local_44.mailType = 5;
                         sub_80951FC(&local_44);
-                        puVar5 = sub_8095228(sub_809539C(1, local_44.unk10));
+                        puVar5 = sub_8095228(sub_809539C(1, local_44.unk10.unk10));
                         puVar5->mailType = WONDER_MAIL_TYPE_OKD;
                         MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         break;
@@ -265,7 +265,7 @@ s32 UpdateRescuePasswordMenu(void)
                         DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
-                        puVar6 = sub_8095228(sub_809539C(4, local_44.unk10));
+                        puVar6 = sub_8095228(sub_809539C(4, local_44.unk10.unk10));
                         *puVar6 = local_44;
                         puVar6->mailType = 6;
                         iVar9 = GetMainMenu();
@@ -462,7 +462,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
         if (param_3->mailType != WONDER_MAIL_TYPE_SOS) {
             return PASSWORD_ENTRY_NOT_SOS_MAIL;
         }
-        else if ( (sub_80952F0(2, param_3->unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_AOK, param_3->unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_COMPLETED, param_3->unk10)) || (sub_8095298(param_3->unk10))) {
+        else if ( (sub_80952F0(2, param_3->unk10.unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_AOK, param_3->unk10.unk10)) || (sub_80952F0(WONDER_MAIL_TYPE_COMPLETED, param_3->unk10.unk10)) || (sub_8095298(param_3->unk10.unk10))) {
             return PASSWORD_ENTRY_DUPLICATE_SOS_MAIL;
         }
         else if (FindOpenMailSlot() == -1) {
@@ -476,7 +476,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
         if (param_3->mailType != WONDER_MAIL_TYPE_AOK) {
             return PASSWORD_ENTRY_NOT_AOK_MAIL;
         }
-        else if (!sub_80952F0(1, param_3->unk10)) {
+        else if (!sub_80952F0(1, param_3->unk10.unk10)) {
             return PASSWORD_ENTRY_DUPLICATE_AOK_MAIL;
         }
         else {
@@ -487,7 +487,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
         if (param_3->mailType != WONDER_MAIL_TYPE_THANK_YOU) {
             return PASSWORD_ENTRY_NOT_THANK_YOU_MAIL;
         }
-        else if ((!sub_80952F0(4, param_3->unk10)) || (param_3->unk28 != sub_8011C34())) {
+        else if ((!sub_80952F0(4, param_3->unk10.unk10)) || (param_3->unk28 != sub_8011C34())) {
             return PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL;
         }
         else {
