@@ -257,7 +257,10 @@ struct Entity
     /* 0x14 */ struct Position32 prevPixelPos;
     s32 unk1C;
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
-    u8 fill21[0x25 - 0x21];
+    u8 fill21;
+    u8 unk22;
+    u8 fill23;
+    u8 unk24;
     /* 0x25 */ u8 room;
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.

@@ -83,14 +83,6 @@ struct unkStruct_203B214
 extern struct unkStruct_203B214 *gUnknown_203B214;
 extern struct unkStruct_203B214 *gUnknown_203B21C;
 
-struct Item_Alt
-{
-    union temp {
-        struct Item norm;
-        u32 full_bits;
-    } temp;
-};
-
 extern void sub_8013818(void *, u32, u32, u32);
 
 extern u8 sub_8019FB0(void);
@@ -523,10 +515,8 @@ u32 sub_8019E40(u32 r0)
 
 u32 sub_8019EDC(u8 r0)
 {
-    struct Item_Alt slot;
+    struct Item slot;
     struct BulkItem *item;
-    u32 itemIndex;
-    u32 numItems;
 
     if(r0 == 0)
     {
@@ -542,14 +532,9 @@ u32 sub_8019EDC(u8 r0)
                 return 2;
             case 1:
                 item = GetKecleonShopItem(sub_8019FB0());
-
-                // NOTE: needs seperate vars to match
-                itemIndex = item->id << 16;
-                slot.temp.full_bits =  (slot.temp.full_bits & 0xff00ffff) | itemIndex;
-                numItems = item->quantity << 8;
-                slot.temp.full_bits =  (slot.temp.full_bits & 0xffff00ff) | numItems;
-
-                if(GetStackBuyPrice((struct Item *)&slot) > gTeamInventory_203B460->teamMoney)
+                slot.id = item->id;
+                slot.quantity = item->quantity;
+                if(GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
                 {
                     PlayMenuSoundEffect(2);
                 }
@@ -675,7 +660,7 @@ void sub_801A0D8(void)
   u8 auStack204 [80];
   struct unkStruct_8090F58 local_7c;
   u8 auStack112 [80];
-  struct Item_Alt item;
+  struct Item item;
   u8 temp_calc;
 
   // Needed for the shifts..
@@ -691,21 +676,15 @@ void sub_801A0D8(void)
     {
       temp_calc = (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + index;
       heldItem = GetKecleonShopItem(temp_calc);
-
-      index_shift = heldItem->id << 16;
-      item.temp.full_bits = (item.temp.full_bits & 0xff00ffff) | index_shift;
-
-      quantity_shift = heldItem->quantity << 8;
-      item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | quantity_shift;
-
-      item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
-
+      item.id = heldItem->id;
+      item.quantity = heldItem->quantity;
+      item.flags = (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
       local_7c.unk0 = 1;
       local_7c.unk4 = 0;
       local_7c.unk6 = 0x58;
       local_7c.unk8 = 1;
-      sub_8090E14(auStack204,(struct Item *)&item,&local_7c);
-      buyPrice = GetStackBuyPrice((struct Item *)&item);
+      sub_8090E14(auStack204,&item,&local_7c);
+      buyPrice = GetStackBuyPrice(&item);
       if (buyPrice <= gTeamInventory_203B460->teamMoney) {
         y = sub_8013800(gUnknown_203B214,index);
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B214->unk34,0);
@@ -746,10 +725,8 @@ u32 sub_801A20C(u32 r0)
 
 u32 sub_801A2A8(u8 r0)
 {
-    struct Item_Alt slot;
+    struct Item slot;
     struct BulkItem *item;
-    u32 itemIndex;
-    u32 numItems;
 
     if(r0 == 0)
     {
@@ -767,12 +744,10 @@ u32 sub_801A2A8(u8 r0)
                 item = GetKecleonWareItem(sub_801A37C());
 
                 // NOTE: needs seperate vars to match
-                itemIndex = item->id << 16;
-                slot.temp.full_bits =  (slot.temp.full_bits & 0xff00ffff) | itemIndex;
-                numItems = item->quantity << 8;
-                slot.temp.full_bits =  (slot.temp.full_bits & 0xffff00ff) | numItems;
+                slot.id = item->id;
+                slot.quantity = item->quantity;
 
-                if(GetStackBuyPrice((struct Item *)&slot) > gTeamInventory_203B460->teamMoney)
+                if(GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
                 {
                     PlayMenuSoundEffect(2);
                 }
@@ -897,7 +872,7 @@ void sub_801A4A4(void)
   u8 buffer1 [80];
   struct unkStruct_8090F58 local_7c;
   u8 buffer2 [80];
-  struct Item_Alt item;
+  struct Item item;
   u8 temp_calc;
 
   // Needed for the shifts..
@@ -913,15 +888,9 @@ void sub_801A4A4(void)
     {
       temp_calc = (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + index;
       heldItem = GetKecleonWareItem(temp_calc);
-
-      index_shift = heldItem->id << 16;
-      item.temp.full_bits = (item.temp.full_bits & 0xff00ffff) | index_shift;
-
-      quantity_shift = heldItem->quantity << 8;
-      item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | quantity_shift;
-
-      item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
-
+      item.id = heldItem->id;
+      item.quantity = heldItem->quantity;
+      item.flags =  (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
       local_7c.unk0 = 1;
       local_7c.unk4 = 0;
       local_7c.unk6 = 0x58;

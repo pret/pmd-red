@@ -35,7 +35,7 @@ extern void sub_8078F50(struct Entity *, struct Entity *);
 extern void sub_807DC68(struct Entity *, struct Entity *);
 extern void sub_8078A58(struct Entity *, struct Entity *, s16, u32);
 extern u32 sub_803D73C(u32);
-extern void sub_8045C28(struct Item *, u8 , u8 *);
+extern void sub_8045C28(struct Item *, u8 , u8);
 extern void sub_80464C8(struct Entity *, struct Position *, struct Item *);
 extern void sub_8068FE0(struct Entity *, u32, struct Entity *r2);
 extern void sub_80522F4(struct Entity *r1, struct Entity *r2, const char []);
@@ -148,16 +148,6 @@ extern u8 gUnknown_202DE58[];
 extern s16 gUnknown_80F4E08;
 extern u8 gDungeonCamouflageTypes[76];
 extern u32 gUnknown_202F228;
-
-struct Position_Alt
-{
-    union PositionAlt
-    {
-        struct Position norm;
-        u32 full_bits;
-    } temp;
-};
-
 
 extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
@@ -1182,9 +1172,7 @@ bool8 FillInOrbAction(struct Entity *pokemon,struct Entity *target)
     int y;
     bool8 filledInTile;
     int x;
-    u16 cast_x;
-    u32 cast_y;
-    struct Position_Alt tileCoords;
+    struct Position tileCoords;
 
     filledInTile = FALSE;
     iVar5 = target->info;
@@ -1195,20 +1183,17 @@ bool8 FillInOrbAction(struct Entity *pokemon,struct Entity *target)
     else
     {
         // Calculate the coordinates of the tile in front of the user
-        cast_x = target->pos.x + gAdjacentTileOffsets[iVar5->action.direction].x;
-        tileCoords.temp.full_bits = (tileCoords.temp.full_bits & 0xffff0000) | cast_x;
+        tileCoords.x = target->pos.x + gAdjacentTileOffsets[iVar5->action.direction].x; 
+        tileCoords.y = target->pos.y + gAdjacentTileOffsets[iVar5->action.direction].y; 
 
-        cast_y = ((u16)(target->pos.y + gAdjacentTileOffsets[iVar5->action.direction].y)) << 0x10;
-        tileCoords.temp.full_bits = (tileCoords.temp.full_bits & 0x0000ffff) | cast_y;
-
-        sub_8042A54((struct Position *)&tileCoords);
-        tileToFill = GetTileSafe(tileCoords.temp.norm.x,tileCoords.temp.norm.y);
+        sub_8042A54(&tileCoords);
+        tileToFill = GetTileSafe(tileCoords.x,tileCoords.y);
         if ((tileToFill->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
             tileToFill->terrainType = (tileToFill->terrainType & ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) | TERRAIN_TYPE_NORMAL;
 
             for(y = -1; y < 2; y++)
                 for(x = -1; x < 2; x++)
-                    sub_80498A8(tileCoords.temp.norm.x + x, tileCoords.temp.norm.y + y);
+                    sub_80498A8(tileCoords.x + x, tileCoords.y + y);
             filledInTile = TRUE;
             sub_806CF60();
         }
@@ -1218,7 +1203,7 @@ bool8 FillInOrbAction(struct Entity *pokemon,struct Entity *target)
                 sub_8049BB0(x,y);
 
         if (filledInTile) {
-            sub_8042A64((struct Position *)&tileCoords);
+            sub_8042A64(&tileCoords);
             sub_80522F4(pokemon,target,*gUnknown_80FD0B4);
         }
         else {

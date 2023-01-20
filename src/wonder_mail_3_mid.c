@@ -539,12 +539,9 @@ void HandleMissionReward(void)
 {
   int moneyReward;
   const u8 *rankString;
-  u8 uVar7;
+  u8 itemID;
   struct unkStruct_8090F58 local_20;
-  struct Item_Alt item;
-  u32 quantity;
-  u32 index_cast;
-  u32 index_cast2;
+  struct Item item;
   
   switch(gUnknown_203B310->state) {
     case 0:
@@ -615,29 +612,22 @@ void HandleMissionReward(void)
         gUnknown_203B310->nextState = 4;
         break;
     case 4:
-        uVar7 = gUnknown_203B310->unk10->itemRewards[0];
-        if (uVar7 != 0) 
+        itemID = gUnknown_203B310->unk10->itemRewards[0];
+        if (itemID != ITEM_NOTHING) 
         {
             if (gUnknown_203B310->unk10->moneyReward == 0) {
-
-                // Cast ItemIndex
-                index_cast = uVar7 << 16;
-                item.temp.full_bits = (item.temp.full_bits & 0xff00ffff) | index_cast;
-
-                index_cast2 = item.temp.full_bits >> 16;
-                if (IsThrowableItem(index_cast2)) {
-                    // Cast number items
-                    quantity = (gUnknown_203B310->unk10->quantity << 8);
-                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | quantity;
+                item.id = itemID;
+                if (IsThrowableItem(item.id)) {
+                    item.quantity = gUnknown_203B310->unk10->quantity;
                 }
                 else {
-                    item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | 0;
+                    item.quantity = 0;
                 }
-                item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | ITEM_FLAG_EXISTS;
+                item.flags = ITEM_FLAG_EXISTS;
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gUnknown_202DEA8,(struct Item *)&item,&local_20);
+                sub_8090E14(gUnknown_202DEA8,&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
                     gUnknown_203B310->nextState = 5;

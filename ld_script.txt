@@ -223,6 +223,8 @@ SECTIONS {
         asm/code_805744C.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
+        src/code_805A120.o(.text);
+        asm/code_8057824_1.o(.text);
         src/status_actions.o(.text);
         src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
