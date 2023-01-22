@@ -19,6 +19,8 @@
 #include "status_actions.h"
 #include "code_8077274_1.h"
 #include "code_808417C.h"
+#include "charge_move.h"
+#include "weather.h"
 
 extern u32 gUnknown_202F210;
 extern u8 gAvailablePokemonNames[];
@@ -58,6 +60,16 @@ extern u8 *gUnknown_81004EC[];
 extern s16 gUnknown_80F4DDA;
 extern s16 gUnknown_80F4DFE;
 extern u8 *gUnknown_81004EC[];
+extern s16 gUnknown_80F4DFC;
+extern u8 *gUnknown_80FC7C8[];
+extern u32 gUnknown_80F4F60;
+extern u8 *gUnknown_80FAD10[];
+extern s16 gUnknown_80F4DCC;
+extern s16 gUnknown_80F4DBE;
+extern s16 gUnknown_80F4DCA;
+extern s16 gUnknown_80F4DE2;
+extern u8 *gUnknown_80FEB90[];
+extern s16 gUnknown_80F501A[];
 
 extern u32 sub_8055864(struct Entity *pokemon, struct Entity *target, struct Move *param_3, s32 param_4, s32 param_5);
 extern void sub_80943A0(void*, s32);
@@ -80,6 +92,7 @@ extern void sub_80694C0(struct Entity *, s32, s32, u32);
 bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos);
 extern void sub_807D148(struct Entity *pokemon, struct Entity *target, u32 r2, struct Position *r3);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
+extern void SetMessageArgument_2(u8 *buffer, struct EntityInfo *r1, u32);
 void sub_80522F4(struct Entity *r0, struct Entity *r1, char r2[]);
 extern void sub_806A6E8(struct Entity *);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
@@ -92,6 +105,345 @@ extern u8 sub_8057308(struct Entity *, u32);
 extern void sub_805A7D4(struct Entity *, struct Entity *, struct Item *, struct Position *);
 extern void sub_8045394(struct Entity *, s32, s32);
 extern void sub_804652C(struct Entity *, struct Entity *, struct Item *, u32, struct Position *);
+extern void sub_806EAF4(struct Entity *, struct Entity *, u8, u32, u32, s32 *, u32, u16, u32);
+extern u8 *gUnknown_80FEB60[];
+extern u8 *gUnknown_80FE330[];
+extern u8 *gUnknown_80FE36C[];
+extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
+
+struct unkStruct_80928C0
+{
+    u32 unk0;
+    s32 unk4;
+    u8 unk8;
+    u8 unk9;
+};
+
+void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
+extern u8 sub_806F4A4(struct Entity *, u32);
+
+
+bool8 sub_8059A2C(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+    u8 local_20;
+    u32 level;
+    
+    local_20 = 0;
+    level = pokemon->info->level;
+    sub_806F370(pokemon,target,level,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
+    local_20 = local_20 == 0;
+    return local_20;
+}
+
+
+bool8 sub_8059AA8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    ConfuseStatusTarget(pokemon, target, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059AB8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    TauntStatusTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_8059AC4(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    HealTargetHP(pokemon, target, gUnknown_80F501A[GetApparentWeather(pokemon)], 0, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059AF8(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  u8 local_20;
+  
+  local_20 = 0;
+  if (sub_806F4A4(target,GetMoveType(move)) == 0) {
+    sub_80522F4(pokemon,target,*gUnknown_80FEB90);
+    return FALSE;
+  }
+  else {
+    sub_806F370(pokemon,target,9999,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,0,0);
+    local_20 = local_20 == 0;
+    return local_20;
+  }
+}
+
+bool8 sub_8059B94(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2);
+    return TRUE;
+}
+
+bool8 sub_8059BAC(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  u8 moveType;
+  struct Move *movePtr;
+  s32 index;
+  struct EntityInfo * info;
+  s32 counter;
+  s32 newIndex;
+  struct Move *moveStack [MAX_MON_MOVES];
+  
+  counter = 0;
+  info = target->info;
+  if (HasAbility(target, 0x25)) {
+      sub_80522F4(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
+      return FALSE;
+  }
+  else
+  {
+    for(index = 0; index < MAX_MON_MOVES; index++)
+    {
+      movePtr = &info->moves[index];
+      if (((movePtr->moveFlags & MOVE_FLAG_EXISTS)) && (GetMoveTypeForMonster(target,movePtr) != TYPE_NONE)) {
+        moveStack[counter]  = movePtr;
+        counter++;
+      }
+    }
+    if (counter == 0) {
+        sub_80522F4(pokemon,target,*gUnknown_80FE36C);
+        return FALSE;
+    }
+    else
+    {
+      newIndex = DungeonRandInt(counter);
+      moveType = GetMoveTypeForMonster(target,moveStack[newIndex]);
+      info->types[0] = moveType;
+      info->types[1] = TYPE_NONE;
+      info->isColorChanged = TRUE;
+      sub_80928C0(gUnknown_202DE58, moveStack[newIndex], NULL);
+      sub_80522F4(pokemon,target,*gUnknown_80FE330);
+      return TRUE;
+    }
+  }
+}
+
+bool8 sub_8059C80(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    Conversion2StatusTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 HelpingHandMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    bool8 flag;
+    flag = FALSE;
+    if(pokemon == target)
+    {
+        sub_80522F4(target, target, *gUnknown_80FEB60);
+    }
+    else {
+        RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
+        RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
+        flag = TRUE;
+    }
+    return flag;
+}
+
+bool8 sub_8059CD8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    RaiseDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 2);
+    return TRUE;
+}
+
+bool8 sub_8059CF0(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    sub_807D148(pokemon, target, 0, NULL);
+    return TRUE;
+}
+
+bool8 sub_8059D00(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DE2))
+    {
+        ParalyzeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059D48(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    ParalyzeStatusTarget(pokemon, target, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059D58(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, 0))
+    {
+        ParalyzeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059D98(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    ImmobilizedStatusTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_8059DA4(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    PoisonedStatusTarget(pokemon, target, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059DB4(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    BadlyPoisonedStatusTarget(pokemon, target, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059DC4(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DCA))
+    {
+        BadlyPoisonedStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059E0C(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DBE))
+    {
+        PoisonedStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059E54(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4,u8 param_5)
+{
+  u8 moveType;
+  u32 movePower;
+  u32 moveCritChance;
+  bool8 flag;
+  s32 local_30 [4];
+  u8 auStack_20;
+  
+  flag = FALSE;
+  if (param_5 == 0) {
+    flag = sub_8055640(pokemon,target,move,0x100,param_4) != 0 ? TRUE : FALSE;
+  }
+  if (!flag) {
+    moveType = GetMoveTypeForMonster(pokemon,move);
+    movePower = GetMovePower(pokemon,move);
+    moveCritChance = GetMoveCritChance(move);
+    sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x100,move->id,0);
+    SetMessageArgument_2(gAvailablePokemonNames,pokemon->info,0);
+    sub_80522F4(pokemon,target,*gUnknown_80FC7C8);
+    local_30[0] = local_30[0] / 2;
+    if (local_30[0] == 0) {
+      local_30[0] = 1;
+    }
+    sub_806F370(pokemon,pokemon,local_30[0],0,&auStack_20,0,0x1f7,0x13,1,0);
+  }
+  return flag;
+}
+
+bool8 sub_8059F38(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (MoveMatchesChargingStatus(pokemon, move)) {
+    if (sub_8055640(pokemon, target, move, gUnknown_80F4F60, param_4) != 0) {
+      flag = TRUE;
+      if (sub_805727C(pokemon, target, gUnknown_80F4DCC) != 0) {
+        ParalyzeStatusTarget(pokemon, target, FALSE);
+      }
+    }
+    sub_8079764(pokemon);
+  }
+  else {
+    SetChargeStatusTarget(pokemon, pokemon, 8, move, *gUnknown_80FAD10);
+    flag = TRUE;
+  }
+  return flag;
+}
+
+bool8 sub_8059FC8(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4,u8 param_5)
+{
+  u8 moveType;
+  u32 movePower;
+  u32 moveCritChance;
+  bool8 flag;
+  s32 local_30 [4];
+  u8 auStack_20;
+  
+  flag = FALSE;
+  if (param_5 == 0) {
+    flag = sub_8055640(pokemon,target,move,0x200,param_4) != 0 ? TRUE : FALSE;
+  }
+  if (!flag) {
+    moveType = GetMoveTypeForMonster(pokemon,move);
+    movePower = GetMovePower(pokemon,move);
+    moveCritChance = GetMoveCritChance(move);
+    sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x200,move->id,0);
+    SetMessageArgument_2(gAvailablePokemonNames,pokemon->info,0);
+    sub_80522F4(pokemon,target,*gUnknown_80FC7C8);
+    local_30[0] = local_30[0] / 2;
+    if (local_30[0] == 0) {
+      local_30[0] = 1;
+    }
+    sub_806F370(pokemon,pokemon,local_30[0],0,&auStack_20,0,0x1f8,0x13,1,0);
+  }
+  return flag;
+}
+
+bool8 sub_805A0A8(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
+{
+    bool8 flag;
+
+    flag = FALSE;
+    if(sub_8055640(pokemon, target, move, 0x100, param_4))
+    {
+        flag = TRUE;
+        if(sub_805727C(pokemon, target, gUnknown_80F4DFC))
+        {
+            switch(DungeonRandInt(3))
+            {
+                case 0:
+                default:
+                    ParalyzeStatusTarget(pokemon, target, FALSE);
+                    break;
+                case 1:
+                    BurnedStatusTarget(pokemon, target, 0, FALSE);
+                    break;
+                case 2:
+                    FrozenStatusTarget(pokemon, target, FALSE);
+                    break;
+            }
+        }
+    }
+    return flag;
+}
 
 bool8 sub_805A120(struct Entity * pokemon,struct Entity * target, struct Move *move, u32 param_4)
 {
@@ -168,7 +520,6 @@ bool8 sub_805A23C(struct Entity * pokemon, struct Entity * target, struct Move *
     if(move->id == MOVE_MUD_SPORT)
     {
         sub_807EA30(0);
-
     }
     else
     {
@@ -617,9 +968,7 @@ bool8 sub_805AAE0(struct Entity * pokemon,struct Entity * target, struct Move *m
   u32 *belly;
   u32 newBelly;
   struct EntityInfo *info;
-  
   bool8 flag;
-
 
   info = pokemon->info;
   flag = FALSE;
