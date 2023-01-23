@@ -4,6 +4,7 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
+#include "constants/weather.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_ai_targeting.h"
@@ -17,6 +18,7 @@
 #include "move_effects_target.h"
 #include "status.h"
 #include "status_actions.h"
+#include "tile_types.h"
 #include "code_8077274_1.h"
 #include "code_808417C.h"
 #include "charge_move.h"
@@ -25,9 +27,27 @@
 extern u32 gUnknown_202F210;
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_202F218;
+extern u32 gUnknown_202F214;
+
+extern s16 gUnknown_80F4DE0;
+extern s16 gUnknown_80F4DC4;
+extern u8 *gUnknown_80FCF78[];
+extern s16 gUnknown_80F4DF0;
+extern u32 gUnknown_80F4F5C;
+extern u8 *gUnknown_80FACFC[];
+extern s16 gUnknown_80F4F7C;
+extern s32 gSolarBeamMovePower;
+extern u8 *gUnknown_80FACE4[];
+extern u8 *gUnknown_80FEB8C[];
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
-
+extern s16 gUnknown_80F4DC8;
+extern s16 gUnknown_80F4DEC;
+extern s16 gUnknown_80F4E00;
+extern u8 *gUnknown_80FD128[];
+extern u8 *gUnknown_80FAD2C[];
+extern u32 gUnknown_80F4F64;
 extern u8 gUnknown_80F5978[];
 extern s16 gUnknown_80F4E74;
 extern s16 gUnknown_80F4E06;
@@ -121,7 +141,265 @@ struct unkStruct_80928C0
 
 void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern u8 sub_806F4A4(struct Entity *, u32);
+extern void sub_807DF38(struct Entity *pokemon, struct Entity *target, struct Position *pos, u32, u8 moveType, s16);
 
+
+bool8 sub_8059424(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DF0))
+    {
+        CringeStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_805946C(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  s32 HP;
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
+    flag = TRUE;
+    if ((!HasAbility(pokemon, 7)) && (sub_8057308(pokemon,0) != 0)) {
+      HP = pokemon->info->maxHPStat;
+      if (HP < 0) {
+        HP = HP + 7;
+      }
+      HP = HP >> 3;
+      if (HP == 0) {
+        HP = 1;
+      }
+      sub_806F370(pokemon,pokemon,HP,0,0,0,0x1fd,0x14,1,0);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_80594E0(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    gDungeon->unkE269 = gUnknown_80F4F42;
+    if(sub_807EAA0(1, 0) == 0)
+    {
+        sub_80522F4(pokemon, target, *gUnknown_80FCF78);
+    }
+    return TRUE;
+}
+
+bool8 sub_8059528(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059540(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DC4))
+    {
+        PoisonedStatusTarget(pokemon, target, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_8059588(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
+    return TRUE;
+}
+
+bool8 sub_80595A0(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4DE0))
+    {
+        BurnedStatusTarget(pokemon, target, 0, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 sub_80595EC(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  u8 moveType;
+  u8 local_20;
+  
+  local_20 = 0;
+  if (sub_806F4A4(target,GetMoveType(move)) == 0) {
+    sub_80522F4(pokemon,target,*gUnknown_80FEB8C);
+    return FALSE;
+  }
+  else {
+    moveType = GetMoveType(move);
+    sub_806F370(pokemon,target,9999,1,&local_20,moveType,sub_8057600(move,param_4),0,1,0);
+    local_20 = (local_20 == 0);
+    return local_20;
+  }
+}
+
+// Solar Beam Move Action
+bool8 sub_805968C(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  u8 weather; // weather and flag are resued in same variable
+  s32 movePower;
+  
+  weather = GetApparentWeather(pokemon);
+  if ((weather == WEATHER_SUNNY) || (MoveMatchesChargingStatus(pokemon,move))) {
+    movePower = gSolarBeamMovePower;
+    
+    if (((weather == WEATHER_SANDSTORM) || (weather == WEATHER_RAIN)) || weather == WEATHER_HAIL) {
+      movePower /= 2;
+    }
+    weather = sub_8055640(pokemon,target,move,movePower,param_4) != 0 ? TRUE : FALSE;
+    sub_8079764(pokemon);
+  }
+  else {
+    SetChargeStatusTarget(pokemon,pokemon,STATUS_SOLARBEAM,move,*gUnknown_80FACE4);
+    weather = TRUE;
+  }
+  return weather;
+}
+
+bool8 sub_8059714(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+    u8 local_20;
+    
+    local_20 = 0;
+    sub_806F370(pokemon,target,gUnknown_80F4F7C,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
+    local_20 = local_20 == 0;
+    return local_20;
+}
+
+// Fly Move Action
+bool8 sub_8059790(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (MoveMatchesChargingStatus(pokemon,move)) {
+      flag = sub_8055640(pokemon,target,move,gUnknown_80F4F5C,param_4) != 0 ? TRUE : FALSE;
+      sub_8079764(pokemon);
+  }
+  else {
+      SetChargeStatusTarget(pokemon,pokemon,STATUS_FLYING,move,*gUnknown_80FACFC);
+      flag = TRUE;
+  }
+  return flag;
+}
+
+bool8 sub_80597F0(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+    sub_807DF38(pokemon,target,&target->pos,2,GetMoveType(move),sub_8057600(move,param_4));
+    return TRUE;
+}
+
+bool8 DiveMoveAction(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (IsTileGround(GetTileAtEntitySafe(pokemon))) {
+    sub_80522F4(pokemon,target,*gUnknown_80FD128);
+  }
+  else if (MoveMatchesChargingStatus(pokemon,move)) {
+      flag = sub_8055640(pokemon,target,move,gUnknown_80F4F64,param_4) != 0 ? TRUE : FALSE;
+      sub_8079764(pokemon);
+  }
+  else {
+      SetChargeStatusTarget(pokemon,pokemon,STATUS_DIVING,move,*gUnknown_80FAD2C);
+      flag = TRUE;
+  }
+  return flag;
+}
+
+bool8 sub_80598CC(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    if(sub_805727C(pokemon, target, gUnknown_80F4E00))
+    {
+        LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, FALSE);
+    }
+  }
+  return flag;
+}
+
+bool8 StockpileMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    HandleStockpile(pokemon, target);
+    return TRUE;
+}
+
+bool8 sub_8059928(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  bool8 flag;
+  s32 iVar2;
+  
+  iVar2 = 1;
+  flag = FALSE;
+  if ((u8)(target->info->chargingStatus - 7) <= 1){
+      iVar2 = 2;
+  }
+  if (sub_8055640(pokemon,target,move,iVar2 << 8,param_4) != 0)
+  {
+    flag = TRUE;
+    if(sub_805727C(pokemon,target,gUnknown_80F4DEC) != 0) {
+        CringeStatusTarget(pokemon,target,FALSE);
+    } 
+  }
+  return flag;
+}
+
+bool8 sub_8059988(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+{
+  bool8 flag;
+  
+  flag = FALSE;
+  if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
+    flag = TRUE;
+    gUnknown_202F218 = 1;
+  }
+  if (((gUnknown_202F218 != 0) && (gUnknown_202F214 == 2)) &&
+     (sub_805727C(pokemon,target,gUnknown_80F4DC8) != 0)) {
+    PoisonedStatusTarget(pokemon,target,FALSE);
+  }
+  return flag;
+}
+
+bool8 sub_80599EC(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    s32 HP;
+
+    HP = target->info->maxHPStat;
+    if(HP < 0)
+        HP += 3;
+    HealTargetHP(pokemon, target, HP >> 2, 0, TRUE);
+    return TRUE;
+}
+
+bool8 sub_8059A18(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+{
+    RaiseAccuracyStageTarget(pokemon, target, gUnknown_8106A50);
+    return TRUE;
+}
 
 bool8 sub_8059A2C(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
 {
@@ -134,7 +412,6 @@ bool8 sub_8059A2C(struct Entity * pokemon,struct Entity * target,struct Move * m
     local_20 = local_20 == 0;
     return local_20;
 }
-
 
 bool8 sub_8059AA8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
@@ -382,7 +659,7 @@ bool8 sub_8059F38(struct Entity * pokemon,struct Entity * target,struct Move * m
     sub_8079764(pokemon);
   }
   else {
-    SetChargeStatusTarget(pokemon, pokemon, 8, move, *gUnknown_80FAD10);
+    SetChargeStatusTarget(pokemon, pokemon, STATUS_BOUNCING, move, *gUnknown_80FAD10);
     flag = TRUE;
   }
   return flag;
@@ -447,63 +724,60 @@ bool8 sub_805A0A8(struct Entity * pokemon, struct Entity * target, struct Move *
 
 bool8 sub_805A120(struct Entity * pokemon,struct Entity * target, struct Move *move, u32 param_4)
 {
-  struct EntityInfo *r9;
-  struct EntityInfo *r8;
-  struct EntityInfo *r7;
-  struct EntityInfo *sp;
-  struct Item item;
-  bool32 flag;
-  struct Item *item1;
-  struct Item *item2;
-  
-  flag = FALSE;
-  r9 = pokemon->info;
-  r7 = r9;
-  r8 = target->info;
-  sp = r8;
-  
-  SetMessageArgument(gAvailablePokemonNames,pokemon,0);
-  SetMessageArgument(gAvailablePokemonNames + 0x50,target,0);
-  if (HasAbility(target, ABILITY_STICKY_HOLD)) {
-    sub_80522F4(pokemon,target,*gUnknown_80FCCE4);
-    return FALSE;
-  }
-  else
-  {
-    if (HasHeldItem(target, ITEM_ALERT_SPECS)) {
-      sub_80522F4(pokemon,target,*gUnknown_80FD578);
-      return FALSE;
+    struct EntityInfo *r9;
+    struct EntityInfo *r8;
+    struct EntityInfo *r7;
+    struct EntityInfo *sp;
+    struct Item item;
+    bool32 flag;
+    struct Item *item1;
+    struct Item *item2;
+
+    flag = FALSE;
+    r9 = pokemon->info;
+    r7 = r9;
+    r8 = target->info;
+    sp = r8;
+
+    SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+    SetMessageArgument(gAvailablePokemonNames + 0x50,target,0);
+    if (HasAbility(target, ABILITY_STICKY_HOLD)) {
+        sub_80522F4(pokemon,target,*gUnknown_80FCCE4);
+        return FALSE;
+    }
+    else if (HasHeldItem(target, ITEM_ALERT_SPECS)) {
+        sub_80522F4(pokemon,target,*gUnknown_80FD578);
+        return FALSE;
     }
     else
     {
-      item1 = &r9->heldItem;
-      item2 = &r8->heldItem;
-      if (!(item1->flags & ITEM_FLAG_EXISTS))
-        flag = 1;
+        item1 = &r9->heldItem;
+        item2 = &r8->heldItem;
+        if (!(item1->flags & ITEM_FLAG_EXISTS))
+            flag = 1;
 
-      if(!(item2->flags & ITEM_FLAG_EXISTS)) 
-        flag = 1;
-      
-      if (flag)
-      {
-        sub_80522F4(pokemon,target,*gUnknown_80FC7AC);   
-        return FALSE;
-      }
-      else
-      {
-        item = r7->heldItem;
-        r7->heldItem = sp->heldItem;
-        sp->heldItem = item;
-        sub_806A6E8(pokemon);
-        sub_806A6E8(target);
-        if (r7->unkFB == 0) {
-          r7->unkFB = 1;
+        if(!(item2->flags & ITEM_FLAG_EXISTS)) 
+            flag = 1;
+
+        if (flag)
+        {
+                sub_80522F4(pokemon,target,*gUnknown_80FC7AC);   
+                return FALSE;
         }
-        sub_80522F4(pokemon,target,*gUnknown_80FC790);
-        return TRUE;
-      }
+        else
+        {
+            item = r7->heldItem;
+            r7->heldItem = sp->heldItem;
+            sp->heldItem = item;
+            sub_806A6E8(pokemon);
+            sub_806A6E8(target);
+            if (r7->unkFB == 0) {
+                r7->unkFB = 1;
+            }
+            sub_80522F4(pokemon,target,*gUnknown_80FC790);
+            return TRUE;
+        }
     }
-  }
 }
 
 bool8 sub_805A210(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
@@ -783,59 +1057,60 @@ bool8 sub_805A688(struct Entity *pokemon, struct Entity *target, struct Move *mo
 }
 
 // Knock Off Move Action
-bool8 sub_805A6C8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4) 
+bool8 sub_805A6C8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-  struct EntityInfo *iVar2;
-  struct EntityInfo *iVar6;
-  struct EntityInfo *iVar7;
-  struct Item heldItem;
-  struct Position pos;
-  struct Item *itemPtr;
-  u32 flag;
-  u32 itemFlag;
-  
-  iVar2 = pokemon->info;
-  iVar6 = target->info;
-  iVar7 = iVar6;
-  SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-  SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
-  if (HasAbility(target, ABILITY_STICKY_HOLD)) {
-    sub_80522F4(pokemon,target,*gUnknown_80FCCE8);
-    return FALSE;
-  }
-  else
-  {
-    if (HasHeldItem(target, ITEM_ALERT_SPECS)) {
-      sub_80522F4(pokemon,target,*gUnknown_80FD57C);
-       return FALSE;
+    struct EntityInfo *iVar2;
+    struct EntityInfo *iVar6;
+    struct EntityInfo *iVar7;
+    struct Item heldItem;
+    struct Position pos;
+    struct Item *itemPtr;
+    u32 flag;
+    u32 itemFlag;
+
+    iVar2 = pokemon->info;
+    iVar6 = target->info;
+    iVar7 = iVar6;
+    SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+    SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+    if (HasAbility(target, ABILITY_STICKY_HOLD)) 
+    {
+        sub_80522F4(pokemon,target,*gUnknown_80FCCE8);
+        return FALSE;
+    }
+    else if (HasHeldItem(target, ITEM_ALERT_SPECS)) 
+    {
+        sub_80522F4(pokemon,target,*gUnknown_80FD57C);
+        return FALSE;
     }
     else
     {
-      heldItem = iVar6->heldItem;
-      itemFlag = heldItem.flags;
-      flag = ITEM_FLAG_EXISTS;
-      flag &= itemFlag;
-      if (flag == 0) {
-        sub_80522F4(pokemon,target,*gUnknown_80FD18C);
-        return FALSE;
-      }
-      else
-      {
-        itemPtr = &iVar7->heldItem;
-        itemPtr->id = ITEM_NOTHING;
-        itemPtr->quantity = 0;
-        itemPtr->flags = 0;
-        sub_80522F4(pokemon,target,*gUnknown_80FD170); // $m1's item was swatted down!
-        pos.x = gAdjacentTileOffsets[iVar2->action.direction].x;
-        pos.y = gAdjacentTileOffsets[iVar2->action.direction].y;
-        sub_805A7D4(pokemon,target,&heldItem,&pos);
-        if (sub_80706A4(target, &target->pos) != 0) {
-          sub_807D148(pokemon, target, 0, NULL);
+        heldItem = iVar6->heldItem;
+        itemFlag = heldItem.flags;
+        flag = ITEM_FLAG_EXISTS;
+        flag &= itemFlag;
+        if (flag == 0) 
+        {
+            sub_80522F4(pokemon,target,*gUnknown_80FD18C);
+            return FALSE;
         }
-        return TRUE;
-      }
+        else
+        {
+            itemPtr = &iVar7->heldItem;
+            itemPtr->id = ITEM_NOTHING;
+            itemPtr->quantity = 0;
+            itemPtr->flags = 0;
+            sub_80522F4(pokemon,target,*gUnknown_80FD170); // $m1's item was swatted down!
+            pos.x = gAdjacentTileOffsets[iVar2->action.direction].x;
+            pos.y = gAdjacentTileOffsets[iVar2->action.direction].y;
+            sub_805A7D4(pokemon,target,&heldItem,&pos);
+            if (sub_80706A4(target, &target->pos) != 0) 
+            {
+                sub_807D148(pokemon, target, 0, NULL);
+            }
+            return TRUE;
+        }
     }
-  }
 }
 
 void sub_805A7D4(struct Entity * pokemon, struct Entity * target, struct Item *item, struct Position *pos)

@@ -4,7 +4,7 @@
 #include "item.h"
 
 
-s16 sub_8094828(u16 r0, u8 id)
+s16 sub_8094828(u16 moveID, u8 id)
 {
     if(id != 0)
     {
@@ -15,7 +15,7 @@ s16 sub_8094828(u16 r0, u8 id)
     }
     else
     {
-        return r0;
+        return moveID;
     }
 }
 

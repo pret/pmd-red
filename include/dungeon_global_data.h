@@ -137,7 +137,9 @@ struct Dungeon
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265; // Uses the weather constants in weather.h
     /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
-    /* 0xE267 */ u8 unkE267[0xE26B - 0xE267];
+    /* 0xE267 */ u8 unkE267[0xE269 - 0xE267];
+    u8 unkE269;
+    u8 fillE26A;
     u8 unkE26B;
     u8 weatherTurns;
     u8 fillE26D[0xE26F - 0xE26D];
