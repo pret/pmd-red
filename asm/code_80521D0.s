@@ -4469,7 +4469,7 @@ _08054B48:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805968C
+	bl SolarBeamMoveAction
 	bl _080554BA
 _08054B58:
 	adds r0, r7, 0
@@ -4679,7 +4679,7 @@ _08054D1A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A55C
+	bl CurseMoveAction
 	b _080554BA
 _08054D28:
 	movs r0, 0
@@ -4856,7 +4856,7 @@ _08054E7C:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A3FC
+	bl WishMoveAction
 	b _080554BA
 _08054E8A:
 	adds r0, r7, 0
@@ -5017,7 +5017,7 @@ _08054FBE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059790
+	bl FlyMoveAction
 	b _080554BA
 _08054FCC:
 	adds r0, r7, 0
@@ -5059,7 +5059,7 @@ _08055012:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A6C8
+	bl KnockOffMoveAction
 	b _080554BA
 _08055020:
 	adds r0, r7, 0

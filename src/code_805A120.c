@@ -167,7 +167,7 @@ bool8 sub_805946C(struct Entity * pokemon,struct Entity * target,struct Move * m
   flag = FALSE;
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
-    if ((!HasAbility(pokemon, 7)) && (sub_8057308(pokemon,0) != 0)) {
+    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && (sub_8057308(pokemon,0) != 0)) {
       HP = pokemon->info->maxHPStat;
       if (HP < 0) {
         HP = HP + 7;
@@ -252,8 +252,7 @@ bool8 sub_80595EC(struct Entity * pokemon,struct Entity * target,struct Move * m
   }
 }
 
-// Solar Beam Move Action
-bool8 sub_805968C(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
+bool8 SolarBeamMoveAction(struct Entity * pokemon,struct Entity * target,struct Move * move,u32 param_4)
 {
   u8 weather; // weather and flag are resued in same variable
   s32 movePower;
@@ -285,8 +284,7 @@ bool8 sub_8059714(struct Entity * pokemon,struct Entity * target,struct Move * m
     return local_20;
 }
 
-// Fly Move Action
-bool8 sub_8059790(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
+bool8 FlyMoveAction(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
 {
   bool8 flag;
   
@@ -465,7 +463,7 @@ bool8 sub_8059BAC(struct Entity * pokemon,struct Entity * target,struct Move * m
   
   counter = 0;
   info = target->info;
-  if (HasAbility(target, 0x25)) {
+  if (HasAbility(target, ABILITY_FORECAST)) {
       sub_80522F4(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
       return FALSE;
   }
@@ -754,10 +752,10 @@ bool8 sub_805A120(struct Entity * pokemon,struct Entity * target, struct Move *m
         item1 = &r9->heldItem;
         item2 = &r8->heldItem;
         if (!(item1->flags & ITEM_FLAG_EXISTS))
-            flag = 1;
+            flag = TRUE;
 
         if(!(item2->flags & ITEM_FLAG_EXISTS)) 
-            flag = 1;
+            flag = TRUE;
 
         if (flag)
         {
@@ -860,7 +858,7 @@ bool8 sub_805A31C(struct Entity *pokemon, struct Entity *target, struct Move *mo
   
   iVar3 = pokemon->info;
   iVar4 = target->info;
-  if (HasAbility(target,0x35)) {
+  if (HasAbility(target, ABILITY_WONDER_GUARD)) {
     sub_80522F4(pokemon,target,*gUnknown_80FC854);
     return FALSE;
   }
@@ -893,8 +891,7 @@ bool8 sub_805A3DC(struct Entity *pokemon, struct Entity *target, struct Move *mo
     return TRUE;
 }
 
-// Wish Move Action
-bool8 sub_805A3FC(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+bool8 WishMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     WishStatusTarget(pokemon, target);
     return TRUE;
@@ -975,8 +972,7 @@ bool8 sub_805A508(struct Entity *pokemon, struct Entity *target, struct Move *mo
   return TRUE;
 }
 
-// Curse Move Action
-bool8 sub_805A55C(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+bool8 CurseMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     CurseStatusTarget(pokemon, target);
     return TRUE;
@@ -1056,8 +1052,7 @@ bool8 sub_805A688(struct Entity *pokemon, struct Entity *target, struct Move *mo
   return flag;
 }
 
-// Knock Off Move Action
-bool8 sub_805A6C8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+bool8 KnockOffMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     struct EntityInfo *iVar2;
     struct EntityInfo *iVar6;
