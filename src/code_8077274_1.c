@@ -294,7 +294,7 @@ print:
   }
 }
 
-void sub_8078F50(struct Entity * pokemon, struct Entity * target)
+void MobileStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
   struct EntityInfo *entityInfo_1;
   struct EntityInfo *entityInfo;
@@ -505,7 +505,7 @@ void RestorePPTarget(struct Entity * pokemon,struct Entity * target, s32 param_3
   }
 }
 
-void sub_80793B0(struct Entity * pokemon, struct Entity *target, s32 param_3)
+void RaiseAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
@@ -522,7 +522,7 @@ void sub_80793B0(struct Entity * pokemon, struct Entity *target, s32 param_3)
     oldStat = entityInfo->atk;
     oldStat1 = oldStat;
 
-    newStat = entityInfo->atk + param_3;
+    newStat = entityInfo->atk + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
@@ -538,7 +538,7 @@ void sub_80793B0(struct Entity * pokemon, struct Entity *target, s32 param_3)
   }
 }
 
-void sub_8079420(struct Entity * pokemon, struct Entity *target, s32 param_3)
+void RaiseSpAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
@@ -555,7 +555,7 @@ void sub_8079420(struct Entity * pokemon, struct Entity *target, s32 param_3)
     oldStat = entityInfo->spAtk;
     oldStat1 = oldStat;
 
-    newStat = entityInfo->spAtk + param_3;
+    newStat = entityInfo->spAtk + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
@@ -571,7 +571,7 @@ void sub_8079420(struct Entity * pokemon, struct Entity *target, s32 param_3)
   }
 }
 
-void sub_8079490(struct Entity * pokemon, struct Entity *target, s32 param_3)
+void RaiseDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
@@ -588,7 +588,7 @@ void sub_8079490(struct Entity * pokemon, struct Entity *target, s32 param_3)
     oldStat = entityInfo->def;
     oldStat1 = oldStat;
 
-    newStat = entityInfo->def + param_3;
+    newStat = entityInfo->def + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
@@ -604,7 +604,7 @@ void sub_8079490(struct Entity * pokemon, struct Entity *target, s32 param_3)
   }
 }
 
-void sub_8079500(struct Entity * pokemon, struct Entity *target, s32 param_3)
+void RaiseSpDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
@@ -621,7 +621,7 @@ void sub_8079500(struct Entity * pokemon, struct Entity *target, s32 param_3)
     oldStat = entityInfo->spDef;
     oldStat1 = oldStat;
 
-    newStat = entityInfo->spDef + param_3;
+    newStat = entityInfo->spDef + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
@@ -752,7 +752,7 @@ void sub_8079764(struct Entity * pokemon)
     }
 }
 
-void sub_80797A0(struct Entity * pokemon, struct Entity * target, u8 newStatus)
+void CounterStatusTarget(struct Entity * pokemon, struct Entity * target, u8 newStatus)
 {
   struct EntityInfo *entityInfo;
   

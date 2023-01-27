@@ -772,7 +772,7 @@ bool8 GrudgeMoveAction(struct Entity *pokemon, struct Entity * target)
 
 bool8 sub_805815C(struct Entity *pokemon, struct Entity *target)
 {
-    sub_80797A0(pokemon, target, STATUS_COUNTER);
+    CounterStatusTarget(pokemon, target, STATUS_COUNTER);
     return TRUE;
 }
 
