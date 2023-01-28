@@ -10,13 +10,13 @@ SECTIONS {
     ALIGN(4)
     {
         ewram_start = .;
-        INCLUDE "sym_ewram.txt"
+        INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
         *libgcc.a:fp-bit.o(.bss);
         *libgcc.a:dp-bit.o(.bss);
         *libc.a:syscalls.o(.bss);
         . = ALIGN(16);
-        INCLUDE "sym_ewram2.txt"
+        INCLUDE "sym_ewram2.ld"
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
@@ -30,7 +30,7 @@ SECTIONS {
     ALIGN(4)
     {
         iwram_start = .;
-        INCLUDE "sym_iwram.txt"
+        INCLUDE "sym_iwram.ld"
         . = 0x8000;
     }
 

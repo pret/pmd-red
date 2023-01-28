@@ -231,10 +231,16 @@ $(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 
-$(BUILD_DIR)/sym_%.txt: sym_%.txt
-	cp $< $(BUILD_DIR)
+$(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.txt $(BUILD_DIR)/sym_ewram2.txt $(BUILD_DIR)/sym_iwram.txt
+$(BUILD_DIR)/sym_ewram2.ld: sym_ewram2.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+
+$(BUILD_DIR)/sym_iwram.ld: sym_iwram.txt
+	$(RAMSCRGEN) iwram_data $< ENGLISH > $@
+
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
