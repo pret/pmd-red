@@ -673,7 +673,7 @@ string generate_item_data_text(Json data) {
             << "\n.byte 0"
             << read_json_string(data_entry["moveID"], 2)
             << read_json_int(data_entry["order"], 1)
-            << read_json_int_array(data_entry["unkThrow1B"], 1, 2)
+            << read_json_int_array(data_entry["spawnAmountRange"], 1, 2)
             << read_json_int(data_entry["paletteID"], 1)
             << read_json_string(data_entry["actionType"], 1)
             << "\n.byte 0\n";

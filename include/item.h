@@ -19,7 +19,7 @@ struct ItemDataEntry
     /* 0x14 */ bool8 aiFlags[3];
     /* 0x18 */ s16 moveID;
     /* 0x1A */ u8 order; // Numbered order they are in storage
-    /* 0x1B */ u8 unkThrow1B[2];
+    /* 0x1B */ u8 spawnAmountRange[2];
     /* 0x1D */ u8 palette;
     /* 0x1E */ u8 actionType;
 };
@@ -70,6 +70,9 @@ enum ItemAIFlag
 #define INVENTORY_SIZE 20
 #define STORAGE_SIZE NUMBER_OF_ITEM_IDS
 
+#define MIN_SPAWN_AMOUNT 0
+#define MAX_SPAWN_AMOUNT 1
+
 void LoadItemParameters(void);
 struct TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
@@ -89,7 +92,7 @@ s32 GetItemSellPrice(u8 id);
 s32 GetItemOrder(u8 id);
 u8 GetItemPalette(u8 id);
 u32 GetItemActionType(u8 id);
-u32 GetItemUnkThrow(u8 id, u32 r1);
+u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);
 bool8 GetItemAIFlag(u8 id, u32 r1);
 void sub_8090DC4(void* param_1,u8 id, struct unkStruct_8090F58* param_3);
