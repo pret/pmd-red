@@ -1235,7 +1235,7 @@ const char *sub_8091E50(u8 index)
   return gUnknown_810AF50[index];
 }
 
-u32 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
+u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
 {
   if (i0 > 0x3e)
     return 0;

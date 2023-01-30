@@ -9,10 +9,6 @@
 #include "friend_area_action_menu.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
-extern struct UnkTextStruct2 gUnknown_80DD74C;
-extern struct UnkTextStruct2 gUnknown_80DD704;
-extern struct UnkTextStruct2 gUnknown_80DD6EC;
-extern struct UnkTextStruct2 gUnknown_80DD71C;
 
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
@@ -53,6 +49,58 @@ extern void sub_8027CA0();
 extern void sub_8027D00();
 extern void CreateFriendActionMenu();
 extern void sub_80276A8();
+
+const struct UnkTextStruct2 gUnknown_80DD6EC =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+
+const struct UnkTextStruct2 gUnknown_80DD704 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x13, 0x00, 0x04, 0x00,
+    0x09, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DD71C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x14, 0x00, 0x04, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DD734 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x16, 0x00, 0x04, 0x00,
+    0x06, 0x03,
+    0x03, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DD74C =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x11, 0x00,
+    0x1A, 0x02,
+    0x02, 0x00,
+    NULL
+};
+
 
 ALIGNED(4) const u8 gFriendAreaActionSayFarewellPrompt[] = _(
          "You have chosen to say farewell\n"

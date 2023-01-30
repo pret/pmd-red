@@ -13,7 +13,7 @@ struct unkStruct_203B328
 {
     // size: 0x11C
     u32 state;
-    u8 unk4;
+    u8 mailIndex;
     u32 unk8;
     u8 fillC[0x58 - 0xC];
     u32 unk58;
@@ -241,7 +241,7 @@ void sub_8031258(void)
             sub_8012D60(&gUnknown_203B328->unk58, gUnknown_80E0948, 0, 0, 3, 2);
             break;
         case 4:
-            sub_8030D40(gUnknown_203B328->unk4, 3);
+            sub_8030D40(gUnknown_203B328->mailIndex, 3);
             break;
         case 5:
         case 6:
@@ -255,11 +255,11 @@ void sub_8031300(void)
     switch(sub_8030768(1))
     {
         case 3:
-            gUnknown_203B328->unk4 = sub_80307EC();
+            gUnknown_203B328->mailIndex = sub_80307EC();
             sub_80310E4(1);
             break;
         case 4:
-            gUnknown_203B328->unk4 = sub_80307EC();
+            gUnknown_203B328->mailIndex = sub_80307EC();
             sub_80310E4(4);
             break;
         case 2:
@@ -301,7 +301,7 @@ void sub_803136C(void)
 
 void sub_80313D8(u32 state)
 {
-  s32 iVar2;
+  s32 index;
   s32 local_10;
   struct unkStruct_203B480 *unused;
   
@@ -322,15 +322,15 @@ void sub_80313D8(u32 state)
         switch(state)
         {
             case 2:
-                sub_8095240(gUnknown_203B328->unk4);
+                sub_8095240(gUnknown_203B328->mailIndex);
                 break;
             case 3:
-                for(iVar2 = 0; iVar2 < 0x20; iVar2++)
+                for(index = 0; index < 0x20; index++)
                 {
-                    unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].mailType = 0;
-                    unused = &gUnknown_203B480[iVar2];
-                    gUnknown_203B480[iVar2].unk20.id = 0;
+                    unused = &gUnknown_203B480[index];
+                    gUnknown_203B480[index].mailType = 0;
+                    unused = &gUnknown_203B480[index];
+                    gUnknown_203B480[index].unk20.id = ITEM_NOTHING;
                 }
                 break;
         }

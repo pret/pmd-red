@@ -291,7 +291,7 @@ u32 CreateThankYouMailPelipper(void)
     mail = sub_8095228(index);
     gUnknown_203B2C4->unk41C = mail->unk20;
     gUnknown_203B2C4->mailIndex = index;
-    gUnknown_203B2C4->unk430 = mail->unk10;
+    gUnknown_203B2C4->unk430 = mail->unk10.unk10;
     SetThankYouMailMenuState(5);
   }
   else {
@@ -841,11 +841,11 @@ void HandleThankYouMailPasswordMenu(void)
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                uVar1 = sub_809539C(4,mail1.unk10);
+                uVar1 = sub_809539C(4,mail1.unk10.unk10);
                 mail = sub_8095228(uVar1);
                 *mail = mail1;
                 mail->mailType = 6;
-                gUnknown_203B2C4->unk430 = mail1.unk10;
+                gUnknown_203B2C4->unk430 = mail1.unk10.unk10;
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_SUCCESS);
                 break;
             default:
@@ -1346,10 +1346,10 @@ void UpdateThankYouMailText(void)
                     case 7:
                         gUnknown_203B2C4->linkError = sub_80381F4(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                         if ( sub_800D588() != '\0') {
-                            gUnknown_203B2C4->unk430 = gUnknown_203B2C4->unk1E8.unk10;
+                            gUnknown_203B2C4->unk430 = gUnknown_203B2C4->unk1E8.unk10.unk10;
                         }
                         else {
-                            gUnknown_203B2C4->unk430 = gUnknown_203B2C4->unk1B8.unk10;
+                            gUnknown_203B2C4->unk430 = gUnknown_203B2C4->unk1B8.unk10.unk10;
                         }
                     break;
                 }

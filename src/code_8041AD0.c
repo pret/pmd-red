@@ -37,7 +37,7 @@ extern u8 sub_8042768(struct Entity *pokemon);
 extern void sub_806CDD4(struct Entity *pokemon, u8, u32);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
-extern u8 sub_803F428(struct Entity *pokemon);
+extern u8 sub_803F428(struct Position *pos);
 extern void sub_8041550(struct Entity *pokemon, u32, u32, u32, u32, u32);
 
 
@@ -836,9 +836,9 @@ void sub_80421C0(struct Entity *pokemon, u16 r1)
             PlaySoundEffect(r1);
 }
 
-void sub_80421EC(struct Entity *pokemon, u16 r1)
+void sub_80421EC(struct Position *pos, u16 r1)
 {
-    if(sub_803F428(pokemon) != 0)
+    if(sub_803F428(pos) != 0)
         PlaySoundEffect(r1);
 }
 

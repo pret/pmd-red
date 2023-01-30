@@ -3,22 +3,22 @@
 
 void MuzzleTarget(struct Entity *pokemon, struct Entity *target);
 void sub_8078E18(struct Entity * pokemon, struct Entity * target);
-void sub_8078F50(struct Entity * pokemon, struct Entity * target);
+void MobileStatusTarget(struct Entity * pokemon, struct Entity * target);
 void ExposeStatusTarget(struct Entity * pokemon, struct Entity * target, s16 param_3);
 void IdentityItemHolders(struct Entity *pokemon, struct Entity *target);
 void BlindTarget(struct Entity *pokemon, struct Entity *target);
 void CrossEyeVisionTarget(struct Entity *pokemon, struct Entity *target);
 void RestoreVisionTarget(struct Entity *pokemon, struct Entity *target);
 void RestorePPTarget(struct Entity * pokemon,struct Entity * target, s32 param_3);
-void sub_80793B0(struct Entity * pokemon,struct Entity * target, s32 param_3);
-void sub_8079420(struct Entity * pokemon,struct Entity * target, s32 param_3);
-void sub_8079490(struct Entity * pokemon,struct Entity * target, s32 param_3);
-void sub_8079500(struct Entity * pokemon,struct Entity * target, s32 param_3);
+void RaiseAtkStatTarget(struct Entity * pokemon,struct Entity * target, s32 increment);
+void RaiseSpAtkStatTarget(struct Entity * pokemon,struct Entity * target, s32 increment);
+void RaiseDefStatTarget(struct Entity * pokemon,struct Entity * target, s32 increment);
+void RaiseSpDefStatTarget(struct Entity * pokemon,struct Entity * target, s32 increment);
 void LongTossStatusTarget(struct Entity * pokemon,struct Entity * target);
 void PierceStatusTarget(struct Entity * pokemon,struct Entity * target);
 void SetChargeStatusTarget(struct Entity *pokemon, struct Entity *target, u8 newStatus, struct Move *move, u8 *message);
 void sub_8079764(struct Entity * pokemon);
-void sub_80797A0(struct Entity * pokemon, struct Entity * target, u8 newStatus);
+void CounterStatusTarget(struct Entity * pokemon, struct Entity * target, u8 newStatus);
 void SafeguardStatusTarget(struct Entity * pokemon, struct Entity * target);
 void MistStatusTarget(struct Entity * pokemon, struct Entity * target);
 void WishStatusTarget(struct Entity * pokemon, struct Entity * target);

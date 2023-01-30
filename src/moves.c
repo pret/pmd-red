@@ -302,7 +302,7 @@ u32 GetMoveMaxUpgradeLevel(struct Move *move)
     return gMovesData[move->id].maxUpgradeLevel;
 }
 
-u8 GetMoveCritChance(struct Move *move)
+u32 GetMoveCritChance(struct Move *move)
 {
     return gMovesData[move->id].critChance;
 }

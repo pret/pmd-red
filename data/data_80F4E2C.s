@@ -426,11 +426,10 @@ gUnknown_80F4F46: @ 80F4F46
 @ replacing .incbin "baserom.gba", 0x000f4f46, 0x2
 .byte 0x0c, 0x00
 
-	.global gUnknown_80F4F48
-gUnknown_80F4F48: @ 80F4F48
+	.global gSolarBeamMovePower
+gSolarBeamMovePower: @ 80F4F48
 @ replacing .incbin "baserom.gba", 0x000f4f48, 0x4
-.byte 0x00, 0x02
-.byte 0x00, 0x00
+.4byte 0x0200
 
 	.global gUnknown_80F4F4C
 gUnknown_80F4F4C: @ 80F4F4C

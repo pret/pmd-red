@@ -169,7 +169,7 @@ _08048918: .4byte gUnknown_80FD6E8
 sub_804891C:
 	push {lr}
 	movs r2, 0x3
-	bl sub_80793B0
+	bl RaiseAtkStatTarget
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804891C
@@ -178,7 +178,7 @@ sub_804891C:
 sub_8048928:
 	push {lr}
 	movs r2, 0x3
-	bl sub_8079420
+	bl RaiseSpAtkStatTarget
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8048928
@@ -187,7 +187,7 @@ sub_8048928:
 sub_8048934:
 	push {lr}
 	movs r2, 0x3
-	bl sub_8079490
+	bl RaiseDefStatTarget
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8048934
@@ -196,7 +196,7 @@ sub_8048934:
 sub_8048940:
 	push {lr}
 	movs r2, 0x3
-	bl sub_8079500
+	bl RaiseSpDefStatTarget
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8048940

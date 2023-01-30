@@ -19,7 +19,7 @@ s32 GetMoveBasePower(struct Move *move);
 s32 GetMoveAccuracyOrAIChance(struct Move *move, u32 accuracyType);
 u32 GetMoveBasePP(struct Move *move);
 u32 GetMoveMaxUpgradeLevel(struct Move *move);
-u8 GetMoveCritChance(struct Move *move);
+u32 GetMoveCritChance(struct Move *move);
 bool8 MoveCannotHitFrozen(struct Move *move);
 bool8 MovesIgnoresTaunted(struct Move *move);
 u32 GetMoveRangeID(struct Move *move);

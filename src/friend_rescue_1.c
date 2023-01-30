@@ -712,7 +712,7 @@ void sub_8033DBC(void)
                         SetFriendRescueMenuState(8);
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
-                        sub_8095274(mail.unk10);
+                        sub_8095274(mail.unk10.unk10);
                         mail.mailType = 2;
                         sub_80951BC(&mail);
                         sub_80141B4(gUnknown_80E4928, 0, 0, 0x101);
@@ -729,7 +729,7 @@ void sub_8033DBC(void)
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
                         mail.mailType = 5;
                         sub_80951FC(&mail);
-                        mail2 = sub_8095228(sub_809539C(1, mail.unk10));
+                        mail2 = sub_8095228(sub_809539C(1, mail.unk10.unk10));
                         mail2->mailType = 7;
                         MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
@@ -1597,10 +1597,10 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(0x6B);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                        mail2 = sub_8095228(sub_809539C(4, mail.unk10));
+                        mail2 = sub_8095228(sub_809539C(4, mail.unk10.unk10));
                         *mail2 = mail;
                         mail2->mailType = 6;
-                        gUnknown_203B33C->unk420 = mail.unk10;
+                        gUnknown_203B33C->unk420 = mail.unk10.unk10;
                         SetFriendRescueMenuState(0x6D);
                         break;
                     case 7:

@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B320
 {
@@ -27,26 +28,58 @@ struct unkStruct_203B320
     u8 unkC0[4];
 };
 extern struct unkStruct_203B320 *gUnknown_203B320;
-extern struct UnkTextStruct2 gUnknown_80E083C;
-extern struct UnkTextStruct2 gUnknown_80E0854;
-extern u8 *gUnknown_80E086C[];
+
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
-struct unkStruct_802C39C
-{
-    /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct DungeonLocation *unk8;
-    /* 0xC */ u8 *unkC;
-    /* 0x10 */ s16 unk10;
-    /* 0x12 */ s16 unk12;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ u8 fill15[0x1B];
-    /* 0x34 */ u8 fill34[2];
-    /* 0x36 */ u8 fill36[0x3C - 0x36];
-    /* 0x3C */ u8 unk3C[0x10];
-    /* 0x4C */ u32 unk4C;
-    /* 0x50 */ u32 unk50[3];
+const struct UnkTextStruct2 gUnknown_80E083C = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
+
+const struct UnkTextStruct2 gUnknown_80E0854 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x18, 0x11,
+    0x11, 0x00,
+    NULL
+};
+
+extern const u8 SOSList[];
+extern const u8 RequestList[];
+extern const u8 SOSMail[];
+extern const u8 ToDoList[];
+extern const u8 AOKMail[];
+extern const u8 ThanksList[];
+extern const u8 CompletedJobs[];
+extern const u8 OkdRescue[];
+
+const u8 * const gUnknown_80E086C[] = 
+{
+    SOSList,
+    RequestList,
+    SOSMail,
+    ToDoList,
+    AOKMail,
+    ThanksList,
+    CompletedJobs,
+    OkdRescue
+};
+
+ALIGNED(4) const u8 OkdRescue[] = _("OK{APOSTROPHE}d Rescues");
+ALIGNED(4) const u8 CompletedJobs[] = "Completed Jobs";
+ALIGNED(4) const u8 ThanksList[] = "Thanks List";
+ALIGNED(4) const u8 AOKMail[] = "A-OK Mail";
+ALIGNED(4) const u8 ToDoList[] = "To-Do List";
+ALIGNED(4) const u8 SOSMail[] = "SOS Mail";
+ALIGNED(4) const u8 RequestList[] = "Request List";
+ALIGNED(4) const u8 SOSList[] = "SOS List";
+static const u8 wonder_mail_fill[] = "pksdir0";
+
 
 extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);
@@ -236,7 +269,7 @@ void sub_803092C(void)
   struct unkStruct_203B480 *mail;
   s32 r4;
   s32 r5;
-  s32 r6;
+  s32 index;
   struct unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B320->unk58);
@@ -249,43 +282,43 @@ void sub_803092C(void)
   r5 = r4 + gUnknown_203B320->unkC0[2] * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->unk42 + 1,1,7,gUnknown_203B320->unk58);
 
-  r6 = 0;
-  if (r6 < gUnknown_203B320->unk3E) {
+  index = 0;
+  if (index < gUnknown_203B320->unk3E) {
     do {
-      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + r6]);
+      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
-      local.unk4C = sub_8013800(&gUnknown_203B320->unk24,r6);
-      local.unk3C[8] = 7;
-      local.unk3C[10] = 0;
-      local.unk3C[12] = 0;
+      local.y = sub_8013800(&gUnknown_203B320->unk24,index);
+      local.unk40 = 7;
+      local.unk42 = 0;
+      local.unk44 = 0;
 
-      local.unk8 = &mail->dungeon;
-      local.unkC = mail->playerName;
+      local.dungeon = &mail->dungeon;
+      local.playerName = mail->playerName;
 
-      local.unk10 = (mail->clientSpecies);
-      local.unk12 = (mail->clientSpecies);
+      local.clientSpecies = (mail->clientSpecies);
+      local.targetSpecies = (mail->clientSpecies);
       local.unk14 = 0;
-      local.fill15[0x19] = 5;
+      local.unk2E = 5;
 
       switch(mail->mailType)
       {
         case WONDER_MAIL_TYPE_AOK:
-            local.unk3C[11] = 3;
+            local.unk43 = 3;
             break;
         case WONDER_MAIL_TYPE_THANK_YOU:
-            local.unk3C[11] = 4;
+            local.unk43 = 4;
             break;
         case 1:
         case 2:
-            local.unk3C[11]= 1;
+            local.unk43 = 1;
             break;
         default:
-            local.unk3C[11]= 0;
+            local.unk43 = 0;
             break;
       }
       CreateRescueTitle(&local);
-      r6++;
-    } while (r6 < gUnknown_203B320->unk3E);
+      index++;
+    } while (index < gUnknown_203B320->unk3E);
   }
   sub_80073E0(gUnknown_203B320->unk58);
 }

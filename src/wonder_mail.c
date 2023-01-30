@@ -1471,7 +1471,7 @@ void sub_80293F4(void)
                         sub_8028B04(7);
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
-                        sub_8095274(mail.unk10);
+                        sub_8095274(mail.unk10.unk10);
                         mail.mailType = 2;
                         sub_80951BC(&mail);
                         sub_80141B4(gWonderMailAOKMailReceivedText, 0, &gUnknown_203B2C0->faceFile, 0x101);
