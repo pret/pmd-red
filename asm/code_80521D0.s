@@ -3889,7 +3889,7 @@ _0805461A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A2E8
+	bl SurfMoveAction
 	bl _080554BA
 _0805462A:
 	adds r0, r7, 0
@@ -4084,7 +4084,7 @@ _080547D8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A0A8
+	bl TriAttackMoveAction
 	bl _080554BA
 _080547E8:
 	adds r0, r7, 0
@@ -4224,7 +4224,7 @@ _08054918:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A588
+	bl TickleMoveAction
 	bl _080554BA
 _08054928:
 	adds r0, r7, 0
@@ -4287,7 +4287,7 @@ _080549A8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805ACD8
+	bl BulkUpMoveAction
 	bl _080554BA
 _080549B8:
 	adds r0, r7, 0
@@ -4469,7 +4469,7 @@ _08054B48:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805968C
+	bl SolarBeamMoveAction
 	bl _080554BA
 _08054B58:
 	adds r0, r7, 0
@@ -4518,7 +4518,7 @@ _08054BB8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805AF30
+	bl PresentMoveAction
 	bl _080554BA
 _08054BC8:
 	adds r0, r7, 0
@@ -4553,7 +4553,7 @@ _08054C08:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805AB48
+	bl LightScreenMoveAction
 	bl _080554BA
 _08054C18:
 	adds r0, r7, 0
@@ -4679,7 +4679,7 @@ _08054D1A:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A55C
+	bl CurseMoveAction
 	b _080554BA
 _08054D28:
 	movs r0, 0
@@ -4856,7 +4856,7 @@ _08054E7C:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A3FC
+	bl WishMoveAction
 	b _080554BA
 _08054E8A:
 	adds r0, r7, 0
@@ -5017,7 +5017,7 @@ _08054FBE:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059790
+	bl FlyMoveAction
 	b _080554BA
 _08054FCC:
 	adds r0, r7, 0
@@ -5059,7 +5059,7 @@ _08055012:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A6C8
+	bl KnockOffMoveAction
 	b _080554BA
 _08055020:
 	adds r0, r7, 0
@@ -5243,7 +5243,7 @@ _08055182:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A508
+	bl SwallowMoveAction
 	b _080554BA
 _08055190:
 	adds r0, r7, 0
@@ -5348,7 +5348,7 @@ _08055254:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805AAE0
+	bl BellyDrumMoveAction
 	b _080554BA
 _08055262:
 	adds r0, r7, 0
@@ -5404,7 +5404,7 @@ _080552C4:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C468
+	bl MobileOrbAction
 	b _080554BA
 _080552D2:
 	adds r0, r7, 0
@@ -5481,7 +5481,7 @@ _0805535E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805AB54
+	bl SecretPowerMoveAction
 	b _080554BA
 _0805536C:
 	adds r0, r7, 0
@@ -5516,7 +5516,7 @@ _080553A4:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A31C
+	bl RolePlayMoveAction
 	b _080554BA
 _080553B2:
 	adds r0, r7, 0
@@ -5530,7 +5530,7 @@ _080553C0:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059BAC
+	bl ConversionMoveAction
 	b _080554BA
 _080553CE:
 	adds r0, r7, 0
@@ -5614,7 +5614,7 @@ _08055468:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059C80
+	bl Conversion2MoveAction
 	b _080554BA
 _08055476:
 	adds r0, r7, 0

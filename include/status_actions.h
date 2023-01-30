@@ -48,7 +48,7 @@ bool8 FillInOrbAction(struct Entity *pokemon,struct Entity *target);
 bool8 sub_805C3DC(struct Entity *pokemon, struct Entity *target);
 bool8 sub_805C3F8(struct Entity *pokemon, struct Entity *target);
 bool8 sub_805C45C(struct Entity *pokemon, struct Entity *target);
-bool8 sub_805C468(struct Entity *pokemon, struct Entity *target);
+bool8 MobileOrbAction(struct Entity *pokemon, struct Entity *target);
 bool8 StairsOrbAction(struct Entity *pokemon, struct Entity *target);
 bool8 LongtossOrbAction(struct Entity *pokemon, struct Entity *target);
 bool8 PierceOrbAction(struct Entity *pokemon, struct Entity *target);

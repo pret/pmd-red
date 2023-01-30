@@ -11,14 +11,6 @@ extern void sub_8017F10(u32);
 
 extern u8 sub_801CF14(u32);
 
-struct BulkItem_Alt {
-  union tempHeld
-  {
-      struct BulkItem norm;
-      u32 full_bits;
-  } temp;
-};
-
 extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8(void);
@@ -128,10 +120,8 @@ void sub_8018620(void)
 
 void sub_80186F8(void)
 {
-    struct BulkItem_Alt item;
-    u16 cast;
+    struct BulkItem item;
     s32 itemID;
-    u8 itemID_u8;
 
     switch(sub_801CA08(1))
     {
@@ -140,26 +130,24 @@ void sub_80186F8(void)
             {
                 for(itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++)
                 {
-                    itemID_u8 = itemID; // dumb cast needed to match
                     if(sub_801CFE0(itemID) != 0)
                     {
-                        item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | itemID_u8;
-                        if(IsThrowableItem(item.temp.norm.id))
-                            if(gTeamInventory_203B460->teamStorage[item.temp.norm.id] > 0x63)
+                        item.id = itemID;
+                        if(IsThrowableItem(item.id))
+                            if(gTeamInventory_203B460->teamStorage[item.id] > 0x63)
                             {
-                                item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | (0xC6 << 7);
+                                item.quantity = 0x63;
                             }
                             else
                             {
-                                cast = gTeamInventory_203B460->teamStorage[item.temp.norm.id] << 8;
-                                item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | cast;
+                                item.quantity = gTeamInventory_203B460->teamStorage[item.id];
                             }
                         else
                         {
-                            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | (0x80 << 1);
+                            item.quantity = 1;
                         }
-                        gTeamInventory_203B460->teamStorage[item.temp.norm.id] -= item.temp.norm.quantity;
-                        AddHeldItemToInventory((struct BulkItem *)&item);
+                        gTeamInventory_203B460->teamStorage[item.id] -= item.quantity;
+                        AddHeldItemToInventory(&item);
                     }
                 }
                 FillInventoryGaps();
@@ -198,9 +186,7 @@ void sub_80186F8(void)
 
 void sub_8018854(void)
 {
-    struct BulkItem_Alt item;
-    u32 itemsCast;
-    u32 indexCast;
+    struct BulkItem item;
 
     sub_801CA08(0);
     sub_8012FD8(&gUnknown_203B20C->unk70);
@@ -209,16 +195,10 @@ void sub_8018854(void)
     {
         case 3:
             gUnknown_203B20C->unk8.quantity = gUnknown_203B20C->unkC0;
-
             gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
-
-            indexCast = gUnknown_203B20C->unk8.id;
-            item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | indexCast;
-
-            itemsCast = (gUnknown_203B20C->unk8.quantity << 8);
-            item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
-
-            AddHeldItemToInventory((struct BulkItem *)&item);
+            item.id = gUnknown_203B20C->unk8.id;
+            item.quantity = gUnknown_203B20C->unk8.quantity;
+            AddHeldItemToInventory(&item);
             if(sub_801CF14(1) == 0)
                 if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 {
@@ -289,10 +269,8 @@ void sub_8018904(void)
 
 void sub_80189C8(void)
 {
-    struct BulkItem_Alt item;
+    struct BulkItem item;
     s32 menuAction;
-    u32 itemsCast;
-    u32 indexCast;
 
     menuAction = 0;
 
@@ -312,14 +290,9 @@ void sub_80189C8(void)
             else
             {
                 gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
-
-                indexCast = gUnknown_203B20C->unk8.id;
-                item.temp.full_bits = (item.temp.full_bits & 0xffffff00) | indexCast;
-
-                itemsCast = (gUnknown_203B20C->unk8.quantity << 8);
-                item.temp.full_bits = (item.temp.full_bits & 0xffff00ff) | itemsCast;
-
-                AddHeldItemToInventory((struct BulkItem *)&item);
+                item.id = gUnknown_203B20C->unk8.id;
+                item.quantity = gUnknown_203B20C->unk8.quantity;
+                AddHeldItemToInventory(&item);
                 if(sub_801CF14(1) == 0)
                     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                     {

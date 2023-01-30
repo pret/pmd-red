@@ -67,6 +67,8 @@ SCANINC   := tools/scaninc/scaninc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 DUNGEONJSON := tools/dungeonjson/dungeonjson
 
+PERL := perl
+
 TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
@@ -86,6 +88,7 @@ BUILD_DIR := build/pmd_$(BUILD_NAME)
 ROM := pmd_$(BUILD_NAME).gba
 ELF := $(ROM:%.gba=%.elf)
 MAP := $(ROM:%.gba=%.map)
+SYM := $(ROM:%.gba=%.sym)
 
 C_SUBDIR = src
 ASM_SUBDIR = asm
@@ -164,6 +167,8 @@ all: $(ROM)
 
 tools: $(TOOLDIRS)
 
+syms: $(SYM)
+
 include dungeon_pokemon.mk
 include dungeon_floor.mk
 include dungeon_trap.mk
@@ -185,7 +190,7 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 tidy:
-	$(RM) -f $(ROM) $(ELF) $(MAP)
+	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM)
 	$(RM) -r $(BUILD_DIR)
 	$(RM) -f $(ITEM_DATA)
 	$(RM) -f $(MOVE_DATA)
@@ -231,10 +236,16 @@ $(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 
-$(BUILD_DIR)/sym_%.txt: sym_%.txt
-	cp $< $(BUILD_DIR)
+$(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.txt $(BUILD_DIR)/sym_ewram2.txt $(BUILD_DIR)/sym_iwram.txt
+$(BUILD_DIR)/sym_ewram2.ld: sym_ewram2.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+
+$(BUILD_DIR)/sym_iwram.ld: sym_iwram.txt
+	$(RAMSCRGEN) iwram_data $< ENGLISH > $@
+
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld $(BUILD_DIR)/sym_iwram.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
@@ -247,3 +258,10 @@ $(ROM): %.gba: $(ELF)
 ifeq (,$(filter clean,$(MAKECMDGOALS)))
 -include $(ALL_OBJECTS:.o=.d)
 endif
+
+###################
+### Symbol file ###
+###################
+
+$(SYM): $(ELF)
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

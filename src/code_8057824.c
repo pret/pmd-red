@@ -183,17 +183,17 @@ void sub_8057588(struct Entity * pokemon, u8 param_2)
     }
 }
 
-s16 sub_8057600(struct Move *move, s32 param_2)
+s16 sub_8057600(struct Move *move, s32 itemID)
 {
-    return sub_8094828(move->id, sub_8057620(param_2));
+    return sub_8094828(move->id, sub_8057620(itemID));
 }
 
-u8 sub_8057620(u32 param_1)
+u8 sub_8057620(u32 itemID)
 {
-    if(param_1 == 0)
-        return 0;
+    if(itemID == ITEM_NOTHING)
+        return ITEM_NOTHING;
     else
-        return param_1;
+        return itemID;
 }
 
 bool8 sub_8057634(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4)
@@ -772,7 +772,7 @@ bool8 GrudgeMoveAction(struct Entity *pokemon, struct Entity * target)
 
 bool8 sub_805815C(struct Entity *pokemon, struct Entity *target)
 {
-    sub_80797A0(pokemon, target, STATUS_COUNTER);
+    CounterStatusTarget(pokemon, target, STATUS_COUNTER);
     return TRUE;
 }
 

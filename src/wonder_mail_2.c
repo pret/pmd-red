@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/item.h"
 #include "constants/wonder_mail.h"
 #include "file_system.h"
 #include "input.h"
@@ -389,8 +390,8 @@ void sub_802B3E0(void)
         mail = sub_8095228(gUnknown_203B2C8->unk1);
         sub_803C37C(&mail->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
         gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
-        gUnknown_203B2C8->unk114.itemRewards[1] = 0;
-        gUnknown_203B2C8->unk114.itemRewards[2] = 0;
+        gUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
+        gUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
         gUnknown_203B2C8->unk114.quantity = 10;
         gUnknown_203B2C8->unk114.friendAreaReward = 0;
         sub_802F204(&gUnknown_203B2C8->unk114, 0);

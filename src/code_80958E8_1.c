@@ -26,7 +26,7 @@ extern void sub_80965F4();
 extern void SortPelipperJobs();
 extern struct WonderMail *GetPelipperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
-extern u8 sub_8095B28(struct WonderMail *);
+extern bool8 GenerateMailJobInfo(struct WonderMail *);
 
 void SortPelipperJobs(void)
 {
@@ -118,7 +118,7 @@ void GeneratePelipperJobs(void)
     index++;
   }
   for (; index <= range; index++) {
-    if (sub_8095B28(&gUnknown_203B490->pelipperBoardJobs[index]) == 0) break;
+    if (!GenerateMailJobInfo(&gUnknown_203B490->pelipperBoardJobs[index])) break;
     gUnknown_203B490->pelipperBoardJobs[index].rewardType = RandRange(MONEY, BLANK_4);
   }
   sub_80965F4();

@@ -121,7 +121,9 @@ struct Dungeon
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
-    u8 fill37FD[0x3A0D - 0x37FD];
+    u8 fill37FD[0x3A08 - 0x37FD];
+    /* 0x3A08 */ u8 unk3A08;
+    u8 fill3A09[0x3A0D - 0x3A09];
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ u16 unk3A10;
@@ -135,7 +137,9 @@ struct Dungeon
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265; // Uses the weather constants in weather.h
     /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
-    u8 unkE267[0xE26B - 0xE267];
+    /* 0xE267 */ u8 unkE267[0xE269 - 0xE267];
+    u8 unkE269;
+    u8 fillE26A;
     u8 unkE26B;
     u8 weatherTurns;
     u8 fillE26D[0xE26F - 0xE26D];

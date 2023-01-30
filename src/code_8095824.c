@@ -102,7 +102,7 @@ bool8 sub_80952F0(u8 mailType, u32 param_2)
   
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if ((ptr->mailType == mailType) && (ptr->unk10 == param_2)) return TRUE;
+    if ((ptr->mailType == mailType) && (ptr->unk10.unk10 == param_2)) return TRUE;
   }
   return FALSE;
 }
@@ -153,7 +153,7 @@ s32 sub_809539C(u8 mailType, u32 param_2)
   
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
   {  
-    if ((ptr->mailType == mailType) && (ptr->unk10 == param_2)) return index;
+    if ((ptr->mailType == mailType) && (ptr->unk10.unk10 == param_2)) return index;
   }
   return -1;
 }
@@ -175,7 +175,7 @@ s32 sub_8095400(u32 param_1)
   u32 *ptr;
   s32 index;
   
-  for(index = 0, ptr = &gUnknown_203B480[0].unk10; index < 0x20; ptr += 0xC, index++)
+  for(index = 0, ptr = &gUnknown_203B480[0].unk10.unk10; index < 0x20; ptr += 0xC, index++)
   {  
     if (*ptr == param_1) return index;
   }
@@ -200,7 +200,7 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   preload->dungeon = param_1->unk0;
   preload->unk8 = uVar4;
   sub_8094D28(Rand32Bit());
-  gUnknown_203B480->unk10 = sub_8094E4C();
+  gUnknown_203B480->unk10.unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
@@ -324,7 +324,7 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     RestoreDungeonLocation(a, &b->dungeon);
     RestoreIntegerBits(a, &b->unk8, 0x18);
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
-    RestoreIntegerBits(a, &b->unk10, 0x20);
+    RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
     RestoreIntegerBits(a, &b->unk20.flags, 0x8);
     RestoreIntegerBits(a, &b->unk20.quantity, 0x8);
@@ -349,7 +349,7 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     SaveDungeonLocation(a, &b->dungeon);
     SaveIntegerBits(a, &b->unk8, 0x18);
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
-    SaveIntegerBits(a, &b->unk10, 0x20);
+    SaveIntegerBits(a, &b->unk10.unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);
     SaveIntegerBits(a, &b->unk20.flags, 0x8);
     SaveIntegerBits(a, &b->unk20.quantity, 0x8);

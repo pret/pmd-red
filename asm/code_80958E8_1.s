@@ -377,7 +377,7 @@ _08096340:
 	lsrs r0, 24
 	bl GetMailboxSlotInfo
 	adds r4, r0, 0
-	bl sub_8095B28
+	bl GenerateMailJobInfo
 	lsls r0, 24
 	cmp r0, 0
 	beq _08096392

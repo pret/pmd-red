@@ -11,7 +11,11 @@ struct unkStruct_203B480
     /* 0x8 */ u32 unk8;
     /* 0xC */ s16 clientSpecies;
     /* 0xE */ s16 targetSpecies;
-    /* 0x10 */ u32 unk10;
+    union unk10_temp
+    {
+        u32 unk10;
+        u16 unk10_u16;
+    } unk10;
     /* 0x14 */ u8 playerName[0x20 - 0x14];;
     struct Item unk20;
     u32 unk24;

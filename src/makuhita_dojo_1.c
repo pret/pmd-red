@@ -31,22 +31,40 @@ struct unkStruct_203B31C
 extern struct unkStruct_203B31C *gUnknown_203B31C;
 extern struct unkStruct_203B318 *gUnknown_203B318;
 
-extern struct UnkTextStruct2 gUnknown_80E07EC;
-extern struct UnkTextStruct2 gUnknown_80E0804;
+static const u8 makuhita_dojo_fill[] = "pksdir0";
+
+const struct UnkTextStruct2 gUnknown_80E07EC = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+const struct UnkTextStruct2 gUnknown_80E0804 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x06, 0x00, 0x00, 0x00,
+    0x02, 0x00, 0x02, 0x00,
+    0x0E, 0x0E,
+    0x0E, 0x00,
+    NULL
+};
+
+const u8 gMakuhitaDojoHeader[] = "Courses";
+ALIGNED(4) const u8 gUnknown_80E0824[] = _("{STAR_BULLET}");
+ALIGNED(4) const u8 gMakuhitaCoursePlaceholder[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
+static const u8 makuhita_dojo_fill2[] = "pksdir0";
 
 extern u8 gMakuhitaDojoGoTrain[];
-extern u8 *gUnknown_80D4970[];
 extern u8 *gUnknown_80D4934[];
-extern u8 gUnknown_80E081C[];
-extern u8 gUnknown_80E0824[];
-extern u8 gUnknown_80E0828[];
+extern u8 *gUnknown_80D4970[];
 
 extern bool8 sub_8097504(s16);
 extern s16 sub_80A26CC(s16 r0);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
+extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern u8 sub_80A2740(s32 r0);
 extern s16 sub_80A2668(u32 r0);
@@ -301,7 +319,7 @@ void sub_80304C8(void)
 void DrawDojoCourseList(void)
 {
   u8 dungeonIndex;
-  s32 sVar3;
+  s32 mazeIndex;
   s32 y;
   s32 iVar6;
   u32 color;
@@ -310,7 +328,7 @@ void DrawDojoCourseList(void)
   
   sub_8008C54(gUnknown_203B31C->unk64);
   sub_80073B8(gUnknown_203B31C->unk64);
-  xxx_call_draw_string(10,0,gUnknown_80E081C,gUnknown_203B31C->unk64,0); // Courses
+  xxx_call_draw_string(10,0,gMakuhitaDojoHeader,gUnknown_203B31C->unk64,0); // Courses
   sub_8012BC4(gUnknown_203B31C->unkCC[2] * 8 + 4,0,
             gUnknown_203B31C->unk4E + 1,2,7,gUnknown_203B31C->unk64);
   index = 0;
@@ -319,15 +337,15 @@ void DrawDojoCourseList(void)
       iVar6 = gUnknown_203B31C->unk0[gUnknown_203B31C->unk4E * gUnknown_203B31C->unk4C + index];
       dungeonIndex = sub_80A2740(iVar6);
 
-      sVar3 = sub_80A2668(iVar6);
+      mazeIndex = sub_80A2668(iVar6);
 
       y = sub_8013800(&gUnknown_203B31C->unk30, index);
       color = COLOR_WHITE_2; // COLOR_WHITE again?
-      if (IsMazeCompleted(sVar3)) {
+      if (IsMazeCompleted(mazeIndex)) {
         xxx_call_draw_string(8,y,gUnknown_80E0824,gUnknown_203B31C->unk64,0); // Draw Star symbol
         color = COLOR_GREEN;
       }
-      sprintfStatic(buffer,gUnknown_80E0828,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
+      sprintfStatic(buffer,gMakuhitaCoursePlaceholder,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
       xxx_call_draw_string(0x10,y,buffer,gUnknown_203B31C->unk64,0);
       index++;
     } while (index < gUnknown_203B31C->unk4A);
