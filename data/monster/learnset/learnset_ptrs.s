@@ -1,3 +1,5 @@
+.4byte 0
+.4byte 0
 .4byte LevelUpMovesBulbasaur
 .4byte HMTMMovesBulbasaur
 .4byte LevelUpMovesIvysaur

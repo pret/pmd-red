@@ -36,9 +36,7 @@ extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
-extern u8* GetLevelUpMoves(s16);
 extern u8* DecompressMoveID(u8* a1, u16* a2);
-extern u8* GetHMTMMoves(s32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
