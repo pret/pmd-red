@@ -23,7 +23,7 @@ extern struct unkStruct_80928C0 gUnknown_81098C4;
 extern struct FileArchive gSystemFileArchive;
 extern struct OpenedFile *gWazaParametersFile;
 extern struct MoveDataEntry *gMovesData;
-extern u8 *gMovesRelated_2038C6C;
+extern u8 *gMoveLearnsets;
 
 extern u8 gUnknown_81098D0[];
 extern u8 gUnknown_81098DC[];
@@ -44,7 +44,7 @@ void LoadWazaParameters(void)
     gWazaParametersFile = OpenFileAndGetFileDataPtr(gUnknown_81098D0, &gSystemFileArchive);
 
     gMovesData = ((struct MoveDataFile *)(gWazaParametersFile->data))->moveData;
-    gMovesRelated_2038C6C = ((struct MoveDataFile *)(gWazaParametersFile->data))->unk4;
+    gMoveLearnsets = ((struct MoveDataFile *)(gWazaParametersFile->data))->unk4;
 }
 
 u8 sub_809287C(struct Move *move)
@@ -168,7 +168,7 @@ u8 GetMoveType(struct Move *move)
 }
 
 NAKED
-void sub_8092B18(s16 species)
+void GetLevelUpMoves(s16 species)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tlsls r0, 16\n"
@@ -191,7 +191,7 @@ void sub_8092B18(s16 species)
 	"\tb _08092B4A\n"
 	"\t.align 2, 0\n"
 "_08092B40: .4byte 0x000001a5\n"
-"_08092B44: .4byte gMovesRelated_2038C6C\n"
+"_08092B44: .4byte gMoveLearnsets\n"
 "_08092B48:\n"
 	"\tldr r0, _08092B50\n"
 "_08092B4A:\n"
@@ -202,7 +202,7 @@ void sub_8092B18(s16 species)
 }
 
 NAKED
-void sub_8092B54(s16 species)
+void GetHMTMMoves(s16 species)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tlsls r0, 16\n"
@@ -225,7 +225,7 @@ void sub_8092B54(s16 species)
 	"\tb _08092B86\n"
 	"\t.align 2, 0\n"
 "_08092B7C: .4byte 0x000001a5\n"
-"_08092B80: .4byte gMovesRelated_2038C6C\n"
+"_08092B80: .4byte gMoveLearnsets\n"
 "_08092B84:\n"
 	"\tldr r0, _08092B8C\n"
 "_08092B86:\n"

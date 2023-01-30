@@ -741,12 +741,14 @@ string generate_learnset_data_text(Json data) {
     text << ".global gLearnsetData\n";
     text << "gLearnsetData:";
     for (Json data_entry : data.array_items()) {
-        text << "\nLevelUpMoves" << get_json_string_value(data_entry["pokemon"]) << ":";
+        string level_up_ptr = "LevelUpMoves" + get_json_string_value(data_entry["pokemon"]);
+        text << "\n.global " << level_up_ptr << "\n" << level_up_ptr << ":";
         for (Json level_up_move : data_entry["levelUpMoves"].array_items()) {
             text << get_compressed_move_id(get_json_string_value(level_up_move["move"]));
             text << read_json_int(level_up_move["level"], 1);
         }
-        text << "\n.byte 0\nHMTMMoves" << get_json_string_value(data_entry["pokemon"]) << ":";
+        string hm_tm_ptr = "HMTMMoves" + get_json_string_value(data_entry["pokemon"]);
+        text << "\n.byte 0\n.global " << hm_tm_ptr << "\n" << hm_tm_ptr << ":";
         for (Json hm_tm_move : data_entry["HMTMMoves"].array_items()) {
             text << get_compressed_move_id(get_json_string_value(hm_tm_move));
         }

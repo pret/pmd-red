@@ -2013,7 +2013,7 @@ _08072AD8:
 	cmp r2, r6
 	bge _08072AD8
 	movs r5, 0
-	bl sub_8092B18
+	bl GetLevelUpMoves
 	adds r4, r0, 0
 	b _08072B04
 _08072AEA:
@@ -2037,7 +2037,7 @@ _08072B04:
 	beq _08072B1C
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_808E07C
+	bl DecompressMoveID
 	adds r4, r0, 0
 	ldrb r0, [r4]
 	adds r4, 0x1

@@ -36,9 +36,9 @@ extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void sub_8093F50(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
-extern u8* sub_8092B18(s16);
-extern u8* sub_808E07C(u8* a1, u16* a2);
-extern u8* sub_8092B54(s32);
+extern u8* GetLevelUpMoves(s16);
+extern u8* DecompressMoveID(u8* a1, u16* a2);
+extern u8* GetHMTMMoves(s32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 struct unkStruct_8107654 {
@@ -642,7 +642,7 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
    *a1 = gLevelCurrentData[a3];
 }
 
-u8* sub_808E07C(u8* a1, u16* moveID)
+u8* DecompressMoveID(u8* a1, u16* moveID)
 {
     u32 r1 = *a1++;
     u32 r3;
@@ -683,14 +683,14 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
   if (species == MONSTER_NONE) return 0;
   if (species == MONSTER_MUNCHLAX) return 0;
   // get stream
-  stream = sub_8092B18(_species);
+  stream = GetLevelUpMoves(_species);
 
   while (*stream)
   {
     u8 v12;
 
     // read from stream
-    stream = sub_808E07C(stream, &moveID);
+    stream = DecompressMoveID(stream, &moveID);
     v12 = *stream++;
 
     if (v12 > a3)
@@ -717,29 +717,29 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
 
 bool8 CanMonLearnMove(u16 moveID, s16 _species)
 {
-  u16 result;
-  u16 result2;
+  u16 levelUpMoveID;
+  u16 HMTMMoveID;
   s32 species = _species;  // r4
-  u8* ptr;
+  u8* learnsetPtr;
 
   if (species == MONSTER_DECOY) return 0;
   if (species == MONSTER_NONE) return 0;
   if (species == MONSTER_MUNCHLAX) return 0;
   if (moveID == MOVE_STRUGGLE) return 0;
 
-  ptr = sub_8092B18(species);
-  while (*ptr) {
-    ptr = sub_808E07C(ptr, &result);
-    ptr++;
-    if (moveID == result) {
+  learnsetPtr = GetLevelUpMoves(species);
+  while (*learnsetPtr) {
+    learnsetPtr = DecompressMoveID(learnsetPtr, &levelUpMoveID);
+    learnsetPtr++;
+    if (moveID == levelUpMoveID) {
       return TRUE;
     }
   }
 
-  ptr = sub_8092B54(species);
-  while (*ptr) {
-    ptr = sub_808E07C(ptr, &result2);
-    if (result2 == moveID) {
+  learnsetPtr = GetHMTMMoves(species);
+  while (*learnsetPtr) {
+    learnsetPtr = DecompressMoveID(learnsetPtr, &HMTMMoveID);
+    if (HMTMMoveID == moveID) {
       return TRUE;
     }
   }
@@ -765,10 +765,10 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
     u8* ptr;
     u16 result;
 
-    ptr = sub_8092B18(evolve_sequence[i].speciesNum);
+    ptr = GetLevelUpMoves(evolve_sequence[i].speciesNum);
     while (*ptr) {
       s32 value;
-      ptr = sub_808E07C(ptr, &result);
+      ptr = DecompressMoveID(ptr, &result);
       value = *ptr++;
 
       if (value > evolve_sequence[i].unkHasNextStage) {
