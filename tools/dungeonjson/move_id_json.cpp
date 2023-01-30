@@ -4,6 +4,7 @@ using std::string;
 #include <map>
 using std::map;
 
+#include "dungeonjson.h"
 #include "move_id_json.h"
 
 static map<std::string, int> move_macro_ids;
@@ -368,5 +369,12 @@ int get_move_id(string move_macro) {
         move_macro_ids["MOVE_WIDE_SLASH"] = 0x168;
         move_macro_ids["MOVE_VACUUM_CUT"] = 0x18A;
     }
-    return move_macro_ids[move_macro];
+    if (move_macro_ids.count(move_macro))
+    {
+        return move_macro_ids.at(move_macro);
+    }
+    else
+    {
+        FATAL_ERROR("Unknown move %s when generating learnsets. Make sure the move is registered in tools/data/move_id_json.cpp.\n", move_macro.c_str());
+    }
 }

@@ -928,13 +928,10 @@ gBoughtFriendAreas: /* 2038C28 (one byte for each friend area) */
 gWazaParametersFile: /* 2038C64 */
 	.space 0x4
 
-gMoveLearnsets: /* 2038C6C */
-	.space 0x4;
-	
 gMovesData: /* 2038C68 */
 	.space 0x4
 
-gMovesRelated_2038C6C: /* 2038C6C */
+gMoveLearnsets: /* 2038C6C */
 	.space 0x4
 
 gGameOptions: /* 2038C70 */
