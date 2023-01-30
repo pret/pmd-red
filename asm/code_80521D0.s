@@ -4553,7 +4553,7 @@ _08054C08:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805AB48
+	bl LightScreenMoveAction
 	bl _080554BA
 _08054C18:
 	adds r0, r7, 0
@@ -5614,7 +5614,7 @@ _08055468:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8059C80
+	bl Conversion2MoveAction
 	b _080554BA
 _08055476:
 	adds r0, r7, 0

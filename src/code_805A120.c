@@ -495,7 +495,7 @@ bool8 ConversionMoveAction(struct Entity * pokemon,struct Entity * target,struct
   }
 }
 
-bool8 sub_8059C80(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
+bool8 Conversion2MoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
     Conversion2StatusTarget(pokemon, target);
     return TRUE;
@@ -1260,7 +1260,7 @@ bool8 BellyDrumMoveAction(struct Entity * pokemon,struct Entity * target, struct
   return flag;
 }
 
-bool8 sub_805AB48(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
+bool8 LightScreenMoveAction(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
 {
     LightScreenStatusTarget(pokemon, target);
     return TRUE;
