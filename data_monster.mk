@@ -17,3 +17,13 @@ data_monster: $(MONSTER_DATA);
 
 $(MONSTER_DATA): $(MONSTER_DIR)/monster_data.json $(MONSTER_DATA_INC)
 	$(DUNGEONJSON) monster pmd-red $<
+
+
+LEARNSET_DIR = $(MONSTER_DIR)/learnset
+LEARNSET_DATA = $(LEARNSET_DIR)/learnset_data.inc
+
+data_learnset: $(LEARNSET_DATA);
+
+$(LEARNSET_DATA): $(LEARNSET_DIR)/learnset_data.json
+	$(DUNGEONJSON) learnset pmd-red $<
+

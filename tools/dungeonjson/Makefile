@@ -2,9 +2,9 @@ CXX ?= g++
 
 CXXFLAGS := -Wall -std=c++11 -O2
 
-SRCS := json11.cpp dungeonjson.cpp
+SRCS := json11.cpp dungeonjson.cpp move_id_json.cpp
 
-HEADERS := dungeonjson.h
+HEADERS := dungeonjson.h move_id_json.h
 
 .PHONY: all clean
 
