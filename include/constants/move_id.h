@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_MOVE_ID_H
 #define GUARD_CONSTANTS_MOVE_ID_H
 
+// These IDs should be kept in sync with tools/dungeonjson/move_id_json.cpp for any moves that Pokémon can learn normally.
+
 #define MOVE_NOTHING 0x0
 #define MOVE_IRON_TAIL 0x1
 #define MOVE_ICE_BALL 0x2

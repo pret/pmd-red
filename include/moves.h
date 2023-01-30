@@ -11,6 +11,8 @@ void sub_8092AA8(struct Move *move, u16 moveID);
 void InitZeroedPPPokemonMove(struct Move *move, u16 moveID);
 s16 GetMoveTargetAndRange(struct Move *move, u32 isAI);
 u8 GetMoveType(struct Move *move);
+u8* GetLevelUpMoves(s16 species);
+u8* GetHMTMMoves(s32 species);
 u8 GetMoveAIWeight(struct Move *move);
 u32 GetMoveNumberOfChainedHits(struct Move *move);
 s32 GetMoveBasePower(struct Move *move);

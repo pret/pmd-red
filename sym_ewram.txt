@@ -931,7 +931,7 @@ gWazaParametersFile: /* 2038C64 */
 gMovesData: /* 2038C68 */
 	.space 0x4
 
-gMovesRelated_2038C6C: /* 2038C6C */
+gMoveLearnsets: /* 2038C6C */
 	.space 0x4
 
 gGameOptions: /* 2038C70 */

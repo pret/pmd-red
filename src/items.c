@@ -37,8 +37,6 @@ extern u8 gInvalidItemIDs[0x10];
 EWRAM_DATA struct OpenedFile *gItemParametersFile;
 EWRAM_DATA struct ItemDataEntry *gItemParametersData;
 
-extern u8 GetItemCategory(u8);
-extern u32 GetItemUnkThrow(u8, u32);
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
@@ -115,8 +113,8 @@ void xxx_init_itemslot_8090A8C(struct Item *slot, u8 id, u8 param_3)
     slot->flags = ITEM_FLAG_EXISTS;
     slot->id = id;
     if (IsThrowableItem(id)) {
-        uVar3 = GetItemUnkThrow(id, 0);
-        uVar4 = GetItemUnkThrow(id, 1);
+        uVar3 = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
+        uVar4 = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
         slot->quantity = RandRange(uVar3, uVar4);
     }
     else if (GetItemCategory(id) == CATEGORY_POKE)
@@ -143,8 +141,8 @@ void xxx_init_helditem_8090B08(struct BulkItem *held, u8 id)
   if (id != ITEM_NOTHING) {
     held->id = id;
     if (IsThrowableItem(id)) {
-        uVar2 = GetItemUnkThrow(id,0);
-        uVar3 = GetItemUnkThrow(id,1);
+        uVar2 = GetSpawnAmountRange(id,MIN_SPAWN_AMOUNT);
+        uVar3 = GetSpawnAmountRange(id,MAX_SPAWN_AMOUNT);
         held->quantity = RandRange(uVar2, uVar3);
     }
     else if (GetItemCategory(id) == CATEGORY_POKE)
@@ -283,9 +281,9 @@ u32 GetItemActionType(u8 id)
     return gItemParametersData[id].actionType;
 }
 
-u32 GetItemUnkThrow(u8 id, u32 r1)
+u32 GetSpawnAmountRange(u8 id, u32 rangeIndex)
 {
-    return gItemParametersData[id].unkThrow1B[r1];
+    return gItemParametersData[id].spawnAmountRange[rangeIndex];
 }
 
 u8 *GetItemDescription(u8 id)

@@ -1,14 +1,20 @@
 #include "global.h"
 #include "moves.h"
 
+#include "constants/monster.h"
 #include "file_system.h"
 #include "moves.h"
 #include "code_800D090.h"
 
+struct MoveLearnset {
+    u8 *levelUpMoves;
+    u8 *HMTMMoves;
+};
+
 struct MoveDataFile
 {
     struct MoveDataEntry *moveData;
-    u8 *unk4; // unsure of this struct's structure yet
+    struct MoveLearnset *moveLearnsets;
 };
 
 struct unkStruct_80928C0
@@ -23,7 +29,7 @@ extern struct unkStruct_80928C0 gUnknown_81098C4;
 extern struct FileArchive gSystemFileArchive;
 extern struct OpenedFile *gWazaParametersFile;
 extern struct MoveDataEntry *gMovesData;
-extern u8 *gMovesRelated_2038C6C;
+extern struct MoveLearnset *gMoveLearnsets[420];
 
 extern u8 gUnknown_81098D0[];
 extern u8 gUnknown_81098DC[];
@@ -35,6 +41,7 @@ extern u8 gUnknown_81098E0[];
 extern u8 gUnknown_81098EC[];
 extern u8 *gRangeNames[];
 extern u8 gUnknown_810992C[];
+extern u8 gUnknown_810992B;
 
 extern void sub_8093F10(struct Move *, struct Move *);
 extern void sub_80928C0(u8 *, struct Move *, struct unkStruct_80928C0 *);
@@ -44,7 +51,7 @@ void LoadWazaParameters(void)
     gWazaParametersFile = OpenFileAndGetFileDataPtr(gUnknown_81098D0, &gSystemFileArchive);
 
     gMovesData = ((struct MoveDataFile *)(gWazaParametersFile->data))->moveData;
-    gMovesRelated_2038C6C = ((struct MoveDataFile *)(gWazaParametersFile->data))->unk4;
+    *gMoveLearnsets = ((struct MoveDataFile *)(gWazaParametersFile->data))->moveLearnsets;
 }
 
 u8 sub_809287C(struct Move *move)
@@ -167,8 +174,22 @@ u8 GetMoveType(struct Move *move)
     return gMovesData[move->id].type;
 }
 
+#ifdef NONMATCHING
+u8 *GetLevelUpMoves(s16 species)
+{
+    if (species == MONSTER_DECOY || species == MONSTER_NONE)
+    {
+        return &gUnknown_810992B;
+    }
+    if (species == MONSTER_MUNCHLAX)
+    {
+        return &gUnknown_810992B;
+    }
+    return (*gMoveLearnsets)[species].levelUpMoves;
+}
+#else
 NAKED
-void sub_8092B18(s16 species)
+u8* GetLevelUpMoves(s16 species)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tlsls r0, 16\n"
@@ -191,7 +212,7 @@ void sub_8092B18(s16 species)
 	"\tb _08092B4A\n"
 	"\t.align 2, 0\n"
 "_08092B40: .4byte 0x000001a5\n"
-"_08092B44: .4byte gMovesRelated_2038C6C\n"
+"_08092B44: .4byte gMoveLearnsets\n"
 "_08092B48:\n"
 	"\tldr r0, _08092B50\n"
 "_08092B4A:\n"
@@ -200,9 +221,24 @@ void sub_8092B18(s16 species)
 	"\t.align 2, 0\n"
 "_08092B50: .4byte gUnknown_810992B");
 }
+#endif
 
+#ifdef NONMATCHING
+u8 *GetHMTMMoves(s32 species)
+{
+    if (species == MONSTER_DECOY || species == MONSTER_NONE)
+    {
+        return &gUnknown_810992B;
+    }
+    if (species == MONSTER_MUNCHLAX)
+    {
+        return &gUnknown_810992B;
+    }
+    return (*gMoveLearnsets)[species].HMTMMoves;
+}
+#else
 NAKED
-void sub_8092B54(s16 species)
+u8* GetHMTMMoves(s32 species)
 {
 	asm_unified("\tpush {lr}\n"
 	"\tlsls r0, 16\n"
@@ -225,7 +261,7 @@ void sub_8092B54(s16 species)
 	"\tb _08092B86\n"
 	"\t.align 2, 0\n"
 "_08092B7C: .4byte 0x000001a5\n"
-"_08092B80: .4byte gMovesRelated_2038C6C\n"
+"_08092B80: .4byte gMoveLearnsets\n"
 "_08092B84:\n"
 	"\tldr r0, _08092B8C\n"
 "_08092B86:\n"
@@ -234,6 +270,7 @@ void sub_8092B54(s16 species)
 	"\t.align 2, 0\n"
 "_08092B8C: .4byte gUnknown_810992B");
 }
+#endif
 
 u8 GetMoveAIWeight(struct Move *move)
 {
