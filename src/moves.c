@@ -176,9 +176,12 @@ u8 GetMoveType(struct Move *move)
 
 u8 *GetLevelUpMoves(s16 species)
 {
-    s32 species_s32, species_s32_1 = species;
+
 #ifndef NONMATCHING    
+    s32 species_s32, species_s32_1 = species;
     asm("add \tr2, r1, #0");
+#else
+    s32 species_s32, species_s32_1 = species;
 #endif
     if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
     {
@@ -193,9 +196,12 @@ u8 *GetLevelUpMoves(s16 species)
 
 u8 *GetHMTMMoves(s16 species)
 {
-    s32 species_s32, species_s32_1 = species;
+
 #ifndef NONMATCHING    
+    s32 species_s32, species_s32_1 = species;
     asm("add \tr2, r1, #0");
+#else
+    s32 species_s32, species_s32_1 = species;
 #endif
     if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
     {
