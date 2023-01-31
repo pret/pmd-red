@@ -174,103 +174,50 @@ u8 GetMoveType(struct Move *move)
     return gMovesData[move->id].type;
 }
 
-#ifdef NONMATCHING
+
 u8 *GetLevelUpMoves(s16 species)
 {
-    if (species == MONSTER_DECOY || species == MONSTER_NONE)
-    {
-        return &gUnknown_810992B;
-    }
-    if (species == MONSTER_MUNCHLAX)
-    {
-        return &gUnknown_810992B;
-    }
-    return (*gMoveLearnsets)[species].levelUpMoves;
-}
+
+#ifndef NONMATCHING
+    register s32 species1 asm("r1"), species2;
 #else
-NAKED
-u8* GetLevelUpMoves(s16 species)
-{
-	asm_unified("\tpush {lr}\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tadds r2, r1, 0\n"
-	"\tldr r0, _08092B40\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _08092B48\n"
-	"\tcmp r1, 0\n"
-	"\tbeq _08092B48\n"
-	"\tmovs r0, 0xD2\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r2, r0\n"
-	"\tbeq _08092B48\n"
-	"\tldr r0, _08092B44\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r0, r2, 3\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tb _08092B4A\n"
-	"\t.align 2, 0\n"
-"_08092B40: .4byte 0x000001a5\n"
-"_08092B44: .4byte gMoveLearnsets\n"
-"_08092B48:\n"
-	"\tldr r0, _08092B50\n"
-"_08092B4A:\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_08092B50: .4byte gUnknown_810992B");
-}
+    s32 species1, species2;
 #endif
 
-#ifdef NONMATCHING
-u8 *GetHMTMMoves(s32 species)
-{
-    if (species == MONSTER_DECOY || species == MONSTER_NONE)
+    species1 = species;
+    species2 = species1;
+    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
     {
         return &gUnknown_810992B;
     }
-    if (species == MONSTER_MUNCHLAX)
+    if (species2 == MONSTER_MUNCHLAX)
     {
         return &gUnknown_810992B;
     }
-    return (*gMoveLearnsets)[species].HMTMMoves;
+    return (*gMoveLearnsets)[species2].levelUpMoves;
 }
+
+u8 *GetHMTMMoves(s16 species)
+{
+
+#ifndef NONMATCHING
+    register s32 species1 asm("r1"), species2;
 #else
-NAKED
-u8* GetHMTMMoves(s32 species)
-{
-	asm_unified("\tpush {lr}\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tadds r2, r1, 0\n"
-	"\tldr r0, _08092B7C\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _08092B84\n"
-	"\tcmp r1, 0\n"
-	"\tbeq _08092B84\n"
-	"\tmovs r0, 0xD2\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r2, r0\n"
-	"\tbeq _08092B84\n"
-	"\tldr r0, _08092B80\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r0, r2, 3\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0, 0x4]\n"
-	"\tb _08092B86\n"
-	"\t.align 2, 0\n"
-"_08092B7C: .4byte 0x000001a5\n"
-"_08092B80: .4byte gMoveLearnsets\n"
-"_08092B84:\n"
-	"\tldr r0, _08092B8C\n"
-"_08092B86:\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_08092B8C: .4byte gUnknown_810992B");
-}
+    s32 species1, species2;
 #endif
+
+    species1 = species;
+    species2 = species1;
+    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
+    {
+        return &gUnknown_810992B;
+    }
+    if (species2 == MONSTER_MUNCHLAX)
+    {
+        return &gUnknown_810992B;
+    }
+    return (*gMoveLearnsets)[species2].HMTMMoves;
+}
 
 u8 GetMoveAIWeight(struct Move *move)
 {
