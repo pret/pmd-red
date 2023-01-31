@@ -174,44 +174,49 @@ u8 GetMoveType(struct Move *move)
     return gMovesData[move->id].type;
 }
 
+
 u8 *GetLevelUpMoves(s16 species)
 {
 
-#ifndef NONMATCHING    
-    s32 species_s32, species_s32_1 = species;
-    asm("add \tr2, r1, #0");
+#ifndef NONMATCHING
+    register s32 species1 asm("r1"), species2;
 #else
-    s32 species_s32, species_s32_1 = species;
+    s32 species1, species2;
 #endif
-    if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
+
+    species1 = species;
+    species2 = species1;
+    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
     {
         return &gUnknown_810992B;
     }
-    if (species_s32 == MONSTER_MUNCHLAX)
+    if (species2 == MONSTER_MUNCHLAX)
     {
         return &gUnknown_810992B;
     }
-    return (*gMoveLearnsets)[species_s32].levelUpMoves;
+    return (*gMoveLearnsets)[species2].levelUpMoves;
 }
 
 u8 *GetHMTMMoves(s16 species)
 {
 
-#ifndef NONMATCHING    
-    s32 species_s32, species_s32_1 = species;
-    asm("add \tr2, r1, #0");
+#ifndef NONMATCHING
+    register s32 species1 asm("r1"), species2;
 #else
-    s32 species_s32, species_s32_1 = species;
+    s32 species1, species2;
 #endif
-    if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
+
+    species1 = species;
+    species2 = species1;
+    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
     {
         return &gUnknown_810992B;
     }
-    if (species_s32 == MONSTER_MUNCHLAX)
+    if (species2 == MONSTER_MUNCHLAX)
     {
         return &gUnknown_810992B;
     }
-    return (*gMoveLearnsets)[species_s32].HMTMMoves;
+    return (*gMoveLearnsets)[species2].HMTMMoves;
 }
 
 u8 GetMoveAIWeight(struct Move *move)
