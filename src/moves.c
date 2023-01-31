@@ -179,8 +179,6 @@ u8 *GetLevelUpMoves(s16 species)
     s32 species_s32, species_s32_1 = species;
 #ifndef NONMATCHING    
     asm("add \tr2, r1, #0");
-#else
-    asm("add \tr2, r1, #0");
 #endif
     if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
     {
@@ -197,8 +195,6 @@ u8 *GetHMTMMoves(s16 species)
 {
     s32 species_s32, species_s32_1 = species;
 #ifndef NONMATCHING    
-    asm("add \tr2, r1, #0");
-#else
     asm("add \tr2, r1, #0");
 #endif
     if (species_s32_1 == MONSTER_DECOY || species_s32_1 == MONSTER_NONE)
