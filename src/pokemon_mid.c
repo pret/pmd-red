@@ -725,7 +725,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   if (species == MONSTER_MUNCHLAX) return 0;
   if (moveID == MOVE_STRUGGLE) return 0;
 
-  learnsetPtr = GetLevelUpMoves(species);
+  learnsetPtr = GetLevelUpMoves(_species);
   while (*learnsetPtr) {
     learnsetPtr = DecompressMoveID(learnsetPtr, &levelUpMoveID);
     learnsetPtr++;
