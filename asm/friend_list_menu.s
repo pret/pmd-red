@@ -1506,7 +1506,7 @@ _08026362:
 	adds r0, 0x28
 	ldr r1, [r1, 0x18]
 	adds r1, 0x2C
-	bl sub_809401C
+	bl unk_CopyMoves4To8
 	ldr r2, [r4]
 	movs r0, 0xA
 	ldrsh r1, [r2, r0]
@@ -1565,7 +1565,7 @@ _080263E0:
 	adds r1, r2, 0
 	adds r1, 0x28
 	adds r2, 0x68
-	bl sub_8093560
+	bl GetLinkedSequence
 	ldr r0, [r4]
 	adds r0, 0x68
 	bl sub_801F808

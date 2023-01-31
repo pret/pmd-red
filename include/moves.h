@@ -31,4 +31,9 @@ bool8 FailsWhileMuzzled(u16 moveID);
 bool8 IsSoundMove(struct Move *move);
 bool8 DoesMoveCharge(u16 move);
 
+void unk_FixLinkedMovesSetEnabled8_v2(struct Move* move);
+
+void sub_8092D54(u8 *buffer, struct Move *move);
+extern void CopyAndResetMove(struct Move *, struct Move *);
+
 #endif // GUARD_MOVES_H

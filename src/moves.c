@@ -67,7 +67,7 @@ u8 sub_809287C(struct Move *move)
 void sub_80928A0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *r2)
 {
     struct Move stack;
-    sub_8093F10(&stack, move);
+    CopyAndResetMove(&stack, move);
     sub_80928C0(buffer, &stack, r2);
 }
 
@@ -317,3 +317,30 @@ void sub_8092D54(u8 *buffer, struct Move *move)
 {
     sprintfStatic(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeID(move)]);
 }
+
+
+// really close
+// int sub_8092D80(struct Move *movePtr, int index)
+// {
+//   register struct Move *currentMove asm("r1");
+//   int i; // r5
+
+//   i = 0;
+//   currentMove = &movePtr[index];
+//   do
+//   {
+//     unsigned int flags; // r2
+
+//     ++currentMove;
+//     if (++index == 4)
+//       break;
+    
+//     flags = currentMove->moveFlags;
+//     if ((1 & flags) == 0)
+//       break;
+//     if ((1 & (flags >> 1)) == 0)
+//       return index;
+//   }
+//   while (++i <= 3);
+//   return 0;
+// }

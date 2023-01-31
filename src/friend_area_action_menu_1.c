@@ -339,8 +339,8 @@ void sub_8027CA0(void)
     {
         case 3:
         case 4:
-            gUnknown_203B2BC->unk20 = sub_801F194();
-            gUnknown_203B2BC->moveID = gUnknown_203B2BC->unk28[gUnknown_203B2BC->unk20].id;
+            gUnknown_203B2BC->moveIndex = sub_801F194();
+            gUnknown_203B2BC->moveID = gUnknown_203B2BC->moves[gUnknown_203B2BC->moveIndex].id;
             SetFriendAreaActionMenuState(0x10);
             break;
         case 2:

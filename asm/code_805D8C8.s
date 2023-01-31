@@ -11916,7 +11916,7 @@ _08063898:
 	adds r0, r4, 0
 	movs r2, 0
 	mov r3, r10
-	bl sub_8093DE8
+	bl unk_PrintMoveDescription
 	mov r8, r0
 _080638FE:
 	mov r0, r8
@@ -12167,7 +12167,7 @@ _08063AEC:
 	movs r1, 0x8C
 	lsls r1, 1
 	adds r0, r5, r1
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x2
 	orrs r0, r1
@@ -12240,7 +12240,7 @@ sub_8063B54:
 	strb r0, [r4]
 	adds r5, r6
 	adds r0, r5, 0
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x2
 	orrs r0, r1
@@ -12346,7 +12346,7 @@ _08063C42:
 	bl sub_80928C0
 _08063C5C:
 	adds r0, r6, r4
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldr r0, _08063C84
 	bl PlaySoundEffect
 	pop {r4-r7}
@@ -12491,7 +12491,7 @@ _08063D70:
 	movs r2, 0x8C
 	lsls r2, 1
 	adds r0, r6, r2
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldr r0, _08063DA8
 	bl PlaySoundEffect
 	mov r3, r10
@@ -12617,7 +12617,7 @@ _08063E44:
 	ble _08063E44
 _08063E62:
 	adds r0, r5, 0
-	bl sub_80936F4
+	bl unk_FixLinkedMovesSetEnabled8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -21995,7 +21995,7 @@ _08068922:
 	add r0, r9
 	adds r0, 0x1C
 	add r1, sp, 0x34
-	bl sub_8093F50
+	bl CopyAndResetMoves
 _08068A06:
 	ldr r0, [r6]
 	adds r0, r4
