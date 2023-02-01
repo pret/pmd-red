@@ -261,7 +261,7 @@ _0801F026:
 	ldrsh r4, [r2, r0]
 	ldr r0, [r2, 0x10]
 	adds r1, r4, 0
-	bl sub_809309C
+	bl unk_SetMoveToLastInLinkedSequence8_v2
 _0801F032:
 	ldr r1, [r5]
 	strh r0, [r1, 0x34]
@@ -285,7 +285,7 @@ _0801F04C:
 	ldrsh r4, [r2, r1]
 	ldr r0, [r2, 0x10]
 	adds r1, r4, 0
-	bl sub_809324C
+	bl unk_SetMoveToFirstInLinkedSequence8_v2
 	b _0801F032
 	.align 2, 0
 _0801F068: .4byte gUnknown_203B270

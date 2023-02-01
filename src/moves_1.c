@@ -16,14 +16,6 @@ bool8 TryLinkMovesAfter(int param_1, struct Move* src_struct);
 bool8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 
-void unk_GetLinkedSequences4(struct Move* moves, struct Move linkedSequences[4][4]);
-void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences[4][4]);
-void unk_GetLinkedSequences8(struct Move* moves, struct Move linkedSequences[8][8]);
-void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences[8][8]);
-
-void unk_GetLinkedSequences8_v2(struct Move*, struct Move[8][8]);
-void unk_LinkedSequencesToMoves8_v2(struct Move*, struct Move[8][8]);
-
 int unk_PrintMoveDescription(int, struct Move*, int, struct subStruct_203B240**);
 
 extern void sub_80073B8(u32);
@@ -40,6 +32,210 @@ extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;     // "Type"
 extern u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
+// the next 3 functions are the same, except the first
+// is for 4, then for 8 then for 8_v2
+int unk_SetMoveToLastInLinkedSequence4(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[4][4];
+    s32 startIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences4(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences44(linkedSequence);
+    if (startIndex >= 0 && startIndex < 3) {
+        for (i = 0; i < 4; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
+            linkedSequence[startIndex + 1][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves4(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 4; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
+
+int unk_SetMoveToLastInLinkedSequence8(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[8][8];
+    s32 startIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences8(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences88(linkedSequence);
+    if (startIndex >= 0 && startIndex < 7) {
+        for (i = 0; i < 8; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
+            linkedSequence[startIndex + 1][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves8(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 8; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
+
+int unk_SetMoveToLastInLinkedSequence8_v2(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[8][8];
+    s32 startIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences8_v2(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences88_v2(linkedSequence);
+    if (startIndex >= 0 && startIndex < 7) {
+        for (i = 0; i < 8; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
+            linkedSequence[startIndex + 1][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves8_v2(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 8; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
+
+// the next 3 functions are the same, but for
+// 4, 8 and 8_v2
+int unk_SetMoveToFirstInLinkedSequence4(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[4][4];
+    s32 startIndex, prevIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences4(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences44(linkedSequence);
+    prevIndex = startIndex - 1;
+    if (prevIndex >= 0 && prevIndex < 3) {
+        for (i = 0; i < 4; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
+            linkedSequence[prevIndex][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves4(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 4; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
+
+int unk_SetMoveToFirstInLinkedSequence8(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[8][8];
+    s32 startIndex, prevIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences8(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences88(linkedSequence);
+    prevIndex = startIndex - 1;
+    if (prevIndex >= 0 && prevIndex < 7) {
+        for (i = 0; i < 8; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
+            linkedSequence[prevIndex][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves8(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 8; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
+
+int unk_SetMoveToFirstInLinkedSequence8_v2(struct Move* moves, int index) {
+    struct Move* move;
+    struct Move linkedSequence[8][8];
+    s32 startIndex, prevIndex;
+    int result;
+    int i;
+    
+    result = index;
+    
+    move = &moves[index];
+    move->moveFlags |= MOVE_FLAG_INTERNAL_MARKER;
+    unk_GetLinkedSequences8_v2(moves, linkedSequence);
+    
+    startIndex = unk_FindMarkedMoveInLinkedSequences88_v2(linkedSequence);
+    prevIndex = startIndex - 1;
+    if (prevIndex >= 0 && prevIndex < 7) {
+        for (i = 0; i < 8; i++) {
+            const struct Move temp = linkedSequence[startIndex][i];
+            linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
+            linkedSequence[prevIndex][i] = temp;
+        }
+    }
+    
+    unk_LinkedSequencesToMoves8_v2(moves, linkedSequence);
+    for (startIndex = 0; startIndex < 8; startIndex++) {
+        if (moves[startIndex].moveFlags & MOVE_FLAG_INTERNAL_MARKER) {
+            moves[startIndex].moveFlags &= ~MOVE_FLAG_INTERNAL_MARKER;
+            result = startIndex;
+            break;
+        }
+    }
+    return result;
+}
 
 bool8 IsMoveSet(int index, struct Move* struct_ptr)
 {
@@ -360,12 +556,12 @@ void unk_FixLinkedMovesSetEnabled8_v2(struct Move* moves) {
     unk_LinkedSequencesToMoves8_v2(moves, linkedSequences);
 }
 
-int unk_FindMoveFlag2Unk80InLinkedSequences44(struct Move moves[4][4]) {
+int unk_FindMarkedMoveInLinkedSequences44(struct Move moves[4][4]) {
     int i, j;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            if ((moves[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moves[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+            if ((moves[i][j].moveFlags & MOVE_FLAG_EXISTS) && (moves[i][j].moveFlags & MOVE_FLAG_INTERNAL_MARKER)) {
                 return i;
             }
         }
@@ -459,12 +655,12 @@ void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences
 }
 
 // the next two functions are exactly the same
-int unk_FindMoveFlag2Unk80InLinkedSequences88(struct Move linkedSequences[8][8]) {
+int unk_FindMarkedMoveInLinkedSequences88(struct Move linkedSequences[8][8]) {
     int i, j;
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_INTERNAL_MARKER)) {
                 return i;
             }
         }
@@ -475,12 +671,12 @@ int unk_FindMoveFlag2Unk80InLinkedSequences88(struct Move linkedSequences[8][8])
 
 // I expect the intent was to check for a different flag in this one
 // or the argument is a struct type that does hold the moves as a field
-int unk_FindMoveFlag2Unk80InLinkedSequences88_v2(struct Move linkedSequences[8][8]) {
+int unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[8][8]) {
     int i, j;
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_UNK80)) {
+            if ((linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS) && (linkedSequences[i][j].moveFlags & MOVE_FLAG_INTERNAL_MARKER)) {
                 return i;
             }
         }

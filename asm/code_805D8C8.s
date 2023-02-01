@@ -10863,7 +10863,7 @@ _0806305C:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8092F80
+	bl unk_SetMoveToLastInLinkedSequence4
 	ldr r1, _080630A4
 	str r0, [r1]
 	cmp r6, r0
@@ -10917,7 +10917,7 @@ _080630DE:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8093130
+	bl unk_SetMoveToFirstInLinkedSequence4
 	ldr r1, _08063120
 	str r0, [r1]
 	cmp r6, r0
