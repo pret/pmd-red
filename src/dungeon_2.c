@@ -12,19 +12,20 @@ extern struct DungeonLocation gUnknown_8107828[];
 extern u8 gDungeonFloorCount[];
 extern u8 gUnknown_81077E8[];
 
-// this one just does not want to get right
-// int sub_809017C(int a1) {
-//     struct DungeonLocation location;
-//     int i;
-//     sub_80901D8(&location, a1);
-//     for (i = 0; i < 999 && gUnknown_8107828[i].dungeonIndex != 63; ++i) {
-//         if (location.dungeonIndex == gUnknown_8107828[i].dungeonIndex &&
-//             location.dungeonFloor == gUnknown_8107828[i].dungeonFloor) {
-//             return 1;
-//         }
-//     }
-//     return 0;
-// }
+void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2);
+
+int sub_809017C(struct DungeonLocation* a1) {
+    struct DungeonLocation location;
+    int i;
+    sub_80901D8(&location, a1);
+    for (i = 0; i < 999 && gUnknown_8107828[i].id != 63; ++i) {
+        if (location.id == gUnknown_8107828[i].id &&
+            location.floor == gUnknown_8107828[i].floor) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2)
 { 

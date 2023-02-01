@@ -11,9 +11,9 @@ extern u8 gAvailablePokemonNames[];
 extern const char gUnknown_8109930[];
 extern struct MoveDataEntry *gMovesData;
 
-u8 sub_8093468(int param_1, struct Move* src_struct);
-u8 TryLinkMovesAfter(int param_1, struct Move* src_struct);
-u8 sub_80933D8(int param_1, void* src_struct);
+bool8 sub_8093468(int param_1, struct Move* src_struct);
+bool8 TryLinkMovesAfter(int param_1, struct Move* src_struct);
+bool8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
 
 void unk_GetLinkedSequences4(struct Move* moves, struct Move linkedSequences[4][4]);
@@ -41,37 +41,37 @@ extern u8* gPtrTypeText;     // "Type"
 extern u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
 
-int IsMoveSet(int index, struct Move* struct_ptr)
+bool8 IsMoveSet(int index, struct Move* struct_ptr)
 {
     if ((struct_ptr[index].moveFlags & MOVE_FLAG_SET) != 0) {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-int IsMoveEnabled(int index, struct Move* struct_ptr)
+bool8 IsMoveEnabled(int index, struct Move* struct_ptr)
 {
     if ((struct_ptr[index].moveFlags & MOVE_FLAG_ENABLED_FOR_AI) != 0) {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-int sub_8093318(int param_1, void* src_struct)
+bool8 sub_8093318(int param_1, void* src_struct)
 {
     struct Move dest_struct[8];
     MemoryCopy8((void*)dest_struct, src_struct, 64);
     return TryLinkMovesAfter(param_1, dest_struct);
 }
 
-int sub_809333C(int param_1, void* src_struct)
+bool8 sub_809333C(int param_1, void* src_struct)
 {
     struct Move dest_struct[8];
     MemoryCopy8((void*)dest_struct, src_struct, 64);
     return sub_8093468(param_1, dest_struct);
 }
 
-int sub_8093360(int param_1, void* src_struct)
+bool8 sub_8093360(int param_1, void* src_struct)
 {
     u8 dest_struct[64];
     MemoryCopy8(dest_struct, src_struct, 64);
@@ -79,15 +79,15 @@ int sub_8093360(int param_1, void* src_struct)
 }
 
 // appears unused
-int IsMoveNotSet(int index, struct Move* struct_ptr)
+bool8 IsMoveNotSet(int index, struct Move* struct_ptr)
 {
     if ((struct_ptr[index].moveFlags & MOVE_FLAG_SET) != 0) {
-        return 0;
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
-int IsAnyMoveLinked(int unused, struct Move* moves) {
+bool8 IsAnyMoveLinked(int unused, struct Move* moves) {
     int i;
     int counter;
 
@@ -98,12 +98,12 @@ int IsAnyMoveLinked(int unused, struct Move* moves) {
         }
     }
     if (counter > 1) {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-u8 sub_80933D8(int param_1, void* src_struct)
+bool8 sub_80933D8(int param_1, void* src_struct)
 {
   int result;
 
@@ -111,37 +111,37 @@ u8 sub_80933D8(int param_1, void* src_struct)
     result = sub_8093468(param_1, src_struct);
   }
   else {
-    result = 1;
+    result = TRUE;
   }
   return result;
 }
 
-u8 TryLinkMovesAfter(int index, struct Move* moves) {
+bool8 TryLinkMovesAfter(int index, struct Move* moves) {
     int i;
     const struct Move *move = &moves[index];
     if (DoesMoveCharge(move->id)) {
-        return 0;
+        return FALSE;
     }
     
     for (i = index + 1; i < 8; i++) {
         if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS)) {
-            return 0;
+            return FALSE;
         }
         if (DoesMoveCharge(moves[i].id)) {
-            return 0;
+            return FALSE;
         }
         if (!(moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
             moves[i].moveFlags |= MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
             unk_FixLinkedMovesSetEnabled8_v2(moves);
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 // unlinks move
 NAKED
-u8 sub_8093468(int index, struct Move* moves)
+bool8 sub_8093468(int index, struct Move* moves)
 {
 	asm_unified(
 "   push {r4-r7,lr}\n"
@@ -182,20 +182,20 @@ u8 sub_8093468(int index, struct Move* moves)
 "	bx r1\n");
 }
 
-u8 IsNextMoveLinked(int index, struct Move* moves) {
+bool8 IsNextMoveLinked(int index, struct Move* moves) {
     struct Move* move;
     if (index + 1 >= 8) {
-        return 0;
+        return FALSE;
     }
     move = &moves[index + 1];
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
-        return 0;
+        return FALSE;
     if ((move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
-        return 1;
-    return 0;
+        return TRUE;
+    return FALSE;
 }
 
-int ToggleSetMove(int index, struct Move* moves) {
+bool8 ToggleSetMove(int index, struct Move* moves) {
     struct Move* move;
     u8 flags;
     int i;
@@ -215,7 +215,7 @@ int ToggleSetMove(int index, struct Move* moves) {
     }
     move->moveFlags = flags;
     unk_FixLinkedMovesSetEnabled8_v2(moves);
-    return 1;
+    return TRUE;
 }
 
 void UnSetMove(int index, struct Move* moves) {
@@ -224,11 +224,11 @@ void UnSetMove(int index, struct Move* moves) {
     unk_FixLinkedMovesSetEnabled8_v2(moves);
 }
 
-int ToggleMoveEnabled(int index, struct Move* moves) {
+bool8 ToggleMoveEnabled(int index, struct Move* moves) {
     struct Move* move = &moves[index];
     move->moveFlags ^= MOVE_FLAG_ENABLED_FOR_AI;
     unk_FixLinkedMovesSetEnabled8_v2(moves);
-    return 1;
+    return TRUE;
 }
 
 int GetLinkedSequence(int index, struct Move* moves, u16* sequenceMoveIDs) {
