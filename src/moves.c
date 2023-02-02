@@ -48,7 +48,7 @@ extern u8 gAvailablePokemonNames[];
 extern const char gUnknown_8109930[];
 extern struct MoveDataEntry *gMovesData;
 
-bool8 sub_8093468(int param_1, struct Move* src_struct);
+bool8 UnlinkMovesAfter(int param_1, struct Move* src_struct);
 bool8 TryLinkMovesAfter(int param_1, struct Move* src_struct);
 bool8 sub_80933D8(int param_1, void* src_struct);
 bool8 DoesMoveCharge(u16 move);
@@ -759,7 +759,7 @@ bool8 sub_809333C(int param_1, void* src_struct)
 {
     struct Move dest_struct[8];
     MemoryCopy8((void*)dest_struct, src_struct, 64);
-    return sub_8093468(param_1, dest_struct);
+    return UnlinkMovesAfter(param_1, dest_struct);
 }
 
 bool8 sub_8093360(int param_1, void* src_struct)
@@ -799,7 +799,7 @@ bool8 sub_80933D8(int param_1, void* src_struct)
   int result;
 
   if (!TryLinkMovesAfter(param_1, src_struct)) {
-    result = sub_8093468(param_1, src_struct);
+    result = UnlinkMovesAfter(param_1, src_struct);
   }
   else {
     result = TRUE;
@@ -830,48 +830,22 @@ bool8 TryLinkMovesAfter(int index, struct Move* moves) {
     return FALSE;
 }
 
-// unlinks move
-NAKED
-bool8 sub_8093468(int index, struct Move* moves)
-{
-	asm_unified(
-"   push {r4-r7,lr}\n"
-"	adds r6, r1, 0\n"
-"	movs r5, 0\n"
-"	adds r1, r0, 0x1\n"
-"	movs r4, 0\n"
-"	cmp r1, 0x7\n"
-"	bgt _080934A0\n"
-"	movs r0, 0x2\n"
-"	mov r12, r0\n"
-"	movs r7, 0xFD\n"
-"	lsls r0, r1, 3\n"
-"	adds r3, r0, r6\n"
-"_08093480:\n"
-"	ldrb r2, [r3]\n"
-"	mov r0, r12\n"
-"	ands r0, r2\n"
-"	cmp r0, 0\n"
-"	beq _080934A0\n"
-"	adds r0, r7, 0\n"
-"	ands r0, r2\n"
-"	strb r0, [r3]\n"
-"	movs r5, 0x1\n"
-"	adds r3, 0x8\n"
-"	adds r1, 0x1\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x7\n"
-"	bgt _080934A0\n"
-"	cmp r1, 0x7\n"
-"	ble _08093480\n"
-"_080934A0:\n"
-"	adds r0, r6, 0\n"
-"	bl unk_FixLinkedMovesSetEnabled8_v2\n"
-"	adds r0, r5, 0\n"
-"	pop {r4-r7}\n"
-"	pop {r1}\n"
-"	bx r1\n");
+bool8 UnlinkMovesAfter(int index, struct Move* moves) {
+    int i;
+    bool8 result = FALSE;
+    int r4;
+
+    for (i = index + 1, r4 = 0; r4 < 8 && i < 8; i++, r4++) {
+        if (!(moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+            goto label; // for some reason we can't use break here
+        moves[i].moveFlags &= ~MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
+        result = TRUE;
+    }
+label:
+    unk_FixLinkedMovesSetEnabled8_v2(moves);
+    return result;
 }
+
 
 bool8 IsNextMoveLinked(int index, struct Move* moves) {
     struct Move* move;

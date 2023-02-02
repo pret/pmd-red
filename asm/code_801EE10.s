@@ -341,7 +341,7 @@ _0801F0D0:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093468
+	bl UnlinkMovesAfter
 	b _0801F0FE
 	.align 2, 0
 _0801F0E0: .4byte gUnknown_203B270
@@ -4276,7 +4276,7 @@ _08021058:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093468
+	bl UnlinkMovesAfter
 _08021068:
 	movs r0, 0x1F
 	bl sub_801FDA8
