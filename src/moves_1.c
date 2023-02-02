@@ -32,6 +32,91 @@ extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;     // "Type"
 extern u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
+// the next 2 functions are the same
+// should be 8 and 8_v2
+int sub_8092E8C(struct Move* moves, int index) {
+    int i, j;
+    
+    for (i = 0; i < 8; i++) {
+        u8 flag;
+        
+        if (--index < 0) {
+            for (j = 7; j > 0; j--) {
+                if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS)) {
+                    continue;
+                }
+                
+                // checks MOVE_FLAG_ENABLED_FOR_AI
+                flag = (moves[j].moveFlags >> 1);
+                if (!(flag & 1)) {
+                    return j;
+                }
+            }
+            return 0;
+        }
+        
+        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+int sub_8092EEC(struct Move* moves, int index) {
+    int i, j;
+    
+    for (i = 0; i < 8; i++) {
+        u8 flag;
+        
+        if (--index < 0) {
+            for (j = 7; j > 0; j--) {
+                if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS)) {
+                    continue;
+                }
+                
+                // checks MOVE_FLAG_ENABLED_FOR_AI
+                flag = (moves[j].moveFlags >> 1);
+                if (!(flag & 1)) {
+                    return j;
+                }
+            }
+            return 0;
+        }
+        
+        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+int sub_8092F4C(struct Move* moves, int index) {
+    int i;
+    for (i = index; i > 0; i--) {
+        struct Move* move = &moves[i];
+        u8 flag;
+        if (!(move->moveFlags & MOVE_FLAG_EXISTS)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (move->moveFlags >> 1);
+        if (!(flag & 1)) {
+            return i;
+        }
+    }
+    return 0;
+}
+
 // the next 3 functions are the same, except the first
 // is for 4, then for 8 then for 8_v2
 int unk_SetMoveToLastInLinkedSequence4(struct Move* moves, int index) {
