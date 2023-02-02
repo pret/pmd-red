@@ -292,7 +292,6 @@ SECTIONS {
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
-        src/dungeon_2.o(.text);
         asm/dungeon_2.o(.text);
         src/dungeon_2_1.o(.text);
         src/items.o(.text);
