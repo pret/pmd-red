@@ -32,6 +32,107 @@ extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;     // "Type"
 extern u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
+// this function is the same as the two after the next one
+// except this one is for 4, and the other 2 for 8 and 8_v2
+int sub_8092D80(struct Move* moves, int index) {
+    int i;
+    
+    for (i = 0; i < 4; i++) {
+        u8 flag;
+        
+        if (++index == 4) {
+            return 0;
+        }
+        
+        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+int sub_8092DB8(struct Move* moves, int index) {
+    int i, j;
+    
+    for (i = 0; i < 4; i++) {
+        u8 flag;
+        
+        if (--index < 0) {
+            for (j = 3; j >= 0; j--) {
+                if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS)) {
+                    continue;
+                }
+
+                index = j;
+                break;
+            }
+
+            // return 0 if loop ends without setting index
+            if (j < 0) 
+                return 0;
+        }
+        
+        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+int sub_8092E1C(struct Move* moves, int index) {
+    int i;
+    
+    for (i = 0; i < 8; i++) {
+        u8 flag;
+        
+        if (++index == 8) {
+            return 0;
+        }
+        
+        if (!(moves[index].moveFlags & 1)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+int sub_8092E54(struct Move* moves, int index) {
+    int i;
+    
+    for (i = 0; i < 8; i++) {
+        u8 flag;
+        
+        if (++index == 8) {
+            return 0;
+        }
+        
+        if (!(moves[index].moveFlags & 1)) {
+            return 0;
+        }
+        // checks MOVE_FLAG_ENABLED_FOR_AI
+        flag = (moves[index].moveFlags >> 1);
+        if (!(flag & 1)) {
+            return index;
+        }
+    }
+    return 0;
+}
+
 // the next 2 functions are the same
 // should be 8 and 8_v2
 int sub_8092E8C(struct Move* moves, int index) {
