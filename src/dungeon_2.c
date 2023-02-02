@@ -14,17 +14,17 @@ extern u8 gUnknown_81077E8[];
 
 void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2);
 
-int sub_809017C(struct DungeonLocation* a1) {
+bool8 sub_809017C(struct DungeonLocation* a1) {
     struct DungeonLocation location;
     int i;
     sub_80901D8(&location, a1);
     for (i = 0; i < 999 && gUnknown_8107828[i].id != 63; ++i) {
         if (location.id == gUnknown_8107828[i].id &&
             location.floor == gUnknown_8107828[i].floor) {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2)
