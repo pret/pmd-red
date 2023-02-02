@@ -10886,7 +10886,7 @@ _080630BA:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8092D80
+	bl unk_FindMoveEnabledForAIAfter4
 	adds r1, r0, 0
 	ldr r0, _08063118
 	bl sub_8013780
@@ -12701,7 +12701,7 @@ _08063EEC:
 	ldrsh r4, [r1, r2]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8092E1C
+	bl unk_FindMoveEnabledForAIAfter8
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_8013780
@@ -12724,7 +12724,7 @@ _08063F2A:
 	ldrsh r4, [r1, r2]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8092E8C
+	bl unk_FindMoveEnabledForAIBefore8
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_8013780

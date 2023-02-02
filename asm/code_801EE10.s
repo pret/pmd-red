@@ -218,7 +218,7 @@ _0801EFCA:
 	adds r4, 0x1C
 	ldr r0, [r0, 0x10]
 	adds r1, r6, 0
-	bl sub_8092E54
+	bl unk_FindMoveEnabledForAIAfter8_v2
 	b _0801EFF8
 	.align 2, 0
 _0801EFE0: .4byte gUnknown_203B270
@@ -231,7 +231,7 @@ _0801EFE4:
 	adds r4, 0x1C
 	ldr r0, [r0, 0x10]
 	adds r1, r6, 0
-	bl sub_8092EEC
+	bl unk_FindMoveEnabledForAIBefore8_v2
 _0801EFF8:
 	adds r1, r0, 0
 	adds r0, r4, 0

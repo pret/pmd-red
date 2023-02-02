@@ -343,7 +343,7 @@ void sub_8092D54(u8 *buffer, struct Move *move)
 
 // this function is the same as the two after the next one
 // except this one is for 4, and the other 2 for 8 and 8_v2
-int sub_8092D80(struct Move* moves, int index) {
+int unk_FindMoveEnabledForAIAfter4(struct Move* moves, int index) {
     int i;
     
     for (i = 0; i < 4; i++) {
@@ -398,7 +398,7 @@ int sub_8092DB8(struct Move* moves, int index) {
     return 0;
 }
 
-int sub_8092E1C(struct Move* moves, int index) {
+int unk_FindMoveEnabledForAIAfter8(struct Move* moves, int index) {
     int i;
     
     for (i = 0; i < 8; i++) {
@@ -420,7 +420,7 @@ int sub_8092E1C(struct Move* moves, int index) {
     return 0;
 }
 
-int sub_8092E54(struct Move* moves, int index) {
+int unk_FindMoveEnabledForAIAfter8_v2(struct Move* moves, int index) {
     int i;
     
     for (i = 0; i < 8; i++) {
@@ -444,7 +444,7 @@ int sub_8092E54(struct Move* moves, int index) {
 
 // the next 2 functions are the same
 // should be 8 and 8_v2
-int sub_8092E8C(struct Move* moves, int index) {
+int unk_FindMoveEnabledForAIBefore8(struct Move* moves, int index) {
     int i, j;
     
     for (i = 0; i < 8; i++) {
@@ -477,7 +477,7 @@ int sub_8092E8C(struct Move* moves, int index) {
     return 0;
 }
 
-int sub_8092EEC(struct Move* moves, int index) {
+int unk_FindMoveEnabledForAIBefore8_v2(struct Move* moves, int index) {
     int i, j;
     
     for (i = 0; i < 8; i++) {
