@@ -81,7 +81,7 @@ void sub_80277FC(void)
         gUnknown_203B2BC->targetPoke = sub_8023B44();
         pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
         gUnknown_203B2BC->unk18 = pokeStruct;
-        gUnknown_203B2BC->unk1C = pokeStruct->isTeamLeader;
+        gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
         PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(3);
         break;
@@ -89,13 +89,13 @@ void sub_80277FC(void)
         gUnknown_203B2BC->targetPoke = sub_8023B44();
         pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
         gUnknown_203B2BC->unk18 = pokeStruct;
-        gUnknown_203B2BC->unk1C = pokeStruct->isTeamLeader;
+        gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
         PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(4);
         break;
       case 2:
         sub_8023C60();
-        SetFriendAreaActionMenuState(0x11);
+        SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_EXIT);
         break;
   }
 }
@@ -105,14 +105,14 @@ void sub_80278B4(void)
   struct PokemonStruct *playerStruct;
   struct PokemonStruct *pokeStruct1;
   struct PokemonStruct *pokeStruct2;
-  int local_c;
+  int menuAction;
 
-  local_c = 0;
+  menuAction = 0;
   sub_8023A94(0);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&local_c), local_c != 1)) {
-    gUnknown_203B2BC->unk70 = local_c;
+  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
+    gUnknown_203B2BC->unk70 = menuAction;
   }
-  switch(local_c) {
+  switch(menuAction) {
       case 6:
         if (sub_808D750(gUnknown_203B2BC->targetPoke)) {
 #ifdef NONMATCHING
@@ -242,10 +242,10 @@ void sub_8027A78(void)
 
 void sub_8027AE4(void)
 {
-  s32 local_8;
+  s32 menuAction;
 
-  if (sub_80144A4(&local_8) == 0) {
-      switch(local_8)
+  if (sub_80144A4(&menuAction) == 0) {
+      switch(menuAction)
       {
         case 1:
         case 3:
@@ -368,12 +368,12 @@ void sub_8027D00(void)
     }
 }
 
-void sub_8027D1C(void)
+void FriendAreaActionMenu_GotoFallbackState(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        SetFriendAreaActionMenuState(gUnknown_203B2BC->unk4);
+        SetFriendAreaActionMenuState(gUnknown_203B2BC->fallbackState);
     }
 }
 

@@ -36,14 +36,14 @@ void sub_803AF38(void)
 
 void sub_803AF88(void)
 {
-  s32 local_c;
+  s32 menuAction;
   
-  local_c = 0;
-  sub_8023A94(local_c);
+  menuAction = 0;
+  sub_8023A94(0);
   if (sub_8012FD8(&gUnknown_203B3F8->unk10) == 0) {
-    sub_8013114(&gUnknown_203B3F8->unk10, &local_c);
+    sub_8013114(&gUnknown_203B3F8->unk10, &menuAction);
   }
-  switch(local_c)
+  switch(menuAction)
   {
       case 4:
         sub_803ACD0(5);

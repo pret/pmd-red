@@ -5,14 +5,14 @@ struct unkStruct_203B2BC
 {
     // size: 0x1E0
     u32 state;
-    u32 unk4;
+    u32 fallbackState;
     s16 targetPoke;
     u16 unkA;
     u32 id;
     struct BulkItem itemToGive;
     struct BulkItem item2;
     struct PokemonStruct *unk18;
-    u8 unk1C;
+    bool8 isTeamLeader;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
     struct Move moves[8];
@@ -33,6 +33,11 @@ struct unkStruct_203B2BC
     u8 fill170[0x180 - 0x170];
 
     struct UnkTextStruct2 unk180[4];
+};
+
+enum FriendAreaActionMenuStates {
+    FRIEND_AREA_ACTION_MENU_INIT,
+    FRIEND_AREA_ACTION_MENU_EXIT = 0x11,
 };
 
 #endif

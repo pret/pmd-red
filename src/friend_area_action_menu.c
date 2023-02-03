@@ -39,7 +39,7 @@ extern void sub_80277FC();
 extern void sub_80278B4();
 extern void sub_8027A40();
 extern void sub_8027A5C();
-extern void sub_8027D1C();
+extern void FriendAreaActionMenu_GotoFallbackState();
 extern void sub_8027A78();
 extern void sub_8027AE4();
 extern void sub_8027B28();
@@ -131,14 +131,14 @@ u32 sub_8027074(void)
     gUnknown_203B2BC->unk70 = 0;
     gUnknown_203B2BC->unk74 = 0;
     gUnknown_203B2BC->unk78 = 0;
-    SetFriendAreaActionMenuState(0);
+    SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_INIT);
     return 1;
 }
 
 u32 sub_80270A4(void)
 {
   switch(gUnknown_203B2BC->state) {
-      case 0:
+      case FRIEND_AREA_ACTION_MENU_INIT:
         SetFriendAreaActionMenuState(1);
         break;
       case 1:
@@ -178,9 +178,9 @@ u32 sub_80270A4(void)
         sub_8027D00();
         break;
       default:
-        sub_8027D1C();
+        FriendAreaActionMenu_GotoFallbackState();
         break;
-      case 0x11:
+      case FRIEND_AREA_ACTION_MENU_EXIT:
         return 3;
   }
   return 0;
@@ -236,8 +236,8 @@ void sub_8027274(void)
   struct Item slot;
 
   switch(gUnknown_203B2BC->state) {
-    case 0:
-    case 0x11:
+    case FRIEND_AREA_ACTION_MENU_INIT:
+    case FRIEND_AREA_ACTION_MENU_EXIT:
         break;
     case 1:
         sub_8023868(1,0,0,7);
@@ -290,13 +290,13 @@ void sub_8027274(void)
         sub_801F808(gUnknown_203B2BC->moveIDs);
         break;
     case 6:
-        gUnknown_203B2BC->unk4 = 2;
+        gUnknown_203B2BC->fallbackState = 2;
         // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
         // returned to the Toolbox
         sub_80141B4(gUnknown_80DD8A0,0,0,0x101);
         break;
     case 7:
-        gUnknown_203B2BC->unk4 = 2;
+        gUnknown_203B2BC->fallbackState = 2;
         // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
         // returned to storage
         sub_80141B4(gUnknown_80DD8D0,0,0,0x101);

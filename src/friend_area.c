@@ -359,9 +359,9 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
         pokemon = &gRecruitedPokemonRef->pokemon[counter];
         if((u8)(pokemon->unk0) & 1)
         {
-            if((pokemon->unk2 == 0) || r2)
+            if((pokemon->isTeamLeader == 0) || r2)
             {
-                flag = (u8)pokemon->fill4[0] == 65;
+                flag = pokemon->dungeonLocation.id == 65;
                 if(!flag || r3)
                 {
                     if(sub_80923D4(counter) == r0)
@@ -464,36 +464,33 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 #endif
 
 #ifdef NONMATCHING
-void sub_809249C(u8 index, u8 clear)
+void sub_809249C(u8 friendArea, u8 clear)
 {
-    s32 counter;
-    bool32 flag;
-    u8 temp8;
-    u8 neg8;
+    s32 index;
+    bool32 dungeonCheck;
+    bool32 isTeamLeader;
 
-    if(!gFriendAreas[index])
+    if(!gFriendAreas[friendArea])
         return;
-    for(counter = 0; counter <= 412; counter++)
+    for(index = 0; index < NUM_MONSTERS; index++)
     {
-        if((u8)(gRecruitedPokemonRef[counter].unk0) & 1)
+        struct PokemonStruct *pokemon = &gRecruitedPokemonRef->pokemon[index]; 
+        
+        if((u8)(pokemon->unk0) & 1)
         {
-            if(sub_80923D4(counter) == index)
+            if(sub_80923D4(index) == friendArea)
             {
-                flag = (u8)gRecruitedPokemonRef[counter].unk4[0] == 65;
-                if(!flag)
+                dungeonCheck = pokemon->dungeonLocation.id == 65;
+                if(!(dungeonCheck))
                 {
-                    temp8 = (u8)gRecruitedPokemonRef[counter].unk2;
-                    neg8 = -temp8;
-                    neg8 |= temp8;
-                    // still tries to left shift before the right shift..
-                    neg8 >>= 7;
-                    if(neg8 != 0)
+                    isTeamLeader = pokemon->isTeamLeader != FALSE;
+                    if(isTeamLeader)
                     {
-                        clear = 0;
+                        clear = FALSE;
                     }
                     else
                     {
-                       gRecruitedPokemonRef[counter].unk0 = neg8;
+                       pokemon->unk0 = 0;
                     }
                 }
             }
@@ -501,11 +498,11 @@ void sub_809249C(u8 index, u8 clear)
     }
     if(clear)
     {
-        gFriendAreas[index] = FALSE;
+        gFriendAreas[friendArea] = FALSE;
     }
 }
 #else
-NAKED void sub_809249C(u8 index, u8 clear)
+NAKED void sub_809249C(u8 friendArea, u8 clear)
 {
 	asm_unified("\tpush {r4-r7,lr}\n"
 	"\tlsls r0, 24\n"
