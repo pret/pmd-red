@@ -19,15 +19,15 @@ extern void sub_8023B7C(u32);
 extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8093560(u32, struct Move *, u32 *);
-extern void sub_801F808(u32 *);
+extern void GetLinkedSequence(u32, struct Move *, u16*);
+extern void sub_801F808(u16*);
 extern void sub_8027794();
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
 extern void sub_801B3C0(struct Item *);
-extern void sub_809401C(struct Move *, struct Move *);
+extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
 extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
@@ -271,8 +271,8 @@ void sub_8027274(void)
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        sub_809401C(gUnknown_203B2BC->unk28,gUnknown_203B2BC->unk18->moves);
-        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->unk28,0,0,0);
+        unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->unk18->moves);
+        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,0,0);
         break;
     case 0xf:
         sub_801F1B0(1,0);
@@ -286,8 +286,8 @@ void sub_8027274(void)
         sub_8014248(gFriendAreaActionSayFarewellConfirm,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
         break;
     case 0x10:
-        sub_8093560(gUnknown_203B2BC->unk20,gUnknown_203B2BC->unk28,&gUnknown_203B2BC->unk68);
-        sub_801F808(&gUnknown_203B2BC->unk68);
+        GetLinkedSequence(gUnknown_203B2BC->moveIndex,gUnknown_203B2BC->moves,gUnknown_203B2BC->moveIDs);
+        sub_801F808(gUnknown_203B2BC->moveIDs);
         break;
     case 6:
         gUnknown_203B2BC->unk4 = 2;

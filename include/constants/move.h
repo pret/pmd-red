@@ -10,12 +10,14 @@ enum MoveFlag
     MOVE_FLAG_ENABLED_FOR_AI = 1 << 2, // Enabled for the AI to use.
     MOVE_FLAG_SET = 1 << 3, // This move can be triggered by pressing L+A instead of having to go to the move menu.
     MOVE_FLAG_LAST_USED = 1 << 4, // The most recent move used by the Pokémon.
-    MOVE_FLAG_DISABLED = 1 << 5 // Disabled by an effect like Taunt.
+    MOVE_FLAG_DISABLED = 1 << 5, // Disabled by an effect like Taunt.
+    MOVE_FLAG_INTERNAL_MARKER = 1 << 7     // Possibly some kind of flag used internally to mark a move and find it again
 };
 
 enum MoveFlag2
 {
     MOVE_FLAG_SEALED = 1 << 0,
+    MOVE_FLAG2_UNK4 = 1 << 2,
     MOVE_FLAG_TEMPORARY = 1 << 3, // Used for moves copied by Mimic.
     MOVE_FLAG_REPLACE = 1 << 5 // Used for moves copied by Sketch.
 };

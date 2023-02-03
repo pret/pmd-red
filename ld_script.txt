@@ -292,8 +292,6 @@ SECTIONS {
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
-        asm/dungeon.o(.text);
-        src/dungeon_2.o(.text);
         asm/dungeon_2.o(.text);
         src/dungeon_2_1.o(.text);
         src/items.o(.text);
@@ -303,8 +301,6 @@ SECTIONS {
         asm/friend_area_1.o(.text);
         src/friend_area_1.o(.text);
         src/moves.o(.text);
-        asm/moves_1.o(.text);
-        src/moves_1.o(.text);
         asm/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);

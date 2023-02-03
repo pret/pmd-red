@@ -7,6 +7,10 @@
 #include "pokemon.h"
 #include "moves.h"
 
+
+// there might be more overlap with unkStruct_203B2BC
+// I was working on the moves and put the data that seemed to correspond to that
+// into a separate struct
 struct unkStruct_203B2B4
 {
     // size: 0x178
@@ -20,15 +24,15 @@ struct unkStruct_203B2B4
     struct BulkItem unk14;
     u32 unk18;
     /* 0x1C */ struct PokemonStruct *pokeStruct;
-    u32 unk20;
-    u32 unk24;
-    /* 0x28 */ struct Move moves[8];
-    u32 unk68;
-    u32 unk6C;
+    u32 moveIndex;  // some sort of move index
+    u16 moveID;
+    struct Move moves[8];
+    u16 moveIDs[4];   // some list of move IDs
     u32 unk70;
-    u32 unk74;
+    s32 unk74;
     u32 unk78;
-    u8 fill7C[0xC8 - 0x7C]; 
+    u32 unk7C;
+    u8 fill7C[0xC8 - 0x80]; 
     struct MenuItem unkC8[4];
     u8 fillE8[0x108 - 0xE8];
     s16 unk108[8];
@@ -83,10 +87,10 @@ extern void sub_801BEEC(s16);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4(void);
 
-extern void sub_809401C(struct Move *, struct Move *);
+extern void unk_CopyMoves4To8(struct Move *, struct Move *); // TODO convert arg 0 to PokemonMove struct *
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
-extern void sub_8093560(u32, struct Move *, u32 *);
-extern void sub_801F808(u32 *);
+extern void GetLinkedSequence(u32, struct Move *, u16*);
+extern void sub_801F808(u16 *);
 u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8025E68(u32 , u32 *);
 
@@ -279,15 +283,15 @@ void sub_8025518(void)
         sub_80141B4(gUnknown_80DD270,0,0,0x101);
         break;
     case 0xf:
-        sub_809401C(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
+        unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
         sub_801EE10(3,gUnknown_203B2B4->unkE,gUnknown_203B2B4->moves,0,0,0);
         break;
     case 0x10:
         sub_801F1B0(1,0);
         break;
     case 0x11:
-        sub_8093560(gUnknown_203B2B4->unk20,gUnknown_203B2B4->moves,&gUnknown_203B2B4->unk68);
-        sub_801F808(&gUnknown_203B2B4->unk68);
+        GetLinkedSequence(gUnknown_203B2B4->moveIndex,gUnknown_203B2B4->moves, gUnknown_203B2B4->moveIDs);
+        sub_801F808(gUnknown_203B2B4->moveIDs);
         break;
     case 0x12:
         sub_801602C(2,gUnknown_203B2B4->pokeStruct->name);

@@ -218,7 +218,7 @@ _0801EFCA:
 	adds r4, 0x1C
 	ldr r0, [r0, 0x10]
 	adds r1, r6, 0
-	bl sub_8092E54
+	bl unk_FindMoveEnabledForAIAfter8_v2
 	b _0801EFF8
 	.align 2, 0
 _0801EFE0: .4byte gUnknown_203B270
@@ -231,7 +231,7 @@ _0801EFE4:
 	adds r4, 0x1C
 	ldr r0, [r0, 0x10]
 	adds r1, r6, 0
-	bl sub_8092EEC
+	bl unk_FindMoveEnabledForAIBefore8_v2
 _0801EFF8:
 	adds r1, r0, 0
 	adds r0, r4, 0
@@ -261,7 +261,7 @@ _0801F026:
 	ldrsh r4, [r2, r0]
 	ldr r0, [r2, 0x10]
 	adds r1, r4, 0
-	bl sub_809309C
+	bl unk_SetMoveToLastInLinkedSequence8_v2
 _0801F032:
 	ldr r1, [r5]
 	strh r0, [r1, 0x34]
@@ -285,7 +285,7 @@ _0801F04C:
 	ldrsh r4, [r2, r1]
 	ldr r0, [r2, 0x10]
 	adds r1, r4, 0
-	bl sub_809324C
+	bl unk_SetMoveToFirstInLinkedSequence8_v2
 	b _0801F032
 	.align 2, 0
 _0801F068: .4byte gUnknown_203B270
@@ -319,7 +319,7 @@ _0801F074:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093400
+	bl TryLinkMovesAfter
 	movs r0, 0x6
 	bl PlayMenuSoundEffect
 	movs r7, 0x1
@@ -341,7 +341,7 @@ _0801F0D0:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093468
+	bl UnlinkMovesAfter
 	b _0801F0FE
 	.align 2, 0
 _0801F0E0: .4byte gUnknown_203B270
@@ -357,7 +357,7 @@ _0801F0E4:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_80934DC
+	bl ToggleSetMove
 _0801F0FE:
 	lsls r0, 24
 	cmp r0, 0
@@ -371,7 +371,7 @@ _0801F110:
 	movs r2, 0x34
 	ldrsh r0, [r1, r2]
 	ldr r1, [r1, 0x10]
-	bl sub_8093544
+	bl ToggleMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801F128
@@ -1506,7 +1506,7 @@ sub_801F9A4:
 	ldrh r1, [r3, 0x8]
 	ldr r2, [r3, 0x5C]
 	adds r3, 0x14
-	bl sub_8093D9C
+	bl unk_MoveIDPrintMoveDescription
 	ldr r1, [r5]
 	str r0, [r1, 0x10]
 	str r4, [r1, 0x24]
@@ -2727,7 +2727,7 @@ _080203F8:
 	adds r0, 0x24
 	ldr r1, [r1, 0x10]
 	adds r1, 0x2C
-	bl sub_809401C
+	bl unk_CopyMoves4To8
 	ldr r0, [r5]
 	movs r5, 0xC
 	ldrsh r1, [r0, r5]
@@ -2776,7 +2776,7 @@ _08020460:
 	adds r1, r2, 0
 	adds r1, 0x24
 	adds r2, 0x64
-	bl sub_8093560
+	bl GetLinkedSequence
 _0802046E:
 	ldr r0, [r5]
 	adds r0, 0x64
@@ -3163,7 +3163,7 @@ CreateGulpinLinkMenu:
 	beq _0802079C
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80932E0
+	bl IsMoveSet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020788
@@ -3191,7 +3191,7 @@ _08020798: .4byte gGulpinSet
 _0802079C:
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80932FC
+	bl IsMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080207B4
@@ -3893,7 +3893,7 @@ _08020D14:
 	adds r0, 0x24
 	ldr r1, [r1, 0x10]
 	adds r1, 0x2C
-	bl sub_809401C
+	bl unk_CopyMoves4To8
 	movs r5, 0
 	adds r6, r4, 0
 	movs r4, 0x24
@@ -4153,7 +4153,7 @@ _08020F44:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80934DC
+	bl ToggleSetMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020F68
@@ -4174,7 +4174,7 @@ _08020F70:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_809352C
+	bl UnSetMove
 	b _08021068
 	.align 2, 0
 _08020F84: .4byte 0x00000133
@@ -4184,7 +4184,7 @@ _08020F8C:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093544
+	bl ToggleMoveEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020FB0
@@ -4249,7 +4249,7 @@ _0802101C:
 	ldr r1, [r0]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093400
+	bl TryLinkMovesAfter
 	b _08021068
 	.align 2, 0
 _0802102C: .4byte 0x00000133
@@ -4276,7 +4276,7 @@ _08021058:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_8093468
+	bl UnlinkMovesAfter
 _08021068:
 	movs r0, 0x1F
 	bl sub_801FDA8
@@ -4288,7 +4288,7 @@ _08021074:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80933A0
+	bl IsAnyMoveLinked
 	lsls r0, 24
 	cmp r0, 0
 	bne _08021098
@@ -4305,7 +4305,7 @@ _08021098:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x18]
 	adds r1, 0x24
-	bl sub_80934B0
+	bl IsNextMoveLinked
 	ldr r1, [r4]
 	strb r0, [r1, 0x14]
 	movs r0, 0x22
@@ -4365,7 +4365,7 @@ _08021108:
 	adds r0, r1, 0
 	adds r0, 0x24
 	ldr r1, [r1, 0x18]
-	bl sub_8093CF8
+	bl RemoveLinkSequenceFromMoves8
 	movs r0, 0x23
 	bl sub_801FDA8
 	b _0802112A

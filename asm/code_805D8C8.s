@@ -10863,7 +10863,7 @@ _0806305C:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8092F80
+	bl unk_SetMoveToLastInLinkedSequence4
 	ldr r1, _080630A4
 	str r0, [r1]
 	cmp r6, r0
@@ -10886,7 +10886,7 @@ _080630BA:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8092D80
+	bl unk_FindMoveEnabledForAIAfter4
 	adds r1, r0, 0
 	ldr r0, _08063118
 	bl sub_8013780
@@ -10917,7 +10917,7 @@ _080630DE:
 	lsls r0, 1
 	add r0, r9
 	adds r1, r6, 0
-	bl sub_8093130
+	bl unk_SetMoveToFirstInLinkedSequence4
 	ldr r1, _08063120
 	str r0, [r1]
 	cmp r6, r0
@@ -11916,7 +11916,7 @@ _08063898:
 	adds r0, r4, 0
 	movs r2, 0
 	mov r3, r10
-	bl sub_8093DE8
+	bl unk_PrintMoveDescription
 	mov r8, r0
 _080638FE:
 	mov r0, r8
@@ -12167,7 +12167,7 @@ _08063AEC:
 	movs r1, 0x8C
 	lsls r1, 1
 	adds r0, r5, r1
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x2
 	orrs r0, r1
@@ -12240,7 +12240,7 @@ sub_8063B54:
 	strb r0, [r4]
 	adds r5, r6
 	adds r0, r5, 0
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x2
 	orrs r0, r1
@@ -12346,7 +12346,7 @@ _08063C42:
 	bl sub_80928C0
 _08063C5C:
 	adds r0, r6, r4
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldr r0, _08063C84
 	bl PlaySoundEffect
 	pop {r4-r7}
@@ -12491,7 +12491,7 @@ _08063D70:
 	movs r2, 0x8C
 	lsls r2, 1
 	adds r0, r6, r2
-	bl sub_80936D8
+	bl unk_FixLinkedMovesSetEnabled4
 	ldr r0, _08063DA8
 	bl PlaySoundEffect
 	mov r3, r10
@@ -12617,7 +12617,7 @@ _08063E44:
 	ble _08063E44
 _08063E62:
 	adds r0, r5, 0
-	bl sub_80936F4
+	bl unk_FixLinkedMovesSetEnabled8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -12701,7 +12701,7 @@ _08063EEC:
 	ldrsh r4, [r1, r2]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8092E1C
+	bl unk_FindMoveEnabledForAIAfter8
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_8013780
@@ -12724,7 +12724,7 @@ _08063F2A:
 	ldrsh r4, [r1, r2]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8092E8C
+	bl unk_FindMoveEnabledForAIBefore8
 	adds r1, r0, 0
 	mov r0, r8
 	bl sub_8013780
@@ -21995,7 +21995,7 @@ _08068922:
 	add r0, r9
 	adds r0, 0x1C
 	add r1, sp, 0x34
-	bl sub_8093F50
+	bl CopyAndResetMoves
 _08068A06:
 	ldr r0, [r6]
 	adds r0, r4

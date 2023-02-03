@@ -33,7 +33,7 @@ extern void sub_80922B4(u8 *, u8 *, s32);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyStringtoBuffer(char *r0, char *r1);
-extern void sub_8093F50(void*, void*);
+extern void CopyAndResetMoves(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
 extern u8* DecompressMoveID(u8* a1, u16* a2);
@@ -540,7 +540,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     }
 
     a1->unk18 = pokemon->unk1C;
-    sub_8093F50(&a1->moves, &pokemon->moves);
+    CopyAndResetMoves(&a1->moves, &pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];
@@ -568,7 +568,7 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void sub_8093FA8(struct Move*, struct unkStruct_8094184*);
+extern void CopyBareMoveData(struct Move*, struct unkStruct_8094184*);
 
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
@@ -591,7 +591,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 
     pokemon->unk1C = a2->unk18;
-    sub_8093FA8(pokemon->moves, &a2->moves);
+    CopyBareMoveData(pokemon->moves, &a2->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];

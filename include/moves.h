@@ -31,4 +31,24 @@ bool8 FailsWhileMuzzled(u16 moveID);
 bool8 IsSoundMove(struct Move *move);
 bool8 DoesMoveCharge(u16 move);
 
+void unk_FixLinkedMovesSetEnabled8_v2(struct Move* move);
+
+void sub_8092D54(u8 *buffer, struct Move *move);
+extern void CopyAndResetMove(struct Move *, struct Move *);
+
+void unk_GetLinkedSequences4(struct Move* moves, struct Move linkedSequences[4][4]);
+void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences[4][4]);
+void unk_GetLinkedSequences8(struct Move* moves, struct Move linkedSequences[8][8]);
+void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences[8][8]);
+void unk_GetLinkedSequences8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
+void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
+
+int unk_FindMarkedMoveInLinkedSequences44(struct Move linkedSequences[4][4]);
+void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences[4][4]);
+int unk_FindMarkedMoveInLinkedSequences88(struct Move linkedSequences[8][8]);
+void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences[8][8]);
+int unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[8][8]);
+void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
+
+
 #endif // GUARD_MOVES_H
