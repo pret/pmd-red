@@ -12,7 +12,7 @@
         "aiConditionRandomChance": 0,
         "numberOfChainedHits": 0,
         "cannotHitFrozen": false,
-        "rangeID": 0,
+        "rangeID": "MOVE_RANGE_NONE",
         "description": "MoveDescriptionNone",
         "useText": "MoveDescriptionNone"
     },
@@ -32,7 +32,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -52,7 +52,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMultiHitUntilMiss",
         "useText": "MoveUseTextUse"
     },
@@ -72,7 +72,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionYawn",
         "useText": "MoveUseTextUse"
     },
@@ -92,7 +92,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionLovelyKiss",
         "useText": "MoveUseTextUse"
     },
@@ -110,7 +110,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNightmare",
         "useText": "MoveUseTextUse"
     },
@@ -129,7 +129,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 4,
+        "rangeID": "MOVE_RANGE_FLOOR_MEMBERS",
         "description": "MoveDescriptionMorningSun",
         "useText": "MoveUseTextUse"
     },
@@ -147,7 +147,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionVitalThrow",
         "useText": "MoveUseTextUse"
     },
@@ -167,7 +167,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionDig",
         "useText": "MoveUseTextUse"
     },
@@ -187,7 +187,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 12,
+        "rangeID": "MOVE_RANGE_SIDE",
         "description": "MoveDescriptionThrash",
         "useText": "MoveUseTextUse"
     },
@@ -206,7 +206,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionSweetScent",
         "useText": "MoveUseTextUse"
     },
@@ -225,7 +225,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCharm",
         "useText": "MoveUseTextUse"
     },
@@ -243,7 +243,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionRainDance",
         "useText": "MoveUseTextUse"
     },
@@ -262,7 +262,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConfuseRay",
         "useText": "MoveUseTextUse"
     },
@@ -280,7 +280,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionHail",
         "useText": "MoveUseTextUse"
     },
@@ -299,7 +299,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": false,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionHealTeamStatus",
         "useText": "MoveUseTextUse"
     },
@@ -319,7 +319,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionLowerSpeedChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -337,7 +337,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionEncore",
         "useText": "MoveUseTextUse"
     },
@@ -357,7 +357,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionCut",
         "useText": "MoveUseTextUse"
     },
@@ -375,7 +375,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionRage",
         "useText": "MoveUseTextUse"
     },
@@ -395,7 +395,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSuperFang",
         "useText": "MoveUseTextUse"
     },
@@ -413,7 +413,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPainSplit",
         "useText": "MoveUseTextUse"
     },
@@ -432,7 +432,7 @@
         "critChance": 12,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTorment",
         "useText": "MoveUseTextUse"
     },
@@ -451,7 +451,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionStringShot",
         "useText": "MoveUseTextUse"
     },
@@ -470,7 +470,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSwagger",
         "useText": "MoveUseTextUse"
     },
@@ -491,7 +491,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionSnore",
         "useText": "MoveUseTextUse"
     },
@@ -510,7 +510,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": false,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionHealTeamStatus",
         "useText": "MoveUseTextUse"
     },
@@ -530,7 +530,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionScreech",
         "useText": "MoveUseTextUse"
     },
@@ -550,7 +550,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -569,7 +569,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 25,
+        "rangeID": "MOVE_RANGE_WALL",
         "description": "MoveDescriptionRockSmash",
         "useText": "MoveUseTextUse"
     },
@@ -589,7 +589,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionRockSlide",
         "useText": "MoveUseTextUse"
     },
@@ -609,7 +609,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionWeatherBall",
         "useText": "MoveUseTextUse"
     },
@@ -629,7 +629,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionWhirlpool",
         "useText": "MoveUseTextUse"
     },
@@ -649,7 +649,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFakeTears",
         "useText": "MoveUseTextUse"
     },
@@ -669,7 +669,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionSing",
         "useText": "MoveUseTextUse"
     },
@@ -687,7 +687,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSpite",
         "useText": "MoveUseTextUse"
     },
@@ -707,7 +707,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -726,7 +726,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionSmokescreen",
         "useText": "MoveUseTextUse"
     },
@@ -744,7 +744,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionCounter",
         "useText": "MoveUseTextUse"
     },
@@ -764,7 +764,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -782,7 +782,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionMirrorMove",
         "useText": "MoveUseTextUse"
     },
@@ -802,7 +802,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionOverheat",
         "useText": "MoveUseTextUse"
     },
@@ -822,7 +822,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionAuroraBeam",
         "useText": "MoveUseTextUse"
     },
@@ -840,7 +840,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionMemento",
         "useText": "MoveUseTextUse"
     },
@@ -861,7 +861,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionOctazooka",
         "useText": "MoveUseTextUse"
     },
@@ -881,7 +881,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFlatter",
         "useText": "MoveUseTextUse"
     },
@@ -901,7 +901,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -920,7 +920,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionWillOWisp",
         "useText": "MoveUseTextUse"
     },
@@ -939,7 +939,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionReturn",
         "useText": "MoveUseTextUse"
     },
@@ -957,7 +957,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionGrudge",
         "useText": "MoveUseTextUse"
     },
@@ -975,7 +975,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionStrength",
         "useText": "MoveUseTextUse"
     },
@@ -993,7 +993,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionCounter",
         "useText": "MoveUseTextUse"
     },
@@ -1013,7 +1013,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -1033,7 +1033,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionFlamethrower",
         "useText": "MoveUseTextUse"
     },
@@ -1051,7 +1051,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionOdorSleuth",
         "useText": "MoveUseTextUse"
     },
@@ -1070,7 +1070,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -1089,7 +1089,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostEvasion",
         "useText": "MoveUseTextUse"
     },
@@ -1109,7 +1109,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionGust",
         "useText": "MoveUseTextUse"
     },
@@ -1128,7 +1128,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -1146,7 +1146,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -1166,7 +1166,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 28,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS",
         "description": "MoveDescriptionRazorWind",
         "useText": "MoveUseTextUse"
     },
@@ -1184,7 +1184,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBide",
         "useText": "MoveUseTextUse"
     },
@@ -1205,7 +1205,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -1226,7 +1226,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -1246,7 +1246,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionThunder",
         "useText": "MoveUseTextUse"
     },
@@ -1266,7 +1266,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -1285,7 +1285,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionEndeavor",
         "useText": "MoveUseTextUse"
     },
@@ -1305,7 +1305,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFacade",
         "useText": "MoveUseTextUse"
     },
@@ -1325,7 +1325,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1345,7 +1345,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -1364,7 +1364,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -1384,7 +1384,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConstrict",
         "useText": "MoveUseTextUse"
     },
@@ -1404,7 +1404,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionBrickBreak",
         "useText": "MoveUseTextUse"
     },
@@ -1424,7 +1424,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamageLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -1443,7 +1443,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionFocusEnergy",
         "useText": "MoveUseTextUse"
     },
@@ -1463,7 +1463,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionFocusPunch",
         "useText": "MoveUseTextUse"
     },
@@ -1483,7 +1483,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -1503,7 +1503,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionReversal",
         "useText": "MoveUseTextUse"
     },
@@ -1523,7 +1523,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSmellingsalt",
         "useText": "MoveUseTextUse"
     },
@@ -1542,7 +1542,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionSpore",
         "useText": "MoveUseTextUse"
     },
@@ -1563,7 +1563,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -1583,7 +1583,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1603,7 +1603,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionSilverWind",
         "useText": "MoveUseTextUse"
     },
@@ -1622,7 +1622,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMetalSound",
         "useText": "MoveUseTextUse"
     },
@@ -1642,7 +1642,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionSleep",
         "useText": "MoveUseTextUse"
     },
@@ -1661,7 +1661,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTickle",
         "useText": "MoveUseTextUse"
     },
@@ -1680,7 +1680,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionLegHolder",
         "useText": "MoveUseTextUse"
     },
@@ -1700,7 +1700,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1718,7 +1718,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 17,
+        "rangeID": "MOVE_RANGE_ROOM",
         "description": "MoveDescriptionHaze",
         "useText": "MoveUseTextUse"
     },
@@ -1737,7 +1737,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLegHolder",
         "useText": "MoveUseTextUse"
     },
@@ -1757,7 +1757,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -1777,7 +1777,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionOutrage",
         "useText": "MoveUseTextUse"
     },
@@ -1797,7 +1797,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowKick",
         "useText": "MoveUseTextUse"
     },
@@ -1817,7 +1817,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionAncientpower",
         "useText": "MoveUseTextUse"
     },
@@ -1836,7 +1836,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 21,
+        "rangeID": "MOVE_RANGE_USER_3",
         "description": "MoveDescriptionSynthesis",
         "useText": "MoveUseTextUse"
     },
@@ -1855,7 +1855,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionAgility",
         "useText": "MoveUseTextUse"
     },
@@ -1875,7 +1875,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionRapidSpin",
         "useText": "MoveUseTextUse"
     },
@@ -1895,7 +1895,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionIcyWind",
         "useText": "MoveUseTextUse"
     },
@@ -1913,7 +1913,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionMindReader",
         "useText": "MoveUseTextUse"
     },
@@ -1932,7 +1932,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionCosmicPower",
         "useText": "MoveUseTextUse"
     },
@@ -1952,7 +1952,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 28,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS",
         "description": "MoveDescriptionSkyAttack",
         "useText": "MoveUseTextUse"
     },
@@ -1972,7 +1972,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -1990,7 +1990,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionFollowMe",
         "useText": "MoveUseTextUse"
     },
@@ -2010,7 +2010,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionMeteorMash",
         "useText": "MoveUseTextUse"
     },
@@ -2028,7 +2028,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionEndure",
         "useText": "MoveUseTextUse"
     },
@@ -2048,7 +2048,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHitUntilMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2067,7 +2067,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -2087,7 +2087,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionConfuseChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -2106,7 +2106,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionPsywave",
         "useText": "MoveUseTextUse"
     },
@@ -2126,7 +2126,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -2146,7 +2146,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPsychoBoost",
         "useText": "MoveUseTextUse"
     },
@@ -2165,7 +2165,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionSleep",
         "useText": "MoveUseTextUse"
     },
@@ -2184,7 +2184,7 @@
         "critChance": 12,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionUproar",
         "useText": "MoveUseTextUse"
     },
@@ -2204,7 +2204,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionWaterSpout",
         "useText": "MoveUseTextUse"
     },
@@ -2224,7 +2224,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionConfuseChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -2242,7 +2242,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 30,
+        "rangeID": "MOVE_RANGE_FRONT",
         "description": "MoveDescriptionPsychUp",
         "useText": "MoveUseTextUse"
     },
@@ -2262,7 +2262,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionRecoil",
         "useText": "MoveUseTextUse"
     },
@@ -2281,7 +2281,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionRecover",
         "useText": "MoveUseTextUse"
     },
@@ -2301,7 +2301,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 18,
+        "rangeID": "MOVE_RANGE_ROOM_EXCEPT_USER",
         "description": "MoveDescriptionEarthquake",
         "useText": "MoveUseTextUse"
     },
@@ -2320,7 +2320,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNaturePower",
         "useText": "MoveUseTextUse"
     },
@@ -2341,7 +2341,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -2361,7 +2361,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFlail",
         "useText": "MoveUseTextUse"
     },
@@ -2380,7 +2380,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerDefense",
         "useText": "MoveUseTextUse"
     },
@@ -2399,7 +2399,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 26,
+        "rangeID": "MOVE_RANGE_ONE_TILE",
         "description": "MoveDescriptionSelfdestruct",
         "useText": "MoveUseTextUse"
     },
@@ -2418,7 +2418,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionStunSpore",
         "useText": "MoveUseTextUse"
     },
@@ -2438,7 +2438,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -2458,7 +2458,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2478,7 +2478,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionShadowBall",
         "useText": "MoveUseTextUse"
     },
@@ -2497,7 +2497,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionCharge",
         "useText": "MoveUseTextUse"
     },
@@ -2517,7 +2517,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionThunderbolt",
         "useText": "MoveUseTextUse"
     },
@@ -2536,7 +2536,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionMist",
         "useText": "MoveUseTextUse"
     },
@@ -2555,7 +2555,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFissure",
         "useText": "MoveUseTextUse"
     },
@@ -2575,7 +2575,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 13,
+        "rangeID": "MOVE_RANGE_TWO_TILES_FOE",
         "description": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -2595,7 +2595,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionExtrasensory",
         "useText": "MoveUseTextUse"
     },
@@ -2614,7 +2614,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionSafeguard",
         "useText": "MoveUseTextUse"
     },
@@ -2635,7 +2635,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -2655,7 +2655,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSkyUppercut",
         "useText": "MoveUseTextUse"
     },
@@ -2673,7 +2673,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSkillSwap",
         "useText": "MoveUseTextUse"
     },
@@ -2691,7 +2691,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSketch",
         "useText": "MoveUseTextUse"
     },
@@ -2711,7 +2711,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -2731,7 +2731,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionRecoil",
         "useText": "MoveUseTextUse"
     },
@@ -2749,7 +2749,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionSandstorm",
         "useText": "MoveUseTextUse"
     },
@@ -2768,7 +2768,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -2788,7 +2788,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConstriction",
         "useText": "MoveUseTextUse"
     },
@@ -2808,7 +2808,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -2828,7 +2828,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -2846,7 +2846,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -2866,7 +2866,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPoisonChance",
         "useText": "MoveUseTextUse"
     },
@@ -2885,7 +2885,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionGrowth",
         "useText": "MoveUseTextUse"
     },
@@ -2905,7 +2905,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSacredFire",
         "useText": "MoveUseTextUse"
     },
@@ -2924,7 +2924,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSheerCold",
         "useText": "MoveUseTextUse"
     },
@@ -2944,7 +2944,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 28,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS",
         "description": "MoveDescriptionSolarbeam",
         "useText": "MoveUseTextUse"
     },
@@ -2963,7 +2963,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionSonicboom",
         "useText": "MoveUseTextUse"
     },
@@ -2983,7 +2983,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionFly",
         "useText": "MoveUseTextUse"
     },
@@ -3003,7 +3003,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3022,7 +3022,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 27,
+        "rangeID": "MOVE_RANGE_TWO_TILES",
         "description": "MoveDescriptionExplosion",
         "useText": "MoveUseTextUse"
     },
@@ -3042,7 +3042,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionDive",
         "useText": "MoveUseTextUse"
     },
@@ -3062,7 +3062,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -3082,7 +3082,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3102,7 +3102,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMuddyWater",
         "useText": "MoveUseTextUse"
     },
@@ -3122,7 +3122,7 @@
         "isSnatchable": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionStockpile",
         "useText": "MoveUseTextUse"
     },
@@ -3142,7 +3142,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3162,7 +3162,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTwister",
         "useText": "MoveUseTextUse"
     },
@@ -3182,7 +3182,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -3202,7 +3202,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionTwineedle",
         "useText": "MoveUseTextUse"
     },
@@ -3221,7 +3221,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionSoftboiled",
         "useText": "MoveUseTextUse"
     },
@@ -3241,7 +3241,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3261,7 +3261,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -3281,7 +3281,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3300,7 +3300,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostEvasion",
         "useText": "MoveUseTextUse"
     },
@@ -3319,7 +3319,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSeismicToss",
         "useText": "MoveUseTextUse"
     },
@@ -3339,7 +3339,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionConfuse",
         "useText": "MoveUseTextUse"
     },
@@ -3357,7 +3357,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTaunt",
         "useText": "MoveUseTextUse"
     },
@@ -3376,7 +3376,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 5,
+        "rangeID": "MOVE_RANGE_FLOOR_MEMBERS_2",
         "description": "MoveDescriptionMoonlight",
         "useText": "MoveUseTextUse"
     },
@@ -3396,7 +3396,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3416,7 +3416,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3436,7 +3436,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3455,7 +3455,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionOneHit",
         "useText": "MoveUseTextUse"
     },
@@ -3475,7 +3475,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3495,7 +3495,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -3515,7 +3515,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -3534,7 +3534,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionSwordsDance",
         "useText": "MoveUseTextUse"
     },
@@ -3554,7 +3554,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -3572,7 +3572,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionConversion",
         "useText": "MoveUseTextUse"
     },
@@ -3590,7 +3590,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionConversion2",
         "useText": "MoveUseTextUse"
     },
@@ -3608,7 +3608,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 22,
+        "rangeID": "MOVE_RANGE_ROOM_ONLY",
         "description": "MoveDescriptionHelpingHand",
         "useText": "MoveUseTextUse"
     },
@@ -3627,7 +3627,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -3645,7 +3645,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionTeleport",
         "useText": "MoveUseTextUse"
     },
@@ -3665,7 +3665,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -3685,7 +3685,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionShockWave",
         "useText": "MoveUseTextUse"
     },
@@ -3705,7 +3705,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 13,
+        "rangeID": "MOVE_RANGE_TWO_TILES_FOE",
         "description": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -3725,7 +3725,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConfuse",
         "useText": "MoveUseTextUse"
     },
@@ -3744,7 +3744,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -3764,7 +3764,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionZapCannon",
         "useText": "MoveUseTextUse"
     },
@@ -3783,7 +3783,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionBlock",
         "useText": "MoveUseTextUse"
     },
@@ -3803,7 +3803,7 @@
         "isSnatchable": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -3822,7 +3822,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPoison",
         "useText": "MoveUseTextUse"
     },
@@ -3841,7 +3841,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionToxic",
         "useText": "MoveUseTextUse"
     },
@@ -3861,7 +3861,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPoisonFang",
         "useText": "MoveUseTextUse"
     },
@@ -3880,7 +3880,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPoison",
         "useText": "MoveUseTextUse"
     },
@@ -3900,7 +3900,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionPoisonChance",
         "useText": "MoveUseTextUse"
     },
@@ -3920,7 +3920,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -3939,7 +3939,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -3959,7 +3959,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTakeDown",
         "useText": "MoveUseTextUse"
     },
@@ -3979,7 +3979,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionJumpKick",
         "useText": "MoveUseTextUse"
     },
@@ -3999,7 +3999,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionBounce",
         "useText": "MoveUseTextUse"
     },
@@ -4019,7 +4019,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionJumpKick",
         "useText": "MoveUseTextUse"
     },
@@ -4039,7 +4039,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionTriAttack",
         "useText": "MoveUseTextUse"
     },
@@ -4059,7 +4059,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4077,7 +4077,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTrick",
         "useText": "MoveUseTextUse"
     },
@@ -4097,7 +4097,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionTripleKick",
         "useText": "MoveUseTextUse"
     },
@@ -4117,7 +4117,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4135,7 +4135,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionMudSport",
         "useText": "MoveUseTextUse"
     },
@@ -4155,7 +4155,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMudSlap",
         "useText": "MoveUseTextUse"
     },
@@ -4175,7 +4175,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionThief",
         "useText": "MoveUseTextUse"
     },
@@ -4194,7 +4194,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionAmnesia",
         "useText": "MoveUseTextUse"
     },
@@ -4213,7 +4213,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionNightShade",
         "useText": "MoveUseTextUse"
     },
@@ -4233,7 +4233,7 @@
         "affectedByMagicCoat": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionGrowl",
         "useText": "MoveUseTextUse"
     },
@@ -4252,7 +4252,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionRecover",
         "useText": "MoveUseTextUse"
     },
@@ -4272,7 +4272,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSurf",
         "useText": "MoveUseTextUse"
     },
@@ -4290,7 +4290,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionRolePlay",
         "useText": "MoveUseTextUse"
     },
@@ -4310,7 +4310,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -4330,7 +4330,7 @@
         "critChance": 3,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHitTwice",
         "useText": "MoveUseTextUse"
     },
@@ -4348,7 +4348,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionSunnyDay",
         "useText": "MoveUseTextUse"
     },
@@ -4367,7 +4367,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerDefense",
         "useText": "MoveUseTextUse"
     },
@@ -4385,7 +4385,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionWish",
         "useText": "MoveUseTextUse"
     },
@@ -4405,7 +4405,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 13,
+        "rangeID": "MOVE_RANGE_TWO_TILES_FOE",
         "description": "MoveDescriptionFakeOut",
         "useText": "MoveUseTextUse"
     },
@@ -4424,7 +4424,7 @@
         "critChance": 12,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionSleepTalk",
         "useText": "MoveUseTextUse"
     },
@@ -4444,7 +4444,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPayDay",
         "useText": "MoveUseTextUse"
     },
@@ -4464,7 +4464,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionAssist",
         "useText": "MoveUseTextAssist"
     },
@@ -4484,7 +4484,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionHeatWave",
         "useText": "MoveUseTextUse"
     },
@@ -4503,7 +4503,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionSleepPowder",
         "useText": "MoveUseTextUse"
     },
@@ -4522,7 +4522,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionRest",
         "useText": "MoveUseTextUse"
     },
@@ -4541,7 +4541,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionIngrain",
         "useText": "MoveUseTextUse"
     },
@@ -4561,7 +4561,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConfuseChance",
         "useText": "MoveUseTextUse"
     },
@@ -4581,7 +4581,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyzeChance",
         "useText": "MoveUseTextUse"
     },
@@ -4601,7 +4601,7 @@
         "isSnatchable": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 21,
+        "rangeID": "MOVE_RANGE_USER_3",
         "description": "MoveDescriptionSwallow",
         "useText": "MoveUseTextUse"
     },
@@ -4619,7 +4619,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionCurse",
         "useText": "MoveUseTextUse"
     },
@@ -4639,7 +4639,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionFrenzyPlant",
         "useText": "MoveUseTextUse"
     },
@@ -4659,7 +4659,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionHydroCannon",
         "useText": "MoveUseTextUse"
     },
@@ -4679,7 +4679,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionHydroPump",
         "useText": "MoveUseTextUse"
     },
@@ -4700,7 +4700,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4720,7 +4720,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionHyperBeam",
         "useText": "MoveUseTextUse"
     },
@@ -4740,7 +4740,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSuperpower",
         "useText": "MoveUseTextUse"
     },
@@ -4760,7 +4760,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSteelWing",
         "useText": "MoveUseTextUse"
     },
@@ -4781,7 +4781,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSpitUp",
         "useText": "MoveUseTextUse"
     },
@@ -4801,7 +4801,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDynamicpunch",
         "useText": "MoveUseTextUse"
     },
@@ -4820,7 +4820,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionOneHit",
         "useText": "MoveUseTextUse"
     },
@@ -4840,7 +4840,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4858,7 +4858,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionKnockOff",
         "useText": "MoveUseTextUse"
     },
@@ -4878,7 +4878,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -4898,7 +4898,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionHighCriticalDistance",
         "useText": "MoveUseTextUse"
     },
@@ -4916,7 +4916,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 17,
+        "rangeID": "MOVE_RANGE_ROOM",
         "description": "MoveDescriptionBatonPass",
         "useText": "MoveUseTextUse"
     },
@@ -4936,7 +4936,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPetalDance",
         "useText": "MoveUseTextUse"
     },
@@ -4954,7 +4954,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionSplash",
         "useText": "MoveUseTextUse"
     },
@@ -4974,7 +4974,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionLowerSpeedChanceDistance",
         "useText": "MoveUseTextUse"
     },
@@ -4992,7 +4992,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionFixedDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5011,7 +5011,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBellyDrum",
         "useText": "MoveUseTextUse"
     },
@@ -5030,7 +5030,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefenseTwo",
         "useText": "MoveUseTextUse"
     },
@@ -5049,7 +5049,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionLightScreen",
         "useText": "MoveUseTextUse"
     },
@@ -5069,7 +5069,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -5090,7 +5090,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5110,7 +5110,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -5130,7 +5130,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionSecretPower",
         "useText": "MoveUseTextUse"
     },
@@ -5150,7 +5150,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionConfuseChance",
         "useText": "MoveUseTextUse"
     },
@@ -5169,7 +5169,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBulkUp",
         "useText": "MoveUseTextUse"
     },
@@ -5187,7 +5187,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionImprison",
         "useText": "MoveUseTextUse"
     },
@@ -5206,7 +5206,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFeatherdance",
         "useText": "MoveUseTextUse"
     },
@@ -5224,7 +5224,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionWhirlwind",
         "useText": "MoveUseTextUse"
     },
@@ -5242,7 +5242,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 4,
+        "rangeID": "MOVE_RANGE_FLOOR_MEMBERS",
         "description": "MoveDescriptionBeatUp",
         "useText": "MoveUseTextUse"
     },
@@ -5262,7 +5262,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -5282,7 +5282,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5303,7 +5303,7 @@
         "usesMouth": true,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 2,
+        "rangeID": "MOVE_RANGE_ONE_TILE_FOE",
         "description": "MoveDescriptionBlastBurn",
         "useText": "MoveUseTextUse"
     },
@@ -5322,7 +5322,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerAccuracy",
         "useText": "MoveUseTextUse"
     },
@@ -5340,7 +5340,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionTeeterDance",
         "useText": "MoveUseTextUse"
     },
@@ -5360,7 +5360,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -5380,7 +5380,7 @@
         "critChance": 50,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionBlazeKick",
         "useText": "MoveUseTextUse"
     },
@@ -5399,7 +5399,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionPresent",
         "useText": "MoveUseTextUse"
     },
@@ -5419,7 +5419,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionEruption",
         "useText": "MoveUseTextUse"
     },
@@ -5439,7 +5439,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionSludge",
         "useText": "MoveUseTextUse"
     },
@@ -5459,7 +5459,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionSludgeBomb",
         "useText": "MoveUseTextUse"
     },
@@ -5478,7 +5478,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionParalyze",
         "useText": "MoveUseTextUse"
     },
@@ -5496,7 +5496,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionTransform",
         "useText": "MoveUseTextUse"
     },
@@ -5516,7 +5516,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionPoisonTail",
         "useText": "MoveUseTextUse"
     },
@@ -5535,7 +5535,7 @@
         "critChance": 12,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionWhirlwind",
         "useText": "MoveUseTextUse"
     },
@@ -5555,7 +5555,7 @@
         "critChance": 2,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -5574,7 +5574,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionCamouflage",
         "useText": "MoveUseTextUse"
     },
@@ -5594,7 +5594,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionThief",
         "useText": "MoveUseTextUse"
     },
@@ -5613,7 +5613,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionTailGlow",
         "useText": "MoveUseTextUse"
     },
@@ -5633,7 +5633,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5653,7 +5653,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionBonemerang",
         "useText": "MoveUseTextUse"
     },
@@ -5673,7 +5673,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFireSpin",
         "useText": "MoveUseTextUse"
     },
@@ -5693,7 +5693,7 @@
         "critChance": 12,
         "cannotHitFrozen": false,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionBurnChance",
         "useText": "MoveUseTextUse"
     },
@@ -5712,7 +5712,7 @@
         "critChance": 12,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 7,
+        "rangeID": "MOVE_RANGE_FLOOR_FOES",
         "description": "MoveDescriptionPerishSong",
         "useText": "MoveUseTextUse"
     },
@@ -5730,7 +5730,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionWrap",
         "useText": "MoveUseTextUse"
     },
@@ -5748,7 +5748,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 24,
+        "rangeID": "MOVE_RANGE_FLOOR",
         "description": "MoveDescriptionSpikes",
         "useText": "MoveUseTextUse"
     },
@@ -5767,7 +5767,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 18,
+        "rangeID": "MOVE_RANGE_ROOM_EXCEPT_USER",
         "description": "MoveDescriptionMagnitude",
         "useText": "MoveUseTextUse"
     },
@@ -5787,7 +5787,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNeverMiss",
         "useText": "MoveUseTextUse"
     },
@@ -5805,7 +5805,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionMagicCoat",
         "useText": "MoveUseTextUse"
     },
@@ -5825,7 +5825,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDamageLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -5845,7 +5845,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 13,
+        "rangeID": "MOVE_RANGE_TWO_TILES_FOE",
         "description": "MoveDescriptionTwoTilesAhead",
         "useText": "MoveUseTextUse"
     },
@@ -5863,7 +5863,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionProtect",
         "useText": "MoveUseTextUse"
     },
@@ -5882,7 +5882,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostDefense",
         "useText": "MoveUseTextUse"
     },
@@ -5902,7 +5902,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionCringe",
         "useText": "MoveUseTextUse"
     },
@@ -5921,7 +5921,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 30,
+        "rangeID": "MOVE_RANGE_FRONT",
         "description": "MoveDescriptionSubstitute",
         "useText": "MoveUseTextUse"
     },
@@ -5939,7 +5939,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionProtect",
         "useText": "MoveUseTextUse"
     },
@@ -5959,7 +5959,7 @@
         "critChance": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionMultiHitDistance",
         "useText": "MoveUseTextUse"
     },
@@ -5977,7 +5977,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionWaterSport",
         "useText": "MoveUseTextUse"
     },
@@ -5997,7 +5997,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6017,7 +6017,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMistBall",
         "useText": "MoveUseTextUse"
     },
@@ -6037,7 +6037,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionWaterPulse",
         "useText": "MoveUseTextUse"
     },
@@ -6057,7 +6057,7 @@
         "critChance": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6077,7 +6077,7 @@
         "critChance": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6095,7 +6095,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDestinyBond",
         "useText": "MoveUseTextUse"
     },
@@ -6114,7 +6114,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFalseSwipe",
         "useText": "MoveUseTextUse"
     },
@@ -6132,7 +6132,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionForesight",
         "useText": "MoveUseTextUse"
     },
@@ -6150,7 +6150,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionMirrorCoat",
         "useText": "MoveUseTextUse"
     },
@@ -6168,7 +6168,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionFixedDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6188,7 +6188,7 @@
         "isSnatchable": true,
         "usesMouth": true,
         "cannotHitFrozen": true,
-        "rangeID": 5,
+        "rangeID": "MOVE_RANGE_FLOOR_MEMBERS_2",
         "description": "MoveDescriptionMilkDrink",
         "useText": "MoveUseTextUse"
     },
@@ -6207,7 +6207,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionCalmMind",
         "useText": "MoveUseTextUse"
     },
@@ -6227,7 +6227,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDrain",
         "useText": "MoveUseTextUse"
     },
@@ -6247,7 +6247,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6267,7 +6267,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6287,7 +6287,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -6307,7 +6307,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHiddenPower",
         "useText": "MoveUseTextUse"
     },
@@ -6327,7 +6327,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMetalClaw",
         "useText": "MoveUseTextUse"
     },
@@ -6346,7 +6346,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionAttract",
         "useText": "MoveUseTextUse"
     },
@@ -6364,7 +6364,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMimic",
         "useText": "MoveUseTextUse"
     },
@@ -6383,7 +6383,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFrustration",
         "useText": "MoveUseTextUse"
     },
@@ -6402,7 +6402,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionLeechSeed",
         "useText": "MoveUseTextUse"
     },
@@ -6421,7 +6421,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionMetronome",
         "useText": "MoveUseTextUse"
     },
@@ -6442,7 +6442,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionDreamEater",
         "useText": "MoveUseTextUse"
     },
@@ -6462,7 +6462,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionAcid",
         "useText": "MoveUseTextUse"
     },
@@ -6481,7 +6481,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBoostAttack",
         "useText": "MoveUseTextUse"
     },
@@ -6499,7 +6499,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionSnatch",
         "useText": "MoveUseTextUse"
     },
@@ -6519,7 +6519,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerSpecialDefenseChance",
         "useText": "MoveUseTextUse"
     },
@@ -6539,7 +6539,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHighCritical",
         "useText": "MoveUseTextUse"
     },
@@ -6557,7 +6557,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 23,
+        "rangeID": "MOVE_RANGE_ITEMS",
         "description": "MoveDescriptionRecycle",
         "useText": "MoveUseTextUse"
     },
@@ -6576,7 +6576,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionReflect",
         "useText": "MoveUseTextUse"
     },
@@ -6595,7 +6595,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": false,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionRefresh",
         "useText": "MoveUseTextUse"
     },
@@ -6613,7 +6613,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionBide",
         "useText": "MoveUseTextUse"
     },
@@ -6632,7 +6632,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionDragonRage",
         "useText": "MoveUseTextUse"
     },
@@ -6653,7 +6653,7 @@
         "usesMouth": true,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionDragonbreath",
         "useText": "MoveUseTextUse"
     },
@@ -6672,7 +6672,7 @@
         "critChance": 12,
         "isSnatchable": true,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionDragonDance",
         "useText": "MoveUseTextUse"
     },
@@ -6692,7 +6692,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionFreezeChanceRoom",
         "useText": "MoveUseTextUse"
     },
@@ -6712,7 +6712,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionIceBeam",
         "useText": "MoveUseTextUse"
     },
@@ -6732,7 +6732,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionHitTwice",
         "useText": "MoveUseTextUse"
     },
@@ -6752,7 +6752,7 @@
         "critChance": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6772,7 +6772,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 20,
+        "rangeID": "MOVE_RANGE_USER_2",
         "description": "MoveDescriptionSkullBash",
         "useText": "MoveUseTextUse"
     },
@@ -6790,7 +6790,7 @@
         "numberOfChainedHits": 1,
         "critChance": 12,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionLockOn",
         "useText": "MoveUseTextUse"
     },
@@ -6810,7 +6810,7 @@
         "critChance": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionMultiHit",
         "useText": "MoveUseTextUse"
     },
@@ -6829,7 +6829,7 @@
         "critChance": 12,
         "affectedByMagicCoat": true,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionLowerSpeed",
         "useText": "MoveUseTextUse"
     },
@@ -6848,7 +6848,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionStruggle",
         "useText": "MoveUseTextUse"
     },
@@ -6868,7 +6868,7 @@
         "critChance": 50,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionHighCriticalDistance",
         "useText": "MoveUseTextUse"
     },
@@ -6888,7 +6888,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionVoltTackle",
         "useText": "MoveUseTextUse"
     },
@@ -6907,7 +6907,7 @@
         "maxUpgradeLevel": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextRegularAttack"
     },
@@ -6927,7 +6927,7 @@
         "critChance": 6,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionIsWatching",
         "useText": "MoveUseTextUse"
     },
@@ -6947,7 +6947,7 @@
         "critChance": 6,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextBide"
     },
@@ -6967,7 +6967,7 @@
         "critChance": 6,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -6987,7 +6987,7 @@
         "critChance": 6,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -7007,7 +7007,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 1,
+        "rangeID": "MOVE_RANGE_THREE_TILES_DIAGONALLY",
         "description": "MoveDescriptionWideSlash",
         "useText": "MoveUseTextUse"
     },
@@ -7026,7 +7026,7 @@
         "maxUpgradeLevel": 99,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7046,7 +7046,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 9,
+        "rangeID": "MOVE_RANGE_SIDE_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7063,7 +7063,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7081,7 +7081,7 @@
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7098,7 +7098,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7118,7 +7118,7 @@
         "critChance": 12,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 13,
+        "rangeID": "MOVE_RANGE_TWO_TILES_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7135,7 +7135,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7152,7 +7152,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 14,
+        "rangeID": "MOVE_RANGE_STRAIGHT_LINE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7169,7 +7169,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7186,7 +7186,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7203,7 +7203,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7220,7 +7220,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 16,
+        "rangeID": "MOVE_RANGE_ROOM_ALLIES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7237,7 +7237,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7254,7 +7254,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7271,7 +7271,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7288,7 +7288,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7305,7 +7305,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7322,7 +7322,7 @@
         "aiConditionRandomChance": 20,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7339,7 +7339,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7356,7 +7356,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7373,7 +7373,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7390,7 +7390,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7407,7 +7407,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7424,7 +7424,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7441,7 +7441,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7458,7 +7458,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7475,7 +7475,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7492,7 +7492,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 29,
+        "rangeID": "MOVE_RANGE_FLOOR_2",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7509,7 +7509,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 29,
+        "rangeID": "MOVE_RANGE_FLOOR_2",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7526,7 +7526,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 4,
+        "rangeID": "MOVE_RANGE_FLOOR_MEMBERS",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7543,7 +7543,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7562,7 +7562,7 @@
         "maxUpgradeLevel": 99,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7579,7 +7579,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 6,
+        "rangeID": "MOVE_RANGE_FLOOR_POKEMON",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7596,7 +7596,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionVacuumCut",
         "useText": "MoveUseTextUse"
     },
@@ -7613,7 +7613,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7632,7 +7632,7 @@
         "maxUpgradeLevel": 99,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7651,7 +7651,7 @@
         "maxUpgradeLevel": 99,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7668,7 +7668,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 15,
+        "rangeID": "MOVE_RANGE_ROOM_FOES",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7685,7 +7685,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 29,
+        "rangeID": "MOVE_RANGE_FLOOR_2",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7702,7 +7702,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 29,
+        "rangeID": "MOVE_RANGE_FLOOR_2",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7719,7 +7719,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7736,7 +7736,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7753,7 +7753,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 3,
+        "rangeID": "MOVE_RANGE_CUTS_CORNERS_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7770,7 +7770,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -7787,7 +7787,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionDamage",
         "useText": "MoveUseTextUse"
     },
@@ -7806,7 +7806,7 @@
         "maxUpgradeLevel": 99,
         "cannotHitFrozen": true,
         "ignoresTaunted": true,
-        "rangeID": 11,
+        "rangeID": "MOVE_RANGE_FRONT_FOE",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7823,7 +7823,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7840,7 +7840,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 10,
+        "rangeID": "MOVE_RANGE_SPECIAL",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7857,7 +7857,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7874,7 +7874,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     },
@@ -7891,7 +7891,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionPlaceholder",
         "useText": "MoveUseTextUse"
     },
@@ -7908,7 +7908,7 @@
         "aiConditionRandomChance": 75,
         "numberOfChainedHits": 1,
         "cannotHitFrozen": true,
-        "rangeID": 19,
+        "rangeID": "MOVE_RANGE_USER",
         "description": "MoveDescriptionNull",
         "useText": "MoveUseTextUse"
     }

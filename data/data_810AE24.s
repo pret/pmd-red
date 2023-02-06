@@ -1290,11 +1290,279 @@ AbilityDescriptionNone:
 
 	.global gRangeNames
 gRangeNames: @ 810CC0C
-	.incbin "baserom.gba", 0x10CC0C, 0x2F4
+.4byte 0x810AE1C
+.4byte MoveRangeThreeTilesDiagonally
+.4byte MoveRangeOneTileFoe
+.4byte MoveRangeCutsCornersFoe
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeFloorPokemon
+.4byte MoveRangeFloorFoes
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeSideFoe
+.4byte MoveRangeSpecial
+.4byte MoveRangeFrontFoe
+.4byte MoveRangeSide
+.4byte MoveRangeTwoTilesFoe
+.4byte MoveRangeStraightLine
+.4byte MoveRangeRoomFoes
+.4byte MoveRangeRoomAllies
+.4byte MoveRangeRoom
+.4byte MoveRangeRoomExceptUser
+.4byte MoveRangeUser
+.4byte MoveRangeUser
+.4byte MoveRangeUser
+.4byte MoveRangeRoomOnly
+.4byte MoveRangeItems
+.4byte MoveRangeFloor
+.4byte MoveRangeWall
+.4byte MoveRangeOneTile
+.4byte MoveRangeTwoTiles
+.4byte MoveRangeCutsCorners
+.4byte MoveRangeFloor
+.4byte MoveRangeFront
+.4byte MoveRange31
+.4byte MoveRange32
+.4byte MoveRange33
+.4byte MoveRange34
+.4byte MoveRange35
+.4byte MoveRange36
+.4byte MoveRange37
+.4byte MoveRange38
+.4byte MoveRange39
+.4byte MoveRange40
+.4byte MoveRange41
+.4byte MoveRange42
+.4byte MoveRange43
+.4byte MoveRange44
+.4byte MoveRange45
+.4byte MoveRange46
+.4byte MoveRange47
+.4byte MoveRange48
+
+.global MoveRange48
+MoveRange48:
+.string "48\0"
+.align 2,0
+
+.global MoveRange47
+MoveRange47:
+.string "47\0"
+.align 2,0
+
+.global MoveRange46
+MoveRange46:
+.string "46\0"
+.align 2,0
+
+.global MoveRange45
+MoveRange45:
+.string "45\0"
+.align 2,0
+
+.global MoveRange44
+MoveRange44:
+.string "44\0"
+.align 2,0
+
+.global MoveRange43
+MoveRange43:
+.string "43\0"
+.align 2,0
+
+.global MoveRange42
+MoveRange42:
+.string "42\0"
+.align 2,0
+
+.global MoveRange41
+MoveRange41:
+.string "41\0"
+.align 2,0
+
+.global MoveRange40
+MoveRange40:
+.string "40\0"
+.align 2,0
+
+.global MoveRange39
+MoveRange39:
+.string "39\0"
+.align 2,0
+
+.global MoveRange38
+MoveRange38:
+.string "38\0"
+.align 2,0
+
+.global MoveRange37
+MoveRange37:
+.string "37\0"
+.align 2,0
+
+.global MoveRange36
+MoveRange36:
+.string "36\0"
+.align 2,0
+
+.global MoveRange35
+MoveRange35:
+.string "35\0"
+.align 2,0
+
+.global MoveRange34
+MoveRange34:
+.string "34\0"
+.align 2,0
+
+.global MoveRange33
+MoveRange33:
+.string "33\0"
+.align 2,0
+
+.global MoveRange32
+MoveRange32:
+.string "32\0"
+.align 2,0
+
+.global MoveRange31
+MoveRange31:
+.string "31\0"
+.align 2,0
+
+.global MoveRangeFront
+MoveRangeFront:
+.string "Pokémon in front\0"
+.align 2,0
+
+.global MoveRangeCutsCorners
+MoveRangeCutsCorners:
+.string "User{COMMA} cuts corners\0"
+.align 2,0
+
+.global MoveRangeTwoTiles
+MoveRangeTwoTiles:
+.string "Pokémon within 2-tile range\0"
+.align 2,0
+
+.global MoveRangeOneTile
+MoveRangeOneTile:
+.string "Pokémon within 1-tile range\0"
+.align 2,0
+
+.global MoveRangeWall
+MoveRangeWall:
+.string "Wall\0"
+.align 2,0
+
+.global MoveRangeFloor
+MoveRangeFloor:
+.string "Floor\0"
+.align 2,0
+
+.global MoveRangeItems
+MoveRangeItems:
+.string "Items\0"
+.align 2,0
+
+.global MoveRangeRoomOnly
+MoveRangeRoomOnly:
+.string "Members in room only\0"
+.align 2,0
+
+.global MoveRangeUser
+MoveRangeUser:
+.string "User\0"
+.align 2,0
+
+.global MoveRangeRoomExceptUser
+MoveRangeRoomExceptUser:
+.string "All in room except user\0"
+.align 2,0
+
+.global MoveRangeRoom
+MoveRangeRoom:
+.string "All Pokémon in room\0"
+.align 2,0
+
+.global MoveRangeRoomAllies
+MoveRangeRoomAllies:
+.string "Allies in room\0"
+.align 2,0
+
+.global MoveRangeRoomFoes
+MoveRangeRoomFoes:
+.string "Foes in room\0"
+.align 2,0
+
+.global MoveRangeStraightLine
+MoveRangeStraightLine:
+.string "Straight line\0"
+.align 2,0
+
+.global MoveRangeTwoTilesFoe
+MoveRangeTwoTilesFoe:
+.string "Foe up to 2 tiles ahead\0"
+.align 2,0
+
+.global MoveRangeSide
+MoveRangeSide:
+.string "Pokémon at side\0"
+.align 2,0
+
+.global MoveRangeFrontFoe
+MoveRangeFrontFoe:
+.string "Foe in front\0"
+.align 2,0
+
+.global MoveRangeSpecial
+MoveRangeSpecial:
+.string "Special\0"
+.align 2,0
+
+.global MoveRangeSideFoe
+MoveRangeSideFoe:
+.string "Foe at side\0"
+.align 2,0
+
+.global MoveRangeFloorFoes
+MoveRangeFloorFoes:
+.string "Foes on floor\0"
+.align 2,0
+
+.global MoveRangeFloorPokemon
+MoveRangeFloorPokemon:
+.string "Pokémon on floor\0"
+.align 2,0
+
+.global MoveRangeFloorMembers
+MoveRangeFloorMembers:
+.string "Members on floor\0"
+.align 2,0
+
+.global MoveRangeCutsCornersFoe
+MoveRangeCutsCornersFoe:
+.string "Foe in front{COMMA} cuts corners\0"
+.align 2,0
+
+.global MoveRangeOneTileFoe
+MoveRangeOneTileFoe:
+.string "Foes within 1-tile range\0"
+.align 2,0
+
+.global MoveRangeThreeTilesDiagonally
+MoveRangeThreeTilesDiagonally:
+.string "3 tiles diagonally and in front\0"
+.align 2,0
+
+.global RangeText
+RangeText:
+.string "Range#=@.{ARG_POKEMON_0} \0"
+.align 2,0
 
 	.global gUnknown_810CF00
 gUnknown_810CF00: @ 810CF00
-        .byte 0xF0, 0xCE, 0x10, 0x08 @ (pointer to range string)
+        .4byte RangeText
 
         .global TypeText
         TypeText:
