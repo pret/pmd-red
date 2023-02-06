@@ -360,7 +360,468 @@ gRescueTeamRanks: @ 810B44C
 
 	.global gAbilityNames
 gAbilityNames: @ 810B4C8
-	.incbin "baserom.gba", 0x10B4C8, 0x4C0
+.4byte AbilityNameNone
+.4byte AbilityNameStench
+.4byte AbilityNameThickFat
+.4byte AbilityNameRainDish
+.4byte AbilityNameDrizzle
+.4byte AbilityNameArenaTrap
+.4byte AbilityNameIntimidate
+.4byte AbilityNameRockHead
+.4byte AbilityNameAirLock
+.4byte AbilityNameHyperCutter
+.4byte AbilityNameShadowTag
+.4byte AbilityNameSpeedBoost
+.4byte AbilityNameBattleArmor
+.4byte AbilityNameSturdy
+.4byte AbilityNameSuctionCups
+.4byte AbilityNameClearBody
+.4byte AbilityNameTorrent
+.4byte AbilityNameGuts
+.4byte AbilityNameRoughSkin
+.4byte AbilityNameShellArmor
+.4byte AbilityNameNaturalCure
+.4byte AbilityNameDamp
+.4byte AbilityNameLimber
+.4byte AbilityNameMagnetPull
+.4byte AbilityNameWhiteSmoke
+.4byte AbilityNameSynchronize
+.4byte AbilityNameOvergrow
+.4byte AbilityNameSwiftSwim
+.4byte AbilityNameSandStream
+.4byte AbilityNameSandVeil
+.4byte AbilityNameKeenEye
+.4byte AbilityNameInnerFocus
+.4byte AbilityNameStatic
+.4byte AbilityNameShedSkin
+.4byte AbilityNameHugePower
+.4byte AbilityNameVoltAbsorb
+.4byte AbilityNameWaterAbsorb
+.4byte AbilityNameForecast
+.4byte AbilityNameSereneGrace
+.4byte AbilityNamePoisonPoint
+.4byte AbilityNameTrace
+.4byte AbilityNameOblivious
+.4byte AbilityNameTruant
+.4byte AbilityNameRunAway
+.4byte AbilityNameStickyHold
+.4byte AbilityNameCloudNine
+.4byte AbilityNameIlluminate
+.4byte AbilityNameEarlyBird
+.4byte AbilityNameHustle
+.4byte AbilityNameDrought
+.4byte AbilityNameLightningrod
+.4byte AbilityNameCompoundeyes
+.4byte AbilityNameMarvelScale
+.4byte AbilityNameWonderGuard
+.4byte AbilityNameInsomnia
+.4byte AbilityNameLevitate
+.4byte AbilityNamePlus
+.4byte AbilityNamePressure
+.4byte AbilityNameLiquidOoze
+.4byte AbilityNameColorChange
+.4byte AbilityNameSoundproof
+.4byte AbilityNameEffectSpore
+.4byte AbilityNameFlameBody
+.4byte AbilityNameMinus
+.4byte AbilityNameOwnTempo
+.4byte AbilityNameMagmaArmor
+.4byte AbilityNameWaterVeil
+.4byte AbilityNameSwarm
+.4byte AbilityNameCuteCharm
+.4byte AbilityNameImmunity
+.4byte AbilityNameBlaze
+.4byte AbilityNamePickup
+.4byte AbilityNameFlashFire
+.4byte AbilityNameVitalSpirit
+.4byte AbilityNameChlorophyll
+.4byte AbilityNamePurePower
+.4byte AbilityNameShieldDust
+
+.global AbilityNameShieldDust
+AbilityNameShieldDust:
+.string "Shield Dust\0"
+.align 2,0
+
+.global AbilityNamePurePower
+AbilityNamePurePower:
+.string "Pure Power\0"
+.align 2,0
+
+.global AbilityNameChlorophyll
+AbilityNameChlorophyll:
+.string "Chlorophyll\0"
+.align 2,0
+
+.global AbilityNameVitalSpirit
+AbilityNameVitalSpirit:
+.string "Vital Spirit\0"
+.align 2,0
+
+.global AbilityNameFlashFire
+AbilityNameFlashFire:
+.string "Flash Fire\0"
+.align 2,0
+
+.global AbilityNamePickup
+AbilityNamePickup:
+.string "Pickup\0"
+.align 2,0
+
+.global AbilityNameBlaze
+AbilityNameBlaze:
+.string "Blaze\0"
+.align 2,0
+
+.global AbilityNameImmunity
+AbilityNameImmunity:
+.string "Immunity\0"
+.align 2,0
+
+.global AbilityNameCuteCharm
+AbilityNameCuteCharm:
+.string "Cute Charm\0"
+.align 2,0
+
+.global AbilityNameSwarm
+AbilityNameSwarm:
+.string "Swarm\0"
+.align 2,0
+
+.global AbilityNameWaterVeil
+AbilityNameWaterVeil:
+.string "Water Veil\0"
+.align 2,0
+
+.global AbilityNameMagmaArmor
+AbilityNameMagmaArmor:
+.string "Magma Armor\0"
+.align 2,0
+
+.global AbilityNameOwnTempo
+AbilityNameOwnTempo:
+.string "Own Tempo\0"
+.align 2,0
+
+.global AbilityNameMinus
+AbilityNameMinus:
+.string "Minus\0"
+.align 2,0
+
+.global AbilityNameFlameBody
+AbilityNameFlameBody:
+.string "Flame Body\0"
+.align 2,0
+
+.global AbilityNameEffectSpore
+AbilityNameEffectSpore:
+.string "Effect Spore\0"
+.align 2,0
+
+.global AbilityNameSoundproof
+AbilityNameSoundproof:
+.string "Soundproof\0"
+.align 2,0
+
+.global AbilityNameColorChange
+AbilityNameColorChange:
+.string "Color Change\0"
+.align 2,0
+
+.global AbilityNameLiquidOoze
+AbilityNameLiquidOoze:
+.string "Liquid Ooze\0"
+.align 2,0
+
+.global AbilityNamePressure
+AbilityNamePressure:
+.string "Pressure\0"
+.align 2,0
+
+.global AbilityNamePlus
+AbilityNamePlus:
+.string "Plus\0"
+.align 2,0
+
+.global AbilityNameLevitate
+AbilityNameLevitate:
+.string "Levitate\0"
+.align 2,0
+
+.global AbilityNameInsomnia
+AbilityNameInsomnia:
+.string "Insomnia\0"
+.align 2,0
+
+.global AbilityNameWonderGuard
+AbilityNameWonderGuard:
+.string "Wonder Guard\0"
+.align 2,0
+
+.global AbilityNameMarvelScale
+AbilityNameMarvelScale:
+.string "Marvel Scale\0"
+.align 2,0
+
+.global AbilityNameCompoundeyes
+AbilityNameCompoundeyes:
+.string "Compoundeyes\0"
+.align 2,0
+
+.global AbilityNameLightningrod
+AbilityNameLightningrod:
+.string "Lightningrod\0"
+.align 2,0
+
+.global AbilityNameDrought
+AbilityNameDrought:
+.string "Drought\0"
+.align 2,0
+
+.global AbilityNameHustle
+AbilityNameHustle:
+.string "Hustle\0"
+.align 2,0
+
+.global AbilityNameEarlyBird
+AbilityNameEarlyBird:
+.string "Early Bird\0"
+.align 2,0
+
+.global AbilityNameIlluminate
+AbilityNameIlluminate:
+.string "Illuminate\0"
+.align 2,0
+
+.global AbilityNameCloudNine
+AbilityNameCloudNine:
+.string "Cloud Nine\0"
+.align 2,0
+
+.global AbilityNameStickyHold
+AbilityNameStickyHold:
+.string "Sticky Hold\0"
+.align 2,0
+
+.global AbilityNameRunAway
+AbilityNameRunAway:
+.string "Run Away\0"
+.align 2,0
+
+.global AbilityNameTruant
+AbilityNameTruant:
+.string "Truant\0"
+.align 2,0
+
+.global AbilityNameOblivious
+AbilityNameOblivious:
+.string "Oblivious\0"
+.align 2,0
+
+.global AbilityNameTrace
+AbilityNameTrace:
+.string "Trace\0"
+.align 2,0
+
+.global AbilityNamePoisonPoint
+AbilityNamePoisonPoint:
+.string "Poison Point\0"
+.align 2,0
+
+.global AbilityNameSereneGrace
+AbilityNameSereneGrace:
+.string "Serene Grace\0"
+.align 2,0
+
+.global AbilityNameForecast
+AbilityNameForecast:
+.string "Forecast\0"
+.align 2,0
+
+.global AbilityNameWaterAbsorb
+AbilityNameWaterAbsorb:
+.string "Water Absorb\0"
+.align 2,0
+
+.global AbilityNameVoltAbsorb
+AbilityNameVoltAbsorb:
+.string "Volt Absorb\0"
+.align 2,0
+
+.global AbilityNameHugePower
+AbilityNameHugePower:
+.string "Huge Power\0"
+.align 2,0
+
+.global AbilityNameShedSkin
+AbilityNameShedSkin:
+.string "Shed Skin\0"
+.align 2,0
+
+.global AbilityNameStatic
+AbilityNameStatic:
+.string "Static\0"
+.align 2,0
+
+.global AbilityNameInnerFocus
+AbilityNameInnerFocus:
+.string "Inner Focus\0"
+.align 2,0
+
+.global AbilityNameKeenEye
+AbilityNameKeenEye:
+.string "Keen Eye\0"
+.align 2,0
+
+.global AbilityNameSandVeil
+AbilityNameSandVeil:
+.string "Sand Veil\0"
+.align 2,0
+
+.global AbilityNameSandStream
+AbilityNameSandStream:
+.string "Sand Stream\0"
+.align 2,0
+
+.global AbilityNameSwiftSwim
+AbilityNameSwiftSwim:
+.string "Swift Swim\0"
+.align 2,0
+
+.global AbilityNameOvergrow
+AbilityNameOvergrow:
+.string "Overgrow\0"
+.align 2,0
+
+.global AbilityNameSynchronize
+AbilityNameSynchronize:
+.string "Synchronize\0"
+.align 2,0
+
+.global AbilityNameWhiteSmoke
+AbilityNameWhiteSmoke:
+.string "White Smoke\0"
+.align 2,0
+
+.global AbilityNameMagnetPull
+AbilityNameMagnetPull:
+.string "Magnet Pull\0"
+.align 2,0
+
+.global AbilityNameLimber
+AbilityNameLimber:
+.string "Limber\0"
+.align 2,0
+
+.global AbilityNameDamp
+AbilityNameDamp:
+.string "Damp\0"
+.align 2,0
+
+.global AbilityNameNaturalCure
+AbilityNameNaturalCure:
+.string "Natural Cure\0"
+.align 2,0
+
+.global AbilityNameShellArmor
+AbilityNameShellArmor:
+.string "Shell Armor\0"
+.align 2,0
+
+.global AbilityNameRoughSkin
+AbilityNameRoughSkin:
+.string "Rough Skin\0"
+.align 2,0
+
+.global AbilityNameGuts
+AbilityNameGuts:
+.string "Guts\0"
+.align 2,0
+
+.global AbilityNameTorrent
+AbilityNameTorrent:
+.string "Torrent\0"
+.align 2,0
+
+.global AbilityNameClearBody
+AbilityNameClearBody:
+.string "Clear Body\0"
+.align 2,0
+
+.global AbilityNameSuctionCups
+AbilityNameSuctionCups:
+.string "Suction Cups\0"
+.align 2,0
+
+.global AbilityNameSturdy
+AbilityNameSturdy:
+.string "Sturdy\0"
+.align 2,0
+
+.global AbilityNameBattleArmor
+AbilityNameBattleArmor:
+.string "Battle Armor\0"
+.align 2,0
+
+.global AbilityNameSpeedBoost
+AbilityNameSpeedBoost:
+.string "Speed Boost\0"
+.align 2,0
+
+.global AbilityNameShadowTag
+AbilityNameShadowTag:
+.string "Shadow Tag\0"
+.align 2,0
+
+.global AbilityNameHyperCutter
+AbilityNameHyperCutter:
+.string "Hyper Cutter\0"
+.align 2,0
+
+.global AbilityNameAirLock
+AbilityNameAirLock:
+.string "Air Lock\0"
+.align 2,0
+
+.global AbilityNameRockHead
+AbilityNameRockHead:
+.string "Rock Head\0"
+.align 2,0
+
+.global AbilityNameIntimidate
+AbilityNameIntimidate:
+.string "Intimidate\0"
+.align 2,0
+
+.global AbilityNameArenaTrap
+AbilityNameArenaTrap:
+.string "Arena Trap\0"
+.align 2,0
+
+.global AbilityNameDrizzle
+AbilityNameDrizzle:
+.string "Drizzle\0"
+.align 2,0
+
+.global AbilityNameRainDish
+AbilityNameRainDish:
+.string "Rain Dish\0"
+.align 2,0
+
+.global AbilityNameThickFat
+AbilityNameThickFat:
+.string "Thick Fat\0"
+.align 2,0
+
+.global AbilityNameStench
+AbilityNameStench:
+.string "Stench\0"
+.align 2,0
+
+.global AbilityNameNone
+AbilityNameNone:
+.string "Unknown\0"
+.align 2,0
 
 	.global AbilityDescriptions
 AbilityDescriptions: @ 810B988
