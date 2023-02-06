@@ -36,9 +36,9 @@ enum AccuracyType
 
 struct MoveDataEntry
 {
-    u8 *name;
+    /* 0x0 */ u8 *name;
     /* 0x4 */ s16 basePower;
-    u8 type;
+    /* 0x6 */ u8 type;
     // Determines the range of moves.
     /* 0x8 */ u16 targetingFlags[2]; // 0 for player and 1 for AI
     // The AI consider certain moves to have different range than they actually do.
@@ -47,16 +47,16 @@ struct MoveDataEntry
     // There are multiple accuracy values. These are define with the AccuracyType enum.
     /* 0xE */ u8 accuracy[NUM_ACCURACY_TYPES];
     /* 0x11 */ u8 numberOfChainedHits; // Maximum number of times the move will hit. Used for multi-hit moves like Fury Attack.
-    u8 maxUpgradeLevel;
+    /* 0x12 */ u8 maxUpgradeLevel;
     /* 0x13 */ u8 critChance;
     /* 0x14 */ bool8 affectedByMagicCoat; // If true, this move is reflected by Magic Coat.
     /* 0x15 */ bool8 isSnatchable;
     /* 0x16 */ bool8 usesMouth; // If true, this move can't be used with the Muzzled status.
     /* 0x17 */ bool8 cannotHitFrozen; // Used by Status Checker to determine if a move can be used on a frozen target.
     /* 0x18 */ bool8 ignoresTaunted;
-    u8 rangeID;
-    u8 *description;
-    u8 *useText; // The text displayed when this move is used.
+    /* 0x19 */ u8 rangeID;
+    /* 0x1C */ u8 *description;
+    /* 0x20 */ u8 *useText; // The text displayed when this move is used.
 };
 
 struct Move
