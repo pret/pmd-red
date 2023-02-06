@@ -360,97 +360,1209 @@ gRescueTeamRanks: @ 810B44C
 
 	.global gAbilityNames
 gAbilityNames: @ 810B4C8
-	.incbin "baserom.gba", 0x10B4C8, 0x4C0
+.4byte AbilityNameNone
+.4byte AbilityNameStench
+.4byte AbilityNameThickFat
+.4byte AbilityNameRainDish
+.4byte AbilityNameDrizzle
+.4byte AbilityNameArenaTrap
+.4byte AbilityNameIntimidate
+.4byte AbilityNameRockHead
+.4byte AbilityNameAirLock
+.4byte AbilityNameHyperCutter
+.4byte AbilityNameShadowTag
+.4byte AbilityNameSpeedBoost
+.4byte AbilityNameBattleArmor
+.4byte AbilityNameSturdy
+.4byte AbilityNameSuctionCups
+.4byte AbilityNameClearBody
+.4byte AbilityNameTorrent
+.4byte AbilityNameGuts
+.4byte AbilityNameRoughSkin
+.4byte AbilityNameShellArmor
+.4byte AbilityNameNaturalCure
+.4byte AbilityNameDamp
+.4byte AbilityNameLimber
+.4byte AbilityNameMagnetPull
+.4byte AbilityNameWhiteSmoke
+.4byte AbilityNameSynchronize
+.4byte AbilityNameOvergrow
+.4byte AbilityNameSwiftSwim
+.4byte AbilityNameSandStream
+.4byte AbilityNameSandVeil
+.4byte AbilityNameKeenEye
+.4byte AbilityNameInnerFocus
+.4byte AbilityNameStatic
+.4byte AbilityNameShedSkin
+.4byte AbilityNameHugePower
+.4byte AbilityNameVoltAbsorb
+.4byte AbilityNameWaterAbsorb
+.4byte AbilityNameForecast
+.4byte AbilityNameSereneGrace
+.4byte AbilityNamePoisonPoint
+.4byte AbilityNameTrace
+.4byte AbilityNameOblivious
+.4byte AbilityNameTruant
+.4byte AbilityNameRunAway
+.4byte AbilityNameStickyHold
+.4byte AbilityNameCloudNine
+.4byte AbilityNameIlluminate
+.4byte AbilityNameEarlyBird
+.4byte AbilityNameHustle
+.4byte AbilityNameDrought
+.4byte AbilityNameLightningrod
+.4byte AbilityNameCompoundeyes
+.4byte AbilityNameMarvelScale
+.4byte AbilityNameWonderGuard
+.4byte AbilityNameInsomnia
+.4byte AbilityNameLevitate
+.4byte AbilityNamePlus
+.4byte AbilityNamePressure
+.4byte AbilityNameLiquidOoze
+.4byte AbilityNameColorChange
+.4byte AbilityNameSoundproof
+.4byte AbilityNameEffectSpore
+.4byte AbilityNameFlameBody
+.4byte AbilityNameMinus
+.4byte AbilityNameOwnTempo
+.4byte AbilityNameMagmaArmor
+.4byte AbilityNameWaterVeil
+.4byte AbilityNameSwarm
+.4byte AbilityNameCuteCharm
+.4byte AbilityNameImmunity
+.4byte AbilityNameBlaze
+.4byte AbilityNamePickup
+.4byte AbilityNameFlashFire
+.4byte AbilityNameVitalSpirit
+.4byte AbilityNameChlorophyll
+.4byte AbilityNamePurePower
+.4byte AbilityNameShieldDust
+
+.global AbilityNameShieldDust
+AbilityNameShieldDust:
+.string "Shield Dust\0"
+.align 2,0
+
+.global AbilityNamePurePower
+AbilityNamePurePower:
+.string "Pure Power\0"
+.align 2,0
+
+.global AbilityNameChlorophyll
+AbilityNameChlorophyll:
+.string "Chlorophyll\0"
+.align 2,0
+
+.global AbilityNameVitalSpirit
+AbilityNameVitalSpirit:
+.string "Vital Spirit\0"
+.align 2,0
+
+.global AbilityNameFlashFire
+AbilityNameFlashFire:
+.string "Flash Fire\0"
+.align 2,0
+
+.global AbilityNamePickup
+AbilityNamePickup:
+.string "Pickup\0"
+.align 2,0
+
+.global AbilityNameBlaze
+AbilityNameBlaze:
+.string "Blaze\0"
+.align 2,0
+
+.global AbilityNameImmunity
+AbilityNameImmunity:
+.string "Immunity\0"
+.align 2,0
+
+.global AbilityNameCuteCharm
+AbilityNameCuteCharm:
+.string "Cute Charm\0"
+.align 2,0
+
+.global AbilityNameSwarm
+AbilityNameSwarm:
+.string "Swarm\0"
+.align 2,0
+
+.global AbilityNameWaterVeil
+AbilityNameWaterVeil:
+.string "Water Veil\0"
+.align 2,0
+
+.global AbilityNameMagmaArmor
+AbilityNameMagmaArmor:
+.string "Magma Armor\0"
+.align 2,0
+
+.global AbilityNameOwnTempo
+AbilityNameOwnTempo:
+.string "Own Tempo\0"
+.align 2,0
+
+.global AbilityNameMinus
+AbilityNameMinus:
+.string "Minus\0"
+.align 2,0
+
+.global AbilityNameFlameBody
+AbilityNameFlameBody:
+.string "Flame Body\0"
+.align 2,0
+
+.global AbilityNameEffectSpore
+AbilityNameEffectSpore:
+.string "Effect Spore\0"
+.align 2,0
+
+.global AbilityNameSoundproof
+AbilityNameSoundproof:
+.string "Soundproof\0"
+.align 2,0
+
+.global AbilityNameColorChange
+AbilityNameColorChange:
+.string "Color Change\0"
+.align 2,0
+
+.global AbilityNameLiquidOoze
+AbilityNameLiquidOoze:
+.string "Liquid Ooze\0"
+.align 2,0
+
+.global AbilityNamePressure
+AbilityNamePressure:
+.string "Pressure\0"
+.align 2,0
+
+.global AbilityNamePlus
+AbilityNamePlus:
+.string "Plus\0"
+.align 2,0
+
+.global AbilityNameLevitate
+AbilityNameLevitate:
+.string "Levitate\0"
+.align 2,0
+
+.global AbilityNameInsomnia
+AbilityNameInsomnia:
+.string "Insomnia\0"
+.align 2,0
+
+.global AbilityNameWonderGuard
+AbilityNameWonderGuard:
+.string "Wonder Guard\0"
+.align 2,0
+
+.global AbilityNameMarvelScale
+AbilityNameMarvelScale:
+.string "Marvel Scale\0"
+.align 2,0
+
+.global AbilityNameCompoundeyes
+AbilityNameCompoundeyes:
+.string "Compoundeyes\0"
+.align 2,0
+
+.global AbilityNameLightningrod
+AbilityNameLightningrod:
+.string "Lightningrod\0"
+.align 2,0
+
+.global AbilityNameDrought
+AbilityNameDrought:
+.string "Drought\0"
+.align 2,0
+
+.global AbilityNameHustle
+AbilityNameHustle:
+.string "Hustle\0"
+.align 2,0
+
+.global AbilityNameEarlyBird
+AbilityNameEarlyBird:
+.string "Early Bird\0"
+.align 2,0
+
+.global AbilityNameIlluminate
+AbilityNameIlluminate:
+.string "Illuminate\0"
+.align 2,0
+
+.global AbilityNameCloudNine
+AbilityNameCloudNine:
+.string "Cloud Nine\0"
+.align 2,0
+
+.global AbilityNameStickyHold
+AbilityNameStickyHold:
+.string "Sticky Hold\0"
+.align 2,0
+
+.global AbilityNameRunAway
+AbilityNameRunAway:
+.string "Run Away\0"
+.align 2,0
+
+.global AbilityNameTruant
+AbilityNameTruant:
+.string "Truant\0"
+.align 2,0
+
+.global AbilityNameOblivious
+AbilityNameOblivious:
+.string "Oblivious\0"
+.align 2,0
+
+.global AbilityNameTrace
+AbilityNameTrace:
+.string "Trace\0"
+.align 2,0
+
+.global AbilityNamePoisonPoint
+AbilityNamePoisonPoint:
+.string "Poison Point\0"
+.align 2,0
+
+.global AbilityNameSereneGrace
+AbilityNameSereneGrace:
+.string "Serene Grace\0"
+.align 2,0
+
+.global AbilityNameForecast
+AbilityNameForecast:
+.string "Forecast\0"
+.align 2,0
+
+.global AbilityNameWaterAbsorb
+AbilityNameWaterAbsorb:
+.string "Water Absorb\0"
+.align 2,0
+
+.global AbilityNameVoltAbsorb
+AbilityNameVoltAbsorb:
+.string "Volt Absorb\0"
+.align 2,0
+
+.global AbilityNameHugePower
+AbilityNameHugePower:
+.string "Huge Power\0"
+.align 2,0
+
+.global AbilityNameShedSkin
+AbilityNameShedSkin:
+.string "Shed Skin\0"
+.align 2,0
+
+.global AbilityNameStatic
+AbilityNameStatic:
+.string "Static\0"
+.align 2,0
+
+.global AbilityNameInnerFocus
+AbilityNameInnerFocus:
+.string "Inner Focus\0"
+.align 2,0
+
+.global AbilityNameKeenEye
+AbilityNameKeenEye:
+.string "Keen Eye\0"
+.align 2,0
+
+.global AbilityNameSandVeil
+AbilityNameSandVeil:
+.string "Sand Veil\0"
+.align 2,0
+
+.global AbilityNameSandStream
+AbilityNameSandStream:
+.string "Sand Stream\0"
+.align 2,0
+
+.global AbilityNameSwiftSwim
+AbilityNameSwiftSwim:
+.string "Swift Swim\0"
+.align 2,0
+
+.global AbilityNameOvergrow
+AbilityNameOvergrow:
+.string "Overgrow\0"
+.align 2,0
+
+.global AbilityNameSynchronize
+AbilityNameSynchronize:
+.string "Synchronize\0"
+.align 2,0
+
+.global AbilityNameWhiteSmoke
+AbilityNameWhiteSmoke:
+.string "White Smoke\0"
+.align 2,0
+
+.global AbilityNameMagnetPull
+AbilityNameMagnetPull:
+.string "Magnet Pull\0"
+.align 2,0
+
+.global AbilityNameLimber
+AbilityNameLimber:
+.string "Limber\0"
+.align 2,0
+
+.global AbilityNameDamp
+AbilityNameDamp:
+.string "Damp\0"
+.align 2,0
+
+.global AbilityNameNaturalCure
+AbilityNameNaturalCure:
+.string "Natural Cure\0"
+.align 2,0
+
+.global AbilityNameShellArmor
+AbilityNameShellArmor:
+.string "Shell Armor\0"
+.align 2,0
+
+.global AbilityNameRoughSkin
+AbilityNameRoughSkin:
+.string "Rough Skin\0"
+.align 2,0
+
+.global AbilityNameGuts
+AbilityNameGuts:
+.string "Guts\0"
+.align 2,0
+
+.global AbilityNameTorrent
+AbilityNameTorrent:
+.string "Torrent\0"
+.align 2,0
+
+.global AbilityNameClearBody
+AbilityNameClearBody:
+.string "Clear Body\0"
+.align 2,0
+
+.global AbilityNameSuctionCups
+AbilityNameSuctionCups:
+.string "Suction Cups\0"
+.align 2,0
+
+.global AbilityNameSturdy
+AbilityNameSturdy:
+.string "Sturdy\0"
+.align 2,0
+
+.global AbilityNameBattleArmor
+AbilityNameBattleArmor:
+.string "Battle Armor\0"
+.align 2,0
+
+.global AbilityNameSpeedBoost
+AbilityNameSpeedBoost:
+.string "Speed Boost\0"
+.align 2,0
+
+.global AbilityNameShadowTag
+AbilityNameShadowTag:
+.string "Shadow Tag\0"
+.align 2,0
+
+.global AbilityNameHyperCutter
+AbilityNameHyperCutter:
+.string "Hyper Cutter\0"
+.align 2,0
+
+.global AbilityNameAirLock
+AbilityNameAirLock:
+.string "Air Lock\0"
+.align 2,0
+
+.global AbilityNameRockHead
+AbilityNameRockHead:
+.string "Rock Head\0"
+.align 2,0
+
+.global AbilityNameIntimidate
+AbilityNameIntimidate:
+.string "Intimidate\0"
+.align 2,0
+
+.global AbilityNameArenaTrap
+AbilityNameArenaTrap:
+.string "Arena Trap\0"
+.align 2,0
+
+.global AbilityNameDrizzle
+AbilityNameDrizzle:
+.string "Drizzle\0"
+.align 2,0
+
+.global AbilityNameRainDish
+AbilityNameRainDish:
+.string "Rain Dish\0"
+.align 2,0
+
+.global AbilityNameThickFat
+AbilityNameThickFat:
+.string "Thick Fat\0"
+.align 2,0
+
+.global AbilityNameStench
+AbilityNameStench:
+.string "Stench\0"
+.align 2,0
+
+.global AbilityNameNone
+AbilityNameNone:
+.string "Unknown\0"
+.align 2,0
 
 	.global AbilityDescriptions
 AbilityDescriptions: @ 810B988
-        .4byte 0x810cc00
-        .4byte 0x810cbd4
-        .4byte 0x810cb9c
-        .4byte 0x810cb68
-        .4byte 0x810cb3c
-        .4byte 0x810cae0
-        .4byte 0x810caa0
-        .4byte 0x810ca54
-        .4byte 0x810ca24
-        .4byte 0x810c9ec
-        .4byte 0x810c9c4
-        .4byte 0x810c984
-        .4byte 0x810c958
-        .4byte 0x810c930
-        .4byte 0x810c900
-        .4byte 0x810c8d0
-        .4byte 0x810c88c
-        .4byte 0x810c848
-        .4byte 0x810c818
-        .4byte 0x810c7f0
-        .4byte 0x810c7b4
-        .4byte 0x810c778
-        .4byte 0x810c754
-        .4byte 0x810c720
-        .4byte 0x810c6f0
-        .4byte 0x810c6ac
-        .4byte 0x810c668
-        .4byte 0x810c62c
-        .4byte 0x810c5f4
-        .4byte 0x810c5bc
-        .4byte 0x810c588
-        .4byte 0x810c560
-        .4byte 0x810c53c
-        .4byte 0x810c504
-        .4byte 0x810c4d4
-        .4byte 0x810c490
-        .4byte 0x810c454
-        .4byte 0x810c414
-        .4byte 0x810c3c0
-        .4byte 0x810c398
-        .4byte 0x810c34c
-        .4byte 0x810c324
-        .4byte 0x810c2d0
-        .4byte 0x810c274
-        .4byte 0x810c22c
-        .4byte 0x810c1fc
-        .4byte 0x810c1ac
-        .4byte 0x810c17c
-        .4byte 0x810c14c
-        .4byte 0x810c120
-        .4byte 0x810c0ec
-        .4byte 0x810c0b8
-        .4byte 0x810c078
-        .4byte 0x810c034
-        .4byte 0x810c014
-        .4byte 0x810bfe4
-        .4byte 0x810bf94
-        .4byte 0x810bf48
-        .4byte 0x810bef8
-        .4byte 0x810bea0
-        .4byte 0x810be5c
-        .4byte 0x810be10
-        .4byte 0x810bde0
-        .4byte 0x810bd90
-        .4byte 0x810bd6c
-        .4byte 0x810bd44
-        .4byte 0x810bd20
-        .4byte 0x810bce0
-        .4byte 0x810bca8
-        .4byte 0x810bc68
-        .4byte 0x810bc28
-        .4byte 0x810bbe4
-        .4byte 0x810bb8c
-        .4byte 0x810bb68
-        .4byte 0x810bb24
-        .4byte 0x810baf4
-        .4byte 0x810babc
+.4byte AbilityDescriptionNone
+.4byte AbilityDescriptionStench
+.4byte AbilityDescriptionThickFat
+.4byte AbilityDescriptionRainDish
+.4byte AbilityDescriptionDrizzle
+.4byte AbilityDescriptionArenaTrap
+.4byte AbilityDescriptionIntimidate
+.4byte AbilityDescriptionRockHead
+.4byte AbilityDescriptionAirLock
+.4byte AbilityDescriptionHyperCutter
+.4byte AbilityDescriptionShadowTag
+.4byte AbilityDescriptionSpeedBoost
+.4byte AbilityDescriptionBattleArmor
+.4byte AbilityDescriptionSturdy
+.4byte AbilityDescriptionSuctionCups
+.4byte AbilityDescriptionClearBody
+.4byte AbilityDescriptionTorrent
+.4byte AbilityDescriptionGuts
+.4byte AbilityDescriptionRoughSkin
+.4byte AbilityDescriptionShellArmor
+.4byte AbilityDescriptionNaturalCure
+.4byte AbilityDescriptionDamp
+.4byte AbilityDescriptionLimber
+.4byte AbilityDescriptionMagnetPull
+.4byte AbilityDescriptionWhiteSmoke
+.4byte AbilityDescriptionSynchronize
+.4byte AbilityDescriptionOvergrow
+.4byte AbilityDescriptionSwiftSwim
+.4byte AbilityDescriptionSandStream
+.4byte AbilityDescriptionSandVeil
+.4byte AbilityDescriptionKeenEye
+.4byte AbilityDescriptionInnerFocus
+.4byte AbilityDescriptionStatic
+.4byte AbilityDescriptionShedSkin
+.4byte AbilityDescriptionHugePower
+.4byte AbilityDescriptionVoltAbsorb
+.4byte AbilityDescriptionWaterAbsorb
+.4byte AbilityDescriptionForecast
+.4byte AbilityDescriptionSereneGrace
+.4byte AbilityDescriptionPoisonPoint
+.4byte AbilityDescriptionTrace
+.4byte AbilityDescriptionOblivious
+.4byte AbilityDescriptionTruant
+.4byte AbilityDescriptionRunAway
+.4byte AbilityDescriptionStickyHold
+.4byte AbilityDescriptionCloudNine
+.4byte AbilityDescriptionIlluminate
+.4byte AbilityDescriptionEarlyBird
+.4byte AbilityDescriptionHustle
+.4byte AbilityDescriptionDrought
+.4byte AbilityDescriptionLightningrod
+.4byte AbilityDescriptionCompoundeyes
+.4byte AbilityDescriptionMarvelScale
+.4byte AbilityDescriptionWonderGuard
+.4byte AbilityDescriptionInsomnia
+.4byte AbilityDescriptionLevitate
+.4byte AbilityDescriptionPlus
+.4byte AbilityDescriptionPressure
+.4byte AbilityDescriptionLiquidOoze
+.4byte AbilityDescriptionColorChange
+.4byte AbilityDescriptionSoundproof
+.4byte AbilityDescriptionEffectSpore
+.4byte AbilityDescriptionFlameBody
+.4byte AbilityDescriptionMinus
+.4byte AbilityDescriptionOwnTempo
+.4byte AbilityDescriptionMagmaArmor
+.4byte AbilityDescriptionWaterVeil
+.4byte AbilityDescriptionSwarm
+.4byte AbilityDescriptionCuteCharm
+.4byte AbilityDescriptionImmunity
+.4byte AbilityDescriptionBlaze
+.4byte AbilityDescriptionPickup
+.4byte AbilityDescriptionFlashFire
+.4byte AbilityDescriptionVitalSpirit
+.4byte AbilityDescriptionChlorophyll
+.4byte AbilityDescriptionPurePower
+.4byte AbilityDescriptionShieldDust
 
-	.incbin "baserom.gba", 0x10BABC, 0x1150
+.global AbilityDescriptionShieldDust
+AbilityDescriptionShieldDust:
+.string "{COLOR_2 RED}Shield Dust{END_COLOR_TEXT_2}: Blocks the added\neffects of moves.\0"
+.align 2,0
+
+.global AbilityDescriptionPurePower
+AbilityDescriptionPurePower:
+.string "{COLOR_2 RED}Pure Power{END_COLOR_TEXT_2}: Occasionally\nboosts Attack.\0"
+.align 2,0
+
+.global AbilityDescriptionChlorophyll
+AbilityDescriptionChlorophyll:
+.string "{COLOR_2 RED}Chlorophyll{END_COLOR_TEXT_2}: Boosts attack\nfrequency if the weather is\nsunny.\0"
+.align 2,0
+
+.global AbilityDescriptionVitalSpirit
+AbilityDescriptionVitalSpirit:
+.string "{COLOR_2 RED}Vital Spirit{END_COLOR_TEXT_2}: Prevents sleep.\0"
+.align 2,0
+
+.global AbilityDescriptionFlashFire
+AbilityDescriptionFlashFire:
+.string "{COLOR_2 RED}Flash Fire{END_COLOR_TEXT_2}: Zeroes damage\nfrom Fire-type move hits{COMMA}\nand boosts own Fire moves.\0"
+.align 2,0
+
+.global AbilityDescriptionPickup
+AbilityDescriptionPickup:
+.string "{COLOR_2 RED}Pickup{END_COLOR_TEXT_2}: Finds items if\nthe Pokémon is not holding\nanything.\0"
+.align 2,0
+
+.global AbilityDescriptionBlaze
+AbilityDescriptionBlaze:
+.string "{COLOR_2 RED}Blaze{END_COLOR_TEXT_2}: Boosts the power\nof Fire-type moves when\nHP is low.\0"
+.align 2,0
+
+.global AbilityDescriptionImmunity
+AbilityDescriptionImmunity:
+.string "{COLOR_2 RED}Immunity{END_COLOR_TEXT_2}: Prevents\nbecoming poisoned or badly\npoisoned.\0"
+.align 2,0
+
+.global AbilityDescriptionCuteCharm
+AbilityDescriptionCuteCharm:
+.string "{COLOR_2 RED}Cute Charm{END_COLOR_TEXT_2}: Causes\nattackers to become\ninfatuated.\0"
+.align 2,0
+
+.global AbilityDescriptionSwarm
+AbilityDescriptionSwarm:
+.string "{COLOR_2 RED}Swarm{END_COLOR_TEXT_2}: Boosts the power\nof Bug-type moves when\nHP is low.\0"
+.align 2,0
+
+.global AbilityDescriptionWaterVeil
+AbilityDescriptionWaterVeil:
+.string "{COLOR_2 RED}Water Veil{END_COLOR_TEXT_2}: Prevents burns.\0"
+.align 2,0
+
+.global AbilityDescriptionMagmaArmor
+AbilityDescriptionMagmaArmor:
+.string "{COLOR_2 RED}Magma Armor{END_COLOR_TEXT_2}: Prevents\nfreezing.\0"
+.align 2,0
+
+.global AbilityDescriptionOwnTempo
+AbilityDescriptionOwnTempo:
+.string "{COLOR_2 RED}Own Tempo{END_COLOR_TEXT_2}: Prevents\nconfusion.\0"
+.align 2,0
+
+.global AbilityDescriptionMinus
+AbilityDescriptionMinus:
+.string "{COLOR_2 RED}Minus{END_COLOR_TEXT_2}: Boosts Special Attack\nif there is a Pokémon with\nthe Plus ability.\0"
+.align 2,0
+
+.global AbilityDescriptionFlameBody
+AbilityDescriptionFlameBody:
+.string "{COLOR_2 RED}Flame Body{END_COLOR_TEXT_2}: Afflicts\nattackers with burns.\0"
+.align 2,0
+
+.global AbilityDescriptionEffectSpore
+AbilityDescriptionEffectSpore:
+.string "{COLOR_2 RED}Effect Spore{END_COLOR_TEXT_2}: Attackers are\npoisoned{COMMA} paralyzed{COMMA} or put\nto sleep.\0"
+.align 2,0
+
+.global AbilityDescriptionSoundproof
+AbilityDescriptionSoundproof:
+.string "{COLOR_2 RED}Soundproof{END_COLOR_TEXT_2}: Blocks the\neffects of all moves that\nuse sound.\0"
+.align 2,0
+
+.global AbilityDescriptionColorChange
+AbilityDescriptionColorChange:
+.string "{COLOR_2 RED}Color Change{END_COLOR_TEXT_2}: Changes the\nPokémon{APOSTROPHE}s type to that of\nthe move that hit it last.\0"
+.align 2,0
+
+.global AbilityDescriptionLiquidOoze
+AbilityDescriptionLiquidOoze:
+.string "{COLOR_2 RED}Liquid Ooze{END_COLOR_TEXT_2}: Inflicts damage\non the foe if hit by a move\nthat drains HP.\0"
+.align 2,0
+
+.global AbilityDescriptionPressure
+AbilityDescriptionPressure:
+.string "{COLOR_2 RED}Pressure{END_COLOR_TEXT_2}: If hit by a foe{APOSTROPHE}s\nmove{COMMA} the foe uses more PP\nthan usual.\0"
+.align 2,0
+
+.global AbilityDescriptionPlus
+AbilityDescriptionPlus:
+.string "{COLOR_2 RED}Plus{END_COLOR_TEXT_2}: Boosts Special Attack\nif there is a Pokémon with\nthe Minus ability.\0"
+.align 2,0
+
+.global AbilityDescriptionLevitate
+AbilityDescriptionLevitate:
+.string "{COLOR_2 RED}Levitate{END_COLOR_TEXT_2}: Blocks all\nGround-type moves.\0"
+.align 2,0
+
+.global AbilityDescriptionInsomnia
+AbilityDescriptionInsomnia:
+.string "{COLOR_2 RED}Insomnia{END_COLOR_TEXT_2}: Prevents sleep.\0"
+.align 2,0
+
+.global AbilityDescriptionWonderGuard
+AbilityDescriptionWonderGuard:
+.string "{COLOR_2 RED}Wonder Guard{END_COLOR_TEXT_2}: Only\nsuper-effective moves can\ninflict damage.\0"
+.align 2,0
+
+.global AbilityDescriptionMarvelScale
+AbilityDescriptionMarvelScale:
+.string "{COLOR_2 RED}Marvel Scale{END_COLOR_TEXT_2}: Boosts\nDefense if there is a status\nproblem.\0"
+.align 2,0
+
+.global AbilityDescriptionCompoundeyes
+AbilityDescriptionCompoundeyes:
+.string "{COLOR_2 RED}Compoundeyes{END_COLOR_TEXT_2}: Boosts\nthe Accuracy of moves.\0"
+.align 2,0
+
+.global AbilityDescriptionLightningrod
+AbilityDescriptionLightningrod:
+.string "{COLOR_2 RED}Lightningrod{END_COLOR_TEXT_2}: Attracts\nElectric-type moves.\0"
+.align 2,0
+
+.global AbilityDescriptionDrought
+AbilityDescriptionDrought:
+.string "{COLOR_2 RED}Drought{END_COLOR_TEXT_2}: Changes the\nweather to sunny.\0"
+.align 2,0
+
+.global AbilityDescriptionHustle
+AbilityDescriptionHustle:
+.string "{COLOR_2 RED}Hustle{END_COLOR_TEXT_2}: Boosts Attack but\nlowers Accuracy.\0"
+.align 2,0
+
+.global AbilityDescriptionEarlyBird
+AbilityDescriptionEarlyBird:
+.string "{COLOR_2 RED}Early Bird{END_COLOR_TEXT_2}: Awakens quickly\nfrom sleep.\0"
+.align 2,0
+
+.global AbilityDescriptionIlluminate
+AbilityDescriptionIlluminate:
+.string "{COLOR_2 RED}Illuminate{END_COLOR_TEXT_2}: If damaged{COMMA}\na wild Pokémon appears \non the dungeon floor.\0"
+.align 2,0
+
+.global AbilityDescriptionCloudNine
+AbilityDescriptionCloudNine:
+.string "{COLOR_2 RED}Cloud Nine{END_COLOR_TEXT_2}: Changes the\nweather to clear.\0"
+.align 2,0
+
+.global AbilityDescriptionStickyHold
+AbilityDescriptionStickyHold:
+.string "{COLOR_2 RED}Sticky Hold{END_COLOR_TEXT_2}: Prevents the\nPokémon{APOSTROPHE}s hold item from\nbeing taken.\0"
+.align 2,0
+
+.global AbilityDescriptionRunAway
+AbilityDescriptionRunAway:
+.string "{COLOR_2 RED}Run Away{END_COLOR_TEXT_2}: Becomes terrified\nand flees when HP gets low.\nLeaders will resist this urge.\0"
+.align 2,0
+
+.global AbilityDescriptionTruant
+AbilityDescriptionTruant:
+.string "{COLOR_2 RED}Truant{END_COLOR_TEXT_2}: Prevents action in\nyour next turn after using\na move or a Wonder Orb.\0"
+.align 2,0
+
+.global AbilityDescriptionOblivious
+AbilityDescriptionOblivious:
+.string "{COLOR_2 RED}Oblivious{END_COLOR_TEXT_2}: Prevents\ninfatuation.\0"
+.align 2,0
+
+.global AbilityDescriptionTrace
+AbilityDescriptionTrace:
+.string "{COLOR_2 RED}Trace{END_COLOR_TEXT_2}: Changes ability to\nthat of the foe attacking\nor using a move.\0"
+.align 2,0
+
+.global AbilityDescriptionPoisonPoint
+AbilityDescriptionPoisonPoint:
+.string "{COLOR_2 RED}Poison Point{END_COLOR_TEXT_2}: Poisons\nattackers.\0"
+.align 2,0
+
+.global AbilityDescriptionSereneGrace
+AbilityDescriptionSereneGrace:
+.string "{COLOR_2 RED}Serene Grace{END_COLOR_TEXT_2}: Improves the\nchances of triggering the\nadded effects of moves.\0"
+.align 2,0
+
+.global AbilityDescriptionForecast
+AbilityDescriptionForecast:
+.string "{COLOR_2 RED}Forecast{END_COLOR_TEXT_2}: The Pokémon{APOSTROPHE}s\ntype changes with the\nweather.\0"
+.align 2,0
+
+.global AbilityDescriptionWaterAbsorb
+AbilityDescriptionWaterAbsorb:
+.string "{COLOR_2 RED}Water Absorb{END_COLOR_TEXT_2}: Restores HP\nif hit by a Water-type move.\0"
+.align 2,0
+
+.global AbilityDescriptionVoltAbsorb
+AbilityDescriptionVoltAbsorb:
+.string "{COLOR_2 RED}Volt Absorb{END_COLOR_TEXT_2}: Restores HP\nif damaged by an Electric-\ntype move.\0"
+.align 2,0
+
+.global AbilityDescriptionHugePower
+AbilityDescriptionHugePower:
+.string "{COLOR_2 RED}Huge Power{END_COLOR_TEXT_2}: Occasionally\nboosts Attack.\0"
+.align 2,0
+
+.global AbilityDescriptionShedSkin
+AbilityDescriptionShedSkin:
+.string "{COLOR_2 RED}Shed Skin{END_COLOR_TEXT_2}: Recovers easily\nfrom status problems.\0"
+.align 2,0
+
+.global AbilityDescriptionStatic
+AbilityDescriptionStatic:
+.string "{COLOR_2 RED}Static{END_COLOR_TEXT_2}: Paralyzes attackers.\0"
+.align 2,0
+
+.global AbilityDescriptionInnerFocus
+AbilityDescriptionInnerFocus:
+.string "{COLOR_2 RED}Inner Focus{END_COLOR_TEXT_2}: Prevents\ncringing.\0"
+.align 2,0
+
+.global AbilityDescriptionKeenEye
+AbilityDescriptionKeenEye:
+.string "{COLOR_2 RED}Keen Eye{END_COLOR_TEXT_2}: Prevents Accuracy\nfrom going down.\0"
+.align 2,0
+
+.global AbilityDescriptionSandVeil
+AbilityDescriptionSandVeil:
+.string "{COLOR_2 RED}Sand Veil{END_COLOR_TEXT_2}: Boosts Evasion\nif there is a sandstorm.\0"
+.align 2,0
+
+.global AbilityDescriptionSandStream
+AbilityDescriptionSandStream:
+.string "{COLOR_2 RED}Sand Stream{END_COLOR_TEXT_2}: Changes the\nweather to a sandstorm.\0"
+.align 2,0
+
+.global AbilityDescriptionSwiftSwim
+AbilityDescriptionSwiftSwim:
+.string "{COLOR_2 RED}Swift Swim{END_COLOR_TEXT_2}: Boosts attack\nfrequency if it is raining.\0"
+.align 2,0
+
+.global AbilityDescriptionOvergrow
+AbilityDescriptionOvergrow:
+.string "{COLOR_2 RED}Overgrow{END_COLOR_TEXT_2}: Boosts the power\nof Grass-type moves when\nHP is low.\0"
+.align 2,0
+
+.global AbilityDescriptionSynchronize
+AbilityDescriptionSynchronize:
+.string "{COLOR_2 RED}Synchronize{END_COLOR_TEXT_2}: Shares\nstatus problems with any\nPokémon in reach.\0"
+.align 2,0
+
+.global AbilityDescriptionWhiteSmoke
+AbilityDescriptionWhiteSmoke:
+.string "{COLOR_2 RED}White Smoke{END_COLOR_TEXT_2}: Prevents\nreduction of stats.\0"
+.align 2,0
+
+.global AbilityDescriptionMagnetPull
+AbilityDescriptionMagnetPull:
+.string "{COLOR_2 RED}Magnet Pull{END_COLOR_TEXT_2}: Immobilizes\nSteel-type attackers.\0"
+.align 2,0
+
+.global AbilityDescriptionLimber
+AbilityDescriptionLimber:
+.string "{COLOR_2 RED}Limber{END_COLOR_TEXT_2}: Prevents paralysis.\0"
+.align 2,0
+
+.global AbilityDescriptionDamp
+AbilityDescriptionDamp:
+.string "{COLOR_2 RED}Damp{END_COLOR_TEXT_2}: Prevents any\nexplosions on the dungeon\nfloor.\0"
+.align 2,0
+
+.global AbilityDescriptionNaturalCure
+AbilityDescriptionNaturalCure:
+.string "{COLOR_2 RED}Natural Cure{END_COLOR_TEXT_2}: Recovers\nquickly from status\nproblems.\0"
+.align 2,0
+
+.global AbilityDescriptionShellArmor
+AbilityDescriptionShellArmor:
+.string "{COLOR_2 RED}Shell Armor{END_COLOR_TEXT_2}: Blocks\ncritical hits.\0"
+.align 2,0
+
+.global AbilityDescriptionRoughSkin
+AbilityDescriptionRoughSkin:
+.string "{COLOR_2 RED}Rough Skin{END_COLOR_TEXT_2}: Inflicts damage\non attackers.\0"
+.align 2,0
+
+.global AbilityDescriptionGuts
+AbilityDescriptionGuts:
+.string "{COLOR_2 RED}Guts{END_COLOR_TEXT_2}: Boosts Attack if the\nPokémon has any status\nproblems.\0"
+.align 2,0
+
+.global AbilityDescriptionTorrent
+AbilityDescriptionTorrent:
+.string "{COLOR_2 RED}Torrent{END_COLOR_TEXT_2}: Boosts the power\nof Water-type moves when\nHP is low.\0"
+.align 2,0
+
+.global AbilityDescriptionClearBody
+AbilityDescriptionClearBody:
+.string "{COLOR_2 RED}Clear Body{END_COLOR_TEXT_2}: Prevents\nreduction of stats.\0"
+.align 2,0
+
+.global AbilityDescriptionSuctionCups
+AbilityDescriptionSuctionCups:
+.string "{COLOR_2 RED}Suction Cups{END_COLOR_TEXT_2}: Prevents\nforced movement.\0"
+.align 2,0
+
+.global AbilityDescriptionSturdy
+AbilityDescriptionSturdy:
+.string "{COLOR_2 RED}Sturdy{END_COLOR_TEXT_2}: Blocks\none-hit KO moves.\0"
+.align 2,0
+
+.global AbilityDescriptionBattleArmor
+AbilityDescriptionBattleArmor:
+.string "{COLOR_2 RED}Battle Armor{END_COLOR_TEXT_2}: Blocks\ncritical hits.\0"
+.align 2,0
+
+.global AbilityDescriptionSpeedBoost
+AbilityDescriptionSpeedBoost:
+.string "{COLOR_2 RED}Speed Boost{END_COLOR_TEXT_2}: The Pokémon{APOSTROPHE}s\nMovement Speed accelerates.\0"
+.align 2,0
+
+.global AbilityDescriptionShadowTag
+AbilityDescriptionShadowTag:
+.string "{COLOR_2 RED}Shadow Tag{END_COLOR_TEXT_2}: Immobilizes\nattackers.\0"
+.align 2,0
+
+.global AbilityDescriptionHyperCutter
+AbilityDescriptionHyperCutter:
+.string "{COLOR_2 RED}Hyper Cutter{END_COLOR_TEXT_2}: Prevents\nAttack from being lowered.\0"
+.align 2,0
+
+.global AbilityDescriptionAirLock
+AbilityDescriptionAirLock:
+.string "{COLOR_2 RED}Air Lock{END_COLOR_TEXT_2}: Changes the\nweather to clear.\0"
+.align 2,0
+
+.global AbilityDescriptionRockHead
+AbilityDescriptionRockHead:
+.string "{COLOR_2 RED}Rock Head{END_COLOR_TEXT_2}: Prevents damage\nfrom the recoil of moves\nsuch as Take Down.\0"
+.align 2,0
+
+.global AbilityDescriptionIntimidate
+AbilityDescriptionIntimidate:
+.string "{COLOR_2 RED}Intimidate{END_COLOR_TEXT_2}: Lowers the\nPhysical Attack power of\nattackers.\0"
+.align 2,0
+
+.global AbilityDescriptionArenaTrap
+AbilityDescriptionArenaTrap:
+.string "{COLOR_2 RED}Arena Trap{END_COLOR_TEXT_2}: Immobilizes any\nattacker except Flying-type\nfoes and those with Levitate.\0"
+.align 2,0
+
+.global AbilityDescriptionDrizzle
+AbilityDescriptionDrizzle:
+.string "{COLOR_2 RED}Drizzle{END_COLOR_TEXT_2}: Changes the\nweather to rainy.\0"
+.align 2,0
+
+.global AbilityDescriptionRainDish
+AbilityDescriptionRainDish:
+.string "{COLOR_2 RED}Rain Dish{END_COLOR_TEXT_2}: Improves HP gain\nif it is raining.\0"
+.align 2,0
+
+.global AbilityDescriptionThickFat
+AbilityDescriptionThickFat:
+.string "{COLOR_2 RED}Thick Fat{END_COLOR_TEXT_2}: Resistant to\nFire- and Ice-type moves.\0"
+.align 2,0
+
+.global AbilityDescriptionStench
+AbilityDescriptionStench:
+.string "{COLOR_2 RED}Stench{END_COLOR_TEXT_2}: May terrify an\nattacking foe.\0"
+.align 2,0
+
+.global AbilityDescriptionNone
+AbilityDescriptionNone:
+.string "{COLOR_2 RED}-------\0"
+.align 2,0
 
 	.global gRangeNames
 gRangeNames: @ 810CC0C
-	.incbin "baserom.gba", 0x10CC0C, 0x2F4
+.4byte 0x810AE1C
+.4byte MoveRangeThreeTilesDiagonally
+.4byte MoveRangeOneTileFoe
+.4byte MoveRangeCutsCornersFoe
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeFloorPokemon
+.4byte MoveRangeFloorFoes
+.4byte MoveRangeFloorMembers
+.4byte MoveRangeSideFoe
+.4byte MoveRangeSpecial
+.4byte MoveRangeFrontFoe
+.4byte MoveRangeSide
+.4byte MoveRangeTwoTilesFoe
+.4byte MoveRangeStraightLine
+.4byte MoveRangeRoomFoes
+.4byte MoveRangeRoomAllies
+.4byte MoveRangeRoom
+.4byte MoveRangeRoomExceptUser
+.4byte MoveRangeUser
+.4byte MoveRangeUser
+.4byte MoveRangeUser
+.4byte MoveRangeRoomOnly
+.4byte MoveRangeItems
+.4byte MoveRangeFloor
+.4byte MoveRangeWall
+.4byte MoveRangeOneTile
+.4byte MoveRangeTwoTiles
+.4byte MoveRangeCutsCorners
+.4byte MoveRangeFloor
+.4byte MoveRangeFront
+.4byte MoveRange31
+.4byte MoveRange32
+.4byte MoveRange33
+.4byte MoveRange34
+.4byte MoveRange35
+.4byte MoveRange36
+.4byte MoveRange37
+.4byte MoveRange38
+.4byte MoveRange39
+.4byte MoveRange40
+.4byte MoveRange41
+.4byte MoveRange42
+.4byte MoveRange43
+.4byte MoveRange44
+.4byte MoveRange45
+.4byte MoveRange46
+.4byte MoveRange47
+.4byte MoveRange48
+
+.global MoveRange48
+MoveRange48:
+.string "48\0"
+.align 2,0
+
+.global MoveRange47
+MoveRange47:
+.string "47\0"
+.align 2,0
+
+.global MoveRange46
+MoveRange46:
+.string "46\0"
+.align 2,0
+
+.global MoveRange45
+MoveRange45:
+.string "45\0"
+.align 2,0
+
+.global MoveRange44
+MoveRange44:
+.string "44\0"
+.align 2,0
+
+.global MoveRange43
+MoveRange43:
+.string "43\0"
+.align 2,0
+
+.global MoveRange42
+MoveRange42:
+.string "42\0"
+.align 2,0
+
+.global MoveRange41
+MoveRange41:
+.string "41\0"
+.align 2,0
+
+.global MoveRange40
+MoveRange40:
+.string "40\0"
+.align 2,0
+
+.global MoveRange39
+MoveRange39:
+.string "39\0"
+.align 2,0
+
+.global MoveRange38
+MoveRange38:
+.string "38\0"
+.align 2,0
+
+.global MoveRange37
+MoveRange37:
+.string "37\0"
+.align 2,0
+
+.global MoveRange36
+MoveRange36:
+.string "36\0"
+.align 2,0
+
+.global MoveRange35
+MoveRange35:
+.string "35\0"
+.align 2,0
+
+.global MoveRange34
+MoveRange34:
+.string "34\0"
+.align 2,0
+
+.global MoveRange33
+MoveRange33:
+.string "33\0"
+.align 2,0
+
+.global MoveRange32
+MoveRange32:
+.string "32\0"
+.align 2,0
+
+.global MoveRange31
+MoveRange31:
+.string "31\0"
+.align 2,0
+
+.global MoveRangeFront
+MoveRangeFront:
+.string "Pokémon in front\0"
+.align 2,0
+
+.global MoveRangeCutsCorners
+MoveRangeCutsCorners:
+.string "User{COMMA} cuts corners\0"
+.align 2,0
+
+.global MoveRangeTwoTiles
+MoveRangeTwoTiles:
+.string "Pokémon within 2-tile range\0"
+.align 2,0
+
+.global MoveRangeOneTile
+MoveRangeOneTile:
+.string "Pokémon within 1-tile range\0"
+.align 2,0
+
+.global MoveRangeWall
+MoveRangeWall:
+.string "Wall\0"
+.align 2,0
+
+.global MoveRangeFloor
+MoveRangeFloor:
+.string "Floor\0"
+.align 2,0
+
+.global MoveRangeItems
+MoveRangeItems:
+.string "Items\0"
+.align 2,0
+
+.global MoveRangeRoomOnly
+MoveRangeRoomOnly:
+.string "Members in room only\0"
+.align 2,0
+
+.global MoveRangeUser
+MoveRangeUser:
+.string "User\0"
+.align 2,0
+
+.global MoveRangeRoomExceptUser
+MoveRangeRoomExceptUser:
+.string "All in room except user\0"
+.align 2,0
+
+.global MoveRangeRoom
+MoveRangeRoom:
+.string "All Pokémon in room\0"
+.align 2,0
+
+.global MoveRangeRoomAllies
+MoveRangeRoomAllies:
+.string "Allies in room\0"
+.align 2,0
+
+.global MoveRangeRoomFoes
+MoveRangeRoomFoes:
+.string "Foes in room\0"
+.align 2,0
+
+.global MoveRangeStraightLine
+MoveRangeStraightLine:
+.string "Straight line\0"
+.align 2,0
+
+.global MoveRangeTwoTilesFoe
+MoveRangeTwoTilesFoe:
+.string "Foe up to 2 tiles ahead\0"
+.align 2,0
+
+.global MoveRangeSide
+MoveRangeSide:
+.string "Pokémon at side\0"
+.align 2,0
+
+.global MoveRangeFrontFoe
+MoveRangeFrontFoe:
+.string "Foe in front\0"
+.align 2,0
+
+.global MoveRangeSpecial
+MoveRangeSpecial:
+.string "Special\0"
+.align 2,0
+
+.global MoveRangeSideFoe
+MoveRangeSideFoe:
+.string "Foe at side\0"
+.align 2,0
+
+.global MoveRangeFloorFoes
+MoveRangeFloorFoes:
+.string "Foes on floor\0"
+.align 2,0
+
+.global MoveRangeFloorPokemon
+MoveRangeFloorPokemon:
+.string "Pokémon on floor\0"
+.align 2,0
+
+.global MoveRangeFloorMembers
+MoveRangeFloorMembers:
+.string "Members on floor\0"
+.align 2,0
+
+.global MoveRangeCutsCornersFoe
+MoveRangeCutsCornersFoe:
+.string "Foe in front{COMMA} cuts corners\0"
+.align 2,0
+
+.global MoveRangeOneTileFoe
+MoveRangeOneTileFoe:
+.string "Foes within 1-tile range\0"
+.align 2,0
+
+.global MoveRangeThreeTilesDiagonally
+MoveRangeThreeTilesDiagonally:
+.string "3 tiles diagonally and in front\0"
+.align 2,0
+
+.global RangeText
+RangeText:
+.string "Range#=@.{ARG_POKEMON_0} \0"
+.align 2,0
 
 	.global gUnknown_810CF00
 gUnknown_810CF00: @ 810CF00
-        .byte 0xF0, 0xCE, 0x10, 0x08 @ (pointer to range string)
+        .4byte RangeText
 
         .global TypeText
         TypeText:
