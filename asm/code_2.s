@@ -870,7 +870,7 @@ _08000D36:
 	cmp r4, 0x63
 	beq _08000D70
 	adds r0, r4, 0
-	bl GetSaveBeforeEntering
+	bl IsForceGameSave
 	lsls r0, 24
 	cmp r0, 0
 	beq _08000D70
@@ -961,7 +961,7 @@ _08000E00:
 	b _08000E1E
 _08000E0C:
 	adds r0, r6, 0
-	bl GetSaveBeforeEntering
+	bl IsForceGameSave
 	lsls r0, 24
 	cmp r0, 0
 	bne _08000E1E

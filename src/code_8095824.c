@@ -205,7 +205,7 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->unk2C = GetUnk3(gUnknown_203B480->dungeon.id);
+  gUnknown_203B480->unk2C = GetRescuesAllowed(gUnknown_203B480->dungeon.id);
 }
 
 void sub_8095494(struct unkStruct_809542C *param_1, u8 index)

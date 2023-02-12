@@ -16768,7 +16768,7 @@ sub_8065FB4:
 	ldr r1, _08065FE8
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetRecruitable
+	bl IsRecruitingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065FF0
@@ -21916,7 +21916,7 @@ _08068922:
 	ldr r1, _08068A6C
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetLevelCondition
+	bl IsLevelResetTo1
 	lsls r0, 24
 	cmp r0, 0
 	beq _08068A06
@@ -22333,7 +22333,7 @@ _08068C96:
 	ldr r1, _08068CD8
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetLevelCondition
+	bl IsLevelResetTo1
 	lsls r0, 24
 	cmp r0, 0
 	beq _08068CDC
@@ -23050,7 +23050,7 @@ _08069228:
 	ldr r1, _080692D4
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetLevelCondition
+	bl IsLevelResetTo1
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806926E
@@ -23249,7 +23249,7 @@ _080693CC:
 	ldr r1, _080694B0
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetLevelCondition
+	bl IsLevelResetTo1
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806940E

@@ -17,7 +17,7 @@ extern bool8 IsInvalidItemReward(u8);
 extern u8 sub_803C1D0(struct DungeonLocation *, u8);
 extern bool8 IsNotMoneyOrUsedTMItem(u8);
 extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
-extern u32 GetMaxItemCount(u8);
+extern u32 GetMaxItemsAllowed(u8);
 extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
 extern void ResetPelipperBoardSlot(u8);
@@ -90,7 +90,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         return FALSE;
     else
     {
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemCount(data->dungeon.id) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemsAllowed(data->dungeon.id) == 0)
             return FALSE;
 
         if(data->unk2 > 9)

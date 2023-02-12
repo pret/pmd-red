@@ -1510,7 +1510,7 @@ _0806F6F0:
 	ldr r2, _0806F834
 	adds r0, r3, r2
 	ldrb r0, [r0]
-	bl GetRecruitable
+	bl IsRecruitingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F702
