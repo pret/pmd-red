@@ -4,7 +4,7 @@
 struct MenuItem
 {
     const u8 *text;
-    u32 menuAction; // action??
+    s32 menuAction; // action??
 };
 
 #endif // GUARD_MENU_H

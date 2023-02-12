@@ -58,11 +58,11 @@ struct UnkInputStruct
     /* 0x5 */ u32 unk5;
     /* 0x9 */ u32 unk9;
     /* 0xD */ u32 unkD;
-    /* 0x12 */ u32 unk11;
-    /* 0x16 */ u32 unk15;
-    /* 0x1A */ u32 unk19;
-    /* 0x1E */ u32 unk1D;
-    /* 0x24 */ u32 unk24;
+    /* 0x11 */ u32 unk11;
+    /* 0x15 */ u32 unk15;
+    /* 0x19 */ u32 unk19;
+    /* 0x1D */ u32 unk1D;
+    /* 0x21 */ u32 unk21;
     /* 0x28 */ u8 unk28;
     /* 0x29 */ u8 a_button;
     /* 0x2A */ u8 b_button;

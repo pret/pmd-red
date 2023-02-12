@@ -31,7 +31,7 @@ u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct Move *param_3
   gUnknown_203B26C = MemoryAlloc(sizeof(struct unkStruct_203B26C),8);
   gUnknown_203B26C->unk0 = param_1;
   gUnknown_203B26C->speciesNum = species_32;
-  gUnknown_203B26C->unk10 = param_3;
+  gUnknown_203B26C->moves = param_3;
   gUnknown_203B26C->unk1C = param_3[4].id;
 
   if (param_1 == 0) {
@@ -81,9 +81,9 @@ u32 sub_801E8C0(void)
   return 0;
 }
 
-u8 sub_801E930(void)
+bool8 GulpinIsNextMoveLinked(void)
 {
-    return gUnknown_203B26C->unkE;
+    return gUnknown_203B26C->isNextMoveLinked;
 }
 
 void sub_801E93C(void)

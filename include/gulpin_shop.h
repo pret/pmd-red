@@ -8,8 +8,8 @@ struct unkStruct_203B26C
     s32 state;
     u32 unk8;
     s16 speciesNum; // species of chosen Pokemon
-    u8 unkE;
-    struct Move * unk10;
+    bool8 isNextMoveLinked;
+    struct Move * moves;
     u32 unk14;
     u32 unk18;
     u16 unk1C;

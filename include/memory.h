@@ -53,7 +53,7 @@ void InitHeapInternal(void);
 void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
 void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock *, u32);
 s32 _LocateSet(struct HeapDescriptor *heap, s32 size, s32 param_3);
-void *MemoryAlloc(s32 size, s32 b);
+void *MemoryAlloc(s32 size, s32 group);
 void MemoryFree(void *a);
 
 #endif // GUARD_MEMORY_H

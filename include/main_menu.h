@@ -74,5 +74,6 @@ void CleanUpMenu(void);
 bool8 sub_80363E0(void);
 struct unkStruct_8035D94 *sub_8035D94(void);
 void sub_8035DA0(void);
+struct MainMenu *GetMainMenu(void);
 
 #endif // GUARD_MAIN_MENU_H

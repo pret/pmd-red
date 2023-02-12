@@ -36,7 +36,7 @@ void sub_801ED28(void)
             break;
         case 2:
             PlaySound(0x133);
-            gUnknown_203B26C->unkE = IsNextMoveLinked(gUnknown_203B26C->unk20, gUnknown_203B26C->unk10);
+            gUnknown_203B26C->isNextMoveLinked = IsNextMoveLinked(gUnknown_203B26C->unk20, gUnknown_203B26C->moves);
             UpdateGulpinShopState(4);
             break;
         case 3:
@@ -67,7 +67,7 @@ void sub_801EDC0(void)
         {
             case 4:
                 sub_801F214();
-                RemoveLinkSequenceFromMoves8(gUnknown_203B26C->unk10, gUnknown_203B26C->unk20);
+                RemoveLinkSequenceFromMoves8(gUnknown_203B26C->moves, gUnknown_203B26C->unk20);
                 gUnknown_203B26C->state = 5;
                 break;
             case 1:

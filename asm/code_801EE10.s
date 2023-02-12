@@ -3962,7 +3962,7 @@ sub_8020D90:
 	bcc _08020DC6
 	cmp r0, 0x3
 	bne _08020DC6
-	bl sub_801E930
+	bl GulpinIsNextMoveLinked
 	ldr r1, _08020DB8
 	ldr r1, [r1]
 	strb r0, [r1, 0x14]
