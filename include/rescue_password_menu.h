@@ -1,6 +1,8 @@
 #ifndef GUARD_RESCUE_PASSWORD_MENU_H
 #define GUARD_RESCUE_PASSWORD_MENU_H
 
+#include "menu.h"
+
 struct unkSprite
 {
     u16 unk208;
@@ -14,13 +16,10 @@ struct RescuePasswordMenu
     // size: 0x214
     u32 currMenu;
     u32 state;
-    u32 unk8;
-    u8 fillC[0x148 - 0xC];
+    struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
     struct UnkTextStruct2 unk1A8[4];
-
     struct unkSprite unk208;
-
     u32 unk210;
 };
 

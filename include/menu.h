@@ -27,5 +27,4 @@ struct MenuStruct
     u8 unk4D;
 };
 
-
 #endif // GUARD_MENU_H

@@ -34,8 +34,7 @@ struct unkStruct_203B34C
 {
     // size: 0x1A8
     u32 unk0;
-    struct MenuStruct unk4[3];
-    u8 fillF4[0x144 - 0xF4];
+    struct MenuStruct unk4[4];
     struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
 };
@@ -628,16 +627,16 @@ void sub_8035C1C(void)
 }
 
 void
-SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, int index, const struct UnkTextStruct2 *param_4, const struct MenuItem *param_5, char param_6 ,u32 param_7, u32 unused_8)
+SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6 ,u32 param_7, u32 unused_8)
 {
   unkData[index] = *param_4;
   ResetUnusedInputStruct();
   sub_800641C(unkData,1,1);
   if (param_6 != 0) {
-       sub_8012D60(&param_1[index],param_5,0,0,param_7,index);
+       sub_8012D60(&param_1[index],menuItems,0,0,param_7,index);
   }
   else {
-       sub_8012E04(&param_1[index],param_5,0,0,0,index);
+       sub_8012E04(&param_1[index],menuItems,0,0,0,index);
   }
   param_1[index].unk4C = 1;
 }
@@ -897,50 +896,50 @@ bool8 SetMainMenuText(void)
   switch(menuChoice) {
     case MENU_WIRELESS_COMMS:
         // Using wireless communications, you can go on an adventure to unknown worlds.
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E6030,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E6030,0,0,0);
         break;
     case MENU_WONDER_MAIL:
         // Using passwords, you can receive Wonder Mail
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F80,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F80,0,0,0);
         break;
     case MENU_AWAITING_RESCUE:
         // You are awaiting resuce by a friend
         // You can give up waiting for rescue
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F1C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F1C,0,0,0);
         break;
     case MENU_NEW_GAME:
         // Start an entirely new adventure
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5CCC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5CCC,0,0,0);
         break;
     case MENU_CONTINUE:
         // Resume your adventure from where you last saved
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DA0,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DA0,0,0,0);
         break;
     case MENU_DELETE_SAVE_PROMPT:
         // This will delete your saved game data.
         // Beware! This will delete it forever
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DF0,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DF0,0,0,0);
         break;
     case MENU_ADVENTURE_LOG:
         // Check your career as an adventurer
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D0C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D0C,0,0,0);
         break;
     case MENU_FRIEND_RESCUE:
         // Using a Game Link cable or passwords, friends may rescue each other
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5E5C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5E5C,0,0,0);
         break;
     case MENU_TRADE_ITEMS:
         // Using a Game Link cable you can trade stored items with a friend
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5EBC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5EBC,0,0,0);
         break;
     case MENU_DUAL_SLOT:
         // Using Dual Slot function, you can receive teams from your friends
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5FCC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5FCC,0,0,0);
         break;
     case MENU_DEBUG:
         // This is the Debug Mode.
         // It won't be in the release version
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D48,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D48,0,0,0);
         break;
     default:
         break;
@@ -971,7 +970,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-          SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5C18,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5C18,1,gUnknown_203B350,1);
         }
         else {
             // Revive Team
@@ -979,7 +978,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-          SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5BC4,gUnknown_80E5BDC,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5BC4,gUnknown_80E5BDC,1,gUnknown_203B350,1);
         }
       }
       else {
@@ -990,7 +989,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-          SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5AFC,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5AFC,1,gUnknown_203B350,1);
         }
         else {
             // Continue
@@ -998,7 +997,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-          SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A60,gUnknown_80E5A90,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A60,gUnknown_80E5A90,1,gUnknown_203B350,1);
         }
       }
     }
@@ -1010,7 +1009,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5B8C,1,gUnknown_203B350,1);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5B8C,1,gUnknown_203B350,1);
       }
       else {
             // Awaiting Rescue
@@ -1018,7 +1017,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-        SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5B34,gUnknown_80E5B4C,1,gUnknown_203B350,1);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5B34,gUnknown_80E5B4C,1,gUnknown_203B350,1);
       }
     }
   }
@@ -1026,7 +1025,7 @@ void SetMainMenuItems(void)
   {
       // New Game
       // Adventure Log
-    SetMenuItems((struct MenuStruct *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E59E0,gUnknown_80E59F8,1,gUnknown_203B350,1);
+    SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E59E0,gUnknown_80E59F8,1,gUnknown_203B350,1);
   }
 }
 

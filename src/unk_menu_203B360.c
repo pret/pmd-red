@@ -2,6 +2,7 @@
 #include "input.h"
 #include "main_menu.h"
 #include "memory.h"
+#include "menu.h"
 #include "text.h"
 
 struct unkSprite
@@ -17,8 +18,7 @@ struct unkStruct_203B360
     // size: 0x1b4
     u32 currMenu;
     u32 unk4; // state
-    u32 unk8;
-    u8 fill8[0x148 - 0xC];
+    struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
     struct unkSprite unk1A8;
     u32 unk1B0; // sprite count?
@@ -31,10 +31,10 @@ extern struct MenuItem gUnknown_80E6EAC[];
 
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void sub_8038440();
-extern void sub_8035CF4(u32 *, u32, u32);
-extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
-extern u8 sub_80130A8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
+extern u8 sub_80130A8(struct MenuStruct *);
+extern void sub_8013114(struct MenuStruct *, u32 *);
 extern void sub_80384D0();
 
 void sub_80382E4(s32 param_1)
@@ -54,10 +54,10 @@ void sub_80382E4(s32 param_1)
       // Caution!
       // The storage space is empty!
       // Please check again.
-    SetMenuItems(&gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
+    SetMenuItems(gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
                  0,4,0);
   }
-  sub_8035CF4(&gUnknown_203B360->unk8,0,1);
+  sub_8035CF4(gUnknown_203B360->unk8,0,1);
   gUnknown_203B360->currMenu = param_1;
   gUnknown_203B360->unk4 = 0;
   sub_8038440();
@@ -82,8 +82,8 @@ u32 sub_80383D4(void)
   nextMenu = MENU_NO_SCREEN_CHANGE;
 
   if (gUnknown_203B360->unk4 == 0){
-    if (sub_80130A8(&gUnknown_203B360->unk8) == '\0') {
-        sub_8013114(&gUnknown_203B360->unk8, &menuAction);
+    if (sub_80130A8(&gUnknown_203B360->unk8[0]) == '\0') {
+        sub_8013114(&gUnknown_203B360->unk8[0], &menuAction);
     }
     switch(menuAction)
     {

@@ -20,8 +20,7 @@ struct unkStruct_203B360
     // size: 0x1b4
     u32 currMenu;
     u32 unk4;
-    u32 unk8;
-    u8 fill8[0x148 - 0xC];
+    struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
     struct unkSprite unk1A8;
     u32 unk1B0; // Sprite count?
@@ -135,14 +134,14 @@ ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
 
 extern void ResetSprites(u32);
 extern void sub_8038440();
-extern void sub_8035CF4(u32 *, u32, u32);
-extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-extern u8 sub_80130A8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
+extern u8 sub_80130A8(struct MenuStruct *);
+extern void sub_8013114(struct MenuStruct *, u32 *);
 extern void sub_80384D0();
 extern void sub_8038830();
 extern void sub_80388C4(void);
-extern u8 sub_8012FD8(u32 *);
+extern u8 sub_8012FD8(struct MenuStruct *);
 extern void sub_8014114();
 extern void sub_80140F8(void);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
@@ -165,15 +164,15 @@ void CreateSaveMenu(s32 currMenu)
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
+    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
                  0,6,0);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
+    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
                  0,6,0);
   }
-  sub_8035CF4(&gUnknown_203B364->unk8,0,1);
+  sub_8035CF4(gUnknown_203B364->unk8,0,1);
   gUnknown_203B364->unk4 = 0;
   gUnknown_203B364->currMenu = currMenu;
   sub_8038830();
@@ -207,7 +206,7 @@ s32 UpdateSaveMenu(void)
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 0:
-        sub_8012FD8(&gUnknown_203B364->unk8);
+        sub_8012FD8(&gUnknown_203B364->unk8[0]);
         uStack_18 = 0;
         sub_80140F8();
         saveStatus = WriteSavetoPak(&uStack_18,sub_8011C1C());
@@ -217,18 +216,18 @@ s32 UpdateSaveMenu(void)
             case SAVE_COMPLETED:
                 sub_8035CC0(gUnknown_203B364->unk148,0);
                 if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                 gDeletedSaveMenuItems,0,6,0);
                 }
                 else {
-                    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                 gAdventureSavedMenuItems,0,6,0);
                 }
                 if (gUnknown_203B364->currMenu == 0x2d) {
                     gUnknown_203B364->unk4 = 1;
                     return MENU_COMMUNICATION_1;
                 }
-                sub_8035CF4(&gUnknown_203B364->unk8,0,1);
+                sub_8035CF4(gUnknown_203B364->unk8,0,1);
                 gUnknown_203B364->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
@@ -238,22 +237,22 @@ s32 UpdateSaveMenu(void)
             default:
                 sub_8035CC0(gUnknown_203B364->unk148,0);
                 if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeDeletedMenuItems,0,6,0);
                 }
                 else {
-                    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeSavedMenuItems,0,6,0);
                 }
-                sub_8035CF4(&gUnknown_203B364->unk8,0,1);
+                sub_8035CF4(gUnknown_203B364->unk8,0,1);
                 gUnknown_203B364->unk4 = 1;
                 break;
         }
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 1:
-        if (sub_80130A8(&gUnknown_203B364->unk8) == '\0') {
-            sub_8013114(&gUnknown_203B364->unk8,&action);
+        if (sub_80130A8(&gUnknown_203B364->unk8[0]) == '\0') {
+            sub_8013114(&gUnknown_203B364->unk8[0],&action);
         }
         switch(action)
         {

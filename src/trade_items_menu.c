@@ -87,14 +87,14 @@ extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
 extern u8 sub_801CB24();
 extern void sub_801B3C0(struct Item *);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
+extern u8 sub_8012FD8(struct MenuStruct *);
+extern void sub_8013114(struct MenuStruct *, s32 *);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();
 extern void sub_801B450();
 extern void sub_801CB5C(u32);
-extern void sub_8035CF4(u32 *, u32, u32);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern u32 sub_8013BBC(u32 *);
 extern void sub_80141B4(const u8 *, u32, u32, u32);
 
@@ -109,7 +109,7 @@ extern void sub_801C8C4(u32, u32, s32 *, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8011830(void);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
-extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
+extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void nullsub_23(u32);
 extern void xxx_call_start_bg_music(void);
 extern s32 sub_80381F4(u32, void *, void *);
@@ -312,8 +312,8 @@ void sub_8036674(void)
 
   menuAction = -1;
   sub_801CA08(0);
-  if (sub_8012FD8(&gTradeItemsMenu->unk134) == '\0') {
-    sub_8013114(&gTradeItemsMenu->unk134, &menuAction);
+  if (sub_8012FD8(&gTradeItemsMenu->unk44[3]) == '\0') {
+    sub_8013114(&gTradeItemsMenu->unk44[3], &menuAction);
   }
   switch(menuAction){
     case 3: // confirm
@@ -348,7 +348,7 @@ void sub_8036728(void)
         sub_800641C(gTradeItemsMenu->unk1E4, 1, 1);
         sub_801CB5C(1);
         if (gTradeItemsMenu->fallbackState == 0x13) {
-            sub_8035CF4(&gTradeItemsMenu->unk44, 3, 1);
+            sub_8035CF4(gTradeItemsMenu->unk44, 3, 1);
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         }
         else {
@@ -362,20 +362,20 @@ void sub_8036728(void)
 
 void sub_8036788(void)
 {
-  sub_8012FD8(&gTradeItemsMenu->unk134);
+  sub_8012FD8(&gTradeItemsMenu->unk44[3]);
   sub_801CA08(0);
   switch(sub_8013BBC(&gTradeItemsMenu->quantityToSend)){
     case 1:
         // When you change the #
         sub_801CCD8();
-        sub_8035CF4(&gTradeItemsMenu->unk44, 3, 0);
+        sub_8035CF4(gTradeItemsMenu->unk44, 3, 0);
         sub_8036F30();
         break;
     case 2:
         // If you back out of the # selection
         sub_8035CC0(gTradeItemsMenu->unk184, 2);
         sub_801CCD8();
-        sub_8035CF4(&gTradeItemsMenu->unk44, 3, 1);
+        sub_8035CF4(gTradeItemsMenu->unk44, 3, 1);
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 3:
@@ -634,10 +634,10 @@ void sub_8036B28(void)
         break;
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8006518(gTradeItemsMenu->unk184);
-        SetMenuItems(&gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
+        SetMenuItems(gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
                     gUnknown_80E6104,1,0,0);
         sub_801CCD8();
-        sub_8035CF4(&gTradeItemsMenu->unk44,3,1);
+        sub_8035CF4(gTradeItemsMenu->unk44,3,1);
         break;
     case TRADE_ITEMS_SEND_ITEM_NUMBER:
         sub_8036F74();
@@ -793,7 +793,7 @@ void sub_8036F74(void)
   sub_8006518(gTradeItemsMenu->unk184);
   sub_8036ECC(2, gTeamInventory_203B460->teamStorage[gTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
-  sub_8035CF4(&gTradeItemsMenu->unk44, 3, 0);
+  sub_8035CF4(gTradeItemsMenu->unk44, 3, 0);
   sub_8036F30();
 }
 

@@ -19,7 +19,7 @@ enum DebugMenuOptions
 struct DebugMenu
 {
     // size: 0x1A4
-    u8 fill0[0x140];
+    struct MenuStruct unk0[4];
     /* 0x140 */ struct UnkTextStruct2 unk140[4];
     u32 fill1A0;
 };

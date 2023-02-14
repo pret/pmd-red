@@ -18,12 +18,7 @@ struct LoadScreen
 {
     // size: 0x27c
     u32 currMenu;
-    u32 unk4;
-    u8 fill8[0x54 - 8];
-    u32 unk54;
-    u8 fill58[0xA4 - 0x58];
-    u32 unkA4;
-    u8 fillA8[0x144 - 0xA8];
+    struct MenuStruct unk4[4];
     struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
@@ -44,10 +39,10 @@ u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
-extern void sub_8035CF4(u32 *, u32, u32);
-extern void SetMenuItems(u32 *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
+extern u8 sub_8012FD8(struct MenuStruct *);
+extern void sub_8013114(struct MenuStruct *, u32 *);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
@@ -170,40 +165,40 @@ ALIGNED(4) const char load_screen_fill[] = "pksdir0";
 
 void CreateLoadScreen(u32 currMenu)
 {
-  int iVar8;
+  int index;
 
   if (gLoadScreen == NULL) {
     gLoadScreen = MemoryAlloc(sizeof(struct LoadScreen),8);
     MemoryFill8((u8 *)gLoadScreen,0,sizeof(struct LoadScreen));
   }
   gLoadScreen->currMenu = currMenu;
-  for(iVar8 = 0; iVar8 < 4; iVar8++){
-    gLoadScreen->unk144[iVar8] = gUnknown_80E75F8;
+  for(index = 0; index < 4; index++){
+    gLoadScreen->unk144[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
   sub_800641C(gLoadScreen->unk144,1,1);
-  SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,0,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,0,6,0);
         else
-            SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,0,6,0);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,0,6,0);
         break;
   }
-  SetMenuItems(&gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,1,2,0);
-  sub_8035CF4(&gLoadScreen->unk4,0,0);
-  sub_8035CF4(&gLoadScreen->unk4,1,0);
-  sub_8035CF4(&gLoadScreen->unk4,2,1);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,1,2,0);
+  sub_8035CF4(gLoadScreen->unk4,0,0);
+  sub_8035CF4(gLoadScreen->unk4,1,0);
+  sub_8035CF4(gLoadScreen->unk4,2,1);
   DrawLoadScreenText();
 }
 
@@ -225,9 +220,9 @@ u32 UpdateLoadScreenMenu(void)
 
   nextMenu = MENU_NO_SCREEN_CHANGE;
   menuAction = 4;
-  sub_8012FD8(&gLoadScreen->unk54);
-  if (sub_8012FD8(&gLoadScreen->unkA4) == '\0') {
-    sub_8013114(&gLoadScreen->unkA4,&menuAction);
+  sub_8012FD8(&gLoadScreen->unk4[1]);
+  if (sub_8012FD8(&gLoadScreen->unk4[2]) == '\0') {
+    sub_8013114(&gLoadScreen->unk4[2],&menuAction);
   }
 
   switch(menuAction)
