@@ -25,9 +25,9 @@ const u8 *GetDungeonName2(u8 dungeon)
     return gDungeonNames[dungeon].name2;
 }
 
-u8 GetStairDirection(u8 dungeon)
+bool8 IsStairDirectionUp(u8 dungeon)
 {
-    return gDungeons[dungeon].stairDirection;
+    return gDungeons[dungeon].stairDirectionUp;
 }
 
 s16 GetTurnLimit(u8 dungeon)
@@ -40,9 +40,9 @@ bool8 IsForceGameSave(u8 dungeon)
     return gDungeons[dungeon].forceGameSave;
 }
 
-u8 GetUnk9(u8 dungeon)
+u8 HasCheckpoint(u8 dungeon)
 {
-    return gDungeons[dungeon].unk9;
+    return gDungeons[dungeon].hasCheckpoint;
 }
 
 bool8 IsLevelResetTo1(u8 dungeon)
@@ -70,7 +70,7 @@ bool8 IsRecruitingEnabled(u8 dungeon)
     return gDungeons[dungeon].recruitingEnabled;
 }
 
-u8 sub_8090158(u8 dungeon)
+bool8 IsDungeonUnk8(u8 dungeon)
 {
     return gDungeons[dungeon].unk8;
 }
@@ -111,7 +111,7 @@ void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonL
 
 void PrintDungeonLocationtoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation)
 {
-    if(gDungeons[dungeonLocation->id].stairDirection != 0){
+    if(gDungeons[dungeonLocation->id].stairDirectionUp){
         sprintfStatic(buffer, gUnknown_8108F18, gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); //_F
     }
     else

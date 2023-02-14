@@ -11,7 +11,7 @@ struct DungeonName
 
 struct DungeonDataEntry
 {
-    /* 0x0 */ u8 stairDirection;
+    /* 0x0 */ bool8 stairDirectionUp;
     /* 0x1 */ bool8 leaderCanSwitch;
     /* 0x2 */ bool8 recruitingEnabled;
     /* 0x3 */ s8 rescuesAllowed;
@@ -19,8 +19,8 @@ struct DungeonDataEntry
     /* 0x5 */ u8 maxPartyMembers;
     /* 0x6 */ bool8 levelResetTo1;
     /* 0x7 */ bool8 moneyResetTo0;
-    /* 0x8 */ u8 unk8;
-    /* 0x9 */ u8 unk9;
+    /* 0x8 */ bool8 unk8;
+    /* 0x9 */ bool8 hasCheckpoint;
     /* 0xA */ bool8 forceGameSave;  // Whether to quicksave or not before entering.
     /* 0xB */ u8 HMMask; // HM mask for dungeon entry requirements (Fly, Dive, Waterfall, Surf, Water).
     /* 0xC */ s16 turnLimit;
@@ -34,6 +34,6 @@ u32 sub_80908D8(struct DungeonLocation *dungeon);
 u8 sub_8090910(struct DungeonLocation *dungeon, u32 param_2);
 bool8 sub_809095C(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
-u8 GetUnk9(u8 dungeon);
+bool8 HasCheckpoint(u8 dungeon);
 
 #endif //GUARD_DUNGEON_H

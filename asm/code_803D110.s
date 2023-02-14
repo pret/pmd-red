@@ -1363,7 +1363,7 @@ _0803DAFE:
 	ldr r1, _0803DBA8
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetStairDirection
+	bl IsStairDirectionUp
 	lsls r0, 24
 	ldr r6, _0803DBB0
 	cmp r0, 0
@@ -2196,7 +2196,7 @@ _0803E1BC:
 	ldr r1, _0803E1D8
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl GetStairDirection
+	bl IsStairDirectionUp
 	lsls r0, 24
 	movs r1, 0x16
 	cmp r0, 0
@@ -5603,7 +5603,7 @@ _0803FCB0:
 	ldr r3, _0803FCF8
 	adds r0, r2, r3
 	ldrb r0, [r0]
-	bl GetStairDirection
+	bl IsStairDirectionUp
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803FCFC

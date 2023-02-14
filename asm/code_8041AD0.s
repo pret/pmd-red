@@ -546,7 +546,7 @@ _08042694:
 	ldr r1, _080426C0
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetStairDirection
+	bl IsStairDirectionUp
 	lsls r0, 24
 	ldr r4, _080426C4
 	cmp r0, 0

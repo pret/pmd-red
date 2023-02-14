@@ -7423,7 +7423,7 @@ _080614C8:
 	ldr r3, _08061578
 	adds r0, r1, r3
 	ldrb r0, [r0]
-	bl sub_8090158
+	bl IsDungeonUnk8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806154C

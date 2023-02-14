@@ -541,9 +541,8 @@ gAvoidCaptureText: @ 8109CE4
 gFinalScenarioText: @ 8109CF4
 	.incbin "baserom.gba", 0x109CF4, 0x3C
 
-	.global gDungeons
-gDungeons: @ 8109D30
-	.incbin "baserom.gba", 0x109D30, 0x620
+        @ 8109D30
+        #include "dungeon/dungeon_data.inc"
 
 	.global gUnknown_810A350
 gUnknown_810A350: @ 810A350

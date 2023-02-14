@@ -131,7 +131,7 @@ bool8 sub_8083C88(u8 param_1)
 
   temp = &gDungeon->unk1CE98;
 
-  if (((GetUnk9(gDungeon->dungeonLocation.id) == 0) && 
+  if ((!HasCheckpoint(gDungeon->dungeonLocation.id) && 
       ((gDungeon->unk65C != 0) || (param_1 != 0))) ||
      (temp->unk14 != 0x227)) {
     return TRUE;
