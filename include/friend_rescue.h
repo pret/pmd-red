@@ -5,6 +5,7 @@
 #include "item.h"
 #include "pokemon.h"
 #include "wonder_mail.h"
+#include "menu.h"
 
 struct WonderMailStruct_203B33C
 {
@@ -21,13 +22,7 @@ struct WonderMailStruct_203B33C
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
     u8 unk218;
-    u8 padding7[3];
-    u32 unk21C;
-    u8 padding[0x7C];
-    u32 unk29C;
-    u8 padding6[0x6C];
-    u32 unk30C;
-    u8 padding8[0x4C];
+    struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
     struct Item unk41C;

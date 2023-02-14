@@ -1,3 +1,4 @@
+#include "gba/defines.h"
 #include "global.h"
 #include "input.h"
 #include "menu.h"
@@ -27,19 +28,115 @@ struct unkStruct_203B360
 };
 
 extern struct unkStruct_203B360 *gUnknown_203B364;
-extern struct UnkTextStruct2 gUnknown_80E6F20;
-extern struct UnkTextStruct2 gUnknown_80E6F38;
-extern struct MenuItem gUnknown_80E7090[];
-extern struct MenuItem gUnknown_80E6F50[];
-extern struct MenuItem gUnknown_80E70CC;
-extern struct MenuItem gUnknown_80E6FBC;
-extern struct MenuItem gUnknown_80E7114;
-extern struct MenuItem gUnknown_80E701C;
-extern u8 gUnknown_80E7178[];
+
+const struct UnkTextStruct2 gUnknown_80E6F20 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E6F38 =
+{
+    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00,
+    0x05, 0x00, 0x08, 0x00,
+    0x15, 0x05,
+    0x05, 0x00,
+    NULL
+};
+
+const u8 sUnknown_80E6F70[];
+const u8 sUnknown_80E6F90[];
+const u8 sUnknown_80E6FAC[];
+
+const struct MenuItem gSavingAdventureMenuItems[] = {
+    {sUnknown_80E6FAC, 4},
+    {sUnknown_80E6F90, 4},
+    {sUnknown_80E6F70, 4},
+    {NULL, 2}
+};
+ALIGNED(4) const u8 sUnknown_80E6F70[] = _("{CENTER_ALIGN}Don{APOSTROPHE}t turn off the power.");
+ALIGNED(4) const u8 sUnknown_80E6F90[] = _("{CENTER_ALIGN}Saving your adventure!");
+ALIGNED(4) const u8 sUnknown_80E6FAC[] = _("{CENTER_ALIGN}{COLOR_1 RED}Beware!{END_COLOR_TEXT_1} ");
+
+extern const u8 sUnknown_80E6FDC[];
+extern const u8 sUnknown_80E7008[];
+extern const u8 sUnknown_80E6FF0[];
+
+const struct MenuItem gAdventureSavedMenuItems[] = {
+    {sUnknown_80E7008, 4},
+    {sUnknown_80E6FF0, 4},
+    {sUnknown_80E6FDC, 4},
+    {NULL, 2}
+};
+ALIGNED(4) const u8 sUnknown_80E6FDC[] = _("{CENTER_ALIGN}has been saved.");
+ALIGNED(4) const u8 sUnknown_80E6FF0[] = _("{CENTER_ALIGN}Your adventure so far");
+ALIGNED(4) const u8 sUnknown_80E7008[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} ");
+
+extern const u8 sUnknown_80E7078[];
+extern const u8 sUnknown_80E7050[];
+extern const u8 sUnknown_80E703C[];
+
+const struct MenuItem gAdventureCouldNotBeSavedMenuItems[] = {
+    {sUnknown_80E7078, 4},
+    {sUnknown_80E7050, 4},
+    {sUnknown_80E703C, 4},
+    {NULL, 2}
+};
+ALIGNED(4) const u8 sUnknown_80E703C[] = _("{CENTER_ALIGN}Please try again.");
+ALIGNED(4) const u8 sUnknown_80E7050[] = _("{CENTER_ALIGN}Your adventure could not be saved.");
+ALIGNED(4) const u8 sUnknown_80E7078[] = _("{CENTER_ALIGN}{COLOR_1 RED}Save failed!{END_COLOR_TEXT_1} ");
+
+
+extern const u8 DeletingAdventure_80E70B0[];
+
+const struct MenuItem gDeletingYourAdventureMenuItems[] = {
+    {sUnknown_80E6FAC, 4},
+    {DeletingAdventure_80E70B0, 4},
+    {sUnknown_80E6F70, 4},
+    {NULL, 2}
+};
+ALIGNED(4) const u8 DeletingAdventure_80E70B0[] = _("{CENTER_ALIGN}Deleting your adventure!");
+
+extern const u8 Data_80E70EC[];
+extern const u8 AdventureDeleted_80E70F0[];
+
+const struct MenuItem gDeletedSaveMenuItems[] = {
+    {sUnknown_80E7008, 4},
+    {AdventureDeleted_80E70F0, 4},
+    {Data_80E70EC, 4},
+    {NULL, 2},
+};
+
+ALIGNED(4) const u8 Data_80E70EC[] = _("  ");
+ALIGNED(4) const u8 AdventureDeleted_80E70F0[] = _("{CENTER_ALIGN}Your adventure has been deleted.");
+
+extern const u8 sUnknown_80E7134[];
+extern const u8 sUnknown_80E715C[];
+
+const struct MenuItem gAdventureCouldNotBeDeletedMenuItems[] = {
+    {sUnknown_80E715C, 4},
+    {sUnknown_80E7134, 4},
+    {sUnknown_80E703C, 4},
+    {NULL, 2},
+};
+ALIGNED(4) const u8 sUnknown_80E7134[] = _("{CENTER_ALIGN}Your adventure could not be deleted.");
+ALIGNED(4) const u8 sUnknown_80E715C[] = _("{CENTER_ALIGN}{COLOR_1 RED}Deletion failed!{END_COLOR_TEXT_1} ");
+
+ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be written.\n"
+                                            "{CENTER_ALIGN}Please turn off the power and remove\n"
+                                            "{CENTER_ALIGN}and reinsert the DS Card.");
+
+ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
+
 extern void ResetSprites(u32);
 extern void sub_8038440();
 extern void sub_8035CF4(u32 *, u32, u32);
-extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(void *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern u8 sub_80130A8(u32 *);
 extern void sub_8013114(u32 *, u32 *);
 extern void sub_80384D0();
@@ -68,12 +165,12 @@ void CreateSaveMenu(s32 currMenu)
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gUnknown_80E7090,
+    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
                  0,6,0);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gUnknown_80E6F50,
+    SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
                  0,6,0);
   }
   sub_8035CF4(&gUnknown_203B364->unk8,0,1);
@@ -121,11 +218,11 @@ s32 UpdateSaveMenu(void)
                 sub_8035CC0(gUnknown_203B364->unk148,0);
                 if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
                     SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                &gUnknown_80E70CC,0,6,0);
+                                gDeletedSaveMenuItems,0,6,0);
                 }
                 else {
                     SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                &gUnknown_80E6FBC,0,6,0);
+                                gAdventureSavedMenuItems,0,6,0);
                 }
                 if (gUnknown_203B364->currMenu == 0x2d) {
                     gUnknown_203B364->unk4 = 1;
@@ -142,11 +239,11 @@ s32 UpdateSaveMenu(void)
                 sub_8035CC0(gUnknown_203B364->unk148,0);
                 if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
                     SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    &gUnknown_80E7114,0,6,0);
+                                    gAdventureCouldNotBeDeletedMenuItems,0,6,0);
                 }
                 else {
                     SetMenuItems(&gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    &gUnknown_80E701C,0,6,0);
+                                    gAdventureCouldNotBeSavedMenuItems,0,6,0);
                 }
                 sub_8035CF4(&gUnknown_203B364->unk8,0,1);
                 gUnknown_203B364->unk4 = 1;

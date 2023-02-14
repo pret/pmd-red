@@ -45,10 +45,9 @@ extern u32 sub_80154F0();
 extern void sub_80155F0();
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
-extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
+extern u8 sub_8012FD8(struct MenuStruct *);
+extern void sub_8013114(struct MenuStruct  *, s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801CB5C(u32);
@@ -56,7 +55,7 @@ extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801B3C0(struct Item *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
-extern void sub_8035CF4(u32 *, u32, u32);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern u8 sub_801CB24(void);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
@@ -232,7 +231,6 @@ extern void sub_8023868(u32, u32, u32, u32);
 extern u32 sub_801D008(void);
 extern void sub_8023DA4(void);
 extern void sub_8023C60(void);
-extern void sub_8035CF4(u32 *, u32, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_803092C(void);
 extern void sub_801CCD8(void);
@@ -240,7 +238,6 @@ extern void sub_80151C0(u32, u8 *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
 extern void xxx_call_start_bg_music(void);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
-extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void nullsub_23(u32);
 extern s32 sub_8037D64(u32, void *, void *);
@@ -828,8 +825,8 @@ void sub_8034074(void)
 
     menuAction = -1;
     sub_8030768(0);
-    if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
+        sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
@@ -865,7 +862,7 @@ void sub_8034130(void)
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == 0x7E)
             {
-                sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x1E);
             }
             else
@@ -911,8 +908,8 @@ void sub_8034254(void)
     menuAction = -1;
 
     sub_8023A94(0);
-    if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
+        sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
@@ -951,7 +948,7 @@ void sub_8034310(void)
             sub_8023B7C(1);
             if(gUnknown_203B33C->fallbackState == 0x7E)
             {
-                sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x27);
             }
             else
@@ -1106,8 +1103,8 @@ void sub_8034590(void)
     menuAction = -1;
 
     sub_8030768(0);
-    if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
+        sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
@@ -1143,7 +1140,7 @@ void sub_803464C(void)
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == 0x7E)
             {
-                sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x33);
             }
             else
@@ -1431,8 +1428,8 @@ void sub_8034A70(void)
 
     menuAction = -1;
     sub_8030768(0);
-    if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
+        sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
@@ -1468,7 +1465,7 @@ void sub_8034B2C(void)
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == 0x7E)
             {
-                sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x5D);
             }
             else
@@ -1518,7 +1515,7 @@ void sub_8034C38(void)
             sub_801CB5C(1);
             if(gUnknown_203B33C->fallbackState == 0x7E)
             {
-                sub_8035CF4(&gUnknown_203B33C->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
                 SetFriendRescueMenuState(0x60);
             }
             else
@@ -1536,8 +1533,8 @@ void sub_8034C98(void)
 
     menuAction = -1;
     sub_801CA08(0);
-    if(!sub_8012FD8(&gUnknown_203B33C->unk30C))
-        sub_8013114(&gUnknown_203B33C->unk30C, &menuAction);
+    if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
+        sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
