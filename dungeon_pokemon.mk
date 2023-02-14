@@ -8,4 +8,4 @@ DUNGEON_POKEMON := $(patsubst $(DUNGEONS_DIR)/%/,$(DUNGEONS_DIR)/%/pokemon_found
 dungeon_pokemon: $(DUNGEON_POKEMON);
 
 $(DUNGEONS_DIR)/%/pokemon_found.inc: $(DUNGEONS_DIR)/%/pokemon_found.json
-	$(DUNGEONJSON) dungeon pmd-red $<
+	$(DUNGEONJSON) dungeon_pokemon pmd-red $<

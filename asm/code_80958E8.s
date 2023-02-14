@@ -120,7 +120,7 @@ _08095BEE:
 	bl sub_803C37C
 _08095C10:
 	ldrb r0, [r4, 0x4]
-	bl GetMaxItemCount
+	bl GetMaxItemsAllowed
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _08095C28

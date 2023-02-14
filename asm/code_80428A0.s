@@ -636,7 +636,7 @@ _08042FB6:
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	ldrb r0, [r5, 0x4]
-	bl GetUnkC
+	bl GetTurnLimit
 	ldr r1, [r4]
 	ldr r5, _08043124
 	adds r2, r1, r5
@@ -646,7 +646,7 @@ _08042FB6:
 	strb r7, [r1]
 	mov r1, r8
 	ldrb r0, [r1, 0x4]
-	bl GetUnk3
+	bl GetRescuesAllowed
 	ldr r1, [r4]
 	ldr r2, _0804312C
 	adds r1, r2
@@ -896,7 +896,7 @@ _08043230:
 	ldr r5, _080432BC
 	adds r0, r5
 	ldrb r0, [r0]
-	bl GetLevelCondition
+	bl IsLevelResetTo1
 	lsls r0, 24
 	mov r4, r8
 	adds r4, 0x1C
@@ -1256,7 +1256,7 @@ _08043544:
 	ldr r1, _080435C4
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetUnkC
+	bl GetTurnLimit
 	ldr r2, [r5]
 	ldr r3, _080435C8
 	adds r1, r2, r3
@@ -2665,7 +2665,7 @@ sub_8044124:
 	ldr r1, _080441B0
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetMaxItemCount
+	bl GetMaxItemsAllowed
 	cmp r0, 0
 	bne _08044182
 	movs r3, 0
@@ -2714,7 +2714,7 @@ _08044182:
 	ldr r2, _080441B0
 	adds r0, r2
 	ldrb r0, [r0]
-	bl GetMoneyCondition
+	bl IsMoneyResetTo0
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0

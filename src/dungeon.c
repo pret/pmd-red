@@ -25,59 +25,59 @@ const u8 *GetDungeonName2(u8 dungeon)
     return gDungeonNames[dungeon].name2;
 }
 
-u8 GetStairDirection(u8 dungeon)
+bool8 IsStairDirectionUp(u8 dungeon)
 {
-    return gDungeons[dungeon].stairDirection;
+    return gDungeons[dungeon].stairDirectionUp;
 }
 
-s16 GetUnkC(u8 dungeon)
+s16 GetTurnLimit(u8 dungeon)
 {
-    return gDungeons[dungeon].timer;
+    return gDungeons[dungeon].turnLimit;
 }
 
-bool8 GetSaveBeforeEntering(u8 dungeon)
+bool8 IsForceGameSave(u8 dungeon)
 {
-    return gDungeons[dungeon].saveBeforeEntering;
+    return gDungeons[dungeon].forceGameSave;
 }
 
-u8 GetUnk9(u8 dungeon)
+u8 HasCheckpoint(u8 dungeon)
 {
-    return gDungeons[dungeon].unk9;
+    return gDungeons[dungeon].hasCheckpoint;
 }
 
-u8 GetLevelCondition(u8 dungeon)
+bool8 IsLevelResetTo1(u8 dungeon)
 {
-    return gDungeons[dungeon].levelCondition;
+    return gDungeons[dungeon].levelResetTo1;
 }
 
-u8 GetMaxItemCount(u8 dungeon)
+u8 GetMaxItemsAllowed(u8 dungeon)
 {
-    return gDungeons[dungeon].maxItemCount;
+    return gDungeons[dungeon].maxItemsAllowed;
 }
 
-u8 GetMoneyCondition(u8 dungeon)
+bool8 IsMoneyResetTo0(u8 dungeon)
 {
-    return gDungeons[dungeon].moneyCondition;
+    return gDungeons[dungeon].moneyResetTo0;
 }
 
-s8 GetUnk3(u8 dungeon)
+s8 GetRescuesAllowed(u8 dungeon)
 {
-    return gDungeons[dungeon].unk3;
+    return gDungeons[dungeon].rescuesAllowed;
 }
 
-bool8 GetRecruitable(u8 dungeon)
+bool8 IsRecruitingEnabled(u8 dungeon)
 {
-    return gDungeons[dungeon].isRecruitable;
+    return gDungeons[dungeon].recruitingEnabled;
 }
 
-u8 sub_8090158(u8 dungeon)
+bool8 IsDungeonUnk8(u8 dungeon)
 {
     return gDungeons[dungeon].unk8;
 }
 
-s16 sub_8090168(u8 dungeon)
+s16 GetRandomMovementChance(u8 dungeon)
 {
-    return gDungeons[dungeon].unkE;
+    return gDungeons[dungeon].randomMovementChance;
 }
 
 bool8 sub_809017C(struct DungeonLocation* a1) {
@@ -111,7 +111,7 @@ void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonL
 
 void PrintDungeonLocationtoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation)
 {
-    if(gDungeons[dungeonLocation->id].stairDirection != 0){
+    if(gDungeons[dungeonLocation->id].stairDirectionUp){
         sprintfStatic(buffer, gUnknown_8108F18, gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); //_F
     }
     else
@@ -159,7 +159,7 @@ void RestoreDungeonLocation(struct unkStruct_8094924* r0, struct DungeonLocation
     RestoreIntegerBits(r0, &r1->floor, 0x7);
 }
 
-u8 GetDungeonUnk1(u8 dungeon)
+bool8 CanLeaderSwitch(u8 dungeon)
 {
-    return gDungeons[dungeon].unk1;
+    return gDungeons[dungeon].leaderCanSwitch;
 }

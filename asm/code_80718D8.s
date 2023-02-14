@@ -224,7 +224,7 @@ _08071CDC:
 	ldr r2, _08071D28
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_8090168
+	bl GetRandomMovementChance
 	lsls r0, 16
 	asrs r0, 16
 	cmp r4, r0

@@ -175,6 +175,7 @@ include dungeon_trap.mk
 include data_monster.mk
 include data_item.mk
 include data_move.mk
+include data_dungeon.mk
 include graphics.mk
 
 $(TOOLDIRS):
@@ -197,6 +198,7 @@ tidy:
 	$(RM) -f $(MONSTER_DATA)
 	$(RM) -f $(LEARNSET_DATA)
 	$(RM) -f $(LEARNSET_PTRS)
+	$(RM) -f $(DUNGEON_DATA)
 	$(RM) -f $(DUNGEON_FLOOR)
 	$(RM) -f $(DUNGEON_POKEMON)
 	$(RM) -f $(DUNGEON_TRAP)
@@ -220,7 +222,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
 	@$(call scaninc,$(INCLUDE_PATHS))
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor dungeon_trap data_monster data_item data_move data_learnset data_learnset_ptrs
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor dungeon_trap data_monster data_item data_move data_learnset data_learnset_ptrs data_dungeon
 	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(DATA_ASM_BUILDDIR)/$*.i.s
 	@$(PREPROC) $(DATA_ASM_BUILDDIR)/$*.i.s charmap.txt > $(DATA_ASM_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(DATA_ASM_BUILDDIR)/$*.s

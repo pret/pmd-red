@@ -185,8 +185,8 @@ struct EntityInfo
     /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
     u8 fill113;
-    // When non-zero, an AI Pokémon will move in a random direction every turn.
-    // Unclear where this is set in-game; it is not set by statuses (e.g., confusion) or mission clients.
+    // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
+    // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
     /* 0x118 */ struct Move moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
