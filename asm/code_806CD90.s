@@ -2030,7 +2030,7 @@ _0806E040:
 	ldr r1, _0806E0C0
 	adds r0, r1
 	ldrb r0, [r0]
-	bl CanLeaderSwitch
+	bl DoEnemiesEvolveWhenKOed
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E066

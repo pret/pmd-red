@@ -765,17 +765,17 @@ string generate_dungeon_data_text(Json data) {
     text << "gDungeons:";
     for (Json data_entry : data.array_items()) {
         text << read_json_bool(data_entry["stairDirectionUp"])
-            << read_json_bool(data_entry["leaderCanSwitch"])
+            << read_json_bool(data_entry["enemiesEvolveWhenKOed"])
             << read_json_bool(data_entry["recruitingEnabled"])
             << read_json_int(data_entry["rescuesAllowed"], 1)
             << read_json_int(data_entry["maxItemsAllowed"], 1)
             << read_json_int(data_entry["maxPartyMembers"], 1)
             << read_json_bool(data_entry["levelResetTo1"])
-            << read_json_bool(data_entry["moneyResetTo0"])
-            << read_json_bool(data_entry["unk8"])
+            << read_json_bool(data_entry["keepMoney"])
+            << read_json_bool(data_entry["leaderCanSwitch"])
             << read_json_bool(data_entry["hasCheckpoint"])
-            << read_json_bool(data_entry["forceGameSave"])
-            << read_json_int(data_entry["HMMask"], 1)
+            << read_json_bool(data_entry["enterWithoutGameSave"])
+            << read_json_binary(data_entry["HMMask"], 1)
             << read_json_int(data_entry["turnLimit"], 2)
             << read_json_int(data_entry["randomMovementChance"], 2);
     }

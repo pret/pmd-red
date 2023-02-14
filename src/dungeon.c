@@ -35,9 +35,9 @@ s16 GetTurnLimit(u8 dungeon)
     return gDungeons[dungeon].turnLimit;
 }
 
-bool8 IsForceGameSave(u8 dungeon)
+bool8 IsEnterWithoutGameSave(u8 dungeon)
 {
-    return gDungeons[dungeon].forceGameSave;
+    return gDungeons[dungeon].enterWithoutGameSave;
 }
 
 u8 HasCheckpoint(u8 dungeon)
@@ -55,9 +55,9 @@ u8 GetMaxItemsAllowed(u8 dungeon)
     return gDungeons[dungeon].maxItemsAllowed;
 }
 
-bool8 IsMoneyResetTo0(u8 dungeon)
+bool8 IsKeepMoney(u8 dungeon)
 {
-    return gDungeons[dungeon].moneyResetTo0;
+    return gDungeons[dungeon].keepMoney;
 }
 
 s8 GetRescuesAllowed(u8 dungeon)
@@ -70,9 +70,9 @@ bool8 IsRecruitingEnabled(u8 dungeon)
     return gDungeons[dungeon].recruitingEnabled;
 }
 
-bool8 IsDungeonUnk8(u8 dungeon)
+bool8 CanLeaderSwitch(u8 dungeon)
 {
-    return gDungeons[dungeon].unk8;
+    return gDungeons[dungeon].leaderCanSwitch;
 }
 
 s16 GetRandomMovementChance(u8 dungeon)
@@ -159,7 +159,7 @@ void RestoreDungeonLocation(struct unkStruct_8094924* r0, struct DungeonLocation
     RestoreIntegerBits(r0, &r1->floor, 0x7);
 }
 
-bool8 CanLeaderSwitch(u8 dungeon)
+bool8 DoEnemiesEvolveWhenKOed(u8 dungeon)
 {
-    return gDungeons[dungeon].leaderCanSwitch;
+    return gDungeons[dungeon].enemiesEvolveWhenKOed;
 }
