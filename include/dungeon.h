@@ -12,16 +12,16 @@ struct DungeonName
 struct DungeonDataEntry
 {
     /* 0x0 */ bool8 stairDirectionUp;
-    /* 0x1 */ bool8 leaderCanSwitch;
+    /* 0x1 */ bool8 unk1;
     /* 0x2 */ bool8 recruitingEnabled;
     /* 0x3 */ s8 rescuesAllowed;
     /* 0x4 */ u8 maxItemsAllowed;
     /* 0x5 */ u8 maxPartyMembers;
     /* 0x6 */ bool8 levelResetTo1;
-    /* 0x7 */ bool8 moneyResetTo0;
-    /* 0x8 */ bool8 unk8;
+    /* 0x7 */ bool8 keepMoney;
+    /* 0x8 */ bool8 leaderCanSwitch;
     /* 0x9 */ bool8 hasCheckpoint;
-    /* 0xA */ bool8 forceGameSave;  // Whether to quicksave or not before entering.
+    /* 0xA */ bool8 enterWithoutGameSave; // If false, the dungeon will force a quicksave before entering.
     /* 0xB */ u8 HMMask; // HM mask for dungeon entry requirements (Fly, Dive, Waterfall, Surf, Water).
     /* 0xC */ s16 turnLimit;
     /* 0xE */ s16 randomMovementChance; // The chance that a wild Pokémon's moveRandomly flag will be set when spawning, causing them to move randomly inside a room instead of exploring rooms.

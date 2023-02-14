@@ -2714,7 +2714,7 @@ _08044182:
 	ldr r2, _080441B0
 	adds r0, r2
 	ldrb r0, [r0]
-	bl IsMoneyResetTo0
+	bl IsKeepMoney
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
