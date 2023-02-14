@@ -159,7 +159,7 @@ void RestoreDungeonLocation(struct unkStruct_8094924* r0, struct DungeonLocation
     RestoreIntegerBits(r0, &r1->floor, 0x7);
 }
 
-bool8 IsDungeonUnk1(u8 dungeon)
+bool8 DoEnemiesEvolveWhenKOed(u8 dungeon)
 {
-    return gDungeons[dungeon].unk1;
+    return gDungeons[dungeon].enemiesEvolveWhenKOed;
 }

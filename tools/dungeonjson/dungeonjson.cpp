@@ -765,7 +765,7 @@ string generate_dungeon_data_text(Json data) {
     text << "gDungeons:";
     for (Json data_entry : data.array_items()) {
         text << read_json_bool(data_entry["stairDirectionUp"])
-            << read_json_bool(data_entry["unk1"])
+            << read_json_bool(data_entry["enemiesEvolveWhenKOed"])
             << read_json_bool(data_entry["recruitingEnabled"])
             << read_json_int(data_entry["rescuesAllowed"], 1)
             << read_json_int(data_entry["maxItemsAllowed"], 1)
