@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "constants/mailbox.h"
 #include "code_800D090.h"
 #include "input.h"
@@ -196,13 +197,13 @@ u32 sub_802C1E4(u8 param_1)
   else {
     switch(GetKeyPress(&gUnknown_203B2E0->unk8))
     {
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
-        case 4:
+        case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
             return 4;
         default:

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/colors.h"
 #include "constants/dungeon.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "dungeon.h"
 #include "input.h"
@@ -215,10 +216,10 @@ u32 sub_80303AC(u8 param_1)
   }
   switch(GetKeyPress(&gUnknown_203B31C->unk30))
   {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
         PlayMenuSoundEffect(0);
         return 3;
     default:

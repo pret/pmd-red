@@ -1,6 +1,6 @@
 #include "global.h"
+#include "constants/input.h"
 #include "input.h"
-#include "gba/io_reg.h"
 #include "memory.h"
 #include "text.h"
 
@@ -94,10 +94,10 @@ u32 HandleAdventureLogInput(u8 param_1)
   else {
     switch(GetKeyPress(gAdventureLog))
     {
-        case B_BUTTON:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case A_BUTTON:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
         default:

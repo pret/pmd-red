@@ -1,0 +1,25 @@
+#ifndef GUARD_CONSTANTS_INPUT_H
+#define GUARD_CONSTANTS_INPUT_H
+
+#define INPUT_NONE 0
+#define INPUT_A_BUTTON 1
+#define INPUT_B_BUTTON 2
+#define INPUT_SELECT_BUTTON 3
+#define INPUT_START_BUTTON 4
+#define INPUT_L_BUTTON 5
+#define INPUT_R_BUTTON 6
+#define INPUT_DPAD_UP 7
+#define INPUT_DPAD_DOWN 8
+#define INPUT_DPAD_LEFT 9
+#define INPUT_DPAD_RIGHT 10
+
+// When R button is pressed in combination with other keys
+#define INPUT_R_A_BUTTONS 11
+#define INPUT_R_DPAD_UP_BUTTONS 12
+#define INPUT_R_DPAD_DOWN_BUTTONS 13
+#define INPUT_R_DPAD_LEFT_BUTTONS 14
+#define INPUT_R_DPAD_RIGHT_BUTTONS 15
+
+
+#endif // GUARD_CONSTANTS_INPUT_H
+

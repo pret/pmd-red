@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "file_system.h"
 #include "memory.h"
 #include "pokemon.h"
@@ -527,10 +528,10 @@ u32 sub_8019EDC(u8 r0)
     {
         switch(GetKeyPress(gUnknown_203B214))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 item = GetKecleonShopItem(sub_8019FB0());
                 slot.id = item->id;
                 slot.quantity = item->quantity;
@@ -543,7 +544,7 @@ u32 sub_8019EDC(u8 r0)
                     PlayMenuSoundEffect(0);
                 }
                  return 3;
-            case 4:
+            case INPUT_START_BUTTON:
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
@@ -737,13 +738,12 @@ u32 sub_801A2A8(u8 r0)
     {
         switch(GetKeyPress(gUnknown_203B21C))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 item = GetKecleonWareItem(sub_801A37C());
 
-                // NOTE: needs seperate vars to match
                 slot.id = item->id;
                 slot.quantity = item->quantity;
 
@@ -756,7 +756,7 @@ u32 sub_801A2A8(u8 r0)
                     PlayMenuSoundEffect(0);
                 }
                  return 3;
-            case 4:
+            case INPUT_START_BUTTON:
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
@@ -958,10 +958,10 @@ u32 sub_801A6E8(u8 param_1)
     return 0;
   }
   switch(GetKeyPress(&gUnknown_203B224->unk54)) {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
         switch(gUnknown_203B224->unk0) {
             case 0:
             case 1:
@@ -989,11 +989,11 @@ u32 sub_801A6E8(u8 param_1)
                 break;
         }
         return 3;
-    case 4:
+    case INPUT_START_BUTTON:
         PlayMenuSoundEffect(4);
         return 4;
-    case 5:
-    case 6:
+    case INPUT_L_BUTTON:
+    case INPUT_R_BUTTON:
         if (gUnknown_203B224->unk0 != 3) goto _0801A87C;
         index = sub_801A8AC();
         if ((gUnknown_203B224->unk4[index] != 0) || (sub_801ADA0(index) != 0)) {
@@ -1008,7 +1008,7 @@ u32 sub_801A6E8(u8 param_1)
             PlayMenuSoundEffect(2);
             goto _0801A87C;
         }
-    case 3:
+    case INPUT_SELECT_BUTTON:
         if (gUnknown_203B224->unk0 != 2) {
             PlayMenuSoundEffect(5);
             Kecleon_SortItems();

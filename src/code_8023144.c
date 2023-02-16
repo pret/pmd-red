@@ -1,3 +1,4 @@
+#include "constants/input.h"
 #include "global.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
@@ -299,13 +300,13 @@ u8 sub_8023278(u8 param_1)
   }
   switch(GetKeyPress(&gUnknown_3001B5C->unk35C))
   {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
       PlayMenuSoundEffect(0);
       return 3;
-    case 3:
+    case INPUT_SELECT_BUTTON:
         PlayMenuSoundEffect(5);
         if (temp = gUnknown_3001B5C->unk4, iVar3 = 1, temp < 2) {
             iVar3 = temp + 1;

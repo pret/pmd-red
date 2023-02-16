@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "pokemon.h"
 #include "input.h"
@@ -244,10 +245,10 @@ u8 sub_80244E4(void)
 { 
   switch(GetKeyPress(gUnknown_203B2AC))
   {
-      case 2:
+      case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-      case 1:
+      case INPUT_A_BUTTON:
         PlayMenuSoundEffect(0);
         return 3;
       default:

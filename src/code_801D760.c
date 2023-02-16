@@ -1,6 +1,7 @@
 #include "global.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
+#include "constants/input.h"
 #include "file_system.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -394,10 +395,10 @@ u32 sub_801DA78(void)
 {
     switch(GetKeyPress(gUnknown_203B258))
     {
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             return 3;
         default:
             if(sub_80138B8(gUnknown_203B258, 1) != 0)

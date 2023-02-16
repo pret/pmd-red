@@ -6,7 +6,9 @@ struct UnkTextStruct1 {
     u16 unk04;
     u8 fill06[2];
     u16 unk08;
-    u8 fill04[0x3c];
+    u16 fillA;
+    u32 unkC;
+    u8 fill04[0x36];
     u8 unk46;
 };
 

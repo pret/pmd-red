@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "memory.h"
 #include "text.h"
 #include "input.h"
@@ -798,10 +799,10 @@ u32 sub_802F8A0(u8 r0)
     {
         switch(GetKeyPress(&gUnknown_203B314->unkBC))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 PlayMenuSoundEffect(0);
                 return 3;
             default:
