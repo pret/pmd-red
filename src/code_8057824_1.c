@@ -392,7 +392,7 @@ extern u8 JirachiFriendAreaSearch(void);
 extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
-extern void sub_8052D44(u8 *, struct Entity *, struct Entity *);
+extern void sub_8052D44(s16 *, struct Entity *, struct Entity *);
 extern void sub_8097FD0(u32);
 extern void SetMessageArgument(u8 *, struct Entity *, u32);
 extern struct Entity *GetLeader();
@@ -513,7 +513,7 @@ void ZapdosReFightDialogue(void)
   DisplayDungeonDialogue(&gZapdosReFightDialogue_3);
   ZapdosScreenFlash(2);
   DisplayDungeonDialogue(&gZapdosReFightDialogue_4);
-  SetupBossFightHP(ZapdosEntity,300,0xb);
+  SetupBossFightHP(ZapdosEntity,300,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -541,7 +541,7 @@ void ZapdosPostStoryPreFightDialogue(void)
     ZapdosScreenFlash(2);
     DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
-    SetupBossFightHP(ZapdosEntity,300,0xb);
+    SetupBossFightHP(ZapdosEntity,300,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -719,7 +719,7 @@ void MoltresPreFightDialogue(void)
   MoltresScreenFlash2(0xb,6);
   DisplayDungeonDialogue(&gMoltresPreFightDialogue_12);
   sub_803E708(10,0x46);
-  SetupBossFightHP(MoltresEntity,400,0xb);
+  SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -762,7 +762,7 @@ void MoltresReFightDialogue(void)
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gMoltresReFightDialogue_5);
   sub_803E708(10,0x46);
-  SetupBossFightHP(MoltresEntity,400,0xb);
+  SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -800,7 +800,7 @@ void MoltresPostStoryPreFightDialogue(void)
     MoltresScreenFlash2(0xb,6);
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
-    SetupBossFightHP(MoltresEntity,400,0xb);
+    SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -1147,7 +1147,7 @@ void ArticunoPreFightDialogue(void)
   DisplayDungeonDialogue(&gArticunoPreFightDialogue_12);
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x10,0x46);
-  SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
+  SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -1169,7 +1169,7 @@ void ArticunoReFightDialogue(void)
   DisplayDungeonDialogue(&gArticunoReFightDialogue_3);
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x28,0x46);
-  SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
+  SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -1205,7 +1205,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_5);
     sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
     sub_803E708(0x28,0x46);
-    SetupBossFightHP(ArticunoEntity,0x1c2,0xb);
+    SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -1468,7 +1468,7 @@ void GroudonPreFightDialogue(void)
   sub_8086A54(GroudonEntity);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
-  SetupBossFightHP(GroudonEntity,500,0xb);
+  SetupBossFightHP(GroudonEntity,500,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -1500,7 +1500,7 @@ void GroudonReFightDialogue(void)
   sub_8086A54(GroudonEntity);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
-  SetupBossFightHP(GroudonEntity,500,0xb);
+  SetupBossFightHP(GroudonEntity,500,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -1528,7 +1528,7 @@ void GroudonPostStoryPreFightDialogue(void)
     GroudonScreenFlash();
     DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_4);
     sub_803E708(10,0x46);
-    SetupBossFightHP(GroudonEntity,500,0xb);
+    SetupBossFightHP(GroudonEntity,500,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -1672,14 +1672,14 @@ void MagmaCavernMidDialogue(void)
   struct Entity * PartnerEntity;
   struct Entity * iVar3;
   struct Entity * iVar4;
-  u8 auStack36 [4];
+  s16 IDStack [2];
   struct Position32 local_20;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
   iVar3 = GetEntityFromClientType(0xb);
   iVar4 = GetEntityFromClientType(0xc);
-  sub_8052D44(auStack36,LeaderEntity,PartnerEntity);
+  sub_8052D44(IDStack,LeaderEntity,PartnerEntity);
   sub_8086448();
   SpriteLookAroundEffect(PartnerEntity);
   // Let's see..
@@ -1970,7 +1970,7 @@ void RayquazaPreFightDialogue(void)
   DisplayDungeonDialogue(&gRayquazaPreFightDialogue_10);
   RayquazaScreenFlash();
   DisplayDungeonDialogue(&gRayquazaPreFightDialogue_11);
-  SetupBossFightHP(RayquazaEntity,600,0x20);
+  SetupBossFightHP(RayquazaEntity,600,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -1994,7 +1994,7 @@ void RayquazaReFightDialogue(void)
   DisplayDungeonDialogue(&gRayquazaReFightDialogue_3);
   RayquazaScreenFlash();
   DisplayDungeonDialogue(&gRayquazaReFightDialogue_4);
-  SetupBossFightHP(RayquazaEntity,600,0x20);
+  SetupBossFightHP(RayquazaEntity,600,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2020,7 +2020,7 @@ void RayquazaPostStoryPreFightDialogue(void)
     DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_4);
     RayquazaScreenFlash();
     DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_5);
-    SetupBossFightHP(RayquazaEntity,600,0xb);
+    SetupBossFightHP(RayquazaEntity,600,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -2267,7 +2267,7 @@ void MewtwoPreFightDialogue(void)
   MewtwoScreenFlash();
   DisplayDungeonDialogue(&gMewtwoPreFightDialogue_5);
   sub_803E708(10,0x46);
-  SetupBossFightHP(MewtwoEntity,900,0x20);
+  SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2293,7 +2293,7 @@ void MewtwoReFightDialogue(void)
     DisplayDungeonDialogue(&gMewtwoReFightDialogue_3);
     MewtwoScreenFlash();
     DisplayDungeonDialogue(&gMewtwoReFightDialogue_4);
-    SetupBossFightHP(MewtwoEntity,900,0x20);
+    SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -2406,7 +2406,7 @@ void EnteiPreFightDialogue(void)
   EnteiScreenFlash();
   DisplayDungeonDialogue(&gEnteiPreFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(EnteiEntity,600,0xb);
+  SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2424,7 +2424,7 @@ void EnteiReFightDialogue(void)
   EnteiScreenFlash();
   DisplayDungeonDialogue(&gEnteiReFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(EnteiEntity,600,0xb);
+  SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2446,7 +2446,7 @@ void EnteiPostStoryPreFightDialogue(void)
     EnteiScreenFlash();
     DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_3);
     sub_803E708(10,70);
-    SetupBossFightHP(EnteiEntity,600,0xb);
+    SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -2559,7 +2559,7 @@ void RaikouPreFightDialogue(void)
   RaikouScreenFlash();
   DisplayDungeonDialogue(&gRaikouPreFightDialogue_6);
   sub_803E708(10,70);
-  SetupBossFightHP(RaikouEntity,0x28a,0xb);
+  SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2579,7 +2579,7 @@ void RaikouReFightDialogue(void)
   RaikouScreenFlash();
   DisplayDungeonDialogue(&gRaikouReFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(RaikouEntity,0x28a,0xb);
+  SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2602,7 +2602,7 @@ void RaikouPostStoryPreFightDialogue(void)
     RaikouScreenFlash();
     DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_3);
     sub_803E708(10,70);
-    SetupBossFightHP(RaikouEntity,0x28a,0xb);
+    SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -2717,7 +2717,7 @@ void SuicunePreFightDialogue(void)
   SuicuneScreenFlash();
   DisplayDungeonDialogue(&gSuicunePreFightDialogue_7);
   sub_803E708(10,70);
-  SetupBossFightHP(SuicuneEntity,0x28a,0xb);
+  SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2734,7 +2734,7 @@ void SuicuneReFightDialogue(void)
   SuicuneScreenFlash();
   DisplayDungeonDialogue(&gSuicuneReFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(SuicuneEntity,0x28a,0xb);
+  SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2755,7 +2755,7 @@ void SuicunePostStoryPreFightDialogue(void)
     SuicuneScreenFlash();
     DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_3);
     sub_803E708(10,70);
-    SetupBossFightHP(SuicuneEntity,0x28a,0xb);
+    SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -2898,7 +2898,7 @@ void HoOhPreFightDialogue(void)
   HoOhScreenFlash();
   DisplayDungeonDialogue(&gHoOhPreFightDialogue_6);
   sub_803E708(10,70);
-  SetupBossFightHP(HoOhEntity,800,0x20);
+  SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -2934,7 +2934,7 @@ void HoOhReFightDialogue(void)
     HoOhScreenFlash();
     DisplayDungeonDialogue(&HoOhReFightDialogue_4);
     sub_803E708(10,70);
-    SetupBossFightHP(HoOhEntity,800,0x20);
+    SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
 }
@@ -3071,7 +3071,7 @@ void LatiosPreFightDialogue(void)
   LatiosScreenFlash();
   DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(LatiosEntity,600,0xb);
+  SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -3090,7 +3090,7 @@ void LatiosReFightDialogue(void)
   LatiosScreenFlash();
   DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
   sub_803E708(10,70);
-  SetupBossFightHP(LatiosEntity,600,0xb);
+  SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -3207,17 +3207,17 @@ void sub_808ADCC(void)
 void sub_808AE54(char param_1,char param_2,u32 *param_3)
 {
   struct Entity * LeaderEntity;
-  u8 auStack24 [4];
-  struct Item auStack20;
+  s16 IDStack[2];
+  struct Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack24,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ROCK_PART,0);
-      sub_80464C8(GetLeader(),param_3,&auStack20);
+      xxx_init_itemslot_8090A8C(&item,ITEM_ROCK_PART,0);
+      sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
@@ -3230,17 +3230,17 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
 void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 {
   struct Entity * LeaderEntity;
-  u8 auStack24 [4];
-  struct Item auStack20;
+  s16 IDStack[2];
+  struct Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack24,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,ITEM_ICE_PART,0);
-      sub_80464C8(GetLeader(),param_3,&auStack20);
+      xxx_init_itemslot_8090A8C(&item,ITEM_ICE_PART,0);
+      sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
@@ -3252,17 +3252,17 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 {
   struct Entity * LeaderEntity;
-  u8 auStack24 [4];
-  struct Item auStack20;
+  s16 IDStack[2];
+  struct Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack24,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(0);
     if (sub_8098100(0x1d) == 0) {
-      xxx_init_itemslot_8090A8C(&auStack20,ITEM_STEEL_PART,0);
-      sub_80464C8(GetLeader(),param_3, &auStack20);
+      xxx_init_itemslot_8090A8C(&item,ITEM_STEEL_PART,0);
+      sub_80464C8(GetLeader(),param_3, &item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item
@@ -3274,10 +3274,10 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 void sub_808AFB0(char param_1)
 {
   struct Entity * LeaderEntity;
-  u8 auStack12 [4];
+  s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack12,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
@@ -3292,10 +3292,10 @@ void sub_808AFB0(char param_1)
 void sub_808B030(char param_1)
 {
   struct Entity * LeaderEntity;
-  u8 auStack12 [4];
+  s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack12,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
@@ -3310,10 +3310,10 @@ void sub_808B030(char param_1)
 void sub_808B0B0(char param_1)
 {
   struct Entity * LeaderEntity;
-  u8 auStack12 [4];
+  s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
-  sub_8052D44(auStack12,LeaderEntity,0);
+  sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
@@ -3482,19 +3482,19 @@ void SetupRegiFacingDirection(struct Entity *regiEntity)
 
 void SetupRegirockFightHP(struct Entity *r0)
 {
-    SetupBossFightHP(r0, 450, 0xB);
+    SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 
 void SetupRegiceFightHP(struct Entity *r0)
 {
-    SetupBossFightHP(r0, 450, 0xB);
+    SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 
 void SetupRegisteelFightHP(struct Entity *r0)
 {
-    SetupBossFightHP(r0, 450, 0xB);
+    SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 void sub_808B2F4(void)
@@ -3653,7 +3653,7 @@ void JirachiPreFightDialogue(void)
   sub_803E708(10,70);
   DisplayDungeonDialogue(&gJirachiPreFightDialogue_4);
   sub_803E708(10,70);
-  SetupBossFightHP(JirachiEntity,0x15e,0x20);
+  SetupBossFightHP(JirachiEntity,0x15e,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
@@ -3692,12 +3692,12 @@ void JirachiWish(void)
   struct Position *LeaderPos;
   struct Entity *LeaderEntity;
   s32 wishChoice;
-  s32 iVar4;
-  u32 uVar6;
-  s32 iVar9;
-  struct Item auStack152 [9];
-  struct Item auStack116 [9];
-  struct Item auStack80 [9];
+  s32 counter;
+  u32 direction;
+  s32 index;
+  struct Item money [9];
+  struct Item itemStack [9];
+  struct Item strengthItems [9];
   s32 local_2c;
   s32 local_28;
   s32 local_24;
@@ -3751,12 +3751,12 @@ void JirachiWish(void)
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
 
-      for(iVar4 = 0; iVar4 < 6; iVar4 = r8)
+      for(counter = 0; counter < 6; counter = r8)
       {
-        r8 = iVar4 + 1;
-        for(iVar9 = 0; iVar9 < 9; iVar9++)
+        r8 = counter + 1;
+        for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&auStack152[iVar9], 0x69, 0);
+          sub_8045C28(&money[index], 0x69, 0);
         }
         temp = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
         local_2c &= 0xffff0000;
@@ -3768,7 +3768,7 @@ void JirachiWish(void)
         if ((GetTileSafe((s16)local_2c, local_2c >> 16)->terrainType & 3) != 0) {
           PlaySoundEffect(0x14c);
           sub_808BB3C((s16 *)&local_2c);
-          sub_8046860(JirachiEntity,&local_2c,auStack152,9);
+          sub_8046860(JirachiEntity,&local_2c,money,9);
         }
       }
       JirachiEntity->info->unk15D  = 0;
@@ -3779,14 +3779,14 @@ void JirachiWish(void)
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
 
-      for(iVar4 = 0; iVar4 < 6; iVar4++)
+      for(counter = 0; counter < 6; counter++)
       {
 #ifndef NONMATCHING
         asm("":::"sl");
 #endif
-        for(iVar9 = 0; iVar9 < 9; iVar9++)
+        for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&auStack116[iVar9], sub_803D73C(0),0);
+          sub_8045C28(&itemStack[index], sub_803D73C(0),0);
         }
         temp2 = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
         local_28 &= 0xffff0000;
@@ -3798,7 +3798,7 @@ void JirachiWish(void)
         if ((GetTileSafe((s16)local_28, local_28 >> 16)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
           sub_808BB3C((s16 *)&local_28);
-          sub_8046860(JirachiEntity,&local_28,auStack116,9);
+          sub_8046860(JirachiEntity,&local_28,itemStack,9);
         }
       }
       JirachiEntity->info->unk15D = 0;
@@ -3838,12 +3838,12 @@ void JirachiWish(void)
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
 
-        for(iVar4 = 0; iVar4 < 5; iVar4++)
+        for(counter = 0; counter < 5; counter++)
         {
 
-          for(iVar9 = 0; iVar9 < 4; iVar9++)
+          for(index = 0; index < 4; index++)
           {
-            sub_8045C28(&auStack80[iVar9],gUnknown_81074FC[DungeonRandInt(8)],0);
+            sub_8045C28(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
           }
           temp3 = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
           local_24 &= 0xffff0000;
@@ -3855,7 +3855,7 @@ void JirachiWish(void)
           if ((GetTileSafe((s16)local_24, local_24 >> 16)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
             sub_808BB3C((s16 *)&local_24);
-            sub_8046860(JirachiEntity,&local_24,auStack80,4);
+            sub_8046860(JirachiEntity,&local_24,strengthItems,4);
           }
         }
         JirachiEntity->info->unk15D  = 0;
@@ -3871,8 +3871,8 @@ void JirachiWish(void)
         DisplayDungeonDialogue(&gUnknown_8105D80);
         sub_803E708(10,0x46);
         LeaderPos = &GetLeader()->pos;
-        uVar6 = GetDirectionTowardsPosition(&JirachiEntity->pos,LeaderPos);
-        SetFacingDirection(JirachiEntity,uVar6);
+        direction = GetDirectionTowardsPosition(&JirachiEntity->pos,LeaderPos);
+        SetFacingDirection(JirachiEntity,direction);
         sub_803E708(10,0x46);
         DisplayDungeonDialogue(&gUnknown_8105D9C);
         sub_803E708(10,0x46);
@@ -4157,7 +4157,7 @@ void LugiaPreFightDialogue(void)
     sub_80861D4(LugiaEntity,7,0);
     DisplayDungeonDialogue(&gLugiaPreFightDialogue_7);
     LugiaScreenFlash();
-    SetupBossFightHP(LugiaEntity,800,0x20);
+    SetupBossFightHP(LugiaEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
@@ -4307,7 +4307,7 @@ void KyogrePreFightDialogue(void)
     // power!
     DisplayDungeonDialogue(&gKyogrePreFightDialogue_7);
     sub_803E708(10,0x46);
-    SetupBossFightHP(KyogreEntity,600,0xb);
+    SetupBossFightHP(KyogreEntity,600,MUS_BOSS_BATTLE);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
@@ -4449,7 +4449,7 @@ void SetupDeoxysFacingDirection(struct Entity *deoxysEntity)
 
 void SetupDeoxysFightHP(struct Entity *deoxysEntity)
 {
-    SetupBossFightHP(deoxysEntity, 950, 0x20);
+    SetupBossFightHP(deoxysEntity, 950, MUS_BATTLE_WITH_RAYQUAZA);
 }
 
 void sub_808C5C0(void)
@@ -4910,13 +4910,13 @@ void sub_808C938(void)
 void sub_808C948(struct Entity *param_1, u8 param_2)
 {
   bool8 flag;
-  s32 iVar3;
+  s32 index;
   struct Entity *iVar2;
 
   if (param_2 == 0x37) {
     flag = FALSE;
-    for(iVar3 = 0; iVar3 < DUNGEON_MAX_WILD_POKEMON; iVar3++){
-      iVar2 = gDungeon->wildPokemon[iVar3];
+    for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++){
+      iVar2 = gDungeon->wildPokemon[index];
       if ((iVar2 != param_1) && (EntityExists(iVar2) != 0)) {
         flag = TRUE;
         break;

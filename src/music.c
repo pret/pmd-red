@@ -61,7 +61,7 @@ struct PMDMusicPlayer
     u16 unk0;
     u16 songIndex;
     u16 volume;
-    bool8 unk6;
+    bool8 isNotMaxVolume;
 };
 
 extern struct PMDMusicPlayer gUnknown_3000FD8[8];
@@ -418,7 +418,7 @@ void InitMusic(void)
         musicPlayer->unk0 = 0;
         musicPlayer->songIndex = STOP_SOUND_EFFECT;
         musicPlayer->volume = 0;
-        musicPlayer->unk6 = FALSE;
+        musicPlayer->isNotMaxVolume = FALSE;
     }
     nullsub_19();
 }
@@ -677,11 +677,11 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
       musicPlayer->songIndex = songIndex;
       if(volume == MAX_VOLUME)
       {
-        musicPlayer->unk6 = FALSE;
+        musicPlayer->isNotMaxVolume = FALSE;
       }
       else
       {
-        musicPlayer->unk6 = TRUE;
+        musicPlayer->isNotMaxVolume = TRUE;
       }
       musicPlayer->volume = volume;
       if (interrupt_flag2)
@@ -739,7 +739,7 @@ void StopFanfareSE(u16 songIndex)
             musicPlayer1->unk0 = 0;
             musicPlayer1->songIndex = STOP_SOUND_EFFECT;
             musicPlayer1->volume = 0;
-            musicPlayer1->unk6 = FALSE;
+            musicPlayer1->isNotMaxVolume = FALSE;
         }
         if (cVar1 != '\0') {
             EnableInterrupts();
@@ -760,7 +760,7 @@ void StopFanfareSE(u16 songIndex)
                 musicPlayer->unk0 = 0;
                 musicPlayer->songIndex = STOP_SOUND_EFFECT;
                 musicPlayer->volume = 0;
-                musicPlayer->unk6 = FALSE;
+                musicPlayer->isNotMaxVolume = FALSE;
             }
             if (cVar2 != '\0') {
                 EnableInterrupts();
@@ -834,7 +834,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
                     musicPlayer1->unk0 = 0;
                     musicPlayer1->songIndex = STOP_SOUND_EFFECT;
                     musicPlayer1->volume = 0;
-                    musicPlayer1->unk6 = FALSE;
+                    musicPlayer1->isNotMaxVolume = FALSE;
                 }
             }
         }
@@ -856,7 +856,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
                 musicPlayer->unk0 = 0;
                 musicPlayer->songIndex = STOP_SOUND_EFFECT;
                 musicPlayer->volume = 0;
-                musicPlayer->unk6 = FALSE;
+                musicPlayer->isNotMaxVolume = FALSE;
             }
         }
         if (cVar2 != '\0') {
@@ -1089,9 +1089,9 @@ void UpdateSound(void)
                     case 2:
                         if (IsMusicPlayerPlaying(musicPlayerIndex))
                         {
-                            if(musicPlayer->unk6)
+                            if(musicPlayer->isNotMaxVolume)
                             {
-                                musicPlayer->unk6 = FALSE;
+                                musicPlayer->isNotMaxVolume = FALSE;
                                 m4aMPlayVolumeControl(gMPlayTable[musicPlayerIndex].info,0xff,musicPlayer->volume);
                             }
                         }
@@ -1100,7 +1100,7 @@ void UpdateSound(void)
                             musicPlayer->unk0 = 0;
                             musicPlayer->songIndex = STOP_SOUND_EFFECT;
                             musicPlayer->volume = 0;
-                            musicPlayer->unk6 = FALSE;
+                            musicPlayer->isNotMaxVolume = FALSE;
                         }
                         break;
                     case 3:

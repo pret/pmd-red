@@ -57,7 +57,7 @@ void sub_8086A54(struct Entity *pokemon)
     pokemon->info->unk15E = 0;
 }
 
-void SetupBossFightHP(struct Entity *pokemon, s32 newHP, u16 param_3)
+void SetupBossFightHP(struct Entity *pokemon, s32 newHP, u16 songIndex)
 {
 
   // NOTE: needed two of these to match.. very dumb
@@ -79,7 +79,7 @@ void SetupBossFightHP(struct Entity *pokemon, s32 newHP, u16 param_3)
     entityInfo->HP = newHP;
   }
 
-  gDungeon->unk66A = param_3;
+  gDungeon->bossSongIndex = songIndex;
   SetDefaultIQSkills(enityData_1->IQSkillMenuFlags, enityData_1->bossFlag);
   LoadIQSkills(pokemon);
 }
