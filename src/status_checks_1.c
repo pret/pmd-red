@@ -26,7 +26,7 @@ extern u8 *gUnknown_80F8968[];
 extern u8 *gUnknown_80F8988[];
 extern u8 gUnknown_8106FA4[];
 
-u8 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
+s32 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
 {
     bool8 flag;
 

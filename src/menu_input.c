@@ -22,6 +22,104 @@ void AddMenuCursorSprite(void *);
 
 void sub_8012EBC(struct MenuStruct *param_1);
 
+extern u32 gUnknown_80D47B8;
+extern void sub_8013134(u32 *, u32, u32);
+extern void sub_80137B0(u32 *, u32);
+
+extern s16 sub_8009614(u32, u32);
+
+void sub_8012D60(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *param_3,u16 *param_4,s32 param_5,
+                s32 index)
+{
+  const u8 *textPtr;
+  s32 counter;
+  s32 menuIndex;
+  s32 iVar1;
+  
+  counter = 0;
+  menuIndex = -1;
+  iVar1 = 0;
+  param_1->index = index;
+  param_1->menuItems = menuItems;
+  param_1->unk8 = param_3;
+  if (param_3 == 0) {
+    param_1->unk8 = &gUnknown_80D47B8;
+  }
+  param_1->unkC = param_4;
+  textPtr = menuItems->text;
+  if(textPtr)
+  {
+      while (textPtr != 0) {
+        if ((0 <= param_5) && (param_5 == menuItems->menuAction)) {
+          menuIndex = counter;
+        }
+        if (*menuItems->text == '*') {
+          iVar1 = counter;
+        }
+        menuItems++;
+        counter++;
+        textPtr = menuItems->text;
+      }
+  }
+  if (menuIndex < 0) {
+    menuIndex = iVar1;
+  }
+  sub_8013134(&param_1->unk14,counter,index);
+  param_1->menuIndex = menuIndex;
+  sub_80137B0(&param_1->unk14,0);
+  param_1->unk4C = 1;
+  param_1->unk4D = 1;
+  param_1->unk4E = 1;
+  param_1->menuAction = -1;
+}
+
+void sub_8012E04(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *param_3,u16 *param_4,s32 param_5,
+                s32 index)
+{
+  const u8 *textPtr;
+  s32 counter;
+  struct MenuItem *menuItemPtr;
+  s32 iVar1;
+  s32 menuIndex;
+  
+  counter = 0;
+  menuIndex = -1;
+  iVar1 = 0;
+  textPtr = menuItems->text;
+  if (textPtr) {
+    menuItemPtr = menuItems;
+    while (textPtr != NULL) {
+      if ((0 <= param_5) && (param_5 == menuItemPtr->menuAction)) {
+        menuIndex = counter;
+      }
+      if (*menuItemPtr->text == '*') {
+        iVar1 = counter;
+      }
+      menuItemPtr++;
+      counter++;
+      textPtr = menuItemPtr->text;
+    }
+  }
+    
+  if (menuIndex < 0) {
+    menuIndex = iVar1;
+  }
+  sub_8013134(&param_1->unk14,counter,index);
+  param_1->menuIndex = menuIndex;
+  sub_80137B0(&param_1->unk14,0);
+  param_1->index = index;
+  param_1->unk8 = param_3;
+  if (param_3 == 0) {
+    param_1->unk8 = &gUnknown_80D47B8;
+  }
+  param_1->unkC = param_4;
+  param_1->menuItems = menuItems;
+  param_1->unk4E = 0;
+  param_1->unk4C = 1;
+  param_1->unk4D = 1;
+  param_1->menuAction = -1;
+}
+
 void sub_8012EA4(struct MenuStruct *param_1, u32 r1)
 {
     param_1->unk4C = r1;
