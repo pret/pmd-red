@@ -178,7 +178,7 @@ void sub_802E94C(void)
             sub_802EC10();
             gUnknown_203B308->unk10C[2] = gUnknown_80E0360;
             sub_8012CAC(&gUnknown_203B308->unk10C[2], gUnknown_203B308->unkBC);
-            gUnknown_203B308->unk10C[2].unk0c = 6;
+            gUnknown_203B308->unk10C[2].unkC = 6;
             gUnknown_203B308->unk10C[3] = gUnknown_80E0378;
             break;
         default:

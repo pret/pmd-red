@@ -12,7 +12,7 @@ struct MenuStruct
     // size: 0x50
     u8 *unk0;
     /* 0x4 */ struct MenuItem *menuItems;
-    u32 *unk8;
+    const u32 *menuTextColorArray;
     u16 *unkC;
     /* 0x10 */ s32 index;
     /* 0x14 */ u32 unk14;

@@ -89,7 +89,6 @@ SECTIONS {
         src/save.o(.text);
         src/code_8012A18.o(.text);
         src/more_input.o(.text);
-        asm/code_8012A18.o(.text);
         src/menu_input.o(.text);
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
@@ -119,10 +118,11 @@ SECTIONS {
         src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);
         src/gulpin_shop_1.o(.text);
+        src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
         src/code_8023144.o(.text);
         asm/code_801EE10_1.o(.text);
-        src/code_801EE10.o(.text);
+        src/code_801EE10_1.o(.text);
         src/luminous_cave.o(.text);
         src/friend_list_menu_1.o(.text);
         asm/friend_list_menu.o(.text);
@@ -423,6 +423,7 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
+        src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/friend_area_action_menu.o(.rodata);
         src/friend_area_action_menu_1.o(.rodata);

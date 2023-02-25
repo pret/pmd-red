@@ -423,7 +423,7 @@ void sub_8026E08(u32 r0)
     sub_808D930(buffer, gUnknown_203B2B8->unk18->speciesNum);
     sprintfStatic(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
-    xxx_call_draw_string(((gUnknown_80DD370.unk0c << 3) - x) / 2, 3, buffer1, r0, 0);
+    xxx_call_draw_string(((gUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }
 

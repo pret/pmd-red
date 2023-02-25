@@ -1,10 +1,5 @@
 	.section .rodata
 
-        .global gUnknown_80D47B8
-gUnknown_80D47B8: @ 80D47B8
-        .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x00, 0x00
 
         .global UnkData_80D47C4
         UnkData_80D47C4:

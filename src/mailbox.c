@@ -172,7 +172,7 @@ void sub_802E0A0(void)
             CreateMailActionMenu();
             gUnknown_203B304->unk10C[2] = gUnknown_80E02B4;
             sub_8012CAC(&gUnknown_203B304->unk10C[2], gUnknown_203B304->unkBC);
-            gUnknown_203B304->unk10C[2].unk0c = 6;
+            gUnknown_203B304->unk10C[2].unkC = 6;
             gUnknown_203B304->unk10C[3] = gUnknown_80E02CC;
             break;
         default:

@@ -1169,7 +1169,7 @@ void sub_801A9E0(void)
                 break;
         }
         if ((sub_801AED0(teamItemIndex) & 1) != 0) {
-            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unk0c - 2) * 8,10);
+            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unkC - 2) * 8,10);
         }
     }
     sub_80073E0(gUnknown_203B224->unk88);

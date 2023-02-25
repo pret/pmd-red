@@ -24,7 +24,7 @@ struct UnkTextStruct2 {
     u8 fill00[0x04];
     s32 unk4;
     struct UnkTextStruct2_sub unk08;
-    s16 unk0c;
+    s16 unkC;
     s16 unkE;
     s16 unk10;
     s16 unk12;
