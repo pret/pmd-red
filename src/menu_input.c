@@ -360,7 +360,7 @@ void sub_8012EBC(struct MenuStruct *param_1)
   }
 }
 
-u8 sub_8012FD8(struct MenuStruct *param_1)
+bool8 sub_8012FD8(struct MenuStruct *param_1)
 {
   u32 prevMenuIndex;
   s32 index;
@@ -416,7 +416,7 @@ u8 sub_8012FD8(struct MenuStruct *param_1)
   return param_1->unk4C;
 }
 
-u8 sub_80130A8(struct MenuStruct *param_1)
+bool8 sub_80130A8(struct MenuStruct *param_1)
 {
   s32 index;
   s32 menuAction;

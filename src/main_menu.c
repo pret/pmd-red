@@ -2,6 +2,7 @@
 #include "text.h"
 #include "menu.h"
 #include "input.h"
+#include "menu_input.h"
 
 #include "adventure_log.h"
 #include "debug_menu.h"
@@ -57,12 +58,7 @@ extern void sub_80370D4(void);
 extern void CleanWonderMailMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
-extern u8 sub_8012FD8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, s32 *);
 extern u8 sub_803D0D8();
-extern void sub_8012D60(struct MenuStruct *, const struct MenuItem *, u32, u32, u32, u32);
-extern void sub_8012E04(struct MenuStruct *, const struct MenuItem *, u32, u32, u32, u32);
-void sub_8012EBC(struct MenuStruct *);
 
 void CleanMainMenu(void);
 void DrawMainMenu(void);

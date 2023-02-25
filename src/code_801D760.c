@@ -4,12 +4,14 @@
 #include "constants/input.h"
 #include "file_system.h"
 #include "item.h"
+#include "menu.h"
 #include "team_inventory.h"
 #include "memory.h"
 #include "input.h"
 #include "text.h"
 #include "rescue_team_info.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 struct unkStruct_203B258
 {
@@ -64,8 +66,6 @@ extern u32 sub_80270A4();
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
@@ -99,7 +99,7 @@ struct unk_203B250
     u8 unk9;
     u8 fillA[0x14 - 0xA];
     u32 unk14;
-    u32 unk18; // an input struct??
+    struct MenuStruct unk18;
 };
 
 struct unk_203B250 *gUnknown_203B250;

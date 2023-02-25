@@ -2,11 +2,13 @@
 #include "global.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
+#include "menu.h"
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "text.h"
 #include "input.h"
 #include "item.h"
+#include "menu_input.h"
 
 struct unkStruct_3001B5C
 {
@@ -40,8 +42,7 @@ extern u16 gUnknown_203B29E;
 extern struct UnkTextStruct2 gUnknown_80DC91C;
 extern struct UnkTextStruct2 gUnknown_80DC904;
 
-extern u8 sub_8023704();
-extern void sub_8012D08(void *, u32);
+extern u8 sub_8023704(u8);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_8013984(u8 *);
 extern void sub_8023420(void);
@@ -67,10 +68,8 @@ struct unkStruct_203B294
     /* 0x48 */ struct PokemonStruct *pokeStruct;
     u32 unk4C;
     struct Item unk50;
-    u32 unk54;
-    u8 fill58[0xA4 - 0x58];
-    u32 unkA4;
-    u8 fillA8[0xF4 - 0xA8];
+    struct MenuStruct unk54;
+    struct MenuStruct unkA4;
     u32 unkF4;
     u32 unkF8;
     u16 unkFC;
@@ -87,8 +86,6 @@ extern void sub_801B048(void);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_801A6E8(u32);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);

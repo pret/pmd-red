@@ -11,6 +11,7 @@
 #include "text.h"
 #include "team_inventory.h"
 #include "rescue_password_menu.h"
+#include "menu_input.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -36,7 +37,6 @@ extern void sub_803084C();
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC();
 extern void sub_8030D40(u8, u32);
-extern u8 sub_8012FD8(struct MenuStruct *r0);
 extern void sub_8030810(u32);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8035CF4(struct MenuStruct *r0, u32, u32);
@@ -50,7 +50,6 @@ extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_80951BC(struct unkStruct_203B480 *r0);
-extern void sub_8013114(struct MenuStruct *r0, s32 *r1);
 extern void sub_8023C60();
 extern u32 sub_8023A94(u32);
 extern void sub_8024458(s16, u32);

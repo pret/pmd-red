@@ -13,6 +13,7 @@
 #include "text.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -155,7 +156,6 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-extern u8 sub_8012FD8(struct MenuStruct *r0);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
@@ -167,7 +167,6 @@ extern u32 sub_8030768(u32);
 extern s8 sub_80307EC(void);
 extern void sub_8030D40(u8, u32);
 extern u32 sub_8030DA0();
-extern void sub_8013114(struct MenuStruct *r0, s32 *r1);
 extern void HandleThankYouMailPelipperMainMenu();
 extern void sub_802AAC8();
 extern void ReturnToThankYouMailMainMenu();

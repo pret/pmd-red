@@ -7,6 +7,7 @@
 #include "team_inventory.h"
 #include "input.h"
 #include "kangaskhan_storage.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
 
@@ -30,8 +31,6 @@ extern s32 sub_80144A4(s32 *);
 extern void sub_801B450();
 extern u32 sub_801B410(void);
 
-extern u8 sub_8012FD8(u32 *r0);
-extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8();
 
 extern bool8 sub_801ADA0(u32);
@@ -47,13 +46,11 @@ extern u32 sub_801A6E8(u32);
 extern u32 sub_801AEA8(void);
 extern u32 sub_801A8AC(void);
 extern void sub_801A928(void);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_80182E4(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
-extern void sub_8012EA4(u32 *, u32);
 extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
 
 extern void sub_801A9E0();
@@ -65,7 +62,6 @@ extern void sub_8013AA0(u32 *);
 extern void sub_801B3C0(struct Item *);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801A8D0(u32);
 extern u32 sub_801CFE0(u8);

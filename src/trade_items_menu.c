@@ -8,6 +8,7 @@
 #include "memory.h"
 #include "save.h"
 #include "menu.h"
+#include "menu_input.h"
 
 extern struct TradeItemsMenu *gTradeItemsMenu;
 
@@ -87,8 +88,6 @@ extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
 extern u8 sub_801CB24();
 extern void sub_801B3C0(struct Item *);
-extern u8 sub_8012FD8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, s32 *);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();

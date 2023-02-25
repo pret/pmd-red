@@ -20,8 +20,7 @@ struct unkStruct_203B208
     u32 unk20;
     struct MenuItem unk24[5];
     u16 unk4C[5];
-    u32 unk58;
-    u8 unk5C[0xA8 - 0x5C];
+    struct MenuStruct unk58;
     u32 unkA8;
     u8 unkAC[0xBC - 0xAC];
     u32 unkBC;
@@ -51,8 +50,7 @@ struct unkStruct_203B20C
     u32 unk1C;
     struct MenuItem unk20[8];
     u16 unk60[8];
-    u32 unk70;
-    u8 fill74[0xC0 - 0x74];
+    struct MenuStruct unk70;
     u32 unkC0;
     u32 unkC4;
     u32 unkC8;

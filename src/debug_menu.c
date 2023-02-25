@@ -9,6 +9,7 @@
 #include "pokemon.h"
 #include "save.h"
 #include "text_util.h"
+#include "menu_input.h"
 
 extern struct DebugMenu *gUnknown_203B3EC;
 
@@ -54,8 +55,6 @@ ALIGNED(4) static const char debug_menu_fill6[] = "pksdir0";
 
 
 
-extern u8 sub_8012FD8(struct MenuStruct*);
-extern void sub_8013114(struct MenuStruct*, s32 *);
 extern void sub_80976F8(u8);
 extern void sub_803A3BC(void);
 extern void sub_803A3A0(void);

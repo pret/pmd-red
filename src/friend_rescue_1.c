@@ -12,6 +12,7 @@
 #include "save.h"
 #include "menu.h"
 #include "rescue_password_menu.h"
+#include "menu_input.h"
 
 
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -46,8 +47,6 @@ extern void sub_80155F0();
 extern void sub_80141B4(u8 *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 
-extern u8 sub_8012FD8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct  *, s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801CB5C(u32);

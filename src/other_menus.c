@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct unkStruct_203B35C
 {
@@ -59,8 +60,6 @@ extern void sub_8035CF4(struct MenuStruct *,u32, u32);
 extern void sub_80376CC();
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
-extern u8 sub_80130A8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, u32 *);
 extern u32 sub_8037C10(u32);
 extern void sub_8037748(void);
 extern void sub_80371B8(void);
