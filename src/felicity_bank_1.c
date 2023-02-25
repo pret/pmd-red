@@ -2,6 +2,7 @@
 #include "item.h"
 #include "team_inventory.h"
 #include "felicity_bank.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B204 *gUnknown_203B204;
 
@@ -14,7 +15,6 @@ extern u8 *gFelicityDeposit;
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
 extern s32 sub_80144A4(s32 *);

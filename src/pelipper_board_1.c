@@ -7,6 +7,7 @@
 #include "text.h"
 #include "team_inventory.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 struct unkStruct_203B308
 {
@@ -21,8 +22,7 @@ struct unkStruct_203B308
     u8 fill51[0x64 - 0x51];
     u32 unk64;
     u32 unk68;
-    u32 unk6C;
-    u8 fill70[0xBC - 0x70];
+    struct MenuStruct unk6C;
     struct MenuItem unkBC[8];
     u16 unkFC[8];
     struct UnkTextStruct2 unk10C[4];
@@ -32,7 +32,6 @@ extern struct unkStruct_203B308 *gUnknown_203B308;
 extern u8 gPelipperBoard_Accepted[];
 extern u8 gPelipperStatusSlash[];
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -48,14 +47,11 @@ extern void sub_8096A78(struct WonderMail*);
 extern void ResetPelipperBoardSlot(u8);
 extern void sub_80965F4(void);
 extern void sub_802C2D4(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_802C1E4(u32);
 extern void PlaySound(u32);
 extern void SetPelipperBoardState(u32);
 extern u8 sub_802C26C(void);
 extern u8 HasNoAcceptedJobs(void);
-extern void sub_8012EA4(u32 *, u32);
 
 void sub_802ECB4(void)
 {

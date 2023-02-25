@@ -5,6 +5,7 @@
 #include "input.h"
 #include "mailbox.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 
 extern void HandleMailboxMenu(void);
@@ -71,11 +72,9 @@ static const u8 mailbox_fill[] = "pksdir0";
 
 extern struct unkStruct_203B304 *gUnknown_203B304;
 extern void sub_802E088(u32);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
 
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);

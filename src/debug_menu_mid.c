@@ -5,6 +5,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct unkStruct_203B3F0
 {
@@ -14,8 +15,7 @@ struct unkStruct_203B3F0
     u8 fill5[0x8 - 5];
     u32 unk8;
     struct MenuItem menuItems[8];
-    u32 unk4C;
-    u8 fill50[0x9C - 0x50];
+    struct MenuStruct unk4C;
     u32 unk9C;
     u32 unkA0;
     u32 unkA4;
@@ -39,8 +39,7 @@ struct unkStruct_203B3F4
     u8 fill5[0x8 - 5];
     u32 unk8;
     struct MenuItem menuItems[8];
-    u32 unk4C;
-    u8 fill50[0x9C - 0x50];
+    struct MenuStruct unk4C;
     struct UnkTextStruct2 unk9C[4];
 };
 
@@ -63,18 +62,14 @@ extern const char *gUnknown_80D4970[];
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801CCD8();
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
-extern void sub_8012EA4(u32 *, u32);
 extern void sub_80073E0(u32);
 extern void sub_8013C68(u32 *);
 extern void xxx_call_draw_string(s32, u32, const char *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern u8 sub_801CB24();
 extern void sub_801CBB8();
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_8013BBC(u32 *);
 extern u32 sub_801B410();
 extern void sub_801B450();

@@ -8,6 +8,7 @@
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
 #include "code_802C39C.h"
+#include "menu_input.h"
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -104,7 +105,6 @@ ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
 ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
 static const u8 wonder_mail_3_fill[] = "pksdir0";
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
 
@@ -131,7 +131,6 @@ extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void sub_802C750(void);
 extern void sub_802D1A0(u32);
-extern void sub_8012EA4(u8 *, u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern void sub_803B35C(void *, u32*);
 extern void sub_802DE84(u32 *);
@@ -143,13 +142,11 @@ extern void sub_802D690(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80141B4(const u8 *, u32, u32, u32);
-extern void sub_8012D60(u8 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern u8 *sub_8096DE8(void);
 extern void sub_8096A78(struct unkSubStruct_203B2F8 *);
 extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
 struct unkStruct_803B344 *sub_803B344(u8);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -391,13 +388,13 @@ void sub_802D2A8(void)
         break;
       case 0xd:
         sub_802C750();
-        sub_8012D60(gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
+        sub_8012D60(&gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
                     gUnknown_203B2F8->unk6C,2);
         break;
       case 0xe:
         sub_802C750();
-        sub_8012EA4(gUnknown_203B2F8->unk78,0);
-        sub_8012D60(gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
+        sub_8012EA4(&gUnknown_203B2F8->unk78,0);
+        sub_8012D60(&gUnknown_203B2F8->unkC8,gUnknown_203B2F8->unk158,0,0,4,3);
         break;
       case 0xf:
         sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex),&gUnknown_203B2F8->unk14);

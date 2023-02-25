@@ -33,8 +33,7 @@ struct unkStruct_203B3F8
     u16 unk6;
     struct PokemonStruct *pokemon;
     u32 unkC;
-    const char *unk10;
-    u8 fill14[0x60 - 0x14];
+    struct MenuStruct unk10;
     u32 unk60;
     u32 unk64;
     u32 unk68;

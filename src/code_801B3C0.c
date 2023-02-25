@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "team_inventory.h"
+#include "menu_input.h"
 
 struct subStruct_203B240
 {
@@ -45,10 +46,8 @@ struct unkStruct_203B234
     struct unkStruct_8090F58 unk14;
     struct Item unk20;
     u32 unk24;
-    u32 unk28;
-    u8 fill2C[0x78 - 0x2C];
-    u32 unk78;
-    u8 fill7C[0xC8 - 0x7C];
+    struct MenuStruct unk28;
+    struct MenuStruct unk78;
     u32 unkC8;
     struct MenuItem unkCC[5];
     struct UnkTextStruct2 unkF4[4];
@@ -78,7 +77,6 @@ extern struct UnkTextStruct2 gUnknown_80DBA88;
 extern struct UnkTextStruct2 gUnknown_80DBA70;
 
 extern void sub_801BB5C(void);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_801B748(u32);
 extern void sub_8008C54(u32);
@@ -90,8 +88,6 @@ extern void sub_8013F84(void);
 extern u32 sub_8012A64(u32 *, u32);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
-extern void sub_8012EA4(u32 *, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_801BB20(void);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0(void);

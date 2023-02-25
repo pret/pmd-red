@@ -5,6 +5,7 @@
 #include "text.h"
 #include "menu.h"
 #include "code_802C39C.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2E8
 {
@@ -37,8 +38,8 @@ struct unkStruct_203B2F0
     u32 unk10;
     u8 fill14[0x68 - 0x14];
     u32 unk68;
-    u8 fill6C[0xBC - 0x6C];
-    u8 unkBC[0x10C - 0xBC];
+    struct MenuStruct unk6C;
+    struct MenuStruct unkBC;
     struct MenuItem unk10C[8];
     struct MenuItem unk14C[8];
     u8 fill18C[0x19C - 0x18C];
@@ -131,7 +132,6 @@ const struct UnkTextStruct2 gUnknown_80DFDA4 =
 const u8 gUnknown_80DFDBC[] = "RESCUE EVENT";
 static const u8 wonder_mail_fill1[] = "pksdir0";
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
 extern void sub_8008C54(u32);
@@ -142,7 +142,6 @@ extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void CreateRescueTitle(void *);
 
 extern void sub_8013984(u32 *);
@@ -154,7 +153,6 @@ extern s32 GetKeyPress(void *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
-extern void sub_8012D34(struct UnkTextStruct2 *, u32);
 extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void sub_802C910(u32);
 extern void sub_802CC00(void);
@@ -163,9 +161,7 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_8012D60(u8 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802DE84(u32 *);
-extern void sub_8012EA4(u8 *, u32);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
@@ -499,13 +495,13 @@ void sub_802C9D8(void)
             break;
         case 2:
             sub_802C750();
-            sub_8012D60(gUnknown_203B2F0->fill6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->unk68, 2);
+            sub_8012D60(&gUnknown_203B2F0->unk6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->unk68, 2);
             break;
         case 3:
             sub_802CBAC();
             sub_802C750();
-            sub_8012EA4(gUnknown_203B2F0->fill6C, 0);
-            sub_8012D60(gUnknown_203B2F0->unkBC, gUnknown_203B2F0->unk14C, 0, 0, 6, 3);
+            sub_8012EA4(&gUnknown_203B2F0->unk6C, 0);
+            sub_8012D60(&gUnknown_203B2F0->unkBC, gUnknown_203B2F0->unk14C, 0, 0, 6, 3);
             break;
         case 4:
             sub_803B35C(GetJobSlotInfo(gUnknown_203B2F0->unkC), &gUnknown_203B2F0->unk10);

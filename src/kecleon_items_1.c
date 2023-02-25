@@ -8,6 +8,7 @@
 #include "kecleon_items.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u16 gUnknown_203B218;
@@ -35,8 +36,6 @@ extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 
 extern void sub_8099690(u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_8019EDC(u8);
 extern u32 sub_801A2A8(u8);
 extern s32 sub_801A8AC(void);
@@ -48,12 +47,10 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(void *, u32);
 extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
-extern void sub_8012BC4(s32, s32, s32, s32, s32, s32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
 void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_801AE84(void);
-extern void sub_8012D08(void *, u32);
 extern void sub_801A998(void);
 extern void sub_801A9E0(void);
 extern void Kecleon_SortItems(void);

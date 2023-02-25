@@ -5,6 +5,7 @@
 #include "text.h"
 #include "util.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 struct unkChar
 {
@@ -36,7 +37,6 @@ struct unkChar *GetCharacter(u32);
 extern void xxx_call_draw_char(u32, u32, u32, u32, u32);
 
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
-void sub_8012D08(struct UnkTextStruct2 *, s32);
 
 void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6)
 {
@@ -71,7 +71,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6)
     do {
       iVar1 = *piVar4;
       piVar4++;
-      uVar2 = ReturnIntFromChar2(iVar1 + 0x30U);
+      uVar2 = ReturnIntFromChar2(iVar1 + 0x30);
       iVar3 = GetCharacter(uVar2);
       total_x += iVar3->unk6;
       xxx_call_draw_char(x - total_x,y,uVar2,param_5,param_6);
@@ -100,7 +100,7 @@ void sub_8012C60(u32 x,u32 y,u32 param_3,u32 param_4,u32 param_5)
   xxx_call_draw_char(x + add_x,y,uVar2,param_4,param_5);
 }
 
-void sub_8012CAC(struct UnkTextStruct2 *param_1, struct MenuItem *param_2)
+void sub_8012CAC(struct UnkTextStruct2 *param_1, const struct MenuItem *param_2)
 {
   s16 length;
   int r5;
@@ -192,7 +192,7 @@ void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
 	"\tbx r0");
 }
 
-void sub_8012D60(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
+void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
                 s32 index)
 {
   const u8 *textPtr;
@@ -231,18 +231,18 @@ void sub_8012D60(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *colo
   sub_8013134(&param_1->unk14,counter,index);
   param_1->menuIndex = menuIndex;
   sub_80137B0(&param_1->unk14,0);
-  param_1->unk4C = 1;
-  param_1->unk4D = 1;
-  param_1->unk4E = 1;
+  param_1->unk4C = TRUE;
+  param_1->unk4D = TRUE;
+  param_1->unk4E = TRUE;
   param_1->menuAction = -1;
 }
 
-void sub_8012E04(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
+void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
                 s32 index)
 {
   const u8 *textPtr;
   s32 counter;
-  struct MenuItem *menuItemPtr;
+  const struct MenuItem *menuItemPtr;
   s32 iVar1;
   s32 menuIndex;
   
@@ -278,16 +278,16 @@ void sub_8012E04(struct MenuStruct *param_1,struct MenuItem *menuItems,u32 *colo
   }
   param_1->unkC = param_4;
   param_1->menuItems = menuItems;
-  param_1->unk4E = 0;
-  param_1->unk4C = 1;
-  param_1->unk4D = 1;
+  param_1->unk4E = FALSE;
+  param_1->unk4C = TRUE;
+  param_1->unk4D = TRUE;
   param_1->menuAction = -1;
 }
 
-void sub_8012EA4(struct MenuStruct *param_1, u32 r1)
+void sub_8012EA4(struct MenuStruct *param_1, bool8 r1)
 {
     param_1->unk4C = r1;
-    param_1->unk4D = 1;
+    param_1->unk4D = TRUE;
     sub_8012EBC(param_1);
 }
 
@@ -297,7 +297,7 @@ void sub_8012EBC(struct MenuStruct *param_1)
   s32 y;
   u32 color;
   const u8 *textPtr;
-  struct MenuItem *menuItemsPtr;
+  const struct MenuItem *menuItemsPtr;
   u16 *_puVar2;
   const u32 *colorArray;
   s32 counter;
@@ -307,7 +307,7 @@ void sub_8012EBC(struct MenuStruct *param_1)
   struct UnkTextStruct1 *ptr_text;
   struct UnkTextStruct2 *ptr_text2;
   
-  if (param_1->unk4D != 0) {
+  if (param_1->unk4D) {
     sub_80073B8(param_1->index);
     index = param_1->index;
     ptr_text = &gUnknown_2027370[index];
@@ -348,10 +348,10 @@ void sub_8012EBC(struct MenuStruct *param_1)
       } while (menuItemsPtr->text != NULL);
     }
     sub_80073E0(param_1->index);
-    param_1->unk4D = 0;
+    param_1->unk4D = FALSE;
   }
-  if (param_1->unk4E != 0) {
-    if (param_1->unk4C != 0) {
+  if (param_1->unk4E) {
+    if (param_1->unk4C) {
       AddMenuCursorSprite(&param_1->unk14);
     }
     else {
@@ -360,13 +360,14 @@ void sub_8012EBC(struct MenuStruct *param_1)
   }
 }
 
-u8 sub_8012FD8(struct MenuStruct *param_1) {
+u8 sub_8012FD8(struct MenuStruct *param_1)
+{
   u32 prevMenuIndex;
   s32 index;
-  struct MenuItem *item;
+  const struct MenuItem *item;
   
   prevMenuIndex = param_1->menuIndex;
-  if (param_1->unk4C != 0) {
+  if (param_1->unk4C) {
     switch(GetKeyPress(&param_1->unk14))
     {
         case INPUT_DPAD_DOWN:
@@ -388,7 +389,7 @@ u8 sub_8012FD8(struct MenuStruct *param_1) {
                ((param_1->unkC == NULL || (param_1->unkC[index] != 1)))) {
               param_1->menuAction = item->menuAction;
               ++param_1; --param_1;
-              param_1->unk4C = 0;
+              param_1->unk4C = FALSE;
               param_1->unk38 = 0;
             }
             else
@@ -405,7 +406,7 @@ u8 sub_8012FD8(struct MenuStruct *param_1) {
         case INPUT_B_BUTTON:
             if (-1 < param_1->menuItems[param_1->unk2E].menuAction) {
                 param_1->menuAction = param_1->menuItems[param_1->unk2E].menuAction;
-                param_1->unk4C = 0;
+                param_1->unk4C = FALSE;
                 PlayMenuSoundEffect(1);
             }
             break;
@@ -415,12 +416,13 @@ u8 sub_8012FD8(struct MenuStruct *param_1) {
   return param_1->unk4C;
 }
 
-u8 sub_80130A8(struct MenuStruct *param_1) {
+u8 sub_80130A8(struct MenuStruct *param_1)
+{
   s32 index;
   s32 menuAction;
-  struct MenuItem *menuItem;
+  const struct MenuItem *menuItem;
   
-  if (param_1->unk4C != 0) {
+  if (param_1->unk4C) {
 
     switch(GetKeyPress(&param_1->unk14))
     {
@@ -428,14 +430,14 @@ u8 sub_80130A8(struct MenuStruct *param_1) {
             index = sub_80137A8(&param_1->unk14);
             menuItem = &param_1->menuItems[index];
             param_1->menuAction = menuItem->menuAction;
-            param_1->unk4C = 0;
+            param_1->unk4C = FALSE;
             param_1->unk38 = 0;
             PlayMenuSoundEffect(0);
             break;
         case INPUT_B_BUTTON:
             if(menuAction = param_1->menuItems[param_1->unk2E].menuAction, -1 < menuAction) {
               param_1->menuAction = menuAction;
-              param_1->unk4C = 0;
+              param_1->unk4C = FALSE;
               PlayMenuSoundEffect(0);
             }
             break;
@@ -445,8 +447,9 @@ u8 sub_80130A8(struct MenuStruct *param_1) {
   return param_1->unk4C;
 }
 
-bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction){
-    if(param_1->unk4C != 0){
+bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
+{
+    if(param_1->unk4C){
         return TRUE;
     }
     if (menuAction != NULL){

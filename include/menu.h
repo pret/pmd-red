@@ -11,7 +11,7 @@ struct MenuStruct
 {
     // size: 0x50
     u8 *unk0;
-    /* 0x4 */ struct MenuItem *menuItems;
+    /* 0x4 */ const struct MenuItem *menuItems;
     const u32 *menuTextColorArray;
     u16 *unkC;
     /* 0x10 */ s32 index;
@@ -23,9 +23,9 @@ struct MenuStruct
     u16 unk38;
     u8 fill3A[0x48 - 0x3A];
     /* 0x48 */ s32 menuAction;
-    u8 unk4C;
-    u8 unk4D;
-    u8 unk4E;
+    bool8 unk4C;
+    bool8 unk4D;
+    bool8 unk4E;
 };
 
 #endif // GUARD_MENU_H

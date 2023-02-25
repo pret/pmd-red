@@ -11,6 +11,7 @@
 #include "save.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
+#include "menu_input.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
 
@@ -41,8 +42,6 @@ void sub_80397B4(void);
 
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-extern u8 sub_8012FD8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, u32 *);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);

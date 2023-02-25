@@ -13,6 +13,7 @@
 #include "wonder_mail.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2C8
 {
@@ -155,7 +156,6 @@ extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s32 sub_8013800(u32 *, s32);
@@ -166,7 +166,6 @@ extern void sub_801317C(u32 *);
 extern u8 HasNoMailinMailbox(void);
 extern void sub_802BF30(void);
 extern void CreateMailMenu(void);
-extern void sub_8012D34(struct UnkTextStruct2 *, u32);
 extern s32 CountEmptyMailSlots(void);
 extern void sub_8013848(u32 *, s32, u32, u32);
 

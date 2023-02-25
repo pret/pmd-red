@@ -9,6 +9,7 @@
 #include "text.h"
 #include "menu.h"
 #include "makuhita_dojo.h"
+#include "menu_input.h"
 
 struct unkStruct_203B31C
 {
@@ -66,7 +67,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern u8 sub_80A2740(s32 r0);
 extern s16 sub_80A2668(u32 r0);
 extern s32 sub_8013800(void *, u32);
@@ -81,7 +81,6 @@ extern u8 sub_80138B8(void *, u32);
 extern void PlayMenuSoundEffect(u32);
 extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
-extern void sub_8012D08(void *, u32);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_803053C(void);
 extern u8 sub_80306A4(void);

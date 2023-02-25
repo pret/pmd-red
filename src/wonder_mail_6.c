@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "menu.h"
 #include "code_8094F88.h"
+#include "menu_input.h"
 
 extern bool8 HasNoWonderMailType(u32);
 
@@ -14,10 +15,8 @@ struct unkStruct_203B328
     // size: 0x11C
     u32 state;
     u8 mailIndex;
-    u32 unk8;
-    u8 fillC[0x58 - 0xC];
-    u32 unk58;
-    u8 fill5C[0xA8 - 0x5C];
+    struct MenuStruct unk8;
+    struct MenuStruct unk58;
     struct UnkTextStruct2 unkA8[4];
     /* 0x108 */ struct OpenedFile *faceFile;
     /* 0x10C */ u8 *faceData;
@@ -79,7 +78,6 @@ ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
         "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
 const u8 wonder_mail_6_fill[] = "pksdir0";
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, const struct MenuItem *);
 extern void sub_80306A8(s32, u32, u32, u32);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8031300(void);
@@ -97,10 +95,6 @@ extern void sub_8030DE4();
 extern void sub_8030810(u32);
 extern void sub_803092C(void);
 extern void sub_8030D40(u8, u32);
-extern void sub_8012EA4(u32 *, u32);
-extern void sub_8012D60(u32 *, const struct MenuItem *, u32, u32, u32, u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern void sub_8095240(u8);
 
 bool8 sub_8030F58(u32 wonderMailType)

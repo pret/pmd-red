@@ -9,6 +9,7 @@
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
 #include "code_80958E8.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2FC
 {
@@ -123,8 +124,6 @@ struct WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
 extern void sub_803C21C(struct WonderMail *, u32 *);
-extern u8 sub_8012FD8(u8 *);
-extern void sub_8013114(u8 *r0, s32 *r1);
 extern u32 sub_802C598(s32);
 extern void sub_802C688(void);
 extern void sub_8096C80(void);
@@ -227,7 +226,7 @@ void sub_802D940(void)
   
   menuAction = 0;
   sub_802C598(0);
-  if ((sub_8012FD8(gUnknown_203B2F8->unk78) == 0) && (sub_8013114(gUnknown_203B2F8->unk78,&menuAction), menuAction != 1)) {
+  if ((sub_8012FD8(&gUnknown_203B2F8->unk78) == 0) && (sub_8013114(&gUnknown_203B2F8->unk78,&menuAction), menuAction != 1)) {
     gUnknown_203B2F8->unk6C = menuAction;
   }
 
@@ -258,9 +257,9 @@ void sub_802D9F0(void)
   
   menuAction = 0;
   sub_802C598(0);
-  sub_8012FD8(gUnknown_203B2F8->unk78);
-  if (sub_8012FD8(gUnknown_203B2F8->unkC8) == 0) {
-    sub_8013114(gUnknown_203B2F8->unkC8,&menuAction);
+  sub_8012FD8(&gUnknown_203B2F8->unk78);
+  if (sub_8012FD8(&gUnknown_203B2F8->unkC8) == 0) {
+    sub_8013114(&gUnknown_203B2F8->unkC8,&menuAction);
   }
 
   switch(menuAction)

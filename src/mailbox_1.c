@@ -5,6 +5,7 @@
 #include "input.h"
 #include "mailbox.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B304 *gUnknown_203B304;
 
@@ -12,7 +13,6 @@ extern u8 gMailAccepted[];
 extern u8 gUnknown_80E0324[];
 
 extern void xxx_call_draw_string(s32 x, u32 y, u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -27,8 +27,6 @@ extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
 extern struct WonderMail *GetMailboxSlotInfo(u8);
 extern u8 HasNoMailinMailbox(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_802BDEC(u32);
 extern void sub_8096A78(struct WonderMail *);
 extern void sub_8096C80(void);
@@ -42,7 +40,6 @@ extern void sub_802BEDC(void);
 extern u8 sub_802BE74(void);
 extern u8 HasNoAcceptedJobs(void);
 extern u8 HasNoPKMNNews(void);
-extern void sub_8012EA4(u32 *, u32);
 
 void HandleMailboxMenu(void)
 {

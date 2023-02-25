@@ -1,3 +1,4 @@
+#include "menu.h"
 struct unkStruct_203B2F4
 {
     u8 fill0[0x1A];
@@ -50,9 +51,8 @@ struct unkStruct_203B2F8
     u32 unk6C;
     u32 unk70;
     u32 unk74;
-    u8 unk78[0xC8 - 0x78];
-    u8 unkC8[4];
-    u8 fillCC[0x118 - 0xCC];
+    struct MenuStruct unk78;
+    struct MenuStruct unkC8;
     struct MenuItem unk118[8];
     struct MenuItem unk158[8];
     u16 unk198[8];

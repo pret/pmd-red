@@ -638,7 +638,7 @@ SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 ind
   else {
        sub_8012E04(&param_1[index],menuItems,0,0,0,index);
   }
-  param_1[index].unk4C = 1;
+  param_1[index].unk4C = TRUE;
 }
 
 void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
@@ -649,7 +649,7 @@ void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
     sub_800641C(dataArray, 1, 1);
 }
 
-void sub_8035CF4(struct MenuStruct * Menu, u32 index, u8 r2)
+void sub_8035CF4(struct MenuStruct * Menu, u32 index, bool8 r2)
  {
     Menu[index].unk4C = r2;
     Menu[index].unk4D = 1;
@@ -881,7 +881,7 @@ u32 UpdateMainMenu(void)
 bool8 SetMainMenuText(void)
 {
   u32 menuChoice;
-  struct MenuItem *preload;
+  const struct MenuItem *preload;
 
  // Have to load the pointer before the index
   preload = gUnknown_203B34C->unk4[0].menuItems;
