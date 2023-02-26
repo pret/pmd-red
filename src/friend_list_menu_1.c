@@ -6,6 +6,7 @@
 #include "item.h"
 #include "pokemon.h"
 #include "moves.h"
+#include "menu_input.h"
 
 
 // there might be more overlap with unkStruct_203B2BC
@@ -19,10 +20,10 @@ struct unkStruct_203B2B4
     u32 unk8;
     u8 unkC;
     u8 unkD;
-    s16 unkE;
+    s16 species;
     u32 unk10;
     struct BulkItem unk14;
-    u32 unk18;
+    struct BulkItem unk18;
     /* 0x1C */ struct PokemonStruct *pokeStruct;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
@@ -30,9 +31,7 @@ struct unkStruct_203B2B4
     u16 moveIDs[4];   // some list of move IDs
     u32 unk70;
     s32 unk74;
-    u32 unk78;
-    u32 unk7C;
-    u8 fill7C[0xC8 - 0x80]; 
+    struct MenuStruct unk78;
     struct MenuItem unkC8[4];
     u8 fillE8[0x108 - 0xE8];
     s16 unk108[8];
@@ -70,7 +69,6 @@ extern void sub_8025E24(void);
 extern void sub_8025E44(void);
 extern void sub_802544C(void);
 extern void sub_8025518(void);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_8025728(void);
 extern void sub_802591C(void);
 extern u32 sub_801B3C0(struct Item *param_1);
@@ -80,19 +78,17 @@ extern void sub_801A5D8(u32,u32, u32, u32);
 extern void sub_801A8D0(u32);
 extern void sub_801A9E0(void);
 extern void PlaySound(u32);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, s16 *, u32, u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
 extern void sub_8023B7C(u32);
 extern void sub_8023DA4(void);
 
-extern void unk_CopyMoves4To8(struct Move *, struct Move *); // TODO convert arg 0 to PokemonMove struct *
+extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void GetLinkedSequence(u32, struct Move *, u16*);
 extern void sub_801F808(u16 *);
 u32 sub_801602C(u32 r0, u8 *name);
-extern void sub_8025E68(u32 , u32 *);
+extern void sub_8025E68(u32 , struct BulkItem *);
 
 bool8 sub_80252F0(s32 param_1)
 {
@@ -246,10 +242,10 @@ void sub_8025518(void)
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->unk70,2);
         break;
     case 4:
-        sub_8024458(gUnknown_203B2B4->unkE,2);
+        sub_8024458(gUnknown_203B2B4->species,2);
         break;
     case 5:
-        sub_801BEEC(gUnknown_203B2B4->unkE);
+        sub_801BEEC(gUnknown_203B2B4->species);
         break;
     case 0xb:
         sub_801A5D8(1,0,0,10);
@@ -284,7 +280,7 @@ void sub_8025518(void)
         break;
     case 0xf:
         unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
-        sub_801EE10(3,gUnknown_203B2B4->unkE,gUnknown_203B2B4->moves,0,0,0);
+        sub_801EE10(3,gUnknown_203B2B4->species,gUnknown_203B2B4->moves,0,0,0);
         break;
     case 0x10:
         sub_801F1B0(1,0);

@@ -6,6 +6,7 @@
 #include "input.h"
 #include "menu.h"
 #include "gulpin_shop.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B26C *gUnknown_203B26C;
 extern const struct UnkTextStruct2 gUnknown_80DC11C;
@@ -18,7 +19,6 @@ extern void sub_801EDA4();
 extern void sub_801EDC0();
 extern void sub_801E980();
 extern void sub_801EA28();
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_801EBC4();
 
 u32 DisplayGulpinDialogueSprite(s32 param_1,s16 pokeSpecies,struct Move *param_3)

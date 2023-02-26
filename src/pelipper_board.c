@@ -3,6 +3,7 @@
 #include "text.h"
 #include "menu.h"
 #include "input.h"
+#include "menu_input.h"
 
 // Guessing based off of 203B304
 struct unkStruct_203B308
@@ -18,8 +19,7 @@ struct unkStruct_203B308
     u8 fill51[0x64 - 0x51];
     u32 unk64;
     u32 unk68;
-    u32 unk6C;
-    u8 fill70[0xBC - 0x70];
+    struct MenuStruct unk6C;
     struct MenuItem unkBC[8];
     u16 unkFC[8];
     struct UnkTextStruct2 unk10C[4];
@@ -73,7 +73,6 @@ const u8 gPelipperBoard_Accepted[] = "Accepted";
 const u8 gPelipperStatusSlash[] = "/";
 static const u8 gPelipperfill[] = "pksdir0";
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802ECB4(void);
 extern void nullsub_134(void);
 extern void sub_802ED4C(void);
@@ -85,7 +84,6 @@ extern void sub_802EA58(void);
 extern void CreatePelipperBoardMenu(void);
 extern void sub_802EC10(void);
 
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
 extern void sub_802C39C(void);
