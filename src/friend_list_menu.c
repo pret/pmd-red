@@ -1,11 +1,13 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "item.h"
+#include "menu.h"
 #include "pokemon.h"
 #include "text.h"
 #include "team_inventory.h"
 #include "constants/move.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2B8
 {
@@ -26,9 +28,8 @@ struct unkStruct_203B2B8
     u32 unk70;
     u32 unk74;
     u32 unk78;
-    u32 unk7C;
-    u8 fill80[0xCC - 0x80];
-    u32 unkCC;
+    struct MenuStruct unk7C;
+    struct MenuStruct unkCC;
 };
 extern struct unkStruct_203B2B8 *gUnknown_203B2B8;
 extern u8 gAvailablePokemonNames[0x58];
@@ -69,8 +70,6 @@ extern void nullsub_104(void);
 extern void sub_801A928(void);
 extern void sub_8099690(u32);
 extern u32 sub_801A6E8(u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 
 extern u32 sub_801A8AC(void);
 extern u32 sub_8022860(void);

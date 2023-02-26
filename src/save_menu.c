@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "text.h"
 #include "save.h"
+#include "menu_input.h"
 
 struct unkSprite
 {
@@ -136,12 +137,9 @@ extern void ResetSprites(u32);
 extern void sub_8038440();
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-extern u8 sub_80130A8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, u32 *);
 extern void sub_80384D0();
 extern void sub_8038830();
 extern void sub_80388C4(void);
-extern u8 sub_8012FD8(struct MenuStruct *);
 extern void sub_8014114();
 extern void sub_80140F8(void);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);

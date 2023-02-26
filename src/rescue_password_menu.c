@@ -10,6 +10,7 @@
 #include "rescue_password_menu.h"
 #include "code_8094F88.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 extern u8 gRescuePasswordBuffer[];
 extern u32 gUnknown_202EC4C;
@@ -34,8 +35,6 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
 
 extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern bool8 sub_80951FC(struct unkStruct_203B480 *r0);
-extern u8 sub_8012FD8(struct MenuStruct *r0);
-extern void sub_8013114(struct MenuStruct *, s32 *);
 extern u32 sub_80154F0(void);
 extern void sub_8095274(u32);
 extern u32 sub_8031DCC(void);

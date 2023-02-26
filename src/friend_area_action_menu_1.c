@@ -6,6 +6,7 @@
 #include "team_inventory.h"
 #include "pokemon.h"
 #include "friend_area_action_menu.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -16,8 +17,6 @@ extern u32 sub_801EF38(u8 r0);
 extern void sub_801F214();
 
 extern void SetFriendAreaActionMenuState(u32);
-extern u8 sub_8012FD8(u32 *r0);
-extern void sub_8013114(u32 *, s32 *);
 extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_801A928();

@@ -3,6 +3,7 @@
 
 #include "text.h"
 #include "menu.h"
+#include "menu_input.h"
 
 enum DebugMenuOptions
 {

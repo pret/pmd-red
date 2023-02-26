@@ -7,12 +7,12 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "friend_area_action_menu.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32 *, u32, u32);
 extern void sub_8027D40(u32, struct BulkItem *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
@@ -30,7 +30,6 @@ extern void sub_801B3C0(struct Item *);
 extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void ResetSprites(u8 );
 extern void sub_802719C();

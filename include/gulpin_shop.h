@@ -18,8 +18,8 @@ struct unkStruct_203B26C
     u32 unk24;
     struct MenuItem unk28[8];
     u16 unk68[8];
-    u32 unk78;
-    u8 fill7C[0x118 - 0x7C]; 
+    struct MenuStruct unk78;
+    u8 fillC8[0x118 - 0xC8];
     /* 0x118 */ struct OpenedFile *faceFile;
     /* 0x11C */ u8 *faceData;
     /* 0x120 */ u16 unk120;

@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct unkSprite
 {
@@ -33,8 +34,6 @@ extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void sub_8038440();
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
-extern u8 sub_80130A8(struct MenuStruct *);
-extern void sub_8013114(struct MenuStruct *, u32 *);
 extern void sub_80384D0();
 
 void sub_80382E4(s32 param_1)

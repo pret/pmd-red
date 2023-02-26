@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "game_options.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct unkStruct_203B25C
 {
@@ -11,8 +12,7 @@ struct unkStruct_203B25C
     u32 chosenHintIndex;
     struct GameOptions newOptions;
     u32 unk18;
-    const char *unk1C;
-    u8 fill20[0x6C - 0x20];
+    struct MenuStruct unk1C;
     struct MenuItem menuItems[8];
     u16 unkAC[8];
     struct UnkTextStruct2 unkBC[4];
@@ -28,15 +28,12 @@ extern void sub_801E0FC();
 extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
-extern void sub_8012D60(const char **, struct MenuItem *, u32, u16 *, u32, u32);
 extern u32 sub_801E198(struct GameOptions *);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
 extern void CreateHintSelectionScreen(u32);
 extern void CreateChangeSettingsConfirmMenu(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_801E474(u32);
 extern u32 GetChosenHintIndex(void);
 extern void sub_801E54C(void);
@@ -47,7 +44,6 @@ extern void sub_801E2C4(void);
 extern s32 sub_80144A4(s32 *);
 extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 
 extern struct GameOptions *gGameOptionsRef;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
@@ -350,7 +346,7 @@ void sub_801DED0(void)
   switch(gUnknown_203B25C->state) {
     case 0:
     case 1:
-        gUnknown_203B25C->unk1C = gOthers_MenuOption;
+        gUnknown_203B25C->unk1C.unk0 = gOthers_MenuOption;
         sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->unk18,0);
         break;
     case 3:
@@ -420,8 +416,8 @@ void HandleOthersMenu(void)
   s32 menuAction;
   
   menuAction = 0;
-  if (sub_8012FD8((u32 *)&gUnknown_203B25C->unk1C) == '\0') {
-    sub_8013114((u32 *)&gUnknown_203B25C->unk1C,&menuAction);
+  if (sub_8012FD8(&gUnknown_203B25C->unk1C) == '\0') {
+    sub_8013114(&gUnknown_203B25C->unk1C,&menuAction);
     gUnknown_203B25C->unk18 = menuAction;
   }
   switch(menuAction)

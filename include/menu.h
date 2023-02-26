@@ -10,7 +10,7 @@ struct MenuItem
 struct MenuStruct
 {
     // size: 0x50
-    u8 *unk0;
+    const u8 *unk0; // header text?
     /* 0x4 */ const struct MenuItem *menuItems;
     const u32 *menuTextColorArray;
     u16 *unkC;

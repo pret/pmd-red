@@ -4,12 +4,10 @@
 
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
 extern u32 sub_8013BBC(u32 *);
-extern u8 sub_8012FD8(void *);
 extern void sub_803AE58(void);
 extern u32 sub_8016080(void);
 extern void sub_803ACD0(u32);
 extern void sub_80160D8(void);
-extern void sub_8013114(void *, s32 *);
 
 extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
