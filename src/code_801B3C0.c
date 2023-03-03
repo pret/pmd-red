@@ -39,9 +39,8 @@ struct unkStruct_203B234
     // size: 0x154
     u32 unk0;
     u32 state;
-    u32 unk8;
+    u32 fallbackState;
     u8 unkC;
-    u8 fillD[0x10 - 0xD];
     struct Item unk10;
     struct unkStruct_8090F58 unk14;
     struct Item unk20;
@@ -371,7 +370,7 @@ void sub_801B874(void)
     {
         case 0:
             if (gUnknown_203B234->unk10.id == ITEM_WEAVILE_FIG) {
-                gUnknown_203B234->unk8 = 0x10;
+                gUnknown_203B234->fallbackState = 0x10;
                 if(sub_8001784(0,0x47,1) != 0)
                 {
                     AddToTeamMoney(1000);
@@ -385,7 +384,7 @@ void sub_801B874(void)
             }
             else if (gUnknown_203B234->unk10.id == ITEM_MIME_JR_FIG)
             {
-                gUnknown_203B234->unk8 = 0x10;
+                gUnknown_203B234->fallbackState = 0x10;
                 if(sub_8001784(0, 0x47, 0) != 0)
                 {
                     AddToTeamMoney(1000);
@@ -406,13 +405,13 @@ void sub_801B874(void)
                         if((gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
                         {
     store:
-                            gUnknown_203B234->unk8 = 6;
+                            gUnknown_203B234->fallbackState = 6;
                         }
                         else
                         {
                             gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
                             PlaySound(0xCB);
-                            gUnknown_203B234->unk8 = 5;
+                            gUnknown_203B234->fallbackState = 5;
                         }
                     }
                     else
@@ -425,7 +424,7 @@ void sub_801B874(void)
                     AddItemToInventory(&gUnknown_203B234->unk10);
                     FillInventoryGaps();
                     PlaySound(0xCB);
-                    gUnknown_203B234->unk8 = 0x10;
+                    gUnknown_203B234->fallbackState = 0x10;
                 }
                 if(gUnknown_203B234->unk0 == 1)
                     sub_801B748(2);
@@ -452,7 +451,7 @@ void sub_801B874(void)
             sub_80141B4(gUnknown_80DBB9C,0,0,0x101);
             break;
         case 5:
-            gUnknown_203B234->unk8 = 0x10;
+            gUnknown_203B234->fallbackState = 0x10;
             sub_80141B4(gUnknown_80DBC28,0,0,0x101);
             break;
         case 6:
@@ -484,15 +483,15 @@ void sub_801B874(void)
             sub_8012D60(&gUnknown_203B234->unk78,gUnknown_203B234->unkCC,0,0,3,1);
             break;
         case 0xd:
-            gUnknown_203B234->unk8 = 0x10;
+            gUnknown_203B234->fallbackState = 0x10;
             sub_80141B4(gUnknown_80DBCC4,0,0,0x101);
             break;
         case 0xe:
-            gUnknown_203B234->unk8 = 0x10;
+            gUnknown_203B234->fallbackState = 0x10;
             sub_80141B4(gUnknown_80DBCE8,0,0,0x101);
             break;
         case 0xf:
-            gUnknown_203B234->unk8 = 0x10;
+            gUnknown_203B234->fallbackState = 0x10;
             sub_80141B4(gUnknown_80DBD24,0,0,0x101);
             break;
         case 0x10:
