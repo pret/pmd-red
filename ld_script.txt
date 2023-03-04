@@ -112,8 +112,7 @@ SECTIONS {
         asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
         asm/code_801D760.o(.text);
-        src/code_801DCC4.o(.text);
-        asm/code_801DCC4.o(.text);
+        src/options_menu.o(.text);
         src/hints_menu.o(.text);
         src/gulpin_shop.o(.text);
         asm/gulpin_shop.o(.text);

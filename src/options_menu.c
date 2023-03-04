@@ -1,9 +1,50 @@
 #include "global.h"
+#include "constants/input.h"
+#include "input.h"
 #include "memory.h"
-#include "menu.h"
-#include "game_options.h"
 #include "text.h"
+#include "game_options.h"
 #include "menu_input.h"
+
+struct unkStruct_203B260  
+{ 
+    struct GameOptions *optionsMenu;           
+    u32 unk4;           
+    u8  unk8;           
+    u8 fill9[0x10 - 0x9];
+    u32 unk10;        
+    u8 fill14[0x28 - 0x14];
+    s16 unk28;        
+    u8 fill2A[0x44 - 0x2A];
+    u32 unk44;        
+    struct UnkTextStruct2 * unk48;        
+    struct UnkTextStruct2 unk4C[4];        
+};
+struct unkStruct_203B260  *gUnknown_203B260;
+extern struct UnkTextStruct2 gUnknown_80DC020;
+extern struct UnkTextStruct2 gUnknown_80DC03C;
+
+extern u8 gWindowBGTitle[];
+extern u8 gUnknown_80DC064[];
+extern u8 gWindowBGGreenString[];
+extern u8 gWindowBGRedString[];
+extern u8 gWindowBGBlueString[];
+
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
+extern s32 sub_8008ED0(u8 *);
+extern s32 sub_8013800(u32 *, u32);
+extern void sub_80078A4(u32, u32, u32, u32, u32);
+extern u8 sub_80138B8(u32 *, u32);
+void PlayMenuSoundEffect(u32);
+s32 sub_8012AE8(void);
+void sub_801317C(u32 *);
+extern void sub_8013818(void *, u32, u32, u32);
+
+void CreateOptionsMenu(void);
+void nullsub_38(void);
 
 struct unkStruct_203B25C
 {
@@ -28,7 +69,7 @@ extern void sub_801E0FC();
 extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
-extern u32 sub_801E198(struct GameOptions *);
+extern bool8 sub_801E198(struct GameOptions *);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
@@ -514,4 +555,124 @@ void HandleChangeSettingsMenu(void)
             break;
     }
   }
+}
+
+bool8 sub_801E198(struct GameOptions *optionsMenu)
+{
+  gUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
+  gUnknown_203B260->optionsMenu = optionsMenu;
+  sub_801317C(&gUnknown_203B260->unk4);
+  gUnknown_203B260->unk44 = 0;
+  gUnknown_203B260->unk48 = &gUnknown_203B260->unk4C[0];
+  sub_8006518(gUnknown_203B260->unk4C);
+  gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC03C;
+  sub_8012D08(gUnknown_203B260->unk48,1);
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B260->unk4C,1,1);
+  sub_8013818(&gUnknown_203B260->unk10,1,1,gUnknown_203B260->unk44);
+  nullsub_38();
+  CreateOptionsMenu();
+  return TRUE;
+}
+
+u32 sub_801E218(void)
+{
+    bool32 flag;
+
+    flag = FALSE;
+
+    switch(sub_8012AE8())
+    {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_DPAD_LEFT:
+            if (gUnknown_203B260->unk28 == 0)
+            {
+                if (gUnknown_203B260->optionsMenu->windowColor == WINDOW_COLOR_BLUE) {
+                    gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_GREEN;
+                }
+                else {
+                    gUnknown_203B260->optionsMenu->windowColor--;
+                }
+                PlayMenuSoundEffect(3);
+                flag = TRUE;
+            }
+            break;
+        case INPUT_DPAD_RIGHT:
+            if(gUnknown_203B260->unk28 == 0)
+            {
+                if (gUnknown_203B260->optionsMenu->windowColor > WINDOW_COLOR_RED) {
+                    gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_BLUE;
+                }
+                else
+                    gUnknown_203B260->optionsMenu->windowColor++;
+                PlayMenuSoundEffect(3);
+                flag = TRUE;
+            }
+            break;
+    }
+
+    // == 1 is needed for matching
+    if ((sub_80138B8(&gUnknown_203B260->unk10,1) != 0) || (flag == TRUE)) {
+        nullsub_38();
+        CreateOptionsMenu();
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+void sub_801E2C4(void)
+{
+    if(gUnknown_203B260 != NULL)
+    {
+        gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC020;
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B260->unk4C, 1, 1);
+        MemoryFree(gUnknown_203B260);
+        gUnknown_203B260 = NULL;
+    }
+}
+
+
+void nullsub_38(void)
+{
+    
+}
+
+void CreateOptionsMenu(void)
+{
+  u32 uVar2;
+  u32 y;
+  
+  sub_8008C54(gUnknown_203B260->unk44);
+  sub_80073B8(gUnknown_203B260->unk44);
+  xxx_call_draw_string(0x10,0,gWindowBGTitle,gUnknown_203B260->unk44,0);
+  y = sub_8013800(&gUnknown_203B260->unk10,0);
+  xxx_call_draw_string(8,y,gUnknown_80DC064,gUnknown_203B260->unk44,0);
+
+  switch(gUnknown_203B260->optionsMenu->windowColor)
+  {
+      case WINDOW_COLOR_BLUE:
+        uVar2 = sub_8008ED0(gWindowBGBlueString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
+              y + 0xA,uVar2,7);
+        break;
+      case WINDOW_COLOR_RED:
+        uVar2 = sub_8008ED0(gWindowBGRedString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
+              y + 0xA,uVar2,7);
+        break;
+      case WINDOW_COLOR_GREEN:
+        uVar2 = sub_8008ED0(gWindowBGGreenString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
+              y + 0xA,uVar2,7);
+        break;
+  }
+  sub_80073E0(gUnknown_203B260->unk44);
 }
