@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "text.h"
 #include "item.h"
+#include "menu.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
 
@@ -61,12 +62,7 @@ struct WonderMailStruct_203B2C0
     struct WonderMailStruct_203B2C0_sub unk130;
     u8 fill16A[0x218 - 0x1B8];
     u8 mailIndex;
-    u32 unk21C;
-    u8 padding[0x7C];
-    u32 unk29C;
-    u8 padding6[0x6C];
-    u32 unk30C;
-    u8 padding8[0x4C];
+    struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
     /* 0x41C */ u32 unkfill; // ItemSlot?
@@ -99,10 +95,7 @@ struct WonderMailStruct_203B2C4
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
     s8 mailIndex;
-    u32 unk21C;
-    u8 filler220[0x30C - 0x220];
-    u32 unk30C;
-    u8 filler310[0x35C - 0x310];
+    struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
     struct Item unk41C;

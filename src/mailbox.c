@@ -5,6 +5,7 @@
 #include "input.h"
 #include "mailbox.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 
 extern void HandleMailboxMenu(void);
@@ -23,7 +24,7 @@ extern void sub_802E1AC(void);
 const struct UnkTextStruct2 gUnknown_80E0284 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -33,7 +34,7 @@ const struct UnkTextStruct2 gUnknown_80E0284 =
 const struct UnkTextStruct2 gUnknown_80E029C =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x03, 0x00, 0x03, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -43,7 +44,7 @@ const struct UnkTextStruct2 gUnknown_80E029C =
 const struct UnkTextStruct2 gUnknown_80E02B4 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x04, 0x00, 0x00, 0x00,
+    0x04,
     0x15, 0x00, 0x06, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -53,7 +54,7 @@ const struct UnkTextStruct2 gUnknown_80E02B4 =
 const struct UnkTextStruct2 gUnknown_80E02CC =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x04, 0x00, 0x00, 0x00,
+    0x04,
     0x15, 0x00, 0x0f, 0x00,
     0x06, 0x03,
     0x03, 0x00,
@@ -71,11 +72,9 @@ static const u8 mailbox_fill[] = "pksdir0";
 
 extern struct unkStruct_203B304 *gUnknown_203B304;
 extern void sub_802E088(u32);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
 
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);
@@ -172,7 +171,7 @@ void sub_802E0A0(void)
             CreateMailActionMenu();
             gUnknown_203B304->unk10C[2] = gUnknown_80E02B4;
             sub_8012CAC(&gUnknown_203B304->unk10C[2], gUnknown_203B304->unkBC);
-            gUnknown_203B304->unk10C[2].unk0c = 6;
+            gUnknown_203B304->unk10C[2].unkC = 6;
             gUnknown_203B304->unk10C[3] = gUnknown_80E02CC;
             break;
         default:

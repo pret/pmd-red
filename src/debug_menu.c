@@ -9,13 +9,14 @@
 #include "pokemon.h"
 #include "save.h"
 #include "text_util.h"
+#include "menu_input.h"
 
 extern struct DebugMenu *gUnknown_203B3EC;
 
 const struct UnkTextStruct2 gUnknown_80E7D40 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -25,7 +26,7 @@ const struct UnkTextStruct2 gUnknown_80E7D40 =
 const struct UnkTextStruct2 gUnknown_80E7D58 = 
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x02, 0x00, 0x02, 0x00,
     0x09, 0x0b,
     0x0b, 0x00,
@@ -54,14 +55,12 @@ ALIGNED(4) static const char debug_menu_fill6[] = "pksdir0";
 
 
 
-extern u8 sub_8012FD8(struct DebugMenu *);
-extern void sub_8013114(struct DebugMenu *, s32 *);
 extern void sub_80976F8(u8);
 extern void sub_803A3BC(void);
 extern void sub_803A3A0(void);
 
-extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
-extern void sub_8035CF4(struct DebugMenu *, u32, u32);
+extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
+extern void sub_8035CF4(struct MenuStruct*, u32, u32);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_808D1DC(u8 *);
 extern void sub_808CFD0(u8 *, s32, u8 *, u32, u32 *, u16 *);
@@ -102,8 +101,8 @@ u32 UpdateDebugMenu(void)
   nextMenu = MENU_NO_SCREEN_CHANGE;
   debugMenuAction = 11;
 
-  if (sub_8012FD8(gUnknown_203B3EC) == 0) {
-    sub_8013114(gUnknown_203B3EC, &debugMenuAction);
+  if (sub_8012FD8(&gUnknown_203B3EC->unk0[0]) == 0) {
+    sub_8013114(&gUnknown_203B3EC->unk0[0], &debugMenuAction);
   }
 
   switch(debugMenuAction) {
@@ -147,8 +146,8 @@ u32 UpdateDebugMenu(void)
 
 void SetDebugMenuItems(void)
 {
-  SetMenuItems(gUnknown_203B3EC, gUnknown_203B3EC->unk140, 0, &gUnknown_80E7D58, gDebugMenuItems, 1, 0xd, 0);
-  sub_8035CF4(gUnknown_203B3EC,0,1);
+  SetMenuItems(gUnknown_203B3EC->unk0, gUnknown_203B3EC->unk140, 0, &gUnknown_80E7D58, gDebugMenuItems, 1, 0xd, 0);
+  sub_8035CF4(gUnknown_203B3EC->unk0,0,1);
 }
 
 void sub_803A3A0(void)

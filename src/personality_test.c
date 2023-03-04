@@ -1,6 +1,8 @@
 #include "global.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
+#include "constants/input.h"
+#include "constants/type.h"
 #include "random.h"
 #include "file_system.h"
 #include "pokemon.h"
@@ -355,7 +357,7 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 const struct UnkTextStruct2 gUnknown_80F4244 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x05, 0x00, 0x00, 0x00,
+    0x05,
     0x0C, 0x00, 0x06, 0x00,
     0x05, 0x05,
     0x05, 0x00,
@@ -381,7 +383,7 @@ const s16 gPartners[NUM_PARTNERS] =
 const struct UnkTextStruct2 gUnknown_80F4278 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -391,7 +393,7 @@ const struct UnkTextStruct2 gUnknown_80F4278 =
 const struct UnkTextStruct2 gUnknown_80F4290 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x09, 0x0B,
     0x0D, 0x00,
@@ -401,7 +403,7 @@ const struct UnkTextStruct2 gUnknown_80F4290 =
 const struct UnkTextStruct2 gUnknown_80F42A8 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x05, 0x00, 0x00, 0x00,
+    0x05,
     0x0E, 0x00, 0x04, 0x00,
     0x05, 0x05,
     0x05, 0x00,
@@ -801,7 +803,7 @@ u16 HandlePartnerSelectionInput(void)
 
   partnerID = gUnknown_203B404->currPartnerSelection;
   gUnknown_203B404->unk16 = 0;
-  if (GetKeyPress(&gUnknown_203B404->unk18) == A_BUTTON) {
+  if (GetKeyPress(&gUnknown_203B404->unk18) == INPUT_A_BUTTON) {
     PlayMenuSoundEffect(0);
     return gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
   }
@@ -1034,8 +1036,8 @@ s32 GetValidPartners(void)
     CurrentPartnerID = gPartners[counter];
     currentPartnerTypes[0] = GetPokemonType(CurrentPartnerID, 0);
     currentPartnerTypes[1] = GetPokemonType(CurrentPartnerID, 1);
-    if (((currentPartnerTypes[0] == '\0') || ((currentPartnerTypes[0] != PlayerType[0] && (currentPartnerTypes[0] != PlayerType[1]))))
-       && ((currentPartnerTypes[1] == '\0' || ((currentPartnerTypes[1] != PlayerType[0] && (currentPartnerTypes[1] != PlayerType[1])))
+    if (((currentPartnerTypes[0] == TYPE_NONE) || ((currentPartnerTypes[0] != PlayerType[0] && (currentPartnerTypes[0] != PlayerType[1]))))
+       && ((currentPartnerTypes[1] == TYPE_NONE || ((currentPartnerTypes[1] != PlayerType[0] && (currentPartnerTypes[1] != PlayerType[1])))
            ))) {
       gUnknown_203B404->PartnerArray[ValidPartnerCounter] = CurrentPartnerID;
       ValidPartnerCounter++;

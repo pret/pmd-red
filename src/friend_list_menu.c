@@ -1,34 +1,35 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "item.h"
+#include "menu.h"
 #include "pokemon.h"
 #include "text.h"
 #include "team_inventory.h"
 #include "constants/move.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2B8
 {
     // size: 0x280
     u32 state;
-    u32 unk4;
+    u32 fallbackState;
     u8 unk8;
     /* 0xA */ s16 pokeSpecies;
-    u32 unkC;
+    u32 id;
     /* 0x10 */ struct BulkItem item1;
     /* 0x14 */ struct BulkItem item2;
     struct PokemonStruct *unk18;
-    u8 fill1C[0x4];
-    u32 unk20;
+    bool8 isTeamLeader;
+    u32 moveIndex;
     /* 0x24 */ u16 moveID;
-    struct Move unk28[4];
-    u8 fill48[0x70 - 0x48];
+    struct Move moves[8];
+    u16 moveIDs[4];   // some list of move IDs
     u32 unk70;
     u32 unk74;
     u32 unk78;
-    u32 unk7C;
-    u8 fill80[0xCC - 0x80];
-    u32 unkCC;
+    struct MenuStruct unk7C;
+    struct MenuStruct unkCC;
 };
 extern struct unkStruct_203B2B8 *gUnknown_203B2B8;
 extern u8 gAvailablePokemonNames[0x58];
@@ -69,8 +70,6 @@ extern void nullsub_104(void);
 extern void sub_801A928(void);
 extern void sub_8099690(u32);
 extern u32 sub_801A6E8(u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 
 extern u32 sub_801A8AC(void);
 extern u32 sub_8022860(void);
@@ -268,15 +267,15 @@ void sub_8026B64(void)
     switch(sub_801A6E8(1))
     {
         case 3:
-            gUnknown_203B2B8->unkC = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].quantity;
+            gUnknown_203B2B8->id = sub_801A8AC();
+            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8026074(0x14);
             break;
         case 4:
-            gUnknown_203B2B8->unkC = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->unkC].quantity;
+            gUnknown_203B2B8->id = sub_801A8AC();
+            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8099690(0);
             sub_8026074(0x15);
             break;
@@ -307,7 +306,7 @@ void sub_8026C14(void)
       case 0xb:
         nextState = 0xF;
         PlaySound(0x14d);
-        ShiftItemsDownFrom(gUnknown_203B2B8->unkC);
+        ShiftItemsDownFrom(gUnknown_203B2B8->id);
         FillInventoryGaps();
         if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
           AddHeldItemToInventory(&gUnknown_203B2B8->item2);
@@ -359,8 +358,8 @@ void sub_8026D0C(void)
             break;
         case 3:
         case 4:
-            gUnknown_203B2B8->unk20 = sub_801F194();
-            gUnknown_203B2B8->moveID = gUnknown_203B2B8->unk28[gUnknown_203B2B8->unk20].id;
+            gUnknown_203B2B8->moveIndex = sub_801F194();
+            gUnknown_203B2B8->moveID = gUnknown_203B2B8->moves[gUnknown_203B2B8->moveIndex].id;
             sub_8026074(0x18);
             break;
         case 2:
@@ -390,7 +389,7 @@ void sub_8026D88(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        sub_8026074(gUnknown_203B2B8->unk4);
+        sub_8026074(gUnknown_203B2B8->fallbackState);
     }
 }
 
@@ -423,7 +422,7 @@ void sub_8026E08(u32 r0)
     sub_808D930(buffer, gUnknown_203B2B8->unk18->speciesNum);
     sprintfStatic(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
-    xxx_call_draw_string(((gUnknown_80DD370.unk0c << 3) - x) / 2, 3, buffer1, r0, 0);
+    xxx_call_draw_string(((gUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }
 

@@ -96,7 +96,7 @@ struct Dungeon
     u8 fill662[0x666 - 0x662];
     /* 0x666 */ u16 windTurns; // Turns remaining before getting swept out of the dungeon.
     u8 fill668[0x66A - 0x668];
-    u16 unk66A;
+    u16 bossSongIndex;
     u8 unk66C;
     u8 unk66D;
     /* 0x66E */ u8 unk66E;

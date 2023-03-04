@@ -4,12 +4,10 @@
 
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
 extern u32 sub_8013BBC(u32 *);
-extern u8 sub_8012FD8(void *);
 extern void sub_803AE58(void);
 extern u32 sub_8016080(void);
 extern void sub_803ACD0(u32);
 extern void sub_80160D8(void);
-extern void sub_8013114(void *, s32 *);
 
 extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
@@ -36,14 +34,14 @@ void sub_803AF38(void)
 
 void sub_803AF88(void)
 {
-  s32 local_c;
+  s32 menuAction;
   
-  local_c = 0;
-  sub_8023A94(local_c);
+  menuAction = 0;
+  sub_8023A94(0);
   if (sub_8012FD8(&gUnknown_203B3F8->unk10) == 0) {
-    sub_8013114(&gUnknown_203B3F8->unk10, &local_c);
+    sub_8013114(&gUnknown_203B3F8->unk10, &menuAction);
   }
-  switch(local_c)
+  switch(menuAction)
   {
       case 4:
         sub_803ACD0(5);

@@ -40,6 +40,13 @@ extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern struct Entity *gPotentialTargets[NUM_DIRECTIONS];
 
+extern void sub_8055A00(struct Entity *, u8, u32, u32, u32);
+extern void sub_806A9B4(struct Entity *, u8);
+extern bool8 sub_8044B28(void);
+extern void sub_8057588(struct Entity *, u32);
+extern void sub_806A1B0(struct Entity *);
+
+
 void DecideAttack(struct Entity *pokemon)
 {
     struct EntityInfo *pokemonInfo = pokemon->info;
@@ -921,4 +928,27 @@ bool8 IsTargetInRange(struct Entity *pokemon, struct Entity *targetPokemon, s32 
         }
     }
     return FALSE;
+}
+
+void sub_807CABC(struct Entity *target)
+{
+  struct EntityInfo *entityInfo;
+  s32 counter;
+
+  counter = 0; 
+  while (1) {
+        if(counter >= sub_8070828(target, TRUE)) break;
+        entityInfo = target->info;
+        sub_8055A00(target,(entityInfo->action).actionUseIndex,1,0,0);
+        if(!EntityExists(target)) break;
+        if(sub_8044B28()) break;
+        if(entityInfo->unk159) break;
+        counter++;
+  }
+
+  sub_8057588(target,1);
+  if (EntityExists(target)) {
+    sub_806A9B4(target,(target->info->action).actionUseIndex);
+  }
+  sub_806A1B0(target);
 }

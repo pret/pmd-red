@@ -1,8 +1,9 @@
 #include "global.h"
+#include "constants/input.h"
 #include "input.h"
-#include "gba/io_reg.h"
 #include "memory.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct AdventureLog
 {
@@ -23,7 +24,7 @@ extern struct AdventureLog *gAdventureLog;
 
 const struct UnkTextStruct2 gUnknown_80E1FF0 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x00, 0x00, 0x00, 0x00,
    0x00, 0x00,
    0x00, 0x00,
@@ -31,7 +32,7 @@ const struct UnkTextStruct2 gUnknown_80E1FF0 = {
 };
 const struct UnkTextStruct2 gUnknown_80E2008 = {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x1A, 0x04,
     0x06, 0x00,
@@ -62,7 +63,6 @@ extern void xxx_call_draw_string(s32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void xxx_format_and_draw(u32, u32, const char *, u32, u32);
 const u8 *GetAdventureLogLine(u8 index);
 extern s32 sub_8013800(void *, s32);
@@ -94,10 +94,10 @@ u32 HandleAdventureLogInput(u8 param_1)
   else {
     switch(GetKeyPress(gAdventureLog))
     {
-        case B_BUTTON:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case A_BUTTON:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
         default:

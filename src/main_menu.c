@@ -2,6 +2,7 @@
 #include "text.h"
 #include "menu.h"
 #include "input.h"
+#include "menu_input.h"
 
 #include "adventure_log.h"
 #include "debug_menu.h"
@@ -30,30 +31,11 @@
 // Deletes the Save
 
 
-struct unkStruct_Menu
-{
-    // size 0x50;
-    u8 fil0[0x4C];
-    u8 unk4C;
-    u8 fill4D[0x50 - 0x4D];
-};
-
 struct unkStruct_203B34C
 {
     // size: 0x1A8
     u32 unk0;
-    u32 unk4;
-    struct MenuItem *unk8; // Array of menu choices??
-    u8 fillC[0x30 - 0xC];
-    s16 menuIndex;
-    u8 fill32[0x54 - 0x32];
-
-    u32 unk54;
-    u8 fill58[0xA4 - 0x58];
-
-    u32 unkA4;
-    u32 unkA8;
-    u8 fillAC[0x144 - 0xAC];
+    struct MenuStruct unk4[4];
     struct UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
 };
@@ -76,11 +58,7 @@ extern void sub_80370D4(void);
 extern void CleanWonderMailMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, s32 *);
 extern u8 sub_803D0D8();
-extern void sub_8012D60(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
-extern void sub_8012E04(struct unkStruct_Menu *, const struct MenuItem *, u32, u32, u32, u32);
 
 void CleanMainMenu(void);
 void DrawMainMenu(void);
@@ -113,7 +91,7 @@ static const u8 sUnknown_80E6070[];
 
 const struct UnkTextStruct2 gUnknown_80E59A8 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x00, 0x00, 0x00, 0x00,
    0x00, 0x00,
    0x00, 0x00,
@@ -124,7 +102,7 @@ static const char main_menu_fill[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80E59C8 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x00, 0x00, 0x00, 0x00,
    0x00, 0x00,
    0x00, 0x00,
@@ -133,7 +111,7 @@ const struct UnkTextStruct2 gUnknown_80E59C8 = {
 
 const struct UnkTextStruct2 gUnknown_80E59E0 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x03,
    0x03, 0x00,
@@ -149,7 +127,7 @@ const struct MenuItem gUnknown_80E59F8[] =
 
 const struct UnkTextStruct2 gUnknown_80E5A29 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x02,
    0x02, 0x00,
@@ -164,7 +142,7 @@ const struct MenuItem gUnknown_80E5A44[] =
 
 const struct UnkTextStruct2 gUnknown_80E5A60 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03, 
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x08,
    0x08, 0x00,
@@ -173,7 +151,7 @@ const struct UnkTextStruct2 gUnknown_80E5A60 = {
 
 const struct UnkTextStruct2 gUnknown_80E5A78 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0B, 0x09,
    0x09, 0x00,
@@ -203,7 +181,7 @@ const struct MenuItem gUnknown_80E5AFC[] =
 
 const struct UnkTextStruct2 gUnknown_80E5B34 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x08,
    0x08, 0x00,
@@ -233,7 +211,7 @@ const struct MenuItem gUnknown_80E5B8C[] =
 
 const struct UnkTextStruct2 gUnknown_80E5BC4 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x08,
    0x08, 0x00,
@@ -263,7 +241,7 @@ const struct MenuItem gUnknown_80E5C18[] =
 
 const struct UnkTextStruct2 gUnknown_80E5C50 = { 
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x02, 0x00,
    0x0A, 0x03,
    0x03, 0x00,
@@ -286,7 +264,7 @@ const struct MenuItem gUnknown_80E5C9C[] =
 
 const struct UnkTextStruct2 gUnknown_80E5CB4 = {
    0x00, 0x00, 0x00, 0x00,
-   0x03, 0x00, 0x00, 0x00,
+   0x03,
    0x02, 0x00, 0x0F, 0x00,
    0x1A, 0x03,
    0x03, 0x00,
@@ -645,18 +623,18 @@ void sub_8035C1C(void)
 }
 
 void
-SetMenuItems(struct unkStruct_Menu *param_1, struct UnkTextStruct2 *unkData, int param_3, const struct UnkTextStruct2 *param_4, const struct MenuItem *param_5, char param_6 ,u32 param_7, u32 unused_8)
+SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6 ,u32 param_7, u32 unused_8)
 {
-  unkData[param_3] = *param_4;
+  unkData[index] = *param_4;
   ResetUnusedInputStruct();
   sub_800641C(unkData,1,1);
-  if (param_6 != '\0') {
-       sub_8012D60(&param_1[param_3],param_5,0,0,param_7,param_3);
+  if (param_6 != 0) {
+       sub_8012D60(&param_1[index],menuItems,0,0,param_7,index);
   }
   else {
-       sub_8012E04(&param_1[param_3],param_5,0,0,0,param_3);
+       sub_8012E04(&param_1[index],menuItems,0,0,0,index);
   }
-  param_1[param_3].unk4C = 1;
+  param_1[index].unk4C = TRUE;
 }
 
 void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
@@ -667,27 +645,12 @@ void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
     sub_800641C(dataArray, 1, 1);
 }
 
-NAKED
-void sub_8035CF4(void * Menu, u32 index, u8 r2)
-{
-	asm_unified("\tpush {lr}\n"
-	"\tadds r3, r0, 0\n"
-	"\tlsls r0, r1, 2\n"
-	"\tadds r0, r1\n"
-	"\tlsls r0, 4\n"
-	"\tadds r0, r3\n"
-	"\tadds r1, r0, 0\n"
-	"\tadds r1, 0x4C\n"
-	"\tstrb r2, [r1]\n"
-	"\tadds r2, r0, 0\n"
-	"\tadds r2, 0x4D\n"
-	"\tmovs r1, 0x1\n"
-	"\tstrb r1, [r2]\n"
-	"\tsubs r1, 0x2\n"
-	"\tstr r1, [r0, 0x48]\n"
-	"\tbl sub_8012EBC\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
+void sub_8035CF4(struct MenuStruct * Menu, u32 index, bool8 r2)
+ {
+    Menu[index].unk4C = r2;
+    Menu[index].unk4D = 1;
+    Menu[index].menuAction = -1;
+    sub_8012EBC(&Menu[index]);
 }
 
 void sub_8035D1C(void)
@@ -814,10 +777,10 @@ void DrawMainMenu(void)
 
     if(SetMainMenuText())
     {
-        sub_8035CF4(&gUnknown_203B34C->unk4,2,0);
+        sub_8035CF4(gUnknown_203B34C->unk4,2,0);
     }
 
-    sub_8035CF4(&gUnknown_203B34C->unk4,0,1);
+    sub_8035CF4(gUnknown_203B34C->unk4,0,1);
     gUnknown_203B34C->unk0 = 1;
 }
 
@@ -838,14 +801,14 @@ u32 UpdateMainMenu(void)
     switch(gUnknown_203B34C->unk0)
     {
         case 1:
-            sub_8012FD8(&gUnknown_203B34C->unkA4);
-            if(!sub_8012FD8(&gUnknown_203B34C->unk4))
-                sub_8013114(&gUnknown_203B34C->unk4, &nextMenu);
+            sub_8012FD8(&gUnknown_203B34C->unk4[2]);
+            if(!sub_8012FD8(gUnknown_203B34C->unk4))
+                sub_8013114(gUnknown_203B34C->unk4, &nextMenu);
 
             if(SetMainMenuText())
             {
-                sub_8035CF4(&gUnknown_203B34C->unk4, 0, 1);
-                sub_8035CF4(&gUnknown_203B34C->unk4, 2, 0);
+                sub_8035CF4(gUnknown_203B34C->unk4, 0, 1);
+                sub_8035CF4(gUnknown_203B34C->unk4, 2, 0);
             }
             switch(nextMenu)
             {
@@ -856,8 +819,8 @@ u32 UpdateMainMenu(void)
                     gUnknown_203B34C->unk0 = 1;
                     nextMenu = MENU_NO_SCREEN_CHANGE;
                     ResetUnusedInputStruct();
-                    sub_8035CF4(&gUnknown_203B34C->unk4, 0, 1);
-                    sub_8035CF4(&gUnknown_203B34C->unk4, 2, 0);
+                    sub_8035CF4(gUnknown_203B34C->unk4, 0, 1);
+                    sub_8035CF4(gUnknown_203B34C->unk4, 2, 0);
                     break;
                 case MENU_TRADE_ITEMS:
                     sub_8035DA0();
@@ -880,8 +843,8 @@ u32 UpdateMainMenu(void)
             }
             break;
         case 0xC:
-            if(!sub_8012FD8(&gUnknown_203B34C->unk54))
-                sub_8013114(&gUnknown_203B34C->unk54, &nextMenu);
+            if(!sub_8012FD8(&gUnknown_203B34C->unk4[1]))
+                sub_8013114(&gUnknown_203B34C->unk4[1], &nextMenu);
             switch(nextMenu)
             {
                 case 0xffdd:
@@ -914,11 +877,11 @@ u32 UpdateMainMenu(void)
 bool8 SetMainMenuText(void)
 {
   u32 menuChoice;
-  struct MenuItem *preload;
+  const struct MenuItem *preload;
 
  // Have to load the pointer before the index
-  preload = gUnknown_203B34C->unk8;
-  menuChoice = preload[gUnknown_203B34C->menuIndex].menuAction; // chosen menu action?
+  preload = gUnknown_203B34C->unk4[0].menuItems;
+  menuChoice = preload[gUnknown_203B34C->unk4[0].menuIndex].menuAction; // chosen menu action?
   if (gUnknown_203B34C->currMenuChoice == menuChoice) {
     return FALSE;
   }
@@ -929,50 +892,50 @@ bool8 SetMainMenuText(void)
   switch(menuChoice) {
     case MENU_WIRELESS_COMMS:
         // Using wireless communications, you can go on an adventure to unknown worlds.
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E6030,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E6030,0,0,0);
         break;
     case MENU_WONDER_MAIL:
         // Using passwords, you can receive Wonder Mail
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F80,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F80,0,0,0);
         break;
     case MENU_AWAITING_RESCUE:
         // You are awaiting resuce by a friend
         // You can give up waiting for rescue
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F1C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5F1C,0,0,0);
         break;
     case MENU_NEW_GAME:
         // Start an entirely new adventure
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5CCC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5CCC,0,0,0);
         break;
     case MENU_CONTINUE:
         // Resume your adventure from where you last saved
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DA0,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DA0,0,0,0);
         break;
     case MENU_DELETE_SAVE_PROMPT:
         // This will delete your saved game data.
         // Beware! This will delete it forever
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DF0,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5DF0,0,0,0);
         break;
     case MENU_ADVENTURE_LOG:
         // Check your career as an adventurer
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D0C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D0C,0,0,0);
         break;
     case MENU_FRIEND_RESCUE:
         // Using a Game Link cable or passwords, friends may rescue each other
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5E5C,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5E5C,0,0,0);
         break;
     case MENU_TRADE_ITEMS:
         // Using a Game Link cable you can trade stored items with a friend
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5EBC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5EBC,0,0,0);
         break;
     case MENU_DUAL_SLOT:
         // Using Dual Slot function, you can receive teams from your friends
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5FCC,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5FCC,0,0,0);
         break;
     case MENU_DEBUG:
         // This is the Debug Mode.
         // It won't be in the release version
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D48,0,0,0);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,2,&gUnknown_80E5CB4,gUnknown_80E5D48,0,0,0);
         break;
     default:
         break;
@@ -986,9 +949,9 @@ void sub_803623C(void)
   SetMainMenuItems();
   gUnknown_203B34C->currMenuChoice = -1;
   if (SetMainMenuText()) {
-    sub_8035CF4(&gUnknown_203B34C->unk4,2,0);
+    sub_8035CF4(gUnknown_203B34C->unk4,2,0);
   }
-  sub_8035CF4(&gUnknown_203B34C->unk4,0,1);
+  sub_8035CF4(gUnknown_203B34C->unk4,0,1);
 }
 
 void SetMainMenuItems(void)
@@ -1003,7 +966,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-          SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5C18,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5C18,1,gUnknown_203B350,1);
         }
         else {
             // Revive Team
@@ -1011,7 +974,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-          SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5BC4,gUnknown_80E5BDC,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5BC4,gUnknown_80E5BDC,1,gUnknown_203B350,1);
         }
       }
       else {
@@ -1022,7 +985,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-          SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5AFC,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5AFC,1,gUnknown_203B350,1);
         }
         else {
             // Continue
@@ -1030,7 +993,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-          SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A60,gUnknown_80E5A90,1,gUnknown_203B350,1);
+          SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A60,gUnknown_80E5A90,1,gUnknown_203B350,1);
         }
       }
     }
@@ -1042,7 +1005,7 @@ void SetMainMenuItems(void)
             // Friend Rescue
             // Trade Items
             // Wonder Mail
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5B8C,1,gUnknown_203B350,1);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5A78,gUnknown_80E5B8C,1,gUnknown_203B350,1);
       }
       else {
             // Awaiting Rescue
@@ -1050,7 +1013,7 @@ void SetMainMenuItems(void)
             // Adventure Log
             // Friend Rescue
             // Trade Items
-        SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5B34,gUnknown_80E5B4C,1,gUnknown_203B350,1);
+        SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E5B34,gUnknown_80E5B4C,1,gUnknown_203B350,1);
       }
     }
   }
@@ -1058,7 +1021,7 @@ void SetMainMenuItems(void)
   {
       // New Game
       // Adventure Log
-    SetMenuItems((struct unkStruct_Menu *)&gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E59E0,gUnknown_80E59F8,1,gUnknown_203B350,1);
+    SetMenuItems(gUnknown_203B34C->unk4,gUnknown_203B34C->unk144,0,&gUnknown_80E59E0,gUnknown_80E59F8,1,gUnknown_203B350,1);
   }
 }
 

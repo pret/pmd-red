@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "memory.h"
 #include "text.h"
+#include "menu_input.h"
 
 struct unkStruct_203B35C
 {
@@ -15,8 +16,7 @@ struct unkStruct_203B35C
     u32 linkStatus;
     u32 state;
     u8 fillC[0x1C - 0xC];
-    u32 unk1C;
-    u8 fill20[0x15C - 0x20];
+    struct MenuStruct unk1C[4];
     struct UnkTextStruct2 unk15C[4];
     u8 unk1BC[4];
     u32 unk1C0[9];
@@ -56,19 +56,17 @@ extern struct MenuItem gUnknown_80E6D6C[];
 
 extern void sub_8037400(void);
 extern void ResetSprites(u32);
-extern void sub_8035CF4(u32 *,u32, u32);
+extern void sub_8035CF4(struct MenuStruct *,u32, u32);
 extern void sub_80376CC();
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
-extern u8 sub_80130A8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_8037C10(u32);
 extern void sub_8037748(void);
 extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
-extern void SetMenuItems(void *, void *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, void *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
 extern void sub_800CB20();
@@ -107,9 +105,9 @@ void sub_8036FDC(s32 param_1)
   }
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B35C->unk15C,1,1);
-  SetMenuItems(&gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,
+  SetMenuItems(gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,
                6,0);
-  sub_8035CF4(&gUnknown_203B35C->unk1C,0,1);
+  sub_8035CF4(gUnknown_203B35C->unk1C,0,1);
   sub_80376CC();
 }
 #else
@@ -250,8 +248,8 @@ u32 sub_80370F0(void)
   nextMenu = MENU_NO_SCREEN_CHANGE;
   switch(gUnknown_203B35C->state){
       case 0:
-        if (sub_80130A8(&gUnknown_203B35C->unk1C) == '\0') {
-            sub_8013114(&gUnknown_203B35C->unk1C,&local_10);
+        if (sub_80130A8(&gUnknown_203B35C->unk1C[0]) == '\0') {
+            sub_8013114(&gUnknown_203B35C->unk1C[0],&local_10);
         }
         if (local_10 == 4) {
             sub_8037748();
@@ -271,8 +269,8 @@ u32 sub_80370F0(void)
           return 0x29; // TODO: what screen is this?
         }
         else {
-          if (sub_80130A8(&gUnknown_203B35C->unk1C) == '\0') {
-            sub_8013114(&gUnknown_203B35C->unk1C,&local_10);
+          if (sub_80130A8(&gUnknown_203B35C->unk1C[0]) == '\0') {
+            sub_8013114(&gUnknown_203B35C->unk1C[0],&local_10);
           }
           if (local_10 != 4) {
             PlayMenuSoundEffect(3);
@@ -302,8 +300,8 @@ void sub_80371B8(void)
       // Success!
       // The item exchange with your friend
       // went through successfully
-      SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50, gUnknown_80E6C68, 0, 6, 0);
-      sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
+      SetMenuItems(gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50, gUnknown_80E6C68, 0, 6, 0);
+      sub_8035CF4(gUnknown_203B35C->unk1C, 0, 1);
     }
   }
   else {
@@ -362,8 +360,8 @@ void sub_80371B8(void)
           MenuItems = gUnknown_80E6C0C;
           break;
     }
-    SetMenuItems(&gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
-    sub_8035CF4(&gUnknown_203B35C->unk1C, 0, 1);
+    SetMenuItems(gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
+    sub_8035CF4(gUnknown_203B35C->unk1C, 0, 1);
     if ((gUnknown_203B35C->linkStatus != COMMS_GOOD) && (gUnknown_203B35C->unk0 == 0) &&
         (item = sub_8035D94(), item->itemIndex.itemIndex_u8 != ITEM_NOTHING) && (item->numItems != 0)) {
             gTeamInventory_203B460->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;

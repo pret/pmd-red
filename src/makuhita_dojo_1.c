@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/colors.h"
 #include "constants/dungeon.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "dungeon.h"
 #include "input.h"
@@ -8,6 +9,7 @@
 #include "text.h"
 #include "menu.h"
 #include "makuhita_dojo.h"
+#include "menu_input.h"
 
 struct unkStruct_203B31C
 {
@@ -35,7 +37,7 @@ static const u8 makuhita_dojo_fill[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80E07EC = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -43,7 +45,7 @@ const struct UnkTextStruct2 gUnknown_80E07EC = {
 };
 const struct UnkTextStruct2 gUnknown_80E0804 = {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x0E, 0x0E,
     0x0E, 0x00,
@@ -65,7 +67,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern u8 sub_80A2740(s32 r0);
 extern s16 sub_80A2668(u32 r0);
 extern s32 sub_8013800(void *, u32);
@@ -80,7 +81,6 @@ extern u8 sub_80138B8(void *, u32);
 extern void PlayMenuSoundEffect(u32);
 extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
-extern void sub_8012D08(void *, u32);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_803053C(void);
 extern u8 sub_80306A4(void);
@@ -215,10 +215,10 @@ u32 sub_80303AC(u8 param_1)
   }
   switch(GetKeyPress(&gUnknown_203B31C->unk30))
   {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
         PlayMenuSoundEffect(0);
         return 3;
     default:

@@ -5,6 +5,7 @@
 #include "input.h"
 #include "menu.h"
 #include "debug_menu.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
 extern struct UnkTextStruct2 gUnknown_80E7ED4;
@@ -17,7 +18,6 @@ extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern void sub_8023DA4(void);
-extern void sub_8012EA4(const char **, u32);
 extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
 
 void sub_803ACD0(u32);
@@ -35,8 +35,6 @@ extern void sub_803AE58();
 extern void sub_801602C(u32, u8 *);
 
 extern void sub_803AEB0();
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
-extern void sub_8012D60(const char **, struct MenuItem *, u32, u16 *, u32, u32);
 
 u32 sub_803AC24(void)
 {

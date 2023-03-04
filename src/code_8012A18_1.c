@@ -67,10 +67,10 @@ s32 sub_8015FEC(u8 *buffer, s32 size)
 {
   struct unkChar *iVar2;
   s32 currLength;
-  s32 iVar4;
+  s32 length;
   u8 *bufferPtr;
 
-  iVar4 = 0;
+  length = 0;
   currLength = 0;
 
  if(currLength < size && *buffer != '\0')
@@ -78,12 +78,12 @@ s32 sub_8015FEC(u8 *buffer, s32 size)
     bufferPtr = buffer; // Had to have another variable to match..
     do {
         iVar2 = GetCharacter(ReturnIntFromChar2(*bufferPtr));
-        iVar4 += iVar2->unk6;
+        length += iVar2->unk6;
         bufferPtr++;
         currLength++;
     } while (currLength < size && *bufferPtr != '\0');
  }
-  return iVar4;
+  return length;
 }
 
 s32 sub_8016028(void)
@@ -205,7 +205,7 @@ void CreateConfirmNameMenu(void)
 
 void sub_80161F8(void)
 {
-  s32 iVar2;
+  s32 length;
   s32 maxLength;
 
   if (sub_80154F0() == 3) {
@@ -214,9 +214,9 @@ void sub_80161F8(void)
         sub_80160F4(3);
     }
     else{
-      iVar2 = sub_8015FEC(gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+      length = sub_8015FEC(gUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
       maxLength = sub_8016028(); // returns 60
-      if (iVar2 > maxLength) {
+      if (length > maxLength) {
         sub_80160F4(2);
       }
       else {

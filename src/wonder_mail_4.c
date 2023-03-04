@@ -7,6 +7,7 @@
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
 #include "code_802C39C.h"
+#include "menu_input.h"
 
 struct unkStruct_203B320
 {
@@ -33,7 +34,7 @@ extern struct unkStruct_203B480 *gUnknown_203B480;
 
 const struct UnkTextStruct2 gUnknown_80E083C = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -42,7 +43,7 @@ const struct UnkTextStruct2 gUnknown_80E083C = {
 
 const struct UnkTextStruct2 gUnknown_80E0854 = {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x18, 0x11,
     0x11, 0x00,
@@ -96,7 +97,6 @@ extern void sub_8013984(u32 *);
 extern void AddMenuCursorSprite(u32 *);
 extern s32 sub_8013800(void *, u32);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

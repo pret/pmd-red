@@ -9,7 +9,7 @@
 
 extern bool8 HasCompletedAllMazes(void);
 extern u8 sub_80973F4(u32);
-extern u8 _FlagJudge(u32, u32, u32);
+extern u8 _FlagJudge(s32, s32, u32);
 extern u32 sub_8001658(u32, s32);
 extern u32 _FlagCalc(s32, s32, u32);
 extern void sub_80018D8(u32, u32, u32);
@@ -365,7 +365,7 @@ u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
   }
 }
 
-u8 _FlagJudge(u32 param_1, u32 param_2, u32 operation)
+u8 _FlagJudge(s32 param_1, s32 param_2, u32 operation)
 {
   switch(operation) {
       case 0:
@@ -375,21 +375,21 @@ u8 _FlagJudge(u32 param_1, u32 param_2, u32 operation)
       case 2:
         return param_1 == param_2;
       case 7:
-        return (-(param_1 ^ param_2) | (param_1 ^ param_2)) >> 0x1f;  
+        return param_1 != param_2;
       case 3:
-        return (int)param_1 > (int)param_2;
+        return param_1 > param_2;
       case 5:
-        return (int)param_1 >= (int)param_2;
+        return param_1 >= param_2;
       case 4:
-        return (int)param_1 < (int)param_2;
+        return param_1 < param_2;
       case 6:
-        return (int)param_1 <= (int)param_2;
+        return param_1 <= param_2;
       case 8:
           return (param_1 & param_2) != 0;
       case 9:
         return (param_1 ^ param_2) != 0;
       case 10:
-        return (int)param_1 >> (param_2) & 1;
+        return param_1 >> (param_2) & 1;
       default:
         FatalError(&gUnknown_80B7350,gUnknown_80B735C, operation); // event flag rule error %d
   }
@@ -415,9 +415,9 @@ void sub_800226C(u32 param_1, s16 param_2, s32 param_3, u32 operation)
 
 void sub_80022A0(u32 param_1, s16 param_2, s16 param_3, u32 operation)
 {
-  u32 uVar1;
-  u32 uVar2;
-  u32 uVar3;
+  s32 uVar1;
+  s32 uVar2;
+  s32 uVar3;
 
   s32 param_2_s32 = param_2;
   s32 param_3_s32 = param_3;
@@ -429,14 +429,14 @@ void sub_80022A0(u32 param_1, s16 param_2, s16 param_3, u32 operation)
   sub_80018D8(param_1,param_2_s32,uVar3);
 }
 
-u8 FlagJudge(u32 r0, u32 r1, u32 operation)
+u8 FlagJudge(s32 r0, s32 r1, u32 operation)
 {
     return _FlagJudge(r0, r1, operation);
 }
 
 u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
 {
-  u32 uVar1;
+  s32 uVar1;
   
   uVar1 = sub_8001658(param_1, param_2);
   return _FlagJudge(uVar1,param_3,operation);
@@ -444,8 +444,8 @@ u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
 
 u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
 {
-  u32 uVar1;
-  u32 uVar2;
+  s32 uVar1;
+  s32 uVar2;
 
   s32 param_2_s32 = param_2;
   s32 param_3_s32 = param_3;

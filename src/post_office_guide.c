@@ -144,7 +144,7 @@ ALIGNED(4) const u8 wonder_mail_fill[] = _("pksdir0");
 const struct UnkTextStruct2 gUnknown_80E1EFC =
 {
     0, 0, 0, 0,
-    3, 0, 0, 0,
+    3, 
     0, 0, 0, 0,
     0, 0,
     0, 0,
@@ -156,7 +156,7 @@ const u8 gUnkData_80E1F14[] = {1, 0, 8, 0};
 const struct UnkTextStruct2 gUnknown_80E1F18 =
 {
     0, 0, 0, 0,
-    6, 0, 0, 0,
+    6,
     2, 0, 2, 0,
     0x14, 4,
     4, 0,

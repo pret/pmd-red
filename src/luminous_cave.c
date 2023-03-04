@@ -9,6 +9,7 @@
 #include "random.h"
 #include "text.h"
 #include "team_inventory.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2B0
 {
@@ -32,8 +33,8 @@ struct unkStruct_203B2B0
     u32 unk30;
     struct MenuItem unk34[8];
     u16 unk74[0x8];
-    u32 unk84;
-    u8 fill88[0x104 - 0x88];
+    struct MenuStruct unk84;
+    u8 fillD4[0x104 - 0xD4];
     struct OpenedFile *unk104;
     u8 *unk108;
     u16 unk10C;
@@ -111,7 +112,6 @@ extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 u32 sub_801602C(u32 r0, u8 *name);
@@ -121,8 +121,6 @@ extern s32 sub_801A8AC(void);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
 extern void PlayMenuSoundEffect(u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 extern u32 sub_8016080(void);

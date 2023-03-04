@@ -6,6 +6,7 @@
 #include "input.h"
 #include "menu.h"
 #include "gulpin_shop.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B26C *gUnknown_203B26C;
 extern void UpdateGulpinShopState(u32);
@@ -14,8 +15,6 @@ extern void sub_801F214(void);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u8 IsNextMoveLinked(u32, struct Move *);
 extern void PlaySound(u32);
 extern void sub_801EF38(u32);
@@ -36,7 +35,7 @@ void sub_801ED28(void)
             break;
         case 2:
             PlaySound(0x133);
-            gUnknown_203B26C->unkE = IsNextMoveLinked(gUnknown_203B26C->unk20, gUnknown_203B26C->unk10);
+            gUnknown_203B26C->isNextMoveLinked = IsNextMoveLinked(gUnknown_203B26C->unk20, gUnknown_203B26C->moves);
             UpdateGulpinShopState(4);
             break;
         case 3:
@@ -67,7 +66,7 @@ void sub_801EDC0(void)
         {
             case 4:
                 sub_801F214();
-                RemoveLinkSequenceFromMoves8(gUnknown_203B26C->unk10, gUnknown_203B26C->unk20);
+                RemoveLinkSequenceFromMoves8(gUnknown_203B26C->moves, gUnknown_203B26C->unk20);
                 gUnknown_203B26C->state = 5;
                 break;
             case 1:

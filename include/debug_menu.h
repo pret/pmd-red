@@ -3,6 +3,7 @@
 
 #include "text.h"
 #include "menu.h"
+#include "menu_input.h"
 
 enum DebugMenuOptions
 {
@@ -19,7 +20,7 @@ enum DebugMenuOptions
 struct DebugMenu
 {
     // size: 0x1A4
-    u8 fill0[0x140];
+    struct MenuStruct unk0[4];
     /* 0x140 */ struct UnkTextStruct2 unk140[4];
     u32 fill1A0;
 };
@@ -33,8 +34,7 @@ struct unkStruct_203B3F8
     u16 unk6;
     struct PokemonStruct *pokemon;
     u32 unkC;
-    const char *unk10;
-    u8 fill14[0x60 - 0x14];
+    struct MenuStruct unk10;
     u32 unk60;
     u32 unk64;
     u32 unk68;

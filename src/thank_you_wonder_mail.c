@@ -13,6 +13,7 @@
 #include "text.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -55,7 +56,7 @@ extern char gAvailablePokemonNames[0x50];
 const struct UnkTextStruct2 gUnknown_80DED48 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x15, 0x00, 0x04, 0x00,
         0x06, 0x05,
         0x05, 0x00,
@@ -65,7 +66,7 @@ const struct UnkTextStruct2 gUnknown_80DED48 =
 const struct UnkTextStruct2 gUnknown_80DED60 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x16, 0x00, 0x07, 0x00,
         0x06, 0x05,
         0x05, 0x00,
@@ -86,7 +87,7 @@ const struct MenuItem gUnknown_80DED78[3] =
 const struct UnkTextStruct2 gUnknown_80DEDA0 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -155,7 +156,6 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-extern u8 sub_8012FD8(u32 *r0);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
@@ -167,7 +167,6 @@ extern u32 sub_8030768(u32);
 extern s8 sub_80307EC(void);
 extern void sub_8030D40(u8, u32);
 extern u32 sub_8030DA0();
-extern void sub_8013114(u32 *r0, s32 *r1);
 extern void HandleThankYouMailPelipperMainMenu();
 extern void sub_802AAC8();
 extern void ReturnToThankYouMailMainMenu();
@@ -218,7 +217,7 @@ extern void sub_802F2C0();
 extern u32 sub_80144A4(s32 *r0);
 extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern void SetMenuItems(void *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
+extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_80922B4(u8 *, u8 *, u32);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
@@ -239,7 +238,7 @@ extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
-extern void sub_8035CF4(u32 *, u32, u32);
+extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801B3C0(struct Item *);
@@ -620,8 +619,8 @@ void sub_802A174(void)
 
   menuAction = -1;
   sub_8030768(0);
-  if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
-    sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
+  if (sub_8012FD8(&gUnknown_203B2C4->unk21C[3]) == 0) {
+    sub_8013114(&gUnknown_203B2C4->unk21C[3], &menuAction);
   }
 
   switch(menuAction)
@@ -659,7 +658,7 @@ void sub_802A230(void)
         sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
         sub_803092C();
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
-            sub_8035CF4(&gUnknown_203B2C4->unk21C, 3, 1);
+            sub_8035CF4(gUnknown_203B2C4->unk21C, 3, 1);
             SetThankYouMailMenuState(0x11);
         }
         else {
@@ -711,7 +710,7 @@ void sub_802A33C(void)
         sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
         sub_801CB5C(1);
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
-            sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
+            sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
             SetThankYouMailMenuState(0x14);
         }
         else {
@@ -730,8 +729,8 @@ void sub_802A39C(void)
 
   menuAction = -1;
   sub_801CA08(0);
-  if (sub_8012FD8(&gUnknown_203B2C4->unk30C) == 0) {
-    sub_8013114(&gUnknown_203B2C4->unk30C, &menuAction);
+  if (sub_8012FD8(&gUnknown_203B2C4->unk21C[3]) == 0) {
+    sub_8013114(&gUnknown_203B2C4->unk21C[3], &menuAction);
   }
 
   switch(menuAction)
@@ -1299,9 +1298,9 @@ void UpdateThankYouMailText(void)
         break;
     case 0x11:
         sub_8006518(gUnknown_203B2C4->unk35C);
-        SetMenuItems(&gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,1,0,0);
+        SetMenuItems(gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,1,0,0);
         sub_803092C();
-        sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
+        sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
         break;
     case 0x13:
         if (sub_801D008() != 0)
@@ -1316,9 +1315,9 @@ void UpdateThankYouMailText(void)
         break;
     case 0x14:
         sub_8006518(gUnknown_203B2C4->unk35C);
-        SetMenuItems(&gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,1,0,0);
+        SetMenuItems(gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,1,0,0);
         sub_801CCD8();
-        sub_8035CF4(&gUnknown_203B2C4->unk21C,3,1);
+        sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
         gUnknown_203B2C4->linkError = COMMS_GOOD;

@@ -154,11 +154,11 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3)
     for (i = 0; i < 4; i++)
     {
         gUnknown_202AFC0[i] = a0[i];
-        if (a0[i].unk0c)
+        if (a0[i].unkC)
         {
             sub_8006554(gUnknown_2027370, (void *)VRAM, gUnknown_20274B4, gUnknown_202B038, gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
             sub_80089AC(a0 + i, a3);
-            r9 += a0[i].unk0c * a0[i].unk10;
+            r9 += a0[i].unkC * a0[i].unk10;
         }
     }
 #ifdef NONMATCHING

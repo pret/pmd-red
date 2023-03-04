@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "constants/mailbox.h"
 #include "code_800D090.h"
 #include "input.h"
@@ -7,12 +8,12 @@
 #include "pokemon_mail.h"
 #include "wonder_mail.h"
 #include "code_802C39C.h"
+#include "menu_input.h" 
 
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
 extern s32 sub_802C474(void);
-extern void sub_8012D34(struct UnkTextStruct2 *, u32);
 extern void sub_802C328(void);
 extern void sub_802C39C(void);
 extern void PlayMenuSoundEffect(u32);
@@ -32,7 +33,6 @@ extern u8 gBulletinBoardText[];
 extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern void CreateRescueTitle(void *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
-extern void sub_8012BC4(s32, s32, s32, s32 ,s32 ,s32);
 
 
 struct unkStruct_203B2D8
@@ -196,13 +196,13 @@ u32 sub_802C1E4(u8 param_1)
   else {
     switch(GetKeyPress(&gUnknown_203B2E0->unk8))
     {
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
-        case 4:
+        case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
             return 4;
         default:

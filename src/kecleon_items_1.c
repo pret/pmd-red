@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "file_system.h"
 #include "memory.h"
 #include "pokemon.h"
@@ -7,6 +8,7 @@
 #include "kecleon_items.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u16 gUnknown_203B218;
@@ -34,8 +36,6 @@ extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 
 extern void sub_8099690(u32);
-extern u8 sub_8012FD8(u32 *);
-extern void sub_8013114(u32 *, u32 *);
 extern u32 sub_8019EDC(u8);
 extern u32 sub_801A2A8(u8);
 extern s32 sub_801A8AC(void);
@@ -47,12 +47,10 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(void *, u32);
 extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
-extern void sub_8012BC4(s32, s32, s32, s32, s32, s32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
 void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_801AE84(void);
-extern void sub_8012D08(void *, u32);
 extern void sub_801A998(void);
 extern void sub_801A9E0(void);
 extern void Kecleon_SortItems(void);
@@ -527,10 +525,10 @@ u32 sub_8019EDC(u8 r0)
     {
         switch(GetKeyPress(gUnknown_203B214))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 item = GetKecleonShopItem(sub_8019FB0());
                 slot.id = item->id;
                 slot.quantity = item->quantity;
@@ -543,7 +541,7 @@ u32 sub_8019EDC(u8 r0)
                     PlayMenuSoundEffect(0);
                 }
                  return 3;
-            case 4:
+            case INPUT_START_BUTTON:
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
@@ -737,13 +735,12 @@ u32 sub_801A2A8(u8 r0)
     {
         switch(GetKeyPress(gUnknown_203B21C))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 item = GetKecleonWareItem(sub_801A37C());
 
-                // NOTE: needs seperate vars to match
                 slot.id = item->id;
                 slot.quantity = item->quantity;
 
@@ -756,7 +753,7 @@ u32 sub_801A2A8(u8 r0)
                     PlayMenuSoundEffect(0);
                 }
                  return 3;
-            case 4:
+            case INPUT_START_BUTTON:
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
@@ -958,10 +955,10 @@ u32 sub_801A6E8(u8 param_1)
     return 0;
   }
   switch(GetKeyPress(&gUnknown_203B224->unk54)) {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
         switch(gUnknown_203B224->unk0) {
             case 0:
             case 1:
@@ -989,11 +986,11 @@ u32 sub_801A6E8(u8 param_1)
                 break;
         }
         return 3;
-    case 4:
+    case INPUT_START_BUTTON:
         PlayMenuSoundEffect(4);
         return 4;
-    case 5:
-    case 6:
+    case INPUT_L_BUTTON:
+    case INPUT_R_BUTTON:
         if (gUnknown_203B224->unk0 != 3) goto _0801A87C;
         index = sub_801A8AC();
         if ((gUnknown_203B224->unk4[index] != 0) || (sub_801ADA0(index) != 0)) {
@@ -1008,7 +1005,7 @@ u32 sub_801A6E8(u8 param_1)
             PlayMenuSoundEffect(2);
             goto _0801A87C;
         }
-    case 3:
+    case INPUT_SELECT_BUTTON:
         if (gUnknown_203B224->unk0 != 2) {
             PlayMenuSoundEffect(5);
             Kecleon_SortItems();
@@ -1169,7 +1166,7 @@ void sub_801A9E0(void)
                 break;
         }
         if ((sub_801AED0(teamItemIndex) & 1) != 0) {
-            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unk0c - 2) * 8,10);
+            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unkC - 2) * 8,10);
         }
     }
     sub_80073E0(gUnknown_203B224->unk88);

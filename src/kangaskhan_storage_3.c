@@ -2,6 +2,7 @@
 #include "item.h"
 #include "kangaskhan_storage.h"
 #include "team_inventory.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B20C *gUnknown_203B20C;
 
@@ -11,11 +12,8 @@ extern void sub_8017F10(u32);
 
 extern u8 sub_801CF14(u32);
 
-extern u8 sub_8012FD8(u32 *r0);
-extern void sub_8013114(u32 *, s32 *);
 extern void sub_801CBB8(void);
 extern void sub_8017F10(u32);
-extern void sub_8012EA4(u32 *, u32);
 
 extern u8 sub_801ADA0(s32);
 extern void sub_801A928(void);

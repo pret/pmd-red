@@ -3,6 +3,7 @@
 #include "text.h"
 #include "menu.h"
 #include "input.h"
+#include "menu_input.h"
 
 // Guessing based off of 203B304
 struct unkStruct_203B308
@@ -18,8 +19,7 @@ struct unkStruct_203B308
     u8 fill51[0x64 - 0x51];
     u32 unk64;
     u32 unk68;
-    u32 unk6C;
-    u8 fill70[0xBC - 0x70];
+    struct MenuStruct unk6C;
     struct MenuItem unkBC[8];
     u16 unkFC[8];
     struct UnkTextStruct2 unk10C[4];
@@ -30,7 +30,7 @@ extern void SetPelipperBoardState(u32);
 const struct UnkTextStruct2 gUnknown_80E0330 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -40,7 +40,7 @@ const struct UnkTextStruct2 gUnknown_80E0330 =
 const struct UnkTextStruct2 gUnknown_80E0348 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x03, 0x00, 0x03, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -50,7 +50,7 @@ const struct UnkTextStruct2 gUnknown_80E0348 =
 const struct UnkTextStruct2 gUnknown_80E0360 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x04, 0x00, 0x00, 0x00,
+    0x04,
     0x15, 0x00, 0x06, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -60,7 +60,7 @@ const struct UnkTextStruct2 gUnknown_80E0360 =
 const struct UnkTextStruct2 gUnknown_80E0378 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x04, 0x00, 0x00, 0x00,
+    0x04,
     0x15, 0x00, 0x0f, 0x00,
     0x06, 0x03,
     0x03, 0x00,
@@ -73,7 +73,6 @@ const u8 gPelipperBoard_Accepted[] = "Accepted";
 const u8 gPelipperStatusSlash[] = "/";
 static const u8 gPelipperfill[] = "pksdir0";
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_802ECB4(void);
 extern void nullsub_134(void);
 extern void sub_802ED4C(void);
@@ -85,7 +84,6 @@ extern void sub_802EA58(void);
 extern void CreatePelipperBoardMenu(void);
 extern void sub_802EC10(void);
 
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
 extern void sub_802C39C(void);
@@ -178,7 +176,7 @@ void sub_802E94C(void)
             sub_802EC10();
             gUnknown_203B308->unk10C[2] = gUnknown_80E0360;
             sub_8012CAC(&gUnknown_203B308->unk10C[2], gUnknown_203B308->unkBC);
-            gUnknown_203B308->unk10C[2].unk0c = 6;
+            gUnknown_203B308->unk10C[2].unkC = 6;
             gUnknown_203B308->unk10C[3] = gUnknown_80E0378;
             break;
         default:

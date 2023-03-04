@@ -3,6 +3,7 @@
 
 #include "text.h"
 #include "item.h"
+#include "menu.h"
 
 struct TradeSubStruct
 {
@@ -32,10 +33,7 @@ struct TradeItemsMenu
     u32 unk30;
     u32 unk34;
     u8 fill38[0x44 - 0x38];
-    u32 unk44;
-    u8 fill8[0x134 - 0x48];
-    u32 unk134;
-    u8 fill138[0x184 - 0x138];
+    struct MenuStruct unk44[4];
     struct UnkTextStruct2 unk184[4];
     struct UnkTextStruct2 unk1E4[4];
 

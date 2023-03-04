@@ -13,6 +13,7 @@
 #include "wonder_mail.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2C8
 {
@@ -155,7 +156,6 @@ extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
-extern void sub_8012BC4(u32 x, u32 y, u32, u32, u32, u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s32 sub_8013800(u32 *, s32);
@@ -166,7 +166,6 @@ extern void sub_801317C(u32 *);
 extern u8 HasNoMailinMailbox(void);
 extern void sub_802BF30(void);
 extern void CreateMailMenu(void);
-extern void sub_8012D34(struct UnkTextStruct2 *, u32);
 extern s32 CountEmptyMailSlots(void);
 extern void sub_8013848(u32 *, s32, u32, u32);
 
@@ -199,7 +198,7 @@ ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80DFBD0 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -211,7 +210,7 @@ const u8 gUnknown_80DFBE8[] = { 0x01, 0x00, 0x0C, 0x00 };
 const struct UnkTextStruct2 gUnknown_80DFBEC =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x06, 0x00, 0x00, 0x00,
+        0x06,
         0x02, 0x00, 0x02, 0x00,
         0x18, 0x0E,
         0x0E, 0x00,
@@ -224,7 +223,7 @@ ALIGNED(4) static const char wonder_mail_2_fill1[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80DFC18 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -236,7 +235,7 @@ const u8 gUnkData_80DFC30[] = { 0x01, 0x00, 0x16, 0x00 };
 const struct UnkTextStruct2 gUnknown_80DFC34 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x06, 0x00, 0x00, 0x00,
+        0x06,
         0x02, 0x00, 0x02, 0x00,
         0x1A, 0x10,
         0x10, 0x00,
@@ -250,7 +249,7 @@ ALIGNED(4) static const char wonder_mail_2_fill2[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80DFC5C =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -260,7 +259,7 @@ const struct UnkTextStruct2 gUnknown_80DFC5C =
 const struct UnkTextStruct2 gUnknown_80DFC74 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x06, 0x00, 0x00, 0x00,
+        0x06,
         0x02, 0x00, 0x02, 0x00,
         0x18, 0x0E,
         0x0E, 0x00,
@@ -273,7 +272,7 @@ ALIGNED(4) static const char wonder_mail_2_fill3[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80DFC9C =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x03, 0x00, 0x00, 0x00,
+        0x03,
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -283,7 +282,7 @@ const struct UnkTextStruct2 gUnknown_80DFC9C =
 const struct UnkTextStruct2 gUnknown_80DFCB4 =
 {
         0x00, 0x00, 0x00, 0x00,
-        0x06, 0x00, 0x00, 0x00,
+        0x06,
         0x02, 0x00, 0x02, 0x00,
         0x18, 0x0E,
         0x0E, 0x00,

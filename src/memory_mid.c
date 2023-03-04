@@ -54,9 +54,9 @@ error:
                  heap,size,atb,group);
 }
 
-void *MemoryAlloc(s32 size, s32 b)
+void *MemoryAlloc(s32 size, s32 group)
 {
-    DoAlloc(&gMainHeapDescriptor, size, b);
+    DoAlloc(&gMainHeapDescriptor, size, group);
 }
 
 void MemoryFree(void *a)

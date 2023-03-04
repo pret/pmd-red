@@ -8,8 +8,8 @@ struct unkStruct_203B26C
     s32 state;
     u32 unk8;
     s16 speciesNum; // species of chosen Pokemon
-    u8 unkE;
-    struct Move * unk10;
+    bool8 isNextMoveLinked;
+    struct Move * moves;
     u32 unk14;
     u32 unk18;
     u16 unk1C;
@@ -18,8 +18,8 @@ struct unkStruct_203B26C
     u32 unk24;
     struct MenuItem unk28[8];
     u16 unk68[8];
-    u32 unk78;
-    u8 fill7C[0x118 - 0x7C]; 
+    struct MenuStruct unk78;
+    u8 fillC8[0x118 - 0xC8];
     /* 0x118 */ struct OpenedFile *faceFile;
     /* 0x11C */ u8 *faceData;
     /* 0x120 */ u16 unk120;

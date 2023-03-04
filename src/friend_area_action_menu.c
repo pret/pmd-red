@@ -7,12 +7,12 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "friend_area_action_menu.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
 extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u32 *, u32, u32);
 extern void sub_8027D40(u32, struct BulkItem *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
@@ -30,7 +30,6 @@ extern void sub_801B3C0(struct Item *);
 extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void ResetSprites(u8 );
 extern void sub_802719C();
@@ -39,7 +38,7 @@ extern void sub_80277FC();
 extern void sub_80278B4();
 extern void sub_8027A40();
 extern void sub_8027A5C();
-extern void sub_8027D1C();
+extern void FriendAreaActionMenu_GotoFallbackState();
 extern void sub_8027A78();
 extern void sub_8027AE4();
 extern void sub_8027B28();
@@ -53,7 +52,7 @@ extern void sub_80276A8();
 const struct UnkTextStruct2 gUnknown_80DD6EC =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -64,7 +63,7 @@ const struct UnkTextStruct2 gUnknown_80DD6EC =
 const struct UnkTextStruct2 gUnknown_80DD704 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x13, 0x00, 0x04, 0x00,
     0x09, 0x03,
     0x03, 0x00,
@@ -74,7 +73,7 @@ const struct UnkTextStruct2 gUnknown_80DD704 =
 const struct UnkTextStruct2 gUnknown_80DD71C =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x14, 0x00, 0x04, 0x00,
     0x06, 0x03,
     0x03, 0x00,
@@ -84,7 +83,7 @@ const struct UnkTextStruct2 gUnknown_80DD71C =
 const struct UnkTextStruct2 gUnknown_80DD734 =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x16, 0x00, 0x04, 0x00,
     0x06, 0x03,
     0x03, 0x00,
@@ -94,7 +93,7 @@ const struct UnkTextStruct2 gUnknown_80DD734 =
 const struct UnkTextStruct2 gUnknown_80DD74C =
 {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x02, 0x00, 0x11, 0x00,
     0x1A, 0x02,
     0x02, 0x00,
@@ -131,14 +130,14 @@ u32 sub_8027074(void)
     gUnknown_203B2BC->unk70 = 0;
     gUnknown_203B2BC->unk74 = 0;
     gUnknown_203B2BC->unk78 = 0;
-    SetFriendAreaActionMenuState(0);
+    SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_INIT);
     return 1;
 }
 
 u32 sub_80270A4(void)
 {
   switch(gUnknown_203B2BC->state) {
-      case 0:
+      case FRIEND_AREA_ACTION_MENU_INIT:
         SetFriendAreaActionMenuState(1);
         break;
       case 1:
@@ -178,9 +177,9 @@ u32 sub_80270A4(void)
         sub_8027D00();
         break;
       default:
-        sub_8027D1C();
+        FriendAreaActionMenu_GotoFallbackState();
         break;
-      case 0x11:
+      case FRIEND_AREA_ACTION_MENU_EXIT:
         return 3;
   }
   return 0;
@@ -236,8 +235,8 @@ void sub_8027274(void)
   struct Item slot;
 
   switch(gUnknown_203B2BC->state) {
-    case 0:
-    case 0x11:
+    case FRIEND_AREA_ACTION_MENU_INIT:
+    case FRIEND_AREA_ACTION_MENU_EXIT:
         break;
     case 1:
         sub_8023868(1,0,0,7);
@@ -290,13 +289,13 @@ void sub_8027274(void)
         sub_801F808(gUnknown_203B2BC->moveIDs);
         break;
     case 6:
-        gUnknown_203B2BC->unk4 = 2;
+        gUnknown_203B2BC->fallbackState = 2;
         // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
         // returned to the Toolbox
         sub_80141B4(gUnknown_80DD8A0,0,0,0x101);
         break;
     case 7:
-        gUnknown_203B2BC->unk4 = 2;
+        gUnknown_203B2BC->fallbackState = 2;
         // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
         // returned to storage
         sub_80141B4(gUnknown_80DD8D0,0,0,0x101);

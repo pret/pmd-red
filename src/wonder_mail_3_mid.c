@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "memory.h"
 #include "text.h"
 #include "input.h"
@@ -8,6 +9,7 @@
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "item.h"
+#include "menu_input.h"
 
 struct unkStruct_803B344
 {
@@ -33,8 +35,7 @@ struct unkStruct_203B30C
     u8 fill4D[0x58 - 0x4D];
     u8 *unk58;
     u32 unk5C;
-    u32 unk60;
-    u8 fill64[0xB0 - 0x64];
+    struct MenuStruct unk60;
     struct MenuItem unkB0[8];
     struct UnkTextStruct2 unkF0[4];
 };
@@ -100,7 +101,6 @@ extern struct unkStruct_203B314 *gUnknown_203B314;
 extern u8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
 extern void sub_802FA50(void);
-extern void sub_8012D08(struct UnkTextStruct2 *, u32);
 extern void sub_8013818(u32 *, u32, u32, u32);
 extern u32 sub_802FBF4(void);
 extern void sub_8013878(u32 *, s32);
@@ -118,18 +118,14 @@ extern void sub_801B72C(void);
 extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
 extern s32 sub_80144A4(s32 *);
-extern void sub_8012CAC(struct UnkTextStruct2 *, struct MenuItem *);
 extern void sub_803B35C(struct WonderMail*, u32 *);
 extern void sub_802DE84(u32 *);
-extern void sub_8012D60(u32 *, struct MenuItem *, u32, u16 *, u32, u32);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
 extern u8 sub_802CEBC(void);
 extern u32 sub_802CE5C(u32);
 extern void sub_802CF14(void);
-extern u8 sub_8012FD8(u32 *r0);
-extern void sub_8013114(u32 *, s32 *);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
@@ -150,7 +146,7 @@ void HandleMissionReward(void);
 
 const struct UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -158,7 +154,7 @@ const struct UnkTextStruct2 gUnknown_80E03C4 = {
 };
 const struct UnkTextStruct2 gUnknown_80E03DC = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x03, 0x00, 0x03, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -166,7 +162,7 @@ const struct UnkTextStruct2 gUnknown_80E03DC = {
 };
 const struct UnkTextStruct2 gUnknown_80E03F4 = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x15, 0x00, 0x06, 0x00,
     0x07, 0x03,
     0x03, 0x00,
@@ -177,7 +173,7 @@ const u8 gUnknown_80E040C[] = "Send";
 static const u8 wonder_mail_fill[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80E041C = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -238,7 +234,7 @@ static const u8 wonder_mail_fill2[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80E06FC = {
     0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00,
+    0x03,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
@@ -247,7 +243,7 @@ const struct UnkTextStruct2 gUnknown_80E06FC = {
 
 const struct UnkTextStruct2 gUnknown_80E0714 = {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x0E, 0x0E,
     0x0E, 0x00,
@@ -255,7 +251,7 @@ const struct UnkTextStruct2 gUnknown_80E0714 = {
 };
 const struct UnkTextStruct2 gUnknown_80E072C = {
     0x00, 0x00, 0x00, 0x00,
-    0x06, 0x00, 0x00, 0x00,
+    0x06,
     0x02, 0x00, 0x02, 0x00,
     0x10, 0x10,
     0x10, 0x00,
@@ -798,10 +794,10 @@ u32 sub_802F8A0(u8 r0)
     {
         switch(GetKeyPress(&gUnknown_203B314->unkBC))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 PlayMenuSoundEffect(0);
                 return 3;
             default:

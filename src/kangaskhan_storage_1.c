@@ -4,6 +4,7 @@
 #include "input.h"
 #include "item.h"
 #include "kangaskhan_storage.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B208 *gUnknown_203B208;
 
@@ -12,7 +13,6 @@ extern u8 gUnknown_80DB7A8;
 extern void xxx_call_draw_string(u32 x, u32 y, u8 *, u32, u32);
 extern void sub_801CCD8();
 extern void sub_801AD34(u32);
-extern void sub_8012EA4(u32 *, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);

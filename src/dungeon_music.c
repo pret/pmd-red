@@ -28,6 +28,10 @@ extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo);
 void FadeOutAllMusic(u16);
 void xxx_call_stop_bgm(void);
 
+// Dungeon Music Player adds in this flag to tell
+// the system to fade in rather than immediately playing
+#define DUNGEON_MUSIC_FADE_IN 0x8000
+
 void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * entity)
 {
   u8 *defPtr;
@@ -144,48 +148,48 @@ bool8 sub_8083C88(u8 param_1)
 void sub_8083CE0(u8 param_1)
 {
   if ((param_1 == 0) || (1 < gUnknown_202EE10.unk1A)) {
-    PlayFanfareSE(0x12d,0x100);
+    PlayFanfareSE(0x12d,MAX_VOLUME);
   }
 }
 
 void sub_8083D08(void)
 {
-    PlayFanfareSE(0x12E, 0x100);
+    PlayFanfareSE(0x12E, MAX_VOLUME);
 }
 
 void sub_8083D1C(void)
 {
-    PlayFanfareSE(0x133, 0x100);
+    PlayFanfareSE(0x133, MAX_VOLUME);
 }
 
 void sub_8083D30(void)
 {
-    PlayFanfareSE(0x12F, 0x100);
+    PlayFanfareSE(0x12F, MAX_VOLUME);
 }
 
 void sub_8083D44(void)
 {
-    PlayFanfareSE(0x130, 0x100);
+    PlayFanfareSE(0x130, MAX_VOLUME);
 }
 
 void sub_8083D58(void)
 {
-    PlayFanfareSE(0xC8, 0x100);
+    PlayFanfareSE(0xC8, MAX_VOLUME);
 }
 
 void sub_8083D68(void)
 {
-    PlayFanfareSE(0xCF, 0x100);
+    PlayFanfareSE(0xCF, MAX_VOLUME);
 }
 
 void sub_8083D78(void)
 {
-    PlayFanfareSE(0xD3, 0x100);
+    PlayFanfareSE(0xD3, MAX_VOLUME);
 }
 
 void sub_8083D88(void)
 {
-    PlayFanfareSE(0xCC, 0x100);
+    PlayFanfareSE(0xCC, MAX_VOLUME);
 }
 
 void PlayDungeonFailBGM(void)
@@ -194,7 +198,7 @@ void PlayDungeonFailBGM(void)
   gDungeon->unk66F = 0;
   gDungeon->unk672 = 0;
   gDungeon->unk699 = 0;
-  gDungeon->unk66A = 999;
+  gDungeon->bossSongIndex = STOP_BGM;
 }
 
 void PlayDungeonCompleteBGM(void)
@@ -203,25 +207,25 @@ void PlayDungeonCompleteBGM(void)
   gDungeon->unk66F = 0;
   gDungeon->unk672 = 0;
   gDungeon->unk699 = 0;
-  gDungeon->unk66A = 999;
+  gDungeon->bossSongIndex = STOP_BGM;
 }
 
 void sub_8083E28(void)
 {
-    PlayFanfareSE(0xCF, 0x100);
+    PlayFanfareSE(0xCF, MAX_VOLUME);
 }
 
 void PlaySoundEffect(u32 songIndex)
 {
     u16 songIndex_u32 = songIndex;
-    if(songIndex_u32 != 0x3E5)
-        PlayFanfareSE(songIndex_u32, 0x100);
+    if(songIndex_u32 != STOP_SOUND_EFFECT)
+        PlayFanfareSE(songIndex_u32, MAX_VOLUME);
 }
 
 void StopSoundEffect(u32 songIndex)
 {
     u16 songIndex_u32 = songIndex;
-    if(songIndex_u32 != 0x3E5)
+    if(songIndex_u32 != STOP_SOUND_EFFECT)
         StopFanfareSE(songIndex_u32);
 }
 
@@ -238,16 +242,16 @@ void DungeonStartNewBGM(u16 songIndex)
 
 void DungeonFadeInNewBGM(u16 songIndex, u32 fadeInSpeed)
 {
-  gDungeon->musPlayer.queuedSongIndex = 0x80 << 8 | songIndex;
+  gDungeon->musPlayer.queuedSongIndex = DUNGEON_MUSIC_FADE_IN | songIndex;
   gDungeon->musPlayer.fadeInSpeed = fadeInSpeed;
 }
 
 void DungeonFadeOutBGM(u16 speed)
 {
   FadeOutAllMusic(speed);
-  gDungeon->musPlayer.songIndex = 999;
-  gDungeon->musPlayer.pastSongIndex = 999;
-  gDungeon->musPlayer.queuedSongIndex = 999;
+  gDungeon->musPlayer.songIndex = STOP_BGM;
+  gDungeon->musPlayer.pastSongIndex = STOP_BGM;
+  gDungeon->musPlayer.queuedSongIndex = STOP_BGM;
 }
 
 void DungeonStopBGM(void)
@@ -266,50 +270,50 @@ void StopDungeonBGM(void)
   struct DungeonMusicPlayer *temp = &gDungeon->musPlayer;
   temp->state = 0;
   temp->fadeOutSpeed = 0;
-  temp->songIndex = 999;
-  temp->pastSongIndex = 999;
-  temp->queuedSongIndex = 999;
+  temp->songIndex = STOP_BGM;
+  temp->pastSongIndex = STOP_BGM;
+  temp->queuedSongIndex = STOP_BGM;
 }
 
 void UpdateDungeonMusic(void)
 {
 #ifndef NONMATCHING    
-  register s32 uVar1 asm("r1");
-  register u16 *uVar3 asm("r3");
+  register s32 currSongIndex asm("r1");
+  register u16 *bossSongIndex asm("r3");
 #else
-  s32 uVar1;
-  u16 *uVar3;
+  s32 currSongIndex;
+  u16 *bossSongIndex;
 #endif
-  s32 songIndex1;
+  s32 newSongIndex;
   struct DungeonMusicPlayer *musPlayer;
   
   musPlayer = &gDungeon->musPlayer;
 
-  uVar3 = &gDungeon->unk66A;
-  songIndex1 = *uVar3;
-  if (songIndex1 == 999) {
+  bossSongIndex = &gDungeon->bossSongIndex;
+  newSongIndex = *bossSongIndex;
+  if (newSongIndex == STOP_BGM) {
     if (gDungeon->unk66F != 0) {
-        songIndex1 = MUS_STOP_THIEF;
+        newSongIndex = MUS_STOP_THIEF;
     }
     else if (gDungeon->unk672 != 0) {
-        songIndex1 = MUS_MONSTER_HOUSE;
+        newSongIndex = MUS_MONSTER_HOUSE;
       }
     else if (gDungeon->unk699 != 0) {
-        songIndex1 = MUS_KECLEON_SHOP;
+        newSongIndex = MUS_KECLEON_SHOP;
     }
     else {
-        songIndex1 = musPlayer->queuedSongIndex;
+        newSongIndex = musPlayer->queuedSongIndex;
     }
   }
   if (musPlayer->state == 4) {
-    if (songIndex1 != musPlayer->pastSongIndex) {
+    if (newSongIndex != musPlayer->pastSongIndex) {
       musPlayer->state = 2;
-      musPlayer->songIndex = songIndex1;
+      musPlayer->songIndex = newSongIndex;
     }
   }
-  else if ((songIndex1 != 999) && (musPlayer->songIndex == 999)) {
+  else if ((newSongIndex != STOP_BGM) && (musPlayer->songIndex == STOP_BGM)) {
       musPlayer->state = 1;
-      musPlayer->songIndex = songIndex1;
+      musPlayer->songIndex = newSongIndex;
   }
   switch(musPlayer->state) {
     case 0:
@@ -317,21 +321,21 @@ void UpdateDungeonMusic(void)
     default:
         break;
     case 1:
-        uVar1 = musPlayer->songIndex;
-        if (uVar1 == 999) {
+        currSongIndex = musPlayer->songIndex;
+        if (currSongIndex == STOP_BGM) {
             musPlayer->state = 0;
         }
         else {
-            if ((uVar1 & 0x8000) != 0) {
-                StartNewBGM(uVar1 & 0x7fff);
+            if ((currSongIndex & DUNGEON_MUSIC_FADE_IN)) {
+                StartNewBGM(currSongIndex & ~(DUNGEON_MUSIC_FADE_IN));
             }
             else {
-                FadeInNewBGM(uVar1 & 0x7fff, musPlayer->fadeInSpeed);
+                FadeInNewBGM(currSongIndex & ~(DUNGEON_MUSIC_FADE_IN), musPlayer->fadeInSpeed);
             }
             musPlayer->pastSongIndex = musPlayer->songIndex;
             musPlayer->state = 4;
         }
-        musPlayer->songIndex = 999;
+        musPlayer->songIndex = STOP_BGM;
         break;
     case 2:
         FadeOutBGM(0x1e);
@@ -342,7 +346,7 @@ void UpdateDungeonMusic(void)
         if ((musPlayer->fadeOutSpeed != 0) && (musPlayer->fadeOutSpeed--, musPlayer->fadeOutSpeed != 0)) {
             break;
         }
-        if (musPlayer->songIndex == 999) {
+        if (musPlayer->songIndex == STOP_BGM) {
             StopBGM();
             musPlayer->state = 0;
         }

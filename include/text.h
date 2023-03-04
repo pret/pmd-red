@@ -6,7 +6,9 @@ struct UnkTextStruct1 {
     u16 unk04;
     u8 fill06[2];
     u16 unk08;
-    u8 fill04[0x3c];
+    u16 fillA;
+    u32 unkC;
+    u8 fill04[0x36];
     u8 unk46;
 };
 
@@ -19,9 +21,10 @@ struct UnkTextStruct2_sub
 };
 
 struct UnkTextStruct2 {
-    u8 fill00[0x08];
+    u8 fill00[0x04];
+    s32 unk4;
     struct UnkTextStruct2_sub unk08;
-    s16 unk0c;
+    s16 unkC;
     s16 unkE;
     s16 unk10;
     s16 unk12;

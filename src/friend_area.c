@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "friend_area.h"
 #include "pokemon.h"
@@ -359,9 +360,9 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
         pokemon = &gRecruitedPokemonRef->pokemon[counter];
         if((u8)(pokemon->unk0) & 1)
         {
-            if((pokemon->unk2 == 0) || r2)
+            if((pokemon->isTeamLeader == 0) || r2)
             {
-                flag = (u8)pokemon->fill4[0] == 65;
+                flag = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
                 if(!flag || r3)
                 {
                     if(sub_80923D4(counter) == r0)
@@ -463,123 +464,35 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 }
 #endif
 
-#ifdef NONMATCHING
-void sub_809249C(u8 index, u8 clear)
+void sub_809249C(u8 friendArea, u8 clear)
 {
-    s32 counter;
-    bool32 flag;
-    u8 temp8;
-    u8 neg8;
+    s32 index;
+    bool32 dungeonCheck;
+    bool32 isTeamLeader;
 
-    if(!gFriendAreas[index])
+    if(!gFriendAreas[friendArea])
         return;
-    for(counter = 0; counter <= 412; counter++)
+    for(index = 0; index < NUM_MONSTERS; index++)
     {
-        if((u8)(gRecruitedPokemonRef[counter].unk0) & 1)
+        struct PokemonStruct *pokemon = &gRecruitedPokemonRef->pokemon[index]; 
+        
+        if((u8)(pokemon->unk0) & 1)
         {
-            if(sub_80923D4(counter) == index)
+            if(sub_80923D4(index) == friendArea)
             {
-                flag = (u8)gRecruitedPokemonRef[counter].unk4[0] == 65;
-                if(!flag)
-                {
-                    temp8 = (u8)gRecruitedPokemonRef[counter].unk2;
-                    neg8 = -temp8;
-                    neg8 |= temp8;
-                    // still tries to left shift before the right shift..
-                    neg8 >>= 7;
-                    if(neg8 != 0)
-                    {
-                        clear = 0;
-                    }
-                    else
-                    {
-                       gRecruitedPokemonRef[counter].unk0 = neg8;
-                    }
-                }
+                dungeonCheck = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
+                if(dungeonCheck || (isTeamLeader = pokemon->isTeamLeader != FALSE, isTeamLeader))
+                    clear = FALSE;
+                else
+                    pokemon->unk0 = 0;
             }
         }
     }
     if(clear)
     {
-        gFriendAreas[index] = FALSE;
+        gFriendAreas[friendArea] = FALSE;
     }
 }
-#else
-NAKED void sub_809249C(u8 index, u8 clear)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tlsls r1, 24\n"
-	"\tlsrs r7, r1, 24\n"
-	"\tldr r0, _080924F8\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r0, r6\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0809251A\n"
-	"\tmovs r5, 0\n"
-"_080924B4:\n"
-	"\tldr r2, _080924FC\n"
-	"\tmovs r0, 0x58\n"
-	"\tadds r1, r5, 0\n"
-	"\tmuls r1, r0\n"
-	"\tldr r0, [r2]\n"
-	"\tadds r4, r0, r1\n"
-	"\tldrb r1, [r4]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08092502\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl sub_80923D4\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, r6\n"
-	"\tbne _08092502\n"
-	"\tmovs r1, 0\n"
-	"\tldrb r0, [r4, 0x4]\n"
-	"\tcmp r0, 0x41\n"
-	"\tbne _080924E2\n"
-	"\tmovs r1, 0x1\n"
-"_080924E2:\n"
-	"\tcmp r1, 0\n"
-	"\tbne _080924F2\n"
-	"\tldrb r1, [r4, 0x2]\n"
-	"\tnegs r0, r1\n"
-	"\torrs r0, r1\n"
-	"\tlsrs r0, 31\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08092500\n"
-"_080924F2:\n"
-	"\tmovs r7, 0\n"
-	"\tb _08092502\n"
-	"\t.align 2, 0\n"
-"_080924F8: .4byte gFriendAreas\n"
-"_080924FC: .4byte gRecruitedPokemonRef\n"
-"_08092500:\n"
-	"\tstrh r0, [r4]\n"
-"_08092502:\n"
-	"\tadds r5, 0x1\n"
-	"\tmovs r0, 0xCE\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r5, r0\n"
-	"\tble _080924B4\n"
-	"\tcmp r7, 0\n"
-	"\tbeq _0809251A\n"
-	"\tldr r0, _08092520\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r0, r6\n"
-	"\tmovs r1, 0\n"
-	"\tstrb r1, [r0]\n"
-"_0809251A:\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08092520: .4byte gFriendAreas");
-}
-#endif
 
 const char *GetFriendAreaName(u8 index)
 {
