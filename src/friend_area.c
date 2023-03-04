@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "friend_area.h"
 #include "pokemon.h"
@@ -361,7 +362,7 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
         {
             if((pokemon->isTeamLeader == 0) || r2)
             {
-                flag = pokemon->dungeonLocation.id == 65;
+                flag = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
                 if(!flag || r3)
                 {
                     if(sub_80923D4(counter) == r0)
@@ -479,7 +480,7 @@ void sub_809249C(u8 friendArea, u8 clear)
         {
             if(sub_80923D4(index) == friendArea)
             {
-                dungeonCheck = pokemon->dungeonLocation.id == 65;
+                dungeonCheck = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
                 if(dungeonCheck || (isTeamLeader = pokemon->isTeamLeader != FALSE, isTeamLeader))
                     clear = FALSE;
                 else
