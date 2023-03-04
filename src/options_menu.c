@@ -6,46 +6,6 @@
 #include "game_options.h"
 #include "menu_input.h"
 
-struct unkStruct_203B260  
-{ 
-    struct GameOptions *optionsMenu;           
-    u32 unk4;           
-    u8  unk8;           
-    u8 fill9[0x10 - 0x9];
-    u32 unk10;        
-    u8 fill14[0x28 - 0x14];
-    s16 unk28;        
-    u8 fill2A[0x44 - 0x2A];
-    u32 unk44;        
-    struct UnkTextStruct2 * unk48;        
-    struct UnkTextStruct2 unk4C[4];        
-};
-struct unkStruct_203B260  *gUnknown_203B260;
-extern struct UnkTextStruct2 gUnknown_80DC020;
-extern struct UnkTextStruct2 gUnknown_80DC03C;
-
-extern u8 gWindowBGTitle[];
-extern u8 gUnknown_80DC064[];
-extern u8 gWindowBGGreenString[];
-extern u8 gWindowBGRedString[];
-extern u8 gWindowBGBlueString[];
-
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
-extern s32 sub_8008ED0(u8 *);
-extern s32 sub_8013800(u32 *, u32);
-extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u8 sub_80138B8(u32 *, u32);
-void PlayMenuSoundEffect(u32);
-s32 sub_8012AE8(void);
-void sub_801317C(u32 *);
-extern void sub_8013818(void *, u32, u32, u32);
-
-void CreateOptionsMenu(void);
-void nullsub_38(void);
-
 struct unkStruct_203B25C
 {
     // size: 0x11C
@@ -59,9 +19,57 @@ struct unkStruct_203B25C
     struct UnkTextStruct2 unkBC[4];
 };
 
+struct unkStruct_203B260  
+{ 
+    struct GameOptions *optionsMenu;
+    u32 unk4;
+    u8  unk8;
+    u8 fill9[0x10 - 0x9];
+    u32 unk10;
+    u8 fill14[0x28 - 0x14];
+    s16 unk28;
+    u8 fill2A[0x44 - 0x2A];
+    u32 unk44;
+    struct UnkTextStruct2 * unk48;
+    struct UnkTextStruct2 unk4C[4];
+};
+struct unkStruct_203B260  *gUnknown_203B260;
+extern struct GameOptions *gGameOptionsRef;
+extern struct unkStruct_203B25C *gUnknown_203B25C;
 
+extern const struct UnkTextStruct2 gUnknown_80DBFB0;
+extern const struct UnkTextStruct2 gUnknown_80DBFCC;
+extern const struct UnkTextStruct2 gUnknown_80DC020;
+extern const struct UnkTextStruct2 gUnknown_80DC03C;
+
+extern u8 gWindowBGTitle[];
+extern u8 gUnknown_80DC064[];
+extern u8 gWindowBGGreenString[];
+extern u8 gWindowBGRedString[];
+extern u8 gWindowBGBlueString[];
+
+extern const char gOthers_MenuOption[];
+extern const char gUnknown_80DBFEC[];
+extern const char gOthers_GameOptions[];
+extern const char gOthers_Hints[];
+extern const char *gUnknown_80D4920[];
+extern const char *gUnknown_80D4928[];
+
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+extern void xxx_call_draw_string(u32, u32, u8 *, u32, u32);
+extern s32 sub_8008ED0(u8 *);
+extern s32 sub_8013800(u32 *, u32);
+extern void sub_80078A4(u32, u32, u32, u32, u32);
+extern u8 sub_80138B8(u32 *, u32);
+void PlayMenuSoundEffect(u32);
+s32 sub_8012AE8(void);
+void sub_801317C(u32 *);
+extern void sub_8013818(void *, u32, u32, u32);
+void CreateOptionsMenu(void);
+void nullsub_38(void);
 extern void sub_801DD6C(u32);
-
 extern void HandleOthersMenu();
 extern void sub_801E088();
 extern void sub_801E0E0();
@@ -85,19 +93,6 @@ extern void sub_801E2C4(void);
 extern s32 sub_80144A4(s32 *);
 extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
-
-extern struct GameOptions *gGameOptionsRef;
-extern struct unkStruct_203B25C *gUnknown_203B25C;
-extern const struct UnkTextStruct2 gUnknown_80DBFCC;
-extern const struct UnkTextStruct2 gUnknown_80DBFB0;
-
-extern const char gOthers_MenuOption[];
-extern const char gUnknown_80DBFEC[];
-extern const char gOthers_GameOptions[];
-extern const char gOthers_Hints[];
-extern const char *gUnknown_80D4920[];
-extern const char *gUnknown_80D4928[];
-
 
 enum 
 {
@@ -647,7 +642,7 @@ void nullsub_38(void)
 
 void CreateOptionsMenu(void)
 {
-  u32 uVar2;
+  u32 length;
   u32 y;
   
   sub_8008C54(gUnknown_203B260->unk44);
@@ -659,19 +654,19 @@ void CreateOptionsMenu(void)
   switch(gUnknown_203B260->optionsMenu->windowColor)
   {
       case WINDOW_COLOR_BLUE:
-        uVar2 = sub_8008ED0(gWindowBGBlueString);
-        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
-              y + 0xA,uVar2,7);
+        length = sub_8008ED0(gWindowBGBlueString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
+              y + 0xA,length,7);
         break;
       case WINDOW_COLOR_RED:
-        uVar2 = sub_8008ED0(gWindowBGRedString);
-        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
-              y + 0xA,uVar2,7);
+        length = sub_8008ED0(gWindowBGRedString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
+              y + 0xA,length,7);
         break;
       case WINDOW_COLOR_GREEN:
-        uVar2 = sub_8008ED0(gWindowBGGreenString);
-        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * '(' + 0x50,
-              y + 0xA,uVar2,7);
+        length = sub_8008ED0(gWindowBGGreenString);
+        sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
+              y + 0xA,length,7);
         break;
   }
   sub_80073E0(gUnknown_203B260->unk44);
