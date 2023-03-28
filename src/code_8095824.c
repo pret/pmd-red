@@ -48,7 +48,7 @@ struct unkStruct_203B480 * sub_8095228(u8 index)
   return ptr;
 }
 
-void sub_8095240(u8 index)
+void DeleteMailAtIndex(u8 index)
 {
   struct unkStruct_203B480 *unused;
 
@@ -120,7 +120,7 @@ s32 CountMailType(u8 mailType)
   return total;
 }
 
-u32 sub_8095350(void)
+u32 CountAllMail(void)
 {
   struct unkStruct_203B480 *ptr;
   u32 total = 0;
@@ -205,7 +205,7 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->unk2C = GetRescuesAllowed(gUnknown_203B480->dungeon.id);
+  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->dungeon.id);
 }
 
 void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
@@ -331,7 +331,7 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     RestoreIntegerBits(a, &b->unk20.id, 0x8);
     RestoreIntegerBits(a, &b->unk24, 0x20);
     RestoreIntegerBits(a, &b->unk28, 0x20);
-    RestoreIntegerBits(a, &b->unk2C, 0x8);
+    RestoreIntegerBits(a, &b->rescuesAllowed, 0x8);
 
     RestoreIntegerBits(a, &temp, 1);
     b->unk2D = temp & 1;
@@ -356,7 +356,7 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     SaveIntegerBits(a, &b->unk20.id, 0x8);
     SaveIntegerBits(a, &b->unk24, 0x20);
     SaveIntegerBits(a, &b->unk28, 0x20);
-    SaveIntegerBits(a, &b->unk2C, 0x8);
+    SaveIntegerBits(a, &b->rescuesAllowed, 0x8);
 
     if(b->unk2D != 0)
         puVar2 = &neg1;

@@ -95,7 +95,6 @@ extern void sub_8030DE4();
 extern void sub_8030810(u32);
 extern void sub_803092C(void);
 extern void sub_8030D40(u8, u32);
-extern void sub_8095240(u8);
 
 bool8 sub_8030F58(u32 wonderMailType)
 {
@@ -316,7 +315,7 @@ void sub_80313D8(u32 state)
         switch(state)
         {
             case 2:
-                sub_8095240(gUnknown_203B328->mailIndex);
+                DeleteMailAtIndex(gUnknown_203B328->mailIndex);
                 break;
             case 3:
                 for(index = 0; index < 0x20; index++)

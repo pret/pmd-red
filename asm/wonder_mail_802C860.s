@@ -210,29 +210,29 @@ _0802CC1C:
 	.4byte _0802CC30
 	.4byte _0802CC48
 _0802CC30:
-	bl sub_802C620
+	bl GetPelipperBoardSlotIndex
 	ldr r1, _0802CC44
 	ldr r1, [r1]
 	strb r0, [r1, 0xC]
 	movs r0, 0x2
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CC6A
 	.align 2, 0
 _0802CC44: .4byte gUnknown_203B2F0
 _0802CC48:
-	bl sub_802C620
+	bl GetPelipperBoardSlotIndex
 	ldr r1, _0802CC5C
 	ldr r1, [r1]
 	strb r0, [r1, 0xC]
 	movs r0, 0x4
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CC6A
 	.align 2, 0
 _0802CC5C: .4byte gUnknown_203B2F0
 _0802CC60:
 	bl sub_802C688
 	movs r0, 0x5
-	bl sub_802C910
+	bl SetJobListState
 _0802CC6A:
 	pop {r0}
 	bx r0
@@ -306,22 +306,22 @@ _0802CCF4:
 _0802CD06:
 	strb r1, [r0]
 	movs r0, 0x1
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CD2E
 	.align 2, 0
 _0802CD10: .4byte 0x00000133
 _0802CD14: .4byte gUnknown_203B2F0
 _0802CD18:
 	movs r0, 0x3
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CD2E
 _0802CD20:
 	movs r0, 0x4
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CD2E
 _0802CD28:
 	movs r0, 0x1
-	bl sub_802C910
+	bl SetJobListState
 _0802CD2E:
 	add sp, 0x4
 	pop {r4}
@@ -366,7 +366,7 @@ _0802CD7C:
 	bne _0802CDB0
 _0802CD80:
 	movs r0, 0x1
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CDB0
 _0802CD88:
 	ldr r0, [r4]
@@ -379,11 +379,11 @@ _0802CD88:
 	beq _0802CDAA
 	bl sub_802C688
 	movs r0, 0x5
-	bl sub_802C910
+	bl SetJobListState
 	b _0802CDB0
 _0802CDAA:
 	movs r0, 0x1
-	bl sub_802C910
+	bl SetJobListState
 _0802CDB0:
 	add sp, 0x4
 	pop {r4}
@@ -401,7 +401,7 @@ sub_802CDB8:
 	bhi _0802CDD0
 	bl sub_802DF24
 	movs r0, 0x1
-	bl sub_802C910
+	bl SetJobListState
 _0802CDD0:
 	pop {r0}
 	bx r0

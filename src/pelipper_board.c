@@ -4,27 +4,8 @@
 #include "menu.h"
 #include "input.h"
 #include "menu_input.h"
+#include "pelipper_board.h"
 
-// Guessing based off of 203B304
-struct unkStruct_203B308
-{
-    // size: 0xB6 << 1
-    u32 state;
-    u32 unk4;
-    u8 jobIndex;
-    u8 fill9[0xC - 9];
-    u32 unkC;
-    u8 fill10[0x50 - 0x10];
-    u8 unk50;
-    u8 fill51[0x64 - 0x51];
-    u32 unk64;
-    u32 unk68;
-    struct MenuStruct unk6C;
-    struct MenuItem unkBC[8];
-    u16 unkFC[8];
-    struct UnkTextStruct2 unk10C[4];
-};
-extern struct unkStruct_203B308 *gUnknown_203B308;
 extern void SetPelipperBoardState(u32);
 
 const struct UnkTextStruct2 gUnknown_80E0330 =
@@ -86,31 +67,31 @@ extern void sub_802EC10(void);
 
 extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
-extern void sub_802C39C(void);
+extern void DrawPelipperBoardJobMenu(void);
 extern void CreatePelipperAcceptedStatusBox(u32);
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern void sub_802DE84(u32 *);
-extern void sub_802C860(u32);
+extern void InitializeJobListMenu(u32);
 
 u32 sub_802E864(void)
 {
-    gUnknown_203B308 = MemoryAlloc(sizeof(struct unkStruct_203B308), 8);
-    gUnknown_203B308->unk64 = 0;
-    gUnknown_203B308->unk68 = 0;
-    gUnknown_203B308->unk4 = 0;
-    SetPelipperBoardState(0);
+    gPelipperBoard = MemoryAlloc(sizeof(struct unkStruct_203B308), 8);
+    gPelipperBoard->menuAction1 = 0;
+    gPelipperBoard->menuAction2 = 0;
+    gPelipperBoard->unk4 = 0;
+    SetPelipperBoardState(INITIALIZE_PELIPPER_BOARD);
     return 1;
 }
 
 u32 sub_802E890(void)
 {
-    switch(gUnknown_203B308->state)
+    switch(gPelipperBoard->state)
     {
-        case 0:
-            SetPelipperBoardState(1);
+        case INITIALIZE_PELIPPER_BOARD:
+            SetPelipperBoardState(MAIN_PELIPPER_BOARD_MENU);
             break;
-        case 1:
+        case MAIN_PELIPPER_BOARD_MENU:
             sub_802ECB4();
             break;
         case 2:
@@ -123,13 +104,13 @@ u32 sub_802E890(void)
         case 6:
             sub_802EDBC();
             break;
-        case 7:
+        case PELIPPER_JOB_INFO:
             sub_802EEA0();
             break;
-        case 8:
+        case PELIPPER_JOB_LIST_MENU:
             sub_802EEBC();
             break;
-        case 3:
+        case PELIPPER_BOARD_EXIT:
         default:
             return 3;
     }
@@ -138,64 +119,64 @@ u32 sub_802E890(void)
 
 u32 sub_802E90C(void)
 {
-    return gUnknown_203B308->unk4;
+    return gPelipperBoard->unk4;
 }
 
 void sub_802E918(void)
 {
-    if(gUnknown_203B308 != NULL)
+    if(gPelipperBoard != NULL)
     {
-        MemoryFree(gUnknown_203B308);
-        gUnknown_203B308 = NULL;
+        MemoryFree(gPelipperBoard);
+        gPelipperBoard = NULL;
     }
 }
 
 void SetPelipperBoardState(u32 newState)
 {
-    gUnknown_203B308->state = newState;
+    gPelipperBoard->state = newState;
     sub_802E94C();
     sub_802EA58();
 }
 
 void sub_802E94C(void)
 {
-    s32 iVar1;
-    sub_8006518(gUnknown_203B308->unk10C);
-    switch(gUnknown_203B308->state)
+    s32 index;
+    sub_8006518(gPelipperBoard->unk10C);
+    switch(gPelipperBoard->state)
     {
-        case 1:
-            for(iVar1 = 0; iVar1 < 4; iVar1++)
+        case MAIN_PELIPPER_BOARD_MENU:
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B308->unk10C[iVar1] = gUnknown_80E0330;
+                gPelipperBoard->unk10C[index] = gUnknown_80E0330;
             }
             CreatePelipperBoardMenu();
-            gUnknown_203B308->unk10C[2] = gUnknown_80E0348;
-            sub_8012CAC(&gUnknown_203B308->unk10C[2], gUnknown_203B308->unkBC);
+            gPelipperBoard->unk10C[2] = gUnknown_80E0348;
+            sub_8012CAC(&gPelipperBoard->unk10C[2], gPelipperBoard->unkBC);
             break;
         case 6:
             sub_802EC10();
-            gUnknown_203B308->unk10C[2] = gUnknown_80E0360;
-            sub_8012CAC(&gUnknown_203B308->unk10C[2], gUnknown_203B308->unkBC);
-            gUnknown_203B308->unk10C[2].unkC = 6;
-            gUnknown_203B308->unk10C[3] = gUnknown_80E0378;
+            gPelipperBoard->unk10C[2] = gUnknown_80E0360;
+            sub_8012CAC(&gPelipperBoard->unk10C[2], gPelipperBoard->unkBC);
+            gPelipperBoard->unk10C[2].unkC = 6;
+            gPelipperBoard->unk10C[3] = gUnknown_80E0378;
             break;
         default:
-            for(iVar1 = 0; iVar1 < 4; iVar1++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B308->unk10C[iVar1] = gUnknown_80E0330;
+                gPelipperBoard->unk10C[index] = gUnknown_80E0330;
             }
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B308->unk10C, 1, 1);
+    sub_800641C(gPelipperBoard->unk10C, 1, 1);
 }
 
 void sub_802EA58(void)
 {
-    switch(gUnknown_203B308->state)
+    switch(gPelipperBoard->state)
     {
-        case 1:
-            sub_8012D60(&gUnknown_203B308->unk6C, gUnknown_203B308->unkBC, 0, gUnknown_203B308->unkFC, gUnknown_203B308->unk64, 2);
+        case MAIN_PELIPPER_BOARD_MENU:
+            sub_8012D60(&gPelipperBoard->unk6C, gPelipperBoard->unkBC, 0, gPelipperBoard->unkFC, gPelipperBoard->menuAction1, 2);
             break;
         case 4:
             sub_802C10C(0, 0, 4);
@@ -204,22 +185,22 @@ void sub_802EA58(void)
             sub_802C28C(1);
             break;
         case 6:
-            sub_802C39C();
+            DrawPelipperBoardJobMenu();
             CreatePelipperAcceptedStatusBox(3);
-            sub_8012D60(&gUnknown_203B308->unk6C, gUnknown_203B308->unkBC, 0, 0, gUnknown_203B308->unk68, 2);
+            sub_8012D60(&gPelipperBoard->unk6C, gPelipperBoard->unkBC, 0, 0, gPelipperBoard->menuAction2, 2);
             break;
-        case 7:
-            sub_803B35C(GetPelipperBoardSlotInfo(gUnknown_203B308->jobIndex), &gUnknown_203B308->unkC);
-            gUnknown_203B308->unkC = 3;
-            gUnknown_203B308->unk50 = 0;
-            sub_802DE84(&gUnknown_203B308->unkC);
+        case PELIPPER_JOB_INFO:
+            sub_803B35C(GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex), &gPelipperBoard->unkC);
+            gPelipperBoard->unkC = 3;
+            gPelipperBoard->unk50 = 0;
+            sub_802DE84(&gPelipperBoard->unkC);
             break;
-        case 8:
-            sub_802C860(0);
+        case PELIPPER_JOB_LIST_MENU:
+            InitializeJobListMenu(0);
             break;
-        case 0:
+        case INITIALIZE_PELIPPER_BOARD:
         case 2:
-        case 3:
+        case PELIPPER_BOARD_EXIT:
             break;
     }
 }

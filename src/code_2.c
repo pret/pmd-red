@@ -16,6 +16,7 @@
 #include "exclusive_pokemon.h"
 #include "pokemon.h"
 #include "rescue_team_info.h"
+#include "code_8094F88.h"
 
 extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
@@ -42,7 +43,6 @@ extern void LoadTitleScreen(void);
 extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
 extern s32 sub_80953D4(u8);
-extern void sub_8095240(u8);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
@@ -174,9 +174,9 @@ void GameLoop(void)
         CloseFile(gTitlePaletteFile);
         switch (nextMenu) {
             case 2: {
-                s32 tmp5 = sub_80953D4(7);
-                if (tmp5 != -1) {
-                    sub_8095240(tmp5);
+                s32 mailIndex = sub_80953D4(7);
+                if (mailIndex != -1) {
+                    DeleteMailAtIndex(mailIndex);
                     tmp3 = sub_80009D0(2);
                 } else {
                     tmp3 = sub_80009D0(1);

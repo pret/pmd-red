@@ -9,7 +9,6 @@
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];

@@ -413,7 +413,7 @@ gUnknown_203B300: /* 203B300 */
 gUnknown_203B304: /* 203B304 */
 	.space 0x4
 
-gUnknown_203B308: /* 203B308 */
+gPelipperBoard: /* 203B308 */
 	.space 0x4
 
 gUnknown_203B30C: /* 203B30C */

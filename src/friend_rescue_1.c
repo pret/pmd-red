@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
+#include "code_8094F88.h"
 
 
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -21,7 +22,6 @@ extern u8 *gUnknown_203B484;
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
@@ -246,7 +246,6 @@ void sprintfStatic(char *buffer, const char *text, ...);
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
@@ -1933,7 +1932,7 @@ void nullsub_49(void)
 
 void sub_80352A4(void)
 {
-  u8 uVar1;
+  u8 mailIndex;
   char *monName;
 
   if ( sub_802F298() == 3) {
@@ -1941,8 +1940,8 @@ void sub_80352A4(void)
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
-    uVar1 = sub_809539C(6, gUnknown_203B33C->unk420);
-    sub_8095240(uVar1);
+    mailIndex = sub_809539C(6, gUnknown_203B33C->unk420);
+    DeleteMailAtIndex(mailIndex);
     SetFriendRescueMenuState(0x70);
   }
 }

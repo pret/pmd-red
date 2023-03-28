@@ -1,3 +1,4 @@
+#include "constants/input.h"
 #include "global.h"
 #include "text.h"
 #include "input.h"
@@ -140,13 +141,13 @@ u32 sub_8030768(u8 r0)
     }
     switch(GetKeyPress(&gUnknown_203B320->unk24))
     {
-        case 4:
+        case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
             return 4;
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
         default:

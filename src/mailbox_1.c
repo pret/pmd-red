@@ -28,7 +28,7 @@ extern void sub_802DF24(void);
 extern struct WonderMail *GetMailboxSlotInfo(u8);
 extern u8 HasNoMailinMailbox(void);
 extern u32 sub_802BDEC(u32);
-extern void sub_8096A78(struct WonderMail *);
+extern void AcceptJob(struct WonderMail *);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void ResetMailboxSlot(u8);
@@ -52,21 +52,23 @@ void HandleMailboxMenu(void)
     }
     switch(menuAction)
     {
+        // Check Mail
         case 2:
             if(!HasNoMailinMailbox())
-                SetMailboxState(4);
+                SetMailboxState(MAIL_MENU);
             else
                 sub_8012EA4(&gUnknown_203B304->unk6C, 1);
             break;
+        // Job List
         case 3:
             if(!HasNoAcceptedJobs())
-                SetMailboxState(8);
+                SetMailboxState(JOB_LIST_MENU);
             else
                 sub_8012EA4(&gUnknown_203B304->unk6C, 1);
             break;
         case 4:
             if(!HasNoPKMNNews())
-                SetMailboxState(9);
+                SetMailboxState(PKMN_NEWS_MENU);
             else
                 sub_8012EA4(&gUnknown_203B304->unk6C, 1);
             break;
@@ -74,37 +76,37 @@ void HandleMailboxMenu(void)
             SetMailboxState(2);
             break;
         case 1:
-            SetMailboxState(3);
+            SetMailboxState(MAILBOX_EXIT);
             break;
     }
 }
 
 void sub_802E578(void)
 {
-    struct WonderMail *return_var;
+    struct WonderMail *mail;
 
     switch(sub_802BDEC(1))
     {
 
         case 3:
             gUnknown_203B304->mailboxIndex = sub_802BE74();
-            SetMailboxState(6);
+            SetMailboxState(MAIL_ACTION_MENU);
             break;
         case 4:
             gUnknown_203B304->mailboxIndex = sub_802BE74();
-            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
-            if(return_var->mailType == 1)
+            mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            if(mail->mailType == 1)
             {
-                gUnknown_203B304->mailIndex = return_var->dungeon.floor;
-                gUnknown_203B304->fallbackState = 5;
-                SetMailboxState(0xB);
+                gUnknown_203B304->mailIndex = mail->dungeon.floor;
+                gUnknown_203B304->fallbackState = MAIL_MENU_1;
+                SetMailboxState(DISPLAY_SEL_PKMN_NEWS);
             }
             else
-                SetMailboxState(7);
+                SetMailboxState(MAIL_INFO);
             break;
         case 2:
             sub_802BEDC();
-            SetMailboxState(1);
+            SetMailboxState(MAIN_MAILBOX_MENU);
             break;
         case 0:
         case 1:
@@ -115,7 +117,7 @@ void sub_802E578(void)
 void HandleMailActionMenu(void)
 {
     s32 menuAction = 0;
-    struct WonderMail *return_var;
+    struct WonderMail *mail;
 
 
     sub_802BDEC(0);
@@ -130,9 +132,11 @@ void HandleMailActionMenu(void)
         case 3:
         case 4:
             break;
+
+        // Accept
         case 5:
             PlaySound(0x133);
-            sub_8096A78(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex));
+            AcceptJob(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex));
             sub_8096C80();
             sub_8096D24();
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
@@ -140,37 +144,43 @@ void HandleMailActionMenu(void)
             if(HasNoMailinMailbox())
             {
                 sub_802BEDC();
-                SetMailboxState(1);
+                SetMailboxState(MAIN_MAILBOX_MENU);
             }
             else
-                SetMailboxState(5);
+                SetMailboxState(MAIL_MENU_1);
             break;
+
+        // Info
         case 8:
-            SetMailboxState(7);
+            SetMailboxState(MAIL_INFO);
             break;
+
+        // Store
         case 6:
             PlaySound(0x133);
-            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
-            ReceivePKMNNews(return_var->dungeon.floor);
+            mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            ReceivePKMNNews(mail->dungeon.floor);
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
             sub_8096078();
             if(HasNoMailinMailbox())
             {
                 sub_802BEDC();
-                SetMailboxState(1);
+                SetMailboxState(MAIN_MAILBOX_MENU);
             }
             else
-                SetMailboxState(5);
+                SetMailboxState(MAIL_MENU_1);
             break;
+
+        // Read
         case 7:
             PlayMenuSoundEffect(0);
-            return_var = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
-            gUnknown_203B304->mailIndex = return_var->dungeon.floor;
-            gUnknown_203B304->fallbackState = 5;
-            SetMailboxState(0xB);
+            mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
+            gUnknown_203B304->mailIndex = mail->dungeon.floor;
+            gUnknown_203B304->fallbackState = MAIL_MENU_1;
+            SetMailboxState(DISPLAY_SEL_PKMN_NEWS);
             break;
         case 1:
-            SetMailboxState(5);
+            SetMailboxState(MAIL_MENU_1);
             break;
     }
 }
@@ -182,7 +192,7 @@ void sub_802E73C(void)
         case 2:
         case 3:
             sub_802DF24();
-            SetMailboxState(5);
+            SetMailboxState(MAIL_MENU_1);
         case 0:
         case 1:
             break;
@@ -196,7 +206,7 @@ void sub_802E758(void)
         case 2:
         case 3:
             sub_802C8F4();
-            SetMailboxState(1);
+            SetMailboxState(MAIN_MAILBOX_MENU);
         case 0:
         case 1:
             break;
@@ -213,12 +223,12 @@ void sub_802E774(void)
         case 3:
         case 4:
             gUnknown_203B304->mailIndex = GetPokemonNewsIndex();
-            gUnknown_203B304->fallbackState = 0xA;
-            SetMailboxState(0xB);
+            gUnknown_203B304->fallbackState = PKMN_NEWS_MENU_1;
+            SetMailboxState(DISPLAY_SEL_PKMN_NEWS);
             break;
         case 2:
             sub_802B81C();
-            SetMailboxState(1);
+            SetMailboxState(MAIN_MAILBOX_MENU);
             break;
     }
 }

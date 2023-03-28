@@ -1371,7 +1371,7 @@ _0801D49C:
 	b _0801D4B6
 _0801D4AA:
 	movs r0, 0
-	bl sub_802C860
+	bl InitializeJobListMenu
 	b _0801D4B6
 _0801D4B2:
 	bl sub_801DCC4
