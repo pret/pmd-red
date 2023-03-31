@@ -724,7 +724,7 @@ void sub_8033DBC(void)
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
                         mail.mailType = 5;
                         sub_80951FC(&mail);
-                        mail2 = sub_8095228(sub_809539C(1, mail.unk10.unk10));
+                        mail2 = sub_8095228(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
                         MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
@@ -1592,7 +1592,7 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(0x6B);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                        mail2 = sub_8095228(sub_809539C(4, mail.unk10.unk10));
+                        mail2 = sub_8095228(GetMailIndex(4, mail.unk10.unk10));
                         *mail2 = mail;
                         mail2->mailType = 6;
                         gUnknown_203B33C->unk420 = mail.unk10.unk10;
@@ -1893,7 +1893,7 @@ void sub_8035210(void)
             case 0xD:
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
-                    mail = sub_8095228(sub_80953D4(5));
+                    mail = sub_8095228(GetFirstIndexofMailType(5));
                     if(mail->unk20.id != ITEM_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else
@@ -1940,7 +1940,7 @@ void sub_80352A4(void)
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
-    mailIndex = sub_809539C(6, gUnknown_203B33C->unk420);
+    mailIndex = GetMailIndex(6, gUnknown_203B33C->unk420);
     DeleteMailAtIndex(mailIndex);
     SetFriendRescueMenuState(0x70);
   }

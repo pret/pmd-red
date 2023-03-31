@@ -43,12 +43,12 @@ void DeleteMailAtIndex(u8 index);
 void sub_8095274(u32 param_1);
 bool8 sub_8095298(s32 param_1);
 void sub_80952C4(void);
-bool8 sub_80952F0(u8 mailType, u32 param_2);
+bool8 HasMail(u8 mailType, u32 param_2);
 s32 CountMailType(u8 mailType);
 u32 CountAllMail(void);
 s32 sub_8095374(void);
-s32 sub_809539C(u8 mailType, u32 param_2);
-s32 sub_80953D4(u8 mailType);
+s32 GetMailIndex(u8 mailType, u32 param_2);
+s32 GetFirstIndexofMailType(u8 mailType);
 
 
 #endif

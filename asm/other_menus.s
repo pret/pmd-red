@@ -1360,7 +1360,7 @@ sub_8037EBC:
 _08037ED0:
 	ldr r1, [r5, 0x10]
 	movs r0, 0x1
-	bl sub_809539C
+	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8095228
@@ -1431,7 +1431,7 @@ sub_8037F4C:
 _08037F5E:
 	ldr r1, [r4, 0x10]
 	movs r0, 0x4
-	bl sub_809539C
+	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8095228
@@ -1596,7 +1596,7 @@ _0803809C:
 _080380A2:
 	movs r0, 0x4
 	adds r1, r6, 0
-	bl sub_80952F0
+	bl HasMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080380BA
@@ -1628,19 +1628,19 @@ _080380D8:
 	ldr r4, [r5, 0x10]
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_80952F0
+	bl HasMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038110
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80952F0
+	bl HasMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038110
 	movs r0, 0x6
 	adds r1, r4, 0
-	bl sub_80952F0
+	bl HasMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038110
@@ -1681,7 +1681,7 @@ sub_803812C:
 _0803813E:
 	ldr r1, [r4, 0x10]
 	movs r0, 0x1
-	bl sub_80952F0
+	bl HasMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038150

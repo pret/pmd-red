@@ -1417,7 +1417,7 @@ _0803349C:
 	adds r0, r5
 	ldr r1, [r0]
 	movs r0, 0x6
-	bl sub_809539C
+	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8095228

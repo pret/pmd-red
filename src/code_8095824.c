@@ -95,7 +95,7 @@ void sub_80952C4(void)
   }
 }
 
-bool8 sub_80952F0(u8 mailType, u32 param_2)
+bool8 HasMail(u8 mailType, u32 param_2)
 {
   struct unkStruct_203B480 *ptr;
   s32 index;
@@ -146,7 +146,8 @@ s32 sub_8095374(void)
   return retvar;
 }
 
-s32 sub_809539C(u8 mailType, u32 param_2)
+/* With mailType and (additonal data??), search mail and return exact index */
+s32 GetMailIndex(u8 mailType, u32 param_2)
 {
   struct unkStruct_203B480 *ptr;
   s32 index;
@@ -158,7 +159,8 @@ s32 sub_809539C(u8 mailType, u32 param_2)
   return -1;
 }
 
-s32 sub_80953D4(u8 mailType)
+/* Return the index of the first mail of the requested type */
+s32 GetFirstIndexofMailType(u8 mailType)
 {
   struct unkStruct_203B480 *ptr;
   s32 index;
