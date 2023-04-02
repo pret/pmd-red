@@ -101,7 +101,7 @@ extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void CreateRescueTitle(void *);
+extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)
 {

@@ -50,7 +50,7 @@ extern void sub_8030DD4(void);
 extern void sub_801317C(void *);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8012A64(void *, u32);
-extern void CreateRescueDescription(void *);
+extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(u32, u32, const char *, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);

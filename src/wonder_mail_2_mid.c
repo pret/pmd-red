@@ -31,7 +31,7 @@ extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
 extern bool8 IsMailinJobSlot(struct WonderMail *);
-extern void CreateRescueTitle(void *);
+extern void CreateRescueTitle(struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 
 
@@ -83,7 +83,6 @@ extern struct UnkTextStruct2 gUnknown_80DFC9C;
 extern u16 gUnknown_203B2E4;
 
 extern struct WonderMail *GetMailboxSlotInfo(u8);
-extern void CreateRescueTitle(void *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];

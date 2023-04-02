@@ -107,13 +107,13 @@ struct unk_203B250 *gUnknown_203B250;
 
 void sub_801D680(void)
 {
-  int local_c;
+  int menuAction;
 
-  local_c = 0;
-  if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&local_c), local_c != 1)) {
-    gUnknown_203B250->unk14 = local_c;
+  menuAction = 0;
+  if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&menuAction), menuAction != 1)) {
+    gUnknown_203B250->unk14 = menuAction;
   }
-  switch(local_c) {
+  switch(menuAction) {
       case 2:
         sub_801D208(3);
         break;

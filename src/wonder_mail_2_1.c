@@ -19,7 +19,7 @@ struct unkStruct_203B2E8
     s16 unk24;
     s16 unk26;
     u16 unk28;
-    u16 unk2A;
+    u16 acceptedJobs;
     u16 unk2C;
     u8 fill2E[0x3C - 0x2E]; 
     u32 unk3C;
@@ -143,7 +143,7 @@ extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
-extern void CreateRescueTitle(void *);
+extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 extern void sub_8013984(u32 *);
 extern void sub_802C6DC(void);
@@ -263,7 +263,7 @@ void sub_802C640(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
-    gUnknown_203B2E8->unk2A = CountAcceptedJobs();
+    gUnknown_203B2E8->acceptedJobs = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
     DrawJobListMenu();

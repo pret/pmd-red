@@ -171,6 +171,7 @@ enum FriendRescueStates {
     RECEIVED_FRIEND_SOS_MAIL_SAVE_PRE = 0x24,
     RECEIVED_FRIEND_SOS_MAIL_SAVE_COMPLETE = 0x25,
     PROMPT_SOS_MAIL_PASSWORD = 0x26,
+    PROMPT_CHOOSE_AOK_MAIL = 0x29,
     NO_AOK_MAIL_TO_SEND = 0x2F,
     NO_POKEMON_IN_FRIEND_AREA = 0x31,
     PROMPT_SELECT_HELPER_POKEMON = 0x32,
@@ -360,7 +361,7 @@ u32 sub_8028078(void)
     case 0x2d:
         sub_80295A8();
         break;
-    case 0x29:
+    case PROMPT_CHOOSE_AOK_MAIL:
         sub_8029668();
         break;
     case 0x2b:
@@ -578,7 +579,7 @@ void sub_8028348(void)
         case 0x2D:
             sub_8014248(gUnknown_80DDDBC, 0, 8, gUnknown_80DDA64, 0, 4, 0, &gUnknown_203B2C0->faceFile,0xC);
             break;
-        case 0x29:
+        case PROMPT_CHOOSE_AOK_MAIL:
             sub_80141B4(gUnknown_80DDDD8, 0, &gUnknown_203B2C0->faceFile,0x10d);
             break;
         case 0x2A:
@@ -854,14 +855,14 @@ void PrintFriendRescueCounterError(u32 errorCode)
 
 void sub_8028BF0(void)
 {
-    u32 temp;
-    if(sub_80144A4(&temp) != 0)
+    u32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
     gUnknown_203B2C0->unk40 = 8;
     gUnknown_203B2C0->speciesNum = -1;
-    switch(temp)
+    switch(menuChoice)
     {
         case 0:
             gUnknown_203B2C0->unk40 = 3;
@@ -890,7 +891,7 @@ void sub_8028BF0(void)
             gUnknown_203B2C0->unk538 = 2;
             if(CountMailType(WONDER_MAIL_TYPE_AOK) != 0)
             {
-                SetFriendRescueCounterState(0x29);
+                SetFriendRescueCounterState(PROMPT_CHOOSE_AOK_MAIL);
             }
             else
             {
@@ -951,13 +952,13 @@ void sub_8028CFC()
 
 void sub_8028D4C()
 {
-    s32 temp;
+    s32 menuChoice;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    gUnknown_203B2C0->unk538 = temp;
+    gUnknown_203B2C0->unk538 = menuChoice;
     switch(gUnknown_203B2C0->unk538)
     {
         case 5:
@@ -1010,13 +1011,13 @@ void sub_8028E08()
 
 void sub_8028E24()
 {
-    s32 temp;
+    s32 menuChoice;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             SetFriendRescueCounterState(CONFIRM_DELETE_ALL_MAIL_1);
@@ -1031,13 +1032,13 @@ void sub_8028E24()
 
 void sub_8028E54()
 {
-    s32 temp;
+    s32 menuChoice;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             SetFriendRescueCounterState(CONFIRM_DELETE_ALL_MAIL_2);
@@ -1080,13 +1081,13 @@ void sub_8028EAC()
 
 void sub_8028ED4()
 {
-    s32 temp;
+    s32 menuChoice;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp){
+    switch(menuChoice){
         case 8:
             SetFriendRescueCounterState(0xB);
             break;
@@ -1168,14 +1169,14 @@ void sub_8028FC0()
 
 void sub_8028FDC(void)
 {
-    s32 temp;
+    s32 menuChoice;
     struct unkStruct_203B480 *mail;
 
-    if(sub_80144A4(&temp) != 0)
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             mail = sub_8095228(gUnknown_203B2C0->mailIndex);
@@ -1295,12 +1296,12 @@ void sub_80291AC(void)
 
 void sub_8029208(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
 
         case 13:
@@ -1340,12 +1341,12 @@ void sub_8029208(void)
 
 void sub_80292A4(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             switch(gUnknown_203B2C0->unk538)
@@ -1504,12 +1505,12 @@ void sub_80293F4(void)
 
 void sub_802955C(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             SetFriendRescueCounterState(PROMPT_SOS_MAIL_PASSWORD);
@@ -1532,12 +1533,12 @@ void sub_802958C(void)
 
 void sub_80295A8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 8:
             SetFriendRescueCounterState(0x8);
@@ -1750,12 +1751,12 @@ void sub_8029944(void)
 
 void sub_80299AC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 0x12:
             SetFriendRescueCounterState(4);
@@ -1770,12 +1771,12 @@ void sub_80299AC(void)
 
 void sub_80299D8(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
 
         case 8:
@@ -1792,12 +1793,12 @@ void sub_80299D8(void)
 
 void sub_8029A18(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) != 0)
+    s32 menuChoice;
+    if(sub_80144A4(&menuChoice) != 0)
     {
         return;
     }
-    switch(temp)
+    switch(menuChoice)
     {
         case 0x11:
             if(sub_8024108(3) != 0)

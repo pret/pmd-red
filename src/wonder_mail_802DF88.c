@@ -10,6 +10,7 @@
 #include "wonder_mail_3.h"
 #include "code_80958E8.h"
 #include "menu_input.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B2FC
 {
@@ -40,7 +41,7 @@ struct unkStruct_203B300
 {
     // size: 0x7C
     u8 fill0[0xC];
-    u32 *unkC;
+    struct unkStruct_802C39C *unkC;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
@@ -108,7 +109,7 @@ static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void CreateRescueDescription(u32 *);
+extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8012A64(void *, u32);
 extern s32 sub_80144A4(s32 *);
@@ -524,12 +525,12 @@ void sub_802DE60(void)
     }
 }
 
-u32 sub_802DE84(u32 *r0)
+u32 sub_802DE84(struct unkStruct_802C39C *r0)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
     gUnknown_203B300->unkC = r0;
     sub_801317C();
-    gUnknown_203B300->unk10 = *gUnknown_203B300->unkC;
+    gUnknown_203B300->unk10 = gUnknown_203B300->unkC->unk0[0];
     gUnknown_203B300->unk14 = &gUnknown_203B300->unk18[gUnknown_203B300->unk10];
     sub_8006518(gUnknown_203B300->unk18);
     gUnknown_203B300->unk18[gUnknown_203B300->unk10] = gUnknown_80E0264;
