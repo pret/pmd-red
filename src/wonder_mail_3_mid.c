@@ -141,7 +141,7 @@ extern void sub_802DF24(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
-extern void sub_802F718(void);
+extern void ProceedToNextRewardSceneState(void);
 extern u8 sub_80138B8(u32 *, u32);
 extern void sub_8013660(u32 *);
 extern u32 GetKeyPress(u32 *);
@@ -500,7 +500,7 @@ u32 sub_802F298(void)
             sub_802F6FC();
             return 0;
         default:
-            sub_802F718();
+            ProceedToNextRewardSceneState();
             return 0;
     }
 }
@@ -715,7 +715,7 @@ void sub_802F6FC(void)
     }
 }
 
-void sub_802F718(void)
+void ProceedToNextRewardSceneState(void)
 {
     s32 temp;
 
