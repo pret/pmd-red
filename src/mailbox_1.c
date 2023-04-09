@@ -48,7 +48,7 @@ void HandleMailboxMenu(void)
     if(!sub_8012FD8(&gUnknown_203B304->unk6C))
     {
         sub_8013114(&gUnknown_203B304->unk6C, &menuAction);
-        if(menuAction != 1) gUnknown_203B304->unk64 = menuAction;
+        if(menuAction != 1) gUnknown_203B304->menuAction1 = menuAction;
     }
     switch(menuAction)
     {
@@ -124,7 +124,7 @@ void HandleMailActionMenu(void)
     if(!sub_8012FD8(&gUnknown_203B304->unk6C))
     {
         sub_8013114(&gUnknown_203B304->unk6C, &menuAction);
-        if(menuAction != 1) gUnknown_203B304->unk68 = menuAction;
+        if(menuAction != 1) gUnknown_203B304->menuAction2 = menuAction;
     }
     switch(menuAction)
     {

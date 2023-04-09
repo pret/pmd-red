@@ -12,7 +12,7 @@ struct unkStruct_203B204
     s32 currState;
     u32 fallbackState;
     u32 chosenAmount;
-    u32 unk10;
+    u32 menuAction;
     struct MenuItem unk14[8];
     u16 unk54[8];
     u32 unk64;

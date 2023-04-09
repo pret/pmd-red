@@ -29,11 +29,11 @@ void sub_8016B48(u8 action);
 
 void sub_80169BC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        gUnknown_203B204->unk10  = temp;
-        switch(temp)
+        gUnknown_203B204->menuAction  = menuAction;
+        switch(menuAction)
         {
             case 2:
                 UpdateFelicityBankState(7);

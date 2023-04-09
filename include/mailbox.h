@@ -16,8 +16,8 @@ struct unkStruct_203B304
     u8 fill10[0x50 - 0x10];
     u8 unk50;
     u8 fill51[0x64 - 0x51];
-    u32 unk64;
-    u32 unk68;
+    u32 menuAction1;
+    u32 menuAction2;
     struct MenuStruct unk6C;
     struct MenuItem unkBC[8];
     u16 unkFC[8];

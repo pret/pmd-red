@@ -90,8 +90,8 @@ extern void sub_802B9FC(u8);
 u32 sub_802DFB0(void)
 {
     gUnknown_203B304 = MemoryAlloc(sizeof(struct unkStruct_203B304), 8);
-    gUnknown_203B304->unk64 = 0;
-    gUnknown_203B304->unk68 = 0;
+    gUnknown_203B304->menuAction1 = 0;
+    gUnknown_203B304->menuAction2 = 0;
     SetMailboxState(INITIALIZE_MAILBOX);
     return 1;
 }
@@ -190,7 +190,7 @@ void sub_802E1AC(void)
     switch(gUnknown_203B304->state)
     {
         case MAIN_MAILBOX_MENU:
-            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, gUnknown_203B304->unkFC, gUnknown_203B304->unk64, 2);
+            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, gUnknown_203B304->unkFC, gUnknown_203B304->menuAction1, 2);
             break;
         case MAIL_MENU:
             sub_802BD14(0, 0, 4);
@@ -201,7 +201,7 @@ void sub_802E1AC(void)
         case MAIL_ACTION_MENU:
             CreateMailMenu();
             CreateMailAcceptedStatusBox(3);
-            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, 0, gUnknown_203B304->unk68, 2);
+            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, 0, gUnknown_203B304->menuAction2, 2);
             break;
         case MAIL_INFO:
             sub_803B35C(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex), &gUnknown_203B304->unkC);

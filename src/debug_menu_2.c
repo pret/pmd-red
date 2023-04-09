@@ -124,7 +124,7 @@ void sub_803AD88(void)
             break;
         case 3:
             sub_8023DA4();
-            sub_8012D60(&gUnknown_203B3F8->unk10, gUnknown_203B3F8->unk90, 0, gUnknown_203B3F8->unkD0, gUnknown_203B3F8->unkC, 2);
+            sub_8012D60(&gUnknown_203B3F8->unk10, gUnknown_203B3F8->unk90, 0, gUnknown_203B3F8->unkD0, gUnknown_203B3F8->menuAction, 2);
             break;
         case 5:
             gUnknown_203B3F8->unk70 = 3;
