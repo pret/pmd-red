@@ -12,7 +12,7 @@ struct unkStruct_203B25C
     u32 state;
     u32 chosenHintIndex;
     struct GameOptions newOptions;
-    u32 unk18;
+    u32 menuAction;
     struct MenuStruct unk1C;
     struct MenuItem menuItems[8];
     u16 unkAC[8];
@@ -383,7 +383,7 @@ void sub_801DED0(void)
     case 0:
     case 1:
         gUnknown_203B25C->unk1C.unk0 = gOthers_MenuOption;
-        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->unk18,0);
+        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
         break;
     case 3:
         sub_801E3F0(0);
@@ -454,7 +454,7 @@ void HandleOthersMenu(void)
   menuAction = 0;
   if (sub_8012FD8(&gUnknown_203B25C->unk1C) == '\0') {
     sub_8013114(&gUnknown_203B25C->unk1C,&menuAction);
-    gUnknown_203B25C->unk18 = menuAction;
+    gUnknown_203B25C->menuAction = menuAction;
   }
   switch(menuAction)
   {

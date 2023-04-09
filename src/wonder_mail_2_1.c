@@ -38,7 +38,7 @@ struct unkStruct_203B2F0
     u8 fillD[0x10 - 0xD];
     u32 unk10;
     u8 fill14[0x68 - 0x14];
-    u32 unk68;
+    u32 menuAction;
     struct MenuStruct unk6C;
     struct MenuStruct unkBC;
     struct MenuItem unk10C[8];
@@ -411,7 +411,7 @@ bool8 InitializeJobListMenu(u32 r0)
     else
     {
         gUnknown_203B2F0 = MemoryAlloc(sizeof(struct unkStruct_203B2F0), 0x8);
-        gUnknown_203B2F0->unk68 = 0;
+        gUnknown_203B2F0->menuAction = 0;
         gUnknown_203B2F0->unk0 = r0;
         SetJobListState(0);
         return TRUE;
@@ -495,7 +495,7 @@ void sub_802C9D8(void)
             break;
         case 2:
             DrawJobListMenu();
-            sub_8012D60(&gUnknown_203B2F0->unk6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->unk68, 2);
+            sub_8012D60(&gUnknown_203B2F0->unk6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->menuAction, 2);
             break;
         case 3:
             sub_802CBAC();
