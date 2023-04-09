@@ -36,9 +36,9 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   struct OpenedFile *faceFile;
   
   gUnknown_203B210 = MemoryAlloc(sizeof(struct unkStruct_203B210),8);
-  gUnknown_203B210->unk28 = 0;
-  gUnknown_203B210->unk2C = 0;
-  gUnknown_203B210->unk30 = 0;
+  gUnknown_203B210->menuAction1 = 0;
+  gUnknown_203B210->menuAction2 = 0;
+  gUnknown_203B210->menuAction3 = 0;
   gUnknown_203B210->unk0 = param_1;
   switch(param_1)
   {
@@ -79,21 +79,21 @@ u32 DisplayKeckleonDialogueSprite(u32 param_1)
   }
   faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
   gUnknown_203B210->faceFile = faceFile;
-  gUnknown_203B210->unkD8 = faceFile->data;
+  gUnknown_203B210->faceData = faceFile->data;
   gUnknown_203B210->unkE0 = 0;
   gUnknown_203B210->unkE1 = 0;
   gUnknown_203B210->unkE2 = 0;
   gUnknown_203B210->unkDC = 2;
   gUnknown_203B210->unkDE = 8;
-  UpdateKecleonStoreState(0);
+  UpdateKecleonStoreState(KECLEON_STORE_INIT);
   return 1;
 }
 
 u32 sub_8018C04(void)
 {
   switch(gUnknown_203B210->currState) {
-    case 0:
-    case 1:
+    case KECLEON_STORE_INIT:
+    case KECLEON_STORE_MAIN_MENU:
         sub_8019730();
         break;
     case 0x12:
@@ -125,7 +125,7 @@ u32 sub_8018C04(void)
     case 0x1d:
         sub_8019D4C();
         break;
-    case 4:
+    case KECLEON_STORE_EXIT:
         return 3;
     default:
         sub_8019D68();
@@ -153,7 +153,7 @@ void UpdateKecleonStoreState(u32 newState)
 
 void sub_8018D30(void)
 {
-    s32 iVar3;
+    s32 index;
     sub_8006518(gUnknown_203B210->unkE8);
     switch(gUnknown_203B210->currState)
     {
@@ -181,8 +181,8 @@ void sub_8018D30(void)
         case 0x17:
         case 0x18:
         case 0x19:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
-                gUnknown_203B210->unkE8[iVar3] = gUnknown_80DB840;
+            for(index = 0; index < 4; index++)
+                gUnknown_203B210->unkE8[index] = gUnknown_80DB840;
             break;
     }
     ResetUnusedInputStruct();

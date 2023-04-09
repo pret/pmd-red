@@ -666,8 +666,8 @@ void AddToTeamMoney(s32 amount)
   gTeamInventory_203B460->teamMoney += amount;
 
   // clamp money
-  clamped_money = 99999;
-  if (gTeamInventory_203B460->teamMoney <= 99999) {
+  clamped_money = MAX_TEAM_MONEY;
+  if (gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY) {
     if (gTeamInventory_203B460->teamMoney >= 0) {
       return;
     }
