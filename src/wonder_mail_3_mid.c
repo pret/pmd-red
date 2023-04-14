@@ -29,7 +29,6 @@ struct unkStruct_203B30C
     // size: 0x150
     s32 state;
     u8 unk4;
-    u8 unk5[3];
     struct unkStruct_802C39C unk8;
     struct MenuStruct unk60;
     struct MenuItem unkB0[8];
@@ -44,8 +43,6 @@ struct unkStruct_203B310
     /* 0x4 */ u32 nextState;
     /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
     /* 0x9 */ u8 currTeamRank; // team rank
-    u8 unkA;
-    u8 unkB;
     /* 0xC */ s32 itemRewardIndex;
     struct unkStruct_802F204 *unk10;
     /* 0x14 */ struct OpenedFile *faceFile;
@@ -765,14 +762,14 @@ u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
 u32 sub_802F848(s16 param_1)
 {
-    int iVar2;
+    int index;
     s32 param_1_32;
 
     param_1_32 = param_1; // cast needed
 
-    for( iVar2 = 0; iVar2 < gUnknown_203B314->unkDE; iVar2++ ) {
-        if (gUnknown_203B314->unk0[iVar2] == param_1_32) {
-            sub_8013878(&gUnknown_203B314->unkBC,iVar2);
+    for( index = 0; index < gUnknown_203B314->unkDE; index++ ) {
+        if (gUnknown_203B314->unk0[index] == param_1_32) {
+            sub_8013878(&gUnknown_203B314->unkBC,index);
             sub_802F9C0();
             sub_802FA50();
             return 1;
