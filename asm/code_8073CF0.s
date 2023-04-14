@@ -2825,7 +2825,7 @@ _080753A6:
 	ldr r1, [r4, 0x10]
 	ldr r2, [r4, 0x14]
 	adds r0, r3, 0
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 	ldrh r0, [r4, 0x18]
 	subs r0, 0x1
 	strh r0, [r4, 0x18]

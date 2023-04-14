@@ -122,7 +122,7 @@ struct Dungeon
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
     u8 fill37FD[0x3904 - 0x37FD];
-    /* 0x3904 */ u16 unk3904;
+    /* 0x3904 */ s16 unk3904;
     u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
     u8 fill3A09[0x3A0D - 0x3A09];

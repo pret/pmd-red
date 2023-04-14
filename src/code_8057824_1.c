@@ -325,7 +325,7 @@ extern void PlaySoundEffect(u32);
 extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
 extern void sub_806CE68(struct Entity *, u32);
-extern void sub_804539C(struct Entity *, u32, u32);
+extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_8042B0C(struct Entity *);
 extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
@@ -449,7 +449,6 @@ extern u8 sub_8086AE4(u32);
 extern void sub_8072008(struct Entity *, struct Entity *, s16, u32, u32);
 extern struct Entity *GetPartnerEntity();
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
-extern void sub_804539C(struct Entity *, u32, u32);
 extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_8085374();
 
@@ -1534,12 +1533,12 @@ void GroudonPostStoryPreFightDialogue(void)
 }
 
 // Moves Groudon down in a walking fashion
-void SceneGroudonMovement(struct Entity * param_1)
+void SceneGroudonMovement(struct Entity * GroudonEntity)
 {
   int iVar1;
 
   sub_8086848(0x18,0x10);
-  sub_806CDD4(param_1,0,DIRECTION_SOUTH);
+  sub_806CDD4(GroudonEntity,0,DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 0x2C; iVar1++)
   {
     if ((iVar1 == 10) || (iVar1 == 0x20)) {
@@ -1548,12 +1547,12 @@ void SceneGroudonMovement(struct Entity * param_1)
       sub_808680C();
     }
     if ((iVar1 - 10U < 0xc) || (iVar1 > 0x1f)) {
-      sub_804539C(param_1,0,0x100);
+      IncreaseEntityPixelPos(GroudonEntity,0,0x100);
     }
     sub_803E46C(0x46);
   }
-  sub_80856C8(param_1,param_1->pos.x,param_1->pos.y + 1);
-  sub_80861D4(param_1,0xf,0);
+  sub_80856C8(GroudonEntity,GroudonEntity->pos.x,GroudonEntity->pos.y + 1);
+  sub_80861D4(GroudonEntity,0xf,0);
   sub_803E708(10,0x46);
   sub_808682C();
   sub_8085930(DIRECTION_NORTH);
@@ -1801,7 +1800,7 @@ void sub_8089168(void)
 
 void sub_808919C(struct Entity *r0)
 {
-    sub_804539C(r0, 0, 0xfffffe00);
+    IncreaseEntityPixelPos(r0, 0, 0xfffffe00);
 }
 
 void sub_80891B0(struct Entity *r0)
@@ -1830,43 +1829,43 @@ void sub_80891F0(void)
   sub_80855E4(sub_80891D0);
 }
 
-void sub_8089224(struct Entity * param_1)
+void sub_8089224(struct Entity * entity)
 {
-  s32 iVar1;
+  s32 xPixelPos;
 
-  if (param_1->pixelPos.y < 0x9001) {
+  if (entity->pixelPos.y < 0x9001) {
     return;
   }
-  iVar1 = param_1->pixelPos.x;
+  xPixelPos = entity->pixelPos.x;
 
-  if(iVar1 < 0xE400)
+  if(xPixelPos < 0xE400)
   {
-      if(iVar1 <= 0xB400)
+      if(xPixelPos <= 0xB400)
       {
           // 0 - 0xB400
-          sub_804539C(param_1, 0, 0xfffffe00);
+          IncreaseEntityPixelPos(entity, 0, 0xfffffe00);
       }
       else
       {
           // 0xB401 - 0xE3FF
-           sub_804539C(param_1, 0xfffffe00, 0);
+           IncreaseEntityPixelPos(entity, 0xfffffe00, 0);
       }
   }
   else
   {
-      if(iVar1 < 0xFC00)
+      if(xPixelPos < 0xFC00)
       {
-            sub_804539C(param_1, 0, 0xfffffe00);
+            IncreaseEntityPixelPos(entity, 0, 0xfffffe00);
       }
       else
       {
-          if(iVar1 <= 0x11400)
+          if(xPixelPos <= 0x11400)
           {
-              sub_804539C(param_1, 0x200, 0);
+              IncreaseEntityPixelPos(entity, 0x200, 0);
           }
           else
           {
-              sub_804539C(param_1, 0, 0xfffffe00);
+              IncreaseEntityPixelPos(entity, 0, 0xfffffe00);
           }
       }
   }
@@ -5000,7 +4999,7 @@ void MedichamRescueDialogue(void)
     sub_806CDD4(MedichamEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
     {
-        sub_804539C(MedichamEntity, 0, 0x80 << 1);
+        IncreaseEntityPixelPos(MedichamEntity, 0, 0x80 << 1);
         sub_803E46C(0x46);
     }
     sub_806CE68(MedichamEntity, DIRECTION_SOUTH);
@@ -5090,7 +5089,7 @@ void SmeargleRescueDialogue(void)
     sub_806CDD4(SmeargleEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
     {
-        sub_804539C(SmeargleEntity, 0, 0x80 << 1);
+        IncreaseEntityPixelPos(SmeargleEntity, 0, 0x80 << 1);
         sub_803E46C(0x46);
     }
     sub_806CE68(SmeargleEntity, DIRECTION_SOUTH);

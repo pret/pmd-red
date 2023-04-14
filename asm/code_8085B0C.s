@@ -126,7 +126,7 @@ _08085C08:
 	muls r2, r0
 	lsls r2, 8
 	adds r0, r6, 0
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 _08085C32:
 	adds r5, 0x10
 	adds r7, 0x1

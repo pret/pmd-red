@@ -1943,7 +1943,7 @@ _08046BAA:
 	adds r0, r2
 	ldr r2, [r0]
 	adds r0, r4, 0
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 	mov r0, r10
 	bl sub_8009C7C
 	add r2, sp, 0x20
