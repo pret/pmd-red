@@ -220,8 +220,10 @@ struct EntityInfo
     u8 fill160[0x164 - 0x160];
     /* 0x164 */ u8 unk164;
     /* 0x165 */ u8 unk165;
-    u8 fill166[0x169 - 0x166];
-    u8 turnsSinceWarpScarfActivation;
+    /* 0x166 */ u8 unk166;
+    /* 0x167 */ u8 unk167;
+    /* 0x168 */ u8 unk168;
+    /* 0x169 */ u8 turnsSinceWarpScarfActivation;
     /* 0x16C */ struct Position targetPos;
     /* 0x170 */ struct Position pixelPos;
     u32 unk174;
@@ -291,11 +293,13 @@ struct Entity
     /* 0x54 */ u16 spriteGlobalIndex;
     u8 fill56[0x64 - 0x56];
     u32 unk64;
-    u8 fill68[2];
+    u16 unk68;
     /* 0x6A */ u8 unk6A;
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 direction;
     /* 0x6D */ u8 direction2; // Duplicate of 0x6C?
+    /* 0x6E */ u8 unk6E;
+    /* 0x6F */ u8 unk6F;
     /* 0x70 */ struct EntityInfo *info;
 };
 
