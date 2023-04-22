@@ -28,7 +28,7 @@ extern void sub_8017D24();
 extern void sub_8017DDC();
 extern void sub_8017928();
 extern void sub_8017A1C();
-extern void sub_8017DF8();
+extern void AdvanceToKangaskhanStorageFallbackState();
 void sub_8016E80();
 extern void sub_8016FF8();
 
@@ -41,9 +41,9 @@ u32 DisplayKangaskhanDialogueSprite(s32 param_1)
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gUnknown_203B208 = MemoryAlloc(sizeof(struct unkStruct_203B208),8);
-  gUnknown_203B208->unk18 = 0;
-  gUnknown_203B208->unk1C = 0;
-  gUnknown_203B208->unk20 = 0;
+  gUnknown_203B208->menuAction1 = 0;
+  gUnknown_203B208->menuAction2 = 0;
+  gUnknown_203B208->menuAction3 = 0;
   gUnknown_203B208->unk0 = param_1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KANGASKHAN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KANGASKHAN);
@@ -63,15 +63,15 @@ u32 DisplayKangaskhanDialogueSprite(s32 param_1)
   gUnknown_203B208->unkE6 = 0;
   gUnknown_203B208->unkE0 = 2;
   gUnknown_203B208->unkE2 = 8;
-  UpdateKangaskhanStorageState(0);
+  UpdateKangaskhanStorageState(KANGASKHAN_STORAGE_INIT);
   return 1;
 }
 
 u32 sub_8016D54(void)
 { 
   switch(gUnknown_203B208->currState) {
-    case 0:
-    case 1:
+    case KANGASKHAN_STORAGE_INIT:
+    case KANGASKHAN_STORAGE_MAIN_MENU:
         sub_8017828();
         break;
     case 0xd:
@@ -109,10 +109,10 @@ u32 sub_8016D54(void)
     case 0x1c:
         sub_8017A1C();
         break;
-    case 4:
+    case KANGASKHAN_STORAGE_EXIT:
         return 3;
     default:
-        sub_8017DF8();
+        AdvanceToKangaskhanStorageFallbackState();
         break;
   }
     return 0;

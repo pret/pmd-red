@@ -45,7 +45,7 @@ void sub_8018588(void)
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
         sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
-        if(menuAction != 1) gUnknown_203B20C->unk14 = menuAction;
+        if(menuAction != 1) gUnknown_203B20C->menuAction1 = menuAction;
     }
 
     switch(menuAction)
@@ -99,14 +99,14 @@ void sub_8018620(void)
             }
             else
             {
-                gUnknown_203B20C->unkC = sub_801A8AC();
-                gUnknown_203B20C->unk8 = gTeamInventory_203B460->teamItems[gUnknown_203B20C->unkC];
+                gUnknown_203B20C->itemIndex = sub_801A8AC();
+                gUnknown_203B20C->item = gTeamInventory_203B460->teamItems[gUnknown_203B20C->itemIndex];
                 sub_8017F10(6);
             }
             break;
         case 4:
-            gUnknown_203B20C->unkC = sub_801A8AC();
-            gUnknown_203B20C->unk8 = gTeamInventory_203B460->teamItems[gUnknown_203B20C->unkC];
+            gUnknown_203B20C->itemIndex = sub_801A8AC();
+            gUnknown_203B20C->item = gTeamInventory_203B460->teamItems[gUnknown_203B20C->itemIndex];
             sub_8017F10(7);
             break;
         case 2:
@@ -161,15 +161,15 @@ void sub_80186F8(void)
             else
             {
                 gUnknown_203B20C->id = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->id, 0);
-                gUnknown_203B20C->unk8.quantity = 1;
+                xxx_init_itemslot_8090A8C(&gUnknown_203B20C->item, gUnknown_203B20C->id, 0);
+                gUnknown_203B20C->item.quantity = 1;
                 sub_8017F10(0xD);
             }
             break;
         case 4:
             gUnknown_203B20C->id = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&gUnknown_203B20C->unk8, gUnknown_203B20C->id, 0);
-            gUnknown_203B20C->unk8.quantity = 1;
+            xxx_init_itemslot_8090A8C(&gUnknown_203B20C->item, gUnknown_203B20C->id, 0);
+            gUnknown_203B20C->item.quantity = 1;
             sub_8017F10(0xE);
             break;
         case 2:
@@ -192,10 +192,10 @@ void sub_8018854(void)
     switch(sub_8013BBC(&gUnknown_203B20C->unkC0))
     {
         case 3:
-            gUnknown_203B20C->unk8.quantity = gUnknown_203B20C->unkC0;
-            gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
-            item.id = gUnknown_203B20C->unk8.id;
-            item.quantity = gUnknown_203B20C->unk8.quantity;
+            gUnknown_203B20C->item.quantity = gUnknown_203B20C->unkC0;
+            gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
+            item.id = gUnknown_203B20C->item.id;
+            item.quantity = gUnknown_203B20C->item.quantity;
             AddHeldItemToInventory(&item);
             if(sub_801CF14(1) == 0)
                 if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
@@ -230,19 +230,19 @@ void sub_8018904(void)
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
         sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
-        if(menuAction != 1) gUnknown_203B20C->unk18 = menuAction;
+        if(menuAction != 1) gUnknown_203B20C->menuAction2 = menuAction;
     }
     switch(menuAction)
     {
         case 2:
-            if(IsNotMoneyOrUsedTMItem(gUnknown_203B20C->unk8.id))
-                if(sub_801ADA0(gUnknown_203B20C->unkC) == 0)
+            if(IsNotMoneyOrUsedTMItem(gUnknown_203B20C->item.id))
+                if(sub_801ADA0(gUnknown_203B20C->itemIndex) == 0)
             error:
                     sub_8012EA4(&gUnknown_203B20C->unk70, 1);
                 else
                 {
-                    MoveToStorage(&gUnknown_203B20C->unk8);
-                    ShiftItemsDownFrom(gUnknown_203B20C->unkC);
+                    MoveToStorage(&gUnknown_203B20C->item);
+                    ShiftItemsDownFrom(gUnknown_203B20C->itemIndex);
                     FillInventoryGaps();
                     if(GetNumberOfFilledInventorySlots() == 0)
                     {
@@ -276,20 +276,20 @@ void sub_80189C8(void)
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
         sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
-        if(menuAction != 1) gUnknown_203B20C->unk1C = menuAction;
+        if(menuAction != 1) gUnknown_203B20C->menuAction3 = menuAction;
     }
     switch(menuAction)
     {
         case 3:
             if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 sub_8012EA4(&gUnknown_203B20C->unk70, 1);
-            else if(IsThrowableItem(gUnknown_203B20C->unk8.id))
+            else if(IsThrowableItem(gUnknown_203B20C->item.id))
                 sub_8017F10(0xC);
             else
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B20C->unk8.id] -= gUnknown_203B20C->unk8.quantity;
-                item.id = gUnknown_203B20C->unk8.id;
-                item.quantity = gUnknown_203B20C->unk8.quantity;
+                gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
+                item.id = gUnknown_203B20C->item.id;
+                item.quantity = gUnknown_203B20C->item.quantity;
                 AddHeldItemToInventory(&item);
                 if(sub_801CF14(1) == 0)
                     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)

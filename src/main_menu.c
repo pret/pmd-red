@@ -460,7 +460,7 @@ void SetUpMenu(void)
 
 s32 UpdateMenu(void)
 {
-  s32 iVar1;
+  s32 nextMenu1;
   s32 nextMenu;
 
   nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -475,37 +475,37 @@ s32 UpdateMenu(void)
         nextMenu = UpdateLoadScreenMenu();
         break;
     case MENU_TRADE_ITEMS:
-        iVar1 = UpdateTradeItemsMenu();
+        nextMenu1 = UpdateTradeItemsMenu();
         nextMenu = MENU_MAIN_SCREEN;
-        if (iVar1 != 3) {
+        if (nextMenu1 != 3) {
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case MENU_FRIEND_RESCUE:
-        iVar1 = UpdateFriendRescueMenu();
+        nextMenu1 = UpdateFriendRescueMenu();
         nextMenu = MENU_MAIN_SCREEN;
-        if (iVar1 != 3) {
+        if (nextMenu1 != 3) {
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case MENU_WONDER_MAIL:
-        iVar1 = UpdateWonderMailMenu();
+        nextMenu1 = UpdateWonderMailMenu();
         nextMenu = MENU_MAIN_SCREEN;
-        if (iVar1 != 3) {
+        if (nextMenu1 != 3) {
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case MENU_DUAL_SLOT:
-        iVar1 = UpdateDualSlotMenu();
+        nextMenu1 = UpdateDualSlotMenu();
         nextMenu = MENU_MAIN_SCREEN;
-        if (iVar1 != 3) {
+        if (nextMenu1 != 3) {
             nextMenu = MENU_NO_SCREEN_CHANGE;
         }
         break;
     case MENU_WIRELESS_COMMS:
-        iVar1 = UpdateWirelessCommsMenu();
+        nextMenu1 = UpdateWirelessCommsMenu();
         nextMenu = 5;
-        if ((iVar1 != 3) && (nextMenu = MENU_NO_SCREEN_CHANGE, iVar1 == 2)) {
+        if ((nextMenu1 != 3) && (nextMenu = MENU_NO_SCREEN_CHANGE, nextMenu1 == 2)) {
             nextMenu = MENU_MAIN_SCREEN;
         }
         break;
@@ -623,13 +623,13 @@ void sub_8035C1C(void)
 }
 
 void
-SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6 ,u32 param_7, u32 unused_8)
+SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6 ,u32 menuAction, u32 unused_8)
 {
   unkData[index] = *param_4;
   ResetUnusedInputStruct();
   sub_800641C(unkData,1,1);
   if (param_6 != 0) {
-       sub_8012D60(&param_1[index],menuItems,0,0,param_7,index);
+       sub_8012D60(&param_1[index],menuItems,0,0,menuAction,index);
   }
   else {
        sub_8012E04(&param_1[index],menuItems,0,0,0,index);
@@ -757,7 +757,7 @@ s32 sub_8035DB4(u32 currMenu)
 
 void DrawMainMenu(void)
 {
-    s32 iVar3;
+    s32 index;
 
     if(gUnknown_203B34C == NULL)
     {
@@ -765,9 +765,9 @@ void DrawMainMenu(void)
         MemoryFill8((u8 *)gUnknown_203B34C, 0, sizeof(struct unkStruct_203B34C));
     }
 
-    for(iVar3 = 0; iVar3 < 4; iVar3++)
+    for(index = 0; index < 4; index++)
     {
-        gUnknown_203B34C->unk144[iVar3] = gUnknown_80E59C8;
+        gUnknown_203B34C->unk144[index] = gUnknown_80E59C8;
     }
 
     ResetUnusedInputStruct();

@@ -10,6 +10,7 @@
 #include "wonder_mail_3.h"
 #include "code_80958E8.h"
 #include "menu_input.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B2FC
 {
@@ -40,7 +41,7 @@ struct unkStruct_203B300
 {
     // size: 0x7C
     u8 fill0[0xC];
-    u32 *unkC;
+    struct unkStruct_802C39C *unkC;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
@@ -108,7 +109,7 @@ static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void CreateRescueDescription(u32 *);
+extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8012A64(void *, u32);
 extern s32 sub_80144A4(s32 *);
@@ -128,7 +129,7 @@ extern u32 sub_802C598(s32);
 extern void sub_802C688(void);
 extern void sub_8096C80(void);
 extern void ResetJobSlot(u8);
-extern u8 sub_802C620(void);
+extern u8 GetPelipperBoardSlotIndex(void);
 
 void sub_802DE44(void);
 void sub_802DE60(void);
@@ -149,17 +150,20 @@ void sub_802D7D0(void)
       gUnknown_203B2F8->unk70 = menuAction;
     }
     switch(menuAction) {
+        // Yes
         case 3:
-            sub_802D1A0(2);
+            sub_802D1A0(WONDER_MAIL_EXIT);
             break;
+        // New Mail
         case 6:
             gUnknown_203B2F8->fallbackState = 1;
             sub_802D1A0(0x10);
             break;
+        // No
         case 4:
         case 2:
         default:
-            sub_802D1A0(0);
+            sub_802D1A0(INITIAL_WONDER_MAIL_CHECK);
             break;
     }
   }
@@ -174,19 +178,23 @@ void sub_802D82C(void)
       gUnknown_203B2F8->unk74 = menuAction;
     }
     switch(menuAction) {
+        // Yes
         case 3:
             ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
             sub_8096C80();
-            sub_802D1A0(8);
+            sub_802D1A0(RECEIVE_WONDER_MAIL);
             break;
+        // New Mail
         case 6:
             gUnknown_203B2F8->fallbackState = 9;
             sub_802D1A0(0x10);
             break;
+        // Old Mail
         case 7:
             gUnknown_203B2F8->fallbackState = 9;
             sub_802D1A0(0xf);
             break;
+        // No
         default:
         case 1:
         case 2:
@@ -204,12 +212,12 @@ void sub_802D8CC(void)
     case 1:
         break;
     case 3:
-        gUnknown_203B2F8->jobSlotIndex = sub_802C620();
+        gUnknown_203B2F8->jobSlotIndex = GetPelipperBoardSlotIndex();
         sub_802D1A0(0xd);
         break;
     case 4:
-        gUnknown_203B2F8->jobSlotIndex = sub_802C620();
-        gUnknown_203B2F8->fallbackState = 0xc;
+        gUnknown_203B2F8->jobSlotIndex = GetPelipperBoardSlotIndex();
+        gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
         sub_802D1A0(0xf);
         break;
     case 2:
@@ -232,21 +240,23 @@ void sub_802D940(void)
 
   switch(menuAction)
   {
+    // Delete
     case 2:
         if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > 5) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)))
         {
-            sub_802D1A0(0x7);
+            sub_802D1A0(7);
         }
         else {
             sub_802D1A0(0xE);
         }
         break;
+    // Info
     case 5:
-        gUnknown_203B2F8->fallbackState = 0xc;
+        gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
         sub_802D1A0(0xf);
         break;
     case 1:
-        sub_802D1A0(0xc);
+        sub_802D1A0(DRAW_JOB_LIST_1);
         break;
   }
 }
@@ -264,15 +274,17 @@ void sub_802D9F0(void)
 
   switch(menuAction)
   {
+    // No
     case 1:
     case 4:
-        sub_802D1A0(0xc);
+        sub_802D1A0(DRAW_JOB_LIST_1);
         break;
+    // Yes
     case 3:
         sub_802C688();
         ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
         sub_8096C80();
-        sub_802D1A0(8);
+        sub_802D1A0(RECEIVE_WONDER_MAIL);
         break;
   }
 }
@@ -292,7 +304,7 @@ void sub_802DA60(void)
     }
 }
 
-void sub_802DA84(void)
+void AdvancetoFallbackWonderMailRescueState(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
@@ -513,12 +525,12 @@ void sub_802DE60(void)
     }
 }
 
-u32 sub_802DE84(u32 *r0)
+u32 sub_802DE84(struct unkStruct_802C39C *r0)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
     gUnknown_203B300->unkC = r0;
     sub_801317C();
-    gUnknown_203B300->unk10 = *gUnknown_203B300->unkC;
+    gUnknown_203B300->unk10 = gUnknown_203B300->unkC->unk0[0];
     gUnknown_203B300->unk14 = &gUnknown_203B300->unk18[gUnknown_203B300->unk10];
     sub_8006518(gUnknown_203B300->unk18);
     gUnknown_203B300->unk18[gUnknown_203B300->unk10] = gUnknown_80E0264;

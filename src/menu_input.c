@@ -192,7 +192,7 @@ void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
 	"\tbx r0");
 }
 
-void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
+void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 menuAction,
                 s32 index)
 {
   const u8 *textPtr;
@@ -214,7 +214,7 @@ void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32
   if(textPtr)
   {
       while (textPtr != 0) {
-        if ((0 <= param_5) && (param_5 == menuItems->menuAction)) {
+        if ((0 <= menuAction) && (menuAction == menuItems->menuAction)) {
           menuIndex = counter;
         }
         if (*menuItems->text == '*') {
@@ -237,7 +237,7 @@ void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32
   param_1->menuAction = -1;
 }
 
-void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 param_5,
+void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 menuAction,
                 s32 index)
 {
   const u8 *textPtr;
@@ -253,7 +253,7 @@ void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32
   if (textPtr) {
     menuItemPtr = menuItems;
     while (textPtr != NULL) {
-      if ((0 <= param_5) && (param_5 == menuItemPtr->menuAction)) {
+      if ((0 <= menuAction) && (menuAction == menuItemPtr->menuAction)) {
         menuIndex = counter;
       }
       if (*menuItemPtr->text == '*') {

@@ -22,7 +22,7 @@ CreatePelipperBoardMenu:
 	adds r1, 0xC0
 	movs r0, 0x2
 	str r0, [r1]
-	bl sub_802C4A4
+	bl HasNoPelipperBoardJobs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802EB66
@@ -93,7 +93,7 @@ _0802EBB6:
 	str r0, [r1, 0x64]
 	b _0802EC0A
 	.align 2, 0
-_0802EBDC: .4byte gUnknown_203B308
+_0802EBDC: .4byte gPelipperBoard
 _0802EBE0: .4byte gPelipperBoard_BulletinBoard
 _0802EBE4: .4byte gPelipperBoard_JobList
 _0802EBE8:
@@ -202,7 +202,7 @@ _0802ECA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802ECA8: .4byte gUnknown_203B308
+_0802ECA8: .4byte gPelipperBoard
 _0802ECAC: .4byte gUnknown_80D4990
 _0802ECB0: .4byte gUnknown_80D4970
 	thumb_func_end sub_802EC10

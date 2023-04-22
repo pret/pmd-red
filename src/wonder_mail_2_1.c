@@ -1,3 +1,4 @@
+#include "constants/input.h"
 #include "global.h"
 #include "constants/mailbox.h"
 #include "input.h"
@@ -10,7 +11,7 @@
 struct unkStruct_203B2E8
 {
     // size: 0xA8
-    u8 unk0[MAX_ACCEPTED_JOBS];
+    u8 pelipperBoardSlots[MAX_ACCEPTED_JOBS];
     u32 unk8;
     u8 fillC[0x20 - 0xC];
     s16 unk20;
@@ -18,7 +19,7 @@ struct unkStruct_203B2E8
     s16 unk24;
     s16 unk26;
     u16 unk28;
-    u16 unk2A;
+    u16 acceptedJobs;
     u16 unk2C;
     u8 fill2E[0x3C - 0x2E]; 
     u32 unk3C;
@@ -37,7 +38,7 @@ struct unkStruct_203B2F0
     u8 fillD[0x10 - 0xD];
     u32 unk10;
     u8 fill14[0x68 - 0x14];
-    u32 unk68;
+    u32 menuAction;
     struct MenuStruct unk6C;
     struct MenuStruct unkBC;
     struct MenuItem unk10C[8];
@@ -142,11 +143,11 @@ extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
 extern void sub_803B35C(void *, u32 *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
-extern void CreateRescueTitle(void *);
+extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 extern void sub_8013984(u32 *);
 extern void sub_802C6DC(void);
-extern void sub_802C750(void);
+extern void DrawJobListMenu(void);
 extern void AddMenuCursorSprite(u32 *);
 extern u8 sub_80138B8(void *, u32);
 extern s32 GetKeyPress(void *);
@@ -154,7 +155,7 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
 extern bool8 IsPelipperBoardSlotEmpty(u8);
-extern void sub_802C910(u32);
+extern void SetJobListState(u32);
 extern void sub_802CC00(void);
 extern void sub_802CC70(void);
 extern void sub_802CD38(void);
@@ -167,7 +168,7 @@ extern void sub_802CBAC(void);
 s32 CountAcceptedJobs(void);
 bool8 HasNoAcceptedJobs(void);
 
-s32 sub_802C474(void)
+s32 CountPelipperBoardSlots(void)
 {
   s32 index;
   s32 counter = 0;
@@ -175,14 +176,14 @@ s32 sub_802C474(void)
   {
       if(!IsPelipperBoardSlotEmpty(index))
       {
-          gUnknown_203B2E0->unk0[counter] = index;
+          gUnknown_203B2E0->pelipperBoardSlots[counter] = index;
           counter++;
       }
   }
   return counter;
 }
 
-bool8 sub_802C4A4(void)
+bool8 HasNoPelipperBoardJobs(void)
 {
   s32 index;
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
@@ -218,7 +219,7 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
     gUnknown_203B2E8->unk20 = gUnknown_203B2EC;
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
-    sub_802C750();
+    DrawJobListMenu();
     return TRUE;
   }
 }
@@ -232,20 +233,19 @@ u32 sub_802C598(u8 param_1)
   else {
         switch(GetKeyPress(&gUnknown_203B2E8->unk8))
         {
-            case 2:
+            case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
-            case 1:
+            case INPUT_A_BUTTON:
                 PlayMenuSoundEffect(0);
                 return 3;
-            case 4:
+            case INPUT_START_BUTTON:
                 PlayMenuSoundEffect(4);
                 return 4;
-                break;
         }
         if (sub_80138B8(&gUnknown_203B2E8->unk8, 1) != '\0') {
             sub_802C6DC();
-            sub_802C750();
+            DrawJobListMenu();
             return 1;
         }
         else {
@@ -254,19 +254,19 @@ u32 sub_802C598(u8 param_1)
     }
 }
 
-u8 sub_802C620(void)
+u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + gUnknown_203B2E8->unk20];
+    return gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + gUnknown_203B2E8->unk20];
 }
 
 void sub_802C640(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
-    gUnknown_203B2E8->unk2A = CountAcceptedJobs();
+    gUnknown_203B2E8->acceptedJobs = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->unk8);
     sub_802C6DC();
-    sub_802C750();
+    DrawJobListMenu();
     if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E8->unk8);
 }
@@ -344,7 +344,7 @@ void sub_802C6DC(void)
 
 }
 
-void sub_802C750(void)
+void DrawJobListMenu(void)
 {
   struct WonderMail *mail;
   int index;
@@ -366,7 +366,7 @@ void sub_802C750(void)
   if(( index < gUnknown_203B2E8->unk22))
     do
     {
-        mail = GetJobSlotInfo(gUnknown_203B2E8->unk0[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
+        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
         local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
         sub_803B35C(mail,local.unk0);
@@ -384,7 +384,7 @@ s32 CountAcceptedJobs(void)
     {
         if(!IsJobSlotEmpty(index))
         {
-            gUnknown_203B2E8->unk0[counter] = index;
+            gUnknown_203B2E8->pelipperBoardSlots[counter] = index;
             counter++;
         }
     }
@@ -402,7 +402,7 @@ bool8 HasNoAcceptedJobs(void)
     return TRUE;
 }
 
-bool8 sub_802C860(u32 r0)
+bool8 InitializeJobListMenu(u32 r0)
 {
     if(HasNoAcceptedJobs())
     {
@@ -411,9 +411,9 @@ bool8 sub_802C860(u32 r0)
     else
     {
         gUnknown_203B2F0 = MemoryAlloc(sizeof(struct unkStruct_203B2F0), 0x8);
-        gUnknown_203B2F0->unk68 = 0;
+        gUnknown_203B2F0->menuAction = 0;
         gUnknown_203B2F0->unk0 = r0;
-        sub_802C910(0);
+        SetJobListState(0);
         return TRUE;
     }
 }
@@ -451,7 +451,7 @@ void sub_802C8F4(void)
     }
 }
 
-void sub_802C910(u32 newState)
+void SetJobListState(u32 newState)
 {
     gUnknown_203B2F0->state = newState;
     sub_802C928();
@@ -494,12 +494,12 @@ void sub_802C9D8(void)
             sub_802C640(1);
             break;
         case 2:
-            sub_802C750();
-            sub_8012D60(&gUnknown_203B2F0->unk6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->unk68, 2);
+            DrawJobListMenu();
+            sub_8012D60(&gUnknown_203B2F0->unk6C, gUnknown_203B2F0->unk10C, 0, 0, gUnknown_203B2F0->menuAction, 2);
             break;
         case 3:
             sub_802CBAC();
-            sub_802C750();
+            DrawJobListMenu();
             sub_8012EA4(&gUnknown_203B2F0->unk6C, 0);
             sub_8012D60(&gUnknown_203B2F0->unkBC, gUnknown_203B2F0->unk14C, 0, 0, 6, 3);
             break;

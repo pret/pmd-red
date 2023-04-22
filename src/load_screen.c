@@ -237,7 +237,7 @@ u32 UpdateLoadScreenMenu(void)
                 nextMenu = 2; // MENU_???
                 break;
             case MENU_AWAITING_RESCUE:
-                sub_8095240(0);
+                DeleteMailAtIndex(0);
                 nextMenu = 4; // MENU_???
                 break;
             case MENU_DELETE_SAVE_PROMPT:

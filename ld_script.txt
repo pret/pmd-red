@@ -132,6 +132,7 @@ SECTIONS {
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
+        src/pokemon_news.o(.text);
         src/wonder_mail_2_mid.o(.text);
         src/wonder_mail_2_1.o(.text);
         asm/wonder_mail_802C860.o(.text);
@@ -429,6 +430,7 @@ SECTIONS {
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);
+        src/pokemon_news.o(.rodata);
         src/wonder_mail_2_1.o(.rodata);
         src/wonder_mail_3.o(.rodata);
         src/wonder_mail_802DF88.o(.rodata);

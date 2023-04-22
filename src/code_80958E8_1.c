@@ -242,7 +242,7 @@ bool8 sub_8096A08(u8 dungeon, s32 param_2)
   return FALSE;
 }
 
-bool8 sub_8096A78(struct WonderMail *mail)
+bool8 AcceptJob(struct WonderMail *mail)
 {
   s32 index;
 
@@ -347,7 +347,7 @@ void sub_8096BD0(void)
   sub_8096D24();
 }
 
-bool8 sub_8096C08(u8 *param_1)
+bool8 sub_8096C08(u8 *jobIndex)
 {
   s32 index;
   struct WonderMail *mail;
@@ -357,7 +357,7 @@ bool8 sub_8096C08(u8 *param_1)
     if(mail->mailType > 4 && mail->unk2 == 4)
     {
 
-        param_1[0] = index;
+        *jobIndex = index;
         return TRUE;
     }
   }

@@ -17,7 +17,7 @@ struct unkStruct_203B2B4
     // size: 0x178
     s32 unk0;
     s32 state;
-    u32 unk8;
+    u32 fallbackState;
     u8 unkC;
     u8 unkD;
     s16 species;
@@ -97,7 +97,7 @@ bool8 sub_80252F0(s32 param_1)
     return FALSE;
   }
   else {
-    gUnknown_203B2B4 = MemoryAlloc(0x178,8);
+    gUnknown_203B2B4 = MemoryAlloc(sizeof(struct unkStruct_203B2B4),8);
     gUnknown_203B2B4->unk70 = 0;
     gUnknown_203B2B4->unk0 = param_1;
     gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
@@ -180,7 +180,7 @@ void sub_8025434(s32 newState)
 
 void sub_802544C(void)
 {
-  s32 iVar5;
+  s32 index;
   
   sub_8006518(gUnknown_203B2B4->unk118);
 
@@ -200,9 +200,9 @@ void sub_802544C(void)
         sub_8012CAC(&gUnknown_203B2B4->unk118[2],gUnknown_203B2B4->unkC8);
         break;
     default:
-        for(iVar5 = 0; iVar5 < 4; iVar5++)
+        for(index = 0; index < 4; index++)
         {
-            gUnknown_203B2B4->unk118[iVar5] = gUnknown_80DD148;
+            gUnknown_203B2B4->unk118[index] = gUnknown_80DD148;
         }
         break;
 
@@ -219,7 +219,7 @@ void sub_8025518(void)
   switch(gUnknown_203B2B4->state)
   {
     case 0:
-        gUnknown_203B2B4->unk8 = 1;
+        gUnknown_203B2B4->fallbackState = 1;
         sub_80141B4(gUnknown_80DD1A8,0,0,0x301);
         break;
     case 1:
@@ -262,19 +262,19 @@ void sub_8025518(void)
         sub_801B3C0(&item);
         break;
     case 8:
-        gUnknown_203B2B4->unk8 = 2;
+        gUnknown_203B2B4->fallbackState = 2;
         sub_80141B4(gUnknown_80DD1C8,0,0,0x101);
         break;
     case 9:
-        gUnknown_203B2B4->unk8 = 2;
+        gUnknown_203B2B4->fallbackState = 2;
         sub_80141B4(gUnknown_80DD1EC,0,0,0x101);
         break;
     case 10:
-        gUnknown_203B2B4->unk8 = 2;
+        gUnknown_203B2B4->fallbackState = 2;
         sub_80141B4(gUnknown_80DD240,0,0,0x101);
         break;
     case 7:
-        gUnknown_203B2B4->unk8 = 1;
+        gUnknown_203B2B4->fallbackState = 1;
         PlaySound(0xcf);
         sub_80141B4(gUnknown_80DD270,0,0,0x101);
         break;

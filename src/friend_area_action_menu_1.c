@@ -104,12 +104,12 @@ void sub_80278B4(void)
   struct PokemonStruct *playerStruct;
   struct PokemonStruct *pokeStruct1;
   struct PokemonStruct *pokeStruct2;
-  int menuAction;
+  u32 menuAction;
 
   menuAction = 0;
   sub_8023A94(0);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
-    gUnknown_203B2BC->unk70 = menuAction;
+    gUnknown_203B2BC->menuAction1 = menuAction;
   }
   switch(menuAction) {
       case 6:
@@ -292,7 +292,7 @@ void sub_8027BD8(void)
   menuAction = 0;
   sub_801A6E8(0);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
-    gUnknown_203B2BC->unk74 = menuAction;
+    gUnknown_203B2BC->menuAction2 = menuAction;
   }
   switch(menuAction)
   {

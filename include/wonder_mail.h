@@ -77,7 +77,7 @@ struct WonderMailStruct_203B2C0
     u32 unk534;
     s32 unk538; // A7 << 3
     u32 unk53C;
-    u32 unk540; // A8 << 4
+    u32 mailCount; // A8 << 4
     s16 speciesNum;
 
 };
@@ -113,6 +113,6 @@ struct WonderMailStruct_203B2C4
     struct unkStruct_802F204 unk53C;
 };
 
-void sub_8028B04(u32 r0);
+void SetFriendRescueCounterState(u32 r0);
 
 #endif

@@ -10,14 +10,13 @@ struct unkStruct_203B208
     // size: 0x14C
     u32 unk0;
     u32 currState;
-    u32 unk8;
-    struct Item unkC;
-    u32 unk10;
+    u32 fallbackState;
+    struct Item storedItem;
+    u32 itemIndex;
     u8 id; // another id?
-    u8 fill15[0x3];
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
+    u32 menuAction1;
+    u32 menuAction2;
+    u32 menuAction3;
     struct MenuItem unk24[5];
     u16 unk4C[5];
     struct MenuStruct unk58;
@@ -42,12 +41,12 @@ struct unkStruct_203B20C
 {
     u32 state;
     u8 unk4[4];
-    struct Item unk8;
-    u32 unkC;
+    struct Item item;
+    u32 itemIndex;
     u8 id;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
+    u32 menuAction1;
+    u32 menuAction2;
+    u32 menuAction3;
     struct MenuItem unk20[8];
     u16 unk60[8];
     struct MenuStruct unk70;
@@ -62,6 +61,15 @@ struct unkStruct_203B20C
     u32 unkE0;
     u8 fillE4[0xF0 - 0xE4];
     struct UnkTextStruct2 unkF0[4];
+};
+
+enum KangaskhanStorageStates {
+    KANGASKHAN_STORAGE_INIT = 0,
+    KANGASKHAN_STORAGE_MAIN_MENU = 1,
+    KANGASKHAN_STORAGE_EXIT = 4,
+    KANGASKHAN_STORAGE_NO_INV_ITEMS = 5,
+    KANGASKHAN_STORAGE_TOO_MANY_ITEMS = 6,
+    KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
 
 #endif

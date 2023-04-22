@@ -240,7 +240,7 @@ _0804731A:
 	adds r0, r7, 0
 	ldr r1, [sp, 0x228]
 	ldr r2, [sp, 0x22C]
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 	bl IsWaterTileset
 	lsls r0, 24
 	movs r2, 0

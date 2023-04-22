@@ -31,7 +31,7 @@ u32 CreateFelicityBank(s32 param_1)
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gUnknown_203B204 = MemoryAlloc(sizeof(struct unkStruct_203B204),8);
-  gUnknown_203B204->unk10 = 0;
+  gUnknown_203B204->menuAction = 0;
   gUnknown_203B204->unk0 = param_1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_PERSIAN);

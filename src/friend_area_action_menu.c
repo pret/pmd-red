@@ -127,9 +127,9 @@ u32 sub_8027074(void)
 {
     ResetSprites(0);
     gUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
-    gUnknown_203B2BC->unk70 = 0;
-    gUnknown_203B2BC->unk74 = 0;
-    gUnknown_203B2BC->unk78 = 0;
+    gUnknown_203B2BC->menuAction1 = 0;
+    gUnknown_203B2BC->menuAction2 = 0;
+    gUnknown_203B2BC->menuAction3 = 0;
     SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_INIT);
     return 1;
 }
@@ -247,7 +247,7 @@ void sub_8027274(void)
     case 3:
         sub_8027D40(3,&gUnknown_203B2BC->item2);
         sub_8023DA4();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk70,2);
+        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction1,2);
         break;
     case 4:
         sub_8024458(gUnknown_203B2BC->targetPoke,2);
@@ -263,7 +263,7 @@ void sub_8027274(void)
         break;
     case 0xc:
         sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->unk74,2);
+        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
         break;
     case 0xd:
         HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);

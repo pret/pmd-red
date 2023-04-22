@@ -95,7 +95,7 @@ struct Dungeon
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
     u8 fill662[0x666 - 0x662];
     /* 0x666 */ u16 windTurns; // Turns remaining before getting swept out of the dungeon.
-    u8 fill668[0x66A - 0x668];
+    /* 0x668 */ u16 unk668;
     u16 bossSongIndex;
     u8 unk66C;
     u8 unk66D;
@@ -114,14 +114,18 @@ struct Dungeon
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x699 - 0x68B];
     u8 unk699;   
-    u8 fill69A[0x363C - 0x69A];
+    u8 fill69A[0x69C - 0x69A];
+    /* 0x69C */ struct EntityInfo unk69C[4];
+    u8 fillEBC[0x363C - 0xEBC]; 
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
     u8 fill37E3[0x37F4 - 0x37D9];
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
-    u8 fill37FD[0x3A08 - 0x37FD];
+    u8 fill37FD[0x3904 - 0x37FD];
+    /* 0x3904 */ s16 unk3904;
+    u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
     u8 fill3A09[0x3A0D - 0x3A09];
     /* 0x3A0D */ u8 unk3A0D;
@@ -172,8 +176,12 @@ struct Dungeon
     /* 0x1357C */ struct Entity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ struct Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ struct Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
-    /* 0x1361C */ struct Entity *clientPokemon[2]; // Not sure how large this array is.
-    u8 fill13624[0x17B2C - 0x13624];
+    /* 0x1361C */ struct Entity *clientPokemon[0x40];
+    /* 0x1371C */ struct Entity *unk1371C[0x40];
+    /* 0x1381C */ struct Entity teamPokemonEntities[MAX_TEAM_MEMBERS];
+    /* 0x139EC */ struct Entity wildPokemonEntities[DUNGEON_MAX_WILD_POKEMON];
+    /* 0x1412C */ struct Entity clientPokemonEntities[0x40];
+    /* 0x15E2C */ struct Entity unk15E2C[0x40];
     /* 0x17B2C */ struct Entity *lightningRodPokemon;
     /* 0x17B30 */ struct Entity *snatchPokemon;
     /* 0x17B34 */ u8 fillunk1734[0x17B38 - 0x17B34];
@@ -198,8 +206,12 @@ struct Dungeon
     u8 unk18217;
     u8 fill18218[0x1C578 - 0x18218];
     u8 unk1C578;
-    u8 fill1C579[0x1CE98 - 0x1C579];
-    /* 0x1CE98 */ struct unkDungeonGlobal_unk1CE98_sub unk1CE98;
+    u8 fill1C579[0x1C57E - 0x1C579];
+    u8 unk1C57E;
+    u8 fill1C57F[0x1C58B - 0x1C57F];
+    u8 unk1C58B;
+    u8 fill1C58C[0x1CE98 - 0x1C58C];
+    struct unkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
     u32 unk1CEC8;
     /* 0x1CECC */ struct DungeonMusicPlayer musPlayer;
 };

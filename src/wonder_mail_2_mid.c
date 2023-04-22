@@ -13,15 +13,15 @@
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
 extern void sub_8013848(u32 *, s32, u32, u32);
-extern s32 sub_802C474(void);
+extern s32 CountPelipperBoardSlots(void);
 extern void sub_802C328(void);
-extern void sub_802C39C(void);
+extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(u32 *);
 extern s32 GetKeyPress(u32 *);
 extern bool8 sub_80138B8(u32 *, u32);
 extern void AddMenuCursorSprite(u32 *);
-extern u8 sub_802C4A4(void);
+extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
@@ -31,7 +31,7 @@ extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
 extern bool8 IsMailinJobSlot(struct WonderMail *);
-extern void CreateRescueTitle(void *);
+extern void CreateRescueTitle(struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 
 
@@ -68,7 +68,7 @@ struct unkStruct_203B2E0
     s16 unk24;
     s16 unk26;
     s16 unk28;
-    s16 unk2A;
+    s16 pelipperBoardSlots;
     u8 fill22[0x3C - 0x2C];
     s32 unk3C;
     struct UnkTextStruct2 *unk40;
@@ -83,7 +83,6 @@ extern struct UnkTextStruct2 gUnknown_80DFC9C;
 extern u16 gUnknown_203B2E4;
 
 extern struct WonderMail *GetMailboxSlotInfo(u8);
-extern void CreateRescueTitle(void *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
@@ -158,7 +157,7 @@ bool8 HasNoMailinMailbox(void)
 
 bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
 {
-  if (sub_802C4A4() != 0) {
+  if (HasNoPelipperBoardJobs() != 0) {
       return FALSE;
   }
   else
@@ -178,11 +177,11 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
     sub_8012D34(gUnknown_203B2E0->unk40,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44,1,1);
-    sub_8013848(&gUnknown_203B2E0->unk8,sub_802C474(),param_3,param_1);
+    sub_8013848(&gUnknown_203B2E0->unk8,CountPelipperBoardSlots(),param_3,param_1);
     gUnknown_203B2E0->unk20 = gUnknown_203B2E4;
     sub_8013984(&gUnknown_203B2E0->unk8);
     sub_802C328();
-    sub_802C39C();
+    DrawPelipperBoardJobMenu();
     return TRUE;
   }
 }
@@ -208,7 +207,7 @@ u32 sub_802C1E4(u8 param_1)
         default:
             if (sub_80138B8(&gUnknown_203B2E0->unk8,1)) {
                 sub_802C328();
-                sub_802C39C();
+                DrawPelipperBoardJobMenu();
                 return 1;
             }
             else {
@@ -227,10 +226,10 @@ void sub_802C28C(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
-    gUnknown_203B2E0->unk2A = sub_802C474();
+    gUnknown_203B2E0->pelipperBoardSlots = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->unk8);
     sub_802C328();
-    sub_802C39C();
+    DrawPelipperBoardJobMenu();
     if(r0)
         AddMenuCursorSprite(&gUnknown_203B2E0->unk8);
 }
@@ -308,7 +307,7 @@ void sub_802C328(void)
 "_0802C398: .4byte gUnknown_203B2E0");
 }
 
-void sub_802C39C(void)
+void DrawPelipperBoardJobMenu(void)
 {
   u32 slotIndex;
   struct WonderMail *mail;

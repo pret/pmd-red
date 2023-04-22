@@ -12,8 +12,7 @@ struct unkStruct_203B3F0
     // size: 0x138
     u32 state;
     u8 id;
-    u8 fill5[0x8 - 5];
-    u32 unk8;
+    u32 menuAction;
     struct MenuItem menuItems[8];
     struct MenuStruct unk4C;
     u32 unk9C;
@@ -192,7 +191,7 @@ void sub_803A5A0(void)
     case 2:
         sub_801CCD8();
         sub_803A6F0();
-        sub_8012D60(&gUnknown_203B3F0->unk4C, gUnknown_203B3F0->menuItems, 0, 0, gUnknown_203B3F0->unk8, 2);
+        sub_8012D60(&gUnknown_203B3F0->unk4C, gUnknown_203B3F0->menuItems, 0, 0, gUnknown_203B3F0->menuAction, 2);
         break;
     case 3:
         gUnknown_203B3F0->unkAC = 3;
@@ -233,10 +232,10 @@ void sub_803A6F0(void)
 
   gUnknown_203B3F0->menuItems[0].text = &gDebug_NumberText;
   gUnknown_203B3F0->menuItems[0].menuAction = 2;
-  gUnknown_203B3F0->unk8 = 2;
+  gUnknown_203B3F0->menuAction = 2;
   if (!IsNotMoneyOrUsedTMItem(gUnknown_203B3F0->id)) {
     gUnknown_203B3F0->menuItems[0].menuAction = -1;
-    gUnknown_203B3F0->unk8 = 3;
+    gUnknown_203B3F0->menuAction = 3;
   }
   preload = gUnknown_203B3F0;
   // this var gets loaded in between the sets... very dumb

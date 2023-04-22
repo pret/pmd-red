@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
+#include "code_8094F88.h"
 
 
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -21,7 +22,6 @@ extern u8 *gUnknown_203B484;
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
@@ -246,7 +246,6 @@ void sprintfStatic(char *buffer, const char *text, ...);
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
@@ -725,7 +724,7 @@ void sub_8033DBC(void)
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
                         mail.mailType = 5;
                         sub_80951FC(&mail);
-                        mail2 = sub_8095228(sub_809539C(1, mail.unk10.unk10));
+                        mail2 = sub_8095228(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
                         MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
@@ -1593,7 +1592,7 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(0x6B);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                        mail2 = sub_8095228(sub_809539C(4, mail.unk10.unk10));
+                        mail2 = sub_8095228(GetMailIndex(4, mail.unk10.unk10));
                         *mail2 = mail;
                         mail2->mailType = 6;
                         gUnknown_203B33C->unk420 = mail.unk10.unk10;
@@ -1894,7 +1893,7 @@ void sub_8035210(void)
             case 0xD:
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
-                    mail = sub_8095228(sub_80953D4(5));
+                    mail = sub_8095228(GetFirstIndexofMailType(5));
                     if(mail->unk20.id != ITEM_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else
@@ -1933,7 +1932,7 @@ void nullsub_49(void)
 
 void sub_80352A4(void)
 {
-  u8 uVar1;
+  u8 mailIndex;
   char *monName;
 
   if ( sub_802F298() == 3) {
@@ -1941,8 +1940,8 @@ void sub_80352A4(void)
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gAvailablePokemonNames, monName);
-    uVar1 = sub_809539C(6, gUnknown_203B33C->unk420);
-    sub_8095240(uVar1);
+    mailIndex = GetMailIndex(6, gUnknown_203B33C->unk420);
+    DeleteMailAtIndex(mailIndex);
     SetFriendRescueMenuState(0x70);
   }
 }

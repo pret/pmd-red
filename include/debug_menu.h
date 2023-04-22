@@ -33,7 +33,7 @@ struct unkStruct_203B3F8
     s16 unk4;
     u16 unk6;
     struct PokemonStruct *pokemon;
-    u32 unkC;
+    u32 menuAction;
     struct MenuStruct unk10;
     u32 unk60;
     u32 unk64;

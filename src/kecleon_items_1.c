@@ -119,13 +119,13 @@ void sub_8019700(void)
 
     preload = gUnknown_203B210;
     nullText = NULL;
-    preload->unk34[0].text = *gUnknown_80D4920;
-    preload->unk34[0].menuAction = 5;
+    preload->menuItems[0].text = *gUnknown_80D4920;
+    preload->menuItems[0].menuAction = 5;
     menuAction = 1;
-    preload->unk34[1].text = *gUnknown_80D4928;
-    preload->unk34[1].menuAction = 6;
-    preload->unk34[2].text = nullText;
-    preload->unk34[2].menuAction = menuAction;
+    preload->menuItems[1].text = *gUnknown_80D4928;
+    preload->menuItems[1].menuAction = 6;
+    preload->menuItems[2].text = nullText;
+    preload->menuItems[2].menuAction = menuAction;
 }
 
 void sub_8019730(void)
@@ -135,32 +135,32 @@ void sub_8019730(void)
   if (sub_80144A4(&menuAction) != 0)
     return;
   if (menuAction != 1)
-    gUnknown_203B210->unk28 = menuAction;
+    gUnknown_203B210->menuAction1 = menuAction;
   switch(menuAction) {
     case 2:
         if (CountKecleonItems() == 0)
-            UpdateKecleonStoreState(5);
+            UpdateKecleonStoreState(KECLEON_STORE_NO_STORE_ITEMS);
         else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-            UpdateKecleonStoreState(0xA);
+            UpdateKecleonStoreState(KECLEON_STORE_TOO_MANY_ITEMS);
         else
             UpdateKecleonStoreState(0xF);
         break;
     case 3:
         if (GetNumberOfFilledInventorySlots() == 0)
-            UpdateKecleonStoreState(9);
+            UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
         else if (gUnknown_203B210->numInventoryItemToSell == 0)
             UpdateKecleonStoreState(8);
-        else if (gTeamInventory_203B460->teamMoney < 99999)
+        else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
             UpdateKecleonStoreState(0x17);
         else
             UpdateKecleonStoreState(7);
         break;
     case 4:
         if (GetNumberOfFilledInventorySlots() == 0)
-            UpdateKecleonStoreState(9);
+            UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
         else if (gUnknown_203B210->numInventoryItemToSell == 0)
             UpdateKecleonStoreState(8);
-        else if (gUnknown_203B210->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > 99999)
+        else if (gUnknown_203B210->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
             UpdateKecleonStoreState(7);
         else
             UpdateKecleonStoreState(0x1f);
@@ -213,7 +213,7 @@ void sub_80198E8(void)
       {
           case 5:
             AddToTeamMoney(gUnknown_203B210->itemSellPrice);
-            ShiftItemsDownFrom(gUnknown_203B210->unk24);
+            ShiftItemsDownFrom(gUnknown_203B210->soldItemInventoryIndex);
             PlaySound(0x14c);
             UpdateKecleonStoreState(0x19);
             break;
@@ -249,7 +249,7 @@ void sub_8019944(void)
             break;
         case 1:
         case 6:
-            UpdateKecleonStoreState(1);
+            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
             break;
     }
   }
@@ -257,17 +257,17 @@ void sub_8019944(void)
 
 void sub_80199CC(void)
 {
-  u32 uVar2;
+  u32 menuAction;
   struct BulkItem *item;
 
   if (gUnknown_203B210->isKecleonItemShop) {
-    uVar2 = sub_8019EDC(1);
+    menuAction = sub_8019EDC(1);
   }
   else {
-    uVar2 = sub_801A2A8(1);
+    menuAction = sub_801A2A8(1);
   }
 
-  switch(uVar2)
+  switch(menuAction)
   {
     case 3:
         if (gUnknown_203B210->isKecleonItemShop) {
@@ -278,9 +278,9 @@ void sub_80199CC(void)
             gUnknown_203B210->wareShopItemIndex = sub_801A37C();
             item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
         }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,item->id,0);
-        gUnknown_203B210->unk1C.quantity =item->quantity;
-        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem,item->id,0);
+        gUnknown_203B210->soldItem.quantity =item->quantity;
+        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
         UpdateKecleonStoreState(0x14);
         break;
     case 4:
@@ -292,9 +292,9 @@ void sub_80199CC(void)
             gUnknown_203B210->wareShopItemIndex = sub_801A37C();
             item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
         }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->unk1C,item->id,0);
-        gUnknown_203B210->unk1C.quantity = item->quantity;
-        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->unk1C);
+        xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem,item->id,0);
+        gUnknown_203B210->soldItem.quantity = item->quantity;
+        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
         UpdateKecleonStoreState(0x15);
         break;
     case 2:
@@ -302,7 +302,7 @@ void sub_80199CC(void)
             sub_801A010();
         else
             sub_801A3DC();
-        UpdateKecleonStoreState(1);
+        UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
         break;
     case 1:
         sub_801AD34(0);
@@ -318,21 +318,21 @@ void sub_8019B08(void)
     case 0:
         break;
     case 3:
-        gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
+        gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
         UpdateKecleonStoreState(0x1c);
         break;
     case 4:
-        gUnknown_203B210->unk24 = sub_801A8AC();
-        gUnknown_203B210->unk1C = gTeamInventory_203B460->teamItems[gUnknown_203B210->unk24];
-        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->unk1C);
+        gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
+        gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
+        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
         sub_8099690(0);
         UpdateKecleonStoreState(0x1d);
         break;
     case 2:
         sub_801A928();
-        UpdateKecleonStoreState(1);
+        UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
         break;
     case 1:
     default:
@@ -352,15 +352,15 @@ void sub_8019BBC(void)
   else {
     sub_801A2A8(0);
   }
-  if ((sub_8012FD8(&gUnknown_203B210->unk84) == 0) && (sub_8013114(&gUnknown_203B210->unk84,&menuAction), menuAction != 1)) {
-    gUnknown_203B210->unk30 = menuAction;
+  if ((sub_8012FD8(&gUnknown_203B210->menu) == 0) && (sub_8013114(&gUnknown_203B210->menu,&menuAction), menuAction != 1)) {
+    gUnknown_203B210->menuAction3 = menuAction;
   }
   switch(menuAction){
       case 2:
         if (gTeamInventory_203B460->teamMoney == 0)
-            UpdateKecleonStoreState(0x6);
+            UpdateKecleonStoreState(KECLEON_STORE_NO_MONEY);
         else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney)
-            UpdateKecleonStoreState(0xC);
+            UpdateKecleonStoreState(KECLEON_STORE_NOT_ENOUGH_MONEY);
         else
             UpdateKecleonStoreState(0x16);
         break;
@@ -379,15 +379,15 @@ void sub_8019C78(void)
 
   menuAction = 0;
   sub_801A6E8(0);
-  if ((sub_8012FD8(&gUnknown_203B210->unk84) == '\0') && (sub_8013114(&gUnknown_203B210->unk84,&menuAction), menuAction != 1)) {
-    gUnknown_203B210->unk2C = menuAction;
+  if ((sub_8012FD8(&gUnknown_203B210->menu) == '\0') && (sub_8013114(&gUnknown_203B210->menu,&menuAction), menuAction != 1)) {
+    gUnknown_203B210->menuAction2 = menuAction;
   }
   switch(menuAction){
       case 3:
         sub_8099690(0);
-        if (!CanSellItem(gUnknown_203B210->unk1C.id))
-            UpdateKecleonStoreState(0xd);
-        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > 99999)
+        if (!CanSellItem(gUnknown_203B210->soldItem.id))
+            UpdateKecleonStoreState(KECLEON_STORE_CANT_SELL_ITEM);
+        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
             UpdateKecleonStoreState(0xe);
         else
             UpdateKecleonStoreState(0x1e);
@@ -976,7 +976,7 @@ u32 sub_801A6E8(u8 param_1)
                 break;
             case 4:
                 item = gTeamInventory_203B460->teamItems[sub_801A8AC()];
-                if (CanSellItem(item.id) && (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney < 100000))
+                if (CanSellItem(item.id) && (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY))
                     PlayMenuSoundEffect(0);
                 else
                     PlayMenuSoundEffect(2);
@@ -1135,7 +1135,7 @@ void sub_801A9E0(void)
                     stack2.unk8 = 1;
                     item.flags = 3;
                     sub_8090E14(buffer1,&item, &stack2);
-                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > 99999){
+                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY){
                         // very dumb but this matches...
                         sprintfStatic((char *)&stack3,gUnknown_80DB9A0,buffer1);
                         xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);

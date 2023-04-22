@@ -16,4 +16,6 @@ struct TeamInventory
 
 extern struct TeamInventory *gTeamInventory_203B460;
 
+#define MAX_TEAM_MONEY 99999
+
 #endif

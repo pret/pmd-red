@@ -10,6 +10,7 @@
 #include "friend_area.h"
 #include "item.h"
 #include "menu_input.h"
+#include "code_802C39C.h"
 
 struct unkStruct_803B344
 {
@@ -28,13 +29,7 @@ struct unkStruct_203B30C
     // size: 0x150
     s32 state;
     u8 unk4;
-    u8 unk5[3];
-    u32 unk8;
-    u8 fillC[0x4C - 0xC];
-    u8 unk4C;
-    u8 fill4D[0x58 - 0x4D];
-    u8 *unk58;
-    u32 unk5C;
+    struct unkStruct_802C39C unk8;
     struct MenuStruct unk60;
     struct MenuItem unkB0[8];
     struct UnkTextStruct2 unkF0[4];
@@ -48,8 +43,6 @@ struct unkStruct_203B310
     /* 0x4 */ u32 nextState;
     /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
     /* 0x9 */ u8 currTeamRank; // team rank
-    u8 unkA;
-    u8 unkB;
     /* 0xC */ s32 itemRewardIndex;
     struct unkStruct_802F204 *unk10;
     /* 0x14 */ struct OpenedFile *faceFile;
@@ -98,6 +91,20 @@ struct unkStruct_203B314
 
 extern struct unkStruct_203B314 *gUnknown_203B314;
 
+
+enum FriendRewardStates {
+    PREP_MONEY_REWARD = 0,
+    MONEY_REWARD = 1,
+    PREP_FRIEND_AREA_REWARD = 2,
+    UNLOCK_FRIEND_AREA = 3,
+    PREP_ITEM_REWARD = 4,
+    GIVE_ITEM_REWARD = 5,
+    NEXT_ITEM = 6,
+    TEAM_PNTS_REWARD = 7,
+    NEW_TEAM_RANK = 8,
+    REWARD_EXIT = 9,
+};
+
 extern u8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
 extern void sub_802FA50(void);
@@ -107,7 +114,7 @@ extern void sub_8013878(u32 *, s32);
 
 extern void AddMenuCursorSprite(u32 *);
 extern void sub_8013984(u32 *);
-extern void sub_802F2E8(u32);
+extern void SetRewardSceneState(u32);
 extern void sub_802EFEC(u32);
 extern void sub_802F148(void);
 extern void sub_802F184(void);
@@ -118,8 +125,8 @@ extern void sub_801B72C(void);
 extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
 extern s32 sub_80144A4(s32 *);
-extern void sub_803B35C(struct WonderMail*, u32 *);
-extern void sub_802DE84(u32 *);
+extern void sub_803B35C(struct WonderMail*, struct unkStruct_802C39C *);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
@@ -131,7 +138,7 @@ extern void sub_802DF24(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
-extern void sub_802F718(void);
+extern void ProceedToNextRewardSceneState(void);
 extern u8 sub_80138B8(u32 *, u32);
 extern void sub_8013660(u32 *);
 extern u32 GetKeyPress(u32 *);
@@ -322,7 +329,7 @@ void sub_802EFEC(u32 newState)
 
 void sub_802F004(void)
 {
-    s32 iVar3;
+    s32 index;
 
     sub_8006518(gUnknown_203B30C->unkF0);
     switch(gUnknown_203B30C->state)
@@ -333,9 +340,9 @@ void sub_802F004(void)
             sub_8012CAC(&gUnknown_203B30C->unkF0[2], gUnknown_203B30C->unkB0);
             break;
         default:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B30C->unkF0[iVar3] = gUnknown_80E03C4;
+                gUnknown_203B30C->unkF0[index] = gUnknown_80E03C4;
             }
     }
     ResetUnusedInputStruct();
@@ -361,9 +368,9 @@ void sub_802F088(void)
         case 3:
             temp = sub_803B344(gUnknown_203B30C->unk4);
             sub_803B35C(&temp->mail, &gUnknown_203B30C->unk8);
-            gUnknown_203B30C->unk8 = 3;
-            gUnknown_203B30C->unk4C = 0;
-            gUnknown_203B30C->unk58 = temp->unk18;
+            gUnknown_203B30C->unk8.unk0[0] = 3;
+            gUnknown_203B30C->unk8.unk44 = 0;
+            gUnknown_203B30C->unk8.unk50[0] = temp->unk18;
             sub_802DE84(&gUnknown_203B30C->unk8);
     }
 }
@@ -446,7 +453,7 @@ void sub_802F1E8(void)
 
 
 
-u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 r1)
+u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
 {
     struct unkStruct_203B310 *preload;
 
@@ -455,7 +462,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 r1)
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
-    gUnknown_203B310->displayClientDialogueSprite = r1;
+    gUnknown_203B310->displayClientDialogueSprite = displayClientSprite;
 
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
@@ -476,7 +483,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 r1)
         gUnknown_203B310->faceData = gUnknown_203B310->faceFile->data;
     }
 
-    sub_802F2E8(0);
+    SetRewardSceneState(PREP_MONEY_REWARD);
     return 1;
 }
 
@@ -484,13 +491,13 @@ u32 sub_802F298(void)
 {
     switch(gUnknown_203B310->state)
     {
-        case 9:
+        case REWARD_EXIT:
             return 3;
-        case 5:
+        case GIVE_ITEM_REWARD:
             sub_802F6FC();
             return 0;
         default:
-            sub_802F718();
+            ProceedToNextRewardSceneState();
             return 0;
     }
 }
@@ -506,7 +513,7 @@ void sub_802F2C0(void)
     }
 }
 
-void sub_802F2E8(u32 newState)
+void SetRewardSceneState(u32 newState)
 {
     gUnknown_203B310->state = newState;
     sub_802F300();
@@ -515,14 +522,14 @@ void sub_802F2E8(u32 newState)
 
 void sub_802F300(void)
 {
-    s32 iVar3;
+    s32 index;
     switch(gUnknown_203B310->state)
     {
-        case 0:
+        case PREP_MONEY_REWARD:
             sub_8006518(gUnknown_203B310->unk24);
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B310->unk24[iVar3] = gUnknown_80E041C;
+                gUnknown_203B310->unk24[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B310->unk24, 1, 1);
@@ -540,24 +547,23 @@ void HandleMissionReward(void)
   struct Item item;
   
   switch(gUnknown_203B310->state) {
-    case 0:
-    // Reward intro..
+    case PREP_MONEY_REWARD:
         moneyReward = gUnknown_203B310->unk10->moneyReward;
         if (moneyReward == 0) {
-            sub_802F2E8(2);
+            SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
         }
         else {
             gUnknown_202DE30 = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceFile,0x10d);
-                gUnknown_203B310->nextState = 1;
+                gUnknown_203B310->nextState = MONEY_REWARD;
             }
             else {
-                sub_802F2E8(1);
+                SetRewardSceneState(MONEY_REWARD);
             }
         }
         break;
-    case 1:
+    case MONEY_REWARD:
         PlaySound(0xcb);
         AddToTeamMoney(gUnknown_203B310->unk10->moneyReward);
         if (sub_808D544(0) < 2) {
@@ -566,26 +572,24 @@ void HandleMissionReward(void)
         else {
             sub_80141B4(gUnknown_80E0484,0,0,0x101);
         }
-        gUnknown_203B310->nextState = 2;
+        gUnknown_203B310->nextState = PREP_FRIEND_AREA_REWARD;
         break;
-    case 2:
-        if (gUnknown_203B310->unk10->friendAreaReward == '\0') {
-            // No friend area reward.. go to item reward
-            sub_802F2E8(4);
+    case PREP_FRIEND_AREA_REWARD:
+        if (gUnknown_203B310->unk10->friendAreaReward == 0) {
+            SetRewardSceneState(PREP_ITEM_REWARD);
         }
         else {
             sub_8092578(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,0);
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceFile,0x10d);
-                gUnknown_203B310->nextState = 3;
+                gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
             }
             else {
-                sub_802F2E8(3);
+                SetRewardSceneState(UNLOCK_FRIEND_AREA);
             }
         }
         break;
-    case 3:
-        // Friend area reward
+    case UNLOCK_FRIEND_AREA:
         if (GetFriendAreaStatus(gUnknown_203B310->unk10->friendAreaReward)) {
             // We already have the friend area
             AddToTeamMoney(1000);
@@ -605,9 +609,9 @@ void HandleMissionReward(void)
                 sub_80141B4(gUnknown_80E05FC,0,0,0x101);
             }
         }
-        gUnknown_203B310->nextState = 4;
+        gUnknown_203B310->nextState = PREP_ITEM_REWARD;
         break;
-    case 4:
+    case PREP_ITEM_REWARD:
         itemID = gUnknown_203B310->unk10->itemRewards[0];
         if (itemID != ITEM_NOTHING) 
         {
@@ -626,26 +630,24 @@ void HandleMissionReward(void)
                 sub_8090E14(gUnknown_202DEA8,&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
-                    gUnknown_203B310->nextState = 5;
+                    gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
                 }
                 else
                 {
-                     sub_802F2E8(5);
+                    SetRewardSceneState(GIVE_ITEM_REWARD);
                 }
             }
             else
             {
-                sub_802F2E8(5);
+                SetRewardSceneState(GIVE_ITEM_REWARD);
             }
         }
         else
-            sub_802F2E8(7);
+            SetRewardSceneState(TEAM_PNTS_REWARD);
         break;
-    case 5:
-    // Item reward
+    case GIVE_ITEM_REWARD:
         if ((gUnknown_203B310->unk10->itemRewards[gUnknown_203B310->itemRewardIndex]) == 0) {
-            // No item in this reward slot
-            sub_802F2E8(6);
+            SetRewardSceneState(NEXT_ITEM);
         }
         else {
             if ((gUnknown_203B310->itemRewardIndex == 0) && (gUnknown_203B310->unk10->moneyReward == 0)) {
@@ -656,47 +658,41 @@ void HandleMissionReward(void)
             }
         }
         break;
-    case 6:
-        // Increase item reward slot index
+    case NEXT_ITEM:
         gUnknown_203B310->itemRewardIndex++;
         if(gUnknown_203B310->itemRewardIndex < MAX_ITEM_REWARDS)
-            sub_802F2E8(5);
+            SetRewardSceneState(GIVE_ITEM_REWARD);
         else
-            // No more items to check... move to give points
-            sub_802F2E8(7);
+            SetRewardSceneState(TEAM_PNTS_REWARD);
         break;
-    case 7:
+    case TEAM_PNTS_REWARD:
         if (gUnknown_203B310->unk10->teamRankPtsReward == 0) {
-            // No pnts to reward
-            sub_802F2E8(9);
+            SetRewardSceneState(REWARD_EXIT);
         }
         else {
             gUnknown_203B310->currTeamRank = GetRescueTeamRank();
             AddToTeamRankPts(gUnknown_203B310->unk10->teamRankPtsReward);
             PlaySound(0xcb);
             if (gUnknown_203B310->currTeamRank != GetRescueTeamRank()) {
-                // Rank up time
-                gUnknown_203B310->nextState = 8;
+                gUnknown_203B310->nextState = NEW_TEAM_RANK;
             }
             else {
-                // No rank up.. close out
-                gUnknown_203B310->nextState = 9;
+                gUnknown_203B310->nextState = REWARD_EXIT;
             }
             gUnknown_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
             sub_80141B4(gUnknown_80E0670,0,0,0x101);
         }
         break;
-    case 8:
-        // Rank up
+    case NEW_TEAM_RANK:
         PlaySound(0xc9);
-        gUnknown_203B310->nextState = 9;
+        gUnknown_203B310->nextState = REWARD_EXIT;
         rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
         strcpy(gUnknown_202E038,rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
         strcpy(gUnknown_202E038 + 0x50,rankString);
         sub_80141B4(gUnknown_80E06A8,0,0,0x101);
         break;
-    case 9:
+    case REWARD_EXIT:
         break;
   }
 }
@@ -707,8 +703,8 @@ void sub_802F6FC(void)
     {
         case 2:
         case 3:
-	    sub_801B72C();
-            sub_802F2E8(6);
+            sub_801B72C();
+            SetRewardSceneState(NEXT_ITEM);
             break;
         case 0:
         case 1:
@@ -716,12 +712,12 @@ void sub_802F6FC(void)
     }
 }
 
-void sub_802F718(void)
+void ProceedToNextRewardSceneState(void)
 {
     s32 temp;
 
     if (sub_80144A4(&temp) == 0) {
-        sub_802F2E8(gUnknown_203B310->nextState);
+        SetRewardSceneState(gUnknown_203B310->nextState);
     }
 }
 
@@ -766,14 +762,14 @@ u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
 u32 sub_802F848(s16 param_1)
 {
-    int iVar2;
+    int index;
     s32 param_1_32;
 
     param_1_32 = param_1; // cast needed
 
-    for( iVar2 = 0; iVar2 < gUnknown_203B314->unkDE; iVar2++ ) {
-        if (gUnknown_203B314->unk0[iVar2] == param_1_32) {
-            sub_8013878(&gUnknown_203B314->unkBC,iVar2);
+    for( index = 0; index < gUnknown_203B314->unkDE; index++ ) {
+        if (gUnknown_203B314->unk0[index] == param_1_32) {
+            sub_8013878(&gUnknown_203B314->unkBC,index);
             sub_802F9C0();
             sub_802FA50();
             return 1;

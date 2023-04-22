@@ -82,7 +82,7 @@ extern void CreateMailAcceptedStatusBox(u32);
 extern struct WonderMail * GetMailboxSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern void sub_802DE84(u32 *);
-extern void sub_802C860(u32);
+extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
 extern void sub_802B9FC(u8);
@@ -90,9 +90,9 @@ extern void sub_802B9FC(u8);
 u32 sub_802DFB0(void)
 {
     gUnknown_203B304 = MemoryAlloc(sizeof(struct unkStruct_203B304), 8);
-    gUnknown_203B304->unk64 = 0;
-    gUnknown_203B304->unk68 = 0;
-    SetMailboxState(0);
+    gUnknown_203B304->menuAction1 = 0;
+    gUnknown_203B304->menuAction2 = 0;
+    SetMailboxState(INITIALIZE_MAILBOX);
     return 1;
 }
 
@@ -100,36 +100,36 @@ u32 sub_802DFD8(void)
 {
     switch(gUnknown_203B304->state)
     {
-        case 0:
-            SetMailboxState(1);
+        case INITIALIZE_MAILBOX:
+            SetMailboxState(MAIN_MAILBOX_MENU);
             break;
-        case 1:
+        case MAIN_MAILBOX_MENU:
             HandleMailboxMenu();
             break;
         case 2:
             nullsub_133();
             break;
-        case 4:
-        case 5:
+        case MAIL_MENU:
+        case MAIL_MENU_1:
             sub_802E578();
             break;
-        case 6:
+        case MAIL_ACTION_MENU:
             HandleMailActionMenu();
             break;
-        case 7:
+        case MAIL_INFO:
             sub_802E73C();
             break;
-        case 8:
+        case JOB_LIST_MENU:
             sub_802E758();
             break;
-        case 9:
-        case 0xA:
+        case PKMN_NEWS_MENU:
+        case PKMN_NEWS_MENU_1:
             sub_802E774();
             break;
-        case 0xB:
+        case DISPLAY_SEL_PKMN_NEWS:
             sub_802E7D0();
             break;
-        case 3:
+        case MAILBOX_EXIT:
         default:
             return 3;
     }
@@ -154,20 +154,20 @@ void SetMailboxState(u32 newState)
 
 void sub_802E0A0(void)
 {
-    s32 iVar1;
+    s32 index;
     sub_8006518(gUnknown_203B304->unk10C);
     switch(gUnknown_203B304->state)
     {
-        case 1:
-            for(iVar1 = 0; iVar1 < 4; iVar1++)
+        case MAIN_MAILBOX_MENU:
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B304->unk10C[iVar1] = gUnknown_80E0284;
+                gUnknown_203B304->unk10C[index] = gUnknown_80E0284;
             }
             CreateMailboxMenu();
             gUnknown_203B304->unk10C[2] = gUnknown_80E029C;
             sub_8012CAC(&gUnknown_203B304->unk10C[2], gUnknown_203B304->unkBC);
             break;
-        case 6:
+        case MAIL_ACTION_MENU:
             CreateMailActionMenu();
             gUnknown_203B304->unk10C[2] = gUnknown_80E02B4;
             sub_8012CAC(&gUnknown_203B304->unk10C[2], gUnknown_203B304->unkBC);
@@ -175,9 +175,9 @@ void sub_802E0A0(void)
             gUnknown_203B304->unk10C[3] = gUnknown_80E02CC;
             break;
         default:
-            for(iVar1 = 0; iVar1 < 4; iVar1++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B304->unk10C[iVar1] = gUnknown_80E0284;
+                gUnknown_203B304->unk10C[index] = gUnknown_80E0284;
             }
             break;
     }
@@ -189,41 +189,41 @@ void sub_802E1AC(void)
 {
     switch(gUnknown_203B304->state)
     {
-        case 1:
-            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, gUnknown_203B304->unkFC, gUnknown_203B304->unk64, 2);
+        case MAIN_MAILBOX_MENU:
+            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, gUnknown_203B304->unkFC, gUnknown_203B304->menuAction1, 2);
             break;
-        case 4:
+        case MAIL_MENU:
             sub_802BD14(0, 0, 4);
             break;
-        case 5:
+        case MAIL_MENU_1:
             sub_802BE94(1);
             break;
-        case 6:
+        case MAIL_ACTION_MENU:
             CreateMailMenu();
             CreateMailAcceptedStatusBox(3);
-            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, 0, gUnknown_203B304->unk68, 2);
+            sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->unkBC, 0, 0, gUnknown_203B304->menuAction2, 2);
             break;
-        case 7:
+        case MAIL_INFO:
             sub_803B35C(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex), &gUnknown_203B304->unkC);
             gUnknown_203B304->unkC = 3;
             gUnknown_203B304->unk50 = 0;
             sub_802DE84(&gUnknown_203B304->unkC);
             break;
-        case 8:
-            sub_802C860(0);
+        case JOB_LIST_MENU:
+            InitializeJobListMenu(0);
             break;
-        case 9:
+        case PKMN_NEWS_MENU:
             sub_802B640(0, 0, 8);
             break;
-        case 0xA:
+        case PKMN_NEWS_MENU_1:
             sub_802B7D0(1);
             break;
-        case 0xB:
+        case DISPLAY_SEL_PKMN_NEWS:
             sub_802B9FC(gUnknown_203B304->mailIndex);
             break;
-        case 0:
+        case INITIALIZE_MAILBOX:
         case 2:
-        case 3:
+        case MAILBOX_EXIT:
             break;
     }
 }

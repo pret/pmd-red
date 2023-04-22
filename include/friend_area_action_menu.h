@@ -18,10 +18,9 @@ struct unkStruct_203B2BC
     u16 moveID;
     struct Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
-
-    u32 unk70;
-    s32 unk74;
-    u32 unk78;
+    u32 menuAction1;
+    u32 menuAction2;
+    u32 menuAction3;
     struct MenuStruct unk7C;
     u8 fill80[0xFD - 0xCC];
     u32 unkFD;

@@ -19,6 +19,7 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
+#define EXIT_THANK_YOU_MAIL_PRE 2
 #define EXIT_THANK_YOU_MAIL 3
 #define NO_THANK_YOU_MAIL 4
 #define SELECT_THANK_YOU_MAIL_COMMS 6
@@ -160,7 +161,6 @@ extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern void sub_8095240(u8);
 extern u32 sub_802F298();
 extern u8 sub_801CF14(u32);
 extern u32 sub_8030768(u32);
@@ -285,7 +285,7 @@ u32 CreateThankYouMailPelipper(void)
   gUnknown_203B2C4->wonderMailMethod = WONDER_MAIL_GAME_LINK;
   gUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
 
-  index = sub_80953D4(6);
+  index = GetFirstIndexofMailType(6);
   if (index != -1) {
     mail = sub_8095228(index);
     gUnknown_203B2C4->unk41C = mail->unk20;
@@ -424,7 +424,7 @@ u32 ThankYouMailPelipperCallback(void)
     case ANYTHING_ELSE_THANK_YOU_MAIN_MENU:
         HandleThankYouMailPelipperMainMenu();
         break;
-    case 2:
+    case EXIT_THANK_YOU_MAIL_PRE:
         sub_802AAC8();
         break;
     case EXIT_THANK_YOU_MAIL:
@@ -815,7 +815,7 @@ void AdvanceToThankYouPasswordProcessing(void)
 
 void HandleThankYouMailPasswordMenu(void)
 {
-  u8 uVar1;
+  u8 mailIndex;
   struct unkStruct_203B480 *mail;
   u32 return_var;
   struct unkStruct_203B480 mail1;
@@ -840,8 +840,8 @@ void HandleThankYouMailPasswordMenu(void)
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                uVar1 = sub_809539C(4,mail1.unk10.unk10);
-                mail = sub_8095228(uVar1);
+                mailIndex = GetMailIndex(4,mail1.unk10.unk10);
+                mail = sub_8095228(mailIndex);
                 *mail = mail1;
                 mail->mailType = 6;
                 gUnknown_203B2C4->unk430 = mail1.unk10.unk10;
@@ -1143,7 +1143,7 @@ void HandleMailCommunicationMenu(void)
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
-                        mail = sub_8095228(sub_80953D4(WONDER_MAIL_TYPE_THANK_YOU));
+                        mail = sub_8095228(GetFirstIndexofMailType(WONDER_MAIL_TYPE_THANK_YOU));
                         if(mail->unk20.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
@@ -1250,7 +1250,7 @@ void sub_802AB98(void)
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
             monName = GetMonSpecies(MONSTER_PELIPPER);
             strcpy(gAvailablePokemonNames, monName);
-            sub_8095240(sub_809539C(6, gUnknown_203B2C4->unk430));
+            DeleteMailAtIndex(GetMailIndex(6, gUnknown_203B2C4->unk430));
             SetThankYouMailMenuState(0x24);
             break;
         default:
@@ -1268,7 +1268,7 @@ void UpdateThankYouMailText(void)
   char *monName;
   u8 buffer1 [80];
   u8 buffer2 [80];
-  u8 uVar2;
+  u8 mailIndex;
   struct PokemonStruct *pokeStruct;
   struct PokemonStruct *pokeStruct2;
   s32 linkStatus;
@@ -1294,7 +1294,7 @@ void UpdateThankYouMailText(void)
             break;
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        sub_80306A8(5,0,0,6);
+        sub_80306A8(WONDER_MAIL_TYPE_THANK_YOU,0,0,6);
         break;
     case 0x11:
         sub_8006518(gUnknown_203B2C4->unk35C);
@@ -1407,8 +1407,8 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.unk14 = MONSTER_PELIPPER; // 0x550
         gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
-        uVar2 = sub_809539C(6,gUnknown_203B2C4->unk430);
-        mail = sub_8095228(uVar2);
+        mailIndex = GetMailIndex(6,gUnknown_203B2C4->unk430);
+        mail = sub_8095228(mailIndex);
         itemIndex = mail->unk20.id;
         if (itemIndex != ITEM_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
@@ -1484,7 +1484,7 @@ void UpdateThankYouMailText(void)
         // May I help you with anything else?
         sub_8014248(gUnknown_80DF928,0,1,gThankYouMailMainMenuItems,0,4,0,&gUnknown_203B2C4->faceFile,0xc);
         break;
-    case 2:
+    case EXIT_THANK_YOU_MAIL_PRE:
         // Please come see me anytime
         sub_80141B4(gUnknown_80DF94C,0,&gUnknown_203B2C4->faceFile,0x10d);
         break;

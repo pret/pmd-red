@@ -99,7 +99,7 @@ extern void sub_806CDD4(struct Entity *, u32, u32);
 extern bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(struct Position *pos);
-extern void sub_804539C(struct Entity *, u32, u32);
+extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_803E46C(u32);
 bool8 sub_80571F0(struct Entity * pokemon, struct Move *move);
 extern void sub_807EC28(u32);
@@ -1132,9 +1132,9 @@ bool8 sub_805A85C(struct Entity * pokemon, struct Entity * target, struct Move *
   int y;
   int counter;
   struct Position *r9;
-  struct Position sp_0x18;
+  struct Position pos1;
   struct Move stackMove;
-  struct Position32 sp_0x28;
+  struct Position32 pos2;
   struct Tile *tile;
   struct Entity *entity;
   s32 temp;
@@ -1142,7 +1142,7 @@ bool8 sub_805A85C(struct Entity * pokemon, struct Entity * target, struct Move *
   u8 check;
 
   
-  sp_0x18 = target->pos;
+  pos1 = target->pos;
   sub_806CDD4(target,10,8);
 
   for(counter = 0; counter < 0x28; counter++)
@@ -1152,9 +1152,9 @@ bool8 sub_805A85C(struct Entity * pokemon, struct Entity * target, struct Move *
     x--;
     y--;
     if ((x != 0) || (y != 0)) {
-      sp_0x18.x = target->pos.x + x;
-      sp_0x18.y = target->pos.y + y;
-      if (sub_80705F0(target,&sp_0x18) == 0) goto _0805A8C2;
+      pos1.x = target->pos.x + x;
+      pos1.y = target->pos.y + y;
+      if (sub_80705F0(target,&pos1) == 0) goto _0805A8C2;
     }
   }
 _0805A8C2:
@@ -1162,23 +1162,23 @@ _0805A8C2:
     sub_80522F4(pokemon,target,*gUnknown_80FEBDC);
     return FALSE;
   }
-  temp = sp_0x18.x * 0x1800;
+  temp = pos1.x * 0x1800;
   temp += (0xC00);
-  sp_0x28.x =  (temp - target->pixelPos.x) / 0xc;
+  pos2.x =  (temp - target->pixelPos.x) / 0xc;
 
-  temp2 = sp_0x18.y * 0x1800;
+  temp2 = pos1.y * 0x1800;
   temp2 += (0x80 << 5);
-  sp_0x28.y = ((temp2 - target->pixelPos.y) / 0xc);
+  pos2.y = ((temp2 - target->pixelPos.y) / 0xc);
 
 
-  if (((check = sub_803F428(&target->pos), r9 = &target->pos, check != 0)) || (sub_803F428(&sp_0x18) != 0)) {
+  if (((check = sub_803F428(&target->pos), r9 = &target->pos, check != 0)) || (sub_803F428(&pos1) != 0)) {
     for(counter = 0; counter < 0xC; counter++)
     {
-      sub_804539C(target,sp_0x28.x,sp_0x28.y);
+      IncreaseEntityPixelPos(target,pos2.x,pos2.y);
       sub_803E46C(0x2c);
     }
   }
-  tile = GetTileSafe(sp_0x18.x,sp_0x18.y);
+  tile = GetTileSafe(pos1.x,pos1.y);
   entity = tile->monster;
   if (entity != NULL) {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
@@ -1194,10 +1194,10 @@ _0805A8C2:
     else {
 _0805A9FE:
       if (EntityExists(target)) {
-        if ((sub_803F428(r9) != 0) || (sub_803F428(&sp_0x18) != 0)) {
+        if ((sub_803F428(r9) != 0) || (sub_803F428(&pos1) != 0)) {
           for(counter = 0; counter < 0xC; counter++)
           {
-            sub_804539C(target, -sp_0x28.x,-sp_0x28.y);
+            IncreaseEntityPixelPos(target, -pos2.x,-pos2.y);
             sub_803E46C(0x2c);
           }
         }
@@ -1207,7 +1207,7 @@ _0805A9FE:
   }
   else
   {
-    sub_80694C0(target,sp_0x18.x,sp_0x18.y,0);
+    sub_80694C0(target,pos1.x,pos1.y,0);
 _0805AA5E:
     if (EntityExists(target)) {
 #ifndef NOMATCHING

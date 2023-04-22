@@ -39,7 +39,7 @@ struct unkStruct_203B2F8
     bool8 unk9;
     u8 dungeonID;
     u8 unkB;
-    struct unkSubStruct_203B2F8 *unkC;
+    struct unkSubStruct_203B2F8 *mail;
     u8 jobSlotIndex;
     u8 fill11[0x14 - 0x11];
     u32 unk14;
@@ -60,3 +60,24 @@ struct unkStruct_203B2F8
     u32 unk1E4;
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;
+
+enum WonderMailRescueStates
+{
+    INITIAL_WONDER_MAIL_CHECK,
+    // 1 is ??
+    WONDER_MAIL_EXIT = 2,
+    DUPLICATE_WONDER_MAIL = 3,
+    DUPLICATE_WONDER_MAIL_1,
+    // 5 is ??
+    // 6 is ??
+    // 7 is ??
+    RECEIVE_WONDER_MAIL = 8,
+    // 9 is ??
+    JOB_LIST_FULL = 0xA,
+    DRAW_JOB_LIST = 0xB,
+    DRAW_JOB_LIST_1 = 0xC,
+    // 0xD is ??
+    // 0xE is ??
+    // 0xF is ??
+    // 0x10 is ??
+};

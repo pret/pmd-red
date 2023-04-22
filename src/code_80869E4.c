@@ -41,10 +41,10 @@ extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
 extern void sub_8086384(struct Entity *entity);
 extern void sub_8085930(u32);
-extern void sub_804539C(struct Entity *, u32, u32);
+extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_806CE68(struct Entity *, u32);
 extern void sub_806CDD4(struct Entity *, u8, u32);
-extern void sub_804535C(struct Entity *, u32 *);
+extern void sub_804535C(struct Entity *, struct Position32 *);
 extern void sub_8086A54(struct Entity *);
 extern void sub_8086A3C(struct Entity *);
 extern void PlaySoundEffect(u32);
@@ -58,22 +58,22 @@ void SpriteShockEffect(struct Entity *entity)
 
 void sub_80862DC(struct Entity *entity)
 {
-    u32 array[2];
-    array[0] = entity->pixelPos.x;
-    array[1] = entity->pixelPos.y + (0xE0 << 6);
+    struct Position32 pos;
+    pos.x = entity->pixelPos.x;
+    pos.y = entity->pixelPos.y + (0xE0 << 6);
 
-    sub_804535C(entity, array);
+    sub_804535C(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_NORTH);
     sub_8086A54(entity);
 }
 
 void sub_8086310(struct Entity *entity)
 {
-    u32 array[2];
-    array[0] = entity->pixelPos.x;
-    array[1] = entity->pixelPos.y + (0x90 << 8);
+    struct Position32 pos;
+    pos.x = entity->pixelPos.x;
+    pos.y = entity->pixelPos.y + (0x90 << 8);
 
-    sub_804535C(entity, array);
+    sub_804535C(entity, &pos);
     sub_806CE68(entity, DIRECTION_SOUTH);
     sub_8086A3C(entity);
     entity->isVisible = 0;
@@ -81,22 +81,22 @@ void sub_8086310(struct Entity *entity)
 
 void sub_8086348(struct Entity *entity)
 {
-    u32 array[2];
-    array[0] = entity->pixelPos.x + (0xF0 << 7);
-    array[1] = entity->pixelPos.y + 0xffffe000;
+    struct Position32 pos;
+    pos.x = entity->pixelPos.x + (0xF0 << 7);
+    pos.y = entity->pixelPos.y + 0xffffe000;
 
-    sub_804535C(entity, array);
+    sub_804535C(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_WEST);
     sub_8086A54(entity);
 }
 
 void sub_8086384(struct Entity *entity)
 {
-    u32 array[2];
-    array[0] = entity->pixelPos.x + (0xF0 << 7);
-    array[1] = entity->pixelPos.y;
+    struct Position32 pos;
+    pos.x = entity->pixelPos.x + (0xF0 << 7);
+    pos.y = entity->pixelPos.y;
 
-    sub_804535C(entity, array);
+    sub_804535C(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_WEST);
     sub_8086A54(entity);
 }
@@ -133,17 +133,17 @@ void sub_8086404(struct Entity *entity)
 
 void sub_8086410(struct Entity *entity)
 {
-    sub_804539C(entity, 0, 0xffffff00);
+    IncreaseEntityPixelPos(entity, 0, 0xffffff00);
 }
 
 void sub_8086424(struct Entity *entity)
 {
-    sub_804539C(entity, 0, 0x80 << 1);
+    IncreaseEntityPixelPos(entity, 0, 0x80 << 1);
 }
 
 void sub_8086434(struct Entity *entity)
 {
-    sub_804539C(entity, 0xffffff00, 0);
+    IncreaseEntityPixelPos(entity, 0xffffff00, 0);
 }
 
 void sub_8086448(void)

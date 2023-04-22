@@ -151,7 +151,7 @@ _0807CEBC:
 	adds r0, r6, 0
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x30]
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 	adds r0, r6, 0
 	bl sub_8045888
 	lsls r0, 24
@@ -1404,7 +1404,7 @@ _0807D8B0:
 	adds r0, r2
 	ldr r2, [r0]
 	adds r0, r4, 0
-	bl sub_804539C
+	bl IncreaseEntityPixelPos
 	mov r0, r10
 	bl sub_8009C7C
 	add r2, sp, 0x20
