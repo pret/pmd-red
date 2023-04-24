@@ -36,7 +36,7 @@ struct unkStruct_203B3F4
     u32 state;
     u8 friendArea;
     u8 fill5[0x8 - 5];
-    u32 unk8;
+    u32 menuAction;
     struct MenuItem menuItems[8];
     struct MenuStruct unk4C;
     struct UnkTextStruct2 unk9C[4];
@@ -227,7 +227,7 @@ void sub_803A690(void)
 
 void sub_803A6F0(void)
 {
-  s32 temp1;
+  s32 menuAction;
   struct unkStruct_203B3F0 *preload;
 
   gUnknown_203B3F0->menuItems[0].text = &gDebug_NumberText;
@@ -239,11 +239,11 @@ void sub_803A6F0(void)
   }
   preload = gUnknown_203B3F0;
   // this var gets loaded in between the sets... very dumb
-  temp1 = 1;
+  menuAction = 1;
   preload->menuItems[1].text = *gUnknown_80D4970;
   preload->menuItems[1].menuAction = 3;
   preload->menuItems[2].text = NULL;
-  preload->menuItems[2].menuAction = temp1;
+  preload->menuItems[2].menuAction = menuAction;
 }
 
 void sub_803A740(void)
@@ -269,14 +269,14 @@ void sub_803A740(void)
 
 void sub_803A7B0(void)
 {
-  s32 local_c;
+  s32 menuAction;
 
-  local_c = 0;
+  menuAction = 0;
   sub_801CA08(0);
   if (sub_8012FD8(&gUnknown_203B3F0->unk4C) == '\0') {
-    sub_8013114(&gUnknown_203B3F0->unk4C,&local_c);
+    sub_8013114(&gUnknown_203B3F0->unk4C,&menuAction);
   }
-  switch(local_c)
+  switch(menuAction)
   {
       case 2:
         sub_803A504(3);
@@ -372,7 +372,7 @@ void sub_803A924(u32 newState)
 
 void sub_803A93C(void)
 {
-    s32 iVar4;
+    s32 index;
     sub_8006518(gUnknown_203B3F4->unk9C);
     if(gUnknown_203B3F4->state == 2)
     {
@@ -380,9 +380,9 @@ void sub_803A93C(void)
     }
     else
     {
-        for(iVar4 = 0; iVar4 < 4; iVar4++)
+        for(index = 0; index < 4; index++)
         {
-            gUnknown_203B3F4->unk9C[iVar4] = gUnknown_80E7E8C;
+            gUnknown_203B3F4->unk9C[index] = gUnknown_80E7E8C;
         }
     }
     ResetUnusedInputStruct();
@@ -401,7 +401,7 @@ void sub_803A9AC(void)
     case 2:
         sub_8021494();
         sub_803AA34();
-        sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->menuItems,0,0,gUnknown_203B3F4->unk8,2);
+        sub_8012D60(&gUnknown_203B3F4->unk4C,gUnknown_203B3F4->menuItems,0,0,gUnknown_203B3F4->menuAction,2);
         break;
     case 3:
         sub_8021774(gUnknown_203B3F4->friendArea,1,0);
@@ -413,11 +413,11 @@ void sub_803A9AC(void)
 
 void sub_803AA34(void)
 {
-    s32 iVar4;
+    s32 index;
     u8 *FriendAreas;
 
 
-    iVar4 = 0;
+    index = 0;
 
     // So dumb that it matches...
     FriendAreas = gFriendAreas;
@@ -436,15 +436,15 @@ void sub_803AA34(void)
         gUnknown_203B3F4->menuItems[0].menuAction = 2;
     }
 
-    iVar4++;
-    gUnknown_203B3F4->menuItems[iVar4].text = *gUnknown_80D4970;
-    gUnknown_203B3F4->menuItems[iVar4].menuAction = 4;
+    index++;
+    gUnknown_203B3F4->menuItems[index].text = *gUnknown_80D4970;
+    gUnknown_203B3F4->menuItems[index].menuAction = 4;
 
-    iVar4++;
-    gUnknown_203B3F4->menuItems[iVar4].text = NULL;
-    gUnknown_203B3F4->menuItems[iVar4].menuAction = 1;
+    index++;
+    gUnknown_203B3F4->menuItems[index].text = NULL;
+    gUnknown_203B3F4->menuItems[index].menuAction = 1;
 
-    gUnknown_203B3F4->unk8 = gUnknown_203B3F4->menuItems[0].menuAction;
+    gUnknown_203B3F4->menuAction = gUnknown_203B3F4->menuItems[0].menuAction;
 }
 
 void sub_803AAC4(void)
@@ -471,12 +471,12 @@ void sub_803AAC4(void)
 
 void sub_803AB34(void)
 {
-    s32 temp;
-    temp = 0;
+    s32 menuAction;
+    menuAction = 0;
     sub_8021274(0);
     if(!sub_8012FD8(&gUnknown_203B3F4->unk4C))
-        sub_8013114(&gUnknown_203B3F4->unk4C, &temp);
-    switch(temp)
+        sub_8013114(&gUnknown_203B3F4->unk4C, &menuAction);
+    switch(menuAction)
     {
         case 2:
             UnlockFriendArea(gUnknown_203B3F4->friendArea);

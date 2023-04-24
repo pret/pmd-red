@@ -25,8 +25,8 @@ struct unkStruct_203B2B8
     /* 0x24 */ u16 moveID;
     struct Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
-    u32 unk70;
-    u32 unk74;
+    u32 menuAction1;
+    u32 menuAction2;
     u32 unk78;
     struct MenuStruct unk7C;
     struct MenuStruct unkCC;
@@ -87,12 +87,12 @@ void sub_80268CC(void)
 {
   struct PokemonStruct *playerPokemon;
   struct PokemonStruct *pokeStruct;
-  struct PokemonStruct *iVar4;
+  struct PokemonStruct *pokeStruct2;
   s32 choice;
   
   choice = 0;
   if ((sub_8012FD8(&gUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&gUnknown_203B2B8->unk7C,&choice), choice != 1)) {
-    gUnknown_203B2B8->unk70 = choice;
+    gUnknown_203B2B8->menuAction1 = choice;
   }
   switch(choice) {
     case 6:
@@ -120,12 +120,12 @@ void sub_80268CC(void)
         sub_8026074(6);
         break;
     case 8:
-        iVar4 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
+        pokeStruct2 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
         playerPokemon = GetPlayerPokemonStruct();
 
-        if (!iVar4->isTeamLeader) {
+        if (!pokeStruct2->isTeamLeader) {
             playerPokemon->isTeamLeader = FALSE;
-            iVar4->isTeamLeader = TRUE;
+            pokeStruct2->isTeamLeader = TRUE;
             nullsub_104();
         }
         sub_808ED00();
@@ -299,7 +299,7 @@ void sub_8026C14(void)
   menuAction = 0;
   sub_801A6E8(0);
   if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
-    gUnknown_203B2B8->unk74 = menuAction;
+    gUnknown_203B2B8->menuAction2 = menuAction;
   }
   switch(menuAction)
   {

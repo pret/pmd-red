@@ -18,13 +18,13 @@ extern const u8 gDungeonWaterType[];
 
 void sub_806CD90(void)
 {
-    s32 iVar3;
-    struct Entity *iVar2;
-    for(iVar3 = 0; iVar3 < DUNGEON_MAX_POKEMON; iVar3++)
+    s32 index;
+    struct Entity *entity;
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        iVar2 = gDungeon->allPokemon[iVar3];
-        if(EntityExists(iVar2))
-            sub_806CCB4(iVar2, sub_806CEBC(iVar2));
+        entity = gDungeon->allPokemon[index];
+        if(EntityExists(entity))
+            sub_806CCB4(entity, sub_806CEBC(entity));
     }
 }
 
@@ -96,22 +96,22 @@ void sub_806CE94(struct Entity *r0, u32 newDir)
 u8 sub_806CEBC(struct Entity *param_1)
 {
   u8 sleep;
-  struct EntityInfo * iVar2;
-  struct EntityInfo * iVar3;
+  struct EntityInfo * entityInfo1;
+  struct EntityInfo * entityInfo2;
 
   // NOTE: copy needed to match
-  iVar2 = param_1->info;
-  iVar3 = param_1->info;
-  sleep = iVar2->sleep;
+  entityInfo1 = param_1->info;
+  entityInfo2 = param_1->info;
+  sleep = entityInfo1->sleep;
 
   if ((sleep == STATUS_SLEEP) || (sleep == STATUS_NAPPING) || (sleep == STATUS_NIGHTMARE)) {
-    if ((iVar3->apparentID != MONSTER_SUDOWOODO) || (iVar3->sleepTurns != 0x7f)) {
+    if ((entityInfo2->apparentID != MONSTER_SUDOWOODO) || (entityInfo2->sleepTurns != 0x7f)) {
       return 5;
     }
     else
         return 7;
   }
-  else if (iVar3->chargingStatus == STATUS_BIDE) {
+  else if (entityInfo2->chargingStatus == STATUS_BIDE) {
     return 0xB;
   }
   return 0x7;
@@ -125,12 +125,12 @@ void sub_806CEFC(struct Entity *param_1, u32 newDir)
 
 void sub_806CF18(struct Entity *param_1)
 {
-  s32 iVar2;
+  s32 index;
   struct EntityInfo *entityInfo;
 
   if (EntityExists(param_1)) {
     entityInfo = param_1->info;
-    for (iVar2 = 0; iVar2 < 100; iVar2++) {
+    for (index = 0; index < 100; index++) {
       sub_803E46C(0x21);
       if (!sub_808DA44(entityInfo->apparentID, param_1->unk6B)) {
         break;
@@ -147,11 +147,11 @@ u8 sub_806CF54(struct Entity *param_1)
 void sub_806CF60(void)
 {
   struct Entity *uVar2;
-  s32 iVar3;
+  s32 index;
 
-  for(iVar3 = 0; iVar3 < DUNGEON_MAX_POKEMON; iVar3++)
+  for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-    uVar2 = gDungeon->allPokemon[iVar3];
+    uVar2 = gDungeon->allPokemon[index];
     if (EntityExists(uVar2)) {
       sub_806CF98(uVar2);
     }

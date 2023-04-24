@@ -853,22 +853,22 @@ bool8 SurfMoveAction(struct Entity *pokemon, struct Entity *target, struct Move 
 
 bool8 RolePlayMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-  struct EntityInfo * iVar3;
-  struct EntityInfo * iVar4;
+  struct EntityInfo * entityInfo;
+  struct EntityInfo * targetEntityInfo;
   
-  iVar3 = pokemon->info;
-  iVar4 = target->info;
+  entityInfo = pokemon->info;
+  targetEntityInfo = target->info;
   if (HasAbility(target, ABILITY_WONDER_GUARD)) {
     sub_80522F4(pokemon,target,*gUnknown_80FC854);
     return FALSE;
   }
   else
   {
-    iVar3->abilities[0] = iVar4->abilities[0];
-    iVar3->abilities[1] = iVar4->abilities[1];
+    entityInfo->abilities[0] = targetEntityInfo->abilities[0];
+    entityInfo->abilities[1] = targetEntityInfo->abilities[1];
     gDungeon->unkC = 1;
-    if (iVar3->unkFB == 0) {
-      iVar3->unkFB = 1;
+    if (entityInfo->unkFB == 0) {
+      entityInfo->unkFB = 1;
     }
     sub_80522F4(pokemon,target,*gUnknown_80FC81C);
     sub_806ABAC(pokemon, pokemon);
@@ -1005,17 +1005,17 @@ bool8 TickleMoveAction(struct Entity *pokemon, struct Entity *target, struct Mov
 
 bool8 sub_805A5E8(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 stat, u32 param_5) 
 {
-  struct EntityInfo *iVar2;
+  struct EntityInfo *entityInfo;
   bool32 flag;
   
   flag = FALSE;
   if (sub_8055640(pokemon,target,move,0x100,param_5) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,gUnknown_80F4DD2) != 0) {
-      iVar2 = pokemon->info;
+      entityInfo = pokemon->info;
       RaiseDefenseStageTarget(pokemon,pokemon,stat,1);
-      if (iVar2->unkFB == 0) {
-        iVar2->unkFB = 1;
+      if (entityInfo->unkFB == 0) {
+        entityInfo->unkFB = 1;
       }
     }
   }
@@ -1054,18 +1054,18 @@ bool8 sub_805A688(struct Entity *pokemon, struct Entity *target, struct Move *mo
 
 bool8 KnockOffMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move, u32 param_4)
 {
-    struct EntityInfo *iVar2;
-    struct EntityInfo *iVar6;
-    struct EntityInfo *iVar7;
+    struct EntityInfo *entityInfo;
+    struct EntityInfo *targetEntityInfo1;
+    struct EntityInfo *targetEntityInfo2;
     struct Item heldItem;
     struct Position pos;
     struct Item *itemPtr;
     u32 flag;
     u32 itemFlag;
 
-    iVar2 = pokemon->info;
-    iVar6 = target->info;
-    iVar7 = iVar6;
+    entityInfo = pokemon->info;
+    targetEntityInfo1 = target->info;
+    targetEntityInfo2 = targetEntityInfo1;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
     if (HasAbility(target, ABILITY_STICKY_HOLD)) 
@@ -1080,7 +1080,7 @@ bool8 KnockOffMoveAction(struct Entity *pokemon, struct Entity *target, struct M
     }
     else
     {
-        heldItem = iVar6->heldItem;
+        heldItem = targetEntityInfo1->heldItem;
         itemFlag = heldItem.flags;
         flag = ITEM_FLAG_EXISTS;
         flag &= itemFlag;
@@ -1091,13 +1091,13 @@ bool8 KnockOffMoveAction(struct Entity *pokemon, struct Entity *target, struct M
         }
         else
         {
-            itemPtr = &iVar7->heldItem;
+            itemPtr = &targetEntityInfo2->heldItem;
             itemPtr->id = ITEM_NOTHING;
             itemPtr->quantity = 0;
             itemPtr->flags = 0;
             sub_80522F4(pokemon,target,*gUnknown_80FD170); // $m1's item was swatted down!
-            pos.x = gAdjacentTileOffsets[iVar2->action.direction].x;
-            pos.y = gAdjacentTileOffsets[iVar2->action.direction].y;
+            pos.x = gAdjacentTileOffsets[entityInfo->action.direction].x;
+            pos.y = gAdjacentTileOffsets[entityInfo->action.direction].y;
             sub_805A7D4(pokemon,target,&heldItem,&pos);
             if (sub_80706A4(target, &target->pos) != 0) 
             {

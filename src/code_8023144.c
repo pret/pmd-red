@@ -59,18 +59,18 @@ struct unkStruct_203B294
     // size: 0x1A8
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 fallbackState;
-    u8 unk8[NUM_IQ_SKILLS];
-    u8 unk20[NUM_IQ_SKILLS];
-    u32 unk38;
-    u32 unk3C;
-    u32 unk40;
-    struct unkStruct_80915F4 unk44;
+    u8 iqSkillPreGummi[NUM_IQ_SKILLS];
+    u8 iqSkillPostGummi[NUM_IQ_SKILLS];
+    u32 availIQSkillPreGummi;
+    u32 availIQSkillPostGummi;
+    u32 unk40; // Gummi eaten flag?
+    struct Gummi gummi;
     /* 0x48 */ struct PokemonStruct *pokeStruct;
-    u32 unk4C;
-    struct Item unk50;
+    u32 itemIndex;
+    struct Item item;
     struct MenuStruct unk54;
     struct MenuStruct unkA4;
-    u32 unkF4;
+    u32 menuAction;
     u32 unkF8;
     u16 unkFC;
 };
@@ -85,12 +85,12 @@ extern u32 sub_801B00C(void);
 extern void sub_801B048(void);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
 extern u32 sub_801A6E8(u32);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
-void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 itemIndex, u8 a3, struct unkStruct_80915F4* a4);
 extern u32 sub_801A8AC(void);
 
 void sub_8022E78(void)
@@ -98,13 +98,13 @@ void sub_8022E78(void)
   switch(sub_801A6E8(1))
   {
       case 3:
-        gUnknown_203B294->unk4C = sub_801A8AC();
-        gUnknown_203B294->unk50 = gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C];
+        gUnknown_203B294->itemIndex = sub_801A8AC();
+        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
         sub_8022924(2);
         break;
       case 4:
-        gUnknown_203B294->unk4C = sub_801A8AC();
-        gUnknown_203B294->unk50 = gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C];
+        gUnknown_203B294->itemIndex = sub_801A8AC();
+        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
         sub_8099690(0);
         sub_8022924(4);
         break;
@@ -117,13 +117,13 @@ void sub_8022E78(void)
 void sub_8022EF4(void)
 {
   s32 menuAction;
-  s32 r5;
+  s32 boostAmount;
   
   menuAction = 0;
   sub_801A6E8(0);
   if (sub_8012FD8(&gUnknown_203B294->unk54) == 0) {
     sub_8013114(&gUnknown_203B294->unk54,&menuAction);
-    if(menuAction != 1) gUnknown_203B294->unkF4 = menuAction;
+    if(menuAction != 1) gUnknown_203B294->menuAction = menuAction;
   }
 
   switch(menuAction)
@@ -135,21 +135,21 @@ void sub_8022EF4(void)
       case 3:
         break;
       case 5:
-        gUnknown_203B294->unk38 = GetNumAvailableIQSkills(gUnknown_203B294->unk8, gUnknown_203B294->pokeStruct->IQ);
-        GetGummiItemStatBoost(gUnknown_203B294->pokeStruct, gUnknown_203B294->unk50.id, 0, &gUnknown_203B294->unk44);
-        gUnknown_203B294->unk3C = GetNumAvailableIQSkills(gUnknown_203B294->unk20, gUnknown_203B294->pokeStruct->IQ);
+        gUnknown_203B294->availIQSkillPreGummi = GetNumAvailableIQSkills(gUnknown_203B294->iqSkillPreGummi, gUnknown_203B294->pokeStruct->IQ);
+        GetGummiItemStatBoost(gUnknown_203B294->pokeStruct, gUnknown_203B294->item.id, FALSE, &gUnknown_203B294->gummi);
+        gUnknown_203B294->availIQSkillPostGummi = GetNumAvailableIQSkills(gUnknown_203B294->iqSkillPostGummi, gUnknown_203B294->pokeStruct->IQ);
         gUnknown_203B294->unk40 = 1;
-        r5 = gUnknown_203B294->unk44.unk0;
+        boostAmount = gUnknown_203B294->gummi.boostAmount;
 
-        sub_8090E14(gUnknown_202DE58, &gTeamInventory_203B460->teamItems[gUnknown_203B294->unk4C], NULL);
+        sub_8090E14(gUnknown_202DE58, &gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex], NULL);
         
-        if(r5 != -1)
-            ShiftItemsDownFrom(gUnknown_203B294->unk4C);
+        if(boostAmount != -1)
+            ShiftItemsDownFrom(gUnknown_203B294->itemIndex);
 
         sub_8099690(0);
         gUnknown_203B294->fallbackState = 0xA;
 
-        switch(r5 + 1)
+        switch(boostAmount + 1)
         {
             case 1:
                 sub_8022924(6);
@@ -201,7 +201,7 @@ void sub_8023068(void)
             sub_8022924(1);
             break;
       case 2:
-        ShiftItemsDownFrom(gUnknown_203B294->unk4C);
+        ShiftItemsDownFrom(gUnknown_203B294->itemIndex);
         if (GetNumberOfFilledInventorySlots() == 0) {
             sub_8099690(0);
             sub_801A928();

@@ -6,7 +6,7 @@ struct unkStruct_203B318
     s32 state;
     s32 fallbackState;
     s16 unk10;
-    s32 unk14;
+    s32 menuAction;
     struct MenuItem unk18[4];
     u8 fill[0x58 - 0x38];
     struct OpenedFile *faceFile;

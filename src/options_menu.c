@@ -69,7 +69,7 @@ void sub_801317C(u32 *);
 extern void sub_8013818(void *, u32, u32, u32);
 void CreateOptionsMenu(void);
 void nullsub_38(void);
-extern void sub_801DD6C(u32);
+extern void SetOptionsMenuState(u32);
 extern void HandleOthersMenu();
 extern void sub_801E088();
 extern void sub_801E0E0();
@@ -103,10 +103,20 @@ enum
     MENU_OPTION_NO
 };
 
+enum OptionsMenuStates {
+    OPTIONS_MENU_INIT,
+    OPTIONS_MENU_MAIN,
+    OPTIONS_MENU_EXIT,
+    OPTIONS_MENU_PRE_HINT_SELECTION,
+    OPTIONS_MENU_HINT_SELECTION,
+    OPTIONS_MENU_DISPLAY_HINT,
+    OPTIONS_MENU_CONFIRM_NEW_OPTIONS = 7,
+};
+
 u32 sub_801DCC4(void)
 {
     gUnknown_203B25C = MemoryAlloc(sizeof(struct unkStruct_203B25C), 8);
-    sub_801DD6C(0);
+    SetOptionsMenuState(OPTIONS_MENU_INIT);
     return 1;
 }
 
@@ -114,23 +124,23 @@ u32 sub_801DCE8(void)
 {
     switch(gUnknown_203B25C->state)
     {
-        case 2:
+        case OPTIONS_MENU_EXIT:
             return 3;
-        case 0:
-        case 1:
+        case OPTIONS_MENU_INIT:
+        case OPTIONS_MENU_MAIN:
             HandleOthersMenu();
             break;
-        case 3:
-        case 4:
+        case OPTIONS_MENU_PRE_HINT_SELECTION:
+        case OPTIONS_MENU_HINT_SELECTION:
             sub_801E088();
             break;
-        case 5:
+        case OPTIONS_MENU_DISPLAY_HINT:
             sub_801E0E0();
             break;
         case 6:
             sub_801E0FC();
             break;
-        case 7:
+        case OPTIONS_MENU_CONFIRM_NEW_OPTIONS:
             HandleChangeSettingsMenu();
             break;
         default:
@@ -148,7 +158,7 @@ void sub_801DD50(void)
     }
 }
 
-void sub_801DD6C(u32 newState)
+void SetOptionsMenuState(u32 newState)
 {
     gUnknown_203B25C->state = newState;
     sub_801DD84();
@@ -380,18 +390,18 @@ void sub_801DD84(void)
 void sub_801DED0(void)
 {
   switch(gUnknown_203B25C->state) {
-    case 0:
-    case 1:
+    case OPTIONS_MENU_INIT:
+    case OPTIONS_MENU_MAIN:
         gUnknown_203B25C->unk1C.unk0 = gOthers_MenuOption;
         sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
         break;
-    case 3:
+    case OPTIONS_MENU_PRE_HINT_SELECTION:
         sub_801E3F0(0);
         break;
-    case 4:
+    case OPTIONS_MENU_HINT_SELECTION:
         CreateHintSelectionScreen(1);
         break;
-    case 5:
+    case OPTIONS_MENU_DISPLAY_HINT:
         CreateHintDisplayScreen(gUnknown_203B25C->chosenHintIndex);
         break;
     case 6:
@@ -399,7 +409,7 @@ void sub_801DED0(void)
         gUnknown_203B25C->newOptions = *gGameOptionsRef;
         sub_801E198(&gUnknown_203B25C->newOptions);
         break;
-    case 7:
+    case OPTIONS_MENU_CONFIRM_NEW_OPTIONS:
         CreateChangeSettingsConfirmMenu();
         // Change settings?
         sub_8014248(gUnknown_80DBFEC,0,4,gUnknown_203B25C->menuItems,0,4,0,0,0x20);
@@ -459,13 +469,13 @@ void HandleOthersMenu(void)
   switch(menuAction)
   {
     case MENU_OPTION_HINTS:
-        sub_801DD6C(3);
+        SetOptionsMenuState(OPTIONS_MENU_PRE_HINT_SELECTION);
         break;
     case MENU_OPTION_GAMEOPTIONS:
-        sub_801DD6C(6);
+        SetOptionsMenuState(6);
         break;
     case MENU_OPTION_DEFAULT:
-        sub_801DD6C(2);
+        SetOptionsMenuState(OPTIONS_MENU_EXIT);
         break;
   }
 }
@@ -478,11 +488,11 @@ void sub_801E088(void)
     case 3:
     case 4:
         gUnknown_203B25C->chosenHintIndex = GetChosenHintIndex();
-        sub_801DD6C(5);
+        SetOptionsMenuState(OPTIONS_MENU_DISPLAY_HINT);
         break;
     case 2:
         sub_801E54C();
-        sub_801DD6C(1);
+        SetOptionsMenuState(OPTIONS_MENU_MAIN);
         break;
     case 0:
     case 1:
@@ -499,7 +509,7 @@ void sub_801E0E0(void)
     case 3:
     case 2:
         DestroyHintDisplayScreen();
-        sub_801DD6C(4);
+        SetOptionsMenuState(OPTIONS_MENU_HINT_SELECTION);
         break;
     case 0:
     case 1:
@@ -517,10 +527,10 @@ void sub_801E0FC(void)
         sub_801E2C4();
         // Check to see if the options changed?
         if (GameOptionsNotChange(&gUnknown_203B25C->newOptions)) {
-            sub_801DD6C(1);
+            SetOptionsMenuState(OPTIONS_MENU_MAIN);
         }
         else {
-            sub_801DD6C(7);
+            SetOptionsMenuState(OPTIONS_MENU_CONFIRM_NEW_OPTIONS);
         }
         break;
     case 0:
@@ -542,11 +552,11 @@ void HandleChangeSettingsMenu(void)
             *gGameOptionsRef = gUnknown_203B25C->newOptions;
             SetWindowBGColor();
             sub_8099690(0);
-            sub_801DD6C(1);
+            SetOptionsMenuState(OPTIONS_MENU_MAIN);
             break;
         case MENU_OPTION_DEFAULT:
         case MENU_OPTION_NO:
-            sub_801DD6C(1);
+            SetOptionsMenuState(OPTIONS_MENU_MAIN);
             break;
     }
   }

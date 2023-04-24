@@ -89,7 +89,7 @@ void sub_803ACD0(u32 newState)
 
 void sub_803ACE8(void)
 {
-    s32 iVar2;
+    s32 index;
     sub_8006518(gUnknown_203B3F8->unkE0);
     switch(gUnknown_203B3F8->state)
     {
@@ -102,9 +102,9 @@ void sub_803ACE8(void)
             gUnknown_203B3F8->unkE0[3] = gUnknown_80E7F04;
             break;
         default:
-            for(iVar2 = 0; iVar2 < 4; iVar2++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B3F8->unkE0[iVar2] = gUnknown_80E7ED4;
+                gUnknown_203B3F8->unkE0[index] = gUnknown_80E7ED4;
             }
             break;
     }

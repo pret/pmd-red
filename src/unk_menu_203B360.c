@@ -38,14 +38,14 @@ extern void sub_80384D0();
 
 void sub_80382E4(s32 param_1)
 {
-  s32 iVar4;
+  s32 index;
   
   if (gUnknown_203B360 == NULL) {
     gUnknown_203B360 = MemoryAlloc(sizeof(struct unkStruct_203B360), 8);
     MemoryFill8((u8 *)gUnknown_203B360, 0, sizeof(struct unkStruct_203B360));
   }
-  for(iVar4 = 0; iVar4 < 4; iVar4++){
-    gUnknown_203B360->unk148[iVar4] = gUnknown_80E6E7C;
+  for(index = 0; index < 4; index++){
+    gUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
   } 
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B360->unk148,1,1);

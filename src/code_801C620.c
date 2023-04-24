@@ -22,7 +22,7 @@ struct unkStruct_203B234
     u32 unk24;
     struct MenuStruct unk28;
     struct MenuStruct unk78;
-    u32 unkC8;
+    u32 menuAction;
     struct MenuItem unkCC[5];
     struct UnkTextStruct2 unkF4[4];
 };
@@ -40,7 +40,7 @@ struct unkStruct_203B238
     u32 unk24;
     u8 iqSkillIndex;
     u32 numIQSkills;
-    s32 unk30;
+    s32 menuAction;
     struct MenuItem unk34[8];
     struct MenuStruct unk74;
     struct UnkTextStruct2 unkC4[4];
@@ -296,7 +296,7 @@ void sub_801BD80(void)
   sub_801A6E8(0);
   if (sub_8012FD8(&gUnknown_203B234->unk28) == '\0') {
     sub_8013114(&gUnknown_203B234->unk28,&menuAction);
-    if (menuAction != 1) gUnknown_203B234->unkC8 = menuAction;
+    if (menuAction != 1) gUnknown_203B234->menuAction = menuAction;
   }
   switch(menuAction)
   {
@@ -381,7 +381,7 @@ bool8 sub_801BEEC(s16 species)
   }
   else {
     gUnknown_203B238 = MemoryAlloc(sizeof(struct unkStruct_203B238),8);
-    gUnknown_203B238->unk30 = 0;
+    gUnknown_203B238->menuAction = 0;
     gUnknown_203B238->species = species_s32;
     gUnknown_203B238->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
     gUnknown_203B238->numIQSkills = GetNumAvailableIQSkills(gUnknown_203B238->iqSkills,gUnknown_203B238->pokeStruct->IQ);
@@ -459,7 +459,7 @@ void sub_801C03C(void)
       case 2:
         sub_801C4C8();
         sub_801C0C8();
-        sub_8012D60(&gUnknown_203B238->unk74,gUnknown_203B238->unk34,0,0,gUnknown_203B238->unk30,2);
+        sub_8012D60(&gUnknown_203B238->unk74,gUnknown_203B238->unk34,0,0,gUnknown_203B238->menuAction,2);
         break;
       case 3:
         sub_801C620(gUnknown_203B238->iqSkillIndex);
@@ -491,10 +491,10 @@ void sub_801C0C8(void)
     
   for(index = 0; index < max; index++) 
   {
-    if(gUnknown_203B238->unk34[index].menuAction == gUnknown_203B238->unk30)
+    if(gUnknown_203B238->unk34[index].menuAction == gUnknown_203B238->menuAction)
         return;
   }
-  gUnknown_203B238->unk30 = 2;
+  gUnknown_203B238->menuAction = 2;
 }
 
 void sub_801C118(void)
@@ -527,7 +527,7 @@ void sub_801C1A0(void)
   menuAction = 0;
   sub_801C308(0);
   if (!(sub_8012FD8(&gUnknown_203B238->unk74)) && (sub_8013114(&gUnknown_203B238->unk74,&menuAction), menuAction != 1)) {
-    gUnknown_203B238->unk30 = menuAction;
+    gUnknown_203B238->menuAction = menuAction;
   }
 
   switch(menuAction)

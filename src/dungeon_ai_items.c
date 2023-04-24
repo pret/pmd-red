@@ -43,12 +43,12 @@ extern struct TeamInventory *gTeamInventory_203B460;
 
 void sub_807360C(struct Entity *pokemon)
 {
-    s32 iVar2;
+    s32 index;
     struct Entity *entity;
 
-    for(iVar2 = 0; iVar2 < DUNGEON_MAX_POKEMON; iVar2++)
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[iVar2];
+        entity = gDungeon->allPokemon[index];
         if(EntityExists(entity))
         {
             if(entity->info->unk152 != 0)

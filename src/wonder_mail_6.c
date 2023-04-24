@@ -98,7 +98,7 @@ extern void sub_8030D40(u8, u32);
 
 bool8 sub_8030F58(u32 wonderMailType)
 {
-  struct OpenedFile *iVar3;
+  struct OpenedFile *file;
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -107,9 +107,9 @@ bool8 sub_8030F58(u32 wonderMailType)
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailType = wonderMailType;
-  iVar3 = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  gUnknown_203B328->faceFile = iVar3;
-  gUnknown_203B328->faceData = iVar3->data;
+  file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
+  gUnknown_203B328->faceFile = file;
+  gUnknown_203B328->faceData = file->data;
   gUnknown_203B328->unk114 = 0;
   gUnknown_203B328->unk115 = 0;
   gUnknown_203B328->unk116 = 0;

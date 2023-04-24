@@ -79,7 +79,7 @@ void sub_80277FC(void)
       case 3:
         gUnknown_203B2BC->targetPoke = sub_8023B44();
         pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->unk18 = pokeStruct;
+        gUnknown_203B2BC->pokeStruct = pokeStruct;
         gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
         PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(3);
@@ -87,7 +87,7 @@ void sub_80277FC(void)
       case 4:
         gUnknown_203B2BC->targetPoke = sub_8023B44();
         pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->unk18 = pokeStruct;
+        gUnknown_203B2BC->pokeStruct = pokeStruct;
         gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
         PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(4);
@@ -129,7 +129,7 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(2);
         break;
       case 7:
-        gUnknown_203B2BC->unk18->unk0 &= 0xfffd;
+        gUnknown_203B2BC->pokeStruct->unk0 &= 0xfffd;
         nullsub_104();
         sub_808ED00();
         SetFriendAreaActionMenuState(2);
@@ -209,7 +209,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->unk18->dungeonLocation.id == 0x44 || gUnknown_203B2BC->unk18->dungeonLocation.id == 0x45)
+    if (gUnknown_203B2BC->pokeStruct->dungeonLocation.id == 0x44 || gUnknown_203B2BC->pokeStruct->dungeonLocation.id == 0x45)
         return TRUE;
     else
         return FALSE;
@@ -217,10 +217,10 @@ static inline bool8 sub_8027A78_sub(void) {
 
 void sub_8027A78(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 1:
             case 3:
@@ -232,7 +232,7 @@ void sub_8027A78(void)
                 else
                 {
                     sub_8027EB8();
-                    sub_808D31C(gUnknown_203B2BC->unk18);
+                    sub_808D31C(gUnknown_203B2BC->pokeStruct);
                 }
                 break;
         }
@@ -252,7 +252,7 @@ void sub_8027AE4(void)
             break;
         case 2:
             sub_8027EB8();
-            sub_808D31C(gUnknown_203B2BC->unk18);
+            sub_808D31C(gUnknown_203B2BC->pokeStruct);
             break;
     }
   }
@@ -471,7 +471,7 @@ bool8 sub_8027E4C(struct PokemonStruct *pokeStruct)
 
 void sub_8027EB8(void)
 {
-    switch(sub_8027E18(gUnknown_203B2BC->unk18))
+    switch(sub_8027E18(gUnknown_203B2BC->pokeStruct))
     {
         case 1:
             PlaySound(0x14d);

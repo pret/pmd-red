@@ -191,9 +191,9 @@ void sub_802CFD0(void)
 u32 sub_802D098(struct unkSubStruct_203B2F8 *mail)
 {
   gUnknown_203B2F8 = MemoryAlloc(0x208,8);
-  gUnknown_203B2F8->unk6C = 0;
-  gUnknown_203B2F8->unk70 = 0;
-  gUnknown_203B2F8->unk74 = 0;
+  gUnknown_203B2F8->menuAction1 = 0;
+  gUnknown_203B2F8->menuAction2 = 0;
+  gUnknown_203B2F8->menuAction3 = 0;
   gUnknown_203B2F8->mail  = mail;
   gUnknown_203B2F8->wonderMailAccepted = FALSE;
   gUnknown_203B2F8->unk9 = sub_8099328(&gUnknown_203B2F8->dungeonID);
@@ -322,7 +322,7 @@ void sub_802D2A8(void)
         break;
       case 1:
         sub_802D73C();
-        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->menuAction2,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case DUPLICATE_WONDER_MAIL:
         gUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
@@ -374,7 +374,7 @@ void sub_802D2A8(void)
         break;
       case 9:
         sub_802D690();
-        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->menuAction3,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case JOB_LIST_FULL:
         gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST;
@@ -389,7 +389,7 @@ void sub_802D2A8(void)
       case 0xd:
         DrawJobListMenu();
         sub_8012D60(&gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
-                    gUnknown_203B2F8->unk6C,2);
+                    gUnknown_203B2F8->menuAction1,2);
         break;
       case 0xe:
         DrawJobListMenu();

@@ -12,7 +12,7 @@ struct unkStruct_203B2BC
     u32 id;
     struct BulkItem itemToGive;
     struct BulkItem item2;
-    struct PokemonStruct *unk18;
+    struct PokemonStruct *pokeStruct;
     bool8 isTeamLeader;
     u32 moveIndex;  // some sort of move index
     u16 moveID;

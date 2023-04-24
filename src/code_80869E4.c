@@ -148,13 +148,13 @@ void sub_8086434(struct Entity *entity)
 
 void sub_8086448(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_80862DC);
 
-    for(iVar1 = 0; iVar1 < 0x38; iVar1++)
+    for(index = 0; index < 0x38; index++)
     {
         XPos = GetCameraXPos();
         YPos = GetCameraYPos();
@@ -168,7 +168,7 @@ void sub_8086448(void)
 
 void sub_8086494(void)
 {
-    s32 iVar1;
+    s32 index;
 
     sub_8085930(DIRECTION_NORTHEAST);
     sub_803E708(4, 0x46);
@@ -183,7 +183,7 @@ void sub_8086494(void)
     sub_803E708(4, 0x46);
 
     sub_80855E4(sub_80863C8);
-    for(iVar1 = 0; iVar1 < 0x90; iVar1++)
+    for(index = 0; index < 0x90; index++)
     {
         sub_80855E4(sub_8086424);
         sub_803E46C(0x46);
@@ -193,13 +193,13 @@ void sub_8086494(void)
 
 void sub_8086500(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_8086348);
 
-    for(iVar1 = 0; iVar1 < 0x48; iVar1++)
+    for(index = 0; index < 0x48; index++)
     {
         XPos = GetCameraXPos();
         XPos += (0x80 << 1);
@@ -213,13 +213,13 @@ void sub_8086500(void)
 
 void sub_808654C(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_8086384);
 
-    for(iVar1 = 0; iVar1 < 0x78; iVar1++)
+    for(index = 0; index < 0x78; index++)
     {
         XPos = GetCameraXPos();
         XPos += (0x80 << 1);
@@ -233,13 +233,13 @@ void sub_808654C(void)
 
 void sub_8086598(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_80863B8);
 
-    for(iVar1 = 0; iVar1 < 0x18; iVar1++)
+    for(index = 0; index < 0x18; index++)
     {
         XPos = GetCameraXPos();
         YPos = GetCameraYPos();
@@ -252,13 +252,13 @@ void sub_8086598(void)
 
 void sub_80865E8(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_80863E8);
 
-    for(iVar1 = 0; iVar1 < 0xC; iVar1++)
+    for(index = 0; index < 0xC; index++)
     {
         XPos = GetCameraXPos();
         YPos = GetCameraYPos();
@@ -272,13 +272,13 @@ void sub_80865E8(void)
 
 void sub_808663C(void)
 {
-    s32 iVar1;
+    s32 index;
     u32 XPos;
     u32 YPos;
 
     sub_80855E4(sub_80863E8);
 
-    for(iVar1 = 0; iVar1 < 0x10; iVar1++)
+    for(index = 0; index < 0x10; index++)
     {
         XPos = GetCameraXPos();
         YPos = GetCameraYPos();
@@ -293,11 +293,11 @@ void sub_808663C(void)
 
 void sub_8086690(void)
 {
-    s32 iVar1;
+    s32 index;
 
     sub_80855E4(sub_80863D8);
 
-    for(iVar1 = 0; iVar1 < 0x30; iVar1++)
+    for(index = 0; index < 0x30; index++)
     {
         sub_80855E4(sub_8086434);
         sub_803E46C(0x46);
@@ -319,11 +319,11 @@ void sub_80866C4(u32 entity)
 
 void sub_80866FC(void)
 {
-    s32 iVar1;
+    s32 index;
 
-    for(iVar1 = 0; iVar1 >= -0xFA; iVar1 -= 0xA)
+    for(index = 0; index >= -0xFA; index -= 0xA)
     {
-        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(index, index, index, 1, 0);
         sub_803E46C(0x46);
     }
 }
@@ -335,22 +335,22 @@ void sub_808627C(void)
 
 void sub_8086738(void)
 {
-    s32 iVar1;
+    s32 index;
 
-    for(iVar1 = 0; iVar1 < 0xFA; iVar1 += 0xA)
+    for(index = 0; index < 0xFA; index += 0xA)
     {
-        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(index, index, index, 1, 0);
         sub_803E46C(0x46);
     }
 }
 
 void sub_8086764(void)
 {
-    s32 iVar1;
+    s32 index;
 
-    for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 5)
+    for(index = 0xFA; index >= 0; index -= 5)
     {
-        SetDungeonBGColorRGB(iVar1, iVar1, iVar1, 1, 0);
+        SetDungeonBGColorRGB(index, index, index, 1, 0);
         sub_803E46C(0x46);
     }
     sub_8085EB0();
@@ -358,16 +358,16 @@ void sub_8086764(void)
 
 void sub_8086794(void)
 {
-    s32 iVar1;
+    s32 index;
 
     gUnknown_202EDC8 = 0;
 
-    for(iVar1 = 0; iVar1 < 0xC8; iVar1++)
+    for(index = 0; index < 0xC8; index++)
     {
         SetDungeonBGColorRGB(0, 0, 0, 1, 0);
         sub_803E9D0();
         sub_803E46C(0x46);
-        if((iVar1 & 3) == 0)
+        if((index & 3) == 0)
         {
             gUnknown_202EDC8++;
             if(gUnknown_202EDC8 == 0x1F)

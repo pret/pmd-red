@@ -578,16 +578,16 @@ void sub_8031A3C(void)
 
 void sub_8031A84(void)
 {
-  s32 iVar1;
+  s32 jobs;
 
   sub_8006518(gUnknown_203B330->unk18);
   gUnknown_203B330->unk18[gUnknown_203B330->unk10] = gUnknown_80E1F18;
   if (gUnknown_203B330->unkC == 2) {
-    iVar1 = CountJobsinDungeon(gUnknown_203B330->dungeonIndex);
-    if (iVar1 == 0) {
-      iVar1 = 1;
+    jobs = CountJobsinDungeon(gUnknown_203B330->dungeonIndex);
+    if (jobs == 0) {
+      jobs = 1;
     }
-    sub_8012D08(gUnknown_203B330->unk14,iVar1);
+    sub_8012D08(gUnknown_203B330->unk14,jobs);
   }
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B330->unk18,1,1);
