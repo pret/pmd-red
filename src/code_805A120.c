@@ -1380,7 +1380,7 @@ bool8 sub_805AD54(struct Entity * pokemon, struct Entity * target, struct Move *
     targetEntity = possibleTargets[index];
     if ((((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
         (CanTarget(pokemon,targetEntity,FALSE,FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK)) &&
-       (targetEntity->info->clientType != ENTITY_MONSTER)) {
+       (targetEntity->info->clientType != CLIENT_TYPE_CLIENT)) {
       if (!sub_805AD54_sub(targetEntity)) {
         sub_807D148(pokemon,targetEntity,2,&target->pos);
         flag = TRUE;

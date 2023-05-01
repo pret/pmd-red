@@ -1,9 +1,11 @@
 #include "global.h"
 #include "constants/item.h"
 #include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_random.h"
 #include "item.h"
+#include "map.h"
 
 extern u8 *gUnknown_80FE6F4[];
 extern struct unkStruct_8090F58 gUnknown_80F699C;
@@ -16,6 +18,8 @@ extern void GetTrapName(u8 *, u8);
 extern bool8 IsNotSpecialItem(u8 id);
 void sub_8045BF8(u8 *, struct Item *);
 void sub_8046CE4(void *param_1,u32 param_2);
+extern u32 sub_803D73C(u32);
+void sub_80460F8(struct Position *, struct Item *, u32);
 
 void sub_8045ACC(void)
 {
@@ -126,5 +130,71 @@ _store:
     total = (gDungeon->unk1C58B << 2) + gDungeon->unk1C58B;
     total <<= 3;
     sub_8046CE4(Item, total);
+  }
+}
+
+void sub_8045CB0(void)
+{
+  bool8 shopFlag;
+  u8 itemID;
+  u32 x;
+  int y;
+  int yCounter;
+  struct Tile *tile;
+  u32 uVar5;
+  int xCounter;
+  struct Item item;
+  struct Position pos;
+  u32 flag;
+  
+  x = DungeonRandInt(DUNGEON_MAX_SIZE_X);
+  y = DungeonRandInt(DUNGEON_MAX_SIZE_Y);
+  gDungeon->unk3904 = 0;
+  for(yCounter = 0; yCounter < DUNGEON_MAX_SIZE_Y; yCounter++)
+  {
+    y++;
+    if (y == DUNGEON_MAX_SIZE_Y) {
+      y = 0;
+    }
+
+    for(xCounter = 0; xCounter < DUNGEON_MAX_SIZE_X; xCounter++)
+    {
+      x++;
+      flag = ITEM_FLAG_IN_SHOP;
+      if (x == DUNGEON_MAX_SIZE_X) {
+        x = 0;
+      }
+      tile = GetTile(x,y);
+
+      if (((tile->terrainType & TERRAIN_TYPE_STAIRS) == 0) && ((tile->unk4 & 2) != 0)) {
+        shopFlag = FALSE;
+        pos.x = x;
+        pos.y = y;
+
+        if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+          shopFlag = TRUE;
+          uVar5 = 1;
+        }
+        else
+        {
+          if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0) {
+            uVar5 = 3;
+          }
+          else {
+            // TODO: Ternary?
+            uVar5 = -(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE) >> 0x1f & 2;
+          }
+        }
+        itemID = sub_803D73C(uVar5);
+        if (!CanSellItem(itemID)) {
+          shopFlag = 0;
+        }
+        sub_8045C28(&item,itemID,0);
+        if (shopFlag) {
+          item.flags |= flag;
+        }
+        sub_80460F8(&pos,&item,1);
+      }
+    }
   }
 }
