@@ -331,9 +331,8 @@ void DrawDojoCourseList(void)
   xxx_call_draw_string(10,0,gMakuhitaDojoHeader,gUnknown_203B31C->unk64,0); // Courses
   sub_8012BC4(gUnknown_203B31C->unkCC[2] * 8 + 4,0,
             gUnknown_203B31C->unk4E + 1,2,7,gUnknown_203B31C->unk64);
-  index = 0;
-  if (index < gUnknown_203B31C->unk4A) {
-    do {
+  for (index = 0; index < gUnknown_203B31C->unk4A; index++)
+    {
       iVar6 = gUnknown_203B31C->unk0[gUnknown_203B31C->unk4E * gUnknown_203B31C->unk4C + index];
       dungeonIndex = sub_80A2740(iVar6);
 
@@ -347,9 +346,7 @@ void DrawDojoCourseList(void)
       }
       sprintfStatic(buffer,gMakuhitaCoursePlaceholder,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
       xxx_call_draw_string(0x10,y,buffer,gUnknown_203B31C->unk64,0);
-      index++;
-    } while (index < gUnknown_203B31C->unk4A);
-  }
+    }
   sub_80073E0(gUnknown_203B31C->unk64);
 }
 

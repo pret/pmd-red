@@ -747,40 +747,36 @@ void sub_801C440(void)
 
 void sub_801C4C8(void)
 {
-  u32 y;
-  s32 x;
-  s32 x2;
-  u32 skillIndex;
-  s32 counter;
-  
-  sub_8008C54(gUnknown_203B23C->unk58);
-  sub_80073B8(gUnknown_203B23C->unk58);
-  x = gUnknown_203B23C->unk42 * 8;
-  x2 = x;
-  x2 += 10;
-  xxx_call_draw_string(x2,0,gUnknown_80DBE08,gUnknown_203B23C->unk58,0);
-  x += 4;
-  x2 = x + gUnknown_203B23C->unkC2 * 8;
-  sub_8012BC4(x2,0,gUnknown_203B23C->unk42 + 1,1,7,
-              gUnknown_203B23C->unk58);
-  counter = 0;
-  if (counter < gUnknown_203B23C->unk3E) {
-    do {
-      skillIndex = gUnknown_203B23C->iqSkills
-                    [gUnknown_203B23C->unk42 * gUnknown_203B23C->unk40 + counter];
-      y = sub_8013800(&gUnknown_203B23C->unk24,counter);
-      strncpy(gUnknown_202DEA8,GetIQSkillName(skillIndex),0x50);
-      if (IsIQSkillSet((u8 *)&gUnknown_203B23C->pokeStruct->IQSkills,1 << skillIndex)) {
-        strcpy(gUnknown_202DEA8 - 0x50,gUnknown_80DBE14);
-      }
-      else {
-        strcpy(gUnknown_202DEA8 - 0x50,gUnknown_80DBE18);
-      }
-      xxx_format_and_draw(0xc,y,gUnknown_80DBE1C,gUnknown_203B23C->unk58,0);
-      counter++;
-    } while (counter < gUnknown_203B23C->unk3E);
-  }
-  sub_80073E0(gUnknown_203B23C->unk58);
+    u32 y;
+    s32 x;
+    s32 x2;
+    u32 skillIndex;
+    s32 counter;
+
+    sub_8008C54(gUnknown_203B23C->unk58);
+    sub_80073B8(gUnknown_203B23C->unk58);
+    x = gUnknown_203B23C->unk42 * 8;
+    x2 = x;
+    x2 += 10;
+    xxx_call_draw_string(x2,0,gUnknown_80DBE08,gUnknown_203B23C->unk58,0);
+    x += 4;
+    x2 = x + gUnknown_203B23C->unkC2 * 8;
+    sub_8012BC4(x2,0,gUnknown_203B23C->unk42 + 1,1,7,
+                gUnknown_203B23C->unk58);
+    for (counter = 0; counter < gUnknown_203B23C->unk3E; counter++) {
+        skillIndex = gUnknown_203B23C->iqSkills
+            [gUnknown_203B23C->unk42 * gUnknown_203B23C->unk40 + counter];
+        y = sub_8013800(&gUnknown_203B23C->unk24,counter);
+        strncpy(gUnknown_202DEA8,GetIQSkillName(skillIndex),0x50);
+        if (IsIQSkillSet((u8 *)&gUnknown_203B23C->pokeStruct->IQSkills,1 << skillIndex)) {
+            strcpy(gUnknown_202DEA8 - 0x50,gUnknown_80DBE14);
+        }
+        else {
+            strcpy(gUnknown_202DEA8 - 0x50,gUnknown_80DBE18);
+        }
+        xxx_format_and_draw(0xc,y,gUnknown_80DBE1C,gUnknown_203B23C->unk58,0);
+    }
+    sub_80073E0(gUnknown_203B23C->unk58);
 }
 
 bool8 HasNoAvailIQSkills(s16 species)

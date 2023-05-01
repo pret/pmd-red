@@ -170,20 +170,15 @@ void sub_802CFD0(void)
   r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
   sub_8012BC4(r5,0,gUnknown_203B2F4->unk1E + 1,2,7,gUnknown_203B2F4->unk34);
 
-  r5 = 0;
-  
-  if(r5 < gUnknown_203B2F4->unk1A)
+  for(r5 = 0; r5 < gUnknown_203B2F4->unk1A; r5++)
   {
-    while(r5 < gUnknown_203B2F4->unk1A) {
         iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
         local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.y = sub_8013800(gUnknown_203B2F4,r5);
+        local.y = sub_8013800(gUnknown_203B2F4, r5);
         sub_803B35C(iVar1,local.unk0);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
-        r5++;
-    }
   }
   sub_80073E0(gUnknown_203B2F4->unk34);
 }
