@@ -97,9 +97,14 @@ struct unk_203B250
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    u8 fillA[0x14 - 0xA];
-    u32 unk14;
+    u8 fillA[0xC - 0xA];
+    struct PokemonStruct *unkC;
+    u32 state;
+    u32 menuAction;
     struct MenuStruct unk18;
+    struct MenuItem unk68[8];
+    u16 unkA8[8];
+    struct UnkTextStruct2 unkB8[4];
 };
 
 struct unk_203B250 *gUnknown_203B250;
@@ -111,7 +116,7 @@ void sub_801D680(void)
 
   menuAction = 0;
   if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&menuAction), menuAction != 1)) {
-    gUnknown_203B250->unk14 = menuAction;
+    gUnknown_203B250->menuAction = menuAction;
   }
   switch(menuAction) {
       case 2:
