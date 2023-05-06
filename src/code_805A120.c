@@ -11,6 +11,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_movement_1.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "item.h"
@@ -96,7 +97,6 @@ extern void sub_80943A0(void*, s32);
 s32 RoundUpFixedPoint(s32 fixedPointNumber);
 extern s16 sub_8057600(struct Move*, u32);
 extern void sub_806CDD4(struct Entity *, u32, u32);
-extern bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(struct Position *pos);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
@@ -109,7 +109,6 @@ extern void sub_804535C(struct Entity *, u32);
 extern void sub_804AC20(struct Position *);
 extern void sub_806A5B8(struct Entity *entity);
 extern void sub_80694C0(struct Entity *, s32, s32, u32);
-bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos);
 extern void sub_807D148(struct Entity *pokemon, struct Entity *target, u32 r2, struct Position *r3);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void SetMessageArgument_2(u8 *buffer, struct EntityInfo *r1, u32);

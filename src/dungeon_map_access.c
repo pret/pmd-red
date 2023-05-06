@@ -5,6 +5,8 @@
 #include "dungeon_global_data.h"
 #include "file_system.h"
 #include "tile_types.h"
+#include "random.h"
+#include "dungeon_engine.h"
 
 extern struct unkStruct_202F190 gUnknown_202F190;
 extern struct unkStruct_202F190 *gUnknown_203B430;
@@ -29,6 +31,8 @@ extern u8 sub_8043CE4(u32);
 
 extern void sub_8004AA4(u8 *, struct OpenedFile *, u32);
 extern int sprintf(char *, const char *, ...);
+void sub_8049BB0(s32, s32);
+void sub_80498A8(s32, s32);
 
 struct Tile* GetTile(s32 x, s32 y)
 {
@@ -134,7 +138,6 @@ void sub_8049840(void)
   }
 }
 
-extern void sub_80498A8(s32, s32);
 
 void sub_8049884(void)
 {
@@ -148,3 +151,187 @@ void sub_8049884(void)
     }
   }
 }
+
+void sub_80498A8(int x,int y)
+{
+  volatile u32 sp_0x0;
+  volatile u32 sp_0x4;
+  volatile u32 sp_0x8;
+  volatile u32 sp_0xC;
+  volatile u32 sp_0x10;
+  volatile u32 sp_0x14;
+  volatile u32 sp_0x18;
+  volatile u32 sp_0x1C;
+  u32 r1;
+  u16 sp_0x20; // sp 0x20
+  int r4;
+  s32 r7; // r7
+  
+  if (x < 0) {
+    return;
+  }
+  if (y < 0) {
+    return;
+  }
+  if (DUNGEON_MAX_SIZE_X <= x) {
+    return;
+  }
+  if (DUNGEON_MAX_SIZE_Y <= y) {
+    return;
+  }
+  r7 = 0;
+  sp_0x20 = GetTile(x, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  if (gDungeon->tileset >= 0x40) {
+    if ((0x17 >= x) && (0x17 >= y)) {
+        GetTileSafe(x,y)->unk8 = gDungeon->unk12C24[y * 0x18 + x];
+    }
+    else {
+      GetTileSafe(x,y)->unk8 = 0;
+    }
+  }
+  else
+  {
+    sp_0x0 = GetTile(x,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x4 = GetTile(x + 1,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x8 = GetTile(x + 1,y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0xC = GetTile(x + 1,y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x10 = GetTile(x, y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x14 = GetTile(x - 1,y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x18 = GetTile(x - 1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    r1 =  GetTile(x - 1,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x1C = r1;
+    if (sp_0x20 == 1) {
+      r7 = 0xFF;
+      if (sp_0x0 == 0) {
+        r7 = 0xfe;
+      }
+      if (sp_0x4 == 0) {
+        r7 &= -3;
+      }
+      if (sp_0x8 == 0) {
+        r7 &= -5;
+      }
+      if (sp_0xC == 0) {
+        r7 &= -9;
+      }
+      if (sp_0x10 == 0) {
+        r7 &= -17;
+      }
+      if (sp_0x14 == 0) {
+        r7 &= 0xffffffdf;
+      }
+      if (sp_0x18 == 0) {
+        r7 &= 0xffffffbf;
+      }
+      if (r1 == 0) {
+        r7 &= 0xffffff7f;
+      }
+      r7 |= 0x200;
+    }
+    else if (sp_0x20 == 2) {
+        r7 = 0xff;
+        if (sp_0x0 != 2) {
+          r7 = 0xfe;
+        }
+        if (sp_0x4 != 2) {
+          r7 &= 0xfffffffd;
+        }
+        if (sp_0x8 != 2) {
+          r7 &= 0xfffffffb;
+        }
+        if (sp_0xC != 2) {
+          r7 &= 0xfffffff7;
+        }
+        if (sp_0x10 != 2) {
+          r7 &= 0xffffffef;
+        }
+        if (sp_0x14 != 2) {
+          r7 &= 0xffffffdf;
+        }
+        if (sp_0x18 != 2) {
+          r7 &= 0xffffffbf;
+        }
+        if (r1 != 2) {
+          r7 &= 0xffffff7f;
+        }
+        r7 |= 0x100;
+      }
+    else if (sp_0x20 == 3) {
+        r7 = 0xff;
+        if (sp_0x0 != 3) {
+          r7 = 0xfe;
+        }
+        if (sp_0x4 != 3) {
+          r7 &= 0xfffffffd;
+        }
+        if (sp_0x8 != 3) {
+          r7 &= 0xfffffffb;
+        }
+        if (sp_0xC != 3) {
+          r7 &= 0xfffffff7;
+        }
+        if (sp_0x10 != 3) {
+          r7 &= 0xffffffef;
+        }
+        if (sp_0x14 != 3) {
+          r7 &= 0xffffffdf;
+        }
+        if (sp_0x18 != 3) {
+          r7 &= 0xffffffbf;
+        }
+        if (sp_0x1C != 3) {
+          r7 &= 0xffffff7f;
+        }
+        r7 |= 0x100;
+    }
+    else
+    {
+      if (sp_0x0 == 0) {
+        r7 = 1;
+      }
+      if (sp_0x4 == 0) {
+        r7 |= 2;
+      }
+      if (sp_0x8 == 0) {
+        r7 |= 4;
+      }
+      if (sp_0xC == 0) {
+        r7 |= 8;
+      }
+      if (sp_0x10 == 0) {
+        r7 |= 0x10;
+      }
+      if (sp_0x14 == 0) {
+        r7 |= 0x20;
+      }
+      if (sp_0x18 == 0) {
+        r7 |= 0x40;
+      }
+      if (sp_0x1C == 0) {
+        r7 |= 0x80;
+      }
+    }
+    r4 = RandInt(4);
+    if (r4 == 3) {
+      r4 = 0;
+    }
+    if (IsBossFight()) {
+      r4 = 0;
+    }
+    GetTileSafe(x,y)->unk8 = gDungeon->unk12C24[r4 + r7 * 3];
+  }
+}
+
+void sub_8049B8C(void)
+{
+  s32 XCoord;
+  s32 YCoord;
+  
+  for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
+  {
+    for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++) {
+      sub_8049BB0(XCoord,YCoord);
+    }
+  }
+}
+
