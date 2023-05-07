@@ -27,23 +27,23 @@ typedef void (*DungeonCallback)(struct Entity *);
 
 void sub_80855E4(DungeonCallback func)
 {
-    bool8 bVar1;
+    bool8 flag;
     struct Entity * entity;
     struct Entity * partnerEntity;
     s32 index;
 
-    bVar1 = FALSE;
+    flag = FALSE;
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
             if (entity->info->joinedAt == 0x41) {
-                bVar1 = TRUE;
+                flag = TRUE;
             }
             func(entity);
         }
     }
-    if ((!bVar1) && (partnerEntity = GetPartnerEntity(), partnerEntity != NULL)) {
+    if ((!flag) && (partnerEntity = GetPartnerEntity(), partnerEntity != NULL)) {
         func(partnerEntity);
     }
 }
