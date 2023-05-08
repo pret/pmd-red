@@ -1,6 +1,15 @@
 #ifndef GUARD_BG_H
 #define GUARD_BG_H
 
+enum
+{
+    BG0,
+    BG1,
+    BG2,
+    BG3,
+    NUM_BGS
+};
+
 struct BGControlStruct
 {
     u16 padding;
@@ -8,6 +17,11 @@ struct BGControlStruct
     s16 hofs;
     s16 vofs;
 };
+
+extern struct BGControlStruct gBG0Control;
+extern struct BGControlStruct gBG1Control;
+extern struct BGControlStruct gBG2Control;
+extern struct BGControlStruct gBG3Control;
 
 void SetBG0RegOffsets(s32 xoffset, s32 yoffset);
 void SetBG1RegOffsets(s32 xoffset, s32 yoffset);
