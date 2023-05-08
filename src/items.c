@@ -13,8 +13,6 @@
 
 #include <stddef.h>
 
-extern struct TeamInventory *gTeamInventory_203B460;
-extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
@@ -34,8 +32,10 @@ extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u8 gInvalidItemIDs[0x10];
 
-EWRAM_DATA struct OpenedFile *gItemParametersFile;
-EWRAM_DATA struct ItemDataEntry *gItemParametersData;
+EWRAM_DATA struct OpenedFile *gItemParametersFile = {0};
+EWRAM_DATA struct ItemDataEntry *gItemParametersData = {0};
+EWRAM_DATA struct TeamInventory gUnknown_20389A8 = {0};
+EWRAM_DATA_2 struct TeamInventory *gTeamInventory_203B460 = {0};
 
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);

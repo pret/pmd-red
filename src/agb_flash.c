@@ -6,6 +6,17 @@ static u16 sTimerCount;
 static vu16 *sTimerReg;
 static u16 sSavedIme;
 
+EWRAM_DATA_2 u8 gFlashTimeoutFlag = {0};
+EWRAM_DATA_2 u8 (*PollFlashStatus)(u8 *) = {0};
+EWRAM_DATA_2 u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData) = {0};
+EWRAM_DATA_2 u16 (*ProgramFlashSector)(u16 sectorNum, u8 *src) = {0};
+EWRAM_DATA_2 const struct FlashType *gFlash = {0};
+// u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data); // not used in PMD: Red
+EWRAM_DATA_2 u16 gFlashNumRemainingBytes = {0};
+EWRAM_DATA_2 u16 (*EraseFlashChip)() = {0};
+EWRAM_DATA_2 u16 (*EraseFlashSector)(u16 sectorNum) = {0};
+EWRAM_DATA_2 const u16 *gFlashMaxTime = {0};
+
 void SetReadFlash1(u16 *dest);
 
 void SwitchFlashBank(u8 bankNum)

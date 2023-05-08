@@ -1,7 +1,7 @@
 #include "global.h"
 #include "random.h"
 
-extern s32 gPRNGSequenceNum;
+EWRAM_DATA_2 s32 gPRNGSequenceNum = {0};
 
 void SeedRng(u8 *seed)
 {

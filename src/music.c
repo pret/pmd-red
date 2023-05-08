@@ -3,17 +3,14 @@
 #include "music.h"
 #include "constants/bg_music.h"
 
-EWRAM_DATA u16 gBGMusicPlayerState;
-EWRAM_DATA u16 gCurrentBGSong;
-EWRAM_DATA u16 gQueuedBGSong;
-EWRAM_DATA u16 gCurrentFanfareSong;
-EWRAM_DATA u16 gFanfareMusicPlayerState;
-EWRAM_DATA u16 gMusicTransitionCounter;
-EWRAM_DATA bool8 gRestartBGM;
+EWRAM_DATA u16 gBGMusicPlayerState = {0};
+EWRAM_DATA u16 gCurrentBGSong = {0};
+EWRAM_DATA u16 gQueuedBGSong = {0};
+EWRAM_DATA u16 gCurrentFanfareSong = {0};
+EWRAM_DATA u16 gFanfareMusicPlayerState = {0};
+EWRAM_DATA u16 gMusicTransitionCounter = {0};
+EWRAM_DATA bool8 gRestartBGM = {0};
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM; // BGM??
-
-// IWRAM
 IWRAM_DATA struct PMDMusicPlayer gBGMusicPlayers[NUM_BG_PLAYERS] = {0};
 IWRAM_DATA struct PMDMusicPlayer gSEMusicPlayers[NUM_SE_PLAYERS] = {0};
 

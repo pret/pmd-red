@@ -8,8 +8,9 @@ extern const char gUnknown_81075F4;
 EWRAM_DATA struct MonsterDataEntry *gMonsterParameters;
 EWRAM_DATA struct OpenedFile *gMonsterParametersFile;
 EWRAM_DATA struct unkStruct_203B45C gRecruitedPokemon;
-extern struct unkStruct_203B45C *gRecruitedPokemonRef;
 EWRAM_DATA u16 gLevelCurrentPokeId;
+
+EWRAM_DATA_2 struct unkStruct_203B45C *gRecruitedPokemonRef = {0};
 
 
 void LoadMonsterParameters(void)

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "dungeon_random.h"
 
-extern u32 gDungeonRngState;
+EWRAM_DATA_2 u32 gDungeonRngState = {0};
 
 void InitDungeonRNG(u32 value)
 {

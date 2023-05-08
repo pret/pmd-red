@@ -34,8 +34,8 @@ enum
     PERSONALITY_TEST_END,
 };
 
-EWRAM_DATA struct PersonalityTestTracker *gPersonalityTestTracker;
-EWRAM_DATA struct PersonalityStruct_203B404 *gUnknown_203B404;
+EWRAM_DATA_2 struct PersonalityTestTracker *gPersonalityTestTracker = {0};
+EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};
 
 
 extern void sub_801317C(u32 *);

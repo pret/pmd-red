@@ -1,3 +1,4 @@
+#include "gba/defines.h"
 #include "global.h"
 #include "game_options.h"
 #include "code_8092334.h"
@@ -16,8 +17,8 @@ struct unkStruct_8094CB0
 
 extern struct WindowBG gWindowBGColors;
 
-extern struct GameOptions *gGameOptionsRef;
-extern struct GameOptions gGameOptions;
+EWRAM_DATA_2 struct GameOptions *gGameOptionsRef = {0};
+EWRAM_DATA struct GameOptions gGameOptions = {0};
 extern void SetWindowBGColor(void);
 extern void sub_80099F0(u32);
 

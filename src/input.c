@@ -1,13 +1,13 @@
 #include "global.h"
 #include "input.h"
 
-EWRAM_DATA struct Inputs gRealInputs;
-EWRAM_DATA struct UnusedInputStruct gUnusedInputsRelated;
-EWRAM_DATA u32 gUnusedScrambledInputJunk;
-EWRAM_DATA struct Inputs gBufferedInputs;
-EWRAM_DATA struct Inputs gCurrentInputs;
-EWRAM_DATA struct Inputs gLastInputs;
-EWRAM_DATA struct InputTimers gInputTimers;
+EWRAM_DATA struct Inputs gRealInputs = {0};
+EWRAM_DATA struct UnusedInputStruct gUnusedInputsRelated = {0};
+EWRAM_DATA u32 gUnusedScrambledInputJunk = {0};
+EWRAM_DATA struct Inputs gBufferedInputs = {0};
+EWRAM_DATA struct Inputs gCurrentInputs = {0};
+EWRAM_DATA struct Inputs gLastInputs = {0};
+EWRAM_DATA struct InputTimers gInputTimers = {0};
 
 void ReadKeyInput(struct Inputs *r0);
 

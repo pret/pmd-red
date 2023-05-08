@@ -2,13 +2,13 @@
 #include "input.h"
 #include "bg.h"
 
-EWRAM_DATA struct BGControlStruct gBG0Control;
-EWRAM_DATA struct BGControlStruct gBG1Control;
-EWRAM_DATA struct BGControlStruct gBG2Control;
-EWRAM_DATA struct BGControlStruct gBG3Control;
+EWRAM_DATA struct BGControlStruct gBG0Control = {0};
+EWRAM_DATA struct BGControlStruct gBG1Control = {0};
+EWRAM_DATA struct BGControlStruct gBG2Control = {0};
+EWRAM_DATA struct BGControlStruct gBG3Control = {0};
+EWRAM_DATA u8 gBldAlpha_CoeffA = {0};
+EWRAM_DATA u8 gBldAlpha_CoeffB = {0};
 
-EWRAM_DATA u8 gBldAlpha_CoeffA;
-EWRAM_DATA u8 gBldAlpha_CoeffB;
 EWRAM_DATA u16 gBldAlpha;
 EWRAM_DATA u16 gBldCnt;
 EWRAM_DATA u8 gUnknown_202D7FE;

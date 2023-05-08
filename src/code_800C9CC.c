@@ -5,8 +5,8 @@
 void sub_800BA5C();
 void xxx_update_bg_sound_input();
 
-extern u16 gRawKeyInput;
 extern u32 gUnknown_203B0B8;
+extern u16 gRawKeyInput;
 
 void sub_800CB20(void)
 {

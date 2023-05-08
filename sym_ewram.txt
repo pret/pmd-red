@@ -1,30 +1,5 @@
 
-gMPlayInfo_SE4: /* 2000870 */
-        .space 0x40
-
-gMPlayInfo_SE5: /* 20008B0 */
-        .space 0x40
-
-gMPlayInfo_BGM: /* 20008F0 */
-	.space 0x40
-
-gMPlayInfo_SE6: /* 2000930 */
-	.space 0x40
-
-gMPlayInfo_Fanfare: /* 2000970 */
-	.space 0x40
-
-gMPlayInfo_SE1: /* 20009B0 */
-	.space 0x40
-
-gMPlayInfo_SE3: /* 20009F0 */
-	.space 0x40
-
-gMPlayMemAccArea: /* 2000A30 */
-	.space 0x10
-
-gMPlayInfo_SE2: /* 2000A40 */
-	.space 0x40
+    .include "src/m4a.o"
 
 gUnknown_2000A80: /* 2000A80 */
 	.space 0x8
@@ -32,11 +7,7 @@ gUnknown_2000A80: /* 2000A80 */
 gUnknown_2000A88: /* 2000A88 */
 	.space 0x400
 
-gHeapDescriptorList: /* 2000E88 */
-	.space 0x20
-
-gHeapCount: /* 2000EA8 */
-	.space 0x4
+    .include "src/memory.o"
 
 	.align 4
 
@@ -49,11 +20,7 @@ gMainHeapFreeList: /* 2000ED0 */
 gMainHeap: /* 20011D0 */
 	.space 0x24000
 
-gBGPaletteUsed: /* 20251D0 */
-	.space 0x20
-
-gBGPaletteBuffer: /* 20251F0 */
-	.space 0x400
+    .include "src/bg_palette_buffer.o"
 
 gRealInputs: /* 20255F0 */
 	.space 0x10
@@ -256,32 +223,8 @@ gUnknown_202D240: /* 202D240 */
 gUnknown_202D2A0: /* 202D2A0 */
 	.space 0x4
 
-gUnknown_202D2A4: /* 202D2A4 */
-	.space 0x4
-
-gFileCache: /* 202D2A8 */
-	.space 0x200
-
-gDecompressBufferPtr: /* 202D4A8 */
-	.space 0x4
-
-gDecompressBufferStart: /* 202D4AC */
-	.space 0x4
-
-gDecompressBufferCurrent: /* 202D4B0 */
-	.space 0x4
-
-gDecompressBufferByteInInt: /* 202D4B4 */
-	.space 0x4
-
-IntrMain_Buffer: /* 202D4B8 */
-	.space 0x120
-
-gIntrTable: /* 202D5D8 */
-	.space 0x18
-
-gIntrCallbacks: /* 202D5F0 */
-	.space 0x18
+    .include "src/file_system.o"
+    .include "src/main.o"
 
 gUnknown_202D608: /* 202D608 */
 	.space 0x40
@@ -289,44 +232,11 @@ gUnknown_202D608: /* 202D608 */
 gUnknown_202D648: /* 202D648 */
 	.space 0x40
 
-gBGMusicPlayerState: /* 202D688 */
-	.space 0x2
+    .include "src/music.o"
+    .space 0x3
 
-gCurrentBGSong: /* 202D68A */
-	.space 0x2
-
-gQueuedBGSong: /* 202D68C */
-	.space 0x2
-
-gCurrentFanfareSong: /* 202D68E */
-	.space 0x2
-
-gFanfareMusicPlayerState: /* 202D690 */
-	.space 0x2
-
-gMusicTransitionCounter: /* 202D692 */
-	.space 0x2
-
-gRestartBGM: /* 202D694 */
-	.space 0x4
-
-gBG0Control: /* 202D698 */
-	.space 0x8
-
-gBG1Control: /* 202D6A0 */
-	.space 0x8
-
-gBG2Control: /* 202D6A8 */
-	.space 0x8
-
-gBG3Control: /* 202D6B0 */
-	.space 0x8
-
-gBldAlpha_CoeffA: /* 202D6B8 */
-	.space 0x1
-
-gBldAlpha_CoeffB: /* 202D6B9 */
-	.space 0x141
+    .include "src/bg_control.o"
+	.space 0x140
 
 gBldAlpha: /* 202D7FA */
 	.space 0x2
@@ -887,20 +797,13 @@ gLevelCurrentPokeId: /* 20384E8 */
 gLevelCurrentData: /* 20384F0 */
 	.space 0x4B0
 
-gItemParametersFile: /* 20389A0 */
+    .include "src/items.o"
+
+    .include "src/rescue_team_info.o"
 	.space 0x4
 
-gItemParametersData: /* 20389A4 */
-	.space 0x4
-
-gUnknown_20389A8: /* 20389A8 */
-	.space 0x268
-
-gRescueTeamInfo: /* 2038C10 */
-	.space 0x18
-
-gBoughtFriendAreas: /* 2038C28 (one byte for each friend area) */
-	.space 0x3C
+    .include "src/friend_area.o"
+    .space 0x2
 
 gWazaParametersFile: /* 2038C64 */
 	.space 0x4
@@ -911,11 +814,8 @@ gMovesData: /* 2038C68 */
 gMoveLearnsets: /* 2038C6C */
 	.space 0x4
 
-gGameOptions: /* 2038C70 */
-	.space 0x10
-
-gPlayTime: /* 2038C80 */
-	.space 0x8
+    .include "src/game_options.o"
+    .include "src/play_time.o"
 
 gUnknown_2038C88: /* 2038C88 */
 	.space 0x600
@@ -935,8 +835,8 @@ gUnknown_2039448: /* 2039448 */
 gUnknown_2039778: /* 2039778 */
 	.space 0xC8
 
-gExclusivePokemonInfo: /* 2039840 */
-	.space 0x68
+.include "src/exclusive_pokemon.o"
+.space 0x4
 
 gUnknown_20398A8: /* 20398A8 */
 	.space 0x4
