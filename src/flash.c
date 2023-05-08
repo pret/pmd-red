@@ -3,7 +3,7 @@
 #include "flash.h"
 #include "memory.h"
 
-EWRAM_DATA u8 gFlashEnabled;
+u8 gFlashEnabled;
 
 extern FlashIntrFunc *GetInterruptHandler(s32);
 

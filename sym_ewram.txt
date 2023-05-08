@@ -1,26 +1,3 @@
-gMPlayTrack_BGM: /* 2000000 */
-        .space 0x3C0
-
-gMPlayTrack_Fanfare: /* 20003C0 */
-        .space 0x1E0
-
-gMPlayTrack_SE1: /* 20005A0 */
-        .space 0x50
-
-gMPlayTrack_SE2: /* 20005F0 */
-        .space 0x50
-
-gMPlayTrack_SE3: /* 2000640 */
-        .space 0xA0
-
-gMPlayTrack_SE4: /* 20006E0 */
-        .space 0xA0
-
-gMPlayTrack_SE5: /* 2000780 */
-        .space 0xA0
-
-gMPlayTrack_SE6: /* 2000820 */
-        .space 0x50
 
 gMPlayInfo_SE4: /* 2000870 */
         .space 0x40

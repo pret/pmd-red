@@ -17,12 +17,12 @@ struct unkStruct_3001B74
     u32 unk20;
 };
 
-extern struct unkStruct_3001B74 *gUnknown_3001B74;
+IWRAM_DATA struct unkStruct_3001B74 *gUnknown_3001B74 = {0}; // iwram
 
 extern u16 gUnknown_2026E4E;
 
 // size: 0x55C
-extern u8 *gUnknown_3001B78;
+IWRAM_DATA u8 *gUnknown_3001B78 = {0}; // iwram
 
 extern u8 gUnknown_8117784[];
 extern s16 gUnknown_811E5F4[][2];

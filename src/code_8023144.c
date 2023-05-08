@@ -34,7 +34,7 @@ struct unkStruct_3001B5C
     u8 unk3F8[4];
 };
 
-extern struct unkStruct_3001B5C *gUnknown_3001B5C;
+IWRAM_DATA struct unkStruct_3001B5C *gUnknown_3001B5C;
 
 extern u32 gUnknown_203B298;
 extern u16 gUnknown_203B29C;

@@ -1,9 +1,19 @@
+#include "gba/defines.h"
 #include "gba/m4a_internal.h"
 #include "global.h"
 
 extern const u8 gCgb3Vol[];
 
-extern char SoundMainRAM_Buffer[0x400];
+IWRAM_DATA char SoundMainRAM_Buffer[0x400] = {0};
+
+extern struct MusicPlayerInfo gMPlayInfo_SE4;
+extern struct MusicPlayerInfo gMPlayInfo_SE5;
+extern struct MusicPlayerInfo gMPlayInfo_BGM; // BGM??
+extern struct MusicPlayerInfo gMPlayInfo_SE6;
+extern struct MusicPlayerInfo gMPlayInfo_Fanfare;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE3;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern struct SoundInfo gSoundInfo;
 

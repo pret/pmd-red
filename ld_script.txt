@@ -10,6 +10,7 @@ SECTIONS {
     ALIGN(4)
     {
         ewram_start = .;
+        data/sound_data.o(.bss);
         INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
         *libgcc.a:fp-bit.o(.bss);

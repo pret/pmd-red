@@ -49,6 +49,8 @@ void nullsub_20(u16 songIndex);
 #define STOP_BGM 999
 
 #define MAX_VOLUME 256
+#define NUM_BG_PLAYERS (INDEX_FANFARE - INDEX_BGM) + 1 // 2
+#define NUM_SE_PLAYERS (INDEX_SE6 - INDEX_SE1) + 1 // 6
 
 enum MusicPlayerIndex
 {
