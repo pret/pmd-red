@@ -181,7 +181,6 @@ void sub_8045CB0(void)
             uVar5 = 3;
           }
           else {
-            // TODO: Ternary?
             uVar5 = -(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE) >> 0x1f & 2;
           }
         }
