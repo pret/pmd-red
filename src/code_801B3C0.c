@@ -47,7 +47,7 @@ struct unkStruct_203B234
     u32 unk24;
     struct MenuStruct unk28;
     struct MenuStruct unk78;
-    u32 unkC8;
+    u32 menuAction;
     struct MenuItem unkCC[5];
     struct UnkTextStruct2 unkF4[4];
 };
@@ -249,7 +249,7 @@ void sub_801B590(void)
 u32 sub_801B60C(u32 r0, u8 id, u8 quantity)
 {
     gUnknown_203B234 = MemoryAlloc(sizeof(struct unkStruct_203B234), 8);
-    gUnknown_203B234->unkC8 = 0;
+    gUnknown_203B234->menuAction = 0;
     gUnknown_203B234->unk0 = r0;
     gUnknown_203B234->unk10.id = id;
     if(IsThrowableItem(gUnknown_203B234->unk10.id))
@@ -326,7 +326,7 @@ void sub_801B748(u32 newState)
 
 void sub_801B760(void)
 {
-    s32 iVar4;
+    s32 index;
     switch(gUnknown_203B234->state)
     {
        case 1:
@@ -339,9 +339,9 @@ void sub_801B760(void)
        case 14:
        case 15:
             sub_8006518(gUnknown_203B234->unkF4);
-            for(iVar4 = 0; iVar4 < 4; iVar4++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B234->unkF4[iVar4] = gUnknown_80DBA58;
+                gUnknown_203B234->unkF4[index] = gUnknown_80DBA58;
             }
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B234->unkF4, 1, 1);
@@ -471,7 +471,7 @@ void sub_801B874(void)
             break;
         case 10:
             sub_801A9E0();
-            sub_8012D60(&gUnknown_203B234->unk28,gUnknown_203B234->unkCC,0,0,gUnknown_203B234->unkC8,2);
+            sub_8012D60(&gUnknown_203B234->unk28,gUnknown_203B234->unkCC,0,0,gUnknown_203B234->menuAction,2);
             break;
         case 0xb:
             sub_801B3C0(&gUnknown_203B234->unk20);

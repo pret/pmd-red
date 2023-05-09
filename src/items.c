@@ -13,8 +13,6 @@
 
 #include <stddef.h>
 
-extern struct TeamInventory *gTeamInventory_203B460;
-extern struct TeamInventory gUnknown_20389A8;
 extern struct FileArchive gSystemFileArchive;
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
@@ -34,8 +32,10 @@ extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u8 gInvalidItemIDs[0x10];
 
-EWRAM_DATA struct OpenedFile *gItemParametersFile;
-EWRAM_DATA struct ItemDataEntry *gItemParametersData;
+EWRAM_DATA struct OpenedFile *gItemParametersFile = {0};
+EWRAM_DATA struct ItemDataEntry *gItemParametersData = {0};
+EWRAM_DATA struct TeamInventory gUnknown_20389A8 = {0};
+EWRAM_DATA_2 struct TeamInventory *gTeamInventory_203B460 = {0};
 
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
@@ -821,13 +821,13 @@ u32 GetMoneyValueHeld(struct BulkItem* slot)
   return gUnknown_810A3F0[slot->quantity];
 }
 
-void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, u8 a3, struct unkStruct_80915F4* a4)
+void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi)
 {
   // item stat buff?
   s8 result;
 
-  a4->unk0 = (u16)-1;
-  a4->unk2 = 0;
+  gummi->boostAmount = (u16)-1;
+  gummi->flags = 0;
   result = IsGummiItem(id);
   if (result) {
     u8 pokemon_type_0 = GetPokemonType(pokemon->speciesNum, 0);
@@ -861,8 +861,8 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, u8 a3, struct u
         }
       }
     }
-    a4->unk0 = boost_amount;
-    if (!a3) {
+    gummi->boostAmount = boost_amount;
+    if (!checkBoostFlags) {
       u16 boost_flags;
       if (!boost_amount && RandInt(16) == 10) {
         // supa gummi (all stats boost)
@@ -874,41 +874,41 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, u8 a3, struct u
         boost_flags = table[random_index];
       }
 
-      a4->unk2 = boost_flags;
-      boost_flags = a4->unk2;
-      if (a4->unk2 & 1) {
+      gummi->flags = boost_flags;
+      boost_flags = gummi->flags;
+      if (gummi->flags & 1) {
         if (pokemon->offense.att[OFFENSE_NRM] < 255) {
           pokemon->offense.att[OFFENSE_NRM]++;
         }
         else {
           // fix operand order
-          u16 unk2 = a4->unk2;
+          u16 unk2 = gummi->flags;
           unk2 &= ~1;
-          a4->unk2 &= unk2;
+          gummi->flags &= unk2;
         }
       }
-      if (a4->unk2 & 2) {
+      if (gummi->flags & 2) {
         if (pokemon->offense.att[OFFENSE_SP] < 255) {
           pokemon->offense.att[OFFENSE_SP]++;
         }
         else {
-          a4->unk2 &= ~2;
+          gummi->flags &= ~2;
         }
       }
-      if (a4->unk2 & 4) {
+      if (gummi->flags & 4) {
         if (pokemon->offense.def[OFFENSE_NRM] < 255) {
           pokemon->offense.def[OFFENSE_NRM]++;
         }
         else {
-          a4->unk2 &= ~4;
+          gummi->flags &= ~4;
         }
       }
-      if (a4->unk2 & 8) {
+      if (gummi->flags & 8) {
         if (pokemon->offense.def[OFFENSE_SP] < 255) {
           pokemon->offense.def[OFFENSE_SP] ++;
         }
         else {
-          a4->unk2 &= ~8;
+          gummi->flags &= ~8;
         }
       }
     }

@@ -5,8 +5,8 @@
 #include "pokemon.h"
 #include "code_800D090.h"
 
-bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS];
-EWRAM_DATA bool8 *gFriendAreas;
+EWRAM_DATA bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
+EWRAM_DATA_2 bool8 *gFriendAreas = {0};
 
 
 extern bool8 *gFriendAreas;

@@ -1,12 +1,26 @@
+#include "gba/defines.h"
 #include "gba/m4a_internal.h"
 #include "global.h"
 
 extern const u8 gCgb3Vol[];
 
-extern char SoundMainRAM_Buffer[0x400];
+IWRAM_DATA char SoundMainRAM_Buffer[0x400] = {0};
 
-extern struct SoundInfo gSoundInfo;
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE4 = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE5 = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_BGM = {0}; // BGM??
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE6 = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_Fanfare = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE1 = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
+EWRAM_DATA u8 gMPlayMemAccArea[0x10] = {0};
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
 
+EWRAM_DATA_2 struct SoundInfo gSoundInfo = {0};
+EWRAM_DATA_2 MPlayFunc gMPlayJumpTable[0x22] = {0};
+EWRAM_DATA_2 u32 gUnknown_203AF08 = {0};
+EWRAM_DATA_2 u32 gUnknown_203AF0C = {0};
+EWRAM_DATA_2 struct CgbChannel gCgbChans[4] = {0};
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {

@@ -346,34 +346,31 @@ void sub_802C6DC(void)
 
 void DrawJobListMenu(void)
 {
-  struct WonderMail *mail;
-  int index;
-  s32 r4;
-  s32 r5;
-  struct unkStruct_802C39C local;
-  
-  sub_8008C54(gUnknown_203B2E8->unk3C);
-  sub_80073B8(gUnknown_203B2E8->unk3C);
-  r4 = gUnknown_203B2E8->unk26 * 8;
-  r5 = r4;
-  r5 += 10;
-  xxx_call_draw_string(r5,0,gUnknown_80DFD14,gUnknown_203B2E8->unk3C,0); // "Job List"
-  r4 += 4;
-  r5 = r4 + gUnknown_203B2E8->unkA4[2] * 8;
-  sub_8012BC4(r5,0,gUnknown_203B2E8->unk26 + 1,2,7,gUnknown_203B2E8->unk3C);
-  index = 0;
+    struct WonderMail *mail;
+    int index;
+    s32 r4;
+    s32 r5;
+    struct unkStruct_802C39C local;
 
-  if(( index < gUnknown_203B2E8->unk22))
-    do
+    sub_8008C54(gUnknown_203B2E8->unk3C);
+    sub_80073B8(gUnknown_203B2E8->unk3C);
+    r4 = gUnknown_203B2E8->unk26 * 8;
+    r5 = r4;
+    r5 += 10;
+    xxx_call_draw_string(r5,0,gUnknown_80DFD14,gUnknown_203B2E8->unk3C,0); // "Job List"
+    r4 += 4;
+    r5 = r4 + gUnknown_203B2E8->unkA4[2] * 8;
+    sub_8012BC4(r5,0,gUnknown_203B2E8->unk26 + 1,2,7,gUnknown_203B2E8->unk3C);
+
+    for(index = 0;  index < gUnknown_203B2E8->unk22; index++)
     {
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
         local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
         sub_803B35C(mail,local.unk0);
         CreateRescueTitle(&local);
-        index++;
-    } while( index < gUnknown_203B2E8->unk22);
-  sub_80073E0(gUnknown_203B2E8->unk3C);
+    } 
+    sub_80073E0(gUnknown_203B2E8->unk3C);
 }
 
 s32 CountAcceptedJobs(void)

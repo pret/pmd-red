@@ -49,7 +49,7 @@ bool8 IsPositionActuallyInSight(struct Position *pos1, struct Position *pos2)
 
 bool8 IsPositionInSight(struct Position *pos1, struct Position *pos2)
 {
-  struct Tile *iVar2;
+  struct Tile *tile;
   u8 pos1Room;
   s32 xDiff;
   s32 yDiff;
@@ -58,8 +58,8 @@ bool8 IsPositionInSight(struct Position *pos1, struct Position *pos2)
   s32 y1;
   s32 y2;
 
-  iVar2 = GetTile(pos1->x,pos1->y);
-  pos1Room = iVar2->room;
+  tile = GetTile(pos1->x,pos1->y);
+  pos1Room = tile->room;
   if (pos1Room != CORRIDOR_ROOM) {
         struct RoomData *pos1RoomData = &gDungeon->roomData[pos1Room];
         if (pos1RoomData->bottomRightCornerX - 1 > pos2->x || pos1RoomData->bottomRightCornerY - 1 > pos2->y ||

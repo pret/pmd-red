@@ -1,5 +1,4 @@
-SoundMainRAM_Buffer: /* 3000000 */
-	.space 0x400
+.include "src/m4a.o"
 
 gUnknown_3000400: /* 3000400 */
 	.space 0x800
@@ -10,11 +9,7 @@ gUnknown_3000C00: /* 3000C00 */
 gUnknown_3000E94: /* 3000E94 */
 	.space 0x144
 
-gUnknown_3000FD8: /* 3000FD8 */
-	.space 0x10
-
-gUnknown_3000FE8: /* 3000FE8 */
-	.space 0x30
+.include "src/music.o"
 
 gUnknown_3001018: /* 3001018 */
 	.space 0x180
@@ -44,17 +39,8 @@ gUnknown_3001B64: /* 3001B64 */
 gUnknown_3001B68: /* 3001B68 */
 	.space 0x4
 
-gUnknown_3001B6C: /* 3001B6C */
-	.space 0x4
-
-gUnknown_3001B70: /* 3001B70 */
-	.space 0x4
-
-gUnknown_3001B74: /* 3001B74 */
-	.space 0x4
-
-gUnknown_3001B78: /* 3001B78 */
-	.space 0x4
+.include "src/ground_map.o"
+.include "src/ground_map_2.o"
 
 gUnknown_3001B7C: /* 3001B7C */
 	.space 0x4
@@ -74,4 +60,4 @@ gUnknown_3001B8C: /* 3001B8C */
 gUnknown_3001B90: /* 3001B90 */
 	.space 0x2470
 
-gUnknown_3004000: /* 3004000 */
+.include "src/code_80001DC.o"

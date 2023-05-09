@@ -270,7 +270,7 @@ void sub_8027274(void)
         sub_801B3C0(&slot);
         break;
     case 0xe:
-        unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->unk18->moves);
+        unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->pokeStruct->moves);
         sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,0,0);
         break;
     case 0xf:

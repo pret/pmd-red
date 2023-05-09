@@ -10,6 +10,7 @@ SECTIONS {
     ALIGN(4)
     {
         ewram_start = .;
+        data/sound_data.o(.bss);
         INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
         *libgcc.a:fp-bit.o(.bss);
@@ -76,8 +77,10 @@ SECTIONS {
         src/file_system.o(.text);
         src/main.o(.text);
         asm/code_800B5F0.o(.text);
+        src/code_800B5F0.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);
+        src/bg_control.o(.text);
         src/cpu.o(.text);
         src/flash.o(.text);
         src/code_800D090.o(.text);
@@ -260,6 +263,7 @@ SECTIONS {
         asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);
         asm/code_807CD9C.o(.text);
+        src/code_807CD9C.o(.text);
         src/weather.o(.text);
         asm/code_807E5AC.o(.text);
         src/code_807E5AC.o(.text);

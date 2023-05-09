@@ -3,9 +3,10 @@
 
 extern struct HeapFreeListElement gMainHeapFreeList[32];
 extern u8 gMainHeap[HEAP_SIZE];
-extern u32 gHeapCount;
 extern struct HeapDescriptor gMainHeapDescriptor;
-extern struct HeapDescriptor *gHeapDescriptorList[8];
+
+EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0};
+EWRAM_DATA u32 gHeapCount = {0};
 
 extern void CpuClear(u32 *dest, s32 size);
 

@@ -34,7 +34,7 @@ struct SavePakRead
     u32 readStatus;
 };
 
-EWRAM_DATA struct SavePakRead *gSavePakRead;
+EWRAM_DATA_2 struct SavePakRead *gSavePakRead = {0};
 
 struct SavePakWrite
 {
@@ -52,7 +52,7 @@ struct SavePakWrite
     u16 pokeID;
 };
 
-EWRAM_DATA struct SavePakWrite *gSavePakWrite;
+EWRAM_DATA_2 struct SavePakWrite *gSavePakWrite = {0};
 
 struct QuickSaveRead
 {
@@ -61,7 +61,7 @@ struct QuickSaveRead
     u32 size;
     bool8 saveValid;
 };
-EWRAM_DATA struct QuickSaveRead *gQuickSaveRead;
+EWRAM_DATA_2 struct QuickSaveRead *gQuickSaveRead = {0};
 
 struct QuickSaveWrite
 {
@@ -71,7 +71,7 @@ struct QuickSaveWrite
     u8 unkC;
     u32 quickSaveStatus;
 };
-EWRAM_DATA struct QuickSaveWrite *gQuickSaveWrite;
+EWRAM_DATA_2 struct QuickSaveWrite *gQuickSaveWrite = {0};
 
 
 extern s32 gUnknown_202DE28;

@@ -28,9 +28,9 @@ struct unkStruct_203B2B0
     struct Item chosenItem;
     u32 state;
     u32 fallbackState;
-    u32 unk28;
-    u32 unk2C;
-    u32 unk30;
+    u32 menuAction1;
+    u32 menuAction2;
+    u32 menuAction3;
     struct MenuItem unk34[8];
     u16 unk74[0x8];
     struct MenuStruct unk84;
@@ -172,9 +172,9 @@ u32 sub_802465C(void)
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gUnknown_203B2B0 = MemoryAlloc(sizeof(struct unkStruct_203B2B0),8);
-  gUnknown_203B2B0->unk28 = 0;
-  gUnknown_203B2B0->unk2C = 0;
-  gUnknown_203B2B0->unk30 = 0;
+  gUnknown_203B2B0->menuAction1 = 0;
+  gUnknown_203B2B0->menuAction2 = 0;
+  gUnknown_203B2B0->menuAction3 = 0;
   gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
   gUnknown_203B2B0->pokeRenamed = IsPokemonRenamed(gUnknown_203B2B0->pokeStruct);
   gUnknown_203B2B0->evolutionComplete = FALSE;
@@ -296,17 +296,17 @@ void UpdateLuminousCaveDialogue(void)
   switch(gUnknown_203B2B0->state) {
     case LUMINOUS_CAVE_ENTRY:
         if (LuminousCave_HasOnly1Member()) {
-            gUnknown_203B2B0->unk28 = 3;
+            gUnknown_203B2B0->menuAction1 = 3;
         }
         else {
-            gUnknown_203B2B0->unk28 = 1;
+            gUnknown_203B2B0->menuAction1 = 1;
         }
         sub_8024CFC();
-        sub_8014248(gLuminousCaveSeekAwakening,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(gLuminousCaveSeekAwakening,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case LUMINOUS_CAVE_ASK_EVOLVE:
         sub_8024CFC();
-        sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->unk28,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case LUMINOUS_CAVE_EVOLVE_INFO:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_ASK_EVOLVE;
@@ -320,7 +320,7 @@ void UpdateLuminousCaveDialogue(void)
 
     case LUMINOUS_CAVE_GIVE_ITEM_1:
         sub_8024D48();
-        sub_8014248(gLuminousCaveGiveItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(gLuminousCaveGiveItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case 6:
         sub_801A5D8(2,3,0,10);
@@ -330,7 +330,7 @@ void UpdateLuminousCaveDialogue(void)
         break;
     case LUMINOUS_CAVE_GIVE_ITEM_2:
         sub_8024DBC();
-        sub_8014248(gLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->unk2C,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(gLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case 0xb:
         sub_801A5D8(2,3,0,10);
@@ -347,7 +347,7 @@ void UpdateLuminousCaveDialogue(void)
         sub_801A9E0();
         sub_8024E30();
         sub_8012D60(&gUnknown_203B2B0->unk84,gUnknown_203B2B0->unk34,0,gUnknown_203B2B0->unk74,
-                    gUnknown_203B2B0->unk30,2);
+                    gUnknown_203B2B0->menuAction3,2);
         break;
     case 9:
     case 0xe:
@@ -510,12 +510,12 @@ void sub_8024D48(void)
     {
         if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk2C)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->menuAction2)
                 return;
         }
     }
 
-    gUnknown_203B2B0->unk2C = 4;
+    gUnknown_203B2B0->menuAction2 = 4;
 }
 
 void sub_8024DBC(void)
@@ -546,12 +546,12 @@ void sub_8024DBC(void)
     {
         if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk2C)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->menuAction2)
                 return;
         }
     }
 
-    gUnknown_203B2B0->unk2C = 4;
+    gUnknown_203B2B0->menuAction2 = 4;
 }
 
 void sub_8024E30(void)
@@ -580,12 +580,12 @@ void sub_8024E30(void)
     {
         if(gUnknown_203B2B0->unk74[index] == 0)
         {
-            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->unk30)
+            if(gUnknown_203B2B0->unk34[index].menuAction == gUnknown_203B2B0->menuAction3)
                 return;
         }
     }
 
-    gUnknown_203B2B0->unk30 = 5;
+    gUnknown_203B2B0->menuAction3 = 5;
 }
 
 void sub_8024E9C(void)
@@ -593,7 +593,7 @@ void sub_8024E9C(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) gUnknown_203B2B0->unk28 = menuAction;
+        if(menuAction != 1) gUnknown_203B2B0->menuAction1 = menuAction;
         switch(menuAction)
         {
             case 3:
@@ -617,7 +617,7 @@ void sub_8024F00(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) gUnknown_203B2B0->unk2C = menuAction;
+        if(menuAction != 1) gUnknown_203B2B0->menuAction2 = menuAction;
         switch(menuAction)
         {
             case 4:
@@ -643,7 +643,7 @@ void sub_8024F70(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) gUnknown_203B2B0->unk2C = menuAction;
+        if(menuAction != 1) gUnknown_203B2B0->menuAction2 = menuAction;
         switch(menuAction)
         {
             case 4:
@@ -719,7 +719,7 @@ void sub_80250EC(void)
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {
         sub_8013114(&gUnknown_203B2B0->unk84, &menuAction);
-        if(menuAction != 1) gUnknown_203B2B0->unk30 = menuAction;
+        if(menuAction != 1) gUnknown_203B2B0->menuAction3 = menuAction;
     }
     switch(menuAction)
     {
@@ -746,7 +746,7 @@ void sub_802515C(void)
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {
         sub_8013114(&gUnknown_203B2B0->unk84, &menuAction);
-        if(menuAction != 1) gUnknown_203B2B0->unk30 = menuAction;
+        if(menuAction != 1) gUnknown_203B2B0->menuAction3 = menuAction;
     }
     switch(menuAction)
     {

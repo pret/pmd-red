@@ -1,46 +1,7 @@
 	.align 2
 
-gSoundInfo: /* 2039ED0 */
-	.space 0xFB0
-
-gMPlayJumpTable: /* 203AE80 */
-	.space 0x88
-
-gUnknown_203AF08: /* 203AF08 */
-	.space 0x4
-
-gUnknown_203AF0C: /* 203AF0C */
-	.space 0x4
-
-gCgbChans: /* 203AF10 */
-	.space 0x100
-
-gFlashTimeoutFlag: /* 203B010 */
-	.space 0x4
-
-PollFlashStatus: /* 203B014 */
-	.space 0x4
-
-WaitForFlashWrite: /* 203B018 */
-	.space 0x4
-
-ProgramFlashSector: /* 203B01C */
-	.space 0x4
-
-gFlash: /* 203B020 */
-	.space 0x4
-
-gFlashNumRemainingBytes: /* 203B024 */
-	.space 0x4
-
-EraseFlashChip: /* 203B028 */
-	.space 0x4
-
-EraseFlashSector: /* 203B02C */
-	.space 0x4
-
-gFlashMaxTime: /* 203B030 */
-	.space 0x4
+    .include "src/m4a.o"
+    .include "src/agb_flash.o"
 
 errno: /* 203B034 */
 	.space 0x4
@@ -56,8 +17,9 @@ gUnknown_203B03C: /* 203B03C */
 gUnknown_203B040: /* 203B040 */
 	.space 0x30
 
-gOtherRngState: /* 203B070 */
-	.space 0x4
+    .include "src/other_random.o"
+
+    .space 0x2
 
 gUnknown_203B074: /* 203B074 */
 	.space 0x4
@@ -65,8 +27,7 @@ gUnknown_203B074: /* 203B074 */
 gUnknown_203B078: /* 203B078 */
 	.space 0x4
 
-gPRNGSequenceNum: /* 203B07C */
-	.space 0x4
+    .include "src/random.o"
 
 gUnknown_203B080: /* 203B080 */
 	.space 0x4
@@ -83,11 +44,8 @@ gUnknown_203B08C: /* 203B08C */
 gUnknown_203B090: /* 203B090 */
 	.space 0x4
 
-gFileCacheCursorPosition: /* 203B094 */
-	.space 0x4
-
-gInterruptsEnabled: /* 203B098 */
-	.space 0x1
+    .include "src/file_system.o"
+    .include "src/main.o"
 
 gUnknown_203B099: /* 203B099 */
 	.space 0x1
@@ -161,11 +119,8 @@ gUnknown_203B0E8: /* 203B0E8 */
 gUnknown_203B0EC: /* 203B0EC */
 	.space 0x60
 
-gNDS_DebugEnabled: /* 203B14C */
-	.space 0x4
-
-gUnknown_203B150: /* 203B150 */
-	.space 0x2C
+    .include "src/debug.o"
+	.space 0x2B
 
 gUnknown_203B17C: /* 203B17C */
 	.space 0x4
@@ -176,17 +131,7 @@ gUnknown_203B180: /* 203B180 */
 gUnknown_203B184: /* 203B184 */
 	.space 0x4
 
-gSavePakRead: /* 203B188 */
-	.space 0x4
-
-gSavePakWrite: /* 203B18C */
-	.space 0x4
-
-gQuickSaveRead: /* 203B190 */
-	.space 0x4
-
-gQuickSaveWrite: /* 203B194 */
-	.space 0x4
+.include "src/save.o"
 
 gUnknown_203B198: /* 203B198 */
 	.space 0x60
@@ -524,11 +469,7 @@ gUnknown_203B3F8: /* 203B3F8 */
 gUnknown_203B3FC: /* 203B3FC */
 	.space 0x4
 
-gPersonalityTestTracker: /* 203B400 */
-	.space 0x4
-
-gUnknown_203B404: /* 203B404 */
-	.space 0x4
+    .include "src/personality_test.o"
 
 gUnknown_203B408: /* 203B408 */
 	.space 0x4
@@ -578,26 +519,13 @@ gUnknown_203B444: /* 203B444 */
 gLeaderPointer: /* 203B450 */
 	.space 0x4
 
-gDungeonRngState: /* 203B454 */
-	.space 0x4
-
-gUnknown_203B458: /* 203B458 */
-	.space 0x4
-
-gRecruitedPokemonRef: /* 203B45C */
-	.space 0x4
-
-gTeamInventory_203B460: /* 203B460 */
-	.space 0x4
-
-gRescueTeamInfoRef: /* 203B464 */
-	.space 0x4
-
-gFriendAreas: /* 203B468 */
-	.space 0x4
-
-gGameOptionsRef: /* 203B46C */
-	.space 0x4
+    .include "src/dungeon_random.o"
+    .include "src/dungeon_music.o"
+    .include "src/pokemon.o"
+    .include "src/items.o"
+    .include "src/rescue_team_info.o"
+    .include "src/friend_area.o"
+    .include "src/game_options.o"
 
 gUnknown_203B470: /* 203B470 */
 	.space 0x4
@@ -605,8 +533,7 @@ gUnknown_203B470: /* 203B470 */
 gUnknown_203B474: /* 203B474 */
 	.space 0x8
 
-gPlayTimeRef: /* 203B47C */
-	.space 0x4
+    .include "src/play_time.o"
 
 gUnknown_203B480: /* 203B480 */
 	.space 0x4
@@ -629,11 +556,9 @@ gUnknown_203B494: /* 203B494 */
 gUnknown_203B498: /* 203B498 */
 	.space 0x4
 
-gUnknown_203B49C: /* 203B49C */
-	.space 0x1
 
-gUnknown_203B49D: /* 203B49D */
-	.space 0x3
+    .include "src/ground_main.o"
+	.space 0x2
 
 gUnknown_203B4A0: /* 203B4A0 */
 	.space 0xC

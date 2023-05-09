@@ -33,7 +33,7 @@ const u8 gMakuhitaDojoGoTrain[] = "Go Train";
 extern void sub_8030208();
 extern void sub_8030258();
 extern void sub_80302A8();
-extern void sub_80302C4();
+extern void GotoMakuhitaFallbackState();
 extern void UpdateMakuhitaDialogue();
 
 void UpdateMakuhitaState(s32);
@@ -124,7 +124,7 @@ u32 sub_802FE58(void)
     case 13:
         return 3;
     default:
-        sub_80302C4();
+        GotoMakuhitaFallbackState();
         break;
   }
     return 0;
@@ -154,16 +154,16 @@ void UpdateMakuhitaState(s32 newState)
 
 void sub_802FF1C(void)
 {
-    s32 iVar3;
+    s32 index;
     sub_8006518(gUnknown_203B318->unk6C);
     switch(gUnknown_203B318->state)
     {
         case 0:
         case 4:
         case 13:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B318->unk6C[iVar3] = gUnknown_80E0760;
+                gUnknown_203B318->unk6C[index] = gUnknown_80E0760;
             }
             break;
         default:

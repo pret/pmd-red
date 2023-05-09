@@ -2,8 +2,8 @@
 #include "play_time.h"
 #include "code_8092334.h"
 
-extern struct PlayTimeStruct *gPlayTimeRef;
-EWRAM_DATA struct PlayTimeStruct gPlayTime;
+EWRAM_DATA_2 struct PlayTimeStruct *gPlayTimeRef = {0};
+EWRAM_DATA struct PlayTimeStruct gPlayTime = {0};
 
 
 void InitializePlayTime(void)

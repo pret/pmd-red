@@ -1,6 +1,7 @@
+#include "gba/defines.h"
 #include "global.h"
 
-extern u32 gUnknown_3004000;
+IWRAM_DATA u32 gUnknown_3004000 = {0};
 
 // unused, returns stack pointer
 u32 sub_80001DC() {

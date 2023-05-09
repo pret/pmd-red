@@ -105,7 +105,7 @@ void UpdateGulpinShopState(u32 newState)
 
 void sub_801E980(void)
 {
-    s32 iVar2;
+    s32 index;
 
     sub_8006518(gUnknown_203B26C->unk12C);
     switch(gUnknown_203B26C->state)
@@ -117,9 +117,9 @@ void sub_801E980(void)
             sub_8012CAC(&gUnknown_203B26C->unk12C[2], gUnknown_203B26C->unk28);
             break;
         default:
-            for(iVar2 = 0; iVar2 < 4; iVar2++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B26C->unk12C[iVar2] = gUnknown_80DC11C;
+                gUnknown_203B26C->unk12C[index] = gUnknown_80DC11C;
             }
             break;
     }

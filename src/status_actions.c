@@ -932,7 +932,7 @@ bool8 TransferOrbAction(struct Entity *pokemon, struct Entity * target)
         targetID = entityInfo->id;
         oldID = entityInfo->id;
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        if (entityInfo->clientType != 0) {
+        if (entityInfo->clientType != CLIENT_TYPE_NONE) {
             sub_80522F4(pokemon,target,*gUnknown_80FD450);
             return FALSE;
         }

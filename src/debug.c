@@ -7,8 +7,8 @@
 extern void Hang();
 static void FatalErrorHang(void) __attribute__((noreturn));
 
-extern bool32 gNDS_DebugEnabled;
-extern u8 gUnknown_203B150;
+EWRAM_DATA_2 bool32 gNDS_DebugEnabled = {0};
+EWRAM_DATA_2 u8 gUnknown_203B150 = {0};
 
 ALIGNED(4) const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
 

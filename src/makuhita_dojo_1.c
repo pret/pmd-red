@@ -98,13 +98,13 @@ void DrawMakuhitaMainMenu(void) {
     s32 menuAction;
     struct unkStruct_203B318 *preload;
 
-    gUnknown_203B318->unk14 = 2;
+    gUnknown_203B318->menuAction = 2;
     gUnknown_203B318->unk18[0].text = gMakuhitaDojoGoTrain;
     gUnknown_203B318->unk18[0].menuAction = 2;
     if(sub_80306A4())
     {
         gUnknown_203B318->unk18[0].menuAction = -1;
-        gUnknown_203B318->unk14 = 1;
+        gUnknown_203B318->menuAction = 1;
     }
     preload = gUnknown_203B318;
     menuAction = 1;
@@ -117,11 +117,11 @@ void DrawMakuhitaMainMenu(void) {
 }
 
 void sub_8030208(void) {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        gUnknown_203B318->unk14 = temp;
-        switch(temp)
+        gUnknown_203B318->menuAction = menuAction;
+        switch(menuAction)
         {
             case 2:
                 UpdateMakuhitaState(3);
@@ -170,7 +170,7 @@ void sub_80302A8(void) {
     }
 }
 
-void sub_80302C4(void) {
+void GotoMakuhitaFallbackState(void) {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
@@ -331,9 +331,8 @@ void DrawDojoCourseList(void)
   xxx_call_draw_string(10,0,gMakuhitaDojoHeader,gUnknown_203B31C->unk64,0); // Courses
   sub_8012BC4(gUnknown_203B31C->unkCC[2] * 8 + 4,0,
             gUnknown_203B31C->unk4E + 1,2,7,gUnknown_203B31C->unk64);
-  index = 0;
-  if (index < gUnknown_203B31C->unk4A) {
-    do {
+  for (index = 0; index < gUnknown_203B31C->unk4A; index++)
+    {
       iVar6 = gUnknown_203B31C->unk0[gUnknown_203B31C->unk4E * gUnknown_203B31C->unk4C + index];
       dungeonIndex = sub_80A2740(iVar6);
 
@@ -347,9 +346,7 @@ void DrawDojoCourseList(void)
       }
       sprintfStatic(buffer,gMakuhitaCoursePlaceholder,color,GetDungeonName1(dungeonIndex)); // "#c%c%s#r"
       xxx_call_draw_string(0x10,y,buffer,gUnknown_203B31C->unk64,0);
-      index++;
-    } while (index < gUnknown_203B31C->unk4A);
-  }
+    }
   sub_80073E0(gUnknown_203B31C->unk64);
 }
 

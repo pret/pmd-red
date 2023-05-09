@@ -36,20 +36,20 @@ extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
 extern void sub_80384D0();
 
-void sub_80382E4(s32 param_1)
+void sub_80382E4(s32 currMenu)
 {
-  s32 iVar4;
+  s32 index;
   
   if (gUnknown_203B360 == NULL) {
     gUnknown_203B360 = MemoryAlloc(sizeof(struct unkStruct_203B360), 8);
     MemoryFill8((u8 *)gUnknown_203B360, 0, sizeof(struct unkStruct_203B360));
   }
-  for(iVar4 = 0; iVar4 < 4; iVar4++){
-    gUnknown_203B360->unk148[iVar4] = gUnknown_80E6E7C;
+  for(index = 0; index < 4; index++){
+    gUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
   } 
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B360->unk148,1,1);
-  if (param_1 == 0x25) {
+  if (currMenu == 0x25) {
       // Caution!
       // The storage space is empty!
       // Please check again.
@@ -57,7 +57,7 @@ void sub_80382E4(s32 param_1)
                  0,4,0);
   }
   sub_8035CF4(gUnknown_203B360->unk8,0,1);
-  gUnknown_203B360->currMenu = param_1;
+  gUnknown_203B360->currMenu = currMenu;
   gUnknown_203B360->unk4 = 0;
   sub_8038440();
 }

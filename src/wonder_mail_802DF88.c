@@ -147,7 +147,7 @@ void sub_802D7D0(void)
 
   if (sub_80144A4(&menuAction) == 0) {
     if (menuAction != 1) {
-      gUnknown_203B2F8->unk70 = menuAction;
+      gUnknown_203B2F8->menuAction2 = menuAction;
     }
     switch(menuAction) {
         // Yes
@@ -175,7 +175,7 @@ void sub_802D82C(void)
 
   if (sub_80144A4(&menuAction) == 0) {
     if (menuAction != 1) {
-      gUnknown_203B2F8->unk74 = menuAction;
+      gUnknown_203B2F8->menuAction3 = menuAction;
     }
     switch(menuAction) {
         // Yes
@@ -235,7 +235,7 @@ void sub_802D940(void)
   menuAction = 0;
   sub_802C598(0);
   if ((sub_8012FD8(&gUnknown_203B2F8->unk78) == 0) && (sub_8013114(&gUnknown_203B2F8->unk78,&menuAction), menuAction != 1)) {
-    gUnknown_203B2F8->unk6C = menuAction;
+    gUnknown_203B2F8->menuAction1 = menuAction;
   }
 
   switch(menuAction)

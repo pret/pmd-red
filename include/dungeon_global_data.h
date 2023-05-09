@@ -94,7 +94,7 @@ struct Dungeon
     u8 fill65D[0x660 - 0x65D];
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
     u8 fill662[0x666 - 0x662];
-    /* 0x666 */ u16 windTurns; // Turns remaining before getting swept out of the dungeon.
+    /* 0x666 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
     /* 0x668 */ u16 unk668;
     u16 bossSongIndex;
     u8 unk66C;
@@ -110,7 +110,9 @@ struct Dungeon
     /* 0x676 */ bool8 itemHoldersIdentified;
     u8 unk677;
     u8 unk678;
-    u8 unk679[0x68A - 0x679];
+    u8 unk679;
+    u8 unk67A;
+    u8 unk67B[0x68A - 0x67B];
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x699 - 0x68B];
     u8 unk699;   

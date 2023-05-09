@@ -2,8 +2,8 @@
 #include "rescue_team_info.h"
 #include "code_8092334.h"
 
-extern struct RescueTeamData *gRescueTeamInfoRef;
-EWRAM_DATA struct RescueTeamData gRescueTeamInfo;
+EWRAM_DATA_2 struct RescueTeamData *gRescueTeamInfoRef = {0};
+EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
 
 extern bool8 sub_80023E4(u32);
 extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);

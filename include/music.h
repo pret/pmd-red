@@ -1,6 +1,15 @@
 #ifndef GUARD_MUSIC_H
 #define GUARD_MUSIC_H
 
+// PMD keeps it's own copy of music players for some reason
+struct PMDMusicPlayer
+{
+    u16 unk0;
+    u16 songIndex;
+    u16 volume;
+    bool8 isNotMaxVolume;
+};
+
 void StopBGMusicVSync(void);
 void StartBGMusicVSync(void);
 bool8 IsValidSong(u32 songIndex);
@@ -22,6 +31,9 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed);
 bool8 IsFanfareSEPlaying(u16 songIndex);
 void SoundBiasReset(void);
 void SoundBiasSet(void);
+void UpdateSound(void);
+void SoundVSync(void);
+void nullsub_18(void);
 
 void nullsub_19(void);
 void nullsub_20(u16 songIndex);
@@ -37,6 +49,8 @@ void nullsub_20(u16 songIndex);
 #define STOP_BGM 999
 
 #define MAX_VOLUME 256
+#define NUM_BG_PLAYERS (INDEX_FANFARE - INDEX_BGM) + 1 // 2
+#define NUM_SE_PLAYERS (INDEX_SE6 - INDEX_SE1) + 1 // 6
 
 enum MusicPlayerIndex
 {

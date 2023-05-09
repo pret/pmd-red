@@ -36,10 +36,10 @@ struct BulkItem {
   u8 quantity;
 };
 
-struct unkStruct_80915F4
+struct Gummi
 {
-    s16 unk0;
-    u16 unk2;
+    s16 boostAmount;
+    u16 flags;
 };
 
 struct unkStruct_8090F58

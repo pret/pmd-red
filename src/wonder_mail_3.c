@@ -170,20 +170,15 @@ void sub_802CFD0(void)
   r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
   sub_8012BC4(r5,0,gUnknown_203B2F4->unk1E + 1,2,7,gUnknown_203B2F4->unk34);
 
-  r5 = 0;
-  
-  if(r5 < gUnknown_203B2F4->unk1A)
+  for(r5 = 0; r5 < gUnknown_203B2F4->unk1A; r5++)
   {
-    while(r5 < gUnknown_203B2F4->unk1A) {
         iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
         local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.y = sub_8013800(gUnknown_203B2F4,r5);
+        local.y = sub_8013800(gUnknown_203B2F4, r5);
         sub_803B35C(iVar1,local.unk0);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
-        r5++;
-    }
   }
   sub_80073E0(gUnknown_203B2F4->unk34);
 }
@@ -191,9 +186,9 @@ void sub_802CFD0(void)
 u32 sub_802D098(struct unkSubStruct_203B2F8 *mail)
 {
   gUnknown_203B2F8 = MemoryAlloc(0x208,8);
-  gUnknown_203B2F8->unk6C = 0;
-  gUnknown_203B2F8->unk70 = 0;
-  gUnknown_203B2F8->unk74 = 0;
+  gUnknown_203B2F8->menuAction1 = 0;
+  gUnknown_203B2F8->menuAction2 = 0;
+  gUnknown_203B2F8->menuAction3 = 0;
   gUnknown_203B2F8->mail  = mail;
   gUnknown_203B2F8->wonderMailAccepted = FALSE;
   gUnknown_203B2F8->unk9 = sub_8099328(&gUnknown_203B2F8->dungeonID);
@@ -322,7 +317,7 @@ void sub_802D2A8(void)
         break;
       case 1:
         sub_802D73C();
-        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->unk70,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        sub_8014248(gUnknown_80DFE4C,0,gUnknown_203B2F8->menuAction2,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case DUPLICATE_WONDER_MAIL:
         gUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
@@ -374,7 +369,7 @@ void sub_802D2A8(void)
         break;
       case 9:
         sub_802D690();
-        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->unk74,gUnknown_203B2F8->unk158,0,4,0,0,0);
+        sub_8014248(gUnknown_80E0094,0,gUnknown_203B2F8->menuAction3,gUnknown_203B2F8->unk158,0,4,0,0,0);
         break;
       case JOB_LIST_FULL:
         gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST;
@@ -389,7 +384,7 @@ void sub_802D2A8(void)
       case 0xd:
         DrawJobListMenu();
         sub_8012D60(&gUnknown_203B2F8->unk78,gUnknown_203B2F8->unk118,0,gUnknown_203B2F8->unk198,
-                    gUnknown_203B2F8->unk6C,2);
+                    gUnknown_203B2F8->menuAction1,2);
         break;
       case 0xe:
         DrawJobListMenu();

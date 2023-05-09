@@ -67,14 +67,14 @@ extern void sub_808CFD0(u8 *, s32, u8 *, u32, u32 *, u16 *);
 
 void CreateDebugMenu(void)
 {
-  int iVar2;
+  int index;
 
   if (gUnknown_203B3EC == NULL) {
     gUnknown_203B3EC = MemoryAlloc(sizeof(struct DebugMenu), 8);
     MemoryFill8((u8 *)gUnknown_203B3EC, 0, sizeof(struct DebugMenu));
   }
-  for(iVar2 = 0; iVar2 < 4; iVar2++){
-    gUnknown_203B3EC->unk140[iVar2] = gUnknown_80E7D40;
+  for(index = 0; index < 4; index++){
+    gUnknown_203B3EC->unk140[index] = gUnknown_80E7D40;
   }
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B3EC->unk140, 1, 1);

@@ -25,7 +25,7 @@ struct WonderMailStruct_203B33C
     struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct Item unk41C;
+    struct Item item;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
     u8 unk424[0x100];
     s32 unk524;
@@ -44,5 +44,13 @@ u32 CreateFriendRescueMenu(void);
 u32 UpdateFriendRescueMenu(void);
 void CleanFriendRescueMenu(void);
 
+enum FriendRescueMenuStates {
+    FRIEND_RESCUE_MENU_INIT,
+    FRIEND_RESCUE_MENU_MAIN,
+    FRIEND_RESCUE_MENU_EXIT,
+    FRIEND_RESCUE_MENU_ERROR = 8,
+    FRIEND_RESCUE_MENU_ERROR_2 = 0x6B,
+    FRIEND_RESCUE_MENU_DEFAULT_FALLBACK = 0x7e,
+};
 
 #endif

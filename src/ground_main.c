@@ -8,13 +8,15 @@ extern u32 gUnknown_20398A8;
 extern u32 gUnknown_20398AC;
 extern u32 gUnknown_20398B0;
 extern u32 gUnknown_20398B4;
+extern u8 gUnknown_20398B8;
 extern u8 gUnknown_20398B9;
 extern u8 gUnknown_20398BA;
+extern u16 gUnknown_20398BE;
 extern u32 gUnknown_20398C0;
 extern s16 gUnknown_20398C4;
-extern u16 gUnknown_20398BE;
-extern u8 gUnknown_203B49D;
-extern u8 gUnknown_203B49C;
+
+EWRAM_DATA_2 u8 gUnknown_203B49C = {0};
+EWRAM_DATA_2 u8 gUnknown_203B49D = {0};
 
 const char gUnknown_8115F5C[] = "GroundMain ground request %3d %3d";
 const char gUnknown_8115F80[] = "GroundMain recue request %3d %3d";

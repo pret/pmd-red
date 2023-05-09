@@ -19,7 +19,7 @@ extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
 extern u8 sub_8039880(void);
 
 extern void sub_8035300(void);
-extern void sub_8035404(u32);
+extern void QueueNextFriendRescueState(u32);
 extern void nullsub_41(void);
 extern void nullsub_42(void);
 extern void nullsub_43(void);
@@ -128,10 +128,10 @@ u32 CreateFriendRescueMenu(void)
   for(counter = 0; counter < 0x36; counter++){
     gUnknown_203B33C->passwordBuffer[counter] = 0;
   }
-  gUnknown_203B33C->fallbackState = 0x7E;
+  gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
   gUnknown_203B33C->unk52C = sub_8039880();
   gUnknown_203B33C->unk52D = gUnknown_203B33C->unk52C;
-  SetFriendRescueMenuState(0);
+  SetFriendRescueMenuState(FRIEND_RESCUE_MENU_INIT);
   return 1;
 }
 
@@ -143,19 +143,19 @@ u32 UpdateFriendRescueMenu(void)
         sub_8035300();
         break;
     case 0x79:
-        sub_8035404(0x78);
+        QueueNextFriendRescueState(0x78);
         break;
     case 0x7A:
         sub_8035374();
         break;
     case 0x7B:
-        sub_8035404(0x7a);
+        QueueNextFriendRescueState(0x7a);
         break;
     case 0x7C:
         sub_80353BC();
         break;
     case 0x7D:
-        sub_8035404(0x7c);
+        QueueNextFriendRescueState(0x7c);
         break;
     case 3:
     case 4:
@@ -177,13 +177,13 @@ u32 UpdateFriendRescueMenu(void)
         sub_8034804();
         break;
     case 0x2D:
-        sub_8035404(0x2e);
+        QueueNextFriendRescueState(0x2e);
         break;
     case 0x2E:
         sub_80344C0();
         break;
     case 0x2A:
-        sub_8035404(0xd);
+        QueueNextFriendRescueState(0xd);
         break;
     case 0x2C:
         sub_8034478();
@@ -192,7 +192,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_80344A0();
         break;
     case 0x25:
-        sub_8035404(0x26);
+        QueueNextFriendRescueState(0x26);
         break;
     case 0x26:
         sub_803418C();
@@ -210,13 +210,13 @@ u32 UpdateFriendRescueMenu(void)
         sub_80343C4();
         break;
     case 0x23:
-        sub_8035404(0x21);
+        QueueNextFriendRescueState(0x21);
         break;
     case 0x21:
         sub_8034404();
         break;
     case 0x31:
-        sub_8035404(0x32);
+        QueueNextFriendRescueState(0x32);
         break;
     case 0x32:
         sub_8034500();
@@ -246,7 +246,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_8033FB4();
         break;
     case 0x1C:
-        sub_8035404(0x1d);
+        QueueNextFriendRescueState(0x1d);
         break;
     case 0x1E:
         sub_8034074();
@@ -258,7 +258,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_8033FE4();
         break;
     case 0x11:
-        sub_8035404(0x12);
+        QueueNextFriendRescueState(0x12);
         break;
     case 0x12:
         nullsub_42();
@@ -280,7 +280,7 @@ u32 UpdateFriendRescueMenu(void)
         break;
     case 0x19:
     case 0x43:
-        sub_8035404(0x1a);
+        QueueNextFriendRescueState(0x1a);
         break;
     case 0x1A:
         sub_8033DBC();
@@ -297,7 +297,7 @@ u32 UpdateFriendRescueMenu(void)
     case 7:
         sub_8033CAC();
         break;
-    case 8:
+    case FRIEND_RESCUE_MENU_ERROR:
         sub_8033D48();
         break;
     case 9:
@@ -308,31 +308,31 @@ u32 UpdateFriendRescueMenu(void)
         break;
     case 0xB:
     case 0xC:
-        sub_8035404(6);
+        QueueNextFriendRescueState(6);
         break;
     case 0xD:
-        sub_8035404(7);
+        QueueNextFriendRescueState(7);
         break;
     case 0xE:
         sub_8033B8C();
         break;
-    case 0:
-    case 1:
+    case FRIEND_RESCUE_MENU_INIT:
+    case FRIEND_RESCUE_MENU_MAIN:
         sub_80339C8();
         break;
-    case 2:
+    case FRIEND_RESCUE_MENU_EXIT:
         return 3;
     case 0x6A:
         sub_80348C4();
         break;
-    case 0x6B:
+    case FRIEND_RESCUE_MENU_ERROR_2:
         sub_803482C();
         break;
     case 0x5A:
         sub_80349B0();
         break;
     case 0x5B:
-        sub_8035404(0x5c);
+        QueueNextFriendRescueState(0x5c);
         break;
     case 0x5D:
         sub_8034A70();
@@ -356,7 +356,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_8034D54();
         break;
     case 0x66:
-        sub_8035404(0x67);
+        QueueNextFriendRescueState(0x67);
         break;
     case 0x67:
         sub_8034970();
@@ -365,7 +365,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_80351E0();
         break;
     case 0x72:
-        sub_8035404(0x73);
+        QueueNextFriendRescueState(0x73);
         break;
     case 0x73:
         sub_8034D74();
@@ -378,13 +378,13 @@ u32 UpdateFriendRescueMenu(void)
         break;
     case 0x50:
     case 0x6D:
-        sub_8035404(0x6e);
+        QueueNextFriendRescueState(0x6e);
         break;
     case 0x6E:
         sub_80352A4();
         break;
     case 0x62:
-        sub_8035404(0x6a);
+        QueueNextFriendRescueState(0x6a);
         break;
     case 0x65:
         sub_8034EC8();
@@ -394,7 +394,7 @@ u32 UpdateFriendRescueMenu(void)
         break;
     case 0x63:
     case 0x6F:
-        sub_8035404(0x62);
+        QueueNextFriendRescueState(0x62);
         break;
     case 0x69:
         sub_8034F58();
@@ -415,10 +415,10 @@ u32 UpdateFriendRescueMenu(void)
     case 0x59:
     case 0x6C:
     case 0x77:
-        sub_8035404(2);
+        QueueNextFriendRescueState(FRIEND_RESCUE_MENU_EXIT);
         break;
     case 0x57:
-        sub_8035404(0x5f);
+        QueueNextFriendRescueState(0x5f);
         break;
     case 0x56:
         sub_8035094();
@@ -427,7 +427,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_80350F4();
         break;
     case 0x53:
-        sub_8035404(0x54);
+        QueueNextFriendRescueState(0x54);
         break;
     case 0x54:
         sub_803517C();
@@ -436,7 +436,7 @@ u32 UpdateFriendRescueMenu(void)
         sub_8035210();
         break;
     case 0x46:
-        sub_8035404(0x47);
+        QueueNextFriendRescueState(0x47);
         break;
     case 0x47:
         nullsub_46();
@@ -458,7 +458,7 @@ u32 UpdateFriendRescueMenu(void)
         break;
     case 0x4D:
     case 0x4E:
-        sub_8035404(0x4f);
+        QueueNextFriendRescueState(0x4f);
         break;
     case 0x4F:
         sub_8034848();
@@ -470,10 +470,10 @@ u32 UpdateFriendRescueMenu(void)
     case 0x3C:
     case 0x44:
     case 0x45:
-        sub_8035404(1);
+        QueueNextFriendRescueState(FRIEND_RESCUE_MENU_MAIN);
         break;
     case 0x51:
-        sub_8035404(1);
+        QueueNextFriendRescueState(FRIEND_RESCUE_MENU_MAIN);
         break;
     case 0x36:
         break;

@@ -91,39 +91,35 @@ extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
 {
-  struct WonderMail *mail;
-  s32 y;
-  s32 index;
-  struct unkStruct_802C39C local;
-  u8 buffer [128];
-  
-  sub_8008C54(gUnknown_203B2D8->unk38);
-  sub_80073B8(gUnknown_203B2D8->unk38);
-  xxx_call_draw_string(gUnknown_203B2D8->unk22 * 8 + 10,0,gMailboxText,gUnknown_203B2D8->unk38,0);
-  index = 0;
-  if (index < gUnknown_203B2D8->unk1E) {
-    do {
-      mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + index]);
-      local.unk0[0] = gUnknown_203B2D8->unk38;
-      local.y = sub_8013800(&gUnknown_203B2D8->unk4, index);
-      if (mail->mailType == 1) {
-        y = sub_8013800(&gUnknown_203B2D8->unk4, index);
-        sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
-        PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
-        sprintfStatic(buffer, GetPokemonMailHeadline(mail->dungeon.floor), gAvailablePokemonNames);
-        xxx_call_draw_string(0x15,y,buffer,gUnknown_203B2D8->unk38,0);
-      }
-      else {
-       sub_803B35C(mail,local.unk0);
-        if (IsMailinJobSlot(mail)) {
-          local.unk43 = 2;
+    struct WonderMail *mail;
+    s32 y;
+    s32 index;
+    struct unkStruct_802C39C local;
+    u8 buffer [128];
+
+    sub_8008C54(gUnknown_203B2D8->unk38);
+    sub_80073B8(gUnknown_203B2D8->unk38);
+    xxx_call_draw_string(gUnknown_203B2D8->unk22 * 8 + 10,0,gMailboxText,gUnknown_203B2D8->unk38,0);
+    for (index = 0; index < gUnknown_203B2D8->unk1E; index++) {
+        mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + index]);
+        local.unk0[0] = gUnknown_203B2D8->unk38;
+        local.y = sub_8013800(&gUnknown_203B2D8->unk4, index);
+        if (mail->mailType == 1) {
+            y = sub_8013800(&gUnknown_203B2D8->unk4, index);
+            sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
+            PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
+            sprintfStatic(buffer, GetPokemonMailHeadline(mail->dungeon.floor), gAvailablePokemonNames);
+            xxx_call_draw_string(0x15,y,buffer,gUnknown_203B2D8->unk38,0);
         }
-        CreateRescueTitle(&local);
-      }
-      index++;
-    } while (index < gUnknown_203B2D8->unk1E);
-  }
-  sub_80073E0(gUnknown_203B2D8->unk38);
+        else {
+            sub_803B35C(mail,local.unk0);
+            if (IsMailinJobSlot(mail)) {
+                local.unk43 = 2;
+            }
+            CreateRescueTitle(&local);
+        }
+    }
+    sub_80073E0(gUnknown_203B2D8->unk38);
 }
 
 s32 CountEmptyMailSlots(void)
@@ -309,26 +305,24 @@ void sub_802C328(void)
 
 void DrawPelipperBoardJobMenu(void)
 {
-  u32 slotIndex;
-  struct WonderMail *mail;
-  s32 iVar4;
-  s32 x;
-  s32 index;
-  struct unkStruct_802C39C local;
-  
-  sub_8008C54(gUnknown_203B2E0->unk3C);
-  sub_80073B8(gUnknown_203B2E0->unk3C);
-  iVar4 = gUnknown_203B2E0->unk26 * 8;
-  x = iVar4;
-  x += 10;
-  xxx_call_draw_string(x,0,gBulletinBoardText,gUnknown_203B2E0->unk3C,0);
-  iVar4 += 4;
-  x = iVar4 + gUnknown_203B2E0->unkA4[2] * 8;
-  sub_8012BC4(x,0,gUnknown_203B2E0->unk26 + 1,2,7,gUnknown_203B2E0->unk3C);
+    u32 slotIndex;
+    struct WonderMail *mail;
+    s32 iVar4;
+    s32 x;
+    s32 index;
+    struct unkStruct_802C39C local;
 
-  index = 0;
-  if(index < gUnknown_203B2E0->unk22)
-    do 
+    sub_8008C54(gUnknown_203B2E0->unk3C);
+    sub_80073B8(gUnknown_203B2E0->unk3C);
+    iVar4 = gUnknown_203B2E0->unk26 * 8;
+    x = iVar4;
+    x += 10;
+    xxx_call_draw_string(x,0,gBulletinBoardText,gUnknown_203B2E0->unk3C,0);
+    iVar4 += 4;
+    x = iVar4 + gUnknown_203B2E0->unkA4[2] * 8;
+    sub_8012BC4(x,0,gUnknown_203B2E0->unk26 + 1,2,7,gUnknown_203B2E0->unk3C);
+
+    for(index = 0; index < gUnknown_203B2E0->unk22; index++)
     {
         slotIndex = (gUnknown_203B2E0->unk0[gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24 + index]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
@@ -339,7 +333,6 @@ void DrawPelipperBoardJobMenu(void)
             local.unk43 = 2;
         }
         CreateRescueTitle(&local);
-        index++;
-    } while (index < gUnknown_203B2E0->unk22);
-  sub_80073E0(gUnknown_203B2E0->unk3C);
+    }
+    sub_80073E0(gUnknown_203B2E0->unk3C);
 }

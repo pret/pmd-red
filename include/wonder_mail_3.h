@@ -48,9 +48,9 @@ struct unkStruct_203B2F8
     u8 fill59[0x64 - 0x59];
     u8 *unk64;
     u32 unk68;
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
+    u32 menuAction1;
+    u32 menuAction2;
+    u32 menuAction3;
     struct MenuStruct unk78;
     struct MenuStruct unkC8;
     struct MenuItem unk118[8];

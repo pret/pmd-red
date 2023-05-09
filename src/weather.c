@@ -2,10 +2,12 @@
 #include "weather.h"
 
 #include "constants/item.h"
+#include "constants/move_id.h"
 #include "constants/weather.h"
 #include "dungeon_global_data.h"
 #include "dungeon_items.h"
 #include "dungeon_random.h"
+#include "dungeon_util.h"
 
 extern void TriggerWeatherAbilities(void);
 extern void sub_807EAA0(u32, u32);

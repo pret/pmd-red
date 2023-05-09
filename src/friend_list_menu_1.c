@@ -22,15 +22,15 @@ struct unkStruct_203B2B4
     u8 unkD;
     s16 species;
     u32 unk10;
-    struct BulkItem unk14;
-    struct BulkItem unk18;
+    struct BulkItem item1;
+    struct BulkItem item2;
     /* 0x1C */ struct PokemonStruct *pokeStruct;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
     struct Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
-    u32 unk70;
-    s32 unk74;
+    u32 menuAction1;
+    s32 menuAction2;
     struct MenuStruct unk78;
     struct MenuItem unkC8[4];
     u8 fillE8[0x108 - 0xE8];
@@ -98,7 +98,7 @@ bool8 sub_80252F0(s32 param_1)
   }
   else {
     gUnknown_203B2B4 = MemoryAlloc(sizeof(struct unkStruct_203B2B4),8);
-    gUnknown_203B2B4->unk70 = 0;
+    gUnknown_203B2B4->menuAction1 = 0;
     gUnknown_203B2B4->unk0 = param_1;
     gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
     gUnknown_203B2B4->unkD = 0;
@@ -234,12 +234,12 @@ void sub_8025518(void)
         break;
     case 3:
         if (gUnknown_203B2B4->unk0 == 0) {
-            sub_8025E68(3,&gUnknown_203B2B4->unk18);
+            sub_8025E68(3,&gUnknown_203B2B4->item2);
         }
         sub_8023DA4();
         PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B4->pokeStruct,7);
         PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B4->pokeStruct,6);
-        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->unk70,2);
+        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
         break;
     case 4:
         sub_8024458(gUnknown_203B2B4->species,2);
@@ -255,10 +255,10 @@ void sub_8025518(void)
         break;
     case 0xd:
         sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->unk74,2);
+        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction2,2);
         break;
     case 0xe:
-        HeldItemToSlot(&item, &gUnknown_203B2B4->unk14);
+        HeldItemToSlot(&item, &gUnknown_203B2B4->item1);
         sub_801B3C0(&item);
         break;
     case 8:

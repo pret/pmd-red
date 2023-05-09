@@ -3,12 +3,12 @@
 #include "debug.h"
 #include "ground_script.h"
 
-extern struct GroundScript_ExecutePP_1 *gUnknown_3001B6C;
+IWRAM_DATA struct GroundScript_ExecutePP_1 *gUnknown_3001B6C = {0}; // iwram
+IWRAM_DATA u8 *gUnknown_3001B70 = {0};
 
 extern struct DebugLocation gUnknown_8117538[];
 
 extern u8 gUnknown_811736C[];
-extern u8 *gUnknown_3001B70;
 
 extern void sub_809D600(void *, u8 *, u32, u32, u32);
 extern void GroundMap_Reset(void);

@@ -106,7 +106,7 @@ void UpdateFelicityBankState(u32 newState)
 
 void sub_801645C(void)
 {
-    s32 uVar3;
+    s32 index;
 
     sub_8006518(gUnknown_203B204->unkA8);
     switch(gUnknown_203B204->currState)
@@ -129,9 +129,9 @@ void sub_801645C(void)
             sub_800641C(gUnknown_203B204->unkA8, 1, 0);
             break;
         default:
-            for(uVar3 = 0; uVar3 < 4; uVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B204->unkA8[uVar3] = gUnknown_80DB6DC;
+                gUnknown_203B204->unkA8[index] = gUnknown_80DB6DC;
             }
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B204->unkA8, 1, 1);

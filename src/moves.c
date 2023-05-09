@@ -25,6 +25,7 @@ struct MoveDataFile
 
 extern struct unkStruct_80928C0 gUnknown_81098C4;
 extern struct FileArchive gSystemFileArchive;
+
 extern struct OpenedFile *gWazaParametersFile;
 extern struct MoveDataEntry *gMovesData;
 extern struct MoveLearnset *gMoveLearnsets[420];

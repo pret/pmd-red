@@ -16,7 +16,8 @@ struct unkStruct_202EE10
 
 extern struct unkStruct_202EE10 gUnknown_202EE10;
 
-extern u32 gUnknown_203B458;
+EWRAM_DATA_2 u32 gUnknown_203B458 = {0};
+
 extern u8 *gUnknown_80FE6F4[];
 extern u8 gUnknown_810AC60; // 0xC
 extern u8 gUnknown_810AC62; // 0xC

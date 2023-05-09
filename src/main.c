@@ -8,12 +8,12 @@ extern char ewram_start[];
 
 typedef void (*IntrCallback)(void);
 
-EWRAM_DATA u8 IntrMain_Buffer[0x120];
-EWRAM_DATA IntrCallback gIntrTable[6];
-EWRAM_DATA IntrCallback gIntrCallbacks[6];
+EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
+EWRAM_DATA IntrCallback gIntrTable[6] = {0};
+EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 extern u16 gBldCnt;
 extern u8 gUnknown_202D7FE;
-extern u8 gInterruptsEnabled;
+EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
 extern u16 gUnknown_203B0AC;
 extern s16 gUnknown_203B0AE;
 

@@ -1,17 +1,17 @@
 #include "global.h"
 #include "file_system.h"
 
-extern struct OpenedFile gFileCache[64];
+EWRAM_DATA u32 gUnknown_202D2A4 = {0};
+EWRAM_DATA struct OpenedFile gFileCache[64] = {0};
+EWRAM_DATA u32 *gDecompressBufferPtr = {0};
+EWRAM_DATA u32 *gDecompressBufferStart = {0};
+EWRAM_DATA u32 gDecompressBufferCurrent = {0};
+EWRAM_DATA u32 gDecompressBufferByteInInt = {0};
 
-extern u32 gFileCacheCursorPosition;
-extern u32 gUnknown_202D2A4;
+EWRAM_DATA_2 u32 gFileCacheCursorPosition = {0};
 
 extern const u32 gByteShiftLookup[4];
 
-extern u32 *gDecompressBufferPtr;
-extern u32 *gDecompressBufferStart;
-extern u32 gDecompressBufferCurrent;
-extern u32 gDecompressBufferByteInInt;
 
 extern int sprintf(char *, const char *, ...);
 

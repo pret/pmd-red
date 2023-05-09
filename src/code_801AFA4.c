@@ -242,7 +242,7 @@ void sub_801B2D8(void)
 s32 GetNumMonsAbleToLearnItemMove(void)
 {
     s32 length;
-    s32 iVar4;
+    s32 numMons;
     s32 index;
     s32 team [MAX_TEAM_MEMBERS];
     struct PokemonStruct *preload;
@@ -255,9 +255,9 @@ s32 GetNumMonsAbleToLearnItemMove(void)
         preload = &gRecruitedPokemonRef->pokemon[team[index]];
         if (CanMonLearnMove(gUnknown_203B22C->moveID, preload->speciesNum)) {
             gUnknown_203B22C->unk50[gUnknown_203B22C->monsAbleToLearnMove] = team[index];
-            iVar4 = gUnknown_203B22C->monsAbleToLearnMove;
-            if (iVar4 >= MAX_TEAM_MEMBERS) break;
-            gUnknown_203B22C->monsAbleToLearnMove = iVar4 + 1;
+            numMons = gUnknown_203B22C->monsAbleToLearnMove;
+            if (numMons >= MAX_TEAM_MEMBERS) break;
+            gUnknown_203B22C->monsAbleToLearnMove = numMons + 1;
         }
     }
     return gUnknown_203B22C->monsAbleToLearnMove;
@@ -267,16 +267,16 @@ s32 GetNumMonsAbleToLearnItemMove(void)
 bool8 sub_801B374(u8 id)
 {
   u16 moveID;
-  struct PokemonStruct *puVar4;
-  s32 iVar5;
+  struct PokemonStruct *pokeStruct;
+  s32 index;
 
-  puVar4 = &gRecruitedPokemonRef->pokemon[0];
+  pokeStruct = &gRecruitedPokemonRef->pokemon[0];
   moveID = GetItemMoveID(id);
 
-  for(iVar5 = 0; iVar5 < NUM_MONSTERS; iVar5++, puVar4++)
+  for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
   {
-      if((puVar4->unk0 >> 1 & 1) != 0)
-        if(CanMonLearnMove(moveID, puVar4->speciesNum))
+      if((pokeStruct->unk0 >> 1 & 1) != 0)
+        if(CanMonLearnMove(moveID, pokeStruct->speciesNum))
             return FALSE;
   }
   return TRUE;
