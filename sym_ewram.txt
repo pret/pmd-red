@@ -437,11 +437,8 @@ gUnknown_202EC40: /* 202EC40 */
 gUnknown_202EC48: /* 202EC48 */
 	.space 0x4
 
-gUnknown_202EC4C: /* 202EC4C */
-	.space 0x4
-
-gRescuePasswordBuffer: /* 202EC50 */
-	.space 0x38
+    .include "src/rescue_password_menu.o"
+	.space 0x2
 
 gDungeonNameBannerPalette: /* 202EC88 */
 	.space 0x4

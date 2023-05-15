@@ -11,9 +11,9 @@
 #include "game_options.h"
 
 
-EWRAM_DATA u32 gUnknown_203B17C;
-EWRAM_DATA char *gUnknown_203B180;
-EWRAM_DATA struct UnkStruct_203B184 *gUnknown_203B184;
+EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
+EWRAM_DATA_2 char *gUnknown_203B180 = {0};
+EWRAM_DATA_2 struct UnkStruct_203B184 *gUnknown_203B184 = {0};
 extern struct GameOptions *gGameOptionsRef;
 
 struct unk_struct

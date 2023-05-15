@@ -1,14 +1,17 @@
 #include "global.h"
+#include "constants/dungeon.h"
+#include "constants/input.h"
+
 #include "memory.h"
 #include "text.h"
 #include "input.h"
 #include "mailbox.h"
 #include "menu.h"
-#include "constants/dungeon.h"
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
 #include "code_802C39C.h"
 #include "menu_input.h"
+#include "wonder_mail_2_1.h"
 
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
@@ -153,6 +156,294 @@ extern void sub_80073E0(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 extern s32 sub_8013800(void *, u32);
 extern u8 gUnknown_80DFDBC[];
+extern void sub_802CF5C(void);
+extern void sub_802CFD0(void);
+extern void sub_8013984(void *);
+extern void AddMenuCursorSprite(void *);
+extern u8 sub_80138B8(void *, u32);
+extern void sub_8013660(void *);
+extern u32 GetKeyPress(void *);
+extern void PlayMenuSoundEffect(u32);
+extern void sub_8013848(void *, s32, u32, u32);
+
+extern void sub_802DF24(void);
+extern void SetJobListState(u32);
+extern u32 sub_802DEE0(void);
+extern void ResetJobSlot(u8);
+extern u8 HasNoAcceptedJobs(void);
+u32 sub_802C598(u8 param_1);
+extern void sub_802C688(void);
+extern void PlaySound(u32);
+extern u8 GetPelipperBoardSlotIndex(void);
+
+extern struct UnkTextStruct2 gUnknown_80DFD8C;
+extern struct UnkTextStruct2 gUnknown_80DFDA4;
+
+extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
+
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
+
+void sub_802CBAC(void)
+{
+    u8 *text;
+    s32 menuAction;
+    struct unkStruct_203B2F0 *preload;
+
+    preload = gUnknown_203B2F0;
+    text = NULL;
+    preload->unk14C[0].text = *gUnknown_80D4920;
+    preload->unk14C[0].menuAction = 5;
+    menuAction = 1;
+    preload->unk14C[1].text = *gUnknown_80D4928;
+    preload->unk14C[1].menuAction = 6;
+    preload->unk14C[2].text = text;
+    preload->unk14C[2].menuAction = menuAction;
+}
+
+void sub_802CC00(void)
+{
+    switch(sub_802C598(1))
+    {
+        case 3:
+            gUnknown_203B2F0->unkC = GetPelipperBoardSlotIndex();
+            SetJobListState(2);
+            break;
+        case 4:
+            gUnknown_203B2F0->unkC = GetPelipperBoardSlotIndex();
+            SetJobListState(4);
+            break;
+        case 0:
+        case 1:
+            break;
+        case 2:
+            sub_802C688();
+            SetJobListState(5);
+            break;
+    }
+}
+
+void sub_802CC70(void)
+{
+  s32 menuAction;
+  struct WonderMail *mail;
+  struct WonderMail *mail2;
+  
+  menuAction = 0;
+  sub_802C598(0);
+  if (!sub_8012FD8(&gUnknown_203B2F0->unk6C)) {
+    sub_8013114(&gUnknown_203B2F0->unk6C,&menuAction);
+    if(menuAction != 1) gUnknown_203B2F0->menuAction = menuAction;
+  }
+  switch(menuAction)
+  {
+        case 2:
+            PlaySound(0x133);
+            mail = GetJobSlotInfo(gUnknown_203B2F0->unkC);
+            mail->mailType = 6;
+            SetJobListState(1);
+            break;
+        case 3:
+            PlaySound(0x133);
+            mail2 = GetJobSlotInfo(gUnknown_203B2F0->unkC);
+            mail2->mailType = 5;
+            SetJobListState(1);
+            break;
+        case 4:
+            SetJobListState(3);
+            break;
+        case 7:
+            SetJobListState(4);
+            break;
+        case 1:
+            SetJobListState(1);
+            break;
+  }
+}
+
+void sub_802CD38(void)
+{
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_802C598(0);
+  sub_8012FD8(&gUnknown_203B2F0->unk6C);
+  if (!sub_8012FD8(&gUnknown_203B2F0->unkBC)) {
+    sub_8013114(&gUnknown_203B2F0->unkBC,&menuAction);
+  }
+  switch(menuAction)
+  {
+      case 1:
+      case 6:
+        SetJobListState(1);
+        break;
+    case 5:
+        ResetJobSlot(gUnknown_203B2F0->unkC);
+        sub_8096C80();
+        if (HasNoAcceptedJobs()) {
+          sub_802C688();
+          SetJobListState(5);
+        }
+        else {
+          SetJobListState(1);
+        }
+        break;
+  }
+}
+
+void sub_802CDB8(void)
+{
+    switch(sub_802DEE0())
+    {
+        case 2:
+        case 3:
+            sub_802DF24();
+            SetJobListState(1);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+bool8 sub_802CDD4(u32 r0)
+{
+    if(gUnknown_203B2F4 == NULL)
+    {
+        gUnknown_203B2F4 = MemoryAlloc(sizeof(struct unkStruct_203B2F4), 8);
+    }
+    gUnknown_203B2F4->unk34 = r0;
+    gUnknown_203B2F4->unk38 = &gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34];
+    sub_8006518(gUnknown_203B2F4->unk3C);
+    gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFDA4;
+    gUnknown_203B2F4->unk38->unk14 = gUnknown_203B2F4->unk9C;
+    sub_8012D34(gUnknown_203B2F4->unk38, 4);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2F4->unk3C, 1, 1);
+    sub_8013848(gUnknown_203B2F4, 5, 4, r0);
+    sub_802CF5C();
+    sub_802CFD0();
+    return TRUE;
+}
+
+u32 sub_802CE5C(u8 r0)
+{
+    if(r0 == 0)
+    {
+        sub_8013660(gUnknown_203B2F4);
+        return 0;
+    }
+    else
+    {
+        switch(GetKeyPress(gUnknown_203B2F4))
+        {
+            case INPUT_B_BUTTON:
+                PlayMenuSoundEffect(1);
+                return 2;
+            case INPUT_A_BUTTON:
+                return 3;
+            default:
+                if(sub_80138B8(gUnknown_203B2F4, 1) != 0)
+                {
+                    sub_802CF5C();
+                    sub_802CFD0();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+        }
+    }
+}
+
+u8 sub_802CEBC(void)
+{
+    return (gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C) + gUnknown_203B2F4->unk18;
+}
+
+void sub_802CED8(u8 r0)
+{
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2F4->unk3C, 0, 0);
+    sub_8013984(gUnknown_203B2F4);
+    sub_802CF5C();
+    sub_802CFD0();
+    if(r0)
+        AddMenuCursorSprite(gUnknown_203B2F4);
+}
+
+void sub_802CF14(void)
+{
+    if(gUnknown_203B2F4)
+    {
+        gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFD8C;
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B2F4->unk3C, 1, 1);
+        MemoryFree(gUnknown_203B2F4);
+        gUnknown_203B2F4 = NULL;
+    }
+}
+
+NAKED
+void sub_802CF5C(void)
+{
+	asm_unified(
+    "\tpush {r4,lr}\n"
+	"\tldr r4, _0802CFCC\n"
+	"\tldr r0, [r4]\n"
+	"\tldrh r1, [r0, 0x20]\n"
+	"\tadds r0, 0x9C\n"
+	"\tmovs r2, 0\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tldrh r1, [r0, 0x1E]\n"
+	"\tadds r0, 0x9D\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9E\n"
+	"\tmovs r1, 0xC\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9F\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r1, 0x1A\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tmovs r1, 0x18\n"
+	"\tbl sub_8009614\n"
+	"\tadds r0, 0x2\n"
+	"\tlsls r0, 16\n"
+	"\tldr r2, [r4]\n"
+	"\tldr r3, [r2, 0x34]\n"
+	"\tlsls r1, r3, 1\n"
+	"\tadds r1, r3\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r2, r1\n"
+	"\tadds r1, 0x4A\n"
+	"\tasrs r3, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r1, [r2, 0x34]\n"
+	"\tlsls r0, r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tlsls r0, 3\n"
+	"\tadds r2, r0\n"
+	"\tadds r3, 0x2\n"
+	"\tadds r2, 0x4C\n"
+	"\tstrh r3, [r2]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x3C\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0802CFCC: .4byte gUnknown_203B2F4");
+}
 
 
 void sub_802CFD0(void)

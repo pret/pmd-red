@@ -1,13 +1,15 @@
 #include "menu.h"
 struct unkStruct_203B2F4
 {
-    u8 fill0[0x1A];
+    u8 fill0[0x18];
+    u8 unk18;
+    u8 unk19;
     s16 unk1A;
     s16 unk1C;
     s16 unk1E;
     u8 fill20[0x34 - 0x20];
     u32 unk34;
-    u32 unk38;
+    struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };

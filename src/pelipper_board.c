@@ -6,6 +6,7 @@
 #include "menu_input.h"
 #include "pelipper_board.h"
 
+EWRAM_DATA_2 struct unkStruct_203B308 *gPelipperBoard = {0};
 extern void SetPelipperBoardState(u32);
 
 const struct UnkTextStruct2 gUnknown_80E0330 =

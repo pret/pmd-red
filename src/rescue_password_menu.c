@@ -12,14 +12,17 @@
 #include "wonder_mail.h"
 #include "menu_input.h"
 
-extern u8 gRescuePasswordBuffer[];
-extern u32 gUnknown_202EC4C;
+#define RESCUE_PASSWORD_SIZE 0x36
+
+EWRAM_DATA u32 gUnknown_202EC4C = {0};
+EWRAM_DATA u8 gRescuePasswordBuffer[RESCUE_PASSWORD_SIZE] = {0};
+
 extern struct unkStruct_203B484 *gUnknown_203B484;
 extern struct UnkTextStruct2 gUnknown_80E71E4;
 
-EWRAM_DATA u8 gUnknown_203B368;
-EWRAM_DATA u32 gUnknown_203B36C;
-EWRAM_DATA struct RescuePasswordMenu *gRescuePasswordMenu;
+EWRAM_DATA_2 u8 gUnknown_203B368 = {0};
+EWRAM_DATA_2 u32 gUnknown_203B36C = {0};
+EWRAM_DATA_2 struct RescuePasswordMenu *gRescuePasswordMenu = {0};
 
 extern s32 sub_8035D74(void);
 extern void sub_80151C0(u32, u8 *);
@@ -92,7 +95,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
     sub_800641C(gRescuePasswordMenu->unk148, 1, 1);
 
     if ((gUnknown_203B368 != 0) || (gUnknown_203B36C != currMenu)) {
-        for(counter = 0; counter < 0x36; counter++)
+        for(counter = 0; counter < RESCUE_PASSWORD_SIZE; counter++)
         {
             gRescuePasswordBuffer[counter] = 0;
         }
@@ -164,10 +167,10 @@ s32 UpdateRescuePasswordMenu(void)
   struct MainMenu *iVar9;
   s32 nextMenu;
   struct unkStruct_203B480 local_44;
-  u32 local_14;
+  u32 menuAction;
   u32 subtract;
 
-  local_14 = 0xb;
+  menuAction = 0xb;
   nextMenu = MENU_NO_SCREEN_CHANGE;
   switch(gRescuePasswordMenu->state) {
     case 0:
@@ -304,9 +307,9 @@ s32 UpdateRescuePasswordMenu(void)
         break;
     case 8:
         if (sub_8012FD8(&gRescuePasswordMenu->unk8[0]) == '\0') {
-            sub_8013114(&gRescuePasswordMenu->unk8[0], &local_14);
+            sub_8013114(&gRescuePasswordMenu->unk8[0], &menuAction);
         }
-        switch(local_14)
+        switch(menuAction)
         {
             default:
             case 0xD:
@@ -332,9 +335,9 @@ s32 UpdateRescuePasswordMenu(void)
         break;
     case 9:
         if (sub_8012FD8(&gRescuePasswordMenu->unk8[0]) == '\0') {
-            sub_8013114(&gRescuePasswordMenu->unk8[0], &local_14);
+            sub_8013114(&gRescuePasswordMenu->unk8[0], &menuAction);
         }
-        switch(local_14)
+        switch(menuAction)
         {
             default:
             case 0xD:
@@ -414,36 +417,36 @@ void DisplayPasswordAcceptScreen(void)
 
 u32 ConvertMenutoRescuePasswordState(u32 unused)
 {
-  u32 uVar1;
+  u32 state;
 
-  uVar1 = 0xb;
+  state = 0xb;
   switch(gRescuePasswordMenu->currMenu) {
     case 0x1b:
-        uVar1 = 0;
+        state = 0;
         break;
     case 0x1f:
-        uVar1 = 4;
+        state = 4;
         break;
     case 0x1d:
-        uVar1 = 2;
+        state = 2;
         break;
     case MENU_DISPLAY_RESCUE_PASSWORD:
-        uVar1 = 6;
+        state = 6;
         break;
     case 0x1c:
-        uVar1 = 1;
+        state = 1;
         break;
     case 0x20:
-        uVar1 = 5;
+        state = 5;
         break;
     case 0x1e:
-        uVar1 = 3;
+        state = 3;
         break;
     case MENU_RESCUE_PASSWORD_ENTRY:
-        uVar1 = 7;
+        state = 7;
         break;
   }
-  return uVar1;
+  return state;
 }
 
 u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *param_3)

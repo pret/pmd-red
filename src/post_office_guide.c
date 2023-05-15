@@ -23,7 +23,7 @@ struct PostOfficeHelper
     u8 unk16;
 };
 
-EWRAM_DATA struct PostOfficeHelper *gPostOfficeHelper;
+EWRAM_DATA_2 struct PostOfficeHelper *gPostOfficeHelper = {0};
 
 
 struct unkStruct_203B330
@@ -38,7 +38,7 @@ struct unkStruct_203B330
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
 };
-EWRAM_DATA struct unkStruct_203B330 *gUnknown_203B330;
+EWRAM_DATA_2 struct unkStruct_203B330 *gUnknown_203B330 = {0};
 
 
 extern const char GetHelp_Text[];

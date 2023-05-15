@@ -15,36 +15,36 @@ u8 sub_80981A0(s32);
 
 bool8 IsExclusivePokemonUnlocked(s16 pokeID)
 {
-    s32 iVar2;
+    s32 index;
     s32 pokeID_s32;
 
     pokeID_s32 = pokeID;
 
-    for(iVar2 = 0; iVar2 < NUM_EXCLUSIVE_POKEMON; iVar2++)
+    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
-        if(gExclusivePokemon[iVar2].poke_id == pokeID_s32)
-            return gUnknown_203B498->Exclusives[iVar2];
+        if(gExclusivePokemon[index].poke_id == pokeID_s32)
+            return gUnknown_203B498->Exclusives[index];
     }
     return TRUE;
 }
 
 void UnlockExclusivePokemon(s16 pokeID)
 {
-    s32 iVar2;
+    s32 index;
     s32 pokeID_s32;
 
     pokeID_s32 = pokeID;
 
-    for(iVar2 = 0; iVar2 < NUM_EXCLUSIVE_POKEMON; iVar2++)
+    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
-        if(gExclusivePokemon[iVar2].poke_id == pokeID_s32)
-            gUnknown_203B498->Exclusives[iVar2] = TRUE;
+        if(gExclusivePokemon[index].poke_id == pokeID_s32)
+            gUnknown_203B498->Exclusives[index] = TRUE;
     }
 }
 
 void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
 {
-    s32 iVar2;
+    s32 index;
     u8 *puVar2;
 
     u8 stack_0;
@@ -58,24 +58,24 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
 
 
     SaveIntegerBits(r0, gUnknown_203B498, 1);
-    for(iVar2 = 0; iVar2 < 424; iVar2++)
+    for(index = 0; index < 424; index++)
     {   
-        stack_0 = sub_8098134(iVar2);
+        stack_0 = sub_8098134(index);
         SaveIntegerBits(r0, &stack_0, 1);
     }
-    for(iVar2 = 0; iVar2 < 64; iVar2++)
+    for(index = 0; index < 64; index++)
     {
-        stack_1 = sub_8098100(iVar2);
+        stack_1 = sub_8098100(index);
         SaveIntegerBits(r0, &stack_1, 1);
     }
-    for(iVar2 = 0; iVar2 < 31; iVar2++)
+    for(index = 0; index < 31; index++)
     {
-        stack_2 = sub_80981A0(iVar2);
+        stack_2 = sub_80981A0(index);
         SaveIntegerBits(r0, &stack_2, 1);
     }
-    for(iVar2 = 0; iVar2 < NUM_EXCLUSIVE_POKEMON; iVar2++)
+    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
-        if(gUnknown_203B498->Exclusives[iVar2])
+        if(gUnknown_203B498->Exclusives[index])
             puVar2 = &neg_1;
         else
             puVar2 = &zero;
@@ -85,7 +85,7 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
 
 void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
 {
-    s32 iVar2;
+    s32 index;
     u8 stack_0;
     u8 stack_1;
     u8 stack_2;
@@ -93,31 +93,31 @@ void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
 
     memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
     RestoreIntegerBits(r0, gUnknown_203B498, 1);
-    for(iVar2 = 0; iVar2 < 424; iVar2++)
+    for(index = 0; index < 424; index++)
     {
         RestoreIntegerBits(r0, &stack_0, 1);
         if(stack_0)
-            sub_80980B4(iVar2);
+            sub_80980B4(index);
     }
-    for(iVar2 = 0; iVar2 < 64; iVar2++)
+    for(index = 0; index < 64; index++)
     {
         RestoreIntegerBits(r0, &stack_1, 1);
         if(stack_1)
-            sub_8097FA8(iVar2);
+            sub_8097FA8(index);
     }
-    for(iVar2 = 0; iVar2 < 31; iVar2++)
+    for(index = 0; index < 31; index++)
     {
         RestoreIntegerBits(r0, &stack_2, 1);
         if(stack_2)
-            sub_8098170(iVar2);
+            sub_8098170(index);
     }
-    for(iVar2 = 0; iVar2 < NUM_EXCLUSIVE_POKEMON; iVar2++)
+    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
         RestoreIntegerBits(r0, &stack_3, 1);
 
         do; while(0); // do/while needed for matching - jiang
 
-        gUnknown_203B498->Exclusives[iVar2] = 1 & stack_3;
+        gUnknown_203B498->Exclusives[index] = 1 & stack_3;
     }
     sub_8097FF8();
 }
