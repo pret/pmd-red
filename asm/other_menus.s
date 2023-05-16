@@ -116,7 +116,7 @@ _080374E4:
 	bl sub_8035D74
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r3, _08037518
 	ldr r1, [r3]
 	movs r2, 0xE6
@@ -154,7 +154,7 @@ _08037534:
 	bl sub_8035D74
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r3, _08037568
 	ldr r1, [r3]
 	movs r2, 0x8B
@@ -180,7 +180,7 @@ _0803756C:
 	bl sub_8035D74
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r4, _080375CC
 	ldr r1, [r4]
 	movs r5, 0xA3
@@ -1363,7 +1363,7 @@ _08037ED0:
 	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r4, r0, 0
 	adds r1, r4, 0
 	adds r0, r5, 0
@@ -1434,7 +1434,7 @@ _08037F5E:
 	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r2, r0, 0
 	adds r1, r4, 0
 	ldm r1!, {r3-r5}

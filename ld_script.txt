@@ -313,8 +313,6 @@ SECTIONS {
         asm/code_8094D28.o(.text);
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
-        asm/code_8095014.o(.text);
-        src/code_8095824.o(.text);
         src/code_80958E8.o(.text);
         asm/code_80958E8.o(.text);
         src/code_80958E8_mid.o(.text);

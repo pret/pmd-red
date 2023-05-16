@@ -180,7 +180,7 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk114.unk16 = 2;
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
-        mail = sub_8095228(gUnknown_203B2C8->unk1);
+        mail = GetMailatIndex(gUnknown_203B2C8->unk1);
         sub_803C37C(&mail->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
         gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
@@ -241,7 +241,7 @@ void sub_802B5B8(void)
 
   if (sub_80144A4(&temp) == 0) {
     uVar2 = sub_8011C34();
-    mail = sub_8095228(gUnknown_203B2C8->unk1);
+    mail = GetMailatIndex(gUnknown_203B2C8->unk1);
     mail->mailType = WONDER_MAIL_TYPE_AOK;
     mail->unk28 = uVar2;
     sub_802B548(3);

@@ -17,7 +17,6 @@
 
 
 extern struct TeamInventory *gTeamInventory_203B460;
-extern u8 *gUnknown_203B484;
 
 extern void SetFriendRescueMenuState(u32);
 extern s32 sub_80144A4(s32 *);
@@ -82,9 +81,7 @@ extern u16 sub_8023B44(void);
 
 extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
-extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern u8 sub_800D588(void);
-extern s32 FindOpenMailSlot(void);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 
 extern u8 gUnknown_80E44A4[];
@@ -724,7 +721,7 @@ void sub_8033DBC(void)
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
                         mail.mailType = 5;
                         sub_80951FC(&mail);
-                        mail2 = sub_8095228(GetMailIndex(1, mail.unk10.unk10));
+                        mail2 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
                         MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
@@ -1592,7 +1589,7 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR_2);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
-                        mail2 = sub_8095228(GetMailIndex(4, mail.unk10.unk10));
+                        mail2 = GetMailatIndex(GetMailIndex(4, mail.unk10.unk10));
                         *mail2 = mail;
                         mail2->mailType = 6;
                         gUnknown_203B33C->unk420 = mail.unk10.unk10;
@@ -1691,7 +1688,7 @@ void sub_8034F88(void)
         switch(menuAction)
         {
             case 6:
-                mail = sub_8095228(gUnknown_203B33C->unk218);
+                mail = GetMailatIndex(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->item.id != ITEM_NOTHING)
                     mail->unk20 = gUnknown_203B33C->item;
                 gTeamInventory_203B460->teamStorage[gUnknown_203B33C->item.id]--;
@@ -1893,7 +1890,7 @@ void sub_8035210(void)
             case 0xD:
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
-                    mail = sub_8095228(GetFirstIndexofMailType(5));
+                    mail = GetMailatIndex(GetFirstIndexofMailType(5));
                     if(mail->unk20.id != ITEM_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else

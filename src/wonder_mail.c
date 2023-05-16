@@ -28,7 +28,6 @@ extern bool8 sub_80A2824(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
-extern s32 FindOpenMailSlot(void);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
@@ -48,7 +47,6 @@ extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_80951BC(struct unkStruct_203B480 *r0);
 extern void sub_8023C60();
 extern u32 sub_8023A94(u32);
 extern void sub_8024458(s16, u32);
@@ -628,7 +626,7 @@ void sub_8028348(void)
                         MemoryFill8((u8 *)&gUnknown_203B2C0->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
                         gUnknown_203B2C0->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B2C0->unk130.pokemon.speciesNum = 0;
-                        gUnknown_203B2C0->unkA8.mail = *sub_8095228(gUnknown_203B2C0->mailIndex);
+                        gUnknown_203B2C0->unkA8.mail = *GetMailatIndex(gUnknown_203B2C0->mailIndex);
                         if(gUnknown_203B2C0->speciesNum != -1)
                         {
                             gUnknown_203B2C0->unkA8.pokemon = gRecruitedPokemonRef->pokemon[gUnknown_203B2C0->speciesNum];
@@ -1179,7 +1177,7 @@ void sub_8028FDC(void)
     switch(menuChoice)
     {
         case 8:
-            mail = sub_8095228(gUnknown_203B2C0->mailIndex);
+            mail = GetMailatIndex(gUnknown_203B2C0->mailIndex);
             if(!sub_80A2824(mail->dungeon.id))
             {
                 SetFriendRescueCounterState(CANT_GO_TO_DUNGEON);

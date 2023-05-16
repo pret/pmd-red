@@ -287,7 +287,7 @@ u32 CreateThankYouMailPelipper(void)
 
   index = GetFirstIndexofMailType(6);
   if (index != -1) {
-    mail = sub_8095228(index);
+    mail = GetMailatIndex(index);
     gUnknown_203B2C4->unk41C = mail->unk20;
     gUnknown_203B2C4->mailIndex = index;
     gUnknown_203B2C4->unk430 = mail->unk10.unk10;
@@ -841,7 +841,7 @@ void HandleThankYouMailPasswordMenu(void)
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
                 mailIndex = GetMailIndex(4,mail1.unk10.unk10);
-                mail = sub_8095228(mailIndex);
+                mail = GetMailatIndex(mailIndex);
                 *mail = mail1;
                 mail->mailType = 6;
                 gUnknown_203B2C4->unk430 = mail1.unk10.unk10;
@@ -954,7 +954,7 @@ void HandleConfirmItemtoSendMenu(void)
         switch(menuAction)
         {
             case 7:
-                mail = sub_8095228(gUnknown_203B2C4->mailIndex);
+                mail = GetMailatIndex(gUnknown_203B2C4->mailIndex);
                 if(gUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
                     mail->unk20 = gUnknown_203B2C4->unk41C;
@@ -1143,7 +1143,7 @@ void HandleMailCommunicationMenu(void)
                 switch(gUnknown_203B2C4->wonderMailMode)
                 {
                     case WONDER_MAIL_MODE_SEND:
-                        mail = sub_8095228(GetFirstIndexofMailType(WONDER_MAIL_TYPE_THANK_YOU));
+                        mail = GetMailatIndex(GetFirstIndexofMailType(WONDER_MAIL_TYPE_THANK_YOU));
                         if(mail->unk20.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
@@ -1330,7 +1330,7 @@ void UpdateThankYouMailText(void)
             {
                 case 6:
                     MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
-                    gUnknown_203B2C4->unk1B8 = *sub_8095228(gUnknown_203B2C4->mailIndex);
+                    gUnknown_203B2C4->unk1B8 = *GetMailatIndex(gUnknown_203B2C4->mailIndex);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
@@ -1408,7 +1408,7 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         mailIndex = GetMailIndex(6,gUnknown_203B2C4->unk430);
-        mail = sub_8095228(mailIndex);
+        mail = GetMailatIndex(mailIndex);
         itemIndex = mail->unk20.id;
         if (itemIndex != ITEM_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558

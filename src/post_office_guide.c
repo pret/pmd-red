@@ -613,7 +613,7 @@ void DisplayMissionObjectives(void)
     {
         case 1:
             sub_8099394(&local_94);
-            mail = sub_8095228(local_94);
+            mail = GetMailatIndex(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
             sprintfStatic(buffer,gUnknown_80E1F3C,mail->dungeon.floor);

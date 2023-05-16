@@ -13,7 +13,7 @@ s32 CountFilledMailboxSlots(void)
     s32 counter;
 
     counter = 0;
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         if(!IsMailSlotEmpty(index))
             counter++;
@@ -26,7 +26,7 @@ bool8 sub_8095FB0(struct WonderMail *mail)
 {
     s32 index;
 
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         if(gUnknown_203B490->mailboxSlots[index].mailType == WONDER_MAIL_TYPE_NONE)
         {
@@ -53,7 +53,7 @@ bool8 IsMailSlotEmpty(u8 index)
 void ResetMailbox(void)
 {
     s32 index;
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         ResetMailboxSlot(index);
     }

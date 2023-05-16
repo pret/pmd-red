@@ -1,4 +1,5 @@
 #include "wonder_mail.h"
+#include "constants/mailbox.h"
 
 struct subStruct_203B490
 {
@@ -12,13 +13,13 @@ struct subStruct_203B490
 struct unkStruct_203B490
 {
     // size: 0x330?
-    /* 0x0 */ struct WonderMail mailboxSlots[4];
-    /* 0x50 */ struct WonderMail pelipperBoardJobs[8];
-    /* 0xF0 */ struct WonderMail jobSlots[8];
+    /* 0x0 */ struct WonderMail mailboxSlots[NUM_MAILBOX_SLOTS];
+    /* 0x50 */ struct WonderMail pelipperBoardJobs[MAX_ACCEPTED_JOBS];
+    /* 0xF0 */ struct WonderMail jobSlots[MAX_ACCEPTED_JOBS];
     u8 unk190[0x28];
     u8 unk1B8[0x78];
     struct subStruct_203B490 unk230[16];
-    u8 PKMNNewsReceived[56];
+    u8 PKMNNewsReceived[NUM_POKEMON_NEWS];
     bool8 unk328;
 };
 

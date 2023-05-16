@@ -848,7 +848,7 @@ _0803304A:
 	lsls r3, 2
 	adds r0, r3
 	ldrb r0, [r0]
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r1, [r6]
 	adds r1, 0x48
 	ldm r0!, {r2,r4,r5}
@@ -907,7 +907,7 @@ _080330B4:
 	lsls r3, 2
 	adds r0, r1, r3
 	ldrb r0, [r0]
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r1, [r6]
 	adds r1, 0xA8
 	ldm r0!, {r2-r4}
@@ -1202,7 +1202,7 @@ _0803331A:
 	lsls r2, 2
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_8095228
+	bl GetMailatIndex
 	ldr r1, [r6]
 	adds r1, r4
 	ldm r0!, {r2,r3,r5}
@@ -1420,7 +1420,7 @@ _0803349C:
 	bl GetMailIndex
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r2, r0, 0
 	adds r0, 0x22
 	ldrb r1, [r0]

@@ -34,7 +34,7 @@ struct unkStruct_203B2B4
     struct MenuStruct unk78;
     struct MenuItem unkC8[4];
     u8 fillE8[0x108 - 0xE8];
-    s16 unk108[8];
+    u16 unk108[8];
     struct UnkTextStruct2 unk118[4];
 };
 extern struct unkStruct_203B2B4 *gUnknown_203B2B4;
