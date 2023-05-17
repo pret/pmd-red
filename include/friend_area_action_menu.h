@@ -27,11 +27,7 @@ struct unkStruct_203B2BC
     u8 fill101[0x11C - 0x104];
     struct MenuItem menuItems[4];
     u8 fill120[0x16C - 0x13C];
-
-    // Structure of some sort
-    u16 unk16C;
-    u8 fill170[0x180 - 0x170];
-
+    u16 unk16C[10];
     struct UnkTextStruct2 unk180[4];
 };
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "memory.h"
 #include "text.h"
 #include "input.h"
 #include "menu.h"
@@ -67,6 +68,27 @@ ALIGNED(4) const u8 gFriendActionCheckIQ[] = "Check IQ";
 ALIGNED(4) const u8 gUnknown_80DD958[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
 static const u8 filler[] = "pksdir0";
 
+
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
+
+void sub_8027794(void)
+{
+  struct unkStruct_203B2BC *puVar1;
+  u8 *nullText;
+  s32 menuAction;
+  
+  MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
+  puVar1 = gUnknown_203B2BC;
+  nullText = NULL;
+  puVar1->menuItems[0].text = *gUnknown_80D4920;
+  gUnknown_203B2BC->menuItems[0].menuAction = 0x2;
+  menuAction = 1;
+  gUnknown_203B2BC->menuItems[1].text = *gUnknown_80D4928;
+  gUnknown_203B2BC->menuItems[1].menuAction = 3;
+  gUnknown_203B2BC->menuItems[2].text = nullText;
+  gUnknown_203B2BC->menuItems[2].menuAction = menuAction;
+}
 
 void sub_80277FC(void)
 {
