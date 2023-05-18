@@ -381,19 +381,16 @@ void sub_802F088(void)
 
 void sub_802F108(void)
 {
-    struct unkStruct_203B30C *preload;
-    const u8 *blankText;
-    s32 action_1;
+    s32 loopMax = 0;
 
-    preload = gUnknown_203B30C;
-    blankText = NULL;
-    preload->unkB0[0].text = gUnknown_80E040C;
-    preload->unkB0[0].menuAction = 2;
-    action_1 = 1;
-    preload->unkB0[1].text = *gUnknown_80D4970;
-    preload->unkB0[1].menuAction = 3;
-    preload->unkB0[2].text = blankText;
-    preload->unkB0[2].menuAction = action_1;
+    gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B30C->unkB0[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B30C->unkB0[loopMax].text = NULL;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 1;
 }
 
 void sub_802F148(void)

@@ -186,19 +186,17 @@ extern u8 *gUnknown_80D4928[];
 
 void sub_802CBAC(void)
 {
-    u8 *text;
-    s32 menuAction;
-    struct unkStruct_203B2F0 *preload;
+    s32 loopMax;
+    loopMax = 0;
 
-    preload = gUnknown_203B2F0;
-    text = NULL;
-    preload->unk14C[0].text = *gUnknown_80D4920;
-    preload->unk14C[0].menuAction = 5;
-    menuAction = 1;
-    preload->unk14C[1].text = *gUnknown_80D4928;
-    preload->unk14C[1].menuAction = 6;
-    preload->unk14C[2].text = text;
-    preload->unk14C[2].menuAction = menuAction;
+    gUnknown_203B2F0->unk14C[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F0->unk14C[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2F0->unk14C[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F0->unk14C[loopMax].menuAction = 6;
+    loopMax += 1;
+    gUnknown_203B2F0->unk14C[loopMax].text = NULL;
+    gUnknown_203B2F0->unk14C[loopMax].menuAction = 1;
 }
 
 void sub_802CC00(void)

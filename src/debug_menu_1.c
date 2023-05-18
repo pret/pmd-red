@@ -173,25 +173,20 @@ void sub_803AE58(void)
 
 void sub_803AEB0(void)
 {
-
   s32 index;
   s32 loopMax;
-  u8 *nullText;
-  s32 menuAction;
-  struct unkStruct_203B3F8 *preload;
   
   MemoryFill16(gUnknown_203B3F8->unkD0,0,sizeof(gUnknown_203B3F8->unkD0));
+  loopMax = 0;
 
-  preload = gUnknown_203B3F8;
-  nullText = NULL;
-  preload->unk90[0].text = gDebug_LevelText;
-  preload->unk90[0].menuAction = 4;
-  menuAction = 1;
-  preload->unk90[1].text = gUnknown_80E7F2C;
-  preload->unk90[1].menuAction = 5;
-  loopMax = 2;
-  preload->unk90[2].text = nullText;
-  preload->unk90[2].menuAction = menuAction;
+  gUnknown_203B3F8->unk90[loopMax].text = gDebug_LevelText;
+  gUnknown_203B3F8->unk90[loopMax].menuAction = 4;
+  loopMax += 1;
+  gUnknown_203B3F8->unk90[loopMax].text = gUnknown_80E7F2C;
+  gUnknown_203B3F8->unk90[loopMax].menuAction = 5;
+  loopMax += 1;
+  gUnknown_203B3F8->unk90[loopMax].text = NULL;
+  gUnknown_203B3F8->unk90[loopMax].menuAction = 1;
     
   for(index = 0; index < loopMax; index++)
   {

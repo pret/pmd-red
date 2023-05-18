@@ -464,47 +464,40 @@ void UpdateLuminousCaveDialogue(void)
 
 void sub_8024CFC(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
+    s32 loopMax = 0;
 
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA18;
-    preload->unk34[0].menuAction = 3;
-    defaultAction = 1;
-    preload->unk34[1].text = *gUnknown_80D4970;
-    preload->unk34[1].menuAction = 2;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA18;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 }
 
 void sub_8024D48(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA24;
-    preload->unk34[0].menuAction = 4;
-    defaultAction = 1;
-    preload->unk34[1].text = gUnknown_80DCA2C;
-    preload->unk34[1].menuAction = 5;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-
-    loopMax = 3;
-
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA24;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -520,27 +513,22 @@ void sub_8024D48(void)
 
 void sub_8024DBC(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA24;
-    preload->unk34[0].menuAction = 4;
-    defaultAction = 1;
-    preload->unk34[1].text = gUnknown_80DCA2C;
-    preload->unk34[1].menuAction = 5;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-
-    loopMax = 3;
-
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA24;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -556,25 +544,19 @@ void sub_8024DBC(void)
 
 void sub_8024E30(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA2C;
-    preload->unk34[0].menuAction = 5;
-    defaultAction = 1;
-    preload->unk34[1].text = *gUnknown_80D4970;
-    preload->unk34[1].menuAction = 2;
-
-    loopMax = 2;
-
-    preload->unk34[2].text = nullString;
-    preload->unk34[2].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {

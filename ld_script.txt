@@ -101,10 +101,6 @@ SECTIONS {
         src/kangaskhan_storage.o(.text);
         asm/kangaskhan_storage.o(.text);
         src/kangaskhan_storage_1.o(.text);
-        asm/kangaskhan_storage_1.o(.text);
-        src/kangaskhan_storage_2.o(.text);
-        asm/kangaskhan_storage_2.o(.text);
-        src/kangaskhan_storage_3.o(.text);
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);

@@ -227,23 +227,21 @@ void sub_803A690(void)
 
 void sub_803A6F0(void)
 {
-  s32 menuAction;
-  struct unkStruct_203B3F0 *preload;
+  s32 loopMax = 0;
 
-  gUnknown_203B3F0->menuItems[0].text = &gDebug_NumberText;
-  gUnknown_203B3F0->menuItems[0].menuAction = 2;
+  gUnknown_203B3F0->menuItems[loopMax].text = &gDebug_NumberText;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 2;
   gUnknown_203B3F0->menuAction = 2;
   if (!IsNotMoneyOrUsedTMItem(gUnknown_203B3F0->id)) {
-    gUnknown_203B3F0->menuItems[0].menuAction = -1;
+    gUnknown_203B3F0->menuItems[loopMax].menuAction = -1;
     gUnknown_203B3F0->menuAction = 3;
   }
-  preload = gUnknown_203B3F0;
-  // this var gets loaded in between the sets... very dumb
-  menuAction = 1;
-  preload->menuItems[1].text = *gUnknown_80D4970;
-  preload->menuItems[1].menuAction = 3;
-  preload->menuItems[2].text = NULL;
-  preload->menuItems[2].menuAction = menuAction;
+  loopMax += 1;
+  gUnknown_203B3F0->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
+  loopMax += 1;
+  gUnknown_203B3F0->menuItems[loopMax].text = NULL;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 1;
 }
 
 void sub_803A740(void)
