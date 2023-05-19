@@ -176,7 +176,7 @@ void sub_802B3E0(void)
       case 1:
         monName = GetMonSpecies(MONSTER_PELIPPER);
         strcpy(gUnknown_203B2C8->unk114.clientName, monName);
-        gUnknown_203B2C8->unk114.unk14 = MONSTER_PELIPPER;
+        gUnknown_203B2C8->unk114.clientSpecies = MONSTER_PELIPPER;
         gUnknown_203B2C8->unk114.unk16 = 2;
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();

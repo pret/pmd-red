@@ -82,8 +82,8 @@ extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern void sub_803B35C(struct WonderMail *, u32 *);
-extern void sub_802DE84(u32 *);
+extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
@@ -236,8 +236,8 @@ void sub_802E1AC(void)
             break;
         case MAIL_INFO:
             sub_803B35C(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex), &gUnknown_203B304->unkC);
-            gUnknown_203B304->unkC = 3;
-            gUnknown_203B304->unk50 = 0;
+            gUnknown_203B304->unkC.unk0[0] = 3;
+            gUnknown_203B304->unkC.unk44 = 0;
             sub_802DE84(&gUnknown_203B304->unkC);
             break;
         case JOB_LIST_MENU:
@@ -265,7 +265,7 @@ void CreateMailboxMenu(void)
     s32 loopMax;
 
     loopMax = 0;
-    MemoryFill16(gUnknown_203B304->unkFC,0,0x10);
+    MemoryFill16(gUnknown_203B304->unkFC,0,sizeof(gUnknown_203B304->unkFC));
     gUnknown_203B304->menuItems[0].text = gMailboxCheckMail;
     gUnknown_203B304->menuItems[0].menuAction = 2;
     if ((HasNoMailinMailbox())) {

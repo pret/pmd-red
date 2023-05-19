@@ -25,9 +25,7 @@ struct unkStruct_203B2F0
     u32 state;
     u8 unk8[0xC - 0x8];
     u8 unkC;
-    u8 fillD[0x10 - 0xD];
-    u32 unk10;
-    u8 fill14[0x68 - 0x14];
+    struct unkStruct_802C39C unk10;
     u32 menuAction;
     struct MenuStruct unk6C;
     struct MenuStruct unkBC;

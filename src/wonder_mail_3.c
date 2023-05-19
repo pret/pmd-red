@@ -9,10 +9,9 @@
 #include "menu.h"
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
-#include "code_802C39C.h"
 #include "menu_input.h"
+#include "code_80958E8.h"
 #include "wonder_mail_2_1.h"
-
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -135,8 +134,8 @@ extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
 extern struct WonderMail* GetJobSlotInfo(u8);
-extern void sub_803B35C(void *, u32*);
-extern void sub_802DE84(u32 *);
+extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C*);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void sub_802D73C(void);
 extern void sub_802C640(u32);
 extern void sub_802C4C8(u32, u32, u32);
@@ -183,6 +182,8 @@ extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
+extern u8 *gUnknown_80D494C[];
+extern u8 *gUnknown_80D4970[];
 
 void sub_802CBAC(void)
 {
@@ -464,7 +465,7 @@ void sub_802CFD0(void)
         iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
         local.unk0[0] = gUnknown_203B2F4->unk34;
         local.y = sub_8013800(gUnknown_203B2F4, r5);
-        sub_803B35C(iVar1,local.unk0);
+        sub_803B35C(&iVar1->mail,&local);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
@@ -682,15 +683,316 @@ void sub_802D2A8(void)
         break;
       case 0xf:
         sub_803B35C(GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex),&gUnknown_203B2F8->unk14);
-        gUnknown_203B2F8->unk14 = 3;
+        gUnknown_203B2F8->unk14.unk0[0] = 3;
         sub_802DE84(&gUnknown_203B2F8->unk14);
         break;
       case 0x10:
-        sub_803B35C(gUnknown_203B2F8->mail,&gUnknown_203B2F8->unk14);
-        gUnknown_203B2F8->unk14 = 3;
-        gUnknown_203B2F8->unk58 = 0;
-        gUnknown_203B2F8->unk64 = gUnknown_203B2F8->mail->unk18;
+        sub_803B35C(&gUnknown_203B2F8->mail->wonderMail,&gUnknown_203B2F8->unk14);
+        gUnknown_203B2F8->unk14.unk0[0] = 3;
+        gUnknown_203B2F8->unk14.unk44 = 0;
+        gUnknown_203B2F8->unk14.unk50[0] = gUnknown_203B2F8->mail->unk18;
         sub_802DE84(&gUnknown_203B2F8->unk14);
         break;
   }
 }
+
+void sub_802D5A4(void) {
+    s32 loopMax;
+    s32 index;
+
+    loopMax = 0;
+    MemoryFill16(gUnknown_203B2F8->unk198, 0, sizeof(gUnknown_203B2F8->unk198));
+    gUnknown_203B2F8->unk118[loopMax].text = *gUnknown_80D494C;
+    gUnknown_203B2F8->unk118[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B2F8->unk118[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2F8->unk118[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2F8->unk118[loopMax].text = NULL;
+    gUnknown_203B2F8->unk118[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if (gUnknown_203B2F8->unk198[index] == 0) {
+            if(gUnknown_203B2F8->unk118[index].menuAction == gUnknown_203B2F8->menuAction1)
+                return;
+        }
+    }
+    gUnknown_203B2F8->menuAction1 = 2;
+}
+
+void sub_802D63C(void) {
+    s32 loopMax = 0;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = NULL;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+}
+
+void sub_802D690(void) {
+    s32 loopMax;
+    s32 index;
+
+    loopMax = 0;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 6;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E0158;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 7;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = NULL;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B2F8->unk158[index].menuAction == gUnknown_203B2F8->menuAction3)
+            return;
+    }
+    gUnknown_203B2F8->menuAction3 = 4;
+}
+
+void sub_802D73C(void) {
+    s32 loopMax;
+    s32 index;
+
+    loopMax = 0;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 6;
+    loopMax += 1;
+    gUnknown_203B2F8->unk158[loopMax].text = NULL;
+    gUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B2F8->unk158[index].menuAction == gUnknown_203B2F8->menuAction2)
+            return;
+    }
+    gUnknown_203B2F8->menuAction2 = 4;
+}
+
+extern s32 sub_80144A4(s32 *);
+
+
+void sub_802D7D0(void)
+{
+  s32 menuAction;
+
+  if (sub_80144A4(&menuAction) == 0) {
+    if (menuAction != 1) {
+      gUnknown_203B2F8->menuAction2 = menuAction;
+    }
+    switch(menuAction) {
+        // Yes
+        case 3:
+            sub_802D1A0(WONDER_MAIL_EXIT);
+            break;
+        // New Mail
+        case 6:
+            gUnknown_203B2F8->fallbackState = 1;
+            sub_802D1A0(0x10);
+            break;
+        // No
+        case 4:
+        case 2:
+        default:
+            sub_802D1A0(INITIAL_WONDER_MAIL_CHECK);
+            break;
+    }
+  }
+}
+
+void sub_802D82C(void)
+{
+  s32 menuAction;
+
+  if (sub_80144A4(&menuAction) == 0) {
+    if (menuAction != 1) {
+      gUnknown_203B2F8->menuAction3 = menuAction;
+    }
+    switch(menuAction) {
+        // Yes
+        case 3:
+            ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
+            sub_8096C80();
+            sub_802D1A0(RECEIVE_WONDER_MAIL);
+            break;
+        // New Mail
+        case 6:
+            gUnknown_203B2F8->fallbackState = 9;
+            sub_802D1A0(0x10);
+            break;
+        // Old Mail
+        case 7:
+            gUnknown_203B2F8->fallbackState = 9;
+            sub_802D1A0(0xf);
+            break;
+        // No
+        default:
+        case 1:
+        case 2:
+        case 4:
+            sub_802D1A0(1);
+            break;
+    }
+  }
+}
+
+void sub_802D8CC(void)
+{
+  switch(sub_802C598(1)) {
+    case 0:
+    case 1:
+        break;
+    case 3:
+        gUnknown_203B2F8->jobSlotIndex = GetPelipperBoardSlotIndex();
+        sub_802D1A0(0xd);
+        break;
+    case 4:
+        gUnknown_203B2F8->jobSlotIndex = GetPelipperBoardSlotIndex();
+        gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
+        sub_802D1A0(0xf);
+        break;
+    case 2:
+        sub_802C688();
+        sub_802D1A0(1);
+        break;
+  }
+}
+
+void sub_802D940(void)
+{
+  struct WonderMail *mail;
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_802C598(0);
+  if ((sub_8012FD8(&gUnknown_203B2F8->unk78) == 0) && (sub_8013114(&gUnknown_203B2F8->unk78,&menuAction), menuAction != 1)) {
+    gUnknown_203B2F8->menuAction1 = menuAction;
+  }
+
+  switch(menuAction)
+  {
+    // Delete
+    case 2:
+        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > 5) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)))
+        {
+            sub_802D1A0(7);
+        }
+        else {
+            sub_802D1A0(0xE);
+        }
+        break;
+    // Info
+    case 5:
+        gUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
+        sub_802D1A0(0xf);
+        break;
+    case 1:
+        sub_802D1A0(DRAW_JOB_LIST_1);
+        break;
+  }
+}
+
+void sub_802D9F0(void)
+{
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_802C598(0);
+  sub_8012FD8(&gUnknown_203B2F8->unk78);
+  if (sub_8012FD8(&gUnknown_203B2F8->unkC8) == 0) {
+    sub_8013114(&gUnknown_203B2F8->unkC8,&menuAction);
+  }
+
+  switch(menuAction)
+  {
+    // No
+    case 1:
+    case 4:
+        sub_802D1A0(DRAW_JOB_LIST_1);
+        break;
+    // Yes
+    case 3:
+        sub_802C688();
+        ResetJobSlot(gUnknown_203B2F8->jobSlotIndex);
+        sub_8096C80();
+        sub_802D1A0(RECEIVE_WONDER_MAIL);
+        break;
+  }
+}
+
+void sub_802DA60(void)
+{
+    switch(sub_802DEE0())
+    {
+        case 2:
+        case 3:
+            sub_802DF24();
+            sub_802D1A0(gUnknown_203B2F8->fallbackState);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void AdvancetoFallbackWonderMailRescueState(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_802D1A0(gUnknown_203B2F8->fallbackState);
+    }
+}
+
+bool8 sub_802DAA8(void)
+{
+  struct WonderMail *mail;
+  
+  mail = GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex);
+  if (!gUnknown_203B2F8->unk9) {
+    return TRUE;
+  }
+  else {
+    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)) return FALSE;
+    return TRUE;
+  }
+}
+
+bool8 sub_802DADC(void)
+{
+  u8 mailType;
+  struct WonderMail *mail;
+  s32 counter;
+  
+  if (!gUnknown_203B2F8->unk9) {
+_0802DAE8:
+    return TRUE;
+  }
+  else {
+    for( mail = &gUnknown_203B490->jobSlots[0], counter = 0; counter < MAX_ACCEPTED_JOBS; mail++, counter++)
+    {
+      mailType = mail->mailType;
+      if (((mailType == 0) || (mailType == WONDER_MAIL_TYPE_THANK_YOU)) ||
+         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->dungeonID != mail->dungeon.id)))) goto _0802DAE8;
+    }
+    return FALSE;
+  }
+}
+

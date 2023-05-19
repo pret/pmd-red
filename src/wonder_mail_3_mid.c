@@ -470,7 +470,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
     PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
 
-    gUnknown_203B310->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->unk14);
+    gUnknown_203B310->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->faceData = NULL;
 
     gUnknown_203B310->unk20 = 0;

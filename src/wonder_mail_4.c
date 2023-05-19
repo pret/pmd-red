@@ -294,9 +294,9 @@ void sub_803092C(void)
       local.dungeon = &mail->dungeon;
       local.playerName = mail->playerName;
 
-      local.clientSpecies = (mail->clientSpecies);
-      local.targetSpecies = (mail->clientSpecies);
-      local.unk14 = 0;
+      local.clientSpecies = mail->clientSpecies;
+      local.targetSpecies = mail->clientSpecies;
+      local.targetItem = ITEM_NOTHING;
       local.unk2E = 5;
 
       switch(mail->mailType)

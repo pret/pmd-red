@@ -75,8 +75,8 @@ extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
 extern void DrawPelipperBoardJobMenu(void);
 extern void CreatePelipperAcceptedStatusBox(u32);
-extern void sub_803B35C(struct WonderMail *, u32 *);
-extern void sub_802DE84(u32 *);
+extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
@@ -223,8 +223,8 @@ void sub_802EA58(void)
             break;
         case PELIPPER_JOB_INFO:
             sub_803B35C(GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex), &gPelipperBoard->unkC);
-            gPelipperBoard->unkC = 3;
-            gPelipperBoard->unk50 = 0;
+            gPelipperBoard->unkC.unk0[0] = 3;
+            gPelipperBoard->unkC.unk44 = 0;
             sub_802DE84(&gPelipperBoard->unkC);
             break;
         case PELIPPER_JOB_LIST_MENU:
@@ -243,7 +243,7 @@ void CreatePelipperBoardMenu(void)
   s32 loopMax;
 
   loopMax = 0;
-  MemoryFill16(gPelipperBoard->unkFC,0,0x10);
+  MemoryFill16(gPelipperBoard->unkFC,0,sizeof(gPelipperBoard->unkFC));
   gPelipperBoard->menuItems[0].text = gPelipperBoard_BulletinBoard;
   gPelipperBoard->menuItems[0].menuAction = 2;
   if ((HasNoPelipperBoardJobs())) {

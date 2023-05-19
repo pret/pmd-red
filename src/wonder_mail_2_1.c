@@ -102,7 +102,7 @@ extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
-extern void sub_803B35C(void *, u32 *);
+extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
@@ -123,7 +123,7 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_802DE84(u32 *);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
@@ -328,7 +328,7 @@ void DrawJobListMenu(void)
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
         local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
-        sub_803B35C(mail,local.unk0);
+        sub_803B35C(mail,&local);
         CreateRescueTitle(&local);
     } 
     sub_80073E0(gUnknown_203B2E8->unk3C);
@@ -463,7 +463,7 @@ void sub_802C9D8(void)
             break;
         case 4:
             sub_803B35C(GetJobSlotInfo(gUnknown_203B2F0->unkC), &gUnknown_203B2F0->unk10);
-            gUnknown_203B2F0->unk10 = 3;
+            gUnknown_203B2F0->unk10.unk0[0] = 3;
             sub_802DE84(&gUnknown_203B2F0->unk10);
             break;
         case 5:

@@ -44,12 +44,7 @@ struct unkStruct_203B2F8
     struct unkSubStruct_203B2F8 *mail;
     u8 jobSlotIndex;
     u8 fill11[0x14 - 0x11];
-    u32 unk14;
-    u8 fill18[0x58 - 0x18];
-    u8 unk58;
-    u8 fill59[0x64 - 0x59];
-    u8 *unk64;
-    u32 unk68;
+    struct unkStruct_802C39C unk14;
     u32 menuAction1;
     u32 menuAction2;
     u32 menuAction3;
