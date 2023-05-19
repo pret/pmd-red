@@ -19,7 +19,7 @@ struct unkStruct_203B304
     u32 menuAction1;
     u32 menuAction2;
     struct MenuStruct unk6C;
-    struct MenuItem unkBC[8];
+    struct MenuItem menuItems[8];
     u16 unkFC[8];
     struct UnkTextStruct2 unk10C[4];
 };

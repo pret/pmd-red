@@ -139,11 +139,7 @@ SECTIONS {
         asm/wonder_mail_3.o(.text);
         src/wonder_mail_802DF88.o(.text);
         src/mailbox.o(.text);
-        asm/mailbox.o(.text);
-        src/mailbox_1.o(.text);
         src/pelipper_board.o(.text);
-        asm/pelipper_board.o(.text);
-        src/pelipper_board_1.o(.text);
         src/wonder_mail_3_mid.o(.text);
         asm/wonder_mail_3_mid.o(.text);
         src/wonder_mail_3_1.o(.text);
