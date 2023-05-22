@@ -384,21 +384,21 @@ void sub_802EDBC(void)
             mail = GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex);
             switch(mail->mailType)
             {
-                case 2:
+                case MAIL_TYPE_UNK2:
                     gPelipperBoard->unk4 = 1;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(PELIPPER_BOARD_EXIT);
                     break;
-                case 3:
+                case MAIL_TYPE_UNK3:
                     gPelipperBoard->unk4 = 2;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
                     sub_80965F4();
                     sub_802C2D4();
                     SetPelipperBoardState(PELIPPER_BOARD_EXIT);
                     break;
-                case 4:
+                case MAIL_TYPE_UNK4:
                     gPelipperBoard->unk4 = 3;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
                     sub_80965F4();

@@ -1,3 +1,4 @@
+#include "constants/mailbox.h"
 #include "global.h"
 #include "constants/dungeon.h"
 #include "constants/monster.h"
@@ -35,11 +36,11 @@ void SortPelipperJobs(void)
 
     struct WonderMail mail;
 
-    for(index1 = 0; index1 < 7; index1++)
+    for(index1 = 0; index1 < MAX_ACCEPTED_JOBS - 1; index1++)
     {
-        for(index2 = index1 + 1; index2 < 8; index2++)
+        for(index2 = index1 + 1; index2 < MAX_ACCEPTED_JOBS; index2++)
         {
-            if(gUnknown_203B490->pelipperBoardJobs[index2].mailType != WONDER_MAIL_TYPE_NONE)
+            if(gUnknown_203B490->pelipperBoardJobs[index2].mailType != MAIL_TYPE_NONE)
             {
                 if((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.id > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.id) ||
                 ((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.id == gUnknown_203B490->pelipperBoardJobs[index2].dungeon.id) && (gUnknown_203B490->pelipperBoardJobs[index1].dungeon.floor > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.floor)))
@@ -60,15 +61,15 @@ void GeneratePelipperJobs(void)
   s32 index;
   
   range = RandRange(4,8);
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-    gUnknown_203B490->pelipperBoardJobs[index].mailType = WONDER_MAIL_TYPE_NONE;
+    gUnknown_203B490->pelipperBoardJobs[index].mailType = MAIL_TYPE_NONE;
   }
   
   index = 0;
   if (sub_8097318(0xe) != 0) {
     mail = GetPelipperBoardSlotInfo(0);
-    mail->mailType = 2;
+    mail->mailType = MAIL_TYPE_UNK2;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 1;
     mail->dungeon.id = DUNGEON_UPROAR_FOREST;
@@ -86,7 +87,7 @@ void GeneratePelipperJobs(void)
 
   if (sub_8097318(0xf) != 0) {
     mail = GetPelipperBoardSlotInfo(index);
-    mail->mailType = 3;
+    mail->mailType = MAIL_TYPE_UNK3;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 2;
     mail->dungeon.id = DUNGEON_HOWLING_FOREST;
@@ -103,7 +104,7 @@ void GeneratePelipperJobs(void)
 
   if (sub_8097318(0x1c) != 0) {
     mail = GetPelipperBoardSlotInfo(index);
-    mail->mailType = 4;
+    mail->mailType = MAIL_TYPE_UNK4;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 3;
     mail->dungeon.id = DUNGEON_WISH_CAVE;
@@ -130,9 +131,9 @@ bool8 IsMailinJobSlot(struct WonderMail *mail)
   struct WonderMail *jobSlot;
   s32 index;
   
-  for(index = 0, jobSlot = &gUnknown_203B490->jobSlots[0]; index < 8; jobSlot++, index++)
+  for(index = 0, jobSlot = &gUnknown_203B490->jobSlots[0]; index < MAX_ACCEPTED_JOBS; jobSlot++, index++)
   {
-      if(jobSlot->mailType != WONDER_MAIL_TYPE_NONE)
+      if(jobSlot->mailType != MAIL_TYPE_NONE)
         if(mail->missionType == jobSlot->missionType) 
             if(mail->unk2 == jobSlot->unk2)
                     if(mail->dungeon.id == jobSlot->dungeon.id)
@@ -166,9 +167,9 @@ bool8 sub_809693C(struct WonderMail *mail)
   {
     if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
         escortMission = TRUE;
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
-      if ((gUnknown_203B490->jobSlots[index].mailType == 6) &&
+      if ((gUnknown_203B490->jobSlots[index].mailType == MAIL_TYPE_TAKEN_JOB) &&
          (sub_8095E38(&gUnknown_203B490->jobSlots[index],dungeonIndex,floor,escortMission) != 0))
       {
         return TRUE;
@@ -184,7 +185,7 @@ s32 GetNumAcceptedJobs(void)
   s32 count;
   
   count = 0;
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
     if (!IsJobSlotEmpty(index)) {
       count++;
@@ -200,11 +201,11 @@ s32 CountJobsinDungeon(u8 dungeon)
   s32 count;
   
   count = 0;
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
     mail = GetJobSlotInfo(index);
     if ((mail->dungeon.id == dungeon) &&
-       (((mail->mailType == 6 || (mail->mailType == 8)) || (mail->mailType == 9)))) {
+       (((mail->mailType == MAIL_TYPE_TAKEN_JOB || (mail->mailType == MAIL_TYPE_UNK8)) || (mail->mailType == MAIL_TYPE_UNK9)))) {
       count++;
     }
   } 
@@ -218,11 +219,11 @@ bool8 sub_8096A08(u8 dungeon, s32 param_2)
   u32 local_14;
   s32 temp;
 
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
       mail = GetJobSlotInfo(index);
       if(mail->dungeon.id == dungeon)
-        if(mail->mailType == 6)
+        if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
             if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
             {
                 temp = 0xffffff00;
@@ -246,9 +247,9 @@ bool8 AcceptJob(struct WonderMail *mail)
 {
   s32 index;
 
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
-    if(gUnknown_203B490->jobSlots[index].mailType == WONDER_MAIL_TYPE_NONE)
+    if(gUnknown_203B490->jobSlots[index].mailType == MAIL_TYPE_NONE)
     {
         gUnknown_203B490->jobSlots[index] = *mail;
         return FALSE;
@@ -264,7 +265,7 @@ struct WonderMail *GetJobSlotInfo(u8 index)
 
 bool8 IsJobSlotEmpty(u8 index)
 {
-    if(gUnknown_203B490->jobSlots[index].mailType == WONDER_MAIL_TYPE_NONE)
+    if(gUnknown_203B490->jobSlots[index].mailType == MAIL_TYPE_NONE)
         return TRUE;
     else
         return FALSE;
@@ -283,7 +284,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
   if (jobSlot->dungeon.id == dungeon) {
     switch(jobSlot->missionType) {
         case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
-            if (jobSlot->mailType == 6) {
+            if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
                 for(index = 0; index < INVENTORY_SIZE; index++)
                 {
                     item = &gTeamInventory_203B460->teamItems[index];
@@ -295,13 +296,13 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
             break;
         case WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT:
         case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
-            if (jobSlot->mailType == 9) {
+            if (jobSlot->mailType == MAIL_TYPE_UNK9) {
                 param_1->unk0 = TRUE;
             }
             break;
         case WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET:
         case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:
-            if (jobSlot->mailType == 9) {
+            if (jobSlot->mailType == MAIL_TYPE_UNK9) {
                 param_1->unk0 = TRUE;
                 param_1->targetSpecies = jobSlot->targetSpecies;
             }
@@ -316,10 +317,10 @@ s16 sub_8096B98(u8 dungeon)
   struct WonderMail *mail;
   s32 index;
   
-  for(index = 0; index < 8; index++)
+  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
     mail = GetJobSlotInfo(index);
-    if(mail->mailType == 6)
+    if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
         if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
             if(mail->dungeon.id == dungeon)
                 return mail->targetSpecies;
@@ -332,13 +333,13 @@ void sub_8096BD0(void)
   s32 index;
   struct WonderMail *mail;
 
-  for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < 8; mail++, index++)
+  for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < MAX_ACCEPTED_JOBS; mail++, index++)
   {
     switch(mail->mailType)
     {
-        case 7:
-        case 8:
-        case 9:
+        case MAIL_TYPE_UNK7:
+        case MAIL_TYPE_UNK8:
+        case MAIL_TYPE_UNK9:
             ResetJobSlot(index);
             break;
     }
@@ -352,7 +353,7 @@ bool8 sub_8096C08(u8 *jobIndex)
   s32 index;
   struct WonderMail *mail;
 
-  for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < 8; mail++, index++)
+  for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < MAX_ACCEPTED_JOBS; mail++, index++)
   {
     if(mail->mailType > 4 && mail->unk2 == 4)
     {
@@ -366,7 +367,7 @@ bool8 sub_8096C08(u8 *jobIndex)
 
 void ResetJobSlot(u8 index)
 {
-  gUnknown_203B490->jobSlots[index].mailType = WONDER_MAIL_TYPE_NONE;
+  gUnknown_203B490->jobSlots[index].mailType = MAIL_TYPE_NONE;
   gUnknown_203B490->jobSlots[index].dungeon.id = 99;
   gUnknown_203B490->jobSlots[index].dungeon.floor = 0;
   gUnknown_203B490->jobSlots[index].rewardType = MONEY1;

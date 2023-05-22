@@ -636,7 +636,7 @@ void DisplayMissionObjectives(void)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
                     if ((((jobInfo->dungeon.id == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
-                        ) && (jobInfo->mailType != 5)) && (jobInfo->mailType != 7)) {
+                        ) && (jobInfo->mailType != MAIL_TYPE_SUSPENDED_JOB)) && (jobInfo->mailType != MAIL_TYPE_UNK7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
                             sprintfStatic(buffer1,gUnknown_80E1F3C,jobInfo->dungeon.floor);

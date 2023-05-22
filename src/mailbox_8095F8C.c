@@ -28,7 +28,7 @@ bool8 sub_8095FB0(struct WonderMail *mail)
 
     for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
-        if(gUnknown_203B490->mailboxSlots[index].mailType == WONDER_MAIL_TYPE_NONE)
+        if(gUnknown_203B490->mailboxSlots[index].mailType == MAIL_TYPE_NONE)
         {
             gUnknown_203B490->mailboxSlots[index] = *mail;
             return FALSE;
@@ -44,7 +44,7 @@ struct WonderMail *GetMailboxSlotInfo(u8 index)
 
 bool8 IsMailSlotEmpty(u8 index)
 {
-    if(gUnknown_203B490->mailboxSlots[index].mailType == WONDER_MAIL_TYPE_NONE)
+    if(gUnknown_203B490->mailboxSlots[index].mailType == MAIL_TYPE_NONE)
         return TRUE;
     else
         return FALSE;
@@ -61,7 +61,7 @@ void ResetMailbox(void)
 
 void ResetMailboxSlot(u8 index)
 {
-    gUnknown_203B490->mailboxSlots[index].mailType = WONDER_MAIL_TYPE_NONE;
+    gUnknown_203B490->mailboxSlots[index].mailType = MAIL_TYPE_NONE;
     gUnknown_203B490->mailboxSlots[index].dungeon.id = 99;
     gUnknown_203B490->mailboxSlots[index].dungeon.floor = 0;
     gUnknown_203B490->mailboxSlots[index].rewardType = MONEY1;

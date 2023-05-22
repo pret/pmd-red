@@ -923,7 +923,7 @@ char* sub_808E4FC(s32 a1)
 {
     struct subStruct_203B240 *result[4];
     sub_8097DF0(gFormattedStatusNames[a1], result);
-    return result[0]->unk0;
+    return result[0]->pokeName;
 }
 
 char* sub_808E51C(s32 a1)

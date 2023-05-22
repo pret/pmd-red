@@ -3,8 +3,9 @@
 
 struct subStruct_203B240
 {
-    char * unk0;
+    char * pokeName;
     char * unk4;
 };
+
 
 #endif

@@ -8,12 +8,7 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "menu_input.h"
-
-struct subStruct_203B240
-{
-    char * pokeName;
-    char * unk4;
-};
+#include "subStruct_203B240.h"
 
 // based off of 203B240..
 struct unkStruct_203B230

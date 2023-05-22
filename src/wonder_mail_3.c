@@ -1,3 +1,4 @@
+#include "constants/mailbox.h"
 #include "global.h"
 #include "constants/dungeon.h"
 #include "constants/input.h"
@@ -184,6 +185,61 @@ extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 extern u8 *gUnknown_80D494C[];
 extern u8 *gUnknown_80D4970[];
+extern u8 gUnknown_80DFD70[];
+extern u8 gUnknown_80DFD7C[];
+
+extern bool8 sub_809693C(struct WonderMail *);
+extern bool8 sub_80A2824(u8);
+
+void sub_802CAA4(void) {
+    s32 loopMax;
+    struct WonderMail *mail;
+    s32 index;
+
+    loopMax = 0;
+    mail = GetJobSlotInfo(gUnknown_203B2F0->unkC);
+    if(gUnknown_203B2F0->unk0 == 0)
+    {
+        switch(mail->mailType)
+        {
+            case 5:
+                gUnknown_203B2F0->unk10C[loopMax].text = gUnknown_80DFD70; // Take Job
+                if(sub_809693C(mail) || !sub_80A2824(mail->dungeon.id))
+                {
+                    gUnknown_203B2F0->unk10C[loopMax].menuAction = -1;
+                }
+                else
+                {
+                    gUnknown_203B2F0->unk10C[loopMax].menuAction = 2;
+                }
+                loopMax += 1;
+                break;
+            case 6:
+                gUnknown_203B2F0->unk10C[loopMax].text = gUnknown_80DFD7C; // Suspend
+                gUnknown_203B2F0->unk10C[loopMax].menuAction = 3;
+                loopMax += 1;
+                break;
+        }
+    }
+    gUnknown_203B2F0->unk10C[loopMax].text = *gUnknown_80D494C;
+    gUnknown_203B2F0->unk10C[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2F0->unk10C[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2F0->unk10C[loopMax].menuAction = 7;
+    loopMax += 1;
+    gUnknown_203B2F0->unk10C[loopMax].text = NULL;
+    gUnknown_203B2F0->unk10C[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B2F0->unk10C[index].menuAction != -1)
+        {
+            if(gUnknown_203B2F0->unk10C[index].menuAction == gUnknown_203B2F0->menuAction)
+                return;
+        }
+    }
+    gUnknown_203B2F0->menuAction = 7;
+}
 
 void sub_802CBAC(void)
 {
@@ -239,13 +295,13 @@ void sub_802CC70(void)
         case 2:
             PlaySound(0x133);
             mail = GetJobSlotInfo(gUnknown_203B2F0->unkC);
-            mail->mailType = 6;
+            mail->mailType = MAIL_TYPE_TAKEN_JOB;
             SetJobListState(1);
             break;
         case 3:
             PlaySound(0x133);
             mail2 = GetJobSlotInfo(gUnknown_203B2F0->unkC);
-            mail2->mailType = 5;
+            mail2->mailType = MAIL_TYPE_SUSPENDED_JOB;
             SetJobListState(1);
             break;
         case 4:
@@ -890,7 +946,7 @@ void sub_802D940(void)
   {
     // Delete
     case 2:
-        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > 5) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)))
+        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > MAIL_TYPE_SUSPENDED_JOB) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)))
         {
             sub_802D1A0(7);
         }

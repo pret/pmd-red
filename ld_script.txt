@@ -134,7 +134,6 @@ SECTIONS {
         src/pokemon_news.o(.text);
         src/wonder_mail_2_mid.o(.text);
         src/wonder_mail_2_1.o(.text);
-        asm/wonder_mail_802C860.o(.text);
         src/wonder_mail_3.o(.text);
         src/wonder_mail_802DF88.o(.text);
         src/mailbox.o(.text);
