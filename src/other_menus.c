@@ -91,7 +91,7 @@ void sub_8036FDC(s32 param_1)
   }
 
   gUnknown_203B35C->unk0 = param_1;
-  gUnknown_203B35C->unk4 = 0;
+  gUnknown_203B35C->linkStatus = 0;
   gUnknown_203B35C->state = 0;
   iVar3 = 0;
   do {

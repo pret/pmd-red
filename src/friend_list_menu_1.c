@@ -32,8 +32,7 @@ struct unkStruct_203B2B4
     u32 menuAction1;
     s32 menuAction2;
     struct MenuStruct unk78;
-    struct MenuItem unkC8[4];
-    u8 fillE8[0x108 - 0xE8];
+    struct MenuItem unkC8[8];
     u16 unk108[8];
     struct UnkTextStruct2 unk118[4];
 };

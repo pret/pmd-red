@@ -71,23 +71,60 @@ static const u8 filler[] = "pksdir0";
 
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
+extern u8 *gUnknown_80D4970[];
+
+void sub_80276A8(void)
+{
+  int index;
+  s32 loopMax;
+
+  loopMax = 0;
+  MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
+  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionGive;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 10;
+  if (GetNumberOfFilledInventorySlots() == 0) {
+    gUnknown_203B2BC->unk16C[loopMax] = 1;
+  }
+  loopMax += 1;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 4;
+  loopMax += 1;
+  gUnknown_203B2BC->menuItems[loopMax].text = 0;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 1;
+
+
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B2BC->unk16C[index] == 0)
+      {
+          if(gUnknown_203B2BC->menuItems[index].menuAction == gUnknown_203B2BC->menuAction2)
+              return;
+      }
+  }
+    
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B2BC->unk16C[index] == 0)
+      {
+             gUnknown_203B2BC->menuAction2 = gUnknown_203B2BC->menuItems[index].menuAction;
+             break;
+      }
+  }
+}
 
 void sub_8027794(void)
 {
-  struct unkStruct_203B2BC *puVar1;
-  u8 *nullText;
-  s32 menuAction;
+  s32 loopMax = 0;
   
   MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  puVar1 = gUnknown_203B2BC;
-  nullText = NULL;
-  puVar1->menuItems[0].text = *gUnknown_80D4920;
-  gUnknown_203B2BC->menuItems[0].menuAction = 0x2;
-  menuAction = 1;
-  gUnknown_203B2BC->menuItems[1].text = *gUnknown_80D4928;
-  gUnknown_203B2BC->menuItems[1].menuAction = 3;
-  gUnknown_203B2BC->menuItems[2].text = nullText;
-  gUnknown_203B2BC->menuItems[2].menuAction = menuAction;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4920;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 0x2;
+  loopMax += 1;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4928;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 3;
+  loopMax += 1;
+  gUnknown_203B2BC->menuItems[loopMax].text = NULL;
+  gUnknown_203B2BC->menuItems[loopMax].menuAction = 1;
 }
 
 void sub_80277FC(void)

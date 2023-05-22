@@ -125,7 +125,6 @@ extern u8 sub_807EAA0(u32, u32);
 extern void sub_80522F4(struct Entity *r1, struct Entity *r2, const char[]);
 extern s32 sub_80556BC(struct Entity *, struct Entity *, u8, struct Move *, u32, u32);
 extern bool8 sub_805727C(struct Entity *, struct Entity *, s16);
-extern void sub_8078968(struct Entity *r0, struct Entity *r1);
 extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void SetMessageArgument(char[], struct Entity*, u32);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
@@ -329,9 +328,9 @@ bool32 sub_80578FC(struct Entity *pokemon, struct Entity *target, struct Move * 
   return flag;
 }
 
-bool32 sub_8057948(struct Entity *pokemon, struct Entity *target)
+bool32 EncoreMoveAction(struct Entity *pokemon, struct Entity *target)
 {
-    sub_8078968(pokemon, target);
+    EncoreStatusTarget(pokemon, target);
     return TRUE;
 }
 
