@@ -122,9 +122,8 @@ SECTIONS {
         asm/code_801EE10_1.o(.text);
         src/code_801EE10_1.o(.text);
         src/luminous_cave.o(.text);
-        src/friend_list_menu_1.o(.text);
-        asm/friend_list_menu.o(.text);
         src/friend_list_menu.o(.text);
+        src/party_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
         asm/friend_area_action_menu.o(.text);
         src/friend_area_action_menu_1.o(.text);
@@ -415,6 +414,8 @@ SECTIONS {
         src/save.o(.rodata);
         src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/friend_list_menu.o(.rodata);
+        src/party_list_menu.o(.rodata);
         src/friend_area_action_menu.o(.rodata);
         src/friend_area_action_menu_1.o(.rodata);
         src/wonder_mail.o(.rodata);

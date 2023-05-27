@@ -30,7 +30,7 @@ struct PokemonStruct
 {
     // size: 0x58
     /* 0x0 */ u16 unk0; // recruited??
-    /* 0x1 */ bool8 isTeamLeader;
+    /* 0x2 */ bool8 isTeamLeader;
     /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
     /* 0x4 */ struct DungeonLocation dungeonLocation;
     /* 0x8 */ s16 speciesNum; // species #

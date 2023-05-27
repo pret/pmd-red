@@ -4614,6 +4614,3 @@ gUnknown_80DCA2C: @ 80DCA2C
 
 	#include "text/luminous_cave.inc"
 
-        #include "friend_area.inc"
-
-	#include "text/party_menu.inc"

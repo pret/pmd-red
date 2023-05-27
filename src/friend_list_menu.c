@@ -1,181 +1,592 @@
 #include "global.h"
-#include "constants/dungeon.h"
-#include "item.h"
-#include "menu.h"
-#include "pokemon.h"
+#include "memory.h"
 #include "text.h"
-#include "team_inventory.h"
-#include "constants/move.h"
-#include "code_800D090.h"
+#include "input.h"
+#include "menu.h"
+#include "item.h"
+#include "pokemon.h"
+#include "moves.h"
 #include "menu_input.h"
+#include "team_inventory.h"
 
-struct unkStruct_203B2B8
+
+// there might be more overlap with unkStruct_203B2BC
+// I was working on the moves and put the data that seemed to correspond to that
+// into a separate struct
+struct unkStruct_203B2B4
 {
-    // size: 0x280
-    u32 state;
+    // size: 0x178
+    s32 unk0;
+    s32 state;
     u32 fallbackState;
-    u8 unk8;
-    /* 0xA */ s16 pokeSpecies;
-    u32 id;
-    /* 0x10 */ struct BulkItem item1;
-    /* 0x14 */ struct BulkItem item2;
-    struct PokemonStruct *unk18;
-    bool8 isTeamLeader;
-    u32 moveIndex;
-    /* 0x24 */ u16 moveID;
+    u8 unkC;
+    u8 unkD;
+    s16 species;
+    u32 itemIndex;
+    struct BulkItem item1;
+    struct BulkItem item2;
+    /* 0x1C */ struct PokemonStruct *pokeStruct;
+    u32 moveIndex;  // some sort of move index
+    u16 moveID;
     struct Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
     u32 menuAction1;
-    u32 menuAction2;
-    u32 unk78;
-    struct MenuStruct unk7C;
-    struct MenuStruct unkCC;
+    s32 menuAction2;
+    struct MenuStruct unk78;
+    struct MenuItem unkC8[8];
+    u16 unk108[8];
+    struct UnkTextStruct2 unk118[4];
 };
-extern struct unkStruct_203B2B8 *gUnknown_203B2B8;
-extern u8 gAvailablePokemonNames[0x58];
-extern u8 gUnknown_202DEA8[0x58];
-extern u8 gUnknown_202DE58[0x58];
-extern u8 gUnknown_80DD6E0[];
-extern u8 gPartyMenuItemPlaceholder[];
-extern struct UnkTextStruct2 gUnknown_80DD370;
+extern struct unkStruct_203B2B4 *gUnknown_203B2B4;
 
-extern u32 sub_8026F04(struct PokemonStruct *);
-extern void sub_8026074(u32);
-extern void PlaySound(u32);
-bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0);
-extern bool8 sub_80023E4(u8);
-extern struct PokemonStruct *sub_808D3F8(void);
-extern struct PokemonStruct *sub_808D3BC(void);
-extern void sub_801F214(void);
-extern u32 sub_801F194(void);
-extern u32 sub_801EF38(u32);
+const struct UnkTextStruct2 gUnknown_80DD148 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+};
 
+const struct UnkTextStruct2 gUnknown_80DD160 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x13, 0x00, 0x04, 0x00,
+        0x08, 0x03,
+        0x03, 0x00,
+        NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DD178 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x14, 0x00, 0x04, 0x00,
+        0x06, 0x03,
+        0x03, 0x00,   
+        NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80DD190 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x02, 0x00, 0x11, 0x00,
+        0x1A, 0x02,
+        0x02, 0x00,
+        NULL
+};
+
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202DEA8[];
+extern u8 *gUnknown_80D4970[];
+extern u8 gUnknown_202DE58[];
+
+ALIGNED(4) const u8 gUnknown_80DD1A8[] = "Whom would you like to visit?";
+
+ALIGNED(4) const u8 gUnknown_80DD1C8[] = _(
+	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}handed over. ");
+
+ALIGNED(4) const u8 gUnknown_80DD1EC[] = _(
+	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}handed over.{EXTRA_MSG}"
+	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}returned to the Toolbox.");
+
+ALIGNED(4) const u8 gUnknown_80DD240[] = _(
+	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}returned to the Toolbox.");
+
+ALIGNED(4) const u8 gUnknown_80DD270[] = _(
+    "{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
+    "{CENTER_ALIGN}on standby in the Friend Area.");
+
+ALIGNED(4) const u8 gUnknown_80DD2B0[] = "Give";
+ALIGNED(4) const u8 gUnknown_80DD2B8[] = "Take";
+ALIGNED(4) const u8 gUnknown_80DD2C0[] = "Stand By";
+ALIGNED(4) const u8 gUnknown_80DD2CC[] = "Visit";
+ALIGNED(4) const u8 gUnknown_80DD2D4[] = "Name";
+ALIGNED(4) const u8 gUnknown_80DD2DC[] = "Summary";
+ALIGNED(4) const u8 gUnknown_80DD2E4[] = "Moves";
+ALIGNED(4) const u8 gUnknown_80DD2EC[] = "Check IQ";
+ALIGNED(4) const u8 gUnknown_80DD2F8[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void sub_80922B4(u8 *, const u8 *, u32);
-extern void sub_808D930(u8 *, s16);
-extern s32 sub_8008ED0(u8 *);
-extern void xxx_call_draw_string(s32 x, s32 y, u8 *, u32, u32);
-extern void xxx_format_and_draw(s32, s32, u8 *, ...);
-extern s32 sub_80144A4(s32 *);
-
-extern u32 sub_801F890(void);
-extern void sub_801F8D0(void);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
-
+extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
+bool8 sub_8025EC4(struct PokemonStruct *);
+extern u32 sub_8023A94(u32);
+extern s16 sub_8023B44(void);
+extern void sub_8023C60(void);
+extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
+extern s16 sub_80A5728(void);
+extern u8 sub_8002658(s16);
+extern bool8 sub_8024108(u32);
+extern void sub_8025434(s32);
+extern void sub_80259F0(void);
+extern void sub_8025A84(void);
+extern void sub_8025BCC(void);
+extern void sub_8025BE8(void);
+extern void sub_8025C04(void);
+extern void sub_8025CB4(void);
+extern void sub_8025D90(void);
+extern void sub_8025DAC(void);
+extern void sub_8025E08(void);
+extern void sub_8025E24(void);
+extern void sub_8025E44(void);
+extern void sub_802544C(void);
+extern void sub_8025518(void);
+extern void sub_8025728(void);
+extern void sub_802591C(void);
+extern u32 sub_801B3C0(struct Item *param_1);
+extern void sub_8023868(u32, u32, u32, u32);
+extern void sub_801F1B0(u32, u32);
+extern void sub_801A5D8(u32,u32, u32, u32);
+extern void sub_801A8D0(u32);
+extern void sub_801A9E0(void);
+extern void PlaySound(u32);
+extern void sub_8024458(s16, u32);
+extern void sub_801BEEC(s16);
+extern void sub_8023B7C(u32);
+extern void sub_8023DA4(void);
 extern void nullsub_104(void);
-extern void sub_801A928(void);
-extern void sub_8099690(u32);
-extern u32 sub_801A6E8(u32);
-
-extern u32 sub_801A8AC(void);
-extern u32 sub_8022860(void);
-extern void sub_8022908(void);
-
-extern void sub_801BF98(void);
-extern u32 sub_801BF48(void);
-extern void sub_802453C(void);
-extern u32 sub_80244E4(void);
-extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern u32 sub_80244E4(void);
+extern void sub_802453C(void);
+extern u32 sub_801BF48(void);
+extern void sub_801BF98(void);
+extern void sub_801B450(void);
+extern u32 sub_801B410(void);
 
-void sub_80268CC(void)
+extern u32 sub_801EF38(u32);
+extern u32 sub_801F194(void);
+extern void sub_801F214(void);
+extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
+extern void sub_801F808(u16 *);
+u32 sub_801602C(u32 r0, u8 *name);
+void sub_8025E68(u32 , struct BulkItem *);
+extern u32 sub_801A6E8(u32);
+extern u32 sub_801A8AC(void);
+extern void sub_8099690(u32);
+extern void sub_801A928(void);
+extern void sub_801F8D0(void);
+extern u32 sub_801F890(void);
+extern void sub_80160D8(void);
+extern u32 sub_8016080(void);
+extern s32 sub_80144A4(s32 *);
+extern bool8 sub_80023E4(u32);
+
+bool8 sub_80252F0(s32 param_1)
 {
-  struct PokemonStruct *playerPokemon;
-  struct PokemonStruct *pokeStruct;
-  struct PokemonStruct *pokeStruct2;
-  s32 choice;
   
-  choice = 0;
-  if ((sub_8012FD8(&gUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&gUnknown_203B2B8->unk7C,&choice), choice != 1)) {
-    gUnknown_203B2B8->menuAction1 = choice;
+  if ((param_1 == 2) && (sub_8024108(4) != '\0')) {
+    return FALSE;
   }
-  switch(choice) {
-    case 6:
-        if (sub_808D750(gUnknown_203B2B8->pokeSpecies)) {
-
-#ifdef NONMATCHING
-            pokeStruct = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
-#else
-            register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2B8->pokeSpecies]);
-            struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
-            size_t addr = offset + (size_t)p;
-            pokeStruct = (struct PokemonStruct*)addr;
-#endif
-
-            pokeStruct->unk0 |= 2;
-            nullsub_104();
-        }
-        sub_808ED00();
-        sub_8026074(5);
-        break;
-    case 7:
-        gUnknown_203B2B8->unk18->unk0 &= 0xfffd;
-        nullsub_104();
-        sub_808ED00();
-        sub_8026074(6);
-        break;
-    case 8:
-        pokeStruct2 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
-        playerPokemon = GetPlayerPokemonStruct();
-
-        if (!pokeStruct2->isTeamLeader) {
-            playerPokemon->isTeamLeader = FALSE;
-            pokeStruct2->isTeamLeader = TRUE;
-            nullsub_104();
-        }
-        sub_808ED00();
-        sub_8026074(7);
-        break;
-    case 9:
-        sub_8026074(0xc);
-        break;
-    case 0xd:
-        sub_8026074(0x16);
-        break;
-    case 10:
-        sub_8026074(0xe);
-        break;
-    case 0xb:
-        sub_8026074(0x12);
-        break;
-    case 0xc:
-        PlaySound(0x14d);
-        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
-            AddHeldItemToInventory(&gUnknown_203B2B8->item2);
-        }
-        FillInventoryGaps();
-        gUnknown_203B2B8->item2.id = ITEM_NOTHING;
-        gUnknown_203B2B8->item2.quantity = 0;
-        GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item2);
-        nullsub_104();
-        sub_8026074(0x11);
-        break;
-    case 4:
-        sub_8026074(3);
-        break;
-    case 5:
-        sub_8026074(4);
-        break;
-    case 1:
-        sub_8026074(0x19);
-        break;
-
+  else {
+    gUnknown_203B2B4 = MemoryAlloc(sizeof(struct unkStruct_203B2B4),8);
+    gUnknown_203B2B4->menuAction1 = 0;
+    gUnknown_203B2B4->unk0 = param_1;
+    gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
+    gUnknown_203B2B4->unkD = 0;
+    if (gUnknown_203B2B4->unk0 == 2) {
+      sub_8025434(0);
+    }
+    else {
+      sub_8025434(1);
+    }
+    return TRUE;
   }
 }
 
-void sub_8026A78(void)
+u32 sub_8025354(void)
+{
+  switch(gUnknown_203B2B4->state) {
+    case 0x13:
+        return 3;
+    case 1:
+    case 2:
+        sub_80259F0();
+        break;
+    case 3:
+        sub_8025A84();
+        break;
+    case 4:
+        sub_8025BCC();
+        break;
+    case 5:
+        sub_8025BE8();
+        break;
+    case 0xb:
+    case 0xc:
+        sub_8025C04();
+        break;
+    case 0xd:
+        sub_8025CB4();
+        break;
+    case 0xe:
+        sub_8025D90();
+        break;
+    case 0xf:
+    case 0x10:
+        sub_8025DAC();
+        break;
+    case 0x11:
+        sub_8025E08();
+        break;
+    case 0x12:
+        sub_8025E24();
+        break;
+    default:
+        sub_8025E44();
+        break;
+  }
+  return 0;
+}
+
+u8 sub_802540C(void)
+{
+    return gUnknown_203B2B4->unkD;
+}
+
+void sub_8025418(void)
+{
+    if(gUnknown_203B2B4 != NULL)
+    {
+        MemoryFree(gUnknown_203B2B4);
+        gUnknown_203B2B4 = NULL;
+    }
+}
+
+void sub_8025434(s32 newState)
+{
+    gUnknown_203B2B4->state = newState;
+    sub_802544C();
+    sub_8025518();
+}
+
+void sub_802544C(void)
+{
+  s32 index;
+  
+  sub_8006518(gUnknown_203B2B4->unk118);
+
+  switch(gUnknown_203B2B4->state)
+  {
+    case 3:
+        if (gUnknown_203B2B4->unk0 == 0) {
+            gUnknown_203B2B4->unk118[3] = gUnknown_80DD190;
+        }
+        sub_8025728();
+        gUnknown_203B2B4->unk118[2] = gUnknown_80DD160;
+        sub_8012CAC(&gUnknown_203B2B4->unk118[2],gUnknown_203B2B4->unkC8);
+        break;
+    case 0xD:
+        sub_802591C();
+        gUnknown_203B2B4->unk118[2] = gUnknown_80DD178;
+        sub_8012CAC(&gUnknown_203B2B4->unk118[2],gUnknown_203B2B4->unkC8);
+        break;
+    default:
+        for(index = 0; index < 4; index++)
+        {
+            gUnknown_203B2B4->unk118[index] = gUnknown_80DD148;
+        }
+        break;
+
+  }
+  ResetUnusedInputStruct();
+  sub_800641C(gUnknown_203B2B4->unk118,1,1);
+}
+
+void sub_8025518(void)
+{
+  u32 uVar3;
+  struct Item item;
+
+  switch(gUnknown_203B2B4->state)
+  {
+    case 0:
+        gUnknown_203B2B4->fallbackState = 1;
+        sub_80141B4(gUnknown_80DD1A8,0,0,0x301);
+        break;
+    case 1:
+        uVar3 = 4;
+        if (gUnknown_203B2B4->unk0 == 0) {
+            uVar3 = 2;
+        }
+        sub_8023868(uVar3,0,0,10);
+        break;
+    case 2:
+        sub_8023B7C(1);
+        break;
+    case 3:
+        if (gUnknown_203B2B4->unk0 == 0) {
+            sub_8025E68(3,&gUnknown_203B2B4->item2);
+        }
+        sub_8023DA4();
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B4->pokeStruct,7);
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B4->pokeStruct,6);
+        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
+        break;
+    case 4:
+        sub_8024458(gUnknown_203B2B4->species,2);
+        break;
+    case 5:
+        sub_801BEEC(gUnknown_203B2B4->species);
+        break;
+    case 0xb:
+        sub_801A5D8(1,0,0,10);
+        break;
+    case 0xc:
+        sub_801A8D0(1);
+        break;
+    case 0xd:
+        sub_801A9E0();
+        sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction2,2);
+        break;
+    case 0xe:
+        HeldItemToSlot(&item, &gUnknown_203B2B4->item1);
+        sub_801B3C0(&item);
+        break;
+    case 8:
+        gUnknown_203B2B4->fallbackState = 2;
+        sub_80141B4(gUnknown_80DD1C8,0,0,0x101);
+        break;
+    case 9:
+        gUnknown_203B2B4->fallbackState = 2;
+        sub_80141B4(gUnknown_80DD1EC,0,0,0x101);
+        break;
+    case 10:
+        gUnknown_203B2B4->fallbackState = 2;
+        sub_80141B4(gUnknown_80DD240,0,0,0x101);
+        break;
+    case 7:
+        gUnknown_203B2B4->fallbackState = 1;
+        PlaySound(0xcf);
+        sub_80141B4(gUnknown_80DD270,0,0,0x101);
+        break;
+    case 0xf:
+        unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
+        sub_801EE10(3,gUnknown_203B2B4->species,gUnknown_203B2B4->moves,0,0,0);
+        break;
+    case 0x10:
+        sub_801F1B0(1,0);
+        break;
+    case 0x11:
+        GetLinkedSequence(gUnknown_203B2B4->moveIndex,gUnknown_203B2B4->moves, gUnknown_203B2B4->moveIDs);
+        sub_801F808(gUnknown_203B2B4->moveIDs);
+        break;
+    case 0x12:
+        sub_801602C(2,gUnknown_203B2B4->pokeStruct->name);
+        break;
+    case 0x13:
+        break;
+  }
+}
+
+void sub_8025728(void)
+{
+    int index;
+    struct PokemonStruct *pokeStruct;
+    s32 loopMax = 0;
+
+    pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
+    MemoryFill16(gUnknown_203B2B4->unk108,0,sizeof(gUnknown_203B2B4->unk108));
+    if (gUnknown_203B2B4->unk0 == 0) {
+        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B0;
+        gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
+        if (GetNumberOfFilledInventorySlots() == 0) {
+            gUnknown_203B2B4->unk108[loopMax] = 1;
+        }
+        loopMax += 1;
+
+        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B8;
+        gUnknown_203B2B4->unkC8[loopMax].menuAction = 0xb;
+        if ((INVENTORY_SIZE <= GetNumberOfFilledInventorySlots()) || (gUnknown_203B2B4->item2.id == ITEM_NOTHING)) {
+            gUnknown_203B2B4->unk108[loopMax] = 1;
+        }
+        loopMax += 1;
+
+        if (sub_8025EC4(pokeStruct)) {
+            gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2C0;
+            gUnknown_203B2B4->unkC8[loopMax].menuAction = 9;
+            loopMax += 1;
+        }
+    }
+    else {
+        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2CC;
+        gUnknown_203B2B4->unkC8[loopMax].menuAction = 7;
+        if (gUnknown_203B2B4->unkC == GetFriendArea(gUnknown_203B2B4->pokeStruct->speciesNum)) {
+            gUnknown_203B2B4->unk108[loopMax] = 1;
+        }
+        loopMax += 1;
+    }
+    if ((pokeStruct->speciesNum == 0x13d) &&
+        (IsPokemonRenamed(pokeStruct))) {
+        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2D4;
+        gUnknown_203B2B4->unkC8[loopMax].menuAction = 8;
+        loopMax += 1;
+    }
+    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2DC;
+    gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2E4;
+    gUnknown_203B2B4->unkC8[loopMax].menuAction = 6;
+    loopMax += 1;
+    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2EC;
+    gUnknown_203B2B4->unkC8[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B4->unkC8[loopMax].text = NULL;
+    gUnknown_203B2B4->unkC8[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B2B4->unk108[index] == 0)
+        {
+            if (gUnknown_203B2B4->unkC8[index].menuAction == gUnknown_203B2B4->menuAction1)
+                return;
+        }
+    }
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B2B4->unk108[index] == 0)
+        {
+            gUnknown_203B2B4->menuAction1 = gUnknown_203B2B4->unkC8[index].menuAction;
+            break;
+        }
+    }
+}
+
+void sub_802591C(void)
+{
+  int index;
+  s32 loopMax = 0;
+  
+
+  MemoryFill16(gUnknown_203B2B4->unk108,0, sizeof(gUnknown_203B2B4->unk108));
+
+  gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B0;
+  gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
+  if (GetNumberOfFilledInventorySlots() == 0) {
+      gUnknown_203B2B4->unk108[loopMax] = 1;
+  }
+  loopMax += 1;
+  gUnknown_203B2B4->unkC8[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
+  loopMax += 1;
+  gUnknown_203B2B4->unkC8[loopMax].text = NULL;
+  gUnknown_203B2B4->unkC8[loopMax].menuAction = 1;
+
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B2B4->unk108[index] == 0)
+      {
+          if (gUnknown_203B2B4->unkC8[index].menuAction == gUnknown_203B2B4->menuAction2)
+            return;
+      }
+  }
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B2B4->unk108[index] == 0)
+      {
+          gUnknown_203B2B4->menuAction2 = gUnknown_203B2B4->unkC8[index].menuAction;
+          break;
+      }
+  }
+}
+
+void sub_80259F0(void)
+{
+    switch(sub_8023A94(1))
+    {
+        case 3:
+            gUnknown_203B2B4->species = sub_8023B44();
+            gUnknown_203B2B4->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
+            PeekPokemonItem(gUnknown_203B2B4->species, &gUnknown_203B2B4->item2);
+            sub_8025434(3);
+            break;
+        case 4:
+            gUnknown_203B2B4->species = sub_8023B44();
+            gUnknown_203B2B4->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
+            PeekPokemonItem(gUnknown_203B2B4->species, &gUnknown_203B2B4->item2);
+            sub_8025434(4);
+            break;
+        case 2:
+            sub_8023C60();
+            sub_8025434(0x13);
+            break;
+    }
+}
+
+void sub_8025A84(void)
+{
+    s32 menuAction = 0;
+
+    sub_8023A94(0);
+    if(!sub_8012FD8(&gUnknown_203B2B4->unk78))
+    {
+        sub_8013114(&gUnknown_203B2B4->unk78, &menuAction);
+        if(menuAction != 1) gUnknown_203B2B4->menuAction1 = menuAction;
+    }
+    switch(menuAction)
+    {
+        case 7:
+            gUnknown_203B2B4->unkD = GetFriendArea(gUnknown_203B2B4->pokeStruct->speciesNum);
+            sub_8023C60();
+            sub_8025434(0x13);
+            break;
+        case 10:
+            sub_8025434(0xB);
+            break;
+        case 11:
+            PlaySound(0x14d);
+            if(gUnknown_203B2B4->item2.id != ITEM_NOTHING)
+            {
+                AddHeldItemToInventory(&gUnknown_203B2B4->item2);
+            }
+            FillInventoryGaps();
+            gUnknown_203B2B4->item2.id = ITEM_NOTHING;
+            gUnknown_203B2B4->item2.quantity = 0;
+            GivePokemonItem(gUnknown_203B2B4->species, &gUnknown_203B2B4->item2);
+            nullsub_104();
+            sub_8025434(0xA);
+            break;
+        case 9:
+            gUnknown_203B2B4->pokeStruct->unk0 &= 0xfffd;
+            nullsub_104();
+            sub_808ED00();
+            sub_8023C60();
+            sub_8025434(0x7);
+            break;
+        case 6:
+            sub_8025434(0xF);
+            break;
+        case 8:
+            sub_8025434(0x12);
+            break;
+        case 4:
+            sub_8025434(0x4);
+            break;
+        case 5:
+            sub_8025434(0x5);
+            break;
+        case 1:
+            sub_8025434(0x2);
+            break;
+        case 2:
+        case 3:
+            break;
+    }
+}
+
+void sub_8025BCC(void)
 {
     switch(sub_80244E4())
     {
         case 2:
         case 3:
             sub_802453C();
-            sub_8026074(2);
+            sub_8025434(2);
             break;
         case 0:
         case 1:
@@ -183,14 +594,14 @@ void sub_8026A78(void)
     }
 }
 
-void sub_8026A94(void)
+void sub_8025BE8(void)
 {
     switch(sub_801BF48())
     {
         case 2:
         case 3:
             sub_801BF98();
-            sub_8026074(2);
+            sub_8025434(2);
             break;
         case 0:
         case 1:
@@ -198,90 +609,26 @@ void sub_8026A94(void)
     }
 }
 
-
-static inline bool8 sub_8026AB0_sub(void) {
-    if (gUnknown_203B2B8->unk18->dungeonLocation.id == 0x44 || gUnknown_203B2B8->unk18->dungeonLocation.id == 0x45)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-void sub_8026AB0(void)
-{
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
-    {
-        switch(temp)
-        {
-            case 1:
-            case 3:
-                sub_8026074(2);
-                break;
-            case 2:
-                if (sub_8026AB0_sub())
-                    sub_8026074(0xD);
-                else
-                    sub_8026074(8);
-                break;
-        }
-    }
-}
-
-void sub_8026B10(void)
-{
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
-    {
-        switch(temp)
-        {
-            case 1:
-            case 3:
-                sub_8026074(2);
-                break;
-            case 2:
-                sub_8026074(8);
-                break;
-        }
-    }
-}
-
-
-void sub_8026B48(void)
-{
-    switch(sub_8022860())
-    {
-        case 2:
-        case 3:
-            sub_8022908();
-            sub_8026074(2);
-            break;
-        case 0:
-        case 1:
-            break;
-    }
-}
-
-
-void sub_8026B64(void)
+void sub_8025C04(void)
 {
     switch(sub_801A6E8(1))
     {
         case 3:
-            gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
-            sub_8026074(0x14);
+            gUnknown_203B2B4->itemIndex = sub_801A8AC();
+            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
+            sub_8025434(0xD);
             break;
         case 4:
-            gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
+            gUnknown_203B2B4->itemIndex = sub_801A8AC();
+            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
             sub_8099690(0);
-            sub_8026074(0x15);
+            sub_8025434(0xE);
             break;
         case 2:
             sub_801A928();
-            sub_8026074(2);
+            sub_8025434(2);
             break;
         case 0:
         case 1:
@@ -289,244 +636,155 @@ void sub_8026B64(void)
     }
 }
 
-void sub_8026C14(void)
+void sub_8025CB4(void)
 {
-  u32 nextState;
-  struct unkStruct_8090F58 temp;
-  int menuAction;
-  struct Item slot;
-
+  u32 uVar2;
+  s32 menuAction;
+  struct unkStruct_8090F58 a3;
+  struct Item item;
+  
   menuAction = 0;
   sub_801A6E8(0);
-  if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
-    gUnknown_203B2B8->menuAction2 = menuAction;
+  if ((!sub_8012FD8(&gUnknown_203B2B4->unk78)) && (sub_8013114(&gUnknown_203B2B4->unk78,&menuAction), menuAction != 1)) {
+    gUnknown_203B2B4->menuAction2 = menuAction;
   }
-  switch(menuAction)
-  {
-      case 0xb:
-        nextState = 0xF;
-        PlaySound(0x14d);
-        ShiftItemsDownFrom(gUnknown_203B2B8->id);
-        FillInventoryGaps();
-        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
-          AddHeldItemToInventory(&gUnknown_203B2B8->item2);
-          nextState = 0x10;
-        }
-        HeldItemToSlot(&slot,&gUnknown_203B2B8->item1);
-        temp.unk0 = 0;
-        temp.unk4 = 0;
-        temp.unk8 = 1;
-        slot.flags = ITEM_FLAG_EXISTS;
-        sub_8090E14(gUnknown_202DEA8,&slot,&temp);
-        GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item1);
-        sub_801A928();
-        nullsub_104();
-        sub_8026074(nextState);
-        break;
-      case 4:
-        sub_8099690(0);
-        sub_8026074(0x15);
-        break;
-      case 1:
-        sub_8026074(0x13);
-        break;
-  }
+
+    switch(menuAction)
+    {
+        case 10:
+            uVar2 = 8;
+            PlaySound(0x14d);
+            ShiftItemsDownFrom(gUnknown_203B2B4->itemIndex);
+            FillInventoryGaps();
+            if ((gUnknown_203B2B4->item2).id != 0) {
+                AddHeldItemToInventory(&gUnknown_203B2B4->item2);
+                uVar2 = 9;
+            }
+            HeldItemToSlot(&item,&gUnknown_203B2B4->item1);
+            a3.unk0 = 0;
+            a3.unk4 = 0;
+            a3.unk8 = 1;
+            item.flags = ITEM_FLAG_EXISTS;
+            sub_8090E14(gUnknown_202DEA8,&item,&a3);
+            GivePokemonItem((int)gUnknown_203B2B4->species,&gUnknown_203B2B4->item1);
+            sub_801A928();
+            nullsub_104();
+            sub_8025434(uVar2);
+            break;
+        case 4:
+            sub_8099690(0);
+            sub_8025434(0xe);
+            break;
+        case 1:
+            sub_8025434(0xc);
+            break;
+    }
 }
 
-void sub_8026CF0(void)
+void sub_8025D90(void)
 {
     switch(sub_801B410())
     {
         case 2:
         case 3:
             sub_801B450();
-            sub_8026074(0x13);
-            break;
+            sub_8025434(0xC);
         case 0:
         case 1:
             break;
     }
 }
 
-
-void sub_8026D0C(void)
+void sub_8025DAC(void)
 {
     switch(sub_801EF38(1))
     {
-        case 0:
-        case 1:
-            break;
         case 3:
+            gUnknown_203B2B4->moveIndex = sub_801F194();
+            gUnknown_203B2B4->moveID = gUnknown_203B2B4->moves[gUnknown_203B2B4->moveIndex].id;
+            sub_8025434(0x11);
+            break;
         case 4:
-            gUnknown_203B2B8->moveIndex = sub_801F194();
-            gUnknown_203B2B8->moveID = gUnknown_203B2B8->moves[gUnknown_203B2B8->moveIndex].id;
-            sub_8026074(0x18);
+            gUnknown_203B2B4->moveIndex = sub_801F194();
+            gUnknown_203B2B4->moveID = gUnknown_203B2B4->moves[gUnknown_203B2B4->moveIndex].id;
+            sub_8025434(0x11);
             break;
         case 2:
             sub_801F214();
-            sub_8026074(2);
+            sub_8094060(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
+            sub_8025434(0x2);
             break;
     }
 }
 
-void sub_8026D6C(void)
+void sub_8025E08(void)
 {
     switch(sub_801F890())
     {
         case 2:
         case 3:
             sub_801F8D0();
-            sub_8026074(0x17);
-            break;
+            sub_8025434(0x10);
         case 0:
         case 1:
             break;
     }
 }
 
-void sub_8026D88(void)
+void sub_8025E24(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    switch(sub_8016080())
     {
-        sub_8026074(gUnknown_203B2B8->fallbackState);
-    }
-}
-
-void sub_8026DAC(u32 r0, struct BulkItem *item)
-{
-    struct Item slot;
-    struct unkStruct_8090F58 temp;
-
-    sub_8008C54(r0);
-    sub_80073B8(r0);
-    HeldItemToSlot(&slot, item);
-    temp.unk0 = 0;
-    temp.unk4 = 0;
-    temp.unk8 = 1;
-    slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gUnknown_202DE58, &slot, &temp);
-    xxx_format_and_draw(4, 3, gPartyMenuItemPlaceholder, r0, 0);
-    sub_80073E0(r0);
-}
-
-void sub_8026E08(u32 r0)
-{
-    u8 buffer1[40];
-    u8 buffer[20];
-    s32 x;
-
-    sub_8008C54(r0);
-    sub_80073B8(r0);
-    sub_80922B4(gAvailablePokemonNames, gUnknown_203B2B8->unk18->name, POKEMON_NAME_LENGTH);
-    sub_808D930(buffer, gUnknown_203B2B8->unk18->speciesNum);
-    sprintfStatic(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
-    x = sub_8008ED0(buffer1);
-    xxx_call_draw_string(((gUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
-    sub_80073E0(r0);
-}
-
-u32 sub_8026E88(struct PokemonStruct *r0)
-{
-    bool8 flag;
-    if(!r0->isTeamLeader)
-    {
-        flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
-        if(flag)
-            if(!sub_80023E4(0x8))
-                return FALSE;
-    }
-    else
-        return FALSE;
-    return TRUE;
-}
-
-bool8 sub_8026EB8(struct PokemonStruct *r0)
-{
-    bool8 flag;
-    if(sub_808D3BC() != r0)
-        if(sub_808D3F8() != r0)
-            if(!r0->isTeamLeader)
-            {
-                flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
-                if(flag)
-                {
-                    if(sub_80023E4(0x8))
-                        goto check;
-                }
-                else
-                    check:
-                    if(sub_8026F04(r0) != 3)
-                        return TRUE;
-            }
-    return FALSE;
-}
-
-
-u32 sub_8026F04(struct PokemonStruct *r0)
-{
-    if(r0->heldItem.id == 0)
-        return 0;
-    else if(GetNumberOfFilledInventorySlots() < INVENTORY_SIZE)
-        return 1;
-    else if(CanTakePokemonHeldItem(r0))
-        return 2;
-    else
-        return 3;
-}
-
-bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0)
-{
-    if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
-    {
-        if(IsThrowableItem(r0->heldItem.id))
-        {
-            if((gTeamInventory_203B460->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
-                return FALSE;
-        }
-        else
-        {
-            if(gTeamInventory_203B460->teamStorage[r0->heldItem.id] > 998)
-                return FALSE;
-        }
-    }
-    else
-        return FALSE;
-    return TRUE;
-}
-
-void sub_8026FA4(void)
-{
-    switch(sub_8026F04(gUnknown_203B2B8->unk18))
-    {
-        case 1:
-            PlaySound(0x14d);
-            AddHeldItemToInventory(&gUnknown_203B2B8->item2);
-            FillInventoryGaps();
-            gUnknown_203B2B8->item2.id = 0;
-            gUnknown_203B2B8->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
-            sub_8026074(0xA);
-            break;
         case 2:
-            PlaySound(0x14d);
-            if(IsThrowableItem(gUnknown_203B2B8->item2.id))
-            {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
-            }
-            else
-            {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += 1;
-            }
+        case 3:
+            sub_80160D8();
+            nullsub_104();
+            sub_8025434(0x2);
+            break;
+    }
+}
 
-            gUnknown_203B2B8->item2.id = 0;
-            gUnknown_203B2B8->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
-            sub_8026074(0xB);
-            break;
-        case 0:
-        default:
-            sub_8026074(0x19);
-            break;
+void sub_8025E44(void)
+{
+    s32 local;
+    if(sub_80144A4(&local) == 0)
+    {
+        sub_8025434(gUnknown_203B2B4->fallbackState);
+    }
+}
+
+void sub_8025E68(u32 r0, struct BulkItem *heldItem)
+{
+    struct Item item;
+    struct unkStruct_8090F58 a3;
+
+    sub_8008C54(r0);
+    sub_80073B8(r0);
+    HeldItemToSlot(&item, heldItem);
+    a3.unk0 = 0;
+    a3.unk4 = 0;
+    a3.unk8 = 1;
+    item.flags = ITEM_FLAG_EXISTS;
+    sub_8090E14(gUnknown_202DE58, &item, &a3);
+    xxx_format_and_draw(4, 3, gUnknown_80DD2F8, r0, 0);
+    sub_80073E0(r0);
+}
+
+bool8 sub_8025EC4(struct PokemonStruct *param_1)
+{
+    bool32 flag;
+    if (param_1->isTeamLeader)
+        {
+            return FALSE;
+        }
+    else
+    {
+        flag = FALSE;
+        if(param_1->dungeonLocation.id == 0x41)
+            flag = TRUE;
+        if(flag && !sub_80023E4(8))
+            return FALSE;
+        else
+            return TRUE;
     }
 }
