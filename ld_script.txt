@@ -414,6 +414,7 @@ SECTIONS {
         src/save.o(.rodata);
         src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/luminous_cave.o(.rodata);
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);
         src/friend_area_action_menu.o(.rodata);
@@ -441,10 +442,12 @@ SECTIONS {
         src/trade_items_menu.o(.rodata);
         data/data_80E59A8.o(.rodata);
         src/save_menu.o(.rodata);
-        data/data_80E6F20.o(.rodata);
+        src/rescue_password_menu.o(.rodata);
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu.o(.rodata);
+        src/debug_menu_mid.o(.rodata);
+        src/debug_menu_1.o(.rodata);
         data/data_80E7D40.o(.rodata);
         src/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);

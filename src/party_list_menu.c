@@ -1,3 +1,4 @@
+#include "gba/defines.h"
 #include "global.h"
 #include "constants/dungeon.h"
 #include "item.h"
@@ -39,7 +40,7 @@ struct unkStruct_203B2B8
     u16 unk20C[10];
     struct UnkTextStruct2 unk220[4];
 };
-extern struct unkStruct_203B2B8 *gUnknown_203B2B8;
+EWRAM_DATA_2 struct unkStruct_203B2B8 *gUnknown_203B2B8 = {0};
 
 const struct UnkTextStruct2 gUnknown_80DD310 = {
         0x00, 0x00, 0x00, 0x00,

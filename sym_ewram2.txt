@@ -280,14 +280,9 @@ gUnknown_203B2AA: /* 203B2AA */
 gUnknown_203B2AC: /* 203B2AC */
 	.space 0x4
 
-gUnknown_203B2B0: /* 203B2B0 */
-	.space 0x4
-
-gUnknown_203B2B4: /* 203B2B4 */
-	.space 0x4
-
-gUnknown_203B2B8: /* 203B2B8 */
-	.space 0x4
+.include "src/luminous_cave.o"
+.include "src/friend_list_menu.o"
+.include "src/party_list_menu.o"
 
 gUnknown_203B2BC: /* 203B2BC */
 	.space 0x4

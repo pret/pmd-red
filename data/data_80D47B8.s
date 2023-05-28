@@ -4612,5 +4612,3 @@ gUnknown_80DCA2C: @ 80DCA2C
         .align 2,0
         .4byte gUnknown_80DCA2C
 
-	#include "text/luminous_cave.inc"
-
