@@ -100,15 +100,15 @@ ALIGNED(4) const u8 gUnknown_80DD270[] = _(
     "{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
     "{CENTER_ALIGN}on standby in the Friend Area.");
 
-ALIGNED(4) const u8 gUnknown_80DD2B0[] = "Give";
-ALIGNED(4) const u8 gUnknown_80DD2B8[] = "Take";
-ALIGNED(4) const u8 gUnknown_80DD2C0[] = "Stand By";
-ALIGNED(4) const u8 gUnknown_80DD2CC[] = "Visit";
-ALIGNED(4) const u8 gUnknown_80DD2D4[] = "Name";
-ALIGNED(4) const u8 gUnknown_80DD2DC[] = "Summary";
-ALIGNED(4) const u8 gUnknown_80DD2E4[] = "Moves";
-ALIGNED(4) const u8 gUnknown_80DD2EC[] = "Check IQ";
-ALIGNED(4) const u8 gUnknown_80DD2F8[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 gFriendListGive[] = "Give";
+ALIGNED(4) const u8 gFriendListTake[] = "Take";
+ALIGNED(4) const u8 gFriendListStandBy[] = "Stand By";
+ALIGNED(4) const u8 gFriendListVisit[] = "Visit";
+ALIGNED(4) const u8 gFriendListName[] = "Name";
+ALIGNED(4) const u8 gFriendListSummary[] = "Summary";
+ALIGNED(4) const u8 gFriendListMoves[] = "Moves";
+ALIGNED(4) const u8 gFriendListCheckIQ[] = "Check IQ";
+ALIGNED(4) const u8 gFriendListItem[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
 extern void sub_8008C54(u32);
@@ -393,14 +393,14 @@ void sub_8025728(void)
     pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
     MemoryFill16(gUnknown_203B2B4->unk108,0,sizeof(gUnknown_203B2B4->unk108));
     if (gUnknown_203B2B4->unk0 == 0) {
-        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B0;
+        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListGive;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
         if (GetNumberOfFilledInventorySlots() == 0) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
         }
         loopMax += 1;
 
-        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B8;
+        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListTake;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 0xb;
         if ((INVENTORY_SIZE <= GetNumberOfFilledInventorySlots()) || (gUnknown_203B2B4->item2.id == ITEM_NOTHING)) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -408,13 +408,13 @@ void sub_8025728(void)
         loopMax += 1;
 
         if (sub_8025EC4(pokeStruct)) {
-            gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2C0;
+            gUnknown_203B2B4->unkC8[loopMax].text = gFriendListStandBy;
             gUnknown_203B2B4->unkC8[loopMax].menuAction = 9;
             loopMax += 1;
         }
     }
     else {
-        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2CC;
+        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListVisit;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 7;
         if (gUnknown_203B2B4->unkC == GetFriendArea(gUnknown_203B2B4->pokeStruct->speciesNum)) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -423,17 +423,17 @@ void sub_8025728(void)
     }
     if ((pokeStruct->speciesNum == 0x13d) &&
         (IsPokemonRenamed(pokeStruct))) {
-        gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2D4;
+        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListName;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 8;
         loopMax += 1;
     }
-    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2DC;
+    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListSummary;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2E4;
+    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListMoves;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 6;
     loopMax += 1;
-    gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2EC;
+    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListCheckIQ;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 5;
     loopMax += 1;
     gUnknown_203B2B4->unkC8[loopMax].text = NULL;
@@ -465,7 +465,7 @@ void sub_802591C(void)
 
   MemoryFill16(gUnknown_203B2B4->unk108,0, sizeof(gUnknown_203B2B4->unk108));
 
-  gUnknown_203B2B4->unkC8[loopMax].text = gUnknown_80DD2B0;
+  gUnknown_203B2B4->unkC8[loopMax].text = gFriendListGive;
   gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
   if (GetNumberOfFilledInventorySlots() == 0) {
       gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -666,7 +666,7 @@ void sub_8025CB4(void)
             a3.unk8 = 1;
             item.flags = ITEM_FLAG_EXISTS;
             sub_8090E14(gUnknown_202DEA8,&item,&a3);
-            GivePokemonItem((int)gUnknown_203B2B4->species,&gUnknown_203B2B4->item1);
+            GivePokemonItem(gUnknown_203B2B4->species,&gUnknown_203B2B4->item1);
             sub_801A928();
             nullsub_104();
             sub_8025434(uVar2);
@@ -766,7 +766,7 @@ void sub_8025E68(u32 r0, struct BulkItem *heldItem)
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &item, &a3);
-    xxx_format_and_draw(4, 3, gUnknown_80DD2F8, r0, 0);
+    xxx_format_and_draw(4, 3, gFriendListItem, r0, 0);
     sub_80073E0(r0);
 }
 
