@@ -27,7 +27,7 @@ struct NaturePowerMove
     MoveCallback move;
 };
 
-struct NaturePowerMove gNaturePowerMoveTable[10];
+extern struct NaturePowerMove gNaturePowerMoveTable[10];
 
 
 extern u8 gUnknown_202DE58[];
