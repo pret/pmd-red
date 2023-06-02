@@ -23,36 +23,402 @@ struct unkStruct_203B35C
 };
 extern struct unkStruct_203B35C *gUnknown_203B35C;
 
-extern struct UnkTextStruct2 gUnknown_80E653C;
+const struct UnkTextStruct2 gUnknown_80E653C = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+const struct UnkTextStruct2 gUnknown_80E6554 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
 
-extern struct UnkTextStruct2 gUnknown_80E66BC;
-extern struct MenuItem gUnknown_80E66D4[];
-extern struct UnkTextStruct2 gUnknown_80E6748;
-extern struct MenuItem gUnknown_80E6760[];
-extern struct UnkTextStruct2 gUnknown_80E67D4;
-extern struct MenuItem gUnknown_80E67EC[];
-extern struct UnkTextStruct2 gUnknown_80E689C;
-extern struct MenuItem gUnknown_80E68B4[];
-extern struct UnkTextStruct2 gUnknown_80E6938;
-extern struct MenuItem gUnknown_80E6950[];
-extern struct UnkTextStruct2 gUnknown_80E69B0;
-extern struct MenuItem gUnknown_80E69C8[];
-extern struct UnkTextStruct2 gUnknown_80E6A10;
-extern struct MenuItem gUnknown_80E6A28[];
-extern struct UnkTextStruct2 gUnknown_80E6A74;
-extern struct MenuItem gUnknown_80E6A8C[];
-extern struct UnkTextStruct2 gUnknown_80E6B78;
-extern struct MenuItem gUnknown_80E6B90[];
-extern struct UnkTextStruct2 gUnknown_80E6BF4;
-extern struct MenuItem gUnknown_80E6C0C[];
-extern struct UnkTextStruct2 gUnknown_80E6C50;
-extern struct MenuItem gUnknown_80E6C68[];
-extern struct UnkTextStruct2 gUnknown_80E6CD0;
-extern struct MenuItem gUnknown_80E6CE8[];
-extern struct UnkTextStruct2 gUnknown_80E6DDC;
-extern struct MenuItem gUnknown_80E6DF4[];
-extern struct UnkTextStruct2 gUnknown_80E6D54;
-extern struct MenuItem gUnknown_80E6D6C[];
+const u8 sUnknown_80E65C4[];
+const u8 sUnknown_80E65AC[];
+const u8 sUnknown_80E658C[];
+const struct MenuItem gUnknown_80E656C[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E65AC, 0x5},
+    {sUnknown_80E658C, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don~27t turn the power off!");
+ALIGNED(4) const u8 sUnknown_80E65AC[] = _("{CENTER_ALIGN}Item transmitting!");
+ALIGNED(4) const u8 sUnknown_80E65C4[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
+
+const u8 sUnknown_80E65F8[];
+const struct MenuItem gUnknown_80E65D8[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E65F8, 0x5},
+    {sUnknown_80E658C, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E65F8[] = _("{CENTER_ALIGN}Thank-You Mail in transmission!");
+
+const u8 sUnknown_80E663C[];
+const struct MenuItem gUnknown_80E661C[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E663C, 0x5},
+    {sUnknown_80E658C, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E663C[] = _("{CENTER_ALIGN}A-OK Mail in transmission!");
+
+const struct MenuItem gUnknown_80E665C[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E65F8, 0x5},
+    {sUnknown_80E658C, 0x5},
+    {NULL, 0x3},
+
+};
+
+const u8 sUnknown_80E669C[];
+const struct MenuItem gUnknown_80E667C[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E669C, 0x5},
+    {sUnknown_80E658C, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E669C[] = _("{CENTER_ALIGN}Wonder Mail in transmission!");
+
+const struct UnkTextStruct2 gUnknown_80E66BC = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6734[];
+const u8 sUnknown_80E6710[];
+const u8 sUnknown_80E66F4[];
+const struct MenuItem gUnknown_80E66D4[4] = {
+    {sUnknown_80E6734, 0x5},
+    {sUnknown_80E6710, 0x5},
+    {sUnknown_80E66F4, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E66F4[] = _("{CENTER_ALIGN}Please press any button.");
+ALIGNED(4) const u8 sUnknown_80E6710[] = _("{CENTER_ALIGN}Your adventure will be continued.");
+ALIGNED(4) const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}#CGSuccess!#R ");
+
+const struct UnkTextStruct2 gUnknown_80E6748 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6780[];
+const u8 sUnknown_80E6794[];
+const u8 sUnknown_80E67B4[];
+const struct MenuItem gUnknown_80E6760[4] = {
+    {sUnknown_80E67B4, 0x5},
+    {sUnknown_80E6794, 0x5},
+    {sUnknown_80E6780, 0x5},
+    {NULL, 0x3},
+
+};
+ALIGNED(4) const u8 sUnknown_80E6780[] = _("{CENTER_ALIGN}please try again.");
+ALIGNED(4) const u8 sUnknown_80E6794[] = _("{CENTER_ALIGN}Check the Game Link cable and");
+ALIGNED(4) const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}#C2Communication error!#R ");
+
+const struct UnkTextStruct2 gUnknown_80E67D4 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E680C[];
+const struct MenuItem gUnknown_80E67EC[4] = {
+    {sUnknown_80E67B4, 0x5},
+    {sUnknown_80E680C, 0x5},
+    {sUnknown_80E6780, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E680C[] = _("{CENTER_ALIGN}Check your communication mode and");
+
+const struct UnkTextStruct2 gUnknown_80E6830 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6888[];
+const u8 sUnknown_80E6868[];
+const struct MenuItem gUnknown_80E6848[4] = {
+    {sUnknown_80E67B4, 0x5},
+    {sUnknown_80E6888, 0x5},
+    {sUnknown_80E6868, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6868[] = _("{CENTER_ALIGN}Please inform the programmer.");
+ALIGNED(4) const u8 sUnknown_80E6888[] = _("{CENTER_ALIGN}Check sum error.");
+
+const struct UnkTextStruct2 gUnknown_80E689C = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6928[];
+const u8 sUnknown_80E68FC[];
+const u8 sUnknown_80E68D4[];
+const struct MenuItem gUnknown_80E68B4[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E68FC, 0x5},
+    {sUnknown_80E68D4, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E68D4[] = _("{CENTER_ALIGN}someone~27s storage space was full.");
+ALIGNED(4) const u8 sUnknown_80E68FC[] = _("{CENTER_ALIGN}An item could not be transferred because");
+ALIGNED(4) const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}#C2Error!#R ");
+
+const struct UnkTextStruct2 gUnknown_80E6938 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6988[];
+const u8 sUnknown_80E6970[];
+const struct MenuItem gUnknown_80E6950[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6988, 0x5},
+    {sUnknown_80E6970, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6970[] = _("{CENTER_ALIGN}Please check again.");
+ALIGNED(4) const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This #CGSOS Mail#R can~27t be used.");
+
+const struct UnkTextStruct2 gUnknown_80E69B0 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E69E8[];
+const struct MenuItem gUnknown_80E69C8[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E69E8, 0x5},
+    {sUnknown_80E6970, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This #CGA-OK Mail#R can~27t be used.");
+
+const struct UnkTextStruct2 gUnknown_80E6A10 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6A48[];
+const struct MenuItem gUnknown_80E6A28[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6A48, 0x5},
+    {sUnknown_80E6970, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This #CGThank-You Mail#R can~27t be used.");
+
+const struct UnkTextStruct2 gUnknown_80E6A74 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6AC8[];
+const u8 sUnknown_80E6AAC[];
+const struct MenuItem gUnknown_80E6A8C[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6AC8, 0x5},
+    {sUnknown_80E6AAC, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can~27t be received.");
+ALIGNED(4) const u8 sUnknown_80E6AC8[] = _("{CENTER_ALIGN}There is no space for new mail.");
+
+const struct UnkTextStruct2 gUnknown_80E6AEC = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6B4C[];
+const u8 sUnknown_80E6B24[];
+const struct MenuItem gUnknown_80E6B04[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6B4C, 0x5},
+    {sUnknown_80E6B24, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6B24[] = _("{CENTER_ALIGN}You need to go further in the story.");
+ALIGNED(4) const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that #CGdungeon#R yet.");
+
+const struct UnkTextStruct2 gUnknown_80E6B78 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6BC4[];
+const u8 sUnknown_80E6BB0[];
+const struct MenuItem gUnknown_80E6B90[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6BC4, 0x5},
+    {sUnknown_80E6BB0, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6BB0[] = _("{CENTER_ALIGN}Please try again.");
+ALIGNED(4) const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend~27s end.");
+
+const struct UnkTextStruct2 gUnknown_80E6BF4 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6C2C[];
+const struct MenuItem gUnknown_80E6C0C[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6C2C, 0x5},
+    {sUnknown_80E6BB0, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6C2C[] = _("{CENTER_ALIGN}Your friend is not responding.");
+
+const struct UnkTextStruct2 gUnknown_80E6C50 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6CA8[];
+const u8 sUnknown_80E6C88[];
+const struct MenuItem gUnknown_80E6C68[4] = {
+    {sUnknown_80E6734, 0x5},
+    {sUnknown_80E6CA8, 0x5},
+    {sUnknown_80E6C88, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6C88[] = _("{CENTER_ALIGN}went through successfully.");
+ALIGNED(4) const u8 sUnknown_80E6CA8[] = _("{CENTER_ALIGN}The item exchange with your friend");
+
+
+const struct UnkTextStruct2 gUnknown_80E6CD0 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6D2C[];
+const u8 sUnknown_80E6D08[];
+const struct MenuItem gUnknown_80E6CE8[4] = {
+    {sUnknown_80E65C4, 0x5},
+    {sUnknown_80E6D2C, 0x5},
+    {sUnknown_80E6D08, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6D08[] = _("{CENTER_ALIGN}you and your friend are ready.");
+ALIGNED(4) const u8 sUnknown_80E6D2C[] = _("{CENTER_ALIGN}Please communicate only after both");
+
+const struct UnkTextStruct2 gUnknown_80E6D54 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6DB0[];
+const u8 sUnknown_80E6D8C[];
+const struct MenuItem gUnknown_80E6D6C[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6DB0, 0x5},
+    {sUnknown_80E6D8C, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6D8C[] = _("{CENTER_ALIGN}connected. Please check again.");
+ALIGNED(4) const u8 sUnknown_80E6DB0[] = _("{CENTER_ALIGN}An incorrect number of GBA systems are");
+
+const struct UnkTextStruct2 gUnknown_80E6DDC = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x03, 0x00, 0x08, 0x00,
+   0x18, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 sUnknown_80E6E30[];
+const u8 sUnknown_80E6E14[];
+const struct MenuItem gUnknown_80E6DF4[4] = {
+    {sUnknown_80E6928, 0x5},
+    {sUnknown_80E6E30, 0x5},
+    {sUnknown_80E6E14, 0x5},
+    {NULL, 0x3},
+};
+ALIGNED(4) const u8 sUnknown_80E6E14[] = _("{CENTER_ALIGN}Please check it again.");
+ALIGNED(4) const u8 sUnknown_80E6E30[] = _("{CENTER_ALIGN}Communication failed.");
+
+static const u8 fill0[] = "pksdir0";
+ALIGNED(4) const u8 gUnknown_80E6E50[] = "CHUNSOFT";
+static const u8 fill1[] = "pksdir0";
+static const u8 fill2[] = "pksdir0";
+static const u8 fill3[] = "pksdir0";
+static const u8 fill4[] = "pksdir0";
 
 extern void sub_8037400(void);
 extern void ResetSprites(u32);
@@ -66,7 +432,7 @@ extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
-extern void SetMenuItems(struct MenuStruct *, void *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, void *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
 extern void sub_800CB20();
@@ -287,8 +653,8 @@ u32 sub_80370F0(void)
 void sub_80371B8(void)
 {
   struct unkStruct_8035D94 *item;
-  struct MenuItem *MenuItems;
-  struct UnkTextStruct2 *puVar5;
+  const struct MenuItem *MenuItems;
+  const struct UnkTextStruct2 *puVar5;
   
   puVar5 = NULL;
   MenuItems = NULL;

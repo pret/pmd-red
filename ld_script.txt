@@ -442,7 +442,8 @@ SECTIONS {
         data/data_80E2068.o(.rodata);
         src/main_menu.o(.rodata);
         src/trade_items_menu.o(.rodata);
-        data/data_80E59A8.o(.rodata);
+        src/other_menus.o(.rodata);
+        src/unk_menu_203B360.o(.rodata);
         src/save_menu.o(.rodata);
         src/rescue_password_menu.o(.rodata);
         src/load_screen.o(.rodata);

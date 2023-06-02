@@ -234,6 +234,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
 void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2* r0, struct PokemonStruct *r1, s32 r2);
 void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon);
 void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
+s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon);
 
 
 #endif // GUARD_POKEMON_H

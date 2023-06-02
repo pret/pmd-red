@@ -26,14 +26,45 @@ struct unkStruct_203B360
 };
 
 extern struct unkStruct_203B360 *gUnknown_203B360;
-extern struct UnkTextStruct2 gUnknown_80E6E7C;
-extern struct UnkTextStruct2 gUnknown_80E6E94;
-extern struct MenuItem gUnknown_80E6EAC[];
+const struct UnkTextStruct2 gUnknown_80E6E7C = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+
+const struct UnkTextStruct2 gUnknown_80E6E94 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x05, 0x00, 0x09, 0x00,
+   0x13, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+const u8 CheckAgain_80E6ECC[];
+const u8 StorageEmpty_80E6EE4[];
+const u8 Caution_80E6F04[];
+
+const struct MenuItem gUnknown_80E6EAC[4] = {
+    {Caution_80E6F04, 0x3},
+    {StorageEmpty_80E6EE4, 0x3},
+    {CheckAgain_80E6ECC, 0x3},
+    {NULL, 1}
+};
+
+ALIGNED(4) const u8 CheckAgain_80E6ECC[] = _("{CENTER_ALIGN}Please check again.");
+ALIGNED(4) const u8 StorageEmpty_80E6EE4[] = _("{CENTER_ALIGN}The storage space is empty!");
+ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
+static const u8 fill0[] = "pksdir0";
+
 
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void sub_8038440();
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, struct UnkTextStruct2 *, struct MenuItem *, u32, u32, u32);
+extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_80384D0();
 
 void sub_80382E4(s32 currMenu)

@@ -31,10 +31,7 @@ extern struct UnkTextStruct2 gUnknown_80DC2AC;
 
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_801F690(void);
-extern void sub_801F700(void);
 extern void sub_8013818(u32 *, u32, u32, u32);
-extern u32 sub_801F7E4(void);
 extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
 extern void AddMenuCursorSprite(void *);
@@ -46,7 +43,10 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(u32 *, s32);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
-extern s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon);
+
+u32 sub_801F7E4(void);
+void sub_801F690(void);
+void sub_801F700(void);
 
 bool8 sub_801F428(s16 index, s32 param_2) {
 
