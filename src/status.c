@@ -12,7 +12,7 @@
 #include "dungeon_items.h"
 #include "code_808417C.h"
 #include "code_8077274_1.h"
-#include "dungeon_movement_1.h"
+#include "dungeon_movement.h"
 #include "map.h"
 
 extern u8 gAvailablePokemonNames[];

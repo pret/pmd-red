@@ -11,7 +11,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "dungeon_movement_1.h"
+#include "dungeon_movement.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "item.h"

@@ -7,7 +7,7 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_leader.h"
-#include "dungeon_movement_1.h"
+#include "dungeon_movement.h"
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
