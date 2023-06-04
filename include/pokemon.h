@@ -75,7 +75,7 @@ struct PokemonStruct2
     /* 0x3 */ u8 unkHasNextStage;   // unk3
     /* 0x4 */ struct DungeonLocation dungeonLocation;  // unk4
     /* 0x8 */ u16 IQ;    // IQ (other offset)
-    /* 0xA */ u16 unkA;
+    /* 0xA */ s16 unkA;
     /* 0xC */ u16 unkC;
     /* 0xE */ s16 speciesNum;  // speciesNum (other offset)
     /* 0x10 */ u16 unk10;  // pokeHP

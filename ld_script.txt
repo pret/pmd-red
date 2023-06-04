@@ -200,8 +200,6 @@ SECTIONS {
         src/dungeon_items.o(.text);
         asm/code_8046CE4.o(.text);
         src/code_8048480.o(.text);
-        asm/code_8048480.o(.text);
-        src/code_8048DB8.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
         asm/code_80495E4.o(.text);
