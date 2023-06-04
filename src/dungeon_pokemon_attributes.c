@@ -62,7 +62,7 @@ bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 display
 bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
 {
   struct EntityInfo * entityInfo;
-  s32 iVar3;
+  s32 index;
 
   entityInfo = pokemon->info;
   if ((entityInfo->sleep != STATUS_SLEEP) && (entityInfo->sleep != STATUS_NAPPING) && (entityInfo->sleep != STATUS_NIGHTMARE)) {
@@ -71,11 +71,15 @@ bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
   else
   {
     // Pin this register to match
+#ifndef NONMATCHING
     register struct Move *pokeMove asm("r4");
+#else
+    struct Move *pokeMove;
+#endif
 
     struct Move *pokeMove2; // some reason uses another pointer to same struct
 
-    for(iVar3 = 0, pokeMove = entityInfo->moves, pokeMove2 = pokeMove; iVar3 < MAX_MON_MOVES; pokeMove++, pokeMove2++, iVar3++)
+    for(index = 0, pokeMove = entityInfo->moves, pokeMove2 = pokeMove; index < MAX_MON_MOVES; pokeMove++, pokeMove2++, index++)
     {
       if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityInfo->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
             if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))

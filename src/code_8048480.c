@@ -18,8 +18,13 @@
 #include "position.h"
 #include "status.h"
 
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202DE58[];
+
+extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
+extern s16 gUnknown_810A808[0x12][NUMBER_OF_GUMMIS];
+
 extern u8 *gUnknown_80F89F4[];
-extern u8 gAvailablePokemonNames[0x58];
 extern u8 *gUnknown_80FB580[];
 extern s16 gUnknown_80F4FB6;
 extern s16 gUnknown_80F4FB8;
@@ -31,7 +36,9 @@ extern s16 gUnknown_80F4FAA; // 0x1E
 extern s16 gUnknown_80F4FA8; // 0xF
 extern s16 gUnknown_80F4FA4; // 0x14 
 extern s16 gUnknown_80F4FA6; // 0x2D
-
+extern u32 gUnknown_8106A4C;
+extern u32 gUnknown_8106A50;
+extern s16 gUnknown_80F4FAC;
 
 extern u8 *gUnknown_80FEAE8[];
 extern u8 *gUnknown_80FDBA0[];
@@ -46,10 +53,32 @@ extern u8 *gUnknown_80FD648[];
 extern u8 *gUnknown_80FD6E8[];
 extern u8 *gPtrCantUseInDungeonMessage[];
 extern u8 *gUnknown_80FE3E8[];
+extern u8 *gPtrMusicBoxPlayedCrumbledMessage[];
+extern u8 *gPtrWishStoneCrumbledMessage[];
+extern u8 *gPtrIcePartCrumbledMessage[];
+extern u8 *gPtrRockPartCrumbledMessage[];
+extern u8 *gPtrSteelPartCrumbledMessage[];
+extern u8 *gUnknown_80FDCA4[];
+extern u8 *gUnknown_80FE3E8[];
+extern u8 *gUnknown_80FECA0[];
+extern u8 *gUnknown_80FE3E8[];
+extern u8 *gUnknown_80F9BD8[];
 
-extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
-extern s16 gUnknown_810A808[0x12][NUMBER_OF_GUMMIS];
-
+extern void sub_80421C0(struct Entity *r0, u16 r1);
+extern void sub_8078B5C(struct Entity *, struct Entity *, u32, u32, u32);
+extern u8 sub_806A538(s32);
+extern void sub_8051E7C(struct Entity *pokemon);
+extern void sub_8045BF8(u8 *, struct Item *);
+extern void sub_8063B54(struct ActionContainer *);
+extern void sub_80637E8(struct ActionContainer *);
+extern void sub_8063BB4(struct ActionContainer *);
+extern void sub_8063CF0(struct ActionContainer *, u32);
+extern void sub_8063A70(struct ActionContainer *, u32);
+extern u8 sub_8062F90(struct Entity *, u32, u32, u32, u32);
+extern void sub_8044DF0(struct Entity *, u32, u32);
+extern s32 sub_8052B8C(u32, u8 *, u32);
+extern void sub_803EAF0(u32, u32);
+extern void sub_8044C10(bool8);
 struct Entity *DrawFieldGiveItemMenu(u32, u32);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_8044E24(u32, u32, u32);
@@ -58,7 +87,6 @@ extern u8 sub_8072938(struct Entity *, u16);
 extern void sub_807D148(struct Entity *pokemon, struct Entity *r1, u32 r2, struct Position *r3);
 extern void sub_8072008(struct Entity *pokemon, struct Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(struct Entity *pokemon, struct Entity *r1, u32 r2);
-extern void sub_8078B5C(struct Entity *, struct Entity *, u32, u32, u32);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_80522F4(struct Entity *pokemon, struct Entity *r1, const char[]);
 extern void sub_806F370(struct Entity *pokemon, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
@@ -221,8 +249,13 @@ void sub_80485B0(struct Entity *pokemon, struct Entity * target)
   bool8 isMoveBoosted;
   s32 moveIndex;
   struct EntityInfo *entityInfo;
+#ifndef NONMATCHING
   register struct Move *movePtr1 asm("r4"); // r4
   register struct Move *movePtr2 asm("r5"); // r5
+#else
+  struct Move *movePtr1; // r4
+  struct Move *movePtr2; // r5
+#endif
   u8 moveBoost;
   s32 movePowerBoost;
   s32 maxPowerBoost;
@@ -466,47 +499,6 @@ bool8 sub_8048950(u32 param_1,struct Item *item)
     }
     return FALSE;
 }
-
-extern void sub_803E708(u32, u32);
-extern void sub_80421C0(struct Entity *r0, u16 r1);
-extern void sub_8078B5C(struct Entity *, struct Entity *, u32, u32, u32);
-
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DE58[];
-
-extern u8 *gPtrMusicBoxPlayedCrumbledMessage[];
-extern u8 *gPtrWishStoneCrumbledMessage[];
-extern u8 *gPtrIcePartCrumbledMessage[];
-extern u8 *gPtrRockPartCrumbledMessage[];
-extern u8 *gPtrSteelPartCrumbledMessage[];
-extern u8 *gUnknown_80FDCA4[];
-extern u8 *gUnknown_80FE3E8[];
-extern u8 *gUnknown_80FECA0[];
-extern u8 *gUnknown_80FE3E8[];
-extern u8 *gUnknown_80F9BD8[];
-
-extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4FAC;
-
-extern u8 sub_806A538(s32);
-extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_8051E7C(struct Entity *pokemon);
-extern void sub_8045BF8(u8 *, struct Item *);
-struct Entity *DrawFieldGiveItemMenu(u32, u32);
-extern void PrintFieldMessage(u32, u8 *, u32);
-extern void sub_8063B54(struct ActionContainer *);
-extern void sub_80637E8(struct ActionContainer *);
-extern void sub_8063BB4(struct ActionContainer *);
-extern void sub_8063CF0(struct ActionContainer *, u32);
-extern void sub_8063A70(struct ActionContainer *, u32);
-extern u8 sub_8062F90(struct Entity *, u32, u32, u32, u32);
-extern void sub_8044DF0(struct Entity *, u32, u32);
-extern s32 sub_8052B8C(u32, u8 *, u32);
-extern void sub_803EAF0(u32, u32);
-extern void sub_8044C10(bool8);
-extern void sub_8044E24(u32, u32, u32);
-extern void sub_804245C(u32, struct Item *);
 
 static inline bool8 sub_8048A68_sub(struct EntityInfo *pokemonInfo)
 {

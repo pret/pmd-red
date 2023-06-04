@@ -424,7 +424,7 @@ void CringeStatusTarget(struct Entity * pokemon,struct Entity * target, bool8 di
 void ParalyzeStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
   struct Tile *mapTile;
-  register struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo;
   struct Entity *mapPokemonEntity;
   int index;
   bool8 bVar6;
