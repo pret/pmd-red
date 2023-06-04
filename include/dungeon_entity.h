@@ -208,7 +208,8 @@ struct EntityInfo
     u8 unk153;
     u8 unk154;
     u8 unk155;
-    u8 fill158[0x158 - 0x156];
+    u8 unk156;
+    bool8 unk157;
     u8 unk158;
     u8 unk159;
     u8 unk15A;

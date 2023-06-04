@@ -2,13 +2,16 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "dungeon_entity.h"
+#include "dungeon_util.h"
 #include "dungeon_global_data.h"
 #include "move_effects_target.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "number_util.h"
 #include "moves.h"
 #include "code_8077274_1.h"
+#include "pokemon.h"
 #include "position.h"
 #include "status.h"
 
@@ -35,7 +38,20 @@ extern u8 *gUnknown_80FE454[];
 extern u8 *gPtrSelfHealPreventedHungerMessage[];
 extern u8 *gUnknown_80F9740[];
 extern u8 *gUnknown_80F9760[];
+extern u8 *gUnknown_80FD644[];
+extern u8 *gUnknown_80FD648[];
+extern u8 *gUnknown_80FD6E8[];
+extern u8 *gPtrCantUseInDungeonMessage[];
+extern u8 *gUnknown_80FE3E8[];
 
+extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
+extern s16 gUnknown_810A808[0x12][NUMBER_OF_GUMMIS];
+
+struct Entity *DrawFieldGiveItemMenu(u32, u32);
+extern void PrintFieldMessage(u32, u8 *, u32);
+extern void sub_8044E24(u32, u32, u32);
+extern void sub_804245C(u32, struct Item *);
+extern u8 sub_8072938(struct Entity *, u16);
 extern void sub_807D148(struct Entity *pokemon, struct Entity *r1, u32 r2, struct Position *r3);
 extern void sub_8072008(struct Entity *pokemon, struct Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(struct Entity *pokemon, struct Entity *r1, u32 r2);
@@ -48,6 +64,8 @@ extern s32 sub_8042520(struct Entity *);
 struct Entity *sub_80696FC(struct Entity *);
 extern void sub_80943A0(void*, s32);
 extern void sub_803E708(u32 r0, u32 r1);
+extern void sub_806A7E8(struct EntityInfo *, s32);
+
 
 void sub_8048340(struct Entity *pokemon, struct Entity *target, u32 r2)
 {
@@ -293,4 +311,155 @@ void sub_804869C(struct Entity *pokemon, struct Entity * target, u8 param_3)
 void sub_80487CC(struct Entity *pokemon, struct Entity * target, u32 param_3, u32 param_4)
 {
     sub_8078B5C(pokemon, target, param_3, param_4, 1);
+}
+
+static inline bool8 sub_80487E0_sub(struct EntityInfo *pokemonInfo)
+{
+    if (pokemonInfo->joinedAt == 0x4A)
+    {
+        return TRUE;
+    }
+    if (pokemonInfo->joinedAt == 0x47)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80487E0(struct Entity *pokemon, struct Entity *target, u8 gummiIndex)
+{
+  s32 iVar3;
+  struct EntityInfo *targetInfo;
+  s32 gummiBoost;
+  s32 baseIQ;
+  s32 iVar4;
+  s32 iVar5;
+  s32 currIQ;
+    
+  targetInfo = target->info;
+  gummiBoost = gTypeGummiIQBoost[targetInfo->types[0]][gummiIndex];
+  gummiBoost += gTypeGummiIQBoost[targetInfo->types[1]][gummiIndex];
+  sub_8078B5C(pokemon,target,
+             gUnknown_810A808[targetInfo->types[0]][gummiIndex] +
+             gUnknown_810A808[targetInfo->types[1]][gummiIndex],0,1);
+  if (!targetInfo->isNotTeamMember) {
+    if (!sub_80487E0_sub(targetInfo)) {
+      baseIQ = targetInfo->IQ;
+      targetInfo->IQ += gummiBoost;
+      currIQ = baseIQ + gummiBoost;
+      if (targetInfo->IQ <= 0) {
+        targetInfo->IQ = 1;
+      }
+      if (999 < targetInfo->IQ) {
+        targetInfo->IQ = 999;
+      }
+      if (baseIQ == targetInfo->IQ) {
+        sub_80522F4(pokemon,target,*gUnknown_80FD644);
+      }
+      else {
+        iVar5 = currIQ - baseIQ;
+        iVar4 = 0;
+        if (((iVar5 < 9) && (iVar4 = 1, iVar5 < 5)) && (iVar4 = 3, 2 < iVar5)) {
+          iVar4 = 2;
+        }
+        iVar5 = targetInfo->IQ - baseIQ;
+        iVar3 = 0;
+        if (((iVar5 < 9) && (iVar3 = 1, iVar5 < 5)) && (iVar3 = 3, 2 < iVar5)) {
+          iVar3 = 2;
+        }
+        sub_80522F4(pokemon,target,gUnknown_80FD648[iVar4]);
+        sub_80522F4(pokemon,target,gUnknown_80FD6E8[iVar3]);
+        LoadIQSkills(target);
+        sub_806A7E8(targetInfo,baseIQ);
+      }
+    }
+  }
+}
+
+void sub_804891C(struct Entity *pokemon, struct Entity *target)
+{
+    RaiseAtkStatTarget(pokemon, target, 3);
+}
+
+void sub_8048928(struct Entity *pokemon, struct Entity *target)
+{
+    RaiseSpAtkStatTarget(pokemon, target, 3);
+}
+
+void sub_8048934(struct Entity *pokemon, struct Entity *target)
+{
+    RaiseDefStatTarget(pokemon, target, 3);
+}
+
+void sub_8048940(struct Entity *pokemon, struct Entity *target)
+{
+    RaiseSpDefStatTarget(pokemon, target, 3);
+}
+
+void nullsub_94(void)
+{}
+
+static inline bool8 sub_8048950_sub(struct EntityInfo *pokemonInfo)
+{
+    if (pokemonInfo->joinedAt == 0x4A)
+    {
+        return TRUE;
+    }
+    if (pokemonInfo->joinedAt == 0x47)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8048950(u32 param_1,struct Item *item)
+{
+    u8 flag;
+    u16 moveID;
+    struct Entity *entity2;
+    struct Entity *entity;
+    struct EntityInfo *entityInfo;
+    int index;
+
+    moveID = GetItemMoveID(item->id);
+    if ((item->flags & ITEM_FLAG_STICKY)) {
+        PrintFieldMessage(0,*gUnknown_80FE3E8,1);
+        return FALSE;
+    }
+    else if (IsHMItem(item->id)) {
+        PrintFieldMessage(0,*gPtrCantUseInDungeonMessage,1);
+        return FALSE;
+    }
+    else
+    {
+        for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+        {
+            entity = gDungeon->teamPokemon[index];
+            if (EntityExists(entity)) {
+                entityInfo = entity->info;
+                flag = CanMonLearnMove(moveID, entityInfo->id);
+                if (CannotMove(entity, FALSE)) {
+                    flag = FALSE;
+                }
+                if (entityInfo->clientType == CLIENT_TYPE_CLIENT) {
+                    flag = FALSE;
+                }
+                if (sub_8048950_sub(entityInfo)) {
+                    flag = FALSE;
+                }
+                entityInfo->unk157 = flag;
+            }
+        }
+        entity2 = DrawFieldGiveItemMenu(0,1);
+        if (!EntityExists(entity2)) {
+            return FALSE;
+        }
+        sub_804245C(param_1,item);
+        if (sub_8072938(entity2,moveID) == 0) {
+            return FALSE;
+        }
+        sub_8044E24(param_1,0,0x141);
+        return TRUE;
+    }
+    return FALSE;
 }
