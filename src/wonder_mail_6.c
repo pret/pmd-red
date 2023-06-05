@@ -71,11 +71,11 @@ const struct UnkTextStruct2 gUnknown_80E09C0 = {
 
 ALIGNED(4) const u8 gUnknown_80E09D8[] = _(
         " ...Uh{COMMA} no?\n"
-        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.");
+        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
         " ...Uh{COMMA} no?\n"
-        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
+        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 const u8 wonder_mail_6_fill[] = "pksdir0";
 
 extern void sub_80306A8(s32, u32, u32, u32);
@@ -120,11 +120,11 @@ bool8 sub_8030F58(u32 wonderMailType)
     switch(wonderMailType)
     {
         case 2:
-            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
             sub_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
             break;
         case 4:
-            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
             sub_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
             break;
     }

@@ -62,7 +62,7 @@ PasswordAccept_80E72B4:
     .align 2, 0
 
 Success_80E72D8:
-    .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} \0"
+    .string "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} \0"
     .align 2, 0
 
 	.global gUnknown_80E72EC
@@ -82,7 +82,7 @@ gUnknown_80E7304: @ 80E7304
     .4byte 0, 0xA
 
 NotSOSMail_80E7324:
-    .string "{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+    .string "{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 	.global gUnknown_80E7344
@@ -102,7 +102,7 @@ gUnknown_80E735C: @ 80E735C
     .4byte 0, 0xA
 
 ReceiveSOSMail_80E737C:
-    .string "{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
+    .string "{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} has been received already.\0"
     .align 2, 0
 
 	.global gUnknown_80E73AC

@@ -75,7 +75,7 @@ const struct MenuItem gAdventureSavedMenuItems[] = {
 };
 ALIGNED(4) const u8 sUnknown_80E6FDC[] = _("{CENTER_ALIGN}has been saved.");
 ALIGNED(4) const u8 sUnknown_80E6FF0[] = _("{CENTER_ALIGN}Your adventure so far");
-ALIGNED(4) const u8 sUnknown_80E7008[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E7008[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
 
 extern const u8 sUnknown_80E7078[];
 extern const u8 sUnknown_80E7050[];

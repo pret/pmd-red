@@ -1,6 +1,6 @@
 const u8 gUnknown_80E61A4[] = "What would you like to do? ";
 const u8 gUnknown_80E61C0[] = "Please choose the item to be sent.";
-ALIGNED(4) const u8 gUnknown_80E61E4[] = _("{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
+ALIGNED(4) const u8 gUnknown_80E61E4[] = _("{COLOR_1 LIGHT_BLUE}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
 "will be sent.\n"
 "Is that OK?");
 
@@ -17,10 +17,10 @@ ALIGNED(4) const u8 gUnknown_80E62C4[] = _("{CENTER_ALIGN}In communication...\n"
                                         "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
 
 ALIGNED(4) const u8 gUnknown_80E6314[] = _("You received\n"
-            "{COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
+            "{COLOR_1 LIGHT_BLUE}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
             "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E6358[] = _("You sent {COLOR_1 LIGHT_BLUE_2}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 gUnknown_80E6358[] = _("You sent {COLOR_1 LIGHT_BLUE}$d0{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.");
 
 // Trade Items Menu Link Error Messages
 const u8 gTradeItemsCommunicationError[] = "There was a communication error.";
