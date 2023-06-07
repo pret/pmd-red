@@ -30,7 +30,7 @@ struct PokemonStruct
 {
     // size: 0x58
     /* 0x0 */ u16 unk0; // recruited??
-    /* 0x1 */ bool8 isTeamLeader;
+    /* 0x2 */ bool8 isTeamLeader;
     /* 0x3 */ u8 unkHasNextStage;  // set to a random value?
     /* 0x4 */ struct DungeonLocation dungeonLocation;
     /* 0x8 */ s16 speciesNum; // species #
@@ -75,7 +75,7 @@ struct PokemonStruct2
     /* 0x3 */ u8 unkHasNextStage;   // unk3
     /* 0x4 */ struct DungeonLocation dungeonLocation;  // unk4
     /* 0x8 */ u16 IQ;    // IQ (other offset)
-    /* 0xA */ u16 unkA;
+    /* 0xA */ s16 unkA;
     /* 0xC */ u16 unkC;
     /* 0xE */ s16 speciesNum;  // speciesNum (other offset)
     /* 0x10 */ u16 unk10;  // pokeHP
@@ -234,6 +234,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2);
 void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2* r0, struct PokemonStruct *r1, s32 r2);
 void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon);
 void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
+s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon);
 
 
 #endif // GUARD_POKEMON_H

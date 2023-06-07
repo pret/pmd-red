@@ -25,7 +25,6 @@ extern void sub_8097670(void);
 extern void LoadGameOptions(void);
 extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
-extern void sub_80950BC(void);
 extern void LoadMailInfo(void);
 extern void sub_800CD64(u32, u32);
 extern void SetWindowTitle(char *);

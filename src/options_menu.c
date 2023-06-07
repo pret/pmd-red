@@ -420,42 +420,37 @@ void sub_801DED0(void)
 
 void CreateOthersMenu(void)
 {
-  const char *blankText;
-  s32 defaultAction;
-  struct unkStruct_203B25C *preload;
+  s32 loopMax;
   
   MemoryFill16(gUnknown_203B25C->unkAC,0,sizeof(gUnknown_203B25C->unkAC));
 
-  // This is dumb that I have to squeeze this in like this
-  preload = gUnknown_203B25C;
-  blankText = NULL;
-  preload->menuItems[0].text = gOthers_GameOptions;
-  preload->menuItems[0].menuAction = MENU_OPTION_GAMEOPTIONS;
-  defaultAction = MENU_OPTION_DEFAULT;
-  preload->menuItems[1].text = gOthers_Hints;
-  preload->menuItems[1].menuAction = MENU_OPTION_HINTS;
-  preload->menuItems[2].text = blankText;
-  preload->menuItems[2].menuAction = defaultAction;
+  loopMax = 0;
+
+  gUnknown_203B25C->menuItems[loopMax].text = gOthers_GameOptions;
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_GAMEOPTIONS;
+  loopMax += 1;
+  gUnknown_203B25C->menuItems[loopMax].text = gOthers_Hints;
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_HINTS;
+  loopMax += 1;
+  gUnknown_203B25C->menuItems[loopMax].text = NULL;
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_DEFAULT;
 }
 
 void CreateChangeSettingsConfirmMenu(void)
 {
-  const char *blankText;
-  s32 defaultAction;
-  struct unkStruct_203B25C *preload;
+  s32 loopMax;
   
   MemoryFill16(gUnknown_203B25C->unkAC,0,sizeof(gUnknown_203B25C->unkAC));
+  loopMax = 0;
 
-  // This is dumb that I have to squeeze this in like this
-  preload = gUnknown_203B25C;
-  blankText = NULL;
-  preload->menuItems[0].text = *gUnknown_80D4920; // Yes
-  preload->menuItems[0].menuAction = MENU_OPTION_YES;
-  defaultAction = MENU_OPTION_DEFAULT;
-  preload->menuItems[1].text = *gUnknown_80D4928; // No
-  preload->menuItems[1].menuAction = MENU_OPTION_NO;
-  preload->menuItems[2].text = blankText;
-  preload->menuItems[2].menuAction = defaultAction;
+  gUnknown_203B25C->menuItems[loopMax].text = *gUnknown_80D4920; // Yes
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_YES;
+  loopMax += 1;
+  gUnknown_203B25C->menuItems[loopMax].text = *gUnknown_80D4928; // No
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_NO;
+  loopMax += 1;
+  gUnknown_203B25C->menuItems[loopMax].text = NULL;
+  gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_DEFAULT;
 }
 
 void HandleOthersMenu(void)

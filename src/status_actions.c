@@ -162,7 +162,7 @@ struct NaturePowerMove
     u16 unk2;
     MoveCallback move;
 };
-struct NaturePowerMove gUnknown_80F59C8[10];
+extern struct NaturePowerMove gUnknown_80F59C8[10];
 
 bool8 sub_805AFA4(struct Entity * pokemon, struct Entity * target, struct Move *move, u32 param_4)
 {

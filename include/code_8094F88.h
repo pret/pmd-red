@@ -5,6 +5,7 @@
 
 struct unkStruct_203B480
 {
+    // size: 0x30
     /* 0x0 */ u8 mailType;
     /* 0x1 */ u8 missionType;
     /* 0x4 */ struct DungeonLocation dungeon;
@@ -37,8 +38,21 @@ struct unkStruct_203B48C
     s32 unk4[0x20];
 };
 
+extern struct unkStruct_203B480 *gUnknown_203B480;
+extern struct unkStruct_203B484 *gUnknown_203B484;
+extern u32 *gUnknown_203B488;
+extern struct unkStruct_203B48C *gUnknown_203B48C;
+
+void sub_80950BC(void);
+struct unkStruct_203B480 *sub_80950F8(void);
+struct unkStruct_203B484 *sub_8095100(void);
+u32 *sub_8095108(void);
+struct unkStruct_203B48C *sub_8095110(void);
+void sub_8095118(void);
+s32 FindOpenMailSlot(void);
+bool8 sub_80951BC(struct unkStruct_203B480 *mail);
 bool8 sub_80951FC(struct unkStruct_203B480 *param_1);
-struct unkStruct_203B480 * sub_8095228(u8 index);
+struct unkStruct_203B480 * GetMailatIndex(u8 index);
 void DeleteMailAtIndex(u8 index);
 void sub_8095274(u32 param_1);
 bool8 sub_8095298(s32 param_1);
@@ -49,6 +63,8 @@ u32 CountAllMail(void);
 s32 sub_8095374(void);
 s32 GetMailIndex(u8 mailType, u32 param_2);
 s32 GetFirstIndexofMailType(u8 mailType);
+void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
+void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 
 
 #endif

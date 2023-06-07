@@ -56,20 +56,15 @@ struct unkStruct_203B310
 };
 extern struct unkStruct_203B310 *gUnknown_203B310;
 
-// TODO: port to ItemSlot
-struct Item_Alt
-{
-    union temp {
-        struct Item norm;
-        u32 full_bits;
-    } temp;
-};
-
 struct unkStruct_203B314
 {
     // size: 0x15C
     s16 unk0[2];
-    u8 fill4[0xB8 - 0x4];
+    u8 fill4[0x5C - 0x4];
+    u8 unk5C[2];
+    u8 fill5E[0x8A - 0x5E];
+    u8 unk8A[2];
+    u8 unk8C[0xB8 - 0x8C];
     u8 unkB8;
     u8 unkB9;
     u8 unkBA;
@@ -150,6 +145,12 @@ extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
+extern s32 sub_8013800(u32 *, s32);
+extern void xxx_call_draw_string(s32, s32, const u8 *, s32, s32);
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+const u8 *sub_80974A0(s16 index);
 
 const struct UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
@@ -273,6 +274,9 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_202DE30;
 extern const u8 *gUnknown_80D4970[];
+extern u8 gUnknown_80E0744[];
+extern u8 gUnknown_80E0754[];
+extern u8 gUnknown_80E0750[];
 
 
 
@@ -377,19 +381,16 @@ void sub_802F088(void)
 
 void sub_802F108(void)
 {
-    struct unkStruct_203B30C *preload;
-    const u8 *blankText;
-    s32 action_1;
+    s32 loopMax = 0;
 
-    preload = gUnknown_203B30C;
-    blankText = NULL;
-    preload->unkB0[0].text = gUnknown_80E040C;
-    preload->unkB0[0].menuAction = 2;
-    action_1 = 1;
-    preload->unkB0[1].text = *gUnknown_80D4970;
-    preload->unkB0[1].menuAction = 3;
-    preload->unkB0[2].text = blankText;
-    preload->unkB0[2].menuAction = action_1;
+    gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B30C->unkB0[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B30C->unkB0[loopMax].text = NULL;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = 1;
 }
 
 void sub_802F148(void)
@@ -469,7 +470,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
     PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
 
-    gUnknown_203B310->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->unk14);
+    gUnknown_203B310->faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->faceData = NULL;
 
     gUnknown_203B310->unk20 = 0;
@@ -837,4 +838,116 @@ void sub_802F974(void)
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }
+}
+
+NAKED
+void sub_802F9C0(void)
+{
+    asm_unified(
+	"\tpush {r4,r5,lr}\n"
+	"\tldr r4, _0802FA44\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r1, 0xAC\n"
+	"\tlsls r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r1, 0x1\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r3, _0802FA48\n"
+	"\tadds r0, r3\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r3, 0x1\n"
+	"\tadds r1, r0, r3\n"
+	"\tmovs r0, 0x8\n"
+	"\tstrb r0, [r1]\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r1, _0802FA4C\n"
+	"\tadds r0, r1\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xD6\n"
+	"\tmovs r2, 0\n"
+	"\tldrsh r0, [r0, r2]\n"
+	"\tmovs r1, 0xC\n"
+	"\tbl sub_80095E4\n"
+	"\tadds r0, 0x2\n"
+	"\tlsls r0, 16\n"
+	"\tldr r3, [r4]\n"
+	"\tadds r5, r3, 0\n"
+	"\tadds r5, 0xF0\n"
+	"\tldr r2, [r5]\n"
+	"\tlsls r1, r2, 1\n"
+	"\tadds r1, r2\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r3, r1\n"
+	"\tmovs r2, 0x83\n"
+	"\tlsls r2, 1\n"
+	"\tadds r1, r2\n"
+	"\tasrs r2, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r1, [r5]\n"
+	"\tlsls r0, r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tlsls r0, 3\n"
+	"\tadds r3, r0\n"
+	"\tadds r2, 0x2\n"
+	"\tmovs r0, 0x84\n"
+	"\tlsls r0, 1\n"
+	"\tadds r3, r0\n"
+	"\tstrh r2, [r3]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0xF8\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tpop {r4,r5}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0802FA44: .4byte gUnknown_203B314\n"
+"_0802FA48: .4byte 0x00000159\n"
+"_0802FA4C: .4byte 0x0000015b");
+}
+
+void sub_802FA50(void)
+{
+  s32 sVar1;
+  const u8 *text;
+  u32 y;
+  u32 y2;
+  int index;
+  int counter;
+  
+  sub_8008C54(gUnknown_203B314->unkF0);
+  sub_80073B8(gUnknown_203B314->unkF0);
+  xxx_call_draw_string(10,0,gUnknown_80E0744,gUnknown_203B314->unkF0,0);
+  sub_8012BC4(gUnknown_203B314->unk158[2] * 8 + 4,0,gUnknown_203B314->unkDA + 1,2,7,gUnknown_203B314->unkF0);
+  if (gUnknown_203B314->unkB8 != 0) {
+    for(counter = 0; counter < gUnknown_203B314->unkD6; counter++)
+    {
+        y = sub_8013800(&gUnknown_203B314->unkBC,counter);
+        index = gUnknown_203B314->unkDA * gUnknown_203B314->unkD8 + counter;
+        sVar1 = gUnknown_203B314->unk0[index];
+        if (gUnknown_203B314->unk5C[index] != 0) {
+            xxx_call_draw_string(10,y,gUnknown_80E0750,gUnknown_203B314->unkF0,0);
+        }
+        else if (gUnknown_203B314->unk8A[index] != 0) {
+            xxx_call_draw_string(10,y,gUnknown_80E0754,gUnknown_203B314->unkF0,0);
+        }
+        xxx_call_draw_string(0x18,y,sub_80974A0(sVar1),gUnknown_203B314->unkF0,0);
+    }
+  }
+  else {
+    for(counter = 0; counter < gUnknown_203B314->unkD6; counter++)
+    {
+        y2 = sub_8013800(&gUnknown_203B314->unkBC,counter);
+        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->unkDA * gUnknown_203B314->unkD8 + counter]);
+        xxx_call_draw_string(8,y2,text,gUnknown_203B314->unkF0,0);
+    }
+  }
+  sub_80073E0(gUnknown_203B314->unkF0);
 }

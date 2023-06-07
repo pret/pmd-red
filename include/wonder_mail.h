@@ -12,15 +12,14 @@
 
 struct unkStruct_802F204
 {
-    /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH]; // client name?
+    /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH];
     /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
-    /* 0x14 */ s16 unk14; // poke species (client??)
+    /* 0x14 */ s16 clientSpecies;
     /* 0x16 */ u8 unk16;
     /* 0x18 */ s32 moneyReward;
     /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
     /* 0x1F */ u8 quantity;
     /* 0x20 */ u8 friendAreaReward;
-    u8 fill21[0x24 - 0x21];
     /* 0x24 */ u32 teamRankPtsReward;
 };
 

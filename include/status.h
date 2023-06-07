@@ -35,5 +35,6 @@ void TauntStatusTarget(struct Entity * pokemon, struct Entity * target);
 void HandleStockpile(struct Entity * pokemon, struct Entity * target);
 void InvisibleStatusTarget(struct Entity * pokemon, struct Entity * target);
 void PerishSongTarget(struct Entity * pokemon, struct Entity * target);
+void EncoreStatusTarget(struct Entity * pokemon, struct Entity * target);
 
 #endif

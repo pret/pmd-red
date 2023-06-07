@@ -8,12 +8,7 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "menu_input.h"
-
-struct subStruct_203B240
-{
-    char * pokeName;
-    char * unk4;
-};
+#include "subStruct_203B240.h"
 
 // based off of 203B240..
 struct unkStruct_203B230
@@ -501,15 +496,15 @@ void sub_801B874(void)
 
 void sub_801BB20(void)
 {
-    struct unkStruct_203B234 *preload;
-    u8 *nullText;
+    s32 loopMax;
 
-    preload = gUnknown_203B234;
-    nullText = NULL;
-    preload->unkCC[0].text = gKangaskhanTrashToolboxItem;
-    preload->unkCC[0].menuAction = 4;
-    preload->unkCC[1].text = gKangaskhanTrashReceivedItem;
-    preload->unkCC[1].menuAction = 5;
-    preload->unkCC[2].text = nullText;
-    preload->unkCC[2].menuAction = -1;
+    loopMax = 0;
+    gUnknown_203B234->unkCC[loopMax].text = gKangaskhanTrashToolboxItem;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B234->unkCC[loopMax].text = gKangaskhanTrashReceivedItem;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B234->unkCC[loopMax].text = NULL;
+    gUnknown_203B234->unkCC[loopMax].menuAction = -1;
 }

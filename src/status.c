@@ -12,7 +12,7 @@
 #include "dungeon_items.h"
 #include "code_808417C.h"
 #include "code_8077274_1.h"
-#include "dungeon_movement_1.h"
+#include "dungeon_movement.h"
 #include "map.h"
 
 extern u8 gAvailablePokemonNames[];
@@ -112,6 +112,10 @@ extern s16 gUnknown_80F4EE4[];
 extern s16 gUnknown_80F4EEC[];
 extern u8 *gUnknown_80FBB04[];
 extern u8 *gUnknown_80FBB28[];
+extern u8 *gUnknown_80FBBD4[];
+extern u8 *gUnknown_80FBBB8[];
+extern u8 *gUnknown_80FBB94[];
+extern s16 gUnknown_80F4EF4[];
 
 extern s32 gUnknown_202DE30[10];
 
@@ -138,6 +142,7 @@ extern void nullsub_79(struct Entity *);
 extern void nullsub_80(struct Entity *);
 extern void nullsub_81(struct Entity *);
 extern void nullsub_82(struct Entity *);
+extern void nullsub_83(struct Entity *);
 extern void sub_803F580(u32);
 extern void sub_8040A84(void);
 extern void sub_8041CA8(struct Entity *);
@@ -419,7 +424,7 @@ void CringeStatusTarget(struct Entity * pokemon,struct Entity * target, bool8 di
 void ParalyzeStatusTarget(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
 {
   struct Tile *mapTile;
-  register struct EntityInfo *entityInfo;
+  struct EntityInfo *entityInfo;
   struct Entity *mapPokemonEntity;
   int index;
   bool8 bVar6;
@@ -1185,5 +1190,38 @@ void PerishSongTarget(struct Entity * pokemon, struct Entity * target)
       sub_80522F4(pokemon,target,*gUnknown_80FBB28);
     }
     EntityUpdateStatusSprites(target);
+  }
+}
+
+void EncoreStatusTarget(struct Entity *pokemon,struct Entity *target)
+{
+  struct Move *movePtr;
+  int index;
+  struct EntityInfo *EntityInfo;
+  
+  EntityInfo = target->info;
+  if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
+    for(index = 0; index < MAX_MON_MOVES; index++)
+    {
+      movePtr = &EntityInfo->moves[index];
+      if ((EntityInfo->moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
+    }
+    if ((index == MAX_MON_MOVES) && ((EntityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
+      SetMessageArgument(gAvailablePokemonNames,target,0);
+      sub_80522F4(pokemon,target,*gUnknown_80FBBD4);
+    }
+    else {
+      SetMessageArgument(gAvailablePokemonNames,target,0);
+      if (EntityInfo->volatileStatus != STATUS_ENCORE) {
+        EntityInfo->volatileStatus = STATUS_ENCORE;
+        EntityInfo->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EF4,TRUE) + 1;
+        nullsub_83(target);
+        sub_80522F4(pokemon,target,*gUnknown_80FBB94);
+      }
+      else {
+        sub_80522F4(pokemon,target,*gUnknown_80FBBB8);
+      }
+      EntityUpdateStatusSprites(target);
+    }
   }
 }

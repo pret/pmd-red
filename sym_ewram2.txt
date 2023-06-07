@@ -83,8 +83,8 @@ gUnknown_203B0B0: /* 203B0B0 */
 gUnknown_203B0B2: /* 203B0B2 */
 	.space 0x2
 
-gFlashEnabled: /* 203B0B4 */
-	.space 0x4
+    .include "src/flash.o"
+    .space 0x3
 
 gUnknown_203B0B8: /* 203B0B8 */
 	.space 0x4
@@ -121,15 +121,6 @@ gUnknown_203B0EC: /* 203B0EC */
 
     .include "src/debug.o"
 	.space 0x2B
-
-gUnknown_203B17C: /* 203B17C */
-	.space 0x4
-
-gUnknown_203B180: /* 203B180 */
-	.space 0x4
-
-gUnknown_203B184: /* 203B184 */
-	.space 0x4
 
 .include "src/save.o"
 
@@ -289,14 +280,9 @@ gUnknown_203B2AA: /* 203B2AA */
 gUnknown_203B2AC: /* 203B2AC */
 	.space 0x4
 
-gUnknown_203B2B0: /* 203B2B0 */
-	.space 0x4
-
-gUnknown_203B2B4: /* 203B2B4 */
-	.space 0x4
-
-gUnknown_203B2B8: /* 203B2B8 */
-	.space 0x4
+.include "src/luminous_cave.o"
+.include "src/friend_list_menu.o"
+.include "src/party_list_menu.o"
 
 gUnknown_203B2BC: /* 203B2BC */
 	.space 0x4
@@ -358,8 +344,7 @@ gUnknown_203B300: /* 203B300 */
 gUnknown_203B304: /* 203B304 */
 	.space 0x4
 
-gPelipperBoard: /* 203B308 */
-	.space 0x4
+.include "src/pelipper_board.o"
 
 gUnknown_203B30C: /* 203B30C */
 	.space 0x4
@@ -385,20 +370,13 @@ gUnknown_203B324: /* 203B324 */
 gUnknown_203B328: /* 203B328 */
 	.space 0x4
 
-gPostOfficeHelper: /* 203B32C */
-	.space 0x4
-
-gUnknown_203B330: /* 203B330 */
-	.space 0x4
+.include "src/post_office_guide.o"
 
 gUnknown_203B334: /* 203B334 */
 	.space 0x4
 
-gAdventureLog: /* 203B338 */
-	.space 0x4
-
-gUnknown_203B33C: /* 203B33C */
-	.space 0x4
+.include "src/adventure_log.o"
+.include "src/friend_rescue.o"
 
 gUnknown_203B340: /* 203B340 */
 	.space 0x4
@@ -406,20 +384,9 @@ gUnknown_203B340: /* 203B340 */
 gUnknown_203B344: /* 203B344 */
 	.space 0x4
 
-gMainMenu: /* 203B348 */
-	.space 0x4
+.include "src/main_menu.o"
 
-gUnknown_203B34C: /* 203B34C */
-	.space 0x4
-
-gUnknown_203B350: /* 203B350 */
-	.space 0x4
-
-gUnknown_203B354: /* 203B354 */
-	.space 0x4
-
-gTradeItemsMenu: /* 203B358 */
-	.space 0x4
+.include "src/trade_items_menu.o"
 
 gUnknown_203B35C: /* 203B35C */
 	.space 0x4
@@ -430,26 +397,9 @@ gUnknown_203B360: /* 203B360 */
 gUnknown_203B364: /* 203B364 */
 	.space 0x4
 
-gUnknown_203B368: /* 203B368 */
-	.space 0x4
+.include "src/rescue_password_menu.o"
 
-gUnknown_203B36C: /* 203B36C */
-	.space 0x4
-
-gRescuePasswordMenu: /* 203B370 */
-	.space 0x4
-
-gLoadScreen: /* 203B374 */
-	.space 0x4
-
-gUnknown_203B378: /* 203B378 */
-	.space 0x10
-
-gUnknown_203B388: /* 203B388 */
-	.space 0x30
-
-gUnknown_203B3B8: /* 203B3B8 */
-	.space 0x30
+.include "src/load_screen.o"
 
 gUnknown_203B3E8: /* 203B3E8 */
 	.space 0x4
@@ -553,9 +503,7 @@ gUnknown_203B490: /* 203B490 */
 gUnknown_203B494: /* 203B494 */
 	.space 0x4
 
-gUnknown_203B498: /* 203B498 */
-	.space 0x4
-
+    .include "src/exclusive_pokemon.o"
 
     .include "src/ground_main.o"
 	.space 0x2

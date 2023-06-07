@@ -12,14 +12,244 @@
 #include "wonder_mail.h"
 #include "menu_input.h"
 
-extern u8 gRescuePasswordBuffer[];
-extern u32 gUnknown_202EC4C;
-extern struct unkStruct_203B484 *gUnknown_203B484;
-extern struct UnkTextStruct2 gUnknown_80E71E4;
+#define RESCUE_PASSWORD_SIZE 0x36
 
-EWRAM_DATA u8 gUnknown_203B368;
-EWRAM_DATA u32 gUnknown_203B36C;
-EWRAM_DATA struct RescuePasswordMenu *gRescuePasswordMenu;
+EWRAM_DATA u32 gUnknown_202EC4C = {0};
+EWRAM_DATA u8 gRescuePasswordBuffer[RESCUE_PASSWORD_SIZE] = {0};
+
+extern struct unkStruct_203B484 *gUnknown_203B484;
+
+EWRAM_DATA_2 u8 gUnknown_203B368 = {0};
+EWRAM_DATA_2 u32 gUnknown_203B36C = {0};
+EWRAM_DATA_2 struct RescuePasswordMenu *gRescuePasswordMenu = {0};
+
+const struct UnkTextStruct2 gUnknown_80E71E4 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+
+};
+
+const struct UnkTextStruct2 gUnknown_80E71FC = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 Error_80E7268[];
+const u8 IncorrectPassword_80E7250[];
+const u8 CheckAgain_80E7234[];
+
+const struct MenuItem gUnknown_80E7214[4] = {
+    {Error_80E7268, 0xC},
+    {IncorrectPassword_80E7250, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 CheckAgain_80E7234[] = _("{CENTER_ALIGN}Please check it again.");
+ALIGNED(4) const u8 IncorrectPassword_80E7250[] = _("{CENTER_ALIGN}Incorrect password!");
+ALIGNED(4) const u8 Error_80E7268[] = _("{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} ");
+
+const struct UnkTextStruct2 gUnknown_80E7278 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 Success_80E72D8[];
+const u8 PasswordAccept_80E72B4[];
+const u8 DATA_80E72B0[];
+
+const struct MenuItem gUnknown_80E7290[4] = {
+    {Success_80E72D8, 0xC},
+    {PasswordAccept_80E72B4, 0xC},
+    {DATA_80E72B0, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 DATA_80E72B0[] = "  ";
+ALIGNED(4) const u8 PasswordAccept_80E72B4[] = _("{CENTER_ALIGN}The password has been accepted.");
+ALIGNED(4) const u8 Success_80E72D8[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} ");
+
+const struct UnkTextStruct2 gUnknown_80E72EC = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 NotSOSMail_80E7324[];
+
+const struct MenuItem gUnknown_80E7304[4] = {
+    {Error_80E7268, 0xC},
+    {NotSOSMail_80E7324, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 NotSOSMail_80E7324[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.");
+
+const struct UnkTextStruct2 gUnknown_80E7344 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 ReceiveSOSMail_80E737C[];
+
+const struct MenuItem gUnknown_80E735C[4] = {
+    {Error_80E7268, 0xC},
+    {ReceiveSOSMail_80E737C, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 ReceiveSOSMail_80E737C[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received already.");
+
+const struct UnkTextStruct2 gUnknown_80E73AC = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E73E4[];
+
+const struct MenuItem gUnknown_80E73C4[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E73E4, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
+
+const struct UnkTextStruct2 gUnknown_80E7408 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E7440[];
+
+const struct MenuItem gUnknown_80E7420[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E7440, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} cannot be used.");
+
+const struct UnkTextStruct2 gUnknown_80E7468 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E74A0[];
+
+const struct MenuItem gUnknown_80E7480[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E74A0, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
+
+const struct UnkTextStruct2 gUnknown_80E74C8 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E7500[];
+
+const struct MenuItem gUnknown_80E74E0[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E7500, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+
+ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} cannot be used.");
+
+const struct UnkTextStruct2 gUnknown_80E752C = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E7564[];
+
+const struct MenuItem gUnknown_80E7544[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E7564, 0xC},
+    {CheckAgain_80E7234, 0xC},
+    {NULL, 0xA},
+};
+ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}.");
+
+const struct UnkTextStruct2 gUnknown_80E7588 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x03, 0x00, 0x09, 0x00,
+        0x17, 0x05,
+        0x05, 0x00,
+        NULL
+
+};
+
+const u8 sUnknown_80E75C0[];
+const u8 sUnknown_80E75CC[];
+const struct MenuItem gUnknown_80E75A0[4] = {
+    {Error_80E7268, 0xC},
+    {sUnknown_80E75CC, 0xC},
+    {sUnknown_80E75C0, 0xC},
+    {NULL, 0xA},
+};
+ALIGNED(4) const u8 sUnknown_80E75C0[] = _("{CENTER_ALIGN}new mail.");
+ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for receiving");
+
+static const u8 fill0[] = "pksdir0";
 
 extern s32 sub_8035D74(void);
 extern void sub_80151C0(u32, u8 *);
@@ -33,10 +263,7 @@ extern void DisplayPasswordAcceptScreen(void);
 
 extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
 
-extern void sub_80951BC(struct unkStruct_203B480 *r0);
-extern bool8 sub_80951FC(struct unkStruct_203B480 *r0);
 extern u32 sub_80154F0(void);
-extern void sub_8095274(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_80391F8(void);
 extern void sub_8031E00();
@@ -50,29 +277,7 @@ bool8 IsInvalidItemReward(u8);
 bool8 sub_8095298(s32);
 bool8 sub_803D204(u8 *, struct unkStruct_203B480 *);
 extern s32 GetDungeonFloorCount(u8);
-extern s32 FindOpenMailSlot(void);
 
-extern struct UnkTextStruct2 gUnknown_80E71FC;
-extern struct UnkTextStruct2 gUnknown_80E7278;
-extern struct UnkTextStruct2 gUnknown_80E72EC;
-extern struct UnkTextStruct2 gUnknown_80E7344;
-extern struct UnkTextStruct2 gUnknown_80E73AC;
-extern struct UnkTextStruct2 gUnknown_80E7408;
-extern struct UnkTextStruct2 gUnknown_80E7468;
-extern struct UnkTextStruct2 gUnknown_80E74C8;
-extern struct UnkTextStruct2 gUnknown_80E752C;
-extern struct UnkTextStruct2 gUnknown_80E7588;
-
-extern struct MenuItem gUnknown_80E7214[];
-extern struct MenuItem gUnknown_80E7290[];
-extern struct MenuItem gUnknown_80E7304[];
-extern struct MenuItem gUnknown_80E735C[];
-extern struct MenuItem gUnknown_80E73C4[];
-extern struct MenuItem gUnknown_80E7420[];
-extern struct MenuItem gUnknown_80E7480[];
-extern struct MenuItem gUnknown_80E74E0[];
-extern struct MenuItem gUnknown_80E7544[];
-extern struct MenuItem gUnknown_80E75A0[];
 
 void CreateRescuePasswordMenu(u32 currMenu)
 {
@@ -92,7 +297,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
     sub_800641C(gRescuePasswordMenu->unk148, 1, 1);
 
     if ((gUnknown_203B368 != 0) || (gUnknown_203B36C != currMenu)) {
-        for(counter = 0; counter < 0x36; counter++)
+        for(counter = 0; counter < RESCUE_PASSWORD_SIZE; counter++)
         {
             gRescuePasswordBuffer[counter] = 0;
         }
@@ -115,7 +320,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             sub_80151C0(4, gRescuePasswordBuffer);
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
-            temp = sub_8095228(0x1F);
+            temp = GetMailatIndex(0x1F);
             MemoryFill8((u8 *)temp, 0, sizeof(struct unkStruct_203B480));
             temp->mailType = 2;
             temp->unk20.id = ITEM_NOTHING;
@@ -158,16 +363,16 @@ static inline s32 UpdateRescuePasswordMenu_sub(s32 otherMenu)
 
 s32 UpdateRescuePasswordMenu(void)
 {
-  struct unkStruct_203B480 *puVar5;
-  struct unkStruct_203B480 *puVar6;
+  struct unkStruct_203B480 *mailPtr1;
+  struct unkStruct_203B480 *mailPtr2;
   u32 iVar7;
-  struct MainMenu *iVar9;
+  struct MainMenu *mainMenuPtr;
   s32 nextMenu;
-  struct unkStruct_203B480 local_44;
-  u32 local_14;
+  struct unkStruct_203B480 mail;
+  u32 menuAction;
   u32 subtract;
 
-  local_14 = 0xb;
+  menuAction = 0xb;
   nextMenu = MENU_NO_SCREEN_CHANGE;
   switch(gRescuePasswordMenu->state) {
     case 0:
@@ -179,7 +384,7 @@ s32 UpdateRescuePasswordMenu(void)
     case 3:
     case 5:
         iVar7 = sub_80154F0();
-        MemoryFill8((u8 *)&local_44, 0, sizeof(struct unkStruct_203B480));
+        MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
         switch(iVar7)
         {
             case 1:
@@ -193,7 +398,7 @@ s32 UpdateRescuePasswordMenu(void)
                 nextMenu = MENU_FRIEND_RESCUE;
                 break;
             case 3:
-                switch(sub_8039068(gRescuePasswordMenu->currMenu, gRescuePasswordBuffer, &local_44)) {
+                switch(sub_8039068(gRescuePasswordMenu->currMenu, gRescuePasswordBuffer, &mail)) {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
                         nextMenu = PASSWORD_ENTRY_INCORRECT_PASSWORD;
                         DisplayRescuePasswordError(nextMenu);
@@ -219,12 +424,12 @@ s32 UpdateRescuePasswordMenu(void)
                         nextMenu = MENU_NO_SCREEN_CHANGE;
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
-                        sub_8095274(local_44.unk10.unk10);
+                        sub_8095274(mail.unk10.unk10);
                         DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
-                        local_44.mailType = 2;
-                        sub_80951BC(&local_44);
+                        mail.mailType = 2;
+                        sub_80951BC(&mail);
                         break;
                     case PASSWORD_ENTRY_NOT_AOK_MAIL:
                         nextMenu = PASSWORD_ENTRY_NOT_AOK_MAIL;
@@ -242,10 +447,10 @@ s32 UpdateRescuePasswordMenu(void)
                         DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
-                        local_44.mailType = 5;
-                        sub_80951FC(&local_44);
-                        puVar5 = sub_8095228(GetMailIndex(1, local_44.unk10.unk10));
-                        puVar5->mailType = WONDER_MAIL_TYPE_OKD;
+                        mail.mailType = 5;
+                        sub_80951FC(&mail);
+                        mailPtr1 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
+                        mailPtr1->mailType = WONDER_MAIL_TYPE_OKD;
                         MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
@@ -264,11 +469,11 @@ s32 UpdateRescuePasswordMenu(void)
                         DisplayPasswordAcceptScreen();
                         gRescuePasswordMenu->state = 9;
                         nextMenu = MENU_NO_SCREEN_CHANGE;
-                        puVar6 = sub_8095228(GetMailIndex(4, local_44.unk10.unk10));
-                        *puVar6 = local_44;
-                        puVar6->mailType = 6;
-                        iVar9 = GetMainMenu();
-                        iVar9->unk3A = 1;
+                        mailPtr2 = GetMailatIndex(GetMailIndex(4, mail.unk10.unk10));
+                        *mailPtr2 = mail;
+                        mailPtr2->mailType = 6;
+                        mainMenuPtr = GetMainMenu();
+                        mainMenuPtr->unk3A = 1;
                         break;
                 }
                 break;
@@ -303,10 +508,10 @@ s32 UpdateRescuePasswordMenu(void)
         }
         break;
     case 8:
-        if (sub_8012FD8(&gRescuePasswordMenu->unk8[0]) == '\0') {
-            sub_8013114(&gRescuePasswordMenu->unk8[0], &local_14);
+        if (!sub_8012FD8(&gRescuePasswordMenu->unk8[0])) {
+            sub_8013114(&gRescuePasswordMenu->unk8[0], &menuAction);
         }
-        switch(local_14)
+        switch(menuAction)
         {
             default:
             case 0xD:
@@ -331,10 +536,10 @@ s32 UpdateRescuePasswordMenu(void)
         }
         break;
     case 9:
-        if (sub_8012FD8(&gRescuePasswordMenu->unk8[0]) == '\0') {
-            sub_8013114(&gRescuePasswordMenu->unk8[0], &local_14);
+        if (!sub_8012FD8(&gRescuePasswordMenu->unk8[0])) {
+            sub_8013114(&gRescuePasswordMenu->unk8[0], &menuAction);
         }
-        switch(local_14)
+        switch(menuAction)
         {
             default:
             case 0xD:
@@ -414,36 +619,36 @@ void DisplayPasswordAcceptScreen(void)
 
 u32 ConvertMenutoRescuePasswordState(u32 unused)
 {
-  u32 uVar1;
+  u32 state;
 
-  uVar1 = 0xb;
+  state = 0xb;
   switch(gRescuePasswordMenu->currMenu) {
     case 0x1b:
-        uVar1 = 0;
+        state = 0;
         break;
     case 0x1f:
-        uVar1 = 4;
+        state = 4;
         break;
     case 0x1d:
-        uVar1 = 2;
+        state = 2;
         break;
     case MENU_DISPLAY_RESCUE_PASSWORD:
-        uVar1 = 6;
+        state = 6;
         break;
     case 0x1c:
-        uVar1 = 1;
+        state = 1;
         break;
     case 0x20:
-        uVar1 = 5;
+        state = 5;
         break;
     case 0x1e:
-        uVar1 = 3;
+        state = 3;
         break;
     case MENU_RESCUE_PASSWORD_ENTRY:
-        uVar1 = 7;
+        state = 7;
         break;
   }
-  return uVar1;
+  return state;
 }
 
 u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *param_3)

@@ -121,7 +121,6 @@ struct unk_203B250
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    u8 fillA[0xC - 0xA];
     struct PokemonStruct *unkC;
     u32 state;
     u32 menuAction;
@@ -914,7 +913,7 @@ void sub_801C6E4(void)
         sub_8008C54(gUnknown_203B240->unk24);
         sub_80073B8(gUnknown_203B240->unk24);
         preload = gUnknown_203B240->unk10[gUnknown_203B240->unk8];
-        strcpy(gAvailablePokemonNames,preload->unk0);
+        strcpy(gAvailablePokemonNames,preload->pokeName);
         xxx_format_and_draw(16,0,gUnknown_80DBE30,gUnknown_203B240->unk24,0); // {ARG_POKEMON_0}
         xxx_format_and_draw(4,16,gUnknown_203B240->unk10[gUnknown_203B240->unk8]->unk4, gUnknown_203B240->unk24,0);
         sub_80073E0(gUnknown_203B240->unk24);

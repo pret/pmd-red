@@ -23,7 +23,7 @@ void MoveMenuCursorUp(u32 *);
 void MoveMenuCursorDown(u32 *);
 extern void sub_80073B8(u32);
 extern s32 sub_8008ED0(const u8 *);
-extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern s32 sub_8013800(u32 *, s32);
 extern void sub_80073E0(u32);
 extern void sub_8013660(u32 *);
@@ -316,7 +316,7 @@ void sub_8012EBC(struct MenuStruct *param_1)
       sub_8006518(textStack);
       x = sub_8008ED0(param_1->unk0);
       xxx_format_and_draw((((ptr_text2->unk14[2]) * 8 - x) /2) + 8,
-          0,*(u8 **)param_1, param_1->index, 0);
+          0,param_1->unk0, param_1->index, 0);
     }
     colorArray = param_1->menuTextColorArray;
     menuItemsPtr = param_1->menuItems;

@@ -1,5 +1,5 @@
-#include "constants/input.h"
 #include "global.h"
+#include "constants/input.h"
 #include "constants/mailbox.h"
 #include "input.h"
 #include "memory.h"
@@ -7,50 +7,11 @@
 #include "menu.h"
 #include "code_802C39C.h"
 #include "menu_input.h"
-
-struct unkStruct_203B2E8
-{
-    // size: 0xA8
-    u8 pelipperBoardSlots[MAX_ACCEPTED_JOBS];
-    u32 unk8;
-    u8 fillC[0x20 - 0xC];
-    s16 unk20;
-    s16 unk22;
-    s16 unk24;
-    s16 unk26;
-    u16 unk28;
-    u16 acceptedJobs;
-    u16 unk2C;
-    u8 fill2E[0x3C - 0x2E]; 
-    u32 unk3C;
-    struct UnkTextStruct2 *unk40;
-    struct UnkTextStruct2 unk44[4];
-    u8 unkA4[4];
-};
-
-struct unkStruct_203B2F0
-{
-    // size: 0x1FC
-    u32 unk0;
-    u32 state;
-    u8 unk8[0xC - 0x8];
-    u8 unkC;
-    u8 fillD[0x10 - 0xD];
-    u32 unk10;
-    u8 fill14[0x68 - 0x14];
-    u32 menuAction;
-    struct MenuStruct unk6C;
-    struct MenuStruct unkBC;
-    struct MenuItem unk10C[8];
-    struct MenuItem unk14C[8];
-    u8 fill18C[0x19C - 0x18C];
-    struct UnkTextStruct2 unk19C[4];
-};
+#include "wonder_mail_2_1.h"
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 extern struct unkStruct_203B2E8* gUnknown_203B2E8;
 extern struct unkStruct_203B2E8* gUnknown_203B2E0;
-
 u16 gUnknown_203B2EC;
 
 const struct UnkTextStruct2 gUnknown_80DFCE4 =
@@ -141,7 +102,7 @@ extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(void *, u32);
-extern void sub_803B35C(void *, u32 *);
+extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
@@ -162,7 +123,7 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_802DE84(u32 *);
+extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
@@ -367,7 +328,7 @@ void DrawJobListMenu(void)
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
         local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
-        sub_803B35C(mail,local.unk0);
+        sub_803B35C(mail,&local);
         CreateRescueTitle(&local);
     } 
     sub_80073E0(gUnknown_203B2E8->unk3C);
@@ -502,7 +463,7 @@ void sub_802C9D8(void)
             break;
         case 4:
             sub_803B35C(GetJobSlotInfo(gUnknown_203B2F0->unkC), &gUnknown_203B2F0->unk10);
-            gUnknown_203B2F0->unk10 = 3;
+            gUnknown_203B2F0->unk10.unk0[0] = 3;
             sub_802DE84(&gUnknown_203B2F0->unk10);
             break;
         case 5:

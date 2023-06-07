@@ -1128,7 +1128,7 @@ _0809E524:
 	bl sub_8001658
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r4, r0, 0
 	movs r0, 0x6
 	bl sub_80023E4

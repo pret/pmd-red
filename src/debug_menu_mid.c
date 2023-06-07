@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "text.h"
 #include "menu_input.h"
+#include "friend_area.h"
 
 struct unkStruct_203B3F0
 {
@@ -45,19 +46,62 @@ struct unkStruct_203B3F4
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
 
 
-extern void sub_801B3C0(struct Item *);
-extern void sub_8013AA0(u32 *);
 
-extern struct UnkTextStruct2 gUnknown_80E7E34;
-extern struct UnkTextStruct2 gUnknown_80E7E4C;
-extern struct UnkTextStruct2 gUnknown_80E7E64;
-extern const char gDebug_NumberText;
-extern struct UnkTextStruct2 gUnknown_80E7E8C;
-extern struct UnkTextStruct2 gUnknown_80E7EA4;
+const struct UnkTextStruct2 gUnknown_80E7E34 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+
+};
+const struct UnkTextStruct2 gUnknown_80E7E4C = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x14, 0x00, 0x04, 0x00,
+        0x06, 0x03,
+        0x03, 0x00,
+        NULL
+
+};
+const struct UnkTextStruct2 gUnknown_80E7E64 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x14, 0x00, 0x0e, 0x00,
+        0x06, 0x04,
+        0x04, 0x00,
+        NULL
+
+};
+ALIGNED(4) const char gDebug_NumberText[] = "Number?";
+ALIGNED(4) static const u8 fill0[] = "pksdir0";
+const struct UnkTextStruct2 gUnknown_80E7E8C = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL
+
+};
+const struct UnkTextStruct2 gUnknown_80E7EA4 = {
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x15, 0x00, 0x04, 0x00,
+        0x06, 0x03,
+        0x03, 0x00,
+        NULL
+
+};
+ALIGNED(4) const u8 gDebug_CloseText[] = "CLOSE";
+ALIGNED(4) const u8 gDebug_OpenText[] = "OPEN";
+ALIGNED(4) static const u8 fill1[] = "pksdir0";
 extern bool8 *gFriendAreas;
 extern const char *gUnknown_80D4970[];
 
-
+extern void sub_801B3C0(struct Item *);
+extern void sub_8013AA0(u32 *);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801CCD8();
@@ -77,9 +121,6 @@ extern void sub_8021354(u32);
 extern void sub_8021494();
 extern void sub_803AA34();
 extern void sub_8021774(u8,u32, u32);
-extern u8 gDebug_CloseText[];
-extern u8 gDebug_OpenText[];
-extern void UnlockFriendArea(u8);
 extern void sub_809249C(u8, u32);
 extern void sub_8021830(void);
 extern u32 sub_80217EC(void);
@@ -218,7 +259,7 @@ void sub_803A690(void)
 {
   sub_8008C54(gUnknown_203B3F0->unkB0);
   sub_80073B8(gUnknown_203B3F0->unkB0);
-  xxx_call_draw_string(4, 0, &gDebug_NumberText, gUnknown_203B3F0->unkB0, 0);
+  xxx_call_draw_string(4, 0, gDebug_NumberText, gUnknown_203B3F0->unkB0, 0);
   sub_8013C68(&gUnknown_203B3F0->unk9C);
   sub_80073E0(gUnknown_203B3F0->unkB0);
   sub_801CCD8();
@@ -227,23 +268,21 @@ void sub_803A690(void)
 
 void sub_803A6F0(void)
 {
-  s32 menuAction;
-  struct unkStruct_203B3F0 *preload;
+  s32 loopMax = 0;
 
-  gUnknown_203B3F0->menuItems[0].text = &gDebug_NumberText;
-  gUnknown_203B3F0->menuItems[0].menuAction = 2;
+  gUnknown_203B3F0->menuItems[loopMax].text = gDebug_NumberText;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 2;
   gUnknown_203B3F0->menuAction = 2;
   if (!IsNotMoneyOrUsedTMItem(gUnknown_203B3F0->id)) {
-    gUnknown_203B3F0->menuItems[0].menuAction = -1;
+    gUnknown_203B3F0->menuItems[loopMax].menuAction = -1;
     gUnknown_203B3F0->menuAction = 3;
   }
-  preload = gUnknown_203B3F0;
-  // this var gets loaded in between the sets... very dumb
-  menuAction = 1;
-  preload->menuItems[1].text = *gUnknown_80D4970;
-  preload->menuItems[1].menuAction = 3;
-  preload->menuItems[2].text = NULL;
-  preload->menuItems[2].menuAction = menuAction;
+  loopMax += 1;
+  gUnknown_203B3F0->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
+  loopMax += 1;
+  gUnknown_203B3F0->menuItems[loopMax].text = NULL;
+  gUnknown_203B3F0->menuItems[loopMax].menuAction = 1;
 }
 
 void sub_803A740(void)

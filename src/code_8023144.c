@@ -71,20 +71,25 @@ struct unkStruct_203B294
     struct MenuStruct unk54;
     struct MenuStruct unkA4;
     u32 menuAction;
-    u32 unkF8;
-    u16 unkFC;
+    struct MenuItem unkF8[0x8];
+    u16 unk138[0x8];
 };
 
 struct unkStruct_203B294 *gUnknown_203B294;
 
 extern u8 gUnknown_80DC5EC[];
 extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_80DC8F0[];
+extern u8 gUnknown_80DC8F8[];
+extern u8 *gUnknown_80D4940[];
+extern u8 *gUnknown_80D4970[];
 extern void sub_8022924(s32);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801B00C(void);
 extern void sub_801B048(void);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
+
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
 extern u32 sub_801A6E8(u32);
@@ -92,6 +97,56 @@ extern void sub_8099690(u32);
 extern void sub_801A928(void);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
 extern u32 sub_801A8AC(void);
+
+void sub_8022D2C(void) {
+    s32 index;
+    s32 loopMax = 0;
+    MemoryFill16(gUnknown_203B294->unk138, 0, sizeof(gUnknown_203B294->unk138));
+    if(gUnknown_203B294->pokeStruct)
+    {
+        gUnknown_203B294->unkF8[loopMax].text = gUnknown_80DC8F0;
+        gUnknown_203B294->unkF8[loopMax].menuAction = 5;
+        if(!IsGummiItem(gUnknown_203B294->item.id))
+        {
+            gUnknown_203B294->unk138[loopMax] = 1;
+        }
+        loopMax += 1;
+    }
+    else {
+        if(GetItemCategory(gUnknown_203B294->item.id) == CATEGORY_TMS_HMS)
+        {
+            gUnknown_203B294->unkF8[loopMax].text = gUnknown_80DC8F8;
+            gUnknown_203B294->unkF8[loopMax].menuAction = 6;
+            loopMax += 1;
+        }
+        gUnknown_203B294->unkF8[loopMax].text = *gUnknown_80D4940;
+        gUnknown_203B294->unkF8[loopMax].menuAction = 4;
+        loopMax += 1;
+    }
+    gUnknown_203B294->unkF8[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B294->unkF8[loopMax].menuAction = 7;
+    loopMax += 1;
+    gUnknown_203B294->unkF8[loopMax].text = NULL;
+    gUnknown_203B294->unkF8[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B294->unk138[index] == 0)
+        {
+            if(gUnknown_203B294->unkF8[index].menuAction == gUnknown_203B294->menuAction)
+                return;
+        }
+    }
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B294->unk138[index] == 0)
+        {
+            gUnknown_203B294->menuAction = gUnknown_203B294->unkF8[index].menuAction;
+            break;
+        }
+    }
+}
 
 void sub_8022E78(void)
 { 

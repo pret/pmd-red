@@ -17,7 +17,8 @@ extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
 extern u8 IsNextMoveLinked(u32, struct Move *);
 extern void PlaySound(u32);
-extern void sub_801EF38(u32);
+extern u32 sub_801EF38(u32);
+extern u32 sub_801F194(void);
 
 void sub_801ED28(void)
 {

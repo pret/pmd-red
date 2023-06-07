@@ -78,7 +78,7 @@ struct Dungeon
     s16 unk12;
     u8 fill14[0xB8 - 0x14];
     struct Entity *unkB8;
-    u32 unkBC;
+    struct Entity *unkBC;
     u8 fillC0[0x16D - 0xC0];
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];

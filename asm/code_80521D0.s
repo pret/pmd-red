@@ -5299,7 +5299,7 @@ _080551F2:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_8057948
+	bl EncoreMoveAction 
 	b _080554BA
 _08055200:
 	adds r0, r7, 0

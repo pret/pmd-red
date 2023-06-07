@@ -41,15 +41,15 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
     u32 temp;
 
     xxx_init_struct_8094924_restore_809485C(&backup, r0, size);
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         RestoreWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         RestoreWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         RestoreWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
     }
@@ -86,15 +86,15 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     u32 temp;
 
     xxx_init_struct_8094924_save_809486C(&backup, r0, size);
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         SaveWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         SaveWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         SaveWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
     }

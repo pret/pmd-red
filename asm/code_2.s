@@ -934,7 +934,7 @@ _08000DAC:
 	cmp r0, 0
 	beq _08000E00
 	ldrb r0, [r4]
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r2, r0, 0
 	adds r0, 0x2C
 	ldrb r1, [r0]
