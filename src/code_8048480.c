@@ -1,7 +1,9 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
+#include "constants/type.h"
 #include "dungeon_action.h"
 #include "dungeon_entity.h"
 #include "dungeon_util.h"
@@ -21,8 +23,8 @@
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
 
-extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
-extern s16 gUnknown_810A808[0x12][NUMBER_OF_GUMMIS];
+extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
+extern s16 gUnknown_810A808[NUM_TYPES][NUMBER_OF_GUMMIS];
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];
@@ -349,13 +351,13 @@ void sub_80487CC(struct Entity *pokemon, struct Entity * target, u32 param_3, u3
     sub_8078B5C(pokemon, target, param_3, param_4, 1);
 }
 
-static inline bool8 sub_80487E0_sub(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems_1(struct EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == 0x4A)
+    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == 0x47)
+    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -379,7 +381,7 @@ void sub_80487E0(struct Entity *pokemon, struct Entity *target, u8 gummiIndex)
              gUnknown_810A808[targetInfo->types[0]][gummiIndex] +
              gUnknown_810A808[targetInfo->types[1]][gummiIndex],0,1);
   if (!targetInfo->isNotTeamMember) {
-    if (!sub_80487E0_sub(targetInfo)) {
+    if (!JoinLocationCannotUseItems_1(targetInfo)) {
       baseIQ = targetInfo->IQ;
       targetInfo->IQ += gummiBoost;
       currIQ = baseIQ + gummiBoost;
@@ -435,13 +437,13 @@ void sub_8048940(struct Entity *pokemon, struct Entity *target)
 void nullsub_94(void)
 {}
 
-static inline bool8 sub_8048950_sub(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems_2(struct EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == 0x4A)
+    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == 0x47)
+    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -480,7 +482,7 @@ bool8 sub_8048950(u32 param_1,struct Item *item)
                 if (entityInfo->clientType == CLIENT_TYPE_CLIENT) {
                     flag = FALSE;
                 }
-                if (sub_8048950_sub(entityInfo)) {
+                if (JoinLocationCannotUseItems_2(entityInfo)) {
                     flag = FALSE;
                 }
                 entityInfo->unk157 = flag;
@@ -500,13 +502,13 @@ bool8 sub_8048950(u32 param_1,struct Item *item)
     return FALSE;
 }
 
-static inline bool8 sub_8048A68_sub(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems_3(struct EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == 0x4A)
+    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == 0x47)
+    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -555,7 +557,7 @@ bool8 sub_8048A68(u32 param_1,struct Item *item)
           if (pEVar6->clientType == CLIENT_TYPE_CLIENT) {
             flag = FALSE;
           }
-          if (sub_8048A68_sub(pEVar6)) {
+          if (JoinLocationCannotUseItems_3(pEVar6)) {
             flag = FALSE;
           }
           if (pEVar6->isTeamLeader) {
@@ -577,13 +579,13 @@ bool8 sub_8048A68(u32 param_1,struct Item *item)
   return FALSE;
 }
 
-static inline bool8 sub_8048B9C_sub(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems_4(struct EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == 0x4A)
+    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == 0x47)
+    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -631,7 +633,7 @@ bool32 sub_8048B9C(struct Entity *entity,struct Item *param_2)
         {
             flag = FALSE;
         }
-        if(sub_8048B9C_sub(entity1Info))
+        if(JoinLocationCannotUseItems_4(entity1Info))
         {
             flag = FALSE;
         }

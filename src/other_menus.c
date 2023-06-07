@@ -50,7 +50,7 @@ const struct MenuItem gUnknown_80E656C[4] = {
     {NULL, 0x3},
 
 };
-ALIGNED(4) const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don~27t turn the power off!");
+ALIGNED(4) const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don{APOSTROPHE}t turn the power off!");
 ALIGNED(4) const u8 sUnknown_80E65AC[] = _("{CENTER_ALIGN}Item transmitting!");
 ALIGNED(4) const u8 sUnknown_80E65C4[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
 
@@ -113,7 +113,7 @@ const struct MenuItem gUnknown_80E66D4[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E66F4[] = _("{CENTER_ALIGN}Please press any button.");
 ALIGNED(4) const u8 sUnknown_80E6710[] = _("{CENTER_ALIGN}Your adventure will be continued.");
-ALIGNED(4) const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}#CGSuccess!#R ");
+ALIGNED(4) const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E6748 = {
    0x00, 0x00, 0x00, 0x00,
@@ -136,7 +136,7 @@ const struct MenuItem gUnknown_80E6760[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E6780[] = _("{CENTER_ALIGN}please try again.");
 ALIGNED(4) const u8 sUnknown_80E6794[] = _("{CENTER_ALIGN}Check the Game Link cable and");
-ALIGNED(4) const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}#C2Communication error!#R ");
+ALIGNED(4) const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}#C2Communication error!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E67D4 = {
    0x00, 0x00, 0x00, 0x00,
@@ -194,9 +194,9 @@ const struct MenuItem gUnknown_80E68B4[4] = {
     {sUnknown_80E68D4, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E68D4[] = _("{CENTER_ALIGN}someone~27s storage space was full.");
+ALIGNED(4) const u8 sUnknown_80E68D4[] = _("{CENTER_ALIGN}someone{APOSTROPHE}s storage space was full.");
 ALIGNED(4) const u8 sUnknown_80E68FC[] = _("{CENTER_ALIGN}An item could not be transferred because");
-ALIGNED(4) const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}#C2Error!#R ");
+ALIGNED(4) const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}#C2Error!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E6938 = {
    0x00, 0x00, 0x00, 0x00,
@@ -216,7 +216,7 @@ const struct MenuItem gUnknown_80E6950[4] = {
     {NULL, 0x3},
 };
 ALIGNED(4) const u8 sUnknown_80E6970[] = _("{CENTER_ALIGN}Please check again.");
-ALIGNED(4) const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This #CGSOS Mail#R can~27t be used.");
+ALIGNED(4) const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E69B0 = {
    0x00, 0x00, 0x00, 0x00,
@@ -234,7 +234,7 @@ const struct MenuItem gUnknown_80E69C8[4] = {
     {sUnknown_80E6970, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This #CGA-OK Mail#R can~27t be used.");
+ALIGNED(4) const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E6A10 = {
    0x00, 0x00, 0x00, 0x00,
@@ -252,7 +252,7 @@ const struct MenuItem gUnknown_80E6A28[4] = {
     {sUnknown_80E6970, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This #CGThank-You Mail#R can~27t be used.");
+ALIGNED(4) const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E6A74 = {
    0x00, 0x00, 0x00, 0x00,
@@ -271,7 +271,7 @@ const struct MenuItem gUnknown_80E6A8C[4] = {
     {sUnknown_80E6AAC, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can~27t be received.");
+ALIGNED(4) const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can{APOSTROPHE}t be received.");
 ALIGNED(4) const u8 sUnknown_80E6AC8[] = _("{CENTER_ALIGN}There is no space for new mail.");
 
 const struct UnkTextStruct2 gUnknown_80E6AEC = {
@@ -292,7 +292,7 @@ const struct MenuItem gUnknown_80E6B04[4] = {
     {NULL, 0x3},
 };
 ALIGNED(4) const u8 sUnknown_80E6B24[] = _("{CENTER_ALIGN}You need to go further in the story.");
-ALIGNED(4) const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that #CGdungeon#R yet.");
+ALIGNED(4) const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR_1 LIGHT_BLUE_2}dungeon{END_COLOR_TEXT_1} yet.");
 
 const struct UnkTextStruct2 gUnknown_80E6B78 = {
    0x00, 0x00, 0x00, 0x00,
@@ -312,7 +312,7 @@ const struct MenuItem gUnknown_80E6B90[4] = {
     {NULL, 0x3},
 };
 ALIGNED(4) const u8 sUnknown_80E6BB0[] = _("{CENTER_ALIGN}Please try again.");
-ALIGNED(4) const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend~27s end.");
+ALIGNED(4) const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend{APOSTROPHE}s end.");
 
 const struct UnkTextStruct2 gUnknown_80E6BF4 = {
    0x00, 0x00, 0x00, 0x00,

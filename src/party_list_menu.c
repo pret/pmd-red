@@ -750,7 +750,7 @@ void sub_8026A94(void)
 
 
 static inline bool8 sub_8026AB0_sub(void) {
-    if (gUnknown_203B2B8->pokeStruct->dungeonLocation.id == 0x44 || gUnknown_203B2B8->pokeStruct->dungeonLocation.id == 0x45)
+    if (gUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || gUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
         return TRUE;
     else
         return FALSE;

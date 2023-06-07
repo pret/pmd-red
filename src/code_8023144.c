@@ -113,7 +113,7 @@ void sub_8022D2C(void) {
         loopMax += 1;
     }
     else {
-        if(GetItemCategory(gUnknown_203B294->item.id) == 5)
+        if(GetItemCategory(gUnknown_203B294->item.id) == CATEGORY_TMS_HMS)
         {
             gUnknown_203B294->unkF8[loopMax].text = gUnknown_80DC8F8;
             gUnknown_203B294->unkF8[loopMax].menuAction = 6;

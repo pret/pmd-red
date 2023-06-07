@@ -144,7 +144,7 @@ const struct MenuItem gUnknown_80E73C4[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an #CGA-OK Mail{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E7408 = {
         0x00, 0x00, 0x00, 0x00,
@@ -165,7 +165,7 @@ const struct MenuItem gUnknown_80E7420[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E7440[] = _("#+This #CGA-OK Mail#R cannot be used.");
+ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} cannot be used.");
 
 const struct UnkTextStruct2 gUnknown_80E7468 = {
         0x00, 0x00, 0x00, 0x00,
@@ -185,7 +185,7 @@ const struct MenuItem gUnknown_80E7480[4] = {
     {CheckAgain_80E7234, 0xC},
     {NULL, 0xA},
 };
-ALIGNED(4) const u8 sUnknown_80E74A0[] = _("#+This is not a #CGThank-You Mail#R.");
+ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E74C8 = {
         0x00, 0x00, 0x00, 0x00,
@@ -206,7 +206,7 @@ const struct MenuItem gUnknown_80E74E0[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E7500[] = _("#+This #CGThank-You Mail#R cannot be used.");
+ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} cannot be used.");
 
 const struct UnkTextStruct2 gUnknown_80E752C = {
         0x00, 0x00, 0x00, 0x00,
@@ -226,7 +226,7 @@ const struct MenuItem gUnknown_80E7544[4] = {
     {CheckAgain_80E7234, 0xC},
     {NULL, 0xA},
 };
-ALIGNED(4) const u8 sUnknown_80E7564[] = _("#+This is not a #CGWonder Mail#R.");
+ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E7588 = {
         0x00, 0x00, 0x00, 0x00,
@@ -246,8 +246,8 @@ const struct MenuItem gUnknown_80E75A0[4] = {
     {sUnknown_80E75C0, 0xC},
     {NULL, 0xA},
 };
-ALIGNED(4) const u8 sUnknown_80E75C0[] = _("#+new mail.");
-ALIGNED(4) const u8 sUnknown_80E75CC[] = _("#+There is no space for receiving");
+ALIGNED(4) const u8 sUnknown_80E75C0[] = _("{CENTER_ALIGN}new mail.");
+ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for receiving");
 
 static const u8 fill0[] = "pksdir0";
 
