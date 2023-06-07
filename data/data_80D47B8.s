@@ -3523,7 +3523,7 @@ gUnknown_80DBB38: @ 80DBB38
 gUnknown_80DBB9C: @ 80DBB9C
         .string "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
         .string "{CENTER_ALIGN}You{APOSTROPHE}ve already acquired it.{EXTRA_MSG}{CENTER_ALIGN}Sorry to see that...{EXTRA_MSG}{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
-        .string "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}."
+        .string "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1{COMMA}000{END_COLOR_TEXT_1} {POKE}."
         .align 2,0
 
 	.global gUnknown_80DBC28

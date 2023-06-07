@@ -5,7 +5,7 @@ ALIGNED(4) const char gUnknown_80DDBA8[] = _(
 
 ALIGNED(4) const char gUnknown_80DDBFC[] = _(
 	" All righty!\n"
-	"Here{APOSTROPHE}s your {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.");
+	"Here{APOSTROPHE}s your {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gUnknown_80DDC30[] = _(
 	" Okeydoke! That{APOSTROPHE}s all done.\n"
@@ -13,7 +13,7 @@ ALIGNED(4) const char gUnknown_80DDC30[] = _(
 
 ALIGNED(4) const char gUnknown_80DDC70[] = _(
 	" Okeydoke! I sent off your\n"
-	"{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	"{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	" Let me save your adventure.");
 
 ALIGNED(4) const char gUnknown_80DDCBC[] = _(
@@ -35,16 +35,16 @@ ALIGNED(4) const char gUnknown_80DDDBC[] = _(
 
 ALIGNED(4) const char gUnknown_80DDDD8[] = _(
 	" All righty. I need you to\n"
-	"pick the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} you want to send.");
+	"pick the {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} you want to send.");
 
 ALIGNED(4) const char gUnknown_80DDE20[] = _(
 	" ...Uh{COMMA} no?\n"
-	"I don{APOSTROPHE}t see any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} here.");
+	"I don{APOSTROPHE}t see any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} here.");
 
 ALIGNED(4) const char gUnknown_80DDE58[] = _(
 	" Did you know? If you use\n"
-	"a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA} you can send\n"
-	"a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} to your friend.");
+	"a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} you can send\n"
+	"a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} to your friend.");
 
 ALIGNED(4) const char gUnknown_80DDEC0[] = _(
 	" Don{APOSTROPHE}t you worry. Sending\n"
@@ -61,7 +61,7 @@ ALIGNED(4) const char gUnknown_80DDF2C[] = _(
 
 ALIGNED(4) const char gUnknown_80DDFB8[] = _(
 	 " All righty! Connect up\n"
-	 "the {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA} if you{APOSTROPHE}d please.\n"
+	 "the {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} if you{APOSTROPHE}d please.\n"
 	 "Your friend ready{COMMA} too?");
 
 ALIGNED(4) const char gUnknown_80DE01C[] = _(
@@ -71,7 +71,7 @@ ALIGNED(4) const char gUnknown_80DE01C[] = _(
 
 ALIGNED(4) const char gUnknown_80DE06C[] = _(
 	" Okeydoke!\n"
-	"I received your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	"I received your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	" Let me save your adventure.");
 
 ALIGNED(4) const char gUnknown_80DE0C0[] = _(
@@ -81,22 +81,22 @@ ALIGNED(4) const char gUnknown_80DE0C0[] = _(
 
 ALIGNED(4) const char gUnknown_80DE124[] = _(
 	" OK{COMMA} I need you to enter\n"
-	"the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1} that your\n"
+	"the {COLOR_1 LIGHT_BLUE}SOS Mail password{END_COLOR_TEXT_1} that your\n"
 	"friend gave you.");
 
 ALIGNED(4) const char gUnknown_80DE178[] = _(
 	" How do you want to receive\n"
-	"your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?");
+	"your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const char gUnknown_80DE1B4[] = _(
 	" How do you want to send\n"
-	"your {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?");
+	"your {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const char gUnknown_80DE1E4[] = _(
 	" ...Uh{COMMA} no?\n"
-	"You don{APOSTROPHE}t have an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	"You don{APOSTROPHE}t have an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	" You{APOSTROPHE}ll need to arrange\n"
-	"to receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} first.\n"
+	"to receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} first.\n"
 	"That{APOSTROPHE}s what you need to do.");
 
 ALIGNED(4) const char gUnknown_80DE280[] = _(
@@ -106,7 +106,7 @@ ALIGNED(4) const char gUnknown_80DE280[] = _(
 ALIGNED(4) const char gUnknown_80DE2B0[] = _(
 	" ...Uh{COMMA} no?\n"
 	"Doesn{APOSTROPHE}t look like you can go to the dungeon\n"
-	"named in this {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	"named in this {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	" Come see me about doing\n"
 	"this rescue when you can actually go\n"
 	"to that dungeon{COMMA} all right?");
@@ -121,7 +121,7 @@ ALIGNED(4) const char gUnknown_80DE368[] = _(
 
 ALIGNED(4) const char gUnknown_80DE430[] = _(
 	" Okeydoke.\n"
-	"I{APOSTROPHE}ll need you to choose the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
+	"I{APOSTROPHE}ll need you to choose the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
 	"for you to go on a rescue mission.");
 
 ALIGNED(4) const char gUnknown_80DE48C[] = _(
@@ -130,25 +130,25 @@ ALIGNED(4) const char gUnknown_80DE48C[] = _(
 
 ALIGNED(4) const char gUnknown_80DE4B8[] = _(
 	" All righty. Choose\n"
-	"the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} you don{APOSTROPHE}t need.");
+	"the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} you don{APOSTROPHE}t need.");
 
 ALIGNED(4) const char gUnknown_80DE4F0[] = _(
 	" ...Uh{COMMA} no?\n"
-	"You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.");
+	"You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gUnknown_80DE524[] = _(
 	" If you want a reward{COMMA} {COLOR_1 RED}don{APOSTROPHE}t\n"
 	"delete an A-OK Mail{END_COLOR_TEXT_1} before getting a\n"
-	"{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} back for it.{EXTRA_MSG}"
+	"{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} back for it.{EXTRA_MSG}"
 	" {COLOR_1 RED}Be careful{END_COLOR_TEXT_1} if you{APOSTROPHE}re going\n"
-	"to delete any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+	"to delete any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
 	" Okeydoke.\n"
-	"Choose an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}\n"
+	"Choose an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}\n"
 	"you don{APOSTROPHE}t need anymore.");
 
 ALIGNED(4) const char gUnknown_80DE614[] = _(
 	" ...Uh{COMMA} no?\n"
-	"You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.");
+	"You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gUnknown_80DE648[] = _(
 	" Uh{COMMA} OK.\n"
@@ -161,8 +161,8 @@ ALIGNED(4) const char gUnknown_80DE694[] = _(
 	"mail on you!");
 
 ALIGNED(4) const char gUnknown_80DE6D4[] = _(
-	" So{COMMA} delete all your {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
-	"{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}{COMMA} and your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\n"
+	" So{COMMA} delete all your {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
+	"{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} and your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\n"
 	"You{APOSTROPHE}re absolutely{COMMA} positively sure?");
 
 ALIGNED(4) const char gUnknown_80DE754[] = _(
@@ -183,7 +183,7 @@ ALIGNED(4) const char gUnknown_80DE808[] = _(
 
 ALIGNED(4) const char gUnknown_80DE830[] = _(
 	" Okeydoke.\n"
-	"I{APOSTROPHE}ll delete {COLOR_1 LIGHT_BLUE_2}every piece of mail{END_COLOR_TEXT_1}.");
+	"I{APOSTROPHE}ll delete {COLOR_1 LIGHT_BLUE}every piece of mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gUnknown_80DE864[] = _(
 	" Okeydoke.\n"
@@ -192,7 +192,7 @@ ALIGNED(4) const char gUnknown_80DE864[] = _(
 
 ALIGNED(4) const char gUnknown_80DE8B4[] = _(
 	" Well{COMMA} hello{COMMA} there!\n"
-	"This is the {COLOR_1 LIGHT_BLUE_2}Friend Rescue{END_COLOR_TEXT_1} counter.\n"
+	"This is the {COLOR_1 LIGHT_BLUE}Friend Rescue{END_COLOR_TEXT_1} counter.\n"
 	"What can I help you with today?");
 
 ALIGNED(4) const char gUnknown_80DE918[] = _(
@@ -250,10 +250,10 @@ ALIGNED(4) const char gWonderMailPasswordIncorrectText[] = _(
 
 ALIGNED(4) const char gWonderMailSOSPasswordIncorrectText[] = _(
 	" ...Uh{COMMA} no? This password{APOSTROPHE}s\n"
-	"not for any {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.");
+	"not for any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const char gWonderMailAOKMailReceivedText[] = _(
-	 ": I received the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\n"
+	 ": I received the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\n"
 	 "Your adventure will be saved.");
 
 ALIGNED(4) const char mail_filler[] = _("pksdir0");

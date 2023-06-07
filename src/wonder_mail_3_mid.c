@@ -212,7 +212,7 @@ ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
         "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
         "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
         "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
-        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE_2}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
@@ -229,12 +229,12 @@ ALIGNED(4) const u8 gUnknown_80E0640[] = _(
         "The promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) const u8 gUnknown_80E0670[] = _(
-        "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1}\n"
+        "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1}\n"
         "{CENTER_ALIGN}gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.");
 
 ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
         "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
-        "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}$t{END_COLOR_TEXT_1} went up in rank\n"
+        "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1} went up in rank\n"
         "{CENTER_ALIGN}from the {ARG_POKEMON_2}\n"
         "{CENTER_ALIGN}to the {ARG_POKEMON_3}!");
 

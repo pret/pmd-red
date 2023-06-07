@@ -474,77 +474,77 @@ gUnknown_80E25F4: @ 80E25F4
 	.global gUnknown_80E2610
 gUnknown_80E2610: @ 80E2610
         .string "How would you like to send your\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
+        .string "{COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2640
 gUnknown_80E2640: @ 80E2640
         .string "How would you like to receive your\n"
-        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
+        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2680
 gUnknown_80E2680: @ 80E2680
         .string "How would you like to send your\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?\0"
+        .string "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E26B0
 gUnknown_80E26B0: @ 80E26B0
         .string "How would you like to receive your\n"
-        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}?\0"
+        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E26F0
 gUnknown_80E26F0: @ 80E26F0
         .string "How would you like to send your\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+        .string "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E2728
 gUnknown_80E2728: @ 80E2728
         .string "How would you like to receive your\n"
-        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+        .string "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E276C
 gUnknown_80E276C: @ 80E276C
         .string "The GBA Game Pak does not have\n"
-        .string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} on it.\0"
+        .string "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on it.\0"
         .align 2,0
 
 	.global gUnknown_80E27A4
 gUnknown_80E27A4: @ 80E27A4
-        .string "If you accept an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}{COMMA} the\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
+        .string "If you accept an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} the\n"
+        .string "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
         .string "will be overwritten. Is that OK?\0"
         .align 2,0
 
 	.global gUnknown_80E2814
 gUnknown_80E2814: @ 80E2814
-        .string "Please enter the {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.\0"
+        .string "Please enter the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2840
 gUnknown_80E2840: @ 80E2840
-        .string "The {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} will be received and\n"
+        .string "The {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} will be received and\n"
         .string "processed.\0"
         .align 2,0
 
 	.global gUnknown_80E2874
 gUnknown_80E2874: @ 80E2874
-        .string "A {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} also arrived!\0"
+        .string "A {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} also arrived!\0"
         .align 2,0
 
 	.global gUnknown_80E2898
 gUnknown_80E2898: @ 80E2898
-        .string "An {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} was received.\n"
+        .string "An {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was received.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E28D8
 gUnknown_80E28D8: @ 80E28D8
-        .string "Resume your game using {COLOR_1 LIGHT_BLUE_2}Revive Team{END_COLOR_TEXT_1}.\0"
+        .string "Resume your game using {COLOR_1 LIGHT_BLUE}Revive Team{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2904
@@ -556,19 +556,19 @@ gUnknown_80E2904: @ 80E2904
 
 	.global gUnknown_80E296C
 gUnknown_80E296C: @ 80E296C
-        .string "Please choose the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} you want\n"
+        .string "Please choose the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} you want\n"
         .string "to send.\0"
         .align 2,0
 
 	.global gUnknown_80E29A0
 gUnknown_80E29A0: @ 80E29A0
-        .string "This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} will be sent.\n"
+        .string "This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} will be sent.\n"
         .string "Is that OK?\0"
         .align 2,0
 
 	.global gUnknown_80E29D0
 gUnknown_80E29D0: @ 80E29D0
-        .string "Your {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} was sent.\n"
+        .string "Your {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} was sent.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
@@ -585,12 +585,12 @@ gUnknown_80E2A1C: @ 80E2A1C
 
 	.global gUnknown_80E2A5C
 gUnknown_80E2A5C: @ 80E2A5C
-        .string "Here is the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1}.\0"
+        .string "Here is the {COLOR_1 LIGHT_BLUE}SOS Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2A80
 gUnknown_80E2A80: @ 80E2A80
-        .string "Here is the {COLOR_1 LIGHT_BLUE_2}A-OK Mail password{END_COLOR_TEXT_1}.\0"
+        .string "Here is the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2AA8
@@ -601,21 +601,21 @@ gUnknown_80E2AA8: @ 80E2AA8
 
 	.global gUnknown_80E2AE4
 gUnknown_80E2AE4: @ 80E2AE4
-.string "Please connect a {COLOR_1 LIGHT_BLUE_2}Link Cable{END_COLOR_TEXT_1}.\n"
+.string "Please connect a {COLOR_1 LIGHT_BLUE}Link Cable{END_COLOR_TEXT_1}.\n"
 .string "When your friend{APOSTROPHE}s side is ready{COMMA} you may\n"
 .string "communicate and exchange data.\0"
 .align 2,0
 
 	.global gUnknown_80E2B54
 gUnknown_80E2B54: @ 80E2B54
-.string "Your {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} was sent.\n"
+.string "Your {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was sent.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
 	.global gUnknown_80E2B90
 gUnknown_80E2B90: @ 80E2B90
-.string "Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
-.string "you can send a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} to\n"
+.string "Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+.string "you can send a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} to\n"
 .string "a friend.\0"
 .align 2,0
 
@@ -645,24 +645,24 @@ gUnknown_80E2CD4: @ 80E2CD4
 
 	.global gUnknown_80E2CE8
 gUnknown_80E2CE8: @ 80E2CE8
-.string "Please choose the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} that should\n"
+.string "Please choose the {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} that should\n"
 .string "be sent to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E2D30
 gUnknown_80E2D30: @ 80E2D30
-.string "This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} will be sent.\n"
+.string "This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} will be sent.\n"
 .string "Is that OK?\0"
 .align 2,0
 
 	.global gUnknown_80E2D60
 gUnknown_80E2D60: @ 80E2D60
-        .string "There is no {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+        .string "There is no {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E2D7C
 gUnknown_80E2D7C: @ 80E2D7C
-.string "Connect the {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}.\n"
+.string "Connect the {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}.\n"
 .string "When your friend is ready{COMMA} begin\n"
 .string "communication.\0"
 .align 2,0
@@ -696,19 +696,19 @@ gUnknown_80E2EB4: @ 80E2EB4
 
 	.global gUnknown_80E2F14
 gUnknown_80E2F14: @ 80E2F14
-.string "There is no {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} on\n"
+.string "There is no {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} on\n"
 .string "the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E2F44
 gUnknown_80E2F44: @ 80E2F44
-.string "Please choose an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
+.string "Please choose an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "on the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E2F78
 gUnknown_80E2F78: @ 80E2F78
-.string "Is it OK to accept this {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}?\0"
+.string "Is it OK to accept this {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?\0"
 .align 2,0
 
 	.global gUnknown_80E2FA0
@@ -720,7 +720,7 @@ gUnknown_80E2FA0: @ 80E2FA0
 
 	.global gUnknown_80E2FEC
 gUnknown_80E2FEC: @ 80E2FEC
-.string "The {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} has been received.\n"
+.string "The {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} has been received.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
@@ -732,28 +732,28 @@ gUnknown_80E3030: @ 80E3030
 
 	.global gUnknown_80E3078
 gUnknown_80E3078: @ 80E3078
-.string "Please enter the {COLOR_1 LIGHT_BLUE_2}SOS Mail password{END_COLOR_TEXT_1}.\0"
+.string "Please enter the {COLOR_1 LIGHT_BLUE}SOS Mail password{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E30A4
 gUnknown_80E30A4: @ 80E30A4
-.string "Is it OK to send this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+.string "Is it OK to send this {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
 .align 2,0
 
 	.global gUnknown_80E30D0
 gUnknown_80E30D0: @ 80E30D0
-.string "Please choose the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} that\n"
+.string "Please choose the {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} that\n"
 .string "should be sent to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E311C
 gUnknown_80E311C: @ 80E311C
-.string "Please enter the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1}.\0"
+.string "Please enter the {COLOR_1 LIGHT_BLUE}Thank-You Mail password{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E314C
 gUnknown_80E314C: @ 80E314C
-.string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail password{END_COLOR_TEXT_1} will be\n"
+.string "The {COLOR_1 LIGHT_BLUE}Thank-You Mail password{END_COLOR_TEXT_1} will be\n"
 .string "shown.\0"
 .align 2,0
 
@@ -765,7 +765,7 @@ gUnknown_80E317C: @ 80E317C
 	.global gUnknown_80E319C
 gUnknown_80E319C: @ 80E319C
         .string "Steps will now be taken to receive the\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+        .string "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E31D8
@@ -775,24 +775,24 @@ gUnknown_80E31D8: @ 80E31D8
 
 	.global gUnknown_80E31FC
 gUnknown_80E31FC: @ 80E31FC
-        .string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} was sent.\0"
+        .string "The {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} was sent.\0"
         .align 2,0
 
 	.global gUnknown_80E3220
 gUnknown_80E3220: @ 80E3220
-        .string "You received the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+        .string "You received the {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E3248
 gUnknown_80E3248: @ 80E3248
-        .string "The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} was sent.\n"
+        .string "The {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} was sent.\n"
         .string "Your adventure will be saved.\0"
         .align 2,0
 
 	.global gUnknown_80E3288
 gUnknown_80E3288: @ 80E3288
         .string "Steps will now be taken to send your\n"
-        .string "{COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+        .string "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E32C4
@@ -823,14 +823,14 @@ gUnknown_80E339C: @ 80E339C
 	.global gUnknown_80E33D8
 gUnknown_80E33D8: @ 80E33D8
 .string "Would you like to choose\n"
-.string "a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} from storage and\n"
+.string "a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1} from storage and\n"
 .string "send it with your mail?\0"
 .align 2,0
 
 	.global gUnknown_80E3430
 gUnknown_80E3430: @ 80E3430
 .string "This mail already has an attached\n"
-.string "{COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}.{EXTRA_MSG}Once an item has been chosen{COMMA} it may not\n"
+.string "{COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1}.{EXTRA_MSG}Once an item has been chosen{COMMA} it may not\n"
 .string "be exchanged with another item.\0"
 .align 2,0
 
@@ -842,13 +842,13 @@ gUnknown_80E34B0: @ 80E34B0
 
 	.global gUnknown_80E34F0
 gUnknown_80E34F0: @ 80E34F0
-.string "Please select a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
+.string "Please select a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}\n"
 .string "from the GBA Game Pak.\0"
 .align 2,0
 
 	.global gUnknown_80E352C
 gUnknown_80E352C: @ 80E352C
-        .string "Is it OK to accept this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+        .string "Is it OK to accept this {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E355C
@@ -860,24 +860,24 @@ gUnknown_80E355C: @ 80E355C
 	.global gUnknown_80E35AC
 gUnknown_80E35AC: @ 80E35AC
         .string "The GBA Game Pak does not have\n"
-        .string "a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} on it.\0"
+        .string "a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} on it.\0"
         .align 2,0
 
 	.global gUnknown_80E35E8
 gUnknown_80E35E8: @ 80E35E8
-        .string "There is no {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+        .string "There is no {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
         .align 2,0
 
 	.global gUnknown_80E360C
 gUnknown_80E360C: @ 80E360C
         .string "How would you like to send\n"
-        .string "your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+        .string "your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E3644
 gUnknown_80E3644: @ 80E3644
         .string "How would you like to receive\n"
-        .string "the {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}?\0"
+        .string "the {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?\0"
         .align 2,0
 
 	.global gUnknown_80E367C
@@ -888,13 +888,13 @@ gUnknown_80E367C: @ 80E367C
 	.global gUnknown_80E3690
 gUnknown_80E3690: @ 80E3690
 .string "If your team is defeated and in need\n"
-.string "of rescuing{COMMA} send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
+.string "of rescuing{COMMA} send an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "to a friend.{EXTRA_MSG}Once you send your mail{COMMA} you must wait\n"
 .string "for your friend to send you\n"
-.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} arrives{COMMA} your\n"
+.string "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If the {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} arrives{COMMA} your\n"
 .string "team can be revived to resume exploring\n"
 .string "the dungeon it was in.{EXTRA_MSG}When your team is revived{COMMA} don{APOSTROPHE}t forget\n"
-.string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
+.string "to send a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
 .string "who came to your rescue.\0"
 .align 2,0
 
@@ -902,9 +902,9 @@ gUnknown_80E3690: @ 80E3690
 gUnknown_80E3818: @ 80E3818
 .string "If your team is defeated in\n"
 .string "a dungeon{COMMA} you may send a friend\n"
-.string "an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} for help.{EXTRA_MSG}However{COMMA} there are some places\n"
+.string "an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} for help.{EXTRA_MSG}However{COMMA} there are some places\n"
 .string "where it is impossible for you to\n"
-.string "call for a rescue.{EXTRA_MSG}Also{COMMA} if you send an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
+.string "call for a rescue.{EXTRA_MSG}Also{COMMA} if you send an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
 .string "you may not continue with your\n"
 .string "adventure while awaiting rescue.{EXTRA_MSG}If you cannot wait to be rescued{COMMA}\n"
 .string "you will have to give up and return\n"
@@ -915,11 +915,11 @@ gUnknown_80E3818: @ 80E3818
 gUnknown_80E3998: @ 80E3998
 .string "If your friend successfully rescues\n"
 .string "your team{COMMA} accept your friend{APOSTROPHE}s\n"
-.string "{COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Once the {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} is received{COMMA}\n"
+.string "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Once the {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} is received{COMMA}\n"
 .string "you may revive your team and resume\n"
-.string "exploring the dungeon you were in.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+.string "exploring the dungeon you were in.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
 .string "your friend can also send you\n"
-.string "a {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1}.{EXTRA_MSG}However{COMMA} the {COLOR_1 LIGHT_BLUE_2}helper Pokémon{END_COLOR_TEXT_1} will not\n"
+.string "a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1}.{EXTRA_MSG}However{COMMA} the {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} will not\n"
 .string "be able to bring an item with it when\n"
 .string "joining your team.\0"
 .align 2,0
@@ -927,50 +927,50 @@ gUnknown_80E3998: @ 80E3998
 	.global gUnknown_80E3B1C
 gUnknown_80E3B1C: @ 80E3B1C
 .string "If your team has been rescued{COMMA} be sure\n"
-.string "to send a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
-.string "that came to your help.{EXTRA_MSG}You may also attach a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1}\n"
-.string "from storage to your {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}\n"
+.string "to send a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} to the friend\n"
+.string "that came to your help.{EXTRA_MSG}You may also attach a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1}\n"
+.string "from storage to your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}\n"
 .string "and send it to your friend.\0"
 .align 2,0
 
 	.global gUnknown_80E3BF8
 gUnknown_80E3BF8: @ 80E3BF8
 .string "If your friend{APOSTROPHE}s team needs rescuing{COMMA}\n"
-.string "you must first receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}\n"
+.string "you must first receive an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
 .string "from your friend.{EXTRA_MSG}When you get the mail{COMMA} you may embark\n"
 .string "on your rescue mission from the\n"
-.string "{COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}If you rescue your friend{APOSTROPHE}s defeated\n"
-.string "team{COMMA} send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} to your\n"
+.string "{COLOR_1 LIGHT_BLUE}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}If you rescue your friend{APOSTROPHE}s defeated\n"
+.string "team{COMMA} send an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} to your\n"
 .string "friend.{EXTRA_MSG}If you rescue a friend{COMMA} you will be eligible\n"
-.string "to receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If you have quicksaved inside a dungeon{COMMA}\n"
-.string "you may not choose {COLOR_1 LIGHT_BLUE_2}Go Rescue{END_COLOR_TEXT_1}.\n"
+.string "to receive a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}If you have quicksaved inside a dungeon{COMMA}\n"
+.string "you may not choose {COLOR_1 LIGHT_BLUE}Go Rescue{END_COLOR_TEXT_1}.\n"
 .string "Your last save must be out of a dungeon.\0"
 .align 2,0
 
 	.global gUnknown_80E3DE4
 gUnknown_80E3DE4: @ 80E3DE4
-.string "You may receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} from\n"
+.string "You may receive an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} from\n"
 .string "a friend{APOSTROPHE}s team that lies defeated in\n"
 .string "a dungeon.{EXTRA_MSG}If there is no space for new mail{COMMA} delete\n"
-.string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
+.string "old mail at the {COLOR_1 LIGHT_BLUE}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E3E98
 gUnknown_80E3E98: @ 80E3E98
 .string "If you successfully rescue your friend{APOSTROPHE}s\n"
-.string "team{COMMA} send your friend an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA} you may\n"
+.string "team{COMMA} send your friend an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} you may\n"
 .string "also send your friend a Pokémon from\n"
 .string "your Friend Area as a helper.{EXTRA_MSG}Don{APOSTROPHE}t worry--sending a Pokémon as\n"
 .string "a helper will not make it disappear from\n"
 .string "its Friend Area.{EXTRA_MSG}If there is no space for new mail{COMMA} delete\n"
-.string "old mail at the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
+.string "old mail at the {COLOR_1 LIGHT_BLUE}Pelipper Post Office{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4014
 gUnknown_80E4014: @ 80E4014
-.string "When you receive an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
+.string "When you receive an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
 .string "you may embark on your rescue mission\n"
-.string "from the {COLOR_1 LIGHT_BLUE_2}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}Beware--if you do not have access to\n"
+.string "from the {COLOR_1 LIGHT_BLUE}Pelipper Post Office{END_COLOR_TEXT_1}.{EXTRA_MSG}Beware--if you do not have access to\n"
 .string "the dungeon they are in{COMMA} you may not go\n"
 .string "on a rescue mission there.{EXTRA_MSG}Accept challenging rescues only\n"
 .string "if you are ready and qualified!\0"
@@ -978,31 +978,31 @@ gUnknown_80E4014: @ 80E4014
 
 	.global gUnknown_80E4130
 gUnknown_80E4130: @ 80E4130
-.string "If you send an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}{COMMA} you may\n"
-.string "receive a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} in return\n"
-.string "from your friend.{EXTRA_MSG}The {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} may also come\n"
-.string "with a {COLOR_1 LIGHT_BLUE_2}reward item{END_COLOR_TEXT_1} attached.\0"
+.string "If you send an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} you may\n"
+.string "receive a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} in return\n"
+.string "from your friend.{EXTRA_MSG}The {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} may also come\n"
+.string "with a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1} attached.\0"
 .align 2,0
 
 	.global gUnknown_80E41DC
 gUnknown_80E41DC: @ 80E41DC
-.string "Using the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function{COMMA}\n"
+.string "Using the {COLOR_1 LIGHT_BLUE}Dual Slot{END_COLOR_TEXT_1} function{COMMA}\n"
 .string "you may perform rescue operations with\n"
 .string "friends using the GBA Game Pak version.{EXTRA_MSG}Insert the DS Game Card and the GBA\n"
 .string "Game Pak in your Nintendo DS system{COMMA}\n"
 .string "then turn on the power.{EXTRA_MSG}Friend Rescue missions using\n"
-.string "the {COLOR_1 LIGHT_BLUE_2}Dual Slot{END_COLOR_TEXT_1} function will be\n"
+.string "the {COLOR_1 LIGHT_BLUE}Dual Slot{END_COLOR_TEXT_1} function will be\n"
 .string "available on the main menu. \0"
 .align 2,0
 
 	.global gUnknown_80E4314
 gUnknown_80E4314: @ 80E4314
 .string "Friends can rescue each other{APOSTROPHE}s defeated\n"
-.string "teams using a {COLOR_1 LIGHT_BLUE_2}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
-.string "{COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} and so on.{EXTRA_MSG}You may go on a rescue mission to save\n"
+.string "teams using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+.string "{COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}{COMMA} and so on.{EXTRA_MSG}You may go on a rescue mission to save\n"
 .string "your friend{APOSTROPHE}s team that has been defeated\n"
 .string "in a dungeon.{EXTRA_MSG}Or{COMMA} you may call for help from a friend\n"
-.string "to save your fallen team in a dungeon.{EXTRA_MSG}Using {COLOR_1 LIGHT_BLUE_2}passwords{END_COLOR_TEXT_1}{COMMA} you can even\n"
+.string "to save your fallen team in a dungeon.{EXTRA_MSG}Using {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}{COMMA} you can even\n"
 .string "exchange help with faraway friends.\0"
 .align 2,0
 
@@ -1054,25 +1054,25 @@ gUnknown_80E4650: @ 80E4650
 	.global gUnknown_80E468C
 gUnknown_80E468C: @ 80E468C
 .string "You do not appear eligible to receive\n"
-.string "this {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+.string "this {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E46C8
 gUnknown_80E46C8: @ 80E46C8
 .string "Your friend is not eligible to receive\n"
-.string "this {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+.string "this {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4704
 gUnknown_80E4704: @ 80E4704
 .string "You do not appear eligible to receive\n"
-.string "this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+.string "this {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4744
 gUnknown_80E4744: @ 80E4744
 .string "Your friend is not eligible to receive\n"
-.string "this {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+.string "this {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4788
@@ -1105,19 +1105,19 @@ gUnknown_80E48A8: @ 80E48A8
 	.global gUnknown_80E48E8
 gUnknown_80E48E8: @ 80E48E8
 .string "This password does not appear to be\n"
-.string "that of an {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\0"
+.string "that of an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E4928
 gUnknown_80E4928: @ 80E4928
-.string "Received the {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1}.\n"
+.string "Received the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\n"
 .string "Your adventure will be saved.\0"
 .align 2,0
 
 	.global gUnknown_80E4964
 gUnknown_80E4964: @ 80E4964
 .string "This password does not appear to be\n"
-.string "an {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1}.\0"
+.string "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 
 	.global gUnknown_80E499C
@@ -1128,7 +1128,7 @@ gUnknown_80E499C: @ 80E499C
 	.global gUnknown_80E49C4
 gUnknown_80E49C4: @ 80E49C4
 .string "This password does not appear to be\n"
-.string "that of a {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1}.\0"
+.string "that of a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\0"
 .align 2,0
 .string "pksdir0\0"
 .align 2,0

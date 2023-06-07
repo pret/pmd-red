@@ -113,7 +113,7 @@ const struct MenuItem gUnknown_80E66D4[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E66F4[] = _("{CENTER_ALIGN}Please press any button.");
 ALIGNED(4) const u8 sUnknown_80E6710[] = _("{CENTER_ALIGN}Your adventure will be continued.");
-ALIGNED(4) const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE_2}Success!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E6748 = {
    0x00, 0x00, 0x00, 0x00,
@@ -216,7 +216,7 @@ const struct MenuItem gUnknown_80E6950[4] = {
     {NULL, 0x3},
 };
 ALIGNED(4) const u8 sUnknown_80E6970[] = _("{CENTER_ALIGN}Please check again.");
-ALIGNED(4) const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}SOS Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E69B0 = {
    0x00, 0x00, 0x00, 0x00,
@@ -234,7 +234,7 @@ const struct MenuItem gUnknown_80E69C8[4] = {
     {sUnknown_80E6970, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}A-OK Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E6A10 = {
    0x00, 0x00, 0x00, 0x00,
@@ -252,7 +252,7 @@ const struct MenuItem gUnknown_80E6A28[4] = {
     {sUnknown_80E6970, 0x5},
     {NULL, 0x3},
 };
-ALIGNED(4) const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE_2}Thank-You Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 const struct UnkTextStruct2 gUnknown_80E6A74 = {
    0x00, 0x00, 0x00, 0x00,
@@ -292,7 +292,7 @@ const struct MenuItem gUnknown_80E6B04[4] = {
     {NULL, 0x3},
 };
 ALIGNED(4) const u8 sUnknown_80E6B24[] = _("{CENTER_ALIGN}You need to go further in the story.");
-ALIGNED(4) const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR_1 LIGHT_BLUE_2}dungeon{END_COLOR_TEXT_1} yet.");
+ALIGNED(4) const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR_1 LIGHT_BLUE}dungeon{END_COLOR_TEXT_1} yet.");
 
 const struct UnkTextStruct2 gUnknown_80E6B78 = {
    0x00, 0x00, 0x00, 0x00,

@@ -420,7 +420,7 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CECONTINUE_text
         CECONTINUE_text:
-        .string "{COLOR_1 LIGHT_BLUE}CONTINUE{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 GENDER_COLOR}CONTINUE{END_COLOR_TEXT_1}\0"
         .align 2,0
 
         .global CISTART_text

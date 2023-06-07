@@ -67,19 +67,19 @@ const struct UnkTextStruct2 gUnknown_80DFE34 =
 
 ALIGNED(4) const u8 gUnknown_80DFE4C[] = _(
 	"Are you sure you want to replace the\n"
-	"old  {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} with the new one?");
+	"old  {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} with the new one?");
 
 ALIGNED(4) const u8 gUnknown_80DFE9C[] = _(
-	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"This {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
 	"received.");
 
 ALIGNED(4) const u8 gUnknown_80DFED0[] = _(
-	"This {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+	"This {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
 	"received.\n"
 	"You may not receive the same one again.");
 
 ALIGNED(4) const u8 gUnknown_80DFF2C[] = _(
-	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Only {COLOR_1 LIGHT_BLUE}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
 	"Please receive it after completing any\n"
 	"rescue mission in progress.");
 
@@ -94,15 +94,15 @@ ALIGNED(4) const u8 gUnknown_80E0010[] =
 	"Mail cannot be deleted now.";
 
 ALIGNED(4) const u8 gReceivedWonderMail[] = _(
-	"Received the {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}!");
+	"Received the {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) const u8 gUnknown_80E0094[] = _(
-	"Only {COLOR_1 LIGHT_BLUE_2}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
-	"Is it OK to replace the old {COLOR_1 LIGHT_BLUE_2}Wonder Mail{END_COLOR_TEXT_1}\n"
+	"Only {COLOR_1 LIGHT_BLUE}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+	"Is it OK to replace the old {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}\n"
 	"with the new one?");
 
 ALIGNED(4) const u8 gUnknown_80E0108[] = _(
-	"Your {COLOR_1 LIGHT_BLUE_2}Job List{END_COLOR_TEXT_1} is full.\n"
+	"Your {COLOR_1 LIGHT_BLUE}Job List{END_COLOR_TEXT_1} is full.\n"
 	"Please select and delete unwanted mail.");
 
 ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";

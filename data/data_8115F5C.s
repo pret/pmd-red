@@ -286,7 +286,7 @@ gUnknown_81163BC: @ 81163BC
 
 	.global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4
-        .string "{COLOR_1 LIGHT_BLUE_2}%d{END_COLOR_TEXT_1} %s\0"
+        .string "{COLOR_1 LIGHT_BLUE}%d{END_COLOR_TEXT_1} %s\0"
         .align 2,0
 
 	.global gUnknown_81163F0
