@@ -240,7 +240,7 @@
 #define TEXT_COLOR_GREEN        0x6
 #define TEXT_COLOR_LIGHT_GREEN  0x7
 #define TEXT_COLOR_BLUE         0x8
-#define TEXT_COLOR_GENDER_COLOR   0x9
+#define TEXT_COLOR_LIGHT_BLUE   0x9
 #define TEXT_DYNAMIC_COLOR_1    0xA // Usually white
 #define TEXT_DYNAMIC_COLOR_2    0xB // Usually white w/ tinge of green
 #define TEXT_DYNAMIC_COLOR_3    0xC // Usually white
