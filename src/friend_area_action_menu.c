@@ -247,7 +247,7 @@ void sub_8027274(void)
     case 3:
         sub_8027D40(3,&gUnknown_203B2BC->item2);
         sub_8023DA4();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction1,2);
+        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction1,2);
         break;
     case 4:
         sub_8024458(gUnknown_203B2BC->targetPoke,2);
@@ -263,7 +263,7 @@ void sub_8027274(void)
         break;
     case 0xc:
         sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,&gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
+        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
         break;
     case 0xd:
         HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);

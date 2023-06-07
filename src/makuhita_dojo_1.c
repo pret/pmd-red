@@ -95,25 +95,26 @@ extern void sub_8030480(void);
 
 void DrawMakuhitaMainMenu(void) {
 
-    s32 menuAction;
-    struct unkStruct_203B318 *preload;
+    s32 loopMax;
 
     gUnknown_203B318->menuAction = 2;
-    gUnknown_203B318->unk18[0].text = gMakuhitaDojoGoTrain;
-    gUnknown_203B318->unk18[0].menuAction = 2;
+    loopMax = 0;
+    gUnknown_203B318->unk18[loopMax].text = gMakuhitaDojoGoTrain;
+    gUnknown_203B318->unk18[loopMax].menuAction = 2;
     if(sub_80306A4())
     {
-        gUnknown_203B318->unk18[0].menuAction = -1;
+        gUnknown_203B318->unk18[loopMax].menuAction = -1;
         gUnknown_203B318->menuAction = 1;
     }
-    preload = gUnknown_203B318;
-    menuAction = 1;
-    preload->unk18[1].text = *gUnknown_80D4970;
-    preload->unk18[1].menuAction = 3;
-    preload->unk18[2].text = *gUnknown_80D4934;
-    preload->unk18[2].menuAction = menuAction;
-    preload->unk18[3].text = NULL;
-    preload->unk18[3].menuAction = menuAction;
+    loopMax += 1;
+    gUnknown_203B318->unk18[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B318->unk18[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B318->unk18[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B318->unk18[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B318->unk18[loopMax].text = NULL;
+    gUnknown_203B318->unk18[loopMax].menuAction = 1;
 }
 
 void sub_8030208(void) {

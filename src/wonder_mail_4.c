@@ -284,7 +284,7 @@ void sub_803092C(void)
   sub_8012BC4(r5,0,gUnknown_203B320->unk42 + 1,1,7,gUnknown_203B320->unk58);
 
   for (index = 0; index < gUnknown_203B320->unk3E; index++) {
-      mail = sub_8095228(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
+      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
       local.y = sub_8013800(&gUnknown_203B320->unk24,index);
       local.unk40 = 7;
@@ -294,9 +294,9 @@ void sub_803092C(void)
       local.dungeon = &mail->dungeon;
       local.playerName = mail->playerName;
 
-      local.clientSpecies = (mail->clientSpecies);
-      local.targetSpecies = (mail->clientSpecies);
-      local.unk14 = 0;
+      local.clientSpecies = mail->clientSpecies;
+      local.targetSpecies = mail->clientSpecies;
+      local.targetItem = ITEM_NOTHING;
       local.unk2E = 5;
 
       switch(mail->mailType)

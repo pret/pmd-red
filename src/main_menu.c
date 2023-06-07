@@ -40,10 +40,10 @@ struct unkStruct_203B34C
     /* 0x1A4 */ u32 currMenuChoice;
 };
 
-EWRAM_DATA struct MainMenu *gMainMenu;
-EWRAM_DATA struct unkStruct_203B34C *gUnknown_203B34C;
-EWRAM_DATA u32 gUnknown_203B350;
-EWRAM_DATA u32 gUnknown_203B354; // unused everywhere else except here..
+EWRAM_DATA_2 struct MainMenu *gMainMenu = {0};
+EWRAM_DATA_2 struct unkStruct_203B34C *gUnknown_203B34C = {0};
+EWRAM_DATA_2 u32 gUnknown_203B350 = {0};
+EWRAM_DATA_2 u32 gUnknown_203B354 = {0}; // unused everywhere else except here..
 
 extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);

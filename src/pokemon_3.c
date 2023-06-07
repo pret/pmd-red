@@ -6,7 +6,7 @@
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 
-extern u32 gIQSkillNames[];
+extern u8 *gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
 extern u32 gTacticsDescriptions[];
 extern u8 *gTactics[];
@@ -461,7 +461,7 @@ void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
 }
 #endif
 
-u32 GetIQSkillName(u8 r0)
+u8 *GetIQSkillName(u8 r0)
 {
     return gIQSkillNames[r0];
 }

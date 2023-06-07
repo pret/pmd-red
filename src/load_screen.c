@@ -29,10 +29,10 @@ struct LoadScreen
     /* 0x258 */ u8 formattedHelperInfo[0x24];
 };
 
-EWRAM_DATA struct LoadScreen *gLoadScreen;
-EWRAM_DATA struct MenuItem gUnknown_203B378[2];
-EWRAM_DATA u32 gUnknown_203B388[12];
-EWRAM_DATA u32 gUnknown_203B3B8[12];
+EWRAM_DATA_2 struct LoadScreen *gLoadScreen = {0};
+EWRAM_DATA_2 struct MenuItem gUnknown_203B378[2] = {0};
+EWRAM_DATA_2 u32 gUnknown_203B388[12] = {0};
+EWRAM_DATA_2 u32 gUnknown_203B3B8[12] = {0};
 
 extern struct unkStruct_203B484 *gUnknown_203B484;
 

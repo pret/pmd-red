@@ -151,7 +151,7 @@ void xxx_init_helditem_8090B08(struct BulkItem *held, u8 id)
         held->quantity = 0;
   }
   else {
-    held->id = 0;
+    held->id = ITEM_NOTHING;
     held->quantity = 0;
   }
 }
@@ -494,7 +494,7 @@ void FillInventoryGaps()
       _slot += (size_t)gTeamInventory_203B460->teamItems;
       slot = (struct Item*)_slot; // &gTeamInventory_203B460->teamItems[end];
 #endif
-      slot->id = 0;
+      slot->id = ITEM_NOTHING;
       slot->quantity = 0;
       slot->flags = 0;
   }
@@ -567,7 +567,7 @@ void ShiftItemsDownFrom(s32 start)
   for (i = start, j = start + 1; i < INVENTORY_SIZE - 1; i++, j++) {
     gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[j];
   }
-  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].id = 0;
+  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].id = ITEM_NOTHING;
   gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].flags = 0;
 }
 
@@ -621,7 +621,7 @@ void ConvertMoneyItemToMoney()
 
       result = GetMoneyValue(current_slot);
       AddToTeamMoney(result);
-      current_slot->id = 0;
+      current_slot->id = ITEM_NOTHING;
       current_slot->quantity = 0;
       current_slot->flags = 0;
     }
@@ -1471,7 +1471,7 @@ void ClearAllItems_8091FB4() {
       slot->flags &= 0xf7;
       if (slot->id == ITEM_POKE) {
         AddToTeamMoney(GetMoneyValue(slot));
-        slot->id = 0;
+        slot->id = ITEM_NOTHING;
         slot->quantity = 0;
         slot->flags = 0;
       }
@@ -1493,7 +1493,7 @@ void ClearAllItems_8091FB4() {
       if (pokemon->heldItem.id) {
         if (pokemon->heldItem.id == ITEM_POKE) {
           AddToTeamMoney(GetMoneyValueHeld(&pokemon->heldItem));
-          pokemon->heldItem.id = 0;
+          pokemon->heldItem.id = ITEM_NOTHING;
         }
       }
     }

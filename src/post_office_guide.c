@@ -23,7 +23,7 @@ struct PostOfficeHelper
     u8 unk16;
 };
 
-EWRAM_DATA struct PostOfficeHelper *gPostOfficeHelper;
+EWRAM_DATA_2 struct PostOfficeHelper *gPostOfficeHelper = {0};
 
 
 struct unkStruct_203B330
@@ -38,7 +38,7 @@ struct unkStruct_203B330
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
 };
-EWRAM_DATA struct unkStruct_203B330 *gUnknown_203B330;
+EWRAM_DATA_2 struct unkStruct_203B330 *gUnknown_203B330 = {0};
 
 
 extern const char GetHelp_Text[];
@@ -613,7 +613,7 @@ void DisplayMissionObjectives(void)
     {
         case 1:
             sub_8099394(&local_94);
-            mail = sub_8095228(local_94);
+            mail = GetMailatIndex(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
             sprintfStatic(buffer,gUnknown_80E1F3C,mail->dungeon.floor);
@@ -636,7 +636,7 @@ void DisplayMissionObjectives(void)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
                     if ((((jobInfo->dungeon.id == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
-                        ) && (jobInfo->mailType != 5)) && (jobInfo->mailType != 7)) {
+                        ) && (jobInfo->mailType != MAIL_TYPE_SUSPENDED_JOB)) && (jobInfo->mailType != MAIL_TYPE_UNK7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
                             sprintfStatic(buffer1,gUnknown_80E1F3C,jobInfo->dungeon.floor);

@@ -929,7 +929,7 @@ _0804326A:
 	beq _080432F4
 	mov r0, sp
 	ldrb r0, [r0]
-	bl sub_8095228
+	bl GetMailatIndex
 	adds r2, r0, 0
 	adds r2, 0x2C
 	movs r0, 0

@@ -40,19 +40,19 @@ struct unkStruct_203B490 *GetMailInfo(void)
 void InitializeMailJobsNews(void)
 {
     s32 index;
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
         ResetMailboxSlot(index);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         ResetPelipperBoardSlot(index);
     }
-    for(index = 0; index < 8; index++)
+    for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
         ResetJobSlot(index);
     }
-    for(index = 0; index < 56; index++)
+    for(index = 0; index < NUM_POKEMON_NEWS; index++)
     {
         gUnknown_203B490->PKMNNewsReceived[index] = FALSE;
     }

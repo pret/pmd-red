@@ -10,10 +10,10 @@
 #include "menu.h"
 #include "menu_input.h"
 
-extern struct TradeItemsMenu *gTradeItemsMenu;
+EWRAM_DATA_2 struct TradeItemsMenu *gTradeItemsMenu = {0};
 
 extern u32 gUnknown_202DE30;
-extern u32 gUnknown_202DE58;
+extern u8 gUnknown_202DE58[];
 
 const struct MenuItem gUnknown_80E60A0[3] = {
     {"Send item", 1},
@@ -643,7 +643,7 @@ void sub_8036B28(void)
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
+        sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
         sub_8014248(gUnknown_80E61E4,0,5, gUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
@@ -702,17 +702,17 @@ void sub_8036B28(void)
     case 0xe:
         if (gTradeItemsMenu->unk24C.quantity == 0) {
             gUnknown_202DE30 = gTradeItemsMenu->unk244.quantity;
-            sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.id,0);
+            sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.id,0);
         }
         else {
             gUnknown_202DE30 = gTradeItemsMenu->unk24C.quantity;
-            sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.id,0);
+            sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.id,0);
         }
         sub_80141B4(gUnknown_80E6314,0,0,0x101);
         break;
     case 0xd:
         gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        sub_8090DC4(&gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
+        sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
         sub_80141B4(gUnknown_80E6358,0,0,0x101);
         break;
     case 0xB:

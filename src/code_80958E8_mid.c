@@ -95,7 +95,7 @@ bool8 GenerateMailJobDungeonInfo(struct WonderMail *mail)
 
 bool8 sub_8095E38(struct WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
 {
-    if (mail->mailType != 0) {
+    if (mail->mailType != MAIL_TYPE_NONE) {
         if ((mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) && (param_4 == 1)) {
             if (mail->dungeon.id == dungeon) {
                 return TRUE;
@@ -127,14 +127,14 @@ u8 sub_8095E78(void)
 
         for(index = 0; index < 4; index++)
         {
-            if((gUnknown_203B490->mailboxSlots[index].mailType != 0) && (gUnknown_203B490->mailboxSlots[index].rewardType == FRIEND_AREA))
+            if((gUnknown_203B490->mailboxSlots[index].mailType != MAIL_TYPE_NONE) && (gUnknown_203B490->mailboxSlots[index].rewardType == FRIEND_AREA))
                 flag = TRUE;
         }
       
 
         for(index = 0; index < 8; index++)
         {
-            if((gUnknown_203B490->jobSlots[index].mailType != 0) && (gUnknown_203B490->jobSlots[index].rewardType == FRIEND_AREA))
+            if((gUnknown_203B490->jobSlots[index].mailType != MAIL_TYPE_NONE) && (gUnknown_203B490->jobSlots[index].rewardType == FRIEND_AREA))
                 flag = TRUE;
         }
 

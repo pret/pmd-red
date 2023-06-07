@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "text.h"
 #include "constants/mailbox.h"
+#include "code_802C39C.h"
 
 struct unkStruct_203B304
 {
@@ -12,14 +13,11 @@ struct unkStruct_203B304
     u32 fallbackState;
     u8 mailboxIndex;
     u8 mailIndex;
-    u32 unkC;
-    u8 fill10[0x50 - 0x10];
-    u8 unk50;
-    u8 fill51[0x64 - 0x51];
+    struct unkStruct_802C39C unkC;
     u32 menuAction1;
     u32 menuAction2;
     struct MenuStruct unk6C;
-    struct MenuItem unkBC[8];
+    struct MenuItem menuItems[8];
     u16 unkFC[8];
     struct UnkTextStruct2 unk10C[4];
 };

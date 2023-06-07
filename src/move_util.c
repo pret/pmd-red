@@ -27,8 +27,13 @@ u32 sub_8057144(struct Entity * pokemon)
   s32 counter;
   struct Move *moveStack [80];
   struct Move **local_20;
+#ifndef NONMATCHING
   register s32 counter_1 asm("r0");
   register struct Move** move_1 asm("r1");
+#else
+  s32 counter_1;
+  struct Move** move_1;
+#endif
 
   counter = 0;
 

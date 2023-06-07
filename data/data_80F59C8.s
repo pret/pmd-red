@@ -441,15 +441,23 @@ gUnknown_80F6964: @ 80F6964
 
 	.global gUnknown_80F697C
 gUnknown_80F697C: @ 80F697C
-	.incbin "baserom.gba", 0xF697C, 0x14
+    .byte 0x58, 0x00, 0x00, 0x00
+    .string "pksdir0"
+    .align 2,0
+    .string "pksdir0"
+    .align 2,0
 
 	.global gUnknown_80F6990
 gUnknown_80F6990: @ 80F6990
-	.incbin "baserom.gba", 0xF6990, 0xC
+    .byte 0x01, 0x00, 0x00, 0x00
+    .byte 0x01, 0x00, 0x00, 0x00
+    .byte 0x01, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F699C
 gUnknown_80F699C: @ 80F699C
-	.incbin "baserom.gba", 0xF699C, 0xC
+    .byte 0x00, 0x00, 0x00, 0x00
+    .byte 0x00, 0x00, 0x00, 0x00
+    .byte 0x01, 0x00, 0x00, 0x00
 
 	.global gUnknown_80F69A8
 gUnknown_80F69A8: @ 80F69A8

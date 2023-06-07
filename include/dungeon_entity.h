@@ -208,7 +208,8 @@ struct EntityInfo
     u8 unk153;
     u8 unk154;
     u8 unk155;
-    u8 fill158[0x158 - 0x156];
+    u8 unk156;
+    bool8 unk157;
     u8 unk158;
     u8 unk159;
     u8 unk15A;
@@ -227,7 +228,7 @@ struct EntityInfo
     /* 0x16C */ struct Position targetPos;
     /* 0x170 */ struct Position pixelPos;
     u32 unk174;
-    u8 fill178[0x17A - 0x178];
+    u16 unk178;
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
     /* 0x184 */ struct Position previousTargetMovePosition1;

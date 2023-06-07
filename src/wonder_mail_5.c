@@ -127,7 +127,7 @@ void sub_8030E48(void)
   stack.playerName = mail->playerName;
   stack.clientSpecies = mail->clientSpecies;
   stack.targetSpecies = mail->clientSpecies;
-  stack.unk14 = 0;
+  stack.targetItem = ITEM_NOTHING;
   if (mail->unk20.id == ITEM_NOTHING) {
     stack.unk2E = 5;
   }

@@ -1,13 +1,15 @@
 #include "menu.h"
 struct unkStruct_203B2F4
 {
-    u8 fill0[0x1A];
+    u8 fill0[0x18];
+    u8 unk18;
+    u8 unk19;
     s16 unk1A;
     s16 unk1C;
     s16 unk1E;
     u8 fill20[0x34 - 0x20];
     u32 unk34;
-    u32 unk38;
+    struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
@@ -41,13 +43,7 @@ struct unkStruct_203B2F8
     u8 unkB;
     struct unkSubStruct_203B2F8 *mail;
     u8 jobSlotIndex;
-    u8 fill11[0x14 - 0x11];
-    u32 unk14;
-    u8 fill18[0x58 - 0x18];
-    u8 unk58;
-    u8 fill59[0x64 - 0x59];
-    u8 *unk64;
-    u32 unk68;
+    struct unkStruct_802C39C unk14;
     u32 menuAction1;
     u32 menuAction2;
     u32 menuAction3;

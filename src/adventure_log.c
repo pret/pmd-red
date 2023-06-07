@@ -20,7 +20,7 @@ struct AdventureLog
     u8 unk9C[4];
 };
 
-extern struct AdventureLog *gAdventureLog;
+EWRAM_DATA_2 struct AdventureLog *gAdventureLog = {0};
 
 const struct UnkTextStruct2 gUnknown_80E1FF0 = {
    0x00, 0x00, 0x00, 0x00,

@@ -5,7 +5,7 @@ struct unkStruct_802C39C
     /* 0xC */ u8 *playerName;
     /* 0x10 */ s16 clientSpecies;
     /* 0x12 */ s16 targetSpecies;
-    /* 0x14 */ u8 unk14;
+    /* 0x14 */ u8 targetItem;
     /* 0x15 */ u8 fill15[0x2E - 0x15];
     u8 unk2E;
     u8 fill2F[0x34 - 0x2F];

@@ -1,3 +1,4 @@
+#include "gba/defines.h"
 #include "global.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
@@ -45,37 +46,125 @@ struct unkStruct_203B2B0
     struct UnkTextStruct2 unk114[4];
 };
 
-extern struct unkStruct_203B2B0 *gUnknown_203B2B0;
+EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
 extern struct UnkTextStruct2 gUnknown_80DCA00;
 extern struct UnkTextStruct2 gUnknown_80DC9E8;
 extern u8 gPlayerName[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
-extern u8 gLuminousCaveSeekAwakening[];
-extern u8 gLuminousCaveEvolutionInfo[];
-extern u8 gLuminousCaveAskEvolution[];
-extern u8 gLuminousCaveYeShallReturn[];
-extern u8 gLuminousCaveGiveItem[];
-extern u8 gLuminousCaveGiveAnotherItem[];
-extern u8 gLuminousCaveLackWhatIsNeeded[];
-extern u8 gLuminousCaveOnlyOneItem[];
-extern u8 gLuminousCaveLetUsBegin[];
-extern u8 gLuminousCaveChangedAppearance[];
-extern u8 gLuminousCaveEvolved[];
-extern u8 gLuminousCaveGiveName[];
-extern u8 gLuminousCaveComeAlone[];
-extern u8 gLuminousCaveLackLevel[];
-extern u8 gLuminousCaveCantEvolveAnymore[];
-extern u8 gLuminousCaveLackFriendArea[];
-extern u8 gLuminousCaveLackRoom[];
-extern u8 gLuminousCaveLackIQ[];
-extern u8 gLuminousCaveLackItem[];
-extern u8 gLuminousCaveCantEvolveYet[];
-extern u8 gUnknown_80DCA18[];
+
 extern u8 *gUnknown_80D4970[];
 extern u8 *gUnknown_80D4934[];
+
+extern u8 gUnknown_80DCA18[];
 extern u8 gUnknown_80DCA24[];
 extern u8 gUnknown_80DCA2C[];
+
+ALIGNED(4) const u8 gLuminousCaveSeekAwakening[] = _(
+	 "{CENTER_ALIGN}...{WAIT_PRESS}A voice emanates from somewhere...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}...Ye who seek awakening...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}This is Luminous Cave.{WAIT_PRESS}\n"
+	 "{CENTER_ALIGN}Do ye seek a new evolution?");
+
+ALIGNED(4) const u8 gLuminousCaveAskEvolution[] = _(
+	 "{CENTER_ALIGN}Do ye seek evolution?");
+
+ALIGNED(4) const u8 gLuminousCaveEvolutionInfo[] = _(
+	 "{CENTER_ALIGN}There are those among Pokémon\n"
+	 "{CENTER_ALIGN}that can evolve.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Such Pokémon can evolve at this very\n"
+	 "{CENTER_ALIGN}spot if they satisfy certain conditions.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Evolution brings about changes\n"
+	 "{CENTER_ALIGN}in appearance and abilities.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Not only that{COMMA} some Pokémon even change\n"
+	 "{CENTER_ALIGN}type and learn different moves.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}However...{WAIT_PRESS} The requirements for\n"
+	 "{CENTER_ALIGN}evolution differ among Pokémon.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Some become ready for evolution\n"
+	 "{CENTER_ALIGN}merely by leveling up.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Still others may need special items\n"
+	 "{CENTER_ALIGN}to attain evolution.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye must also be aware of this:{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Once it has evolved{COMMA} a Pokémon\n"
+	 "{CENTER_ALIGN}can never regain its previous form.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}That is why ye must think carefully\n"
+	 "{CENTER_ALIGN}before committing to evolution.");
+
+ALIGNED(4) const u8 gLuminousCaveYeShallReturn[] = _(
+	 "{CENTER_ALIGN}Ye shall return if evolution\n"
+	 "{CENTER_ALIGN}is what ye seek...");
+
+ALIGNED(4) const u8 gLuminousCaveGiveItem[] = _(
+	 "{CENTER_ALIGN}Will ye give an item for evolution?");
+
+ALIGNED(4) const u8 gLuminousCaveGiveAnotherItem[] = _(
+	 "{CENTER_ALIGN}Will ye give yet another item?");
+
+ALIGNED(4) const u8 gLuminousCaveLackWhatIsNeeded[] = _(
+	 "{CENTER_ALIGN}Alas{COMMA} ye seem to lack what is needed\n"
+	 "{CENTER_ALIGN}for evolution.");
+
+ALIGNED(4) const u8 gLuminousCaveOnlyOneItem[] = _(
+	 "{CENTER_ALIGN}Ye seem to have but one item.");
+
+ALIGNED(4) const u8 gLuminousCaveLetUsBegin[] = _(
+	 "{CENTER_ALIGN}...Ye who seek awakening...\n"
+	 "{CENTER_ALIGN}Let us begin.");
+
+ALIGNED(4) const u8 gLuminousCaveChangedAppearance[] = _(
+	 "{CENTER_ALIGN}...{WAIT_PRESS}$n0 is undergoing changes...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}$n0{APOSTROPHE}s appearance changed...{EXTRA_MSG}");
+
+ALIGNED(4) const u8 gLuminousCaveEvolved[] = _(
+	 "{CENTER_ALIGN}It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
+	 "{CENTER_ALIGN}to {COLOR_1 YELLOW}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
+
+ALIGNED(4) const u8 gLuminousCaveComeAlone[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}One cannot evolve if one\n"
+	 "{CENTER_ALIGN}is in the company of others.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Come alone if ye wish to evolve.");
+
+ALIGNED(4) const u8 gLuminousCaveLackLevel[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye have not high enough a level.");
+
+ALIGNED(4) const u8 gLuminousCaveCantEvolveAnymore[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve anymore.");
+
+ALIGNED(4) const u8 gLuminousCaveLackFriendArea[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye need your Friend Area to evolve.");
+
+ALIGNED(4) const u8 gLuminousCaveLackRoom[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}The Friend Area to which ye shall go\n"
+	 "{CENTER_ALIGN}has no room for ye.");
+
+ALIGNED(4) const u8 gLuminousCaveLackIQ[] = _(
+	 "{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye seem to lack the IQ to evolve.");
+
+ALIGNED(4) const u8 gLuminousCaveLackItem[] = _(
+	 "{CENTER_ALIGN}{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye seem to lack an item to evolve.");
+
+ALIGNED(4) const u8 gLuminousCaveCantEvolveYet[] = _(
+	 "{CENTER_ALIGN}{CENTER_ALIGN}...{EXTRA_MSG}"
+	 "{CENTER_ALIGN}Ye cannot evolve yet. ");
+
+ALIGNED(4) const u8 gLuminousCaveGiveName[] = _(
+	 "{CENTER_ALIGN}Ye must give a name to\n"
+	 "{CENTER_ALIGN}the evolved Pokémon. ");
+
+ALIGNED(4) static const u8 fill0[] = "pksdir0";
+ALIGNED(4) static const u8 fill1[] = "pksdir0";
 
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void UpdateLuminousCaveState(u32);
@@ -464,47 +553,40 @@ void UpdateLuminousCaveDialogue(void)
 
 void sub_8024CFC(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
+    s32 loopMax = 0;
 
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA18;
-    preload->unk34[0].menuAction = 3;
-    defaultAction = 1;
-    preload->unk34[1].text = *gUnknown_80D4970;
-    preload->unk34[1].menuAction = 2;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA18;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 }
 
 void sub_8024D48(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA24;
-    preload->unk34[0].menuAction = 4;
-    defaultAction = 1;
-    preload->unk34[1].text = gUnknown_80DCA2C;
-    preload->unk34[1].menuAction = 5;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-
-    loopMax = 3;
-
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA24;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -520,27 +602,22 @@ void sub_8024D48(void)
 
 void sub_8024DBC(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA24;
-    preload->unk34[0].menuAction = 4;
-    defaultAction = 1;
-    preload->unk34[1].text = gUnknown_80DCA2C;
-    preload->unk34[1].menuAction = 5;
-    preload->unk34[2].text = *gUnknown_80D4934;
-    preload->unk34[2].menuAction = defaultAction;
-
-    loopMax = 3;
-
-    preload->unk34[3].text = nullString;
-    preload->unk34[3].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA24;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 4;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -556,25 +633,19 @@ void sub_8024DBC(void)
 
 void sub_8024E30(void)
 {
-    u8 *nullString;
-    struct unkStruct_203B2B0 *preload;
-    u32 defaultAction;
     s32 index;
     s32 loopMax;
 
+    loopMax = 0;
     MemoryFill16(gUnknown_203B2B0->unk74, 0, sizeof(gUnknown_203B2B0->unk74));
-    preload = gUnknown_203B2B0;
-    nullString = NULL;
-    preload->unk34[0].text = gUnknown_80DCA2C;
-    preload->unk34[0].menuAction = 5;
-    defaultAction = 1;
-    preload->unk34[1].text = *gUnknown_80D4970;
-    preload->unk34[1].menuAction = 2;
-
-    loopMax = 2;
-
-    preload->unk34[2].text = nullString;
-    preload->unk34[2].menuAction = defaultAction;
+    gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B2B0->unk34[loopMax].text = NULL;
+    gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {

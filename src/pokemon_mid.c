@@ -553,7 +553,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
         HeldItemToSlot(slot, held);
     }
     else {
-        slot->id = 0;
+        slot->id = ITEM_NOTHING;
         slot->quantity = 0;
         slot->flags = 0;
     }
@@ -601,7 +601,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
-        pokemon->heldItem.id = 0;
+        pokemon->heldItem.id = ITEM_NOTHING;
     }
 }
 
@@ -613,7 +613,7 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
     else {
-        pokemon->heldItem.id = 0;
+        pokemon->heldItem.id = ITEM_NOTHING;
     }
 }
 
@@ -923,7 +923,7 @@ char* sub_808E4FC(s32 a1)
 {
     struct subStruct_203B240 *result[4];
     sub_8097DF0(gFormattedStatusNames[a1], result);
-    return result[0]->unk0;
+    return result[0]->pokeName;
 }
 
 char* sub_808E51C(s32 a1)

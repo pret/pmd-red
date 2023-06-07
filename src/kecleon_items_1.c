@@ -111,21 +111,135 @@ extern void PlaySound(u16 songIndex);
 
 u32 CountKecleonItems(void);
 
+extern u8 *gUnknown_80D4984[];
+extern u8 *gUnknown_80D4970[];
+extern u8 * gUnknown_80D4978[];
+extern u8 gUnknown_80DB8A0[];
+extern u8 *gUnknown_80D4934[];
+
+void sub_80194F8(void)
+{
+  int index;
+
+  s32 loopMax;
+  MemoryFill16(gUnknown_203B210->unk74,0,sizeof(gUnknown_203B210->unk74));
+  loopMax = 0;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = gUnknown_80DB8A0;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 4;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4934;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = NULL;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B210->unk74[index] == 0)
+      {
+          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction1)
+              return;
+      }
+  }
+  for(index = 0; index < loopMax; index++)
+  {
+      if (gUnknown_203B210->unk74[index] == 0)
+      {
+           gUnknown_203B210->menuAction1 =  gUnknown_203B210->menuItems[index].menuAction;
+           break;
+      }
+  }
+}
+
+void sub_80195C0(void)
+{
+  int index;
+
+  s32 loopMax;
+  MemoryFill16(gUnknown_203B210->unk74,0,sizeof(gUnknown_203B210->unk74));
+  loopMax = 0;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = NULL;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B210->unk74[index] == 0)
+      {
+          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction3)
+              return;
+      }
+  }
+  for(index = 0; index < loopMax; index++)
+  {
+      if (gUnknown_203B210->unk74[index] == 0)
+      {
+           gUnknown_203B210->menuAction3 =  gUnknown_203B210->menuItems[index].menuAction;
+           break;
+      }
+  }
+}
+
+ 
+void sub_8019660(void)
+{
+  int index;
+
+  s32 loopMax;
+  MemoryFill16(gUnknown_203B210->unk74,0, sizeof(gUnknown_203B210->unk74));
+  loopMax = 0;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+  loopMax += 1;
+  gUnknown_203B210->menuItems[loopMax].text = NULL;
+  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+  for(index = 0; index < loopMax; index++)
+  {
+      if(gUnknown_203B210->unk74[index] == 0)
+      {
+          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction2)
+              return;
+      }
+  }
+  for(index = 0; index < loopMax; index++)
+  {
+      if (gUnknown_203B210->unk74[index] == 0)
+      {
+           gUnknown_203B210->menuAction2 =  gUnknown_203B210->menuItems[index].menuAction;
+           break;
+      }
+  }
+}
+
 void sub_8019700(void)
 {
-    u32 menuAction;
-    struct unkStruct_203B210 *preload;
-    u8 *nullText;
-
-    preload = gUnknown_203B210;
-    nullText = NULL;
-    preload->menuItems[0].text = *gUnknown_80D4920;
-    preload->menuItems[0].menuAction = 5;
-    menuAction = 1;
-    preload->menuItems[1].text = *gUnknown_80D4928;
-    preload->menuItems[1].menuAction = 6;
-    preload->menuItems[2].text = nullText;
-    preload->menuItems[2].menuAction = menuAction;
+    s32 loopMax = 0;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 5;
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 6;
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = NULL;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
 }
 
 void sub_8019730(void)

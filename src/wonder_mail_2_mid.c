@@ -104,7 +104,7 @@ void CreateMailMenu(void)
         mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + index]);
         local.unk0[0] = gUnknown_203B2D8->unk38;
         local.y = sub_8013800(&gUnknown_203B2D8->unk4, index);
-        if (mail->mailType == 1) {
+        if (mail->mailType == MAIL_TYPE_UNK1) {
             y = sub_8013800(&gUnknown_203B2D8->unk4, index);
             sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
             PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());

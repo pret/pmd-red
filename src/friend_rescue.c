@@ -14,7 +14,7 @@ extern u32 sub_802F298();
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
-extern struct WonderMailStruct_203B33C *gUnknown_203B33C;
+EWRAM_DATA_2 struct WonderMailStruct_203B33C *gUnknown_203B33C = {0};
 
 extern u8 sub_8039880(void);
 
