@@ -307,8 +307,6 @@ SECTIONS {
         src/code_80958E8_1.o(.text);
         asm/code_8096AF8.o(.text);
         src/code_80972F4.o(.text);
-        asm/code_8097318.o(.text);
-        src/code_809747C.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);

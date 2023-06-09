@@ -3,6 +3,9 @@
 
 #define NUM_DUNGEON_MAZE (NUM_DUNGEONS - DUNGEON_NORMAL_MAZE_2)
 
+// Not sure why I need to +1 the difference...
+#define NUM_BASIC_DUNGEON_MAZE (DUNGEON_STEEL_MAZE - DUNGEON_NORMAL_MAZE_2) + 1
+
 enum DungeonID
 {
     DUNGEON_TINY_WOODS = 0,
