@@ -4157,32 +4157,3 @@ gUnknown_9E7EAB4:
 .global gUnknown_9E7EAC8
 gUnknown_9E7EAC8:
 .incbin "baserom.gba", 0x1E7EAC8, 0x1538
-.string "pksdir0\0"
-.incbin "baserom.gba", 0x1E80008, 0x4
-.4byte gUnknown_9E80018
-.string "pksdir0\0"
-.global gUnknown_9E80018
-gUnknown_9E80018:
-.4byte gUnknown_9E80030
-.4byte gUnknown_9E80040
-.4byte gUnknown_9E80028
-.4byte gUnknown_9E80054
-.global gUnknown_9E80028
-gUnknown_9E80028:
-.incbin "baserom.gba", 0x1E80028, 0x8
-.global gUnknown_9E80030
-gUnknown_9E80030:
-.incbin "baserom.gba", 0x1E80030, 0x10
-.global gUnknown_9E80040
-gUnknown_9E80040:
-.incbin "baserom.gba", 0x1E80040, 0x14
-.global gUnknown_9E80054
-gUnknown_9E80054:
-.incbin "baserom.gba", 0x1E80054, 0x8
-.4byte gUnknown_9E8414C
-.incbin "baserom.gba", 0x1E80060, 0x2804
-.string "SIRO"
-.incbin "baserom.gba", 0x1E82868, 0x18E4
-.global gUnknown_9E8414C
-gUnknown_9E8414C:
-.incbin "baserom.gba", 0x1E8414C, 0x2510
