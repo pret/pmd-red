@@ -1500,7 +1500,7 @@ void ClearAllItems_8091FB4() {
   }
 }
 
-bool32 IsInvalidItemReward(u8 itemID)
+bool8 IsInvalidItemReward(u8 itemID)
 {
   s32 index;
 

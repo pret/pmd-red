@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "memory.h"
 #include "text.h"
 #include "input.h"
@@ -268,7 +269,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->pokeStruct->dungeonLocation.id == 0x44 || gUnknown_203B2BC->pokeStruct->dungeonLocation.id == 0x45)
+    if (gUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || gUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
         return TRUE;
     else
         return FALSE;
@@ -459,7 +460,7 @@ bool8 sub_8027D9C(struct PokemonStruct *pokeStruct)
     if(!pokeStruct->isTeamLeader)
     {
         var1 = 0;
-        if(pokeStruct->dungeonLocation.id == 0x41)
+        if(pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER)
             var1 = 1;
         if(var1 != 0)
         {
@@ -480,7 +481,7 @@ bool8 sub_8027DCC(struct PokemonStruct *pokeStruct)
             if(!pokeStruct->isTeamLeader)
             {
                 var1 = 0;
-                if(pokeStruct->dungeonLocation.id == 0x41)
+                if(pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER)
                     var1 = 1;
                 if(var1 != 0)
                 {

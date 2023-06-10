@@ -3,6 +3,7 @@
 #include "constants/friend_area.h"
 #include "constants/input.h"
 #include "file_system.h"
+#include "friend_list_menu.h"
 #include "item.h"
 #include "menu.h"
 #include "team_inventory.h"
@@ -55,9 +56,6 @@ extern u32 sub_8022860();
 extern void sub_8022908();
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
-extern u32 sub_8025354(void);
-extern u8 sub_802540C(void);
-extern void sub_8025418(void);
 extern u32 sub_8025F68();
 extern u8 sub_802604C();
 extern void sub_8026058();

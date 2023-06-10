@@ -4,10 +4,10 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_music.h"
+#include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
 #include "dungeon_util_1.h"
 
-extern void LoadIQSkills(struct Entity *);
 extern struct Entity *GetPartnerEntity();
 extern struct Entity *xxx_call_GetLeader(void);
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);

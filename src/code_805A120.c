@@ -17,6 +17,8 @@
 #include "item.h"
 #include "moves.h"
 #include "move_effects_target.h"
+#include "move_util.h"
+#include "number_util.h"
 #include "status.h"
 #include "status_actions.h"
 #include "tile_types.h"
@@ -94,14 +96,12 @@ extern s16 gUnknown_80F501A[];
 
 extern u32 sub_8055864(struct Entity *pokemon, struct Entity *target, struct Move *param_3, s32 param_4, s32 param_5);
 extern void sub_80943A0(void*, s32);
-s32 RoundUpFixedPoint(s32 fixedPointNumber);
 extern s16 sub_8057600(struct Move*, u32);
 extern void sub_806CDD4(struct Entity *, u32, u32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(struct Position *pos);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_803E46C(u32);
-bool8 sub_80571F0(struct Entity * pokemon, struct Move *move);
 extern void sub_807EC28(u32);
 extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 void sub_8075900(struct Entity *pokemon, u8 r1);
@@ -116,11 +116,9 @@ void sub_80522F4(struct Entity *r0, struct Entity *r1, char r2[]);
 extern void sub_806A6E8(struct Entity *);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
 extern void sub_807EA30(u32);
-extern bool8 sub_805727C(struct Entity *, struct Entity *, s16);
 extern void sub_806ABAC(struct Entity *, struct Entity *);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_8045C28(struct Item *, u8 , u8);
-extern u8 sub_8057308(struct Entity *, u32);
 extern void sub_805A7D4(struct Entity *, struct Entity *, struct Item *, struct Position *);
 extern void sub_8045394(struct Entity *, s32, s32);
 extern void sub_804652C(struct Entity *, struct Entity *, struct Item *, u32, struct Position *);
