@@ -703,114 +703,184 @@ gUnknown_8116F9A: @ 8116F9A
 	.global gUnknown_8117000
 gUnknown_8117000: @ 8117000
         @ Dungeon Names.. Segments too (i.e Sky Tower and Sky Tower Mid)
-        .4byte 0x81172a8
-        .4byte 0x81172a8
-        .4byte 0x8117298
-        .4byte 0x8117288
-        .4byte 0x8117270
-        .4byte 0x8117270
-        .4byte 0x8117260
-        .4byte 0x8117260
-        .4byte 0x8117250
-        .4byte 0x8117240
-        .4byte 0x8117230
-        .4byte 0x8117230
-        .4byte 0x8117228
-        .4byte 0x811721c
-        .4byte 0x8117208
-        .4byte 0x81171fc
-        .4byte 0x81171ec
-        .4byte 0x81171dc
-        .4byte 0x81171d0
-        .4byte 0x81171c0
-        .4byte 0x81171b0
-        .4byte 0x8117198
-        .4byte 0x811718c
-        .4byte 0x811717c
-        .4byte 0x8117170
-        .4byte 0x8117160
-        .4byte 0x8117150
-        .4byte 0x8117140
-        .4byte 0x8117134
-        .4byte 0x8117124
-        .4byte 0x8117114
-        .4byte 0x8117100
-        .4byte 0x81170f4
-        .4byte 0x81170e4
-        .4byte 0x81170d4
-        .4byte 0x81170c4
-        .4byte 0x81170b8
-        .4byte 0x81170ac
-        .4byte 0x811709c
+        .4byte gUnknown_81172A8
+        .4byte gUnknown_81172A8
+        .4byte gUnknown_8117298
+        .4byte gUnknown_8117288
+        .4byte gUnknown_8117270
+        .4byte gUnknown_8117270
+        .4byte gUnknown_8117260
+        .4byte gUnknown_8117260
+        .4byte gUnknown_8117250
+        .4byte gUnknown_8117240
+        .4byte gUnknown_8117230
+        .4byte gUnknown_8117230
+        .4byte gUnknown_8117228
+        .4byte gUnknown_811721C
+        .4byte gUnknown_8117208
+        .4byte gUnknown_81171FC
+        .4byte gUnknown_81171EC
+        .4byte gUnknown_81171DC
+        .4byte gUnknown_81171D0
+        .4byte gUnknown_81171C0
+        .4byte gUnknown_81171B0
+        .4byte gUnknown_8117198
+        .4byte gUnknown_811718C
+        .4byte gUnknown_811717C
+        .4byte gUnknown_8117170
+        .4byte gUnknown_8117160
+        .4byte gUnknown_8117150
+        .4byte gUnknown_8117140
+        .4byte gUnknown_8117134
+        .4byte gUnknown_8117124
+        .4byte gUnknown_8117114
+        .4byte gUnknown_8117100
+        .4byte gUnknown_81170F4
+        .4byte gUnknown_81170E4
+        .4byte gUnknown_81170D4
+        .4byte gUnknown_81170C4
+        .4byte gUnknown_81170B8
+        .4byte gUnknown_81170AC
+        .4byte gUnknown_811709C
 
+        .global gUnknown_811709C
+        gUnknown_811709C:
         .string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
         .align 2,0
+        .global gUnknown_81170AC
+        gUnknown_81170AC:
         .string "{COLOR_1 YELLOW_3}scene{END_COLOR_TEXT_1}\0"
         .align 2,0
+        .global gUnknown_81170B8
+        gUnknown_81170B8:
         .string "New Game\0"
         .align 2,0
+        .global gUnknown_81170C4
+        gUnknown_81170C4:
         .string "{COLOR_1 YELLOW_3}direction{END_COLOR_TEXT_1}\0"
         .align 2,0
+        .global gUnknown_81170D4
+        gUnknown_81170D4:
         .string "Western Cave\0"
         .align 2,0
+        .global gUnknown_81170E4
+        gUnknown_81170E4:
         .string "Sky Tower Mid\0"
         .align 2,0
+        .global gUnknown_81170F4
+        gUnknown_81170F4:
         .string "Sky Tower\0"
         .align 2,0
+        .global gUnknown_8117100
+        gUnknown_8117100:
         .string "Magma Cavern Mid\0"
         .align 2,0
+        .global gUnknown_8117114
+        gUnknown_8117114:
         .string "Magma Cavern\0"
         .align 2,0
+        .global gUnknown_8117124
+        gUnknown_8117124:
         .string "Mt. Freeze Mid\0"
         .align 2,0
+        .global gUnknown_8117134
+        gUnknown_8117134:
         .string "Mt. Freeze\0"
         .align 2,0
+        .global gUnknown_8117140
+        gUnknown_8117140:
         .string "Frosty Clearing\0"
         .align 2,0
+        .global gUnknown_8117150
+        gUnknown_8117150:
         .string "Frosty Forest\0"
         .align 2,0
+        .global gUnknown_8117160
+        gUnknown_8117160:
         .string "Mt. Blaze Mid\0"
         .align 2,0
+        .global gUnknown_8117170
+        gUnknown_8117170:
         .string "Mt. Blaze\0"
         .align 2,0
+        .global gUnknown_811717C
+        gUnknown_811717C:
         .string "Lapis Cave Exit\0"
         .align 2,0
+        .global gUnknown_811718C
+        gUnknown_811718C:
         .string "Lapis Cave\0"
         .align 2,0
+        .global gUnknown_8117198
+        gUnknown_8117198:
         .string "Hill of the Ancients\0"
         .align 2,0
+        .global gUnknown_81171B0
+        gUnknown_81171B0:
         .string "Great Canyon\0"
         .align 2,0
+        .global gUnknown_81171C0
+        gUnknown_81171C0:
         .string "Mt. Thunder Mid\0"
         .align 2,0
+        .global gUnknown_81171D0
+        gUnknown_81171D0:
         .string "Mt. Thunder\0"
         .align 2,0
+        .global gUnknown_81171DC
+        gUnknown_81171DC:
         .string "Silent Chasm\0"
         .align 2,0
+        .global gUnknown_81171EC
+        gUnknown_81171EC:
         .string "Sinister Woods\0"
         .align 2,0
+        .global gUnknown_81171FC
+        gUnknown_81171FC:
         .string "Mt. Steel\0"
         .align 2,0
+        .global gUnknown_8117208
+        gUnknown_8117208:
         .string "Thunderwave Cave\0"
         .align 2,0
+        .global gUnknown_811721C
+        gUnknown_811721C:
         .string "Tiny Woods\0"
         .align 2,0
+        .global gUnknown_8117228
+        gUnknown_8117228:
         .string "Dungeon\0"
         .align 2,0
+        .global gUnknown_8117230
+        gUnknown_8117230:
         .string "$t Team Base\0"
         .align 2,0
+        .global gUnknown_8117240
+        gUnknown_8117240:
         .string "Friend Areas\0"
         .align 2,0
+        .global gUnknown_8117250
+        gUnknown_8117250:
         .string "Luminous Cave\0"
         .align 2,0
+        .global gUnknown_8117260
+        gUnknown_8117260:
         .string "Makuhita Dojo\0"
         .align 2,0
+        .global gUnknown_8117270
+        gUnknown_8117270:
         .string "Pelipper Post Office\0"
         .align 2,0
+        .global gUnknown_8117288
+        gUnknown_8117288:
         .string "Whiscash Pond\0"
         .align 2,0
+        .global gUnknown_8117298
+        gUnknown_8117298:
         .string "Pokémon Square\0"
         .align 2,0
+        .global gUnknown_81172A8
+        gUnknown_81172A8:
         .string "Square\0"
         .align 2,0
 
@@ -1865,20 +1935,25 @@ gUnknown_8118544: @ 8118544
         .byte 0x00, 0x00, 0x00, 0x00
         .global gUnknown_81185D8
         gUnknown_81185D8:
-        .byte 0x2e, 0x2e, 0x2f, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x67, 0x72
+.global gUnknown_81185D8
+gUnknown_81185D8:
+.byte 0x2e, 0x2e, 0x2f, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x67, 0x72
 .byte 0x6f, 0x75, 0x6e, 0x64, 0x5f, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x2e, 0x63, 0x00
 
 	.global gUnknown_81185F2
 gUnknown_81185F2: @ 81185F2
 @ replacing .incbin "baserom.gba", 0x1185F2, 0x1E
-.byte 0xff, 0xff, 0x00, 0x08, 0x01, 0x08, 0x00, 0x10, 0x00, 0x00, 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64
+.byte 0xff, 0xff, 0x00, 0x08, 0x01, 0x08, 0x00, 0x10, 0x00, 0x00
+.global gUnknown_81185FC
+gUnknown_81185FC:
+.byte 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64
 .byte 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x5f, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x00
 
 	.global gUnknown_8118610
 gUnknown_8118610: @ 8118610
-	.4byte 0x81185D8
+	.4byte gUnknown_81185D8
 	.4byte 0x106
-	.4byte 0x81185FC
+	.4byte gUnknown_81185FC
 
 	.global gUnknown_811861C
 gUnknown_811861C: @ 811861C
@@ -1932,7 +2007,7 @@ gUnknown_81186F4: @ 81186F4
 
 	.global gUnknown_811872C
 gUnknown_811872C: @ 811872C
-        .4byte 0x81185D8
+        .4byte gUnknown_81185D8
         .4byte 0x290
         .4byte GroundEffect_ExecuteScript_Text
 
@@ -1943,13 +2018,13 @@ gUnknown_811872C: @ 811872C
 
 	.global gUnknown_811874C
 gUnknown_811874C: @ 811874C
-        .4byte 0x81185D8
+        .4byte gUnknown_81185D8
         .4byte 0x560
         .4byte GroundEffect_Action_Text
 
 	.global gUnknown_8118758
 gUnknown_8118758: @ 8118758
-        .4byte 0x81185D8
+        .4byte gUnknown_81185D8
         .4byte 0x56A
         .4byte GroundEffect_Action_Text
 

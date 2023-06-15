@@ -1290,7 +1290,7 @@ AbilityDescriptionNone:
 
 	.global gRangeNames
 gRangeNames: @ 810CC0C
-.4byte 0x810AE1C
+.4byte gNoneText
 .4byte MoveRangeThreeTilesDiagonally
 .4byte MoveRangeOneTileFoe
 .4byte MoveRangeCutsCornersFoe
@@ -2614,12 +2614,14 @@ gUnknown_810DEB4: @ 810DEB4
 gUnknown_810DEC8: @ 810DEC8
         .4byte FriendArea_810DEB8
 
+.global gUnknown_810DECC
+gUnknown_810DECC:
         .string "#>22.{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\0"
         .align 2,0
 
 	.global gUnknown_810DEDC
 gUnknown_810DEDC: @ 810DEDC
-        .4byte 0x810DECC
+        .4byte gUnknown_810DECC
 
 .global gUnknown_810DEE0
 gUnknown_810DEE0:

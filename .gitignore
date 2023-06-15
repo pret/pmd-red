@@ -39,3 +39,4 @@ build/
 *.pl
 *.a
 .vscode/
+*.ss[0-9]
