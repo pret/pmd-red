@@ -14,19 +14,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Checkout agbcc
+        uses: actions/checkout@master
+        with:
+          path: agbcc
+          repository: pret/agbcc
+
       - name: Install xdelta and ARM GCC
         run: |
-            sudo apt-get update -y
-            sudo apt-get install -y xdelta3 gcc-arm-none-eabi
+            sudo apt-get install xdelta3 gcc-arm-none-eabi binutils-arm-none-eabi
 
-      - name: Fetch repo
-        uses: actions/checkout@master
-      
-      - name: Load and setup agbcc
+      - name: Install agbcc
         run: |
-          git clone https://github.com/luckytyphlosion/agbcc.git -b new_layout_with_libs
-          cd agbcc && make -j${nproc} && make install prefix=$GITHUB_WORKSPACE
-        
+          ./build.sh
+          ./install.sh ../
+        working-directory: agbcc
+      
       - name: Build tools and baserom
         run: |
           cd $GITHUB_WORKSPACE
