@@ -6,6 +6,7 @@
 #include "friend_list_menu.h"
 #include "item.h"
 #include "menu.h"
+#include "pokemon.h"
 #include "team_inventory.h"
 #include "memory.h"
 #include "input.h"
@@ -63,6 +64,7 @@ extern void sub_8027168();
 extern u32 sub_80270A4();
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
+extern void InitializeJobListMenu(u32);
 
 extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
@@ -78,8 +80,18 @@ extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;
 
+extern u8 gAvailablePokemonNames[];
+
 extern char gUnknown_80DBF3C[];
 extern char gUnknown_80DBF4C[];
+extern u8 gMenuItems[];
+extern u8 gMenuJobList[];
+extern u8 gMenuTeam[];
+extern u8 gMenuOthers[];
+extern u8 *gUnknown_80D49B4[];
+extern u8 gUnknown_80DBF34[];
+extern u8 *gUnknown_80D49A8[];
+extern u8 *gUnknown_80D4970[];
 
 struct TeamBadgeData
 {
@@ -89,13 +101,12 @@ struct TeamBadgeData
 
 struct unk_203B250
 {
-    u32 unk0;
-    u16 unk4;
+    struct PokemonStruct *pokeStruct;
+    s16 index;
     /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    u8 fillA[0xC - 0xA];
     struct PokemonStruct *unkC;
     u32 state;
     u32 menuAction;
@@ -107,13 +118,154 @@ struct unk_203B250
 
 struct unk_203B250 *gUnknown_203B250;
 
+extern bool8 HasNoAcceptedJobs(void);
+extern bool8 sub_8024108(u32);
+extern bool8 sub_8096E2C(void);
+extern bool8 sub_80023E4(u32);
+extern u32 sub_801DCC4(void);
+extern u32 sub_8027074(void);
+extern void sub_80227B8(struct PokemonStruct *);
+extern bool8 sub_8024458(s16, u32);
+extern bool8 sub_801BEEC(s16);
+extern void sub_8021774(u8, u32, u32);
+void sub_801D894(void);
+u32 sub_8025EF4(struct PokemonStruct *);
+
+void sub_801D3A8(void)
+{
+    switch(gUnknown_203B250->state)
+    {
+        case 0:
+        case 1:
+            if(gUnknown_203B250->pokeStruct != NULL)
+                {
+                    PrintColoredPokeNameToBuffer(gAvailablePokemonNames, gUnknown_203B250->pokeStruct, 7);
+                    gUnknown_203B250->unk18.unk0 = gAvailablePokemonNames;
+                    sub_8012D60(&gUnknown_203B250->unk18, gUnknown_203B250->unk68, 0, gUnknown_203B250->unkA8, gUnknown_203B250->menuAction, 0);
+                }
+            else {
+                sub_801D894();
+                sub_8012D60(&gUnknown_203B250->unk18, gUnknown_203B250->unk68, 0, gUnknown_203B250->unkA8, gUnknown_203B250->menuAction, 0);
+            }
+            break;
+        case 3:
+            sub_80227B8(gUnknown_203B250->pokeStruct);
+            break;
+        case 4:
+            sub_8027074();
+            break;
+        case 5:
+            sub_8025EF4(gUnknown_203B250->pokeStruct);
+            break;
+        case 6:
+            sub_80252F0(0);
+            break;
+        case 7:
+            sub_80252F0(1);
+            break;
+        case 8:
+            sub_8024458(gUnknown_203B250->index, 2);
+            break;
+        case 9:
+            sub_801BEEC(gUnknown_203B250->index);
+            break;
+        case 10:
+            sub_8021774(gUnknown_203B250->currFriendAreaLocation, 1, 2);
+            break;
+        case 11:
+            InitializeJobListMenu(0);
+            break;
+        case 12:
+            sub_801DCC4();
+            break;
+    }
+}
+
+void sub_801D4C0(void)
+{
+    s32 index;
+    s32 loopMax;
+
+    loopMax = 0;
+    MemoryFill16(gUnknown_203B250->unkA8,0,sizeof(gUnknown_203B250->unkA8));
+    if (gUnknown_203B250->currFriendAreaLocation == 0) {
+        if (sub_8096E2C()) {
+            gUnknown_203B250->unk68[loopMax].menuAction = 2;
+            gUnknown_203B250->unk68[loopMax].text = gMenuItems;
+            if (GetNumberOfFilledInventorySlots() == 0) {
+                gUnknown_203B250->unkA8[loopMax] = 1;
+            }
+            loopMax++;
+            gUnknown_203B250->unk68[loopMax].text = gMenuTeam;
+            gUnknown_203B250->unk68[loopMax].menuAction = 4;
+            loopMax++;
+            if (sub_80023E4(2)) {
+                gUnknown_203B250->unk68[loopMax].text = gMenuJobList;
+                gUnknown_203B250->unk68[loopMax].menuAction = 9;
+                if (HasNoAcceptedJobs()) {
+                    gUnknown_203B250->unkA8[loopMax] = 1;
+                }
+                loopMax++;
+            }
+        }
+        gUnknown_203B250->unk68[loopMax].text = gMenuOthers;
+        gUnknown_203B250->unk68[loopMax].menuAction = 0xb;
+        loopMax++;
+    }
+    else {
+        strcpy(gAvailablePokemonNames,gUnknown_80DBF34);
+        if (sub_8096E2C()) {
+            gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D49A8;
+            gUnknown_203B250->unk68[loopMax].menuAction = 5;
+            if (sub_8024108(4)) {
+                gUnknown_203B250->unkA8[loopMax] = 1;
+            }
+            loopMax++;
+            gUnknown_203B250->unk68[loopMax].menuAction = 2;
+            gUnknown_203B250->unk68[loopMax].text = gMenuItems;
+            if (GetNumberOfFilledInventorySlots() == 0) {
+                gUnknown_203B250->unkA8[loopMax] = 1;
+            }
+            loopMax++;
+        }
+
+        gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D4970;
+        gUnknown_203B250->unk68[loopMax].menuAction = 8;
+        loopMax++;
+        gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D49B4;
+        gUnknown_203B250->unk68[loopMax].menuAction = 10;
+        loopMax++;
+    }
+    gUnknown_203B250->unk68[loopMax].text = NULL;
+    gUnknown_203B250->unk68[loopMax].menuAction = 1;
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B250->unkA8[index] == 0)
+        {
+            if(gUnknown_203B250->unk68[index].menuAction == gUnknown_203B250->menuAction)
+            {
+                return;
+            }
+        }
+    }
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B250->unkA8[index] == 0)
+        {
+            gUnknown_203B250->menuAction = gUnknown_203B250->unk68[index].menuAction;
+            break;
+        }
+    }
+}
 
 void sub_801D680(void)
 {
   int menuAction;
 
   menuAction = 0;
-  if ((sub_8012FD8(&gUnknown_203B250->unk18) == '\0') && (sub_8013114(&gUnknown_203B250->unk18,&menuAction), menuAction != 1)) {
+  if (!(sub_8012FD8(&gUnknown_203B250->unk18)) && (sub_8013114(&gUnknown_203B250->unk18,&menuAction), menuAction != 1)) {
     gUnknown_203B250->menuAction = menuAction;
   }
   switch(menuAction) {

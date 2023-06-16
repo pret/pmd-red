@@ -66,6 +66,20 @@ extern u8 gUnknown_80DBB08[];
 extern u8 gUnknown_80DBB38[];
 extern u8 gKangaskhanTrashToolboxItem[];
 extern u8 gKangaskhanTrashReceivedItem[];
+extern u8 gKangaskhanStorage[];
+extern u8 gKangaskhanTrash[];
+extern u8 *gUnknown_80D4970[];
+extern u8 gUnknown_202DEA8[];
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
+
+extern s32 sub_80144A4(s32 *);
+extern u32 sub_801A6E8(u32);
+extern u32 sub_801A8AC();
+extern void sub_8099690(u32);
+extern void sub_801A928(void);
+
+extern bool8 sub_801ADA0(s32);
 extern struct UnkTextStruct2 gUnknown_80DBA58;
 extern struct UnkTextStruct2 gUnknown_80DBA88;
 extern struct UnkTextStruct2 gUnknown_80DBA70;
@@ -508,3 +522,206 @@ void sub_801BB20(void)
     gUnknown_203B234->unkCC[loopMax].text = NULL;
     gUnknown_203B234->unkCC[loopMax].menuAction = -1;
 }
+
+void sub_801BB5C(void)
+{
+    int index;
+    s32 loopMax = 0;
+
+    gUnknown_203B234->unkCC[loopMax].text = gKangaskhanStorage;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 6;
+    if (!sub_801ADA0(gUnknown_203B234->unk24)) {
+        gUnknown_203B234->unkCC[loopMax].menuAction = -1;
+    }
+
+    loopMax++;
+    gUnknown_203B234->unkCC[loopMax].text = gKangaskhanTrash;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 7;
+
+    loopMax++;
+    gUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 8;
+
+    loopMax++;
+    gUnknown_203B234->unkCC[loopMax].text = 0;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 1;
+
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B234->unkCC[index].menuAction != -1)
+            if(gUnknown_203B234->unkCC[index].menuAction == gUnknown_203B234->menuAction)
+                return;
+    }
+
+    for(index = 0; index < loopMax; index++)
+    {
+        if(gUnknown_203B234->unkCC[index].menuAction != -1)
+        {
+            gUnknown_203B234->menuAction = gUnknown_203B234->unkCC[index].menuAction;
+            break;
+        }
+    }
+}
+
+void sub_801BC24(void)
+{
+    s32 loopMax;
+    loopMax = 0;
+    gUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 2;
+    loopMax += 1;
+    gUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 3;
+    loopMax += 1;
+    gUnknown_203B234->unkCC[loopMax].text = NULL;
+    gUnknown_203B234->unkCC[loopMax].menuAction = 1;
+}
+
+void sub_801BC64(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp)== 0)
+    {
+        switch(temp)
+        {
+            case 4:
+                sub_801B748(0x8);
+                break;
+            case 5:
+                sub_801B748(0x7);
+                break;
+        }
+    }
+}
+
+void sub_801BC94(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 2:
+                sub_801B748(0xD);
+                break;
+            case 1:
+            case 3:
+                sub_801B748(0x6);
+                break;
+        }
+    }
+}
+
+void sub_801BCCC(void)
+{
+    switch(sub_801A6E8(1))
+    {
+        case 0:
+        case 1:
+            break;
+        case 3:
+            gUnknown_203B234->unk24 = sub_801A8AC();
+            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
+            sub_801B748(0xA);
+            break;
+        case 4:
+            gUnknown_203B234->unk24 = sub_801A8AC();
+            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
+            sub_8099690(0);
+            sub_801B748(0xB);
+            break;
+        case 2:
+            sub_801A928();
+            sub_801B748(6);
+            break;
+    }
+}
+
+void sub_801BD80(void)
+{
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_801A6E8(0);
+  if (!sub_8012FD8(&gUnknown_203B234->unk28)) {
+    sub_8013114(&gUnknown_203B234->unk28,&menuAction);
+    if (menuAction != 1) gUnknown_203B234->menuAction = menuAction;
+  }
+  switch(menuAction)
+  {
+    case 6:
+        MoveToStorage(&gUnknown_203B234->unk20);
+        ShiftItemsDownFrom(gUnknown_203B234->unk24);
+        AddItemToInventory(&gUnknown_203B234->unk10);
+        FillInventoryGaps();
+        PlaySound(0xcb);
+        sub_8099690(0);
+        sub_801A928();
+        sub_801B748(0xE);
+        break;
+    case 7:
+        sub_801B748(0xC);
+        break;
+    case 8:
+        sub_8099690(0);
+        sub_801B748(0xB);
+        break;
+    case 1:
+        sub_801B748(0x9);
+        break;
+  }
+}
+
+void sub_801BE30(void)
+{
+  s32 menuAction;
+  
+  menuAction = 0;
+  sub_801A6E8(0);
+  sub_8012FD8(&gUnknown_203B234->unk28);
+  if (!sub_8012FD8(&gUnknown_203B234->unk78)) {
+    sub_8013114(&gUnknown_203B234->unk78,&menuAction);
+  }
+  switch(menuAction)
+  {
+    case 1:
+    case 3:
+        sub_801B748(9);
+        break;
+    case 2:
+        ShiftItemsDownFrom(gUnknown_203B234->unk24);
+        AddItemToInventory(&gUnknown_203B234->unk10);
+        FillInventoryGaps();
+        PlaySound(0xcb);
+        sub_801A928();
+        sub_801B748(0xf);
+        break;
+  }
+}
+
+void sub_801BEAC(void)
+{
+    switch(sub_801B410())
+    {
+        case 2:
+        case 3:
+            sub_801B450();
+            sub_801B748(9);
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_801BEC8(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_801B748(gUnknown_203B234->fallbackState);
+    }
+}
+

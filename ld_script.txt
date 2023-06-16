@@ -107,7 +107,6 @@ SECTIONS {
         src/kecleon_items_1.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
-        asm/code_801B3C0.o(.text);
         src/code_801C620.o(.text);
         asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
