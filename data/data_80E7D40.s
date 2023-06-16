@@ -1254,27 +1254,27 @@ sUnknown_80E8C14: @ 80E8C14
     .align 2, 0
 
 sUnknown_80E8C18: @ 80E8C18
-    .string "#C2S#R\0"
+    .string "{COLOR_1 RED}S{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C20: @ 80E8C20
-    .string "#C5A#R\0"
+    .string "{COLOR_1 CYAN}A{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C28: @ 80E8C28
-    .string "#C5B#R\0"
+    .string "{COLOR_1 CYAN}B{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C30: @ 80E8C30
-    .string "#C4C#R\0"
+    .string "{COLOR_1 GREEN}C{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C38: @ 80E8C38
-    .string "#C4D#R\0"
+    .string "{COLOR_1 GREEN}D{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C40: @ 80E8C40
-    .string "#C0E#R\0"
+    .string "{COLOR_1 WHITE}E{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 	.global gMissionRewardText
@@ -1295,11 +1295,11 @@ sUnknown_80E8C64: @ 80E8C64
     .align 2, 0
 
 sUnknown_80E8C70: @ 80E8C70
-    .string "#C4%s#R + ?\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} + ?\0"
     .align 2, 0
 
 sUnknown_80E8C7C: @ 80E8C7C
-    .string "#C4%s#R\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}\0"
     .align 2, 0
 
 sUnknown_80E8C84: @ 80E8C84
@@ -1333,11 +1333,11 @@ sUnknown_80E8CD4: @ 80E8CD4
     .align 2, 0
 
 sUnknown_80E8CE0: @ 80E8CE0
-    .string "I can~27t get home!\0"
+    .string "I can{APOSTROPHE}t get home!\0"
     .align 2, 0
 
 sUnknown_80E8CF4: @ 80E8CF4
-    .string "I~27m sad and lonely.\0"
+    .string "I{APOSTROPHE}m sad and lonely.\0"
     .align 2, 0
 
 sUnknown_80E8D0C: @ 80E8D0C
@@ -1345,15 +1345,15 @@ sUnknown_80E8D0C: @ 80E8D0C
     .align 2, 0
 
 sUnknown_80E8D18: @ 80E8D18
-    .string "I was KO~27d...\0"
+    .string "I was KO{APOSTROPHE}d...\0"
     .align 2, 0
 
 sUnknown_80E8D28: @ 80E8D28
-    .string "I~27m too tired to move.\0"
+    .string "I{APOSTROPHE}m too tired to move.\0"
     .align 2, 0
 
 sUnknown_80E8D44: @ 80E8D44
-    .string "I~27m not a fighter...\0"
+    .string "I{APOSTROPHE}m not a fighter...\0"
     .align 2, 0
 
 sUnknown_80E8D5C: @ 80E8D5C
@@ -1365,23 +1365,23 @@ sUnknown_80E8D6C: @ 80E8D6C
     .align 2, 0
 
 sUnknown_80E8D7C: @ 80E8D7C
-    .string "I~27m lost.\0"
+    .string "I{APOSTROPHE}m lost.\0"
     .align 2, 0
 
 sUnknown_80E8D88: @ 80E8D88
-    .string "I can~27t seem to get out.\0"
+    .string "I can{APOSTROPHE}t seem to get out.\0"
     .align 2, 0
 
 sUnknown_80E8DA4: @ 80E8DA4
-    .string "I~27m scared!\0"
+    .string "I{APOSTROPHE}m scared!\0"
     .align 2, 0
 
 sUnknown_80E8DB4: @ 80E8DB4
-    .string "I~27m in trouble...\0"
+    .string "I{APOSTROPHE}m in trouble...\0"
     .align 2, 0
 
 sUnknown_80E8DC8: @ 80E8DC8
-    .string "I can~27t get out!\0"
+    .string "I can{APOSTROPHE}t get out!\0"
     .align 2, 0
 
 sUnknown_80E8DDC: @ 80E8DDC
@@ -1405,15 +1405,15 @@ gUnknown_80E8DE4: @ 80E8DE4
     .4byte sUnknown_80E8E18
 
 sUnknown_80E8E18: @ 80E8E18
-    .string "I~27m famished...\0"
+    .string "I{APOSTROPHE}m famished...\0"
     .align 2, 0
 
 sUnknown_80E8E2C: @ 80E8E2C
-    .string "I can~27t move another step.\0"
+    .string "I can{APOSTROPHE}t move another step.\0"
     .align 2, 0
 
 sUnknown_80E8E4C: @ 80E8E4C
-    .string "Whoa! It~27s too rough here...\0"
+    .string "Whoa! It{APOSTROPHE}s too rough here...\0"
     .align 2, 0
 
 sUnknown_80E8E6C: @ 80E8E6C
@@ -1425,11 +1425,11 @@ sUnknown_80E8E80: @ 80E8E80
     .align 2, 0
 
 sUnknown_80E8E98: @ 80E8E98
-    .string "I~27m close to fainting...\0"
+    .string "I{APOSTROPHE}m close to fainting...\0"
     .align 2, 0
 
 sUnknown_80E8EB4: @ 80E8EB4
-    .string "I~27ve reached my limit...\0"
+    .string "I{APOSTROPHE}ve reached my limit...\0"
     .align 2, 0
 
 sUnknown_80E8ED0: @ 80E8ED0
@@ -1445,7 +1445,7 @@ sUnknown_80E8F10: @ 80E8F10
     .align 2, 0
 
 sUnknown_80E8F2C: @ 80E8F2C
-    .string "I~27m simply no good at fighting.\0"
+    .string "I{APOSTROPHE}m simply no good at fighting.\0"
     .align 2, 0
 
 sUnknown_80E8F50: @ 80E8F50
@@ -1453,7 +1453,7 @@ sUnknown_80E8F50: @ 80E8F50
     .align 2, 0
 
 sUnknown_80E8F7C: @ 80E8F7C
-    .string "I don~27t know how I did it~2c but I can~27t exit!\0"
+    .string "I don{APOSTROPHE}t know how I did it{COMMA} but I can{APOSTROPHE}t exit!\0"
     .align 2, 0
 
 	.global gUnknown_80E8FB0
@@ -1481,7 +1481,7 @@ sUnknown_80E8FF4: @ 80E8FF4
     .align 2, 0
 
 sUnknown_80E900C: @ 80E900C
-    .string "Someone~2c please help!\0"
+    .string "Someone{COMMA} please help!\0"
     .align 2, 0
 
 sUnknown_80E9024: @ 80E9024
@@ -1509,7 +1509,7 @@ sUnknown_80E90B4: @ 80E90B4
     .align 2, 0
 
 sUnknown_80E90D4: @ 80E90D4
-    .string "Someone~2c help!\0"
+    .string "Someone{COMMA} help!\0"
     .align 2, 0
 
 sUnknown_80E90E8: @ 80E90E8
@@ -1517,7 +1517,7 @@ sUnknown_80E90E8: @ 80E90E8
     .align 2, 0
 
 sUnknown_80E90F4: @ 80E90F4
-    .string "Please~2c I need help!\0"
+    .string "Please{COMMA} I need help!\0"
     .align 2, 0
 
 	.global gUnknown_80E910C
@@ -1542,11 +1542,11 @@ sUnknown_80E9144: @ 80E9144
     .align 2, 0
 
 sUnknown_80E914C: @ 80E914C
-    .string "Hasn~27t come back.\0"
+    .string "Hasn{APOSTROPHE}t come back.\0"
     .align 2, 0
 
 sUnknown_80E9160: @ 80E9160
-    .string "I~27m worried.\0"
+    .string "I{APOSTROPHE}m worried.\0"
     .align 2, 0
 
 sUnknown_80E9170: @ 80E9170
@@ -1558,15 +1558,15 @@ sUnknown_80E917C: @ 80E917C
     .align 2, 0
 
 sUnknown_80E9190: @ 80E9190
-    .string "Hurry~2c save #C6%s#R!\0"
+    .string "Hurry{COMMA} save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E91A8: @ 80E91A8
-    .string "#C6%s#R needs help!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} needs help!\0"
     .align 2, 0
 
 sUnknown_80E91BC: @ 80E91BC
-    .string "Please help #C6%s#R!\0"
+    .string "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 	.global gUnknown_80E91D4
@@ -1618,183 +1618,183 @@ gUnknown_80E91D4: @ 80E91D4
     .4byte sUnknown_80E9288
 
 sUnknown_80E9288: @ 80E9288
-    .string "#C6%s#R fell into a trap!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} fell into a trap!\0"
     .align 2, 0
 
 sUnknown_80E92A4: @ 80E92A4
-    .string "I lost contact with #C6%s#R!\0"
+    .string "I lost contact with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E92C4: @ 80E92C4
-    .string "I can~27t contact #C6%s#R!\0"
+    .string "I can{APOSTROPHE}t contact {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E92E0: @ 80E92E0
-    .string "#C6%s#R can~27t walk anymore!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can{APOSTROPHE}t walk anymore!\0"
     .align 2, 0
 
 sUnknown_80E9300: @ 80E9300
-    .string "#C6%s#R~27s been missing three days!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{APOSTROPHE}s been missing three days!\0"
     .align 2, 0
 
 sUnknown_80E9328: @ 80E9328
-    .string "#C6%s#R went the wrong way!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} went the wrong way!\0"
     .align 2, 0
 
 sUnknown_80E9344: @ 80E9344
-    .string "#C6%s#R is lost!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is lost!\0"
     .align 2, 0
 
 sUnknown_80E9358: @ 80E9358
-    .string "#C6%s#R appears to be stuck!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be stuck!\0"
     .align 2, 0
 
 sUnknown_80E9378: @ 80E9378
-    .string "#C6%s#R appears to be lost!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be lost!\0"
     .align 2, 0
 
 sUnknown_80E9394: @ 80E9394
-    .string "#C6%s#R may have had an accident!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have had an accident!\0"
     .align 2, 0
 
 sUnknown_80E93B8: @ 80E93B8
-    .string "I~27m worried for #C6%s#R~27s safety!\0"
+    .string "I{APOSTROPHE}m worried for {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{APOSTROPHE}s safety!\0"
     .align 2, 0
 
 sUnknown_80E93E0: @ 80E93E0
-    .string "#C6%s#R is fighting all alone!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is fighting all alone!\0"
     .align 2, 0
 
 sUnknown_80E9400: @ 80E9400
-    .string "#C6%s#R is too hungry to move!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is too hungry to move!\0"
     .align 2, 0
 
 sUnknown_80E9420: @ 80E9420
-    .string "Hurry~2c bring back #C6%s#R.\0"
+    .string "Hurry{COMMA} bring back {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80E9440: @ 80E9440
-    .string "I got separated from #C6%s#R.\0"
+    .string "I got separated from {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80E9460: @ 80E9460
-    .string "#C6%s#R is running out of time!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is running out of time!\0"
     .align 2, 0
 
 sUnknown_80E9480: @ 80E9480
-    .string "#C6%s#R was attacked~2c maybe!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was attacked{COMMA} maybe!\0"
     .align 2, 0
 
 sUnknown_80E94A0: @ 80E94A0
-    .string "Something happened to #C6%s#R!\0"
+    .string "Something happened to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E94C0: @ 80E94C0
-    .string "#C6%s#R appears to be trapped!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be trapped!\0"
     .align 2, 0
 
 sUnknown_80E94E0: @ 80E94E0
-    .string "#C6%s#R is stuck in a cave!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is stuck in a cave!\0"
     .align 2, 0
 
 sUnknown_80E94FC: @ 80E94FC
-    .string "#C6%s#R appears to be helpless!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be helpless!\0"
     .align 2, 0
 
 sUnknown_80E951C: @ 80E951C
-    .string "#C6%s#R hasn~27t reemerged!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn{APOSTROPHE}t reemerged!\0"
     .align 2, 0
 
 sUnknown_80E9538: @ 80E9538
-    .string "#C6%s#R was attacked by assailants!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was attacked by assailants!\0"
     .align 2, 0
 
 sUnknown_80E955C: @ 80E955C
-    .string "It appears as if #C6%s#R can~27t escape!\0"
+    .string "It appears as if {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can{APOSTROPHE}t escape!\0"
     .align 2, 0
 
 sUnknown_80E9588: @ 80E9588
-    .string "#C6%s#R may have fainted already!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted already!\0"
     .align 2, 0
 
 sUnknown_80E95AC: @ 80E95AC
-    .string "#C6%s#R is about to faint!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is about to faint!\0"
     .align 2, 0
 
 sUnknown_80E95C8: @ 80E95C8
-    .string "#C6%s#R~27s been gone a long time!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{APOSTROPHE}s been gone a long time!\0"
     .align 2, 0
 
 sUnknown_80E95EC: @ 80E95EC
-    .string "#C6%s#R has been cornered!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been cornered!\0"
     .align 2, 0
 
 sUnknown_80E9608: @ 80E9608
-    .string "I~27m worried about #C6%s#R!\0"
+    .string "I{APOSTROPHE}m worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E9628: @ 80E9628
-    .string "#C6%s#R~27s whereabouts are unknown!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{APOSTROPHE}s whereabouts are unknown!\0"
     .align 2, 0
 
 sUnknown_80E9650: @ 80E9650
-    .string "#C6%s#R was paralyzed!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was paralyzed!\0"
     .align 2, 0
 
 sUnknown_80E9668: @ 80E9668
-    .string "Trouble may have found #C6%s#R!\0"
+    .string "Trouble may have found {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80E9688: @ 80E9688
-    .string "#C6%s#R appears to be freezing!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be freezing!\0"
     .align 2, 0
 
 sUnknown_80E96A8: @ 80E96A8
-    .string "#C6%s#R may be confused!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be confused!\0"
     .align 2, 0
 
 sUnknown_80E96C4: @ 80E96C4
-    .string "#C6%s#R is too scared to move!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is too scared to move!\0"
     .align 2, 0
 
 sUnknown_80E96E4: @ 80E96E4
-    .string "#C6%s#R went missing this morning!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} went missing this morning!\0"
     .align 2, 0
 
 sUnknown_80E9708: @ 80E9708
-    .string "#C6%s#R appears to be injured!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be injured!\0"
     .align 2, 0
 
 sUnknown_80E9728: @ 80E9728
-    .string "#C6%s#R may be facing danger!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be facing danger!\0"
     .align 2, 0
 
 sUnknown_80E9748: @ 80E9748
-    .string "#C6%s#R might be unable to return.\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} might be unable to return.\0"
     .align 2, 0
 
 sUnknown_80E976C: @ 80E976C
-    .string "#C6%s#R hasn~27t come back!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn{APOSTROPHE}t come back!\0"
     .align 2, 0
 
 sUnknown_80E9788: @ 80E9788
-    .string "#C6%s#R can~27t swim!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can{APOSTROPHE}t swim!\0"
     .align 2, 0
 
 sUnknown_80E97A0: @ 80E97A0
-    .string "#C6%s#R hasn~27t been heard from!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn{APOSTROPHE}t been heard from!\0"
     .align 2, 0
 
 sUnknown_80E97C4: @ 80E97C4
-    .string "#C6%s#R is still missing.\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is still missing.\0"
     .align 2, 0
 
 sUnknown_80E97E0: @ 80E97E0
-    .string "#C6%s#R may be endangered!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be endangered!\0"
     .align 2, 0
 
 sUnknown_80E97FC: @ 80E97FC
-    .string "#C6%s#R passed out from the heat!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} passed out from the heat!\0"
     .align 2, 0
 
 	.global gUnknown_80E9820
@@ -1823,11 +1823,11 @@ sUnknown_80E987C: @ 80E987C
     .align 2, 0
 
 sUnknown_80E9898: @ 80E9898
-    .string "I~27m pleading for help!\0"
+    .string "I{APOSTROPHE}m pleading for help!\0"
     .align 2, 0
 
 sUnknown_80E98B4: @ 80E98B4
-    .string "I don~27t care who it is! Please help!\0"
+    .string "I don{APOSTROPHE}t care who it is! Please help!\0"
     .align 2, 0
 
 sUnknown_80E98DC: @ 80E98DC
@@ -1872,7 +1872,7 @@ gUnknown_80E9920: @ 80E9920
 
 sUnknown_80E99C8: @ 80E99C8
     .string "Please look for Taillow!\n"
-    .string "My baby is very timid~2c so I~27m worried!\0"
+    .string "My baby is very timid{COMMA} so I{APOSTROPHE}m worried!\0"
     .align 2, 0
 
 sUnknown_80E9A0C: @ 80E9A0C
@@ -1887,7 +1887,7 @@ sUnknown_80E9A54: @ 80E9A54
 
 sUnknown_80E9A94: @ 80E9A94
     .string "Please find my Aron!\n"
-    .string "He~27s my only child! Please help!\0"
+    .string "He{APOSTROPHE}s my only child! Please help!\0"
     .align 2, 0
 
 sUnknown_80E9ACC: @ 80E9ACC
@@ -1901,13 +1901,13 @@ sUnknown_80E9B18: @ 80E9B18
     .align 2, 0
 
 sUnknown_80E9B58: @ 80E9B58
-    .string "My baby Magby is lost. I~27m worried sick.\n"
-    .string "She~27s a cheerful child who loves fire.\0"
+    .string "My baby Magby is lost. I{APOSTROPHE}m worried sick.\n"
+    .string "She{APOSTROPHE}s a cheerful child who loves fire.\0"
     .align 2, 0
 
 sUnknown_80E9BAC: @ 80E9BAC
-    .string "My son can be wild with thunderbolts~2c\n"
-    .string "but he~27s kindhearted. Please help!\0"
+    .string "My son can be wild with thunderbolts{COMMA}\n"
+    .string "but he{APOSTROPHE}s kindhearted. Please help!\0"
     .align 2, 0
 
 sUnknown_80E9BFC: @ 80E9BFC
@@ -1916,7 +1916,7 @@ sUnknown_80E9BFC: @ 80E9BFC
     .align 2, 0
 
 sUnknown_80E9C38: @ 80E9C38
-    .string "Please find Teddiursa! My baby~27s head\n"
+    .string "Please find Teddiursa! My baby{APOSTROPHE}s head\n"
     .string "has a cute crescent mark! Help!\0"
     .align 2, 0
 
@@ -1926,8 +1926,8 @@ sUnknown_80E9C80: @ 80E9C80
     .align 2, 0
 
 sUnknown_80E9CC4: @ 80E9CC4
-    .string "Help! Togepi~27s just a baby!\n"
-    .string "I~27m worried sick! Please help!\0"
+    .string "Help! Togepi{APOSTROPHE}s just a baby!\n"
+    .string "I{APOSTROPHE}m worried sick! Please help!\0"
     .align 2, 0
 
 sUnknown_80E9D04: @ 80E9D04
@@ -1937,16 +1937,16 @@ sUnknown_80E9D04: @ 80E9D04
 
 sUnknown_80E9D50: @ 80E9D50
     .string "Oddish disappeared from sight! She may be\n"
-    .string "buried somewhere! Someone~2c please help!\0"
+    .string "buried somewhere! Someone{COMMA} please help!\0"
     .align 2, 0
 
 sUnknown_80E9DA4: @ 80E9DA4
-    .string "Please rescue Zubat! He~27s so young he\n"
-    .string "can~27t even hang from cavern ceilings well!\0"
+    .string "Please rescue Zubat! He{APOSTROPHE}s so young he\n"
+    .string "can{APOSTROPHE}t even hang from cavern ceilings well!\0"
     .align 2, 0
 
 sUnknown_80E9DFC: @ 80E9DFC
-    .string "Please find Igglybuff! Oh~2c where did that\n"
+    .string "Please find Igglybuff! Oh{COMMA} where did that\n"
     .string "child roll off to?! Oh!\0"
     .align 2, 0
 
@@ -1956,23 +1956,23 @@ sUnknown_80E9E40: @ 80E9E40
     .align 2, 0
 
 sUnknown_80E9E80: @ 80E9E80
-    .string "Please rescue Pichu! He~27s a little cutie\n"
-    .string "who can~27t charge power well yet. Please!\0"
+    .string "Please rescue Pichu! He{APOSTROPHE}s a little cutie\n"
+    .string "who can{APOSTROPHE}t charge power well yet. Please!\0"
     .align 2, 0
 
 sUnknown_80E9ED8: @ 80E9ED8
     .string "Rattata is missing! My precious child!\n"
-    .string "Please~2c won~27t someone help me?\0"
+    .string "Please{COMMA} won{APOSTROPHE}t someone help me?\0"
     .align 2, 0
 
 sUnknown_80E9F24: @ 80E9F24
-    .string "Oh~2c my cute little Pidgey!\n"
-    .string "Please~2c someone help!\0"
+    .string "Oh{COMMA} my cute little Pidgey!\n"
+    .string "Please{COMMA} someone help!\0"
     .align 2, 0
 
 sUnknown_80E9F5C: @ 80E9F5C
     .string "Please rescue Weedle!\n"
-    .string "He~27s my son! Please!\0"
+    .string "He{APOSTROPHE}s my son! Please!\0"
     .align 2, 0
 
 	.global gUnknown_80E9F8C
@@ -2029,7 +2029,7 @@ gUnknown_80E9F8C: @ 80E9F8C
 
 sUnknown_80EA1A8: @ 80EA1A8
     .string "My little brother Pichu disappeared!\n"
-    .string "I~27m really worried! Someone~2c please help!\0"
+    .string "I{APOSTROPHE}m really worried! Someone{COMMA} please help!\0"
     .align 2, 0
 
 sUnknown_80EA1FC: @ 80EA1FC
@@ -2037,28 +2037,28 @@ sUnknown_80EA1FC: @ 80EA1FC
     .align 2, 0
 
 sUnknown_80EA214: @ 80EA214
-    .string "We~27ve been rivals with #C6%s#R for\n"
-    .string "generations. It can~27t suddenly end like this!\0"
+    .string "We{APOSTROPHE}ve been rivals with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} for\n"
+    .string "generations. It can{APOSTROPHE}t suddenly end like this!\0"
     .align 2, 0
 
 sUnknown_80EA26C: @ 80EA26C
-    .string "#C6%s#R has been a rival since my\n"
-    .string "ancestors~27 time. The rivalry can~27t end!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been a rival since my\n"
+    .string "ancestors{APOSTROPHE} time. The rivalry can{APOSTROPHE}t end!\0"
     .align 2, 0
 
 sUnknown_80EA2BC: @ 80EA2BC
-    .string "#C6%s#R can~27t leave without settling\n"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can{APOSTROPHE}t leave without settling\n"
     .string "which one of us is better. Please help!\0"
     .align 2, 0
 
 sUnknown_80EA30C: @ 80EA30C
-    .string "Please save #C6%s#R.\n"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\n"
     .string "We owe each other a game!\0"
     .align 2, 0
 
 sUnknown_80EA33C: @ 80EA33C
-    .string "Please rescue #C6%s#R! We detest\n"
-    .string "each other~2c but we need each other!\0"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We detest\n"
+    .string "each other{COMMA} but we need each other!\0"
     .align 2, 0
 
 sUnknown_80EA384: @ 80EA384
@@ -2066,33 +2066,33 @@ sUnknown_80EA384: @ 80EA384
     .align 2, 0
 
 sUnknown_80EA398: @ 80EA398
-    .string "I can~27t live without #C6%s#R!\n"
+    .string "I can{APOSTROPHE}t live without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
     .string "My heart is breaking! Please! Help!\0"
     .align 2, 0
 
 sUnknown_80EA3DC: @ 80EA3DC
-    .string "Please save #C6%s#R!\n"
-    .string "We~27re no good if we~27re not together!\0"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    .string "We{APOSTROPHE}re no good if we{APOSTROPHE}re not together!\0"
     .align 2, 0
 
 sUnknown_80EA41C: @ 80EA41C
-    .string "Please save my #C6%s#R! Now I\n"
-    .string "know what #C6%s#R means to me...\0"
+    .string "Please save my {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Now I\n"
+    .string "know what {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} means to me...\0"
     .align 2, 0
 
 sUnknown_80EA45C: @ 80EA45C
-    .string "Please rescue #C6%s#R! We\n"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We\n"
     .string "promised our futures together! Please!\0"
     .align 2, 0
 
 sUnknown_80EA4A0: @ 80EA4A0
-    .string "Please rescue my precious #C6%s#R!\n"
-    .string "We~27re in love! Please help!\0"
+    .string "Please rescue my precious {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    .string "We{APOSTROPHE}re in love! Please help!\0"
     .align 2, 0
 
 sUnknown_80EA4E4: @ 80EA4E4
-    .string "Please! Please rescue #C6%s#R!\n"
-    .string "We~27re madly in love!\0"
+    .string "Please! Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    .string "We{APOSTROPHE}re madly in love!\0"
     .align 2, 0
 
 sUnknown_80EA51C: @ 80EA51C
@@ -2100,42 +2100,42 @@ sUnknown_80EA51C: @ 80EA51C
     .align 2, 0
 
 sUnknown_80EA534: @ 80EA534
-    .string "We make each other happy--it~27s in our\n"
-    .string "nature. Please save #C6%s#R!\0"
+    .string "We make each other happy--it{APOSTROPHE}s in our\n"
+    .string "nature. Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\0"
     .align 2, 0
 
 sUnknown_80EA57C: @ 80EA57C
-    .string "Please rescue #C6%s#R! The beach\n"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! The beach\n"
     .string "feels empty without my usual friend...\0"
     .align 2, 0
 
 sUnknown_80EA5C4: @ 80EA5C4
-    .string "I feel lonely without #C6%s#R to pull\n"
+    .string "I feel lonely without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} to pull\n"
     .string "pranks and mess around with. Please help!\0"
     .align 2, 0
 
 sUnknown_80EA614: @ 80EA614
-    .string "Help #C6%s#R~2c please!\n"
+    .string "Help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{COMMA} please!\n"
     .string "We often took strolls on the wind!\0"
     .align 2, 0
 
 sUnknown_80EA650: @ 80EA650
-    .string "Please save #C6%s#R! We~27re both\n"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We{APOSTROPHE}re both\n"
     .string "old-timers who are longtime friends!\0"
     .align 2, 0
 
 sUnknown_80EA698: @ 80EA698
-    .string "Please save #C6%s#R. We~27ve been in\n"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}. We{APOSTROPHE}ve been in\n"
     .string "the delivery business for many years!\0"
     .align 2, 0
 
 sUnknown_80EA6E4: @ 80EA6E4
-    .string "I~27m sad without #C6%s#R~27s company.\n"
+    .string "I{APOSTROPHE}m sad without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{APOSTROPHE}s company.\n"
     .string "We showed flowers to each other...\0"
     .align 2, 0
 
 sUnknown_80EA730: @ 80EA730
-    .string "Without #C6%s#R~2c there~27s no one for\n"
+    .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{COMMA} there{APOSTROPHE}s no one for\n"
     .string "me to play with in the dark! Please help!\0"
     .align 2, 0
 
@@ -2145,37 +2145,37 @@ sUnknown_80EA784: @ 80EA784
     .align 2, 0
 
 sUnknown_80EA7A8: @ 80EA7A8
-    .string "Please save #C6%s#R. We~27re both alike\n"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}. We{APOSTROPHE}re both alike\n"
     .string "in being kind of vacant and unpredictable!\0"
     .align 2, 0
 
 sUnknown_80EA7FC: @ 80EA7FC
-    .string "Without #C6%s#R around~2c there~27s no\n"
+    .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} around{COMMA} there{APOSTROPHE}s no\n"
     .string "one to heckle! Please break my boredom!\0"
     .align 2, 0
 
 sUnknown_80EA84C: @ 80EA84C
-    .string "Please help #C6%s#R!\n"
+    .string "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
     .string "My tiny and round best friend!\0"
     .align 2, 0
 
 sUnknown_80EA880: @ 80EA880
     .string "We promised to show each other how\n"
-    .string "sharp our claws could be... Someone~2c help!\0"
+    .string "sharp our claws could be... Someone{COMMA} help!\0"
     .align 2, 0
 
 sUnknown_80EA8D0: @ 80EA8D0
-    .string "I lock horns with #C6%s#R for fun.\n"
+    .string "I lock horns with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} for fun.\n"
     .string "I terribly miss doing that...\0"
     .align 2, 0
 
 sUnknown_80EA914: @ 80EA914
-    .string "Please help #C6%s#R! We~27re both lazy~2c\n"
-    .string "so we~27re comfortable around each other!\0"
+    .string "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We{APOSTROPHE}re both lazy{COMMA}\n"
+    .string "so we{APOSTROPHE}re comfortable around each other!\0"
     .align 2, 0
 
 sUnknown_80EA968: @ 80EA968
-    .string "I want to help #C6%s#R!\n"
+    .string "I want to help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
     .string "We both have a thing for pincers!\0"
     .align 2, 0
 
@@ -2185,43 +2185,43 @@ sUnknown_80EA9A4: @ 80EA9A4
     .align 2, 0
 
 sUnknown_80EA9F8: @ 80EA9F8
-    .string "Someone save #C6%s#R--my friend\n"
+    .string "Someone save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}--my friend\n"
     .string "and rival at ball juggling!\0"
     .align 2, 0
 
 sUnknown_80EAA34: @ 80EAA34
-    .string "Please help #C6%s#R! Our cries are\n"
+    .string "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Our cries are\n"
     .string "identical! We can tell each other anything!\0"
     .align 2, 0
 
 sUnknown_80EAA84: @ 80EAA84
-    .string "I can~27t play the biting game without my pal\n"
-    .string "#C6%s#R! Please help!\0"
+    .string "I can{APOSTROPHE}t play the biting game without my pal\n"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Please help!\0"
     .align 2, 0
 
 sUnknown_80EAAC8: @ 80EAAC8
-    .string "#C6%s#R is really noisy.\n"
-    .string "But it~27s lonely without the racket... Sob...\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is really noisy.\n"
+    .string "But it{APOSTROPHE}s lonely without the racket... Sob...\0"
     .align 2, 0
 
 sUnknown_80EAB10: @ 80EAB10
-    .string "Without #C6%s#R~2c it~27s no fun playing\n"
-    .string "with toxic powders! Someone~2c please help!\0"
+    .string "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{COMMA} it{APOSTROPHE}s no fun playing\n"
+    .string "with toxic powders! Someone{COMMA} please help!\0"
     .align 2, 0
 
 sUnknown_80EAB68: @ 80EAB68
-    .string "Please rescue #C6%s#R!\n"
-    .string "We~27ve been friends since we were eggs!\0"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    .string "We{APOSTROPHE}ve been friends since we were eggs!\0"
     .align 2, 0
 
 sUnknown_80EABA8: @ 80EABA8
-    .string "Please help #C6%s#R--a good\n"
+    .string "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}--a good\n"
     .string "friend who shares my love of fire!\0"
     .align 2, 0
 
 sUnknown_80EABE8: @ 80EABE8
-    .string "#C6%s#R and I are of the same height.\n"
-    .string "We~27re lifelong friends! Please help!\0"
+    .string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} and I are of the same height.\n"
+    .string "We{APOSTROPHE}re lifelong friends! Please help!\0"
     .align 2, 0
 
 sUnknown_80EAC38: @ 80EAC38
@@ -2230,32 +2230,32 @@ sUnknown_80EAC38: @ 80EAC38
     .align 2, 0
 
 sUnknown_80EAC88: @ 80EAC88
-    .string "Help! I~27m friends with #C6%s#R\n"
+    .string "Help! I{APOSTROPHE}m friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\n"
     .string "because we both evolve fast! Please help!\0"
     .align 2, 0
 
 sUnknown_80EACD4: @ 80EACD4
-    .string "Help! #C6%s#R isn~27t much now~2c but\n"
+    .string "Help! {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} isn{APOSTROPHE}t much now{COMMA} but\n"
     .string "my friend is amazing after evolution!\0"
     .align 2, 0
 
 sUnknown_80EAD20: @ 80EAD20
-    .string "Please rescue #C6%s#R!\n"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
     .string "We always play together!\0"
     .align 2, 0
 
 sUnknown_80EAD50: @ 80EAD50
-    .string "Please rescue #C6%s#R.\n"
-    .string "I can~27t stand to see a sludge buddy hurt!\0"
+    .string "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\n"
+    .string "I can{APOSTROPHE}t stand to see a sludge buddy hurt!\0"
     .align 2, 0
 
 sUnknown_80EAD94: @ 80EAD94
-    .string "Please save my best friend #C6%s#R!\n"
-    .string "We~27re both bivalves!\0"
+    .string "Please save my best friend {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    .string "We{APOSTROPHE}re both bivalves!\0"
     .align 2, 0
 
 sUnknown_80EADD0: @ 80EADD0
-    .string "Please save #C6%s#R~2c\n"
+    .string "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}{COMMA}\n"
     .string "my drilling buddy!\0"
     .align 2, 0
 
@@ -2556,91 +2556,91 @@ gUnknown_80EB3F8: @ 80EB3F8
     .4byte sUnknown_80EB450
 
 sUnknown_80EB450: @ 80EB450
-    .string "Is it true about the #C4%s#R?\0"
+    .string "Is it true about the {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}?\0"
     .align 2, 0
 
 sUnknown_80EB470: @ 80EB470
-    .string "The item #C4%s#R is the in thing!\0"
+    .string "The item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} is the in thing!\0"
     .align 2, 0
 
 sUnknown_80EB494: @ 80EB494
-    .string "Wanted: my own #C4%s#R.\0"
+    .string "Wanted: my own {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80EB4AC: @ 80EB4AC
-    .string "I lost my #C4%s#R.\0"
+    .string "I lost my {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80EB4C0: @ 80EB4C0
-    .string "#C4%s#R wanted for nostalgia.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted for nostalgia.\0"
     .align 2, 0
 
 sUnknown_80EB4E0: @ 80EB4E0
-    .string "#C4%s#R wanted to test effects.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted to test effects.\0"
     .align 2, 0
 
 sUnknown_80EB500: @ 80EB500
-    .string "#C4%s#R~27s texture is comforting.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}{APOSTROPHE}s texture is comforting.\0"
     .align 2, 0
 
 sUnknown_80EB524: @ 80EB524
-    .string "#C4%s#R--it~27s my mom~27s favorite.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--it{APOSTROPHE}s my mom{APOSTROPHE}s favorite.\0"
     .align 2, 0
 
 sUnknown_80EB54C: @ 80EB54C
-    .string "#C4%s#R makes me strong.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} makes me strong.\0"
     .align 2, 0
 
 sUnknown_80EB568: @ 80EB568
-    .string "I can~27t sleep without it: #C4%s#R.\0"
+    .string "I can{APOSTROPHE}t sleep without it: {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80EB590: @ 80EB590
-    .string "#C4%s#R--I get scared without it!\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I get scared without it!\0"
     .align 2, 0
 
 sUnknown_80EB5B4: @ 80EB5B4
-    .string "Hard-to-find #C4%s#R sought.\0"
+    .string "Hard-to-find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} sought.\0"
     .align 2, 0
 
 sUnknown_80EB5D4: @ 80EB5D4
-    .string "I can~27t find one more #C4%s#R.\0"
+    .string "I can{APOSTROPHE}t find one more {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.\0"
     .align 2, 0
 
 sUnknown_80EB5F8: @ 80EB5F8
-    .string "Help this #C4%s#R collector!\0"
+    .string "Help this {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} collector!\0"
     .align 2, 0
 
 sUnknown_80EB618: @ 80EB618
-    .string "#C4%s#R! Seeking in quantity!\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! Seeking in quantity!\0"
     .align 2, 0
 
 sUnknown_80EB638: @ 80EB638
-    .string "#C4%s#R wanted as a charm.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted as a charm.\0"
     .align 2, 0
 
 sUnknown_80EB654: @ 80EB654
-    .string "#C4%s#R--I can~27t leave without it.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I can{APOSTROPHE}t leave without it.\0"
     .align 2, 0
 
 sUnknown_80EB67C: @ 80EB67C
-    .string "#C4%s#R--I~27d love to utilize one!\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I{APOSTROPHE}d love to utilize one!\0"
     .align 2, 0
 
 sUnknown_80EB6A0: @ 80EB6A0
-    .string "#C4%s#R wanted for exploration.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted for exploration.\0"
     .align 2, 0
 
 sUnknown_80EB6C0: @ 80EB6C0
-    .string "#C4%s#R wanted after long search.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted after long search.\0"
     .align 2, 0
 
 sUnknown_80EB6E4: @ 80EB6E4
-    .string "#C4%s#R--it~27s convenient to have.\0"
+    .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--it{APOSTROPHE}s convenient to have.\0"
     .align 2, 0
 
 sUnknown_80EB708: @ 80EB708
-    .string "Having one #C4%s#R is reassuring.\0"
+    .string "Having one {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} is reassuring.\0"
     .align 2, 0
 
 	.global gUnknown_80EB72C
@@ -2673,11 +2673,11 @@ sUnknown_80EB784: @ 80EB784
     .align 2, 0
 
 sUnknown_80EB7A8: @ 80EB7A8
-    .string "Please help! I~27ll make it worth your time!\0"
+    .string "Please help! I{APOSTROPHE}ll make it worth your time!\0"
     .align 2, 0
 
 sUnknown_80EB7D8: @ 80EB7D8
-    .string "Please help! I~27m offering a reward!\0"
+    .string "Please help! I{APOSTROPHE}m offering a reward!\0"
     .align 2, 0
 
 sUnknown_80EB800: @ 80EB800
@@ -2697,7 +2697,7 @@ sUnknown_80EB850: @ 80EB850
     .align 2, 0
 
 sUnknown_80EB86C: @ 80EB86C
-    .string "Please help! You~27re my only hope!\0"
+    .string "Please help! You{APOSTROPHE}re my only hope!\0"
     .align 2, 0
 
 sUnknown_80EB890: @ 80EB890
@@ -2705,7 +2705,7 @@ sUnknown_80EB890: @ 80EB890
     .align 2, 0
 
 sUnknown_80EB8AC: @ 80EB8AC
-    .string "Please help! I~27m counting on you!\0"
+    .string "Please help! I{APOSTROPHE}m counting on you!\0"
     .align 2, 0
 
 sUnknown_80EB8D0: @ 80EB8D0
@@ -2717,11 +2717,11 @@ sUnknown_80EB8E8: @ 80EB8E8
     .align 2, 0
 
 sUnknown_80EB90C: @ 80EB90C
-    .string "I~27m looking forward to your help!\0"
+    .string "I{APOSTROPHE}m looking forward to your help!\0"
     .align 2, 0
 
 sUnknown_80EB930: @ 80EB930
-    .string "Please! I~27m offering a generous reward!\0"
+    .string "Please! I{APOSTROPHE}m offering a generous reward!\0"
     .align 2, 0
 
 sUnknown_80EB95C: @ 80EB95C

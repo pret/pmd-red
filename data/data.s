@@ -103,239 +103,355 @@ gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
 
 	.global gUnknown_80B6D90
 gUnknown_80B6D90: @ 80B6D90
-        .byte 0x44, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B7144
         .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x3c, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B713C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x34, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B7134
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x2c, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B712C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x24, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B7124
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x1c, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B711C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x14, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B7114
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x0c, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B710C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x04, 0x71, 0x0b, 0x08
+        .4byte gUnknown_80B7104
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xfc, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70FC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xf4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70F4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xec, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70EC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xe4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70E4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xdc, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70DC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xd4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70D4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xcc, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70CC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xc4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70C4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xbc, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70BC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xb4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70B4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xac, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70AC
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0xa4, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B70A4
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x9c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B709C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x94, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7094
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x8c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B708C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x84, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7084
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x7c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B707C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x74, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7074
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x6c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B706C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x64, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7064
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x5c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B705C
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x54, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7054
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x4c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B704C
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x44, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7044
         .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x3c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B703C
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x34, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7034
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x2c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B702C
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x24, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7024
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x1c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B701C
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7014
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x0c, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B700C
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x04, 0x70, 0x0b, 0x08
+        .4byte gUnknown_80B7004
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xfc, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FFC
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xf4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FF4
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xec, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FEC
         .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0xe4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FE4
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xdc, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FDC
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0xd4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FD4
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xcc, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FCC
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xc4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FC4
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0xbc, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FBC
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xb4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FB4
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0xac, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FAC
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0xa4, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6FA4
         .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x9c, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F9C
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x94, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F94
         .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x8c, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F8C
         .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x84, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F84
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x78, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F78
         .byte 0xff, 0xff, 0xff, 0xff
-        .byte 0x68, 0x6f, 0x0b, 0x08
+        .4byte gUnknown_80B6F68
         .byte 0xff, 0xff, 0xff, 0xff
 
+        .global gUnknown_80B6F68
+        gUnknown_80B6F68:
         .string "DEBUG GROUND\0"
         .align 2,0
+        .global gUnknown_80B6F78
+        gUnknown_80B6F78:
         .string "NEXT DAY\0"
         .align 2,0
+        .global gUnknown_80B6F84
+        gUnknown_80B6F84:
         .string "R00E01A\0"
         .align 2,0
+        .global gUnknown_80B6F8C
+        gUnknown_80B6F8C:
         .string "S09E01C\0"
         .align 2,0
+        .global gUnknown_80B6F94
+        gUnknown_80B6F94:
         .string "S09E01B\0"
         .align 2,0
+        .global gUnknown_80B6F9C
+        gUnknown_80B6F9C:
         .string "S09E01A\0"
         .align 2,0
+        .global gUnknown_80B6FA4
+        gUnknown_80B6FA4:
         .string "S08E01B\0"
         .align 2,0
+        .global gUnknown_80B6FAC
+        gUnknown_80B6FAC:
         .string "S08E01A\0"
         .align 2,0
+        .global gUnknown_80B6FB4
+        gUnknown_80B6FB4:
         .string "S07E01B\0"
         .align 2,0
+        .global gUnknown_80B6FBC
+        gUnknown_80B6FBC:
         .string "S07E01A\0"
         .align 2,0
+        .global gUnknown_80B6FC4
+        gUnknown_80B6FC4:
         .string "S06E01C\0"
         .align 2,0
+        .global gUnknown_80B6FCC
+        gUnknown_80B6FCC:
         .string "S06E01B\0"
         .align 2,0
+        .global gUnknown_80B6FD4
+        gUnknown_80B6FD4:
         .string "S06E01A\0"
         .align 2,0
+        .global gUnknown_80B6FDC
+        gUnknown_80B6FDC:
         .string "S05E01B\0"
         .align 2,0
+        .global gUnknown_80B6FE4
+        gUnknown_80B6FE4:
         .string "S05E01A\0"
         .align 2,0
+        .global gUnknown_80B6FEC
+        gUnknown_80B6FEC:
         .string "S04E01F\0"
         .align 2,0
+        .global gUnknown_80B6FF4
+        gUnknown_80B6FF4:
         .string "S04E01E\0"
         .align 2,0
+        .global gUnknown_80B6FFC
+        gUnknown_80B6FFC:
         .string "S04E01D\0"
         .align 2,0
+        .global gUnknown_80B7004
+        gUnknown_80B7004:
         .string "S04E01C\0"
         .align 2,0
+        .global gUnknown_80B700C
+        gUnknown_80B700C:
         .string "S04E01B\0"
         .align 2,0
+        .global gUnknown_80B7014
+        gUnknown_80B7014:
         .string "S04E01A\0"
         .align 2,0
+        .global gUnknown_80B701C
+        gUnknown_80B701C:
         .string "S03E01B\0"
         .align 2,0
+        .global gUnknown_80B7024
+        gUnknown_80B7024:
         .string "S03E01A\0"
         .align 2,0
+        .global gUnknown_80B702C
+        gUnknown_80B702C:
         .string "S02E02B\0"
         .align 2,0
+        .global gUnknown_80B7034
+        gUnknown_80B7034:
         .string "S02E02A\0"
         .align 2,0
+        .global gUnknown_80B703C
+        gUnknown_80B703C:
         .string "S02E01A\0"
         .align 2,0
+        .global gUnknown_80B7044
+        gUnknown_80B7044:
         .string "S01E02B\0"
         .align 2,0
+        .global gUnknown_80B704C
+        gUnknown_80B704C:
         .string "S01E02A\0"
         .align 2,0
+        .global gUnknown_80B7054
+        gUnknown_80B7054:
         .string "S01E01B\0"
         .align 2,0
+        .global gUnknown_80B705C
+        gUnknown_80B705C:
         .string "S01E01A\0"
         .align 2,0
+        .global gUnknown_80B7064
+        gUnknown_80B7064:
         .string "S00E01A\0"
         .align 2,0
+        .global gUnknown_80B706C
+        gUnknown_80B706C:
         .string "M02END\0"
         .align 2,0
+        .global gUnknown_80B7074
+        gUnknown_80B7074:
         .string "M02E02H\0"
         .align 2,0
+        .global gUnknown_80B707C
+        gUnknown_80B707C:
         .string "M02E02G\0"
         .align 2,0
+        .global gUnknown_80B7084
+        gUnknown_80B7084:
         .string "M02E02F\0"
         .align 2,0
+        .global gUnknown_80B708C
+        gUnknown_80B708C:
         .string "M02E02E\0"
         .align 2,0
+        .global gUnknown_80B7094
+        gUnknown_80B7094:
         .string "M02E02D\0"
         .align 2,0
+        .global gUnknown_80B709C
+        gUnknown_80B709C:
         .string "M02E02C\0"
         .align 2,0
+        .global gUnknown_80B70A4
+        gUnknown_80B70A4:
         .string "M02E02B\0"
         .align 2,0
+        .global gUnknown_80B70AC
+        gUnknown_80B70AC:
         .string "M02E02A\0"
         .align 2,0
+        .global gUnknown_80B70B4
+        gUnknown_80B70B4:
         .string "M02E01A\0"
         .align 2,0
+        .global gUnknown_80B70BC
+        gUnknown_80B70BC:
         .string "M01END\0"
         .align 2,0
+        .global gUnknown_80B70C4
+        gUnknown_80B70C4:
         .string "M01E10A\0"
         .align 2,0
+        .global gUnknown_80B70CC
+        gUnknown_80B70CC:
         .string "M01E09A\0"
         .align 2,0
+        .global gUnknown_80B70D4
+        gUnknown_80B70D4:
         .string "M01E08B\0"
         .align 2,0
+        .global gUnknown_80B70DC
+        gUnknown_80B70DC:
         .string "M01E08A\0"
         .align 2,0
+        .global gUnknown_80B70E4
+        gUnknown_80B70E4:
         .string "M01E07B\0"
         .align 2,0
+        .global gUnknown_80B70EC
+        gUnknown_80B70EC:
         .string "M01E07A\0"
         .align 2,0
+        .global gUnknown_80B70F4
+        gUnknown_80B70F4:
         .string "M01E06A\0"
         .align 2,0
+        .global gUnknown_80B70FC
+        gUnknown_80B70FC:
         .string "M01E05B\0"
         .align 2,0
+        .global gUnknown_80B7104
+        gUnknown_80B7104:
         .string "M01E05A\0"
         .align 2,0
+        .global gUnknown_80B710C
+        gUnknown_80B710C:
         .string "M01E04B\0"
         .align 2,0
+        .global gUnknown_80B7114
+        gUnknown_80B7114:
         .string "M01E04A\0"
         .align 2,0
+        .global gUnknown_80B711C
+        gUnknown_80B711C:
         .string "M01E03A\0"
         .align 2,0
+        .global gUnknown_80B7124
+        gUnknown_80B7124:
         .string "M01E02B\0"
         .align 2,0
+        .global gUnknown_80B712C
+        gUnknown_80B712C:
         .string "M01E02A\0"
         .align 2,0
+        .global gUnknown_80B7134
+        gUnknown_80B7134:
         .string "M01E01A\0"
         .align 2,0
+        .global gUnknown_80B713C
+        gUnknown_80B713C:
         .string "M00E01A\0"
         .align 2,0
 
