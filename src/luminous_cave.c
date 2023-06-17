@@ -1,4 +1,3 @@
-#include "gba/defines.h"
 #include "global.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"

@@ -294,7 +294,7 @@ struct Entity
     /* 0x54 */ u16 spriteGlobalIndex;
     u8 fill56[0x64 - 0x56];
     u32 unk64;
-    u16 unk68;
+    s16 unk68;
     /* 0x6A */ u8 unk6A;
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 direction;

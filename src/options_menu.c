@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/input.h"
+#include "constants/colors.h"
 #include "input.h"
 #include "memory.h"
 #include "text.h"
@@ -662,17 +663,17 @@ void CreateOptionsMenu(void)
       case WINDOW_COLOR_BLUE:
         length = sub_8008ED0(gWindowBGBlueString);
         sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
-              y + 0xA,length,7);
+              y + 0xA,length,COLOR_WHITE_2);
         break;
       case WINDOW_COLOR_RED:
         length = sub_8008ED0(gWindowBGRedString);
         sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
-              y + 0xA,length,7);
+              y + 0xA,length,COLOR_WHITE_2);
         break;
       case WINDOW_COLOR_GREEN:
         length = sub_8008ED0(gWindowBGGreenString);
         sub_80078A4(gUnknown_203B260->unk44,gUnknown_203B260->optionsMenu->windowColor * 0x28 + 0x50,
-              y + 0xA,length,7);
+              y + 0xA,length,COLOR_WHITE_2);
         break;
   }
   sub_80073E0(gUnknown_203B260->unk44);

@@ -21,7 +21,7 @@ extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(struct WonderMail *);
 
-extern struct unkStruct_203B490 *gUnknown_203B490;
+EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
 extern struct unkStruct_203B490 gUnknown_2039448;
 
 void LoadMailInfo(void)

@@ -1,7 +1,7 @@
 #include "menu.h"
 
-void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6);
-void sub_8012C60(u32 x, u32 y, u32 param_3, u32 param_4, u32 param_5);
+void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 param_6);
+void sub_8012C60(u32 x, u32 y, u32 param_3, u32 color, u32 param_5);
 void sub_8012CAC(struct UnkTextStruct2 *param_1, const struct MenuItem *param_2);
 void sub_8012D08(struct UnkTextStruct2 *param_1, s32 param_2);
 void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2);

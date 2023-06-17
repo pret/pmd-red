@@ -829,9 +829,8 @@ gUnknown_20393C0: /* 20393C0 */
 gUnknown_2039448: /* 2039448 */
 	.space 0x330
 
-gUnknown_2039778: /* 2039778 */
-	.space 0xC8
-
+.include "src/code_8097670.o"
+.space 0x4
 .include "src/exclusive_pokemon.o"
 .space 0x4
 

@@ -11,7 +11,7 @@
 #include "text_util.h"
 #include "menu_input.h"
 
-extern struct DebugMenu *gUnknown_203B3EC;
+EWRAM_DATA_2 struct DebugMenu *gUnknown_203B3EC = {0};
 
 const struct UnkTextStruct2 gUnknown_80E7D40 =
 {

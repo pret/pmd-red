@@ -341,9 +341,7 @@ gUnknown_203B2FC: /* 203B2FC */
 gUnknown_203B300: /* 203B300 */
 	.space 0x4
 
-gUnknown_203B304: /* 203B304 */
-	.space 0x4
-
+.include "src/mailbox.o"
 .include "src/pelipper_board.o"
 
 gUnknown_203B30C: /* 203B30C */
@@ -371,10 +369,7 @@ gUnknown_203B328: /* 203B328 */
 	.space 0x4
 
 .include "src/post_office_guide.o"
-
-gUnknown_203B334: /* 203B334 */
-	.space 0x4
-
+.include "src/code_8031D70.o"
 .include "src/adventure_log.o"
 .include "src/friend_rescue.o"
 
@@ -398,14 +393,9 @@ gUnknown_203B364: /* 203B364 */
 	.space 0x4
 
 .include "src/rescue_password_menu.o"
-
 .include "src/load_screen.o"
-
-gUnknown_203B3E8: /* 203B3E8 */
-	.space 0x4
-
-gUnknown_203B3EC: /* 203B3EC */
-	.space 0x4
+.include "src/wonder_mail_main_menu.o"
+.include "src/debug_menu.o"
 
 gUnknown_203B3F0: /* 203B3F0 */
 	.space 0x4
@@ -484,27 +474,10 @@ gUnknown_203B474: /* 203B474 */
 	.space 0x8
 
     .include "src/play_time.o"
-
-gUnknown_203B480: /* 203B480 */
-	.space 0x4
-
-gUnknown_203B484: /* 203B484 */
-	.space 0x4
-
-gUnknown_203B488: /* 203B488 */
-	.space 0x4
-
-gUnknown_203B48C: /* 203B48C */
-	.space 0x4
-
-gUnknown_203B490: /* 203B490 */
-	.space 0x4
-
-gUnknown_203B494: /* 203B494 */
-	.space 0x4
-
+    .include "src/code_8094F88.o"
+    .include "src/code_80958E8.o"
+    .include "src/code_8097670.o"
     .include "src/exclusive_pokemon.o"
-
     .include "src/ground_main.o"
 	.space 0x2
 
@@ -520,5 +493,4 @@ gUnknown_203B4B0: /* 203B4B0 */
 gUnknown_203B4B4: /* 203B4B4 */
 	.space 0x4
 
-gUnknown_203B4B8: /* 203B4B8 */
-	.space 0x4
+.include "src/ground_link.o"

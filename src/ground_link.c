@@ -13,7 +13,7 @@ struct unkStruct_203B4B8
     u32 unk0;
 };
 
-extern struct unkStruct_203B4B8 gUnknown_203B4B8;
+EWRAM_DATA_2 struct unkStruct_203B4B8 gUnknown_203B4B8 = {0};
 extern struct DebugLocation gUnknown_8118798;
 extern struct unkStruct_80A77D0 *sub_80A77D0(s16 r0, struct DebugLocation *r1);
 

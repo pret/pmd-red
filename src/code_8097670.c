@@ -3,7 +3,7 @@
 
 struct unkStruct_203B494
 {
-    // size: 0xC8?
+    // size: 0xC4
     u32 unk0; // 32 bit bitfield, I think
     s32 numAdventures;
     s32 unk8;
@@ -18,8 +18,8 @@ struct unkStruct_203B494
     s32 unkC0;
 };
 
-extern struct unkStruct_203B494 *gUnknown_203B494;
-extern struct unkStruct_203B494 gUnknown_2039778;
+EWRAM_DATA_2 struct unkStruct_203B494 *gUnknown_203B494 = {0};
+EWRAM_DATA struct unkStruct_203B494 gUnknown_2039778 = {0};
 extern const u8 *gAdventureLogText[];
 s16 GetBaseSpeciesNoUnown(s16 index);
 

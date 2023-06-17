@@ -1,4 +1,3 @@
-#include "gba/defines.h"
 #include "global.h"
 #include "constants/dungeon.h"
 #include "item.h"

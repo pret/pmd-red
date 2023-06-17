@@ -620,7 +620,7 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
     }
 }
 
-void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
+void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 level)
 {
   u8 buffer[12];
   s32 id = _id;
@@ -636,11 +636,11 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
     DecompressATFile((char*)gLevelCurrentData, 0, file);
     CloseFile(file);
   }
-  a3 -= 1;
-  if ( a3 < 0 )
-    a3 = 0;
+  level -= 1;
+  if ( level < 0 )
+    level = 0;
 
-   *a1 = gLevelCurrentData[a3];
+   *a1 = gLevelCurrentData[level];
 }
 
 u8* DecompressMoveID(u8* a1, u16* moveID)

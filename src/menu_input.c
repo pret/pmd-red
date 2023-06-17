@@ -38,7 +38,7 @@ extern void xxx_call_draw_char(u32, u32, u32, u32, u32);
 
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6)
+void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 param_6)
 {
   s32 iVar1;
   u32 uVar2;
@@ -74,7 +74,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6)
       uVar2 = ReturnIntFromChar2(iVar1 + 0x30);
       iVar3 = GetCharacter(uVar2);
       total_x += iVar3->unk6;
-      xxx_call_draw_char(x - total_x,y,uVar2,param_5,param_6);
+      xxx_call_draw_char(x - total_x,y,uVar2,color,param_6);
       counter++;
       if (counter >= len) {
         break;
@@ -83,7 +83,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 param_5, u32 param_6)
   }
 }
 
-void sub_8012C60(u32 x,u32 y,u32 param_3,u32 param_4,u32 param_5)
+void sub_8012C60(u32 x,u32 y,u32 param_3,u32 color,u32 param_5)
 {
   u32 add_x;
   struct unkChar *iVar3;
@@ -97,7 +97,7 @@ void sub_8012C60(u32 x,u32 y,u32 param_3,u32 param_4,u32 param_5)
   else {
     add_x = 0;
   }
-  xxx_call_draw_char(x + add_x,y,uVar2,param_4,param_5);
+  xxx_call_draw_char(x + add_x,y,uVar2,color,param_5);
 }
 
 void sub_8012CAC(struct UnkTextStruct2 *param_1, const struct MenuItem *param_2)

@@ -118,7 +118,7 @@ struct unkStruct_203B3E8
     bool8 wonderMailAccepted;
 };
 
-EWRAM_DATA struct unkStruct_203B3E8 *gUnknown_203B3E8;
+EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
 
 extern u32 sub_80144A4(s32 *);
 extern u32 sub_8011C1C(void);
