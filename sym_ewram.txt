@@ -167,10 +167,7 @@ gUnknown_202B034: /* 202B034 */
 	.space 0x4
 
 gUnknown_202B038: /* 202B038 */
-	.space 0x2
-
-gUnknown_202B03A: /* 202B03A */
-	.space 0x7FE
+	.space 0x800
 
 gUnknown_202B838: /* 202B838 */
 	.space 0x800

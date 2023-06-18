@@ -1311,7 +1311,7 @@ _08040B4C:
 	bx r0
 	.align 2, 0
 _08040B58: .4byte 0x0000e0b8
-_08040B5C: .4byte gUnknown_202B03A
+_08040B5C: .4byte gUnknown_202B038 + 2
 	thumb_func_end sub_8040ABC
 
 	thumb_func_start sub_8040B60

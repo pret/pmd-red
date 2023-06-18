@@ -3,10 +3,7 @@
 extern u8 gUnknown_202D238[4];
 
 extern s32 gUnknown_202D23C;
-extern u16 gUnknown_202B038[2][32][32];
-extern u8 gUnknown_202B838[0x800];
-extern u8 gUnknown_202C038[0x800];
-extern u8 gUnknown_202C838[0x720];
+extern u16 gUnknown_202B038[4][32][32];
 
 struct unkStruct_202D240
 {
@@ -99,41 +96,34 @@ void sub_80098F8(u32 r0)
 void sub_8009908(void)
 {
   s32 index;
-  u32 iVar3;
   
-  index = 0;
-  if (index < gUnknown_202D23C) {
-    iVar3 = 0;
-    do {
-      CpuCopy(gUnknown_202D240[index].unk0,gUnknown_202D240[index].unk4,gUnknown_202D240[index].size);
-      iVar3 += sizeof(struct unkStruct_202D240);
-      index++;
-    } while (index < gUnknown_202D23C);
+  for(index = 0; index < gUnknown_202D23C; index++)
+  {
+      CpuCopy(gUnknown_202D240[index].unk0, gUnknown_202D240[index].unk4, gUnknown_202D240[index].size);
   }
   gUnknown_202D23C = 0;
   if (gUnknown_202D238[0] != 0) {
     gUnknown_202D238[0] = 0;
-    CpuCopy(BG_SCREEN_ADDR(12),gUnknown_202B038, BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(12), gUnknown_202B038[0], BG_SCREEN_SIZE);
   }
   if (gUnknown_202D238[1] != 0) {
     gUnknown_202D238[1] = 0;
-    CpuCopy(BG_SCREEN_ADDR(13),gUnknown_202B838, BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
   }
   if (gUnknown_202D238[2] != 0) {
     gUnknown_202D238[2] = 0;
-    CpuCopy(BG_SCREEN_ADDR(14),gUnknown_202C038, BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(14), gUnknown_202B038[2], BG_SCREEN_SIZE);
   }
   if (gUnknown_202D238[3] != 0) {
     gUnknown_202D238[3] = 0;
-    CpuCopy(BG_SCREEN_ADDR(15),gUnknown_202C838, BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(15), gUnknown_202B038[3], BG_SCREEN_SIZE);
   }
 }
 
 void sub_80099C0(void)
 {
-  CpuCopy(BG_SCREEN_ADDR(12),gUnknown_202B038, BG_SCREEN_SIZE);
-  // TODO shouldn't this be 202B838? It didn't match... might need raw address
-  CpuCopy(BG_SCREEN_ADDR(13),gUnknown_202B038 + 0x1, BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(12), gUnknown_202B038[0], BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
 }
 
 void sub_80099F0(u32 r0)

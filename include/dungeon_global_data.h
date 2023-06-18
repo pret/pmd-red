@@ -155,7 +155,7 @@ struct Dungeon
     /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
     u8 fillE27A[0xE8C0 - 0xE27A];
     /* 0xE8C0 */ struct Tile* tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    u8 fill104C0[0x104C4 - 0x104C0];
+    u8 unk104C0;
     /* 0x104C4 */ struct RoomData roomData[MAX_ROOM_COUNT];
     u8 fill10764[0x10844 - 0x10764];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
@@ -206,7 +206,9 @@ struct Dungeon
     /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     u8 fill18211[0x18217 - 0x18211];
     u8 unk18217;
-    u8 fill18218[0x1C578 - 0x18218];
+    u8 fill18218[0x1821A - 0x18218];
+    u8 unk1821A;
+    u8 fill1821B[0x1C578 - 0x1821B];
     u8 unk1C578;
     u8 fill1C579[0x1C57E - 0x1C579];
     u8 unk1C57E;

@@ -605,34 +605,4 @@ _0801F3F0: .4byte gUnknown_203B270
 _0801F3F4: .4byte gUnknown_80DC2A0
 	thumb_func_end sub_801F280
 
-	thumb_func_start sub_801F3F8
-sub_801F3F8:
-	push {r4,r5,lr}
-	movs r4, 0
-	ldr r0, _0801F424
-	ldr r0, [r0]
-	movs r5, 0x1
-	ldr r2, [r0, 0x10]
-	movs r3, 0x7
-_0801F406:
-	ldrb r1, [r2]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0801F412
-	adds r4, 0x1
-_0801F412:
-	adds r2, 0x8
-	subs r3, 0x1
-	cmp r3, 0
-	bge _0801F406
-	adds r0, r4, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0801F424: .4byte gUnknown_203B270
-	thumb_func_end sub_801F3F8
-
-
         .align 2,0

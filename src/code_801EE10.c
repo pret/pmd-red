@@ -3,26 +3,7 @@
 #include "text.h"
 #include "memory.h"
 #include "input.h"
-
-struct unkStruct_203B270
-{
-    // size 0xBC
-    u32 unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    /* 0x8 */ struct PokemonStruct *pokeStruct;
-    /* 0xC */ u8 isTeamLeader;
-    /* 0x10 */ struct Move *moves;
-    u8 fill14[0x1C - 0x14];
-    u32 unk1C;
-    u8 fill20[0x50 - 0x20];
-    u32 unk50;
-    u32 unk54;
-    struct UnkTextStruct2 unk58[4];
-    u32 unkB8;
-};
+#include "code_801EE10.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 extern struct UnkTextStruct2 gUnknown_80DC25C;
@@ -35,7 +16,7 @@ s32 sub_801F3F8(void);
 void sub_8013780(u32 *, u32);
 void sub_801F280(u32);
 
-u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u32 param_5,u32 param_6)
+u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_5,u32 param_6)
 {
   s32 iVar5;
   s32 iVar8;

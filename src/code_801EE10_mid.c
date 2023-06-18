@@ -5,6 +5,9 @@
 #include "input.h"
 #include "code_800D090.h"
 #include "moves.h"
+#include "code_801EE10.h"
+
+extern struct unkStruct_203B270 *gUnknown_203B270;
 
 struct unkStruct_203B274
 {
@@ -47,6 +50,23 @@ extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 u32 sub_801F7E4(void);
 void sub_801F690(void);
 void sub_801F700(void);
+
+s32 sub_801F3F8(void)
+{
+  struct Move *move;
+  int index;
+  s32 counter;
+
+  counter = 0;
+  for(index = 0; index < 8; index++)
+  {
+    move = &gUnknown_203B270->moves[index];
+    if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+      counter++;
+    }
+  }
+  return counter;
+}
 
 bool8 sub_801F428(s16 index, s32 param_2) {
 
