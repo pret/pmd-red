@@ -408,7 +408,7 @@ extern void sub_808692C();
 
 extern void sub_80868F4();
 extern void sub_8086910();
-extern u32 sub_8085EC8(u32, u32, u32, u32 *, u32);
+extern u32 sub_8085EC8(u32, u32, u32, struct Position *, u32);
 extern void sub_808680C();
 extern void sub_808682C();
 extern void sub_8086854();
@@ -487,8 +487,8 @@ extern s32 sub_8052C68(u32, u8 *, u32 *, u32);
 extern void sub_80861A8(void);
 extern void sub_8045C28(struct Item *, u8 , u8 *);
 extern void sub_808BD38(void);
-extern void sub_808BB3C(s16 *);
-extern void sub_8046860(struct Entity *, s32 *, struct Item *, u32);
+extern void sub_808BB3C(struct Position *);
+extern void sub_8046860(struct Entity *, struct Position *, struct Item *, u32);
 extern u32 sub_803D73C(u32);
 
 void ZapdosReFightDialogue(void)
@@ -562,20 +562,20 @@ void ZapdosDropInEffect(struct Entity *zapdosEntity)
   sub_803E708(0x1e,0x46);
 }
 
-void ZapdosScreenFlash(s32 param_1)
+void ZapdosScreenFlash(s32 numFlashes)
 {
   s32 iVar1;
   s32 iVar2;
 
   PlaySoundEffect(0x1f6);
-  if (2 < param_1) {
+  if (2 < numFlashes) {
     for(iVar2 = 250; iVar2 > 199; iVar2 -= 10)
     {
       SetDungeonBGColorRGB(iVar2,iVar2,iVar2 / 2,1,1);
       sub_803E46C(0x46);
     }
   }
-  if (1 < param_1) {
+  if (1 < numFlashes) {
     for(iVar2 = 250; iVar2 > 199; iVar2 -= 10)
     {
       SetDungeonBGColorRGB(iVar2,iVar2,iVar2 / 2,1,1);
@@ -593,8 +593,6 @@ void ZapdosScreenFlash(s32 param_1)
   }
   sub_8085EB0();
 }
-
-
 
 void sub_80877E8(void)
 {
@@ -642,8 +640,6 @@ void sub_8087848(void)
   sub_803F878(XPos, YPos + -0x1000);
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MOLTRES);
 }
-
-
 
 void sub_80878F4(char param_1, s32 param_2)
 {
@@ -2101,15 +2097,15 @@ void sub_808974C(void)
 void sub_8089788(struct Entity *param_1, u8 param_2, s32 param_3)
 {
   struct Entity *iVar2;
-  s32 iVar3;
+  s32 index;
   u32 unk1;
 
   unk1 = 0;
 
   if ((((param_3 * 0x1000000) + 0xe6000000U) >> 0x18) < 2) {
-    for(iVar3 = 0; iVar3 < DUNGEON_MAX_WILD_POKEMON; iVar3++)
+    for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
-      iVar2 = gDungeon->wildPokemon[iVar3];
+      iVar2 = gDungeon->wildPokemon[index];
       if ((EntityExists(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->info->clientType == param_2)) {
         return;
       }
@@ -3047,14 +3043,15 @@ void LatiosPreFightDialogue(void)
   struct Entity * LeaderEntity;
   struct Entity * LatiosEntity;
   struct Position32 local_18;
-  u32 local_19;
+  struct Position local_19;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
 
   local_18.x = LatiosEntity->pixelPos.x;
   local_18.y = LatiosEntity->pixelPos.y + (0x80 << 6);
-  local_19 = 0x7000fc;
+  local_19.y = 0x70;
+  local_19.x = 0xFC;
   sub_8085EC8(0x1bd,0,0,&local_19,1);
 
   sub_803E708(0x1e,70);
@@ -3694,15 +3691,12 @@ void JirachiWish(void)
   s32 counter;
   u32 direction;
   s32 index;
-  struct Item money [9];
+  struct Item auStack152 [9];
   struct Item itemStack [9];
   struct Item strengthItems [9];
-  s32 local_2c;
-  s32 local_28;
-  s32 local_24;
-  s32 temp;
-  s32 temp2;
-  s32 temp3;
+  struct Position pos1;
+  struct Position pos2;
+  struct Position pos3;
 
   JirachiEntity = GetEntityFromClientType(0x1a);
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
@@ -3749,25 +3743,20 @@ void JirachiWish(void)
       DisplayDungeonDialogue(&gUnknown_810581C);
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
-
+      
       for(counter = 0; counter < 6; counter = r8)
       {
         r8 = counter + 1;
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&money[index], 0x69, 0);
+          sub_8045C28(&auStack152[index], 0x69, 0);
         }
-        temp = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
-        local_2c &= 0xffff0000;
-        local_2c |= temp;
-
-        temp = ((u16)JirachiEntity->pos.y + DungeonRandInt(3) + -1) * 0x10000;
-        local_2c &= 0xffff;
-        local_2c |= temp;
-        if ((GetTileSafe((s16)local_2c, local_2c >> 16)->terrainType & 3) != 0) {
+        pos1.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
+        pos1.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
+        if ((GetTileSafe(pos1.x, pos1.y)->terrainType & 3) != 0) {
           PlaySoundEffect(0x14c);
-          sub_808BB3C((s16 *)&local_2c);
-          sub_8046860(JirachiEntity,&local_2c,money,9);
+          sub_808BB3C(&pos1);
+          sub_8046860(JirachiEntity,&pos1,auStack152,9);
         }
       }
       JirachiEntity->info->unk15D  = 0;
@@ -3787,17 +3776,13 @@ void JirachiWish(void)
         {
           sub_8045C28(&itemStack[index], sub_803D73C(0),0);
         }
-        temp2 = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
-        local_28 &= 0xffff0000;
-        local_28 |= temp2;
-
-        temp2 = ((u16)JirachiEntity->pos.y + DungeonRandInt(3) + -1) * 0x10000;
-        local_28 &= 0xffff;
-        local_28 |= temp2;
-        if ((GetTileSafe((s16)local_28, local_28 >> 16)->terrainType & 3) != 0) {
+        pos2.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
+        pos2.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
+          
+        if ((GetTileSafe(pos2.x, pos2.y)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
-          sub_808BB3C((s16 *)&local_28);
-          sub_8046860(JirachiEntity,&local_28,itemStack,9);
+          sub_808BB3C(&pos2);
+          sub_8046860(JirachiEntity,&pos2,itemStack,9);
         }
       }
       JirachiEntity->info->unk15D = 0;
@@ -3836,25 +3821,22 @@ void JirachiWish(void)
         DisplayDungeonDialogue(&gUnknown_8105BA8);
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
-
+    
         for(counter = 0; counter < 5; counter++)
         {
-
+    
           for(index = 0; index < 4; index++)
           {
             sub_8045C28(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
           }
-          temp3 = (u16)(((((u16)JirachiEntity->pos.x + DungeonRandInt(3)) - 1) << 16) >> 16);
-          local_24 &= 0xffff0000;
-          local_24 |= temp3;
 
-          temp3 = ((u16)JirachiEntity->pos.y + DungeonRandInt(3) + -1) * 0x10000;
-          local_24 &= 0xffff;
-          local_24 |= temp3;
-          if ((GetTileSafe((s16)local_24, local_24 >> 16)->terrainType & 3) != 0) {
+          pos3.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
+          pos3.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
+            
+          if ((GetTileSafe(pos3.x, pos3.y)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
-            sub_808BB3C((s16 *)&local_24);
-            sub_8046860(JirachiEntity,&local_24,strengthItems,4);
+            sub_808BB3C(&pos3);
+            sub_8046860(JirachiEntity,&pos3,strengthItems,4);
           }
         }
         JirachiEntity->info->unk15D  = 0;
@@ -3931,37 +3913,27 @@ void JirachiWishGrantFlash(void)
   sub_8085EB0();
 }
 
-void sub_808BB3C(s16 *param_1)
+void sub_808BB3C(struct Position *param_1)
 {
 #ifndef NONMATCHING
   register s32 iVar1 asm("r0");
 #else
   s32 iVar1;
 #endif
-  s32 uVar2;
-  u32 local_8;
+  struct Position local_8;
   
-  iVar1 = param_1[0] * 0x1800 + 0xc00;
+  iVar1 = param_1->x * 0x1800 + 0xc00;
+  if (iVar1 < 0) {
+    iVar1 += 0xff;
+  }
+  local_8.x = iVar1 >> 8;
+
+  iVar1 = param_1->y * 0x1800 + 0x1000;
   if (iVar1 < 0) {
     iVar1 += 0xff;
   }
 
-  iVar1 <<= 8;
-  iVar1 = (u16)(iVar1 >> 16);
-
-  uVar2 = (local_8 & 0xffff0000) | iVar1;
-  local_8 = uVar2;
-
-  iVar1 = param_1[1] * 0x1800 + 0x1000;
-  if (iVar1 < 0) {
-    iVar1 += 0xff;
-  }
-
-  iVar1 <<= 8;
-  iVar1 = (u16)(iVar1 >> 0x10);
-  iVar1 <<= 0x10;
-
-  local_8 = (iVar1) | (uVar2 & 0x0000ffff);
+  local_8.y = iVar1 >> 8;
   sub_8085EC8(100,0,0,&local_8,0);
 }
 
