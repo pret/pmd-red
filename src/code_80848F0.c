@@ -357,7 +357,6 @@ void sub_80848F0(void)
 
 void DisplayPreFightDialogue(void)
 {
-
   switch(gDungeon->unk3A0D) {
       case 0:
         break;
@@ -545,10 +544,9 @@ void DisplayPreFightDialogue(void)
   sub_8097FF8();
 }
 
-void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
+void sub_8084E00(struct Entity *entity, u8 param_2, u8 param_3)
 {
-
-  if (param_2 != '\0') {
+  if (param_2 != 0) {
     switch(gDungeon->unk3A0D) {
         case 0:
             break;
@@ -587,7 +585,7 @@ void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
             break;
         case 0x1a:
         case 0x1b:
-            sub_8089788(param_1,param_2,gDungeon->unk3A0D);
+            sub_8089788(entity,param_2,gDungeon->unk3A0D);
             break;
         case 0x1d:
         case 0x1e:
@@ -619,13 +617,13 @@ void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
             sub_808AAF0(param_2,gDungeon->unk3A0D);
             break;
         case 0x2e:
-            sub_808AE54(param_2,gDungeon->unk3A0D,&param_1->pos.x);
+            sub_808AE54(param_2,gDungeon->unk3A0D,&entity->pos.x);
             break;
         case 0x2f:
-            sub_808AEC8(param_2,gDungeon->unk3A0D,&param_1->pos.x);
+            sub_808AEC8(param_2,gDungeon->unk3A0D,&entity->pos.x);
             break;
         case 0x30:
-            sub_808AF3C(param_2,gDungeon->unk3A0D,&param_1->pos.x);
+            sub_808AF3C(param_2,gDungeon->unk3A0D,&entity->pos.x);
             break;
         case 0x31:
         case 0x32:
@@ -644,7 +642,7 @@ void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
             nullsub_100(param_2,gDungeon->unk3A0D,param_3);
             break;
         case 0x37:
-            sub_808C948(param_1,gDungeon->unk3A0D);
+            sub_808C948(entity,gDungeon->unk3A0D);
             break;
         case 0x38:
         case 0x39:
@@ -653,7 +651,7 @@ void sub_8084E00(struct Entity *param_1,char param_2,char param_3)
         case 0x3C:
             break;
     }
-    if ((param_3 == '\0') && (gDungeon->unk2 != '\0')) {
+    if ((param_3 == 0) && (gDungeon->unk2 != 0)) {
       DungeonStartNewBGM(999);
     }
   }

@@ -417,7 +417,7 @@ extern void sub_8086838(u32, u32, u32);
 extern void sub_80426C8(u32, u32);
 extern void sub_807EAA0(u32, u32);
 
-extern void sub_808BCE4(void);
+extern void CreateJirachiWishWarpTile(void);
 extern u8 sub_8098100(u32);
 extern void sub_8086794();
 
@@ -447,7 +447,6 @@ extern u8 sub_8086AE4(u32);
 
 
 extern void sub_8072008(struct Entity *, struct Entity *, s16, u32, u32);
-extern struct Entity *GetPartnerEntity();
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
 extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_8085374();
@@ -486,7 +485,7 @@ void ZapdosScreenFlash(int param_1);
 extern s32 sub_8052C68(u32, u8 *, u32 *, u32);
 extern void sub_80861A8(void);
 extern void sub_8045C28(struct Item *, u8 , u8 *);
-extern void sub_808BD38(void);
+extern void EnableJirachiWishWarpTile(void);
 extern void sub_808BB3C(struct Position *);
 extern void sub_8046860(struct Entity *, struct Position *, struct Item *, u32);
 extern u32 sub_803D73C(u32);
@@ -641,9 +640,9 @@ void sub_8087848(void)
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MOLTRES);
 }
 
-void sub_80878F4(char param_1, s32 param_2)
+void sub_80878F4(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xF6000000U) >> 0x18 < 3) && (param_1 == 0x9)) {
+  if ((param_2 == 0xA || param_2 == 0xB || param_2 == 0xC) && (param_1 == 0x9)) {
     sub_8097FA8(0x7);
     gDungeon->unk2 = 1;
   }
@@ -1058,11 +1057,9 @@ void sub_8087FF8(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ARTICUNO);
 }
 
-
-
-void sub_8088088(char param_1, s32 param_2)
+void sub_8088088(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xF3000000U) >> 0x18 < 3) && (param_1 == 0xD)) {
+  if ((param_2 == 0xD || param_2 == 0xE || param_2 == 0xF) && (param_1 == 0xD)) {
     sub_8097FA8(0x9);
     gDungeon->unk2 = 1;
   }
@@ -1372,9 +1369,9 @@ void sub_808875C(void)
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
 }
 
-void sub_8088818(char param_1, s32 param_2)
+void sub_8088818(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xEE000000U) >> 0x18 < 3) && (param_1 == 0xE)) {
+  if ((param_2 == 0x12 || param_2 == 0x13 || param_2 == 0x14) && (param_1 == 0xE)) {
     sub_8097FA8(0xC);
     gDungeon->unk2 = 1;
   }
@@ -1920,9 +1917,9 @@ void sub_8089328(void)
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_RAYQUAZA);
 }
 
-void sub_80893B4(char param_1, s32 param_2)
+void sub_80893B4(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xE9000000U) >> 0x18 < 3) && (param_1 == 0xF)) {
+  if ((param_2 == 0x17 || param_2 == 0x18 || param_2 == 0x19) && (param_1 == 0xF)) {
     sub_8097FA8(0xF);
     gDungeon->unk2 = 1;
   }
@@ -2094,19 +2091,19 @@ void sub_808974C(void)
   sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y + -3);
 }
 
-void sub_8089788(struct Entity *param_1, u8 param_2, s32 param_3)
+void sub_8089788(struct Entity *entity, u8 param_2, u8 param_3)
 {
-  struct Entity *iVar2;
+  struct Entity *monEntity;
   s32 index;
   u32 unk1;
 
   unk1 = 0;
 
-  if ((((param_3 * 0x1000000) + 0xe6000000U) >> 0x18) < 2) {
+  if (param_3 == 0x1A || param_3 == 0x1B) {
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
-      iVar2 = gDungeon->wildPokemon[index];
-      if ((EntityExists(iVar2) != '\0') && (iVar2 != param_1) && (iVar2->info->clientType == param_2)) {
+      monEntity = gDungeon->wildPokemon[index];
+      if ((EntityExists(monEntity)) && (monEntity != entity) && (monEntity->info->clientType == param_2)) {
         return;
       }
     }
@@ -2231,9 +2228,9 @@ void sub_8089978(void)
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MEWTWO);
 }
 
-void sub_8089A00(char param_1, s32 param_2)
+void sub_8089A00(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xE3000000U) >> 0x18 < 3) && (param_1 == 0x11)) {
+  if ((param_2 == 0x1d || param_2 == 0x1e || param_2 == 0x1f) && (param_1 == 0x11)) {
     sub_8097FA8(0x13);
     gDungeon->unk2 = 1;
   }
@@ -2377,15 +2374,13 @@ void sub_8089C90(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ENTEI);
 }
 
-
-void sub_8089CFC(char param_1,int param_2)
+void sub_8089CFC(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xE0000000U) >> 0x18 < 3) && (param_1 == 0x12)) {
+  if ((param_2 == 0x20 || param_2 == 0x21 || param_2 == 0x22) && (param_1 == 0x12)) {
     sub_8097FA8(0x15);
     gDungeon->unk2 = 1;
   }
 }
-
 
 void EnteiPreFightDialogue(void)
 {
@@ -2524,14 +2519,13 @@ void sub_8089F8C(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_RAIKOU);
 }
 
-void sub_8089FF0(char param_1,int param_2)
+void sub_8089FF0(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xdD000000U) >> 0x18 < 3) && (param_1 == 0x13)) {
+  if ((param_2 == 0x23 || param_2 == 0x24 || param_2 == 0x25) && (param_1 == 0x13)) {
     sub_8097FA8(0x17);
     gDungeon->unk2 = 1;
   }
 }
-
 
 void RaikouPreFightDialogue(void)
 {
@@ -2680,9 +2674,9 @@ void sub_808A308(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SUICUNE);
 }
 
-void sub_808A36C(char param_1,int param_2)
+void sub_808A36C(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xda000000U) >> 0x18 < 3) && (param_1 == 0x14)) {
+  if ((param_2 == 0x26 || param_2 == 0x27 || param_2 == 0x28) && (param_1 == 0x14)) {
     sub_8097FA8(0x19);
     gDungeon->unk2 = 1;
   }
@@ -2844,14 +2838,13 @@ void sub_808A668(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_HO_OH);
 }
 
-void sub_808A6E8(char param_1, s32 param_2)
+void sub_808A6E8(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xd7000000U) >> 0x18 < 2) && (param_1 == 0x15)) {
+  if ((param_2 == 0x29 || param_2 == 0x2A) && (param_1 == 0x15)) {
     sub_8097FA8(0x1A);
     gDungeon->unk2 = 1;
   }
 }
-
 
 void sub_808A718(void)
 {
@@ -3030,10 +3023,10 @@ void sub_808AA94(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LATIOS);
 }
 
-void sub_808AAF0(char param_1, s32 param_2)
+void sub_808AAF0(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xd5000000U) >> 0x18 < 3) && (param_1 == 0x16)) {
-    sub_8097FA8(0x1c);
+  if ((param_2 == 0x2B || param_2 == 0x2C || param_2 == 0x2D) && (param_1 == 0x16)) {
+    sub_8097FA8(0x1C);
     gDungeon->unk2 = 1;
   }
 }
@@ -3501,7 +3494,7 @@ void sub_808B2F4(void)
   LeaderEntity = xxx_call_GetLeader();
   JirachiEntity = GetEntityFromClientType(0x1a);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
-  sub_808BCE4();
+  CreateJirachiWishWarpTile();
   sub_8049ED4();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -3529,7 +3522,7 @@ void sub_808B35C(void)
   else {
     SetFacingDirection(JirachiEntity, DIRECTION_SOUTH);
     sub_8086A3C(JirachiEntity);
-    sub_808BCE4();
+    CreateJirachiWishWarpTile();
     sub_8049ED4();
 
   }
@@ -3537,94 +3530,30 @@ void sub_808B35C(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
 }
 
-#ifdef NONMATCHING
-void sub_808B3E4(u8 param_1,u8 param_2,u8 param_3)
+void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 {
   u8 uVar1;
-
-  // TODO R1 and R2 shifts are switched ordering but matches
-  if (((((param_2 * 0x1000000) + 0xcf000000U) >> 0x18) < 2) && (param_1 == 0x1A)){
-    sub_8097FA8(0x1e);
-    if (param_3 != 0) {
-      gDungeon->unk2 = 1;
+  if ((param_2 == 0x31 || param_2 == 0x32) && (param_1 == 0x1A)) {
+    sub_8097FA8(0x1E);
+    if(param_3 != 0)
+    {
+        gDungeon->unk2 = 1;
     }
     else {
-      uVar1 = gDungeon->unk1356C;
-      if (sub_80860A8(0x36) != 0) {
-           JirachiWish();
-      }
-      else {
-          sub_808B50C();
-      }
-      gDungeon->unk1356C = uVar1;
-      sub_8040A84();
+        uVar1 = gDungeon->unk1356C;
+        if(sub_80860A8(0x36) != 0)
+        {
+            JirachiWish();
+        }
+        else
+        {
+            sub_808B50C();
+        }
+        gDungeon->unk1356C = uVar1;
+        sub_8040A84();
     }
   }
 }
-#else
-NAKED
-void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
-{
-    asm_unified(
-	"\tpush {r4,lr}\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tlsls r1, 24\n"
-	"\tlsls r2, 24\n"
-	"\tlsrs r4, r2, 24\n"
-	"\tmovs r2, 0xCF\n"
-	"\tlsls r2, 24\n"
-	"\tadds r1, r2\n"
-	"\tlsrs r1, 24\n"
-	"\tcmp r1, 0x1\n"
-	"\tbhi _0808B44E\n"
-	"\tcmp r0, 0x1A\n"
-	"\tbne _0808B44E\n"
-	"\tmovs r0, 0x1E\n"
-	"\tbl sub_8097FA8\n"
-	"\tcmp r4, 0\n"
-	"\tbeq _0808B418\n"
-	"\tldr r0, _0808B414\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1, 0x2]\n"
-	"\tb _0808B44E\n"
-	"\t.align 2, 0\n"
-"_0808B414: .4byte gDungeon\n"
-"_0808B418:\n"
-	"\tldr r0, _0808B434\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r1, _0808B438\n"
-	"\tadds r0, r1\n"
-	"\tldrb r4, [r0]\n"
-	"\tmovs r0, 0x36\n"
-	"\tbl sub_80860A8\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0808B43C\n"
-	"\tbl JirachiWish\n"
-	"\tb _0808B440\n"
-	"\t.align 2, 0\n"
-"_0808B434: .4byte gDungeon\n"
-"_0808B438: .4byte 0x0001356c\n"
-"_0808B43C:\n"
-	"\tbl sub_808B50C\n"
-"_0808B440:\n"
-	"\tldr r0, _0808B454\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r2, _0808B458\n"
-	"\tadds r0, r2\n"
-	"\tstrb r4, [r0]\n"
-	"\tbl sub_8040A84\n"
-"_0808B44E:\n"
-	"\tpop {r4}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0808B454: .4byte gDungeon\n"
-"_0808B458: .4byte 0x0001356c");
-}
-#endif
 
 void JirachiPreFightDialogue(void)
 {
@@ -3749,7 +3678,7 @@ void JirachiWish(void)
         r8 = counter + 1;
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&auStack152[index], 0x69, 0);
+          sub_8045C28(&auStack152[index], ITEM_POKE, 0);
         }
         pos1.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos1.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
@@ -3867,7 +3796,7 @@ void JirachiWish(void)
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gUnknown_810593C);
   sub_803E708(10,0x46);
-  sub_808BD38();
+  EnableJirachiWishWarpTile();
 }
 
 void JirachiReFightDialogue(void)
@@ -3999,30 +3928,31 @@ void JirachiWishGrantDialogue(struct Entity *jirachiEntity)
   JirachiWishGrantFlash();
 }
 
-void sub_808BCE4(void)
+// Warp Tile is created but not enabled until the Wish is done with EnableJirachiWishWarpTile
+void CreateJirachiWishWarpTile(void)
 {
-  struct Tile *puVar1;
+  struct Tile *tile;
 
-  puVar1 = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
-  puVar1->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  puVar1->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
-  puVar1->terrainType &= ~TERRAIN_TYPE_STAIRS;
+  tile = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
+  tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+  tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
   sub_8049884();
   sub_8049B8C();
   sub_8049ED4();
   sub_8040A84();
 }
 
-void sub_808BD38(void)
+void EnableJirachiWishWarpTile(void)
 {
-  struct Tile *puVar1;
+  struct Tile *tile;
 
-  puVar1 = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
-  puVar1->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  puVar1->terrainType |= TERRAIN_TYPE_NORMAL;
-  puVar1->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;
-  puVar1->terrainType |= TERRAIN_TYPE_STAIRS;
-  puVar1->unk8 = 1;
+  tile = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
+  tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  tile->terrainType |= TERRAIN_TYPE_NORMAL;
+  tile->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;
+  tile->terrainType |= TERRAIN_TYPE_STAIRS;
+  tile->unk8 = 1;
   sub_8049884();
   sub_8049B8C();
   sub_8049ED4();
@@ -4444,8 +4374,7 @@ void sub_808C5C0(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_CELEBI);
 }
 
-// Dummy Celebi Fight Dialogue??
-void nullsub_100(u32 r0, u32 r1, u32 r2)
+void nullsub_100(u8 r0, u8 r1, u32 r2)
 {
 }
 
@@ -4878,17 +4807,17 @@ void sub_808C938(void)
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(struct Entity *param_1, u8 param_2)
+void sub_808C948(struct Entity *entity, u8 param_2)
 {
   bool8 flag;
   s32 index;
-  struct Entity *iVar2;
+  struct Entity *pokeEntity;
 
   if (param_2 == 0x37) {
     flag = FALSE;
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++){
-      iVar2 = gDungeon->wildPokemon[index];
-      if ((iVar2 != param_1) && (EntityExists(iVar2) != 0)) {
+      pokeEntity = gDungeon->wildPokemon[index];
+      if ((pokeEntity != entity) && (EntityExists(pokeEntity))) {
         flag = TRUE;
         break;
       }

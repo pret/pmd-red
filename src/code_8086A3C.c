@@ -10,15 +10,12 @@
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
 
-extern struct Entity *GetPartnerEntity();
-extern struct Entity *xxx_call_GetLeader(void);
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
 extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
 extern u8 HasRecruitedMon(u32);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
-extern void sub_80854D4();
 extern void sub_80855E4(void *);
 extern void sub_8068FE0(struct Entity *, u32, u32);
 extern void sub_8097FA8(u32);
@@ -306,90 +303,35 @@ void sub_8086F00(void)
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0xA0, MONSTER_CATERPIE);
 }
 
-// https://decomp.me/scratch/bLnx3  (94.46 %)
-#ifdef NONMATCHING
-void sub_8086F54(u8 param_1, s32 param_2)
+// From @jiangzhengwenjz:
+// Matches this way for -O2 but can match w/o this hack on -O1
+// https://decomp.me/scratch/BTqWo 
+void sub_8086F54(u8 param_1, u8 param_2)
 {
   struct Entity *entity;
   s32 index;
-  u32 unk1;
-  register u32 param_1_u8 asm("r6")  = param_1;
-    
-  unk1 = 0;
+  u32 unk1 = 0;
+
   
-  if ((((param_2 * 0x1000000) + 0xfc000000U) >> 0x18) < 2) {
+  if (param_2 == 4 || param_2 == 5) {
+    void *labels[2];
+    labels[0] = labels[1] = &&label;
+
     for(index = 0; index < 0x10; index++)
     {
       entity = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity)) && (entity->info->clientType != param_1_u8)) {
+      if ((EntityExists(entity)) && (entity->info->clientType != param_1)) {
         return;
       }
     }
-
     if(!unk1)
     {
-        sub_8097FA8(3);
-        gDungeon->unk2 = 1;
+      sub_8097FA8(3);
+    label:
+      gDungeon->unk2 = 1;
     }
   }
 }
-#else
-NAKED
-void sub_8086F54(u8 param_1, s32 param_2)
-{
-    asm_unified(
-	"\tpush {r4-r6,lr}\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tlsls r1, 24\n"
-	"\tmovs r0, 0xFC\n"
-	"\tlsls r0, 24\n"
-	"\tadds r1, r0\n"
-	"\tlsrs r1, 24\n"
-	"\tcmp r1, 0x1\n"
-	"\tbhi _08086FA8\n"
-	"\tmovs r5, 0\n"
-"_08086F6A:\n"
-	"\tldr r0, _08086FB0\n"
-	"\tldr r0, [r0]\n"
-	"\tlsls r1, r5, 2\n"
-	"\tldr r2, _08086FB4\n"
-	"\tadds r0, r2\n"
-	"\tadds r0, r1\n"
-	"\tldr r4, [r0]\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl EntityExists\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08086F8E\n"
-	"\tldr r0, [r4, 0x70]\n"
-	"\tadds r0, 0xA4\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, r6\n"
-	"\tbne _08086FA8\n"
-"_08086F8E:\n"
-	"\tadds r5, 0x1\n"
-	"\tcmp r5, 0xF\n"
-	"\tble _08086F6A\n"
-	"\tmovs r0, 0\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08086FA8\n"
-	"\tmovs r0, 0x3\n"
-	"\tbl sub_8097FA8\n"
-	"\tldr r0, _08086FB0\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1, 0x2]\n"
-"_08086FA8:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08086FB0: .4byte gDungeon\n"
-"_08086FB4: .4byte 0x0001358c");
-}
-#endif
-
 
 void TeamMeaniesPreFightDialogue(void)
 {
@@ -536,11 +478,10 @@ void sub_808729C(void)
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ZAPDOS);
 }
 
-void sub_8087334(char param_1, s32 param_2)
+void sub_8087334(u8 param_1, u8 param_2)
 {
-  if ((((param_2 * 0x1000000) + 0xF9000000U) >> 0x18 < 3) && (param_1 == 8)) {
+  if ((param_2 == 7 || param_2 == 8 || param_2 == 9) && (param_1 == 8)) {
     sub_8097FA8(5);
     gDungeon->unk2 = 1;
   }
 }
-

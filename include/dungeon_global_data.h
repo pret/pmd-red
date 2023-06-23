@@ -136,9 +136,11 @@ struct Dungeon
     u8 fill3A10[0x3A14 - 0x3A12];
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A18 */ struct Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    u8 fillE218[0xE23C - 0xE218];
-    s16 unkE23C;
-    s16 unkE23E;
+    u8 fillE218[0xE220 - 0xE218];
+    struct Position unkE220[4];
+    u8 unkE230[0xE23C - 0xE230];
+    s16 unkE23C; // x coord of some kind
+    s16 unkE23E; // y coord of some kind
     u8 fillE240[0xE264 - 0xE240];
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265; // Uses the weather constants in weather.h

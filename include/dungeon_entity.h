@@ -346,6 +346,7 @@ enum ClientType
 {
     CLIENT_TYPE_NONE = 0,
     CLIENT_TYPE_CLIENT = 1, // Used for mission clients that need rescuing.
+    CLIENT_TYPE_PARTNER,
     CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
 };
 
