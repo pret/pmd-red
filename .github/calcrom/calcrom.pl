@@ -69,7 +69,7 @@ my $partial_doc_cmd = "grep '_[0-38-9][0-9a-fA-F]\\{5,6\\}'";
 
 my $count_cmd = "wc -l";
 
-my $incbin_cmd = "find \"\$(dirname $elffname)\" \\( -name '*.s' -o -name '*.inc' \\) -exec cat {} ';' | grep -oE '^\\s*\\.incbin\\s*\"[^\"]+\"\s*,\\s*(0x)?[0-9a-fA-F]+\\s*,\\s*(0x)?[0-9a-fA-F]+' -";
+my $incbin_cmd = "find \"\$(dirname $elffname)\" \\( -name '*.s' -o -name '*.inc' \\) -exec cat {} ';' | grep -oE '^\\s*\\.incbin\\s*\"[^\"]+\"\s*,\\s*(0x)?[0-9a-fA-F]+\\s*,\\s*(0x)?[0-9a-fA-F]+' - | awk '{\$1=\$1;print}' | sort | uniq";
 
 # It sucks that we have to run this three times, but I can't figure out how to get
 # stdin working for subcommands in perl while still having a timeout. It's decently
