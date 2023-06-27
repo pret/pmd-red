@@ -3,10 +3,10 @@
 #include "input.h"
 
 
-extern void nullsub_34(struct UnkInputStructSub *r0);
+extern void nullsub_34(struct MenuInputStructSub *r0);
 u32 sub_8012AE8(void);
 
-u32 sub_8012A64(struct UnkInputStructSub *r0, u32 r1)
+u32 sub_8012A64(struct MenuInputStructSub *r0, u32 r1)
 {
     if(r0 == NULL)
     {
@@ -32,7 +32,7 @@ u32 sub_8012A64(struct UnkInputStructSub *r0, u32 r1)
     }
 }
 
-u32 GetKeyPress(struct UnkInputStruct *r0)
+u32 GetKeyPress(struct MenuInputStruct *r0)
 {
     if(r0 != NULL)
     {

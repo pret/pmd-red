@@ -14,7 +14,7 @@ struct unkStruct_203B2CC
 {
     // size: 0xD4;
     u8 receivedNewsletters[NUM_POKEMON_NEWS];
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk6C;
     struct UnkTextStruct2 *unk70;
     struct UnkTextStruct2 unk74[4];
@@ -41,7 +41,7 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk38;
     struct UnkTextStruct2 *unk3C;
     struct UnkTextStruct2 unk40[4];
@@ -158,9 +158,9 @@ extern void CreatePKMNNewsMenu(void);
 extern void sub_8013818(void *, u32, u32, u32);
 extern u8 sub_80138B8(void *, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(struct UnkInputStruct *);
-extern void sub_8013660(struct UnkInputStruct *);
-extern void AddMenuCursorSprite(struct UnkInputStruct *);
+extern s32 GetKeyPress(struct MenuInputStruct *);
+extern void sub_8013660(struct MenuInputStruct *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern void sub_802BCC4(void);
 extern void sub_802BB14(u32);
 extern void sub_801317C(u32 *);
@@ -168,7 +168,7 @@ extern u8 HasNoMailinMailbox(void);
 extern void sub_802BF30(void);
 extern void CreateMailMenu(void);
 extern s32 CountEmptyMailSlots(void);
-extern void sub_8013848(struct UnkInputStruct*, s32, u32, u32);
+extern void sub_8013848(struct MenuInputStruct*, s32, u32, u32);
 void sub_802BB28(void);
 extern void sub_802BB98(void);
 extern void sub_802BC08(void);
@@ -184,8 +184,8 @@ extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
-extern s32 sub_8013800(struct UnkInputStruct *, s32);
-extern void sub_8013984(struct UnkInputStruct *);
+extern s32 sub_8013800(struct MenuInputStruct *, s32);
+extern void sub_8013984(struct MenuInputStruct *);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 

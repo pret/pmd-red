@@ -15,7 +15,7 @@ struct unkStruct_203B31C
 {
     // Size: 0xD0
     s16 unk0[NUM_DUNGEON_MAZE];
-    struct UnkInputStruct unk30;
+    struct MenuInputStruct unk30;
     u32 unk64;
     struct UnkTextStruct2 *unk68;
     struct UnkTextStruct2 unk6C[4];
@@ -66,7 +66,7 @@ extern bool8 IsMazeCompleted(s32);
 extern s32 sub_8030668(void);
 extern void sub_8013984(void *);
 extern void sub_80304C8();
-extern void AddMenuCursorSprite(struct UnkInputStruct *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern void DrawDojoCourseList(void);
 
 extern u8 sub_80138B8(void *, u32);

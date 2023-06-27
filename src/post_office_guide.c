@@ -29,7 +29,7 @@ EWRAM_DATA_2 struct PostOfficeHelper *gPostOfficeHelper = {0};
 struct unkStruct_203B330
 {
     // size: 0x78
-    struct UnkInputStructSub input;
+    struct MenuInputStructSub input;
     u8 unkC;
     u8 dungeonIndex;
     u8 fillE[2];
@@ -178,7 +178,7 @@ extern u8 gAvailablePokemonNames[];
 
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-extern u32 sub_8012A64(struct UnkInputStructSub *, u32);
+extern u32 sub_8012A64(struct MenuInputStructSub *, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8031A84();
 extern void DisplayMissionObjectives();

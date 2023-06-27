@@ -17,26 +17,26 @@ extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(struct UnkInputStruct *);
-extern u32 sub_80137A8(struct UnkInputStruct *);
-void MoveMenuCursorUp(struct UnkInputStruct *);
-void MoveMenuCursorDown(struct UnkInputStruct *);
+extern s32 GetKeyPress(struct MenuInputStruct *);
+extern u32 sub_80137A8(struct MenuInputStruct *);
+void MoveMenuCursorUp(struct MenuInputStruct *);
+void MoveMenuCursorDown(struct MenuInputStruct *);
 extern void sub_80073B8(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern s32 sub_8013800(struct UnkInputStruct *, s32);
+extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern void sub_80073E0(u32);
-extern void sub_8013660(struct UnkInputStruct *);
-void AddMenuCursorSprite(struct UnkInputStruct *);
-void AddMenuCursorSprite_(struct UnkInputStruct *, u32);
+extern void sub_8013660(struct MenuInputStruct *);
+void AddMenuCursorSprite(struct MenuInputStruct *);
+void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
-extern void sub_8013134(struct UnkInputStruct *, u32, u32);
-extern void sub_80137B0(struct UnkInputStruct *, u32);
+extern void sub_8013134(struct MenuInputStruct *, u32, u32);
+extern void sub_80137B0(struct MenuInputStruct *, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
 struct unkChar *GetCharacter(u32);
 extern void xxx_call_draw_char(u32, u32, u32, u32, u32);
-extern void sub_801317C(struct UnkInputStructSub *);
+extern void sub_801317C(struct MenuInputStructSub *);
 extern void nullsub_7(u16 *);
 
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
@@ -461,7 +461,7 @@ bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
     return FALSE;
 }
 
-void sub_8013134(struct UnkInputStruct *param_1, u32 menuItemCounter, u32 index) {
+void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u32 index) {
 
     struct UnkTextStruct1 *temp;
 
@@ -491,7 +491,7 @@ void sub_8013134(struct UnkInputStruct *param_1, u32 menuItemCounter, u32 index)
     sub_801317C(&param_1->unk28);
 }
 
-void sub_801317C(struct UnkInputStructSub *param_1)
+void sub_801317C(struct MenuInputStructSub *param_1)
 {
     param_1->unk0 = 0;
     param_1->a_button = 0;
@@ -504,7 +504,7 @@ void sub_801317C(struct UnkInputStructSub *param_1)
     ResetUnusedInputStruct();
 }
 
-void AddMenuCursorSprite(struct UnkInputStruct *param_1)
+void AddMenuCursorSprite(struct MenuInputStruct *param_1)
 {
     AddMenuCursorSprite_(param_1, 0);
 }

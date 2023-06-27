@@ -12,21 +12,21 @@
 
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
-extern void sub_8013848(struct UnkInputStruct *, s32, u32, u32);
+extern void sub_8013848(struct MenuInputStruct *, s32, u32, u32);
 extern s32 CountPelipperBoardSlots(void);
 extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013660(struct UnkInputStruct *);
-extern s32 GetKeyPress(struct UnkInputStruct *);
-extern bool8 sub_80138B8(struct UnkInputStruct *, u32);
-extern void AddMenuCursorSprite(struct UnkInputStruct *);
+extern void sub_8013660(struct MenuInputStruct *);
+extern s32 GetKeyPress(struct MenuInputStruct *);
+extern bool8 sub_80138B8(struct MenuInputStruct *, u32);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 
-extern s32 sub_8013800(struct UnkInputStruct *, s32);
+extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
@@ -39,7 +39,7 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk38;
     struct UnkTextStruct2 *unk3C;
     struct UnkTextStruct2 unk40[4];
@@ -52,7 +52,7 @@ struct unkStruct_203B2E0
 {
     // size: 0xA8
     u8 unk0[0x8];
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     s32 unk3C;
     struct UnkTextStruct2 *unk40;
     struct UnkTextStruct2 unk44[4];

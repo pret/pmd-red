@@ -8,7 +8,7 @@
 struct AdventureLog
 {
     // size: 0xA0
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -42,10 +42,10 @@ const u8 fill_adven[] = "pksdir0";
 void sub_8032084();
 void DisplayAdventureLog();
 extern void sub_8013818(void *, u32, u32, u32);
-extern bool8 sub_8013938(struct UnkInputStruct *);
-extern void sub_8013660(struct UnkInputStruct *);
+extern bool8 sub_8013938(struct MenuInputStruct *);
+extern void sub_8013660(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
-extern u32 GetKeyPress(struct UnkInputStruct *);
+extern u32 GetKeyPress(struct MenuInputStruct *);
 extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();

@@ -154,17 +154,17 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
-extern s32 sub_8013800(void *, u32);
+extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
-extern void sub_8013984(void *);
-extern void AddMenuCursorSprite(void *);
-extern u8 sub_80138B8(void *, u32);
-extern void sub_8013660(void *);
-extern u32 GetKeyPress(void *);
+extern void sub_8013984(struct MenuInputStruct *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
+extern u8 sub_80138B8(struct MenuInputStruct *, u32);
+extern void sub_8013660(struct MenuInputStruct *);
+extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013848(void *, s32, u32, u32);
+extern void sub_8013848(struct MenuInputStruct *, s32, u32, u32);
 
 extern void sub_802DF24(void);
 extern void SetJobListState(u32);
@@ -375,7 +375,7 @@ bool8 sub_802CDD4(u32 r0)
     sub_8012D34(gUnknown_203B2F4->unk38, 4);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2F4->unk3C, 1, 1);
-    sub_8013848(gUnknown_203B2F4, 5, 4, r0);
+    sub_8013848(&gUnknown_203B2F4->input, 5, 4, r0);
     sub_802CF5C();
     sub_802CFD0();
     return TRUE;
@@ -385,12 +385,12 @@ u32 sub_802CE5C(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(gUnknown_203B2F4);
+        sub_8013660(&gUnknown_203B2F4->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(gUnknown_203B2F4))
+        switch(GetKeyPress(&gUnknown_203B2F4->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -398,7 +398,7 @@ u32 sub_802CE5C(u8 r0)
             case INPUT_A_BUTTON:
                 return 3;
             default:
-                if(sub_80138B8(gUnknown_203B2F4, 1) != 0)
+                if(sub_80138B8(&gUnknown_203B2F4->input, 1) != 0)
                 {
                     sub_802CF5C();
                     sub_802CFD0();
@@ -414,18 +414,18 @@ u32 sub_802CE5C(u8 r0)
 
 u8 sub_802CEBC(void)
 {
-    return (gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C) + gUnknown_203B2F4->unk18;
+    return (gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C) + gUnknown_203B2F4->input.menuIndex;
 }
 
 void sub_802CED8(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2F4->unk3C, 0, 0);
-    sub_8013984(gUnknown_203B2F4);
+    sub_8013984(&gUnknown_203B2F4->input);
     sub_802CF5C();
     sub_802CFD0();
     if(r0)
-        AddMenuCursorSprite(gUnknown_203B2F4);
+        AddMenuCursorSprite(&gUnknown_203B2F4->input);
 }
 
 void sub_802CF14(void)
@@ -510,17 +510,17 @@ void sub_802CFD0(void)
   
   sub_8008C54(gUnknown_203B2F4->unk34);
   sub_80073B8(gUnknown_203B2F4->unk34);
-  r5 = r4 = gUnknown_203B2F4->unk1E * 8 + 10;
+  r5 = r4 = gUnknown_203B2F4->input.unk1E * 8 + 10;
   xxx_call_draw_string(r5,0,gUnknown_80DFDBC,gUnknown_203B2F4->unk34,0); // RESCUE EVENT
   r4 -= 6;
   r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
-  sub_8012BC4(r5,0,gUnknown_203B2F4->unk1E + 1,2,7,gUnknown_203B2F4->unk34);
+  sub_8012BC4(r5,0,gUnknown_203B2F4->input.unk1E + 1,2,7,gUnknown_203B2F4->unk34);
 
-  for(r5 = 0; r5 < gUnknown_203B2F4->unk1A; r5++)
+  for(r5 = 0; r5 < gUnknown_203B2F4->input.unk1A; r5++)
   {
-        iVar1 = sub_803B344(gUnknown_203B2F4->unk1E * gUnknown_203B2F4->unk1C + r5);
+        iVar1 = sub_803B344(gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C + r5);
         local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.y = sub_8013800(gUnknown_203B2F4, r5);
+        local.y = sub_8013800(&gUnknown_203B2F4->input, r5);
         sub_803B35C(&iVar1->mail,&local);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;

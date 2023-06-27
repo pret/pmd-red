@@ -17,7 +17,7 @@ struct MenuStruct
     const u32 *menuTextColorArray;
     u16 *unkC;
     /* 0x10 */ s32 index;
-    /* 0x14 */ struct UnkInputStruct input;
+    /* 0x14 */ struct MenuInputStruct input;
     /* 0x48 */ s32 menuAction;
     bool8 unk4C;
     bool8 unk4D;

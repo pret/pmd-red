@@ -14,7 +14,7 @@ struct Hints
 struct unkStruct_203B268
 {
     // size: 0xA0
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -24,7 +24,7 @@ struct unkStruct_203B268
 struct unkStruct_203B264
 {
     // size: 0x9C
-    struct UnkInputStruct input;
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -57,9 +57,9 @@ extern void sub_8008C54(u32);
 void DrawHintSelectionMenu(void);
 void sub_801E594(void);
 void sub_8013984(void *);
-void AddMenuCursorSprite(struct UnkInputStruct *);
-extern u8 sub_80138B8(struct UnkInputStruct *, u32);
-extern void sub_8013660(struct UnkInputStruct *);
+void AddMenuCursorSprite(struct MenuInputStruct *);
+extern u8 sub_80138B8(struct MenuInputStruct *, u32);
+extern void sub_8013660(struct MenuInputStruct *);
 extern void sub_8012D08(struct UnkTextStruct2 *, u32);
 
 u32 sub_801E3F0(u32 r0)

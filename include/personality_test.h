@@ -49,7 +49,7 @@ struct PersonalityStruct_203B404
     /* 0x0 */ s16 StarterID;
     /* 0x2 */ s16 PartnerArray[NUM_PARTNERS];
     u8 unk16;
-    /* 0x18 */ struct UnkInputStruct *unk18; // something menu related (seems to be some struct)
+    /* 0x18 */ struct MenuInputStruct *unk18; // something menu related (seems to be some struct)
     u8 padding[0x30 - 0x1C];
     /* 0x30 */ s16 currPartnerSelection;
     s16 unk32;

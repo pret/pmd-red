@@ -42,7 +42,7 @@ struct unkStruct_203B224
     // size: 0xF4
     u32 unk0;
     u32 unk4[INVENTORY_SIZE];
-    /* 0x54 */ struct UnkInputStruct input;
+    /* 0x54 */ struct MenuInputStruct input;
     u32 unk88;
     struct UnkTextStruct2 *unk8C;
     struct UnkTextStruct2 unk90[4];

@@ -48,7 +48,7 @@ struct UnusedInputStruct
     /* 0x2A..0x2B - padding */
 };
 
-struct UnkInputStructSub
+struct MenuInputStructSub
 {
     u8 unk0;
     /* 0x1 */ u8 a_button;
@@ -60,7 +60,7 @@ struct UnkInputStructSub
     s16 unkA;
 };
 
-struct UnkInputStruct
+struct MenuInputStruct
 {
     s32 unk0;
     /* 0x4 */ u16 unk4;
@@ -77,10 +77,10 @@ struct UnkInputStruct
     /* 0x1C */ s16 unk1C;
     /* 0x1E */ s16 unk1E;
     /* 0x20 */ u16 unk20;
-    /* 0x20 */ u16 unk22;
+    /* 0x22 */ u16 unk22;
     /* 0x24 */ u16 unk24;
                u16 unk26;
-    /* 0x28 */ struct UnkInputStructSub unk28;
+    /* 0x28 */ struct MenuInputStructSub unk28;
 };
 
 
