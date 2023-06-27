@@ -41,17 +41,8 @@ struct unkStruct_203B224
 {
     // size: 0xF4
     u32 unk0;
-
     u32 unk4[INVENTORY_SIZE];
-    u32 unk54;
-    u8 fill58[0x6C - 0x58];
-    s16 unk6C;
-    s16 unk6E;
-    s16 unk70;
-    s16 unk72;
-    u16 unk74;
-    u16 unk76;
-    u8 fill78[0x88 - 0x78];
+    /* 0x54 */ struct UnkInputStruct input;
     u32 unk88;
     struct UnkTextStruct2 *unk8C;
     struct UnkTextStruct2 unk90[4];

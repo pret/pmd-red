@@ -1049,10 +1049,10 @@ u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 p
     sub_8099690(1);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B224->unk90,1,1);
-    sub_8013818(&gUnknown_203B224->unk54,GetNumberOfFilledInventorySlots(),param_4,param_2);
-    gUnknown_203B224->unk6C = gUnknown_203B228;
-    gUnknown_203B224->unk72 = gUnknown_203B22A;
-    sub_8013984((u8 *)&gUnknown_203B224->unk54);
+    sub_8013818(&gUnknown_203B224->input,GetNumberOfFilledInventorySlots(),param_4,param_2);
+    gUnknown_203B224->input.menuIndex = gUnknown_203B228;
+    gUnknown_203B224->input.unk1E = gUnknown_203B22A;
+    sub_8013984((u8 *)&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
     return 1;
@@ -1065,10 +1065,10 @@ u32 sub_801A6E8(u8 param_1)
   struct Item item;
 
   if (param_1 == 0) {
-    sub_8013660(&gUnknown_203B224->unk54);
+    sub_8013660(&gUnknown_203B224->input);
     return 0;
   }
-  switch(GetKeyPress(&gUnknown_203B224->unk54)) {
+  switch(GetKeyPress(&gUnknown_203B224->input)) {
     case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
@@ -1110,7 +1110,7 @@ u32 sub_801A6E8(u8 param_1)
         if ((gUnknown_203B224->unk4[index] != 0) || (sub_801ADA0(index) != 0)) {
             PlayMenuSoundEffect(6);
             gUnknown_203B224->unk4[index] ^= 1;
-            sub_80138B8(&gUnknown_203B224->unk54,0);
+            sub_80138B8(&gUnknown_203B224->input,0);
             sub_801A9E0();
             return 1;
         }
@@ -1128,7 +1128,7 @@ u32 sub_801A6E8(u8 param_1)
         // NOTE: fallthrough needed here
     default:
 _0801A87C:
-        if (sub_80138B8(&gUnknown_203B224->unk54,1) != '\0') {
+        if (sub_80138B8(&gUnknown_203B224->input,1) != '\0') {
             sub_801A998();
             sub_801A9E0();
             return 1;
@@ -1142,7 +1142,7 @@ _0801A87C:
 
 s32 sub_801A8AC(void)
 {
-    return (gUnknown_203B224->unk72 * gUnknown_203B224->unk70) + gUnknown_203B224->unk6C;
+    return (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + gUnknown_203B224->input.menuIndex;
 }
 
 void sub_801A8D0(u8 r0)
@@ -1151,20 +1151,20 @@ void sub_801A8D0(u8 r0)
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B224->unk90, 0, 0);
     FillInventoryGaps();
-    gUnknown_203B224->unk76 = GetNumberOfFilledInventorySlots();
-    sub_8013984((u8 *)&gUnknown_203B224->unk54);
+    gUnknown_203B224->input.unk22 = GetNumberOfFilledInventorySlots();
+    sub_8013984((u8 *)&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
     if(r0)
-        AddMenuCursorSprite((u8 *)&gUnknown_203B224->unk54);
+        AddMenuCursorSprite((u8 *)&gUnknown_203B224->input);
 }
 
 void sub_801A928(void)
 {
     if(gUnknown_203B224 != NULL)
     {
-        gUnknown_203B228 = gUnknown_203B224->unk6C;
-        gUnknown_203B22A = gUnknown_203B224->unk72;
+        gUnknown_203B228 = gUnknown_203B224->input.menuIndex;
+        gUnknown_203B22A = gUnknown_203B224->input.unk1E;
         gUnknown_203B224->unk90[gUnknown_203B224->unk88] = gUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
@@ -1176,8 +1176,8 @@ void sub_801A928(void)
 
 void sub_801A998(void)
 {
-    gUnknown_203B224->unkF0[0] = gUnknown_203B224->unk74;
-    gUnknown_203B224->unkF0[1] = gUnknown_203B224->unk72;
+    gUnknown_203B224->unkF0[0] = gUnknown_203B224->input.unk20;
+    gUnknown_203B224->unkF0[1] = gUnknown_203B224->input.unk1E;
     gUnknown_203B224->unkF0[2] = 0xB;
     gUnknown_203B224->unkF0[3] = 0;
     ResetUnusedInputStruct();
@@ -1201,21 +1201,21 @@ void sub_801A9E0(void)
 
     sub_8008C54(gUnknown_203B224->unk88);
     sub_80073B8(gUnknown_203B224->unk88);
-    x = gUnknown_203B224->unk72 * 8 + 10;
-    if (gUnknown_203B224->unk72 == 0) {
+    x = gUnknown_203B224->input.unk1E * 8 + 10;
+    if (gUnknown_203B224->input.unk1E == 0) {
         xxx_call_draw_string(x,0,gTeamToolboxA,gUnknown_203B224->unk88,0);
     }
     else {
         xxx_call_draw_string(x,0,gTeamToolboxB,gUnknown_203B224->unk88,0);
     }
-    for(r7 = 0; r7 < gUnknown_203B224->unk6E; r7++)
+    for(r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++)
     {
-        teamItemIndex = (gUnknown_203B224->unk72 * gUnknown_203B224->unk70) + r7;
+        teamItemIndex = (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + r7;
         item = gTeamInventory_203B460->teamItems[teamItemIndex];
         switch(gUnknown_203B224->unk0) {
             case 0:
                 sub_8090E14(buffer1,&item,0);
-                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
                 break;
             case 1:
             case 2:
@@ -1224,7 +1224,7 @@ void sub_801A9E0(void)
                 stack.unk8 = 1;
                 item.flags = 1;
                 sub_8090E14(buffer1,&item, &stack);
-                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
                 break;
             case 3:
                 stack1.unk0 = 0;
@@ -1233,12 +1233,12 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buffer1,&item,&stack1);
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != '\0'){
-                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
                 }
                 else
                 {
                     strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);  
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);  
                 }
                 break;
             case 4:
@@ -1252,15 +1252,15 @@ void sub_801A9E0(void)
                     if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY){
                         // very dumb but this matches...
                         sprintfStatic((char *)&stack3,gUnknown_80DB9A0,buffer1);
-                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);
+                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);
                     }
                     else
-                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);;
+                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);;
                 }
                 else {
                     sub_8090E14(buffer1,&item, 0);
                     strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
                 }
                 break;
             case 5:
@@ -1270,17 +1270,17 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buffer1,&item,&stack3);
                 if (IsGummiItem(item.id)) {
-                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->unk54,r7),buffer1,gUnknown_203B224->unk88,0);
+                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
                 }
                 else
                 {
                     strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->unk54,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
                 }
                 break;
         }
         if ((sub_801AED0(teamItemIndex) & 1) != 0) {
-            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->unk54,r7),(gUnknown_203B224->unk8C->unkC - 2) * 8,10);
+            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->input,r7),(gUnknown_203B224->unk8C->unkC - 2) * 8,10);
         }
     }
     sub_80073E0(gUnknown_203B224->unk88);

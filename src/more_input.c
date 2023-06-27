@@ -1,12 +1,12 @@
-#include "constants/input.h"
 #include "global.h"
+#include "constants/input.h"
 #include "input.h"
 
 
-extern void nullsub_34(struct UnkInputStruct *r0);
+extern void nullsub_34(struct UnkInputStructSub *r0);
 u32 sub_8012AE8(void);
 
-u32 sub_8012A64(struct UnkInputStruct *r0, u32 r1)
+u32 sub_8012A64(struct UnkInputStructSub *r0, u32 r1)
 {
     if(r0 == NULL)
     {
@@ -16,36 +16,39 @@ u32 sub_8012A64(struct UnkInputStruct *r0, u32 r1)
     {
         nullsub_34(r0);
     }
-    if(r0->unk1 != 0)
+    if(r0->a_button != 0)
     {
-        r0->unk1 = 0;
-        return 1;
+        r0->a_button = 0;
+        return INPUT_A_BUTTON;
     }
-    if(r0->unk2 == 0)
+    else if(r0->b_button == 0)
     {
         return sub_8012AE8();
     }
-    r0->unk2 = r0->unk1;
-    return 2;
+    else
+    {
+        r0->b_button = 0;
+        return INPUT_B_BUTTON;
+    }
 }
 
 u32 GetKeyPress(struct UnkInputStruct *r0)
 {
     if(r0 != NULL)
     {
-        if(r0->a_button != 0)
+        if(r0->unk28.a_button != 0)
         {
             return INPUT_A_BUTTON;
         }
-        if(r0->b_button != 0)
+        if(r0->unk28.b_button != 0)
         {
             return INPUT_B_BUTTON;
         }
-        if(r0->dpad_left != 0)
+        if(r0->unk28.dpad_left != 0)
         {
             return INPUT_DPAD_LEFT;
         }
-        if(r0->dpad_right != 0)
+        if(r0->unk28.dpad_right != 0)
         {
             return INPUT_DPAD_RIGHT;
         }

@@ -12,21 +12,21 @@
 
 bool8 IsMailSlotEmpty(u8);
 extern void sub_8013984(void *);
-extern void sub_8013848(u32 *, s32, u32, u32);
+extern void sub_8013848(struct UnkInputStruct *, s32, u32, u32);
 extern s32 CountPelipperBoardSlots(void);
 extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013660(u32 *);
-extern s32 GetKeyPress(u32 *);
-extern bool8 sub_80138B8(u32 *, u32);
-extern void AddMenuCursorSprite(u32 *);
+extern void sub_8013660(struct UnkInputStruct *);
+extern s32 GetKeyPress(struct UnkInputStruct *);
+extern bool8 sub_80138B8(struct UnkInputStruct *, u32);
+extern void AddMenuCursorSprite(struct UnkInputStruct *);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 
-extern s32 sub_8013800(u32 *, s32);
+extern s32 sub_8013800(struct UnkInputStruct *, s32);
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
@@ -39,21 +39,12 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    u32 unk4;
-    u8 fill8[0x1C - 0x8];
-    s16 unk1C;
-    s16 unk1E;
-    s16 unk20;
-    s16 unk22;
-    s16 fill24;
-    /* 0x26 */ s16 emptyMailSlots;
-    u8 fill28[0x38 - 0x28];
+    struct UnkInputStruct input;
     u32 unk38;
     struct UnkTextStruct2 *unk3C;
     struct UnkTextStruct2 unk40[4];
     u8 unkA0[4];
 };
-
 
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
 
@@ -61,15 +52,7 @@ struct unkStruct_203B2E0
 {
     // size: 0xA8
     u8 unk0[0x8];
-    u32 unk8;
-    u8 unkC[0x20 - 0xC];
-    s16 unk20;
-    s16 unk22;
-    s16 unk24;
-    s16 unk26;
-    s16 unk28;
-    s16 pelipperBoardSlots;
-    u8 fill22[0x3C - 0x2C];
+    struct UnkInputStruct input;
     s32 unk3C;
     struct UnkTextStruct2 *unk40;
     struct UnkTextStruct2 unk44[4];
@@ -99,13 +82,13 @@ void CreateMailMenu(void)
 
     sub_8008C54(gUnknown_203B2D8->unk38);
     sub_80073B8(gUnknown_203B2D8->unk38);
-    xxx_call_draw_string(gUnknown_203B2D8->unk22 * 8 + 10,0,gMailboxText,gUnknown_203B2D8->unk38,0);
-    for (index = 0; index < gUnknown_203B2D8->unk1E; index++) {
-        mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + index]);
+    xxx_call_draw_string(gUnknown_203B2D8->input.unk1E * 8 + 10,0,gMailboxText,gUnknown_203B2D8->unk38,0);
+    for (index = 0; index < gUnknown_203B2D8->input.unk1A; index++) {
+        mail = GetMailboxSlotInfo(gUnknown_203B2D8->unk0[(gUnknown_203B2D8->input.unk1E * gUnknown_203B2D8->input.unk1C) + index]);
         local.unk0[0] = gUnknown_203B2D8->unk38;
-        local.y = sub_8013800(&gUnknown_203B2D8->unk4, index);
+        local.y = sub_8013800(&gUnknown_203B2D8->input, index);
         if (mail->mailType == MAIL_TYPE_UNK1) {
-            y = sub_8013800(&gUnknown_203B2D8->unk4, index);
+            y = sub_8013800(&gUnknown_203B2D8->input, index);
             sub_803B6B0(10,y,6,gUnknown_203B2D8->unk38);
             PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
             sprintfStatic(buffer, GetPokemonMailHeadline(mail->dungeon.floor), gAvailablePokemonNames);
@@ -173,9 +156,9 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
     sub_8012D34(gUnknown_203B2E0->unk40,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44,1,1);
-    sub_8013848(&gUnknown_203B2E0->unk8,CountPelipperBoardSlots(),param_3,param_1);
-    gUnknown_203B2E0->unk20 = gUnknown_203B2E4;
-    sub_8013984(&gUnknown_203B2E0->unk8);
+    sub_8013848(&gUnknown_203B2E0->input,CountPelipperBoardSlots(),param_3,param_1);
+    gUnknown_203B2E0->input.menuIndex = gUnknown_203B2E4;
+    sub_8013984(&gUnknown_203B2E0->input);
     sub_802C328();
     DrawPelipperBoardJobMenu();
     return TRUE;
@@ -185,11 +168,11 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
 u32 sub_802C1E4(u8 param_1)
 {
   if (param_1 == '\0') {
-    sub_8013660(&gUnknown_203B2E0->unk8);
+    sub_8013660(&gUnknown_203B2E0->input);
     return 0;
   }
   else {
-    switch(GetKeyPress(&gUnknown_203B2E0->unk8))
+    switch(GetKeyPress(&gUnknown_203B2E0->input))
     {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
@@ -201,7 +184,7 @@ u32 sub_802C1E4(u8 param_1)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&gUnknown_203B2E0->unk8,1)) {
+            if (sub_80138B8(&gUnknown_203B2E0->input,1)) {
                 sub_802C328();
                 DrawPelipperBoardJobMenu();
                 return 1;
@@ -215,26 +198,26 @@ u32 sub_802C1E4(u8 param_1)
 
 u8 sub_802C26C(void)
 {
-    return gUnknown_203B2E0->unk0[(gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24) + gUnknown_203B2E0->unk20];
+    return gUnknown_203B2E0->unk0[(gUnknown_203B2E0->input.unk1E * gUnknown_203B2E0->input.unk1C) + gUnknown_203B2E0->input.menuIndex];
 }
 
 void sub_802C28C(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
-    gUnknown_203B2E0->pelipperBoardSlots = CountPelipperBoardSlots();
-    sub_8013984(&gUnknown_203B2E0->unk8);
+    gUnknown_203B2E0->input.unk22 = CountPelipperBoardSlots();
+    sub_8013984(&gUnknown_203B2E0->input);
     sub_802C328();
     DrawPelipperBoardJobMenu();
     if(r0)
-        AddMenuCursorSprite(&gUnknown_203B2E0->unk8);
+        AddMenuCursorSprite(&gUnknown_203B2E0->input);
 }
 
 void sub_802C2D4(void)
 {
     if(gUnknown_203B2E0 != NULL)
     {
-        gUnknown_203B2E4 = gUnknown_203B2E0->unk20;
+        gUnknown_203B2E4 = gUnknown_203B2E0->input.menuIndex;
         gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C] = gUnknown_80DFC9C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2E0->unk44, 1, 1);
@@ -314,20 +297,20 @@ void DrawPelipperBoardJobMenu(void)
 
     sub_8008C54(gUnknown_203B2E0->unk3C);
     sub_80073B8(gUnknown_203B2E0->unk3C);
-    iVar4 = gUnknown_203B2E0->unk26 * 8;
+    iVar4 = gUnknown_203B2E0->input.unk1E * 8;
     x = iVar4;
     x += 10;
     xxx_call_draw_string(x,0,gBulletinBoardText,gUnknown_203B2E0->unk3C,0);
     iVar4 += 4;
     x = iVar4 + gUnknown_203B2E0->unkA4[2] * 8;
-    sub_8012BC4(x,0,gUnknown_203B2E0->unk26 + 1,2,7,gUnknown_203B2E0->unk3C);
+    sub_8012BC4(x,0,gUnknown_203B2E0->input.unk1E + 1,2,7,gUnknown_203B2E0->unk3C);
 
-    for(index = 0; index < gUnknown_203B2E0->unk22; index++)
+    for(index = 0; index < gUnknown_203B2E0->input.unk1A; index++)
     {
-        slotIndex = (gUnknown_203B2E0->unk0[gUnknown_203B2E0->unk26 * gUnknown_203B2E0->unk24 + index]);
+        slotIndex = (gUnknown_203B2E0->unk0[gUnknown_203B2E0->input.unk1E * gUnknown_203B2E0->input.unk1C + index]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
         local.unk0[0] = gUnknown_203B2E0->unk3C;
-        local.y = sub_8013800(&gUnknown_203B2E0->unk8,index);
+        local.y = sub_8013800(&gUnknown_203B2E0->input,index);
         sub_803B35C(mail,local.unk0);
         if (IsMailinJobSlot(GetPelipperBoardSlotInfo(slotIndex))) {
             local.unk43 = 2;

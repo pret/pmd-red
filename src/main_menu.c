@@ -881,7 +881,7 @@ bool8 SetMainMenuText(void)
 
  // Have to load the pointer before the index
   preload = gUnknown_203B34C->unk4[0].menuItems;
-  menuChoice = preload[gUnknown_203B34C->unk4[0].menuIndex].menuAction; // chosen menu action?
+  menuChoice = preload[gUnknown_203B34C->unk4[0].input.menuIndex].menuAction; // chosen menu action?
   if (gUnknown_203B34C->currMenuChoice == menuChoice) {
     return FALSE;
   }

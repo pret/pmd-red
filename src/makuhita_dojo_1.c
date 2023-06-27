@@ -15,15 +15,7 @@ struct unkStruct_203B31C
 {
     // Size: 0xD0
     s16 unk0[NUM_DUNGEON_MAZE];
-    u32 unk30;
-    u8 fill34[0x48 - 0x34];
-    s16 unk48;
-    s16 unk4A;
-    s16 unk4C;
-    s16 unk4E;
-    u16 unk50;
-    u16 unk52;
-    u8 fill54[0x64 - 0x54];    
+    struct UnkInputStruct unk30;
     u32 unk64;
     struct UnkTextStruct2 *unk68;
     struct UnkTextStruct2 unk6C[4];
@@ -72,9 +64,9 @@ extern s16 sub_80A2668(u32 r0);
 extern s32 sub_8013800(void *, u32);
 extern bool8 IsMazeCompleted(s32);
 extern s32 sub_8030668(void);
-extern void sub_8013984(u32 *);
+extern void sub_8013984(void *);
 extern void sub_80304C8();
-extern void AddMenuCursorSprite(u32 *);
+extern void AddMenuCursorSprite(struct UnkInputStruct *);
 extern void DrawDojoCourseList(void);
 
 extern u8 sub_80138B8(void *, u32);
@@ -234,11 +226,11 @@ u32 sub_80303AC(u8 param_1)
 }
 
 s16 sub_8030418(void) {
-    return gUnknown_203B31C->unk0[(gUnknown_203B31C->unk4E * gUnknown_203B31C->unk4C) + gUnknown_203B31C->unk48];
+    return gUnknown_203B31C->unk0[(gUnknown_203B31C->unk30.unk1E * gUnknown_203B31C->unk30.unk1C) + gUnknown_203B31C->unk30.menuIndex];
 }
 
 void sub_8030444(u8 r0) {
-    gUnknown_203B31C->unk52 = sub_8030668();
+    gUnknown_203B31C->unk30.unk22 = sub_8030668();
     sub_8013984(&gUnknown_203B31C->unk30);
     sub_80304C8();
     DrawDojoCourseList();
@@ -331,10 +323,10 @@ void DrawDojoCourseList(void)
   sub_80073B8(gUnknown_203B31C->unk64);
   xxx_call_draw_string(10,0,gMakuhitaDojoHeader,gUnknown_203B31C->unk64,0); // Courses
   sub_8012BC4(gUnknown_203B31C->unkCC[2] * 8 + 4,0,
-            gUnknown_203B31C->unk4E + 1,2,7,gUnknown_203B31C->unk64);
-  for (index = 0; index < gUnknown_203B31C->unk4A; index++)
+            gUnknown_203B31C->unk30.unk1E + 1,2,7,gUnknown_203B31C->unk64);
+  for (index = 0; index < gUnknown_203B31C->unk30.unk1A; index++)
     {
-      iVar6 = gUnknown_203B31C->unk0[gUnknown_203B31C->unk4E * gUnknown_203B31C->unk4C + index];
+      iVar6 = gUnknown_203B31C->unk0[gUnknown_203B31C->unk30.unk1E * gUnknown_203B31C->unk30.unk1C + index];
       dungeonIndex = sub_80A2740(iVar6);
 
       mazeIndex = sub_80A2668(iVar6);

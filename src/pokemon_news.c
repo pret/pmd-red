@@ -14,22 +14,8 @@ struct unkStruct_203B2CC
 {
     // size: 0xD4;
     u8 receivedNewsletters[NUM_POKEMON_NEWS];
-
-    u32 unk38;
-    u8 fill3C[0x50 - 0x3C];
-
-    s16 unk50;
-    s16 unk52;
-    s16 unk54;
-    s16 unk56;
-
-    u16 unk58;
-    u16 numPKMNNews;
-
-    u8 fill5C[0x6C - 0x5C];
-
+    struct UnkInputStruct input;
     u32 unk6C;
-
     struct UnkTextStruct2 *unk70;
     struct UnkTextStruct2 unk74[4];
 };
@@ -55,15 +41,7 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    u32 unk4;
-    u8 fill8[0x1C - 0x8];
-    s16 unk1C;
-    s16 unk1E;
-    s16 unk20;
-    s16 unk22;
-    s16 fill24;
-    /* 0x26 */ s16 emptyMailSlots;
-    u8 fill28[0x38 - 0x28];
+    struct UnkInputStruct input;
     u32 unk38;
     struct UnkTextStruct2 *unk3C;
     struct UnkTextStruct2 unk40[4];
@@ -180,9 +158,9 @@ extern void CreatePKMNNewsMenu(void);
 extern void sub_8013818(void *, u32, u32, u32);
 extern u8 sub_80138B8(void *, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(u32 *);
-extern void sub_8013660(u32 *);
-extern void AddMenuCursorSprite(u32 *);
+extern s32 GetKeyPress(struct UnkInputStruct *);
+extern void sub_8013660(struct UnkInputStruct *);
+extern void AddMenuCursorSprite(struct UnkInputStruct *);
 extern void sub_802BCC4(void);
 extern void sub_802BB14(u32);
 extern void sub_801317C(u32 *);
@@ -190,7 +168,7 @@ extern u8 HasNoMailinMailbox(void);
 extern void sub_802BF30(void);
 extern void CreateMailMenu(void);
 extern s32 CountEmptyMailSlots(void);
-extern void sub_8013848(u32 *, s32, u32, u32);
+extern void sub_8013848(struct UnkInputStruct*, s32, u32, u32);
 void sub_802BB28(void);
 extern void sub_802BB98(void);
 extern void sub_802BC08(void);
@@ -206,8 +184,8 @@ extern void sub_80073E0(u32);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
-extern s32 sub_8013800(u32 *, s32);
-extern void sub_8013984(u32 *);
+extern s32 sub_8013800(struct UnkInputStruct *, s32);
+extern void sub_8013984(struct UnkInputStruct *);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 
@@ -240,12 +218,12 @@ u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
 
-        sub_8013818(&gUnknown_203B2CC->unk38, GetNumPKMNNews(), r2, r0);
+        sub_8013818(&gUnknown_203B2CC->input, GetNumPKMNNews(), r2, r0);
 
-        gUnknown_203B2CC->unk50 = gUnknown_203B2D0;
-        gUnknown_203B2CC->unk56 = gUnknown_203B2D2;
+        gUnknown_203B2CC->input.menuIndex = gUnknown_203B2D0;
+        gUnknown_203B2CC->input.unk1E = gUnknown_203B2D2;
 
-        sub_8013984(&gUnknown_203B2CC->unk38);
+        sub_8013984(&gUnknown_203B2CC->input);
         sub_802B880();
         CreatePKMNNewsMenu();
 
@@ -257,12 +235,12 @@ u32 sub_802B720(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B2CC->unk38);
+        sub_8013660(&gUnknown_203B2CC->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(&gUnknown_203B2CC->unk38))
+        switch(GetKeyPress(&gUnknown_203B2CC->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -274,7 +252,7 @@ u32 sub_802B720(u8 r0)
                 PlayMenuSoundEffect(4);
                 return 4;
         }
-        if(sub_80138B8(&gUnknown_203B2CC->unk38, 1) != 0)
+        if(sub_80138B8(&gUnknown_203B2CC->input, 1) != 0)
         {
             sub_802B880();
             CreatePKMNNewsMenu();
@@ -287,7 +265,7 @@ u32 sub_802B720(u8 r0)
 
 u8 GetPokemonNewsIndex(void)
 {
-    return gUnknown_203B2CC->receivedNewsletters[(gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + gUnknown_203B2CC->unk50];
+    return gUnknown_203B2CC->receivedNewsletters[(gUnknown_203B2CC->input.unk1E * gUnknown_203B2CC->input.unk1C) + gUnknown_203B2CC->input.menuIndex];
 }
 
 void sub_802B7D0(u8 r0)
@@ -295,14 +273,14 @@ void sub_802B7D0(u8 r0)
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2CC->unk74, 0, 0);
 
-    gUnknown_203B2CC->numPKMNNews = GetNumPKMNNews();
-    sub_8013984(&gUnknown_203B2CC->unk38);
+    gUnknown_203B2CC->input.unk22 = GetNumPKMNNews();
+    sub_8013984(&gUnknown_203B2CC->input);
     sub_802B880();
     CreatePKMNNewsMenu();
 
     if(r0 != 0)
     {
-        AddMenuCursorSprite(&gUnknown_203B2CC->unk38);
+        AddMenuCursorSprite(&gUnknown_203B2CC->input);
     }
 }
 
@@ -310,9 +288,9 @@ void sub_802B81C(void)
 {
     if(gUnknown_203B2CC  != NULL)
     {
-        gUnknown_203B2D0 = gUnknown_203B2CC->unk50;
+        gUnknown_203B2D0 = gUnknown_203B2CC->input.menuIndex;
 
-        gUnknown_203B2D2 = gUnknown_203B2CC->unk56;
+        gUnknown_203B2D2 = gUnknown_203B2CC->input.unk1E;
 
         gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBD0;
 
@@ -380,11 +358,11 @@ void CreatePKMNNewsMenu(void)
     sub_8008C54(gUnknown_203B2CC->unk6C);
     sub_80073B8(gUnknown_203B2CC->unk6C);
     xxx_call_draw_string(0xA, 0, gUnknown_80DFC04, gUnknown_203B2CC->unk6C, 0);
-    sub_8012BC4(((gUnknown_80DFBE8[2] << 3) + 4), 0, gUnknown_203B2CC->unk56 + 1, 2, 7, gUnknown_203B2CC->unk6C);
-    for(index = 0; index < gUnknown_203B2CC->unk52; index++)
+    sub_8012BC4(((gUnknown_80DFBE8[2] << 3) + 4), 0, gUnknown_203B2CC->input.unk1E + 1, 2, 7, gUnknown_203B2CC->unk6C);
+    for(index = 0; index < gUnknown_203B2CC->input.unk1A; index++)
     {
-        y = sub_8013800(&gUnknown_203B2CC->unk38, index);
-        new_index =  (gUnknown_203B2CC->unk56 * gUnknown_203B2CC->unk54) + index;
+        y = sub_8013800(&gUnknown_203B2CC->input, index);
+        new_index =  (gUnknown_203B2CC->input.unk1E * gUnknown_203B2CC->input.unk1C) + index;
         mailIndex = gUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(0xA, y, 6, gUnknown_203B2CC->unk6C);
         sub_802BC7C();
@@ -607,9 +585,9 @@ u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
     sub_8012D34(gUnknown_203B2D8->unk3C,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2D8->unk40,1,1);
-    sub_8013848(&gUnknown_203B2D8->unk4,CountEmptyMailSlots(),param_3,param_1);
-    gUnknown_203B2D8->unk1C = gUnknown_203B2DC;
-    sub_8013984(&gUnknown_203B2D8->unk4);
+    sub_8013848(&gUnknown_203B2D8->input,CountEmptyMailSlots(),param_3,param_1);
+    gUnknown_203B2D8->input.menuIndex = gUnknown_203B2DC;
+    sub_8013984(&gUnknown_203B2D8->input);
     sub_802BF30();
     CreateMailMenu();
     return 1;
@@ -620,10 +598,10 @@ u32 sub_802BDEC(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B2D8->unk4);
+        sub_8013660(&gUnknown_203B2D8->input);
         return 0;
     }
-    switch(GetKeyPress(&gUnknown_203B2D8->unk4))
+    switch(GetKeyPress(&gUnknown_203B2D8->input))
     {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
@@ -635,7 +613,7 @@ u32 sub_802BDEC(u8 r0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if(sub_80138B8(&gUnknown_203B2D8->unk4, 1) != 0)
+            if(sub_80138B8(&gUnknown_203B2D8->input, 1) != 0)
             {
                 sub_802BF30();
                 CreateMailMenu();
@@ -647,7 +625,7 @@ u32 sub_802BDEC(u8 r0)
 }
 
 u8 sub_802BE74(void) {
-  return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->unk22 * gUnknown_203B2D8->unk20) + gUnknown_203B2D8->unk1C];
+  return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->input.unk1E * gUnknown_203B2D8->input.unk1C) + gUnknown_203B2D8->input.menuIndex];
 }
 
 void sub_802BE94(u8 r0)
@@ -655,14 +633,14 @@ void sub_802BE94(u8 r0)
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2D8->unk40, 0, 0);
 
-    gUnknown_203B2D8->emptyMailSlots = CountEmptyMailSlots();
-    sub_8013984(&gUnknown_203B2D8->unk4);
+    gUnknown_203B2D8->input.unk22 = CountEmptyMailSlots();
+    sub_8013984(&gUnknown_203B2D8->input);
     sub_802BF30();
     CreateMailMenu();
 
     if(r0 != 0)
     {
-        AddMenuCursorSprite(&gUnknown_203B2D8->unk4);
+        AddMenuCursorSprite(&gUnknown_203B2D8->input);
     }
 }
 
@@ -670,7 +648,7 @@ void sub_802BEDC(void)
 {
     if(gUnknown_203B2D8 != NULL)
     {
-        gUnknown_203B2DC = gUnknown_203B2D8->unk1C;
+        gUnknown_203B2DC = gUnknown_203B2D8->input.menuIndex;
         gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38] = gUnknown_80DFC5C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2D8->unk40, 1, 1);

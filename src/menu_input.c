@@ -17,24 +17,27 @@ extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(u32 *);
-extern u32 sub_80137A8(u32 *);
-void MoveMenuCursorUp(u32 *);
-void MoveMenuCursorDown(u32 *);
+extern s32 GetKeyPress(struct UnkInputStruct *);
+extern u32 sub_80137A8(struct UnkInputStruct *);
+void MoveMenuCursorUp(struct UnkInputStruct *);
+void MoveMenuCursorDown(struct UnkInputStruct *);
 extern void sub_80073B8(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern s32 sub_8013800(u32 *, s32);
+extern s32 sub_8013800(struct UnkInputStruct *, s32);
 extern void sub_80073E0(u32);
-extern void sub_8013660(u32 *);
-void AddMenuCursorSprite(void *);
+extern void sub_8013660(struct UnkInputStruct *);
+void AddMenuCursorSprite(struct UnkInputStruct *);
+void AddMenuCursorSprite_(struct UnkInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
-extern void sub_8013134(u32 *, u32, u32);
-extern void sub_80137B0(u32 *, u32);
+extern void sub_8013134(struct UnkInputStruct *, u32, u32);
+extern void sub_80137B0(struct UnkInputStruct *, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
 struct unkChar *GetCharacter(u32);
 extern void xxx_call_draw_char(u32, u32, u32, u32, u32);
+extern void sub_801317C(struct UnkInputStructSub *);
+extern void nullsub_7(u16 *);
 
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
@@ -228,9 +231,9 @@ void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32
   if (menuIndex < 0) {
     menuIndex = iVar1;
   }
-  sub_8013134(&param_1->unk14,counter,index);
-  param_1->menuIndex = menuIndex;
-  sub_80137B0(&param_1->unk14,0);
+  sub_8013134(&param_1->input,counter,index);
+  param_1->input.menuIndex = menuIndex;
+  sub_80137B0(&param_1->input,0);
   param_1->unk4C = TRUE;
   param_1->unk4D = TRUE;
   param_1->unk4E = TRUE;
@@ -268,9 +271,9 @@ void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32
   if (menuIndex < 0) {
     menuIndex = iVar1;
   }
-  sub_8013134(&param_1->unk14,counter,index);
-  param_1->menuIndex = menuIndex;
-  sub_80137B0(&param_1->unk14,0);
+  sub_8013134(&param_1->input,counter,index);
+  param_1->input.menuIndex = menuIndex;
+  sub_80137B0(&param_1->input,0);
   param_1->index = index;
   param_1->menuTextColorArray = colorArray;
   if (colorArray == NULL) {
@@ -341,7 +344,7 @@ void sub_8012EBC(struct MenuStruct *param_1)
             color = colorArray[0];
         }
         sprintfStatic(buffer,gUnknown_80D4828,color,textPtr);
-        y = sub_8013800(&param_1->unk14,counter);
+        y = sub_8013800(&param_1->input,counter);
         xxx_format_and_draw(8,y,buffer,param_1->index,0);
         menuItemsPtr++;
         counter++;
@@ -352,10 +355,10 @@ void sub_8012EBC(struct MenuStruct *param_1)
   }
   if (param_1->unk4E) {
     if (param_1->unk4C) {
-      AddMenuCursorSprite(&param_1->unk14);
+      AddMenuCursorSprite(&param_1->input);
     }
     else {
-      sub_8013660(&param_1->unk14);
+      sub_8013660(&param_1->input);
     }
   }
 }
@@ -366,31 +369,31 @@ bool8 sub_8012FD8(struct MenuStruct *param_1)
   s32 index;
   const struct MenuItem *item;
   
-  prevMenuIndex = param_1->menuIndex;
+  prevMenuIndex = param_1->input.menuIndex;
   if (param_1->unk4C) {
-    switch(GetKeyPress(&param_1->unk14))
+    switch(GetKeyPress(&param_1->input))
     {
         case INPUT_DPAD_DOWN:
-            MoveMenuCursorDown(&param_1->unk14);
-            if (prevMenuIndex != param_1->menuIndex) {
+            MoveMenuCursorDown(&param_1->input);
+            if (prevMenuIndex != param_1->input.menuIndex) {
                 PlayMenuSoundEffect(3);
             }
             break;
         case INPUT_DPAD_UP:
-            MoveMenuCursorUp(&param_1->unk14);
-            if (prevMenuIndex != param_1->menuIndex) {
+            MoveMenuCursorUp(&param_1->input);
+            if (prevMenuIndex != param_1->input.menuIndex) {
                 PlayMenuSoundEffect(3);
             }
             break;
         case INPUT_A_BUTTON:
-            index = sub_80137A8(&param_1->unk14);
+            index = sub_80137A8(&param_1->input);
             item = &param_1->menuItems[index];
             if ((-1 < item->menuAction) &&
                ((param_1->unkC == NULL || (param_1->unkC[index] != 1)))) {
               param_1->menuAction = item->menuAction;
               ++param_1; --param_1;
               param_1->unk4C = FALSE;
-              param_1->unk38 = 0;
+              param_1->input.unk24 = 0;
             }
             else
             {
@@ -404,8 +407,8 @@ bool8 sub_8012FD8(struct MenuStruct *param_1)
                 PlayMenuSoundEffect(0);
             break;
         case INPUT_B_BUTTON:
-            if (-1 < param_1->menuItems[param_1->unk2E].menuAction) {
-                param_1->menuAction = param_1->menuItems[param_1->unk2E].menuAction;
+            if (-1 < param_1->menuItems[param_1->input.unk1A].menuAction) {
+                param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
                 param_1->unk4C = FALSE;
                 PlayMenuSoundEffect(1);
             }
@@ -424,18 +427,18 @@ bool8 sub_80130A8(struct MenuStruct *param_1)
   
   if (param_1->unk4C) {
 
-    switch(GetKeyPress(&param_1->unk14))
+    switch(GetKeyPress(&param_1->input))
     {
         case INPUT_A_BUTTON:
-            index = sub_80137A8(&param_1->unk14);
+            index = sub_80137A8(&param_1->input);
             menuItem = &param_1->menuItems[index];
             param_1->menuAction = menuItem->menuAction;
             param_1->unk4C = FALSE;
-            param_1->unk38 = 0;
+            param_1->input.unk24 = 0;
             PlayMenuSoundEffect(0);
             break;
         case INPUT_B_BUTTON:
-            if(menuAction = param_1->menuItems[param_1->unk2E].menuAction, -1 < menuAction) {
+            if(menuAction = param_1->menuItems[param_1->input.unk1A].menuAction, -1 < menuAction) {
               param_1->menuAction = menuAction;
               param_1->unk4C = FALSE;
               PlayMenuSoundEffect(0);
@@ -456,4 +459,52 @@ bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
         *menuAction = param_1->menuAction;
     }
     return FALSE;
+}
+
+void sub_8013134(struct UnkInputStruct *param_1, u32 menuItemCounter, u32 index) {
+
+    struct UnkTextStruct1 *temp;
+
+    temp = &gUnknown_2027370[index];
+    
+    param_1->unk0 = index;
+    param_1->menuIndex = 0;
+    param_1->unk1A = menuItemCounter;
+    param_1->unk1C = menuItemCounter;
+    param_1->unk1E = 0;
+    param_1->unk4 = 0;
+
+    if(temp->unkC == 6)
+    {
+        param_1->unk6 = 0x10;
+    }
+    else
+    {
+        param_1->unk6 = 0x2;
+    }
+
+
+    param_1->unkC = 0;
+    param_1->unkE = 0;
+    param_1->unk14 = 0;
+    param_1->unk24 = 0;
+    sub_801317C(&param_1->unk28);
+}
+
+void sub_801317C(struct UnkInputStructSub *param_1)
+{
+    param_1->unk0 = 0;
+    param_1->a_button = 0;
+    param_1->b_button = 0;
+    param_1->dpad_left = 0;
+    param_1->dpad_right = 0;
+    param_1->unk8 = -1;
+    param_1->unkA = -1;
+    nullsub_7(&param_1->unk8);
+    ResetUnusedInputStruct();
+}
+
+void AddMenuCursorSprite(struct UnkInputStruct *param_1)
+{
+    AddMenuCursorSprite_(param_1, 0);
 }
