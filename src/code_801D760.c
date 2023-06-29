@@ -18,14 +18,7 @@
 struct unkStruct_203B258
 {
     // size: 0xA0
-    u8 fill0[0x18];
-    u16 unk18;
-    u16 unk1A;
-    s16 unk1C;
-    s16 unk1E;
-    s16 unk20;
-    u16 unk22;
-    u8 unk24[0x34 - 0x24];
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -36,15 +29,15 @@ extern struct unkStruct_203B258 *gUnknown_203B258;
 extern struct UnkTextStruct2 gUnknown_80DBF88;
 extern struct UnkTextStruct2 gUnknown_80DBF70;
 
-extern void sub_8013818(void *, u32, u32, u32);
-extern void sub_8013878(void *, s32);
-extern u8 sub_80138B8(void *, u32);
-extern u32 GetKeyPress(void *);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
+extern void sub_8013878(struct MenuInputStruct *, s32);
+extern u8 sub_80138B8(struct MenuInputStruct *, u32);
+extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_801DB54();
 extern void sub_801DBD4();
-extern void sub_8013984(void *);
-extern void AddMenuCursorSprite(void *);
+extern void sub_8013984(struct MenuInputStruct *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
@@ -531,7 +524,7 @@ u32 sub_801D9E4(void)
   gUnknown_203B258->unk38->unk14 = gUnknown_203B258->unk9C;
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B258->unk3C,1,1);
-  sub_8013818(gUnknown_203B258,0xe5,10,gUnknown_203B258->unk34);
+  sub_8013818(&gUnknown_203B258->input,0xe5,10,gUnknown_203B258->unk34);
   sub_801DB54();
   sub_801DBD4();
   return 1;
@@ -541,14 +534,14 @@ void sub_801DA58(s16 param_0)
 {
     s32 cast;
     cast = param_0;
-    sub_8013878(gUnknown_203B258, cast);
+    sub_8013878(&gUnknown_203B258->input, cast);
     sub_801DB54();
     sub_801DBD4();
 }
 
 u32 sub_801DA78(void)
 {
-    switch(GetKeyPress(gUnknown_203B258))
+    switch(GetKeyPress(&gUnknown_203B258->input))
     {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
@@ -556,7 +549,7 @@ u32 sub_801DA78(void)
         case INPUT_A_BUTTON:
             return 3;
         default:
-            if(sub_80138B8(gUnknown_203B258, 1) != 0)
+            if(sub_80138B8(&gUnknown_203B258->input, 1) != 0)
             {
                 sub_801DB54();
                 sub_801DBD4();
@@ -570,17 +563,17 @@ u32 sub_801DA78(void)
 
 s16 sub_801DAC0(void)
 {
-    return (gUnknown_203B258->unk1E * gUnknown_203B258->unk1C) + gUnknown_203B258->unk18;
+    return (gUnknown_203B258->input.unk1E * gUnknown_203B258->input.unk1C) + gUnknown_203B258->input.menuIndex;
 }
 
 void sub_801DADC(u8 r0)
 {
-    gUnknown_203B258->unk22 = 0xE5;
-    sub_8013984(gUnknown_203B258);
+    gUnknown_203B258->input.unk22 = 0xE5;
+    sub_8013984(&gUnknown_203B258->input);
     sub_801DB54();
     sub_801DBD4();
     if(r0)
-        AddMenuCursorSprite(gUnknown_203B258);
+        AddMenuCursorSprite(&gUnknown_203B258->input);
 }
 
 void sub_801DB0C(void)

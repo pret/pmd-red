@@ -22,13 +22,7 @@ struct unkStruct_3001B5C
     u8 fill14[0x354 - 0x14];
     u8 unk354;
     u8 fill355[0x35C - 0x355];
-    u8 unk35C;
-    u8 fill35D[0x374 - 0x35D];
-    s16 unk374;
-    s16 unk376;
-    s16 unk378;
-    s16 unk37A;
-    u8 fill37C[0x390 - 0x37C];
+    struct MenuInputStruct input;
     u32 unk390;
     struct UnkTextStruct2 *unk394;
     struct UnkTextStruct2 unk398[4];
@@ -48,16 +42,16 @@ void sub_80237E0(void);
 extern bool8 sub_8098134(s32);
 extern void sub_8023730(void);
 extern u8 sub_8023704(u8);
-extern void sub_8013818(void *, u32, u32, u32);
-extern void sub_8013984(u8 *);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
+extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8023420(void);
 extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
-extern u8 sub_80138B8(void *, u32);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(void *);
-extern void sub_8013660(void *);
-extern void AddMenuCursorSprite(void *);
+extern s32 GetKeyPress(struct MenuInputStruct*);
+extern void sub_8013660(struct MenuInputStruct*);
+extern void AddMenuCursorSprite(struct MenuInputStruct*);
 
 struct unkStruct_203B294
 {   
@@ -336,10 +330,10 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
   sub_8012D08(gUnknown_3001B5C->unk394,param_4);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_3001B5C->unk398,1,1);
-  sub_8013818(&gUnknown_3001B5C->unk35C,sub_80236A4(),param_4,index);
-  gUnknown_3001B5C->unk374 = gUnknown_203B29C;
-  gUnknown_3001B5C->unk37A = gUnknown_203B29E;
-  sub_8013984(&gUnknown_3001B5C->unk35C);
+  sub_8013818(&gUnknown_3001B5C->input,sub_80236A4(),param_4,index);
+  gUnknown_3001B5C->input.menuIndex = gUnknown_203B29C;
+  gUnknown_3001B5C->input.unk1E = gUnknown_203B29E;
+  sub_8013984(&gUnknown_3001B5C->input);
   sub_8023420();
   sub_80234BC();
   return 1;
@@ -352,10 +346,10 @@ u8 sub_8023278(u8 param_1)
   u32 temp;
   
   if (param_1 == 0) {
-    sub_8013660(&gUnknown_3001B5C->unk35C);
+    sub_8013660(&gUnknown_3001B5C->input);
     return 0;
   }
-  switch(GetKeyPress(&gUnknown_3001B5C->unk35C))
+  switch(GetKeyPress(&gUnknown_3001B5C->input))
   {
     case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
@@ -372,7 +366,7 @@ u8 sub_8023278(u8 param_1)
         sub_80236A4();
         break;
     default:
-        if (sub_80138B8(&gUnknown_3001B5C->unk35C, 1) == 0) {
+        if (sub_80138B8(&gUnknown_3001B5C->input, 1) == 0) {
             return 0;
         }
         break;
@@ -384,18 +378,18 @@ u8 sub_8023278(u8 param_1)
 
 s16 sub_802331C(void)
 {
-  return gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk37A * gUnknown_3001B5C->unk378 + gUnknown_3001B5C->unk374];
+  return gUnknown_3001B5C->unkC[gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + gUnknown_3001B5C->input.menuIndex];
 }
 
 void sub_8023354(u8 param_1)
 {
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_3001B5C->unk398,0,0);
-  sub_8013984(&gUnknown_3001B5C->unk35C);
+  sub_8013984(&gUnknown_3001B5C->input);
   sub_8023420();
   sub_80234BC();
   if (param_1 != 0) {
-    AddMenuCursorSprite(&gUnknown_3001B5C->unk35C);
+    AddMenuCursorSprite(&gUnknown_3001B5C->input);
   }
 }
 
@@ -404,8 +398,8 @@ void sub_80233A0(void)
 {
   if (gUnknown_3001B5C != NULL) {
     gUnknown_203B298 = gUnknown_3001B5C->unk4;
-    gUnknown_203B29C = gUnknown_3001B5C->unk374;
-    gUnknown_203B29E = gUnknown_3001B5C->unk37A;
+    gUnknown_203B29C = gUnknown_3001B5C->input.menuIndex;
+    gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
     gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC904;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_3001B5C->unk398,1,1);
@@ -526,11 +520,11 @@ void sub_80234BC(void)
   sub_80073B8(gUnknown_3001B5C->unk390);
   xxx_call_draw_string(10,0,gUnknown_80DC934,gUnknown_3001B5C->unk390,0); // Pokemon
   sub_8012BC4(gUnknown_3001B5C->unk3F8[2] * 8 + 4,0,
-              gUnknown_3001B5C->unk37A + 1,2,7,gUnknown_3001B5C->unk390);
-  for(index = 0; index < gUnknown_3001B5C->unk376; index++)
+              gUnknown_3001B5C->input.unk1E + 1,2,7,gUnknown_3001B5C->unk390);
+  for(index = 0; index < gUnknown_3001B5C->input.unk1A; index++)
   {
-      y = sub_8013800(&gUnknown_3001B5C->unk35C,index);
-      species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->unk37A * gUnknown_3001B5C->unk378 + index)];
+      y = sub_8013800(&gUnknown_3001B5C->input,index);
+      species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + index)];
       sub_8092638(GetFriendArea(species),&auStack_2c,0,0);
       color = 7;
       if (auStack_2c.unk4 != 0) {

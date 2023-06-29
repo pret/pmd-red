@@ -45,7 +45,7 @@ extern void DrawTeamMoneyBox(u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(void *, u32);
+extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
@@ -64,14 +64,7 @@ extern struct unkStruct_203B224 *gUnknown_203B224;
 struct unkStruct_203B214
 {;
     // size: 0xA0
-    u8 fill0[0x18];
-    u16 unk18;
-    s16 unk1A;
-    s16 unk1C;
-    s16 unk1E;
-    s16 unk20;
-    u16 shopItemCount;
-    u8 fill24[0x34 - 0x24];
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -81,14 +74,14 @@ struct unkStruct_203B214
 extern struct unkStruct_203B214 *gUnknown_203B214;
 extern struct unkStruct_203B214 *gUnknown_203B21C;
 
-extern void sub_8013818(void *, u32, u32, u32);
+extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
 
 extern u8 sub_8019FB0(void);
-extern u8 sub_80138B8(void *, u32);
+extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(void *);
-extern void sub_8013660(void *);
+extern s32 GetKeyPress(struct MenuInputStruct *);
+extern void sub_8013660(struct MenuInputStruct *);
 
 extern struct UnkTextStruct2 gUnknown_80DB8CC;
 extern struct UnkTextStruct2 gUnknown_80DB8B4;
@@ -98,10 +91,10 @@ extern struct UnkTextStruct2 gUnknown_80DB95C;
 extern const struct UnkTextStruct2 gUnknown_80DB914;
 extern void sub_801A430(void);
 extern void sub_801A4A4(void);
-extern void sub_8013984(u8 *);
+extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_801A064(void);
 extern void sub_801A0D8(void);
-extern void AddMenuCursorSprite(void *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 sub_801A37C(void);
 
 extern void sub_801A010(void);
@@ -616,9 +609,9 @@ u32 sub_8019E40(u32 r0)
         gUnknown_203B214->unk38->unk14 = gUnknown_203B214->unk9C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B214->unk3C, 1, 1);
-        sub_8013818(gUnknown_203B214, CountKecleonShopItems(), 0xA, r0);
-        gUnknown_203B214->unk18 = gUnknown_203B218;
-        sub_8013984((u8 *)gUnknown_203B214);
+        sub_8013818(&gUnknown_203B214->input, CountKecleonShopItems(), 0xA, r0);
+        gUnknown_203B214->input.menuIndex = gUnknown_203B218;
+        sub_8013984(&gUnknown_203B214->input);
         sub_801A064();
         sub_801A0D8();
         return 1;
@@ -632,12 +625,12 @@ u32 sub_8019EDC(u8 r0)
 
     if(r0 == 0)
     {
-        sub_8013660(gUnknown_203B214);
+        sub_8013660(&gUnknown_203B214->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(gUnknown_203B214))
+        switch(GetKeyPress(&gUnknown_203B214->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -659,7 +652,7 @@ u32 sub_8019EDC(u8 r0)
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
-                if(sub_80138B8(gUnknown_203B214, 1) != 0)
+                if(sub_80138B8(&gUnknown_203B214->input, 1) != 0)
                 {
                     sub_801A064();
                     sub_801A0D8();
@@ -675,26 +668,26 @@ u32 sub_8019EDC(u8 r0)
 
 u8 sub_8019FB0(void)
 {
-    return (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + (u8)gUnknown_203B214->unk18;
+    return (gUnknown_203B214->input.unk1E * gUnknown_203B214->input.unk1C) + (u8)gUnknown_203B214->input.menuIndex;
 }
 
 void sub_8019FCC(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B214->unk3C, 0, 0);
-    gUnknown_203B214->shopItemCount = CountKecleonShopItems();
-    sub_8013984((u8 *)gUnknown_203B214);
+    gUnknown_203B214->input.unk22 = CountKecleonShopItems();
+    sub_8013984(&gUnknown_203B214->input);
     sub_801A064();
     sub_801A0D8();
     if(r0)
-        AddMenuCursorSprite(gUnknown_203B214);
+        AddMenuCursorSprite(&gUnknown_203B214->input);
 }
 
 void sub_801A010(void)
 {
     if(gUnknown_203B214 != NULL)
     {
-        gUnknown_203B218 = gUnknown_203B214->unk18;
+        gUnknown_203B218 = gUnknown_203B214->input.menuIndex;
         gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8B4;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B214->unk3C, 1, 1);
@@ -775,18 +768,14 @@ void sub_801A0D8(void)
   struct Item item;
   u8 temp_calc;
 
-  // Needed for the shifts..
-  u32 index_shift;
-  u32 quantity_shift;
-
   sub_8008C54(gUnknown_203B214->unk34);
   sub_80073B8(gUnknown_203B214->unk34);
-  xxx_call_draw_string(gUnknown_203B214->unk1E * 8 + 10,0,gUnknown_80DB8E4,
+  xxx_call_draw_string(gUnknown_203B214->input.unk1E * 8 + 10,0,gUnknown_80DB8E4,
                         gUnknown_203B214->unk34,0);
 
-  for(index = 0; index < gUnknown_203B214->unk1A; index++)
+  for(index = 0; index < gUnknown_203B214->input.unk1A; index++)
     {
-      temp_calc = (gUnknown_203B214->unk1E * gUnknown_203B214->unk1C) + index;
+      temp_calc = (gUnknown_203B214->input.unk1E * gUnknown_203B214->input.unk1C) + index;
       heldItem = GetKecleonShopItem(temp_calc);
       item.id = heldItem->id;
       item.quantity = heldItem->quantity;
@@ -798,12 +787,12 @@ void sub_801A0D8(void)
       sub_8090E14(auStack204,&item,&local_7c);
       buyPrice = GetStackBuyPrice(&item);
       if (buyPrice <= gTeamInventory_203B460->teamMoney) {
-        y = sub_8013800(gUnknown_203B214,index);
+        y = sub_8013800(&gUnknown_203B214->input,index);
         xxx_call_draw_string(8,y,auStack204,gUnknown_203B214->unk34,0);
       }
       else {
         sprintfStatic(auStack112,gUnknown_80DB8EC,auStack204);
-        y = sub_8013800(gUnknown_203B214,index);
+        y = sub_8013800(&gUnknown_203B214->input,index);
         xxx_call_draw_string(8,y,auStack112,gUnknown_203B214->unk34,0);
       }
    }
@@ -826,9 +815,9 @@ u32 sub_801A20C(u32 r0)
         gUnknown_203B21C->unk38->unk14 = gUnknown_203B21C->unk9C;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
-        sub_8013818(gUnknown_203B21C, CountKecleonWareItems(), 0xA, r0);
-        gUnknown_203B21C->unk18 = gUnknown_203B220;
-        sub_8013984((u8 *)gUnknown_203B21C);
+        sub_8013818(&gUnknown_203B21C->input, CountKecleonWareItems(), 0xA, r0);
+        gUnknown_203B21C->input.menuIndex = gUnknown_203B220;
+        sub_8013984(&gUnknown_203B21C->input);
         sub_801A430();
         sub_801A4A4();
         return 1;
@@ -842,12 +831,12 @@ u32 sub_801A2A8(u8 r0)
 
     if(r0 == 0)
     {
-        sub_8013660(gUnknown_203B21C);
+        sub_8013660(&gUnknown_203B21C->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(gUnknown_203B21C))
+        switch(GetKeyPress(&gUnknown_203B21C->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -871,7 +860,7 @@ u32 sub_801A2A8(u8 r0)
                 PlayMenuSoundEffect(4);
                 return 4;
             default:
-                if(sub_80138B8(gUnknown_203B21C, 1) != 0)
+                if(sub_80138B8(&gUnknown_203B21C->input, 1) != 0)
                 {
                     sub_801A430();
                     sub_801A4A4();
@@ -887,26 +876,26 @@ u32 sub_801A2A8(u8 r0)
 
 u8 sub_801A37C(void)
 {
-    return (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + gUnknown_203B21C->unk18;
+    return (gUnknown_203B21C->input.unk1E * gUnknown_203B21C->input.unk1C) + gUnknown_203B21C->input.menuIndex;
 }
 
 void sub_801A398(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B21C->unk3C, 0, 0);
-    gUnknown_203B21C->shopItemCount = CountKecleonWareItems();
-    sub_8013984((u8 *)gUnknown_203B21C);
+    gUnknown_203B21C->input.unk22 = CountKecleonWareItems();
+    sub_8013984(&gUnknown_203B21C->input);
     sub_801A430();
     sub_801A4A4();
     if(r0)
-        AddMenuCursorSprite(gUnknown_203B21C);
+        AddMenuCursorSprite(&gUnknown_203B21C->input);
 }
 
 void sub_801A3DC(void)
 {
     if(gUnknown_203B21C != NULL)
     {
-        gUnknown_203B220 = gUnknown_203B21C->unk18;
+        gUnknown_203B220 = gUnknown_203B21C->input.menuIndex;
         gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB8FC;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
@@ -986,18 +975,14 @@ void sub_801A4A4(void)
   struct Item item;
   u8 temp_calc;
 
-  // Needed for the shifts..
-  u32 index_shift;
-  u32 quantity_shift;
-
   sub_8008C54(gUnknown_203B21C->unk34);
   sub_80073B8(gUnknown_203B21C->unk34);
-  xxx_call_draw_string(gUnknown_203B21C->unk1E * 8 + 10,0,gUnknown_80DB92C,
+  xxx_call_draw_string(gUnknown_203B21C->input.unk1E * 8 + 10,0,gUnknown_80DB92C,
                         gUnknown_203B21C->unk34,0);
 
-  for(index = 0; index < gUnknown_203B21C->unk1A; index++)
+  for(index = 0; index < gUnknown_203B21C->input.unk1A; index++)
     {
-      temp_calc = (gUnknown_203B21C->unk1E * gUnknown_203B21C->unk1C) + index;
+      temp_calc = (gUnknown_203B21C->input.unk1E * gUnknown_203B21C->input.unk1C) + index;
       heldItem = GetKecleonWareItem(temp_calc);
       item.id = heldItem->id;
       item.quantity = heldItem->quantity;
@@ -1006,15 +991,15 @@ void sub_801A4A4(void)
       local_7c.unk4 = 0;
       local_7c.unk6 = 0x58;
       local_7c.unk8 = 1;
-      sub_8090E14(buffer1,(struct Item *)&item,&local_7c);
-      buyPrice = GetStackBuyPrice((struct Item *)&item);
+      sub_8090E14(buffer1,&item,&local_7c);
+      buyPrice = GetStackBuyPrice(&item);
       if (buyPrice <= gTeamInventory_203B460->teamMoney) {
-        y = sub_8013800(gUnknown_203B21C,index);
+        y = sub_8013800(&gUnknown_203B21C->input,index);
         xxx_call_draw_string(8,y,buffer1,gUnknown_203B21C->unk34,0);
       }
       else {
         sprintfStatic(buffer2,gUnknown_80DB934,buffer1);
-        y = sub_8013800(gUnknown_203B21C,index);
+        y = sub_8013800(&gUnknown_203B21C->input,index);
         xxx_call_draw_string(8,y,buffer2,gUnknown_203B21C->unk34,0);
       }
    }
@@ -1052,7 +1037,7 @@ u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 p
     sub_8013818(&gUnknown_203B224->input,GetNumberOfFilledInventorySlots(),param_4,param_2);
     gUnknown_203B224->input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->input.unk1E = gUnknown_203B22A;
-    sub_8013984((u8 *)&gUnknown_203B224->input);
+    sub_8013984(&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
     return 1;
@@ -1152,11 +1137,11 @@ void sub_801A8D0(u8 r0)
     sub_800641C(gUnknown_203B224->unk90, 0, 0);
     FillInventoryGaps();
     gUnknown_203B224->input.unk22 = GetNumberOfFilledInventorySlots();
-    sub_8013984((u8 *)&gUnknown_203B224->input);
+    sub_8013984(&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
     if(r0)
-        AddMenuCursorSprite((u8 *)&gUnknown_203B224->input);
+        AddMenuCursorSprite(&gUnknown_203B224->input);
 }
 
 void sub_801A928(void)

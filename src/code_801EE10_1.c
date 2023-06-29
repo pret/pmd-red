@@ -8,10 +8,7 @@
 
 struct unkStruct_203B2AC
 {
-    u8 unk0[0x1E];
-    s16 unk1E;
-    s16 unk20;
-    u8 unk22[0x34 - 0x22];
+    struct MenuInputStruct input;
     u32 unk34[3];
     u8 unk40[0x48 - 0x40];
     s16 speciesNum;
@@ -48,15 +45,15 @@ extern struct unkStruct_3001B60 *gUnknown_3001B60;
 extern struct UnkTextStruct2 gUnknown_80DC9B0;
 extern struct UnkTextStruct2 gUnknown_80DC9C8;
 
-extern void sub_8013818(void *, u32, u32, u32);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
 extern bool8 sub_80023E4(u32);
 extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
-extern s32 GetKeyPress(void *);
-extern bool8 sub_8013938(void *);
+extern s32 GetKeyPress(struct MenuInputStruct*);
+extern bool8 sub_8013938(struct MenuInputStruct*);
 extern void sub_802452C(void);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013984(void *);
+extern void sub_8013984(struct MenuInputStruct*);
 void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 bool8 ComparePokemonNames(s16 a1, s16 a2);
 
@@ -237,13 +234,13 @@ bool8 sub_8024458(s16 speciesNum, s32 param_2)
   gUnknown_203B2AC->unk148[2] = 10;
   sub_8024604();
   sub_802452C();
-  sub_8013984(gUnknown_203B2AC);
+  sub_8013984(&gUnknown_203B2AC->input);
   return TRUE;
 }
 
 u8 sub_80244E4(void)
 { 
-  switch(GetKeyPress(gUnknown_203B2AC))
+  switch(GetKeyPress(&gUnknown_203B2AC->input))
   {
       case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
@@ -252,7 +249,7 @@ u8 sub_80244E4(void)
         PlayMenuSoundEffect(0);
         return 3;
       default:
-        if (sub_8013938(gUnknown_203B2AC) != 0) {
+        if (sub_8013938(&gUnknown_203B2AC->input) != 0) {
             sub_802452C();
             return 1;
         }
@@ -282,8 +279,8 @@ void sub_802453C(void)
 
 void sub_8024588(void)
 { 
-   gUnknown_203B2AC->unk148[0] = gUnknown_203B2AC->unk20;
-   gUnknown_203B2AC->unk148[1] = gUnknown_203B2AC->unk1E;
+   gUnknown_203B2AC->unk148[0] = gUnknown_203B2AC->input.unk20;
+   gUnknown_203B2AC->unk148[1] = gUnknown_203B2AC->input.unk1E;
    gUnknown_203B2AC->unk148[3] = 0;
    ResetUnusedInputStruct();
    sub_800641C(gUnknown_203B2AC->unkE8,1,1);
@@ -292,8 +289,8 @@ void sub_8024588(void)
 void sub_80245D0(void)
 { 
   CreatePokemonInfoTabScreen
-            (gUnknown_203B2AC->unk34[gUnknown_203B2AC->unk1E],
-             gUnknown_203B2AC->unk1E,&gUnknown_203B2AC->unk4C,
+            (gUnknown_203B2AC->unk34[gUnknown_203B2AC->input.unk1E],
+             gUnknown_203B2AC->input.unk1E,&gUnknown_203B2AC->unk4C,
              &gUnknown_203B2AC->unkB0,gUnknown_203B2AC->unkE0);
 }
 
@@ -305,7 +302,7 @@ void sub_8024604(void)
   gUnknown_203B2AC->unk34[0] = 2;
   gUnknown_203B2AC->unk34[1] = 3;
   gUnknown_203B2AC->unk34[2] = 5;
-  sub_8013818(gUnknown_203B2AC,3,1,gUnknown_203B2AC->unkE0);
+  sub_8013818(&gUnknown_203B2AC->input,3,1,gUnknown_203B2AC->unkE0);
   iVar3 = &gUnknown_203B2AC->unk4C;
   pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2AC->speciesNum];
   sub_808FF20(iVar3,pokeStruct, sub_80023E4(7));

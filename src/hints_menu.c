@@ -42,9 +42,9 @@ extern struct Hints gGameHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 
 extern void sub_801E714(void);
-extern void sub_8013818(void *, u32, u32, u32);
-extern bool8 sub_8013938(void *);
-extern s32 GetKeyPress(void *);
+extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
+extern bool8 sub_8013938(struct MenuInputStruct *);
+extern s32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_801E714(void);
 extern void sub_801E76C(void);
@@ -52,11 +52,11 @@ extern void DisplayChosenHint(void);
 extern void xxx_call_draw_string(s32, u32, u8 *, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
-extern s32 sub_8013800(void *, u32);
+extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern void sub_8008C54(u32);
 void DrawHintSelectionMenu(void);
 void sub_801E594(void);
-void sub_8013984(void *);
+void sub_8013984(struct MenuInputStruct *);
 void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 extern void sub_8013660(struct MenuInputStruct *);
@@ -73,7 +73,7 @@ u32 sub_801E3F0(u32 r0)
     sub_8012D08(gUnknown_203B264->unk38, 0xA);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B264->unk3C, 1, 1);
-    sub_8013818(gUnknown_203B264, 0x5, 0xA, r0);
+    sub_8013818(&gUnknown_203B264->input, 0x5, 0xA, r0);
     sub_801E594();
     DrawHintSelectionMenu();
     return 1;
@@ -118,7 +118,7 @@ void CreateHintSelectionScreen(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B264->unk3C, 0, 0);
-    sub_8013984(gUnknown_203B264);
+    sub_8013984(&gUnknown_203B264->input);
     sub_801E594();
     DrawHintSelectionMenu();
     if(r0)
@@ -191,7 +191,7 @@ void DrawHintSelectionMenu(void)
     xxx_call_draw_string(16, 0, gUnknown_80DC0D4, gUnknown_203B264->unk34, 0);
     for(hintIndex = 0; hintIndex < MAX_HINTS; hintIndex++)
     {
-        y = sub_8013800(gUnknown_203B264, hintIndex);
+        y = sub_8013800(&gUnknown_203B264->input, hintIndex);
         xxx_call_draw_string(10, y, gGameHints[hintIndex].heading, gUnknown_203B264->unk34, 0);
     }
     sub_80073E0(gUnknown_203B264->unk34);
@@ -207,7 +207,7 @@ u32 CreateHintDisplayScreen(u32 index)
     gUnknown_203B268->unk38->unk14 = gUnknown_203B268->unk9C;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B268->unk3C, 1, 1);
-    sub_8013818(gUnknown_203B268, 5, 1, gUnknown_203B268->unk34);
+    sub_8013818(&gUnknown_203B268->input, 5, 1, gUnknown_203B268->unk34);
     gUnknown_203B268->input.unk1E = index;
     sub_801E714();
 
@@ -216,7 +216,7 @@ u32 CreateHintDisplayScreen(u32 index)
 
 u32 HandleHintDisplayScreenInput(void)
 {
-    switch(GetKeyPress(gUnknown_203B268))
+    switch(GetKeyPress(&gUnknown_203B268->input))
     {
         case 2:
             PlayMenuSoundEffect(1);
@@ -225,7 +225,7 @@ u32 HandleHintDisplayScreenInput(void)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if(sub_8013938(gUnknown_203B268)){
+            if(sub_8013938(&gUnknown_203B268->input)){
                 sub_801E714();
                 return 1;
             }

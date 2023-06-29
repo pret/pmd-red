@@ -76,8 +76,8 @@ struct MenuInputStruct
     /* 0x1A */ s16 unk1A;
     /* 0x1C */ s16 unk1C;
     /* 0x1E */ s16 unk1E;
-    /* 0x20 */ u16 unk20;
-    /* 0x22 */ u16 unk22;
+    /* 0x20 */ s16 unk20;
+    /* 0x22 */ s16 unk22;
     /* 0x24 */ u16 unk24;
                u16 unk26;
     /* 0x28 */ struct MenuInputStructSub unk28;

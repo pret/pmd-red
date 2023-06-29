@@ -2,16 +2,7 @@ struct unkStruct_203B2E8
 {
     // size: 0xA8
     u8 pelipperBoardSlots[MAX_ACCEPTED_JOBS];
-    u32 unk8;
-    u8 fillC[0x20 - 0xC];
-    s16 unk20;
-    s16 unk22;
-    s16 unk24;
-    s16 unk26;
-    u16 unk28;
-    u16 acceptedJobs;
-    u16 unk2C;
-    u8 fill2E[0x3C - 0x2E]; 
+    struct MenuInputStruct input;
     u32 unk3C;
     struct UnkTextStruct2 *unk40;
     struct UnkTextStruct2 unk44[4];
