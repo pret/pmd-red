@@ -64,13 +64,13 @@ struct MenuInputStruct
 {
     s32 unk0;
     /* 0x4 */ u16 unk4;
-    /* 0x6 */ u16 unk6;
+    /* 0x6 */ s16 unk6;
     /* 0x8 */ u16 unk8;
     /* 0x8 */ u16 unkA;
     /* 0xC */ u16 unkC;
     /* 0xE */ u16 unkE;
     /* 0x10 */ u32 unk10;
-    /* 0x14 */ u16 unk14;
+    /* 0x14 */ s16 unk14;
     /* 0x16 */ u16 unk16;
     /* 0x18 */ s16 menuIndex;
     /* 0x1A */ s16 unk1A;

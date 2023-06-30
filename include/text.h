@@ -2,9 +2,10 @@
 #define GUARD_TEXT_H 
 
 struct UnkTextStruct1 {
-    u8 fill00[4];
-    u16 unk04;
-    u8 fill06[2];
+    s16 unk0;
+    s16 unk2;
+    s16 unk04;
+    s16 unk6;
     u16 unk08;
     u16 fillA;
     u32 unkC;
