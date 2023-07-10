@@ -13,7 +13,7 @@ extern void sub_8012D08(void *, u32);
 extern void sub_8013818(void *, u32, u32, u32);
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
-void sub_8013780(u32 *, u32);
+void sub_8013780(struct MenuInputStruct*, u32);
 void sub_801F280(u32);
 
 u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_5,u32 param_6)
@@ -63,8 +63,8 @@ u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_
   sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B270->unk58,1,1);
-  sub_8013818(&gUnknown_203B270->unk1C,iVar5,iVar5,param_6);
-  sub_8013780(&gUnknown_203B270->unk1C,0);
+  sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
+  sub_8013780(&gUnknown_203B270->input,0);
   sub_801F280(1);
   return 1;
 }
