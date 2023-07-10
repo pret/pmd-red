@@ -294,7 +294,7 @@ struct Entity
     /* 0x54 */ u16 spriteGlobalIndex;
     u8 fill56[0x64 - 0x56];
     u32 unk64;
-    u16 unk68;
+    s16 unk68;
     /* 0x6A */ u8 unk6A;
     /* 0x6A */ u8 unk6B;
     /* 0x6C */ u8 direction;
@@ -346,6 +346,7 @@ enum ClientType
 {
     CLIENT_TYPE_NONE = 0,
     CLIENT_TYPE_CLIENT = 1, // Used for mission clients that need rescuing.
+    CLIENT_TYPE_PARTNER,
     CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
 };
 

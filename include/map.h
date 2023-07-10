@@ -48,14 +48,19 @@ struct Tile
 
 struct RoomData
 {
-    u8 fill0[0x2 - 0x0];
+    u8 unk0;
+    u8 unk1;
     // All coordinates are inclusive.
     // These are not aligned properly to use the Position struct.
     /* 0x2 */ s16 bottomRightCornerX;
     /* 0x4 */ s16 bottomRightCornerY;
     /* 0x6 */ s16 topLeftCornerX;
     /* 0x8 */ s16 topLeftCornerY;
-    u8 fillA[0x1A - 0xA];
+    u8 fillA[0xC - 0xA];
+    u32 unkC; // bottom right x
+    u32 unk10; // bottom right y
+    u32 unk14; // top left x
+    u32 unk18; // top left y
 };
 
 #endif

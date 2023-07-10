@@ -246,20 +246,21 @@ void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index)
     sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {COLOR_2 CYAN}%s{END_COLOR_TEXT_2}
 }
 
-void sub_808D930(u8 *buffer, s16 index)
+void sub_808D930(u8 *buffer, s32 index)
 {
   char *unownString;
   s32 unownIndex;
   const char *preload;
+  s16 index_s16 = index;
 
-  if (GetBaseSpecies(index) == MONSTER_UNOWN) {
+  if (GetBaseSpecies(index_s16) == MONSTER_UNOWN) {
     preload = gUnknown_8107630; // %s%c
     unownString = GetMonSpecies(MONSTER_UNOWN);
-    unownIndex = GetUnownIndex(index);
+    unownIndex = GetUnownIndex(index_s16);
     sprintfStatic(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!?
   }
   else {
-    sprintfStatic(buffer,gUnknown_8107638, gMonsterParameters[index].species); // %s
+    sprintfStatic(buffer,gUnknown_8107638, gMonsterParameters[index_s16].species); // %s
   }
 }
 
@@ -376,9 +377,10 @@ u32 GetSize(s16 index)
     return gMonsterParameters[index].size;
 }
 
-u8 GetFriendArea(s16 index)
+u8 GetFriendArea(s32 index)
 {
-    return gMonsterParameters[index].friendArea;
+    s16 index_s32 = index;
+    return gMonsterParameters[index_s32].friendArea;
 }
 
 u16 GetBaseHP(s16 index)
@@ -422,9 +424,10 @@ u8 GetPokemonAbility(s16 index, u32 abilityIndex)
     return gMonsterParameters[index].abilities[abilityIndex];
 }
 
-s16 GetDexInternalNo(s16 index, u32 r1)
+s16 GetDexInternalNo(s32 index, u32 r1)
 {
-    return gMonsterParameters[index].dexInternal[r1];
+    s16 index_s16 = index;
+    return gMonsterParameters[index_s16].dexInternal[r1];
 }
 
 s16 GetRecruitRate(s16 index)
@@ -617,7 +620,7 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
     }
 }
 
-void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
+void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 level)
 {
   u8 buffer[12];
   s32 id = _id;
@@ -633,11 +636,11 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 a3)
     DecompressATFile((char*)gLevelCurrentData, 0, file);
     CloseFile(file);
   }
-  a3 -= 1;
-  if ( a3 < 0 )
-    a3 = 0;
+  level -= 1;
+  if ( level < 0 )
+    level = 0;
 
-   *a1 = gLevelCurrentData[a3];
+   *a1 = gLevelCurrentData[level];
 }
 
 u8* DecompressMoveID(u8* a1, u16* moveID)

@@ -5,6 +5,9 @@
 #include "input.h"
 #include "code_800D090.h"
 #include "moves.h"
+#include "code_801EE10.h"
+
+extern struct unkStruct_203B270 *gUnknown_203B270;
 
 struct unkStruct_203B274
 {
@@ -12,14 +15,7 @@ struct unkStruct_203B274
     struct PokemonStruct *pokeStruct;
     struct unkStruct_808E218_arg *unk4;
     struct unkStruct_808E218_arg unk8;
-    u32 unk348;
-    u8 fill34C[0x360 - 0x34C];
-    s16 unk360;
-    s16 unk362;
-    s16 unk364;
-    s16 unk366;
-    s16 unk368;
-    u8 fill36A[0x37C - 0x36A];
+    struct MenuInputStruct input;
     s32 unk37C;
     struct UnkTextStruct2 *unk380;
     struct UnkTextStruct2 unk384[4];
@@ -31,22 +27,39 @@ extern struct UnkTextStruct2 gUnknown_80DC2AC;
 
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_8013818(u32 *, u32, u32, u32);
-extern s32 GetKeyPress(void *);
-extern void sub_8013660(void *);
-extern void AddMenuCursorSprite(void *);
-extern u8 sub_80138B8(u32 *, u32);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
+extern s32 GetKeyPress(struct MenuInputStruct*);
+extern void sub_8013660(struct MenuInputStruct*);
+extern void AddMenuCursorSprite(struct MenuInputStruct*);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013984(void *);
+extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(u32 *, s32);
+extern s32 sub_8013800(struct MenuInputStruct*, s32);
 extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 
 u32 sub_801F7E4(void);
 void sub_801F690(void);
 void sub_801F700(void);
+
+s32 sub_801F3F8(void)
+{
+  struct Move *move;
+  int index;
+  s32 counter;
+
+  counter = 0;
+  for(index = 0; index < 8; index++)
+  {
+    move = &gUnknown_203B270->moves[index];
+    if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+      counter++;
+    }
+  }
+  return counter;
+}
 
 bool8 sub_801F428(s16 index, s32 param_2) {
 
@@ -65,7 +78,7 @@ bool8 sub_801F428(s16 index, s32 param_2) {
     gUnknown_203B274->unk3E4[3] = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B274->unk384, 1, 1);
-    sub_8013818(&gUnknown_203B274->unk348, sub_801F7E4(), 4, param_2);
+    sub_8013818(&gUnknown_203B274->input, sub_801F7E4(), 4, param_2);
     sub_801F690();
     sub_801F700();
     return 1;
@@ -74,11 +87,11 @@ bool8 sub_801F428(s16 index, s32 param_2) {
 u32 sub_801F520(u8 param_1)
 {
     if (param_1 == 0) {
-        sub_8013660(&gUnknown_203B274->unk348);
+        sub_8013660(&gUnknown_203B274->input);
         return 0;
     }
     else {
-        switch(GetKeyPress(&gUnknown_203B274->unk348))
+        switch(GetKeyPress(&gUnknown_203B274->input))
         {
             case 2:
                 PlayMenuSoundEffect(1);
@@ -92,7 +105,7 @@ u32 sub_801F520(u8 param_1)
             default:
                 break;
         }
-        if (sub_80138B8(&gUnknown_203B274->unk348,1) != 0) {
+        if (sub_80138B8(&gUnknown_203B274->input,1) != 0) {
             sub_801F690();
             sub_801F700();
             return 1;
@@ -105,18 +118,18 @@ u32 sub_801F520(u8 param_1)
 
 u16 sub_801F5B4(void)
 { 
-    return gUnknown_203B274->unk4->unk0[gUnknown_203B274->unk366 * gUnknown_203B274->unk364 + gUnknown_203B274->unk360];
+    return gUnknown_203B274->unk4->unk0[gUnknown_203B274->input.unk1E * gUnknown_203B274->input.unk1C + gUnknown_203B274->input.menuIndex];
 }
 
 void sub_801F5F0(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B274->unk384, 0, 0);
-    sub_8013984(&gUnknown_203B274->unk348);
+    sub_8013984(&gUnknown_203B274->input);
     sub_801F690();
     sub_801F700();
     if(r0)
-        AddMenuCursorSprite(&gUnknown_203B274->unk348);
+        AddMenuCursorSprite(&gUnknown_203B274->input);
 }
 
 void sub_801F63C(void)
@@ -196,12 +209,12 @@ void sub_801F700(void)
 
     sub_8008C54(gUnknown_203B274->unk37C);
     sub_80073B8(gUnknown_203B274->unk37C);
-    sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->unk366 + 1,gUnknown_203B274->unk368); // Moves Page: %d/%d 
+    sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->input.unk1E + 1,gUnknown_203B274->input.unk20); // Moves Page: %d/%d 
     xxx_call_draw_string(0x10,0,buffer1,gUnknown_203B274->unk37C,0);
-    for(index = 0; index < gUnknown_203B274->unk362; index++)
+    for(index = 0; index < gUnknown_203B274->input.unk1A; index++)
     {
-        sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->unk366 * gUnknown_203B274->unk364 + index]);
-        y = sub_8013800(&gUnknown_203B274->unk348, index);
+        sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->input.unk1E * gUnknown_203B274->input.unk1C + index]);
+        y = sub_8013800(&gUnknown_203B274->input, index);
         xxx_call_draw_string(8,y,buffer2,gUnknown_203B274->unk37C,0);
     }
     sub_80073E0(gUnknown_203B274->unk37C);

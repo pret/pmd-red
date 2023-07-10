@@ -7,6 +7,7 @@
 #include "code_809447C.h"
 #include "text_util.h"
 
+#include "constants/colors.h"
 #include "constants/monster.h"
 #include "file_system.h"
 #include "code_800D090.h"
@@ -1451,7 +1452,7 @@ void unk_MovePrintData(struct Move* move, int y) {
     s32 power;
     const char* text;
     
-    sub_80078A4(y, 4, 72, 200, 7);
+    sub_80078A4(y, 4, 72, 200, COLOR_WHITE_2);
     sub_8092D54(gAvailablePokemonNames, move);
     xxx_format_and_draw(4, 74, gUnknown_810CF00, y, 0);
     xxx_format_and_draw(4, 86, gPtrTypeText, y, 0);

@@ -1030,7 +1030,7 @@ bool8 TrapbustOrbAction(struct Entity * pokemon,struct Entity * target)
     }
     else
     {
-        if (tile->room == 0xFF) {
+        if (tile->room == CORRIDOR_ROOM) {
             bottomRightCornerX    =   target->pos.x - gDungeon->visibilityRange;
             bottomRightCornerY    =   target->pos.y - gDungeon->visibilityRange;
             topLeftCornerX      =   bottomRightCornerX + gDungeon->visibilityRange;

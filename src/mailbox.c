@@ -7,22 +7,7 @@
 #include "wonder_mail.h"
 #include "menu_input.h"
 
-
-extern u8 *gUnknown_80D4990[];
-extern u8 *gUnknown_80D4970[];
-
-extern bool8 IsMailinJobSlot(struct WonderMail *mail);
-
-void sub_802E578(void);
-void HandleMailActionMenu(void);
-void HandleMailboxMenu(void);
-void nullsub_133(void);
-void sub_802E0A0(void);
-void sub_802E1AC(void);
-void sub_802E73C(void);
-void sub_802E758(void);
-void sub_802E774(void);
-void sub_802E7D0(void);
+EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
 const struct UnkTextStruct2 gUnknown_80E0284 =
 {
@@ -73,11 +58,24 @@ const u8 gMailAccepted[] = "Accepted";
 const u8 gUnknown_80E0324[] = "/";
 static const u8 mailbox_fill[] = "pksdir0";
 
-extern struct unkStruct_203B304 *gUnknown_203B304;
+extern u8 *gUnknown_80D4990[];
+extern u8 *gUnknown_80D4970[];
+
+extern bool8 IsMailinJobSlot(struct WonderMail *mail);
+
+void sub_802E578(void);
+void HandleMailActionMenu(void);
+void HandleMailboxMenu(void);
+void nullsub_133(void);
+void sub_802E0A0(void);
+void sub_802E1AC(void);
+void sub_802E73C(void);
+void sub_802E758(void);
+void sub_802E774(void);
+void sub_802E7D0(void);
 extern void sub_802E088(u32);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
-
 extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);

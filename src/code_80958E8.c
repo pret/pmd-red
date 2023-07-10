@@ -13,10 +13,7 @@
 extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(struct DungeonLocation *);
 extern s16 GetBaseSpecies(s16);
-extern bool8 IsInvalidItemReward(u8);
 extern u8 sub_803C1D0(struct DungeonLocation *, u8);
-extern bool8 IsNotMoneyOrUsedTMItem(u8);
-extern u8 xxx_bit_lut_lookup_8091E50(u8 ,u8 );
 extern u32 GetMaxItemsAllowed(u8);
 extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
@@ -24,7 +21,7 @@ extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(struct WonderMail *);
 
-extern struct unkStruct_203B490 *gUnknown_203B490;
+EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
 extern struct unkStruct_203B490 gUnknown_2039448;
 
 void LoadMailInfo(void)

@@ -1,4 +1,3 @@
-#include "gba/defines.h"
 #include "global.h"
 #include "game_options.h"
 #include "code_8092334.h"

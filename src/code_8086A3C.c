@@ -1,22 +1,21 @@
+#include "constants/monster.h"
 #include "global.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_music.h"
+#include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
 #include "dungeon_util_1.h"
+#include "dungeon_util.h"
 
-extern void LoadIQSkills(struct Entity *);
-extern struct Entity *GetPartnerEntity();
-extern struct Entity *xxx_call_GetLeader(void);
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
 extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
 extern u8 HasRecruitedMon(u32);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
-extern void sub_80854D4();
 extern void sub_80855E4(void *);
 extern void sub_8068FE0(struct Entity *, u32, u32);
 extern void sub_8097FA8(u32);
@@ -30,7 +29,18 @@ extern void SkarmoryEntry(struct Entity *);
 extern void SpriteLookAroundEffect(struct Entity *);
 extern void sub_8086A54(struct Entity *);
 extern void sub_808563C(void *);
+extern void sub_8087144();
+void sub_80866C4(u8 *);
+extern void sub_8072008(struct Entity *pokemon, struct Entity *r1, u32 r2, u8 r3, u32);
+extern bool8 sub_8085B80(u8 *);
+extern void sub_8085B4C(u8 *, void *, struct Entity **, u32);
+extern void sub_803E46C(u32);
 
+extern u8 gUnknown_810739C[];
+extern u8 gUnknown_81073D4[];
+extern u8 gUnknown_810740C[];
+extern s16 gUnknown_80F57CC;
+extern u8 gUnknown_8101440[];
 extern u8 gSkarmoryPreFightDialogue_1;
 extern u8 gSkarmoryPreFightDialogue_2;
 extern u8 gSkarmoryPreFightDialogue_3;
@@ -43,6 +53,19 @@ extern u8 gSkarmoryPreFightDialogue_9;
 extern u8 gSkarmoryReFightDialogue_1;
 extern u8 gSkarmoryReFightDialogue_2;
 extern u8 gSkarmoryReFightDialogue_3;
+extern u8 gTeamMeaniesPreFightDialogue_1;
+extern u8 gTeamMeaniesPreFightDialogue_2;
+extern u8 gTeamMeaniesPreFightDialogue_3;
+extern u8 gTeamMeaniesPreFightDialogue_4;
+extern u8 gTeamMeaniesPreFightDialogue_5;
+extern u8 gTeamMeaniesPreFightDialogue_6;
+extern u8 gTeamMeaniesPreFightDialogue_7;
+extern u8 gTeamMeaniesReFightDialogue_1;
+extern u8 gTeamMeaniesReFightDialogue_2;
+extern u8 gTeamMeaniesReFightDialogue_3;
+extern u8 gTeamMeaniesReFightDialogue_4;
+extern u8 gTeamMeaniesReFightDialogue_5;
+
 extern u8 gUnknown_8100D3C;
 
 void sub_8086A3C(struct Entity *pokemon)
@@ -117,7 +140,7 @@ void sub_8086B14(void)
   sub_80855E4(sub_8086A3C);
   sub_8086A3C(SkarmoryEntity);
   DiglettEntity->info->unk15C = 1;
-  sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y + -2);
+  sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y - 2);
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_DIGLETT);
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_SKARMORY);
 }
@@ -278,4 +301,187 @@ void sub_8086F00(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_METAPOD);
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_GENGAR);
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0xA0, MONSTER_CATERPIE);
+}
+
+// From @jiangzhengwenjz:
+// Matches this way for -O2 but can match w/o this hack on -O1
+// https://decomp.me/scratch/BTqWo 
+void sub_8086F54(u8 param_1, u8 param_2)
+{
+  struct Entity *entity;
+  s32 index;
+  u32 unk1 = 0;
+
+  
+  if (param_2 == 4 || param_2 == 5) {
+    void *labels[2];
+    labels[0] = labels[1] = &&label;
+
+    for(index = 0; index < 0x10; index++)
+    {
+      entity = gDungeon->wildPokemon[index];
+      if ((EntityExists(entity)) && (entity->info->clientType != param_1)) {
+        return;
+      }
+    }
+    if(!unk1)
+    {
+      sub_8097FA8(3);
+    label:
+      gDungeon->unk2 = 1;
+    }
+  }
+}
+
+void TeamMeaniesPreFightDialogue(void)
+{
+    struct Entity *LeaderEntity;
+
+    LeaderEntity = xxx_call_GetLeader();
+    sub_8086448();
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_1);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
+    sub_803E708(10, 0x46);
+    sub_8087144();
+    DungeonStartNewBGM(MUS_THERES_TROUBLE);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_3);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_4);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_5);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_6);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_7);
+    sub_803E708(10, 0x46);
+    ShiftCameraToPosition(&LeaderEntity->pixelPos, 0x10);
+}
+
+void TeamMeaniesReFightDialogue(void)
+{
+    struct Entity *LeaderEntity;
+    struct Entity *PartnerEntity;
+
+    LeaderEntity = xxx_call_GetLeader();
+    PartnerEntity = GetPartnerEntity();
+    sub_8086448();
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_1);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
+    sub_803E708(10, 0x46);
+    sub_8087144();
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_2);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_3);
+    sub_803E708(10, 0x46);
+    sub_806CDD4(LeaderEntity, 6, 4);
+    sub_806CDD4(PartnerEntity, 6, 4);
+    sub_803E708(10, 0x46);
+    sub_806CDD4(LeaderEntity, 7, 4);
+    sub_806CDD4(PartnerEntity, 7, 4);
+    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_4);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_5);
+    sub_803E708(10, 0x46);
+    ShiftCameraToPosition(&LeaderEntity->pixelPos, 0x10);
+}
+
+void sub_8087130(void)
+{
+    sub_8086448();
+    sub_80866C4(gUnknown_8101440);
+}
+
+void sub_8087144(void)
+{
+    struct Entity *iVar2;
+    struct Entity *iVar3;
+    struct Entity *iVar4;
+    u8 auStack_10c [56];
+    u8 puStack_60[56];
+    u8 puStack_5c[56];
+    u8 *puStack_64[3];
+    struct Entity *pEStack_58[3];
+    u8 auStack_4c [48];
+
+    iVar2 = GetEntityFromClientType(5);
+    iVar3 = GetEntityFromClientType(6);
+    iVar4 = GetEntityFromClientType(7);
+    memcpy(auStack_10c,gUnknown_810739C, 0x38);
+    memcpy(puStack_60, gUnknown_81073D4, 0x38);
+    memcpy(puStack_5c, gUnknown_810740C, 0x38);
+    puStack_64[0] = auStack_10c;
+    puStack_64[1] = puStack_60;
+    puStack_64[2] = puStack_5c;
+    pEStack_58[0] = iVar2;
+    pEStack_58[1] = iVar3;
+    pEStack_58[2] = iVar4;
+    DungeonStartNewBGM(MUS_THERES_TROUBLE);
+    sub_8086A54(iVar2);
+    sub_8086A54(iVar3);
+    sub_8086A54(iVar4);
+    sub_8085B4C(auStack_4c,puStack_64,pEStack_58,3);
+    iVar2->info->unk15F = 1;
+    iVar3->info->unk15F = 1;
+    iVar4->info->unk15F = 1;
+    while( TRUE ) {
+        if (!sub_8085B80(auStack_4c)) break;
+        sub_803E46C(0x46);
+    }
+    iVar2->info->unk15F = 0;
+    iVar3->info->unk15F = 0;
+    iVar4->info->unk15F = 0;
+}
+
+void sub_8087230(void)
+{
+    struct Entity *LeaderEntity;
+    struct Entity *ZapdosEntity;
+
+    LeaderEntity = xxx_call_GetLeader();
+    ZapdosEntity = GetEntityFromClientType(0x8);
+    DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
+    sub_8085374();
+    sub_80854D4();
+    sub_8085930(4);
+    sub_80855E4(sub_8086A3C);
+    SetFacingDirection(ZapdosEntity, 0);
+    sub_8086A3C(ZapdosEntity);
+    sub_8085860(LeaderEntity->pos.x, LeaderEntity->pos.y - 3);
+    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SHIFTRY);
+    CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ZAPDOS);
+}
+
+void sub_808729C(void)
+{
+  struct Entity *LeaderEntity;
+  struct Entity *ZapdosEntity;
+  
+  LeaderEntity = xxx_call_GetLeader();
+  ZapdosEntity = GetEntityFromClientType(8);
+  sub_80854D4();
+  sub_8085930(4);
+  sub_80855E4(sub_8086A3C);
+  if (sub_8086AE4(0x91) != 0) {
+    sub_8068FE0(ZapdosEntity,0x21c,0);
+  }
+  else {
+    sub_8072008(ZapdosEntity,ZapdosEntity,gUnknown_80F57CC,0,0);
+    SetFacingDirection(ZapdosEntity,0);
+    sub_8086A3C(ZapdosEntity);
+  }
+  sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y - 3);
+  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SHIFTRY);
+  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ZAPDOS);
+}
+
+void sub_8087334(u8 param_1, u8 param_2)
+{
+  if ((param_2 == 7 || param_2 == 8 || param_2 == 9) && (param_1 == 8)) {
+    sub_8097FA8(5);
+    gDungeon->unk2 = 1;
+  }
 }

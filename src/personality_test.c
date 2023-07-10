@@ -1,4 +1,5 @@
 #include "global.h"
+#include "input.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
@@ -6,7 +7,6 @@
 #include "random.h"
 #include "file_system.h"
 #include "pokemon.h"
-#include "input.h"
 #include "save.h"
 #include "memory.h"
 #include "game_options.h"
@@ -62,16 +62,16 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
-extern void sub_8013818(struct UnkInputStruct **r0, s32, u32, u32);
+extern void sub_8013818(struct MenuInputStruct *r0, s32, u32, u32);
 
-extern u32 GetKeyPress(struct UnkInputStruct **r0);
-extern u8 sub_80138B8(struct UnkInputStruct **r0, u32);
+extern u32 GetKeyPress(struct MenuInputStruct *r0);
+extern u8 sub_80138B8(struct MenuInputStruct *r0, u32);
 extern void PlayMenuSoundEffect(u32);
 
 
-extern void sub_8013984(struct UnkInputStruct **r0);
-u32 sub_8013800(struct UnkInputStruct **r0, u32);
-extern void AddMenuCursorSprite(struct UnkInputStruct **r0);
+extern void sub_8013984(struct MenuInputStruct *r0);
+u32 sub_8013800(struct MenuInputStruct *r0, u32);
+extern void AddMenuCursorSprite(struct MenuInputStruct *r0);
 extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
@@ -791,7 +791,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->unkb4[3] = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B404->unk54, 1, 1);
-    sub_8013818(&gUnknown_203B404->unk18, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
+    sub_8013818(&gUnknown_203B404->input, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
@@ -801,17 +801,17 @@ u16 HandlePartnerSelectionInput(void)
 {
   s32 partnerID;
 
-  partnerID = gUnknown_203B404->currPartnerSelection;
+  partnerID = gUnknown_203B404->input.menuIndex;
   gUnknown_203B404->unk16 = 0;
-  if (GetKeyPress(&gUnknown_203B404->unk18) == INPUT_A_BUTTON) {
+  if (GetKeyPress(&gUnknown_203B404->input) == INPUT_A_BUTTON) {
     PlayMenuSoundEffect(0);
-    return gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
+    return gUnknown_203B404->PartnerArray[gUnknown_203B404->input.menuIndex];
   }
   else {
-    if (sub_80138B8(&gUnknown_203B404->unk18, 1) != '\0') {
+    if (sub_80138B8(&gUnknown_203B404->input, 1) != '\0') {
       RedrawPartnerSelectionMenu();
     }
-    if (partnerID != gUnknown_203B404->currPartnerSelection) {
+    if (partnerID != gUnknown_203B404->input.menuIndex) {
       PersonalityTest_DisplayPartnerSprite();
     }
     if (gUnknown_203B404->unk16 != '\0') {
@@ -825,12 +825,12 @@ u16 HandlePartnerSelectionInput(void)
 
 void sub_803CE34(u8 param_1)
 {
-  gUnknown_203B404->numPartners = GetValidPartners();
-  sub_8013984(&gUnknown_203B404->unk18);
+  gUnknown_203B404->input.unk22 = GetValidPartners();
+  sub_8013984(&gUnknown_203B404->input);
   RedrawPartnerSelectionMenu();
   PersonalityTest_DisplayPartnerSprite();
   if (param_1 != 0) {
-    AddMenuCursorSprite(&gUnknown_203B404->unk18);
+    AddMenuCursorSprite(&gUnknown_203B404->input);
   }
 }
 
@@ -1006,7 +1006,7 @@ void PersonalityTest_DisplayPartnerSprite(void)
   u8 *r6;
   u32 faceIndex;
 
-  partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->currPartnerSelection];
+  partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->input.menuIndex];
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(partnerID);

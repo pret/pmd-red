@@ -94,6 +94,8 @@ SECTIONS {
         src/code_8012A18.o(.text);
         src/more_input.o(.text);
         src/menu_input.o(.text);
+        asm/menu_input.o(.text);
+        src/menu_input_1.o(.text);
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
@@ -107,7 +109,6 @@ SECTIONS {
         src/kecleon_items_1.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
-        asm/code_801B3C0.o(.text);
         src/code_801C620.o(.text);
         asm/code_801C620.o(.text);
         src/code_801D760.o(.text);
@@ -150,7 +151,7 @@ SECTIONS {
         src/wonder_mail_5.o(.text);
         src/wonder_mail_6.o(.text);
         src/post_office_guide.o(.text);
-        asm/code_8031D70.o(.text);
+        src/code_8031D70.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
         asm/friend_rescue.o(.text);
@@ -203,6 +204,7 @@ SECTIONS {
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
         asm/code_80495E4.o(.text);
+        src/dungeon_map_access_1.o(.text);
         src/tile_types.o(.text);
         asm/code_804AFAC.o(.text);
         src/code_80521D0.o(.text);
@@ -307,8 +309,6 @@ SECTIONS {
         src/code_80958E8_1.o(.text);
         asm/code_8096AF8.o(.text);
         src/code_80972F4.o(.text);
-        asm/code_8097318.o(.text);
-        src/code_809747C.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
@@ -434,7 +434,7 @@ SECTIONS {
         src/wonder_mail_5.o(.rodata);
         src/wonder_mail_6.o(.rodata);
         src/post_office_guide.o(.rodata);
-        data/data_80E1F30.o(.rodata);
+        src/code_8031D70.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);
         src/main_menu.o(.rodata);

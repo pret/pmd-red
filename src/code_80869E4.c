@@ -1,8 +1,9 @@
 #include "global.h"
+#include "constants/direction.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_util_1.h"
 #include "random.h"
-#include "constants/direction.h"
 
 struct unkStruct_202F3D0
 {
@@ -19,12 +20,10 @@ EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
 void sub_80869E4(struct Entity *entity, u32, u8, s8);
-extern void sub_80859F0(u32);
 extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-extern struct Entity *xxx_call_GetLeader(void);
 void SpriteLookAroundEffect(struct Entity *entity);
 extern void DisplayDungeonDialogue(u32);
 void sub_8086494();
@@ -40,7 +39,6 @@ extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
 extern void sub_8086384(struct Entity *entity);
-extern void sub_8085930(u32);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_806CE68(struct Entity *, u32);
 extern void sub_806CDD4(struct Entity *, u8, u32);
@@ -60,7 +58,7 @@ void sub_80862DC(struct Entity *entity)
 {
     struct Position32 pos;
     pos.x = entity->pixelPos.x;
-    pos.y = entity->pixelPos.y + (0xE0 << 6);
+    pos.y = entity->pixelPos.y + 0x3800;
 
     sub_804535C(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_NORTH);
@@ -71,7 +69,7 @@ void sub_8086310(struct Entity *entity)
 {
     struct Position32 pos;
     pos.x = entity->pixelPos.x;
-    pos.y = entity->pixelPos.y + (0x90 << 8);
+    pos.y = entity->pixelPos.y + 0x9000;
 
     sub_804535C(entity, &pos);
     sub_806CE68(entity, DIRECTION_SOUTH);
@@ -82,8 +80,8 @@ void sub_8086310(struct Entity *entity)
 void sub_8086348(struct Entity *entity)
 {
     struct Position32 pos;
-    pos.x = entity->pixelPos.x + (0xF0 << 7);
-    pos.y = entity->pixelPos.y + 0xffffe000;
+    pos.x = entity->pixelPos.x + 0x7800;
+    pos.y = entity->pixelPos.y - 0x2000;
 
     sub_804535C(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_WEST);
@@ -93,7 +91,7 @@ void sub_8086348(struct Entity *entity)
 void sub_8086384(struct Entity *entity)
 {
     struct Position32 pos;
-    pos.x = entity->pixelPos.x + (0xF0 << 7);
+    pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y;
 
     sub_804535C(entity, &pos);
@@ -133,17 +131,17 @@ void sub_8086404(struct Entity *entity)
 
 void sub_8086410(struct Entity *entity)
 {
-    IncreaseEntityPixelPos(entity, 0, 0xffffff00);
+    IncreaseEntityPixelPos(entity, 0, -0x100);
 }
 
 void sub_8086424(struct Entity *entity)
 {
-    IncreaseEntityPixelPos(entity, 0, 0x80 << 1);
+    IncreaseEntityPixelPos(entity, 0, 0x100);
 }
 
 void sub_8086434(struct Entity *entity)
 {
-    IncreaseEntityPixelPos(entity, 0xffffff00, 0);
+    IncreaseEntityPixelPos(entity, -0x100, 0);
 }
 
 void sub_8086448(void)
@@ -306,12 +304,12 @@ void sub_8086690(void)
 }
 
 
-void sub_80866C4(u32 entity)
+void sub_80866C4(u32 dialogue)
 {
 
     SpriteLookAroundEffect(xxx_call_GetLeader());
     sub_803E708(0xA, 0x46);
-    DisplayDungeonDialogue(entity);
+    DisplayDungeonDialogue(dialogue);
     sub_803E708(0xA, 0x46);
     sub_8086494();
     gDungeon->unk2 = 1;

@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "team_inventory.h"
 #include "text.h"
 #include "input.h"
@@ -21,13 +22,7 @@ struct unkStruct_3001B5C
     u8 fill14[0x354 - 0x14];
     u8 unk354;
     u8 fill355[0x35C - 0x355];
-    u8 unk35C;
-    u8 fill35D[0x374 - 0x35D];
-    s16 unk374;
-    s16 unk376;
-    s16 unk378;
-    s16 unk37A;
-    u8 fill37C[0x390 - 0x37C];
+    struct MenuInputStruct input;
     u32 unk390;
     struct UnkTextStruct2 *unk394;
     struct UnkTextStruct2 unk398[4];
@@ -42,17 +37,21 @@ extern u16 gUnknown_203B29E;
 extern struct UnkTextStruct2 gUnknown_80DC91C;
 extern struct UnkTextStruct2 gUnknown_80DC904;
 
+void sub_8023758(void);
+void sub_80237E0(void);
+extern bool8 sub_8098134(s32);
+extern void sub_8023730(void);
 extern u8 sub_8023704(u8);
-extern void sub_8013818(void *, u32, u32, u32);
-extern void sub_8013984(u8 *);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
+extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8023420(void);
 extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
-extern u8 sub_80138B8(void *, u32);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(void *);
-extern void sub_8013660(void *);
-extern void AddMenuCursorSprite(void *);
+extern s32 GetKeyPress(struct MenuInputStruct*);
+extern void sub_8013660(struct MenuInputStruct*);
+extern void AddMenuCursorSprite(struct MenuInputStruct*);
 
 struct unkStruct_203B294
 {   
@@ -331,10 +330,10 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
   sub_8012D08(gUnknown_3001B5C->unk394,param_4);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_3001B5C->unk398,1,1);
-  sub_8013818(&gUnknown_3001B5C->unk35C,sub_80236A4(),param_4,index);
-  gUnknown_3001B5C->unk374 = gUnknown_203B29C;
-  gUnknown_3001B5C->unk37A = gUnknown_203B29E;
-  sub_8013984(&gUnknown_3001B5C->unk35C);
+  sub_8013818(&gUnknown_3001B5C->input,sub_80236A4(),param_4,index);
+  gUnknown_3001B5C->input.menuIndex = gUnknown_203B29C;
+  gUnknown_3001B5C->input.unk1E = gUnknown_203B29E;
+  sub_8013984(&gUnknown_3001B5C->input);
   sub_8023420();
   sub_80234BC();
   return 1;
@@ -347,10 +346,10 @@ u8 sub_8023278(u8 param_1)
   u32 temp;
   
   if (param_1 == 0) {
-    sub_8013660(&gUnknown_3001B5C->unk35C);
+    sub_8013660(&gUnknown_3001B5C->input);
     return 0;
   }
-  switch(GetKeyPress(&gUnknown_3001B5C->unk35C))
+  switch(GetKeyPress(&gUnknown_3001B5C->input))
   {
     case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
@@ -367,7 +366,7 @@ u8 sub_8023278(u8 param_1)
         sub_80236A4();
         break;
     default:
-        if (sub_80138B8(&gUnknown_3001B5C->unk35C, 1) == 0) {
+        if (sub_80138B8(&gUnknown_3001B5C->input, 1) == 0) {
             return 0;
         }
         break;
@@ -379,18 +378,18 @@ u8 sub_8023278(u8 param_1)
 
 s16 sub_802331C(void)
 {
-  return gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk37A * gUnknown_3001B5C->unk378 + gUnknown_3001B5C->unk374];
+  return gUnknown_3001B5C->unkC[gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + gUnknown_3001B5C->input.menuIndex];
 }
 
 void sub_8023354(u8 param_1)
 {
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_3001B5C->unk398,0,0);
-  sub_8013984(&gUnknown_3001B5C->unk35C);
+  sub_8013984(&gUnknown_3001B5C->input);
   sub_8023420();
   sub_80234BC();
   if (param_1 != 0) {
-    AddMenuCursorSprite(&gUnknown_3001B5C->unk35C);
+    AddMenuCursorSprite(&gUnknown_3001B5C->input);
   }
 }
 
@@ -399,12 +398,201 @@ void sub_80233A0(void)
 {
   if (gUnknown_3001B5C != NULL) {
     gUnknown_203B298 = gUnknown_3001B5C->unk4;
-    gUnknown_203B29C = gUnknown_3001B5C->unk374;
-    gUnknown_203B29E = gUnknown_3001B5C->unk37A;
+    gUnknown_203B29C = gUnknown_3001B5C->input.menuIndex;
+    gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
     gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC904;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_3001B5C->unk398,1,1);
     MemoryFree(gUnknown_3001B5C);
     gUnknown_3001B5C = NULL;
   }
+}
+
+NAKED
+void sub_8023420(void)
+{
+    asm_unified(
+	"\tpush {r4,r5,lr}\n"
+	"\tldr r4, _080234A8\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r1, 0xFE\n"
+	"\tlsls r1, 2\n"
+	"\tadds r0, r1\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r1, 0x1\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r1, _080234AC\n"
+	"\tadds r0, r1\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r1, 0x1\n"
+	"\tadds r0, r1\n"
+	"\tmovs r1, 0xC\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r1, _080234B0\n"
+	"\tadds r0, r1\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tldr r2, _080234B4\n"
+	"\tadds r0, r2\n"
+	"\tmovs r1, 0\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tmovs r1, 0xC\n"
+	"\tbl sub_80095E4\n"
+	"\tadds r0, 0x2\n"
+	"\tldr r3, [r4]\n"
+	"\tmovs r2, 0xE4\n"
+	"\tlsls r2, 2\n"
+	"\tadds r5, r3, r2\n"
+	"\tldr r2, [r5]\n"
+	"\tlsls r1, r2, 1\n"
+	"\tadds r1, r2\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r3, r1\n"
+	"\tldr r2, _080234B8\n"
+	"\tadds r1, r2\n"
+	"\tlsls r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r2, [r5]\n"
+	"\tlsls r1, r2, 1\n"
+	"\tadds r1, r2\n"
+	"\tlsls r1, 3\n"
+	"\tadds r3, r1\n"
+	"\tmovs r1, 0xEA\n"
+	"\tlsls r1, 2\n"
+	"\tadds r3, r1\n"
+	"\tstrh r0, [r3]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r2, 0xE6\n"
+	"\tlsls r2, 2\n"
+	"\tadds r0, r2\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tpop {r4,r5}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_080234A8: .4byte gUnknown_3001B5C\n"
+"_080234AC: .4byte 0x000003f9\n"
+"_080234B0: .4byte 0x000003fb\n"
+"_080234B4: .4byte 0x00000376\n"
+"_080234B8: .4byte 0x000003a6");
+}
+
+extern u8 gUnknown_80DC934[];
+
+struct unkStruct_8092638
+{
+    u32 unk0;
+    u8 unk4;
+    u32 unk5;
+};
+extern void sub_8092638(u8,struct unkStruct_8092638  *, u32, u32);
+extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
+extern void sub_8008C54(u32);
+extern void sub_80073B8(u32);
+extern void sub_80073E0(u32);
+void sub_808D930(u8 *buffer, s32 index);
+extern s32 sub_8013800(void *, u32);
+bool8 HasRecruitedMon(s16 species_);
+extern u8 gUnknown_80DC93C[];
+void sprintfStatic(char *buffer, const char *text, ...);
+
+void sub_80234BC(void)
+{
+  u8 cVar2;
+  u32 y;
+  s32 uVar3;
+  s32 iVar4;
+  s32 species;
+  u32 color;
+  s32 index;
+  u8 buffer2 [256];
+  u8 buffer1 [100];
+  struct unkStruct_8092638 auStack_2c;
+  
+  sub_8008C54(gUnknown_3001B5C->unk390);
+  sub_80073B8(gUnknown_3001B5C->unk390);
+  xxx_call_draw_string(10,0,gUnknown_80DC934,gUnknown_3001B5C->unk390,0); // Pokemon
+  sub_8012BC4(gUnknown_3001B5C->unk3F8[2] * 8 + 4,0,
+              gUnknown_3001B5C->input.unk1E + 1,2,7,gUnknown_3001B5C->unk390);
+  for(index = 0; index < gUnknown_3001B5C->input.unk1A; index++)
+  {
+      y = sub_8013800(&gUnknown_3001B5C->input,index);
+      species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + index)];
+      sub_8092638(GetFriendArea(species),&auStack_2c,0,0);
+      color = 7;
+      if (auStack_2c.unk4 != 0) {
+        color = HasRecruitedMon(species) ? 5 : 4;
+      }
+      iVar4 = GetDexInternalNo(species,0);
+      cVar2 = (iVar4 % 10) + 0x30;
+      sub_8012C60(0x14,y,cVar2,color,gUnknown_3001B5C->unk390);
+      if (9 < iVar4) {
+        iVar4 /= 10;
+        cVar2 = (iVar4 % 10) + 0x30;
+        sub_8012C60(0xd,y,cVar2,color,gUnknown_3001B5C->unk390);
+        if (9 < iVar4) {
+          uVar3 = iVar4 / 10;
+          cVar2 = (uVar3 % 10) + 0x30;
+          sub_8012C60(6,y,cVar2,color,gUnknown_3001B5C->unk390);
+        }
+      }
+      sub_808D930(buffer1,species);
+      sprintfStatic(buffer2,gUnknown_80DC93C,color,buffer1); // {COLOR_2}%c%s
+      xxx_call_draw_string(0x24,y,buffer2,gUnknown_3001B5C->unk390,0);
+  }
+  sub_80073E0(gUnknown_3001B5C->unk390);
+}
+
+u32 sub_80236A4(void)
+{
+  s16 index_s32;
+  int index;
+  s32 temp;
+  
+  gUnknown_3001B5C->unk8 = 0;
+  for(index = 0; index < 0x1a8; index++)
+  {
+    index_s32 = index;
+    if ((sub_8098134(index_s32)) &&
+       (index_s32 == GetBaseSpeciesNoUnown(index_s32))) {
+      temp = gUnknown_3001B5C->unk8;
+      gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8] = index;
+      gUnknown_3001B5C->unk8 = temp + 1;
+    }
+  }
+  sub_8023730();
+  return gUnknown_3001B5C->unk8;
+}
+
+bool8 sub_8023704(u8 unused)
+{
+  s32 index;
+  
+  for(index = 0; index < 0x1a8; index++)
+  {
+    if (sub_8098134((s16)index))
+        return FALSE;
+  }
+  return TRUE;
+}
+
+void sub_8023730(void) 
+{
+    switch(gUnknown_3001B5C->unk4)
+    {
+        case 1:
+            sub_8023758();
+            break;
+        case 2:
+            sub_80237E0();
+            break;
+        
+    }
 }

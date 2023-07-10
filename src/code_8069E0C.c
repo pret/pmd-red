@@ -8,6 +8,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "move_effects_target.h"
 #include "pokemon.h"
 #include "weather.h"
 #include "game_options.h"
@@ -36,7 +37,6 @@ void sub_80522F4(struct Entity *r0, struct Entity *r1, const char r2[]);
 extern void sub_8042900(struct Entity *r0);
 extern void sub_8042968(struct Entity *r0);
 extern void sub_806ABAC(struct Entity *, struct Entity *);
-extern void PausedStatusTarget(struct Entity *, struct Entity *,u32,u32,u32);
 void sub_8041BBC(struct Entity *r0);
 extern u8 sub_8045888(struct Entity *);
 extern void sub_806A2BC(struct Entity *, u8);

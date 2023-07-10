@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/colors.h"
 #include "file_system.h"
 #include "item.h"
 #include "moves.h"
@@ -703,7 +704,7 @@ u32 sub_80913E0(struct Item* slot, u32 a2, struct subStruct_203B240 ** a3)
     u32 result;
 
     InitPokemonMove(buffer8, move);
-    sub_80078A4(a2, 4, 82, 200, 7);
+    sub_80078A4(a2, 4, 82, 200, COLOR_WHITE_2);
     xxx_format_and_draw(4, 84, gPtrTypeText, a2, 0);
     moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
@@ -1500,7 +1501,7 @@ void ClearAllItems_8091FB4() {
   }
 }
 
-bool32 IsInvalidItemReward(u8 itemID)
+bool8 IsInvalidItemReward(u8 itemID)
 {
   s32 index;
 

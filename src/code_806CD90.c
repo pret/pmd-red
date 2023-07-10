@@ -6,15 +6,76 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "tile_types.h"
+#include "random.h"
 
 extern u8 sub_806CEBC(struct Entity *);
 extern void sub_806CCB4(struct Entity *, u8);
 extern void sub_803E46C(u32);
 extern bool8 sub_808DA44(s32 a1_, u32 a2_);
 extern u32 sub_806CF98(struct Entity *);
+extern u32 sub_80687D0(s16);
+void sub_80053AC(u8 *, s32, u32, u32, u32, u32, u8);
+void sub_806CDD4(struct Entity *, u8, u32);
 
 extern const u8 gUnknown_8106EEF[];
 extern const u8 gDungeonWaterType[];
+
+void sub_806CC10(void)
+{
+  struct EntityInfo *entityInfo;
+  struct Entity *entity;
+  s32 index;
+  
+  for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+  {
+    entity = gDungeon->allPokemon[index];
+    if (EntityExists(entity)) {
+      entityInfo = entity->info;
+
+      if ((entityInfo->unk166 != 0) && (entityInfo->unk166--, (entityInfo->unk166 & 1) == 0)) {
+        sub_806CDD4(entity,0, (entityInfo->action.direction - 1) & 7);
+      }
+    }
+  }
+}
+
+void sub_806CC70(void)
+{
+    s32 index;
+    struct Entity *entity;
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        entity = gDungeon->allPokemon[index];
+        if(EntityExists(entity))
+            sub_806CCB4(entity, sub_806CEBC(entity));
+    }
+}
+
+void sub_806CCB4(struct Entity *entity, u8 param_2)
+{
+  s32 sVar1;
+  bool8 flag;
+  struct EntityInfo *info;
+
+  info = entity->info;
+  flag = gDungeon->hallucinating;
+  if (entity == gDungeon->cameraTarget) {
+    flag = FALSE;
+  }
+  entity->unk6B = param_2;
+  entity->unk6A = param_2;
+  entity->direction2 = info->action.direction;
+  entity->direction = info->action.direction;
+  entity->unk6F = 0;
+  sVar1 = entity->unk68;
+  if ((info->waitingStatus != STATUS_DECOY) && (!flag)) {
+    sub_80053AC(entity->fill28,entity->unk64,entity->unk6A,entity->direction,sVar1,Rand32Bit() & 3,0);
+  }
+  else {
+    sub_80053AC(entity->fill28,sub_80687D0(0x1a5),entity->unk6A,entity->direction,sVar1,Rand32Bit() & 3,0);
+  }
+  entity->unk6E = 0;
+}
 
 void sub_806CD90(void)
 {
@@ -28,22 +89,22 @@ void sub_806CD90(void)
     }
 }
 
-void sub_806CDD4(struct Entity *r0, u8 r1, u32 r2)
+void sub_806CDD4(struct Entity *entity, u8 r1, u32 r2)
 {
-    if(GetEntityType(r0) == ENTITY_MONSTER)
+    if(GetEntityType(entity) == ENTITY_MONSTER)
     {
-        r0->unk6A = r1;
-        if(r2 < NUM_DIRECTIONS) r0->direction = r2;
+        entity->unk6A = r1;
+        if(r2 < NUM_DIRECTIONS) entity->direction = r2;
     }
 }
 
-void sub_806CDFC(struct Entity *r0, u8 r1, u32 r2)
+void sub_806CDFC(struct Entity *entity, u8 r1, u32 r2)
 {
-    if(GetEntityType(r0) == ENTITY_MONSTER)
+    if(GetEntityType(entity) == ENTITY_MONSTER)
     {
-        if(r0->unk6B == r1)
+        if(entity->unk6B == r1)
         {
-            if(r0->direction2 == r2)
+            if(entity->direction2 == r2)
                 return;
             else
                 goto change_dir;
@@ -51,57 +112,57 @@ void sub_806CDFC(struct Entity *r0, u8 r1, u32 r2)
         else
         {
 change_dir:
-            sub_806CDD4(r0, r1, r2);
+            sub_806CDD4(entity, r1, r2);
         }
     }
 }
 
-void sub_806CE34(struct Entity *r0, u32 newDir)
+void sub_806CE34(struct Entity *entity, u32 newDir)
 {
-    if(GetEntityType(r0) == ENTITY_MONSTER)
+    if(GetEntityType(entity) == ENTITY_MONSTER)
     {
-        r0->unk6A = sub_806CEBC(r0);
+        entity->unk6A = sub_806CEBC(entity);
         if(newDir < NUM_DIRECTIONS)
         {
-            r0->info->action.direction = newDir & DIRECTION_MASK;
-            r0->direction = newDir & DIRECTION_MASK;
+            entity->info->action.direction = newDir & DIRECTION_MASK;
+            entity->direction = newDir & DIRECTION_MASK;
         }
     }
 }
 
-void sub_806CE68(struct Entity *r0, u32 newDir)
+void sub_806CE68(struct Entity *entity, u32 newDir)
 {
-    if(GetEntityType(r0) == ENTITY_MONSTER)
+    if(GetEntityType(entity) == ENTITY_MONSTER)
     {
-        r0->unk6A = sub_806CEBC(r0);
+        entity->unk6A = sub_806CEBC(entity);
         if(newDir < NUM_DIRECTIONS)
         {
-            r0->direction = newDir;
+            entity->direction = newDir;
         }
     }
 }
 
-void sub_806CE94(struct Entity *r0, u32 newDir)
+void sub_806CE94(struct Entity *entity, u32 newDir)
 {
-    if(GetEntityType(r0) == ENTITY_MONSTER)
+    if(GetEntityType(entity) == ENTITY_MONSTER)
     {
-        r0->unk6A = 6;
+        entity->unk6A = 6;
         if(newDir < NUM_DIRECTIONS)
         {
-            r0->direction = newDir;
+            entity->direction = newDir;
         }
     }
 }
 
-u8 sub_806CEBC(struct Entity *param_1)
+u8 sub_806CEBC(struct Entity *entity)
 {
   u8 sleep;
   struct EntityInfo * entityInfo1;
   struct EntityInfo * entityInfo2;
 
   // NOTE: copy needed to match
-  entityInfo1 = param_1->info;
-  entityInfo2 = param_1->info;
+  entityInfo1 = entity->info;
+  entityInfo2 = entity->info;
   sleep = entityInfo1->sleep;
 
   if ((sleep == STATUS_SLEEP) || (sleep == STATUS_NAPPING) || (sleep == STATUS_NIGHTMARE)) {
@@ -117,57 +178,57 @@ u8 sub_806CEBC(struct Entity *param_1)
   return 0x7;
 }
 
-void sub_806CEFC(struct Entity *param_1, u32 newDir)
+void sub_806CEFC(struct Entity *entity, u32 newDir)
 {
-  param_1->info->action.direction = newDir & DIRECTION_MASK;
-  sub_806CE68(param_1, (newDir & DIRECTION_MASK));
+  entity->info->action.direction = newDir & DIRECTION_MASK;
+  sub_806CE68(entity, (newDir & DIRECTION_MASK));
 }
 
-void sub_806CF18(struct Entity *param_1)
+void sub_806CF18(struct Entity *entity)
 {
   s32 index;
   struct EntityInfo *entityInfo;
 
-  if (EntityExists(param_1)) {
-    entityInfo = param_1->info;
+  if (EntityExists(entity)) {
+    entityInfo = entity->info;
     for (index = 0; index < 100; index++) {
       sub_803E46C(0x21);
-      if (!sub_808DA44(entityInfo->apparentID, param_1->unk6B)) {
+      if (!sub_808DA44(entityInfo->apparentID, entity->unk6B)) {
         break;
       }
     }
   }
 }
 
-u8 sub_806CF54(struct Entity *param_1)
+u8 sub_806CF54(struct Entity *entity)
 {
-    return param_1->info->unk204;
+    return entity->info->unk204;
 }
 
 void sub_806CF60(void)
 {
-  struct Entity *uVar2;
+  struct Entity *entity;
   s32 index;
 
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-    uVar2 = gDungeon->allPokemon[index];
-    if (EntityExists(uVar2)) {
-      sub_806CF98(uVar2);
+    entity = gDungeon->allPokemon[index];
+    if (EntityExists(entity)) {
+      sub_806CF98(entity);
     }
   }
 }
 
-u32 sub_806CF98(struct Entity *param_1)
+u32 sub_806CF98(struct Entity *entity)
 {
   struct Tile *mapTile;
   u32 uVar3;
   u16 terrainType;
   struct EntityInfo *entityInfo;
 
-  mapTile = GetTileAtEntitySafe(param_1);
+  mapTile = GetTileAtEntitySafe(entity);
   terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  entityInfo = param_1->info;
+  entityInfo = entity->info;
   uVar3 = GetShadowSize(entityInfo->apparentID);
   if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) {
     return 6;

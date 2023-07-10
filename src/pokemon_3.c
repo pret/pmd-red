@@ -192,7 +192,7 @@ s32 GetBaseSpecies(s16 index) {
     return index;
 }
 
-s32 GetBaseSpeciesNoUnown(s16 index) {
+s16 GetBaseSpeciesNoUnown(s16 index) {
     register s32 a1_ asm("r2") = index;
     if (index == MONSTER_CASTFORM_SNOWY) {
         return MONSTER_CASTFORM;

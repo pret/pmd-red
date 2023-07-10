@@ -69,15 +69,7 @@ struct unkStruct_203B314
     u8 unkB9;
     u8 unkBA;
     u8 unkBB;
-    u32 unkBC;
-    u8 fillC0[0xD4 - 0xC0];
-    s16 unkD4;
-    s16 unkD6;
-    s16 unkD8;
-    s16 unkDA;
-    s16 unkDC;
-    s16 unkDE;
-    u8 fillDF[0xF0 - 0xE0];
+    struct MenuInputStruct input;
     u32 unkF0;
     struct UnkTextStruct2 *unkF4;
     struct UnkTextStruct2 unkF8[4];
@@ -103,12 +95,12 @@ enum FriendRewardStates {
 extern u8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
 extern void sub_802FA50(void);
-extern void sub_8013818(u32 *, u32, u32, u32);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
 extern u32 sub_802FBF4(void);
-extern void sub_8013878(u32 *, s32);
+extern void sub_8013878(struct MenuInputStruct *, s32);
 
-extern void AddMenuCursorSprite(u32 *);
-extern void sub_8013984(u32 *);
+extern void AddMenuCursorSprite(struct MenuInputStruct *);
+extern void sub_8013984(struct MenuInputStruct *);
 extern void SetRewardSceneState(u32);
 extern void sub_802EFEC(u32);
 extern void sub_802F148(void);
@@ -134,9 +126,9 @@ extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
-extern u8 sub_80138B8(u32 *, u32);
-extern void sub_8013660(u32 *);
-extern u32 GetKeyPress(u32 *);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
+extern void sub_8013660(struct MenuInputStruct *);
+extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_802F300(void);
 extern void PlaySound(u32);
@@ -145,7 +137,7 @@ extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
-extern s32 sub_8013800(u32 *, s32);
+extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern void xxx_call_draw_string(s32, s32, const u8 *, s32, s32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
@@ -754,7 +746,7 @@ u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
         sub_8012D08(gUnknown_203B314->unkF4, r2);
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B314->unkF8, 1, 1);
-        sub_8013818(&gUnknown_203B314->unkBC, sub_802FBF4(), r2, r0);
+        sub_8013818(&gUnknown_203B314->input, sub_802FBF4(), r2, r0);
         sub_802F9C0();
         sub_802FA50();
         return 1;
@@ -768,15 +760,15 @@ u32 sub_802F848(s16 param_1)
 
     param_1_32 = param_1; // cast needed
 
-    for( index = 0; index < gUnknown_203B314->unkDE; index++ ) {
+    for( index = 0; index < gUnknown_203B314->input.unk22; index++ ) {
         if (gUnknown_203B314->unk0[index] == param_1_32) {
-            sub_8013878(&gUnknown_203B314->unkBC,index);
+            sub_8013878(&gUnknown_203B314->input,index);
             sub_802F9C0();
             sub_802FA50();
             return 1;
         }
     }
-    sub_8013878(&gUnknown_203B314->unkBC,0);
+    sub_8013878(&gUnknown_203B314->input,0);
     return 0;
 }
 
@@ -784,12 +776,12 @@ u32 sub_802F8A0(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B314->unkBC);
+        sub_8013660(&gUnknown_203B314->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(&gUnknown_203B314->unkBC))
+        switch(GetKeyPress(&gUnknown_203B314->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -798,7 +790,7 @@ u32 sub_802F8A0(u8 r0)
                 PlayMenuSoundEffect(0);
                 return 3;
             default:
-                if(sub_80138B8(&gUnknown_203B314->unkBC, 1) != 0)
+                if(sub_80138B8(&gUnknown_203B314->input, 1) != 0)
                 {
                     sub_802F9C0();
                     sub_802FA50();
@@ -814,18 +806,18 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[(gUnknown_203B314->unkDA * gUnknown_203B314->unkD8) + gUnknown_203B314->unkD4];
+    return gUnknown_203B314->unk0[(gUnknown_203B314->input.unk1E * gUnknown_203B314->input.unk1C) + gUnknown_203B314->input.menuIndex];
 }
 
 void sub_802F938(u8 r0)
 {
-    gUnknown_203B314->unkDE = sub_802FBF4();
-    sub_8013984(&gUnknown_203B314->unkBC);
+    gUnknown_203B314->input.unk22 = sub_802FBF4();
+    sub_8013984(&gUnknown_203B314->input);
     sub_802F9C0();
     sub_802FA50();
 
     if(r0 != 0)
-        AddMenuCursorSprite(&gUnknown_203B314->unkBC);
+        AddMenuCursorSprite(&gUnknown_203B314->input);
 }
 
 void sub_802F974(void)
@@ -925,12 +917,12 @@ void sub_802FA50(void)
   sub_8008C54(gUnknown_203B314->unkF0);
   sub_80073B8(gUnknown_203B314->unkF0);
   xxx_call_draw_string(10,0,gUnknown_80E0744,gUnknown_203B314->unkF0,0);
-  sub_8012BC4(gUnknown_203B314->unk158[2] * 8 + 4,0,gUnknown_203B314->unkDA + 1,2,7,gUnknown_203B314->unkF0);
+  sub_8012BC4(gUnknown_203B314->unk158[2] * 8 + 4,0,gUnknown_203B314->input.unk1E + 1,2,7,gUnknown_203B314->unkF0);
   if (gUnknown_203B314->unkB8 != 0) {
-    for(counter = 0; counter < gUnknown_203B314->unkD6; counter++)
+    for(counter = 0; counter < gUnknown_203B314->input.unk1A; counter++)
     {
-        y = sub_8013800(&gUnknown_203B314->unkBC,counter);
-        index = gUnknown_203B314->unkDA * gUnknown_203B314->unkD8 + counter;
+        y = sub_8013800(&gUnknown_203B314->input,counter);
+        index = gUnknown_203B314->input.unk1E * gUnknown_203B314->input.unk1C + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
             xxx_call_draw_string(10,y,gUnknown_80E0750,gUnknown_203B314->unkF0,0);
@@ -942,10 +934,10 @@ void sub_802FA50(void)
     }
   }
   else {
-    for(counter = 0; counter < gUnknown_203B314->unkD6; counter++)
+    for(counter = 0; counter < gUnknown_203B314->input.unk1A; counter++)
     {
-        y2 = sub_8013800(&gUnknown_203B314->unkBC,counter);
-        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->unkDA * gUnknown_203B314->unkD8 + counter]);
+        y2 = sub_8013800(&gUnknown_203B314->input,counter);
+        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->input.unk1E * gUnknown_203B314->input.unk1C + counter]);
         xxx_call_draw_string(8,y2,text,gUnknown_203B314->unkF0,0);
     }
   }

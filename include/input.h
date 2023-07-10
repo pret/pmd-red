@@ -48,26 +48,39 @@ struct UnusedInputStruct
     /* 0x2A..0x2B - padding */
 };
 
-struct UnkInputStruct
+struct MenuInputStructSub
 {
-    /* 0x0 */ u8 unk0;
-    /* 0x1 */ u8 unk1;
-    /* 0x2 */ u8 unk2;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4;
-    /* 0x8 */ u32 unk8;
-    /* 0xC */ u32 unkC;
+    u8 unk0;
+    /* 0x1 */ u8 a_button;
+    /* 0x2 */ u8 b_button;
+    /* 0x3 */ u8 dpad_right;
+    /* 0x4 */ u8 dpad_left;
+    u8 fill5[3];
+    u16 unk8;
+    s16 unkA;
+};
+
+struct MenuInputStruct
+{
+    s32 unk0;
+    /* 0x4 */ u16 unk4;
+    /* 0x6 */ s16 unk6;
+    /* 0x8 */ u16 unk8;
+    /* 0x8 */ u16 unkA;
+    /* 0xC */ u16 unkC;
+    /* 0xE */ u16 unkE;
     /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 unk1C;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u8 unk28;
-    /* 0x29 */ u8 a_button;
-    /* 0x2A */ u8 b_button;
-    /* 0x2B */ u8 dpad_right;
-    /* 0x2C */ u8 dpad_left;
+    /* 0x14 */ s16 unk14;
+    /* 0x16 */ u16 unk16;
+    /* 0x18 */ s16 menuIndex;
+    /* 0x1A */ s16 unk1A;
+    /* 0x1C */ s16 unk1C;
+    /* 0x1E */ s16 unk1E;
+    /* 0x20 */ s16 unk20;
+    /* 0x22 */ s16 unk22;
+    /* 0x24 */ u16 unk24;
+               u16 unk26;
+    /* 0x28 */ struct MenuInputStructSub unk28;
 };
 
 

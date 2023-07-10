@@ -3,6 +3,9 @@
 
 #include "dungeon_entity.h"
 
+struct Entity *xxx_call_GetLeader(void);
+struct Entity *GetPartnerEntity(void);
+void sub_80854D4(void);
 struct Entity *GetEntityFromClientType(u8 entityType);
 void sub_80856C8(struct Entity * pokemon, s32 x, s32 y);
 void sub_80856E0(struct Entity * pokemon, s32 direction);

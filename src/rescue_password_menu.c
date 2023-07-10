@@ -273,7 +273,6 @@ extern struct MainMenu *GetMainMenu(void);
 
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8035CF4(struct MenuStruct *r0, u32, u32);
-bool8 IsInvalidItemReward(u8);
 bool8 sub_8095298(s32);
 bool8 sub_803D204(u8 *, struct unkStruct_203B480 *);
 extern s32 GetDungeonFloorCount(u8);

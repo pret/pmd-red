@@ -98,23 +98,23 @@ extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
-extern void sub_8013C68(u32 *);
+extern void sub_8013C68(struct MenuInputStruct*);
 extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
-extern s32 sub_8013800(void *, u32);
+extern s32 sub_8013800(struct MenuInputStruct*, u32);
 extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
-extern void sub_8013984(u32 *);
+extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_802C6DC(void);
 extern void DrawJobListMenu(void);
-extern void AddMenuCursorSprite(u32 *);
-extern u8 sub_80138B8(void *, u32);
-extern s32 GetKeyPress(void *);
+extern void AddMenuCursorSprite(struct MenuInputStruct*);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
+extern s32 GetKeyPress(struct MenuInputStruct*);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013660(void *);
-extern void sub_8013848(u32 *, s32, u32, u32);
+extern void sub_8013848(struct MenuInputStruct*, s32, u32, u32);
 extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void SetJobListState(u32);
 extern void sub_802CC00(void);
@@ -176,9 +176,9 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
     sub_8012D34(gUnknown_203B2E8->unk40,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44,1,1);
-    sub_8013848(&gUnknown_203B2E8->unk8,CountAcceptedJobs(),param_3,param_1);
-    gUnknown_203B2E8->unk20 = gUnknown_203B2EC;
-    sub_8013984(&gUnknown_203B2E8->unk8);
+    sub_8013848(&gUnknown_203B2E8->input,CountAcceptedJobs(),param_3,param_1);
+    gUnknown_203B2E8->input.menuIndex = gUnknown_203B2EC;
+    sub_8013984(&gUnknown_203B2E8->input);
     sub_802C6DC();
     DrawJobListMenu();
     return TRUE;
@@ -188,11 +188,11 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
 u32 sub_802C598(u8 param_1)
 {
   if (param_1 == '\0') {
-    sub_8013660(&gUnknown_203B2E8->unk8);
+    sub_8013660(&gUnknown_203B2E8->input);
     return 0;
   }
   else {
-        switch(GetKeyPress(&gUnknown_203B2E8->unk8))
+        switch(GetKeyPress(&gUnknown_203B2E8->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -204,7 +204,7 @@ u32 sub_802C598(u8 param_1)
                 PlayMenuSoundEffect(4);
                 return 4;
         }
-        if (sub_80138B8(&gUnknown_203B2E8->unk8, 1) != '\0') {
+        if (sub_80138B8(&gUnknown_203B2E8->input, 1) != '\0') {
             sub_802C6DC();
             DrawJobListMenu();
             return 1;
@@ -217,26 +217,26 @@ u32 sub_802C598(u8 param_1)
 
 u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + gUnknown_203B2E8->unk20];
+    return gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->input.unk1E * gUnknown_203B2E8->input.unk1C + gUnknown_203B2E8->input.menuIndex];
 }
 
 void sub_802C640(u8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
-    gUnknown_203B2E8->acceptedJobs = CountAcceptedJobs();
-    sub_8013984(&gUnknown_203B2E8->unk8);
+    gUnknown_203B2E8->input.unk22 = CountAcceptedJobs();
+    sub_8013984(&gUnknown_203B2E8->input);
     sub_802C6DC();
     DrawJobListMenu();
     if(r0)
-        AddMenuCursorSprite(&gUnknown_203B2E8->unk8);
+        AddMenuCursorSprite(&gUnknown_203B2E8->input);
 }
 
 void sub_802C688(void)
 {
     if(gUnknown_203B2E8 != NULL)
     {
-        gUnknown_203B2EC = gUnknown_203B2E8->unk20;
+        gUnknown_203B2EC = gUnknown_203B2E8->input.menuIndex;
         gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C] = gUnknown_80DFCE4;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2E8->unk44, 1, 1);
@@ -315,19 +315,19 @@ void DrawJobListMenu(void)
 
     sub_8008C54(gUnknown_203B2E8->unk3C);
     sub_80073B8(gUnknown_203B2E8->unk3C);
-    r4 = gUnknown_203B2E8->unk26 * 8;
+    r4 = gUnknown_203B2E8->input.unk1E * 8;
     r5 = r4;
     r5 += 10;
     xxx_call_draw_string(r5,0,gUnknown_80DFD14,gUnknown_203B2E8->unk3C,0); // "Job List"
     r4 += 4;
     r5 = r4 + gUnknown_203B2E8->unkA4[2] * 8;
-    sub_8012BC4(r5,0,gUnknown_203B2E8->unk26 + 1,2,7,gUnknown_203B2E8->unk3C);
+    sub_8012BC4(r5,0,gUnknown_203B2E8->input.unk1E + 1,2,7,gUnknown_203B2E8->unk3C);
 
-    for(index = 0;  index < gUnknown_203B2E8->unk22; index++)
+    for(index = 0;  index < gUnknown_203B2E8->input.unk1A; index++)
     {
-        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->unk26 * gUnknown_203B2E8->unk24 + index]);
+        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[gUnknown_203B2E8->input.unk1E * gUnknown_203B2E8->input.unk1C + index]);
         local.unk0[0] = gUnknown_203B2E8->unk3C;
-        local.y = sub_8013800(&gUnknown_203B2E8->unk8,index);
+        local.y = sub_8013800(&gUnknown_203B2E8->input,index);
         sub_803B35C(mail,&local);
         CreateRescueTitle(&local);
     } 

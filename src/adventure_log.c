@@ -8,12 +8,7 @@
 struct AdventureLog
 {
     // size: 0xA0
-    u8 fill0[0x1A];
-    /* 0x1A */ s16 unk1A;
-    /* 0x1C */ s16 unk1C;
-    /* 0x1E */ s16 currPage;
-    s16 unk20;
-    u8 fill22[0x34 - 0x22];
+    struct MenuInputStruct input;
     u32 unk34;
     struct UnkTextStruct2 *unk38;
     struct UnkTextStruct2 unk3C[4];
@@ -47,10 +42,10 @@ const u8 fill_adven[] = "pksdir0";
 void sub_8032084();
 void DisplayAdventureLog();
 extern void sub_8013818(void *, u32, u32, u32);
-extern bool8 sub_8013938(void *);
-extern void sub_8013660(void *);
+extern bool8 sub_8013938(struct MenuInputStruct *);
+extern void sub_8013660(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
-extern u32 GetKeyPress(void *);
+extern u32 GetKeyPress(struct MenuInputStruct *);
 extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();
@@ -88,11 +83,11 @@ u32 CreateAdventureLogScreen(u32 param_1)
 u32 HandleAdventureLogInput(u8 param_1)
 {
   if (param_1 == 0) {
-    sub_8013660(gAdventureLog);
+    sub_8013660(&gAdventureLog->input);
     return 0;
   }
   else {
-    switch(GetKeyPress(gAdventureLog))
+    switch(GetKeyPress(&gAdventureLog->input))
     {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
@@ -101,7 +96,7 @@ u32 HandleAdventureLogInput(u8 param_1)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(gAdventureLog)) {
+            if (sub_8013938(&gAdventureLog->input)) {
                 sub_8032084();
                 DisplayAdventureLog();
                 return 1;
@@ -131,11 +126,11 @@ void sub_8032084(void)
   u32 sVar2;
   
   gAdventureLog->unk9C[0] = gAdventureLog->unk20;
-  gAdventureLog->unk9C[1]= gAdventureLog->currPage;
+  gAdventureLog->unk9C[1]= gAdventureLog->unk0.unk1E;
   gAdventureLog->unk9C[2]= 0xb;
   gAdventureLog->unk9C[3]= 0;
   // So a sign extend..
-  sVar2 = sub_80095E4(gAdventureLog->unk1A,0xc) + 2 << 0x10;
+  sVar2 = sub_80095E4(gAdventureLog->unk0.unk1A,0xc) + 2 << 0x10;
   // TODO needs asr r3, r0, r16
   //        and lsr r0, r0, r16
   gAdventureLog->unk3C[gAdventureLog->unk34].unkE = sVar2;
@@ -215,7 +210,7 @@ void DisplayAdventureLog(void)
   
   sub_8008C54(gAdventureLog->unk34);
   sub_80073B8(gAdventureLog->unk34);
-  r4 = gAdventureLog->currPage * 8;
+  r4 = gAdventureLog->input.unk1E * 8;
   r6 = r4;
   r6 += 10;
   // Draw Header
@@ -223,11 +218,11 @@ void DisplayAdventureLog(void)
   r4 += 4;
   r6 = r4 + gAdventureLog->unk9C[2] * 8;
   // Draw Page #
-  sub_8012BC4(r6, 0, gAdventureLog->currPage + 1, 1, 7, gAdventureLog->unk34);
+  sub_8012BC4(r6, 0, gAdventureLog->input.unk1E + 1, 1, 7, gAdventureLog->unk34);
 
-  for(counter = 0; counter < gAdventureLog->unk1A; counter++)
+  for(counter = 0; counter < gAdventureLog->input.unk1A; counter++)
   {
-    temp = gAdventureLog->currPage * gAdventureLog->unk1C + counter;
+    temp = gAdventureLog->input.unk1E * gAdventureLog->input.unk1C + counter;
     if(sub_8097710(temp)){
         switch(temp) {
             case 0xc:

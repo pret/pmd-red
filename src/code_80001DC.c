@@ -1,4 +1,3 @@
-#include "gba/defines.h"
 #include "global.h"
 
 IWRAM_DATA u32 gUnknown_3004000 = {0};

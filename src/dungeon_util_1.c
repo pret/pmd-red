@@ -2,7 +2,9 @@
 #include "dungeon_util_1.h"
 
 #include "constants/direction.h"
+#include "constants/dungeon.h"
 #include "dungeon_global_data.h"
+#include "dungeon_leader.h"
 #include "dungeon_util.h"
 #include "random.h"
 
@@ -21,9 +23,96 @@ extern void sub_8068FE0(struct Entity *, u32, u8 *);
 extern void sub_80457DC(u8 *);
 extern void sub_80861D4(struct Entity *, u32, s32 direction);
 extern void sub_80694C0(struct Entity *, s32, s32, u32);
-extern struct Entity *GetPartnerEntity();
 
 typedef void (*DungeonCallback)(struct Entity *);
+
+struct Entity *xxx_call_GetLeader(void)
+{
+    return GetLeader();
+}
+
+struct Entity *GetPartnerEntity(void)
+{
+    s32 counter;
+    struct Entity *entity;
+    for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
+    {
+        entity = gDungeon->teamPokemon[counter];
+        if(EntityExists(entity) && entity->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        {
+            return entity;
+        }
+    }
+    return GetEntityFromClientType(CLIENT_TYPE_PARTNER);
+}
+
+void sub_80854D4(void)
+{
+    struct Entity *stack1[MAX_TEAM_MEMBERS];
+    struct Entity *stack2[MAX_TEAM_MEMBERS];
+    s32 counter = 0;
+    s32 index;
+    struct Entity *entity;
+    struct Entity *entity2;
+    struct Entity *entity3;
+    struct Entity *entity4;
+    struct Entity *entity5;
+    
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity = gDungeon->teamPokemon[index];
+        if(EntityExists(entity))
+        {
+            stack1[counter] = entity;
+            counter++;
+        }
+    }
+    for(; counter < MAX_TEAM_MEMBERS; counter++)
+    {
+        stack1[counter] = NULL;
+    }
+    counter = 0;
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity2 = stack1[index];
+        if(entity2 != NULL && entity2->info->isTeamLeader)
+        {
+            stack1[index] = NULL;
+            stack2[counter] = entity2;
+            counter++;
+        }
+    }
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity3 = stack1[index];
+        if(entity3 != NULL && entity3->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        {
+            stack1[index] = NULL;
+            stack2[counter] = entity3;
+            counter++;
+        }
+    }
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity4 = stack1[index];
+        if(entity4 != NULL)
+        {
+            stack1[index] = NULL;
+            stack2[counter] = entity4;
+            counter++;
+        }
+    }
+    for(; counter < MAX_TEAM_MEMBERS; counter++)
+    {
+        stack2[counter] = NULL;
+    }
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity5 = stack2[index];
+        if(entity5 != NULL)
+            sub_80856C8(entity5, gDungeon->unkE220[index].x, gDungeon->unkE220[index].y);
+    }
+}
 
 void sub_80855E4(DungeonCallback func)
 {
@@ -37,7 +126,7 @@ void sub_80855E4(DungeonCallback func)
     {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-            if (entity->info->joinedAt == 0x41) {
+            if (entity->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER) {
                 flag = TRUE;
             }
             func(entity);
@@ -116,7 +205,7 @@ void sub_8085764(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (entity->info->clientType == 2)) {
+        if ((EntityExists(entity)) && (entity->info->clientType == CLIENT_TYPE_PARTNER)) {
             sub_8068FE0(entity,0x207,auStack128);
         }
     }
@@ -215,7 +304,7 @@ void sub_8085930(s32 direction)
         entity = gDungeon->wildPokemon[index];
         if(EntityExists(entity))
         {
-            if(entity->info->clientType == 2)
+            if(entity->info->clientType == CLIENT_TYPE_PARTNER)
             {
                 if(direction >= NUM_DIRECTIONS)
                 {
@@ -291,7 +380,7 @@ bool8 IsMovingClient(struct Entity *pokemon)
         case 0x24:
             return TRUE;
         case CLIENT_TYPE_NONE:
-        case 0x2:
+        case CLIENT_TYPE_PARTNER:
         case CLIENT_TYPE_DONT_MOVE:
         case 0xA:
         case 0xB:

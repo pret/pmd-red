@@ -8,15 +8,15 @@
 #include "save.h"
 #include "text_util.h"
 
-extern struct unkStruct_203B480 gUnknown_2038C88;
-extern struct unkStruct_203B480 *gUnknown_203B480;
-extern struct unkStruct_203B484 gUnknown_2039288;
-extern struct unkStruct_203B484 *gUnknown_203B484;
-extern struct unkStruct_203B48C gUnknown_20393C0;
-extern struct unkStruct_203B48C *gUnknown_203B48C;
-extern u32 *gUnknown_203B488;
-extern u32 gUnknown_20392E8;
+EWRAM_DATA_2 struct unkStruct_203B480 *gUnknown_203B480 = {0};
+EWRAM_DATA_2 struct unkStruct_203B484 *gUnknown_203B484 = {0};
+EWRAM_DATA_2 u32 *gUnknown_203B488 = {0};
+EWRAM_DATA_2 struct unkStruct_203B48C *gUnknown_203B48C = {0};
 
+extern struct unkStruct_203B480 gUnknown_2038C88;
+extern struct unkStruct_203B484 gUnknown_2039288;
+extern u32 gUnknown_20392E8;
+extern struct unkStruct_203B48C gUnknown_20393C0;
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);

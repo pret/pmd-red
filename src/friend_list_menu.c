@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/dungeon.h"
 #include "memory.h"
 #include "text.h"
 #include "input.h"
@@ -115,7 +116,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
-bool8 sub_8025EC4(struct PokemonStruct *);
 extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
 extern void sub_8023C60(void);
@@ -123,22 +123,6 @@ extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
-extern void sub_8025434(s32);
-extern void sub_80259F0(void);
-extern void sub_8025A84(void);
-extern void sub_8025BCC(void);
-extern void sub_8025BE8(void);
-extern void sub_8025C04(void);
-extern void sub_8025CB4(void);
-extern void sub_8025D90(void);
-extern void sub_8025DAC(void);
-extern void sub_8025E08(void);
-extern void sub_8025E24(void);
-extern void sub_8025E44(void);
-extern void sub_802544C(void);
-extern void sub_8025518(void);
-extern void sub_8025728(void);
-extern void sub_802591C(void);
 extern u32 sub_801B3C0(struct Item *param_1);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
@@ -164,8 +148,7 @@ extern u32 sub_801F194(void);
 extern void sub_801F214(void);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
-u32 sub_801602C(u32 r0, u8 *name);
-void sub_8025E68(u32 , struct BulkItem *);
+extern u32 sub_801602C(u32 r0, u8 *name);
 extern u32 sub_801A6E8(u32);
 extern u32 sub_801A8AC(void);
 extern void sub_8099690(u32);
@@ -177,10 +160,29 @@ extern u32 sub_8016080(void);
 extern s32 sub_80144A4(s32 *);
 extern bool8 sub_80023E4(u32);
 
+void sub_8025434(s32);
+void sub_802544C(void);
+void sub_8025518(void);
+void sub_8025728(void);
+void sub_802591C(void);
+void sub_80259F0(void);
+void sub_8025A84(void);
+void sub_8025BCC(void);
+void sub_8025BE8(void);
+void sub_8025C04(void);
+void sub_8025CB4(void);
+void sub_8025D90(void);
+void sub_8025DAC(void);
+void sub_8025E08(void);
+void sub_8025E24(void);
+void sub_8025E44(void);
+void sub_8025E68(u32 , struct BulkItem *);
+bool8 sub_8025EC4(struct PokemonStruct *);
+
+
 bool8 sub_80252F0(s32 param_1)
 {
-  
-  if ((param_1 == 2) && (sub_8024108(4) != '\0')) {
+  if ((param_1 == 2) && (sub_8024108(4) != 0)) {
     return FALSE;
   }
   else {
@@ -770,17 +772,17 @@ void sub_8025E68(u32 r0, struct BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 sub_8025EC4(struct PokemonStruct *param_1)
+bool8 sub_8025EC4(struct PokemonStruct *pokeStruct)
 {
     bool32 flag;
-    if (param_1->isTeamLeader)
+    if (pokeStruct->isTeamLeader)
         {
             return FALSE;
         }
     else
     {
         flag = FALSE;
-        if(param_1->dungeonLocation.id == 0x41)
+        if(pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER)
             flag = TRUE;
         if(flag && !sub_80023E4(8))
             return FALSE;

@@ -15,15 +15,7 @@ struct unkStruct_203B320
     // size: 0xC4
     u8 unk0[0x20];
     u32 wonderMailType;
-    u32 unk24;
-    u8 fill28[0x3C - 0x28];
-    s16 unk3C;
-    s16 unk3E;
-    s16 unk40;
-    s16 unk42;
-    s16 unk44;
-    s16 unk46;
-    u8 fill48[0x58 - 0x48];
+    struct MenuInputStruct input;
     u32 unk58;
     struct UnkTextStruct2 *unk5C;
     struct UnkTextStruct2 unk60[4];
@@ -88,15 +80,15 @@ extern s32 sub_8030A74(void);
 extern void sub_80308A0(void);
 extern void sub_803092C(void);
 extern void sub_8012D08(struct UnkTextStruct2 *, s32);
-extern void sub_8013818(void *, u32, u32, u32);
+extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
 
-extern u8 sub_80138B8(u32 *, u32);
-extern void sub_8013660(u32 *);
-extern s32 GetKeyPress(u32 *);
+extern u8 sub_80138B8(struct MenuInputStruct*, u32);
+extern void sub_8013660(struct MenuInputStruct*);
+extern s32 GetKeyPress(struct MenuInputStruct*);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013984(u32 *);
-extern void AddMenuCursorSprite(u32 *);
-extern s32 sub_8013800(void *, u32);
+extern void sub_8013984(struct MenuInputStruct*);
+extern void AddMenuCursorSprite(struct MenuInputStruct*);
+extern s32 sub_8013800(struct MenuInputStruct*, u32);
 extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
@@ -126,7 +118,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r
     sub_8012D08(gUnknown_203B320->unk5C, r3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B320->unk60, 1, 1);
-    sub_8013818(&gUnknown_203B320->unk24, sub_8030A74(), r3, r1);
+    sub_8013818(&gUnknown_203B320->input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
     return 1;
@@ -136,10 +128,10 @@ u32 sub_8030768(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B320->unk24);
+        sub_8013660(&gUnknown_203B320->input);
         return 0;
     }
-    switch(GetKeyPress(&gUnknown_203B320->unk24))
+    switch(GetKeyPress(&gUnknown_203B320->input))
     {
         case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
@@ -151,7 +143,7 @@ u32 sub_8030768(u8 r0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if(sub_80138B8(&gUnknown_203B320->unk24, 1) != 0)
+            if(sub_80138B8(&gUnknown_203B320->input, 1) != 0)
             {
                 sub_80308A0();
                 sub_803092C();
@@ -164,18 +156,18 @@ u32 sub_8030768(u8 r0)
 
 u8 sub_80307EC(void)
 {
-    return gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + gUnknown_203B320->unk3C];
+    return gUnknown_203B320->unk0[(gUnknown_203B320->input.unk1E * gUnknown_203B320->input.unk1C) + gUnknown_203B320->input.menuIndex];
 }
 
 void sub_8030810(u8 r0)
 {
-    gUnknown_203B320->unk46 = sub_8030A74();
-    sub_8013984(&gUnknown_203B320->unk24);
+    gUnknown_203B320->input.unk22 = sub_8030A74();
+    sub_8013984(&gUnknown_203B320->input);
 
     sub_80308A0();
     sub_803092C();
     if(r0 != 0)
-        AddMenuCursorSprite(&gUnknown_203B320->unk24);
+        AddMenuCursorSprite(&gUnknown_203B320->input);
 }
 
 void sub_803084C()
@@ -275,18 +267,18 @@ void sub_803092C(void)
   
   sub_8008C54(gUnknown_203B320->unk58);
   sub_80073B8(gUnknown_203B320->unk58);
-  r4 = gUnknown_203B320->unk42 * 8;
+  r4 = gUnknown_203B320->input.unk1E * 8;
   r5 = r4;
   r5 += 10;
   xxx_call_draw_string(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->unk58,0);
   r4 += 4; 
   r5 = r4 + gUnknown_203B320->unkC0[2] * 8;
-  sub_8012BC4(r5,0,gUnknown_203B320->unk42 + 1,1,7,gUnknown_203B320->unk58);
+  sub_8012BC4(r5,0,gUnknown_203B320->input.unk1E + 1,1,7,gUnknown_203B320->unk58);
 
-  for (index = 0; index < gUnknown_203B320->unk3E; index++) {
-      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->unk42 * gUnknown_203B320->unk40) + index]);
+  for (index = 0; index < gUnknown_203B320->input.unk1A; index++) {
+      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->input.unk1E * gUnknown_203B320->input.unk1C) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
-      local.y = sub_8013800(&gUnknown_203B320->unk24,index);
+      local.y = sub_8013800(&gUnknown_203B320->input,index);
       local.unk40 = 7;
       local.unk42 = 0;
       local.unk44 = 0;

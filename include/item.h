@@ -129,6 +129,7 @@ s32 FindItemInInventory(u8 id);
 bool8 IsHMItem(u8 id);
 bool8 IsEdibleItem(u8 id);
 u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1);
+bool8 IsInvalidItemReward(u8 itemID);
 
 void RestoreHeldItem(struct unkStruct_8094924*, struct BulkItem*);
 void SaveHeldItem(struct unkStruct_8094924*, struct BulkItem*);

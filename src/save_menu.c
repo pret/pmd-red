@@ -1,4 +1,3 @@
-#include "gba/defines.h"
 #include "global.h"
 #include "input.h"
 #include "menu.h"
