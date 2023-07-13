@@ -197,7 +197,7 @@ void PlayDungeonFailBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
   gDungeon->unk66F = 0;
-  gDungeon->unk672 = 0;
+  gDungeon->monsterHouseTriggeredEvent = FALSE;
   gDungeon->unk699 = 0;
   gDungeon->bossSongIndex = STOP_BGM;
 }
@@ -206,7 +206,7 @@ void PlayDungeonCompleteBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
   gDungeon->unk66F = 0;
-  gDungeon->unk672 = 0;
+  gDungeon->monsterHouseTriggeredEvent = FALSE;
   gDungeon->unk699 = 0;
   gDungeon->bossSongIndex = STOP_BGM;
 }
@@ -296,7 +296,7 @@ void UpdateDungeonMusic(void)
     if (gDungeon->unk66F != 0) {
         newSongIndex = MUS_STOP_THIEF;
     }
-    else if (gDungeon->unk672 != 0) {
+    else if (gDungeon->monsterHouseTriggeredEvent) {
         newSongIndex = MUS_MONSTER_HOUSE;
       }
     else if (gDungeon->unk699 != 0) {

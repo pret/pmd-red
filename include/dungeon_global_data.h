@@ -109,7 +109,7 @@ struct Dungeon
     u8 unk66F;
     u8 unk670;
     /* 0x671 */ bool8 monsterHouseTriggered;
-    /* 0x672 */ u8 unk672;
+    /* 0x672 */ bool8 monsterHouseTriggeredEvent;
     u8 unk673;
     u8 unk674;
     u8 unk675;
