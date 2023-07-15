@@ -5,13 +5,12 @@ struct unkStruct_203B26C
 {
 // size: 0x18C
     u32 unk0;
-    s32 state;
+    /* 0x4 */ s32 state;
     u32 unk8;
-    s16 speciesNum; // species of chosen Pokemon
-    bool8 isNextMoveLinked;
-    struct Move * moves;
-    u32 unk14;
-    u32 unk18;
+    /* 0xC */ s16 speciesNum; // species of chosen Pokemon
+    /* 0xE */ bool8 isNextMoveLinked;
+    /* 0x10 */ struct Move * moves;
+    u16 unk14[4];
     u16 unk1C;
     u16 unk1E;
     u32 unk20;
@@ -22,7 +21,7 @@ struct unkStruct_203B26C
     u8 fillC8[0x118 - 0xC8];
     /* 0x118 */ struct OpenedFile *faceFile;
     /* 0x11C */ u8 *faceData;
-    /* 0x120 */ u16 unk120;
+    u16 unk120;
     u16 unk122;
     u8 unk124;
     u8 unk125;

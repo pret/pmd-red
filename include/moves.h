@@ -31,6 +31,9 @@ bool8 FailsWhileMuzzled(u16 moveID);
 bool8 IsSoundMove(struct Move *move);
 bool8 DoesMoveCharge(u16 move);
 
+bool8 IsAnyMoveLinked(int unused, struct Move* moves);
+bool8 IsNextMoveLinked(int index, struct Move* moves);
+void RemoveLinkSequenceFromMoves8(struct Move* moves, int index);
 int GetLinkedSequence(int index, struct Move* moves, u16* sequenceMoveIDs);
 void unk_CopyMoves4To8(struct Move* destMoves, struct Move* srcMoves);
 void sub_8094060(struct Move* srcMoves, struct Move* destMoves);
