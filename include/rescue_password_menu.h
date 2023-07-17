@@ -5,12 +5,13 @@
 
 struct unkSprite
 {
-    u16 unk208;
-    u16 unk20A;
-    u16 unk20C;
-    u16 unk20E;
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
 };
 
+// Similar to unkStruct_203B360
 struct RescuePasswordMenu
 {
     // size: 0x214

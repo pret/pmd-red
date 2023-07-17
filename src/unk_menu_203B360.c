@@ -14,6 +14,7 @@ struct unkSprite
     u16 unk6;
 };
 
+// Similar to RescuePasswordMenu
 struct unkStruct_203B360
 {
     // size: 0x1b4

@@ -277,6 +277,9 @@ bool8 sub_8095298(s32);
 bool8 sub_803D204(u8 *, struct unkStruct_203B480 *);
 extern s32 GetDungeonFloorCount(u8);
 
+extern void AddSprite(struct unkSprite *, u32, u32, u32);
+extern void xxx_draw_string_80144C4(void);
+
 
 void CreateRescuePasswordMenu(u32 currMenu)
 {
@@ -700,4 +703,72 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
     default:
         return -1;
     }
+}
+
+void sub_8039174(void)
+{
+    u16 temp;
+    #ifndef NONMATCHING
+    register u32 r2 asm("r2");
+    #else
+    u32 r2; // r4 but should be r2
+    #endif //NONMATCHING
+    struct unkSprite* spr; // r2 but should be r3
+    u16 r4; // r3 but should be r4
+    
+    spr = &gRescuePasswordMenu->unk208;
+
+    spr->unk0 &= ~0x100;
+    spr->unk0 &= ~0x200;
+    r4 = ~(0x800 | 0x400);
+    spr->unk0 &= r4;
+    spr->unk0 &= ~0x1000;
+    spr->unk0 &= ~0x2000;
+    r2 = 0x4000;
+    temp = 0x8000;
+    temp = ~(temp | 0x4000);
+    spr->unk0 &= temp;
+    spr->unk0 |= r2;
+
+    r2 = 0x200 | 0x100 | 0x80 | 0x40 | 0x20 | 0x10;
+    spr->unk4 &= ~(0x200 | 0x100 | 0x80 | 0x40 | 0x20 | 0x10 | 0x8 | 0x4 | 0x2 | 0x1);
+    spr->unk4 |= r2;
+    spr->unk4 &= r4;
+    r2 = 0x1 | 0x2 | 0x4 | 0x8;
+    r4 = 0x1000 | 0x2000 | 0x4000 | 0x8000;
+    temp = ~r4;
+    spr->unk4 &= temp;
+    spr->unk4 |= r4;
+
+    #ifndef NONMATCHING
+    while (0) ;
+    #endif //NONMATCHING
+    spr->unk2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
+
+    temp = 0x800 | 0x400;
+    r2 &= spr->unk6;
+    r2 |= temp;
+    spr->unk6 = r2;
+}
+
+void sub_80391F8(void)
+{
+  struct unkSprite *iVar2;
+  u32 temp;
+  u32 temp2;
+
+  iVar2 = &gRescuePasswordMenu->unk208;
+  
+  temp = (iVar2->unk2 & 0xfe00);
+  iVar2->unk2 = temp | 0x70;
+
+  temp2 = 0x700;
+  temp = (iVar2->unk6 & 0xf);
+  iVar2->unk6 = temp | temp2;
+
+  if ((gRescuePasswordMenu->unk210 & 8) != 0) {
+    AddSprite(iVar2,0x100,0,0);
+  }
+  xxx_draw_string_80144C4();
+  gRescuePasswordMenu->unk210 += 1;
 }
