@@ -14,7 +14,7 @@
 
 #define RESCUE_PASSWORD_SIZE 0x36
 
-EWRAM_DATA u32 gUnknown_202EC4C = {0};
+EWRAM_DATA s32 gCommsTimeout = {0};
 EWRAM_DATA u8 gRescuePasswordBuffer[RESCUE_PASSWORD_SIZE] = {0};
 
 extern struct unkStruct_203B484 *gUnknown_203B484;

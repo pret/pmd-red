@@ -155,6 +155,7 @@ SECTIONS {
         src/trade_items_menu.o(.text);
         src/other_menus.o(.text);
         asm/other_menus.o(.text);
+        src/other_menus_1.o(.text);
         src/adventure_log_menu.o(.text);
         src/unk_menu_203B360.o(.text);
         src/save_menu.o(.text);
