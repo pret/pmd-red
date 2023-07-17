@@ -4,6 +4,8 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "save.h"
+#include "team_inventory.h"
+#include "main_menu.h"
 
 extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn't connected
 extern s32 sub_803815C(u32, void *, void*);
@@ -18,9 +20,53 @@ extern void sub_800D510(void);
 extern s32 sub_8037DF0(void);
 extern void sub_8037F9C(u32, u8 *, u8 *);
 
-extern s32 sub_8038014(void *param_2,void *param_3);
 extern u8 sub_800D588(void);
 extern struct UnkStruct_203B184 *gUnknown_203B184;
+
+s32 sub_8038014(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *param_2)
+{
+  s32 linkStatus;
+  s32 r2;
+  struct unkStruct_8035D94 *r3;
+  struct unkStruct_8035D94 *r4;
+
+  if (sub_800D588() == 0) {
+    r4 = param_2;
+  }
+  else
+  {
+    r4 = param_1;      
+  }
+
+  if (sub_800D588() == 0) {
+    r3 = param_1;
+  }
+  else
+  {
+    r3 = param_2;      
+  }
+    
+  if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
+    r2 = gTeamInventory_203B460->teamStorage[r4->itemIndex.itemIndex_u8];
+    r2 += r3->numItems;
+    if (r2 > 999) {
+        linkStatus = COMMS_NO_ROOM_STORAGE;
+    }
+    else
+        linkStatus = COMMS_GOOD;
+  }
+  else {
+    r2 = gTeamInventory_203B460->teamStorage[r3->itemIndex.itemIndex_u8];
+    r2 += r3->numItems;
+    if (r2 > 999) {
+        linkStatus = COMMS_NO_ROOM_STORAGE;
+    }
+    else
+        linkStatus = COMMS_GOOD;
+
+  }
+  return linkStatus;
+}
 
 s32 sub_8038078(struct unkStruct_203B480 *param_1,struct unkStruct_203B480 *param_2)
 {
