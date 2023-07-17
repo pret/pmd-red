@@ -34,8 +34,8 @@ struct unkDungeonGlobal_unk1CE98_sub
 {
     /* 0x0 */ u8 buffer1[10];
     /* 0xA */ u8 buffer2[10];
-    s16 unk14;
-    u8 fill16[0x18 - 0x16];
+    /* 0x14 */ s16 moveID;
+    /* 0x16 */ u8 fill16[0x2];
     /* 0x18 */ struct DungeonLocation dungeonLocation;
     /* 0x1C */ struct Item heldItem;
     /* 0x20 */ u32 exp;

@@ -284,7 +284,6 @@ SECTIONS {
         asm/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
-        asm/code_809447C.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
         asm/code_8094D28.o(.text);

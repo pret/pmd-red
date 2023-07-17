@@ -8,6 +8,18 @@
 #include "memory.h"
 #include "text.h"
 #include "menu_input.h"
+#include "dungeon_global_data.h"
+#include "pokemon.h"
+#include "code_8094F88.h"
+
+struct unkSprite
+{
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+};
+
 
 struct unkStruct_203B35C
 {
@@ -15,11 +27,23 @@ struct unkStruct_203B35C
     u32 unk0;
     u32 linkStatus;
     u32 state;
-    u8 fillC[0x1C - 0xC];
+    struct unkSprite unkC;
+    u32 unk14;
+    u8 fill18[0x1C - 0x18];
     struct MenuStruct unk1C[4];
     struct UnkTextStruct2 unk15C[4];
-    u8 unk1BC[4];
-    u32 unk1C0[9];
+   struct unkStruct_8035D94 unk1BC[2];
+   struct unkStruct_203B480 unk1CC;
+   struct unkStruct_203B480 unk1FC;
+   struct unkStruct_203B480 unk22C;
+   struct unkStruct_203B480 unk25C;
+   struct unkStruct_203B480 unk28C;
+   struct PokemonStruct unk2BC; 
+   struct unkStruct_203B480 unk314;
+   struct PokemonStruct unk344;
+   s32 unk39C;
+   u8 fill3A0[0x450 - 0x3A0];
+   s32 unk450;
 };
 extern struct unkStruct_203B35C *gUnknown_203B35C;
 
@@ -440,13 +464,21 @@ extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();
 extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
+extern s32 sub_8037D64(u32, void *, void *);
+extern s32 sub_80381F4(u32, void *, void *);
+extern void sub_8037810(void);
+extern void sub_8011830(void);
+extern s32 sub_8037B28(u32);
+s32 sub_8035D3C(void);
+extern s32 sub_8035D74(void);
+extern void xxx_call_start_bg_music(void);
+extern void xxx_draw_string_80144C4(void);
+extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
-
-#ifdef NONMATCHING
 void sub_8036FDC(s32 param_1)
 {
-  int iVar3;
-  int iVar4;
+  int index1;
+  int index2;
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
@@ -457,143 +489,22 @@ void sub_8036FDC(s32 param_1)
   }
 
   gUnknown_203B35C->unk0 = param_1;
-  gUnknown_203B35C->linkStatus = 0;
+  gUnknown_203B35C->linkStatus = COMMS_GOOD;
   gUnknown_203B35C->state = 0;
-  iVar3 = 0;
-  do {
-    gUnknown_203B35C->unk1C0[iVar3 * 2] = 0;
-    // Add statements of index flip but ends in same result
-    gUnknown_203B35C->unk1BC[iVar3 * 8] = 0;
-    iVar3 = iVar3 + 1;
-  } while (iVar3 < 2);
-  for(iVar4 = 0; iVar4 < 4; iVar4++){
-    gUnknown_203B35C->unk15C[iVar4] = gUnknown_80E653C;
+  for(index1 = 0; index1 < 2; index1++)
+  {
+    gUnknown_203B35C->unk1BC[index1].numItems = 0;
+    gUnknown_203B35C->unk1BC[index1].itemIndex.itemIndex_u8 = ITEM_NOTHING;
+  }
+  for(index2 = 0; index2 < 4; index2++){
+    gUnknown_203B35C->unk15C[index2] = gUnknown_80E653C;
   }
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B35C->unk15C,1,1);
-  SetMenuItems(gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,
-               6,0);
+  SetMenuItems(gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,6,0);
   sub_8035CF4(gUnknown_203B35C->unk1C,0,1);
   sub_80376CC();
 }
-#else
-NAKED
-void sub_8036FDC(s32 param_1)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tmov r7, r8\n"
-	"\tpush {r7}\n"
-	"\tsub sp, 0x10\n"
-	"\tadds r6, r0, 0\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tmovs r0, 0\n"
-	"\tbl ResetSprites\n"
-	"\tldr r5, _080370C0\n"
-	"\tldr r0, [r5]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08037016\n"
-	"\tldr r4, _080370C4\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0x8\n"
-	"\tbl MemoryAlloc\n"
-	"\tstr r0, [r5]\n"
-	"\tmovs r1, 0\n"
-	"\tadds r2, r4, 0\n"
-	"\tbl MemoryFill8\n"
-"_08037016:\n"
-	"\tldr r0, [r5]\n"
-	"\tstr r6, [r0]\n"
-	"\tmovs r1, 0\n"
-	"\tstr r1, [r0, 0x4]\n"
-	"\tstr r1, [r0, 0x8]\n"
-	"\tmovs r3, 0\n"
-	"\tadds r7, r5, 0\n"
-	"\tmovs r6, 0xE0\n"
-	"\tlsls r6, 1\n"
-	"\tmovs r4, 0\n"
-	"\tmovs r5, 0xDE\n"
-	"\tlsls r5, 1\n"
-"_0803702E:\n"
-	"\tldr r0, [r7]\n"
-	"\tlsls r2, r3, 3\n"
-	"\tadds r1, r0, r6\n"
-	"\tadds r1, r2\n"
-	"\tstr r4, [r1]\n"
-	"\tadds r0, r2\n"
-	"\tadds r0, r5\n"
-	"\tstrb r4, [r0]\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0x1\n"
-	"\tble _0803702E\n"
-	"\tldr r0, _080370C0\n"
-	"\tmov r12, r0\n"
-	"\tmovs r5, 0xAE\n"
-	"\tlsls r5, 1\n"
-	"\tmov r8, r5\n"
-	"\tldr r4, _080370C8\n"
-	"\tmovs r3, 0\n"
-	"\tmovs r2, 0x3\n"
-"_08037054:\n"
-	"\tmov r6, r12\n"
-	"\tldr r1, [r6]\n"
-	"\tadds r1, r3\n"
-	"\tadd r1, r8\n"
-	"\tadds r0, r4, 0\n"
-	"\tldm r0!, {r5-r7}\n"
-	"\tstm r1!, {r5-r7}\n"
-	"\tldm r0!, {r5-r7}\n"
-	"\tstm r1!, {r5-r7}\n"
-	"\tadds r3, 0x18\n"
-	"\tsubs r2, 0x1\n"
-	"\tcmp r2, 0\n"
-	"\tbge _08037054\n"
-	"\tmovs r6, 0\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tldr r5, _080370C0\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r4, 0xAE\n"
-	"\tlsls r4, 1\n"
-	"\tadds r0, r4\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0x1C\n"
-	"\tadds r1, r4\n"
-	"\tldr r3, _080370CC\n"
-	"\tldr r2, _080370D0\n"
-	"\tstr r2, [sp]\n"
-	"\tstr r6, [sp, 0x4]\n"
-	"\tmovs r2, 0x6\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tstr r6, [sp, 0xC]\n"
-	"\tmovs r2, 0\n"
-	"\tbl SetMenuItems\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, 0x1C\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_8035CF4\n"
-	"\tbl sub_80376CC\n"
-	"\tadd sp, 0x10\n"
-	"\tpop {r3}\n"
-	"\tmov r8, r3\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_080370C0: .4byte gUnknown_203B35C\n"
-"_080370C4: .4byte 0x00000504\n"
-"_080370C8: .4byte gUnknown_80E653C\n"
-"_080370CC: .4byte gUnknown_80E6CD0\n"
-"_080370D0: .4byte gUnknown_80E6CE8");
-}
-#endif
 
 void sub_80370D4(void)
 {
@@ -752,4 +663,210 @@ void sub_80373C4(void)
 struct unkStruct_203B35C *sub_80373F4(void)
 {
     return gUnknown_203B35C;
+}
+
+void sub_8037400(void)
+{
+  u8 mailIndex;
+  void *r5;
+  void *r6;
+  s32 species;
+  struct unkStruct_8035D94 *puVar5;
+  struct unkStruct_8035D94 *puVar6;
+      
+  r6 = NULL;
+  r5 = NULL;
+  sub_8037810();
+  sub_8011830();
+  gUnknown_203B35C->linkStatus = sub_8037B28(gUnknown_203B35C->unk0);
+  if (gUnknown_203B35C->linkStatus == COMMS_GOOD)
+  {
+      switch(gUnknown_203B35C->unk0) {
+          case 10:
+            r6 = &gUnknown_203B35C->unk39C;
+            r5 = &gUnknown_203B35C->unk450;
+            break;
+          case 9:
+            r6 = &gUnknown_203B35C->unk39C;
+            r5 = &gUnknown_203B35C->unk450;
+            break;
+          case 0:
+            {
+#ifndef NONMATCING
+                register u32 temp1 asm("r1");
+#else
+                u32 temp1;
+#endif
+                puVar5 = sub_8035D94();
+                puVar6 = &gUnknown_203B35C->unk1BC[0];
+                temp1 = puVar5->numItems;
+                puVar6->itemIndex.itemIndex_u32 = puVar5->itemIndex.itemIndex_u32;
+                puVar6->numItems = temp1;
+            }
+            r6 = &gUnknown_203B35C->unk1BC[0];
+            r5 = &gUnknown_203B35C->unk1BC[1];
+            break;
+          case 1:
+            r6 = &gUnknown_203B35C->unk1BC[0];
+            r5 = &gUnknown_203B35C->unk1BC[1];
+            break;
+          case 7:
+            r6 = &gUnknown_203B35C->unk1CC;
+            r5 = &gUnknown_203B35C->unk1FC;
+            break;
+          case 6:
+            mailIndex = sub_8035D74();
+            gUnknown_203B35C->unk1CC = *GetMailatIndex(mailIndex);
+            r6 = &gUnknown_203B35C->unk1CC;
+            r5 = &gUnknown_203B35C->unk1FC;
+            break;
+          case 3:
+            r6 = &gUnknown_203B35C->unk22C;
+            r5 = &gUnknown_203B35C->unk25C;
+            break;
+          case 2:
+            mailIndex = sub_8035D74();
+            gUnknown_203B35C->unk22C = *GetMailatIndex(mailIndex);
+            r6 = &gUnknown_203B35C->unk22C;
+            r5 = &gUnknown_203B35C->unk25C;
+            break;
+          case 4:
+            mailIndex = sub_8035D74();
+            gUnknown_203B35C->unk28C = *GetMailatIndex(mailIndex);
+            if( sub_8035D3C() << 0x10 != 0xffff0000)
+            {
+                species = sub_8035D3C();
+                gUnknown_203B35C->unk2BC = gRecruitedPokemonRef->pokemon[(s16)species];
+            }
+            r6 = &gUnknown_203B35C->unk28C;
+            r5 = &gUnknown_203B35C->unk314;
+            break;
+          case 5:
+            r6 = &gUnknown_203B35C->unk28C;
+            r5 = &gUnknown_203B35C->unk314;
+            break;
+      }
+      gUnknown_203B35C->linkStatus = sub_8037D64(gUnknown_203B35C->unk0, r6, r5);
+    
+      if (gUnknown_203B35C->linkStatus == COMMS_GOOD)
+      {
+          switch(gUnknown_203B35C->unk0) {
+              case 0:
+              case 1:
+                r6 = &gUnknown_203B35C->unk1BC[0];
+                r5 = &gUnknown_203B35C->unk1BC[1];
+                break;
+              case 2:
+              case 3:
+                r6 = &gUnknown_203B35C->unk22C;
+                r5 = &gUnknown_203B35C->unk25C;
+                break;
+              case 4:
+              case 5:
+                r6 = &gUnknown_203B35C->unk28C;
+                r5 = &gUnknown_203B35C->unk314;
+                break;
+              case 6:
+              case 7:
+                r6 = &gUnknown_203B35C->unk1CC;
+                r5 = &gUnknown_203B35C->unk1FC;
+                break;
+              case 9:
+              case 10:
+                r6 = &gUnknown_203B35C->unk39C;
+                r5 = &gUnknown_203B35C->unk450;
+                break;
+          }
+          gUnknown_203B35C->linkStatus = sub_80381F4(gUnknown_203B35C->unk0, r6, r5);
+      }
+  }
+  xxx_call_start_bg_music();
+}
+
+void sub_80376CC(void)
+{
+#ifdef NONMATCHING
+    u32 r0;
+    u32 r2;
+#else
+    register u32 r0 asm("r0");
+    register u32 r2 asm("r2");
+#endif
+    u32 r1;
+    u32 r4;
+    
+
+    r1 = gUnknown_203B35C->unkC.unk0;
+    r0 = 0xfeff;
+    r0 &= r1;
+    r0 &= 0xfdff;
+    r0 &= 0xf3ff;
+    r0 &= 0xefff;
+    r0 &= 0xdfff;
+    r2 = 0x4000;
+    r0 &= 0x3fff;
+    r0 |= r2;
+    gUnknown_203B35C->unkC.unk0 = r0;
+
+    r2 = 0x3F0;
+    r1 = gUnknown_203B35C->unkC.unk4;
+    r0 = 0xFC00;
+    r0 &= r1;
+    r0 |= r2;
+    r0 &= 0xf3ff;
+    r2 = 0xF;
+    r4 = 0xF000;
+    r0 &= 0xfff;
+    r0 |= r4;
+
+    gUnknown_203B35C->unkC.unk4 = r0;
+    r0 = 0;
+    gUnknown_203B35C->unkC.unk2 = r0;
+
+    r1 = 0xC00;
+    r0 = gUnknown_203B35C->unkC.unk6;
+    r2 &= r0;
+    r2 |= r1;
+    gUnknown_203B35C->unkC.unk6 = r2;
+
+}
+
+void sub_8037748(void)
+{
+  u32 temp2;
+
+  gUnknown_203B35C->unkC.unk2 = (gUnknown_203B35C->unkC.unk2 & 0xfe00) | 0x70;
+
+  temp2 = 0x680;
+  gUnknown_203B35C->unkC.unk6 = (gUnknown_203B35C->unkC.unk6 & 0xf) | temp2;
+
+  if ((gUnknown_203B35C->unk14 & 8) != 0) {
+    AddSprite(&gUnknown_203B35C->unkC,0x100,0,0x0);
+  }
+  xxx_draw_string_80144C4();
+  gUnknown_203B35C->unk14++;
+}
+
+u32 sub_8037798(void)
+{
+    u32 nextMenu = MENU_NO_SCREEN_CHANGE;
+    switch(gUnknown_203B35C->unk0) {
+        case 0:
+        case 1:
+            nextMenu = MENU_MAIN_SCREEN;
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            nextMenu = (gUnknown_203B35C->linkStatus == COMMS_GOOD) ? 0x2A : MENU_MAIN_SCREEN;
+            break;
+        case 9:
+        case 10:
+            nextMenu = (gUnknown_203B35C->linkStatus == COMMS_GOOD) ? 0x2B : MENU_WONDER_MAIL;
+            break;
+    }
+    return nextMenu;
 }
