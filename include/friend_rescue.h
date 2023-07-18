@@ -7,14 +7,14 @@
 #include "wonder_mail.h"
 #include "menu.h"
 
+// size: 0x568
 struct WonderMailStruct_203B33C
 {
-    // size: 0x568
-    u32 state;
-    u32 fallbackState;
-    u8 passwordBuffer[0x36];
+    /* 0x0 */ u32 state;
+    /* 0x4 */ u32 fallbackState;
+    /* 0x8 */ u8 passwordBuffer[0x36];
     u32 unk40;
-    u32 status;
+    /* 0x44 */ u32 status;
     struct unkStruct_203B480 unk48;
     struct unkStruct_203B480 unk78;
     struct WonderMailStruct_203B2C0_sub unkA8;
@@ -25,7 +25,7 @@ struct WonderMailStruct_203B33C
     struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
-    struct Item item;
+    /* 0x41C */ struct Item item;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
     u8 unk424[0x100];
     s32 unk524;
@@ -35,7 +35,7 @@ struct WonderMailStruct_203B33C
     u8 fill52E;
     u32 unk530;
     u32 unk534;
-    s16 speciesNum; // A7 << 3
+    /* 0x538 */ s16 speciesNum; // A7 << 3
     struct unkStruct_802F204 unk53C;
     s32 unk564;
 };

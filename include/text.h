@@ -1,7 +1,9 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H 
 
-struct UnkTextStruct1 {
+// size: 0x48
+struct UnkTextStruct1
+{
     s16 unk0;
     s16 unk2;
     s16 unk04;
@@ -13,6 +15,7 @@ struct UnkTextStruct1 {
     u8 unk46;
 };
 
+// size: 0x4
 struct UnkTextStruct2_sub
 {
     u8 unk0;
@@ -21,7 +24,9 @@ struct UnkTextStruct2_sub
     u8 unk3;
 };
 
-struct UnkTextStruct2 {
+// size: 0x18
+struct UnkTextStruct2
+{
     u8 fill00[0x04];
     s32 unk4;
     struct UnkTextStruct2_sub unk08;

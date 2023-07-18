@@ -10,12 +10,13 @@
 
 #include "constants/wonder_mail.h"
 
+// size: 0x28
 struct unkStruct_802F204
 {
     /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH];
     /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
     /* 0x14 */ s16 clientSpecies;
-    /* 0x16 */ u8 unk16;
+    u8 unk16;
     /* 0x18 */ s32 moneyReward;
     /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
     /* 0x1F */ u8 quantity;
@@ -23,14 +24,15 @@ struct unkStruct_802F204
     /* 0x24 */ u32 teamRankPtsReward;
 };
 
+// size: 0x14
 struct WonderMail
 {
     /* 0x0 */ u8 mailType; // mail type
     /* 0x1 */ u8 missionType; // mission type
-    /* 0x2 */ u8 unk2;
-    /* 0x3 */ u8 unk3;
+    u8 unk2;
+    u8 unk3;
     /* 0x4 */ struct DungeonLocation dungeon;
-    /* 0x8 */ u32 unk8;
+    u32 unk8;
     /* 0xC */ s16 clientSpecies; // client pokemon
     /* 0xE */ s16 targetSpecies; // target
     /* 0x10 */ u8 targetItem; // item to find/deliver
@@ -40,27 +42,28 @@ struct WonderMail
 };
 
 
+// size: 0x88
 struct WonderMailStruct_203B2C0_sub
 {
-    struct unkStruct_203B480 mail;
-    struct PokemonStruct pokemon;
+    /* 0x0 */ struct unkStruct_203B480 mail;
+    /* 0x30 */ struct PokemonStruct pokemon;
 };
 
+// size: 0x548
 struct WonderMailStruct_203B2C0
 {
-    // size: 0x548
     /* 0x0 */ u32 fallbackState;
     /* 0x4 */ u32 state;
     /* 0x8 */ u8 passwordBuffer[PASSWORD_BUFFER_SIZE];
     u8 unk3E;
     u32 unk40;
-    u32 linkError;
+    /* 0x44 */ u32 linkError;
     struct unkStruct_203B480 unk48;
     struct unkStruct_203B480 unk78;
     struct WonderMailStruct_203B2C0_sub unkA8;
     struct WonderMailStruct_203B2C0_sub unk130;
     u8 fill16A[0x218 - 0x1B8];
-    u8 mailIndex;
+    /* 0x218 */ u8 mailIndex;
     struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];
@@ -72,18 +75,17 @@ struct WonderMailStruct_203B2C0
     u8 unk42C;
     u8 unk42D;
     u8 unk42E;
-    u8 padding3[0x534 - 0x430];
+    /* 0x430 */ u8 padding3[0x534 - 0x430];
     u32 unk534;
     s32 unk538; // A7 << 3
     u32 unk53C;
-    u32 mailCount; // A8 << 4
-    s16 speciesNum;
-
+    /* 0x540 */ u32 mailCount; // A8 << 4
+    /* 0x544 */ s16 speciesNum;
 };
 
+// size: 0x564
 struct WonderMailStruct_203B2C4
 {
-    // size: 0x564
     /* 0x0 */ u8 state;
     /* 0x4 */ u32 fallbackState; // wonder mail link status??
     /* 0x8 */ u8 passwordBuffer[PASSWORD_BUFFER_SIZE]; // Probably a buffer for entry
@@ -93,7 +95,7 @@ struct WonderMailStruct_203B2C4
     u8 filler48[0x1B8 - 0x48];
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
-    s8 mailIndex;
+    /* 0x218 */ s8 mailIndex;
     struct MenuStruct unk21C[4];
     struct UnkTextStruct2 unk35C[4];
     struct UnkTextStruct2 unk3BC[4];

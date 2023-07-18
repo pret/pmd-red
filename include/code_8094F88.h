@@ -3,9 +3,9 @@
 
 #include "item.h"
 
+// size: 0x30
 struct unkStruct_203B480
 {
-    // size: 0x30
     /* 0x0 */ u8 mailType;
     /* 0x1 */ u8 missionType;
     /* 0x4 */ struct DungeonLocation dungeon;
@@ -21,21 +21,23 @@ struct unkStruct_203B480
     struct Item unk20;
     u32 unk24;
     u32 unk28;
-    s8 rescuesAllowed;
+    /* 0x2C */ s8 rescuesAllowed;
     u8 unk2D;
     u8 padding4[0x30 - 0x2E];
 };
 
+// size: 0x5C
 struct unkStruct_203B484
 {
-    u32 unk0;
-    struct PokemonStruct unk4;
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ struct PokemonStruct unk4;
 };
 
+// size: 0x84
 struct unkStruct_203B48C
 {
-    s32 unk0;
-    s32 unk4[0x20];
+    /* 0x0 */ s32 unk0;
+    /* 0x4 */ s32 unk4[0x20];
 };
 
 extern struct unkStruct_203B480 *gUnknown_203B480;
