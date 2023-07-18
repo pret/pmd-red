@@ -127,12 +127,12 @@ void sub_8030E48(void)
   stack.clientSpecies = mail->clientSpecies;
   stack.targetSpecies = mail->clientSpecies;
   stack.targetItem = ITEM_NOTHING;
-  if (mail->unk20.id == ITEM_NOTHING) {
+  if (mail->item.id == ITEM_NOTHING) {
     stack.unk2E = 5;
   }
   else {
     stack.unk2E = 2;
-    stack.unk34 = mail->unk20.id;
+    stack.unk34 = mail->item.id;
   }
   switch(mail->mailType)
   {

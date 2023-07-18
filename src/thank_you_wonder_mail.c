@@ -288,7 +288,7 @@ u32 CreateThankYouMailPelipper(void)
   index = GetFirstIndexofMailType(6);
   if (index != -1) {
     mail = GetMailatIndex(index);
-    gUnknown_203B2C4->unk41C = mail->unk20;
+    gUnknown_203B2C4->unk41C = mail->item;
     gUnknown_203B2C4->mailIndex = index;
     gUnknown_203B2C4->unk430 = mail->unk10.unk10;
     SetThankYouMailMenuState(5);
@@ -957,7 +957,7 @@ void HandleConfirmItemtoSendMenu(void)
                 mail = GetMailatIndex(gUnknown_203B2C4->mailIndex);
                 if(gUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
-                    mail->unk20 = gUnknown_203B2C4->unk41C;
+                    mail->item = gUnknown_203B2C4->unk41C;
                 }
                 gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
@@ -1144,7 +1144,7 @@ void HandleMailCommunicationMenu(void)
                 {
                     case WONDER_MAIL_MODE_SEND:
                         mail = GetMailatIndex(GetFirstIndexofMailType(WONDER_MAIL_TYPE_THANK_YOU));
-                        if(mail->unk20.id != ITEM_NOTHING)
+                        if(mail->item.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1409,7 +1409,7 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         mailIndex = GetMailIndex(6,gUnknown_203B2C4->unk430);
         mail = GetMailatIndex(mailIndex);
-        itemIndex = mail->unk20.id;
+        itemIndex = mail->item.id;
         if (itemIndex != ITEM_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else

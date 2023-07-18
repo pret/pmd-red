@@ -72,7 +72,7 @@ void sub_8095118(void)
     unused = &gUnknown_203B480[index];
     gUnknown_203B480[index].mailType = WONDER_MAIL_TYPE_NONE;
     unused = &gUnknown_203B480[index];
-    gUnknown_203B480[index].unk20.id = ITEM_NOTHING;
+    gUnknown_203B480[index].item.id = ITEM_NOTHING;
     unused = &gUnknown_203B480[index];
     gUnknown_203B480[index].unk2D = 0;
   }
@@ -152,7 +152,7 @@ void DeleteMailAtIndex(u8 index)
   unused = &gUnknown_203B480[index];
   gUnknown_203B480[index].mailType = 0;
   unused = &gUnknown_203B480[index];
-  gUnknown_203B480[index].unk20.id = 0;
+  gUnknown_203B480[index].item.id = 0;
 }
 
 void sub_8095274(u32 param_1)
@@ -424,9 +424,9 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
-    RestoreIntegerBits(a, &b->unk20.flags, 0x8);
-    RestoreIntegerBits(a, &b->unk20.quantity, 0x8);
-    RestoreIntegerBits(a, &b->unk20.id, 0x8);
+    RestoreIntegerBits(a, &b->item.flags, 0x8);
+    RestoreIntegerBits(a, &b->item.quantity, 0x8);
+    RestoreIntegerBits(a, &b->item.id, 0x8);
     RestoreIntegerBits(a, &b->unk24, 0x20);
     RestoreIntegerBits(a, &b->unk28, 0x20);
     RestoreIntegerBits(a, &b->rescuesAllowed, 0x8);
@@ -449,9 +449,9 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10.unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);
-    SaveIntegerBits(a, &b->unk20.flags, 0x8);
-    SaveIntegerBits(a, &b->unk20.quantity, 0x8);
-    SaveIntegerBits(a, &b->unk20.id, 0x8);
+    SaveIntegerBits(a, &b->item.flags, 0x8);
+    SaveIntegerBits(a, &b->item.quantity, 0x8);
+    SaveIntegerBits(a, &b->item.id, 0x8);
     SaveIntegerBits(a, &b->unk24, 0x20);
     SaveIntegerBits(a, &b->unk28, 0x20);
     SaveIntegerBits(a, &b->rescuesAllowed, 0x8);
