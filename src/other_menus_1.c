@@ -13,7 +13,6 @@ extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn'
 extern s32 gUnknown_202EC48;
 extern u32 gUnknown_202EC40[2];
 
-extern s32 sub_803815C(u32, void *, void*);
 extern void sub_800D494(void);
 extern s32 sub_800D33C(void);
 extern void sub_800D520(void);
@@ -22,35 +21,35 @@ extern void sub_80373C4(void);
 extern void sub_800D59C(s32 *, u32);
 extern void sub_800D570(void);
 extern void sub_800D510(void);
-extern s32 sub_8037DF0(void);
 extern u8 sub_800D588(void);
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 extern void sub_800D670(u32, s32 *, u32);
-void sub_8037F9C(u32 mode, void *param_2, void *param_3);
 extern void sub_800D68C(u32);
-
 
 u32 sub_8037C10(u8 param_1)
 {
-  if (param_1 != 0) {
-    if (sub_800D588()) {
-        goto _zero;
+    u32 ret;
+
+    if (param_1 != 0)
+    {
+        if (sub_800D588())
+        {
+            ret = gUnknown_202EC40[0];
+        }
+        else
+        {
+            ret = gUnknown_202EC40[1];
+        }
+    }
+    else if (sub_800D588())
+    {
+        ret = gUnknown_202EC40[1];
     }
     else
     {
-        goto _one;
+        ret =  gUnknown_202EC40[0];
     }
-  }
-  else if (sub_800D588()) 
-  {
-_one:
-    return gUnknown_202EC40[1];
-  }
-  else
-  {
-_zero:
-    return gUnknown_202EC40[0];
-  }
+    return ret;
 }
 
 void sub_8037C44(s32 mode, void *data)
@@ -89,25 +88,25 @@ void sub_8037CC4(s32 mode, void *param_2, void *param_3)
     {
         case 0:
         case 1:
-            sub_800D670(0,param_2, sizeof(struct unkStruct_8035D94));
-            sub_800D670(1,param_3, sizeof(struct unkStruct_8035D94));
+            sub_800D670(0, param_2, sizeof(struct unkStruct_8035D94));
+            sub_800D670(1, param_3, sizeof(struct unkStruct_8035D94));
             break;
         case 2:
         case 3:
         case 6:
         case 7:
-            sub_800D670(0,param_2, sizeof(struct unkStruct_203B480));
-            sub_800D670(1,param_3, sizeof(struct unkStruct_203B480));
+            sub_800D670(0, param_2, sizeof(struct unkStruct_203B480));
+            sub_800D670(1, param_3, sizeof(struct unkStruct_203B480));
             break;
         case 4:
         case 5:
-            sub_800D670(0,param_2, sizeof(struct WonderMailStruct_203B2C0_sub));
-            sub_800D670(1,param_3, sizeof(struct WonderMailStruct_203B2C0_sub));
+            sub_800D670(0, param_2, sizeof(struct WonderMailStruct_203B2C0_sub));
+            sub_800D670(1, param_3, sizeof(struct WonderMailStruct_203B2C0_sub));
             break;
         case 9:
         case 10:
-            sub_800D670(0,param_2, 0xb4);
-            sub_800D670(1,param_3, 0xb4);
+            sub_800D670(0, param_2, 0xb4);
+            sub_800D670(1, param_3, 0xb4);
             break;
     }
 }
