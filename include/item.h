@@ -4,6 +4,7 @@
 #include "constants/item.h"
 #include "code_8092334.h"
 
+// size: 0x20
 struct ItemDataEntry
 {
     /* 0x0 */ u8 *name;
@@ -24,24 +25,29 @@ struct ItemDataEntry
     /* 0x1E */ u8 actionType;
 };
 
+// size: 0x4
 struct Item
 {
-    u8 flags;
-    u8 quantity;
-    u8 id;
+    /* 0x0 */ u8 flags;
+    /* 0x1 */ u8 quantity;
+    /* 0x2 */ u8 id;
 };
 
-struct BulkItem {
-  u8 id;
-  u8 quantity;
+// size: 0x4
+struct BulkItem
+{
+    /* 0x0 */ u8 id;
+    /* 0x1 */ u8 quantity;
 };
 
+// size: 0x4
 struct Gummi
 {
-    s16 boostAmount;
-    u16 flags;
+    /* 0x0 */ s16 boostAmount;
+    /* 0x2 */ u16 flags;
 };
 
+// size: 0xC
 struct unkStruct_8090F58
 {
     u32 unk0;

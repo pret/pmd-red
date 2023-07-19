@@ -152,8 +152,6 @@ SECTIONS {
         src/code_8031D70.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
-        asm/friend_rescue.o(.text);
-        src/friend_rescue_1.o(.text);
         asm/credits.o(.text);
         src/credits.o(.text);
         src/main_menu.o(.text);
