@@ -14,7 +14,7 @@ struct unkStruct_203B25C
     u32 chosenHintIndex;
     struct GameOptions newOptions;
     u32 menuAction;
-    struct MenuStruct unk1C;
+    struct MenuStruct menu;
     struct MenuItem menuItems[8];
     u16 unkAC[8];
     struct UnkTextStruct2 unkBC[4];
@@ -26,10 +26,7 @@ struct unkStruct_203B260
     u32 unk4;
     u8  unk8;
     u8 fill9[0x10 - 0x9];
-    u32 unk10;
-    u8 fill14[0x28 - 0x14];
-    s16 unk28;
-    u8 fill2A[0x44 - 0x2A];
+    struct MenuInputStruct input;
     u32 unk44;
     struct UnkTextStruct2 * unk48;
     struct UnkTextStruct2 unk4C[4];
@@ -60,10 +57,10 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8008ED0(u8 *);
-extern s32 sub_8013800(u32 *, u32);
+extern s32 sub_8013800(void *, u32);
 extern void CreateOthersMenu(void);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u8 sub_80138B8(u32 *, u32);
+extern u8 sub_80138B8(void *, u32);
 void PlayMenuSoundEffect(u32);
 s32 sub_8012AE8(void);
 void sub_801317C(u32 *);
@@ -173,7 +170,7 @@ void sub_801DD84(void)
     sub_8006518(gUnknown_203B25C->unkBC);
     switch(gUnknown_203B25C->state)
     {
-        case 0:
+        case OPTIONS_MENU_INIT:
             CreateOthersMenu();
             for(index = 0; index < 8; index++)
             {
@@ -191,7 +188,7 @@ void sub_801DD84(void)
             sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
             gUnknown_203B25C->unkBC[0].unkC = 0xA;
             break;
-        case 1:
+        case OPTIONS_MENU_MAIN:
             CreateOthersMenu();
             for(index = 0; index < 4; index++)
             {
@@ -217,8 +214,8 @@ void sub_801DED0(void)
   switch(gUnknown_203B25C->state) {
     case OPTIONS_MENU_INIT:
     case OPTIONS_MENU_MAIN:
-        gUnknown_203B25C->unk1C.unk0 = gOthers_MenuOption;
-        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
+        gUnknown_203B25C->menu.unk0 = gOthers_MenuOption;
+        sub_8012D60(&gUnknown_203B25C->menu,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
         break;
     case OPTIONS_MENU_PRE_HINT_SELECTION:
         sub_801E3F0(0);
@@ -282,8 +279,8 @@ void HandleOthersMenu(void)
   s32 menuAction;
   
   menuAction = 0;
-  if (sub_8012FD8(&gUnknown_203B25C->unk1C) == '\0') {
-    sub_8013114(&gUnknown_203B25C->unk1C,&menuAction);
+  if (sub_8012FD8(&gUnknown_203B25C->menu) == '\0') {
+    sub_8013114(&gUnknown_203B25C->menu,&menuAction);
     gUnknown_203B25C->menuAction = menuAction;
   }
   switch(menuAction)
@@ -394,7 +391,7 @@ bool8 sub_801E198(struct GameOptions *optionsMenu)
   sub_8012D08(gUnknown_203B260->unk48,1);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B260->unk4C,1,1);
-  sub_8013818(&gUnknown_203B260->unk10,1,1,gUnknown_203B260->unk44);
+  sub_8013818(&gUnknown_203B260->input,1,1,gUnknown_203B260->unk44);
   nullsub_38();
   CreateOptionsMenu();
   return TRUE;
@@ -415,7 +412,7 @@ u32 sub_801E218(void)
             PlayMenuSoundEffect(0);
             return 3;
         case INPUT_DPAD_LEFT:
-            if (gUnknown_203B260->unk28 == 0)
+            if (gUnknown_203B260->input.menuIndex == 0)
             {
                 if (gUnknown_203B260->optionsMenu->windowColor == WINDOW_COLOR_BLUE) {
                     gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_GREEN;
@@ -428,7 +425,7 @@ u32 sub_801E218(void)
             }
             break;
         case INPUT_DPAD_RIGHT:
-            if(gUnknown_203B260->unk28 == 0)
+            if(gUnknown_203B260->input.menuIndex == 0)
             {
                 if (gUnknown_203B260->optionsMenu->windowColor > WINDOW_COLOR_RED) {
                     gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_BLUE;
@@ -442,7 +439,7 @@ u32 sub_801E218(void)
     }
 
     // == 1 is needed for matching
-    if ((sub_80138B8(&gUnknown_203B260->unk10,1) != 0) || (flag == TRUE)) {
+    if ((sub_80138B8(&gUnknown_203B260->input,1) != 0) || (flag == TRUE)) {
         nullsub_38();
         CreateOptionsMenu();
         return 1;
@@ -478,7 +475,7 @@ void CreateOptionsMenu(void)
   sub_8008C54(gUnknown_203B260->unk44);
   sub_80073B8(gUnknown_203B260->unk44);
   xxx_call_draw_string(0x10,0,gWindowBGTitle,gUnknown_203B260->unk44,0);
-  y = sub_8013800(&gUnknown_203B260->unk10,0);
+  y = sub_8013800(&gUnknown_203B260->input,0);
   xxx_call_draw_string(8,y,gUnknown_80DC064,gUnknown_203B260->unk44,0);
 
   switch(gUnknown_203B260->optionsMenu->windowColor)
