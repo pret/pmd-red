@@ -61,6 +61,7 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8008ED0(u8 *);
 extern s32 sub_8013800(u32 *, u32);
+extern void CreateOthersMenu(void);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern u8 sub_80138B8(u32 *, u32);
 void PlayMenuSoundEffect(u32);
@@ -166,227 +167,50 @@ void SetOptionsMenuState(u32 newState)
     sub_801DED0();
 }
 
-#ifdef NONMATCHING
 void sub_801DD84(void)
 {
-    s32 iVar3;
+    s32 index;
     sub_8006518(gUnknown_203B25C->unkBC);
     switch(gUnknown_203B25C->state)
     {
         case 0:
             CreateOthersMenu();
-            // TODO probably could be cleaned up to actually match
-            iVar3 = 0;
-            if (gUnknown_203B25C->unkAC[iVar3] == 0) {
-                gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
-            }
-            else {
-                do {
-                    iVar3++;
-                    if(iVar3 > 7)
-                        break;
-                    if(gUnknown_203B25C->unkAC[iVar3] == 0){
-                        gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
-                        break;
-                    }
-                } while (iVar3 < 8);
-            }
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 8; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFCC;
+                if(gUnknown_203B25C->unkAC[index] == 0)
+                {
+                    gUnknown_203B25C->menuAction = gUnknown_203B25C->menuItems[index].menuAction;
+                    break;
+                }
             }
-            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFB0;
-            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
-            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
-            break;
-        case 1:
-            CreateOthersMenu();
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
             }
             gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
             sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
-            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
+            gUnknown_203B25C->unkBC[0].unkC = 0xA;
+            break;
+        case 1:
+            CreateOthersMenu();
+            for(index = 0; index < 4; index++)
+            {
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
+            }
+            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
+            gUnknown_203B25C->unkBC[0].unkC = 0xA;
             break;
         default:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
             }
             break;
     }
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B25C->unkBC, 1, 1);
 }
-#else
-NAKED
-void sub_801DD84(void)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tmov r7, r9\n"
-	"\tmov r6, r8\n"
-	"\tpush {r6,r7}\n"
-	"\tldr r4, _0801DDAC\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, 0xBC\n"
-	"\tbl sub_8006518\n"
-	"\tldr r0, [r4]\n"
-	"\tldr r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0801DDB4\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _0801DE38\n"
-	"\tmovs r3, 0\n"
-	"\tadds r7, r4, 0\n"
-	"\tldr r2, _0801DDB0\n"
-	"\tb _0801DE90\n"
-	"\t.align 2, 0\n"
-"_0801DDAC: .4byte gUnknown_203B25C\n"
-"_0801DDB0: .4byte gUnknown_80DBFB0\n"
-"_0801DDB4:\n"
-	"\tbl CreateOthersMenu\n"
-	"\tmovs r3, 0\n"
-	"\tldr r1, [r4]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0xAC\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0801DDCE\n"
-	"\tldr r0, [r1, 0x70]\n"
-	"\tstr r0, [r1, 0x18]\n"
-	"\tadds r7, r4, 0\n"
-	"\tb _0801DDF2\n"
-"_0801DDCE:\n"
-	"\tadds r3, 0x1\n"
-	"\tldr r7, _0801DE2C\n"
-	"\tcmp r3, 0x7\n"
-	"\tbgt _0801DDF2\n"
-	"\tldr r2, [r7]\n"
-	"\tlsls r0, r3, 1\n"
-	"\tadds r1, r2, 0\n"
-	"\tadds r1, 0xAC\n"
-	"\tadds r1, r0\n"
-	"\tldrh r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0801DDCE\n"
-	"\tlsls r0, r3, 3\n"
-	"\tadds r1, r2, 0\n"
-	"\tadds r1, 0x70\n"
-	"\tadds r1, r0\n"
-	"\tldr r0, [r1]\n"
-	"\tstr r0, [r2, 0x18]\n"
-"_0801DDF2:\n"
-	"\tldr r0, _0801DE30\n"
-	"\tmov r9, r0\n"
-	"\tldr r2, _0801DE2C\n"
-	"\tmov r12, r2\n"
-	"\tldr r3, _0801DE34\n"
-	"\tmov r8, r3\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x3\n"
-"_0801DE02:\n"
-	"\tmov r4, r12\n"
-	"\tldr r1, [r4]\n"
-	"\tadds r1, r2\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r8\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tadds r2, 0x18\n"
-	"\tsubs r3, 0x1\n"
-	"\tcmp r3, 0\n"
-	"\tbge _0801DE02\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r9\n"
-	"\tldm r0!, {r2,r5,r6}\n"
-	"\tstm r1!, {r2,r5,r6}\n"
-	"\tldm r0!, {r3-r5}\n"
-	"\tstm r1!, {r3-r5}\n"
-	"\tb _0801DE70\n"
-	"\t.align 2, 0\n"
-"_0801DE2C: .4byte gUnknown_203B25C\n"
-"_0801DE30: .4byte gUnknown_80DBFCC\n"
-"_0801DE34: .4byte gUnknown_80DBFB0\n"
-"_0801DE38:\n"
-	"\tbl CreateOthersMenu\n"
-	"\tmov r8, r4\n"
-	"\tldr r6, _0801DE88\n"
-	"\tmov r12, r6\n"
-	"\tmov r7, r8\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x3\n"
-"_0801DE48:\n"
-	"\tmov r0, r8\n"
-	"\tldr r1, [r0]\n"
-	"\tadds r1, r2\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r12\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tadds r2, 0x18\n"
-	"\tsubs r3, 0x1\n"
-	"\tcmp r3, 0\n"
-	"\tbge _0801DE48\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r1, 0xBC\n"
-	"\tldr r0, _0801DE8C\n"
-	"\tldm r0!, {r2-r4}\n"
-	"\tstm r1!, {r2-r4}\n"
-	"\tldm r0!, {r2,r5,r6}\n"
-	"\tstm r1!, {r2,r5,r6}\n"
-"_0801DE70:\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0xBC\n"
-	"\tadds r1, 0x6C\n"
-	"\tbl sub_8012CAC\n"
-	"\tldr r0, [r7]\n"
-	"\tadds r0, 0xC8\n"
-	"\tmovs r1, 0xA\n"
-	"\tstrh r1, [r0]\n"
-	"\tb _0801DEAC\n"
-	"\t.align 2, 0\n"
-"_0801DE88: .4byte gUnknown_80DBFB0\n"
-"_0801DE8C: .4byte gUnknown_80DBFCC\n"
-"_0801DE90:\n"
-	"\tldr r0, [r7]\n"
-	"\tlsls r1, r3, 1\n"
-	"\tadds r1, r3\n"
-	"\tlsls r1, 3\n"
-	"\tadds r0, r1\n"
-	"\tadds r0, 0xBC\n"
-	"\tadds r1, r2, 0\n"
-	"\tldm r1!, {r4-r6}\n"
-	"\tstm r0!, {r4-r6}\n"
-	"\tldm r1!, {r4-r6}\n"
-	"\tstm r0!, {r4-r6}\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0x3\n"
-	"\tble _0801DE90\n"
-"_0801DEAC:\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tldr r0, _0801DECC\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r0, 0xBC\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0801DECC: .4byte gUnknown_203B25C");
-}
-#endif
 
 void sub_801DED0(void)
 {
