@@ -14,6 +14,7 @@
 #include "item.h"
 #include "pokemon.h"
 #include "position_util.h"
+#include "exclusive_pokemon.h"
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -380,7 +381,6 @@ extern void DisplayDungeonDialogue(u32 *r0);
 extern void SpriteShockEffect(struct Entity *);
 extern u32 sub_80861F8(u32, struct Entity *, u32);
 
-extern void sub_8097FA8(u32);
 
 extern void JirachiWish();
 extern void JirachiSpinEffect(struct Entity *);
@@ -393,14 +393,12 @@ extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 extern void sub_8052D44(s16 *, struct Entity *, struct Entity *);
-extern void sub_8097FD0(u32);
 extern void SetMessageArgument(u8 *, struct Entity *, u32);
 extern struct Entity *GetLeader();
 extern void sub_80421C0(struct Entity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
 extern void sub_80464C8(struct Entity *, u32 *, struct Item *);
-extern void sub_8098044(u32);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void sub_803E46C(u32);
 extern void sub_80866C4(u32 *);
@@ -418,7 +416,6 @@ extern void sub_80426C8(u32, u32);
 extern void sub_807EAA0(u32, u32);
 
 extern void CreateJirachiWishWarpTile(void);
-extern u8 sub_8098100(u32);
 extern void sub_8086794();
 
 void EnteiScreenFlash(void);

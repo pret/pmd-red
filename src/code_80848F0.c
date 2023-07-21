@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_global_data.h"
 #include "dungeon_music.h"
+#include "exclusive_pokemon.h"
 
 extern void SkarmoryPreFightDialogue();
 extern void SkarmoryReFightDialogue();
@@ -62,7 +63,6 @@ extern void SmeargleRescueDialogue();
 extern void sub_808CD9C();
 extern void sub_8085764();
 extern void sub_80857B8();
-extern void sub_8097FF8();
 
 extern void sub_8086BDC(u32,u8);
 extern void sub_8086F54(u32,u8);
@@ -143,10 +143,7 @@ extern void sub_808C9C4(void);
 extern void sub_808CB5C(void);
 extern void sub_808CBB0(void);
 extern void sub_808CD44(void);
-extern void sub_8097FF8(void);
 
-extern u8 sub_8098100(u8);
-extern void sub_8097FA8(void);
 extern void sub_807E5E4(u32);
 
 void sub_8084854(u8 *param_1)
@@ -168,7 +165,7 @@ void sub_8084854(u8 *param_1)
       {
         gDungeon->unk3A0D = param_1[1];
         if (param_1[2] != 0x40) {
-          sub_8097FA8();
+          sub_8097FA8(param_1[2]);
         }
       }
     }

@@ -9,16 +9,15 @@
 #include "pokemon.h"
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
+#include "exclusive_pokemon.h"
 
 extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
-extern void sub_8097FF8(void);
 extern u8 sub_8044B28(void);
 extern u8 HasRecruitedMon(u32);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
 extern void sub_80855E4(void *);
 extern void sub_8068FE0(struct Entity *, u32, u32);
-extern void sub_8097FA8(u32);
 extern void DisplayDungeonDialogue(u8 *);
 extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_80869E4(struct Entity *, u32, u32, u32);

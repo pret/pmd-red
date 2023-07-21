@@ -4,6 +4,7 @@
 #include "wonder_mail.h"
 #include "code_80958E8.h"
 #include "dungeon.h"
+#include "exclusive_pokemon.h"
 
 struct MissionText
 {
@@ -19,10 +20,8 @@ extern const char gMeetNinetalesText[];
 extern const char gAvoidCaptureText[];
 extern const u8 gUnknown_8109CC0[];
 extern const u8 gDummyScenarioText[];
-extern u8 sub_80A270C();
+extern u8 sub_80A270C(s16);
 
-extern void sub_8097FA8(u32);
-extern void sub_8097FF8(void);
 extern u8 sub_80A2728(s16);
 extern bool8 sub_8001D08(u32, u32 ,s32);
 extern u32 sub_8001784(u32, u32, u16);
