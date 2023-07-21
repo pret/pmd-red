@@ -6975,45 +6975,4 @@ _080097A8: .4byte 0x06017e00
 _080097AC: .4byte gUnknown_80B88C0
 	thumb_func_end InitGraphics
 
-	thumb_func_start sub_80097B0
-sub_80097B0:
-	push {r4-r6,lr}
-	ldr r0, _080097F8
-	ldr r1, _080097FC
-	bl OpenFileAndGetFileDataPtr
-	adds r6, r0, 0
-	ldr r4, _08009800
-	ldr r1, [r6, 0x4]
-	movs r2, 0x80
-	lsls r2, 2
-	adds r0, r4, 0
-	bl CpuCopy
-	bl sub_80063B0
-	adds r5, r4, 0
-	adds r5, 0x40
-	cmp r0, 0x1
-	bne _080097D8
-	adds r5, r4, 0
-_080097D8:
-	movs r4, 0
-_080097DA:
-	adds r0, r4, 0
-	adds r0, 0xF0
-	adds r1, r5, 0
-	bl SetBGPaletteBufferColorArray
-	adds r5, 0x4
-	adds r4, 0x1
-	cmp r4, 0xF
-	ble _080097DA
-	adds r0, r6, 0
-	bl CloseFile
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080097F8: .4byte gUnknown_80B88CC
-_080097FC: .4byte gSystemFileArchive
-_08009800: .4byte gUnknown_202D038
-	thumb_func_end sub_80097B0
-
 	.align 2, 0 @ Don't pad with nop.
