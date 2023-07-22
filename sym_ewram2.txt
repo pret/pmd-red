@@ -136,7 +136,7 @@ gUnknown_203B1FC: /* 203B1FC */
 gUnknown_203B200: /* 203B200 */
 	.space 0x4
 
-gUnknown_203B204: /* 203B204 */
+gFelicityBankWork: /* 203B204 */
 	.space 0x4
 
 gUnknown_203B208: /* 203B208 */
