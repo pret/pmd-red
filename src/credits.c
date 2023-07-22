@@ -23,8 +23,8 @@ struct unkCreditsStruct_203B344
 struct CreditsData
 {
     /* 0x0 */ s16 type;
-    s16 unk2;
-    s16 unk4;
+    s16 x;
+    s16 y;
     /* 0x8 */ u8 *text;
 };
 
@@ -52,8 +52,8 @@ extern u8 sub_8099B94();
 s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
 {
     s32 i;
-    u32 counter;
-    s32 temp2;
+    s32 x;
+    s32 y;
     struct CreditsData *cred;
     u8 *srcText;
     u8 *destText1;
@@ -76,14 +76,14 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     sub_80073B8(0);
 
     cred = creditsCategoryIndex[gCreditsTable]; // WTF
-    counter = 0;
+    y = 0;
     while (cred->text != NULL) {
         srcText = cred->text;
-        if (cred->unk4 >= 0)
-            counter = cred->unk4;
+        if (cred->y >= 0)
+            y = cred->y;
         else
-            counter -= cred->unk4;
-        temp2 = cred->unk2;
+            y -= cred->y;
+        x = cred->x;
 
         switch (cred->type) {
             case 1:
@@ -108,7 +108,7 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
                 break;
         }
 
-        xxx_call_draw_string(temp2, counter, srcText, 0, 0);
+        xxx_call_draw_string(x, y, srcText, 0, 0);
         cred++;
     }
     
@@ -125,8 +125,12 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
 
 s32 sub_8035574(void)
 {
+    #ifdef NONMATCHING
+    u32 const *p;
+    #else
     register u32 const *p asm("r2");
-    
+    #endif
+
     switch (gUnknown_203B340->unk60) {
         case 0:
             if (sub_8099B94() == 0) {
