@@ -5,10 +5,10 @@
 #include "text.h"
 #include "menu.h"
 
-struct unkStruct_203B204
+// size: 0x108
+struct FelicityBankWork
 {
-    // size: 0x108
-    u32 unk0;
+    u32 isAsleep;
     s32 currState;
     u32 fallbackState;
     u32 chosenAmount;
@@ -30,6 +30,5 @@ struct unkStruct_203B204
     struct OpenedFile **unkA4;
     struct UnkTextStruct2 unkA8[4];
 };
-
 
 #endif

@@ -5,59 +5,60 @@
 #include "felicity_bank.h"
 #include "memory.h"
 
-extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
+extern u8 gUnknown_202E5D8[];
+extern struct FelicityBankWork *gFelicityBankWork;
 
-extern struct unkStruct_203B204 *gUnknown_203B204;
 extern struct UnkTextStruct2 gUnknown_80DB6DC;
 extern struct UnkTextStruct2 gUnknown_80DB6F4;
 extern struct UnkTextStruct2 gUnknown_80DB70C;
 
-extern void sub_8016B24();
-extern void sub_80169BC();
 extern void Felicity_DepositMoney();
 extern void Felicity_WithdrawMoney();
-extern void sub_8016B00();
-extern void sub_801645C();
-extern void UpdateFelicityBankDialogue();
 
+extern void sub_801645C();
+extern void sub_80169BC();
+extern void sub_8016B00();
+extern void sub_8016B24();
+
+void UpdateFelicityBankDialogue();
 void UpdateFelicityBankState(u32);
 
-u32 CreateFelicityBank(s32 param_1)
+u32 CreateFelicityBank(s32 isAsleep)
 {
   char *monName;
   struct OpenedFile * faceFile;
   
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
-  gUnknown_203B204 = MemoryAlloc(sizeof(struct unkStruct_203B204),8);
-  gUnknown_203B204->menuAction = 0;
-  gUnknown_203B204->unk0 = param_1;
+  sub_800641C(0, 1, 1);
+  gFelicityBankWork = MemoryAlloc(sizeof(struct FelicityBankWork), 8);
+  gFelicityBankWork->menuAction = 0;
+  gFelicityBankWork->isAsleep = isAsleep;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_PERSIAN);
   monName = GetMonSpecies(MONSTER_PERSIAN);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
-  if (gUnknown_203B204->unk0 == 1) {
-    gUnknown_203B204->unkA4 = NULL;
-  }
-  else {
-    gUnknown_203B204->unkA4 = &gUnknown_203B204->faceFile;
-  }
+
+  if (gFelicityBankWork->isAsleep == 1)
+    gFelicityBankWork->unkA4 = NULL;
+  else
+    gFelicityBankWork->unkA4 = &gFelicityBankWork->faceFile;
+
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
-  gUnknown_203B204->faceFile = faceFile;
-  gUnknown_203B204->faceData = faceFile->data;
-  gUnknown_203B204->unkA0 = 0;
-  gUnknown_203B204->unkA1 = 0;
-  gUnknown_203B204->unkA2 = 0;
-  gUnknown_203B204->unk9C = 2;
-  gUnknown_203B204->unk9E = 8;
+  gFelicityBankWork->faceFile = faceFile;
+  gFelicityBankWork->faceData = faceFile->data;
+  gFelicityBankWork->unkA0 = 0;
+  gFelicityBankWork->unkA1 = 0;
+  gFelicityBankWork->unkA2 = 0;
+  gFelicityBankWork->unk9C = 2;
+  gFelicityBankWork->unk9E = 8;
   UpdateFelicityBankState(0);
   return 1;
 }
 
 u32 FelicityBankCallback(void)
 { 
-  switch(gUnknown_203B204->currState) {
+  switch (gFelicityBankWork->currState) {
     case 1:
         sub_8016B24();
         break;
@@ -89,17 +90,16 @@ u32 FelicityBankCallback(void)
 
 void CleanFelicityBank(void)
 {
-    if(gUnknown_203B204 != NULL)
-    {
-        CloseFile(gUnknown_203B204->faceFile);
-        MemoryFree(gUnknown_203B204);
-        gUnknown_203B204 = NULL;
+    if (gFelicityBankWork != NULL) {
+        CloseFile(gFelicityBankWork->faceFile);
+        MemoryFree(gFelicityBankWork);
+        gFelicityBankWork = NULL;
     }
 }
 
 void UpdateFelicityBankState(u32 newState)
 {
-    gUnknown_203B204->currState = newState;
+    gFelicityBankWork->currState = newState;
     sub_801645C();
     UpdateFelicityBankDialogue();
 }
@@ -108,33 +108,32 @@ void sub_801645C(void)
 {
     s32 index;
 
-    sub_8006518(gUnknown_203B204->unkA8);
-    switch(gUnknown_203B204->currState)
+    sub_8006518(gFelicityBankWork->unkA8);
+    switch (gFelicityBankWork->currState)
     {
         case 2:
-            gUnknown_203B204->unkA8[0].fill00[0] = 0x80;
-            gUnknown_203B204->unkA8[1].fill00[0] = 0x80;
-            gUnknown_203B204->unkA8[2].fill00[0] = 0x80;
-            gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
+            gFelicityBankWork->unkA8[0].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[1].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[2].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B204->unkA8, 1, 0);
+            sub_800641C(gFelicityBankWork->unkA8, 1, 0);
             break;
         case 8:
         case 11:
-            gUnknown_203B204->unkA8[0].fill00[0] = 0x80;
-            gUnknown_203B204->unkA8[1].fill00[0] = 0x80;
-            gUnknown_203B204->unkA8[3] = gUnknown_80DB6F4;
-            gUnknown_203B204->unkA8[2] = gUnknown_80DB70C;
+            gFelicityBankWork->unkA8[0].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[1].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
+            gFelicityBankWork->unkA8[2] = gUnknown_80DB70C;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B204->unkA8, 1, 0);
+            sub_800641C(gFelicityBankWork->unkA8, 1, 0);
             break;
         default:
-            for(index = 0; index < 4; index++)
-            {
-                gUnknown_203B204->unkA8[index] = gUnknown_80DB6DC;
+            for (index = 0; index < 4; index++) {
+                gFelicityBankWork->unkA8[index] = gUnknown_80DB6DC;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B204->unkA8, 1, 1);
+            sub_800641C(gFelicityBankWork->unkA8, 1, 1);
             break;
     }
 }
