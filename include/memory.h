@@ -3,18 +3,22 @@
 
 #define HEAP_SIZE 0x24000
 
+// size: 0x8
 struct HeapSettings
 {
     /* 0x0 */ u8 *start;
     /* 0x4 */ u32 size;
 };
 
-struct HeapMemoryBlock {
+// size: 0xC
+struct HeapMemoryBlock
+{
     /* 0x0 */ u8 *start;
     /* 0x4 */ s32 size;
     /* 0x8 */ s32 allocatedSize;
 };
 
+// size: 0x10
 struct HeapFreeListElement
 {
     /* 0x0 */ u32 unk_atb;
@@ -23,6 +27,7 @@ struct HeapFreeListElement
     /* 0xC */ struct HeapMemoryBlock block;
 };
 
+// size: 0x1C
 struct HeapDescriptor
 {
     u32 unk0;
