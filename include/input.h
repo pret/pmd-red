@@ -1,6 +1,7 @@
 #ifndef GUARD_INPUT_H
 #define GUARD_INPUT_H  
 
+// size: 0x10
 struct Inputs
 {
     /* 0x0 */ u16 held;
@@ -8,46 +9,47 @@ struct Inputs
     /* 0x4 */ u16 repeated;
     /* 0x6 */ u16 shortPress;
     /* 0x8 */ u16 heldDpad;
-    /* 0xA..0xB - padding */
     /* 0xC */ s32 repeatTimerDpad;
 };
 
 extern struct Inputs gRealInputs;
 
+// size: 0x8
 struct InputTimers
 {
     /* 0x0 */ s16 holdTimerB;
     /* 0x2 */ s16 holdTimerR;
-    /* 0x4 */ u16 unk4;
-    /* 0x6 */ u16 unk6;
+    u16 unk4;
+    u16 unk6;
 };
 
+// size: 0x2C
 struct UnusedInputStruct
 {
-    /* 0x0 */ u16 unk0;
-    /* 0x2 */ u16 unk2;
-    /* 0x4 */ u16 unk4;
-    /* 0x6 */ u16 unk6;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ u16 unkA;
-    /* 0xC */ u16 unkC;
-    /* 0xE */ u16 unkE;
-    /* 0x10 */ u16 unk10;
-    /* 0x12 */ u16 unk12;
-    /* 0x14 */ u16 unk14;
-    /* 0x16 */ u16 unk16;
-    /* 0x18 */ u16 unk18;
-    /* 0x1A */ u16 unk1A;
-    /* 0x1C */ u16 unk1C;
-    /* 0x1E */ u16 unk1E;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u16 unk24;
-    /* 0x24 */ u16 unk26;
-    /* 0x28 */ u8 unk28;
-    /* 0x29 */ u8 unk29;
-    /* 0x2A..0x2B - padding */
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+    u16 unk10;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    u16 unk1A;
+    u16 unk1C;
+    u16 unk1E;
+    u32 unk20;
+    u16 unk24;
+    u16 unk26;
+    u8 unk28;
+    u8 unk29;
 };
 
+// size: 0xC
 struct MenuInputStructSub
 {
     u8 unk0;
@@ -60,27 +62,28 @@ struct MenuInputStructSub
     s16 unkA;
 };
 
+// size: 0x2C
 struct MenuInputStruct
 {
     s32 unk0;
-    /* 0x4 */ u16 unk4;
-    /* 0x6 */ s16 unk6;
-    /* 0x8 */ u16 unk8;
-    /* 0x8 */ u16 unkA;
-    /* 0xC */ u16 unkC;
-    /* 0xE */ u16 unkE;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ s16 unk14;
-    /* 0x16 */ u16 unk16;
+    u16 unk4;
+    s16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+    u32 unk10;
+    s16 unk14;
+    u16 unk16;
     /* 0x18 */ s16 menuIndex;
-    /* 0x1A */ s16 unk1A;
-    /* 0x1C */ s16 unk1C;
-    /* 0x1E */ s16 unk1E;
-    /* 0x20 */ s16 unk20;
-    /* 0x22 */ s16 unk22;
-    /* 0x24 */ u16 unk24;
-               u16 unk26;
-    /* 0x28 */ struct MenuInputStructSub unk28;
+    s16 unk1A;
+    s16 unk1C;
+    s16 unk1E;
+    s16 unk20;
+    s16 unk22;
+    u16 unk24;
+    u16 unk26;
+    struct MenuInputStructSub unk28;
 };
 
 
