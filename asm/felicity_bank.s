@@ -23,7 +23,7 @@ _0801654E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08016558: .4byte gUnknown_203B204
+_08016558: .4byte gFelicityBankWork
 _0801655C: .4byte _08016560
 	.align 2, 0
 _08016560:
@@ -92,7 +92,7 @@ _080165B4:
 	str r4, [sp, 0x8]
 	b _08016632
 	.align 2, 0
-_080165FC: .4byte gUnknown_203B204
+_080165FC: .4byte gFelicityBankWork
 _08016600: .4byte gTeamInventory_203B460
 _08016604: .4byte gFelicityDialogue
 _08016608:
@@ -539,7 +539,7 @@ _0801695C:
 	str r0, [r1, 0x10]
 	b _080169B6
 	.align 2, 0
-_08016980: .4byte gUnknown_203B204
+_08016980: .4byte gFelicityBankWork
 _08016984: .4byte gUnknown_80D4958
 _08016988: .4byte gUnknown_80D4964
 _0801698C: .4byte gUnknown_80D4970
