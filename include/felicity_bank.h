@@ -8,11 +8,11 @@
 // size: 0x108
 struct FelicityBankWork
 {
-    u32 isAsleep;
-    s32 currState;
-    u32 fallbackState;
-    u32 chosenAmount;
-    u32 menuAction;
+    /* 0x0 */ u32 isAsleep;
+    /* 0x4 */ s32 currState;
+    /* 0x8 */ u32 fallbackState;
+    /* 0xC */ u32 chosenAmount;
+    /* 0x10 */ u32 menuAction;
     struct MenuItem unk14[8];
     u16 unk54[8];
     u32 unk64;

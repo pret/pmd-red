@@ -88,7 +88,7 @@ u32 FelicityBankCallback(void)
   return 0;
 }
 
-void CleanFelicityBank(void)
+void DestroyFelicityBank(void)
 {
     if (gFelicityBankWork != NULL) {
         CloseFile(gFelicityBankWork->faceFile);
