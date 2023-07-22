@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "input.h"
 #include "text.h"
+#include "text_util.h"
 
 struct unkStruct_203B200
 {
@@ -34,7 +35,6 @@ extern void sub_80160F4(u32);
 bool8 IsNameEmpty(void);
 extern u32 sub_80154F0(void);
 extern void sub_80155F0(void);
-extern void sub_80922B4(u8 *, u8 *, s32);
 
 void nullsub_36(void);
 void sub_8016110(void);

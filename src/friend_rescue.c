@@ -3,6 +3,7 @@
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
 #include "text.h"
+#include "text_util.h"
 #include "input.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -316,7 +317,6 @@ extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern s32 sub_8037B28(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 
 extern s32 CountMailType(u8 mailType);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);

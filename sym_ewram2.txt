@@ -380,18 +380,10 @@ gUnknown_203B344: /* 203B344 */
 	.space 0x4
 
 .include "src/main_menu.o"
-
 .include "src/trade_items_menu.o"
-
-gUnknown_203B35C: /* 203B35C */
-	.space 0x4
-
-gUnknown_203B360: /* 203B360 */
-	.space 0x4
-
-gUnknown_203B364: /* 203B364 */
-	.space 0x4
-
+.include "src/other_menus.o"
+.include "src/unk_menu_203B360.o"
+.include "src/save_menu.o"
 .include "src/rescue_password_menu.o"
 .include "src/load_screen.o"
 .include "src/wonder_mail_main_menu.o"

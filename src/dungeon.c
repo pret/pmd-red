@@ -50,7 +50,7 @@ bool8 IsLevelResetTo1(u8 dungeon)
     return gDungeons[dungeon].levelResetTo1;
 }
 
-u8 GetMaxItemsAllowed(u8 dungeon)
+u32 GetMaxItemsAllowed(u8 dungeon)
 {
     return gDungeons[dungeon].maxItemsAllowed;
 }

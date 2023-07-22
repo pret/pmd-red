@@ -4,16 +4,18 @@
 #include "debug.h"
 #include "code_80A26CC.h"
 
-extern u32 gUnknown_20398A8;
-extern u32 gUnknown_20398AC;
-extern u32 gUnknown_20398B0;
-extern u32 gUnknown_20398B4;
-extern u8 gUnknown_20398B8;
-extern u8 gUnknown_20398B9;
-extern u8 gUnknown_20398BA;
-extern u16 gUnknown_20398BE;
-extern u32 gUnknown_20398C0;
-extern s16 gUnknown_20398C4;
+EWRAM_DATA u32 gUnknown_20398A8 = {0};
+EWRAM_DATA u32 gUnknown_20398AC = {0};
+EWRAM_DATA u32 gUnknown_20398B0 = {0};
+EWRAM_DATA u32 gUnknown_20398B4 = {0};
+EWRAM_DATA u8 gUnknown_20398B8 = {0};
+EWRAM_DATA u8 gUnknown_20398B9 = {0};
+EWRAM_DATA u8 gUnknown_20398BA = {0};
+EWRAM_DATA UNUSED static u8 gUnknown_20398BB = {0}; // NOTE: Needed for matching but not used
+EWRAM_DATA u16 gUnknown_20398BC = {0};
+EWRAM_DATA u16 gUnknown_20398BE = {0};
+EWRAM_DATA u32 gUnknown_20398C0 = {0};
+EWRAM_DATA s16 gUnknown_20398C4 = {0};
 
 EWRAM_DATA_2 u8 gUnknown_203B49C = {0};
 EWRAM_DATA_2 u8 gUnknown_203B49D = {0};

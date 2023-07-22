@@ -26,7 +26,7 @@ struct unkStruct_203B360
     u32 unk1B0; // sprite count?
 };
 
-extern struct unkStruct_203B360 *gUnknown_203B360;
+EWRAM_DATA_2 struct unkStruct_203B360 *gUnknown_203B360 = {0};
 const struct UnkTextStruct2 gUnknown_80E6E7C = {
    0x00, 0x00, 0x00, 0x00,
    0x03,

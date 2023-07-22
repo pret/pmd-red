@@ -45,7 +45,8 @@ struct unkStruct_203B35C
    u8 fill3A0[0x450 - 0x3A0];
    s32 unk450;
 };
-extern struct unkStruct_203B35C *gUnknown_203B35C;
+
+EWRAM_DATA_2 struct unkStruct_203B35C *gUnknown_203B35C = {0};
 
 const struct UnkTextStruct2 gUnknown_80E653C = {
    0x00, 0x00, 0x00, 0x00,

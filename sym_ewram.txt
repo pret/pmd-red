@@ -811,58 +811,16 @@ gMoveLearnsets: /* 2038C6C */
     .include "src/game_options.o"
     .include "src/play_time.o"
 
-gUnknown_2038C88: /* 2038C88 */
-	.space 0x600
-
-gUnknown_2039288: /* 2039288 */
-	.space 0x60
-
-gUnknown_20392E8: /* 20392E8 */
-	.space 0xD8
-
-gUnknown_20393C0: /* 20393C0 */
-	.space 0x88
-
-gUnknown_2039448: /* 2039448 */
-	.space 0x330
-
-.include "src/code_8097670.o"
-.space 0x4
-.include "src/exclusive_pokemon.o"
-.space 0x4
-
-gUnknown_20398A8: /* 20398A8 */
-	.space 0x4
-
-gUnknown_20398AC: /* 20398AC */
-	.space 0x4
-
-gUnknown_20398B0: /* 20398B0 */
-	.space 0x4
-
-gUnknown_20398B4: /* 20398B4 */
-	.space 0x4
-
-gUnknown_20398B8: /* 20398B8 */
-	.space 0x1
-
-gUnknown_20398B9: /* 20398B9 */
-	.space 0x1
-
-gUnknown_20398BA: /* 20398BA */
-	.space 0x2
-
-gUnknown_20398BC: /* 20398BC */
-	.space 0x2
-
-gUnknown_20398BE: /* 20398BE */
-	.space 0x2
-
-gUnknown_20398C0: /* 20398C0 */
-	.space 0x4
-
-gUnknown_20398C4: /* 20398C4 */
-	.space 0x4
+    .include "src/code_8094F88.o"
+    .space 0x4
+    .include "src/code_80958E8.o"
+    .space 0x4
+    .include "src/code_8097670.o"
+    .space 0x4
+    .include "src/exclusive_pokemon.o"
+    .space 0x4
+    .include "src/ground_main.o"
+    .space 0x2
 
 gUnknown_20398C8: /* 20398C8 */
 	.space 0x10

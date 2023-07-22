@@ -8,6 +8,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "text.h"
+#include "text_util.h"
 #include "team_inventory.h"
 #include "menu_input.h"
 
@@ -201,7 +202,6 @@ void sub_8024DBC(void);
 void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
-void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 u32 sub_801602C(u32 r0, u8 *name);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801A6E8(u32);

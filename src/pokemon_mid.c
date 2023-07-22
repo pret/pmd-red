@@ -7,6 +7,7 @@
 #include "constants/colors.h"
 #include "constants/move_id.h"
 #include "code_800D090.h"
+#include "text_util.h"
 
 extern struct MonsterDataEntry *gMonsterParameters;
 extern const char gUnknown_8107600[];
@@ -29,10 +30,8 @@ extern struct LevelData gLevelCurrentData[];
 
 
 extern s16 GetBaseSpecies(s16);
-extern void sub_80922B4(u8 *, u8 *, s32);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
-extern void CopyStringtoBuffer(char *r0, char *r1);
 extern void CopyAndResetMoves(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);

@@ -4,6 +4,7 @@
 #include "item.h"
 #include "moves.h"
 #include "dungeon_global_data.h"
+#include "text_util.h"
 
 struct unkStruct_8113080
 {
@@ -41,7 +42,6 @@ void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonL
 extern void sub_80073B8(u32);
 extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern s32 sub_8008ED0(u8 *);
-void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 extern void sub_80073E0(u32);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)

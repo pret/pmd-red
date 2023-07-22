@@ -5,6 +5,7 @@
 #include "input.h"
 #include "memory.h"
 #include "text.h"
+#include "text_util.h"
 
 struct unkStruct_203B2AC
 {
@@ -54,7 +55,6 @@ extern bool8 sub_8013938(struct MenuInputStruct*);
 extern void sub_802452C(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct MenuInputStruct*);
-void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 bool8 ComparePokemonNames(s16 a1, s16 a2);
 
 void sub_8024588(void);

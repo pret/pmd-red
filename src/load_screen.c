@@ -7,6 +7,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "text.h"
+#include "text_util.h"
 #include "pokemon.h"
 #include "save.h"
 #include "code_800D090.h"
@@ -50,7 +51,6 @@ extern u8 *sub_8098FB4();
 extern u8 *GetDungeonLocationInfo(void);
 extern u32 GetNumAdventures(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
-extern void sub_80922B4(u8 *, const u8 *, u32);
 extern u32 sub_8001658(u32, u32);
 extern void sub_80073E0(u32);
 

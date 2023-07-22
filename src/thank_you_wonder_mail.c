@@ -11,6 +11,7 @@
 #include "input.h"
 #include "rescue_password_menu.h"
 #include "text.h"
+#include "text_util.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "menu_input.h"
@@ -218,7 +219,6 @@ extern u32 sub_80144A4(s32 *r0);
 extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
-extern void sub_80922B4(u8 *, u8 *, u32);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
