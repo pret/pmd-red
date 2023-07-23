@@ -39,4 +39,7 @@ struct FelicityBankWork
 
 extern struct FelicityBankWork *gFelicityBankWork;
 
+#define FELICITY_BANK_ACTION_WITHDRAW 0
+#define FELICITY_BANK_ACTION_DEPOSIT 1
+
 #endif
