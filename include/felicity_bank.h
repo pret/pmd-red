@@ -16,9 +16,15 @@ struct FelicityBankWork
     struct MenuItem unk14[8];
     u16 unk54[8];
     u32 unk64;
-    u8 fill68[0x78 - 0x68];
+    s32 unk68;
+    s32 unk6C;
+    /* 0x70 */ s32 maximumDepositWithdraw;
+    s32 unk74;
     u32 unk78;
-    u8 fill7C[0x94 - 0x7C];
+    struct UnkTextStruct2 *unk7C;
+    s32 unk80;
+    s32 unk84;
+    u8 fill88[0x94 - 0x88];
     /* 0x94 */ struct OpenedFile *faceFile;
     /* 0x98 */ u8 *faceData;
     u16 unk9C;
@@ -30,5 +36,7 @@ struct FelicityBankWork
     struct OpenedFile **unkA4;
     struct UnkTextStruct2 unkA8[4];
 };
+
+extern struct FelicityBankWork *gFelicityBankWork;
 
 #endif

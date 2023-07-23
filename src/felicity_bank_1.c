@@ -4,8 +4,6 @@
 #include "felicity_bank.h"
 #include "menu_input.h"
 
-extern struct FelicityBankWork *gFelicityBankWork;
-
 extern u8 gUnknown_80DB738;
 extern u8 gFelicityMoney[];
 extern u8 gFelicitySavings[];
