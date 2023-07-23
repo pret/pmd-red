@@ -53,7 +53,6 @@ extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern void sub_8023DA4(void);
-extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_803ACE8();
 extern void sub_803AD88();
 extern void sub_803AF38();

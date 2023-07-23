@@ -79,7 +79,6 @@ extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 
-extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

@@ -181,7 +181,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
-extern void xxx_call_draw_string(s32 x, u32 y, const u8 *, u32 , u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s32 sub_8013800(struct MenuInputStruct *, s32);

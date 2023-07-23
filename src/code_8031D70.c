@@ -46,7 +46,6 @@ const struct UnkTextStruct2 gUnknown_80E1FC4 = {
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void xxx_call_draw_string(s32, s32, const u8 *, s32, s32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

@@ -49,7 +49,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_801E714(void);
 extern void sub_801E76C(void);
 extern void DisplayChosenHint(void);
-extern void xxx_call_draw_string(s32, u32, u8 *, u32, u32);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
 extern s32 sub_8013800(struct MenuInputStruct *, u32);

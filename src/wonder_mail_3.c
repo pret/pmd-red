@@ -149,7 +149,6 @@ extern u8 *sub_8096DE8(void);
 extern void AcceptJob(struct unkSubStruct_203B2F8 *);
 extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
 struct unkStruct_803B344 *sub_803B344(u8);
-extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
