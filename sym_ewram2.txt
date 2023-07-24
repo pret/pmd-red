@@ -250,8 +250,7 @@ gUnknown_203B28A: /* 203B28A */
 gUnknown_203B28C: /* 203B28C */
 	.space 0x4
 
-gUnknown_203B290: /* 203B290 */
-	.space 0x4
+.include "src/wigglytuff_shop.o"
 
 gUnknown_203B294: /* 203B294 */
 	.space 0x4

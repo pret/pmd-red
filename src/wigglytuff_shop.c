@@ -9,13 +9,22 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "friend_area.h"
+#include "wigglytuff_shop.h"
 
 struct unkStruct_8092638
 {
     u32 unk0;
-    u8 unk4;
+    bool8 hasFriendArea;
     u32 unk5;
 };
+
+extern struct UnkTextStruct2 gUnknown_80DC534;
+extern struct UnkTextStruct2 gUnknown_80DC564;
+extern struct UnkTextStruct2 gUnknown_80DC54C;
+extern struct UnkTextStruct2 gUnknown_80DC534;
+
+EWRAM_DATA_2 struct WigglytuffShop *gWigglytuffShop = {0};
+
 extern u8 gUnknown_202E628[];
 extern u32 gUnknown_202DE30[2];
 extern u8 gUnknown_202E5D8[];
@@ -30,15 +39,10 @@ extern u8 *gUnknown_80D4934[];
 extern u8 *gUnknown_80D4970[];
 extern u8 *gUnknown_80D4978[];
 
-extern struct UnkTextStruct2 gUnknown_80DC534;
-extern struct UnkTextStruct2 gUnknown_80DC564;
-extern struct UnkTextStruct2 gUnknown_80DC54C;
-extern struct UnkTextStruct2 gUnknown_80DC534;
 
 s32 sub_80144A4(s32 *);
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
-void sub_80222C8(void);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32,u8 *r5, u32);
 extern void sub_80141B4(const u8 *, u32, u8*, u32);
 extern void DrawTeamMoneyBox(u32);
@@ -61,53 +65,27 @@ void sub_8023354(u8 param_1);
 extern bool8 sub_80023E4(u32);
 extern void sub_8022420(void);
 extern void sub_8092638(u8,struct unkStruct_8092638  *, u32, u32);
+extern u8 sub_8099B94(void);
+extern void sub_8099AFC(u32, u32, u32);
+extern void sub_8099A5C(u32, u32, u32);
 
 extern u32 sub_8023278(u32);
 void sub_80233A0(void);
 s16 sub_802331C(void);
-extern void sub_8022460(void);
-extern void sub_8022538(void);
-extern void sub_80225C8(void);
-extern void sub_80224D4(void);
-extern void sub_80226F0(void);
-extern void sub_8022790(void);
-extern void sub_8022668(void);
-extern void sub_8022684(void);
-extern void sub_80226CC(void);
 
-void UpdateWigglytuffState(s32);
+void sub_8022460(void);
+void sub_8022538(void);
+void sub_80225C8(void);
+void sub_80224D4(void);
+void sub_80226F0(void);
+void sub_8022790(void);
+void sub_8022668(void);
+void sub_8022684(void);
+void sub_80226CC(void);
+void sub_80222C8(void);
+void SetWigglytuffState(s32);
 void sub_8021D5C(void);
 void UpdateWigglytuffDialogue(void);
-
-struct unkStruct_203B290 
-{
-    // size: 0x138
-    bool32 isAsleep;
-    s32 state;
-    s32 fallbackState;
-    s32 friendAreaPrice;
-    u8 chosenFriendArea;
-    s16 chosenSpecies;
-    u32 menuAction1;
-    u32 menuAction2;
-    struct MenuItem unk1C[8];
-    u16 unk5C[0x8];
-    struct MenuStruct unk6C;
-    /* 0xBC */ struct OpenedFile *faceFile;
-    /* 0xC0 */ u8 *faceData;
-    u16 unkC4;
-    u16 unkC6;
-    u8 unkC8;
-    u8 unkC9;
-    u8 unkCA;
-    u8 fillCB;
-    u8 *unkCC;
-    struct UnkTextStruct2 unkD0[4];
-    u32 unk130;
-    u32 unk134;
-};
-
-extern struct unkStruct_203B290 *gUnknown_203B290;
 
 bool8 CreateWigglytuffShop(bool32 isAsleep)
 {
@@ -116,35 +94,35 @@ bool8 CreateWigglytuffShop(bool32 isAsleep)
 
     ResetUnusedInputStruct();
     sub_800641C(0, 1, 1);
-    gUnknown_203B290 = MemoryAlloc(sizeof(struct unkStruct_203B290), 8);
-    gUnknown_203B290->menuAction1 = 0;
-    gUnknown_203B290->menuAction2 = 0;
-    gUnknown_203B290->isAsleep = isAsleep;
+    gWigglytuffShop = MemoryAlloc(sizeof(struct WigglytuffShop), 8);
+    gWigglytuffShop->menuAction1 = 0;
+    gWigglytuffShop->menuAction2 = 0;
+    gWigglytuffShop->isAsleep = isAsleep;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_WIGGLYTUFF);
     CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_WIGGLYTUFF);
     string = GetMonSpecies(MONSTER_WIGGLYTUFF);
     strcpy(gUnknown_202E1C8 - 0x50, string);
-    if (gUnknown_203B290->isAsleep == TRUE) {
-        gUnknown_203B290->unkCC = NULL;
+    if (gWigglytuffShop->isAsleep == TRUE) {
+        gWigglytuffShop->unkCC = NULL;
     }
     else {
-        gUnknown_203B290->unkCC = (u8 *)&gUnknown_203B290->faceFile;
+        gWigglytuffShop->unkCC = (u8 *)&gWigglytuffShop->faceFile;
     }
     file = GetDialogueSpriteDataPtr(MONSTER_WIGGLYTUFF);
-    gUnknown_203B290->faceFile = file;
-    gUnknown_203B290->faceData = file->data;
-    gUnknown_203B290->unkC8 = 0;
-    gUnknown_203B290->unkC9 = 0;
-    gUnknown_203B290->unkCA = 0;
-    gUnknown_203B290->unkC4 = 2;
-    gUnknown_203B290->unkC6 = 8;
-    UpdateWigglytuffState(0);
+    gWigglytuffShop->faceFile = file;
+    gWigglytuffShop->faceData = file->data;
+    gWigglytuffShop->unkC8 = 0;
+    gWigglytuffShop->unkC9 = 0;
+    gWigglytuffShop->unkCA = 0;
+    gWigglytuffShop->unkC4 = 2;
+    gWigglytuffShop->unkC6 = 8;
+    SetWigglytuffState(0);
     return TRUE;
 }
 
 u32 sub_8021C5C(void)
 {
-    switch(gUnknown_203B290->state)
+    switch(gWigglytuffShop->state)
     {
         case 0:
         case 1:
@@ -184,17 +162,17 @@ u32 sub_8021C5C(void)
 
 void sub_8021D1C(void)
 {
-    if(gUnknown_203B290)
+    if(gWigglytuffShop)
     {
-        CloseFile(gUnknown_203B290->faceFile);
-        MemoryFree(gUnknown_203B290);
-        gUnknown_203B290 = NULL;
+        CloseFile(gWigglytuffShop->faceFile);
+        MemoryFree(gWigglytuffShop);
+        gWigglytuffShop = NULL;
     }
 }
 
-void UpdateWigglytuffState(s32 newState)
+void SetWigglytuffState(s32 newState)
 {
-    gUnknown_203B290->state = newState;
+    gWigglytuffShop->state = newState;
     sub_8021D5C();
     UpdateWigglytuffDialogue();
 }
@@ -203,29 +181,29 @@ void sub_8021D5C(void)
 {
     s32 index;
     
-    sub_8006518(gUnknown_203B290->unkD0);
-    switch(gUnknown_203B290->state)
+    sub_8006518(gWigglytuffShop->unkD0);
+    switch(gWigglytuffShop->state)
     {
         case 0x9:
         case 0xA:
-            gUnknown_203B290->unkD0[0] = gUnknown_80DC534;
-            gUnknown_203B290->unkD0[2] = gUnknown_80DC534;
-            gUnknown_203B290->unkD0[1] = gUnknown_80DC564;
+            gWigglytuffShop->unkD0[0] = gUnknown_80DC534;
+            gWigglytuffShop->unkD0[2] = gUnknown_80DC534;
+            gWigglytuffShop->unkD0[1] = gUnknown_80DC564;
             break;
         case 0xB:
-            gUnknown_203B290->unkD0[2] = gUnknown_80DC54C;
+            gWigglytuffShop->unkD0[2] = gUnknown_80DC54C;
             break;
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B290->unkD0[index] = gUnknown_80DC534;
+                gWigglytuffShop->unkD0[index] = gUnknown_80DC534;
             }
             break;
     
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B290->unkD0, 1, 1);
+    sub_800641C(gWigglytuffShop->unkD0, 1, 1);
 }
 
 void UpdateWigglytuffDialogue(void)
@@ -233,49 +211,49 @@ void UpdateWigglytuffDialogue(void)
     char *string;
     struct unkStruct_8092638 uStack_14;
 
-    switch(gUnknown_203B290->state) 
+    switch(gWigglytuffShop->state) 
     {
         case 0:
             sub_80222C8();
-            sub_8014248(gWigglytuffDialogue[gUnknown_203B290->isAsleep][0],0,gUnknown_203B290->menuAction1,gUnknown_203B290->unk1C,gUnknown_203B290->unk5C,4,0,gUnknown_203B290->unkCC,0xc);
+            sub_8014248(gWigglytuffDialogue[gWigglytuffShop->isAsleep][0],0,gWigglytuffShop->menuAction1,gWigglytuffShop->unk1C,gWigglytuffShop->unk5C,4,0,gWigglytuffShop->unkCC,0xc);
             break;
         case 1:
             sub_80222C8();
-            sub_8014248(gWigglytuffDialogue[gUnknown_203B290->isAsleep][1],0,gUnknown_203B290->menuAction1,gUnknown_203B290->unk1C,gUnknown_203B290->unk5C,4,0,gUnknown_203B290->unkCC,0xc);
+            sub_8014248(gWigglytuffDialogue[gWigglytuffShop->isAsleep][1],0,gWigglytuffShop->menuAction1,gWigglytuffShop->unk1C,gWigglytuffShop->unk5C,4,0,gWigglytuffShop->unkCC,0xc);
             break;
         case 7:
-            gUnknown_203B290->fallbackState = 9;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][3],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 9;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][3],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 8:
-            gUnknown_203B290->fallbackState = 10;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][4],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 10;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][4],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 2:
-            gUnknown_203B290->fallbackState = 1;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][19],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 1;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][19],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 3:
-            gUnknown_203B290->fallbackState = 4;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][2],0,gUnknown_203B290->unkCC,0x30d);
+            gWigglytuffShop->fallbackState = 4;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][2],0,gWigglytuffShop->unkCC,0x30d);
             break;
         default:
             break;
         case 5:
-            gUnknown_203B290->fallbackState = 3;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][8],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 3;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][8],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 6:
-            gUnknown_203B290->fallbackState = 10;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][9],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 10;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][9],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 0x12:
-            gUnknown_203B290->fallbackState = 3;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][10],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 3;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][10],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 0x13:
-            gUnknown_203B290->fallbackState = 10;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][11],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 10;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][11],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 9:
             sub_80211AC(2,3);
@@ -289,49 +267,49 @@ void UpdateWigglytuffDialogue(void)
             sub_8021494();
             DrawTeamMoneyBox(1);
             sub_8022380();
-            sub_8012D60(&gUnknown_203B290->unk6C,gUnknown_203B290->unk1C,0,gUnknown_203B290->unk5C, gUnknown_203B290->menuAction2,2);
+            sub_8012D60(&gWigglytuffShop->unk6C,gWigglytuffShop->unk1C,0,gWigglytuffShop->unk5C, gWigglytuffShop->menuAction2,2);
             break;
         case 0x11:
             sub_8022420();
-            sub_8092578(gUnknown_202E628,gUnknown_203B290->chosenFriendArea,0);
-            gUnknown_202DE30[0] = gUnknown_203B290->friendAreaPrice;
-            sub_8014248(gWigglytuffDialogue[gUnknown_203B290->isAsleep][5],0,5,gUnknown_203B290->unk1C,0,4,0,gUnknown_203B290->unkCC,0xc);
+            sub_8092578(gUnknown_202E628,gWigglytuffShop->chosenFriendArea,0);
+            gUnknown_202DE30[0] = gWigglytuffShop->friendAreaPrice;
+            sub_8014248(gWigglytuffDialogue[gWigglytuffShop->isAsleep][5],0,5,gWigglytuffShop->unk1C,0,4,0,gWigglytuffShop->unkCC,0xc);
             break;
         case 0x10:
-            sub_8021774(gUnknown_203B290->chosenFriendArea,0,2);
+            sub_8021774(gWigglytuffShop->chosenFriendArea,0,2);
             break;
         case 0xc:
-            gUnknown_203B290->fallbackState = 0xd;
-            sub_8092578(gUnknown_202E628,gUnknown_203B290->chosenFriendArea,0);
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][6],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 0xd;
+            sub_8092578(gUnknown_202E628,gWigglytuffShop->chosenFriendArea,0);
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][6],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 0xd:
-            gUnknown_203B290->fallbackState = 0xe;
+            gWigglytuffShop->fallbackState = 0xe;
             PlaySound(0x25b);
-            gUnknown_203B290->unk130 = 1;
+            gWigglytuffShop->unk130 = 1;
             break;
         case 0xe:
-            gUnknown_203B290->fallbackState = 0xf;
-            gUnknown_203B290->unk134 = 0x1e;
+            gWigglytuffShop->fallbackState = 0xf;
+            gWigglytuffShop->unk134 = 0x1e;
             break;
         case 0xf:
             if (sub_8021700(2) != 0) {
                 sub_80213A0();
-                gUnknown_203B290->fallbackState = 0x12;
+                gWigglytuffShop->fallbackState = 0x12;
             }
             else {
-                gUnknown_203B290->fallbackState = 8;
+                gWigglytuffShop->fallbackState = 8;
             }
             PlaySound(0xce);
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][7],0,gUnknown_203B290->unkCC,0x10d);
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][7],0,gWigglytuffShop->unkCC,0x10d);
             break;
         case 0x14:
-            gUnknown_203B290->fallbackState = 0x16;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][12],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 0x16;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][12],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 0x15:
-            gUnknown_203B290->fallbackState = 0x17;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][13],0,gUnknown_203B290->unkCC,0x10d); 
+            gWigglytuffShop->fallbackState = 0x17;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][13],0,gWigglytuffShop->unkCC,0x10d); 
             break;
         case 0x16:
             sub_8023144(0,3,0,10);
@@ -340,53 +318,53 @@ void UpdateWigglytuffDialogue(void)
             sub_8023354(1);
             break;
         case 0x18:
-            sub_8092638(gUnknown_203B290->chosenFriendArea,&uStack_14,0,0);
-            if (uStack_14.unk4 != 0) {
-                gUnknown_203B290->fallbackState = 0x19;
+            sub_8092638(gWigglytuffShop->chosenFriendArea,&uStack_14,0,0);
+            if (uStack_14.hasFriendArea) {
+                gWigglytuffShop->fallbackState = 0x19;
             }
             else
             {
-                switch(GetFriendAreaUnlockCondition(gUnknown_203B290->chosenFriendArea))
+                switch(GetFriendAreaUnlockCondition(gWigglytuffShop->chosenFriendArea))
                 {
                     case UNLOCK_SHOP_POST_GAME:
                         if (sub_80023E4(6) != 0) {
-                            gUnknown_203B290->fallbackState = 0x15;
+                            gWigglytuffShop->fallbackState = 0x15;
                         }
                         else {
-                            gUnknown_203B290->fallbackState = 0x1a;
+                            gWigglytuffShop->fallbackState = 0x1a;
                         }
                         break;
                     case UNLOCK_WONDER_MAIL:
-                        gUnknown_203B290->fallbackState = 0x1b;
+                        gWigglytuffShop->fallbackState = 0x1b;
                         break;
                     case UNLOCK_LEGENDARY_REQUEST:
-                        gUnknown_203B290->fallbackState = 0x1c;
+                        gWigglytuffShop->fallbackState = 0x1c;
                         break;
                     default:
-                        gUnknown_203B290->fallbackState = 0x15;
+                        gWigglytuffShop->fallbackState = 0x15;
                         break;
                 }
             }
-            string = GetMonSpecies(gUnknown_203B290->chosenSpecies);
+            string = GetMonSpecies(gWigglytuffShop->chosenSpecies);
             strcpy(gAvailablePokemonNames,string);
-            sub_8092578(gUnknown_202E628,gUnknown_203B290->chosenFriendArea,0);
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][14],0,gUnknown_203B290->unkCC,0x10d);
+            sub_8092578(gUnknown_202E628,gWigglytuffShop->chosenFriendArea,0);
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][14],0,gWigglytuffShop->unkCC,0x10d);
             break;
         case 0x19:
-            gUnknown_203B290->fallbackState = 0x15;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][15],0,gUnknown_203B290->unkCC,0x10d);
+            gWigglytuffShop->fallbackState = 0x15;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][15],0,gWigglytuffShop->unkCC,0x10d);
             break;
         case 0x1a:
-            gUnknown_203B290->fallbackState = 0x15;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][16],0,gUnknown_203B290->unkCC,0x10d);
+            gWigglytuffShop->fallbackState = 0x15;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][16],0,gWigglytuffShop->unkCC,0x10d);
             break;
         case 0x1b:
-            gUnknown_203B290->fallbackState = 0x15;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][17],0,gUnknown_203B290->unkCC,0x10d);
+            gWigglytuffShop->fallbackState = 0x15;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][17],0,gWigglytuffShop->unkCC,0x10d);
             break;
         case 0x1c:
-            gUnknown_203B290->fallbackState = 0x15;
-            sub_80141B4(gWigglytuffDialogue[gUnknown_203B290->isAsleep][18],0,gUnknown_203B290->unkCC,0x10d);
+            gWigglytuffShop->fallbackState = 0x15;
+            sub_80141B4(gWigglytuffDialogue[gWigglytuffShop->isAsleep][18],0,gWigglytuffShop->unkCC,0x10d);
             break;
     }
 }
@@ -395,32 +373,32 @@ void sub_80222C8(void)
 {
     s32 i;
     s32 index = 0;
-    MemoryFill16(gUnknown_203B290->unk5C, 0, sizeof(gUnknown_203B290->unk5C));
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4978;
-    gUnknown_203B290->unk1C[index].menuAction = 2;
+    MemoryFill16(gWigglytuffShop->unk5C, 0, sizeof(gWigglytuffShop->unk5C));
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4978;
+    gWigglytuffShop->unk1C[index].menuAction = 2;
     index++;
-    gUnknown_203B290->unk1C[index].text = *gWigglytuffCheck;
-    gUnknown_203B290->unk1C[index].menuAction = 3;
+    gWigglytuffShop->unk1C[index].text = *gWigglytuffCheck;
+    gWigglytuffShop->unk1C[index].menuAction = 3;
     index++;
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4970;
-    gUnknown_203B290->unk1C[index].menuAction = 4;
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4970;
+    gWigglytuffShop->unk1C[index].menuAction = 4;
     index++;
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4934;
-    gUnknown_203B290->unk1C[index].menuAction = 1;
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4934;
+    gWigglytuffShop->unk1C[index].menuAction = 1;
     index++;
-    gUnknown_203B290->unk1C[index].text = NULL;
-    gUnknown_203B290->unk1C[index].menuAction = 1;
+    gWigglytuffShop->unk1C[index].text = NULL;
+    gWigglytuffShop->unk1C[index].menuAction = 1;
 
     for(i = 0; i < index; i++)
     {
-        if(gUnknown_203B290->unk5C[i] == 0 && gUnknown_203B290->unk1C[i].menuAction == gUnknown_203B290->menuAction1)
+        if(gWigglytuffShop->unk5C[i] == 0 && gWigglytuffShop->unk1C[i].menuAction == gWigglytuffShop->menuAction1)
             return;
     }
     for(i = 0; i < index; i++)
     {
-        if(gUnknown_203B290->unk5C[i] == 0)
+        if(gWigglytuffShop->unk5C[i] == 0)
         {
-            gUnknown_203B290->menuAction1 = gUnknown_203B290->unk1C[i].menuAction;
+            gWigglytuffShop->menuAction1 = gWigglytuffShop->unk1C[i].menuAction;
             break;
         }
     }
@@ -430,26 +408,26 @@ void sub_8022380(void)
 {
     s32 i;
     s32 index = 0;
-    MemoryFill16(gUnknown_203B290->unk5C, 0, sizeof(gUnknown_203B290->unk5C));
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4978;
-    gUnknown_203B290->unk1C[index].menuAction = 2;
+    MemoryFill16(gWigglytuffShop->unk5C, 0, sizeof(gWigglytuffShop->unk5C));
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4978;
+    gWigglytuffShop->unk1C[index].menuAction = 2;
     index++;
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4970;
-    gUnknown_203B290->unk1C[index].menuAction = 4;
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4970;
+    gWigglytuffShop->unk1C[index].menuAction = 4;
     index++;
-    gUnknown_203B290->unk1C[index].text = NULL;
-    gUnknown_203B290->unk1C[index].menuAction = 1;
+    gWigglytuffShop->unk1C[index].text = NULL;
+    gWigglytuffShop->unk1C[index].menuAction = 1;
 
     for(i = 0; i < index; i++)
     {
-        if(gUnknown_203B290->unk5C[i] == 0 && gUnknown_203B290->unk1C[i].menuAction == gUnknown_203B290->menuAction2)
+        if(gWigglytuffShop->unk5C[i] == 0 && gWigglytuffShop->unk1C[i].menuAction == gWigglytuffShop->menuAction2)
             return;
     }
     for(i = 0; i < index; i++)
     {
-        if(gUnknown_203B290->unk5C[i] == 0)
+        if(gWigglytuffShop->unk5C[i] == 0)
         {
-            gUnknown_203B290->menuAction2 = gUnknown_203B290->unk1C[i].menuAction;
+            gWigglytuffShop->menuAction2 = gWigglytuffShop->unk1C[i].menuAction;
             break;
         }
     }
@@ -458,15 +436,15 @@ void sub_8022380(void)
 void sub_8022420(void)
 {
     s32 index = 0;
-    MemoryFill16(gUnknown_203B290->unk5C, 0, sizeof(gUnknown_203B290->unk5C));
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4920;
-    gUnknown_203B290->unk1C[index].menuAction = 5;
+    MemoryFill16(gWigglytuffShop->unk5C, 0, sizeof(gWigglytuffShop->unk5C));
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4920;
+    gWigglytuffShop->unk1C[index].menuAction = 5;
     index++;
-    gUnknown_203B290->unk1C[index].text = *gUnknown_80D4928;
-    gUnknown_203B290->unk1C[index].menuAction = 6;
+    gWigglytuffShop->unk1C[index].text = *gUnknown_80D4928;
+    gWigglytuffShop->unk1C[index].menuAction = 6;
     index++;
-    gUnknown_203B290->unk1C[index].text = NULL;
-    gUnknown_203B290->unk1C[index].menuAction = 1;
+    gWigglytuffShop->unk1C[index].text = NULL;
+    gWigglytuffShop->unk1C[index].menuAction = 1;
 }
 
 void sub_8022460(void)
@@ -476,26 +454,26 @@ void sub_8022460(void)
     if (sub_80144A4(&menuAction) == 0)
     {
         if (menuAction != 1) {
-            gUnknown_203B290->menuAction1 = menuAction;
+            gWigglytuffShop->menuAction1 = menuAction;
         }
         switch(menuAction)
         {
             case 2:
                 if (sub_8021700(2) != 0) {
-                    UpdateWigglytuffState(5);
+                    SetWigglytuffState(5);
                 }
                 else {
-                    UpdateWigglytuffState(7);
+                    SetWigglytuffState(7);
                 }
                 break;
             case 3:
-                UpdateWigglytuffState(0x14);
+                SetWigglytuffState(0x14);
                 break;
             case 4:
-                UpdateWigglytuffState(2);
+                SetWigglytuffState(2);
                 break;
             case 1:
-                UpdateWigglytuffState(3);
+                SetWigglytuffState(3);
                 break;
         }
     }
@@ -509,14 +487,14 @@ void sub_80224D4(void)
         switch(menuAction)
         {
             case 5:
-                gTeamInventory_203B460->teamMoney -= gUnknown_203B290->friendAreaPrice;
-                UnlockFriendArea(gUnknown_203B290->chosenFriendArea);
+                gTeamInventory_203B460->teamMoney -= gWigglytuffShop->friendAreaPrice;
+                UnlockFriendArea(gWigglytuffShop->chosenFriendArea);
                 PlaySound(0x14C);
-                UpdateWigglytuffState(0xC);
+                SetWigglytuffState(0xC);
                 break;
             case 1:
             case 6:
-                UpdateWigglytuffState(0xA);
+                SetWigglytuffState(0xA);
                 break;
         }
     }
@@ -527,20 +505,20 @@ void sub_8022538(void)
     switch(sub_8021274(1))
     {
         case 3:
-            gUnknown_203B290->chosenFriendArea = sub_802132C();
-            gUnknown_203B290->friendAreaPrice = GetFriendAreaPrice(gUnknown_203B290->chosenFriendArea);
-            UpdateWigglytuffState(0xB);
+            gWigglytuffShop->chosenFriendArea = sub_802132C();
+            gWigglytuffShop->friendAreaPrice = GetFriendAreaPrice(gWigglytuffShop->chosenFriendArea);
+            SetWigglytuffState(0xB);
             break;
         case 4:
-            gUnknown_203B290->chosenFriendArea = sub_802132C();
-            gUnknown_203B290->friendAreaPrice = GetFriendAreaPrice(gUnknown_203B290->chosenFriendArea);
-            UpdateWigglytuffState(0x10);
+            gWigglytuffShop->chosenFriendArea = sub_802132C();
+            gWigglytuffShop->friendAreaPrice = GetFriendAreaPrice(gWigglytuffShop->chosenFriendArea);
+            SetWigglytuffState(0x10);
             break;
         case 0:
             break;
         case 2:
             sub_80213A0();
-            UpdateWigglytuffState(1);
+            SetWigglytuffState(1);
             break;
         case 1:
         default:
@@ -553,32 +531,32 @@ void sub_80225C8(void)
 {
     s32 menuAction = 0;
     sub_8021274(0);
-    if(sub_8012FD8(&gUnknown_203B290->unk6C) == 0)
+    if(sub_8012FD8(&gWigglytuffShop->unk6C) == 0)
     {
-        sub_8013114(&gUnknown_203B290->unk6C, &menuAction);
-        if(menuAction != 1) gUnknown_203B290->menuAction2 = menuAction;
+        sub_8013114(&gWigglytuffShop->unk6C, &menuAction);
+        if(menuAction != 1) gWigglytuffShop->menuAction2 = menuAction;
     }
     switch(menuAction)
     {
         case 2:
             if(gTeamInventory_203B460->teamMoney == 0)
             {
-                UpdateWigglytuffState(6);
+                SetWigglytuffState(6);
             }
-            else if(gUnknown_203B290->friendAreaPrice > gTeamInventory_203B460->teamMoney)
+            else if(gWigglytuffShop->friendAreaPrice > gTeamInventory_203B460->teamMoney)
             {
-                UpdateWigglytuffState(0x13);
+                SetWigglytuffState(0x13);
             }
             else
             {
-                UpdateWigglytuffState(0x11);
+                SetWigglytuffState(0x11);
             }
             break;
         case 4:
-            UpdateWigglytuffState(0x10);
+            SetWigglytuffState(0x10);
             break;
         case 1:
-            UpdateWigglytuffState(10);
+            SetWigglytuffState(10);
             break;
     }
 }
@@ -590,7 +568,7 @@ void sub_8022668(void)
         case 2:
         case 3:
             sub_8021830();
-            UpdateWigglytuffState(0xA);
+            SetWigglytuffState(0xA);
             break;
         case 0:
         case 1:
@@ -603,13 +581,13 @@ void sub_8022684(void)
     switch(sub_8023278(1))
     {
         case 3:
-            gUnknown_203B290->chosenSpecies = sub_802331C();
-            gUnknown_203B290->chosenFriendArea = GetFriendArea(gUnknown_203B290->chosenSpecies);
-            UpdateWigglytuffState(0x18);
+            gWigglytuffShop->chosenSpecies = sub_802331C();
+            gWigglytuffShop->chosenFriendArea = GetFriendArea(gWigglytuffShop->chosenSpecies);
+            SetWigglytuffState(0x18);
             break;
         case 2:
             sub_80233A0();
-            UpdateWigglytuffState(1);
+            SetWigglytuffState(1);
             break;
         case 0:
         case 1:
@@ -623,6 +601,51 @@ void sub_80226CC(void)
 
     if (sub_80144A4(&temp) == 0) 
     {
-        UpdateWigglytuffState(gUnknown_203B290->fallbackState);
+        SetWigglytuffState(gWigglytuffShop->fallbackState);
+    }
+}
+
+void sub_80226F0(void)
+{
+    union {
+        vu32 a;
+        vu8 b[4];
+    } temp;
+    vu8 *ptr = temp.b;
+    u32 r2 = 0;
+    ptr[0] = 0x80;
+    ptr[1] = 0x80;
+    ptr[2] = 0x10;
+    ptr[3] = r2;
+    if(sub_8099B94() == 0)
+    {
+        switch(gWigglytuffShop->unk130)
+        {
+            case 1:
+            case 3:
+                sub_8099AFC(5, 2, temp.a);
+                break;
+            case 2:
+            case 4:
+                sub_8099A5C(5, 2, temp.a);
+                break;
+            case 0:
+            default:
+                SetWigglytuffState(gWigglytuffShop->fallbackState);
+                gWigglytuffShop->unk130 = 0;
+                break;
+        }
+        gWigglytuffShop->unk130++;
+    }
+}
+
+void sub_8022790(void)
+{
+    if(gWigglytuffShop->unk134 != 0)
+    {
+        gWigglytuffShop->unk134--;
+    }
+    else {
+        SetWigglytuffState(gWigglytuffShop->fallbackState);
     }
 }

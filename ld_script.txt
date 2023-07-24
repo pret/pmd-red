@@ -119,7 +119,6 @@ SECTIONS {
         src/code_801EE10_mid.o(.text);
         asm/code_801EE10_mid.o(.text);
         src/wigglytuff_shop.o(.text);
-        asm/wigglytuff_shop.o(.text);
         asm/code_8023144.o(.text);
         src/code_8023144.o(.text);
         asm/code_801EE10_1.o(.text);

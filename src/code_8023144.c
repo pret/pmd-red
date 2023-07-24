@@ -1,5 +1,6 @@
 #include "constants/input.h"
 #include "global.h"
+#include "constants/colors.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
 #include "menu.h"
@@ -343,70 +344,70 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
 
 u8 sub_8023278(u8 param_1)
 {
-  s32 iVar3;
-  u32 temp;
-  
-  if (param_1 == 0) {
-    sub_8013660(&gUnknown_3001B5C->input);
-    return 0;
-  }
-  switch(GetKeyPress(&gUnknown_3001B5C->input))
-  {
-    case INPUT_B_BUTTON:
-        PlayMenuSoundEffect(1);
-        return 2;
-    case INPUT_A_BUTTON:
-      PlayMenuSoundEffect(0);
-      return 3;
-    case INPUT_SELECT_BUTTON:
-        PlayMenuSoundEffect(5);
-        if (temp = gUnknown_3001B5C->unk4, iVar3 = 1, temp < 2) {
-            iVar3 = temp + 1;
-        }
-        gUnknown_3001B5C->unk4 = iVar3;
-        sub_80236A4();
-        break;
-    default:
-        if (sub_80138B8(&gUnknown_3001B5C->input, 1) == 0) {
-            return 0;
-        }
-        break;
-  }
-  sub_8023420();
-  sub_80234BC();
-  return 1;
+    s32 iVar3;
+    u32 temp;
+
+    if (param_1 == 0) {
+        sub_8013660(&gUnknown_3001B5C->input);
+        return 0;
+    }
+    switch(GetKeyPress(&gUnknown_3001B5C->input))
+    {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_SELECT_BUTTON:
+            PlayMenuSoundEffect(5);
+            if (temp = gUnknown_3001B5C->unk4, iVar3 = 1, temp < 2) {
+                iVar3 = temp + 1;
+            }
+            gUnknown_3001B5C->unk4 = iVar3;
+            sub_80236A4();
+            break;
+        default:
+            if (sub_80138B8(&gUnknown_3001B5C->input, 1) == 0) {
+                return 0;
+            }
+            break;
+    }
+    sub_8023420();
+    sub_80234BC();
+    return 1;
 }
 
 s16 sub_802331C(void)
 {
-  return gUnknown_3001B5C->unkC[gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + gUnknown_3001B5C->input.menuIndex];
+    return gUnknown_3001B5C->unkC[gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + gUnknown_3001B5C->input.menuIndex];
 }
 
 void sub_8023354(u8 param_1)
 {
-  ResetUnusedInputStruct();
-  sub_800641C(gUnknown_3001B5C->unk398,0,0);
-  sub_8013984(&gUnknown_3001B5C->input);
-  sub_8023420();
-  sub_80234BC();
-  if (param_1 != 0) {
-    AddMenuCursorSprite(&gUnknown_3001B5C->input);
-  }
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_3001B5C->unk398,0,0);
+    sub_8013984(&gUnknown_3001B5C->input);
+    sub_8023420();
+    sub_80234BC();
+    if (param_1 != 0) {
+        AddMenuCursorSprite(&gUnknown_3001B5C->input);
+    }
 }
 
 
 void sub_80233A0(void)
 {
-  if (gUnknown_3001B5C != NULL) {
-    gUnknown_203B298 = gUnknown_3001B5C->unk4;
-    gUnknown_203B29C = gUnknown_3001B5C->input.menuIndex;
-    gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
-    gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC904;
-    ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->unk398,1,1);
-    MemoryFree(gUnknown_3001B5C);
-    gUnknown_3001B5C = NULL;
-  }
+    if (gUnknown_3001B5C != NULL) {
+        gUnknown_203B298 = gUnknown_3001B5C->unk4;
+        gUnknown_203B29C = gUnknown_3001B5C->input.menuIndex;
+        gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
+        gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC904;
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_3001B5C->unk398,1,1);
+        MemoryFree(gUnknown_3001B5C);
+        gUnknown_3001B5C = NULL;
+    }
 }
 
 NAKED
@@ -490,7 +491,7 @@ extern u8 gUnknown_80DC934[];
 struct unkStruct_8092638
 {
     u32 unk0;
-    u8 unk4;
+    bool8 hasFriendArea;
     u32 unk5;
 };
 extern void sub_8092638(u8,struct unkStruct_8092638  *, u32, u32);
@@ -505,82 +506,77 @@ void sprintfStatic(char *buffer, const char *text, ...);
 
 void sub_80234BC(void)
 {
-  u8 cVar2;
-  u32 y;
-  s32 uVar3;
-  s32 iVar4;
-  s32 species;
-  u32 color;
-  s32 index;
-  u8 buffer2 [256];
-  u8 buffer1 [100];
-  struct unkStruct_8092638 auStack_2c;
-  
-  sub_8008C54(gUnknown_3001B5C->unk390);
-  sub_80073B8(gUnknown_3001B5C->unk390);
-  xxx_call_draw_string(10,0,gUnknown_80DC934,gUnknown_3001B5C->unk390,0); // Pokemon
-  sub_8012BC4(gUnknown_3001B5C->unk3F8[2] * 8 + 4,0,
-              gUnknown_3001B5C->input.unk1E + 1,2,7,gUnknown_3001B5C->unk390);
-  for(index = 0; index < gUnknown_3001B5C->input.unk1A; index++)
-  {
-      y = sub_8013800(&gUnknown_3001B5C->input,index);
-      species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + index)];
-      sub_8092638(GetFriendArea(species),&auStack_2c,0,0);
-      color = 7;
-      if (auStack_2c.unk4 != 0) {
-        color = HasRecruitedMon(species) ? 5 : 4;
-      }
-      iVar4 = GetDexInternalNo(species,0);
-      cVar2 = (iVar4 % 10) + 0x30;
-      sub_8012C60(0x14,y,cVar2,color,gUnknown_3001B5C->unk390);
-      if (9 < iVar4) {
-        iVar4 /= 10;
-        cVar2 = (iVar4 % 10) + 0x30;
-        sub_8012C60(0xd,y,cVar2,color,gUnknown_3001B5C->unk390);
-        if (9 < iVar4) {
-          uVar3 = iVar4 / 10;
-          cVar2 = (uVar3 % 10) + 0x30;
-          sub_8012C60(6,y,cVar2,color,gUnknown_3001B5C->unk390);
+    u8 cVar2;
+    u32 y;
+    s32 uVar3;
+    s32 iVar4;
+    s32 species;
+    u32 color;
+    s32 index;
+    u8 buffer2 [256];
+    u8 buffer1 [100];
+    struct unkStruct_8092638 auStack_2c;
+
+    sub_8008C54(gUnknown_3001B5C->unk390);
+    sub_80073B8(gUnknown_3001B5C->unk390);
+    xxx_call_draw_string(10,0,gUnknown_80DC934,gUnknown_3001B5C->unk390,0); // Pokemon
+    sub_8012BC4(gUnknown_3001B5C->unk3F8[2] * 8 + 4,0,
+                gUnknown_3001B5C->input.unk1E + 1,2,7,gUnknown_3001B5C->unk390);
+    for(index = 0; index < gUnknown_3001B5C->input.unk1A; index++)
+    {
+        y = sub_8013800(&gUnknown_3001B5C->input,index);
+        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + index)];
+        sub_8092638(GetFriendArea(species),&auStack_2c,0,0);
+        color = COLOR_WHITE_2;
+        if (auStack_2c.hasFriendArea) {
+            color = HasRecruitedMon(species) ? COLOR_CYAN : COLOR_GREEN;
         }
-      }
-      sub_808D930(buffer1,species);
-      sprintfStatic(buffer2,gUnknown_80DC93C,color,buffer1); // {COLOR_2}%c%s
-      xxx_call_draw_string(0x24,y,buffer2,gUnknown_3001B5C->unk390,0);
-  }
-  sub_80073E0(gUnknown_3001B5C->unk390);
+        iVar4 = GetDexInternalNo(species,0);
+        cVar2 = (iVar4 % 10) + 0x30;
+        sub_8012C60(0x14,y,cVar2,color,gUnknown_3001B5C->unk390);
+        if (9 < iVar4) {
+            iVar4 /= 10;
+            cVar2 = (iVar4 % 10) + 0x30;
+            sub_8012C60(0xd,y,cVar2,color,gUnknown_3001B5C->unk390);
+            if (9 < iVar4) {
+                uVar3 = iVar4 / 10;
+                cVar2 = (uVar3 % 10) + 0x30;
+                sub_8012C60(6,y,cVar2,color,gUnknown_3001B5C->unk390);
+            }
+        }
+        sub_808D930(buffer1,species);
+        sprintfStatic(buffer2,gUnknown_80DC93C,color,buffer1); // {COLOR_2}%c%s
+        xxx_call_draw_string(0x24,y,buffer2,gUnknown_3001B5C->unk390,0);
+    }
+    sub_80073E0(gUnknown_3001B5C->unk390);
 }
 
 u32 sub_80236A4(void)
 {
-  s16 index_s32;
-  int index;
-  s32 temp;
-  
-  gUnknown_3001B5C->unk8 = 0;
-  for(index = 0; index < 0x1a8; index++)
-  {
-    index_s32 = index;
-    if ((sub_8098134(index_s32)) &&
-       (index_s32 == GetBaseSpeciesNoUnown(index_s32))) {
-      temp = gUnknown_3001B5C->unk8;
-      gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8] = index;
-      gUnknown_3001B5C->unk8 = temp + 1;
+    s32 index;
+
+    gUnknown_3001B5C->unk8 = 0;
+    for(index = 0; index < 0x1a8; index++)
+    {
+        if ((sub_8098134((s16)index)) &&
+            ((s16)index == GetBaseSpeciesNoUnown(index))) {
+            gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8++] = index;
+        }
     }
-  }
-  sub_8023730();
-  return gUnknown_3001B5C->unk8;
+    sub_8023730();
+    return gUnknown_3001B5C->unk8;
 }
 
 bool8 sub_8023704(u8 unused)
 {
-  s32 index;
-  
-  for(index = 0; index < 0x1a8; index++)
-  {
-    if (sub_8098134((s16)index))
-        return FALSE;
-  }
-  return TRUE;
+    s32 index;
+
+    for(index = 0; index < 0x1a8; index++)
+    {
+        if (sub_8098134((s16)index))
+            return FALSE;
+    }
+    return TRUE;
 }
 
 void sub_8023730(void) 
