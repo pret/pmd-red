@@ -72,7 +72,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct MenuInputStruct *r0);
 u32 sub_8013800(struct MenuInputStruct *r0, u32);
 extern void AddMenuCursorSprite(struct MenuInputStruct *r0);
-extern void xxx_call_draw_string(u32 x, u32 y, const char *text, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 
 extern struct GameOptions *gGameOptionsRef;

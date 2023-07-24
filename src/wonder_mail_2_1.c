@@ -103,7 +103,6 @@ extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern s32 sub_8013800(struct MenuInputStruct*, u32);
 extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
-extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 extern void sub_8013984(struct MenuInputStruct*);

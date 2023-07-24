@@ -174,7 +174,6 @@ extern void sub_80073E0(u32);
 extern void sub_80922B4(u8 *, const u8 *, u32);
 extern void sub_808D930(u8 *, s16);
 extern s32 sub_8008ED0(u8 *);
-extern void xxx_call_draw_string(s32 x, s32 y, u8 *, u32, u32);
 extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801F890(void);

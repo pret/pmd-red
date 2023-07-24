@@ -147,7 +147,7 @@ gUnknown_81161D8: @ 81161D8
 gUnknown_81161E8: @ 81161E8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte CleanFelicityBank
+        .4byte DestroyFelicityBank
         .4byte FelicityBankCallback
 
 	.global gUnknown_81161F8

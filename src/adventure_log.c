@@ -54,7 +54,6 @@ extern s16 sub_8097838();
 extern s16 sub_8097870();
 extern s32 sub_80977B8();
 extern s32 sub_80977F8();
-extern void xxx_call_draw_string(s32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

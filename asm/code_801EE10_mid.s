@@ -1419,14 +1419,14 @@ _0802038C:
 	ldrsh r1, [r2, r5]
 	adds r2, 0x24
 	movs r0, 0
-	bl DisplayGulpinDialogueSprite
+	bl CreateGulpinShop
 	b _08020562
 _080203A2:
 	movs r0, 0xC
 	ldrsh r1, [r2, r0]
 	adds r2, 0x24
 	movs r0, 0x1
-	bl DisplayGulpinDialogueSprite
+	bl CreateGulpinShop
 	b _08020562
 _080203B0:
 	ldr r2, [r5]
@@ -2709,14 +2709,14 @@ sub_8020D90:
 	ldr r1, _08020DB8
 	ldr r1, [r1]
 	strb r0, [r1, 0x14]
-	bl sub_801E93C
+	bl DestroyGulpinShop
 	movs r0, 0x1A
 	bl sub_801FDA8
 	b _08020DC6
 	.align 2, 0
 _08020DB8: .4byte gUnknown_203B27C
 _08020DBC:
-	bl sub_801E93C
+	bl DestroyGulpinShop
 	movs r0, 0x10
 	bl sub_801FDA8
 _08020DC6:

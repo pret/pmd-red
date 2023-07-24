@@ -138,7 +138,6 @@ extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
 extern s32 sub_8013800(struct MenuInputStruct *, s32);
-extern void xxx_call_draw_string(s32, s32, const u8 *, s32, s32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

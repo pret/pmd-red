@@ -162,7 +162,6 @@ extern void PlayMenuSoundEffect(u32);
 extern char * GetIQSkillDescription(u8 r0);
 extern s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ);
 extern void sub_8013C68(u32 *);
-extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern char * GetIQSkillName(u8 r0);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern s32 sub_8013800(struct MenuInputStruct *, s32);

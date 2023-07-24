@@ -47,4 +47,5 @@ void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
 void sub_8009388(void);
 void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
 void sub_8006518(struct UnkTextStruct2 *);
+extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
 #endif

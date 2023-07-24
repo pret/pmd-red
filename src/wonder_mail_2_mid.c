@@ -32,7 +32,6 @@ extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
 extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
-extern void xxx_call_draw_string(s32, s32, u8 *, s32, s32);
 
 
 struct unkStruct_203B2D8

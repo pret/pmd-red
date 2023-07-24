@@ -5,20 +5,26 @@
 #include "text.h"
 #include "menu.h"
 
-struct unkStruct_203B204
+// size: 0x108
+struct FelicityBankWork
 {
-    // size: 0x108
-    u32 unk0;
-    s32 currState;
-    u32 fallbackState;
-    u32 chosenAmount;
-    u32 menuAction;
+    /* 0x0 */ u32 isAsleep;
+    /* 0x4 */ s32 currState;
+    /* 0x8 */ u32 fallbackState;
+    /* 0xC */ u32 chosenAmount;
+    /* 0x10 */ u32 menuAction;
     struct MenuItem unk14[8];
     u16 unk54[8];
     u32 unk64;
-    u8 fill68[0x78 - 0x68];
+    s32 unk68;
+    s32 unk6C;
+    /* 0x70 */ s32 maximumDepositWithdraw;
+    s32 unk74;
     u32 unk78;
-    u8 fill7C[0x94 - 0x7C];
+    struct UnkTextStruct2 *unk7C;
+    s32 unk80;
+    s32 unk84;
+    u8 fill88[0x94 - 0x88];
     /* 0x94 */ struct OpenedFile *faceFile;
     /* 0x98 */ u8 *faceData;
     u16 unk9C;
@@ -31,5 +37,9 @@ struct unkStruct_203B204
     struct UnkTextStruct2 unkA8[4];
 };
 
+extern struct FelicityBankWork *gFelicityBankWork;
+
+#define FELICITY_BANK_ACTION_WITHDRAW 0
+#define FELICITY_BANK_ACTION_DEPOSIT 1
 
 #endif

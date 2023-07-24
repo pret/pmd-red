@@ -1,10 +1,10 @@
 #ifndef GUARD_GULPIN_SHOP_H
 #define GUARD_GULPIN_SHOP_H 
 
-struct unkStruct_203B26C
-{
 // size: 0x18C
-    u32 unk0;
+struct GulpinShopWork
+{
+    /* 0x0 */ u32 isAsleep;
     /* 0x4 */ s32 state;
     u32 unk8;
     /* 0xC */ s16 speciesNum; // species of chosen Pokemon
@@ -28,7 +28,10 @@ struct unkStruct_203B26C
     u8 unk126;
     u8 unk127;
     struct OpenedFile **unk128;
-    struct UnkTextStruct2 unk12C[4]; 
+    struct UnkTextStruct2 unk12C[4];
 };
+
+u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves);
+void DestroyGulpinShop(void);
 
 #endif

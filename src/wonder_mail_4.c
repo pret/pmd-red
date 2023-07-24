@@ -89,7 +89,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct MenuInputStruct*);
 extern void AddMenuCursorSprite(struct MenuInputStruct*);
 extern s32 sub_8013800(struct MenuInputStruct*, u32);
-extern void xxx_call_draw_string(u32, u32, const u8 *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);

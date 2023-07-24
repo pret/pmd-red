@@ -5,6 +5,7 @@
 #include "team_inventory.h"
 #include "menu.h"
 #include "pokemon.h"
+#include "gulpin_shop.h"
 
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
@@ -29,7 +30,6 @@ extern u8 gUnknown_202E218[0x50];
 extern void InitZeroedPPPokemonMove(struct Move*, u16);
 extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern bool8 IsHMItem(u8);
-extern void DisplayGulpinDialogueSprite(u32, u32, void *);
 extern void sub_801B178(void);
 extern void sub_8094060(void *, struct Move *);
 extern void PlaySound(u32);
@@ -38,7 +38,6 @@ extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, 
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801E8C0(void);
-extern void sub_801E93C(void);
 
 extern bool8 CanMonLearnMove(u16 moveID, s16 _species);
 extern s32 sub_808D580(s32*);
@@ -130,7 +129,7 @@ void sub_801B080(void)
             sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
             break;
         case 1:
-            DisplayGulpinDialogueSprite(2, gUnknown_203B22C->chosenPokemon, gUnknown_203B22C->moves);
+            CreateGulpinShop(2, gUnknown_203B22C->chosenPokemon, gUnknown_203B22C->moves);
             break;
         case 2:
             sub_8094060(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
@@ -215,11 +214,11 @@ void sub_801B2AC(void)
     switch(sub_801E8C0())
     {
         case 3:
-            sub_801E93C();
+            DestroyGulpinShop();
             sub_801B064(2);
             break;
         case 2:
-            sub_801E93C();
+            DestroyGulpinShop();
             sub_801B064(0);
             break;
         case 0:

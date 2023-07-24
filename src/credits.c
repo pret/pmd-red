@@ -37,8 +37,6 @@ extern const u32 gUnknown_80E4A40[];
 extern struct CreditsData* gCreditsTable[27];
 extern u16 gUnknown_80E5990[];
 
-extern void xxx_call_draw_string(s32, u32, const u8 *, u32, u32);
-
 extern void sub_80015C0(u32, u32);
 extern s32 sub_8001658(u32, u32);
 extern void sub_80073B8(u32);

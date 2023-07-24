@@ -9,6 +9,7 @@
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "text.h"
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern u16 gUnknown_203B218;
@@ -46,7 +47,6 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8013800(struct MenuInputStruct *, u32);
-extern void  xxx_call_draw_string(s32 x, s32, u8 *, u32, u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
 void sub_8007B7C(s32, s32, s32, s32, s32);
