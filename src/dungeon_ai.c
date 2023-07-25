@@ -17,7 +17,7 @@
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities_1.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_global_data.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"

@@ -9,7 +9,7 @@
 #include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
-#include "dungeon_capabilities_1.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_random.h"
 
 const s16 gConfusedAttackChance = 70;
