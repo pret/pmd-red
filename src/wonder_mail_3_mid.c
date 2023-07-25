@@ -146,7 +146,7 @@ const u8 *sub_80974A0(s16 index);
 const struct UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -154,7 +154,7 @@ const struct UnkTextStruct2 gUnknown_80E03C4 = {
 const struct UnkTextStruct2 gUnknown_80E03DC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x03, 0x00, 0x03, 0x00,
+    0x03, 0x03,
     0x07, 0x03,
     0x03, 0x00,
     NULL
@@ -162,7 +162,7 @@ const struct UnkTextStruct2 gUnknown_80E03DC = {
 const struct UnkTextStruct2 gUnknown_80E03F4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x15, 0x00, 0x06, 0x00,
+    0x15, 0x06,
     0x07, 0x03,
     0x03, 0x00,
     NULL
@@ -173,7 +173,7 @@ static const u8 wonder_mail_fill[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80E041C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -234,7 +234,7 @@ static const u8 wonder_mail_fill2[] = "pksdir0";
 const struct UnkTextStruct2 gUnknown_80E06FC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -243,7 +243,7 @@ const struct UnkTextStruct2 gUnknown_80E06FC = {
 const struct UnkTextStruct2 gUnknown_80E0714 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x0E, 0x0E,
     0x0E, 0x00,
     NULL
@@ -251,7 +251,7 @@ const struct UnkTextStruct2 gUnknown_80E0714 = {
 const struct UnkTextStruct2 gUnknown_80E072C = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x10, 0x10,
     0x10, 0x00,
     NULL
@@ -268,8 +268,6 @@ extern const u8 *gUnknown_80D4970[];
 extern u8 gUnknown_80E0744[];
 extern u8 gUnknown_80E0754[];
 extern u8 gUnknown_80E0750[];
-
-
 
 u32 sub_802EF48(void)
 {
@@ -715,41 +713,34 @@ void ProceedToNextRewardSceneState(void)
 
 u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 {
-    if(sub_802FCF0(r0))
-    {
+    if (sub_802FCF0(r0))
         return 0;
-    }
+
+    if (gUnknown_203B314 == NULL)
+        gUnknown_203B314 = MemoryAlloc(sizeof(struct unkStruct_203B314), 8);
+
+    gUnknown_203B314->unkB8 = r3;
+    gUnknown_203B314->unkF0 = r0;
+    gUnknown_203B314->unkF4 = &gUnknown_203B314->unkF8[gUnknown_203B314->unkF0];
+    sub_8006518(gUnknown_203B314->unkF8);
+
+    if (r3 != 0)
+        gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E072C;
     else
-    {
-        if(gUnknown_203B314 == NULL)
-            gUnknown_203B314 = MemoryAlloc(sizeof(struct unkStruct_203B314), 0x8);
-        gUnknown_203B314->unkB8 = r3;
-        gUnknown_203B314->unkF0 = r0;
-        gUnknown_203B314->unkF4 = &gUnknown_203B314->unkF8[gUnknown_203B314->unkF0];
-        sub_8006518(gUnknown_203B314->unkF8);
-        if(r3 != 0)
-        {
-            gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E072C;
-        }
-        else
-        {
-            gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E0714;
-        }
+        gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E0714;
 
-        gUnknown_203B314->unkF4->unk14 = gUnknown_203B314->unk158;
-        if(r1 != 0)
-        {
-             gUnknown_203B314->unkF8[gUnknown_203B314->unkF0].unk08 = *r1;
-        }
+    gUnknown_203B314->unkF4->unk14 = gUnknown_203B314->unk158;
 
-        sub_8012D08(gUnknown_203B314->unkF4, r2);
-        ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B314->unkF8, 1, 1);
-        sub_8013818(&gUnknown_203B314->input, sub_802FBF4(), r2, r0);
-        sub_802F9C0();
-        sub_802FA50();
-        return 1;
-    }
+    if (r1 != 0)
+        gUnknown_203B314->unkF8[gUnknown_203B314->unkF0].unk8 = *r1;
+
+    sub_8012D08(gUnknown_203B314->unkF4, r2);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B314->unkF8, 1, 1);
+    sub_8013818(&gUnknown_203B314->input, sub_802FBF4(), r2, r0);
+    sub_802F9C0();
+    sub_802FA50();
+    return 1;
 }
 
 u32 sub_802F848(s16 param_1)

@@ -24,23 +24,21 @@ EWRAM_DATA_2 u32 gUnknown_203B36C = {0};
 EWRAM_DATA_2 struct RescuePasswordMenu *gRescuePasswordMenu = {0};
 
 const struct UnkTextStruct2 gUnknown_80E71E4 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const struct UnkTextStruct2 gUnknown_80E71FC = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 Error_80E7268[];
@@ -59,13 +57,12 @@ ALIGNED(4) const u8 IncorrectPassword_80E7250[] = _("{CENTER_ALIGN}Incorrect pas
 ALIGNED(4) const u8 Error_80E7268[] = _("{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E7278 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 Success_80E72D8[];
@@ -84,13 +81,12 @@ ALIGNED(4) const u8 PasswordAccept_80E72B4[] = _("{CENTER_ALIGN}The password has
 ALIGNED(4) const u8 Success_80E72D8[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
 
 const struct UnkTextStruct2 gUnknown_80E72EC = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 NotSOSMail_80E7324[];
@@ -105,13 +101,12 @@ const struct MenuItem gUnknown_80E7304[4] = {
 ALIGNED(4) const u8 NotSOSMail_80E7324[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E7344 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 ReceiveSOSMail_80E737C[];
@@ -126,13 +121,12 @@ const struct MenuItem gUnknown_80E735C[4] = {
 ALIGNED(4) const u8 ReceiveSOSMail_80E737C[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} has been received already.");
 
 const struct UnkTextStruct2 gUnknown_80E73AC = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E73E4[];
@@ -147,13 +141,12 @@ const struct MenuItem gUnknown_80E73C4[4] = {
 ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E7408 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E7440[];
@@ -168,13 +161,12 @@ const struct MenuItem gUnknown_80E7420[4] = {
 ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} cannot be used.");
 
 const struct UnkTextStruct2 gUnknown_80E7468 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E74A0[];
@@ -188,13 +180,12 @@ const struct MenuItem gUnknown_80E7480[4] = {
 ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E74C8 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E7500[];
@@ -209,13 +200,12 @@ const struct MenuItem gUnknown_80E74E0[4] = {
 ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} cannot be used.");
 
 const struct UnkTextStruct2 gUnknown_80E752C = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E7564[];
@@ -229,13 +219,12 @@ const struct MenuItem gUnknown_80E7544[4] = {
 ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}.");
 
 const struct UnkTextStruct2 gUnknown_80E7588 = {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x03, 0x00, 0x09, 0x00,
-        0x17, 0x05,
-        0x05, 0x00,
-        NULL
-
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x03, 0x09,
+    0x17, 0x05,
+    0x05, 0x00,
+    NULL
 };
 
 const u8 sUnknown_80E75C0[];

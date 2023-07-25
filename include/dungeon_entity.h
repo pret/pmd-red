@@ -22,6 +22,7 @@
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
 
+// size: 0x18
 struct ActionContainer
 {
     /* 0x0 */ u16 action;
@@ -38,6 +39,7 @@ struct ActionContainer
     /* 0x14 */ struct Position itemTargetPosition;
 };
 
+// size: 0x208
 struct EntityInfo
 {
     // This has different purposes for Pokémon, items, and traps.
@@ -248,7 +250,7 @@ struct EntityInfo
     u8 unk204;
 };
 
-// Used for Pokémon, items, and traps.
+// size: 0x74 | Used for Pokémon, items, and traps.
 struct Entity
 {
     /* 0x0 */ u32 type;
@@ -295,12 +297,12 @@ struct Entity
     u8 fill56[0x64 - 0x56];
     u32 unk64;
     s16 unk68;
-    /* 0x6A */ u8 unk6A;
-    /* 0x6A */ u8 unk6B;
+    u8 unk6A;
+    u8 unk6B;
     /* 0x6C */ u8 direction;
     /* 0x6D */ u8 direction2; // Duplicate of 0x6C?
-    /* 0x6E */ u8 unk6E;
-    /* 0x6F */ u8 unk6F;
+    u8 unk6E;
+    u8 unk6F;
     /* 0x70 */ struct EntityInfo *info;
 };
 

@@ -320,7 +320,7 @@ void sub_8013984(struct MenuInputStruct * param_1) {
         param_1->unkC = 0;
     }
     else {
-        param_1->unkC = (ptr->unk0 + ptr->unk04 + -2) * 8;
+        param_1->unkC = (ptr->unk0 + ptr->unk4 + -2) * 8;
     }
     param_1->unkE = ((ptr->unk2) + 1) * 8 + -2;
 }

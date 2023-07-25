@@ -309,12 +309,12 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
 {
   u8 param_1_u8 = param_1;
 
-  if (sub_8023704(param_1_u8)) {
+  if (sub_8023704(param_1_u8))
     return 0;
-  }
-  if (gUnknown_3001B5C == NULL) {
+
+  if (gUnknown_3001B5C == NULL)
     gUnknown_3001B5C = MemoryAlloc(sizeof(struct unkStruct_3001B5C), 8);
-  }
+
   gUnknown_3001B5C->unk0 = param_1_u8;
   gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
@@ -324,9 +324,10 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
   gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC91C;
 
   gUnknown_3001B5C->unk394->unk14 = gUnknown_3001B5C->unk3F8;
-  if (sub != NULL) {
-    gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390].unk08 = *sub;
-  }
+
+  if (sub != NULL)
+    gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390].unk8 = *sub;
+
   sub_8012D08(gUnknown_3001B5C->unk394,param_4);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_3001B5C->unk398,1,1);

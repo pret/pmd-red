@@ -25,19 +25,20 @@ EWRAM_DATA_2 struct unkStruct_203B334 *gUnknown_203B334 = {0};
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
 const struct UnkTextStruct2 gUnknown_80E1FA8 = {
-    0, 0, 0, 0, 
+    0, 0, 0, 0,
     3, 
-    0x0, 0x0, 0x0, 0x0, 
+    0x0, 0x0,
     0x0, 0x0,
     0x0, 0,
     NULL
 };
 
 const u8 gUnkData_80E1FC0[4] = {0x01, 0x00, 0x0A, 0x00};
+
 const struct UnkTextStruct2 gUnknown_80E1FC4 = {
-    0, 0, 0, 0, 
+    0, 0, 0, 0,
     6, 
-    0x2, 0x0, 0x2, 0x0, 
+    0x2, 0x2,
     0x1A, 0xA,
     0xA, 0,
     gUnkData_80E1FC0

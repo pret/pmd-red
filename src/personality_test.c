@@ -37,7 +37,6 @@ enum
 EWRAM_DATA_2 struct PersonalityTestTracker *gPersonalityTestTracker = {0};
 EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};
 
-
 extern void sub_801317C(u32 *);
 extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
@@ -153,7 +152,6 @@ extern const struct PersonalityQuestion MiscQuest2;
 extern const struct PersonalityQuestion MiscQuest3;
 extern const struct PersonalityQuestion BraveQuest2B;
 
-
 const struct PersonalityQuestion * const gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS + 1] =
 {
     &HardyQuest1,
@@ -213,7 +211,6 @@ const struct PersonalityQuestion * const gPersonalityQuestionPointerTable[NUM_QU
     &MiscQuest3,
     &BraveQuest2B
 };
-
 
 // NOTE: 2nd Part of Brave is included at the end so it isn't actually chosen
 const u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS + 1] =
@@ -279,7 +276,6 @@ const u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS + 1] =
 ALIGNED(4) const u8 gGenderText[] = "Are you a boy or a girl?";
 const char * const gGenderTextPtr = gGenderText;
 
-
 const struct MenuItem gGenderMenu[] =
 {
     {BoyText, 0},
@@ -312,7 +308,6 @@ const s16 gStarters[NUM_PERSONALITIES][2] =
     [LONELY]  = {MONSTER_CUBONE, MONSTER_PSYDUCK},
     [QUIRKY]  = {MONSTER_MEOWTH, MONSTER_TREECKO}
 };
-
 
 ALIGNED(4) const char gStarterReveal[] = _("\n{CENTER_ALIGN}The Pokémon {ARG_POKEMON_0}!");
 const char * const gStarterRevealPtr = gStarterReveal;
@@ -357,7 +352,7 @@ const struct UnkTextStruct2 gUnknown_80F4244 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
-    0x0C, 0x00, 0x06, 0x00,
+    0x0C, 0x06,
     0x05, 0x05,
     0x05, 0x00,
     NULL
@@ -383,7 +378,7 @@ const struct UnkTextStruct2 gUnknown_80F4278 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -393,7 +388,7 @@ const struct UnkTextStruct2 gUnknown_80F4290 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x09, 0x0B,
     0x0D, 0x00,
     NULL
@@ -403,7 +398,7 @@ const struct UnkTextStruct2 gUnknown_80F42A8 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
-    0x0E, 0x00, 0x04, 0x00,
+    0x0E, 0x04,
     0x05, 0x05,
     0x05, 0x00,
     NULL

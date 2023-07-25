@@ -3,12 +3,14 @@
 
 #include "dungeon_global_data.h"
 
+// size: 0x8
 struct DungeonName
 {
     const u8 *name1;
     const u8 *name2;
 };
 
+// size: 0x10
 struct DungeonDataEntry
 {
     /* 0x0 */ bool8 stairDirectionUp;

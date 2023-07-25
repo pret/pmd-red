@@ -15,14 +15,16 @@ ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
 ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
 ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
 static const u8 makuhita_dojo_fill[] = "pksdir0";
+
 const struct UnkTextStruct2 gUnknown_80E0760 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
 };
+
 ALIGNED(4) const u8 gMakuhitaDojoBonslyDoll[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!\n"
         "{CENTER_ALIGN}It has been placed outside your\n"
@@ -44,13 +46,14 @@ u32 CreateMakuhitaShop(u32 param_1)
   char *monName;
   struct OpenedFile *faceFile;
   u32 initialState;
-  
+
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
-  gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318),8);
+  sub_800641C(0, 1, 1);
+  gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318), 8);
   gUnknown_203B318->unk10 = -1;
   gUnknown_203B318->unk0 = param_1;
-  switch(param_1) {
+
+  switch (param_1) {
       case 0:
         initialState = 0;
         gUnknown_203B318->unk4 = 0;
@@ -85,16 +88,17 @@ u32 CreateMakuhitaShop(u32 param_1)
         gUnknown_203B318->unk4 = 1;
         break;
   }
-  if (gUnknown_203B318->unk4 == 1) {
+
+  if (gUnknown_203B318->unk4 == 1)
     gUnknown_203B318->unk68 = NULL;
-  }
-  else {
+  else
     gUnknown_203B318->unk68 = &gUnknown_203B318->faceFile;
-  }
+
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_MAKUHITA);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_MAKUHITA);
   monName = GetMonSpecies(MONSTER_MAKUHITA);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
+
   faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
   gUnknown_203B318->faceFile = faceFile;
   gUnknown_203B318->faceData = faceFile->data;
@@ -109,8 +113,7 @@ u32 CreateMakuhitaShop(u32 param_1)
 
 u32 sub_802FE58(void)
 {
-  
-  switch(gUnknown_203B318->state) {
+  switch (gUnknown_203B318->state) {
     case 0:
     case 1:
         sub_8030208();
@@ -127,7 +130,7 @@ u32 sub_802FE58(void)
         GotoMakuhitaFallbackState();
         break;
   }
-    return 0;
+  return 0;
 }
 
 s16 sub_802FED0(void)
@@ -135,10 +138,9 @@ s16 sub_802FED0(void)
     return gUnknown_203B318->unk10;
 }
 
-void CleanMakuhitaShop(void)
+void DestroyMakuhitaShop(void)
 {
-    if(gUnknown_203B318 != NULL)
-    {
+    if (gUnknown_203B318 != NULL) {
         CloseFile(gUnknown_203B318->faceFile);
         MemoryFree(gUnknown_203B318);
         gUnknown_203B318 = NULL;
@@ -155,20 +157,20 @@ void UpdateMakuhitaState(s32 newState)
 void sub_802FF1C(void)
 {
     s32 index;
+
     sub_8006518(gUnknown_203B318->unk6C);
-    switch(gUnknown_203B318->state)
-    {
+
+    switch (gUnknown_203B318->state) {
         case 0:
         case 4:
         case 13:
             for(index = 0; index < 4; index++)
-            {
                 gUnknown_203B318->unk6C[index] = gUnknown_80E0760;
-            }
             break;
         default:
             break;
     }
+
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B318->unk6C, 1, 1);
 }

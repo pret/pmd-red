@@ -33,7 +33,6 @@ extern u8 gBulletinBoardText[];
 extern bool8 IsMailinJobSlot(struct WonderMail *);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
-
 struct unkStruct_203B2D8
 {
     // size: 0xA4
@@ -140,18 +139,19 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
   }
   else
   {
-    if (gUnknown_203B2E0 == NULL) {
-      gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0),8);
-    }
+    if (gUnknown_203B2E0 == NULL)
+      gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), 8);
+
     gUnknown_203B2E0->unk3C = param_1;
     gUnknown_203B2E0->unk40 = &gUnknown_203B2E0->unk44[param_1];
     sub_8006518(gUnknown_203B2E0->unk44);
 
     gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C] = gUnknown_80DFCB4;
     gUnknown_203B2E0->unk40->unk14 = gUnknown_203B2E0->unkA4;
-    if (param_2 != NULL) {
-      gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C].unk08 = *param_2;
-    }
+
+    if (param_2 != NULL)
+      gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C].unk8 = *param_2;
+
     sub_8012D34(gUnknown_203B2E0->unk40,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E0->unk44,1,1);

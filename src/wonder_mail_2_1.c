@@ -18,7 +18,7 @@ const struct UnkTextStruct2 gUnknown_80DFCE4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -28,7 +28,7 @@ const struct UnkTextStruct2 gUnknown_80DFCFC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x18, 0x0E,
     0x0E, 0x00,
     NULL
@@ -41,7 +41,7 @@ const struct UnkTextStruct2 gUnknown_80DFD28 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -51,7 +51,7 @@ const struct UnkTextStruct2 gUnknown_80DFD40 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
-    0x15, 0x00, 0x06, 0x00,
+    0x15, 0x06,
     0x07, 0x03,
     0x03, 0x00,
     NULL
@@ -61,7 +61,7 @@ const struct UnkTextStruct2 gUnknown_80DFD58 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
-    0x15, 0x00, 0x0f, 0x00,
+    0x15, 0x0f,
     0x06, 0x03,
     0x03, 0x00,
     NULL
@@ -75,7 +75,7 @@ const struct UnkTextStruct2 gUnknown_80DFD8C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -85,7 +85,7 @@ const struct UnkTextStruct2 gUnknown_80DFDA4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x18, 0x0e,
     0x0e, 0x00,
     NULL
@@ -161,7 +161,7 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
   }
   else
   {
-    gUnknown_203B2E8 = MemoryAlloc(sizeof(struct unkStruct_203B2E8),8);
+    gUnknown_203B2E8 = MemoryAlloc(sizeof(struct unkStruct_203B2E8), 8);
     gUnknown_203B2E8->unk3C = param_1;
     gUnknown_203B2E8->unk40 = &gUnknown_203B2E8->unk44[param_1];
     sub_8006518(gUnknown_203B2E8->unk44);
@@ -169,9 +169,10 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
     gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C] = gUnknown_80DFCFC;
 
     gUnknown_203B2E8->unk40->unk14 = gUnknown_203B2E8->unkA4;
-    if (param_2 != NULL) {
-      gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C].unk08 = *param_2;
-    }
+
+    if (param_2 != NULL)
+      gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C].unk8 = *param_2;
+
     sub_8012D34(gUnknown_203B2E8->unk40,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2E8->unk44,1,1);

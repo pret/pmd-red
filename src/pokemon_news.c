@@ -52,24 +52,24 @@ extern struct GameOptions *gGameOptionsRef;
 
 const struct UnkTextStruct2 gUnknown_80DFBD0 =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const u8 gUnknown_80DFBE8[] = { 0x01, 0x00, 0x0C, 0x00 };
 
 const struct UnkTextStruct2 gUnknown_80DFBEC =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x06,
-        0x02, 0x00, 0x02, 0x00,
-        0x18, 0x0E,
-        0x0E, 0x00,
-        gUnknown_80DFBE8
+    0x00, 0x00, 0x00, 0x00,
+    0x06,
+    0x02, 0x02,
+    0x18, 0x0E,
+    0x0E, 0x00,
+    gUnknown_80DFBE8
 };
 
 ALIGNED(4) const u8 gUnknown_80DFC04[] = "News List";
@@ -77,24 +77,24 @@ ALIGNED(4) static const char wonder_mail_2_fill1[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80DFC18 =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const u8 gUnkData_80DFC30[] = { 0x01, 0x00, 0x16, 0x00 };
 
 const struct UnkTextStruct2 gUnknown_80DFC34 =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x06,
-        0x02, 0x00, 0x02, 0x00,
-        0x1A, 0x10,
-        0x10, 0x00,
-        gUnkData_80DFC30
+    0x00, 0x00, 0x00, 0x00,
+    0x06,
+    0x02, 0x02,
+    0x1A, 0x10,
+    0x10, 0x00,
+    gUnkData_80DFC30
 };
 
 ALIGNED(4) const u8 gUnknown_80DFC4C[] = "She";
@@ -103,22 +103,22 @@ ALIGNED(4) static const char wonder_mail_2_fill2[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80DFC5C =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const struct UnkTextStruct2 gUnknown_80DFC74 =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x06,
-        0x02, 0x00, 0x02, 0x00,
-        0x18, 0x0E,
-        0x0E, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x06,
+    0x02, 0x02,
+    0x18, 0x0E,
+    0x0E, 0x00,
+    NULL
 };
 
 ALIGNED(4) const u8 gMailboxText[] = "Mailbox";
@@ -126,22 +126,22 @@ ALIGNED(4) static const char wonder_mail_2_fill3[] = "pksdir0";
 
 const struct UnkTextStruct2 gUnknown_80DFC9C =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const struct UnkTextStruct2 gUnknown_80DFCB4 =
 {
-        0x00, 0x00, 0x00, 0x00,
-        0x06,
-        0x02, 0x00, 0x02, 0x00,
-        0x18, 0x0E,
-        0x0E, 0x00,
-        NULL
+    0x00, 0x00, 0x00, 0x00,
+    0x06,
+    0x02, 0x02,
+    0x18, 0x0E,
+    0x0E, 0x00,
+    NULL
 };
 
 ALIGNED(4) const u8 gBulletinBoardText[] = "Bulletin Board";
@@ -190,76 +190,66 @@ extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 
 u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
 {
-
-    if(HasNoPKMNNews())
-    {
+    if (HasNoPKMNNews())
         return 0;
-    }
-    else
-    {
-        if(gUnknown_203B2CC == NULL)
-        {
-            gUnknown_203B2CC = MemoryAlloc(sizeof(struct unkStruct_203B2CC), 8);
-        }
-        gUnknown_203B2CC->unk6C = r0;
-        gUnknown_203B2CC->unk70 = &gUnknown_203B2CC->unk74[r0];
 
-        sub_8006518(gUnknown_203B2CC->unk74);
+    if (gUnknown_203B2CC == NULL)
+        gUnknown_203B2CC = MemoryAlloc(sizeof(struct unkStruct_203B2CC), 8);
 
-        gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBEC;
+    gUnknown_203B2CC->unk6C = r0;
+    gUnknown_203B2CC->unk70 = &gUnknown_203B2CC->unk74[r0];
 
-        if(r1 != NULL)
-        {
-            gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C].unk08 = *r1;
-        }
+    sub_8006518(gUnknown_203B2CC->unk74);
 
-        sub_8012D08(gUnknown_203B2CC->unk70, r2);
-        ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
+    gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBEC;
 
-        sub_8013818(&gUnknown_203B2CC->input, GetNumPKMNNews(), r2, r0);
+    if (r1 != NULL)
+        gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C].unk8 = *r1;
 
-        gUnknown_203B2CC->input.menuIndex = gUnknown_203B2D0;
-        gUnknown_203B2CC->input.unk1E = gUnknown_203B2D2;
+    sub_8012D08(gUnknown_203B2CC->unk70, r2);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
 
-        sub_8013984(&gUnknown_203B2CC->input);
-        sub_802B880();
-        CreatePKMNNewsMenu();
+    sub_8013818(&gUnknown_203B2CC->input, GetNumPKMNNews(), r2, r0);
 
-        return 1;
-    }
+    gUnknown_203B2CC->input.menuIndex = gUnknown_203B2D0;
+    gUnknown_203B2CC->input.unk1E = gUnknown_203B2D2;
+
+    sub_8013984(&gUnknown_203B2CC->input);
+    sub_802B880();
+    CreatePKMNNewsMenu();
+
+    return 1;
 }
 
 u32 sub_802B720(u8 r0)
 {
-    if(r0 == 0)
-    {
+    if (r0 == 0) {
         sub_8013660(&gUnknown_203B2CC->input);
         return 0;
     }
-    else
+
+    switch (GetKeyPress(&gUnknown_203B2CC->input))
     {
-        switch(GetKeyPress(&gUnknown_203B2CC->input))
-        {
-            case INPUT_B_BUTTON:
-                PlayMenuSoundEffect(1);
-                return 2;
-            case INPUT_A_BUTTON:
-                PlayMenuSoundEffect(0);
-                return 3;
-            case INPUT_START_BUTTON:
-                PlayMenuSoundEffect(4);
-                return 4;
-        }
-        if(sub_80138B8(&gUnknown_203B2CC->input, 1) != 0)
-        {
-            sub_802B880();
-            CreatePKMNNewsMenu();
-            return 1;
-        }
-        else
-            return 0;
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_START_BUTTON:
+            PlayMenuSoundEffect(4);
+            return 4;
     }
+
+    if (sub_80138B8(&gUnknown_203B2CC->input, 1) != 0)
+    {
+        sub_802B880();
+        CreatePKMNNewsMenu();
+        return 1;
+    }
+    else
+        return 0;
 }
 
 u8 GetPokemonNewsIndex(void)
@@ -277,16 +267,13 @@ void sub_802B7D0(u8 r0)
     sub_802B880();
     CreatePKMNNewsMenu();
 
-    if(r0 != 0)
-    {
+    if (r0 != 0)
         AddMenuCursorSprite(&gUnknown_203B2CC->input);
-    }
 }
 
 void sub_802B81C(void)
 {
-    if(gUnknown_203B2CC  != NULL)
-    {
+    if (gUnknown_203B2CC != NULL) {
         gUnknown_203B2D0 = gUnknown_203B2CC->input.menuIndex;
 
         gUnknown_203B2D2 = gUnknown_203B2CC->input.unk1E;
@@ -353,20 +340,20 @@ void CreatePKMNNewsMenu(void)
     s32 new_index;
     u8 mailIndex;
 
-
     sub_8008C54(gUnknown_203B2CC->unk6C);
     sub_80073B8(gUnknown_203B2CC->unk6C);
     xxx_call_draw_string(0xA, 0, gUnknown_80DFC04, gUnknown_203B2CC->unk6C, 0);
     sub_8012BC4(((gUnknown_80DFBE8[2] << 3) + 4), 0, gUnknown_203B2CC->input.unk1E + 1, 2, 7, gUnknown_203B2CC->unk6C);
-    for(index = 0; index < gUnknown_203B2CC->input.unk1A; index++)
-    {
+
+    for (index = 0; index < gUnknown_203B2CC->input.unk1A; index++) {
         y = sub_8013800(&gUnknown_203B2CC->input, index);
-        new_index =  (gUnknown_203B2CC->input.unk1E * gUnknown_203B2CC->input.unk1C) + index;
+        new_index = (gUnknown_203B2CC->input.unk1E * gUnknown_203B2CC->input.unk1C) + index;
         mailIndex = gUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(0xA, y, 6, gUnknown_203B2CC->unk6C);
         sub_802BC7C();
         xxx_format_and_draw(0x15, y, GetPokemonMailHeadline(mailIndex), gUnknown_203B2CC->unk6C, 0);
     }
+
     sub_80073E0(gUnknown_203B2CC->unk6C);
 }
 
@@ -377,14 +364,13 @@ s32 GetNumPKMNNews(void)
 
     newsCount = 0;
 
-    for(index = 0; index < NUM_POKEMON_NEWS; index++)
-    {
-        if(CheckPKMNNewsSlot(index))
-        {
+    for (index = 0; index < NUM_POKEMON_NEWS; index++) {
+        if (CheckPKMNNewsSlot(index)) {
             gUnknown_203B2CC->receivedNewsletters[newsCount] = index;
             newsCount++;
         }
     }
+
     return newsCount;
 }
 
@@ -392,13 +378,11 @@ bool8 HasNoPKMNNews(void)
 {
     s32 index;
 
-    for(index = 0; index < NUM_POKEMON_NEWS; index++)
-    {
-        if(CheckPKMNNewsSlot(index))
-        {
+    for (index = 0; index < NUM_POKEMON_NEWS; index++) {
+        if (CheckPKMNNewsSlot(index))
             return FALSE;
-        }
     }
+
     return TRUE;
 }
 
@@ -423,8 +407,7 @@ u32 sub_802B9FC(u8 mailIndex)
 
 u32 sub_802BA8C(void)
 {
-    switch(gUnknown_203B2D4->state)
-    {
+    switch (gUnknown_203B2D4->state) {
         case 0:
             sub_802BB98();
             break;
@@ -443,8 +426,7 @@ u32 sub_802BA8C(void)
 
 void sub_802BACC(void)
 {
-    if(gUnknown_203B2D4 != NULL)
-    {
+    if (gUnknown_203B2D4 != NULL) {
         gUnknown_203B2D4->unk28[gUnknown_203B2D4->unk24] = gUnknown_80DFC18;
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2D4->unk28, 1, 1);
@@ -461,8 +443,7 @@ void sub_802BB14(u32 newState)
 
 void sub_802BB28(void)
 {
-    switch(gUnknown_203B2D4->state)
-    {
+    switch (gUnknown_203B2D4->state) {
         case 0:
         case 1:
             sub_8008C54(gUnknown_203B2D4->unk24);
@@ -480,17 +461,16 @@ void sub_802BB28(void)
 
 void sub_802BB98(void)
 {
-    if(gUnknown_203B2D4->unkC != 0)
-    {
-        if(gUnknown_203B2D4->unk20 & 8)
+    if (gUnknown_203B2D4->unkC != 0) {
+        if (gUnknown_203B2D4->unk20 & 8)
             sub_8013E54();
         gUnknown_203B2D4->unk20++;
     }
-    switch(sub_8012A64(&gUnknown_203B2D4->unk88, gUnknown_203B2D4->unk24))
-    {
+
+    switch (sub_8012A64(&gUnknown_203B2D4->unk88, gUnknown_203B2D4->unk24)) {
         case 1:
             PlayMenuSoundEffect(0);
-            if(gUnknown_203B2D4->unkC != 0)
+            if (gUnknown_203B2D4->unkC != 0)
                 sub_802BB14(1);
             else
                 sub_802BB14(3);
@@ -504,17 +484,16 @@ void sub_802BB98(void)
 
 void sub_802BC08(void)
 {
-    if(gUnknown_203B2D4->unk8 < gUnknown_203B2D4->unkC)
-    {
-        if(gUnknown_203B2D4->unk20 & 8)
+    if (gUnknown_203B2D4->unk8 < gUnknown_203B2D4->unkC) {
+        if (gUnknown_203B2D4->unk20 & 8)
             sub_8013E54();
         gUnknown_203B2D4->unk20++;
     }
-    switch(sub_8012A64(&gUnknown_203B2D4->unk88, gUnknown_203B2D4->unk24))
-    {
+
+    switch (sub_8012A64(&gUnknown_203B2D4->unk88, gUnknown_203B2D4->unk24)) {
         case 1:
             PlayMenuSoundEffect(0);
-            if(gUnknown_203B2D4->unk8 < gUnknown_203B2D4->unkC)
+            if (gUnknown_203B2D4->unk8 < gUnknown_203B2D4->unkC)
                 sub_802BB14(1);
             else
                 sub_802BB14(3);
@@ -529,14 +508,10 @@ void sub_802BC08(void)
 void sub_802BC7C(void)
 {
     PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
-    if(gGameOptionsRef->playerGender == FEMALE)
-    {
+    if (gGameOptionsRef->playerGender == FEMALE)
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC4C); // She
-    }
     else
-    {
         strcpy(gAvailablePokemonNames + 0x50, gUnknown_80DFC50); // He
-    }
 }
 
 void sub_802BCC4(void)
@@ -564,23 +539,21 @@ void sub_802BCC4(void)
 
 u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
 {
+    if (HasNoMailinMailbox())
+        return 0;
 
-  if (HasNoMailinMailbox()) {
-      return 0;
-  }
-  else
-  {
-    if (gUnknown_203B2D8 == NULL) {
-      gUnknown_203B2D8 = MemoryAlloc(sizeof(struct unkStruct_203B2D8),8);
-    }
+    if (gUnknown_203B2D8 == NULL)
+        gUnknown_203B2D8 = MemoryAlloc(sizeof(struct unkStruct_203B2D8), 8);
+
     gUnknown_203B2D8->unk38 = param_1;
     gUnknown_203B2D8->unk3C = &gUnknown_203B2D8->unk40[param_1];
     sub_8006518(gUnknown_203B2D8->unk40);
     gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38] = gUnknown_80DFC74;
     gUnknown_203B2D8->unk3C->unk14 = gUnknown_203B2D8->unkA0;
-    if (param_2 != NULL) {
-        gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38].unk08 = *param_2;
-    }
+
+    if (param_2 != NULL)
+        gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38].unk8 = *param_2;
+    
     sub_8012D34(gUnknown_203B2D8->unk3C,param_3);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B2D8->unk40,1,1);
@@ -590,18 +563,16 @@ u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
     sub_802BF30();
     CreateMailMenu();
     return 1;
-  }
 }
 
 u32 sub_802BDEC(u8 r0)
 {
-    if(r0 == 0)
-    {
+    if (r0 == 0) {
         sub_8013660(&gUnknown_203B2D8->input);
         return 0;
     }
-    switch(GetKeyPress(&gUnknown_203B2D8->input))
-    {
+
+    switch (GetKeyPress(&gUnknown_203B2D8->input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -612,8 +583,7 @@ u32 sub_802BDEC(u8 r0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if(sub_80138B8(&gUnknown_203B2D8->input, 1) != 0)
-            {
+            if (sub_80138B8(&gUnknown_203B2D8->input, 1) != 0) {
                 sub_802BF30();
                 CreateMailMenu();
                 return 1;
@@ -623,8 +593,9 @@ u32 sub_802BDEC(u8 r0)
     }
 }
 
-u8 sub_802BE74(void) {
-  return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->input.unk1E * gUnknown_203B2D8->input.unk1C) + gUnknown_203B2D8->input.menuIndex];
+u8 sub_802BE74(void)
+{
+    return gUnknown_203B2D8->unk0[(gUnknown_203B2D8->input.unk1E * gUnknown_203B2D8->input.unk1C) + gUnknown_203B2D8->input.menuIndex];
 }
 
 void sub_802BE94(u8 r0)
@@ -637,16 +608,13 @@ void sub_802BE94(u8 r0)
     sub_802BF30();
     CreateMailMenu();
 
-    if(r0 != 0)
-    {
+    if (r0 != 0)
         AddMenuCursorSprite(&gUnknown_203B2D8->input);
-    }
 }
 
 void sub_802BEDC(void)
 {
-    if(gUnknown_203B2D8 != NULL)
-    {
+    if (gUnknown_203B2D8 != NULL) {
         gUnknown_203B2DC = gUnknown_203B2D8->input.menuIndex;
         gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38] = gUnknown_80DFC5C;
         ResetUnusedInputStruct();
