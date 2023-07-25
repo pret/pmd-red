@@ -230,7 +230,6 @@ SECTIONS {
         src/dungeon_movement.o(.text);
         src/status_checks_1.o(.text);
         src/dungeon_capabilities.o(.text);
-        asm/code_8070BC0.o(.text);
         src/dungeon_capabilities_1.o(.text);
         src/dungeon_ai_targeting.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
