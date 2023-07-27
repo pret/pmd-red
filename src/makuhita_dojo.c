@@ -94,8 +94,8 @@ u32 CreateMakuhitaShop(u32 param_1)
   else
     gUnknown_203B318->unk68 = &gUnknown_203B318->faceFile;
 
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_MAKUHITA);
-  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_MAKUHITA);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
+  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_MAKUHITA);
   monName = GetMonSpecies(MONSTER_MAKUHITA);
   strcpy(gUnknown_202E1C8 - 0x50, monName);
 
