@@ -2,17 +2,15 @@
 #include "constants/input.h"
 #include "input.h"
 #include "text.h"
+#include "menu_input.h"
 
 extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern void PlayMenuSoundEffect(u32);
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern void sub_8013A7C(struct MenuInputStruct *);
 extern void sub_8013A54(struct MenuInputStruct *);
-extern s32 GetKeyPress(struct MenuInputStruct *);
 extern void MoveMenuCursorUp(struct MenuInputStruct *);
 extern void MoveMenuCursorDown(struct MenuInputStruct *);
 void sub_8013984(struct MenuInputStruct *);
-void sub_801317C(struct MenuInputStructSub *);
 void sub_80137F8(struct MenuInputStruct *, u32);
 s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2);
 void UpdateMenuCursorSpriteCoords(struct MenuInputStruct *param_1);

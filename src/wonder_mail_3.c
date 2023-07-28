@@ -158,10 +158,8 @@ extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
 extern void sub_8013984(struct MenuInputStruct *);
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 extern void sub_8013660(struct MenuInputStruct *);
-extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013848(struct MenuInputStruct *, s32, u32, u32);
 

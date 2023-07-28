@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "code_802C39C.h"
 #include "wonder_mail.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2FC
 {
@@ -33,7 +34,7 @@ extern struct unkStruct_203B2FC *gUnknown_203B2FC;
 struct unkStruct_203B300
 {
     // size: 0x7C
-    u8 fill0[0xC];
+    struct MenuInputStructSub unk0;
     struct unkStruct_802C39C *unkC;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
@@ -104,7 +105,6 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void PlayMenuSoundEffect(u32);
-extern s32 sub_8012A64(void *, u32);
 extern s32 sub_80144A4(s32 *);
 extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
@@ -129,7 +129,6 @@ void sub_802DE60(void);
 void sub_802DF6C(void);
 void sub_802DF88(void);
 void sub_802DF14(void);
-void sub_801317C(void);
 void sub_802D1A0(u32);
 u32 sub_802DEE0(void);
 void sub_802DF24(void);
@@ -313,7 +312,7 @@ u32 sub_802DE84(struct unkStruct_802C39C *r0)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
     gUnknown_203B300->unkC = r0;
-    sub_801317C();
+    sub_801317C(&gUnknown_203B300->unk0);
     gUnknown_203B300->unk10 = gUnknown_203B300->unkC->unk0[0];
     gUnknown_203B300->unk14 = &gUnknown_203B300->unk18[gUnknown_203B300->unk10];
     sub_8006518(gUnknown_203B300->unk18);
@@ -324,7 +323,7 @@ u32 sub_802DE84(struct unkStruct_802C39C *r0)
 
 u32 sub_802DEE0(void)
 {
-    switch(sub_8012A64(gUnknown_203B300, gUnknown_203B300->unk10))
+    switch(sub_8012A64(&gUnknown_203B300->unk0, gUnknown_203B300->unk10))
     {
         case 2:
             PlayMenuSoundEffect(1);

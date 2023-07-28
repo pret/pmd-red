@@ -56,9 +56,7 @@ struct unkStruct_203B240
     u32 unk20;
     u32 unk24;
     struct UnkTextStruct2 unk28[4];
-    u32 unk88;
-    u32 unk8C;
-    u32 unk90;
+    struct MenuInputStructSub unk88;
 };
 
 struct unkStruct_203B244
@@ -150,13 +148,11 @@ extern void sub_801CC38(void);
 extern void sub_801CCD8(void);
 extern void sub_801CF94(void);
 extern void ResetSprites(u32);
-extern void sub_801317C(u32 *);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
-extern u32 sub_8012A64(u32 *, u32);
 extern void sub_8013F84();
 extern void PlayMenuSoundEffect(u32);
 extern char * GetIQSkillDescription(u8 r0);
@@ -168,10 +164,8 @@ extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern u32 sub_80095E4(s16, u32);
 extern void sub_801C440(void);
 extern void sub_801C4C8(void);
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 extern void sub_8013660(struct MenuInputStruct *);
-extern s32 GetKeyPress(struct MenuInputStruct *);
 extern bool8 HasNoAvailIQSkills(s16 species);
 extern u32 sub_801C674(void);
 extern void sub_801C6B4(void);

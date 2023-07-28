@@ -99,7 +99,6 @@ extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
 extern u32 sub_802FBF4(void);
 extern void sub_8013878(struct MenuInputStruct *, s32);
 
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern void sub_8013984(struct MenuInputStruct *);
 extern void SetRewardSceneState(u32);
 extern void sub_802EFEC(u32);
@@ -128,7 +127,6 @@ extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void sub_8013660(struct MenuInputStruct *);
-extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_802F300(void);
 extern void PlaySound(u32);

@@ -6,6 +6,7 @@
 #include "code_800D090.h"
 #include "moves.h"
 #include "code_801EE10.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 
@@ -28,9 +29,7 @@ extern struct UnkTextStruct2 gUnknown_80DC2AC;
 extern u8 gUnknown_80DC2DC[];
 
 extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern s32 GetKeyPress(struct MenuInputStruct*);
 extern void sub_8013660(struct MenuInputStruct*);
-extern void AddMenuCursorSprite(struct MenuInputStruct*);
 extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013984(struct MenuInputStruct*);

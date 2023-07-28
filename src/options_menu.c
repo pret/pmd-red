@@ -23,9 +23,7 @@ struct unkStruct_203B25C
 struct unkStruct_203B260  
 { 
     struct GameOptions *optionsMenu;
-    u32 unk4;
-    u8  unk8;
-    u8 fill9[0x10 - 0x9];
+    struct MenuInputStructSub unk4;
     struct MenuInputStruct input;
     u32 unk44;
     struct UnkTextStruct2 * unk48;
@@ -62,8 +60,6 @@ extern void CreateOthersMenu(void);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern u8 sub_80138B8(void *, u32);
 void PlayMenuSoundEffect(u32);
-s32 sub_8012AE8(void);
-void sub_801317C(u32 *);
 extern void sub_8013818(void *, u32, u32, u32);
 void CreateOptionsMenu(void);
 void nullsub_38(void);

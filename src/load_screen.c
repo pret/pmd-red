@@ -56,7 +56,6 @@ extern void sub_80073E0(u32);
 
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
-extern void sub_808D930(u8 *, s16);
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
 extern void SetBGPaletteBufferColorArray(s32, s32);

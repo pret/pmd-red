@@ -4,12 +4,12 @@
 #include "memory.h"
 #include "input.h"
 #include "code_801EE10.h"
+#include "menu_input.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 extern struct UnkTextStruct2 gUnknown_80DC25C;
 extern struct UnkTextStruct2 gUnknown_80DC274;
 
-extern void sub_8012D08(void *, u32);
 extern void sub_8013818(void *, u32, u32, u32);
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);

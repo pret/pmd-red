@@ -65,12 +65,10 @@ extern bool8 IsMazeCompleted(s32);
 extern s32 sub_8030668(void);
 extern void sub_8013984(void *);
 extern void sub_80304C8();
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern void DrawDojoCourseList(void);
 
 extern u8 sub_80138B8(void *, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(void *);
 extern void sub_8013660(void *);
 extern void sub_8013818(void *, u32, u32, u32);
 extern void sub_803053C(void);

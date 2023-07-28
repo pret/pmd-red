@@ -11,7 +11,7 @@ EWRAM_DATA_2 bool8 *gFriendAreas = {0};
 
 extern bool8 *gFriendAreas;
 
-extern u32 gFriendAreaDescriptions[];
+extern u8 *gFriendAreaDescriptions[];
 extern const char *gFriendAreaNames[];
 extern const char gUnknown_81098A4;
 extern const char gUnknown_81098AC;
@@ -504,7 +504,7 @@ u8 GetFriendAreaUnlockCondition(u8 index)
     return gFriendAreaSettings[index].unlock_condition;
 }
 
-u32 GetFriendAreaPrice(u8 index)
+s32 GetFriendAreaPrice(u8 index)
 {
     return gFriendAreaSettings[index].price;
 }
@@ -530,7 +530,7 @@ void sub_8092578(u8 *buffer, u8 index, u8 r2)
     }
 }
 
-u32 GetFriendAreaDescription(u8 index)
+u8 *GetFriendAreaDescription(u8 index)
 {
     return gFriendAreaDescriptions[index];
 }
@@ -558,3 +558,38 @@ bool8 HasAllFriendAreas(void)
     return TRUE;
 }
 
+void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4)
+{
+    struct PokemonStruct *pokeStruct;
+    s32 counter;
+    s32 iVar4;
+
+
+    iVar4 = 0;
+
+    for(counter = 0; counter < friendArea; counter++)
+    {
+        iVar4 += gFriendAreaSettings[counter].num_pokemon;
+    }
+    param_2->unk8 = iVar4;
+
+    param_2->hasFriendArea = gFriendAreas[counter];
+    if (param_2->hasFriendArea != 0) {
+        param_2->unk2 = 0;
+        param_2->numPokemon = gFriendAreaSettings[counter].num_pokemon;
+
+        for(counter = 0; counter < param_2->numPokemon; counter++, iVar4++)
+        {
+            pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
+            if (((((u8)pokeStruct->unk0 & 1) != 0) &&
+                ((param_3 == 0 || (!pokeStruct->isTeamLeader)))) &&
+                ((param_4 == 0 || ((pokeStruct->dungeonLocation).id != DUNGEON_JOIN_LOCATION_PARTNER)))) {
+                param_2->unk2++;
+            }
+        }
+    }
+    else {
+        param_2->unk2 = 0;
+        param_2->numPokemon = 0;
+    }
+}

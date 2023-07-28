@@ -1,5 +1,8 @@
 #include "menu.h"
 
+u32 sub_8012A64(struct MenuInputStructSub *r0, u32 r1);
+s32 GetKeyPress(struct MenuInputStruct *r0);
+s32 sub_8012AE8(void);
 void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 param_6);
 void sub_8012C60(u32 x, u32 y, u32 param_3, u32 color, u32 param_5);
 void sub_8012CAC(struct UnkTextStruct2 *param_1, const struct MenuItem *param_2);
@@ -12,3 +15,5 @@ void sub_8012EBC(struct MenuStruct *param_1);
 bool8 sub_8012FD8(struct MenuStruct *param_1);
 bool8 sub_80130A8(struct MenuStruct *param_1);
 bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction);
+void sub_801317C(struct MenuInputStructSub *param_1);
+void AddMenuCursorSprite(struct MenuInputStruct *param_1);

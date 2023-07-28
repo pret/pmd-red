@@ -1,6 +1,6 @@
-#include "constants/input.h"
 #include "global.h"
 #include "constants/colors.h"
+#include "constants/input.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
 #include "menu.h"
@@ -11,6 +11,9 @@
 #include "input.h"
 #include "item.h"
 #include "menu_input.h"
+#include "code_8023144.h"
+#include "code_800D090.h"
+#include "friend_area.h"
 
 struct unkStruct_3001B5C
 {
@@ -31,6 +34,7 @@ struct unkStruct_3001B5C
 };
 
 IWRAM_DATA struct unkStruct_3001B5C *gUnknown_3001B5C;
+struct unkStruct_203B294 *gUnknown_203B294;
 
 extern u32 gUnknown_203B298;
 extern u16 gUnknown_203B29C;
@@ -50,32 +54,8 @@ extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
 extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(struct MenuInputStruct*);
 extern void sub_8013660(struct MenuInputStruct*);
-extern void AddMenuCursorSprite(struct MenuInputStruct*);
 
-struct unkStruct_203B294
-{   
-    // size: 0x1A8
-    /* 0x0 */ u32 state;
-    /* 0x4 */ u32 fallbackState;
-    u8 iqSkillPreGummi[NUM_IQ_SKILLS];
-    u8 iqSkillPostGummi[NUM_IQ_SKILLS];
-    u32 availIQSkillPreGummi;
-    u32 availIQSkillPostGummi;
-    u32 unk40; // Gummi eaten flag?
-    struct Gummi gummi;
-    /* 0x48 */ struct PokemonStruct *pokeStruct;
-    u32 itemIndex;
-    struct Item item;
-    struct MenuStruct unk54;
-    struct MenuStruct unkA4;
-    u32 menuAction;
-    struct MenuItem unkF8[0x8];
-    u16 unk138[0x8];
-};
-
-struct unkStruct_203B294 *gUnknown_203B294;
 
 extern u8 gUnknown_80DC5EC[];
 extern u8 gUnknown_202DE58[];
@@ -488,21 +468,12 @@ void sub_8023420(void)
 
 extern u8 gUnknown_80DC934[];
 
-struct unkStruct_8092638
-{
-    u32 unk0;
-    bool8 hasFriendArea;
-    u32 unk5;
-};
-extern void sub_8092638(u8,struct unkStruct_8092638  *, u32, u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-void sub_808D930(u8 *buffer, s32 index);
 extern s32 sub_8013800(void *, u32);
 bool8 HasRecruitedMon(s16 species_);
 extern u8 gUnknown_80DC93C[];
-void sprintfStatic(char *buffer, const char *text, ...);
 
 void sub_80234BC(void)
 {

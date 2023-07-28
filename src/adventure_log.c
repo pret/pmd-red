@@ -45,7 +45,6 @@ extern void sub_8013818(void *, u32, u32, u32);
 extern bool8 sub_8013938(struct MenuInputStruct *);
 extern void sub_8013660(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
-extern u32 GetKeyPress(struct MenuInputStruct *);
 extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();

@@ -92,7 +92,6 @@ SECTIONS {
         src/debug.o(.text);
         src/save.o(.text);
         src/code_8012A18.o(.text);
-        src/more_input.o(.text);
         src/menu_input.o(.text);
         asm/menu_input.o(.text);
         src/menu_input_1.o(.text);
@@ -118,7 +117,9 @@ SECTIONS {
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
         asm/code_801EE10_mid.o(.text);
+        src/code_8021774.o(.text);
         src/wigglytuff_shop.o(.text);
+        src/code_8023144_pre.o(.text);
         asm/code_8023144.o(.text);
         src/code_8023144.o(.text);
         asm/code_801EE10_1.o(.text);

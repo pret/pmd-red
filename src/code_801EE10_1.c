@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "text.h"
 #include "text_util.h"
+#include "menu_input.h"
 
 struct unkStruct_203B2AC
 {
@@ -50,7 +51,6 @@ extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
 extern bool8 sub_80023E4(u32);
 extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
-extern s32 GetKeyPress(struct MenuInputStruct*);
 extern bool8 sub_8013938(struct MenuInputStruct*);
 extern void sub_802452C(void);
 extern void PlayMenuSoundEffect(u32);
