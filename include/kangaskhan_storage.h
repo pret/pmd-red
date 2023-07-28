@@ -8,7 +8,7 @@
 struct unkStruct_203B208
 {
     // size: 0x14C
-    u32 unk0;
+    bool32 isAsleep;
     u32 currState;
     u32 fallbackState;
     struct Item storedItem;
@@ -21,9 +21,15 @@ struct unkStruct_203B208
     u16 unk4C[5];
     struct MenuStruct unk58;
     u32 unkA8;
-    u8 unkAC[0xBC - 0xAC];
+    u32 unkAC;
+    u32 unkB0;
+    u32 unkB4;
+    u32 unkB8;
     u32 unkBC;
-    u8 unkC0[0xD4 - 0xC0];
+    struct UnkTextStruct2 *unkC0;
+    u32 unkC4;
+    u32 unkC8;
+    u8 unkCC[0xD4 - 0xCC];
     u32 unkD4;
     struct OpenedFile *faceFile;
     u8 *faceData;

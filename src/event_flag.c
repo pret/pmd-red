@@ -30,18 +30,18 @@ struct unkStruct_80B6D90
 };
 extern struct unkStruct_80B6D90 gUnknown_80B6D90[];
 
-extern u8 gUnknown_80B735C[];
-extern u32 gUnknown_80B7350;
-extern u8 gUnknown_80B7324[];
-extern u32 gUnknown_80B7318;
-extern u8 gUnknown_80B72CC[];
 extern u8 gUnknown_80B7144[];
-extern u8 *gUnknown_80B71A0[];
 extern u8 *gUnknown_80B714C[];
-extern u8 gUnknown_80B7388[];
+extern u8 *gUnknown_80B71A0[];
+extern u8 gUnknown_80B72CC[];
+extern struct DebugLocation gUnknown_80B7318;
+extern u8 gUnknown_80B7324[];
+extern struct DebugLocation gUnknown_80B7350;
+extern u8 gUnknown_80B735C[];
 extern u8 gUnknown_80B7378[];
+extern u8 gUnknown_80B7388[];
 
-void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
+void FatalError(struct DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern u8 sub_80973F4(u32);
 extern bool8 HasCompletedAllMazes(void);
 extern void sub_8097418(u32, u32);
@@ -455,7 +455,7 @@ u8 *sub_8002374(u32 param_1)
     return gUnknown_80B6D90[param_1].text;
   }
   else {
-    return gUnknown_80B7378;
+    return gUnknown_80B7378; // error number
   }
 }
 
