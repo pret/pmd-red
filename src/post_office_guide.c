@@ -144,7 +144,7 @@ const struct UnkTextStruct2 gUnknown_80E1EFC =
 {
     0, 0, 0, 0,
     3, 
-    0, 0, 0, 0,
+    0, 0,
     0, 0,
     0, 0,
     NULL
@@ -156,7 +156,7 @@ const struct UnkTextStruct2 gUnknown_80E1F18 =
 {
     0, 0, 0, 0,
     6,
-    2, 0, 2, 0,
+    2, 2,
     0x14, 4,
     4, 0,
     gUnkData_80E1F14

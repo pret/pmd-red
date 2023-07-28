@@ -14,11 +14,14 @@
 
 extern struct Dungeon *gDungeon;
 
-struct DungeonLocation {
-    u8 id;
-    u8 floor;
+// size: 0x4
+struct DungeonLocation
+{
+    /* 0x0 */ u8 id;
+    /* 0x1 */ u8 floor;
 };
 
+// size: 0x4
 struct Dungeon_sub
 {
     u8 unk0;
@@ -26,12 +29,13 @@ struct Dungeon_sub
     u8 unk2;
 };
 
+// size: 0x30
 struct unkDungeonGlobal_unk1CE98_sub
 {
-    /* 0x0 */ u8 buffer1[0xA];
-    /* 0xA */ u8 buffer2[0xA];
-    /* 0x14 */ s16 unk14;
-    /* 0x16 */ u8 fill16[0x2];
+    /* 0x0 */ u8 buffer1[10];
+    /* 0xA */ u8 buffer2[10];
+    s16 unk14;
+    u8 fill16[0x18 - 0x16];
     /* 0x18 */ struct DungeonLocation dungeonLocation;
     /* 0x1C */ struct Item heldItem;
     /* 0x20 */ u32 exp;
@@ -45,19 +49,21 @@ struct unkDungeonGlobal_unk1CE98_sub
     /* 0x2C */ u8 spAttBoost;
     /* 0x2D */ u8 defBoost;
     /* 0x2E */ u8 spDefBoost;
-    u8 unk4; // speedBoost?
+    u8 unk2F; // speedBoost?
 };
 
+// size: 0x10
 struct DungeonMusicPlayer
 {
-    u32 state;
-    u32 fadeOutSpeed;
-    u16 fadeInSpeed;
-    u16 songIndex;
-    u16 pastSongIndex;
-    u16 queuedSongIndex;
+    /* 0x0 */ u32 state;
+    /* 0x4 */ u32 fadeOutSpeed;
+    /* 0x8 */ u16 fadeInSpeed;
+    /* 0xA */ u16 songIndex;
+    /* 0xC */ u16 pastSongIndex;
+    /* 0xE */ u16 queuedSongIndex;
 };
 
+// size: 0x1CEDC
 struct Dungeon
 {
     u8 unk0;

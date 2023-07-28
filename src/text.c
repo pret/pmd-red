@@ -29,6 +29,7 @@ extern const struct FileArchive gSystemFileArchive;
 extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
+extern u32 gUnknown_80B8814[];
 
 void LoadCharmaps(void)
 {
@@ -43,23 +44,25 @@ void LoadCharmaps(void)
     gCharmaps[1] = gCharmapFiles[1]->data;
     gUnknown_202B028[0] = 11;
     gUnknown_202B028[1] = 12;
-    for (k = 0; k < 4; k++)
-    {
-        gUnknown_2027370[k].unk04 = 0;
-        gUnknown_2027370[k].unk08 = 0;
+
+    for (k = 0; k < 4; k++) {
+        gUnknown_2027370[k].unk4 = 0;
+        gUnknown_2027370[k].unk8 = 0;
         gUnknown_2027370[k].unk46 = 0;
     }
+
     gCharacterSpacing = 0;
-    for (i = 0; i < 20; i++)
-    {
+
+    for (i = 0; i < 20; i++) {
         gUnknown_202B038[0][i][0] = 0xf279;
         gUnknown_202B038[1][i][0] = 0xf27a;
-        for (j = 1; j < 32; j++)
-        {
+
+        for (j = 1; j < 32; j++) {
             gUnknown_202B038[0][i][j] = 0;
             gUnknown_202B038[1][i][j] = 0xf27a;
         }
     }
+
     gUnknown_202B034 = 1;
     gUnknown_202B030 = 0x88888888;
     gUnknown_203B078 = NULL;
@@ -75,16 +78,16 @@ u32 xxx_update_some_bg_tiles(u32 a0)
     u32 *r4 = (u32 *)(VRAM + 0x4f40);
     const u32 *r2;
     gUnknown_20274B0 = a0;
-    if (a0 == 0 || a0 == 2)
-    {
+
+    if (a0 == 0 || a0 == 2) {
         sub_800CDA8(2);
         r2 = gUnknown_80B87C4;
     }
-    else
-    {
+    else {
         sub_800CDA8(1);
         r2 = gUnknown_80B87E4;
     }
+
     gUnknown_202B030 = 0x88888888;
     *r4++ = *r2++;
     *r4++ = *r2++;
@@ -117,13 +120,11 @@ void SelectCharmap(u32 a0)
 void sub_80063D8(int a0)
 {
     u32 retval;
-    if (a0 == 0)
-    {
+    if (a0 == 0) {
         gUnknown_20274B0;
         retval = 0x88888888;
     }
-    else
-    {
+    else {
         retval = (a0 & 0xf) | ((a0 & 0xf) << 4);
         retval |= ((a0 & 0xf) << 8);
         retval |= ((a0 & 0xf) << 12);
@@ -150,17 +151,19 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3)
         a0 = gUnknown_80B857C;
     if (a2)
         sub_8009388();
+
     sub_800898C();
-    for (i = 0; i < 4; i++)
-    {
+
+    for (i = 0; i < 4; i++) {
         gUnknown_202AFC0[i] = a0[i];
-        if (a0[i].unkC)
-        {
+
+        if (a0[i].unkC) {
             sub_8006554(gUnknown_2027370, (void *)VRAM, gUnknown_20274B4, gUnknown_202B038, gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
             sub_80089AC(a0 + i, a3);
             r9 += a0[i].unkC * a0[i].unk10;
         }
     }
+
 #ifdef NONMATCHING
     gUnknown_203B078 = gUnknown_3000E94;
     gUnknown_20274A5 = 1;

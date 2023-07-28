@@ -29,6 +29,7 @@ enum CrossableTerrain
     NUM_CROSSABLE_TERRAIN
 };
 
+// size: 0x18
 struct Tile
 {
     // Uses the TerrainType bit flags.
@@ -46,6 +47,7 @@ struct Tile
     /* 0x14 */ struct Entity *object; // Item or trap on the tile.
 };
 
+// size: 0x1C
 struct RoomData
 {
     u8 unk0;

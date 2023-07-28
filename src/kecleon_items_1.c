@@ -1027,9 +1027,10 @@ u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 p
     gUnknown_203B224->unk90[gUnknown_203B224->unk88] = gUnknown_80DB95C;
 
     gUnknown_203B224->unk8C->unk14 = gUnknown_203B224->unkF0;
-    if (param_3 != NULL) {
-        gUnknown_203B224->unk90[gUnknown_203B224->unk88].unk08 = *param_3;
-    }
+
+    if (param_3 != NULL)
+        gUnknown_203B224->unk90[gUnknown_203B224->unk88].unk8 = *param_3;
+
     sub_8012D08(gUnknown_203B224->unk8C,param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();

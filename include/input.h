@@ -62,7 +62,7 @@ struct MenuInputStructSub
     s16 unkA;
 };
 
-// size: 0x2C
+// size: 0x34
 struct MenuInputStruct
 {
     s32 unk0;

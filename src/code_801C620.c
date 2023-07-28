@@ -780,9 +780,10 @@ bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, 
     sub_8006518(gUnknown_203B244->unk4F0);
     gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8] = gUnknown_80DBE54;
     gUnknown_203B244->unk4EC->unk14 = gUnknown_203B244->unk550;
-    if (param_3 != NULL) {
-        gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8].unk08 = *param_3;
-    }
+
+    if (param_3 != NULL)
+        gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8].unk8 = *param_3;
+
     sub_8012D08(gUnknown_203B244->unk4EC, param_4);
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B244->unk4F0,1,1);

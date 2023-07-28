@@ -137,17 +137,17 @@ void sub_801645C(void)
     switch (gFelicityBankWork->currState)
     {
         case 2:
-            gFelicityBankWork->unkA8[0].fill00[0] = 0x80;
-            gFelicityBankWork->unkA8[1].fill00[0] = 0x80;
-            gFelicityBankWork->unkA8[2].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[0].unk0 = 0x80;
+            gFelicityBankWork->unkA8[1].unk0 = 0x80;
+            gFelicityBankWork->unkA8[2].unk0 = 0x80;
             gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
             ResetUnusedInputStruct();
             sub_800641C(gFelicityBankWork->unkA8, 1, 0);
             break;
         case 8:
         case 11:
-            gFelicityBankWork->unkA8[0].fill00[0] = 0x80;
-            gFelicityBankWork->unkA8[1].fill00[0] = 0x80;
+            gFelicityBankWork->unkA8[0].unk0 = 0x80;
+            gFelicityBankWork->unkA8[1].unk0 = 0x80;
             gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
             gFelicityBankWork->unkA8[2] = gUnknown_80DB70C;
             ResetUnusedInputStruct();

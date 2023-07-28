@@ -32,7 +32,7 @@ const struct UnkTextStruct2 gUnknown_80E6F20 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -42,7 +42,7 @@ const struct UnkTextStruct2 gUnknown_80E6F38 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x05, 0x00, 0x08, 0x00,
+    0x05, 0x08,
     0x15, 0x05,
     0x05, 0x00,
     NULL
@@ -127,8 +127,8 @@ ALIGNED(4) const u8 sUnknown_80E7134[] = _("{CENTER_ALIGN}Your adventure could n
 ALIGNED(4) const u8 sUnknown_80E715C[] = _("{CENTER_ALIGN}{COLOR_1 RED}Deletion failed!{END_COLOR_TEXT_1} ");
 
 ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be written.\n"
-                                            "{CENTER_ALIGN}Please turn off the power and remove\n"
-                                            "{CENTER_ALIGN}and reinsert the DS Card.");
+                                           "{CENTER_ALIGN}Please turn off the power and remove\n"
+                                           "{CENTER_ALIGN}and reinsert the DS Card.");
 
 ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
 

@@ -28,7 +28,7 @@ extern struct unkStruct_203B480 *gUnknown_203B480;
 const struct UnkTextStruct2 gUnknown_80E083C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
-    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
@@ -37,7 +37,7 @@ const struct UnkTextStruct2 gUnknown_80E083C = {
 const struct UnkTextStruct2 gUnknown_80E0854 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
-    0x02, 0x00, 0x02, 0x00,
+    0x02, 0x02,
     0x18, 0x11,
     0x11, 0x00,
     NULL
@@ -74,7 +74,6 @@ ALIGNED(4) const u8 RequestList[] = "Request List";
 ALIGNED(4) const u8 SOSList[] = "SOS List";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
-
 extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);
 extern void sub_80308A0(void);
@@ -96,9 +95,10 @@ extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)
 {
-    if(HasNoWonderMailType(wonderMailType))
+    if (HasNoWonderMailType(wonderMailType))
         return 0;
-    gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), 0x8);
+
+    gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), 8);
     gUnknown_203B320->wonderMailType = wonderMailType;
     gUnknown_203B320->unk58 = r1;
 
@@ -108,11 +108,8 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r
     gUnknown_203B320->unk60[gUnknown_203B320->unk58] = gUnknown_80E0854;
     gUnknown_203B320->unk5C->unk14 = gUnknown_203B320->unkC0;
 
-    if(r2 != 0)
-    {
-        gUnknown_203B320->unk60[gUnknown_203B320->unk58].unk08 = *r2;
-    }
-
+    if (r2 != 0)
+        gUnknown_203B320->unk60[gUnknown_203B320->unk58].unk8 = *r2;
 
     sub_8012D08(gUnknown_203B320->unk5C, r3);
     ResetUnusedInputStruct();
