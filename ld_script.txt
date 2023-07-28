@@ -47,8 +47,6 @@ SECTIONS {
         asm/code_2.o(.text);
         src/code.o(.text);
         asm/event_flag.o(.text);
-        src/event_flag_1.o(.text);
-        asm/event_flag_1.o(.text);
         src/event_flag.o(.text);
         asm/code_8002774.o(.text);
         src/memory.o(.text);

@@ -5,6 +5,7 @@
 #include "code_80958E8.h"
 #include "dungeon.h"
 #include "exclusive_pokemon.h"
+#include "event_flag.h"
 
 struct MissionText
 {
@@ -23,10 +24,7 @@ extern const u8 gDummyScenarioText[];
 extern u8 sub_80A270C(s16);
 
 extern u8 sub_80A2728(s16);
-extern bool8 sub_8001D08(u32, u32 ,s32);
-extern u32 sub_8001784(u32, u32, u16);
 extern void sub_800199C(u8, u8, u16, s32);
-extern bool8 sub_80023E4(u32);
 
 void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
 void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);

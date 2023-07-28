@@ -3,6 +3,7 @@
 #include "input.h"
 #include "debug.h"
 #include "code_80A26CC.h"
+#include "event_flag.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
@@ -68,7 +69,6 @@ extern void GroundEffect_Action();
 extern s32 sub_8001658(u8, u8);
 extern s32 sub_8001784(u8, u8, u8);
 extern void sub_809CB8C();
-extern void sub_8001D88();
 extern void sub_80015C0(u8, u8);
 extern void sub_80018D8(u8, u8, u32);
 extern void sub_800199C(u8, u8, u8, s32);
@@ -77,13 +77,10 @@ extern void GeneratePelipperJobs();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
-extern bool8 sub_8001CC4(u8, u8, u8);
 extern void ChooseKecleonShopInventory(u32);
-extern bool8 sub_80023E4(u32);
 extern void FadeOutAllMusic(u16);
 extern u8 sub_809C730();
 extern s16 sub_80A2750(s16);
-extern u8 sub_8001D44(u32, u32, s32);
 
 void sub_8098BDC(void)
 {

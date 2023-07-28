@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_flag.h"
 
 extern void xxx_dungeon_8042F6C(u32 r0);
 extern void NDS_LoadOverlay_GroundMain();
@@ -49,7 +50,6 @@ struct unkStruct_80B7394
 };
 
 extern struct unkStruct_80B7394 gUnknown_80B7394[];
-void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3);
 extern void sub_80015C0(u32, u32);
 extern void sub_800199C(u32, s32, u32, s32);
 extern void sub_80018D8(u32, u32, u32);
