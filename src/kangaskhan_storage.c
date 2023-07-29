@@ -125,7 +125,7 @@ extern void sub_801B3C0(struct Item *);
 extern u8 sub_801CF14(u32);
 
 
-u32 DisplayKangaskhanDialogueSprite(bool32 isAsleep)
+u32 CreateKangaskhanStorage(bool32 isAsleep)
 {
   char *monName;
   struct OpenedFile * faceFile;
@@ -268,49 +268,49 @@ void sub_8016FF8(void)
 {
 
     switch(gUnknown_203B208->currState) {
-        case 0:
+        case KANGASKHAN_STORAGE_INIT:
             sub_80175FC();
             gUnknown_203B208->unkE4 = 1;
             sub_8014248(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][0],0,gUnknown_203B208->menuAction1,gUnknown_203B208->unk24,
                         gUnknown_203B208->unk4C,4,0,gUnknown_203B208->unkE8,0xc);
             break;
-        case 1:
+        case KANGASKHAN_STORAGE_MAIN_MENU:
             sub_80175FC();
             gUnknown_203B208->unkE4 = 0;
             sub_8014248(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][1],0,gUnknown_203B208->menuAction1,gUnknown_203B208->unk24,
                         gUnknown_203B208->unk4C,4,0,gUnknown_203B208->unkE8,0xc);
             break;
         case 2:
-            gUnknown_203B208->fallbackState = 1;
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gUnknown_203B208->unkE4 = 0;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][19],0,gUnknown_203B208->unkE8,0x10d);
             break;
         case 3:
-            gUnknown_203B208->fallbackState = 4;
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_EXIT;
             gUnknown_203B208->unkE4 = 1;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][2],0,gUnknown_203B208->unkE8,0x30d);
             break;
-        case 5:
-            gUnknown_203B208->fallbackState = 1;
+        case KANGASKHAN_STORAGE_NO_INV_ITEMS:
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gUnknown_203B208->unkE4 = 0;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][13],0,gUnknown_203B208->unkE8,0x10d);
             break;
-        case 6:
-            gUnknown_203B208->fallbackState = 1;
+        case KANGASKHAN_STORAGE_TOO_MANY_ITEMS:
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gUnknown_203B208->unkE4 = 0;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][14],0,gUnknown_203B208->unkE8,0x10d);
             break;
         case 7:
-            gUnknown_203B208->fallbackState = 1;
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gUnknown_203B208->unkE4 = 0;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][15],0,gUnknown_203B208->unkE8,0x10d);
             break;
         case 8:
-            gUnknown_203B208->fallbackState = 1;
+            gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gUnknown_203B208->unkE4 = 0;
             sub_80141B4(gKangaskhanStorageDialogue[gUnknown_203B208->isAsleep][18],0,gUnknown_203B208->unkE8,0x10d);
             break;
-        case 9:
+        case KANGASKHAN_STORAGE_IS_MONEY_USED_TM:
             sub_8090E14(gUnknown_202DE58,&gUnknown_203B208->storedItem,0);
             gUnknown_203B208->fallbackState = 0xe;
             gUnknown_203B208->unkE4 = 0;
@@ -360,7 +360,7 @@ void sub_8016FF8(void)
         case 0x13:
             if (GetNumberOfFilledInventorySlots() == 0) {
                 sub_801A928();
-                gUnknown_203B208->fallbackState = 1;
+                gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             }
             else {
                 gUnknown_203B208->fallbackState = 0xc;
@@ -432,7 +432,7 @@ void sub_8016FF8(void)
         case 0x1d:
             if ((sub_801CF14(1)) || (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)) {
                 sub_801CBB8();
-                gUnknown_203B208->fallbackState = 1;
+                gUnknown_203B208->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             }
             else {
                 gUnknown_203B208->fallbackState = 0x15;
