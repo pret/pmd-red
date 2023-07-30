@@ -16,7 +16,7 @@ s32 sub_801F3F8(void);
 void sub_8013780(struct MenuInputStruct*, u32);
 void sub_801F280(u32);
 
-u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_5,u32 param_6)
+u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *text, u32 param_6)
 {
   s32 iVar5;
   s32 iVar8;
@@ -24,7 +24,7 @@ u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_
   u8 param_4_u8;
   s32 four;
     
-  species_s32 = species; 
+  species_s32 = species;
   param_4_u8 = param_4;
   gUnknown_203B270 = MemoryAlloc(sizeof(struct unkStruct_203B270), 8);
   gUnknown_203B270->unk4 = param_4_u8;
@@ -47,7 +47,7 @@ u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_
   gUnknown_203B270->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
   gUnknown_203B270->isTeamLeader = gUnknown_203B270->pokeStruct->isTeamLeader;
   gUnknown_203B270->moves = moves;
-  gUnknown_203B270->unkB8 = param_5;
+  gUnknown_203B270->text = text;
   iVar8 = iVar5 = sub_801F3F8();
   four = 4;
   if (iVar8 < four) {
@@ -56,7 +56,7 @@ u8 sub_801EE10(u32 param_1,s16 species,struct Move *moves,u32 param_4,u8 *param_
   sub_8006518(gUnknown_203B270->unk58);
   gUnknown_203B270->unk50 = param_6;
   gUnknown_203B270->unk58[param_6] = gUnknown_80DC25C;
-  if (gUnknown_203B270->unkB8 != 0) {
+  if (gUnknown_203B270->text != NULL) {
     gUnknown_203B270->unk54 = sub_8006544(param_6);
     gUnknown_203B270->unk58[gUnknown_203B270->unk54] = gUnknown_80DC274;
   }

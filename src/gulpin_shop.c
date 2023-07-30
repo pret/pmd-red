@@ -151,7 +151,7 @@ void sub_801EA28(void)
 {
     switch (gGulpinShopWork->state) {
         case 0:
-            sub_801EE10(2, gGulpinShopWork->speciesNum, gGulpinShopWork->moves, 0, &gUnknown_80DC164, 0);
+            sub_801EE10(2, gGulpinShopWork->speciesNum, gGulpinShopWork->moves, 0, gUnknown_80DC164, 0);
             break;
         case 1:
             sub_801F1B0(1, 0);

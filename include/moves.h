@@ -57,5 +57,7 @@ void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences
 int unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[8][8]);
 void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
 
+bool8 IsMoveSet(int index, struct Move* struct_ptr);
+bool8 IsMoveEnabled(int index, struct Move* struct_ptr);
 
 #endif // GUARD_MOVES_H

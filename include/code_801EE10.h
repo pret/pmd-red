@@ -17,7 +17,7 @@ struct unkStruct_203B270
     u32 unk50;
     u32 unk54;
     struct UnkTextStruct2 unk58[4];
-    u8 *unkB8;
+    u8 *text;
 };
 
 #endif
