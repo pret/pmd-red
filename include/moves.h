@@ -59,5 +59,12 @@ void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequen
 
 bool8 IsMoveSet(int index, struct Move* struct_ptr);
 bool8 IsMoveEnabled(int index, struct Move* struct_ptr);
+bool8 TryLinkMovesAfter(int index, struct Move* moves);
+bool8 UnlinkMovesAfter(int index, struct Move* moves);
+bool8 ToggleSetMove(int index, struct Move* moves);
+void UnSetMove(int index, struct Move* moves);
+bool8 ToggleMoveEnabled(int index, struct Move* moves);
+bool8 sub_8093318(int param_1, void* src_struct);
+bool8 sub_809333C(int param_1, void* src_struct);
 
 #endif // GUARD_MOVES_H

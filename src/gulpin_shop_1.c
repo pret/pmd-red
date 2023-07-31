@@ -81,6 +81,8 @@ extern u8 gUnknown_80DC438[];
 extern u8 gUnknown_80DC448[];
 extern u8 gUnknown_202E128[];
 
+void PlayMenuSoundEffect(u32);
+void PlaySound(u32);
 bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
 extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
@@ -1006,3 +1008,111 @@ void sub_8020DCC(void)
           break;
   }
 }
+
+void sub_8020EB4(void) {
+    s32 menuAction;
+    
+    menuAction = 0;
+    sub_801EF38(0);
+    if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
+        sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
+        if (menuAction != 1) {
+            gUnknown_203B27C->unk78 = menuAction;
+        }
+    }
+
+    switch(menuAction)
+    {
+        case 5:
+            if(ToggleSetMove(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
+            {
+                PlaySound(0x133);
+                sub_801FDA8(0x1F);
+            }
+            else
+            {
+                PlayMenuSoundEffect(2);
+                sub_801FDA8(0x1F);
+            }
+            break;
+        case 6:
+            PlaySound(0x133);
+            UnSetMove(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves);
+            sub_801FDA8(0x1F);
+            break;
+        case 7:
+            if(ToggleMoveEnabled(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
+            {
+                PlaySound(0x133);
+                asm("");
+            }
+            else
+            {
+                PlayMenuSoundEffect(2);
+            }
+            sub_801FDA8(0x1F);
+            break;
+        case 8:
+            if(gTeamInventory_203B460->teamMoney < 0x96)
+            {
+                PlayMenuSoundEffect(2);
+                sub_801FDA8(0x3);        
+            }
+            else if(!sub_8093318(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
+            {
+                PlayMenuSoundEffect(2);
+                sub_801FDA8(0x4);        
+            }
+            else
+            {
+                if(gUnknown_203B27C->unk15 == 0)
+                {
+                    gUnknown_203B27C->unk15 = 1;
+                    PlaySound(0x14c);
+                }
+                else
+                {
+                    PlaySound(0x133);
+                }
+                TryLinkMovesAfter(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves);
+                sub_801FDA8(0x1F);
+            }
+            break;
+        case 9:
+            if(!sub_809333C(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
+            {
+                PlayMenuSoundEffect(2);
+                sub_801FDA8(0x5);     
+            }
+            else
+            {
+                PlaySound(0x133);
+                UnlinkMovesAfter(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves);
+                sub_801FDA8(0x1F);
+            }
+            break;
+        case 1:
+        case 0x11:
+            sub_801FDA8(0x1F);
+            break;
+        case 0xA:
+            if(!IsAnyMoveLinked(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
+            {
+                PlayMenuSoundEffect(2);
+                sub_801FDA8(0x6);
+            }
+            else
+            {
+                PlaySound(0x133);
+                gUnknown_203B27C->isNextMoveLinked = IsNextMoveLinked(gUnknown_203B27C->moveIndex,gUnknown_203B27C->moves);
+                sub_801FDA8(0x22);
+            }
+            break;
+        case 0xB:
+            sub_801FDA8(0x21);
+            break;
+        case 0xC ... 0xF:
+            break;
+    }
+}
+
