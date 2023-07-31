@@ -33,5 +33,6 @@ struct GulpinShopWork
 
 u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves);
 void DestroyGulpinShop(void);
+bool8 GulpinIsNextMoveLinked(void);
 
 #endif

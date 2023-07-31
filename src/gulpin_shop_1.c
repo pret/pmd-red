@@ -135,6 +135,11 @@ extern void sub_801F63C(void);
 extern u16 sub_801F5B4(void);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
+extern u32 sub_801E8C0(void);
+extern u32 sub_801F194(void);
+bool8 sub_801F1A4(void);
+void sub_801F214(void);
+extern u32 sub_801EF38(u32);
 
 extern void CreateGulpinLinkMenu(void);
 extern void sub_802069C(void);
@@ -942,4 +947,62 @@ void sub_8020D74(void)
         case 1:
             break;
     }
+}
+
+void sub_8020D90(void)
+{
+    switch(sub_801E8C0())
+    {
+        case 3:
+            gUnknown_203B27C->isNextMoveLinked = GulpinIsNextMoveLinked();
+            DestroyGulpinShop();
+            sub_801FDA8(0x1A);
+            break;
+        case 2:
+            DestroyGulpinShop();
+            sub_801FDA8(0x10);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_8020DCC(void)
+{
+  switch(sub_801EF38(1)) {
+      case 3:
+        if (sub_801F1A4() != 0) {
+          gUnknown_203B27C->unk15 = 1;
+        }
+        gUnknown_203B27C->moveIndex = sub_801F194();
+        gUnknown_203B27C->unk1C = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
+        gUnknown_203B27C->unk20 = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
+        sub_801FDA8(0x20);
+        break;
+      case 4:
+        if (sub_801F1A4() != 0) {
+          gUnknown_203B27C->unk15 = 1;
+        }
+        gUnknown_203B27C->moveIndex = sub_801F194();
+        gUnknown_203B27C->unk1C = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
+        gUnknown_203B27C->unk20 = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
+        sub_801FDA8(0x21);
+        break;
+      case 2:
+        if (sub_801F1A4() != 0) {
+          gUnknown_203B27C->unk15 = 1;
+        }
+        sub_801F214();
+        sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
+        sub_801FDA8(0x10);
+        break;
+      case 1:
+        if (sub_801F1A4() != 0) {
+          gUnknown_203B27C->unk15 = 1;
+        }
+        break;
+      case 0:
+          break;
+  }
 }
