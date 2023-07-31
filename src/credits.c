@@ -28,8 +28,8 @@ struct CreditsData
     /* 0x8 */ u8 *text;
 };
 
-extern struct unkCreditsStruct_203B340 *gUnknown_203B340;
-extern struct unkCreditsStruct_203B344 *gUnknown_203B344;
+EWRAM_DATA_2 struct unkCreditsStruct_203B340 *gUnknown_203B340 = {0};
+EWRAM_DATA_2 struct unkCreditsStruct_203B344 *gUnknown_203B344 = {0};
 
 extern struct UnkTextStruct2 gUnknown_80E4A10;
 extern struct UnkTextStruct2 gUnknown_80E4A28;

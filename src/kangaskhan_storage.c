@@ -8,8 +8,9 @@
 #include "menu_input.h"
 #include "team_inventory.h"
 
-extern struct unkStruct_203B208 *gUnknown_203B208;
-extern struct unkStruct_203B20C *gUnknown_203B20C;
+EWRAM_DATA_2 struct unkStruct_203B208 *gUnknown_203B208 = {0};
+EWRAM_DATA_2 struct unkStruct_203B20C *gUnknown_203B20C = {0};
+
 extern struct UnkTextStruct2 gUnknown_80DB748;
 extern struct UnkTextStruct2 gUnknown_80DB778;
 extern struct UnkTextStruct2 gUnknown_80DB790;

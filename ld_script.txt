@@ -113,6 +113,7 @@ SECTIONS {
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
         src/gulpin_shop_1.o(.text);
+        src/code_8021774_pre.o(.text);
         asm/code_801EE10_mid.o(.text);
         src/code_8021774.o(.text);
         src/wigglytuff_shop.o(.text);

@@ -11,11 +11,26 @@
 #include "menu_input.h"
 #include "text.h"
 
+struct unkStruct_203B214
+{;
+    // size: 0xA0
+    struct MenuInputStruct input;
+    u32 unk34;
+    struct UnkTextStruct2 *unk38;
+    struct UnkTextStruct2 unk3C[4];
+    u8 unk9C[4];
+};
+
+
 extern struct unkStruct_203B210 *gUnknown_203B210;
+extern struct unkStruct_203B214 *gUnknown_203B214;
 extern u16 gUnknown_203B218;
+extern struct unkStruct_203B214 *gUnknown_203B21C;
 extern u16 gUnknown_203B220;
+extern struct unkStruct_203B224 *gUnknown_203B224;
 extern u16 gUnknown_203B228;
 extern u16 gUnknown_203B22A;
+
 extern u8 gUnknown_80DB8E4[];
 extern u8 gUnknown_80DB8EC[];
 extern u8 gUnknown_80DB92C[];
@@ -58,21 +73,6 @@ extern bool8 sub_801ADA0(s32);
 extern s32 sub_801AEA8(void);
 s32 sub_801AE24(u32);
 
-
-extern struct unkStruct_203B224 *gUnknown_203B224;
-
-struct unkStruct_203B214
-{;
-    // size: 0xA0
-    struct MenuInputStruct input;
-    u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
-    u8 unk9C[4];
-};
-
-extern struct unkStruct_203B214 *gUnknown_203B214;
-extern struct unkStruct_203B214 *gUnknown_203B21C;
 
 extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
 

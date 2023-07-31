@@ -20,27 +20,25 @@ struct unkStruct_203B27C
     /* 0xC */ s16 speciesNum;
     /* 0x10 */ struct PokemonStruct *pokeStruct;
     /* 0x14 */ bool8 isNextMoveLinked;
-    u8 unk15;
-    u8 isTeamLeader;
-    u8 unk17;
+    bool8 unk15;
+    /* 0x16 */ bool8 isTeamLeader;
     /* 0x18 */ u32 moveIndex;
+    // Group of move ids but not sure purpose just yet...
     u16 unk1C;
     u16 unk1E;
     u16 unk20;
-    u16 fill22;
-    /* 0x24 */ struct Move moves[4];
-    u8 fill44[0x20];
-    /* 0x64 */ u16 sequenceMoveIDs[4];
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
-    u32 unk78;
+    /* 0x24 */ struct Move moves[MAX_MON_MOVES * 2];
+    /* 0x64 */ u16 sequenceMoveIDs[MAX_MON_MOVES];
+    /* 0x6C */ u32 menuAction1;
+    /* 0x70 */ u32 menuAction2;
+    /* 0x74 */ u32 menuAction3;
+    /* 0x78 */ u32 menuAction4;
     struct MenuItem unk7C[8];
     u16 unkBC[8];
     struct MenuStruct unkCC;
     u8 fill11C[0x16C - 0x11C];
-    struct OpenedFile *unk16C;
-    u8 *unk170;
+    /* 0x16C */ struct OpenedFile *faceFile;
+    /* 0x170 */ u8 *faceData;
     u16 unk174;
     u16 unk176;
     u8 unk178;
@@ -50,7 +48,7 @@ struct unkStruct_203B27C
     struct UnkTextStruct2 unk180[4];
 };
 
-extern struct unkStruct_203B27C *gUnknown_203B27C;
+EWRAM_DATA_2 struct unkStruct_203B27C *gUnknown_203B27C = {0};
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
@@ -64,6 +62,10 @@ extern struct UnkTextStruct2 gUnknown_80DC34C;
 extern struct UnkTextStruct2 gUnknown_80DC37C;
 
 extern const u8 *gGulpinDialogue[2][25];
+extern u8 gUnknown_80DC3D8[];
+extern u8 gUnknown_80DC3E0[];
+extern u8 gUnknown_80DC3E8[];
+extern u8 gUnknown_80DC3F4[];
 extern u8 gUnknown_80DC394[];
 extern u8 gGulpinProceed[];
 extern u8 gGulpinInfo[];
@@ -81,6 +83,7 @@ extern u8 gUnknown_80DC438[];
 extern u8 gUnknown_80DC448[];
 extern u8 gUnknown_202E128[];
 
+extern s32 sub_80144A4(s32 *);
 void PlayMenuSoundEffect(u32);
 void PlaySound(u32);
 bool8 sub_8021178(void);
@@ -155,11 +158,11 @@ bool8 sub_801FB50(bool32 isAsleep)
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
   gUnknown_203B27C = MemoryAlloc(sizeof(struct unkStruct_203B27C), 0x8);
-  gUnknown_203B27C->unk70 = 0;
-  gUnknown_203B27C->unk74 = 0;
-  gUnknown_203B27C->unk78 = 0;
+  gUnknown_203B27C->menuAction2 = 0;
+  gUnknown_203B27C->menuAction3 = 0;
+  gUnknown_203B27C->menuAction4 = 0;
   gUnknown_203B27C->isAsleep = isAsleep;
-  gUnknown_203B27C->unk15 = 0;
+  gUnknown_203B27C->unk15 = FALSE;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_GULPIN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_GULPIN);
   name = GetMonSpecies(MONSTER_GULPIN);
@@ -169,11 +172,11 @@ bool8 sub_801FB50(bool32 isAsleep)
     gUnknown_203B27C->unk17C = NULL;
   }
   else {
-    gUnknown_203B27C->unk17C = &gUnknown_203B27C->unk16C;
+    gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
   }
   faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-  gUnknown_203B27C->unk16C = faceFile;
-  gUnknown_203B27C->unk170 = faceFile->data;
+  gUnknown_203B27C->faceFile = faceFile;
+  gUnknown_203B27C->faceData = faceFile->data;
   gUnknown_203B27C->unk178 = 0;
   gUnknown_203B27C->unk179 = 0;
   gUnknown_203B27C->unk17A = 0;
@@ -239,7 +242,7 @@ u32 sub_801FC40(void)
             sub_80210E4();
             break;
         case 0xd:
-            if (gUnknown_203B27C->unk15 == 1) {
+            if (gUnknown_203B27C->unk15 == TRUE) {
                 gTeamInventory_203B460->teamMoney -= 150;
             }
             return 3;
@@ -254,7 +257,7 @@ void sub_801FD7C(void)
 {
     if(gUnknown_203B27C)
     {
-        CloseFile(gUnknown_203B27C->unk16C);
+        CloseFile(gUnknown_203B27C->faceFile);
         MemoryFree(gUnknown_203B27C);
         gUnknown_203B27C = NULL;
     }
@@ -322,15 +325,15 @@ void sub_801FF28(void)
     switch(gUnknown_203B27C->state)
     {
         case 0:
-            gUnknown_203B27C->unk6C = 2;
+            gUnknown_203B27C->menuAction1 = 2;
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][0],0,gUnknown_203B27C->unk6C,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][0],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
             break;
         case 1:
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][1],0,gUnknown_203B27C->unk6C,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][1],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
             break;
         case 2:
             DrawTeamMoneyBox(3);
@@ -391,7 +394,7 @@ void sub_801FF28(void)
             break;
         case 0x11:
             sub_8023DA4();
-            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->unk70,2);
+            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->menuAction2,2);
             break;
         case 0x12:
             sub_8024458(gUnknown_203B27C->speciesNum,2);
@@ -411,7 +414,7 @@ void sub_801FF28(void)
             break;
         case 0x17:
             sub_801F700();
-            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->unk74,2);
+            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->menuAction3,2);
             break;
         case 0x18:
             gUnknown_203B27C->sequenceMoveIDs[0] = gUnknown_203B27C->unk1C;
@@ -464,7 +467,7 @@ void sub_801FF28(void)
             break;
         case 0x20:
             sub_801F280(0);
-            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->unk78,2);
+            sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->menuAction4,2);
             break;
         case 0x21:
             GetLinkedSequence(gUnknown_203B27C->moveIndex,gUnknown_203B27C->moves,gUnknown_203B27C->sequenceMoveIDs);
@@ -514,12 +517,6 @@ void CreateGulpinShopMenu(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 }
 
-extern u8 gUnknown_80DC3D8[];
-extern u8 gUnknown_80DC3E0[];
-extern u8 gUnknown_80DC3E8[];
-extern u8 gUnknown_80DC3F4[];
-extern u8 *gUnknown_80D4970[];
-
 void sub_80205D0(void)
 {
     s32 loopMax;
@@ -548,12 +545,12 @@ void sub_80205D0(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 
     for (i = 0; i < loopMax; i++) {
-        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->unk70)
+        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction2)
             return;
     }
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0) {
-            gUnknown_203B27C->unk70 = gUnknown_203B27C->unk7C[i].menuAction;
+            gUnknown_203B27C->menuAction2 = gUnknown_203B27C->unk7C[i].menuAction;
             break;
         }
     }
@@ -579,12 +576,12 @@ void sub_802069C(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 
     for (i = 0; i < loopMax; i++) {
-        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->unk74)
+        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction3)
             return;
     }
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0) {
-            gUnknown_203B27C->unk74 = gUnknown_203B27C->unk7C[i].menuAction;
+            gUnknown_203B27C->menuAction3 = gUnknown_203B27C->unk7C[i].menuAction;
             break;
         }
     }
@@ -645,12 +642,12 @@ void CreateGulpinLinkMenu(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 
     for (i = 0; i < loopMax; i++) {
-        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->unk78)
+        if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction4)
             return;
     }
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0) {
-            gUnknown_203B27C->unk78 = gUnknown_203B27C->unk7C[i].menuAction;
+            gUnknown_203B27C->menuAction4 = gUnknown_203B27C->unk7C[i].menuAction;
             break;
         }
     }
@@ -702,15 +699,13 @@ void sub_8020950(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 }
 
-extern s32 sub_80144A4(s32 *);
-
 void sub_80209AC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAciton;
+    if(sub_80144A4(&menuAciton) == 0)
     {
-        gUnknown_203B27C->unk6C = temp;
-        switch(temp)
+        gUnknown_203B27C->menuAction1 = menuAciton;
+        switch(menuAciton)
         {
             case 2:
                 sub_801FDA8(0xe);
@@ -727,10 +722,10 @@ void sub_80209AC(void)
 
 void sub_80209FC(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0x10:
                 sub_801FDA8(0xe);
@@ -745,10 +740,10 @@ void sub_80209FC(void)
 
 void sub_8020A34(void)
 {
-    s32 temp;
-    if(sub_80144A4(&temp) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        switch(temp)
+        switch(menuAction)
         {
             case 0xD:
                 sub_801FDA8(0x9);
@@ -803,7 +798,7 @@ void sub_8020B38(void)
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
         if (menuAction != 1) {
-            gUnknown_203B27C->unk70 = menuAction;
+            gUnknown_203B27C->menuAction2 = menuAction;
         }
     }
 
@@ -899,7 +894,7 @@ void sub_8020CC0(void)
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
         if (menuAction != 1) {
-            gUnknown_203B27C->unk74 = menuAction;
+            gUnknown_203B27C->menuAction3 = menuAction;
         }
     }
 
@@ -912,7 +907,7 @@ void sub_8020CC0(void)
         case 0x3:
             sub_801F63C();
             unk_CopyMoves4To8(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
-            for(index = 0; index < 8; index++)
+            for(index = 0; index < MAX_MON_MOVES * 2; index++)
             {
                 move = &gUnknown_203B27C->moves[index];
                 if(!(move->moveFlags & MOVE_FLAG_EXISTS))
@@ -921,7 +916,7 @@ void sub_8020CC0(void)
                     break;
                 }
             }
-            if(index >= 4)
+            if(index >= MAX_MON_MOVES)
             {
                 sub_801FDA8(0x1d);
             }
@@ -975,7 +970,7 @@ void sub_8020DCC(void)
   switch(sub_801EF38(1)) {
       case 3:
         if (sub_801F1A4() != 0) {
-          gUnknown_203B27C->unk15 = 1;
+          gUnknown_203B27C->unk15 = TRUE;
         }
         gUnknown_203B27C->moveIndex = sub_801F194();
         gUnknown_203B27C->unk1C = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
@@ -984,7 +979,7 @@ void sub_8020DCC(void)
         break;
       case 4:
         if (sub_801F1A4() != 0) {
-          gUnknown_203B27C->unk15 = 1;
+          gUnknown_203B27C->unk15 = TRUE;
         }
         gUnknown_203B27C->moveIndex = sub_801F194();
         gUnknown_203B27C->unk1C = gUnknown_203B27C->moves [gUnknown_203B27C->moveIndex].id;
@@ -993,7 +988,7 @@ void sub_8020DCC(void)
         break;
       case 2:
         if (sub_801F1A4() != 0) {
-          gUnknown_203B27C->unk15 = 1;
+          gUnknown_203B27C->unk15 = TRUE;
         }
         sub_801F214();
         sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
@@ -1001,7 +996,7 @@ void sub_8020DCC(void)
         break;
       case 1:
         if (sub_801F1A4() != 0) {
-          gUnknown_203B27C->unk15 = 1;
+          gUnknown_203B27C->unk15 = TRUE;
         }
         break;
       case 0:
@@ -1009,7 +1004,8 @@ void sub_8020DCC(void)
   }
 }
 
-void sub_8020EB4(void) {
+void sub_8020EB4(void)
+{
     s32 menuAction;
     
     menuAction = 0;
@@ -1017,7 +1013,7 @@ void sub_8020EB4(void) {
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
         if (menuAction != 1) {
-            gUnknown_203B27C->unk78 = menuAction;
+            gUnknown_203B27C->menuAction4 = menuAction;
         }
     }
 
@@ -1053,7 +1049,7 @@ void sub_8020EB4(void) {
             sub_801FDA8(0x1F);
             break;
         case 8:
-            if(gTeamInventory_203B460->teamMoney < 0x96)
+            if(gTeamInventory_203B460->teamMoney < 150)
             {
                 PlayMenuSoundEffect(2);
                 sub_801FDA8(0x3);        
@@ -1065,9 +1061,9 @@ void sub_8020EB4(void) {
             }
             else
             {
-                if(gUnknown_203B27C->unk15 == 0)
+                if(!gUnknown_203B27C->unk15)
                 {
-                    gUnknown_203B27C->unk15 = 1;
+                    gUnknown_203B27C->unk15 = TRUE;
                     PlaySound(0x14c);
                 }
                 else
@@ -1116,3 +1112,64 @@ void sub_8020EB4(void) {
     }
 }
 
+void sub_80210C8(void)
+{
+    switch(sub_801F890())
+    {
+        case 2:
+        case 3:
+            sub_801F8D0();
+            sub_801FDA8(0x1F);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_80210E4(void)
+{
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
+    {
+        switch(menuAction)
+        {
+            case 0x10:
+                RemoveLinkSequenceFromMoves8(gUnknown_203B27C->moves, gUnknown_203B27C->moveIndex);
+                sub_801FDA8(0x23);
+                break;
+            case 1:
+            case 0x11:
+                sub_801FDA8(0x1F);
+                break;
+        }
+    }
+}
+
+void sub_8021130(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        sub_801FDA8(gUnknown_203B27C->fallbackState);
+    }
+}
+
+void sub_8021154(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 4)
+    {
+        sub_801FDA8(gUnknown_203B27C->fallbackState);
+    }
+}
+
+bool8 sub_8021178(void)
+{
+    s32 count;
+    struct unkStruct_808E218_arg local;
+
+    count = sub_808E218(&local, gUnknown_203B27C->pokeStruct);
+    if(count == 0) return TRUE;
+    else return FALSE;
+}

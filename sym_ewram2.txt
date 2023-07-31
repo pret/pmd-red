@@ -136,14 +136,8 @@ gUnknown_203B1FC: /* 203B1FC */
 gUnknown_203B200: /* 203B200 */
 	.space 0x4
 
-gFelicityBankWork: /* 203B204 */
-	.space 0x4
-
-gUnknown_203B208: /* 203B208 */
-	.space 0x4
-
-gUnknown_203B20C: /* 203B20C */
-	.space 0x4
+.include "src/felicity_bank.o"
+.include "src/kangaskhan_storage.o"
 
 gUnknown_203B210: /* 203B210 */
 	.space 0x4
@@ -232,8 +226,7 @@ gUnknown_203B274: /* 203B274 */
 gUnknown_203B278: /* 203B278 */
 	.space 0x4
 
-gUnknown_203B27C: /* 203B27C */
-	.space 0x4
+.include "src/gulpin_shop_1.o"
 
 gUnknown_203B280: /* 203B280 */
 	.space 0x4
@@ -371,13 +364,7 @@ gUnknown_203B328: /* 203B328 */
 .include "src/code_8031D70.o"
 .include "src/adventure_log.o"
 .include "src/friend_rescue.o"
-
-gUnknown_203B340: /* 203B340 */
-	.space 0x4
-
-gUnknown_203B344: /* 203B344 */
-	.space 0x4
-
+.include "src/credits.o"
 .include "src/main_menu.o"
 .include "src/trade_items_menu.o"
 .include "src/other_menus.o"
