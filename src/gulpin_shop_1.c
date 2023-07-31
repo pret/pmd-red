@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "menu.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "file_system.h"
 #include "input.h"
 #include "text.h"
@@ -20,7 +21,7 @@ struct unkStruct_203B27C
     /* 0x10 */ struct PokemonStruct *pokeStruct;
     /* 0x14 */ bool8 isNextMoveLinked;
     u8 unk15;
-    u8 unk16;
+    u8 isTeamLeader;
     u8 unk17;
     /* 0x18 */ u32 moveIndex;
     u16 unk1C;
@@ -78,7 +79,9 @@ extern u8 *gUnknown_80D4970[];
 extern u8 gUnknown_80DC428[];
 extern u8 gUnknown_80DC438[];
 extern u8 gUnknown_80DC448[];
+extern u8 gUnknown_202E128[];
 
+bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
 extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
@@ -120,6 +123,18 @@ extern void sub_80209FC(void);
 extern void sub_8020A34(void);
 extern void sub_801FDC0(void);
 extern void sub_801FF28(void);
+u32 sub_8023A94(u32);
+void sub_8023C60(void);
+extern s16 sub_8023B44(void);
+extern u32 sub_80244E4(void);
+extern u32 sub_801BF48(void);
+extern void sub_802453C(void);
+extern void sub_801BF98(void);
+extern u32 sub_801F520(u32);
+extern void sub_801F63C(void);
+extern u16 sub_801F5B4(void);
+extern void sub_801F8D0(void);
+extern u32 sub_801F890(void);
 
 extern void CreateGulpinLinkMenu(void);
 extern void sub_802069C(void);
@@ -576,7 +591,7 @@ void CreateGulpinLinkMenu(void)
     
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
-    if(gUnknown_203B27C->unk16)
+    if(gUnknown_203B27C->isTeamLeader)
     {
         if(IsMoveSet(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
         {
@@ -678,4 +693,253 @@ void sub_8020950(void)
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+}
+
+extern s32 sub_80144A4(s32 *);
+
+void sub_80209AC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        gUnknown_203B27C->unk6C = temp;
+        switch(temp)
+        {
+            case 2:
+                sub_801FDA8(0xe);
+                break;
+            case 0xB:
+                sub_801FDA8(0x8);
+                break;
+            case 1:
+                sub_801FDA8(0xC);
+                break;
+        }
+    }
+}
+
+void sub_80209FC(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 0x10:
+                sub_801FDA8(0xe);
+                break;
+            case 0x11:
+            case 1:
+                sub_801FDA8(0xC);
+                break;
+        }
+    }
+}
+
+void sub_8020A34(void)
+{
+    s32 temp;
+    if(sub_80144A4(&temp) == 0)
+    {
+        switch(temp)
+        {
+            case 0xD:
+                sub_801FDA8(0x9);
+                break;
+            case 0xE:
+                sub_801FDA8(10);
+                break;
+            case 0xF:
+                sub_801FDA8(0xb);
+                break;
+            case 1:
+                sub_801FDA8(0x1);
+                break;
+        }
+    }
+}
+
+void sub_8020A80(void)
+{
+    switch(sub_8023A94(1))
+    {
+        case 3:
+            gUnknown_203B27C->speciesNum = sub_8023B44();
+            gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
+            gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
+            PrintPokeNameToBuffer(gUnknown_202E128, gUnknown_203B27C->pokeStruct);
+            sub_801FDA8(0x11);
+            break;
+        case 4:
+            gUnknown_203B27C->speciesNum = sub_8023B44();
+            gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
+            gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
+            PrintPokeNameToBuffer(gUnknown_202E128, gUnknown_203B27C->pokeStruct);
+            sub_801FDA8(0x12);
+            break;
+        case 0:
+        case 1:
+            break;
+        case 2:
+            sub_8023C60();
+            sub_801FDA8(7);
+            break;
+    }
+}
+
+void sub_8020B38(void)
+{
+    s32 menuAction;
+
+    menuAction = 0;
+    sub_8023A94(0);
+    if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
+        sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
+        if (menuAction != 1) {
+            gUnknown_203B27C->unk70 = menuAction;
+        }
+    }
+
+    switch(menuAction)
+    {
+        case 0x1:
+        case 0x11:
+            sub_801FDA8(0x10);
+            break;
+        case 0x3:
+            if(GetBaseSpeciesNoUnown(gUnknown_203B27C->pokeStruct->speciesNum) == MONSTER_DEOXYS_NORMAL)
+            {
+                sub_801FDA8(0x1C);
+            }
+            else if(sub_8021178())
+            {
+                sub_801FDA8(0x1b);
+            }
+            else
+            {
+                sub_801FDA8(0x14);
+            }
+            break;
+        case 0x4:
+            sub_801FDA8(0x1e);
+            break;
+        case 0xB:
+            sub_801FDA8(0x12);
+            break;
+        case 0xC:
+            sub_801FDA8(0x13);
+            break;
+    }
+}
+
+void sub_8020C2C(void)
+{
+    switch(sub_80244E4())
+    {
+        case 2:
+        case 3:
+            sub_802453C();
+            sub_801FDA8(0x10);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_8020C48(void)
+{
+    switch(sub_801BF48())
+    {
+        case 2:
+        case 3:
+            sub_801BF98();
+            sub_801FDA8(0x10);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+}
+
+void sub_8020C64(void)
+{
+    switch(sub_801F520(1))
+    {
+        case 3:
+            gUnknown_203B27C->unk1E = gUnknown_203B27C->unk1C = sub_801F5B4();
+            sub_801FDA8(0x17);
+            break;
+        case 4:
+            gUnknown_203B27C->unk1E = gUnknown_203B27C->unk1C = sub_801F5B4();
+            sub_801FDA8(0x18);
+            break;
+        case 2:
+            sub_801F63C();
+            sub_801FDA8(0x10);
+            break;
+    }
+}
+
+void sub_8020CC0(void)
+{
+    s32 menuAction;
+    s32 index;
+    struct Move *move;
+    
+    menuAction = 0;
+    sub_801F520(0);
+    if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
+        sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
+        if (menuAction != 1) {
+            gUnknown_203B27C->unk74 = menuAction;
+        }
+    }
+
+    switch(menuAction)
+    {
+        case 0x1:
+        case 0x11:
+            sub_801FDA8(0x16);
+            break;
+        case 0x3:
+            sub_801F63C();
+            unk_CopyMoves4To8(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
+            for(index = 0; index < 8; index++)
+            {
+                move = &gUnknown_203B27C->moves[index];
+                if(!(move->moveFlags & MOVE_FLAG_EXISTS))
+                {
+                    InitZeroedPPPokemonMove(move,gUnknown_203B27C->unk1E);
+                    break;
+                }
+            }
+            if(index >= 4)
+            {
+                sub_801FDA8(0x1d);
+            }
+            else
+            {
+                sub_801FDA8(0x19);
+            }
+            break;
+        case 0xB:
+            sub_801FDA8(0x18);
+            break;
+    }
+}
+
+void sub_8020D74(void)
+{
+    switch(sub_801F890())
+    {
+        case 2:
+        case 3:
+            sub_801F8D0();
+            sub_801FDA8(0x16);
+            break;
+        case 0:
+        case 1:
+            break;
+    }
 }
