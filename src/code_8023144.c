@@ -47,14 +47,10 @@ void sub_80237E0(void);
 extern bool8 sub_8098134(s32);
 extern void sub_8023730(void);
 extern u8 sub_8023704(u8);
-extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8023420(void);
 extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
-extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013660(struct MenuInputStruct*);
 
 
 extern u8 gUnknown_80DC5EC[];
@@ -471,7 +467,6 @@ extern u8 gUnknown_80DC934[];
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(void *, u32);
 bool8 HasRecruitedMon(s16 species_);
 extern u8 gUnknown_80DC93C[];
 

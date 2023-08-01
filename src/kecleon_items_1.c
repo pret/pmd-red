@@ -61,7 +61,6 @@ extern void DrawTeamMoneyBox(u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
 void sub_8007B7C(s32, s32, s32, s32, s32);
@@ -74,13 +73,9 @@ extern s32 sub_801AEA8(void);
 s32 sub_801AE24(u32);
 
 
-extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
-
 extern u8 sub_8019FB0(void);
-extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013660(struct MenuInputStruct *);
 
 extern struct UnkTextStruct2 gUnknown_80DB8CC;
 extern struct UnkTextStruct2 gUnknown_80DB8B4;
@@ -90,7 +85,6 @@ extern struct UnkTextStruct2 gUnknown_80DB95C;
 extern const struct UnkTextStruct2 gUnknown_80DB914;
 extern void sub_801A430(void);
 extern void sub_801A4A4(void);
-extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_801A064(void);
 extern void sub_801A0D8(void);
 extern u8 sub_801A37C(void);

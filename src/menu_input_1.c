@@ -6,14 +6,6 @@
 
 extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013A7C(struct MenuInputStruct *);
-extern void sub_8013A54(struct MenuInputStruct *);
-extern void MoveMenuCursorUp(struct MenuInputStruct *);
-extern void MoveMenuCursorDown(struct MenuInputStruct *);
-void sub_8013984(struct MenuInputStruct *);
-void sub_80137F8(struct MenuInputStruct *, u32);
-s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2);
-void UpdateMenuCursorSpriteCoords(struct MenuInputStruct *param_1);
 void sub_801332C(u16 *);
 
 void sub_8013660(struct MenuInputStruct *param_1)
@@ -168,7 +160,7 @@ s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2)
     return (iVar2 + (iVar1 >> 8));
 }
 
-void sub_8013818(struct MenuInputStruct *param_1, short param_2, u16 param_3, s32 param_4)
+void sub_8013818(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
@@ -183,7 +175,7 @@ void sub_8013818(struct MenuInputStruct *param_1, short param_2, u16 param_3, s3
 }
 
 
-void sub_8013848(struct MenuInputStruct *param_1, short param_2, u16 param_3, s32 param_4)
+void sub_8013848(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
@@ -197,7 +189,7 @@ void sub_8013848(struct MenuInputStruct *param_1, short param_2, u16 param_3, s3
     sub_80137F8(param_1,0x18);
 }
 
-void sub_8013878(struct MenuInputStruct *param_1, int param_2)
+void sub_8013878(struct MenuInputStruct *param_1, s32 param_2)
 {
     if (param_2 < 0) {
         param_2 = 0;
@@ -278,7 +270,8 @@ bool8 sub_8013938(struct MenuInputStruct *param_1)
     }
 }
 
-void sub_8013984(struct MenuInputStruct * param_1) {
+void sub_8013984(struct MenuInputStruct * param_1)
+{
     s32 iVar2;
     s32 iVar4;
     struct UnkTextStruct1 *ptr;

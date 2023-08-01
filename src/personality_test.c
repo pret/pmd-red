@@ -61,14 +61,9 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
-extern void sub_8013818(struct MenuInputStruct *r0, s32, u32, u32);
 
-extern u8 sub_80138B8(struct MenuInputStruct *r0, u32);
 extern void PlayMenuSoundEffect(u32);
 
-
-extern void sub_8013984(struct MenuInputStruct *r0);
-u32 sub_8013800(struct MenuInputStruct *r0, u32);
 extern u32 sub_80095E4(s16, u32);
 
 extern struct GameOptions *gGameOptionsRef;

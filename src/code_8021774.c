@@ -7,6 +7,7 @@
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "code_800D090.h"
+#include "menu_input.h"
 
 struct unkStruct_203B28C
 {
@@ -55,8 +56,6 @@ void sub_8007A78(u32, u32, u32, u32, u32);
 
 extern void sub_8021878(void);
 extern void sub_8021894(void);
-extern u32 sub_8012A64(struct MenuInputStructSub *, s32);
-extern void sub_801317C(struct MenuInputStructSub *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8021A60(void);
 void sub_8021820(void);

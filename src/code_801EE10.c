@@ -10,10 +10,8 @@ extern struct unkStruct_203B270 *gUnknown_203B270;
 extern struct UnkTextStruct2 gUnknown_80DC25C;
 extern struct UnkTextStruct2 gUnknown_80DC274;
 
-extern void sub_8013818(void *, u32, u32, u32);
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
-void sub_8013780(struct MenuInputStruct*, u32);
 void sub_801F280(u32);
 
 u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *text, u32 param_6)

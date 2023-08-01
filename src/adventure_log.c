@@ -41,9 +41,6 @@ const u8 fill_adven[] = "pksdir0";
 
 void sub_8032084();
 void DisplayAdventureLog();
-extern void sub_8013818(void *, u32, u32, u32);
-extern bool8 sub_8013938(struct MenuInputStruct *);
-extern void sub_8013660(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern bool8 sub_8097710(u8);
 
@@ -58,7 +55,6 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, const char *, u32, u32);
 const u8 *GetAdventureLogLine(u8 index);
-extern s32 sub_8013800(void *, s32);
 extern u32 gUnknown_202DE30;
 
 u32 CreateAdventureLogScreen(u32 param_1)
@@ -72,7 +68,7 @@ u32 CreateAdventureLogScreen(u32 param_1)
 
   ResetUnusedInputStruct();
   sub_800641C(gAdventureLog->unk3C,1,1);
-  sub_8013818(gAdventureLog,0x20,8,param_1);
+  sub_8013818(&gAdventureLog->input,0x20,8,param_1);
   sub_8032084();
   DisplayAdventureLog();
   return 1;
@@ -226,41 +222,41 @@ void DisplayAdventureLog(void)
             case 0xc:
                 v1 = sub_80978B8();
                 gUnknown_202DE30 = (s16)v1;
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 7:
                 v2 = sub_8097880();
                 gUnknown_202DE30 = (s16)v2;
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 0xb:
                 v3 = sub_8097838();
                 gUnknown_202DE30 = (s16)v3;
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 8:
                 v4 = sub_80977B8();
                 gUnknown_202DE30 = v4;
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 9:
                 v5 = sub_80977F8();
                 gUnknown_202DE30 = v5;
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
             case 10:
                 v6 = sub_8097870();
                 gUnknown_202DE30 = (s16)v6;
                 // fallthrough
             default:
-                xxx_format_and_draw(8, sub_8013800(gAdventureLog, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
+                xxx_format_and_draw(8, sub_8013800(&gAdventureLog->input, counter), GetAdventureLogLine(temp), gAdventureLog->unk34, 0);
                 break;
         }
     }
     else
     {
         // Draw the ?????????? across the row
-        xxx_call_draw_string(8, sub_8013800(gAdventureLog, counter), gAdventureLogTextPlaceholder, gAdventureLog->unk34, 0);
+        xxx_call_draw_string(8, sub_8013800(&gAdventureLog->input, counter), gAdventureLogTextPlaceholder, gAdventureLog->unk34, 0);
     }
    }
    sub_80073E0(gAdventureLog->unk34);

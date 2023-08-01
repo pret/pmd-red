@@ -153,15 +153,10 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
-extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
-extern void sub_8013984(struct MenuInputStruct *);
-extern u8 sub_80138B8(struct MenuInputStruct *, u32);
-extern void sub_8013660(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013848(struct MenuInputStruct *, s32, u32, u32);
 
 extern void sub_802DF24(void);
 extern void SetJobListState(u32);

@@ -11,20 +11,15 @@
 #include "menu_input.h" 
 
 bool8 IsMailSlotEmpty(u8);
-extern void sub_8013984(void *);
-extern void sub_8013848(struct MenuInputStruct *, s32, u32, u32);
 extern s32 CountPelipperBoardSlots(void);
 extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013660(struct MenuInputStruct *);
-extern bool8 sub_80138B8(struct MenuInputStruct *, u32);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 
-extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];

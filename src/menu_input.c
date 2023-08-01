@@ -17,19 +17,13 @@ extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
-extern u32 sub_80137A8(struct MenuInputStruct *);
-void MoveMenuCursorUp(struct MenuInputStruct *);
-void MoveMenuCursorDown(struct MenuInputStruct *);
 extern void sub_80073B8(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern s32 sub_8013800(struct MenuInputStruct *, s32);
 extern void sub_80073E0(u32);
-extern void sub_8013660(struct MenuInputStruct *);
 void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
 extern void sub_8013134(struct MenuInputStruct *, u32, u32);
-extern void sub_80137B0(struct MenuInputStruct *, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
 struct unkChar *GetCharacter(u32);
@@ -40,7 +34,7 @@ extern void nullsub_34(struct MenuInputStructSub *r0);
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 
-u32 sub_8012A64(struct MenuInputStructSub *r0, u32 r1)
+u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1)
 {
     if(r0 == NULL)
     {

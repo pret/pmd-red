@@ -53,15 +53,10 @@ extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern void sub_8013660(struct MenuInputStruct*);
-extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(struct MenuInputStruct*, s32);
 extern void ResetSprites(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
@@ -71,7 +66,6 @@ extern void sub_801F930(void);
 extern void sub_801F9A4(void);
 int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern bool8 sub_8013938(struct MenuInputStruct *);
 void sub_8013F84(void);
 
 

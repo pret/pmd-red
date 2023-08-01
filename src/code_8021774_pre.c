@@ -29,10 +29,6 @@ extern struct UnkTextStruct2 gUnknown_80DC464;
 
 u8 sub_8021700(u32 mode);
 s32 sub_8021664(void);
-extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern void sub_8013984(struct MenuInputStruct *);
-extern u8 sub_80138B8(struct MenuInputStruct*, u32);
-extern void sub_8013660(struct MenuInputStruct*);
 extern u8 sub_802132C(void);
 extern void sub_8021410(void);
 extern void sub_8021494(void);
