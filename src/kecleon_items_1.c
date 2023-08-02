@@ -12,7 +12,7 @@
 #include "text.h"
 
 struct unkStruct_203B214
-{;
+{
     // size: 0xA0
     struct MenuInputStruct input;
     u32 unk34;

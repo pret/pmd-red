@@ -110,7 +110,7 @@ bool8 sub_801F428(s16 index, s32 param_2) {
     sub_8013818(&gUnknown_203B274->input, sub_801F7E4(), 4, param_2);
     sub_801F690();
     sub_801F700();
-    return 1;
+    return TRUE;
 }
 
 u32 sub_801F520(u8 param_1)
